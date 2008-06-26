@@ -141,6 +141,9 @@ FallbackProfile::FallbackProfile()
 {
     // Fallback settings
     setProperty(Name,i18n("Shell"));
+    // magic path for the fallback profile which is not a valid 
+    // non-directory file name
+    setProperty(Path,"FALLBACK/"); 
     setProperty(Command,getenv("SHELL"));
     setProperty(Icon,"utilities-terminal");
     setProperty(Arguments,QStringList() << getenv("SHELL"));
@@ -180,11 +183,33 @@ FallbackProfile::FallbackProfile()
     // Fallback should not be shown in menus
     setHidden(true);
 }
-
 Profile::Profile(Profile::Ptr parent)
     : _parent(parent)
      ,_hidden(false)
 {
+}
+void Profile::clone(Profile::Ptr profile, bool differentOnly)
+{
+    const PropertyInfo* properties = DefaultPropertyNames;
+    while (properties->name != 0)
+    {
+        Property current = properties->property;
+        QVariant otherValue = profile->property<QVariant>(current);
+        switch (current)
+        {
+            case Name:
+            case Path:
+                break;
+            default:
+                if (!differentOnly || 
+                    property<QVariant>(current) != 
+                    otherValue)
+                {
+                    setProperty(current,otherValue);
+                }
+        }
+        properties++;
+    }
 }
 Profile::~Profile()
 {
@@ -352,6 +377,9 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
 
 bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile)
 {
+    if (!QFile::exists(path))
+        return false;
+
     KConfig config(path,KConfig::NoGlobals);
 
     KConfigGroup general = config.group(GENERAL_GROUP);
@@ -462,5 +490,49 @@ QHash<Profile::Property,QVariant> ProfileCommandParser::parse(const QString& inp
 
     return changes;
 }
+
+void ProfileGroup::updateValues()
+{
+    const PropertyInfo* properties = Profile::DefaultPropertyNames;
+    while (properties->name != 0)
+    {
+        // the profile group does not store a value for some properties
+        // (eg. name, path) if even they are equal between profiles - 
+        //
+        // the exception is when the group has only one profile in which
+        // case it behaves like a standard Profile
+        if (_profiles.count() > 1 && 
+            !canInheritProperty(properties->property))
+        {
+            properties++;
+            continue;
+        }
+
+        QVariant value;
+        for (int i=0;i<_profiles.count();i++)
+        {   
+            QVariant profileValue = _profiles[i]->property<QVariant>(properties->property);
+            if (value.isNull())
+                value = profileValue; 
+            else if (value != profileValue)
+            {
+                value = QVariant();
+                break;
+            }
+        }   
+        Profile::setProperty(properties->property,value);
+        properties++;
+    }
+}
+void ProfileGroup::setProperty(Property property, const QVariant& value)
+{
+    if (_profiles.count() > 1 && !canInheritProperty(property))
+        return;
+
+    Profile::setProperty(property,value);
+    foreach(Profile::Ptr profile,_profiles)
+        profile->setProperty(property,value);
+}
+
 
 

@@ -100,7 +100,7 @@ void EditProfileDialog::save()
     if ( _tempProfile->isEmpty() )
         return;
 
-    SessionManager::instance()->changeProfile(_profileKey,_tempProfile->setProperties());
+    SessionManager::instance()->changeProfile(_profile,_tempProfile->setProperties());
 
     // ensure that these settings are not undone by a call
     // to unpreview()
@@ -122,18 +122,48 @@ void EditProfileDialog::accept()
     unpreviewAll();
     KDialog::accept(); 
 }
-void EditProfileDialog::updateCaption(const QString& profileName)
+QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr group, int maxLength)
 {
-    setCaption( i18n("Edit Profile \"%1\"",profileName) );
+    QString caption;
+    int count = group->profiles().count();
+    for (int i=0;i < count;i++)
+    {
+        caption += group->profiles()[i]->name();
+        if (i < (count-1)) 
+        {
+            caption += ',';
+            // limit caption length to prevent very long window titles
+            if (maxLength > 0 && caption.length() > maxLength)
+            {
+                caption += "...";
+                break;
+            }
+        }
+    }
+    return caption;
+}
+void EditProfileDialog::updateCaption(const Profile::Ptr profile)
+{
+    const int MAX_GROUP_CAPTION_LENGTH = 25;
+    ProfileGroup::Ptr group = profile->asGroup(); 
+    if (group && group->profiles().count() > 1)
+    {
+        QString caption = groupProfileNames(group,MAX_GROUP_CAPTION_LENGTH); 
+        setCaption( i18n("Edit Profile \"%1\"",caption) );
+        // STRINGFREEZE - Change caption for groups after KDE 4.1 is released
+        // setCaption( i18n("Editing %1 profiles",group->profiles().count()) )
+    }
+    else
+        setCaption( i18n("Edit Profile \"%1\"",profile->name()) );
 }
 void EditProfileDialog::setProfile(Profile::Ptr profile)
 {
-    _profileKey = profile;
+    _profile = profile;
 
     Q_ASSERT( profile );
 
     // update caption
-    updateCaption(profile->name());
+    updateCaption(profile);
 
     // mark each page of the dialog as out of date
     // and force an update of the currently visible page
@@ -149,7 +179,7 @@ void EditProfileDialog::setProfile(Profile::Ptr profile)
 }
 const Profile::Ptr EditProfileDialog::lookupProfile() const
 {
-    return _profileKey; 
+    return _profile; 
 }
 void EditProfileDialog::preparePage(int page)
 {
@@ -191,9 +221,18 @@ void EditProfileDialog::selectProfileName()
 }
 void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
 {
-
     // basic profile options
-    _ui->profileNameEdit->setText( info->name() );
+    {
+        ProfileGroup::Ptr group = info->asGroup(); 
+        if (!group || group->profiles().count() < 2)
+            _ui->profileNameEdit->setText( info->name() );
+        else 
+        {
+            _ui->profileNameEdit->setText( groupProfileNames(group,-1) );
+            _ui->profileNameLabel->setEnabled(false);
+            _ui->profileNameEdit->setEnabled(false);
+        }
+    }
 
     ShellCommand command( info->command() , info->arguments() );
     _ui->commandEdit->setText( command.fullCommand() );
@@ -352,7 +391,7 @@ void EditProfileDialog::selectIcon()
 void EditProfileDialog::profileNameChanged(const QString& text)
 {
     _tempProfile->setProperty(Profile::Name,text);
-    updateCaption(_tempProfile->name());
+    updateCaption(_tempProfile);
 }
 void EditProfileDialog::startInSameDir(bool sameDir)
 {
@@ -576,7 +615,7 @@ void EditProfileDialog::unpreviewAll()
 
     // undo any preview changes
     if ( !map.isEmpty() )
-        SessionManager::instance()->changeProfile(_profileKey,map,false);
+        SessionManager::instance()->changeProfile(_profile,map,false);
 }
 void EditProfileDialog::unpreview(int property)
 {
@@ -587,7 +626,7 @@ void EditProfileDialog::unpreview(int property)
     
     QHash<Profile::Property,QVariant> map;
     map.insert((Profile::Property)property,_previewedProperties[property]);
-    SessionManager::instance()->changeProfile(_profileKey,map,false); 
+    SessionManager::instance()->changeProfile(_profile,map,false); 
 
     _previewedProperties.remove(property);
 }
@@ -618,11 +657,22 @@ void EditProfileDialog::preview(int property , const QVariant& value)
 
     const Profile::Ptr original = lookupProfile();
 
-    if (!_previewedProperties.contains(property))    
+    // skip previews for profile groups if the profiles in the group
+    // have conflicting original values for the property
+    //
+    // TODO - Save the original values for each profile and use to unpreview properties
+    ProfileGroup::Ptr group = original->asGroup();
+    if (group && group->profiles().count() > 1 &&
+        original->property<QVariant>((Profile::Property)property).isNull())
+        return;
+
+    if (!_previewedProperties.contains(property))   
+    {
         _previewedProperties.insert(property , original->property<QVariant>((Profile::Property)property) );
+    }
 
     // temporary change to color scheme
-    SessionManager::instance()->changeProfile( _profileKey , map , false);
+    SessionManager::instance()->changeProfile( _profile , map , false);
 }
 void EditProfileDialog::previewColorScheme(const QModelIndex& index)
 {

@@ -56,7 +56,7 @@ class Session;
  * how to display them.  The favorite status of a profile can be altered using
  * setFavorite() and retrieved using isFavorite() 
  */
-class SessionManager : public QObject
+class KDE_EXPORT SessionManager : public QObject
 {
 Q_OBJECT
 
@@ -95,7 +95,7 @@ public:
      * Searches for available profiles on-disk and returns a list
      * of paths of profiles which can be loaded.
      */
-    QList<QString> availableProfilePaths() const;
+    QStringList availableProfilePaths() const;
 
     
     /**
@@ -134,6 +134,12 @@ public:
      * if createSession() is called with an empty configPath argument.
      */
     Profile::Ptr defaultProfile() const;
+    /**
+     * Returns a Profile object with hard-coded settings which is always available.
+     * This can be used as a parent for new profiles which provides suitable default settings
+     * for all properties.
+     */
+    Profile::Ptr fallbackProfile() const;
 
     /**
      * Creates a new session using the settings specified by the specified
@@ -323,7 +329,8 @@ private:
     QList<Session*> _sessions; // list of running sessions
 
     Profile::Ptr _defaultProfile; 
-    
+    Profile::Ptr _fallbackProfile;
+
     QSet<Profile::Ptr> _favorites; // list of favorite profiles
 
     bool _loadedAllProfiles; // set to true after loadAllProfiles has been called

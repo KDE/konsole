@@ -34,12 +34,14 @@
 // KDE
 #include <KSharedPtr>
 #include <KDebug>
+#include <kdemacros.h>
 
 class KConfig;
 class KConfigGroup;
 
 namespace Konsole
 {
+class ProfileGroup;
 
 /**
  * Represents a terminal set-up which can be used to 
@@ -59,14 +61,16 @@ namespace Konsole
  * Profiles can be loaded from disk using ProfileReader instances
  * and saved to disk using ProfileWriter instances.
  */
-class Profile : public QSharedData 
+class KDE_EXPORT Profile : public QSharedData 
 {
 
 friend class KDE4ProfileReader;
 friend class KDE4ProfileWriter;
+friend class ProfileGroup;
 
 public:
 	typedef KSharedPtr<Profile> Ptr;
+    typedef KSharedPtr<ProfileGroup> GroupPtr;
 
     /**
      * This enum describes the available properties
@@ -79,7 +83,6 @@ public:
     {
         /** (QString) Path to the profile's configuration file on-disk. */
         Path,   
-
         /** (QString) The descriptive name of this profile. */
         Name,   
         /** (QString) Title of this profile that will be displayed. */
@@ -88,35 +91,31 @@ public:
          * is used in menus and tabs to represent the profile. 
          */
         Icon, 
-        /** 
-         * (QString) The command to execute ( excluding arguments ) when creating a new terminal
+        /** (QString) The command to execute ( excluding arguments ) when creating a new terminal
          * session using this profile.
          */
         Command,   
-        /**
-         * (QStringList) The arguments which are passed to the program specified by the Command property
-         * when creating a new terminal session using this profile.
+        /** (QStringList) The arguments which are passed to the program specified by
+         * the Command property when creating a new terminal session using this profile.
          */ 
         Arguments,
-        /** 
-         * (QStringList) Additional environment variables ( in the form of NAME=VALUE pairs )
+        /** (QStringList) Additional environment variables ( in the form of NAME=VALUE pairs )
          * which are passed to the program specified by the Command property
          * when creating a new terminal session using this profile. 
          */ 
         Environment,
         /** (QString) The initial working directory for sessions created using this profile. */ 
         Directory,
-
         /** (QString) The format used for tab titles when running normal commands. */
         LocalTabTitleFormat,   
-        /** (QString) The format used for tab titles when the session is running a remote command (eg. SSH) */ 
+        /** (QString) The format used for tab titles when the session is running 
+         * a remote command (eg. SSH) */ 
         RemoteTabTitleFormat,   
-
         /** (bool) Specifies whether the menu bar should be shown in the main application window. */
         ShowMenuBar,    
-        /** (TabBarModeEnum) Specifies when the tab bar should be shown in the main application window. */ 
+        /** (TabBarModeEnum) Specifies when the tab bar should be shown in
+         * the main application window. */ 
         TabBarMode,    
-
         /** (QFont) The font to use in terminal displays using this profile. */
         Font,           
         /** (QString) 
@@ -124,12 +123,10 @@ public:
          * Color schemes are managed by the ColorSchemeManager class. 
          */
         ColorScheme,   
-
         /** (QString) The name of the key bindings. 
          * Key bindings are managed by the KeyboardTranslatorManager class. 
          */
         KeyBindings, 
-
         /** (HistoryModeEnum) Specifies the storage type used for keeping the output produced
          * by terminal sessions using this profile.
          */
@@ -139,8 +136,7 @@ public:
          * Only applicable if the HistoryMode property is FixedSizeHistory
          */
         HistorySize,
-        /**
-         * (ScrollBarPositionEnum) Specifies the position of the scroll bar in 
+        /** (ScrollBarPositionEnum) Specifies the position of the scroll bar in 
          * terminal displays using this profile.
          */
         ScrollBarPosition,  
@@ -160,7 +156,6 @@ public:
          * to text editing applications )
          */
         BlinkingCursorEnabled,
-
         /** (bool) If true, terminal displays use a fixed color to draw the cursor,
          * specified by the CustomCursorColor property.  Otherwise the cursor changes
          * color to match the character underneath it.
@@ -171,25 +166,19 @@ public:
         /** (QColor) The color used by terminal displays to draw the cursor.  Only applicable
          * if the UseCustomCursorColor property is true. */ 
         CustomCursorColor,        
-
         /** (QString) A string consisting of the characters used to delimit words when
          * selecting text in the terminal display.
          */
         WordCharacters,
-
         /** (TabBarPositionEnum) Position of the tab-bar relative to the terminal displays. */
         TabBarPosition,
-
         /** (String) Default text codec */
         DefaultEncoding,
-
         /** (bool) Whether fonts should be aliased or not */
         AntiAliasFonts,
-
 		/** (bool) Whether new sessions should be started in the same directory as the 
 		 * currently active session. */
         StartInCurrentSessionDir,
-
         /** (bool) Whether a 'New Tab' and 'Close Tab' buttons should be shown on the tab bar */
         ShowNewAndCloseTabButtons
     };
@@ -262,9 +251,24 @@ public:
 
     /**
      * Constructs a new profile
+     *
+     * @param parent The parent profile.  When querying the value of a property
+     * using property(), if the property has not been set in this profile then
+     * the parent's value for the property will be returned instead.
      */
     explicit Profile(Ptr parent = Ptr());
     virtual ~Profile(); 
+
+    /**
+     * Copies all properties except Name and Path from the specified @p profile
+     * into this profile
+     *
+     * @param profile The profile to copy properties from
+     * @param differentOnly If true, only properties in @p profile which have a
+     * different value from this profile's current value (either set via
+     * setProperty() or inherited from the parent profile) will be set.
+     */
+    void clone(Ptr profile, bool differentOnly = true);
 
     /** 
      * Changes the parent profile.  When calling the property() method,
@@ -275,6 +279,10 @@ public:
 
     /** Returns the parent profile. */
     const Ptr parent() const;
+
+    /** Returns this profile as a group or null if this profile is not a group. */
+    const GroupPtr asGroup() const;
+    GroupPtr asGroup();
 
     /** 
      * Returns the current value of the specified @p property, cast to type T.
@@ -316,39 +324,33 @@ public:
     // Convenience methods for property() and setProperty() go here
     //
 
-    /** Convenience method for property(Profile::Path) */
+    /** Convenience method for property<QString>(Profile::Path) */
     QString path() const { return property<QString>(Profile::Path); }
 
-    /** Convenience method for property(Profile::Name) */
+    /** Convenience method for property<QString>(Profile::Name) */
     QString name() const { return property<QString>(Profile::Name); }
     
-    /** Convenience method for property(Profile::Directory) */
+    /** Convenience method for property<QString>(Profile::Directory) */
     QString defaultWorkingDirectory() const 
             { return property<QString>(Profile::Directory); }
 
-    /** Convenience method for property(Profile::Icon) */
+    /** Convenience method for property<QString>(Profile::Icon) */
     QString icon() const { return property<QString>(Profile::Icon); }
 
-    /** Convenience method for property(Profile::Command) */
+    /** Convenience method for property<QString>(Profile::Command) */
     QString command() const { return property<QString>(Profile::Command); }
 
-    /** Convenience method for property(Profile::Arguments) */
+    /** Convenience method for property<QStringList>(Profile::Arguments) */
     QStringList arguments() const { return property<QStringList>(Profile::Arguments); }
 
-    /** Convenience method for property(Profile::Font) */
+    /** Convenience method for property<QFont>(Profile::Font) */
     QFont font() const { return property<QFont>(Profile::Font); }
 
-    /** Convenience method for property(Profile::ColorScheme) */
+    /** Convenience method for property<QString>(Profile::ColorScheme) */
     QString colorScheme() const { return property<QString>(Profile::ColorScheme); }
 
-    /** Convenience method for property(Profile::Environment) */
+    /** Convenience method for property<QStringList>(Profile::Environment) */
     QStringList environment() const { return property<QStringList>(Profile::Environment); }
-
-    /** 
-     * Convenience method.
-     * Returns the value of the "TERM" value in the environment list.
-     */
-    QString terminal() const { return "xterm"; }
 
     /**
      * Returns true if @p name has been associated with an element
@@ -378,17 +380,17 @@ public:
 
 private:
     struct PropertyInfo;
-	/**
-     * Adds an association between a string @p name and a @p property.
-     * Subsequent calls to lookupByName() with @p name as the argument
-     * will return @p property.
-     */
+    // Defines a new property, this property is then available
+    // to all Profile instances.
     static void registerProperty(const PropertyInfo& info); 
 
 	// fills the table with default names for profile properties
     // the first time it is called.
     // subsequent calls return immediately
     static void fillTableWithDefaultNames();
+
+    // returns true if the property can be inherited
+    static bool canInheritProperty(Property property);
 
     QHash<Property,QVariant> _propertyValues;
     Ptr _parent;
@@ -398,6 +400,8 @@ private:
     static QHash<QString,PropertyInfo> _propertyInfoByName;
     static QHash<Property,PropertyInfo> _infoByProperty;
     
+    // Describes a property.  Each property has a name and group
+    // which is used when saving/loading the profile.
     struct PropertyInfo
     {
         Property property;
@@ -416,20 +420,19 @@ inline T Profile::property(Property theProperty) const
 template <>
 inline QVariant Profile::property(Property property) const
 {
-    bool canInheritProperty = property != Path;
     if ( _propertyValues.contains(property) ) {
-        //kDebug() << "accessing property " << property;
         return _propertyValues[property];
     }
-    else if ( _parent && canInheritProperty ) {
-        //kDebug() << "accessing parent property " << property;
+    else if ( _parent && canInheritProperty(property) ) {
         return _parent->property<QVariant>(property);
     }
     else {
-        //kDebug() << "return empty property" << property;
         return QVariant();
     }
 }
+inline bool Profile::canInheritProperty(Property property) 
+{ return property != Name && property != Path; }
+
 
 /** 
  * A profile which contains a number of default settings for various properties.
@@ -441,6 +444,77 @@ class FallbackProfile : public Profile
 public:
     FallbackProfile();
 };
+
+/** 
+ * A composite profile which allows a group of profiles to be treated as one.
+ * When setting a property, the new value is applied to all profiles in the group.
+ * When reading a property, if all profiles in the group have the same value
+ * then that value is returned, otherwise the result is null.
+ *
+ * Profiles can be added to the group using addProfile().  When all profiles
+ * have been added updateValues() must be called
+ * to sync the group's property values with those of the group's profiles.
+ *
+ * The Profile::Name and Profile::Path properties are unique to individual profiles,
+ * setting these properties on a ProfileGroup has no effect.
+ */
+class KDE_EXPORT ProfileGroup : public Profile
+{
+public:
+	typedef KSharedPtr<ProfileGroup> Ptr;
+
+    /** Construct a new profile group, which is hidden by default. */
+    ProfileGroup(Profile::Ptr parent = Profile::Ptr());
+
+    /** Add a profile to the group.  Calling setProperty() will update this profile.
+     * When creating a group, add the profiles to the group then call updateValues() to 
+     * make the group's property values reflect the profiles currently in the group. */
+    void addProfile(Profile::Ptr profile)
+    { _profiles.append(profile); }
+
+    /** Remove a profile from the group.  Calling setProperty() will no longer
+     * affect this profile. */
+    void removeProfile(Profile::Ptr profile)
+    { _profiles.removeAll(profile); }
+
+    /** Returns the profiles in this group .*/
+    QList<Profile::Ptr> profiles() const
+    { return _profiles; }
+
+    /** 
+     * Updates the property values in this ProfileGroup to match those from 
+     * the group's profiles() 
+     *
+     * For each available property, if each profile in the group has the same value then
+     * the ProfileGroup will use that value for the property.  Otherwise the value for the property
+     * will be set to a null QVariant
+     *
+     * Some properties such as the name and the path of the profile
+     * will always be set to null if the group has more than one profile.
+     */
+    void updateValues();
+
+    /** Sets the value of @p property in each of the group's profiles to @p value. */
+    void setProperty(Property property, const QVariant& value);
+
+private:
+    QList<Profile::Ptr> _profiles;
+};
+inline ProfileGroup::ProfileGroup(Profile::Ptr parent)
+: Profile(parent)
+{
+    setHidden(true);
+}
+inline const Profile::GroupPtr Profile::asGroup() const
+{
+    const Profile::GroupPtr ptr(dynamic_cast<ProfileGroup*>(
+                                const_cast<Profile*>(this)));
+    return ptr;
+}
+inline Profile::GroupPtr Profile::asGroup()
+{
+    return Profile::GroupPtr(dynamic_cast<ProfileGroup*>(this));
+}
 
 /** Interface for all classes which can load profile settings from a file. */
 class ProfileReader

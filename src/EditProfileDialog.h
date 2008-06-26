@@ -197,8 +197,10 @@ private:
     void unpreviewAll();
     void enableIfNonEmptySelection(QWidget* widget,QItemSelectionModel* selectionModel);
 
-    void updateCaption(const QString& profileName);
+    void updateCaption(const Profile::Ptr profile);
     void updateTransparencyWarning();
+
+    static QString groupProfileNames(const ProfileGroup::Ptr group, int maxLength = -1);
 
     struct RadioOption
     {
@@ -219,7 +221,7 @@ private:
 
     Ui::EditProfileDialog* _ui;
     Profile::Ptr _tempProfile;
-    Profile::Ptr _profileKey;
+    Profile::Ptr _profile;
 
     // keeps track of pages which need to be updated to match the current
     // profile.  all elements in this vector are set to true when the 

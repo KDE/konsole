@@ -38,7 +38,7 @@
       <bool>false</bool>
      </property>
      <property name="toolTip" >
-      <string>Edit the selected profile</string>
+      <string>Edit the selected profile(s)</string>
      </property>
      <property name="text" >
       <string>Edit Profile...</string>
@@ -51,7 +51,7 @@
       <bool>false</bool>
      </property>
      <property name="toolTip" >
-      <string>Delete the selected profile</string>
+      <string>Delete the selected profile(s)</string>
      </property>
      <property name="text" >
       <string>Delete Profile</string>
@@ -93,7 +93,7 @@
       <bool>true</bool>
      </property>
      <property name="selectionMode" >
-      <enum>QAbstractItemView::SingleSelection</enum>
+      <enum>QAbstractItemView::ExtendedSelection</enum>
      </property>
      <property name="selectionBehavior" >
       <enum>QAbstractItemView::SelectRows</enum>

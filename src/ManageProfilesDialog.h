@@ -86,21 +86,29 @@ private slots:
     // selection changes
     void tableSelectionChanged(const QItemSelection&);
 
-    // updates the profile table to be in sync with the 
-    // session manager
-    void updateTableModel();
-
     void updateFavoriteStatus(Profile::Ptr profile, bool favorite);
 
-private:
-    Profile::Ptr selectedKey() const; // return the profile associated with the currently selected
-                                 // item in the profile table
+    void addItems(const Profile::Ptr);
+    void updateItems(const Profile::Ptr);
+    void removeItems(const Profile::Ptr);
 
-    void updateDefaultItem(); // updates the font of the items to match
-                              // their default / non-default profile status
+private:
+    Profile::Ptr currentProfile() const; 
+    QList<Profile::Ptr> selectedProfiles() const; 
+
+    // updates the font of the items to match
+    // their default / non-default profile status
+    void updateDefaultItem(); 
+    void updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem*>& items) const;
+    // updates the profile table to be in sync with the 
+    // session manager
+    void populateTable();
+    int rowForProfile(const Profile::Ptr info) const;
+
     Ui::ManageProfilesDialog* _ui;
     QStandardItemModel* _sessionModel;
 
+    static const int ProfileNameColumn = 0;
     static const int FavoriteStatusColumn = 1;
     static const int ShortcutColumn = 2;
     static const int ProfileKeyRole = Qt::UserRole + 1;

@@ -78,7 +78,8 @@ SessionManager::SessionManager()
             SLOT(sessionTerminated(QObject*)) );
 
     //load fallback profile
-    addProfile( Profile::Ptr(new FallbackProfile) );
+    _fallbackProfile = Profile::Ptr(new FallbackProfile);
+    addProfile(_fallbackProfile);
 
     //locate and load default profile
     KSharedConfigPtr appConfig = KGlobal::config();
@@ -103,6 +104,10 @@ SessionManager::SessionManager()
 }
 Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
 {
+    // the fallback profile has a 'special' path name, "FALLBACK/"
+    if (shortPath == _fallbackProfile->property<QString>(Profile::Path))
+        return _fallbackProfile;
+
     QString path = shortPath;
 
     // add a suggested suffix and relative prefix if missing
@@ -177,11 +182,16 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
 		return newProfile;
 	}
 }
-QList<QString> SessionManager::availableProfilePaths() const
+QStringList SessionManager::availableProfilePaths() const
 {
-    KDE4ProfileReader reader;
+    KDE3ProfileReader kde3Reader;
+    KDE4ProfileReader kde4Reader;
 
-    return reader.findProfiles();    
+    QStringList profiles;
+    profiles += kde3Reader.findProfiles();
+    profiles += kde4Reader.findProfiles();
+
+    return profiles;
 }
 
 void SessionManager::loadAllProfiles()
@@ -189,12 +199,7 @@ void SessionManager::loadAllProfiles()
     if ( _loadedAllProfiles )
         return;
 
-    KDE3ProfileReader kde3Reader;
-    KDE4ProfileReader kde4Reader;
-
-    QStringList profiles;
-    profiles += kde3Reader.findProfiles();
-    profiles += kde4Reader.findProfiles();
+    QStringList profiles = availableProfilePaths();
     
     QListIterator<QString> iter(profiles);
     while (iter.hasNext())
@@ -302,6 +307,8 @@ Profile::Ptr SessionManager::defaultProfile() const
 {
     return _defaultProfile;
 }
+Profile::Ptr SessionManager::fallbackProfile() const
+{ return _fallbackProfile; }
 
 QString SessionManager::saveProfile(Profile::Ptr info)
 {
@@ -327,6 +334,20 @@ void SessionManager::changeProfile(Profile::Ptr info ,
     {
         const Profile::Property property = iter.next();
         info->setProperty(property,propertyMap[property]);
+    }
+    
+    // when changing a group, iterate through the profiles
+    // in the group and call changeProfile() on each of them
+    //
+    // this is so that each profile in the group, the profile is 
+    // applied, a change notification is emitted and the profile
+    // is saved to disk
+    ProfileGroup::Ptr group = info->asGroup();
+    if (group)
+    {
+        foreach(Profile::Ptr profile, group->profiles())
+            changeProfile(profile,propertyMap,persistant);
+        return;
     }
     
     // apply the changes to existing sessions
@@ -468,7 +489,9 @@ bool SessionManager::deleteProfile(Profile::Ptr type)
             }
         }
 
+        // remove from favorites, profile list, shortcut list etc.
         setFavorite(type,false);
+        setShortcut(type,QKeySequence());
         _types.remove(type);
 
 		// mark the profile as hidden so that it does not show up in the 
@@ -571,6 +594,9 @@ void SessionManager::setShortcut(Profile::Ptr info ,
     QKeySequence existingShortcut = shortcut(info);
     _shortcuts.remove(existingShortcut);
 
+    if (keySequence.isEmpty())
+        return;
+
     ShortcutData data;
     data.profileKey = info;
     data.profilePath = info->path();
@@ -653,6 +679,11 @@ Profile::Ptr SessionManager::findByShortcut(const QKeySequence& shortcut)
     if ( !_shortcuts[shortcut].profileKey )
     {
         Profile::Ptr key = loadProfile(_shortcuts[shortcut].profilePath);
+        if (!key)
+        {
+            _shortcuts.remove(shortcut);
+            return Profile::Ptr();
+        }
         _shortcuts[shortcut].profileKey = key;
     }
 
