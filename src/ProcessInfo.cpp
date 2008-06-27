@@ -498,8 +498,8 @@ private:
     // off_t, and we're safe.
     #if defined(_FILE_OFFSET_BITS) && (_FILE_OFFSET_BITS==64)
         #undef _FILE_OFFSET_BITS
-        #include <procfs.h>
     #endif
+    #include <procfs.h>
 #else
     // On non-Solaris platforms, define a fake psinfo structure
     // so that the SolarisProcessInfo class can be compiled
