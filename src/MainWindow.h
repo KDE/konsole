@@ -155,6 +155,7 @@ class MainWindow : public KXmlGuiWindow
 
     private:
         void correctShortcuts();
+        void removeMenuAccelerators();
         void setupActions();
         void setupWidgets();
         QString activeSessionDir() const;

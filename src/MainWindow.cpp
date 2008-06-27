@@ -24,6 +24,7 @@
 #include <QtGui/QBoxLayout>
 
 // KDE
+#include <KAcceleratorManager>
 #include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
@@ -65,7 +66,6 @@ MainWindow::MainWindow()
     // the directory ('konsole') is included in the path here so that the XML
     // file can be found when this code is being used in the Konsole part.
     setXMLFile("konsole/konsoleui.rc");
-
     setupActions();
 
     // create view manager
@@ -86,9 +86,21 @@ MainWindow::MainWindow()
     // create main window widgets
     setupWidgets();
 
+    // disable automatically generated accelerators in top-level
+    // menu items - to avoid conflicting with Alt+[Letter] shortcuts
+    // in terminal applications
+    KAcceleratorManager::setNoAccel(menuBar());
     // create menus
     createGUI();
-
+    // remove accelerators for standard menu items (eg. &File, &View, &Edit)
+    // etc. which are defined in kdelibs/kdeui/xmlgui/ui_standards.rc, again,
+    // to avoid conflicting with Alt+[Letter] terminal shortcuts
+    //
+    // TODO - Modify XMLGUI so that it allows the text for standard actions
+    // defined in ui_standards.rc to be re-defined in the local application
+    // XMLGUI file (konsoleui.rc in this case) - the text for standard items
+    // can then be redefined there to exclude the standard accelerators
+    removeMenuAccelerators();
     // replace standard shortcuts which cannot be used in a terminal
     // (as they are reserved for use by terminal programs)
     correctShortcuts();
@@ -96,7 +108,15 @@ MainWindow::MainWindow()
     // enable save and restore of window size
     setAutoSaveSettings("MainWindow",true);
 }
-
+void MainWindow::removeMenuAccelerators()
+{
+    foreach(QAction* menuItem, menuBar()->actions())
+    {
+        QString itemText = menuItem->text();
+        itemText.remove('&');
+        menuItem->setText(itemText);
+    }
+}
 void MainWindow::setMenuBarVisibleOnce(bool visible)
 {
 	if (_menuBarVisibilitySet || menuBar()->isTopLevelMenu() )
