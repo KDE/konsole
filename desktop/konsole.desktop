@@ -40,6 +40,7 @@ Name[x-test]=xxKonsolexx
 
 GenericName=Terminal
 GenericName[af]=Terminaal
+GenericName[bg]=Терминал
 GenericName[cs]=Terminál
 GenericName[el]=Τερματικό
 GenericName[eo]=Terminalo
@@ -49,6 +50,7 @@ GenericName[gu]=ટર્મિનલ
 GenericName[ja]=ターミナル
 GenericName[km]=ស្ថានីយ
 GenericName[ko]=터미널
+GenericName[ku]=Termînal
 GenericName[lv]=Terminālis
 GenericName[ml]=ടെര്‍മിനല്‍
 GenericName[nds]=Konsool
