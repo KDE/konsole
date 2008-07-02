@@ -15,3 +15,4 @@ $EXTRACTRC `find ../desktop -name \*.rc` >> rc.cpp
 $XGETTEXT *.cpp -o $podir/konsole.pot
 rm -f schemas.cpp
 #rm -f tips.cpp
+rm -f rc.cpp
