@@ -87,7 +87,7 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
 
     kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
 
-    target_link_libraries(kdeinit_konsole ${KDE4_KPTY_LIBRARY} ${KDE4_KIO_LIBS} ${QT_QTXML_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBS} )
+    target_link_libraries(kdeinit_konsole ${KDE4_KPTY_LIBRARY} ${KDE4_KIO_LIBS} ${QT_QTXML_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBS} ${X11_LIBRARIES} )
 
     # XRender library for true transparency support    
     if(X11_Xrender_FOUND)
@@ -122,7 +122,7 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
 
     set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 
-    target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} ${KDE4_KPTY_LIBRARY} ${KDE4_KIO_LIBS} ${KDE4_KNOTIFYCONFIG_LIBS})
+    target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} ${KDE4_KPTY_LIBRARY} ${KDE4_KIO_LIBS} ${KDE4_KNOTIFYCONFIG_LIBS} ${X11_LIBRARIES})
 
     if(X11_Xrender_FOUND)
         target_link_libraries(konsolepart ${X11_Xrender_LIB})
