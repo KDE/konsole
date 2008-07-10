@@ -75,6 +75,7 @@ Comment[ko]=Konsole 기본 프로필
 Comment[ku]=Profîla standard a Konsolê
 Comment[lv]=Konsole noklusējuma profils
 Comment[mk]=Стандарден профил на Конзола
+Comment[ml]=കണ്‍സോളിന്റെ സ്വതേയുള്ള പ്രൊഫൈല്‍
 Comment[nb]=Konsoles standardprofil
 Comment[nds]=Standard-Konsoletörn
 Comment[nl]=Standaardprofiel (Konsole)
