@@ -1,3 +1,5 @@
+
+### Compile-time features
 macro_optional_find_package(XKB)
 macro_bool_to_01(X11_Xrender_FOUND HAVE_XRENDER)
 macro_log_feature(XKB_FOUND "XKB" "X keyboard extension" "http://www.x.org" FALSE "" "Gives Konsole better keyboard support.")
@@ -18,17 +20,23 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
     OPTION(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
 
     if(KONSOLE_GENERATE_LINEFONT)
-	    add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/LineFont.h COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder ARGS ${CMAKE_SOURCE_DIR}/LineFont.src DEPENDS ${CMAKE_SOURCE_DIR}/LineFont.src )
+	    add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/LineFont.h
+                           COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder
+                           ARGS ${CMAKE_SOURCE_DIR}/LineFont.src
+                           DEPENDS ${CMAKE_SOURCE_DIR}/LineFont.src )
     endif(KONSOLE_GENERATE_LINEFONT)
 
-# Konsole source files shared between embedded terminal and main application
+### Konsole source files shared between embedded terminal and main application
 
-    qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.Session.xml Session.h Konsole::Session )
+    qt4_add_dbus_adaptor( sessionadaptors_SRCS
+                          org.kde.konsole.Session.xml
+                          Session.h
+                          Konsole::Session )
 
     set(konsole_COMMON_SRCS
         ${sessionadaptors_SRCS}
         BlockArray.cpp
-        BookmarkHandler.cpp 
+        BookmarkHandler.cpp
         ColorScheme.cpp
         ColorSchemeEditor.cpp
         CopyInputDialog.cpp
@@ -67,14 +75,31 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
         konsole_wcwidth.cpp
     )
 
-### Konsole Application 
+    set(konsole_LIBS
+        ${KDE4_KPTY_LIBRARY}
+        ${KDE4_KIO_LIBS}
+        ${QT_QTXML_LIBRARY}
+        ${KDE4_KNOTIFYCONFIG_LIBRARY}
+        ${X11_LIBRARIES}
+    )
+
+    # XRender library for true transparency support
+    if(X11_Xrender_FOUND)
+        list(APPEND konsole_LIBS ${X11_Xrender_LIB})
+    endif(X11_Xrender_FOUND)
+
+    if(X11_XTest_FOUND)
+        list(APPEND konsole_LIBS ${X11_XTest_LIB})
+    endif(X11_XTest_FOUND)
+
+### Konsole Application
 
     set(konsole_KDEINIT_SRCS
         ${konsole_COMMON_SRCS}
         Application.cpp
         MainWindow.cpp
         main.cpp
-    ) 
+    )
 
     kde4_add_ui_files(konsole_KDEINIT_SRCS
                   ColorSchemeEditor.ui
@@ -86,52 +111,32 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
                  )
 
     kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
-
-    target_link_libraries(kdeinit_konsole ${KDE4_KPTY_LIBRARY} ${KDE4_KIO_LIBS} ${QT_QTXML_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBS} ${X11_LIBRARIES} )
-
-    # XRender library for true transparency support    
-    if(X11_Xrender_FOUND)
-        target_link_libraries(kdeinit_konsole ${X11_Xrender_LIB} )
-    endif(X11_Xrender_FOUND)
-
-    if(X11_XTest_FOUND)
-        target_link_libraries(kdeinit_konsole ${X11_XTest_LIB} )
-    endif(X11_XTest_FOUND)
+    target_link_libraries(kdeinit_konsole ${konsole_LIBS})
 
     install(TARGETS kdeinit_konsole  ${INSTALL_TARGETS_DEFAULT_ARGS} )
     install(TARGETS konsole          ${INSTALL_TARGETS_DEFAULT_ARGS})
 
+### Embedded Konsole KPart
+
+    set(konsolepart_PART_SRCS
+      ${konsole_COMMON_SRCS}
+      Part.cpp
+   )
+
+    kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
+    set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
+    target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} ${konsole_LIBS})
+    install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR} )
+
 ### konsoleprofile command-line tool
 
-    install(FILES konsoleprofile PERMISSIONS OWNER_READ 
-                                         OWNER_WRITE 
+    install(FILES konsoleprofile PERMISSIONS OWNER_READ
+                                         OWNER_WRITE
                                          OWNER_EXECUTE
                                          GROUP_EXECUTE
                                          GROUP_READ
-                                         WORLD_READ 
+                                         WORLD_READ
                                          WORLD_EXECUTE DESTINATION ${BIN_INSTALL_DIR})
-
-### Embedded Konsole KPart
-
-    set(konsolepart_PART_SRCS 
-      ${konsole_COMMON_SRCS}
-      Part.cpp
-   ) 
-
-    kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
-
-    set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
-
-    target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} ${KDE4_KPTY_LIBRARY} ${KDE4_KIO_LIBS} ${KDE4_KNOTIFYCONFIG_LIBS} ${X11_LIBRARIES})
-
-    if(X11_Xrender_FOUND)
-        target_link_libraries(konsolepart ${X11_Xrender_LIB})
-    endif(X11_Xrender_FOUND)
-    if(X11_XTest_LIB)
-        target_link_libraries(konsolepart  ${X11_XTest_LIB})
-    endif(X11_XTest_LIB)
-
-    install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 ### KWriteD Daemon
 
@@ -139,5 +144,3 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
     kde4_add_plugin(kded_kwrited ${kded_kwrited_PART_SRCS})
     target_link_libraries(kded_kwrited  ${KDE4_KDEUI_LIBS} ${KDE4_KPTY_LIBS})
     install(TARGETS kded_kwrited  DESTINATION ${PLUGIN_INSTALL_DIR} )
-
-
