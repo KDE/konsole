@@ -47,6 +47,7 @@
 #include <KRun>
 #include <kshell.h>
 #include <KStandardDirs>
+#include <KPtyDevice>
 
 // Konsole
 #include <config-konsole.h>
@@ -636,7 +637,21 @@ void Session::close()
 
   if (!isRunning() || !kill(SIGHUP))
   {
-   // Forced close.
+     if (isRunning())
+     {
+        kDebug() << "Process" << _shellProcess->pid() << "did not respond to SIGHUP";
+
+        // close the pty and wait to see if the process finishes.  If it does,
+        // the done() slot will have been called so we can return.  Otherwise,
+        // emit the finished() signal regardless
+        _shellProcess->pty()->close();
+        if (_shellProcess->waitForFinished(3000))
+            return;
+
+        kWarning() << "Unable to kill process" << _shellProcess->pid();
+     }
+
+     // Forced close.
      QTimer::singleShot(1, this, SIGNAL(finished()));
   }
 }

@@ -389,8 +389,10 @@ public slots:
 
   /**
    * Closes the terminal session.  This sends a hangup signal
-   * (SIGHUP) to the terminal process and causes the done(Session*)
-   * signal to be emitted.
+   * (SIGHUP) to the terminal process and causes the finished()  
+   * signal to be emitted.  If the process does not respond to the SIGHUP signal
+   * then the terminal connection (the pty) is closed and Konsole waits for the 
+   * process to exit.
    */
   void close();
 
