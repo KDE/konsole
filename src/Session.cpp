@@ -666,9 +666,9 @@ void Session::done(int exitStatus)
   if (!_wantedClose || exitStatus != 0)
   {
     if (_shellProcess->exitStatus() == QProcess::NormalExit)
-        message = i18n("Program '%1' exited with status %2.", _shellProcess->program().first(), exitStatus);
+        message = i18n("Program '%1' exited with status %2.", _program, exitStatus);
     else
-        message = i18n("Program '%1' crashed.", _shellProcess->program().first());
+        message = i18n("Program '%1' crashed.", _program);
 
     //FIXME: See comments in Session::monitorTimerDone()
     KNotification::event("Finished", message , QPixmap(),
