@@ -110,10 +110,17 @@ MainWindow::MainWindow()
 }
 void MainWindow::removeMenuAccelerators()
 {
+    // regular expression to find accelerators in menu items.
+    // Matches the '&' character anywhere in the text (for Western languages) 
+    // or " (&Letters)" (for many non-Western languages)
+    //
+    // Translators can change or remove this as necessary for their language
+    static QString stripPattern("\\(\\s*\\&.*\\)|\\&");
+    static QRegExp acceleratorStripRegExp(stripPattern);
     foreach(QAction* menuItem, menuBar()->actions())
     {
         QString itemText = menuItem->text();
-        itemText.remove('&');
+        itemText.remove(acceleratorStripRegExp);
         menuItem->setText(itemText);
     }
 }
