@@ -66,7 +66,18 @@ ShellCommand::ShellCommand(const QString& command , const QStringList& arguments
 }
 QString ShellCommand::fullCommand() const
 {
-    return _arguments.join(QChar(' '));
+    QStringList quotedArgs(_arguments);
+    for (int i=0;i<quotedArgs.count();i++)
+    {
+        QString arg = quotedArgs.at(i);
+        bool hasSpace = false;
+        for (int j=0;j<arg.count();j++)
+            if (arg[j].isSpace())
+                hasSpace = true;
+        if (hasSpace)
+            quotedArgs[i] = '\"' + arg + '\"';
+    }
+    return quotedArgs.join(QChar(' '));
 }
 QString ShellCommand::command() const
 {
