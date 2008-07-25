@@ -161,6 +161,10 @@ class MainWindow : public KXmlGuiWindow
         QString activeSessionDir() const;
 		void disconnectController(SessionController* controller);
 
+        // sets the active shortcuts of actions in 'dest' to the shortcuts of actions
+        // with the same name in 'source' (see KAction::ActiveShortcut)
+        static void syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source);
+
     private:
         ViewManager*  _viewManager;
         BookmarkHandler* _bookmarkHandler;

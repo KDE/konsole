@@ -372,7 +372,17 @@ bool MainWindow::queryClose()
 
     return true;
 }
-
+void MainWindow::syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source)
+{
+    foreach(QAction* qAction, source->actions()) 
+    {
+        if (KAction* kAction = qobject_cast<KAction*>(qAction))
+        {
+           if (KAction* destKAction = qobject_cast<KAction*>(dest->action(kAction->objectName())))
+               destKAction->setShortcut(kAction->shortcut(KAction::ActiveShortcut),KAction::ActiveShortcut);
+        }
+    }
+}
 void MainWindow::showShortcutsDialog()
 {
     KShortcutsDialog dialog(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsDisallowed, this);
@@ -383,11 +393,21 @@ void MainWindow::showShortcutsDialog()
 
     if (dialog.configure())
     {
+        // sync shortcuts in other main windows to match this window
+        foreach(QWidget* widget, QApplication::topLevelWidgets())
+        {
+            if (MainWindow* window = qobject_cast<MainWindow*>(widget))
+                syncActiveShortcuts(window->actionCollection(),actionCollection()); 
+        }
         // reload session actions (defined in "sessionui.rc") in other session controllers
         foreach(SessionController* controller, SessionController::allControllers())
         {
             if (controller != _pluggedController)
+            {
                 controller->reloadXML();
+                if (controller->factory())
+                    syncActiveShortcuts(controller->actionCollection(),_pluggedController->actionCollection());
+            }
         }
     }
 }
