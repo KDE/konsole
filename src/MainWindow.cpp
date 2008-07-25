@@ -393,24 +393,21 @@ void MainWindow::showShortcutsDialog()
 
     if (dialog.configure())
     {
-        // sync shortcuts in other main windows to match this window
+        // sync shortcuts for non-session actions (defined in "konsoleui.rc") in other main windows
         foreach(QWidget* widget, QApplication::topLevelWidgets())
         {
-            if (MainWindow* window = qobject_cast<MainWindow*>(widget))
-                syncActiveShortcuts(window->actionCollection(),actionCollection()); 
+            if (MainWindow* window = qobject_cast<MainWindow*>(widget) && window != this)
+                syncActiveShortcuts(window->actionCollection(),actionCollection());
         }
-        // reload session actions (defined in "sessionui.rc") in other session controllers.
+        // sync shortcuts for session actions (defined in "sessionui.rc") in other session controllers.
         // Controllers which are currently plugged in (ie. their actions are part of the current menu)
         // must be updated immediately via syncActiveShortcuts().  Other controllers will be updated
         // when they are plugged into a main window.
         foreach(SessionController* controller, SessionController::allControllers())
         {
-            if (controller != _pluggedController)
-            {
-                controller->reloadXML();
-                if (controller->factory())
-                    syncActiveShortcuts(controller->actionCollection(),_pluggedController->actionCollection());
-            }
+            controller->reloadXML();
+            if (controller->factory() && controller != _pluggedController)
+                syncActiveShortcuts(controller->actionCollection(),_pluggedController->actionCollection());
         }
     }
 }
