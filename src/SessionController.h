@@ -91,7 +91,6 @@ public:
      */
     SessionController(Session* session , TerminalDisplay* view, QObject* parent);
     ~SessionController();
-
     
     /** Returns the session associated with this controller */
     QPointer<Session> session() { return _session; }
@@ -133,6 +132,10 @@ public:
 
     // Reimplemented to watch for events happening to the view
     virtual bool eventFilter(QObject* watched , QEvent* event);
+
+    /** Returns the set of all controllers that exist. */
+    static QSet<SessionController*> allControllers()
+    { return _allControllers; }
 
 signals:
     /**
@@ -225,9 +228,6 @@ private:
 	void listenForScreenWindowUpdates();
 
 private:
-    static KIcon _activityIcon;
-    static KIcon _silenceIcon;
-
     QPointer<Session>         _session;
     QPointer<TerminalDisplay> _view;
 	SessionGroup* 			  _copyToGroup;
@@ -257,7 +257,10 @@ private:
 	bool _listenForScreenWindowUpdates;
 	bool _preventClose;
 
+    static QSet<SessionController*> _allControllers;
 	static int _lastControllerId;
+    static KIcon _activityIcon;
+    static KIcon _silenceIcon;
 };
 inline bool SessionController::isValid() const
 {

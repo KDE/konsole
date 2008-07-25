@@ -67,6 +67,7 @@ using namespace Konsole;
 
 KIcon SessionController::_activityIcon;
 KIcon SessionController::_silenceIcon;
+QSet<SessionController*> SessionController::_allControllers;
 QPointer<SearchHistoryThread> SearchHistoryTask::_thread;
 int SessionController::_lastControllerId;
 
@@ -89,6 +90,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 	, _listenForScreenWindowUpdates(false)
 	, _preventClose(false)
 {
+    _allControllers.insert(this);
+
     Q_ASSERT( session );
     Q_ASSERT( view );
 
@@ -170,6 +173,8 @@ SessionController::~SessionController()
 {
    if ( _view )
       _view->setScreenWindow(0);
+
+   _allControllers.remove(this);
 }
 void SessionController::trackOutput(QKeyEvent* event)
 {

@@ -375,8 +375,21 @@ bool MainWindow::queryClose()
 
 void MainWindow::showShortcutsDialog()
 {
-    KShortcutsDialog::configure( actionCollection() ,
-                                 KShortcutsEditor::LetterShortcutsDisallowed, this );
+    KShortcutsDialog dialog(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsDisallowed, this);
+
+    // add actions from this window and the current session controller
+    foreach(KXMLGUIClient* client, guiFactory()->clients())
+                dialog.addCollection(client->actionCollection());
+
+    if (dialog.configure())
+    {
+        // reload session actions (defined in "sessionui.rc") in other session controllers
+        foreach(SessionController* controller, SessionController::allControllers())
+        {
+            if (controller != _pluggedController)
+                controller->reloadXML();
+        }
+    }
 }
 
 void MainWindow::newFromProfile(Profile::Ptr profile)
