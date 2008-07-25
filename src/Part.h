@@ -109,15 +109,18 @@ public slots:
 	 * Connects to an existing pseudo-teletype. See Session::openTeletype().
 	 * This must be called before the session is started by startProgram(),
 	 * or showShellInDir()
+     *
+     * @param ptyMasterFd The file descriptor of the pseudo-teletype (pty) master
 	 */
-	void openTeletype(int fd);
+	void openTeletype(int ptyMasterFd);
 
 signals:
 	/** 
-	 * When the key sequence for a shortcut, which is also a valid terminal key sequence
-	 * is pressed while the terminal has focus, this signal is emitted to check whether 
-	 * the terminal display should override the shortcut and send the key sequence to the
-	 * terminal application instead.
+	 * Emitted when the key sequence for a shortcut, which is also a valid terminal key sequence, 
+	 * is pressed while the terminal has focus.  By responding to this signal, the 
+     * controlling application can choose whether to execute the action associated with
+     * the shortcut or ignore the shortcut and send the key
+     * sequence to the terminal application.
 	 *
 	 * In the embedded terminal, shortcuts are overridden and sent to the terminal by default.
 	 * Set @p override to false to prevent this happening and allow the shortcut to be triggered
