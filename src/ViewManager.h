@@ -239,6 +239,9 @@ private slots:
     void moveActiveViewLeft();
     // moves active view to the right
     void moveActiveViewRight();
+    // switches to the view at visual position 'index' 
+    // in the current container
+    void switchToView(int index);
 
 	// called when a SessionController gains focus
 	void controllerChanged(SessionController* controller);

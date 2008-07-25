@@ -201,6 +201,19 @@ void ViewManager::setupActions()
         collection->addAction("next-container",nextContainerAction);
         collection->addAction("move-view-left",moveViewLeftAction);
         collection->addAction("move-view-right",moveViewRightAction);
+
+        // Switch to tab N shortcuts
+        const int SWITCH_TO_TAB_COUNT = 10;
+        QSignalMapper* switchToTabMapper = new QSignalMapper(this);
+        connect(switchToTabMapper,SIGNAL(mapped(int)),this,SLOT(switchToView(int)));
+        for (int i=0;i < SWITCH_TO_TAB_COUNT;i++)
+        {
+            KAction* switchToTabAction = new KAction(i18n("Switch to Tab %1",i+1),this);
+            switchToTabMapper->setMapping(switchToTabAction,i);
+            connect(switchToTabAction,SIGNAL(triggered()),switchToTabMapper,
+                    SLOT(map()));
+            collection->addAction(QString("switch-to-tab-%1").arg(i),switchToTabAction);
+        }
     }
 
     QListIterator<QAction*> iter(multiViewOnlyActions);
@@ -235,7 +248,16 @@ void ViewManager::setupActions()
     connect( moveViewRightAction , SIGNAL(triggered()) , this , SLOT(moveActiveViewRight()) );
     _viewSplitter->addAction(moveViewRightAction);
 }
-
+void ViewManager::switchToView(int index)
+{
+    Q_ASSERT(index >= 0);
+    ViewContainer* container = _viewSplitter->activeContainer();
+    Q_ASSERT( container );
+    QList<QWidget*> containerViews = container->views();
+    if (index >= containerViews.count())
+        return;
+    container->setActiveView(containerViews.at(index));
+}
 void ViewManager::updateDetachViewState()
 {
 	if (!_actionCollection)
