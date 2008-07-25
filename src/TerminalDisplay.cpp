@@ -1520,7 +1520,6 @@ void TerminalDisplay::updateImageSize()
 //showEvent and hideEvent are reimplemented here so that it appears to other classes that the 
 //display has been resized when the display is hidden or shown.
 //
-//this allows  
 //TODO: Perhaps it would be better to have separate signals for show and hide instead of using
 //the same signal as the one for a content size change 
 void TerminalDisplay::showEvent(QShowEvent*)
