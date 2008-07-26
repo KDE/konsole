@@ -157,7 +157,7 @@ FallbackProfile::FallbackProfile()
     setProperty(ShowNewAndCloseTabButtons,false);
 
     setProperty(KeyBindings,"default");
-    setProperty(ColorScheme,"Linux");
+    setProperty(ColorScheme,"DarkPastels");
     setProperty(Font,KGlobalSettings::fixedFont());
 
     setProperty(HistoryMode,FixedSizeHistory);
