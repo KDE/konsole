@@ -103,7 +103,7 @@ LocalTabTitleFormat=%d : %n
 RemoteTabTitleFormat=%h : %u
 
 [Appearance]
-ColorScheme=Linux
+ColorScheme=DarkPastels
 
 [Scrolling]
 ScrollMode=FixedLineCount
