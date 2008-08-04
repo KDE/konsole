@@ -38,6 +38,7 @@ Comment[x-test]=xxKonsolexx
 [Event/BellVisible]
 Name=Bell in Visible Session
 Name[af]=Klokkie in die sigbare sessie 
+Name[bn]=প্রদর্শিত সেশন-এ ঘণ্টা
 Name[bn_IN]=দৃশ্যমান সেশানের ঘন্টাধ্বনি
 Name[ca]=Timbre en una sessió visible
 Name[cs]=Zvonek ve viditelné relaci
@@ -151,6 +152,7 @@ Action=None
 [Event/BellInvisible]
 Name=Bell in Non-Visible Session
 Name[af]=Klokkie in nie-sigbare sessie 
+Name[bn]=আবৃত সেশন-এ ঘণ্টা
 Name[bn_IN]=অদৃশ্য সেশানের মধ্যে যে ঘন্টাধ্বনি বাজানো হয়
 Name[ca]=Timbre en una sessió no visible
 Name[cs]=Zvonek ve skryté relaci
@@ -266,6 +268,7 @@ Action=Popup
 Name=Activity in Monitored Session
 Name[af]=Aktiwiteit in gemonitorde sessie
 Name[bg]=Активност в наблюдаваната сесия
+Name[bn]=মনিটর করা সেশন-এ ঘটনা
 Name[bn_IN]=নিরীক্ষণ হওয়া সেশানের মধ্যে কর্ম
 Name[ca]=Activitat en una sessió controlada
 Name[cs]=Aktivita v monitorované relaci
@@ -382,6 +385,7 @@ Action=Popup
 [Event/Silence]
 Name=Silence in Monitored Session
 Name[af]=Stilte in gemonitorde sessie 
+Name[bn]=মনিটর করা সেশন চুপচাপ
 Name[bn_IN]=নিরীক্ষণ হওয়া সেশানের মধ্যে নৈঃশব্দ্য
 Name[ca]=Silenci en una sessió controlada
 Name[cs]=Ticho v monitorované relaci
@@ -496,6 +500,7 @@ Action=Popup
 [Event/Finished]
 Name=Session Finished With Non-Zero Status
 Name[af]=Sessie het geëindig met nie-zero status 
+Name[bn]=সেশন নন-জিরো স্ট্যাটাস সমেত সমাপ্ত
 Name[bn_IN]=শূণ্য ভিন্ন অন্য মানসহ সেশান সমাপ্তি
 Name[ca]=Sessió finalitzada amb un estat diferent de zero
 Name[cs]=Relace ukončena nenulovým stavem

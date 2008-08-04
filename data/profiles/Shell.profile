@@ -53,6 +53,7 @@ Name[xh]=Iqokobhe
 Comment=Konsole default profile
 Comment[af]=Konsole verstekprofiel
 Comment[bg]=Профил по подразбиране на конзолата
+Comment[bn]=কনসোল ডিফল্ট প্রোফাইল
 Comment[bn_IN]=Konsole-র ডিফল্ট প্রোফাইল
 Comment[ca]=Perfil per omissió del Konsole
 Comment[cs]=Výchozí profil Konsole
