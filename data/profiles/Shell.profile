@@ -30,6 +30,7 @@ Name[mr]=शेल
 Name[nb]=Skall
 Name[nds]=Befehlsfinster
 Name[nn]=Skal
+Name[oc]=Copèla
 Name[pa]=ਸ਼ੈੱਲ
 Name[pl]=Powłoka
 Name[pt]=Linha de Comandos
