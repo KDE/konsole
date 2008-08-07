@@ -132,7 +132,9 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 
     if ( window )
     {
+#ifdef __GNUC__
 #warning "The order here is not specified - does it matter whether updateImage or updateLineProperties comes first?"
+#endif
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()) );
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
 		window->setWindowLines(_lines);
