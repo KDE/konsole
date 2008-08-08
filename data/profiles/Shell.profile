@@ -70,6 +70,7 @@ Comment[fy]=Standertprofyl (konsole)
 Comment[ga]=Próifíl réamhshocraithe Konsole
 Comment[gl]=Perfil predeterminado de Konsole
 Comment[gu]=કોન્સોલ મૂળભૂત પ્રોફાઇલ
+Comment[hr]=Zadani profil konzole
 Comment[hu]=Alapértelmezett Konsole-profil
 Comment[is]=Sjálfgefið sniðmát Konsole
 Comment[it]=Profilo predefinito di Konsole
