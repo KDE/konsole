@@ -52,6 +52,7 @@ Name[x-test]=xxShellxx
 Name[xh]=Iqokobhe
 Comment=Konsole default profile
 Comment[af]=Konsole verstekprofiel
+Comment[ar]=لوحة الإعدادات الافتراضية
 Comment[bg]=Профил по подразбиране на конзолата
 Comment[bn]=কনসোল ডিফল্ট প্রোফাইল
 Comment[bn_IN]=Konsole-র ডিফল্ট প্রোফাইল

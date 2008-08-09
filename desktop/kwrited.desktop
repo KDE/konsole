@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=KDE Write Daemon
 Name[af]=KDE Skryf Bediener
-Name[ar]=رقيب الكتابة لِــ كدي
+Name[ar]=شيطان كتابة كيدي
 Name[be]=Cервіс KDE Write
 Name[bg]=Демон за писане (KDE)
 Name[bn]=কে.ডি.ই. রাইট ডিমন
@@ -73,6 +73,7 @@ Name[zh_CN]=KDE Write 守护程序
 Name[zh_TW]=KDE Write 伺服程式
 Comment=Watch for messages from local users sent with write(1) or wall(1)
 Comment[af]=Kyk uit vir boodskappe vanaf plaaslike gebruikers wat met write(1) of wall(1) gestuur is
+Comment[ar]=لمشاهدة رسائل من المستخدمين المحليين ارسلت مع الكتابة (1) او الجدار (1)
 Comment[be]=Назірае за паведамленнямі ад мясцовых карыстальнікаў, дасланымі праз write(1) ці wall(1)
 Comment[bg]=Наблюдение за съобщения от локални потребители, изпратени с write(1) или wall(1)
 Comment[bn_IN]=write(1) অথবা wall(1) সহযোগে ব্যবহারকারীদের থেকে প্রাপ্ত বার্তার অপেক্ষা করা হবে
