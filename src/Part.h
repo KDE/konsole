@@ -59,12 +59,12 @@ protected:
 class Part : public KParts::ReadOnlyPart , public TerminalInterface
 {
 Q_OBJECT
-    Q_INTERFACES(TerminalInterface) 
+    Q_INTERFACES(TerminalInterface)
 public:
     /** Constructs a new Konsole part with the specified parent. */
     explicit Part(QWidget* parentWidget , QObject* parent = 0);
 	virtual ~Part();
-	
+
     /** Reimplemented from TerminalInterface. */
     virtual void startProgram( const QString& program,
                                const QStringList& arguments );
@@ -74,12 +74,12 @@ public:
     virtual void sendInput( const QString& text );
 
 public slots:
-	/** 
+	/**
 	 * Shows the dialog used to manage profiles in Konsole.  The dialog
 	 * will be non-modal and will delete itself when it is closed.
 	 *
 	 * This is experimental API and not guaranteed to be present in later
-	 * KDE 4 releases. 
+	 * KDE 4 releases.
 	 *
 	 * @param parent The parent widget of the new dialog.
 	 */
@@ -89,13 +89,13 @@ public slots:
 	 * dialog will be non-modal and will delete itself when it is closed.
 	 *
 	 * This is experimental API and not guaranteed to be present in later KDE 4
-	 * releases.  
+	 * releases.
 	 *
 	 * @param parent The parent widget of the new dialog.
 	 */
 	void showEditCurrentProfileDialog(QWidget* parent);
-	/** 
-	 * Sends a profile change command to the active session.  This is equivalent to using 
+	/**
+	 * Sends a profile change command to the active session.  This is equivalent to using
 	 * the konsoleprofile tool within the session to change its settings.  The @p text string
 	 * is a semi-colon separated list of property=value pairs, eg. "colors=Linux Colors"
 	 *
@@ -105,7 +105,7 @@ public slots:
 	 */
 	void changeSessionSettings(const QString& text);
 
-	/** 
+	/**
 	 * Connects to an existing pseudo-teletype. See Session::openTeletype().
 	 * This must be called before the session is started by startProgram(),
 	 * or showShellInDir()
@@ -115,9 +115,9 @@ public slots:
 	void openTeletype(int ptyMasterFd);
 
 signals:
-	/** 
-	 * Emitted when the key sequence for a shortcut, which is also a valid terminal key sequence, 
-	 * is pressed while the terminal has focus.  By responding to this signal, the 
+	/**
+	 * Emitted when the key sequence for a shortcut, which is also a valid terminal key sequence,
+	 * is pressed while the terminal has focus.  By responding to this signal, the
      * controlling application can choose whether to execute the action associated with
      * the shortcut or ignore the shortcut and send the key
      * sequence to the terminal application.
@@ -137,6 +137,7 @@ signals:
 protected:
     /** Reimplemented from KParts::PartBase. */
     virtual bool openFile();
+    virtual bool openUrl(const KUrl & url);
 
 private slots:
     // creates a new session using the specified profile.

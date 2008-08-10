@@ -31,6 +31,7 @@
 #include <KLocale>
 #include <KWindowSystem>
 #include <kdeversion.h>
+#include <kde_file.h>
 
 // Konsole
 #include "ColorScheme.h"
@@ -168,7 +169,7 @@ Session* Part::activeSession() const
 	{
 		Q_ASSERT( _viewManager->activeViewController()->session());
 
-		return _viewManager->activeViewController()->session();	
+		return _viewManager->activeViewController()->session();
 	}
 	else
 	{
@@ -227,7 +228,7 @@ void Part::activeViewChanged(SessionController* controller)
 	Q_ASSERT( controller->view() );
 
 	// remove existing controller
-    if (_pluggedController) 
+    if (_pluggedController)
 	{
 		removeChildClient (_pluggedController);
 		disconnect(_pluggedController,SIGNAL(titleChanged(ViewProperties*)),this,
@@ -254,7 +255,7 @@ void Part::overrideTerminalShortcut(QKeyEvent* event, bool& override)
 	// override all shortcuts in the embedded terminal by default
 	override = true;
 	emit overrideShortcut(event,override);
-}	
+}
 void Part::activeViewTitleChanged(ViewProperties* properties)
 {
 	emit setWindowCaption(properties->title());
@@ -277,18 +278,42 @@ void Part::showEditCurrentProfileDialog(QWidget* parent)
 	EditProfileDialog* dialog = new EditProfileDialog(parent);
 	dialog->setAttribute(Qt::WA_DeleteOnClose);
 	dialog->setProfile( SessionManager::instance()->sessionProfile(activeSession()) );
-	dialog->show();	
+	dialog->show();
 }
 void Part::changeSessionSettings(const QString& text)
 {
-	// send a profile change command, the escape code format 
+	// send a profile change command, the escape code format
 	// is the same as the normal X-Term commands used to change the window title or icon,
 	// but with a magic value of '50' for the parameter which specifies what to change
 	Q_ASSERT( activeSession() );
 	QByteArray buffer;
 	buffer.append("\033]50;").append(text.toUtf8()).append('\a');
-	
-	activeSession()->emulation()->receiveData(buffer.constData(),buffer.length());  
+
+	activeSession()->emulation()->receiveData(buffer.constData(),buffer.length());
+}
+
+// Konqueror integration
+bool Part::openUrl( const KUrl & _url )
+{
+	if ( url() == _url ) {
+		emit completed();
+		return true;
+	}
+
+	setUrl( _url );
+	emit setWindowCaption( _url.pathOrUrl() );
+    //kdDebug(1211) << "Set Window Caption to " << url.pathOrUrl();
+	emit started( 0 );
+
+	if ( _url.isLocalFile() /*&& b_openUrls*/ ) {
+		KDE_struct_stat buff;
+		KDE_stat( QFile::encodeName( _url.path() ), &buff );
+		QString text = ( S_ISDIR( buff.st_mode ) ? _url.path() : _url.directory() );
+		showShellInDir( text );
+	}
+
+	emit completed();
+	return true;
 }
 
 #include "Part.moc"
