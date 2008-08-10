@@ -46,9 +46,12 @@
 #include "MainWindow.h"
 
 // X
+#include "config-konsole.h"
 #ifdef Q_WS_X11
 #include <X11/Xlib.h>
+#ifdef HAVE_XRENDER
 #include <X11/extensions/Xrender.h>
+#endif
 #endif
 
 extern "C"
@@ -119,7 +122,7 @@ void Part::setupActionsForSession(SessionController* session)
 }
 bool Part::transparencyAvailable()
 {
-#ifdef Q_WS_X11
+#if defined(Q_WS_X11) && defined(HAVE_XRENDER)
     bool ARGB = false;
 
     int screen = QX11Info::appScreen();
