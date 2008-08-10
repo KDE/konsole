@@ -31,6 +31,7 @@
 #include <KLocale>
 #include <KWindowSystem>
 #include <kdeversion.h>
+#include <kde_file.h>
 
 // Konsole
 #include "ColorScheme.h"
@@ -289,6 +290,30 @@ void Part::changeSessionSettings(const QString& text)
 	buffer.append("\033]50;").append(text.toUtf8()).append('\a');
 	
 	activeSession()->emulation()->receiveData(buffer.constData(),buffer.length());  
+}
+
+// Konqueror integration
+bool Part::openUrl( const KUrl & _url )
+{
+	if ( url() == _url ) {
+		emit completed();
+		return true;
+	}
+
+	setUrl( _url );
+	emit setWindowCaption( _url.pathOrUrl() );
+	//kdDebug(1211) << "Set Window Caption to " << url.pathOrUrl();
+	emit started( 0 );
+
+	if ( _url.isLocalFile() /*&& b_openUrls*/ ) {
+		KDE_struct_stat buff;
+		KDE_stat( QFile::encodeName( _url.path() ), &buff );
+		QString text = ( S_ISDIR( buff.st_mode ) ? _url.path() : _url.directory() );
+		showShellInDir( text );
+	}
+
+	emit completed();
+	return true;
 }
 
 #include "Part.moc"
