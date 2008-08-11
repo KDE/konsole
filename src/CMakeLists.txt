@@ -17,7 +17,7 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
 
 ### Line graphics font
 
-    OPTION(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
+    option(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
 
     if(KONSOLE_GENERATE_LINEFONT)
 	    add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/LineFont.h
