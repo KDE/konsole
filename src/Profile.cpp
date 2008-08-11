@@ -410,7 +410,7 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
         return false;
 
     // KDE 3 profiles do not have parents
-    parentProfile = QString();
+    parentProfile.clear();
 
     KDesktopFile* desktopFile = new KDesktopFile(path);
     KConfigGroup* config = new KConfigGroup( desktopFile->desktopGroup() );

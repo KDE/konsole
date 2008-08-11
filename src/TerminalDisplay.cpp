@@ -770,8 +770,8 @@ void TerminalDisplay::setCursorPos(const int curx, const int cury)
 void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
 {
 	// if the flow control warning is enabled this will interfere with the 
-	// scrolling optimisations and cause artifacts.  the simple solution here
-	// is to just disable the optimisation whilst it is visible
+	// scrolling optimizations and cause artifacts.  the simple solution here
+	// is to just disable the optimization whilst it is visible
 	if ( _outputSuspendedLabel && _outputSuspendedLabel->isVisible() )
 		return;
 
