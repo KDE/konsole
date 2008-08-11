@@ -1163,7 +1163,7 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
 {
   QPainter paint(this);
 
-  foreach (QRect rect, (pe->region() & contentsRect()).rects())
+  foreach (const QRect &rect, (pe->region() & contentsRect()).rects())
   {
     drawBackground(paint,rect,palette().background().color(),
 					true /* use opacity setting */);
@@ -2324,7 +2324,7 @@ void TerminalDisplay::emitSelection(bool useXselection,bool appendReturn)
     text.append("\r");
   if ( ! text.isEmpty() )
   {
-    text.replace("\n", "\r");
+    text.replace('\n', '\r');
     QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
     emit keyPressedSignal(&e); // expose as a big fat keypress event
     
