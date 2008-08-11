@@ -74,6 +74,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     _searchTimer->setInterval(250);
     _searchTimer->setSingleShot(true);
     connect( _searchTimer , SIGNAL(timeout()) , this , SLOT(notifySearchChanged()) );
+    connect( _searchEdit , SIGNAL(clearButtonClicked()) , this , SLOT(clearLineEdit()) );
     connect( _searchEdit , SIGNAL(textChanged(const QString&)) , _searchTimer , SLOT(start()));
 
     QToolButton* findNext = new QToolButton(this);
@@ -254,6 +255,11 @@ void IncrementalSearchBar::setContinueFlag( Continue flag )
     {
         _continueLabel->hide();
     }
+}
+
+void IncrementalSearchBar::clearLineEdit()
+{
+    _searchEdit->setStyleSheet( QString() );
 }
 
 #include "IncrementalSearchBar.moc"

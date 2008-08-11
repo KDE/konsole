@@ -176,6 +176,7 @@ protected:
 
 private slots:
     void notifySearchChanged();
+    void clearLineEdit();
 
 private:
     bool _foundMatch;
