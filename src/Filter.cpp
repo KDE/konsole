@@ -388,7 +388,9 @@ void RegExpFilter::process()
             pos += _searchText.matchedLength();
 
             // if matchedLength == 0, the program will get stuck in an infinite loop
-            Q_ASSERT( _searchText.matchedLength() > 0 );
+            if ( _searchText.matchedLength() == 0 )
+                pos = -1;
+
         }
     }    
 }
