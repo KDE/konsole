@@ -83,6 +83,9 @@ Part::Part(QWidget* parentWidget , QObject* parent)
   ,_pluggedController(0)
   ,_manageProfilesAction(0)
 {
+    // make sure the konsole catalog is loaded
+    KGlobal::locale()->insertCatalog("konsole");    
+
     TerminalDisplay::HAVE_TRANSPARENCY = transparencyAvailable();
 
 	// setup global actions
