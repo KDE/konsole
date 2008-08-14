@@ -158,7 +158,7 @@ static bool expandEnv( QString &text )
 				int len	= pos2 - pos;
 				QString key	= text.mid( pos+1, len-1);
 				QString value =
-					QString::fromLocal8Bit( ::getenv(key.toLocal8Bit()) );
+					QString::fromLocal8Bit( qgetenv(key.toLocal8Bit()) );
 
 				if ( !value.isEmpty() ) {
 					expanded = true;

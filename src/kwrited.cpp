@@ -85,7 +85,7 @@ KWrited::KWrited() : QTextEdit()
 
   pty = new KPty();
   pty->open();
-  pty->login(KUser().loginName().toLocal8Bit().data(), getenv("DISPLAY"));
+  pty->login(KUser().loginName().toLocal8Bit().data(), qgetenv("DISPLAY"));
   QSocketNotifier *sn = new QSocketNotifier(pty->masterFd(), QSocketNotifier::Read, this);
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 

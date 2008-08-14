@@ -287,7 +287,7 @@ QString Session::checkProgram(const QString& program) const
   // if 'exec' is not specified, fall back to default shell.  if that 
   // is not set then fall back to /bin/sh
   if ( exec.isEmpty() )
-      exec = getenv("SHELL");
+      exec = qgetenv("SHELL");
   if ( exec.isEmpty() )
   	  exec = "/bin/sh";
 
@@ -327,7 +327,7 @@ void Session::run()
       kDebug() << "Session::run() - no command line arguments specified.";
 
   const int CHOICE_COUNT = 3;
-  QString programs[CHOICE_COUNT] = {_program,getenv("SHELL"),"/bin/sh"};
+  QString programs[CHOICE_COUNT] = {_program,qgetenv("SHELL"),"/bin/sh"};
   QString exec;
   int choice = 0;
   while (choice < CHOICE_COUNT)

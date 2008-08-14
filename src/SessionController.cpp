@@ -703,7 +703,7 @@ bool SessionController::confirmClose() const
         // hard coded for now.  In future make it possible for the user to specify which programs
         // are ignored when considering whether to display a confirmation
         QStringList ignoreList; 
-        ignoreList << QString(getenv("SHELL")).section('/',-1);
+        ignoreList << QString(qgetenv("SHELL")).section('/',-1);
         if (ignoreList.contains(title))
             return true;
 
