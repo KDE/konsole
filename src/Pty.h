@@ -70,7 +70,7 @@ Q_OBJECT
 	 * Construct a process using an open pty master.
 	 * See KPtyProcess::KPtyProcess()
 	 */
-	Pty(int ptyMasterFd, QObject* parent = 0);
+	explicit Pty(int ptyMasterFd, QObject* parent = 0);
 
     ~Pty();
 

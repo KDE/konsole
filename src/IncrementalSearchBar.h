@@ -103,7 +103,7 @@ public:
      * Constructs a new incremental search bar with the given parent widget 
      * @p features specifies the features which should be made available to the user.
      */
-    IncrementalSearchBar(Features features , QWidget* parent = 0);
+    explicit IncrementalSearchBar(Features features , QWidget* parent = 0);
 
     /** 
      * Sets an indicator for the user as to whether or not a match for the 

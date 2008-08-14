@@ -787,6 +787,8 @@ public:
 
 class AutoScrollHandler : public QObject
 {
+Q_OBJECT
+
 public:
 	AutoScrollHandler(QWidget* parent);
 protected:
