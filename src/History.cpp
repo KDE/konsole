@@ -32,6 +32,7 @@
 #include <errno.h>
 
 // KDE
+#include <kde_file.h>
 #include <kdebug.h>
 
 // Reasonable line size
@@ -141,7 +142,7 @@ void HistoryFile::add(const unsigned char* bytes, int len)
 
   int rc = 0;
 
-  rc = lseek(ion,length,SEEK_SET); if (rc < 0) { perror("HistoryFile::add.seek"); return; }
+  rc = KDE_lseek(ion,length,SEEK_SET); if (rc < 0) { perror("HistoryFile::add.seek"); return; }
   rc = write(ion,bytes,len);       if (rc < 0) { perror("HistoryFile::add.write"); return; }
   length += rc;
 }
@@ -167,7 +168,7 @@ void HistoryFile::get(unsigned char* bytes, int len, int loc)
 
   	if (loc < 0 || len < 0 || loc + len > length)
     	fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
-  	rc = lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
+  	rc = KDE_lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
   	rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); return; }
   }
 }

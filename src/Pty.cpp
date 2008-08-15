@@ -38,6 +38,7 @@
 #include <KDebug>
 #include <KPty>
 #include <KPtyDevice>
+#include <kde_file.h>
 
 using namespace Konsole;
 
@@ -219,8 +220,8 @@ int Pty::start(const QString& program,
 
 void Pty::setWriteable(bool writeable)
 {
-  struct stat sbuf;
-  stat(pty()->ttyName(), &sbuf);
+  KDE_struct_stat sbuf;
+  KDE_stat(pty()->ttyName(), &sbuf);
   if (writeable)
     chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP);
   else
