@@ -16,6 +16,7 @@ Name[fr]=Terminal
 Name[fy]=Flues
 Name[ga]=Blaosc
 Name[gu]=શેલ
+Name[he]=מעטפת
 Name[hr]=Ljuska
 Name[hu]=Parancsértelmező
 Name[is]=Skél
