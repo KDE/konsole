@@ -1,6 +1,7 @@
 [General]
 Name=Shell
 Name[af]=Tolk
+Name[be@latin]=Abałonka
 Name[bg]=Шел
 Name[bn]=শেল
 Name[bn_IN]=শেল
@@ -54,6 +55,7 @@ Name[x-test]=xxShellxx
 Name[xh]=Iqokobhe
 Comment=Konsole default profile
 Comment[af]=Konsole verstekprofiel
+Comment[be@latin]=Zmoŭčany profil prahramy „Konsole”
 Comment[bg]=Профил по подразбиране на конзолата
 Comment[bn_IN]=Konsole-র ডিফল্ট প্রোফাইল
 Comment[ca]=Perfil per omissió del Konsole
