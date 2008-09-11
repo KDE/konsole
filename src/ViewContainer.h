@@ -56,6 +56,7 @@ class QLabel;
 
 namespace Konsole
 {
+    class IncrementalSearchBar;
     class ViewProperties;
 /**
  * An interface for container widgets which can hold one or more views.
@@ -192,6 +193,11 @@ public:
      */
     virtual void setActiveView(QWidget* widget) = 0;
 
+    /**
+     * @return the search widget for this view
+     */
+    IncrementalSearchBar* searchBar();
+
     /** Changes the active view to the next view */
     void activateNextView();
 
@@ -325,6 +331,7 @@ protected:
 
 private slots:
     void viewDestroyed(QObject* view);
+    void searchBarDestroyed();
 
 private:
     NavigationDisplayMode _navigationDisplayMode;
@@ -332,65 +339,20 @@ private:
     QList<QWidget*> _views;
     QHash<QWidget*,ViewProperties*> _navigation;
     Features _features;
+    IncrementalSearchBar* _searchBar;
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(ViewContainer::Features)
 
-/** 
- * A view container which uses a QTabWidget to display the views and 
- * allow the user to switch between them.
- */
-class TabbedViewContainer : public ViewContainer  
-{
-    Q_OBJECT
-
-public:
-    TabbedViewContainer(NavigationPosition position , QObject* parent);
-    virtual ~TabbedViewContainer();
-    
-    virtual QWidget* containerWidget() const;
-    virtual QWidget* activeView() const;
-    virtual void setActiveView(QWidget* view);
-
-    void setNewSessionMenu(QMenu* menu);
-     
-protected:
-    virtual void addViewWidget( QWidget* view , int index);
-    virtual void removeViewWidget( QWidget* view ); 
-
-private slots:
-    void updateTitle(ViewProperties* item);
-    void updateIcon(ViewProperties* item);
-    void closeTabClicked();
-    void selectTabColor();
-    void prepareColorCells();
-    void showContextMenu(QWidget* widget , const QPoint& position);
-    void currentTabChanged(int index);
-
-private:
-    KTabWidget* _tabWidget; 
-    QList<QAction*> _viewActions;
-
-    QToolButton*    _newSessionButton;
-    QMenu*          _newSessionMenu;
-
-    KMenu*          _tabContextMenu;
-    KMenu*          _tabSelectColorMenu;
-    QWidgetAction*  _tabColorSelector; 
-    KColorCells*    _tabColorCells;
-
-    int _contextMenuTab;
-};
-
-class TabbedViewContainerV2;
+class TabbedViewContainer;
 
 // internal class,
-// to allow for tweaks to the tab bar required by TabbedViewContainerV2.
+// to allow for tweaks to the tab bar required by TabbedViewContainer.
 class ViewContainerTabBar : public KTabBar
 {
 Q_OBJECT
 
 public:
-    ViewContainerTabBar(QWidget* parent,TabbedViewContainerV2* container);
+    ViewContainerTabBar(QWidget* parent,TabbedViewContainer* container);
 
 	// returns a pixmap image of a tab for use with QDrag 
 	QPixmap dragDropPixmap(int tab);
@@ -413,7 +375,7 @@ private:
     // is the same as the tab at the drop location
     bool proposedDropIsSameTab(const QDropEvent* event) const;
 
-	TabbedViewContainerV2* _container;
+	TabbedViewContainer* _container;
 	QLabel* _dropIndicator;
 	int _dropIndicatorIndex;
     bool _drawIndicatorDisabled;
@@ -422,11 +384,11 @@ private:
 // internal
 // this class provides a work-around for a problem in Qt 4.x
 // where the insertItem() method only has protected access - 
-// and the TabbedViewContainerV2 class needs to call it.
+// and the TabbedViewContainer class needs to call it.
 //
 // and presumably for binary compatibility reasons will
 // not be fixed until Qt 5. 
-class TabbedViewContainerV2Layout : public QVBoxLayout
+class TabbedViewContainerLayout : public QVBoxLayout
 {
 public:
     void insertItemAt( int index , QLayoutItem* item )
@@ -439,7 +401,7 @@ public:
  * An alternative tabbed view container which uses a QTabBar and QStackedWidget
  * combination for navigation instead of QTabWidget
  */
-class TabbedViewContainerV2 : public ViewContainer
+class TabbedViewContainer : public ViewContainer
 {
     Q_OBJECT
 
@@ -450,8 +412,8 @@ public:
      * Constructs a new tabbed view container.  Supported positions
      * are NavigationPositionTop and NavigationPositionBottom.
      */
-    TabbedViewContainerV2(NavigationPosition position , QObject* parent);
-    virtual ~TabbedViewContainerV2();
+    TabbedViewContainer(NavigationPosition position , QObject* parent);
+    virtual ~TabbedViewContainer();
 
     virtual QWidget* containerWidget() const;
     virtual QWidget* activeView() const;
@@ -460,6 +422,7 @@ public:
     virtual void setFeatures(Features features);
     virtual Features supportedFeatures() const;
     virtual void setNewViewMenu(QMenu* menu);
+
 protected:
     virtual void addViewWidget(QWidget* view , int index);
     virtual void removeViewWidget(QWidget* view);
@@ -488,7 +451,7 @@ private:
     QStackedWidget* _stackWidget;
     QWidget* _containerWidget;
     QSpacerItem* _tabBarSpacer;
-    TabbedViewContainerV2Layout* _layout;
+    TabbedViewContainerLayout* _layout;
     QHBoxLayout* _tabBarLayout;
     KPushButton* _newTabButton;
     KPushButton* _closeTabButton;
@@ -512,6 +475,7 @@ protected:
     virtual void removeViewWidget( QWidget* view );
 
 private:
+    QWidget *_containerWidget;
     QStackedWidget* _stackWidget;
 };
 

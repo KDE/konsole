@@ -36,6 +36,7 @@ namespace Konsole
 {
 
 class ColorScheme;
+class IncrementalSearchBar;
 class Session;
 class TerminalDisplay;
 class Profile;
@@ -147,6 +148,11 @@ public:
  	 * emitted when this changes.
 	 */
 	SessionController* activeViewController() const;
+
+    /**
+     * Returns the search bar.
+     */
+    IncrementalSearchBar* searchBar() const;
 
 signals:
     /** Emitted when the last view is removed from the view manager */

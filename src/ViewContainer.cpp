@@ -50,6 +50,7 @@
 #include <KTabWidget>
 
 // Konsole
+#include "IncrementalSearchBar.h"
 #include "ViewProperties.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
@@ -61,13 +62,19 @@ ViewContainer::ViewContainer(NavigationPosition position , QObject* parent)
     : QObject(parent)
     , _navigationDisplayMode(AlwaysShowNavigation)
     , _navigationPosition(position)
+    , _searchBar(0)
 {
 }
+
 ViewContainer::~ViewContainer()
 {
     foreach( QWidget* view , _views ) 
     {
         disconnect(view,SIGNAL(destroyed(QObject*)),this,SLOT(viewDestroyed(QObject*)));
+    }
+
+    if (_searchBar) {
+        _searchBar->deleteLater();
     }
 
     emit destroyed(this);
@@ -184,6 +191,21 @@ const QList<QWidget*> ViewContainer::views()
     return _views;
 }
 
+IncrementalSearchBar* ViewContainer::searchBar()
+{
+    if (!_searchBar) {
+        _searchBar = new IncrementalSearchBar( IncrementalSearchBar::AllFeatures , 0);
+        _searchBar->setVisible(false);
+        connect(_searchBar, SIGNAL(destroyed(QObject*)), this, SLOT(searchBarDestroyed()));
+    }
+    return _searchBar;
+}
+
+void ViewContainer::searchBarDestroyed()
+{
+    _searchBar = 0;
+}
+
 void ViewContainer::activateNextView()
 {
     QWidget* active = activeView();
@@ -230,216 +252,7 @@ QList<QWidget*> ViewContainer::widgetsForItem(ViewProperties* item) const
     return _navigation.keys(item);
 }
 
-TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* parent) :
-    ViewContainer(position,parent)
-   ,_newSessionButton(0) 
-   ,_tabContextMenu(0) 
-   ,_tabSelectColorMenu(0)
-   ,_tabColorSelector(0)
-   ,_tabColorCells(0)
-   ,_contextMenuTab(0) 
-{
-    _tabWidget = new KTabWidget();
-    _tabContextMenu = new KMenu(_tabWidget);   
-
-    _newSessionButton = new QToolButton(_tabWidget);
-    _newSessionButton->setAutoRaise(true);
-    _newSessionButton->setIcon( KIcon("tab-new") );
-    _newSessionButton->setText( i18n("New") );
-    _newSessionButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    _newSessionButton->setPopupMode(QToolButton::MenuButtonPopup);
-
-    QToolButton* closeButton = new QToolButton(_tabWidget);
-    closeButton->setIcon( KIcon("tab-close") );
-    closeButton->setAutoRaise(true);
-    connect( closeButton , SIGNAL(clicked()) , this , SLOT(closeTabClicked()) );
-
-    _tabWidget->setCornerWidget(_newSessionButton,Qt::TopLeftCorner);
-    _tabWidget->setCornerWidget(closeButton,Qt::TopRightCorner);
-
-     //Create a colour selection palette and fill it with a range of suitable colours
-     QString paletteName;
-     QStringList availablePalettes = KColorCollection::installedCollections();
-
-     if (availablePalettes.contains("40.colors"))
-        paletteName = "40.colors";
-
-    KColorCollection palette(paletteName);
-
-    //If the palette of colours was found, create a palette menu displaying those colors
-    //which the user chooses from when they activate the "Select Tab Color" sub-menu.
-    //
-    //If the palette is empty, default back to the old behaviour where the user is shown
-    //a color dialog when they click the "Select Tab Color" menu item.
-    if ( palette.count() > 0 )
-    {
-        _tabColorCells = new KColorCells(_tabWidget,palette.count()/8,8);
-
-        for (int i=0;i<palette.count();i++)
-            _tabColorCells->setColor(i,palette.color(i));
-
-
-        _tabSelectColorMenu = new KMenu(_tabWidget);
-        connect( _tabSelectColorMenu, SIGNAL(aboutToShow()) , this, SLOT(prepareColorCells()) );
-        _tabColorSelector = new QWidgetAction(_tabSelectColorMenu);
-        _tabColorSelector->setDefaultWidget(_tabColorCells);
-
-        _tabSelectColorMenu->addAction( _tabColorSelector );
-
-        connect(_tabColorCells,SIGNAL(colorSelected(int)),this,SLOT(selectTabColor()));
-        connect(_tabColorCells,SIGNAL(colorSelected(int)),_tabContextMenu,SLOT(hide()));
-        
-        QAction* action = _tabSelectColorMenu->menuAction(); 
-            //_tabPopupMenu->addMenu(_tabSelectColorMenu);
-        action->setIcon( KIcon("colors") );
-        action->setText( i18n("Select &Tab Color") );
-
-        _viewActions << action;
-    }
-    else
-    {
-      //  _viewActions << new KAction( KIcon("colors"),i18n("Select &Tab Color..."),this,
-      //                  SLOT(slotTabSelectColor()));
-    }
-
-
-   connect( _tabWidget , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
-   connect( _tabWidget , SIGNAL(contextMenu(QWidget*,const QPoint&)),
-                         SLOT(showContextMenu(QWidget*,const QPoint&))); 
-}
-
-
-
-void TabbedViewContainer::currentTabChanged(int tab)
-{
-    if ( tab >= 0 )
-    {
-        emit activeViewChanged( _tabWidget->widget(tab) );
-    }
-}
-
-void TabbedViewContainer::closeTabClicked()
-{
-    emit closeRequest(_tabWidget->currentWidget());
-}
-
-TabbedViewContainer::~TabbedViewContainer()
-{
-    _tabContextMenu->deleteLater();
-    _tabWidget->deleteLater();
-}
-
-void TabbedViewContainer::setNewSessionMenu(QMenu* menu)
-{
-    _newSessionButton->setMenu(menu);
-}
-void TabbedViewContainer::showContextMenu(QWidget* widget , const QPoint& position)
-{
-    //TODO - Use the tab under the mouse, not just the active tab
-    _contextMenuTab = _tabWidget->indexOf(widget);
-    //NavigationItem* item = navigationItem( widget );
-   
-    _tabContextMenu->clear();
-//    _tabContextMenu->addActions( item->contextMenuActions(_viewActions) );
-    _tabContextMenu->popup( position );
-}
-
-void TabbedViewContainer::prepareColorCells()
-{
- //set selected color in palette widget to color of active tab
-
-    QColor activeTabColor = _tabWidget->tabTextColor( _contextMenuTab );
-
-    for (int i=0;i<_tabColorCells->count();i++)
-        if ( activeTabColor == _tabColorCells->color(i) )
-        {
-            _tabColorCells->setSelected(i);
-            break;
-        } 
-}
-
-void TabbedViewContainer::addViewWidget( QWidget* view , int )
-{
-    ViewProperties* item = viewProperties(view);
-    connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*))); 
-    connect( item , SIGNAL(iconChanged(ViewProperties*) ) , this ,SLOT(updateIcon(ViewProperties*)));          
-    _tabWidget->addTab( view , item->icon() , item->title() );
-}
-void TabbedViewContainer::removeViewWidget( QWidget* view )
-{
-    const int index = _tabWidget->indexOf(view);
-
-    if ( index != -1 )
-        _tabWidget->removeTab( index );
-}
-
-void TabbedViewContainer::updateIcon(ViewProperties* item)
-{
-    QList<QWidget*> items = widgetsForItem(item);
-    QListIterator<QWidget*> itemIter(items);
-    
-    while ( itemIter.hasNext() )
-    {
-        int index = _tabWidget->indexOf( itemIter.next() );
-        _tabWidget->setTabIcon( index , item->icon() );
-    }
-}
-void TabbedViewContainer::updateTitle(ViewProperties* item) 
-{
-    QList<QWidget*> items = widgetsForItem(item);
-    QListIterator<QWidget*> itemIter(items);
-
-    while ( itemIter.hasNext() )
-    {
-        int index = _tabWidget->indexOf( itemIter.next() );
-        _tabWidget->setTabText( index , item->title() );
-    }
-
-}
-
-QWidget* TabbedViewContainer::containerWidget() const
-{
-    return _tabWidget;
-}
-
-QWidget* TabbedViewContainer::activeView() const
-{
-    return _tabWidget->widget(_tabWidget->currentIndex());
-}
-
-void TabbedViewContainer::setActiveView(QWidget* view)
-{
-    _tabWidget->setCurrentWidget(view);
-}
-
-void TabbedViewContainer::selectTabColor()
-{
-  QColor color;
-  
-  //If the color palette is available apply the current selected color to the tab, otherwise
-  //default back to showing KDE's color dialog instead.
-  if ( _tabColorCells )
-  {
-    color = _tabColorCells->color(_tabColorCells->selectedIndex());
-
-    if (!color.isValid())
-            return;
-  }
-  else
-  {
-    QColor defaultColor = _tabWidget->palette().color( QPalette::Foreground );
-    QColor tempColor = _tabWidget->tabTextColor( _contextMenuTab );
-
-    if ( KColorDialog::getColor(tempColor,defaultColor,_tabWidget) == KColorDialog::Accepted )
-        color = tempColor;
-    else
-        return;
-  }
-
-  _tabWidget->setTabTextColor( _contextMenuTab , color );
-}
-
-ViewContainerTabBar::ViewContainerTabBar(QWidget* parent,TabbedViewContainerV2* container)
+ViewContainerTabBar::ViewContainerTabBar(QWidget* parent,TabbedViewContainer* container)
     : KTabBar(parent)
 	, _container(container)
     , _dropIndicator(0)
@@ -608,7 +421,7 @@ QPixmap ViewContainerTabBar::dragDropPixmap(int tab)
 
 	return tabPixmap;
 }
-TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObject* parent) 
+TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* parent) 
 : ViewContainer(position,parent)
 {
     _containerWidget = new QWidget;
@@ -642,7 +455,7 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
     connect( _newTabButton , SIGNAL(clicked()) , this , SIGNAL(newViewRequest()) );
     connect( _closeTabButton , SIGNAL(clicked()) , this , SLOT(closeCurrentTab()) );
 
-    _layout = new TabbedViewContainerV2Layout;
+    _layout = new TabbedViewContainerLayout;
     _layout->setSpacing(0);
     _layout->setMargin(0);
     _tabBarLayout = new QHBoxLayout;
@@ -654,15 +467,17 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
     _tabBarSpacer = new QSpacerItem(0,TabBarSpace);
 
     _layout->addWidget(_stackWidget);
-    
+    searchBar()->setParent(_containerWidget);
     if ( position == NavigationPositionTop )
     {
         _layout->insertLayout(0,_tabBarLayout);
         _layout->insertItemAt(0,_tabBarSpacer);
+        _layout->insertWidget(-1,searchBar());
         _tabBar->setShape(QTabBar::RoundedNorth);
     }
     else if ( position == NavigationPositionBottom )
     {
+        _layout->insertWidget(-1,searchBar());
         _layout->insertLayout(-1,_tabBarLayout);
         _layout->insertItemAt(-1,_tabBarSpacer);
         _tabBar->setShape(QTabBar::RoundedSouth);
@@ -672,11 +487,11 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
 
     _containerWidget->setLayout(_layout);
 }
-void TabbedViewContainerV2::setNewViewMenu(QMenu* menu)
+void TabbedViewContainer::setNewViewMenu(QMenu* menu)
 { _newTabButton->setDelayedMenu(menu); }
-ViewContainer::Features TabbedViewContainerV2::supportedFeatures() const
+ViewContainer::Features TabbedViewContainer::supportedFeatures() const
 { return QuickNewView|QuickCloseView; }
-void TabbedViewContainerV2::setFeatures(Features features)
+void TabbedViewContainer::setFeatures(Features features)
 {
     ViewContainer::setFeatures(features);
 
@@ -684,21 +499,21 @@ void TabbedViewContainerV2::setFeatures(Features features)
     _newTabButton->setVisible(!tabBarHidden && (features & QuickNewView));
     _closeTabButton->setVisible(!tabBarHidden && (features & QuickCloseView));
 }
-void TabbedViewContainerV2::closeCurrentTab()
+void TabbedViewContainer::closeCurrentTab()
 {
     if (_stackWidget->currentIndex() != -1)
     {
         closeTab(_stackWidget->currentIndex());
     }
 }
-void TabbedViewContainerV2::closeTab(int tab)
+void TabbedViewContainer::closeTab(int tab)
 {
 	Q_ASSERT(tab >= 0 && tab < _stackWidget->count());
     
     if (viewProperties(_stackWidget->widget(tab))->confirmClose())
 	    removeView(_stackWidget->widget(tab));
 }
-void TabbedViewContainerV2::setTabBarVisible(bool visible)
+void TabbedViewContainer::setTabBarVisible(bool visible)
 {
     _tabBar->setVisible(visible);
     _newTabButton->setVisible(visible && (features() & QuickNewView));
@@ -712,15 +527,15 @@ void TabbedViewContainerV2::setTabBarVisible(bool visible)
         _tabBarSpacer->changeSize(0,0);
     } 
 }
-QList<ViewContainer::NavigationPosition> TabbedViewContainerV2::supportedNavigationPositions() const
+QList<ViewContainer::NavigationPosition> TabbedViewContainer::supportedNavigationPositions() const
 {
     return QList<NavigationPosition>() << NavigationPositionTop << NavigationPositionBottom;
 }
-void TabbedViewContainerV2::navigationPositionChanged(NavigationPosition position)
+void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
 {
     // this method assumes that there are only three items 
     // in the layout
-    Q_ASSERT( _layout->count() == 3 );
+    Q_ASSERT( _layout->count() == 4 );
 
     // index of stack widget in the layout when tab bar is at the bottom
     const int StackIndexWithTabBottom = 0;
@@ -730,9 +545,11 @@ void TabbedViewContainerV2::navigationPositionChanged(NavigationPosition positio
     {
         _layout->removeItem(_tabBarLayout);
         _layout->removeItem(_tabBarSpacer);
+        _layout->removeWidget(searchBar());
 
         _layout->insertLayout(0,_tabBarLayout);
         _layout->insertItemAt(0,_tabBarSpacer);
+        _layout->insertWidget(-1,searchBar());
         _tabBar->setShape(QTabBar::RoundedNorth);
     }
     else if ( position == NavigationPositionBottom 
@@ -740,13 +557,15 @@ void TabbedViewContainerV2::navigationPositionChanged(NavigationPosition positio
     {
         _layout->removeItem(_tabBarLayout);
         _layout->removeItem(_tabBarSpacer);
+        _layout->removeWidget(searchBar());
 
+        _layout->insertWidget(-1,searchBar());
         _layout->insertLayout(-1,_tabBarLayout);
         _layout->insertItemAt(-1,_tabBarSpacer);
         _tabBar->setShape(QTabBar::RoundedSouth);
     }
 }
-void TabbedViewContainerV2::navigationDisplayModeChanged(NavigationDisplayMode mode)
+void TabbedViewContainer::navigationDisplayModeChanged(NavigationDisplayMode mode)
 {
     if ( mode == AlwaysShowNavigation && _tabBar->isHidden() )
         setTabBarVisible(true);
@@ -757,7 +576,7 @@ void TabbedViewContainerV2::navigationDisplayModeChanged(NavigationDisplayMode m
     if ( mode == ShowNavigationAsNeeded )
         dynamicTabBarVisibility();
 }
-void TabbedViewContainerV2::dynamicTabBarVisibility()
+void TabbedViewContainer::dynamicTabBarVisibility()
 {
     if ( _tabBar->count() > 1 && _tabBar->isHidden() )
         setTabBarVisible(true);
@@ -765,12 +584,12 @@ void TabbedViewContainerV2::dynamicTabBarVisibility()
     if ( _tabBar->count() < 2 && !_tabBar->isHidden() )
         setTabBarVisible(false);    
 }
-TabbedViewContainerV2::~TabbedViewContainerV2()
+TabbedViewContainer::~TabbedViewContainer()
 {
     _containerWidget->deleteLater();
 }
 
-void TabbedViewContainerV2::startTabDrag(int tab)
+void TabbedViewContainer::startTabDrag(int tab)
 {
 	QDrag* drag = new QDrag(_tabBar);
 	const QRect tabRect = _tabBar->tabRect(tab);
@@ -802,11 +621,11 @@ void TabbedViewContainerV2::startTabDrag(int tab)
 		removeView(view);
 	}
 }
-void TabbedViewContainerV2::tabDoubleClicked(int tab)
+void TabbedViewContainer::tabDoubleClicked(int tab)
 {
     viewProperties( views()[tab] )->rename();
 }
-void TabbedViewContainerV2::moveViewWidget( int fromIndex , int toIndex )
+void TabbedViewContainer::moveViewWidget( int fromIndex , int toIndex )
 {
     QString text = _tabBar->tabText(fromIndex);
     QIcon icon = _tabBar->tabIcon(fromIndex);
@@ -821,7 +640,7 @@ void TabbedViewContainerV2::moveViewWidget( int fromIndex , int toIndex )
     _stackWidget->removeWidget(widget);
     _stackWidget->insertWidget(toIndex,widget);
 }
-void TabbedViewContainerV2::currentTabChanged(int index)
+void TabbedViewContainer::currentTabChanged(int index)
 {
     _stackWidget->setCurrentIndex(index);
     if (_stackWidget->widget(index))
@@ -831,7 +650,7 @@ void TabbedViewContainerV2::currentTabChanged(int index)
     setTabActivity(index,false);
 }
 
-void TabbedViewContainerV2::wheelScrolled(int delta)
+void TabbedViewContainer::wheelScrolled(int delta)
 {
     if ( delta < 0 )
 	activateNextView();
@@ -839,15 +658,15 @@ void TabbedViewContainerV2::wheelScrolled(int delta)
 	activatePreviousView();
 }
 
-QWidget* TabbedViewContainerV2::containerWidget() const
+QWidget* TabbedViewContainer::containerWidget() const
 {
     return _containerWidget;
 }
-QWidget* TabbedViewContainerV2::activeView() const
+QWidget* TabbedViewContainer::activeView() const
 {
     return _stackWidget->currentWidget();
 }
-void TabbedViewContainerV2::setActiveView(QWidget* view)
+void TabbedViewContainer::setActiveView(QWidget* view)
 {
     const int index = _stackWidget->indexOf(view);
 
@@ -856,7 +675,7 @@ void TabbedViewContainerV2::setActiveView(QWidget* view)
    _stackWidget->setCurrentWidget(view);
    _tabBar->setCurrentIndex(index); 
 }
-void TabbedViewContainerV2::addViewWidget( QWidget* view , int index)
+void TabbedViewContainer::addViewWidget( QWidget* view , int index)
 {
     _stackWidget->insertWidget(index,view);
     _stackWidget->updateGeometry();
@@ -874,7 +693,7 @@ void TabbedViewContainerV2::addViewWidget( QWidget* view , int index)
     if ( navigationDisplayMode() == ShowNavigationAsNeeded )
         dynamicTabBarVisibility();
 }
-void TabbedViewContainerV2::removeViewWidget( QWidget* view )
+void TabbedViewContainer::removeViewWidget( QWidget* view )
 {
     const int index = _stackWidget->indexOf(view);
 
@@ -887,7 +706,7 @@ void TabbedViewContainerV2::removeViewWidget( QWidget* view )
         dynamicTabBarVisibility();
 }
 
-void TabbedViewContainerV2::setTabActivity(int index , bool activity)
+void TabbedViewContainer::setTabActivity(int index , bool activity)
 {
     const QPalette& palette = _tabBar->palette();
     KColorScheme colorScheme(palette.currentColorGroup());
@@ -902,7 +721,7 @@ void TabbedViewContainerV2::setTabActivity(int index , bool activity)
         _tabBar->setTabTextColor(index,color);
 }
 
-void TabbedViewContainerV2::updateActivity(ViewProperties* item)
+void TabbedViewContainer::updateActivity(ViewProperties* item)
 {
     QListIterator<QWidget*> iter(widgetsForItem(item));
     while ( iter.hasNext() )
@@ -916,7 +735,7 @@ void TabbedViewContainerV2::updateActivity(ViewProperties* item)
     }
 }
 
-void TabbedViewContainerV2::updateTitle(ViewProperties* item)
+void TabbedViewContainer::updateTitle(ViewProperties* item)
 {
 	// prevent tab titles from becoming overly-long as this limits the number
 	// of tabs which can fit in the tab bar.  
@@ -938,7 +757,7 @@ void TabbedViewContainerV2::updateTitle(ViewProperties* item)
         _tabBar->setTabText( index , tabText );
     }
 }
-void TabbedViewContainerV2::updateIcon(ViewProperties* item)
+void TabbedViewContainer::updateIcon(ViewProperties* item)
 {
     QListIterator<QWidget*> iter(widgetsForItem(item));
     while ( iter.hasNext() )
@@ -951,15 +770,22 @@ void TabbedViewContainerV2::updateIcon(ViewProperties* item)
 StackedViewContainer::StackedViewContainer(QObject* parent) 
 : ViewContainer(NavigationPositionTop,parent)
 {
-    _stackWidget = new QStackedWidget;
+    _containerWidget = new QWidget;
+    QVBoxLayout *layout = new QVBoxLayout(_containerWidget);
+
+    _stackWidget = new QStackedWidget(_containerWidget);
+
+    searchBar()->setParent(_containerWidget);
+    layout->addWidget(searchBar());
+    layout->addWidget(_stackWidget);
 }
 StackedViewContainer::~StackedViewContainer()
 {
-    _stackWidget->deleteLater();
+    _containerWidget->deleteLater();
 }
 QWidget* StackedViewContainer::containerWidget() const
 {
-    return _stackWidget;
+    return _containerWidget;
 }
 QWidget* StackedViewContainer::activeView() const
 {
@@ -986,8 +812,14 @@ ListViewContainer::ListViewContainer(NavigationPosition position,QObject* parent
     : ViewContainer(position,parent)
 {
     _splitter = new QSplitter;
-    _stackWidget = new QStackedWidget(_splitter);
     _listWidget = new ProfileListWidget(_splitter);
+
+    QWidget *contentArea = new QWidget(_splitter);
+    QVBoxLayout *layout = new QVBoxLayout(contentArea);
+    _stackWidget = new QStackedWidget(contentArea);
+    searchBar()->setParent(contentArea);
+    layout->addWidget(_stackWidget);
+    layout->addWidget(searchBar());
 
     // elide left is used because the most informative part of the session name is often
     // the rightmost part
@@ -1005,7 +837,7 @@ ListViewContainer::ListViewContainer(NavigationPosition position,QObject* parent
     _listWidget->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     _listWidget->setDragDropMode(QAbstractItemView::DragDrop);
     _splitter->addWidget(_listWidget);
-    _splitter->addWidget(_stackWidget);
+    _splitter->addWidget(contentArea);
         
     connect( _listWidget , SIGNAL(currentRowChanged(int)) , this , SLOT(rowChanged(int)) ); 
 }

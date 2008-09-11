@@ -168,7 +168,6 @@ class MainWindow : public KXmlGuiWindow
     private:
         ViewManager*  _viewManager;
         BookmarkHandler* _bookmarkHandler;
-        IncrementalSearchBar* _searchBar;
         KToggleAction* _toggleMenuBarAction;
 
         QPointer<SessionController> _pluggedController;

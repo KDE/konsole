@@ -526,6 +526,12 @@ SessionController* ViewManager::activeViewController() const
 {
 	return _pluggedController;
 }
+
+IncrementalSearchBar* ViewManager::searchBar() const
+{
+    return _viewSplitter->activeSplitter()->activeContainer()->searchBar();
+}
+
 void ViewManager::createView(Session* session, ViewContainer* container, int index)
 {
 	// notify this view manager when the session finishes so that its view
@@ -600,7 +606,7 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
     switch ( _navigationMethod )
     {
         case TabbedNavigation:    
-            container = new TabbedViewContainerV2(position,_viewSplitter);
+            container = new TabbedViewContainer(position,_viewSplitter);
             break;
         case NoNavigation:
         default:

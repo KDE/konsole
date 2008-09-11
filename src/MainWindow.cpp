@@ -211,7 +211,7 @@ void MainWindow::activeViewTitleChanged(ViewProperties* properties)
 
 IncrementalSearchBar* MainWindow::searchBar() const
 {
-    return _searchBar;
+    return _viewManager->searchBar();
 }
 
 void MainWindow::setupActions()
@@ -435,11 +435,7 @@ void MainWindow::setupWidgets()
     QWidget* widget = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout();
 
-    _searchBar = new IncrementalSearchBar( IncrementalSearchBar::AllFeatures , this);
-    _searchBar->setVisible(false);
-
     layout->addWidget( _viewManager->widget() );
-    layout->addWidget( _searchBar );
     layout->setMargin(0);
     layout->setSpacing(0);
 
