@@ -1138,20 +1138,15 @@ void Screen::setSelectionEnd( const int x, const int y)
 
 bool Screen::isSelected( const int x,const int y) const
 {
-  if (columnmode) {
-    int sel_Left,sel_Right;
-    if ( sel_TL % columns < sel_BR % columns ) {
-      sel_Left = sel_TL; sel_Right = sel_BR;
-    } else {
-      sel_Left = sel_BR; sel_Right = sel_TL;
+    bool columnInSelection = true;
+    if (columnmode)
+    {
+        columnInSelection = x >= (sel_TL % columns) &&
+                            x <= (sel_BR % columns);
     }
-    return ( x >= sel_Left % columns ) && ( x <= sel_Right % columns ) &&
-           ( y >= sel_TL / columns ) && ( y <= sel_BR / columns );
-  }
-  else {
-  int pos = loc(x,y);
-  return ( pos >= sel_TL && pos <= sel_BR );
-  }
+
+    int pos = loc(x,y);
+    return pos >= sel_TL && pos <= sel_BR && columnInSelection;
 }
 
 QString Screen::selectedText(bool preserveLineBreaks)
