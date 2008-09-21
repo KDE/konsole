@@ -143,7 +143,13 @@ void MainWindow::correctShortcuts()
 
     Q_ASSERT( helpAction );
 
-    helpAction->setShortcut( QKeySequence() );
+    helpAction->setShortcut(QKeySequence());
+   
+    // replace Ctrl+B shortcut for bookmarks
+    // TODO - Make this configurable
+    QAction* bookmarkAction = actionCollection()->action("add_bookmark");
+    Q_ASSERT(bookmarkAction);
+    bookmarkAction->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_B));
 }
 
 void MainWindow::setDefaultProfile(Profile::Ptr profile)
