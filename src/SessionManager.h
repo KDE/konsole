@@ -338,6 +338,7 @@ private:
     QSignalMapper* _sessionMapper;
 };
 
+/** Utility class to simplify code in SessionManager::applyProfile(). */
 class ShouldApplyProperty 
 {
 public:
@@ -354,7 +355,7 @@ private:
 };
 
 /**
- * PopStackOnExit is a utility to remove all values from a stack which are added during
+ * PopStackOnExit is a utility to remove all values from a QStack which are added during
  * the lifetime of a PopStackOnExit instance.
  *
  * When a PopStackOnExit instance is destroyed, elements are removed from the stack
@@ -374,7 +375,15 @@ private:
     QStack<T>& _stack;
     int _count;
 };
-
+/** 
+ * Item-view model which contains a flat list of sessions.
+ * After constructing the model, call setSessions() to set the sessions displayed
+ * in the list.  When a session ends (after emitting the finished() signal) it is
+ * automatically removed from the list.
+ *
+ * The internal pointer for each item in the model (index.internalPointer()) is the
+ * associated Session*
+ */
 class SessionListModel : public QAbstractListModel
 {
 Q_OBJECT
@@ -382,8 +391,14 @@ Q_OBJECT
 public:
     SessionListModel(QObject* parent = 0);
 
+    /** 
+     * Sets the list of sessions displayed in the model.  
+     * To display all sessions that are currently running in the list,
+     * call setSessions(SessionManager::instance()->sessions())
+     */
     void setSessions(const QList<Session*>& sessions);
 
+    // reimplemented from QAbstractItemModel
     virtual QModelIndex index(int row, int column, const QModelIndex& parent) const;
     virtual QVariant data(const QModelIndex& index, int role) const;
     virtual QVariant headerData(int section, Qt::Orientation orientation, 
