@@ -1103,21 +1103,36 @@ void Screen::setSelectionStart(const int x, const int y, const bool mode)
 
 void Screen::setSelectionEnd( const int x, const int y)
 {
-  if (sel_begin == -1) return;
-  int l =  loc(x,y); 
+  if (sel_begin == -1) 
+    return;
 
-  if (l < sel_begin)
+  int endPos =  loc(x,y); 
+
+  if (endPos < sel_begin)
   {
-    sel_TL = l;
+    sel_TL = endPos;
     sel_BR = sel_begin;
   }
   else
   {
     /* FIXME, HACK to correct for x too far to the right... */
-    if (x == columns) l--;
+    if (x == columns) 
+        endPos--;
 
     sel_TL = sel_begin;
-    sel_BR = l;
+    sel_BR = endPos;
+  }
+
+  // Normalize the selection in column mode
+  if (columnmode)
+  {
+    int topRow = sel_TL / columns;
+    int topColumn = sel_TL % columns;
+    int bottomRow = sel_BR / columns;
+    int bottomColumn = sel_BR % columns;
+
+    sel_TL = loc(qMin(topColumn,bottomColumn),topRow);
+    sel_BR = loc(qMax(topColumn,bottomColumn),bottomRow);
   }
 }
 
