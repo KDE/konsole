@@ -2470,11 +2470,8 @@ QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
     return QVariant();
 }
 
-bool TerminalDisplay::event( QEvent *e )
+bool TerminalDisplay::handleShortcutOverrideEvent(QKeyEvent* keyEvent)
 {
-  if ( e->type() == QEvent::ShortcutOverride )
-  {
-    QKeyEvent* keyEvent = static_cast<QKeyEvent *>( e );
     int modifiers = keyEvent->modifiers();
 
     //  When a possible shortcut combination is pressed, 
@@ -2519,8 +2516,21 @@ bool TerminalDisplay::event( QEvent *e )
         keyEvent->accept();
         return true;
     }
+    return false;
+}
+
+bool TerminalDisplay::event(QEvent* event)
+{
+  bool eventHandled = false;
+  switch (event->type())
+  {
+    case QEvent::ShortcutOverride:
+        eventHandled = handleShortcutOverrideEvent((QKeyEvent*)event);
+        break;
+    default:
+        break;
   }
-  return QWidget::event( e );
+  return eventHandled ? true : QWidget::event(event); 
 }
 
 void TerminalDisplay::setBellMode(int mode)

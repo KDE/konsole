@@ -658,6 +658,8 @@ private:
     // redraws the cursor
     void updateCursor();
 
+    bool handleShortcutOverrideEvent(QKeyEvent* event);
+
     // the window onto the terminal screen which this display
     // is currently showing.  
     QPointer<ScreenWindow> _screenWindow;
