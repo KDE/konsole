@@ -45,7 +45,7 @@ Q_OBJECT
 
 public:
     ViewProperties(QObject* parent); 
-	virtual ~ViewProperties();
+    virtual ~ViewProperties();
 
     /** Returns the icon associated with a view */
     QIcon icon() const;
@@ -79,12 +79,12 @@ public:
     virtual bool confirmClose() const
     { return true; }
 
-	/** Finds a ViewProperties instance given its numeric identifier. */
-	static ViewProperties* propertiesById(int id);
+    /** Finds a ViewProperties instance given its numeric identifier. */
+    static ViewProperties* propertiesById(int id);
 
-	/** Name of mime format to use in drag-and-drop operations. */
-	static QString mimeType() 
-	{ return _mimeType; }
+    /** Name of mime format to use in drag-and-drop operations. */
+    static QString mimeType() 
+    { return _mimeType; }
    
     /** Returns a new QMimeData instance which represents the view with the given @p id 
      * (See identifier()).  The QMimeData instance returned must be deleted by the caller.
@@ -144,8 +144,8 @@ private:
     QString _title;
     int _id;
 
-	static QHash<int,ViewProperties*> _viewProperties;
-	static QString _mimeType;
+    static QHash<int,ViewProperties*> _viewProperties;
+    static QString _mimeType;
 };
 
 }

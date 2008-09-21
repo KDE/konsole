@@ -76,7 +76,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , KXMLGUIClient()
     , _session(session)
     , _view(view)
-	, _copyToGroup(0)
+    , _copyToGroup(0)
     , _profileList(0)
     , _previousState(-1)
     , _viewUrlFilter(0)
@@ -87,8 +87,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _urlFilterUpdateRequired(false)
     , _codecAction(0)
     , _changeProfileMenu(0)
-	, _listenForScreenWindowUpdates(false)
-	, _preventClose(false)
+    , _listenForScreenWindowUpdates(false)
+    , _preventClose(false)
 {
     _allControllers.insert(this);
 
@@ -100,7 +100,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 #ifdef KONSOLE_PART
     setXMLFile("konsole/partui.rc");
 #else
-	setXMLFile("konsole/sessionui.rc");
+    setXMLFile("konsole/sessionui.rc");
 #endif
 
     setupActions();
@@ -131,21 +131,21 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // listen to title and icon changes
     connect( _session , SIGNAL(titleChanged()) , this , SLOT(sessionTitleChanged()) );
 
-	// listen for color changes
-	connect( _session , SIGNAL(changeBackgroundColorRequest(QColor)) , _view , SLOT(setBackgroundColor(QColor)) );
-	connect( _session , SIGNAL(changeForegroundColorRequest(QColor)) , _view , SLOT(setForegroundColor(QColor)) );
+    // listen for color changes
+    connect( _session , SIGNAL(changeBackgroundColorRequest(QColor)) , _view , SLOT(setBackgroundColor(QColor)) );
+    connect( _session , SIGNAL(changeForegroundColorRequest(QColor)) , _view , SLOT(setForegroundColor(QColor)) );
 
-	// update the title when the session starts
-	connect( _session , SIGNAL(started()) , this , SLOT(snapshot()) ); 
+    // update the title when the session starts
+    connect( _session , SIGNAL(started()) , this , SLOT(snapshot()) ); 
 
     // listen for output changes to set activity flag
     connect( _session->emulation() , SIGNAL(outputChanged()) , this ,
             SLOT(fireActivity()) );
-	
+    
     // listen for flow control status changes
     connect( _session , SIGNAL(flowControlEnabledChanged(bool)) , _view ,
-		SLOT(setFlowControlWarningEnabled(bool)) );
-	_view->setFlowControlWarningEnabled(_session->flowControlEnabled());
+        SLOT(setFlowControlWarningEnabled(bool)) );
+    _view->setFlowControlWarningEnabled(_session->flowControlEnabled());
 
     // take a snapshot of the session state every so often when
     // user activity occurs
@@ -161,12 +161,12 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
 void SessionController::updateSearchFilter()
 {
-	if ( _searchFilter ) 
-	{
-		Q_ASSERT( searchBar() && searchBar()->isVisible() );
+    if ( _searchFilter ) 
+    {
+        Q_ASSERT( searchBar() && searchBar()->isVisible() );
 
-		_view->processFilters();
-	}
+        _view->processFilters();
+    }
 }
 
 SessionController::~SessionController()
@@ -180,18 +180,18 @@ void SessionController::trackOutput(QKeyEvent* event)
 {
     Q_ASSERT( _view->screenWindow() );
 
-	// jump to the end of the scrollback buffer unless the key pressed
-	// is one of the three main modifiers, as these are used to select
-	// the selection mode (eg. Ctrl+Alt+<Left Click> for column/block selection)
-	switch (event->key())
-	{
-		case Qt::Key_Shift:
-		case Qt::Key_Control:
-		case Qt::Key_Alt:
-			break;
-		default:
-    		_view->screenWindow()->setTrackOutput(true);
-	}
+    // jump to the end of the scrollback buffer unless the key pressed
+    // is one of the three main modifiers, as these are used to select
+    // the selection mode (eg. Ctrl+Alt+<Left Click> for column/block selection)
+    switch (event->key())
+    {
+        case Qt::Key_Shift:
+        case Qt::Key_Control:
+        case Qt::Key_Alt:
+            break;
+        default:
+            _view->screenWindow()->setTrackOutput(true);
+    }
 }
 void SessionController::requireUrlFilterUpdate()
 {
@@ -240,11 +240,11 @@ void SessionController::snapshot()
     else
         delete snapshot;
 
-	title = title.simplified();
+    title = title.simplified();
 
-	// crude indicator when the session is broadcasting to others
-	if (_copyToGroup && _copyToGroup->sessions().count() > 1)
-		title.append('*');
+    // crude indicator when the session is broadcasting to others
+    if (_copyToGroup && _copyToGroup->sessions().count() > 1)
+        title.append('*');
 
     // apply new title
     if ( !title.isEmpty() )
@@ -317,7 +317,7 @@ KUrl SessionController::url() const
 
 void SessionController::rename()
 {
-	renameSession();
+    renameSession();
 }
 
 void SessionController::openUrl( const KUrl& url )
@@ -478,10 +478,10 @@ void SessionController::setupActions()
 
     connect( pasteAction , SIGNAL(triggered()) , this , SLOT(paste()) );
 
-	action = collection->addAction("paste-selection");
-	action->setText( i18n("Paste Selection") );
-	action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert) );
-	connect( action , SIGNAL(triggered()) , this , SLOT(pasteSelection()) );
+    action = collection->addAction("paste-selection");
+    action->setText( i18n("Paste Selection") );
+    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert) );
+    connect( action , SIGNAL(triggered()) , this , SLOT(pasteSelection()) );
 
     // Rename Session
     action = collection->addAction("rename-session");
@@ -593,7 +593,7 @@ void SessionController::setupActions()
 }
 void SessionController::changeProfile(Profile::Ptr profile)
 {
-	SessionManager::instance()->setSessionProfile(_session,profile);	
+    SessionManager::instance()->setSessionProfile(_session,profile);    
 }
 void SessionController::prepareChangeProfileMenu()
 {
@@ -659,25 +659,25 @@ void SessionController::editCurrentProfile()
 }
 void SessionController::renameSession()
 {
-	QPointer<Session> guard(_session);
+    QPointer<Session> guard(_session);
     bool ok = false;
     const QString& text = KInputDialog::getText( i18n("Rename Tab") ,
                                                  i18n("Enter new tab text:") ,
                                                  _session->tabTitleFormat(Session::LocalTabTitle) ,
                                                  &ok, QApplication::activeWindow() );
     if (!guard)
-		return;
+        return;
 
-	if ( ok )
+    if ( ok )
     {
-		// renaming changes both the local and remote tab title formats, to save confusion over
-		// the tab title not changing if renaming the tab whilst the remote tab title format is 
-		// being displayed
-		//
-		// The downside of this approach is that after renaming a tab manually, the ability to 
-		// have separate formats for local and remote activities is lost
+        // renaming changes both the local and remote tab title formats, to save confusion over
+        // the tab title not changing if renaming the tab whilst the remote tab title format is 
+        // being displayed
+        //
+        // The downside of this approach is that after renaming a tab manually, the ability to 
+        // have separate formats for local and remote activities is lost
         _session->setTabTitleFormat(Session::LocalTabTitle,text);
-		_session->setTabTitleFormat(Session::RemoteTabTitle,text);
+        _session->setTabTitleFormat(Session::RemoteTabTitle,text);
 
         // trigger an update of the tab text
         snapshot();
@@ -722,8 +722,8 @@ bool SessionController::confirmClose() const
 }
 void SessionController::closeSession()
 {
-	if (_preventClose)
-		return;
+    if (_preventClose)
+        return;
 
     _session->close();
 }
@@ -744,49 +744,49 @@ void SessionController::paste()
 }
 void SessionController::pasteSelection()
 {
-	_view->pasteSelection();
+    _view->pasteSelection();
 }
 void SessionController::copyInputTo()
 {
-	if (!_copyToGroup)
-	{
-		_copyToGroup = new SessionGroup(this);
-		_copyToGroup->addSession(_session);
-		_copyToGroup->setMasterStatus(_session,true);
-		_copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
-	}
+    if (!_copyToGroup)
+    {
+        _copyToGroup = new SessionGroup(this);
+        _copyToGroup->addSession(_session);
+        _copyToGroup->setMasterStatus(_session,true);
+        _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
+    }
 
-	CopyInputDialog* dialog = new CopyInputDialog(_view);
-	dialog->setMasterSession(_session);
-	
-	QSet<Session*> currentGroup = QSet<Session*>::fromList(_copyToGroup->sessions());
-	currentGroup.remove(_session);
-	
-	dialog->setChosenSessions(currentGroup);
+    CopyInputDialog* dialog = new CopyInputDialog(_view);
+    dialog->setMasterSession(_session);
+    
+    QSet<Session*> currentGroup = QSet<Session*>::fromList(_copyToGroup->sessions());
+    currentGroup.remove(_session);
+    
+    dialog->setChosenSessions(currentGroup);
 
-	QPointer<Session> guard(_session);
-	int result = dialog->exec();
-	if (!guard)
-		return;
+    QPointer<Session> guard(_session);
+    int result = dialog->exec();
+    if (!guard)
+        return;
 
-	if (result)
-	{
-		QSet<Session*> newGroup = dialog->chosenSessions();
-		newGroup.remove(_session);
-	
-		QSet<Session*> completeGroup = newGroup | currentGroup;
-		foreach(Session* session, completeGroup)
-		{
-			if (newGroup.contains(session) && !currentGroup.contains(session))
-				_copyToGroup->addSession(session);
-			else if (!newGroup.contains(session) && currentGroup.contains(session))
-				_copyToGroup->removeSession(session);
-		}
+    if (result)
+    {
+        QSet<Session*> newGroup = dialog->chosenSessions();
+        newGroup.remove(_session);
+    
+        QSet<Session*> completeGroup = newGroup | currentGroup;
+        foreach(Session* session, completeGroup)
+        {
+            if (newGroup.contains(session) && !currentGroup.contains(session))
+                _copyToGroup->addSession(session);
+            else if (!newGroup.contains(session) && currentGroup.contains(session))
+                _copyToGroup->removeSession(session);
+        }
 
-		snapshot();
-	}
+        snapshot();
+    }
 
-	delete dialog;
+    delete dialog;
 }
 void SessionController::clear()
 {
@@ -815,15 +815,15 @@ void SessionController::searchHistory()
 
 void SessionController::listenForScreenWindowUpdates()
 {
-	if (_listenForScreenWindowUpdates)
-		return;
+    if (_listenForScreenWindowUpdates)
+        return;
 
-	connect( _view->screenWindow() , SIGNAL(outputChanged()) , this , 
-			SLOT(updateSearchFilter()) );
-	connect( _view->screenWindow() , SIGNAL(scrolled(int)) , this , 
-			SLOT(updateSearchFilter()) );
+    connect( _view->screenWindow() , SIGNAL(outputChanged()) , this , 
+            SLOT(updateSearchFilter()) );
+    connect( _view->screenWindow() , SIGNAL(scrolled(int)) , this , 
+            SLOT(updateSearchFilter()) );
 
-	_listenForScreenWindowUpdates = true;
+    _listenForScreenWindowUpdates = true;
 }
 
 // searchHistory() may be called either as a result of clicking a menu item or
@@ -838,8 +838,8 @@ void SessionController::searchHistory(bool showSearchBar)
         {
             removeSearchFilter();
 
-			listenForScreenWindowUpdates();
-			
+            listenForScreenWindowUpdates();
+            
             _searchFilter = new RegExpFilter();
             _view->filterChain()->addFilter(_searchFilter);
             connect( _searchBar , SIGNAL(searchChanged(const QString&)) , this ,
@@ -973,18 +973,18 @@ void SessionController::sessionResizeRequest(const QSize& size)
 }
 void SessionController::scrollBackOptionsChanged( int mode , int lines )
 {
-	switch (mode)
+    switch (mode)
     {
-		case HistorySizeDialog::NoHistory:
-        	_session->setHistoryType( HistoryTypeNone() );
-			break;
-     	case HistorySizeDialog::FixedSizeHistory:
-        	_session->setHistoryType( HistoryTypeBuffer(lines) );
-			break;
-     	case HistorySizeDialog::UnlimitedHistory:
-         	_session->setHistoryType( HistoryTypeFile() );
-			break;
-	}
+        case HistorySizeDialog::NoHistory:
+            _session->setHistoryType( HistoryTypeNone() );
+            break;
+         case HistorySizeDialog::FixedSizeHistory:
+            _session->setHistoryType( HistoryTypeBuffer(lines) );
+            break;
+         case HistorySizeDialog::UnlimitedHistory:
+             _session->setHistoryType( HistoryTypeFile() );
+            break;
+    }
 }
 
 void SessionController::saveHistory()
@@ -1040,12 +1040,12 @@ void SessionController::sessionTitleChanged()
 
         QString title = _session->title(Session::DisplayedTitleRole);
 
-		// special handling for the "%w" marker which is replaced with the
-		// window title set by the shell
-    	title.replace("%w",_session->userTitle());
-		// special handling for the "%#" marker which is replaced with the 
-		// number of the shell
-		title.replace("%#",QString::number(_session->sessionId()));
+        // special handling for the "%w" marker which is replaced with the
+        // window title set by the shell
+        title.replace("%w",_session->userTitle());
+        // special handling for the "%#" marker which is replaced with the 
+        // number of the shell
+        title.replace("%#",QString::number(_session->sessionId()));
 
        if ( title.isEmpty() )
           title = _session->title(Session::NameRole);
@@ -1078,21 +1078,21 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
         contentSeparator->setSeparator(true);
         contentActions << contentSeparator;
 
-		_preventClose = true;
+        _preventClose = true;
 
         popup->insertActions(popup->actions().value(0,0),contentActions);
         QAction* chosen = popup->exec( _view->mapToGlobal(position) );
 
         // remove content-specific actions, unless the close action was chosen
-		// in which case the popup menu will be partially destroyed at this point
-       	foreach(QAction* action,contentActions)
-    		popup->removeAction(action);
-    	delete contentSeparator;
+        // in which case the popup menu will be partially destroyed at this point
+           foreach(QAction* action,contentActions)
+            popup->removeAction(action);
+        delete contentSeparator;
 
-		_preventClose = false;
+        _preventClose = false;
 
-		if (chosen && chosen->objectName() == "close-session")
-			chosen->trigger();
+        if (chosen && chosen->objectName() == "close-session")
+            chosen->trigger();
     }
     else
     {
@@ -1352,7 +1352,7 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
         QTextStream searchStream(&string);
 
         PlainTextDecoder decoder;
-		decoder.setRecordLinePositions(true);
+        decoder.setRecordLinePositions(true);
 
         //setup first and last lines depending on search direction
         int line = startLine;
@@ -1410,8 +1410,8 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
             emulation->writeToStream(&decoder, qMin(endLine,line) , qMax(endLine,line) );
             decoder.end();
 
-			// line number search below assumes that the buffer ends with a new-line 
-			string.append('\n');
+            // line number search below assumes that the buffer ends with a new-line 
+            string.append('\n');
 
             pos = -1;
             if (forwards)
@@ -1422,15 +1422,15 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
             //if a match is found, position the cursor on that line and update the screen
             if ( pos != -1 )
             {
-				int newLines = 0;
-				QList<int> linePositions = decoder.linePositions();
-				while (newLines < linePositions.count() && linePositions[newLines] <= pos)
-					newLines++;
+                int newLines = 0;
+                QList<int> linePositions = decoder.linePositions();
+                while (newLines < linePositions.count() && linePositions[newLines] <= pos)
+                    newLines++;
 
-				// ignore the new line at the start of the buffer
-				newLines--;
+                // ignore the new line at the start of the buffer
+                newLines--;
 
-				int findPos = qMin(line,endLine) + newLines;
+                int findPos = qMin(line,endLine) + newLines;
 
                 highlightResult(window,findPos);
 

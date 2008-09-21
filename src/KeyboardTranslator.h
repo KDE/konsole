@@ -108,8 +108,8 @@ public:
         ScrollLineDownCommand = 16,
         /** Toggles scroll lock mode */
         ScrollLockCommand = 32,
-		/** Echos the operating system specific erase character. */
-		EraseCommand = 64
+        /** Echos the operating system specific erase character. */
+        EraseCommand = 64
     };
     Q_DECLARE_FLAGS(Commands,Command)
 
@@ -404,7 +404,7 @@ private:
     static bool parseAsModifier(const QString& item , Qt::KeyboardModifier& modifier);
     static bool parseAsStateFlag(const QString& item , KeyboardTranslator::State& state);
     static bool parseAsKeyCode(const QString& item , int& keyCode);
-   	static bool parseAsCommand(const QString& text , KeyboardTranslator::Command& command);
+       static bool parseAsCommand(const QString& text , KeyboardTranslator::Command& command);
 
     QIODevice* _source;
     QString _description;

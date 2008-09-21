@@ -36,7 +36,7 @@
 #include <kdebug.h>
 
 // Reasonable line size
-#define LINE_SIZE	1024
+#define LINE_SIZE    1024
 
 using namespace Konsole;
 
@@ -87,7 +87,7 @@ FIXME: There is noticeable decrease in speed, also. Perhaps,
 HistoryFile::HistoryFile()
   : ion(-1),
     length(0),
-	fileMap(0)
+    fileMap(0)
 {
   if (tmpFile.open())
   { 
@@ -98,8 +98,8 @@ HistoryFile::HistoryFile()
 
 HistoryFile::~HistoryFile()
 {
-	if (fileMap)
-		unmap();
+    if (fileMap)
+        unmap();
 }
 
 //TODO:  Mapping the entire file in will cause problems if the history file becomes exceedingly large,
@@ -107,9 +107,9 @@ HistoryFile::~HistoryFile()
 //to avoid this.
 void HistoryFile::map()
 {
-	assert( fileMap == 0 );
+    assert( fileMap == 0 );
 
-	fileMap = (char*)mmap( 0 , length , PROT_READ , MAP_PRIVATE , ion , 0 );
+    fileMap = (char*)mmap( 0 , length , PROT_READ , MAP_PRIVATE , ion , 0 );
 
     //if mmap'ing fails, fall back to the read-lseek combination
     if ( fileMap == MAP_FAILED )
@@ -122,22 +122,22 @@ void HistoryFile::map()
 
 void HistoryFile::unmap()
 {
-	int result = munmap( fileMap , length );
-	assert( result == 0 );
+    int result = munmap( fileMap , length );
+    assert( result == 0 );
 
-	fileMap = 0;
+    fileMap = 0;
 }
 
 bool HistoryFile::isMapped()
 {
-	return (fileMap != 0);
+    return (fileMap != 0);
 }
 
 void HistoryFile::add(const unsigned char* bytes, int len)
 {
   if ( fileMap )
-		  unmap();
-		
+          unmap();
+        
   readWriteBalance++;
 
   int rc = 0;
@@ -155,21 +155,21 @@ void HistoryFile::get(unsigned char* bytes, int len, int loc)
   //file to improve performance.
   readWriteBalance--;
   if ( !fileMap && readWriteBalance < MAP_THRESHOLD )
-		  map();
+          map();
 
   if ( fileMap )
   {
-	for (int i=0;i<len;i++)
-			bytes[i]=fileMap[loc+i];
+    for (int i=0;i<len;i++)
+            bytes[i]=fileMap[loc+i];
   }
   else
-  {	
-  	int rc = 0;
+  {    
+      int rc = 0;
 
-  	if (loc < 0 || len < 0 || loc + len > length)
-    	fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
-  	rc = KDE_lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
-  	rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); return; }
+      if (loc < 0 || len < 0 || loc + len > length)
+        fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
+      rc = KDE_lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
+      rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); return; }
   }
 }
 
@@ -245,11 +245,11 @@ int HistoryScrollFile::startOfLine(int lineno)
   if (lineno <= 0) return 0;
   if (lineno <= getLines())
     { 
-	
-	if (!index.isMapped())
-			index.map();
-	
-	int res;
+    
+    if (!index.isMapped())
+            index.map();
+    
+    int res;
     index.get((unsigned char*)&res,sizeof(int),(lineno-1)*sizeof(int));
     return res;
     }
@@ -269,7 +269,7 @@ void HistoryScrollFile::addCells(const Character text[], int count)
 void HistoryScrollFile::addLine(bool previousWrapped)
 {
   if (index.isMapped())
-		  index.unmap();
+          index.unmap();
 
   int locn = cells.len();
   index.add((unsigned char*)&locn,sizeof(int));

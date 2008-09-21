@@ -271,17 +271,17 @@ signals:
     void newViewRequest();
 
     /** 
-	 * Emitted when the user requests to move a view from another container
-	 * into this container.  If 'success' is set to true by a connected slot
-	 * then the original view will be removed.
-	 *
-	 * @param index Index at which to insert the new view in the container or -1
-	 * to append it.  This index should be passed to addView() when the new view
-	 * has been created.
-	 * @param id The identifier of the view.
-	 * @param success The slot handling this signal should set this to true if the 
-	 * new view was successfully created.  
-	 */
+     * Emitted when the user requests to move a view from another container
+     * into this container.  If 'success' is set to true by a connected slot
+     * then the original view will be removed.
+     *
+     * @param index Index at which to insert the new view in the container or -1
+     * to append it.  This index should be passed to addView() when the new view
+     * has been created.
+     * @param id The identifier of the view.
+     * @param success The slot handling this signal should set this to true if the 
+     * new view was successfully created.  
+     */
     void moveViewRequest(int index,int id,bool& success);
 
     /** Emitted when the active view changes */
@@ -354,30 +354,30 @@ Q_OBJECT
 public:
     ViewContainerTabBar(QWidget* parent,TabbedViewContainer* container);
 
-	// returns a pixmap image of a tab for use with QDrag 
-	QPixmap dragDropPixmap(int tab);
+    // returns a pixmap image of a tab for use with QDrag 
+    QPixmap dragDropPixmap(int tab);
 
 protected:
     virtual QSize tabSizeHint(int index) const;
-	virtual void dragEnterEvent(QDragEnterEvent* event);
-	virtual void dragLeaveEvent(QDragLeaveEvent* event);
-	virtual void dragMoveEvent(QDragMoveEvent* event);
-	virtual void dropEvent(QDropEvent* event);
+    virtual void dragEnterEvent(QDragEnterEvent* event);
+    virtual void dragLeaveEvent(QDragLeaveEvent* event);
+    virtual void dragMoveEvent(QDragMoveEvent* event);
+    virtual void dropEvent(QDropEvent* event);
 
 private:
-	// show the indicator arrow which shows where a dropped tab will
-	// be inserted at 'index'
-	void setDropIndicator(int index, bool drawDisabled = false);
-	// returns the index at which a tab will be inserted if the mouse
-	// in a drag-drop operation is released at 'pos'
-	int dropIndex(const QPoint& pos) const;
+    // show the indicator arrow which shows where a dropped tab will
+    // be inserted at 'index'
+    void setDropIndicator(int index, bool drawDisabled = false);
+    // returns the index at which a tab will be inserted if the mouse
+    // in a drag-drop operation is released at 'pos'
+    int dropIndex(const QPoint& pos) const;
     // returns true if the tab to be dropped in a drag-drop operation
     // is the same as the tab at the drop location
     bool proposedDropIsSameTab(const QDropEvent* event) const;
 
-	TabbedViewContainer* _container;
-	QLabel* _dropIndicator;
-	int _dropIndicatorIndex;
+    TabbedViewContainer* _container;
+    QLabel* _dropIndicator;
+    int _dropIndicatorIndex;
     bool _drawIndicatorDisabled;
 };
 
@@ -435,13 +435,13 @@ private slots:
     void updateIcon(ViewProperties* item);
     void updateActivity(ViewProperties* item);
     void currentTabChanged(int index);
-	void closeTab(int index);
+    void closeTab(int index);
     void closeCurrentTab();
     void wheelScrolled(int delta);
    
     void tabDoubleClicked(int index);
 
-	void startTabDrag(int index);
+    void startTabDrag(int index);
 private:
     void dynamicTabBarVisibility();
     void setTabBarVisible(bool visible);

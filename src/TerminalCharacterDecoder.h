@@ -43,24 +43,24 @@ namespace Konsole
 class TerminalCharacterDecoder
 {
 public:
-	virtual ~TerminalCharacterDecoder() {}
+    virtual ~TerminalCharacterDecoder() {}
 
     /** Begin decoding characters.  The resulting text is appended to @p output. */
     virtual void begin(QTextStream* output) = 0;
     /** End decoding. */
     virtual void end() = 0;
 
-	/**
-	 * Converts a line of terminal characters with associated properties into a text string
-	 * and writes the string into an output QTextStream.
-	 *
-	 * @param characters An array of characters of length @p count.
-	 * @param properties Additional properties which affect all characters in the line
-	 * @param output The output stream which receives the decoded text
-	 */
-	virtual void decodeLine(const Character* const characters, 
-							int count,
-							LineProperty properties) = 0; 
+    /**
+     * Converts a line of terminal characters with associated properties into a text string
+     * and writes the string into an output QTextStream.
+     *
+     * @param characters An array of characters of length @p count.
+     * @param properties Additional properties which affect all characters in the line
+     * @param output The output stream which receives the decoded text
+     */
+    virtual void decodeLine(const Character* const characters, 
+                            int count,
+                            LineProperty properties) = 0; 
 };
 
 /**
@@ -70,7 +70,7 @@ public:
 class PlainTextDecoder : public TerminalCharacterDecoder
 {
 public:
-	PlainTextDecoder(); 
+    PlainTextDecoder(); 
 
     /** 
      * Set whether trailing whitespace at the end of lines should be included 
@@ -83,29 +83,29 @@ public:
      * in the output.
      */
     bool trailingWhitespace() const;
-	/** 
-	 * Returns of character positions in the output stream
-	 * at which new lines where added.  Returns an empty if setTrackLinePositions() is false or if 
-	 * the output device is not a string.
-	 */
-	QList<int> linePositions() const;
-	/** Enables recording of character positions at which new lines are added.  See linePositions() */
-	void setRecordLinePositions(bool record);
+    /** 
+     * Returns of character positions in the output stream
+     * at which new lines where added.  Returns an empty if setTrackLinePositions() is false or if 
+     * the output device is not a string.
+     */
+    QList<int> linePositions() const;
+    /** Enables recording of character positions at which new lines are added.  See linePositions() */
+    void setRecordLinePositions(bool record);
 
     virtual void begin(QTextStream* output);
     virtual void end();
 
-	virtual void decodeLine(const Character* const characters,
-							int count,
-							LineProperty properties);	
+    virtual void decodeLine(const Character* const characters,
+                            int count,
+                            LineProperty properties);    
 
     
 private:
     QTextStream* _output;
     bool _includeTrailingWhitespace;
 
-	bool _recordLinePositions;
-	QList<int> _linePositions;
+    bool _recordLinePositions;
+    QList<int> _linePositions;
 };
 
 /**
@@ -114,34 +114,34 @@ private:
 class HTMLDecoder : public TerminalCharacterDecoder
 {
 public:
-	/** 
-	 * Constructs an HTML decoder using a default black-on-white color scheme.
-	 */
-	HTMLDecoder();
+    /** 
+     * Constructs an HTML decoder using a default black-on-white color scheme.
+     */
+    HTMLDecoder();
 
-	/**
-	 * Sets the colour table which the decoder uses to produce the HTML colour codes in its
-	 * output
-	 */
-	void setColorTable( const ColorEntry* table );
-		
-	virtual void decodeLine(const Character* const characters,
-							int count,
-							LineProperty properties);
+    /**
+     * Sets the colour table which the decoder uses to produce the HTML colour codes in its
+     * output
+     */
+    void setColorTable( const ColorEntry* table );
+        
+    virtual void decodeLine(const Character* const characters,
+                            int count,
+                            LineProperty properties);
 
     virtual void begin(QTextStream* output);
     virtual void end();
 
 private:
-	void openSpan(QString& text , const QString& style);
-	void closeSpan(QString& text);
+    void openSpan(QString& text , const QString& style);
+    void closeSpan(QString& text);
 
     QTextStream* _output;
-	const ColorEntry* _colorTable;
+    const ColorEntry* _colorTable;
     bool _innerSpanOpen; 
-	quint8 _lastRendition;
-	CharacterColor _lastForeColor;
-	CharacterColor _lastBackColor;
+    quint8 _lastRendition;
+    CharacterColor _lastForeColor;
+    CharacterColor _lastBackColor;
 
 };
 

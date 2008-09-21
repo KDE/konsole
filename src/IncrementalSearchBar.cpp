@@ -118,7 +118,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
         _matchRegExpBox = new QCheckBox( i18n("Match regular expression") , this );
         _matchRegExpBox->setObjectName("match-regexp-box");
         _matchRegExpBox->setToolTip( i18n("Sets whether the search phrase is interpreted as normal text or"
-					  " as a regular expression") );
+                      " as a regular expression") );
         connect( _matchRegExpBox , SIGNAL(toggled(bool)) , this , SIGNAL(matchRegExpToggled(bool)) );
     }
 
@@ -226,10 +226,10 @@ void IncrementalSearchBar::setFoundMatch( bool match )
 {
     if ( !match && !_searchEdit->text().isEmpty() )
     {
-		KStatefulBrush backgroundBrush(KColorScheme::View,KColorScheme::NegativeBackground);
+        KStatefulBrush backgroundBrush(KColorScheme::View,KColorScheme::NegativeBackground);
 
-		QString styleSheet = QString("QLineEdit{ background-color:%1 }")
-							 .arg(backgroundBrush.brush(_searchEdit).color().name());
+        QString styleSheet = QString("QLineEdit{ background-color:%1 }")
+                             .arg(backgroundBrush.brush(_searchEdit).color().name());
 
         _searchEdit->setStyleSheet( styleSheet );
     }

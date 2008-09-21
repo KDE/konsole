@@ -131,9 +131,9 @@ bool ViewSplitter::recursiveSplitting() const
 
 void ViewSplitter::removeContainer( ViewContainer* container )
 {
-	Q_ASSERT( containers().contains(container) );
+    Q_ASSERT( containers().contains(container) );
 
-	unregisterContainer(container);
+    unregisterContainer(container);
 }
 
 void ViewSplitter::addContainer( ViewContainer* container , 

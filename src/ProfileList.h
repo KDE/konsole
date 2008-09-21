@@ -85,8 +85,8 @@ signals:
 private slots:
     void triggered(QAction* action);
     void favoriteChanged(Profile::Ptr profile, bool isFavorite);
-	void profileChanged(Profile::Ptr profile);
-	void shortcutChanged(Profile::Ptr profile, const QKeySequence& sequence);
+    void profileChanged(Profile::Ptr profile);
+    void shortcutChanged(Profile::Ptr profile, const QKeySequence& sequence);
 
 private:
     QAction* actionForKey(Profile::Ptr profile) const;

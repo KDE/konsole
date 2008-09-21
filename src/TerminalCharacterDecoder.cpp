@@ -51,7 +51,7 @@ void PlainTextDecoder::begin(QTextStream* output)
 {
    _output = output;
    if (!_linePositions.isEmpty())
-	   _linePositions.clear();
+       _linePositions.clear();
 }
 void PlainTextDecoder::end()
 {
@@ -60,30 +60,30 @@ void PlainTextDecoder::end()
 
 void PlainTextDecoder::setRecordLinePositions(bool record)
 {
-	_recordLinePositions = record;
+    _recordLinePositions = record;
 }
 QList<int> PlainTextDecoder::linePositions() const
 {
-	return _linePositions;
+    return _linePositions;
 }
 void PlainTextDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/
-							 )
+                             )
 {
     Q_ASSERT( _output );
 
-	if (_recordLinePositions && _output->string())
-	{
-		int pos = _output->string()->count();
-		_linePositions << pos;
-	}
+    if (_recordLinePositions && _output->string())
+    {
+        int pos = _output->string()->count();
+        _linePositions << pos;
+    }
 
-	//TODO should we ignore or respect the LINE_WRAPPED line property?
+    //TODO should we ignore or respect the LINE_WRAPPED line property?
 
-	//note:  we build up a QString and send it to the text stream rather writing into the text
-	//stream a character at a time because it is more efficient.
-	//(since QTextStream always deals with QStrings internally anyway)
-	QString plainText;
-	plainText.reserve(count);
+    //note:  we build up a QString and send it to the text stream rather writing into the text
+    //stream a character at a time because it is more efficient.
+    //(since QTextStream always deals with QStrings internally anyway)
+    QString plainText;
+    plainText.reserve(count);
    
     int outputCount = count;
 
@@ -99,13 +99,13 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
                 outputCount--;
         }
     }
-	
+    
     for (int i=0;i<outputCount;)
-	{
-		plainText.append( QChar(characters[i].character) );
+    {
+        plainText.append( QChar(characters[i].character) );
         i += qMax(1,konsole_wcwidth(characters[i].character));
-	}
-	*_output << plainText;
+    }
+    *_output << plainText;
 }
 
 HTMLDecoder::HTMLDecoder() :
@@ -114,7 +114,7 @@ HTMLDecoder::HTMLDecoder() :
        ,_innerSpanOpen(false)
        ,_lastRendition(DEFAULT_RENDITION)
 {
-	
+    
 }
 
 void HTMLDecoder::begin(QTextStream* output)
@@ -123,7 +123,7 @@ void HTMLDecoder::begin(QTextStream* output)
 
     QString text;
 
-	//open monospace span
+    //open monospace span
     openSpan(text,"font-family:monospace");
 
     *output << text;
@@ -145,102 +145,102 @@ void HTMLDecoder::end()
 
 //TODO: Support for LineProperty (mainly double width , double height)
 void HTMLDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/
-							)
+                            )
 {
     Q_ASSERT( _output );
 
-	QString text;
+    QString text;
 
-	int spaceCount = 0;
-		
-	for (int i=0;i<count;i++)
-	{
-		QChar ch(characters[i].character);
+    int spaceCount = 0;
+        
+    for (int i=0;i<count;i++)
+    {
+        QChar ch(characters[i].character);
 
-		//check if appearance of character is different from previous char
-		if ( characters[i].rendition != _lastRendition  ||
-		     characters[i].foregroundColor != _lastForeColor  ||
-			 characters[i].backgroundColor != _lastBackColor )
-		{
-			if ( _innerSpanOpen )
-					closeSpan(text);
+        //check if appearance of character is different from previous char
+        if ( characters[i].rendition != _lastRendition  ||
+             characters[i].foregroundColor != _lastForeColor  ||
+             characters[i].backgroundColor != _lastBackColor )
+        {
+            if ( _innerSpanOpen )
+                    closeSpan(text);
 
-			_lastRendition = characters[i].rendition;
-			_lastForeColor = characters[i].foregroundColor;
-			_lastBackColor = characters[i].backgroundColor;
-			
-			//build up style string
-			QString style;
+            _lastRendition = characters[i].rendition;
+            _lastForeColor = characters[i].foregroundColor;
+            _lastBackColor = characters[i].backgroundColor;
+            
+            //build up style string
+            QString style;
 
-			if ( _lastRendition & RE_BOLD ||
+            if ( _lastRendition & RE_BOLD ||
                              (_colorTable && characters[i].isBold(_colorTable)) )
-					style.append("font-weight:bold;");
+                    style.append("font-weight:bold;");
 
 
-			if ( _lastRendition & RE_UNDERLINE )
-					style.append("font-decoration:underline;");
-		
-			//colours - a colour table must have been defined first
-			if ( _colorTable )	
-			{
-				style.append( QString("color:%1;").arg(_lastForeColor.color(_colorTable).name() ) );
+            if ( _lastRendition & RE_UNDERLINE )
+                    style.append("font-decoration:underline;");
+        
+            //colours - a colour table must have been defined first
+            if ( _colorTable )    
+            {
+                style.append( QString("color:%1;").arg(_lastForeColor.color(_colorTable).name() ) );
 
-				if (!characters[i].isTransparent(_colorTable))
-				{
-					style.append( QString("background-color:%1;").arg(_lastBackColor.color(_colorTable).name() ) );
-				}
-			}
-		
-			//open the span with the current style	
-			openSpan(text,style);
-			_innerSpanOpen = true;
-		}
+                if (!characters[i].isTransparent(_colorTable))
+                {
+                    style.append( QString("background-color:%1;").arg(_lastBackColor.color(_colorTable).name() ) );
+                }
+            }
+        
+            //open the span with the current style    
+            openSpan(text,style);
+            _innerSpanOpen = true;
+        }
 
-		//handle whitespace
-		if (ch.isSpace())
-			spaceCount++;
-		else
-			spaceCount = 0;
-		
+        //handle whitespace
+        if (ch.isSpace())
+            spaceCount++;
+        else
+            spaceCount = 0;
+        
 
-		//output current character
-		if (spaceCount < 2)
-		{
-			//escape HTML tag characters and just display others as they are
-			if ( ch == '<' )
-				text.append("&lt;");
-			else if (ch == '>')
-					text.append("&gt;");
-			else	
-					text.append(ch);
-		}
-		else
-		{
-			text.append("&nbsp;"); //HTML truncates multiple spaces, so use a space marker instead
-		}
-		
-	}
+        //output current character
+        if (spaceCount < 2)
+        {
+            //escape HTML tag characters and just display others as they are
+            if ( ch == '<' )
+                text.append("&lt;");
+            else if (ch == '>')
+                    text.append("&gt;");
+            else    
+                    text.append(ch);
+        }
+        else
+        {
+            text.append("&nbsp;"); //HTML truncates multiple spaces, so use a space marker instead
+        }
+        
+    }
 
-	//close any remaining open inner spans
-	if ( _innerSpanOpen )
-		closeSpan(text);
+    //close any remaining open inner spans
+    if ( _innerSpanOpen )
+        closeSpan(text);
 
-	//start new line
-	text.append("<br>");
-	
-	*_output << text;
+    //start new line
+    text.append("<br>");
+    
+    *_output << text;
 }
 void HTMLDecoder::openSpan(QString& text , const QString& style)
 {
-	text.append( QString("<span style=\"%1\">").arg(style) );
+    text.append( QString("<span style=\"%1\">").arg(style) );
 }
 
 void HTMLDecoder::closeSpan(QString& text)
 {
-	text.append("</span>");
+    text.append("</span>");
 }
 
 void HTMLDecoder::setColorTable(const ColorEntry* table)
 {
-	_colorTable = table;
+    _colorTable = table;
 }

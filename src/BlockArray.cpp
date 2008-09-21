@@ -293,8 +293,8 @@ void BlockArray::increaseBuffer()
     FILE *fion = fdopen(dup(ion), "w+b");
     if (!fion) {
         perror("fdopen/dup");
-	delete [] buffer1;
-	delete [] buffer2;
+    delete [] buffer1;
+    delete [] buffer2;
         return;
     }
 

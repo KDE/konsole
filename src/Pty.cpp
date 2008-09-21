@@ -119,14 +119,14 @@ void Pty::setErase(char erase)
 
 char Pty::erase() const
 {
-	if (pty()->masterFd() >= 0)
-	{
-		struct ::termios ttyAttributes;
-		pty()->tcGetAttr(&ttyAttributes);
-		return ttyAttributes.c_cc[VERASE];
-	}
+    if (pty()->masterFd() >= 0)
+    {
+        struct ::termios ttyAttributes;
+        pty()->tcGetAttr(&ttyAttributes);
+        return ttyAttributes.c_cc[VERASE];
+    }
 
-	return _eraseChar;
+    return _eraseChar;
 }
 
 void Pty::addEnvironmentVariables(const QStringList& environment)
@@ -203,7 +203,7 @@ int Pty::start(const QString& program,
 #endif
 
   if (_eraseChar != 0)
-  	ttmode.c_cc[VERASE] = _eraseChar;
+      ttmode.c_cc[VERASE] = _eraseChar;
   
   if (!pty()->tcSetAttr(&ttmode))
     kWarning() << "Unable to set terminal attributes.";
@@ -213,7 +213,7 @@ int Pty::start(const QString& program,
   KProcess::start();
 
   if (!waitForStarted())
-  	return -1;
+      return -1;
 
   return 0;
 }
@@ -229,14 +229,14 @@ void Pty::setWriteable(bool writeable)
 }
 
 Pty::Pty(int masterFd, QObject* parent)
-	: KPtyProcess(masterFd,parent)
+    : KPtyProcess(masterFd,parent)
 {
-	init();
+    init();
 }
 Pty::Pty(QObject* parent)
     : KPtyProcess(parent)
 {
-	init();
+    init();
 }
 void Pty::init()
 {
@@ -257,7 +257,7 @@ Pty::~Pty()
 void Pty::sendData(const char* data, int length)
 {
   if (!length)
-  	return;
+      return;
   
   if (!pty()->write(data,length)) 
   {
@@ -268,8 +268,8 @@ void Pty::sendData(const char* data, int length)
 
 void Pty::dataReceived() 
 {
- 	QByteArray data = pty()->readAll();
-	emit receivedData(data.constData(),data.count());
+     QByteArray data = pty()->readAll();
+    emit receivedData(data.constData(),data.count());
 }
 
 void Pty::lockPty(bool lock)
@@ -297,18 +297,18 @@ int Pty::foregroundProcessGroup() const
 
 void Pty::setupChildProcess()
 {
-	KPtyProcess::setupChildProcess();
-	
-	// reset all signal handlers
-	// this ensures that terminal applications respond to 
-	// signals generated via key sequences such as Ctrl+C
-	// (which sends SIGINT)
-	struct sigaction action;
-	sigemptyset(&action.sa_mask);
-	action.sa_handler = SIG_DFL;
-	action.sa_flags = 0;
-	for (int signal=1;signal < NSIG; signal++)
-		sigaction(signal,&action,0L);
+    KPtyProcess::setupChildProcess();
+    
+    // reset all signal handlers
+    // this ensures that terminal applications respond to 
+    // signals generated via key sequences such as Ctrl+C
+    // (which sends SIGINT)
+    struct sigaction action;
+    sigemptyset(&action.sa_mask);
+    action.sa_handler = SIG_DFL;
+    action.sa_flags = 0;
+    for (int signal=1;signal < NSIG; signal++)
+        sigaction(signal,&action,0L);
 }
 
 

@@ -63,7 +63,7 @@ static const char* ENCODING_GROUP = "Encoding Options";
 
 const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
 {
-	// General
+    // General
       { Path , "Path" , 0 , QVariant::String }
     , { Name , "Name" , GENERAL_GROUP , QVariant::String }
     , { Title , "Title" , 0 , QVariant::String }
@@ -78,39 +78,39 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     , { ShowMenuBar , "ShowMenuBar" , GENERAL_GROUP , QVariant::Bool }
     , { TabBarMode , "TabBarMode" , GENERAL_GROUP , QVariant::Int }
     , { TabBarPosition , "TabBarPosition" , GENERAL_GROUP , QVariant::Int }
-	, { StartInCurrentSessionDir , "StartInCurrentSessionDir" , GENERAL_GROUP , QVariant::Bool }
+    , { StartInCurrentSessionDir , "StartInCurrentSessionDir" , GENERAL_GROUP , QVariant::Bool }
     , { ShowNewAndCloseTabButtons, "ShowNewAndCloseTabButtons" , GENERAL_GROUP , QVariant::Bool }
 
-	// Appearance
-	, { Font , "Font" , APPEARANCE_GROUP , QVariant::Font }
+    // Appearance
+    , { Font , "Font" , APPEARANCE_GROUP , QVariant::Font }
     , { ColorScheme , "ColorScheme" , APPEARANCE_GROUP , QVariant::String }
     , { ColorScheme , "colors" , 0 , QVariant::String }
     , { AntiAliasFonts, "AntiAliasFonts" , APPEARANCE_GROUP , QVariant::Bool }
     
-	// Keyboard
+    // Keyboard
     , { KeyBindings , "KeyBindings" , KEYBOARD_GROUP , QVariant::String }
     
-	// Scrolling
-	, { HistoryMode , "HistoryMode" , SCROLLING_GROUP , QVariant::Int }
+    // Scrolling
+    , { HistoryMode , "HistoryMode" , SCROLLING_GROUP , QVariant::Int }
     , { HistorySize , "HistorySize" , SCROLLING_GROUP , QVariant::Int } 
     , { ScrollBarPosition , "ScrollBarPosition" , SCROLLING_GROUP , QVariant::Int }
    
-   	// Terminal Features
-	, { BlinkingTextEnabled , "BlinkingTextEnabled" , TERMINAL_GROUP , QVariant::Bool }
+       // Terminal Features
+    , { BlinkingTextEnabled , "BlinkingTextEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { FlowControlEnabled , "FlowControlEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { AllowProgramsToResizeWindow , "AllowProgramsToResizeWindow" , TERMINAL_GROUP , QVariant::Bool }
     , { BidiRenderingEnabled , "BidiRenderingEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { BlinkingCursorEnabled , "BlinkingCursorEnabled" , TERMINAL_GROUP , QVariant::Bool }
     
-	// Cursor 
-	, { UseCustomCursorColor , "UseCustomCursorColor" , CURSOR_GROUP , QVariant::Bool}
+    // Cursor 
+    , { UseCustomCursorColor , "UseCustomCursorColor" , CURSOR_GROUP , QVariant::Bool}
     , { CursorShape , "CursorShape" , CURSOR_GROUP , QVariant::Int}
     , { CustomCursorColor , "CustomCursorColor" , CURSOR_GROUP , QVariant::Color }
 
-	// Interaction
+    // Interaction
     , { WordCharacters , "WordCharacters" , INTERACTION_GROUP , QVariant::String }
 
-	// Encoding
+    // Encoding
     , { DefaultEncoding , "DefaultEncoding" , ENCODING_GROUP , QVariant::String }
 
     , { (Property)0 , 0 , 0, QVariant::Invalid }
@@ -296,50 +296,50 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr info)
     return newPath;
 }
 void KDE4ProfileWriter::writeProperties(KConfig& config,
-										const Profile::Ptr profile,
-										const Profile::PropertyInfo* properties) 
+                                        const Profile::Ptr profile,
+                                        const Profile::PropertyInfo* properties) 
 {
-	const char* groupName = 0;
-	KConfigGroup group;
-	
-	while (properties->name != 0)	
-	{
-		if (properties->group != 0)
-		{
-			if (groupName == 0 || strcmp(groupName,properties->group) != 0)
-			{
-				group = config.group(properties->group);
-				groupName = properties->group;
-			}
+    const char* groupName = 0;
+    KConfigGroup group;
+    
+    while (properties->name != 0)    
+    {
+        if (properties->group != 0)
+        {
+            if (groupName == 0 || strcmp(groupName,properties->group) != 0)
+            {
+                group = config.group(properties->group);
+                groupName = properties->group;
+            }
 
-			if ( profile->isPropertySet(properties->property) )
-        		group.writeEntry(QString(properties->name),
-							profile->property<QVariant>(properties->property));
-		}
+            if ( profile->isPropertySet(properties->property) )
+                group.writeEntry(QString(properties->name),
+                            profile->property<QVariant>(properties->property));
+        }
 
-		properties++;
-	}
+        properties++;
+    }
 }
 bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile::Ptr profile)
 {
     KConfig config(path,KConfig::NoGlobals);
 
-	KConfigGroup general = config.group(GENERAL_GROUP);
+    KConfigGroup general = config.group(GENERAL_GROUP);
 
-	// Parent profile if set, when loading the profile in future, the parent
+    // Parent profile if set, when loading the profile in future, the parent
     // must be loaded as well if it exists.
     if ( profile->parent() )
         general.writeEntry("Parent",profile->parent()->path());
 
-	if (    profile->isPropertySet(Profile::Command) 
+    if (    profile->isPropertySet(Profile::Command) 
          || profile->isPropertySet(Profile::Arguments) )
         general.writeEntry("Command",
                 ShellCommand(profile->command(),profile->arguments()).fullCommand());
 
-	// Write remaining properties
-	writeProperties(config,profile,Profile::DefaultPropertyNames);
+    // Write remaining properties
+    writeProperties(config,profile,Profile::DefaultPropertyNames);
 
-	return true;
+    return true;
 }
 
 QStringList KDE4ProfileReader::findProfiles()
@@ -348,31 +348,31 @@ QStringList KDE4ProfileReader::findProfiles()
             KStandardDirs::NoDuplicates);
 }
 void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profile,
-									   const Profile::PropertyInfo* properties)
+                                       const Profile::PropertyInfo* properties)
 {
-	const char* groupName = 0;
-	KConfigGroup group;
+    const char* groupName = 0;
+    KConfigGroup group;
 
-	while (properties->name != 0)
-	{
-		if (properties->group != 0)
-		{
-			if (groupName == 0 || strcmp(groupName,properties->group) != 0)
-			{
-				group = config.group(properties->group);
-				groupName = properties->group;
-			}
-		
-			QString name(properties->name);
+    while (properties->name != 0)
+    {
+        if (properties->group != 0)
+        {
+            if (groupName == 0 || strcmp(groupName,properties->group) != 0)
+            {
+                group = config.group(properties->group);
+                groupName = properties->group;
+            }
+        
+            QString name(properties->name);
 
-			if (group.hasKey(name))
-				profile->setProperty(properties->property,
-								 	group.readEntry(name,QVariant(properties->type)));
+            if (group.hasKey(name))
+                profile->setProperty(properties->property,
+                                     group.readEntry(name,QVariant(properties->type)));
 
-		}
-		
-		properties++;
-	}
+        }
+        
+        properties++;
+    }
 }
 
 bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile)
@@ -383,10 +383,10 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
     KConfig config(path,KConfig::NoGlobals);
 
     KConfigGroup general = config.group(GENERAL_GROUP);
-	if (general.hasKey("Parent"))
-		parentProfile = general.readEntry("Parent");
+    if (general.hasKey("Parent"))
+        parentProfile = general.readEntry("Parent");
 
-	if ( general.hasKey("Command") )
+    if ( general.hasKey("Command") )
     {
         ShellCommand shellCommand(general.readEntry("Command"));
 
@@ -394,10 +394,10 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
         profile->setProperty(Profile::Arguments,shellCommand.arguments());
     }
 
-	// Read remaining properties
-	readProperties(config,profile,Profile::DefaultPropertyNames);
+    // Read remaining properties
+    readProperties(config,profile,Profile::DefaultPropertyNames);
 
-	return true;
+    return true;
 }
 QStringList KDE3ProfileReader::findProfiles()
 {

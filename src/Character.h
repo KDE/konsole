@@ -34,10 +34,10 @@ namespace Konsole
 
 typedef unsigned char LineProperty;
 
-static const int LINE_DEFAULT		= 0;
-static const int LINE_WRAPPED 	 	= (1 << 0);
-static const int LINE_DOUBLEWIDTH  	= (1 << 1);
-static const int LINE_DOUBLEHEIGHT	= (1 << 2);
+static const int LINE_DEFAULT        = 0;
+static const int LINE_WRAPPED          = (1 << 0);
+static const int LINE_DOUBLEWIDTH      = (1 << 1);
+static const int LINE_DOUBLEHEIGHT    = (1 << 2);
 
 #define DEFAULT_RENDITION  0
 #define RE_BOLD            (1 << 0)

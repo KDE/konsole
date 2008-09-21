@@ -35,11 +35,11 @@ ViewProperties::ViewProperties(QObject* parent)
 }
 ViewProperties::~ViewProperties()
 {
-	_viewProperties.remove(_id);
+    _viewProperties.remove(_id);
 }
 ViewProperties* ViewProperties::propertiesById(int id)
 {
-	return _viewProperties[id];
+    return _viewProperties[id];
 }
 KUrl ViewProperties::url() const
 {
@@ -79,12 +79,12 @@ void ViewProperties::setIcon(const QIcon& icon)
 }
 void ViewProperties::setIdentifier(int id)
 {
-	if (_viewProperties.contains(_id))
-		_viewProperties.remove(_id);
+    if (_viewProperties.contains(_id))
+        _viewProperties.remove(_id);
 
     _id = id;
 
-	_viewProperties.insert(id,this);
+    _viewProperties.insert(id,this);
 }
 QString ViewProperties::title() const
 {

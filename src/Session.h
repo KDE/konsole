@@ -369,13 +369,13 @@ public:
    */
   enum UserTitleChange
   {
-  	IconNameAndWindowTitle 	= 0,
-	IconName 				= 1,
-	WindowTitle				= 2,
-	TextColor				= 10,
-	BackgroundColor			= 11,
-	SessionName				= 30,
-	ProfileChange			= 50 	// this clashes with Xterm's font change command
+      IconNameAndWindowTitle     = 0,
+    IconName                 = 1,
+    WindowTitle                = 2,
+    TextColor                = 10,
+    BackgroundColor            = 11,
+    SessionName                = 30,
+    ProfileChange            = 50     // this clashes with Xterm's font change command
   };
 
 public slots:
@@ -636,7 +636,7 @@ public:
     int masterMode() const;
 
 private slots:
-	void sessionFinished();
+    void sessionFinished();
 
 private:
     void connectPair(Session* master , Session* other);

@@ -143,11 +143,11 @@ public:
      */
     NavigationMethod navigationMethod() const;
 
-	/** 
- 	 * Returns the controller for the active view.  activeViewChanged() is 
- 	 * emitted when this changes.
-	 */
-	SessionController* activeViewController() const;
+    /** 
+      * Returns the controller for the active view.  activeViewChanged() is 
+      * emitted when this changes.
+     */
+    SessionController* activeViewController() const;
 
     /**
      * Returns the search bar.
@@ -206,7 +206,7 @@ private slots:
 
     // called when the "Detach View" menu item is selected
     void detachActiveView();
-	void updateDetachViewState();
+    void updateDetachViewState();
 
     // called when a session terminates - the view manager will delete any
     // views associated with the session
@@ -249,16 +249,16 @@ private slots:
     // in the current container
     void switchToView(int index);
 
-	// called when a SessionController gains focus
-	void controllerChanged(SessionController* controller);
+    // called when a SessionController gains focus
+    void controllerChanged(SessionController* controller);
 
-	// called when a ViewContainer requests a view be 
-	// moved 
-	void containerMoveViewRequest(int index, int id, bool& success);
+    // called when a ViewContainer requests a view be 
+    // moved 
+    void containerMoveViewRequest(int index, int id, bool& success);
 
 private:
-	void createView(Session* session, ViewContainer* container, int index);
-	const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile) const;
+    void createView(Session* session, ViewContainer* container, int index);
+    const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile) const;
 
     void setupActions();
     void focusActiveView();

@@ -72,8 +72,8 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     KUniqueApplication::addCmdLineOptions();
 
     KUniqueApplication::StartFlags startFlags;
-	if (forceNewProcess())
-		startFlags = KUniqueApplication::NonUniqueInstance;
+    if (forceNewProcess())
+        startFlags = KUniqueApplication::NonUniqueInstance;
 
     // create a new application instance if there are no running Konsole instances,
     // otherwise inform the existing Konsole process and exit
@@ -82,30 +82,30 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
         exit(0);
     }
 #ifdef Q_WS_X11 
-	if ( useTransparency() ) 
-	{
-		Display* display = 0;
-		Visual* visual = 0;
-		Colormap colormap = 0;
+    if ( useTransparency() ) 
+    {
+        Display* display = 0;
+        Visual* visual = 0;
+        Colormap colormap = 0;
 
-		getDisplayInformation(display,visual,colormap);
+        getDisplayInformation(display,visual,colormap);
 
-		Application app(display,(Qt::HANDLE)visual,(Qt::HANDLE)colormap);
-		return app.exec();
-	}
-	else
+        Application app(display,(Qt::HANDLE)visual,(Qt::HANDLE)colormap);
+        return app.exec();
+    }
+    else
 #endif 
-	{
-    	Application app;
-    	return app.exec();
-	}   
+    {
+        Application app;
+        return app.exec();
+    }   
 }
 bool forceNewProcess()
 {
     // when starting Konsole from a terminal, a new process must be used 
-	// so that the current environment is propagated into the shells of the new
-	// Konsole and any debug output or warnings from Konsole are written to
-	// the current terminal
+    // so that the current environment is propagated into the shells of the new
+    // Konsole and any debug output or warnings from Konsole are written to
+    // the current terminal
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
     return isatty(1) && !args->isSet("new-tab");
 }
@@ -127,10 +127,10 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("new-tab",ki18n("Create a new tab in an existing window rather than creating a new window"));
     options.add("workdir <dir>",   ki18n("Set the initial working directory of the new tab "
                                            "or window to 'dir'"));
-	options.add("notransparency",ki18n("Disable transparent backgrounds, even if the system supports them."));
+    options.add("notransparency",ki18n("Disable transparent backgrounds, even if the system supports them."));
     options.add("force-transparency",ki18n("Try to enable transparency, even if the system does not appear to support it."));
-	options.add("hold");
-	options.add("noclose",ki18n("Do not close the initial session automatically when it ends."));
+    options.add("hold");
+    options.add("noclose",ki18n("Do not close the initial session automatically when it ends."));
     // TODO - Document this option more clearly
     options.add("p <property=value>",ki18n("Change the value of a profile property."));
     options.add("!e <cmd>",ki18n("Command to execute"));

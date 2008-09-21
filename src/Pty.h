@@ -66,11 +66,11 @@ Q_OBJECT
      */
     explicit Pty(QObject* parent = 0);
 
-	/** 
-	 * Construct a process using an open pty master.
-	 * See KPtyProcess::KPtyProcess()
-	 */
-	explicit Pty(int ptyMasterFd, QObject* parent = 0);
+    /** 
+     * Construct a process using an open pty master.
+     * See KPtyProcess::KPtyProcess()
+     */
+    explicit Pty(int ptyMasterFd, QObject* parent = 0);
 
     ~Pty();
 
@@ -128,8 +128,8 @@ Q_OBJECT
     /** TODO Document me */
     void setErase(char erase);
 
-	/** */
-	char erase() const;
+    /** */
+    char erase() const;
 
     /**
      * Returns the process id of the teletype's current foreground
@@ -180,14 +180,14 @@ Q_OBJECT
     void receivedData(const char* buffer, int length);
    
   protected:
-  	void setupChildProcess();
+      void setupChildProcess();
 
   private slots:
     // called when data is received from the terminal process 
     void dataReceived(); 
-	
+    
   private:
-  	void init();
+      void init();
 
     // takes a list of key=value pairs and adds them
     // to the environment for the process

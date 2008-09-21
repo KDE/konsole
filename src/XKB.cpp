@@ -48,7 +48,7 @@ int xkb_init()
     int xkb_lmin = XkbMinorVersion;
     return XkbLibraryVersion( &xkb_lmaj, &xkb_lmin )
         && XkbQueryExtension( QX11Info::display(), &xkb_opcode, &xkb_event, &xkb_error,
-			       &xkb_lmaj, &xkb_lmin );
+                   &xkb_lmaj, &xkb_lmin );
 }
     
 #if 0
@@ -58,7 +58,7 @@ static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char *name )
 {
     int i;
     if( !xkb || !xkb->names )
-	return 0;
+    return 0;
 
     Atom atom = XInternAtom( xkb->dpy, name, true );
     if (atom == None)
@@ -66,14 +66,14 @@ static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char *name )
 
     for( i = 0;
          i < XkbNumVirtualMods;
-	 i++ )
+     i++ )
     {
-	if (atom == xkb->names->vmods[i] )
-	{
-	    unsigned int mask;
-	    XkbVirtualModsToReal( xkb, 1 << i, &mask );
-	    return mask;
-	}
+    if (atom == xkb->names->vmods[i] )
+    {
+        unsigned int mask;
+        XkbVirtualModsToReal( xkb, 1 << i, &mask );
+        return mask;
+    }
     }
     return 0;
 }

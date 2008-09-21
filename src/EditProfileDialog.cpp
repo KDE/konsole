@@ -70,11 +70,11 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
 
     // - Renable in a later KDE 4.x release when this feature works again
     _ui->enableResizeWindowButton->setVisible(false);
-	
+    
 #ifdef __GNUC__
 #warning "Re-enable when flow control is working again - bug in KDE 4.1"
 #endif
-	_ui->enableFlowControlButton->setEnabled(false);
+    _ui->enableFlowControlButton->setEnabled(false);
 
     // there are various setupXYZPage() methods to load the items
     // for each page and update their states to match the profile
@@ -91,7 +91,7 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
             SLOT(preparePage(int)) );
 
     _tempProfile = new Profile;
-	_tempProfile->setHidden(true);
+    _tempProfile->setHidden(true);
 }
 EditProfileDialog::~EditProfileDialog()
 {
@@ -251,7 +251,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     _ui->initialDirEdit->setClearButtonShown(true);
     _ui->dirSelectButton->setIcon( KIcon("folder-open") );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
-	_ui->startInSameDirButton->setChecked(info->property<bool>(Profile::StartInCurrentSessionDir));
+    _ui->startInSameDirButton->setChecked(info->property<bool>(Profile::StartInCurrentSessionDir));
 
     // window options
     _ui->showMenuBarButton->setChecked( info->property<bool>(Profile::ShowMenuBar) );
@@ -259,8 +259,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     // signals and slots
     connect( _ui->dirSelectButton , SIGNAL(clicked()) , this , SLOT(selectInitialDir()) );
     connect( _ui->iconSelectButton , SIGNAL(clicked()) , this , SLOT(selectIcon()) );
-	connect( _ui->startInSameDirButton , SIGNAL(toggled(bool)) , this , 
-			SLOT(startInSameDir(bool)));
+    connect( _ui->startInSameDirButton , SIGNAL(toggled(bool)) , this , 
+            SLOT(startInSameDir(bool)));
     connect( _ui->profileNameEdit , SIGNAL(textChanged(const QString&)) , this ,
             SLOT(profileNameChanged(const QString&)) );
     connect( _ui->initialDirEdit , SIGNAL(textChanged(const QString&)) , this , 
@@ -397,7 +397,7 @@ void EditProfileDialog::profileNameChanged(const QString& text)
 }
 void EditProfileDialog::startInSameDir(bool sameDir)
 {
-	_tempProfile->setProperty(Profile::StartInCurrentSessionDir,sameDir);
+    _tempProfile->setProperty(Profile::StartInCurrentSessionDir,sameDir);
 }
 void EditProfileDialog::initialDirChanged(const QString& dir)
 {
@@ -431,9 +431,9 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
              SLOT(colorSchemeAnimationUpdate()) );
    
     _ui->transparencyWarningWidget->setVisible(false);
-	_ui->transparencyWarningWidget->setText(i18n("This color scheme uses a transparent background"
-												 " which does not appear to be supported on your"
-												 " desktop"));
+    _ui->transparencyWarningWidget->setText(i18n("This color scheme uses a transparent background"
+                                                 " which does not appear to be supported on your"
+                                                 " desktop"));
     _ui->editColorSchemeButton->setEnabled(false);
     _ui->removeColorSchemeButton->setEnabled(false);
 
@@ -460,14 +460,14 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
             SLOT(newColorScheme()) );
 
     // setup font preview
-	bool antialias = info->property<bool>(Profile::AntiAliasFonts);
+    bool antialias = info->property<bool>(Profile::AntiAliasFonts);
 
     QFont font = info->font();
-	if (!antialias)
-		font.setStyleStrategy(QFont::NoAntialias);
+    if (!antialias)
+        font.setStyleStrategy(QFont::NoAntialias);
 
-	_ui->fontPreviewLabel->installEventFilter(this);
-	_ui->fontPreviewLabel->setFont(font);
+    _ui->fontPreviewLabel->installEventFilter(this);
+    _ui->fontPreviewLabel->setFont(font);
     _ui->fontSizeSlider->setValue( font.pointSize() );
     _ui->fontSizeSlider->setMinimum( KGlobalSettings::smallestReadableFont().pointSize() );
 
@@ -476,17 +476,17 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
     connect( _ui->editFontButton , SIGNAL(clicked()) , this ,
              SLOT(showFontDialog()) );
 
-	// setup font smoothing 
-	_ui->antialiasTextButton->setChecked(antialias);
-	connect( _ui->antialiasTextButton , SIGNAL(toggled(bool)) , this , 
-			 SLOT(setAntialiasText(bool)) );
+    // setup font smoothing 
+    _ui->antialiasTextButton->setChecked(antialias);
+    connect( _ui->antialiasTextButton , SIGNAL(toggled(bool)) , this , 
+             SLOT(setAntialiasText(bool)) );
 }
 void EditProfileDialog::setAntialiasText(bool enable)
 {
-	_tempProfile->setProperty(Profile::AntiAliasFonts,enable);
+    _tempProfile->setProperty(Profile::AntiAliasFonts,enable);
 
-	// update preview to reflect text smoothing state
-	fontSelected(_ui->fontPreviewLabel->font());
+    // update preview to reflect text smoothing state
+    fontSelected(_ui->fontPreviewLabel->font());
 }
 void EditProfileDialog::colorSchemeAnimationUpdate()
 {
@@ -594,11 +594,11 @@ bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
         else
             unpreview(Profile::ColorScheme);
     }
-	if ( watched == _ui->fontPreviewLabel && event->type() == QEvent::FontChange )
-	{
-		const QFont& labelFont = _ui->fontPreviewLabel->font();
-		_ui->fontPreviewLabel->setText(i18n("%1, size %2",labelFont.family(),labelFont.pointSize()));
-	}
+    if ( watched == _ui->fontPreviewLabel && event->type() == QEvent::FontChange )
+    {
+        const QFont& labelFont = _ui->fontPreviewLabel->font();
+        _ui->fontPreviewLabel->setText(i18n("%1, size %2",labelFont.family(),labelFont.pointSize()));
+    }
 
     return KDialog::eventFilter(watched,event);
 }
@@ -755,8 +755,8 @@ void EditProfileDialog::colorSchemeSelected()
 
         kDebug() << "Setting temp profile color to" << colors->name();
         
-		previewColorScheme(selected.first());
-		_tempProfile->setProperty(Profile::ColorScheme,colors->name());
+        previewColorScheme(selected.first());
+        _tempProfile->setProperty(Profile::ColorScheme,colors->name());
 
         updateTransparencyWarning();
     }
@@ -1069,19 +1069,19 @@ void EditProfileDialog::toggleResizeWindow(bool enable)
 }
 void EditProfileDialog::fontSelected(const QFont& font)
 {
-	QFont previewFont = font;
+    QFont previewFont = font;
 
    QSlider* slider = _ui->fontSizeSlider;
    _ui->fontSizeSlider->setRange( qMin(slider->minimum(),font.pointSize()) ,
                                   qMax(slider->maximum(),font.pointSize()) );
    _ui->fontSizeSlider->setValue(font.pointSize());
 
-	
+    
    QFont::StyleStrategy strategy;
    if (_tempProfile->property<bool>(Profile::AntiAliasFonts))
-   		strategy = QFont::PreferAntialias;
+           strategy = QFont::PreferAntialias;
    else
-   		strategy = QFont::NoAntialias;
+           strategy = QFont::NoAntialias;
 
    previewFont.setStyleStrategy(strategy);
 
@@ -1101,13 +1101,13 @@ void EditProfileDialog::showFontDialog()
     connect( dialog , SIGNAL(fontSelected(const QFont&)) , this , SLOT(fontSelected(const QFont&)) );
 
     if (dialog->exec() == QDialog::Rejected)
-		fontSelected(currentFont);
+        fontSelected(currentFont);
 }
 void EditProfileDialog::setFontSize(int pointSize)
 {
     QFont newFont = _ui->fontPreviewLabel->font();
     newFont.setPointSize(pointSize);
-	_ui->fontPreviewLabel->setFont(newFont);
+    _ui->fontPreviewLabel->setFont(newFont);
 
     _tempProfile->setProperty(Profile::Font,newFont);
 

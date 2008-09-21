@@ -58,7 +58,7 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
 {
     // create main view area
     _viewSplitter = new ViewSplitter(0);  
-	KAcceleratorManager::setNoAccel(_viewSplitter);
+    KAcceleratorManager::setNoAccel(_viewSplitter);
 
     // the ViewSplitter class supports both recursive and non-recursive splitting,
     // in non-recursive mode, all containers are inserted into the same top-level splitter
@@ -177,7 +177,7 @@ void ViewManager::setupActions()
         // to Ctrl+D - which will terminate the session in many cases
         detachViewAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_H) );
        
-  		connect( this , SIGNAL(splitViewToggle(bool)) , this , SLOT(updateDetachViewState()) ); 
+          connect( this , SIGNAL(splitViewToggle(bool)) , this , SLOT(updateDetachViewState()) ); 
         connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
    
         // Expand & Shrink Active View
@@ -260,17 +260,17 @@ void ViewManager::switchToView(int index)
 }
 void ViewManager::updateDetachViewState()
 {
-	if (!_actionCollection)
-		return;
+    if (!_actionCollection)
+        return;
 
 
-	bool splitView = _viewSplitter->containers().count() >= 2;
-	bool shouldEnable = splitView || _viewSplitter->activeContainer()->views().count() >= 2;
+    bool splitView = _viewSplitter->containers().count() >= 2;
+    bool shouldEnable = splitView || _viewSplitter->activeContainer()->views().count() >= 2;
 
-	QAction* detachAction = _actionCollection->action("detach-view");
+    QAction* detachAction = _actionCollection->action("detach-view");
 
-	if ( detachAction && shouldEnable != detachAction->isEnabled() )
-		detachAction->setEnabled(shouldEnable);
+    if ( detachAction && shouldEnable != detachAction->isEnabled() )
+        detachAction->setEnabled(shouldEnable);
 }
 void ViewManager::moveActiveViewLeft()
 {
@@ -336,10 +336,10 @@ void ViewManager::detachActiveView()
 
 void ViewManager::sessionFinished()
 {
-	// if this slot is called after the view manager's main widget
-	// has been destroyed, do nothing
-	if (!_viewSplitter)
-		return;
+    // if this slot is called after the view manager's main widget
+    // has been destroyed, do nothing
+    if (!_viewSplitter)
+        return;
 
     Session* session = qobject_cast<Session*>(sender());
 
@@ -455,7 +455,7 @@ void ViewManager::removeContainer(ViewContainer* container)
         _sessionMap.remove(display);
     } 
 
-	_viewSplitter->removeContainer(container);
+    _viewSplitter->removeContainer(container);
     container->deleteLater();
 
     emit splitViewToggle( _viewSplitter->containers().count() > 1 );
@@ -504,27 +504,27 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     connect( session , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
     connect( view , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
 
-	// if this is the first controller created then set it as the active controller
-	if (!_pluggedController)
-		controllerChanged(controller);
+    // if this is the first controller created then set it as the active controller
+    if (!_pluggedController)
+        controllerChanged(controller);
 
     return controller;
 }
 
 void ViewManager::controllerChanged(SessionController* controller)
 {
-	if ( controller == _pluggedController )
-		return;
+    if ( controller == _pluggedController )
+        return;
 
-	_viewSplitter->setFocusProxy(controller->view());
+    _viewSplitter->setFocusProxy(controller->view());
 
-	_pluggedController = controller;
-	emit activeViewChanged(controller);
+    _pluggedController = controller;
+    emit activeViewChanged(controller);
 }
 
 SessionController* ViewManager::activeViewController() const
 {
-	return _pluggedController;
+    return _pluggedController;
 }
 
 IncrementalSearchBar* ViewManager::searchBar() const
@@ -534,11 +534,11 @@ IncrementalSearchBar* ViewManager::searchBar() const
 
 void ViewManager::createView(Session* session, ViewContainer* container, int index)
 {
-	// notify this view manager when the session finishes so that its view
+    // notify this view manager when the session finishes so that its view
     // can be deleted
-	//
-	// TODO - Find a more efficient a way to avoid multiple connections
-	disconnect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
+    //
+    // TODO - Find a more efficient a way to avoid multiple connections
+    disconnect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
     connect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
 
      bool isFirst = _sessionMap.isEmpty();
@@ -555,7 +555,7 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
      session->addView(display);
 
      // tell the session whether it has a light or dark background
- 	const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
+     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
      session->setDarkBackground( colorSchemeForProfile(profile)->hasDarkBackground() );
 
      if ( container == _viewSplitter->activeContainer() ) 
@@ -563,8 +563,8 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
          container->setActiveView(display);
          display->setFocus( Qt::OtherFocusReason );
      }
-	
-	 updateDetachViewState();
+    
+     updateDetachViewState();
 }
 
 void ViewManager::createView(Session* session)
@@ -586,7 +586,7 @@ void ViewManager::createView(Session* session)
     while ( containerIter.hasNext() )
     {
         ViewContainer* container = containerIter.next();
-		createView(session,container,-1);
+        createView(session,container,-1);
     }
 
 }
@@ -622,7 +622,7 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
 
     connect( container, SIGNAL(newViewRequest()), this, SIGNAL(newViewRequest()) );
     connect( container, SIGNAL(moveViewRequest(int,int,bool&)), 
-	this , SLOT(containerMoveViewRequest(int,int,bool&)) );
+    this , SLOT(containerMoveViewRequest(int,int,bool&)) );
     connect( container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
@@ -631,14 +631,14 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
 }
 void ViewManager::containerMoveViewRequest(int index, int id, bool& moved)
 {
-	ViewContainer* container = qobject_cast<ViewContainer*>(sender());
-	SessionController* controller = qobject_cast<SessionController*>(ViewProperties::propertiesById(id));
+    ViewContainer* container = qobject_cast<ViewContainer*>(sender());
+    SessionController* controller = qobject_cast<SessionController*>(ViewProperties::propertiesById(id));
 
-	if (!controller)
-		return;
+    if (!controller)
+        return;
 
-	createView(controller->session(),container,index);
-	moved = true;
+    createView(controller->session(),container,index);
+    moved = true;
 }
 void ViewManager::setNavigationMethod(NavigationMethod method)
 {
@@ -697,7 +697,7 @@ void ViewManager::viewCloseRequest(QWidget* view)
     }
         
     focusActiveView();
-	updateDetachViewState();
+    updateDetachViewState();
 }
 
 TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
@@ -839,8 +839,8 @@ void ViewManager::profileChanged(Profile::Ptr profile)
 
         // if session uses this profile, update the display
         if ( iter.key() != 0 && 
-			 iter.value() != 0 && 
-			 SessionManager::instance()->sessionProfile(iter.value()) == profile ) 
+             iter.value() != 0 && 
+             SessionManager::instance()->sessionProfile(iter.value()) == profile ) 
         {
             applyProfile(iter.key(),profile,true);
         }

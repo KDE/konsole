@@ -370,7 +370,7 @@ public:
      * @param columns The number of columns in the terminal image
      */
     void setImage(const Character* const image , int lines , int columns,
-				  const QVector<LineProperty>& lineProperties);  
+                  const QVector<LineProperty>& lineProperties);  
 
 private:
     QString* _buffer;

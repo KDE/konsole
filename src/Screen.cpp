@@ -1,7 +1,7 @@
 /*
     This file is part of Konsole, an X terminal.
 
-	Copyright 2007-2008 by Robert Knight <robert.knight@gmail.com>
+    Copyright 2007-2008 by Robert Knight <robert.knight@gmail.com>
     Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
@@ -365,8 +365,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
 void Screen::setDefaultMargins()
 {
-	tmargin = 0;
-	bmargin = lines-1;
+    tmargin = 0;
+    bmargin = lines-1;
 }
 
 
@@ -406,11 +406,11 @@ void Screen::setDefaultMargins()
 
 void Screen::reverseRendition(Character& p) const
 { 
-	CharacterColor f = p.foregroundColor; 
-	CharacterColor b = p.backgroundColor;
-  	
-	p.foregroundColor = b; 
-	p.backgroundColor = f; //p->r &= ~RE_TRANSPARENT;
+    CharacterColor f = p.foregroundColor; 
+    CharacterColor b = p.backgroundColor;
+      
+    p.foregroundColor = b; 
+    p.backgroundColor = f; //p->r &= ~RE_TRANSPARENT;
 }
 
 void Screen::effectiveRendition()
@@ -455,39 +455,39 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
     hist->getCells(line,0,length,dest + destLineOffset);
 
     for (int column = length; column < columns; column++) 
-		dest[destLineOffset+column] = defaultChar;
+        dest[destLineOffset+column] = defaultChar;
     
-	// invert selected text
-	if (sel_begin !=-1)
-	{
-    	for (int column = 0; column < columns; column++)
-    	{
-        	if (isSelected(column,line)) 
-			{
-          		reverseRendition(dest[destLineOffset + column]); 
-    		}
-  		}
-	}
+    // invert selected text
+    if (sel_begin !=-1)
+    {
+        for (int column = 0; column < columns; column++)
+        {
+            if (isSelected(column,line)) 
+            {
+                  reverseRendition(dest[destLineOffset + column]); 
+            }
+          }
+    }
   }
 }
 
 void Screen::copyFromScreen(Character* dest , int startLine , int count) const
 {
-	Q_ASSERT( startLine >= 0 && count > 0 && startLine + count <= lines );
+    Q_ASSERT( startLine >= 0 && count > 0 && startLine + count <= lines );
 
     for (int line = startLine; line < (startLine+count) ; line++)
     {
        int srcLineStartIndex  = line*columns;
-	   int destLineStartIndex = (line-startLine)*columns;
+       int destLineStartIndex = (line-startLine)*columns;
 
        for (int column = 0; column < columns; column++)
        { 
-		 int srcIndex = srcLineStartIndex + column; 
-		 int destIndex = destLineStartIndex + column;
+         int srcIndex = srcLineStartIndex + column; 
+         int destIndex = destLineStartIndex + column;
 
          dest[destIndex] = screenLines[srcIndex/columns].value(srcIndex%columns,defaultChar);
 
-	     // invert selected text
+         // invert selected text
          if (sel_begin != -1 && isSelected(column,line + hist->getLines()))
            reverseRendition(dest[destIndex]); 
        }
@@ -509,13 +509,13 @@ void Screen::getImage( Character* dest, int size, int startLine, int endLine ) c
 
   // copy lines from history buffer
   if (linesInHistoryBuffer > 0)
-  	copyFromHistory(dest,startLine,linesInHistoryBuffer); 
+      copyFromHistory(dest,startLine,linesInHistoryBuffer); 
 
   // copy lines from screen buffer
   if (linesInScreenBuffer > 0)
-  	copyFromScreen(dest + linesInHistoryBuffer*columns,
-				   startLine + linesInHistoryBuffer - hist->getLines(),
-				   linesInScreenBuffer);
+      copyFromScreen(dest + linesInHistoryBuffer*columns,
+                   startLine + linesInHistoryBuffer - hist->getLines(),
+                   linesInScreenBuffer);
  
   // invert display when in screen mode
   if (getMode(MODE_Screen))
@@ -535,8 +535,8 @@ QVector<LineProperty> Screen::getLineProperties( int startLine , int endLine ) c
   Q_ASSERT( startLine >= 0 ); 
   Q_ASSERT( endLine >= startLine && endLine < hist->getLines() + lines );
 
-	const int mergedLines = endLine-startLine+1;
-	const int linesInHistory = qBound(0,hist->getLines()-startLine,mergedLines);
+    const int mergedLines = endLine-startLine+1;
+    const int linesInHistory = qBound(0,hist->getLines()-startLine,mergedLines);
   const int linesInScreen = mergedLines - linesInHistory;
 
   QVector<LineProperty> result(mergedLines);
@@ -545,21 +545,21 @@ QVector<LineProperty> Screen::getLineProperties( int startLine , int endLine ) c
   // copy properties for lines in history
   for (int line = startLine; line < startLine + linesInHistory; line++) 
   {
-		//TODO Support for line properties other than wrapped lines
-	  if (hist->isWrappedLine(line))
-	  {
-	  	result[index] = (LineProperty)(result[index] | LINE_WRAPPED);
-	  }
+        //TODO Support for line properties other than wrapped lines
+      if (hist->isWrappedLine(line))
+      {
+          result[index] = (LineProperty)(result[index] | LINE_WRAPPED);
+      }
     index++;
   }
   
   // copy properties for lines in screen buffer
   const int firstScreenLine = startLine + linesInHistory - hist->getLines();
   for (int line = firstScreenLine; line < firstScreenLine+linesInScreen; line++)
-	{
+    {
     result[index]=lineProperties[line];
-  	index++;
-	}
+      index++;
+    }
 
   return result;
 }
@@ -1164,42 +1164,42 @@ void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder ,
     if ( !isSelectionValid() )
         return;
 
-	int top = sel_TL / columns;	
-	int left = sel_TL % columns;
+    int top = sel_TL / columns;    
+    int left = sel_TL % columns;
 
-	int bottom = sel_BR / columns;
-	int right = sel_BR % columns;
+    int bottom = sel_BR / columns;
+    int right = sel_BR % columns;
 
     Q_ASSERT( top >= 0 && left >= 0 && bottom >= 0 && right >= 0 );
 
-	for (int y=top;y<=bottom;y++)
-	{
-			int start = 0;
-			if ( y == top || columnmode ) start = left;
-		
-			int count = -1;
-			if ( y == bottom || columnmode ) count = right - start + 1;
+    for (int y=top;y<=bottom;y++)
+    {
+            int start = 0;
+            if ( y == top || columnmode ) start = left;
+        
+            int count = -1;
+            if ( y == bottom || columnmode ) count = right - start + 1;
 
             const bool appendNewLine = ( y != bottom );
-			int copied = copyLineToStream( y,
-                              			   start,
-                              			   count,
-                              			   decoder, 
-                              			   appendNewLine,
-                              			   preserveLineBreaks );
+            int copied = copyLineToStream( y,
+                                             start,
+                                             count,
+                                             decoder, 
+                                             appendNewLine,
+                                             preserveLineBreaks );
 
-			// if the selection goes beyond the end of the last line then
-			// append a new line character.
-			//
-			// this makes it possible to 'select' a trailing new line character after
-			// the text on a line.  
-			if ( y == bottom && 
-				 copied < count	)
-			{
-				Character newLineChar('\n');
-				decoder->decodeLine(&newLineChar,1,0);
-			}
-	}	
+            // if the selection goes beyond the end of the last line then
+            // append a new line character.
+            //
+            // this makes it possible to 'select' a trailing new line character after
+            // the text on a line.  
+            if ( y == bottom && 
+                 copied < count    )
+            {
+                Character newLineChar('\n');
+                decoder->decodeLine(&newLineChar,1,0);
+            }
+    }    
 }
 
 int Screen::copyLineToStream(int line , 
@@ -1209,35 +1209,35 @@ int Screen::copyLineToStream(int line ,
                               bool appendNewLine,
                               bool preserveLineBreaks)
 {
-		//buffer to hold characters for decoding
-		//the buffer is static to avoid initialising every 
+        //buffer to hold characters for decoding
+        //the buffer is static to avoid initialising every 
         //element on each call to copyLineToStream
-		//(which is unnecessary since all elements will be overwritten anyway)
-		static const int MAX_CHARS = 1024;
-		static Character characterBuffer[MAX_CHARS];
-		
-		assert( count < MAX_CHARS );
+        //(which is unnecessary since all elements will be overwritten anyway)
+        static const int MAX_CHARS = 1024;
+        static Character characterBuffer[MAX_CHARS];
+        
+        assert( count < MAX_CHARS );
 
         LineProperty currentLineProperties = 0;
 
-		//determine if the line is in the history buffer or the screen image
-		if (line < hist->getLines())
-		{
+        //determine if the line is in the history buffer or the screen image
+        if (line < hist->getLines())
+        {
             const int lineLength = hist->getLineLen(line);
 
             // ensure that start position is before end of line
             start = qMin(start,qMax(0,lineLength-1));
 
-			// retrieve line from history buffer.  It is assumed
-			// that the history buffer does not store trailing white space
-			// at the end of the line, so it does not need to be trimmed here 
-			if (count == -1)
+            // retrieve line from history buffer.  It is assumed
+            // that the history buffer does not store trailing white space
+            // at the end of the line, so it does not need to be trimmed here 
+            if (count == -1)
             {
-					count = lineLength-start;
+                    count = lineLength-start;
             }
-			else
+            else
             {
-					count = qMin(start+count,lineLength)-start;
+                    count = qMin(start+count,lineLength)-start;
             }
 
             // safety checks
@@ -1245,15 +1245,15 @@ int Screen::copyLineToStream(int line ,
             assert( count >= 0 );    
             assert( (start+count) <= hist->getLineLen(line) );
 
-			hist->getCells(line,start,count,characterBuffer);
+            hist->getCells(line,start,count,characterBuffer);
 
             if ( hist->isWrappedLine(line) )
                 currentLineProperties |= LINE_WRAPPED;
-		}
-		else
-		{
-			if ( count == -1 )
-					count = columns - start;
+        }
+        else
+        {
+            if ( count == -1 )
+                    count = columns - start;
 
             assert( count >= 0 );
 
@@ -1262,25 +1262,25 @@ int Screen::copyLineToStream(int line ,
             Character* data = screenLines[screenLine].data();
             int length = screenLines[screenLine].count();
 
-			// ignore trailing white space at the end of the line
-			for (int i = length-1; i >= 0; i--)
-				if (data[i].character == ' ')
-					length--;
-				else
-					break;
+            // ignore trailing white space at the end of the line
+            for (int i = length-1; i >= 0; i--)
+                if (data[i].character == ' ')
+                    length--;
+                else
+                    break;
 
-			//retrieve line from screen image
-			for (int i=start;i < qMin(start+count,length);i++)
-			{
-			    characterBuffer[i-start] = data[i];
+            //retrieve line from screen image
+            for (int i=start;i < qMin(start+count,length);i++)
+            {
+                characterBuffer[i-start] = data[i];
             }
 
             // count cannot be any greater than length
-			count = qBound(0,count,length-start);
+            count = qBound(0,count,length-start);
 
             Q_ASSERT( screenLine < lineProperties.count() );
             currentLineProperties |= lineProperties[screenLine]; 
-		}
+        }
 
         // add new line character at end
         const bool omitLineBreak = (currentLineProperties & LINE_WRAPPED) ||
@@ -1292,20 +1292,20 @@ int Screen::copyLineToStream(int line ,
             count++;
         }
 
-		//decode line and write to text stream	
-		decoder->decodeLine( (Character*) characterBuffer , 
+        //decode line and write to text stream    
+        decoder->decodeLine( (Character*) characterBuffer , 
                              count, currentLineProperties );
 
-		return count;
+        return count;
 }
 
 void Screen::writeToStream(TerminalCharacterDecoder* decoder, int from, int to)
 {
-	sel_begin = loc(0,from);
-	sel_TL = sel_begin;
-	sel_BR = loc(columns-1,to);
-	writeSelectionToStream(decoder);
-	clearSelection();
+    sel_begin = loc(0,from);
+    sel_TL = sel_begin;
+    sel_BR = loc(columns-1,to);
+    writeSelectionToStream(decoder);
+    clearSelection();
 }
 
 QString Screen::getHistoryLine(int no)
@@ -1408,17 +1408,17 @@ const HistoryType& Screen::getScroll()
 
 void Screen::setLineProperty(LineProperty property , bool enable)
 {
-	if ( enable )
-	{
-		lineProperties[cuY] = (LineProperty)(lineProperties[cuY] | property);
-	}
-	else
-	{
-		lineProperties[cuY] = (LineProperty)(lineProperties[cuY] & ~property);
-	}
+    if ( enable )
+    {
+        lineProperties[cuY] = (LineProperty)(lineProperties[cuY] | property);
+    }
+    else
+    {
+        lineProperties[cuY] = (LineProperty)(lineProperties[cuY] & ~property);
+    }
 }
 void Screen::fillWithDefaultChar(Character* dest, int count)
 {
-	for (int i=0;i<count;i++)
-		dest[i] = defaultChar;
+    for (int i=0;i<count;i++)
+        dest[i] = defaultChar;
 }

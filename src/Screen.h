@@ -309,10 +309,10 @@ public:
     /** Returns the line which the cursor is positioned on. */
     int  getCursorY() const;
    
-	/** Clear the entire screen and move the cursor to the home position.
+    /** Clear the entire screen and move the cursor to the home position.
      * Equivalent to calling clearEntireScreen() followed by home().
      */
-	void clear();
+    void clear();
     /** 
      * Sets the position of the cursor to the 'home' position at the top-left
      * corner of the screen (0,0) 
@@ -384,7 +384,7 @@ public:
      * other attributes control the size of characters in the line.
      */
     QVector<LineProperty> getLineProperties( int startLine , int endLine ) const;
-	
+    
 
     /** Return the number of lines. */
     int  getLines()   { return lines; }
@@ -441,9 +441,9 @@ public:
     void setBusySelecting(bool busy) { sel_busy = busy; }
 
     /** 
- 	 * 	Returns true if the character at (@p column, @p line) is part of the
- 	 *  current selection. 
- 	 */ 
+      *     Returns true if the character at (@p column, @p line) is part of the
+      *  current selection. 
+      */ 
     bool isSelected(const int column,const int line) const;
 
     /** 
@@ -452,15 +452,15 @@ public:
      * be inserted into the returned text at the end of each terminal line.
      */
     QString selectedText(bool preserveLineBreaks);
-	    
-	/**
-	 * Copies part of the output to a stream.
-	 *
-	 * @param decoder A decoder which coverts terminal characters into text
-	 * @param from The first line in the history to retrieve
-	 * @param to The last line in the history to retrieve
-	 */
-	void writeToStream(TerminalCharacterDecoder* decoder, int from, int to);
+        
+    /**
+     * Copies part of the output to a stream.
+     *
+     * @param decoder A decoder which coverts terminal characters into text
+     * @param from The first line in the history to retrieve
+     * @param to The last line in the history to retrieve
+     */
+    void writeToStream(TerminalCharacterDecoder* decoder, int from, int to);
 
     /** 
      * Sets the selection to line @p no in the history and returns
@@ -468,40 +468,40 @@ public:
      */
     QString getHistoryLine(int no);
 
-	/**
-	 * Copies the selected characters, set using @see setSelBeginXY and @see setSelExtentXY
-	 * into a stream.
-	 *
-	 * @param decoder A decoder which converts terminal characters into text.  
-	 * PlainTextDecoder is the most commonly used decoder which coverts characters 
-	 * into plain text with no formatting.
+    /**
+     * Copies the selected characters, set using @see setSelBeginXY and @see setSelExtentXY
+     * into a stream.
+     *
+     * @param decoder A decoder which converts terminal characters into text.  
+     * PlainTextDecoder is the most commonly used decoder which coverts characters 
+     * into plain text with no formatting.
      * @param preserveLineBreaks Specifies whether new line characters should 
      * be inserted into the returned text at the end of each terminal line. 
-	 */
-	void writeSelectionToStream(TerminalCharacterDecoder* decoder , bool
+     */
+    void writeSelectionToStream(TerminalCharacterDecoder* decoder , bool
                                 preserveLineBreaks = true);
 
     /** TODO Document me */
     void checkSelection(int from, int to);
 
-	/** 
-	 * Sets or clears an attribute of the current line.
-	 * 
-	 * @param property The attribute to set or clear
-	 * Possible properties are:
-	 * LINE_WRAPPED:	 Specifies that the line is wrapped.
-	 * LINE_DOUBLEWIDTH: Specifies that the characters in the current line
+    /** 
+     * Sets or clears an attribute of the current line.
+     * 
+     * @param property The attribute to set or clear
+     * Possible properties are:
+     * LINE_WRAPPED:     Specifies that the line is wrapped.
+     * LINE_DOUBLEWIDTH: Specifies that the characters in the current line
      *                   should be double the normal width.
-	 * LINE_DOUBLEHEIGHT:Specifies that the characters in the current line 
+     * LINE_DOUBLEHEIGHT:Specifies that the characters in the current line 
      *                   should be double the normal height.
      *                   Double-height lines are formed of two lines containing the same characters,
      *                   with both having the LINE_DOUBLEHEIGHT attribute.
      *                   This allows other parts of the code to work on the
      *                   assumption that all lines are the same height.
-	 *
-	 * @param enable true to apply the attribute to the current line or false to remove it
-	 */
-	void setLineProperty(LineProperty property , bool enable);
+     *
+     * @param enable true to apply the attribute to the current line or false to remove it
+     */
+    void setLineProperty(LineProperty property , bool enable);
 
     /** 
      * Returns the number of lines that the image has been scrolled up or down by,
@@ -543,32 +543,32 @@ public:
      */
     void resetDroppedLines();
 
-	/** 
- 	 * Fills the buffer @p dest with @p count instances of the default (ie. blank)
- 	 * Character style.
- 	 */
-	static void fillWithDefaultChar(Character* dest, int count);
+    /** 
+      * Fills the buffer @p dest with @p count instances of the default (ie. blank)
+      * Character style.
+      */
+    static void fillWithDefaultChar(Character* dest, int count);
 
 private: 
 
-	//copies a line of text from the screen or history into a stream using a 
-	//specified character decoder.  Returns the number of lines actually copied,
-	//which may be less than 'count' if (start+count) is more than the number of characters on
-	//the line 
-	//
-	//line - the line number to copy, from 0 (the earliest line in the history) up to 
-	//		 hist->getLines() + lines - 1
-	//start - the first column on the line to copy
-	//count - the number of characters on the line to copy
-	//decoder - a decoder which coverts terminal characters (an Character array) into text
+    //copies a line of text from the screen or history into a stream using a 
+    //specified character decoder.  Returns the number of lines actually copied,
+    //which may be less than 'count' if (start+count) is more than the number of characters on
+    //the line 
+    //
+    //line - the line number to copy, from 0 (the earliest line in the history) up to 
+    //         hist->getLines() + lines - 1
+    //start - the first column on the line to copy
+    //count - the number of characters on the line to copy
+    //decoder - a decoder which coverts terminal characters (an Character array) into text
     //appendNewLine - if true a new line character (\n) is appended to the end of the line
-	int  copyLineToStream(int line, 
+    int  copyLineToStream(int line, 
                           int start, 
                           int count, 
                           TerminalCharacterDecoder* decoder,
                           bool appendNewLine,
                           bool preserveLineBreaks);
-	
+    
     //fills a section of the screen image with the character 'c'
     //the parameters are specified as offsets from the start of the screen image.
     //the loc(x,y) macro can be used to generate these values from a column,line pair.
@@ -594,12 +594,12 @@ private:
 
     bool isSelectionValid() const;
 
-	// copies 'count' lines from the screen buffer into 'dest',
-	// starting from 'startLine', where 0 is the first line in the screen buffer
-	void copyFromScreen(Character* dest, int startLine, int count) const;
-	// copies 'count' lines from the history buffer into 'dest',
-	// starting from 'startLine', where 0 is the first line in the history
-	void copyFromHistory(Character* dest, int startLine, int count) const;
+    // copies 'count' lines from the screen buffer into 'dest',
+    // starting from 'startLine', where 0 is the first line in the screen buffer
+    void copyFromScreen(Character* dest, int startLine, int count) const;
+    // copies 'count' lines from the history buffer into 'dest',
+    // starting from 'startLine', where 0 is the first line in the history
+    void copyFromHistory(Character* dest, int startLine, int count) const;
 
 
     // screen image ----------------
@@ -615,7 +615,7 @@ private:
     int _droppedLines;
 
     QVarLengthArray<LineProperty,64> lineProperties;    
-	
+    
     // history buffer ---------------
     HistoryScroll *hist;
     

@@ -38,15 +38,15 @@ class WarningBox : public QFrame
 Q_OBJECT
 
 public:
-	WarningBox(QWidget* parent = 0);
+    WarningBox(QWidget* parent = 0);
 
-	/** Sets the text displayed in the warning label. */
-	void setText(const QString& text);
-	/** Returns the text displayed in the warning label. */
-	QString text() const;
+    /** Sets the text displayed in the warning label. */
+    void setText(const QString& text);
+    /** Returns the text displayed in the warning label. */
+    QString text() const;
 
 private:
-	QLabel* _label;
+    QLabel* _label;
 };
 
 }

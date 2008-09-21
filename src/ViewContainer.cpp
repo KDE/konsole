@@ -136,10 +136,10 @@ ViewContainer::NavigationDisplayMode ViewContainer::navigationDisplayMode() cons
 }
 void ViewContainer::addView(QWidget* view , ViewProperties* item, int index)
 {
-	if (index == -1)
-		_views.append(view);
-	else
-		_views.insert(index,view);
+    if (index == -1)
+        _views.append(view);
+    else
+        _views.insert(index,view);
 
     _navigation[view] = item;
 
@@ -254,104 +254,104 @@ QList<QWidget*> ViewContainer::widgetsForItem(ViewProperties* item) const
 
 ViewContainerTabBar::ViewContainerTabBar(QWidget* parent,TabbedViewContainer* container)
     : KTabBar(parent)
-	, _container(container)
+    , _container(container)
     , _dropIndicator(0)
-	, _dropIndicatorIndex(-1)
+    , _dropIndicatorIndex(-1)
     , _drawIndicatorDisabled(false)
 {
 }
 void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 {
-	if (!parentWidget() || _dropIndicatorIndex == index)
-		return;
+    if (!parentWidget() || _dropIndicatorIndex == index)
+        return;
 
-	_dropIndicatorIndex = index;
-	const int ARROW_SIZE = 22;
-	bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
+    _dropIndicatorIndex = index;
+    const int ARROW_SIZE = 22;
+    bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
 
-	if (!_dropIndicator || _drawIndicatorDisabled != drawDisabled)
-	{
+    if (!_dropIndicator || _drawIndicatorDisabled != drawDisabled)
+    {
         if (!_dropIndicator)
         {
-		    _dropIndicator = new QLabel(parentWidget());
+            _dropIndicator = new QLabel(parentWidget());
             _dropIndicator->resize(ARROW_SIZE,ARROW_SIZE);
         }
 
         QIcon::Mode drawMode = drawDisabled ? QIcon::Disabled : QIcon::Normal;
-		const QString iconName = north ? "arrow-up" : "arrow-down";
-		_dropIndicator->setPixmap(KIcon(iconName).pixmap(ARROW_SIZE,ARROW_SIZE,drawMode));
+        const QString iconName = north ? "arrow-up" : "arrow-down";
+        _dropIndicator->setPixmap(KIcon(iconName).pixmap(ARROW_SIZE,ARROW_SIZE,drawMode));
         _drawIndicatorDisabled = drawDisabled;
-	}
+    }
 
-	if (index < 0)
-	{
-		_dropIndicator->hide();
-		return;
-	}
+    if (index < 0)
+    {
+        _dropIndicator->hide();
+        return;
+    }
 
-	const QRect rect = tabRect(index < count() ? index : index-1);
+    const QRect rect = tabRect(index < count() ? index : index-1);
 
-	QPoint pos;
-	if (index < count())
-		pos = rect.topLeft();
-	else
-		pos = rect.topRight();
+    QPoint pos;
+    if (index < count())
+        pos = rect.topLeft();
+    else
+        pos = rect.topRight();
 
-	if (north)
-		pos.ry() += ARROW_SIZE;
-	else
-		pos.ry() -= ARROW_SIZE; 
+    if (north)
+        pos.ry() += ARROW_SIZE;
+    else
+        pos.ry() -= ARROW_SIZE; 
 
-	pos.rx() -= ARROW_SIZE/2; 
+    pos.rx() -= ARROW_SIZE/2; 
 
-	_dropIndicator->move(mapTo(parentWidget(),pos));
-	_dropIndicator->show();
+    _dropIndicator->move(mapTo(parentWidget(),pos));
+    _dropIndicator->show();
 
 }
 void ViewContainerTabBar::dragLeaveEvent(QDragLeaveEvent*)
 {
-	setDropIndicator(-1);
+    setDropIndicator(-1);
 }
 void ViewContainerTabBar::dragEnterEvent(QDragEnterEvent* event)
 {
-	if (event->mimeData()->hasFormat(ViewProperties::mimeType()) &&
-		event->source() != 0)
-		event->acceptProposedAction();	
+    if (event->mimeData()->hasFormat(ViewProperties::mimeType()) &&
+        event->source() != 0)
+        event->acceptProposedAction();    
 }
 void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent* event)
 {
-	if (event->mimeData()->hasFormat(ViewProperties::mimeType())
-		&& event->source() != 0)
-	{
-		int index = dropIndex(event->pos());
-		if (index == -1)
-			index = count();
+    if (event->mimeData()->hasFormat(ViewProperties::mimeType())
+        && event->source() != 0)
+    {
+        int index = dropIndex(event->pos());
+        if (index == -1)
+            index = count();
 
-		setDropIndicator(index,proposedDropIsSameTab(event));
+        setDropIndicator(index,proposedDropIsSameTab(event));
 
-		event->acceptProposedAction();
-	}
+        event->acceptProposedAction();
+    }
 }
 int ViewContainerTabBar::dropIndex(const QPoint& pos) const
 {
-	int tab = tabAt(pos);
-	if (tab < 0)
-		return tab;
+    int tab = tabAt(pos);
+    if (tab < 0)
+        return tab;
 
-	// pick the closest tab boundary 
-	QRect rect = tabRect(tab);
-	if ( (pos.x()-rect.left()) > (rect.width()/2) )
-		tab++;
+    // pick the closest tab boundary 
+    QRect rect = tabRect(tab);
+    if ( (pos.x()-rect.left()) > (rect.width()/2) )
+        tab++;
 
-	if (tab == count())
-		return -1;
+    if (tab == count())
+        return -1;
 
-	return tab;
+    return tab;
 }
 bool ViewContainerTabBar::proposedDropIsSameTab(const QDropEvent* event) const
 {
     int index = dropIndex(event->pos());
-	int droppedId = ViewProperties::decodeMimeData(event->mimeData());
+    int droppedId = ViewProperties::decodeMimeData(event->mimeData());
     bool sameTabBar = event->source() == this;
 
     if (!sameTabBar)
@@ -367,31 +367,31 @@ bool ViewContainerTabBar::proposedDropIsSameTab(const QDropEvent* event) const
     }
 
     bool sourceAndDropAreLast = sourceIndex == count()-1 && index == -1;
-	if (sourceIndex == index || sourceIndex == index-1 || sourceAndDropAreLast)
-		return true;
-	else
+    if (sourceIndex == index || sourceIndex == index-1 || sourceAndDropAreLast)
+        return true;
+    else
         return false;
 }
 void ViewContainerTabBar::dropEvent(QDropEvent* event)
 {
-	setDropIndicator(-1);
+    setDropIndicator(-1);
 
-	if (    !event->mimeData()->hasFormat(ViewProperties::mimeType())
+    if (    !event->mimeData()->hasFormat(ViewProperties::mimeType())
         ||  proposedDropIsSameTab(event) )
     {
-		event->ignore();
+        event->ignore();
         return;
     }
 
     int index = dropIndex(event->pos());
     int droppedId = ViewProperties::decodeMimeData(event->mimeData());
-	bool result = false;
-	emit _container->moveViewRequest(index,droppedId,result);
-	
-	if (result)
-		event->accept();
-	else
-		event->ignore();
+    bool result = false;
+    emit _container->moveViewRequest(index,droppedId,result);
+    
+    if (result)
+        event->accept();
+    else
+        event->ignore();
 }
 
 QSize ViewContainerTabBar::tabSizeHint(int index) const
@@ -400,15 +400,15 @@ QSize ViewContainerTabBar::tabSizeHint(int index) const
 }
 QPixmap ViewContainerTabBar::dragDropPixmap(int tab) 
 {
-	Q_ASSERT(tab >= 0 && tab < count());
+    Q_ASSERT(tab >= 0 && tab < count());
 
     // TODO - grabWidget() works except that it includes part
-	// of the tab bar outside the tab itself if the tab has 
-	// curved corners
+    // of the tab bar outside the tab itself if the tab has 
+    // curved corners
     const QRect rect = tabRect(tab);
     const int borderWidth = 1;
 
-	QPixmap tabPixmap(rect.width()+borderWidth,
+    QPixmap tabPixmap(rect.width()+borderWidth,
                       rect.height()+borderWidth);
     QPainter painter(&tabPixmap);
     painter.drawPixmap(0,0,QPixmap::grabWidget(this,rect));
@@ -419,7 +419,7 @@ QPixmap ViewContainerTabBar::dragDropPixmap(int tab)
     painter.drawRect(0,0,rect.width(),rect.height());
     painter.end();
 
-	return tabPixmap;
+    return tabPixmap;
 }
 TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* parent) 
 : ViewContainer(position,parent)
@@ -448,9 +448,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
     connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
     connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
-	connect( _tabBar , SIGNAL(mouseMiddleClick(int)) , this , SLOT(closeTab(int)) );
     connect( _tabBar , SIGNAL(closeRequest(int)) , this , SLOT(closeTab(int)) );
-	connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );
+    connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );
 
     connect( _newTabButton , SIGNAL(clicked()) , this , SIGNAL(newViewRequest()) );
     connect( _closeTabButton , SIGNAL(clicked()) , this , SLOT(closeCurrentTab()) );
@@ -508,10 +507,10 @@ void TabbedViewContainer::closeCurrentTab()
 }
 void TabbedViewContainer::closeTab(int tab)
 {
-	Q_ASSERT(tab >= 0 && tab < _stackWidget->count());
+    Q_ASSERT(tab >= 0 && tab < _stackWidget->count());
     
     if (viewProperties(_stackWidget->widget(tab))->confirmClose())
-	    removeView(_stackWidget->widget(tab));
+        removeView(_stackWidget->widget(tab));
 }
 void TabbedViewContainer::setTabBarVisible(bool visible)
 {
@@ -591,35 +590,35 @@ TabbedViewContainer::~TabbedViewContainer()
 
 void TabbedViewContainer::startTabDrag(int tab)
 {
-	QDrag* drag = new QDrag(_tabBar);
-	const QRect tabRect = _tabBar->tabRect(tab);
-	QPixmap tabPixmap = _tabBar->dragDropPixmap(tab); 
+    QDrag* drag = new QDrag(_tabBar);
+    const QRect tabRect = _tabBar->tabRect(tab);
+    QPixmap tabPixmap = _tabBar->dragDropPixmap(tab); 
 
-	drag->setPixmap(tabPixmap);
-	
-	int id = viewProperties(views()[tab])->identifier();
+    drag->setPixmap(tabPixmap);
+    
+    int id = viewProperties(views()[tab])->identifier();
     QWidget* view = views()[tab];
-	drag->setMimeData(ViewProperties::createMimeData(id));
+    drag->setMimeData(ViewProperties::createMimeData(id));
 
-	// start drag, if drag-and-drop is successful the view at 'tab' will be
-	// deleted
-	//
-	// if the tab was dragged onto another application
-	// which blindly accepted the drop then ignore it
-	if (drag->exec() == Qt::MoveAction && drag->target() != 0)
-	{
-		// Deleting the view may cause the view container to be deleted, which
-		// will also delete the QDrag object.
-		// This can cause a crash if Qt's internal drag-and-drop handling
-		// tries to delete it later.  
-		//
-		// For now set the QDrag's parent to 0 so that it won't be deleted if 
-		// this view container is destroyed.
-		//
-		// FIXME: Resolve this properly
-		drag->setParent(0);
-		removeView(view);
-	}
+    // start drag, if drag-and-drop is successful the view at 'tab' will be
+    // deleted
+    //
+    // if the tab was dragged onto another application
+    // which blindly accepted the drop then ignore it
+    if (drag->exec() == Qt::MoveAction && drag->target() != 0)
+    {
+        // Deleting the view may cause the view container to be deleted, which
+        // will also delete the QDrag object.
+        // This can cause a crash if Qt's internal drag-and-drop handling
+        // tries to delete it later.  
+        //
+        // For now set the QDrag's parent to 0 so that it won't be deleted if 
+        // this view container is destroyed.
+        //
+        // FIXME: Resolve this properly
+        drag->setParent(0);
+        removeView(view);
+    }
 }
 void TabbedViewContainer::tabDoubleClicked(int tab)
 {
@@ -653,9 +652,9 @@ void TabbedViewContainer::currentTabChanged(int index)
 void TabbedViewContainer::wheelScrolled(int delta)
 {
     if ( delta < 0 )
-	activateNextView();
+    activateNextView();
     else
-	activatePreviousView();
+    activatePreviousView();
 }
 
 QWidget* TabbedViewContainer::containerWidget() const
@@ -715,7 +714,7 @@ void TabbedViewContainer::setTabActivity(int index , bool activity)
     const QColor normalColor = palette.text().color();
     const QColor activityColor = KColorUtils::mix(normalColor,colorSchemeActive); 
     
-	QColor color = activity ? activityColor : QColor();
+    QColor color = activity ? activityColor : QColor();
 
     if ( color != _tabBar->tabTextColor(index) )
         _tabBar->setTabTextColor(index,color);
@@ -737,22 +736,22 @@ void TabbedViewContainer::updateActivity(ViewProperties* item)
 
 void TabbedViewContainer::updateTitle(ViewProperties* item)
 {
-	// prevent tab titles from becoming overly-long as this limits the number
-	// of tabs which can fit in the tab bar.  
-	//
-	// if the view's title is overly long then trim it and select the 
-	// right-most 20 characters (assuming they contain the most useful
-	// information) and insert an elide at the front
-	const int MAX_TAB_TEXT_LENGTH = 20;
+    // prevent tab titles from becoming overly-long as this limits the number
+    // of tabs which can fit in the tab bar.  
+    //
+    // if the view's title is overly long then trim it and select the 
+    // right-most 20 characters (assuming they contain the most useful
+    // information) and insert an elide at the front
+    const int MAX_TAB_TEXT_LENGTH = 20;
 
     QListIterator<QWidget*> iter(widgetsForItem(item));
     while ( iter.hasNext() )
     {
         const int index = _stackWidget->indexOf( iter.next() );
 
-		QString tabText = item->title();
-		if (tabText.count() > MAX_TAB_TEXT_LENGTH)
-			tabText = tabText.right(MAX_TAB_TEXT_LENGTH).prepend("...");
+        QString tabText = item->title();
+        if (tabText.count() > MAX_TAB_TEXT_LENGTH)
+            tabText = tabText.right(MAX_TAB_TEXT_LENGTH).prepend("...");
 
         _tabBar->setTabText( index , tabText );
     }

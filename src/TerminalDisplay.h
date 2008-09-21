@@ -159,20 +159,20 @@ public:
     void setCtrlDrag(bool enable) { _ctrlDrag=enable; }
     bool ctrlDrag() { return _ctrlDrag; }
 
-	/** 
+    /** 
      *  This enum describes the methods for selecting text when
- 	 *  the user triple-clicks within the display. 
- 	 */
-	enum TripleClickMode
-	{
-		/** Select the whole line underneath the cursor. */
-		SelectWholeLine,
-		/** Select from the current cursor position to the end of the line. */
-		SelectForwardsFromCursor
-	};
-    /** Sets how the text is selected when the user triple clicks within the display. */	
+      *  the user triple-clicks within the display. 
+      */
+    enum TripleClickMode
+    {
+        /** Select the whole line underneath the cursor. */
+        SelectWholeLine,
+        /** Select from the current cursor position to the end of the line. */
+        SelectForwardsFromCursor
+    };
+    /** Sets how the text is selected when the user triple clicks within the display. */    
     void setTripleClickMode(TripleClickMode mode) { _tripleClickMode = mode; }
-	/** See setTripleClickSelectionMode() */
+    /** See setTripleClickSelectionMode() */
     TripleClickMode tripleClickMode() { return _tripleClickMode; }
 
     void setLineSpacing(uint);
@@ -422,11 +422,11 @@ public slots:
      */
     void pasteSelection();
 
-	/** 
- 	  * Changes whether the flow control warning box should be shown when the flow control
- 	  * stop key (Ctrl+S) are pressed.
- 	  */
-	void setFlowControlWarningEnabled(bool enabled);
+    /** 
+       * Changes whether the flow control warning box should be shown when the flow control
+       * stop key (Ctrl+S) are pressed.
+       */
+    void setFlowControlWarningEnabled(bool enabled);
     /** 
      * Returns true if the flow control warning box is enabled. 
      * See outputSuspended() and setFlowControlWarningEnabled()
@@ -435,14 +435,14 @@ public slots:
     { return _flowControlWarningEnabled; }
 
     /** 
-	 * Causes the widget to display or hide a message informing the user that terminal
-	 * output has been suspended (by using the flow control key combination Ctrl+S)
-	 *
-	 * @param suspended True if terminal output has been suspended and the warning message should
-	 *				 	be shown or false to indicate that terminal output has been resumed and that
-	 *				 	the warning message should disappear.
-	 */ 
-	void outputSuspended(bool suspended);
+     * Causes the widget to display or hide a message informing the user that terminal
+     * output has been suspended (by using the flow control key combination Ctrl+S)
+     *
+     * @param suspended True if terminal output has been suspended and the warning message should
+     *                     be shown or false to indicate that terminal output has been resumed and that
+     *                     the warning message should disappear.
+     */ 
+    void outputSuspended(bool suspended);
 
     /**
      * Sets whether the program whoose output is being displayed in the view
@@ -469,17 +469,17 @@ public slots:
      */
     void bell(const QString& message);
 
-	/** 
-	 * Sets the background of the display to the specified color. 
-	 * @see setColorTable(), setForegroundColor() 
-	 */
-	void setBackgroundColor(const QColor& color);
+    /** 
+     * Sets the background of the display to the specified color. 
+     * @see setColorTable(), setForegroundColor() 
+     */
+    void setBackgroundColor(const QColor& color);
 
-	/** 
-	 * Sets the text of the display to the specified color. 
-	 * @see setColorTable(), setBackgroundColor()
-	 */
-	void setForegroundColor(const QColor& color);
+    /** 
+     * Sets the text of the display to the specified color. 
+     * @see setColorTable(), setBackgroundColor()
+     */
+    void setForegroundColor(const QColor& color);
 
 signals:
 
@@ -507,16 +507,16 @@ signals:
      */
     void configureRequest( TerminalDisplay*, int state, const QPoint& position );
 
-	/**
-	 * When a shortcut which is also a valid terminal key sequence is pressed while 
-	 * the terminal widget  has focus, this signal is emitted to allow the host to decide 
-	 * whether the shortcut should be overridden.  
-	 * When the shortcut is overridden, the key sequence will be sent to the terminal emulation instead
-	 * and the action associated with the shortcut will not be triggered.
-	 *
-	 * @p override is set to false by default and the shortcut will be triggered as normal.
-	 */
-	void overrideShortcutCheck(QKeyEvent* keyEvent,bool& override);
+    /**
+     * When a shortcut which is also a valid terminal key sequence is pressed while 
+     * the terminal widget  has focus, this signal is emitted to allow the host to decide 
+     * whether the shortcut should be overridden.  
+     * When the shortcut is overridden, the key sequence will be sent to the terminal emulation instead
+     * and the action associated with the shortcut will not be triggered.
+     *
+     * @p override is set to false by default and the shortcut will be triggered as normal.
+     */
+    void overrideShortcutCheck(QKeyEvent* keyEvent,bool& override);
 
    void isBusySelecting(bool);
    void sendStringToEmu(const char*);
@@ -531,8 +531,8 @@ protected:
     virtual void resizeEvent(QResizeEvent*);
 
     virtual void fontChange(const QFont &font);
-	virtual void focusInEvent(QFocusEvent* event);
-	virtual void focusOutEvent(QFocusEvent* event);
+    virtual void focusInEvent(QFocusEvent* event);
+    virtual void focusOutEvent(QFocusEvent* event);
     virtual void keyPressEvent(QKeyEvent* event);
     virtual void mouseDoubleClickEvent(QMouseEvent* ev);
     virtual void mousePressEvent( QMouseEvent* );
@@ -555,12 +555,12 @@ protected:
       QDrag           *dragObject;
     } dragInfo;
 
-	// classifies the 'ch' into one of three categories
-	// and returns a character to indicate which category it is in
-	//
-	// 	- A space (returns ' ') 
-	// 	- Part of a word (returns 'a')
-	// 	- Other characters (returns the input character)
+    // classifies the 'ch' into one of three categories
+    // and returns a character to indicate which category it is in
+    //
+    //     - A space (returns ' ') 
+    //     - Part of a word (returns 'a')
+    //     - Other characters (returns the input character)
     QChar charClass(QChar ch) const;
 
     void clearImage();
@@ -603,7 +603,7 @@ private:
     // the display's transparency (set with setOpacity()), otherwise the background
     // will be drawn fully opaque
     void drawBackground(QPainter& painter, const QRect& rect, const QColor& color,
-						bool useOpacitySetting);
+                        bool useOpacitySetting);
     // draws the cursor character
     void drawCursor(QPainter& painter, const QRect& rect , const QColor& foregroundColor, 
                                        const QColor& backgroundColor , bool& invertColors);
@@ -611,7 +611,7 @@ private:
     void drawCharacters(QPainter& painter, const QRect& rect,  const QString& text, 
                                            const Character* style, bool invertCharacterColor);
     // draws a string of line graphics
-	void drawLineCharString(QPainter& painter, int x, int y, 
+    void drawLineCharString(QPainter& painter, int x, int y, 
                             const QString& str, const Character* attributes);
 
     // draws the preedit string for input methods
@@ -648,15 +648,15 @@ private:
     
     void paintFilters(QPainter& painter);
 
-	// returns a region covering all of the areas of the widget which contain
-	// a hotspot
-	QRegion hotSpotRegion() const;
+    // returns a region covering all of the areas of the widget which contain
+    // a hotspot
+    QRegion hotSpotRegion() const;
 
-	// returns the position of the cursor in columns and lines
-	QPoint cursorPosition() const;
+    // returns the position of the cursor in columns and lines
+    QPoint cursorPosition() const;
 
-	// redraws the cursor
-	void updateCursor();
+    // redraws the cursor
+    void updateCursor();
 
     // the window onto the terminal screen which this display
     // is currently showing.  
@@ -738,18 +738,18 @@ private:
     QLabel* _resizeWidget;
     QTimer* _resizeTimer;
 
-	bool _flowControlWarningEnabled;
+    bool _flowControlWarningEnabled;
 
     //widgets related to the warning message that appears when the user presses Ctrl+S to suspend
     //terminal output - informing them what has happened and how to resume output
     QLabel* _outputSuspendedLabel; 
-    	
+        
     uint _lineSpacing;
 
     bool _colorsInverted; // true during visual bell
 
     QSize _size;
-	
+    
     QRgb _blendColor;
 
     // list of filters currently applied to the display.  used for links and
@@ -775,8 +775,8 @@ private:
 
     //the delay in milliseconds between redrawing blinking text
     static const int BLINK_DELAY = 500;
-	static const int DEFAULT_LEFT_MARGIN = 1;
-	static const int DEFAULT_TOP_MARGIN = 1;
+    static const int DEFAULT_LEFT_MARGIN = 1;
+    static const int DEFAULT_TOP_MARGIN = 1;
 
 public:
     static void setTransparencyEnabled(bool enable)
@@ -790,13 +790,13 @@ class AutoScrollHandler : public QObject
 Q_OBJECT
 
 public:
-	AutoScrollHandler(QWidget* parent);
+    AutoScrollHandler(QWidget* parent);
 protected:
-	virtual void timerEvent(QTimerEvent* event);
-	virtual bool eventFilter(QObject* watched,QEvent* event);
+    virtual void timerEvent(QTimerEvent* event);
+    virtual bool eventFilter(QObject* watched,QEvent* event);
 private:
-	QWidget* widget() const { return static_cast<QWidget*>(parent()); }
-	int _timerId;
+    QWidget* widget() const { return static_cast<QWidget*>(parent()); }
+    int _timerId;
 };
 
 }

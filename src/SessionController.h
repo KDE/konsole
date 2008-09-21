@@ -96,14 +96,14 @@ public:
     QPointer<Session> session() { return _session; }
     /** Returns the view associated with this controller */
     QPointer<TerminalDisplay>  view()    { return _view;    }
-	
-	/** 
-	 * Returns true if the controller is valid.
-	 * A valid controller is one which has a non-null session() and view().
-	 *
-	 * Equivalent to "!session().isNull() && !view().isNull()"
-	 */
-	bool isValid() const;
+    
+    /** 
+     * Returns true if the controller is valid.
+     * A valid controller is one which has a non-null session() and view().
+     *
+     * Equivalent to "!session().isNull() && !view().isNull()"
+     */
+    bool isValid() const;
 
     /** 
      * Sets the widget used for searches through the session's output.
@@ -162,10 +162,10 @@ private slots:
     void openBrowser();
     void copy();
     void paste();
-	void pasteSelection(); // shortcut only
+    void pasteSelection(); // shortcut only
     void clear();
     void clearAndReset();
-	void copyInputTo();
+    void copyInputTo();
     void editCurrentProfile();
     void changeCodec(QTextCodec* codec);
     //void searchHistory();
@@ -208,10 +208,10 @@ private slots:
     void sessionResizeRequest(const QSize& size);
 
     void trackOutput(QKeyEvent* event);  // move view to end of current output
-										 // when a key press occurs in the 
-										 // display area
+                                         // when a key press occurs in the 
+                                         // display area
 
-	void updateSearchFilter();
+    void updateSearchFilter();
 
     // debugging slots
     void debugProcess();
@@ -225,12 +225,12 @@ private:
     void setupActions();
     void removeSearchFilter(); // remove and delete the current search filter if set
     void setFindNextPrevEnabled(bool enabled);
-	void listenForScreenWindowUpdates();
+    void listenForScreenWindowUpdates();
 
 private:
     QPointer<Session>         _session;
     QPointer<TerminalDisplay> _view;
-	SessionGroup* 			  _copyToGroup;
+    SessionGroup*               _copyToGroup;
     
     ProfileList* _profileList;
 
@@ -254,17 +254,17 @@ private:
 
     KMenu* _changeProfileMenu;
 
-	bool _listenForScreenWindowUpdates;
-	bool _preventClose;
+    bool _listenForScreenWindowUpdates;
+    bool _preventClose;
 
     static QSet<SessionController*> _allControllers;
-	static int _lastControllerId;
+    static int _lastControllerId;
     static KIcon _activityIcon;
     static KIcon _silenceIcon;
 };
 inline bool SessionController::isValid() const
 {
-	return !_session.isNull() && !_view.isNull();
+    return !_session.isNull() && !_view.isNull();
 }
 
 /** 

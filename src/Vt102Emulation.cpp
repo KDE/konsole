@@ -1,8 +1,8 @@
 /*
     This file is part of Konsole, an X terminal.
     
-	Copyright 2007-2008 by Robert Knight <robert.knight@gmail.com>
-	Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
+    Copyright 2007-2008 by Robert Knight <robert.knight@gmail.com>
+    Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -381,13 +381,13 @@ void Vt102Emulation::XtermHack()
 
 void Vt102Emulation::updateTitle()
 {
-	QListIterator<int> iter( _pendingTitleUpdates.keys() );
-	while (iter.hasNext()) {
-		int arg = iter.next();
-		emit titleChanged( arg , _pendingTitleUpdates[arg] );	
-	}
+    QListIterator<int> iter( _pendingTitleUpdates.keys() );
+    while (iter.hasNext()) {
+        int arg = iter.next();
+        emit titleChanged( arg , _pendingTitleUpdates[arg] );    
+    }
 
-    _pendingTitleUpdates.clear();	
+    _pendingTitleUpdates.clear();    
 }
 
 // Interpreting Codes ---------------------------------------------------------
@@ -521,21 +521,21 @@ switch( N )
     case TY_ESC_CS('%', '@') :      setCodec             (LocaleCodec ); break; //LINUX
 
     case TY_ESC_DE('3'      ) : /* Double height line, top half    */ 
-								_currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
-								_currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
-									break;
+                                _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
+                                    break;
     case TY_ESC_DE('4'      ) : /* Double height line, bottom half */ 
-								_currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
-								_currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
-									break;
+                                _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
+                                    break;
     case TY_ESC_DE('5'      ) : /* Single width, single height line*/
-								_currentScreen->setLineProperty( LINE_DOUBLEWIDTH , false);
-								_currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
-								break;
+                                _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , false);
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
+                                break;
     case TY_ESC_DE('6'      ) : /* Double width, single height line*/ 
-							    _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true);	
-								_currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
-								break;
+                                _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true);    
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
+                                break;
     case TY_ESC_DE('8'      ) : _currentScreen->helpAlign            (          ); break;
 
 // resize = \e[8;<row>;<col>t
@@ -550,7 +550,7 @@ switch( N )
     case TY_CSI_PS('J',   0) : _currentScreen->clearToEndOfScreen   (          ); break;
     case TY_CSI_PS('J',   1) : _currentScreen->clearToBeginOfScreen (          ); break;
     case TY_CSI_PS('J',   2) : _currentScreen->clearEntireScreen    (          ); break;
-	case TY_CSI_PS('J',	  3) : clearHistory(); 						   break;
+    case TY_CSI_PS('J',      3) : clearHistory();                            break;
     case TY_CSI_PS('g',   0) : _currentScreen->changeTabStop        (false     ); break; //VT100
     case TY_CSI_PS('g',   3) : _currentScreen->clearTabStops        (          ); break; //VT100
     case TY_CSI_PS('h',   4) : _currentScreen->    setMode      (MODE_Insert   ); break;
@@ -907,8 +907,8 @@ void Vt102Emulation::reportAnswerBack()
                  or a general mouse release (3).
 
     eventType represents the kind of mouse action that occurred:
-    	0 = Mouse button press or release
-	1 = Mouse drag
+        0 = Mouse button press or release
+    1 = Mouse drag
 */
 
 void Vt102Emulation::sendMouseEvent( int cb, int cx, int cy , int eventType )
@@ -920,7 +920,7 @@ void Vt102Emulation::sendMouseEvent( int cb, int cx, int cy , int eventType )
 
   //Mouse motion handling
   if ( (getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1 )
-	  cb += 0x20; //add 32 to signify motion event
+      cb += 0x20; //add 32 to signify motion event
 
   sprintf(tmp,"\033[M%c%c%c",cb+0x20,cx+0x20,cy+0x20);
   sendString(tmp);
@@ -978,7 +978,7 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
         // (unless there is an entry defined for this particular combination
         //  in the keyboard modifier)
         bool wantsAltModifier = entry.modifiers() & entry.modifierMask() & Qt::AltModifier;
-		bool wantsAnyModifier = entry.state() & entry.stateMask() & KeyboardTranslator::AnyModifierState;
+        bool wantsAnyModifier = entry.state() & entry.stateMask() & KeyboardTranslator::AnyModifierState;
 
         if ( modifiers & Qt::AltModifier && !(wantsAltModifier || wantsAnyModifier) 
              && !event->text().isEmpty() )
@@ -988,8 +988,8 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
 
         if ( entry.command() != KeyboardTranslator::NoCommand )
         {
-			if (entry.command() & KeyboardTranslator::EraseCommand)
-				textToSend += getErase();
+            if (entry.command() & KeyboardTranslator::EraseCommand)
+                textToSend += getErase();
 
             // TODO command handling
         }
@@ -1090,8 +1090,8 @@ void Vt102Emulation::useCharset(int n)
 
 void Vt102Emulation::setDefaultMargins()
 {
-	_screen[0]->setDefaultMargins();
-	_screen[1]->setDefaultMargins();
+    _screen[0]->setDefaultMargins();
+    _screen[1]->setDefaultMargins();
 }
 
 void Vt102Emulation::setMargins(int t, int b)
@@ -1174,7 +1174,7 @@ void Vt102Emulation::setMode(int m)
     case MODE_Mouse1001:
     case MODE_Mouse1002:
     case MODE_Mouse1003:
- 	    emit programUsesMouseChanged(false); 
+         emit programUsesMouseChanged(false); 
     break;
 
     case MODE_AppScreen : _screen[1]->clearSelection();
@@ -1201,7 +1201,7 @@ void Vt102Emulation::resetMode(int m)
     case MODE_Mouse1001 :
     case MODE_Mouse1002 :
     case MODE_Mouse1003 :
-	    emit programUsesMouseChanged(true); 
+        emit programUsesMouseChanged(true); 
     break;
 
     case MODE_AppScreen : _screen[0]->clearSelection();

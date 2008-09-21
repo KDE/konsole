@@ -266,8 +266,8 @@ void KeyboardTranslatorReader::readNext()
             else if ( tokens[2].type == Token::Command )
             {
                 // identify command
-				if (!parseAsCommand(tokens[2].text,command))
-					kWarning() << "Command" << tokens[2].text << "not understood.";
+                if (!parseAsCommand(tokens[2].text,command))
+                    kWarning() << "Command" << tokens[2].text << "not understood.";
             }
 
             KeyboardTranslator::Entry newEntry;
@@ -292,8 +292,8 @@ void KeyboardTranslatorReader::readNext()
 
 bool KeyboardTranslatorReader::parseAsCommand(const QString& text,KeyboardTranslator::Command& command) 
 {
-	if ( text.compare("erase",Qt::CaseInsensitive) == 0 )
-		command = KeyboardTranslator::EraseCommand;
+    if ( text.compare("erase",Qt::CaseInsensitive) == 0 )
+        command = KeyboardTranslator::EraseCommand;
     else if ( text.compare("scrollpageup",Qt::CaseInsensitive) == 0 )
         command = KeyboardTranslator::ScrollPageUpCommand;
     else if ( text.compare("scrollpagedown",Qt::CaseInsensitive) == 0 )
@@ -305,9 +305,9 @@ bool KeyboardTranslatorReader::parseAsCommand(const QString& text,KeyboardTransl
     else if ( text.compare("scrolllock",Qt::CaseInsensitive) == 0 )
         command = KeyboardTranslator::ScrollLockCommand;
     else
-    	return false;
+        return false;
 
-	return true;
+    return true;
 }
 
 bool KeyboardTranslatorReader::decodeSequence(const QString& text,
@@ -392,8 +392,8 @@ bool KeyboardTranslatorReader::parseAsModifier(const QString& item , Qt::Keyboar
         modifier = Qt::AltModifier;
     else if ( item == "meta" )
         modifier = Qt::MetaModifier;
-	else if ( item == "keypad" )
-		modifier = Qt::KeypadModifier;
+    else if ( item == "keypad" )
+        modifier = Qt::KeypadModifier;
     else
         return false;
 
@@ -454,14 +454,14 @@ KeyboardTranslator::Entry KeyboardTranslatorReader::createEntry( const QString& 
     entryString.append(condition);
     entryString.append(" : ");
 
-	// if 'result' is the name of a command then the entry result will be that command,
-	// otherwise the result will be treated as a string to echo when the key sequence
-	// specified by 'condition' is pressed
-	KeyboardTranslator::Command command;
-	if (parseAsCommand(result,command))
-    	entryString.append(result);
-	else
-		entryString.append('\"' + result + '\"');
+    // if 'result' is the name of a command then the entry result will be that command,
+    // otherwise the result will be treated as a string to echo when the key sequence
+    // specified by 'condition' is pressed
+    KeyboardTranslator::Command command;
+    if (parseAsCommand(result,command))
+        entryString.append(result);
+    else
+        entryString.append('\"' + result + '\"');
 
     QByteArray array = entryString.toUtf8();
 
@@ -731,8 +731,8 @@ void KeyboardTranslator::Entry::insertModifier( QString& item , int modifier ) c
         item += "Alt";
     else if ( modifier == Qt::MetaModifier )
         item += "Meta";
-	else if ( modifier == Qt::KeypadModifier )
-		item += "KeyPad";
+    else if ( modifier == Qt::KeypadModifier )
+        item += "KeyPad";
 }
 void KeyboardTranslator::Entry::insertState( QString& item , int state ) const
 {
@@ -759,8 +759,8 @@ QString KeyboardTranslator::Entry::resultToString(bool expandWildCards,Qt::Keybo
 {
     if ( !_text.isEmpty() )
         return escapedText(expandWildCards,modifiers);
-	else if ( _command == EraseCommand )
-		return "Erase";
+    else if ( _command == EraseCommand )
+        return "Erase";
     else if ( _command == ScrollPageUpCommand )
         return "ScrollPageUp";
     else if ( _command == ScrollPageDownCommand )

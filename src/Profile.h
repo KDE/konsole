@@ -69,7 +69,7 @@ friend class KDE4ProfileWriter;
 friend class ProfileGroup;
 
 public:
-	typedef KSharedPtr<Profile> Ptr;
+    typedef KSharedPtr<Profile> Ptr;
     typedef KSharedPtr<ProfileGroup> GroupPtr;
 
     /**
@@ -176,8 +176,8 @@ public:
         DefaultEncoding,
         /** (bool) Whether fonts should be aliased or not */
         AntiAliasFonts,
-		/** (bool) Whether new sessions should be started in the same directory as the 
-		 * currently active session. */
+        /** (bool) Whether new sessions should be started in the same directory as the 
+         * currently active session. */
         StartInCurrentSessionDir,
         /** (bool) Whether a 'New Tab' and 'Close Tab' buttons should be shown on the tab bar */
         ShowNewAndCloseTabButtons
@@ -286,16 +286,16 @@ public:
 
     /** 
      * Returns the current value of the specified @p property, cast to type T.
-	 * Internally properties are stored using the QVariant type and cast to T
-	 * using QVariant::value<T>();
+     * Internally properties are stored using the QVariant type and cast to T
+     * using QVariant::value<T>();
      *
      * If the specified @p property has not been set in this profile,
      * and a non-null parent was specified in the Profile's constructor,
      * the parent's value for @p property will be returned.
      */
     template <class T>
-	T property(Property property) const;
-	
+    T property(Property property) const;
+    
     /** Sets the value of the specified @p property to @p value. */
     virtual void setProperty(Property property,const QVariant& value);
     /** Returns true if the specified property has been set in this Profile instance. */
@@ -384,7 +384,7 @@ private:
     // to all Profile instances.
     static void registerProperty(const PropertyInfo& info); 
 
-	// fills the table with default names for profile properties
+    // fills the table with default names for profile properties
     // the first time it is called.
     // subsequent calls return immediately
     static void fillTableWithDefaultNames();
@@ -415,7 +415,7 @@ private:
 template <class T>
 inline T Profile::property(Property theProperty) const
 {
-	return property<QVariant>(theProperty).value<T>();
+    return property<QVariant>(theProperty).value<T>();
 }
 template <>
 inline QVariant Profile::property(Property property) const
@@ -461,7 +461,7 @@ public:
 class KDE_EXPORT ProfileGroup : public Profile
 {
 public:
-	typedef KSharedPtr<ProfileGroup> Ptr;
+    typedef KSharedPtr<ProfileGroup> Ptr;
 
     /** Construct a new profile group, which is hidden by default. */
     ProfileGroup(Profile::Ptr parent = Profile::Ptr());
@@ -549,8 +549,8 @@ public:
     virtual QStringList findProfiles();
     virtual bool readProfile(const QString& path , Profile::Ptr profile, QString& parentProfile);
 private:
-	void readProperties(const KConfig& config, Profile::Ptr profile, 
-						const Profile::PropertyInfo* properties);
+    void readProperties(const KConfig& config, Profile::Ptr profile, 
+                        const Profile::PropertyInfo* properties);
 };
 /** Interface for all classes which can write profile settings to a file. */
 class ProfileWriter
@@ -577,8 +577,8 @@ public:
     virtual bool writeProfile(const QString& path , const Profile::Ptr profile);
 
 private:
-	void writeProperties(KConfig& config, const Profile::Ptr profile, 
-						 const Profile::PropertyInfo* properties);
+    void writeProperties(KConfig& config, const Profile::Ptr profile, 
+                         const Profile::PropertyInfo* properties);
 };
 
 /** 

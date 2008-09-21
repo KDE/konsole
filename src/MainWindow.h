@@ -97,7 +97,7 @@ class MainWindow : public KXmlGuiWindow
          */
         Profile::Ptr defaultProfile() const;
 
-		
+        
     signals:
         /** 
          * Emitted by the main window to request the creation of a new session.
@@ -147,11 +147,11 @@ class MainWindow : public KXmlGuiWindow
         void viewFullScreen(bool fullScreen);
         void configureNotifications();
 
-		// single shot call to set the visibility of the menu bar.  Has no 
-		// effect if the menu bar is a MacOS-style top-level menu
-		void setMenuBarVisibleOnce(bool visible);
+        // single shot call to set the visibility of the menu bar.  Has no 
+        // effect if the menu bar is a MacOS-style top-level menu
+        void setMenuBarVisibleOnce(bool visible);
 
-		void openUrls(const QList<KUrl>& urls);
+        void openUrls(const QList<KUrl>& urls);
 
     private:
         void correctShortcuts();
@@ -159,7 +159,7 @@ class MainWindow : public KXmlGuiWindow
         void setupActions();
         void setupWidgets();
         QString activeSessionDir() const;
-		void disconnectController(SessionController* controller);
+        void disconnectController(SessionController* controller);
 
         // sets the active shortcuts of actions in 'dest' to the shortcuts of actions
         // with the same name in 'source' (see KAction::ActiveShortcut)
@@ -173,7 +173,7 @@ class MainWindow : public KXmlGuiWindow
         QPointer<SessionController> _pluggedController;
 
         Profile::Ptr _defaultProfile;
-		bool _menuBarVisibilitySet;
+        bool _menuBarVisibilitySet;
 };
 
 }

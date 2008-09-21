@@ -164,9 +164,9 @@ const HistoryType& Emulation::history()
 void Emulation::setCodec(const QTextCodec * qtc)
 {
   if (qtc)
-  	_codec = qtc;
+      _codec = qtc;
   else
-	 setCodec(LocaleCodec);
+     setCodec(LocaleCodec);
 
   delete _decoder;
   _decoder = _codec->makeDecoder();
@@ -264,36 +264,36 @@ TODO: Character composition from the old code.  See #96536
 
 void Emulation::receiveData(const char* text, int length)
 {
-	emit stateSet(NOTIFYACTIVITY);
+    emit stateSet(NOTIFYACTIVITY);
 
-	bufferedUpdate();
-    	
+    bufferedUpdate();
+        
     QString unicodeText = _decoder->toUnicode(text,length);
 
-	//send characters to terminal emulator
-	for (int i=0;i<unicodeText.length();i++)
-	{
-		receiveChar(unicodeText[i].unicode());
-	}
+    //send characters to terminal emulator
+    for (int i=0;i<unicodeText.length();i++)
+    {
+        receiveChar(unicodeText[i].unicode());
+    }
 
-	//look for z-modem indicator
-	//-- someone who understands more about z-modems that I do may be able to move
-	//this check into the above for loop?
-	for (int i=0;i<length;i++)
-	{
-		if (text[i] == '\030')
-    		{
-      			if ((length-i-1 > 3) && (strncmp(text+i+1, "B00", 3) == 0))
-      				emit zmodemDetected();
-    		}
-	}
+    //look for z-modem indicator
+    //-- someone who understands more about z-modems that I do may be able to move
+    //this check into the above for loop?
+    for (int i=0;i<length;i++)
+    {
+        if (text[i] == '\030')
+            {
+                  if ((length-i-1 > 3) && (strncmp(text+i+1, "B00", 3) == 0))
+                      emit zmodemDetected();
+            }
+    }
 }
 
 //OLDER VERSION
 //This version of onRcvBlock was commented out because
-//	a)  It decoded incoming characters one-by-one, which is slow in the current version of Qt (4.2 tech preview)
-//	b)  It messed up decoding of non-ASCII characters, with the result that (for example) chinese characters
-//	    were not printed properly.
+//    a)  It decoded incoming characters one-by-one, which is slow in the current version of Qt (4.2 tech preview)
+//    b)  It messed up decoding of non-ASCII characters, with the result that (for example) chinese characters
+//        were not printed properly.
 //
 //There is something about stopping the _decoder if "we get a control code halfway a multi-byte sequence" (see below)
 //which hasn't been ported into the newer function (above).  Hopefully someone who understands this better
@@ -333,7 +333,7 @@ void Emulation::receiveData(const char* text, int length)
     if (s[i] == '\030')
     {
       if ((len-i-1 > 3) && (strncmp(s+i+1, "B00", 3) == 0))
-      	emit zmodemDetected();
+          emit zmodemDetected();
     }
   }
 }*/

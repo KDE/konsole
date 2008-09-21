@@ -130,19 +130,19 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
             return profile;
     }
 
-	// guard to prevent problems if a profile specifies itself as its parent
-	// or if there is recursion in the "inheritance" chain
-	// (eg. two profiles, A and B, specifying each other as their parents)
-	static QStack<QString> recursionGuard;
-	PopStackOnExit<QString> popGuardOnExit(recursionGuard);
+    // guard to prevent problems if a profile specifies itself as its parent
+    // or if there is recursion in the "inheritance" chain
+    // (eg. two profiles, A and B, specifying each other as their parents)
+    static QStack<QString> recursionGuard;
+    PopStackOnExit<QString> popGuardOnExit(recursionGuard);
 
-	if (recursionGuard.contains(path))
-	{
-		kWarning() << "Ignoring attempt to load profile recursively from" << path;
-		return Profile::Ptr();
-	}
-	else
-		recursionGuard.push(path);
+    if (recursionGuard.contains(path))
+    {
+        kWarning() << "Ignoring attempt to load profile recursively from" << path;
+        return Profile::Ptr();
+    }
+    else
+        recursionGuard.push(path);
 
     // load the profile
     ProfileReader* reader = 0;
@@ -152,10 +152,10 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
         reader = new KDE4ProfileReader;
 
     if (!reader)
-	{
-		kWarning() << "Could not create loader to read profile from" << path;
+    {
+        kWarning() << "Could not create loader to read profile from" << path;
         return Profile::Ptr();
-	}
+    }
 
     Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile()));
     newProfile->setProperty(Profile::Path,path);
@@ -173,14 +173,14 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
 
     if (!result)
     {
-		kWarning() << "Could not load profile from " << path;
+        kWarning() << "Could not load profile from " << path;
         return Profile::Ptr();
     }
     else
-	{
+    {
         addProfile(newProfile);
-		return newProfile;
-	}
+        return newProfile;
+    }
 }
 QStringList SessionManager::availableProfilePaths() const
 {
@@ -209,7 +209,7 @@ void SessionManager::loadAllProfiles()
 }
 void SessionManager::saveState()
 {
-	// save default profile
+    // save default profile
     setDefaultProfile( _defaultProfile );
 
     // save shortcuts
@@ -222,21 +222,21 @@ void SessionManager::closeAll()
 {
     // close remaining sessions
     foreach( Session* session , _sessions )
-	{
+    {
         session->close();
-	}
-	_sessions.clear();	
+    }
+    _sessions.clear();    
 }
 SessionManager::~SessionManager()
 {
-	if (_sessions.count() > 0)
-	{
-		kWarning() << "Konsole SessionManager destroyed with sessions still alive";
-		// ensure that the Session doesn't later try to call back and do things to the 
-		// SessionManager
-		foreach(Session* session , _sessions)
-			disconnect(session , 0 , this , 0);
-	}
+    if (_sessions.count() > 0)
+    {
+        kWarning() << "Konsole SessionManager destroyed with sessions still alive";
+        // ensure that the Session doesn't later try to call back and do things to the 
+        // SessionManager
+        foreach(Session* session , _sessions)
+            disconnect(session , 0 , this , 0);
+    }
 }
 
 const QList<Session*> SessionManager::sessions()
@@ -261,11 +261,11 @@ Session* SessionManager::createSession(Profile::Ptr info)
 {
     Session* session = 0;
     
-	if (!info)
-		info = defaultProfile();
+    if (!info)
+        info = defaultProfile();
    
     if (!_types.contains(info))
-		addProfile(info);
+        addProfile(info);
 
     //configuration information found, create a new session based on this
     session = new Session();
@@ -281,7 +281,7 @@ Session* SessionManager::createSession(Profile::Ptr info)
 
     //add session to active list
     _sessions << session;
-	_sessionProfiles.insert(session,info);
+    _sessionProfiles.insert(session,info);
 
     Q_ASSERT( session );
 
@@ -356,12 +356,12 @@ void SessionManager::changeProfile(Profile::Ptr info ,
     // notify the world about the change
     emit profileChanged(info);
 
-	// save changes to disk, unless the profile is hidden, in which case
-	// it has no file on disk 
+    // save changes to disk, unless the profile is hidden, in which case
+    // it has no file on disk 
     if ( persistant && !info->isHidden() )
-	{
+    {
         info->setProperty(Profile::Path,saveProfile(info));
-	}
+    }
 }
 void SessionManager::applyProfile(Profile::Ptr info , bool modifiedPropertiesOnly)
 {
@@ -375,24 +375,24 @@ void SessionManager::applyProfile(Profile::Ptr info , bool modifiedPropertiesOnl
 }
 Profile::Ptr SessionManager::sessionProfile(Session* session) const
 {
-	return _sessionProfiles[session];
+    return _sessionProfiles[session];
 }
 void SessionManager::setSessionProfile(Session* session, Profile::Ptr profile)
 {
-	_sessionProfiles[session] = profile;
-	updateSession(session);
+    _sessionProfiles[session] = profile;
+    updateSession(session);
 }
 void SessionManager::applyProfile(Session* session, const Profile::Ptr info , bool modifiedPropertiesOnly)
 {
-	Q_ASSERT(info);
+    Q_ASSERT(info);
 
     _sessionProfiles[session] = info;
 
-	ShouldApplyProperty apply(info,modifiedPropertiesOnly);
+    ShouldApplyProperty apply(info,modifiedPropertiesOnly);
 
     // Basic session settings
-	if ( apply.shouldApply(Profile::Name) )
-		session->setTitle(Session::NameRole,info->name());
+    if ( apply.shouldApply(Profile::Name) )
+        session->setTitle(Session::NameRole,info->name());
 
     if ( apply.shouldApply(Profile::Command) )
         session->setProgram(info->command());
@@ -404,14 +404,14 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr info , bo
         session->setInitialWorkingDirectory(info->defaultWorkingDirectory());
 
     if ( apply.shouldApply(Profile::Environment) )
-	{
-		// add environment variable containing home directory of current profile
-		// (if specified)
-		QStringList environment = info->property<QStringList>(Profile::Environment);
-		environment << QString("PROFILEHOME=%1").arg(info->defaultWorkingDirectory());
+    {
+        // add environment variable containing home directory of current profile
+        // (if specified)
+        QStringList environment = info->property<QStringList>(Profile::Environment);
+        environment << QString("PROFILEHOME=%1").arg(info->defaultWorkingDirectory());
 
         session->setEnvironment(environment);
-	}
+    }
 
     if ( apply.shouldApply(Profile::Icon) )
         session->setIconName(info->icon());
@@ -494,9 +494,9 @@ bool SessionManager::deleteProfile(Profile::Ptr type)
         setShortcut(type,QKeySequence());
         _types.remove(type);
 
-		// mark the profile as hidden so that it does not show up in the 
-		// Manage Profiles dialog and is not saved to disk
-		type->setHidden(true);
+        // mark the profile as hidden so that it does not show up in the 
+        // Manage Profiles dialog and is not saved to disk
+        type->setHidden(true);
     }
 
     // if we just deleted the default session type,
@@ -536,8 +536,8 @@ QSet<Profile::Ptr> SessionManager::findFavorites()
 }
 void SessionManager::setFavorite(Profile::Ptr info , bool favorite)
 {
-	if (!_types.contains(info))
-		addProfile(info);
+    if (!_types.contains(info))
+        addProfile(info);
 
     if ( favorite && !_favorites.contains(info) )
     {
@@ -604,7 +604,7 @@ void SessionManager::setShortcut(Profile::Ptr info ,
     // have a path yet
     _shortcuts.insert(keySequence,data);
 
-	emit shortcutChanged(info,keySequence);
+    emit shortcutChanged(info,keySequence);
 }
 void SessionManager::loadFavorites()
 {
@@ -711,9 +711,9 @@ void SessionManager::sessionProfileCommandReceived(const QString& text)
         newProfile->setProperty(iter.key(),iter.value());
     } 
 
-	_sessionProfiles[session] = newProfile;
-	applyProfile(newProfile,true);
-	emit sessionUpdated(session);
+    _sessionProfiles[session] = newProfile;
+    applyProfile(newProfile,true);
+    emit sessionUpdated(session);
 }
 
 QKeySequence SessionManager::shortcut(Profile::Ptr info) const
@@ -733,7 +733,7 @@ QKeySequence SessionManager::shortcut(Profile::Ptr info) const
 K_GLOBAL_STATIC( SessionManager , theSessionManager )
 SessionManager* SessionManager::instance()
 {
-	return theSessionManager;
+    return theSessionManager;
 }
 
 SessionListModel::SessionListModel(QObject* parent)
@@ -743,93 +743,93 @@ SessionListModel::SessionListModel(QObject* parent)
 
 void SessionListModel::setSessions(const QList<Session*>& sessions)
 {
-	_sessions = sessions;
+    _sessions = sessions;
 
-	foreach(Session* session, sessions)
-		connect(session,SIGNAL(finished()),this,SLOT(sessionFinished()));
+    foreach(Session* session, sessions)
+        connect(session,SIGNAL(finished()),this,SLOT(sessionFinished()));
 
-	reset();
+    reset();
 }
 QVariant SessionListModel::data(const QModelIndex& index, int role) const
 {
-	Q_ASSERT(index.isValid());
-	
-	int row = index.row();
-	int column = index.column();
+    Q_ASSERT(index.isValid());
+    
+    int row = index.row();
+    int column = index.column();
 
-	Q_ASSERT( row >= 0 && row < _sessions.count() );
-	Q_ASSERT( column >= 0 && column < 2 );
+    Q_ASSERT( row >= 0 && row < _sessions.count() );
+    Q_ASSERT( column >= 0 && column < 2 );
 
-	switch (role)
-	{
-		case Qt::DisplayRole:
-			if (column == 1)
-				return _sessions[row]->title(Session::DisplayedTitleRole);
-			else if (column == 0)
-				return _sessions[row]->sessionId();
-			break;
-		case Qt::DecorationRole:
-			if (column == 1)
-				return KIcon(_sessions[row]->iconName());
-			else
-				return QVariant();
-	}
+    switch (role)
+    {
+        case Qt::DisplayRole:
+            if (column == 1)
+                return _sessions[row]->title(Session::DisplayedTitleRole);
+            else if (column == 0)
+                return _sessions[row]->sessionId();
+            break;
+        case Qt::DecorationRole:
+            if (column == 1)
+                return KIcon(_sessions[row]->iconName());
+            else
+                return QVariant();
+    }
 
-	return QVariant();
+    return QVariant();
 }
 QVariant SessionListModel::headerData(int section, Qt::Orientation orientation, 
-						int role) const
+                        int role) const
 {
-	if (role != Qt::DisplayRole)
-		return QVariant();
+    if (role != Qt::DisplayRole)
+        return QVariant();
 
-	if (orientation == Qt::Vertical)
-		return QVariant();
-	else
-	{
-		switch (section)
-		{
-			case 0:
-				return i18n("Number");
-			case 1:
-				return i18n("Title");
-			default:
-				return QVariant();
-		}	
-	}
+    if (orientation == Qt::Vertical)
+        return QVariant();
+    else
+    {
+        switch (section)
+        {
+            case 0:
+                return i18n("Number");
+            case 1:
+                return i18n("Title");
+            default:
+                return QVariant();
+        }    
+    }
 }
 
 int SessionListModel::columnCount(const QModelIndex&) const
 {
-	return 2;
+    return 2;
 }
 int SessionListModel::rowCount(const QModelIndex&) const
 {
-	return _sessions.count();
+    return _sessions.count();
 }
 QModelIndex SessionListModel::parent(const QModelIndex&) const
 {
-	return QModelIndex();
+    return QModelIndex();
 }
 void SessionListModel::sessionFinished()
 {
-	Session* session = qobject_cast<Session*>(sender());
-	int row = _sessions.indexOf(session);
-	
-	if (row != -1)
-	{
-		beginRemoveRows(QModelIndex(),row,row);
-		sessionRemoved(session);
-		_sessions.removeAt(row);
-		endRemoveRows();
-	}
+    Session* session = qobject_cast<Session*>(sender());
+    int row = _sessions.indexOf(session);
+    
+    if (row != -1)
+    {
+        beginRemoveRows(QModelIndex(),row,row);
+        sessionRemoved(session);
+        _sessions.removeAt(row);
+        endRemoveRows();
+    }
 }
 QModelIndex SessionListModel::index(int row, int column, const QModelIndex& parent) const
 {
-	if (hasIndex(row,column,parent))
-		return createIndex(row,column,_sessions[row]);
-	else
-		return QModelIndex();
+    if (hasIndex(row,column,parent))
+        return createIndex(row,column,_sessions[row]);
+    else
+        return QModelIndex();
 }
 
 #include "SessionManager.moc"

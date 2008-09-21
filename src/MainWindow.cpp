@@ -127,13 +127,13 @@ void MainWindow::removeMenuAccelerators()
 }
 void MainWindow::setMenuBarVisibleOnce(bool visible)
 {
-	if (_menuBarVisibilitySet || menuBar()->isTopLevelMenu() )
-		return;
+    if (_menuBarVisibilitySet || menuBar()->isTopLevelMenu() )
+        return;
 
-	menuBar()->setVisible(visible);
-	_toggleMenuBarAction->setChecked(visible);
+    menuBar()->setVisible(visible);
+    _toggleMenuBarAction->setChecked(visible);
 
-	_menuBarVisibilitySet = true;
+    _menuBarVisibilitySet = true;
 }
 
 void MainWindow::correctShortcuts()
@@ -162,15 +162,15 @@ ViewManager* MainWindow::viewManager() const
 
 void MainWindow::disconnectController(SessionController* controller)
 {
-	disconnect( controller , SIGNAL(titleChanged(ViewProperties*))
+    disconnect( controller , SIGNAL(titleChanged(ViewProperties*))
                      , this , SLOT(activeViewTitleChanged(ViewProperties*)) );
 
-	// KXmlGuiFactory::removeClient() will try to access actions associated
-	// with the controller internally, which may not be valid after the controller
-	// itself is no longer valid (after the associated session and or view have
-	// been destroyed)
-	if (controller->isValid())
-    	guiFactory()->removeClient(controller);
+    // KXmlGuiFactory::removeClient() will try to access actions associated
+    // with the controller internally, which may not be valid after the controller
+    // itself is no longer valid (after the associated session and or view have
+    // been destroyed)
+    if (controller->isValid())
+        guiFactory()->removeClient(controller);
 
     controller->setSearchBar(0);
 }
@@ -184,7 +184,7 @@ void MainWindow::activeViewChanged(SessionController* controller)
              SLOT(openUrl(const KUrl&)) );
 
     if ( _pluggedController )
-		disconnectController(_pluggedController);
+        disconnectController(_pluggedController);
 
     // listen for title changes from the current session
     Q_ASSERT( controller );
@@ -247,7 +247,7 @@ void MainWindow::setupActions()
     _bookmarkHandler = new BookmarkHandler( collection , bookmarkMenu->menu() , true , this );
     collection->addAction("bookmark" , bookmarkMenu);
 
-	connect( _bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)) );
+    connect( _bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)) );
 
     //TODO - The 'Add Bookmark' menu action currently has a Ctrl+B shortcut by
     // default which cannot be overridden
@@ -322,12 +322,12 @@ QString MainWindow::activeSessionDir() const
 
 void MainWindow::openUrls(const QList<KUrl>& urls)
 {
-	// TODO Implement support for SSH bookmarks here
-	foreach( const KUrl& url , urls )
-	{
-		if ( url.isLocalFile() )
-			emit newSessionRequest( _defaultProfile , url.path() , _viewManager );
-	}
+    // TODO Implement support for SSH bookmarks here
+    foreach( const KUrl& url , urls )
+    {
+        if ( url.isLocalFile() )
+            emit newSessionRequest( _defaultProfile , url.path() , _viewManager );
+    }
 }
 
 void MainWindow::newTab()
@@ -361,10 +361,10 @@ bool MainWindow::queryClose()
         return true;
     case KMessageBox::No:
         if (_pluggedController && _pluggedController->session())
-		{
-			disconnectController(_pluggedController);
-			_pluggedController->session()->close();
-		}
+        {
+            disconnectController(_pluggedController);
+            _pluggedController->session()->close();
+        }
         return false;
     case KMessageBox::Cancel:
         return false;

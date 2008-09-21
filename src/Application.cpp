@@ -121,30 +121,30 @@ int Application::newInstance()
 
     // create new session
     Session* session = createSession( window->defaultProfile() , QString() , window->viewManager() );
-	if ( !args->isSet("close") )
-		session->setAutoClose(false);
+    if ( !args->isSet("close") )
+        session->setAutoClose(false);
 
     // if the background-mode argument is supplied, start the background session
     // ( or bring to the front if it already exists )
     if ( args->isSet("background-mode") )
         startBackgroundMode(window);
     else
-	{
-		// Qt constrains top-level windows which have not been manually resized
-		// (via QWidget::resize()) to a maximum of 2/3rds of the screen size.
-		//
-		// This means that the terminal display might not get the width/height
-		// it asks for.  To work around this, the widget must be manually resized
-		// to its sizeHint().
-		//
-		// This problem only affects the first time the application is run.  After
-		// that KMainWindow will have manually resized the window to its saved size
-		// at this point (so the Qt::WA_Resized attribute will be set)
-		if (!window->testAttribute(Qt::WA_Resized))
-			window->resize(window->sizeHint());
+    {
+        // Qt constrains top-level windows which have not been manually resized
+        // (via QWidget::resize()) to a maximum of 2/3rds of the screen size.
+        //
+        // This means that the terminal display might not get the width/height
+        // it asks for.  To work around this, the widget must be manually resized
+        // to its sizeHint().
+        //
+        // This problem only affects the first time the application is run.  After
+        // that KMainWindow will have manually resized the window to its saved size
+        // at this point (so the Qt::WA_Resized attribute will be set)
+        if (!window->testAttribute(Qt::WA_Resized))
+            window->resize(window->sizeHint());
 
-		window->show();
-	}
+        window->show();
+    }
 
     return 0;
 }
@@ -233,7 +233,7 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
     if (!newProfile->isEmpty())
     {
         window->setDefaultProfile(newProfile); 
-    }	
+    }    
 }
 
 void Application::startBackgroundMode(MainWindow* window)
@@ -274,8 +274,8 @@ void Application::toggleBackgroundInstance()
 
 Application::~Application()
 {
-	SessionManager::instance()->closeAll();
-	SessionManager::instance()->saveState();
+    SessionManager::instance()->closeAll();
+    SessionManager::instance()->saveState();
 }
 
 void Application::detachView(Session* session)

@@ -48,7 +48,7 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     _emptyListAction = new QAction(i18n("No profiles available"),_group);
     _emptyListAction->setEnabled(false);
     
-	// TODO Sort list in alphabetical order
+    // TODO Sort list in alphabetical order
     QList<Profile::Ptr> list = manager->findFavorites().toList();
     QListIterator<Profile::Ptr> iter(list);
 
@@ -63,8 +63,8 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     // listen for future changes to the session list
     connect( manager , SIGNAL(favoriteStatusChanged(Profile::Ptr,bool)) , this ,
              SLOT(favoriteChanged(Profile::Ptr,bool)) );
-	connect( manager , SIGNAL(shortcutChanged(Profile::Ptr,QKeySequence)) , this , 
-			 SLOT(shortcutChanged(Profile::Ptr,QKeySequence)) );
+    connect( manager , SIGNAL(shortcutChanged(Profile::Ptr,QKeySequence)) , this , 
+             SLOT(shortcutChanged(Profile::Ptr,QKeySequence)) );
     connect( manager , SIGNAL(profileChanged(Profile::Ptr)) , this , 
              SLOT(profileChanged(Profile::Ptr)) );
 }
@@ -109,15 +109,15 @@ void ProfileList::updateAction(QAction* action , Profile::Ptr info)
 }
 void ProfileList::shortcutChanged(Profile::Ptr info,const QKeySequence& sequence)
 {
-	if ( !_addShortcuts )
-		return;
+    if ( !_addShortcuts )
+        return;
 
-	QAction* action = actionForKey(info);
+    QAction* action = actionForKey(info);
 
-	if ( action )
-	{
-		action->setShortcut(sequence);
-	}
+    if ( action )
+    {
+        action->setShortcut(sequence);
+    }
 }
 void ProfileList::syncWidgetActions(QWidget* widget, bool sync)
 {

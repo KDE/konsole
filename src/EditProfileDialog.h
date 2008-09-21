@@ -111,7 +111,7 @@ private slots:
 
     void profileNameChanged(const QString& text);
     void initialDirChanged(const QString& text);
-	void startInSameDir(bool);
+    void startInSameDir(bool);
     void commandChanged(const QString& text);
     void tabTitleFormatChanged(const QString& text);
     void remoteTabTitleFormatChanged(const QString& text);
@@ -127,7 +127,7 @@ private slots:
 
     // appearance page
     void setFontSize(int pointSize);
-	void setAntialiasText(bool enable);
+    void setAntialiasText(bool enable);
     void showFontDialog();
     void newColorScheme();
     void editColorScheme();

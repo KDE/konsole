@@ -32,7 +32,7 @@
 
 namespace Ui
 {
-	class CopyInputDialog;
+    class CopyInputDialog;
 }
 
 namespace Konsole
@@ -44,25 +44,25 @@ class CopyInputDialog : public KDialog
 Q_OBJECT
 
 public:
-	CopyInputDialog(QWidget* parent = 0);
+    CopyInputDialog(QWidget* parent = 0);
 
-	void setMasterSession(Session* master);
-	Session* masterSession() const;
+    void setMasterSession(Session* master);
+    Session* masterSession() const;
 
-	void setChosenSessions(const QSet<Session*>& sessions);
-	QSet<Session*> chosenSessions() const;
+    void setChosenSessions(const QSet<Session*>& sessions);
+    QSet<Session*> chosenSessions() const;
 
 private slots:
-	void selectAll() { setSelectionChecked(true); };
-	void deselectAll() { setSelectionChecked(false); };
+    void selectAll() { setSelectionChecked(true); };
+    void deselectAll() { setSelectionChecked(false); };
 
 private:
-	void setSelectionChecked(bool checked);
-	void setRowChecked(int row, bool checked);
+    void setSelectionChecked(bool checked);
+    void setRowChecked(int row, bool checked);
 
-	Ui::CopyInputDialog* _ui;
-	CheckableSessionModel* _model;
-	QPointer<Session> _masterSession;
+    Ui::CopyInputDialog* _ui;
+    CheckableSessionModel* _model;
+    QPointer<Session> _masterSession;
 };
 
 class CheckableSessionModel : public SessionListModel
@@ -70,27 +70,27 @@ class CheckableSessionModel : public SessionListModel
 Q_OBJECT 
 
 public:
-	CheckableSessionModel(QObject* parent); 
+    CheckableSessionModel(QObject* parent); 
 
-	void setCheckColumn(int column);
-	int checkColumn() const;
+    void setCheckColumn(int column);
+    int checkColumn() const;
 
-	void setCheckable(Session* session, bool checkable);
-	
-	void setCheckedSessions(const QSet<Session*> sessions);
-	QSet<Session*> checkedSessions() const;
+    void setCheckable(Session* session, bool checkable);
+    
+    void setCheckedSessions(const QSet<Session*> sessions);
+    QSet<Session*> checkedSessions() const;
 
-	virtual Qt::ItemFlags flags(const QModelIndex& index) const;
-	virtual QVariant data(const QModelIndex& index, int role) const;
-	virtual bool setData(const QModelIndex& index, const QVariant& value, int role);
+    virtual Qt::ItemFlags flags(const QModelIndex& index) const;
+    virtual QVariant data(const QModelIndex& index, int role) const;
+    virtual bool setData(const QModelIndex& index, const QVariant& value, int role);
 
 protected:
-	virtual void sessionRemoved(Session*);
+    virtual void sessionRemoved(Session*);
 
 private:
-	QSet<Session*> _checkedSessions;
-	QSet<Session*> _fixedSessions;
-	int _checkColumn;
+    QSet<Session*> _checkedSessions;
+    QSet<Session*> _fixedSessions;
+    int _checkColumn;
 };
 inline int CheckableSessionModel::checkColumn() const
 { return _checkColumn; }

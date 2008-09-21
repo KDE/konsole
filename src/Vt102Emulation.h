@@ -114,7 +114,7 @@ protected:
   
 
 private slots:
-		
+        
   //causes changeTitle() to be emitted for each (int,QString) pair in pendingTitleUpdates
   //used to buffer multiple title updates
   void updateTitle();

@@ -60,16 +60,16 @@ public:
     ManageProfilesDialog(QWidget* parent = 0);
     virtual ~ManageProfilesDialog();
 
-	/** 
-	 * Specifies whether the shorcut editor should be show.
-	 * The shortcut editor allows shortcuts to be associated with 
-	 * profiles.  When a shortcut is changed, the dialog will call
-	 * SessionManager::instance()->setShortcut() to update the shortcut
-	 * associated with the profile.
-	 *
-	 * By default the editor is visible.
-	 */
-	void setShortcutEditorVisible(bool visible);
+    /** 
+     * Specifies whether the shorcut editor should be show.
+     * The shortcut editor allows shortcuts to be associated with 
+     * profiles.  When a shortcut is changed, the dialog will call
+     * SessionManager::instance()->setShortcut() to update the shortcut
+     * associated with the profile.
+     *
+     * By default the editor is visible.
+     */
+    void setShortcutEditorVisible(bool visible);
 
 protected:
     virtual void showEvent(QShowEvent* event);
@@ -118,8 +118,8 @@ private:
 class StyledBackgroundPainter 
 {
 public:
-	static void drawBackground(QPainter* painter, const QStyleOptionViewItem& option,
-				const QModelIndex& index);
+    static void drawBackground(QPainter* painter, const QStyleOptionViewItem& option,
+                const QModelIndex& index);
 };
 
 class FavoriteItemDelegate : public QStyledItemDelegate
@@ -129,8 +129,8 @@ public:
 
     virtual bool editorEvent(QEvent* event,QAbstractItemModel* model,
                              const QStyleOptionViewItem& option,const QModelIndex& index);
-	virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, 
-						const QModelIndex& index) const;
+    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, 
+                        const QModelIndex& index) const;
 };
 
 class ShortcutItemDelegate : public QStyledItemDelegate
@@ -138,20 +138,20 @@ class ShortcutItemDelegate : public QStyledItemDelegate
 Q_OBJECT
 
 public:
-	ShortcutItemDelegate(QObject* parent = 0);
+    ShortcutItemDelegate(QObject* parent = 0);
 
-	virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
-	virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, 
-									const QModelIndex& index) const;
-	virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, 
-						const QModelIndex& index) const;
+    virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
+    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, 
+                                    const QModelIndex& index) const;
+    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, 
+                        const QModelIndex& index) const;
 
 private slots:
-	void editorModified(const QKeySequence& keys);
+    void editorModified(const QKeySequence& keys);
 
 private:
-	mutable QSet<QWidget*> _modifiedEditors;
-	mutable QSet<QModelIndex> _itemsBeingEdited;
+    mutable QSet<QWidget*> _modifiedEditors;
+    mutable QSet<QModelIndex> _itemsBeingEdited;
 };
 
 }

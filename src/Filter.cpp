@@ -170,7 +170,7 @@ void TerminalImageFilterChain::setImage(const Character* const image , int lines
         // terminal image to avoid adding this imaginary character for wrapped
         // lines
         if ( !(lineProperties.value(i,LINE_DEFAULT) & LINE_WRAPPED) )
-        	lineStream << QChar('\n');
+            lineStream << QChar('\n');
     }
     decoder.end();
 }

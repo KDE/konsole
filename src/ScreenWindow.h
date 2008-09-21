@@ -65,7 +65,7 @@ public:
      * between all views on a session.
      */
     ScreenWindow(QObject* parent = 0);
-	virtual ~ScreenWindow();
+    virtual ~ScreenWindow();
 
     /** Sets the screen which this window looks onto */
     void setScreen(Screen* screen);
@@ -141,8 +141,8 @@ public:
      */
     void clearSelection();
 
-	/** Sets the number of lines in the window */
-	void setWindowLines(int lines);
+    /** Sets the number of lines in the window */
+    void setWindowLines(int lines);
     /** Returns the number of lines in the window */
     int windowLines() const;
     /** Returns the number of columns in the window */
@@ -240,15 +240,15 @@ signals:
     void selectionChanged();
 
 private:
-	int endWindowLine() const;
-	void fillUnusedArea();
+    int endWindowLine() const;
+    void fillUnusedArea();
 
     Screen* _screen; // see setScreen() , screen()
-	Character* _windowBuffer;
-	int _windowBufferSize;
-	bool _bufferNeedsUpdate;
+    Character* _windowBuffer;
+    int _windowBufferSize;
+    bool _bufferNeedsUpdate;
 
-	int  _windowLines;
+    int  _windowLines;
     int  _currentLine; // see scrollTo() , currentLine()
     bool _trackOutput; // see setTrackOutput() , trackOutput() 
     int  _scrollCount; // count of lines which the window has been scrolled by since
