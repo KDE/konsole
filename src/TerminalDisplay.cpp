@@ -1664,14 +1664,9 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
   else if ( ev->button() == Qt::RightButton )
   {
     if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier)) 
-    {
-        emit configureRequest( this, 
-                               ev->modifiers() & (Qt::ShiftModifier|Qt::ControlModifier), 
-                               ev->pos()
-                             );
-    }
+        emit configureRequest(ev->pos());
     else
-      emit mouseSignal( 2, charColumn +1, charLine +1 +_scrollBar->value() -_scrollBar->maximum() , 0);
+        emit mouseSignal( 2, charColumn +1, charLine +1 +_scrollBar->value() -_scrollBar->maximum() , 0);
   }
 }
 

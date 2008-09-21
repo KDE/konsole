@@ -118,8 +118,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
             SLOT(sessionResizeRequest(const QSize&)) );
 
     // listen for popup menu requests
-    connect( _view , SIGNAL(configureRequest(TerminalDisplay*,int,const QPoint&)) , this,
-            SLOT(showDisplayContextMenu(TerminalDisplay*,int,const QPoint&)) );
+    connect( _view , SIGNAL(configureRequest(QPoint)) , this,
+            SLOT(showDisplayContextMenu(QPoint)) );
 
     // move view to newest output when keystrokes occur
     connect( _view , SIGNAL(keyPressedSignal(QKeyEvent*)) , this ,
@@ -1053,23 +1053,20 @@ void SessionController::sessionTitleChanged()
        setTitle( title );
 }
 
-void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , int /*state*/, const QPoint& position)
+void SessionController::showDisplayContextMenu(const QPoint& position)
 {
-    QMenu* popup = 0;
-
     // needed to make sure the popup menu is available, even if a hosting
     // application did not merge our GUI.
-    if (!factory()) {
-        if (!clientBuilder()) {
+    if (!factory()) 
+    {
+        if (!clientBuilder()) 
             setClientBuilder(new KXMLGUIBuilder(_view));
-        }
-        KXMLGUIFactory* f = new KXMLGUIFactory(clientBuilder(), this);
-        f->addClient(this);
+        
+        KXMLGUIFactory* factory = new KXMLGUIFactory(clientBuilder(), this);
+        factory->addClient(this);
     }
 
-    if ( factory() )
-        popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu",this));
-
+    QMenu* popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu",this));
     if (popup)
     {
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
@@ -1096,7 +1093,7 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
     }
     else
     {
-        kWarning(1211) << "Unable to display popup menu for session"
+        kWarning() << "Unable to display popup menu for session"
                    << _session->title(Session::NameRole)
                    << ", no GUI factory available to build the popup.";
     }

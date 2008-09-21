@@ -505,7 +505,7 @@ signals:
      *
      * This can be used to display a context menu.
      */
-    void configureRequest( TerminalDisplay*, int state, const QPoint& position );
+    void configureRequest(const QPoint& position);
 
     /**
      * When a shortcut which is also a valid terminal key sequence is pressed while 
