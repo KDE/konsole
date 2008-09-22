@@ -725,7 +725,8 @@ void SessionController::closeSession()
     if (_preventClose)
         return;
 
-    _session->close();
+    if (confirmClose())
+        _session->close();
 }
 
 void SessionController::openBrowser()
