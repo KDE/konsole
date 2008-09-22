@@ -168,7 +168,6 @@ private slots:
     void copyInputTo();
     void editCurrentProfile();
     void changeCodec(QTextCodec* codec);
-    //void searchHistory();
     void searchHistory(bool showSearchBar);
     void findNextInHistory();
     void findPreviousInHistory();
@@ -202,11 +201,8 @@ private slots:
 
     void requireUrlFilterUpdate();
     void highlightMatches(bool highlight);
-
     void scrollBackOptionsChanged(int mode , int lines);
-
     void sessionResizeRequest(const QSize& size);
-
     void trackOutput(QKeyEvent* event);  // move view to end of current output
                                          // when a key press occurs in the 
                                          // display area
