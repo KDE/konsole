@@ -47,6 +47,20 @@ namespace Konsole
 class ColorEntry
 {
 public:
+  /** Specifies the weight to use when drawing text with this color. */
+  enum FontWeight 
+  {
+    /** Always draw text in this color with a bold weight. */
+    Bold,
+    /** Always draw text in this color with a normal weight. */
+    Normal,
+    /** 
+     * Use the current font weight set by the terminal application.  
+     * This is the default behavior.
+     */
+    UseCurrentFormat
+  };
+
   /** 
    * Constructs a new color palette entry.
    *
@@ -54,13 +68,14 @@ public:
    * @param tr Specifies that the color should be transparent when used as a background color.
    * @param b Specifies that text drawn with this color should be bold.
    */
-  ColorEntry(QColor c, bool tr, bool b) : color(c), transparent(tr), bold(b) {}
+  ColorEntry(QColor c, bool tr, FontWeight weight = UseCurrentFormat) 
+          : color(c), transparent(tr), fontWeight(weight) {}
 
   /**
    * Constructs a new color palette entry with an undefined color, and
    * with the transparent and bold flags set to false.
    */ 
-  ColorEntry() : transparent(false), bold(false) {} 
+  ColorEntry() : transparent(false), fontWeight(UseCurrentFormat) {} 
  
   /**
    * Sets the color, transparency and boldness of this color to those of @p rhs.
@@ -69,7 +84,7 @@ public:
   { 
        color = rhs.color; 
        transparent = rhs.transparent; 
-       bold = rhs.bold; 
+       fontWeight = rhs.fontWeight; 
   }
 
   /** The color value of this entry for display. */
@@ -81,10 +96,10 @@ public:
    */
   bool   transparent;
   /**
-   * If true characters drawn using this color should be bold.
+   * Specifies the font weight to use when drawing text with this color. 
    * This is not applicable when the color is used to draw a character's background.
    */
-  bool   bold;        
+  FontWeight fontWeight;        
 };
 
 

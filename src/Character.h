@@ -102,7 +102,7 @@ public:
    * it is drawn with the specified @p palette, independent of whether
    * or not the character has the RE_BOLD rendition flag. 
    */
-  bool   isBold(const ColorEntry* base) const;
+  ColorEntry::FontWeight fontWeight(const ColorEntry* base) const;
   
   /** 
    * Compares two characters and returns true if they have the same unicode character value,
@@ -140,12 +140,14 @@ inline bool Character::isTransparent(const ColorEntry* base) const
           base[backgroundColor._u+2+(backgroundColor._v?BASE_COLORS:0)].transparent);
 }
 
-inline bool Character::isBold(const ColorEntry* base) const
+inline ColorEntry::FontWeight Character::fontWeight(const ColorEntry* base) const
 {
-  return ((backgroundColor._colorSpace == COLOR_SPACE_DEFAULT) &&
-            base[backgroundColor._u+0+(backgroundColor._v?BASE_COLORS:0)].bold)
-      || ((backgroundColor._colorSpace == COLOR_SPACE_SYSTEM) &&
-            base[backgroundColor._u+2+(backgroundColor._v?BASE_COLORS:0)].bold);
+    if (backgroundColor._colorSpace == COLOR_SPACE_DEFAULT)
+        return base[backgroundColor._u+0+(backgroundColor._v?BASE_COLORS:0)].fontWeight;
+    else if (backgroundColor._colorSpace == COLOR_SPACE_SYSTEM)
+        return base[backgroundColor._u+2+(backgroundColor._v?BASE_COLORS:0)].fontWeight;
+    else
+        return ColorEntry::UseCurrentFormat;
 }
 
 extern unsigned short vt100_graphics[32];

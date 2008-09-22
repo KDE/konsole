@@ -42,27 +42,27 @@ const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] =
  // gamma correction for the dim colors to compensate for bright X screens.
  // It contains the 8 ansiterm/xterm colors in 2 intensities.
 {
-    ColorEntry( QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry(
-QColor(0xFF,0xFF,0xFF), 1, 0 ), // Dfore, Dback
-    ColorEntry( QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry(
-QColor(0xB2,0x18,0x18), 0, 0 ), // Black, Red
-    ColorEntry( QColor(0x18,0xB2,0x18), 0, 0 ), ColorEntry(
-QColor(0xB2,0x68,0x18), 0, 0 ), // Green, Yellow
-    ColorEntry( QColor(0x18,0x18,0xB2), 0, 0 ), ColorEntry(
-QColor(0xB2,0x18,0xB2), 0, 0 ), // Blue, Magenta
-    ColorEntry( QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry(
-QColor(0xB2,0xB2,0xB2), 0, 0 ), // Cyan, White
+    ColorEntry( QColor(0x00,0x00,0x00), 0), ColorEntry(
+QColor(0xFF,0xFF,0xFF), 1), // Dfore, Dback
+    ColorEntry( QColor(0x00,0x00,0x00), 0), ColorEntry(
+QColor(0xB2,0x18,0x18), 0), // Black, Red
+    ColorEntry( QColor(0x18,0xB2,0x18), 0), ColorEntry(
+QColor(0xB2,0x68,0x18), 0), // Green, Yellow
+    ColorEntry( QColor(0x18,0x18,0xB2), 0), ColorEntry(
+QColor(0xB2,0x18,0xB2), 0), // Blue, Magenta
+    ColorEntry( QColor(0x18,0xB2,0xB2), 0), ColorEntry(
+QColor(0xB2,0xB2,0xB2), 0), // Cyan, White
     // intensive
-    ColorEntry( QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry(
-QColor(0xFF,0xFF,0xFF), 1, 0 ),
-    ColorEntry( QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry(
-QColor(0xFF,0x54,0x54), 0, 0 ),
-    ColorEntry( QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry(
-QColor(0xFF,0xFF,0x54), 0, 0 ),
-    ColorEntry( QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry(
-QColor(0xFF,0x54,0xFF), 0, 0 ),
-    ColorEntry( QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry(
-QColor(0xFF,0xFF,0xFF), 0, 0 )
+    ColorEntry( QColor(0x00,0x00,0x00), 0), ColorEntry(
+QColor(0xFF,0xFF,0xFF), 1),
+    ColorEntry( QColor(0x68,0x68,0x68), 0), ColorEntry(
+QColor(0xFF,0x54,0x54), 0),
+    ColorEntry( QColor(0x54,0xFF,0x54), 0), ColorEntry(
+QColor(0xFF,0xFF,0x54), 0),
+    ColorEntry( QColor(0x54,0x54,0xFF), 0), ColorEntry(
+QColor(0xFF,0x54,0xFF), 0),
+    ColorEntry( QColor(0x54,0xFF,0xFF), 0), ColorEntry(
+QColor(0xFF,0xFF,0xFF), 0)
 };
 
 const char* ColorScheme::colorNames[TABLE_COLORS] =
@@ -310,7 +310,15 @@ void ColorScheme::readColorEntry(KConfig& config , int index)
 
     entry.color = configGroup.readEntry("Color",QColor());
     entry.transparent = configGroup.readEntry("Transparent",false);
-    entry.bold = configGroup.readEntry("Bold",false);
+
+    // Deprecated key from KDE 4.0 which set 'Bold' to true to force
+    // a color to be bold or false to use the current format
+    //
+    // TODO - Add a new tri-state key which allows for bold, normal or
+    // current format
+    if (configGroup.hasKey("Bold"))
+        entry.fontWeight = configGroup.readEntry("Bold",false) ? ColorEntry::Bold :
+                                                                 ColorEntry::UseCurrentFormat;
 
     quint16 hue = configGroup.readEntry("MaxRandomHue",0);
     quint8 value = configGroup.readEntry("MaxRandomValue",0);
@@ -327,7 +335,10 @@ void ColorScheme::writeColorEntry(KConfig& config , const QString& colorName, co
 
     configGroup.writeEntry("Color",entry.color);
     configGroup.writeEntry("Transparency",(bool)entry.transparent);
-    configGroup.writeEntry("Bold",(bool)entry.bold);
+    if (entry.fontWeight != ColorEntry::UseCurrentFormat)
+    {
+        configGroup.writeEntry("Bold",entry.fontWeight == ColorEntry::Bold);
+    }
 
     // record randomization if this color has randomization or 
     // if one of the keys already exists 
@@ -470,7 +481,7 @@ bool KDE3ColorSchemeReader::readColorLine(const QString& line,ColorScheme* schem
     ColorEntry entry;
     entry.color = QColor(red,green,blue);
     entry.transparent = ( transparent != 0 );
-    entry.bold = ( bold != 0 );
+    entry.fontWeight = ( bold != 0 ) ? ColorEntry::Bold : ColorEntry::UseCurrentFormat;
 
     scheme->setColorTableEntry(index,entry);
     return true;

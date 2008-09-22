@@ -172,10 +172,15 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
             //build up style string
             QString style;
 
-            if ( _lastRendition & RE_BOLD ||
-                             (_colorTable && characters[i].isBold(_colorTable)) )
-                    style.append("font-weight:bold;");
-
+            bool useBold;
+            ColorEntry::FontWeight weight = characters[i].fontWeight(_colorTable);
+            if (weight == ColorEntry::UseCurrentFormat)
+                useBold = _lastRendition & RE_BOLD;
+            else
+                useBold = weight == ColorEntry::Bold;
+            
+            if (useBold)
+                style.append("font-weight:bold;");
 
             if ( _lastRendition & RE_UNDERLINE )
                     style.append("font-decoration:underline;");
