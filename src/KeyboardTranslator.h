@@ -85,7 +85,9 @@ public:
          */
         AlternateScreenState = 8,
         /** Indicates that any of the modifier keys is active. */ 
-        AnyModifierState = 16
+        AnyModifierState = 16,
+        /** Indicates that the numpad is in application mode. */
+        ApplicationKeypadState = 32
     };
     Q_DECLARE_FLAGS(States,State)
 

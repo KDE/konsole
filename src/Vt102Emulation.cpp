@@ -952,6 +952,8 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
     if ( getMode(MODE_Ansi)     ) states |= KeyboardTranslator::AnsiState;
     if ( getMode(MODE_AppCuKeys)) states |= KeyboardTranslator::CursorKeysState;
     if ( getMode(MODE_AppScreen)) states |= KeyboardTranslator::AlternateScreenState;
+    if ( getMode(MODE_AppKeyPad) && (modifiers & Qt::KeypadModifier) ) 
+        states |= KeyboardTranslator::ApplicationKeypadState;
 
     // check flow control state
     if (modifiers & Qt::ControlModifier)

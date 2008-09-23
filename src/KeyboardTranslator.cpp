@@ -411,6 +411,8 @@ bool KeyboardTranslatorReader::parseAsStateFlag(const QString& item , KeyboardTr
         flag = KeyboardTranslator::AlternateScreenState;
     else if ( item == "anymod" )
         flag = KeyboardTranslator::AnyModifierState;
+    else if ( item == "appkeypad" )
+        flag = KeyboardTranslator::ApplicationKeypadState;
     else
         return false;
 
@@ -754,6 +756,8 @@ void KeyboardTranslator::Entry::insertState( QString& item , int state ) const
         item += "AppCuKeys";
     else if ( state == KeyboardTranslator::AnyModifierState )
         item += "AnyMod";
+    else if ( state == KeyboardTranslator::ApplicationKeypadState )
+        item += "AppKeypad";
 }
 QString KeyboardTranslator::Entry::resultToString(bool expandWildCards,Qt::KeyboardModifiers modifiers) const
 {
@@ -782,7 +786,8 @@ QString KeyboardTranslator::Entry::conditionToString() const
     insertModifier( result , Qt::ShiftModifier );
     insertModifier( result , Qt::ControlModifier );
     insertModifier( result , Qt::AltModifier );
-    insertModifier( result , Qt::MetaModifier ); 
+    insertModifier( result , Qt::MetaModifier );
+    insertModifier( result , Qt::KeypadModifier );
 
     // add states
     insertState( result , KeyboardTranslator::AlternateScreenState );
@@ -790,6 +795,7 @@ QString KeyboardTranslator::Entry::conditionToString() const
     insertState( result , KeyboardTranslator::AnsiState );
     insertState( result , KeyboardTranslator::CursorKeysState );
     insertState( result , KeyboardTranslator::AnyModifierState );
+    insertState( result , KeyboardTranslator::ApplicationKeypadState );
 
     return result;
 }
