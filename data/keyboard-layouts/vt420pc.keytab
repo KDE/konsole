@@ -1,3 +1,8 @@
+#
+# NOTE: This keyboard binding is not installed because it
+# apparently doesn't work with actual VT420 systems 
+# (see BUG:170220)
+#
 # [vt420pc.keytab] Konsole Keyboard Table (VT420pc keys)
 # adapted by ferdinand gassauer f.gassauer@aon.at
 # Nov 2000
