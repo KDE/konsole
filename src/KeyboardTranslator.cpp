@@ -329,12 +329,15 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
     for ( int i = 0 ; i < text.count() ; i++ )
     {
         const QChar& ch = text[i];
+        bool isFirstLetter = i == 0;
         bool isLastLetter = ( i == text.count()-1 );
-
         endOfItem = true;
         if ( ch.isLetterOrNumber() )
         {
             endOfItem = false;
+            buffer.append(ch);
+        } else if ( isFirstLetter )
+        {
             buffer.append(ch);
         }
 
@@ -518,7 +521,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
     static QRegExp title("keyboard\\s+\"(.*)\"");
     // key line: key KeySequence : "output"
     // key line: key KeySequence : command
-    static QRegExp key("key\\s+([\\w\\+\\s\\-]+)\\s*:\\s*(\"(.*)\"|\\w+)");
+    static QRegExp key("key\\s+([\\w\\+\\s\\-\\*\\.]+)\\s*:\\s*(\"(.*)\"|\\w+)");
 
     QList<Token> list;
     if ( text.isEmpty() ) 
@@ -551,7 +554,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
             // capturedTexts()[3] is the output string
            Token outputToken = { Token::OutputText , key.capturedTexts()[3] };
            list << outputToken;
-        }     
+        }    
     }
     else
     {
