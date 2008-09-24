@@ -84,41 +84,32 @@ class Vt102Emulation : public Emulation
 Q_OBJECT
 
 public:
-
   /** Constructs a new emulation */
   Vt102Emulation();
   ~Vt102Emulation();
   
-  // reimplemented
+  // reimplemented from Emulation
   virtual void clearEntireScreen();
   virtual void reset();
-  
-  // reimplemented
   virtual char getErase() const;
   
 public slots: 
-
-  // reimplemented 
+  // reimplemented from Emulation 
   virtual void sendString(const char*,int length = -1);
   virtual void sendText(const QString& text);
   virtual void sendKeyEvent(QKeyEvent*);
-  virtual void sendMouseEvent( int buttons, int column, int line , int eventType );
+  virtual void sendMouseEvent(int buttons, int column, int line, int eventType);
   
 protected:
-  // reimplemented
-  virtual void setMode    (int mode);
-  virtual void resetMode  (int mode);
-
-  // reimplemented 
+  // reimplemented from Emulation
+  virtual void setMode(int mode);
+  virtual void resetMode(int mode);
   virtual void receiveChar(int cc);
   
-
 private slots:
-        
   //causes changeTitle() to be emitted for each (int,QString) pair in pendingTitleUpdates
   //used to buffer multiple title updates
   void updateTitle();
-
 
 private:
   unsigned short applyCharset(unsigned short c);
@@ -143,24 +134,27 @@ private:
   // (except MODE_Allow132Columns)
   void resetModes();
 
-  void resetToken();
-#define MAXPBUF 80
-  void pushToToken(int cc);
-  int pbuf[MAXPBUF]; //FIXME: overflow?
-  int ppos;
+  void resetTokenizer();
+  #define MAX_TOKEN_LENGTH 80
+  void addToCurrentToken(int cc);
+  int tokenBuffer[MAX_TOKEN_LENGTH]; //FIXME: overflow?
+  int tokenBufferPos;
 #define MAXARGS 15
   void addDigit(int dig);
   void addArgument();
   int argv[MAXARGS];
   int argc;
   void initTokenizer();
-  int tbl[256];
 
-  void scan_buffer_report(); //FIXME: rename
-  void ReportErrorToken();   //FIXME: rename
+  // Set of flags for each of the ASCII characters which indicates
+  // what category they fall into (printable character, control, digit etc.)
+  // for the purposes of decoding terminal output
+  int charClass[256];
 
-  void tau(int code, int p, int q);
-  void XtermHack();
+  void reportDecodingError(); 
+
+  void processToken(int code, int p, int q);
+  void processWindowAttributeChange();
 
   void reportTerminalType();
   void reportSecondaryAttributes();
@@ -188,7 +182,6 @@ private:
   //output from the terminal
   QHash<int,QString> _pendingTitleUpdates;
   QTimer* _titleUpdateTimer;
-  
 };
 
 }
