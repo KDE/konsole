@@ -72,11 +72,6 @@ Vt102Emulation::Vt102Emulation()
   reset();
 }
 
-DECpar::DECpar()
-{
-    memset(&mode,false,MODE_total * sizeof(bool));
-}
-
 Vt102Emulation::~Vt102Emulation()
 {}
 
@@ -1112,20 +1107,20 @@ void Vt102Emulation::resetModes()
   resetMode(MODE_AppScreen);  saveMode(MODE_AppScreen);
   resetMode(MODE_AppCuKeys);  saveMode(MODE_AppCuKeys);
   resetMode(MODE_AppKeyPad);  saveMode(MODE_AppKeyPad);
-  resetMode(MODE_NewLine  );
-    setMode(MODE_Ansi     );
+  resetMode(MODE_NewLine);
+    setMode(MODE_Ansi);
 }
 
 void Vt102Emulation::setMode(int m)
 {
-  _currParm.mode[m] = true;
+  _currentModes.mode[m] = true;
   switch (m)
   {
     case MODE_132Columns:
         if (getMode(MODE_Allow132Columns))
             clearScreenAndSetColumns(132);
         else
-            _currParm.mode[m] = false;
+            _currentModes.mode[m] = false;
         break;
     case MODE_Mouse1000:
     case MODE_Mouse1001:
@@ -1147,7 +1142,7 @@ void Vt102Emulation::setMode(int m)
 
 void Vt102Emulation::resetMode(int m)
 {
-  _currParm.mode[m] = false;
+  _currentModes.mode[m] = false;
   switch (m)
   {
     case MODE_132Columns:
@@ -1175,12 +1170,12 @@ void Vt102Emulation::resetMode(int m)
 
 void Vt102Emulation::saveMode(int m)
 {
-  _saveParm.mode[m] = _currParm.mode[m];
+  _savedModes.mode[m] = _currentModes.mode[m];
 }
 
 void Vt102Emulation::restoreMode(int m)
 {
-  if (_saveParm.mode[m]) 
+  if (_savedModes.mode[m]) 
       setMode(m); 
   else 
       resetMode(m);
@@ -1188,7 +1183,7 @@ void Vt102Emulation::restoreMode(int m)
 
 bool Vt102Emulation::getMode(int m)
 {
-  return _currParm.mode[m];
+  return _currentModes.mode[m];
 }
 
 char Vt102Emulation::getErase() const

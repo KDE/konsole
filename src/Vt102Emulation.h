@@ -50,14 +50,6 @@
 namespace Konsole
 {
 
-class DECpar
-{
-public:
-  // Initializes all modes to false
-  DECpar();
-  bool mode[MODE_total];
-};
-
 struct CharCodes
 {
   // coding info
@@ -172,8 +164,18 @@ private:
 
   CharCodes _charset[2];
 
-  DECpar _currParm;
-  DECpar _saveParm;
+  class TerminalState
+  {
+  public:
+    // Initializes all modes to false
+    TerminalState()
+    { memset(&mode,false,MODE_total * sizeof(bool)); }
+
+    bool mode[MODE_total];
+  };
+
+  TerminalState _currentModes;
+  TerminalState _savedModes;
 
   //hash table and timer for buffering calls to the session instance 
   //to update the name of the session
