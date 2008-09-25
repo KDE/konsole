@@ -43,13 +43,6 @@
 namespace Konsole
 {
 
-/*!
-*/
-struct ScreenParm
-{
-  int mode[MODES_SCREEN];
-};
-
 class TerminalCharacterDecoder;
 
 /**
@@ -387,11 +380,13 @@ public:
     
 
     /** Return the number of lines. */
-    int  getLines()   { return lines; }
+    int getLines() const   
+    { return lines; }
     /** Return the number of columns. */
-    int  getColumns() { return columns; }
+    int getColumns() const 
+    { return columns; }
     /** Return the number of lines in the history buffer. */
-    int  getHistLines ();
+    int getHistLines() const;
     /** 
      * Sets the type of storage used to keep lines in the history. 
      * If @p copyPreviousScroll is true then the contents of the previous 
@@ -399,21 +394,21 @@ public:
      */
     void setScroll(const HistoryType& , bool copyPreviousScroll = true);
     /** Returns the type of storage used to keep lines in the history. */
-    const HistoryType& getScroll();
+    const HistoryType& getScroll() const;
     /** 
      * Returns true if this screen keeps lines that are scrolled off the screen
      * in a history buffer.
      */
-    bool hasScroll();
+    bool hasScroll() const;
 
     /** 
      * Sets the start of the selection.
      *
      * @param column The column index of the first character in the selection.
      * @param line The line index of the first character in the selection.
-     * @param columnmode True if the selection is in column mode.
+     * @param blockSelectionMode True if the selection is in column mode.
      */
-    void setSelectionStart(const int column, const int line, const bool columnmode);
+    void setSelectionStart(const int column, const int line, const bool blockSelectionMode);
     
     /**
      * Sets the end of the current selection.
@@ -427,21 +422,19 @@ public:
      * Retrieves the start of the selection or the cursor position if there
      * is no selection.
      */
-    void getSelectionStart(int& column , int& line);
+    void getSelectionStart(int& column , int& line) const;
     
     /**
      * Retrieves the end of the selection or the cursor position if there
      * is no selection.
      */
-    void getSelectionEnd(int& column , int& line);
+    void getSelectionEnd(int& column , int& line) const;
 
     /** Clears the current selection */
     void clearSelection();
 
-    void setBusySelecting(bool busy) { sel_busy = busy; }
-
     /** 
-      *     Returns true if the character at (@p column, @p line) is part of the
+      *  Returns true if the character at (@p column, @p line) is part of the
       *  current selection. 
       */ 
     bool isSelected(const int column,const int line) const;
@@ -451,7 +444,7 @@ public:
      * @param preserveLineBreaks Specifies whether new line characters should 
      * be inserted into the returned text at the end of each terminal line.
      */
-    QString selectedText(bool preserveLineBreaks);
+    QString selectedText(bool preserveLineBreaks) const;
         
     /**
      * Copies part of the output to a stream.
@@ -460,13 +453,7 @@ public:
      * @param from The first line in the history to retrieve
      * @param to The last line in the history to retrieve
      */
-    void writeToStream(TerminalCharacterDecoder* decoder, int from, int to);
-
-    /** 
-     * Sets the selection to line @p no in the history and returns
-     * the text of that line from the history buffer.
-     */
-    QString getHistoryLine(int no);
+    void writeLinesToStream(TerminalCharacterDecoder* decoder, int fromLine, int toLine) const;
 
     /**
      * Copies the selected characters, set using @see setSelBeginXY and @see setSelExtentXY
@@ -479,7 +466,7 @@ public:
      * be inserted into the returned text at the end of each terminal line. 
      */
     void writeSelectionToStream(TerminalCharacterDecoder* decoder , bool
-                                preserveLineBreaks = true);
+                                preserveLineBreaks = true) const;
 
     /** TODO Document me */
     void checkSelection(int from, int to);
@@ -557,7 +544,7 @@ private:
     //the line 
     //
     //line - the line number to copy, from 0 (the earliest line in the history) up to 
-    //         hist->getLines() + lines - 1
+    //         history->getLines() + lines - 1
     //start - the first column on the line to copy
     //count - the number of characters on the line to copy
     //decoder - a decoder which coverts terminal characters (an Character array) into text
@@ -567,7 +554,7 @@ private:
                           int count, 
                           TerminalCharacterDecoder* decoder,
                           bool appendNewLine,
-                          bool preserveLineBreaks);
+                          bool preserveLineBreaks) const;
     
     //fills a section of the screen image with the character 'c'
     //the parameters are specified as offsets from the start of the screen image.
@@ -589,11 +576,14 @@ private:
 
     void initTabStops();
 
-    void effectiveRendition();
+    void updateEffectiveRendition();
     void reverseRendition(Character& p) const;
 
     bool isSelectionValid() const;
-
+    // copies text from 'startIndex' to 'endIndex' to a stream
+    // startIndex and endIndex are positions generated using the loc(x,y) macro
+    void writeToStream(TerminalCharacterDecoder* decoder, int startIndex, 
+                       int endIndex, bool preserveLineBreaks = true) const;
     // copies 'count' lines from the screen buffer into 'dest',
     // starting from 'startLine', where 0 is the first line in the screen buffer
     void copyFromScreen(Character* dest, int startLine, int count) const;
@@ -617,58 +607,56 @@ private:
     QVarLengthArray<LineProperty,64> lineProperties;    
     
     // history buffer ---------------
-    HistoryScroll *hist;
+    HistoryScroll* history;
     
     // cursor location
     int cuX;
     int cuY;
 
     // cursor color and rendition info
-    CharacterColor cu_fg;      // foreground
-    CharacterColor cu_bg;      // background
-    quint8 cu_re;      // rendition
+    CharacterColor currentForeground;
+    CharacterColor currentBackground;
+    quint8 currentRendition; 
 
     // margins ----------------
-    int tmargin;      // top margin
-    int bmargin;      // bottom margin
+    int _topMargin;
+    int _bottomMargin;
 
     // states ----------------
-    ScreenParm currParm;
+    int currentModes[MODES_SCREEN];
+    int savedModes[MODES_SCREEN];
 
     // ----------------------------
 
-    bool* tabstops;
+    QBitArray tabStops;
 
     // selection -------------------
-    int sel_begin; // The first location selected.
-    int sel_TL;    // TopLeft Location.
-    int sel_BR;    // Bottom Right Location.
-    bool sel_busy; // Busy making a selection.
-    bool columnmode;  // Column selection mode
+    int selBegin; // The first location selected.
+    int selTopLeft;    // TopLeft Location.
+    int selBottomRight;    // Bottom Right Location.
+    bool blockSelectionMode;  // Column selection mode
 
     // effective colors and rendition ------------
-    CharacterColor ef_fg;      // These are derived from
-    CharacterColor ef_bg;      // the cu_* variables above
-    quint8 ef_re;      // to speed up operation
+    CharacterColor effectiveForeground; // These are derived from
+    CharacterColor effectiveBackground; // the cu_* variables above
+    quint8 effectiveRendition;          // to speed up operation
 
-    //
-    // save cursor, rendition & states ------------
-    // 
+    class SavedState  
+    {
+    public:
+        SavedState()
+        : cursorColumn(0),cursorLine(0),rendition(0) {}
 
-    // cursor location
-    int sa_cuX;
-    int sa_cuY;
-
-    // rendition info
-    quint8 sa_cu_re;
-    CharacterColor sa_cu_fg;
-    CharacterColor sa_cu_bg;
-    
+        int cursorColumn;
+        int cursorLine;
+        quint8 rendition;
+        CharacterColor foreground;
+        CharacterColor background;
+    };
+    SavedState savedState;
+        
     // last position where we added a character
     int lastPos;
-
-    // modes
-    ScreenParm saveParm;
 
     static Character defaultChar;
 };

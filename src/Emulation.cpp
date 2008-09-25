@@ -1,6 +1,4 @@
 /*
-    This file is part of Konsole, an X terminal.
-
     Copyright 2007-2008 Robert Knight <robertknight@gmail.com> 
     Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
     Copyright 1996 by Matthias Ettrich <ettrich@kde.org>
@@ -52,17 +50,6 @@
 
 using namespace Konsole;
 
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/*                               Emulation                                  */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
-
-//#define CNTL(c) ((c)-'@')
-
-/*!
-*/
-
 Emulation::Emulation() :
   _currentScreen(0),
   _codec(0),
@@ -70,7 +57,6 @@ Emulation::Emulation() :
   _keyTranslator(0),
   _usesMouse(false)
 {
-
   // create screens with a default size
   _screen[0] = new Screen(40,80);
   _screen[1] = new Screen(40,80);
@@ -108,9 +94,6 @@ ScreenWindow* Emulation::createWindow()
     return window;
 }
 
-/*!
-*/
-
 Emulation::~Emulation()
 {
   QListIterator<ScreenWindow*> windowIter(_windows);
@@ -125,23 +108,15 @@ Emulation::~Emulation()
   delete _decoder;
 }
 
-/*! change between primary and alternate _screen
-*/
-
 void Emulation::setScreen(int n)
 {
   Screen *old = _currentScreen;
-  _currentScreen = _screen[n&1];
+  _currentScreen = _screen[n & 1];
   if (_currentScreen != old) 
   {
-     old->setBusySelecting(false);
-
-     // tell all windows onto this emulation to switch to the newly active _screen
-     QListIterator<ScreenWindow*> windowIter(_windows);
-     while ( windowIter.hasNext() )
-     {
-         windowIter.next()->setScreen(_currentScreen);
-     }
+     // tell all windows onto this emulation to switch to the newly active screen
+     foreach(ScreenWindow* window,_windows)
+         window->setScreen(_currentScreen);
   }
 }
 
@@ -192,19 +167,6 @@ QString Emulation::keyBindings() const
   return _keyTranslator->name();
 }
 
-
-// Interpreting Codes ---------------------------------------------------------
-
-/*
-   This section deals with decoding the incoming character stream.
-   Decoding means here, that the stream is first separated into `tokens'
-   which are then mapped to a `meaning' provided as operations by the
-   `Screen' class.
-*/
-
-/*!
-*/
-
 void Emulation::receiveChar(int c)
 // process application unicode input to terminal
 // this is a trivial scanner
@@ -222,15 +184,6 @@ void Emulation::receiveChar(int c)
   };
 }
 
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/*                             Keyboard Handling                             */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
-
-/*!
-*/
-
 void Emulation::sendKeyEvent( QKeyEvent* ev )
 {
   emit stateSet(NOTIFYNORMAL);
@@ -238,9 +191,7 @@ void Emulation::sendKeyEvent( QKeyEvent* ev )
   if (!ev->text().isEmpty())
   { // A block of text
     // Note that the text is proper unicode.
-    // We should do a conversion here, but since this
-    // routine will never be used, we simply emit plain ascii.
-    //emit sendBlock(ev->text().toAscii(),ev->text().length());
+    // We should do a conversion here
     emit sendData(ev->text().toUtf8(),ev->text().length());
   }
 }
@@ -254,8 +205,6 @@ void Emulation::sendMouseEvent(int /*buttons*/, int /*column*/, int /*row*/, int
 {
     // default implementation does nothing
 }
-
-// Unblocking, Byte to Unicode translation --------------------------------- --
 
 /*
    We are doing code conversion from locale to unicode first.
@@ -272,9 +221,7 @@ void Emulation::receiveData(const char* text, int length)
 
     //send characters to terminal emulator
     for (int i=0;i<unicodeText.length();i++)
-    {
         receiveChar(unicodeText[i].unicode());
-    }
 
     //look for z-modem indicator
     //-- someone who understands more about z-modems that I do may be able to move
@@ -282,10 +229,10 @@ void Emulation::receiveData(const char* text, int length)
     for (int i=0;i<length;i++)
     {
         if (text[i] == '\030')
-            {
-                  if ((length-i-1 > 3) && (strncmp(text+i+1, "B00", 3) == 0))
-                      emit zmodemDetected();
-            }
+        {
+            if ((length-i-1 > 3) && (strncmp(text+i+1, "B00", 3) == 0))
+                emit zmodemDetected();
+        }
     }
 }
 
@@ -342,7 +289,7 @@ void Emulation::writeToStream( TerminalCharacterDecoder* _decoder ,
                                int startLine ,
                                int endLine) 
 {
-  _currentScreen->writeToStream(_decoder,startLine,endLine);
+  _currentScreen->writeLinesToStream(_decoder,startLine,endLine);
 }
 
 int Emulation::lineCount() const
@@ -350,8 +297,6 @@ int Emulation::lineCount() const
     // sum number of lines currently on _screen plus number of lines in history
     return _currentScreen->getLines() + _currentScreen->getHistLines();
 }
-
-// Refreshing -------------------------------------------------------------- --
 
 #define BULK_TIMEOUT1 10
 #define BULK_TIMEOUT2 40
@@ -378,7 +323,7 @@ void Emulation::bufferedUpdate()
    }
 }
 
-char Emulation::getErase() const
+char Emulation::eraseChar() const
 {
   return '\b';
 }

@@ -83,7 +83,7 @@ public:
   // reimplemented from Emulation
   virtual void clearEntireScreen();
   virtual void reset();
-  virtual char getErase() const;
+  virtual char eraseChar() const;
   
 public slots: 
   // reimplemented from Emulation 

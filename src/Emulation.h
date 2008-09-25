@@ -183,7 +183,7 @@ public:
   
 
   /** TODO Document me */
-  virtual char getErase() const;
+  virtual char eraseChar() const;
 
   /** 
    * Sets the key bindings used to key events

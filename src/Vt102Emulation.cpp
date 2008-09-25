@@ -805,7 +805,8 @@ void Vt102Emulation::sendString(const char* s , int length)
 }
 
 void Vt102Emulation::reportCursorPosition()
-{ char tmp[20];
+{ 
+  char tmp[20];
   sprintf(tmp,"\033[%d;%dR",_currentScreen->getCursorY()+1,_currentScreen->getCursorX()+1);
   sendString(tmp);
 }
@@ -813,14 +814,14 @@ void Vt102Emulation::reportCursorPosition()
 void Vt102Emulation::reportTerminalType()
 {
   // Primary device attribute response (Request was: ^[[0c or ^[[c (from TT321 Users Guide))
-  //   VT220:  ^[[?63;1;2;3;6;7;8c   (list deps on emul. capabilities)
-  //   VT100:  ^[[?1;2c
-  //   VT101:  ^[[?1;0c
-  //   VT102:  ^[[?6v
+  // VT220:  ^[[?63;1;2;3;6;7;8c   (list deps on emul. capabilities)
+  // VT100:  ^[[?1;2c
+  // VT101:  ^[[?1;0c
+  // VT102:  ^[[?6v
   if (getMode(MODE_Ansi))
-    sendString("\033[?1;2c");     // I'm a VT100
+    sendString("\033[?1;2c"); // I'm a VT100
   else
-    sendString("\033/Z");         // I'm a VT52
+    sendString("\033/Z"); // I'm a VT52
 }
 
 void Vt102Emulation::reportSecondaryAttributes()
@@ -835,7 +836,8 @@ void Vt102Emulation::reportSecondaryAttributes()
 
 void Vt102Emulation::reportTerminalParms(int p)
 // DECREPTPARM
-{ char tmp[100];
+{ 
+  char tmp[100];
   sprintf(tmp,"\033[%d;1;1;112;112;1;0x",p); // not really true.
   sendString(tmp);
 }
@@ -845,10 +847,11 @@ void Vt102Emulation::reportStatus()
   sendString("\033[0n"); //VT100. Device status report. 0 = Ready.
 }
 
-#define ANSWER_BACK "" // This is really obsolete VT100 stuff.
-
 void Vt102Emulation::reportAnswerBack()
 {
+  // FIXME - Test this with VTTEST
+  // This is really obsolete VT100 stuff.
+  const char* ANSWER_BACK = "";
   sendString(ANSWER_BACK);
 }
 
@@ -942,7 +945,7 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
         if ( entry.command() != KeyboardTranslator::NoCommand )
         {
             if (entry.command() & KeyboardTranslator::EraseCommand)
-                textToSend += getErase();
+                textToSend += eraseChar();
 
             // TODO command handling
         }
@@ -999,13 +1002,13 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
 unsigned short Vt102Emulation::applyCharset(unsigned short c)
 {
   if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c-0x5f];
-  if (CHARSET.pound                && c == '#' ) return 0xa3; //This mode is obsolete
+  if (CHARSET.pound && c == '#' ) return 0xa3; //This mode is obsolete
   return c;
 }
 
 /*
    "Charset" related part of the emulation state.
-   This configures the VT100 _charset filter.
+   This configures the VT100 charset filter.
 
    While most operation work on the current _screen,
    the following two are different.
@@ -1013,12 +1016,12 @@ unsigned short Vt102Emulation::applyCharset(unsigned short c)
 
 void Vt102Emulation::resetCharset(int scrno)
 {
-  _charset[scrno].cu_cs   = 0;
+  _charset[scrno].cu_cs = 0;
   strncpy(_charset[scrno].charset,"BBBB",4);
   _charset[scrno].sa_graphic = false;
-  _charset[scrno].sa_pound   = false;
+  _charset[scrno].sa_pound = false;
   _charset[scrno].graphic = false;
-  _charset[scrno].pound   = false;
+  _charset[scrno].pound = false;
 }
 
 void Vt102Emulation::setCharset(int n, int cs) // on both screens.
@@ -1052,8 +1055,6 @@ void Vt102Emulation::setMargins(int t, int b)
   _screen[1]->setMargins(t, b);
 }
 
-/*! Save the cursor position and the rendition attribute settings. */
-
 void Vt102Emulation::saveCursor()
 {
   CHARSET.sa_graphic = CHARSET.graphic;
@@ -1063,8 +1064,6 @@ void Vt102Emulation::saveCursor()
   //sa_charset_num = cScreen->_charset;
   _currentScreen->saveCursor();
 }
-
-/*! Restore the cursor position and the rendition attribute settings. */
 
 void Vt102Emulation::restoreCursor()
 {
@@ -1108,7 +1107,7 @@ void Vt102Emulation::resetModes()
   resetMode(MODE_AppCuKeys);  saveMode(MODE_AppCuKeys);
   resetMode(MODE_AppKeyPad);  saveMode(MODE_AppKeyPad);
   resetMode(MODE_NewLine);
-    setMode(MODE_Ansi);
+  setMode(MODE_Ansi);
 }
 
 void Vt102Emulation::setMode(int m)
@@ -1186,7 +1185,7 @@ bool Vt102Emulation::getMode(int m)
   return _currentModes.mode[m];
 }
 
-char Vt102Emulation::getErase() const
+char Vt102Emulation::eraseChar() const
 {
   KeyboardTranslator::Entry entry = _keyTranslator->findEntry(
                                             Qt::Key_Backspace,
