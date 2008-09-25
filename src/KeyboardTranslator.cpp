@@ -398,7 +398,7 @@ bool KeyboardTranslatorReader::parseAsModifier(const QString& item , Qt::Keyboar
 }
 bool KeyboardTranslatorReader::parseAsStateFlag(const QString& item , KeyboardTranslator::State& flag)
 {
-    if ( item == "appcukeys" )
+    if ( item == "appcukeys" || item == "appcursorkeys" )
         flag = KeyboardTranslator::CursorKeysState;
     else if ( item == "ansi" )
         flag = KeyboardTranslator::AnsiState;
@@ -406,7 +406,7 @@ bool KeyboardTranslatorReader::parseAsStateFlag(const QString& item , KeyboardTr
         flag = KeyboardTranslator::NewLineState;
     else if ( item == "appscreen" )
         flag = KeyboardTranslator::AlternateScreenState;
-    else if ( item == "anymod" )
+    else if ( item == "anymod" || item == "anymodifier" )
         flag = KeyboardTranslator::AnyModifierState;
     else if ( item == "appkeypad" )
         flag = KeyboardTranslator::ApplicationKeypadState;
@@ -740,9 +740,9 @@ void KeyboardTranslator::Entry::insertState( QString& item , int state ) const
     else if ( state == KeyboardTranslator::AnsiState )
         item += "Ansi";
     else if ( state == KeyboardTranslator::CursorKeysState )
-        item += "AppCuKeys";
+        item += "AppCursorKeys";
     else if ( state == KeyboardTranslator::AnyModifierState )
-        item += "AnyMod";
+        item += "AnyModifier";
     else if ( state == KeyboardTranslator::ApplicationKeypadState )
         item += "AppKeypad";
 }
