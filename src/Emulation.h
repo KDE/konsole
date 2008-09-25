@@ -135,14 +135,13 @@ public:
   ScreenWindow* createWindow();
 
   /** Returns the size of the screen image which the emulation produces */
-  QSize imageSize();
+  QSize imageSize() const;
 
   /**
    * Returns the total number of lines, including those stored in the history.
    */ 
-  int lineCount();
+  int lineCount() const;
 
-  
   /** 
    * Sets the history store used by this emulation.  When new lines
    * are added to the output, older lines at the top of the screen are transferred to a history
@@ -153,7 +152,7 @@ public:
    */
   void setHistory(const HistoryType&);
   /** Returns the history store used by this emulation.  See setHistory() */
-  const HistoryType& history();
+  const HistoryType& history() const;
   /** Clears the history scroll. */
   void clearHistory();
 
@@ -169,9 +168,8 @@ public:
    */
   virtual void writeToStream(TerminalCharacterDecoder* decoder,int startLine,int endLine);
   
-  
   /** Returns the codec used to decode incoming characters.  See setCodec() */
-  const QTextCodec* codec() { return _codec; }
+  const QTextCodec* codec() const { return _codec; }
   /** Sets the codec used to decode incoming characters.  */
   void setCodec(const QTextCodec*);
 
@@ -180,7 +178,8 @@ public:
    * Returns true if the current codec used to decode incoming
    * characters is UTF-8
    */
-  bool utf8() { Q_ASSERT(_codec); return _codec->mibEnum() == 106; }
+  bool utf8() const
+  { Q_ASSERT(_codec); return _codec->mibEnum() == 106; }
   
 
   /** TODO Document me */
@@ -196,7 +195,7 @@ public:
    * Returns the name of the emulation's current key bindings.
    * See setKeyBindings()
    */
-  QString keyBindings();
+  QString keyBindings() const;
 
   /** 
    * Copies the current image into the history and clears the screen.
@@ -397,10 +396,10 @@ signals:
   void flowControlKeyPressed(bool suspendKeyPressed);
 
 protected:
-  virtual void setMode  (int mode) = 0;
+  virtual void setMode(int mode) = 0;
   virtual void resetMode(int mode) = 0;
    
- /** 
+  /** 
    * Processes an incoming character.  See receiveData()
    * @p ch A unicode character code. 
    */
@@ -438,7 +437,6 @@ protected:
   //the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
   const QTextCodec* _codec;
   QTextDecoder* _decoder;
-
   const KeyboardTranslator* _keyTranslator; // the keyboard layout
 
 protected slots:
@@ -458,7 +456,6 @@ private slots:
   void usesMouseChanged(bool usesMouse);
 
 private:
-
   bool _usesMouse;
   QTimer _bulkTimer1;
   QTimer _bulkTimer2;

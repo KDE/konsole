@@ -156,7 +156,7 @@ void Emulation::setHistory(const HistoryType& t)
   showBulk();
 }
 
-const HistoryType& Emulation::history()
+const HistoryType& Emulation::history() const
 {
   return _screen[0]->getScroll();
 }
@@ -187,7 +187,7 @@ void Emulation::setKeyBindings(const QString& name)
   _keyTranslator = KeyboardTranslatorManager::instance()->findTranslator(name);
 }
 
-QString Emulation::keyBindings()
+QString Emulation::keyBindings() const
 {
   return _keyTranslator->name();
 }
@@ -338,47 +338,6 @@ void Emulation::receiveData(const char* text, int length)
   }
 }*/
 
-// Selection --------------------------------------------------------------- --
-
-#if 0
-void Emulation::onSelectionBegin(const int x, const int y, const bool columnmode) {
-  if (!connected) return;
-  _currentScreen->setSelectionStart( x,y,columnmode);
-  showBulk();
-}
-
-void Emulation::onSelectionExtend(const int x, const int y) {
-  if (!connected) return;
-  _currentScreen->setSelectionEnd(x,y);
-  showBulk();
-}
-
-void Emulation::setSelection(const bool preserve_line_breaks) {
-  if (!connected) return;
-  QString t = _currentScreen->selectedText(preserve_line_breaks);
-  if (!t.isNull()) 
-  {
-    QListIterator< TerminalDisplay* > viewIter(_views);
-
-    while (viewIter.hasNext())    
-        viewIter.next()->setSelection(t);
-  }
-}
-
-void Emulation::testIsSelected(const int x, const int y, bool &selected)
-{
-  if (!connected) return;
-  selected=_currentScreen->isSelected(x,y);
-}
-
-void Emulation::clearSelection() {
-  if (!connected) return;
-  _currentScreen->clearSelection();
-  showBulk();
-}
-
-#endif 
-
 void Emulation::writeToStream( TerminalCharacterDecoder* _decoder , 
                                int startLine ,
                                int endLine) 
@@ -386,7 +345,7 @@ void Emulation::writeToStream( TerminalCharacterDecoder* _decoder ,
   _currentScreen->writeToStream(_decoder,startLine,endLine);
 }
 
-int Emulation::lineCount()
+int Emulation::lineCount() const
 {
     // sum number of lines currently on _screen plus number of lines in history
     return _currentScreen->getLines() + _currentScreen->getHistLines();
@@ -397,8 +356,6 @@ int Emulation::lineCount()
 #define BULK_TIMEOUT1 10
 #define BULK_TIMEOUT2 40
 
-/*!
-*/
 void Emulation::showBulk()
 {
     _bulkTimer1.stop();
@@ -448,7 +405,7 @@ void Emulation::setImageSize(int lines, int columns)
   bufferedUpdate();
 }
 
-QSize Emulation::imageSize()
+QSize Emulation::imageSize() const
 {
   return QSize(_currentScreen->getColumns(), _currentScreen->getLines());
 }
