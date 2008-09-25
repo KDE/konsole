@@ -72,7 +72,7 @@ class TerminalCharacterDecoder;
 
     The screen image has a selection associated with it, specified using 
     setSelectionStart() and setSelectionEnd().  The selected text can be retrieved
-    using selectedText().  When getImage() is used to retrieve the the visible image,
+    using selectedText().  When getImage() is used to retrieve the visible image,
     characters which are part of the selection have their colours inverted.   
 */
 class Screen

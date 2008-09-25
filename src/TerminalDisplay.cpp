@@ -801,7 +801,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     // Note:  With Qt 4.4 the left edge of the scrolled area must be at 0
     // to get the correct (newly exposed) part of the widget repainted.
     //
-    // The right edge must be before the the left edge of the scroll bar to 
+    // The right edge must be before the left edge of the scroll bar to 
     // avoid triggering a repaint of the entire widget, the distance is 
     // given by SCROLLBAR_CONTENT_GAP
     //

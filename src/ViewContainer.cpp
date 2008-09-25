@@ -157,7 +157,7 @@ void ViewContainer::viewDestroyed(QObject* object)
     _navigation.remove(widget);
 
     // FIXME This can result in ViewContainerSubClass::removeViewWidget() being 
-    // called after the the widget's parent has been deleted or partially deleted
+    // called after the widget's parent has been deleted or partially deleted
     // in the ViewContainerSubClass instance's destructor.
     //
     // Currently deleteLater() is used to remove child widgets in the subclass 

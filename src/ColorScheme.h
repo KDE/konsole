@@ -164,7 +164,7 @@ private:
     const ColorEntry* colorTable() const;
 
     // reads a single colour entry from a KConfig source
-    // and sets the the palette entry at 'index' to the entry read.
+    // and sets the palette entry at 'index' to the entry read.
     void readColorEntry(KConfig& config , int index); 
     // writes a single colour entry to a KConfig source
     void writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry,const RandomizationRange& range) const;
