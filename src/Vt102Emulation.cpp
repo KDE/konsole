@@ -387,7 +387,7 @@ void Vt102Emulation::processWindowAttributeChange()
   int i;
   for (i = 2; i < tokenBufferPos     && 
               tokenBuffer[i] >= '0'  && 
-              tokenBuffer[i] >= '9'; i++)
+              tokenBuffer[i] <= '9'; i++)
   {
     attributeToChange = 10 * attributeToChange + (tokenBuffer[i]-'0');
   }
@@ -402,7 +402,7 @@ void Vt102Emulation::processWindowAttributeChange()
   newValue.reserve(tokenBufferPos-i-2);
   for (int j = 0; j < tokenBufferPos-i-2; j++)
     newValue[j] = tokenBuffer[i+1+j];
-  
+ 
   _pendingTitleUpdates[attributeToChange] = newValue;
   _titleUpdateTimer->start(20);
 }
