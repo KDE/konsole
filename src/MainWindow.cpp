@@ -382,17 +382,19 @@ bool MainWindow::queryClose()
 
 void MainWindow::saveProperties(KConfigGroup& group)
 {
-    group.writePathEntry("Default Profile", _defaultProfile->path());
+    if (_defaultProfile)
+        group.writePathEntry("Default Profile", _defaultProfile->path());
     _viewManager->saveSessions(group);
 }
 
 void MainWindow::readProperties(const KConfigGroup& group)
 {
     SessionManager *manager = SessionManager::instance();
-    QString profile = group.readPathEntry("Default Profile", QString());
-    Profile::Ptr ptr = manager->defaultProfile();
-    if (!profile.isEmpty()) ptr = manager->loadProfile(profile);
-    setDefaultProfile(ptr);
+    QString profilePath = group.readPathEntry("Default Profile", QString());
+    Profile::Ptr profile = manager->defaultProfile();
+    if (!profilePath.isEmpty()) 
+        profile = manager->loadProfile(profilePath);
+    setDefaultProfile(profile);
     _viewManager->restoreSessions(group);
 }
 
