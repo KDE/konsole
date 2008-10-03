@@ -730,6 +730,69 @@ QKeySequence SessionManager::shortcut(Profile::Ptr info) const
     return QKeySequence();
 }
 
+void SessionManager::saveSessions(KConfig* config)
+{
+    // The session IDs can't be restored.
+    // So we need to map the old ID to the future new ID.
+    int n = 1;
+    _restoreMapping.clear();
+
+    foreach(Session* session, _sessions)
+    {
+        QString name = QLatin1String("Session") + QString::number(n);
+        KConfigGroup group(config, name);
+
+        group.writePathEntry("Profile",
+                             _sessionProfiles.value(session)->path());
+        session->saveSession(group);
+        _restoreMapping.insert(session, n);
+        n++;
+    }
+
+    KConfigGroup group(config, "Number");
+    group.writeEntry("NumberOfSessions", _sessions.count());
+}
+
+int SessionManager::getRestoreId(Session* session)
+{
+    return _restoreMapping.value(session);
+}
+
+void SessionManager::restoreSessions(KConfig* config)
+{
+    KConfigGroup group(config, "Number");
+    int sessions;
+
+    // Any sessions saved?
+    if ((sessions = group.readEntry("NumberOfSessions", 0)) > 0)
+    {
+        for (int n = 1; n <= sessions; n++)
+        {
+            QString name = QLatin1String("Session") + QString::number(n);
+            KConfigGroup sessionGroup(config, name);
+
+            QString profile = sessionGroup.readPathEntry("Profile", QString());
+            Profile::Ptr ptr = defaultProfile();
+            if (!profile.isEmpty()) ptr = loadProfile(profile);
+
+            Session* session = createSession(ptr);
+            session->restoreSession(sessionGroup);
+        }
+    }
+}
+
+Session* SessionManager::idToSession(int id)
+{
+    Q_ASSERT(id); 
+    foreach(Session* session, _sessions)
+        if (session->sessionId() == id)
+            return session;
+
+    // this should not happen
+    Q_ASSERT(0);
+    return 0;
+}
+
 K_GLOBAL_STATIC( SessionManager , theSessionManager )
 SessionManager* SessionManager::instance()
 {
@@ -833,3 +896,12 @@ QModelIndex SessionListModel::index(int row, int column, const QModelIndex& pare
 }
 
 #include "SessionManager.moc"
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

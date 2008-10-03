@@ -103,49 +103,56 @@ void Application::listAvailableProfiles()
 int Application::newInstance()
 {
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+    static bool firstInstance = true;
 
-    // check for arguments to print help or other information to the terminal,
-    // quit if such an argument was found
-    if ( processHelpArgs(args) ) 
-        return 0;
-
-    // create a new window or use an existing one 
-    MainWindow* window = processWindowArgs(args);
-  
-    // select profile to use 
-    processProfileSelectArgs(args,window);
-   
-    // process various command-line options which cause a property of the 
-    // default profile to be changed 
-    processProfileChangeArgs(args,window);
-
-    // create new session
-    Session* session = createSession( window->defaultProfile() , QString() , window->viewManager() );
-    if ( !args->isSet("close") )
-        session->setAutoClose(false);
-
-    // if the background-mode argument is supplied, start the background session
-    // ( or bring to the front if it already exists )
-    if ( args->isSet("background-mode") )
-        startBackgroundMode(window);
-    else
+    // handle session management
+    if ((args->count() != 0) || !firstInstance || !isSessionRestored())
     {
-        // Qt constrains top-level windows which have not been manually resized
-        // (via QWidget::resize()) to a maximum of 2/3rds of the screen size.
-        //
-        // This means that the terminal display might not get the width/height
-        // it asks for.  To work around this, the widget must be manually resized
-        // to its sizeHint().
-        //
-        // This problem only affects the first time the application is run.  After
-        // that KMainWindow will have manually resized the window to its saved size
-        // at this point (so the Qt::WA_Resized attribute will be set)
-        if (!window->testAttribute(Qt::WA_Resized))
-            window->resize(window->sizeHint());
+        // check for arguments to print help or other information to the terminal,
+        // quit if such an argument was found
+        if ( processHelpArgs(args) )
+            return 0;
 
-        window->show();
+        // create a new window or use an existing one
+        MainWindow* window = processWindowArgs(args);
+
+        // select profile to use
+        processProfileSelectArgs(args,window);
+
+        // process various command-line options which cause a property of the
+        // default profile to be changed
+        processProfileChangeArgs(args,window);
+
+        // create new session
+        Session* session = createSession( window->defaultProfile() , QString() , window->viewManager() );
+        if ( !args->isSet("close") )
+            session->setAutoClose(false);
+
+        // if the background-mode argument is supplied, start the background session
+        // ( or bring to the front if it already exists )
+        if ( args->isSet("background-mode") )
+            startBackgroundMode(window);
+        else
+        {
+            // Qt constrains top-level windows which have not been manually resized
+            // (via QWidget::resize()) to a maximum of 2/3rds of the screen size.
+            //
+            // This means that the terminal display might not get the width/height
+            // it asks for.  To work around this, the widget must be manually resized
+            // to its sizeHint().
+            //
+            // This problem only affects the first time the application is run.  After
+            // that KMainWindow will have manually resized the window to its saved size
+            // at this point (so the Qt::WA_Resized attribute will be set)
+            if (!window->testAttribute(Qt::WA_Resized))
+                window->resize(window->sizeHint());
+
+            window->show();
+        }
     }
 
+    firstInstance = false;
+    args->clear();
     return 0;
 }
 
@@ -313,3 +320,12 @@ Session* Application::createSession(Profile::Ptr profile, const QString& directo
 }
 
 #include "Application.moc"
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

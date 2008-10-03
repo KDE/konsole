@@ -866,9 +866,78 @@ QList<ViewProperties*> ViewManager::viewProperties() const
     return list;
 }
 
+void ViewManager::saveSessions(KConfigGroup& group)
+{
+    // find all unique session restore IDs
+    QList<int> ids;
+    QHash<Session*,int> unique;
+
+    // first: sessions in the active container, preserving the order
+    ViewContainer* container = _viewSplitter->activeContainer();
+    Q_ASSERT(container);
+    TerminalDisplay* activeview = dynamic_cast<TerminalDisplay*>(container->activeView());
+
+    QListIterator<QWidget*> viewIter(container->views());
+    int tab = 1;
+    while (viewIter.hasNext())
+    {
+        TerminalDisplay *view = dynamic_cast<TerminalDisplay*>(viewIter.next());
+        Q_ASSERT(view);
+        Session *session = _sessionMap[view];
+        ids << SessionManager::instance()->getRestoreId(session);
+        if (view == activeview) group.writeEntry("Active", tab);
+        unique.insert(session, 1);
+        tab++;
+    }
+
+    // second: all other sessions, in random order
+    // we don't want to have sessions restored that are not connected
+    foreach(Session* session, _sessionMap)
+        if (!unique.contains(session))
+        {
+            ids << SessionManager::instance()->getRestoreId(session);
+            unique.insert(session, 1);
+        }
+
+    group.writeEntry("Sessions", ids);
+}
+
+void ViewManager::restoreSessions(const KConfigGroup& group)
+{
+    QList<int> ids = group.readEntry("Sessions", QList<int>());
+    int activeTab  = group.readEntry("Active", 0);
+    TerminalDisplay *display = 0;
+
+    int tab = 1;
+    foreach(int id, ids)
+    {
+        Session *session = SessionManager::instance()->idToSession(id);
+        createView(session);
+        if (!session->isRunning())
+            session->run();
+        if (tab++ == activeTab)
+            display = dynamic_cast<TerminalDisplay*>(activeView());
+    }
+
+    if (display)
+    {
+        _viewSplitter->activeContainer()->setActiveView(display);
+        display->setFocus(Qt::OtherFocusReason);
+    }
+}
+
 uint qHash(QPointer<TerminalDisplay> display)
 {
     return qHash((TerminalDisplay*)display);
 }
 
 #include "ViewManager.moc"
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

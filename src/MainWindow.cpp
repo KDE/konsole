@@ -19,6 +19,7 @@
 
 // Own
 #include "MainWindow.h"
+#include "SessionManager.h"
 
 // Qt
 #include <QtGui/QBoxLayout>
@@ -378,6 +379,33 @@ bool MainWindow::queryClose()
 
     return true;
 }
+
+void MainWindow::saveProperties(KConfigGroup& group)
+{
+    group.writePathEntry("Default Profile", _defaultProfile->path());
+    _viewManager->saveSessions(group);
+}
+
+void MainWindow::readProperties(const KConfigGroup& group)
+{
+    SessionManager *manager = SessionManager::instance();
+    QString profile = group.readPathEntry("Default Profile", QString());
+    Profile::Ptr ptr = manager->defaultProfile();
+    if (!profile.isEmpty()) ptr = manager->loadProfile(profile);
+    setDefaultProfile(ptr);
+    _viewManager->restoreSessions(group);
+}
+
+void MainWindow::saveGlobalProperties(KConfig* config)
+{
+    SessionManager::instance()->saveSessions(config);
+}
+
+void MainWindow::readGlobalProperties(KConfig* config)
+{
+    SessionManager::instance()->restoreSessions(config);
+}
+
 void MainWindow::syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source)
 {
     foreach(QAction* qAction, source->actions()) 
@@ -456,3 +484,12 @@ void MainWindow::configureNotifications()
 }
 
 #include "MainWindow.moc"
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

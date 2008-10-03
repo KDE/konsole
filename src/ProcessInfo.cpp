@@ -64,18 +64,10 @@ void ProcessInfo::update()
     readProcessInfo(_pid,_enableEnvironmentRead);
 }
 
-QString ProcessInfo::format(const QString& input) const
+QString ProcessInfo::validCurrentDir() const
 {
    bool ok = false;
 
-   QString output(input);
-
-   // search for and replace known marker
-   output.replace("%u","NOT IMPLEMENTED YET");
-   output.replace("%n",name(&ok));
-   output.replace("%c",formatCommand(name(&ok),arguments(&ok),ShortCommandFormat));
-   output.replace("%C",formatCommand(name(&ok),arguments(&ok),LongCommandFormat));
-   
    // read current dir, if an error occurs try the parent as the next
    // best option
    int currentPid = parentPid(&ok);
@@ -88,7 +80,23 @@ QString ProcessInfo::format(const QString& input) const
        dir = current->currentDir(&ok);
        delete current;
    }
-        
+
+   return dir;
+}
+
+QString ProcessInfo::format(const QString& input) const
+{
+   bool ok = false;
+
+   QString output(input);
+
+   // search for and replace known marker
+   output.replace("%u","NOT IMPLEMENTED YET");
+   output.replace("%n",name(&ok));
+   output.replace("%c",formatCommand(name(&ok),arguments(&ok),ShortCommandFormat));
+   output.replace("%C",formatCommand(name(&ok),arguments(&ok),LongCommandFormat));
+   
+   QString dir = validCurrentDir();
    output.replace("%D",dir);
    output.replace("%d",formatShortDir(dir));
    
@@ -731,3 +739,11 @@ ProcessInfo* ProcessInfo::newInstance(int pid,bool enableEnvironmentRead)
 #endif
 }
 
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

@@ -36,12 +36,14 @@
 #include "History.h"
 
 class KProcess;
+class KUrl;
 
 namespace Konsole
 {
 
 class Emulation;
 class Pty;
+class ProcessInfo;
 class TerminalDisplay;
 class ZModemDialog;
 
@@ -201,6 +203,11 @@ public:
   void setInitialWorkingDirectory( const QString& dir );
 
   /**
+   * Returns the current directory of the foreground process in the session
+   */
+  QString currentWorkingDirectory();
+
+  /**
    * Sets the type of history store used by this session.
    * Lines of output produced by the terminal are added
    * to the history store.  The type of history store
@@ -274,11 +281,16 @@ public:
   QString title(TitleRole role) const;
   /** Convenience method used to read the name property.  Returns title(Session::NameRole). */
   QString nameTitle() const { return title(Session::NameRole); }
+  /** Returns a title generated from tab format and process information. */
+  QString getDynamicTitle();
 
   /** Sets the name of the icon associated with this session. */
   void setIconName(const QString& iconName);
   /** Returns the name of the icon associated with this session. */
   QString iconName() const;
+
+  /** Return URL for the session. */
+  KUrl getUrl();
 
   /** Sets the text of the icon associated with this session. */
   void setIconText(const QString& iconText);
@@ -317,12 +329,11 @@ public:
    */
   int processId() const;
 
-  /**
-   * Returns the process id of the terminal's foreground process.
-   * This is initially the same as processId() but can change
-   * as the user starts other programs inside the terminal.
-   */
-  int foregroundProcessId() const;
+  /** Returns true if the user has started a program in the session. */
+  bool isChildActive();
+
+  /** Returns the name of the current foreground process. */
+  QString childName();
 
   /** Returns the terminal session's window size in lines and columns. */
   QSize size();
@@ -377,6 +388,10 @@ public:
     SessionName                = 30,
     ProfileChange            = 50     // this clashes with Xterm's font change command
   };
+
+  // session management
+  void saveSession(KConfigGroup& group);
+  void restoreSession(KConfigGroup& group);
 
 public slots:
 
@@ -517,6 +532,10 @@ private:
   // checks that the binary 'program' is available and can be executed
   // returns the binary name if available or an empty string otherwise
   QString checkProgram(const QString& program) const;
+  ProcessInfo* getProcessInfo();
+  void updateSessionProcessInfo();
+  bool updateForegroundProcessInfo();
+  ProcessInfo* updateWorkingDirectory();
 
   int            _uniqueIdentifier;
 
@@ -555,6 +574,11 @@ private:
   int            _sessionId;
 
   QString        _initialWorkingDir;
+  QString        _currentWorkingDir;
+
+  ProcessInfo*   _sessionProcessInfo;
+  ProcessInfo*   _foregroundProcessInfo;
+  int            _foregroundPid;
 
   // ZModem
   bool           _zmodemBusy;
@@ -653,3 +677,12 @@ private:
 }
 
 #endif
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

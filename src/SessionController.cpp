@@ -50,7 +50,6 @@
 #include "IncrementalSearchBar.h"
 #include "ScreenWindow.h"
 #include "Session.h"
-#include "ProcessInfo.h"
 #include "ProfileList.h"
 #include "TerminalDisplay.h"
 #include "SessionManager.h"
@@ -204,43 +203,8 @@ void SessionController::snapshot()
 {
     Q_ASSERT( _session != 0 );
 
-    ProcessInfo* process = 0;
-    ProcessInfo* snapshot = ProcessInfo::newInstance(_session->processId());
-    snapshot->update();
-
-    // use foreground process information if available
-    // fallback to session process otherwise
-    int pid = _session->foregroundProcessId(); //snapshot->foregroundPid(&ok);
-    if ( pid != 0 )
-    {
-       process = ProcessInfo::newInstance(pid);
-       process->update();
-    }
-    else
-       process = snapshot;
-
-    bool ok = false;
-
-    // format tab titles using process info
-    QString title;
-    if ( process->name(&ok) == "ssh" && ok )
-    {
-        SSHProcessInfo sshInfo(*process);
-        title = sshInfo.format(_session->tabTitleFormat(Session::RemoteTabTitle));
-    }
-    else
-        title = process->format(_session->tabTitleFormat(Session::LocalTabTitle) ) ;
-
-
-    if ( snapshot != process )
-    {
-        delete snapshot;
-        delete process;
-    }
-    else
-        delete snapshot;
-
-    title = title.simplified();
+    QString title = _session->getDynamicTitle();    
+    title         = title.simplified();
 
     // crude indicator when the session is broadcasting to others
     if (_copyToGroup && _copyToGroup->sessions().count() > 1)
@@ -255,64 +219,12 @@ void SessionController::snapshot()
 
 QString SessionController::currentDir() const
 {
-    ProcessInfo* info = ProcessInfo::newInstance(_session->processId());
-    info->update();
-
-    bool ok = false;
-    QString path = info->currentDir(&ok);
-
-    delete info;
-
-    if ( ok )
-        return path;
-    else
-        return QString();
+    return _session->currentWorkingDirectory();
 }
 
 KUrl SessionController::url() const
 {
-    ProcessInfo* info = ProcessInfo::newInstance(_session->processId());
-    info->update();
-
-    QString path;
-    if ( info->isValid() )
-    {
-        bool ok = false;
-
-        // check if foreground process is bookmark-able
-        int pid = _session->foregroundProcessId();
-        if ( pid != 0 )
-        {
-            ProcessInfo* foregroundInfo = ProcessInfo::newInstance(pid);
-            foregroundInfo->update();
-
-            // for remote connections, save the user and host
-            // bright ideas to get the directory at the other end are welcome :)
-            if ( foregroundInfo->name(&ok) == "ssh" && ok )
-            {
-                SSHProcessInfo sshInfo(*foregroundInfo);
-                path = "ssh://" + sshInfo.userName() + '@' + sshInfo.host();
-            }
-            else
-            {
-                path = foregroundInfo->currentDir(&ok);
-
-                if (!ok)
-                    path.clear();
-            }
-
-            delete foregroundInfo;
-        }
-        else // otherwise use the current working directory of the shell process
-        {
-            path = info->currentDir(&ok);
-            if (!ok)
-                path.clear();
-        }
-    }
-
-    delete info;
-    return KUrl( path );
+    return _session->getUrl();
 }
 
 void SessionController::rename()
@@ -585,11 +497,6 @@ void SessionController::setupActions()
     _changeProfileMenu = new KMenu(i18n("Change Profile"),_view);
     collection->addAction("change-profile",_changeProfileMenu->menuAction());
     connect( _changeProfileMenu , SIGNAL(aboutToShow()) , this , SLOT(prepareChangeProfileMenu()) );
-
-    // debugging tools
-    //action = collection->addAction("debug-process");
-    //action->setText( "Get Foreground Process" );
-    //connect( action , SIGNAL(triggered()) , this , SLOT(debugProcess()) );
 }
 void SessionController::changeProfile(Profile::Ptr profile)
 {
@@ -614,40 +521,6 @@ void SessionController::updateCodecAction()
 void SessionController::changeCodec(QTextCodec* codec)
 {
     _session->setCodec(codec);
-}
-void SessionController::debugProcess()
-{
-    // testing facility to retrieve process information about
-    // currently active process in the shell
-    ProcessInfo* sessionProcess = ProcessInfo::newInstance(_session->processId());
-    sessionProcess->update();
-
-    bool ok = false;
-    int fpid = sessionProcess->foregroundPid(&ok);
-
-    if ( ok )
-    {
-        ProcessInfo* fp = ProcessInfo::newInstance(fpid);
-        fp->update();
-
-        QString name = fp->name(&ok);
-
-        if ( ok )
-        {
-            _session->setTitle(Session::DisplayedTitleRole,name);
-            sessionTitleChanged();
-        }
-
-        QString currentDir = fp->currentDir(&ok);
-
-        if ( ok )
-            kDebug(1211) << currentDir;
-        else
-            kDebug(1211) << "could not read current dir of foreground process";
-
-        delete fp;
-    }
-    delete sessionProcess;
 }
 
 void SessionController::editCurrentProfile()
@@ -692,13 +565,9 @@ void SessionController::saveSession()
 }
 bool SessionController::confirmClose() const
 {
-    if (_session->foregroundProcessId() != _session->processId())
+    if (_session->isChildActive())
     {
-        ProcessInfo* foregroundInfo = ProcessInfo::newInstance(_session->foregroundProcessId());
-        foregroundInfo->update();
-        bool ok = false;
-        QString title = foregroundInfo->name(&ok);
-        delete foregroundInfo;
+        QString title = _session->childName();
       
         // hard coded for now.  In future make it possible for the user to specify which programs
         // are ignored when considering whether to display a confirmation
@@ -708,12 +577,12 @@ bool SessionController::confirmClose() const
             return true;
 
         QString question;
-        if (ok)
-            question = i18n("The program '%1' is currently running in this session."  
-                            "  Are you sure you want to close it?",title);
-        else
+        if (title.isEmpty())
             question = i18n("A program is currently running in this session."
                             "  Are you sure you want to close it?");
+        else
+            question = i18n("The program '%1' is currently running in this session."  
+                            "  Are you sure you want to close it?",title);
 
         int result = KMessageBox::warningYesNo(_view->window(),question,i18n("Confirm Close"));
         return (result == KMessageBox::Yes) ? true : false; 
@@ -1489,3 +1358,12 @@ QRegExp SearchHistoryTask::regExp() const
 }
 
 #include "SessionController.moc"
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

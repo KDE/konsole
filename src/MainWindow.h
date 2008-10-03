@@ -132,6 +132,10 @@ class MainWindow : public KXmlGuiWindow
     protected:
         // reimplemented from KMainWindow
         virtual bool queryClose();
+        virtual void saveProperties(KConfigGroup& group);
+        virtual void readProperties(const KConfigGroup& group);
+        virtual void saveGlobalProperties(KConfig* config);
+        virtual void readGlobalProperties(KConfig* config);
 
     private slots:
         void newTab();
@@ -179,3 +183,12 @@ class MainWindow : public KXmlGuiWindow
 }
 
 #endif // KONSOLEMAINWINDOW_H
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

@@ -144,8 +144,8 @@ public:
     NavigationMethod navigationMethod() const;
 
     /** 
-      * Returns the controller for the active view.  activeViewChanged() is 
-      * emitted when this changes.
+     * Returns the controller for the active view.  activeViewChanged() is 
+     * emitted when this changes.
      */
     SessionController* activeViewController() const;
 
@@ -153,6 +153,12 @@ public:
      * Returns the search bar.
      */
     IncrementalSearchBar* searchBar() const;
+
+    /**
+     * Session management
+     */
+    void saveSessions(KConfigGroup& group);
+    void restoreSessions(const KConfigGroup& group);
 
 signals:
     /** Emitted when the last view is removed from the view manager */
@@ -305,3 +311,12 @@ private:
 }
 
 #endif
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

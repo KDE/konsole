@@ -48,11 +48,13 @@
 #include <kshell.h>
 #include <KStandardDirs>
 #include <KPtyDevice>
+#include <KUrl>
 
 // Konsole
 #include <config-konsole.h>
 #include <sessionadaptor.h>
 
+#include "ProcessInfo.h"
 #include "Pty.h"
 #include "TerminalDisplay.h"
 #include "ShellCommand.h"
@@ -77,6 +79,9 @@ Session::Session(QObject* parent) :
    , _flowControl(true)
    , _fullScripting(false)
    , _sessionId(0)
+   , _sessionProcessInfo(0)
+   , _foregroundProcessInfo(0)
+   , _foregroundPid(0)
    , _zmodemBusy(false)
    , _zmodemProc(0)
    , _zmodemProgress(0)
@@ -198,6 +203,19 @@ void Session::setInitialWorkingDirectory(const QString& dir)
 void Session::setArguments(const QStringList& arguments)
 {
     _arguments = ShellCommand::expand(arguments);
+}
+
+QString Session::currentWorkingDirectory()
+{
+    // only returned cached value
+    if (_currentWorkingDir.isEmpty()) updateWorkingDirectory();
+    return _currentWorkingDir;
+}
+ProcessInfo* Session::updateWorkingDirectory()
+{
+    ProcessInfo *process = getProcessInfo();
+    _currentWorkingDir = process->validCurrentDir();
+    return process;
 }
 
 QList<TerminalDisplay*> Session::views() const
@@ -322,9 +340,13 @@ void Session::run()
 {
   //check that everything is in place to run the session
   if (_program.isEmpty())
+  {
       kDebug() << "Session::run() - program to run not set.";
+  }
   if (_arguments.isEmpty())
+  {
       kDebug() << "Session::run() - no command line arguments specified.";
+  }
 
   const int CHOICE_COUNT = 3;
   QString programs[CHOICE_COUNT] = {_program,qgetenv("SHELL"),"/bin/sh"};
@@ -662,6 +684,10 @@ void Session::sendText(const QString &text) const
 
 Session::~Session()
 {
+  if (_foregroundProcessInfo)
+      delete _foregroundProcessInfo;
+  if (_sessionProcessInfo)
+      delete _sessionProcessInfo;
   delete _emulation;
   delete _shellProcess;
   delete _zmodemProc;
@@ -747,6 +773,110 @@ QString Session::title(TitleRole role) const
         return _displayTitle;
     else
         return QString();
+}
+
+ProcessInfo* Session::getProcessInfo()
+{
+    ProcessInfo* process;
+
+    if (isChildActive())
+        process = _foregroundProcessInfo;
+    else
+    {
+        updateSessionProcessInfo();
+        process = _sessionProcessInfo;
+    }
+
+    return process;
+}
+
+void Session::updateSessionProcessInfo()
+{
+    Q_ASSERT(_shellProcess);
+    if (!_sessionProcessInfo)
+        _sessionProcessInfo = ProcessInfo::newInstance(processId());
+    _sessionProcessInfo->update();
+}
+
+bool Session::updateForegroundProcessInfo()
+{
+    bool valid = (_foregroundProcessInfo != 0);
+
+    // has foreground process changed?
+    Q_ASSERT(_shellProcess);
+    int pid = _shellProcess->foregroundProcessGroup();
+    if (pid != _foregroundPid)
+    {
+        if (valid)
+            delete _foregroundProcessInfo;
+        _foregroundProcessInfo = ProcessInfo::newInstance(pid);
+        _foregroundPid = pid;
+        valid = true;
+    }
+
+    if (valid)
+    {
+        _foregroundProcessInfo->update();
+        valid = _foregroundProcessInfo->isValid();
+    }
+
+    return valid;
+}
+
+QString Session::getDynamicTitle()
+{
+    // update current directory from process
+    ProcessInfo* process = updateWorkingDirectory();
+
+    // format tab titles using process info
+    bool ok = false;
+    QString title;
+    if ( process->name(&ok) == "ssh" && ok )
+    {
+        SSHProcessInfo sshInfo(*process);
+        title = sshInfo.format(tabTitleFormat(Session::RemoteTabTitle));
+    }
+    else
+        title = process->format(tabTitleFormat(Session::LocalTabTitle));
+
+    return title;
+}
+
+KUrl Session::getUrl()
+{
+    QString path;
+    
+    updateSessionProcessInfo();
+    if (_sessionProcessInfo->isValid())
+    {
+        bool ok = false;
+
+        // check if foreground process is bookmark-able
+        if (isChildActive())
+        {
+            // for remote connections, save the user and host
+            // bright ideas to get the directory at the other end are welcome :)
+            if (_foregroundProcessInfo->name(&ok) == "ssh" && ok)
+            {
+                SSHProcessInfo sshInfo(*_foregroundProcessInfo);
+                path = "ssh://" + sshInfo.userName() + '@' + sshInfo.host();
+            }
+            else
+            {
+                path = _foregroundProcessInfo->currentDir(&ok);
+                if (!ok)
+                    path.clear();
+            }
+        }
+        else // otherwise use the current working directory of the shell process
+        {
+            path = _sessionProcessInfo->currentDir(&ok);
+            if (!ok)
+                path.clear();
+        }
+    }
+
+    return KUrl(path);
 }
 
 void Session::setIconName(const QString& iconName)
@@ -984,13 +1114,49 @@ void Session::setSize(const QSize& size)
 
   emit resizeRequest(size);
 }
-int Session::foregroundProcessId() const
-{
-    return _shellProcess->foregroundProcessGroup();
-}
 int Session::processId() const
 {
     return _shellProcess->pid();
+}
+
+bool Session::isChildActive()
+{
+    // foreground process info is always updated after this
+    return updateForegroundProcessInfo() && (processId() != _foregroundPid);
+}
+
+QString Session::childName()
+{
+    QString name;
+
+    if (updateForegroundProcessInfo()) 
+    {
+        bool ok = false;
+        name = _foregroundProcessInfo->name(&ok);
+        if (!ok)
+            name.clear();
+    }
+
+    return name;
+}
+
+void Session::saveSession(KConfigGroup& group)
+{
+    group.writePathEntry("WorkingDir", currentWorkingDirectory());
+    group.writeEntry("LocalTab",       tabTitleFormat(LocalTabTitle));
+    group.writeEntry("RemoteTab",      tabTitleFormat(RemoteTabTitle));
+}
+
+void Session::restoreSession(KConfigGroup& group)
+{
+    QString value;
+
+    value = group.readPathEntry("WorkingDir", QString());
+    if (!value.isEmpty()) setInitialWorkingDirectory(value);
+    value = group.readEntry("LocalTab");
+    if (!value.isEmpty()) setTabTitleFormat(LocalTabTitle, value);
+    value = group.readEntry("RemoteTab");
+    if (!value.isEmpty()) setTabTitleFormat(RemoteTabTitle, value);
 }
 
 SessionGroup::SessionGroup(QObject* parent)
@@ -1111,3 +1277,12 @@ void SessionGroup::disconnectPair(Session* master , Session* other)
 }
 
 #include "Session.moc"
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

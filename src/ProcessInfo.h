@@ -152,6 +152,11 @@ public:
     QString currentDir(bool* ok) const;
 
     /**
+     * Returns the current working directory of the process (or its parent)
+     */
+    QString validCurrentDir() const;
+
+    /**
      * Parses an input string, looking for markers beginning with a '%' 
      * character and returns a string with the markers replaced
      * with information from this process description.
@@ -424,3 +429,12 @@ private:
 
 }
 #endif //PROCESSINFO_H
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

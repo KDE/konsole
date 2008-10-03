@@ -209,9 +209,6 @@ private slots:
 
     void updateSearchFilter();
 
-    // debugging slots
-    void debugProcess();
-
 private:
     // begins the search
     // text - pattern to search for
@@ -439,3 +436,12 @@ private:
 }
 
 #endif //SESSIONCONTROLLER_H
+
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

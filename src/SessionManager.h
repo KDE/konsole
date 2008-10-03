@@ -243,6 +243,12 @@ public:
      */
     static SessionManager* instance();
 
+    // session management
+    void saveSessions(KConfig* config);
+    int  getRestoreId(Session* session);
+    void restoreSessions(KConfig* config);
+    Session *idToSession(int id);
+
 signals:
     /** Emitted when a profile is added to the manager. */
     void profileAdded(Profile::Ptr ptr);
@@ -318,6 +324,7 @@ private:
 
     QSet<Profile::Ptr> _types;
     QHash<Session*,Profile::Ptr> _sessionProfiles;
+    QHash<Session*,int> _restoreMapping;
 
     struct ShortcutData
     {
@@ -420,3 +427,11 @@ private:
 }
 #endif //SESSIONMANAGER_H
 
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/

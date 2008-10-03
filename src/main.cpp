@@ -19,6 +19,7 @@
 
 // Own
 #include "Application.h"
+#include "MainWindow.h"
 #include <KDebug>
 
 // Unix
@@ -51,6 +52,7 @@ void fillCommandLineOptions(KCmdLineOptions& options);
 bool useTransparency();     // returns true if transparency should be enabled
 bool forceNewProcess();     // returns true if new instance should use a new
                             // process (instead of re-using an existing one)
+void restoreSession(Application& app);
 
 // ***
 // Entry point into the Konsole terminal application.  
@@ -91,12 +93,14 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
         getDisplayInformation(display,visual,colormap);
 
         Application app(display,(Qt::HANDLE)visual,(Qt::HANDLE)colormap);
+        restoreSession(app);
         return app.exec();
     }
     else
 #endif 
     {
         Application app;
+        restoreSession(app);
         return app.exec();
     }   
 }
@@ -242,4 +246,21 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
 }
 #endif
 
+void restoreSession(Application& app)
+{
+    if (app.isSessionRestored())
+    {
+        int n = 1;
+        while (KMainWindow::canBeRestored(n))
+            app.newMainWindow()->restore(n++);
+    }
+}
 
+/*
+  Local Variables:
+  mode: c++
+  c-file-style: "stroustrup"
+  indent-tabs-mode: nil
+  tab-width: 4
+  End:
+*/
