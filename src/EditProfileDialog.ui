@@ -507,7 +507,7 @@
                </sizepolicy>
               </property>
               <property name="text" >
-               <string>FONT PREVIEW TEXT</string>
+               <string comment="KDE::DoNotExtract">FONT PREVIEW TEXT</string>
               </property>
              </widget>
             </item>
@@ -1133,7 +1133,7 @@
              </sizepolicy>
             </property>
             <property name="text" >
-             <string>DEFAULTENCODING</string>
+             <string comment="KDE::DoNotExtract">DEFAULTENCODING</string>
             </property>
            </widget>
           </item>
