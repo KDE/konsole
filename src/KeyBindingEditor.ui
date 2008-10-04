@@ -71,7 +71,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox" >
      <property name="title" >
-      <string>Test Area</string>
+      <string comment="Title of the area where you test your keys are properly configured">Test Area</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
