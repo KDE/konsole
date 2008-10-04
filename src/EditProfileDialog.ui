@@ -81,6 +81,9 @@
             <property name="toolTip" >
              <string>The command to execute when new terminal sessions are created using this profile</string>
             </property>
+            <property name="layoutDirection" >
+             <enum>Qt::LeftToRight</enum>
+            </property>
            </widget>
           </item>
           <item row="2" column="0" >
@@ -97,6 +100,9 @@
            <widget class="KLineEdit" name="initialDirEdit" >
             <property name="toolTip" >
              <string>The initial working directory for new terminal sessions using this profile</string>
+            </property>
+            <property name="layoutDirection" >
+    	     <enum>Qt::LeftToRight</enum>
             </property>
            </widget>
           </item>
