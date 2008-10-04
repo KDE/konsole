@@ -54,7 +54,7 @@ public:
 
     /** 
      * Sets the 'source' session whoose input will be copied to 
-     * other sessions.  This session is displayed greyed-out in the list
+     * other sessions.  This session is displayed grayed out in the list
      * and cannot be unchecked.
      */
     void setMasterSession(Session* master);
