@@ -1010,17 +1010,17 @@
               </property>
               <item>
                <property name="text" >
-                <string>Block</string>
+                <string comment="The shape of the cursor">Block</string>
                </property>
               </item>
               <item>
                <property name="text" >
-                <string>I-Beam</string>
+                <string comment="The shape of the cursor, similar to a capital I">I-Beam</string>
                </property>
               </item>
               <item>
                <property name="text" >
-                <string>Underline</string>
+                <string comment="The shape of the cursor">Underline</string>
                </property>
               </item>
              </widget>
