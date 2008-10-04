@@ -275,7 +275,7 @@
           <item row="0" column="1" >
            <widget class="KLineEdit" name="tabTitleEdit" >
             <property name="toolTip" >
-             <string>Normal tab title format </string>
+             <string>Normal tab title format</string>
             </property>
            </widget>
           </item>
@@ -685,7 +685,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_7" >
          <property name="title" >
-          <string>Scroll Bar </string>
+          <string>Scroll Bar</string>
          </property>
          <property name="flat" >
           <bool>true</bool>
