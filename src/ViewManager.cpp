@@ -128,10 +128,10 @@ void ViewManager::setupActions()
 
     KAction* nextViewAction = new KAction( i18n("Next View") , this );
     KAction* previousViewAction = new KAction( i18n("Previous View") , this );
-    QAction* nextContainerAction = new QAction( i18n("Next View Container") , this);
+    KAction* nextContainerAction = new KAction( i18n("Next View Container") , this);
   
-    QAction* moveViewLeftAction = new QAction( i18n("Move View Left") , this );
-    QAction* moveViewRightAction = new QAction( i18n("Move View Right") , this );
+    KAction* moveViewLeftAction = new KAction( i18n("Move View Left") , this );
+    KAction* moveViewRightAction = new KAction( i18n("Move View Right") , this );
 
     // list of actions that should only be enabled when there are multiple view
     // containers open
