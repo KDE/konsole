@@ -585,7 +585,8 @@ void TabbedViewContainer::dynamicTabBarVisibility()
 }
 TabbedViewContainer::~TabbedViewContainer()
 {
-    _containerWidget->deleteLater();
+    if (!_containerWidget.isNull())
+        _containerWidget->deleteLater();
 }
 
 void TabbedViewContainer::startTabDrag(int tab)
@@ -780,7 +781,8 @@ StackedViewContainer::StackedViewContainer(QObject* parent)
 }
 StackedViewContainer::~StackedViewContainer()
 {
-    _containerWidget->deleteLater();
+    if (!_containerWidget.isNull())
+        _containerWidget->deleteLater();
 }
 QWidget* StackedViewContainer::containerWidget() const
 {

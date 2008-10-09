@@ -24,6 +24,7 @@
 
 // Qt
 #include <QtCore/QObject>
+#include <QtCore/QPointer>
 #include <QtCore/QHash>
 #include <QtCore/QList>
 #include <QtGui/QBoxLayout>
@@ -449,7 +450,7 @@ private:
 
     ViewContainerTabBar* _tabBar;
     QStackedWidget* _stackWidget;
-    QWidget* _containerWidget;
+    QPointer<QWidget> _containerWidget;
     QSpacerItem* _tabBarSpacer;
     TabbedViewContainerLayout* _layout;
     QHBoxLayout* _tabBarLayout;
@@ -475,7 +476,7 @@ protected:
     virtual void removeViewWidget( QWidget* view );
 
 private:
-    QWidget *_containerWidget;
+    QPointer<QWidget> _containerWidget;
     QStackedWidget* _stackWidget;
 };
 
