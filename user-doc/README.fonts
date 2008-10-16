@@ -20,7 +20,7 @@ Fonts need to suit the needs of X11, QT and konsole.
   processing) the outcome would look very poor,
   since the glyphs would have to be placed into
   a cell fitting the widest character in the
-  font, which is typically more then two times
+  font, which is typically more than two times
   wider then the narrowest glyph. Imagine a text
   with  l  o  t  s     o  f     s  p  a  c  e  s
   inserted between each character to get the idea.

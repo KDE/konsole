@@ -71,7 +71,7 @@ This file is to collect requirements and ideas for this.
 - A more generic handling of different sorts of emulations.
 
   This means to fix a long term problem in mc(1) first,
-  to allow using terminfo entries other then 'xterm'.
+  to allow using terminfo entries other than 'xterm'.
 
   We could use these then to weed out obsolete material
   and to make konsole having an ECMA compatible emulation
