@@ -9,7 +9,7 @@ First of all, the redition process deals with a lot of parameters, making
 a useful configuration program for it quite complicated.
 
 Looking at TECommon.h, the current implementation of a character cell allows
-not less then 256 different foreground and background colors, together with
+not less than 256 different foreground and background colors, together with
 256 rendition values, with, forming a bit vector can be treated as 8 different
 rendition attributes (like blink, bold, underlined, etc.)
 
@@ -96,7 +96,7 @@ colors. That fore- and background colors are interpreted identically, is
 also build-in to the engine (and interpretation). These aren't severe
 limitations, it can be changed easily.
 
-Other then the emulations mentioned above, konsole can interpret "blink"
+Other than the emulations mentioned above, konsole can interpret "blink"
 as blink. Just to have a little more fun, konsole can display background
 images, meaning that some background colors have to be interpreted as 
 "transparent" when a background image exists. Practically, this can only
