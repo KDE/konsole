@@ -1,6 +1,7 @@
 [General]
 Name=Shell
 Name[af]=Tolk
+Name[ar]=القشرة
 Name[bg]=Шел
 Name[bn]=শেল
 Name[bn_IN]=শেল
