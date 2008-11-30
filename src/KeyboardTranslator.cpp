@@ -51,7 +51,7 @@ KeyboardTranslatorManager::KeyboardTranslatorManager()
 }
 KeyboardTranslatorManager::~KeyboardTranslatorManager()
 {
-    qDeleteAll(_translators.values());
+    qDeleteAll(_translators);
 }
 QString KeyboardTranslatorManager::findTranslatorPath(const QString& name)
 {
