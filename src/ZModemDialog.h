@@ -21,7 +21,7 @@
 
 #include <kdialog.h>
 
-class QTextEdit;
+class KTextEdit;
 
 namespace Konsole
 {
@@ -46,7 +46,7 @@ public Q_SLOTS:
   void slotClose();
   
 private:
-  QTextEdit* _textEdit;
+  KTextEdit* _textEdit;
 };
 
 }

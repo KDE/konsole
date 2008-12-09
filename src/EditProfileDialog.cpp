@@ -26,7 +26,6 @@
 #include <QtGui/QPainter>
 #include <QtGui/QStandardItem>
 #include <QtCore/QTextCodec>
-#include <QtGui/QTextEdit>
 #include <QtGui/QLinearGradient>
 #include <QtGui/QRadialGradient>
 
@@ -42,6 +41,7 @@
 #include <KFileDialog>
 #include <KUrlCompletion>
 #include <KWindowSystem>
+#include <KTextEdit>
 
 // Konsole
 #include "ColorScheme.h"
@@ -279,7 +279,7 @@ void EditProfileDialog::showEnvironmentEditor()
     const Profile::Ptr info = lookupProfile();
 
     KDialog* dialog = new KDialog(this);
-    QTextEdit* edit = new QTextEdit(dialog);
+    KTextEdit* edit = new KTextEdit(dialog);
 
     QStringList currentEnvironment = info->property<QStringList>(Profile::Environment);
 

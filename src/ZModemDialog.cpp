@@ -19,11 +19,9 @@
 // Own 
 #include "ZModemDialog.h"
 
-// Qt
-#include <QtGui/QTextEdit>
-
 // KDE
 #include <KLocale>
+#include <KTextEdit>
 
 using namespace Konsole;
 
@@ -41,7 +39,7 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
 
   showButtonSeparator( true );
   enableButton(Close, false);
-  _textEdit = new QTextEdit(this);
+  _textEdit = new KTextEdit(this);
   _textEdit->setMinimumSize(400, 100);
   _textEdit->setReadOnly(true);
   setMainWidget(_textEdit);

@@ -220,22 +220,22 @@ void Vt102Emulation::initTokenizer()
 { 
   int i; 
   quint8* s;
-  for(i = 0;i < 256; i++) 
+  for(i = 0;i < 256; ++i) 
     charClass[i] = 0;
-  for(i = 0;i < 32; i++) 
+  for(i = 0;i < 32; ++i) 
     charClass[i] |= CTL;
-  for(i = 32;i < 256; i++) 
+  for(i = 32;i < 256; ++i) 
     charClass[i] |= CHR;
-  for(s = (quint8*)"@ABCDGHILMPSTXZcdfry"; *s; s++) 
+  for(s = (quint8*)"@ABCDGHILMPSTXZcdfry"; *s; ++s) 
     charClass[*s] |= CPN;
   // resize = \e[8;<row>;<col>t
-  for(s = (quint8*)"t"; *s; s++) 
+  for(s = (quint8*)"t"; *s; ++s) 
     charClass[*s] |= CPS;
-  for(s = (quint8*)"0123456789"; *s; s++) 
+  for(s = (quint8*)"0123456789"; *s; ++s) 
     charClass[*s] |= DIG;
-  for(s = (quint8*)"()+*%"; *s; s++) 
+  for(s = (quint8*)"()+*%"; *s; ++s) 
     charClass[*s] |= SCS;
-  for(s = (quint8*)"()+*#[]%"; *s; s++) 
+  for(s = (quint8*)"()+*#[]%"; *s; ++s) 
     charClass[*s] |= GRP;
 
   resetTokenizer();

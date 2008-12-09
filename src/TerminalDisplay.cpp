@@ -954,7 +954,7 @@ void TerminalDisplay::updateImage()
   // which therefore need to be repainted
   int dirtyLineCount = 0;
 
-  for (y = 0; y < linesToUpdate; y++)
+  for (y = 0; y < linesToUpdate; ++y)
   {
     const Character*       currentLine = &_image[y*this->_columns];
     const Character* const newLine = &newimg[y*columns];
@@ -966,7 +966,7 @@ void TerminalDisplay::updateImage()
     // its cell boundaries
     memset(dirtyMask, 0, columnsToUpdate+2);
    
-    for( x = 0 ; x < columnsToUpdate ; x++)
+    for( x = 0 ; x < columnsToUpdate ; ++x)
     {
         if ( newLine[x] != currentLine[x] ) 
         {
@@ -975,7 +975,7 @@ void TerminalDisplay::updateImage()
     }
 
     if (!_resizing) // not while _resizing, we're expecting a paintEvent
-    for (x = 0; x < columnsToUpdate; x++)
+    for (x = 0; x < columnsToUpdate; ++x)
     {
       _hasBlinker |= (newLine[x].rendition & RE_BLINK);
     
@@ -995,7 +995,7 @@ void TerminalDisplay::updateImage()
         _clipboard = newLine[x].backgroundColor;
         if (newLine[x].foregroundColor != cf) cf = newLine[x].foregroundColor;
         int lln = columnsToUpdate - x;
-        for (len = 1; len < lln; len++)
+        for (len = 1; len < lln; ++len)
         {
             const Character& ch = newLine[x+len];
 
