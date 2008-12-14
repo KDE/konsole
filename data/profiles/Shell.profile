@@ -41,7 +41,6 @@ Name[oc]=Copèla
 Name[pa]=ਸ਼ੈੱਲ
 Name[pl]=Powłoka
 Name[pt]=Linha de Comandos
-Name[pt_BR]=Linha de Comando
 Name[ro]=Interpretor
 Name[ru]=Оболочка командной строки
 Name[se]=Skálžu
