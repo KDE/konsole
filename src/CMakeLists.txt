@@ -88,9 +88,10 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
         list(APPEND konsole_LIBS ${X11_Xrender_LIB})
     endif(X11_Xrender_FOUND)
 
-    if(X11_XTest_FOUND)
-        list(APPEND konsole_LIBS ${X11_XTest_LIB})
-    endif(X11_XTest_FOUND)
+# doesn't seem to be needed
+#    if(X11_XTest_FOUND)
+#        list(APPEND konsole_LIBS ${X11_XTest_LIB})
+#    endif(X11_XTest_FOUND)
 
 ### Konsole Application
 
