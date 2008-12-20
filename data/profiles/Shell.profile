@@ -62,6 +62,7 @@ Comment[af]=Konsole verstekprofiel
 Comment[ar]=لوحة الإعدادات المبدئية
 Comment[be@latin]=Zmoŭčany profil prahramy „Konsole”
 Comment[bg]=Профил по подразбиране на конзолата
+Comment[bn]=কনসোল ডিফল্ট প্রোফাইল
 Comment[bn_IN]=Konsole-র ডিফল্ট প্রোফাইল
 Comment[ca]=Perfil per omissió del Konsole
 Comment[cs]=Výchozí profil Konsole
