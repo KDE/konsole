@@ -12,6 +12,7 @@ Name[da]=Skal
 Name[el]=Κέλυφος
 Name[eo]=Ŝelo
 Name[es]=Intérprete de comandos
+Name[eu]=Shell-a
 Name[fi]=Komentorivi
 Name[fr]=Terminal
 Name[fy]=Flues
