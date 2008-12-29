@@ -1042,9 +1042,6 @@ void SaveHistoryTask::execute()
 {
     QListIterator<SessionPtr> iter(sessions());
 
-    // TODO - prompt the user if the file already exists, currently existing files
-    //        are always overwritten
-
     // TODO - think about the UI when saving multiple history sessions, if there are more than two or
     //        three then providing a URL for each one will be tedious
 
@@ -1053,6 +1050,9 @@ void SaveHistoryTask::execute()
 
      KFileDialog* dialog = new KFileDialog( QString(":konsole") /* check this */,
                                                QString(), QApplication::activeWindow() );
+     dialog->setOperationMode(KFileDialog::Saving);
+     dialog->setConfirmOverwrite(true);
+
      QStringList mimeTypes;
      mimeTypes << "text/plain";
      mimeTypes << "text/html";
