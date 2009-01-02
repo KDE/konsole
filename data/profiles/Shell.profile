@@ -102,6 +102,7 @@ Comment[nb]=Konsoles standardprofil
 Comment[nds]=Standard-Konsoletörn
 Comment[nl]=Standaardprofiel (Konsole)
 Comment[nn]=Standardprofil for Konsoll
+Comment[or]=କୋନସୋଲ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ସଂକ୍ଷିପ୍ତ ଚିତ୍ର
 Comment[pa]=ਕਨਸੋਲ ਡਿਫਾਲਟ ਪਰੋਫਾਇਲ
 Comment[pl]=Domyślny profil Konsoli
 Comment[pt]=Perfil predefinido do Konsole
