@@ -38,6 +38,7 @@
 
 // Konsole
 #include "TerminalCharacterDecoder.h"
+#include "konsole_wcwidth.h"
 
 using namespace Konsole;
 
@@ -219,7 +220,7 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
         if ( _linePositions->value(i) <= position && position < nextLine ) 
         {
             startLine = i;
-            startColumn = position - _linePositions->value(i);
+            startColumn = string_width(buffer()->mid(_linePositions->value(i),position - _linePositions->value(i)));
             return;
         }
     }
