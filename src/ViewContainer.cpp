@@ -487,9 +487,13 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _containerWidget->setLayout(_layout);
 }
 void TabbedViewContainer::setNewViewMenu(QMenu* menu)
-{ _newTabButton->setDelayedMenu(menu); }
+{
+  _newTabButton->setDelayedMenu(menu); 
+}
 ViewContainer::Features TabbedViewContainer::supportedFeatures() const
-{ return QuickNewView|QuickCloseView; }
+{ 
+  return QuickNewView|QuickCloseView;
+}
 void TabbedViewContainer::setFeatures(Features features)
 {
     ViewContainer::setFeatures(features);
@@ -695,6 +699,8 @@ void TabbedViewContainer::addViewWidget( QWidget* view , int index)
 }
 void TabbedViewContainer::removeViewWidget( QWidget* view )
 {
+    if (!_stackWidget)
+        return;
     const int index = _stackWidget->indexOf(view);
 
     Q_ASSERT( index != -1 );
@@ -802,6 +808,8 @@ void StackedViewContainer::addViewWidget( QWidget* view , int )
 }
 void StackedViewContainer::removeViewWidget( QWidget* view )
 {
+    if (!_stackWidget)
+        return;
     const int index = _stackWidget->indexOf(view);
 
     Q_ASSERT( index != -1);
@@ -897,6 +905,8 @@ void ListViewContainer::addViewWidget( QWidget* view , int )
 
 void ListViewContainer::removeViewWidget( QWidget* view )
 {
+    if (!_stackWidget)
+        return;
     int index = _stackWidget->indexOf(view);
     _stackWidget->removeWidget(view);
     delete _listWidget->takeItem( index );
