@@ -757,7 +757,7 @@ private:
     // list of filters currently applied to the display.  used for links and
     // search highlight
     TerminalImageFilterChain* _filterChain;
-    QRect _mouseOverHotspotArea;
+    QRegion _mouseOverHotspotArea;
 
     KeyboardCursorShape _cursorShape;
 
