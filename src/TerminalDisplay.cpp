@@ -873,13 +873,32 @@ QRegion TerminalDisplay::hotSpotRegion() const
     QRegion region;
     foreach( Filter::HotSpot* hotSpot , _filterChain->hotSpots() )
     {
-        QRect rect;
-        rect.setLeft(hotSpot->startColumn());
-        rect.setTop(hotSpot->startLine());
-        rect.setRight(hotSpot->endColumn());
-        rect.setBottom(hotSpot->endLine());
-
-        region |= imageToWidget(rect); 
+        QRect r;
+        if (hotSpot->startLine()==hotSpot->endLine()) {
+            r.setLeft(hotSpot->startColumn());
+            r.setTop(hotSpot->startLine());
+            r.setRight(hotSpot->endColumn());
+            r.setBottom(hotSpot->endLine());
+            region |= imageToWidget(r);;
+        } else {
+            r.setLeft(hotSpot->startColumn());
+            r.setTop(hotSpot->startLine());
+            r.setRight(_columns);
+            r.setBottom(hotSpot->startLine());
+            region |= imageToWidget(r);;
+            for ( int line = hotSpot->startLine()+1 ; line < hotSpot->endLine() ; line++ ) {
+                r.setLeft(0);
+                r.setTop(line);
+                r.setRight(_columns);
+                r.setBottom(line);
+                region |= imageToWidget(r);;
+            }
+            r.setLeft(0);
+            r.setTop(hotSpot->endLine());
+            r.setRight(hotSpot->endColumn());
+            r.setBottom(hotSpot->endLine());
+            region |= imageToWidget(r);;
+        }
     }
     return region;
 }
@@ -1244,6 +1263,28 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     {
         Filter::HotSpot* spot = iter.next();
 
+        QRegion region;
+        if ( spot->type() == Filter::HotSpot::Link ) {
+            QRect r;
+            if (spot->startLine()==spot->endLine()) {
+                r.setCoords( spot->startColumn()*_fontWidth + 1, spot->startLine()*_fontHeight + 1,
+                                 (spot->endColumn()-1)*_fontWidth - 1, (spot->endLine()+1)*_fontHeight - 1 ); 
+                region |= r;
+            } else {
+                r.setCoords( spot->startColumn()*_fontWidth + 1, spot->startLine()*_fontHeight + 1,
+                                 (_columns-1)*_fontWidth - 1, (spot->startLine()+1)*_fontHeight - 1 ); 
+                region |= r;
+                for ( int line = spot->startLine()+1 ; line < spot->endLine() ; line++ ) {
+                    r.setCoords( 0*_fontWidth + 1, line*_fontHeight + 1,
+                                 (_columns-1)*_fontWidth - 1, (line+1)*_fontHeight - 1 ); 
+                    region |= r;
+                }
+                r.setCoords( 0*_fontWidth + 1, spot->endLine()*_fontHeight + 1,
+                                 (spot->endColumn()-1)*_fontWidth - 1, (spot->endLine()+1)*_fontHeight - 1 ); 
+                region |= r;
+            }
+        }
+
         for ( int line = spot->startLine() ; line <= spot->endLine() ; line++ )
         {
             int startColumn = 0;
@@ -1287,10 +1328,10 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 int baseline = r.bottom() - metrics.descent();
                 // find the position of the underline below that
                 int underlinePos = baseline + metrics.underlinePos();
-
-                if ( r.contains( mapFromGlobal(QCursor::pos()) ) )
+                if ( region.contains( mapFromGlobal(QCursor::pos()) ) ){
                     painter.drawLine( r.left() , underlinePos , 
                                       r.right() , underlinePos );
+                }
             }
             // Marker hotspots simply have a transparent rectanglular shape
             // drawn on top of them
@@ -1697,27 +1738,41 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
   Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
   if ( spot && spot->type() == Filter::HotSpot::Link)
   {
-    QRect previousHotspotArea = _mouseOverHotspotArea;
-    _mouseOverHotspotArea.setCoords( qMin(spot->startColumn() , spot->endColumn()) * _fontWidth,
-                                     spot->startLine() * _fontHeight,
-                                     qMax(spot->startColumn() , spot->endColumn()) * _fontHeight,
-                                     (spot->endLine()+1) * _fontHeight );
-
+    QRegion previousHotspotArea = _mouseOverHotspotArea;
+    _mouseOverHotspotArea = QRegion();
+    QRect r;
+    if (spot->startLine()==spot->endLine()) {
+        r.setCoords( spot->startColumn()*_fontWidth, spot->startLine()*_fontHeight,
+                         spot->endColumn()*_fontWidth, (spot->endLine()+1)*_fontHeight - 1 ); 
+        _mouseOverHotspotArea |= r;
+    } else {
+        r.setCoords( spot->startColumn()*_fontWidth, spot->startLine()*_fontHeight,
+                         _columns*_fontWidth - 1, (spot->startLine()+1)*_fontHeight ); 
+        _mouseOverHotspotArea |= r;
+        for ( int line = spot->startLine()+1 ; line < spot->endLine() ; line++ ) {
+            r.setCoords( 0*_fontWidth, line*_fontHeight,
+                         _columns*_fontWidth, (line+1)*_fontHeight ); 
+            _mouseOverHotspotArea |= r;
+        }
+        r.setCoords( 0*_fontWidth, spot->endLine()*_fontHeight,
+                         spot->endColumn()*_fontWidth, (spot->endLine()+1)*_fontHeight ); 
+        _mouseOverHotspotArea |= r;
+    }
     // display tooltips when mousing over links
     // TODO: Extend this to work with filter types other than links
     const QString& tooltip = spot->tooltip();
     if ( !tooltip.isEmpty() )
     {
-        QToolTip::showText( mapToGlobal(ev->pos()) , tooltip , this , _mouseOverHotspotArea );
+        QToolTip::showText( mapToGlobal(ev->pos()) , tooltip , this , _mouseOverHotspotArea.boundingRect() );
     }
 
     update( _mouseOverHotspotArea | previousHotspotArea );
   }
-  else if ( _mouseOverHotspotArea.isValid() )
+  else if ( !_mouseOverHotspotArea.isEmpty() )
   {
         update( _mouseOverHotspotArea );
         // set hotspot area to an invalid rectangle
-        _mouseOverHotspotArea = QRect();
+        _mouseOverHotspotArea = QRegion();
   }
   
   // for auto-hiding the cursor, we need mouseTracking

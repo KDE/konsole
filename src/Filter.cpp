@@ -28,7 +28,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QClipboard>
 #include <QtCore/QString>
-#include <KDebug>
+#include <QtCore/QTextStream>
 #include <QtCore/QSharedData>
 #include <QtCore/QFile>
 
@@ -372,7 +372,6 @@ void RegExpFilter::process()
 
         if ( pos >= 0 )
         {
-
             int startLine = 0;
             int endLine = 0;
             int startColumn = 0;
