@@ -671,7 +671,7 @@ ViewManager::NavigationMethod ViewManager::navigationMethod() const { return _na
 
 void ViewManager::containerViewsChanged(QObject* container)
 {
-    if ( container == _viewSplitter->activeContainer() )
+    if (_viewSplitter && container == _viewSplitter->activeContainer() )
     {
         emit viewPropertiesChanged( viewProperties() );
     } 
@@ -695,9 +695,11 @@ void ViewManager::viewCloseRequest(QWidget* view)
         if ( session->views().count() == 0 )
             session->close();
     }
-        
-    focusActiveView();
-    updateDetachViewState();
+    //we only update the focus if the splitter is still alive
+    if (_viewSplitter) {
+        focusActiveView();
+        updateDetachViewState();
+    }
 }
 
 TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
