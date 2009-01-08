@@ -449,7 +449,7 @@ private:
     void setTabActivity(int index,bool activity);
 
     ViewContainerTabBar* _tabBar;
-    QStackedWidget* _stackWidget;
+    QPointer<QStackedWidget> _stackWidget;
     QPointer<QWidget> _containerWidget;
     QSpacerItem* _tabBarSpacer;
     TabbedViewContainerLayout* _layout;
@@ -477,7 +477,7 @@ protected:
 
 private:
     QPointer<QWidget> _containerWidget;
-    QStackedWidget* _stackWidget;
+    QPointer<QStackedWidget> _stackWidget;
 };
 
 /**
@@ -508,7 +508,7 @@ private slots:
 private:
     QBrush randomItemBackground(int randomIndex);
 
-    QStackedWidget* _stackWidget;
+    QPointer<QStackedWidget> _stackWidget;
     QSplitter* _splitter;
     QListWidget* _listWidget;
 };
