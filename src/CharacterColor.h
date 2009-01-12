@@ -259,9 +259,9 @@ inline const QColor color256(quint8 u, const ColorEntry* base)
   if (u <   8) return base[u+2+BASE_COLORS].color; u -= 8;
 
   //  16..231: 6x6x6 rgb color cube
-  if (u < 216) return QColor(255*((u/36)%6)/5,
-                             255*((u/ 6)%6)/5,
-                             255*((u/ 1)%6)/5); u -= 216;
+  if (u < 216) return QColor(((u/36)%6) ? (40*((u/36)%6)+55) : 0,
+                             ((u/ 6)%6) ? (40*((u/ 6)%6)+55) : 0,
+                             ((u/ 1)%6) ? (40*((u/ 1)%6)+55) : 0); u -= 216;
   
   // 232..255: gray, leaving out black and white
   int gray = u*10+8; return QColor(gray,gray,gray);
