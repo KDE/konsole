@@ -139,7 +139,7 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
     if (recursionGuard.contains(path))
     {
         kWarning() << "Ignoring attempt to load profile recursively from" << path;
-        return Profile::Ptr();
+        return _fallbackProfile;
     }
     else
         recursionGuard.push(path);
