@@ -33,6 +33,7 @@ Name[kn]=ಆದೇಶಗ್ರಾಹಿ (ಶೆಲ್)
 Name[ko]=셸
 Name[lt]=Apvalkalas
 Name[lv]=Čaula
+Name[mai]=शेल
 Name[mk]=Школка
 Name[ml]=ഷെല്‍
 Name[mr]=शेल
