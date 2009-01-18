@@ -161,7 +161,7 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme)
     setupColorTable(_colors);
 
     // setup transparency slider
-    const int transparencyPercent = (int) ( (1-_colors->opacity())*100 );
+    const int transparencyPercent = qRound( (1-_colors->opacity())*100 );
     
     _ui->transparencySlider->setValue(transparencyPercent);
     setTransparencyPercentLabel(transparencyPercent);
