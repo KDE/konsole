@@ -140,10 +140,16 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
 
 const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
 {
-    kDebug() << "Loading default translator from text" << defaultTranslatorText;
-    QBuffer textBuffer;
-    textBuffer.setData(defaultTranslatorText,strlen(defaultTranslatorText));
-    return loadTranslator(&textBuffer,"fallback");
+    // Try to find the default.keytab file if it exists, otherwise
+    // fall back to the hard-coded one
+    const KeyboardTranslator* translator = findTranslator("default");
+    if (!translator)
+    {
+        QBuffer textBuffer;
+        textBuffer.setData(defaultTranslatorText,strlen(defaultTranslatorText));
+        translator = loadTranslator(&textBuffer,"fallback");
+    }
+    return translator;
 }
 
 KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(QIODevice* source,const QString& name)
