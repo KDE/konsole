@@ -64,9 +64,6 @@ MainWindow::MainWindow()
    _menuBarVisibilitySet(false)
 {
     // create actions for menus
-    // the directory ('konsole') is included in the path here so that the XML
-    // file can be found when this code is being used in the Konsole part.
-    setXMLFile("konsole/konsoleui.rc");
     setupActions();
 
     // create view manager
