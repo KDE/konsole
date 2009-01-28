@@ -92,5 +92,6 @@ GenericName[x-test]=xxTerminalxx
 GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 X-DBUS-StartupType=Unique
+X-DBUS-ServiceName=org.kde.konsole
 X-KDE-AuthorizeAction=shell_access
 Categories=Qt;KDE;System;TerminalEmulator;
