@@ -95,6 +95,8 @@ public:
     /** Returns the default line count, as set with setDefaultLineCount() */
     int defaultLineCount() const;
 
+    bool saveToCurrentProfile() const;
+
 signals:
     /**
      * Emitted when the user changes the scroll-back mode or line count and
@@ -104,7 +106,7 @@ signals:
      * @param lineCount The current line count.  This is only applicable if mode is
      * FixedSizeHistory
      */
-    void optionsChanged(int mode , int lineCount);
+    void optionsChanged(int mode , int lineCount, bool saveToCurrentProfile);
 
 private slots:
     // changes the mode and line count back to the defaults
@@ -119,6 +121,7 @@ private:
     QAbstractButton* _noHistoryButton;
     QAbstractButton* _fixedHistoryButton;
     QAbstractButton* _unlimitedHistoryButton;
+    QAbstractButton* _saveToCurrentProfileButton;
     QSpinBox* _lineCountBox;   
 
     HistoryMode _defaultMode;

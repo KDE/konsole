@@ -831,8 +831,8 @@ void SessionController::showHistoryOptions()
     else
         dialog->setMode( HistorySizeDialog::NoHistory );
 
-    connect( dialog , SIGNAL(optionsChanged(int,int)) ,
-             this , SLOT(scrollBackOptionsChanged(int,int)) );
+    connect( dialog , SIGNAL(optionsChanged(int,int,bool)) ,
+             this , SLOT(scrollBackOptionsChanged(int,int,bool)) );
 
     dialog->show();
 }
@@ -841,7 +841,7 @@ void SessionController::sessionResizeRequest(const QSize& size)
     kDebug(1211) << "View resize requested to " << size;
     _view->setSize(size.width(),size.height());
 }
-void SessionController::scrollBackOptionsChanged( int mode , int lines )
+void SessionController::scrollBackOptionsChanged(int mode, int lines, bool saveToCurrentProfile )
 {
     switch (mode)
     {
@@ -854,6 +854,25 @@ void SessionController::scrollBackOptionsChanged( int mode , int lines )
          case HistorySizeDialog::UnlimitedHistory:
              _session->setHistoryType( HistoryTypeFile() );
             break;
+    }
+    if (saveToCurrentProfile)
+    {
+        Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
+
+        switch (mode)
+        {
+            case HistorySizeDialog::NoHistory:
+                profile->setProperty(Profile::HistoryMode , Profile::DisableHistory);
+                break;
+            case HistorySizeDialog::FixedSizeHistory:
+                profile->setProperty(Profile::HistoryMode , Profile::FixedSizeHistory);
+                profile->setProperty(Profile::HistorySize , lines);
+                break;
+            case HistorySizeDialog::UnlimitedHistory:
+                profile->setProperty(Profile::HistoryMode , Profile::UnlimitedHistory);
+                break;
+        }
+        SessionManager::instance()->changeProfile(profile, profile->setProperties());
     }
 }
 

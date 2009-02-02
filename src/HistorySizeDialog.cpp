@@ -23,6 +23,7 @@
 // Qt
 #include <QtGui/QButtonGroup>
 #include <QtGui/QBoxLayout>
+#include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
 #include <QtGui/QRadioButton>
 #include <QtGui/QSpinBox>
@@ -41,6 +42,7 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     ,  _noHistoryButton(0)
     ,  _fixedHistoryButton(0)
     ,  _unlimitedHistoryButton(0)
+    ,  _saveToCurrentProfileButton(0)
     ,  _lineCountBox(0)
     ,  _defaultMode(FixedSizeHistory)
     ,  _defaultLineCount(1000)
@@ -62,6 +64,7 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     _noHistoryButton = new QRadioButton( i18n("No scrollback") );
     _fixedHistoryButton = new QRadioButton( i18n("Fixed size scrollback: ") );
     _unlimitedHistoryButton = new QRadioButton( i18n("Unlimited scrollback") );
+    _saveToCurrentProfileButton = new QCheckBox( i18n("Save to current profile") );
 
     modeGroup->addButton(_noHistoryButton);
     modeGroup->addButton(_fixedHistoryButton);
@@ -94,6 +97,8 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     dialogLayout->addWidget(_noHistoryButton);
     dialogLayout->addLayout(lineCountLayout);
     dialogLayout->addWidget(_unlimitedHistoryButton);
+    dialogLayout->insertSpacing(3, 10);
+    dialogLayout->addWidget(_saveToCurrentProfileButton);
 
     // select the fixed size mode by default
     _fixedHistoryButton->click();
@@ -106,18 +111,20 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
 
 void HistorySizeDialog::emitOptionsChanged()
 {
-    emit optionsChanged( mode() , lineCount() );
+    emit optionsChanged( mode() , lineCount(), saveToCurrentProfile() );
 }
 
 void HistorySizeDialog::setDefaultMode( HistoryMode mode ) { _defaultMode = mode; }
 HistorySizeDialog::HistoryMode HistorySizeDialog::defaultMode() const { return _defaultMode; }
 void HistorySizeDialog::setDefaultLineCount( int count ) { _defaultLineCount = count; }
 int HistorySizeDialog::defaultLineCount() const { return _defaultLineCount; }
+bool HistorySizeDialog::saveToCurrentProfile() const { return _saveToCurrentProfileButton->isChecked(); }
 
 void HistorySizeDialog::useDefaults()
 {
     setMode( _defaultMode );
     setLineCount( _defaultLineCount );
+    _saveToCurrentProfileButton->setChecked(false);
 }
 
 void HistorySizeDialog::setMode( HistoryMode mode )
