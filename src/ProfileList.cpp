@@ -34,6 +34,16 @@
 
 using namespace Konsole;
 
+bool profileNameLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
+{
+    return QString::localeAwareCompare(p1->name(), p2->name()) <= 0;
+}
+
+static void sortProfileList(QList<Profile::Ptr> &list)
+{
+    qStableSort(list.begin(), list.end(), profileNameLessThan);
+}
+
 ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     : QObject(parent)
     , _addShortcuts(addShortcuts)
@@ -47,9 +57,11 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     // disabled action to be shown only when the list is empty
     _emptyListAction = new QAction(i18n("No profiles available"),_group);
     _emptyListAction->setEnabled(false);
-    
-    // TODO Sort list in alphabetical order
+
+    // TODO - Handle re-sorts when user changes profile names
     QList<Profile::Ptr> list = manager->findFavorites().toList();
+    sortProfileList(list);
+
     QListIterator<Profile::Ptr> iter(list);
 
     while (iter.hasNext())
