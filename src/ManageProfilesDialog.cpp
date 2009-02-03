@@ -163,7 +163,7 @@ void ManageProfilesDialog::updateItemsForProfile(const Profile::Ptr info, QList<
     // Favorite Status
     const bool isFavorite = SessionManager::instance()->findFavorites().contains(info);
     if ( isFavorite )
-       items[FavoriteStatusColumn]->setData(KIcon("favorites"),Qt::DecorationRole);
+       items[FavoriteStatusColumn]->setData(KIcon("checkmark"),Qt::DecorationRole);
     else
        items[FavoriteStatusColumn]->setData(KIcon(),Qt::DecorationRole);
     items[FavoriteStatusColumn]->setData(QVariant::fromValue(info),ProfileKeyRole);
@@ -349,7 +349,7 @@ void ManageProfilesDialog::updateFavoriteStatus(Profile::Ptr profile, bool favor
         if (index.data(ProfileKeyRole).value<Profile::Ptr>() ==
             profile )
         {
-            const KIcon icon = favorite ? KIcon("favorites") : KIcon();
+            const KIcon icon = favorite ? KIcon("checkmark") : KIcon();
             _sessionModel->setData(index,icon,Qt::DecorationRole);
         }
     }
