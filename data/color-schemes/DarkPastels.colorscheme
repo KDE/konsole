@@ -1,11 +1,11 @@
 [Background]
 Bold=false
-Color=63,63,63
+Color=44,44,44
 Transparency=false
 
 [BackgroundIntense]
 Bold=true
-Color=63,63,63
+Color=44,44,44
 Transparency=false
 
 [Color0]
