@@ -81,7 +81,7 @@ typedef QPointer<Session> SessionPtr;
  * which contains the view to plug the controller's actions into the menu when
  * the view is focused.
  */
-class SessionController : public ViewProperties , public KXMLGUIClient
+class KONSOLEPRIVATE_EXPORT SessionController : public ViewProperties , public KXMLGUIClient
 {
 Q_OBJECT
     

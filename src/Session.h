@@ -30,7 +30,7 @@
 // KDE
 #include <KApplication>
 #include <KMainWindow>
-#include <kdemacros.h>
+#include "konsole_export.h"
 
 // Konsole
 #include "History.h"
@@ -58,7 +58,7 @@ class ZModemDialog;
  * or send input to the program in the terminal in the form of keypresses and mouse
  * activity.
  */
-class KDE_EXPORT Session : public QObject
+class KONSOLEPRIVATE_EXPORT Session : public QObject
 {
 Q_OBJECT
 

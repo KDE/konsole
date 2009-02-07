@@ -25,6 +25,7 @@
 #include <QtCore/QObject>
 
 #include "Profile.h"
+#include "konsole_export.h"
 
 class QAction;
 class QActionGroup;
@@ -46,7 +47,7 @@ class Profile;
  * The user-data associated with each session can be passed to the createProfile() method of the 
  * SessionManager to create a new terminal session. 
  */
-class ProfileList : public QObject
+class KONSOLEPRIVATE_EXPORT ProfileList : public QObject
 {
 Q_OBJECT
 

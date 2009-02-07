@@ -29,6 +29,9 @@
 // KDE
 #include <KUrl>
 
+// Konsole
+#include "konsole_export.h"
+
 namespace Konsole
 {
 
@@ -39,7 +42,7 @@ namespace Konsole
  * This can be used by navigation widgets in a ViewContainer sub-class to provide a tab, label or other
  * item for switching between views.
  */
-class ViewProperties : public QObject 
+class KONSOLEPRIVATE_EXPORT ViewProperties : public QObject 
 {
 Q_OBJECT
 

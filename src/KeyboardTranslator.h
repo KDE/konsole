@@ -29,8 +29,8 @@
 #include <QtCore/QMetaType>
 #include <QtCore/QVarLengthArray>
 
-// KDE
-#include <kdemacros.h>
+// Konsole
+#include "konsole_export.h"
 
 class QIODevice;
 class QTextStream;
@@ -442,7 +442,7 @@ private:
  * Manages the keyboard translations available for use by terminal sessions,
  * see KeyboardTranslator.
  */
-class KDE_EXPORT KeyboardTranslatorManager
+class KONSOLEPRIVATE_EXPORT KeyboardTranslatorManager
 {
 public:
     /** 

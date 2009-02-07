@@ -65,7 +65,7 @@ class ViewSplitter;
  * user interface elements specific to each display/session pair.
  *
  */
-class ViewManager : public QObject
+class KONSOLEPRIVATE_EXPORT ViewManager : public QObject
 {
 Q_OBJECT
 

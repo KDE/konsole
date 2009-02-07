@@ -48,7 +48,7 @@ namespace Konsole
  * the user to add new profiles, and remove or edit existing
  * profile types.
  */
-class ManageProfilesDialog : public KDialog
+class KONSOLEPRIVATE_EXPORT ManageProfilesDialog : public KDialog
 {
 Q_OBJECT
 

@@ -61,7 +61,7 @@ class Profile;
  * the persistant argument set to false.  These changes are then
  * un-done when the dialog is closed.
  */
-class EditProfileDialog : public KDialog
+class KONSOLEPRIVATE_EXPORT EditProfileDialog : public KDialog
 {
 Q_OBJECT
 

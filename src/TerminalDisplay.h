@@ -29,6 +29,7 @@
 // Konsole
 #include "Filter.h"
 #include "Character.h"
+#include "konsole_export.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -63,7 +64,7 @@ class ScreenWindow;
  *
  * TODO More documentation
  */
-class TerminalDisplay : public QWidget
+class KONSOLEPRIVATE_EXPORT TerminalDisplay : public QWidget
 {
    Q_OBJECT
 

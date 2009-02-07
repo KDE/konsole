@@ -34,7 +34,9 @@
 // KDE
 #include <KSharedPtr>
 #include <KDebug>
-#include <kdemacros.h>
+
+// Konsole
+#include "konsole_export.h"
 
 class KConfig;
 class KConfigGroup;
@@ -61,7 +63,7 @@ class ProfileGroup;
  * Profiles can be loaded from disk using ProfileReader instances
  * and saved to disk using ProfileWriter instances.
  */
-class KDE_EXPORT Profile : public QSharedData 
+class KONSOLEPRIVATE_EXPORT Profile : public QSharedData 
 {
 
 friend class KDE4ProfileReader;
@@ -439,7 +441,7 @@ inline bool Profile::canInheritProperty(Property property)
  * This can be used as a parent for other profiles or a fallback in case
  * a profile cannot be loaded from disk.
  */
-class FallbackProfile : public Profile
+class KONSOLEPRIVATE_EXPORT FallbackProfile : public Profile
 {
 public:
     FallbackProfile();
@@ -458,7 +460,7 @@ public:
  * The Profile::Name and Profile::Path properties are unique to individual profiles,
  * setting these properties on a ProfileGroup has no effect.
  */
-class KDE_EXPORT ProfileGroup : public Profile
+class KONSOLEPRIVATE_EXPORT ProfileGroup : public Profile
 {
 public:
     typedef KSharedPtr<ProfileGroup> Ptr;
@@ -598,7 +600,7 @@ private:
  *   Icon=konsole;Directory=/home/bob
  * @endcode
  */
-class ProfileCommandParser
+class KONSOLEPRIVATE_EXPORT ProfileCommandParser
 {
 public:
     /**

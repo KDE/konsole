@@ -33,7 +33,7 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
                           Session.h
                           Konsole::Session )
 
-    set(konsole_COMMON_SRCS
+    set(konsoleprivate_SRCS
         ${sessionadaptors_SRCS}
         BlockArray.cpp
         BookmarkHandler.cpp
@@ -95,14 +95,7 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
 
 ### Konsole Application
 
-    set(konsole_KDEINIT_SRCS
-        ${konsole_COMMON_SRCS}
-        Application.cpp
-        MainWindow.cpp
-        main.cpp
-    )
-
-    kde4_add_ui_files(konsole_KDEINIT_SRCS
+    kde4_add_ui_files(konsoleprivate_SRCS
                   ColorSchemeEditor.ui
                   CopyInputDialog.ui
                   EditProfileDialog.ui
@@ -111,11 +104,22 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
                   RemoteConnectionDialog.ui
                  )
 
-    kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
-    target_link_libraries(kdeinit_konsole ${konsole_LIBS})
+    kde4_add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
+    target_link_libraries(konsoleprivate ${konsole_LIBS})
+    target_link_libraries(konsoleprivate LINK_INTERFACE_LIBRARIES ${konsole_LIBS})
 
-    install(TARGETS kdeinit_konsole  ${INSTALL_TARGETS_DEFAULT_ARGS} )
-    install(TARGETS konsole          ${INSTALL_TARGETS_DEFAULT_ARGS})
+    set(konsole_KDEINIT_SRCS
+        Application.cpp
+        MainWindow.cpp
+        main.cpp
+    )
+
+    kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
+
+    kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
+    target_link_libraries(kdeinit_konsole konsoleprivate)
+
+    install(TARGETS kdeinit_konsole konsole konsoleprivate ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ### Embedded Konsole KPart
 
@@ -126,7 +130,7 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
 
     kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
     set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
-    target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} ${konsole_LIBS})
+    target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} konsoleprivate)
     install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 ### konsoleprofile command-line tool

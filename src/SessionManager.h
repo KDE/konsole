@@ -56,7 +56,7 @@ class Session;
  * how to display them.  The favorite status of a profile can be altered using
  * setFavorite() and retrieved using isFavorite() 
  */
-class KDE_EXPORT SessionManager : public QObject
+class KONSOLEPRIVATE_EXPORT SessionManager : public QObject
 {
 Q_OBJECT
 

@@ -30,6 +30,9 @@
 // KDE
 #include <KBookmarkManager>
 
+// Konsole
+#include "konsole_export.h"
+
 class KMenu;
 class KBookmarkMenu;
 class KBookmarkManager;
@@ -51,7 +54,7 @@ class ViewProperties;
  *
  * When the user selects a bookmark, the openUrl() signal is emitted.
  */
-class BookmarkHandler : public QObject, public KBookmarkOwner
+class KONSOLEPRIVATE_EXPORT BookmarkHandler : public QObject, public KBookmarkOwner
 {
     Q_OBJECT
 
