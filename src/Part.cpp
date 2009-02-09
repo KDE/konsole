@@ -22,7 +22,7 @@
 
 // Qt
 #include <QtCore/QStringList>
-
+#include <QDir>
 
 // KDE
 #include <KAction>
@@ -84,7 +84,7 @@ Part::Part(QWidget* parentWidget , QObject* parent)
   ,_manageProfilesAction(0)
 {
     // make sure the konsole catalog is loaded
-    KGlobal::locale()->insertCatalog("konsole");    
+    KGlobal::locale()->insertCatalog("konsole");
 
     TerminalDisplay::HAVE_TRANSPARENCY = transparencyAvailable();
 
@@ -313,6 +313,8 @@ bool Part::openUrl( const KUrl & _url )
         KDE_stat( QFile::encodeName( _url.path() ), &buff );
         QString text = ( S_ISDIR( buff.st_mode ) ? _url.path() : _url.directory() );
         showShellInDir( text );
+    } else {
+        showShellInDir( QDir::homePath() );
     }
 
     emit completed();
