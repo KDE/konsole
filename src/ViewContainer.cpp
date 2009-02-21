@@ -428,6 +428,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _stackWidget = new QStackedWidget();
     _tabBar = new ViewContainerTabBar(_containerWidget,this);
     _tabBar->setDrawBase(true);
+    _tabBar->setDocumentMode(true);
 
     const int cornerButtonWidth = 50;
     _newTabButton = new KPushButton(KIcon("tab-new"),QString(),_containerWidget);
