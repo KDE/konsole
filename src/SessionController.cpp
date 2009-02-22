@@ -244,6 +244,8 @@ void SessionController::openUrl( const KUrl& url )
     {
         _session->emulation()->sendText("ssh ");
 
+        if ( url.port() > -1 )
+            _session->emulation()->sendText("-p " + QString::number(url.port()) + ' ' );
         if ( url.hasUser() )
             _session->emulation()->sendText(url.user() + '@');
         if ( url.hasHost() )
