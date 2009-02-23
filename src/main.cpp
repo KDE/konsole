@@ -165,7 +165,7 @@ void fillAboutData(KAboutData& aboutData)
     "neundorf@kde.org");
   aboutData.addCredit(ki18n("Peter Silva"),
     ki18n("Marking improvements"),
-    "peter.silva@videotron.ca");
+    "Peter.A.Silva@gmail.com");
   aboutData.addCredit(ki18n("Lotzi Boloni"),
     ki18n("Embedded Konsole\n"
     "Toolbar and session names"),
