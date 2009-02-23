@@ -563,6 +563,9 @@ protected:
     //     - Other characters (returns the input character)
     QChar charClass(QChar ch) const;
 
+    // Returns true upon a word boundary
+    bool isCharBoundary(QChar ch) const;
+
     void clearImage();
 
     void mouseTripleClickEvent(QMouseEvent* ev);

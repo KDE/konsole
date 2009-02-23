@@ -2155,12 +2155,11 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
   _wordSelectionMode = true;
 
   // find word boundaries...
-  QChar selClass = charClass(_image[i].character);
   {
      // find the start of the word
      int x = bgnSel.x();
      while ( ((x>0) || (bgnSel.y()>0 && (_lineProperties[bgnSel.y()-1] & LINE_WRAPPED) )) 
-                     && charClass(_image[i-1].character) == selClass )
+                     && !isCharBoundary(_image[i-1].character) )
      {  
        i--; 
        if (x>0) 
@@ -2179,7 +2178,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
      while( ((x<_usedColumns-1) || (endSel.y()<_usedLines-1 && (_lineProperties[endSel.y()] & LINE_WRAPPED) )) 
-                     && charClass(_image[i+1].character) == selClass )
+                     && !isCharBoundary(_image[i+1].character) )
      { 
          i++; 
          if (x<_usedColumns-1) 
@@ -2333,6 +2332,15 @@ bool TerminalDisplay::focusNextPrevChild( bool next )
   return QWidget::focusNextPrevChild( next );
 }
 
+// Returns true upon a word boundary
+// TODO determine if the below charClass() is actually required
+bool TerminalDisplay::isCharBoundary(QChar qch) const
+{
+    if ( _wordCharacters.contains(qch, Qt::CaseInsensitive) ) return true;
+    if ( qch.isSpace() ) return true;
+
+    return false;
+}
 
 QChar TerminalDisplay::charClass(QChar qch) const
 {
