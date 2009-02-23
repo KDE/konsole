@@ -427,7 +427,7 @@ ColorScheme* KDE3ColorSchemeReader::read()
     while ( !_device->atEnd() )
     {
         QString line(_device->readLine());
-        line.replace(comment,QString());
+        line.remove(comment);
         line = line.simplified();
 
         if ( line.isEmpty() )
