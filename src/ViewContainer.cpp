@@ -785,6 +785,7 @@ StackedViewContainer::StackedViewContainer(QObject* parent)
     searchBar()->setParent(_containerWidget);
     layout->addWidget(searchBar());
     layout->addWidget(_stackWidget);
+    layout->setMargin(0);
 }
 StackedViewContainer::~StackedViewContainer()
 {
@@ -830,6 +831,7 @@ ListViewContainer::ListViewContainer(NavigationPosition position,QObject* parent
     searchBar()->setParent(contentArea);
     layout->addWidget(_stackWidget);
     layout->addWidget(searchBar());
+    layout->setMargin(0);
 
     // elide left is used because the most informative part of the session name is often
     // the rightmost part
