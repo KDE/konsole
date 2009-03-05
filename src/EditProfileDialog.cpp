@@ -151,9 +151,7 @@ void EditProfileDialog::updateCaption(const Profile::Ptr profile)
     if (group && group->profiles().count() > 1)
     {
         QString caption = groupProfileNames(group,MAX_GROUP_CAPTION_LENGTH); 
-        setCaption( i18n("Edit Profile \"%1\"",caption) );
-        // STRINGFREEZE - Change caption for groups after KDE 4.1 is released
-        // setCaption( i18n("Editing %1 profiles",group->profiles().count()) )
+         setCaption( i18n("Editing %1 profiles: %2",group->profiles().count(), caption) );
     }
     else
         setCaption( i18n("Edit Profile \"%1\"",profile->name()) );
