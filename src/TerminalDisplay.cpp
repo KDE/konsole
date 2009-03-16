@@ -310,6 +310,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_hasBlinker(false)
 ,_cursorBlinking(false)
 ,_hasBlinkingCursor(false)
+,_allowBlinkingText(true)
 ,_ctrlDrag(false)
 ,_tripleClickMode(SelectWholeLine)
 ,_isFixedSize(false)
@@ -1157,6 +1158,20 @@ void TerminalDisplay::setBlinkingCursor(bool blink)
   }
 }
 
+void TerminalDisplay::setBlinkingTextEnabled(bool blink)
+{
+    _allowBlinkingText = blink;
+
+    if (blink && !_blinkTimer->isActive()) 
+        _blinkTimer->start(BLINK_DELAY);
+  
+    if (!blink && _blinkTimer->isActive()) 
+    {
+        _blinkTimer->stop();
+        _blinking = false;
+    }
+}
+
 void TerminalDisplay::focusOutEvent(QFocusEvent*)
 {
     // trigger a repaint of the cursor so that it is both visible (in case
@@ -1473,6 +1488,8 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
 
 void TerminalDisplay::blinkEvent()
 {
+  if (!_allowBlinkingText) return;
+
   _blinking = !_blinking;
 
   //TODO:  Optimise to only repaint the areas of the widget 

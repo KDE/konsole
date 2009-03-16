@@ -156,6 +156,9 @@ public:
     /** Specifies whether or not the cursor blinks. */
     void setBlinkingCursor(bool blink);
 
+    /** Specifies whether or not text can blink. */
+    void setBlinkingTextEnabled(bool blink);
+
     void setCtrlDrag(bool enable) { _ctrlDrag=enable; }
     bool ctrlDrag() { return _ctrlDrag; }
 
@@ -723,6 +726,7 @@ private:
     bool _hasBlinker; // has characters to blink
     bool _cursorBlinking;     // hide cursor in paintEvent
     bool _hasBlinkingCursor;  // has blinking cursor enabled
+    bool _allowBlinkingText;  // allow text to blink
     bool _ctrlDrag;           // require Ctrl key for drag
     TripleClickMode _tripleClickMode;
     bool _isFixedSize; //Columns / lines are locked.
