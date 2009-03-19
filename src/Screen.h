@@ -468,7 +468,16 @@ public:
     void writeSelectionToStream(TerminalCharacterDecoder* decoder , bool
                                 preserveLineBreaks = true) const;
 
-    /** TODO Document me */
+    /**
+     * Checks if the text between from and to is inside the current
+     * selection. If this is the case, the selection is cleared. The
+     * from and to are coordinates in the current viewable window.
+     * The loc(x,y) macro can be used to generate these values from a
+     * column,line pair.
+     *
+     * @param from The start of the area to check.
+     * @param to The end of the area to check
+     */
     void checkSelection(int from, int to);
 
     /** 
