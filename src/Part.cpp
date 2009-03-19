@@ -86,7 +86,7 @@ Part::Part(QWidget* parentWidget , QObject* parent)
     // make sure the konsole catalog is loaded
     KGlobal::locale()->insertCatalog("konsole");
 
-    TerminalDisplay::HAVE_TRANSPARENCY = transparencyAvailable();
+
 
     // setup global actions
     createGlobalActions();
@@ -107,6 +107,10 @@ Part::Part(QWidget* parentWidget , QObject* parent)
     foreach (QAction* action, actionCollection()->actions())
         action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 
+    // Enable translucency support.
+    _viewManager->widget()->setAttribute(Qt::WA_TranslucentBackground, true);
+    TerminalDisplay::HAVE_TRANSPARENCY = KWindowSystem::compositingActive();
+
     // create basic session
     createSession();
 }
@@ -124,35 +128,6 @@ void Part::setupActionsForSession(SessionController* session)
     KActionCollection* collection = session->actionCollection();
     collection->addAction("manage-profiles",_manageProfilesAction);
 }
-bool Part::transparencyAvailable()
-{
-#if defined(Q_WS_X11) && defined(HAVE_XRENDER)
-    bool ARGB = false;
-
-    int screen = QX11Info::appScreen();
-    bool depth = (QX11Info::appDepth() == 32);
-
-    Display* display = QX11Info::display();
-    Visual* visual = static_cast<Visual*>(QX11Info::appVisual(screen));
-
-    XRenderPictFormat* format = XRenderFindVisualFormat(display, visual);
-
-    if (depth && format->type == PictTypeDirect && format->direct.alphaMask)
-    {
-        ARGB = true;
-    }
-
-    if (ARGB)
-    {
-        return KWindowSystem::compositingActive();
-    }
-    else
-#endif
-    {
-        return false;
-    }
-}
-
 bool Part::openFile()
 {
     return false;
