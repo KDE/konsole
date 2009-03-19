@@ -618,7 +618,7 @@ void Screen::checkSelection(int from, int to)
         return;
     int scr_TL = loc(0, history->getLines());
     //Clear entire selection if it overlaps region [from, to]
-    if ( (selBottomRight > (from+scr_TL)) && (selTopLeft < (to+scr_TL)) )
+    if ( (selBottomRight >= (from+scr_TL)) && (selTopLeft <= (to+scr_TL)) )
         clearSelection();
 }
 
@@ -661,7 +661,7 @@ void Screen::displayCharacter(unsigned short c)
     lastPos = loc(cuX,cuY);
 
     // check if selection is still valid.
-    checkSelection(cuX,cuY);
+    checkSelection(lastPos, lastPos);
 
     Character& currentChar = screenLines[cuY][cuX];
 
