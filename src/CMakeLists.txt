@@ -27,14 +27,22 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
     endif(KONSOLE_GENERATE_LINEFONT)
 
 ### Konsole source files shared between embedded terminal and main application
+    # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
+    # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
 
     qt4_add_dbus_adaptor( sessionadaptors_SRCS
                           org.kde.konsole.Session.xml
                           Session.h
                           Konsole::Session )
+    qt4_add_dbus_adaptor( konsoleadaptors_SRCS 
+                          org.kde.konsole.Konsole.xml 
+                          ViewManager.h 
+                          Konsole::ViewManager )
+
 
     set(konsoleprivate_SRCS
         ${sessionadaptors_SRCS}
+        ${konsoleadaptors_SRCS}
         BlockArray.cpp
         BookmarkHandler.cpp
         ColorScheme.cpp

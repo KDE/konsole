@@ -35,6 +35,7 @@
 #include <KLocale>
 #include <KToggleAction>
 #include <KXMLGUIFactory>
+#include <QStringList>
 
 // Konsole
 #include "ColorScheme.h"
@@ -45,6 +46,8 @@
 #include "SessionManager.h"
 #include "ViewContainer.h"
 #include "ViewSplitter.h"
+#include "konsoleadaptor.h"
+#include "Profile.h"
 
 using namespace Konsole;
 
@@ -85,6 +88,11 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
             SLOT(profileChanged(Profile::Ptr)) );
     connect( SessionManager::instance() , SIGNAL(sessionUpdated(Session*)) , this,
             SLOT(updateViewsForSession(Session*)) );
+
+    //prepare DBus communication
+    new KonsoleAdaptor(this);
+    QDBusConnection::sessionBus().registerObject(QLatin1String("/Konsole"), this);
+
 }
 
 ViewManager::~ViewManager()
@@ -934,6 +942,11 @@ void ViewManager::restoreSessions(const KConfigGroup& group)
 uint qHash(QPointer<TerminalDisplay> display)
 {
     return qHash((TerminalDisplay*)display);
+}
+
+int ViewManager::sessionCount()
+{
+    return this->_sessionMap.size();
 }
 
 #include "ViewManager.moc"

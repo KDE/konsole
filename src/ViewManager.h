@@ -68,6 +68,7 @@ class ViewSplitter;
 class KONSOLEPRIVATE_EXPORT ViewManager : public QObject
 {
 Q_OBJECT
+Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Konsole")
 
 public:
     /** 
@@ -200,6 +201,10 @@ signals:
     void newViewRequest();
     /** Requests creation of a new view, with the selected profile. */
     void newViewRequest(Profile::Ptr);
+
+public slots:
+    /** DBus slot that returns the number of sessions in the current view. */
+    int sessionCount();
 
 private slots:
     // called when the "Split View Left/Right" menu item is selected
