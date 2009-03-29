@@ -437,11 +437,3 @@ private:
 
 #endif //SESSIONCONTROLLER_H
 
-/*
-  Local Variables:
-  mode: c++
-  c-file-style: "stroustrup"
-  indent-tabs-mode: nil
-  tab-width: 4
-  End:
-*/

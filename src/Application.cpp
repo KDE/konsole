@@ -321,11 +321,3 @@ Session* Application::createSession(Profile::Ptr profile, const QString& directo
 
 #include "Application.moc"
 
-/*
-  Local Variables:
-  mode: c++
-  c-file-style: "stroustrup"
-  indent-tabs-mode: nil
-  tab-width: 4
-  End:
-*/

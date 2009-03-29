@@ -1380,11 +1380,3 @@ QRegExp SearchHistoryTask::regExp() const
 
 #include "SessionController.moc"
 
-/*
-  Local Variables:
-  mode: c++
-  c-file-style: "stroustrup"
-  indent-tabs-mode: nil
-  tab-width: 4
-  End:
-*/

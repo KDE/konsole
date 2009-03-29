@@ -897,11 +897,3 @@ QModelIndex SessionListModel::index(int row, int column, const QModelIndex& pare
 
 #include "SessionManager.moc"
 
-/*
-  Local Variables:
-  mode: c++
-  c-file-style: "stroustrup"
-  indent-tabs-mode: nil
-  tab-width: 4
-  End:
-*/
