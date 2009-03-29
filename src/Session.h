@@ -329,11 +329,16 @@ public:
    */
   int processId() const;
 
+  /**
+   * Returns the foreground PID. Returns -1 if there is none.
+   */
+  int foregroundProcessId();
+
   /** Returns true if the user has started a program in the session. */
-  bool isChildActive();
+  bool isForegroundProcessActive();
 
   /** Returns the name of the current foreground process. */
-  QString childName();
+  QString foregroundProcessName();
 
   /** Returns the terminal session's window size in lines and columns. */
   QSize size();

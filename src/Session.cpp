@@ -779,7 +779,7 @@ ProcessInfo* Session::getProcessInfo()
 {
     ProcessInfo* process;
 
-    if (isChildActive())
+    if (isForegroundProcessActive())
         process = _foregroundProcessInfo;
     else
     {
@@ -852,7 +852,7 @@ KUrl Session::getUrl()
         bool ok = false;
 
         // check if foreground process is bookmark-able
-        if (isChildActive())
+        if (isForegroundProcessActive())
         {
             // for remote connections, save the user and host
             // bright ideas to get the directory at the other end are welcome :)
@@ -1119,13 +1119,25 @@ int Session::processId() const
     return _shellProcess->pid();
 }
 
-bool Session::isChildActive()
+int Session::foregroundProcessId()
+{
+    int pid;
+
+    bool ok = false;
+    pid = getProcessInfo()->pid(&ok);
+    if (!ok)
+        pid = -1;
+
+    return pid;
+}
+
+bool Session::isForegroundProcessActive()
 {
     // foreground process info is always updated after this
     return updateForegroundProcessInfo() && (processId() != _foregroundPid);
 }
 
-QString Session::childName()
+QString Session::foregroundProcessName()
 {
     QString name;
 

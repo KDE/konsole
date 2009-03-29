@@ -567,9 +567,9 @@ void SessionController::saveSession()
 }
 bool SessionController::confirmClose() const
 {
-    if (_session->isChildActive())
+    if (_session->isForegroundProcessActive())
     {
-        QString title = _session->childName();
+        QString title = _session->foregroundProcessName();
       
         // hard coded for now.  In future make it possible for the user to specify which programs
         // are ignored when considering whether to display a confirmation

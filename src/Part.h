@@ -23,7 +23,7 @@
 // KDE
 #include <KParts/Factory>
 #include <KParts/Part>
-#include <kde_terminal_interface.h>
+#include <kde_terminal_interface_v2.h>
 
 // Konsole
 #include "Profile.h"
@@ -56,10 +56,10 @@ protected:
  * A re-usable terminal emulator component using the KParts framework which can
  * be used to embed terminal emulators into other applications.
  */
-class Part : public KParts::ReadOnlyPart , public TerminalInterface
+class Part : public KParts::ReadOnlyPart , public TerminalInterfaceV2
 {
 Q_OBJECT
-    Q_INTERFACES(TerminalInterface)
+    Q_INTERFACES(TerminalInterfaceV2)
 public:
     /** Constructs a new Konsole part with the specified parent. */
     explicit Part(QWidget* parentWidget , QObject* parent = 0);
@@ -72,6 +72,15 @@ public:
     virtual void showShellInDir( const QString& dir );
     /** Reimplemented from TerminalInterface. */
     virtual void sendInput( const QString& text );
+
+    /** Reimplemented from TerminalInterfaceV2. */
+    virtual int terminalProcessId();
+
+    /** Reimplemented from TerminalInterfaceV2. */
+    virtual int foregroundProcessId();
+
+    /** Reimplemented from TerminalInterfaceV2. */
+    virtual QString foregroundProcessName();
 
 public slots:
     /**

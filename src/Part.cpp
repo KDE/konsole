@@ -187,6 +187,36 @@ void Part::sendInput( const QString& text )
     activeSession()->emulation()->sendText(text);
 }
 
+int Part::terminalProcessId()
+{
+    Q_ASSERT( activeSession() );
+
+    return activeSession()->processId();
+
+}
+
+int Part::foregroundProcessId()
+{
+    Q_ASSERT( activeSession() );
+
+    if (activeSession()->isForegroundProcessActive()) {
+        return activeSession()->foregroundProcessId();
+    } else {
+        return -1;
+    }
+}
+
+QString Part::foregroundProcessName()
+{
+    Q_ASSERT( activeSession() );
+
+    if (activeSession()->isForegroundProcessActive()) {
+        return activeSession()->foregroundProcessName();
+    } else {
+        return "";
+    }
+}
+
 Session* Part::createSession(const Profile::Ptr profile)
 {
     Session* session = SessionManager::instance()->createSession(profile);
