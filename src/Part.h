@@ -59,7 +59,7 @@ protected:
 class Part : public KParts::ReadOnlyPart , public TerminalInterfaceV2
 {
 Q_OBJECT
-    Q_INTERFACES(TerminalInterfaceV2)
+    Q_INTERFACES(TerminalInterface TerminalInterfaceV2)
 public:
     /** Constructs a new Konsole part with the specified parent. */
     explicit Part(QWidget* parentWidget , QObject* parent = 0);
