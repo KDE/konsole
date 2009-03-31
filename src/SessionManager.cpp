@@ -82,7 +82,7 @@ SessionManager::SessionManager()
     addProfile(_fallbackProfile);
 
     //locate and load default profile
-    KSharedConfigPtr appConfig = KGlobal::config();
+    KSharedConfigPtr appConfig = KSharedConfig::openConfig("konsolerc");
     const KConfigGroup group = appConfig->group( "Desktop Entry" );
     QString defaultSessionFilename = group.readEntry("DefaultProfile","Shell.profile");
 
