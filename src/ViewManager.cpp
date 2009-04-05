@@ -656,6 +656,15 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
 
     if ( collection )
     {
+        // FIXME: The following disables certain actions for the KPart that it
+        // doesn't actually have a use for, to avoid polluting the action/shortcut
+        // namespace of an application using the KPart (otherwise, a shortcut may
+        // be in use twice, and the user gets to see an "ambiguous shortcut over-
+        // load" error dialog). However, this approach sucks - it's the inverse of
+        // what it should be. Rather than disabling actions not used by the KPart,
+        // a method should be devised to only enable those that are used, perhaps
+        // by using a separate action collection.
+
         QAction* action;
 
         action = collection->action( "next-view" );
@@ -671,6 +680,12 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
         if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
 
         action = collection->action( "rename-session" );
+        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+
+        action = collection->action( "move-view-left" );
+        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+
+        action = collection->action( "move-view-right" );
         if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
     }
 }
