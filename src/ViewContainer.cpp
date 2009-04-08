@@ -430,19 +430,16 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _tabBar->setDrawBase(true);
     _tabBar->setDocumentMode(true);
 
-    const int cornerButtonWidth = 50;
-    _newTabButton = new KPushButton(KIcon("tab-new"),QString(),_containerWidget);
-    // The button width here is hard coded, it would be better to use the value from
-    // the current style (see QTabWidget::setUpLayout())
-    _newTabButton->setFixedWidth(cornerButtonWidth);
-    _newTabButton->setFlat(true);
+    _newTabButton = new QToolButton(_containerWidget);
+    _newTabButton->setIcon(KIcon("tab-new"));
+    _newTabButton->adjustSize();
     // new tab button is initially hidden, it will be shown when setFeatures() is called
     // with the QuickNewView flag enabled
     _newTabButton->setHidden(true);
-   
-    _closeTabButton = new KPushButton(KIcon("tab-close"),QString(),_containerWidget);
-    _closeTabButton->setFixedWidth(cornerButtonWidth);
-    _closeTabButton->setFlat(true);
+
+    _closeTabButton = new QToolButton(_containerWidget);
+    _closeTabButton->setIcon(KIcon("tab-close"));
+    _closeTabButton->adjustSize();
     _closeTabButton->setHidden(true);
 
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
@@ -489,7 +486,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
 }
 void TabbedViewContainer::setNewViewMenu(QMenu* menu)
 {
-  _newTabButton->setDelayedMenu(menu); 
+  _newTabButton->setMenu(menu);
 }
 ViewContainer::Features TabbedViewContainer::supportedFeatures() const
 { 

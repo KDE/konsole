@@ -31,7 +31,6 @@
 
 // KDE
 #include <KTabBar>
-#include <KPushButton>
 
 class QSpacerItem;
 class QStackedWidget;
@@ -454,8 +453,8 @@ private:
     QSpacerItem* _tabBarSpacer;
     TabbedViewContainerLayout* _layout;
     QHBoxLayout* _tabBarLayout;
-    KPushButton* _newTabButton;
-    KPushButton* _closeTabButton;
+    QToolButton* _newTabButton;
+    QToolButton* _closeTabButton;
 
     static const int TabBarSpace = 2;
 };
