@@ -345,7 +345,7 @@ void SessionManager::changeProfile(Profile::Ptr info ,
     ProfileGroup::Ptr group = info->asGroup();
     if (group)
     {
-        foreach(Profile::Ptr profile, group->profiles())
+        foreach(const Profile::Ptr &profile, group->profiles())
             changeProfile(profile,propertyMap,persistant);
         return;
     }

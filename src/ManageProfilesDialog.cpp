@@ -199,7 +199,7 @@ void ManageProfilesDialog::populateTable()
     _sessionModel->setHorizontalHeaderLabels( QStringList() << i18n("Name")
                                                             << i18n("Show in Menu") 
                                                             << i18n("Shortcut") );
-    foreach(const Profile::Ptr info,SessionManager::instance()->loadedProfiles())
+    foreach(const Profile::Ptr &info,SessionManager::instance()->loadedProfiles())
     {
         addItems(info);
     }
@@ -256,7 +256,7 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
 }
 void ManageProfilesDialog::deleteSelected()
 {
-    foreach(Profile::Ptr profile, selectedProfiles())
+    foreach(const Profile::Ptr &profile, selectedProfiles())
     {
         if (profile != SessionManager::instance()->defaultProfile())
             SessionManager::instance()->deleteProfile(profile);
@@ -306,7 +306,7 @@ void ManageProfilesDialog::editSelected()
     EditProfileDialog dialog(this);
     // the dialog will delete the profile group when it is destroyed
     ProfileGroup* group = new ProfileGroup;
-    foreach(Profile::Ptr profile,selectedProfiles())
+    foreach(const Profile::Ptr &profile,selectedProfiles())
         group->addProfile(profile);
     group->updateValues();
 
