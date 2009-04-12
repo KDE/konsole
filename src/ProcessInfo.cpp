@@ -24,6 +24,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <unistd.h>
+#include <pwd.h>
 
 // Qt
 #include <KDebug>
@@ -52,7 +54,9 @@ ProcessInfo::ProcessInfo(int pid , bool enableEnvironmentRead)
     , _pid(pid)
     , _parentPid(0)
     , _foregroundPid(0)
+    , _userId(0)
     , _lastError(NoError)
+    , _userName(QString())
 {
 }
 
@@ -91,7 +95,7 @@ QString ProcessInfo::format(const QString& input) const
    QString output(input);
 
    // search for and replace known marker
-   output.replace("%u","NOT IMPLEMENTED YET");
+   output.replace("%u",userName());
    output.replace("%n",name(&ok));
    output.replace("%c",formatCommand(name(&ok),arguments(&ok),ShortCommandFormat));
    output.replace("%C",formatCommand(name(&ok),arguments(&ok),LongCommandFormat));
@@ -219,11 +223,35 @@ QString ProcessInfo::name(bool* ok) const
     return _name;
 }
 
+int ProcessInfo::userId(bool* ok) const
+{
+    *ok = _fields & UID;
+
+    return _userId;
+}
+
+QString ProcessInfo::userName() const
+{
+    return _userName;
+}
+
 void ProcessInfo::setPid(int pid)
 {
     _pid = pid;
     _fields |= PROCESS_ID;
 }
+
+void ProcessInfo::setUserId(int uid)
+{
+    _userId = uid;
+    _fields |= UID;
+}
+
+void ProcessInfo::setUserName(const QString& name)
+{
+    _userName = name;
+}
+
 
 void ProcessInfo::setParentPid(int pid)
 {
@@ -314,6 +342,19 @@ bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
     return ok;
 }
 
+void UnixProcessInfo::readUserName()
+{
+    bool ok = false;
+    int uid = userId(&ok);
+    if (!ok) return;
+
+    struct passwd *pwuser = getpwuid(uid);
+    if (pwuser)
+        setUserName(QString(pwuser->pw_name));
+    else
+        setUserName(QString());
+}
+
 
 class LinuxProcessInfo : public UnixProcessInfo
 {
@@ -335,6 +376,29 @@ private:
         QString parentPidString;
         QString processNameString;
         QString foregroundPidString;
+
+        // For user id read process status file ( /proc/<pid>/status )
+        //  Can not use getuid() due to it does not work for 'su'
+        QFile statusInfo( QString("/proc/%1/status").arg(pid) );
+        if ( statusInfo.open(QIODevice::ReadOnly) )
+        {
+            QTextStream stream(&statusInfo);
+            QString data = stream.readAll();
+            int uidIndex = data.indexOf("Uid:");
+            QString uidLine = data.mid(uidIndex + 4, 16); // grab some data
+            QString uidString = uidLine.split('\t', QString::SkipEmptyParts)[0];
+            bool ok = false;
+            int uid = uidString.toInt(&ok);
+            if (ok)
+                setUserId(uid);
+            readUserName();
+        }
+        else
+        {
+            setFileError( statusInfo.error() );
+            return false;
+        }
+
 
         // read process status file ( /proc/<pid/stat )
         //

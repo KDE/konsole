@@ -122,6 +122,12 @@ public:
      */
     int foregroundPid(bool* ok) const;
     
+    /* Returns the user id of the process */
+    int userId(bool* ok) const;
+
+    /** Returns the user's name of the process */
+    QString userName() const;
+   
     /** Returns the name of the current process */
     QString name(bool* ok) const;
    
@@ -224,12 +230,19 @@ protected:
      */
     virtual bool readProcessInfo(int pid , bool readEnvironment) = 0;
 
+    /* Read the user name */
+    virtual void readUserName(void) = 0;
+
     /** Sets the process id associated with this ProcessInfo instance */
     void setPid(int pid);
     /** Sets the parent process id as returned by parentPid() */
     void setParentPid(int pid);
     /** Sets the foreground process id as returend by foregroundPid() */
     void setForegroundPid(int pid);
+    /** Sets the user id associated with this ProcessInfo instance */
+    void setUserId(int uid);
+    /** Sets the user name of the process as set by readUserName() */
+    void setUserName(const QString& name);
     /** Sets the name of the process as returned by name() */
     void setName(const QString& name);
     /** Sets the current working directory for the process */
@@ -280,7 +293,8 @@ private:
         ARGUMENTS           = 8,
         ENVIRONMENT         = 16,
         NAME                = 32,
-        CURRENT_DIR         = 64
+        CURRENT_DIR         = 64,
+        UID                 =128 
     };
 
     char _fields; // a bitmap indicating which fields are valid
@@ -292,10 +306,12 @@ private:
     int _pid;  
     int _parentPid;
     int _foregroundPid;
+    int _userId;  
 
     Error _lastError;
 
     QString _name;
+    QString _userName;
     QString _currentDir;
 
     QVector<QString> _arguments;
@@ -343,6 +359,8 @@ protected:
      * four private methods below in turn.
      */
     virtual bool readProcessInfo(int pid , bool readEnvironment);
+
+    virtual void readUserName(void);
 
 private:
     /**
