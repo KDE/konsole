@@ -964,5 +964,84 @@ int ViewManager::sessionCount()
     return this->_sessionMap.size();
 }
 
+int ViewManager::currentSession()
+{
+    QHash<TerminalDisplay*,Session*>::iterator i;
+    for (i = this->_sessionMap.begin(); i != this->_sessionMap.end(); ++i)
+        if (i.key()->isVisible())
+            return i.value()->sessionId();
+    return -1;
+}
+
+int ViewManager::newSession()
+{
+    Profile::Ptr profile = profile = SessionManager::instance()->defaultProfile();
+    Session* session = SessionManager::instance()->createSession(profile);
+
+    this->createView(session);
+    session->run();
+
+    return session->sessionId();
+}
+
+int ViewManager::newSession(QString profile, QString directory)
+{
+    QList<Profile::Ptr> profilelist = SessionManager::instance()->loadedProfiles();
+    QList<Profile::Ptr>::iterator i = profilelist.begin();
+
+    Profile::Ptr profileptr = SessionManager::instance()->defaultProfile();
+
+    while (i != profilelist.end() )
+    {
+        Profile::Ptr ptr = *i;
+        if ( ptr->name().compare(profile) == 0)
+            profileptr = ptr;
+        i++;
+    }
+
+    Session* session = SessionManager::instance()->createSession(profileptr);
+    session->setInitialWorkingDirectory(directory);
+
+    this->createView(session);
+    session->run();
+
+    return session->sessionId();
+}
+
+QStringList ViewManager::profileList()
+{
+    QList<Profile::Ptr> profilelist = SessionManager::instance()->loadedProfiles();
+    QList<Profile::Ptr>::iterator i = profilelist.begin();
+    QStringList list;
+    while (i != profilelist.end() )
+    {
+        Profile::Ptr ptr = *i;
+        list.push_back(ptr->name());
+        i++;
+    }
+
+    return list;
+}
+
+void ViewManager::nextSession()
+{
+    this->nextView();
+}
+
+void ViewManager::prevSession()
+{
+    this->previousView();
+}
+
+void ViewManager::moveSessionLeft()
+{
+    this->moveActiveViewLeft();
+}
+
+void ViewManager::moveSessionRight()
+{
+    this->moveActiveViewRight();
+}
+
 #include "ViewManager.moc"
 

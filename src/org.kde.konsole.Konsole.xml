@@ -1,9 +1,33 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
- <node>
-   <interface name="org.kde.konsole.Konsole">
-     <method name="sessionCount">
-       <arg type="i" direction="out"/>
-     </method>
-   </interface>
- </node>
+<node>
+    <interface name="org.kde.konsole.Konsole">
+        <method name="sessionCount">
+            <arg type="i" direction="out"/>
+        </method>
+        <method name="currentSession">
+            <arg type="i" direction="out"/>
+        </method>
+        <method name="newSession">
+            <arg type="i" direction="out"/>
+            <arg name="profile" type="s" direction="in"/>
+            <arg name="directory" type="s" direction="in"/>
+        </method>
+        <method name="profileList">
+            <arg type="as" direction="out"/>
+        </method>
+        <method name="newSession">
+            <arg type="i" direction="out"/>
+        </method>
+        <method name="nextSession">
+        </method>
+        <method name="prevSession">
+        </method>
+        <method name="moveSessionLeft">
+        </method>
+        <method name="moveSessionRight">
+        </method>
+
+
+    </interface>
+</node>

@@ -206,6 +206,42 @@ public slots:
     /** DBus slot that returns the number of sessions in the current view. */
     int sessionCount();
 
+    /** DBus slot that returns the current (active) session window */
+    int currentSession();
+
+    /** DBus slot that creates a new session in the current view.
+     * @param the name of the profile to be used
+     * @param directory is the working directory, where the session gets
+     * started.
+     */
+    int newSession(QString profile, QString directory);
+
+    // DBus slot that returns a string list of defined (known) profiles
+    QStringList profileList();
+
+    /** DBus slot that creates a new session in the current view with the associated
+      * default profile and the default working directory
+      */
+    int newSession();
+
+    /** DBus slot that changes the view port to the next session */
+    void nextSession();
+
+    /** DBus slot that changes the view port to the previous session */
+    void prevSession();
+
+    /** DBus slot that switches the current session (as returned by
+      * currentSession()) with the left (or previous) one in the
+      * navigation tab.
+      */
+    void moveSessionLeft();
+
+    /** DBus slot that Switches the current session (as returned by
+      * currentSession()) with the right (or next) one in the navigation
+      * tab.
+      */
+    void moveSessionRight();
+
 private slots:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();
