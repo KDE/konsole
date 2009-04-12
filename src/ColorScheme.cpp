@@ -433,12 +433,12 @@ ColorScheme* KDE3ColorSchemeReader::read()
         if ( line.isEmpty() )
             continue;
 
-        if ( line.startsWith("color") )
+        if ( line.startsWith(QLatin1String("color")) )
         {
             if (!readColorLine(line,scheme))
                 kWarning() << "Failed to read KDE 3 color scheme line" << line;
         }
-        else if ( line.startsWith("title") )
+        else if ( line.startsWith(QLatin1String("title")) )
         {
             if (!readTitleLine(line,scheme))
                 kWarning() << "Failed to read KDE 3 color scheme title line" << line;
@@ -488,7 +488,7 @@ bool KDE3ColorSchemeReader::readColorLine(const QString& line,ColorScheme* schem
 }
 bool KDE3ColorSchemeReader::readTitleLine(const QString& line,ColorScheme* scheme)
 {
-    if( !line.startsWith("title") )
+    if( !line.startsWith(QLatin1String("title")) )
         return false;
 
     int spacePos = line.indexOf(' ');
@@ -556,7 +556,7 @@ QList<const ColorScheme*> ColorSchemeManager::allColorSchemes()
 bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 {
     QFile file(filePath);
-    if (!filePath.endsWith(".schema") || !file.open(QIODevice::ReadOnly))
+    if (!filePath.endsWith(QLatin1String(".schema")) || !file.open(QIODevice::ReadOnly))
         return false;
 
     KDE3ColorSchemeReader reader(&file);
@@ -596,7 +596,7 @@ void ColorSchemeManager::addColorScheme(ColorScheme* scheme)
 }
 bool ColorSchemeManager::loadColorScheme(const QString& filePath)
 {
-    if ( !filePath.endsWith(".colorscheme") || !QFile::exists(filePath) )
+    if ( !filePath.endsWith(QLatin1String(".colorscheme")) || !QFile::exists(filePath) )
         return false;
 
     QFileInfo info(filePath);

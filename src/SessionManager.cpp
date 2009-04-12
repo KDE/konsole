@@ -146,7 +146,7 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
 
     // load the profile
     ProfileReader* reader = 0;
-    if ( path.endsWith(".desktop") )
+    if ( path.endsWith(QLatin1String(".desktop")) )
         reader = 0; // new KDE3ProfileReader;
     else
         reader = new KDE4ProfileReader;
