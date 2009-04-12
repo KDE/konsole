@@ -322,6 +322,10 @@ bool NullProcessInfo::readProcessInfo(int /*pid*/ , bool /*enableEnvironmentRead
     return false;
 }
 
+void NullProcessInfo::readUserName()
+{
+}
+
 UnixProcessInfo::UnixProcessInfo(int pid,bool enableEnvironmentRead)
     : ProcessInfo(pid,enableEnvironmentRead)
 {

@@ -338,6 +338,7 @@ public:
     explicit NullProcessInfo(int pid,bool readEnvironment = false);
 protected:
     virtual bool readProcessInfo(int pid,bool readEnvironment);
+    virtual void readUserName(void);
 };
 
 /**
