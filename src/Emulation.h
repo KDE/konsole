@@ -356,7 +356,7 @@ signals:
    * <li>1 - Set window icon text to @p newTitle</li>
    * <li>2 - Set session title to @p newTitle</li>
    * <li>11 - Set the session's default background color to @p newTitle,
-   *         where @p newTitle can be an HTML-style string (#RRGGBB) or a named
+   *         where @p newTitle can be an HTML-style string ("#RRGGBB") or a named
    *         color (eg 'red', 'blue').  
    *         See http://doc.trolltech.com/4.2/qcolor.html#setNamedColor for more
    *         details.
