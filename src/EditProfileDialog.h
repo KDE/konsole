@@ -77,7 +77,7 @@ public:
      * When the dialog closes, the profile will be updated in the SessionManager
      * with the altered settings.
      *
-     * @param key The key for the session type provided by the SessionManager instance
+     * @param profile The profile to be edited
      */
     void setProfile(Profile::Ptr profile);
 

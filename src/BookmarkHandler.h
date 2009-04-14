@@ -100,7 +100,6 @@ signals:
      * Emitted when the user selects a bookmark from the bookmark menu.
      *
      * @param url The url of the bookmark which was selected by the user.
-     * @param text TODO: Document me
      */
     void openUrl( const KUrl& url ); 
 

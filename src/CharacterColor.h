@@ -67,6 +67,7 @@ public:
    * @param c The color value for this entry.
    * @param tr Specifies that the color should be transparent when used as a background color.
    * @param b Specifies that text drawn with this color should be bold.
+   * @parm weight Specifies the font weight to use when drawing text with this color. 
    */
   ColorEntry(QColor c, bool tr, FontWeight weight = UseCurrentFormat) 
           : color(c), transparent(tr), fontWeight(weight) {}

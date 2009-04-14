@@ -75,7 +75,7 @@ signals:
    /** 
     * Emitted when the user selects an action from the list.
     * 
-    * @param key The profile key associated with the selected action.
+    * @param profile The profile to select
     */
    void profileSelected(Profile::Ptr profile);
    /**

@@ -450,8 +450,8 @@ public:
      * Copies part of the output to a stream.
      *
      * @param decoder A decoder which coverts terminal characters into text
-     * @param from The first line in the history to retrieve
-     * @param to The last line in the history to retrieve
+     * @param fromLine The first line in the history to retrieve
+     * @param toLine The last line in the history to retrieve
      */
     void writeLinesToStream(TerminalCharacterDecoder* decoder, int fromLine, int toLine) const;
 

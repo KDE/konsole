@@ -364,7 +364,7 @@ public:
      * Returns the element from the Property enum associated with the 
      * specified @p name.
      *
-     * @param The name of the property to look for, this is case insensitive.
+     * @param name The name of the property to look for, this is case insensitive.
      */
     static Property lookupByName(const QString& name);
     /**
