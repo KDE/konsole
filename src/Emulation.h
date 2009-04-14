@@ -269,7 +269,7 @@ signals:
    * standard input of the terminal.
    *
    * @param data The buffer of data ready to be sent
-   * @paran len The length of @p data in bytes
+   * @param len The length of @p data in bytes
    */
   void sendData(const char* data,int len);
 

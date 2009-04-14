@@ -213,7 +213,7 @@ public:
   void toggleIntensive();
 
   /** 
-   * Returns the color within the specified color @palette
+   * Returns the color within the specified color @p palette
    *
    * The @p palette is only used if this color is one of the 16 system colors, otherwise
    * it is ignored.

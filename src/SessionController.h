@@ -153,7 +153,7 @@ public slots:
      * responding to input.
      *
      * openUrl() currently supports urls for local paths and those
-     * using the 'ssh' protocol ( eg. ssh://joebloggs@hostname )
+     * using the 'ssh' protocol ( eg. "ssh://joebloggs@hostname" )
      */
     void openUrl( const KUrl& url ); 
 
