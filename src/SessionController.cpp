@@ -251,6 +251,18 @@ void SessionController::openUrl( const KUrl& url )
         if ( url.hasHost() )
             _session->emulation()->sendText(url.host() + '\r');
     }
+    else if ( url.protocol() == "telnet" )
+    {
+        _session->emulation()->sendText("telnet ");
+
+        if ( url.hasUser() )
+            _session->emulation()->sendText("-l " + url.user() + ' ');
+        if ( url.hasHost() )
+            _session->emulation()->sendText(url.host() + ' ');
+        if ( url.port() > -1 )
+            _session->emulation()->sendText(QString::number(url.port()));
+         _session->emulation()->sendText("\r");
+    }
     else
     {
         //TODO Implement handling for other Url types
