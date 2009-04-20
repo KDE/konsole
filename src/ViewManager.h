@@ -210,8 +210,8 @@ public slots:
     int currentSession();
 
     /** DBus slot that creates a new session in the current view.
-     * @param the name of the profile to be used
-     * @param directory is the working directory, where the session gets
+     * @param profile the name of the profile to be used
+     * @param directory the working directory where the session is
      * started.
      */
     int newSession(QString profile, QString directory);
