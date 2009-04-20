@@ -105,6 +105,7 @@ signals:
      * @param mode The current history mode.  This is a value from the HistoryMode enum.
      * @param lineCount The current line count.  This is only applicable if mode is
      * FixedSizeHistory
+     * @param saveToCurrentprofile Determines if the changes are saved to current profile.
      */
     void optionsChanged(int mode , int lineCount, bool saveToCurrentProfile);
 

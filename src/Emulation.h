@@ -166,7 +166,8 @@ public:
    * @param decoder A decoder which converts lines of terminal characters with 
    * appearance attributes into output text.  PlainTextDecoder is the most commonly
    * used decoder.
-   * @param startLine The first
+   * @param startLine Index of first line to copy
+   * @param endLine Index of last line to copy
    */
   virtual void writeToStream(TerminalCharacterDecoder* decoder,int startLine,int endLine);
   

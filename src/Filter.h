@@ -368,6 +368,7 @@ public:
      * @param image The terminal image
      * @param lines The number of lines in the terminal image
      * @param columns The number of columns in the terminal image
+     * @param lineProperties The line properties to set for image
      */
     void setImage(const Character* const image , int lines , int columns,
                   const QVector<LineProperty>& lineProperties);  
