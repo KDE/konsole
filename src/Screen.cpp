@@ -1229,14 +1229,18 @@ int Screen::copyLineToStream(int line ,
         Character* data = screenLines[screenLine].data();
         int length = screenLines[screenLine].count();
 
-        // ignore trailing white space at the end of the line
-        for (int i = length-1; i >= 0; i--)
+        // Don't remove end spaces in lines that wrap
+        if (!(lineProperties[screenLine] & LINE_WRAPPED))
         {
-            if (data[i].character == ' ')
-                length--;
-            else
-                break;
-        }
+            // ignore trailing white space at the end of the line
+            for (int i = length-1; i >= 0; i--)
+            {
+                if (data[i].character == ' ')
+                    length--;
+                else
+                    break;
+            }
+         }
 
         //retrieve line from screen image
         for (int i=start;i < qMin(start+count,length);i++)
