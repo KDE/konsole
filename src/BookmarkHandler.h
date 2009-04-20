@@ -66,6 +66,7 @@ public:
      * @param collection The collection which the boomark menu's actions should be added to
      * @param menu The menu which the bookmark actions should be added to
      * @param toplevel TODO: Document me
+     * @param parent TODO: Document me
      */
     BookmarkHandler( KActionCollection* collection , KMenu* menu, bool toplevel , QObject* parent );
     ~BookmarkHandler();

@@ -55,8 +55,8 @@ public:
      * and writes the string into an output QTextStream.
      *
      * @param characters An array of characters of length @p count.
+     * @param count The number of characters
      * @param properties Additional properties which affect all characters in the line
-     * @param output The output stream which receives the decoded text
      */
     virtual void decodeLine(const Character* const characters, 
                             int count,
