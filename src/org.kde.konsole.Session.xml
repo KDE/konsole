@@ -1,6 +1,65 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
-  <interface name="org.kde.konsole.Session">
-  </interface>
+    <interface name="org.kde.konsole.Session">
+        <method name="environment">
+            <arg type="as" direction="out"/>
+        </method>
+        <method name="setEnvironment">
+            <arg name="environment" type="as" direction="in"/>
+        </method>
+        <method name="close">
+        </method>
+        <method name="setMonitorActivity">
+            <arg type="b" direction="in"/>
+        </method>
+        <method name="isMonitorActivity">
+            <arg type="b" direction="out"/>
+        </method>
+        <method name="setMonitorSilence">
+            <arg type="b" direction="in"/>
+        </method>
+        <method name="isMonitorSilence">
+            <arg type="b" direction="out"/>
+        </method>
+        <method name="setMonitorSilenceSeconds">
+            <arg name="seconds" type="i" direction="in"/>
+        </method>
+        <method name="setFlowControlEnabled">
+            <arg name="enabled" type="b" direction="in"/>
+        </method>
+        <method name="flowControlEnabled">
+            <arg type="b" direction="out"/>
+        </method>
+        <method name="sendText">
+            <arg name="text" type="s" direction="in"/>
+        </method>
+        <method name="sendMouseEvent">
+            <arg name="buttons" type="i" direction="in"/>
+            <arg name="column" type="i" direction="in"/>
+            <arg name="line" type="i" direction="in"/>
+            <arg name="eventType" type="i" direction="in"/>
+        </method>
+        <method name="processId">
+            <arg type="i" direction="out"/>
+        </method>
+        <method name="foregroundProcessId">
+            <arg type="i" direction="out"/>
+        </method>
+        <method name="setCodec">
+            <arg type="b" direction="out"/>
+            <arg name="codec" type="ay" direction="in"/>
+        </method>
+        <method name="codec">
+            <arg type="ay" direction="out"/>
+        </method>
+        <method name="setTitle">
+            <arg name="role" type="i" direction="in"/>
+            <arg name="title" type="s" direction="in"/>
+        </method>
+        <method name="title">
+            <arg type="s" direction="out"/>
+            <arg name="role" type="i" direction="in"/>
+        </method>
+    </interface>
 </node>

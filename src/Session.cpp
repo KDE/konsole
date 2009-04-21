@@ -192,6 +192,21 @@ void Session::setCodec(QTextCodec* codec)
     emulation()->setCodec(codec);
 }
 
+bool Session::setCodec(QByteArray name)
+{
+    QTextCodec *codec = QTextCodec::codecForName(name);
+    if (codec) {
+        setCodec(codec);
+        return true;
+    }
+    return false;
+}
+
+QByteArray Session::codec()
+{
+    return _emulation->codec()->name();
+}
+
 void Session::setProgram(const QString& program)
 {
     _program = ShellCommand::expand(program);
@@ -527,6 +542,7 @@ void Session::monitorTimerDone()
 }
 void Session::updateFlowControlState(bool suspended)
 {
+kDebug()<<"suspend "<<suspended<<"; flowenable "<<flowControlEnabled()<<endl;
     if (suspended)
     {
         if (flowControlEnabled())
@@ -680,6 +696,11 @@ void Session::close()
 void Session::sendText(const QString &text) const
 {
   _emulation->sendText(text);
+}
+
+void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
+{
+    _emulation->sendMouseEvent(buttons, column, line, eventType);
 }
 
 Session::~Session()
@@ -976,11 +997,12 @@ void Session::setFlowControlEnabled(bool enabled)
 
   if (_shellProcess)  
     _shellProcess->setFlowControlEnabled(_flowControl);
-  
+ kDebug()<<"flow "<<enabled<<"; shell "<<_shellProcess<<endl; 
   emit flowControlEnabledChanged(enabled);
 }
 bool Session::flowControlEnabled() const
 {
+kDebug()<<"_shellProcess "<<_shellProcess->flowControlEnabled()<<"; else _flow "<<_flowControl<<endl;
     if (_shellProcess)
             return _shellProcess->flowControlEnabled();
     else
@@ -1117,6 +1139,30 @@ void Session::setSize(const QSize& size)
 int Session::processId() const
 {
     return _shellProcess->pid();
+}
+
+void Session::setTitle(int role , const QString& title)
+{
+    switch (role) {
+    case (0):
+        this->setTitle(Session::NameRole, title);
+        break;
+    case (1):
+        this->setTitle(Session::DisplayedTitleRole, title);
+        break;
+    }
+}
+
+QString Session::title(int role) const
+{
+    switch (role) {
+    case (0):
+        return this->title(Session::NameRole);
+    case (1):
+        return this->title(Session::DisplayedTitleRole);
+    default:
+        return QString();
+    }
 }
 
 int Session::foregroundProcessId()
