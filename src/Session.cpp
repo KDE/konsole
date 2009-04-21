@@ -542,7 +542,6 @@ void Session::monitorTimerDone()
 }
 void Session::updateFlowControlState(bool suspended)
 {
-kDebug()<<"suspend "<<suspended<<"; flowenable "<<flowControlEnabled()<<endl;
     if (suspended)
     {
         if (flowControlEnabled())
@@ -997,12 +996,10 @@ void Session::setFlowControlEnabled(bool enabled)
 
   if (_shellProcess)  
     _shellProcess->setFlowControlEnabled(_flowControl);
- kDebug()<<"flow "<<enabled<<"; shell "<<_shellProcess<<endl; 
   emit flowControlEnabledChanged(enabled);
 }
 bool Session::flowControlEnabled() const
 {
-kDebug()<<"_shellProcess "<<_shellProcess->flowControlEnabled()<<"; else _flow "<<_flowControl<<endl;
     if (_shellProcess)
             return _shellProcess->flowControlEnabled();
     else
