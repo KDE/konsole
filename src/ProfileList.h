@@ -58,6 +58,7 @@ public:
      *
      * @param addShortcuts True if the shortcuts associated with profiles
      * in the session manager should be added to the actions
+     * @param parent The parent GUI object
      */
     ProfileList(bool addShortcuts , QObject* parent);
 
