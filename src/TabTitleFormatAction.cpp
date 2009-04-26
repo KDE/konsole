@@ -35,7 +35,7 @@ const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] =
     { "%d" , I18N_NOOP("Current Directory (Short)") },
     { "%D" , I18N_NOOP("Current Directory (Long)") },
     { "%w" , I18N_NOOP("Window Title Set by Shell") },
-    { "%#" , I18N_NOOP("Session number") },
+    { "%#" , I18N_NOOP("Session Number") },
     { "%u" , I18N_NOOP("User Name") }
 };
 const int TabTitleFormatAction::_localElementCount = 6;
@@ -45,7 +45,7 @@ const TabTitleFormatAction::Element TabTitleFormatAction::_remoteElements[] =
     { "%h" , I18N_NOOP("Remote Host (Short)") },
     { "%H" , I18N_NOOP("Remote Host (Long)") },
     { "%w" , I18N_NOOP("Window Title Set by Shell") },
-    { "%#" , I18N_NOOP("Session number") }
+    { "%#" , I18N_NOOP("Session Number") }
 };
 const int TabTitleFormatAction::_remoteElementCount = 5;
 
