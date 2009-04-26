@@ -72,6 +72,32 @@
     </widget>
    </item>
    <item row="4" column="1" >
+    <widget class="QPushButton" name="moveUpButton" >
+     <property name="enabled" >
+      <bool>false</bool>
+     </property>
+     <property name="toolTip" >
+      <string>Move the selected profile up in the menu list</string>
+     </property>
+     <property name="text" >
+      <string>Move Up</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" >
+    <widget class="QPushButton" name="moveDownButton" >
+     <property name="enabled" >
+      <bool>false</bool>
+     </property>
+     <property name="toolTip" >
+      <string>Move the selected profile down in the menu list</string>
+     </property>
+     <property name="text" >
+      <string>Move Down</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1" >
     <spacer>
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
@@ -84,7 +110,7 @@
      </property>
     </spacer>
    </item>
-   <item rowspan="5" row="0" column="0" >
+   <item rowspan="7" row="0" column="0" >
     <widget class="QTableView" name="sessionTable" >
      <property name="whatsThis" >
       <string/>

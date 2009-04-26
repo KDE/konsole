@@ -46,7 +46,9 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     , _sessionModel(new QStandardItemModel(this))
 {
     setCaption(i18n("Manage Profiles"));
-    setButtons( KDialog::Close ); 
+    setButtons( KDialog::Ok | KDialog::Apply | KDialog::Cancel ); 
+
+    connect( this, SIGNAL(applyClicked()) , this , SLOT(setMenuOrder()) );
 
     _ui = new Ui::ManageProfilesDialog();
     _ui->setupUi(mainWidget());
@@ -56,6 +58,10 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     _ui->sessionTable->setItemDelegateForColumn(FavoriteStatusColumn,new FavoriteItemDelegate(this));
     _ui->sessionTable->setItemDelegateForColumn(ShortcutColumn,new ShortcutItemDelegate(this));
     _ui->sessionTable->setEditTriggers(_ui->sessionTable->editTriggers() | QAbstractItemView::SelectedClicked);
+
+    // TODO re-enable when saving profile order works - khindenburg
+    _ui->moveUpButton->setEnabled(false);
+    _ui->moveDownButton->setEnabled(false);
 
     // update table and listen for changes to the session types
     connect( SessionManager::instance() , SIGNAL(profileAdded(Profile::Ptr)) , this,
@@ -84,6 +90,8 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     connect( _ui->editSessionButton , SIGNAL(clicked()) , this , SLOT(editSelected()) );
     connect( _ui->deleteSessionButton , SIGNAL(clicked()) , this , SLOT(deleteSelected()) );
     connect( _ui->setAsDefaultButton , SIGNAL(clicked()) , this , SLOT(setSelectedAsDefault()) );
+    connect( _ui->moveUpButton , SIGNAL(clicked()) , this , SLOT(moveUpSelected()) );
+    connect( _ui->moveDownButton , SIGNAL(clicked()) , this , SLOT(moveDownSelected()) );
 }
 
 void ManageProfilesDialog::showEvent(QShowEvent*)
@@ -120,6 +128,20 @@ void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
                                                 sequence); 
    } 
 }
+
+void ManageProfilesDialog::setMenuOrder(void)
+{
+    return;
+// TODO fix 
+/*
+    for (int i=0;i<_sessionModel->rowCount();i++)
+    {
+    }
+
+    SessionManager::instance()->setMenuOrder();
+*/
+}
+
 int ManageProfilesDialog::rowForProfile(const Profile::Ptr info) const
 {
     for (int i=0;i<_sessionModel->rowCount();i++)
@@ -195,11 +217,16 @@ void ManageProfilesDialog::populateTable()
     // that the dialog is shown. 
     SessionManager::instance()->loadAllProfiles();
 
+    _sessionModel->clear();
     // setup session table
     _sessionModel->setHorizontalHeaderLabels( QStringList() << i18n("Name")
                                                             << i18n("Show in Menu") 
                                                             << i18n("Shortcut") );
-    foreach(const Profile::Ptr &info,SessionManager::instance()->loadedProfiles())
+
+    QList<Profile::Ptr> profiles = SessionManager::instance()->loadedProfiles();
+    SessionManager::instance()->sortProfiles(profiles);
+
+    foreach(const Profile::Ptr &info, profiles)
     {
         addItems(info);
     }
@@ -217,6 +244,7 @@ void ManageProfilesDialog::populateTable()
             SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)) , this ,
             SLOT(tableSelectionChanged(const QItemSelection&)) );
 
+    _ui->sessionTable->selectRow(0);
     tableSelectionChanged( _ui->sessionTable->selectionModel()->selection() );
 }
 void ManageProfilesDialog::updateDefaultItem()
@@ -247,12 +275,20 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
     const int selectedRows = _ui->sessionTable->selectionModel()->selectedRows().count();
     const SessionManager* manager = SessionManager::instance();
     const bool isNotDefault = (selectedRows > 0) && currentProfile() != manager->defaultProfile();
+    const int rowIndex = _ui->sessionTable->currentIndex().row();
 
     _ui->newSessionButton->setEnabled(selectedRows < 2);
     _ui->editSessionButton->setEnabled(selectedRows > 0);
     // do not allow the default session type to be removed
     _ui->deleteSessionButton->setEnabled(isNotDefault);
     _ui->setAsDefaultButton->setEnabled(isNotDefault && (selectedRows < 2)); 
+
+    // TODO handle multiple moves
+    // TODO re-enable when saving profile order works - khindenburg
+//    _ui->moveUpButton->setEnabled((selectedRows == 1) && (rowIndex > 0));
+//    _ui->moveDownButton->setEnabled((selectedRows == 1) && (rowIndex < (_sessionModel->rowCount()-1)));
+
+    _ui->sessionTable->selectRow(rowIndex);
 }
 void ManageProfilesDialog::deleteSelected()
 {
@@ -272,6 +308,27 @@ void ManageProfilesDialog::setSelectedAsDefault()
     // update font of new default item
     updateDefaultItem(); 
 }
+
+void ManageProfilesDialog::moveUpSelected()
+{
+    Q_ASSERT(_sessionModel);
+
+    const int rowIndex = _ui->sessionTable->currentIndex().row();
+    const QList<QStandardItem*>items = _sessionModel->takeRow(rowIndex);
+    _sessionModel->insertRow(rowIndex-1, items);
+    _ui->sessionTable->selectRow(rowIndex-1);
+}
+
+void ManageProfilesDialog::moveDownSelected()
+{
+    Q_ASSERT(_sessionModel);
+
+    const int rowIndex = _ui->sessionTable->currentIndex().row();
+    const QList<QStandardItem*>items = _sessionModel->takeRow(rowIndex);
+    _sessionModel->insertRow(rowIndex+1, items);
+    _ui->sessionTable->selectRow(rowIndex+1);
+}
+
 void ManageProfilesDialog::newType()
 {
     EditProfileDialog dialog(this);

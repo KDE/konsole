@@ -34,6 +34,7 @@ class QItemSelection;
 class QShowEvent;
 class QStandardItem;
 class QStandardItemModel;
+class QTableView;
 
 namespace Ui
 {
@@ -52,8 +53,10 @@ class KONSOLEPRIVATE_EXPORT ManageProfilesDialog : public KDialog
 {
 Q_OBJECT
 
+
 friend class FavoriteItemDelegate;
 friend class ShortcutItemDelegate;
+friend class QTableView;
 
 public:
     /** Constructs a new profile type with the specified parent. */
@@ -79,6 +82,8 @@ private slots:
     void setSelectedAsDefault();
     void newType();
     void editSelected();
+    void moveUpSelected();
+    void moveDownSelected();
 
     void itemDataChanged(QStandardItem* item);
 
@@ -91,6 +96,8 @@ private slots:
     void addItems(const Profile::Ptr);
     void updateItems(const Profile::Ptr);
     void removeItems(const Profile::Ptr);
+
+    void setMenuOrder(void);
 
 private:
     Profile::Ptr currentProfile() const; 
