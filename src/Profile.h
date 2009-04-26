@@ -182,7 +182,11 @@ public:
          * currently active session. */
         StartInCurrentSessionDir,
         /** (bool) Whether a 'New Tab' and 'Close Tab' buttons should be shown on the tab bar */
-        ShowNewAndCloseTabButtons
+        ShowNewAndCloseTabButtons,
+        /** Index of profile in the File Menu
+         * In future, format will be #.#.# to account for levels
+         */
+        MenuIndex
     };
 
     /** 
@@ -353,6 +357,11 @@ public:
 
     /** Convenience method for property<QStringList>(Profile::Environment) */
     QStringList environment() const { return property<QStringList>(Profile::Environment); }
+
+    /** Convenience method for property<QString>(Profile::MenuIndex) */
+    QString menuIndex() const { return property<QString>(Profile::MenuIndex); }
+
+    int menuIndexAsInt() const;
 
     /**
      * Returns true if @p name has been associated with an element

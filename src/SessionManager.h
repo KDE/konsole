@@ -66,7 +66,8 @@ public:
      * profiles.
      */
     SessionManager();
-    
+    void setMenuOrder();
+ 
     /** 
      * Destroys the SessionManager.  All running sessions should be closed (via closeAll()) and the 
      * SessionManager's state should be saved via saveState() before the SessionManager is destroyed.
@@ -90,6 +91,16 @@ public:
      * should only be done when necessary.
      */
     QList<Profile::Ptr> loadedProfiles() const;
+
+    QList<Profile::Ptr> sortedFavorites();
+
+    /*
+     * Sorts the profile list by menuindex; those without an menuindex, sort by name.
+     *  The menuindex list is first and then the non-menuindex list.
+     *
+     * @param list The profile list to sort
+     */
+    void sortProfiles(QList<Profile::Ptr> &list);
 
     /**
      * Searches for available profiles on-disk and returns a list

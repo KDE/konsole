@@ -68,6 +68,26 @@ bool Profile::isAvailable() const
 }
 #endif
 
+bool profileIndexLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
+{
+    return p1->menuIndexAsInt() <= p2->menuIndexAsInt();
+}
+
+bool profileNameLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
+{
+    return QString::localeAwareCompare(p1->name(), p2->name()) <= 0;
+}
+
+static void sortByIndexProfileList(QList<Profile::Ptr> &list)
+{
+   qStableSort(list.begin(), list.end(), profileIndexLessThan);
+}
+
+static void sortByNameProfileList(QList<Profile::Ptr> &list)
+{
+    qStableSort(list.begin(), list.end(), profileNameLessThan);
+}
+
 SessionManager::SessionManager()
     : _loadedAllProfiles(false)
     , _loadedFavorites(false)
@@ -207,6 +227,53 @@ void SessionManager::loadAllProfiles()
 
     _loadedAllProfiles = true;
 }
+
+void SessionManager::sortProfiles(QList<Profile::Ptr> &list)
+{
+
+    QList<Profile::Ptr> lackingIndices;
+    QList<Profile::Ptr> havingIndices;
+
+    for (int i = 0; i < list.size(); ++i)
+    {
+        // dis-regard the fallback profile
+        if (list.at(i)->path() == _fallbackProfile->property<QString>(Profile::Path))
+            continue;
+
+        if (list.at(i)->menuIndexAsInt() == 0)
+            lackingIndices.append(list.at(i));
+        else
+            havingIndices.append(list.at(i));
+    }
+
+    // sort by index
+    sortByIndexProfileList(havingIndices);
+
+    // sort alphabetically those w/o an index
+    sortByNameProfileList(lackingIndices);
+
+    // Put those with indices in sequential order w/o any gaps
+    int i = 0;
+    for (i = 0; i < havingIndices.size(); ++i)
+    {
+        Profile::Ptr tempProfile = havingIndices.at(i);
+        tempProfile->setProperty(Profile::MenuIndex, QString::number(i+1));
+        havingIndices.replace(i, tempProfile);
+    }
+    // Put those w/o indices in sequential order
+    for (int j = 0; j < lackingIndices.size(); ++j)
+    {
+        Profile::Ptr tempProfile = lackingIndices.at(j);
+        tempProfile->setProperty(Profile::MenuIndex, QString::number(j+1+i));
+        lackingIndices.replace(j, tempProfile);
+    }
+
+    // combine the 2 list: first those who had indices
+    list.clear();
+    list.append(havingIndices);
+    list.append(lackingIndices);
+}
+
 void SessionManager::saveState()
 {
     // save default profile
@@ -296,6 +363,14 @@ void SessionManager::sessionTerminated(QObject* sessionObject)
 
     _sessions.removeAll(session);
     session->deleteLater();
+}
+
+QList<Profile::Ptr> SessionManager::sortedFavorites()
+{
+    QList<Profile::Ptr> favorites = findFavorites().toList();
+
+    sortProfiles(favorites);
+    return favorites;
 }
 
 QList<Profile::Ptr> SessionManager::loadedProfiles() const

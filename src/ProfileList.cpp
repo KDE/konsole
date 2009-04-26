@@ -34,16 +34,6 @@
 
 using namespace Konsole;
 
-bool profileNameLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
-{
-    return QString::localeAwareCompare(p1->name(), p2->name()) <= 0;
-}
-
-static void sortProfileList(QList<Profile::Ptr> &list)
-{
-    qStableSort(list.begin(), list.end(), profileNameLessThan);
-}
-
 ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     : QObject(parent)
     , _addShortcuts(addShortcuts)
@@ -59,8 +49,8 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     _emptyListAction->setEnabled(false);
 
     // TODO - Handle re-sorts when user changes profile names
-    QList<Profile::Ptr> list = manager->findFavorites().toList();
-    sortProfileList(list);
+
+    QList<Profile::Ptr> list = manager->sortedFavorites();
 
     QListIterator<Profile::Ptr> iter(list);
 

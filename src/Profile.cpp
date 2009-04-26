@@ -80,6 +80,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     , { TabBarPosition , "TabBarPosition" , GENERAL_GROUP , QVariant::Int }
     , { StartInCurrentSessionDir , "StartInCurrentSessionDir" , GENERAL_GROUP , QVariant::Bool }
     , { ShowNewAndCloseTabButtons, "ShowNewAndCloseTabButtons" , GENERAL_GROUP , QVariant::Bool }
+    , { MenuIndex, "MenuIndex" , GENERAL_GROUP , QVariant::String }
 
     // Appearance
     , { Font , "Font" , APPEARANCE_GROUP , QVariant::Font }
@@ -155,6 +156,7 @@ FallbackProfile::FallbackProfile()
     setProperty(ShowMenuBar,true);
     setProperty(StartInCurrentSessionDir,true);
     setProperty(ShowNewAndCloseTabButtons,false);
+    setProperty(MenuIndex,"0");
 
     setProperty(KeyBindings,"default");
     setProperty(ColorScheme,"DarkPastels");
@@ -274,6 +276,14 @@ void Profile::registerProperty(const PropertyInfo& info)
     // (multiple name -> property mappings are allowed though)
     if ( !_infoByProperty.contains(info.property) )
         _infoByProperty.insert(info.property,info);
+}
+
+int Profile::menuIndexAsInt() const
+{
+    bool ok;
+    int index = menuIndex().toInt(&ok, 10);
+    if (ok) return index;
+    return 0;
 }
 
 QString KDE4ProfileWriter::getPath(const Profile::Ptr info)
