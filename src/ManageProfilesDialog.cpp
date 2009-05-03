@@ -348,6 +348,7 @@ void ManageProfilesDialog::newType()
     Profile::Ptr newProfile = Profile::Ptr(new Profile(SessionManager::instance()->fallbackProfile()));
     newProfile->clone(sourceProfile,true);
     newProfile->setProperty(Profile::Name,i18n("New Profile"));
+    newProfile->setProperty(Profile::MenuIndex, QString("0"));
 
     dialog.setProfile(newProfile); 
     dialog.selectProfileName();
