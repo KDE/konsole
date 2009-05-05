@@ -1434,15 +1434,21 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
          if (doubleWidth)
             _fixedFont = false;
          QString unistr(disstrU,p);
-         
+
+         // Create a text scaling matrix for double width and double height lines.
+         QMatrix textScale;
+
          if (y < _lineProperties.size())
          {
             if (_lineProperties[y] & LINE_DOUBLEWIDTH)
-                paint.scale(2,1);
-            
+                textScale.scale(2,1);
+
             if (_lineProperties[y] & LINE_DOUBLEHEIGHT)
-                   paint.scale(1,2);
+                textScale.scale(1,2);
          }
+
+         //Apply text scaling matrix.
+         paint.setWorldMatrix(textScale, true);
 
          //calculate the area in which the text will be drawn
          QRect textArea = QRect( _leftMargin+tLx+_fontWidth*x , _topMargin+tLy+_fontHeight*y , _fontWidth*len , _fontHeight);
@@ -1453,8 +1459,7 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
          //transformation has been applied to the painter.  this ensures that 
          //painting does actually start from textArea.topLeft() 
          //(instead of textArea.topLeft() * painter-scale)    
-         QTransform inverted = paint.worldTransform().inverted();
-         textArea.moveTopLeft( inverted.map(textArea.topLeft()) );
+         textArea.moveTopLeft( textScale.inverted().map(textArea.topLeft()) );
          
          //paint text fragment
          drawTextFragment(    paint,
@@ -1467,7 +1472,7 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
          _fixedFont = save__fixedFont;
      
          //reset back to single-width, single-height _lines 
-         paint.resetMatrix();
+         paint.setWorldMatrix(textScale.inverted(), true);
 
          if (y < _lineProperties.size()-1)
          {
