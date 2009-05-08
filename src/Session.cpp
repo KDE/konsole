@@ -198,7 +198,7 @@ void Session::setProgram(const QString& program)
 }
 void Session::setInitialWorkingDirectory(const QString& dir)
 {
-    _initialWorkingDir = ShellCommand::expand(dir);
+    _initialWorkingDir = KShell::tildeExpand(ShellCommand::expand(dir));
 }
 void Session::setArguments(const QStringList& arguments)
 {
