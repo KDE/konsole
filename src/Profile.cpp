@@ -159,7 +159,7 @@ FallbackProfile::FallbackProfile()
     setProperty(MenuIndex,"0");
 
     setProperty(KeyBindings,"default");
-    setProperty(ColorScheme,"DarkPastels");
+    setProperty(ColorScheme,"Linux"); //use DarkPastels when is start support blue ncurses UI properly
     setProperty(Font,KGlobalSettings::fixedFont());
 
     setProperty(HistoryMode,FixedSizeHistory);
