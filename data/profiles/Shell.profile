@@ -102,6 +102,7 @@ Comment[ko]=Konsole 기본 프로필
 Comment[ku]=Profîla standard a Konsolê
 Comment[lt]=Konsole numatytas profilis
 Comment[lv]=Konsole noklusējuma profils
+Comment[mai]=कंसोल पूर्वनिर्धारित प्रोफाइल
 Comment[mk]=Стандарден профил на Конзола
 Comment[ml]=കണ്‍സോളിന്റെ സ്വതേയുള്ള പ്രൊഫൈല്‍
 Comment[mr]=कंसोल मुलभूत प्रोफाइल
