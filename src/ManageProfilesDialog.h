@@ -56,7 +56,7 @@ Q_OBJECT
 
 friend class FavoriteItemDelegate;
 friend class ShortcutItemDelegate;
-friend class QTableView;
+friend class ::QTableView;
 
 public:
     /** Constructs a new profile type with the specified parent. */
