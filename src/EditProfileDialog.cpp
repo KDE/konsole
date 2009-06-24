@@ -146,7 +146,7 @@ void EditProfileDialog::updateCaption(const Profile::Ptr profile)
     if (group && group->profiles().count() > 1)
     {
         QString caption = groupProfileNames(group,MAX_GROUP_CAPTION_LENGTH); 
-         setCaption( i18n("Editing %1 profiles: %2",group->profiles().count(), caption) );
+         setCaption( i18np("Editing profile: %2","Editing %1 profiles: %2",group->profiles().count(), caption) );
     }
     else
         setCaption( i18n("Edit Profile \"%1\"",profile->name()) );
