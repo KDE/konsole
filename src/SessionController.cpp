@@ -863,7 +863,7 @@ void SessionController::scrollBackOptionsChanged(int mode, int lines, bool saveT
             _session->setHistoryType( HistoryTypeNone() );
             break;
          case HistorySizeDialog::FixedSizeHistory:
-            _session->setHistoryType( HistoryTypeBuffer(lines) );
+            _session->setHistoryType( CompactHistoryType(lines) );
             break;
          case HistorySizeDialog::UnlimitedHistory:
              _session->setHistoryType( HistoryTypeFile() );

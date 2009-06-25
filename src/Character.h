@@ -105,6 +105,11 @@ public:
   ColorEntry::FontWeight fontWeight(const ColorEntry* base) const;
   
   /** 
+   * returns true if the format (color, rendition flag) of the compared characters is equal
+   */
+  bool equalsFormat(const Character &other) const;
+
+  /** 
    * Compares two characters and returns true if they have the same unicode character value,
    * rendition and colors.
    */
@@ -139,6 +144,14 @@ inline bool Character::isTransparent(const ColorEntry* base) const
       || ((backgroundColor._colorSpace == COLOR_SPACE_SYSTEM) && 
           base[backgroundColor._u+2+(backgroundColor._v?BASE_COLORS:0)].transparent);
 }
+
+inline bool Character::equalsFormat(const Character& other) const
+{
+  return 
+    backgroundColor==other.backgroundColor &&
+    foregroundColor==other.foregroundColor &&
+    rendition==other.rendition;
+}	
 
 inline ColorEntry::FontWeight Character::fontWeight(const ColorEntry* base) const
 {

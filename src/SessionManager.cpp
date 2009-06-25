@@ -515,7 +515,7 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr info , bo
             case Profile::FixedSizeHistory:
                 {
                     int lines = info->property<int>(Profile::HistorySize);
-                    session->setHistoryType( HistoryTypeBuffer(lines) );
+                    session->setHistoryType( CompactHistoryType(lines) );
                 }
                 break;
             case Profile::UnlimitedHistory:
