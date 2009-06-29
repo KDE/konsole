@@ -449,7 +449,7 @@ public:
     /**
      * Copies part of the output to a stream.
      *
-     * @param decoder A decoder which coverts terminal characters into text
+     * @param decoder A decoder which converts terminal characters into text
      * @param fromLine The first line in the history to retrieve
      * @param toLine The last line in the history to retrieve
      */
@@ -460,7 +460,7 @@ public:
      * into a stream.
      *
      * @param decoder A decoder which converts terminal characters into text.  
-     * PlainTextDecoder is the most commonly used decoder which coverts characters 
+     * PlainTextDecoder is the most commonly used decoder which converts characters 
      * into plain text with no formatting.
      * @param preserveLineBreaks Specifies whether new line characters should 
      * be inserted into the returned text at the end of each terminal line. 
@@ -556,7 +556,7 @@ private:
     //         history->getLines() + lines - 1
     //start - the first column on the line to copy
     //count - the number of characters on the line to copy
-    //decoder - a decoder which coverts terminal characters (an Character array) into text
+    //decoder - a decoder which converts terminal characters (an Character array) into text
     //appendNewLine - if true a new line character (\n) is appended to the end of the line
     int  copyLineToStream(int line, 
                           int start, 

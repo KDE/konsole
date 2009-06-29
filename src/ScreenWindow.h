@@ -94,7 +94,7 @@ public:
      * whole window, but will be a smaller area in, for example, applications
      * which provide split-screen facilities.
      *
-     * This is not guaranteed to be accurate, but allows views to optimise
+     * This is not guaranteed to be accurate, but allows views to optimize
      * rendering by reducing the amount of costly text rendering that
      * needs to be done when the output is scrolled. 
      */
@@ -110,7 +110,7 @@ public:
      * usually the whole window area.
      *
      * Like scrollCount(), this is not guaranteed to be accurate,
-     * but allows views to optimise rendering.
+     * but allows views to optimize rendering.
      */
     QRect scrollRegion() const;
 

@@ -253,7 +253,7 @@ void Application::startBackgroundMode(MainWindow* window)
         KAction* action = new KAction(window);
         KShortcut shortcut = action->shortcut();
         action->setObjectName("Konsole Background Mode");
-        //TODO - Customisable key sequence for this
+        //TODO - Customizable key sequence for this
         action->setGlobalShortcut( KShortcut(QKeySequence(Qt::Key_F12)) );
 
         _backgroundInstance = window;

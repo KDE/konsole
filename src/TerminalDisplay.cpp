@@ -1508,7 +1508,7 @@ void TerminalDisplay::blinkEvent()
 
   _blinking = !_blinking;
 
-  //TODO:  Optimise to only repaint the areas of the widget 
+  //TODO:  Optimize to only repaint the areas of the widget 
   // where there is blinking text
   // rather than repainting the whole widget.
   update();
