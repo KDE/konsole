@@ -61,6 +61,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     _ui->setupUi(this);
 
     // description edit
+    _ui->descriptionEdit->setClearButtonShown(true);
     connect( _ui->descriptionEdit , SIGNAL(textChanged(const QString&)) , this , 
             SLOT(setDescription(const QString&)) );
 

@@ -220,7 +220,10 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     {
         ProfileGroup::Ptr group = info->asGroup(); 
         if (!group || group->profiles().count() < 2)
+        {
+            _ui->profileNameEdit->setClearButtonShown(true);
             _ui->profileNameEdit->setText( info->name() );
+        }
         else 
         {
             _ui->profileNameEdit->setText( groupProfileNames(group,-1) );
