@@ -45,6 +45,9 @@ RemoteConnectionDialog::RemoteConnectionDialog(QWidget* parent)
 
     // set initial UI state
     _ui->userEdit->setFocus(Qt::OtherFocusReason);
+
+    _ui->userEdit->setClearButtonShown(true);
+    _ui->hostEdit->setClearButtonShown(true);
 }
 RemoteConnectionDialog::~RemoteConnectionDialog()
 {

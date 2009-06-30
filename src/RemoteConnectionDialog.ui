@@ -33,7 +33,7 @@
     </widget>
    </item>
    <item row="0" column="1" >
-    <widget class="QLineEdit" name="userEdit" />
+    <widget class="KLineEdit" name="userEdit" />
    </item>
    <item row="1" column="0" >
     <widget class="QLabel" name="userLabel" >
@@ -43,7 +43,7 @@
     </widget>
    </item>
    <item row="1" column="1" >
-    <widget class="QLineEdit" name="hostEdit" >
+    <widget class="KLineEdit" name="hostEdit" >
      <property name="minimumSize" >
       <size>
        <width>180</width>
