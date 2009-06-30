@@ -345,7 +345,7 @@
            </widget>
           </item>
           <item row="1" column="1" >
-           <widget class="QComboBox" name="tabBarVisibilityCombo" >
+           <widget class="KComboBox" name="tabBarVisibilityCombo" >
             <property name="sizePolicy" >
              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
               <horstretch>1</horstretch>
@@ -368,7 +368,7 @@
            </widget>
           </item>
           <item row="2" column="1" >
-           <widget class="QComboBox" name="tabBarPositionCombo" >
+           <widget class="KComboBox" name="tabBarPositionCombo" >
             <property name="sizePolicy" >
              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
               <horstretch>1</horstretch>
