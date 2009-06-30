@@ -26,11 +26,11 @@
 #include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
 #include <QtGui/QRadioButton>
-#include <QtGui/QSpinBox>
 #include <QtGui/QWidget>
 
 // KDE
 #include <KLocalizedString>
+#include <KNumInput>
 
 // Konsole
 #include "SessionManager.h"
@@ -70,7 +70,7 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     modeGroup->addButton(_fixedHistoryButton);
     modeGroup->addButton(_unlimitedHistoryButton);
 
-    _lineCountBox = new QSpinBox(this);
+    _lineCountBox = new KIntSpinBox(this);
 
     // minimum lines = 1 ( for 0 lines , "No History" mode should be used instead )
     // maximum lines is abritrarily chosen, I do not think it is sensible to allow this

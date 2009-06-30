@@ -24,7 +24,7 @@
 #include <KDialog>
 
 class QAbstractButton;
-class QSpinBox;
+class KIntSpinBox;
 
 namespace Konsole
 {
@@ -123,7 +123,7 @@ private:
     QAbstractButton* _fixedHistoryButton;
     QAbstractButton* _unlimitedHistoryButton;
     QAbstractButton* _saveToCurrentProfileButton;
-    QSpinBox* _lineCountBox;   
+    KIntSpinBox* _lineCountBox;   
 
     HistoryMode _defaultMode;
     int _defaultLineCount; 

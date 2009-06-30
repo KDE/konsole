@@ -642,7 +642,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="scrollBackLinesSpinner" >
+             <widget class="KIntSpinBox" name="scrollBackLinesSpinner" >
               <property name="toolTip" >
                <string>Number of lines of output to remember</string>
               </property>
@@ -1177,6 +1177,11 @@
    <class>KColorButton</class>
    <extends>QPushButton</extends>
    <header>kcolorbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KIntSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
