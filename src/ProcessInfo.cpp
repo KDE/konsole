@@ -40,6 +40,12 @@
 #include <KGlobal>
 #include <KSharedConfig>
 
+#if defined(Q_OS_MAC)
+#include <sys/sysctl.h>
+#include <sys/proc_info.h>
+#include <sys/proc.h>
+#endif
+
 using namespace Konsole;
 
 ProcessInfo::ProcessInfo(int pid , bool enableEnvironmentRead)
@@ -565,6 +571,90 @@ private:
     }
 } ;
 
+class MacProcessInfo : public UnixProcessInfo
+{
+public:
+    MacProcessInfo(int pid, bool env) :
+        UnixProcessInfo(pid, env)
+    {
+    }
+
+private:
+    virtual bool readProcInfo(int pid)
+    {
+#if defined(Q_OS_MAC)
+        int managementInfoBase[4];
+        size_t mibLength;
+        struct kinfo_proc* kInfoProc;
+        struct stat statInfo;
+
+        // Find the tty device of 'pid' (Example: /dev/ttys001)
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC;
+        managementInfoBase[2] = KERN_PROC_PID;
+        managementInfoBase[3] = pid;
+
+        if (sysctl(managementInfoBase, 4, NULL, &mibLength, NULL, 0) == -1)
+        {
+            return false;
+        } 
+        else
+        {
+            kInfoProc = new struct kinfo_proc [mibLength];
+            if (sysctl(managementInfoBase, 4, kInfoProc, &mibLength, NULL, 0) == -1)
+            {
+                delete [] kInfoProc;
+                return false;
+            }
+            else
+            { 
+                QString deviceNumber = QString(devname(((&kInfoProc->kp_eproc)->e_tdev), S_IFCHR));
+                QString fullDeviceName =  QString("/dev/") + deviceNumber.rightJustified(3, '0');
+                delete [] kInfoProc;
+
+                const char* ttyName = fullDeviceName.toLatin1().constData();
+
+                if (stat(ttyName, &statInfo) != 0)
+                    return false;
+
+                // Find all processes attached to ttyName
+                managementInfoBase[0] = CTL_KERN;
+                managementInfoBase[1] = KERN_PROC;
+                managementInfoBase[2] = KERN_PROC_TTY;
+                managementInfoBase[3] = statInfo.st_rdev;
+
+                mibLength = 0;
+                if (sysctl(managementInfoBase, sizeof(managementInfoBase)/sizeof(int), NULL, &mibLength, NULL, 0) == -1)
+                    return false;
+
+                kInfoProc = new struct kinfo_proc [mibLength];
+                if (sysctl(managementInfoBase, sizeof(managementInfoBase)/sizeof(int), kInfoProc, &mibLength, NULL, 0) == -1)
+                    return false;
+
+                // The foreground program is the first one
+                setName(QString(kInfoProc->kp_proc.p_comm));
+
+                delete [] kInfoProc;
+            }
+        }
+        return true;
+#endif
+    }
+
+    virtual bool readArguments(int pid)
+    {
+        return false;
+    }
+    virtual bool readCurrentDir(int pid)
+    {
+        return false;
+    }
+    virtual bool readEnvironment(int pid)
+    {
+        return false;
+    }
+} ;
+
 #ifdef Q_OS_SOLARIS
     // The procfs structure definition requires off_t to be
     // 32 bits, which only applies if FILE_OFFSET_BITS=32.
@@ -802,6 +892,8 @@ ProcessInfo* ProcessInfo::newInstance(int pid,bool enableEnvironmentRead)
     return new LinuxProcessInfo(pid,enableEnvironmentRead);
 #elif defined(Q_OS_SOLARIS)
     return new SolarisProcessInfo(pid,enableEnvironmentRead);
+#elif defined(Q_OS_MAC)
+    return new MacProcessInfo(pid,enableEnvironmentRead);
 #else
     return new NullProcessInfo(pid,enableEnvironmentRead);
 #endif
