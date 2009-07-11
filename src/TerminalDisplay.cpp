@@ -1381,7 +1381,8 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
   int rly = qMin(_usedLines-1,  qMax(0,(rect.bottom() - tLy - _topMargin  ) / _fontHeight));
 
   const int bufferSize = _usedColumns;
-  QChar *disstrU = new QChar[bufferSize];
+  QString unistr;
+  unistr.reserve(bufferSize);
   for (int y = luy; y <= rly; y++)
   {
     quint16 c = _image[loc(lux,y)].character;
@@ -1392,6 +1393,10 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
     {
       int len = 1;
       int p = 0;
+
+      // reset our buffer to the maximal size
+      unistr.resize(bufferSize);
+      QChar *disstrU = unistr.data();
 
       // is this a single character or a sequence of characters ?
       if ( _image[loc(x,y)].rendition & RE_EXTENDED_CHAR )
@@ -1444,7 +1449,7 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
             _fixedFont = false;
          if (doubleWidth)
             _fixedFont = false;
-         QString unistr(disstrU,p);
+         unistr.resize(p);
 
          // Create a text scaling matrix for double width and double height lines.
          QMatrix textScale;
@@ -1499,7 +1504,6 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
         x += len - 1;
     }
   }
-  delete [] disstrU;
 }
 
 void TerminalDisplay::blinkEvent()
