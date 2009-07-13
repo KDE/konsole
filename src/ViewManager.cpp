@@ -353,10 +353,10 @@ void ViewManager::sessionFinished()
 
     if ( _sessionMap[qobject_cast<TerminalDisplay*>(activeView())] == session )
     {
-        // switch to the previous view before deleting the session views to prevent flicker 
+        // switch to the next view before deleting the session views to prevent flicker 
         // occurring as a result of an interval between removing the active view and switching
-        // to the previous view
-        previousView();
+        // to the next view
+        nextView();
     }
 
     Q_ASSERT(session);
