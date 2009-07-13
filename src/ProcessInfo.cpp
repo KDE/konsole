@@ -571,6 +571,7 @@ private:
     }
 } ;
 
+#if defined(Q_OS_MAC)
 class MacProcessInfo : public UnixProcessInfo
 {
 public:
@@ -582,7 +583,6 @@ public:
 private:
     virtual bool readProcInfo(int pid)
     {
-#if defined(Q_OS_MAC)
         int managementInfoBase[4];
         size_t mibLength;
         struct kinfo_proc* kInfoProc;
@@ -638,7 +638,6 @@ private:
             }
         }
         return true;
-#endif
     }
 
     virtual bool readArguments(int pid)
@@ -654,6 +653,7 @@ private:
         return false;
     }
 } ;
+#endif
 
 #ifdef Q_OS_SOLARIS
     // The procfs structure definition requires off_t to be
