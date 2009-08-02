@@ -975,6 +975,8 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
                                  SLOT(toggleResizeWindow(bool)) },
                                { _ui->enableBlinkingCursorButton , Profile::BlinkingCursorEnabled ,
                                  SLOT(toggleBlinkingCursor(bool)) },
+                               { _ui->tripleClickMode , Profile::TripleClickMode ,
+                                 SLOT(toggleTripleClickMode(bool)) },
                                { _ui->enableBidiRenderingButton , Profile::BidiRenderingEnabled ,
                                  SLOT(togglebidiRendering(bool)) },
                                { 0 , 0 , 0 }
@@ -1050,6 +1052,10 @@ void EditProfileDialog::togglebidiRendering(bool enable)
 void EditProfileDialog::toggleBlinkingCursor(bool enable)
 {
     _tempProfile->setProperty(Profile::BlinkingCursorEnabled,enable);
+}
+void EditProfileDialog::toggleTripleClickMode(bool enable)
+{
+    _tempProfile->setProperty(Profile::TripleClickMode,enable);
 }
 void EditProfileDialog::toggleBlinkingText(bool enable)
 {

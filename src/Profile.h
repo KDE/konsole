@@ -174,6 +174,10 @@ public:
         WordCharacters,
         /** (TabBarPositionEnum) Position of the tab-bar relative to the terminal displays. */
         TabBarPosition,
+        /** (bool) If true, the triple click selects from current word onwards. Otherwise
+         * selects whole line.
+         */
+        TripleClickMode,
         /** (String) Default text codec */
         DefaultEncoding,
         /** (bool) Whether fonts should be aliased or not */

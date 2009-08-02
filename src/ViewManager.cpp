@@ -825,6 +825,9 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
     bool blinkingText = info->property<bool>(Profile::BlinkingTextEnabled);
     view->setBlinkingTextEnabled(blinkingText);
 
+    bool tripleClickMode = info->property<bool>(Profile::TripleClickMode);
+    view->setTripleClickMode(tripleClickMode ? TerminalDisplay::SelectForwardsFromCursor : TerminalDisplay::SelectWholeLine);
+
     bool bidiEnabled = info->property<bool>(Profile::BidiRenderingEnabled);
     view->setBidiEnabled(bidiEnabled);
 

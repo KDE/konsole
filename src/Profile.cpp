@@ -110,6 +110,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
 
     // Interaction
     , { WordCharacters , "WordCharacters" , INTERACTION_GROUP , QVariant::String }
+    , { TripleClickMode , "TripleClickSelectsFromCursor" , INTERACTION_GROUP , QVariant::Bool }
 
     // Encoding
     , { DefaultEncoding , "DefaultEncoding" , ENCODING_GROUP , QVariant::String }

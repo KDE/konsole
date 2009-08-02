@@ -972,6 +972,16 @@
             </item>
            </layout>
           </item>
+            <item>
+            <widget class="QCheckBox" name="tripleClickMode" >
+             <property name="text" >
+              <string>Triple click selects from current word forward</string>
+             </property>
+              <property name="toolTip" >
+               <string>All characters from the current word to the end of line will be selected.</string>
+              </property>
+            </widget>
+           </item>
          </layout>
         </widget>
        </item>
