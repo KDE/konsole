@@ -83,6 +83,27 @@ key Left  -Shift+AnyMod+Ansi           : "\E[1;*D"
 #key * +KeyPad+AppKeyPad : "\EOM"
 #key Enter +KeyPad+AppKeyPad : "\r"
 
+# Keypad keys with NumLock Off
+key Up    -Shift+Ansi+AppCuKeys+KeyPad : "\EOA"
+key Down  -Shift+Ansi+AppCuKeys+KeyPad : "\EOB"
+key Right -Shift+Ansi+AppCuKeys+KeyPad : "\EOC"
+key Left  -Shift+Ansi+AppCuKeys+KeyPad : "\EOD"
+
+key Up    -Shift+Ansi-AppCuKeys+KeyPad : "\E[A"
+key Down  -Shift+Ansi-AppCuKeys+KeyPad : "\E[B"
+key Right -Shift+Ansi-AppCuKeys+KeyPad : "\E[C"
+key Left  -Shift+Ansi-AppCuKeys+KeyPad : "\E[D"
+
+key Home        +AppCuKeys+KeyPad : "\EOH"
+key End         +AppCuKeys+KeyPad : "\EOF"
+key Home        -AppCuKeys+KeyPad : "\E[H"
+key End         -AppCuKeys+KeyPad : "\E[F"
+
+key Insert      +KeyPad  : "\E[2~"
+key Delete      +KeyPad  : "\E[3~"
+key Prior -Shift+KeyPad  : "\E[5~"
+key Next  -Shift+KeyPad  : "\E[6~"
+
 # other grey PC keys
 
 key Enter+NewLine : "\r\n"
