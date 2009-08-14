@@ -90,6 +90,7 @@ Comment[gu]=કોન્સોલ મૂળભૂત પ્રોફાઇલ
 Comment[he]=פרופיל ברירת־המחדל של קונסול
 Comment[hi]=कंसोल डिफ़ॉल्ट प्रोफ़ाइल
 Comment[hne]=कंसोल डिफाल्ट प्रोफाइल
+Comment[hr]=Zadani profil Konzole
 Comment[hsb]=Standardny profil konsole
 Comment[hu]=Alapértelmezett Konsole-profil
 Comment[is]=Sjálfgefið sniðmát Konsole
