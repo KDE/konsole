@@ -420,12 +420,7 @@ void SessionController::setupActions()
     action->setText(i18n("Copy Input To..."));
     connect( action , SIGNAL(triggered()) , this , SLOT(copyInputTo()) );
 
-    // Clear and Clear+Reset
-    action = collection->addAction("clear");
-    action->setText( i18n("C&lear Display") );
-    action->setIcon( KIcon("edit-clear") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(clear()) );
-
+    // Clear+Reset
     action = collection->addAction("clear-and-reset");
     action->setText( i18n("Clear && Reset") );
     action->setIcon( KIcon("edit-clear-history") );
@@ -492,10 +487,6 @@ void SessionController::setupActions()
     action->setText( i18n("Scrollback Options") );
     action->setIcon( KIcon("configure") );
     connect( action , SIGNAL(triggered()) , this , SLOT(showHistoryOptions()) );
-
-    action = collection->addAction("clear-history");
-    action->setText( i18n("Clear Scrollback") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(clearHistory()) );
 
     action = collection->addAction("clear-history-and-reset");
     action->setText( i18n("Clear Scrollback && Reset") );
