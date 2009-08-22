@@ -381,7 +381,7 @@ void SessionController::setupActions()
 
     // Open Browser
     action = collection->addAction("open-browser");
-    action->setText( i18n("Open Browser Here") );
+    action->setText( i18n("Open File Manager") );
     action->setIcon( KIcon("system-file-manager") );
     connect( action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
 
