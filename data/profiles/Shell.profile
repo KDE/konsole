@@ -93,6 +93,7 @@ Comment[hne]=कंसोल डिफाल्ट प्रोफाइल
 Comment[hr]=Zadani profil Konzole
 Comment[hsb]=Standardny profil konsole
 Comment[hu]=Alapértelmezett Konsole-profil
+Comment[id]=Profil standar Konsole
 Comment[is]=Sjálfgefið sniðmát Konsole
 Comment[it]=Profilo predefinito di Konsole
 Comment[ja]=Konsole の標準プロファイル
