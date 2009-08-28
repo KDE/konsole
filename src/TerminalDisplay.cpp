@@ -1104,7 +1104,7 @@ void TerminalDisplay::updateImage()
   // update the parts of the display which have changed
   update(dirtyRegion);
 
-  if ( _hasBlinker && !_blinkTimer->isActive()) _blinkTimer->start( BLINK_DELAY ); 
+  if ( _hasBlinker && !_blinkTimer->isActive()) _blinkTimer->start( TEXT_BLINK_DELAY ); 
   if (!_hasBlinker && _blinkTimer->isActive()) { _blinkTimer->stop(); _blinking = false; }
   delete[] dirtyMask;
   delete[] disstrU;
@@ -1146,7 +1146,7 @@ void TerminalDisplay::setBlinkingCursor(bool blink)
   _hasBlinkingCursor=blink;
   
   if (blink && !_blinkCursorTimer->isActive()) 
-      _blinkCursorTimer->start(BLINK_DELAY);
+      _blinkCursorTimer->start(QApplication::cursorFlashTime() / 2);
   
   if (!blink && _blinkCursorTimer->isActive()) 
   {
@@ -1163,7 +1163,7 @@ void TerminalDisplay::setBlinkingTextEnabled(bool blink)
     _allowBlinkingText = blink;
 
     if (blink && !_blinkTimer->isActive()) 
-        _blinkTimer->start(BLINK_DELAY);
+        _blinkTimer->start(TEXT_BLINK_DELAY);
   
     if (!blink && _blinkTimer->isActive()) 
     {
@@ -2518,7 +2518,7 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 
     if (_hasBlinkingCursor) 
     {
-      _blinkCursorTimer->start(BLINK_DELAY);
+      _blinkCursorTimer->start(QApplication::cursorFlashTime() / 2);
       if (_cursorBlinking)
         blinkCursorEvent();
       else
