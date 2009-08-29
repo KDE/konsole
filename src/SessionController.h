@@ -1,5 +1,6 @@
 /*
     Copyright 2006-2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 2009 by Thomas Dreibholz <dreibh@iem.uni-due.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -208,6 +209,9 @@ private slots:
                                          // display area
 
     void updateSearchFilter();
+    
+    void zmodemDownload();
+    void zmodemUpload();
 
 private:
     // begins the search

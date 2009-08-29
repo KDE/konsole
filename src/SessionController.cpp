@@ -1,5 +1,6 @@
 /*
     Copyright 2006-2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 2009 by Thomas Dreibholz <dreibh@iem.uni-due.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,8 +32,10 @@
 #include <KInputDialog>
 #include <KLocale>
 #include <KMenu>
+#include <KMessageBox>
 #include <KRun>
 #include <kshell.h>
+#include <KStandardDirs>
 #include <KToggleAction>
 #include <KUrl>
 #include <KXMLGUIFactory>
@@ -140,7 +143,10 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // listen for output changes to set activity flag
     connect( _session->emulation() , SIGNAL(outputChanged()) , this ,
             SLOT(fireActivity()) );
-    
+
+    // listen for detection of ZModem transfer
+    connect( _session , SIGNAL(zmodemDetected()) , this , SLOT(zmodemDownload()) ); 
+
     // listen for flow control status changes
     connect( _session , SIGNAL(flowControlEnabledChanged(bool)) , _view ,
         SLOT(setFlowControlWarningEnabled(bool)) );
@@ -426,6 +432,12 @@ void SessionController::setupActions()
     action->setIcon( KIcon("edit-clear-history") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
 
+    action = collection->addAction("zmodem-upload");
+    action->setText( i18n( "&ZModem Upload..." ) );
+    action->setIcon( KIcon("document-open") );
+    action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_U) );
+    connect( action , SIGNAL(triggered()) , this , SLOT(zmodemUpload()) );
+    
     // Monitor
     toggleAction = new KToggleAction(i18n("Monitor for &Activity"),this);
     toggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_A) );
@@ -1029,6 +1041,57 @@ void SessionController::sessionStateChanged(int state)
         }
 
         setIcon( _sessionIcon );
+    }
+}
+
+void SessionController::zmodemDownload()
+{
+    QString zmodem = KGlobal::dirs()->findExe("rz");
+    if(zmodem.isEmpty()) {
+       zmodem = KGlobal::dirs()->findExe("lrz");
+    }
+    if(!zmodem.isEmpty()) {
+        const QString path = KFileDialog::getExistingDirectory(
+                                QString(), _view,
+                                i18n("Save ZModem Download to..."));
+
+        if(!path.isEmpty()) {
+            _session->startZModem(zmodem, path, QStringList());
+            return;
+        }
+    }
+    else {
+        KMessageBox::error(_view,
+          i18n("<p>A ZModem file transfer attempt has been detected, "
+               "but no suitable ZModem software was found on this system.\n"
+               "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"));
+    }
+    _session->cancelZModem();
+    return;
+}
+
+void SessionController::zmodemUpload()
+{
+    if(_session->isZModemBusy()) {
+      KMessageBox::sorry(_view,
+         i18n("<p>The current session already has a ZModem file transfer in progress."));
+      return;
+    }
+    QString zmodem = KGlobal::dirs()->findExe("sz");
+    if(zmodem.isEmpty()) {
+       zmodem = KGlobal::dirs()->findExe("lsz");
+    }
+    if(zmodem.isEmpty()) {
+        KMessageBox::sorry(_view,
+           i18n("<p>No suitable ZModem software was found on this system.\n"
+                "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"));
+        return;
+    }
+
+    QStringList files = KFileDialog::getOpenFileNames(KUrl(), QString(), _view,
+                           i18n("Select Files for ZModem Upload"));
+    if(!files.isEmpty()) {
+        _session->startZModem(zmodem, QString::null, files);
     }
 }
 

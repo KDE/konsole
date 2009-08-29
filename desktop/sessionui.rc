@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="2">
+<kpartgui name="session" version="8">
     <MenuBar>
         <Menu name="file">
             <Action name="open-browser" group="session-operations"/>
@@ -12,6 +12,7 @@
             <Action name="rename-session" group="session-edit-operations" />
             <Separator group="session-edit-operations"/>
             <Action name="copy-input-to" group="session-edit-operations"/>
+            <Action name="zmodem-upload" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>
             <Action name="clear" group="session-edit-operations" />
             <Action name="clear-and-reset" group="session-edit-operations" />

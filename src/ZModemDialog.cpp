@@ -34,8 +34,8 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
   setButtons( User1|Close );
   setButtonGuiItem( User1, KGuiItem(i18n("&Stop")) );
 
-  setDefaultButton( User1 );
-  setEscapeButton(User1);
+  setDefaultButton( Close );
+  setEscapeButton( User1 );
 
   showButtonSeparator( true );
   enableButton(Close, false);

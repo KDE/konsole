@@ -154,6 +154,9 @@ void fillAboutData(KAboutData& aboutData)
   aboutData.addCredit(ki18n("Stephan Binner"),
     ki18n("Bug fixes and general improvements"),
     "binner@kde.org");
+  aboutData.addCredit(ki18n("Thomas Dreibholz"),
+    ki18n("General improvements"),
+    "dreibh@iem.uni-due.de");
   aboutData.addCredit(ki18n("Chris Machemer"),
     ki18n("Bug fixes"),
     "machey@ceinetworks.com");

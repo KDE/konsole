@@ -3,6 +3,7 @@
 
     Copyright 2006-2008 by Robert Knight <robertknight@gmail.com>
     Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
+    Copyright 2009 by Thomas Dreibholz <dreibh@iem.uni-due.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -1031,8 +1032,6 @@ void Session::startZModem(const QString &zmodem, const QString &dir, const QStri
   if (!dir.isEmpty())
      _zmodemProc->setWorkingDirectory(dir);
 
-  _zmodemProc->start();
-
   connect(_zmodemProc,SIGNAL (readyReadStandardOutput()),
           this, SLOT(zmodemReadAndSendBlock()));
   connect(_zmodemProc,SIGNAL (readyReadStandardError()),
@@ -1040,14 +1039,16 @@ void Session::startZModem(const QString &zmodem, const QString &dir, const QStri
   connect(_zmodemProc,SIGNAL (finished(int,QProcess::ExitStatus)),
           this, SLOT(zmodemFinished()));
 
-  disconnect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
-  connect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
+  _zmodemProc->start();
+  
+  disconnect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
+  connect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
 
   _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
                                     i18n("ZModem Progress"));
 
   connect(_zmodemProgress, SIGNAL(user1Clicked()),
-          this, SLOT(zmodemDone()));
+          this, SLOT(zmodemFinished()));
 
   _zmodemProgress->show();
 }
@@ -1100,14 +1101,18 @@ void Session::zmodemRcvBlock(const char *data, int len)
 
 void Session::zmodemFinished()
 {
-  if (_zmodemProc)
-  {
-    delete _zmodemProc;
-    _zmodemProc = 0;
+  /* zmodemFinished() is called by QProcess's finished() and
+      ZModemDialog's user1Clicked(). Therefore, an invokation by
+      user1Clicked() will recursively invoke this function again
+      when the KProcess is deleted! */
+  if (_zmodemProc) {
+    KProcess* process = _zmodemProc;
+    _zmodemProc = 0;   // Set _zmodemProc to 0 avoid recursive invokations!
     _zmodemBusy = false;
+    delete process;    // Now, the KProcess may be disposed safely.
 
-    disconnect( _shellProcess,SIGNAL(block_in(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
-    connect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
+    disconnect( _shellProcess,SIGNAL(receivedData(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
+    connect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
 
     _shellProcess->sendData("\030\030\030\030", 4); // Abort
     _shellProcess->sendData("\001\013\n", 3); // Try to get prompt back
