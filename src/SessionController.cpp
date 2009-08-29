@@ -212,9 +212,11 @@ void SessionController::snapshot()
     QString title = _session->getDynamicTitle();    
     title         = title.simplified();
 
-    // crude indicator when the session is broadcasting to others
-    if (_copyToGroup && _copyToGroup->sessions().count() > 1)
+    // Visualize that the session is broadcasting to others
+    if (_copyToGroup && _copyToGroup->sessions().count() > 1) {
         title.append('*');
+    }
+    updateSessionIcon();
 
     // apply new title
     if ( !title.isEmpty() )
@@ -935,13 +937,25 @@ void SessionController::monitorSilence(bool monitor)
 {
     _session->setMonitorSilence(monitor);
 }
+void SessionController::updateSessionIcon()
+{
+    // Visualize that the session is broadcasting to others
+    if (_copyToGroup && _copyToGroup->sessions().count() > 1) {
+        // Master Mode: set different icon, to warn the user to be careful
+        setIcon(KIcon("emblem-important"));
+    }
+    else {
+        // Not in Master Mode: use normal icon
+        setIcon( _sessionIcon );
+    }
+}
 void SessionController::sessionTitleChanged()
 {
         if ( _sessionIconName != _session->iconName() )
         {
             _sessionIconName = _session->iconName();
             _sessionIcon = KIcon( _sessionIconName );
-            setIcon( _sessionIcon );
+            updateSessionIcon();
         }
 
         QString title = _session->title(Session::DisplayedTitleRole);
@@ -1040,7 +1054,7 @@ void SessionController::sessionStateChanged(int state)
             _sessionIcon = KIcon( _sessionIconName );
         }
 
-        setIcon( _sessionIcon );
+        updateSessionIcon();
     }
 }
 

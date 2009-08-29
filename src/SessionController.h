@@ -225,6 +225,8 @@ private:
     void listenForScreenWindowUpdates();
 
 private:
+    void updateSessionIcon();
+  
     QPointer<Session>         _session;
     QPointer<TerminalDisplay> _view;
     SessionGroup*               _copyToGroup;
