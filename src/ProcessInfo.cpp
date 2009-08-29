@@ -44,6 +44,7 @@
 #include <sys/sysctl.h>
 #include <sys/proc_info.h>
 #include <sys/proc.h>
+#include <kde_file.h>
 #endif
 
 using namespace Konsole;
@@ -612,9 +613,10 @@ private:
                 QString fullDeviceName =  QString("/dev/") + deviceNumber.rightJustified(3, '0');
                 delete [] kInfoProc;
 
-                const char* ttyName = fullDeviceName.toLatin1().constData();
+                QByteArray deviceName = fullDeviceName.toLatin1().constData();
+                const char* ttyName = deviceName.data();
 
-                if (stat(ttyName, &statInfo) != 0)
+                if (KDE_stat(ttyName, &statInfo) != 0)
                     return false;
 
                 // Find all processes attached to ttyName
