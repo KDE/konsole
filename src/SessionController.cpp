@@ -1103,7 +1103,7 @@ void SessionController::zmodemUpload()
     QStringList files = KFileDialog::getOpenFileNames(KUrl(), QString(), _view,
                            i18n("Select Files for ZModem Upload"));
     if(!files.isEmpty()) {
-        _session->startZModem(zmodem, QString::null, files);
+        _session->startZModem(zmodem, QString(), files);
     }
 }
 

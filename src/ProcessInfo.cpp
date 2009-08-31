@@ -613,7 +613,7 @@ private:
                 QString fullDeviceName =  QString("/dev/") + deviceNumber.rightJustified(3, '0');
                 delete [] kInfoProc;
 
-                QByteArray deviceName = fullDeviceName.toLatin1().constData();
+                QByteArray deviceName = fullDeviceName.toLatin1();
                 const char* ttyName = deviceName.data();
 
                 if (KDE_stat(ttyName, &statInfo) != 0)
