@@ -1102,12 +1102,12 @@ void Session::zmodemRcvBlock(const char *data, int len)
 void Session::zmodemFinished()
 {
   /* zmodemFinished() is called by QProcess's finished() and
-      ZModemDialog's user1Clicked(). Therefore, an invokation by
+      ZModemDialog's user1Clicked(). Therefore, an invocation by
       user1Clicked() will recursively invoke this function again
       when the KProcess is deleted! */
   if (_zmodemProc) {
     KProcess* process = _zmodemProc;
-    _zmodemProc = 0;   // Set _zmodemProc to 0 avoid recursive invokations!
+    _zmodemProc = 0;   // Set _zmodemProc to 0 avoid recursive invocations!
     _zmodemBusy = false;
     delete process;    // Now, the KProcess may be disposed safely.
 
