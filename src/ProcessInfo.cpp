@@ -811,13 +811,13 @@ private:
     virtual bool readArguments(int /*pid*/)
     {
         // Handled in readProcInfo()
-        return true;
+        return false;
     }
 
     virtual bool readEnvironment(int /*pid*/)
     {
         // Not supported in Solaris
-        return true;
+        return false;
     }
 
     virtual bool readCurrentDir(int pid)
