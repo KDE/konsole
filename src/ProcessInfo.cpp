@@ -47,6 +47,13 @@
 #include <kde_file.h>
 #endif
 
+#if defined(Q_OS_FREEBSD)
+#include <sys/sysctl.h>
+#include <sys/types.h>
+#include <sys/user.h>
+#include <libutil.h>
+#endif
+
 using namespace Konsole;
 
 ProcessInfo::ProcessInfo(int pid , bool enableEnvironmentRead)
@@ -572,6 +579,92 @@ private:
     }
 } ;
 
+#if defined(Q_OS_FREEBSD)
+class FreeBSDProcessInfo : public UnixProcessInfo
+{
+public:
+    FreeBSDProcessInfo(int pid, bool readEnvironment) :
+        UnixProcessInfo(pid, readEnvironment)
+    {
+    }
+
+private:
+    virtual bool readProcInfo(int pid)
+    {
+        int managementInfoBase[4];
+        size_t mibLength;
+        struct kinfo_proc* kInfoProc;
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC;
+        managementInfoBase[2] = KERN_PROC_PID;
+        managementInfoBase[3] = pid;
+
+        if (sysctl(managementInfoBase, 4, NULL, &mibLength, NULL, 0) == -1)
+            return false;
+
+        kInfoProc = new struct kinfo_proc [mibLength];
+
+        if (sysctl(managementInfoBase, 4, kInfoProc, &mibLength, NULL, 0) == -1)
+        {
+            delete [] kInfoProc;
+            return false;
+        }
+
+        setName(kInfoProc->ki_comm);
+        setPid(kInfoProc->ki_pid);
+        setParentPid(kInfoProc->ki_ppid);
+        setForegroundPid(kInfoProc->ki_pgid);
+        setUserId(kInfoProc->ki_uid);
+
+        readUserName();
+
+        delete [] kInfoProc;
+        return true;
+    }
+
+    virtual bool readArguments(int pid)
+    {
+        // TODO: parse kInfoProc->ki_args?
+        return false;
+    }
+
+    virtual bool readEnvironment(int pid)
+    {
+        // Not supported in FreeBSD?
+        return false;
+    }
+
+    virtual bool readCurrentDir(int pid)
+    {
+        int numrecords;
+        struct kinfo_file* info = 0;
+        struct kinfo_file* iter = 0;
+
+        info = kinfo_getfile(pid, &numrecords);
+
+        if (!info)
+            return false;
+
+        for (int i = 0; i < numrecords; ++i)
+        {
+            iter = &info[i];
+
+            if (iter->kf_fd == KF_FD_TYPE_CWD)
+            {
+                setCurrentDir(iter->kf_path);
+
+                free(info);
+                return true;
+            }
+        }
+
+        free(info);
+        return false;
+    }
+} ;
+#endif
+
 #if defined(Q_OS_MAC)
 class MacProcessInfo : public UnixProcessInfo
 {
@@ -896,6 +989,8 @@ ProcessInfo* ProcessInfo::newInstance(int pid,bool enableEnvironmentRead)
     return new SolarisProcessInfo(pid,enableEnvironmentRead);
 #elif defined(Q_OS_MAC)
     return new MacProcessInfo(pid,enableEnvironmentRead);
+#elif defined(Q_OS_FREEBSD)
+    return new FreeBSDProcessInfo(pid,enableEnvironmentRead);
 #else
     return new NullProcessInfo(pid,enableEnvironmentRead);
 #endif
