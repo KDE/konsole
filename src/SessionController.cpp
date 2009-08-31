@@ -95,12 +95,10 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     Q_ASSERT( view );
 
     // handle user interface related to session (menus etc.)
-
-#ifdef KONSOLE_PART
-    setXMLFile("konsole/partui.rc");
-#else
-    setXMLFile("konsole/sessionui.rc");
-#endif
+    if (isKonsolePart())
+        setXMLFile("konsole/partui.rc");
+    else
+        setXMLFile("konsole/sessionui.rc");
 
     setupActions();
     actionCollection()->addAssociatedWidget(view);
@@ -1039,6 +1037,15 @@ void SessionController::sessionStateChanged(int state)
 
         setIcon( _sessionIcon );
     }
+}
+
+bool SessionController::isKonsolePart() const
+{
+    // Check to see if we are being called from Konsole or a KPart
+    if (QString(kapp->metaObject()->className()) == "Konsole::Application")
+        return false;
+    else
+        return true;
 }
 
 SessionTask::SessionTask(QObject* parent)
