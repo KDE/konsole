@@ -213,6 +213,9 @@ private slots:
     void zmodemDownload();
     void zmodemUpload();
 
+    /* Returns true if called within a KPart; false if called within Konsole. */
+    bool isKonsolePart() const;
+
 private:
     // begins the search
     // text - pattern to search for
