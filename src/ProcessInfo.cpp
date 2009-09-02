@@ -658,7 +658,6 @@ private:
     {
         int numrecords;
         struct kinfo_file* info = 0;
-        struct kinfo_file* iter = 0;
 
         info = kinfo_getfile(pid, &numrecords);
 
@@ -667,11 +666,9 @@ private:
 
         for (int i = 0; i < numrecords; ++i)
         {
-            iter = &info[i];
-
-            if (iter->kf_fd == KF_FD_TYPE_CWD)
+            if (info[i].kf_fd == KF_FD_TYPE_CWD)
             {
-                setCurrentDir(iter->kf_path);
+                setCurrentDir(info[i].kf_path);
 
                 free(info);
                 return true;
