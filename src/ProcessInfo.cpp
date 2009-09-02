@@ -625,8 +625,27 @@ private:
 
     virtual bool readArguments(int pid)
     {
-        // TODO: parse kInfoProc->ki_args?
-        return false;
+        char args[ARG_MAX];
+        int managementInfoBase[4];
+        size_t len;
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC;
+        managementInfoBase[2] = KERN_PROC_PID;
+        managementInfoBase[3] = pid;
+
+        len = sizeof(args);
+        if (sysctl(managementInfoBase, 4, args, &len, NULL, 0) == -1)
+            return false;
+
+        const QStringList argumentList = QString(args).split(QChar('\0'));
+
+        for (QStringList::const_iterator it = argumentList.begin(); it != argumentList.end(); ++it)
+        {
+            addArgument(*it);
+        }
+
+        return true;
     }
 
     virtual bool readEnvironment(int pid)
