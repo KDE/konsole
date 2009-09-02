@@ -1251,7 +1251,9 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
     {
         int pos = -1;
         const bool forwards = ( _direction == ForwardsSearch );
-        const int startLine = selectionLine + window->currentLine() + ( forwards ? 1 : -1 );
+        int startLine = selectionLine + window->currentLine() + ( forwards ? 1 : -1 );
+        // Temporary fix for #205495
+        if (startLine < 0) startLine = 0;
         const int lastLine = window->lineCount() - 1;
         QString string;
 
