@@ -334,8 +334,8 @@ char Emulation::eraseChar() const
 
 void Emulation::setImageSize(int lines, int columns)
 {
-  Q_ASSERT( lines > 0 );
-  Q_ASSERT( columns > 0 );
+  if ((lines < 1) || (columns < 1))
+    return;
 
   QSize screenSize[2] = { QSize(_screen[0]->getColumns(),
                                 _screen[0]->getLines()),
