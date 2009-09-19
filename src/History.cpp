@@ -603,8 +603,8 @@ void* CompactHistoryLine::operator new (size_t size, CompactHistoryBlockList& bl
 }
 
 CompactHistoryLine::CompactHistoryLine ( const TextLine& line, CompactHistoryBlockList& bList ) 
-  : formatLength(0),
-    blockList(bList)
+  : blockList(bList),
+    formatLength(0)
 {
   length=line.size();
       
