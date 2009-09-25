@@ -408,9 +408,6 @@ void Session::run()
   // the background color is deemed dark or not
   QString backgroundColorHint = _hasDarkBackground ? "COLORFGBG=15;0" : "COLORFGBG=0;15";
 
-  if (exec.startsWith(QLatin1String("./")))
-    exec = QDir::currentPath() + exec.mid(1);
-
   int result = _shellProcess->start(exec,
                                   arguments,
                                   _environment << backgroundColorHint,

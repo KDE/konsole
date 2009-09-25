@@ -28,6 +28,7 @@
 // Qt
 #include <QHashIterator>
 #include <QFileInfo>
+#include <QDir>
 
 // KDE
 #include <KAction>
@@ -213,8 +214,11 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
         arguments << args->getOption("e");
         for ( int i = 0 ; i < args->count() ; i++ )
            arguments << args->arg(i); 
-   
-        newProfile->setProperty(Profile::Command,args->getOption("e"));
+
+        QString exec = args->getOption("e");
+        if (exec.startsWith(QLatin1String("./")))
+          exec = QDir::currentPath() + exec.mid(1);
+        newProfile->setProperty(Profile::Command,exec);
         newProfile->setProperty(Profile::Arguments,arguments);
     }
 
