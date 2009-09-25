@@ -1241,7 +1241,7 @@ void SessionGroup::addSession(Session* session)
     QListIterator<Session*> masterIter(masters());
 
     while ( masterIter.hasNext() )
-        connectPair(masterIter.next(),session);
+        connectPair(masterIter.next());
 }
 void SessionGroup::removeSession(Session* session)
 {
@@ -1252,7 +1252,7 @@ void SessionGroup::removeSession(Session* session)
     QListIterator<Session*> masterIter(masters());
 
     while ( masterIter.hasNext() )
-        disconnectPair(masterIter.next(),session);
+        disconnectPair(masterIter.next());
 
     _sessions.remove(session);
 }
@@ -1289,9 +1289,9 @@ void SessionGroup::connectAll(bool connect)
             if ( other != master )
             {
                 if ( connect )
-                    connectPair(master,other);
+                    connectPair(master);
                 else
-                    disconnectPair(master,other);
+                    disconnectPair(master);
             }
         }
     }
@@ -1313,27 +1313,51 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
         if ( other != session )
         {
             if ( master )
-                connectPair(session,other);
+                connectPair(session);
             else
-                disconnectPair(session,other);
+                disconnectPair(session);
         }
     }
 }
-void SessionGroup::connectPair(Session* master , Session* other)
+void SessionGroup::connectPair(Session* master)
 {
     if ( _masterMode & CopyInputToAll )
     {
-        connect( master->emulation() , SIGNAL(sendData(const char*,int)) , other->emulation() ,
-                 SLOT(sendString(const char*,int)) );
+        // It is not possible to connect directly to other->emulation()'s
+        // sendString() here, since this would cause an infinite loop when
+        // the destination session is also the master of another group!
+        connect( master->emulation() , SIGNAL(sendData(const char*,int)) , this,
+                 SLOT(forwardData(const char*,int)) );
     }
 }
-void SessionGroup::disconnectPair(Session* master , Session* other)
+void SessionGroup::disconnectPair(Session* master)
 {
     if ( _masterMode & CopyInputToAll )
     {
-        disconnect( master->emulation() , SIGNAL(sendData(const char*,int)) , other->emulation() ,
-                SLOT(sendString(const char*,int)) );
+        disconnect( master->emulation() , SIGNAL(sendData(const char*,int)) , this,
+                SLOT(forwardData(const char*,int)) );
     }
+}
+void SessionGroup::forwardData(const char* data, int size)
+{
+    static bool _inForwardData = false;
+    if(_inForwardData) {   // Avoid recursive calls among session groups!
+       // A recursive call happens when a master in group A calls forwardData()
+       // in group B. If one of the destination sessions in group B is also a
+       // master of a group including the master session of group A, this would
+       // again call forwardData() in group A, and so on.
+       return;
+    }
+    
+    _inForwardData = true;
+    QListIterator<Session*> iter(_sessions.keys());
+    while(iter.hasNext()) {
+        Session* other = iter.next();
+        if(!_sessions[other]) {
+           other->emulation()->sendString(data, size);
+        }
+    }
+    _inForwardData = false;
 }
 
 #include "Session.moc"

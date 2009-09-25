@@ -166,7 +166,9 @@ private slots:
     void pasteSelection(); // shortcut only
     void clear();
     void clearAndReset();
-    void copyInputTo();
+    void copyInputToAllTabs();
+    void copyInputToSelectedTabs();
+    void copyInputToNone();
     void editCurrentProfile();
     void changeCodec(QTextCodec* codec);
     void searchHistory(bool showSearchBar);
@@ -243,6 +245,10 @@ private:
     UrlFilter*      _viewUrlFilter;
     RegExpFilter*   _searchFilter; 
 
+    KAction* _copyToAllTabsAction;
+    KAction* _copyToSelectedAction;
+    KAction* _copyToNoneAction;
+    
     KAction* _searchToggleAction;
     KAction* _findNextAction;
     KAction* _findPreviousAction;

@@ -38,6 +38,7 @@
 #include <KStandardDirs>
 #include <KToggleAction>
 #include <KUrl>
+#include <KXmlGuiWindow>
 #include <KXMLGUIFactory>
 #include <KXMLGUIBuilder>
 #include <kdebug.h>
@@ -295,6 +296,12 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             // second, connect the newly focused view to listen for the session's bell signal
             connect( _session , SIGNAL(bellRequest(const QString&)) ,
                     _view , SLOT(bell(const QString&)) );
+                    
+            if(_copyToAllTabsAction->isChecked()) {
+                // A session with "Copy To All Tabs" has come into focus:
+                // Ensure that newly created sessions are included in _copyToGroup!
+                copyInputToAllTabs();
+            }
         }
         // when a mouse move is received, create the URL filter and listen for output changes if
         // it has not already been created.  If it already exists, then update only if the output
@@ -421,10 +428,27 @@ void SessionController::setupActions()
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_S) );
     connect( action , SIGNAL(triggered()) , this , SLOT(renameSession()) );
 
-    // Copy Input To
-    action = collection->addAction("copy-input-to");
-    action->setText(i18n("Copy Input To..."));
-    connect( action , SIGNAL(triggered()) , this , SLOT(copyInputTo()) );
+    // Copy Input To -> All Tabs in Current Window
+    _copyToAllTabsAction = collection->addAction("copy-input-to-all-tabs");
+    _copyToAllTabsAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Comma) );
+    _copyToAllTabsAction->setText(i18n("&All Tabs in Current Window") );
+    _copyToAllTabsAction->setCheckable(TRUE);
+    connect( _copyToAllTabsAction , SIGNAL(triggered()) , this , SLOT(copyInputToAllTabs()) );
+
+    // Copy Input To -> Select Tabs
+    _copyToSelectedAction = collection->addAction("copy-input-to-selected-tabs");
+    _copyToSelectedAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Period) );
+    _copyToSelectedAction->setText( i18n("&Select Tabs...") );
+    _copyToSelectedAction->setCheckable(TRUE);
+    connect( _copyToSelectedAction , SIGNAL(triggered()) , this , SLOT(copyInputToSelectedTabs()) );
+
+    // Copy Input To -> None
+    _copyToNoneAction = collection->addAction("copy-input-to-none");
+    _copyToNoneAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Slash) );
+    _copyToNoneAction->setText( i18n("&None") );
+    _copyToNoneAction->setCheckable(TRUE);
+    _copyToNoneAction->setChecked(TRUE);
+    connect( _copyToNoneAction , SIGNAL(triggered()) , this , SLOT(copyInputToNone()) );
 
     // Clear+Reset
     action = collection->addAction("clear-and-reset");
@@ -633,7 +657,70 @@ void SessionController::pasteSelection()
 {
     _view->pasteSelection();
 }
-void SessionController::copyInputTo()
+static const KXmlGuiWindow* findWindow(const QObject* object)
+{
+    // Walk up the QObject hierarchy to find a KXmlGuiWindow.
+    while(object != NULL) {
+        const KXmlGuiWindow* window = dynamic_cast<const KXmlGuiWindow*>(object);
+        if(window != NULL) {
+            return(window);
+        }
+        object = object->parent();
+    }
+    return(NULL);
+}
+
+static bool hasTerminalDisplayInSameWindow(const Session* session, const KXmlGuiWindow* window)
+{
+    // Iterate all TerminalDisplays of this Session ...
+    QListIterator<TerminalDisplay*> terminalDisplayIterator(session->views());
+    while(terminalDisplayIterator.hasNext()) {
+        const TerminalDisplay* terminalDisplay = terminalDisplayIterator.next();
+        // ... and check whether a TerminalDisplay has the same
+        // window as given in the parameter
+        if(window == findWindow(terminalDisplay)) {
+            return(true);    
+        }
+    }
+    return(false);
+}
+
+void SessionController::copyInputToAllTabs()
+{
+    if(!_copyToGroup) {
+        _copyToGroup = new SessionGroup(this);
+        _copyToGroup->addSession(_session);
+        _copyToGroup->setMasterStatus(_session, true);
+        _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
+    }
+
+    // Find our window ...
+    const KXmlGuiWindow* myWindow = findWindow(_view);
+
+    QSet<Session*> group =
+       QSet<Session*>::fromList(SessionManager::instance()->sessions());
+    for(QSet<Session*>::iterator iterator = group.begin();
+        iterator != group.end(); ++iterator) {
+        Session* session = *iterator;
+ 
+        if(session != _session) {
+            // First, ensure that the session is removed
+            // (necessary to avoid duplicates on addSession()!)
+            _copyToGroup->removeSession(session);
+
+            // Add current session if it is displayed our window
+            if(hasTerminalDisplayInSameWindow(session, myWindow)) {
+                _copyToGroup->addSession(session);
+            }
+        }
+    }
+    snapshot();
+    _copyToAllTabsAction->setChecked(TRUE);
+    _copyToSelectedAction->setChecked(FALSE);
+    _copyToNoneAction->setChecked(FALSE);
+}
+
+void SessionController::copyInputToSelectedTabs()
 {
     if (!_copyToGroup)
     {
@@ -670,11 +757,33 @@ void SessionController::copyInputTo()
                 _copyToGroup->removeSession(session);
         }
 
-        snapshot();
+        snapshot();        
     }
 
     delete dialog;
+    _copyToAllTabsAction->setChecked(FALSE);
+    _copyToSelectedAction->setChecked(TRUE);
+    _copyToNoneAction->setChecked(FALSE);
 }
+
+void SessionController::copyInputToNone()
+{
+    QSet<Session*> group =
+       QSet<Session*>::fromList(SessionManager::instance()->sessions());
+    for(QSet<Session*>::iterator iterator = group.begin();
+        iterator != group.end(); ++iterator) {
+        Session* session = *iterator;
+ 
+        if(session != _session) {
+            _copyToGroup->removeSession(*iterator);
+        }
+    }
+    snapshot();
+    _copyToAllTabsAction->setChecked(FALSE);
+    _copyToSelectedAction->setChecked(FALSE);
+    _copyToNoneAction->setChecked(TRUE);
+}
+
 void SessionController::clear()
 {
     Emulation* emulation = _session->emulation();

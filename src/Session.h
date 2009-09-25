@@ -3,6 +3,7 @@
 
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
     Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
+    Copyright 2009 by Thomas Dreibholz <dreibh@iem.uni-due.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -706,10 +707,11 @@ public:
 
 private slots:
     void sessionFinished();
+    void forwardData(const char* data, int size);
 
 private:
-    void connectPair(Session* master , Session* other);
-    void disconnectPair(Session* master , Session* other);
+    void connectPair(Session* master);
+    void disconnectPair(Session* master);
     void connectAll(bool connect);
     QList<Session*> masters() const;
 
