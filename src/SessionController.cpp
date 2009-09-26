@@ -432,22 +432,22 @@ void SessionController::setupActions()
     _copyToAllTabsAction = collection->addAction("copy-input-to-all-tabs");
     _copyToAllTabsAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Comma) );
     _copyToAllTabsAction->setText(i18n("&All Tabs in Current Window") );
-    _copyToAllTabsAction->setCheckable(TRUE);
+    _copyToAllTabsAction->setCheckable(true);
     connect( _copyToAllTabsAction , SIGNAL(triggered()) , this , SLOT(copyInputToAllTabs()) );
 
     // Copy Input To -> Select Tabs
     _copyToSelectedAction = collection->addAction("copy-input-to-selected-tabs");
     _copyToSelectedAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Period) );
     _copyToSelectedAction->setText( i18n("&Select Tabs...") );
-    _copyToSelectedAction->setCheckable(TRUE);
+    _copyToSelectedAction->setCheckable(true);
     connect( _copyToSelectedAction , SIGNAL(triggered()) , this , SLOT(copyInputToSelectedTabs()) );
 
     // Copy Input To -> None
     _copyToNoneAction = collection->addAction("copy-input-to-none");
     _copyToNoneAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Slash) );
     _copyToNoneAction->setText( i18n("&None") );
-    _copyToNoneAction->setCheckable(TRUE);
-    _copyToNoneAction->setChecked(TRUE);
+    _copyToNoneAction->setCheckable(true);
+    _copyToNoneAction->setChecked(true);
     connect( _copyToNoneAction , SIGNAL(triggered()) , this , SLOT(copyInputToNone()) );
 
     // Clear+Reset
@@ -715,9 +715,9 @@ void SessionController::copyInputToAllTabs()
         }
     }
     snapshot();
-    _copyToAllTabsAction->setChecked(TRUE);
-    _copyToSelectedAction->setChecked(FALSE);
-    _copyToNoneAction->setChecked(FALSE);
+    _copyToAllTabsAction->setChecked(true);
+    _copyToSelectedAction->setChecked(false);
+    _copyToNoneAction->setChecked(false);
 }
 
 void SessionController::copyInputToSelectedTabs()
@@ -761,9 +761,9 @@ void SessionController::copyInputToSelectedTabs()
     }
 
     delete dialog;
-    _copyToAllTabsAction->setChecked(FALSE);
-    _copyToSelectedAction->setChecked(TRUE);
-    _copyToNoneAction->setChecked(FALSE);
+    _copyToAllTabsAction->setChecked(false);
+    _copyToSelectedAction->setChecked(true);
+    _copyToNoneAction->setChecked(false);
 }
 
 void SessionController::copyInputToNone()
@@ -779,9 +779,9 @@ void SessionController::copyInputToNone()
         }
     }
     snapshot();
-    _copyToAllTabsAction->setChecked(FALSE);
-    _copyToSelectedAction->setChecked(FALSE);
-    _copyToNoneAction->setChecked(TRUE);
+    _copyToAllTabsAction->setChecked(false);
+    _copyToSelectedAction->setChecked(false);
+    _copyToNoneAction->setChecked(true);
 }
 
 void SessionController::clear()
