@@ -37,7 +37,7 @@
 #include <KLocale>
 #include <KWindowSystem>
 
-#define KONSOLE_VERSION "2.3.1"
+#define KONSOLE_VERSION "2.3.2"
 
 using namespace Konsole;
 
