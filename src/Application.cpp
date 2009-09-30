@@ -68,6 +68,11 @@ void Application::init()
 
     // check for compositing functionality
     TerminalDisplay::setTransparencyEnabled( KWindowSystem::compositingActive() );
+#if defined(Q_WS_MAC) && QT_VERSION >= 0x040600
+    // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
+    // will work correctly in the terminal
+    setAttribute(Qt::AA_MacDontSwapCtrlAndMeta);
+#endif
 }
 
 Application* Application::self()
