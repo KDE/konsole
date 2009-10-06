@@ -25,31 +25,19 @@
 // Unix
 #include <unistd.h>
 
-// X11
-#ifdef Q_WS_X11
-#include <X11/Xlib.h>
-#include <X11/extensions/Xrender.h>
-#endif
-
 // KDE
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KLocale>
-#include <KWindowSystem>
 
 #define KONSOLE_VERSION "2.4"
 
 using namespace Konsole;
 
-#ifdef Q_WS_X11
-void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap);
-#endif
-
 // fills the KAboutData structure with information about contributors to 
 // Konsole
 void fillAboutData(KAboutData& aboutData);
 void fillCommandLineOptions(KCmdLineOptions& options);
-bool useTransparency();     // returns true if transparency should be enabled
 bool forceNewProcess();     // returns true if new instance should use a new
                             // process (instead of re-using an existing one)
 void restoreSession(Application& app);
@@ -83,26 +71,10 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     {
         exit(0);
     }
-#ifdef Q_WS_X11 
-    if ( useTransparency() ) 
-    {
-        Display* display = 0;
-        Visual* visual = 0;
-        Colormap colormap = 0;
-
-        getDisplayInformation(display,visual,colormap);
-
-        Application app(display,(Qt::HANDLE)visual,(Qt::HANDLE)colormap);
-        restoreSession(app);
-        return app.exec();
-    }
-    else
-#endif 
-    {
-        Application app;
-        restoreSession(app);
-        return app.exec();
-    }   
+    
+    Application app;
+    restoreSession(app);
+    return app.exec();
 }
 bool forceNewProcess()
 {
@@ -113,13 +85,7 @@ bool forceNewProcess()
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
     return isatty(1) && !args->isSet("new-tab");
 }
-bool useTransparency()
-{
-    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-    bool compositingAvailable = KWindowSystem::compositingActive() ||
-                                args->isSet("force-transparency");
-    return compositingAvailable && args->isSet("transparency");
-}
+
 void fillCommandLineOptions(KCmdLineOptions& options)
 {
     options.add("profile <file>", ki18n("Name of profile to use for new Konsole instance"));
@@ -208,46 +174,6 @@ void fillAboutData(KAboutData& aboutData)
   aboutData.addCredit(ki18n("Thanks to many others.\n"));
   aboutData.setProgramIconName("utilities-terminal");
 }
-
-// code taken from the Qt 4 graphics dojo examples
-// at http://labs.trolltech.com 
-#ifdef Q_WS_X11
-void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap)
-{
-    display = XOpenDisplay(0); // open default display
-    if (!display) {
-        kWarning("Cannot connect to the X server");
-        exit(1);
-    }
-
-    int screen = DefaultScreen(display);
-    int eventBase, errorBase;
-
-    if (XRenderQueryExtension(display, &eventBase, &errorBase)) {
-        int nvi;
-        XVisualInfo templ;
-        templ.screen  = screen;
-        templ.depth = 32;
-        templ.c_class = TrueColor;
-        XVisualInfo *xvi = XGetVisualInfo(display, VisualScreenMask |
-                                          VisualDepthMask |
-                                          VisualClassMask, &templ, &nvi);
-    
-        for (int i = 0; i < nvi; ++i) {
-            XRenderPictFormat* format = XRenderFindVisualFormat(display,
-                                                                xvi[i].visual);
-            if (format->type == PictTypeDirect && format->direct.alphaMask) {
-                visual = xvi[i].visual;
-                colormap = XCreateColormap(display, RootWindow(display, screen),
-                                           visual, AllocNone);
-
-                // found ARGB visual
-                break;
-            }
-        }
-    }
-}
-#endif
 
 void restoreSession(Application& app)
 {

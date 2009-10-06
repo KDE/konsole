@@ -30,6 +30,7 @@
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KApplication>
+#include <KCmdLineArgs>
 #include <KShortcutsDialog>
 #include <KLocale>
 #include <KMenu>
@@ -41,6 +42,7 @@
 #include <KToolInvocation>
 #include <KStandardAction>
 #include <KStandardGuiItem>
+#include <KWindowSystem>
 #include <KXMLGUIFactory>
 #include <KNotifyConfigWidget>
 
@@ -57,12 +59,25 @@
 
 using namespace Konsole;
 
+static bool useTransparency()
+{
+    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+    bool compositingAvailable = KWindowSystem::compositingActive() ||
+                                args->isSet("force-transparency");
+    return compositingAvailable && args->isSet("transparency");
+}
+
 MainWindow::MainWindow()
  : KXmlGuiWindow() ,
    _bookmarkHandler(0),
    _pluggedController(0),
    _menuBarVisibilitySet(false)
 {
+    if (useTransparency()) {
+        setAttribute(Qt::WA_TranslucentBackground);
+        setAttribute(Qt::WA_NoSystemBackground, false);
+    }
+
     // create actions for menus
     setupActions();
 
