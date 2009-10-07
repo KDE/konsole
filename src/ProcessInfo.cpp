@@ -366,11 +366,25 @@ void UnixProcessInfo::readUserName()
     int uid = userId(&ok);
     if (!ok) return;
 
-    struct passwd *pwuser = getpwuid(uid);
-    if (pwuser)
-        setUserName(QString(pwuser->pw_name));
+    struct passwd passwdStruct;
+    struct passwd *getpwResult;
+    char *getpwBuffer;
+    long getpwBufferSize;
+    int getpwStatus;
+
+    getpwBufferSize = sysconf(_SC_GETPW_R_SIZE_MAX);
+    if (getpwBufferSize == -1)
+        getpwBufferSize = 16384;
+
+    getpwBuffer = new char[getpwBufferSize];
+    if (getpwBuffer == NULL)
+        return;
+    getpwStatus = getpwuid_r(uid, &passwdStruct, getpwBuffer, getpwBufferSize, &getpwResult);
+    if (getpwResult != NULL)
+        setUserName(QString(passwdStruct.pw_name));
     else
         setUserName(QString());
+    delete [] getpwBuffer;
 }
 
 
