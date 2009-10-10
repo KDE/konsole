@@ -333,11 +333,13 @@ QString MainWindow::activeSessionDir() const
 
 void MainWindow::openUrls(const QList<KUrl>& urls)
 {
-    // TODO Implement support for SSH bookmarks here
     foreach( const KUrl& url , urls )
     {
         if ( url.isLocalFile() )
             emit newSessionRequest( _defaultProfile , url.path() , _viewManager );
+
+        else if ( url.protocol() == "ssh" )
+            emit newSSHSessionRequest( _defaultProfile , url , _viewManager );
     }
 }
 

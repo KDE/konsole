@@ -79,6 +79,8 @@ MainWindow* Application::newMainWindow()
 
     connect( window , SIGNAL(newSessionRequest(Profile::Ptr,const QString&,ViewManager*)), 
                       this , SLOT(createSession(Profile::Ptr,const QString&,ViewManager*)));
+    connect( window , SIGNAL(newSSHSessionRequest(Profile::Ptr,const KUrl&,ViewManager*)),
+                      this , SLOT(createSSHSession(Profile::Ptr,const KUrl&,ViewManager*)));
     connect( window , SIGNAL(newWindowRequest(Profile::Ptr,const QString&)),
                       this , SLOT(createWindow(Profile::Ptr,const QString&)) );
     connect( window->viewManager() , SIGNAL(viewDetached(Session*)) , this , SLOT(detachView(Session*)) );
@@ -310,6 +312,31 @@ Session* Application::createSession(Profile::Ptr profile, const QString& directo
 
     if (!directory.isEmpty() && profile->property<bool>(Profile::StartInCurrentSessionDir))
         session->setInitialWorkingDirectory(directory);
+
+    // create view before starting the session process so that the session doesn't suffer
+    // a change in terminal size right after the session starts.  some applications such as GNU Screen
+    // and Midnight Commander don't like this happening
+    view->createView(session);
+    session->run();
+
+    return session;
+}
+
+Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url, ViewManager* view)
+{
+    if (!profile)
+        profile = SessionManager::instance()->defaultProfile();
+
+    Session* session = SessionManager::instance()->createSession(profile);
+
+    session->sendText("ssh ");
+
+    if ( url.port() > -1 )
+        session->sendText("-p " + QString::number(url.port()) + ' ' );
+    if ( url.hasUser() )
+        session->sendText(url.user() + '@');
+    if ( url.hasHost() )
+        session->sendText(url.host() + '\r');
 
     // create view before starting the session process so that the session doesn't suffer
     // a change in terminal size right after the session starts.  some applications such as GNU Screen

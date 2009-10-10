@@ -71,6 +71,7 @@ public:
 
 private slots:
     Session* createSession(Profile::Ptr profile, const QString& directory , ViewManager* view);
+    Session* createSSHSession(Profile::Ptr profile, const KUrl& url, ViewManager* view);
     void createWindow(Profile::Ptr profile , const QString& directory);
     void detachView(Session* session);
 
