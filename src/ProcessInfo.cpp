@@ -352,11 +352,25 @@ void UnixProcessInfo::readUserName()
     int uid = userId(&ok);
     if (!ok) return;
 
-    struct passwd *pwuser = getpwuid(uid);
-    if (pwuser)
-        setUserName(QString(pwuser->pw_name));
+    struct passwd passwdStruct;
+    struct passwd *getpwResult;
+    char *getpwBuffer;
+    long getpwBufferSize;
+    int getpwStatus;
+
+    getpwBufferSize = sysconf(_SC_GETPW_R_SIZE_MAX);
+    if (getpwBufferSize == -1)
+        getpwBufferSize = 16384;
+
+    getpwBuffer = new char[getpwBufferSize];
+    if (getpwBuffer == NULL)
+        return;
+    getpwStatus = getpwuid_r(uid, &passwdStruct, getpwBuffer, getpwBufferSize, &getpwResult);
+    if (getpwResult != NULL)
+        setUserName(QString(passwdStruct.pw_name));
     else
         setUserName(QString());
+    delete [] getpwBuffer;
 }
 
 
@@ -380,6 +394,9 @@ private:
         QString parentPidString;
         QString processNameString;
         QString foregroundPidString;
+        QString uidLine;
+        QString uidString;
+        QStringList uidStrings;
 
         // For user id read process status file ( /proc/<pid>/status )
         //  Can not use getuid() due to it does not work for 'su'
@@ -387,10 +404,21 @@ private:
         if ( statusInfo.open(QIODevice::ReadOnly) )
         {
             QTextStream stream(&statusInfo);
-            QString data = stream.readAll();
-            int uidIndex = data.indexOf("Uid:");
-            QString uidLine = data.mid(uidIndex + 4, 16); // grab some data
-            QString uidString = uidLine.split('\t', QString::SkipEmptyParts)[0];
+            QString statusLine;
+            do {
+                statusLine = stream.readLine(0);
+                if (statusLine.startsWith("Uid:"))
+                    uidLine = statusLine;
+            } while (!statusLine.isNull() && uidLine.isNull());
+
+            uidStrings << uidLine.split('\t', QString::SkipEmptyParts);
+            // Must be 5 entries: 'Uid: %d %d %d %d' and
+            // uid string must be less than 5 chars (uint)
+            if (uidStrings.size() == 5)
+                uidString = uidStrings[1];
+            if (uidString.size() > 5)
+                uidString.clear();
+
             bool ok = false;
             int uid = uidString.toInt(&ok);
             if (ok)
