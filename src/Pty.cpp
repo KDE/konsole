@@ -274,9 +274,9 @@ void Pty::dataReceived()
 
 void Pty::lockPty(bool lock)
 {
-#ifdef __GNUC__
-#warning "TODO: Support for locking the Pty"
-#endif
+    Q_UNUSED(lock);
+
+// TODO: Support for locking the Pty
   //if (lock)
     //suspend();
   //else

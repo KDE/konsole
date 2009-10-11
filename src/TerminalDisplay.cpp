@@ -132,9 +132,9 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 
     if ( window )
     {
-#ifdef __GNUC__
-#warning "The order here is not specified - does it matter whether updateImage or updateLineProperties comes first?"
-#endif
+
+// TODO: Determine if this is an issue.
+//#warning "The order here is not specified - does it matter whether updateImage or updateLineProperties comes first?"
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()) );
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
         window->setWindowLines(_lines);
@@ -2570,6 +2570,8 @@ QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
             break;
         case Qt::ImCurrentSelection:
                 return QString();
+            break;
+        default:
             break;
     }
 

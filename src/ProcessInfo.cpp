@@ -128,6 +128,9 @@ QString ProcessInfo::formatCommand(const QString& name,
                                    const QVector<QString>& arguments,
                                    CommandFormat format) const
 {
+    Q_UNUSED(name);
+    Q_UNUSED(format);
+
     // TODO Implement me
     return QStringList(QList<QString>::fromVector(arguments)).join(" ");
 }
@@ -421,7 +424,7 @@ private:
             QString statusLine;
             do {
                 statusLine = stream.readLine(0);
-                if (statusLine.startsWith("Uid:"))
+                if (statusLine.startsWith(QLatin1String("Uid:")))
                     uidLine = statusLine;
             } while (!statusLine.isNull() && uidLine.isNull());
 

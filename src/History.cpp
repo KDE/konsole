@@ -758,7 +758,8 @@ void CompactHistoryScroll::getCells ( int lineNumber, int startColumn, int count
   if ( count == 0 ) return;
   Q_ASSERT ( lineNumber < lines.size() );
   CompactHistoryLine* line = lines[lineNumber];
-  Q_ASSERT ( startColumn <= line->getLength() - count );
+  Q_ASSERT ( startColumn >= 0 );
+  Q_ASSERT ( (unsigned int)startColumn <= line->getLength() - count );
   line->getCharacters ( buffer, count, startColumn );
 }
 
