@@ -429,6 +429,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _tabBar = new ViewContainerTabBar(_containerWidget,this);
     _tabBar->setDrawBase(true);
     _tabBar->setDocumentMode(true);
+    _tabBar->setFocusPolicy(Qt::ClickFocus);
 
     _newTabButton = new QToolButton(_containerWidget);
     _newTabButton->setIcon(KIcon("tab-new"));
