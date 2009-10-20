@@ -51,6 +51,7 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
     _ui->keyBindingTable->setHorizontalHeaderLabels(labels);
     _ui->keyBindingTable->horizontalHeader()->setStretchLastSection(true);
     _ui->keyBindingTable->verticalHeader()->hide();
+    _ui->keyBindingTable->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     // add and remove buttons
     _ui->addEntryButton->setIcon( KIcon("list-add") );
