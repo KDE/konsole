@@ -978,7 +978,7 @@ int ViewManager::currentSession()
 
 int ViewManager::newSession()
 {
-    Profile::Ptr profile = profile = SessionManager::instance()->defaultProfile();
+    Profile::Ptr profile = SessionManager::instance()->defaultProfile();
     Session* session = SessionManager::instance()->createSession(profile);
 
     this->createView(session);
