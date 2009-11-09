@@ -273,6 +273,13 @@ void SessionController::openUrl( const KUrl& url )
     else
     {
         //TODO Implement handling for other Url types
+
+        QString detailedMessage = i18n("This bookmark is using an Url that is not understood.");
+        QString detailedInfo = url.prettyUrl();
+        if (!(url.protocol()).isEmpty())
+            detailedInfo.append(QString(i18n("\n\nProtocol: ")) + url.protocol());
+        KMessageBox::detailedSorry(_view->window(), detailedMessage, detailedInfo);
+
         kWarning(1211) << "Unable to open bookmark at url" << url << ", I do not know"
            << " how to handle the protocol " << url.protocol();
     }
