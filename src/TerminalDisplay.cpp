@@ -2635,6 +2635,10 @@ bool TerminalDisplay::event(QEvent* event)
     case QEvent::ShortcutOverride:
         eventHandled = handleShortcutOverrideEvent((QKeyEvent*)event);
         break;
+    case QEvent::PaletteChange:
+    case QEvent::ApplicationPaletteChange:
+        _scrollBar->setPalette( QApplication::palette() );
+        break;
     default:
         break;
   }
