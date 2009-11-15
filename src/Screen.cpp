@@ -455,12 +455,13 @@ void Screen::copyFromScreen(Character* dest , int startLine , int count) const
 
 void Screen::getImage( Character* dest, int size, int startLine, int endLine ) const
 {
-    Q_ASSERT( startLine >= 0 ); 
+    Q_ASSERT( startLine >= 0 );
     Q_ASSERT( endLine >= startLine && endLine < history->getLines() + lines );
 
     const int mergedLines = endLine - startLine + 1;
 
     Q_ASSERT( size >= mergedLines * columns ); 
+    Q_UNUSED( size );
 
     const int linesInHistoryBuffer = qBound(0,history->getLines()-startLine,mergedLines);
     const int linesInScreenBuffer = mergedLines - linesInHistoryBuffer;

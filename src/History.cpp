@@ -123,7 +123,7 @@ void HistoryFile::map()
 void HistoryFile::unmap()
 {
     int result = munmap( fileMap , length );
-    assert( result == 0 );
+    assert( result == 0 ); Q_UNUSED( result );
 
     fileMap = 0;
 }
