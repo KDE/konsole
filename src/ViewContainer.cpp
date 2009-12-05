@@ -813,6 +813,7 @@ void StackedViewContainer::removeViewWidget( QWidget* view )
     const int index = _stackWidget->indexOf(view);
 
     Q_ASSERT( index != -1);
+    Q_UNUSED(index);
 
     _stackWidget->removeWidget(view);
 }

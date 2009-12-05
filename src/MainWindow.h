@@ -115,7 +115,7 @@ class MainWindow : public KXmlGuiWindow
          * Emitted by the main window to request the creation of a new SSH session.
          *
          * @param profile The profile to use to create the new session.
-         * @param URL URL for the new session
+         * @param url URL for the new session
          * @param view The view manager owned by this main window
          */
         void newSSHSessionRequest(Profile::Ptr profile,
