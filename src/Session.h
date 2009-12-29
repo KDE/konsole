@@ -710,9 +710,6 @@ private slots:
     void forwardData(const char* data, int size);
 
 private:
-    void connectPair(Session* master);
-    void disconnectPair(Session* master);
-    void connectAll(bool connect);
     QList<Session*> masters() const;
 
     // maps sessions to their master status

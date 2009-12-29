@@ -1225,8 +1225,6 @@ SessionGroup::SessionGroup(QObject* parent)
 }
 SessionGroup::~SessionGroup()
 {
-    // disconnect all
-    connectAll(false);
 }
 int SessionGroup::masterMode() const { return _masterMode; }
 QList<Session*> SessionGroup::sessions() const { return _sessions.keys(); }
@@ -1235,25 +1233,12 @@ bool SessionGroup::masterStatus(Session* session) const { return _sessions[sessi
 void SessionGroup::addSession(Session* session)
 {
     connect(session,SIGNAL(finished()),this,SLOT(sessionFinished()));
-
     _sessions.insert(session,false);
-
-    QListIterator<Session*> masterIter(masters());
-
-    while ( masterIter.hasNext() )
-        connectPair(masterIter.next());
 }
 void SessionGroup::removeSession(Session* session)
 {
     disconnect(session,SIGNAL(finished()),this,SLOT(sessionFinished()));
-
     setMasterStatus(session,false);
-
-    QListIterator<Session*> masterIter(masters());
-
-    while ( masterIter.hasNext() )
-        disconnectPair(masterIter.next());
-
     _sessions.remove(session);
 }
 void SessionGroup::sessionFinished()
@@ -1265,77 +1250,28 @@ void SessionGroup::sessionFinished()
 void SessionGroup::setMasterMode(int mode)
 {
    _masterMode = mode;
-
-   connectAll(false);
-   connectAll(true);
 }
 QList<Session*> SessionGroup::masters() const
 {
     return _sessions.keys(true);
 }
-void SessionGroup::connectAll(bool connect)
-{
-    QListIterator<Session*> masterIter(masters());
-
-    while ( masterIter.hasNext() )
-    {
-        Session* master = masterIter.next();
-
-        QListIterator<Session*> otherIter(_sessions.keys());
-        while ( otherIter.hasNext() )
-        {
-            Session* other = otherIter.next();
-
-            if ( other != master )
-            {
-                if ( connect )
-                    connectPair(master);
-                else
-                    disconnectPair(master);
-            }
-        }
-    }
-}
 void SessionGroup::setMasterStatus(Session* session , bool master)
 {
-    bool wasMaster = _sessions[session];
+    const bool wasMaster = _sessions[session];
+
+    if (wasMaster == master) {
+        // No status change -> nothing to do.
+        return;
+    }
     _sessions[session] = master;
 
-    if (    ( !wasMaster && !master )
-         || ( wasMaster && master ) )
-      return;
-
-    QListIterator<Session*> iter(_sessions.keys());
-    while ( iter.hasNext() )
-    {
-        Session* other = iter.next();
-
-        if ( other != session )
-        {
-            if ( master )
-                connectPair(session);
-            else
-                disconnectPair(session);
-        }
-    }
-}
-void SessionGroup::connectPair(Session* master)
-{
-    if ( _masterMode & CopyInputToAll )
-    {
-        // It is not possible to connect directly to other->emulation()'s
-        // sendString() here, since this would cause an infinite loop when
-        // the destination session is also the master of another group!
-        connect( master->emulation() , SIGNAL(sendData(const char*,int)) , this,
+    if(master) {
+        connect( session->emulation() , SIGNAL(sendData(const char*,int)) , this,
                  SLOT(forwardData(const char*,int)) );
     }
-}
-void SessionGroup::disconnectPair(Session* master)
-{
-    if ( _masterMode & CopyInputToAll )
-    {
-        disconnect( master->emulation() , SIGNAL(sendData(const char*,int)) , this,
-                SLOT(forwardData(const char*,int)) );
+    else {
+        disconnect( session->emulation() , SIGNAL(sendData(const char*,int)) , this,
+                    SLOT(forwardData(const char*,int)) );
     }
 }
 void SessionGroup::forwardData(const char* data, int size)

@@ -694,9 +694,6 @@ void SessionController::copyInputToAllTabs()
 {
     if(!_copyToGroup) {
         _copyToGroup = new SessionGroup(this);
-        _copyToGroup->addSession(_session);
-        _copyToGroup->setMasterStatus(_session, true);
-        _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
     }
 
     // Find our window ...
@@ -708,17 +705,18 @@ void SessionController::copyInputToAllTabs()
         iterator != group.end(); ++iterator) {
         Session* session = *iterator;
  
-        if(session != _session) {
-            // First, ensure that the session is removed
-            // (necessary to avoid duplicates on addSession()!)
-            _copyToGroup->removeSession(session);
+        // First, ensure that the session is removed
+        // (necessary to avoid duplicates on addSession()!)
+        _copyToGroup->removeSession(session);
 
-            // Add current session if it is displayed our window
-            if(hasTerminalDisplayInSameWindow(session, myWindow)) {
-                _copyToGroup->addSession(session);
-            }
+        // Add current session if it is displayed our window
+        if(hasTerminalDisplayInSameWindow(session, myWindow)) {
+            _copyToGroup->addSession(session);
         }
     }
+    _copyToGroup->setMasterStatus(_session, true);
+    _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
+    
     snapshot();
     _copyToAllTabsAction->setChecked(true);
     _copyToSelectedAction->setChecked(false);
@@ -762,6 +760,8 @@ void SessionController::copyInputToSelectedTabs()
                 _copyToGroup->removeSession(session);
         }
 
+        _copyToGroup->setMasterStatus(_session, true);
+        _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
         snapshot();        
     }
 
@@ -783,7 +783,10 @@ void SessionController::copyInputToNone()
             _copyToGroup->removeSession(*iterator);
         }
     }
+    delete _copyToGroup;
+    _copyToGroup = NULL;
     snapshot();
+    
     _copyToAllTabsAction->setChecked(false);
     _copyToSelectedAction->setChecked(false);
     _copyToNoneAction->setChecked(true);
