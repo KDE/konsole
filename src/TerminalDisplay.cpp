@@ -2708,8 +2708,7 @@ void TerminalDisplay::clearImage()
 
 void TerminalDisplay::calcGeometry()
 {
-  _scrollBar->resize(QApplication::style()->pixelMetric(QStyle::PM_ScrollBarExtent),
-                    contentsRect().height());
+  _scrollBar->resize(_scrollBar->sizeHint().width(), contentsRect().height());
   switch(_scrollbarLocation)
   {
     case NoScrollBar :
@@ -2764,8 +2763,7 @@ void TerminalDisplay::makeImage()
 // calculate the needed size, this must be synced with calcGeometry()
 void TerminalDisplay::setSize(int columns, int lines)
 {
-  int scrollBarWidth = _scrollBar->isHidden() ? 0 :  
-                        style()->pixelMetric(QStyle::PM_ScrollBarExtent);
+  int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->sizeHint().width();
   int horizontalMargin = 2 * DEFAULT_LEFT_MARGIN;
   int verticalMargin = 2 * DEFAULT_TOP_MARGIN;
 
