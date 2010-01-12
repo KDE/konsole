@@ -62,6 +62,7 @@ class ZModemDialog;
 class KONSOLEPRIVATE_EXPORT Session : public QObject
 {
 Q_OBJECT
+Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Session")
 
 public:
   Q_PROPERTY(QString name READ nameTitle)

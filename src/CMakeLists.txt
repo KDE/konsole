@@ -30,12 +30,17 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
     # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
     # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
 
+    # Generate dbus .xml files; do not store .xml in source folder
+    qt4_generate_dbus_interface( Session.h org.kde.konsole.Session.xml OPTIONS
+ -m)
+    qt4_generate_dbus_interface( ViewManager.h org.kde.konsole.Konsole.xml OPTIONS -s -M)
+
     qt4_add_dbus_adaptor( sessionadaptors_SRCS
-                          org.kde.konsole.Session.xml
+                          ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
                           Session.h
                           Konsole::Session )
     qt4_add_dbus_adaptor( konsoleadaptors_SRCS 
-                          org.kde.konsole.Konsole.xml 
+                          ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Konsole.xml 
                           ViewManager.h 
                           Konsole::ViewManager )
 
@@ -81,6 +86,8 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
         XKB.cpp
         ZModemDialog.cpp
         konsole_wcwidth.cpp
+        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Konsole.xml
+        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
     )
 
     set(konsole_LIBS
