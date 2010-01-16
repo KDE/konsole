@@ -21,26 +21,16 @@
 #include "DBusTest.h"
 
 // KDE
-#include <qtest_kde.h>
+//#include <qtest_kde.h>
 
 using namespace Konsole;
 
-/* We need to find the Konsole DBus service.  Depending on the user's setup,
- * this could be org.kde.konsole or org.kde.konsole-PID#.  Since QTest
- * doesn't accept user command line options, we will just pick the last
- * Konsole service.
- */
-DBusTest::DBusTest()
-{
-    init();
-    newInstance();
-}
-
-void DBusTest::init()
+/* Exec a new Konsole and grab its dbus */
+void DBusTest::initTestCase()
 {
     const QString interfaceName = "org.kde.konsole";
-    _originalSessionCount = 0;
     QDBusConnectionInterface* bus = 0;
+    QStringList konsoleServices;
 
     if (!QDBusConnection::sessionBus().isConnected() ||
             !(bus = QDBusConnection::sessionBus().interface()))
@@ -50,12 +40,39 @@ void DBusTest::init()
     if (!serviceReply.isValid())
         kFatal() << "SessionBus interfaces not available";
 
-    const QStringList allServices = serviceReply;
+    // Find all current Konsoles' services running
+    QStringList allServices = serviceReply;
     for (QStringList::const_iterator it = allServices.begin(),
             end = allServices.end(); it != end; ++it) {
         const QString service = *it;
         if (service.startsWith(interfaceName))
-            _interfaceName = service;
+            konsoleServices << service;
+    }
+
+    // Create a new Konsole
+    int result = KToolInvocation::kdeinitExec("konsole");
+    if (result)
+        kFatal() << "Unable to exec a new Konsole : " << result;
+
+    // Wait for above Konsole to finish starting
+#ifdef HAVE_USLEEP
+    usleep(5*1000);
+#else
+    sleep(5);
+#endif
+
+    serviceReply = bus->registeredServiceNames();
+    if (!serviceReply.isValid())
+        kFatal() << "SessionBus interfaces not available";
+
+    // Find dbus service of above Konsole
+    allServices = serviceReply;
+    for (QStringList::const_iterator it = allServices.begin(),
+            end = allServices.end(); it != end; ++it) {
+        const QString service = *it;
+        if (service.startsWith(interfaceName))
+            if (!konsoleServices.contains(service))
+                _interfaceName = service;
     }
 
     if (_interfaceName.isEmpty())
@@ -66,29 +83,6 @@ void DBusTest::init()
                                 QLatin1String("/Konsole"),
                                 QLatin1String("org.kde.konsole.Konsole"),
                                 QDBusConnection::sessionBus(), this);
-
-    QDBusReply<int> sessionCount = _iface->call("sessionCount");
-    QVERIFY(sessionCount.isValid());
-    _originalSessionCount = sessionCount;
-    //kDebug()<<"sessionCount "<<sessionCount.value();
-}
-
-void DBusTest::newInstance()
-{
-    QDBusInterface iface(_interfaceName,
-                         QLatin1String("/MainApplication"),
-                         QLatin1String("org.kde.KUniqueApplication"));
-    if (!iface.isValid())
-        kFatal() << "Unable to get a dbus interface to Konsole!";
-
-    QDBusReply<void> instanceReply = iface.call("newInstance");
-    if (!instanceReply.isValid())
-        kFatal() << "Unable to start a newInstance of Konsole: " << instanceReply.error();
-
-}
-
-void DBusTest::initTestCase()
-{
     QVERIFY(_iface);
     QVERIFY(_iface->isValid());
 }
@@ -100,10 +94,8 @@ void DBusTest::cleanupTestCase()
     QVERIFY(_iface);
     QVERIFY(_iface->isValid());
 
-    // How to handle when profile has CloseAllTabs=false?
-    // Assume that testing window is MainWindow_2?
     QDBusInterface iface(_interfaceName,
-                         QLatin1String("/konsole/MainWindow_2"),
+                         QLatin1String("/konsole/MainWindow_1"),
                          QLatin1String("com.trolltech.Qt.QWidget"));
     if (!iface.isValid())
         kFatal() << "Unable to get a dbus interface to Konsole!";
@@ -111,18 +103,12 @@ void DBusTest::cleanupTestCase()
     QDBusReply<void> instanceReply = iface.call("close");
     if (!instanceReply.isValid())
         kFatal() << "Unable to close MainWindow_2 :" << instanceReply.error();
-
-    QDBusReply<int> sessionCount = _iface->call("sessionCount");
-    QVERIFY(sessionCount.isValid());
-    QCOMPARE(sessionCount.value(), _originalSessionCount);
-
 }
 
 void DBusTest::testSessions()
 {
     QVERIFY(_iface);
     QVERIFY(_iface->isValid());
-
 }
 
 QTEST_MAIN(DBusTest)

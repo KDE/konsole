@@ -25,6 +25,9 @@
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
 #include <KDebug>
+#include <KToolInvocation>
+
+#include <unistd.h>
 
 namespace Konsole
 {
@@ -33,22 +36,18 @@ class DBusTest : public QObject
 {
     Q_OBJECT
 public:
-    DBusTest();
 
 private slots:
-    void init();
     void initTestCase();
     void cleanupTestCase();
     void testSessions();
 
 // protected slots are not treated as test cases
 protected slots:
-    void newInstance();
 
 private:
     QString _interfaceName;
     QDBusInterface* _iface;
-    int     _originalSessionCount;
 };
 
 }
