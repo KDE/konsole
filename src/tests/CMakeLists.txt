@@ -11,3 +11,7 @@ target_link_libraries(ProfileTest ${KONSOLE_TEST_LIBS})
 
 kde4_add_unit_test(SessionManagerTest SessionManagerTest.cpp)
 target_link_libraries(SessionManagerTest ${KONSOLE_TEST_LIBS})
+
+kde4_add_unit_test(DBusTest DBusTest.cpp)
+target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS})
+
