@@ -120,38 +120,34 @@ void DBusTest::testSessions()
     QVERIFY(iface.isValid());
 
     //****************** Test is/set MonitorActivity
+    voidReply = iface.call("setMonitorActivity", false);
+    QVERIFY(voidReply.isValid());
+
     boolReply = iface.call("isMonitorActivity");
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), false);
 
     voidReply = iface.call("setMonitorActivity", true);
+    QVERIFY(voidReply.isValid());
 
     boolReply = iface.call("isMonitorActivity");
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), true);
 
-    voidReply = iface.call("setMonitorActivity", false);
-
-    boolReply = iface.call("isMonitorActivity");
-    QVERIFY(boolReply.isValid());
-    QCOMPARE(boolReply.value(), false);
-
     //****************** Test is/set MonitorSilence
+    voidReply = iface.call("setMonitorSilence", false);
+    QVERIFY(voidReply.isValid());
+
     boolReply = iface.call("isMonitorSilence");
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), false);
 
     voidReply = iface.call("setMonitorSilence", true);
+    QVERIFY(voidReply.isValid());
 
     boolReply = iface.call("isMonitorSilence");
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), true);
-
-    voidReply = iface.call("setMonitorSilence", false);
-
-    boolReply = iface.call("isMonitorSilence");
-    QVERIFY(boolReply.isValid());
-    QCOMPARE(boolReply.value(), false);
 
     //****************** Test codec and setCodec
     arrayReply = iface.call("codec");
@@ -172,6 +168,20 @@ void DBusTest::testSessions()
                 (QTextCodec::codecForName(availableCodecs[i]))->name());
     }
 
+    //****************** Test is/set flowControlEnabled
+    voidReply = iface.call("setFlowControlEnabled", true);
+    QVERIFY(voidReply.isValid());
+
+    boolReply = iface.call("flowControlEnabled");
+    QVERIFY(boolReply.isValid());
+    QCOMPARE(boolReply.value(), true);
+
+    voidReply = iface.call("setFlowControlEnabled", false);
+    QVERIFY(voidReply.isValid());
+
+    boolReply = iface.call("flowControlEnabled");
+    QVERIFY(boolReply.isValid());
+    QCOMPARE(boolReply.value(), false);
 
 }
 
