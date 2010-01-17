@@ -2444,7 +2444,8 @@ void TerminalDisplay::copyClipboard()
       return;
 
   QString text = _screenWindow->selectedText(_preserveLineBreaks);
-  QApplication::clipboard()->setText(text);
+  if (!text.isEmpty())
+    QApplication::clipboard()->setText(text);
 }
 
 void TerminalDisplay::pasteClipboard()
