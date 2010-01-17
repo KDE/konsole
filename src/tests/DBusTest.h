@@ -24,6 +24,7 @@
 #include <QtDBus/QtDBus>
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
+#include <QTextCodec>
 #include <KDebug>
 #include <KToolInvocation>
 

@@ -20,9 +20,6 @@
 // Own
 #include "DBusTest.h"
 
-// KDE
-//#include <qtest_kde.h>
-
 using namespace Konsole;
 
 /* Exec a new Konsole and grab its dbus */
@@ -94,6 +91,9 @@ void DBusTest::cleanupTestCase()
     QVERIFY(_iface);
     QVERIFY(_iface->isValid());
 
+    // Need to take care of when user has CloseAllTabs=False otherwise
+    // they will get a popup dialog when we try to close this.
+ 
     QDBusInterface iface(_interfaceName,
                          QLatin1String("/konsole/MainWindow_1"),
                          QLatin1String("com.trolltech.Qt.QWidget"));
@@ -102,17 +102,80 @@ void DBusTest::cleanupTestCase()
 
     QDBusReply<void> instanceReply = iface.call("close");
     if (!instanceReply.isValid())
-        kFatal() << "Unable to close MainWindow_2 :" << instanceReply.error();
+        kFatal() << "Unable to close Konsole :" << instanceReply.error();
 }
 
 void DBusTest::testSessions()
 {
+    QDBusReply<void> voidReply;
+    QDBusReply<bool> boolReply;
+    QDBusReply<QByteArray> arrayReply;
+
     QVERIFY(_iface);
     QVERIFY(_iface->isValid());
+
+    QDBusInterface iface(_interfaceName,
+                         QLatin1String("/Sessions/1"),
+                         QLatin1String("org.kde.konsole.Session"));
+    QVERIFY(iface.isValid());
+
+    //****************** Test is/set MonitorActivity
+    boolReply = iface.call("isMonitorActivity");
+    QVERIFY(boolReply.isValid());
+    QCOMPARE(boolReply.value(), false);
+
+    voidReply = iface.call("setMonitorActivity", true);
+
+    boolReply = iface.call("isMonitorActivity");
+    QVERIFY(boolReply.isValid());
+    QCOMPARE(boolReply.value(), true);
+
+    voidReply = iface.call("setMonitorActivity", false);
+
+    boolReply = iface.call("isMonitorActivity");
+    QVERIFY(boolReply.isValid());
+    QCOMPARE(boolReply.value(), false);
+
+    //****************** Test is/set MonitorSilence
+    boolReply = iface.call("isMonitorSilence");
+    QVERIFY(boolReply.isValid());
+    QCOMPARE(boolReply.value(), false);
+
+    voidReply = iface.call("setMonitorSilence", true);
+
+    boolReply = iface.call("isMonitorSilence");
+    QVERIFY(boolReply.isValid());
+    QCOMPARE(boolReply.value(), true);
+
+    voidReply = iface.call("setMonitorSilence", false);
+
+    boolReply = iface.call("isMonitorSilence");
+    QVERIFY(boolReply.isValid());
+    QCOMPARE(boolReply.value(), false);
+
+    //****************** Test codec and setCodec
+    arrayReply = iface.call("codec");
+    QVERIFY(arrayReply.isValid());
+
+    // Obtain a list of system's Codecs
+    QList<QByteArray> availableCodecs = QTextCodec::availableCodecs();
+    for (int i = 0; i < availableCodecs.count(); ++i) {
+        boolReply = iface.call("setCodec", availableCodecs[i]);
+        QVERIFY(boolReply.isValid());
+        QCOMPARE(boolReply.value(), true);
+
+        arrayReply = iface.call("codec");
+        QVERIFY(arrayReply.isValid());
+        // Compare result with name due to aliases issue
+        // Better way to do this?
+        QCOMPARE((QTextCodec::codecForName(arrayReply.value()))->name(),
+                (QTextCodec::codecForName(availableCodecs[i]))->name());
+    }
+
+
 }
 
 QTEST_MAIN(DBusTest)
 
 #include "DBusTest.moc"
-
 
