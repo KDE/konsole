@@ -1192,8 +1192,8 @@ void SessionController::zmodemDownload()
     else {
         KMessageBox::error(_view,
           i18n("<p>A ZModem file transfer attempt has been detected, "
-               "but no suitable ZModem software was found on this system.\n"
-               "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"));
+               "but no suitable ZModem software was found on this system.</p>"
+               "<p>You may wish to install the 'rzsz' or 'lrzsz' package.</p>"));
     }
     _session->cancelZModem();
     return;
@@ -1203,7 +1203,7 @@ void SessionController::zmodemUpload()
 {
     if(_session->isZModemBusy()) {
       KMessageBox::sorry(_view,
-         i18n("<p>The current session already has a ZModem file transfer in progress."));
+         i18n("<p>The current session already has a ZModem file transfer in progress.</p>"));
       return;
     }
     QString zmodem = KGlobal::dirs()->findExe("sz");
@@ -1212,8 +1212,8 @@ void SessionController::zmodemUpload()
     }
     if(zmodem.isEmpty()) {
         KMessageBox::sorry(_view,
-           i18n("<p>No suitable ZModem software was found on this system.\n"
-                "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"));
+           i18n("<p>No suitable ZModem software was found on this system.</p>"
+                "<p>You may wish to install the 'rzsz' or 'lrzsz' package.</p>"));
         return;
     }
 
