@@ -1227,7 +1227,7 @@ void SessionController::zmodemUpload()
 bool SessionController::isKonsolePart() const
 {
     // Check to see if we are being called from Konsole or a KPart
-    if (QString(kapp->metaObject()->className()) == "Konsole::Application")
+    if (QString(qApp->metaObject()->className()) == "Konsole::Application")
         return false;
     else
         return true;
