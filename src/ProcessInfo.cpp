@@ -727,7 +727,7 @@ private:
         int managementInfoBase[4];
         size_t mibLength;
         struct kinfo_proc* kInfoProc;
-        struct stat statInfo;
+        struct KDE_stat statInfo;
 
         // Find the tty device of 'pid' (Example: /dev/ttys001)
         managementInfoBase[0] = CTL_KERN;
