@@ -39,8 +39,8 @@ void DBusTest::initTestCase()
 
     // Find all current Konsoles' services running
     QStringList allServices = serviceReply;
-    for (QStringList::const_iterator it = allServices.begin(),
-            end = allServices.end(); it != end; ++it) {
+    for (QStringList::const_iterator it = allServices.constBegin(),
+            end = allServices.constEnd(); it != end; ++it) {
         const QString service = *it;
         if (service.startsWith(interfaceName))
             konsoleServices << service;
@@ -64,8 +64,8 @@ void DBusTest::initTestCase()
 
     // Find dbus service of above Konsole
     allServices = serviceReply;
-    for (QStringList::const_iterator it = allServices.begin(),
-            end = allServices.end(); it != end; ++it) {
+    for (QStringList::const_iterator it = allServices.constBegin(),
+            end = allServices.constEnd(); it != end; ++it) {
         const QString service = *it;
         if (service.startsWith(interfaceName))
             if (!konsoleServices.contains(service))
