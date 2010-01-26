@@ -41,7 +41,7 @@
 using namespace Konsole;
 
 
-const char* KeyboardTranslatorManager::defaultTranslatorText = 
+const char* const KeyboardTranslatorManager::defaultTranslatorText = 
 #include <DefaultTranslatorText.h>
 ;
 

@@ -187,8 +187,8 @@ private:
                                         // if no colors in the color scheme support
                                         // randomization
 
-    static const char* colorNames[TABLE_COLORS];
-    static const char* translatedColorNames[TABLE_COLORS];
+    static const char* const colorNames[TABLE_COLORS];
+    static const char* const translatedColorNames[TABLE_COLORS];
 
     static const ColorEntry defaultTable[]; // table of default color entries
 };

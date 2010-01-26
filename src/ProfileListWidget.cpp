@@ -26,7 +26,7 @@
 #include <QtGui/QKeyEvent>
 #include <QtCore/QMimeData>
 
-static const char* konsoleSessionMimeFormat = "konsole/session";
+static const char konsoleSessionMimeFormat[] = "konsole/session";
 
 ProfileListWidget::ProfileListWidget(QWidget* parent)
     : QListWidget(parent)

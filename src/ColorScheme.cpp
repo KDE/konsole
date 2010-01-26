@@ -65,7 +65,7 @@ QColor(0xFF,0x54,0xFF), 0),
 QColor(0xFF,0xFF,0xFF), 0)
 };
 
-const char* ColorScheme::colorNames[TABLE_COLORS] =
+const char* const ColorScheme::colorNames[TABLE_COLORS] =
 {
   "Foreground",
   "Background",
@@ -88,7 +88,7 @@ const char* ColorScheme::colorNames[TABLE_COLORS] =
   "Color6Intense",
   "Color7Intense"
 };
-const char* ColorScheme::translatedColorNames[TABLE_COLORS] =
+const char* const ColorScheme::translatedColorNames[TABLE_COLORS] =
 {
     I18N_NOOP("Foreground"),
     I18N_NOOP("Background"),
