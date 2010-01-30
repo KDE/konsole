@@ -71,12 +71,26 @@ KeyBindingEditor::~KeyBindingEditor()
 
 void KeyBindingEditor::removeSelectedEntry()
 {
-    QListIterator<QTableWidgetItem*> iter( _ui->keyBindingTable->selectedItems() );
+    QList<QTableWidgetItem*> selectedList =  _ui->keyBindingTable->selectedItems();
+    QList<QTableWidgetItem*> uniqueList;
+    
+    //Filter unique items
+    QListIterator<QTableWidgetItem*> iter( selectedList );
+    while ( iter.hasNext() )
+    {
+        QTableWidgetItem* item = iter.next();
+        if (item->column() == 1) //Select item at the first column
+            item = _ui->keyBindingTable->item(item->row(),0);
 
+        if ( !uniqueList.contains(item) )
+            uniqueList.append(item);
+    }
+
+    iter = QListIterator<QTableWidgetItem*>( uniqueList );
     while ( iter.hasNext() )
     {     
         // get the first item in the row which has the entry
-        QTableWidgetItem* item = _ui->keyBindingTable->item(iter.next()->row(),0);
+        QTableWidgetItem* item = iter.next();
 
         KeyboardTranslator::Entry existing = item->data(Qt::UserRole).
                                                     value<KeyboardTranslator::Entry>();
