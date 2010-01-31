@@ -645,16 +645,9 @@ void Screen::displayCharacter(unsigned short c)
 
     // ensure current line vector has enough elements
     int size = screenLines[cuY].size();
-    if (size == 0 && cuY > 0)
+    if (size < cuX+w)
     {
-        screenLines[cuY].resize( qMax(screenLines[cuY-1].size() , cuX+w) );
-    }
-    else
-    {
-        if (size < cuX+w)
-        {
-            screenLines[cuY].resize(cuX+w);
-        }
+        screenLines[cuY].resize(cuX+w);
     }
 
     if (getMode(MODE_Insert)) insertChars(w);
@@ -1230,19 +1223,6 @@ int Screen::copyLineToStream(int line ,
         Character* data = screenLines[screenLine].data();
         int length = screenLines[screenLine].count();
 
-        // Don't remove end spaces in lines that wrap
-        if (!(lineProperties[screenLine] & LINE_WRAPPED))
-        {
-            // ignore trailing white space at the end of the line
-            for (int i = length-1; i >= 0; i--)
-            {
-                if (data[i].character == ' ')
-                    length--;
-                else
-                    break;
-            }
-        }
- 
         //retrieve line from screen image
         for (int i=start;i < qMin(start+count,length);i++)
         {
