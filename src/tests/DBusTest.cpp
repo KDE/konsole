@@ -19,6 +19,7 @@
 
 // Own
 #include "DBusTest.h"
+#include "../Session.h"
 
 using namespace Konsole;
 
@@ -110,6 +111,7 @@ void DBusTest::testSessions()
     QDBusReply<void> voidReply;
     QDBusReply<bool> boolReply;
     QDBusReply<QByteArray> arrayReply;
+    QDBusReply<QString> stringReply;
     QDBusReply<QStringList> listReply;
 
     QVERIFY(_iface);
@@ -205,6 +207,34 @@ void DBusTest::testSessions()
     listReply = iface.call("environment");
     QVERIFY(listReply.isValid());
     QCOMPARE(listReply.value(), prevEnv);
+
+    //****************** Test is/set title
+    // TODO: Consider checking what is in Profile
+    stringReply = iface.call("title", Session::LocalTabTitle);
+    QVERIFY(stringReply.isValid());
+
+    //kDebug()<< stringReply.value();
+    QString prevLocalTitle = stringReply.value();
+
+    // set title to,  what title should be
+    QMap<QString, QString> titleMap;
+    titleMap["Shell"] = "Shell";
+
+    // BUG: It appears that Session::LocalTabTitle is set to Shell and
+    // doesn't change.  While RemoteTabTitle is actually the LocalTabTitle
+    // TODO: Figure out what's going on...
+    QMapIterator<QString, QString> i(titleMap);
+    while (i.hasNext()) {
+        i.next();
+        voidReply = iface.call("setTitle", Session::LocalTabTitle, i.key());
+        QVERIFY(voidReply.isValid());
+
+        stringReply = iface.call("title", Session::LocalTabTitle);
+        QVERIFY(stringReply.isValid());
+
+        QCOMPARE(stringReply.value(), i.value());
+
+    }
 }
 
 QTEST_MAIN(DBusTest)
