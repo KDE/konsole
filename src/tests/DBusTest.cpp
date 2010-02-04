@@ -110,6 +110,7 @@ void DBusTest::testSessions()
     QDBusReply<void> voidReply;
     QDBusReply<bool> boolReply;
     QDBusReply<QByteArray> arrayReply;
+    QDBusReply<QStringList> listReply;
 
     QVERIFY(_iface);
     QVERIFY(_iface->isValid());
@@ -183,6 +184,27 @@ void DBusTest::testSessions()
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), false);
 
+    //****************** Test is/set environment
+    listReply = iface.call("environment");
+    QVERIFY(listReply.isValid());
+
+    QStringList prevEnv = listReply.value();
+    //for (int i = 0; i < prevEnv.size(); ++i)
+    //    kDebug()<< prevEnv.at(i).toLocal8Bit().constData() << endl;
+
+    voidReply = iface.call("setEnvironment", QStringList());
+    QVERIFY(voidReply.isValid());
+
+    listReply = iface.call("environment");
+    QVERIFY(listReply.isValid());
+    QCOMPARE(listReply.value(), QStringList());
+
+    voidReply = iface.call("setEnvironment", prevEnv);
+    QVERIFY(voidReply.isValid());
+
+    listReply = iface.call("environment");
+    QVERIFY(listReply.isValid());
+    QCOMPARE(listReply.value(), prevEnv);
 }
 
 QTEST_MAIN(DBusTest)
