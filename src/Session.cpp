@@ -339,7 +339,7 @@ QString Session::checkProgram(const QString& program) const
 
 void Session::terminalWarning(const QString& message)
 {
-    static const QByteArray warningText = i18n("Warning: ").toLocal8Bit(); 
+    static const QByteArray warningText = i18nc("@info:shell Alert the user with red color text", "Warning: ").toLocal8Bit(); 
     QByteArray messageText = message.toLocal8Bit();
 
     static const char redPenOn[] = "\033[1m\033[31m";
@@ -718,7 +718,7 @@ void Session::done(int exitStatus)
 {
   if (!_autoClose)
   {
-    _userTitle = i18n("Finished");
+    _userTitle = i18nc("@info:shell This session is done", "Finished");
     emit titleChanged();
     return;
   }
