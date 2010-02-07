@@ -88,28 +88,31 @@ const char* const ColorScheme::colorNames[TABLE_COLORS] =
   "Color6Intense",
   "Color7Intense"
 };
+// These colors are from the ANSI Color table (2 rows and 8 columns) 
+// plus the fore and background colors.  These are displayed in the 
+// color scheme dialog.
 const char* const ColorScheme::translatedColorNames[TABLE_COLORS] =
 {
-    I18N_NOOP("Foreground"),
-    I18N_NOOP("Background"),
-    I18N_NOOP("Color 1"),
-    I18N_NOOP("Color 2"),
-    I18N_NOOP("Color 3"),
-    I18N_NOOP("Color 4"),
-    I18N_NOOP("Color 5"),
-    I18N_NOOP("Color 6"),
-    I18N_NOOP("Color 7"),
-    I18N_NOOP("Color 8"),
-    I18N_NOOP("Foreground (Intense)"),
-    I18N_NOOP("Background (Intense)"),
-    I18N_NOOP("Color 1 (Intense)"),
-    I18N_NOOP("Color 2 (Intense)"),
-    I18N_NOOP("Color 3 (Intense)"),
-    I18N_NOOP("Color 4 (Intense)"),
-    I18N_NOOP("Color 5 (Intense)"),
-    I18N_NOOP("Color 6 (Intense)"),
-    I18N_NOOP("Color 7 (Intense)"),
-    I18N_NOOP("Color 8 (Intense)")
+    I18N_NOOP2("@item:intable the normal ANSI foreground color", "Foreground"),
+    I18N_NOOP2("@item:intable the normal ANSI background color", "Background"),
+    I18N_NOOP2("@item:intable the normal ANSI color in column one", "Color 1"),
+    I18N_NOOP2("@item:intable the normal ANSI color in column two", "Color 2"),
+    I18N_NOOP2("@item:intable the normal ANSI color in column three", "Color 3"),
+    I18N_NOOP2("@item:intable the normal ANSI color in column four", "Color 4"),
+    I18N_NOOP2("@item:intable the normal ANSI color in column five", "Color 5"),
+    I18N_NOOP2("@item:intable the normal ANSI color in column six", "Color 6"),
+    I18N_NOOP2("@item:intable the normal ANSI color in column seven", "Color 7"),
+    I18N_NOOP2("@item:intable the normal ANSI color in column eight", "Color 8"),
+    I18N_NOOP2("@item:intable the bright ANSI foreground color", "Foreground (Intense)"),
+    I18N_NOOP2("@item:intable the bright ANSI background color", "Background (Intense)"),
+    I18N_NOOP2("@item:intable the bright ANSI color in column one", "Color 1 (Intense)"),
+    I18N_NOOP2("@item:intable the bright ANSI color in column two", "Color 2 (Intense)"),
+    I18N_NOOP2("@item:intable the bright ANSI color in column three", "Color 3 (Intense)"),
+    I18N_NOOP2("@item:intable the bright ANSI color in column four", "Color 4 (Intense)"),
+    I18N_NOOP2("@item:intable the bright ANSI color in column five", "Color 5 (Intense)"),
+    I18N_NOOP2("@item:intable the bright ANSI color in column six", "Color 6 (Intense)"),
+    I18N_NOOP2("@item:intable the bright ANSI color in column seven", "Color 7 (Intense)"),
+    I18N_NOOP2("@item:intable the bright ANSI color in column eight", "Color 8 (Intense)"),
 };
 
 ColorScheme::ColorScheme()
@@ -266,7 +269,7 @@ void ColorScheme::read(KConfig& config)
 {
     KConfigGroup configGroup = config.group("General");
 
-    QString description = configGroup.readEntry("Description", I18N_NOOP("Un-named Color Scheme"));
+    QString description = configGroup.readEntry("Description", I18N_NOOP2("@item:inlistbox A color scheme that has no description","Un-named Color Scheme"));
 
     _description = i18n(description.toUtf8());
     _opacity = configGroup.readEntry("Opacity",qreal(1.0));
@@ -383,7 +386,7 @@ AccessibleColorScheme::AccessibleColorScheme()
 {
     // basic attributes
     setName("accessible");
-    setDescription(i18n("Accessible Color Scheme"));
+    setDescription(i18nc("@item:inlistbox","Accessible Color Scheme"));
 
     // setup colors
     const int ColorRoleCount = 8;
