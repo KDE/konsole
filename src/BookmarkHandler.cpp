@@ -133,7 +133,7 @@ QString BookmarkHandler::titleForView(ViewProperties* view) const
         if ( u.hasUser() )
             return i18nc("@item:inmenu The user's name and host they are connected to via ssh", "%1 on %2",u.user(),u.host());
         else
-            return i18nc("@item:inmenu The host the user is connected to via ssh", "%1 on %2",u.user(),u.host());
+            return i18nc("@item:inmenu The host the user is connected to via ssh", "%1",u.host());
     }
     return u.prettyUrl();
 }
