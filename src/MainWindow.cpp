@@ -478,7 +478,7 @@ void MainWindow::setupWidgets()
     QVBoxLayout* layout = new QVBoxLayout();
 
     layout->addWidget( _viewManager->widget() );
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
     widget->setLayout(layout);
