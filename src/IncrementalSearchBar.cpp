@@ -145,7 +145,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     layout->addWidget(_continueLabel);
     layout->addStretch();
 
-    layout->setMargin(4);
+    layout->setContentsMargins(4, 4, 4, 4);
 
     setLayout(layout);
 }

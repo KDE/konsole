@@ -369,7 +369,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   setAttribute(Qt::WA_OpaquePaintEvent);
 
   _gridLayout = new QGridLayout(this);
-  _gridLayout->setMargin(0);
+  _gridLayout->setContentsMargins(0, 0, 0, 0);
 
   setLayout( _gridLayout ); 
 
@@ -2888,7 +2888,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
             _outputSuspendedLabel->setAutoFillBackground(true);
             _outputSuspendedLabel->setBackgroundRole(QPalette::Base);
             _outputSuspendedLabel->setFont(QApplication::font());
-            _outputSuspendedLabel->setMargin(5);
+            _outputSuspendedLabel->setContentsMargins(5, 5, 5, 5);
 
             //enable activation of "Xon/Xoff" link in label
             _outputSuspendedLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse | 

@@ -455,10 +455,10 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
 
     _layout = new TabbedViewContainerLayout;
     _layout->setSpacing(0);
-    _layout->setMargin(0);
+    _layout->setContentsMargins(0, 0, 0, 0);
     _tabBarLayout = new QHBoxLayout;
     _tabBarLayout->setSpacing(0);
-    _tabBarLayout->setMargin(0);
+    _tabBarLayout->setContentsMargins(0, 0, 0, 0);
     _tabBarLayout->addWidget(_newTabButton);
     _tabBarLayout->addWidget(_tabBar);
     _tabBarLayout->addWidget(_closeTabButton); 
@@ -783,7 +783,7 @@ StackedViewContainer::StackedViewContainer(QObject* parent)
     searchBar()->setParent(_containerWidget);
     layout->addWidget(searchBar());
     layout->addWidget(_stackWidget);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
 }
 StackedViewContainer::~StackedViewContainer()
 {
@@ -830,7 +830,7 @@ ListViewContainer::ListViewContainer(NavigationPosition position,QObject* parent
     searchBar()->setParent(contentArea);
     layout->addWidget(_stackWidget);
     layout->addWidget(searchBar());
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
 
     // elide left is used because the most informative part of the session name is often
     // the rightmost part
