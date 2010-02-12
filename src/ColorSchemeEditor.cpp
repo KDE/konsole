@@ -80,7 +80,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     _ui->colorTable->setRowCount(TABLE_COLORS);
 
     QStringList labels;
-    labels << i18n("Name") << i18n("Color");
+    labels << i18nc("@label:listbox Column header text for color names", "Name") << i18nc("@label:listbox Column header text for the actual colors", "Color");
     _ui->colorTable->setHorizontalHeaderLabels(labels);
 
     _ui->colorTable->horizontalHeader()->setStretchLastSection(true);
