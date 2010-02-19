@@ -353,7 +353,7 @@ bool HistoryScrollBuffer::isWrappedLine(int lineNumber)
     return false;
 }
 
-void HistoryScrollBuffer::getCells(int lineNumber, int startColumn, int count, Character* buffer)
+void HistoryScrollBuffer::getCells(int lineNumber, int startColumn, int count, Character buffer[])
 {
   if ( count == 0 ) return;
 
@@ -753,7 +753,7 @@ int CompactHistoryScroll::getLineLen ( int lineNumber )
 }
 
 
-void CompactHistoryScroll::getCells ( int lineNumber, int startColumn, int count, Character* buffer )
+void CompactHistoryScroll::getCells ( int lineNumber, int startColumn, int count, Character buffer[] )
 {
   if ( count == 0 ) return;
   Q_ASSERT ( lineNumber < lines.size() );
