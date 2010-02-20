@@ -3,20 +3,20 @@
 <kpartgui name="konsole" version="1">
     <MenuBar>
         <Menu name="file"><text>File</text>
-            <Action name="new-tab" />
-            <Action name="new-window" />
-            <!-- <Action name="remote-connection" /> !-->
+            <Action name="new-tab"/>
+            <Action name="new-window"/>
+            <!-- <Action name="remote-connection"/> !-->
             <Separator/>
             <ActionList name="favorite-profiles"/>
             <Separator/>
             <DefineGroup name="session-operations"/>
-            <Action name="exit" />
+            <Action name="exit"/>
         </Menu>
         <Menu name="edit"><text>Edit</text>
-            <DefineGroup name="session-edit-operations" />
+            <DefineGroup name="session-edit-operations"/>
         </Menu>
         <Menu name="history"><text>Scrollback</text>
-            <DefineGroup name="session-history-operations"/>            
+            <DefineGroup name="session-history-operations"/>
         </Menu>
         <Menu name="view"><text>View</text>
             <Menu name="view-split"><text>Split View</text>
@@ -34,7 +34,7 @@
             <Action name="show-menubar"/>
             <Action name="view-full-screen"/>
             <Separator/>
-            <DefineGroup name="session-view-operations"/> 
+            <DefineGroup name="session-view-operations"/>
         </Menu>
         <Action name="bookmark"/>
         <Menu name="settings"><text>Settings</text>
@@ -51,9 +51,8 @@
 
     <Menu name="new-session-popup">
         <Action name="new-tab" />
-        <Action name="new-window" />
+        <Action name="new-window"/>
         <Separator/>
-        <ActionList name="new-session-types"/> 
+        <ActionList name="new-session-types"/>
     </Menu>
 </kpartgui>
-
