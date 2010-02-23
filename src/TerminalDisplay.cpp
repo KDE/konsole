@@ -1598,6 +1598,7 @@ void TerminalDisplay::updateImageSize()
   if ( _resizing )
   {
       showResizeNotification();
+      processFilters(); // Obtain new hotspot indicies
     emit changedContentSizeSignal(_contentHeight, _contentWidth); // expose resizeEvent
   }
   
