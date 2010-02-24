@@ -450,13 +450,11 @@ private:
     ViewContainerTabBar* _tabBar;
     QPointer<QStackedWidget> _stackWidget;
     QPointer<QWidget> _containerWidget;
-    QSpacerItem* _tabBarSpacer;
     TabbedViewContainerLayout* _layout;
     QHBoxLayout* _tabBarLayout;
     QToolButton* _newTabButton;
     QToolButton* _closeTabButton;
 
-    static const int TabBarSpace = 2;
 };
 
 /** A plain view container with no navigation display */

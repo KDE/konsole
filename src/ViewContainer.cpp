@@ -462,14 +462,12 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _tabBarLayout->addWidget(_newTabButton);
     _tabBarLayout->addWidget(_tabBar);
     _tabBarLayout->addWidget(_closeTabButton); 
-    _tabBarSpacer = new QSpacerItem(0,TabBarSpace);
 
     _layout->addWidget(_stackWidget);
     searchBar()->setParent(_containerWidget);
     if ( position == NavigationPositionTop )
     {
         _layout->insertLayout(0,_tabBarLayout);
-        _layout->insertItemAt(0,_tabBarSpacer);
         _layout->insertWidget(-1,searchBar());
         _tabBar->setShape(QTabBar::RoundedNorth);
     }
@@ -477,7 +475,6 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     {
         _layout->insertWidget(-1,searchBar());
         _layout->insertLayout(-1,_tabBarLayout);
-        _layout->insertItemAt(-1,_tabBarSpacer);
         _tabBar->setShape(QTabBar::RoundedSouth);
     }
     else
@@ -520,14 +517,6 @@ void TabbedViewContainer::setTabBarVisible(bool visible)
     _tabBar->setVisible(visible);
     _newTabButton->setVisible(visible && (features() & QuickNewView));
     _closeTabButton->setVisible(visible && (features() & QuickCloseView));
-    if ( visible )
-    {
-        _tabBarSpacer->changeSize(0,TabBarSpace);
-    }
-    else
-    {
-        _tabBarSpacer->changeSize(0,0);
-    } 
 }
 QList<ViewContainer::NavigationPosition> TabbedViewContainer::supportedNavigationPositions() const
 {
@@ -535,9 +524,9 @@ QList<ViewContainer::NavigationPosition> TabbedViewContainer::supportedNavigatio
 }
 void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
 {
-    // this method assumes that there are only three items 
+    // this method assumes that there are only two items
     // in the layout
-    Q_ASSERT( _layout->count() == 4 );
+    Q_ASSERT( _layout->count() == 3 );
 
     // index of stack widget in the layout when tab bar is at the bottom
     const int StackIndexWithTabBottom = 0;
@@ -546,11 +535,9 @@ void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
             && _layout->indexOf(_stackWidget) == StackIndexWithTabBottom )
     {
         _layout->removeItem(_tabBarLayout);
-        _layout->removeItem(_tabBarSpacer);
         _layout->removeWidget(searchBar());
 
         _layout->insertLayout(0,_tabBarLayout);
-        _layout->insertItemAt(0,_tabBarSpacer);
         _layout->insertWidget(-1,searchBar());
         _tabBar->setShape(QTabBar::RoundedNorth);
     }
@@ -558,12 +545,10 @@ void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
             && _layout->indexOf(_stackWidget) != StackIndexWithTabBottom )
     {
         _layout->removeItem(_tabBarLayout);
-        _layout->removeItem(_tabBarSpacer);
         _layout->removeWidget(searchBar());
 
         _layout->insertWidget(-1,searchBar());
         _layout->insertLayout(-1,_tabBarLayout);
-        _layout->insertItemAt(-1,_tabBarSpacer);
         _tabBar->setShape(QTabBar::RoundedSouth);
     }
 }
