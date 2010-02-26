@@ -98,6 +98,7 @@ void Application::listAvailableProfiles()
         QFileInfo info(iter.next());
         std::cout << info.baseName().toLocal8Bit().data() << std::endl;
     }
+    quit();
 }
 
 int Application::newInstance()
