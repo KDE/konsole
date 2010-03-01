@@ -619,6 +619,7 @@ void Session::updateTerminalSize()
         {
             minLines = (minLines == -1) ? view->lines() : qMin( minLines , view->lines() );
             minColumns = (minColumns == -1) ? view->columns() : qMin( minColumns , view->columns() );
+            view->processFilters();
         }
     }
 

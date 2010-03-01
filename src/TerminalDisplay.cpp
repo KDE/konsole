@@ -1598,10 +1598,6 @@ void TerminalDisplay::updateImageSize()
   if ( _resizing )
   {
       showResizeNotification();
-      /* This is causing the ASSERT in CharacterColor.h line 281 to fail
-       * BUG: 228443
-      processFilters(); // Obtain new hotspot indicies
-      */
     emit changedContentSizeSignal(_contentHeight, _contentWidth); // expose resizeEvent
   }
   
