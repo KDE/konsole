@@ -73,8 +73,9 @@ void DBusTest::initTestCase()
                 _interfaceName = service;
     }
 
-    if (_interfaceName.isEmpty())
-        kFatal() << "No services matching " << interfaceName << " were found.";
+    if (_interfaceName.isEmpty()) {
+        kFatal() << "This test will only work in a Konsole window with a new PID.  A new Konsole PID can't be found.";
+    }
     //kDebug()<< "Using service: " + _interfaceName.toLatin1();
 
     _iface = new QDBusInterface(_interfaceName,
