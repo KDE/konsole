@@ -26,7 +26,7 @@
 #include <QtDBus/QDBusReply>
 #include <QTextCodec>
 #include <KDebug>
-#include <KToolInvocation>
+#include <KProcess>
 
 #include <unistd.h>
 
