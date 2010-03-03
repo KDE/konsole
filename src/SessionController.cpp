@@ -540,9 +540,10 @@ void SessionController::setupActions()
     action->setIcon( KIcon("document-properties") );
     connect( action , SIGNAL(triggered()) , this , SLOT(editCurrentProfile()) );
 
-    _changeProfileMenu = new KMenu(i18n("Change Profile"),_view);
-    collection->addAction("change-profile",_changeProfileMenu->menuAction());
-    connect( _changeProfileMenu , SIGNAL(aboutToShow()) , this , SLOT(prepareChangeProfileMenu()) );
+    _changeProfileMenu = new KActionMenu(i18n("Change Profile"), _view);
+    collection->addAction("change-profile", _changeProfileMenu);
+    connect( _changeProfileMenu->menu() , SIGNAL(aboutToShow()) , this , SLOT(prepareChangeProfileMenu()) );
+
 }
 void SessionController::changeProfile(Profile::Ptr profile)
 {
@@ -550,15 +551,15 @@ void SessionController::changeProfile(Profile::Ptr profile)
 }
 void SessionController::prepareChangeProfileMenu()
 {
-    if ( _changeProfileMenu->isEmpty() )
+    if ( _changeProfileMenu->menu()->isEmpty() )
     {
         _profileList = new ProfileList(false,this);
         connect( _profileList , SIGNAL(profileSelected(Profile::Ptr)) ,
                 this , SLOT(changeProfile(Profile::Ptr)) );
     }
 
-    _changeProfileMenu->clear();
-    _changeProfileMenu->addActions(_profileList->actions());
+    _changeProfileMenu->menu()->clear();
+    _changeProfileMenu->menu()->addActions(_profileList->actions());
 }
 void SessionController::updateCodecAction()
 {

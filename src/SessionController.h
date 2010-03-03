@@ -31,6 +31,7 @@
 
 // KDE
 #include <KActionCollection>
+#include <KActionMenu>
 #include <KIcon>
 #include <KXMLGUIClient>
 
@@ -260,7 +261,7 @@ private:
 
     KCodecAction* _codecAction;
 
-    KMenu* _changeProfileMenu;
+    KActionMenu* _changeProfileMenu;
 
     bool _listenForScreenWindowUpdates;
     bool _preventClose;
