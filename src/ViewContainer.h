@@ -477,38 +477,5 @@ private:
     QPointer<QStackedWidget> _stackWidget;
 };
 
-/**
- * A view container which uses a list instead of tabs to provide navigation
- * between sessions.
- */
-class ListViewContainer : public ViewContainer
-{
-Q_OBJECT
-
-public:
-    ListViewContainer(NavigationPosition position , QObject* parent);
-    virtual ~ListViewContainer();
-
-    virtual QWidget* containerWidget() const;
-    virtual QWidget* activeView() const;
-    virtual void setActiveView(QWidget* view);
-
-protected:
-    virtual void addViewWidget( QWidget* view , int index);
-    virtual void removeViewWidget( QWidget* view );
-
-private slots:
-    void rowChanged( int row );
-    void updateTitle( ViewProperties* );
-    void updateIcon( ViewProperties* );
-
-private:
-    QBrush randomItemBackground(int randomIndex);
-
-    QPointer<QStackedWidget> _stackWidget;
-    QSplitter* _splitter;
-    QListWidget* _listWidget;
-};
-
 }
 #endif //VIEWCONTAINER_H
