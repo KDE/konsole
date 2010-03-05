@@ -19,6 +19,7 @@
 
 // Own
 #include "ProcessInfo.h"
+#include "config-konsole.h"
 
 // Unix
 #include <sys/socket.h>
@@ -42,8 +43,12 @@
 
 #if defined(Q_OS_MAC)
 #include <sys/sysctl.h>
+#ifdef HAVE_SYS_PROC_INFO_H
 #include <sys/proc_info.h>
+#endif
+#ifdef HAVE_SYS_PROC_H
 #include <sys/proc.h>
+#endif
 #include <kde_file.h>
 #endif
 
