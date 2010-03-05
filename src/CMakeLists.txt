@@ -4,6 +4,10 @@ macro_optional_find_package(XKB)
 macro_bool_to_01(X11_Xrender_FOUND HAVE_XRENDER)
 macro_log_feature(XKB_FOUND "XKB" "X keyboard extension" "http://www.x.org" FALSE "" "Gives Konsole better keyboard support.")
 
+include(CheckIncludeFiles)
+check_include_files("sys/proc.h"      HAVE_SYS_PROC_H)
+check_include_files("sys/proc_info.h" HAVE_SYS_PROC_INFO_H)
+
 configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h )
 
 ### Tests
