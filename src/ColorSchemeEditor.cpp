@@ -120,18 +120,18 @@ void ColorSchemeEditor::editColorItem( QTableWidgetItem* item )
     if ( item->column() != 1 ) 
         return;
 
-    KColorDialog* dialog = new KColorDialog(this);
-    dialog->setColor( item->background().color() );
+    QColor color = item->background().color();
+    int result = KColorDialog::getColor( color );
+    if ( result == KColorDialog::Accepted ) {
+        item->setBackground( color );
 
-    dialog->exec();
+        ColorEntry entry( _colors->colorEntry(item->row()) );
+        entry.color = color;
+        _colors->setColorTableEntry( item->row(), entry ); 
+    
+        emit colorsChanged( _colors );
 
-    item->setBackground( dialog->color() );
-
-    ColorEntry entry(_colors->colorEntry(item->row()));
-    entry.color = dialog->color();
-    _colors->setColorTableEntry(item->row(),entry); 
-
-    emit colorsChanged(_colors);
+    }
 }
 void ColorSchemeEditor::setDescription(const QString& text)
 {
