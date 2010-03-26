@@ -62,7 +62,6 @@
 #include <KFileDialog>
 #include <KIO/Job>
 #include <KJob>
-#include <KMessageBox>
 #include "TerminalCharacterDecoder.h"
 
 
