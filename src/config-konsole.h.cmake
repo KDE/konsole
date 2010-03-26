@@ -12,3 +12,6 @@
 
 /* Defined if you have sys/proc_info.h */
 #cmakedefine HAVE_SYS_PROC_INFO_H 1
+
+/* Define if you have the do NOT want the XKB extension */
+#cmakedefine AVOID_XKB 1
