@@ -19,7 +19,7 @@
 
 // Own
 #include "ProcessInfo.h"
-#include "config-konsole.h"
+#include <config-konsole.h>
 
 // Unix
 #include <sys/socket.h>

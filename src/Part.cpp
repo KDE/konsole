@@ -46,8 +46,7 @@
 #include "ViewManager.h"
 #include "MainWindow.h"
 
-// X
-#include "config-konsole.h"
+#include <config-konsole.h>
 
 extern "C"
 {
