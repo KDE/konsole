@@ -493,7 +493,7 @@ public:
    static KeyboardTranslatorManager* instance();
 
 private:
-    static const char* const defaultTranslatorText;
+    static const QByteArray defaultTranslatorText;
     
     void findTranslators(); // locate the available translators
     KeyboardTranslator* loadTranslator(const QString& name); // loads the translator 
