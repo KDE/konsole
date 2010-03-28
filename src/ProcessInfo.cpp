@@ -53,7 +53,7 @@
 #endif
 
 #if defined(Q_OS_FREEBSD)
-#include <sys/sysctl.h>
+#include <sys/sysctl.h> //krazy:exclude=includes
 #include <sys/types.h>
 #include <sys/user.h>
 #include <libutil.h>

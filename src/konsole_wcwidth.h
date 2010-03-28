@@ -3,8 +3,8 @@
 /* Markus Kuhn -- 2001-01-12 -- public domain */
 /* Adaptions for KDE by Waldo Bastian <bastian@kde.org> */
 
-#ifndef    _KONSOLE_WCWIDTH_H_
-#define    _KONSOLE_WCWIDTH_H_
+#ifndef KONSOLE_WCWIDTH_H
+#define KONSOLE_WCWIDTH_H
 
 // Qt
 #include <QtCore/QBool>
