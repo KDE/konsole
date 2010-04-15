@@ -773,6 +773,9 @@ void SessionController::copyInputToSelectedTabs()
 
 void SessionController::copyInputToNone()
 {
+    if (!_copyToGroup)      // No 'Copy To' is active
+        return;
+
     QSet<Session*> group =
        QSet<Session*>::fromList(SessionManager::instance()->sessions());
     for(QSet<Session*>::iterator iterator = group.begin();
