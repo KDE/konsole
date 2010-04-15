@@ -789,14 +789,17 @@ private:
 
     virtual bool readArguments(int pid)
     {
+        Q_UNUSED(pid);
         return false;
     }
     virtual bool readCurrentDir(int pid)
     {
+        Q_UNUSED(pid);
         return false;
     }
     virtual bool readEnvironment(int pid)
     {
+        Q_UNUSED(pid);
         return false;
     }
 } ;
