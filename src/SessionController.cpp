@@ -1396,11 +1396,11 @@ void SaveHistoryTask::jobResult(KJob* job)
         KMessageBox::sorry( 0 , i18n("A problem occurred when saving the output.\n%1",job->errorString()) );
     }
 
-    SaveJob& info = _jobSession[job];
+    TerminalCharacterDecoder * decoder = _jobSession[job].decoder;
 
     _jobSession.remove(job);
 
-    delete info.decoder;
+    delete decoder;
 
     // notify the world that the task is done
     emit completed(true);
