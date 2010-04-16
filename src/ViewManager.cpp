@@ -955,6 +955,15 @@ void ViewManager::restoreSessions(const KConfigGroup& group)
         _viewSplitter->activeContainer()->setActiveView(display);
         display->setFocus(Qt::OtherFocusReason);
     }
+
+    if (ids.isEmpty()) // Session file is unusable, start default Profile
+    {
+        Profile::Ptr profile = SessionManager::instance()->defaultProfile();
+        Session* session = SessionManager::instance()->createSession(profile);
+        createView(session);
+        if (!session->isRunning())
+            session->run();
+    }
 }
 
 uint qHash(QPointer<TerminalDisplay> display)
