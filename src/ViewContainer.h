@@ -440,12 +440,15 @@ private slots:
     void wheelScrolled(int delta);
    
     void tabDoubleClicked(int index);
-
+    void openTabContextMenu(int index, const QPoint& point);
+    void tabContextMenuCloseTab();
+    void tabContextMenuRenameTab();
     void startTabDrag(int index);
 private:
     void dynamicTabBarVisibility();
     void setTabBarVisible(bool visible);
     void setTabActivity(int index,bool activity);
+    void renameTab(int index);
 
     ViewContainerTabBar* _tabBar;
     QPointer<QStackedWidget> _stackWidget;
@@ -454,6 +457,8 @@ private:
     QHBoxLayout* _tabBarLayout;
     QToolButton* _newTabButton;
     QToolButton* _closeTabButton;
+    int _contextMenuTabIndex;
+    KMenu* _contextPopupMenu;
 
 };
 

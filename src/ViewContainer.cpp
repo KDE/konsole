@@ -424,6 +424,7 @@ QPixmap ViewContainerTabBar::dragDropPixmap(int tab)
 }
 TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* parent) 
 : ViewContainer(position,parent)
+   , _contextMenuTabIndex(0)
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
@@ -450,6 +451,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
     connect( _tabBar , SIGNAL(closeRequest(int)) , this , SLOT(closeTab(int)) );
     connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );
+    connect( _tabBar, SIGNAL(contextMenu(int, const QPoint&)), this,
+            SLOT(openTabContextMenu(int, const QPoint&)) );
 
     connect( _newTabButton , SIGNAL(clicked()) , this , SIGNAL(newViewRequest()) );
     connect( _closeTabButton , SIGNAL(clicked()) , this , SLOT(closeCurrentTab()) );
@@ -482,6 +485,17 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
         Q_ASSERT(false); // position not supported
 
     _containerWidget->setLayout(_layout);
+ 
+    _contextPopupMenu = new KMenu(_tabBar);
+
+    _contextPopupMenu->addAction(KIcon(),
+        i18nc("@action:inmenu", "&Rename Tab..."), this,
+        SLOT(tabContextMenuRenameTab()));
+
+    _contextPopupMenu->addAction(KIcon("tab-close"),
+        i18nc("@action:inmenu", "&Close Tab"), this,
+        SLOT(tabContextMenuCloseTab()));
+
 }
 void TabbedViewContainer::setNewViewMenu(QMenu* menu)
 {
@@ -610,10 +624,34 @@ void TabbedViewContainer::startTabDrag(int tab)
         removeView(view);
     }
 }
-void TabbedViewContainer::tabDoubleClicked(int tab)
+
+void TabbedViewContainer::tabDoubleClicked(int index)
 {
-    viewProperties( views()[tab] )->rename();
+    renameTab(index);
 }
+
+void TabbedViewContainer::renameTab(int index)
+{
+    viewProperties(views()[index])->rename();
+}
+
+void TabbedViewContainer::openTabContextMenu(int index, const QPoint& pos)
+{
+    _contextMenuTabIndex = index;
+
+    _contextPopupMenu->exec(pos);
+}
+
+void TabbedViewContainer::tabContextMenuCloseTab()
+{
+    closeTab(_contextMenuTabIndex);
+}
+
+void TabbedViewContainer::tabContextMenuRenameTab()
+{
+    renameTab(_contextMenuTabIndex);
+}
+
 void TabbedViewContainer::moveViewWidget( int fromIndex , int toIndex )
 {
     QString text = _tabBar->tabText(fromIndex);
