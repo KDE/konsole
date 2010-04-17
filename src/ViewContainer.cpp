@@ -416,8 +416,6 @@ QSize ViewContainerTabBar::tabSizeHint(int index) const
 
     int tabTextWidth = fontMetrics().width(tabText(index));
     // qBound ( minimum, value, max )
-    kDebug()<<minimumTabWidth<<"; "<<tabTextWidth<<"; "<< tabMaxWidth;
-    kDebug()<<qBound(minimumTabWidth, tabTextWidth, tabMaxWidth);
     QSize size (qBound(minimumTabWidth, tabTextWidth, tabMaxWidth),
                 QTabBar::tabSizeHint(index).height());
     return size;
