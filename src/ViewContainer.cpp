@@ -260,6 +260,7 @@ ViewContainerTabBar::ViewContainerTabBar(QWidget* parent,TabbedViewContainer* co
     , _dropIndicatorIndex(-1)
     , _drawIndicatorDisabled(false)
 {
+    setElideMode(Qt::ElideLeft);
 }
 void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 {
@@ -395,9 +396,31 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
         event->ignore();
 }
 
+/* Try to provide a reasonable tab width:
+ * If there are less than 5 tabs, let the tabs fill out the tabbar.
+ * Otherwise, check the tab text size and the minimumTabWidth value.
+ * The minimumTabWidth is to prevent the tabs from getting too
+ * small such that no scroll indicators will appear.
+*/
 QSize ViewContainerTabBar::tabSizeHint(int index) const
 {
-     return QTabBar::tabSizeHint(index);
+    const int fillTabCount = 5;
+    const int minimumTabWidth = 150; // Arbitrary value
+    int tabBarWidth = rect().width();
+    int tabCount = count();
+    int tabMaxWidth;
+    if (tabCount <= fillTabCount)
+        tabMaxWidth = tabBarWidth / (tabCount + 0.5);
+    else
+        tabMaxWidth = tabBarWidth / (fillTabCount + 0.5);
+
+    int tabTextWidth = fontMetrics().width(tabText(index));
+    // qBound ( minimum, value, max )
+    kDebug()<<minimumTabWidth<<"; "<<tabTextWidth<<"; "<< tabMaxWidth;
+    kDebug()<<qBound(minimumTabWidth, tabTextWidth, tabMaxWidth);
+    QSize size (qBound(minimumTabWidth, tabTextWidth, tabMaxWidth),
+                QTabBar::tabSizeHint(index).height());
+    return size;
 }
 QPixmap ViewContainerTabBar::dragDropPixmap(int tab) 
 {
@@ -766,22 +789,11 @@ void TabbedViewContainer::updateActivity(ViewProperties* item)
 
 void TabbedViewContainer::updateTitle(ViewProperties* item)
 {
-    // prevent tab titles from becoming overly-long as this limits the number
-    // of tabs which can fit in the tab bar.  
-    //
-    // if the view's title is overly long then trim it and select the 
-    // right-most 20 characters (assuming they contain the most useful
-    // information) and insert an elide at the front
-    const int MAX_TAB_TEXT_LENGTH = 20;
-
     QListIterator<QWidget*> iter(widgetsForItem(item));
     while ( iter.hasNext() )
     {
         const int index = _stackWidget->indexOf( iter.next() );
-
         QString tabText = item->title();
-        if (tabText.count() > MAX_TAB_TEXT_LENGTH)
-            tabText = tabText.right(MAX_TAB_TEXT_LENGTH).prepend("...");
 
         _tabBar->setTabText( index , tabText );
     }
