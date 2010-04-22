@@ -454,9 +454,9 @@ void SessionController::setupActions()
     _copyToNoneAction->setChecked(true);
     connect( _copyToNoneAction , SIGNAL(triggered()) , this , SLOT(copyInputToNone()) );
 
-    // Clear+Reset
+    // Clear and Reset
     action = collection->addAction("clear-and-reset");
-    action->setText( i18n("Clear && Reset") );
+    action->setText( i18n("Clear and Reset") );
     action->setIcon( KIcon("edit-clear-history") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
 
@@ -529,7 +529,7 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(showHistoryOptions()) );
 
     action = collection->addAction("clear-history-and-reset");
-    action->setText( i18n("Clear Scrollback && Reset") );
+    action->setText( i18n("Clear Scrollback and Reset") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_X) );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 
