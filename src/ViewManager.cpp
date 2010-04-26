@@ -314,22 +314,30 @@ void ViewManager::previousView()
 
     container->activatePreviousView();
 }
+
 void ViewManager::detachActiveView()
 {
     // find the currently active view and remove it from its container 
     ViewContainer* container = _viewSplitter->activeContainer();
-    TerminalDisplay* activeView = dynamic_cast<TerminalDisplay*>(container->activeView());
 
-    if (!activeView)
+    detachView(container, container->activeView());
+}
+
+void ViewManager::detachView(ViewContainer* container, QWidget* widgetView)
+{
+    TerminalDisplay * viewToDetach = 
+        dynamic_cast<TerminalDisplay*>(widgetView);
+
+    if (!viewToDetach)
         return;
 
-    emit viewDetached(_sessionMap[activeView]);
+    emit viewDetached(_sessionMap[viewToDetach]);
     
-    _sessionMap.remove(activeView);
+    _sessionMap.remove(viewToDetach);
 
     // remove the view from this window
-    container->removeView(activeView);
-    activeView->deleteLater();
+    container->removeView(viewToDetach);
+    viewToDetach->deleteLater();
 
     // if the container from which the view was removed is now empty then it can be deleted,
     // unless it is the only container in the window, in which case it is left empty
@@ -614,7 +622,16 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
     switch ( _navigationMethod )
     {
         case TabbedNavigation:    
-            container = new TabbedViewContainer(position,_viewSplitter);
+            {
+                container =
+                    new TabbedViewContainer(position,_viewSplitter);
+
+                connect(container,
+                    SIGNAL(detachTab(ViewContainer*, QWidget*)),
+                    this,
+                    SLOT(detachView(ViewContainer*, QWidget*))
+                    );
+            }
             break;
         case NoNavigation:
         default:

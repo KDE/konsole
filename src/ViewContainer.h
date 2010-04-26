@@ -443,7 +443,12 @@ private slots:
     void openTabContextMenu(int index, const QPoint& point);
     void tabContextMenuCloseTab();
     void tabContextMenuRenameTab();
+    void tabContextMenuDetachTab();
     void startTabDrag(int index);
+
+signals:
+    void detachTab(ViewContainer * self, QWidget * activeView);
+
 private:
     void dynamicTabBarVisibility();
     void setTabBarVisible(bool visible);

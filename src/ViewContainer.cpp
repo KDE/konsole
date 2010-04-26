@@ -509,6 +509,10 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
  
     _contextPopupMenu = new KMenu(_tabBar);
 
+    _contextPopupMenu->addAction(KIcon("tab-detach"),
+        i18nc("@action:inmenu", "&Detach Tab"), this,
+        SLOT(tabContextMenuDetachTab()));
+
     _contextPopupMenu->addAction(KIcon(),
         i18nc("@action:inmenu", "&Rename Tab..."), this,
         SLOT(tabContextMenuRenameTab()));
@@ -666,6 +670,11 @@ void TabbedViewContainer::openTabContextMenu(int index, const QPoint& pos)
 void TabbedViewContainer::tabContextMenuCloseTab()
 {
     closeTab(_contextMenuTabIndex);
+}
+
+void TabbedViewContainer::tabContextMenuDetachTab()
+{
+    emit detachTab(this, _stackWidget->widget(_contextMenuTabIndex));
 }
 
 void TabbedViewContainer::tabContextMenuRenameTab()
