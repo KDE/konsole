@@ -205,11 +205,11 @@ void Screen::deleteChars(int n)
     if ( cuX >= screenLines[cuY].count() )
         return;
 
-    if ( cuX+n >= screenLines[cuY].count() ) 
-        n = screenLines[cuY].count() - 1 - cuX;
+    if ( cuX+n > screenLines[cuY].count() ) 
+        n = screenLines[cuY].count() - cuX;
 
     Q_ASSERT( n >= 0 );
-    Q_ASSERT( cuX+n < screenLines[cuY].count() );
+    Q_ASSERT( cuX+n <= screenLines[cuY].count() );
 
     screenLines[cuY].remove(cuX,n);
 }
