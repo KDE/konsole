@@ -43,6 +43,8 @@
 #include <KWindowSystem>
 #include <KTextEdit>
 
+#include <cmath>
+
 // Konsole
 #include "ColorScheme.h"
 #include "ColorSchemeEditor.h"
@@ -459,13 +461,12 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
     bool antialias = info->property<bool>(Profile::AntiAliasFonts);
 
     QFont font = info->font();
-    if (!antialias)
-        font.setStyleStrategy(QFont::NoAntialias);
+    font.setStyleStrategy(antialias ? QFont::PreferAntialias : QFont::NoAntialias);
 
     _ui->fontPreviewLabel->installEventFilter(this);
     _ui->fontPreviewLabel->setFont(font);
-    _ui->fontSizeSlider->setValue( font.pointSize() );
-    _ui->fontSizeSlider->setMinimum( KGlobalSettings::smallestReadableFont().pointSize() );
+    setFontSliderRange(font);
+    setFontSliderValue(font);
 
     connect( _ui->fontSizeSlider , SIGNAL(valueChanged(int)) , this ,
              SLOT(setFontSize(int)) );
@@ -481,8 +482,11 @@ void EditProfileDialog::setAntialiasText(bool enable)
 {
     _tempProfile->setProperty(Profile::AntiAliasFonts,enable);
 
+    QFont font = _ui->fontPreviewLabel->font();
+    font.setStyleStrategy(enable ? QFont::PreferAntialias : QFont::NoAntialias);
+
     // update preview to reflect text smoothing state
-    fontSelected(_ui->fontPreviewLabel->font());
+    fontSelected(font);
 }
 void EditProfileDialog::colorSchemeAnimationUpdate()
 {
@@ -593,7 +597,9 @@ bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
     if ( watched == _ui->fontPreviewLabel && event->type() == QEvent::FontChange )
     {
         const QFont& labelFont = _ui->fontPreviewLabel->font();
-        _ui->fontPreviewLabel->setText(i18n("%1, size %2",labelFont.family(),labelFont.pointSize()));
+        qreal size = labelFont.pointSizeF();
+        _ui->fontPreviewLabel->setText(i18n("%1, size %2", labelFont.family(),
+                    KGlobal::locale()->formatNumber(size, size == floor(size) ? 0 : 1)));
     }
 
     return KDialog::eventFilter(watched,event);
@@ -1073,19 +1079,8 @@ void EditProfileDialog::fontSelected(const QFont& font)
 {
     QFont previewFont = font;
 
-   QSlider* slider = _ui->fontSizeSlider;
-   _ui->fontSizeSlider->setRange( qMin(slider->minimum(),font.pointSize()) ,
-                                  qMax(slider->maximum(),font.pointSize()) );
-   _ui->fontSizeSlider->setValue(font.pointSize());
-
-    
-   QFont::StyleStrategy strategy;
-   if (_tempProfile->property<bool>(Profile::AntiAliasFonts))
-           strategy = QFont::PreferAntialias;
-   else
-           strategy = QFont::NoAntialias;
-
-   previewFont.setStyleStrategy(strategy);
+   setFontSliderRange(font);
+   setFontSliderValue(font);
 
    _ui->fontPreviewLabel->setFont(previewFont);
    
@@ -1108,13 +1103,27 @@ void EditProfileDialog::showFontDialog()
 void EditProfileDialog::setFontSize(int pointSize)
 {
     QFont newFont = _ui->fontPreviewLabel->font();
-    newFont.setPointSize(pointSize);
+    newFont.setPointSizeF(pointSize / 10.0);
     _ui->fontPreviewLabel->setFont(newFont);
 
     _tempProfile->setProperty(Profile::Font,newFont);
 
     preview(Profile::Font,newFont);
 }
+
+void EditProfileDialog::setFontSliderRange(const QFont& font)
+{
+    QSlider* slider = _ui->fontSizeSlider;
+    slider->setRange( qMin(slider->minimum(), qRound(font.pointSizeF() * 10)),
+                      qMax(slider->maximum(), 2 * qRound(font.pointSize() * 10)) );
+
+}
+
+void EditProfileDialog::setFontSliderValue(const QFont& font)
+{
+   _ui->fontSizeSlider->setValue(qRound(font.pointSize() * 10));
+}
+
 ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* parent)
  : QAbstractItemDelegate(parent)
 {

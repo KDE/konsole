@@ -1032,17 +1032,17 @@ void SessionController::clearHistoryAndReset()
 void SessionController::increaseTextSize()
 {
     QFont font = _view->getVTFont();
-    font.setPointSize(font.pointSize()+1);
+    font.setPointSizeF(font.pointSizeF()+1);
     _view->setVTFont(font);
 
     //TODO - Save this setting as a session default
 }
 void SessionController::decreaseTextSize()
 {
-    static const int MinimumFontSize = 6;
+    static const qreal MinimumFontSize = 6;
 
     QFont font = _view->getVTFont();
-    font.setPointSize( qMax(font.pointSize()-1,MinimumFontSize) );
+    font.setPointSizeF( qMax(font.pointSizeF()-1,MinimumFontSize) );
     _view->setVTFont(font);
 
     //TODO - Save this setting as a session default
