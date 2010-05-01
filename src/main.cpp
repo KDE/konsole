@@ -95,6 +95,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
                                     " and bring to the front when the F12"
                                     " key is pressed"));
     options.add("new-tab",ki18n("Create a new tab in an existing window rather than creating a new window"));
+    options.add("tabs-from-file <file>", ki18n("Create tabs as specified in given tabs configuration file"));
     options.add("workdir <dir>",   ki18n("Set the initial working directory of the new tab "
                                            "or window to 'dir'"));
     options.add("notransparency",ki18n("Disable transparent backgrounds, even if the system supports them."));

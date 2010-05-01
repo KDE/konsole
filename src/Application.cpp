@@ -124,10 +124,19 @@ int Application::newInstance()
         // default profile to be changed
         processProfileChangeArgs(args,window);
 
-        // create new session
-        Session* session = createSession( window->defaultProfile() , QString() , window->viewManager() );
-        if ( !args->isSet("close") )
-            session->setAutoClose(false);
+        if ( !args->isSet("tabs-from-file") ) {
+            // create new session
+            Session* session = createSession(window->defaultProfile(),
+                                             QString(),
+                                             window->viewManager());
+            if ( !args->isSet("close") ) {
+                session->setAutoClose(false);
+            }
+        }
+        else {
+            // create new session(s) as described in file
+            processTabsFromFileArgs(args, window);
+        }
 
         // if the background-mode argument is supplied, start the background session
         // ( or bring to the front if it already exists )
@@ -155,6 +164,107 @@ int Application::newInstance()
     firstInstance = false;
     args->clear();
     return 0;
+}
+
+/* Documentation for tab file:
+ * ;; is the token separator
+ * # at the beginning of line results in line being ignored
+ * tokens are title:, command:, profile: (not used currently)
+ * Note that the title is static and the tab will close when the 
+ * command is complete (do not use --noclose).  You can start new tabs.
+ * Examples:
+title: This is the title;; command: ssh jupiter
+title: Top this!;; command: top
+#title: This is commented out;; command: ssh jupiter
+command: ssh  earth
+*/
+void Application::processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window)
+{
+    // Open tab configuration file
+    const QString tabsFileName(args->getOption("tabs-from-file"));
+    QFile tabsFile(tabsFileName);
+    if(!tabsFile.open(QFile::ReadOnly)) {
+        kWarning() << "ERROR: Cannot open tabs file "
+                   << tabsFileName.toLocal8Bit().data();
+        quit();
+    }
+    
+    unsigned int sessions = 0;
+    while (!tabsFile.atEnd()) {
+        QString lineString(tabsFile.readLine());
+        if ((lineString.isEmpty()) || (lineString[0] == '#'))
+            continue;
+
+        QHash<QString, QString> lineTokens;
+        QStringList lineParts = lineString.split(";;", QString::SkipEmptyParts);
+
+        for (int i = 0; i < lineParts.size(); ++i) {
+            QString key = lineParts.at(i).section(':', 0, 0).trimmed().toLower();
+            QString value = lineParts.at(i).section(':', 1, 1).trimmed();
+            lineTokens[key] = value;
+
+        }
+        // command: is the only token required
+        if (lineTokens.contains("command")) {
+            createTabFromArgs(args, window, lineTokens);
+            sessions++;
+        } else {
+            kWarning() << "Tab file line must have the 'command:' entry.";
+        }
+    }
+    tabsFile.close();
+
+    if (sessions < 1) {
+        kWarning() << "No valid lines found in "
+                   << tabsFileName.toLocal8Bit().data();
+       quit();
+    }
+}
+
+void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, const QHash<QString, QString>& tokens)
+{
+    QString title = tokens["title"];
+    QString command = tokens["command"];
+    QString profile = tokens["profile"]; // currently not used
+
+    // TODO: A lot of duplicate code below
+
+    // Get the default profile
+    Profile::Ptr defaultProfile = window->defaultProfile();
+    if (!defaultProfile) {
+        defaultProfile = SessionManager::instance()->defaultProfile();
+    }
+
+    // Create profile setting, with command and workdir
+    Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile));
+    newProfile->setHidden(true);
+    newProfile->setProperty(Profile::Command,   command);
+    newProfile->setProperty(Profile::Arguments, command.split(" "));
+    if(args->isSet("workdir")) {
+        newProfile->setProperty(Profile::Directory,args->getOption("workdir"));
+    }
+    if(!newProfile->isEmpty()) {
+        window->setDefaultProfile(newProfile); 
+    }    
+                    
+    // Create the new session
+    Session* session = createSession(window->defaultProfile(), QString(), window->viewManager());
+    session->setTabTitleFormat(Session::LocalTabTitle, title);
+    session->setTabTitleFormat(Session::RemoteTabTitle, title);
+    session->setTitle(Session::DisplayedTitleRole, title);   // Ensure that new title is displayed
+    if ( !args->isSet("close") ) {
+        session->setAutoClose(false);
+    }
+    if (!window->testAttribute(Qt::WA_Resized)) {
+        window->resize(window->sizeHint());
+    }
+                    
+    // Reset the profile to default. Otherwise, the next manually
+    // created tab would have the command above!
+    newProfile = Profile::Ptr(new Profile(defaultProfile));
+    newProfile->setHidden(true);
+    window->setDefaultProfile(newProfile); 
+                
 }
 
 MainWindow* Application::processWindowArgs(KCmdLineArgs* args)

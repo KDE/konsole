@@ -85,6 +85,8 @@ private:
     MainWindow* processWindowArgs(KCmdLineArgs* args);
     void processProfileSelectArgs(KCmdLineArgs* args,MainWindow* window);
     void processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window);
+    void processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window);
+    void createTabFromArgs(KCmdLineArgs* args, MainWindow* window, const QHash<QString, QString>&);
 
     KCmdLineArgs*   _arguments;
     ProfileList*    _sessionList;
