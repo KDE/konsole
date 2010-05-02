@@ -1,13 +1,13 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsolepart" version="2">
+<kpartgui name="konsolepart" version="3">
     <Menu name="session-popup-menu">
-        <Action name="copy"/>
-        <Action name="paste"/>
+        <Action name="edit_copy"/>
+        <Action name="edit_paste"/>
         <Menu name="history"><text>S&amp;crollback</text>
-            <Action name="save-history" group="session-history-operations"/>
+            <Action name="file_save_as" group="session-history-operations"/>
             <Separator group="session-history-operations"/>
-            <Action name="history-options" group="session-history-operations"/>
+            <Action name="configure-history" group="session-history-operations"/>
             <Separator group="session-history-operations"/>
             <Action name="clear-history" group="session-history-operations"/>
             <Action name="clear-history-and-reset" group="session-history-operations"/>

@@ -1,48 +1,44 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="9">
+<kpartgui name="session" version="10">
     <MenuBar>
         <Menu name="file">
-            <Action name="close-session" group="session-operations"/>
+            <Action name="close-session" group="session-tab-operations"/>
+            <Action name="file_save_as" group="session-operations"/>
+            <Separator group="session-operations"/>
             <Action name="open-browser" group="session-operations"/>
         </Menu>
         <Menu name="edit">
-            <Action name="copy" group="session-edit-operations"/>
-            <Action name="paste" group="session-edit-operations"/>
-            <Action name="rename-session" group="session-edit-operations"/>
+            <Action name="edit_copy" group="session-edit-operations"/>
+            <Action name="edit_paste" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>
             <Menu name="edit-copy-input-to" group="session-edit-operations"><text>Copy Input To</text>
                 <Action name="copy-input-to-all-tabs"/>
                 <Action name="copy-input-to-selected-tabs"/>
                 <Action name="copy-input-to-none"/>
             </Menu>
+            <Action name="rename-session" group="session-edit-operations"/>
             <Action name="zmodem-upload" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>
-            <Action name="clear" group="session-edit-operations"/>
-            <Action name="clear-and-reset" group="session-edit-operations"/>
-        </Menu>
-        <Menu name="history">
-            <Action name="search-history" group="session-history-operations"/>
-            <Action name="find-next" group="session-history-operations"/>
-            <Action name="find-previous" group="session-history-operations"/>
-            <Action name="save-history" group="session-history-operations"/>
-            <Separator group="session-history-operations"/>
-            <Action name="history-options" group="session-history-operations"/>
-            <Separator group="session-history-operations"/>
-            <Action name="clear-history" group="session-history-operations"/>
-            <Action name="clear-history-and-reset" group="session-history-operations"/>
+            <Action name="edit_find" group="session-edit-operations"/>
+            <Action name="edit_find_next" group="session-edit-operations"/>
+            <Action name="edit_find_prev" group="session-edit-operations"/>
         </Menu>
         <Menu name="view">
             <Action name="monitor-silence" group="session-view-operations"/>
             <Action name="monitor-activity" group="session-view-operations"/>
             <Separator group="session-view-operations"/>
             <Action name="character-encoding"  group="session-view-operations"/>
-            <Action name="increase-text-size"  group="session-view-operations"/>
-            <Action name="decrease-text-size"  group="session-view-operations"/>
+            <Action name="view_zoom_in"  group="session-view-operations"/>
+            <Action name="view_zoom_out"  group="session-view-operations"/>
+            <Separator group="session-view-operations"/>
+            <Action name="clear" group="session-view-operations"/>
+            <Action name="clear-and-reset" group="session-view-operations"/>
+            <Action name="clear-history" group="session-view-operations"/>
+            <Action name="clear-history-and-reset" group="session-view-operations"/>
         </Menu>
         <Menu name="settings">
-            <Action name="change-profile" group="session-settings"/>
-            <Action name="edit-current-profile" group="session-settings"/>
+            <Action name="configure-history"/> 
         </Menu>
         <!--<Menu name="debug"><text>Debug</text>
             <Action name="debug-process"/>
@@ -56,6 +52,7 @@
         <Separator/>
         <Action name="change-profile"/>
         <Action name="edit-current-profile"/>
+        <Action name="configure-history"/> 
         <Separator/>
         <Action name="show-menubar"/>
         <Action name="character-encoding"/>

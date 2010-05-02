@@ -113,13 +113,13 @@ Part::~Part()
 }
 void Part::createGlobalActions()
 {
-    _manageProfilesAction = new QAction(i18n("Manage Profiles..."),this);
+    _manageProfilesAction = new QAction(i18n("Configure Profiles..."),this);
     connect(_manageProfilesAction,SIGNAL(triggered()),this,SLOT(showManageProfilesDialog()));
 }
 void Part::setupActionsForSession(SessionController* session)
 {
     KActionCollection* collection = session->actionCollection();
-    collection->addAction("manage-profiles",_manageProfilesAction);
+    collection->addAction("configure-profiles",_manageProfilesAction);
 }
 bool Part::openFile()
 {

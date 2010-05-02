@@ -230,11 +230,14 @@ void MainWindow::setupActions()
     KActionCollection* collection = actionCollection();
 
     // File Menu
-    KAction* newTabAction = collection->addAction("new-tab");
-    newTabAction->setIcon( KIcon("tab-new") );
-    newTabAction->setText( i18n("New &Tab") );
-    newTabAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
-    connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
+    _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18n("New &Tab"), collection);
+    collection->addAction("new-tab", _newTabMenuAction);
+
+    _defaultProfileAction = collection->addAction("default-profile");
+    _defaultProfileAction->setIcon(KIcon("utilities-terminal"));
+    _defaultProfileAction->setText(i18n("&Default Profile"));
+    _defaultProfileAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N));
+    connect(_defaultProfileAction, SIGNAL(triggered()), this, SLOT(newTab()));
 
     KAction* newWindowAction = collection->addAction("new-window");
     newWindowAction->setIcon( KIcon("window-new") );
@@ -286,8 +289,8 @@ void MainWindow::setupActions()
     KStandardAction::configureNotifications( this , SLOT(configureNotifications()) , collection  );
     KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
 
-    KAction* manageProfilesAction = collection->addAction("manage-profiles");
-    manageProfilesAction->setText( i18n("Manage Profiles...") );
+    KAction* manageProfilesAction = collection->addAction("configure-profiles");
+    manageProfilesAction->setText( i18n("Configure Profiles...") );
     manageProfilesAction->setIcon( KIcon("configure") );
     connect( manageProfilesAction , SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()) );
 
@@ -321,6 +324,16 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
 {
     unplugActionList("favorite-profiles");
     plugActionList("favorite-profiles",actions);
+
+    // Update the 'New Tab' KActionMenu
+    KMenu *newTabMenu = _newTabMenuAction->menu();
+    newTabMenu->clear();
+    newTabMenu->addAction(_defaultProfileAction);
+    newTabMenu->setDefaultAction(_defaultProfileAction);
+    newTabMenu->addSeparator();
+    foreach (QAction *action, actions) {
+        newTabMenu->addAction(action);
+    }
 }
 
 QString MainWindow::activeSessionDir() const

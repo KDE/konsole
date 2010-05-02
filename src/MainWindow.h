@@ -30,6 +30,8 @@
 // Local
 #include "Profile.h"
 
+class KAction;
+class KActionMenu;
 class KToggleAction;
 
 namespace Konsole
@@ -184,6 +186,8 @@ class MainWindow : public KXmlGuiWindow
         ViewManager*  _viewManager;
         BookmarkHandler* _bookmarkHandler;
         KToggleAction* _toggleMenuBarAction;
+        KActionMenu *_newTabMenuAction;
+        KAction *_defaultProfileAction;
 
         QPointer<SessionController> _pluggedController;
 

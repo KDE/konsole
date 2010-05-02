@@ -403,23 +403,14 @@ void SessionController::setupActions()
     connect( action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
 
     // Copy and Paste
-    action = collection->addAction("copy");
-    action->setIcon( KIcon("edit-copy") );
-    action->setText( i18n("&Copy") );
+    action = KStandardAction::copy(this, SLOT(copy()), collection);
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_C) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(copy()) );
 
-    KAction* pasteAction = new KAction( i18n("&Paste") , this );
-    pasteAction->setIcon( KIcon("edit-paste") );
-
-    KShortcut pasteShortcut = pasteAction->shortcut();
+    action = KStandardAction::paste(this, SLOT(paste()), collection);
+    KShortcut pasteShortcut = action->shortcut();
     pasteShortcut.setPrimary( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_V) );
     pasteShortcut.setAlternate( QKeySequence(Qt::SHIFT+Qt::Key_Insert) );
-    pasteAction->setShortcut(pasteShortcut);
-
-    collection->addAction("paste",pasteAction);
-
-    connect( pasteAction , SIGNAL(triggered()) , this , SLOT(paste()) );
+    action->setShortcut(pasteShortcut);
 
     action = collection->addAction("paste-selection");
     action->setText( i18n("Paste Selection") );
@@ -484,52 +475,36 @@ void SessionController::setupActions()
     connect( _codecAction , SIGNAL(triggered(QTextCodec*)) , this , SLOT(changeCodec(QTextCodec*)) );
 
     // Text Size
-    action = collection->addAction("increase-text-size");
-    action->setText( i18n("Increase Text Size") );
-    action->setIcon( KIcon("zoom-in") );
-    action->setShortcut( QKeySequence(Qt::CTRL+Qt::Key_Plus) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(increaseTextSize()) );
+    action = KStandardAction::zoomIn(this, SLOT(increaseTextSize()), collection);
+    action->setText(i18n("Enlarge Font"));
 
-    action = collection->addAction("decrease-text-size");
-    action->setText( i18n("Decrease Text Size") );
-    action->setIcon( KIcon("zoom-out") );
-    action->setShortcut( QKeySequence(Qt::CTRL+Qt::Key_Minus) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(decreaseTextSize()) );
+    action = KStandardAction::zoomOut(this, SLOT(decreaseTextSize()), collection);
+    action->setText(i18n("Shrink Font"));
 
     // Scrollback
-    _searchToggleAction = new KAction(i18n("Search Output..."),this);
-    _searchToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
-    _searchToggleAction->setIcon( KIcon("edit-find") );
+    _searchToggleAction = KStandardAction::find(this, NULL, collection);
+    _searchToggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F));
     _searchToggleAction->setCheckable(true);
-    action = collection->addAction("search-history" , _searchToggleAction);
-    connect( action , SIGNAL(toggled(bool)) , this , SLOT(searchHistory(bool)) );
+    connect(_searchToggleAction, SIGNAL(toggled(bool)), this, SLOT(searchHistory(bool)));
 
-    _findNextAction = collection->addAction("find-next");
-    _findNextAction->setIcon( KIcon("go-down-search") );
-    _findNextAction->setText( i18n("Find Next") );
-    _findNextAction->setShortcut( QKeySequence(Qt::Key_F3) );
+    _findNextAction = KStandardAction::findNext(this, SLOT(findNextInHistory()), collection);
     _findNextAction->setEnabled(false);
-    connect( _findNextAction , SIGNAL(triggered()) , this , SLOT(findNextInHistory()) );
 
-    _findPreviousAction = collection->addAction("find-previous");
-    _findPreviousAction->setIcon( KIcon("go-up-search") );
-    _findPreviousAction->setText( i18n("Find Previous") );
-    _findPreviousAction->setShortcut( QKeySequence(Qt::SHIFT + Qt::Key_F3) );
+    _findPreviousAction = KStandardAction::findPrev(this, SLOT(findPreviousInHistory()), collection);
+    _findPreviousAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F3));
     _findPreviousAction->setEnabled(false);
-    connect( _findPreviousAction , SIGNAL(triggered()) , this , SLOT(findPreviousInHistory()) );
 
-    action = collection->addAction("save-history");
-    action->setText( i18n("Save Output...") );
-    action->setIcon( KIcon("document-save-as") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(saveHistory()) );
+    action = KStandardAction::saveAs(this, SLOT(saveHistory()), collection);
+    action->setText(i18n("Save Output As..."));
 
-    action = collection->addAction("history-options");
+    action = collection->addAction("configure-history");
     action->setText( i18n("Scrollback Options") );
     action->setIcon( KIcon("configure") );
     connect( action , SIGNAL(triggered()) , this , SLOT(showHistoryOptions()) );
 
     action = collection->addAction("clear-history-and-reset");
     action->setText( i18n("Clear Scrollback and Reset") );
+    action->setIcon( KIcon("edit-clear-history") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_X) );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 
