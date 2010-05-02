@@ -1114,8 +1114,10 @@ void EditProfileDialog::setFontSize(int pointSize)
 void EditProfileDialog::setFontSliderRange(const QFont& font)
 {
     QSlider* slider = _ui->fontSizeSlider;
-    slider->setRange( qMin(slider->minimum(), qRound(font.pointSizeF() * 10)),
-                      qMax(slider->maximum(), 2 * qRound(font.pointSize() * 10)) );
+    // Minimum on the slider is 4, 
+    // Maximum is the greater of 2 times the current size and 14
+    slider->setRange( qMin(4 * 10, qRound(font.pointSizeF() * 10)),
+                      qMax(14 * 10, 2 * qRound(font.pointSize() * 10)) );
 
 }
 
