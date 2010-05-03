@@ -239,7 +239,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
     Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile));
     newProfile->setHidden(true);
     newProfile->setProperty(Profile::Command,   command);
-    newProfile->setProperty(Profile::Arguments, command.split(" "));
+    newProfile->setProperty(Profile::Arguments, command.split(' '));
     if(args->isSet("workdir")) {
         newProfile->setProperty(Profile::Directory,args->getOption("workdir"));
     }
