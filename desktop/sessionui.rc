@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="10">
+<kpartgui name="session" version="11">
     <MenuBar>
         <Menu name="file">
             <Action name="close-session" group="session-tab-operations"/>
@@ -28,34 +28,28 @@
             <Action name="monitor-silence" group="session-view-operations"/>
             <Action name="monitor-activity" group="session-view-operations"/>
             <Separator group="session-view-operations"/>
-            <Action name="character-encoding"  group="session-view-operations"/>
-            <Action name="view_zoom_in"  group="session-view-operations"/>
-            <Action name="view_zoom_out"  group="session-view-operations"/>
+            <Action name="enlarge-font" group="session-view-operations"/>
+            <Action name="shrink-font" group="session-view-operations"/>
+            <Action name="set-encoding" group="session-view-operations"/>
             <Separator group="session-view-operations"/>
-            <Action name="clear" group="session-view-operations"/>
-            <Action name="clear-and-reset" group="session-view-operations"/>
             <Action name="clear-history" group="session-view-operations"/>
-            <Action name="clear-history-and-reset" group="session-view-operations"/>
-        </Menu>
-        <Menu name="settings">
-            <Action name="configure-history"/> 
         </Menu>
         <!--<Menu name="debug"><text>Debug</text>
             <Action name="debug-process"/>
         </Menu>!-->
     </MenuBar>
     <Menu name="session-popup-menu">
-        <Action name="copy"/>
-        <Action name="paste"/>
-        <Action name="clear-history-and-reset"/>
+        <Action name="edit_copy"/>
+        <Action name="edit_paste"/>
         <Action name="open-browser"/>
         <Separator/>
-        <Action name="change-profile"/>
-        <Action name="edit-current-profile"/>
+        <Action name="set-encoding"/>
+        <Action name="clear-history"/>
         <Action name="configure-history"/> 
         <Separator/>
         <Action name="show-menubar"/>
-        <Action name="character-encoding"/>
+        <Action name="change-profile"/>
+        <Action name="edit-current-profile"/>
         <Separator/>
         <Action name="close-session"/>
     </Menu>

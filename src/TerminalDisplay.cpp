@@ -1918,7 +1918,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
   if ( oldpos.y() < textBounds.top() )
   {
       linesBeyondWidget = (textBounds.top()-oldpos.y()) / _fontHeight;
-    _scrollBar->setValue(_scrollBar->value()-linesBeyondWidget-1); // scrollback
+    _scrollBar->setValue(_scrollBar->value()-linesBeyondWidget-1); // history
   }
 
   int charColumn = 0;

@@ -151,13 +151,13 @@ void ViewManager::setupActions()
         KAction* splitLeftRightAction = new KAction( KIcon("view-split-left-right"),
                                                       i18nc("@action:inmenu", "Split View Left/Right"),
                                                       this );
-        splitLeftRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_L) );
+        splitLeftRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_ParenLeft) );
         collection->addAction("split-view-left-right",splitLeftRightAction);
         connect( splitLeftRightAction , SIGNAL(triggered()) , this , SLOT(splitLeftRight()) );
 
         KAction* splitTopBottomAction = new KAction( KIcon("view-split-top-bottom") , 
                                              i18nc("@action:inmenu", "Split View Top/Bottom"),this);
-        splitTopBottomAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_T) );
+        splitTopBottomAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_ParenRight) );
         collection->addAction("split-view-top-bottom",splitTopBottomAction);
         connect( splitTopBottomAction , SIGNAL(triggered()) , this , SLOT(splitTopBottom()));
 
@@ -167,8 +167,8 @@ void ViewManager::setupActions()
         closeActiveAction->setEnabled(false);
         collection->addAction("close-active-view",closeActiveAction);
         connect( closeActiveAction , SIGNAL(triggered()) , this , SLOT(closeActiveView()) );
-      
-        multiViewOnlyActions << closeActiveAction; 
+
+        multiViewOnlyActions << closeActiveAction;
 
         KAction* closeOtherAction = new KAction( i18nc("@action:inmenu Close Other Views", "Close Others") , this );
         closeOtherAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_O) );
@@ -179,15 +179,15 @@ void ViewManager::setupActions()
         multiViewOnlyActions << closeOtherAction;
 
         KAction* detachViewAction = collection->addAction("detach-view");
-        detachViewAction->setIcon( KIcon("tab-detach") );
-        detachViewAction->setText( i18n("&Detach View") );
+        detachViewAction->setIcon(KIcon("tab-detach"));
+        detachViewAction->setText(i18n("D&etach Current Tab"));
         // Ctrl+Shift+D is not used as a shortcut by default because it is too close
         // to Ctrl+D - which will terminate the session in many cases
-        detachViewAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_H) );
-       
-          connect( this , SIGNAL(splitViewToggle(bool)) , this , SLOT(updateDetachViewState()) ); 
+        detachViewAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_H));
+
+        connect( this , SIGNAL(splitViewToggle(bool)) , this , SLOT(updateDetachViewState()) );
         connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
-   
+
         // Expand & Shrink Active View
         KAction* expandActiveAction = new KAction( i18nc("@action:inmenu", "Expand View") , this );
         expandActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_BracketRight) );

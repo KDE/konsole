@@ -260,11 +260,13 @@ void ManageProfilesDialog::updateDefaultItem()
 
         if ( isDefault && !font.bold() )
         {
+            item->setIcon(KIcon(defaultProfile->icon(), NULL, QStringList("emblem-favorite")));
             font.setBold(true);
             item->setFont(font);
         } 
         else if ( !isDefault && font.bold() )
         {
+            item->setIcon(KIcon(defaultProfile->icon()));
             font.setBold(false);
             item->setFont(font);
         } 

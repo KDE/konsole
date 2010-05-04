@@ -165,8 +165,6 @@ private slots:
     void copy();
     void paste();
     void pasteSelection(); // shortcut only
-    void clear();
-    void clearAndReset();
     void copyInputToAllTabs();
     void copyInputToSelectedTabs();
     void copyInputToNone();
@@ -178,7 +176,6 @@ private slots:
     void saveHistory();
     void showHistoryOptions();
     void clearHistory();
-    void clearHistoryAndReset();
     void closeSession();
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);

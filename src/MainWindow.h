@@ -187,7 +187,6 @@ class MainWindow : public KXmlGuiWindow
         BookmarkHandler* _bookmarkHandler;
         KToggleAction* _toggleMenuBarAction;
         KActionMenu *_newTabMenuAction;
-        KAction *_defaultProfileAction;
 
         QPointer<SessionController> _pluggedController;
 

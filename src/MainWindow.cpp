@@ -230,31 +230,27 @@ void MainWindow::setupActions()
     KActionCollection* collection = actionCollection();
 
     // File Menu
-    _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18n("New &Tab"), collection);
+    _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18n("&New Tab"), collection);
+    _newTabMenuAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_T) );
+    connect(_newTabMenuAction, SIGNAL(triggered()), this, SLOT(newTab()));
     collection->addAction("new-tab", _newTabMenuAction);
 
-    _defaultProfileAction = collection->addAction("default-profile");
-    _defaultProfileAction->setIcon(KIcon("utilities-terminal"));
-    _defaultProfileAction->setText(i18n("&Default Profile"));
-    _defaultProfileAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N));
-    connect(_defaultProfileAction, SIGNAL(triggered()), this, SLOT(newTab()));
+    KAction* action = collection->addAction("new-window");
+    action->setIcon( KIcon("window-new") );
+    action->setText( i18n("New &Window") );
+    action->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N) );
+    connect( action , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
-    KAction* newWindowAction = collection->addAction("new-window");
-    newWindowAction->setIcon( KIcon("window-new") );
-    newWindowAction->setText( i18n("New &Window") );
-    newWindowAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_M) );
-    connect( newWindowAction , SIGNAL(triggered()) , this , SLOT(newWindow()) );
+    action = collection->addAction("remote-connection");
+    action->setText( i18n("Remote Connection...") );
+    action->setIcon( KIcon("network-connect") );
+    action->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_R) );
+    connect( action , SIGNAL(triggered()) , this , SLOT(showRemoteConnectionDialog()) );
 
-    KAction* remoteConnectionAction = collection->addAction("remote-connection");
-    remoteConnectionAction->setText( i18n("Remote Connection...") );
-    remoteConnectionAction->setIcon( KIcon("network-connect") );
-    remoteConnectionAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_R) );
-    connect( remoteConnectionAction , SIGNAL(triggered()) , this , SLOT(showRemoteConnectionDialog()) );
-
-    KAction* quitAction = KStandardAction::quit( this , SLOT(close()) , collection );
+    action = KStandardAction::quit( this , SLOT(close()) , collection );
     // the default shortcut for quit is typically Ctrl+[Some Letter, usually Q] but that is reserved for
     // use by terminal applications
-    quitAction->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Q);
+    action->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Q) );
 
     // Bookmark Menu
     KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection );
@@ -263,36 +259,31 @@ void MainWindow::setupActions()
 
     connect( _bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)) );
 
-    //TODO - The 'Add Bookmark' menu action currently has a Ctrl+B shortcut by
-    // default which cannot be overridden
+    //TODO: The 'Add Bookmark' menu action currently has a Ctrl+B shortcut by
+    //      default which cannot be overridden
+    //NOTE: This is currently handled by correctShortcuts()
 
     // View Menu
-    _toggleMenuBarAction = new KToggleAction(this);
-    _toggleMenuBarAction->setText( i18n("Show Menu Bar") );
-    _toggleMenuBarAction->setIcon( KIcon("show-menu") );
+    _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
+    _toggleMenuBarAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M) );
     _toggleMenuBarAction->setChecked( !menuBar()->isHidden() );
-    connect( _toggleMenuBarAction , SIGNAL(toggled(bool)) , menuBar() , SLOT(setVisible(bool)) );
-    collection->addAction("show-menubar",_toggleMenuBarAction);
 
     // Hide the Show/Hide menubar item if the menu bar is a MacOS-style menu bar
     if ( menuBar()->isTopLevelMenu() )
         _toggleMenuBarAction->setVisible(false);
 
     // Full Screen
-    KToggleFullScreenAction* fullScreenAction = new KToggleFullScreenAction(this);
-    fullScreenAction->setWindow(this);
-    fullScreenAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_F11 );
-    collection->addAction("view-full-screen",fullScreenAction);
-    connect( fullScreenAction , SIGNAL(toggled(bool)) , this , SLOT(viewFullScreen(bool)) );
+    action = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
+    action->setShortcut( QKeySequence() );
 
     // Settings Menu
     KStandardAction::configureNotifications( this , SLOT(configureNotifications()) , collection  );
     KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
 
-    KAction* manageProfilesAction = collection->addAction("configure-profiles");
-    manageProfilesAction->setText( i18n("Configure Profiles...") );
-    manageProfilesAction->setIcon( KIcon("configure") );
-    connect( manageProfilesAction , SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()) );
+    action = collection->addAction("configure-profiles");
+    action->setText( i18n("Configure Profiles...") );
+    action->setIcon( KIcon("configure") );
+    connect( action, SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()) );
 
 }
 
@@ -323,17 +314,25 @@ void MainWindow::setSessionList(ProfileList* list)
 void MainWindow::sessionListChanged(const QList<QAction*>& actions)
 {
     unplugActionList("favorite-profiles");
-    plugActionList("favorite-profiles",actions);
+    plugActionList("favorite-profiles", actions);
 
     // Update the 'New Tab' KActionMenu
     KMenu *newTabMenu = _newTabMenuAction->menu();
     newTabMenu->clear();
-    newTabMenu->addAction(_defaultProfileAction);
-    newTabMenu->setDefaultAction(_defaultProfileAction);
-    newTabMenu->addSeparator();
     foreach (QAction *action, actions) {
         newTabMenu->addAction(action);
+
+        // NOTE: _defaultProfile seems to not work here, sigh.
+        Profile::Ptr profile = SessionManager::instance()->defaultProfile();
+        if (profile && profile->name() == action->text()) {
+            action->setIcon(KIcon(profile->icon(), NULL, QStringList("emblem-favorite")));
+            newTabMenu->setDefaultAction(action);
+            QFont font = action->font();
+            font.setBold(true);
+            action->setFont(font);
+        }
     }
+
 }
 
 QString MainWindow::activeSessionDir() const

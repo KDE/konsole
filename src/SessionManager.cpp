@@ -503,7 +503,7 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr info , bo
         session->setTabTitleFormat( Session::RemoteTabTitle ,
                                     info->property<QString>(Profile::RemoteTabTitleFormat));
 
-    // Scrollback / history
+    // History
     if ( apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize) ) 
     {
         int mode = info->property<int>(Profile::HistoryMode);

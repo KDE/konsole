@@ -183,7 +183,7 @@ void SessionController::trackOutput(QKeyEvent* event)
 {
     Q_ASSERT( _view->screenWindow() );
 
-    // jump to the end of the scrollback buffer unless the key pressed
+    // jump to the end of the history buffer unless the key pressed
     // is one of the three main modifiers, as these are used to select
     // the selection mode (eg. Ctrl+Alt+<Left Click> for column/block selection)
     switch (event->key())
@@ -390,98 +390,89 @@ void SessionController::setupActions()
     KActionCollection* collection = actionCollection();
 
     // Close Session
-    action = collection->addAction("close-session");
-    action->setIcon( KIcon("tab-close") );
-    action->setText( i18n("&Close Tab") );
-    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_W) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(closeSession()) );
+    action = collection->addAction("close-session", this, SLOT(closeSession()));
+    action->setIcon(KIcon("tab-close"));
+    action->setText(i18n("&Close Tab"));
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_W));
 
     // Open Browser
-    action = collection->addAction("open-browser");
-    action->setText( i18n("Open File Manager") );
-    action->setIcon( KIcon("system-file-manager") );
-    connect( action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
+    action = collection->addAction("open-browser", this, SLOT(openBrowser()));
+    action->setText(i18n("Open File Manager"));
+    action->setIcon(KIcon("system-file-manager"));
 
     // Copy and Paste
     action = KStandardAction::copy(this, SLOT(copy()), collection);
-    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_C) );
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_C));
 
     action = KStandardAction::paste(this, SLOT(paste()), collection);
     KShortcut pasteShortcut = action->shortcut();
-    pasteShortcut.setPrimary( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_V) );
-    pasteShortcut.setAlternate( QKeySequence(Qt::SHIFT+Qt::Key_Insert) );
+    pasteShortcut.setPrimary(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_V));
+    pasteShortcut.setAlternate(QKeySequence(Qt::SHIFT + Qt::Key_Insert));
     action->setShortcut(pasteShortcut);
 
-    action = collection->addAction("paste-selection");
-    action->setText( i18n("Paste Selection") );
-    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(pasteSelection()) );
+    action = collection->addAction("paste-selection", this, SLOT(pasteSelection()));
+    action->setText(i18n("Paste Selection"));
+    action->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert));
 
     // Rename Session
-    action = collection->addAction("rename-session");
+    action = collection->addAction("rename-session", this, SLOT(renameSession()));
     action->setText( i18n("&Rename Tab...") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_S) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(renameSession()) );
 
     // Copy Input To -> All Tabs in Current Window
-    _copyToAllTabsAction = collection->addAction("copy-input-to-all-tabs");
-    _copyToAllTabsAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Comma) );
-    _copyToAllTabsAction->setText(i18n("&All Tabs in Current Window") );
+    _copyToAllTabsAction = collection->addAction("copy-input-to-all-tabs", this, SLOT(copyInputToAllTabs()));
+    _copyToAllTabsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Comma));
+    _copyToAllTabsAction->setText(i18n("&All Tabs in Current Window"));
     _copyToAllTabsAction->setCheckable(true);
-    connect( _copyToAllTabsAction , SIGNAL(triggered()) , this , SLOT(copyInputToAllTabs()) );
 
     // Copy Input To -> Select Tabs
-    _copyToSelectedAction = collection->addAction("copy-input-to-selected-tabs");
-    _copyToSelectedAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Period) );
-    _copyToSelectedAction->setText( i18n("&Select Tabs...") );
+    _copyToSelectedAction = collection->addAction("copy-input-to-selected-tabs", this, SLOT(copyInputToSelectedTabs()));
+    _copyToSelectedAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Period) );
+    _copyToSelectedAction->setText(i18n("&Select Tabs..."));
     _copyToSelectedAction->setCheckable(true);
-    connect( _copyToSelectedAction , SIGNAL(triggered()) , this , SLOT(copyInputToSelectedTabs()) );
 
     // Copy Input To -> None
-    _copyToNoneAction = collection->addAction("copy-input-to-none");
-    _copyToNoneAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Slash) );
-    _copyToNoneAction->setText( i18n("&None") );
+    _copyToNoneAction = collection->addAction("copy-input-to-none", this, SLOT(copyInputToNone()));
+    _copyToNoneAction->setText(i18n("&None"));
+    _copyToNoneAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Slash));
     _copyToNoneAction->setCheckable(true);
     _copyToNoneAction->setChecked(true);
-    connect( _copyToNoneAction , SIGNAL(triggered()) , this , SLOT(copyInputToNone()) );
 
-    // Clear and Reset
-    action = collection->addAction("clear-and-reset");
-    action->setText( i18n("Clear and Reset") );
-    action->setIcon( KIcon("edit-clear-history") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
+    action = collection->addAction("zmodem-upload", this, SLOT(zmodemUpload()));
+    action->setText(i18n("&ZModem Upload..."));
+    action->setIcon(KIcon("document-open"));
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_U));
 
-    action = collection->addAction("zmodem-upload");
-    action->setText( i18n( "&ZModem Upload..." ) );
-    action->setIcon( KIcon("document-open") );
-    action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_U) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(zmodemUpload()) );
-    
     // Monitor
     toggleAction = new KToggleAction(i18n("Monitor for &Activity"),this);
-    toggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_A) );
-    action = collection->addAction("monitor-activity",toggleAction);
-    connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorActivity(bool)) );
+    toggleAction->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_A));
+    action = collection->addAction("monitor-activity", toggleAction);
+    connect(action, SIGNAL(toggled(bool)), this, SLOT(monitorActivity(bool)));
 
     toggleAction = new KToggleAction(i18n("Monitor for &Silence"),this);
-    toggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_I) );
-    action = collection->addAction("monitor-silence",toggleAction);
-    connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
+    toggleAction->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_I));
+    action = collection->addAction("monitor-silence", toggleAction);
+    connect(action, SIGNAL(toggled(bool)), this, SLOT(monitorSilence(bool)));
 
     // Character Encoding
-    _codecAction = new KCodecAction(i18n("Character Encoding"),this);
-    collection->addAction("character-encoding",_codecAction);
-    connect( _codecAction->menu() , SIGNAL(aboutToShow()) , this , SLOT(updateCodecAction()) );
-    connect( _codecAction , SIGNAL(triggered(QTextCodec*)) , this , SLOT(changeCodec(QTextCodec*)) );
+    _codecAction = new KCodecAction(i18n("Set &Encoding"),this);
+    _codecAction->setIcon(KIcon("character-set"));
+    collection->addAction("set-encoding", _codecAction);
+    connect(_codecAction->menu(), SIGNAL(aboutToShow()), this, SLOT(updateCodecAction()));
+    connect(_codecAction, SIGNAL(triggered(QTextCodec*)), this, SLOT(changeCodec(QTextCodec*)));
 
     // Text Size
-    action = KStandardAction::zoomIn(this, SLOT(increaseTextSize()), collection);
+    action = collection->addAction("enlarge-font", this, SLOT(increaseTextSize()));
     action->setText(i18n("Enlarge Font"));
+    action->setIcon(KIcon("format-font-size-more"));
+    action->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Plus));
 
-    action = KStandardAction::zoomOut(this, SLOT(decreaseTextSize()), collection);
+    action = collection->addAction("shrink-font", this, SLOT(decreaseTextSize()));
     action->setText(i18n("Shrink Font"));
+    action->setIcon(KIcon("format-font-size-less"));
+    action->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Minus));
 
-    // Scrollback
+    // History
     _searchToggleAction = KStandardAction::find(this, NULL, collection);
     _searchToggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F));
     _searchToggleAction->setCheckable(true);
@@ -495,41 +486,37 @@ void SessionController::setupActions()
     _findPreviousAction->setEnabled(false);
 
     action = KStandardAction::saveAs(this, SLOT(saveHistory()), collection);
-    action->setText(i18n("Save Output As..."));
+    action->setText(i18n("Save Output &As..."));
 
-    action = collection->addAction("configure-history");
-    action->setText( i18n("Scrollback Options") );
-    action->setIcon( KIcon("configure") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(showHistoryOptions()) );
+    action = collection->addAction("configure-history", this, SLOT(showHistoryOptions()));
+    action->setText(i18n("Configure Scrollback..."));
+    action->setIcon(KIcon("configure"));
 
-    action = collection->addAction("clear-history-and-reset");
-    action->setText( i18n("Clear Scrollback and Reset") );
-    action->setIcon( KIcon("edit-clear-history") );
-    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_X) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
+    action = collection->addAction("clear-history", this, SLOT(clearHistory()));
+    action->setText(i18n("Clear Scrollback"));
+    action->setIcon(KIcon("edit-clear-history"));
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_X));
 
     // Profile Options
-    action = collection->addAction("edit-current-profile");
-    action->setText( i18n("Edit Current Profile...") );
-    action->setIcon( KIcon("document-properties") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(editCurrentProfile()) );
+    action = collection->addAction("edit-current-profile", this, SLOT(editCurrentProfile()));
+    action->setText(i18n("Configure Current Profile..."));
+    action->setIcon(KIcon("document-properties") );
 
     _changeProfileMenu = new KActionMenu(i18n("Change Profile"), _view);
     collection->addAction("change-profile", _changeProfileMenu);
-    connect( _changeProfileMenu->menu() , SIGNAL(aboutToShow()) , this , SLOT(prepareChangeProfileMenu()) );
-
+    connect(_changeProfileMenu->menu(), SIGNAL(aboutToShow()), this, SLOT(prepareChangeProfileMenu()));
 }
+
 void SessionController::changeProfile(Profile::Ptr profile)
 {
-    SessionManager::instance()->setSessionProfile(_session,profile);    
+    SessionManager::instance()->setSessionProfile(_session,profile);
 }
+
 void SessionController::prepareChangeProfileMenu()
 {
-    if ( _changeProfileMenu->menu()->isEmpty() )
-    {
+    if (_changeProfileMenu->menu()->isEmpty()) {
         _profileList = new ProfileList(false,this);
-        connect( _profileList , SIGNAL(profileSelected(Profile::Ptr)) ,
-                this , SLOT(changeProfile(Profile::Ptr)) );
+        connect(_profileList, SIGNAL(profileSelected(Profile::Ptr)), this, SLOT(changeProfile(Profile::Ptr)));
     }
 
     _changeProfileMenu->menu()->clear();
@@ -537,8 +524,9 @@ void SessionController::prepareChangeProfileMenu()
 }
 void SessionController::updateCodecAction()
 {
-    _codecAction->setCurrentCodec( QString(_session->emulation()->codec()->name()) );
+    _codecAction->setCurrentCodec(QString(_session->emulation()->codec()->name()));
 }
+
 void SessionController::changeCodec(QTextCodec* codec)
 {
     _session->setCodec(codec);
@@ -551,6 +539,7 @@ void SessionController::editCurrentProfile()
     dialog->setProfile(SessionManager::instance()->sessionProfile(_session));
     dialog->show();
 }
+
 void SessionController::renameSession()
 {
     QPointer<Session> guard(_session);
@@ -770,19 +759,6 @@ void SessionController::copyInputToNone()
     _copyToNoneAction->setChecked(true);
 }
 
-void SessionController::clear()
-{
-    Emulation* emulation = _session->emulation();
-
-    emulation->clearEntireScreen();
-}
-void SessionController::clearAndReset()
-{
-    Emulation* emulation = _session->emulation();
-
-    emulation->reset();
-    _session->refresh();
-}
 void SessionController::searchClosed()
 {
     _searchToggleAction->toggle();
@@ -995,15 +971,13 @@ void SessionController::saveHistory()
     task->addSession( _session );
     task->execute();
 }
+
 void SessionController::clearHistory()
 {
     _session->clearHistory();
+    _view->updateImage();   // To reset view scrollbar
 }
-void SessionController::clearHistoryAndReset()
-{
-    clearAndReset();
-    clearHistory();
-}
+
 void SessionController::increaseTextSize()
 {
     QFont font = _view->getVTFont();
@@ -1012,6 +986,7 @@ void SessionController::increaseTextSize()
 
     //TODO - Save this setting as a session default
 }
+
 void SessionController::decreaseTextSize()
 {
     static const qreal MinimumFontSize = 6;
@@ -1022,6 +997,7 @@ void SessionController::decreaseTextSize()
 
     //TODO - Save this setting as a session default
 }
+
 void SessionController::monitorActivity(bool monitor)
 {
     _session->setMonitorActivity(monitor);
