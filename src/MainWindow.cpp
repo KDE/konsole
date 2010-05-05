@@ -232,6 +232,7 @@ void MainWindow::setupActions()
     // File Menu
     _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18n("&New Tab"), collection);
     _newTabMenuAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_T) );
+    _newTabMenuAction->setShortcutConfigurable(true);
     connect(_newTabMenuAction, SIGNAL(triggered()), this, SLOT(newTab()));
     collection->addAction("new-tab", _newTabMenuAction);
 
