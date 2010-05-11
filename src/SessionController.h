@@ -176,6 +176,7 @@ private slots:
     void saveHistory();
     void showHistoryOptions();
     void clearHistory();
+    void clearHistoryAndReset();
     void closeSession();
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);

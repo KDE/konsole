@@ -495,6 +495,10 @@ void SessionController::setupActions()
     action = collection->addAction("clear-history", this, SLOT(clearHistory()));
     action->setText(i18n("Clear Scrollback"));
     action->setIcon(KIcon("edit-clear-history"));
+
+    action = collection->addAction("clear-history-and-reset", this, SLOT(clearHistoryAndReset()));
+    action->setText(i18n("Clear Scrollback and Reset"));
+    action->setIcon(KIcon("edit-clear-history"));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_X));
 
     // Profile Options
@@ -976,6 +980,14 @@ void SessionController::clearHistory()
 {
     _session->clearHistory();
     _view->updateImage();   // To reset view scrollbar
+}
+
+void SessionController::clearHistoryAndReset()
+{
+    Emulation* emulation = _session->emulation();
+    emulation->reset();
+    //_session->refresh();
+    clearHistory();
 }
 
 void SessionController::increaseTextSize()

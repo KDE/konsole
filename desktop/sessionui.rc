@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="11">
+<kpartgui name="session" version="12">
     <MenuBar>
         <Menu name="file">
             <Action name="close-session" group="session-tab-operations"/>
@@ -33,6 +33,7 @@
             <Action name="set-encoding" group="session-view-operations"/>
             <Separator group="session-view-operations"/>
             <Action name="clear-history" group="session-view-operations"/>
+            <Action name="clear-history-and-reset" group="session-view-operations"/>
         </Menu>
         <!--<Menu name="debug"><text>Debug</text>
             <Action name="debug-process"/>

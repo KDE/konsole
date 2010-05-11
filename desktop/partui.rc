@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsolepart" version="3">
+<kpartgui name="konsolepart" version="4">
     <Menu name="session-popup-menu">
         <Action name="edit_copy"/>
         <Action name="edit_paste"/>
@@ -10,6 +10,7 @@
             <Action name="configure-history" group="session-history-operations"/>
             <Separator group="session-history-operations"/>
             <Action name="clear-history" group="session-history-operations"/>
+            <Action name="clear-history-and-reset" group="session-history-operations"/>
         </Menu>
         <Action name="open-browser"/>
         <Separator/>
