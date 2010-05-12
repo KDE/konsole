@@ -66,6 +66,38 @@ using namespace Konsole;
 
 int Session::lastSessionId = 0;
 
+// HACK This is copied out of QUuid::createUuid with reseeding forced.
+// Required because color schemes repeatedly seed the RNG...
+// ...with a constant.
+QUuid createUuid()
+{
+    static const int intbits = sizeof(int)*8;
+    static int randbits = 0;
+    if (!randbits)
+    {
+        int max = RAND_MAX;
+        do { ++randbits; } while ((max=max>>1));
+    }
+
+    qsrand(uint(QDateTime::currentDateTime().toTime_t()));
+    qrand(); // Skip first
+
+    QUuid result;
+    uint *data = &(result.data1);
+    int chunks = 16 / sizeof(uint);
+    while (chunks--) {
+        uint randNumber = 0;
+        for (int filled = 0; filled < intbits; filled += randbits)
+            randNumber |= qrand()<<filled;
+         *(data+chunks) = randNumber;
+    }
+
+    result.data4[0] = (result.data4[0] & 0x3F) | 0x80;        // UV_DCE
+    result.data3 = (result.data3 & 0x0FFF) | 0x4000;        // UV_Random
+
+    return result;
+}
+
 Session::Session(QObject* parent) :
    QObject(parent)
    , _shellProcess(0)
@@ -88,6 +120,8 @@ Session::Session(QObject* parent) :
    , _zmodemProgress(0)
    , _hasDarkBackground(false)
 {
+    _uniqueIdentifier = createUuid();
+
     //prepare DBus communication
     new SessionAdaptor(this);
     _sessionId = ++lastSessionId;
@@ -352,6 +386,15 @@ void Session::terminalWarning(const QString& message)
     _emulation->receiveData("\n\r\n\r",4);
     _emulation->receiveData(redPenOff,strlen(redPenOff));
 }
+
+QString Session::shellSessionId() const
+{
+    QString friendlyUuid(_uniqueIdentifier.toString());
+    friendlyUuid.remove('-').remove('{').remove('}');
+
+    return friendlyUuid;
+}
+
 void Session::run()
 {
   //check that everything is in place to run the session
@@ -362,6 +405,10 @@ void Session::run()
   if (_arguments.isEmpty())
   {
       kDebug() << "Session::run() - no command line arguments specified.";
+  }
+  if (_uniqueIdentifier.isNull())
+  {
+      _uniqueIdentifier = createUuid();
   }
 
   const int CHOICE_COUNT = 3;
@@ -407,10 +454,12 @@ void Session::run()
   // the color scheme as "black on white" or "white on black" depending on whether
   // the background color is deemed dark or not
   QString backgroundColorHint = _hasDarkBackground ? "COLORFGBG=15;0" : "COLORFGBG=0;15";
+  _environment << backgroundColorHint;
+  _environment << QString("SHELL_SESSION_ID=%1").arg(shellSessionId());
 
   int result = _shellProcess->start(exec,
                                   arguments,
-                                  _environment << backgroundColorHint,
+                                  _environment,
                                   windowId(),
                                   _addToUtmp,
                                   dbusService,
@@ -1206,6 +1255,7 @@ void Session::saveSession(KConfigGroup& group)
     group.writePathEntry("WorkingDir", currentWorkingDirectory());
     group.writeEntry("LocalTab",       tabTitleFormat(LocalTabTitle));
     group.writeEntry("RemoteTab",      tabTitleFormat(RemoteTabTitle));
+    group.writeEntry("SessionGuid",    _uniqueIdentifier.toString());
 }
 
 void Session::restoreSession(KConfigGroup& group)
@@ -1218,6 +1268,8 @@ void Session::restoreSession(KConfigGroup& group)
     if (!value.isEmpty()) setTabTitleFormat(LocalTabTitle, value);
     value = group.readEntry("RemoteTab");
     if (!value.isEmpty()) setTabTitleFormat(RemoteTabTitle, value);
+    value = group.readEntry("SessionGuid");
+    if (!value.isEmpty()) _uniqueIdentifier = QUuid(value);
 }
 
 SessionGroup::SessionGroup(QObject* parent)

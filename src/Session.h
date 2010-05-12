@@ -27,6 +27,7 @@
 // Qt
 #include <QtCore/QStringList>
 #include <QtCore/QByteRef>
+#include <QUuid>
 
 // KDE
 #include <KApplication>
@@ -468,6 +469,13 @@ public slots:
    */
   Q_SCRIPTABLE QString title(int role) const;
 
+  /** Returns the "friendly" version of the QUuid of this session.
+  * This is a QUuid with the braces and dashes removed, so it cannot be
+  * used to construct a new QUuid. The same text appears in the
+  * SHELL_SESSION_ID environment variable.
+  */
+  Q_SCRIPTABLE QString shellSessionId() const;
+
 signals:
 
   /** Emitted when the terminal process starts. */
@@ -584,7 +592,7 @@ private:
   bool updateForegroundProcessInfo();
   ProcessInfo* updateWorkingDirectory();
 
-  int            _uniqueIdentifier;
+  QUuid            _uniqueIdentifier; // SHELL_SESSION_ID
 
   Pty*          _shellProcess;
   Emulation*    _emulation;
