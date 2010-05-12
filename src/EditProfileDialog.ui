@@ -955,8 +955,11 @@
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QLabel" name="label_11" >
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
               <property name="text" >
-               <string>Word characters for double-click selection: </string>
+               <string>Characters considered part of a word when double clicking: </string>
               </property>
               <property name="alignment" >
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
