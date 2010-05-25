@@ -43,10 +43,10 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
 
     // construct the list of favorite session types
     _group = new QActionGroup(this);
-    
-    // disabled action to be shown only when the list is empty
-    _emptyListAction = new QAction(i18n("No profiles available"),_group);
-    _emptyListAction->setEnabled(false);
+ 
+    // Even when there are no profiles in the menu list, allow user to 
+    // create new tabs from the menu
+    _emptyListAction = new QAction(i18n("Default profile"),_group);
 
     // TODO - Handle re-sorts when user changes profile names
 
