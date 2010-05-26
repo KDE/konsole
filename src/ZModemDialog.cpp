@@ -37,7 +37,6 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
   setDefaultButton( Close );
   setEscapeButton( User1 );
 
-  showButtonSeparator( true );
   enableButton(Close, false);
   _textEdit = new KTextEdit(this);
   _textEdit->setMinimumSize(400, 100);
