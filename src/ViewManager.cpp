@@ -426,7 +426,8 @@ void ViewManager::splitView(Qt::Orientation orientation)
     {
         Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
         TerminalDisplay* display = createTerminalDisplay(session);
-        applyProfile(display,SessionManager::instance()->sessionProfile(session),false);
+        const Profile::Ptr info = SessionManager::instance()->sessionProfile(session);
+        applyProfile(display, info, false);
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session;
@@ -434,8 +435,15 @@ void ViewManager::splitView(Qt::Orientation orientation)
         // create a container using settings from the first 
         // session in the previous container
         if ( !container )
-            container = createContainer(SessionManager::instance()->sessionProfile(session));
+            container = createContainer(info);
 
+        int tabBarMode = info->property<int>(Profile::TabBarMode);
+        if ( tabBarMode == Profile::AlwaysHideTabBar )
+            container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
+        else if ( tabBarMode == Profile::AlwaysShowTabBar )
+            container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
+        else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
+            container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
         container->addView(display,properties);
         session->addView( display );
     }
