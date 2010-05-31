@@ -646,6 +646,7 @@ void ViewManager::containerMoveViewRequest(int index, int id, bool& moved)
         return;
 
     createView(controller->session(),container,index);
+    controller->session()->refresh();
     moved = true;
 }
 void ViewManager::setNavigationMethod(NavigationMethod method)
