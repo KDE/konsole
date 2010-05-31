@@ -267,7 +267,6 @@ void MainWindow::setupActions()
     _toggleMenuBarAction = new KToggleAction(this);
     _toggleMenuBarAction->setText( i18n("Show Menu Bar") );
     _toggleMenuBarAction->setIcon( KIcon("show-menu") );
-    _toggleMenuBarAction->setChecked( !menuBar()->isHidden() );
     connect( _toggleMenuBarAction , SIGNAL(toggled(bool)) , menuBar() , SLOT(setVisible(bool)) );
     collection->addAction("show-menubar",_toggleMenuBarAction);
 
@@ -489,6 +488,18 @@ void MainWindow::setupWidgets()
 void MainWindow::configureNotifications()
 {
     KNotifyConfigWidget::configure( this );
+}
+
+void MainWindow::showEvent(QShowEvent *event)
+{
+    // This code from Konqueror.
+    // We need to check if our toolbars are shown/hidden here, and set
+    // our menu items accordingly. We can't do it in the constructor because
+    // view profiles store toolbar info, and that info is read after
+    // construct time.
+    _toggleMenuBarAction->setChecked( !menuBar()->isHidden() );
+    // Call parent method
+    KXmlGuiWindow::showEvent(event);
 }
 
 #include "MainWindow.moc"
