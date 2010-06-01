@@ -421,7 +421,6 @@ void SessionController::setupActions()
 
     // Copy Input To -> All Tabs in Current Window
     _copyToAllTabsAction = collection->addAction("copy-input-to-all-tabs", this, SLOT(copyInputToAllTabs()));
-    _copyToAllTabsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Comma));
     _copyToAllTabsAction->setText(i18n("&All Tabs in Current Window"));
     _copyToAllTabsAction->setCheckable(true);
 
