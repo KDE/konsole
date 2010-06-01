@@ -130,6 +130,7 @@ private slots:
     void setFontSliderRange(const QFont&);
     void setFontSliderValue(const QFont&);
     void setAntialiasText(bool enable);
+    void setBoldIntense(bool enable);
     void showFontDialog();
     void newColorScheme();
     void editColorScheme();

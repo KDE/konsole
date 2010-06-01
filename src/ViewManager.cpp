@@ -832,6 +832,7 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
   
     // load font 
     view->setAntialias(info->property<bool>(Profile::AntiAliasFonts));
+    view->setBoldIntense(info->property<bool>(Profile::BoldIntense));
     view->setVTFont(info->font());
 
     // set scroll-bar position

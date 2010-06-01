@@ -355,6 +355,16 @@ public:
      * Returns true if anti-aliasing of text in the terminal is enabled.
      */
     static bool antialias()                 { return _antialiasText;   }
+
+    /**
+     * Specifies whether characters with intense colors should be rendered
+     * as bold. Defaults to true.
+     */
+    void setBoldIntense(bool value) { _boldIntense = value; }
+    /**
+     * Returns true if characters with intense colors are rendered in bold.
+     */
+    bool getBoldIntense() { return _boldIntense; }
     
     /**
      * Sets whether or not the current height and width of the 
@@ -676,6 +686,7 @@ private:
     int  _fontHeight;     // height
     int  _fontWidth;     // width
     int  _fontAscent;     // ascend
+    bool _boldIntense;   // Whether intense colors should be rendered with bold font
 
     int _leftMargin;    // offset
     int _topMargin;    // offset

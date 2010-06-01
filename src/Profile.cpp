@@ -87,6 +87,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     , { ColorScheme , "ColorScheme" , APPEARANCE_GROUP , QVariant::String }
     , { ColorScheme , "colors" , 0 , QVariant::String }
     , { AntiAliasFonts, "AntiAliasFonts" , APPEARANCE_GROUP , QVariant::Bool }
+    , { BoldIntense, "BoldIntense", APPEARANCE_GROUP, QVariant::Bool }
     
     // Keyboard
     , { KeyBindings , "KeyBindings" , KEYBOARD_GROUP , QVariant::String }
@@ -179,6 +180,7 @@ FallbackProfile::FallbackProfile()
 
     setProperty(DefaultEncoding,QString(QTextCodec::codecForLocale()->name()));
     setProperty(AntiAliasFonts,true);
+    setProperty(BoldIntense,true);
 
     // default taken from KDE 3
     setProperty(WordCharacters,":@-./_~?&=%+#");

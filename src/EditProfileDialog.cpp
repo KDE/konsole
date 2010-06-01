@@ -477,6 +477,11 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
     _ui->antialiasTextButton->setChecked(antialias);
     connect( _ui->antialiasTextButton , SIGNAL(toggled(bool)) , this , 
              SLOT(setAntialiasText(bool)) );
+
+    bool boldIntense = info->property<bool>(Profile::BoldIntense);
+    _ui->boldIntenseButton->setChecked(boldIntense);
+    connect( _ui->boldIntenseButton , SIGNAL(toggled(bool)) , this ,
+             SLOT(setBoldIntense(bool)));
 }
 void EditProfileDialog::setAntialiasText(bool enable)
 {
@@ -487,6 +492,11 @@ void EditProfileDialog::setAntialiasText(bool enable)
 
     // update preview to reflect text smoothing state
     fontSelected(font);
+}
+void EditProfileDialog::setBoldIntense(bool enable)
+{
+    _tempProfile->setProperty(Profile::BoldIntense,enable);
+    preview(Profile::BoldIntense,enable);
 }
 void EditProfileDialog::colorSchemeAnimationUpdate()
 {

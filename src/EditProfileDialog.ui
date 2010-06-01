@@ -580,6 +580,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="boldIntenseButton">
+            <property name="text">
+             <string>Draw intense colors in bold font</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

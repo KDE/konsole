@@ -286,6 +286,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_fontHeight(1)
 ,_fontWidth(1)
 ,_fontAscent(1)
+,_boldIntense(true)
 ,_lines(1)
 ,_columns(1)
 ,_usedLines(1)
@@ -516,7 +517,7 @@ void TerminalDisplay::drawLineCharString(    QPainter& painter, int x, int y, co
 {
         const QPen& currentPen = painter.pen();
         
-        if ( attributes->rendition & RE_BOLD )
+        if ( (attributes->rendition & RE_BOLD) && _boldIntense )
         {
             QPen boldPen(currentPen);
             boldPen.setWidth(3);
@@ -672,9 +673,9 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
    
     // setup bold and underline
     bool useBold;
-    ColorEntry::FontWeight weight = style->fontWeight(_colorTable);
+    ColorEntry::FontWeight weight = style->fontWeight(_colorTable);    
     if (weight == ColorEntry::UseCurrentFormat)
-        useBold = style->rendition & RE_BOLD || font().bold();
+        useBold = ((style->rendition & RE_BOLD) && _boldIntense) || font().bold();
     else
         useBold = (weight == ColorEntry::Bold) ? true : false;
     bool useUnderline = style->rendition & RE_UNDERLINE || font().underline();
