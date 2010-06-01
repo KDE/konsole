@@ -143,6 +143,9 @@ class MainWindow : public KXmlGuiWindow
         void closeActiveSessionRequest();
 
     protected:
+        // Reimplemented for internal reasons.
+        virtual void showEvent(QShowEvent *event);
+
         // reimplemented from KMainWindow
         virtual bool queryClose();
         virtual void saveProperties(KConfigGroup& group);
