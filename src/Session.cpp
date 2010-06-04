@@ -1206,6 +1206,7 @@ void Session::saveSession(KConfigGroup& group)
     group.writePathEntry("WorkingDir", currentWorkingDirectory());
     group.writeEntry("LocalTab",       tabTitleFormat(LocalTabTitle));
     group.writeEntry("RemoteTab",      tabTitleFormat(RemoteTabTitle));
+    group.writeEntry("Encoding",       QString(codec()));
 }
 
 void Session::restoreSession(KConfigGroup& group)
@@ -1218,6 +1219,8 @@ void Session::restoreSession(KConfigGroup& group)
     if (!value.isEmpty()) setTabTitleFormat(LocalTabTitle, value);
     value = group.readEntry("RemoteTab");
     if (!value.isEmpty()) setTabTitleFormat(RemoteTabTitle, value);
+    value = group.readEntry("Encoding");
+    if (!value.isEmpty()) setCodec(value.toUtf8());
 }
 
 SessionGroup::SessionGroup(QObject* parent)
