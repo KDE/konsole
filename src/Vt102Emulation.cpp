@@ -742,6 +742,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case TY_CSI_PR('s', 1003) :         saveMode      (MODE_Mouse1003); break; //XTERM
     case TY_CSI_PR('r', 1003) :      restoreMode      (MODE_Mouse1003); break; //XTERM
 
+    case TY_CSI_PR('h', 1034) : /* IGNORED: 8bitinput activation     */ break; //XTERM
+
     case TY_CSI_PR('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
     case TY_CSI_PR('l', 1047) : _screen[1]->clearEntireScreen(); resetMode(MODE_AppScreen); break; //XTERM
     case TY_CSI_PR('s', 1047) :         saveMode      (MODE_AppScreen); break; //XTERM
