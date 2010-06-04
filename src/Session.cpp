@@ -1256,6 +1256,7 @@ void Session::saveSession(KConfigGroup& group)
     group.writeEntry("LocalTab",       tabTitleFormat(LocalTabTitle));
     group.writeEntry("RemoteTab",      tabTitleFormat(RemoteTabTitle));
     group.writeEntry("SessionGuid",    _uniqueIdentifier.toString());
+    group.writeEntry("Encoding",       QString(codec()));
 }
 
 void Session::restoreSession(KConfigGroup& group)
@@ -1270,6 +1271,8 @@ void Session::restoreSession(KConfigGroup& group)
     if (!value.isEmpty()) setTabTitleFormat(RemoteTabTitle, value);
     value = group.readEntry("SessionGuid");
     if (!value.isEmpty()) _uniqueIdentifier = QUuid(value);
+    value = group.readEntry("Encoding");
+    if (!value.isEmpty()) setCodec(value.toUtf8());
 }
 
 SessionGroup::SessionGroup(QObject* parent)
