@@ -1217,6 +1217,30 @@ QString Session::title(int role) const
     }
 }
 
+void Session::setTabTitleFormat(int context , const QString& format)
+{
+    switch (context) {
+    case (0):
+        this->setTabTitleFormat(Session::LocalTabTitle, format);
+        break;
+    case (1):
+        this->setTabTitleFormat(Session::RemoteTabTitle, format);
+        break;
+    }
+}
+
+QString Session::tabTitleFormat(int context) const
+{
+    switch (context) {
+    case (0):
+        return this->tabTitleFormat(Session::LocalTabTitle);
+    case (1):
+        return this->tabTitleFormat(Session::RemoteTabTitle);
+    default:
+        return QString();
+    }
+}
+
 int Session::foregroundProcessId()
 {
     int pid;

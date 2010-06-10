@@ -476,6 +476,20 @@ public slots:
   */
   Q_SCRIPTABLE QString shellSessionId() const;
 
+  /** Sets the session's tab title format for the specified @p context to @p format.
+   *  This is an overloaded member function for setTabTitleFormat(TabTitleContext, QString)
+   *  provided for convenience since enum data types may not be
+   *  exported directly through DBus
+   */
+  Q_SCRIPTABLE void setTabTitleFormat(int context, const QString& format);
+
+  /** Returns the session's tab title format for the specified @p context.
+   * This is an overloaded member function for tabTitleFormat(TitleRole)
+   * provided for convenience since enum data types may not be
+   * exported directly through DBus
+   */
+  Q_SCRIPTABLE QString tabTitleFormat(int context) const;
+
 signals:
 
   /** Emitted when the terminal process starts. */
