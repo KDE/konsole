@@ -30,7 +30,7 @@
 #include <KCmdLineArgs>
 #include <KLocale>
 
-#define KONSOLE_VERSION "2.4.999"
+#define KONSOLE_VERSION "2.5"
 
 using namespace Konsole;
 
