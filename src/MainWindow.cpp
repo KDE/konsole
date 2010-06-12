@@ -233,6 +233,7 @@ void MainWindow::setupActions()
     _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18n("&New Tab"), collection);
     _newTabMenuAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_T) );
     _newTabMenuAction->setShortcutConfigurable(true);
+    _newTabMenuAction->setAutoRepeat( false );
     connect(_newTabMenuAction, SIGNAL(triggered()), this, SLOT(newTab()));
     collection->addAction("new-tab", _newTabMenuAction);
 
@@ -240,6 +241,7 @@ void MainWindow::setupActions()
     action->setIcon( KIcon("window-new") );
     action->setText( i18n("New &Window") );
     action->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N) );
+    action->setAutoRepeat( false );
     connect( action , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
     action = collection->addAction("remote-connection");
