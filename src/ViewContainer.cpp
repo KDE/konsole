@@ -268,7 +268,7 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
         return;
 
     _dropIndicatorIndex = index;
-    const int ARROW_SIZE = 22;
+    const int ARROW_SIZE = 32;
     bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
 
     if (!_dropIndicator || _drawIndicatorDisabled != drawDisabled)
@@ -624,7 +624,14 @@ void TabbedViewContainer::startTabDrag(int tab)
     QPixmap tabPixmap = _tabBar->dragDropPixmap(tab); 
 
     drag->setPixmap(tabPixmap);
-    
+
+    // offset the tab position so the tab will follow the cursor exactly
+    // where it was clicked (as opposed to centering on the origin of the pixmap)
+    QPoint mappedPos = _tabBar->mapFromGlobal(QCursor::pos());
+    mappedPos.rx() -= tabRect.x();
+
+    drag->setHotSpot(mappedPos);
+
     int id = viewProperties(views()[tab])->identifier();
     QWidget* view = views()[tab];
     drag->setMimeData(ViewProperties::createMimeData(id));
