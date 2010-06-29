@@ -91,6 +91,8 @@ MainWindow::MainWindow()
 
     connect( _viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , this ,
             SLOT(setMenuBarVisibleOnce(bool)) );
+    connect( _viewManager , SIGNAL(setSaveGeometryOnExitRequest(bool)) , this ,
+	    SLOT(setSaveGeometryOnExit(bool)) );
     connect( _viewManager , SIGNAL(newViewRequest(Profile::Ptr)) , 
         this , SLOT(newFromProfile(Profile::Ptr)) );
     connect( _viewManager , SIGNAL(newViewRequest()) , 
@@ -139,6 +141,11 @@ void MainWindow::setMenuBarVisibleOnce(bool visible)
     _toggleMenuBarAction->setChecked(visible);
 
     _menuBarVisibilitySet = true;
+}
+
+void MainWindow::setSaveGeometryOnExit(bool save)
+{
+    setAutoSaveSettings("MainWindow",save);
 }
 
 void MainWindow::correctShortcuts()

@@ -787,6 +787,8 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
     // menu bar visibility
     emit setMenuBarVisibleRequest( info->property<bool>(Profile::ShowMenuBar) );
 
+    emit setSaveGeometryOnExitRequest( info->property<bool>(Profile::SaveGeometryOnExit) );
+
     // tab bar visibility
     if (applyContainerSettings)
     {

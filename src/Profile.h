@@ -115,6 +115,7 @@ public:
         RemoteTabTitleFormat,   
         /** (bool) Specifies whether the menu bar should be shown in the main application window. */
         ShowMenuBar,    
+        SaveGeometryOnExit,
         /** (TabBarModeEnum) Specifies when the tab bar should be shown in
          * the main application window. */ 
         TabBarMode,    

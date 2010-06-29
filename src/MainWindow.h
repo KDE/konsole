@@ -171,6 +171,8 @@ class MainWindow : public KXmlGuiWindow
         // effect if the menu bar is a MacOS-style top-level menu
         void setMenuBarVisibleOnce(bool visible);
 
+        void setSaveGeometryOnExit(bool visible);
+
         void openUrls(const QList<KUrl>& urls);
 
     private:

@@ -253,6 +253,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
 
     // window options
     _ui->showMenuBarButton->setChecked( info->property<bool>(Profile::ShowMenuBar) );
+    _ui->saveGeometryOnExitButton->setChecked( info->property<bool>(Profile::SaveGeometryOnExit) );
 
     // signals and slots
     connect( _ui->dirSelectButton , SIGNAL(clicked()) , this , SLOT(selectInitialDir()) );
@@ -268,6 +269,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     
     connect(_ui->showMenuBarButton , SIGNAL(toggled(bool)) , this , 
             SLOT(showMenuBar(bool)) );
+    connect(_ui->saveGeometryOnExitButton , SIGNAL(toggled(bool)) , this ,
+            SLOT(saveGeometryOnExit(bool)) );
 
     connect(_ui->environmentEditButton , SIGNAL(clicked()) , this , 
             SLOT(showEnvironmentEditor()) );
@@ -368,6 +371,10 @@ void EditProfileDialog::insertRemoteTabTitleText(const QString& text)
 void EditProfileDialog::showMenuBar(bool show)
 {
     _tempProfile->setProperty(Profile::ShowMenuBar,show);
+}
+void EditProfileDialog::saveGeometryOnExit(bool save)
+{
+    _tempProfile->setProperty(Profile::SaveGeometryOnExit,save);
 }
 void EditProfileDialog::tabTitleFormatChanged(const QString& format)
 {
