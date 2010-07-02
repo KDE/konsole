@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsole" version="3">
+<kpartgui name="konsole" version="5">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
