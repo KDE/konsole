@@ -470,7 +470,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
     connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
     connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
-    connect( _tabBar , SIGNAL(closeRequest(int)) , this , SLOT(closeTab(int)) );
+    connect( _tabBar , SIGNAL(tabCloseRequested(int)) , this , SLOT(closeTab(int)) );
     connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );
     connect( _tabBar, SIGNAL(contextMenu(int, const QPoint&)), this,
             SLOT(openTabContextMenu(int, const QPoint&)) );
