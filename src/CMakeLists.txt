@@ -85,6 +85,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ProfileListWidget.cpp
         Pty.cpp
         RemoteConnectionDialog.cpp
+        RenameTabsDialog.cpp
         Screen.cpp
         ScreenWindow.cpp
         Session.cpp
@@ -134,6 +135,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                   KeyBindingEditor.ui
                   ManageProfilesDialog.ui
                   RemoteConnectionDialog.ui
+                  RenameTabsDialog.ui
                  )
 
     kde4_add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})

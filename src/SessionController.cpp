@@ -52,6 +52,7 @@
 #include "Filter.h"
 #include "History.h"
 #include "IncrementalSearchBar.h"
+#include "RenameTabsDialog.h"
 #include "ScreenWindow.h"
 #include "Session.h"
 #include "ProfileList.h"
@@ -545,25 +546,22 @@ void SessionController::editCurrentProfile()
 
 void SessionController::renameSession()
 {
+    QScopedPointer<RenameTabsDialog> dialog(new RenameTabsDialog(QApplication::activeWindow()));
+    dialog->setTabTitleText(_session->tabTitleFormat(Session::LocalTabTitle));
+    dialog->setRemoteTabTitleText(_session->tabTitleFormat(Session::RemoteTabTitle));
+
     QPointer<Session> guard(_session);
-    bool ok = false;
-    const QString& text = KInputDialog::getText( i18n("Rename Tab") ,
-                                                 i18n("Enter new tab text:") ,
-                                                 _session->tabTitleFormat(Session::LocalTabTitle) ,
-                                                 &ok, QApplication::activeWindow() );
+    int result = dialog->exec();
     if (!guard)
         return;
 
-    if ( ok )
+    if (result)
     {
-        // renaming changes both the local and remote tab title formats, to save confusion over
-        // the tab title not changing if renaming the tab whilst the remote tab title format is 
-        // being displayed
-        //
-        // The downside of this approach is that after renaming a tab manually, the ability to 
-        // have separate formats for local and remote activities is lost
-        _session->setTabTitleFormat(Session::LocalTabTitle,text);
-        _session->setTabTitleFormat(Session::RemoteTabTitle,text);
+        QString tabTitle = dialog->tabTitleText();
+        QString remoteTabTitle = dialog->remoteTabTitleText();
+
+        _session->setTabTitleFormat(Session::LocalTabTitle, tabTitle);
+        _session->setTabTitleFormat(Session::RemoteTabTitle, remoteTabTitle);
 
         // trigger an update of the tab text
         snapshot();
