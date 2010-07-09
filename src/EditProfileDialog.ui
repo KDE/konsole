@@ -30,13 +30,13 @@
      </property>
      <widget class="QWidget" name="generalTab">
       <attribute name="title">
-       <string>General</string>
+       <string comment="@title:tab Generic, common options">General</string>
       </attribute>
       <layout class="QVBoxLayout">
        <item>
         <widget class="QGroupBox" name="groupBox_10">
          <property name="title">
-          <string>General</string>
+          <string comment="@title:group Generic, common options">General</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -436,7 +436,7 @@
              <string>Create a new color scheme based upon the selected scheme</string>
             </property>
             <property name="text">
-             <string>New...</string>
+             <string comment="@action:button Create an alternate color scheme">New...</string>
             </property>
            </widget>
           </item>
@@ -527,7 +527,7 @@
             <item>
              <widget class="QLabel" name="label_5">
               <property name="text">
-               <string>Small</string>
+               <string comment="@item:inrange Minimum Size">Small</string>
               </property>
              </widget>
             </item>
@@ -550,7 +550,7 @@
             <item>
              <widget class="QLabel" name="label_6">
               <property name="text">
-               <string>Large</string>
+               <string comment="@item:inrange Maximum Size">Large</string>
               </property>
              </widget>
             </item>
@@ -733,7 +733,7 @@
              <string>Hide the scroll bar</string>
             </property>
             <property name="text">
-             <string>Hidden</string>
+             <string comment="@option:radio Conceal the scroll bar">Hidden</string>
             </property>
            </widget>
           </item>
@@ -795,7 +795,7 @@
              <string>Create a new key bindings list based upon the selected bindings</string>
             </property>
             <property name="text">
-             <string>New...</string>
+             <string comment="@action:button Create an alternate key binding">New...</string>
             </property>
            </widget>
           </item>
@@ -839,7 +839,7 @@
      </widget>
      <widget class="QWidget" name="advancedTab">
       <attribute name="title">
-       <string>Advanced</string>
+       <string comment="@title:tab Complex options">Advanced</string>
       </attribute>
       <layout class="QVBoxLayout">
        <item>
@@ -1135,7 +1135,7 @@
           <item>
            <widget class="QPushButton" name="selectEncodingButton">
             <property name="text">
-             <string>Select</string>
+             <string comment="@action:button Pick an encoding">Select</string>
             </property>
            </widget>
           </item>
