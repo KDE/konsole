@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>EditProfileDialog</class>
- <widget class="QWidget" name="EditProfileDialog" >
-  <property name="geometry" >
+ <widget class="QWidget" name="EditProfileDialog">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,150 +10,142 @@
     <height>551</height>
    </rect>
   </property>
-  <layout class="QHBoxLayout" >
-   <property name="margin" >
+  <layout class="QHBoxLayout">
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="tabWidget" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="currentIndex" >
+     <property name="currentIndex">
       <number>0</number>
      </property>
-     <property name="usesScrollButtons" >
+     <property name="usesScrollButtons">
       <bool>true</bool>
      </property>
-     <widget class="QWidget" name="generalTab" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>433</width>
-        <height>493</height>
-       </rect>
-      </property>
-      <attribute name="title" >
+     <widget class="QWidget" name="generalTab">
+      <attribute name="title">
        <string>General</string>
       </attribute>
-      <layout class="QVBoxLayout" >
+      <layout class="QVBoxLayout">
        <item>
-        <widget class="QGroupBox" name="groupBox_10" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_10">
+         <property name="title">
           <string>General</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" >
-          <item row="0" column="0" >
-           <widget class="QLabel" name="profileNameLabel" >
-            <property name="text" >
+         <layout class="QGridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="profileNameLabel">
+            <property name="text">
              <string>Profile name:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="0" column="1" colspan="2" >
-           <widget class="KLineEdit" name="profileNameEdit" >
-            <property name="toolTip" >
+          <item row="0" column="1" colspan="2">
+           <widget class="KLineEdit" name="profileNameEdit">
+            <property name="toolTip">
              <string>A descriptive name for the profile</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0" >
-           <widget class="QLabel" name="label_3" >
-            <property name="text" >
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
              <string>Command:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="1" column="1" colspan="2" >
-           <widget class="KLineEdit" name="commandEdit" >
-            <property name="toolTip" >
+          <item row="1" column="1" colspan="2">
+           <widget class="KLineEdit" name="commandEdit">
+            <property name="toolTip">
              <string>The command to execute when new terminal sessions are created using this profile</string>
             </property>
-            <property name="layoutDirection" >
+            <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
            </widget>
           </item>
-          <item row="2" column="0" >
-           <widget class="QLabel" name="label_9" >
-            <property name="text" >
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
              <string>Initial directory:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="2" column="1" colspan="2" >
-           <widget class="KLineEdit" name="initialDirEdit" >
-            <property name="toolTip" >
+          <item row="2" column="1" colspan="2">
+           <widget class="KLineEdit" name="initialDirEdit">
+            <property name="toolTip">
              <string>The initial working directory for new terminal sessions using this profile</string>
             </property>
-            <property name="layoutDirection" >
-    	     <enum>Qt::LeftToRight</enum>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
             </property>
            </widget>
           </item>
-          <item row="2" column="3" >
-           <widget class="QToolButton" name="dirSelectButton" >
-            <property name="toolTip" >
+          <item row="2" column="3">
+           <widget class="QToolButton" name="dirSelectButton">
+            <property name="toolTip">
              <string>Browse for initial directory</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>...</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="0" >
-           <widget class="QLabel" name="label_10" >
-            <property name="text" >
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
              <string>Icon:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="4" column="1" >
-           <widget class="QPushButton" name="iconSelectButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+          <item row="4" column="1">
+           <widget class="QPushButton" name="iconSelectButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="minimumSize" >
+            <property name="minimumSize">
              <size>
               <width>64</width>
               <height>64</height>
              </size>
             </property>
-            <property name="baseSize" >
+            <property name="baseSize">
              <size>
               <width>0</width>
               <height>0</height>
              </size>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Select the icon displayed on tabs using this profile</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string/>
             </property>
-            <property name="iconSize" >
+            <property name="iconSize">
              <size>
               <width>48</width>
               <height>48</height>
@@ -160,12 +153,12 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="2" >
+          <item row="4" column="2">
            <spacer>
-            <property name="orientation" >
+            <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
               <height>20</height>
@@ -173,29 +166,29 @@
             </property>
            </spacer>
           </item>
-          <item row="5" column="0" >
-           <widget class="QLabel" name="environmentLabel" >
-            <property name="text" >
+          <item row="5" column="0">
+           <widget class="QLabel" name="environmentLabel">
+            <property name="text">
              <string>Environment:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="5" column="1" >
-           <widget class="QPushButton" name="environmentEditButton" >
-            <property name="toolTip" >
+          <item row="5" column="1">
+           <widget class="QPushButton" name="environmentEditButton">
+            <property name="toolTip">
              <string>Edit the list of environment variables and associated values</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Edit...</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1" colspan="2" >
-           <widget class="QCheckBox" name="startInSameDirButton" >
-            <property name="text" >
+          <item row="3" column="1" colspan="2">
+           <widget class="QCheckBox" name="startInSameDirButton">
+            <property name="text">
              <string>Start in same directory as current tab</string>
             </property>
            </widget>
@@ -204,33 +197,33 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_12" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_12">
+         <property name="title">
           <string>Window</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" >
+         <layout class="QVBoxLayout">
           <item>
-           <widget class="QCheckBox" name="showMenuBarButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+           <widget class="QCheckBox" name="showMenuBarButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Show or hide the menu bar in terminal windows</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Show menu bar in new windows</string>
             </property>
            </widget>
           </item>
-        <item>
-          <widget class="QCheckBox" name="saveGeometryOnExitButton">
-	        <property name="sizePolicy">
+          <item>
+           <widget class="QCheckBox" name="saveGeometryOnExitButton">
+            <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
@@ -242,17 +235,17 @@
             <property name="text">
              <string>Save window size and position on exit</string>
             </property>
-            </widget>
-            </item>
-            </layout>
-          </widget>
-        </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
        <item>
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>20</height>
@@ -262,78 +255,70 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabsTab" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>429</width>
-        <height>476</height>
-       </rect>
-      </property>
-      <attribute name="title" >
+     <widget class="QWidget" name="tabsTab">
+      <attribute name="title">
        <string>Tabs</string>
       </attribute>
-      <layout class="QVBoxLayout" >
+      <layout class="QVBoxLayout">
        <item>
-        <widget class="QGroupBox" name="groupBox_5" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="title">
           <string>Tab Titles</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" >
-          <item row="0" column="0" >
-           <widget class="QLabel" name="label" >
-            <property name="text" >
+         <layout class="QGridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
              <string>Tab title format:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="0" column="1" >
-           <widget class="KLineEdit" name="tabTitleEdit" >
-            <property name="toolTip" >
+          <item row="0" column="1">
+           <widget class="KLineEdit" name="tabTitleEdit">
+            <property name="toolTip">
              <string>Normal tab title format</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2" >
-           <widget class="QPushButton" name="tabTitleEditButton" >
-            <property name="toolTip" >
+          <item row="0" column="2">
+           <widget class="QPushButton" name="tabTitleEditButton">
+            <property name="toolTip">
              <string>Edit normal tab title format</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Insert</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0" >
-           <widget class="QLabel" name="label_2" >
-            <property name="text" >
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
              <string>Remote tab title format:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="1" column="1" >
-           <widget class="KLineEdit" name="remoteTabTitleEdit" >
-            <property name="toolTip" >
+          <item row="1" column="1">
+           <widget class="KLineEdit" name="remoteTabTitleEdit">
+            <property name="toolTip">
              <string>Tab title format used when a remote command (e.g. connection to another computer via SSH) is being executed</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="2" >
-           <widget class="QPushButton" name="remoteTabTitleEditButton" >
-            <property name="toolTip" >
+          <item row="1" column="2">
+           <widget class="QPushButton" name="remoteTabTitleEditButton">
+            <property name="toolTip">
              <string>Edit tab title format used when executing remote commands</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Insert</string>
             </property>
            </widget>
@@ -342,60 +327,60 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_2" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
           <string>Tab Bar</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" >
-          <item row="1" column="0" >
-           <widget class="QLabel" name="label_12" >
-            <property name="text" >
+         <layout class="QGridLayout">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
              <string>Tab bar display:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="1" column="1" >
-           <widget class="KComboBox" name="tabBarVisibilityCombo" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+          <item row="1" column="1">
+           <widget class="KComboBox" name="tabBarVisibilityCombo">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>1</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string/>
             </property>
            </widget>
           </item>
-          <item row="2" column="0" >
-           <widget class="QLabel" name="label_13" >
-            <property name="text" >
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
              <string>Tab bar position:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
-          <item row="2" column="1" >
-           <widget class="KComboBox" name="tabBarPositionCombo" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+          <item row="2" column="1">
+           <widget class="KComboBox" name="tabBarPositionCombo">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>1</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
            </widget>
           </item>
-          <item row="3" column="0" colspan="2" >
-           <widget class="QCheckBox" name="newTabButton" >
-            <property name="text" >
+          <item row="3" column="0" colspan="2">
+           <widget class="QCheckBox" name="newTabButton">
+            <property name="text">
              <string>Show 'New Tab' and 'Close Tab' buttons in tab bar</string>
             </property>
            </widget>
@@ -405,10 +390,10 @@
        </item>
        <item>
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>10</height>
@@ -418,77 +403,69 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="appearanceTab" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>429</width>
-        <height>476</height>
-       </rect>
-      </property>
-      <attribute name="title" >
+     <widget class="QWidget" name="appearanceTab">
+      <attribute name="title">
        <string>Appearance</string>
       </attribute>
-      <layout class="QVBoxLayout" >
+      <layout class="QVBoxLayout">
        <item>
-        <widget class="QGroupBox" name="groupBox" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+        <widget class="QGroupBox" name="groupBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>1</verstretch>
           </sizepolicy>
          </property>
-         <property name="title" >
+         <property name="title">
           <string>Color Scheme &amp;&amp; Background</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" >
-          <item rowspan="5" row="0" column="0" >
-           <widget class="QListView" name="colorSchemeList" >
-            <property name="verticalScrollMode" >
+         <layout class="QGridLayout">
+          <item row="0" column="0" rowspan="5">
+           <widget class="QListView" name="colorSchemeList">
+            <property name="verticalScrollMode">
              <enum>QAbstractItemView::ScrollPerPixel</enum>
             </property>
            </widget>
           </item>
-          <item row="0" column="1" >
-           <widget class="QPushButton" name="newColorSchemeButton" >
-            <property name="toolTip" >
+          <item row="0" column="1">
+           <widget class="QPushButton" name="newColorSchemeButton">
+            <property name="toolTip">
              <string>Create a new color scheme based upon the selected scheme</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>New...</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1" >
-           <widget class="QPushButton" name="editColorSchemeButton" >
-            <property name="toolTip" >
+          <item row="1" column="1">
+           <widget class="QPushButton" name="editColorSchemeButton">
+            <property name="toolTip">
              <string>Edit the selected color scheme</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Edit...</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1" >
-           <widget class="QPushButton" name="removeColorSchemeButton" >
-            <property name="toolTip" >
+          <item row="2" column="1">
+           <widget class="QPushButton" name="removeColorSchemeButton">
+            <property name="toolTip">
              <string>Delete the selected color scheme</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Remove</string>
             </property>
            </widget>
           </item>
-          <item rowspan="2" row="3" column="1" >
+          <item row="3" column="1" rowspan="2">
            <spacer>
-            <property name="orientation" >
+            <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
               <height>20</height>
@@ -496,39 +473,39 @@
             </property>
            </spacer>
           </item>
-          <item row="5" column="0" >
-           <widget class="Konsole::WarningBox" native="1" name="transparencyWarningWidget" />
+          <item row="5" column="0">
+           <widget class="Konsole::WarningBox" name="transparencyWarningWidget" native="true"/>
           </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_3" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
           <string>Font</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" >
+         <layout class="QVBoxLayout">
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout">
             <item>
-             <widget class="QLabel" name="label_7" >
-              <property name="text" >
+             <widget class="QLabel" name="label_7">
+              <property name="text">
                <string>Preview:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="fontPreviewLabel" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+             <widget class="QLabel" name="fontPreviewLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>1</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="text" >
+              <property name="text">
                <string comment="KDE::DoNotExtract">FONT PREVIEW TEXT</string>
               </property>
              </widget>
@@ -536,53 +513,53 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout">
             <item>
-             <widget class="QLabel" name="label_4" >
-              <property name="text" >
+             <widget class="QLabel" name="label_4">
+              <property name="text">
                <string>Text size:</string>
               </property>
-              <property name="alignment" >
+              <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_5" >
-              <property name="text" >
+             <widget class="QLabel" name="label_5">
+              <property name="text">
                <string>Small</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QSlider" name="fontSizeSlider" >
-              <property name="toolTip" >
+             <widget class="QSlider" name="fontSizeSlider">
+              <property name="toolTip">
                <string>Adjust the font size used in this profile</string>
               </property>
-              <property name="minimum" >
+              <property name="minimum">
                <number>9</number>
               </property>
-              <property name="maximum" >
+              <property name="maximum">
                <number>20</number>
               </property>
-              <property name="orientation" >
+              <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_6" >
-              <property name="text" >
+             <widget class="QLabel" name="label_6">
+              <property name="text">
                <string>Large</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="editFontButton" >
-              <property name="toolTip" >
+             <widget class="QPushButton" name="editFontButton">
+              <property name="toolTip">
                <string>Change the font used in this profile</string>
               </property>
-              <property name="text" >
+              <property name="text">
                <string>Edit Font...</string>
               </property>
              </widget>
@@ -590,8 +567,8 @@
            </layout>
           </item>
           <item>
-           <widget class="QCheckBox" name="antialiasTextButton" >
-            <property name="text" >
+           <widget class="QCheckBox" name="antialiasTextButton">
+            <property name="text">
              <string>Smooth fonts</string>
             </property>
            </widget>
@@ -608,81 +585,73 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="scrollingTab" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>433</width>
-        <height>493</height>
-       </rect>
-      </property>
-      <attribute name="title" >
+     <widget class="QWidget" name="scrollingTab">
+      <attribute name="title">
        <string>Scrolling</string>
       </attribute>
-      <layout class="QVBoxLayout" >
+      <layout class="QVBoxLayout">
        <item>
-        <widget class="QGroupBox" name="groupBox_6" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_6">
+         <property name="title">
           <string>Scrolling</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" >
+         <layout class="QVBoxLayout">
           <item>
-           <widget class="QRadioButton" name="disableScrollbackButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QRadioButton" name="disableScrollbackButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Disable scroll bar and do not remember previous output</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Disable scrollback</string>
             </property>
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout">
             <item>
-             <widget class="QRadioButton" name="fixedScrollbackButton" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+             <widget class="QRadioButton" name="fixedScrollbackButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="toolTip" >
+              <property name="toolTip">
                <string>Limit the remembered output to a fixed number of lines</string>
               </property>
-              <property name="text" >
+              <property name="text">
                <string>Fixed number of lines: </string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="KIntSpinBox" name="scrollBackLinesSpinner" >
-              <property name="toolTip" >
+             <widget class="KIntSpinBox" name="scrollBackLinesSpinner">
+              <property name="toolTip">
                <string>Number of lines of output to remember</string>
               </property>
-              <property name="minimum" >
+              <property name="minimum">
                <number>1</number>
               </property>
-              <property name="maximum" >
+              <property name="maximum">
                <number>100000</number>
               </property>
              </widget>
             </item>
             <item>
              <spacer>
-              <property name="orientation" >
+              <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" stdset="0" >
+              <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
                 <height>20</height>
@@ -693,17 +662,17 @@
            </layout>
           </item>
           <item>
-           <widget class="QRadioButton" name="unlimitedScrollbackButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QRadioButton" name="unlimitedScrollbackButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Remember all output produced by the terminal</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Unlimited scrollback</string>
             </property>
            </widget>
@@ -712,58 +681,58 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_7" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_7">
+         <property name="title">
           <string>Scroll Bar</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" >
+         <layout class="QVBoxLayout">
           <item>
-           <widget class="QRadioButton" name="scrollBarLeftButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QRadioButton" name="scrollBarLeftButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Show the scroll bar on the left side of the terminal window</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Show on left side</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="scrollBarRightButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QRadioButton" name="scrollBarRightButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Show the scroll bar on the right side of the terminal window</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Show on right side</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="scrollBarHiddenButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QRadioButton" name="scrollBarHiddenButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Hide the scroll bar</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Hidden</string>
             </property>
            </widget>
@@ -773,10 +742,10 @@
        </item>
        <item>
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>20</height>
@@ -786,41 +755,33 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="keyboardTab" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>433</width>
-        <height>493</height>
-       </rect>
-      </property>
-      <attribute name="title" >
+     <widget class="QWidget" name="keyboardTab">
+      <attribute name="title">
        <string>Input</string>
       </attribute>
-      <layout class="QVBoxLayout" >
+      <layout class="QVBoxLayout">
        <item>
-        <widget class="QGroupBox" name="keyBindingsGroup" >
-         <property name="title" >
+        <widget class="QGroupBox" name="keyBindingsGroup">
+         <property name="title">
           <string>Key Bindings</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" >
-          <item row="0" column="0" colspan="2" >
-           <widget class="QLabel" name="label_15" >
-            <property name="text" >
+         <layout class="QGridLayout">
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="label_15">
+            <property name="text">
              <string>Key bindings control how combinations of key presses in the terminal window are converted into the stream of characters which is sent to the current terminal program.</string>
             </property>
-            <property name="wordWrap" >
+            <property name="wordWrap">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item rowspan="5" row="1" column="0" >
-           <widget class="QListView" name="keyBindingList" >
-            <property name="iconSize" >
+          <item row="1" column="0" rowspan="5">
+           <widget class="QListView" name="keyBindingList">
+            <property name="iconSize">
              <size>
               <width>32</width>
               <height>32</height>
@@ -828,42 +789,42 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1" >
-           <widget class="QPushButton" name="newKeyBindingsButton" >
-            <property name="toolTip" >
+          <item row="1" column="1">
+           <widget class="QPushButton" name="newKeyBindingsButton">
+            <property name="toolTip">
              <string>Create a new key bindings list based upon the selected bindings</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>New...</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1" >
-           <widget class="QPushButton" name="editKeyBindingsButton" >
-            <property name="toolTip" >
+          <item row="2" column="1">
+           <widget class="QPushButton" name="editKeyBindingsButton">
+            <property name="toolTip">
              <string>Edit the selected key bindings list</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Edit...</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1" >
-           <widget class="QPushButton" name="removeKeyBindingsButton" >
-            <property name="toolTip" >
+          <item row="3" column="1">
+           <widget class="QPushButton" name="removeKeyBindingsButton">
+            <property name="toolTip">
              <string>Delete the selected key bindings list</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Remove</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1" >
+          <item row="5" column="1">
            <spacer>
-            <property name="orientation" >
+            <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
               <height>20</height>
@@ -876,88 +837,80 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="advancedTab" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>433</width>
-        <height>517</height>
-       </rect>
-      </property>
-      <attribute name="title" >
+     <widget class="QWidget" name="advancedTab">
+      <attribute name="title">
        <string>Advanced</string>
       </attribute>
-      <layout class="QVBoxLayout" >
+      <layout class="QVBoxLayout">
        <item>
-        <widget class="QGroupBox" name="groupBox_4" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
           <string>Terminal Features</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" >
+         <layout class="QVBoxLayout">
           <item>
-           <widget class="QCheckBox" name="enableBlinkingTextButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QCheckBox" name="enableBlinkingTextButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Allow terminal programs to create blinking sections of text</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Allow blinking text</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="enableFlowControlButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QCheckBox" name="enableFlowControlButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Allow the output to be suspended by pressing Ctrl+S</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Enable flow control using Ctrl+S, Ctrl+Q</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="enableResizeWindowButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QCheckBox" name="enableResizeWindowButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Allow terminal programs to resize the window</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Allow programs to resize terminal window</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="enableBidiRenderingButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QCheckBox" name="enableBidiRenderingButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Enable Bi-Directional display on terminals (valid for Arabic, Farsi or Hebrew only)</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Enable Bi-Directional text rendering</string>
             </property>
            </widget>
@@ -966,113 +919,113 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_9" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_9">
+         <property name="title">
           <string>Mouse Interaction</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" >
+         <layout class="QVBoxLayout">
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout">
             <item>
-             <widget class="QLabel" name="label_11" >
-              <property name="wordWrap">
-               <bool>true</bool>
-              </property>
-              <property name="text" >
+             <widget class="QLabel" name="label_11">
+              <property name="text">
                <string>Characters considered part of a word when double clicking: </string>
               </property>
-              <property name="alignment" >
+              <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="KLineEdit" name="wordCharacterEdit" >
-              <property name="toolTip" >
+             <widget class="KLineEdit" name="wordCharacterEdit">
+              <property name="toolTip">
                <string>Characters which are considered part of a word when double-clicking to select whole words in the terminal</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
-            <item>
-            <widget class="QCheckBox" name="tripleClickMode" >
-             <property name="text" >
-              <string>Triple click selects from current word forward</string>
-             </property>
-              <property name="toolTip" >
-               <string>All characters from the current word to the end of line will be selected.</string>
-              </property>
-            </widget>
-           </item>
+          <item>
+           <widget class="QCheckBox" name="tripleClickMode">
+            <property name="toolTip">
+             <string>All characters from the current word to the end of line will be selected.</string>
+            </property>
+            <property name="text">
+             <string>Triple click selects from current word forward</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_8" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="title">
           <string>Cursor</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" >
+         <layout class="QVBoxLayout">
           <item>
-           <widget class="QCheckBox" name="enableBlinkingCursorButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QCheckBox" name="enableBlinkingCursorButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Make the cursor blink regularly</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Blinking cursor</string>
             </property>
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout">
             <item>
-             <widget class="QLabel" name="label_8" >
-              <property name="text" >
+             <widget class="QLabel" name="label_8">
+              <property name="text">
                <string>Cursor shape:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="cursorShapeCombo" >
-              <property name="toolTip" >
+             <widget class="QComboBox" name="cursorShapeCombo">
+              <property name="toolTip">
                <string>Change the shape of the cursor</string>
               </property>
               <item>
-               <property name="text" >
+               <property name="text">
                 <string comment="The shape of the cursor">Block</string>
                </property>
               </item>
               <item>
-               <property name="text" >
+               <property name="text">
                 <string comment="The shape of the cursor, similar to a capital I">I-Beam</string>
                </property>
               </item>
               <item>
-               <property name="text" >
+               <property name="text">
                 <string comment="The shape of the cursor">Underline</string>
                </property>
               </item>
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer" >
-              <property name="orientation" >
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" stdset="0" >
+              <property name="sizeHint" stdset="0">
                <size>
                 <width>40</width>
                 <height>20</height>
@@ -1083,61 +1036,61 @@
            </layout>
           </item>
           <item>
-           <widget class="QRadioButton" name="autoCursorColorButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+           <widget class="QRadioButton" name="autoCursorColorButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="toolTip" >
+            <property name="toolTip">
              <string>Set the cursor to match the color of the character underneath it.</string>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>Set cursor color to match current character</string>
             </property>
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
+           <layout class="QHBoxLayout">
             <item>
-             <widget class="QRadioButton" name="customCursorColorButton" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+             <widget class="QRadioButton" name="customCursorColorButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="toolTip" >
+              <property name="toolTip">
                <string>Use a custom, fixed color for the cursor</string>
               </property>
-              <property name="text" >
+              <property name="text">
                <string>Custom cursor color:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="KColorButton" name="customColorSelectButton" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+             <widget class="KColorButton" name="customColorSelectButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="toolTip" >
+              <property name="toolTip">
                <string>Select the color used to draw the cursor</string>
               </property>
-              <property name="text" >
+              <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer_2" >
-              <property name="orientation" >
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" stdset="0" >
+              <property name="sizeHint" stdset="0">
                <size>
                 <width>40</width>
                 <height>20</height>
@@ -1151,37 +1104,37 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_11" >
-         <property name="title" >
+        <widget class="QGroupBox" name="groupBox_11">
+         <property name="title">
           <string>Encoding</string>
          </property>
-         <property name="flat" >
+         <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QHBoxLayout" >
+         <layout class="QHBoxLayout">
           <item>
-           <widget class="QLabel" name="label_14" >
-            <property name="text" >
+           <widget class="QLabel" name="label_14">
+            <property name="text">
              <string>Default character encoding:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="characterEncodingLabel" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+           <widget class="QLabel" name="characterEncodingLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="text" >
+            <property name="text">
              <string comment="KDE::DoNotExtract">DEFAULTENCODING</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="selectEncodingButton" >
-            <property name="text" >
+           <widget class="QPushButton" name="selectEncodingButton">
+            <property name="text">
              <string>Select</string>
             </property>
            </widget>
@@ -1191,10 +1144,10 @@
        </item>
        <item>
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>20</height>
@@ -1210,11 +1163,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KColorButton</class>
-   <extends>QPushButton</extends>
-   <header>kcolorbutton.h</header>
-  </customwidget>
-  <customwidget>
    <class>KIntSpinBox</class>
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
@@ -1223,6 +1171,16 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
   </customwidget>
   <customwidget>
    <class>Konsole::WarningBox</class>
