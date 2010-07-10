@@ -473,7 +473,7 @@ ShortcutItemDelegate::ShortcutItemDelegate(QObject* parent)
 }
 void ShortcutItemDelegate::editorModified(const QKeySequence& keys)
 {
-    kDebug() << keys.toString();
+    //kDebug() << keys.toString();
 
     KKeySequenceWidget* editor = qobject_cast<KKeySequenceWidget*>(sender());
     Q_ASSERT(editor);
