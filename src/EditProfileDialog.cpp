@@ -615,8 +615,8 @@ bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
     {
         const QFont& labelFont = _ui->fontPreviewLabel->font();
         qreal size = labelFont.pointSizeF();
-        _ui->fontPreviewLabel->setText(i18n("%1, size %2", labelFont.family(),
-                    KGlobal::locale()->formatNumber(size, size == floor(size) ? 0 : 1)));
+        QString fontSize  = KGlobal::locale()->formatNumber(size, size == floor(size) ? 0 : 1);
+        _ui->fontPreviewLabel->setText(i18n("%1, size %2", labelFont.family(), fontSize));
     }
 
     return KDialog::eventFilter(watched,event);
