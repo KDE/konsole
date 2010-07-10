@@ -79,7 +79,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
 
     QToolButton* findNext = new QToolButton(this);
     findNext->setObjectName("find-next-button");
-    findNext->setText(i18n("Next"));
+    findNext->setText(i18nc("@action:button Go to the next phrase", "Next"));
     findNext->setAutoRaise(true);
     findNext->setIcon( KIcon("go-down-search") );
     findNext->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -88,7 +88,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
 
     QToolButton* findPrev = new QToolButton(this);
     findPrev->setObjectName("find-previous-button");
-    findPrev->setText(i18n("Previous"));
+    findPrev->setText(i18nc("@action:button Go to the previous phrase", "Previous"));
     findPrev->setAutoRaise(true);
     findPrev->setIcon( KIcon("go-up-search") );
     findPrev->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
