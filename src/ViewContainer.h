@@ -32,27 +32,20 @@
 // KDE
 #include <KTabBar>
 
-class QSpacerItem;
 class QStackedWidget;
 class QWidget;
 class QLabel;
 
 // TabbedViewContainer
     // Qt
-    class QAction;
     class QPoint;
-    class QWidgetAction;
     class QToolButton;
     class QMenu;
 
     // KDE
-    class KTabWidget;
-    class KColorCells;
     class KMenu;
 
 // ListViewContainer
-    class QSplitter;
-    class QListWidget;
 
 namespace Konsole
 {

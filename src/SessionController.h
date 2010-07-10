@@ -48,7 +48,6 @@ namespace KIO
 class QAction;
 class QTextCodec;
 class KCodecAction;
-class KMenu;
 class KUrl;
 class KJob;
 

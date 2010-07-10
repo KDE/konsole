@@ -39,7 +39,6 @@
 #include "konsole_export.h"
 
 class KConfig;
-class KConfigGroup;
 
 namespace Konsole
 {

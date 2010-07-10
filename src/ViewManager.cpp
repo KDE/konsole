@@ -36,6 +36,7 @@
 #include <KToggleAction>
 #include <KXMLGUIFactory>
 #include <QStringList>
+#include <KConfigGroup>
 
 // Konsole
 #include "ColorScheme.h"

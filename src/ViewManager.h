@@ -31,6 +31,7 @@
 class QSignalMapper;
 class QMenu;
 class KActionCollection;
+class KConfigGroup;
 
 namespace Konsole
 {

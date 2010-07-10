@@ -37,7 +37,6 @@ class QDropEvent;
 class QLabel;
 class QTimer;
 class QEvent;
-class QFrame;
 class QGridLayout;
 class QKeyEvent;
 class QScrollBar;
