@@ -359,6 +359,7 @@ void ManageProfilesDialog::newType()
     {
         SessionManager::instance()->addProfile(newProfile);
         SessionManager::instance()->setFavorite(newProfile,true);
+        SessionManager::instance()->changeProfile(newProfile, newProfile->setProperties());
     }
 }
 void ManageProfilesDialog::editSelected()
