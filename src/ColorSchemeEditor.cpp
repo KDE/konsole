@@ -100,9 +100,10 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     }
     else
     {
-        _ui->transparencyWarningWidget->setText(i18n("The background transparency setting will not"
-                                            " be used because your desktop does not appear to support"
-                                            " transparent windows."));
+        _ui->transparencyWarningWidget->setText(i18nc("@info:status",
+            "The background transparency setting will not"
+            " be used because your desktop does not appear to support"
+            " transparent windows."));
     }
 }
 void ColorSchemeEditor::setRandomizedBackgroundColor( bool randomize )

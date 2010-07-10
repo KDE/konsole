@@ -433,7 +433,7 @@ void SessionController::setupActions()
 
     // Copy Input To -> None
     _copyToNoneAction = collection->addAction("copy-input-to-none", this, SLOT(copyInputToNone()));
-    _copyToNoneAction->setText(i18n("&None"));
+    _copyToNoneAction->setText(i18nc("@action:inmenu Do not select any tabs", "&None"));
     _copyToNoneAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Slash));
     _copyToNoneAction->setCheckable(true);
     _copyToNoneAction->setChecked(true);
