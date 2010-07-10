@@ -400,11 +400,11 @@ void Session::run()
   //check that everything is in place to run the session
   if (_program.isEmpty())
   {
-      kDebug() << "Session::run() - program to run not set.";
+      kWarning() << "Session::run() - program to run not set.";
   }
   if (_arguments.isEmpty())
   {
-      kDebug() << "Session::run() - no command line arguments specified.";
+      kWarning() << "Session::run() - no command line arguments specified.";
   }
   if (_uniqueIdentifier.isNull())
   {
@@ -726,7 +726,7 @@ void Session::close()
   {
      if (isRunning())
      {
-        kDebug() << "Process" << _shellProcess->pid() << "did not respond to SIGHUP";
+        kWarning() << "Process" << _shellProcess->pid() << "did not respond to SIGHUP";
 
         // close the pty and wait to see if the process finishes.  If it does,
         // the done() slot will have been called so we can return.  Otherwise,
