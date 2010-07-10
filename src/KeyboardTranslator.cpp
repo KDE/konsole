@@ -104,7 +104,7 @@ bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator* transla
     const QString path = KGlobal::dirs()->saveLocation("data","konsole/")+translator->name()
            +".keytab";
 
-    kDebug() << "Saving translator to" << path;
+    //kDebug() << "Saving translator to" << path;
 
     QFile destination(path);
     if (!destination.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -366,7 +366,7 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
             else if ( parseAsKeyCode(buffer,itemKeyCode) )
                 keyCode = itemKeyCode;
             else
-                kDebug() << "Unable to parse key binding item:" << buffer;
+                kWarning() << "Unable to parse key binding item:" << buffer;
 
             buffer.clear();
         }
@@ -432,7 +432,7 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString& item , int& keyCode
 
         if ( sequence.count() > 1 )
         {
-            kDebug() << "Unhandled key codes in sequence: " << item;
+            kWarning() << "Unhandled key codes in sequence: " << item;
         }
     }
     // additional cases implemented for backwards compatibility with KDE 3
