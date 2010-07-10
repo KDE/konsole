@@ -908,9 +908,9 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     if ( !ok || name != "ssh" )
     {
         if ( !ok )
-            kDebug() << "Could not read process info";
+            kWarning() << "Could not read process info";
         else
-            kDebug() << "Process is not a SSH process";
+            kWarning() << "Process is not a SSH process";
 
         return;
     }
@@ -988,7 +988,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     }
     else
     {
-        kDebug() << "Could not read arguments";
+        kWarning() << "Could not read arguments";
         
         return;
     }

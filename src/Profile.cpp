@@ -306,7 +306,7 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr info)
         newPath = KGlobal::dirs()->saveLocation("data","konsole/") + info->name() + ".profile";
     }
 
-    kDebug(1211) << "Saving profile under name: " << newPath;
+    //kDebug(1211) << "Saving profile under name: " << newPath;
 
     return newPath;
 }
@@ -433,7 +433,7 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
     if ( config->hasKey("Name") )
         profile->setProperty(Profile::Name,config->readEntry("Name"));
 
-    kDebug() << "reading KDE 3 profile " << profile->name();
+    //kDebug() << "reading KDE 3 profile " << profile->name();
 
     if ( config->hasKey("Icon") )
         profile->setProperty(Profile::Icon,config->readEntry("Icon"));

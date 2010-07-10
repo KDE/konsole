@@ -114,7 +114,7 @@ const Block* BlockArray::at(size_t i)
         return lastmap;
 
     if (i > index) {
-        kDebug(1211) << "BlockArray::at() i > index\n";
+        //kDebug(1211) << "BlockArray::at() i > index\n";
         return 0;
     }
     

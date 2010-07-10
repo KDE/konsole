@@ -143,7 +143,7 @@ void Screen::setMargins(int top, int bot)
     top = top - 1;              // Adjust to internal lineno
     bot = bot - 1;              // Adjust to internal lineno
     if ( !( 0 <= top && top < bot && bot < lines ) )
-    { kDebug()<<" setRegion("<<top<<","<<bot<<") : bad range.";
+    { //Debug()<<" setRegion("<<top<<","<<bot<<") : bad range.";
         return;                   // Default error action: ignore
     }
     _topMargin = top;

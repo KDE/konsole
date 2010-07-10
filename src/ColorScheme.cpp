@@ -577,7 +577,7 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
         _colorSchemes.insert(scheme->name(),scheme);
     else
     {
-        kDebug() << "color scheme with name" << scheme->name() << "has already been" <<
+        kWarning() << "color scheme with name" << scheme->name() << "has already been" <<
             "found, ignoring.";
         delete scheme;
     }
@@ -619,7 +619,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     }
     else
     {
-        kDebug() << "color scheme with name" << scheme->name() << "has already been" <<
+        kWarning() << "color scheme with name" << scheme->name() << "has already been" <<
             "found, ignoring.";
         
         delete scheme;

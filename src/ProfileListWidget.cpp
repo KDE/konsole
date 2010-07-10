@@ -45,7 +45,7 @@ ProfileListWidget::ProfileListWidget(QWidget* parent)
 
 void ProfileListWidget::startDrag(Qt::DropActions /*supportedActions*/)
 {
-    kDebug() << "drag and drop started in session list widget";
+    //kDebug() << "drag and drop started in session list widget";
 
     QMimeData* mimeData = new QMimeData();
 

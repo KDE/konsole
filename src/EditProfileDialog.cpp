@@ -772,7 +772,7 @@ void EditProfileDialog::colorSchemeSelected()
         QAbstractItemModel* model = _ui->colorSchemeList->model();
         const ColorScheme* colors = model->data(selected.first(),Qt::UserRole+1).value<const ColorScheme*>();
 
-        kDebug() << "Setting temp profile color to" << colors->name();
+        //kDebug() << "Setting temp profile color to" << colors->name();
         
         previewColorScheme(selected.first());
         _tempProfile->setProperty(Profile::ColorScheme,colors->name());
