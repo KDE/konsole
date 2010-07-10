@@ -45,7 +45,7 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     : KDialog(parent)
     , _sessionModel(new QStandardItemModel(this))
 {
-    setCaption(i18n("Manage Profiles"));
+    setCaption(i18nc("@title:window", "Manage Profiles"));
     setButtons( KDialog::Ok | KDialog::Apply | KDialog::Cancel ); 
 
     connect( this, SIGNAL(applyClicked()) , this , SLOT(setMenuOrder()) );
@@ -219,9 +219,9 @@ void ManageProfilesDialog::populateTable()
 
     _sessionModel->clear();
     // setup session table
-    _sessionModel->setHorizontalHeaderLabels( QStringList() << i18n("Name")
-                                                            << i18n("Show in Menu") 
-                                                            << i18n("Shortcut") );
+    _sessionModel->setHorizontalHeaderLabels( QStringList() << i18nc("@title:column Profile label", "Name")
+                                                            << i18nc("@title:column Display profile in file menu", "Show in Menu") 
+                                                            << i18nc("@title:column Profile shortcut text", "Shortcut") );
 
     QList<Profile::Ptr> profiles = SessionManager::instance()->loadedProfiles();
     SessionManager::instance()->sortProfiles(profiles);
@@ -349,7 +349,7 @@ void ManageProfilesDialog::newType()
 
     Profile::Ptr newProfile = Profile::Ptr(new Profile(SessionManager::instance()->fallbackProfile()));
     newProfile->clone(sourceProfile,true);
-    newProfile->setProperty(Profile::Name,i18n("New Profile"));
+    newProfile->setProperty(Profile::Name, i18nc("@item This will be used as part of the file name", "New Profile"));
     newProfile->setProperty(Profile::MenuIndex, QString("0"));
 
     dialog.setProfile(newProfile); 
