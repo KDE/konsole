@@ -58,6 +58,7 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     _ui->sessionTable->setItemDelegateForColumn(FavoriteStatusColumn,new FavoriteItemDelegate(this));
     _ui->sessionTable->setItemDelegateForColumn(ShortcutColumn,new ShortcutItemDelegate(this));
     _ui->sessionTable->setEditTriggers(_ui->sessionTable->editTriggers() | QAbstractItemView::SelectedClicked);
+    _ui->sessionTable->setShowGrid(false);
 
     // TODO re-enable when saving profile order works - khindenburg
     _ui->moveUpButton->setEnabled(false);
