@@ -34,7 +34,7 @@
 
 using namespace Konsole;
 
-// fills the KAboutData structure with information about contributors to 
+// fills the KAboutData structure with information about contributors to
 // Konsole
 void fillAboutData(KAboutData& aboutData);
 void fillCommandLineOptions(KCmdLineOptions& options);
@@ -43,7 +43,7 @@ bool forceNewProcess();     // returns true if new instance should use a new
 void restoreSession(Application& app);
 
 // ***
-// Entry point into the Konsole terminal application.  
+// Entry point into the Konsole terminal application.
 // ***
 extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 {
@@ -51,7 +51,8 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
                         ki18n("Konsole"),
                         KONSOLE_VERSION,
                         ki18n("Terminal emulator"),
-                        KAboutData::License_GPL_V2
+			KAboutData::License_GPL_V2,
+			ki18n("Copyright © 2006–2011 Konsole authors")
                     );
     fillAboutData(about);
 
@@ -71,14 +72,14 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     {
         exit(0);
     }
-    
+
     Application app;
     restoreSession(app);
     return app.exec();
 }
 bool forceNewProcess()
 {
-    // when starting Konsole from a terminal, a new process must be used 
+    // when starting Konsole from a terminal, a new process must be used
     // so that the current environment is propagated into the shells of the new
     // Konsole and any debug output or warnings from Konsole are written to
     // the current terminal
@@ -113,7 +114,7 @@ void fillAboutData(KAboutData& aboutData)
   aboutData.addAuthor(ki18n("Robert Knight"),ki18n("Maintainer"), "robertknight@gmail.com");
   aboutData.addAuthor(ki18n("Lars Doelle"),ki18n("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit(ki18n("Kurt V. Hindenburg"),
-    ki18n("Bug fixes and general improvements"), 
+    ki18n("Bug fixes and general improvements"),
     "kurt.hindenburg@gmail.com");
   aboutData.addCredit(ki18n("Waldo Bastian"),
     ki18n("Bug fixes and general improvements"),
