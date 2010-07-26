@@ -51,7 +51,6 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
                         ki18n("Konsole"),
                         KONSOLE_VERSION,
                         ki18n("Terminal emulator"),
-                        ki18n(description),
 			KAboutData::License_GPL_V2,
 			ki18n("Copyright © 2006–2011 Konsole authors")
                     );
