@@ -51,6 +51,12 @@ RenameTabsDialog::RenameTabsDialog(QWidget* parent)
 
 }
 
+RenameTabsDialog::~RenameTabsDialog()
+{
+    delete _ui;
+}
+
+
 void RenameTabsDialog::setTabTitleText(const QString& text)
 {
     _ui->tabTitleEdit->setText(text);

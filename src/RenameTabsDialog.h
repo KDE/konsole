@@ -43,6 +43,7 @@ Q_OBJECT
 
 public:
     RenameTabsDialog(QWidget* parent = 0);
+    ~RenameTabsDialog();
     QString tabTitleText() const;
     QString remoteTabTitleText() const;
     void setTabTitleText(const QString&);
