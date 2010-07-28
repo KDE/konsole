@@ -61,6 +61,12 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     _ui->sessionList->setColumnHidden(0,true); // Hide number column
     _ui->sessionList->header()->hide();
 }
+
+CopyInputDialog::~CopyInputDialog()
+{
+    delete _ui;
+}
+
 void CopyInputDialog::setChosenSessions(const QSet<Session*>& sessions)
 {
     QSet<Session*> checked = sessions;

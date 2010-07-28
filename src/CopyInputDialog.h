@@ -51,7 +51,7 @@ Q_OBJECT
 
 public:
     CopyInputDialog(QWidget* parent = 0);
-
+    ~CopyInputDialog();
     /** 
      * Sets the 'source' session whoose input will be copied to 
      * other sessions.  This session is displayed grayed out in the list
