@@ -122,6 +122,7 @@ Comment[id]=Profil standar Konsole
 Comment[is]=Sjálfgefið sniðmát Konsole
 Comment[it]=Profilo predefinito di Konsole
 Comment[ja]=Konsole の標準プロファイル
+Comment[ka]=Konsole-ს ნაგულისხმები პროფილი 
 Comment[kk]=Konsole-дың әдетті профилі
 Comment[km]=ទម្រង់​លំនាំដើម​របស់​កុងសូល
 Comment[kn]=ಕನ್ಸೋಲ್ ನ (ಆದೇಶ ಗ್ರಾಹಿ) ಪೂರ್ವನಿಯೋಜಿತ ವ್ಯಕ್ತಿವೈಶಿಷ್ಟ್ಯ (ಪ್ರೊಫೈಲ್)
