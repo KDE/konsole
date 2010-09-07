@@ -351,7 +351,6 @@ public:
     QPixmap dragDropPixmap(int tab);
 
 protected:
-    virtual QSize tabSizeHint(int index) const;
     virtual void dragEnterEvent(QDragEnterEvent* event);
     virtual void dragLeaveEvent(QDragLeaveEvent* event);
     virtual void dragMoveEvent(QDragMoveEvent* event);
