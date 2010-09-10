@@ -647,11 +647,19 @@ private:
             return false;
         }
 
+#if defined(__DragonFly__)
+        setName(kInfoProc->kp_comm);
+        setPid(kInfoProc->kp_pid);
+        setParentPid(kInfoProc->kp_ppid);
+        setForegroundPid(kInfoProc->kp_pgid);
+        setUserId(kInfoProc->kp_uid);
+#else
         setName(kInfoProc->ki_comm);
         setPid(kInfoProc->ki_pid);
         setParentPid(kInfoProc->ki_ppid);
         setForegroundPid(kInfoProc->ki_pgid);
         setUserId(kInfoProc->ki_uid);
+#endif
 
         readUserName();
 
@@ -692,6 +700,10 @@ private:
 
     virtual bool readCurrentDir(int pid)
     {
+#if defined(__DragonFly__)
+        // Not supported in DragonFly
+        return false;
+#else
         int numrecords;
         struct kinfo_file* info = 0;
 
@@ -713,6 +725,7 @@ private:
 
         free(info);
         return false;
+#endif
     }
 } ;
 #endif
