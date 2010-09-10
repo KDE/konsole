@@ -260,6 +260,7 @@ ViewContainerTabBar::ViewContainerTabBar(QWidget* parent,TabbedViewContainer* co
     , _dropIndicatorIndex(-1)
     , _drawIndicatorDisabled(false)
 {
+    setStyleSheet("QTabBar::tab { min-width: 2em; max-width: 25em }");
     setElideMode(Qt::ElideLeft);
 }
 void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
@@ -396,29 +397,10 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
         event->ignore();
 }
 
-/* Try to provide a reasonable tab width:
- * If there are less than 5 tabs, let the tabs fill out the tabbar.
- * Otherwise, check the tab text size and the minimumTabWidth value.
- * The minimumTabWidth is to prevent the tabs from getting too
- * small such that no scroll indicators will appear.
-*/
+/* A stylesheet is used now to handle width of tab. */
 QSize ViewContainerTabBar::tabSizeHint(int index) const
 {
-    const int fillTabCount = 5;
-    const int minimumTabWidth = 150; // Arbitrary value
-    int tabBarWidth = rect().width();
-    int tabCount = count();
-    int tabMaxWidth;
-    if (tabCount <= fillTabCount)
-        tabMaxWidth = tabBarWidth / (tabCount + 0.5);
-    else
-        tabMaxWidth = tabBarWidth / (fillTabCount + 0.5);
-
-    int tabTextWidth = fontMetrics().width(tabText(index));
-    // qBound ( minimum, value, max )
-    QSize size (qBound(minimumTabWidth, tabTextWidth, tabMaxWidth),
-                QTabBar::tabSizeHint(index).height());
-    return size;
+    return QTabBar::tabSizeHint(index);
 }
 QPixmap ViewContainerTabBar::dragDropPixmap(int tab) 
 {
