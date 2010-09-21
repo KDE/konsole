@@ -1,7 +1,7 @@
 [General]
 Name=Shell
 Name[af]=Tolk
-Name[ar]=القشرة
+Name[ar]=الصدفة
 Name[as]=শ্বেল
 Name[be@latin]=Abałonka
 Name[bg]=Шел
@@ -87,7 +87,7 @@ Name[zh_CN]=Shell
 Name[zh_TW]=Shell
 Comment=Konsole default profile
 Comment[af]=Konsole verstekprofiel
-Comment[ar]=لوحة الإعدادات الافتراضية
+Comment[ar]=لوحة الإعدادات المبدئية
 Comment[as]=Konsole ৰ অবিকল্পিত পাৰ্শ্বৰূপ
 Comment[be@latin]=Zmoŭčany profil prahramy „Konsole”
 Comment[bg]=Профил по подразбиране на конзолата
