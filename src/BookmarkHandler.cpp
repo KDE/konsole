@@ -50,7 +50,7 @@ BookmarkHandler::BookmarkHandler( KActionCollection* collection,
       m_toplevel(toplevel),
       m_activeView(0)
 {
-    setObjectName( "BookmarkHandler" );
+    setObjectName( QLatin1String( "BookmarkHandler" ) );
 
     m_menu = menu;
 

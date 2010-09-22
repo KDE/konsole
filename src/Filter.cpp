@@ -525,8 +525,8 @@ QList<QAction*> UrlFilter::HotSpot::actions()
     // object names are set here so that the hotspot performs the
     // correct action when activated() is called with the triggered
     // action passed as a parameter.
-    openAction->setObjectName("open-action");
-    copyAction->setObjectName("copy-action");
+    openAction->setObjectName( QLatin1String("open-action" ));
+    copyAction->setObjectName( QLatin1String("copy-action" ));
 
     QObject::connect( openAction , SIGNAL(triggered()) , _urlObject , SLOT(activated()) );
     QObject::connect( copyAction , SIGNAL(triggered()) , _urlObject , SLOT(activated()) );

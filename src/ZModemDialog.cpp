@@ -28,7 +28,7 @@ using namespace Konsole;
 ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
  : KDialog( parent )
 {
-  setObjectName( "zmodem_progress" );
+  setObjectName( QLatin1String( "zmodem_progress" ) );
   setModal( modal );
   setCaption( caption );
   setButtons( User1|Close );
