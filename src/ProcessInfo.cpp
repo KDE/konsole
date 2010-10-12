@@ -43,6 +43,7 @@
 
 #if defined(Q_OS_MAC)
 #include <sys/sysctl.h>
+#include <libproc.h>
 #ifdef HAVE_SYS_PROC_INFO_H
 #include <sys/proc_info.h>
 #endif
@@ -807,7 +808,13 @@ private:
     }
     virtual bool readCurrentDir(int pid)
     {
-        Q_UNUSED(pid);
+        struct proc_vnodepathinfo vpi;
+        int nb = proc_pidinfo(pid, PROC_PIDVNODEPATHINFO, 0, &vpi, sizeof(vpi));
+        if (nb == sizeof(vpi))
+        {
+            setCurrentDir(QString(vpi.pvi_cdir.vip_path));
+            return true;
+        }
         return false;
     }
     virtual bool readEnvironment(int pid)
