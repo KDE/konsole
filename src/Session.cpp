@@ -865,7 +865,10 @@ void Session::updateSessionProcessInfo()
 {
     Q_ASSERT(_shellProcess);
     if (!_sessionProcessInfo)
+    {
         _sessionProcessInfo = ProcessInfo::newInstance(processId());
+        _sessionProcessInfo->setUserHomeDir();
+    }
     _sessionProcessInfo->update();
 }
 

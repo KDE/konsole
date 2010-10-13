@@ -128,6 +128,9 @@ public:
     /** Returns the user's name of the process */
     QString userName() const;
    
+    /** Returns the user's home directory of the process */
+    QString userHomeDir() const;
+
     /** Returns the name of the current process */
     QString name(bool* ok) const;
    
@@ -161,6 +164,9 @@ public:
      * Returns the current working directory of the process (or its parent)
      */
     QString validCurrentDir() const;
+
+    /** Forces the user home directory to be calculated */
+    void setUserHomeDir();
 
     /**
      * Parses an input string, looking for markers beginning with a '%' 
@@ -312,6 +318,7 @@ private:
 
     QString _name;
     QString _userName;
+    QString _userHomeDir;
     QString _currentDir;
 
     QVector<QString> _arguments;

@@ -40,6 +40,7 @@
 #include <KConfigGroup>
 #include <KGlobal>
 #include <KSharedConfig>
+#include <KUser>
 
 #if defined(Q_OS_MAC)
 #include <sys/sysctl.h>
@@ -77,6 +78,7 @@ ProcessInfo::ProcessInfo(int pid , bool enableEnvironmentRead)
     , _userId(0)
     , _lastError(NoError)
     , _userName(QString())
+    , _userHomeDir(QString())
 {
 }
 
@@ -121,7 +123,18 @@ QString ProcessInfo::format(const QString& input) const
    output.replace("%C",formatCommand(name(&ok),arguments(&ok),LongCommandFormat));
    
    QString dir = validCurrentDir();
-   output.replace("%D",dir);
+   if (output.contains("%D"))
+   {
+      QString homeDir = userHomeDir();
+      QString tempDir = dir;
+      // Change User's Home Dir w/ ~ only at the beginning
+      if (tempDir.startsWith(homeDir))
+      {
+         tempDir.remove(0, homeDir.length());
+         tempDir.prepend('~');
+      }
+      output.replace("%D", tempDir);
+   }
    output.replace("%d",formatShortDir(dir));
    
    // remove any remaining %[LETTER] sequences
@@ -258,6 +271,11 @@ QString ProcessInfo::userName() const
     return _userName;
 }
 
+QString ProcessInfo::userHomeDir() const
+{
+    return _userHomeDir;
+}
+
 void ProcessInfo::setPid(int pid)
 {
     _pid = pid;
@@ -273,8 +291,17 @@ void ProcessInfo::setUserId(int uid)
 void ProcessInfo::setUserName(const QString& name)
 {
     _userName = name;
+    setUserHomeDir();
 }
 
+void ProcessInfo::setUserHomeDir()
+{
+    QString usersName = userName();
+    if (!usersName.isEmpty())
+        _userHomeDir = KUser(usersName).homeDir();
+    else
+        _userHomeDir = QDir::homePath();
+}
 
 void ProcessInfo::setParentPid(int pid)
 {
