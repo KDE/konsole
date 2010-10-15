@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>ManageProfilesDialog</class>
- <widget class="QWidget" name="ManageProfilesDialog" >
-  <property name="geometry" >
+ <widget class="QWidget" name="ManageProfilesDialog">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,100 +10,91 @@
     <height>315</height>
    </rect>
   </property>
-  <layout class="QGridLayout" >
-   <property name="leftMargin" >
+  <layout class="QGridLayout">
+   <property name="margin">
     <number>0</number>
    </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>0</number>
-   </property>
-   <item row="0" column="1" >
-    <widget class="QPushButton" name="newSessionButton" >
-     <property name="toolTip" >
+   <item row="0" column="1">
+    <widget class="QPushButton" name="newSessionButton">
+     <property name="toolTip">
       <string>Create a new profile based upon the selected profile</string>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>New Profile...</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" >
-    <widget class="QPushButton" name="editSessionButton" >
-     <property name="enabled" >
+   <item row="1" column="1">
+    <widget class="QPushButton" name="editSessionButton">
+     <property name="enabled">
       <bool>false</bool>
      </property>
-     <property name="toolTip" >
+     <property name="toolTip">
       <string>Edit the selected profile(s)</string>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Edit Profile...</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1" >
-    <widget class="QPushButton" name="deleteSessionButton" >
-     <property name="enabled" >
+   <item row="2" column="1">
+    <widget class="QPushButton" name="deleteSessionButton">
+     <property name="enabled">
       <bool>false</bool>
      </property>
-     <property name="toolTip" >
+     <property name="toolTip">
       <string>Delete the selected profile(s)</string>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Delete Profile</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="1" >
-    <widget class="QPushButton" name="setAsDefaultButton" >
-     <property name="enabled" >
+   <item row="3" column="1">
+    <widget class="QPushButton" name="setAsDefaultButton">
+     <property name="enabled">
       <bool>false</bool>
      </property>
-     <property name="toolTip" >
+     <property name="toolTip">
       <string>Set the selected profile as the default for new terminal sessions</string>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Set as Default</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="1" >
-    <widget class="QPushButton" name="moveUpButton" >
-     <property name="enabled" >
+   <item row="4" column="1">
+    <widget class="QPushButton" name="moveUpButton">
+     <property name="enabled">
       <bool>false</bool>
      </property>
-     <property name="toolTip" >
+     <property name="toolTip">
       <string>Move the selected profile up in the menu list</string>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Move Up</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="1" >
-    <widget class="QPushButton" name="moveDownButton" >
-     <property name="enabled" >
+   <item row="5" column="1">
+    <widget class="QPushButton" name="moveDownButton">
+     <property name="enabled">
       <bool>false</bool>
      </property>
-     <property name="toolTip" >
+     <property name="toolTip">
       <string>Move the selected profile down in the menu list</string>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Move Down</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="1" >
+   <item row="6" column="1">
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>40</height>
@@ -110,27 +102,27 @@
      </property>
     </spacer>
    </item>
-   <item rowspan="7" row="0" column="0" >
-    <widget class="QTableView" name="sessionTable" >
-     <property name="whatsThis" >
+   <item row="0" column="0" rowspan="7">
+    <widget class="QTableView" name="sessionTable">
+     <property name="whatsThis">
       <string/>
      </property>
-     <property name="alternatingRowColors" >
+     <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
-     <property name="selectionMode" >
+     <property name="selectionMode">
       <enum>QAbstractItemView::ExtendedSelection</enum>
      </property>
-     <property name="selectionBehavior" >
+     <property name="selectionBehavior">
       <enum>QAbstractItemView::SelectRows</enum>
      </property>
-     <property name="verticalScrollMode" >
+     <property name="verticalScrollMode">
       <enum>QAbstractItemView::ScrollPerPixel</enum>
      </property>
-     <property name="horizontalScrollMode" >
+     <property name="horizontalScrollMode">
       <enum>QAbstractItemView::ScrollPerPixel</enum>
      </property>
-     <property name="showGrid" >
+     <property name="showGrid">
       <bool>false</bool>
      </property>
     </widget>
