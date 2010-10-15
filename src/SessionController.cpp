@@ -470,7 +470,7 @@ void SessionController::setupActions()
     action = collection->addAction("shrink-font", this, SLOT(decreaseTextSize()));
     action->setText(i18n("Shrink Font"));
     action->setIcon(KIcon("format-font-size-less"));
-    action->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Minus));
+    action->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_Minus));
 
     // History
     _searchToggleAction = KStandardAction::find(this, NULL, collection);
