@@ -60,10 +60,6 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     _ui->sessionTable->setEditTriggers(_ui->sessionTable->editTriggers() | QAbstractItemView::SelectedClicked);
     _ui->sessionTable->setShowGrid(false);
 
-    // TODO re-enable when saving profile order works - khindenburg
-    _ui->moveUpButton->setEnabled(false);
-    _ui->moveDownButton->setEnabled(false);
-
     // update table and listen for changes to the session types
     connect( SessionManager::instance() , SIGNAL(profileAdded(Profile::Ptr)) , this,
              SLOT(addItems(Profile::Ptr)) );
@@ -91,8 +87,6 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     connect( _ui->editSessionButton , SIGNAL(clicked()) , this , SLOT(editSelected()) );
     connect( _ui->deleteSessionButton , SIGNAL(clicked()) , this , SLOT(deleteSelected()) );
     connect( _ui->setAsDefaultButton , SIGNAL(clicked()) , this , SLOT(setSelectedAsDefault()) );
-    connect( _ui->moveUpButton , SIGNAL(clicked()) , this , SLOT(moveUpSelected()) );
-    connect( _ui->moveDownButton , SIGNAL(clicked()) , this , SLOT(moveDownSelected()) );
 }
 
 void ManageProfilesDialog::showEvent(QShowEvent*)
