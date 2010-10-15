@@ -787,6 +787,7 @@ void TabbedViewContainer::updateTitle(ViewProperties* item)
         QString tabText = item->title();
 
         _tabBar->setTabText( index , tabText );
+        _tabBar->setTabToolTip( index , tabText );
     }
 }
 void TabbedViewContainer::updateIcon(ViewProperties* item)
