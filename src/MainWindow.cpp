@@ -37,7 +37,7 @@
 #include <KMenuBar>
 #include <KMessageBox>
 #include <KService>
-#include <KToggleAction>
+#include <KDualAction>
 #include <KToggleFullScreenAction>
 #include <KToolInvocation>
 #include <KStandardAction>
@@ -274,7 +274,7 @@ void MainWindow::setupActions()
     //NOTE: This is currently handled by correctShortcuts()
 
     // View Menu
-    _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
+    _toggleMenuBarAction = KStandardAction::showHideMenubar(menuBar(), SLOT(setVisible(bool)), collection);
     _toggleMenuBarAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M) );
 
     // Hide the Show/Hide menubar item if the menu bar is a MacOS-style menu bar

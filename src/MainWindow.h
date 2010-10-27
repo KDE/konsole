@@ -32,7 +32,7 @@
 
 class KAction;
 class KActionMenu;
-class KToggleAction;
+class KDualAction;
 
 namespace Konsole
 {
@@ -190,7 +190,7 @@ class MainWindow : public KXmlGuiWindow
     private:
         ViewManager*  _viewManager;
         BookmarkHandler* _bookmarkHandler;
-        KToggleAction* _toggleMenuBarAction;
+        KDualAction* _toggleMenuBarAction;
         KActionMenu *_newTabMenuAction;
 
         QPointer<SessionController> _pluggedController;
