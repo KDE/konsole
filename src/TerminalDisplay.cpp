@@ -942,14 +942,17 @@ void TerminalDisplay::updateImage()
                _screenWindow->scrollRegion() );
   _screenWindow->resetScrollCount();
 
+  if (!_image) {
+     // Create _image.
+     // The emitted changedContentSizeSignal also leads to getImage being recreated, so do this first.
+     updateImageSize();
+  }
+
   Character* const newimg = _screenWindow->getImage();
   int lines = _screenWindow->windowLines();
   int columns = _screenWindow->windowColumns();
 
   setScroll( _screenWindow->currentLine() , _screenWindow->lineCount() );
-
-  if (!_image)
-     updateImageSize(); // Create _image
 
   Q_ASSERT( this->_usedLines <= this->_lines );
   Q_ASSERT( this->_usedColumns <= this->_columns );
