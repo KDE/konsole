@@ -1053,6 +1053,16 @@ void SessionController::sessionTitleChanged()
 
 void SessionController::showDisplayContextMenu(const QPoint& position)
 {
+    /* After showing this menu in a Konsole Part, it will crash upon
+     * exiting the last session.
+       BUG 246652
+    */
+    if (!factory())
+    {
+        kWarning()<< "Not showing menu to avoid crash (BUG 246652)";
+        return;
+    }
+
     // needed to make sure the popup menu is available, even if a hosting
     // application did not merge our GUI.
     if (!factory()) 
