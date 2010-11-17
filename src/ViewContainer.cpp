@@ -435,6 +435,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _tabBar->setDrawBase(true);
     _tabBar->setDocumentMode(true);
     _tabBar->setFocusPolicy(Qt::NoFocus);
+    _tabBar->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
 
     _newTabButton = new QToolButton(_containerWidget);
     _newTabButton->setIcon(KIcon("tab-new"));

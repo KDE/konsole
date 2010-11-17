@@ -359,13 +359,8 @@ void ViewManager::sessionFinished()
 
     Session* session = qobject_cast<Session*>(sender());
 
-    if ( _sessionMap[qobject_cast<TerminalDisplay*>(activeView())] == session )
-    {
-        // switch to the next view before deleting the session views to prevent flicker 
-        // occurring as a result of an interval between removing the active view and switching
-        // to the next view
-        nextView();
-    }
+    // We're using setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab)
+    // so no need to manually select next tab.
 
     Q_ASSERT(session);
 
