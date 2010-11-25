@@ -315,6 +315,10 @@ void SessionManager::updateSession(Session* session)
 {
     Profile::Ptr info = _sessionProfiles[session]; 
 
+    // Temp fix for crashes when changing profiles 256357, 246054
+    if (!info)
+        info = defaultProfile();
+
     Q_ASSERT( info );
 
     applyProfile(session,info,false);
