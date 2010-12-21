@@ -151,13 +151,13 @@ void ViewManager::setupActions()
         KAction* splitLeftRightAction = new KAction( KIcon("view-split-left-right"),
                                                       i18nc("@action:inmenu", "Split View Left/Right"),
                                                       this );
-        splitLeftRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_ParenLeft) );
+        splitLeftRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::Key_ParenLeft) );
         collection->addAction("split-view-left-right",splitLeftRightAction);
         connect( splitLeftRightAction , SIGNAL(triggered()) , this , SLOT(splitLeftRight()) );
 
         KAction* splitTopBottomAction = new KAction( KIcon("view-split-top-bottom") , 
                                              i18nc("@action:inmenu", "Split View Top/Bottom"),this);
-        splitTopBottomAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_ParenRight) );
+        splitTopBottomAction->setShortcut( QKeySequence(Qt::CTRL+Qt::Key_ParenRight) );
         collection->addAction("split-view-top-bottom",splitTopBottomAction);
         connect( splitTopBottomAction , SIGNAL(triggered()) , this , SLOT(splitTopBottom()));
 
