@@ -58,6 +58,7 @@
 #include <sys/sysctl.h> //krazy:exclude=includes
 #include <sys/types.h>
 #include <sys/user.h>
+#include <sys/syslimits.h>
 #include <libutil.h>
 #endif
 
@@ -729,8 +730,22 @@ private:
     virtual bool readCurrentDir(int pid)
     {
 #if defined(__DragonFly__)
-        // Not supported in DragonFly
-        return false;
+        char buf[PATH_MAX];
+        int managementInfoBase[4];
+        size_t len;
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC;
+        managementInfoBase[2] = KERN_PROC_CWD;
+        managementInfoBase[3] = pid;
+
+        len = sizeof(buf);
+        if (sysctl(managementInfoBase, 4, buf, &len, NULL, 0) == -1)
+            return false;
+
+        setCurrentDir(buf);
+
+        return true;
 #else
         int numrecords;
         struct kinfo_file* info = 0;
