@@ -30,6 +30,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <KWindowSystem>
+#include <KPluginFactory>
 #include <kdeversion.h>
 #include <kde_file.h>
 
@@ -48,29 +49,13 @@
 
 #include <config-konsole.h>
 
-extern "C"
-{
-    // entry point for Konsole part library,
-    // returns a new factory which can be used to construct Konsole parts
-    KDE_EXPORT void* init_libkonsolepart()
-    {
-        return new Konsole::PartFactory;
-    }
-}
-
 using namespace Konsole;
 
-KParts::Part* PartFactory::createPartObject( QWidget* parentWidget,
-                                             QObject* parent,
-                                             const char* /*classname*/,
-                                             const QStringList& /*args*/)
-{
-    return new Part(parentWidget,parent);
-}
+K_PLUGIN_FACTORY(KonsolePartFactory, registerPlugin<Konsole::Part>();)
+K_EXPORT_PLUGIN(KonsolePartFactory("konsole"))
 
-K_EXPORT_PLUGIN(Konsole::PartFactory())
 
-Part::Part(QWidget* parentWidget , QObject* parent)
+Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
  : KParts::ReadOnlyPart(parent)
   ,_viewManager(0)
   ,_pluggedController(0)

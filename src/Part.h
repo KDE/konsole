@@ -21,9 +21,9 @@
 #define PART_H
 
 // KDE
-#include <KParts/Factory>
 #include <KParts/Part>
 #include <kde_terminal_interface_v2.h>
+#include <QVariantList>
 
 // Konsole
 #include "Profile.h"
@@ -40,19 +40,6 @@ class ViewManager;
 class ViewProperties;
 
 /**
- * A factory which creates Konsole parts.
- */
-class PartFactory : public KParts::Factory
-{
-protected:
-    /** Reimplemented to create Konsole parts. */
-    virtual KParts::Part* createPartObject(QWidget* parentWidget = 0,
-                                           QObject* parent = 0,
-                                           const char* classname = "KParts::Part",
-                                           const QStringList& args = QStringList());
-};
-
-/**
  * A re-usable terminal emulator component using the KParts framework which can
  * be used to embed terminal emulators into other applications.
  */
@@ -62,7 +49,7 @@ Q_OBJECT
     Q_INTERFACES(TerminalInterface TerminalInterfaceV2)
 public:
     /** Constructs a new Konsole part with the specified parent. */
-    explicit Part(QWidget* parentWidget , QObject* parent = 0);
+    explicit Part(QWidget* parentWidget , QObject* parent, const QVariantList&);
     virtual ~Part();
 
     /** Reimplemented from TerminalInterface. */
