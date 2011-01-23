@@ -322,9 +322,6 @@ void MainWindow::setSessionList(ProfileList* list)
 
 void MainWindow::sessionListChanged(const QList<QAction*>& actions)
 {
-    unplugActionList("favorite-profiles");
-    plugActionList("favorite-profiles", actions);
-
     // Update the 'New Tab' KActionMenu
     KMenu *newTabMenu = _newTabMenuAction->menu();
     newTabMenu->clear();
