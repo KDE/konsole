@@ -377,6 +377,10 @@ void ViewManager::sessionFinished()
         }
     }
 
+    // This is needed to remove this controller from factory() in 
+    // order to prevent BUG: 185466 - disappearing menu popup
+    if (_pluggedController)
+        emit unplugController(_pluggedController);
 }
 
 void ViewManager::focusActiveView()

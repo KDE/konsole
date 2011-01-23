@@ -175,6 +175,12 @@ signals:
      */
     void activeViewChanged(SessionController* controller);
 
+    /** 
+     * Emitted when the current session needs unplugged from factory().
+     * @param controller The controller associated with the active view 
+     */
+    void unplugController(SessionController* controller);
+
     /**
      * Emitted when the list of view properties ( as returned by viewProperties() ) changes.
      * This occurs when views are added to or removed from the active container, or 
