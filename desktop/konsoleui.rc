@@ -42,9 +42,4 @@
         <Menu name="help"><text>Help</text>
         </Menu>
     </MenuBar>
-    <Menu name="new-tab"><text>New &amp;Tab</text>
-        <Action name="default-profile"/>
-        <Separator/>
-        <ActionList name="favorite-profiles"/>
-    </Menu>
 </kpartgui>
