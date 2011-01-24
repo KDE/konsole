@@ -749,8 +749,10 @@ void ViewManager::viewCloseRequest(QWidget* view)
         focusActiveView();
         updateDetachViewState();
     }
-    if (_pluggedController)
-        emit unplugController(_pluggedController);
+    // The below causes the menus  to be messed up
+    // Only happenss when using the tab bar close button
+//    if (_pluggedController)
+//        emit unplugController(_pluggedController);
 }
 
 TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
