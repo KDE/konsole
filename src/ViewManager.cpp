@@ -749,6 +749,8 @@ void ViewManager::viewCloseRequest(QWidget* view)
         focusActiveView();
         updateDetachViewState();
     }
+    if (_pluggedController)
+        emit unplugController(_pluggedController);
 }
 
 TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
