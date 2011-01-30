@@ -1,6 +1,11 @@
 project(Konsole)
 
-find_package(KDE4 4.6.40 REQUIRED)
+if(WIN32)
+    set(REQ_VERSION 4.5.0)
+else(WIN32)
+    set(REQ_VERSION 4.4.60)
+endif(WIN32)
+find_package(KDE4 ${REQ_VERSION} REQUIRED)
 
 include(KDE4Defaults)
 
