@@ -54,7 +54,7 @@
 #include <KIO/NetAccess>
 
 // Konsole
-#include <config-apps.h>
+//#include <config-apps.h>
 #include "Filter.h"
 #include "konsole_wcwidth.h"
 #include "ScreenWindow.h"
