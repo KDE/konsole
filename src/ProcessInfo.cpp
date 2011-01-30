@@ -409,6 +409,7 @@ void UnixProcessInfo::readUserName()
     long getpwBufferSize;
     int getpwStatus;
 
+#ifndef Q_WS_WIN
     getpwBufferSize = sysconf(_SC_GETPW_R_SIZE_MAX);
     if (getpwBufferSize == -1)
         getpwBufferSize = 16384;
@@ -422,6 +423,7 @@ void UnixProcessInfo::readUserName()
     else
         setUserName(QString());
     delete [] getpwBuffer;
+#endif
 }
 
 

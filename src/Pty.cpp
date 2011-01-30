@@ -26,18 +26,24 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
+#ifndef Q_WS_WIN
 #include <termios.h>
 #include <signal.h>
+#endif
 
 // Qt
 #include <QtCore/QStringList>
+#include <QtCore/QTextCodec>
+#include <QtCore/QDebug>
 
 // KDE
 #include <KStandardDirs>
 #include <KLocale>
 #include <KDebug>
+#ifndef Q_WS_WIN
 #include <KPty>
 #include <KPtyDevice>
+#endif
 #include <kde_file.h>
 
 using namespace Konsole;
@@ -46,9 +52,13 @@ void Pty::setWindowSize(int lines, int cols)
 {
   _windowColumns = cols;
   _windowLines = lines;
-
+/* FIXME */
+#ifndef Q_WS_WIN
   if (pty()->masterFd() >= 0)
     pty()->setWinSize(lines, cols);
+#else
+    write(QByteArray("\e[") + QString("%1;%2t").arg(lines).arg(cols).toLatin1());
+#endif
 }
 QSize Pty::windowSize() const
 {
@@ -59,6 +69,7 @@ void Pty::setFlowControlEnabled(bool enable)
 {
   _xonXoff = enable;
 
+#ifndef Q_WS_WIN
   if (pty()->masterFd() >= 0)
   {
     struct ::termios ttmode;
@@ -70,9 +81,11 @@ void Pty::setFlowControlEnabled(bool enable)
     if (!pty()->tcSetAttr(&ttmode))
       kWarning() << "Unable to set terminal attributes.";
   }
+#endif
 }
 bool Pty::flowControlEnabled() const
 {
+#ifndef Q_WS_WIN
     if (pty()->masterFd() >= 0)
     {
         struct ::termios ttmode;
@@ -81,6 +94,7 @@ bool Pty::flowControlEnabled() const
                ttmode.c_iflag & IXON;
     }  
     kWarning() << "Unable to get flow control status, terminal not connected.";
+#endif
     return false;
 }
 
@@ -106,7 +120,8 @@ void Pty::setUtf8Mode(bool enable)
 void Pty::setErase(char erase)
 {
   _eraseChar = erase;
-  
+
+#ifndef Q_WS_WIN
   if (pty()->masterFd() >= 0)
   {
     struct ::termios ttmode;
@@ -115,17 +130,19 @@ void Pty::setErase(char erase)
     if (!pty()->tcSetAttr(&ttmode))
       kWarning() << "Unable to set terminal attributes.";
   }
+#endif
 }
 
 char Pty::erase() const
 {
+#ifndef Q_WS_WIN
     if (pty()->masterFd() >= 0)
     {
         struct ::termios ttyAttributes;
         pty()->tcGetAttr(&ttyAttributes);
         return ttyAttributes.c_cc[VERASE];
     }
-
+#endif
     return _eraseChar;
 }
 
@@ -186,7 +203,7 @@ int Pty::start(const QString& program,
   //
   // BR:149300
   setEnv("LANGUAGE",QString(),false /* do not overwrite existing value if any */);
-
+#ifndef Q_WS_WIN
   setUseUtmp(addToUtmp);
 
   struct ::termios ttmode;
@@ -207,9 +224,10 @@ int Pty::start(const QString& program,
   
   if (!pty()->tcSetAttr(&ttmode))
     kWarning() << "Unable to set terminal attributes.";
-  
-  pty()->setWinSize(_windowLines, _windowColumns);
 
+  pty()->setWinSize(_windowLines, _windowColumns);
+#endif
+  qDebug() << "trying to start process!" << endl;
   KProcess::start();
 
   if (!waitForStarted())
@@ -220,21 +238,31 @@ int Pty::start(const QString& program,
 
 void Pty::setWriteable(bool writeable)
 {
+#ifndef Q_WS_WIN
   KDE_struct_stat sbuf;
   KDE_stat(pty()->ttyName(), &sbuf);
   if (writeable)
     chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP);
   else
     chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP|S_IWOTH));
+#endif
 }
 
 Pty::Pty(int masterFd, QObject* parent)
+#ifndef Q_WS_WIN
     : KPtyProcess(masterFd,parent)
+#else
+    : KProcess(parent)
+#endif
 {
     init();
 }
 Pty::Pty(QObject* parent)
+#ifndef Q_WS_WIN
     : KPtyProcess(parent)
+#else
+    : KProcess(parent)
+#endif
 {
     init();
 }
@@ -247,8 +275,20 @@ void Pty::init()
   _utf8 =true;
 
   connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
+#ifndef Q_WS_WIN
   setPtyChannels(KPtyProcess::AllChannels);
+#else
+  setOutputChannelMode(MergedChannels);
+#endif
 }
+
+
+#ifdef Q_WS_WIN
+KProcess* Pty::pty()
+{
+    return this;
+}
+#endif
 
 Pty::~Pty()
 {
@@ -264,11 +304,16 @@ void Pty::sendData(const char* data, int length)
     kWarning() << "Pty::doSendJobs - Could not send input data to terminal process.";
     return;
   }
+#ifdef Q_WS_WIN
+  emit receivedData(data,length);
+#endif
 }
 
 void Pty::dataReceived() 
 {
-     QByteArray data = pty()->readAll();
+    QTextCodec *codec = QTextCodec::codecForName("IBM 850");
+    QString string = codec->toUnicode(pty()->readAll());
+    QByteArray data = string.toLatin1();
     emit receivedData(data.constData(),data.count());
 }
 
@@ -285,7 +330,11 @@ void Pty::lockPty(bool lock)
 
 int Pty::foregroundProcessGroup() const
 {
+#ifndef Q_WS_WIN
     int pid = tcgetpgrp(pty()->masterFd());
+#else
+    int pid = KProcess::pid();
+#endif
 
     if ( pid != -1 )
     {
@@ -297,6 +346,7 @@ int Pty::foregroundProcessGroup() const
 
 void Pty::setupChildProcess()
 {
+#ifndef Q_WS_WIN
     KPtyProcess::setupChildProcess();
     
     // reset all signal handlers
@@ -309,6 +359,7 @@ void Pty::setupChildProcess()
     action.sa_flags = 0;
     for (int signal=1;signal < NSIG; signal++)
         sigaction(signal,&action,0L);
+#endif
 }
 
 

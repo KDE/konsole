@@ -30,7 +30,7 @@
 #include <QtCore/QSize>
 
 // KDE
-#include <KPtyProcess>
+#include <KProcess>
 
 // Konsole
 #include "konsole_export.h"
@@ -51,7 +51,7 @@ namespace Konsole
  * To start the terminal process, call the start() method
  * with the program name and appropriate arguments. 
  */
-class KONSOLEPRIVATE_EXPORT Pty: public KPtyProcess
+class KONSOLEPRIVATE_EXPORT Pty: public KProcess
 {
 Q_OBJECT
 
@@ -143,6 +143,9 @@ Q_OBJECT
      */
     int foregroundProcessGroup() const;
    
+#ifdef Q_WS_WIN
+    KProcess* pty();
+#endif
   public slots:
 
     /**

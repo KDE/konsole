@@ -1,0 +1,61 @@
+# [windows.keytab] Konsole Keyboard Table (Windows console keys)
+#
+# --------------------------------------------------------------
+
+# NOT TESTED, MAY NEED SOME CLEANUPS
+keyboard "Windows cmd"
+
+# --------------------------------------------------------------
+#
+# This configuration table allows to customize the
+# meaning of the keys.
+#
+# The syntax is that each entry has the form : 
+#
+#   "key" Keyname { ("+"|"-") Modename } ":" (String|Operation)
+#
+# Keynames are those defined in <qnamespace.h> with the
+# "Qt::Key_" removed. (We'd better insert the list here)
+#
+# Mode names are : 
+#
+# - Shift
+# - Alt
+# - Control
+#
+#   The VT100 emulation has two modes that can affect the
+#   sequences emitted by certain keys. These modes are
+#   under control of the client program.
+#   
+# - Newline     : effects Return and Enter key.
+# - Application : effects Up and Down key.
+#
+# - Ansi        : effects Up and Down key (This is for VT52, really).
+#
+# Operations are
+#
+# - scrollUpLine
+# - scrollUpPage
+# - scrollDownLine
+# - scrollDownPage
+#
+# - emitSelection
+#
+# If the key is not found here, the text of the
+# key event as provided by Qt is emitted, possibly
+# preceeded by ESC if the Alt key is pressed.
+#
+# --------------------------------------------------------------
+
+key Tab    : "\t"
+
+key Return-NewLine : "\r\n"
+
+#----------------------------------------------------------
+
+# keypad characters as offered by Qt
+# cannot be recognized as such.
+
+#----------------------------------------------------------
+
+# Following other strings as emitted by konsole.

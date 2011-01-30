@@ -48,7 +48,9 @@
 #include <KRun>
 #include <kshell.h>
 #include <KStandardDirs>
+#ifndef Q_WS_WIN
 #include <KPtyDevice>
+#endif
 #include <KUrl>
 
 // Konsole
@@ -349,15 +351,17 @@ QString Session::checkProgram(const QString& program) const
   // Check to see if the given program is executable.
   QString exec = QFile::encodeName(program);
 
-  if (exec.isEmpty())
-      return QString();
+/*  if (exec.isEmpty())
+      return QString();*/
 
   // if 'exec' is not specified, fall back to default shell.  if that 
   // is not set then fall back to /bin/sh
   if ( exec.isEmpty() )
       exec = qgetenv("SHELL");
   if ( exec.isEmpty() )
-        exec = "/bin/sh";
+#ifndef Q_WS_WIN
+      exec = "/bin/sh";
+ 
 
   exec = KRun::binaryName(exec, false);
   exec = KShell::tildeExpand(exec);
@@ -368,6 +372,9 @@ QString Session::checkProgram(const QString& program) const
     return QString();
   }
 
+#else
+      exec = "kcwsh.exe";
+#endif
   return exec;
 }
 
@@ -412,7 +419,12 @@ void Session::run()
   }
 
   const int CHOICE_COUNT = 3;
+#ifndef Q_WS_WIN
   QString programs[CHOICE_COUNT] = {_program,qgetenv("SHELL"),"/bin/sh"};
+#else
+  QString programs[CHOICE_COUNT] = {_program,qgetenv("SHELL"),"kcwsh.exe"};
+  _arguments << "C:\\Windows\\SysWOW64\\cmd.exe";
+#endif
   QString exec;
   int choice = 0;
   while (choice < CHOICE_COUNT)
@@ -460,7 +472,7 @@ void Session::run()
   int result = _shellProcess->start(exec,
                                   arguments,
                                   _environment,
-                                  windowId(),
+                                  (ulong)windowId(),
                                   _addToUtmp,
                                   dbusService,
                                   (QLatin1String("/Sessions/") +
