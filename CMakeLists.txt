@@ -1,6 +1,6 @@
 project(Konsole)
 
-find_package(KDE4 4.6.40 REQUIRED)
+find_package(KDE4 4.5.40 REQUIRED)
 
 include(KDE4Defaults)
 
