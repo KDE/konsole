@@ -292,16 +292,22 @@ public:
   
   CompactHistoryBlock(){
     blockLength = 4096*64; // 256kb
+#ifndef Q_WS_WIN
     head = (quint8*) mmap(0, blockLength, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON, -1, 0);
-    //head = (quint8*) malloc(blockLength);
+#else
+    head = (quint8*) malloc(blockLength);
+#endif
     Q_ASSERT(head != MAP_FAILED);
     tail = blockStart = head;
     allocCount=0;
   }
   
   virtual ~CompactHistoryBlock(){
-    //free(blockStart);
+#ifndef Q_WS_WIN
     munmap(blockStart, blockLength);
+#else
+    free(blockStart);
+#endif
   }
   
   virtual unsigned int remaining(){ return blockStart+blockLength-tail;}
