@@ -1,0 +1,1055 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN"
+ "dtd/kdex.dtd" [
+<!ENTITY kappname "&konsole;">
+<!ENTITY package "kdebase">
+<!ENTITY % English "INCLUDE">
+<!ENTITY % addindex "IGNORE">
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title>The &konsole; Handbook</title>
+<authorgroup>
+<author>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
+<author>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
+
+<othercredit role="developer">
+&Robert.Knight; &Robert.Knight.mail;
+</othercredit>
+
+<othercredit role="developer">
+&Kurt.Hindenburg; &Kurt.Hindenburg.mail;
+</othercredit>
+
+<othercredit role="developer">
+&Waldo.Bastian; &Waldo.Bastian.mail;
+</othercredit>
+
+<othercredit role="reviewer">
+&Mike.McBride; &Mike.McBride.mail;
+</othercredit>
+
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+
+</authorgroup>
+
+<copyright>
+<year>2000</year><year>2001</year><year>2002</year>
+<holder>&Jonathan.Singer;</holder>
+</copyright>
+<copyright>
+<year>2005</year><year>2008</year><year>2009</year><year>2010</year>
+<holder>&Kurt.Hindenburg;</holder>
+</copyright>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2010-05-25</date>
+<releaseinfo>2.5.0</releaseinfo>
+
+<abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>konsole</keyword>
+<keyword>kdebase</keyword>
+<keyword>command</keyword>
+<keyword>line</keyword>
+<keyword>terminal</keyword>
+<keyword>cli</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+
+<sect1 id="terminal">
+<title>What is a terminal?</title>
+
+<para>&konsole; is an X terminal 
+emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.
+</para>
+
+<para>Explaining the use of the &UNIX; <acronym>CLI</acronym> is beyond the scope of this document.  A search of the web for these terms will produce more information.
+</para>
+</sect1>
+
+<sect1 id="scrollback">
+<title>Scrollback</title>
+
+<para>&konsole; uses the notion of scrollback 
+to allow user's to view previously displayed output.
+By default, scrollback is on 
+and set to save 1000 lines of
+output in addition to what is currently displayed on the screen.
+As lines of text scroll off the top of the screen, they can be reviewed
+by moving the scroll bar upwards, scrolling with a mouse wheel or through
+the use of the 
+<keycombo action="simul">&Shift;<keycap>Page Up</keycap></keycombo> (to move
+back a page), 
+<keycombo action="simul">&Shift;<keycap>Page Down</keycap></keycombo> (to move forward a page), 
+<keycombo action="simul">&Shift;<keycap>Up Arrow</keycap></keycombo> (to move up a line) and 
+<keycombo action="simul">&Shift;<keycap>Down Arrow</keycap></keycombo> (to move down a line) keys.
+</para>
+
+<para>When the <keycap>scrolllock</keycap> is on,
+ordinary input and output from the shell is suspended, and you can
+scroll through the history with 
+<keycap>Page Up</keycap>, 
+<keycap>Page Down</keycap>,  
+<keycap>Up Arrow</keycap> and 
+<keycap>Down Arrow</keycap>.
+</para>
+
+
+</sect1>
+
+<sect1 id="profiles">
+<title>Profiles</title>
+<para>Profiles allow the user to quickly and easily automate the running
+of common commands.  Examples could include:
+
+<itemizedlist>
+<listitem><para>ssh into another machine</para></listitem>
+<listitem><para>starting an irc session</para></listitem>
+<listitem><para>use tail to watch a file</para></listitem>
+</itemizedlist>
+
+</para>
+
+<para>
+Procedure to create a new profile:
+<orderedlist>
+<listitem><para>Click on the menu entry <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Profiles...</guimenuitem>
+</menuchoice></para></listitem>
+
+<listitem><para>Click on the button <guibutton>New Profile...</guibutton>.</para></listitem>
+
+<listitem><para>Fill in the first entry with a name.  This is the
+name that will show in the menu, and will be the default label instead
+of <guilabel>Shell</guilabel> when you start a session of this type.
+</para></listitem>
+
+<listitem><para>Enter a command just as you normally would if you opened a new 
+shell and were going to issue that command.  For our first example above, you 
+might type <userinput><command>ssh</command> <replaceable>administration</replaceable></userinput>.</para></listitem>
+
+<listitem><para>On the other tabs of the dialog, configure this session's appearance. 
+You can configure a different font, colour scheme, $<envar>TERM</envar> type and many 
+other settings for each session.</para></listitem>
+
+<listitem><para>Press the <guibutton>OK</guibutton> button. The new session 
+is now available in the <guilabel>Manage Profiles...</guilabel> dialog.
+</para></listitem>
+
+</orderedlist>
+</para>
+
+<para>
+After creating profiles, they are listed by their name in the 
+<menuchoice><guimenu>File</guimenu><guisubmenu>New Tab</guisubmenu></menuchoice> menu
+underneath the default <guimenuitem>Shell</guimenuitem> item.
+</para>
+
+</sect1>
+
+<sect1 id="mousebuttons">
+
+<title>Mouse Buttons</title>
+
+<para>This section details the use of the mouse buttons for the common
+right handed mouse button order.
+For the left handed mouse button order, swap left and right in the text below.
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term><mousebutton>Left</mousebutton></term>
+
+<listitem><para> All &LMB; clicks will be sent to a mouse-aware 
+application running in &konsole;. 
+If an application will react on mouse clicks, &konsole;
+indicates this by showing an arrow cursor. If not, an I-beam (bar)
+cursor is shown.</para>
+
+<para>Holding the &LMB; down and
+dragging the mouse over the screen with a mouse-unaware application
+running will mark a region of the text. While dragging, the marked
+text is displayed reversed for visual feedback. Select <guimenuitem>Copy</guimenuitem>
+from the <guimenu>Edit</guimenu> menu to copy the marked text to the clipboard for further use
+within &konsole; or another application. The selected text can also be
+dragged and dropped into compatible applications. Click on the selected
+text and drag it to the desired location. Depending on your &kde; settings,
+you may need to hold the &Ctrl; key while dragging.</para>
+
+<para>Normally, new-line characters are inserted at the end of each
+line selected. This is best for cut and paste of source code, or the output
+of a particular command. For ordinary text, the line breaks are often
+not important. One might prefer, however, for the text to be a stream
+of characters that will be automatically re-formatted when pasted into
+another application. To select in text-stream mode, hold down the
+&Ctrl; key while selecting normally.</para>
+
+<para>Pressing the &Ctrl; and &Alt; keys along with the &LMB;
+will select a column of text.
+</para>
+
+<para>Double-click with the &LMB; to select a word;
+triple-click to select an entire line.</para>
+
+<para>If the upper or lower edge of the text area is touched while
+marking, &konsole; scrolls up or down, eventually exposing text within
+the history buffer. The scrolling stops when the mouse stops
+moving.</para>
+
+<para>After the mouse is released, &konsole; attempts to keep the text
+in the clipboard visible by holding the marked area reversed. The
+marked area reverts back to normal as soon as the contents of the
+clipboard change, the text within the marked area is altered or the
+&LMB; is clicked.</para>
+
+<para>To mark text on a mouse-aware application (Midnight Commander, for example)
+the &Shift; key has to be pressed when clicking.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><mousebutton>Middle</mousebutton></term>
+
+<listitem><para>Pressing the &MMB;
+pastes text currently in the clipboard. Holding down the &Ctrl; key as you
+press the &MMB; pastes the text and sends
+it to &konsole;.</para>
+
+<note><para>If you have a mouse with only two buttons, pressing both
+the &LMB; and &RMB; together emulates the &MMB; of a three button mouse.</para></note>
+
+<para>If you have a <mousebutton>wheel</mousebutton> as the middle button,
+rolling it in a mouse unaware program will move &konsole;'s scrollbar.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><mousebutton>Right</mousebutton></term>
+<listitem>
+<para>These items appear in the menu when the &RMB;
+is pressed:
+
+<guimenuitem>Copy</guimenuitem>,
+<guimenuitem>Paste</guimenuitem>,
+<guimenuitem>Open File Manager</guimenuitem>,
+<guimenuitem>Set Encoding</guimenuitem>
+<guimenuitem>Clear Scrollback</guimenuitem>,
+<guimenuitem>Configure Scrollback...</guimenuitem>,
+<guimenuitem>Show Menu Bar</guimenuitem>,
+<guimenuitem>Change Profile</guimenuitem>,
+<guimenuitem>Configure Current Profile...</guimenuitem>,
+and <guimenuitem>Close Tab</guimenuitem>
+</para>
+
+<para>In a mouse aware application, press the &Shift; key along with the
+&RMB; to get the popup menu.
+</para>
+
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+</chapter>
+
+<chapter id="commandreference">
+<title>Command Reference</title>
+
+<sect1 id="menubar">
+<title>The Menubar</title>
+
+<para>The menubar is at the top of the &konsole; window. 
+If the menubar is hidden, 
+<guimenuitem>Show Menu Bar</guimenuitem> can be reached by 
+<mousebutton>right</mousebutton> clicking in the window
+(as long as no full screen application is running in that 
+window such as vi, minicom, etc.).  The default shortcut
+is listed after each menu item.
+</para>
+
+<sect2 id="file-menu">
+<title><guimenu>File</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>N</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>New Window</guimenuitem>
+</menuchoice>
+</term>
+<listitem><para><action>Opens a new separate &konsole; window with the default profile</action>
+</para></listitem></varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>T</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>New Tab</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Opens a new tab with the default profile</action>
+<note><para>&konsole; ships with the Shell profile as the default.
+Any new profiles added by the user will be listed in the sub-menu.
+</para></note>
+</para></listitem></varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>W</keycap></keycombo></shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Close Tab</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Closes the current tab</action>
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>File</guimenu>
+<guimenuitem>Save Output As...</guimenuitem></menuchoice></term>
+<listitem><para><action>Saves the current scrollback as a text or html
+ file</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>File</guimenu>
+<guimenuitem>Open File Manager</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Opens &kde;'s file manager
+at the current directory</action>.  By default, that is 
+<ulink url="help:/dolphin/index.html">&dolphin;</ulink>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>Q</keycap></keycombo></shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Quit</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Quits &konsole;</action></para>
+<note><para>&konsole; will display a window if there is more than one
+tab open.  This window can be disabled by clicking on the <guibutton>Do not ask again</guibutton> checkbox.
+</para></note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="edit-menu">
+<title><guimenu>Edit</guimenu> Menu</title>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>C</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Copy</guimenuitem></menuchoice></term>
+<listitem><para><action>Copies the selected text to the clipboard</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo
+ action="simul">&Ctrl;&Shift;<keycap>V</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Paste
+</guimenuitem></menuchoice></term>
+<listitem><para><action>Pastes text from the clipboard at the cursor
+location</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Edit</guimenu><guisubmenu>Copy Input To</guisubmenu><guimenuitem>All Tabs in Current Window</guimenuitem></menuchoice></term>
+<listitem><para><action>Allows input from the current session to be sent simultaneously to all sessions in current window</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo
+ action="simul">&Ctrl;&Shift;<keycap>.</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guisubmenu>Copy Input To</guisubmenu><guimenuitem>Select Tabs...</guimenuitem></menuchoice></term>
+<listitem><para><action>Allows input from the current session to be sent simultaneously to sessions picked by user</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo
+ action="simul">&Ctrl;&Shift;<keycap>/</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guisubmenu>Copy Input To</guisubmenu><guimenuitem>None</guimenuitem></menuchoice></term>
+<listitem><para><action>Stop all input to other sessions</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo
+ action="simul">&Ctrl;&Alt;<keycap>S</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Rename Tab...</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens a dialog box allowing you to change
+the name of the current tab</action>
+(<link linkend="rename-tab-dialog">more info</link>)
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo
+ action="simul">&Ctrl;&Alt;<keycap>U</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>ZModem Upload...</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens up a dialog to select a file to be uploaded if the required software is installed</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>F</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Find...</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens a search bar at the bottom of &konsole;'s window
+</action></para>
+<para>This allows for case sensitive, forward or backwards, and regular expressions searches.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo><keycap>F3</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Find 
+Next</guimenuitem></menuchoice></term>
+<listitem><para><action>Moves to the next search instance
+</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Shift;<keycap>F3</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Find 
+Previous</guimenuitem></menuchoice></term>
+<listitem><para><action>Moves to the previous search instance
+</action></para></listitem>
+</varlistentry>
+
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title><guimenu>View</guimenu> Menu</title>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>(</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Split 
+View Left/Right</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Splits all the tabs into left and right views</action>
+</para><para>
+Any output on one view is duplicated in the other view.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>)</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Split 
+View Top/Bottom</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Splits all the tabs into top and bottom views</action>
+</para><para>
+Any output on one view is duplicated in the other view.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>S</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>
+Close Active</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Closes the current view</action>
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>O</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>
+Close Others</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Closes the non-current view</action>
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>]</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Expand View</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Makes the current view larger</action>
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>[</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Shrink View</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Makes the current view smaller</action>
+</para></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>H</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Detach Current Tab</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Opens the current tab in a 
+separate window</action>
+</para><para>
+Quiting the previous &konsole; window will not
+affect the newly created window.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>I</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Monitor for 
+Silence</guimenuitem></menuchoice></term>
+<listitem><para><action>Toggles the monitoring of the current tab for 
+lack of activity</action>
+</para><para>
+By default, after 10 seconds of inactivity, an info icon will appear on
+the session's tab.
+The type of alerts can be changed through  
+<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Notifications</guimenuitem><guimenuitem>Silence in monitored session</guimenuitem></menuchoice>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>A</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Monitor for 
+Activity</guimenuitem></menuchoice></term>
+<listitem><para><action>Toggles the monitoring of the current tab for 
+activity</action>
+</para><para>
+Upon any activity, an info icon will appear on the session's tab.
+The type of alerts can be changed through  
+<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Notifications</guimenuitem><guimenuitem>Activity in monitored session</guimenuitem></menuchoice>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>+</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Enlarge Font</guimenuitem></menuchoice></term>
+<listitem><para><action>Increases the text font size</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>-</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Shrink Font</guimenuitem></menuchoice></term>
+<listitem><para><action>Decreases the text font size</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>View</guimenu>
+<guimenuitem>Set Encoding</guimenuitem></menuchoice></term>
+<listitem><para><action>Sets the character encoding</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>View</guimenu><guimenuitem>Clear Scrollback</guimenuitem></menuchoice></term>
+<listitem><para><action>Clears the text in the scrollback</action></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>X</keycap></keycombo></shortcut>
+<guimenu>Scrollback</guimenu><guimenuitem>Clear 
+Scrollback and Reset</guimenuitem></menuchoice></term>
+<listitem><para><action>Clears the text in the current tab and scrollback 
+and resets the terminal</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title><guimenu>Bookmarks</guimenu> Menu</title>
+
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>B</keycap></keycombo></shortcut>
+<guimenu>Bookmarks</guimenu><guimenuitem>Add Bookmark</guimenuitem></menuchoice></term>
+<listitem><para><action>Adds the current location</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>Bookmark Tabs as Folder...</guimenuitem></menuchoice></term>
+<listitem><para><action>Adds all tabs to a bookmark folder</action>
+</para><para>
+A dialog will open for the bookmark folder name.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>New Bookmark Folder...</guimenuitem></menuchoice></term>
+<listitem><para><action>Adds a new folder to the bookmark list</action>
+</para><para>
+A dialog will open for the bookmark folder name.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>Edit Bookmarks</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens the bookmark editor</action></para>
+
+<note><para>You can use the bookmark editor to manually add URLs.
+Currently, &konsole; accepts the following:
+<itemizedlist mark='opencircle'>
+<listitem><para>ssh://user@host:port</para></listitem>
+<listitem><para>telnet://user@host:port</para></listitem>
+</itemizedlist>
+</para></note>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="settings-menu">
+<title><guimenu>Settings</guimenu> Menu</title>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+Profiles...</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens a editor for managing profiles</action> 
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo
+ action="simul">&Ctrl;&Shift;<keycap>M</keycap></keycombo></shortcut>
+<guimenu>Settings</guimenu><guimenuitem>Show
+Menu Bar</guimenuitem></menuchoice></term>
+<listitem><para><action>Toggles the menubar being visible</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Full Screen Mode</guimenuitem></menuchoice></term>
+<listitem><para><action>Toggles &konsole; filling the entire screen</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+Shortcuts...</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens the keyboard shortcut editor</action></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+Notifications...</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens the notifications editor</action></para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="help-menu">
+<title><guimenu>Help</guimenu> Menu</title>
+<!-- Only negative to using this is it shows shortcut F1 for Handbook -->
+&help.menu.documentation;
+</sect2>
+</sect1>
+
+<sect1 id="rename-tab-dialog">
+<title>Rename Tab Dialog</title>
+
+<para>The name of the current tab can be changed from this dialog.
+The dialog can be displayed via the menu, the shortcut <keycombo
+ action="simul">&Ctrl;&Alt;<keycap>S</keycap></keycombo> or by 
+double-clicking on the tab in the tab bar.
+These changes can be made permanent by editing the current profile.
+</para>
+
+<para>
+&konsole; will subsitute these tokens:
+<itemizedlist mark='opencircle'>
+<listitem><para>%n : program name</para></listitem>
+<listitem><para>%d : current directory (short)</para></listitem>
+<listitem><para>%D : current directory (long)</para></listitem>
+<listitem><para>%w : window title set by shell</para></listitem>
+<listitem><para>%# : session number</para></listitem>
+<listitem><para>%u : user name</para></listitem>
+</itemizedlist>
+
+</para>
+<para>
+Examples:
+<itemizedlist mark='opencircle'>
+
+<listitem><para>
+<userinput>%d : %n</userinput>
+ with /usr/src as current directory and running
+<application>bash</application> will display 
+<guibutton>usr/s : bash</guibutton>
+</para></listitem>
+
+<listitem><para>
+<userinput>%D : %n</userinput>
+ with /usr/src as current directory and running 
+<application>top</application> will display
+<guibutton>/usr/src : top</guibutton>
+</para></listitem>
+
+<listitem><para>
+<userinput>%w (%#)</userinput>
+ with ~ as current directory and running 
+<application>vim</application> in the first tab will display 
+<guibutton>[No Name] (~) - VIM(1)</guibutton>
+</para></listitem>
+
+</itemizedlist>
+
+</para>
+
+</sect1>
+
+<sect1 id="copy-input-dialog">
+<title>Copy Input Dialog</title>
+
+<para>The text entered in one tab can simultaneously be sent to other tabs.
+This dialog allows you to select which tabs will get that input. 
+The current tab will be greyed out.
+<!--
+<screenshot>
+<screeninfo>A picture of the copy input dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="copyinputdialog.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>A picture of the copy input dialog</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+-->
+
+</para>
+
+</sect1>
+
+<sect1 id="scrollback-options-dialog">
+<title>Scrollback Options Dialog</title>
+
+<para>The 
+<link linkend="scrollback">scrollback</link>
+option for the history size can be changed in this dialog. There is also
+a check box to save these settings to the current profile.
+</para>
+
+</sect1>
+
+</chapter>
+
+<chapter id="command-line-options">
+<title>Command-line Options</title>
+
+<para>When &konsole; is started from the command line, various options
+can be specified to modify its behavior.</para>
+
+<variablelist>
+<varlistentry>
+<term><option>--help</option></term>
+<listitem><para><action>List the various options</action>.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--profile</option> <parameter>file</parameter></term>
+<listitem><para><action>Start &konsole;</action> using a saved set of sessions.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--list-profiles</option></term>
+<listitem><para><action>List</action> all of the available profiles.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--background-mode</option></term>
+<listitem><para><action>Start &konsole;</action> in the background and bring to the front when the F12 key is pressed.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--new-tab</option></term>
+<listitem><para><action>Create a new tab</action> in an existing window rather than creating a new window.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--tabs-from-file </option><parameter>file</parameter></term>
+<listitem><para><action>Create tabs</action> as specified in the given tabs configuration file.
+</para>
+<note><para>The file has one tab per line in the following format:</para><para>
+title: This is the title;; command: run me
+</para></note>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--workdir</option> <parameter>dir</parameter></term>
+<listitem><para><action>Open with</action>
+<parameter>dir</parameter> as the working (starting) directory.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--notransparency</option></term>
+<listitem><para><action>Disable</action> transparent backgrounds, even if the system supports them.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--force-transparency</option></term>
+<listitem><para><action>Try to enable transparency</action>, even if the system does not appear to support it.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--hold, --noclose</option></term>
+<listitem><para><action>Do not close</action> the initial session automatically when it ends.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>-p</option> <parameter>property=value</parameter></term>
+<listitem><para><action>Change</action> the value of a profile property.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>-e</option> <parameter>command</parameter></term>
+<listitem><para><action>Execute</action>
+<parameter>command</parameter> instead of the normal shell.</para>
+<note><para>Any arguments after <parameter>command</parameter> will be passed to
+<parameter>command</parameter>, not &konsole;.</para></note>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>&konsole; also accepts generic &Qt; and &kde; options:</para>
+
+<variablelist>
+<varlistentry>
+<term><option>--help-qt</option></term>
+<listitem><para><action>List &Qt;-specific options</action></para></listitem>
+</varlistentry>
+</variablelist>
+
+<caution><para>The following &Qt; options have no effect on &konsole;:
+<informalexample>
+<variablelist>
+
+<varlistentry>
+<term><option>--fn</option>, <option>--font</option> 
+<parameter>fontname</parameter></term>
+<listitem><para><action>Defines the application font</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--bg</option>, <option>--background</option> 
+<parameter>color</parameter></term>
+<listitem><para><action>Sets the default background color</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--fg</option>, <option>--foreground</option> 
+<parameter>color</parameter></term>
+<listitem><para><action>Sets the default foreground color</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--btn</option>, <option>--button</option> 
+<parameter>color</parameter></term>
+<listitem><para><action>Sets the default button color</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+
+</informalexample>
+</para></caution>
+
+<variablelist>
+<varlistentry>
+<term><option>--help-kde</option></term>
+<listitem><para><action>List &kde;-specific options</action></para></listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--help-all</option></term>
+<listitem><para><action>List all options</action></para></listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--author</option></term>
+<listitem><para><action>Show the authors' names</action></para></listitem>
+</varlistentry>
+<varlistentry>
+<term><option>-v,--version</option></term>
+<listitem><para><action>Show the version number</action></para></listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--license</option></term>
+<listitem><para><action>Show license information</action></para></listitem>
+</varlistentry>
+</variablelist>
+
+</chapter>
+
+<chapter id="scripting">
+<title>Scripting &konsole;</title>
+
+<para>For &kde; 4, the old &DCOP; has been replaced with &DBus;.
+&konsole; does support numerous methods that can be used with &DBus;.
+</para>
+<para>There are two ways to use the &DBus; interface: &Qt;'s &GUI;
+<application>qdbusviewer</application>
+and the command line
+<application>qdbus</application>.
+</para>
+
+<para>
+Examples:
+<itemizedlist mark='opencircle'>
+
+<listitem><para>
+<prompt>&percnt;</prompt>
+<command>qdbus</command>
+will display all services available.
+</para></listitem>
+
+<listitem><para>
+<prompt>&percnt;</prompt>
+<command>qdbus</command>
+<option>org.kde.konsole</option>
+will display the &DBus; interface for &konsole;.
+</para></listitem>
+
+<listitem><para>
+<prompt>&percnt;</prompt>
+<command>qdbus</command>
+<option>org.kde.konsole /Konsole</option>
+will display methods for controlling the main &konsole; window.
+</para></listitem>
+
+<listitem><para>
+<prompt>&percnt;</prompt>
+<command>qdbus</command>
+<option>org.kde.konsole /Sessions/1</option>
+will display methods for session 1.
+</para></listitem>
+
+</itemizedlist>
+</para>
+
+<para>
+If you start &konsole; from a terminal you may need to change
+<option>org.kde.konsole</option> to 
+<option>org.kde.konsole-`pidof -s konsole`</option>.
+</para>
+
+<para>
+For more information, please visit 
+<ulink url="http://techbase.kde.org/Development/Tutorials/D-Bus/Introduction">&DBus; tutorial</ulink>.
+</para>
+
+</chapter>
+
+<chapter id="credits">
+<title>Credits and Copyright</title>
+
+<para>&konsole; is currently maintained by &Robert.Knight;  &Robert.Knight.mail;</para>
+
+<para>Previous &konsole; maintainers include: &Kurt.Hindenburg; &Kurt.Hindenburg.mail; and &Waldo.Bastian; &Waldo.Bastian.mail;</para>
+
+<para>The application &konsole; Copyright &copy; 1997-2008
+&Lars.Doelle; &Lars.Doelle.mail;</para>
+
+<para>This document was written by &Jonathan.Singer;
+&Jonathan.Singer.mail;</para>
+
+<para>This document was updated for &kde; 3.4 by
+&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para>This document was updated for &kde; 4.1 by
+&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
+
+<para>Originally converted to DocBook <acronym>SGML</acronym> by
+&Mike.McBride; and &Lauri.Watts;</para>
+
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;
+&underGPL;
+</chapter>
+
+<appendix id="links">
+<title>Links</title>
+
+<para>For more information please visit these websites:</para>
+<itemizedlist>
+<listitem><para><ulink url="http://userbase.kde.org/Konsole">&konsole;'s homepage on &kde;'s UserBase</ulink>&nbsp;</para></listitem>
+<listitem><para><ulink url="http://konsole.kde.org/">&konsole;'s homepage</ulink></para></listitem>
+<listitem><para><ulink url="http://mail.kde.org/mailman/listinfo/konsole-devel">&konsole;'s mailing list</ulink></para></listitem>
+<listitem><para><ulink url="http://freebsd.kde.org/">&kde; on 
+FreeBSD</ulink></para></listitem>
+<listitem><para><ulink url="http://solaris.kde.org/">&kde; on &Solaris;</ulink></para></listitem>
+</itemizedlist>
+
+</appendix>
+
+&documentation.index;
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-omittag: nil
+sgml-shorttag: t
+sgml-general-insert-case: lower
+End:
+-->
+
+

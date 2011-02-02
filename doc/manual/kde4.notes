@@ -1,0 +1,141 @@
+
+ Konsole's interface ( particularly the menus and settings ) have 
+ changed in KDE 4.  These are notes on what needs to be covered
+ in the handbook and somewhere to draft a layout for the documentation.
+
+ -- Robert Knight (robertknight@gmail.com) 
+
+-----------
+khindenburg - Aug 2008
+The handbook has been updated to trunk/ which will be 4.2.  
+The menus and command-line options are correct.  
+There is room for more information which could include some of the ideas below.
+Also a FAQ section needs to be added.
+Consider adding link to updated Handbook on konsole.kde.org
+Consider what to do with konsole.kde.org
+-----------
+
+ Introduction
+    - What is Konsole?
+    - What is a terminal?
+    - How can I learn to use the terminal?
+
+        Ideas:
+
+        -> Information on more beginner-friendly shells such as Fish
+        -> Basic introduction?
+        -> Links to beginners tutorial for Bash shell
+        -> Links to information on scripting languages
+        -> Links to information on Vim, Emacs etc.
+    
+    - ( Konsole features )?
+        - A brief list of useful features in Konsole with links
+          to the appropriate section of the handbook.
+
+ Basic Usage
+    - Creating new tabs
+    - Creating new windows
+    - Closing a tab or window
+    - Input
+        - Keyboard
+        - Mouse
+        - Opening links and email addresses
+    - Edit actions
+        - Copy and Paste
+        - Tab titles and renaming the tab
+        - Copying input to all tabs
+    - Scrolling
+        - Scrolling output
+            - With the mouse
+            - With the keyboard
+        - Clearing the display
+            - Clearing the current display only
+            - Clearing everything
+        - Changing the scroll-back size
+        - Searching output
+        - Saving output
+    - View actions
+        - Changing the text size temporarily
+        - Splitting the view
+            - Uses of split view
+            - What happens when the view is split?
+            - How to split the view:  Left/Right , Top/Bottom
+            - Closing (unsplitting) the view: Close active view, close others
+            - Changing the size of the views
+                - Using the mouse
+                - Using the keyboard shortcuts
+        - Monitoring for silence or activity
+        - Hiding the menu bar
+        - Full screen mode
+            - Entering into and exiting from
+
+        - Moving a tab between windows
+    - Bookmarks
+        - Creating a new bookmark
+        - Bookmarking a set of tabs as a folder
+        - Local vs SSH bookmarks
+
+ Konsole Setup : Profiles
+
+    - What is a profile
+    - Changing the current profile in a tab
+    - Editing the current profile
+        - General
+            - Name
+            - Command
+            - Working directory
+            - Icon
+            - Environment editor
+                - The $TERM environment variable
+            - Menu Bar display 
+        - Tabs
+            - Tab titles
+                - Local vs Remote
+                - Inserting dynamic elementss
+            - Tab bar position
+            - Tab bar display mode
+        - Color Schemes and Fonts
+            - Choosing and previewing a color scheme
+            - Changing the text size
+            - Changing the font
+
+            (Link -> Color Schemes)
+
+        - Scrollback
+            - Scroll back types ( none , fixed line count , unlimited )
+            - Scroll bar position
+        - Keyboard Setup
+            - Choosing a keyboard binding
+
+            (Link -> Keyboard Bindings)
+
+        - Advanced    
+    - Managing profiles
+        - Creating new profiles
+        - Creating a new session from a profile
+        - Editing existing profiles
+        - Removing profiles
+        - Favorite profiles 
+        - Profile shortcuts
+
+ Color Schemes
+    - Creating new color schemes
+        - The color palette
+        - Changing a color
+        - Transparent color schemes
+            -> Transparency requirements
+        - Randomly varied background colors 
+    - Editing existing color schemes
+    - Removing color schemes
+    
+ Keyboard Bindings
+    - Creating a new keyboard binding
+        - Editing key binding entries
+            - Key sequence specification
+            - Output specification
+                - Escape characters
+        - Adding a new key binding
+        - Removing a key binding 
+        - Testing key bindings
+    - Editing existing bindings
+    - Removing bindings
