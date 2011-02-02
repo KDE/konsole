@@ -57,7 +57,7 @@ void Pty::setWindowSize(int lines, int cols)
   if (pty()->masterFd() >= 0)
     pty()->setWinSize(lines, cols);
 #else
-    write(QByteArray("\e[") + QString("%1;%2t").arg(lines).arg(cols).toLatin1());
+    pty()->write(QByteArray("\x1B[") + QString("%1;%2t\r\n").arg(lines).arg(cols).toLatin1());
 #endif
 }
 QSize Pty::windowSize() const
@@ -304,9 +304,6 @@ void Pty::sendData(const char* data, int length)
     kWarning() << "Pty::doSendJobs - Could not send input data to terminal process.";
     return;
   }
-#ifdef Q_WS_WIN
-  emit receivedData(data,length);
-#endif
 }
 
 void Pty::dataReceived() 
