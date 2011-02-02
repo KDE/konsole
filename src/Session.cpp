@@ -472,7 +472,7 @@ void Session::run()
   int result = _shellProcess->start(exec,
                                   arguments,
                                   _environment,
-                                  (ulong)windowId(),
+                                  (quintptr)windowId(),         //makes casting of Wid to ulong on indows possible
                                   _addToUtmp,
                                   dbusService,
                                   (QLatin1String("/Sessions/") +
