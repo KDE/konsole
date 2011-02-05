@@ -161,6 +161,7 @@ class MainWindow : public KXmlGuiWindow
         void showShortcutsDialog();
         void newFromProfile(Profile::Ptr profile);
         void activeViewChanged(SessionController* controller);
+        void disconnectController(SessionController* controller);
         void activeViewTitleChanged(ViewProperties*);
 
         void sessionListChanged(const QList<QAction*>& actions);
@@ -181,7 +182,6 @@ class MainWindow : public KXmlGuiWindow
         void setupActions();
         void setupWidgets();
         QString activeSessionDir() const;
-        void disconnectController(SessionController* controller);
 
         // sets the active shortcuts of actions in 'dest' to the shortcuts of actions
         // with the same name in 'source' (see KAction::ActiveShortcut)

@@ -86,6 +86,8 @@ MainWindow::MainWindow()
     connect( _viewManager , SIGNAL(empty()) , this , SLOT(close()) );
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
             SLOT(activeViewChanged(SessionController*)) );
+    connect( _viewManager , SIGNAL(unplugController(SessionController*)) , this ,
+            SLOT(disconnectController(SessionController*)) );
     connect( _viewManager , SIGNAL(viewPropertiesChanged(const QList<ViewProperties*>&)) ,
            bookmarkHandler() , SLOT(setViews(const QList<ViewProperties*>&)) );
 
