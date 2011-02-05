@@ -443,6 +443,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _closeTabButton->setIcon(KIcon("tab-close"));
     _closeTabButton->adjustSize();
     _closeTabButton->setHidden(true);
+    _closeTabButton->setEnabled(false);
 
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
@@ -494,11 +495,11 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _contextPopupMenu->addAction(KIcon(),
         i18nc("@action:inmenu", "&Rename Tab..."), this,
         SLOT(tabContextMenuRenameTab()));
-
+/*
     _contextPopupMenu->addAction(KIcon("tab-close"),
         i18nc("@action:inmenu", "&Close Tab"), this,
         SLOT(tabContextMenuCloseTab()));
-
+*/
 }
 void TabbedViewContainer::setNewViewMenu(QMenu* menu)
 {
