@@ -40,14 +40,14 @@
 <holder>&Jonathan.Singer;</holder>
 </copyright>
 <copyright>
-<year>2005</year><year>2008</year><year>2009</year><year>2010</year>
+<year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year>
 <holder>&Kurt.Hindenburg;</holder>
 </copyright>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2010-05-25</date>
-<releaseinfo>2.5.0</releaseinfo>
+<date>2011-02-05</date>
+<releaseinfo>2.7.0</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -456,7 +456,7 @@ Previous</guimenuitem></menuchoice></term>
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>(</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>(</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Split 
 View Left/Right</guimenuitem></menuchoice>
 </term>
@@ -468,7 +468,7 @@ Any output on one view is duplicated in the other view.
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>)</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>)</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Split 
 View Top/Bottom</guimenuitem></menuchoice>
 </term>
@@ -561,14 +561,14 @@ The type of alerts can be changed through
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>+</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>+</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guimenuitem>Enlarge Font</guimenuitem></menuchoice></term>
 <listitem><para><action>Increases the text font size</action></para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>-</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>-</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guimenuitem>Shrink Font</guimenuitem></menuchoice></term>
 <listitem><para><action>Decreases the text font size</action></para></listitem>
 </varlistentry>
