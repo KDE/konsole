@@ -47,7 +47,7 @@ void DBusTest::initTestCase()
             konsoleServices << service;
     }
 
-    // Create a new Konsole with a seperate process id
+    // Create a new Konsole with a separate process id
     int result = KProcess::execute("konsole");
     if (result)
         kFatal() << "Unable to exec a new Konsole : " << result;
