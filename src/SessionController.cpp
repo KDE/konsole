@@ -983,7 +983,7 @@ void SessionController::clearHistoryAndReset()
 {
     Emulation* emulation = _session->emulation();
     emulation->reset();
-    //_session->refresh();
+    _session->refresh();
     clearHistory();
 }
 
