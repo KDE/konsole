@@ -49,6 +49,9 @@ public:
     void setTabTitleText(const QString&);
     void setRemoteTabTitleText(const QString&);
 
+    void focusTabTitleText();
+    void focusRemoteTabTitleText();
+
 public slots:
     void insertTabTitleText(const QString& text);
     void insertRemoteTabTitleText(const QString& text);

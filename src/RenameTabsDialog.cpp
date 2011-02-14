@@ -56,6 +56,15 @@ RenameTabsDialog::~RenameTabsDialog()
     delete _ui;
 }
 
+void RenameTabsDialog::focusTabTitleText()
+{
+    _ui->tabTitleEdit->setFocus();
+}
+
+void RenameTabsDialog::focusRemoteTabTitleText()
+{
+    _ui->remoteTabTitleEdit->setFocus();
+}
 
 void RenameTabsDialog::setTabTitleText(const QString& text)
 {

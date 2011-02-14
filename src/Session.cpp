@@ -897,6 +897,14 @@ bool Session::updateForegroundProcessInfo()
     return valid;
 }
 
+bool Session::isRemote()
+{
+    ProcessInfo* process = getProcessInfo();
+
+    bool ok = false;
+    return ( process->name(&ok) == "ssh" && ok );
+}
+
 QString Session::getDynamicTitle()
 {
     // update current directory from process
