@@ -151,6 +151,13 @@ public:
      */
     RemoteTabTitle
   };
+
+  /**
+   * Returns true if the session currently contains a connection to a 
+   * remote computer.  It currently supports ssh.
+   */
+  bool isRemote();
+
   /**
    * Sets the format used by this session for tab titles.
    *
