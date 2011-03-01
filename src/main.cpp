@@ -104,6 +104,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("noclose",ki18n("Do not close the initial session automatically when it ends."));
     // TODO - Document this option more clearly
     options.add("p <property=value>",ki18n("Change the value of a profile property."));
+    options.add("list-profile-properties", ki18n("List all the profile propertes names and their type (for use with -p)"));
     options.add("!e <cmd>",ki18n("Command to execute"));
     options.add("+[args]",ki18n("Arguments passed to command"));
 }

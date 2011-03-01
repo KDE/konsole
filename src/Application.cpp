@@ -101,6 +101,15 @@ void Application::listAvailableProfiles()
     quit();
 }
 
+void Application::listProfilePropertyInfo()
+{
+    Profile::Ptr tempProfile = SessionManager::instance()->defaultProfile();
+    const QStringList names = tempProfile->propertiesInfoList();
+    for (int i = 0; i < names.size(); ++i)
+        std::cout << names.at(i).toLocal8Bit().data() << std::endl;
+    quit();
+}
+
 int Application::newInstance()
 {
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
@@ -306,6 +315,11 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
     if ( args->isSet("list-profiles") )
     {
         listAvailableProfiles();
+        return true;
+    }
+    else if ( args->isSet("list-profile-properties") )
+    {
+        listProfilePropertyInfo();
         return true;
     }
     return false;

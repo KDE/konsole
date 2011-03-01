@@ -370,6 +370,11 @@ public:
 
     int menuIndexAsInt() const;
 
+    /** Return a list of all properties names and their type 
+     *  (for use with -p option).
+     */
+    const QStringList propertiesInfoList() const;
+
     /**
      * Returns true if @p name has been associated with an element
      * from the Property enum or false otherwise.

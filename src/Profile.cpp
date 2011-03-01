@@ -291,6 +291,19 @@ int Profile::menuIndexAsInt() const
     return 0;
 }
 
+const QStringList Profile::propertiesInfoList() const
+{
+    QStringList info;
+    const PropertyInfo* iter = DefaultPropertyNames;
+    while ( iter->name != 0 )
+    {
+        info << QString(iter->name) + " : " + QString(QVariant(iter->type).typeName());
+        iter++;
+    }
+
+    return info;
+}
+
 QString KDE4ProfileWriter::getPath(const Profile::Ptr info)
 {
     QString newPath;

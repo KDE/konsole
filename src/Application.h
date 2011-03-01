@@ -80,6 +80,7 @@ private slots:
 private:
     void init();
     void listAvailableProfiles();
+    void listProfilePropertyInfo();
     void startBackgroundMode(MainWindow* window);
     bool processHelpArgs(KCmdLineArgs* args);
     MainWindow* processWindowArgs(KCmdLineArgs* args);
