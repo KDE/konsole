@@ -41,7 +41,6 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* parent)
     : QWidget(parent)
     , _foundMatch(false)
     , _searchEdit(0)
-    , _continueLabel(0)
     ,_caseSensitive(0)
     ,_regExpression(0)
     ,_highlightMatches(0)
@@ -102,9 +101,6 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* parent)
     optionsButton->setToolButtonStyle(Qt::ToolButtonTextOnly);
     optionsButton->setToolTip( i18n("Display the options menu") );
 
-    QLabel* _continueLabel = new QLabel(this);
-    _continueLabel->setVisible(false);
-
     layout->addWidget(close);
     layout->addWidget(findLabel);
     layout->addWidget(_searchEdit);
@@ -134,7 +130,6 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* parent)
     connect(_highlightMatches, SIGNAL(toggled(bool)),
             this, SIGNAL(highlightMatchesToggled(bool)) );
 
-    layout->addWidget(_continueLabel);
     layout->addStretch();
 
     layout->setContentsMargins(4, 4, 4, 4);
@@ -195,24 +190,6 @@ void IncrementalSearchBar::setFoundMatch( bool match )
     else
     {
         _searchEdit->setStyleSheet( QString() );
-    }
-}
-
-void IncrementalSearchBar::setContinueFlag( Continue flag )
-{
-    if ( flag == ContinueFromTop )
-    {
-        _continueLabel->setText( i18n("Search reached bottom, continued from top.") );
-        _continueLabel->show();
-    } 
-    else if ( flag == ContinueFromBottom )
-    {
-        _continueLabel->setText( i18n("Search reached top, continued from bottom.") );
-        _continueLabel->show();
-    } 
-    else if ( flag == ClearContinue )
-    {
-        _continueLabel->hide();
     }
 }
 

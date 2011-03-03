@@ -59,22 +59,6 @@ class IncrementalSearchBar : public QWidget
 Q_OBJECT
 
 public:
-    enum Continue
-    {
-        /** 
-         * Indicates that the search has reached the bottom of the document and has been continued from
-         * the top 
-         */
-        ContinueFromTop,
-        /**
-         * Indicates that the search has reached the top of the document and has been continued from
-         * the bottom
-         */
-        ContinueFromBottom,
-
-        /** Clears the Continue flag */
-        ClearContinue
-    };
 
     /** 
      * This enum defines the options that can be checked.
@@ -109,14 +93,6 @@ public:
      * found will be shown.
      */
     void setFoundMatch( bool match );
-
-    /**
-     * Sets a flag to indicate that the current search for matches has reached the top or bottom of
-     * the document and has been continued again from the other end of the document.
-     *
-     * This flag will be cleared when the user presses the buttons to find a next or previous match.
-     */
-    void setContinueFlag( Continue flag );
 
     /** Returns the current search text */
     QString searchText();
@@ -159,7 +135,6 @@ private:
     bool _foundMatch;
 
     KLineEdit* _searchEdit;
-    QLabel* _continueLabel;
     QProgressBar* _progress;
     QAction* _caseSensitive;
     QAction* _regExpression;
