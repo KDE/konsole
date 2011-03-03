@@ -22,6 +22,7 @@
 
 // Qt
 #include <QtGui/QWidget>
+#include <QBitArray>
 
 class QCheckBox;
 class QLabel;
@@ -47,14 +48,6 @@ namespace Konsole
  * findNextClicked() and findPreviousClicked() signals are emitted when the user presses buttons 
  * to find next and previous matches respectively.
  *
- * The search bar has a number of optional features which can be enabled or disabled by passing
- * a set of Features flags to the constructor.
- *
- * An optional checkbox can be displayed to indicate whether all matches in the document 
- * for searchText() should be highlighted.  
- * The highlightMatchesToggled() signal is emitted when this checkbox is toggled.
- *
- * The two further optional checkboxes allow the user to control the matching process.  
  * The first indicates whether searches are case sensitive.  
  * The matchCaseToggled() signal is emitted when this is changed.
  * The second indicates whether the search text should be treated as a plain string or 
@@ -84,26 +77,25 @@ public:
     };
 
     /** 
-     * This enum defines the features which can be supported by an implementation of
-     * an incremental search bar
+     * This enum defines the options that can be checked.
      */
-    enum Features
+    enum SearchOptions
     {
-        /** search facility supports highlighting of all matches */
-        HighlightMatches = 1,
-        /** search facility supports case-sensitive and case-insensitive search */
-        MatchCase        = 2,
-        /** search facility supports regular expressions */
-        RegExp           = 4,
-        /** search facility supports all features */
-        AllFeatures      = HighlightMatches | MatchCase | RegExp
+        /** Highlight all matches */
+        HighlightMatches = 0,
+        /** Searches are case-sensitive or not */
+        MatchCase        = 1,
+        /** Searches use regular expressions */
+        RegExp           = 2,
     };
 
     /** 
      * Constructs a new incremental search bar with the given parent widget 
-     * @p features specifies the features which should be made available to the user.
      */
-    explicit IncrementalSearchBar(Features features , QWidget* parent = 0);
+    explicit IncrementalSearchBar(QWidget* parent = 0);
+
+    /* Returns search options that are checked */
+    const QBitArray optionsChecked();
 
     /** 
      * Sets an indicator for the user as to whether or not a match for the 
@@ -128,21 +120,6 @@ public:
 
     /** Returns the current search text */
     QString searchText();
-    /** 
-     * Returns whether matches for the current search text should be highlighted in the document. 
-     * Always returns true if the highlight matches checkbox is not visible. 
-     */
-    bool highlightMatches();
-    /** 
-     * Returns whether matching for the current search text should be case sensitive.
-     * Always returns false if the match case checkbox is not visible.
-     */
-    bool matchCase();
-    /** 
-     * Returns whether the current search text should be treated as plain text or a regular expression 
-     * Always returns false if the match regular expression checkbox is not visible.
-     */
-    bool matchRegExp();
 
     // reimplemented
     virtual void setVisible( bool visible );
@@ -180,13 +157,13 @@ private slots:
 
 private:
     bool _foundMatch;
-    QCheckBox* _matchCaseBox;
-    QCheckBox* _matchRegExpBox;
-    QCheckBox* _highlightBox;
 
     KLineEdit* _searchEdit;
     QLabel* _continueLabel;
     QProgressBar* _progress;
+    QAction* _caseSensitive;
+    QAction* _regExpression;
+    QAction* _highlightMatches;
 
     QTimer* _searchTimer;
 };

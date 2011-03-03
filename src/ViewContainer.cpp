@@ -195,7 +195,7 @@ const QList<QWidget*> ViewContainer::views()
 IncrementalSearchBar* ViewContainer::searchBar()
 {
     if (!_searchBar) {
-        _searchBar = new IncrementalSearchBar( IncrementalSearchBar::AllFeatures , 0);
+        _searchBar = new IncrementalSearchBar(0);
         _searchBar->setVisible(false);
         connect(_searchBar, SIGNAL(destroyed(QObject*)), this, SLOT(searchBarDestroyed()));
     }
