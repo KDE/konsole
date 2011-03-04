@@ -135,12 +135,12 @@ void ViewManager::setupActions()
 {
     KActionCollection* collection = _actionCollection;
 
-    KAction* nextViewAction = new KAction( i18n("Next View") , this );
-    KAction* previousViewAction = new KAction( i18n("Previous View") , this );
+    KAction* nextViewAction = new KAction( i18n("Next Tab") , this );
+    KAction* previousViewAction = new KAction( i18n("Previous Tab") , this );
     KAction* nextContainerAction = new KAction( i18n("Next View Container") , this);
   
-    KAction* moveViewLeftAction = new KAction( i18n("Move View Left") , this );
-    KAction* moveViewRightAction = new KAction( i18n("Move View Right") , this );
+    KAction* moveViewLeftAction = new KAction( i18n("Move Tab Left") , this );
+    KAction* moveViewRightAction = new KAction( i18n("Move Tab Right") , this );
 
     // list of actions that should only be enabled when there are multiple view
     // containers open
