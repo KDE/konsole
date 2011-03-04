@@ -346,9 +346,19 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
 QString MainWindow::activeSessionDir() const
 {
     if ( _pluggedController )
+    {
+        if ( Session* session = _pluggedController->session() )
+        {
+            // For new tabs to get the correct working directory,
+            // force the updating of the currentWorkingDirectory.
+            session->getDynamicTitle();
+        }
         return _pluggedController->currentDir();
+    }
     else
+    {
         return QString();
+    }
 }
 
 void MainWindow::openUrls(const QList<KUrl>& urls)
