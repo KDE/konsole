@@ -788,8 +788,11 @@ void TabbedViewContainer::updateTitle(ViewProperties* item)
         const int index = _stackWidget->indexOf( iter.next() );
         QString tabText = item->title();
 
-        _tabBar->setTabText( index , tabText );
         _tabBar->setTabToolTip( index , tabText );
+
+        // To avoid having & replaced with _ (shortcut indicator)
+        tabText.replace("&", "&&");
+        _tabBar->setTabText( index , tabText );
     }
 }
 void TabbedViewContainer::updateIcon(ViewProperties* item)
