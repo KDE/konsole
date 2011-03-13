@@ -247,6 +247,14 @@ void SessionController::openUrl( const KUrl& url )
         QString path = url.toLocalFile();
         _session->emulation()->sendText("cd " + KShell::quoteArg(path) + '\r');
     }
+    else if (url.protocol().isEmpty())
+    {
+        // KUrl couldn't parse what the user entered into the URL field
+        // so just dump it to the shell
+        QString command = url.prettyUrl();
+        if (!command.isEmpty())
+            _session->emulation()->sendText(command + '\r');
+    }
     else if ( url.protocol() == "ssh" )
     {
         _session->emulation()->sendText("ssh ");
