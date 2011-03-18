@@ -157,6 +157,7 @@ class MainWindow : public KXmlGuiWindow
         void newTab();
         void newWindow();
         void showManageProfilesDialog();
+        void activateMenuBar();
         void showRemoteConnectionDialog();
         void showShortcutsDialog();
         void newFromProfile(Profile::Ptr profile);

@@ -296,6 +296,11 @@ void MainWindow::setupActions()
     action->setIcon( KIcon("configure") );
     connect( action, SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()) );
 
+    // Set up an action and shortcut for activating menu bar.
+    KAction* menuBarAction = collection->addAction("activate_menu");
+    menuBarAction->setText(i18n("Activate Menu"));
+    menuBarAction->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F10));
+    connect(menuBarAction, SIGNAL(triggered()), this, SLOT(activateMenuBar()));
 }
 
 void MainWindow::viewFullScreen(bool fullScreen)
@@ -500,6 +505,33 @@ void MainWindow::showRemoteConnectionDialog()
 //    RemoteConnectionDialog dialog(this);
 //    if ( dialog.exec() == QDialog::Accepted )
 //        emit newSessionRequest(dialog.sessionKey(),QString(),_viewManager);
+}
+
+void MainWindow::activateMenuBar()
+{
+    QAction* fileAction;
+
+    // Find action for "File" menu
+    foreach(QAction* menuItem, menuBar()->actions())
+    {
+        QString itemText = KGlobal::locale()->removeAcceleratorMarker(menuItem->text());
+        if  (itemText == "File")
+        {
+            fileAction = menuItem;
+            break;
+        }
+    }
+    if (fileAction)
+    {
+        if (menuBar()->isHidden()) // Show menubar if hidden
+        {
+            _toggleMenuBarAction->setChecked(true);
+            menuBar()->setVisible(true);
+        }
+        // TODO: Handle when menubar is top level (MacOS)
+        menuBar()->setActiveAction(fileAction);
+    }
+
 }
 
 void MainWindow::setupWidgets()
