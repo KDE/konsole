@@ -509,29 +509,22 @@ void MainWindow::showRemoteConnectionDialog()
 
 void MainWindow::activateMenuBar()
 {
-    QAction* fileAction;
+    const QList<QAction*> menuActions = menuBar()->actions();
 
-    // Find action for "File" menu
-    foreach(QAction* menuItem, menuBar()->actions())
+    if (menuActions.isEmpty())
+        return;
+
+    // First menu action should be 'File'
+    QAction* fileAction = menuActions.first();
+
+    if (menuBar()->isHidden()) // Show menubar if hidden
     {
-        QString itemText = KGlobal::locale()->removeAcceleratorMarker(menuItem->text());
-        if  (itemText == "File")
-        {
-            fileAction = menuItem;
-            break;
-        }
-    }
-    if (fileAction)
-    {
-        if (menuBar()->isHidden()) // Show menubar if hidden
-        {
-            _toggleMenuBarAction->setChecked(true);
-            menuBar()->setVisible(true);
-        }
-        // TODO: Handle when menubar is top level (MacOS)
-        menuBar()->setActiveAction(fileAction);
+        _toggleMenuBarAction->setChecked(true);
+        menuBar()->setVisible(true);
     }
 
+    // TODO: Handle when menubar is top level (MacOS)
+    menuBar()->setActiveAction(fileAction);
 }
 
 void MainWindow::setupWidgets()
