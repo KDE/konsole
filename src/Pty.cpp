@@ -221,11 +221,11 @@ int Pty::start(const QString& program,
 void Pty::setWriteable(bool writeable)
 {
   KDE_struct_stat sbuf;
-  KDE_stat(pty()->ttyName(), &sbuf);
+  KDE::stat(pty()->ttyName(), &sbuf);
   if (writeable)
-    chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP);
+    KDE::chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP);
   else
-    chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP|S_IWOTH));
+    KDE::chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP|S_IWOTH));
 }
 
 Pty::Pty(int masterFd, QObject* parent)

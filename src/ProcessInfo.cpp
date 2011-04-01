@@ -817,7 +817,7 @@ private:
                 QByteArray deviceName = fullDeviceName.toLatin1();
                 const char* ttyName = deviceName.data();
 
-                if (KDE_stat(ttyName, &statInfo) != 0)
+                if (KDE::stat(ttyName, &statInfo) != 0)
                     return false;
 
                 // Find all processes attached to ttyName
