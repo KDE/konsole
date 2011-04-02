@@ -417,10 +417,15 @@ void UnixProcessInfo::readUserName()
     if (getpwBuffer == NULL)
         return;
     getpwStatus = getpwuid_r(uid, &passwdStruct, getpwBuffer, getpwBufferSize, &getpwResult);
-    if (getpwResult != NULL)
+    if ((getpwStatus == 0) && (getpwResult != NULL))
+    {
         setUserName(QString(passwdStruct.pw_name));
+    }
     else
+    {
         setUserName(QString());
+        kWarning()<<"getpwuid_r returned error : "<<getpwStatus;
+    }
     delete [] getpwBuffer;
 }
 
