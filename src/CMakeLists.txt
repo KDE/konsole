@@ -84,7 +84,6 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ProfileList.cpp
         ProfileListWidget.cpp
         Pty.cpp
-        RemoteConnectionDialog.cpp
         RenameTabsDialog.cpp
         Screen.cpp
         ScreenWindow.cpp
@@ -134,7 +133,6 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                   EditProfileDialog.ui
                   KeyBindingEditor.ui
                   ManageProfilesDialog.ui
-                  RemoteConnectionDialog.ui
                   RenameTabsDialog.ui
                  )
 

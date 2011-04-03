@@ -49,7 +49,6 @@
 // Konsole
 #include "BookmarkHandler.h"
 #include "IncrementalSearchBar.h"
-#include "RemoteConnectionDialog.h"
 #include "SessionController.h"
 #include "ProfileList.h"
 #include "ManageProfilesDialog.h"
@@ -252,12 +251,6 @@ void MainWindow::setupActions()
     action->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N) );
     action->setAutoRepeat( false );
     connect( action , SIGNAL(triggered()) , this , SLOT(newWindow()) );
-
-    action = collection->addAction("remote-connection");
-    action->setText( i18n("Remote Connection...") );
-    action->setIcon( KIcon("network-connect") );
-    action->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_R) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(showRemoteConnectionDialog()) );
 
     action = KStandardAction::quit( this , SLOT(close()) , collection );
     // the default shortcut for quit is typically Ctrl+[Some Letter, usually Q] but that is reserved for
@@ -498,13 +491,6 @@ void MainWindow::showManageProfilesDialog()
 {
     ManageProfilesDialog* dialog = new ManageProfilesDialog(this);
     dialog->show();
-}
-
-void MainWindow::showRemoteConnectionDialog()
-{
-//    RemoteConnectionDialog dialog(this);
-//    if ( dialog.exec() == QDialog::Accepted )
-//        emit newSessionRequest(dialog.sessionKey(),QString(),_viewManager);
 }
 
 void MainWindow::activateMenuBar()
