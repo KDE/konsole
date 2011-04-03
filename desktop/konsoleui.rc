@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsole" version="5">
+<kpartgui name="konsole" version="6">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
@@ -31,13 +31,15 @@
         </Menu>
         <Action name="bookmark"/>
         <Menu name="settings"><text>Settings</text>
+            <DefineGroup name="session-settings"/>
+            <Action name="edit-current-profile"/>
+            <Action name="configure-profiles"/>
             <Action name="show-menubar"/>
             <Separator/>
             <Action name="view-full-screen"/>
             <Separator/>
             <Action name="configure-notifications"/>
             <Action name="configure-shortcuts"/>
-            <Action name="configure-profiles"/>
         </Menu>
         <Menu name="help"><text>Help</text>
         </Menu>
