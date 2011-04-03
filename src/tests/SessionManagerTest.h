@@ -20,8 +20,6 @@
 #ifndef SESSIONMANAGERTEST_H
 #define SESSIONMANAGERTEST_H
 
-#include <QtTest>
-
 #include "../SessionManager.h"
 
 namespace Konsole

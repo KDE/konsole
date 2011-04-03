@@ -21,7 +21,6 @@
 #define PARTTEST_H
 
 #include <QtCore/QEventLoop>
-#include <QtTest>
 
 #include <kde_terminal_interface.h>
 #include <KParts/Part>
