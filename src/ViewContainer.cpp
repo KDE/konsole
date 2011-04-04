@@ -791,7 +791,7 @@ void TabbedViewContainer::updateTitle(ViewProperties* item)
         _tabBar->setTabToolTip( index , tabText );
 
         // To avoid having & replaced with _ (shortcut indicator)
-        tabText.replace("&", "&&");
+        tabText.replace('&', "&&");
         _tabBar->setTabText( index , tabText );
     }
 }
