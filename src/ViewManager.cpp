@@ -793,6 +793,8 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
 
     emit setSaveGeometryOnExitRequest( info->property<bool>(Profile::SaveGeometryOnExit) );
 
+    emit updateWindowIcon();
+
     // tab bar visibility
     if (applyContainerSettings)
     {

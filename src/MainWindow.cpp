@@ -94,6 +94,8 @@ MainWindow::MainWindow()
             SLOT(setMenuBarVisibleOnce(bool)) );
     connect( _viewManager , SIGNAL(setSaveGeometryOnExitRequest(bool)) , this ,
 	    SLOT(setSaveGeometryOnExit(bool)) );
+    connect( _viewManager , SIGNAL(updateWindowIcon()) , this ,
+	    SLOT(updateWindowIcon()) );
     connect( _viewManager , SIGNAL(newViewRequest(Profile::Ptr)) , 
         this , SLOT(newFromProfile(Profile::Ptr)) );
     connect( _viewManager , SIGNAL(newViewRequest()) , 
@@ -221,11 +223,20 @@ void MainWindow::activeViewChanged(SessionController* controller)
     activeViewTitleChanged(controller);
 
     _pluggedController = controller;
+
+    // Update window icon to newly activated session's icon
+    updateWindowIcon();
 }
 
 void MainWindow::activeViewTitleChanged(ViewProperties* properties)
 {
     setPlainCaption(properties->title());
+}
+
+void MainWindow::updateWindowIcon()
+{
+    if (_pluggedController)
+        setWindowIcon(_pluggedController->icon());
 }
 
 IncrementalSearchBar* MainWindow::searchBar() const

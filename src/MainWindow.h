@@ -174,6 +174,8 @@ class MainWindow : public KXmlGuiWindow
 
         void setSaveGeometryOnExit(bool visible);
 
+        void updateWindowIcon();
+
         void openUrls(const QList<KUrl>& urls);
 
     private:
