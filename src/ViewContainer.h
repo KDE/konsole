@@ -427,7 +427,6 @@ private slots:
     void updateIcon(ViewProperties* item);
     void updateActivity(ViewProperties* item);
     void currentTabChanged(int index);
-    void closeTab(int index);
     void closeCurrentTab();
     void wheelScrolled(int delta);
    
@@ -440,6 +439,7 @@ private slots:
 
 signals:
     void detachTab(ViewContainer * self, QWidget * activeView);
+    void closeTab(ViewContainer * self, QWidget * activeView);
 
 private:
     void dynamicTabBarVisibility();

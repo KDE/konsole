@@ -639,6 +639,11 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
                     this,
                     SLOT(detachView(ViewContainer*, QWidget*))
                     );
+                connect(container,
+                    SIGNAL(closeTab(ViewContainer*, QWidget*)),
+                    this,
+                    SLOT(closeTabFromContainer(ViewContainer*, QWidget*)));
+
             }
             break;
         case NoNavigation:
@@ -1088,6 +1093,14 @@ void ViewManager::moveSessionLeft()
 void ViewManager::moveSessionRight()
 {
     this->moveActiveViewRight();
+}
+
+void ViewManager::closeTabFromContainer(ViewContainer *container, QWidget *tab)
+{
+    SessionController *controller = dynamic_cast<SessionController*>(container->viewProperties(tab));
+    Q_ASSERT(controller);
+    if (controller && controller->confirmClose())
+        controller->session()->close();
 }
 
 #include "ViewManager.moc"

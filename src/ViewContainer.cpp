@@ -443,13 +443,11 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _closeTabButton->setIcon(KIcon("tab-close"));
     _closeTabButton->adjustSize();
     _closeTabButton->setHidden(true);
-    _closeTabButton->setEnabled(false);
 
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
     connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
     connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
-    connect( _tabBar , SIGNAL(tabCloseRequested(int)) , this , SLOT(closeTab(int)) );
     connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );
     connect( _tabBar, SIGNAL(contextMenu(int, const QPoint&)), this,
             SLOT(openTabContextMenu(int, const QPoint&)) );
@@ -496,9 +494,9 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
         i18nc("@action:inmenu", "&Rename Tab..."), this,
         SLOT(tabContextMenuRenameTab()));
 
-//    _contextPopupMenu->addAction(KIcon("tab-close"),
-//        i18nc("@action:inmenu", "&Close Tab"), this,
-//        SLOT(tabContextMenuCloseTab()));
+    _contextPopupMenu->addAction(KIcon("tab-close"),
+        i18nc("@action:inmenu", "&Close Tab"), this,
+        SLOT(tabContextMenuCloseTab()));
 
 }
 void TabbedViewContainer::setNewViewMenu(QMenu* menu)
@@ -521,16 +519,10 @@ void TabbedViewContainer::closeCurrentTab()
 {
     if (_stackWidget->currentIndex() != -1)
     {
-        closeTab(_stackWidget->currentIndex());
+        emit closeTab(this, _stackWidget->widget(_stackWidget->currentIndex()));
     }
 }
-void TabbedViewContainer::closeTab(int tab)
-{
-    Q_ASSERT(tab >= 0 && tab < _stackWidget->count());
-    
-    if (viewProperties(_stackWidget->widget(tab))->confirmClose())
-        removeView(_stackWidget->widget(tab));
-}
+
 void TabbedViewContainer::setTabBarVisible(bool visible)
 {
     _tabBar->setVisible(visible);
@@ -655,7 +647,8 @@ void TabbedViewContainer::openTabContextMenu(int index, const QPoint& pos)
 
 void TabbedViewContainer::tabContextMenuCloseTab()
 {
-    closeTab(_contextMenuTabIndex);
+    _tabBar->setCurrentIndex(_contextMenuTabIndex);// Required for this to work
+    emit closeTab(this, _stackWidget->widget(_contextMenuTabIndex));
 }
 
 void TabbedViewContainer::tabContextMenuDetachTab()
