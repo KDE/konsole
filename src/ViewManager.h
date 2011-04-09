@@ -313,6 +313,8 @@ private slots:
 
     void detachView(ViewContainer* container, QWidget* view);
 
+    void closeTabFromContainer(ViewContainer *container, QWidget *view);
+    
 private:
     void createView(Session* session, ViewContainer* container, int index);
     const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile) const;

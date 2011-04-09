@@ -376,7 +376,8 @@ public slots:
    * then the terminal connection (the pty) is closed and Konsole waits for the 
    * process to exit.
    */
-  Q_SCRIPTABLE void close();
+  //Q_SCRIPTABLE void close(); // This cause the menu issues bko 185466
+  void close();
 
   /**
    * Changes the session title or other customizable aspects of the terminal
