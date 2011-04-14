@@ -30,6 +30,7 @@
 #include "Filter.h"
 #include "Character.h"
 #include "konsole_export.h"
+#include "ScreenWindow.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -52,7 +53,6 @@ namespace Konsole
 
 extern unsigned short vt100_graphics[32];
 
-class ScreenWindow;
 
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
@@ -410,6 +410,12 @@ public:
     static bool HAVE_TRANSPARENCY;
 
 public slots:
+    /**
+     * Scrolls current ScreenWindow
+     *
+     * it's needed for proper handling scroll commands in the Vt102Emulation class
+     */
+    void scrollScreenWindow( enum ScreenWindow::RelativeScrollMode mode , int amount );
 
     /** 
      * Causes the terminal display to fetch the latest character image from the associated

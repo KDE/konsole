@@ -54,6 +54,7 @@
 // Konsole
 #include "KeyboardTranslator.h"
 #include "Screen.h"
+#include "TerminalDisplay.h"
 
 
 using namespace Konsole;
@@ -943,10 +944,18 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
 
         if ( entry.command() != KeyboardTranslator::NoCommand )
         {
-            if (entry.command() & KeyboardTranslator::EraseCommand)
+            bool update = true;
+            if (entry.command() & KeyboardTranslator::EraseCommand) {
                 textToSend += eraseChar();
-
-            // TODO command handling
+		update = false;
+	    } else if ( entry.command() & KeyboardTranslator::ScrollPageUpCommand )
+                _currentScreen->currentTerminalDisplay()->scrollScreenWindow( ScreenWindow::ScrollPages , -1 );
+            else if ( entry.command() & KeyboardTranslator::ScrollPageDownCommand )
+                _currentScreen->currentTerminalDisplay()->scrollScreenWindow( ScreenWindow::ScrollPages , 1 );
+            else if ( entry.command() & KeyboardTranslator::ScrollLineUpCommand )
+                _currentScreen->currentTerminalDisplay()->scrollScreenWindow( ScreenWindow::ScrollLines , -1 );
+            else if ( entry.command() & KeyboardTranslator::ScrollLineDownCommand )
+                _currentScreen->currentTerminalDisplay()->scrollScreenWindow( ScreenWindow::ScrollLines , 1 );
         }
         else if ( !entry.text().isEmpty() ) 
         {

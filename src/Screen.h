@@ -44,6 +44,7 @@ namespace Konsole
 {
 
 class TerminalCharacterDecoder;
+class TerminalDisplay;
 
 /**
     \brief An image of characters with associated attributes.
@@ -545,6 +546,16 @@ public:
       */
     static void fillWithDefaultChar(Character* dest, int count);
 
+    void setCurrentTerminalDisplay(TerminalDisplay *terminal_display)
+    {
+	   _currentTerminalDisplay = terminal_display;
+    }
+
+    TerminalDisplay *currentTerminalDisplay()
+    {
+        return _currentTerminalDisplay;
+    }
+
 private: 
 
     //copies a line of text from the screen or history into a stream using a 
@@ -580,6 +591,9 @@ private:
     void scrollUp(int from, int i);
     // scroll down 'i' lines in current region, clearing the top 'i' lines
     void scrollDown(int from, int i);
+
+    //when we handle scroll commands, we need to know which screenwindow will scroll
+    TerminalDisplay *_currentTerminalDisplay;
 
     void addHistLine();
 

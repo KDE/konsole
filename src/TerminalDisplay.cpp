@@ -19,6 +19,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301  USA.
 */
+#include "ScreenWindow.h"
 
 // Own
 #include "TerminalDisplay.h"
@@ -57,8 +58,9 @@
 //#include <config-apps.h>
 #include "Filter.h"
 #include "konsole_wcwidth.h"
-#include "ScreenWindow.h"
 #include "TerminalCharacterDecoder.h"
+#include "Screen.h"
+#include "ScreenWindow.h"
 
 using namespace Konsole;
 
@@ -2480,46 +2482,20 @@ void TerminalDisplay::setFlowControlWarningEnabled( bool enable )
         outputSuspended(false);
 }
 
+void TerminalDisplay::scrollScreenWindow( enum ScreenWindow::RelativeScrollMode mode, int amount )
+{
+	_screenWindow->scrollBy( mode, amount);
+        _screenWindow->setTrackOutput( _screenWindow->atEndOfOutput() );
+           
+        updateLineProperties();
+        updateImage();
+}
+
 void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 {
     bool emitKeyPressSignal = true;
 
-    // Keyboard-based navigation
-    if ( event->modifiers() == Qt::ShiftModifier )
-    {
-        bool update = true;
-
-        if ( event->key() == Qt::Key_PageUp )
-        {
-            _screenWindow->scrollBy( ScreenWindow::ScrollPages , -1 );
-        }
-        else if ( event->key() == Qt::Key_PageDown )
-        {
-            _screenWindow->scrollBy( ScreenWindow::ScrollPages , 1 );
-        }
-        else if ( event->key() == Qt::Key_Up )
-        {
-            _screenWindow->scrollBy( ScreenWindow::ScrollLines , -1 );
-        }
-        else if ( event->key() == Qt::Key_Down )
-        {
-            _screenWindow->scrollBy( ScreenWindow::ScrollLines , 1 );
-        }
-        else
-            update = false;
-
-        if ( update )
-        {
-            _screenWindow->setTrackOutput( _screenWindow->atEndOfOutput() );
-            
-            updateLineProperties();
-            updateImage();
-
-            // do not send key press to terminal
-            emitKeyPressSignal = false;
-        }
-    }
-
+    _screenWindow->screen()->setCurrentTerminalDisplay(this);
     _actSel=0; // Key stroke implies a screen update, so TerminalDisplay won't
               // know where the current selection is.
 
