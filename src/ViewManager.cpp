@@ -867,6 +867,8 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
 
     bool tripleClickMode = info->property<bool>(Profile::TripleClickMode);
     view->setTripleClickMode(tripleClickMode ? TerminalDisplay::SelectForwardsFromCursor : TerminalDisplay::SelectWholeLine);
+    
+    view->setUnderlineLinks(info->property<bool>(Profile::UnderlineLinksEnabled));
 
     bool bidiEnabled = info->property<bool>(Profile::BidiRenderingEnabled);
     view->setBidiEnabled(bidiEnabled);

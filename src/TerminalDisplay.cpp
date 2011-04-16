@@ -316,6 +316,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_allowBlinkingText(true)
 ,_ctrlDrag(true)
 ,_tripleClickMode(SelectWholeLine)
+,_underlineLinks(true)
 ,_isFixedSize(false)
 ,_possibleTripleClick(false)
 ,_resizeWidget(0)
@@ -1289,7 +1290,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
         Filter::HotSpot* spot = iter.next();
 
         QRegion region;
-        if ( spot->type() == Filter::HotSpot::Link ) {
+        if ( _underlineLinks && spot->type() == Filter::HotSpot::Link ) {
             QRect r;
             if (spot->startLine()==spot->endLine()) {
                 r.setCoords( spot->startColumn()*_fontWidth + 1 + scrollBarWidth, 
@@ -1353,7 +1354,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                          endColumn*_fontWidth - 1 + scrollBarWidth,
                          (line+1)*_fontHeight - 1 ); 
             // Underline link hotspots 
-            if ( spot->type() == Filter::HotSpot::Link )
+            if ( _underlineLinks && spot->type() == Filter::HotSpot::Link )
             {
                 QFontMetrics metrics(font());
         
@@ -1782,7 +1783,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
   // handle filters
   // change link hot-spot appearance on mouse-over
   Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
-  if ( spot && spot->type() == Filter::HotSpot::Link)
+  if ( _underlineLinks && spot && spot->type() == Filter::HotSpot::Link)
   {
     QRegion previousHotspotArea = _mouseOverHotspotArea;
     _mouseOverHotspotArea = QRegion();

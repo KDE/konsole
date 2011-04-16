@@ -1000,6 +1000,8 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
                                  SLOT(toggleBlinkingCursor(bool)) },
                                { _ui->tripleClickMode , Profile::TripleClickMode ,
                                  SLOT(toggleTripleClickMode(bool)) },
+                               { _ui->underlineLinksButton , Profile::UnderlineLinksEnabled,
+                                 SLOT(toggleUnderlineLinks(bool)) },
                                { _ui->enableBidiRenderingButton , Profile::BidiRenderingEnabled ,
                                  SLOT(togglebidiRendering(bool)) },
                                { 0 , 0 , 0 }
@@ -1075,6 +1077,10 @@ void EditProfileDialog::togglebidiRendering(bool enable)
 void EditProfileDialog::toggleBlinkingCursor(bool enable)
 {
     _tempProfile->setProperty(Profile::BlinkingCursorEnabled,enable);
+}
+void EditProfileDialog::toggleUnderlineLinks(bool enable)
+{
+    _tempProfile->setProperty(Profile::UnderlineLinksEnabled,enable);
 }
 void EditProfileDialog::toggleTripleClickMode(bool enable)
 {

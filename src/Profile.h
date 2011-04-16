@@ -178,6 +178,10 @@ public:
          * selects whole line.
          */
         TripleClickMode,
+        /** (bool) If true, text that matches a link or an email address is underlined when
+         * hovered by the mouse pointer.
+         */
+        UnderlineLinksEnabled,
         /** (String) Default text codec */
         DefaultEncoding,
         /** (bool) Whether fonts should be aliased or not */

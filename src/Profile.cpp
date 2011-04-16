@@ -113,6 +113,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     // Interaction
     , { WordCharacters , "WordCharacters" , INTERACTION_GROUP , QVariant::String }
     , { TripleClickMode , "TripleClickSelectsFromCursor" , INTERACTION_GROUP , QVariant::Bool }
+    , { UnderlineLinksEnabled , "UnderlineLinksEnabled" , INTERACTION_GROUP , QVariant::Bool }
 
     // Encoding
     , { DefaultEncoding , "DefaultEncoding" , ENCODING_GROUP , QVariant::String }
@@ -173,6 +174,7 @@ FallbackProfile::FallbackProfile()
     setProperty(FlowControlEnabled,true);
     setProperty(AllowProgramsToResizeWindow,true);
     setProperty(BlinkingTextEnabled,true);
+    setProperty(UnderlineLinksEnabled,true);
     
     setProperty(BlinkingCursorEnabled,false);
     setProperty(BidiRenderingEnabled,false);

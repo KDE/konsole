@@ -177,6 +177,17 @@ public:
     void setTripleClickMode(TripleClickMode mode) { _tripleClickMode = mode; }
     /** See setTripleClickSelectionMode() */
     TripleClickMode tripleClickMode() { return _tripleClickMode; }
+    
+    /**
+     * Specifies whether links and email addresses should be underlined when 
+     * hovered by the mouse. Defaults to true.
+     */
+    void setUnderlineLinks(bool value) { _underlineLinks = value; }
+    /**
+     * Returns true if links and email addresses should be underlined when 
+     * hovered by the mouse.
+     */
+    bool getUnderlineLinks() { return _underlineLinks; }
 
     void setLineSpacing(uint);
     uint lineSpacing() const;
@@ -746,6 +757,7 @@ private:
     bool _allowBlinkingText;  // allow text to blink
     bool _ctrlDrag;           // require Ctrl key for drag
     TripleClickMode _tripleClickMode;
+    bool _underlineLinks;     // Underline URL and hosts on mouse hover
     bool _isFixedSize; //Columns / lines are locked.
     QTimer* _blinkTimer;  // active when hasBlinker
     QTimer* _blinkCursorTimer;  // active when hasBlinkingCursor
@@ -756,7 +768,6 @@ private:
 
     bool _possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
                                // after QApplication::doubleClickInterval() delay
-
 
     QLabel* _resizeWidget;
     QTimer* _resizeTimer;
