@@ -932,9 +932,9 @@ QVariant SessionListModel::headerData(int section, Qt::Orientation orientation,
         switch (section)
         {
             case 0:
-                return i18n("Number");
+                return i18nc("@item:intable The session index", "Number");
             case 1:
-                return i18n("Title");
+                return i18nc("@item:intable The session title", "Title");
             default:
                 return QVariant();
         }    
