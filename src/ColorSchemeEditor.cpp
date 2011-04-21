@@ -151,8 +151,7 @@ void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
 }
 void ColorSchemeEditor::setup(const ColorScheme* scheme)
 {
-    if ( _colors )
-        delete _colors;
+    delete _colors;
 
     _colors = new ColorScheme(*scheme);
 

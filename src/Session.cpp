@@ -755,10 +755,8 @@ void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
 
 Session::~Session()
 {
-  if (_foregroundProcessInfo)
-      delete _foregroundProcessInfo;
-  if (_sessionProcessInfo)
-      delete _sessionProcessInfo;
+  delete _foregroundProcessInfo;
+  delete _sessionProcessInfo;
   delete _emulation;
   delete _shellProcess;
   delete _zmodemProc;

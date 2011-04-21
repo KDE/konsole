@@ -174,8 +174,7 @@ QString KeyBindingEditor::description() const
 
 void KeyBindingEditor::setup(const KeyboardTranslator* translator)
 {
-    if ( _translator )
-        delete _translator;
+    delete _translator;
 
     _translator = new KeyboardTranslator(*translator);
 
