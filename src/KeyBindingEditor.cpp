@@ -67,6 +67,7 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
 KeyBindingEditor::~KeyBindingEditor()
 {
     delete _ui;
+    delete _translator;
 }
 
 void KeyBindingEditor::removeSelectedEntry()
