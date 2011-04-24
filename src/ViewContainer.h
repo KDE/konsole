@@ -162,6 +162,12 @@ public:
      */
     virtual QList<NavigationPosition> supportedNavigationPositions() const;
 
+    /** Sets the navigation text mode
+     *  If mode is true, use the width of the title; otherwise use the
+     *  default width calculations.
+     */
+    void setNavigationTextMode(bool mode);
+
     /** Adds a new view to the container widget */
     void addView(QWidget* view , ViewProperties* navigationItem, int index = -1);
  
@@ -311,6 +317,8 @@ protected:
      */
     virtual void navigationPositionChanged(NavigationPosition) {}
 
+    virtual void navigationTextModeChanged(bool) {}
+
     /** Returns the widgets which are associated with a particular navigation item */
     QList<QWidget*> widgetsForItem( ViewProperties* item ) const;
 
@@ -420,6 +428,7 @@ protected:
     virtual void removeViewWidget(QWidget* view);
     virtual void navigationDisplayModeChanged(NavigationDisplayMode mode);
     virtual void navigationPositionChanged(NavigationPosition position);
+    virtual void navigationTextModeChanged(bool mode);
     virtual void moveViewWidget( int fromIndex , int toIndex );
 
 private slots:

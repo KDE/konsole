@@ -251,6 +251,9 @@ public slots:
       */
     void moveSessionRight();
 
+    /** DBus slot that sets ALL tabs' width to match their text */
+    void setTabWidthToText(bool);
+
 private slots:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();

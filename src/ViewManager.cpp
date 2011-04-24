@@ -1097,6 +1097,13 @@ void ViewManager::moveSessionRight()
     this->moveActiveViewRight();
 }
 
+void ViewManager::setTabWidthToText(bool useTextWidth)
+{
+    ViewContainer* container = _viewSplitter->activeContainer();
+    Q_ASSERT(container);
+    container->setNavigationTextMode(useTextWidth);
+}
+
 void ViewManager::closeTabFromContainer(ViewContainer *container, QWidget *tab)
 {
     SessionController *controller = dynamic_cast<SessionController*>(container->viewProperties(tab));
