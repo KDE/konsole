@@ -132,7 +132,11 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
 
     // add a suggested suffix and relative prefix if missing
     QFileInfo fileInfo(path);
-    if ( fileInfo.suffix().isEmpty() )
+
+    if (fileInfo.isDir())
+        return Profile::Ptr();
+
+    if ( fileInfo.suffix() != "profile" )
         path.append(".profile");
     if ( fileInfo.path().isEmpty() || fileInfo.path() == "." )
         path.prepend(QString("konsole")+QDir::separator());

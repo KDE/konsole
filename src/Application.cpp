@@ -96,7 +96,7 @@ void Application::listAvailableProfiles()
     while ( iter.hasNext() )
     {
         QFileInfo info(iter.next());
-        std::cout << info.baseName().toLocal8Bit().data() << std::endl;
+        std::cout << info.completeBaseName().toLocal8Bit().data() << std::endl;
     }
     quit();
 }
