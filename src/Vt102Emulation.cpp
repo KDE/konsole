@@ -944,11 +944,9 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
 
         if ( entry.command() != KeyboardTranslator::NoCommand )
         {
-            bool update = true;
             if (entry.command() & KeyboardTranslator::EraseCommand) {
                 textToSend += eraseChar();
-		update = false;
-	    } else if ( entry.command() & KeyboardTranslator::ScrollPageUpCommand )
+            } else if ( entry.command() & KeyboardTranslator::ScrollPageUpCommand )
                 _currentScreen->currentTerminalDisplay()->scrollScreenWindow( ScreenWindow::ScrollPages , -1 );
             else if ( entry.command() & KeyboardTranslator::ScrollPageDownCommand )
                 _currentScreen->currentTerminalDisplay()->scrollScreenWindow( ScreenWindow::ScrollPages , 1 );

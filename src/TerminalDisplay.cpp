@@ -2484,11 +2484,10 @@ void TerminalDisplay::setFlowControlWarningEnabled( bool enable )
 
 void TerminalDisplay::scrollScreenWindow( enum ScreenWindow::RelativeScrollMode mode, int amount )
 {
-	_screenWindow->scrollBy( mode, amount);
-        _screenWindow->setTrackOutput( _screenWindow->atEndOfOutput() );
-           
-        updateLineProperties();
-        updateImage();
+    _screenWindow->scrollBy(mode, amount);
+    _screenWindow->setTrackOutput(_screenWindow->atEndOfOutput());
+    updateLineProperties();
+    updateImage();
 }
 
 void TerminalDisplay::keyPressEvent( QKeyEvent* event )
