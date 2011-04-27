@@ -70,7 +70,7 @@ public:
         /** Searches are case-sensitive or not */
         MatchCase        = 1,
         /** Searches use regular expressions */
-        RegExp           = 2,
+        RegExp           = 2
     };
 
     /** 
