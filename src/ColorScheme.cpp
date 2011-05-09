@@ -619,7 +619,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     }
     else
     {
-        kWarning() << "color scheme with name" << scheme->name() << "has already been" <<
+        kDebug() << "color scheme with name" << scheme->name() << "has already been" <<
             "found, ignoring.";
         
         delete scheme;
