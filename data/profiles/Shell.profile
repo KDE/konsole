@@ -96,6 +96,7 @@ Comment[be@latin]=Zmoŭčany profil prahramy „Konsole”
 Comment[bg]=Профил по подразбиране за Konsole
 Comment[bn]=কনসোল ডিফল্ট প্রোফাইল
 Comment[bn_IN]=Konsole-র ডিফল্ট প্রোফাইল
+Comment[bs]=Podrazumijevani profil Konzole
 Comment[ca]=Perfil per omissió del Konsole
 Comment[ca@valencia]=Perfil per omissió del Konsole
 Comment[cs]=Výchozí profil Konsole
