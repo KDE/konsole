@@ -9,6 +9,7 @@ Name[bg]=Обвивка
 Name[bn]=শেল
 Name[bn_IN]=শেল
 Name[br]=Shell
+Name[bs]=Školjka
 Name[ca]=Intèrpret d'ordres
 Name[ca@valencia]=Intèrpret d'ordes
 Name[cs]=Shell
