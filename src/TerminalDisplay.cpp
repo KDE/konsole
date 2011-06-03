@@ -973,7 +973,6 @@ void TerminalDisplay::updateImage()
   const int linesToUpdate = qMin(this->_lines, qMax(0,lines  ));
   const int columnsToUpdate = qMin(this->_columns,qMax(0,columns));
 
-  QChar *disstrU = new QChar[columnsToUpdate];
   char *dirtyMask = new char[columnsToUpdate+2]; 
   QRegion dirtyRegion;
 
@@ -1015,8 +1014,6 @@ void TerminalDisplay::updateImage()
         quint16 c = newLine[x+0].character;
         if ( !c )
             continue;
-        int p = 0;
-        disstrU[p++] = c; //fontMap(c);
         bool lineDraw = isLineChar(c);
         bool doubleWidth = (x+1 == columnsToUpdate) ? false : (newLine[x+1].character == 0);
         cr = newLine[x].rendition;
@@ -1039,11 +1036,7 @@ void TerminalDisplay::updateImage()
                   isLineChar(c) != lineDraw || 
                   nextIsDoubleWidth != doubleWidth )
             break;
-
-          disstrU[p++] = c; //fontMap(c);
         }
-
-        QString unistr(disstrU, p);
 
         bool saveFixedFont = _fixedFont;
         if (lineDraw)
@@ -1115,7 +1108,6 @@ void TerminalDisplay::updateImage()
   if ( _hasBlinker && !_blinkTimer->isActive()) _blinkTimer->start( TEXT_BLINK_DELAY ); 
   if (!_hasBlinker && _blinkTimer->isActive()) { _blinkTimer->stop(); _blinking = false; }
   delete[] dirtyMask;
-  delete[] disstrU;
 
 }
 
