@@ -623,9 +623,18 @@ void SessionController::closeSession()
         _session->close();
 }
 
+// Trying to open a remote Url may produce unexpected results.
+// Therefore, if a remote url, open the user's home path.
+// TODO consider: 1) disable menu upon remote session
+//   2) transform url to get the desired result (ssh -> sftp, etc)
 void SessionController::openBrowser()
 {
-    new KRun(url(), QApplication::activeWindow());
+    KUrl currentUrl = url();
+
+    if (currentUrl.isLocalFile())
+        new KRun(currentUrl, QApplication::activeWindow(), 0, true, true);
+    else
+        new KRun(KUrl(QDir::homePath()), QApplication::activeWindow(), 0, true, true);
 }
 
 void SessionController::copy()
