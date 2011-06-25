@@ -1006,9 +1006,13 @@ void SessionController::clearHistory()
 
 void SessionController::clearHistoryAndReset()
 {
+    Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
+    QByteArray name = profile->property<QString>(Profile::DefaultEncoding).toUtf8();
+
     Emulation* emulation = _session->emulation();
     emulation->reset();
     _session->refresh();
+    _session->setCodec(QTextCodec::codecForName(name));
     clearHistory();
 }
 
