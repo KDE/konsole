@@ -81,13 +81,21 @@ void Vt102Emulation::clearEntireScreen()
 
 void Vt102Emulation::reset()
 {
+  // Save the current codec so we can set it later.
+  // Ideally we would want to use the profile setting
+  const QTextCodec* currentCodec = codec();
+
   resetTokenizer();
   resetModes();
   resetCharset(0);
   _screen[0]->reset();
   resetCharset(1);
   _screen[1]->reset();
-  setCodec(LocaleCodec);
+
+  if (currentCodec)
+    setCodec(currentCodec);
+  else
+    setCodec(LocaleCodec);
  
   bufferedUpdate();
 }
