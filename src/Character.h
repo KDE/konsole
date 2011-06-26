@@ -64,7 +64,7 @@ public:
    * @param _b The color used to draw the character's background.
    * @param _r A set of rendition flags which specify how this character is to be drawn.
    */
-  inline Character(quint16 _c = ' ',
+  explicit inline Character(quint16 _c = ' ',
             CharacterColor  _f = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR),
             CharacterColor  _b = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR),
             quint8  _r = DEFAULT_RENDITION)

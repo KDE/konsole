@@ -221,7 +221,7 @@ void Screen::insertChars(int n)
     if ( screenLines[cuY].size() < cuX )
         screenLines[cuY].resize(cuX);
 
-    screenLines[cuY].insert(cuX,n,' ');
+    screenLines[cuY].insert(cuX,n,Character(' '));
 
     if ( screenLines[cuY].count() > columns )
         screenLines[cuY].resize(columns);
@@ -1242,7 +1242,7 @@ int Screen::copyLineToStream(int line ,
 
     if ( !omitLineBreak && appendNewLine && (count+1 < MAX_CHARS) )
     {
-        characterBuffer[count] = '\n';
+        characterBuffer[count] = Character('\n');
         count++;
     }
 
