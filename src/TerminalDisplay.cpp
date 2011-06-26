@@ -1014,8 +1014,8 @@ void TerminalDisplay::updateImage()
         quint16 c = newLine[x+0].character;
         if ( !c )
             continue;
-        bool lineDraw = isLineChar(c);
-        bool doubleWidth = (x+1 == columnsToUpdate) ? false : (newLine[x+1].character == 0);
+        const bool lineDraw = isLineChar(c);
+        const bool doubleWidth = (x+1 == columnsToUpdate) ? false : (newLine[x+1].character == 0);
         cr = newLine[x].rendition;
         _clipboard = newLine[x].backgroundColor;
         if (newLine[x].foregroundColor != cf) cf = newLine[x].foregroundColor;
@@ -1371,14 +1371,14 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 }
 void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
 {
-  QPoint tL  = contentsRect().topLeft();
-  int    tLx = tL.x();
-  int    tLy = tL.y();
+  const QPoint tL  = contentsRect().topLeft();
+  const int    tLx = tL.x();
+  const int    tLy = tL.y();
 
-  int lux = qMin(_usedColumns-1, qMax(0,(rect.left()   - tLx - _leftMargin ) / _fontWidth));
-  int luy = qMin(_usedLines-1,  qMax(0,(rect.top()    - tLy - _topMargin  ) / _fontHeight));
-  int rlx = qMin(_usedColumns-1, qMax(0,(rect.right()  - tLx - _leftMargin ) / _fontWidth));
-  int rly = qMin(_usedLines-1,  qMax(0,(rect.bottom() - tLy - _topMargin  ) / _fontHeight));
+  const int lux = qMin(_usedColumns-1, qMax(0,(rect.left()   - tLx - _leftMargin ) / _fontWidth));
+  const int luy = qMin(_usedLines-1,  qMax(0,(rect.top()    - tLy - _topMargin  ) / _fontHeight));
+  const int rlx = qMin(_usedColumns-1, qMax(0,(rect.right()  - tLx - _leftMargin ) / _fontWidth));
+  const int rly = qMin(_usedLines-1,  qMax(0,(rect.bottom() - tLy - _topMargin  ) / _fontHeight));
 
   const int bufferSize = _usedColumns;
   QString unistr;
@@ -1422,11 +1422,11 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
         }
       }
 
-      bool lineDraw = isLineChar(c);
-      bool doubleWidth = (_image[ qMin(loc(x,y)+1,_imageSize) ].character == 0);
-      CharacterColor currentForeground = _image[loc(x,y)].foregroundColor;
-      CharacterColor currentBackground = _image[loc(x,y)].backgroundColor;
-      quint8 currentRendition = _image[loc(x,y)].rendition;
+      const bool lineDraw = isLineChar(c);
+      const bool doubleWidth = (_image[ qMin(loc(x,y)+1,_imageSize) ].character == 0);
+      const CharacterColor currentForeground = _image[loc(x,y)].foregroundColor;
+      const CharacterColor currentBackground = _image[loc(x,y)].backgroundColor;
+      const quint8 currentRendition = _image[loc(x,y)].rendition;
       
       while (x+len <= rlx &&
              _image[loc(x+len,y)].foregroundColor == currentForeground &&
@@ -2201,7 +2201,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
   _wordSelectionMode = true;
 
   // find word boundaries...
-  QChar selClass = charClass(_image[i].character);
+  const QChar selClass = charClass(_image[i].character);
   {
      // find the start of the word
      int x = bgnSel.x();
@@ -2334,7 +2334,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
   if (_tripleClickMode == SelectForwardsFromCursor) {
     // find word boundary start
     int i = loc(_iPntSel.x(),_iPntSel.y());
-    QChar selClass = charClass(_image[i].character);
+    const QChar selClass = charClass(_image[i].character);
     int x = _iPntSel.x();
     
     while ( ((x>0) || 

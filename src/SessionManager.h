@@ -178,7 +178,7 @@ public:
     /**
      * Returns a list of active sessions.
      */
-    const QList<Session*> sessions();
+    const QList<Session*> sessions() const;
 
     /**
      * Deletes the configuration file used to store a profile.

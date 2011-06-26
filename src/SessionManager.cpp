@@ -310,7 +310,7 @@ SessionManager::~SessionManager()
     }
 }
 
-const QList<Session*> SessionManager::sessions()
+const QList<Session*> SessionManager::sessions() const
 {
     return _sessions;
 }

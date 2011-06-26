@@ -190,7 +190,7 @@ public:
      * @param unicodePoints An array of unicode character points
      * @param length Length of @p unicodePoints
      */
-    ushort createExtendedChar(ushort* unicodePoints , ushort length);
+    ushort createExtendedChar(const ushort* unicodePoints , ushort length);
     /**
      * Looks up and returns a pointer to a sequence of unicode characters
      * which was added to the table using createExtendedChar().
@@ -207,10 +207,10 @@ public:
     static ExtendedCharTable instance;
 private:
     // calculates the hash key of a sequence of unicode points of size 'length'
-    ushort extendedCharHash(ushort* unicodePoints , ushort length) const;
+    ushort extendedCharHash(const ushort* unicodePoints , ushort length) const;
     // tests whether the entry in the table specified by 'hash' matches the 
     // character sequence 'unicodePoints' of size 'length'
-    bool extendedCharMatch(ushort hash , ushort* unicodePoints , ushort length) const;
+    bool extendedCharMatch(ushort hash , const ushort* unicodePoints , ushort length) const;
     // internal, maps hash keys to character sequence buffers.  The first ushort
     // in each value is the length of the buffer, followed by the ushorts in the buffer
     // themselves.
