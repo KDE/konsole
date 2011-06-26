@@ -25,6 +25,7 @@
 
 // Qt
 #include <QtCore/QRect>
+#include <QtCore/QSet>
 #include <QtCore/QTextStream>
 #include <QtCore/QVarLengthArray>
 
@@ -554,6 +555,23 @@ public:
     TerminalDisplay *currentTerminalDisplay()
     {
         return _currentTerminalDisplay;
+    }
+    
+    QSet<ushort> usedExtendedChars() const
+    {
+        QSet<ushort> result;
+        for (int i = 0; i < lines; ++i)
+        {
+            const ImageLine &il = screenLines[i];
+            for (int j = 0; j < columns; ++j)
+            {
+                if (il[j].rendition & RE_EXTENDED_CHAR)
+                {
+                    result << il[j].character;
+                }
+            }
+        }
+        return result;
     }
 
 private: 

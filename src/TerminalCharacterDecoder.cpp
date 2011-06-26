@@ -93,7 +93,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     {
         for (int i = count-1 ; i >= 0 ; i--)
         {
-            if ( characters[i].character != ' '  )
+            if ( !characters[i].isSpace() )
                 break;
             else
                 outputCount--;
@@ -102,8 +102,22 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     
     for (int i=0;i<outputCount;)
     {
-        plainText.append( QChar(characters[i].character) );
-        i += qMax(1,konsole_wcwidth(characters[i].character));
+        if (characters[i].rendition & RE_EXTENDED_CHAR)
+        {
+            ushort extendedCharLength = 0;
+            const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
+            if (chars)
+            {
+                const QString s = QString::fromUtf16(chars, extendedCharLength);
+                plainText.append(s);
+                i += string_width(s);
+            }
+        }
+        else
+        {
+            plainText.append( QChar(characters[i].character) );
+            i += qMax(1,konsole_wcwidth(characters[i].character));
+        }
     }
     *_output << plainText;
 }
@@ -155,8 +169,6 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
         
     for (int i=0;i<count;i++)
     {
-        QChar ch(characters[i].character);
-
         //check if appearance of character is different from previous char
         if ( characters[i].rendition != _lastRendition  ||
              characters[i].foregroundColor != _lastForeColor  ||
@@ -202,7 +214,7 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
         }
 
         //handle whitespace
-        if (ch.isSpace())
+        if (characters[i].isSpace())
             spaceCount++;
         else
             spaceCount = 0;
@@ -211,13 +223,26 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
         //output current character
         if (spaceCount < 2)
         {
-            //escape HTML tag characters and just display others as they are
-            if ( ch == '<' )
-                text.append("&lt;");
-            else if (ch == '>')
+            if (characters[i].rendition & RE_EXTENDED_CHAR)
+            {
+                ushort extendedCharLength = 0;
+                const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
+                if (chars)
+                {
+                    text.append(QString::fromUtf16(chars, extendedCharLength));
+                }
+            }
+            else
+            {
+                //escape HTML tag characters and just display others as they are
+                const QChar ch = characters[i].character;
+                if ( ch == '<' )
+                    text.append("&lt;");
+                else if (ch == '>')
                     text.append("&gt;");
-            else    
+                else    
                     text.append(ch);
+            }
         }
         else
         {

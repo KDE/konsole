@@ -47,6 +47,9 @@
 #include "Screen.h"
 #include "TerminalCharacterDecoder.h"
 #include "ScreenWindow.h"
+#include "SessionManager.h"
+#include "Session.h"
+#include "TerminalDisplay.h"
 
 using namespace Konsole;
 
@@ -389,11 +392,13 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
 {
     // look for this sequence of points in the table
     ushort hash = extendedCharHash(unicodePoints,length);
+    const ushort initialHash = hash;
+    bool triedCleaningSolution = false;
 
     // check existing entry for match
-    while ( extendedCharTable.contains(hash) )
+    while ( extendedCharTable.contains(hash) && hash != 0 ) // 0 has a special meaning for chars so we don't use it
     {
-        if ( extendedCharMatch(hash,unicodePoints,length) )
+        if ( extendedCharMatch(hash, unicodePoints, length) )
         {
             // this sequence already has an entry in the table, 
             // return its hash
@@ -404,6 +409,45 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
             // if hash is already used by another, different sequence of unicode character
             // points then try next hash
             hash++;
+            
+            if (hash == initialHash)
+            {
+                if (!triedCleaningSolution)
+                {
+                    triedCleaningSolution = true;
+                    // All the hashes are full, go to all Screens and try to free any
+                    // This is slow but should happen very rarely
+                    QSet<ushort> usedExtendedChars;
+                    const SessionManager *sm = SessionManager::instance();
+                    foreach(const Session *s, sm->sessions())
+                    {
+                        foreach(const TerminalDisplay* td, s->views())
+                        {
+                            usedExtendedChars += td->screenWindow()->screen()->usedExtendedChars();
+                            
+                        }
+                    }
+                    
+                    QHash<ushort,ushort*>::iterator it = extendedCharTable.begin();
+                    QHash<ushort,ushort*>::iterator itEnd = extendedCharTable.end();
+                    while (it != itEnd)
+                    {
+                        if (usedExtendedChars.contains(it.key()))
+                        {
+                            ++it;
+                        }
+                        else
+                        {
+                            it = extendedCharTable.erase(it);
+                        }
+                    }
+                }
+                else
+                {
+                    kWarning() << "Using all the extended char hashes, going to miss this extended character";
+                    return 0;
+                }
+            }
         }
     }    
 

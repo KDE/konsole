@@ -70,19 +70,12 @@ public:
             quint8  _r = DEFAULT_RENDITION)
        : character(_c), rendition(_r), foregroundColor(_f), backgroundColor(_b) {}
 
-  union
-  {
-    /** The unicode character value for this character. */
-    quint16 character;
-    /** 
-     * Experimental addition which allows a single Character instance to contain more than
-     * one unicode character.
-     *
-     * charSequence is a hash code which can be used to look up the unicode
-     * character sequence in the ExtendedCharTable used to create the sequence.
-     */
-    quint16 charSequence; 
-  };
+  /** The unicode character value for this character.
+   * 
+   * if RE_EXTENDED_CHAR character is a hash code which can be used to look up the unicode
+   * character sequence in the ExtendedCharTable used to create the sequence.
+   */
+  quint16 character;
 
   /** A combination of RENDITION flags which specify options for drawing the character. */
   quint8  rendition;
@@ -119,6 +112,17 @@ public:
    * renditions or colors.
    */
   friend bool operator != (const Character& a, const Character& b);
+  
+  inline bool isLineChar() const
+  {
+      return (rendition & RE_EXTENDED_CHAR) ? false : ((character & 0xFF80) == 0x2500);
+  }
+  
+  inline bool isSpace() const
+  {
+      return (rendition & RE_EXTENDED_CHAR) ? false : QChar(character).isSpace();
+  }
+  
 };
 
 inline bool operator == (const Character& a, const Character& b)

@@ -557,7 +557,10 @@ void Screen::backspace()
         screenLines[cuY].resize(cuX+1);
 
     if (BS_CLEARS) 
+    {
         screenLines[cuY][cuX].character = ' ';
+        screenLines[cuY][cuX].rendition = screenLines[cuY][cuX].rendition & ~RE_EXTENDED_CHAR;
+    }
 }
 
 void Screen::tab(int n)
@@ -631,8 +634,38 @@ void Screen::displayCharacter(unsigned short c)
     // putting the cursor one right to the last column of the screen.
 
     int w = konsole_wcwidth(c);
-    if (w <= 0)
+    if (w < 0)
         return;
+    else if (w == 0)
+    {
+        if (QChar(c).category() != QChar::Mark_NonSpacing)
+            return;
+        int charToCombineWithX = -1;
+        int charToCombineWithY = -1;
+        if (cuX == 0)
+        {
+            if (cuY > 0)
+            {
+                charToCombineWithX = columns - 1;
+                charToCombineWithY = cuY - 1;
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            charToCombineWithX = cuX - 1;
+            charToCombineWithY = cuY;
+        }
+        Character& currentChar = screenLines[charToCombineWithY][charToCombineWithX];
+        Q_ASSERT((currentChar.rendition & RE_EXTENDED_CHAR) == 0);
+        const ushort chars[2] = { currentChar.character, c };
+        currentChar.rendition |= RE_EXTENDED_CHAR;
+        currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, 2);
+        return;
+    }
 
     if (cuX+w > columns) {
         if (getMode(MODE_Wrap)) {

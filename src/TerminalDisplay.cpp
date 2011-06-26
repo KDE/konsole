@@ -190,12 +190,10 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
    QCodec.
 */
 
-static inline bool isLineChar(quint16 c) { return ((c & 0xFF80) == 0x2500);}
 static inline bool isLineCharString(const QString& string)
 {
-        return (string.length() > 0) && (isLineChar(string.at(0).unicode()));
+  return (string.length() > 0) && ((string.at(0).unicode() & 0xFF80) == 0x2500);
 }
-                        
 
 // assert for i in [0..31] : vt100extended(vt100_graphics[i]) == i.
 
@@ -1011,10 +1009,9 @@ void TerminalDisplay::updateImage()
       // where characters exceed their cell width.
       if (dirtyMask[x])
       {
-        quint16 c = newLine[x+0].character;
-        if ( !c )
+        if (!newLine[x+0].character)
             continue;
-        const bool lineDraw = isLineChar(c);
+        const bool lineDraw = newLine[x+0].isLineChar();
         const bool doubleWidth = (x+1 == columnsToUpdate) ? false : (newLine[x+1].character == 0);
         cr = newLine[x].rendition;
         _clipboard = newLine[x].backgroundColor;
@@ -1033,7 +1030,7 @@ void TerminalDisplay::updateImage()
                   ch.backgroundColor != _clipboard || 
                   ch.rendition != cr ||
                   !dirtyMask[x+len] || 
-                  isLineChar(c) != lineDraw || 
+                  ch.isLineChar() != lineDraw || 
                   nextIsDoubleWidth != doubleWidth )
             break;
         }
@@ -1318,7 +1315,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                                         // display in _columns
 
             // ignore whitespace at the end of the lines
-            while ( QChar(_image[loc(endColumn,line)].character).isSpace() && endColumn > 0 )
+            while ( _image[loc(endColumn,line)].isSpace() && endColumn > 0 )
                 endColumn--;
               
             // increment here because the column which we want to set 'endColumn' to
@@ -1380,21 +1377,21 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
   const int rlx = qMin(_usedColumns-1, qMax(0,(rect.right()  - tLx - _leftMargin ) / _fontWidth));
   const int rly = qMin(_usedLines-1,  qMax(0,(rect.bottom() - tLy - _topMargin  ) / _fontHeight));
 
-  const int bufferSize = _usedColumns;
+  const int numberOfColumns = _usedColumns;
   QString unistr;
-  unistr.reserve(bufferSize);
+  unistr.reserve(numberOfColumns);
   for (int y = luy; y <= rly; y++)
   {
-    quint16 c = _image[loc(lux,y)].character;
     int x = lux;
-    if(!c && x)
+    if(!_image[loc(lux,y)].character && x)
       x--; // Search for start of multi-column character
     for (; x <= rlx; x++)
     {
       int len = 1;
       int p = 0;
 
-      // reset our buffer to the maximal size
+      // reset our buffer to the number of columns
+      int bufferSize = numberOfColumns;
       unistr.resize(bufferSize);
       QChar *disstrU = unistr.data();
 
@@ -1403,18 +1400,24 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
       {
         // sequence of characters
         ushort extendedCharLength = 0;
-        ushort* chars = ExtendedCharTable::instance
-                            .lookupExtendedChar(_image[loc(x,y)].charSequence,extendedCharLength);
-        for ( int index = 0 ; index < extendedCharLength ; index++ ) 
+        const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(_image[loc(x,y)].character, extendedCharLength);
+        if (chars)
         {
+          Q_ASSERT(extendedCharLength > 1);
+          bufferSize += extendedCharLength - 1;
+          unistr.resize(bufferSize);
+          disstrU = unistr.data();
+          for ( int index = 0 ; index < extendedCharLength ; index++ ) 
+          {
             Q_ASSERT( p < bufferSize );
             disstrU[p++] = chars[index];
+          }
         }
       }
       else
       {
         // single character
-        c = _image[loc(x,y)].character;
+        const quint16 c = _image[loc(x,y)].character;
         if (c)
         {
              Q_ASSERT( p < bufferSize );
@@ -1422,7 +1425,7 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
         }
       }
 
-      const bool lineDraw = isLineChar(c);
+      const bool lineDraw = _image[loc(x,y)].isLineChar();
       const bool doubleWidth = (_image[ qMin(loc(x,y)+1,_imageSize) ].character == 0);
       const CharacterColor currentForeground = _image[loc(x,y)].foregroundColor;
       const CharacterColor currentBackground = _image[loc(x,y)].backgroundColor;
@@ -1433,10 +1436,37 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
              _image[loc(x+len,y)].backgroundColor == currentBackground &&
              _image[loc(x+len,y)].rendition == currentRendition &&
              (_image[ qMin(loc(x+len,y)+1,_imageSize) ].character == 0) == doubleWidth &&
-             isLineChar( c = _image[loc(x+len,y)].character) == lineDraw) // Assignment!
+             _image[loc(x+len,y)].isLineChar() == lineDraw)
       {
-        if (c)
-          disstrU[p++] = c; //fontMap(c);
+        const quint16 c = _image[loc(x+len,y)].character;
+        if ( currentRendition & RE_EXTENDED_CHAR )
+        {
+            // sequence of characters
+            ushort extendedCharLength = 0;
+            const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
+            if (chars)
+            {
+              Q_ASSERT(extendedCharLength > 1);
+              bufferSize += extendedCharLength - 1;
+              unistr.resize(bufferSize);
+              disstrU = unistr.data();
+              for ( int index = 0 ; index < extendedCharLength ; index++ ) 
+              {
+                Q_ASSERT( p < bufferSize );
+                disstrU[p++] = chars[index];
+              }
+            }
+        }
+        else
+        {
+            // single character
+            if (c)
+            {
+                Q_ASSERT( p < bufferSize );
+                disstrU[p++] = c; //fontMap(c);
+            }
+        }
+      
         if (doubleWidth) // assert((_image[loc(x+len,y)+1].character == 0)), see above if condition
           len++; // Skip trailing part of multi-column character
         len++;
@@ -1947,9 +1977,9 @@ void TerminalDisplay::extendSelection( const QPoint& position )
     QPoint left = left_not_right ? here : _iPntSelCorr;
     i = loc(left.x(),left.y());
     if (i>=0 && i<=_imageSize) {
-      selClass = charClass(_image[i].character);
+      selClass = charClass(_image[i]);
       while ( ((left.x()>0) || (left.y()>0 && (_lineProperties[left.y()-1] & LINE_WRAPPED) )) 
-                      && charClass(_image[i-1].character) == selClass )
+                      && charClass(_image[i-1]) == selClass )
       { i--; if (left.x()>0) left.rx()--; else {left.rx()=_usedColumns-1; left.ry()--;} }
     }
 
@@ -1957,9 +1987,9 @@ void TerminalDisplay::extendSelection( const QPoint& position )
     QPoint right = left_not_right ? _iPntSelCorr : here;
     i = loc(right.x(),right.y());
     if (i>=0 && i<=_imageSize) {
-      selClass = charClass(_image[i].character);
+      selClass = charClass(_image[i]);
       while( ((right.x()<_usedColumns-1) || (right.y()<_usedLines-1 && (_lineProperties[right.y()] & LINE_WRAPPED) )) 
-                      && charClass(_image[i+1].character) == selClass )
+                      && charClass(_image[i+1]) == selClass )
       { i++; if (right.x()<_usedColumns-1) right.rx()++; else {right.rx()=0; right.ry()++; } }
     }
 
@@ -2029,7 +2059,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
     {
       i = loc(right.x(),right.y());
       if (i>=0 && i<=_imageSize) {
-        selClass = charClass(_image[i-1].character);
+        selClass = charClass(_image[i-1]);
        /* if (selClass == ' ')
         {
           while ( right.x() < _usedColumns-1 && charClass(_image[i+1].character) == selClass && (right.y()<_usedLines-1) && 
@@ -2201,12 +2231,12 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
   _wordSelectionMode = true;
 
   // find word boundaries...
-  const QChar selClass = charClass(_image[i].character);
+  const QChar selClass = charClass(_image[i]);
   {
      // find the start of the word
      int x = bgnSel.x();
      while ( ((x>0) || (bgnSel.y()>0 && (_lineProperties[bgnSel.y()-1] & LINE_WRAPPED) )) 
-                     && charClass(_image[i-1].character) == selClass )
+                     && charClass(_image[i-1]) == selClass )
      {  
        i--; 
        if (x>0) 
@@ -2225,7 +2255,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
      while( ((x<_usedColumns-1) || (endSel.y()<_usedLines-1 && (_lineProperties[endSel.y()] & LINE_WRAPPED) )) 
-                     && charClass(_image[i+1].character) == selClass )
+                     && charClass(_image[i+1]) == selClass )
      { 
          i++; 
          if (x<_usedColumns-1) 
@@ -2240,8 +2270,12 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
      endSel.setX(x);
 
      // In word selection mode don't select @ (64) if at end of word.
-     if ( ( QChar( _image[i].character ) == '@' ) && ( ( endSel.x() - bgnSel.x() ) > 0 ) )
+     if ( ((_image[i].rendition & RE_EXTENDED_CHAR) == 0) &&
+          ( QChar( _image[i].character ) == '@' ) &&
+          ( ( endSel.x() - bgnSel.x() ) > 0 ) )
+     {
        endSel.setX( x - 1 );
+     }
 
 
      _actSel = 2; // within selection
@@ -2334,13 +2368,13 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
   if (_tripleClickMode == SelectForwardsFromCursor) {
     // find word boundary start
     int i = loc(_iPntSel.x(),_iPntSel.y());
-    const QChar selClass = charClass(_image[i].character);
+    const QChar selClass = charClass(_image[i]);
     int x = _iPntSel.x();
     
     while ( ((x>0) || 
              (_iPntSel.y()>0 && (_lineProperties[_iPntSel.y()-1] & LINE_WRAPPED) )
             ) 
-            && charClass(_image[i-1].character) == selClass )
+            && charClass(_image[i-1]) == selClass )
     {
         i--; 
         if (x>0) 
@@ -2380,14 +2414,34 @@ bool TerminalDisplay::focusNextPrevChild( bool next )
 }
 
 
-QChar TerminalDisplay::charClass(QChar qch) const
+QChar TerminalDisplay::charClass(const Character &ch) const
 {
-    if ( qch.isSpace() ) return ' ';
+    if (ch.rendition & RE_EXTENDED_CHAR)
+    {
+        ushort extendedCharLength = 0;
+        const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
+        if (chars && extendedCharLength > 0)
+        {
+            const QString s = QString::fromUtf16(chars, extendedCharLength);
+            if (_wordCharacters.contains(s, Qt::CaseInsensitive))
+                return 'a';
+            bool allLetterOrNumber = true;
+            for (int i = 0; allLetterOrNumber && i < s.size(); ++i)
+                allLetterOrNumber = s.at(i).isLetterOrNumber();
+            return allLetterOrNumber ? 'a' : s.at(0);
+        }
+        return 0;
+    }
+    else
+    {
+        const QChar qch(ch.character);
+        if ( qch.isSpace() ) return ' ';
 
-    if ( qch.isLetterOrNumber() || _wordCharacters.contains(qch, Qt::CaseInsensitive ) )
-    return 'a';
+        if ( qch.isLetterOrNumber() || _wordCharacters.contains(qch, Qt::CaseInsensitive ) )
+            return 'a';
 
-    return qch;
+        return qch;
+    }
 }
 
 void TerminalDisplay::setWordCharacters(const QString& wc)
