@@ -965,8 +965,6 @@ void TerminalDisplay::updateImage()
   _hasBlinker = false;
 
   CharacterColor cf;       // undefined
-  CharacterColor _clipboard;       // undefined
-  int cr  = -1;   // undefined
 
   const int linesToUpdate = qMin(this->_lines, qMax(0,lines  ));
   const int columnsToUpdate = qMin(this->_columns,qMax(0,columns));
@@ -1013,8 +1011,8 @@ void TerminalDisplay::updateImage()
             continue;
         const bool lineDraw = newLine[x+0].isLineChar();
         const bool doubleWidth = (x+1 == columnsToUpdate) ? false : (newLine[x+1].character == 0);
-        cr = newLine[x].rendition;
-        _clipboard = newLine[x].backgroundColor;
+        const quint8 cr = newLine[x].rendition;
+        const CharacterColor _clipboard = newLine[x].backgroundColor;
         if (newLine[x].foregroundColor != cf) cf = newLine[x].foregroundColor;
         int lln = columnsToUpdate - x;
         for (len = 1; len < lln; ++len)
@@ -1028,7 +1026,7 @@ void TerminalDisplay::updateImage()
 
             if (  ch.foregroundColor != cf || 
                   ch.backgroundColor != _clipboard || 
-                  ch.rendition != cr ||
+                  (ch.rendition & ~RE_EXTENDED_CHAR) != (cr & ~RE_EXTENDED_CHAR) ||
                   !dirtyMask[x+len] || 
                   ch.isLineChar() != lineDraw || 
                   nextIsDoubleWidth != doubleWidth )
@@ -1434,12 +1432,12 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
       while (x+len <= rlx &&
              _image[loc(x+len,y)].foregroundColor == currentForeground &&
              _image[loc(x+len,y)].backgroundColor == currentBackground &&
-             _image[loc(x+len,y)].rendition == currentRendition &&
+             (_image[loc(x+len,y)].rendition & ~RE_EXTENDED_CHAR) == (currentRendition & ~RE_EXTENDED_CHAR) &&
              (_image[ qMin(loc(x+len,y)+1,_imageSize) ].character == 0) == doubleWidth &&
              _image[loc(x+len,y)].isLineChar() == lineDraw)
       {
         const quint16 c = _image[loc(x+len,y)].character;
-        if ( currentRendition & RE_EXTENDED_CHAR )
+        if ( _image[loc(x+len,y)].rendition & RE_EXTENDED_CHAR )
         {
             // sequence of characters
             ushort extendedCharLength = 0;

@@ -268,11 +268,11 @@ class CharacterFormat
 {
 public:
   bool equalsFormat(const CharacterFormat &other) const {
-    return other.rendition==rendition && other.fgColor==fgColor && other.bgColor==bgColor;
+    return (other.rendition & ~RE_EXTENDED_CHAR)==(rendition & ~RE_EXTENDED_CHAR) && other.fgColor==fgColor && other.bgColor==bgColor;
   }
 
   bool equalsFormat(const Character &c) const {
-    return c.rendition==rendition && c.foregroundColor==fgColor && c.backgroundColor==bgColor;
+    return (c.rendition & ~RE_EXTENDED_CHAR)==(rendition & ~RE_EXTENDED_CHAR) && c.foregroundColor==fgColor && c.backgroundColor==bgColor;
   }
 
   void setFormat(const Character& c) {
