@@ -660,10 +660,28 @@ void Screen::displayCharacter(unsigned short c)
             charToCombineWithY = cuY;
         }
         Character& currentChar = screenLines[charToCombineWithY][charToCombineWithX];
-        Q_ASSERT((currentChar.rendition & RE_EXTENDED_CHAR) == 0);
-        const ushort chars[2] = { currentChar.character, c };
-        currentChar.rendition |= RE_EXTENDED_CHAR;
-        currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, 2);
+        if ((currentChar.rendition & RE_EXTENDED_CHAR) == 0)
+        {
+            const ushort chars[2] = { currentChar.character, c };
+            currentChar.rendition |= RE_EXTENDED_CHAR;
+            currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, 2);
+        }
+        else
+        {
+            ushort extendedCharLength;
+            const ushort* oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
+            Q_ASSERT(oldChars);
+            if (oldChars)
+            {
+                Q_ASSERT(extendedCharLength > 1);
+                Q_ASSERT(extendedCharLength < 65535);
+                ushort *chars = new ushort[extendedCharLength + 1];
+                memcpy (chars, oldChars, sizeof(ushort) * extendedCharLength);
+                chars[extendedCharLength] = c;
+                currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, extendedCharLength + 1);
+                delete[] chars;
+            }
+        }
         return;
     }
 
