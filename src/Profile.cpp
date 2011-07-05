@@ -154,7 +154,7 @@ FallbackProfile::FallbackProfile()
     setProperty(Arguments,QStringList() << qgetenv("SHELL"));
     setProperty(Environment,QStringList() << "TERM=xterm");
     setProperty(LocalTabTitleFormat,"%d : %n");
-    setProperty(RemoteTabTitleFormat,"%H (%u)");
+    setProperty(RemoteTabTitleFormat,"(%u) %H");
     setProperty(TabBarMode,AlwaysShowTabBar);
     setProperty(TabBarPosition,TabBarBottom);
     setProperty(ShowMenuBar,true);
