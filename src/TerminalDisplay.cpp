@@ -2699,7 +2699,8 @@ void TerminalDisplay::bell(const QString& message)
     } 
     else if (_bellMode==NotifyBell) 
     {
-        KNotification::event("BellVisible", message,QPixmap(),this);
+        KNotification::event(hasFocus() ? "BellVisible" : "BellInvisible",
+                             message,QPixmap(),this);
     } 
     else if (_bellMode==VisualBell) 
     {
