@@ -206,6 +206,15 @@ private:
     void updateCaption(const Profile::Ptr profile);
     void updateTransparencyWarning();
 
+    // Update _tempProfile in a way of respecting the apply button.
+    // When used with some previewed property, this method should
+    // always come after the preview operation.
+    void updateTempProfileProperty(Profile::Property, const QVariant& value);
+
+    // Enable or disable apply button, used only within 
+    // updateTempProfileProperty().
+    void updateButtonApply();
+
     static QString groupProfileNames(const ProfileGroup::Ptr group, int maxLength = -1);
 
     struct RadioOption

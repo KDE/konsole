@@ -65,6 +65,9 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     setCaption(i18n("Edit Profile"));
     setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
 
+    // disable the apply button , since no modification has been made
+    enableButtonApply(false);
+
     connect( this , SIGNAL(applyClicked()) , this , SLOT(save()) );
     connect( _delayedPreviewTimer , SIGNAL(timeout()) , this , SLOT(delayedPreviewActivate()) );
     _ui = new Ui::EditProfileDialog();
@@ -109,6 +112,10 @@ void EditProfileDialog::save()
         iter.next();
         _previewedProperties.remove(iter.key());
     }
+
+    _tempProfile = new Profile ;
+    _tempProfile->setHidden(true);
+    enableButtonApply(false);
 }
 void EditProfileDialog::reject()
 {
@@ -291,7 +298,7 @@ void EditProfileDialog::showEnvironmentEditor()
     if ( dialog->exec() == QDialog::Accepted )
     {
         QStringList newEnvironment = edit->toPlainText().split('\n');
-        _tempProfile->setProperty(Profile::Environment,newEnvironment);
+        updateTempProfileProperty(Profile::Environment,newEnvironment);
     }
 
     dialog->deleteLater();
@@ -351,14 +358,16 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
            this , SLOT(insertRemoteTabTitleText(const QString&)) ); 
 }
 void EditProfileDialog::showNewTabButton(bool show)
-{ _tempProfile->setProperty(Profile::ShowNewAndCloseTabButtons,show); }
+{
+    updateTempProfileProperty(Profile::ShowNewAndCloseTabButtons,show);
+}
 void EditProfileDialog::tabBarVisibilityChanged(int newValue)
 {
-    _tempProfile->setProperty( Profile::TabBarMode , newValue );
+    updateTempProfileProperty( Profile::TabBarMode , newValue );
 }
 void EditProfileDialog::tabBarPositionChanged(int newValue)
 {
-    _tempProfile->setProperty( Profile::TabBarPosition , newValue );
+    updateTempProfileProperty( Profile::TabBarPosition , newValue );
 }
 void EditProfileDialog::insertTabTitleText(const QString& text)
 {
@@ -370,19 +379,19 @@ void EditProfileDialog::insertRemoteTabTitleText(const QString& text)
 }
 void EditProfileDialog::showMenuBar(bool show)
 {
-    _tempProfile->setProperty(Profile::ShowMenuBar,show);
+    updateTempProfileProperty(Profile::ShowMenuBar,show);
 }
 void EditProfileDialog::saveGeometryOnExit(bool save)
 {
-    _tempProfile->setProperty(Profile::SaveGeometryOnExit,save);
+    updateTempProfileProperty(Profile::SaveGeometryOnExit,save);
 }
 void EditProfileDialog::tabTitleFormatChanged(const QString& format)
 {
-    _tempProfile->setProperty(Profile::LocalTabTitleFormat,format);
+    updateTempProfileProperty(Profile::LocalTabTitleFormat,format);
 }
 void EditProfileDialog::remoteTabTitleFormatChanged(const QString& format)
 {
-    _tempProfile->setProperty(Profile::RemoteTabTitleFormat,format);
+    updateTempProfileProperty(Profile::RemoteTabTitleFormat,format);
 }
 
 void EditProfileDialog::selectIcon()
@@ -392,28 +401,28 @@ void EditProfileDialog::selectIcon()
     if (!icon.isEmpty())
     {
         _ui->iconSelectButton->setIcon( KIcon(icon) );
-        _tempProfile->setProperty(Profile::Icon,icon);
+        updateTempProfileProperty(Profile::Icon,icon);
     }
 }
 void EditProfileDialog::profileNameChanged(const QString& text)
 {
-    _tempProfile->setProperty(Profile::Name,text);
+    updateTempProfileProperty(Profile::Name,text);
     updateCaption(_tempProfile);
 }
 void EditProfileDialog::startInSameDir(bool sameDir)
 {
-    _tempProfile->setProperty(Profile::StartInCurrentSessionDir,sameDir);
+    updateTempProfileProperty(Profile::StartInCurrentSessionDir,sameDir);
 }
 void EditProfileDialog::initialDirChanged(const QString& dir)
 {
-    _tempProfile->setProperty(Profile::Directory,dir);
+    updateTempProfileProperty(Profile::Directory,dir);
 }
 void EditProfileDialog::commandChanged(const QString& command)
 {
     ShellCommand shellCommand(command);
 
-    _tempProfile->setProperty(Profile::Command,shellCommand.command());
-    _tempProfile->setProperty(Profile::Arguments,shellCommand.arguments());
+    updateTempProfileProperty(Profile::Command,shellCommand.command());
+    updateTempProfileProperty(Profile::Arguments,shellCommand.arguments());
 }
 void EditProfileDialog::selectInitialDir()
 {
@@ -492,18 +501,17 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
 }
 void EditProfileDialog::setAntialiasText(bool enable)
 {
-    _tempProfile->setProperty(Profile::AntiAliasFonts,enable);
-
     QFont font = _ui->fontPreviewLabel->font();
     font.setStyleStrategy(enable ? QFont::PreferAntialias : QFont::NoAntialias);
 
     // update preview to reflect text smoothing state
     fontSelected(font);
+    updateTempProfileProperty(Profile::AntiAliasFonts,enable);
 }
 void EditProfileDialog::setBoldIntense(bool enable)
 {
-    _tempProfile->setProperty(Profile::BoldIntense,enable);
     preview(Profile::BoldIntense,enable);
+    updateTempProfileProperty(Profile::BoldIntense,enable);
 }
 void EditProfileDialog::colorSchemeAnimationUpdate()
 {
@@ -774,8 +782,8 @@ void EditProfileDialog::colorSchemeSelected()
 
         //kDebug() << "Setting temp profile color to" << colors->name();
         
+        updateTempProfileProperty(Profile::ColorScheme,colors->name());
         previewColorScheme(selected.first());
-        _tempProfile->setProperty(Profile::ColorScheme,colors->name());
 
         updateTransparencyWarning();
     }
@@ -805,6 +813,45 @@ void EditProfileDialog::updateTransparencyWarning()
         _ui->transparencyWarningWidget->setHidden(KWindowSystem::compositingActive() || !hasTransparency);
     }
 }
+
+void EditProfileDialog::updateTempProfileProperty(Profile::Property property, const QVariant & value)
+{
+    _tempProfile->setProperty(property, value);
+    updateButtonApply();
+}
+
+void EditProfileDialog::updateButtonApply( )
+{
+    bool userModified = false;
+
+    QHashIterator<Profile::Property,QVariant> iter(_tempProfile->setProperties());
+    while ( iter.hasNext() )
+    {
+        iter.next();
+
+        Profile::Property property = iter.key();
+        QVariant value = iter.value() ;
+
+        // for previewed property
+        if( _previewedProperties.contains(int(property)) )
+        {
+           if ( value != _previewedProperties.value(int(property)))
+           {
+                userModified = true ;
+                break ;
+           }
+        }
+        // for not-previewed property
+        else if ( (value != _profile->property<QVariant>(property)) )
+        {
+            userModified = true ;
+            break ;
+        }
+    }
+
+    enableButtonApply(userModified);
+}
+
 void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* info */)
 {
     // setup translator list
@@ -832,7 +879,7 @@ void EditProfileDialog::keyBindingSelected()
         QAbstractItemModel* model = _ui->keyBindingList->model();
         const KeyboardTranslator* translator = model->data(selected.first(),Qt::UserRole+1)
                                                 .value<const KeyboardTranslator*>();
-        _tempProfile->setProperty(Profile::KeyBindings,translator->name());
+        updateTempProfileProperty(Profile::KeyBindings,translator->name());
     }
 
     updateKeyBindingsButtons();
@@ -893,7 +940,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 
         if ( newTranslator->name() == currentTranslator )
         {
-            _tempProfile->setProperty(Profile::KeyBindings,newTranslator->name());
+            updateTempProfileProperty(Profile::KeyBindings,newTranslator->name());
         }
     }
 }
@@ -962,31 +1009,31 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
 
 void EditProfileDialog::scrollBackLinesChanged(int lineCount)
 {
-    _tempProfile->setProperty(Profile::HistorySize , lineCount);
+    updateTempProfileProperty(Profile::HistorySize , lineCount);
 }
 void EditProfileDialog::noScrollBack()
 {
-    _tempProfile->setProperty(Profile::HistoryMode , Profile::DisableHistory);
+    updateTempProfileProperty(Profile::HistoryMode , Profile::DisableHistory);
 }
 void EditProfileDialog::fixedScrollBack()
 {
-    _tempProfile->setProperty(Profile::HistoryMode , Profile::FixedSizeHistory);
+    updateTempProfileProperty(Profile::HistoryMode , Profile::FixedSizeHistory);
 }
 void EditProfileDialog::unlimitedScrollBack()
 {
-    _tempProfile->setProperty(Profile::HistoryMode , Profile::UnlimitedHistory );
+    updateTempProfileProperty(Profile::HistoryMode , Profile::UnlimitedHistory );
 }
 void EditProfileDialog::hideScrollBar()
 {
-    _tempProfile->setProperty(Profile::ScrollBarPosition , Profile::ScrollBarHidden );
+    updateTempProfileProperty(Profile::ScrollBarPosition , Profile::ScrollBarHidden );
 }
 void EditProfileDialog::showScrollBarLeft()
 {
-    _tempProfile->setProperty(Profile::ScrollBarPosition , Profile::ScrollBarLeft );
+    updateTempProfileProperty(Profile::ScrollBarPosition , Profile::ScrollBarLeft );
 }
 void EditProfileDialog::showScrollBarRight()
 {
-    _tempProfile->setProperty(Profile::ScrollBarPosition , Profile::ScrollBarRight );
+    updateTempProfileProperty(Profile::ScrollBarPosition , Profile::ScrollBarRight );
 }
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {
@@ -1044,59 +1091,59 @@ void EditProfileDialog::setDefaultCodec(QTextCodec* codec)
 {
     QString name = QString(codec->name());
 
-    _tempProfile->setProperty(Profile::DefaultEncoding,name);
+    updateTempProfileProperty(Profile::DefaultEncoding,name);
     _ui->characterEncodingLabel->setText(codec->name());
 }
 void EditProfileDialog::customCursorColorChanged(const QColor& color)
 {
-    _tempProfile->setProperty(Profile::CustomCursorColor,color);
+    updateTempProfileProperty(Profile::CustomCursorColor,color);
 
     // ensure that custom cursor colors are enabled
     _ui->customCursorColorButton->click();
 }
 void EditProfileDialog::wordCharactersChanged(const QString& text)
 {
-    _tempProfile->setProperty(Profile::WordCharacters,text);
+    updateTempProfileProperty(Profile::WordCharacters,text);
 }
 void EditProfileDialog::autoCursorColor()
 {
-    _tempProfile->setProperty(Profile::UseCustomCursorColor,false);
+    updateTempProfileProperty(Profile::UseCustomCursorColor,false);
 }
 void EditProfileDialog::customCursorColor()
 {
-    _tempProfile->setProperty(Profile::UseCustomCursorColor,true);
+    updateTempProfileProperty(Profile::UseCustomCursorColor,true);
 }
 void EditProfileDialog::setCursorShape(int index)
 {
-    _tempProfile->setProperty(Profile::CursorShape,index);
+    updateTempProfileProperty(Profile::CursorShape,index);
 }
 void EditProfileDialog::togglebidiRendering(bool enable)
 {
-    _tempProfile->setProperty(Profile::BidiRenderingEnabled,enable);
+    updateTempProfileProperty(Profile::BidiRenderingEnabled,enable);
 }
 void EditProfileDialog::toggleBlinkingCursor(bool enable)
 {
-    _tempProfile->setProperty(Profile::BlinkingCursorEnabled,enable);
+    updateTempProfileProperty(Profile::BlinkingCursorEnabled,enable);
 }
 void EditProfileDialog::toggleUnderlineLinks(bool enable)
 {
-    _tempProfile->setProperty(Profile::UnderlineLinksEnabled,enable);
+    updateTempProfileProperty(Profile::UnderlineLinksEnabled,enable);
 }
 void EditProfileDialog::toggleTripleClickMode(bool enable)
 {
-    _tempProfile->setProperty(Profile::TripleClickMode,enable);
+    updateTempProfileProperty(Profile::TripleClickMode,enable);
 }
 void EditProfileDialog::toggleBlinkingText(bool enable)
 {
-    _tempProfile->setProperty(Profile::BlinkingTextEnabled,enable);
+    updateTempProfileProperty(Profile::BlinkingTextEnabled,enable);
 }
 void EditProfileDialog::toggleFlowControl(bool enable)
 {
-    _tempProfile->setProperty(Profile::FlowControlEnabled,enable);
+    updateTempProfileProperty(Profile::FlowControlEnabled,enable);
 }
 void EditProfileDialog::toggleResizeWindow(bool enable)
 {
-    _tempProfile->setProperty(Profile::AllowProgramsToResizeWindow,enable);
+    updateTempProfileProperty(Profile::AllowProgramsToResizeWindow,enable);
 }
 void EditProfileDialog::fontSelected(const QFont& font)
 {
@@ -1107,9 +1154,9 @@ void EditProfileDialog::fontSelected(const QFont& font)
 
    _ui->fontPreviewLabel->setFont(previewFont);
    
-   _tempProfile->setProperty(Profile::Font,font);
-
    preview(Profile::Font,font);
+   updateTempProfileProperty(Profile::Font,font);
+
 }
 void EditProfileDialog::showFontDialog()
 {
@@ -1129,9 +1176,8 @@ void EditProfileDialog::setFontSize(int pointSize)
     newFont.setPointSizeF(pointSize / 10.0);
     _ui->fontPreviewLabel->setFont(newFont);
 
-    _tempProfile->setProperty(Profile::Font,newFont);
-
     preview(Profile::Font,newFont);
+    updateTempProfileProperty(Profile::Font,newFont);
 }
 
 void EditProfileDialog::setFontSliderRange(const QFont& font)
