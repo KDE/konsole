@@ -186,11 +186,11 @@ public:
         DefaultEncoding,
         /** (bool) Whether fonts should be aliased or not */
         AntiAliasFonts,
-        /** (bool) Whether new sessions should be started in the same directory as the 
-         * currently active session. */
-        BoldIntense,
         /** (bool) Whether character with intense colors should be rendered in bold font
          * or just in bright color. */
+        BoldIntense,
+        /** (bool) Whether new sessions should be started in the same directory as the 
+         * currently active session. */
         StartInCurrentSessionDir,
         /** (bool) Whether a 'New Tab' and 'Close Tab' buttons should be shown on the tab bar */
         ShowNewAndCloseTabButtons,
