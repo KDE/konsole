@@ -32,6 +32,7 @@
 // KDE
 #include <KApplication>
 #include <KMainWindow>
+#include <KProcess>
 #include "konsole_export.h"
 
 // Konsole
@@ -576,7 +577,7 @@ signals:
   void flowControlEnabledChanged(bool enabled);
 
 private slots:
-  void done(int);
+  void done(int, QProcess::ExitStatus);
 
   void fireZModemDetected();
 
@@ -626,7 +627,7 @@ private:
   bool           _notifiedActivity;
   bool           _masterMode;
   bool           _autoClose;
-  bool           _wantedClose;
+  bool           _closePerUser;
   QTimer*        _monitorTimer;
 
   int            _silenceSeconds;

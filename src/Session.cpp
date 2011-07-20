@@ -44,7 +44,6 @@
 #include <KLocale>
 #include <KMessageBox>
 #include <KNotification>
-#include <KProcess>
 #include <KRun>
 #include <kshell.h>
 #include <KStandardDirs>
@@ -106,7 +105,7 @@ Session::Session(QObject* parent) :
    , _monitorSilence(false)
    , _notifiedActivity(false)
    , _autoClose(true)
-   , _wantedClose(false)
+   , _closePerUser(false)
    , _silenceSeconds(10)
    , _addToUtmp(true)  
    , _flowControl(true)
@@ -176,7 +175,7 @@ void Session::openTeletype(int fd)
             SLOT(sendData(const char*,int)) );
     connect( _emulation,SIGNAL(lockPtyRequest(bool)),_shellProcess,SLOT(lockPty(bool)) );
     connect( _emulation,SIGNAL(useUtf8Request(bool)),_shellProcess,SLOT(setUtf8Mode(bool)) );
-    connect( _shellProcess,SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(done(int)) );
+    connect( _shellProcess,SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(done(int,QProcess::ExitStatus)) );
     connect( _emulation,SIGNAL(imageSizeChanged(int,int)),this,SLOT(updateWindowSize(int,int)) );
 }
 
@@ -720,7 +719,7 @@ bool Session::kill(int signal)
 void Session::close()
 {
   _autoClose = true;
-  _wantedClose = true;
+  _closePerUser = true;
 
   if (!isRunning() || !kill(SIGHUP))
   {
@@ -762,7 +761,7 @@ Session::~Session()
   delete _zmodemProc;
 }
 
-void Session::done(int exitStatus)
+void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 {
   if (!_autoClose)
   {
@@ -772,10 +771,10 @@ void Session::done(int exitStatus)
   }
 
   QString message;
-  if (!_wantedClose || exitStatus != 0)
+  if (!_closePerUser && exitCode != 0)
   {
-    if (_shellProcess->exitStatus() == QProcess::NormalExit)
-        message = i18n("Program '%1' exited with status %2.", _program, exitStatus);
+    if (exitStatus == QProcess::NormalExit)
+        message = i18n("Program '%1' exited with status %2.", _program, exitCode);
     else
         message = i18n("Program '%1' crashed.", _program);
 
@@ -785,7 +784,7 @@ void Session::done(int exitStatus)
                          KNotification::CloseWhenWidgetActivated);
   }
 
-  if ( !_wantedClose && _shellProcess->exitStatus() != QProcess::NormalExit )
+  if ( !_closePerUser && exitStatus != QProcess::NormalExit )
       terminalWarning(message);
   else
         emit finished();
