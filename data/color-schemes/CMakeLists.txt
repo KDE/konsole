@@ -9,5 +9,6 @@ install( FILES
          WhiteOnBlack.schema  	
          Linux.colorscheme
          DarkPastels.colorscheme
+         Solarized.colorscheme
          DESTINATION 
          ${DATA_INSTALL_DIR}/konsole )
