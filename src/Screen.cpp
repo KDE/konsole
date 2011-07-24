@@ -1291,9 +1291,12 @@ int Screen::copyLineToStream(int line ,
     const bool omitLineBreak = (currentLineProperties & LINE_WRAPPED) ||
         !preserveLineBreaks;
 
-    if ( !omitLineBreak && appendNewLine && (count+1 < MAX_CHARS) )
+    if ( appendNewLine && (count+1 < MAX_CHARS) )
     {
-        characterBuffer[count] = Character('\n');
+        // When users ask to omit the linebreaks, they usually mean: `treat
+        // LINEBREAK as SPACE , thus joining multiple lines into single line in
+        // the same way as 'J' does in VIM.`
+        characterBuffer[count] = omitLineBreak ? Character(' ') : Character('\n');
         count++;
     }
 
