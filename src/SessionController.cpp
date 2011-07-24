@@ -1423,17 +1423,6 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
         info.session->emulation()->writeToStream( info.decoder , info.lastLineFetched+1 , copyUpToLine );
         info.decoder->end();
 
-        // if there are still more lines to process after this request
-        // then insert a new line character
-        // to ensure that the next block of lines begins on a new line
-        //
-        // FIXME - There is still an extra new-line at the end of the save data.
-        if ( copyUpToLine <= sessionLines-1 )
-        {
-            stream << '\n';
-        }
-
-
         info.lastLineFetched = copyUpToLine;
     }
 }
