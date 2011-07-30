@@ -115,8 +115,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     view->installEventFilter(this);
 
     // listen for session resize requests
-    connect( _session , SIGNAL(resizeRequest(const QSize&)) , this ,
-            SLOT(sessionResizeRequest(const QSize&)) );
+    connect( _session , SIGNAL(resizeRequest(QSize)) , this ,
+            SLOT(sessionResizeRequest(QSize)) );
 
     // listen for popup menu requests
     connect( _view , SIGNAL(configureRequest(QPoint)) , this,
@@ -128,7 +128,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     // listen to activity / silence notifications from session
     connect( _session , SIGNAL(stateChanged(int)) , this ,
-            SLOT(sessionStateChanged(int) ));
+            SLOT(sessionStateChanged(int)));
     // listen to title and icon changes
     connect( _session , SIGNAL(titleChanged()) , this , SLOT(sessionTitleChanged()) );
 
@@ -305,10 +305,10 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             // by the focused view
 
             // first, disconnect any other views which are listening for bell signals from the session
-            disconnect( _session , SIGNAL(bellRequest(const QString&)) , 0 , 0 );
+            disconnect( _session , SIGNAL(bellRequest(QString)) , 0 , 0 );
             // second, connect the newly focused view to listen for the session's bell signal
-            connect( _session , SIGNAL(bellRequest(const QString&)) ,
-                    _view , SLOT(bell(const QString&)) );
+            connect( _session , SIGNAL(bellRequest(QString)) ,
+                    _view , SLOT(bell(QString)) );
                     
             if(_copyToAllTabsAction->isChecked()) {
                 // A session with "Copy To All Tabs" has come into focus:
@@ -824,8 +824,8 @@ void SessionController::searchHistory(bool showSearchBar)
             
             _searchFilter = new RegExpFilter();
             _view->filterChain()->addFilter(_searchFilter);
-            connect( _searchBar , SIGNAL(searchChanged(const QString&)) , this ,
-                    SLOT(searchTextChanged(const QString&)) );
+            connect( _searchBar , SIGNAL(searchChanged(QString)) , this ,
+                    SLOT(searchTextChanged(QString)) );
 
             // invoke search for matches for the current search text
             const QString& currentSearchText = _searchBar->searchText();
@@ -840,8 +840,8 @@ void SessionController::searchHistory(bool showSearchBar)
         {
             setFindNextPrevEnabled(false);
 
-            disconnect( _searchBar , SIGNAL(searchChanged(const QString&)) , this ,
-                    SLOT(searchTextChanged(const QString&)) );
+            disconnect( _searchBar , SIGNAL(searchChanged(QString)) , this ,
+                    SLOT(searchTextChanged(QString)) );
 
             removeSearchFilter();
 

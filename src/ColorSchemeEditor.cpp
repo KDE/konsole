@@ -62,8 +62,8 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
 
     // description edit
     _ui->descriptionEdit->setClearButtonShown(true);
-    connect( _ui->descriptionEdit , SIGNAL(textChanged(const QString&)) , this , 
-            SLOT(setDescription(const QString&)) );
+    connect( _ui->descriptionEdit , SIGNAL(textChanged(QString)) , this , 
+            SLOT(setDescription(QString)) );
 
     // transparency slider
     QFontMetrics metrics(font());

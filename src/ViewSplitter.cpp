@@ -90,8 +90,8 @@ ViewSplitter* ViewSplitter::activeSplitter()
 void ViewSplitter::registerContainer( ViewContainer* container )
 {
     _containers << container;
-    connect( container , SIGNAL(destroyed(ViewContainer*)) , this , SLOT( containerDestroyed(ViewContainer*) ) );
-    connect( container , SIGNAL(empty(ViewContainer*)) , this , SLOT( containerEmpty(ViewContainer*) ) );
+    connect( container , SIGNAL(destroyed(ViewContainer*)) , this , SLOT(containerDestroyed(ViewContainer*)) );
+    connect( container , SIGNAL(empty(ViewContainer*)) , this , SLOT(containerEmpty(ViewContainer*)) );
 }
 
 void ViewSplitter::unregisterContainer( ViewContainer* container )

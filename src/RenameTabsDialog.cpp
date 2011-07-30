@@ -40,14 +40,14 @@ RenameTabsDialog::RenameTabsDialog(QWidget* parent)
     TabTitleFormatAction* localTabTitleAction = new TabTitleFormatAction(this);
     localTabTitleAction->setContext(Session::LocalTabTitle);
     _ui->tabTitleEditButton->setMenu(localTabTitleAction->menu());
-    connect(localTabTitleAction, SIGNAL(dynamicElementSelected(const QString&)),
-             this, SLOT(insertTabTitleText(const QString&)));
+    connect(localTabTitleAction, SIGNAL(dynamicElementSelected(QString)),
+             this, SLOT(insertTabTitleText(QString)));
 
     TabTitleFormatAction* remoteTabTitleAction = new TabTitleFormatAction(this);
     remoteTabTitleAction->setContext(Session::RemoteTabTitle);
     _ui->remoteTabTitleEditButton->setMenu(remoteTabTitleAction->menu());
-    connect(remoteTabTitleAction, SIGNAL(dynamicElementSelected(const QString&)),
-             this, SLOT(insertRemoteTabTitleText(const QString&)));
+    connect(remoteTabTitleAction, SIGNAL(dynamicElementSelected(QString)),
+             this, SLOT(insertRemoteTabTitleText(QString)));
 
 }
 

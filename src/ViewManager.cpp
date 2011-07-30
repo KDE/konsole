@@ -635,14 +635,14 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
                     new TabbedViewContainer(position,_viewSplitter);
 
                 connect(container,
-                    SIGNAL(detachTab(ViewContainer*, QWidget*)),
+                    SIGNAL(detachTab(ViewContainer*,QWidget*)),
                     this,
-                    SLOT(detachView(ViewContainer*, QWidget*))
+                    SLOT(detachView(ViewContainer*,QWidget*))
                     );
                 connect(container,
-                    SIGNAL(closeTab(ViewContainer*, QWidget*)),
+                    SIGNAL(closeTab(ViewContainer*,QWidget*)),
                     this,
-                    SLOT(closeTabFromContainer(ViewContainer*, QWidget*)));
+                    SLOT(closeTabFromContainer(ViewContainer*,QWidget*)));
 
             }
             break;

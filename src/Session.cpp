@@ -129,16 +129,16 @@ Session::Session(QObject* parent) :
     //create emulation backend
     _emulation = new Vt102Emulation();
 
-    connect( _emulation, SIGNAL( titleChanged( int, const QString & ) ),
-           this, SLOT( setUserTitle( int, const QString & ) ) );
-    connect( _emulation, SIGNAL( stateSet(int) ),
-           this, SLOT( activityStateSet(int) ) );
-    connect( _emulation, SIGNAL( zmodemDetected() ), this ,
-            SLOT( fireZModemDetected() ) );
-    connect( _emulation, SIGNAL( changeTabTextColorRequest( int ) ),
-           this, SIGNAL( changeTabTextColorRequest( int ) ) );
-    connect( _emulation, SIGNAL(profileChangeCommandReceived(const QString&)),
-           this, SIGNAL( profileChangeCommandReceived(const QString&)) );
+    connect( _emulation, SIGNAL(titleChanged(int,QString)),
+           this, SLOT(setUserTitle(int,QString)) );
+    connect( _emulation, SIGNAL(stateSet(int)),
+           this, SLOT(activityStateSet(int)) );
+    connect( _emulation, SIGNAL(zmodemDetected()), this ,
+            SLOT(fireZModemDetected()) );
+    connect( _emulation, SIGNAL(changeTabTextColorRequest(int)),
+           this, SIGNAL(changeTabTextColorRequest(int)) );
+    connect( _emulation, SIGNAL(profileChangeCommandReceived(QString)),
+           this, SIGNAL(profileChangeCommandReceived(QString)) );
     connect( _emulation, SIGNAL(flowControlKeyPressed(bool)) , this, 
              SLOT(updateFlowControlState(bool)) );
 

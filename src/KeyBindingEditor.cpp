@@ -40,7 +40,7 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
     _ui->setupUi(this);
 
     // description edit
-    connect( _ui->descriptionEdit , SIGNAL(textChanged(const QString&)) , this , SLOT(setDescription(const QString&)) );
+    connect( _ui->descriptionEdit , SIGNAL(textChanged(QString)) , this , SLOT(setDescription(QString)) );
 
     // key bindings table
     _ui->keyBindingTable->setColumnCount(2);

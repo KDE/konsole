@@ -150,7 +150,7 @@ void ViewContainer::addView(QWidget* view , ViewProperties* item, int index)
 
     _navigation[view] = item;
 
-    connect( view , SIGNAL(destroyed(QObject*)) , this , SLOT( viewDestroyed(QObject*) ) );
+    connect( view , SIGNAL(destroyed(QObject*)) , this , SLOT(viewDestroyed(QObject*)) );
 
     addViewWidget(view,index);
 
@@ -182,7 +182,7 @@ void ViewContainer::removeView(QWidget* view)
     _views.removeAll(view);
     _navigation.remove(view);
 
-    disconnect( view , SIGNAL(destroyed(QObject*)) , this , SLOT( viewDestroyed(QObject*) ) );
+    disconnect( view , SIGNAL(destroyed(QObject*)) , this , SLOT(viewDestroyed(QObject*)) );
 
     removeViewWidget(view);
     
@@ -455,8 +455,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
     connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
     connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );
-    connect( _tabBar, SIGNAL(contextMenu(int, const QPoint&)), this,
-            SLOT(openTabContextMenu(int, const QPoint&)) );
+    connect( _tabBar, SIGNAL(contextMenu(int,QPoint)), this,
+            SLOT(openTabContextMenu(int,QPoint)) );
 
     connect( _newTabButton , SIGNAL(clicked()) , this , SIGNAL(newViewRequest()) );
     connect( _closeTabButton , SIGNAL(clicked()) , this , SLOT(closeCurrentTab()) );
@@ -749,7 +749,7 @@ void TabbedViewContainer::addViewWidget( QWidget* view , int index)
     ViewProperties* item = viewProperties(view);
     connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , 
                     SLOT(updateTitle(ViewProperties*))); 
-    connect( item , SIGNAL(iconChanged(ViewProperties*) ) , this , 
+    connect( item , SIGNAL(iconChanged(ViewProperties*)) , this , 
                     SLOT(updateIcon(ViewProperties*)));
     connect( item , SIGNAL(activity(ViewProperties*)) , this ,
                     SLOT(updateActivity(ViewProperties*)));

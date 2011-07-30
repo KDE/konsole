@@ -267,12 +267,12 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     connect( _ui->iconSelectButton , SIGNAL(clicked()) , this , SLOT(selectIcon()) );
     connect( _ui->startInSameDirButton , SIGNAL(toggled(bool)) , this , 
             SLOT(startInSameDir(bool)));
-    connect( _ui->profileNameEdit , SIGNAL(textChanged(const QString&)) , this ,
-            SLOT(profileNameChanged(const QString&)) );
-    connect( _ui->initialDirEdit , SIGNAL(textChanged(const QString&)) , this , 
-            SLOT(initialDirChanged(const QString&)) );
-    connect(_ui->commandEdit , SIGNAL(textChanged(const QString&)) , this ,
-            SLOT(commandChanged(const QString&)) ); 
+    connect( _ui->profileNameEdit , SIGNAL(textChanged(QString)) , this ,
+            SLOT(profileNameChanged(QString)) );
+    connect( _ui->initialDirEdit , SIGNAL(textChanged(QString)) , this , 
+            SLOT(initialDirChanged(QString)) );
+    connect(_ui->commandEdit , SIGNAL(textChanged(QString)) , this ,
+            SLOT(commandChanged(QString)) ); 
     
     connect(_ui->showMenuBarButton , SIGNAL(toggled(bool)) , this , 
             SLOT(showMenuBar(bool)) );
@@ -339,23 +339,23 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
     connect( _ui->newTabButton , SIGNAL(toggled(bool)) , this ,
              SLOT(showNewTabButton(bool)) );
 
-    connect(_ui->tabTitleEdit , SIGNAL(textChanged(const QString&)) , this ,
-            SLOT(tabTitleFormatChanged(const QString&)) );
-    connect(_ui->remoteTabTitleEdit , SIGNAL(textChanged(const QString&)) , this ,
-            SLOT(remoteTabTitleFormatChanged(const QString&)));
+    connect(_ui->tabTitleEdit , SIGNAL(textChanged(QString)) , this ,
+            SLOT(tabTitleFormatChanged(QString)) );
+    connect(_ui->remoteTabTitleEdit , SIGNAL(textChanged(QString)) , this ,
+            SLOT(remoteTabTitleFormatChanged(QString)));
 
     // menus for local and remote tab title dynamic elements
     TabTitleFormatAction* localTabTitleAction = new TabTitleFormatAction(this);
     localTabTitleAction->setContext(Session::LocalTabTitle);
     _ui->tabTitleEditButton->setMenu(localTabTitleAction->menu());
-    connect( localTabTitleAction , SIGNAL(dynamicElementSelected(const QString&)) , 
-            this , SLOT(insertTabTitleText(const QString&)) );
+    connect( localTabTitleAction , SIGNAL(dynamicElementSelected(QString)) , 
+            this , SLOT(insertTabTitleText(QString)) );
 
     TabTitleFormatAction* remoteTabTitleAction = new TabTitleFormatAction(this);
     remoteTabTitleAction->setContext(Session::RemoteTabTitle);
     _ui->remoteTabTitleEditButton->setMenu(remoteTabTitleAction->menu());
-    connect( remoteTabTitleAction , SIGNAL(dynamicElementSelected(const QString&)) ,
-           this , SLOT(insertRemoteTabTitleText(const QString&)) ); 
+    connect( remoteTabTitleAction , SIGNAL(dynamicElementSelected(QString)) ,
+           this , SLOT(insertRemoteTabTitleText(QString)) ); 
 }
 void EditProfileDialog::showNewTabButton(bool show)
 {
@@ -459,10 +459,10 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
     _ui->colorSchemeList->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
 
     connect( _ui->colorSchemeList->selectionModel() , 
-            SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)) 
+            SIGNAL(selectionChanged(QItemSelection,QItemSelection)) 
             , this , SLOT(colorSchemeSelected()) );
-    connect( _ui->colorSchemeList , SIGNAL(entered(const QModelIndex&)) , this , 
-            SLOT(previewColorScheme(const QModelIndex&)) );
+    connect( _ui->colorSchemeList , SIGNAL(entered(QModelIndex)) , this , 
+            SLOT(previewColorScheme(QModelIndex)) );
     
     updateColorSchemeButtons();
 
@@ -858,7 +858,7 @@ void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* info */)
     updateKeyBindingsList(true); 
 
     connect( _ui->keyBindingList->selectionModel() , 
-                SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)),
+                SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
                 SLOT(keyBindingSelected()) );
     connect( _ui->newKeyBindingsButton , SIGNAL(clicked()) , this ,
             SLOT(newKeyBinding()) );
@@ -1058,8 +1058,8 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     // interaction options
     _ui->wordCharacterEdit->setText( profile->property<QString>(Profile::WordCharacters) );
 
-    connect( _ui->wordCharacterEdit , SIGNAL(textChanged(const QString&)) , this , 
-            SLOT(wordCharactersChanged(const QString&)) );
+    connect( _ui->wordCharacterEdit , SIGNAL(textChanged(QString)) , this , 
+            SLOT(wordCharactersChanged(QString)) );
 
     // cursor options
     if ( profile->property<bool>(Profile::UseCustomCursorColor) )
@@ -1071,8 +1071,8 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 
     connect( _ui->customCursorColorButton , SIGNAL(clicked()) , this , SLOT(customCursorColor()) );
     connect( _ui->autoCursorColorButton , SIGNAL(clicked()) , this , SLOT(autoCursorColor()) );
-    connect( _ui->customColorSelectButton , SIGNAL(changed(const QColor&)) , 
-            SLOT(customCursorColorChanged(const QColor&)) );
+    connect( _ui->customColorSelectButton , SIGNAL(changed(QColor)) , 
+            SLOT(customCursorColorChanged(QColor)) );
 
     int shape = profile->property<int>(Profile::CursorShape);
     _ui->cursorShapeCombo->setCurrentIndex(shape);
@@ -1165,7 +1165,7 @@ void EditProfileDialog::showFontDialog()
     KFontDialog* dialog = new KFontDialog(this, KFontChooser::FixedFontsOnly);
     dialog->setFont(currentFont, true);
 
-    connect( dialog , SIGNAL(fontSelected(const QFont&)) , this , SLOT(fontSelected(const QFont&)) );
+    connect( dialog , SIGNAL(fontSelected(QFont)) , this , SLOT(fontSelected(QFont)) );
 
     if (dialog->exec() == QDialog::Rejected)
         fontSelected(currentFont);

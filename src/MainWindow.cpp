@@ -87,8 +87,8 @@ MainWindow::MainWindow()
             SLOT(activeViewChanged(SessionController*)) );
     connect( _viewManager , SIGNAL(unplugController(SessionController*)) , this ,
             SLOT(disconnectController(SessionController*)) );
-    connect( _viewManager , SIGNAL(viewPropertiesChanged(const QList<ViewProperties*>&)) ,
-           bookmarkHandler() , SLOT(setViews(const QList<ViewProperties*>&)) );
+    connect( _viewManager , SIGNAL(viewPropertiesChanged(QList<ViewProperties*>)) ,
+           bookmarkHandler() , SLOT(setViews(QList<ViewProperties*>)) );
 
     connect( _viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , this ,
             SLOT(setMenuBarVisibleOnce(bool)) );
@@ -200,9 +200,9 @@ void MainWindow::activeViewChanged(SessionController* controller)
 {
     // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
-    disconnect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , 0 , 0 );
-    connect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , controller ,
-             SLOT(openUrl(const KUrl&)) );
+    disconnect( bookmarkHandler() , SIGNAL(openUrl(KUrl)) , 0 , 0 );
+    connect( bookmarkHandler() , SIGNAL(openUrl(KUrl)) , controller ,
+             SLOT(openUrl(KUrl)) );
 
     if ( _pluggedController )
         disconnectController(_pluggedController);
@@ -327,8 +327,8 @@ void MainWindow::setSessionList(ProfileList* list)
     connect( list , SIGNAL(profileSelected(Profile::Ptr)) , this ,
             SLOT(newFromProfile(Profile::Ptr)) );
 
-    connect( list , SIGNAL(actionsChanged(const QList<QAction*>&)) , this ,
-            SLOT(sessionListChanged(const QList<QAction*>&)) );
+    connect( list , SIGNAL(actionsChanged(QList<QAction*>)) , this ,
+            SLOT(sessionListChanged(QList<QAction*>)) );
 }
 
 void MainWindow::sessionListChanged(const QList<QAction*>& actions)

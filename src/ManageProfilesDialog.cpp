@@ -236,8 +236,8 @@ void ManageProfilesDialog::populateTable()
     // it appears that the selection model is changed when the model itself is replaced,
     // so the signals need to be reconnected each time the model is updated.
     connect( _ui->sessionTable->selectionModel() , 
-            SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)) , this ,
-            SLOT(tableSelectionChanged(const QItemSelection&)) );
+            SIGNAL(selectionChanged(QItemSelection,QItemSelection)) , this ,
+            SLOT(tableSelectionChanged(QItemSelection)) );
 
     _ui->sessionTable->selectRow(0);
     tableSelectionChanged( _ui->sessionTable->selectionModel()->selection() );
