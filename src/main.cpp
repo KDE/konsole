@@ -107,6 +107,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("list-profile-properties", ki18n("List all the profile properties names and their type (for use with -p)"));
     options.add("!e <cmd>",ki18n("Command to execute"));
     options.add("+[args]",ki18n("Arguments passed to command"));
+    options.add("", ki18n("Use --nofork to run in the foreground (helpful with the -e option)."));
 }
 
 void fillAboutData(KAboutData& aboutData)
