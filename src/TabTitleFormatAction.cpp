@@ -31,21 +31,21 @@ using namespace Konsole;
 
 const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] = 
 {
-    { "%n" , I18N_NOOP("Program Name") },
-    { "%d" , I18N_NOOP("Current Directory (Short)") },
-    { "%D" , I18N_NOOP("Current Directory (Long)") },
-    { "%w" , I18N_NOOP("Window Title Set by Shell") },
-    { "%#" , I18N_NOOP("Session Number") },
-    { "%u" , I18N_NOOP("User Name") }
+    { "%n" , I18N_NOOP("Program Name: %n") },
+    { "%d" , I18N_NOOP("Current Directory (Short): %d") },
+    { "%D" , I18N_NOOP("Current Directory (Long): %D") },
+    { "%w" , I18N_NOOP("Window Title Set by Shell: %w") },
+    { "%#" , I18N_NOOP("Session Number: %#") },
+    { "%u" , I18N_NOOP("User Name: %u") }
 };
 const int TabTitleFormatAction::_localElementCount = 6;
 const TabTitleFormatAction::Element TabTitleFormatAction::_remoteElements[] =
 {
-    { "%u" , I18N_NOOP("User Name") },
-    { "%h" , I18N_NOOP("Remote Host (Short)") },
-    { "%H" , I18N_NOOP("Remote Host (Long)") },
-    { "%w" , I18N_NOOP("Window Title Set by Shell") },
-    { "%#" , I18N_NOOP("Session Number") }
+    { "%u" , I18N_NOOP("User Name: %u") },
+    { "%h" , I18N_NOOP("Remote Host (Short): %h") },
+    { "%H" , I18N_NOOP("Remote Host (Long): %H") },
+    { "%w" , I18N_NOOP("Window Title Set by Shell: %w") },
+    { "%#" , I18N_NOOP("Session Number: %#") }
 };
 const int TabTitleFormatAction::_remoteElementCount = 5;
 
