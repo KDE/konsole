@@ -868,6 +868,9 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
     else if ( scrollBarPosition == Profile::ScrollBarRight )
        view->setScrollBarPosition(TerminalDisplay::ScrollBarRight);
 
+    // set visibility of the size widget
+    view->setSizeWidgetVisibility(info->property<bool>(Profile::ShowSizeWidget));
+
     // terminal features
     bool blinkingCursor = info->property<bool>(Profile::BlinkingCursorEnabled);
     view->setBlinkingCursor(blinkingCursor);  

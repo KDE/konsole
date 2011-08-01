@@ -117,6 +117,10 @@ public:
     void setScroll(int cursor, int lines);
 
     /** 
+     * Sets if the size widget is going to be shown or not
+     */
+    void setSizeWidgetVisibility(bool visible);
+    /**
      * Returns the display's filter chain.  When the image for the display is updated,
      * the text is passed through each filter in the chain.  Each filter can define
      * hotspots which correspond to certain strings (such as URLs or particular words).
@@ -750,6 +754,7 @@ private:
     QString     _wordCharacters;
     int         _bellMode;
 
+    bool _showSizeWidget; // if the size widget will be show
     bool _blinking;   // hide text in paintEvent
     bool _hasBlinker; // has characters to blink
     bool _cursorBlinking;     // hide cursor in paintEvent

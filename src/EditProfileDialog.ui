@@ -237,6 +237,16 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="showSizeWidgetButton" >
+            <property name="toolTip" >
+             <string>Show new size of the terminal after resizing</string>
+            </property>
+            <property name="text" >
+             <string>Show terminal size after resizing</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

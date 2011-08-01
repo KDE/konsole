@@ -306,6 +306,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_scrollbarLocation(NoScrollBar)
 ,_wordCharacters(":@-./_~")
 ,_bellMode(SystemBeepBell)
+,_showSizeWidget(true)
 ,_blinking(false)
 ,_hasBlinker(false)
 ,_cursorBlinking(false)
@@ -1623,6 +1624,7 @@ void TerminalDisplay::updateImageSize()
 
   if ( _resizing )
   {
+    if (_showSizeWidget)
       showResizeNotification();
     emit changedContentSizeSignal(_contentHeight, _contentWidth); // expose resizeEvent
   }
@@ -2402,6 +2404,11 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
   _iPntSel.ry() += _scrollBar->value();
 }
 
+
+void Konsole::TerminalDisplay::setSizeWidgetVisibility(bool visible)
+{
+  _showSizeWidget = visible;
+}
 
 bool TerminalDisplay::focusNextPrevChild( bool next )
 {
