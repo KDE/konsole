@@ -952,16 +952,23 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
 
         if ( entry.command() != KeyboardTranslator::NoCommand )
         {
+            TerminalDisplay * currentView = _currentScreen->currentTerminalDisplay();
+
             if (entry.command() & KeyboardTranslator::EraseCommand) {
                 textToSend += eraseChar();
             } else if ( entry.command() & KeyboardTranslator::ScrollPageUpCommand )
-                _currentScreen->currentTerminalDisplay()->scrollScreenWindow( ScreenWindow::ScrollPages , -1 );
+                currentView->scrollScreenWindow( ScreenWindow::ScrollPages , -1 );
             else if ( entry.command() & KeyboardTranslator::ScrollPageDownCommand )
-                _currentScreen->currentTerminalDisplay()->scrollScreenWindow( ScreenWindow::ScrollPages , 1 );
+                currentView->scrollScreenWindow( ScreenWindow::ScrollPages , 1 );
             else if ( entry.command() & KeyboardTranslator::ScrollLineUpCommand )
-                _currentScreen->currentTerminalDisplay()->scrollScreenWindow( ScreenWindow::ScrollLines , -1 );
+                currentView->scrollScreenWindow( ScreenWindow::ScrollLines , -1 );
             else if ( entry.command() & KeyboardTranslator::ScrollLineDownCommand )
-                _currentScreen->currentTerminalDisplay()->scrollScreenWindow( ScreenWindow::ScrollLines , 1 );
+                currentView->scrollScreenWindow( ScreenWindow::ScrollLines , 1 );
+            else if ( entry.command() & KeyboardTranslator::ScrollUpToTopCommand )
+                currentView->scrollScreenWindow( ScreenWindow::ScrollLines ,
+                                                - currentView->screenWindow()->currentLine());
+            else if ( entry.command() & KeyboardTranslator::ScrollDownToBottomCommand)
+                currentView->scrollScreenWindow( ScreenWindow::ScrollLines , lineCount());
         }
         else if ( !entry.text().isEmpty() ) 
         {
