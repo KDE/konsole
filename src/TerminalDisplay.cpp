@@ -2844,8 +2844,15 @@ QSize TerminalDisplay::sizeHint() const
 
 void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
 {
-  if (event->mimeData()->hasFormat("text/plain"))
+  // text/plain alone is enough for KDE-apps
+  // text/uri-list is for supporting some non-KDE apps, such as thunar
+  //   and pcmanfm
+  // That also applies in dropEvent()
+  if (event->mimeData()->hasFormat("text/plain") ||
+      event->mimeData()->hasFormat("text/uri-list"))
+  {
       event->acceptProposedAction();
+  }
 }
 
 void TerminalDisplay::dropEvent(QDropEvent* event)
@@ -2880,7 +2887,8 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
     dropText = event->mimeData()->text();
   }
 
-  if(event->mimeData()->hasFormat("text/plain")) 
+  if (event->mimeData()->hasFormat("text/plain") ||
+      event->mimeData()->hasFormat("text/uri-list"))
   {
     emit sendStringToEmu(dropText.toLocal8Bit());
   }
