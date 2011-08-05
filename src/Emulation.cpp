@@ -58,7 +58,8 @@ Emulation::Emulation() :
   _codec(0),
   _decoder(0),
   _keyTranslator(0),
-  _usesMouse(false)
+  _usesMouse(false),
+  _imageSizeInitialized(false)
 {
   // create screens with a default size
   _screen[0] = new Screen(40,80);
@@ -347,14 +348,37 @@ void Emulation::setImageSize(int lines, int columns)
   QSize newSize(columns,lines);
 
   if (newSize == screenSize[0] && newSize == screenSize[1])
-    return;    
+  {
+    // If this method is called for the first time, always emit
+    // SIGNAL(imageSizeChange()), even if the new size is the same as the
+    // current size.  See #176902
+    if (!_imageSizeInitialized)
+    {
+      emit imageSizeChanged(lines,columns);
+    }
+  }
+  else
+  {
+    _screen[0]->resizeImage(lines,columns);
+    _screen[1]->resizeImage(lines,columns);
 
-  _screen[0]->resizeImage(lines,columns);
-  _screen[1]->resizeImage(lines,columns);
+    emit imageSizeChanged(lines,columns);
 
-  emit imageSizeChanged(lines,columns);
+    bufferedUpdate();
+  }
 
-  bufferedUpdate();
+  if (!_imageSizeInitialized)
+  {
+    _imageSizeInitialized = true;
+
+    // FIXME
+    // a hard-coded, small delay is introduced to gurarantee Session::run()
+    // does not get triggered by SIGNAL(imageSizeInitialized()) before
+    // Pty::setWindowSize() is triggered by previously emitted
+    // SIGNAL(imageSizeChanged()); See #203185
+    QTimer::singleShot(200, this, SIGNAL(imageSizeInitialized()) );
+  }
+
 }
 
 QSize Emulation::imageSize() const

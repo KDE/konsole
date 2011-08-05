@@ -177,6 +177,7 @@ void Session::openTeletype(int fd)
     connect( _emulation,SIGNAL(useUtf8Request(bool)),_shellProcess,SLOT(setUtf8Mode(bool)) );
     connect( _shellProcess,SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(done(int,QProcess::ExitStatus)) );
     connect( _emulation,SIGNAL(imageSizeChanged(int,int)),this,SLOT(updateWindowSize(int,int)) );
+    connect( _emulation,SIGNAL(imageSizeInitialized()),this,SLOT(run()) );
 }
 
 WId Session::windowId() const

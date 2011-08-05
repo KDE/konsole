@@ -378,6 +378,12 @@ signals:
    */
   void imageSizeChanged(int lineCount , int columnCount);
 
+  /**
+   * Emitted when the setImageSize() is called on this emulation for
+   * the first time.
+   */
+  void imageSizeInitialized();
+
   /** 
    * Emitted when the terminal program requests to change various properties
    * of the terminal display.  
@@ -462,6 +468,7 @@ private:
   bool _usesMouse;
   QTimer _bulkTimer1;
   QTimer _bulkTimer2;
+  bool _imageSizeInitialized;
   
 };
 

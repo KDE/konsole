@@ -442,7 +442,6 @@ Session* Application::createSession(Profile::Ptr profile, const QString& directo
     // a change in terminal size right after the session starts.  some applications such as GNU Screen
     // and Midnight Commander don't like this happening
     view->createView(session);
-    session->run();
 
     return session;
 }
