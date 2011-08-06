@@ -304,4 +304,44 @@ bool Part::openUrl( const KUrl & _url )
     return true;
 }
 
+void Part::setMonitorSilenceEnabled(bool enabled)
+{
+    Q_ASSERT( activeSession() );
+
+    if (enabled)
+    {
+        activeSession()->setMonitorSilence(true);
+        connect(activeSession(), SIGNAL(stateChanged(int)), this, SLOT(sessionStateChanged(int)), Qt::UniqueConnection);
+    }
+    else
+    {
+        activeSession()->setMonitorSilence(false);
+        disconnect(activeSession(), SIGNAL(stateChanged(int)), this, SLOT(sessionStateChanged(int)));
+    }
+}
+
+void Part::setMonitorActivityEnabled(bool enabled)
+{
+    Q_ASSERT( activeSession() );
+
+    if (enabled)
+    {
+        activeSession()->setMonitorActivity(true);
+        connect(activeSession(), SIGNAL(stateChanged(int)), this, SLOT(sessionStateChanged(int)), Qt::UniqueConnection);
+    }
+    else
+    {
+        activeSession()->setMonitorActivity(false);
+        disconnect(activeSession(), SIGNAL(stateChanged(int)), this, SLOT(sessionStateChanged(int)));
+    }
+}
+
+void Part::sessionStateChanged(int state)
+{
+    if (state == NOTIFYSILENCE)
+        emit silenceDetected();
+    else if (state == NOTIFYACTIVITY)
+        emit activityDetected();
+}
+
 #include "Part.moc"
