@@ -110,6 +110,22 @@ public slots:
      */
     void openTeletype(int ptyMasterFd);
 
+    /**
+     * Toggles monitoring for silence in the active session. If silence is detected,
+     * the silenceDetected() signal is emitted.
+     *
+     * @param enabled Whether to enable or disable monitoring for silence.
+     * */
+    void setMonitorSilenceEnabled(bool enabled);
+
+     /**
+     * Toggles monitoring for activity in the active session. If activity is detected,
+     * the activityDetected() signal is emitted.
+     *
+     * @param enabled Whether to enable or disable monitoring for activity.
+     * */
+    void setMonitorActivityEnabled(bool enabled);
+
 signals:
     /**
      * Emitted when the key sequence for a shortcut, which is also a valid terminal key sequence,
@@ -130,6 +146,18 @@ signals:
      */
     void overrideShortcut(QKeyEvent* event, bool& override);
 
+    /**
+     * Emitted when silence has been detected in the active session. Monitoring
+     * for silence has to be enabled first using setMonitorSilenceEnabled().
+     */
+    void silenceDetected();
+
+    /**
+     * Emitted when activity has been detected in the active session. Monitoring
+     * for activity has to be enabled first using setMonitorActivityEnabled().
+     */
+    void activityDetected();
+
 protected:
     /** Reimplemented from KParts::PartBase. */
     virtual bool openFile();
@@ -145,6 +173,7 @@ private slots:
     void terminalExited();
     void newTab();
     void overrideTerminalShortcut(QKeyEvent*,bool& override);
+    void sessionStateChanged(int state);
 
 private:
     Session* activeSession() const;
