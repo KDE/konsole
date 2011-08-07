@@ -996,6 +996,77 @@ For more information, please visit
 
 </chapter>
 
+<chapter id="faqtips">
+<title>FAQs, Tips and Tricks</title>
+
+<sect1 id="didyouknow">
+<title>Did You Know?</title>
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem><para>
+Pressing Ctrl while selecting text will cause lines breaks to be converted to spaces when pasted.
+</para></listitem>
+
+<listitem><para>
+Pressing the Ctrl+Alt keys while selecting text will select columns.
+</para></listitem>
+
+<listitem><para>
+When a program evaluates either mouse button, pressing the Shift key will allow the popup menu to appear.
+</para></listitem>
+
+<listitem><para>
+The Ctrl+Shift+F10 shortcut will activate the menu.
+</para></listitem>
+
+<listitem><para>
+The Shift+Insert keys will insert the clipboard.
+</para></listitem>
+
+<listitem><para>
+Double-clicking will select a whole word. Continuing to hold the mouse button and moving the mouse will extend the selection.
+</para></listitem>
+
+<listitem><para>
+Triple-clicking will select a whole line. Continuing to hold the mouse button and moving the mouse will extend the selection.
+</para></listitem>
+
+</itemizedlist>
+</para>
+
+</sect1>
+
+<sect1 id="faqs">
+<title>FAQs</title>
+<itemizedlist>
+
+<listitem><para>
+By default when started from a terminal, Konsole will run in the background.  Use --nofork to force Konsole to run in the foreground.
+</para>
+
+<para>
+This is needed for some scripts and commands to work as expected:
+    <itemizedlist mark='opencircle'>
+
+    <listitem><para>
+<command>konsole --nofork -e sleep 3 ; echo 1</command>
+    </para></listitem>
+
+    <listitem><para>
+<command>kdesu -u kdeuser konsole --nofork</command>
+    </para></listitem>
+
+    </itemizedlist>
+
+</para></listitem>
+
+</itemizedlist>
+
+</sect1>
+
+</chapter>
+
 <chapter id="credits">
 <title>Credits and Copyright</title>
 
