@@ -997,7 +997,7 @@ For more information, please visit
 </chapter>
 
 <chapter id="faqtips">
-<title>FAQs, Tips and Tricks</title>
+<title>Did You Know?, Common Issues and More</title>
 
 <sect1 id="didyouknow">
 <title>Did You Know?</title>
@@ -1037,8 +1037,8 @@ Triple-clicking will select a whole line. Continuing to hold the mouse button an
 
 </sect1>
 
-<sect1 id="faqs">
-<title>FAQs</title>
+<sect1 id="commonissues">
+<title>Common Issues</title>
 <itemizedlist>
 
 <listitem><para>
@@ -1059,6 +1059,13 @@ This is needed for some scripts and commands to work as expected:
 
     </itemizedlist>
 
+</para></listitem>
+
+<listitem><para>
+In KDE3, each tab had its own process ID.  However, in KDE4, all the tabs use the same process ID.  This has the side-effect that if one tab's process has issues, all the other tabs may expericence issues as well.
+</para>
+<para>
+This is most noticeable when a command that connects to an external device or system (ssh, nfs) has issues.
 </para></listitem>
 
 </itemizedlist>
