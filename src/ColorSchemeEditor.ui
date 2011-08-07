@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0" >
  <class>ColorSchemeEditor</class>
  <widget class="QWidget" name="ColorSchemeEditor" >
@@ -6,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>364</width>
-    <height>475</height>
+    <height>502</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" >
@@ -75,6 +76,31 @@
     </widget>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="_2" >
+     <item>
+      <widget class="QLabel" name="label_3" >
+       <property name="text" >
+        <string>Wallpaper:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KLineEdit" name="wallpaperPath" >
+       <property name="toolTip" >
+        <string>The wallpaper picture file path</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="wallpaperSelectButton" >
+       <property name="text" >
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <spacer>
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
@@ -97,6 +123,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
   <customwidget>
    <class>Konsole::WarningBox</class>
    <extends>QWidget</extends>

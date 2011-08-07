@@ -29,14 +29,45 @@
 #include <QtCore/QIODevice>
 #include <QtCore/QSet>
 
+// KDE
+#include <KSharedPtr>
+
 // Konsole
 #include "CharacterColor.h"
 
 class QIODevice;
 class KConfig;
+class QPixmap;
+class QPainter;
 
 namespace Konsole
 {
+
+/**
+ * This class holds the wallpaper pixmap associated with a color scheme.
+ * The wallpaper object is shared between multiple TerminalDisplay.
+ */
+class ColorSchemeWallpaper : public QSharedData
+{
+public:
+    typedef KSharedPtr<ColorSchemeWallpaper> Ptr;
+
+    ColorSchemeWallpaper(const QString& path);
+    ~ColorSchemeWallpaper();
+
+    void load();
+
+    /** Returns true if wallpaper available and drawn */
+    bool draw(QPainter& painter, const QRect& rect);
+
+    bool isNull() const;
+
+    QString path() const;
+
+private:
+    QString _path;
+    QPixmap* _picture;
+};
 
 /**
  * Represents a color scheme for a terminal display.  
@@ -128,6 +159,10 @@ public:
      */
     qreal opacity() const;
 
+    void setWallpaper(const QString& path);
+
+    ColorSchemeWallpaper::Ptr wallpaper() const;
+
     /** 
      * Enables randomization of the background color.  This will cause
      * the palette returned by getColorTable() and colorEntry() to
@@ -180,12 +215,13 @@ private:
     ColorEntry* _table; // pointer to custom color table or 0 if the default
                         // color scheme is being used
 
-
     static const quint16 MAX_HUE = 340;
 
     RandomizationRange* _randomTable;   // pointer to randomization table or 0
                                         // if no colors in the color scheme support
                                         // randomization
+
+    ColorSchemeWallpaper::Ptr _wallpaper;
 
     static const char* const colorNames[TABLE_COLORS];
     static const char* const translatedColorNames[TABLE_COLORS];

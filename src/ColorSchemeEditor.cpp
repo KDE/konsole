@@ -26,11 +26,14 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QItemDelegate>
 #include <QtGui/QItemEditorCreator>
+#include <QFileInfo>
 
 // KDE
 #include <KColorDialog>
 #include <KDebug>
 #include <KWindowSystem>
+#include <KFileDialog>
+#include <KUrlCompletion>
 
 // Konsole
 #include "ui_ColorSchemeEditor.h"
@@ -134,6 +137,26 @@ void ColorSchemeEditor::editColorItem( QTableWidgetItem* item )
 
     }
 }
+void ColorSchemeEditor::selectWallpaper()
+{
+    const KUrl url = KFileDialog::getImageOpenUrl( _ui->wallpaperPath->text(),
+                                                   this,
+                                                   i18n("Select wallpaper image file"));
+
+    if ( !url.isEmpty() )
+        _ui->wallpaperPath->setText(url.path());
+}
+void ColorSchemeEditor::wallpaperPathChanged(const QString& path)
+{
+    if (path.isEmpty())
+        _colors->setWallpaper(path);
+    else {
+        QFileInfo i(path);
+
+        if (i.exists() && i.isFile() && i.isReadable())
+            _colors->setWallpaper(path);
+    }
+}
 void ColorSchemeEditor::setDescription(const QString& text)
 {
     if ( _colors )
@@ -169,6 +192,19 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme)
 
     // randomized background color checkbox
     _ui->randomizedBackgroundCheck->setChecked( scheme->randomizedBackgroundColor() );
+
+    // wallpaper stuff
+    KUrlCompletion* fileCompletion = new KUrlCompletion(KUrlCompletion::FileCompletion);
+    fileCompletion->setParent(this);
+    _ui->wallpaperPath->setCompletionObject( fileCompletion );
+    _ui->wallpaperPath->setClearButtonShown(true);
+    _ui->wallpaperSelectButton->setIcon( KIcon("image-x-generic") );
+    _ui->wallpaperPath->setText( scheme->wallpaper()->path() );
+
+    connect( _ui->wallpaperSelectButton, SIGNAL(clicked()),
+             this, SLOT(selectWallpaper()));
+    connect( _ui->wallpaperPath, SIGNAL(textChanged(const QString&)),
+             this, SLOT(wallpaperPathChanged(const QString&)));
 }
 void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
 {

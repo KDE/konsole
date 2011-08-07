@@ -852,6 +852,7 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
     colorScheme->getColorTable(table , view->randomSeed() );
     view->setColorTable(table);
     view->setOpacity(colorScheme->opacity());
+    view->setWallpaper(colorScheme->wallpaper());
   
     // load font 
     view->setAntialias(info->property<bool>(Profile::AntiAliasFonts));

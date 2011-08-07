@@ -31,6 +31,7 @@
 #include "Character.h"
 #include "konsole_export.h"
 #include "ScreenWindow.h"
+#include "ColorScheme.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -89,6 +90,9 @@ public:
 
     /** Sets the opacity of the terminal display. */
     void setOpacity(qreal opacity);
+
+    /** Sets the background picture */
+    void setWallpaper(ColorSchemeWallpaper::Ptr p);
 
     /** 
      * This enum describes the location where the scroll bar is positioned in the display widget.
@@ -790,6 +794,8 @@ private:
     QSize _size;
     
     QRgb _blendColor;
+
+    ColorSchemeWallpaper::Ptr _wallpaper;
 
     // list of filters currently applied to the display.  used for links and
     // search highlight

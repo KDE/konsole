@@ -578,6 +578,11 @@ void TerminalDisplay::setOpacity(qreal opacity)
     _blendColor = color.rgba();
 }
 
+void TerminalDisplay::setWallpaper(ColorSchemeWallpaper::Ptr p)
+{
+  _wallpaper = p;
+}
+
 void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const QColor& backgroundColor, bool useOpacitySetting )
 {
         // the area of the widget showing the contents of the terminal display is drawn
@@ -594,7 +599,11 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
         QRegion contentsRegion = QRegion(rect).subtracted(scrollBarArea);
         QRect contentsRect = contentsRegion.boundingRect();
 
-        if ( HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff && useOpacitySetting ) 
+	if ( useOpacitySetting && !_wallpaper->isNull() &&
+	     _wallpaper->draw(painter, contentsRect) )
+	{
+	}
+        else if ( HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff && useOpacitySetting ) 
         {
             QColor color(backgroundColor);
             color.setAlpha(qAlpha(_blendColor));
@@ -939,9 +948,12 @@ void TerminalDisplay::updateImage()
   // optimization - scroll the existing image where possible and 
   // avoid expensive text drawing for parts of the image that 
   // can simply be moved up or down
-  scrollImage( _screenWindow->scrollCount() ,
-               _screenWindow->scrollRegion() );
-  _screenWindow->resetScrollCount();
+  if (_wallpaper->isNull())
+  {
+      scrollImage( _screenWindow->scrollCount() ,
+		   _screenWindow->scrollRegion() );
+      _screenWindow->resetScrollCount();
+  }
 
   if (!_image) {
      // Create _image.
@@ -2778,6 +2790,8 @@ void TerminalDisplay::calcGeometry()
 
 void TerminalDisplay::makeImage()
 {
+  _wallpaper->load();
+
   calcGeometry();
 
   // confirm that array will be of non-zero size, since the painting code 

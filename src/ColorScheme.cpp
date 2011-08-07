@@ -26,6 +26,7 @@
 #include <QtGui/QBrush>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
+#include <QPainter>
 
 // KDE
 #include <KColorScheme>
@@ -117,11 +118,14 @@ ColorScheme::ColorScheme()
     _table = 0;
     _randomTable = 0;
     _opacity = 1.0;
+    setWallpaper(QString());
 }
+
 ColorScheme::ColorScheme(const ColorScheme& other)
       : _opacity(other._opacity)
        ,_table(0)
        ,_randomTable(0)
+       ,_wallpaper(other._wallpaper)
 {
     setName(other.name());
     setDescription(other.description());
@@ -270,6 +274,7 @@ void ColorScheme::read(KConfig& config)
 
     _description = i18n(description.toUtf8());
     _opacity = configGroup.readEntry("Opacity",qreal(1.0));
+    setWallpaper(configGroup.readEntry("Wallpaper", QString()));
 
     for (int i=0 ; i < TABLE_COLORS ; i++)
     {
@@ -282,6 +287,7 @@ void ColorScheme::write(KConfig& config) const
 
     configGroup.writeEntry("Description",_description);
     configGroup.writeEntry("Opacity",_opacity);
+    configGroup.writeEntry("Wallpaper", _wallpaper->path());
     
     for (int i=0 ; i < TABLE_COLORS ; i++)
     {
@@ -350,6 +356,60 @@ void ColorScheme::writeColorEntry(KConfig& config , const QString& colorName, co
     }
 }
 
+void ColorScheme::setWallpaper(const QString& path)
+{
+    _wallpaper.attach(new ColorSchemeWallpaper(path));
+}
+
+ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const
+{
+    return _wallpaper;
+}
+
+ColorSchemeWallpaper::ColorSchemeWallpaper(const QString& path)
+    : _path(path),
+      _picture(0)
+{
+    //    kDebug(1211) << "wallpaper created" << _path << "\n";
+}
+
+ColorSchemeWallpaper::~ColorSchemeWallpaper()
+{
+    //    kDebug(1211) << "wallpaper deleted" << _path << "\n";
+    delete _picture;
+}
+
+void ColorSchemeWallpaper::load()
+{
+    if (_path.isEmpty())
+        return;
+
+    // Create and load original pixmap
+    if (!_picture)
+        _picture = new QPixmap();
+
+    if (_picture->isNull())
+        _picture->load(_path);
+}
+
+bool ColorSchemeWallpaper::isNull() const
+{
+    return _path.isEmpty();
+}
+
+bool ColorSchemeWallpaper::draw(QPainter& painter, const QRect& rect)
+{
+    if (!_picture || _picture->isNull())
+        return false;
+
+    painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
+    return true;
+}
+
+QString ColorSchemeWallpaper::path() const
+{
+    return _path;
+}
 
 // 
 // Work In Progress - A color scheme for use on KDE setups for users
