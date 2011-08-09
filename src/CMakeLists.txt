@@ -82,7 +82,6 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ProcessInfo.cpp
         Profile.cpp
         ProfileList.cpp
-        ProfileListWidget.cpp
         Pty.cpp
         RenameTabsDialog.cpp
         Screen.cpp

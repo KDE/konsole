@@ -55,7 +55,6 @@
 #include "ViewProperties.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
-#include "ProfileListWidget.h"
 
 using namespace Konsole;
 
