@@ -391,7 +391,7 @@ void EditProfileDialog::saveGeometryOnExit(bool save)
 }
 void EditProfileDialog::showSizeWidget(bool show)
 {
-  _tempProfile->setProperty(Profile::ShowSizeWidget,show);
+    updateTempProfileProperty(Profile::ShowSizeWidget,show);
 }
 void EditProfileDialog::tabTitleFormatChanged(const QString& format)
 {
