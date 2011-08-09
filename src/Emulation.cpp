@@ -293,11 +293,11 @@ void Emulation::receiveData(const char* text, int length)
   }
 }*/
 
-void Emulation::writeToStream( TerminalCharacterDecoder* _decoder , 
+void Emulation::writeToStream( TerminalCharacterDecoder* decoder , 
                                int startLine ,
                                int endLine) 
 {
-  _currentScreen->writeLinesToStream(_decoder,startLine,endLine);
+  _currentScreen->writeLinesToStream(decoder,startLine,endLine);
 }
 
 int Emulation::lineCount() const
