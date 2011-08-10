@@ -23,8 +23,6 @@
 // std
 #include <iostream>
 
-#include "kdebug.h"
-
 // Qt
 #include <QHashIterator>
 #include <QFileInfo>
