@@ -643,7 +643,6 @@ private:
   QString        _iconText; // as set by: echo -en '\033]1;IconText\007
   bool           _addToUtmp;
   bool           _flowControl;
-  bool           _fullScripting;
 
   QString        _program;
   QStringList    _arguments;
