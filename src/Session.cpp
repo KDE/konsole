@@ -352,20 +352,13 @@ QString Session::checkProgram(const QString& program) const
   if (exec.isEmpty())
       return QString();
 
-  // if 'exec' is not specified, fall back to default shell.  if that 
-  // is not set then fall back to /bin/sh
-  if ( exec.isEmpty() )
-      exec = qgetenv("SHELL");
-  if ( exec.isEmpty() )
-        exec = "/bin/sh";
-
   exec = KRun::binaryName(exec, false);
   exec = KShell::tildeExpand(exec);
   QString pexec = KGlobal::dirs()->findExe(exec);
   if ( pexec.isEmpty() ) 
   {
       kError() << i18n("Could not find binary: ") << exec;
-    return QString();
+      return QString();
   }
 
   return exec;
@@ -412,6 +405,8 @@ void Session::run()
   }
 
   const int CHOICE_COUNT = 3;
+  // if '_program' is empty , fall back to default shell. If that is not set
+  // then fall back to /bin/sh
   QString programs[CHOICE_COUNT] = {_program,qgetenv("SHELL"),"/bin/sh"};
   QString exec;
   int choice = 0;
