@@ -181,7 +181,7 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
         return Profile::Ptr();
     }
 
-    Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile()));
+    Profile::Ptr newProfile = Profile::Ptr(new Profile(fallbackProfile()));
     newProfile->setProperty(Profile::Path,path);
 
     QString parentProfilePath;
