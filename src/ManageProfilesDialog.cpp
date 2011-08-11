@@ -122,7 +122,25 @@ void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
         QKeySequence sequence = QKeySequence::fromString(item->text());
         SessionManager::instance()->setShortcut(item->data(ShortcutRole).value<Profile::Ptr>(),
                                                 sequence); 
-   } 
+   }
+   else if ( item->column() == ProfileNameColumn )
+   {
+        QString newName = item->text();
+        QHash<Profile::Property,QVariant> properties;
+        properties.insert(Profile::Name, newName);
+
+        Profile::Ptr profile = item->data(ProfileKeyRole).value<Profile::Ptr>();
+
+        // TODO: find a more elegant solution for the recursion problem.
+        // disconnect & connect is necessary to prevent this SLOT from being
+        // triggered recursively after calling SessionMananger::changeProfile().
+        disconnect( _sessionModel , SIGNAL(itemChanged(QStandardItem*)) ,
+                    this , SLOT(itemDataChanged(QStandardItem*)) );
+        SessionManager::instance()->changeProfile(profile, properties);
+        connect( _sessionModel , SIGNAL(itemChanged(QStandardItem*)) ,
+                    this , SLOT(itemDataChanged(QStandardItem*)) );
+   }
+
 }
 
 void ManageProfilesDialog::setMenuOrder(void)
