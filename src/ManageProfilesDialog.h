@@ -102,6 +102,7 @@ private slots:
 private:
     Profile::Ptr currentProfile() const; 
     QList<Profile::Ptr> selectedProfiles() const; 
+    bool isProfileDeletable(Profile::Ptr profile) const;
 
     // updates the font of the items to match
     // their default / non-default profile status

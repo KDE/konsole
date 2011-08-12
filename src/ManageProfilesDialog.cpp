@@ -26,6 +26,7 @@
 #include <QtGui/QItemDelegate>
 #include <QtGui/QItemEditorCreator>
 #include <QtCore/QMetaEnum>
+#include <QtCore/QFileInfo>
 #include <QtGui/QScrollBar>
 #include <QtGui/QShowEvent>
 #include <QtGui/QStandardItem>
@@ -272,12 +273,14 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
     const int selectedRows = _ui->sessionTable->selectionModel()->selectedRows().count();
     const SessionManager* manager = SessionManager::instance();
     const bool isNotDefault = (selectedRows > 0) && currentProfile() != manager->defaultProfile();
+    const bool isDeletable = (selectedRows > 1) ||
+                             (selectedRows == 1 && isProfileDeletable(currentProfile()));
     const int rowIndex = _ui->sessionTable->currentIndex().row();
 
     _ui->newSessionButton->setEnabled(selectedRows < 2);
     _ui->editSessionButton->setEnabled(selectedRows > 0);
     // do not allow the default session type to be removed
-    _ui->deleteSessionButton->setEnabled(isNotDefault);
+    _ui->deleteSessionButton->setEnabled(isDeletable && isNotDefault);
     _ui->setAsDefaultButton->setEnabled(isNotDefault && (selectedRows < 2)); 
 
     // TODO handle multiple moves
@@ -393,6 +396,27 @@ Profile::Ptr ManageProfilesDialog::currentProfile() const
 
     return  selection->
             selectedIndexes().first().data(ProfileKeyRole).value<Profile::Ptr>();
+}
+bool ManageProfilesDialog::isProfileDeletable(Profile::Ptr profile) const
+{
+    if ( profile )
+    {
+        QFileInfo fileInfo(profile->path());
+
+        if ( fileInfo.exists() )
+        {
+            QFileInfo dirInfo(fileInfo.path());
+            return dirInfo.isWritable();
+        }
+        else
+        {
+            return true;
+        }
+    }
+    else
+    {
+        return true;
+    }
 }
 void ManageProfilesDialog::updateFavoriteStatus(Profile::Ptr profile, bool favorite)
 {
