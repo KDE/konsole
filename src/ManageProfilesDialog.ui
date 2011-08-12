@@ -22,9 +22,6 @@
      <property name="text">
       <string>&amp;New Profile...</string>
      </property>
-     <property name="shortcut">
-      <string>Alt+N</string>
-     </property>
     </widget>
    </item>
    <item row="1" column="1">
@@ -37,9 +34,6 @@
      </property>
      <property name="text">
       <string>&amp;Edit Profile...</string>
-     </property>
-     <property name="shortcut">
-      <string>Alt+E</string>
      </property>
     </widget>
    </item>
@@ -54,9 +48,6 @@
      <property name="text">
       <string>&amp;Delete Profile</string>
      </property>
-     <property name="shortcut">
-      <string>Alt+D</string>
-     </property>
     </widget>
    </item>
    <item row="3" column="1">
@@ -69,9 +60,6 @@
      </property>
      <property name="text">
       <string>&amp;Set as Default</string>
-     </property>
-     <property name="shortcut">
-      <string>Alt+S</string>
      </property>
     </widget>
    </item>
