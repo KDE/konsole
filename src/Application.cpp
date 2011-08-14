@@ -371,20 +371,20 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
 
 void Application::startBackgroundMode(MainWindow* window)
 {
-        if ( _backgroundInstance )
-        {
-            return;
-        }
+    if ( _backgroundInstance )
+    {
+        return;
+    }
 
-        KAction* action = new KAction(window);
-        KShortcut shortcut = action->shortcut();
-        action->setObjectName( QLatin1String("Konsole Background Mode" ));
-        //TODO - Customizable key sequence for this
-        action->setGlobalShortcut( KShortcut(QKeySequence(Qt::Key_F12)) );
+    KAction* action = new KAction(window);
+    KShortcut shortcut = action->shortcut();
+    action->setObjectName( QLatin1String("Konsole Background Mode" ));
+    //TODO - Customizable key sequence for this
+    action->setGlobalShortcut( KShortcut(QKeySequence(Qt::Key_F12)) );
 
-        _backgroundInstance = window;
-        
-        connect( action , SIGNAL(triggered()) , this , SLOT(toggleBackgroundInstance()) );
+    _backgroundInstance = window;
+
+    connect( action , SIGNAL(triggered()) , this , SLOT(toggleBackgroundInstance()) );
 }
 
 void Application::toggleBackgroundInstance()
