@@ -52,6 +52,9 @@
 #include <KGlobalSettings>
 #include <KShortcut>
 #include <KIO/NetAccess>
+#include <konq_operations.h>
+#include <KFileItem>
+#include <klocalizedstring.h>
 
 // Konsole
 //#include <config-apps.h>
@@ -326,6 +329,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_blendColor(qRgba(0,0,0,0xff))
 ,_filterChain(new TerminalImageFilterChain())
 ,_cursorShape(BlockCursor)
+,_sessionController(0)
 {
   // terminal applications are not designed with Right-To-Left in mind,
   // so the layout is forced to Left-To-Right
@@ -2895,6 +2899,28 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
         if ( i != urls.count()-1 ) 
             dropText += ' ';
     }
+
+    // If our target is local we will open a popup - otherwise the fallback kicks
+    // in and the URLs will simply be pasted as text.
+    if(_sessionController && _sessionController->url().isLocalFile())
+    {
+      // A standard popup with Copy, Move and Link as options -
+      // plus an additional Paste option.
+
+      QAction* pasteAction = new QAction(i18n("&Paste as text"), this);
+      pasteAction->setData(dropText);
+      connect(pasteAction, SIGNAL(triggered()), this, SLOT(dropMenuPasteTriggered()));
+
+      QList<QAction*> additionalActions;
+      additionalActions.append(pasteAction);
+
+      KUrl target(_sessionController->currentDir());
+
+      KonqOperations::doDrop(KFileItem(), target, event, this, additionalActions);
+
+      return;
+    }
+
   }
   else 
   {
@@ -2905,6 +2931,18 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
       event->mimeData()->hasFormat("text/uri-list"))
   {
     emit sendStringToEmu(dropText.toLocal8Bit());
+  }
+}
+
+void TerminalDisplay::dropMenuPasteTriggered()
+{
+  if(sender())
+  {
+    const QAction* action = dynamic_cast<const QAction*>(sender());
+    if(action)
+    {
+      emit sendStringToEmu(action->data().toString().toLocal8Bit());
+    }
   }
 }
 
@@ -2968,6 +3006,11 @@ void TerminalDisplay::setLineSpacing(uint i)
 {
   _lineSpacing = i;
   setVTFont(font()); // Trigger an update.
+}
+
+void TerminalDisplay::setSessionController(SessionController* controller)
+{
+  _sessionController = controller;
 }
 
 AutoScrollHandler::AutoScrollHandler(QWidget* parent)

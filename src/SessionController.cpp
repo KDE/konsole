@@ -113,6 +113,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     sessionTitleChanged();
 
     view->installEventFilter(this);
+    view->setSessionController(this);
 
     // listen for session resize requests
     connect( _session , SIGNAL(resizeRequest(QSize)) , this ,

@@ -112,6 +112,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ${QT_QTXML_LIBRARY}
         ${KDE4_KNOTIFYCONFIG_LIBRARY}
         ${X11_LIBRARIES}
+        konq
     )
 
     # XRender library for true transparency support

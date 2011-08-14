@@ -32,6 +32,7 @@
 #include "konsole_export.h"
 #include "ScreenWindow.h"
 #include "ColorScheme.h"
+#include "SessionController.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -199,6 +200,8 @@ public:
 
     void setLineSpacing(uint);
     uint lineSpacing() const;
+
+    void setSessionController(SessionController* controller);
 
     void emitSelection(bool useXselection,bool appendReturn);
 
@@ -519,6 +522,11 @@ public slots:
      */
     void setForegroundColor(const QColor& color);
 
+    /**
+     * Called from the drag'n'drop popup. Causes the dropped URLs to be pasted as text.
+     */
+    void dropMenuPasteTriggered();
+
 signals:
 
     /**
@@ -822,6 +830,8 @@ private:
     static const int TEXT_BLINK_DELAY = 500;
     static const int DEFAULT_LEFT_MARGIN = 1;
     static const int DEFAULT_TOP_MARGIN = 1;
+
+    SessionController* _sessionController;
 
 public:
     static void setTransparencyEnabled(bool enable)
