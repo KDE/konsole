@@ -435,7 +435,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
         Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
         TerminalDisplay* display = createTerminalDisplay(session);
         const Profile::Ptr info = SessionManager::instance()->sessionProfile(session);
-        applyProfile(display, info, false);
+        applyProfileToView(display, info);
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session;
@@ -558,9 +558,13 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
     disconnect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
     connect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
 
-     bool isFirst = _sessionMap.isEmpty();
      TerminalDisplay* display = createTerminalDisplay(session);
-     applyProfile(display,SessionManager::instance()->sessionProfile(session),isFirst);
+     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
+     applyProfileToView(display, profile);
+
+     bool isFirst = _sessionMap.isEmpty();
+     if ( isFirst)
+         applyProfileToContainer(container, profile);
      
      // set initial size
      display->setSize(80,40);
@@ -572,7 +576,6 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
      session->addView(display);
 
      // tell the session whether it has a light or dark background
-     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
      session->setDarkBackground( colorSchemeForProfile(profile)->hasDarkBackground() );
 
      if ( container == _viewSplitter->activeContainer() ) 
@@ -797,8 +800,7 @@ const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr info) c
     return colorScheme;
 }
 
-void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info, 
-                               bool applyContainerSettings) 
+void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr info)
 {
     Q_ASSERT( info );
     
@@ -810,42 +812,6 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
     emit setSaveGeometryOnExitRequest( info->property<bool>(Profile::SaveGeometryOnExit) );
 
     emit updateWindowIcon();
-
-    // tab bar visibility
-    if (applyContainerSettings)
-    {
-        ViewContainer* container = _viewSplitter->activeContainer();
-        int tabBarMode = info->property<int>(Profile::TabBarMode);
-        int tabBarPosition = info->property<int>(Profile::TabBarPosition);
-        bool showNewCloseButtons = info->property<bool>(Profile::ShowNewAndCloseTabButtons);
-
-        if ( tabBarMode == Profile::AlwaysHideTabBar )
-            container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
-        else if ( tabBarMode == Profile::AlwaysShowTabBar )
-            container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
-        else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
-            container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
-
-        ViewContainer::NavigationPosition position = container->navigationPosition();
-
-        if ( tabBarPosition == Profile::TabBarTop )
-            position = ViewContainer::NavigationPositionTop;
-        else if ( tabBarPosition == Profile::TabBarBottom )
-            position = ViewContainer::NavigationPositionBottom; 
-
-        if ( container->supportedNavigationPositions().contains(position) )
-            container->setNavigationPosition(position);
-       
-        if (showNewCloseButtons)
-        {
-            container->setFeatures(container->features() 
-                               | ViewContainer::QuickNewView | ViewContainer::QuickCloseView);
-            container->setNewViewMenu(createNewViewMenu());
-        }
-        else
-            container->setFeatures(container->features() 
-                            & ~ViewContainer::QuickNewView & ~ViewContainer::QuickCloseView);
-    }
 
     // load colour scheme
     ColorEntry table[TABLE_COLORS];
@@ -908,12 +874,47 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
     view->setWordCharacters( info->property<QString>(Profile::WordCharacters) );
 }
 
+void ViewManager::applyProfileToContainer(ViewContainer* container , const Profile::Ptr info)
+{
+    int tabBarMode = info->property<int>(Profile::TabBarMode);
+    int tabBarPosition = info->property<int>(Profile::TabBarPosition);
+    bool showNewCloseButtons = info->property<bool>(Profile::ShowNewAndCloseTabButtons);
+
+    if ( tabBarMode == Profile::AlwaysHideTabBar )
+        container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
+    else if ( tabBarMode == Profile::AlwaysShowTabBar )
+        container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
+    else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
+        container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
+
+    ViewContainer::NavigationPosition position = container->navigationPosition();
+    if ( tabBarPosition == Profile::TabBarTop )
+        position = ViewContainer::NavigationPositionTop;
+    else if ( tabBarPosition == Profile::TabBarBottom )
+        position = ViewContainer::NavigationPositionBottom;
+
+    if ( container->supportedNavigationPositions().contains(position) )
+        container->setNavigationPosition(position);
+
+    if (showNewCloseButtons)
+    {
+        container->setFeatures(container->features()
+                | ViewContainer::QuickNewView | ViewContainer::QuickCloseView);
+        container->setNewViewMenu(createNewViewMenu());
+    }
+    else
+    {
+        container->setFeatures(container->features()
+                & ~ViewContainer::QuickNewView & ~ViewContainer::QuickCloseView);
+    }
+}
+
 void ViewManager::updateViewsForSession(Session* session)
 {
     QListIterator<TerminalDisplay*> iter(_sessionMap.keys(session));
     while ( iter.hasNext() )
     {
-        applyProfile(iter.next(),SessionManager::instance()->sessionProfile(session),false);
+        applyProfileToView(iter.next(),SessionManager::instance()->sessionProfile(session));
     }
 }
 
@@ -930,8 +931,15 @@ void ViewManager::profileChanged(Profile::Ptr profile)
              iter.value() != 0 && 
              SessionManager::instance()->sessionProfile(iter.value()) == profile ) 
         {
-            applyProfile(iter.key(),profile,true);
+            applyProfileToView(iter.key(),profile);
         }
+    }
+
+    QListIterator<ViewContainer*> containerIter(_viewSplitter->containers());
+    while ( containerIter.hasNext() )
+    {
+        ViewContainer* container = containerIter.next();
+        applyProfileToContainer(container, profile);
     }
 }
 

@@ -88,11 +88,15 @@ public:
 
     /**
      * Applies the view-specific settings associated with specified @p profile
-     * to the terminal display @p view.  If @p applyContainerSettings is true then
-     * tab bar settings in the profile will also be applied
+     * to the terminal display @p view.
      */
-    void applyProfile(TerminalDisplay* view , const Profile::Ptr profile
-                    , bool applyContainerSettings);
+    void applyProfileToView(TerminalDisplay* view , const Profile::Ptr profile);
+
+    /**
+     * Applies the container-specific settings associated with specified @p
+     * profile to the view container @p container.
+     */
+    void applyProfileToContainer(ViewContainer* container , const Profile::Ptr profile);
 
     /** 
      * Return the main widget for the view manager which
