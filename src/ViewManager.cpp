@@ -443,7 +443,10 @@ void ViewManager::splitView(Qt::Orientation orientation)
         // create a container using settings from the first 
         // session in the previous container
         if ( !container )
+        {
             container = createContainer(info);
+            applyProfileToContainer(container, info);
+        }
 
         container->addView(display,properties);
         session->addView( display );
