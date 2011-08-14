@@ -26,7 +26,6 @@
 
 class QCheckBox;
 class QLabel;
-class QProgressBar;
 class QTimer;
 class KLineEdit;
 
@@ -135,7 +134,6 @@ private:
     bool _foundMatch;
 
     KLineEdit* _searchEdit;
-    QProgressBar* _progress;
     QAction* _caseSensitive;
     QAction* _regExpression;
     QAction* _highlightMatches;
