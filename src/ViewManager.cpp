@@ -445,13 +445,6 @@ void ViewManager::splitView(Qt::Orientation orientation)
         if ( !container )
             container = createContainer(info);
 
-        int tabBarMode = info->property<int>(Profile::TabBarMode);
-        if ( tabBarMode == Profile::AlwaysHideTabBar )
-            container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
-        else if ( tabBarMode == Profile::AlwaysShowTabBar )
-            container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
-        else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
-            container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
         container->addView(display,properties);
         session->addView( display );
     }
@@ -660,6 +653,14 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
         default:
             container = new StackedViewContainer(_viewSplitter);
     }
+
+    int tabBarMode = info->property<int>(Profile::TabBarMode);
+    if ( tabBarMode == Profile::AlwaysHideTabBar )
+        container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
+    else if ( tabBarMode == Profile::AlwaysShowTabBar )
+        container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
+    else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
+        container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
 
     // connect signals and slots
     connect( container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
