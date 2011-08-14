@@ -1287,17 +1287,20 @@ int Screen::copyLineToStream(int line ,
         currentLineProperties |= lineProperties[screenLine]; 
     }
 
-    // add new line character at end
-    const bool omitLineBreak = (currentLineProperties & LINE_WRAPPED) ||
-        !preserveLineBreaks;
-
     if ( appendNewLine && (count+1 < MAX_CHARS) )
     {
-        // When users ask to omit the linebreaks, they usually mean: `treat
-        // LINEBREAK as SPACE , thus joining multiple lines into single line in
-        // the same way as 'J' does in VIM.`
-        characterBuffer[count] = omitLineBreak ? Character(' ') : Character('\n');
-        count++;
+        if ( currentLineProperties & LINE_WRAPPED )
+        {
+            // do nothing extra when this line is wrapped.
+        }
+        else
+        {
+            // When users ask not to preserve the linebreaks, they usually mean:
+            // `treat LINEBREAK as SPACE, thus joining multiple lines into
+            // single line in the same way as 'J' does in VIM.`
+            characterBuffer[count] = preserveLineBreaks ? Character('\n') : Character(' ') ;
+            count++;
+        }
     }
 
     //decode line and write to text stream    
