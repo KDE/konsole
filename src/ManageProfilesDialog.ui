@@ -20,7 +20,7 @@
       <string>Create a new profile based upon the selected profile</string>
      </property>
      <property name="text">
-      <string>New Profile...</string>
+      <string>&amp;New Profile...</string>
      </property>
     </widget>
    </item>
@@ -33,7 +33,7 @@
       <string>Edit the selected profile(s)</string>
      </property>
      <property name="text">
-      <string>Edit Profile...</string>
+      <string>&amp;Edit Profile...</string>
      </property>
     </widget>
    </item>
@@ -46,7 +46,7 @@
       <string>Delete the selected profile(s)</string>
      </property>
      <property name="text">
-      <string>Delete Profile</string>
+      <string>&amp;Delete Profile</string>
      </property>
     </widget>
    </item>
@@ -59,7 +59,7 @@
       <string>Set the selected profile as the default for new terminal sessions</string>
      </property>
      <property name="text">
-      <string>Set as Default</string>
+      <string>&amp;Set as Default</string>
      </property>
     </widget>
    </item>
