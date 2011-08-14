@@ -718,9 +718,9 @@ void TabbedViewContainer::currentTabChanged(int index)
 void TabbedViewContainer::wheelScrolled(int delta)
 {
     if ( delta < 0 )
-    activateNextView();
+        activateNextView();
     else
-    activatePreviousView();
+        activatePreviousView();
 }
 
 QWidget* TabbedViewContainer::containerWidget() const
