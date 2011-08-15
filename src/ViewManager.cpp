@@ -660,13 +660,7 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
             container = new StackedViewContainer(_viewSplitter);
     }
 
-    int tabBarMode = info->property<int>(Profile::TabBarMode);
-    if ( tabBarMode == Profile::AlwaysHideTabBar )
-        container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
-    else if ( tabBarMode == Profile::AlwaysShowTabBar )
-        container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
-    else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
-        container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
+    applyProfileToContainer(container, info);
 
     // connect signals and slots
     connect( container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
