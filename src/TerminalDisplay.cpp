@@ -2584,7 +2584,7 @@ void TerminalDisplay::inputMethodEvent( QInputMethodEvent* event )
 {
     if ( !event->commitString().isEmpty() )
     {
-        QKeyEvent keyEvent(QEvent::KeyPress,0,Qt::NoModifier,event->commitString());
+        QKeyEvent keyEvent(QEvent::KeyPress, 0, Qt::NoModifier,event->commitString());
         emit keyPressedSignal(&keyEvent);
     }
 
