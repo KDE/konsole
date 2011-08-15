@@ -609,17 +609,7 @@ void ViewManager::createView(Session* session)
     while ( containerIter.hasNext() )
     {
         ViewContainer* container = containerIter.next();
-
-        int index = -1;
-        QWidget* view = activeView();
-
-        if (view)
-        {
-            QList<QWidget*> views = container->views();
-            index = views.indexOf(view) + 1;
-        }
-
-        createView(session, container, index);
+        createView(session,container,-1);
     }
 
 }
