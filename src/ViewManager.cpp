@@ -600,18 +600,27 @@ void ViewManager::createView(Session* session)
         emit splitViewToggle(false);
     }
 
-       
+    int index = -1;
+    QWidget* activeView = activeView();
+    ViewContainer* activeContainer = _viewSplitter->activeContainer();
+
+    // In all containers the new view will be put at the same position, i.e.,
+    // the position right after the active view in the active container.
+    if (activeView)
+    {
+        QList<QWidget*> views = activeContainer->views();
+        index = views.indexOf(activeView) + 1;
+    }
+
     // iterate over the view containers owned by this view manager
     // and create a new terminal display for the session in each of them, along with
     // a controller for the session/display pair 
     QListIterator<ViewContainer*> containerIter(_viewSplitter->containers());
-
     while ( containerIter.hasNext() )
     {
         ViewContainer* container = containerIter.next();
-        createView(session,container,-1);
+        createView(session, container, index);
     }
-
 }
 
 ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
