@@ -2582,8 +2582,11 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 
 void TerminalDisplay::inputMethodEvent( QInputMethodEvent* event )
 {
-    QKeyEvent keyEvent(QEvent::KeyPress,0,Qt::NoModifier,event->commitString());
-    emit keyPressedSignal(&keyEvent);
+    if ( !event->commitString().isEmpty() )
+    {
+        QKeyEvent keyEvent(QEvent::KeyPress,0,Qt::NoModifier,event->commitString());
+        emit keyPressedSignal(&keyEvent);
+    }
 
     _inputMethodData.preeditString = event->preeditString();
     update(preeditRect() | _inputMethodData.previousPreeditRect);
