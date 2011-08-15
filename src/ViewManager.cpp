@@ -601,15 +601,14 @@ void ViewManager::createView(Session* session)
     }
 
     int index = -1;
-    QWidget* activeView = activeView();
-    ViewContainer* activeContainer = _viewSplitter->activeContainer();
 
     // In all containers the new view will be put at the same position, i.e.,
     // the position right after the active view in the active container.
-    if (activeView)
+    QWidget* view = activeView();
+    if (view)
     {
-        QList<QWidget*> views = activeContainer->views();
-        index = views.indexOf(activeView) + 1;
+        QList<QWidget*> views =  _viewSplitter->activeContainer()->views();
+        index = views.indexOf(view) + 1;
     }
 
     // iterate over the view containers owned by this view manager
