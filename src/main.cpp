@@ -112,11 +112,18 @@ void fillCommandLineOptions(KCmdLineOptions& options)
 
 void fillAboutData(KAboutData& aboutData)
 {
-  aboutData.addAuthor(ki18n("Robert Knight"),ki18n("Maintainer"), "robertknight@gmail.com");
-  aboutData.addAuthor(ki18n("Lars Doelle"),ki18n("Author"), "lars.doelle@on-line.de");
-  aboutData.addCredit(ki18n("Kurt V. Hindenburg"),
-    ki18n("Bug fixes and general improvements"), 
+  aboutData.addAuthor(ki18n("Kurt Hindenburg"),
+    ki18n("General maintainer, bug fixes and general improvements"),
     "kurt.hindenburg@gmail.com");
+  aboutData.addAuthor(ki18n("Robert Knight"),
+    ki18n("Prevous maintainer, ported to KDE4"),
+    "robertknight@gmail.com");
+  aboutData.addAuthor(ki18n("Lars Doelle"),
+    ki18n("Original author"),
+    "lars.doelle@on-line.de");
+  aboutData.addCredit(ki18n("Jekyll Wu"),
+    ki18n("Bug fixes and general improvements"),
+    "adaptee@gmail.com");
   aboutData.addCredit(ki18n("Waldo Bastian"),
     ki18n("Bug fixes and general improvements"),
     "bastian@kde.org");
@@ -176,6 +183,7 @@ void fillAboutData(KAboutData& aboutData)
     "knoll@mpi-hd.mpg.de");
   aboutData.addCredit(ki18n("Thanks to many others.\n"));
   aboutData.setProgramIconName("utilities-terminal");
+  aboutData.setHomepage("http://konsole.kde.org");
 }
 
 void restoreSession(Application& app)
