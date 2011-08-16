@@ -927,15 +927,16 @@ void ViewManager::profileChanged(Profile::Ptr profile)
              SessionManager::instance()->sessionProfile(iter.value()) == profile ) 
         {
             applyProfileToView(iter.key(),profile);
+
+            QListIterator<ViewContainer*> containerIter(_viewSplitter->containers());
+            while ( containerIter.hasNext() )
+            {
+                ViewContainer* container = containerIter.next();
+                applyProfileToContainer(container, profile);
+            }
         }
     }
 
-    QListIterator<ViewContainer*> containerIter(_viewSplitter->containers());
-    while ( containerIter.hasNext() )
-    {
-        ViewContainer* container = containerIter.next();
-        applyProfileToContainer(container, profile);
-    }
 }
 
 QList<ViewProperties*> ViewManager::viewProperties() const
