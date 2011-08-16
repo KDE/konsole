@@ -116,7 +116,7 @@ void fillAboutData(KAboutData& aboutData)
     ki18n("General maintainer, bug fixes and general improvements"),
     "kurt.hindenburg@gmail.com");
   aboutData.addAuthor(ki18n("Robert Knight"),
-    ki18n("Prevous maintainer, ported to KDE4"),
+    ki18n("Previous maintainer, ported to KDE4"),
     "robertknight@gmail.com");
   aboutData.addAuthor(ki18n("Lars Doelle"),
     ki18n("Original author"),
