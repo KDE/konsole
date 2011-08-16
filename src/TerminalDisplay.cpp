@@ -1742,6 +1742,16 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 
   if ( ev->button() == Qt::LeftButton)
   {
+    // request the software keyboard, if any
+    if (qApp->autoSipEnabled()) {
+      QStyle::RequestSoftwareInputPanel behavior = QStyle::RequestSoftwareInputPanel(
+                  style()->styleHint(QStyle::SH_RequestSoftwareInputPanel));
+      if (hasFocus() || behavior == QStyle::RSIP_OnMouseClick) {
+        QEvent event(QEvent::RequestSoftwareInputPanel);
+        QApplication::sendEvent(this, &event);
+      }
+    }
+
     _lineSelectionMode = false;
     _wordSelectionMode = false;
 
