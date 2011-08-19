@@ -203,8 +203,8 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme)
 
     connect( _ui->wallpaperSelectButton, SIGNAL(clicked()),
              this, SLOT(selectWallpaper()));
-    connect( _ui->wallpaperPath, SIGNAL(textChanged(const QString&)),
-             this, SLOT(wallpaperPathChanged(const QString&)));
+    connect( _ui->wallpaperPath, SIGNAL(textChanged(QString)),
+             this, SLOT(wallpaperPathChanged(QString)));
 }
 void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
 {
