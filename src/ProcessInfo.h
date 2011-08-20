@@ -265,6 +265,13 @@ protected:
      * by arguments()
      */
     void addArgument(const QString& argument);
+
+    /**
+     * clear the commandline arguments for the process, as returned
+     * by arguments()
+     */
+    void clearArguments();
+
     /**
      * Adds an environment binding for the process, as returned by
      * environment()

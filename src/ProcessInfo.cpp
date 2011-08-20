@@ -338,6 +338,11 @@ void ProcessInfo::addArgument(const QString& argument)
     _arguments << argument;    
 }
 
+void ProcessInfo::clearArguments()
+{
+    _arguments.clear();
+}
+
 void ProcessInfo::addEnvironmentBinding(const QString& name , const QString& value)
 {
     _environment.insert(name,value);
@@ -384,6 +389,10 @@ UnixProcessInfo::UnixProcessInfo(int pid,bool enableEnvironmentRead)
 
 bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
 {
+    // prevent _arguments from growing longer and longer each time this
+    // method is called.
+    clearArguments();
+
     bool ok = readProcInfo(pid);
     if (ok)
     {
