@@ -62,12 +62,12 @@ namespace Konsole
  *   if ( info->isValid() )
  *   {
  *      bool ok;
- *      QString value = info->name(&ok);
  *
+ *      QString name = info->name(&ok);
  *      if ( ok ) kDebug() << "process name - " << name;
  *      int parentPid = info->parentPid(&ok);
  *      if ( ok ) kDebug() << "parent process - " << parentPid;
- *      int foregroundPid = info->foregroundColororegroundPid(&ok);
+ *      int foregroundPid = info->foregroundPid(&ok);
  *      if ( ok ) kDebug() << "foreground process - " << foregroundPid;
  *   }
  * @endcode
