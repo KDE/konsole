@@ -120,9 +120,10 @@ QString ProcessInfo::format(const QString& input) const
    // search for and replace known marker
    output.replace("%u",userName());
    output.replace("%n",name(&ok));
-   output.replace("%c",formatCommand(name(&ok),arguments(&ok),ShortCommandFormat));
-   output.replace("%C",formatCommand(name(&ok),arguments(&ok),LongCommandFormat));
-   
+   // TODO: un-comment me when ProcessInfo::formatCommand() is implemented.
+   //output.replace("%c",formatCommand(name(&ok),arguments(&ok),ShortCommandFormat));
+   //output.replace("%C",formatCommand(name(&ok),arguments(&ok),LongCommandFormat));
+
    QString dir = validCurrentDir();
    if (output.contains("%D"))
    {
