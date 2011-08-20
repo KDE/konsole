@@ -1029,6 +1029,10 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     continue;
                 else if ( singleOptionArguments.contains(argChar) )
                 {
+                    // support using `-l user` to specify username.
+                    if ( argChar == 'l' )
+                        _user = args[i+1] ;
+
                     i++;
                     continue;
                 }
