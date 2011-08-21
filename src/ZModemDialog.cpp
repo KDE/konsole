@@ -28,42 +28,42 @@ using namespace Konsole;
 ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
  : KDialog( parent )
 {
-  setObjectName( QLatin1String( "zmodem_progress" ) );
-  setModal( modal );
-  setCaption( caption );
-  setButtons( User1|Close );
-  setButtonGuiItem( User1, KGuiItem(i18n("&Stop")) );
+    setObjectName( QLatin1String( "zmodem_progress" ) );
+    setModal( modal );
+    setCaption( caption );
+    setButtons( User1|Close );
+    setButtonGuiItem( User1, KGuiItem(i18n("&Stop")) );
 
-  setDefaultButton( Close );
-  setEscapeButton( User1 );
+    setDefaultButton( Close );
+    setEscapeButton( User1 );
 
-  enableButton(Close, false);
-  _textEdit = new KTextEdit(this);
-  _textEdit->setMinimumSize(400, 100);
-  _textEdit->setReadOnly(true);
-  setMainWidget(_textEdit);
-  connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClose()));
-  connect(this,SIGNAL(closeClicked()),this,SLOT(slotClose()));
+    enableButton(Close, false);
+    _textEdit = new KTextEdit(this);
+    _textEdit->setMinimumSize(400, 100);
+    _textEdit->setReadOnly(true);
+    setMainWidget(_textEdit);
+    connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClose()));
+    connect(this,SIGNAL(closeClicked()),this,SLOT(slotClose()));
 }
 
 void ZModemDialog::addProgressText(const QString &txt)
 {
-  QTextCursor cursor = _textEdit->textCursor();
+    QTextCursor cursor = _textEdit->textCursor();
 
-  cursor.insertBlock();
-  cursor.insertText(txt);
+    cursor.insertBlock();
+    cursor.insertText(txt);
 }
 
 void ZModemDialog::transferDone()
 {
-  enableButton(Close, true);
-  enableButton(User1, false);
+    enableButton(Close, true);
+    enableButton(User1, false);
 }
 
 void ZModemDialog::slotClose()
 {
-  delayedDestruct();
-  accept();
+    delayedDestruct();
+    accept();
 }
 
 #include "ZModemDialog.moc"
