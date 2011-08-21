@@ -432,6 +432,11 @@ public:
      */
     QString host() const;
 
+    /**
+     * Returns the port on host which the user has connected to.
+     */
+    QString port() const;
+
     /** 
      * Returns the command which the user specified to execute on the 
      * remote computer when starting the SSH process.
@@ -457,6 +462,7 @@ private:
     const ProcessInfo& _process;
     QString _user;
     QString _host;
+    QString _port;
     QString _command;
 };
 

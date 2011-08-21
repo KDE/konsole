@@ -1032,6 +1032,9 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     // support using `-l user` to specify username.
                     if ( argChar == 'l' )
                         _user = args[i+1] ;
+                    // support using `-p port` to specify port.
+                    else if ( argChar == 'p' )
+                        _port = args[i+1] ;
 
                     i++;
                     continue;
@@ -1082,6 +1085,10 @@ QString SSHProcessInfo::userName() const
 QString SSHProcessInfo::host() const
 {
     return _host;
+}
+QString SSHProcessInfo::port() const
+{
+    return _port;
 }
 QString SSHProcessInfo::command() const
 {
