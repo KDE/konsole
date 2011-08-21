@@ -933,7 +933,14 @@ KUrl Session::getUrl()
             if (_foregroundProcessInfo->name(&ok) == "ssh" && ok)
             {
                 SSHProcessInfo sshInfo(*_foregroundProcessInfo);
+
                 path = "ssh://" + sshInfo.userName() + '@' + sshInfo.host();
+
+                QString port = sshInfo.port();
+                if (!port.isEmpty() && port != "22")
+                {
+                    path.append( ":" + port );
+                }
             }
             else
             {
