@@ -1059,26 +1059,26 @@ void SessionController::updateSessionIcon()
 }
 void SessionController::sessionTitleChanged()
 {
-        if ( _sessionIconName != _session->iconName() )
-        {
-            _sessionIconName = _session->iconName();
-            _sessionIcon = KIcon( _sessionIconName );
-            updateSessionIcon();
-        }
+    if ( _sessionIconName != _session->iconName() )
+    {
+        _sessionIconName = _session->iconName();
+        _sessionIcon = KIcon( _sessionIconName );
+        updateSessionIcon();
+    }
 
-        QString title = _session->title(Session::DisplayedTitleRole);
+    QString title = _session->title(Session::DisplayedTitleRole);
 
-        // special handling for the "%w" marker which is replaced with the
-        // window title set by the shell
-        title.replace("%w",_session->userTitle());
-        // special handling for the "%#" marker which is replaced with the 
-        // number of the shell
-        title.replace("%#",QString::number(_session->sessionId()));
+    // special handling for the "%w" marker which is replaced with the
+    // window title set by the shell
+    title.replace("%w",_session->userTitle());
+    // special handling for the "%#" marker which is replaced with the 
+    // number of the shell
+    title.replace("%#",QString::number(_session->sessionId()));
 
-       if ( title.isEmpty() )
-          title = _session->title(Session::NameRole);
+    if ( title.isEmpty() )
+        title = _session->title(Session::NameRole);
 
-       setTitle( title );
+    setTitle( title );
 }
 
 void SessionController::showDisplayContextMenu(const QPoint& position)

@@ -88,7 +88,7 @@ QUuid createUuid()
         uint randNumber = 0;
         for (int filled = 0; filled < intbits; filled += randbits)
             randNumber |= qrand()<<filled;
-         *(data+chunks) = randNumber;
+        *(data+chunks) = randNumber;
     }
 
     result.data4[0] = (result.data4[0] & 0x3F) | 0x80;        // UV_DCE
@@ -194,7 +194,7 @@ WId Session::windowId() const
     // returned
 
     if ( _views.count() == 0 )
-       return 0;
+        return 0;
     else
     {
         QWidget* window = _views.first();
@@ -274,7 +274,7 @@ QList<TerminalDisplay*> Session::views() const
 
 void Session::addView(TerminalDisplay* widget)
 {
-     Q_ASSERT( !_views.contains(widget) );
+    Q_ASSERT( !_views.contains(widget) );
 
     _views.append(widget);
 
@@ -344,23 +344,23 @@ void Session::removeView(TerminalDisplay* widget)
 
 QString Session::checkProgram(const QString& program) const
 {
-  // Upon a KPty error, there is no description on what that error was...
-  // Check to see if the given program is executable.
-  QString exec = QFile::encodeName(program);
+    // Upon a KPty error, there is no description on what that error was...
+    // Check to see if the given program is executable.
+    QString exec = QFile::encodeName(program);
 
-  if (exec.isEmpty())
-      return QString();
+    if (exec.isEmpty())
+        return QString();
 
-  exec = KRun::binaryName(exec, false);
-  exec = KShell::tildeExpand(exec);
-  QString pexec = KGlobal::dirs()->findExe(exec);
-  if ( pexec.isEmpty() ) 
-  {
-      kError() << i18n("Could not find binary: ") << exec;
-      return QString();
-  }
+    exec = KRun::binaryName(exec, false);
+    exec = KShell::tildeExpand(exec);
+    QString pexec = KGlobal::dirs()->findExe(exec);
+    if ( pexec.isEmpty() ) 
+    {
+        kError() << i18n("Could not find binary: ") << exec;
+        return QString();
+    }
 
-  return exec;
+    return exec;
 }
 
 void Session::terminalWarning(const QString& message)
@@ -389,86 +389,86 @@ QString Session::shellSessionId() const
 
 void Session::run()
 {
-  //check that everything is in place to run the session
-  if (_program.isEmpty())
-  {
-      kWarning() << "Session::run() - program to run not set.";
-  }
-  if (_arguments.isEmpty())
-  {
-      kWarning() << "Session::run() - no command line arguments specified.";
-  }
-  if (_uniqueIdentifier.isNull())
-  {
-      _uniqueIdentifier = createUuid();
-  }
+    //check that everything is in place to run the session
+    if (_program.isEmpty())
+    {
+        kWarning() << "Session::run() - program to run not set.";
+    }
+    if (_arguments.isEmpty())
+    {
+        kWarning() << "Session::run() - no command line arguments specified.";
+    }
+    if (_uniqueIdentifier.isNull())
+    {
+        _uniqueIdentifier = createUuid();
+    }
 
-  const int CHOICE_COUNT = 3;
-  // if '_program' is empty , fall back to default shell. If that is not set
-  // then fall back to /bin/sh
-  QString programs[CHOICE_COUNT] = {_program,qgetenv("SHELL"),"/bin/sh"};
-  QString exec;
-  int choice = 0;
-  while (choice < CHOICE_COUNT)
-  {
-    exec = checkProgram(programs[choice]);
-    if (exec.isEmpty())
-        choice++;
+    const int CHOICE_COUNT = 3;
+    // if '_program' is empty , fall back to default shell. If that is not set
+    // then fall back to /bin/sh
+    QString programs[CHOICE_COUNT] = {_program,qgetenv("SHELL"),"/bin/sh"};
+    QString exec;
+    int choice = 0;
+    while (choice < CHOICE_COUNT)
+    {
+        exec = checkProgram(programs[choice]);
+        if (exec.isEmpty())
+            choice++;
+        else
+            break;
+    }
+
+    // if a program was specified via setProgram(), but it couldn't be found, print a warning
+    if (choice != 0 && choice < CHOICE_COUNT && !_program.isEmpty())
+    {
+        terminalWarning(i18n("Could not find '%1', starting '%2' instead.  Please check your profile settings.",_program,exec)); 
+    }
+    // if none of the choices are available, print a warning
+    else if (choice == CHOICE_COUNT)
+    {
+        terminalWarning(i18n("Could not find an interactive shell to start."));
+        return;
+    }
+
+    // if no arguments are specified, fall back to program name
+    QStringList arguments = _arguments.join(QChar(' ')).isEmpty() ?
+        QStringList() << exec : _arguments;
+
+    QString dbusService = QDBusConnection::sessionBus().baseService();
+    if (!_initialWorkingDir.isEmpty())
+        _shellProcess->setWorkingDirectory(_initialWorkingDir);
     else
-        break;
-  }
+        _shellProcess->setWorkingDirectory(QDir::homePath());
 
-  // if a program was specified via setProgram(), but it couldn't be found, print a warning
-  if (choice != 0 && choice < CHOICE_COUNT && !_program.isEmpty())
-  {
-      terminalWarning(i18n("Could not find '%1', starting '%2' instead.  Please check your profile settings.",_program,exec)); 
-  }
-  // if none of the choices are available, print a warning
-  else if (choice == CHOICE_COUNT)
-  {
-      terminalWarning(i18n("Could not find an interactive shell to start."));
-      return;
-  }
-  
-  // if no arguments are specified, fall back to program name
-  QStringList arguments = _arguments.join(QChar(' ')).isEmpty() ?
-                                                   QStringList() << exec : _arguments;
+    _shellProcess->setFlowControlEnabled(_flowControl);
+    _shellProcess->setErase(_emulation->eraseChar());
 
-  QString dbusService = QDBusConnection::sessionBus().baseService();
-  if (!_initialWorkingDir.isEmpty())
-    _shellProcess->setWorkingDirectory(_initialWorkingDir);
-  else
-    _shellProcess->setWorkingDirectory(QDir::homePath());
+    // this is not strictly accurate use of the COLORFGBG variable.  This does not
+    // tell the terminal exactly which colors are being used, but instead approximates
+    // the color scheme as "black on white" or "white on black" depending on whether
+    // the background color is deemed dark or not
+    QString backgroundColorHint = _hasDarkBackground ? "COLORFGBG=15;0" : "COLORFGBG=0;15";
+    _environment << backgroundColorHint;
+    _environment << QString("SHELL_SESSION_ID=%1").arg(shellSessionId());
 
-  _shellProcess->setFlowControlEnabled(_flowControl);
-  _shellProcess->setErase(_emulation->eraseChar());
+    int result = _shellProcess->start(exec,
+            arguments,
+            _environment,
+            windowId(),
+            _addToUtmp,
+            dbusService,
+            (QLatin1String("/Sessions/") +
+             QString::number(_sessionId)));
 
-  // this is not strictly accurate use of the COLORFGBG variable.  This does not
-  // tell the terminal exactly which colors are being used, but instead approximates
-  // the color scheme as "black on white" or "white on black" depending on whether
-  // the background color is deemed dark or not
-  QString backgroundColorHint = _hasDarkBackground ? "COLORFGBG=15;0" : "COLORFGBG=0;15";
-  _environment << backgroundColorHint;
-  _environment << QString("SHELL_SESSION_ID=%1").arg(shellSessionId());
+    if (result < 0)
+    {
+        terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(" ")));
+        return;
+    }
 
-  int result = _shellProcess->start(exec,
-                                  arguments,
-                                  _environment,
-                                  windowId(),
-                                  _addToUtmp,
-                                  dbusService,
-                                  (QLatin1String("/Sessions/") +
-                                   QString::number(_sessionId)));
+    _shellProcess->setWriteable(false);  // We are reachable via kwrited.
 
-  if (result < 0)
-  {
-      terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(" ")));
-    return;
-  }
-
-  _shellProcess->setWriteable(false);  // We are reachable via kwrited.
-
-  emit started();
+    emit started();
 }
 
 void Session::setUserTitle( int what, const QString &caption )
@@ -478,7 +478,7 @@ void Session::setUserTitle( int what, const QString &caption )
 
     if ((what == IconNameAndWindowTitle) || (what == WindowTitle)) 
     {
-           if ( _userTitle != caption ) {
+        if ( _userTitle != caption ) {
             _userTitle = caption;
             modified = true;
         }
@@ -487,44 +487,44 @@ void Session::setUserTitle( int what, const QString &caption )
     if ((what == IconNameAndWindowTitle) || (what == IconName))
     {
         if ( _iconText != caption ) {
-               _iconText = caption;
+            _iconText = caption;
             modified = true;
         }
     }
 
     if (what == TextColor || what == BackgroundColor) 
     {
-      QString colorString = caption.section(';',0,0);
-      QColor color = QColor(colorString);
-      if (color.isValid())
-      {
-          if (what == TextColor)
-                  emit changeForegroundColorRequest(color);
-          else
-                  emit changeBackgroundColorRequest(color);
-      }
+        QString colorString = caption.section(';',0,0);
+        QColor color = QColor(colorString);
+        if (color.isValid())
+        {
+            if (what == TextColor)
+                emit changeForegroundColorRequest(color);
+            else
+                emit changeBackgroundColorRequest(color);
+        }
     }
 
     if (what == SessionName) 
     {
         if ( _nameTitle != caption ) {
-               setTitle(Session::NameRole,caption);
+            setTitle(Session::NameRole,caption);
             return;
         }
     }
 
     if (what == 31) 
     {
-       QString cwd=caption;
-       cwd=cwd.replace( QRegExp("^~"), QDir::homePath() );
-       emit openUrlRequest(cwd);
+        QString cwd=caption;
+        cwd=cwd.replace( QRegExp("^~"), QDir::homePath() );
+        emit openUrlRequest(cwd);
     }
 
     // change icon via \033]32;Icon\007
     if (what == 32) 
     { 
         if ( _iconName != caption ) {
-               _iconName = caption;
+            _iconName = caption;
 
             modified = true;
         }
@@ -563,26 +563,26 @@ QString Session::tabTitleFormat(TabTitleContext context) const
 
 void Session::monitorTimerDone()
 {
-  //FIXME: The idea here is that the notification popup will appear to tell the user than output from
-  //the terminal has stopped and the popup will disappear when the user activates the session.
-  //
-  //This breaks with the addition of multiple views of a session.  The popup should disappear
-  //when any of the views of the session becomes active
-  
+    //FIXME: The idea here is that the notification popup will appear to tell the user than output from
+    //the terminal has stopped and the popup will disappear when the user activates the session.
+    //
+    //This breaks with the addition of multiple views of a session.  The popup should disappear
+    //when any of the views of the session becomes active
 
-  //FIXME: Make message text for this notification and the activity notification more descriptive.    
-  if (_monitorSilence) {
-    KNotification::event("Silence", i18n("Silence in session '%1'", _nameTitle), QPixmap(),
-                    QApplication::activeWindow(),
-                    KNotification::CloseWhenWidgetActivated);
-    emit stateChanged(NOTIFYSILENCE);
-  }
-  else
-  {
-    emit stateChanged(NOTIFYNORMAL);
-  }
 
-  _notifiedActivity=false;
+    //FIXME: Make message text for this notification and the activity notification more descriptive.    
+    if (_monitorSilence) {
+        KNotification::event("Silence", i18n("Silence in session '%1'", _nameTitle), QPixmap(),
+                QApplication::activeWindow(),
+                KNotification::CloseWhenWidgetActivated);
+        emit stateChanged(NOTIFYSILENCE);
+    }
+    else
+    {
+        emit stateChanged(NOTIFYNORMAL);
+    }
+
+    _notifiedActivity=false;
 }
 void Session::updateFlowControlState(bool suspended)
 {
@@ -605,38 +605,38 @@ void Session::updateFlowControlState(bool suspended)
 }
 void Session::activityStateSet(int state)
 {
-  if (state==NOTIFYBELL)
-  {
-      emit bellRequest( i18n("Bell in session '%1'",_nameTitle) );
-  }
-  else if (state==NOTIFYACTIVITY)
-  {
-    if (_monitorSilence) {
-      _monitorTimer->start(_silenceSeconds*1000);
+    if (state==NOTIFYBELL)
+    {
+        emit bellRequest( i18n("Bell in session '%1'",_nameTitle) );
     }
+    else if (state==NOTIFYACTIVITY)
+    {
+        if (_monitorSilence) {
+            _monitorTimer->start(_silenceSeconds*1000);
+        }
 
-    if ( _monitorActivity ) {
-      //FIXME:  See comments in Session::monitorTimerDone()
-      if (!_notifiedActivity) {
-        KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
+        if ( _monitorActivity ) {
+            //FIXME:  See comments in Session::monitorTimerDone()
+            if (!_notifiedActivity) {
+                KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
                         QApplication::activeWindow(),
-        KNotification::CloseWhenWidgetActivated);
-        _notifiedActivity=true;
-      }
+                        KNotification::CloseWhenWidgetActivated);
+                _notifiedActivity=true;
+            }
+        }
     }
-  }
 
-  if ( state==NOTIFYACTIVITY && !_monitorActivity )
-          state = NOTIFYNORMAL;
-  if ( state==NOTIFYSILENCE && !_monitorSilence )
-          state = NOTIFYNORMAL;
+    if ( state==NOTIFYACTIVITY && !_monitorActivity )
+        state = NOTIFYNORMAL;
+    if ( state==NOTIFYSILENCE && !_monitorSilence )
+        state = NOTIFYNORMAL;
 
-  emit stateChanged(state);
+    emit stateChanged(state);
 }
 
 void Session::onViewSizeChange(int /*height*/, int /*width*/)
 {
-  updateTerminalSize();
+    updateTerminalSize();
 }
 
 void Session::updateTerminalSize()
@@ -713,33 +713,33 @@ bool Session::kill(int signal)
 
 void Session::close()
 {
-  _autoClose = true;
-  _closePerUser = true;
+    _autoClose = true;
+    _closePerUser = true;
 
-  if (!isRunning() || !kill(SIGHUP))
-  {
-     if (isRunning())
-     {
-        kWarning() << "Process" << _shellProcess->pid() << "did not respond to SIGHUP";
+    if (!isRunning() || !kill(SIGHUP))
+    {
+        if (isRunning())
+        {
+            kWarning() << "Process" << _shellProcess->pid() << "did not respond to SIGHUP";
 
-        // close the pty and wait to see if the process finishes.  If it does,
-        // the done() slot will have been called so we can return.  Otherwise,
-        // emit the finished() signal regardless
-        _shellProcess->pty()->close();
-        if (_shellProcess->waitForFinished(3000))
-            return;
+            // close the pty and wait to see if the process finishes.  If it does,
+            // the done() slot will have been called so we can return.  Otherwise,
+            // emit the finished() signal regardless
+            _shellProcess->pty()->close();
+            if (_shellProcess->waitForFinished(3000))
+                return;
 
-        kWarning() << "Unable to kill process" << _shellProcess->pid();
-     }
+            kWarning() << "Unable to kill process" << _shellProcess->pid();
+        }
 
-     // Forced close.
-     QTimer::singleShot(1, this, SIGNAL(finished()));
-  }
+        // Forced close.
+        QTimer::singleShot(1, this, SIGNAL(finished()));
+    }
 }
 
 void Session::sendText(const QString &text) const
 {
-  _emulation->sendText(text);
+    _emulation->sendText(text);
 }
 
 void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
@@ -749,55 +749,55 @@ void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
 
 Session::~Session()
 {
-  delete _foregroundProcessInfo;
-  delete _sessionProcessInfo;
-  delete _emulation;
-  delete _shellProcess;
-  delete _zmodemProc;
+    delete _foregroundProcessInfo;
+    delete _sessionProcessInfo;
+    delete _emulation;
+    delete _shellProcess;
+    delete _zmodemProc;
 }
 
 void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 {
-  if (!_autoClose)
-  {
-    _userTitle = i18nc("@info:shell This session is done", "Finished");
-    emit titleChanged();
-    return;
-  }
+    if (!_autoClose)
+    {
+        _userTitle = i18nc("@info:shell This session is done", "Finished");
+        emit titleChanged();
+        return;
+    }
 
-  QString message;
-  if (!_closePerUser && exitCode != 0)
-  {
-    if (exitStatus == QProcess::NormalExit)
-        message = i18n("Program '%1' exited with status %2.", _program, exitCode);
+    QString message;
+    if (!_closePerUser && exitCode != 0)
+    {
+        if (exitStatus == QProcess::NormalExit)
+            message = i18n("Program '%1' exited with status %2.", _program, exitCode);
+        else
+            message = i18n("Program '%1' crashed.", _program);
+
+        //FIXME: See comments in Session::monitorTimerDone()
+        KNotification::event("Finished", message , QPixmap(),
+                QApplication::activeWindow(),
+                KNotification::CloseWhenWidgetActivated);
+    }
+
+    if ( !_closePerUser && exitStatus != QProcess::NormalExit )
+        terminalWarning(message);
     else
-        message = i18n("Program '%1' crashed.", _program);
-
-    //FIXME: See comments in Session::monitorTimerDone()
-    KNotification::event("Finished", message , QPixmap(),
-                         QApplication::activeWindow(),
-                         KNotification::CloseWhenWidgetActivated);
-  }
-
-  if ( !_closePerUser && exitStatus != QProcess::NormalExit )
-      terminalWarning(message);
-  else
         emit finished();
 }
 
 Emulation* Session::emulation() const
 {
-  return _emulation;
+    return _emulation;
 }
 
 QString Session::keyBindings() const
 {
-  return _emulation->keyBindings();
+    return _emulation->keyBindings();
 }
 
 QStringList Session::environment() const
 {
-  return _environment;
+    return _environment;
 }
 
 void Session::setEnvironment(const QStringList& environment)
@@ -807,12 +807,12 @@ void Session::setEnvironment(const QStringList& environment)
 
 int Session::sessionId() const
 {
-  return _sessionId;
+    return _sessionId;
 }
 
 void Session::setKeyBindings(const QString &id)
 {
-  _emulation->setKeyBindings(id);
+    _emulation->setKeyBindings(id);
 }
 
 void Session::setTitle(TitleRole role , const QString& newTitle)
@@ -971,27 +971,27 @@ void Session::setIconName(const QString& iconName)
 
 void Session::setIconText(const QString& iconText)
 {
-  _iconText = iconText;
+    _iconText = iconText;
 }
 
 QString Session::iconName() const
 {
-  return _iconName;
+    return _iconName;
 }
 
 QString Session::iconText() const
 {
-  return _iconText;
+    return _iconText;
 }
 
 void Session::setHistoryType(const HistoryType &hType)
 {
-  _emulation->setHistory(hType);
+    _emulation->setHistory(hType);
 }
 
 const HistoryType& Session::historyType() const
 {
-  return _emulation->history();
+    return _emulation->history();
 }
 
 void Session::clearHistory()
@@ -1001,12 +1001,12 @@ void Session::clearHistory()
 
 QStringList Session::arguments() const
 {
-  return _arguments;
+    return _arguments;
 }
 
 QString Session::program() const
 {
-  return _program;
+    return _program;
 }
 
 // unused currently
@@ -1016,168 +1016,168 @@ bool Session::isMonitorSilence()  const { return _monitorSilence; }
 
 void Session::setMonitorActivity(bool _monitor)
 {
-  _monitorActivity=_monitor;
-  _notifiedActivity=false;
+    _monitorActivity=_monitor;
+    _notifiedActivity=false;
 
-  activityStateSet(NOTIFYNORMAL);
+    activityStateSet(NOTIFYNORMAL);
 }
 
 void Session::setMonitorSilence(bool _monitor)
 {
-  if (_monitorSilence==_monitor)
-    return;
+    if (_monitorSilence==_monitor)
+        return;
 
-  _monitorSilence=_monitor;
-  if (_monitorSilence)
-  {
-    _monitorTimer->start(_silenceSeconds*1000);
-  }
-  else
-    _monitorTimer->stop();
+    _monitorSilence=_monitor;
+    if (_monitorSilence)
+    {
+        _monitorTimer->start(_silenceSeconds*1000);
+    }
+    else
+        _monitorTimer->stop();
 
-  activityStateSet(NOTIFYNORMAL);
+    activityStateSet(NOTIFYNORMAL);
 }
 
 void Session::setMonitorSilenceSeconds(int seconds)
 {
-  _silenceSeconds=seconds;
-  if (_monitorSilence) {
-    _monitorTimer->start(_silenceSeconds*1000);
-  }
+    _silenceSeconds=seconds;
+    if (_monitorSilence) {
+        _monitorTimer->start(_silenceSeconds*1000);
+    }
 }
 
 void Session::setAddToUtmp(bool set)
 {
-  _addToUtmp = set;
+    _addToUtmp = set;
 }
 
 void Session::setFlowControlEnabled(bool enabled)
 {
-  _flowControl = enabled;
+    _flowControl = enabled;
 
-  if (_shellProcess)  
-    _shellProcess->setFlowControlEnabled(_flowControl);
-  emit flowControlEnabledChanged(enabled);
+    if (_shellProcess)  
+        _shellProcess->setFlowControlEnabled(_flowControl);
+    emit flowControlEnabledChanged(enabled);
 }
 bool Session::flowControlEnabled() const
 {
     if (_shellProcess)
-            return _shellProcess->flowControlEnabled();
+        return _shellProcess->flowControlEnabled();
     else
-            return _flowControl;
+        return _flowControl;
 }
 void Session::fireZModemDetected()
 {
-  if (!_zmodemBusy)
-  {
-    QTimer::singleShot(10, this, SIGNAL(zmodemDetected()));
-    _zmodemBusy = true;
-  }
+    if (!_zmodemBusy)
+    {
+        QTimer::singleShot(10, this, SIGNAL(zmodemDetected()));
+        _zmodemBusy = true;
+    }
 }
 
 void Session::cancelZModem()
 {
-  _shellProcess->sendData("\030\030\030\030", 4); // Abort
-  _zmodemBusy = false;
+    _shellProcess->sendData("\030\030\030\030", 4); // Abort
+    _zmodemBusy = false;
 }
 
 void Session::startZModem(const QString &zmodem, const QString &dir, const QStringList &list)
 {
-  _zmodemBusy = true;
-  _zmodemProc = new KProcess();
-  _zmodemProc->setOutputChannelMode( KProcess::SeparateChannels );
+    _zmodemBusy = true;
+    _zmodemProc = new KProcess();
+    _zmodemProc->setOutputChannelMode( KProcess::SeparateChannels );
 
-  *_zmodemProc << zmodem << "-v" << list;
+    *_zmodemProc << zmodem << "-v" << list;
 
-  if (!dir.isEmpty())
-     _zmodemProc->setWorkingDirectory(dir);
+    if (!dir.isEmpty())
+        _zmodemProc->setWorkingDirectory(dir);
 
-  connect(_zmodemProc,SIGNAL (readyReadStandardOutput()),
-          this, SLOT(zmodemReadAndSendBlock()));
-  connect(_zmodemProc,SIGNAL (readyReadStandardError()),
-          this, SLOT(zmodemReadStatus()));
-  connect(_zmodemProc,SIGNAL (finished(int,QProcess::ExitStatus)),
-          this, SLOT(zmodemFinished()));
+    connect(_zmodemProc,SIGNAL (readyReadStandardOutput()),
+            this, SLOT(zmodemReadAndSendBlock()));
+    connect(_zmodemProc,SIGNAL (readyReadStandardError()),
+            this, SLOT(zmodemReadStatus()));
+    connect(_zmodemProc,SIGNAL (finished(int,QProcess::ExitStatus)),
+            this, SLOT(zmodemFinished()));
 
-  _zmodemProc->start();
-  
-  disconnect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
-  connect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
+    _zmodemProc->start();
 
-  _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
-                                    i18n("ZModem Progress"));
+    disconnect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
+    connect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
 
-  connect(_zmodemProgress, SIGNAL(user1Clicked()),
-          this, SLOT(zmodemFinished()));
+    _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
+            i18n("ZModem Progress"));
 
-  _zmodemProgress->show();
+    connect(_zmodemProgress, SIGNAL(user1Clicked()),
+            this, SLOT(zmodemFinished()));
+
+    _zmodemProgress->show();
 }
 
 void Session::zmodemReadAndSendBlock()
 {
-  _zmodemProc->setReadChannel( QProcess::StandardOutput );
-  QByteArray data = _zmodemProc->readAll();
+    _zmodemProc->setReadChannel( QProcess::StandardOutput );
+    QByteArray data = _zmodemProc->readAll();
 
-  if ( data.count() == 0 )
-      return;
+    if ( data.count() == 0 )
+        return;
 
-  _shellProcess->sendData(data.constData(),data.count());
+    _shellProcess->sendData(data.constData(),data.count());
 }
 
 void Session::zmodemReadStatus()
 {
-  _zmodemProc->setReadChannel( QProcess::StandardError );
-  QByteArray msg = _zmodemProc->readAll();
-  while(!msg.isEmpty())
-  {
-     int i = msg.indexOf('\015');
-     int j = msg.indexOf('\012');
-     QByteArray txt;
-     if ((i != -1) && ((j == -1) || (i < j)))
-     {
-       msg = msg.mid(i+1);
-     }
-     else if (j != -1)
-     {
-       txt = msg.left(j);
-       msg = msg.mid(j+1);
-     }
-     else
-     {
-       txt = msg;
-       msg.truncate(0);
-     }
-     if (!txt.isEmpty())
-       _zmodemProgress->addProgressText(QString::fromLocal8Bit(txt));
-  }
+    _zmodemProc->setReadChannel( QProcess::StandardError );
+    QByteArray msg = _zmodemProc->readAll();
+    while(!msg.isEmpty())
+    {
+        int i = msg.indexOf('\015');
+        int j = msg.indexOf('\012');
+        QByteArray txt;
+        if ((i != -1) && ((j == -1) || (i < j)))
+        {
+            msg = msg.mid(i+1);
+        }
+        else if (j != -1)
+        {
+            txt = msg.left(j);
+            msg = msg.mid(j+1);
+        }
+        else
+        {
+            txt = msg;
+            msg.truncate(0);
+        }
+        if (!txt.isEmpty())
+            _zmodemProgress->addProgressText(QString::fromLocal8Bit(txt));
+    }
 }
 
 void Session::zmodemRcvBlock(const char *data, int len)
 {
-  QByteArray ba( data, len );
+    QByteArray ba( data, len );
 
-  _zmodemProc->write( ba );
+    _zmodemProc->write( ba );
 }
 
 void Session::zmodemFinished()
 {
-  /* zmodemFinished() is called by QProcess's finished() and
-      ZModemDialog's user1Clicked(). Therefore, an invocation by
-      user1Clicked() will recursively invoke this function again
-      when the KProcess is deleted! */
-  if (_zmodemProc) {
-    KProcess* process = _zmodemProc;
-    _zmodemProc = 0;   // Set _zmodemProc to 0 avoid recursive invocations!
-    _zmodemBusy = false;
-    delete process;    // Now, the KProcess may be disposed safely.
+    /* zmodemFinished() is called by QProcess's finished() and
+       ZModemDialog's user1Clicked(). Therefore, an invocation by
+       user1Clicked() will recursively invoke this function again
+       when the KProcess is deleted! */
+    if (_zmodemProc) {
+        KProcess* process = _zmodemProc;
+        _zmodemProc = 0;   // Set _zmodemProc to 0 avoid recursive invocations!
+        _zmodemBusy = false;
+        delete process;    // Now, the KProcess may be disposed safely.
 
-    disconnect( _shellProcess,SIGNAL(receivedData(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
-    connect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
+        disconnect( _shellProcess,SIGNAL(receivedData(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
+        connect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
 
-    _shellProcess->sendData("\030\030\030\030", 4); // Abort
-    _shellProcess->sendData("\001\013\n", 3); // Try to get prompt back
-    _zmodemProgress->transferDone();
-  }
+        _shellProcess->sendData("\030\030\030\030", 4); // Abort
+        _shellProcess->sendData("\001\013\n", 3); // Try to get prompt back
+        _zmodemProgress->transferDone();
+    }
 }
 
 void Session::onReceiveBlock( const char* buf, int len )
@@ -1188,15 +1188,15 @@ void Session::onReceiveBlock( const char* buf, int len )
 
 QSize Session::size()
 {
-  return _emulation->imageSize();
+    return _emulation->imageSize();
 }
 
 void Session::setSize(const QSize& size)
 {
-  if ((size.width() <= 1) || (size.height() <= 1))
-     return;
+    if ((size.width() <= 1) || (size.height() <= 1))
+        return;
 
-  emit resizeRequest(size);
+    emit resizeRequest(size);
 }
 int Session::processId() const
 {
@@ -1339,7 +1339,7 @@ void SessionGroup::sessionFinished()
 }
 void SessionGroup::setMasterMode(int mode)
 {
-   _masterMode = mode;
+    _masterMode = mode;
 }
 QList<Session*> SessionGroup::masters() const
 {
@@ -1368,11 +1368,11 @@ void SessionGroup::forwardData(const char* data, int size)
 {
     static bool _inForwardData = false;
     if(_inForwardData) {   // Avoid recursive calls among session groups!
-       // A recursive call happens when a master in group A calls forwardData()
-       // in group B. If one of the destination sessions in group B is also a
-       // master of a group including the master session of group A, this would
-       // again call forwardData() in group A, and so on.
-       return;
+        // A recursive call happens when a master in group A calls forwardData()
+        // in group B. If one of the destination sessions in group B is also a
+        // master of a group including the master session of group A, this would
+        // again call forwardData() in group A, and so on.
+        return;
     }
     
     _inForwardData = true;
@@ -1380,7 +1380,7 @@ void SessionGroup::forwardData(const char* data, int size)
     while(iter.hasNext()) {
         Session* other = iter.next();
         if(!_sessions[other]) {
-           other->emulation()->sendString(data, size);
+            other->emulation()->sendString(data, size);
         }
     }
     _inForwardData = false;
