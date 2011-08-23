@@ -234,14 +234,12 @@ void ViewManager::setupActions()
     // keyboard shortcut only actions
     KShortcut nextViewShortcut = nextViewAction->shortcut();
     nextViewShortcut.setPrimary( QKeySequence(Qt::SHIFT+Qt::Key_Right) );
-    nextViewShortcut.setAlternate( QKeySequence(Qt::CTRL+Qt::Key_PageDown) );
     nextViewAction->setShortcut(nextViewShortcut); 
     connect( nextViewAction, SIGNAL(triggered()) , this , SLOT(nextView()) );
     _viewSplitter->addAction(nextViewAction);
 
     KShortcut previousViewShortcut = previousViewAction->shortcut();
     previousViewShortcut.setPrimary( QKeySequence(Qt::SHIFT+Qt::Key_Left) );
-    previousViewShortcut.setAlternate( QKeySequence(Qt::CTRL+Qt::Key_PageUp) );
     previousViewAction->setShortcut(previousViewShortcut);
     connect( previousViewAction, SIGNAL(triggered()) , this , SLOT(previousView()) );
     _viewSplitter->addAction(previousViewAction);
