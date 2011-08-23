@@ -939,7 +939,7 @@ KUrl Session::getUrl()
                 QString port = sshInfo.port();
                 if (!port.isEmpty() && port != "22")
                 {
-                    path.append( ":" + port );
+                    path.append(':' + port);
                 }
             }
             else
