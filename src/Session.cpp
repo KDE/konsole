@@ -316,11 +316,14 @@ void Session::addView(TerminalDisplay* widget)
 
 void Session::viewDestroyed(QObject* view)
 {
-    TerminalDisplay* display = (TerminalDisplay*)view;
+    TerminalDisplay* display = qobject_cast<TerminalDisplay*>(view);
 
-    Q_ASSERT( _views.contains(display) );
+    if ( display )
+    {
+        Q_ASSERT( _views.contains(display) );
 
-    removeView(display);
+        removeView(display);
+    }
 }
 
 void Session::removeView(TerminalDisplay* widget)
