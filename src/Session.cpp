@@ -231,11 +231,15 @@ void Session::setCodec(QTextCodec* codec)
 bool Session::setCodec(QByteArray name)
 {
     QTextCodec *codec = QTextCodec::codecForName(name);
+
     if (codec) {
         setCodec(codec);
         return true;
     }
-    return false;
+    else
+    {
+        return false;
+    }
 }
 
 QByteArray Session::codec()
@@ -259,7 +263,9 @@ void Session::setArguments(const QStringList& arguments)
 QString Session::currentWorkingDirectory()
 {
     // only returned cached value
-    if (_currentWorkingDir.isEmpty()) updateWorkingDirectory();
+    if (_currentWorkingDir.isEmpty())
+        updateWorkingDirectory();
+
     return _currentWorkingDir;
 }
 ProcessInfo* Session::updateWorkingDirectory()
@@ -434,9 +440,11 @@ void Session::run()
 
     // if no arguments are specified, fall back to program name
     QStringList arguments = _arguments.join(QChar(' ')).isEmpty() ?
-        QStringList() << exec : _arguments;
+                                            QStringList() << exec :
+                                            _arguments;
 
     QString dbusService = QDBusConnection::sessionBus().baseService();
+
     if (!_initialWorkingDir.isEmpty())
         _shellProcess->setWorkingDirectory(_initialWorkingDir);
     else
@@ -584,7 +592,7 @@ void Session::monitorTimerDone()
         emit stateChanged(NOTIFYNORMAL);
     }
 
-    _notifiedActivity=false;
+    _notifiedActivity = false;
 }
 void Session::updateFlowControlState(bool suspended)
 {
@@ -607,11 +615,11 @@ void Session::updateFlowControlState(bool suspended)
 }
 void Session::activityStateSet(int state)
 {
-    if (state==NOTIFYBELL)
+    if (state == NOTIFYBELL)
     {
         emit bellRequest( i18n("Bell in session '%1'",_nameTitle) );
     }
-    else if (state==NOTIFYACTIVITY)
+    else if (state == NOTIFYACTIVITY)
     {
         if (_monitorSilence) {
             _monitorTimer->start(_silenceSeconds*1000);
@@ -623,14 +631,14 @@ void Session::activityStateSet(int state)
                 KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
                         QApplication::activeWindow(),
                         KNotification::CloseWhenWidgetActivated);
-                _notifiedActivity=true;
+                _notifiedActivity = true;
             }
         }
     }
 
-    if ( state==NOTIFYACTIVITY && !_monitorActivity )
+    if ( state == NOTIFYACTIVITY && !_monitorActivity )
         state = NOTIFYNORMAL;
-    if ( state==NOTIFYSILENCE && !_monitorSilence )
+    if ( state == NOTIFYSILENCE && !_monitorSilence )
         state = NOTIFYNORMAL;
 
     emit stateChanged(state);
@@ -913,7 +921,9 @@ QString Session::getDynamicTitle()
         title = sshInfo.format(tabTitleFormat(Session::RemoteTabTitle));
     }
     else
+    {
         title = process->format(tabTitleFormat(Session::LocalTabTitle));
+    }
 
     return title;
 }
@@ -1018,31 +1028,33 @@ bool Session::isMonitorSilence()  const { return _monitorSilence; }
 
 void Session::setMonitorActivity(bool _monitor)
 {
-    _monitorActivity=_monitor;
-    _notifiedActivity=false;
+    _monitorActivity  = _monitor;
+    _notifiedActivity = false;
 
     activityStateSet(NOTIFYNORMAL);
 }
 
 void Session::setMonitorSilence(bool _monitor)
 {
-    if (_monitorSilence==_monitor)
+    if (_monitorSilence == _monitor)
         return;
 
-    _monitorSilence=_monitor;
+    _monitorSilence = _monitor;
     if (_monitorSilence)
     {
         _monitorTimer->start(_silenceSeconds*1000);
     }
     else
+    {
         _monitorTimer->stop();
+    }
 
     activityStateSet(NOTIFYNORMAL);
 }
 
 void Session::setMonitorSilenceSeconds(int seconds)
 {
-    _silenceSeconds=seconds;
+    _silenceSeconds = seconds;
     if (_monitorSilence) {
         _monitorTimer->start(_silenceSeconds*1000);
     }
@@ -1059,6 +1071,7 @@ void Session::setFlowControlEnabled(bool enabled)
 
     if (_shellProcess)  
         _shellProcess->setFlowControlEnabled(_flowControl);
+
     emit flowControlEnabledChanged(enabled);
 }
 bool Session::flowControlEnabled() const
@@ -1361,7 +1374,8 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
         connect( session->emulation() , SIGNAL(sendData(const char*,int)) , this,
                  SLOT(forwardData(const char*,int)) );
     }
-    else {
+    else
+    {
         disconnect( session->emulation() , SIGNAL(sendData(const char*,int)) , this,
                     SLOT(forwardData(const char*,int)) );
     }
