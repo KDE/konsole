@@ -61,17 +61,17 @@ Emulation::Emulation() :
   _usesMouse(false),
   _imageSizeInitialized(false)
 {
-  // create screens with a default size
-  _screen[0] = new Screen(40,80);
-  _screen[1] = new Screen(40,80);
-  _currentScreen = _screen[0];
+    // create screens with a default size
+    _screen[0] = new Screen(40,80);
+    _screen[1] = new Screen(40,80);
+    _currentScreen = _screen[0];
 
-  QObject::connect(&_bulkTimer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
-  QObject::connect(&_bulkTimer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
-   
-  // listen for mouse status changes
-  connect( this , SIGNAL(programUsesMouseChanged(bool)) , 
-           SLOT(usesMouseChanged(bool)) );
+    QObject::connect(&_bulkTimer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
+    QObject::connect(&_bulkTimer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
+
+    // listen for mouse status changes
+    connect( this , SIGNAL(programUsesMouseChanged(bool)) , 
+            SLOT(usesMouseChanged(bool)) );
 }
 
 bool Emulation::programUsesMouse() const
@@ -95,33 +95,34 @@ ScreenWindow* Emulation::createWindow()
 
     connect(this , SIGNAL(outputChanged()),
             window , SLOT(notifyOutputChanged()) );
+
     return window;
 }
 
 Emulation::~Emulation()
 {
-  QListIterator<ScreenWindow*> windowIter(_windows);
+    QListIterator<ScreenWindow*> windowIter(_windows);
 
-  while (windowIter.hasNext())
-  {
-    delete windowIter.next();
-  }
+    while (windowIter.hasNext())
+    {
+        delete windowIter.next();
+    }
 
-  delete _screen[0];
-  delete _screen[1];
-  delete _decoder;
+    delete _screen[0];
+    delete _screen[1];
+    delete _decoder;
 }
 
 void Emulation::setScreen(int n)
 {
-  Screen *old = _currentScreen;
-  _currentScreen = _screen[n & 1];
-  if (_currentScreen != old) 
-  {
-     // tell all windows onto this emulation to switch to the newly active screen
-     foreach(ScreenWindow* window,_windows)
-         window->setScreen(_currentScreen);
-  }
+    Screen *old = _currentScreen;
+    _currentScreen = _screen[n & 1];
+    if (_currentScreen != old) 
+    {
+        // tell all windows onto this emulation to switch to the newly active screen
+        foreach(ScreenWindow* window,_windows)
+            window->setScreen(_currentScreen);
+    }
 }
 
 void Emulation::clearHistory()
@@ -130,14 +131,14 @@ void Emulation::clearHistory()
 }
 void Emulation::setHistory(const HistoryType& t)
 {
-  _screen[0]->setScroll(t);
+    _screen[0]->setScroll(t);
 
-  showBulk();
+    showBulk();
 }
 
 const HistoryType& Emulation::history() const
 {
-  return _screen[0]->getScroll();
+    return _screen[0]->getScroll();
 }
 
 void Emulation::setCodec(const QTextCodec * qtc)
@@ -163,45 +164,46 @@ void Emulation::setCodec(EmulationCodec codec)
 
 void Emulation::setKeyBindings(const QString& name)
 {
-  _keyTranslator = KeyboardTranslatorManager::instance()->findTranslator(name);
-  if (!_keyTranslator)
-  {
-      _keyTranslator = KeyboardTranslatorManager::instance()->defaultTranslator();
-  }
+    _keyTranslator = KeyboardTranslatorManager::instance()->findTranslator(name);
+    if (!_keyTranslator)
+    {
+        _keyTranslator = KeyboardTranslatorManager::instance()->defaultTranslator();
+    }
 }
 
 QString Emulation::keyBindings() const
 {
-  return _keyTranslator->name();
+    return _keyTranslator->name();
 }
 
 void Emulation::receiveChar(int c)
 // process application unicode input to terminal
 // this is a trivial scanner
 {
-  c &= 0xff;
-  switch (c)
-  {
-    case '\b'      : _currentScreen->backspace();                 break;
-    case '\t'      : _currentScreen->tab();                       break;
-    case '\n'      : _currentScreen->newLine();                   break;
-    case '\r'      : _currentScreen->toStartOfLine();             break;
-    case 0x07      : emit stateSet(NOTIFYBELL);
-                     break;
-    default        : _currentScreen->displayCharacter(c);         break;
-  };
+    c &= 0xff;
+    switch (c)
+    {
+        case '\b'      : _currentScreen->backspace();                 break;
+        case '\t'      : _currentScreen->tab();                       break;
+        case '\n'      : _currentScreen->newLine();                   break;
+        case '\r'      : _currentScreen->toStartOfLine();             break;
+        case 0x07      : emit stateSet(NOTIFYBELL);
+                         break;
+        default        : _currentScreen->displayCharacter(c);         break;
+    };
 }
 
 void Emulation::sendKeyEvent( QKeyEvent* ev )
 {
-  emit stateSet(NOTIFYNORMAL);
-  
-  if (!ev->text().isEmpty())
-  { // A block of text
-    // Note that the text is proper unicode.
-    // We should do a conversion here
-    emit sendData(ev->text().toUtf8(),ev->text().length());
-  }
+    emit stateSet(NOTIFYNORMAL);
+
+    if (!ev->text().isEmpty())
+    {
+        // A block of text
+        // Note that the text is proper unicode.
+        // We should do a conversion here
+        emit sendData(ev->text().toUtf8(),ev->text().length());
+    }
 }
 
 void Emulation::sendString(const char*,int)
@@ -224,7 +226,7 @@ void Emulation::receiveData(const char* text, int length)
     emit stateSet(NOTIFYACTIVITY);
 
     bufferedUpdate();
-        
+
     QString unicodeText = _decoder->toUnicode(text,length);
 
     //send characters to terminal emulator
@@ -297,7 +299,7 @@ void Emulation::writeToStream( TerminalCharacterDecoder* decoder ,
                                int startLine ,
                                int endLine) 
 {
-  _currentScreen->writeLinesToStream(decoder,startLine,endLine);
+    _currentScreen->writeLinesToStream(decoder,startLine,endLine);
 }
 
 int Emulation::lineCount() const
@@ -322,68 +324,68 @@ void Emulation::showBulk()
 
 void Emulation::bufferedUpdate()
 {
-   _bulkTimer1.setSingleShot(true);
-   _bulkTimer1.start(BULK_TIMEOUT1);
-   if (!_bulkTimer2.isActive())
-   {
-      _bulkTimer2.setSingleShot(true);
-      _bulkTimer2.start(BULK_TIMEOUT2);
-   }
+    _bulkTimer1.setSingleShot(true);
+    _bulkTimer1.start(BULK_TIMEOUT1);
+    if (!_bulkTimer2.isActive())
+    {
+        _bulkTimer2.setSingleShot(true);
+        _bulkTimer2.start(BULK_TIMEOUT2);
+    }
 }
 
 char Emulation::eraseChar() const
 {
-  return '\b';
+    return '\b';
 }
 
 void Emulation::setImageSize(int lines, int columns)
 {
-  if ((lines < 1) || (columns < 1)) 
-    return;
+    if ((lines < 1) || (columns < 1))
+        return;
 
-  QSize screenSize[2] = { QSize(_screen[0]->getColumns(),
-                                _screen[0]->getLines()),
-                          QSize(_screen[1]->getColumns(),
-                                _screen[1]->getLines()) };
-  QSize newSize(columns,lines);
+    QSize screenSize[2] = { QSize(_screen[0]->getColumns(),
+                                  _screen[0]->getLines()),
+                            QSize(_screen[1]->getColumns(),
+                                  _screen[1]->getLines()) };
+    QSize newSize(columns,lines);
 
-  if (newSize == screenSize[0] && newSize == screenSize[1])
-  {
-    // If this method is called for the first time, always emit
-    // SIGNAL(imageSizeChange()), even if the new size is the same as the
-    // current size.  See #176902
+    if (newSize == screenSize[0] && newSize == screenSize[1])
+    {
+        // If this method is called for the first time, always emit
+        // SIGNAL(imageSizeChange()), even if the new size is the same as the
+        // current size.  See #176902
+        if (!_imageSizeInitialized)
+        {
+            emit imageSizeChanged(lines,columns);
+        }
+    }
+    else
+    {
+        _screen[0]->resizeImage(lines,columns);
+        _screen[1]->resizeImage(lines,columns);
+
+        emit imageSizeChanged(lines,columns);
+
+        bufferedUpdate();
+    }
+
     if (!_imageSizeInitialized)
     {
-      emit imageSizeChanged(lines,columns);
+        _imageSizeInitialized = true;
+
+        // FIXME
+        // a hard-coded, small delay is introduced to gurarantee Session::run()
+        // does not get triggered by SIGNAL(imageSizeInitialized()) before
+        // Pty::setWindowSize() is triggered by previously emitted
+        // SIGNAL(imageSizeChanged()); See #203185
+        QTimer::singleShot(200, this, SIGNAL(imageSizeInitialized()) );
     }
-  }
-  else
-  {
-    _screen[0]->resizeImage(lines,columns);
-    _screen[1]->resizeImage(lines,columns);
-
-    emit imageSizeChanged(lines,columns);
-
-    bufferedUpdate();
-  }
-
-  if (!_imageSizeInitialized)
-  {
-    _imageSizeInitialized = true;
-
-    // FIXME
-    // a hard-coded, small delay is introduced to gurarantee Session::run()
-    // does not get triggered by SIGNAL(imageSizeInitialized()) before
-    // Pty::setWindowSize() is triggered by previously emitted
-    // SIGNAL(imageSizeChanged()); See #203185
-    QTimer::singleShot(200, this, SIGNAL(imageSizeInitialized()) );
-  }
 
 }
 
 QSize Emulation::imageSize() const
 {
-  return QSize(_currentScreen->getColumns(), _currentScreen->getLines());
+    return QSize(_currentScreen->getColumns(), _currentScreen->getLines());
 }
 
 ushort ExtendedCharTable::extendedCharHash(const ushort* unicodePoints , ushort length) const
@@ -476,8 +478,8 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
     }    
 
     
-     // add the new sequence to the table and
-     // return that index
+    // add the new sequence to the table and
+    // return that index
     ushort* buffer = new ushort[length+1];
     buffer[0] = length;
     for ( int i = 0 ; i < length ; i++ )
