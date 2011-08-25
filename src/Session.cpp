@@ -453,14 +453,14 @@ void Session::run()
     _environment << backgroundColorHint;
     _environment << QString("SHELL_SESSION_ID=%1").arg(shellSessionId());
 
-    int result = _shellProcess->start(exec,
-            arguments,
-            _environment,
-            windowId(),
-            _addToUtmp,
-            dbusService,
-            (QLatin1String("/Sessions/") +
-             QString::number(_sessionId)));
+    int result = _shellProcess->start(  exec,
+                                        arguments,
+                                        _environment,
+                                        windowId(),
+                                        _addToUtmp,
+                                        dbusService,
+                                        (QLatin1String("/Sessions/") +
+                                        QString::number(_sessionId)));
 
     if (result < 0)
     {
