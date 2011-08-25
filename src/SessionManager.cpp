@@ -50,23 +50,6 @@
 
 using namespace Konsole;
 
-#if 0
-
-bool Profile::isAvailable() const
-{
-    //TODO:  Is it necessary to cache the result of the search?
-
-    QString binary = KRun::binaryName( command(true) , false );
-    binary = KShell::tildeExpand(binary);
-
-    QString fullBinaryPath = KGlobal::dirs()->findExe(binary);
-
-    if ( fullBinaryPath.isEmpty() )
-        return false;
-    else
-        return true;
-}
-#endif
 
 bool profileIndexLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
 {
