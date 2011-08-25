@@ -194,7 +194,9 @@ WId Session::windowId() const
     // returned
 
     if ( _views.count() == 0 )
+    {
         return 0;
+    }
     else
     {
         QWidget* window = _views.first();
