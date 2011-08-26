@@ -141,17 +141,21 @@ const HistoryType& Emulation::history() const
     return _screen[0]->getScroll();
 }
 
-void Emulation::setCodec(const QTextCodec * qtc)
+void Emulation::setCodec(const QTextCodec * codec)
 {
-  if (qtc)
-      _codec = qtc;
-  else
-     setCodec(LocaleCodec);
+    if ( codec )
+    {
+        _codec = codec;
 
-  delete _decoder;
-  _decoder = _codec->makeDecoder();
+        delete _decoder;
+        _decoder = _codec->makeDecoder();
 
-  emit useUtf8Request(utf8());
+        emit useUtf8Request(utf8());
+    }
+    else
+    {
+        setCodec(LocaleCodec);
+    }
 }
 
 void Emulation::setCodec(EmulationCodec codec)
