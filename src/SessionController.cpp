@@ -303,6 +303,15 @@ void SessionController::setupPrimaryScreenSpecificActions( bool use)
     resetAction->setEnabled(use);
 }
 
+void SessionController::updateCopyAction( const QString & text )
+{
+    KActionCollection * collection = actionCollection() ;
+    QAction * copyAction = collection->action("edit_copy");
+
+    // copy action is meaningful only when some text is selcted.
+    copyAction->setEnabled(!text.isEmpty());
+}
+
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
 {
     if ( watched == _view )
@@ -424,6 +433,8 @@ void SessionController::setupActions()
     // Copy and Paste
     action = KStandardAction::copy(this, SLOT(copy()), collection);
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_C));
+    // disabled at first, since nothing has been selected now
+    action->setEnabled(false);
 
     action = KStandardAction::paste(this, SLOT(paste()), collection);
     KShortcut pasteShortcut = action->shortcut();

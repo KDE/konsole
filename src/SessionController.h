@@ -162,6 +162,13 @@ public slots:
      * update actions which are meaningful only when rimary screen is in use.
      */
     void setupPrimaryScreenSpecificActions( bool use);
+    
+    /**
+     * enable or disable the copy action
+     */
+    void updateCopyAction( const QString & text );
+
+
 
 private slots:
     // menu item handlers

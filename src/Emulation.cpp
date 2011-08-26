@@ -92,6 +92,8 @@ ScreenWindow* Emulation::createWindow()
 
     connect(window , SIGNAL(selectionChanged()),
             this , SLOT(bufferedUpdate()));
+    connect(window, SIGNAL(selectionChanged()),
+            this, SLOT(checkSelectedText()));
 
     connect(this , SIGNAL(outputChanged()),
             window , SLOT(notifyOutputChanged()) );
@@ -102,6 +104,12 @@ ScreenWindow* Emulation::createWindow()
 void Emulation::checkScreenInUse()
 {
     emit primaryScreenInUse( _currentScreen == _screen[0] );
+}
+
+void Emulation::checkSelectedText()
+{
+    QString text = _currentScreen->selectedText(true);
+    emit selectedText(text);
 }
 
 Emulation::~Emulation()
@@ -129,6 +137,7 @@ void Emulation::setScreen(int n)
             window->setScreen(_currentScreen);
 
         checkScreenInUse();
+        checkSelectedText();
     }
 }
 

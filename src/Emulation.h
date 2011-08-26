@@ -409,7 +409,13 @@ signals:
    * screen is in use.
    */
   void primaryScreenInUse(bool use);
+  
+  /**
+   * Emitted when the text selection is changed
+   */
+  void selectedText(const QString & text);
 
+  
 protected:
   virtual void setMode(int mode) = 0;
   virtual void resetMode(int mode) = 0;
@@ -464,6 +470,9 @@ protected slots:
 
   // used to emit the primaryScreenInUse(bool) signal
   void checkScreenInUse();
+  
+  // used to emit the selectedText(QString) signal
+  void checkSelectedText();
 
 private slots: 
 
