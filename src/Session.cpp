@@ -140,6 +140,8 @@ Session::Session(QObject* parent) :
            this, SIGNAL(profileChangeCommandReceived(QString)) );
     connect( _emulation, SIGNAL(flowControlKeyPressed(bool)) , this, 
              SLOT(updateFlowControlState(bool)) );
+    connect( _emulation, SIGNAL(primaryScreenInUse(bool)) , this,
+             SLOT(onPrimaryScreenInUse(bool)) );
 
     //create new teletype for I/O with shell process
     openTeletype(-1);
@@ -613,6 +615,12 @@ void Session::updateFlowControlState(bool suspended)
             display->outputSuspended(false);
     }   
 }
+
+void Session::onPrimaryScreenInUse(bool use)
+{
+    emit primaryScreenInUse(use);
+}
+
 void Session::activityStateSet(int state)
 {
     if (state == NOTIFYBELL)

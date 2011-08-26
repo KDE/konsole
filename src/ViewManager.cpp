@@ -520,6 +520,8 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     SessionController* controller = new SessionController(session,view,this);
     connect( controller , SIGNAL(focused(SessionController*)) , this , SLOT(controllerChanged(SessionController*)) );
     connect( session , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
+    connect( session , SIGNAL(primaryScreenInUse(bool)) ,
+             controller , SLOT(setupPrimaryScreenSpecificActions(bool)) );
     connect( view , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
 
     // if this is the first controller created then set it as the active controller

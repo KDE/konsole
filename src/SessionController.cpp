@@ -292,6 +292,17 @@ void SessionController::openUrl( const KUrl& url )
     }
 }
 
+void SessionController::setupPrimaryScreenSpecificActions( bool use)
+{
+    KActionCollection * collection = actionCollection() ;
+    QAction * clearAction = collection->action("clear-history");
+    QAction * resetAction = collection->action("clear-history-and-reset");
+
+    // these actions are meaningful only when primary screen is used.
+    clearAction->setEnabled(use);
+    resetAction->setEnabled(use);
+}
+
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
 {
     if ( watched == _view )

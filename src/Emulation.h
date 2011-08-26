@@ -404,6 +404,12 @@ signals:
    */
   void flowControlKeyPressed(bool suspendKeyPressed);
 
+  /**
+   * Emitted when the active screen is switched, to indicate whether the primary
+   * screen is in use.
+   */
+  void primaryScreenInUse(bool use);
+
 protected:
   virtual void setMode(int mode) = 0;
   virtual void resetMode(int mode) = 0;
@@ -455,6 +461,9 @@ protected slots:
    * much like the Qt buffered update of widgets. 
    */
   void bufferedUpdate();
+
+  // used to emit the primaryScreenInUse(bool) signal
+  void checkScreenInUse();
 
 private slots: 
 

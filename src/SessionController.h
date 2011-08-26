@@ -158,6 +158,11 @@ public slots:
      */
     void openUrl( const KUrl& url ); 
 
+    /**
+     * update actions which are meaningful only when rimary screen is in use.
+     */
+    void setupPrimaryScreenSpecificActions( bool use);
+
 private slots:
     // menu item handlers
     void openBrowser();

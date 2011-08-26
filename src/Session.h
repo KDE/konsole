@@ -576,6 +576,15 @@ signals:
   */
   void flowControlEnabledChanged(bool enabled);
 
+ /**
+  * Emitted when the active screen is swiched, to indicate whether the primary
+  * screen is in use.
+  *
+  * This signal serves as a relayer of Emulation::priamyScreenInUse(bool),
+  * making it usable for higher level component.
+  */
+  void primaryScreenInUse( bool use);
+
 private slots:
   void done(int, QProcess::ExitStatus);
 
@@ -598,6 +607,10 @@ private slots:
 
   void updateFlowControlState(bool suspended);
   void updateWindowSize(int lines, int columns);
+
+  // signal relayer
+  void onPrimaryScreenInUse(bool use);
+
 private:
 
   void updateTerminalSize();
