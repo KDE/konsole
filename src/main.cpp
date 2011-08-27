@@ -38,8 +38,8 @@ using namespace Konsole;
 // Konsole
 void fillAboutData(KAboutData& aboutData);
 void fillCommandLineOptions(KCmdLineOptions& options);
-bool forceNewProcess();     // returns true if new instance should use a new
-                            // process (instead of re-using an existing one)
+bool shouldUseNewProcess();  // returns true if new instance should use a new
+                             // process (instead of re-using an existing one)
 void restoreSession(Application& app);
 
 // ***
@@ -62,7 +62,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     KUniqueApplication::addCmdLineOptions();
 
     KUniqueApplication::StartFlags startFlags;
-    if (forceNewProcess())
+    if (shouldUseNewProcess())
         startFlags = KUniqueApplication::NonUniqueInstance;
 
     // create a new application instance if there are no running Konsole instances,
@@ -76,7 +76,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     restoreSession(app);
     return app.exec();
 }
-bool forceNewProcess()
+bool shouldUseNewProcess()
 {
     // when starting Konsole from a terminal, a new process must be used 
     // so that the current environment is propagated into the shells of the new
