@@ -15,3 +15,4 @@ add_subdirectory( data )
 add_subdirectory( desktop )
 add_subdirectory( doc/manual )
 
+macro_display_feature_log()
