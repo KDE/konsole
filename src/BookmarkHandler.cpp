@@ -47,12 +47,11 @@ BookmarkHandler::BookmarkHandler( KActionCollection* collection,
                                   QObject* parent )
     : QObject( parent ),
       KBookmarkOwner(),
+      m_menu(menu),
       m_toplevel(toplevel),
       m_activeView(0)
 {
     setObjectName( QLatin1String( "BookmarkHandler" ) );
-
-    m_menu = menu;
 
     m_file = KStandardDirs::locate( "data", "konsole/bookmarks.xml" );
     if ( m_file.isEmpty() )
