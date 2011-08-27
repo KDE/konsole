@@ -32,6 +32,9 @@
 
 #define KONSOLE_VERSION "2.7.999"
 
+// standard input file descriptor
+static const int STDIN = 0;
+
 using namespace Konsole;
 
 // fill the KAboutData structure with information about contributors to Konsole.
@@ -88,7 +91,7 @@ bool shouldUseNewProcess()
     // Konsole and any debug output or warnings from Konsole are written to
     // the current terminal
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-    return isatty(1) && !args->isSet("new-tab");
+    return isatty(STDIN) && !args->isSet("new-tab");
 }
 
 void fillCommandLineOptions(KCmdLineOptions& options)
