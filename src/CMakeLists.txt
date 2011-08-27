@@ -1,3 +1,5 @@
+macro_optional_find_package(LibKonq)
+macro_log_feature(LIBKONQ_FOUND "LibKonq" "libkonq is a construction kit for a file manager. It comes from kde-baseapps." "http://www.kde.org" TRUE)
 
 ### Compile-time features
 macro_optional_find_package(XKB)
@@ -112,7 +114,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ${QT_QTXML_LIBRARY}
         ${KDE4_KNOTIFYCONFIG_LIBRARY}
         ${X11_LIBRARIES}
-        konq
+        ${LIBKONQ_LIBRARY}
     )
 
     # XRender library for true transparency support
