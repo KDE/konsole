@@ -54,8 +54,6 @@ BookmarkHandler::BookmarkHandler( KActionCollection* collection,
 
     m_menu = menu;
 
-    QString new_bm_file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
-
     m_file = KStandardDirs::locate( "data", "konsole/bookmarks.xml" );
     if ( m_file.isEmpty() )
         m_file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
