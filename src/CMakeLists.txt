@@ -1,4 +1,4 @@
-macro_optional_find_package(LibKonq)
+find_package(LibKonq)
 macro_log_feature(LIBKONQ_FOUND "LibKonq" "libkonq is a construction kit for a file manager. It comes from kde-baseapps." "http://www.kde.org" TRUE)
 
 ### Compile-time features
