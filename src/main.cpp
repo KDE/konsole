@@ -34,12 +34,17 @@
 
 using namespace Konsole;
 
-// fills the KAboutData structure with information about contributors to 
-// Konsole
+// fill the KAboutData structure with information about contributors to Konsole.
 void fillAboutData(KAboutData& aboutData);
+
+// fill the KCmdLineOptions object with konsole specific options.
 void fillCommandLineOptions(KCmdLineOptions& options);
-bool shouldUseNewProcess();  // returns true if new instance should use a new
-                             // process (instead of re-using an existing one)
+
+// check and report whether this konsole instance should use a new konsole
+// process, or re-use an existing konsole process.
+bool shouldUseNewProcess();
+
+// resotre sessions saved by KDE.
 void restoreSession(Application& app);
 
 // ***
