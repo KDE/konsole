@@ -53,7 +53,6 @@ Application::Application() : KUniqueApplication()
 
 void Application::init()
 {
-    _sessionList = 0;
     _backgroundInstance = 0;
 
     // check for compositing functionality
