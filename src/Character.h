@@ -167,8 +167,6 @@ inline ColorEntry::FontWeight Character::fontWeight(const ColorEntry* base) cons
         return ColorEntry::UseCurrentFormat;
 }
 
-extern unsigned short vt100_graphics[32];
-
 
 /**
  * A table which stores sequences of unicode characters, referenced
