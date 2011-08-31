@@ -212,9 +212,8 @@ void Profile::clone(Profile::Ptr profile, bool differentOnly)
             case Path:
                 break;
             default:
-                if (!differentOnly || 
-                    property<QVariant>(current) != 
-                    otherValue)
+                if (!differentOnly ||
+                    property<QVariant>(current) != otherValue)
                 {
                     setProperty(current,otherValue);
                 }
@@ -291,8 +290,10 @@ int Profile::menuIndexAsInt() const
 {
     bool ok;
     int index = menuIndex().toInt(&ok, 10);
-    if (ok) return index;
-    return 0;
+    if (ok)
+        return index;
+    else
+        return 0;
 }
 
 const QStringList Profile::propertiesInfoList() const
