@@ -774,7 +774,7 @@ QString KeyboardTranslator::Entry::resultToString(bool expandWildCards,Qt::Keybo
         return "ScrollLineDown";
     else if ( _command == ScrollUpToTopCommand )
         return "ScrollUpToTop";
-    else if ( _command == ScrollUpToTopCommand)
+    else if ( _command == ScrollDownToBottomCommand)
         return "ScrollDownToBottom";
     else if ( _command == ScrollLockCommand )
         return "ScrollLock";
