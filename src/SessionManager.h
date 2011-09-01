@@ -335,6 +335,7 @@ private:
 
     QSet<Profile::Ptr> _types;
     QHash<Session*,Profile::Ptr> _sessionProfiles;
+    QHash<Session*,Profile::Ptr> _sessionRuntimeProfiles;
     QHash<Session*,int> _restoreMapping;
 
     struct ShortcutData

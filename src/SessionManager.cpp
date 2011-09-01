@@ -758,18 +758,23 @@ Profile::Ptr SessionManager::findByShortcut(const QKeySequence& shortcut)
 
 void SessionManager::sessionProfileCommandReceived(const QString& text)
 {
-    // FIXME: This is inefficient, it creates a new profile instance for
-    // each set of changes applied.  Instead a new profile should be created
-    // only the first time changes are applied to a session
-
     Session* session = qobject_cast<Session*>(sender());
     Q_ASSERT( session );
 
     ProfileCommandParser parser;
     QHash<Profile::Property,QVariant> changes = parser.parse(text);
 
-    Profile::Ptr newProfile = Profile::Ptr(new Profile(_sessionProfiles[session]));
-    
+    Profile::Ptr newProfile;
+    if ( !_sessionRuntimeProfiles.contains(session) )
+    {
+        newProfile = new Profile(_sessionProfiles[session]);
+        _sessionRuntimeProfiles.insert(session,newProfile);
+    }
+    else
+    {
+        newProfile = _sessionRuntimeProfiles[session];
+    }
+
     QHashIterator<Profile::Property,QVariant> iter(changes);
     while ( iter.hasNext() )
     {
