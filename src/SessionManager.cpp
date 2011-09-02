@@ -353,6 +353,9 @@ void SessionManager::sessionTerminated(QObject* sessionObject)
     Q_ASSERT( session );
 
     _sessions.removeAll(session);
+    _sessionProfiles.remove(session);
+    _sessionRuntimeProfiles.remove(session);
+
     session->deleteLater();
 }
 
