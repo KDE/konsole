@@ -161,9 +161,9 @@ void EditProfileDialog::updateCaption(const Profile::Ptr profile)
 }
 void EditProfileDialog::setProfile(Profile::Ptr profile)
 {
-    _profile = profile;
-
     Q_ASSERT( profile );
+
+    _profile = profile;
 
     // update caption
     updateCaption(profile);
