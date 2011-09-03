@@ -1193,9 +1193,9 @@ void SessionController::sessionStateChanged(int state)
 
 void SessionController::zmodemDownload()
 {
-    QString zmodem = KGlobal::dirs()->findExe("rz");
+    QString zmodem = KStandardDirs::findExe("rz");
     if(zmodem.isEmpty()) {
-       zmodem = KGlobal::dirs()->findExe("lrz");
+       zmodem = KStandardDirs::findExe("lrz");
     }
     if(!zmodem.isEmpty()) {
         const QString path = KFileDialog::getExistingDirectory(
@@ -1224,9 +1224,9 @@ void SessionController::zmodemUpload()
          i18n("<p>The current session already has a ZModem file transfer in progress.</p>"));
       return;
     }
-    QString zmodem = KGlobal::dirs()->findExe("sz");
+    QString zmodem = KStandardDirs::findExe("sz");
     if(zmodem.isEmpty()) {
-       zmodem = KGlobal::dirs()->findExe("lsz");
+       zmodem = KStandardDirs::findExe("lsz");
     }
     if(zmodem.isEmpty()) {
         KMessageBox::sorry(_view,

@@ -365,7 +365,7 @@ QString Session::checkProgram(const QString& program) const
 
     exec = KRun::binaryName(exec, false);
     exec = KShell::tildeExpand(exec);
-    QString pexec = KGlobal::dirs()->findExe(exec);
+    QString pexec = KStandardDirs::findExe(exec);
     if ( pexec.isEmpty() ) 
     {
         kError() << i18n("Could not find binary: ") << exec;
