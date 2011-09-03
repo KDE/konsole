@@ -89,7 +89,7 @@ SessionManager::SessionManager()
     const KConfigGroup group = appConfig->group( "Desktop Entry" );
     QString defaultSessionFilename = group.readEntry("DefaultProfile","Shell.profile");
 
-    QString path = KGlobal::dirs()->findResource("data","konsole/"+defaultSessionFilename);
+    QString path = KStandardDirs::locate("data","konsole/"+defaultSessionFilename);
     if (!path.isEmpty())
     {
         Profile::Ptr profile = loadProfile(path);
