@@ -90,8 +90,7 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     connect( _ui->tabWidget , SIGNAL(currentChanged(int)) , this , 
             SLOT(preparePage(int)) );
 
-    _tempProfile = Profile::Ptr(new Profile);
-    _tempProfile->setHidden(true);
+    createTempProfile();
 }
 EditProfileDialog::~EditProfileDialog()
 {
@@ -113,8 +112,8 @@ void EditProfileDialog::save()
         _previewedProperties.remove(iter.key());
     }
 
-    _tempProfile = Profile::Ptr(new Profile);
-    _tempProfile->setHidden(true);
+    createTempProfile();
+
     enableButtonApply(false);
 }
 void EditProfileDialog::reject()
@@ -178,8 +177,7 @@ void EditProfileDialog::setProfile(Profile::Ptr profile)
 
     if ( _tempProfile )
     {
-        _tempProfile = Profile::Ptr(new Profile);
-        _tempProfile->setHidden(true);
+        createTempProfile();
     }
 }
 const Profile::Ptr EditProfileDialog::lookupProfile() const
@@ -821,6 +819,12 @@ void EditProfileDialog::updateTransparencyWarning()
         bool hasTransparency = index.data(Qt::UserRole+1).value<const ColorScheme*>()->opacity() < 1.0;
         _ui->transparencyWarningWidget->setHidden(KWindowSystem::compositingActive() || !hasTransparency);
     }
+}
+
+void EditProfileDialog::createTempProfile()
+{
+    _tempProfile = Profile::Ptr(new Profile);
+    _tempProfile->setHidden(true);
 }
 
 void EditProfileDialog::updateTempProfileProperty(Profile::Property property, const QVariant & value)
