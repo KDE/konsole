@@ -179,6 +179,7 @@ void EditProfileDialog::setProfile(Profile::Ptr profile)
     if ( _tempProfile )
     {
         _tempProfile = Profile::Ptr(new Profile);
+        _tempProfile->setHidden(true);
     }
 }
 const Profile::Ptr EditProfileDialog::lookupProfile() const
