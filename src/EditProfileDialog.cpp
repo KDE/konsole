@@ -90,7 +90,7 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     connect( _ui->tabWidget , SIGNAL(currentChanged(int)) , this , 
             SLOT(preparePage(int)) );
 
-    _tempProfile = new Profile;
+    _tempProfile = Profile::Ptr(new Profile);
     _tempProfile->setHidden(true);
 }
 EditProfileDialog::~EditProfileDialog()
@@ -113,7 +113,7 @@ void EditProfileDialog::save()
         _previewedProperties.remove(iter.key());
     }
 
-    _tempProfile = new Profile ;
+    _tempProfile = Profile::Ptr(new Profile);
     _tempProfile->setHidden(true);
     enableButtonApply(false);
 }
@@ -178,7 +178,7 @@ void EditProfileDialog::setProfile(Profile::Ptr profile)
 
     if ( _tempProfile )
     {
-        _tempProfile = new Profile;
+        _tempProfile = Profile::Ptr(new Profile);
     }
 }
 const Profile::Ptr EditProfileDialog::lookupProfile() const
