@@ -156,7 +156,7 @@ Session::Session(QObject* parent) :
 
 void Session::openTeletype(int fd)
 {
-    if (_shellProcess && isRunning())
+    if ( isRunning() )
     {
         kWarning() << "Attempted to open teletype in a running session.";
         return;
@@ -224,7 +224,7 @@ bool Session::hasDarkBackground() const
 }
 bool Session::isRunning() const
 {
-    return _shellProcess->state() == QProcess::Running;
+    return _shellProcess && ( _shellProcess->state() == QProcess::Running );
 }
 
 void Session::setCodec(QTextCodec* codec)
