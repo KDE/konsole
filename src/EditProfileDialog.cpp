@@ -232,32 +232,32 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     // basic profile options
     {
         ProfileGroup::Ptr group = info->asGroup(); 
-        if (!group || group->profiles().count() < 2)
+        if ( !group || group->profiles().count() < 2)
         {
-            _ui->profileNameEdit->setClearButtonShown(true);
             _ui->profileNameEdit->setText( info->name() );
+            _ui->profileNameEdit->setClearButtonShown(true);
         }
         else 
         {
             _ui->profileNameEdit->setText( groupProfileNames(group,-1) );
-            _ui->profileNameLabel->setEnabled(false);
             _ui->profileNameEdit->setEnabled(false);
+            _ui->profileNameLabel->setEnabled(false);
         }
     }
 
     ShellCommand command( info->command() , info->arguments() );
     _ui->commandEdit->setText( command.fullCommand() );
-
     KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
     exeCompletion->setParent(this);
     exeCompletion->setDir(QString());
     _ui->commandEdit->setCompletionObject( exeCompletion );
-    _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
 
+    _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
     KUrlCompletion* dirCompletion = new KUrlCompletion(KUrlCompletion::DirCompletion);
     dirCompletion->setParent(this);
     _ui->initialDirEdit->setCompletionObject( dirCompletion );
     _ui->initialDirEdit->setClearButtonShown(true);
+
     _ui->dirSelectButton->setIcon( KIcon("folder-open") );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
     _ui->startInSameDirButton->setChecked(info->property<bool>(Profile::StartInCurrentSessionDir));
@@ -278,17 +278,15 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
             SLOT(initialDirChanged(QString)) );
     connect(_ui->commandEdit , SIGNAL(textChanged(QString)) , this ,
             SLOT(commandChanged(QString)) ); 
+    connect(_ui->environmentEditButton , SIGNAL(clicked()) , this , 
+            SLOT(showEnvironmentEditor()) );
     
     connect(_ui->showMenuBarButton , SIGNAL(toggled(bool)) , this , 
             SLOT(showMenuBar(bool)) );
     connect(_ui->saveGeometryOnExitButton , SIGNAL(toggled(bool)) , this ,
             SLOT(saveGeometryOnExit(bool)) );
-
     connect(_ui->showSizeWidgetButton , SIGNAL(toggled(bool)) , this ,
             SLOT(showSizeWidget(bool)) );
-
-    connect(_ui->environmentEditButton , SIGNAL(clicked()) , this , 
-            SLOT(showEnvironmentEditor()) );
 }
 void EditProfileDialog::showEnvironmentEditor()
 {
@@ -337,6 +335,7 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
                                                       << i18n("Above Terminal Displays") );
 
     _ui->tabBarPositionCombo->setCurrentIndex(tabPosition);
+
     _ui->newTabButton->setChecked(info->property<bool>(Profile::ShowNewAndCloseTabButtons));
 
     // signals and slots
@@ -581,11 +580,10 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     if (!_ui->keyBindingList->model())
         _ui->keyBindingList->setModel(new QStandardItemModel(this));
 
-    KeyboardTranslatorManager* keyManager = KeyboardTranslatorManager::instance();
-
     const QString& name = lookupProfile()
                                     ->property<QString>(Profile::KeyBindings);
 
+    KeyboardTranslatorManager* keyManager = KeyboardTranslatorManager::instance();
     const KeyboardTranslator* currentTranslator = keyManager->findTranslator(name);
     
     QStandardItemModel* model = qobject_cast<QStandardItemModel*>(_ui->keyBindingList->model());
