@@ -393,7 +393,7 @@ QString SessionManager::saveProfile(Profile::Ptr info)
 }
 
 void SessionManager::changeProfile(Profile::Ptr info , 
-                                   QHash<Profile::Property,QVariant> propertyMap, bool persistant)
+                                   QHash<Profile::Property,QVariant> propertyMap, bool persistent)
 {
     Q_ASSERT(info); 
 
@@ -415,7 +415,7 @@ void SessionManager::changeProfile(Profile::Ptr info ,
     if (group)
     {
         foreach(const Profile::Ptr &profile, group->profiles())
-            changeProfile(profile,propertyMap,persistant);
+            changeProfile(profile,propertyMap,persistent);
         return;
     }
     
@@ -427,7 +427,7 @@ void SessionManager::changeProfile(Profile::Ptr info ,
 
     // save changes to disk, unless the profile is hidden, in which case
     // it has no file on disk 
-    if ( persistant && !info->isHidden() )
+    if ( persistent && !info->isHidden() )
     {
         info->setProperty(Profile::Path,saveProfile(info));
     }

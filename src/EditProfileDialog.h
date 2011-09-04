@@ -58,7 +58,7 @@ class Profile;
  *
  * Some changes made in the dialog are preview-only changes which cause
  * the SessionManager's changeProfile() method to be called with
- * the persistant argument set to false.  These changes are then
+ * the persistent argument set to false.  These changes are then
  * un-done when the dialog is closed.
  */
 class KONSOLEPRIVATE_EXPORT EditProfileDialog : public KDialog
