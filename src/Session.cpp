@@ -401,6 +401,13 @@ QString Session::shellSessionId() const
 
 void Session::run()
 {
+    // extra safeguard for potential bug.
+    if ( isRunning() )
+    {
+        kWarning() << "Attempted to re-run an already running session.";
+        return;
+    }
+
     //check that everything is in place to run the session
     if (_program.isEmpty())
     {
