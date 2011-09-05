@@ -22,9 +22,11 @@
 #ifndef TERMINAL_CHARACTER_DECODER_H
 #define TERMINAL_CHARACTER_DECODER_H
 
-#include "Character.h"
-
+// Qt
 #include <QtCore/QList>
+
+// Konsole
+#include "Character.h"
 
 class QTextStream;
 

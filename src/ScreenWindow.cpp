@@ -20,7 +20,7 @@
 // Own
 #include "ScreenWindow.h"
 
-// Qt
+// KDE
 #include <KDebug>
 
 // Konsole

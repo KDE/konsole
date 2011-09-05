@@ -20,7 +20,7 @@
 // Own
 #include "ShellCommand.h"
 
-// Qt
+// KDE
 #include <KShell>
 #include <KDebug>
 

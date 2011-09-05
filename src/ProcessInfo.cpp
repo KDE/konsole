@@ -29,7 +29,6 @@
 #include <pwd.h>
 
 // Qt
-#include <KDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 #include <QtCore/QRegExp>
@@ -41,6 +40,7 @@
 #include <KGlobal>
 #include <KSharedConfig>
 #include <KUser>
+#include <KDebug>
 
 #if defined(Q_OS_MAC)
 #include <sys/sysctl.h>

@@ -20,7 +20,6 @@
 // Own
 #include "Application.h"
 #include "MainWindow.h"
-#include <KDebug>
 
 // Unix
 #include <unistd.h>
@@ -29,6 +28,7 @@
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KLocale>
+#include <KDebug>
 
 #define KONSOLE_VERSION "2.7.999"
 

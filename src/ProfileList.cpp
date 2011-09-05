@@ -23,11 +23,11 @@
 // Qt
 #include <QtGui/QAction>
 #include <QtGui/QActionGroup>
-#include <KDebug>
 
 // KDE
 #include <KIcon>
 #include <KLocalizedString>
+#include <KDebug>
 
 // Konsole
 #include "SessionManager.h"
