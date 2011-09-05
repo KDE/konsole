@@ -113,7 +113,7 @@ signals:
      */
     void openUrls( const QList<KUrl>& urls );
 
-private Q_SLOTS:
+private slots:
     void openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers );
 
 private:

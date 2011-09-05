@@ -290,7 +290,7 @@ signals:
      */
     void shortcutChanged(Profile::Ptr profile , const QKeySequence& newShortcut);
 
-protected Q_SLOTS:
+protected slots:
 
     /**
      * Called to inform the manager that a session has finished executing.
