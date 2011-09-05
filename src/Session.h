@@ -691,8 +691,6 @@ private:
 
   QColor         _modifiedBackground; // as set by: echo -en '\033]11;Color\007
 
-  QString        _profileKey;
-
   bool _hasDarkBackground;
 
   static int lastSessionId;
