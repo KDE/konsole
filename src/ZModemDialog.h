@@ -43,7 +43,7 @@ public:
      */
     void transferDone();
 
-public Q_SLOTS:
+private slots:
     void slotClose();
 
 private:
