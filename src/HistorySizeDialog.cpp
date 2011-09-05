@@ -59,13 +59,11 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
 
     QVBoxLayout* dialogLayout = new QVBoxLayout(dialogWidget);
 
-    QButtonGroup* modeGroup = new QButtonGroup(this);
-
-    _noHistoryButton = new QRadioButton( i18n("No scrollback") );
-    _fixedHistoryButton = new QRadioButton( i18n("Fixed size scrollback: ") );
+    _noHistoryButton        = new QRadioButton( i18n("No scrollback") );
+    _fixedHistoryButton     = new QRadioButton( i18n("Fixed size scrollback: ") );
     _unlimitedHistoryButton = new QRadioButton( i18n("Unlimited scrollback") );
-    _saveToCurrentProfileButton = new QCheckBox( i18n("Save to current profile") );
 
+    QButtonGroup* modeGroup = new QButtonGroup(this);
     modeGroup->addButton(_noHistoryButton);
     modeGroup->addButton(_fixedHistoryButton);
     modeGroup->addButton(_unlimitedHistoryButton);
@@ -81,18 +79,20 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     // 1000 lines was the default in the KDE 3 series
     // using that for now
     _lineCountBox->setValue( _defaultLineCount );
-
     _lineCountBox->setSingleStep( _defaultLineCount / 10 );
 
-    QLabel* lineCountLabel = new QLabel(i18n("lines"),this);
-    QHBoxLayout* lineCountLayout = new QHBoxLayout();
-
     _fixedHistoryButton->setFocusProxy(_lineCountBox);
+    connect( _fixedHistoryButton , SIGNAL(clicked()) ,
+             _lineCountBox , SLOT(selectAll()) );
 
-    connect( _fixedHistoryButton , SIGNAL(clicked()) , _lineCountBox , SLOT(selectAll()) );
+    QLabel* lineCountLabel = new QLabel(i18n("lines"),this);
+
+    QHBoxLayout* lineCountLayout = new QHBoxLayout();
     lineCountLayout->addWidget(_fixedHistoryButton);
     lineCountLayout->addWidget(_lineCountBox);
     lineCountLayout->addWidget(lineCountLabel);
+
+    _saveToCurrentProfileButton = new QCheckBox( i18n("Save to current profile") );
 
     dialogLayout->addWidget(_noHistoryButton);
     dialogLayout->addLayout(lineCountLayout);
