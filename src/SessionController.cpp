@@ -1123,7 +1123,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         //kDebug(1211) << "Created xmlgui factory" << factory;
     }
 
-    QMenu* popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu",this));
+    QPointer<QMenu> popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu",this));
     if (popup)
     {
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
@@ -1137,11 +1137,19 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         popup->insertActions(popup->actions().value(0,0),contentActions);
         QAction* chosen = popup->exec( _view->mapToGlobal(position) );
 
-        // remove content-specific actions, unless the close action was chosen
-        // in which case the popup menu will be partially destroyed at this point
-           foreach(QAction* action,contentActions)
-            popup->removeAction(action);
-        delete contentSeparator;
+	// check for validity of the pointer to the popup menu
+	if (popup)
+	{
+            // Remove content-specific actions
+            //
+            // If the close action was chosen, the popup menu will be partially
+            // destroyed at this point, and the rest will be destroyed later by
+            // 'chosen->trigger()'
+            foreach (QAction* action,contentActions)
+		popup->removeAction(action);
+
+            delete contentSeparator;
+	}
 
         _preventClose = false;
 
