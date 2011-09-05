@@ -110,11 +110,30 @@ void HistorySizeDialog::emitOptionsChanged()
     emit optionsChanged( mode() , lineCount(), saveToCurrentProfile() );
 }
 
-void HistorySizeDialog::setDefaultMode( HistoryMode mode ) { _defaultMode = mode; }
-HistorySizeDialog::HistoryMode HistorySizeDialog::defaultMode() const { return _defaultMode; }
-void HistorySizeDialog::setDefaultLineCount( int count ) { _defaultLineCount = count; }
-int HistorySizeDialog::defaultLineCount() const { return _defaultLineCount; }
-bool HistorySizeDialog::saveToCurrentProfile() const { return _saveToCurrentProfileButton->isChecked(); }
+void HistorySizeDialog::setDefaultMode( HistoryMode mode )
+{
+    _defaultMode = mode;
+}
+
+HistorySizeDialog::HistoryMode HistorySizeDialog::defaultMode() const
+{
+    return _defaultMode;
+}
+
+void HistorySizeDialog::setDefaultLineCount( int count )
+{
+    _defaultLineCount = count;
+}
+
+int HistorySizeDialog::defaultLineCount() const
+{
+    return _defaultLineCount;
+}
+
+bool HistorySizeDialog::saveToCurrentProfile() const
+{
+    return _saveToCurrentProfileButton->isChecked();
+}
 
 void HistorySizeDialog::useDefaults()
 {
