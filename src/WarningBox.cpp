@@ -21,8 +21,8 @@
 #include "WarningBox.h"
 
 // Qt
-#include <QLabel>
-#include <QHBoxLayout>
+#include <QtGui/QLabel>
+#include <QtGui/QHBoxLayout>
 
 // KDE
 #include <KIcon>

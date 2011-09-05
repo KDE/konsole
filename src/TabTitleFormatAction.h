@@ -21,7 +21,7 @@
 #define TABTITLEFORMATACTION_H
 
 // Qt
-#include <QAction>
+#include <QtGui/QAction>
 
 // Konsole
 #include "Session.h"

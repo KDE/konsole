@@ -26,7 +26,7 @@
 #include <QtGui/QBrush>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
-#include <QPainter>
+#include <QtGui/QPainter>
 
 // KDE
 #include <KColorScheme>

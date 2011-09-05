@@ -21,7 +21,7 @@
 #define WARNINGBOX_H
 
 // Qt
-#include <QFrame>
+#include <QtGui/QFrame>
 
 class QLabel;
 

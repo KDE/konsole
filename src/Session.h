@@ -27,7 +27,7 @@
 // Qt
 #include <QtCore/QStringList>
 #include <QtCore/QByteRef>
-#include <QUuid>
+#include <QtCore/QUuid>
 
 // KDE
 #include <KApplication>

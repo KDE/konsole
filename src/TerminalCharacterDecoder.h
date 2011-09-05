@@ -24,7 +24,7 @@
 
 #include "Character.h"
 
-#include <QList>
+#include <QtCore/QList>
 
 class QTextStream;
 

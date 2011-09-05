@@ -22,7 +22,7 @@
 
 // Qt
 #include <QtGui/QWidget>
-#include <QBitArray>
+#include <QtCore/QBitArray>
 
 class QCheckBox;
 class QLabel;

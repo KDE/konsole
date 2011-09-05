@@ -23,7 +23,7 @@
 
 // Qt
 #include <QtGui/QApplication>
-#include <QMenu>
+#include <QtGui/QMenu>
 
 // KDE
 #include <KAction>

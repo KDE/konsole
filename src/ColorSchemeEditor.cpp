@@ -26,7 +26,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QItemDelegate>
 #include <QtGui/QItemEditorCreator>
-#include <QFileInfo>
+#include <QtCore/QFileInfo>
 
 // KDE
 #include <KColorDialog>

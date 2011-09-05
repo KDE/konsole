@@ -21,7 +21,7 @@
 #define COPYINPUTDIALOG
 
 // Qt
-#include <QPointer>
+#include <QtCore/QPointer>
 
 // KDE
 #include <KDialog>

@@ -22,7 +22,7 @@
 
 // Qt
 #include <QtCore/QStringList>
-#include <QDir>
+#include <QtCore/QDir>
 
 // KDE
 #include <KAction>

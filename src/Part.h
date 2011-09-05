@@ -23,7 +23,9 @@
 // KDE
 #include <KParts/Part>
 #include <kde_terminal_interface_v2.h>
-#include <QVariantList>
+
+// Qt
+#include <QtCore/QVariantList>
 
 // Konsole
 #include "Profile.h"

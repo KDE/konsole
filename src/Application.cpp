@@ -24,9 +24,9 @@
 #include <iostream>
 
 // Qt
-#include <QHashIterator>
-#include <QFileInfo>
-#include <QDir>
+#include <QtCore/QHashIterator>
+#include <QtCore/QFileInfo>
+#include <QtCore/QDir>
 
 // KDE
 #include <KAction>

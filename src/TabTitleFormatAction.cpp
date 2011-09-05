@@ -21,8 +21,8 @@
 #include "TabTitleFormatAction.h"
 
 // Qt
-#include <QList>
-#include <QMenu>
+#include <QtCore/QList>
+#include <QtGui/QMenu>
 
 // KDE
 #include <KLocale>
