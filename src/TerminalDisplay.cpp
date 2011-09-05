@@ -57,7 +57,6 @@
 #include <klocalizedstring.h>
 
 // Konsole
-//#include <config-apps.h>
 #include "Filter.h"
 #include "konsole_wcwidth.h"
 #include "TerminalCharacterDecoder.h"

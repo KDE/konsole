@@ -28,7 +28,6 @@
 
 // Qt 
 #include <QtGui/QKeyEvent>
-//#include <QPointer>
 #include <QtCore/QTextCodec>
 #include <QtCore/QTextStream>
 #include <QtCore/QTimer>
