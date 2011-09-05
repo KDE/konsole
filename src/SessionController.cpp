@@ -958,7 +958,9 @@ void SessionController::showHistoryOptions()
     if ( currentHistory.isEnabled() )
     {
         if ( currentHistory.isUnlimited() )
+        {
             dialog->setMode( HistorySizeDialog::UnlimitedHistory );
+        }
         else
         {
             dialog->setMode( HistorySizeDialog::FixedSizeHistory );
@@ -966,7 +968,9 @@ void SessionController::showHistoryOptions()
         }
     }
     else
+    {
         dialog->setMode( HistorySizeDialog::NoHistory );
+    }
 
     connect( dialog , SIGNAL(optionsChanged(int,int,bool)) ,
              this , SLOT(scrollBackOptionsChanged(int,int,bool)) );
