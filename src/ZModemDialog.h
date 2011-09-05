@@ -28,25 +28,26 @@ namespace Konsole
 
 class ZModemDialog : public KDialog
 {
-  Q_OBJECT
-public:
-  ZModemDialog(QWidget *parent, bool modal, const QString &caption);
-  
-  /**
-   * Adds a line of text to the progress window
-   */
-  void addProgressText(const QString &);
+Q_OBJECT
 
-  /**
-   * To indicate the process is finished.
-   */
-  void transferDone();
+public:
+    ZModemDialog(QWidget *parent, bool modal, const QString &caption);
+
+    /**
+     * Adds a line of text to the progress window
+     */
+    void addProgressText(const QString &);
+
+    /**
+     * To indicate the process is finished.
+     */
+    void transferDone();
 
 public Q_SLOTS:
-  void slotClose();
-  
+    void slotClose();
+
 private:
-  KTextEdit* _textEdit;
+    KTextEdit* _textEdit;
 };
 
 }
