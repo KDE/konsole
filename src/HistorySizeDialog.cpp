@@ -49,8 +49,8 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
 {
     // basic dialog properties
     setPlainCaption( i18n("Scrollback Options") );
-    setButtons(  Default | Ok | Cancel );
-    setDefaultButton(Ok);
+    setButtons( KDialog::Default | KDialog::Ok | KDialog::Cancel );
+    setDefaultButton( KDialog::Ok );
     setModal( false );
 
     // dialog widgets
