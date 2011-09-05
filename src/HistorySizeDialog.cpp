@@ -100,10 +100,6 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     dialogLayout->insertSpacing(3, 10);
     dialogLayout->addWidget(_saveToCurrentProfileButton);
 
-    // select the fixed size mode by default
-    _fixedHistoryButton->click();
-    _fixedHistoryButton->setFocus( Qt::OtherFocusReason );
-
     connect(this,SIGNAL(defaultClicked()),this,SLOT(useDefaults()));
 
     connect(this,SIGNAL(accepted()),this,SLOT(emitOptionsChanged()));
