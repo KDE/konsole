@@ -237,7 +237,6 @@ void Emulation::sendMouseEvent(int /*buttons*/, int /*column*/, int /*row*/, int
 
 /*
    We are doing code conversion from locale to unicode first.
-TODO: Character composition from the old code.  See #96536
 */
 
 void Emulation::receiveData(const char* text, int length)
