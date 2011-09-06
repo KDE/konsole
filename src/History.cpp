@@ -86,7 +86,7 @@ FIXME: There is noticeable decrease in speed, also. Perhaps,
 
 HistoryFile::HistoryFile()
   : _fd(-1),
-    length(0),
+    _length(0),
     fileMap(0)
 {
   if (_tmpFile.open())
@@ -109,7 +109,7 @@ void HistoryFile::map()
 {
     assert( fileMap == 0 );
 
-    fileMap = (char*)mmap( 0 , length , PROT_READ , MAP_PRIVATE , _fd , 0 );
+    fileMap = (char*)mmap( 0 , _length , PROT_READ , MAP_PRIVATE , _fd , 0 );
 
     //if mmap'ing fails, fall back to the read-lseek combination
     if ( fileMap == MAP_FAILED )
@@ -122,7 +122,7 @@ void HistoryFile::map()
 
 void HistoryFile::unmap()
 {
-    int result = munmap( fileMap , length );
+    int result = munmap( fileMap , _length );
     assert( result == 0 ); Q_UNUSED( result );
 
     fileMap = 0;
@@ -142,9 +142,9 @@ void HistoryFile::add(const unsigned char* bytes, int len)
 
   int rc = 0;
 
-  rc = KDE_lseek(_fd,length,SEEK_SET); if (rc < 0) { perror("HistoryFile::add.seek"); return; }
+  rc = KDE_lseek(_fd,_length,SEEK_SET); if (rc < 0) { perror("HistoryFile::add.seek"); return; }
   rc = write(_fd,bytes,len);       if (rc < 0) { perror("HistoryFile::add.write"); return; }
-  length += rc;
+  _length += rc;
 }
 
 void HistoryFile::get(unsigned char* bytes, int len, int loc)
@@ -166,7 +166,7 @@ void HistoryFile::get(unsigned char* bytes, int len, int loc)
   {    
       int rc = 0;
 
-      if (loc < 0 || len < 0 || loc + len > length)
+      if (loc < 0 || len < 0 || loc + len > _length)
         fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
       rc = KDE_lseek(_fd,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
       rc = read(_fd,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); return; }
@@ -175,7 +175,7 @@ void HistoryFile::get(unsigned char* bytes, int len, int loc)
 
 int HistoryFile::len()
 {
-  return length;
+  return _length;
 }
 
 

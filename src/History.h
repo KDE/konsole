@@ -64,8 +64,8 @@ public:
 
 private:
   int  _fd;
-  int  length;
-  KTemporaryFile tmpFile;
+  int  _length;
+  KTemporaryFile _tmpFile;
 
   //pointer to start of mmap'ed file data, or 0 if the file is not mmap'ed
   char* fileMap;
