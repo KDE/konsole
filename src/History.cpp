@@ -89,10 +89,10 @@ HistoryFile::HistoryFile()
     length(0),
     fileMap(0)
 {
-  if (tmpFile.open())
+  if (_tmpFile.open())
   { 
-    tmpFile.setAutoRemove(true);
-    _fd = tmpFile.handle();
+    _tmpFile.setAutoRemove(true);
+    _fd = _tmpFile.handle();
   }
 }
 
