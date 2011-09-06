@@ -87,7 +87,7 @@ FIXME: There is noticeable decrease in speed, also. Perhaps,
 HistoryFile::HistoryFile()
   : _fd(-1),
     _length(0),
-    fileMap(0)
+    _fileMap(0)
 {
   if (_tmpFile.open())
   { 
@@ -98,7 +98,7 @@ HistoryFile::HistoryFile()
 
 HistoryFile::~HistoryFile()
 {
-    if (fileMap)
+    if (_fileMap)
         unmap();
 }
 
@@ -107,38 +107,38 @@ HistoryFile::~HistoryFile()
 //to avoid this.
 void HistoryFile::map()
 {
-    assert( fileMap == 0 );
+    assert( _fileMap == 0 );
 
-    fileMap = (char*)mmap( 0 , _length , PROT_READ , MAP_PRIVATE , _fd , 0 );
+    _fileMap = (char*)mmap( 0 , _length , PROT_READ , MAP_PRIVATE , _fd , 0 );
 
     //if mmap'ing fails, fall back to the read-lseek combination
-    if ( fileMap == MAP_FAILED )
+    if ( _fileMap == MAP_FAILED )
     {
-            readWriteBalance = 0; 
-            fileMap = 0;
+            _readWriteBalance = 0; 
+            _fileMap = 0;
             kWarning() << k_funcinfo << ": mmap'ing history failed.  errno = " << errno;
     }
 }
 
 void HistoryFile::unmap()
 {
-    int result = munmap( fileMap , _length );
+    int result = munmap( _fileMap , _length );
     assert( result == 0 ); Q_UNUSED( result );
 
-    fileMap = 0;
+    _fileMap = 0;
 }
 
 bool HistoryFile::isMapped()
 {
-    return (fileMap != 0);
+    return (_fileMap != 0);
 }
 
 void HistoryFile::add(const unsigned char* bytes, int len)
 {
-  if ( fileMap )
+  if ( _fileMap )
           unmap();
         
-  readWriteBalance++;
+  _readWriteBalance++;
 
   int rc = 0;
 
@@ -153,14 +153,14 @@ void HistoryFile::get(unsigned char* bytes, int len, int loc)
   //If there are many more get() calls compared with add() 
   //calls (decided by using MAP_THRESHOLD) then mmap the log
   //file to improve performance.
-  readWriteBalance--;
-  if ( !fileMap && readWriteBalance < MAP_THRESHOLD )
+  _readWriteBalance--;
+  if ( !_fileMap && _readWriteBalance < MAP_THRESHOLD )
           map();
 
-  if ( fileMap )
+  if ( _fileMap )
   {
     for (int i=0;i<len;i++)
-            bytes[i]=fileMap[loc+i];
+            bytes[i]=_fileMap[loc+i];
   }
   else
   {    
