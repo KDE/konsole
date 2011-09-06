@@ -63,7 +63,7 @@ public:
 
 
 private:
-  int  ion;
+  int  _fd;
   int  length;
   KTemporaryFile tmpFile;
 

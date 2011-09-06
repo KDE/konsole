@@ -85,14 +85,14 @@ FIXME: There is noticeable decrease in speed, also. Perhaps,
 */
 
 HistoryFile::HistoryFile()
-  : ion(-1),
+  : _fd(-1),
     length(0),
     fileMap(0)
 {
   if (tmpFile.open())
   { 
     tmpFile.setAutoRemove(true);
-    ion = tmpFile.handle();
+    _fd = tmpFile.handle();
   }
 }
 
@@ -109,7 +109,7 @@ void HistoryFile::map()
 {
     assert( fileMap == 0 );
 
-    fileMap = (char*)mmap( 0 , length , PROT_READ , MAP_PRIVATE , ion , 0 );
+    fileMap = (char*)mmap( 0 , length , PROT_READ , MAP_PRIVATE , _fd , 0 );
 
     //if mmap'ing fails, fall back to the read-lseek combination
     if ( fileMap == MAP_FAILED )
@@ -142,8 +142,8 @@ void HistoryFile::add(const unsigned char* bytes, int len)
 
   int rc = 0;
 
-  rc = KDE_lseek(ion,length,SEEK_SET); if (rc < 0) { perror("HistoryFile::add.seek"); return; }
-  rc = write(ion,bytes,len);       if (rc < 0) { perror("HistoryFile::add.write"); return; }
+  rc = KDE_lseek(_fd,length,SEEK_SET); if (rc < 0) { perror("HistoryFile::add.seek"); return; }
+  rc = write(_fd,bytes,len);       if (rc < 0) { perror("HistoryFile::add.write"); return; }
   length += rc;
 }
 
@@ -168,8 +168,8 @@ void HistoryFile::get(unsigned char* bytes, int len, int loc)
 
       if (loc < 0 || len < 0 || loc + len > length)
         fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
-      rc = KDE_lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
-      rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); return; }
+      rc = KDE_lseek(_fd,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
+      rc = read(_fd,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); return; }
   }
 }
 
