@@ -48,7 +48,6 @@
 #include <KLocale>
 #include <KMenu>
 #include <KColorCollection>
-#include <KTabWidget>
 
 // Konsole
 #include "IncrementalSearchBar.h"
