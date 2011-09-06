@@ -26,6 +26,7 @@
 // Qt
 #include <QtCore/QDateTime>
 #include <QtCore/QSignalMapper>
+#include <QtCore/QStringList>
 #include <QtGui/QMenu>
 
 // KDE
@@ -35,7 +36,6 @@
 #include <KLocale>
 #include <KToggleAction>
 #include <KXMLGUIFactory>
-#include <QStringList>
 #include <KConfigGroup>
 
 // Konsole
