@@ -183,13 +183,13 @@ int HistoryFile::len()
 
 
 HistoryScroll::HistoryScroll(HistoryType* t)
-  : m_histType(t)
+  : _historyType(t)
 {
 }
 
 HistoryScroll::~HistoryScroll()
 {
-  delete m_histType;
+  delete _historyType;
 }
 
 bool HistoryScroll::hasScroll()
@@ -394,7 +394,7 @@ void HistoryScrollBuffer::setMaxNbLines(unsigned int lineCount)
     delete[] oldBuffer;
 
     _wrappedLine.resize(lineCount);
-    dynamic_cast<HistoryTypeBuffer*>(m_histType)->m_nbLines = lineCount;
+    dynamic_cast<HistoryTypeBuffer*>(_historyType)->m_nbLines = lineCount;
 }
 
 int HistoryScrollBuffer::bufferIndex(int lineNumber)

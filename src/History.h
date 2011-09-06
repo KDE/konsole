@@ -118,10 +118,10 @@ public:
   // is very unsafe, because those references will no longer
   // be valid if the history scroll is deleted.
   //
-  const HistoryType& getType() { return *m_histType; }
+  const HistoryType& getType() { return *_historyType; }
 
 protected:
-  HistoryType* m_histType;
+  HistoryType* _historyType;
 
 };
 
