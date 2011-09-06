@@ -285,7 +285,6 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
 //    _ui->moveUpButton->setEnabled((selectedRows == 1) && (rowIndex > 0));
 //    _ui->moveDownButton->setEnabled((selectedRows == 1) && (rowIndex < (_sessionModel->rowCount()-1)));
 
-    _ui->sessionTable->selectRow(rowIndex);
 }
 void ManageProfilesDialog::deleteSelected()
 {
