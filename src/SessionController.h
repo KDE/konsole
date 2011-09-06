@@ -24,6 +24,7 @@
 // Qt
 #include <QtGui/QIcon>
 #include <QtCore/QList>
+#include <QtCore/QSet>
 #include <QtCore/QPointer>
 #include <QtCore/QString>
 #include <QtCore/QThread>

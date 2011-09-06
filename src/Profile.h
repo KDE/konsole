@@ -33,7 +33,6 @@
 
 // KDE
 #include <KSharedPtr>
-#include <KDebug>
 
 // Konsole
 #include "konsole_export.h"

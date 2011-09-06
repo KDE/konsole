@@ -22,6 +22,7 @@
 
 // KDE 
 #include <KUniqueApplication>
+#include <KUrl>
 
 // Konsole
 #include "Profile.h"
