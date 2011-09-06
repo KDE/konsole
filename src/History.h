@@ -59,7 +59,7 @@ public:
   //un-mmaps the file
   void unmap();
   //returns true if the file is mmap'ed
-  bool isMapped();
+  bool isMapped() const;
 
 
 private:
