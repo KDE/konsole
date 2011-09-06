@@ -148,7 +148,6 @@ public:
 private:
   int startOfLine(int lineno);
 
-  QString m_logFileName;
   HistoryFile index; // lines Row(int)
   HistoryFile cells; // text  Row(Character)
   HistoryFile lineflags; // flags Row(unsigned char)

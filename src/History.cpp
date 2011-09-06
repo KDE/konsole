@@ -211,8 +211,7 @@ bool HistoryScroll::hasScroll()
 */
 
 HistoryScrollFile::HistoryScrollFile(const QString &logFileName)
-  : HistoryScroll(new HistoryTypeFile(logFileName)),
-  m_logFileName(logFileName)
+  : HistoryScroll(new HistoryTypeFile(logFileName))
 {
 }
 
