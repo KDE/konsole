@@ -293,7 +293,7 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
     const bool isNotDefault = (selectedRows > 0) && currentProfile() != manager->defaultProfile();
     const bool isDeletable = (selectedRows > 1) ||
                              (selectedRows == 1 && isProfileDeletable(currentProfile()));
-    const int rowIndex = _ui->sessionTable->currentIndex().row();
+    //const int rowIndex = _ui->sessionTable->currentIndex().row();
 
     _ui->newSessionButton->setEnabled(selectedRows < 2);
     _ui->editSessionButton->setEnabled(selectedRows > 0);
