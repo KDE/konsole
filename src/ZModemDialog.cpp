@@ -31,7 +31,7 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
     setObjectName( QLatin1String( "zmodem_progress" ) );
     setModal( modal );
     setCaption( caption );
-    setButtons( User1|Close );
+    setButtons( KDialog::User1 | KDialog::Close );
     setButtonGuiItem( User1, KGuiItem(i18n("&Stop")) );
 
     setDefaultButton( Close );
