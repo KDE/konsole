@@ -281,11 +281,10 @@ void HistoryScrollFile::addLine(bool previousWrapped)
 HistoryScrollBuffer::HistoryScrollBuffer(unsigned int maxLineCount)
   : HistoryScroll(new HistoryTypeBuffer(maxLineCount))
    ,_historyBuffer()
-   ,_maxLineCount(0)
+   ,_maxLineCount(maxLineCount)
    ,_usedLines(0)
    ,_head(0)
 {
-  setMaxNbLines(maxLineCount);
 }
 
 HistoryScrollBuffer::~HistoryScrollBuffer()
