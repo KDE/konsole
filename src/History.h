@@ -102,9 +102,6 @@ public:
   virtual void getCells(int lineno, int colno, int count, Character res[]) = 0;
   virtual bool isWrappedLine(int lineno) = 0;
 
-  // backward compatibility (obsolete)
-  Character   getCell(int lineno, int colno) { Character res; getCells(lineno,colno,1,&res); return res; }
-
   // adding lines.
   virtual void addCells(const Character a[], int count) = 0;
   // convenience method - this is virtual so that subclasses can take advantage
