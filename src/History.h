@@ -175,8 +175,6 @@ public:
   virtual void addLine(bool previousWrapped=false);
 
   void setMaxNbLines(unsigned int nbLines);
-  unsigned int maxNbLines() { return _maxLineCount; }
-  
 
 private:
   int bufferIndex(int lineNumber);
@@ -370,7 +368,6 @@ public:
   virtual void addLine(bool previousWrapped=false);
 
   void setMaxNbLines(unsigned int nbLines);
-  unsigned int maxNbLines() const { return _maxLineCount; }
 
 private:
   bool hasDifferentColors(const TextLine& line) const;
