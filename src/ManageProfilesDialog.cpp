@@ -260,7 +260,6 @@ void ManageProfilesDialog::populateTable()
             SLOT(tableSelectionChanged(QItemSelection)) );
 
     _ui->sessionTable->selectRow(0);
-    tableSelectionChanged( _ui->sessionTable->selectionModel()->selection() );
 }
 void ManageProfilesDialog::updateDefaultItem()
 {
