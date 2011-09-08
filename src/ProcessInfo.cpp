@@ -1019,24 +1019,38 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
          // program name ( expected to be 'ssh' in this case )
          for ( int i = 1 ; i < args.count() ; i++ )
          {
-            // if this argument is an option then skip it, plus any 
-            // following arguments which refer to this option
+            // If this one is an option ...
+            // Most options together with its argument will be skipped.
             if ( args[i].startsWith('-') )
             {
                 QChar argChar = ( args[i].length() > 1 ) ? args[i][1] : '\0';
+                // for example: -p2222 or -p 2222 ?
+                bool optionArgumentCombined =  args[i].length() > 2 ;
 
                 if ( noOptionsArguments.contains(argChar) )
+                {
                     continue;
+                }
                 else if ( singleOptionArguments.contains(argChar) )
                 {
+                    QString argument ;
+                    if ( optionArgumentCombined )
+                    {
+                        argument = args[i].mid(2);
+                    }
+                    else
+                    {
+                        argument = args[i+1] ;
+                        i++;
+                    }
+
                     // support using `-l user` to specify username.
                     if ( argChar == 'l' )
-                        _user = args[i+1] ;
+                        _user = argument;
                     // support using `-p port` to specify port.
                     else if ( argChar == 'p' )
-                        _port = args[i+1] ;
+                        _port = argument;
 
-                    i++;
                     continue;
                 }
             }
