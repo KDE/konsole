@@ -55,6 +55,10 @@
 #include "ShellCommand.h"
 #include "TabTitleFormatAction.h"
 
+// FIXME: it feels bad to include a big header file just
+// in order to use one of its static members.
+#include "TerminalDisplay.h"
+
 using namespace Konsole;
 
 EditProfileDialog::EditProfileDialog(QWidget* parent)
@@ -458,9 +462,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
              SLOT(colorSchemeAnimationUpdate()) );
    
     _ui->transparencyWarningWidget->setVisible(false);
-    _ui->transparencyWarningWidget->setText(i18n("This color scheme uses a transparent background"
-                                                 " which does not appear to be supported on your"
-                                                 " desktop"));
+
     _ui->editColorSchemeButton->setEnabled(false);
     _ui->removeColorSchemeButton->setEnabled(false);
 
@@ -821,8 +823,26 @@ void EditProfileDialog::updateTransparencyWarning()
     // zero or one indexes can be selected
     foreach( const QModelIndex& index , _ui->colorSchemeList->selectionModel()->selectedIndexes() ) 
     {
-        bool hasTransparency = index.data(Qt::UserRole+1).value<const ColorScheme*>()->opacity() < 1.0;
-        _ui->transparencyWarningWidget->setHidden(KWindowSystem::compositingActive() || !hasTransparency);
+        bool needTransparency = index.data(Qt::UserRole+1).value<const ColorScheme*>()->opacity() < 1.0;
+
+        if ( ! needTransparency )
+        {
+            _ui->transparencyWarningWidget->setHidden(true);
+        }
+        else if ( ! KWindowSystem::compositingActive() )
+        {
+            _ui->transparencyWarningWidget->setText(i18n("This color scheme uses a transparent background"
+                        " which does not appear to be supported on your"
+                        " desktop"));
+            _ui->transparencyWarningWidget->setHidden(false);
+        }
+        else if ( ! TerminalDisplay::HAVE_TRANSPARENCY )
+        {
+            _ui->transparencyWarningWidget->setText(i18n("Konsole was started before desktop effect is enabled. "
+                        " You need to restart konsole to see transparent background."));
+            _ui->transparencyWarningWidget->setHidden(false);
+        }
+
     }
 }
 
