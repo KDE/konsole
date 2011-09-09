@@ -999,9 +999,9 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     // these are taken from the SSH manual ( accessed via 'man ssh' )
     
     // options which take no arguments
-    static const QString noOptionsArguments("1246AaCfgkMNnqsTtVvXxY"); 
+    static const QString noArgumentOptions("1246AaCfgkMNnqsTtVvXxY"); 
     // options which take one argument
-    static const QString singleOptionArguments("bcDeFiLlmOopRSw");
+    static const QString singleArgumentOptions("bcDeFiLlmOopRSw");
 
     if ( ok )
     {
@@ -1023,15 +1023,15 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
             // Most options together with its argument will be skipped.
             if ( args[i].startsWith('-') )
             {
-                QChar argChar = ( args[i].length() > 1 ) ? args[i][1] : '\0';
+                QChar optionChar = ( args[i].length() > 1 ) ? args[i][1] : '\0';
                 // for example: -p2222 or -p 2222 ?
                 bool optionArgumentCombined =  args[i].length() > 2 ;
 
-                if ( noOptionsArguments.contains(argChar) )
+                if ( noArgumentOptions.contains(optionChar) )
                 {
                     continue;
                 }
-                else if ( singleOptionArguments.contains(argChar) )
+                else if ( singleArgumentOptions.contains(optionChar) )
                 {
                     QString argument ;
                     if ( optionArgumentCombined )
@@ -1045,10 +1045,10 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     }
 
                     // support using `-l user` to specify username.
-                    if ( argChar == 'l' )
+                    if ( optionChar == 'l' )
                         _user = argument;
                     // support using `-p port` to specify port.
-                    else if ( argChar == 'p' )
+                    else if ( optionChar == 'p' )
                         _port = argument;
 
                     continue;
