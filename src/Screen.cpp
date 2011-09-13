@@ -397,8 +397,8 @@ void Screen::updateEffectiveRendition()
         effectiveBackground = currentBackground;
     }
 
-    if (currentRendition & RE_BOLD)
-        effectiveForeground.toggleIntensive();
+    if ( currentRendition & RE_BOLD )
+        effectiveForeground.setIntensive();
 }
 
 void Screen::copyFromHistory(Character* dest, int startLine, int count) const
