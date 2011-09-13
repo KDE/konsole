@@ -2908,8 +2908,8 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
       
         dropText += urlText;
 
-        if ( i != urls.count()-1 ) 
-            dropText += ' ';
+        // Each filename(including the last) should be followed by one space.
+        dropText += ' ';
     }
 
     // If our target is local we will open a popup - otherwise the fallback kicks
