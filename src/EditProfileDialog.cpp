@@ -859,8 +859,8 @@ void EditProfileDialog::updateTransparencyWarning()
         }
         else if ( ! TerminalDisplay::HAVE_TRANSPARENCY )
         {
-            _ui->transparencyWarningWidget->setText(i18n("Konsole was started before desktop effect is enabled. "
-                        " You need to restart konsole to see transparent background."));
+            _ui->transparencyWarningWidget->setText(i18n("Konsole was started before desktop effects were enabled."
+                        " You need to restart Konsole to see transparent background."));
             _ui->transparencyWarningWidget->setHidden(false);
         }
 
