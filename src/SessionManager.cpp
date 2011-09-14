@@ -397,6 +397,7 @@ void SessionManager::changeProfile(Profile::Ptr info ,
 {
     Q_ASSERT(info); 
 
+
     // insert the changes into the existing Profile instance
     QListIterator<Profile::Property> iter(propertyMap.keys());
     while ( iter.hasNext() )
@@ -404,7 +405,10 @@ void SessionManager::changeProfile(Profile::Ptr info ,
         const Profile::Property property = iter.next();
         info->setProperty(property,propertyMap[property]);
     }
-    
+
+    // never save a profile with empty name into disk!
+    persistent = persistent && !info->name().isEmpty() ;
+
     // when changing a group, iterate through the profiles
     // in the group and call changeProfile() on each of them
     //

@@ -42,6 +42,7 @@
 #include <KUrlCompletion>
 #include <KWindowSystem>
 #include <KTextEdit>
+#include <KMessageBox>
 
 #include <cmath>
 
@@ -127,6 +128,18 @@ void EditProfileDialog::reject()
 }
 void EditProfileDialog::accept()
 {
+    Q_ASSERT( _profile );
+    Q_ASSERT( _tempProfile );
+
+    if (   ( _tempProfile->isPropertySet(Profile::Name) &&
+             _tempProfile->name().isEmpty() )
+        || ( _profile->name().isEmpty() && _tempProfile->name().isEmpty() ) )
+    {
+        KMessageBox::sorry(this,
+                i18n("<p>Each profile must have a name before it can be saved"
+                     "into disk.</p>"));
+        return;
+    }
     save();
     unpreviewAll();
     KDialog::accept(); 
@@ -240,14 +253,20 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
         {
             _ui->profileNameEdit->setText( info->name() );
             _ui->profileNameEdit->setClearButtonShown(true);
+
+            _ui->emptyNameWarningWidget->setVisible( info->name().isEmpty() );
+            _ui->emptyNameWarningWidget->setText(i18n("Profile name is empty."));
         }
         else 
         {
             _ui->profileNameEdit->setText( groupProfileNames(group,-1) );
             _ui->profileNameEdit->setEnabled(false);
             _ui->profileNameLabel->setEnabled(false);
+
+            _ui->emptyNameWarningWidget->setVisible(false);
         }
     }
+
 
     ShellCommand command( info->command() , info->arguments() );
     _ui->commandEdit->setText( command.fullCommand() );
@@ -423,6 +442,8 @@ void EditProfileDialog::selectIcon()
 }
 void EditProfileDialog::profileNameChanged(const QString& text)
 {
+    _ui->emptyNameWarningWidget->setVisible(text.isEmpty());
+
     updateTempProfileProperty(Profile::Name,text);
     updateCaption(_tempProfile);
 }
