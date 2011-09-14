@@ -130,7 +130,8 @@ int Application::newInstance()
         // default profile to be changed
         processProfileChangeArgs(args,window);
 
-        if ( !args->isSet("tabs-from-file") ) {
+        if ( !args->isSet("tabs-from-file") )
+        {
             // create new session
             Session* session = createSession(window->defaultProfile(),
                                              QString(),
@@ -138,8 +139,26 @@ int Application::newInstance()
             if ( !args->isSet("close") ) {
                 session->setAutoClose(false);
             }
+
+            // run a custom command, don't store it in the default profile.
+            // Otherwise it will become the default for new tabs.
+            if ( args->isSet("e") )
+            {
+                QStringList arguments;
+                arguments << args->getOption("e");
+                for ( int i = 0 ; i < args->count() ; i++ )
+                    arguments << args->arg(i);
+
+                QString exec = args->getOption("e");
+                if (exec.startsWith(QLatin1String("./")))
+                    exec = QDir::currentPath() + exec.mid(1);
+
+                session->setProgram(exec);
+                session->setArguments(arguments);
+            }
         }
-        else {
+        else
+        {
             // create new session(s) as described in file
             processTabsFromFileArgs(args, window);
         }
@@ -328,20 +347,6 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
         defaultProfile = SessionManager::instance()->defaultProfile();
     Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile));
     newProfile->setHidden(true);
-    // run a custom command
-    if ( args->isSet("e") ) 
-    {
-        QStringList arguments;
-        arguments << args->getOption("e");
-        for ( int i = 0 ; i < args->count() ; i++ )
-           arguments << args->arg(i); 
-
-        QString exec = args->getOption("e");
-        if (exec.startsWith(QLatin1String("./")))
-          exec = QDir::currentPath() + exec.mid(1);
-        newProfile->setProperty(Profile::Command,exec);
-        newProfile->setProperty(Profile::Arguments,arguments);
-    }
 
     // change the initial working directory
     if( args->isSet("workdir") )
