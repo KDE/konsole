@@ -185,6 +185,7 @@ private slots:
     void searchHistory(bool showSearchBar);
     void findNextInHistory();
     void findPreviousInHistory();
+    void changeSearchMatch();
     void saveHistory();
     void showHistoryOptions();
     void clearHistory();

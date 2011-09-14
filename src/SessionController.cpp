@@ -397,6 +397,7 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
         connect( _searchBar , SIGNAL(findNextClicked()) , this , SLOT(findNextInHistory()) );
         connect( _searchBar , SIGNAL(findPreviousClicked()) , this , SLOT(findPreviousInHistory()) );
         connect( _searchBar , SIGNAL(highlightMatchesToggled(bool)) , this , SLOT(highlightMatches(bool)) );
+	connect( _searchBar , SIGNAL(matchCaseToggled(bool)) , this , SLOT(changeSearchMatch()));
 
         // if the search bar was previously active
         // then re-enter search mode
@@ -949,6 +950,15 @@ void SessionController::findPreviousInHistory()
     Q_ASSERT( _searchFilter );
 
     beginSearch(_searchBar->searchText(),SearchHistoryTask::BackwardsSearch);
+}
+void SessionController::changeSearchMatch()
+{
+    Q_ASSERT( _searchBar );
+    Q_ASSERT( _searchFilter );
+
+    // reset Selection for new case match
+    _view->screenWindow()->clearSelection();
+    beginSearch(_searchBar->searchText(),SearchHistoryTask::ForwardsSearch);
 }
 void SessionController::showHistoryOptions()
 {
