@@ -136,7 +136,7 @@ void EditProfileDialog::accept()
         || ( _profile->name().isEmpty() && _tempProfile->name().isEmpty() ) )
     {
         KMessageBox::sorry(this,
-                i18n("<p>Each profile must have a name before it can be saved"
+                i18n("<p>Each profile must have a name before it can be saved "
                      "into disk.</p>"));
         return;
     }
