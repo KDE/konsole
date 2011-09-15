@@ -429,7 +429,7 @@ void Application::createWindow(Profile::Ptr profile , const QString& directory)
     window->show();
 }
 
-Session* Application::createSession(Profile::Ptr profile, const QString& directory , ViewManager* view)
+Session* Application::createSession(Profile::Ptr profile, const QString& directory , ViewManager* viewManager)
 {
     if (!profile)
         profile = SessionManager::instance()->defaultProfile();
@@ -442,12 +442,12 @@ Session* Application::createSession(Profile::Ptr profile, const QString& directo
     // create view before starting the session process so that the session doesn't suffer
     // a change in terminal size right after the session starts.  some applications such as GNU Screen
     // and Midnight Commander don't like this happening
-    view->createView(session);
+    viewManager->createView(session);
 
     return session;
 }
 
-Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url, ViewManager* view)
+Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url, ViewManager* viewManager)
 {
     if (!profile)
         profile = SessionManager::instance()->defaultProfile();
@@ -466,7 +466,7 @@ Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url, Vi
     // create view before starting the session process so that the session doesn't suffer
     // a change in terminal size right after the session starts.  some applications such as GNU Screen
     // and Midnight Commander don't like this happening
-    view->createView(session);
+    viewManager->createView(session);
     session->run();
 
     return session;
