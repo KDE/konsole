@@ -695,8 +695,7 @@ void Screen::displayCharacter(unsigned short c)
     }
 
     // ensure current line vector has enough elements
-    int size = screenLines[cuY].size();
-    if (size < cuX+w)
+    if (screenLines[cuY].size() < cuX+w)
     {
         screenLines[cuY].resize(cuX+w);
     }
