@@ -146,6 +146,17 @@ void ScreenWindow::setSelectionEnd( int column , int line )
     emit selectionChanged();
 }
 
+void ScreenWindow::setSelectionByLineRange(int start, int end)
+{
+    clearSelection();
+
+    _screen->setSelectionStart( 0 , start , false);
+    _screen->setSelectionEnd( windowColumns() , end );
+
+    _bufferNeedsUpdate = true;
+    emit selectionChanged();
+}
+
 bool ScreenWindow::isSelected( int column , int line )
 {
     return _screen->isSelected( column , qMin(line + currentLine(),endWindowLine()) );

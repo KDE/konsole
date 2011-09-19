@@ -176,6 +176,7 @@ private slots:
     void openBrowser();
     void copy();
     void paste();
+    void selectAll();
     void pasteSelection(); // shortcut only
     void copyInputToAllTabs();
     void copyInputToSelectedTabs();
@@ -229,6 +230,7 @@ private slots:
 
     /* Returns true if called within a KPart; false if called within Konsole. */
     bool isKonsolePart() const;
+
 
 private:
     // begins the search

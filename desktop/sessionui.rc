@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="13">
+<kpartgui name="session" version="14">
     <MenuBar>
         <Menu name="file">
             <Action name="close-session" group="session-tab-operations"/>
@@ -11,6 +11,8 @@
         <Menu name="edit">
             <Action name="edit_copy" group="session-edit-operations"/>
             <Action name="edit_paste" group="session-edit-operations"/>
+            <Separator group="session-edit-operations"/>
+            <Action name="select-all" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>
             <Menu name="edit-copy-input-to" group="session-edit-operations"><text>Copy Input To</text>
                 <Action name="copy-input-to-all-tabs"/>

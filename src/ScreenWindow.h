@@ -124,6 +124,18 @@ public:
      * the window.
      */
     void setSelectionEnd( int column , int line ); 
+
+    /**
+     * Sets the selection as the range specified by line @p start and line @p
+     * end in the whole history.
+     *
+     * Both @p start and @p end are absolute line number in the whole history,
+     * not relative line number in the window. This make it possible to select
+     * range larger than the window . A good use case is selecting the whole
+     * history.
+     */
+    void setSelectionByLineRange(int start, int end);
+
     /**
      * Retrieves the start of the selection within the window.
      */

@@ -297,10 +297,12 @@ void SessionController::setupPrimaryScreenSpecificActions( bool use)
     KActionCollection * collection = actionCollection() ;
     QAction * clearAction = collection->action("clear-history");
     QAction * resetAction = collection->action("clear-history-and-reset");
+    QAction * selectAllAction = collection->action("select-all");
 
     // these actions are meaningful only when primary screen is used.
     clearAction->setEnabled(use);
     resetAction->setEnabled(use);
+    selectAllAction->setEnabled(use);
 }
 
 void SessionController::updateCopyAction( const QString & text )
@@ -442,6 +444,10 @@ void SessionController::setupActions()
     pasteShortcut.setPrimary(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_V));
     pasteShortcut.setAlternate(QKeySequence(Qt::SHIFT + Qt::Key_Insert));
     action->setShortcut(pasteShortcut);
+
+    action = collection->addAction("select-all", this, SLOT(selectAll()));
+    action->setText(i18n("&Select All"));
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
 
     action = collection->addAction("paste-selection", this, SLOT(pasteSelection()));
     action->setText(i18n("Paste Selection"));
@@ -673,6 +679,11 @@ void SessionController::paste()
 void SessionController::pasteSelection()
 {
     _view->pasteSelection();
+}
+void SessionController::selectAll()
+{
+    ScreenWindow * screenWindow = _view->screenWindow();
+    screenWindow->setSelectionByLineRange(0, _session->emulation()->lineCount() );
 }
 static const KXmlGuiWindow* findWindow(const QObject* object)
 {
