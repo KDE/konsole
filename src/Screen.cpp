@@ -307,7 +307,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     // create new screen lines and copy from old to new
 
     ImageLine* newScreenLines = new ImageLine[new_lines+1];
-    for (int i=0; i < qMin(lines-1,new_lines+1) ;i++)
+    for (int i=0; i < qMin(lines,new_lines+1) ;i++)
         newScreenLines[i]=screenLines[i];
     for (int i=lines;(i > 0) && (i<new_lines+1);i++)
         newScreenLines[i].resize( new_columns );
