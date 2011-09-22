@@ -27,7 +27,7 @@
 #include <QtCore/QVector>
 
 // KDE
-#include <ktemporaryfile.h>
+#include <KTemporaryFile>
 
 // Konsole
 #include "BlockArray.h"

@@ -29,7 +29,7 @@
 #include <QtCore/QFileInfo>
 
 // KDE
-#include <kshell.h>
+#include <KShell>
 
 #include <KBookmarkMenu>
 #include <KDebug>

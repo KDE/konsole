@@ -34,14 +34,14 @@
 #include <KMenu>
 #include <KMessageBox>
 #include <KRun>
-#include <kshell.h>
+#include <KShell>
 #include <KStandardDirs>
 #include <KToggleAction>
 #include <KUrl>
 #include <KXmlGuiWindow>
 #include <KXMLGUIFactory>
 #include <KXMLGUIBuilder>
-#include <kdebug.h>
+#include <KDebug>
 #include <kcodecaction.h>
 #include <kdeversion.h>
 

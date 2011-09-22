@@ -36,7 +36,7 @@
 #include <QtCore/QDate>
 
 // KDE
-#include <kdebug.h>
+#include <KDebug>
 
 // Konsole
 #include "konsole_wcwidth.h"

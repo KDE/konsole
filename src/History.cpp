@@ -33,7 +33,7 @@
 
 // KDE
 #include <kde_file.h>
-#include <kdebug.h>
+#include <KDebug>
 
 // Reasonable line size
 #define LINE_SIZE    1024

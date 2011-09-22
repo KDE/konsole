@@ -45,7 +45,7 @@
 #include <KMessageBox>
 #include <KNotification>
 #include <KRun>
-#include <kshell.h>
+#include <KShell>
 #include <KStandardDirs>
 #include <KPtyDevice>
 #include <KUrl>

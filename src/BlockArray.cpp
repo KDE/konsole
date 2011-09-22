@@ -30,7 +30,7 @@
 
 // KDE
 #include <kde_file.h>
-#include <kdebug.h>
+#include <KDebug>
 
 using namespace Konsole;
 

@@ -42,10 +42,10 @@
 #include <QtGui/QToolTip>
 
 // KDE
-#include <kshell.h>
+#include <KShell>
 #include <KColorScheme>
 #include <KCursor>
-#include <kdebug.h>
+#include <KDebug>
 #include <KLocale>
 #include <KMenu>
 #include <KNotification>
@@ -54,7 +54,7 @@
 #include <KIO/NetAccess>
 #include <konq_operations.h>
 #include <KFileItem>
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 // Konsole
 #include "Filter.h"

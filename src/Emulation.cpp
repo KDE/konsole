@@ -40,7 +40,7 @@
 #include <QtCore/QTime>
 
 // KDE
-#include <kdebug.h>
+#include <KDebug>
 
 // Konsole
 #include "KeyboardTranslator.h"

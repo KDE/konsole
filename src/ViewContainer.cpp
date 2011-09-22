@@ -41,10 +41,10 @@
 
 // KDE 
 #include <KColorDialog>
-#include <kcolorscheme.h>
-#include <kcolorutils.h>
-#include <kdebug.h>
-#include <kconfiggroup.h>
+#include <KColorScheme>
+#include <KColorUtils>
+#include <KDebug>
+#include <KConfigGroup>
 #include <KLocale>
 #include <KMenu>
 #include <KColorCollection>

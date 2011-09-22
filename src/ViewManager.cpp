@@ -30,7 +30,7 @@
 #include <QtGui/QMenu>
 
 // KDE
-#include <kdebug.h>
+#include <KDebug>
 #include <KAcceleratorManager>
 #include <KGlobal>
 #include <KLocale>

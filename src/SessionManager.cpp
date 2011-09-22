@@ -31,16 +31,16 @@
 #include <QtCore/QTextCodec>
 
 // KDE
-#include <klocale.h>
-#include <kicon.h>
-#include <krun.h>
-#include <kshell.h>
-#include <kconfig.h>
-#include <kglobal.h>
-#include <kdebug.h>
-#include <kconfiggroup.h>
-#include <kstandarddirs.h>
-#include <kdesktopfile.h>
+#include <KLocale>
+#include <KIcon>
+#include <KRun>
+#include <KShell>
+#include <KConfig>
+#include <KGlobal>
+#include <KDebug>
+#include <KConfigGroup>
+#include <KStandardDirs>
+#include <KDesktopFile>
 
 // Konsole
 #include "ColorScheme.h"
