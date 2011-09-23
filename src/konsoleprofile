@@ -1,3 +1,20 @@
 #!/bin/sh
 
+#  A command-line tool to change profile options used in current tab in runtime.
+#
+#  Usage: konsoleprofile option=value
+#
+#  Example: 'konsoleprofile ColorScheme=WhiteOnBlack' will change the colorscheme
+#  used in current tab into WhiteOnBlack on the fly.
+#
+#  NOTE: This script MUST run within a konsole tab to take effect. The change is
+#  applied only to current tab. Other tabs using the same profile will not be
+#  influenced. It won't save the change into disk, either.
+#
+#  For the full list of supported options and values, refer to src/Profile.h, or
+#  visit the online reference:
+#  http://api.kde.org/4.7-api/kdebase-apps-apidocs/konsole/html/classKonsole_1_1Profile.html
+#
+#  All of the logic is in konsole itself. This script is provided for convenience.
+
 /bin/echo -e "\033]50;$1\a"
