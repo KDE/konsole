@@ -70,7 +70,9 @@ MainWindow::MainWindow()
  : KXmlGuiWindow() ,
    _bookmarkHandler(0),
    _pluggedController(0),
-   _menuBarVisibilitySet(false)
+   _menuBarInitialVisibility(true),
+   _menuBarInitialVisibilitySet(false),
+   _menuBarInitialVisibilityApplied(false)
 {
     if (useTransparency()) {
         setAttribute(Qt::WA_TranslucentBackground);
@@ -91,7 +93,7 @@ MainWindow::MainWindow()
            bookmarkHandler() , SLOT(setViews(QList<ViewProperties*>)) );
 
     connect( _viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , this ,
-            SLOT(setMenuBarVisibleOnce(bool)) );
+            SLOT(setMenuBarInitialVisibility(bool)) );
     connect( _viewManager , SIGNAL(setSaveGeometryOnExitRequest(bool)) , this ,
 	    SLOT(setSaveGeometryOnExit(bool)) );
     connect( _viewManager , SIGNAL(updateWindowIcon()) , this ,
@@ -135,15 +137,15 @@ void MainWindow::removeMenuAccelerators()
         menuItem->setText(itemText);
     }
 }
-void MainWindow::setMenuBarVisibleOnce(bool visible)
+void MainWindow::setMenuBarInitialVisibility(bool visible)
 {
-    if (_menuBarVisibilitySet)
+    // Make sure the 'initial' visibility is set only once.
+    if ( _menuBarInitialVisibilitySet )
         return;
 
-    menuBar()->setVisible(visible);
-    _toggleMenuBarAction->setChecked(visible);
-
-    _menuBarVisibilitySet = true;
+    // The initial visibility of menubar will not be applied until showEvent(),
+    _menuBarInitialVisibility    = visible ;
+    _menuBarInitialVisibilitySet = true;
 }
 
 void MainWindow::setSaveGeometryOnExit(bool save)
@@ -561,12 +563,23 @@ void MainWindow::configureNotifications()
 
 void MainWindow::showEvent(QShowEvent *event)
 {
-    // This code from Konqueror.
-    // We need to check if our toolbars are shown/hidden here, and set
-    // our menu items accordingly. We can't do it in the constructor because
-    // view profiles store toolbar info, and that info is read after
-    // construct time.
-    _toggleMenuBarAction->setChecked( !menuBar()->isHidden() );
+    // Make sure the 'initial' visibility is applied only once.
+    if ( ! _menuBarInitialVisibilityApplied )
+    {
+        // TODO: this is a workaround, not a simple and clear solution.
+        //
+        // Since the geometry restoration of MainWindow happens after
+        // setMenuBarInitialVisibility() is triggered, the initial visibility of
+        // menubar should be applied at this last moment. Otherwise, the initial
+        // visibility will be determined by what is stored in konsolerc, but not
+        // by the the selected profile.
+        //
+        menuBar()->setVisible( _menuBarInitialVisibility );
+        _toggleMenuBarAction->setChecked( _menuBarInitialVisibility );
+
+        _menuBarInitialVisibilityApplied = true;
+    }
+
     // Call parent method
     KXmlGuiWindow::showEvent(event);
 }

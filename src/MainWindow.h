@@ -168,9 +168,9 @@ class MainWindow : public KXmlGuiWindow
         void viewFullScreen(bool fullScreen);
         void configureNotifications();
 
-        // single shot call to set the visibility of the menu bar.  Has no 
-        // effect if the menu bar is a MacOS-style top-level menu
-        void setMenuBarVisibleOnce(bool visible);
+        // single shot call to set the initial visibility of the menu bar.
+        // Has no effect if the menu bar is a MacOS-style top-level menu
+        void setMenuBarInitialVisibility(bool visible);
 
         void setSaveGeometryOnExit(bool visible);
 
@@ -198,7 +198,10 @@ class MainWindow : public KXmlGuiWindow
         QPointer<SessionController> _pluggedController;
 
         Profile::Ptr _defaultProfile;
-        bool _menuBarVisibilitySet;
+
+        bool _menuBarInitialVisibility;
+        bool _menuBarInitialVisibilitySet;
+        bool _menuBarInitialVisibilityApplied;
 };
 
 }
