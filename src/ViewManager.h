@@ -292,6 +292,9 @@ private slots:
     // called when "Previous View" shortcut is activated
     void previousView();
 
+    // called when "Switch to last tab" shortcut is activated
+    void lastView();
+
     // called when "Next View Container" shortcut is activated
     void nextContainer();
 

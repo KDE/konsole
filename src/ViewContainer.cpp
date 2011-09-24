@@ -228,6 +228,11 @@ void ViewContainer::activateNextView()
     setActiveView( _views.at(index) );
 }
 
+void ViewContainer::activateLastView()
+{
+    setActiveView(_views.at(_views.count()-1));
+}
+
 void ViewContainer::activatePreviousView()
 {
     QWidget* active = activeView();

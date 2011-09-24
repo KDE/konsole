@@ -137,6 +137,7 @@ void ViewManager::setupActions()
 
     KAction* nextViewAction = new KAction( i18n("Next Tab") , this );
     KAction* previousViewAction = new KAction( i18n("Previous Tab") , this );
+    KAction* lastViewAction = new KAction( i18n("Switch to Last Tab") , this);
     KAction* nextContainerAction = new KAction( i18n("Next View Container") , this);
   
     KAction* moveViewLeftAction = new KAction( i18n("Move Tab Left") , this );
@@ -207,6 +208,7 @@ void ViewManager::setupActions()
         // Next / Previous View , Next Container
         collection->addAction("next-view",nextViewAction);
         collection->addAction("previous-view",previousViewAction);
+        collection->addAction("last-tab",lastViewAction);
         collection->addAction("next-container",nextContainerAction);
         collection->addAction("move-view-left",moveViewLeftAction);
         collection->addAction("move-view-right",moveViewRightAction);
@@ -254,6 +256,9 @@ void ViewManager::setupActions()
     moveViewRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Right) );
     connect( moveViewRightAction , SIGNAL(triggered()) , this , SLOT(moveActiveViewRight()) );
     _viewSplitter->addAction(moveViewRightAction);
+
+    connect( lastViewAction, SIGNAL(triggered()) , this , SLOT(lastView()));
+    _viewSplitter->addAction(lastViewAction);
 }
 void ViewManager::switchToView(int index)
 {
@@ -312,6 +317,15 @@ void ViewManager::previousView()
     Q_ASSERT( container );
 
     container->activatePreviousView();
+}
+
+void ViewManager::lastView()
+{
+    ViewContainer* container = _viewSplitter->activeContainer();
+
+    Q_ASSERT( container );
+
+    container->activateLastView();
 }
 
 void ViewManager::detachActiveView()
@@ -713,6 +727,9 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
         if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
 
         action = collection->action( "previous-view" );
+        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+
+        action = collection->action( "last-tab" );
         if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
 
         action = collection->action( "split-view-left-right" );

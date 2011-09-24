@@ -203,6 +203,9 @@ public:
     /** Changes the active view to the previous view */
     void activatePreviousView();
 
+    /** Changes the active view to the last view */
+    void activateLastView();
+
     /** 
      * This enum describes the directions 
      * in which views can be re-arranged within the container
