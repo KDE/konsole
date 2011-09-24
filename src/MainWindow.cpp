@@ -329,23 +329,43 @@ void MainWindow::setSessionList(ProfileList* list)
 
 void MainWindow::sessionListChanged(const QList<QAction*>& actions)
 {
-    // Update the 'New Tab' KActionMenu
-    KMenu *newTabMenu = _newTabMenuAction->menu();
-    newTabMenu->clear();
-    foreach (QAction *action, actions) {
-        newTabMenu->addAction(action);
+    // If only 1 profile is to be shown in the menu, only display
+    // it if it is the non-default profile.
+    if (actions.size() > 2)
+    {
+        // Update the 'New Tab' KActionMenu
+        KMenu *newTabMenu = _newTabMenuAction->menu();
+        newTabMenu->clear();
+        foreach (QAction *action, actions) {
+            newTabMenu->addAction(action);
 
-        // NOTE: _defaultProfile seems to not work here, sigh.
-        Profile::Ptr profile = SessionManager::instance()->defaultProfile();
-        if (profile && profile->name() == action->text()) {
-            action->setIcon(KIcon(profile->icon(), NULL, QStringList("emblem-favorite")));
-            newTabMenu->setDefaultAction(action);
-            QFont font = action->font();
-            font.setBold(true);
-            action->setFont(font);
+            // NOTE: _defaultProfile seems to not work here, sigh.
+            Profile::Ptr profile = SessionManager::instance()->defaultProfile();
+            if (profile && profile->name() == action->text().remove('&')) {
+                action->setIcon(KIcon(profile->icon(), NULL, QStringList("emblem-favorite")));
+                newTabMenu->setDefaultAction(action);
+                QFont font = action->font();
+                font.setBold(true);
+                action->setFont(font);
+            }
         }
     }
+    else
+    {
+        KMenu *newTabMenu = _newTabMenuAction->menu();
+        newTabMenu->clear();
+        Profile::Ptr profile = SessionManager::instance()->defaultProfile();
 
+        // NOTE: Compare names w/o any '&'
+        if (actions.size() == 2 &&  actions[1]->text().remove('&') != profile->name())
+        {
+            newTabMenu->addAction(actions[1]);
+        }
+        else
+        {
+            delete newTabMenu;
+        }
+    }
 }
 
 QString MainWindow::activeSessionDir() const
