@@ -61,6 +61,11 @@ void Application::init()
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
     // will work correctly in the terminal
     setAttribute(Qt::AA_MacDontSwapCtrlAndMeta);
+
+    // KDE's menuBar()->isTopLevel() hasn't worked in a while.
+    // For now, put menus inside Konsole window; this also make
+    // the keyboard shortcut to show menus look reasonable.
+    setAttribute(Qt::AA_DontUseNativeMenuBar);
 #endif
 }
 

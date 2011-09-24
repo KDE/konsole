@@ -137,7 +137,7 @@ void MainWindow::removeMenuAccelerators()
 }
 void MainWindow::setMenuBarVisibleOnce(bool visible)
 {
-    if (_menuBarVisibilitySet || menuBar()->isTopLevelMenu() )
+    if (_menuBarVisibilitySet)
         return;
 
     menuBar()->setVisible(visible);
@@ -282,10 +282,6 @@ void MainWindow::setupActions()
     // View Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
     _toggleMenuBarAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M) );
-
-    // Hide the Show/Hide menubar item if the menu bar is a MacOS-style menu bar
-    if ( menuBar()->isTopLevelMenu() )
-        _toggleMenuBarAction->setVisible(false);
 
     // Full Screen
     action = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
