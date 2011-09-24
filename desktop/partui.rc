@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsolepart" version="4">
+<kpartgui name="konsolepart" version="5">
     <Menu name="session-popup-menu">
         <Action name="edit_copy"/>
         <Action name="edit_paste"/>
@@ -14,7 +14,7 @@
         </Menu>
         <Action name="open-browser"/>
         <Separator/>
-        <Action name="change-profile"/>
+        <Action name="switch-profile"/>
         <Action name="edit-current-profile"/>
         <Separator/>
         <Action name="show-menubar"/>
@@ -22,8 +22,8 @@
         <Separator/>
         <Action name="close-session"/>
     </Menu>
-    <Menu name="change-profile">
-        <text>&amp;Change Profile</text>
+    <Menu name="switch-profile">
+        <text>&amp;Switch Profile</text>
         <ActionList name="profile-list"/>
     </Menu>
 </kpartgui>
