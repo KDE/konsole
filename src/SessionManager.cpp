@@ -300,34 +300,34 @@ const QList<Session*> SessionManager::sessions() const
 
 void SessionManager::updateSession(Session* session)
 {
-    Profile::Ptr info = _sessionProfiles[session]; 
+    Profile::Ptr profile = _sessionProfiles[session]; 
 
     // Temp fix for crashes when changing profiles 256357, 246054
-    if (!info)
-        info = defaultProfile();
+    if (!profile)
+        profile = defaultProfile();
 
-    Q_ASSERT( info );
+    Q_ASSERT( profile );
 
-    applyProfile(session,info,false);
+    applyProfile(session,profile,false);
 
     // FIXME - This may update a lot more than just the session
     // of interest. 
     emit sessionUpdated(session);
 }
 
-Session* SessionManager::createSession(Profile::Ptr info)
+Session* SessionManager::createSession(Profile::Ptr profile)
 {
     Session* session = 0;
     
-    if (!info)
-        info = defaultProfile();
+    if (!profile)
+        profile = defaultProfile();
    
-    if (!_types.contains(info))
-        addProfile(info);
+    if (!_types.contains(profile))
+        addProfile(profile);
 
     //configuration information found, create a new session based on this
     session = new Session();
-    applyProfile(session,info,false);
+    applyProfile(session,profile,false);
 
     connect( session , SIGNAL(profileChangeCommandReceived(QString)) , this ,
             SLOT(sessionProfileCommandReceived(QString)) );
@@ -339,7 +339,7 @@ Session* SessionManager::createSession(Profile::Ptr info)
 
     //add session to active list
     _sessions << session;
-    _sessionProfiles.insert(session,info);
+    _sessionProfiles.insert(session,profile);
 
     Q_ASSERT( session );
 
@@ -379,23 +379,23 @@ Profile::Ptr SessionManager::defaultProfile() const
 Profile::Ptr SessionManager::fallbackProfile() const
 { return _fallbackProfile; }
 
-QString SessionManager::saveProfile(Profile::Ptr info)
+QString SessionManager::saveProfile(Profile::Ptr profile)
 {
     ProfileWriter* writer = new KDE4ProfileWriter;
 
-    QString newPath = writer->getPath(info);
+    QString newPath = writer->getPath(profile);
 
-    writer->writeProfile(newPath,info);
+    writer->writeProfile(newPath,profile);
 
     delete writer;
 
     return newPath;
 }
 
-void SessionManager::changeProfile(Profile::Ptr info , 
+void SessionManager::changeProfile(Profile::Ptr profile, 
                                    QHash<Profile::Property,QVariant> propertyMap, bool persistent)
 {
-    Q_ASSERT(info); 
+    Q_ASSERT(profile); 
 
 
     // insert the changes into the existing Profile instance
@@ -403,11 +403,11 @@ void SessionManager::changeProfile(Profile::Ptr info ,
     while ( iter.hasNext() )
     {
         const Profile::Property property = iter.next();
-        info->setProperty(property,propertyMap[property]);
+        profile->setProperty(property,propertyMap[property]);
     }
 
     // never save a profile with empty name into disk!
-    persistent = persistent && !info->name().isEmpty() ;
+    persistent = persistent && !profile->name().isEmpty() ;
 
     // when changing a group, iterate through the profiles
     // in the group and call changeProfile() on each of them
@@ -415,7 +415,7 @@ void SessionManager::changeProfile(Profile::Ptr info ,
     // this is so that each profile in the group, the profile is 
     // applied, a change notification is emitted and the profile
     // is saved to disk
-    ProfileGroup::Ptr group = info->asGroup();
+    ProfileGroup::Ptr group = profile->asGroup();
     if (group)
     {
         foreach(const Profile::Ptr &profile, group->profiles())
@@ -424,26 +424,26 @@ void SessionManager::changeProfile(Profile::Ptr info ,
     }
     
     // apply the changes to existing sessions
-    applyProfile(info,true);
+    applyProfile(profile,true);
 
     // notify the world about the change
-    emit profileChanged(info);
+    emit profileChanged(profile);
 
     // save changes to disk, unless the profile is hidden, in which case
     // it has no file on disk 
-    if ( persistent && !info->isHidden() )
+    if ( persistent && !profile->isHidden() )
     {
-        info->setProperty(Profile::Path,saveProfile(info));
+        profile->setProperty(Profile::Path,saveProfile(profile));
     }
 }
-void SessionManager::applyProfile(Profile::Ptr info , bool modifiedPropertiesOnly)
+void SessionManager::applyProfile(Profile::Ptr profile , bool modifiedPropertiesOnly)
 {
     QListIterator<Session*> iter(_sessions);
     while ( iter.hasNext() )
     {
         Session* next = iter.next();
-        if ( _sessionProfiles[next] == info )
-            applyProfile(next,info,modifiedPropertiesOnly);        
+        if ( _sessionProfiles[next] == profile )
+            applyProfile(next,profile,modifiedPropertiesOnly);        
     }
 }
 Profile::Ptr SessionManager::sessionProfile(Session* session) const
@@ -455,56 +455,56 @@ void SessionManager::setSessionProfile(Session* session, Profile::Ptr profile)
     _sessionProfiles[session] = profile;
     updateSession(session);
 }
-void SessionManager::applyProfile(Session* session, const Profile::Ptr info , bool modifiedPropertiesOnly)
+void SessionManager::applyProfile(Session* session, const Profile::Ptr profile , bool modifiedPropertiesOnly)
 {
-    Q_ASSERT(info);
+    Q_ASSERT(profile);
 
-    _sessionProfiles[session] = info;
+    _sessionProfiles[session] = profile;
 
-    ShouldApplyProperty apply(info,modifiedPropertiesOnly);
+    ShouldApplyProperty apply(profile,modifiedPropertiesOnly);
 
     // Basic session settings
     if ( apply.shouldApply(Profile::Name) )
-        session->setTitle(Session::NameRole,info->name());
+        session->setTitle(Session::NameRole,profile->name());
 
     if ( apply.shouldApply(Profile::Command) )
-        session->setProgram(info->command());
+        session->setProgram(profile->command());
 
     if ( apply.shouldApply(Profile::Arguments) )
-        session->setArguments(info->arguments());
+        session->setArguments(profile->arguments());
 
     if ( apply.shouldApply(Profile::Directory) )
-        session->setInitialWorkingDirectory(info->defaultWorkingDirectory());
+        session->setInitialWorkingDirectory(profile->defaultWorkingDirectory());
 
     if ( apply.shouldApply(Profile::Environment) )
     {
         // add environment variable containing home directory of current profile
         // (if specified)
-        QStringList environment = info->property<QStringList>(Profile::Environment);
-        environment << QString("PROFILEHOME=%1").arg(info->defaultWorkingDirectory());
+        QStringList environment = profile->property<QStringList>(Profile::Environment);
+        environment << QString("PROFILEHOME=%1").arg(profile->defaultWorkingDirectory());
 
         session->setEnvironment(environment);
     }
 
     if ( apply.shouldApply(Profile::Icon) )
-        session->setIconName(info->icon());
+        session->setIconName(profile->icon());
 
     // Key bindings
     if ( apply.shouldApply(Profile::KeyBindings) )
-        session->setKeyBindings(info->property<QString>(Profile::KeyBindings));
+        session->setKeyBindings(profile->property<QString>(Profile::KeyBindings));
 
     // Tab formats
     if ( apply.shouldApply(Profile::LocalTabTitleFormat) )
         session->setTabTitleFormat( Session::LocalTabTitle ,
-                                    info->property<QString>(Profile::LocalTabTitleFormat));
+                                    profile->property<QString>(Profile::LocalTabTitleFormat));
     if ( apply.shouldApply(Profile::RemoteTabTitleFormat) )
         session->setTabTitleFormat( Session::RemoteTabTitle ,
-                                    info->property<QString>(Profile::RemoteTabTitleFormat));
+                                    profile->property<QString>(Profile::RemoteTabTitleFormat));
 
     // History
     if ( apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize) ) 
     {
-        int mode = info->property<int>(Profile::HistoryMode);
+        int mode = profile->property<int>(Profile::HistoryMode);
         switch ((Profile::HistoryModeEnum)mode)
         {
             case Profile::DisableHistory:
@@ -512,7 +512,7 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr info , bo
                 break;
             case Profile::FixedSizeHistory:
                 {
-                    int lines = info->property<int>(Profile::HistorySize);
+                    int lines = profile->property<int>(Profile::HistorySize);
                     session->setHistoryType( CompactHistoryType(lines) );
                 }
                 break;
@@ -524,12 +524,12 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr info , bo
 
     // Terminal features
     if ( apply.shouldApply(Profile::FlowControlEnabled) )
-        session->setFlowControlEnabled( info->property<bool>(Profile::FlowControlEnabled) );
+        session->setFlowControlEnabled( profile->property<bool>(Profile::FlowControlEnabled) );
 
     // Encoding
     if ( apply.shouldApply(Profile::DefaultEncoding) )
     {
-        QByteArray name = info->property<QString>(Profile::DefaultEncoding).toUtf8();
+        QByteArray name = profile->property<QString>(Profile::DefaultEncoding).toUtf8();
         session->setCodec( QTextCodec::codecForName(name) );
     } 
 }
@@ -583,16 +583,16 @@ bool SessionManager::deleteProfile(Profile::Ptr type)
 
     return true; 
 }
-void SessionManager::setDefaultProfile(Profile::Ptr info)
+void SessionManager::setDefaultProfile(Profile::Ptr profile)
 {
-   Q_ASSERT ( _types.contains(info) );
+   Q_ASSERT ( _types.contains(profile) );
 
-   _defaultProfile = info;
+   _defaultProfile = profile;
 
-   QString path = info->path();  
+   QString path = profile->path();  
    
    if ( path.isEmpty() )
-       path = KDE4ProfileWriter().getPath(info);
+       path = KDE4ProfileWriter().getPath(profile);
 
    QFileInfo fileInfo(path);
 
@@ -607,20 +607,20 @@ QSet<Profile::Ptr> SessionManager::findFavorites()
 
     return _favorites;
 }
-void SessionManager::setFavorite(Profile::Ptr info , bool favorite)
+void SessionManager::setFavorite(Profile::Ptr profile , bool favorite)
 {
-    if (!_types.contains(info))
-        addProfile(info);
+    if (!_types.contains(profile))
+        addProfile(profile);
 
-    if ( favorite && !_favorites.contains(info) )
+    if ( favorite && !_favorites.contains(profile) )
     {
-        _favorites.insert(info);
-        emit favoriteStatusChanged(info,favorite);
+        _favorites.insert(profile);
+        emit favoriteStatusChanged(profile,favorite);
     }
-    else if ( !favorite && _favorites.contains(info) )
+    else if ( !favorite && _favorites.contains(profile) )
     {
-        _favorites.remove(info);
-        emit favoriteStatusChanged(info,favorite);
+        _favorites.remove(profile);
+        emit favoriteStatusChanged(profile,favorite);
     }
 }
 void SessionManager::loadShortcuts()
@@ -661,23 +661,23 @@ void SessionManager::saveShortcuts()
                 iter.value().profilePath);
     }    
 }
-void SessionManager::setShortcut(Profile::Ptr info , 
+void SessionManager::setShortcut(Profile::Ptr profile , 
                                  const QKeySequence& keySequence )
 {
-    QKeySequence existingShortcut = shortcut(info);
+    QKeySequence existingShortcut = shortcut(profile);
     _shortcuts.remove(existingShortcut);
 
     if (keySequence.isEmpty())
         return;
 
     ShortcutData data;
-    data.profileKey = info;
-    data.profilePath = info->path();
+    data.profileKey = profile;
+    data.profilePath = profile->path();
     // TODO - This won't work if the profile doesn't 
     // have a path yet
     _shortcuts.insert(keySequence,data);
 
-    emit shortcutChanged(info,keySequence);
+    emit shortcutChanged(profile,keySequence);
 }
 void SessionManager::loadFavorites()
 {
@@ -794,14 +794,14 @@ void SessionManager::sessionProfileCommandReceived(const QString& text)
     emit sessionUpdated(session);
 }
 
-QKeySequence SessionManager::shortcut(Profile::Ptr info) const
+QKeySequence SessionManager::shortcut(Profile::Ptr profile) const
 {
     QMapIterator<QKeySequence,ShortcutData> iter(_shortcuts);
     while (iter.hasNext())
     {
         iter.next();
-        if ( iter.value().profileKey == info 
-             || iter.value().profilePath == info->path() )
+        if ( iter.value().profileKey == profile 
+             || iter.value().profilePath == profile->path() )
             return iter.key();
     }
     

@@ -326,12 +326,12 @@ private:
     // to all sessions currently using that profile
     // if modifiedPropertiesOnly is true, only properties which
     // are set in the profile @p key are updated
-    void applyProfile(Profile::Ptr ptr , bool modifiedPropertiesOnly);
-    // apples updates to the profile @p info to the session @p session
+    void applyProfile(Profile::Ptr profile , bool modifiedPropertiesOnly);
+    // apples updates to the profile @p profile to the session @p session
     // if modifiedPropertiesOnly is true, only properties which
-    // are set in @p info are update ( ie. properties for which info->isPropertySet(<property>) 
+    // are set in @p profile are update ( ie. properties for which profile->isPropertySet(<property>) 
     // returns true )
-    void applyProfile(Session* session , const Profile::Ptr info , bool modifiedPropertiesOnly); 
+    void applyProfile(Session* session , const Profile::Ptr profile , bool modifiedPropertiesOnly); 
 
     QSet<Profile::Ptr> _types;
     QHash<Session*,Profile::Ptr> _sessionProfiles;
