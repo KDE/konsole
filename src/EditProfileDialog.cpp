@@ -344,22 +344,22 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
             info->property<QString>(Profile::RemoteTabTitleFormat));
 
     // tab options
-    int tabMode = info->property<int>(Profile::TabBarMode);
-    int tabPosition = info->property<int>(Profile::TabBarPosition);
+    int tabBarMode = info->property<int>(Profile::TabBarMode);
+    int tabBarPosition = info->property<int>(Profile::TabBarPosition);
 
     // note: Items should be in the same order as the 
     // Profile::TabBarModeEnum enum
     _ui->tabBarVisibilityCombo->addItems( QStringList() << i18n("Always Hide Tab Bar")
                                                         << i18n("Show Tab Bar When Needed") 
                                                         << i18n("Always Show Tab Bar") );
-    _ui->tabBarVisibilityCombo->setCurrentIndex(tabMode);
+    _ui->tabBarVisibilityCombo->setCurrentIndex(tabBarMode);
 
     // note: Items should be in the same order as the
     // Profile::TabBarPositionEnum enum
     _ui->tabBarPositionCombo->addItems( QStringList() << i18n("Below Terminal Displays")
                                                       << i18n("Above Terminal Displays") );
 
-    _ui->tabBarPositionCombo->setCurrentIndex(tabPosition);
+    _ui->tabBarPositionCombo->setCurrentIndex(tabBarPosition);
 
     _ui->newTabButton->setChecked(info->property<bool>(Profile::ShowNewAndCloseTabButtons));
 
