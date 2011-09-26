@@ -115,24 +115,25 @@ QString BookmarkHandler::currentTitle() const
 
 QString BookmarkHandler::titleForView(ViewProperties* view) const
 {
-    const KUrl &u = view ? view->url() : KUrl(); 
-    if (u.isLocalFile())
+    const KUrl& url = view ? view->url() : KUrl(); 
+    if ( url.isLocalFile() )
     {
-       QString path = u.path();
-       path = KShell::tildeExpand(path);
+        QString path = url.path();
 
-       path = QFileInfo(path).baseName();
+        path = KShell::tildeExpand(path);
+        path = QFileInfo(path).baseName();
 
-       return path;
+        return path;
     }
-    else if ( u.hasHost() )
+    else if ( url.hasHost() )
     {
-        if ( u.hasUser() )
-            return i18nc("@item:inmenu The user's name and host they are connected to via ssh", "%1 on %2",u.user(),u.host());
+        if ( url.hasUser() )
+            return i18nc("@item:inmenu The user's name and host they are connected to via ssh", "%1 on %2",url.user(),url.host());
         else
-            return i18nc("@item:inmenu The host the user is connected to via ssh", "%1",u.host());
+            return i18nc("@item:inmenu The host the user is connected to via ssh", "%1",url.host());
     }
-    return u.prettyUrl();
+
+    return url.prettyUrl();
 }
 
 bool BookmarkHandler::supportsTabs() const
