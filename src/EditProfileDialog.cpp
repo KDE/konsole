@@ -346,6 +346,7 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
     // tab options
     int tabBarMode = info->property<int>(Profile::TabBarMode);
     int tabBarPosition = info->property<int>(Profile::TabBarPosition);
+    int newTabBehavior = info->property<int>(Profile::NewTabBehavior);
 
     // note: Items should be in the same order as the 
     // Profile::TabBarModeEnum enum
@@ -358,8 +359,13 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
     // Profile::TabBarPositionEnum enum
     _ui->tabBarPositionCombo->addItems( QStringList() << i18n("Below Terminal Displays")
                                                       << i18n("Above Terminal Displays") );
-
     _ui->tabBarPositionCombo->setCurrentIndex(tabBarPosition);
+
+    // note: Items should be in the same order as the
+    // Profile::NewTabBehaviorEnum enum
+    _ui->newTabBehaviorCombo->addItems( QStringList() << i18n("Put New Tab At The End")
+                                                      << i18n("Put New Tab After Current Tab") );
+    _ui->newTabBehaviorCombo->setCurrentIndex(newTabBehavior);
 
     _ui->newTabButton->setChecked(info->property<bool>(Profile::ShowNewAndCloseTabButtons));
 
@@ -368,6 +374,8 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
              SLOT(tabBarVisibilityChanged(int)) );
     connect( _ui->tabBarPositionCombo , SIGNAL(activated(int)) , this ,
              SLOT(tabBarPositionChanged(int)) );
+    connect( _ui->newTabBehaviorCombo , SIGNAL(activated(int)) , this ,
+             SLOT(newTabBehaviorChanged(int)) );
     connect( _ui->newTabButton , SIGNAL(toggled(bool)) , this ,
              SLOT(showNewTabButton(bool)) );
 
@@ -400,6 +408,10 @@ void EditProfileDialog::tabBarVisibilityChanged(int newValue)
 void EditProfileDialog::tabBarPositionChanged(int newValue)
 {
     updateTempProfileProperty( Profile::TabBarPosition , newValue );
+}
+void EditProfileDialog::newTabBehaviorChanged(int newValue)
+{
+    updateTempProfileProperty( Profile::NewTabBehavior , newValue );
 }
 void EditProfileDialog::insertTabTitleText(const QString& text)
 {

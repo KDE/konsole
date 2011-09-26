@@ -176,6 +176,8 @@ public:
         WordCharacters,
         /** (TabBarPositionEnum) Position of the tab-bar relative to the terminal displays. */
         TabBarPosition,
+        /** (NewTabBehaviorEnum) Specifies where the newly created tab should be placed. */
+        NewTabBehavior,
         /** (bool) If true, the triple click selects from current word onwards. Otherwise
          * selects whole line.
          */
@@ -224,6 +226,17 @@ public:
         TabBarBottom = 0,
         /** Show tab bar above displays. */
         TabBarTop    = 1
+    };
+
+    /** 
+     * This enum describes where newly created tab should be placed. 
+     */
+    enum NewTabBehaviorEnum
+    {
+        /** Put newly created tab at the end. */
+        PutNewTabAtTheEnd = 0,
+        /** Put newly created tab right after current tab. */
+        PutNewTabAfterCurrentTab   = 1
     };
 
     /** 

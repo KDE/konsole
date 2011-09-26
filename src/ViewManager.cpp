@@ -616,15 +616,24 @@ void ViewManager::createView(Session* session)
         emit splitViewToggle(false);
     }
 
+    // new tab will be put at the end by default.
     int index = -1;
 
-    // In all containers the new view will be put at the same position, i.e.,
-    // the position right after the active view in the active container.
-    QWidget* view = activeView();
-    if (view)
+    // TODO: currently, whether new tab should be put after current tab is a per
+    // profile setting, while in concept it should be per ViewManager or global
+    // setting. The current implementation is limited by the design of Profile.h
+    // It should be re-implmented at some appropriate time in the future.
+    // comment by jekyllwu
+    Profile::Ptr info = SessionManager::instance()->sessionProfile(session);
+    int newTabBehavior = info->property<int>(Profile::NewTabBehavior);
+    if ( newTabBehavior == Profile::PutNewTabAfterCurrentTab )
     {
-        QList<QWidget*> views =  _viewSplitter->activeContainer()->views();
-        index = views.indexOf(view) + 1;
+        QWidget* view = activeView();
+        if (view)
+        {
+            QList<QWidget*> views =  _viewSplitter->activeContainer()->views();
+            index = views.indexOf(view) + 1;
+        }
     }
 
     // iterate over the view containers owned by this view manager

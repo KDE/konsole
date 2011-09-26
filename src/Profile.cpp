@@ -80,6 +80,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     , { SaveGeometryOnExit , "SaveGeometryOnExit" , GENERAL_GROUP , QVariant::Bool }
     , { TabBarMode , "TabBarMode" , GENERAL_GROUP , QVariant::Int }
     , { TabBarPosition , "TabBarPosition" , GENERAL_GROUP , QVariant::Int }
+    , { NewTabBehavior , "NewTabBehavior" , GENERAL_GROUP , QVariant::Int }
     , { StartInCurrentSessionDir , "StartInCurrentSessionDir" , GENERAL_GROUP , QVariant::Bool }
     , { ShowNewAndCloseTabButtons, "ShowNewAndCloseTabButtons" , GENERAL_GROUP , QVariant::Bool }
     , { MenuIndex, "MenuIndex" , GENERAL_GROUP , QVariant::String }
@@ -158,6 +159,7 @@ FallbackProfile::FallbackProfile()
     setProperty(RemoteTabTitleFormat,"(%u) %H");
     setProperty(TabBarMode,AlwaysShowTabBar);
     setProperty(TabBarPosition,TabBarBottom);
+    setProperty(NewTabBehavior,PutNewTabAtTheEnd);
     setProperty(ShowMenuBar,true);
     setProperty(ShowSizeWidget,true);
     setProperty(SaveGeometryOnExit,true);

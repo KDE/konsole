@@ -125,6 +125,7 @@ private slots:
     void showEnvironmentEditor();
     void tabBarVisibilityChanged(int);
     void tabBarPositionChanged(int);
+    void newTabBehaviorChanged(int);
     void showNewTabButton(bool);
 
     // appearance page
