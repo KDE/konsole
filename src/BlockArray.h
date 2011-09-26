@@ -23,8 +23,8 @@
 
 #include <unistd.h>
 
-#define BlockSize (1 << 12)
-#define ENTRIES   ((BlockSize - sizeof(size_t) ) / sizeof(unsigned char))
+#define BLOCKSIZE (1 << 12)
+#define ENTRIES   ((BLOCKSIZE - sizeof(size_t) ) / sizeof(unsigned char))
 
 namespace Konsole
 {
