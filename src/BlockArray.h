@@ -23,8 +23,6 @@
 
 #include <unistd.h>
 
-//#error Do not use in KDE 2.1
-
 #define BlockSize (1 << 12)
 #define ENTRIES   ((BlockSize - sizeof(size_t) ) / sizeof(unsigned char))
 
