@@ -117,7 +117,7 @@ void HistoryFile::map()
     {
             _readWriteBalance = 0; 
             _fileMap = 0;
-            kWarning() << k_funcinfo << ": mmap'ing history failed.  errno = " << errno;
+            kWarning() << "mmap'ing history failed.  errno = " << errno;
     }
 }
 
