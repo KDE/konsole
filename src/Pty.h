@@ -128,10 +128,10 @@ public:
     QSize windowSize() const;
 
     /** TODO Document me */
-    void setErase(char erase);
+    void setEraseChar(char eraseChar);
 
     /** */
-    char erase() const;
+    char eraseChar() const;
 
     /**
      * Returns the process id of the teletype's current foreground

@@ -105,21 +105,21 @@ void Pty::setUtf8Mode(bool enable)
 #endif
 }
 
-void Pty::setErase(char erase)
+void Pty::setEraseChar(char eraseChar)
 {
-    _eraseChar = erase;
+    _eraseChar = eraseChar;
 
     if (pty()->masterFd() >= 0)
     {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        ttmode.c_cc[VERASE] = erase;
+        ttmode.c_cc[VERASE] = eraseChar;
         if (!pty()->tcSetAttr(&ttmode))
             kWarning() << "Unable to set terminal attributes.";
     }
 }
 
-char Pty::erase() const
+char Pty::eraseChar() const
 {
     if (pty()->masterFd() >= 0)
     {

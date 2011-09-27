@@ -462,7 +462,7 @@ void Session::run()
         _shellProcess->setWorkingDirectory(QDir::homePath());
 
     _shellProcess->setFlowControlEnabled(_flowControl);
-    _shellProcess->setErase(_emulation->eraseChar());
+    _shellProcess->setEraseChar(_emulation->eraseChar());
 
     // this is not strictly accurate use of the COLORFGBG variable.  This does not
     // tell the terminal exactly which colors are being used, but instead approximates
