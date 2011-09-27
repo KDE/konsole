@@ -447,7 +447,8 @@ void SessionController::setupActions()
 
     action = collection->addAction("select-all", this, SLOT(selectAll()));
     action->setText(i18n("&Select All"));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
+    // TODO: this shortcut conflict with the 'close-active-view' action
+    //action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
 
     action = collection->addAction("paste-selection", this, SLOT(pasteSelection()));
     action->setText(i18n("Paste Selection"));
