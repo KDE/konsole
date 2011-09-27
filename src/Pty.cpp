@@ -99,7 +99,7 @@ void Pty::setUtf8Mode(bool enable)
         else
             ttmode.c_iflag &= ~IUTF8;
 
-        if ( pty()->tcSetAttr(&ttmode) )
+        if ( !pty()->tcSetAttr(&ttmode) )
             kWarning() << "Unable to set terminal attributes.";
     }
 #endif
