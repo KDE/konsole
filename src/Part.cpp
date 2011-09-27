@@ -288,7 +288,7 @@ bool Part::openUrl( const KUrl & _url )
 
     setUrl( _url );
     emit setWindowCaption( _url.pathOrUrl() );
-    //kdDebug(1211) << "Set Window Caption to " << url.pathOrUrl();
+    //kdDebug() << "Set Window Caption to " << url.pathOrUrl();
     emit started( 0 );
 
     if ( _url.isLocalFile() /*&& b_openUrls*/ ) {

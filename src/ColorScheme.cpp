@@ -370,12 +370,12 @@ ColorSchemeWallpaper::ColorSchemeWallpaper(const QString& path)
     : _path(path),
       _picture(0)
 {
-    //    kDebug(1211) << "wallpaper created" << _path << "\n";
+    //    kDebug() << "wallpaper created" << _path << "\n";
 }
 
 ColorSchemeWallpaper::~ColorSchemeWallpaper()
 {
-    //    kDebug(1211) << "wallpaper deleted" << _path << "\n";
+    //    kDebug() << "wallpaper deleted" << _path << "\n";
     delete _picture;
 }
 

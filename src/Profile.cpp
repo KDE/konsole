@@ -326,7 +326,7 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr info)
         newPath = KGlobal::dirs()->saveLocation("data","konsole/") + info->name() + ".profile";
     }
 
-    //kDebug(1211) << "Saving profile under name: " << newPath;
+    //kDebug() << "Saving profile under name: " << newPath;
 
     return newPath;
 }

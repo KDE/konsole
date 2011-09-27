@@ -287,7 +287,7 @@ void SessionController::openUrl( const KUrl& url )
                            i18n("Konsole does not know how to open the bookmark: ") +
                            url.prettyUrl());
 
-        kWarning(1211) << "Unable to open bookmark at url" << url << ", I do not know"
+        kWarning() << "Unable to open bookmark at url" << url << ", I do not know"
            << " how to handle the protocol " << url.protocol();
     }
 }
@@ -1001,7 +1001,7 @@ void SessionController::showHistoryOptions()
 }
 void SessionController::sessionResizeRequest(const QSize& size)
 {
-    //kDebug(1211) << "View resize requested to " << size;
+    //kDebug() << "View resize requested to " << size;
     _view->setSize(size.width(),size.height());
 }
 void SessionController::scrollBackOptionsChanged(int mode, int lines, bool saveToCurrentProfile )
@@ -1142,7 +1142,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 
         KXMLGUIFactory* factory = new KXMLGUIFactory(clientBuilder(), this);
         factory->addClient(this);
-        //kDebug(1211) << "Created xmlgui factory" << factory;
+        //kDebug() << "Created xmlgui factory" << factory;
     }
 
     QPointer<QMenu> popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu",this));
@@ -1592,7 +1592,7 @@ void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
      //work out how many lines into the current block of text the search result was found
      //- looks a little painful, but it only has to be done once per search.
 
-     //kDebug(1211) << "Found result at line " << findPos;
+     //kDebug() << "Found result at line " << findPos;
 
      //update display to show area of history containing selection
      window->scrollTo(findPos);
