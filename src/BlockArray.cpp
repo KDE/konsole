@@ -57,7 +57,7 @@ BlockArray::~BlockArray()
     assert(!lastblock);
 }
 
-size_t BlockArray::append(Block *block)
+size_t BlockArray::append(Block* block)
 {
     if (!size)
         return size_t(-1);
@@ -128,7 +128,7 @@ const Block* BlockArray::at(size_t i)
     assert(j < size);
     unmap();
 
-    Block *block = (Block*)mmap(0, blocksize, PROT_READ, MAP_PRIVATE, ion, j * blocksize);
+    Block* block = (Block*)mmap(0, blocksize, PROT_READ, MAP_PRIVATE, ion, j * blocksize);
 
     if (block == (Block*)-1) { perror("mmap"); return 0; }
 
@@ -206,7 +206,7 @@ bool BlockArray::setHistorySize(size_t newsize)
     }
 }
 
-void moveBlock(FILE *fion, int cursor, int newpos, char *buffer2)
+void moveBlock(FILE* fion, int cursor, int newpos, char* buffer2)
 {
     int res = KDE_fseek(fion, cursor * blocksize, SEEK_SET);
     if (res)
@@ -235,9 +235,9 @@ void BlockArray::decreaseBuffer(size_t newsize)
         return;
 
     // The Block constructor could do somthing in future...
-    char *buffer1 = new char[blocksize];
+    char* buffer1 = new char[blocksize];
 
-    FILE *fion = fdopen(dup(ion), "w+b");
+    FILE* fion = fdopen(dup(ion), "w+b");
     if (!fion) {
         delete [] buffer1;
         perror("fdopen/dup");
@@ -280,8 +280,8 @@ void BlockArray::increaseBuffer()
         return;
 
     // The Block constructor could do somthing in future...
-    char *buffer1 = new char[blocksize];
-    char *buffer2 = new char[blocksize];
+    char* buffer1 = new char[blocksize];
+    char* buffer2 = new char[blocksize];
 
     int runs = 1;
     int bpr = size; // blocks per run
@@ -291,7 +291,7 @@ void BlockArray::increaseBuffer()
         runs = offset;
     }
 
-    FILE *fion = fdopen(dup(ion), "w+b");
+    FILE* fion = fdopen(dup(ion), "w+b");
     if (!fion) {
         perror("fdopen/dup");
     delete [] buffer1;

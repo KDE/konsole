@@ -61,7 +61,7 @@ public:
     * Note, that the block may be dropped completely
     * if history is turned off.
     */
-    size_t append(Block *block);
+    size_t append(Block* block);
 
     /**
     * gets the block at the index. Function may return
@@ -71,7 +71,7 @@ public:
     * maped in memory - and will be invalid on the next
     * operation on this class.
     */
-    const Block *at(size_t index);
+    const Block* at(size_t index);
 
     /**
     * reorders blocks as needed. If newsize is null,
@@ -83,7 +83,7 @@ public:
 
     size_t newBlock();
 
-    Block *lastBlock() const;
+    Block* lastBlock() const;
 
     /**
     * Convenient function to set the size in KBytes
@@ -107,9 +107,9 @@ private:
     size_t current;
     size_t index;
 
-    Block *lastmap;
+    Block* lastmap;
     size_t lastmap_index;
-    Block *lastblock;
+    Block* lastblock;
 
     int ion;
     size_t length;
