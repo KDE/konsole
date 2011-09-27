@@ -34,10 +34,10 @@ namespace Konsole
 
 typedef unsigned char LineProperty;
 
-static const int LINE_DEFAULT        = 0;
-static const int LINE_WRAPPED          = (1 << 0);
-static const int LINE_DOUBLEWIDTH      = (1 << 1);
-static const int LINE_DOUBLEHEIGHT    = (1 << 2);
+static const int LINE_DEFAULT      = 0;
+static const int LINE_WRAPPED      = (1 << 0);
+static const int LINE_DOUBLEWIDTH  = (1 << 1);
+static const int LINE_DOUBLEHEIGHT = (1 << 2);
 
 #define DEFAULT_RENDITION  0
 #define RE_BOLD            (1 << 0)
@@ -100,7 +100,7 @@ public:
   /** 
    * returns true if the format (color, rendition flag) of the compared characters is equal
    */
-  bool equalsFormat(const Character &other) const;
+  bool equalsFormat(const Character& other) const;
 
   /** 
    * Compares two characters and returns true if they have the same unicode character value,
@@ -149,9 +149,9 @@ inline bool Character::isTransparent(const ColorEntry* base) const
 inline bool Character::equalsFormat(const Character& other) const
 {
   return 
-    backgroundColor==other.backgroundColor &&
-    foregroundColor==other.foregroundColor &&
-    rendition==other.rendition;
+    backgroundColor == other.backgroundColor &&
+    foregroundColor == other.foregroundColor &&
+    rendition == other.rendition;
 }	
 
 inline ColorEntry::FontWeight Character::fontWeight(const ColorEntry* base) const
