@@ -25,7 +25,6 @@
 #include "Session.h"
 
 // Standard
-#include <assert.h>
 #include <stdlib.h>
 #include <signal.h>
 
