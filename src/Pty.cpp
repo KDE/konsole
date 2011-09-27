@@ -193,10 +193,12 @@ int Pty::start(const QString& program,
 
     struct ::termios ttmode;
     pty()->tcGetAttr(&ttmode);
+
     if ( _xonXoff )
         ttmode.c_iflag |= (IXOFF | IXON);
     else
         ttmode.c_iflag &= ~(IXOFF | IXON);
+
 #ifdef IUTF8 // XXX not a reasonable place to check it.
     if ( _utf8 )
         ttmode.c_iflag |= IUTF8;
@@ -243,13 +245,13 @@ Pty::Pty(QObject* parent)
 void Pty::init()
 {
     _windowColumns = 0;
-    _windowLines = 0;
-    _eraseChar = 0;
-    _xonXoff = true;
-    _utf8 =true;
+    _windowLines   = 0;
+    _eraseChar     = 0;
+    _xonXoff       = true;
+    _utf8          = true;
 
-    connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
     setPtyChannels(KPtyProcess::AllChannels);
+    connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
 }
 
 Pty::~Pty()
@@ -258,7 +260,7 @@ Pty::~Pty()
 
 void Pty::sendData(const char* data, int length)
 {
-    if (!length)
+    if ( length == 0 )
         return;
 
     if (!pty()->write(data,length)) 
