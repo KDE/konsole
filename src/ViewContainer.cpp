@@ -435,23 +435,13 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
+
+    // The tab bar
     _tabBar = new ViewContainerTabBar(_containerWidget,this);
     _tabBar->setDrawBase(true);
     _tabBar->setDocumentMode(true);
     _tabBar->setFocusPolicy(Qt::NoFocus);
     _tabBar->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
-
-    _newTabButton = new QToolButton(_containerWidget);
-    _newTabButton->setIcon(KIcon("tab-new"));
-    _newTabButton->adjustSize();
-    // new tab button is initially hidden, it will be shown when setFeatures() is called
-    // with the QuickNewView flag enabled
-    _newTabButton->setHidden(true);
-
-    _closeTabButton = new QToolButton(_containerWidget);
-    _closeTabButton->setIcon(KIcon("tab-close"));
-    _closeTabButton->adjustSize();
-    _closeTabButton->setHidden(true);
 
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
@@ -461,38 +451,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     connect( _tabBar, SIGNAL(contextMenu(int,QPoint)), this,
             SLOT(openTabContextMenu(int,QPoint)) );
 
-    connect( _newTabButton , SIGNAL(clicked()) , this , SIGNAL(newViewRequest()) );
-    connect( _closeTabButton , SIGNAL(clicked()) , this , SLOT(closeCurrentTab()) );
-
-    _layout = new TabbedViewContainerLayout;
-    _layout->setSpacing(0);
-    _layout->setContentsMargins(0, 0, 0, 0);
-    _tabBarLayout = new QHBoxLayout;
-    _tabBarLayout->setSpacing(0);
-    _tabBarLayout->setContentsMargins(0, 0, 0, 0);
-    _tabBarLayout->addWidget(_newTabButton);
-    _tabBarLayout->addWidget(_tabBar);
-    _tabBarLayout->addWidget(_closeTabButton); 
-
-    _layout->addWidget(_stackWidget);
-    searchBar()->setParent(_containerWidget);
-    if ( position == NavigationPositionTop )
-    {
-        _layout->insertLayout(0,_tabBarLayout);
-        _layout->insertWidget(-1,searchBar());
-        _tabBar->setShape(QTabBar::RoundedNorth);
-    }
-    else if ( position == NavigationPositionBottom )
-    {
-        _layout->insertWidget(-1,searchBar());
-        _layout->insertLayout(-1,_tabBarLayout);
-        _tabBar->setShape(QTabBar::RoundedSouth);
-    }
-    else
-        Q_ASSERT(false); // position not supported
-
-    _containerWidget->setLayout(_layout);
- 
+    // The context menu of tab bar
     _contextPopupMenu = new KMenu(_tabBar);
 
     _contextPopupMenu->addAction(KIcon("tab-detach"),
@@ -506,6 +465,61 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _contextPopupMenu->addAction(KIcon("tab-close"),
         i18nc("@action:inmenu", "&Close Tab"), this,
         SLOT(tabContextMenuCloseTab()));
+
+    // The 'new tab' and 'close tab' button
+    _newTabButton = new QToolButton(_containerWidget);
+    _newTabButton->setIcon(KIcon("tab-new"));
+    _newTabButton->adjustSize();
+
+    _closeTabButton = new QToolButton(_containerWidget);
+    _closeTabButton->setIcon(KIcon("tab-close"));
+    _closeTabButton->adjustSize();
+
+    // 'new tab' button is initially hidden. It will be shown when setFeatures()
+    // is called with the QuickNewView flag enabled. The 'close tab' is the same.
+    _newTabButton->setHidden(true);
+    _closeTabButton->setHidden(true);
+
+    connect( _newTabButton , SIGNAL(clicked()) , this , SIGNAL(newViewRequest()) );
+    connect( _closeTabButton , SIGNAL(clicked()) , this , SLOT(closeCurrentTab()) );
+
+    // Combin tab bar and 'new/close tab' buttons
+    _tabBarLayout = new QHBoxLayout;
+    _tabBarLayout->setSpacing(0);
+    _tabBarLayout->setContentsMargins(0, 0, 0, 0);
+    _tabBarLayout->addWidget(_newTabButton);
+    _tabBarLayout->addWidget(_tabBar);
+    _tabBarLayout->addWidget(_closeTabButton);
+
+    _layout = new TabbedViewContainerLayout;
+    _layout->setSpacing(0);
+    _layout->setContentsMargins(0, 0, 0, 0);
+
+    // The terminal area
+    _layout->addWidget(_stackWidget);
+
+    // The search bar
+    searchBar()->setParent(_containerWidget);
+
+    // The overall layout
+    if ( position == NavigationPositionTop )
+    {
+        _layout->insertLayout(0,_tabBarLayout);
+        _layout->insertWidget(-1,searchBar());
+        _tabBar->setShape(QTabBar::RoundedNorth);
+    }
+    else if ( position == NavigationPositionBottom )
+    {
+        _layout->insertWidget(-1,searchBar());
+        _layout->insertLayout(-1,_tabBarLayout);
+        _tabBar->setShape(QTabBar::RoundedSouth);
+    }
+    else
+    {
+        Q_ASSERT(false); // position not supported
+    }
+
+    _containerWidget->setLayout(_layout);
 
 }
 void TabbedViewContainer::setNewViewMenu(QMenu* menu)
