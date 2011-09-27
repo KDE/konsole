@@ -63,11 +63,12 @@ void Pty::setFlowControlEnabled(bool enable)
     {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        if (!enable)
-            ttmode.c_iflag &= ~(IXOFF | IXON);
-        else
+        if ( enable )
             ttmode.c_iflag |= (IXOFF | IXON);
-        if (!pty()->tcSetAttr(&ttmode))
+        else
+            ttmode.c_iflag &= ~(IXOFF | IXON);
+
+        if ( !pty()->tcSetAttr(&ttmode) )
             kWarning() << "Unable to set terminal attributes.";
     }
 }
@@ -93,11 +94,12 @@ void Pty::setUtf8Mode(bool enable)
     {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        if (!enable)
-            ttmode.c_iflag &= ~IUTF8;
-        else
+        if ( enable )
             ttmode.c_iflag |= IUTF8;
-        if (!pty()->tcSetAttr(&ttmode))
+        else
+            ttmode.c_iflag &= ~IUTF8;
+
+        if ( pty()->tcSetAttr(&ttmode) )
             kWarning() << "Unable to set terminal attributes.";
     }
 #endif
@@ -191,15 +193,15 @@ int Pty::start(const QString& program,
 
     struct ::termios ttmode;
     pty()->tcGetAttr(&ttmode);
-    if (!_xonXoff)
-        ttmode.c_iflag &= ~(IXOFF | IXON);
-    else
+    if ( _xonXoff )
         ttmode.c_iflag |= (IXOFF | IXON);
-#ifdef IUTF8 // XXX not a reasonable place to check it.
-    if (!_utf8)
-        ttmode.c_iflag &= ~IUTF8;
     else
+        ttmode.c_iflag &= ~(IXOFF | IXON);
+#ifdef IUTF8 // XXX not a reasonable place to check it.
+    if ( _utf8 )
         ttmode.c_iflag |= IUTF8;
+    else
+        ttmode.c_iflag &= ~IUTF8;
 #endif
 
     if (_eraseChar != 0)
