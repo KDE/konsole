@@ -458,6 +458,7 @@ private:
     void setTabBarVisible(bool visible);
     void setTabActivity(int index,bool activity);
     void renameTab(int index);
+    void updateVisibilityOfQuickButtons();
 
     ViewContainerTabBar* _tabBar;
     QPointer<QStackedWidget> _stackWidget;

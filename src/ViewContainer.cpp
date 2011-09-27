@@ -533,11 +533,9 @@ ViewContainer::Features TabbedViewContainer::supportedFeatures() const
 void TabbedViewContainer::setFeatures(Features features)
 {
     ViewContainer::setFeatures(features);
-
-    const bool tabBarHidden = _tabBar->isHidden();
-    _newTabButton->setVisible(!tabBarHidden && (features & QuickNewView));
-    _closeTabButton->setVisible(!tabBarHidden && (features & QuickCloseView));
+    updateVisibilityOfQuickButtons();
 }
+
 void TabbedViewContainer::closeCurrentTab()
 {
     if (_stackWidget->currentIndex() != -1)
@@ -546,11 +544,17 @@ void TabbedViewContainer::closeCurrentTab()
     }
 }
 
+void TabbedViewContainer::updateVisibilityOfQuickButtons()
+{
+    const bool tabBarHidden = _tabBar->isHidden();
+    _newTabButton->setVisible(!tabBarHidden && (features() & QuickNewView));
+    _closeTabButton->setVisible(!tabBarHidden && (features() & QuickCloseView));
+}
+
 void TabbedViewContainer::setTabBarVisible(bool visible)
 {
     _tabBar->setVisible(visible);
-    _newTabButton->setVisible(visible && (features() & QuickNewView));
-    _closeTabButton->setVisible(visible && (features() & QuickCloseView));
+    updateVisibilityOfQuickButtons();
 }
 QList<ViewContainer::NavigationPosition> TabbedViewContainer::supportedNavigationPositions() const
 {
