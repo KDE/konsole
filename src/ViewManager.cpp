@@ -21,7 +21,6 @@
 #include "ViewManager.h"
 
 // System
-#include <assert.h>
 
 // Qt
 #include <QtCore/QDateTime>

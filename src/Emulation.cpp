@@ -23,7 +23,6 @@
 #include "Emulation.h"
 
 // System
-#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
