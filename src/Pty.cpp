@@ -42,13 +42,13 @@
 
 using namespace Konsole;
 
-void Pty::setWindowSize(int lines, int cols)
+void Pty::setWindowSize(int lines, int columns)
 {
-    _windowColumns = cols;
+    _windowColumns = columns;
     _windowLines = lines;
 
     if (pty()->masterFd() >= 0)
-        pty()->setWinSize(lines, cols);
+        pty()->setWinSize(lines, columns);
 }
 QSize Pty::windowSize() const
 {
