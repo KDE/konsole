@@ -55,8 +55,8 @@ class KONSOLEPRIVATE_EXPORT Pty: public KPtyProcess
 {
 Q_OBJECT
 
-  public:
-    
+public:
+
     /** 
      * Constructs a new Pty.
      * 
@@ -123,7 +123,7 @@ Q_OBJECT
      * used by this teletype.
      */
     void setWindowSize(int lines, int cols);
-    
+
     /** Returns the size of the window used by this teletype.  See setWindowSize() */
     QSize windowSize() const;
 
@@ -142,8 +142,8 @@ Q_OBJECT
      * 0 will be returned.
      */
     int foregroundProcessGroup() const;
-   
-  public slots:
+
+public slots:
 
     /**
      * Put the pty into UTF-8 mode on systems which support it.
@@ -160,7 +160,7 @@ Q_OBJECT
      * otherwise processing is resumed.
      */
     void lockPty(bool lock);
-    
+
     /** 
      * Sends data to the process currently controlling the 
      * teletype ( whose id is returned by foregroundProcessGroup() )
@@ -170,7 +170,7 @@ Q_OBJECT
      */
     void sendData(const char* buffer, int length);
 
-  signals:
+signals:
 
     /**
      * Emitted when a new block of data is received from
@@ -180,16 +180,17 @@ Q_OBJECT
      * @param length Length of @p buffer
      */
     void receivedData(const char* buffer, int length);
-   
-  protected:
-      void setupChildProcess();
 
-  private slots:
+protected:
+    void setupChildProcess();
+
+private slots:
     // called when data is received from the terminal process 
     void dataReceived(); 
-    
-  private:
-      void init();
+
+private:
+
+    void init();
 
     // takes a list of key=value pairs and adds them
     // to the environment for the process
