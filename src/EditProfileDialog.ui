@@ -986,14 +986,45 @@
            </layout>
           </item>
           <item>
-           <widget class="QCheckBox" name="tripleClickMode">
-            <property name="toolTip">
-             <string>All characters from the current word to the end of line will be selected.</string>
-            </property>
-            <property name="text">
-             <string>Triple click selects from current word forward</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout">
+
+            <item>
+             <widget class="QLabel" name="label_17">
+              <property name="text">
+               <string>Triple-click select: </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="KComboBox" name="tripleClickModeCombo">
+              <property name="toolTip">
+               <string>Which part of current line should be selected with triple click .</string>
+              </property>
+              <item>
+               <property name="text">
+                <string comment=""> The whole current line</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string comment=""> From mouse position to the end of line</string>
+               </property>
+              </item>
+            </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>0</width>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QCheckBox" name="underlineLinksButton">
@@ -1065,7 +1096,7 @@
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer">
+             <spacer name="horizontalSpacer_1">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>

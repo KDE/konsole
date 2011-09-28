@@ -165,7 +165,7 @@ private slots:
     void toggleResizeWindow(bool);
     void togglebidiRendering(bool);
     void toggleBlinkingCursor(bool);
-    void toggleTripleClickMode(bool);
+    void TripleClickModeChanged(int);
     void toggleUnderlineLinks(bool);
 
     void setCursorShape(int);

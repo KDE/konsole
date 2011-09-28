@@ -1116,8 +1116,6 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
                                  SLOT(toggleResizeWindow(bool)) },
                                { _ui->enableBlinkingCursorButton , Profile::BlinkingCursorEnabled ,
                                  SLOT(toggleBlinkingCursor(bool)) },
-                               { _ui->tripleClickMode , Profile::TripleClickMode ,
-                                 SLOT(toggleTripleClickMode(bool)) },
                                { _ui->underlineLinksButton , Profile::UnderlineLinksEnabled,
                                  SLOT(toggleUnderlineLinks(bool)) },
                                { _ui->enableBidiRenderingButton , Profile::BidiRenderingEnabled ,
@@ -1131,6 +1129,12 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 
     connect( _ui->wordCharacterEdit , SIGNAL(textChanged(QString)) , this , 
             SLOT(wordCharactersChanged(QString)) );
+
+    int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
+    _ui->tripleClickModeCombo->setCurrentIndex(tripleClickMode);
+
+    connect( _ui->tripleClickModeCombo , SIGNAL(activated(int)) , this ,
+             SLOT(TripleClickModeChanged(int)) );
 
     // cursor options
     if ( profile->property<bool>(Profile::UseCustomCursorColor) )
@@ -1200,9 +1204,9 @@ void EditProfileDialog::toggleUnderlineLinks(bool enable)
 {
     updateTempProfileProperty(Profile::UnderlineLinksEnabled,enable);
 }
-void EditProfileDialog::toggleTripleClickMode(bool enable)
+void EditProfileDialog::TripleClickModeChanged(int newValue)
 {
-    updateTempProfileProperty(Profile::TripleClickMode,enable);
+    updateTempProfileProperty(Profile::TripleClickMode,newValue);
 }
 void EditProfileDialog::toggleBlinkingText(bool enable)
 {

@@ -178,8 +178,8 @@ public:
         TabBarPosition,
         /** (NewTabBehaviorEnum) Specifies where the newly created tab should be placed. */
         NewTabBehavior,
-        /** (bool) If true, the triple click selects from current word onwards. Otherwise
-         * selects whole line.
+        /** (TripleClickModeEnum) Specifies which part of current line should be
+         * selected with triple click action.
          */
         TripleClickMode,
         /** (bool) If true, text that matches a link or an email address is underlined when
@@ -279,6 +279,15 @@ public:
         IBeamCursor     = 1,
         /** Draw a line underneath the cursor's position. */
         UnderlineCursor = 2
+    };
+
+    /** This enum describes the behavior of triple click action . */
+    enum TripleClickModeEnum
+    {
+        /** Select the whole line underneath the cursor. */
+        SelectWholeLine = 0,
+        /** Select from the current cursor position to the end of the line. */
+        SelectForwardsFromCursor = 1,
     };
 
     /**
