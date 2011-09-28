@@ -387,7 +387,7 @@ private:
     QHash<KJob*,SaveJob> _jobSession;
 };
 
-class SearchHistoryThread;
+//class SearchHistoryThread;
 /**
  * A task which searches through the output of sessions for matches for a given regular expression.
  * SearchHistoryTask operates on ScreenWindow instances rather than sessions added by addSession().
@@ -459,7 +459,7 @@ private:
     QRegExp _regExp;
     SearchDirection _direction;
 
-    static QPointer<SearchHistoryThread> _thread;
+    //static QPointer<SearchHistoryThread> _thread;
 };
 
 }

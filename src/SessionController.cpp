@@ -71,7 +71,7 @@ using namespace Konsole;
 KIcon SessionController::_activityIcon;
 KIcon SessionController::_silenceIcon;
 QSet<SessionController*> SessionController::_allControllers;
-QPointer<SearchHistoryThread> SearchHistoryTask::_thread;
+//QPointer<SearchHistoryThread> SearchHistoryTask::_thread;
 int SessionController::_lastControllerId;
 
 SessionController::SessionController(Session* session , TerminalDisplay* view, QObject* parent)
