@@ -1043,7 +1043,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="cursorShapeCombo">
+             <widget class="KComboBox" name="cursorShapeCombo">
               <property name="toolTip">
                <string>Change the shape of the cursor</string>
               </property>
