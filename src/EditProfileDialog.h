@@ -233,7 +233,7 @@ private:
     struct BooleanOption
     {
        QAbstractButton* button;
-       int property;
+       Profile::Property property;
        const char* slot;
     };
     void setupCheckBoxes(BooleanOption* options , const Profile::Ptr profile);

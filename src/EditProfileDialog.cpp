@@ -1027,7 +1027,7 @@ void EditProfileDialog::setupCheckBoxes( BooleanOption* options , const Profile:
 {
     while ( options->button != 0 )
     {
-        options->button->setChecked(profile->property<bool>((Profile::Property)options->property));
+        options->button->setChecked(profile->property<bool>(options->property));
         connect( options->button , SIGNAL(toggled(bool)) , this , options->slot );
 
         ++options;
@@ -1122,7 +1122,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
                                  SLOT(toggleUnderlineLinks(bool)) },
                                { _ui->enableBidiRenderingButton , Profile::BidiRenderingEnabled ,
                                  SLOT(togglebidiRendering(bool)) },
-                               { 0 , 0 , 0 }
+                               { 0 , Profile::Property(0) , 0 }
                              };
     setupCheckBoxes( options , profile );
 
