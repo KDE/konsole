@@ -229,7 +229,7 @@ private:
        int property;
        const char* slot; 
     };
-    void setupRadio(RadioOption* possible,int actual);
+    void setupRadio(RadioOption* possibilities, int actual);
     struct BooleanOption
     {
        QAbstractButton* button;

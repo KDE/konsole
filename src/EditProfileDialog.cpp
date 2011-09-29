@@ -1033,18 +1033,18 @@ void EditProfileDialog::setupCheckBoxes( BooleanOption* options , const Profile:
         ++options;
     }
 }
-void EditProfileDialog::setupRadio( RadioOption* possible , int actual )
+void EditProfileDialog::setupRadio( RadioOption* possibilities , int actual )
 {
-    while (possible->button != 0)
+    while (possibilities->button != 0)
     {
-        if ( possible->property == actual )
-            possible->button->setChecked(true);
+        if ( possibilities->property == actual )
+            possibilities->button->setChecked(true);
         else
-            possible->button->setChecked(false);
+            possibilities->button->setChecked(false);
    
-        connect( possible->button , SIGNAL(clicked()) , this , possible->slot );
+        connect( possibilities->button , SIGNAL(clicked()) , this , possibilities->slot );
 
-        ++possible;
+        ++possibilities;
     }
 }
 
