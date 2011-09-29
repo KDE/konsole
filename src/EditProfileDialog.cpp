@@ -1023,7 +1023,7 @@ void EditProfileDialog::editKeyBinding()
 {
     showKeyBindingEditor(false);
 }
-void EditProfileDialog::setupCombo( ComboOption* options , const Profile::Ptr profile )
+void EditProfileDialog::setupCheckBoxes( BooleanOption* options , const Profile::Ptr profile )
 {
     while ( options->button != 0 )
     {
@@ -1108,7 +1108,7 @@ void EditProfileDialog::showScrollBarRight()
 }
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {
-    ComboOption  options[] = { { _ui->enableBlinkingTextButton , Profile::BlinkingTextEnabled , 
+    BooleanOption  options[] = { { _ui->enableBlinkingTextButton , Profile::BlinkingTextEnabled , 
                                  SLOT(toggleBlinkingText(bool)) },
                                { _ui->enableFlowControlButton , Profile::FlowControlEnabled ,
                                  SLOT(toggleFlowControl(bool)) },
@@ -1124,7 +1124,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
                                  SLOT(togglebidiRendering(bool)) },
                                { 0 , 0 , 0 }
                              };
-    setupCombo( options , profile );
+    setupCheckBoxes( options , profile );
 
     // interaction options
     _ui->wordCharacterEdit->setText( profile->property<QString>(Profile::WordCharacters) );

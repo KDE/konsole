@@ -230,13 +230,13 @@ private:
        const char* slot; 
     };
     void setupRadio(RadioOption* possible,int actual);
-    struct ComboOption
+    struct BooleanOption
     {
        QAbstractButton* button;
        int property;
        const char* slot;
     };
-    void setupCombo(ComboOption* options , const Profile::Ptr profile);
+    void setupCheckBoxes(BooleanOption* options , const Profile::Ptr profile);
 
     const Profile::Ptr lookupProfile() const;
 
