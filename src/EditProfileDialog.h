@@ -46,8 +46,6 @@ namespace Ui
 namespace Konsole
 {
 
-class Profile;
-
 /**
  * A dialog which allows the user to edit a profile.
  * After the dialog is created, it can be initialised with the settings
