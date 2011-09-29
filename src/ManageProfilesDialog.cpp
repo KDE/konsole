@@ -47,7 +47,7 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     , _sessionModel(new QStandardItemModel(this))
 {
     setCaption(i18nc("@title:window", "Manage Profiles"));
-    setButtons( KDialog::Ok | KDialog::Apply | KDialog::Cancel ); 
+    setButtons( KDialog::Close );
 
     connect( this, SIGNAL(applyClicked()) , this , SLOT(setMenuOrder()) );
 
