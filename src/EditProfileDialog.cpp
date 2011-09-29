@@ -1037,7 +1037,7 @@ void EditProfileDialog::setupRadio( RadioOption* possibilities , int actual )
 {
     while (possibilities->button != 0)
     {
-        if ( possibilities->property == actual )
+        if ( possibilities->value == actual )
             possibilities->button->setChecked(true);
         else
             possibilities->button->setChecked(false);

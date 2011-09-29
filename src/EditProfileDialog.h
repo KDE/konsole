@@ -224,7 +224,7 @@ private:
     struct RadioOption
     {
        QAbstractButton* button;
-       int property;
+       int value;
        const char* slot; 
     };
     void setupRadio(RadioOption* possibilities, int actual);
