@@ -115,7 +115,7 @@ public:
         ShowMenuBar,    
         /** (bool) Specifies whether show size information after resizing the application window. */
         ShowSizeWidget,
-         /** (bool) Specifies whether the geometry infomation is saved when window is closed. */
+         /** (bool) Specifies whether the geometry information is saved when window is closed. */
         SaveGeometryOnExit,
         /** (TabBarModeEnum) Specifies when the tab bar should be shown in
          * the main application window. */ 
