@@ -456,9 +456,9 @@ void Session::run()
     QString dbusService = QDBusConnection::sessionBus().baseService();
 
     if (!_initialWorkingDir.isEmpty())
-        _shellProcess->setWorkingDirectory(_initialWorkingDir);
+        _shellProcess->setInitialWorkingDirectory(_initialWorkingDir);
     else
-        _shellProcess->setWorkingDirectory(QDir::homePath());
+        _shellProcess->setInitialWorkingDirectory(QDir::homePath());
 
     _shellProcess->setFlowControlEnabled(_flowControl);
     _shellProcess->setEraseChar(_emulation->eraseChar());

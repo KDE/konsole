@@ -131,6 +131,12 @@ char Pty::eraseChar() const
     return _eraseChar;
 }
 
+void Pty::setInitialWorkingDirectory(const QString& dir)
+{
+    setWorkingDirectory(dir);
+    setEnv("PWD", dir);
+}
+
 void Pty::addEnvironmentVariables(const QStringList& environment)
 {
     QListIterator<QString> iter(environment);
