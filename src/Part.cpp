@@ -103,8 +103,7 @@ void Part::createGlobalActions()
 }
 void Part::setupActionsForSession(SessionController* session)
 {
-    KActionCollection* collection = session->actionCollection();
-    collection->addAction("configure-profiles",_manageProfilesAction);
+    // TODO: what meaningful operation should be placed here?
 }
 bool Part::openFile()
 {
