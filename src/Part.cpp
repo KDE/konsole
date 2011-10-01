@@ -104,6 +104,7 @@ void Part::createGlobalActions()
 void Part::setupActionsForSession(SessionController* session)
 {
     // TODO: what meaningful operation should be placed here?
+    Q_UNUSED(session);
 }
 bool Part::openFile()
 {
