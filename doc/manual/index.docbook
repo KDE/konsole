@@ -123,7 +123,7 @@ of common commands.  Examples could include:
 <para>
 Procedure to create a new profile:
 <orderedlist>
-<listitem><para>Click on the menu entry <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Profiles...</guimenuitem>
+<listitem><para>Click on the menu entry <menuchoice><guimenu>Settings</guimenu><guimenuitem>Manage Profiles...</guimenuitem>
 </menuchoice></para></listitem>
 
 <listitem><para>Click on the button <guibutton>New Profile...</guibutton>.</para></listitem>
@@ -648,7 +648,7 @@ Currently, &konsole; accepts the following:
 <variablelist>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Manage
 Profiles...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens a editor for managing profiles</action>
 </para>

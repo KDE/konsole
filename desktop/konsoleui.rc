@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsole" version="6">
+<kpartgui name="konsole" version="7">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
@@ -33,7 +33,7 @@
         <Menu name="settings"><text>Settings</text>
             <DefineGroup name="session-settings"/>
             <Action name="edit-current-profile"/>
-            <Action name="configure-profiles"/>
+            <Action name="manage-profiles"/>
             <Action name="show-menubar"/>
             <Separator/>
             <Action name="view-full-screen"/>

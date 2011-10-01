@@ -98,7 +98,7 @@ Part::~Part()
 }
 void Part::createGlobalActions()
 {
-    _manageProfilesAction = new QAction(i18n("Configure Profiles..."),this);
+    _manageProfilesAction = new QAction(i18n("Manage Profiles..."),this);
     connect(_manageProfilesAction,SIGNAL(triggered()),this,SLOT(showManageProfilesDialog()));
 }
 void Part::setupActionsForSession(SessionController* session)

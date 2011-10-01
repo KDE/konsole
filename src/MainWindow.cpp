@@ -293,8 +293,8 @@ void MainWindow::setupActions()
     KStandardAction::configureNotifications( this , SLOT(configureNotifications()) , collection  );
     KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
 
-    action = collection->addAction("configure-profiles");
-    action->setText( i18n("Configure Profiles...") );
+    action = collection->addAction("manage-profiles");
+    action->setText( i18n("Manage Profiles...") );
     action->setIcon( KIcon("configure") );
     connect( action, SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()) );
 
