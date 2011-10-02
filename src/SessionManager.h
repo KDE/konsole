@@ -333,7 +333,7 @@ private:
     // returns true )
     void applyProfile(Session* session , const Profile::Ptr profile , bool modifiedPropertiesOnly); 
 
-    QSet<Profile::Ptr> _types;
+    QSet<Profile::Ptr> _profiles;
     QHash<Session*,Profile::Ptr> _sessionProfiles;
     QHash<Session*,Profile::Ptr> _sessionRuntimeProfiles;
     QHash<Session*,int> _restoreMapping;

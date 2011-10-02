@@ -97,7 +97,7 @@ SessionManager::SessionManager()
             _defaultProfile = profile;
     }
 
-    Q_ASSERT( _types.count() > 0 );
+    Q_ASSERT( _profiles.count() > 0 );
     Q_ASSERT( _defaultProfile );
 
     // get shortcuts and paths of profiles associated with
@@ -129,7 +129,7 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
         path = KStandardDirs::locate("data",path);
 
     // check that we have not already loaded this profile
-    QSetIterator<Profile::Ptr> iter(_types);
+    QSetIterator<Profile::Ptr> iter(_profiles);
     while ( iter.hasNext() )
     {
         Profile::Ptr profile = iter.next();
@@ -320,7 +320,7 @@ Session* SessionManager::createSession(Profile::Ptr profile)
     if (!profile)
         profile = defaultProfile();
    
-    if (!_types.contains(profile))
+    if (!_profiles.contains(profile))
         addProfile(profile);
 
     //configuration information found, create a new session based on this
@@ -367,7 +367,7 @@ QList<Profile::Ptr> SessionManager::sortedFavorites()
 
 QList<Profile::Ptr> SessionManager::loadedProfiles() const
 {
-    return _types.toList();
+    return _profiles.toList();
 }
 
 Profile::Ptr SessionManager::defaultProfile() const
@@ -534,10 +534,10 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
 
 void SessionManager::addProfile(Profile::Ptr type)
 {
-    if ( _types.isEmpty() )
+    if ( _profiles.isEmpty() )
         _defaultProfile = type;
  
-    _types.insert(type);
+    _profiles.insert(type);
 
     emit profileAdded(type);
 }
@@ -563,7 +563,7 @@ bool SessionManager::deleteProfile(Profile::Ptr type)
         // remove from favorites, profile list, shortcut list etc.
         setFavorite(type,false);
         setShortcut(type,QKeySequence());
-        _types.remove(type);
+        _profiles.remove(type);
 
         // mark the profile as hidden so that it does not show up in the 
         // Manage Profiles dialog and is not saved to disk
@@ -574,7 +574,7 @@ bool SessionManager::deleteProfile(Profile::Ptr type)
     // replace it with a random type from the list
     if ( wasDefault )
     {
-        setDefaultProfile( _types.toList().first() );
+        setDefaultProfile( _profiles.toList().first() );
     }
 
     emit profileRemoved(type);
@@ -583,7 +583,7 @@ bool SessionManager::deleteProfile(Profile::Ptr type)
 }
 void SessionManager::setDefaultProfile(Profile::Ptr profile)
 {
-   Q_ASSERT ( _types.contains(profile) );
+   Q_ASSERT ( _profiles.contains(profile) );
 
    _defaultProfile = profile;
 
@@ -607,7 +607,7 @@ QSet<Profile::Ptr> SessionManager::findFavorites()
 }
 void SessionManager::setFavorite(Profile::Ptr profile , bool favorite)
 {
-    if (!_types.contains(profile))
+    if (!_profiles.contains(profile))
         addProfile(profile);
 
     if ( favorite && !_favorites.contains(profile) )
@@ -697,7 +697,7 @@ void SessionManager::loadFavorites()
     }
 
     // look for favorites amongst those already loaded
-    QSetIterator<Profile::Ptr> iter(_types);
+    QSetIterator<Profile::Ptr> iter(_profiles);
     while ( iter.hasNext() )
     {
          Profile::Ptr profile = iter.next();
@@ -730,7 +730,7 @@ void SessionManager::saveFavorites()
     {
         Profile::Ptr profile = keyIter.next();
 
-        Q_ASSERT( _types.contains(profile) && profile );
+        Q_ASSERT( _profiles.contains(profile) && profile );
 
         paths << profile->path();
     }
