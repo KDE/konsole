@@ -25,19 +25,19 @@
 
 using namespace Konsole;
 
-ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
+ZModemDialog::ZModemDialog(QWidget* parent, bool modal, const QString& caption)
  : KDialog( parent )
 {
     setObjectName( QLatin1String( "zmodem_progress" ) );
     setModal( modal );
     setCaption( caption );
     setButtons( KDialog::User1 | KDialog::Close );
-    setButtonGuiItem( User1, KGuiItem(i18n("&Stop")) );
+    setButtonGuiItem( KDialog::User1, KGuiItem(i18n("&Stop")) );
 
-    setDefaultButton( Close );
-    setEscapeButton( User1 );
+    setDefaultButton( KDialog::Close );
+    setEscapeButton( KDialog::User1 );
 
-    enableButton(Close, false);
+    enableButton(KDialog::Close, false);
     _textEdit = new KTextEdit(this);
     _textEdit->setMinimumSize(400, 100);
     _textEdit->setReadOnly(true);
@@ -46,18 +46,18 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
     connect(this,SIGNAL(closeClicked()),this,SLOT(slotClose()));
 }
 
-void ZModemDialog::addProgressText(const QString &txt)
+void ZModemDialog::addProgressText(const QString& text)
 {
     QTextCursor cursor = _textEdit->textCursor();
 
     cursor.insertBlock();
-    cursor.insertText(txt);
+    cursor.insertText(text);
 }
 
 void ZModemDialog::transferDone()
 {
-    enableButton(Close, true);
-    enableButton(User1, false);
+    enableButton(KDialog::Close, true);
+    enableButton(KDialog::User1, false);
 }
 
 void ZModemDialog::slotClose()
