@@ -29,7 +29,7 @@
 
 using namespace Konsole;
 
-const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] = 
+const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] =
 {
     { "%n" , I18N_NOOP("Program Name: %n") },
     { "%d" , I18N_NOOP("Current Directory (Short): %d") },
@@ -38,7 +38,9 @@ const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] =
     { "%#" , I18N_NOOP("Session Number: %#") },
     { "%u" , I18N_NOOP("User Name: %u") }
 };
-const int TabTitleFormatAction::_localElementCount = 6;
+const int TabTitleFormatAction::_localElementCount =
+    sizeof(_localElements) / sizeof(TabTitleFormatAction::Element);
+
 const TabTitleFormatAction::Element TabTitleFormatAction::_remoteElements[] =
 {
     { "%u" , I18N_NOOP("User Name: %u") },
@@ -47,7 +49,8 @@ const TabTitleFormatAction::Element TabTitleFormatAction::_remoteElements[] =
     { "%w" , I18N_NOOP("Window Title Set by Shell: %w") },
     { "%#" , I18N_NOOP("Session Number: %#") }
 };
-const int TabTitleFormatAction::_remoteElementCount = 5;
+const int TabTitleFormatAction::_remoteElementCount =
+    sizeof(_remoteElements) / sizeof(TabTitleFormatAction::Element);
 
 TabTitleFormatAction::TabTitleFormatAction(QObject* parent)
     : QAction(parent)
@@ -77,13 +80,13 @@ void TabTitleFormatAction::setContext(Session::TabTitleContext context)
 
     if ( context == Session::LocalTabTitle )
     {
+        array = _localElements;
         count = _localElementCount;
-        array = _localElements;    
     }
     else if ( context == Session::RemoteTabTitle )
     {
-        count = _remoteElementCount;
         array = _remoteElements;
+        count = _remoteElementCount;
     }
      
     for ( int i = 0 ; i < count ; i++ )
