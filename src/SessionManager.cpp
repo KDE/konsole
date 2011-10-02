@@ -191,11 +191,9 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
 }
 QStringList SessionManager::availableProfilePaths() const
 {
-    KDE3ProfileReader kde3Reader;
     KDE4ProfileReader kde4Reader;
 
     QStringList profiles;
-    profiles += kde3Reader.findProfiles();
     profiles += kde4Reader.findProfiles();
 
     return profiles;
