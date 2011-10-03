@@ -506,16 +506,18 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
         switch ((Profile::HistoryModeEnum)mode)
         {
             case Profile::DisableHistory:
-                    session->setHistoryType( HistoryTypeNone() );
+                session->setHistoryType( HistoryTypeNone() );
                 break;
+
             case Profile::FixedSizeHistory:
                 {
                     int lines = profile->property<int>(Profile::HistorySize);
                     session->setHistoryType( CompactHistoryType(lines) );
                 }
                 break;
+
             case Profile::UnlimitedHistory:
-                    session->setHistoryType( HistoryTypeFile() );
+                session->setHistoryType( HistoryTypeFile() );
                 break;
         }
     }
