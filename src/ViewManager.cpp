@@ -1154,8 +1154,8 @@ void ViewManager::closeTabFromContainer(ViewContainer *container, QWidget *tab)
 {
     SessionController *controller = dynamic_cast<SessionController*>(container->viewProperties(tab));
     Q_ASSERT(controller);
-    if (controller && controller->confirmClose())
-        controller->session()->close();
+    if (controller)
+        controller->closeSession() ;
 }
 
 #include "ViewManager.moc"

@@ -735,8 +735,10 @@ bool Session::kill(int signal)
     
     if ( result == 0 )
     {
-        _shellProcess->waitForFinished();
-        return true;
+        if ( _shellProcess->waitForFinished(1000) )
+            return true;
+        else
+            return false;
     }
     else
         return false;
@@ -744,27 +746,48 @@ bool Session::kill(int signal)
 
 void Session::close()
 {
-    _autoClose = true;
+    if ( isRunning() )
+    {
+        if ( !closeInNormalWay() )
+            closeInForceWay();
+    }
+    else
+    {
+        // terminal process has finished, just close the session
+        QTimer::singleShot(1, this, SIGNAL(finished()));
+    }
+}
+
+bool Session::closeInNormalWay()
+{
+    _autoClose    = true;
     _closePerUser = true;
 
-    if (!isRunning() || !kill(SIGHUP))
+    if ( kill(SIGHUP) )
     {
-        if (isRunning())
-        {
-            kWarning() << "Process" << _shellProcess->pid() << "did not respond to SIGHUP";
+        return true;
+    }
+    else
+    {
+        kWarning() << "Process " << _shellProcess->pid() << " did not die with SIGHUP";
+        _shellProcess->pty()->close();
+        return (_shellProcess->waitForFinished(1000)) ;
+    }
+}
 
-            // close the pty and wait to see if the process finishes.  If it does,
-            // the done() slot will have been called so we can return.  Otherwise,
-            // emit the finished() signal regardless
-            _shellProcess->pty()->close();
-            if (_shellProcess->waitForFinished(3000))
-                return;
+bool Session::closeInForceWay()
+{
+    _autoClose    = true;
+    _closePerUser = true;
 
-            kWarning() << "Unable to kill process" << _shellProcess->pid();
-        }
-
-        // Forced close.
-        QTimer::singleShot(1, this, SIGNAL(finished()));
+    if( kill(SIGKILL) )
+    {
+        return true;
+    }
+    else
+    {
+        kWarning() << "Process " << _shellProcess->pid() << " did not die with SIGKILL";
+        return false;
     }
 }
 

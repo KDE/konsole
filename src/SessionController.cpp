@@ -644,13 +644,51 @@ bool SessionController::confirmClose() const
     }
     return true;
 }
+bool SessionController::confirmForceClose() const
+{
+    if (_session->isRunning())
+    {
+        QString title = _session->program();
+
+        // hard coded for now.  In future make it possible for the user to specify which programs
+        // are ignored when considering whether to display a confirmation
+        QStringList ignoreList;
+        ignoreList << QString(qgetenv("SHELL")).section('/',-1);
+        if (ignoreList.contains(title))
+            return true;
+
+        QString question;
+        if ( title.isEmpty() )
+            question = i18n("A program in this session would not die."
+                            "  Are you sure you want to kill it by force?");
+        else
+            question = i18n("The program '%1' is in this session would not die."
+                            "  Are you sure you want to kill it by force?",title);
+
+        int result = KMessageBox::warningYesNo(_view->window(),question,i18n("Confirm Close"));
+        return (result == KMessageBox::Yes) ? true : false;
+    }
+    return true;
+}
 void SessionController::closeSession()
 {
-    if (_preventClose)
+    if ( _preventClose )
         return;
 
-    if (confirmClose())
-        _session->close();
+    if ( confirmClose() )
+    {
+        if ( _session->closeInNormalWay() )
+        {
+            return;
+        }
+        else if ( confirmForceClose())
+        {
+            if( _session->closeInForceWay() )
+                return;
+            else
+                kWarning() << "Konsole failed to close a session in any way.";
+        }
+    }
 }
 
 // Trying to open a remote Url may produce unexpected results.

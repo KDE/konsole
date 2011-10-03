@@ -371,14 +371,29 @@ public slots:
   Q_SCRIPTABLE void setEnvironment(const QStringList& environment);
 
   /**
-   * Closes the terminal session.  This sends a hangup signal
-   * (SIGHUP) to the terminal process and causes the finished()  
-   * signal to be emitted.  If the process does not respond to the SIGHUP signal
-   * then the terminal connection (the pty) is closed and Konsole waits for the 
-   * process to exit.
+   * Closes the terminal session. It kills the terminal process by calling
+   * closeInNormalWay() and, optionally, closeInForceWay().
    */
   //Q_SCRIPTABLE void close(); // This cause the menu issues bko 185466
   void close();
+
+  /**
+   * Kill the terminal process in normal way. This sends a hangup signal
+   * (SIGHUP) to the terminal process and causes the finished() signal to
+   * be emitted. If the process does not respond to the SIGHUP signal then
+   * the terminal connection (the pty) is closed and Konsole waits for the
+   * process to exit. This method works most of the time, but fails with some
+   * programs which respond to SIGHUP signal in special way, such as autossh
+   * and irssi.
+   */
+  bool closeInNormalWay();
+
+  /**
+   * kill terminal process in force way. This send a SIGKILL signal to the
+   * terminal process. It should be called only after closeInNormalWay() has
+   * failed. Take it as last resort.
+   */
+  bool closeInForceWay();
 
   /**
    * Changes the session title or other customizable aspects of the terminal

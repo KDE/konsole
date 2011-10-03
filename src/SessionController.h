@@ -131,6 +131,7 @@ public:
     virtual QString currentDir() const;
     virtual void rename();
     virtual bool confirmClose() const;
+    virtual bool confirmForceClose() const;
 
     // Reimplemented to watch for events happening to the view
     virtual bool eventFilter(QObject* watched , QEvent* event);
@@ -163,7 +164,13 @@ public slots:
      * update actions which are meaningful only when rimary screen is in use.
      */
     void setupPrimaryScreenSpecificActions( bool use);
-    
+
+    /**
+     * close the associated session. This might involve user interaction for
+     * confirmation.
+     */
+    void closeSession();
+
     /**
      * enable or disable the copy action
      */
@@ -191,7 +198,6 @@ private slots:
     void showHistoryOptions();
     void clearHistory();
     void clearHistoryAndReset();
-    void closeSession();
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);
     void increaseTextSize();
