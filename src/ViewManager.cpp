@@ -134,13 +134,13 @@ void ViewManager::setupActions()
 {
     KActionCollection* collection = _actionCollection;
 
-    KAction* nextViewAction = new KAction( i18n("Next Tab") , this );
-    KAction* previousViewAction = new KAction( i18n("Previous Tab") , this );
-    KAction* lastViewAction = new KAction( i18n("Switch to Last Tab") , this);
-    KAction* nextContainerAction = new KAction( i18n("Next View Container") , this);
+    KAction* nextViewAction = new KAction( i18nc("@action Shortcut entry", "Next Tab") , this );
+    KAction* previousViewAction = new KAction( i18nc("@action Shortcut entry", "Previous Tab") , this );
+    KAction* lastViewAction = new KAction( i18nc("@action Shortcut entry", "Switch to Last Tab") , this);
+    KAction* nextContainerAction = new KAction( i18nc("@action Shortcut entry", "Next View Container") , this);
   
-    KAction* moveViewLeftAction = new KAction( i18n("Move Tab Left") , this );
-    KAction* moveViewRightAction = new KAction( i18n("Move Tab Right") , this );
+    KAction* moveViewLeftAction = new KAction( i18nc("@action Shortcut entry", "Move Tab Left") , this );
+    KAction* moveViewRightAction = new KAction( i18nc("@action Shortcut entry", "Move Tab Right") , this );
 
     // list of actions that should only be enabled when there are multiple view
     // containers open
@@ -181,7 +181,7 @@ void ViewManager::setupActions()
 
         KAction* detachViewAction = collection->addAction("detach-view");
         detachViewAction->setIcon(KIcon("tab-detach"));
-        detachViewAction->setText(i18n("D&etach Current Tab"));
+        detachViewAction->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
         // Ctrl+Shift+D is not used as a shortcut by default because it is too close
         // to Ctrl+D - which will terminate the session in many cases
         detachViewAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_H));
@@ -218,7 +218,7 @@ void ViewManager::setupActions()
         connect(switchToTabMapper,SIGNAL(mapped(int)),this,SLOT(switchToView(int)));
         for (int i=0;i < SWITCH_TO_TAB_COUNT;i++)
         {
-            KAction* switchToTabAction = new KAction(i18n("Switch to Tab %1",i+1),this);
+            KAction* switchToTabAction = new KAction(i18nc("@action Shortcut entry", "Switch to Tab %1",i+1),this);
             switchToTabMapper->setMapping(switchToTabAction,i);
             connect(switchToTabAction,SIGNAL(triggered()),switchToTabMapper,
                     SLOT(map()));

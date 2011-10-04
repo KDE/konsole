@@ -141,7 +141,7 @@ void ColorSchemeEditor::selectWallpaper()
 {
     const KUrl url = KFileDialog::getImageOpenUrl( _ui->wallpaperPath->text(),
                                                    this,
-                                                   i18n("Select wallpaper image file"));
+                                                   i18nc("@action:button", "Select wallpaper image file"));
 
     if ( !url.isEmpty() )
         _ui->wallpaperPath->setText(url.path());
