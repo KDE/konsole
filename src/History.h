@@ -52,7 +52,7 @@ public:
 
   virtual void add(const unsigned char* bytes, int len);
   virtual void get(unsigned char* bytes, int len, int loc);
-  virtual int  len();
+  virtual int  len() const;
 
   //mmaps the file in read-only mode
   void map();

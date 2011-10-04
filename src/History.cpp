@@ -174,7 +174,7 @@ void HistoryFile::get(unsigned char* bytes, int len, int loc)
   }
 }
 
-int HistoryFile::len()
+int HistoryFile::len() const
 {
   return _length;
 }
