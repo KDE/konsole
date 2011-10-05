@@ -126,19 +126,16 @@ void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
    else if ( item->column() == ProfileNameColumn )
    {
         QString newName = item->text();
-        QHash<Profile::Property,QVariant> properties;
-        properties.insert(Profile::Name, newName);
-
         Profile::Ptr profile = item->data(ProfileKeyRole).value<Profile::Ptr>();
+        QString oldName = profile->name();
 
-        // TODO: find a more elegant solution for the recursion problem.
-        // disconnect & connect is necessary to prevent this SLOT from being
-        // triggered recursively after calling SessionMananger::changeProfile().
-        disconnect( _sessionModel , SIGNAL(itemChanged(QStandardItem*)) ,
-                    this , SLOT(itemDataChanged(QStandardItem*)) );
-        SessionManager::instance()->changeProfile(profile, properties);
-        connect( _sessionModel , SIGNAL(itemChanged(QStandardItem*)) ,
-                    this , SLOT(itemDataChanged(QStandardItem*)) );
+        if ( newName != oldName )
+        {
+            QHash<Profile::Property,QVariant> properties;
+            properties.insert(Profile::Name, newName);
+
+            SessionManager::instance()->changeProfile(profile, properties);
+        }
    }
 
 }
