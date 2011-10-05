@@ -596,6 +596,7 @@ void SessionManager::setDefaultProfile(Profile::Ptr profile)
 
    QFileInfo fileInfo(path);
 
+   // TODO: writing to konsolerc is a temporary workaround
    KSharedConfigPtr config = KSharedConfig::openConfig("konsolerc");
    KConfigGroup group = config->group("Desktop Entry");
    group.writeEntry("DefaultProfile",fileInfo.fileName());
