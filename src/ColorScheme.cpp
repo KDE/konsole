@@ -91,26 +91,26 @@ const char* const ColorScheme::colorNames[TABLE_COLORS] =
 };
 const char* const ColorScheme::translatedColorNames[TABLE_COLORS] =
 {
-    I18N_NOOP("Foreground"),
-    I18N_NOOP("Background"),
-    I18N_NOOP("Color 1"),
-    I18N_NOOP("Color 2"),
-    I18N_NOOP("Color 3"),
-    I18N_NOOP("Color 4"),
-    I18N_NOOP("Color 5"),
-    I18N_NOOP("Color 6"),
-    I18N_NOOP("Color 7"),
-    I18N_NOOP("Color 8"),
-    I18N_NOOP("Foreground (Intense)"),
-    I18N_NOOP("Background (Intense)"),
-    I18N_NOOP("Color 1 (Intense)"),
-    I18N_NOOP("Color 2 (Intense)"),
-    I18N_NOOP("Color 3 (Intense)"),
-    I18N_NOOP("Color 4 (Intense)"),
-    I18N_NOOP("Color 5 (Intense)"),
-    I18N_NOOP("Color 6 (Intense)"),
-    I18N_NOOP("Color 7 (Intense)"),
-    I18N_NOOP("Color 8 (Intense)")
+    I18N_NOOP2("@item:intable palette", "Foreground"),
+    I18N_NOOP2("@item:intable palette", "Background"),
+    I18N_NOOP2("@item:intable palette", "Color 1"),
+    I18N_NOOP2("@item:intable palette", "Color 2"),
+    I18N_NOOP2("@item:intable palette", "Color 3"),
+    I18N_NOOP2("@item:intable palette", "Color 4"),
+    I18N_NOOP2("@item:intable palette", "Color 5"),
+    I18N_NOOP2("@item:intable palette", "Color 6"),
+    I18N_NOOP2("@item:intable palette", "Color 7"),
+    I18N_NOOP2("@item:intable palette", "Color 8"),
+    I18N_NOOP2("@item:intable palette", "Foreground (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Background (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 1 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 2 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 3 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 4 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 5 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 6 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 7 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Color 8 (Intense)")
 };
 
 ColorScheme::ColorScheme()
@@ -306,7 +306,7 @@ QString ColorScheme::translatedColorNameForIndex(int index)
 {
     Q_ASSERT( index >= 0 && index < TABLE_COLORS );
 
-    return i18n(translatedColorNames[index]);
+    return i18nc("@item:intable palette", translatedColorNames[index]);
 }
 void ColorScheme::readColorEntry(KConfig& config , int index)
 {
