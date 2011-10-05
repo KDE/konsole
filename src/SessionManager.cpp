@@ -596,7 +596,7 @@ void SessionManager::setDefaultProfile(Profile::Ptr profile)
 
    QFileInfo fileInfo(path);
 
-   KSharedConfigPtr config = KGlobal::config();
+   KSharedConfigPtr config = KSharedConfig::openConfig("konsolerc");
    KConfigGroup group = config->group("Desktop Entry");
    group.writeEntry("DefaultProfile",fileInfo.fileName());
 }
