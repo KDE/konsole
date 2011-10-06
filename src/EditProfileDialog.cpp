@@ -1071,7 +1071,10 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     setupRadio( types , scrollBackType ); 
     
     // setup scrollback line count spinner
-    _ui->scrollBackLinesSpinner->setValue( profile->property<int>(Profile::HistorySize) );
+    int historySize = profile->property<int>(Profile::HistorySize);
+    _ui->scrollBackLinesSpinner->setValue( historySize );
+    _ui->scrollBackLinesSpinner->setSingleStep( historySize / 10 );
+
 
     // signals and slots
     connect( _ui->scrollBackLinesSpinner , SIGNAL(valueChanged(int)) , this , 

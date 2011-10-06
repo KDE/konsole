@@ -177,6 +177,7 @@ int HistorySizeDialog::lineCount() const
 void HistorySizeDialog::setLineCount(int lines)
 {
     _lineCountBox->setValue(lines);
+    _lineCountBox->setSingleStep( lines / 10 );
 }
 
 
