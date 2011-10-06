@@ -416,7 +416,7 @@ void Application::toggleBackgroundInstance()
 Application::~Application()
 {
     SessionManager::instance()->closeAll();
-    SessionManager::instance()->saveState();
+    SessionManager::instance()->saveSettings();
 }
 
 void Application::detachView(Session* session)

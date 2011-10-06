@@ -259,7 +259,7 @@ void SessionManager::sortProfiles(QList<Profile::Ptr> &list)
     list.append(lackingIndices);
 }
 
-void SessionManager::saveState()
+void SessionManager::saveSettings()
 {
     // save default profile
     setDefaultProfile( _defaultProfile );
@@ -269,6 +269,15 @@ void SessionManager::saveState()
 
     // save favorites
     saveFavorites();
+
+    // ensure shortcuts/favorites settings are synced into disk
+    KSharedConfigPtr appConfig = KGlobal::config();
+    appConfig->sync();
+
+    // FIXME: another workaround for using 'DefaultProfile' entry in 'konsolerc'
+    KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig("konsolerc");
+    konsoleConfig->sync();
+
 }
 void SessionManager::closeAll()
 {

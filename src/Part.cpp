@@ -94,7 +94,7 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
 }
 Part::~Part()
 {
-    SessionManager::instance()->saveState();
+    SessionManager::instance()->saveSettings();
 }
 void Part::createGlobalActions()
 {

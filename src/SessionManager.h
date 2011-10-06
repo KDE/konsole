@@ -68,17 +68,17 @@ public:
     SessionManager();
     void setMenuOrder();
  
-    /** 
-     * Destroys the SessionManager.  All running sessions should be closed (via closeAll()) and the 
-     * SessionManager's state should be saved via saveState() before the SessionManager is destroyed.
+    /**
+     * Destroys the SessionManager. All running sessions should be closed
+     * (via closeAll()) before the SessionManager is destroyed.
      */
     virtual ~SessionManager();
 
     /** Kill all running sessions. */
     void closeAll();
 
-    /** Saves state information (favorites, shortcuts, default profile etc.) to disk. */
-    void saveState();
+    /** Saves settings (favorites, shortcuts, default profile etc.) to disk. */
+    void saveSettings();
 
     /**
      * Returns a list of profiles which have been loaded.
