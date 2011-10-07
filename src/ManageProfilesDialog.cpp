@@ -50,7 +50,8 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     setButtons( KDialog::Close );
 
     //connect( this, SIGNAL(applyClicked()) , this , SLOT(setMenuOrder()) );
-    connect( this, SIGNAL(finished()) , this , SLOT(onFinished()) );
+    connect( this, SIGNAL(finished()) ,
+             SessionManager::instance() , SLOT(saveSettings()) );
 
     _ui = new Ui::ManageProfilesDialog();
     _ui->setupUi(mainWidget());
@@ -115,11 +116,6 @@ void ManageProfilesDialog::showEvent(QShowEvent*)
 ManageProfilesDialog::~ManageProfilesDialog()
 {
     delete _ui;
-}
-
-void ManageProfilesDialog::onFinished()
-{
-    SessionManager::instance()->saveSettings();
 }
 
 void ManageProfilesDialog::itemDataChanged(QStandardItem* item)

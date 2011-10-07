@@ -77,9 +77,6 @@ public:
     /** Kill all running sessions. */
     void closeAll();
 
-    /** Saves settings (favorites, shortcuts, default profile etc.) to disk. */
-    void saveSettings();
-
     /**
      * Returns a list of profiles which have been loaded.
      * Initially only the profile currently set as the default is loaded.
@@ -289,6 +286,11 @@ signals:
      * @param newShortcut The new shortcut key sequence for the profile
      */
     void shortcutChanged(Profile::Ptr profile , const QKeySequence& newShortcut);
+
+public slots:
+
+    /** Saves settings (favorites, shortcuts, default profile etc.) to disk. */
+    void saveSettings();
 
 protected slots:
 
