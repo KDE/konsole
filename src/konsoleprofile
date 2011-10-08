@@ -1,20 +1,39 @@
 #!/bin/sh
+#
+#  This file is in the public domain.
 
-#  A command-line tool to change profile options used in current tab in runtime.
+#  A command-line tool to change the current tab's profile options.
 #
 #  Usage: konsoleprofile option=value
 #
-#  Example: 'konsoleprofile ColorScheme=WhiteOnBlack' will change the colorscheme
-#  used in current tab into WhiteOnBlack on the fly.
+#  Example: 'konsoleprofile ColorScheme=WhiteOnBlack' will change the
+#  colorscheme used in current tab into WhiteOnBlack on the fly.
 #
-#  NOTE: This script MUST run within a konsole tab to take effect. The change is
-#  applied only to current tab. Other tabs using the same profile will not be
-#  influenced. It won't save the change into disk, either.
+#  NOTE: This script MUST run within a konsole tab to take effect. The change
+#  is applied only to current tab. Other tabs using the same profile will not
+#  be influenced.  Any changes won't be saved to to disk.
 #
-#  For the full list of supported options and values, refer to src/Profile.h, or
-#  visit the online reference:
-#  http://api.kde.org/4.7-api/kdebase-apps-apidocs/konsole/html/classKonsole_1_1Profile.html
+#  For the full list of supported options and values:
+#   1. konsole --list-profile-properties
+#   2. refer to konsole/src/Profile.h
+#   3. visit the online reference:
+#       http://api.kde.org/4.7-api/kde-baseapps-apidocs/konsole/html/namespaceKonsole.html
+#       http://api.kde.org/4.7-api/kde-baseapps-apidocs/konsole/html/classKonsole_1_1Profile.html
 #
-#  All of the logic is in konsole itself. This script is provided for convenience.
+#  All of the logic is in konsole. This script is provided for convenience.
+
+if [ ! $# -eq 1 ]
+    then
+    echo ""
+    echo "Usage: $0 option=value"
+    echo ""
+    echo "For more documentation view this file $0"
+    echo ""
+    echo "The complete list of profile options can be displayed using:"
+    echo " konsole --list-profile-properties"
+    echo ""
+    exit 0
+fi
 
 /bin/echo -e "\033]50;$1\a"
+
