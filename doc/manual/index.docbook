@@ -46,8 +46,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2011-02-05</date>
-<releaseinfo>2.7.0</releaseinfo>
+<date>2011-10-05</date>
+<releaseinfo>2.7.1</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -149,9 +149,9 @@ is now available in the <guilabel>Manage Profiles...</guilabel> dialog.
 </para>
 
 <para>
-After creating profiles, they are listed by their name in the
-<menuchoice><guimenu>File</guimenu><guisubmenu>New Tab</guisubmenu></menuchoice> menu
-underneath the default <guimenuitem>Shell</guimenuitem> item.
+Any profiles which have <guilabel>Show in Menu</guilabel> checked will be listed by their name in the
+<menuchoice><guimenu>File</guimenu><guisubmenu>New Tab</guisubmenu></menuchoice> menu.
+There will be no submenu if only the default profile is to be shown.
 </para>
 
 </sect1>
@@ -337,8 +337,8 @@ at the current directory</action>.  By default, that is
 <guimenuitem>Quit</guimenuitem></menuchoice>
 </term>
 <listitem><para><action>Quits &konsole;</action></para>
-<note><para>&konsole; will display a window if there is more than one
-tab open.  This window can be disabled by clicking on the <guibutton>Do not ask again</guibutton> checkbox.
+<note><para>&konsole; will display a confirmation dialog if there is more than one
+tab open.  This dialog can be disabled by clicking on the <guibutton>Do not ask again</guibutton> checkbox.
 </para></note>
 </listitem>
 </varlistentry>
@@ -588,7 +588,7 @@ The type of alerts can be changed through
 <varlistentry>
 <term><menuchoice>
 <shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>X</keycap></keycombo></shortcut>
-<guimenu>Scrollback</guimenu><guimenuitem>Clear
+<guimenu>View</guimenu><guimenuitem>Clear
 Scrollback and Reset</guimenuitem></menuchoice></term>
 <listitem><para><action>Clears the text in the current tab and scrollback
 and resets the terminal</action></para></listitem>
@@ -646,6 +646,22 @@ Currently, &konsole; accepts the following:
 <sect2 id="settings-menu">
 <title><guimenu>Settings</guimenu> Menu</title>
 <variablelist>
+
+<varlistentry>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+Current Profile...</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens a dialog to configure current profile</action>
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Switch Profile
+</guimenuitem></menuchoice></term>
+<listitem><para><action>Switch current profile to a listed profile</action>
+</para>
+</listitem>
+</varlistentry>
 
 <varlistentry>
 <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Manage
@@ -868,6 +884,12 @@ title: This is the title;; command: run me
 </listitem>
 </varlistentry>
 
+<varlistentry>
+<term><option>--nofork</option></term>
+<listitem><para><action>Do not run in the background</action>.  This is often needed to mimic other terminals.
+</para></listitem>
+</varlistentry>
+
 </variablelist>
 
 <para>&konsole; also accepts generic &Qt; and &kde; options:</para>
@@ -1077,20 +1099,20 @@ This is most noticeable when a command that connects to an external device or sy
 <chapter id="credits">
 <title>Credits and Copyright</title>
 
-<para>&konsole; is currently maintained by &Robert.Knight;  &Robert.Knight.mail;</para>
+<para>&konsole; is currently maintained by &Kurt.Hindenburg;  &Kurt.Hindenburg.mail;</para>
 
-<para>Previous &konsole; maintainers include: &Kurt.Hindenburg; &Kurt.Hindenburg.mail; and &Waldo.Bastian; &Waldo.Bastian.mail;</para>
+<para>Previous &konsole; maintainers include: &Robert.Knight; &Robert.Knight.mail; and &Waldo.Bastian; &Waldo.Bastian.mail;</para>
 
 <para>The application &konsole; Copyright &copy; 1997-2008
 &Lars.Doelle; &Lars.Doelle.mail;</para>
 
-<para>This document was written by &Jonathan.Singer;
+<para>This document was originally written by &Jonathan.Singer;
 &Jonathan.Singer.mail;</para>
 
-<para>This document was updated for &kde; 3.4 by
+<para>This document was updated for &kde; 4.x by
 &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
 
-<para>This document was updated for &kde; 4.1 by
+<para>This document was updated for &kde; 3.4 by
 &Kurt.Hindenburg; &Kurt.Hindenburg.mail;</para>
 
 <para>Originally converted to DocBook <acronym>SGML</acronym> by
