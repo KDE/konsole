@@ -39,7 +39,6 @@
 namespace Konsole
 {
 
-#if 1
 /*
    An extendable tmpfile(1) based buffer.
 */
@@ -79,7 +78,6 @@ private:
   //when _readWriteBalance goes below this threshold, the file will be mmap'ed automatically
   static const int MAP_THRESHOLD = -1000;
 };
-#endif
 
 //////////////////////////////////////////////////////////////////////
 
@@ -125,7 +123,6 @@ protected:
 
 };
 
-#if 1
 
 //////////////////////////////////////////////////////////////////////
 // File-based history (e.g. file log, no limitation in length)
@@ -207,7 +204,6 @@ public:
 
 };*/
 
-#endif
 
 //////////////////////////////////////////////////////////////////////
 // Nothing-based history (no history :-)
@@ -430,7 +426,6 @@ protected:
   size_t m_size;
 };
 
-#if 1 
 class HistoryTypeFile : public HistoryType
 {
 public:
@@ -478,7 +473,6 @@ protected:
 };
 
 
-#endif
 
 }
 
