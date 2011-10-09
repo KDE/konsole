@@ -132,7 +132,6 @@ int konsole_wcwidth(quint16 ucs)
       (ucs >= 0x20000 && ucs <= 0x2ffff) */));
 }
 
-#if 0
 /*
  * The following function is the same as konsole_wcwidth(), except that
  * spacing characters in the East Asian Ambiguous (A) category as
@@ -205,7 +204,6 @@ int konsole_wcwidth_cjk(quint16 ucs)
 
   return konsole_wcwidth(ucs);
 }
-#endif
 
 int string_width( const QString& text )
 {
