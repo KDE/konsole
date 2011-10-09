@@ -11,7 +11,7 @@
 #include <QtCore/QString>
 
 int konsole_wcwidth(quint16 ucs);
-int konsole_wcwidth_cjk(Q_UINT16 ucs);
+int konsole_wcwidth_cjk(quint16 ucs);
 
 int string_width( const QString& text );
 
