@@ -99,8 +99,6 @@ private slots:
 
     void setMenuOrder(void);
 
-    static void onFinished() ;
-
 private:
     Profile::Ptr currentProfile() const; 
     QList<Profile::Ptr> selectedProfiles() const; 

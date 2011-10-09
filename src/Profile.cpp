@@ -250,14 +250,6 @@ bool Profile::isPropertySet(Property property) const
     return _propertyValues.contains(property);
 }
 
-bool Profile::isNameRegistered(const QString& name) 
-{
-    // insert default names into table the first time this is called
-    fillTableWithDefaultNames();
-
-    return _propertyInfoByName.contains(name);
-}
-
 Profile::Property Profile::lookupByName(const QString& name)
 {
     // insert default names into table the first time this is called
@@ -265,20 +257,7 @@ Profile::Property Profile::lookupByName(const QString& name)
 
     return _propertyInfoByName[name.toLower()].property;
 }
-QString Profile::primaryNameForProperty(Property property)
-{
-    // insert default names into table the first time this is called
-    fillTableWithDefaultNames();
 
-    return _infoByProperty[property].name;
-}
-QList<QString> Profile::namesForProperty(Property property)
-{
-    // insert default names into table the first time this is called
-    fillTableWithDefaultNames();
-
-    return QList<QString>() << primaryNameForProperty(property);
-}
 void Profile::registerProperty(const PropertyInfo& info) 
 {
     _propertyInfoByName.insert(QString(info.name).toLower(),info);

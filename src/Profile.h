@@ -403,12 +403,6 @@ public:
      */
     const QStringList propertiesInfoList() const;
 
-    /**
-     * Returns true if @p name has been associated with an element
-     * from the Property enum or false otherwise.
-     */
-    static bool isNameRegistered(const QString& name);
-
     /** 
      * Returns the element from the Property enum associated with the 
      * specified @p name.
@@ -416,18 +410,6 @@ public:
      * @param name The name of the property to look for, this is case insensitive.
      */
     static Property lookupByName(const QString& name);
-    /**
-     * Returns the string names associated with the specified @p property from
-     * the Property enum, in the order the associations were created using
-     * registerName()
-     */
-    static QList<QString> namesForProperty(Property property);
-
-    /** 
-     * Returns the primary name for the specified @p property.
-     * TODO More documentation
-     */
-    static QString primaryNameForProperty(Property property);
 
 private:
     struct PropertyInfo;

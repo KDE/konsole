@@ -1086,6 +1086,10 @@ int ViewManager::newSession()
 
 int ViewManager::newSession(QString profile, QString directory)
 {
+    // ensure all profiles are usable.
+    // FIXME: this explict calling smells bad.
+    SessionManager::instance()->loadAllProfiles();
+
     QList<Profile::Ptr> profilelist = SessionManager::instance()->loadedProfiles();
     QList<Profile::Ptr>::iterator i = profilelist.begin();
 
