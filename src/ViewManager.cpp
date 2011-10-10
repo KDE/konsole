@@ -798,13 +798,14 @@ void ViewManager::viewCloseRequest(QWidget* view)
 
 TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
 {
-   TerminalDisplay* display = new TerminalDisplay(0);
+    TerminalDisplay* display = new TerminalDisplay(0);
+    display->setRandomSeed(session->sessionId() * 31);
 
-   //TODO Temporary settings used here
-   display->setBellMode(TerminalDisplay::NotifyBell);
-   display->setRandomSeed(session->sessionId() * 31);
+    // FIXME: move this hardcode setting into applyProfileToView()
+    // when we allow users to choose other ways for belling.
+    display->setBellMode(TerminalDisplay::NotifyBell);
 
-   return display;
+    return display;
 }
 
 const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr info) const
