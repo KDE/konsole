@@ -2540,8 +2540,6 @@ void TerminalDisplay::scrollScreenWindow( enum ScreenWindow::RelativeScrollMode 
 
 void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 {
-    bool emitKeyPressSignal = true;
-
     _screenWindow->screen()->setCurrentTerminalDisplay(this);
     _actSel=0; // Key stroke implies a screen update, so TerminalDisplay won't
               // know where the current selection is.
@@ -2555,8 +2553,7 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
         _cursorBlinking = false;
     }
 
-    if ( emitKeyPressSignal )
-        emit keyPressedSignal(event);
+    emit keyPressedSignal(event);
 
     event->accept();
 }
