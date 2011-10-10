@@ -312,7 +312,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_blinking(false)
 ,_hasBlinker(false)
 ,_cursorBlinking(false)
-,_hasBlinkingCursor(false)
+,_allowBlinkingCursor(false)
 ,_allowBlinkingText(true)
 ,_ctrlDrag(true)
 ,_tripleClickMode(SelectWholeLine)
@@ -1133,10 +1133,10 @@ void TerminalDisplay::showResizeNotification()
   }
 }
 
-void TerminalDisplay::setBlinkingCursor(bool blink)
+void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
 {
-  _hasBlinkingCursor=blink;
-  
+  _allowBlinkingCursor = blink;
+
   if (blink && !_blinkCursorTimer->isActive()) 
       _blinkCursorTimer->start(QApplication::cursorFlashTime() / 2);
   
@@ -1180,7 +1180,7 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
 }
 void TerminalDisplay::focusInEvent(QFocusEvent*)
 {
-    if (_hasBlinkingCursor)
+    if (_allowBlinkingCursor)
     {
         _blinkCursorTimer->start();
     }
@@ -2555,7 +2555,7 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
     _actSel=0; // Key stroke implies a screen update, so TerminalDisplay won't
               // know where the current selection is.
 
-    if (_hasBlinkingCursor) 
+    if (_allowBlinkingCursor) 
     {
       _blinkCursorTimer->start(QApplication::cursorFlashTime() / 2);
       if (_cursorBlinking)

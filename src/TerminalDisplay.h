@@ -160,10 +160,10 @@ public:
      */
     QList<QAction*> filterActions(const QPoint& position);
 
-    /** Returns true if the cursor is set to blink or false otherwise. */
-    bool blinkingCursor() { return _hasBlinkingCursor; }
-    /** Specifies whether or not the cursor blinks. */
-    void setBlinkingCursor(bool blink);
+    /** Returns true if the cursor is allowed to blink or false otherwise. */
+    bool blinkingCursorEnabled() { return _allowBlinkingCursor; }
+    /** Specifies whether or not the cursor can blink. */
+    void setBlinkingCursorEnabled(bool blink);
 
     /** Specifies whether or not text can blink. */
     void setBlinkingTextEnabled(bool blink);
@@ -770,7 +770,7 @@ private:
     bool _blinking;   // hide text in paintEvent
     bool _hasBlinker; // has characters to blink
     bool _cursorBlinking;     // hide cursor in paintEvent
-    bool _hasBlinkingCursor;  // has blinking cursor enabled
+    bool _allowBlinkingCursor;  // allow cursor to blink
     bool _allowBlinkingText;  // allow text to blink
     bool _ctrlDrag;           // require Ctrl key for drag
     TripleClickMode _tripleClickMode;

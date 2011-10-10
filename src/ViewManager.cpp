@@ -863,7 +863,7 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
 
     // terminal features
     bool blinkingCursor = info->property<bool>(Profile::BlinkingCursorEnabled);
-    view->setBlinkingCursor(blinkingCursor);  
+    view->setBlinkingCursorEnabled(blinkingCursor);
 
     bool blinkingText = info->property<bool>(Profile::BlinkingTextEnabled);
     view->setBlinkingTextEnabled(blinkingText);
