@@ -1009,7 +1009,7 @@ void TerminalDisplay::updateImage()
         const bool lineDraw = newLine[x+0].isLineChar();
         const bool doubleWidth = (x+1 == columnsToUpdate) ? false : (newLine[x+1].character == 0);
         const quint8 cr = newLine[x].rendition;
-        const CharacterColor _clipboard = newLine[x].backgroundColor;
+        const CharacterColor clipboard = newLine[x].backgroundColor;
         if (newLine[x].foregroundColor != cf) cf = newLine[x].foregroundColor;
         int lln = columnsToUpdate - x;
         for (len = 1; len < lln; ++len)
@@ -1022,7 +1022,7 @@ void TerminalDisplay::updateImage()
             bool nextIsDoubleWidth = (x+len+1 == columnsToUpdate) ? false : (newLine[x+len+1].character == 0);
 
             if (  ch.foregroundColor != cf || 
-                  ch.backgroundColor != _clipboard || 
+                  ch.backgroundColor != clipboard || 
                   (ch.rendition & ~RE_EXTENDED_CHAR) != (cr & ~RE_EXTENDED_CHAR) ||
                   !dirtyMask[x+len] || 
                   ch.isLineChar() != lineDraw || 
