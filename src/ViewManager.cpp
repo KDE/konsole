@@ -850,12 +850,12 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     // set scroll-bar position
     int scrollBarPosition = info->property<int>(Profile::ScrollBarPosition);
 
-    if ( scrollBarPosition == Profile::ScrollBarHidden )
-       view->setScrollBarPosition(TerminalDisplay::NoScrollBar);
-    else if ( scrollBarPosition == Profile::ScrollBarLeft )
+    if ( scrollBarPosition == Profile::ScrollBarLeft )
        view->setScrollBarPosition(TerminalDisplay::ScrollBarLeft);
     else if ( scrollBarPosition == Profile::ScrollBarRight )
        view->setScrollBarPosition(TerminalDisplay::ScrollBarRight);
+    else if ( scrollBarPosition == Profile::ScrollBarHidden )
+       view->setScrollBarPosition(TerminalDisplay::ScrollBarHidden);
 
     // show hint about termianl size after resizing
     view->setShowTerminalSizeHint(info->property<bool>(Profile::ShowTerminalSizeHint));

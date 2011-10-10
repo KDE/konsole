@@ -100,12 +100,12 @@ public:
      */
     enum ScrollBarPosition 
     { 
-        /** Do not show the scroll bar. */
-        NoScrollBar=0, 
         /** Show the scroll bar on the left side of the display. */
-        ScrollBarLeft=1, 
+        ScrollBarLeft = 0,
         /** Show the scroll bar on the right side of the display. */
-        ScrollBarRight=2 
+        ScrollBarRight = 1,
+        /** Do not show the scroll bar. */
+        ScrollBarHidden = 2
     };
     /** 
      * Specifies whether the terminal display has a vertical scroll bar, and if so whether it

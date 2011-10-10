@@ -304,7 +304,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_lineSelectionMode(false)
 ,_preserveLineBreaks(false)
 ,_columnSelectionMode(false)
-,_scrollbarLocation(NoScrollBar)
+,_scrollbarLocation(ScrollBarRight)
 ,_wordCharacters(":@-./_~")
 ,_bellMode(SystemBeepBell)
 ,_allowBlinkingText(true)
@@ -1694,7 +1694,7 @@ void TerminalDisplay::setScrollBarPosition(ScrollBarPosition position)
   if (_scrollbarLocation == position) 
       return; 
  
-  if ( position == NoScrollBar )
+  if ( position == ScrollBarHidden )
      _scrollBar->hide();
   else 
      _scrollBar->show(); 
@@ -2751,7 +2751,7 @@ void TerminalDisplay::calcGeometry()
   _scrollBar->resize(_scrollBar->sizeHint().width(), contentsRect().height());
   switch(_scrollbarLocation)
   {
-    case NoScrollBar :
+    case ScrollBarHidden :
      _leftMargin = DEFAULT_LEFT_MARGIN;
      _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN;
      break;
