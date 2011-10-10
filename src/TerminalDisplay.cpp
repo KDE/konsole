@@ -761,25 +761,6 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
 void TerminalDisplay::setRandomSeed(uint randomSeed) { _randomSeed = randomSeed; }
 uint TerminalDisplay::randomSeed() const { return _randomSeed; }
 
-#if 0
-/*!
-    Set XIM Position
-*/
-void TerminalDisplay::setCursorPos(const int curx, const int cury)
-{
-    QPoint tL  = contentsRect().topLeft();
-    int    tLx = tL.x();
-    int    tLy = tL.y();
-
-    int xpos, ypos;
-    ypos = _topMargin + tLy + _fontHeight*(cury-1) + _fontAscent;
-    xpos = _leftMargin + tLx + _fontWidth*curx;
-    //setMicroFocusHint(xpos, ypos, 0, _fontHeight); //### ???
-    // fprintf(stderr, "x/y = %d/%d\txpos/ypos = %d/%d\n", curx, cury, xpos, ypos);
-    _cursorLine = cury;
-    _cursorCol = curx;
-}
-#endif
 
 // scrolls the image by 'lines', down if lines > 0 or up otherwise.
 //
