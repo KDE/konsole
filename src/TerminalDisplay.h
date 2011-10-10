@@ -764,12 +764,7 @@ private:
     bool _underlineLinks;     // Underline URL and hosts on mouse hover
     bool _isFixedSize; // columns/lines are locked.
 
-
     bool _ctrlDrag; // require Ctrl key for drag selected text
-
-    KMenu* _drop;
-    QString _dropText;
-    int _dndFileCount;
 
     TripleClickMode _tripleClickMode;
     bool _possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
