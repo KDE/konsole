@@ -62,6 +62,7 @@
 #include "TerminalCharacterDecoder.h"
 #include "Screen.h"
 #include "ScreenWindow.h"
+#include "LineFont.h"
 
 using namespace Konsole;
 
@@ -442,7 +443,6 @@ enum LineEncode
     BotR  = (1<<23)
 };
 
-#include "LineFont.h"
 
 static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code)
 {
