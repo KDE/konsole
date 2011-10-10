@@ -357,7 +357,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 
   // Enable drag and drop support
   setAcceptDrops(true);
-  dragInfo.state = diNone;
+  _dragInfo.state = diNone;
 
   setFocusPolicy( Qt::WheelFocus );
 
@@ -1745,12 +1745,12 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 
     if ((!_ctrlDrag || ev->modifiers() & Qt::ControlModifier) && selected ) {
       // The user clicked inside selected text
-      dragInfo.state = diPending;
-      dragInfo.start = ev->pos();
+      _dragInfo.state = diPending;
+      _dragInfo.start = ev->pos();
     }
     else {
       // No reason to ever start a drag event
-      dragInfo.state = diNone;
+      _dragInfo.state = diNone;
 
       _preserveLineBreaks = !( ( ev->modifiers() & Qt::ControlModifier ) && !(ev->modifiers() & Qt::AltModifier) );
       _columnSelectionMode = (ev->modifiers() & Qt::AltModifier) && (ev->modifiers() & Qt::ControlModifier);
@@ -1880,14 +1880,14 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     return;
   }
       
-  if (dragInfo.state == diPending) 
+  if (_dragInfo.state == diPending) 
   {
     // we had a mouse down, but haven't confirmed a drag yet
     // if the mouse has moved sufficiently, we will confirm
 
    int distance = KGlobalSettings::dndEventDelay();
-   if ( ev->x() > dragInfo.start.x() + distance || ev->x() < dragInfo.start.x() - distance ||
-        ev->y() > dragInfo.start.y() + distance || ev->y() < dragInfo.start.y() - distance) 
+   if ( ev->x() > _dragInfo.start.x() + distance || ev->x() < _dragInfo.start.x() - distance ||
+        ev->y() > _dragInfo.start.y() + distance || ev->y() < _dragInfo.start.y() - distance) 
    {
       // we've left the drag square, we can start a real drag operation now
       emit isBusySelecting(false); // Ok.. we can breath again.
@@ -1897,7 +1897,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     }
     return;
   } 
-  else if (dragInfo.state == diDragging) 
+  else if (_dragInfo.state == diDragging) 
   {
     // this isn't technically needed because mouseMoveEvent is suppressed during
     // Qt drag operations, replaced by dragMoveEvent
@@ -2132,7 +2132,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
   if ( ev->button() == Qt::LeftButton)
   {
     emit isBusySelecting(false); 
-    if(dragInfo.state == diPending)
+    if(_dragInfo.state == diPending)
     {
       // We had a drag event pending but never confirmed.  Kill selection
        _screenWindow->clearSelection();
@@ -2156,7 +2156,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
                         charColumn + 1,
                         charLine + 1 +_scrollBar->value() -_scrollBar->maximum() , 0);
     }
-    dragInfo.state = diNone;
+    _dragInfo.state = diNone;
   }
   
   
@@ -2929,12 +2929,12 @@ void TerminalDisplay::dropMenuPasteTriggered()
 
 void TerminalDisplay::doDrag()
 {
-  dragInfo.state = diDragging;
-  dragInfo.dragObject = new QDrag(this);
+  _dragInfo.state = diDragging;
+  _dragInfo.dragObject = new QDrag(this);
   QMimeData *mimeData = new QMimeData;
   mimeData->setText(QApplication::clipboard()->text(QClipboard::Selection));
-  dragInfo.dragObject->setMimeData(mimeData);
-  dragInfo.dragObject->exec(Qt::CopyAction);
+  _dragInfo.dragObject->setMimeData(mimeData);
+  _dragInfo.dragObject->exec(Qt::CopyAction);
   // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
 }
 

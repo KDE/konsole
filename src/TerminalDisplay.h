@@ -584,11 +584,11 @@ protected:
     void doDrag();
     enum DragState { diNone, diPending, diDragging };
 
-    struct _dragInfo {
+    struct DragInfo {
       DragState       state;
       QPoint          start;
-      QDrag           *dragObject;
-    } dragInfo;
+      QDrag*          dragObject;
+    } _dragInfo;
 
     // classifies the 'ch' into one of three categories
     // and returns a character to indicate which category it is in
