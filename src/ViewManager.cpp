@@ -939,8 +939,8 @@ void ViewManager::updateViewsForSession(Session* session)
 
 void ViewManager::profileChanged(Profile::Ptr profile)
 {
+    // update all views associated with this profile
     QHashIterator<TerminalDisplay*,Session*> iter(_sessionMap);
-
     while ( iter.hasNext() )
     {
         iter.next();
@@ -951,16 +951,25 @@ void ViewManager::profileChanged(Profile::Ptr profile)
              SessionManager::instance()->sessionProfile(iter.value()) == profile ) 
         {
             applyProfileToView(iter.key(),profile);
-
-            QListIterator<ViewContainer*> containerIter(_viewSplitter->containers());
-            while ( containerIter.hasNext() )
-            {
-                ViewContainer* container = containerIter.next();
-                applyProfileToContainer(container, profile);
-            }
         }
     }
 
+    // update containers only when this view manager only contains one session and
+    // that session is associated with this profile
+    //
+    // FIXME: this is over complex and still not ideal.
+    // TODO: settings influcing containers really should be moved out from profile.
+    QList<Session*> sessions = _sessionMap.values().toSet().toList();
+    if ( sessions.count() == 1 &&
+         SessionManager::instance()->sessionProfile(sessions[0]) == profile )
+    {
+        QListIterator<ViewContainer*> containerIter(_viewSplitter->containers());
+        while ( containerIter.hasNext() )
+        {
+            ViewContainer* container = containerIter.next();
+            applyProfileToContainer(container, profile);
+        }
+    }
 }
 
 QList<ViewProperties*> ViewManager::viewProperties() const
