@@ -802,9 +802,6 @@ TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
 
    //TODO Temporary settings used here
    display->setBellMode(TerminalDisplay::NotifyBell);
-   display->setShowTerminalSizeHint(true);
-   display->setTripleClickMode(TerminalDisplay::SelectWholeLine);
-   display->setScrollBarPosition(TerminalDisplay::ScrollBarRight);
    display->setRandomSeed(session->sessionId() * 31);
 
    return display;
