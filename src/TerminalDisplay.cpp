@@ -98,7 +98,6 @@ const ColorEntry Konsole::base_color_table[TABLE_COLORS] =
 // scroll increment used when dragging selection at top/bottom of window.
 
 // static
-bool TerminalDisplay::_antialiasText = true;
 bool TerminalDisplay::HAVE_TRANSPARENCY = false;
 
 // we use this to force QPainter to display text in LTR mode
@@ -326,6 +325,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_blendColor(qRgba(0,0,0,0xff))
 ,_filterChain(new TerminalImageFilterChain())
 ,_cursorShape(BlockCursor)
+,_antialiasText(true)
 ,_sessionController(0)
 {
   // terminal applications are not designed with Right-To-Left in mind,
