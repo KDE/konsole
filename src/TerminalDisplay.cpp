@@ -2473,8 +2473,6 @@ bool TerminalDisplay::usesMouse() const
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-#undef KeyPress
-
 void TerminalDisplay::emitSelection(bool useXselection,bool appendReturn)
 {
   if ( !_screenWindow ) 
