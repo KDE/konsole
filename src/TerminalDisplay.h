@@ -736,7 +736,6 @@ private:
 
     bool _resizing;
     bool _showTerminalSizeHint;
-    bool _terminalSizeStartup;
     bool _bidiEnabled;
     bool _mouseMarks;
 
