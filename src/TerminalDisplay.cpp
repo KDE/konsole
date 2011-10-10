@@ -2500,7 +2500,7 @@ void TerminalDisplay::setSelection(const QString& t)
   QApplication::clipboard()->setText(t, QClipboard::Selection);
 }
 
-void TerminalDisplay::copyClipboard()
+void TerminalDisplay::copyToClipboard()
 {
   if ( !_screenWindow )
       return;
@@ -2510,12 +2510,12 @@ void TerminalDisplay::copyClipboard()
     QApplication::clipboard()->setText(text);
 }
 
-void TerminalDisplay::pasteClipboard()
+void TerminalDisplay::pasteFromClipboard()
 {
   emitSelection(false,false);
 }
 
-void TerminalDisplay::pasteSelection()
+void TerminalDisplay::pasteFromSelection()
 {
   emitSelection(true,false);
 }

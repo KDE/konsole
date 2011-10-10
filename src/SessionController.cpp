@@ -449,7 +449,7 @@ void SessionController::setupActions()
     // TODO: this shortcut conflict with the 'close-active-view' action
     //action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
 
-    action = collection->addAction("paste-selection", this, SLOT(pasteSelection()));
+    action = collection->addAction("paste-selection", this, SLOT(pasteFromSelection()));
     action->setText(i18n("Paste Selection"));
     action->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert));
 
@@ -707,16 +707,16 @@ void SessionController::openBrowser()
 
 void SessionController::copy()
 {
-    _view->copyClipboard();
+    _view->copyToClipboard();
 }
 
 void SessionController::paste()
 {
-    _view->pasteClipboard();
+    _view->pasteFromClipboard();
 }
-void SessionController::pasteSelection()
+void SessionController::pasteFromSelection()
 {
-    _view->pasteSelection();
+    _view->pasteFromSelection();
 }
 void SessionController::selectAll()
 {

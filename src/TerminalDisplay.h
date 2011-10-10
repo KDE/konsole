@@ -440,17 +440,17 @@ public slots:
     void updateLineProperties();
 
     /** Copies the selected text to the clipboard. */
-    void copyClipboard();
+    void copyToClipboard();
     /** 
      * Pastes the content of the clipboard into the 
      * display.
      */
-    void pasteClipboard();
+    void pasteFromClipboard();
     /**
      * Pastes the content of the selection into the
      * display.
      */
-    void pasteSelection();
+    void pasteFromSelection();
 
     /** 
        * Changes whether the flow control warning box should be shown when the flow control
