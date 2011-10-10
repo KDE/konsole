@@ -309,8 +309,8 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_wordCharacters(":@-./_~")
 ,_bellMode(SystemBeepBell)
 ,_showSizeWidget(true)
-,_blinking(false)
-,_hasBlinker(false)
+,_textBlinking(false)
+,_hasTextBlinker(false)
 ,_cursorBlinking(false)
 ,_allowBlinkingCursor(false)
 ,_allowBlinkingText(true)
@@ -349,8 +349,8 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
                         SLOT(scrollBarPositionChanged(int)));
 
   // setup timers for blinking cursor and text
-  _blinkTimer   = new QTimer(this);
-  connect(_blinkTimer, SIGNAL(timeout()), this, SLOT(blinkEvent()));
+  _blinkTextTimer   = new QTimer(this);
+  connect(_blinkTextTimer, SIGNAL(timeout()), this, SLOT(blinkTextEvent()));
   _blinkCursorTimer   = new QTimer(this);
   connect(_blinkCursorTimer, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
 
@@ -383,7 +383,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 
 TerminalDisplay::~TerminalDisplay()
 {
-  disconnect(_blinkTimer);
+  disconnect(_blinkTextTimer);
   disconnect(_blinkCursorTimer);
   qApp->removeEventFilter( this );
   
@@ -681,7 +681,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
                                      bool invertCharacterColor)
 {
     // don't draw text which is currently blinking
-    if ( _blinking && (style->rendition & RE_BLINK) )
+    if ( _textBlinking && (style->rendition & RE_BLINK) )
             return;
    
     // setup bold and underline
@@ -959,7 +959,7 @@ void TerminalDisplay::updateImage()
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
   int    tLy = tL.y();
-  _hasBlinker = false;
+  _hasTextBlinker = false;
 
   CharacterColor cf;       // undefined
 
@@ -997,7 +997,7 @@ void TerminalDisplay::updateImage()
     if (!_resizing) // not while _resizing, we're expecting a paintEvent
     for (x = 0; x < columnsToUpdate; ++x)
     {
-      _hasBlinker |= (newLine[x].rendition & RE_BLINK);
+      _hasTextBlinker |= (newLine[x].rendition & RE_BLINK);
     
       // Start drawing if this character or the next one differs.
       // We also take the next one into account to handle the situation
@@ -1097,8 +1097,8 @@ void TerminalDisplay::updateImage()
   // update the parts of the display which have changed
   update(dirtyRegion);
 
-  if ( _hasBlinker && !_blinkTimer->isActive()) _blinkTimer->start( TEXT_BLINK_DELAY ); 
-  if (!_hasBlinker && _blinkTimer->isActive()) { _blinkTimer->stop(); _blinking = false; }
+  if ( _hasTextBlinker && !_blinkTextTimer->isActive()) _blinkTextTimer->start( TEXT_BLINK_DELAY ); 
+  if (!_hasTextBlinker && _blinkTextTimer->isActive()) { _blinkTextTimer->stop(); _textBlinking = false; }
   delete[] dirtyMask;
 
 }
@@ -1154,13 +1154,13 @@ void TerminalDisplay::setBlinkingTextEnabled(bool blink)
 {
     _allowBlinkingText = blink;
 
-    if (blink && !_blinkTimer->isActive()) 
-        _blinkTimer->start(TEXT_BLINK_DELAY);
+    if (blink && !_blinkTextTimer->isActive()) 
+        _blinkTextTimer->start(TEXT_BLINK_DELAY);
   
-    if (!blink && _blinkTimer->isActive()) 
+    if (!blink && _blinkTextTimer->isActive()) 
     {
-        _blinkTimer->stop();
-        _blinking = false;
+        _blinkTextTimer->stop();
+        _textBlinking = false;
     }
 }
 
@@ -1173,10 +1173,10 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     updateCursor();
 
     _blinkCursorTimer->stop();
-    if (_blinking)
-        blinkEvent();
+    if (_textBlinking)
+        blinkTextEvent();
 
-    _blinkTimer->stop();
+    _blinkTextTimer->stop();
 }
 void TerminalDisplay::focusInEvent(QFocusEvent*)
 {
@@ -1186,8 +1186,8 @@ void TerminalDisplay::focusInEvent(QFocusEvent*)
     }
     updateCursor();
 
-    if (_hasBlinker)
-        _blinkTimer->start();
+    if (_hasTextBlinker)
+        _blinkTextTimer->start();
 }
 
 void TerminalDisplay::paintEvent( QPaintEvent* pe )
@@ -1531,11 +1531,11 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
   }
 }
 
-void TerminalDisplay::blinkEvent()
+void TerminalDisplay::blinkTextEvent()
 {
   if (!_allowBlinkingText) return;
 
-  _blinking = !_blinking;
+  _textBlinking = !_textBlinking;
 
   //TODO:  Optimize to only repaint the areas of the widget 
   // where there is blinking text

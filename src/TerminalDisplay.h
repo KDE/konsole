@@ -620,7 +620,7 @@ protected:
 protected slots:
 
     void scrollBarPositionChanged(int value);
-    void blinkEvent();
+    void blinkTextEvent();
     void blinkCursorEvent();
     
     //Renables bell noises and visuals.  Used to disable further bells for a short period of time
@@ -767,8 +767,8 @@ private:
     int         _bellMode;
 
     bool _showSizeWidget; // if the size widget will be show
-    bool _blinking;   // hide text in paintEvent
-    bool _hasBlinker; // has characters to blink
+    bool _textBlinking;   // hide text in paintEvent
+    bool _hasTextBlinker; // has characters to blink
     bool _cursorBlinking;     // hide cursor in paintEvent
     bool _allowBlinkingCursor;  // allow cursor to blink
     bool _allowBlinkingText;  // allow text to blink
@@ -776,7 +776,7 @@ private:
     TripleClickMode _tripleClickMode;
     bool _underlineLinks;     // Underline URL and hosts on mouse hover
     bool _isFixedSize; //Columns / lines are locked.
-    QTimer* _blinkTimer;  // active when hasBlinker
+    QTimer* _blinkTextTimer;  // active when hasTextBlinker
     QTimer* _blinkCursorTimer;  // active when hasBlinkingCursor
 
     KMenu* _drop;
