@@ -395,13 +395,6 @@ public:
      * is being resized.
      */
     bool showTerminalSizeHint() { return _showTerminalSizeHint; }
-    /** 
-     * Sets whether the terminal size display is shown briefly
-     * after the widget is first shown.
-     *
-     * See setShowTerminalSizeHint() , isTerminalSizeHint()
-     */
-    void setTerminalSizeStartup(bool on) { _terminalSizeStartup=on; }
 
     /**
      * Sets the status of the BiDi rendering inside the terminal display.

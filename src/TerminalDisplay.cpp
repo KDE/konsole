@@ -298,7 +298,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_randomSeed(0)
 ,_resizing(false)
 ,_showTerminalSizeHint(false)
-,_terminalSizeStartup(true)
 ,_bidiEnabled(false)
 ,_actSel(0)
 ,_wordSelectionMode(false)
@@ -1104,32 +1103,37 @@ void TerminalDisplay::updateImage()
 
 void TerminalDisplay::showResizeNotification()
 {
-  if (_showTerminalSizeHint && isVisible())
-  {
-     if (_terminalSizeStartup) {
-               _terminalSizeStartup=false;
-       return;
-     }
-     if (!_resizeWidget)
-     {
-        _resizeWidget = new QLabel(i18n("Size: XXX x XXX"), this);
-        _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().width(i18n("Size: XXX x XXX")));
-        _resizeWidget->setMinimumHeight(_resizeWidget->sizeHint().height());
-        _resizeWidget->setAlignment(Qt::AlignCenter);
+    static bool resizeForTheFirstTime = true;
+    if ( resizeForTheFirstTime )
+    {
+        // Do not display size hint when resizing for the first time.
+        // That first resizing mostly happens on startup
+        resizeForTheFirstTime = false ;
+        return;
+    }
 
-        _resizeWidget->setStyleSheet("background-color:palette(window);border-style:solid;border-width:1px;border-color:palette(dark)");
+    if (_showTerminalSizeHint && isVisible())
+    {
+        if (!_resizeWidget)
+        {
+            _resizeWidget = new QLabel(i18n("Size: XXX x XXX"), this);
+            _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().width(i18n("Size: XXX x XXX")));
+            _resizeWidget->setMinimumHeight(_resizeWidget->sizeHint().height());
+            _resizeWidget->setAlignment(Qt::AlignCenter);
 
-        _resizeTimer = new QTimer(this);
-        _resizeTimer->setSingleShot(true);
-        connect(_resizeTimer, SIGNAL(timeout()), _resizeWidget, SLOT(hide()));
-     }
-     QString sizeStr = i18n("Size: %1 x %2", _columns, _lines);
-     _resizeWidget->setText(sizeStr);
-     _resizeWidget->move((width()-_resizeWidget->width())/2,
-                         (height()-_resizeWidget->height())/2+20);
-     _resizeWidget->show();
-     _resizeTimer->start(1000);
-  }
+            _resizeWidget->setStyleSheet("background-color:palette(window);border-style:solid;border-width:1px;border-color:palette(dark)");
+
+            _resizeTimer = new QTimer(this);
+            _resizeTimer->setSingleShot(true);
+            connect(_resizeTimer, SIGNAL(timeout()), _resizeWidget, SLOT(hide()));
+        }
+        QString sizeStr = i18n("Size: %1 x %2", _columns, _lines);
+        _resizeWidget->setText(sizeStr);
+        _resizeWidget->move((width()-_resizeWidget->width())/2,
+                (height()-_resizeWidget->height())/2+20);
+        _resizeWidget->show();
+        _resizeTimer->start(1000);
+    }
 }
 
 void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
