@@ -73,10 +73,10 @@ using namespace Konsole;
                   "abcdefgjijklmnopqrstuvwxyz" \
                   "0123456789./+@"
 
-const ColorEntry Konsole::base_color_table[TABLE_COLORS] =
 // The following are almost IBM standard color codes, with some slight
 // gamma correction for the dim colors to compensate for bright X screens.
 // It contains the 8 ansiterm/xterm colors in 2 intensities.
+const ColorEntry Konsole::base_color_table[TABLE_COLORS] =
 {
   // Fixme: could add faint colors here, also.
   // normal
