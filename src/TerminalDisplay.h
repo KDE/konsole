@@ -71,7 +71,7 @@ class KONSOLEPRIVATE_EXPORT TerminalDisplay : public QWidget
 
 public:
     /** Constructs a new terminal display widget with the specified parent. */
-    TerminalDisplay(QWidget *parent=0);
+    TerminalDisplay(QWidget* parent=0);
     virtual ~TerminalDisplay();
 
     /** Returns the terminal color palette used by the display. */
@@ -156,16 +156,16 @@ public:
      */
     QList<QAction*> filterActions(const QPoint& position);
 
-    /** Returns true if the cursor is allowed to blink or false otherwise. */
-    bool blinkingCursorEnabled() { return _allowBlinkingCursor; }
     /** Specifies whether or not the cursor can blink. */
     void setBlinkingCursorEnabled(bool blink);
+    /** Returns true if the cursor is allowed to blink or false otherwise. */
+    bool blinkingCursorEnabled() const { return _allowBlinkingCursor; }
 
     /** Specifies whether or not text can blink. */
     void setBlinkingTextEnabled(bool blink);
 
     void setCtrlDrag(bool enable) { _ctrlDrag=enable; }
-    bool ctrlDrag() { return _ctrlDrag; }
+    bool ctrlDrag() const { return _ctrlDrag; }
 
     /** 
      *  This enum describes the methods for selecting text when
@@ -181,7 +181,7 @@ public:
     /** Sets how the text is selected when the user triple clicks within the display. */    
     void setTripleClickMode(TripleClickMode mode) { _tripleClickMode = mode; }
     /** See setTripleClickSelectionMode() */
-    TripleClickMode tripleClickMode() { return _tripleClickMode; }
+    TripleClickMode tripleClickMode() const { return _tripleClickMode; }
     
     /**
      * Specifies whether links and email addresses should be underlined when 
@@ -192,7 +192,7 @@ public:
      * Returns true if links and email addresses should be underlined when 
      * hovered by the mouse.
      */
-    bool getUnderlineLinks() { return _underlineLinks; }
+    bool getUnderlineLinks() const { return _underlineLinks; }
 
     void setLineSpacing(uint);
     uint lineSpacing() const;
@@ -284,9 +284,9 @@ public:
      */
     int  fontWidth() const { return _fontWidth; }
 
-    void setSize(int cols, int lins);
-    void setFixedSize(int cols, int lins);
-    
+    void setSize(int columns, int lines);
+    void setFixedSize(int columns, int lines);
+
     // reimplemented
     QSize sizeHint() const;
 
@@ -308,7 +308,7 @@ public:
      *
      * @see setWordCharacters()
      */
-    QString wordCharacters() { return _wordCharacters; }
+    QString wordCharacters() const { return _wordCharacters; }
 
     /** 
      * Sets the type of effect used to alert the user when a 'bell' occurs in the 
@@ -324,7 +324,7 @@ public:
      * 
      * See setBellMode()
      */
-    int bellMode() { return _bellMode; }
+    int bellMode() const { return _bellMode; }
 
     /**
      * This enum describes the different types of sounds and visual effects which
@@ -346,7 +346,7 @@ public:
         NoBell=3 
     };
 
-    void setSelection(const QString &t);
+    void setSelection(const QString& text);
 
     /** 
      * Reimplemented.  Has no effect.  Use setVTFont() to change the font
@@ -371,7 +371,7 @@ public:
     /** 
      * Returns true if anti-aliasing of text in the terminal is enabled.
      */
-    bool antialias()                 { return _antialiasText;   }
+    bool antialias() const { return _antialiasText;   }
 
     /**
      * Specifies whether characters with intense colors should be rendered
@@ -381,7 +381,7 @@ public:
     /**
      * Returns true if characters with intense colors are rendered in bold.
      */
-    bool getBoldIntense() { return _boldIntense; }
+    bool getBoldIntense() const { return _boldIntense; }
     
     /**
      * Sets whether or not the current height and width of the 
@@ -394,7 +394,7 @@ public:
      * the terminal in lines and columns is displayed whilst the widget
      * is being resized.
      */
-    bool showTerminalSizeHint() { return _showTerminalSizeHint; }
+    bool showTerminalSizeHint() const { return _showTerminalSizeHint; }
 
     /**
      * Sets the status of the BiDi rendering inside the terminal display.
@@ -404,7 +404,7 @@ public:
     /**
      * Returns the status of the BiDi rendering in this widget.
      */
-    bool isBidiEnabled() { return _bidiEnabled; }
+    bool isBidiEnabled() const { return _bidiEnabled; }
 
     /**
      * Sets the terminal screen section which is displayed in this widget.
@@ -521,7 +521,7 @@ signals:
     /**
      * Emitted when the user presses a key whilst the terminal widget has focus.
      */
-    void keyPressedSignal(QKeyEvent *e);
+    void keyPressedSignal(QKeyEvent* event);
 
     /** 
      * A mouse event occurred.
@@ -557,24 +557,24 @@ signals:
    void sendStringToEmu(const char*);
 
 protected:
-    virtual bool event( QEvent * );
+    virtual bool event( QEvent* event);
 
-    virtual void paintEvent( QPaintEvent * );
+    virtual void paintEvent( QPaintEvent* event);
 
-    virtual void showEvent(QShowEvent*);
-    virtual void hideEvent(QHideEvent*);
-    virtual void resizeEvent(QResizeEvent*);
+    virtual void showEvent(QShowEvent* event);
+    virtual void hideEvent(QHideEvent* event);
+    virtual void resizeEvent(QResizeEvent* event);
 
-    virtual void fontChange(const QFont &font);
+    virtual void fontChange(const QFont& );
     virtual void focusInEvent(QFocusEvent* event);
     virtual void focusOutEvent(QFocusEvent* event);
     virtual void keyPressEvent(QKeyEvent* event);
-    virtual void mouseDoubleClickEvent(QMouseEvent* ev);
-    virtual void mousePressEvent( QMouseEvent* );
-    virtual void mouseReleaseEvent( QMouseEvent* );
-    virtual void mouseMoveEvent( QMouseEvent* );
+    virtual void mouseDoubleClickEvent(QMouseEvent* event);
+    virtual void mousePressEvent( QMouseEvent* event);
+    virtual void mouseReleaseEvent( QMouseEvent* event);
+    virtual void mouseMoveEvent( QMouseEvent* event);
     virtual void extendSelection( const QPoint& pos );
-    virtual void wheelEvent( QWheelEvent* );
+    virtual void wheelEvent( QWheelEvent* event);
 
     virtual bool focusNextPrevChild( bool next );
     
@@ -600,7 +600,7 @@ protected:
 
     void clearImage();
 
-    void mouseTripleClickEvent(QMouseEvent* ev);
+    void mouseTripleClickEvent(QMouseEvent* event);
 
     // reimplemented
     virtual void inputMethodEvent ( QInputMethodEvent* event );
@@ -628,7 +628,7 @@ private:
     // divides the part of the display specified by 'rect' into
     // fragments according to their colors and styles and calls
     // drawTextFragment() to draw the fragments 
-    void drawContents(QPainter &paint, const QRect &rect);
+    void drawContents(QPainter& painter, const QRect& rect);
     // draws a section of text, all the text in this section
     // has a common color and style
     void drawTextFragment(QPainter& painter, const QRect& rect, 
