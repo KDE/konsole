@@ -760,7 +760,6 @@ private:
     bool    _preserveLineBreaks;
     bool    _columnSelectionMode;
 
-    QClipboard*  _clipboard;
     QScrollBar* _scrollBar;
     ScrollBarPosition _scrollbarLocation;
     QString     _wordCharacters;
