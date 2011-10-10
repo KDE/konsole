@@ -766,26 +766,29 @@ private:
     QString     _wordCharacters;
     int         _bellMode;
 
-    bool _showSizeWidget; // if the size widget will be show
-    bool _textBlinking;   // hide text in paintEvent
-    bool _hasTextBlinker; // has characters to blink
-    bool _cursorBlinking;     // hide cursor in paintEvent
-    bool _allowBlinkingCursor;  // allow cursor to blink
     bool _allowBlinkingText;  // allow text to blink
-    bool _ctrlDrag;           // require Ctrl key for drag
-    TripleClickMode _tripleClickMode;
+    bool _allowBlinkingCursor;  // allow cursor to blink
+    bool _textBlinking;   // hide text in paintEvent
+    bool _cursorBlinking;     // hide cursor in paintEvent
+    bool _hasTextBlinker; // has characters to blink
+    QTimer* _blinkTextTimer;
+    QTimer* _blinkCursorTimer;
+
     bool _underlineLinks;     // Underline URL and hosts on mouse hover
-    bool _isFixedSize; //Columns / lines are locked.
-    QTimer* _blinkTextTimer;  // active when hasTextBlinker
-    QTimer* _blinkCursorTimer;  // active when hasBlinkingCursor
+    bool _isFixedSize; // columns/lines are locked.
+
+
+    bool _ctrlDrag; // require Ctrl key for drag selected text
 
     KMenu* _drop;
     QString _dropText;
     int _dndFileCount;
 
+    TripleClickMode _tripleClickMode;
     bool _possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
                                // after QApplication::doubleClickInterval() delay
 
+    bool _showSizeWidget; // if the size widget will be show
     QLabel* _resizeWidget;
     QTimer* _resizeTimer;
 
