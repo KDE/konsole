@@ -69,8 +69,6 @@ using namespace Konsole;
 #define loc(X,Y) ((Y)*_columns+(X))
 #endif
 
-#define yMouseScroll 1
-
 #define REPCHAR   "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
                   "abcdefgjijklmnopqrstuvwxyz" \
                   "0123456789./+@"
@@ -94,8 +92,6 @@ const ColorEntry Konsole::base_color_table[TABLE_COLORS] =
   ColorEntry(QColor(0x54,0x54,0xFF), 0), ColorEntry( QColor(0xFF,0x54,0xFF), 0),
   ColorEntry(QColor(0x54,0xFF,0xFF), 0), ColorEntry( QColor(0xFF,0xFF,0xFF), 0)
 };
-
-// scroll increment used when dragging selection at top/bottom of window.
 
 // static
 bool TerminalDisplay::HAVE_TRANSPARENCY = false;
