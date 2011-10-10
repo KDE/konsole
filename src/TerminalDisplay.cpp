@@ -355,8 +355,8 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   setColorTable(base_color_table);
   setMouseTracking(true);
 
-  // Enable drag and drop 
-  setAcceptDrops(true); // attempt
+  // Enable drag and drop support
+  setAcceptDrops(true);
   dragInfo.state = diNone;
 
   setFocusPolicy( Qt::WheelFocus );
