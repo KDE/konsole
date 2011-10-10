@@ -343,7 +343,7 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
     _ui->remoteTabTitleEdit->setText( 
             info->property<QString>(Profile::RemoteTabTitleFormat));
 
-    // tab options
+    // tab bar options
     int tabBarMode = info->property<int>(Profile::TabBarMode);
     int tabBarPosition = info->property<int>(Profile::TabBarPosition);
     int newTabBehavior = info->property<int>(Profile::NewTabBehavior);
