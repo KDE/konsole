@@ -264,7 +264,7 @@ public:
      * This will depend upon the height of the widget and the current font.
      * See fontHeight()
      */
-    int  lines()   { return _lines;   }
+    int  lines() const { return _lines; }
     /**
      * Returns the number of characters of text which can be displayed on
      * each line in the widget.
@@ -272,17 +272,17 @@ public:
      * This will depend upon the width of the widget and the current font.
      * See fontWidth()
      */
-    int  columns() { return _columns; }
+    int  columns() const { return _columns; }
 
     /**
      * Returns the height of the characters in the font used to draw the text in the display.
      */
-    int  fontHeight()   { return _fontHeight;   }
+    int  fontHeight() const { return _fontHeight; }
     /**
      * Returns the width of the characters in the display.  
      * This assumes the use of a fixed-width font.
      */
-    int  fontWidth()    { return _fontWidth; }
+    int  fontWidth() const { return _fontWidth; }
 
     void setSize(int cols, int lins);
     void setFixedSize(int cols, int lins);
