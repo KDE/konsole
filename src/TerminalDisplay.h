@@ -121,10 +121,6 @@ public:
      */
     void setScroll(int cursor, int lines);
 
-    /** 
-     * Sets if the size widget is going to be shown or not
-     */
-    void setSizeWidgetVisibility(bool visible);
     /**
      * Returns the display's filter chain.  When the image for the display is updated,
      * the text is passed through each filter in the chain.  Each filter can define
@@ -392,18 +388,18 @@ public:
      * terminal in lines and columns is displayed whilst the widget
      * is being resized.
      */
-    void setTerminalSizeHint(bool on) { _terminalSizeHint=on; }
+    void setShowTerminalSizeHint(bool on) { _showTerminalSizeHint=on; }
     /** 
      * Returns whether or not the current height and width of
      * the terminal in lines and columns is displayed whilst the widget
      * is being resized.
      */
-    bool terminalSizeHint() { return _terminalSizeHint; }
+    bool showTerminalSizeHint() { return _showTerminalSizeHint; }
     /** 
      * Sets whether the terminal size display is shown briefly
      * after the widget is first shown.
      *
-     * See setTerminalSizeHint() , isTerminalSizeHint()
+     * See setShowTerminalSizeHint() , isTerminalSizeHint()
      */
     void setTerminalSizeStartup(bool on) { _terminalSizeStartup=on; }
 
@@ -746,7 +742,7 @@ private:
     uint _randomSeed;
 
     bool _resizing;
-    bool _terminalSizeHint;
+    bool _showTerminalSizeHint;
     bool _terminalSizeStartup;
     bool _bidiEnabled;
     bool _mouseMarks;
@@ -787,7 +783,6 @@ private:
     bool _possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
                                // after QApplication::doubleClickInterval() delay
 
-    bool _showSizeWidget; // if the size widget will be show
     QLabel* _resizeWidget;
     QTimer* _resizeTimer;
 

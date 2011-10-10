@@ -287,7 +287,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
 
     // window options
     _ui->showMenuBarButton->setChecked( info->property<bool>(Profile::ShowMenuBar) );
-    _ui->showSizeWidgetButton->setChecked( info->property<bool>(Profile::ShowSizeWidget) );
+    _ui->showTerminalSizeHintButton->setChecked( info->property<bool>(Profile::ShowTerminalSizeHint) );
     _ui->saveGeometryOnExitButton->setChecked( info->property<bool>(Profile::SaveGeometryOnExit) );
 
     // signals and slots
@@ -308,8 +308,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
             SLOT(showMenuBar(bool)) );
     connect(_ui->saveGeometryOnExitButton , SIGNAL(toggled(bool)) , this ,
             SLOT(saveGeometryOnExit(bool)) );
-    connect(_ui->showSizeWidgetButton , SIGNAL(toggled(bool)) , this ,
-            SLOT(showSizeWidget(bool)) );
+    connect(_ui->showTerminalSizeHintButton , SIGNAL(toggled(bool)) , this ,
+            SLOT(showTerminalSizeHint(bool)) );
 }
 void EditProfileDialog::showEnvironmentEditor()
 {
@@ -429,9 +429,9 @@ void EditProfileDialog::saveGeometryOnExit(bool save)
 {
     updateTempProfileProperty(Profile::SaveGeometryOnExit,save);
 }
-void EditProfileDialog::showSizeWidget(bool show)
+void EditProfileDialog::showTerminalSizeHint(bool show)
 {
-    updateTempProfileProperty(Profile::ShowSizeWidget,show);
+    updateTempProfileProperty(Profile::ShowTerminalSizeHint,show);
 }
 void EditProfileDialog::tabTitleFormatChanged(const QString& format)
 {

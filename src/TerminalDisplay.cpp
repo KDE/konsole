@@ -297,7 +297,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_image(0)
 ,_randomSeed(0)
 ,_resizing(false)
-,_terminalSizeHint(false)
+,_showTerminalSizeHint(false)
 ,_terminalSizeStartup(true)
 ,_bidiEnabled(false)
 ,_actSel(0)
@@ -318,7 +318,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_ctrlDrag(true)
 ,_tripleClickMode(SelectWholeLine)
 ,_possibleTripleClick(false)
-,_showSizeWidget(true)
 ,_resizeWidget(0)
 ,_resizeTimer(0)
 ,_flowControlWarningEnabled(false)
@@ -1105,7 +1104,7 @@ void TerminalDisplay::updateImage()
 
 void TerminalDisplay::showResizeNotification()
 {
-  if (_terminalSizeHint && isVisible())
+  if (_showTerminalSizeHint && isVisible())
   {
      if (_terminalSizeStartup) {
                _terminalSizeStartup=false;
@@ -1620,9 +1619,8 @@ void TerminalDisplay::updateImageSize()
 
   if ( _resizing )
   {
-    if (_showSizeWidget)
       showResizeNotification();
-    emit changedContentSizeSignal(_contentHeight, _contentWidth); // expose resizeEvent
+      emit changedContentSizeSignal(_contentHeight, _contentWidth); // expose resizeEvent
   }
   
   _resizing = false;
@@ -2410,11 +2408,6 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
   _iPntSel.ry() += _scrollBar->value();
 }
 
-
-void Konsole::TerminalDisplay::setSizeWidgetVisibility(bool visible)
-{
-  _showSizeWidget = visible;
-}
 
 bool TerminalDisplay::focusNextPrevChild( bool next )
 {

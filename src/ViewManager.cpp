@@ -802,7 +802,7 @@ TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
 
    //TODO Temporary settings used here
    display->setBellMode(TerminalDisplay::NotifyBell);
-   display->setTerminalSizeHint(true);
+   display->setShowTerminalSizeHint(true);
    display->setTripleClickMode(TerminalDisplay::SelectWholeLine);
    display->setTerminalSizeStartup(true);
    display->setScrollBarPosition(TerminalDisplay::ScrollBarRight);
@@ -858,8 +858,8 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     else if ( scrollBarPosition == Profile::ScrollBarRight )
        view->setScrollBarPosition(TerminalDisplay::ScrollBarRight);
 
-    // set visibility of the size widget
-    view->setSizeWidgetVisibility(info->property<bool>(Profile::ShowSizeWidget));
+    // show hint about termianl size after resizing
+    view->setShowTerminalSizeHint(info->property<bool>(Profile::ShowTerminalSizeHint));
 
     // terminal features
     bool blinkingCursor = info->property<bool>(Profile::BlinkingCursorEnabled);
