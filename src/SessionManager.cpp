@@ -541,6 +541,10 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
         QByteArray name = profile->property<QString>(Profile::DefaultEncoding).toUtf8();
         session->setCodec( QTextCodec::codecForName(name) );
     } 
+
+    // Monitor Silence
+    if ( apply.shouldApply(Profile::SilenceSeconds) )
+        session->setMonitorSilenceSeconds( profile->property<int>(Profile::SilenceSeconds) );
 }
 
 void SessionManager::addProfile(Profile::Ptr type)

@@ -343,6 +343,10 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
     _ui->remoteTabTitleEdit->setText( 
             info->property<QString>(Profile::RemoteTabTitleFormat));
 
+    // tab monitoring
+    int silenceSeconds = info->property<int>(Profile::SilenceSeconds);
+    _ui->silenceSecondsSpinner->setValue(silenceSeconds);
+
     // tab bar options
     int tabBarMode = info->property<int>(Profile::TabBarMode);
     int tabBarPosition = info->property<int>(Profile::TabBarPosition);
@@ -383,6 +387,9 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
             SLOT(tabTitleFormatChanged(QString)) );
     connect(_ui->remoteTabTitleEdit , SIGNAL(textChanged(QString)) , this ,
             SLOT(remoteTabTitleFormatChanged(QString)));
+
+    connect( _ui->silenceSecondsSpinner , SIGNAL(valueChanged(int)) ,
+             this , SLOT(silenceSecondsChanged(int)) );
 
     // menus for local and remote tab title dynamic elements
     TabTitleFormatAction* localTabTitleAction = new TabTitleFormatAction(this);
@@ -440,6 +447,11 @@ void EditProfileDialog::tabTitleFormatChanged(const QString& format)
 void EditProfileDialog::remoteTabTitleFormatChanged(const QString& format)
 {
     updateTempProfileProperty(Profile::RemoteTabTitleFormat,format);
+}
+
+void EditProfileDialog::silenceSecondsChanged(int seconds)
+{
+    updateTempProfileProperty(Profile::SilenceSeconds, seconds);
 }
 
 void EditProfileDialog::selectIcon()

@@ -121,6 +121,7 @@ private slots:
     void showTerminalSizeHint(bool);
     void saveGeometryOnExit(bool);
     void showEnvironmentEditor();
+    void silenceSecondsChanged(int);
     void tabBarVisibilityChanged(int);
     void tabBarPositionChanged(int);
     void newTabBehaviorChanged(int);

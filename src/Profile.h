@@ -198,6 +198,8 @@ public:
         StartInCurrentSessionDir,
         /** (bool) Whether a 'New Tab' and 'Close Tab' buttons should be shown on the tab bar */
         ShowNewAndCloseTabButtons,
+        /** (int) Specifies the threshold of detected silence in seconds. */
+        SilenceSeconds,
         /** Index of profile in the File Menu
          * In future, format will be #.#.# to account for levels
          */
