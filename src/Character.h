@@ -49,6 +49,30 @@ static const int LINE_DOUBLEHEIGHT = (1 << 2);
 #define RE_EXTENDED_CHAR   (1 << 5)
 
 /**
+ * Unicode character in the range of U+2500 ~ U+257F are known as line
+ * characters, or box-drawing characters. Currently, konsole draws those
+ * characters itself, instead of using the glyph provided by the font.
+ * Unfortunately, some line characters can't be simulated by the existing 5x5
+ * pixel matrix. Typical examples are ╳(U+2573) and ╰(U+2570). So those
+ * unsupported line characters should be drawn in the normal way .
+ */
+inline bool isSupportedLineChar(quint16 codePoint )
+{
+    if ( (codePoint & 0xFF80) != 0x2500 )
+        return false;
+
+    uchar index = (codePoint & 0x007F) ;
+    if ((index >= 0x04 && index <= 0x0B) ||
+        (index >= 0x4C && index <= 0x4F) ||
+        (index >= 0x6D && index <= 0x73) )
+    {
+        return false;
+    }
+
+    return true;
+}
+
+/**
  * A single character in the terminal which consists of a unicode character
  * value, foreground and background colors and a set of rendition attributes
  * which specify how it should be drawn.
@@ -115,7 +139,10 @@ public:
   
   inline bool isLineChar() const
   {
-      return (rendition & RE_EXTENDED_CHAR) ? false : ((character & 0xFF80) == 0x2500);
+      if ( rendition & RE_EXTENDED_CHAR )
+          return false;
+
+      return isSupportedLineChar(character);
   }
   
   inline bool isSpace() const

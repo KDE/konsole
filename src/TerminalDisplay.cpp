@@ -180,7 +180,10 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
 
 static inline bool isLineCharString(const QString& string)
 {
-  return (string.length() > 0) && ((string.at(0).unicode() & 0xFF80) == 0x2500);
+    if ( string.length() == 0 )
+        return false;
+
+    return isSupportedLineChar( string.at(0).unicode() );
 }
 
 void TerminalDisplay::fontChange(const QFont&)
