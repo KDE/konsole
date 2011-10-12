@@ -153,6 +153,9 @@ class MainWindow : public KXmlGuiWindow
         virtual void saveGlobalProperties(KConfig* config);
         virtual void readGlobalProperties(KConfig* config);
 
+        // reimplemented from QWidget
+        virtual bool focusNextPrevChild( bool next );
+
     private slots:
         void newTab();
         void newWindow();

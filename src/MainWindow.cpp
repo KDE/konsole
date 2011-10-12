@@ -584,5 +584,14 @@ void MainWindow::showEvent(QShowEvent *event)
     KXmlGuiWindow::showEvent(event);
 }
 
+bool MainWindow::focusNextPrevChild( bool )
+{
+    // In stand-alone konsole, always disbale implicit focus switching
+    // throuht 'Tab' and 'Shift+Tab'
+    //
+    // Kpart is another different story
+    return false;
+}
+
 #include "MainWindow.moc"
 

@@ -2367,13 +2367,14 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
   _iPntSel.ry() += _scrollBar->value();
 }
 
-
 bool TerminalDisplay::focusNextPrevChild( bool next )
 {
-  if (next)
-    return false; // This disables changing the active part in konqueror
-                  // when pressing Tab
-  return QWidget::focusNextPrevChild( next );
+    // for'Tab', always disable focus switching among widgets
+    // for 'Shift+Tab', leave the decision to higher level
+    if (next)
+        return false;
+    else
+        return QWidget::focusNextPrevChild( next );
 }
 
 

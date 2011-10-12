@@ -569,7 +569,7 @@ protected:
     virtual void wheelEvent( QWheelEvent* event);
 
     virtual bool focusNextPrevChild( bool next );
-    
+
     // drag and drop
     virtual void dragEnterEvent(QDragEnterEvent* event);
     virtual void dropEvent(QDropEvent* event);
