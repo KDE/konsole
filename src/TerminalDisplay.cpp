@@ -676,11 +676,11 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
 {
     // don't draw text which is currently blinking
     if ( _textBlinking && (style->rendition & RE_BLINK) )
-            return;
-   
+        return;
+
     // setup bold and underline
     bool useBold;
-    ColorEntry::FontWeight weight = style->fontWeight(_colorTable);    
+    ColorEntry::FontWeight weight = style->fontWeight(_colorTable);
     if (weight == ColorEntry::UseCurrentFormat)
         useBold = ((style->rendition & RE_BOLD) && _boldIntense) || font().bold();
     else
@@ -688,12 +688,12 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
     bool useUnderline = style->rendition & RE_UNDERLINE || font().underline();
 
     QFont font = painter.font();
-    if (    font.bold() != useBold 
+    if (    font.bold() != useBold
          || font.underline() != useUnderline )
     {
-       font.setBold(useBold);
-       font.setUnderline(useUnderline);
-       painter.setFont(font);
+        font.setBold(useBold);
+        font.setUnderline(useUnderline);
+        painter.setFont(font);
     }
 
     // setup pen
@@ -708,15 +708,18 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
 
     // draw text
     if ( isLineCharString(text) )
+    {
         drawLineCharString(painter,rect.x(),rect.y(),text,style);
+    }
     else
     {
         // the drawText(rect,flags,string) overload is used here with null flags
-        // instead of drawText(rect,string) because the (rect,string) overload causes 
-        // the application's default layout direction to be used instead of 
+        // instead of drawText(rect,string) because the (rect,string) overload causes
+        // the application's default layout direction to be used instead of
         // the widget-specific layout direction, which should always be
         // Qt::LeftToRight for this widget
-    // This was discussed in: http://lists.kde.org/?t=120552223600002&r=1&w=2
+        //
+        // This was discussed in: http://lists.kde.org/?t=120552223600002&r=1&w=2
         if (_bidiEnabled)
             painter.drawText(rect,0,text);
         else
