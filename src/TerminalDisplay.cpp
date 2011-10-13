@@ -510,26 +510,26 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
 
 }
 
-void TerminalDisplay::drawLineCharString(    QPainter& painter, int x, int y, const QString& str, 
-                                    const Character* attributes)
+void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const QString& str,
+                                         const Character* attributes)
 {
-        const QPen& currentPen = painter.pen();
-        
-        if ( (attributes->rendition & RE_BOLD) && _boldIntense )
-        {
-            QPen boldPen(currentPen);
-            boldPen.setWidth(3);
-            painter.setPen( boldPen );
-        }    
-        
-        for (int i=0 ; i < str.length(); i++)
-        {
-            uchar code = str[i].cell();
-            if (LineChars[code])
-                drawLineChar(painter, x + (_fontWidth*i), y, _fontWidth, _fontHeight, code);
-        }
+    const QPen& originalPen = painter.pen();
 
-        painter.setPen( currentPen );
+    if ( (attributes->rendition & RE_BOLD) && _boldIntense )
+    {
+        QPen boldPen(originalPen);
+        boldPen.setWidth(3);
+        painter.setPen( boldPen );
+    }
+
+    for (int i=0 ; i < str.length(); i++)
+    {
+        uchar code = str[i].cell();
+        if (LineChars[code])
+            drawLineChar(painter, x + (_fontWidth*i), y, _fontWidth, _fontHeight, code);
+    }
+
+    painter.setPen( originalPen );
 }
 
 void TerminalDisplay::setKeyboardCursorShape(KeyboardCursorShape shape)
