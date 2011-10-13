@@ -622,50 +622,49 @@ void TerminalDisplay::drawCursor(QPainter& painter,
                                  const QColor& /*backgroundColor*/,
                                  bool& invertCharacterColor)
 {
+    if ( _cursorBlinking )
+        return ;
+
     QRect cursorRect = rect;
     cursorRect.setHeight(_fontHeight - _lineSpacing - 1);
-    
-    if (!_cursorBlinking)
+
+    QColor cursorColor = _cursorColor.isValid() ? _cursorColor : foregroundColor ;
+    painter.setPen(cursorColor);
+
+    if ( _cursorShape == BlockCursor )
     {
-       if ( _cursorColor.isValid() )
-           painter.setPen(_cursorColor);
-       else
-           painter.setPen(foregroundColor);
+        // draw the cursor outline, adjusting the area so that
+        // it is draw entirely inside 'rect'
+        int penWidth = qMax(1,painter.pen().width());
+        painter.drawRect(cursorRect.adjusted(penWidth/2,
+                                             penWidth/2,
+                                             - penWidth/2 - penWidth%2,
+                                             - penWidth/2 - penWidth%2));
 
-       if ( _cursorShape == BlockCursor )
-       {
-            // draw the cursor outline, adjusting the area so that
-            // it is draw entirely inside 'rect'
-            int penWidth = qMax(1,painter.pen().width());
+        // draw the cursor body only when the widget has focus
+        if ( hasFocus() )
+        {
+            painter.fillRect(cursorRect, cursorColor);
 
-            painter.drawRect(cursorRect.adjusted(penWidth/2,
-                                                 penWidth/2,
-                                                 - penWidth/2 - penWidth%2,
-                                                 - penWidth/2 - penWidth%2));
-            if ( hasFocus() )
+            if ( !_cursorColor.isValid() )
             {
-                painter.fillRect(cursorRect, _cursorColor.isValid() ? _cursorColor : foregroundColor);
-            
-                if ( !_cursorColor.isValid() )
-                {
-                    // invert the colour used to draw the text to ensure that the character at
-                    // the cursor position is readable
-                    invertCharacterColor = true;
-                }
+                // invert the colour used to draw the text to ensure that the character at
+                // the cursor position is readable
+                invertCharacterColor = true;
             }
-       }
-       else if ( _cursorShape == UnderlineCursor )
-            painter.drawLine(cursorRect.left(),
-                             cursorRect.bottom(),
-                             cursorRect.right(),
-                             cursorRect.bottom());
-       else if ( _cursorShape == IBeamCursor )
-            painter.drawLine(cursorRect.left(),
-                             cursorRect.top(),
-                             cursorRect.left(),
-                             cursorRect.bottom());
-    
+        }
     }
+    else if ( _cursorShape == UnderlineCursor )
+        painter.drawLine(cursorRect.left(),
+                         cursorRect.bottom(),
+                         cursorRect.right(),
+                         cursorRect.bottom());
+
+    else if ( _cursorShape == IBeamCursor )
+        painter.drawLine(cursorRect.left(),
+                         cursorRect.top(),
+                         cursorRect.left(),
+                         cursorRect.bottom());
 }
 
 void TerminalDisplay::drawCharacters(QPainter& painter,
