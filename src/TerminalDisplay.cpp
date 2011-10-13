@@ -1799,9 +1799,9 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
 {
   int charLine = 0;
   int charColumn = 0;
-  int scrollBarWidth = (_scrollbarLocation == ScrollBarLeft) ? _scrollBar->width() : 0;
+  getCharacterPosition(ev->pos(),charLine,charColumn);
 
-  getCharacterPosition(ev->pos(),charLine,charColumn); 
+  int scrollBarWidth = (_scrollbarLocation == ScrollBarLeft) ? _scrollBar->width() : 0;
 
   // handle filters
   // change link hot-spot appearance on mouse-over
