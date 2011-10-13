@@ -1758,7 +1758,6 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
       {
          _screenWindow->clearSelection();
 
-        //emit clearSelectionSignal();
         pos.ry() += _scrollBar->value();
         _iPntSel = _pntSel = pos;
         _actSel = 1; // left mouse button pressed but nothing selected yet.
@@ -2135,7 +2134,6 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
     {
       // We had a drag event pending but never confirmed.  Kill selection
        _screenWindow->clearSelection();
-      //emit clearSelectionSignal();
     }
     else
     {
