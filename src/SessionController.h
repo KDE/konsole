@@ -184,7 +184,7 @@ private slots:
     void copy();
     void paste();
     void selectAll();
-    void pasteFromSelection(); // shortcut only
+    void pasteFromXSelection(); // shortcut only
     void copyInputToAllTabs();
     void copyInputToSelectedTabs();
     void copyInputToNone();

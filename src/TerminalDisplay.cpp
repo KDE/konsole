@@ -2512,7 +2512,7 @@ void TerminalDisplay::pasteFromClipboard()
   emitSelection(false,false);
 }
 
-void TerminalDisplay::pasteFromSelection()
+void TerminalDisplay::pasteFromXSelection()
 {
   emitSelection(true,false);
 }

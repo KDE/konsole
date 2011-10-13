@@ -447,10 +447,10 @@ public slots:
      */
     void pasteFromClipboard();
     /**
-     * Pastes the content of the selection into the
+     * Pastes the content of the X selection into the
      * display.
      */
-    void pasteFromSelection();
+    void pasteFromXSelection();
 
     /** 
        * Changes whether the flow control warning box should be shown when the flow control
