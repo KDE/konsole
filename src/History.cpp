@@ -36,7 +36,7 @@
 #include <KDebug>
 
 // Reasonable line size
-const size_t LINE_SIZE = 1024 ;
+const int LINE_SIZE = 1024 ;
 
 using namespace Konsole;
 

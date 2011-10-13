@@ -173,7 +173,7 @@ void Vt102Emulation::reset()
 #define TY_CSI_PG(A)  TY_CONSTRUCT(9,A,0)
 #define TY_CSI_PE(A)  TY_CONSTRUCT(10,A,0)
 
-const size_t MAX_ARGUMENT = 4096 ;
+const int MAX_ARGUMENT = 4096 ;
 
 // Tokenizer --------------------------------------------------------------- --
 
