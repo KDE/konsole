@@ -1737,13 +1737,13 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
     _wordSelectionMode = false;
 
     emit isBusySelecting(true); // Keep it steady...
-    // Drag only when the Control key is hold
-    bool selected = false;
 
+    bool selected = false;
+    // The user clicked inside selected text
     selected =  _screenWindow->isSelected(pos.x(),pos.y());
 
+    // Drag only when the Control key is hold
     if ((!_ctrlDrag || ev->modifiers() & Qt::ControlModifier) && selected ) {
-      // The user clicked inside selected text
       _dragInfo.state = diPending;
       _dragInfo.start = ev->pos();
     }
