@@ -728,31 +728,32 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
         // a method should be devised to only enable those that are used, perhaps
         // by using a separate action collection.
 
+        const bool enable = (_navigationMethod != NoNavigation) ;
         QAction* action;
 
         action = collection->action( "next-view" );
-        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+        if ( action ) action->setEnabled( enable );
 
         action = collection->action( "previous-view" );
-        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+        if ( action ) action->setEnabled( enable );
 
         action = collection->action( "last-tab" );
-        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+        if ( action ) action->setEnabled( enable );
 
         action = collection->action( "split-view-left-right" );
-        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+        if ( action ) action->setEnabled( enable );
 
         action = collection->action( "split-view-top-bottom" );
-        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+        if ( action ) action->setEnabled( enable );
 
         action = collection->action( "rename-session" );
-        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+        if ( action ) action->setEnabled( enable );
 
         action = collection->action( "move-view-left" );
-        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+        if ( action ) action->setEnabled( enable );
 
         action = collection->action( "move-view-right" );
-        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+        if ( action ) action->setEnabled( enable );
     }
 }
 
