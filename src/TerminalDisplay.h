@@ -199,8 +199,6 @@ public:
 
     void setSessionController(SessionController* controller);
 
-    void doPaste(bool useXselection,bool appendReturn);
-
     /**
      * This enum describes the available shapes for the keyboard cursor.
      * See setKeyboardCursorShape()
@@ -694,6 +692,8 @@ private:
     void updateCursor();
 
     bool handleShortcutOverrideEvent(QKeyEvent* event);
+
+    void doPaste(bool useXselection,bool appendReturn);
 
     // the window onto the terminal screen which this display
     // is currently showing.  
