@@ -325,8 +325,8 @@ int Emulation::lineCount() const
     return _currentScreen->getLines() + _currentScreen->getHistLines();
 }
 
-#define BULK_TIMEOUT1 10
-#define BULK_TIMEOUT2 40
+const int BULK_TIMEOUT1 = 10;
+const int BULK_TIMEOUT2 = 40;
 
 void Emulation::showBulk()
 {
