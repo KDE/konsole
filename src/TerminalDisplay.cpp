@@ -1777,7 +1777,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
   else if ( ev->button() == Qt::MidButton )
   {
     if ( _mouseMarks || (!_mouseMarks && (ev->modifiers() & Qt::ShiftModifier)) )
-      emitSelection(true,ev->modifiers() & Qt::ControlModifier);
+      doPaste(true,ev->modifiers() & Qt::ControlModifier);
     else
       emit mouseSignal( 1, charColumn +1, charLine +1 +_scrollBar->value() -_scrollBar->maximum() , 0);
   }
@@ -2472,7 +2472,7 @@ bool TerminalDisplay::usesMouse() const
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TerminalDisplay::emitSelection(bool useXselection,bool appendReturn)
+void TerminalDisplay::doPaste(bool useXselection,bool appendReturn)
 {
   if ( !_screenWindow ) 
       return;
@@ -2509,12 +2509,12 @@ void TerminalDisplay::copyToClipboard()
 
 void TerminalDisplay::pasteFromClipboard()
 {
-  emitSelection(false,false);
+    doPaste(false,false);
 }
 
 void TerminalDisplay::pasteFromXSelection()
 {
-  emitSelection(true,false);
+    doPaste(true,false);
 }
 
 /* ------------------------------------------------------------------------- */

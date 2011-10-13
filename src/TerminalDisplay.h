@@ -199,7 +199,7 @@ public:
 
     void setSessionController(SessionController* controller);
 
-    void emitSelection(bool useXselection,bool appendReturn);
+    void doPaste(bool useXselection,bool appendReturn);
 
     /**
      * This enum describes the available shapes for the keyboard cursor.
