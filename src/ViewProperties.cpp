@@ -30,9 +30,9 @@ QString ViewProperties::_mimeType = "application/x-konsole-view-id";
 ViewProperties::ViewProperties(QObject* parent)
 : QObject(parent)
 , _id(0)
-//, _flags(0)
 {
 }
+
 ViewProperties::~ViewProperties()
 {
     _viewProperties.remove(_id);
