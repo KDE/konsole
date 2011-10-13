@@ -235,15 +235,11 @@ void ViewManager::setupActions()
     }
 
     // keyboard shortcut only actions
-    KShortcut nextViewShortcut = nextViewAction->shortcut();
-    nextViewShortcut.setPrimary( QKeySequence(Qt::SHIFT+Qt::Key_Right) );
-    nextViewAction->setShortcut(nextViewShortcut); 
+    nextViewAction->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Right) );
     connect( nextViewAction, SIGNAL(triggered()) , this , SLOT(nextView()) );
     _viewSplitter->addAction(nextViewAction);
 
-    KShortcut previousViewShortcut = previousViewAction->shortcut();
-    previousViewShortcut.setPrimary( QKeySequence(Qt::SHIFT+Qt::Key_Left) );
-    previousViewAction->setShortcut(previousViewShortcut);
+    previousViewAction->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Left) );
     connect( previousViewAction, SIGNAL(triggered()) , this , SLOT(previousView()) );
     _viewSplitter->addAction(previousViewAction);
 
@@ -254,6 +250,7 @@ void ViewManager::setupActions()
     moveViewLeftAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Left) );
     connect( moveViewLeftAction , SIGNAL(triggered()) , this , SLOT(moveActiveViewLeft()) );
     _viewSplitter->addAction(moveViewLeftAction);
+
     moveViewRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Right) );
     connect( moveViewRightAction , SIGNAL(triggered()) , this , SLOT(moveActiveViewRight()) );
     _viewSplitter->addAction(moveViewRightAction);
