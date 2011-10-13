@@ -1736,8 +1736,6 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
     _lineSelectionMode = false;
     _wordSelectionMode = false;
 
-    emit isBusySelecting(true); // Keep it steady...
-
     bool selected = false;
     // The user clicked inside selected text
     selected =  _screenWindow->isSelected(pos.x(),pos.y());
@@ -1888,8 +1886,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         ev->y() > _dragInfo.start.y() + distance || ev->y() < _dragInfo.start.y() - distance) 
    {
       // we've left the drag square, we can start a real drag operation now
-      emit isBusySelecting(false); // Ok.. we can breath again.
-      
+
        _screenWindow->clearSelection();
       doDrag();
     }
@@ -2129,7 +2126,6 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
   if ( ev->button() == Qt::LeftButton)
   {
-    emit isBusySelecting(false); 
     if(_dragInfo.state == diPending)
     {
       // We had a drag event pending but never confirmed.  Kill selection
@@ -2361,7 +2357,6 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
   _wordSelectionMode = false;
 
   _actSel = 2; // within selection
-  emit isBusySelecting(true); // Keep it steady...
 
   while (_iPntSel.y()>0 && (_lineProperties[_iPntSel.y()-1] & LINE_WRAPPED) )
     _iPntSel.ry()--;

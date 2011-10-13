@@ -549,7 +549,6 @@ signals:
      */
     void overrideShortcutCheck(QKeyEvent* keyEvent,bool& override);
 
-   void isBusySelecting(bool);
    void sendStringToEmu(const char*);
 
 protected:
