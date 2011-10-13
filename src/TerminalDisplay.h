@@ -344,8 +344,6 @@ public:
         NoBell=3 
     };
 
-    void setXSelection(const QString& text);
-
     /** 
      * Reimplemented.  Has no effect.  Use setVTFont() to change the font
      * used to draw characters in the display.
@@ -694,6 +692,7 @@ private:
     bool handleShortcutOverrideEvent(QKeyEvent* event);
 
     void doPaste(bool useXselection,bool appendReturn);
+    void setXSelection(const QString& text);
 
     // the window onto the terminal screen which this display
     // is currently showing.  
