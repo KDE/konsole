@@ -622,6 +622,7 @@ void TerminalDisplay::drawCursor(QPainter& painter,
                                  const QColor& /*backgroundColor*/,
                                  bool& invertCharacterColor)
 {
+    // don't draw cursor which is currently blinking
     if ( _cursorBlinking )
         return ;
 
