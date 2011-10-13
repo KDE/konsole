@@ -2145,7 +2145,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
     {
       if ( _actSel > 1 )
       {
-          setSelection(  _screenWindow->selectedText(_preserveLineBreaks)  );
+          setXSelection(  _screenWindow->selectedText(_preserveLineBreaks)  );
       }
 
       _actSel = 0;
@@ -2289,7 +2289,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
      
      _screenWindow->setSelectionEnd( endSel.x() , endSel.y() );
     
-     setSelection( _screenWindow->selectedText(_preserveLineBreaks) ); 
+     setXSelection( _screenWindow->selectedText(_preserveLineBreaks) ); 
    }
 
   _possibleTripleClick=true;
@@ -2406,7 +2406,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
   
   _screenWindow->setSelectionEnd( _columns - 1 , _iPntSel.y() );
 
-  setSelection(_screenWindow->selectedText(_preserveLineBreaks));
+  setXSelection(_screenWindow->selectedText(_preserveLineBreaks));
 
   _iPntSel.ry() += _scrollBar->value();
 }
@@ -2492,9 +2492,9 @@ void TerminalDisplay::doPaste(bool useXselection,bool appendReturn)
   }
 }
 
-void TerminalDisplay::setSelection(const QString& t)
+void TerminalDisplay::setXSelection(const QString& text)
 {
-  QApplication::clipboard()->setText(t, QClipboard::Selection);
+    QApplication::clipboard()->setText(text, QClipboard::Selection);
 }
 
 void TerminalDisplay::copyToClipboard()

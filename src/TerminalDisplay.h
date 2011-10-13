@@ -344,7 +344,7 @@ public:
         NoBell=3 
     };
 
-    void setSelection(const QString& text);
+    void setXSelection(const QString& text);
 
     /** 
      * Reimplemented.  Has no effect.  Use setVTFont() to change the font
