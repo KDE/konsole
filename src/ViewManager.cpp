@@ -192,6 +192,7 @@ void ViewManager::setupActions()
         // Expand & Shrink Active View
         KAction* expandActiveAction = new KAction( i18nc("@action:inmenu", "Expand View") , this );
         expandActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_BracketRight) );
+        expandActiveAction->setEnabled(false);
         collection->addAction("expand-active-view",expandActiveAction);
         connect( expandActiveAction , SIGNAL(triggered()) , this , SLOT(expandActiveView()) );
 
@@ -199,6 +200,7 @@ void ViewManager::setupActions()
 
         KAction* shrinkActiveAction = new KAction( i18nc("@action:inmenu", "Shrink View") , this );
         shrinkActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_BracketLeft) );
+        shrinkActiveAction->setEnabled(false);
         collection->addAction("shrink-active-view",shrinkActiveAction);
         connect( shrinkActiveAction , SIGNAL(triggered()) , this , SLOT(shrinkActiveView()) );
 
