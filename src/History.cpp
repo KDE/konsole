@@ -73,10 +73,6 @@ FIXME: There is noticeable decrease in speed, also. Perhaps,
        scheme with wrap around would be it's complexity.
 */
 
-//FIXME: tempory replacement for tmpfile
-//       this is here one for debugging purpose.
-
-//#define tmpfile xTmpFile
 
 // History File ///////////////////////////////////////////
 
