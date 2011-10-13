@@ -444,8 +444,8 @@ void ViewManager::splitView(Qt::Orientation orientation)
     {
         Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
         TerminalDisplay* display = createTerminalDisplay(session);
-        const Profile::Ptr info = SessionManager::instance()->sessionProfile(session);
-        applyProfileToView(display, info);
+        const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
+        applyProfileToView(display, profile);
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session;
@@ -454,8 +454,8 @@ void ViewManager::splitView(Qt::Orientation orientation)
         // session in the previous container
         if ( !container )
         {
-            container = createContainer(info);
-            applyProfileToContainer(container, info);
+            container = createContainer(profile);
+            applyProfileToContainer(container, profile);
         }
 
         container->addView(display,properties);
@@ -622,8 +622,8 @@ void ViewManager::createView(Session* session)
     // setting. The current implementation is limited by the design of Profile.h
     // It should be re-implmented at some appropriate time in the future.
     // comment by jekyllwu
-    Profile::Ptr info = SessionManager::instance()->sessionProfile(session);
-    int newTabBehavior = info->property<int>(Profile::NewTabBehavior);
+    Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
+    int newTabBehavior = profile->property<int>(Profile::NewTabBehavior);
     if ( newTabBehavior == Profile::PutNewTabAfterCurrentTab )
     {
         QWidget* view = activeView();
@@ -645,11 +645,11 @@ void ViewManager::createView(Session* session)
     }
 }
 
-ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
+ViewContainer* ViewManager::createContainer(const Profile::Ptr profile)
 {
-    Q_ASSERT( info );
+    Q_ASSERT( profile );
 
-    const int tabPosition = info->property<int>(Profile::TabBarPosition);
+    const int tabPosition = profile->property<int>(Profile::TabBarPosition);
 
     ViewContainer::NavigationPosition position = ( tabPosition == Profile::TabBarTop ) ?
                                                    ViewContainer::NavigationPositionTop :
@@ -681,7 +681,7 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
             container = new StackedViewContainer(_viewSplitter);
     }
 
-    applyProfileToContainer(container, info);
+    applyProfileToContainer(container, profile);
 
     // connect signals and slots
     connect( container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
@@ -808,10 +808,10 @@ TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
     return display;
 }
 
-const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr info) const
+const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr profile) const
 {
     const ColorScheme* colorScheme = ColorSchemeManager::instance()->
-                                            findColorScheme(info->colorScheme());
+                                            findColorScheme(profile->colorScheme());
     if ( !colorScheme )
        colorScheme = ColorSchemeManager::instance()->defaultColorScheme(); 
     Q_ASSERT( colorScheme );
@@ -819,16 +819,16 @@ const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr info) c
     return colorScheme;
 }
 
-void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr info)
+void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr profile)
 {
-    Q_ASSERT( info );
+    Q_ASSERT( profile );
     
-    const ColorScheme* colorScheme = colorSchemeForProfile(info);
+    const ColorScheme* colorScheme = colorSchemeForProfile(profile);
 
     // menu bar visibility
-    emit setMenuBarVisibleRequest( info->property<bool>(Profile::ShowMenuBar) );
+    emit setMenuBarVisibleRequest( profile->property<bool>(Profile::ShowMenuBar) );
 
-    emit setSaveGeometryOnExitRequest( info->property<bool>(Profile::SaveGeometryOnExit) );
+    emit setSaveGeometryOnExitRequest( profile->property<bool>(Profile::SaveGeometryOnExit) );
 
     emit updateWindowIcon();
 
@@ -841,12 +841,12 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     view->setWallpaper(colorScheme->wallpaper());
   
     // load font 
-    view->setAntialias(info->property<bool>(Profile::AntiAliasFonts));
-    view->setBoldIntense(info->property<bool>(Profile::BoldIntense));
-    view->setVTFont(info->font());
+    view->setAntialias(profile->property<bool>(Profile::AntiAliasFonts));
+    view->setBoldIntense(profile->property<bool>(Profile::BoldIntense));
+    view->setVTFont(profile->font());
 
     // set scroll-bar position
-    int scrollBarPosition = info->property<int>(Profile::ScrollBarPosition);
+    int scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
 
     if ( scrollBarPosition == Profile::ScrollBarLeft )
        view->setScrollBarPosition(TerminalDisplay::ScrollBarLeft);
@@ -856,25 +856,25 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
        view->setScrollBarPosition(TerminalDisplay::ScrollBarHidden);
 
     // show hint about termianl size after resizing
-    view->setShowTerminalSizeHint(info->property<bool>(Profile::ShowTerminalSizeHint));
+    view->setShowTerminalSizeHint(profile->property<bool>(Profile::ShowTerminalSizeHint));
 
     // terminal features
-    bool blinkingCursor = info->property<bool>(Profile::BlinkingCursorEnabled);
+    bool blinkingCursor = profile->property<bool>(Profile::BlinkingCursorEnabled);
     view->setBlinkingCursorEnabled(blinkingCursor);
 
-    bool blinkingText = info->property<bool>(Profile::BlinkingTextEnabled);
+    bool blinkingText = profile->property<bool>(Profile::BlinkingTextEnabled);
     view->setBlinkingTextEnabled(blinkingText);
 
-    int tripleClickMode = info->property<int>(Profile::TripleClickMode);
+    int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
     view->setTripleClickMode( TerminalDisplay::TripleClickMode(tripleClickMode) );
 
-    view->setUnderlineLinks(info->property<bool>(Profile::UnderlineLinksEnabled));
+    view->setUnderlineLinks(profile->property<bool>(Profile::UnderlineLinksEnabled));
 
-    bool bidiEnabled = info->property<bool>(Profile::BidiRenderingEnabled);
+    bool bidiEnabled = profile->property<bool>(Profile::BidiRenderingEnabled);
     view->setBidiEnabled(bidiEnabled);
 
     // cursor shape
-    int cursorShape = info->property<int>(Profile::CursorShape);
+    int cursorShape = profile->property<int>(Profile::CursorShape);
 
     if ( cursorShape == Profile::BlockCursor )
         view->setKeyboardCursorShape(TerminalDisplay::BlockCursor);  
@@ -884,20 +884,20 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
         view->setKeyboardCursorShape(TerminalDisplay::UnderlineCursor);
 
     // cursor color
-    bool useCustomColor = info->property<bool>(Profile::UseCustomCursorColor);
-    const QColor& cursorColor = info->property<QColor>(Profile::CustomCursorColor);
+    bool useCustomColor = profile->property<bool>(Profile::UseCustomCursorColor);
+    const QColor& cursorColor = profile->property<QColor>(Profile::CustomCursorColor);
         
     view->setKeyboardCursorColor(!useCustomColor,cursorColor);
 
     // word characters
-    view->setWordCharacters( info->property<QString>(Profile::WordCharacters) );
+    view->setWordCharacters( profile->property<QString>(Profile::WordCharacters) );
 }
 
-void ViewManager::applyProfileToContainer(ViewContainer* container , const Profile::Ptr info)
+void ViewManager::applyProfileToContainer(ViewContainer* container , const Profile::Ptr profile)
 {
-    int tabBarMode = info->property<int>(Profile::TabBarMode);
-    int tabBarPosition = info->property<int>(Profile::TabBarPosition);
-    bool showNewCloseButtons = info->property<bool>(Profile::ShowNewAndCloseTabButtons);
+    int tabBarMode = profile->property<int>(Profile::TabBarMode);
+    int tabBarPosition = profile->property<int>(Profile::TabBarPosition);
+    bool showNewCloseButtons = profile->property<bool>(Profile::ShowNewAndCloseTabButtons);
 
     if ( tabBarMode == Profile::AlwaysHideTabBar )
         container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
