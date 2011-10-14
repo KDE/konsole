@@ -2724,16 +2724,8 @@ void TerminalDisplay::swapColorTable()
 
 void TerminalDisplay::clearImage()
 {
-  // We initialize _image[_imageSize] too. See makeImage()
-  for (int i = 0; i <= _imageSize; i++)
-  {
-    _image[i].character = ' ';
-    _image[i].foregroundColor = CharacterColor(COLOR_SPACE_DEFAULT,
-                                               DEFAULT_FORE_COLOR);
-    _image[i].backgroundColor = CharacterColor(COLOR_SPACE_DEFAULT,
-                                               DEFAULT_BACK_COLOR);
-    _image[i].rendition = DEFAULT_RENDITION;
-  }
+    for (int i = 0; i <= _imageSize; ++i)
+        _image[i] = Screen::defaultChar;
 }
 
 void TerminalDisplay::calcGeometry()

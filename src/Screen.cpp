@@ -62,7 +62,8 @@ const bool BS_CLEARS = false ;
 #endif
 
 
-Character Screen::defaultChar = Character(' ',
+// TODO: should it be changed as Character::defaultChar ?
+const Character Screen::defaultChar = Character(' ',
         CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR),
         CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR),
         DEFAULT_RENDITION);

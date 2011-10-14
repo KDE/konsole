@@ -574,6 +574,8 @@ public:
         return result;
     }
 
+    static const Character defaultChar;
+
 private: 
 
     //copies a line of text from the screen or history into a stream using a 
@@ -699,7 +701,6 @@ private:
     // last position where we added a character
     int lastPos;
 
-    static Character defaultChar;
 };
 
 }
