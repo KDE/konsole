@@ -1,6 +1,10 @@
 find_package(LibKonq)
 macro_log_feature(LIBKONQ_FOUND "LibKonq" "libkonq is a construction kit for a file manager. It comes from kde-baseapps." "http://www.kde.org" TRUE)
 
+if(LIBKONQ_FOUND)
+  include_directories(${LIBKONQ_INCLUDE_DIR})
+endif()
+
 ### Compile-time features
 macro_optional_find_package(XKB)
 macro_bool_to_01(X11_Xrender_FOUND HAVE_XRENDER)
