@@ -2729,10 +2729,12 @@ void TerminalDisplay::bell(const QString& message)
 
 void TerminalDisplay::swapColorTable()
 {
-    ColorEntry color = _colorTable[1];
-    _colorTable[1]=_colorTable[0];
-    _colorTable[0]= color;
+    // swap the default foreground & backround color
+    ColorEntry color = _colorTable[DEFAULT_BACK_COLOR];
+    _colorTable[DEFAULT_BACK_COLOR]=_colorTable[DEFAULT_FORE_COLOR];
+    _colorTable[DEFAULT_FORE_COLOR]= color;
     _colorsInverted = !_colorsInverted;
+
     update();
 }
 
