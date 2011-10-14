@@ -1609,6 +1609,23 @@ void TerminalDisplay::hideEvent(QHideEvent*)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+void TerminalDisplay::setScrollBarPosition(ScrollBarPosition position)
+{
+    if (_scrollbarLocation == position)
+        return;
+
+    if ( position == ScrollBarHidden )
+        _scrollBar->hide();
+    else
+        _scrollBar->show();
+
+    _topMargin = _leftMargin = 1;
+    _scrollbarLocation = position;
+
+    propagateSize();
+    update();
+}
+
 void TerminalDisplay::scrollBarPositionChanged(int)
 {
   if ( !_screenWindow ) 
@@ -1653,24 +1670,6 @@ void TerminalDisplay::setScroll(int cursor, int slines)
 /*                                  Mouse                                    */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
-
-void TerminalDisplay::setScrollBarPosition(ScrollBarPosition position)
-{
-  if (_scrollbarLocation == position) 
-      return; 
- 
-  if ( position == ScrollBarHidden )
-     _scrollBar->hide();
-  else 
-     _scrollBar->show(); 
-
-  _topMargin = _leftMargin = 1;
-  _scrollbarLocation = position;
-  
-  propagateSize();
-  update();
-}
-
 void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 {
   if ( _possibleTripleClick && (ev->button()==Qt::LeftButton) ) {
