@@ -2301,8 +2301,10 @@ void TerminalDisplay::wheelEvent( QWheelEvent* ev )
   if ( _mouseMarks )
   {
     bool canScroll = _scrollBar->maximum() > 0;
-      if (canScroll)
+    if ( canScroll )
+    {
         _scrollBar->event(ev);
+    }
     else
     {
         // assume that each Up / Down key event will cause the terminal application
