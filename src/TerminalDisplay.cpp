@@ -1217,38 +1217,6 @@ QPoint TerminalDisplay::cursorPosition() const
         return QPoint(0,0);
 }
 
-QRect TerminalDisplay::preeditRect() const
-{
-    const int preeditLength = string_width(_inputMethodData.preeditString);
-
-    if ( preeditLength == 0 )
-        return QRect();
-
-    return QRect(_leftMargin + _fontWidth*cursorPosition().x(),
-                 _topMargin + _fontHeight*cursorPosition().y(),
-                 _fontWidth*preeditLength,
-                 _fontHeight);
-}   
-
-void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRect& rect)
-{
-    if ( _inputMethodData.preeditString.isEmpty() )
-        return;
-
-    const QPoint cursorPos = cursorPosition(); 
-
-    bool invertColors = false;
-    const QColor background = _colorTable[DEFAULT_BACK_COLOR].color;
-    const QColor foreground = _colorTable[DEFAULT_FORE_COLOR].color;
-    const Character* style = &_image[loc(cursorPos.x(),cursorPos.y())];
-
-    drawBackground(painter,rect,background,true);
-    drawCursor(painter,rect,foreground,background,invertColors);
-    drawCharacters(painter,rect,_inputMethodData.preeditString,style,invertColors);
-
-    _inputMethodData.previousPreeditRect = rect; 
-}
-
 FilterChain* TerminalDisplay::filterChain() const
 {
     return _filterChain;
@@ -2522,6 +2490,95 @@ void TerminalDisplay::pasteFromXSelection()
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
+/*                                Input Method                               */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+void TerminalDisplay::inputMethodEvent( QInputMethodEvent* event )
+{
+    if ( !event->commitString().isEmpty() )
+    {
+        QKeyEvent keyEvent(QEvent::KeyPress, 0, Qt::NoModifier,event->commitString());
+        emit keyPressedSignal(&keyEvent);
+    }
+
+    _inputMethodData.preeditString = event->preeditString();
+    update(preeditRect() | _inputMethodData.previousPreeditRect);
+    
+    event->accept();
+}
+
+QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
+{
+    const QPoint cursorPos = cursorPosition();
+    switch ( query ) 
+    {
+        case Qt::ImMicroFocus:
+                return imageToWidget(QRect(cursorPos.x(),cursorPos.y(),1,1));
+            break;
+        case Qt::ImFont:
+                return font();
+            break;
+        case Qt::ImCursorPosition:
+                // return the cursor position within the current line
+                return cursorPos.x();
+            break;
+        case Qt::ImSurroundingText:
+            {
+                // return the text from the current line
+                QString lineText;
+                QTextStream stream(&lineText);
+                PlainTextDecoder decoder;
+                decoder.begin(&stream);
+                decoder.decodeLine(&_image[loc(0,cursorPos.y())],_usedColumns,_lineProperties[cursorPos.y()]);
+                decoder.end();
+                return lineText;
+            }
+            break;
+        case Qt::ImCurrentSelection:
+                return QString();
+            break;
+        default:
+            break;
+    }
+
+    return QVariant();
+}
+
+QRect TerminalDisplay::preeditRect() const
+{
+    const int preeditLength = string_width(_inputMethodData.preeditString);
+
+    if ( preeditLength == 0 )
+        return QRect();
+
+    return QRect(_leftMargin + _fontWidth*cursorPosition().x(),
+                 _topMargin + _fontHeight*cursorPosition().y(),
+                 _fontWidth*preeditLength,
+                 _fontHeight);
+}   
+
+void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRect& rect)
+{
+    if ( _inputMethodData.preeditString.isEmpty() )
+        return;
+
+    const QPoint cursorPos = cursorPosition(); 
+
+    bool invertColors = false;
+    const QColor background = _colorTable[DEFAULT_BACK_COLOR].color;
+    const QColor foreground = _colorTable[DEFAULT_FORE_COLOR].color;
+    const Character* style = &_image[loc(cursorPos.x(),cursorPos.y())];
+
+    drawBackground(painter,rect,background,true);
+    drawCursor(painter,rect,foreground,background,invertColors);
+    drawCharacters(painter,rect,_inputMethodData.preeditString,style,invertColors);
+
+    _inputMethodData.previousPreeditRect = rect; 
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
 /*                                Keyboard                                   */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
@@ -2563,55 +2620,6 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
     event->accept();
 }
 
-void TerminalDisplay::inputMethodEvent( QInputMethodEvent* event )
-{
-    if ( !event->commitString().isEmpty() )
-    {
-        QKeyEvent keyEvent(QEvent::KeyPress, 0, Qt::NoModifier,event->commitString());
-        emit keyPressedSignal(&keyEvent);
-    }
-
-    _inputMethodData.preeditString = event->preeditString();
-    update(preeditRect() | _inputMethodData.previousPreeditRect);
-    
-    event->accept();
-}
-QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
-{
-    const QPoint cursorPos = cursorPosition();
-    switch ( query ) 
-    {
-        case Qt::ImMicroFocus:
-                return imageToWidget(QRect(cursorPos.x(),cursorPos.y(),1,1));
-            break;
-        case Qt::ImFont:
-                return font();
-            break;
-        case Qt::ImCursorPosition:
-                // return the cursor position within the current line
-                return cursorPos.x();
-            break;
-        case Qt::ImSurroundingText:
-            {
-                // return the text from the current line
-                QString lineText;
-                QTextStream stream(&lineText);
-                PlainTextDecoder decoder;
-                decoder.begin(&stream);
-                decoder.decodeLine(&_image[loc(0,cursorPos.y())],_usedColumns,_lineProperties[cursorPos.y()]);
-                decoder.end();
-                return lineText;
-            }
-            break;
-        case Qt::ImCurrentSelection:
-                return QString();
-            break;
-        default:
-            break;
-    }
-
-    return QVariant();
-}
 
 bool TerminalDisplay::handleShortcutOverrideEvent(QKeyEvent* keyEvent)
 {
