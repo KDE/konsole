@@ -1107,8 +1107,6 @@ void SessionController::increaseTextSize()
     QFont font = _view->getVTFont();
     font.setPointSizeF(font.pointSizeF()+1);
     _view->setVTFont(font);
-
-    //TODO - Save this setting as a session default
 }
 
 void SessionController::decreaseTextSize()
@@ -1118,8 +1116,6 @@ void SessionController::decreaseTextSize()
     QFont font = _view->getVTFont();
     font.setPointSizeF( qMax(font.pointSizeF()-1,MinimumFontSize) );
     _view->setVTFont(font);
-
-    //TODO - Save this setting as a session default
 }
 
 void SessionController::monitorActivity(bool monitor)
