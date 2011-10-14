@@ -129,14 +129,14 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 
     _screenWindow = window;
 
-    if ( window )
+    if ( _screenWindow )
     {
 
 // TODO: Determine if this is an issue.
 //#warning "The order here is not specified - does it matter whether updateImage or updateLineProperties comes first?"
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()) );
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
-        window->setWindowLines(_lines);
+        _screenWindow->setWindowLines(_lines);
     }
 }
 
