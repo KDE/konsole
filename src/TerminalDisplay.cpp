@@ -137,6 +137,7 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()) );
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
         _screenWindow->setWindowLines(_lines);
+        _screenWindow->screen()->setCurrentTerminalDisplay(this);
     }
 }
 
@@ -2538,7 +2539,6 @@ void TerminalDisplay::scrollScreenWindow( enum ScreenWindow::RelativeScrollMode 
 
 void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 {
-    _screenWindow->screen()->setCurrentTerminalDisplay(this);
     _actSel=0; // Key stroke implies a screen update, so TerminalDisplay won't
               // know where the current selection is.
 
