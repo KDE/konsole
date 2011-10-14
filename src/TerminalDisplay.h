@@ -53,9 +53,6 @@ class KMenu;
 namespace Konsole
 {
 
-extern unsigned short vt100_graphics[32];
-
-
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
  * to the terminal.

@@ -58,6 +58,28 @@
 
 using namespace Konsole;
 
+/*
+   The VT100 has 32 special graphical characters. The usual vt100 extended
+   xterm fonts have these at 0x00..0x1f.
+
+   QT's iso mapping leaves 0x00..0x7f without any changes. But the graphicals
+   come in here as proper unicode characters.
+
+   We treat non-iso10646 fonts as VT100 extended and do the requiered mapping
+   from unicode to 0x00..0x1f. The remaining translation is then left to the
+   QCodec.
+*/
+
+// assert for i in [0..31] : vt100extended(vt100_graphics[i]) == i.
+
+unsigned short Konsole::vt100_graphics[32] =
+{ // 0/8     1/9    2/10    3/11    4/12    5/13    6/14    7/15
+  0x0020, 0x25C6, 0x2592, 0x2409, 0x240c, 0x240d, 0x240a, 0x00b0,
+  0x00b1, 0x2424, 0x240b, 0x2518, 0x2510, 0x250c, 0x2514, 0x253c,
+  0xF800, 0xF801, 0x2500, 0xF803, 0xF804, 0x251c, 0x2524, 0x2534,
+  0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
+};
+
 Vt102Emulation::Vt102Emulation() 
     : Emulation(),
      _titleUpdateTimer(new QTimer(this))

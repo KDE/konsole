@@ -50,6 +50,8 @@
 namespace Konsole
 {
 
+extern unsigned short vt100_graphics[32];
+
 struct CharCodes
 {
   // coding info
