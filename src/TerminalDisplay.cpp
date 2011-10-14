@@ -3010,16 +3010,16 @@ bool AutoScrollHandler::eventFilter(QObject* watched,QEvent* event)
     Q_UNUSED( watched );
 
     QMouseEvent* mouseEvent = (QMouseEvent*)event;
-    switch (event->type())
+    switch ( event->type() )
     {
         case QEvent::MouseMove:
         {
             bool mouseInWidget = widget()->rect().contains(mouseEvent->pos());
-
-            if (mouseInWidget)
+            if ( mouseInWidget )
             {
                 if (_timerId)
                     killTimer(_timerId);
+
                 _timerId = 0;
             }
             else
@@ -3027,17 +3027,20 @@ bool AutoScrollHandler::eventFilter(QObject* watched,QEvent* event)
                 if (!_timerId && (mouseEvent->buttons() & Qt::LeftButton))
                     _timerId = startTimer(100);
             }
-                break;
+
+            break;
         }
         case QEvent::MouseButtonRelease:
-            if (_timerId && (mouseEvent->buttons() & ~Qt::LeftButton))
+        {
+            if ( _timerId && (mouseEvent->buttons() & ~Qt::LeftButton) )
             {
                 killTimer(_timerId);
                 _timerId = 0;
             }
-        break;
+            break;
+        }
         default:
-        break;
+            break;
     };
 
     return false;
