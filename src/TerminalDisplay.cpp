@@ -1784,20 +1784,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             }
         }
     } else if (ev->button() == Qt::MidButton) {
-        if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier)) {
-            const bool appendEnter = ev->modifiers() & Qt::ControlModifier;
-
-            if ( _middleClickPasteMode == Enum::PasteFromX11Selection ) {
-                pasteFromX11Selection(appendEnter);
-            } else if ( _middleClickPasteMode == Enum::PasteFromClipboard ) {
-                pasteFromClipboard(appendEnter);
-            } else {
-                Q_ASSERT(false);
-            }
-
-        } else {
-            emit mouseSignal(1, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
-        }
+        processMidButtonClick(ev);
     } else if (ev->button() == Qt::RightButton) {
         if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier))
             emit configureRequest(ev->pos());
@@ -2190,8 +2177,35 @@ void TerminalDisplay::updateLineProperties()
     _lineProperties = _screenWindow->getLineProperties();
 }
 
+void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)
+{
+    if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier)) {
+        const bool appendEnter = ev->modifiers() & Qt::ControlModifier;
+
+        if ( _middleClickPasteMode == Enum::PasteFromX11Selection ) {
+            pasteFromX11Selection(appendEnter);
+        } else if ( _middleClickPasteMode == Enum::PasteFromClipboard ) {
+            pasteFromClipboard(appendEnter);
+        } else {
+            Q_ASSERT(false);
+        }
+    } else {
+        int charLine = 0;
+        int charColumn = 0;
+        getCharacterPosition(ev->pos(), charLine, charColumn);
+
+        emit mouseSignal(1, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+    }
+}
+
 void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
 {
+    // Yes, successive middle click can trigger this event
+    if (ev->button() == Qt::MidButton) {
+        processMidButtonClick(ev);
+        return;
+    }
+
     if (ev->button() != Qt::LeftButton) return;
     if (!_screenWindow) return;
 

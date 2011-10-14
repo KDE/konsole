@@ -692,6 +692,8 @@ private:
 
     void doPaste(QString text, bool appendReturn);
 
+    void processMidButtonClick(QMouseEvent* event);
+
     // the window onto the terminal screen which this display
     // is currently showing.
     QPointer<ScreenWindow> _screenWindow;
