@@ -1598,38 +1598,38 @@ void TerminalDisplay::propagateSize()
 
 void TerminalDisplay::updateImageSize()
 {
-  Character* oldimg = _image;
-  int oldlin = _lines;
-  int oldcol = _columns;
+    Character* oldImage = _image;
+    int oldLines = _lines;
+    int oldColumns = _columns;
 
-  makeImage();
-  
-  // copy the old image to reduce flicker
-  int lines = qMin(oldlin,_lines);
-  int columns = qMin(oldcol,_columns);
+    makeImage();
 
-  if (oldimg)
-  {
-    for (int line = 0; line < lines; line++) 
+    if ( oldImage )
     {
-      memcpy((void*)&_image[_columns*line],
-             (void*)&oldimg[oldcol*line],columns*sizeof(Character));
+        // copy the old image to reduce flicker
+        int lines = qMin(oldLines,_lines);
+        int columns = qMin(oldColumns,_columns);
+        for (int line = 0; line < lines; line++) 
+        {
+            memcpy( (void*)&_image[_columns*line],
+                    (void*)&oldImage[oldColumns*line],
+                    columns*sizeof(Character) );
+        }
+        delete[] oldImage;
     }
-    delete[] oldimg;
-  }
 
-  if (_screenWindow)
-      _screenWindow->setWindowLines(_lines);
+    if (_screenWindow)
+        _screenWindow->setWindowLines(_lines);
 
-  _resizing = (oldlin!=_lines) || (oldcol!=_columns);
+    _resizing = (oldLines != _lines) || (oldColumns != _columns);
 
-  if ( _resizing )
-  {
-      showResizeNotification();
-      emit changedContentSizeSignal(_contentHeight, _contentWidth); // expose resizeEvent
-  }
-  
-  _resizing = false;
+    if ( _resizing )
+    {
+        showResizeNotification();
+        emit changedContentSizeSignal(_contentHeight, _contentWidth); // expose resizeEvent
+    }
+
+    _resizing = false;
 }
 
 //showEvent and hideEvent are reimplemented here so that it appears to other classes that the 
