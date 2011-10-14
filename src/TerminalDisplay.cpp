@@ -338,9 +338,9 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   _leftMargin = DEFAULT_LEFT_MARGIN;
 
   // create scroll bar for scrolling output up and down
-  // set the scroll bar's slider to occupy the whole area of the scroll bar initially
   _scrollBar = new QScrollBar(this);
-  setScroll(0,0); 
+  // set the scroll bar's slider to occupy the whole area of the scroll bar initially
+  setScroll(0,0);
   _scrollBar->setCursor( Qt::ArrowCursor );
   connect(_scrollBar, SIGNAL(valueChanged(int)), this, 
                         SLOT(scrollBarPositionChanged(int)));
@@ -352,10 +352,11 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   connect(_blinkCursorTimer, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
 
   KCursor::setAutoHideCursor( this, true );
-  
+
   setUsesMouse(true);
-  setColorTable(base_color_table);
   setMouseTracking(true);
+
+  setColorTable(base_color_table);
 
   // Enable drag and drop support
   setAcceptDrops(true);
