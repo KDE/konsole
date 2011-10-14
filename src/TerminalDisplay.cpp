@@ -2676,7 +2676,7 @@ bool TerminalDisplay::event(QEvent* event)
 
 void TerminalDisplay::setBellMode(int mode)
 {
-  _bellMode=mode;
+    _bellMode=mode;
 }
 
 void TerminalDisplay::enableBell()
@@ -2715,11 +2715,11 @@ void TerminalDisplay::bell(const QString& message)
 
 void TerminalDisplay::swapColorTable()
 {
-  ColorEntry color = _colorTable[1];
-  _colorTable[1]=_colorTable[0];
-  _colorTable[0]= color;
-  _colorsInverted = !_colorsInverted;
-  update();
+    ColorEntry color = _colorTable[1];
+    _colorTable[1]=_colorTable[0];
+    _colorTable[0]= color;
+    _colorsInverted = !_colorsInverted;
+    update();
 }
 
 void TerminalDisplay::clearImage()
@@ -2822,7 +2822,7 @@ void TerminalDisplay::setFixedSize(int cols, int lins)
 
 QSize TerminalDisplay::sizeHint() const
 {
-  return _size;
+    return _size;
 }
 
 
@@ -2908,25 +2908,25 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
 void TerminalDisplay::dropMenuPasteTriggered()
 {
-  if(sender())
-  {
-    const QAction* action = dynamic_cast<const QAction*>(sender());
-    if(action)
+    if ( sender() )
     {
-      emit sendStringToEmu(action->data().toString().toLocal8Bit());
+        const QAction* action = dynamic_cast<const QAction*>(sender());
+        if ( action )
+        {
+            emit sendStringToEmu(action->data().toString().toLocal8Bit());
+        }
     }
-  }
 }
 
 void TerminalDisplay::doDrag()
 {
-  _dragInfo.state = diDragging;
-  _dragInfo.dragObject = new QDrag(this);
-  QMimeData *mimeData = new QMimeData;
-  mimeData->setText(QApplication::clipboard()->text(QClipboard::Selection));
-  _dragInfo.dragObject->setMimeData(mimeData);
-  _dragInfo.dragObject->exec(Qt::CopyAction);
-  // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
+    _dragInfo.state = diDragging;
+    _dragInfo.dragObject = new QDrag(this);
+    QMimeData* mimeData = new QMimeData;
+    mimeData->setText(QApplication::clipboard()->text(QClipboard::Selection));
+    _dragInfo.dragObject->setMimeData(mimeData);
+    _dragInfo.dragObject->exec(Qt::CopyAction);
+    // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
 }
 
 void TerminalDisplay::outputSuspended(bool suspended)
@@ -2971,18 +2971,18 @@ void TerminalDisplay::outputSuspended(bool suspended)
 
 uint TerminalDisplay::lineSpacing() const
 {
-  return _lineSpacing;
+    return _lineSpacing;
 }
 
 void TerminalDisplay::setLineSpacing(uint i)
 {
-  _lineSpacing = i;
-  setVTFont(font()); // Trigger an update.
+    _lineSpacing = i;
+    setVTFont(font()); // Trigger an update.
 }
 
 void TerminalDisplay::setSessionController(SessionController* controller)
 {
-  _sessionController = controller;
+    _sessionController = controller;
 }
 
 AutoScrollHandler::AutoScrollHandler(QWidget* parent)
