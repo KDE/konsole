@@ -271,6 +271,17 @@ void TerminalDisplay::setFont(const QFont &)
   // ignore font change request if not coming from konsole itself
 }
 
+uint TerminalDisplay::lineSpacing() const
+{
+    return _lineSpacing;
+}
+
+void TerminalDisplay::setLineSpacing(uint i)
+{
+    _lineSpacing = i;
+    setVTFont(font()); // Trigger an update.
+}
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                         Constructor / Destructor                          */
@@ -2983,17 +2994,6 @@ void TerminalDisplay::outputSuspended(bool suspended)
     }
 
     _outputSuspendedLabel->setVisible(suspended);
-}
-
-uint TerminalDisplay::lineSpacing() const
-{
-    return _lineSpacing;
-}
-
-void TerminalDisplay::setLineSpacing(uint i)
-{
-    _lineSpacing = i;
-    setVTFont(font()); // Trigger an update.
 }
 
 void TerminalDisplay::setSessionController(SessionController* controller)
