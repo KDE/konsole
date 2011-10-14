@@ -1691,6 +1691,12 @@ void TerminalDisplay::setScroll(int cursor, int slines)
   connect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
 }
 
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                                  Mouse                                    */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
 void TerminalDisplay::setScrollBarPosition(ScrollBarPosition position)
 {
   if (_scrollbarLocation == position) 
