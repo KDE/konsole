@@ -142,17 +142,18 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 
 const ColorEntry* TerminalDisplay::colorTable() const
 {
-  return _colorTable;
+    return _colorTable;
 }
 void TerminalDisplay::setBackgroundColor(const QColor& color)
 {
     _colorTable[DEFAULT_BACK_COLOR].color = color;
-    QPalette p = palette();
-      p.setColor( backgroundRole(), color ); 
-      setPalette( p );
 
-      // Avoid propagating the palette change to the scroll bar 
-      _scrollBar->setPalette( QApplication::palette() );  
+    QPalette p = palette();
+    p.setColor( backgroundRole(), color );
+    setPalette( p );
+
+    // Avoid propagating the palette change to the scroll bar
+    _scrollBar->setPalette( QApplication::palette() );
 
     update();
 }
@@ -164,10 +165,10 @@ void TerminalDisplay::setForegroundColor(const QColor& color)
 }
 void TerminalDisplay::setColorTable(const ColorEntry table[])
 {
-  for (int i = 0; i < TABLE_COLORS; i++)
-      _colorTable[i] = table[i];
+    for (int i = 0; i < TABLE_COLORS; i++)
+        _colorTable[i] = table[i];
 
-  setBackgroundColor(_colorTable[DEFAULT_BACK_COLOR].color);
+    setBackgroundColor(_colorTable[DEFAULT_BACK_COLOR].color);
 }
 
 /* ------------------------------------------------------------------------- */
