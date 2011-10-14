@@ -47,7 +47,7 @@
 <legalnotice>&FDLNotice;</legalnotice>
 
 <date>2011-10-05</date>
-<releaseinfo>2.7.1</releaseinfo>
+<releaseinfo>2.7.1 (&kde; 4.8)</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -244,11 +244,11 @@ is pressed:
 <guimenuitem>Copy</guimenuitem>,
 <guimenuitem>Paste</guimenuitem>,
 <guimenuitem>Open File Manager</guimenuitem>,
-<guimenuitem>Set Encoding</guimenuitem>
+<guimenuitem>Set Encoding</guimenuitem>,
 <guimenuitem>Clear Scrollback</guimenuitem>,
 <guimenuitem>Configure Scrollback...</guimenuitem>,
 <guimenuitem>Show Menu Bar</guimenuitem>,
-<guimenuitem>Change Profile</guimenuitem>,
+<guimenuitem>Switch Profile</guimenuitem>,
 <guimenuitem>Configure Current Profile...</guimenuitem>,
 and <guimenuitem>Close Tab</guimenuitem>
 </para>
@@ -368,6 +368,10 @@ tab open.  This dialog can be disabled by clicking on the <guibutton>Do not ask 
 <listitem><para><action>Pastes text from the clipboard at the cursor
 location</action></para></listitem>
 </varlistentry>
+
+<!-- missing
+Select All 
+-->
 
 <varlistentry>
 <term><menuchoice>
