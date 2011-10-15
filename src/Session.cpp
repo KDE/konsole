@@ -763,6 +763,18 @@ bool Session::closeInNormalWay()
     _autoClose    = true;
     _closePerUser = true;
 
+    // for the possible case where following events happen in sequence:
+    //
+    // 1). the terminal process crashes
+    // 2). the tab stays open and displays warning message
+    // 3). the user closes the tab explicitly
+    //
+    if ( !isRunning() )
+    {
+        emit finished();
+        return true;
+    }
+
     if ( kill(SIGHUP) )
     {
         return true;
