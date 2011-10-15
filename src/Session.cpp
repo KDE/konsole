@@ -812,31 +812,44 @@ Session::~Session()
 
 void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    if (!_autoClose)
+    if ( !_autoClose )
     {
         _userTitle = i18nc("@info:shell This session is done", "Finished");
         emit titleChanged();
         return;
     }
 
-    QString message;
-    if (!_closePerUser && exitCode != 0)
+    if ( _closePerUser )
     {
-        if (exitStatus == QProcess::NormalExit)
-            message = i18n("Program '%1' exited with status %2.", _program, exitCode);
-        else
+        emit finished();
+        return;
+    }
+
+    QString message;
+
+    if ( exitCode != 0)
+    {
+        if (exitStatus != QProcess::NormalExit)
             message = i18n("Program '%1' crashed.", _program);
+        else
+            message = i18n("Program '%1' exited with status %2.", _program, exitCode);
 
         //FIXME: See comments in Session::monitorTimerDone()
         KNotification::event("Finished", message , QPixmap(),
-                QApplication::activeWindow(),
-                KNotification::CloseWhenWidgetActivated);
+                            QApplication::activeWindow(),
+                            KNotification::CloseWhenWidgetActivated);
     }
 
-    if ( !_closePerUser && exitStatus != QProcess::NormalExit )
+    if ( exitStatus != QProcess::NormalExit )
+    {
+        // this seeming duplicated line is for the case when exitCode is 0
+        message = i18n("Program '%1' crashed.", _program);
         terminalWarning(message);
+    }
     else
+    {
         emit finished();
+    }
 }
 
 Emulation* Session::emulation() const
