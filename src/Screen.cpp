@@ -868,7 +868,7 @@ void Screen::clearImage(int loca, int loce, char c)
 
     //if the character being used to clear the area is the same as the
     //default character, the affected lines can simply be shrunk.
-    bool isDefaultCh = (clearCh == Character());
+    bool isDefaultCh = ( clearCh == Screen::defaultChar );
 
     for (int y=topLine;y<=bottomLine;y++)
     {
