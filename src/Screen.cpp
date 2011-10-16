@@ -645,13 +645,18 @@ void Screen::displayCharacter(unsigned short c)
         int charToCombineWithY = -1;
         if (cuX == 0)
         {
-            if (cuY > 0)
+            // We are at the beginning of a line, check
+            // if previous line has a character at the end we can combine with
+            if (cuY > 0 && columns == screenLines[cuY - 1].size())
             {
                 charToCombineWithX = columns - 1;
                 charToCombineWithY = cuY - 1;
             }
             else
             {
+                // There is nothing to combine with
+                // TODO Seems gnome-terminal shows the characters alone
+                // might be worth investigating how to do that
                 return;
             }
         }
