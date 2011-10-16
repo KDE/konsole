@@ -2414,8 +2414,8 @@ void TerminalDisplay::setWordCharacters(const QString& wc)
 }
 
 // FIXME: the actual value of _mouseMarks is the opposite of its semantic.
-// when using programms not interested with mouse(shell, less), it is true
-// when using programss interested with mouse(vim,mc), it is false
+// When using programs not interested with mouse(shell, less), it is true.
+// When using programs interested with mouse(vim,mc), it is false.
 void TerminalDisplay::setUsesMouse(bool on)
 {
   _mouseMarks = on;
