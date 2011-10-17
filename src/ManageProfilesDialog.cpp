@@ -63,7 +63,10 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     _ui->sessionTable->setEditTriggers(_ui->sessionTable->editTriggers() | QAbstractItemView::SelectedClicked);
     _ui->sessionTable->setShowGrid(false);
 
-    // update table and listen for changes to the session types
+    // populate the table with profiles
+    populateTable();
+
+    // listen for changes to profiles
     connect( SessionManager::instance() , SIGNAL(profileAdded(Profile::Ptr)) , this,
              SLOT(addItems(Profile::Ptr)) );
     connect( SessionManager::instance() , SIGNAL(profileRemoved(Profile::Ptr)) , this,
@@ -73,8 +76,7 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     connect( SessionManager::instance() , 
                 SIGNAL(favoriteStatusChanged(Profile::Ptr,bool)) , this ,
                 SLOT(updateFavoriteStatus(Profile::Ptr,bool)) );
-    populateTable();
-    
+
     // resize the session table to the full width of the table
     _ui->sessionTable->horizontalHeader()->setHighlightSections(false);
     _ui->sessionTable->resizeColumnsToContents();
