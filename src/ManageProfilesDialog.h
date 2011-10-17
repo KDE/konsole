@@ -80,7 +80,7 @@ protected:
 private slots:
     void deleteSelected();
     void setSelectedAsDefault();
-    void newType();
+    void createProfile();
     void editSelected();
     void moveUpSelected();
     void moveDownSelected();

@@ -88,9 +88,9 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
                 _ui->sessionTable->columnWidth(ShortcutColumn)+100);
 
     // setup buttons
-    connect( _ui->newSessionButton , SIGNAL(clicked()) , this , SLOT(newType()) );
-    connect( _ui->editSessionButton , SIGNAL(clicked()) , this , SLOT(editSelected()) );
-    connect( _ui->deleteSessionButton , SIGNAL(clicked()) , this , SLOT(deleteSelected()) );
+    connect( _ui->newProfileButton , SIGNAL(clicked()) , this , SLOT(createProfile()) );
+    connect( _ui->editProfileButton , SIGNAL(clicked()) , this , SLOT(editSelected()) );
+    connect( _ui->deleteProfileButton , SIGNAL(clicked()) , this , SLOT(deleteSelected()) );
     connect( _ui->setAsDefaultButton , SIGNAL(clicked()) , this , SLOT(setSelectedAsDefault()) );
 }
 
@@ -298,10 +298,10 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
                              (selectedRows == 1 && isProfileDeletable(currentProfile()));
     //const int rowIndex = _ui->sessionTable->currentIndex().row();
 
-    _ui->newSessionButton->setEnabled(selectedRows < 2);
-    _ui->editSessionButton->setEnabled(selectedRows > 0);
+    _ui->newProfileButton->setEnabled(selectedRows < 2);
+    _ui->editProfileButton->setEnabled(selectedRows > 0);
     // do not allow the default session type to be removed
-    _ui->deleteSessionButton->setEnabled(isDeletable && isNotDefault);
+    _ui->deleteProfileButton->setEnabled(isDeletable && isNotDefault);
     _ui->setAsDefaultButton->setEnabled(isNotDefault && (selectedRows < 2)); 
 
     // TODO handle multiple moves
@@ -322,7 +322,7 @@ void ManageProfilesDialog::setSelectedAsDefault()
 {
     SessionManager::instance()->setDefaultProfile(currentProfile());
     // do not allow the new default session type to be removed
-    _ui->deleteSessionButton->setEnabled(false);
+    _ui->deleteProfileButton->setEnabled(false);
     _ui->setAsDefaultButton->setEnabled(false);
 
     // update font of new default item
@@ -349,7 +349,7 @@ void ManageProfilesDialog::moveDownSelected()
     _ui->sessionTable->selectRow(rowIndex+1);
 }
 
-void ManageProfilesDialog::newType()
+void ManageProfilesDialog::createProfile()
 {
     EditProfileDialog dialog(this);
  

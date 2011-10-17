@@ -15,7 +15,7 @@
     <number>0</number>
    </property>
    <item row="0" column="1">
-    <widget class="QPushButton" name="newSessionButton">
+    <widget class="QPushButton" name="newProfileButton">
      <property name="toolTip">
       <string>Create a new profile based upon the selected profile</string>
      </property>
@@ -25,7 +25,7 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="QPushButton" name="editSessionButton">
+    <widget class="QPushButton" name="editProfileButton">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -38,7 +38,7 @@
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QPushButton" name="deleteSessionButton">
+    <widget class="QPushButton" name="deleteProfileButton">
      <property name="enabled">
       <bool>false</bool>
      </property>
