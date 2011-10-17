@@ -586,8 +586,8 @@ void MainWindow::showEvent(QShowEvent *event)
 
 bool MainWindow::focusNextPrevChild( bool )
 {
-    // In stand-alone konsole, always disbale implicit focus switching
-    // throuht 'Tab' and 'Shift+Tab'
+    // In stand-alone konsole, always disable implicit focus switching
+    // through 'Tab' and 'Shift+Tab'
     //
     // Kpart is another different story
     return false;
