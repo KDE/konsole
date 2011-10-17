@@ -1533,7 +1533,7 @@ void TerminalDisplay::blinkCursorEvent()
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/*                                  Resizing                                 */
+/*                          Geometry & Resizing                              */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
@@ -1590,6 +1590,109 @@ void TerminalDisplay::updateImageSize()
     }
 
     _resizing = false;
+}
+
+void TerminalDisplay::makeImage()
+{
+    _wallpaper->load();
+
+    calcGeometry();
+
+    // confirm that array will be of non-zero size, since the painting code 
+    // assumes a non-zero array length
+    Q_ASSERT( _lines > 0 && _columns > 0 );
+    Q_ASSERT( _usedLines <= _lines && _usedColumns <= _columns );
+
+    _imageSize=_lines*_columns;
+
+    // We over-commit one character so that we can be more relaxed in dealing with
+    // certain boundary conditions: _image[_imageSize] is a valid but unused position
+    _image = new Character[_imageSize+1];
+
+    clearImage();
+}
+
+void TerminalDisplay::clearImage()
+{
+    for (int i = 0; i <= _imageSize; ++i)
+        _image[i] = Screen::defaultChar;
+}
+
+void TerminalDisplay::calcGeometry()
+{
+    _scrollBar->resize(_scrollBar->sizeHint().width(), contentsRect().height());
+    switch (_scrollbarLocation)
+    {
+        case ScrollBarHidden :
+            _leftMargin = DEFAULT_LEFT_MARGIN;
+            _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN;
+            break;
+        case ScrollBarLeft :
+            _leftMargin = DEFAULT_LEFT_MARGIN + _scrollBar->width();
+            _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN - _scrollBar->width();
+            _scrollBar->move(contentsRect().topLeft());
+            break;
+        case ScrollBarRight:
+            _leftMargin = DEFAULT_LEFT_MARGIN;
+            _contentWidth = contentsRect().width()  - 2 * DEFAULT_LEFT_MARGIN - _scrollBar->width();
+            _scrollBar->move(contentsRect().topRight() - QPoint(_scrollBar->width()-1,0));
+            break;
+    }
+
+    _topMargin = DEFAULT_TOP_MARGIN;
+    _contentHeight = contentsRect().height() - 2 * DEFAULT_TOP_MARGIN + /* mysterious */ 1;
+
+    if (!_isFixedSize)
+    {
+        // ensure that display is always at least one column wide
+        _columns = qMax(1,_contentWidth / _fontWidth);
+        _usedColumns = qMin(_usedColumns,_columns);
+
+        // ensure that display is always at least one line high
+        _lines = qMax(1,_contentHeight / _fontHeight);
+        _usedLines = qMin(_usedLines,_lines);
+    }
+}
+
+// calculate the needed size, this must be synced with calcGeometry()
+void TerminalDisplay::setSize(int columns, int lines)
+{
+    int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->sizeHint().width();
+    int horizontalMargin = 2 * DEFAULT_LEFT_MARGIN;
+    int verticalMargin = 2 * DEFAULT_TOP_MARGIN;
+
+    QSize newSize = QSize( horizontalMargin + scrollBarWidth + (columns * _fontWidth)  ,
+                           verticalMargin + (lines * _fontHeight)   );
+
+    if ( newSize != size() )
+    {
+        _size = newSize;
+        updateGeometry();
+    }
+}
+
+void TerminalDisplay::setFixedSize(int cols, int lins)
+{
+    _isFixedSize = true;
+
+    //ensure that display is at least one line by one column in size
+    _columns = qMax(1,cols);
+    _lines = qMax(1,lins);
+    _usedColumns = qMin(_usedColumns,_columns);
+    _usedLines = qMin(_usedLines,_lines);
+
+    if (_image)
+    {
+        delete[] _image;
+        makeImage();
+    }
+    setSize(cols, lins);
+    QWidget::setFixedSize(_size);
+}
+
+QSize TerminalDisplay::sizeHint() const
+{
+    return _size;
 }
 
 //showEvent and hideEvent are reimplemented here so that it appears to other classes that the 
@@ -2728,109 +2831,6 @@ void TerminalDisplay::swapColorTable()
     _colorsInverted = !_colorsInverted;
 
     update();
-}
-
-void TerminalDisplay::clearImage()
-{
-    for (int i = 0; i <= _imageSize; ++i)
-        _image[i] = Screen::defaultChar;
-}
-
-void TerminalDisplay::calcGeometry()
-{
-  _scrollBar->resize(_scrollBar->sizeHint().width(), contentsRect().height());
-  switch(_scrollbarLocation)
-  {
-    case ScrollBarHidden :
-     _leftMargin = DEFAULT_LEFT_MARGIN;
-     _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN;
-     break;
-    case ScrollBarLeft :
-     _leftMargin = DEFAULT_LEFT_MARGIN + _scrollBar->width();
-     _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN - _scrollBar->width();
-     _scrollBar->move(contentsRect().topLeft());
-     break;
-    case ScrollBarRight:
-     _leftMargin = DEFAULT_LEFT_MARGIN;
-     _contentWidth = contentsRect().width()  - 2 * DEFAULT_LEFT_MARGIN - _scrollBar->width();
-     _scrollBar->move(contentsRect().topRight() - QPoint(_scrollBar->width()-1,0));
-     break;
-  }
-
-  _topMargin = DEFAULT_TOP_MARGIN;
-  _contentHeight = contentsRect().height() - 2 * DEFAULT_TOP_MARGIN + /* mysterious */ 1;
-   
-  if (!_isFixedSize)
-  {
-     // ensure that display is always at least one column wide
-     _columns = qMax(1,_contentWidth / _fontWidth);
-     _usedColumns = qMin(_usedColumns,_columns);
-     
-     // ensure that display is always at least one line high
-     _lines = qMax(1,_contentHeight / _fontHeight);
-     _usedLines = qMin(_usedLines,_lines);
-  }
-}
-
-void TerminalDisplay::makeImage()
-{
-  _wallpaper->load();
-
-  calcGeometry();
-
-  // confirm that array will be of non-zero size, since the painting code 
-  // assumes a non-zero array length
-  Q_ASSERT( _lines > 0 && _columns > 0 );
-  Q_ASSERT( _usedLines <= _lines && _usedColumns <= _columns );
-
-  _imageSize=_lines*_columns;
-  
-  // We over-commit one character so that we can be more relaxed in dealing with
-  // certain boundary conditions: _image[_imageSize] is a valid but unused position
-  _image = new Character[_imageSize+1];
-
-  clearImage();
-}
-
-// calculate the needed size, this must be synced with calcGeometry()
-void TerminalDisplay::setSize(int columns, int lines)
-{
-  int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->sizeHint().width();
-  int horizontalMargin = 2 * DEFAULT_LEFT_MARGIN;
-  int verticalMargin = 2 * DEFAULT_TOP_MARGIN;
-
-  QSize newSize = QSize( horizontalMargin + scrollBarWidth + (columns * _fontWidth)  ,
-                 verticalMargin + (lines * _fontHeight)   );
-
-  if ( newSize != size() )
-  {
-    _size = newSize;
-    updateGeometry();
-  }
-}
-
-void TerminalDisplay::setFixedSize(int cols, int lins)
-{
-  _isFixedSize = true;
-  
-  //ensure that display is at least one line by one column in size
-  _columns = qMax(1,cols);
-  _lines = qMax(1,lins);
-  _usedColumns = qMin(_usedColumns,_columns);
-  _usedLines = qMin(_usedLines,_lines);
-
-  if (_image)
-  {
-     delete[] _image;
-     makeImage();
-  }
-  setSize(cols, lins);
-  QWidget::setFixedSize(_size);
-}
-
-QSize TerminalDisplay::sizeHint() const
-{
-    return _size;
 }
 
 
