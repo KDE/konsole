@@ -111,7 +111,7 @@ private:
     // updates the profile table to be in sync with the 
     // session manager
     void populateTable();
-    int rowForProfile(const Profile::Ptr info) const;
+    int rowForProfile(const Profile::Ptr profile) const;
 
     Ui::ManageProfilesDialog* _ui;
     QStandardItemModel* _sessionModel;

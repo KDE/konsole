@@ -158,29 +158,29 @@ void ManageProfilesDialog::setMenuOrder(void)
 */
 }
 
-int ManageProfilesDialog::rowForProfile(const Profile::Ptr info) const
+int ManageProfilesDialog::rowForProfile(const Profile::Ptr profile) const
 {
     for (int i=0;i<_sessionModel->rowCount();i++)
     {
         if (_sessionModel->item(i,ProfileNameColumn)->data(ProfileKeyRole)
-            .value<Profile::Ptr>() == info)
+            .value<Profile::Ptr>() == profile)
         {
             return i;
         }
     }
     return -1;
 }
-void ManageProfilesDialog::removeItems(const Profile::Ptr info)
+void ManageProfilesDialog::removeItems(const Profile::Ptr profile)
 {
-    int row = rowForProfile(info);
+    int row = rowForProfile(profile);
     if (row < 0)
         return;
 
     _sessionModel->removeRow(row);
 }
-void ManageProfilesDialog::updateItems(const Profile::Ptr info)
+void ManageProfilesDialog::updateItems(const Profile::Ptr profile)
 {
-    int row = rowForProfile(info);
+    int row = rowForProfile(profile);
     if (row < 0)
         return;
 
@@ -189,28 +189,28 @@ void ManageProfilesDialog::updateItems(const Profile::Ptr info)
     items << _sessionModel->item(row,FavoriteStatusColumn);
     items << _sessionModel->item(row,ShortcutColumn);
 
-    updateItemsForProfile(info,items);
+    updateItemsForProfile(profile,items);
 }
-void ManageProfilesDialog::updateItemsForProfile(const Profile::Ptr info, QList<QStandardItem*>& items) const
+void ManageProfilesDialog::updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem*>& items) const
 {
     // Profile Name
-    items[ProfileNameColumn]->setText(info->name());
-    if ( !info->icon().isEmpty() )
-       items[ProfileNameColumn]->setIcon( KIcon(info->icon()) );
-    items[ProfileNameColumn]->setData(QVariant::fromValue(info),ProfileKeyRole);
+    items[ProfileNameColumn]->setText(profile->name());
+    if ( !profile->icon().isEmpty() )
+       items[ProfileNameColumn]->setIcon( KIcon(profile->icon()) );
+    items[ProfileNameColumn]->setData(QVariant::fromValue(profile),ProfileKeyRole);
 
     // Favorite Status
-    const bool isFavorite = SessionManager::instance()->findFavorites().contains(info);
+    const bool isFavorite = SessionManager::instance()->findFavorites().contains(profile);
     if ( isFavorite )
        items[FavoriteStatusColumn]->setData(KIcon("dialog-ok-apply"),Qt::DecorationRole);
     else
        items[FavoriteStatusColumn]->setData(KIcon(),Qt::DecorationRole);
-    items[FavoriteStatusColumn]->setData(QVariant::fromValue(info),ProfileKeyRole);
+    items[FavoriteStatusColumn]->setData(QVariant::fromValue(profile),ProfileKeyRole);
 
     // Shortcut
-    QString shortcut = SessionManager::instance()->shortcut(info).toString();
+    QString shortcut = SessionManager::instance()->shortcut(profile).toString();
     items[ShortcutColumn]->setText(shortcut);
-    items[ShortcutColumn]->setData(QVariant::fromValue(info),ShortcutRole);
+    items[ShortcutColumn]->setData(QVariant::fromValue(profile),ShortcutRole);
 }
 void ManageProfilesDialog::addItems(const Profile::Ptr profile) 
 {
@@ -244,9 +244,9 @@ void ManageProfilesDialog::populateTable()
     QList<Profile::Ptr> profiles = SessionManager::instance()->loadedProfiles();
     SessionManager::instance()->sortProfiles(profiles);
 
-    foreach(const Profile::Ptr &info, profiles)
+    foreach(const Profile::Ptr &profile, profiles)
     {
-        addItems(info);
+        addItems(profile);
     }
     updateDefaultItem();
 
