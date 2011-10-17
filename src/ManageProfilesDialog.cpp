@@ -229,16 +229,17 @@ void ManageProfilesDialog::populateTable()
     Q_ASSERT(!_ui->sessionTable->model());
     
     _ui->sessionTable->setModel(_sessionModel);
-    // ensure profiles list is complete
-    // this may be expensive, but will only be done the first time
-    // that the dialog is shown. 
-    SessionManager::instance()->loadAllProfiles();
 
     _sessionModel->clear();
     // setup session table
     _sessionModel->setHorizontalHeaderLabels( QStringList() << i18nc("@title:column Profile label", "Name")
                                                             << i18nc("@title:column Display profile in file menu", "Show in Menu") 
                                                             << i18nc("@title:column Profile shortcut text", "Shortcut") );
+
+    // ensure profiles list is complete
+    // this may be expensive, but will only be done the first time
+    // that the dialog is shown.
+    SessionManager::instance()->loadAllProfiles();
 
     QList<Profile::Ptr> profiles = SessionManager::instance()->loadedProfiles();
     SessionManager::instance()->sortProfiles(profiles);
