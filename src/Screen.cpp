@@ -68,8 +68,6 @@ const Character Screen::defaultChar = Character(' ',
         CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR),
         DEFAULT_RENDITION);
 
-//#define REVERSE_WRAPPED_LINES  // for wrapped line debug
-
     Screen::Screen(int l, int c)
 : lines(l),
     columns(c),
