@@ -61,8 +61,6 @@ const bool BS_CLEARS = false ;
 #define loc(X,Y) ((Y)*columns+(X))
 #endif
 
-
-// TODO: should it be changed as Character::defaultChar ?
 const Character Screen::defaultChar = Character(' ',
         CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR),
         CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR),
@@ -91,9 +89,6 @@ Screen::Screen(int l, int c):
     clearSelection();
     reset();
 }
-
-/*! Destructor
-*/
 
 Screen::~Screen()
 {
