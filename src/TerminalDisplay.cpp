@@ -379,8 +379,6 @@ TerminalDisplay::~TerminalDisplay()
     disconnect(_blinkTextTimer);
     disconnect(_blinkCursorTimer);
 
-    qApp->removeEventFilter( this );
-
     delete[] _image;
 
     delete _gridLayout;
