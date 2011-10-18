@@ -252,7 +252,7 @@ void TerminalDisplay::setVTFont(const QFont& f)
 
 void TerminalDisplay::setFont(const QFont &)
 {
-  // ignore font change request if not coming from konsole itself
+    // ignore font change request if not coming from konsole itself
 }
 
 uint TerminalDisplay::lineSpacing() const
@@ -376,15 +376,16 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 
 TerminalDisplay::~TerminalDisplay()
 {
-  disconnect(_blinkTextTimer);
-  disconnect(_blinkCursorTimer);
-  qApp->removeEventFilter( this );
-  
-  delete[] _image;
+    disconnect(_blinkTextTimer);
+    disconnect(_blinkCursorTimer);
 
-  delete _gridLayout;
-  delete _outputSuspendedLabel;
-  delete _filterChain;
+    qApp->removeEventFilter( this );
+
+    delete[] _image;
+
+    delete _gridLayout;
+    delete _outputSuspendedLabel;
+    delete _filterChain;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -575,7 +576,7 @@ void TerminalDisplay::setOpacity(qreal opacity)
 
 void TerminalDisplay::setWallpaper(ColorSchemeWallpaper::Ptr p)
 {
-  _wallpaper = p;
+    _wallpaper = p;
 }
 
 void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const QColor& backgroundColor, bool useOpacitySetting )
@@ -1181,9 +1182,8 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
 void TerminalDisplay::focusInEvent(QFocusEvent*)
 {
     if (_allowBlinkingCursor)
-    {
         _blinkCursorTimer->start();
-    }
+
     updateCursor();
 
     if (_hasTextBlinker)
@@ -1501,14 +1501,14 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
 
 void TerminalDisplay::blinkTextEvent()
 {
-  if (!_allowBlinkingText) return;
+    if (!_allowBlinkingText)
+        return;
 
-  _textBlinking = !_textBlinking;
+    _textBlinking = !_textBlinking;
 
-  //TODO:  Optimize to only repaint the areas of the widget 
-  // where there is blinking text
-  // rather than repainting the whole widget.
-  update();
+    // TODO: Optimize to only repaint the areas of the widget where there is
+    // blinking text rather than repainting the whole widget.
+    update();
 }
 
 QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
@@ -1524,14 +1524,14 @@ QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
 
 void TerminalDisplay::updateCursor()
 {
-  QRect cursorRect = imageToWidget( QRect(cursorPosition(),QSize(1,1)) ); 
-  update(cursorRect);
+    QRect cursorRect = imageToWidget( QRect(cursorPosition(),QSize(1,1)) ); 
+    update(cursorRect);
 }
 
 void TerminalDisplay::blinkCursorEvent()
 {
-  _cursorBlinking = !_cursorBlinking;
-  updateCursor();
+    _cursorBlinking = !_cursorBlinking;
+    updateCursor();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1542,7 +1542,7 @@ void TerminalDisplay::blinkCursorEvent()
 
 void TerminalDisplay::resizeEvent(QResizeEvent*)
 {
-  updateImageSize();
+    updateImageSize();
 }
 
 void TerminalDisplay::propagateSize()
@@ -2415,7 +2415,7 @@ void TerminalDisplay::wheelEvent( QWheelEvent* ev )
 
 void TerminalDisplay::tripleClickTimeout()
 {
-  _possibleTripleClick=false;
+    _possibleTripleClick = false;
 }
 
 void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
@@ -2478,7 +2478,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 
 bool TerminalDisplay::focusNextPrevChild( bool next )
 {
-    // for'Tab', always disable focus switching among widgets
+    // for 'Tab', always disable focus switching among widgets
     // for 'Shift+Tab', leave the decision to higher level
     if (next)
         return false;
@@ -2527,8 +2527,8 @@ void TerminalDisplay::setWordCharacters(const QString& wc)
 // When using programs interested with mouse(vim,mc), it is false.
 void TerminalDisplay::setUsesMouse(bool on)
 {
-  _mouseMarks = on;
-  setCursor( _mouseMarks ? Qt::IBeamCursor : Qt::ArrowCursor );
+    _mouseMarks = on;
+    setCursor( _mouseMarks ? Qt::IBeamCursor : Qt::ArrowCursor );
 }
 bool TerminalDisplay::usesMouse() const
 {
@@ -2602,14 +2602,14 @@ void TerminalDisplay::inputMethodEvent( QInputMethodEvent* event )
 
     _inputMethodData.preeditString = event->preeditString();
     update(preeditRect() | _inputMethodData.previousPreeditRect);
-    
+
     event->accept();
 }
 
 QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
 {
     const QPoint cursorPos = cursorPosition();
-    switch ( query ) 
+    switch ( query )
     {
         case Qt::ImMicroFocus:
                 return imageToWidget(QRect(cursorPos.x(),cursorPos.y(),1,1));
