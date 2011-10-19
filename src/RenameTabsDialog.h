@@ -26,8 +26,6 @@
 // KDE
 #include <KDialog>
 
-#include "TabTitleFormatAction.h"
-
 namespace Ui
 {
     class RenameTabsDialog;

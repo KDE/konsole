@@ -21,6 +21,7 @@
 #include "RenameTabsDialog.h"
 
 // Konsole
+#include "TabTitleFormatAction.h"
 #include "ui_RenameTabsDialog.h"
 
 using namespace Konsole;
