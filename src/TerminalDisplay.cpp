@@ -2818,10 +2818,15 @@ void TerminalDisplay::bell(const QString& message)
     } 
     else if (_bellMode==VisualBell) 
     {
-        swapColorTable();
-        QTimer::singleShot(200,this,SLOT(swapColorTable()));
+        visualBell();
     }
   }
+}
+
+void TerminalDisplay::visualBell( )
+{
+    swapColorTable();
+    QTimer::singleShot(200,this,SLOT(swapColorTable()));
 }
 
 void TerminalDisplay::swapColorTable()

@@ -341,6 +341,9 @@ public:
         NoBell=3 
     };
 
+    /** Play a visual bell for prompt or warning. */
+    void visualBell();
+
     /** 
      * Reimplemented.  Has no effect.  Use setVTFont() to change the font
      * used to draw characters in the display.
