@@ -73,8 +73,8 @@ void TabTitleFormatAction::setContext(Session::TabTitleContext context)
 
     menu()->clear();
 
-    QList<QAction*> list;
-    
+    QList<QAction*> actions;
+
     int count = 0;
     const Element* array = 0;
 
@@ -88,15 +88,15 @@ void TabTitleFormatAction::setContext(Session::TabTitleContext context)
         array = _remoteElements;
         count = _remoteElementCount;
     }
-     
+
     for ( int i = 0 ; i < count ; i++ )
     {
         QAction* action = new QAction(i18n(array[i].description),this);
         action->setData(array[i].element);
-        list << action;
+        actions << action;
     }
 
-    menu()->addActions(list);
+    menu()->addActions(actions);
 }
 Session::TabTitleContext TabTitleFormatAction::context() const
 {
