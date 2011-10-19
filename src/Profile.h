@@ -289,7 +289,7 @@ public:
         /** Select the whole line underneath the cursor. */
         SelectWholeLine = 0,
         /** Select from the current cursor position to the end of the line. */
-        SelectForwardsFromCursor = 1,
+        SelectForwardsFromCursor = 1
     };
 
     /**
