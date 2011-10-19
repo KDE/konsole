@@ -58,10 +58,11 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
 
     // hide vertical header
     _ui->sessionTable->verticalHeader()->hide();
+    _ui->sessionTable->setShowGrid(false);
+
     _ui->sessionTable->setItemDelegateForColumn(FavoriteStatusColumn,new FavoriteItemDelegate(this));
     _ui->sessionTable->setItemDelegateForColumn(ShortcutColumn,new ShortcutItemDelegate(this));
     _ui->sessionTable->setEditTriggers(_ui->sessionTable->editTriggers() | QAbstractItemView::SelectedClicked);
-    _ui->sessionTable->setShowGrid(false);
 
     // populate the table with profiles
     populateTable();

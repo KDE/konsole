@@ -33,6 +33,7 @@ RenameTabsDialog::RenameTabsDialog(QWidget* parent)
 
     _ui = new Ui::RenameTabsDialog();
     _ui->setupUi(mainWidget());
+
     _ui->tabTitleEdit->setClearButtonShown(true);
     _ui->remoteTabTitleEdit->setClearButtonShown(true);
 
