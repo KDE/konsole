@@ -26,7 +26,6 @@
 // KDE
 #include <KDialog>
 
-#include "Profile.h"
 #include "TabTitleFormatAction.h"
 
 namespace Ui
