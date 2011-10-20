@@ -615,7 +615,7 @@ private slots:
   void fireZModemDetected();
 
   void onReceiveBlock( const char* buffer, int len );
-  void monitorTimerDone();
+  void silenceTimerDone();
 
   void onViewSizeChange(int height, int width);
 
@@ -668,7 +668,7 @@ private:
   bool           _masterMode;
   bool           _autoClose;
   bool           _closePerUser;
-  QTimer*        _monitorTimer;
+  QTimer*        _silenceTimer;
 
   int            _silenceSeconds;
 

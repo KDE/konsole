@@ -148,9 +148,9 @@ Session::Session(QObject* parent) :
     openTeletype(-1);
 
     //setup timer for monitoring session activity
-    _monitorTimer = new QTimer(this);
-    _monitorTimer->setSingleShot(true);
-    connect(_monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
+    _silenceTimer = new QTimer(this);
+    _silenceTimer->setSingleShot(true);
+    connect(_silenceTimer, SIGNAL(timeout()), this, SLOT(silenceTimerDone()));
 }
 
 void Session::openTeletype(int fd)
@@ -581,7 +581,7 @@ QString Session::tabTitleFormat(TabTitleContext context) const
     return QString();
 }
 
-void Session::monitorTimerDone()
+void Session::silenceTimerDone()
 {
     //FIXME: The idea here is that the notification popup will appear to tell the user than output from
     //the terminal has stopped and the popup will disappear when the user activates the session.
@@ -643,11 +643,11 @@ void Session::activityStateSet(int state)
     else if (state == NOTIFYACTIVITY)
     {
         if (_monitorSilence) {
-            _monitorTimer->start(_silenceSeconds*1000);
+            _silenceTimer->start(_silenceSeconds*1000);
         }
 
         if ( _monitorActivity ) {
-            //FIXME:  See comments in Session::monitorTimerDone()
+            //FIXME:  See comments in Session::silenceTimerDone()
             if (!_notifiedActivity) {
                 KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
                         QApplication::activeWindow(),
@@ -846,7 +846,7 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
         else
             message = i18n("Program '%1' exited with status %2.", _program, exitCode);
 
-        //FIXME: See comments in Session::monitorTimerDone()
+        //FIXME: See comments in Session::silenceTimerDone()
         KNotification::event("Finished", message , QPixmap(),
                             QApplication::activeWindow(),
                             KNotification::CloseWhenWidgetActivated);
@@ -1111,11 +1111,11 @@ void Session::setMonitorSilence(bool monitor)
     _monitorSilence = monitor;
     if (_monitorSilence)
     {
-        _monitorTimer->start(_silenceSeconds*1000);
+        _silenceTimer->start(_silenceSeconds*1000);
     }
     else
     {
-        _monitorTimer->stop();
+        _silenceTimer->stop();
     }
 
     activityStateSet(NOTIFYNORMAL);
@@ -1125,7 +1125,7 @@ void Session::setMonitorSilenceSeconds(int seconds)
 {
     _silenceSeconds = seconds;
     if (_monitorSilence) {
-        _monitorTimer->start(_silenceSeconds*1000);
+        _silenceTimer->start(_silenceSeconds*1000);
     }
 }
 
