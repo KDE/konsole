@@ -83,7 +83,7 @@ public:
     /** 
      * Returns the menu which this bookmark handler inserts its actions into.
      */
-    KMenu *menu() const { return m_menu; }
+    KMenu* menu() const { return m_menu; }
 
     QList<ViewProperties*> views() const;
     ViewProperties* activeView() const;
@@ -114,7 +114,7 @@ signals:
     void openUrls( const QList<KUrl>& urls );
 
 private slots:
-    void openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers );
+    void openBookmark( const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers );
 
 private:
     QString titleForView( ViewProperties* view ) const;

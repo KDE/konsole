@@ -61,13 +61,10 @@ BookmarkHandler::BookmarkHandler( KActionCollection* collection,
 
     manager->setUpdate( true );
 
-    if (toplevel) {
-        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
-                                            collection );
-    } else {
-        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
-                                            NULL);
-    }
+    if (toplevel)
+        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu, collection );
+    else
+        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu, NULL);
 }
 
 BookmarkHandler::~BookmarkHandler()
@@ -75,7 +72,7 @@ BookmarkHandler::~BookmarkHandler()
     delete m_bookmarkMenu;
 }
 
-void BookmarkHandler::openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers )
+void BookmarkHandler::openBookmark( const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers )
 {
     emit openUrl( bm.url() );
 }
@@ -85,7 +82,7 @@ void BookmarkHandler::openFolderinTabs( const KBookmarkGroup& group )
 }
 bool BookmarkHandler::enableOption(BookmarkOption option ) const
 {
-    if(option == ShowAddBookmark || option == ShowEditBookmark)
+    if ( option == ShowAddBookmark || option == ShowEditBookmark )
         return m_toplevel;
     else
         return KBookmarkOwner::enableOption(option);
@@ -99,13 +96,9 @@ QString BookmarkHandler::currentUrl() const
 QString BookmarkHandler::urlForView(ViewProperties* view) const
 {
     if ( view )
-    {
         return view->url().prettyUrl();
-    }
     else
-    {
-        return QString(); 
-    }
+        return QString();
 }
 
 QString BookmarkHandler::currentTitle() const
@@ -115,7 +108,7 @@ QString BookmarkHandler::currentTitle() const
 
 QString BookmarkHandler::titleForView(ViewProperties* view) const
 {
-    const KUrl& url = view ? view->url() : KUrl(); 
+    const KUrl& url = view ? view->url() : KUrl();
     if ( url.isLocalFile() )
     {
         QString path = url.path();
@@ -146,7 +139,7 @@ QList<QPair<QString,QString> > BookmarkHandler::currentBookmarkList() const
     QList<QPair<QString,QString> > list;
 
     QListIterator<ViewProperties*> iter( m_views );
-    
+
     while ( iter.hasNext() )
     {
         ViewProperties* next = iter.next();
