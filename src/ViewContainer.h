@@ -263,9 +263,6 @@ signals:
     /** Emitted when the container has no more children */
     void empty(ViewContainer* container);
 
-    /** Emitted when the user requests to duplicate a view */
-    void duplicateRequest( ViewProperties* properties );
-
     /** Emitted when the user requests to close a view */
     void closeRequest(QWidget* activeView);
 
