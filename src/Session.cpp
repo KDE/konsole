@@ -1095,20 +1095,20 @@ bool Session::isMonitorActivity() const { return _monitorActivity; }
 // unused currently
 bool Session::isMonitorSilence()  const { return _monitorSilence; }
 
-void Session::setMonitorActivity(bool _monitor)
+void Session::setMonitorActivity(bool monitor)
 {
-    _monitorActivity  = _monitor;
+    _monitorActivity  = monitor;
     _notifiedActivity = false;
 
     activityStateSet(NOTIFYNORMAL);
 }
 
-void Session::setMonitorSilence(bool _monitor)
+void Session::setMonitorSilence(bool monitor)
 {
-    if (_monitorSilence == _monitor)
+    if (_monitorSilence == monitor)
         return;
 
-    _monitorSilence = _monitor;
+    _monitorSilence = monitor;
     if (_monitorSilence)
     {
         _monitorTimer->start(_silenceSeconds*1000);
