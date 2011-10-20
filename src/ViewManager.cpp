@@ -801,10 +801,6 @@ TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
     TerminalDisplay* display = new TerminalDisplay(0);
     display->setRandomSeed(session->sessionId() * 31);
 
-    // FIXME: move this hardcode setting into applyProfileToView()
-    // when we allow users to choose other ways for belling.
-    display->setBellMode(TerminalDisplay::NotifyBell);
-
     return display;
 }
 
