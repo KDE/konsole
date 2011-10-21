@@ -238,6 +238,16 @@ void Part::activeViewChanged(SessionController* controller)
 }
 void Part::overrideTerminalShortcut(QKeyEvent* event, bool& override)
 {
+    // Shift+Insert is commonly used as the alternate shorcut for
+    // pasting in KDE apps(including konsole), so it deserves some
+    // special treatment.
+    if ( (event->modifiers() & Qt::ShiftModifier) &&
+         (event->key() == Qt::Key_Insert) )
+    {
+        override = false;
+        return;
+    }
+
     // override all shortcuts in the embedded terminal by default
     override = true;
     emit overrideShortcut(event,override);
