@@ -961,26 +961,25 @@ void Session::updateSessionProcessInfo()
 
 bool Session::updateForegroundProcessInfo()
 {
-    bool valid = (_foregroundProcessInfo != 0);
-
-    // has foreground process changed?
     Q_ASSERT(_shellProcess);
+
     int pid = _shellProcess->foregroundProcessGroup();
     if (pid != _foregroundPid)
     {
         delete _foregroundProcessInfo;
         _foregroundProcessInfo = ProcessInfo::newInstance(pid);
         _foregroundPid = pid;
-        valid = true;
     }
 
-    if (valid)
+    if (_foregroundProcessInfo)
     {
         _foregroundProcessInfo->update();
-        valid = _foregroundProcessInfo->isValid();
+        return _foregroundProcessInfo->isValid();
     }
-
-    return valid;
+    else
+    {
+        return false;
+    }
 }
 
 bool Session::isRemote()
