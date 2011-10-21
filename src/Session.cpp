@@ -1010,6 +1010,14 @@ QString Session::getDynamicTitle()
         title = process->format(tabTitleFormat(Session::LocalTabTitle));
     }
 
+    // special handling for the "%w" marker which is replaced with the
+    // window title set by the terminal process(shell,mc,vim,etc)
+    title.replace("%w", userTitle());
+
+    // special handling for the "%#" marker which is replaced with the
+    // number of the session
+    title.replace("%#", QString::number(sessionId()));
+
     return title;
 }
 
