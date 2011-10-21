@@ -446,6 +446,7 @@ void SessionController::setupActions()
 
     action = collection->addAction("select-all", this, SLOT(selectAll()));
     action->setText(i18n("&Select All"));
+    action->setIcon( KIcon("edit-select-all") );
     // TODO: this shortcut conflict with the 'close-active-view' action
     //action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
 
@@ -456,6 +457,7 @@ void SessionController::setupActions()
     // Rename Session
     action = collection->addAction("rename-session", this, SLOT(renameSession()));
     action->setText( i18n("&Rename Tab...") );
+    action->setIcon( KIcon("edit-rename") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_S) );
 
     // Copy Input To -> All Tabs in Current Window
