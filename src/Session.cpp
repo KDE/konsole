@@ -45,9 +45,10 @@
 #include <KNotification>
 #include <KRun>
 #include <KShell>
+#include <KProcess>
 #include <KStandardDirs>
 #include <KPtyDevice>
-#include <KUrl>
+#include <KConfigGroup>
 
 // Konsole
 #include <config-konsole.h>
@@ -59,6 +60,7 @@
 #include "ShellCommand.h"
 #include "Vt102Emulation.h"
 #include "ZModemDialog.h"
+#include "History.h"
 
 using namespace Konsole;
 

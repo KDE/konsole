@@ -26,18 +26,22 @@
 
 // Qt
 #include <QtCore/QStringList>
+#include <QtCore/QHash>
 #include <QtCore/QByteRef>
 #include <QtCore/QUuid>
+#include <QtCore/QSize>
+#include <QtCore/QProcess>
+#include <QtGui/QColor>
+#include <QtGui/QWidget>
 
 // KDE
-#include <KConfigGroup>
-#include <KProcess>
-#include "konsole_export.h"
+#include <KUrl>
 
 // Konsole
-#include "History.h"
+#include "konsole_export.h"
 
-class KUrl;
+class KConfigGroup;
+class KProcess;
 
 namespace Konsole
 {
@@ -47,6 +51,7 @@ class Pty;
 class ProcessInfo;
 class TerminalDisplay;
 class ZModemDialog;
+class HistoryType;
 
 /**
  * Represents a terminal session consisting of a pseudo-teletype and a terminal emulation.
