@@ -966,8 +966,7 @@ bool Session::updateForegroundProcessInfo()
     int pid = _shellProcess->foregroundProcessGroup();
     if (pid != _foregroundPid)
     {
-        if (valid)
-            delete _foregroundProcessInfo;
+        delete _foregroundProcessInfo;
         _foregroundProcessInfo = ProcessInfo::newInstance(pid);
         _foregroundPid = pid;
         valid = true;
