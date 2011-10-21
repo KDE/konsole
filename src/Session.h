@@ -663,16 +663,18 @@ private:
 
   QList<TerminalDisplay*> _views;
 
+  // monitor activity & silence
   bool           _monitorActivity;
   bool           _monitorSilence;
   bool           _notifiedActivity;
-  bool           _masterMode;
-  bool           _autoClose;
-  bool           _closePerUser;
+  int            _silenceSeconds;
   QTimer*        _silenceTimer;
   QTimer*        _activityTimer;
 
-  int            _silenceSeconds;
+  bool           _masterMode;
+  bool           _autoClose;
+  bool           _closePerUser;
+
 
   QString        _nameTitle;
   QString        _displayTitle;
