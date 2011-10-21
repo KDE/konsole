@@ -30,8 +30,7 @@
 #include <QtCore/QUuid>
 
 // KDE
-#include <KApplication>
-#include <KMainWindow>
+#include <KConfigGroup>
 #include <KProcess>
 #include "konsole_export.h"
 
