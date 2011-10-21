@@ -38,7 +38,6 @@
 // Konsole
 #include "History.h"
 
-class KProcess;
 class KUrl;
 
 namespace Konsole
