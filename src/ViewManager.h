@@ -40,7 +40,6 @@ class ColorScheme;
 class IncrementalSearchBar;
 class Session;
 class TerminalDisplay;
-class Profile;
 
 class SessionController;
 class ViewProperties;
