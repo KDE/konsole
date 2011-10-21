@@ -652,23 +652,22 @@ void Session::activityStateSet(int state)
     }
     else if (state == NOTIFYACTIVITY)
     {
-        if (_monitorSilence) {
-            _silenceTimer->start(_silenceSeconds*1000);
+        if ( _monitorActivity  && !_notifiedActivity )
+        {
+            KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
+                    QApplication::activeWindow(),
+                    KNotification::CloseWhenWidgetActivated);
+
+            // mask activity notification for a while to avoid flooding
+            // TODO: should this hardcoded interval be user configurable?
+            _notifiedActivity = true;
+            const int activitMaskSeconds = 15;
+            _activityTimer->start(activitMaskSeconds*1000);
         }
 
-        if ( _monitorActivity ) {
-            //FIXME:  See comments in Session::silenceTimerDone()
-            if (!_notifiedActivity) {
-                KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
-                        QApplication::activeWindow(),
-                        KNotification::CloseWhenWidgetActivated);
-
-                // mask activity notification for a while to avoid flooding
-                // TODO: should this hardcoded interval be user configurable?
-                _notifiedActivity = true;
-                const int activitMaskSeconds = 15;
-                _activityTimer->start(activitMaskSeconds*1000);
-            }
+        if (_monitorSilence)
+        {
+            _silenceTimer->start(_silenceSeconds*1000);
         }
     }
 
