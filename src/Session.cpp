@@ -933,10 +933,12 @@ QString Session::title(TitleRole role) const
 
 ProcessInfo* Session::getProcessInfo()
 {
-    ProcessInfo* process;
+    ProcessInfo* process = 0;
 
     if (isForegroundProcessActive())
+    {
         process = _foregroundProcessInfo;
+    }
     else
     {
         updateSessionProcessInfo();
