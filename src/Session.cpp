@@ -151,6 +151,10 @@ Session::Session(QObject* parent) :
     _silenceTimer = new QTimer(this);
     _silenceTimer->setSingleShot(true);
     connect(_silenceTimer, SIGNAL(timeout()), this, SLOT(silenceTimerDone()));
+
+    _activityTimer= new QTimer(this);
+    _activityTimer->setSingleShot(true);
+    connect(_activityTimer, SIGNAL(timeout()), this, SLOT(activityTimerDone()));
 }
 
 void Session::openTeletype(int fd)
@@ -604,6 +608,12 @@ void Session::silenceTimerDone()
 
     _notifiedActivity = false;
 }
+
+void Session::activityTimerDone()
+{
+    _notifiedActivity = false;
+}
+
 void Session::updateFlowControlState(bool suspended)
 {
     if (suspended)
@@ -652,7 +662,12 @@ void Session::activityStateSet(int state)
                 KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
                         QApplication::activeWindow(),
                         KNotification::CloseWhenWidgetActivated);
+
+                // mask activity notification for a while to avoid flooding
+                // TODO: should this hardcoded interval be user configurable?
                 _notifiedActivity = true;
+                const int activitMaskSeconds = 15;
+                _activityTimer->start(activitMaskSeconds*1000);
             }
         }
     }

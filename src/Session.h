@@ -616,6 +616,7 @@ private slots:
 
   void onReceiveBlock( const char* buffer, int len );
   void silenceTimerDone();
+  void activityTimerDone();
 
   void onViewSizeChange(int height, int width);
 
@@ -669,6 +670,7 @@ private:
   bool           _autoClose;
   bool           _closePerUser;
   QTimer*        _silenceTimer;
+  QTimer*        _activityTimer;
 
   int            _silenceSeconds;
 
