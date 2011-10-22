@@ -95,16 +95,6 @@ back a page),
 <keycombo action="simul">&Shift;<keycap>Down Arrow</keycap></keycombo> (to move down a line) keys.
 </para>
 
-<para>When the <keycap>scrolllock</keycap> is on,
-ordinary input and output from the shell is suspended, and you can
-scroll through the history with
-<keycap>Page Up</keycap>,
-<keycap>Page Down</keycap>,
-<keycap>Up Arrow</keycap> and
-<keycap>Down Arrow</keycap>.
-</para>
-
-
 </sect1>
 
 <sect1 id="profiles">
