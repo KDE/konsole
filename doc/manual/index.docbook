@@ -1032,6 +1032,10 @@ Pressing the <keycombo action="simul">&Ctrl;&Alt;</keycombo> keys while selectin
 </para></listitem>
 
 <listitem><para>
+The <keycombo action="simul">&Ctrl;<mousebutton>Wheel</mousebutton></keycombo> combination will zoom text size, like in konqueror and firefox. 
+</para></listitem>
+
+<listitem><para>
 When a program evaluates either mouse button, pressing the &Shift; key will allow the popup menu to appear.
 </para></listitem>
 
