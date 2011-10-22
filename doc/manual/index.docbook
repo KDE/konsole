@@ -223,8 +223,10 @@ the &Shift; key has to be pressed when clicking.</para>
 
 <listitem><para>Pressing the &MMB;
 pastes text currently in the clipboard. Holding down the &Ctrl; key as you
-press the &MMB; pastes the text and sends
-it to &konsole;.</para>
+press the &MMB; pastes the text and appends a new-line. That is convenient
+for executing pasted command quickly, but it can be dangerous so use it
+with caution.
+</para>
 
 <note><para>If you have a mouse with only two buttons, pressing both
 the &LMB; and &RMB; together emulates the &MMB; of a three button mouse.</para></note>
