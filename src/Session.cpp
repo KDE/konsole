@@ -1319,6 +1319,12 @@ void Session::setTitle(int role , const QString& title)
         break;
     case (1):
         this->setTitle(Session::DisplayedTitleRole, title);
+
+        // without these, that title will be overridden by the expansion of
+        // title format shortly after, which will confuses users.
+        _localTabTitleFormat = title;
+        _remoteTabTitleFormat = title;
+
         break;
     }
 }
