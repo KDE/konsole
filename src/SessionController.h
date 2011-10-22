@@ -176,7 +176,11 @@ public slots:
      */
     void updateCopyAction( const QString & text );
 
+    /**  Increase font size */
+    void increaseTextSize();
 
+    /**  Decrease font size */
+    void decreaseTextSize();
 
 private slots:
     // menu item handlers
@@ -200,8 +204,6 @@ private slots:
     void clearHistoryAndReset();
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);
-    void increaseTextSize();
-    void decreaseTextSize();
     void renameSession();
     void saveSession();
     void changeProfile(Profile::Ptr profile);

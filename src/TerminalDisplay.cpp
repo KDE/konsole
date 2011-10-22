@@ -2364,6 +2364,19 @@ void TerminalDisplay::wheelEvent( QWheelEvent* ev )
   if (ev->orientation() != Qt::Vertical)
     return;
 
+  // ctrl+<wheel> for zomming, like in konqueror and firefox
+  if ( ev->modifiers() & Qt::ControlModifier )
+  {
+      if ( ev->delta() > 0 )
+          // wheel-up
+          _sessionController->increaseTextSize();
+      else
+          // wheel-down
+          _sessionController->decreaseTextSize();
+
+      return;
+  }
+
   // if the terminal program is not interested mouse events
   // then send the event to the scrollbar if the slider has room to move
   // or otherwise send simulated up / down key presses to the terminal program
