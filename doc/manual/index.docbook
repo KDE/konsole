@@ -178,13 +178,13 @@ cursor is shown.</para>
 
 <para>Holding the &LMB; down and
 dragging the mouse over the screen with a mouse-unaware application
-running will mark a region of the text. While dragging, the marked
+running will mark a region of the text. While dragging the mouse, the marked
 text is displayed reversed for visual feedback. Select <guimenuitem>Copy</guimenuitem>
 from the <guimenu>Edit</guimenu> menu to copy the marked text to the clipboard for further use
 within &konsole; or another application. The selected text can also be
 dragged and dropped into compatible applications. Click on the selected
 text and drag it to the desired location. Depending on your &kde; settings,
-you may need to hold the &Ctrl; key while dragging.</para>
+you may need to hold the &Ctrl; key while dragging selected text.</para>
 
 <para>Normally, new-line characters are inserted at the end of each
 line selected. This is best for cut and paste of source code, or the output
@@ -195,7 +195,7 @@ another application. To select in text-stream mode, hold down the
 &Ctrl; key while selecting normally.</para>
 
 <para>Pressing the &Ctrl; and &Alt; keys along with the &LMB;
-will select a column of text.
+will select text in columns.
 </para>
 
 <para>Double-click with the &LMB; to select a word;
@@ -212,7 +212,7 @@ marked area reverts back to normal as soon as the contents of the
 clipboard change, the text within the marked area is altered or the
 &LMB; is clicked.</para>
 
-<para>To mark text on a mouse-aware application (Midnight Commander, for example)
+<para>To mark text in a mouse-aware application (Midnight Commander, for example)
 the &Shift; key has to be pressed when clicking.</para>
 
 </listitem>
@@ -230,7 +230,7 @@ it to &konsole;.</para>
 the &LMB; and &RMB; together emulates the &MMB; of a three button mouse.</para></note>
 
 <para>If you have a <mousebutton>wheel</mousebutton> as the middle button,
-rolling it in a mouse unaware program will move &konsole;'s scrollbar.</para>
+rolling it in a mouse-unaware program will move &konsole;'s scrollbar.</para>
 
 </listitem>
 </varlistentry>
@@ -396,7 +396,7 @@ Select All
 <shortcut><keycombo
  action="simul">&Ctrl;&Shift;<keycap>/</keycap></keycombo></shortcut>
 <guimenu>Edit</guimenu><guisubmenu>Copy Input To</guisubmenu><guimenuitem>None</guimenuitem></menuchoice></term>
-<listitem><para><action>Stop all input to other sessions</action>
+<listitem><para><action>Stop sending input from current session into other sessions</action>
 </para>
 </listitem>
 </varlistentry>
@@ -498,7 +498,7 @@ Close Active</guimenuitem></menuchoice>
 <guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>
 Close Others</guimenuitem></menuchoice>
 </term>
-<listitem><para><action>Closes the non-current view</action>
+<listitem><para><action>Closes all non-current views</action>
 </para></listitem>
 </varlistentry>
 
@@ -852,7 +852,7 @@ title: This is the title;; command: run me
 <varlistentry>
 <term><option>--workdir</option> <parameter>dir</parameter></term>
 <listitem><para><action>Open with</action>
-<parameter>dir</parameter> as the working (starting) directory.</para></listitem>
+<parameter>dir</parameter> as the initial working directory.</para></listitem>
 </varlistentry>
 
 <varlistentry>
