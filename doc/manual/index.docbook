@@ -820,7 +820,8 @@ can be specified to modify its behavior.</para>
 
 <varlistentry>
 <term><option>--profile</option> <parameter>file</parameter></term>
-<listitem><para><action>Start &konsole;</action> using a saved set of sessions.</para></listitem>
+<listitem><para><action>Start &konsole;</action> using the specified profile
+instead of the default profile.</para></listitem>
 </varlistentry>
 
 <varlistentry>
