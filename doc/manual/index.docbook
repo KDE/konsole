@@ -81,7 +81,7 @@ emulator, often referred to as a terminal or a shell. It emulates a command line
 <title>Scrollback</title>
 
 <para>&konsole; uses the notion of scrollback
-to allow user's to view previously displayed output.
+to allow users to view previously displayed output.
 By default, scrollback is on
 and set to save 1000 lines of
 output in addition to what is currently displayed on the screen.
@@ -138,7 +138,7 @@ shell and were going to issue that command.  For our first example above, you
 might type <userinput><command>ssh</command> <replaceable>administration</replaceable></userinput>.</para></listitem>
 
 <listitem><para>On the other tabs of the dialog, configure this session's appearance.
-You can configure a different font, colour scheme, $<envar>TERM</envar> type and many
+You can configure a different font, color scheme, $<envar>TERM</envar> type and many
 other settings for each session.</para></listitem>
 
 <listitem><para>Press the <guibutton>OK</guibutton> button. The new session
