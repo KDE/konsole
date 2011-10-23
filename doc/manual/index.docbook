@@ -1091,6 +1091,25 @@ In KDE3, each tab had its own process ID.  However, in KDE4, all the tabs use th
 This is most noticeable when a command that connects to an external device or system (ssh, nfs) has issues.
 </para></listitem>
 
+<listitem><para>
+&konsole; treats arguments after the <option>-e</option> option as one command and runs it directly, instead  of parsing it and possibly dividing it into sub-commands for execution. This is different from xterm.
+</para>
+
+<para>
+    <itemizedlist mark='opencircle'>
+
+    <listitem><para>
+<command>konsole -e "command1 ; command2"</command> does not work
+    </para></listitem>
+
+    <listitem><para>
+<command>konsole -e $SHELL -c "command1 ; command2"</command> works
+    </para></listitem>
+
+    </itemizedlist>
+</para>
+</listitem>
+
 </itemizedlist>
 
 </sect1>
