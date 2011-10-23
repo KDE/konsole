@@ -1110,6 +1110,14 @@ This is most noticeable when a command that connects to an external device or sy
 </para>
 </listitem>
 
+<listitem><para>
+&konsole; doesn't provide convenience for running login shell, because developers don't like the idea of running login shell in a terminal emulator.
+</para>
+<para>
+Of course, users still can run login shell in &konsole; if they really need to. Edit the profile in use and modify its command to the form of starting a login shell explicitly, such as "<command>bash -l</command>" and "<command>zsh -l</command>".
+</para>
+</listitem>
+
 </itemizedlist>
 
 </sect1>
