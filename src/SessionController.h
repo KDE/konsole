@@ -205,7 +205,6 @@ private slots:
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);
     void renameSession();
-    void saveSession();
     void changeProfile(Profile::Ptr profile);
 
     // other

@@ -613,13 +613,7 @@ void SessionController::renameSession()
         snapshot();
     }
 }
-void SessionController::saveSession()
-{
-    Q_ASSERT(0); // not implemented yet
 
-    //SaveSessionDialog dialog(_view);
-    //int result = dialog.exec();
-}
 bool SessionController::confirmClose() const
 {
     if (_session->isForegroundProcessActive())
