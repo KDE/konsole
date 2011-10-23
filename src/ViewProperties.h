@@ -79,16 +79,14 @@ public:
      * to allow them to confirm whether to close a view.
      * The default implementation always returns true
      */
-    virtual bool confirmClose() const
-    { return true; }
+    virtual bool confirmClose() const { return true; }
 
     /** Finds a ViewProperties instance given its numeric identifier. */
     static ViewProperties* propertiesById(int id);
 
     /** Name of mime format to use in drag-and-drop operations. */
-    static QString mimeType() 
-    { return _mimeType; }
-   
+    static QString mimeType() { return _mimeType; }
+
     /** Returns a new QMimeData instance which represents the view with the given @p id 
      * (See identifier()).  The QMimeData instance returned must be deleted by the caller.
      */

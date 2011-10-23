@@ -20,8 +20,6 @@
 // Own
 #include "ViewProperties.h"
 
-// Qt
-
 using namespace Konsole;
 
 QHash<int,ViewProperties*> ViewProperties::_viewProperties;
@@ -70,7 +68,7 @@ void ViewProperties::setIcon(const QIcon& icon)
 {
     // the icon's cache key is used to determine whether this icon is the same
     // as the old one.  if so no signal is emitted.
-    
+
     if ( icon.cacheKey() != _icon.cacheKey() )
     {
         _icon = icon;
