@@ -444,15 +444,15 @@ void SessionController::setupActions()
     pasteShortcut.setAlternate(QKeySequence(Qt::SHIFT + Qt::Key_Insert));
     action->setShortcut(pasteShortcut);
 
+    action = collection->addAction("paste-selection", this, SLOT(pasteFromXSelection()));
+    action->setText(i18n("Paste Selection"));
+    action->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert));
+
     action = collection->addAction("select-all", this, SLOT(selectAll()));
     action->setText(i18n("&Select All"));
     action->setIcon( KIcon("edit-select-all") );
     // TODO: this shortcut conflict with the 'close-active-view' action
     //action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
-
-    action = collection->addAction("paste-selection", this, SLOT(pasteFromXSelection()));
-    action->setText(i18n("Paste Selection"));
-    action->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert));
 
     // Rename Session
     action = collection->addAction("rename-session", this, SLOT(renameSession()));
