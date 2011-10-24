@@ -92,8 +92,6 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
 {
-    _allControllers.insert(this);
-
     Q_ASSERT( session );
     Q_ASSERT( view );
 
@@ -161,6 +159,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     activityTimer->setInterval(2000);
     connect( _view , SIGNAL(keyPressedSignal(QKeyEvent*)) , activityTimer , SLOT(start()) );
     connect( activityTimer , SIGNAL(timeout()) , this , SLOT(snapshot()) );
+
+    _allControllers.insert(this);
 }
 
 void SessionController::updateSearchFilter()
