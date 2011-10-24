@@ -676,7 +676,7 @@ private:
 
   bool           _masterMode;
   bool           _autoClose;
-  bool           _closePerUser;
+  bool           _closePerUserRequest;
 
 
   QString        _nameTitle;

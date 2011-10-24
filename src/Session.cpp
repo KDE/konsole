@@ -107,7 +107,7 @@ Session::Session(QObject* parent) :
    , _notifiedActivity(false)
    , _silenceSeconds(10)
    , _autoClose(true)
-   , _closePerUser(false)
+   , _closePerUserRequest(false)
    , _addToUtmp(true)  
    , _flowControl(true)
    , _sessionId(0)
@@ -777,7 +777,7 @@ void Session::close()
 bool Session::closeInNormalWay()
 {
     _autoClose    = true;
-    _closePerUser = true;
+    _closePerUserRequest = true;
 
     // for the possible case where following events happen in sequence:
     //
@@ -806,7 +806,7 @@ bool Session::closeInNormalWay()
 bool Session::closeInForceWay()
 {
     _autoClose    = true;
-    _closePerUser = true;
+    _closePerUserRequest = true;
 
     if( kill(SIGKILL) )
     {
@@ -847,7 +847,7 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
         return;
     }
 
-    if ( _closePerUser )
+    if ( _closePerUserRequest )
     {
         emit finished();
         return;
