@@ -568,7 +568,7 @@ void SessionController::prepareChangeProfileMenu()
 }
 void SessionController::updateCodecAction()
 {
-    _codecAction->setCurrentCodec(QString(_session->emulation()->codec()->name()));
+    _codecAction->setCurrentCodec(QString(_session->codec()));
 }
 
 void SessionController::changeCodec(QTextCodec* codec)
