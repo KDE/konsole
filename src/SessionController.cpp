@@ -530,7 +530,7 @@ void SessionController::setupActions()
 
     action = collection->addAction("adjust-history", this, SLOT(showHistoryOptions()));
     action->setText(i18n("Adjust Scrollback..."));
-    // TODO: find a suitable icon which matches the action and not misleading
+    // TODO: find a suitable icon which matches this action and not misleading
     action->setIcon(KIcon("configure"));
 
     action = collection->addAction("clear-history", this, SLOT(clearHistory()));
