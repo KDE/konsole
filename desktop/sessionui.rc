@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="15">
+<kpartgui name="session" version="16">
     <MenuBar>
         <Menu name="file">
             <Action name="close-session" group="session-tab-operations"/>
@@ -52,7 +52,7 @@
         <Separator/>
         <Action name="set-encoding"/>
         <Action name="clear-history"/>
-        <Action name="configure-history"/> 
+        <Action name="adjust-history"/>
         <Separator/>
         <Action name="show-menubar"/>
         <Action name="switch-profile"/>

@@ -77,26 +77,6 @@ public:
     /** Sets the number of lines for the fixed size history mode. */
     void setLineCount(int lines);
 
-    /** 
-     * Sets the default history mode.  When the user clicks on the "Defaults" button,
-     * this mode will be used.
-     */
-    void setDefaultMode( HistoryMode mode );
-
-    /** Returns the default mode, as set with setDefaultMode() */
-    HistoryMode defaultMode() const;
-
-    /** 
-     * Sets the default line count.  When the user clicks on the "Defaults" button,
-     * the line count will be set to this number.
-     */
-    void setDefaultLineCount( int count );
-
-    /** Returns the default line count, as set with setDefaultLineCount() */
-    int defaultLineCount() const;
-
-    bool saveToCurrentProfile() const;
-
 signals:
     /**
      * Emitted when the user changes the scroll-back mode or line count and
@@ -105,14 +85,10 @@ signals:
      * @param mode The current history mode.  This is a value from the HistoryMode enum.
      * @param lineCount The current line count.  This is only applicable if mode is
      * FixedSizeHistory
-     * @param saveToCurrentProfile Determines if the changes are saved to current profile.
      */
-    void optionsChanged(int mode , int lineCount, bool saveToCurrentProfile);
+    void optionsChanged(int mode , int lineCount);
 
 private slots:
-    // changes the mode and line count back to the defaults
-    // specified with setDefaultMode() and setDefaultLineCount()
-    void useDefaults();
 
     // fires the optionsChanged() signal with the current mode
     // and line count as arguments
@@ -122,10 +98,8 @@ private:
     QAbstractButton* _noHistoryButton;
     QAbstractButton* _fixedHistoryButton;
     QAbstractButton* _unlimitedHistoryButton;
-    QAbstractButton* _saveToCurrentProfileButton;
     KIntSpinBox* _lineCountBox;   
 
-    HistoryMode _defaultMode;
     int _defaultLineCount; 
 };
 

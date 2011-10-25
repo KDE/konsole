@@ -528,8 +528,9 @@ void SessionController::setupActions()
     action = KStandardAction::saveAs(this, SLOT(saveHistory()), collection);
     action->setText(i18n("Save Output &As..."));
 
-    action = collection->addAction("configure-history", this, SLOT(showHistoryOptions()));
-    action->setText(i18n("Configure Scrollback..."));
+    action = collection->addAction("adjust-history", this, SLOT(showHistoryOptions()));
+    action->setText(i18n("Adjust Scrollback..."));
+    // TODO: find a suitable icon which matches the action and not misleading
     action->setIcon(KIcon("configure"));
 
     action = collection->addAction("clear-history", this, SLOT(clearHistory()));
@@ -1027,8 +1028,8 @@ void SessionController::showHistoryOptions()
         dialog->setMode( HistorySizeDialog::NoHistory );
     }
 
-    connect( dialog , SIGNAL(optionsChanged(int,int,bool)) ,
-             this , SLOT(scrollBackOptionsChanged(int,int,bool)) );
+    connect( dialog , SIGNAL(optionsChanged(int,int)) ,
+             this , SLOT(scrollBackOptionsChanged(int,int)) );
 
     dialog->show();
 }
@@ -1037,7 +1038,7 @@ void SessionController::sessionResizeRequest(const QSize& size)
     //kDebug() << "View resize requested to " << size;
     _view->setSize(size.width(),size.height());
 }
-void SessionController::scrollBackOptionsChanged(int mode, int lines, bool saveToCurrentProfile )
+void SessionController::scrollBackOptionsChanged(int mode, int lines)
 {
     switch (mode)
     {
@@ -1050,25 +1051,6 @@ void SessionController::scrollBackOptionsChanged(int mode, int lines, bool saveT
          case HistorySizeDialog::UnlimitedHistory:
              _session->setHistoryType( HistoryTypeFile() );
             break;
-    }
-    if (saveToCurrentProfile)
-    {
-        Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
-
-        switch (mode)
-        {
-            case HistorySizeDialog::NoHistory:
-                profile->setProperty(Profile::HistoryMode , Profile::DisableHistory);
-                break;
-            case HistorySizeDialog::FixedSizeHistory:
-                profile->setProperty(Profile::HistoryMode , Profile::FixedSizeHistory);
-                profile->setProperty(Profile::HistorySize , lines);
-                break;
-            case HistorySizeDialog::UnlimitedHistory:
-                profile->setProperty(Profile::HistoryMode , Profile::UnlimitedHistory);
-                break;
-        }
-        SessionManager::instance()->changeProfile(profile, profile->setProperties());
     }
 }
 

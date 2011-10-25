@@ -224,7 +224,7 @@ private slots:
 
     void requireUrlFilterUpdate();
     void highlightMatches(bool highlight);
-    void scrollBackOptionsChanged(int mode , int lines, bool saveToCurrentProfile);
+    void scrollBackOptionsChanged(int mode , int lines);
     void sessionResizeRequest(const QSize& size);
     void trackOutput(QKeyEvent* event);  // move view to end of current output
                                          // when a key press occurs in the 
