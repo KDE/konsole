@@ -249,6 +249,7 @@ IncrementalSearchBar* MainWindow::searchBar() const
 void MainWindow::setupActions()
 {
     KActionCollection* collection = actionCollection();
+    KAction* action = 0;
 
     // File Menu
     _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18n("&New Tab"), collection);
@@ -258,7 +259,7 @@ void MainWindow::setupActions()
     connect(_newTabMenuAction, SIGNAL(triggered()), this, SLOT(newTab()));
     collection->addAction("new-tab", _newTabMenuAction);
 
-    KAction* action = collection->addAction("new-window");
+    action = collection->addAction("new-window");
     action->setIcon( KIcon("window-new") );
     action->setText( i18n("New &Window") );
     action->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N) );
@@ -276,10 +277,6 @@ void MainWindow::setupActions()
     collection->addAction("bookmark" , bookmarkMenu);
 
     connect( _bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)) );
-
-    //TODO: The 'Add Bookmark' menu action currently has a Ctrl+B shortcut by
-    //      default which cannot be overridden
-    //NOTE: This is currently handled by correctShortcuts()
 
     // View Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
@@ -299,10 +296,10 @@ void MainWindow::setupActions()
     connect( action, SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()) );
 
     // Set up an action and shortcut for activating menu bar.
-    KAction* menuBarAction = collection->addAction("activate_menu");
-    menuBarAction->setText(i18n("Activate Menu"));
-    menuBarAction->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F10));
-    connect(menuBarAction, SIGNAL(triggered()), this, SLOT(activateMenuBar()));
+    action = collection->addAction("activate-menu");
+    action->setText(i18n("Activate Menu"));
+    action->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F10));
+    connect(action, SIGNAL(triggered()), this, SLOT(activateMenuBar()));
 }
 
 void MainWindow::viewFullScreen(bool fullScreen)
