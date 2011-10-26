@@ -169,12 +169,11 @@ cursor is shown.</para>
 <para>Holding the &LMB; down and
 dragging the mouse over the screen with a mouse-unaware application
 running will mark a region of the text. While dragging the mouse, the marked
-text is displayed reversed for visual feedback. Select <guimenuitem>Copy</guimenuitem>
+text is displayed in reversed color for visual feedback. Select <guimenuitem>Copy</guimenuitem>
 from the <guimenu>Edit</guimenu> menu to copy the marked text to the clipboard for further use
 within &konsole; or another application. The selected text can also be
-dragged and dropped into compatible applications. Click on the selected
-text and drag it to the desired location. Depending on your &kde; settings,
-you may need to hold the &Ctrl; key while dragging selected text.</para>
+dragged and dropped into compatible applications. Hold the &Ctrl; key and 
+drag the selected text to the desired location.</para>
 
 <para>Normally, new-line characters are inserted at the end of each
 line selected. This is best for cut and paste of source code, or the output
