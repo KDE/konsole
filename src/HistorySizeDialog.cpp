@@ -109,13 +109,17 @@ void HistorySizeDialog::setMode( HistoryMode mode )
     if ( mode == NoHistory )
     {
         _noHistoryButton->setChecked(true);
-    } else if ( mode == FixedSizeHistory )
+    }
+    else if ( mode == FixedSizeHistory )
     {
         _fixedHistoryButton->setChecked(true);
-    } else if ( mode == UnlimitedHistory )
+    }
+    else if ( mode == UnlimitedHistory )
     {
         _unlimitedHistoryButton->setChecked(true);
     }
+
+    Q_ASSERT(false);
 }
 
 HistorySizeDialog::HistoryMode HistorySizeDialog::mode() const
