@@ -46,7 +46,6 @@
 #include "ColorScheme.h"
 #include "Session.h"
 #include "History.h"
-#include "ShellCommand.h"
 
 using namespace Konsole;
 
