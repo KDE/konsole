@@ -100,7 +100,8 @@ private:
     QAbstractButton* _unlimitedHistoryButton;
     KIntSpinBox* _lineCountBox;   
 
-    int _defaultLineCount; 
+    // 1000 lines was the default in the KDE 3 series
+    static const int defaultLineCount = 1000;
 };
 
 }

@@ -43,7 +43,6 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     ,  _fixedHistoryButton(0)
     ,  _unlimitedHistoryButton(0)
     ,  _lineCountBox(0)
-    ,  _defaultLineCount(1000)
 {
     // basic dialog properties
     setPlainCaption( i18n("Adjust Scrollback") );
@@ -74,10 +73,8 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     // if a very large log is required, "Unlimited History" mode should be used
     _lineCountBox->setRange( 1 , 100000 );
 
-    // 1000 lines was the default in the KDE 3 series
-    // using that for now
-    _lineCountBox->setValue( _defaultLineCount );
-    _lineCountBox->setSingleStep( _defaultLineCount / 10 );
+    _lineCountBox->setValue( HistorySizeDialog::defaultLineCount );
+    _lineCountBox->setSingleStep( HistorySizeDialog::defaultLineCount / 10 );
 
     _fixedHistoryButton->setFocusProxy(_lineCountBox);
     connect( _fixedHistoryButton , SIGNAL(clicked()) ,
