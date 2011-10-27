@@ -1980,8 +1980,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
 
 void TerminalDisplay::extendSelection( const QPoint& position )
 {
-  QPoint pos = position;
-
   if ( !_screenWindow )
       return;
 
@@ -2001,6 +1999,8 @@ void TerminalDisplay::extendSelection( const QPoint& position )
                      tLy + _topMargin,
                    _usedColumns*_fontWidth-1,
                    _usedLines*_fontHeight-1);
+
+  QPoint pos = position;
 
   // Adjust position within text area bounds.
   QPoint oldpos = pos;
@@ -2023,7 +2023,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
   int charLine = 0;
   getCharacterPosition(pos,charLine,charColumn);
 
-  QPoint here = QPoint(charColumn,charLine); //QPoint((pos.x()-tLx-_leftMargin+(_fontWidth/2))/_fontWidth,(pos.y()-tLy-_topMargin)/_fontHeight);
+  QPoint here = QPoint(charColumn,charLine);
   QPoint ohere;
   QPoint _iPntSelCorr = _iPntSel;
   _iPntSelCorr.ry() -= _scrollBar->value();
