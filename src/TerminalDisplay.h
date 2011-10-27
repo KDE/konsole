@@ -414,6 +414,8 @@ public:
     /** Returns the terminal screen section which is displayed in this widget.  See setScreenWindow() */
     ScreenWindow* screenWindow() const;
 
+    static void setXSelection(const QString& text);
+
     static bool HAVE_TRANSPARENCY;
 
 public slots:
@@ -691,7 +693,6 @@ private:
     bool handleShortcutOverrideEvent(QKeyEvent* event);
 
     void doPaste(bool useXselection,bool appendReturn);
-    void setXSelection(const QString& text);
 
     // the window onto the terminal screen which this display
     // is currently showing.  

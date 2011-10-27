@@ -719,6 +719,7 @@ void SessionController::selectAll()
 {
     ScreenWindow * screenWindow = _view->screenWindow();
     screenWindow->setSelectionByLineRange(0, _session->emulation()->lineCount() );
+    TerminalDisplay::setXSelection( screenWindow->selectedText(true) );
 }
 static const KXmlGuiWindow* findWindow(const QObject* object)
 {
