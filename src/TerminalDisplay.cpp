@@ -1984,10 +1984,10 @@ void TerminalDisplay::extendSelection( const QPoint& position )
       return;
 
   //if ( !contentsRect().contains(ev->pos()) ) return;
-  QPoint tL  = contentsRect().topLeft();
-  int    tLx = tL.x();
-  int    tLy = tL.y();
-  int    scroll = _scrollBar->value();
+  const QPoint tL  = contentsRect().topLeft();
+  const int    tLx = tL.x();
+  const int    tLy = tL.y();
+  const int    scroll = _scrollBar->value();
 
   // we're in the process of moving the mouse with the left button pressed
   // the mouse cursor will kept caught within the bounds of the text in
