@@ -25,15 +25,12 @@
 #include "BookmarkHandler.h"
 
 // Qt
-#include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 
 // KDE
 #include <KShell>
-
 #include <KBookmarkMenu>
 #include <KDebug>
-#include <KMenu>
 #include <KStandardDirs>
 
 // Konsole

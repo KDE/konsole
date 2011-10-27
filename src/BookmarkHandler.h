@@ -25,7 +25,6 @@
 #define KONSOLEBOOKMARKHANDLER_H
 
 // Qt
-#include <QtGui/QMenu>
 
 // KDE
 #include <KBookmarkManager>
@@ -33,9 +32,9 @@
 // Konsole
 #include "konsole_export.h"
 
+class QMenu;
 class KMenu;
 class KBookmarkMenu;
-class KBookmarkManager;
 class KActionCollection;
 
 namespace Konsole
