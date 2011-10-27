@@ -23,7 +23,6 @@
 // Qt
 #include <QtGui/QButtonGroup>
 #include <QtGui/QBoxLayout>
-#include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
 #include <QtGui/QRadioButton>
 #include <QtGui/QWidget>
