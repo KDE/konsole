@@ -32,7 +32,6 @@
 // Konsole
 #include "konsole_export.h"
 
-class QMenu;
 class KMenu;
 class KBookmarkMenu;
 class KActionCollection;
@@ -69,8 +68,6 @@ public:
      */
     BookmarkHandler( KActionCollection* collection , KMenu* menu, bool toplevel , QObject* parent );
     ~BookmarkHandler();
-
-    QMenu * popupMenu();
 
     virtual QString currentUrl() const;
     virtual QString currentTitle() const;
