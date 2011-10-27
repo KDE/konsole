@@ -20,9 +20,6 @@
 #ifndef RENAMETABSDIALOG
 #define RENAMETABSDIALOG
 
-// Qt
-#include <QtCore/QPointer>
-
 // KDE
 #include <KDialog>
 
