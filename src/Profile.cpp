@@ -73,6 +73,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     , { Environment , "Environment" , GENERAL_GROUP , QVariant::StringList }
     , { Directory , "Directory" , GENERAL_GROUP , QVariant::String }
     , { LocalTabTitleFormat , "LocalTabTitleFormat" , GENERAL_GROUP , QVariant::String }
+    , { LocalTabTitleFormat , "tabtitle" , 0 , QVariant::String }
     , { RemoteTabTitleFormat , "RemoteTabTitleFormat" , GENERAL_GROUP , QVariant::String }
     , { ShowMenuBar , "ShowMenuBar" , GENERAL_GROUP , QVariant::Bool }
     , { ShowTerminalSizeHint , "ShowTerminalSizeHint" , GENERAL_GROUP , QVariant::Bool }
@@ -88,6 +89,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     // Appearance
     , { Font , "Font" , APPEARANCE_GROUP , QVariant::Font }
     , { ColorScheme , "ColorScheme" , APPEARANCE_GROUP , QVariant::String }
+    , { ColorScheme , "colors" , 0 , QVariant::String }
     , { AntiAliasFonts, "AntiAliasFonts" , APPEARANCE_GROUP , QVariant::Bool }
     , { BoldIntense, "BoldIntense", APPEARANCE_GROUP, QVariant::Bool }
     
