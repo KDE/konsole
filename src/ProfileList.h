@@ -97,11 +97,11 @@ private:
 
     QActionGroup*   _group;
     bool _addShortcuts;
-    
+
     // action to show when the list is empty
     QAction* _emptyListAction;
     QSet<QWidget*> _registeredWidgets;
-}; 
+};
 
 }
 

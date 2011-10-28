@@ -39,30 +39,28 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     , _addShortcuts(addShortcuts)
     , _emptyListAction(0)
 {
-    SessionManager* manager = SessionManager::instance();
-
-    // construct the list of favorite session types
+    // construct the list of favorite profiles
     _group = new QActionGroup(this);
- 
-    // Even when there are no profiles in the menu list, allow user to 
-    // create new tabs from the menu
+
+    // Even when there are no favorite profiles, allow user to
+    // create new tabs using the default profile from the menu
     _emptyListAction = new QAction(i18n("Default profile"),_group);
 
     // TODO - Handle re-sorts when user changes profile names
-
+    SessionManager* manager = SessionManager::instance();
     QList<Profile::Ptr> list = manager->sortedFavorites();
 
     QListIterator<Profile::Ptr> iter(list);
 
     while (iter.hasNext())
     {
-        favoriteChanged(iter.next(),true);        
+        favoriteChanged(iter.next(), true);
     }
 
     connect( _group , SIGNAL(triggered(QAction*)) , this , SLOT(triggered(QAction*)) );
 
 
-    // listen for future changes to the session list
+    // listen for future changes to the profiles
     connect( manager , SIGNAL(favoriteStatusChanged(Profile::Ptr,bool)) , this ,
              SLOT(favoriteChanged(Profile::Ptr,bool)) );
     connect( manager , SIGNAL(shortcutChanged(Profile::Ptr,QKeySequence)) , this , 
@@ -70,20 +68,19 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     connect( manager , SIGNAL(profileChanged(Profile::Ptr)) , this , 
              SLOT(profileChanged(Profile::Ptr)) );
 }
-void ProfileList::updateEmptyAction() 
+void ProfileList::updateEmptyAction()
 {
     Q_ASSERT( _group );
     Q_ASSERT( _emptyListAction );
 
-    // show empty list action when it is the only action
-    // in the group
-    const bool showEmptyAction = _group->actions().count() == 1;
+    // show this action only when it is the only action in the group
+    const bool showEmptyAction = (_group->actions().count() == 1);
 
     if ( showEmptyAction != _emptyListAction->isVisible() )
         _emptyListAction->setVisible(showEmptyAction);
 }
 QAction* ProfileList::actionForKey(Profile::Ptr key) const
-{        
+{
     QListIterator<QAction*> iter(_group->actions());
     while ( iter.hasNext() )
     {
@@ -145,14 +142,14 @@ void ProfileList::favoriteChanged(Profile::Ptr info,bool isFavorite)
     {
         QAction* action = new QAction(_group);
         action->setData( QVariant::fromValue(info) );
-        
+
         if ( _addShortcuts )
         {
             action->setShortcut(manager->shortcut(info));
         }
 
         updateAction(action,info);
-        
+
         foreach(QWidget* widget,_registeredWidgets)
             widget->addAction(action);
         emit actionsChanged(_group->actions());
