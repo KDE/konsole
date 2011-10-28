@@ -131,9 +131,6 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 
     if ( _screenWindow )
     {
-
-// TODO: Determine if this is an issue.
-//#warning "The order here is not specified - does it matter whether updateImage or updateLineProperties comes first?"
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()) );
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
         _screenWindow->setWindowLines(_lines);
@@ -325,9 +322,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   // so the layout is forced to Left-To-Right
   setLayoutDirection(Qt::LeftToRight);
 
-  // The offsets are not yet calculated.
-  // Do not calculate these too often to be more smoothly when resizing
-  // konsole in opaque mode.
   _topMargin = DEFAULT_TOP_MARGIN;
   _leftMargin = DEFAULT_LEFT_MARGIN;
 
@@ -336,8 +330,8 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   // set the scroll bar's slider to occupy the whole area of the scroll bar initially
   setScroll(0,0);
   _scrollBar->setCursor( Qt::ArrowCursor );
-  connect(_scrollBar, SIGNAL(valueChanged(int)), this, 
-                        SLOT(scrollBarPositionChanged(int)));
+  connect(_scrollBar, SIGNAL(valueChanged(int)),
+          this, SLOT(scrollBarPositionChanged(int)));
 
   // setup timers for blinking cursor and text
   _blinkTextTimer   = new QTimer(this);
@@ -345,10 +339,11 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   _blinkCursorTimer   = new QTimer(this);
   connect(_blinkCursorTimer, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
 
+  // hide mouse cursor on keystroke or idle
   KCursor::setAutoHideCursor( this, true );
+  setMouseTracking(true);
 
   setUsesMouse(true);
-  setMouseTracking(true);
 
   setColorTable(base_color_table);
 
@@ -368,7 +363,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   _gridLayout = new QGridLayout(this);
   _gridLayout->setContentsMargins(0, 0, 0, 0);
 
-  setLayout( _gridLayout ); 
+  setLayout( _gridLayout );
 
   new AutoScrollHandler(this);
 }
@@ -607,7 +602,9 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
             painter.restore();
         } 
         else
+        {
             painter.fillRect(contentsRect, backgroundColor);
+        }
 
         painter.fillRect(scrollBarArea,_scrollBar->palette().background());
 }
