@@ -86,10 +86,11 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     lineCountLayout->addWidget(_lineCountBox);
     lineCountLayout->addWidget(lineCountLabel);
 
-    QLabel* warningLabel = new QLabel(i18n("<span style=\"color:gray;\"><center><bold>The adjustment is only temporary.</bold></center></span>"),this);
+    QLabel* warningLabel = new QLabel(i18n("<center>The adjustment is only temporary</center>"),this);
+    warningLabel->setStyleSheet("text-align:center; font-weight:normal; color:palette(dark)");
+
     dialogLayout->addWidget(warningLabel);
     dialogLayout->insertSpacing(-1, 5);
-
     dialogLayout->addWidget(_noHistoryButton);
     dialogLayout->addLayout(lineCountLayout);
     dialogLayout->addWidget(_unlimitedHistoryButton);
