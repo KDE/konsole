@@ -163,16 +163,6 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     _allControllers.insert(this);
 }
 
-void SessionController::updateSearchFilter()
-{
-    if ( _searchFilter ) 
-    {
-        Q_ASSERT( searchBar() && searchBar()->isVisible() );
-
-        _view->processFilters();
-    }
-}
-
 SessionController::~SessionController()
 {
    if ( _view )
@@ -423,8 +413,8 @@ void SessionController::setupActions()
 
     // Close Session
     action = collection->addAction("close-session", this, SLOT(closeSession()));
-    action->setIcon(KIcon("tab-close"));
     action->setText(i18n("&Close Tab"));
+    action->setIcon(KIcon("tab-close"));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_W));
 
     // Open Browser
@@ -467,8 +457,8 @@ void SessionController::setupActions()
 
     // Copy Input To -> Select Tabs
     _copyToSelectedAction = collection->addAction("copy-input-to-selected-tabs", this, SLOT(copyInputToSelectedTabs()));
-    _copyToSelectedAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Period) );
     _copyToSelectedAction->setText(i18n("&Select Tabs..."));
+    _copyToSelectedAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Period) );
     _copyToSelectedAction->setCheckable(true);
 
     // Copy Input To -> None
@@ -877,6 +867,16 @@ void SessionController::listenForScreenWindowUpdates()
             SLOT(updateSearchFilter()) );
 
     _listenForScreenWindowUpdates = true;
+}
+
+void SessionController::updateSearchFilter()
+{
+    if ( _searchFilter ) 
+    {
+        Q_ASSERT( searchBar() && searchBar()->isVisible() );
+
+        _view->processFilters();
+    }
 }
 
 // searchHistory() may be called either as a result of clicking a menu item or
