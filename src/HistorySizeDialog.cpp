@@ -119,7 +119,6 @@ void HistorySizeDialog::setMode( HistoryMode mode )
         _unlimitedHistoryButton->setChecked(true);
     }
 
-    Q_ASSERT(false);
 }
 
 HistorySizeDialog::HistoryMode HistorySizeDialog::mode() const
