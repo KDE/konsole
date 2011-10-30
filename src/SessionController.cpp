@@ -87,6 +87,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _findNextAction(0)
     , _findPreviousAction(0)
     , _urlFilterUpdateRequired(false)
+    , _searchBar(0)
     , _codecAction(0)
     , _switchProfileMenu(0)
     , _listenForScreenWindowUpdates(false)
