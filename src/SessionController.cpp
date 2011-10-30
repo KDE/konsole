@@ -849,13 +849,6 @@ void SessionController::searchClosed()
     _searchToggleAction->toggle();
 }
 
-#if 0
-void SessionController::searchHistory()
-{
-    searchHistory(true);
-}
-#endif
-
 void SessionController::listenForScreenWindowUpdates()
 {
     if (_listenForScreenWindowUpdates)
