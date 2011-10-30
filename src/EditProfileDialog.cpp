@@ -74,13 +74,15 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     enableButtonApply(false);
 
     connect( this , SIGNAL(applyClicked()) , this , SLOT(save()) );
+
     connect( _delayedPreviewTimer , SIGNAL(timeout()) , this , SLOT(delayedPreviewActivate()) );
+
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
 
-    // - Renable in a later KDE 4.x release when this feature works again
+    // TODO: Renable in a later KDE 4.x release when this feature works again
     _ui->enableResizeWindowButton->setVisible(false);
-    
+
     // there are various setupXYZPage() methods to load the items
     // for each page and update their states to match the profile
     // being edited.
@@ -303,7 +305,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
             SLOT(commandChanged(QString)) ); 
     connect(_ui->environmentEditButton , SIGNAL(clicked()) , this , 
             SLOT(showEnvironmentEditor()) );
-    
+
     connect(_ui->showMenuBarButton , SIGNAL(toggled(bool)) , this , 
             SLOT(showMenuBar(bool)) );
     connect(_ui->saveGeometryOnExitButton , SIGNAL(toggled(bool)) , this ,
@@ -343,10 +345,6 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
     _ui->remoteTabTitleEdit->setText( 
             info->property<QString>(Profile::RemoteTabTitleFormat));
 
-    // tab monitoring
-    int silenceSeconds = info->property<int>(Profile::SilenceSeconds);
-    _ui->silenceSecondsSpinner->setValue(silenceSeconds);
-
     // tab bar options
     int tabBarMode = info->property<int>(Profile::TabBarMode);
     int tabBarPosition = info->property<int>(Profile::TabBarPosition);
@@ -372,6 +370,10 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
     _ui->newTabBehaviorCombo->setCurrentIndex(newTabBehavior);
 
     _ui->newTabButton->setChecked(info->property<bool>(Profile::ShowNewAndCloseTabButtons));
+
+    // tab monitoring
+    int silenceSeconds = info->property<int>(Profile::SilenceSeconds);
+    _ui->silenceSecondsSpinner->setValue(silenceSeconds);
 
     // signals and slots
     connect( _ui->tabBarVisibilityCombo , SIGNAL(activated(int)) , this , 
