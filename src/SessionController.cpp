@@ -28,7 +28,6 @@
 // KDE
 #include <KAction>
 #include <KIcon>
-#include <KInputDialog>
 #include <KLocale>
 #include <KMenu>
 #include <KMessageBox>
