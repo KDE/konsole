@@ -241,8 +241,8 @@ void EditProfileDialog::preparePage(int page)
 }
 void EditProfileDialog::selectProfileName()
 {
-    _ui->profileNameEdit->selectAll();
     _ui->profileNameEdit->setFocus();
+    _ui->profileNameEdit->selectAll();
 }
 void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
 {
