@@ -205,10 +205,10 @@ private slots:
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);
     void renameSession();
-    void changeProfile(Profile::Ptr profile);
+    void switchProfile(Profile::Ptr profile);
 
     // other
-    void prepareChangeProfileMenu();
+    void prepareSwitchProfileMenu();
     void updateCodecAction();
     void showDisplayContextMenu(const QPoint& position);
     void sessionStateChanged(int state);
@@ -281,7 +281,7 @@ private:
 
     KCodecAction* _codecAction;
 
-    KActionMenu* _changeProfileMenu;
+    KActionMenu* _switchProfileMenu;
 
     bool _listenForScreenWindowUpdates;
     bool _preventClose;

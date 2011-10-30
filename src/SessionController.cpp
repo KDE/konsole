@@ -88,7 +88,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _findPreviousAction(0)
     , _urlFilterUpdateRequired(false)
     , _codecAction(0)
-    , _changeProfileMenu(0)
+    , _switchProfileMenu(0)
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
 {
@@ -537,25 +537,25 @@ void SessionController::setupActions()
     action->setText(i18n("Configure Current Profile..."));
     action->setIcon(KIcon("document-properties") );
 
-    _changeProfileMenu = new KActionMenu(i18n("Switch Profile"), _view);
-    collection->addAction("switch-profile", _changeProfileMenu);
-    connect(_changeProfileMenu->menu(), SIGNAL(aboutToShow()), this, SLOT(prepareChangeProfileMenu()));
+    _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), _view);
+    collection->addAction("switch-profile", _switchProfileMenu);
+    connect(_switchProfileMenu->menu(), SIGNAL(aboutToShow()), this, SLOT(prepareSwitchProfileMenu()));
 }
 
-void SessionController::changeProfile(Profile::Ptr profile)
+void SessionController::switchProfile(Profile::Ptr profile)
 {
     SessionManager::instance()->setSessionProfile(_session,profile);
 }
 
-void SessionController::prepareChangeProfileMenu()
+void SessionController::prepareSwitchProfileMenu()
 {
-    if (_changeProfileMenu->menu()->isEmpty()) {
+    if (_switchProfileMenu->menu()->isEmpty()) {
         _profileList = new ProfileList(false,this);
-        connect(_profileList, SIGNAL(profileSelected(Profile::Ptr)), this, SLOT(changeProfile(Profile::Ptr)));
+        connect(_profileList, SIGNAL(profileSelected(Profile::Ptr)), this, SLOT(switchProfile(Profile::Ptr)));
     }
 
-    _changeProfileMenu->menu()->clear();
-    _changeProfileMenu->menu()->addActions(_profileList->actions());
+    _switchProfileMenu->menu()->clear();
+    _switchProfileMenu->menu()->addActions(_profileList->actions());
 }
 void SessionController::updateCodecAction()
 {
