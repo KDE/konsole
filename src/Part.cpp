@@ -31,7 +31,6 @@
 #include <KLocale>
 #include <KWindowSystem>
 #include <KPluginFactory>
-#include <kdeversion.h>
 #include <kde_file.h>
 
 // Konsole

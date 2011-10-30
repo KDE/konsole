@@ -42,7 +42,6 @@
 #include <KXMLGUIBuilder>
 #include <KDebug>
 #include <kcodecaction.h>
-#include <kdeversion.h>
 
 // Konsole
 #include "EditProfileDialog.h"
