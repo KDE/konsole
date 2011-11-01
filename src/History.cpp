@@ -56,29 +56,10 @@ using namespace Konsole;
 
 KDE4: Can we use QTemporaryFile here, instead of KTempFile?
 
-FIXME: some complain about the history buffer comsuming the
-       memory of their machines. This problem is critical
-       since the history does not behave gracefully in cases
-       where the memory is used up completely.
-
-       I put in a workaround that should handle it problem
-       now gracefully. I'm not satisfied with the solution.
-
-FIXME: Terminating the history is not properly indicated
-       in the menu. We should throw a signal.
-
-FIXME: There is noticeable decrease in speed, also. Perhaps,
-       there whole feature needs to be revisited therefore.
-       Disadvantage of a more elaborated, say block-oriented
-       scheme with wrap around would be it's complexity.
 */
 
 
 // History File ///////////////////////////////////////////
-
-/*
-  A Row(X) data type which allows adding elements to the end.
-*/
 
 HistoryFile::HistoryFile()
   : _fd(-1),
