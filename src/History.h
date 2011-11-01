@@ -30,7 +30,7 @@
 #include <KTemporaryFile>
 
 // Konsole
-#include "BlockArray.h"
+//#include "BlockArray.h"
 #include "Character.h"
 
 // map
@@ -150,7 +150,7 @@ private:
   HistoryFile lineflags; // flags Row(unsigned char)
 };
 
-
+#if 0
 //////////////////////////////////////////////////////////////////////
 // Buffer-based history (limited to a fixed nb of lines)
 //////////////////////////////////////////////////////////////////////
@@ -204,6 +204,7 @@ public:
 
 };*/
 
+#endif
 
 //////////////////////////////////////////////////////////////////////
 // Nothing-based history (no history :-)
@@ -225,6 +226,7 @@ public:
   virtual void addLine(bool previousWrapped=false);
 };
 
+#if 0
 //////////////////////////////////////////////////////////////////////
 // BlockArray-based history
 //////////////////////////////////////////////////////////////////////
@@ -246,6 +248,7 @@ protected:
   BlockArray m_blockArray;
   QHash<int,size_t> m_lineLengths;
 };
+#endif
 
 //////////////////////////////////////////////////////////////////////
 // History using compact storage
@@ -412,6 +415,7 @@ public:
   virtual HistoryScroll* scroll(HistoryScroll *) const;
 };
 
+#if 0
 class HistoryTypeBlockArray : public HistoryType
 {
 public:
@@ -425,6 +429,7 @@ public:
 protected:
   size_t m_size;
 };
+#endif
 
 class HistoryTypeFile : public HistoryType
 {
@@ -441,7 +446,7 @@ protected:
   QString m_fileName;
 };
 
-
+#if 0
 class HistoryTypeBuffer : public HistoryType
 {
     friend class HistoryScrollBuffer;
@@ -457,6 +462,7 @@ public:
 protected:
   unsigned int m_nbLines;
 };
+#endif
 
 class CompactHistoryType : public HistoryType
 {

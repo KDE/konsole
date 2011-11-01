@@ -71,7 +71,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
     set(konsoleprivate_SRCS
         ${sessionadaptors_SRCS}
         ${konsoleadaptors_SRCS}
-        BlockArray.cpp
+        #BlockArray.cpp
         BookmarkHandler.cpp
         ColorScheme.cpp
         ColorSchemeEditor.cpp

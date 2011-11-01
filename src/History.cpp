@@ -273,7 +273,7 @@ void HistoryScrollFile::addLine(bool previousWrapped)
   lineflags.add((unsigned char*)&flags,sizeof(unsigned char));
 }
 
-
+#if 0
 // History Scroll Buffer //////////////////////////////////////
 HistoryScrollBuffer::HistoryScrollBuffer(unsigned int maxLineCount)
   : HistoryScroll(new HistoryTypeBuffer(maxLineCount))
@@ -407,6 +407,7 @@ int HistoryScrollBuffer::bufferIndex(int lineNumber)
         return lineNumber;
     }
 }
+#endif
 
 
 // History Scroll None //////////////////////////////////////
@@ -452,6 +453,7 @@ void HistoryScrollNone::addLine(bool)
 {
 }
 
+#if 0
 // History Scroll BlockArray //////////////////////////////////////
 
 HistoryScrollBlockArray::HistoryScrollBlockArray(size_t size)
@@ -522,6 +524,7 @@ void HistoryScrollBlockArray::addCells(const Character a[], int count)
 void HistoryScrollBlockArray::addLine(bool)
 {
 }
+#endif
 
 ////////////////////////////////////////////////////////////////
 // Compact History Scroll //////////////////////////////////////
@@ -808,6 +811,7 @@ int HistoryTypeNone::maximumLineCount() const
   return 0;
 }
 
+#if 0
 //////////////////////////////
 
 HistoryTypeBlockArray::HistoryTypeBlockArray(size_t size)
@@ -830,8 +834,9 @@ HistoryScroll* HistoryTypeBlockArray::scroll(HistoryScroll *old) const
   delete old;
   return new HistoryScrollBlockArray(m_size);
 }
+#endif
 
-
+#if 0
 //////////////////////////////
 
 HistoryTypeBuffer::HistoryTypeBuffer(unsigned int nbLines)
@@ -890,6 +895,7 @@ HistoryScroll* HistoryTypeBuffer::scroll(HistoryScroll *old) const
   }
   return new HistoryScrollBuffer(m_nbLines);
 }
+#endif
 
 //////////////////////////////
 
