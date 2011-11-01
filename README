@@ -26,7 +26,6 @@ Directory Structure
 
  /desktop       .desktop files for Konsole, used to launch the program
                 from KDE's various menus and other application launchers.
-                The "Tip of the Day" startup tips are also stored here. 
 
  /data          Data files for use with Konsole as well as the keyboard setup
                 and color schemes provided with Konsole.
