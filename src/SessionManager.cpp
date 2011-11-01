@@ -50,22 +50,22 @@
 using namespace Konsole;
 
 
-bool profileIndexLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
+static bool profileIndexLessThan(const Profile::Ptr& p1, const Profile::Ptr& p2)
 {
     return p1->menuIndexAsInt() <= p2->menuIndexAsInt();
 }
 
-bool profileNameLessThan(const Profile::Ptr &p1, const Profile::Ptr &p2)
+static bool profileNameLessThan(const Profile::Ptr& p1, const Profile::Ptr& p2)
 {
     return QString::localeAwareCompare(p1->name(), p2->name()) <= 0;
 }
 
-static void sortByIndexProfileList(QList<Profile::Ptr> &list)
+static void sortByIndexProfileList(QList<Profile::Ptr>& list)
 {
    qStableSort(list.begin(), list.end(), profileIndexLessThan);
 }
 
-static void sortByNameProfileList(QList<Profile::Ptr> &list)
+static void sortByNameProfileList(QList<Profile::Ptr>& list)
 {
     qStableSort(list.begin(), list.end(), profileNameLessThan);
 }
