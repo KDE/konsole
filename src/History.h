@@ -390,7 +390,7 @@ public:
    * Returns true if the history is enabled ( can store lines of output )
    * or false otherwise. 
    */
-  virtual bool isEnabled()           const = 0;
+  virtual bool isEnabled() const = 0;
   /**
    * Returns true if the history size is unlimited.
    */
@@ -399,7 +399,7 @@ public:
    * Returns the maximum number of lines which this history type
    * can store or 0 if the history can store an unlimited number of lines.
    */
-  virtual int maximumLineCount()    const = 0;
+  virtual int maximumLineCount() const = 0;
 
   virtual HistoryScroll* scroll(HistoryScroll *) const = 0;
 };
