@@ -943,7 +943,7 @@ HistoryScroll* HistoryTypeFile::scroll(HistoryScroll *old) const
 
 int HistoryTypeFile::maximumLineCount() const
 {
-  return 0;
+  return -1;
 }
 
 //////////////////////////////

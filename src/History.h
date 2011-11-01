@@ -394,10 +394,10 @@ public:
   /**
    * Returns true if the history size is unlimited.
    */
-  bool isUnlimited() const { return maximumLineCount() == 0; }
+  bool isUnlimited() const { return maximumLineCount() == -1; }
   /**
    * Returns the maximum number of lines which this history type
-   * can store or 0 if the history can store an unlimited number of lines.
+   * can store or -1 if the history can store an unlimited number of lines.
    */
   virtual int maximumLineCount() const = 0;
 
