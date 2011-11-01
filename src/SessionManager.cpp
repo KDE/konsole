@@ -323,8 +323,6 @@ void SessionManager::updateSession(Session* session)
 
     applyProfile(session,profile,false);
 
-    // FIXME - This may update a lot more than just the session
-    // of interest. 
     emit sessionUpdated(session);
 }
 
