@@ -24,9 +24,12 @@
 // Qt
 #include <QtGui/QApplication>
 #include <QtGui/QMenu>
+#include <QtGui/QKeyEvent>
 
 // KDE
 #include <KAction>
+#include <KActionMenu>
+#include <KActionCollection>
 #include <KIcon>
 #include <KLocale>
 #include <KMenu>
@@ -48,6 +51,7 @@
 #include "Emulation.h"
 #include "Filter.h"
 #include "History.h"
+#include "HistorySizeDialog.h"
 #include "IncrementalSearchBar.h"
 #include "RenameTabsDialog.h"
 #include "ScreenWindow.h"

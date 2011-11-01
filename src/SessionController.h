@@ -31,13 +31,10 @@
 #include <QtCore/QHash>
 
 // KDE
-#include <KActionCollection>
-#include <KActionMenu>
 #include <KIcon>
 #include <KXMLGUIClient>
 
 // Konsole
-#include "HistorySizeDialog.h"
 #include "ViewProperties.h"
 #include "Profile.h"
 
@@ -48,9 +45,13 @@ namespace KIO
 
 class QAction;
 class QTextCodec;
+class QKeyEvent;
+
 class KCodecAction;
 class KUrl;
 class KJob;
+class KAction;
+class KActionMenu;
 
 namespace Konsole
 {
@@ -63,6 +64,7 @@ class IncrementalSearchBar;
 class ProfileList;
 class UrlFilter;
 class RegExpFilter;
+class HistorySizeDialog;
 
 // SaveHistoryTask
 class TerminalCharacterDecoder;

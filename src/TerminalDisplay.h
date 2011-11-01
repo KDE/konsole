@@ -27,12 +27,10 @@
 #include <QtGui/QWidget>
 
 // Konsole
-#include "Filter.h"
 #include "Character.h"
 #include "konsole_export.h"
 #include "ScreenWindow.h"
 #include "ColorScheme.h"
-#include "SessionController.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -52,6 +50,10 @@ class KMenu;
 
 namespace Konsole
 {
+
+class FilterChain;
+class TerminalImageFilterChain;
+class SessionController;
 
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity

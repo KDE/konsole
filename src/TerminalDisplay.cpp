@@ -63,6 +63,7 @@
 #include "Screen.h"
 #include "ScreenWindow.h"
 #include "LineFont.h"
+#include "SessionController.h"
 
 using namespace Konsole;
 

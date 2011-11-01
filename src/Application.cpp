@@ -31,6 +31,7 @@
 // KDE
 #include <KAction>
 #include <KCmdLineArgs>
+#include <KUrl>
 #include <KDebug>
 #include <KWindowSystem>
 

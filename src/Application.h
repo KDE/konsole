@@ -22,12 +22,12 @@
 
 // KDE 
 #include <KUniqueApplication>
-#include <KUrl>
 
 // Konsole
 #include "Profile.h"
 
 class KCmdLineArgs;
+class KUrl;
 
 namespace Konsole
 {

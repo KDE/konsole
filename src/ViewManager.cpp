@@ -34,6 +34,7 @@
 #include <KGlobal>
 #include <KLocale>
 #include <KToggleAction>
+#include <KActionCollection>
 #include <KXMLGUIFactory>
 #include <KConfigGroup>
 

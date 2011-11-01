@@ -26,12 +26,13 @@
 // Qt
 #include <QtCore/QRect>
 #include <QtCore/QSet>
+#include <QtCore/QVector>
+#include <QtCore/QBitArray>
 #include <QtCore/QTextStream>
 #include <QtCore/QVarLengthArray>
 
 // Konsole
 #include "Character.h"
-#include "History.h"
 
 #define MODE_Origin    0
 #define MODE_Wrap      1
@@ -46,6 +47,8 @@ namespace Konsole
 
 class TerminalCharacterDecoder;
 class TerminalDisplay;
+class HistoryType;
+class HistoryScroll;
 
 /**
     \brief An image of characters with associated attributes.
