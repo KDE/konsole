@@ -27,7 +27,6 @@
 #include <QtGui/QItemEditorCreator>
 #include <QtCore/QMetaEnum>
 #include <QtCore/QFileInfo>
-#include <QtGui/QScrollBar>
 #include <QtGui/QShowEvent>
 #include <QtGui/QStandardItem>
 
