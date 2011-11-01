@@ -437,7 +437,6 @@ public:
   HistoryTypeFile(const QString& fileName=QString());
 
   virtual bool isEnabled() const;
-  virtual const QString& getFileName() const;
   virtual int maximumLineCount() const;
 
   virtual HistoryScroll* scroll(HistoryScroll *) const;

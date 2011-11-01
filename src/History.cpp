@@ -909,11 +909,6 @@ bool HistoryTypeFile::isEnabled() const
   return true;
 }
 
-const QString& HistoryTypeFile::getFileName() const
-{
-  return m_fileName;
-}
-
 HistoryScroll* HistoryTypeFile::scroll(HistoryScroll *old) const
 {
   if (dynamic_cast<HistoryFile *>(old)) 
