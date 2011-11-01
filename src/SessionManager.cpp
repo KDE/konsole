@@ -104,6 +104,25 @@ SessionManager::SessionManager()
     // that is done on-demand.
     loadShortcuts();
 }
+
+SessionManager::~SessionManager()
+{
+    if (_sessions.count() > 0)
+    {
+        kWarning() << "Konsole SessionManager destroyed with sessions still alive";
+        // ensure that the Session doesn't later try to call back and do things to the 
+        // SessionManager
+        foreach(Session* session , _sessions)
+            disconnect(session , 0 , this , 0);
+    }
+}
+
+K_GLOBAL_STATIC( SessionManager , theSessionManager )
+SessionManager* SessionManager::instance()
+{
+    return theSessionManager;
+}
+
 Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
 {
     // the fallback profile has a 'special' path name, "FALLBACK/"
@@ -287,18 +306,6 @@ void SessionManager::closeAll()
     }
     _sessions.clear();    
 }
-SessionManager::~SessionManager()
-{
-    if (_sessions.count() > 0)
-    {
-        kWarning() << "Konsole SessionManager destroyed with sessions still alive";
-        // ensure that the Session doesn't later try to call back and do things to the 
-        // SessionManager
-        foreach(Session* session , _sessions)
-            disconnect(session , 0 , this , 0);
-    }
-}
-
 const QList<Session*> SessionManager::sessions() const
 {
     return _sessions;
@@ -882,12 +889,6 @@ Session* SessionManager::idToSession(int id)
     // this should not happen
     Q_ASSERT(0);
     return 0;
-}
-
-K_GLOBAL_STATIC( SessionManager , theSessionManager )
-SessionManager* SessionManager::instance()
-{
-    return theSessionManager;
 }
 
 SessionListModel::SessionListModel(QObject* parent)
