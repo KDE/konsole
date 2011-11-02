@@ -288,7 +288,7 @@ signals:
    * Requests that the pty used by the terminal process
    * be set to UTF 8 mode.  
    *
-   * TODO: More documentation
+   * Refer to the IUTF8 entry in termios(3) for more information.
    */
   void useUtf8Request(bool);
 

@@ -73,7 +73,9 @@ class MainWindow : public KXmlGuiWindow
 
         /**
          * Returns the search bar.
-         * TODO - More documentation
+         *
+         * This is a convenience method. The search bar is actually owned by
+         * ViewManager, or more precisely, by ViewContainer.
          */
         IncrementalSearchBar* searchBar() const;
 
