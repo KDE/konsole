@@ -41,21 +41,6 @@
 
 using namespace Konsole;
 
-#if 0
-class ColorEditorCreator : public QItemEditorCreatorBase
-{
-    virtual QWidget* createWidget(QWidget* parent) const
-    {
-        return new KColorButton(parent);
-    }
-
-    virtual QByteArray valuePropertyName() const
-    {
-        return QByteArray("color");
-    }
-};
-#endif
-
 ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     : QWidget(parent)
     , _colors(0)
