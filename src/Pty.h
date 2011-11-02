@@ -105,7 +105,7 @@ public:
                const QString& dbusSession
              );
 
-    /** TODO: Document me */
+    /** Control whether the pty device is writeable by group members. */
     void setWriteable(bool writeable);
 
     /** 
@@ -127,7 +127,10 @@ public:
     /** Returns the size of the window used by this teletype.  See setWindowSize() */
     QSize windowSize() const;
 
-    /** TODO Document me */
+    /**
+     * Sets the special character for erasing previous not-yet-erased character.
+     * See termios(3) for detailed description.
+     */
     void setEraseChar(char eraseChar);
 
     /** */

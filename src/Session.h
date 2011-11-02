@@ -568,7 +568,10 @@ signals:
   /** TODO: Document me. */
   void openUrlRequest(const QString& url);
 
-  /** TODO: Document me. */
+  /**
+   * Emitted when the request for data transmission through ZModem
+   * protocol is detected.
+   */
   void zmodemDetected();
 
   /**

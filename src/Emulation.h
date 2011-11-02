@@ -184,7 +184,7 @@ public:
   { Q_ASSERT(_codec); return _codec->mibEnum() == 106; }
   
 
-  /** TODO Document me */
+  /** Returns the special character used for erasing character. */
   virtual char eraseChar() const;
 
   /** 
@@ -300,7 +300,10 @@ signals:
    */
   void stateSet(int state);
 
-  /** TODO Document me */
+  /**
+   * Emitted when the special sequence indicating the request for data
+   * transmission through ZModem protocol is detected.
+   */
   void zmodemDetected();
 
 
