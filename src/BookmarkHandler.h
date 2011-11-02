@@ -79,7 +79,7 @@ public:
     /** 
      * Returns the menu which this bookmark handler inserts its actions into.
      */
-    KMenu* menu() const { return m_menu; }
+    KMenu* menu() const { return _menu; }
 
     QList<ViewProperties*> views() const;
     ViewProperties* activeView() const;
@@ -116,12 +116,12 @@ private:
     QString titleForView( ViewProperties* view ) const;
     QString urlForView( ViewProperties* view ) const;
 
-    KMenu* m_menu;
-    KBookmarkMenu* m_bookmarkMenu;
-    QString m_file;
-    bool m_toplevel;
-    ViewProperties* m_activeView;
-    QList<ViewProperties*> m_views;
+    KMenu* _menu;
+    KBookmarkMenu* _bookmarkMenu;
+    QString _file;
+    bool _toplevel;
+    ViewProperties* _activeView;
+    QList<ViewProperties*> _views;
 };
 
 }

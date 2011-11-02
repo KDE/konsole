@@ -44,29 +44,29 @@ BookmarkHandler::BookmarkHandler( KActionCollection* collection,
                                   QObject* parent )
     : QObject( parent ),
       KBookmarkOwner(),
-      m_menu(menu),
-      m_toplevel(toplevel),
-      m_activeView(0)
+      _menu(menu),
+      _toplevel(toplevel),
+      _activeView(0)
 {
     setObjectName( QLatin1String( "BookmarkHandler" ) );
 
-    m_file = KStandardDirs::locate( "data", "konsole/bookmarks.xml" );
-    if ( m_file.isEmpty() )
-        m_file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
+    _file = KStandardDirs::locate( "data", "konsole/bookmarks.xml" );
+    if ( _file.isEmpty() )
+        _file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
 
-    KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, "konsole" );
+    KBookmarkManager *manager = KBookmarkManager::managerForFile( _file, "konsole" );
 
     manager->setUpdate( true );
 
     if (toplevel)
-        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu, collection );
+        _bookmarkMenu = new KBookmarkMenu( manager, this, _menu, collection );
     else
-        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu, NULL);
+        _bookmarkMenu = new KBookmarkMenu( manager, this, _menu, NULL);
 }
 
 BookmarkHandler::~BookmarkHandler()
 {
-    delete m_bookmarkMenu;
+    delete _bookmarkMenu;
 }
 
 void BookmarkHandler::openBookmark( const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers )
@@ -80,14 +80,14 @@ void BookmarkHandler::openFolderinTabs( const KBookmarkGroup& group )
 bool BookmarkHandler::enableOption(BookmarkOption option ) const
 {
     if ( option == ShowAddBookmark || option == ShowEditBookmark )
-        return m_toplevel;
+        return _toplevel;
     else
         return KBookmarkOwner::enableOption(option);
 }
 
 QString BookmarkHandler::currentUrl() const
 {
-    return urlForView(m_activeView);
+    return urlForView(_activeView);
 }
 
 QString BookmarkHandler::urlForView(ViewProperties* view) const
@@ -100,7 +100,7 @@ QString BookmarkHandler::urlForView(ViewProperties* view) const
 
 QString BookmarkHandler::currentTitle() const
 {
-    return titleForView(m_activeView);
+    return titleForView(_activeView);
 }
 
 QString BookmarkHandler::titleForView(ViewProperties* view) const
@@ -135,7 +135,7 @@ QList<QPair<QString,QString> > BookmarkHandler::currentBookmarkList() const
 {
     QList<QPair<QString,QString> > list;
 
-    QListIterator<ViewProperties*> iter( m_views );
+    QListIterator<ViewProperties*> iter( _views );
 
     while ( iter.hasNext() )
     {
@@ -148,19 +148,19 @@ QList<QPair<QString,QString> > BookmarkHandler::currentBookmarkList() const
 
 void BookmarkHandler::setViews(const QList<ViewProperties*>& views) 
 {
-    m_views = views;
+    _views = views;
 }
 QList<ViewProperties*> BookmarkHandler::views() const
 {
-    return m_views;
+    return _views;
 }
 void BookmarkHandler::setActiveView( ViewProperties* view )
 {
-    m_activeView = view;
+    _activeView = view;
 }
 ViewProperties* BookmarkHandler::activeView() const
 {
-    return m_activeView;
+    return _activeView;
 }
 
 #include "BookmarkHandler.moc"
