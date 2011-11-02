@@ -74,7 +74,8 @@ MainWindow::MainWindow()
    _menuBarInitialVisibilitySet(false),
    _menuBarInitialVisibilityApplied(false)
 {
-    if (useTransparency()) {
+    if ( useTransparency() )
+    {
         setAttribute(Qt::WA_TranslucentBackground);
         setAttribute(Qt::WA_NoSystemBackground, false);
     }
@@ -83,7 +84,7 @@ MainWindow::MainWindow()
     setupActions();
 
     // create view manager
-        _viewManager = new ViewManager(this,actionCollection());
+    _viewManager = new ViewManager(this,actionCollection());
     connect( _viewManager , SIGNAL(empty()) , this , SLOT(close()) );
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
             SLOT(activeViewChanged(SessionController*)) );
@@ -110,6 +111,7 @@ MainWindow::MainWindow()
     // menu items - to avoid conflicting with Alt+[Letter] shortcuts
     // in terminal applications
     KAcceleratorManager::setNoAccel(menuBar());
+
     // create menus
     createGUI();
     // remove accelerators for standard menu items (eg. &File, &View, &Edit)
@@ -157,13 +159,10 @@ void MainWindow::correctShortcuts()
 {
     // replace F1 shortcut for help contents
     QAction* helpAction = actionCollection()->action("help_contents");
-
     Q_ASSERT( helpAction );
-
     helpAction->setShortcut(QKeySequence());
-   
+
     // replace Ctrl+B shortcut for bookmarks
-    // TODO - Make this configurable
     QAction* bookmarkAction = actionCollection()->action("add_bookmark");
     Q_ASSERT(bookmarkAction);
     bookmarkAction->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_B));
@@ -267,15 +266,14 @@ void MainWindow::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
     action = KStandardAction::quit( this , SLOT(close()) , collection );
-    // the default shortcut for quit is typically Ctrl+[Some Letter, usually Q] but that is reserved for
-    // use by terminal applications
+    // the default shortcut for quit is typically Ctrl+[Some Letter, usually Q]
+    // but that is reserved for use by terminal applications
     action->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Q) );
 
     // Bookmark Menu
     KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection );
     _bookmarkHandler = new BookmarkHandler( collection , bookmarkMenu->menu() , true , this );
     collection->addAction("bookmark" , bookmarkMenu);
-
     connect( _bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)) );
 
     // View Menu

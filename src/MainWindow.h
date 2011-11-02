@@ -66,7 +66,7 @@ class MainWindow : public KXmlGuiWindow
         MainWindow();
 
         /**
-         * Returns the view manager associated with this window.  The view manager can be used to 
+         * Returns the view manager associated with this window.  The view manager can be used to
          * create new views on particular session objects inside this window.
          */
         ViewManager* viewManager() const;
@@ -99,7 +99,6 @@ class MainWindow : public KXmlGuiWindow
          */
         Profile::Ptr defaultProfile() const;
 
-        
     signals:
         /** 
          * Emitted by the main window to request the creation of a new session.
