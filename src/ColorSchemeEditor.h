@@ -23,9 +23,6 @@
 // Qt
 #include <QtGui/QWidget>
 
-// Konsole
-#include "ColorScheme.h"
-
 class QTableWidgetItem;
 
 namespace Ui
