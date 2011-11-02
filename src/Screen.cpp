@@ -734,19 +734,6 @@ void Screen::displayCharacter(unsigned short c)
     cuX = newCursorX;
 }
 
-void Screen::compose(const QString& /*compose*/)
-{
-    Q_ASSERT( 0 /*Not implemented yet*/ );
-
-    /*  if (lastPos == -1)
-        return;
-
-        QChar c(image[lastPos].character);
-        compose.prepend(c);
-    //compose.compose(); ### FIXME!
-    image[lastPos].character = compose[0].unicode();*/
-}
-
 int Screen::scrolledLines() const
 {
     return _scrolledLines;

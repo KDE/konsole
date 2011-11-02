@@ -347,10 +347,7 @@ public:
      * character already at the current cursor position.  
      */ 
     void displayCharacter(unsigned short c);
-    
-    // Do composition with last shown character FIXME: Not implemented yet for KDE 4
-    void compose(const QString& compose);
-    
+
     /** 
      * Resizes the image to a new fixed size of @p new_lines by @p new_columns.  
      * In the case that @p new_columns is smaller than the current number of columns,
