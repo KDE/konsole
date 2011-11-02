@@ -134,7 +134,10 @@ char Pty::eraseChar() const
 void Pty::setInitialWorkingDirectory(const QString& dir)
 {
     setWorkingDirectory(dir);
-    setEnv("PWD", dir);
+
+    // setting PWD to "." will cause problem for bash & zsh
+    if ( dir != "." )
+        setEnv("PWD", dir);
 }
 
 void Pty::addEnvironmentVariables(const QStringList& environment)
