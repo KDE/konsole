@@ -73,7 +73,7 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     _viewSplitter->setRecursiveSplitting(false);
     _viewSplitter->setFocusPolicy(Qt::NoFocus);
 
-    // setup actions which relating to the view
+    // setup actions which are related to the views
     setupActions();
 
     // emit a signal when all of the views held by this view manager are destroyed
@@ -139,7 +139,7 @@ void ViewManager::setupActions()
     KAction* previousViewAction = new KAction( i18nc("@action Shortcut entry", "Previous Tab") , this );
     KAction* lastViewAction = new KAction( i18nc("@action Shortcut entry", "Switch to Last Tab") , this);
     KAction* nextContainerAction = new KAction( i18nc("@action Shortcut entry", "Next View Container") , this);
-  
+
     KAction* moveViewLeftAction = new KAction( i18nc("@action Shortcut entry", "Move Tab Left") , this );
     KAction* moveViewRightAction = new KAction( i18nc("@action Shortcut entry", "Move Tab Right") , this );
 
@@ -438,7 +438,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
     // iterate over each session which has a view in the current active
     // container and create a new view for that session in a new container 
     QListIterator<QWidget*> existingViewIter(_viewSplitter->activeContainer()->views());
-    
+
     ViewContainer* container = 0; 
 
     while (existingViewIter.hasNext())
@@ -583,7 +583,7 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
      bool isFirst = _sessionMap.isEmpty();
      if ( isFirst)
          applyProfileToContainer(container, profile);
-     
+
      // set initial size
      display->setSize(80,40);
 
@@ -601,7 +601,7 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
          container->setActiveView(display);
          display->setFocus( Qt::OtherFocusReason );
      }
-    
+
      updateDetachViewState();
 }
 
@@ -697,7 +697,7 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr profile)
     connect( container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
-    
+
     return container;
 }
 void ViewManager::containerMoveViewRequest(int index, int id, bool& moved)
@@ -772,7 +772,7 @@ void ViewManager::viewCloseRequest(QWidget* view)
 {
     //FIXME Check that this cast is actually legal
     TerminalDisplay* display = (TerminalDisplay*)view;
-  
+
     Q_ASSERT(display);
 
     // 1. detach view from session
@@ -819,8 +819,6 @@ const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr profile
 void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr profile)
 {
     Q_ASSERT( profile );
-    
-    const ColorScheme* colorScheme = colorSchemeForProfile(profile);
 
     // menu bar visibility
     emit setMenuBarVisibleRequest( profile->property<bool>(Profile::ShowMenuBar) );
@@ -829,14 +827,14 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
 
     emit updateWindowIcon();
 
-    // load colour scheme
+    // load color scheme
     ColorEntry table[TABLE_COLORS];
-    
+    const ColorScheme* colorScheme = colorSchemeForProfile(profile);
     colorScheme->getColorTable(table , view->randomSeed() );
     view->setColorTable(table);
     view->setOpacity(colorScheme->opacity());
     view->setWallpaper(colorScheme->wallpaper());
-  
+
     // load font 
     view->setAntialias(profile->property<bool>(Profile::AntiAliasFonts));
     view->setBoldIntense(profile->property<bool>(Profile::BoldIntense));
@@ -883,7 +881,7 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     // cursor color
     bool useCustomColor = profile->property<bool>(Profile::UseCustomCursorColor);
     const QColor& cursorColor = profile->property<QColor>(Profile::CustomCursorColor);
-        
+
     view->setKeyboardCursorColor(!useCustomColor,cursorColor);
 
     // word characters
