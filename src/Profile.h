@@ -338,7 +338,7 @@ public:
      */
     template <class T>
     T property(Property property) const;
-    
+
     /** Sets the value of the specified @p property to @p value. */
     virtual void setProperty(Property property,const QVariant& value);
     /** Returns true if the specified property has been set in this Profile instance. */
@@ -372,7 +372,7 @@ public:
 
     /** Convenience method for property<QString>(Profile::Name) */
     QString name() const { return property<QString>(Profile::Name); }
-    
+
     /** Convenience method for property<QString>(Profile::Directory) */
     QString defaultWorkingDirectory() const 
             { return property<QString>(Profile::Directory); }
@@ -434,7 +434,7 @@ private:
 
     static QHash<QString,PropertyInfo> _propertyInfoByName;
     static QHash<Property,PropertyInfo> _infoByProperty;
-    
+
     // Describes a property.  Each property has a name and group
     // which is used when saving/loading the profile.
     struct PropertyInfo

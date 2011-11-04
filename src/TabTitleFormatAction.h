@@ -42,13 +42,13 @@ public:
 
 signals:
     void dynamicElementSelected(const QString&);
-  
+
 private slots:
     void fireElementSelected(QAction*);
 
 private:
     Session::TabTitleContext _context;
-    
+
     struct Element
     {
         QString element;

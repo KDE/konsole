@@ -168,7 +168,7 @@ void ColorScheme::setColorTableEntry(int index , const ColorEntry& entry)
         for (int i=0;i<TABLE_COLORS;i++)
             _table[i] = defaultTable[i];
     }
-    
+
     _table[index] = entry; 
 }
 ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
@@ -185,14 +185,14 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
         !_randomTable[index].isNull() )
     {
         const RandomizationRange& range = _randomTable[index];
-      
+
 
         int hueDifference = range.hue ? (qrand() % range.hue) - range.hue/2 : 0;
         int saturationDifference = range.saturation ? (qrand() % range.saturation) - range.saturation/2 : 0;
         int  valueDifference = range.value ? (qrand() % range.value) - range.value/2 : 0;
 
         QColor& color = entry.color;
-      
+
         int newHue = qAbs( (color.hue() + hueDifference) % MAX_HUE );
         int newValue = qMin( qAbs(color.value() + valueDifference) , 255 );
         int newSaturation = qMin( qAbs(color.saturation() + saturationDifference) , 255 );
@@ -288,7 +288,7 @@ void ColorScheme::write(KConfig& config) const
     configGroup.writeEntry("Description",_description);
     configGroup.writeEntry("Opacity",_opacity);
     configGroup.writeEntry("Wallpaper", _wallpaper->path());
-    
+
     for (int i=0 ; i < TABLE_COLORS ; i++)
     {
         RandomizationRange random = _randomTable != 0 ? _randomTable[i] : RandomizationRange();
@@ -311,7 +311,7 @@ QString ColorScheme::translatedColorNameForIndex(int index)
 void ColorScheme::readColorEntry(KConfig& config , int index)
 {
     KConfigGroup configGroup(&config,colorNameForIndex(index));
-    
+
     ColorEntry entry;
 
     entry.color = configGroup.readEntry("Color",QColor());
@@ -520,7 +520,7 @@ bool KDE3ColorSchemeReader::readColorLine(const QString& line,ColorScheme* schem
         return false;
     if (list.first() != "color")
         return false;
-    
+
     int index = list[1].toInt();
     int red = list[2].toInt();
     int green = list[3].toInt();
@@ -579,7 +579,7 @@ void ColorSchemeManager::loadAllColorSchemes()
     int failed = 0;
 
     QList<QString> nativeColorSchemes = listColorSchemes();
-    
+
     QListIterator<QString> nativeIter(nativeColorSchemes);
     while ( nativeIter.hasNext() )
     {
@@ -630,7 +630,7 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
         delete scheme;
         return false;
     }
-    
+
     QFileInfo info(filePath);
 
     if ( !_colorSchemes.contains(info.baseName()) )
@@ -660,7 +660,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
         return false;
 
     QFileInfo info(filePath);
-    
+
     KConfig config(filePath , KConfig::NoGlobals);
     ColorScheme* scheme = new ColorScheme();
     scheme->setName(info.baseName());
@@ -681,7 +681,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     {
         kDebug() << "color scheme with name" << scheme->name() << "has already been" <<
             "found, ignoring.";
-        
+
         delete scheme;
     }
 
@@ -692,7 +692,7 @@ QList<QString> ColorSchemeManager::listKDE3ColorSchemes()
     return KGlobal::dirs()->findAllResources("data",
                                              "konsole/*.schema",
                                               KStandardDirs::NoDuplicates);
-    
+
 }
 QList<QString> ColorSchemeManager::listColorSchemes()
 {

@@ -219,7 +219,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window
                    << tabsFileName.toLocal8Bit().data();
         quit();
     }
-    
+
     unsigned int sessions = 0;
     while (!tabsFile.atEnd()) {
         QString lineString(tabsFile.readLine());
@@ -277,7 +277,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
     if(!newProfile->isEmpty()) {
         window->setDefaultProfile(newProfile); 
     }    
-                    
+
     // Create the new session
     Session* session = createSession(window->defaultProfile(), QString(), window->viewManager());
     session->setTabTitleFormat(Session::LocalTabTitle, title);
@@ -289,13 +289,13 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
     if (!window->testAttribute(Qt::WA_Resized)) {
         window->resize(window->sizeHint());
     }
-                    
+
     // Reset the profile to default. Otherwise, the next manually
     // created tab would have the command above!
     newProfile = Profile::Ptr(new Profile(defaultProfile));
     newProfile->setHidden(true);
     window->setDefaultProfile(newProfile); 
-                
+
 }
 
 MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
@@ -312,7 +312,7 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
                 break;
         } 
     }
-    
+
     if ( window == 0 )
     {
         window = newMainWindow();
@@ -364,7 +364,7 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
     foreach( const QString &value , args->getOptionList("p") ) 
     {
         ProfileCommandParser parser;
-        
+
         QHashIterator<Profile::Property,QVariant> iter(parser.parse(value));
         while ( iter.hasNext() )
         {

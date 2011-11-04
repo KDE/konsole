@@ -344,7 +344,7 @@ void ViewManager::detachView(ViewContainer* container, QWidget* widgetView)
         return;
 
     emit viewDetached(_sessionMap[viewToDetach]);
-    
+
     _sessionMap.remove(viewToDetach);
 
     // remove the view from this window

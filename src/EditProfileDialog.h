@@ -147,7 +147,7 @@ private slots:
     void noScrollBack();
     void fixedScrollBack();
     void unlimitedScrollBack();
-   
+
     void scrollBackLinesChanged(int);
 
     void hideScrollBar();
@@ -249,7 +249,7 @@ private:
     // after an update by a call to ensurePageLoaded()
     QVector<bool> _pageNeedsUpdate;
     QHash<int,QVariant> _previewedProperties;
-    
+
     QTimeLine* _colorSchemeAnimationTimeLine;
 
     QHash<int,QVariant> _delayedPreviewProperties;

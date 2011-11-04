@@ -85,4 +85,4 @@ private:
 
 }
 
-#endif // COLORSCHEMEEDITOR_H 
+#endif // COLORSCHEMEEDITOR_H

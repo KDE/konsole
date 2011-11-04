@@ -1,6 +1,6 @@
 /*
     This file is part of the Konsole Terminal.
-    
+
     Copyright 2006-2008 Robert Knight <robertknight@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
@@ -169,7 +169,7 @@ void ViewContainer::viewDestroyed(QObject* object)
     // constructors to get around the problem, but this is a hack and needs
     // to be fixed. 
     removeViewWidget(widget);
-    
+
     emit viewRemoved(widget);
 
     if (_views.count() == 0)
@@ -183,7 +183,7 @@ void ViewContainer::removeView(QWidget* view)
     disconnect( view , SIGNAL(destroyed(QObject*)) , this , SLOT(viewDestroyed(QObject*)) );
 
     removeViewWidget(view);
-    
+
     emit viewRemoved(view);
 
     if (_views.count() == 0)
@@ -399,7 +399,7 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
     int droppedId = ViewProperties::decodeMimeData(event->mimeData());
     bool result = false;
     emit _container->moveViewRequest(index,droppedId,result);
-    
+
     if (result)
         event->accept();
     else
@@ -716,10 +716,10 @@ void TabbedViewContainer::moveViewWidget( int fromIndex , int toIndex )
 {
     QString text = _tabBar->tabText(fromIndex);
     QIcon icon = _tabBar->tabIcon(fromIndex);
-   
+
     // FIXME - This will lose properties of the tab other than
     // their text and icon when moving them
-    
+
     _tabBar->removeTab(fromIndex);
     _tabBar->insertTab(toIndex,icon,text);
 
@@ -800,10 +800,10 @@ void TabbedViewContainer::setTabActivity(int index , bool activity)
     const QPalette& palette = _tabBar->palette();
     KColorScheme colorScheme(palette.currentColorGroup());
     const QColor colorSchemeActive = colorScheme.foreground(KColorScheme::ActiveText).color();    
-    
+
     const QColor normalColor = palette.text().color();
     const QColor activityColor = KColorUtils::mix(normalColor,colorSchemeActive); 
-    
+
     QColor color = activity ? activityColor : QColor();
 
     if ( color != _tabBar->tabTextColor(index) )

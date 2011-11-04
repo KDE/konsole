@@ -118,7 +118,7 @@ void ColorSchemeEditor::editColorItem( QTableWidgetItem* item )
         ColorEntry entry( _colors->colorEntry(item->row()) );
         entry.color = color;
         _colors->setColorTableEntry( item->row(), entry ); 
-    
+
         emit colorsChanged( _colors );
 
     }
@@ -154,7 +154,7 @@ void ColorSchemeEditor::setDescription(const QString& text)
 void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
 {
     _ui->transparencyPercentLabel->setText( QString("%1%").arg(percent) );
-    
+
     qreal opacity = ( 100.0 - percent ) / 100.0;
     _colors->setOpacity(opacity);
 }
@@ -172,7 +172,7 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme)
 
     // setup transparency slider
     const int transparencyPercent = qRound( (1-_colors->opacity())*100 );
-    
+
     _ui->transparencySlider->setValue(transparencyPercent);
     setTransparencyPercentLabel(transparencyPercent);
 

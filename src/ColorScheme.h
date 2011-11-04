@@ -114,7 +114,7 @@ public:
      * palette to be randomized.  The seed is used to pick the random color.
      */
     void getColorTable(ColorEntry* table, uint randomSeed = 0) const;
-   
+
     /**
      * Retrieves a single color entry from the table.
      *
@@ -304,7 +304,7 @@ public:
      * Returns the default color scheme for Konsole
      */
     const ColorScheme* defaultColorScheme() const;
- 
+
     /**
      * Returns the color scheme with the given name or 0 if no
      * scheme with that name exists.  If @p name is empty, the

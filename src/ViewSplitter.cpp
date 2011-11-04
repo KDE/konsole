@@ -1,6 +1,6 @@
 /*
     This file is part of the Konsole Terminal.
-    
+
     Copyright 2006-2008 Robert Knight <robertknight@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
@@ -74,7 +74,7 @@ void ViewSplitter::adjustContainerSize(ViewContainer* container , int percentage
 ViewSplitter* ViewSplitter::activeSplitter()
 {
     QWidget* widget = focusWidget() ? focusWidget() : this;
-    
+
     ViewSplitter* splitter = 0;
 
     while ( !splitter && widget )
@@ -140,7 +140,7 @@ void ViewSplitter::addContainer( ViewContainer* container ,
                                  Qt::Orientation containerOrientation )
 {
    ViewSplitter* splitter = activeSplitter();   
-    
+
     if ( splitter->count() < 2 || 
          containerOrientation == splitter->orientation() ||
          !_recursiveSplitting )
@@ -150,7 +150,7 @@ void ViewSplitter::addContainer( ViewContainer* container ,
 
         if ( splitter->orientation() != containerOrientation )
             splitter->setOrientation( containerOrientation );
-        
+
         splitter->updateSizes();
     }
     else
@@ -160,12 +160,12 @@ void ViewSplitter::addContainer( ViewContainer* container ,
 
         ViewContainer* oldContainer = splitter->activeContainer();
         int oldContainerIndex = splitter->indexOf(oldContainer->containerWidget());
-     
+
         splitter->unregisterContainer(oldContainer);   
-      
+
         newSplitter->registerContainer(oldContainer);
         newSplitter->registerContainer(container);
-        
+
         newSplitter->addWidget(oldContainer->containerWidget());
         newSplitter->addWidget(container->containerWidget());
         newSplitter->setOrientation(containerOrientation); 
@@ -180,7 +180,7 @@ void ViewSplitter::addContainer( ViewContainer* container ,
 void ViewSplitter::containerEmpty(ViewContainer* /*object*/)
 {
     QListIterator<ViewContainer*> containerIter(_containers);
-    
+
     int children = 0;
     while (containerIter.hasNext())
     {
@@ -194,7 +194,7 @@ void ViewSplitter::containerEmpty(ViewContainer* /*object*/)
 void ViewSplitter::containerDestroyed(ViewContainer* object)
 {
     Q_ASSERT( _containers.contains(object) );
-    
+
     _containers.removeAll(object);
 
     if ( count() == 0 )
@@ -238,7 +238,7 @@ void ViewSplitter::activatePreviousContainer()
 void ViewSplitter::setActiveContainer(ViewContainer* container)
 {
     QWidget* activeView = container->activeView();
-    
+
     if ( activeView )
         activeView->setFocus( Qt::OtherFocusReason );
 }
@@ -248,14 +248,14 @@ ViewContainer* ViewSplitter::activeContainer() const
    if ( QWidget* focusW = focusWidget() )
    {
         ViewContainer* focusContainer = 0;
-        
+
         while ( focusW != 0 )
         {
             QListIterator<ViewContainer*> containerIter(_containers);
             while (containerIter.hasNext())
             {
                 ViewContainer* nextContainer = containerIter.next();
-                             
+
                 if (nextContainer->containerWidget() == focusW)
                 {
                     focusContainer = nextContainer;
@@ -268,7 +268,7 @@ ViewContainer* ViewSplitter::activeContainer() const
         if ( focusContainer )
             return focusContainer;
    }
-    
+
    QList<ViewSplitter*> splitters = findChildren<ViewSplitter*>();
 
    if (splitters.count() > 0)

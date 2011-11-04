@@ -46,7 +46,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* parent)
     ,_highlightMatches(0)
 {
     QHBoxLayout* layout = new QHBoxLayout(this);
-  
+
     QToolButton* close = new QToolButton(this);
     close->setObjectName( QLatin1String("close-button" ));
     close->setToolTip( i18n("Close the search bar") );
@@ -160,7 +160,7 @@ bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* event)
             }
         }        
     }
-        
+
     return QWidget::eventFilter(watched,event);
 }
 

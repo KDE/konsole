@@ -277,7 +277,7 @@ void Emulation::receiveData(const char* text, int length)
 /*void Emulation::onRcvBlock(const char *s, int len)
 {
   emit notifySessionState(NOTIFYACTIVITY);
-  
+
   bufferedUpdate();
   for (int i = 0; i < len; i++)
   {
@@ -452,7 +452,7 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
             // if hash is already used by another, different sequence of unicode character
             // points then try next hash
             hash++;
-            
+
             if (hash == initialHash)
             {
                 if (!triedCleaningSolution)
@@ -467,10 +467,10 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
                         foreach(const TerminalDisplay* td, s->views())
                         {
                             usedExtendedChars += td->screenWindow()->screen()->usedExtendedChars();
-                            
+
                         }
                     }
-                    
+
                     QHash<ushort,ushort*>::iterator it = extendedCharTable.begin();
                     QHash<ushort,ushort*>::iterator itEnd = extendedCharTable.end();
                     while (it != itEnd)
@@ -494,14 +494,14 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
         }
     }    
 
-    
+
     // add the new sequence to the table and
     // return that index
     ushort* buffer = new ushort[length+1];
     buffer[0] = length;
     for ( int i = 0 ; i < length ; i++ )
        buffer[i+1] = unicodePoints[i]; 
-    
+
     extendedCharTable.insert(hash,buffer);
 
     return hash;

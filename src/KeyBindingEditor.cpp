@@ -59,7 +59,7 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
 
     connect( _ui->removeEntryButton , SIGNAL(clicked()) , this , SLOT(removeSelectedEntry()) );
     connect( _ui->addEntryButton , SIGNAL(clicked()) , this , SLOT(addNewEntry()) );
-    
+
     // test area
     _ui->testAreaInputEdit->installEventFilter(this);
 }
@@ -74,7 +74,7 @@ void KeyBindingEditor::removeSelectedEntry()
 {
     QList<QTableWidgetItem*> selectedList =  _ui->keyBindingTable->selectedItems();
     QList<QTableWidgetItem*> uniqueList;
-    
+
     //Filter unique items
     QListIterator<QTableWidgetItem*> iter( selectedList );
     while ( iter.hasNext() )
@@ -95,9 +95,9 @@ void KeyBindingEditor::removeSelectedEntry()
 
         KeyboardTranslator::Entry existing = item->data(Qt::UserRole).
                                                     value<KeyboardTranslator::Entry>();
-        
+
         _translator->removeEntry(existing);
-    
+
         _ui->keyBindingTable->removeRow( item->row() );
     }
 }
@@ -164,7 +164,7 @@ bool KeyBindingEditor::eventFilter( QObject* watched , QEvent* event )
 void KeyBindingEditor::setDescription(const QString& newDescription)
 {
      _ui->descriptionEdit->setText(newDescription);
-    
+
      if ( _translator )
          _translator->setDescription(newDescription);
 }

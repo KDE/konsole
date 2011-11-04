@@ -1,6 +1,6 @@
 /*
     This file is part of Konsole, KDE's terminal.
-    
+
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
     Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
@@ -120,7 +120,7 @@ public:
    * or not the character has the RE_BOLD rendition flag. 
    */
   ColorEntry::FontWeight fontWeight(const ColorEntry* base) const;
-  
+
   /** 
    * returns true if the format (color, rendition flag) of the compared characters is equal
    */
@@ -136,7 +136,7 @@ public:
    * renditions or colors.
    */
   friend bool operator != (const Character& a, const Character& b);
-  
+
   inline bool isLineChar() const
   {
       if ( rendition & RE_EXTENDED_CHAR )
@@ -144,12 +144,12 @@ public:
 
       return isSupportedLineChar(character);
   }
-  
+
   inline bool isSpace() const
   {
       return (rendition & RE_EXTENDED_CHAR) ? false : QChar(character).isSpace();
   }
-  
+
 };
 
 inline bool operator == (const Character& a, const Character& b)
@@ -179,7 +179,7 @@ inline bool Character::equalsFormat(const Character& other) const
     backgroundColor == other.backgroundColor &&
     foregroundColor == other.foregroundColor &&
     rendition == other.rendition;
-}	
+}
 
 inline ColorEntry::FontWeight Character::fontWeight(const ColorEntry* base) const
 {

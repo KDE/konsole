@@ -149,7 +149,7 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
 
         // split on the first '=' character
         int pos = pair.indexOf('=');
-        
+
         if ( pos >= 0 )
         {
             QString variable = pair.left(pos);
@@ -217,7 +217,7 @@ int Pty::start(const QString& program,
 
     if (_eraseChar != 0)
         ttmode.c_cc[VERASE] = _eraseChar;
-  
+
     if (!pty()->tcSetAttr(&ttmode))
         kWarning() << "Unable to set terminal attributes.";
 

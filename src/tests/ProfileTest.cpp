@@ -60,7 +60,7 @@ void ProfileTest::testProfile()
     QCOMPARE(child->property<QVariant>(Profile::Name),QVariant());
     QCOMPARE(parent->property<QString>(Profile::Path),QString("FakePath"));
     QCOMPARE(child->property<QVariant>(Profile::Path),QVariant());
-    
+
     // read inheritable properties
     QVERIFY(parent->property<bool>(Profile::AntiAliasFonts) == false);
     QVERIFY(child->property<bool>(Profile::AntiAliasFonts) == false);
@@ -80,7 +80,7 @@ void ProfileTest::testClone()
     Profile::Ptr source(new Profile(parent));
     source->setProperty(Profile::AntiAliasFonts,false);
     source->setProperty(Profile::HistorySize,4567);
-    
+
     source->setProperty(Profile::Name,"SourceProfile");
     source->setProperty(Profile::Path,"SourcePath");
 

@@ -748,7 +748,7 @@ void Session::refresh()
 bool Session::kill(int signal)
 {
     int result = ::kill(_shellProcess->pid(),signal);    
-    
+
     if ( result == 0 )
     {
         if ( _shellProcess->waitForFinished(1000) )
@@ -1024,7 +1024,7 @@ QString Session::getDynamicTitle()
 KUrl Session::getUrl()
 {
     QString path;
-    
+
     updateSessionProcessInfo();
     if (_sessionProcessInfo->isValid())
     {
@@ -1489,7 +1489,7 @@ void SessionGroup::forwardData(const char* data, int size)
         // again call forwardData() in group A, and so on.
         return;
     }
-    
+
     _inForwardData = true;
     QListIterator<Session*> iter(_sessions.keys());
     while(iter.hasNext()) {

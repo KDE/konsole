@@ -1,6 +1,6 @@
 /*
     This file is part of the Konsole Terminal.
-    
+
     Copyright 2006-2008 Robert Knight <robertknight@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
@@ -64,7 +64,7 @@ namespace Konsole
 class ViewContainer : public QObject
 {
 Q_OBJECT
-    
+
 public:
 
     /**
@@ -131,7 +131,7 @@ public:
      * the view container's navigation widget. 
      */
     NavigationDisplayMode navigationDisplayMode() const;
-    
+
     /**
      * Sets the position of the navigation widget with
      * respect to the main content area.
@@ -170,16 +170,16 @@ public:
 
     /** Adds a new view to the container widget */
     void addView(QWidget* view , ViewProperties* navigationItem, int index = -1);
- 
+
     /** Removes a view from the container */
     void removeView(QWidget* view);
 
     /** Returns the ViewProperties instance associated with a particular view in the container */
     ViewProperties* viewProperties(  QWidget* view );   
-    
+
     /** Returns a list of the contained views */
     const QList<QWidget*> views();
-   
+
     /** 
      * Returns the view which currently has the focus or 0 if none
      * of the child views have the focus.
@@ -303,7 +303,7 @@ protected:
      * from the container widget.
      */
     virtual void removeViewWidget(QWidget* view) = 0;
-   
+
     /** 
      * Called when the navigation display mode changes.
      * See setNavigationDisplayMode
@@ -438,7 +438,7 @@ private slots:
     void currentTabChanged(int index);
     void closeCurrentTab();
     void wheelScrolled(int delta);
-   
+
     void tabDoubleClicked(int index);
     void openTabContextMenu(int index, const QPoint& point);
     void tabContextMenuCloseTab();

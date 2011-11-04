@@ -67,7 +67,7 @@ public:
      */
     SessionManager();
     void setMenuOrder();
- 
+
     /**
      * Destroys the SessionManager. All running sessions should be closed
      * (via closeAll()) before the SessionManager is destroyed.
@@ -105,7 +105,7 @@ public:
      */
     QStringList availableProfilePaths() const;
 
-    
+
     /**
      * Loads a profile from the specified path and registers 
      * it with the SessionManager.
@@ -305,8 +305,8 @@ private slots:
     void sessionProfileCommandReceived(const QString& text);
 
 private:
-    
-    
+
+
     // loads the mappings between shortcut key sequences and 
     // profile paths
     void loadShortcuts();

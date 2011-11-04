@@ -223,7 +223,7 @@ void SessionManager::loadAllProfiles()
         return;
 
     QStringList profiles = availableProfilePaths();
-    
+
     QListIterator<QString> iter(profiles);
     while (iter.hasNext())
         loadProfile(iter.next());
@@ -329,10 +329,10 @@ void SessionManager::updateSession(Session* session)
 Session* SessionManager::createSession(Profile::Ptr profile)
 {
     Session* session = 0;
-    
+
     if (!profile)
         profile = defaultProfile();
-   
+
     if (!_profiles.contains(profile))
         addProfile(profile);
 
@@ -433,7 +433,7 @@ void SessionManager::changeProfile(Profile::Ptr profile,
             changeProfile(profile,propertyMap,persistent);
         return;
     }
-    
+
     // apply the changes to existing sessions
     applyProfile(profile,true);
 
@@ -555,7 +555,7 @@ void SessionManager::addProfile(Profile::Ptr type)
 {
     if ( _profiles.isEmpty() )
         _defaultProfile = type;
- 
+
     _profiles.insert(type);
 
     emit profileAdded(type);
@@ -607,7 +607,7 @@ void SessionManager::setDefaultProfile(Profile::Ptr profile)
    _defaultProfile = profile;
 
    QString path = profile->path();  
-   
+
    if ( path.isEmpty() )
        path = KDE4ProfileWriter().getPath(profile);
 
@@ -822,7 +822,7 @@ QKeySequence SessionManager::shortcut(Profile::Ptr profile) const
              || iter.value().profilePath == profile->path() )
             return iter.key();
     }
-    
+
     return QKeySequence();
 }
 
@@ -906,7 +906,7 @@ void SessionListModel::setSessions(const QList<Session*>& sessions)
 QVariant SessionListModel::data(const QModelIndex& index, int role) const
 {
     Q_ASSERT(index.isValid());
-    
+
     int row = index.row();
     int column = index.column();
 
@@ -968,7 +968,7 @@ void SessionListModel::sessionFinished()
 {
     Session* session = qobject_cast<Session*>(sender());
     int row = _sessions.indexOf(session);
-    
+
     if (row != -1)
     {
         beginRemoveRows(QModelIndex(),row,row);

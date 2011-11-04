@@ -1,8 +1,8 @@
 /*
     This file is part of Konsole, an X terminal.
-    
+
     Copyright 2006-2008 by Robert Knight <robertknight@gmail.com>
-    
+
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -101,7 +101,7 @@ public:
                             int count,
                             LineProperty properties);    
 
-    
+
 private:
     QTextStream* _output;
     bool _includeTrailingWhitespace;
@@ -126,7 +126,7 @@ public:
      * output
      */
     void setColorTable( const ColorEntry* table );
-        
+
     virtual void decodeLine(const Character* const characters,
                             int count,
                             LineProperty properties);

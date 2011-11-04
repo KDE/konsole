@@ -92,7 +92,7 @@ private:
     void setupKeyBindingTable(const KeyboardTranslator* translator);
 
     Ui::KeyBindingEditor* _ui;
-    
+
     // translator to which modifications are made as the user makes
     // changes in the UI.
     // this is initialized as a copy of the translator specified

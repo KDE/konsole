@@ -133,7 +133,7 @@ public:
        int    _endLine;
        int    _endColumn;
        Type _type;
-    
+
     };
 
     /** Constructs a new filter. */
@@ -177,7 +177,7 @@ protected:
 private:
     QMultiHash<int,HotSpot*> _hotspots;
     QList<HotSpot*> _hotspotList;
-    
+
     const QList<int>* _linePositions;
     const QString* _buffer;
 };
@@ -286,7 +286,7 @@ protected:
     virtual RegExpFilter::HotSpot* newHotSpot(int,int,int,int);
 
 private:
-    
+
     static const QRegExp FullUrlRegExp;
     static const QRegExp EmailAddressRegExp;
 

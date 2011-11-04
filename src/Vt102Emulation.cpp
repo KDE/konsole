@@ -1,6 +1,6 @@
 /*
     This file is part of Konsole, an X terminal.
-    
+
     Copyright 2007-2008 by Robert Knight <robert.knight@gmail.com>
     Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
@@ -117,7 +117,7 @@ void Vt102Emulation::reset()
     setCodec(currentCodec);
   else
     setCodec(LocaleCodec);
- 
+
   bufferedUpdate();
 }
 
@@ -279,7 +279,7 @@ void Vt102Emulation::initTokenizer()
    - P is the length of the token scanned so far.
    - L (often P-1) is the position on which contents we base a decision.
    - C is a character or a group of characters (taken from 'charClass').
-   
+
    - 'cc' is the current character
    - 's' is a pointer to the start of the token buffer
    - 'p' is the current position within the token buffer 
@@ -424,12 +424,12 @@ void Vt102Emulation::processWindowAttributeChange()
     reportDecodingError(); 
     return; 
   }
-  
+
   QString newValue;
   newValue.reserve(tokenBufferPos-i-2);
   for (int j = 0; j < tokenBufferPos-i-2; j++)
     newValue[j] = tokenBuffer[i+1+j];
- 
+
   _pendingTitleUpdates[attributeToChange] = newValue;
   _titleUpdateTimer->start(20);
 }
@@ -741,14 +741,14 @@ void Vt102Emulation::processToken(int token, int p, int q)
     // SET_BTN_EVENT_MOUSE         1002
     // SET_ANY_EVENT_MOUSE         1003
     //
-    
+
     //Note about mouse modes:
     //There are four mouse modes which xterm-compatible terminals can support - 1000,1001,1002,1003
     //Konsole currently supports mode 1000 (basic mouse press and release) and mode 1002 (dragging the mouse).
     //TODO:  Implementation of mouse modes 1001 (something called hilight tracking) and 
     //1003 (a slight variation on dragging the mouse)
     //
- 
+
     case TY_CSI_PR('h', 1000) :          setMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('l', 1000) :        resetMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('s', 1000) :         saveMode      (MODE_Mouse1000); break; //XTERM

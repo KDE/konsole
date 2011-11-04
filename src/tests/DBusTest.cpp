@@ -95,7 +95,7 @@ void DBusTest::cleanupTestCase()
 
     // Need to take care of when user has CloseAllTabs=False otherwise
     // they will get a popup dialog when we try to close this.
- 
+
     QDBusInterface iface(_interfaceName,
                          QLatin1String("/konsole/MainWindow_1"),
                          QLatin1String("com.trolltech.Qt.QWidget"));

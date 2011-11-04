@@ -1,6 +1,6 @@
 /*
     This file is part of Konsole, KDE's terminal.
-    
+
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
     Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
@@ -76,7 +76,7 @@ public:
    * with the transparent and bold flags set to false.
    */ 
   ColorEntry() : transparent(false), fontWeight(UseCurrentFormat) {} 
- 
+
   /**
    * Sets the color, transparency and boldness of this color to those of @p rhs.
    */ 
@@ -202,7 +202,7 @@ public:
   {
         return _colorSpace != COLOR_SPACE_UNDEFINED;
   }
-    
+
   /** 
    * Set this color as an intensive system color.
    * 
@@ -218,7 +218,7 @@ public:
    * it is ignored.
    */
   QColor color(const ColorEntry* palette) const;
- 
+
   /** 
    * Compares two colors and returns true if they represent the same color value and
    * use the same color space.
@@ -261,7 +261,7 @@ inline const QColor color256(quint8 u, const ColorEntry* base)
   if (u < 216) return QColor(((u/36)%6) ? (40*((u/36)%6)+55) : 0,
                              ((u/ 6)%6) ? (40*((u/ 6)%6)+55) : 0,
                              ((u/ 1)%6) ? (40*((u/ 1)%6)+55) : 0); u -= 216;
-  
+
   // 232..255: gray, leaving out black and white
   int gray = u*10+8; return QColor(gray,gray,gray);
 }

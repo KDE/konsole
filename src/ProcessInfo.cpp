@@ -138,7 +138,7 @@ QString ProcessInfo::format(const QString& input) const
       output.replace("%D", tempDir);
    }
    output.replace("%d",formatShortDir(dir));
-   
+
    // remove any remaining %[LETTER] sequences
    // output.replace(QRegExp("%\\w"), QString());
 
@@ -997,7 +997,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
 
     // SSH options
     // these are taken from the SSH manual ( accessed via 'man ssh' )
-    
+
     // options which take no arguments
     static const QString noArgumentOptions("1246AaCfgkMNnqsTtVvXxY"); 
     // options which take one argument
@@ -1062,7 +1062,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                 // check to see if only a hostname is specified, or whether
                 // both a username and host are specified ( in which case they
                 // are separated by an '@' character:  username@host )
-            
+
                 int separatorPosition = args[i].indexOf('@');
                 if ( separatorPosition != -1 )
                 {
@@ -1087,7 +1087,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     else
     {
         kWarning() << "Could not read arguments";
-        
+
         return;
     }
 }
@@ -1111,13 +1111,13 @@ QString SSHProcessInfo::command() const
 QString SSHProcessInfo::format(const QString& input) const
 {
     QString output(input);
-   
+
     // test whether host is an ip address
     // in which case 'short host' and 'full host'
     // markers in the input string are replaced with
     // the full address
     bool isIpAddress = false;
-   
+
     struct in_addr address;
     if ( inet_aton(_host.toLocal8Bit().constData(),&address) != 0 )
         isIpAddress = true;
@@ -1131,7 +1131,7 @@ QString SSHProcessInfo::format(const QString& input) const
         output.replace("%h",_host);
     else
         output.replace("%h",_host.left(_host.indexOf('.')));
-    
+
     output.replace("%H",_host);
     output.replace("%c",_command);
 

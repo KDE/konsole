@@ -245,7 +245,7 @@ public:
                       States flags ) const;
 
         bool operator==(const Entry& rhs) const;
-       
+
     private:
         void insertModifier( QString& item , int modifier ) const;
         void insertState( QString& item , int state ) const;
@@ -263,7 +263,7 @@ public:
 
     /** Constructs a new keyboard translator with the given @p name */
     KeyboardTranslator(const QString& name);
-   
+
     //KeyboardTranslator(const KeyboardTranslator& other);
 
     /** Returns the name of this keyboard translator */
@@ -498,7 +498,7 @@ public:
 
 private:
     static const QByteArray defaultTranslatorText;
-    
+
     void findTranslators(); // locate the available translators
     KeyboardTranslator* loadTranslator(const QString& name); // loads the translator 
                                                              // with the given name
@@ -506,7 +506,7 @@ private:
 
     bool saveTranslator(const KeyboardTranslator* translator);
     QString findTranslatorPath(const QString& name);
-    
+
     QHash<QString,KeyboardTranslator*> _translators; // maps translator-name -> KeyboardTranslator
                                                      // instance
     bool _haveLoadedAll;
@@ -549,7 +549,7 @@ inline int oneOrZero(int value)
 inline QByteArray KeyboardTranslator::Entry::text(bool expandWildCards,Qt::KeyboardModifiers modifiers) const 
 {
     QByteArray expandedText = _text;
-    
+
     if (expandWildCards)
     {
         int modifierValue = 1;

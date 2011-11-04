@@ -1,6 +1,6 @@
 /*
     This file is part of Konsole, KDE's terminal emulator. 
-    
+
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
     Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 

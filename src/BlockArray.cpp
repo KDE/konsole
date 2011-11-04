@@ -117,7 +117,7 @@ const Block* BlockArray::at(size_t i)
         //kDebug() << "BlockArray::at() i > index\n";
         return 0;
     }
-    
+
 //     if (index - i >= length) {
 //         kDebug() << "BlockArray::at() index - i >= length\n";
 //         return 0;

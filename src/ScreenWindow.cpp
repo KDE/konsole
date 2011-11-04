@@ -69,7 +69,7 @@ Character* ScreenWindow::getImage()
 
      if (!_bufferNeedsUpdate)
         return _windowBuffer;
- 
+
     _screen->getImage(_windowBuffer,size,
                       currentLine(),endWindowLine());
 
@@ -108,7 +108,7 @@ int ScreenWindow::endWindowLine() const
 QVector<LineProperty> ScreenWindow::getLineProperties()
 {
     QVector<LineProperty> result = _screen->getLineProperties(currentLine(),endWindowLine());
-    
+
     if (result.count() != windowLines())
         result.resize(windowLines());
 
@@ -133,7 +133,7 @@ void ScreenWindow::getSelectionEnd( int& column , int& line )
 void ScreenWindow::setSelectionStart( int column , int line , bool columnMode )
 {
     _screen->setSelectionStart( column , qMin(line + currentLine(),endWindowLine())  , columnMode);
-    
+
     _bufferNeedsUpdate = true;
     emit selectionChanged();
 }
@@ -197,7 +197,7 @@ int ScreenWindow::columnCount() const
 QPoint ScreenWindow::cursorPosition() const
 {
     QPoint position;
-    
+
     position.setX( _screen->getCursorX() );
     position.setY( _screen->getCursorY() );
 

@@ -1,6 +1,6 @@
 /*
     This file is part of the Konsole Terminal.
-    
+
     Copyright 2006-2008 Robert Knight <robertknight@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
@@ -73,7 +73,7 @@ public:
 
     /** Returns the child ViewSplitter widget which currently has the focus */
     ViewSplitter* activeSplitter() ;
- 
+
     /** 
      * Returns the container which currently has the focus or 0 if none
      * of the immediate child containers have the focus.  This does not 
@@ -96,7 +96,7 @@ public:
      * Returns a list of the containers held by this splitter
      */
     QList<ViewContainer*> containers() const {return _containers;}
-   
+
     /**
      * Gives the focus to the active view in the next container
      */

@@ -92,22 +92,22 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     , { ColorScheme , "colors" , 0 , QVariant::String }
     , { AntiAliasFonts, "AntiAliasFonts" , APPEARANCE_GROUP , QVariant::Bool }
     , { BoldIntense, "BoldIntense", APPEARANCE_GROUP, QVariant::Bool }
-    
+
     // Keyboard
     , { KeyBindings , "KeyBindings" , KEYBOARD_GROUP , QVariant::String }
-    
+
     // Scrolling
     , { HistoryMode , "HistoryMode" , SCROLLING_GROUP , QVariant::Int }
     , { HistorySize , "HistorySize" , SCROLLING_GROUP , QVariant::Int } 
     , { ScrollBarPosition , "ScrollBarPosition" , SCROLLING_GROUP , QVariant::Int }
-   
+
        // Terminal Features
     , { BlinkingTextEnabled , "BlinkingTextEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { FlowControlEnabled , "FlowControlEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { AllowProgramsToResizeWindow , "AllowProgramsToResizeWindow" , TERMINAL_GROUP , QVariant::Bool }
     , { BidiRenderingEnabled , "BidiRenderingEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { BlinkingCursorEnabled , "BlinkingCursorEnabled" , TERMINAL_GROUP , QVariant::Bool }
-    
+
     // Cursor 
     , { UseCustomCursorColor , "UseCustomCursorColor" , CURSOR_GROUP , QVariant::Bool}
     , { CursorShape , "CursorShape" , CURSOR_GROUP , QVariant::Int}
@@ -176,13 +176,13 @@ FallbackProfile::FallbackProfile()
     setProperty(HistoryMode,FixedSizeHistory);
     setProperty(HistorySize,1000);
     setProperty(ScrollBarPosition,ScrollBarRight);
-    
+
     setProperty(FlowControlEnabled,true);
     setProperty(AllowProgramsToResizeWindow,true);
     setProperty(BlinkingTextEnabled,true);
     setProperty(UnderlineLinksEnabled,true);
     setProperty(TripleClickMode,SelectWholeLine);
-    
+
     setProperty(BlinkingCursorEnabled,false);
     setProperty(BidiRenderingEnabled,false);
     setProperty(CursorShape,BlockCursor);
@@ -318,7 +318,7 @@ void KDE4ProfileWriter::writeProperties(KConfig& config,
 {
     const char* groupName = 0;
     KConfigGroup group;
-    
+
     while (properties->name != 0)    
     {
         if (properties->group != 0)
@@ -379,7 +379,7 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
                 group = config.group(properties->group);
                 groupName = properties->group;
             }
-        
+
             QString name(properties->name);
 
             if (group.hasKey(name))
@@ -387,7 +387,7 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
                                      group.readEntry(name,QVariant(properties->type)));
 
         }
-        
+
         properties++;
     }
 }
@@ -443,7 +443,7 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
     {
         const QString& fullCommand = config->readEntry("Exec");
         ShellCommand shellCommand(fullCommand);
-    
+
         profile->setProperty(Profile::Command,shellCommand.command());
         profile->setProperty(Profile::Arguments,shellCommand.arguments());
     }

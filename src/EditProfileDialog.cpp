@@ -216,7 +216,7 @@ void EditProfileDialog::preparePage(int page)
     Q_ASSERT( info );
 
     QWidget* pageWidget = _ui->tabWidget->widget(page);
-    
+
     if ( _pageNeedsUpdate[page] )
     {
        if ( pageWidget == _ui->generalTab )
@@ -501,13 +501,13 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
 {
     ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
     _ui->colorSchemeList->setItemDelegate(delegate);
-    
+
     _colorSchemeAnimationTimeLine = new QTimeLine( 500 , this );
     delegate->setEntryTimeLine(_colorSchemeAnimationTimeLine);
-    
+
     connect( _colorSchemeAnimationTimeLine , SIGNAL(valueChanged(qreal)) , this ,
              SLOT(colorSchemeAnimationUpdate()) );
-   
+
     _ui->transparencyWarningWidget->setVisible(false);
 
     _ui->editColorSchemeButton->setEnabled(false);
@@ -515,7 +515,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
 
     // setup color list
     updateColorSchemeList(true);
-    
+
     _ui->colorSchemeList->setMouseTracking(true);
     _ui->colorSchemeList->installEventFilter(this);
     _ui->colorSchemeList->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
@@ -525,7 +525,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
             , this , SLOT(colorSchemeSelected()) );
     connect( _ui->colorSchemeList , SIGNAL(entered(QModelIndex)) , this , 
             SLOT(previewColorScheme(QModelIndex)) );
-    
+
     updateColorSchemeButtons();
 
     connect( _ui->editColorSchemeButton , SIGNAL(clicked()) , this , 
@@ -593,7 +593,7 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
     QStandardItemModel* model = qobject_cast<QStandardItemModel*>(_ui->colorSchemeList->model());
 
     Q_ASSERT(model);
-    
+
     model->clear();
 
     QList<const ColorScheme*> schemeList = ColorSchemeManager::instance()->allColorSchemes();
@@ -607,7 +607,7 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
         QStandardItem* item = new QStandardItem(colors->description());
         item->setData( QVariant::fromValue(colors) ,  Qt::UserRole + 1);
         item->setFlags( item->flags() );
-       
+
         if ( currentScheme == colors ) 
             selectedItem = item;  
 
@@ -636,7 +636,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 
     KeyboardTranslatorManager* keyManager = KeyboardTranslatorManager::instance();
     const KeyboardTranslator* currentTranslator = keyManager->findTranslator(name);
-    
+
     QStandardItemModel* model = qobject_cast<QStandardItemModel*>(_ui->keyBindingList->model());
 
     Q_ASSERT(model);
@@ -664,7 +664,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     }
 
     model->sort(0);
-    
+
     if ( selectCurrentTranslator && selectedItem )
     {
         _ui->keyBindingList->selectionModel()->setCurrentIndex( selectedItem->index() , 
@@ -710,10 +710,10 @@ void EditProfileDialog::unpreviewAll()
 void EditProfileDialog::unpreview(int property)
 {
     _delayedPreviewProperties.remove(property);
-    
+
     if (!_previewedProperties.contains(property))
         return;
-    
+
     QHash<Profile::Property,QVariant> map;
     map.insert((Profile::Property)property,_previewedProperties[property]);
     SessionManager::instance()->changeProfile(_profile,map,false); 
@@ -777,7 +777,7 @@ void EditProfileDialog::removeColorScheme()
     if ( !selected.isEmpty() )
     {
         const QString& name = selected.first().data(Qt::UserRole+1).value<const ColorScheme*>()->name();
-        
+
         if (ColorSchemeManager::instance()->deleteColorScheme(name))    
             _ui->colorSchemeList->model()->removeRow(selected.first().row());
     }
@@ -808,7 +808,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 
     if ( isNewScheme )
         editor->setDescription(i18n("New Color Scheme"));
-        
+
     if ( dialog->exec() == QDialog::Accepted )
     {
         ColorScheme* newScheme = new ColorScheme(*editor->colorScheme());
@@ -818,7 +818,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
             newScheme->setName(newScheme->description());
 
         ColorSchemeManager::instance()->addColorScheme( newScheme );
-        
+
         updateColorSchemeList(true);
 
         preview(Profile::ColorScheme,newScheme->name());
@@ -842,7 +842,7 @@ void EditProfileDialog::colorSchemeSelected()
         const ColorScheme* colors = model->data(selected.first(),Qt::UserRole+1).value<const ColorScheme*>();
 
         //kDebug() << "Setting temp profile color to" << colors->name();
-        
+
         updateTempProfileProperty(Profile::ColorScheme,colors->name());
         previewColorScheme(selected.first());
 
@@ -1002,7 +1002,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 
     KeyBindingEditor* editor = new KeyBindingEditor;
     dialog->setMainWidget(editor);
-    
+
     if ( translator )
         editor->setup(translator);
 
@@ -1019,7 +1019,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
         KeyboardTranslatorManager::instance()->addTranslator( newTranslator );
 
         updateKeyBindingsList();
-        
+
         const QString& currentTranslator = lookupProfile()
                                         ->property<QString>(Profile::KeyBindings);
 
@@ -1055,7 +1055,7 @@ void EditProfileDialog::setupRadio( RadioOption* possibilities , int actual )
             possibilities->button->setChecked(true);
         else
             possibilities->button->setChecked(false);
-   
+
         connect( possibilities->button , SIGNAL(clicked()) , this , possibilities->slot );
 
         ++possibilities;
@@ -1066,7 +1066,7 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
 {
     // setup scrollbar radio
     int scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
-   
+
     RadioOption positions[] = { {_ui->scrollBarHiddenButton,Profile::ScrollBarHidden,SLOT(hideScrollBar())},
                                 {_ui->scrollBarLeftButton,Profile::ScrollBarLeft,SLOT(showScrollBarLeft())},
                                 {_ui->scrollBarRightButton,Profile::ScrollBarRight,SLOT(showScrollBarRight())},
@@ -1074,16 +1074,16 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
                               }; 
 
     setupRadio( positions , scrollBarPosition );
-   
+
     // setup scrollback type radio
     int scrollBackType = profile->property<int>(Profile::HistoryMode);
-    
+
     RadioOption types[] = { {_ui->disableScrollbackButton,Profile::DisableHistory,SLOT(noScrollBack())},
                             {_ui->fixedScrollbackButton,Profile::FixedSizeHistory,SLOT(fixedScrollBack())},
                             {_ui->unlimitedScrollbackButton,Profile::UnlimitedHistory,SLOT(unlimitedScrollBack())},
                             {0,0,0} };
     setupRadio( types , scrollBackType ); 
-    
+
     // setup scrollback line count spinner
     int historySize = profile->property<int>(Profile::HistorySize);
     _ui->scrollBackLinesSpinner->setValue( historySize );
@@ -1245,7 +1245,7 @@ void EditProfileDialog::fontSelected(const QFont& font)
    setFontSliderValue(font);
 
    _ui->fontPreviewLabel->setFont(previewFont);
-   
+
    preview(Profile::Font,font);
    updateTempProfileProperty(Profile::Font,font);
 
@@ -1253,7 +1253,7 @@ void EditProfileDialog::fontSelected(const QFont& font)
 void EditProfileDialog::showFontDialog()
 {
     QFont currentFont = _ui->fontPreviewLabel->font();
-   
+
     KFontDialog* dialog = new KFontDialog(this, KFontChooser::FixedFontsOnly);
     dialog->setFont(currentFont, true);
 
@@ -1333,11 +1333,11 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     // a darker version at the outer edge
     QColor color = scheme->backgroundColor();
     QRectF backgroundRect = QRectF(option.rect).adjusted(1.5,1.5,-1.5,-1.5);
-  
+
     QRadialGradient backgroundGradient(backgroundRect.center() , backgroundRect.width() / 2);
     backgroundGradient.setColorAt( 0 , color.lighter(105) );
     backgroundGradient.setColorAt( 1 , color.darker(115) );
-   
+
     const int backgroundRectXRoundness = 4;
     const int backgroundRectYRoundness = 30;
 
@@ -1388,7 +1388,7 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
 
         painter->setBrush( QBrush(Qt::NoBrush) );
         QPen pen;
-        
+
         QColor highlightColor = option.palette.highlight().color();
 
         if ( isSelected )
@@ -1399,7 +1399,7 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
         pen.setBrush(highlightColor);
         pen.setWidth(selectedBorderWidth);
         pen.setJoinStyle(Qt::MiterJoin);
-        
+
         painter->setPen(pen);
 
 

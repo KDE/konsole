@@ -1,6 +1,6 @@
 /*
     This file is part of Konsole, an X terminal.
-    
+
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
     Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
@@ -123,7 +123,7 @@ class KONSOLEPRIVATE_EXPORT Emulation : public QObject
 Q_OBJECT
 
 public:
- 
+
    /** Constructs a new terminal emulation */ 
    Emulation();
   ~Emulation();
@@ -169,7 +169,7 @@ public:
    * @param endLine Index of last line to copy
    */
   virtual void writeToStream(TerminalCharacterDecoder* decoder,int startLine,int endLine);
-  
+
   /** Returns the codec used to decode incoming characters.  See setCodec() */
   const QTextCodec* codec() const { return _codec; }
   /** Sets the codec used to decode incoming characters.  */
@@ -182,7 +182,7 @@ public:
    */
   bool utf8() const
   { Q_ASSERT(_codec); return _codec->mibEnum() == 106; }
-  
+
 
   /** Returns the special character used for erasing character. */
   virtual char eraseChar() const;
@@ -220,7 +220,7 @@ public slots:
 
   /** Change the size of the emulation's image */
   virtual void setImageSize(int lines, int columns);
-  
+
   /** 
    * Interprets a sequence of characters and sends the result to the terminal.
    * This is equivalent to calling sendKeyEvent() for each character in @p text in succession.
@@ -232,13 +232,13 @@ public slots:
    * the resulting character stream. 
    */
   virtual void sendKeyEvent(QKeyEvent*);
- 
+
   /** 
    * Converts information about a mouse event into an xterm-compatible escape
    * sequence and emits the character sequence via sendData()
    */
   virtual void sendMouseEvent(int buttons, int column, int line, int eventType);
-  
+
   /**
    * Sends a string of characters to the foreground terminal process. 
    *
@@ -411,17 +411,17 @@ signals:
    * screen is in use.
    */
   void primaryScreenInUse(bool use);
-  
+
   /**
    * Emitted when the text selection is changed
    */
   void selectedText(const QString & text);
 
-  
+
 protected:
   virtual void setMode(int mode) = 0;
   virtual void resetMode(int mode) = 0;
-   
+
   /** 
    * Processes an incoming character.  See receiveData()
    * @p ch A unicode character code. 
@@ -446,7 +446,7 @@ protected:
 
 
   QList<ScreenWindow*> _windows;
-  
+
   Screen* _currentScreen;  // pointer to the screen which is currently active, 
                             // this is one of the elements in the screen[] array
 
@@ -454,8 +454,8 @@ protected:
                             //                      scrollbars are enabled in this mode )
                             // 1 = alternate      ( used by vi , emacs etc.
                             //                      scrollbars are not enabled in this mode )
-                            
-  
+
+
   //decodes an incoming C-style character stream into a unicode QString using 
   //the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
   const QTextCodec* _codec;
@@ -472,7 +472,7 @@ protected slots:
 
   // used to emit the primaryScreenInUse(bool) signal
   void checkScreenInUse();
-  
+
   // used to emit the selectedText(QString) signal
   void checkSelectedText();
 
@@ -489,7 +489,7 @@ private:
   QTimer _bulkTimer1;
   QTimer _bulkTimer2;
   bool _imageSizeInitialized;
-  
+
 };
 
 }

@@ -45,7 +45,7 @@ using namespace Konsole;
 FilterChain::~FilterChain()
 {
     QMutableListIterator<Filter*> iter(*this);
-    
+
     while ( iter.hasNext() )
     {
         Filter* filter = iter.next();
@@ -139,7 +139,7 @@ void TerminalImageFilterChain::setImage(const Character* const image , int lines
 
     PlainTextDecoder decoder;
     decoder.setTrailingWhitespace(false);
-    
+
     // setup new shared buffers for the filters to process on
     QString* newBuffer = new QString();
     QList<int>* newLinePositions = new QList<int>();
@@ -225,7 +225,7 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
         }
     }
 }
-    
+
 
 /*void Filter::addLine(const QString& text)
 {
@@ -265,12 +265,12 @@ Filter::HotSpot* Filter::hotSpotAt(int line , int column) const
     while (spotIter.hasNext())
     {
         HotSpot* spot = spotIter.next();
-        
+
         if ( spot->startLine() == line && spot->startColumn() > column )
             continue;
         if ( spot->endLine() == line && spot->endColumn() < column )
             continue;
-       
+
         return spot;
     }
 
@@ -428,7 +428,7 @@ QString UrlFilter::HotSpot::tooltip() const
 UrlFilter::HotSpot::UrlType UrlFilter::HotSpot::urlType() const
 {
     QString url = capturedTexts().first();
-    
+
     if ( FullUrlRegExp.exactMatch(url) )
         return StandardUrl;
     else if ( EmailAddressRegExp.exactMatch(url) )
@@ -466,7 +466,7 @@ void UrlFilter::HotSpot::activate(QObject* object)
         {
             url.prepend("mailto:");
         }
-    
+
         new KRun(url,QApplication::activeWindow());
     }
 }

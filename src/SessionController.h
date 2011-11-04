@@ -88,19 +88,19 @@ typedef QPointer<Session> SessionPtr;
 class KONSOLEPRIVATE_EXPORT SessionController : public ViewProperties , public KXMLGUIClient
 {
 Q_OBJECT
-    
+
 public:
     /**
      * Constructs a new SessionController which operates on @p session and @p view.
      */
     SessionController(Session* session , TerminalDisplay* view, QObject* parent);
     ~SessionController();
-    
+
     /** Returns the session associated with this controller */
     QPointer<Session> session() { return _session; }
     /** Returns the view associated with this controller */
     QPointer<TerminalDisplay>  view()    { return _view;    }
-    
+
     /** 
      * Returns true if the controller is valid.
      * A valid controller is one which has a non-null session() and view().
@@ -233,7 +233,7 @@ private slots:
                                          // display area
 
     void updateSearchFilter();
-    
+
     void zmodemDownload();
     void zmodemUpload();
 
@@ -254,11 +254,11 @@ private:
 
 private:
     void updateSessionIcon();
-  
+
     QPointer<Session>         _session;
     QPointer<TerminalDisplay> _view;
     SessionGroup*               _copyToGroup;
-    
+
     ProfileList* _profileList;
 
     KIcon      _sessionIcon;
@@ -271,12 +271,12 @@ private:
     KAction* _copyToAllTabsAction;
     KAction* _copyToSelectedAction;
     KAction* _copyToNoneAction;
-    
+
     KAction* _searchToggleAction;
     KAction* _findNextAction;
     KAction* _findPreviousAction;
-    
-    
+
+
     bool _urlFilterUpdateRequired;
 
     QPointer<IncrementalSearchBar> _searchBar;
@@ -361,7 +361,7 @@ private:
 class SaveHistoryTask : public SessionTask
 {
 Q_OBJECT
-  
+
 public:
     /** Constructs a new task to save session output to URLs */
     SaveHistoryTask(QObject* parent = 0);
@@ -387,7 +387,7 @@ private:
         SessionPtr session; // the session associated with a history save job
         int lastLineFetched; // the last line processed in the previous data request
                              // set this to -1 at the start of the save job
-        
+
         TerminalCharacterDecoder* decoder;  // decoder used to convert terminal characters
                                             // into output
 
@@ -440,7 +440,7 @@ public:
     void setRegExp(const QRegExp& regExp);
     /** Returns the regular expression which is searched for when execute() is called */
     QRegExp regExp() const;
-   
+
     /** Specifies the direction to search in when execute() is called. */ 
     void setSearchDirection( SearchDirection direction );
     /** Returns the current search direction.  See setSearchDirection(). */
@@ -460,7 +460,7 @@ public:
 
 private:
     typedef QPointer<ScreenWindow> ScreenWindowPtr;
-    
+
     void executeOnScreenWindow( SessionPtr session , ScreenWindowPtr window );
     void highlightResult( ScreenWindowPtr window , int position);
 

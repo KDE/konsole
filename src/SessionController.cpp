@@ -324,7 +324,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             // second, connect the newly focused view to listen for the session's bell signal
             connect( _session , SIGNAL(bellRequest(QString)) ,
                     _view , SLOT(bell(QString)) );
-                    
+
             if(_copyToAllTabsAction->isChecked()) {
                 // A session with "Copy To All Tabs" has come into focus:
                 // Ensure that newly created sessions are included in _copyToGroup!
@@ -613,7 +613,7 @@ bool SessionController::confirmClose() const
     if (_session->isForegroundProcessActive())
     {
         QString title = _session->foregroundProcessName();
-      
+
         // hard coded for now.  In future make it possible for the user to specify which programs
         // are ignored when considering whether to display a confirmation
         QStringList ignoreList; 
@@ -756,7 +756,7 @@ void SessionController::copyInputToAllTabs()
     for(QSet<Session*>::iterator iterator = group.begin();
         iterator != group.end(); ++iterator) {
         Session* session = *iterator;
- 
+
         // First, ensure that the session is removed
         // (necessary to avoid duplicates on addSession()!)
         _copyToGroup->removeSession(session);
@@ -768,7 +768,7 @@ void SessionController::copyInputToAllTabs()
     }
     _copyToGroup->setMasterStatus(_session, true);
     _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
-    
+
     snapshot();
     _copyToAllTabsAction->setChecked(true);
     _copyToSelectedAction->setChecked(false);
@@ -787,10 +787,10 @@ void SessionController::copyInputToSelectedTabs()
 
     CopyInputDialog* dialog = new CopyInputDialog(_view);
     dialog->setMasterSession(_session);
-    
+
     QSet<Session*> currentGroup = QSet<Session*>::fromList(_copyToGroup->sessions());
     currentGroup.remove(_session);
-    
+
     dialog->setChosenSessions(currentGroup);
 
     QPointer<Session> guard(_session);
@@ -802,7 +802,7 @@ void SessionController::copyInputToSelectedTabs()
     {
         QSet<Session*> newGroup = dialog->chosenSessions();
         newGroup.remove(_session);
-    
+
         QSet<Session*> completeGroup = newGroup | currentGroup;
         foreach(Session* session, completeGroup)
         {
@@ -833,7 +833,7 @@ void SessionController::copyInputToNone()
     for(QSet<Session*>::iterator iterator = group.begin();
         iterator != group.end(); ++iterator) {
         Session* session = *iterator;
- 
+
         if(session != _session) {
             _copyToGroup->removeSession(*iterator);
         }
@@ -841,7 +841,7 @@ void SessionController::copyInputToNone()
     delete _copyToGroup;
     _copyToGroup = NULL;
     snapshot();
-    
+
     _copyToAllTabsAction->setChecked(false);
     _copyToSelectedAction->setChecked(false);
     _copyToNoneAction->setChecked(true);
@@ -888,7 +888,7 @@ void SessionController::searchHistory(bool showSearchBar)
             removeSearchFilter();
 
             listenForScreenWindowUpdates();
-            
+
             _searchFilter = new RegExpFilter();
             _view->filterChain()->addFilter(_searchFilter);
             connect( _searchBar , SIGNAL(searchChanged(QString)) , this ,

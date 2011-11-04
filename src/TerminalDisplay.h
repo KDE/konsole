@@ -181,7 +181,7 @@ public:
     void setTripleClickMode(TripleClickMode mode) { _tripleClickMode = mode; }
     /** See setTripleClickSelectionMode() */
     TripleClickMode tripleClickMode() const { return _tripleClickMode; }
-    
+
     /**
      * Specifies whether links and email addresses should be underlined when 
      * hovered by the mouse. Defaults to true.
@@ -380,7 +380,7 @@ public:
      * Returns true if characters with intense colors are rendered in bold.
      */
     bool getBoldIntense() const { return _boldIntense; }
-    
+
     /**
      * Sets whether or not the current height and width of the 
      * terminal in lines and columns is displayed whilst the widget
@@ -489,7 +489,7 @@ public slots:
      * or false otherwise.
      */
     void setUsesMouse(bool usesMouse);
-  
+
     /** See setUsesMouse() */
     bool usesMouse() const;
 
@@ -610,7 +610,7 @@ protected slots:
     void scrollBarPositionChanged(int value);
     void blinkTextEvent();
     void blinkCursorEvent();
-    
+
     //Renables bell noises and visuals.  Used to disable further bells for a short period of time
     //after emitting the first in a sequence of bell events.
     void enableBell();
@@ -679,7 +679,7 @@ private:
     void propagateSize();
     void updateImageSize();
     void makeImage();
-    
+
     void paintFilters(QPainter& painter);
 
     // returns a region covering all of the areas of the widget which contain
@@ -715,7 +715,7 @@ private:
 
     int _lines;      // the number of lines that can be displayed in the widget
     int _columns;    // the number of columns that can be displayed in the widget
-    
+
     int _usedLines;  // the number of lines that are actually being used, this will be less
                     // than 'lines' if the character image provided with setImage() is smaller
                     // than the maximum image size which can be displayed
@@ -723,7 +723,7 @@ private:
     int _usedColumns; // the number of columns that are actually being used, this will be less
                      // than 'columns' if the character image provided with setImage() is smaller
                      // than the maximum image size which can be displayed
-    
+
     int _contentHeight;
     int _contentWidth;
     Character* _image; // [lines][columns]
@@ -779,13 +779,13 @@ private:
     //widgets related to the warning message that appears when the user presses Ctrl+S to suspend
     //terminal output - informing them what has happened and how to resume output
     QLabel* _outputSuspendedLabel; 
-        
+
     uint _lineSpacing;
 
     bool _colorsInverted; // true during visual bell
 
     QSize _size;
-    
+
     QRgb _blendColor;
 
     ColorSchemeWallpaper::Ptr _wallpaper;

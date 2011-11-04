@@ -66,12 +66,12 @@ void PartTest::testFd()
 	bool result = QMetaObject::invokeMethod(terminalPart,"openTeletype",
 						Qt::DirectConnection,Q_ARG(int,fd));
 	QVERIFY(result);
-		
+
 	// suspend the KPtyDevice so that the embedded terminal gets a chance to 
 	// read from the pty.  Otherwise the KPtyDevice will simply read everything
 	// as soon as it becomes available and the terminal will not display any output
 	ptyProcess.pty()->setSuspended(true);
-	
+
 	KDialog* dialog = new KDialog();
 	dialog->setButtons(0);
 	QVBoxLayout* layout = new QVBoxLayout(dialog->mainWidget());
@@ -95,7 +95,7 @@ void PartTest::testShortcutOverride()
 	// When the key presses are sent automatically, the shortcut is triggered but 
 	// Konsole::TerminalDisplay::event() is not called and the overrideShortcut() signal is 
 	// not emitted by the part.
-	
+
 	// Create a main window with a menu and a test
 	// action with a shortcut set to Ctrl+S, which is also used by the terminal
 	KMainWindow* mainWindow = new KMainWindow();
@@ -166,7 +166,7 @@ KParts::Part* PartTest::createPart()
 	Q_ASSERT(factory);
 
 	KParts::Part* terminalPart = factory->create<KParts::Part>(this);
-	
+
 	return terminalPart;
 }
 

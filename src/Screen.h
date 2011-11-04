@@ -82,7 +82,7 @@ public:
 
     // VT100/2 Operations 
     // Cursor Movement
-    
+
     /** 
      * Move the cursor up by @p n lines.  The cursor will stop at the 
      * top margin.
@@ -126,7 +126,7 @@ public:
      * of the screen.
      */
     void setDefaultMargins();
-    
+
     /** 
      * Moves the cursor down one line, if the MODE_NewLine mode 
      * flag is enabled then the cursor is returned to the leftmost
@@ -154,7 +154,7 @@ public:
      * region is scrolled down by one line instead.
      */
     void reverseIndex();
-    
+
     /** 
      * Scroll the scrolling region of the screen up by @p n lines. 
      * The scrolling region is initially the whole screen, but can be changed 
@@ -181,9 +181,9 @@ public:
     void tab(int n = 1);
     /** Moves the cursor @p n tab-stops to the left. */
     void backtab(int n);
-    
+
     // Editing
-    
+
     /** 
      * Erase @p n characters beginning from the current cursor position. 
      * This is equivalent to over-writing @p n characters starting with the current
@@ -218,7 +218,7 @@ public:
     void clearTabStops();
     /**  Sets or removes a tab stop at the cursor's current column. */ 
     void changeTabStop(bool set);
-   
+
     /** Resets (clears) the specified screen @p mode. */
     void resetMode(int mode);
     /** Sets (enables) the specified screen @p mode. */
@@ -232,7 +232,7 @@ public:
     void restoreMode(int mode);
     /** Returns whether the specified screen @p mode is enabled or not .*/
     bool getMode(int mode) const;
-   
+
     /** 
      * Saves the current position and appearance (text color and style) of the cursor. 
      * It can be restored by calling restoreCursor() 
@@ -240,7 +240,7 @@ public:
     void saveCursor();
     /** Restores the position and appearance of the cursor.  See saveCursor() */
     void restoreCursor();
-   
+
     /** Clear the whole screen, moving the current screen contents into the history first. */ 
     void clearEntireScreen();
     /** 
@@ -259,10 +259,10 @@ public:
     void clearToEndOfLine();
     /** Clears from the current cursor position to the beginning of the line. */
     void clearToBeginOfLine();
-    
+
     /** Fills the entire screen with the letter 'E' */
     void helpAlign();
-       
+
     /** 
      * Enables the given @p rendition flag.  Rendition flags control the appearance 
      * of characters on the screen.
@@ -277,7 +277,7 @@ public:
      * @see Character::rendition
      */
     void resetRendition(int rendition);
-    
+
     /** 
      * Sets the cursor's foreground color.
      * @param space The color space used by the @p color argument
@@ -301,12 +301,12 @@ public:
      * character's rendition flags back to the default settings.
      */
     void setDefaultRendition();
-    
+
     /** Returns the column which the cursor is positioned at. */
     int  getCursorX() const;
     /** Returns the line which the cursor is positioned on. */
     int  getCursorY() const;
-   
+
     /** Clear the entire screen and move the cursor to the home position.
      * Equivalent to calling clearEntireScreen() followed by home().
      */
@@ -334,7 +334,7 @@ public:
      * otherwise they are unaltered.
      */
     void reset(bool clearScreen = true);
-   
+
     /** 
      * Displays a new character at the current cursor position. 
      * 
@@ -359,7 +359,7 @@ public:
      * cleared.
      */
     void resizeImage(int new_lines, int new_columns);
-    
+
     /**
      * Returns the current screen image.  
      * The result is an array of Characters of size [getLines()][getColumns()] which
@@ -379,7 +379,7 @@ public:
      * other attributes control the size of characters in the line.
      */
     QVector<LineProperty> getLineProperties( int startLine , int endLine ) const;
-    
+
 
     /** Return the number of lines. */
     int getLines() const   
@@ -411,7 +411,7 @@ public:
      * @param blockSelectionMode True if the selection is in column mode.
      */
     void setSelectionStart(const int column, const int line, const bool blockSelectionMode);
-    
+
     /**
      * Sets the end of the current selection.
      *
@@ -419,13 +419,13 @@ public:
      * @param line The line index of the last character in the selection. 
      */ 
     void setSelectionEnd(const int column, const int line);
-   
+
     /**
      * Retrieves the start of the selection or the cursor position if there
      * is no selection.
      */
     void getSelectionStart(int& column , int& line) const;
-    
+
     /**
      * Retrieves the end of the selection or the cursor position if there
      * is no selection.
@@ -447,7 +447,7 @@ public:
      * be inserted into the returned text at the end of each terminal line.
      */
     QString selectedText(bool preserveLineBreaks) const;
-        
+
     /**
      * Copies part of the output to a stream.
      *
@@ -556,7 +556,7 @@ public:
     {
         return _currentTerminalDisplay;
     }
-    
+
     QSet<ushort> usedExtendedChars() const
     {
         QSet<ushort> result;
@@ -595,7 +595,7 @@ private:
                           TerminalCharacterDecoder* decoder,
                           bool appendNewLine,
                           bool preserveLineBreaks) const;
-    
+
     //fills a section of the screen image with the character 'c'
     //the parameters are specified as offsets from the start of the screen image.
     //the loc(x,y) macro can be used to generate these values from a column,line pair.
@@ -648,10 +648,10 @@ private:
     int _droppedLines;
 
     QVarLengthArray<LineProperty,64> lineProperties;    
-    
+
     // history buffer ---------------
     HistoryScroll* history;
-    
+
     // cursor location
     int cuX;
     int cuY;
@@ -697,7 +697,7 @@ private:
         CharacterColor background;
     };
     SavedState savedState;
-        
+
     // last position where we added a character
     int lastPos;
 

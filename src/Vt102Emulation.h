@@ -1,6 +1,6 @@
 /*
     This file is part of Konsole, an X terminal.
-    
+
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
     Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
@@ -81,25 +81,25 @@ public:
   /** Constructs a new emulation */
   Vt102Emulation();
   ~Vt102Emulation();
-  
+
   // reimplemented from Emulation
   virtual void clearEntireScreen();
   virtual void reset();
   virtual char eraseChar() const;
-  
+
 public slots: 
   // reimplemented from Emulation 
   virtual void sendString(const char*,int length = -1);
   virtual void sendText(const QString& text);
   virtual void sendKeyEvent(QKeyEvent*);
   virtual void sendMouseEvent(int buttons, int column, int line, int eventType);
-  
+
 protected:
   // reimplemented from Emulation
   virtual void setMode(int mode);
   virtual void resetMode(int mode);
   virtual void receiveChar(int cc);
-  
+
 private slots:
   //causes changeTitle() to be emitted for each (int,QString) pair in pendingTitleUpdates
   //used to buffer multiple title updates

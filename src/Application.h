@@ -54,7 +54,7 @@ Q_OBJECT
 public:
     /** Constructs a new Konsole application. */
     Application();
-    
+
     virtual ~Application();
 
     /** Creates a new main window and opens a default terminal session */

@@ -73,7 +73,7 @@ void KeyboardTranslatorManager::findTranslators()
         QString translatorPath = listIter.next();
 
         QString name = QFileInfo(translatorPath).baseName();
-       
+
         if ( !_translators.contains(name) ) 
             _translators.insert(name,0);
     }
@@ -117,7 +117,7 @@ bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator* transla
     {
         KeyboardTranslatorWriter writer(&destination);
         writer.writeHeader(translator->description());
-    
+
         QListIterator<KeyboardTranslator::Entry> iter(translator->entries());
         while ( iter.hasNext() )
             writer.writeEntry(iter.next());
@@ -516,7 +516,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
         text.remove(commentPos,text.length());
 
     text = text.simplified();
-   
+
     // title line: keyboard "title"
     static QRegExp title("keyboard\\s+\"(.*)\"");
     // key line: key KeySequence : "output"
@@ -533,7 +533,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
     {
         Token titleToken = { Token::TitleKeyword , QString() };
         Token textToken = { Token::TitleText , title.capturedTexts()[1] };
-    
+
         list << titleToken << textToken;
     }
     else if  ( key.exactMatch(text) )
@@ -621,7 +621,7 @@ bool KeyboardTranslator::Entry::matches(int keyCode ,
         if ( wantAnyModifier != anyModifiersSet )
            return false;
     }
-    
+
     return true;
 }
 QByteArray KeyboardTranslator::Entry::escapedText(bool expandWildCards,Qt::KeyboardModifiers modifiers) const

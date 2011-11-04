@@ -159,7 +159,7 @@ public:
     int windowLines() const;
     /** Returns the number of columns in the window */
     int windowColumns() const;
-    
+
     /** Returns the total number of lines in the screen */
     int lineCount() const;
     /** Returns the total number of columns in the screen */

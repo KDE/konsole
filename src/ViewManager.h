@@ -324,7 +324,7 @@ private slots:
     void detachView(ViewContainer* container, QWidget* view);
 
     void closeTabFromContainer(ViewContainer *container, QWidget *view);
-    
+
 private:
     void createView(Session* session, ViewContainer* container, int index);
     const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile) const;
@@ -333,12 +333,12 @@ private:
     void focusActiveView();
     void registerView(TerminalDisplay* view);
     void unregisterView(TerminalDisplay* view);
-  
+
     // takes a view from a view container owned by a different manager and places it in 
     // newContainer owned by this manager
     void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TerminalDisplay* view); 
     void splitView(Qt::Orientation orientation);
-    
+
     // creates a new container which can hold terminal displays
     // 'profile' specifies the profile to use to get initial
     // settings (eg. navigation position) for the container
@@ -350,7 +350,7 @@ private:
     // the 'session' is used so that the terminal display's random seed
     // can be set to something which depends uniquely on that session
     TerminalDisplay* createTerminalDisplay(Session* session = 0);
-    
+
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information
     // about the session ( such as title and associated icon ) to the display.
@@ -361,7 +361,7 @@ private:
 private:
     QPointer<ViewSplitter>          _viewSplitter;
     QPointer<SessionController>     _pluggedController;
-    
+
     QHash<TerminalDisplay*,Session*> _sessionMap;
 
     KActionCollection*                  _actionCollection;

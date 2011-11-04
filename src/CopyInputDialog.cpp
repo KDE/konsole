@@ -131,7 +131,7 @@ void CheckableSessionModel::setCheckColumn(int column)
 Qt::ItemFlags CheckableSessionModel::flags(const QModelIndex& index) const
 {
     Session* session = (Session*)index.internalPointer();
-    
+
     if (_fixedSessions.contains(session))
         return SessionListModel::flags(index) & ~Qt::ItemIsEnabled;
     else

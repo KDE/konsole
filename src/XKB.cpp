@@ -2,7 +2,7 @@
  Originally comes from NumLockX http://dforce.sh.charactervut.characterz/~seli/en/numlockx
 
  NumLockX
- 
+
  Copyright 2000-2001 Lubos Lunak        <l.lunak@kde.org>
  Copyright 2001      Oswald Buddenhagen <ossi@kde.org>
 
@@ -50,7 +50,7 @@ int xkb_init()
         && XkbQueryExtension( QX11Info::display(), &xkb_opcode, &xkb_event, &xkb_error,
                    &xkb_lmaj, &xkb_lmin );
 }
-    
+
 #if 0
 // This method doesn't work in all cases. The atom "ScrollLock" doesn't seem
 // to exist on all XFree versions (at least it's not here with my 3.3.6) - DF
@@ -115,7 +115,7 @@ unsigned int xkb_scrolllock_mask()
 
 
 unsigned int scrolllock_mask = 0;
-        
+
 int xkb_set_on()
 {
     if (!scrolllock_mask)
@@ -129,7 +129,7 @@ int xkb_set_on()
     XkbLockModifiers ( QX11Info::display(), XkbUseCoreKbd, scrolllock_mask, scrolllock_mask);
     return 1;
 }
-    
+
 int xkb_set_off()
 {
     if (!scrolllock_mask)

@@ -80,7 +80,7 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     // resize the session table to the full width of the table
     _ui->sessionTable->horizontalHeader()->setHighlightSections(false);
     _ui->sessionTable->resizeColumnsToContents();
-    
+
     // allow a larger width for the shortcut column to account for the 
     // increased with needed by the shortcut editor compared with just
     // displaying the text of the shortcut
@@ -227,7 +227,7 @@ void ManageProfilesDialog::addItems(const Profile::Ptr profile)
 void ManageProfilesDialog::populateTable()
 {
     Q_ASSERT(!_ui->sessionTable->model());
-    
+
     _ui->sessionTable->setModel(_sessionModel);
 
     _sessionModel->clear();
@@ -352,11 +352,11 @@ void ManageProfilesDialog::moveDownSelected()
 void ManageProfilesDialog::createProfile()
 {
     EditProfileDialog dialog(this);
- 
+
     // setup a temporary profile which is a clone of the selected profile 
     // or the default if no profile is selected
     Profile::Ptr sourceProfile;
-    
+
     Profile::Ptr selectedProfile = currentProfile();
     if ( !selectedProfile ) 
         sourceProfile = SessionManager::instance()->defaultProfile();
@@ -464,7 +464,7 @@ void StyledBackgroundPainter::drawBackground(QPainter* painter, const QStyleOpti
     const QWidget* widget = v3option ? v3option->widget : 0;
 
     QStyle* style = widget ? widget->style() : QApplication::style();
-    
+
     style->drawPrimitive(QStyle::PE_PanelItemViewItem,&option,painter,widget);
 }
 
@@ -522,7 +522,7 @@ void ShortcutItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* mod
                                     const QModelIndex& index) const
 {
     _itemsBeingEdited.remove(index);
-    
+
     if (!_modifiedEditors.contains(editor))
         return;
 

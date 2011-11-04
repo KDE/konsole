@@ -110,7 +110,7 @@ public:
      * @param ok Set to true if the parent process id
      */
     int parentPid(bool* ok) const;
-    
+
     /** 
      * Returns the id of the current foreground process 
      *
@@ -121,19 +121,19 @@ public:
      * @param ok Set to true if the foreground process id was read successfully or false otherwise
      */
     int foregroundPid(bool* ok) const;
-    
+
     /* Returns the user id of the process */
     int userId(bool* ok) const;
 
     /** Returns the user's name of the process */
     QString userName() const;
-   
+
     /** Returns the user's home directory of the process */
     QString userHomeDir() const;
 
     /** Returns the name of the current process */
     QString name(bool* ok) const;
-   
+
     /** 
      * Returns the command-line arguments which the process
      * was started with.
