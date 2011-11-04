@@ -5,7 +5,7 @@ Fonts need to suit the needs of X11, QT and konsole.
 
 * the font has to be fixed width.
 
-  This requierement originate both from X11 and
+  This requirement originate both from X11 and
   the way QT and konsole uses it together with
   the very idea of what a terminal emulation is
   about.
@@ -48,7 +48,7 @@ Fonts need to suit the needs of X11, QT and konsole.
   pseudo graphical entities.
 
   Using fonts without this capabilities means to
-  break the visual apearence of these products.
+  break the visual appearance of these products.
 
   As a minimum the following glyphs have to be
   included within a font to become usable:
@@ -115,7 +115,7 @@ Fonts need to suit the needs of X11, QT and konsole.
 
   If such a character isn't defined, X11 might
   choose to void the character completely, causing
-  inconsistent appearence when refreshing the screen.
+  inconsistent appearance when refreshing the screen.
 
   One may choose the space glyph to hide the flaw
   or a box like one to exhibit it.

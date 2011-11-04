@@ -9,7 +9,7 @@ related to keyboards, that can be coped with this way:
 
 - BS Hack
 
-  While one would expect, that the Backspace key send Ascii
+  While one would expect, that the Backspace key send ASCII
   Backspace, this is not the case in many Linux installations.
 
   The idea behind this hack is to preserve the CTRL-H.
@@ -37,7 +37,7 @@ Note that your system is not unlikely to have other keyboard databases
 which have to be in sync, too (e.g. /etc/inputrc for readline(3)).
 
 If you want to adjust things to your needs, copy one of the
-*.keytab files and edit it. When restarted, konsole offeres
+*.keytab files and edit it. When restarted, konsole offers
 you this new entry on it's menu.
 
 In case your new keytab is likely to suit common needs,

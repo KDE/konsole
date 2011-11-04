@@ -1,7 +1,7 @@
 Konsole and the Linux console
 
 
-From a technical point of view, the Linux console differes
+From a technical point of view, the Linux console differs
 so substantially from any other terminal, that it impossible
 to fully emulate it. This is because the Linux console lives
 in kernel space and interfaces by kernel means, which cannot
@@ -9,7 +9,7 @@ be simulated by any user space application.
 
 Contrary to this fact, konsole can be configured to appear
 and function console like to a degree that makes it virtually
-undistinguishable from the original. To do so, switch off the
+indistinguishable from the original. To do so, switch off the
 menubar, scrollbar and frame, select the Linux colors and font
 and set the full screen mode. 
 
