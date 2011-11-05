@@ -644,7 +644,6 @@ CompactHistoryLine::CompactHistoryLine ( const TextLine& line, CompactHistoryBlo
 
 CompactHistoryLine::~CompactHistoryLine()
 {
-  //kDebug() << "~CHL";
   if (length>0) {
     blockList.deallocate(text);
     blockList.deallocate(formatArray);
