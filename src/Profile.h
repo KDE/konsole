@@ -85,8 +85,6 @@ public:
         Path,   
         /** (QString) The descriptive name of this profile. */
         Name,   
-        /** (QString) Title of this profile that will be displayed. */
-        Title, 
         /** (QString) The name of the icon associated with this profile.  This
          * is used in menus and tabs to represent the profile.
          */

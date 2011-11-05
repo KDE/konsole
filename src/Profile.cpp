@@ -66,7 +66,6 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     // General
       { Path , "Path" , 0 , QVariant::String }
     , { Name , "Name" , GENERAL_GROUP , QVariant::String }
-    , { Title , "Title" , 0 , QVariant::String }
     , { Icon , "Icon" , GENERAL_GROUP , QVariant::String }
     , { Command , "Command" , 0 , QVariant::String }
     , { Arguments , "Arguments" , 0 , QVariant::StringList }
