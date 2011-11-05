@@ -58,6 +58,7 @@ void Application::init()
 
     // check for compositing functionality
     TerminalDisplay::setTransparencyEnabled( KWindowSystem::compositingActive() );
+
 #if defined(Q_WS_MAC) && QT_VERSION >= 0x040600
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
     // will work correctly in the terminal
@@ -80,13 +81,14 @@ MainWindow* Application::newMainWindow()
     MainWindow* window = new MainWindow();
     window->setSessionList( new ProfileList(true,window) );
 
-    connect( window , SIGNAL(newSessionRequest(Profile::Ptr,QString,ViewManager*)), 
-                      this , SLOT(createSession(Profile::Ptr,QString,ViewManager*)));
+    connect( window , SIGNAL(newSessionRequest(Profile::Ptr,QString,ViewManager*)),
+            this , SLOT(createSession(Profile::Ptr,QString,ViewManager*)));
     connect( window , SIGNAL(newSSHSessionRequest(Profile::Ptr,KUrl,ViewManager*)),
-                      this , SLOT(createSSHSession(Profile::Ptr,KUrl,ViewManager*)));
+            this , SLOT(createSSHSession(Profile::Ptr,KUrl,ViewManager*)));
     connect( window , SIGNAL(newWindowRequest(Profile::Ptr,QString)),
-                      this , SLOT(createWindow(Profile::Ptr,QString)) );
-    connect( window->viewManager() , SIGNAL(viewDetached(Session*)) , this , SLOT(detachView(Session*)) );
+            this , SLOT(createWindow(Profile::Ptr,QString)) );
+    connect( window->viewManager() , SIGNAL(viewDetached(Session*)) ,
+            this , SLOT(detachView(Session*)) );
 
     return window;
 }
@@ -201,7 +203,7 @@ int Application::newInstance()
  * ;; is the token separator
  * # at the beginning of line results in line being ignored
  * tokens are title:, command:, profile: (not used currently)
- * Note that the title is static and the tab will close when the 
+ * Note that the title is static and the tab will close when the
  * command is complete (do not use --noclose).  You can start new tabs.
  * Examples:
 title: This is the title;; command: ssh jupiter
@@ -258,7 +260,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
     QString command = tokens["command"];
     QString profile = tokens["profile"]; // currently not used
 
-    // TODO: A lot of duplicate code below
+    // FIXME: A lot of duplicate code below
 
     // Get the default profile
     Profile::Ptr defaultProfile = window->defaultProfile();
@@ -275,8 +277,8 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
         newProfile->setProperty(Profile::Directory,args->getOption("workdir"));
     }
     if(!newProfile->isEmpty()) {
-        window->setDefaultProfile(newProfile); 
-    }    
+        window->setDefaultProfile(newProfile);
+    }
 
     // Create the new session
     Session* session = createSession(window->defaultProfile(), QString(), window->viewManager());
@@ -294,7 +296,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
     // created tab would have the command above!
     newProfile = Profile::Ptr(new Profile(defaultProfile));
     newProfile->setHidden(true);
-    window->setDefaultProfile(newProfile); 
+    window->setDefaultProfile(newProfile);
 
 }
 
@@ -310,7 +312,7 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
             window = qobject_cast<MainWindow*>(iter.previous());
             if ( window != 0 )
                 break;
-        } 
+        }
     }
 
     if ( window == 0 )
@@ -346,7 +348,7 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
     }
     return false;
 }
-void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window) 
+void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window)
 {
     Profile::Ptr defaultProfile = window->defaultProfile();
     if (!defaultProfile)
@@ -361,7 +363,7 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
     }
 
     // temporary changes to profile options specified on the command line
-    foreach( const QString &value , args->getOptionList("p") ) 
+    foreach( const QString& value , args->getOptionList("p") )
     {
         ProfileCommandParser parser;
 
@@ -370,13 +372,13 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
         {
             iter.next();
             newProfile->setProperty(iter.key(),iter.value());
-        }        
+        }
     }
 
     if (!newProfile->isEmpty())
     {
-        window->setDefaultProfile(newProfile); 
-    }    
+        window->setDefaultProfile(newProfile);
+    }
 }
 
 void Application::startBackgroundMode(MainWindow* window)
@@ -408,7 +410,7 @@ void Application::toggleBackgroundInstance()
         // each time the background instance was shown
         _backgroundInstance->viewManager()->activeView()->setFocus();
     }
-    else 
+    else
     {
         _backgroundInstance->hide();
     }
