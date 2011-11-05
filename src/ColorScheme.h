@@ -79,7 +79,7 @@ class ColorScheme
 {
 public:
     /**
-     * Constructs a new color scheme which is initialised to the default color set
+     * Constructs a new color scheme which is initialized to the default color set
      * for Konsole.
      */
     ColorScheme();
@@ -198,10 +198,10 @@ private:
     // this is the default color table.
     const ColorEntry* colorTable() const;
 
-    // reads a single colour entry from a KConfig source
+    // reads a single color entry from a KConfig source
     // and sets the palette entry at 'index' to the entry read.
     void readColorEntry(KConfig& config , int index); 
-    // writes a single colour entry to a KConfig source
+    // writes a single color entry to a KConfig source
     void writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry,const RandomizationRange& range) const;
 
     // sets the amount of randomization allowed for a particular color
@@ -271,7 +271,7 @@ public:
     ColorScheme* read();
 
 private:
-    // reads a line from the file specifying a colour palette entry
+    // reads a line from the file specifying a color palette entry
     // format is: color [index] [red] [green] [blue] [transparent] [bold]
     bool readColorLine(const QString& line , ColorScheme* scheme);
     bool readTitleLine(const QString& line , ColorScheme* scheme);

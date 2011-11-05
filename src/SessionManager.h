@@ -282,7 +282,7 @@ signals:
     /**
      * Emitted when the shortcut for a profile is changed.
      *
-     * @param profile The profile whoose status was changed
+     * @param profile The profile whose status was changed
      * @param newShortcut The new shortcut key sequence for the profile
      */
     void shortcutChanged(Profile::Ptr profile , const QKeySequence& newShortcut);

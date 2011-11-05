@@ -404,8 +404,8 @@ void Application::toggleBackgroundInstance()
     {
         _backgroundInstance->show();
         // ensure that the active terminal display has the focus.
-        // without this, an odd problem occurred where the focus widgetwould change
-        // each time the background instance was shown 
+        // without this, an odd problem occurred where the focus widget would change
+        // each time the background instance was shown
         _backgroundInstance->viewManager()->activeView()->setFocus();
     }
     else 
@@ -446,7 +446,7 @@ Session* Application::createSession(Profile::Ptr profile, const QString& directo
         session->setInitialWorkingDirectory(directory);
 
     // create view before starting the session process so that the session doesn't suffer
-    // a change in terminal size right after the session starts.  some applications such as GNU Screen
+    // a change in terminal size right after the session starts.  Some applications such as GNU Screen
     // and Midnight Commander don't like this happening
     viewManager->createView(session);
 

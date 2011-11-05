@@ -101,7 +101,7 @@ public:
         */
        Type type() const;
        /**
-        * Causes the an action associated with a hotspot to be triggered.
+        * Causes the action associated with a hotspot to be triggered.
         *
         * @param object The object which caused the hotspot to be triggered.  This is
         * typically null ( in which case the default action should be performed ) or

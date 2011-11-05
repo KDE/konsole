@@ -392,7 +392,7 @@ void Emulation::setImageSize(int lines, int columns)
         _imageSizeInitialized = true;
 
         // FIXME
-        // a hard-coded, small delay is introduced to gurarantee Session::run()
+        // a hard-coded, small delay is introduced to guarantee Session::run()
         // does not get triggered by SIGNAL(imageSizeInitialized()) before
         // Pty::setWindowSize() is triggered by previously emitted
         // SIGNAL(imageSizeChanged()); See #203185

@@ -131,8 +131,8 @@ extern const ColorEntry base_color_table[TABLE_COLORS] KDE_NO_EXPORT;
    3     - Index(256)  - u: 16..255  v:0        w:0
    4     - RGB         - u:  0..255  v:0..256   w:0..256
 
-   Default colour space has two separate colours, namely
-   default foreground and default background colour.
+   Default color space has two separate colors, namely
+   default foreground and default background color.
 */
 
 #define COLOR_SPACE_UNDEFINED   0
@@ -149,7 +149,7 @@ class CharacterColor
     friend class Character;
 
 public:
-  /** Constructs a new CharacterColor whoose color and color space are undefined. */
+  /** Constructs a new CharacterColor whose color and color space are undefined. */
   CharacterColor() 
       : _colorSpace(COLOR_SPACE_UNDEFINED), 
         _u(0), 

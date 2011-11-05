@@ -424,8 +424,8 @@ public:
     {
         /** Searches forwards through the output, starting at the current selection. */
         ForwardsSearch,
-        /** Searches backwars through the output, starting at the current selection. */
-        BackwardsSearch  
+        /** Searches backwards through the output, starting at the current selection. */
+        BackwardsSearch
     };
 
     /**

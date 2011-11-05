@@ -67,7 +67,7 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     _lineCountBox = new KIntSpinBox(this);
 
     // minimum lines = 1 ( for 0 lines , "No History" mode should be used instead )
-    // maximum lines is abritrarily chosen, I do not think it is sensible to allow this
+    // maximum lines is arbitrarily chosen, I do not think it is sensible to allow this
     // to be set to a very large figure because that will use large amounts of memory,
     // if a very large log is required, "Unlimited History" mode should be used
     _lineCountBox->setRange( 1 , 100000 );

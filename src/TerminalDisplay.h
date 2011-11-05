@@ -475,7 +475,7 @@ public slots:
     void outputSuspended(bool suspended);
 
     /**
-     * Sets whether the program whoose output is being displayed in the view
+     * Sets whether the program whose output is being displayed in the view
      * is interested in mouse events.
      *
      * If this is set to true, mouse signals will be emitted by the view when the user clicks, drags
@@ -611,7 +611,7 @@ protected slots:
     void blinkTextEvent();
     void blinkCursorEvent();
 
-    //Renables bell noises and visuals.  Used to disable further bells for a short period of time
+    //Re-enables bell noises and visuals.  Used to disable further bells for a short period of time
     //after emitting the first in a sequence of bell events.
     void enableBell();
 

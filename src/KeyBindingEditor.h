@@ -41,7 +41,7 @@ class KeyboardTranslator;
  * the character sequence sent to the terminal when those
  * combinations are pressed.
  *
- * The dialog can be initialised with the settings of an
+ * The dialog can be initialized with the settings of an
  * existing key bindings list using the setup() method.
  *
  * The dialog creates a copy of the supplied keyboard translator
@@ -58,7 +58,7 @@ public:
     virtual ~KeyBindingEditor();
 
     /**
-     * Intialises the dialog with the bindings and other settings
+     * Initializes the dialog with the bindings and other settings
      * from the specified @p translator.
      */
     void setup(const KeyboardTranslator* translator);

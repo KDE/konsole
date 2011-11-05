@@ -47,8 +47,8 @@ using namespace Konsole;
    or newlines, but access it randomly.
 
    The model is that of an arbitrary wide typewriter scroll
-   in that the scroll is a serie of lines and each line is
-   a serie of cells with no overwriting permitted.
+   in that the scroll is a series of lines and each line is
+   a series of cells with no overwriting permitted.
 
    The implementation provides arbitrary length and numbers
    of cells and line/column indexed read access to the scroll
@@ -180,7 +180,7 @@ bool HistoryScroll::hasScroll()
 /* 
    The history scroll makes a Row(Row(Cell)) from
    two history buffers. The index buffer contains
-   start of line positions which refere to the cells
+   start of line positions which refer to the cells
    buffer.
 
    Note that index[0] addresses the second line

@@ -47,7 +47,7 @@ void fillCommandLineOptions(KCmdLineOptions& options);
 // process, or re-use an existing konsole process.
 bool shouldUseNewProcess();
 
-// resotre sessions saved by KDE.
+// restore sessions saved by KDE.
 void restoreSession(Application& app);
 
 // ***

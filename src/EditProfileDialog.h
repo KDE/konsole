@@ -48,7 +48,7 @@ namespace Konsole
 
 /**
  * A dialog which allows the user to edit a profile.
- * After the dialog is created, it can be initialised with the settings
+ * After the dialog is created, it can be initialized with the settings
  * for a profile using setProfile().  When the user makes changes to the
  * dialog and accepts the changes, the dialog will update the
  * profile in the SessionManager by calling the SessionManager's
@@ -69,7 +69,7 @@ public:
     virtual ~EditProfileDialog();
 
     /**
-     * Initialises the dialog with the settings for the specified session
+     * Initializes the dialog with the settings for the specified session
      * type.
      *
      * When the dialog closes, the profile will be updated in the SessionManager

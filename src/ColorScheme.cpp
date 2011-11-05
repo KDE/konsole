@@ -213,7 +213,7 @@ bool ColorScheme::randomizedBackgroundColor() const
 }
 void ColorScheme::setRandomizedBackgroundColor(bool randomize)
 {
-    // the hue of the background colour is allowed to be randomly 
+    // the hue of the background color is allowed to be randomly
     // adjusted as much as possible.
     //
     // the value and saturation are left alone to maintain read-ability

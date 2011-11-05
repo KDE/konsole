@@ -173,7 +173,7 @@ public:
      * character and returns a string with the markers replaced
      * with information from this process description.
      * <br>
-     * The markers recognised are:
+     * The markers recognized are:
      * <ul>
      * <li> %u - Name of the user which owns the process. </li>
      * <li> %n - Replaced with the name of the process.   </li>

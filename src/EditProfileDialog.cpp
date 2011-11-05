@@ -80,7 +80,7 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
 
-    // TODO: Renable in a later KDE 4.x release when this feature works again
+    // TODO: Re-enable in a later KDE 4.x release when this feature works again
     _ui->enableResizeWindowButton->setVisible(false);
 
     // there are various setupXYZPage() methods to load the items

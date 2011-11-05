@@ -61,7 +61,7 @@ public:
     /**
      * Constructs a new bookmark handler for Konsole bookmarks.
      *
-     * @param collection The collection which the boomark menu's actions should be added to
+     * @param collection The collection which the bookmark menu's actions should be added to
      * @param menu The menu which the bookmark actions should be added to
      * @param toplevel TODO: Document me
      * @param parent The parent object
@@ -104,7 +104,7 @@ signals:
      * Emitted when the user selects 'Open Folder in Tabs'
      * from the bookmark menu.
      *
-     * @param urls The urls of the bookmarks in the folder whoose
+     * @param urls The urls of the bookmarks in the folder whose
      * 'Open Folder in Tabs' action was triggered
      */
     void openUrls( const QList<KUrl>& urls );

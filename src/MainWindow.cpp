@@ -567,7 +567,7 @@ void MainWindow::showEvent(QShowEvent *event)
         // setMenuBarInitialVisibility() is triggered, the initial visibility of
         // menubar should be applied at this last moment. Otherwise, the initial
         // visibility will be determined by what is stored in konsolerc, but not
-        // by the the selected profile.
+        // by the selected profile.
         //
         menuBar()->setVisible( _menuBarInitialVisibility );
         _toggleMenuBarAction->setChecked( _menuBarInitialVisibility );
