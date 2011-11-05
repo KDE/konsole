@@ -675,7 +675,7 @@ void Screen::displayCharacter(unsigned short c)
             {
                 Q_ASSERT(extendedCharLength > 1);
                 Q_ASSERT(extendedCharLength < 65535);
-                ushort *chars = new ushort[extendedCharLength + 1];
+                ushort* chars = new ushort[extendedCharLength + 1];
                 memcpy (chars, oldChars, sizeof(ushort) * extendedCharLength);
                 chars[extendedCharLength] = c;
                 currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, extendedCharLength + 1);

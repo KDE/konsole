@@ -595,7 +595,7 @@ protected:
     //     - A space (returns ' ')
     //     - Part of a word (returns 'a')
     //     - Other characters (returns the input character)
-    QChar charClass(const Character &ch) const;
+    QChar charClass(const Character& ch) const;
 
     void clearImage();
 

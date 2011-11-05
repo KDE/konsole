@@ -54,7 +54,7 @@ int xkb_init()
 #if 0
 // This method doesn't work in all cases. The atom "ScrollLock" doesn't seem
 // to exist on all XFree versions (at least it's not here with my 3.3.6) - DF
-static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char *name )
+static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char* name )
 {
     int i;
     if( !xkb || !xkb->names )

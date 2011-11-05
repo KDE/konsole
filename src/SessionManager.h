@@ -97,7 +97,7 @@ public:
      *
      * @param list The profile list to sort
      */
-    void sortProfiles(QList<Profile::Ptr> &list);
+    void sortProfiles(QList<Profile::Ptr>& list);
 
     /**
      * Searches for available profiles on-disk and returns a list
@@ -255,7 +255,7 @@ public:
     void saveSessions(KConfig* config);
     int  getRestoreId(Session* session);
     void restoreSessions(KConfig* config);
-    Session *idToSession(int id);
+    Session* idToSession(int id);
 
 signals:
     /** Emitted when a profile is added to the manager. */

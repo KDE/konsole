@@ -325,7 +325,7 @@ public:
    */
   void refresh();
 
-  void startZModem(const QString &rz, const QString &dir, const QStringList &list);
+  void startZModem(const QString& rz, const QString& dir, const QStringList& list);
   void cancelZModem();
   bool isZModemBusy() { return _zmodemBusy; }
 
@@ -406,7 +406,7 @@ public slots:
    * @param what The feature being changed.  Value is one of UserTitleChange
    * @param caption The text part of the terminal command
    */
-  void setUserTitle( int what , const QString &caption );
+  void setUserTitle( int what , const QString& caption );
 
   /**
    * Enables monitoring for activity in the session.
@@ -633,7 +633,7 @@ private slots:
 
   void zmodemReadStatus();
   void zmodemReadAndSendBlock();
-  void zmodemRcvBlock(const char *data, int len);
+  void zmodemRcvBlock(const char* data, int len);
   void zmodemFinished();
 
   void updateFlowControlState(bool suspended);

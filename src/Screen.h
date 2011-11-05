@@ -547,12 +547,12 @@ public:
       */
     static void fillWithDefaultChar(Character* dest, int count);
 
-    void setCurrentTerminalDisplay(TerminalDisplay *terminal_display)
+    void setCurrentTerminalDisplay(TerminalDisplay* display)
     {
-	   _currentTerminalDisplay = terminal_display;
+	   _currentTerminalDisplay = display;
     }
 
-    TerminalDisplay *currentTerminalDisplay()
+    TerminalDisplay* currentTerminalDisplay()
     {
         return _currentTerminalDisplay;
     }
@@ -562,7 +562,7 @@ public:
         QSet<ushort> result;
         for (int i = 0; i < lines; ++i)
         {
-            const ImageLine &il = screenLines[i];
+            const ImageLine& il = screenLines[i];
             for (int j = 0; j < columns; ++j)
             {
                 if (il[j].rendition & RE_EXTENDED_CHAR)
@@ -613,7 +613,7 @@ private:
     void scrollDown(int from, int i);
 
     //when we handle scroll commands, we need to know which screenwindow will scroll
-    TerminalDisplay *_currentTerminalDisplay;
+    TerminalDisplay* _currentTerminalDisplay;
 
     void addHistLine();
 

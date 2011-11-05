@@ -231,7 +231,7 @@ void SessionManager::loadAllProfiles()
     _loadedAllProfiles = true;
 }
 
-void SessionManager::sortProfiles(QList<Profile::Ptr> &list)
+void SessionManager::sortProfiles(QList<Profile::Ptr>& list)
 {
 
     QList<Profile::Ptr> lackingIndices;
@@ -429,7 +429,7 @@ void SessionManager::changeProfile(Profile::Ptr profile,
     ProfileGroup::Ptr group = profile->asGroup();
     if (group)
     {
-        foreach(const Profile::Ptr &profile, group->profiles())
+        foreach(const Profile::Ptr& profile, group->profiles())
             changeProfile(profile,propertyMap,persistent);
         return;
     }

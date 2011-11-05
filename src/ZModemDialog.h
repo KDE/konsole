@@ -31,7 +31,7 @@ class ZModemDialog : public KDialog
 Q_OBJECT
 
 public:
-    ZModemDialog(QWidget *parent, bool modal, const QString &caption);
+    ZModemDialog(QWidget* parent, bool modal, const QString& caption);
 
     /**
      * Adds a line of text to the progress window

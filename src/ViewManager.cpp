@@ -1001,9 +1001,9 @@ void ViewManager::saveSessions(KConfigGroup& group)
     int tab = 1;
     while (viewIter.hasNext())
     {
-        TerminalDisplay *view = dynamic_cast<TerminalDisplay*>(viewIter.next());
+        TerminalDisplay* view = dynamic_cast<TerminalDisplay*>(viewIter.next());
         Q_ASSERT(view);
-        Session *session = _sessionMap[view];
+        Session* session = _sessionMap[view];
         ids << SessionManager::instance()->getRestoreId(session);
         if (view == activeview) group.writeEntry("Active", tab);
         unique.insert(session, 1);
@@ -1026,12 +1026,12 @@ void ViewManager::restoreSessions(const KConfigGroup& group)
 {
     QList<int> ids = group.readEntry("Sessions", QList<int>());
     int activeTab  = group.readEntry("Active", 0);
-    TerminalDisplay *display = 0;
+    TerminalDisplay* display = 0;
 
     int tab = 1;
     foreach(int id, ids)
     {
-        Session *session = SessionManager::instance()->idToSession(id);
+        Session* session = SessionManager::instance()->idToSession(id);
         createView(session);
         if (!session->isRunning())
             session->run();
@@ -1155,9 +1155,9 @@ void ViewManager::setTabWidthToText(bool useTextWidth)
     container->setNavigationTextMode(useTextWidth);
 }
 
-void ViewManager::closeTabFromContainer(ViewContainer *container, QWidget *tab)
+void ViewManager::closeTabFromContainer(ViewContainer* container, QWidget* tab)
 {
-    SessionController *controller = dynamic_cast<SessionController*>(container->viewProperties(tab));
+    SessionController* controller = dynamic_cast<SessionController*>(container->viewProperties(tab));
     Q_ASSERT(controller);
     if (controller)
         controller->closeSession() ;

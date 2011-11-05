@@ -131,7 +131,7 @@ protected:
 class HistoryScrollFile : public HistoryScroll
 {
 public:
-  HistoryScrollFile(const QString &logFileName);
+  HistoryScrollFile(const QString& logFileName);
   virtual ~HistoryScrollFile();
 
   virtual int  getLines();
@@ -260,11 +260,11 @@ typedef QVector<Character> TextLine;
 class CharacterFormat
 {
 public:
-  bool equalsFormat(const CharacterFormat &other) const {
+  bool equalsFormat(const CharacterFormat& other) const {
     return (other.rendition & ~RE_EXTENDED_CHAR)==(rendition & ~RE_EXTENDED_CHAR) && other.fgColor==fgColor && other.bgColor==bgColor;
   }
 
-  bool equalsFormat(const Character &c) const {
+  bool equalsFormat(const Character& c) const {
     return (c.rendition & ~RE_EXTENDED_CHAR)==(rendition & ~RE_EXTENDED_CHAR) && c.foregroundColor==fgColor && c.backgroundColor==bgColor;
   }
 
@@ -300,7 +300,7 @@ public:
   virtual unsigned int remaining(){ return blockStart+blockLength-tail;}
   virtual unsigned  length() { return blockLength; }
   virtual void* allocate(size_t length);
-  virtual bool contains(void *addr) {return addr>=blockStart && addr<(blockStart+blockLength);}
+  virtual bool contains(void* addr) {return addr>=blockStart && addr<(blockStart+blockLength);}
   virtual void deallocate();
   virtual bool isInUse(){ return allocCount!=0; } ;
 
@@ -317,7 +317,7 @@ public:
   CompactHistoryBlockList() {};
   ~CompactHistoryBlockList();
 
-  void *allocate( size_t size );
+  void* allocate( size_t size );
   void deallocate(void *);
   int length() {return list.size();}
 private:
@@ -331,11 +331,11 @@ public:
   virtual ~CompactHistoryLine();
 
   // custom new operator to allocate memory from custom pool instead of heap
-  static void *operator new( size_t size, CompactHistoryBlockList& blockList);
+  static void* operator new( size_t size, CompactHistoryBlockList& blockList);
   static void operator delete( void *) { /* do nothing, deallocation from pool is done in destructor*/ } ;
 
   virtual void getCharacters(Character* array, int length, int startColumn) ;
-  virtual void getCharacter(int index, Character &r) ;
+  virtual void getCharacter(int index, Character& r) ;
   virtual bool isWrapped() const {return wrapped;};
   virtual void setWrapped(bool isWrapped) { wrapped=isWrapped;};
   virtual unsigned int getLength() const {return length;};

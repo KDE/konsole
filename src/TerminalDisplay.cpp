@@ -269,7 +269,7 @@ void TerminalDisplay::setLineSpacing(uint i)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-TerminalDisplay::TerminalDisplay(QWidget *parent)
+TerminalDisplay::TerminalDisplay(QWidget* parent)
 :QWidget(parent)
 ,_screenWindow(0)
 ,_allowBell(true)
@@ -957,7 +957,7 @@ void TerminalDisplay::updateImage()
   const int linesToUpdate = qMin(this->_lines, qMax(0,lines  ));
   const int columnsToUpdate = qMin(this->_columns,qMax(0,columns));
 
-  char *dirtyMask = new char[columnsToUpdate+2]; 
+  char* dirtyMask = new char[columnsToUpdate+2];
   QRegion dirtyRegion;
 
   // debugging variable, this records the number of lines that are found to
@@ -1189,7 +1189,7 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
 {
   QPainter paint(this);
 
-  foreach (const QRect &rect, (pe->region() & contentsRect()).rects())
+  foreach (const QRect& rect, (pe->region() & contentsRect()).rects())
   {
     drawBackground(paint,rect,palette().background().color(),
                     true /* use opacity setting */);
@@ -1324,7 +1324,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
         }
     }
 }
-void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
+void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
 {
   const QPoint tL  = contentsRect().topLeft();
   const int    tLx = tL.x();
@@ -2495,7 +2495,7 @@ bool TerminalDisplay::focusNextPrevChild( bool next )
 }
 
 
-QChar TerminalDisplay::charClass(const Character &ch) const
+QChar TerminalDisplay::charClass(const Character& ch) const
 {
     if (ch.rendition & RE_EXTENDED_CHAR)
     {

@@ -331,9 +331,9 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
     if (actions.size() > 2)
     {
         // Update the 'New Tab' KActionMenu
-        KMenu *newTabMenu = _newTabMenuAction->menu();
+        KMenu* newTabMenu = _newTabMenuAction->menu();
         newTabMenu->clear();
-        foreach (QAction *action, actions) {
+        foreach (QAction* action, actions) {
             newTabMenu->addAction(action);
 
             // NOTE: _defaultProfile seems to not work here, sigh.
@@ -349,7 +349,7 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
     }
     else
     {
-        KMenu *newTabMenu = _newTabMenuAction->menu();
+        KMenu* newTabMenu = _newTabMenuAction->menu();
         newTabMenu->clear();
         Profile::Ptr profile = SessionManager::instance()->defaultProfile();
 
@@ -447,7 +447,7 @@ void MainWindow::saveProperties(KConfigGroup& group)
 
 void MainWindow::readProperties(const KConfigGroup& group)
 {
-    SessionManager *manager = SessionManager::instance();
+    SessionManager* manager = SessionManager::instance();
     QString profilePath = group.readPathEntry("Default Profile", QString());
     Profile::Ptr profile = manager->defaultProfile();
     if (!profilePath.isEmpty()) 
@@ -556,7 +556,7 @@ void MainWindow::configureNotifications()
     KNotifyConfigWidget::configure( this );
 }
 
-void MainWindow::showEvent(QShowEvent *event)
+void MainWindow::showEvent(QShowEvent* event)
 {
     // Make sure the 'initial' visibility is applied only once.
     if ( ! _menuBarInitialVisibilityApplied )

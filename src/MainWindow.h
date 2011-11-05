@@ -145,7 +145,7 @@ class MainWindow : public KXmlGuiWindow
 
     protected:
         // Reimplemented for internal reasons.
-        virtual void showEvent(QShowEvent *event);
+        virtual void showEvent(QShowEvent* event);
 
         // reimplemented from KMainWindow
         virtual bool queryClose();
@@ -197,7 +197,7 @@ class MainWindow : public KXmlGuiWindow
         ViewManager*  _viewManager;
         BookmarkHandler* _bookmarkHandler;
         KToggleAction* _toggleMenuBarAction;
-        KActionMenu *_newTabMenuAction;
+        KActionMenu* _newTabMenuAction;
 
         QPointer<SessionController> _pluggedController;
 

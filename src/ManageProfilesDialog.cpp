@@ -244,7 +244,7 @@ void ManageProfilesDialog::populateTable()
     QList<Profile::Ptr> profiles = SessionManager::instance()->loadedProfiles();
     SessionManager::instance()->sortProfiles(profiles);
 
-    foreach(const Profile::Ptr &profile, profiles)
+    foreach(const Profile::Ptr& profile, profiles)
     {
         addItems(profile);
     }
@@ -312,7 +312,7 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
 }
 void ManageProfilesDialog::deleteSelected()
 {
-    foreach(const Profile::Ptr &profile, selectedProfiles())
+    foreach(const Profile::Ptr& profile, selectedProfiles())
     {
         if (profile != SessionManager::instance()->defaultProfile())
             SessionManager::instance()->deleteProfile(profile);
@@ -385,7 +385,7 @@ void ManageProfilesDialog::editSelected()
     EditProfileDialog dialog(this);
     // the dialog will delete the profile group when it is destroyed
     ProfileGroup* group = new ProfileGroup;
-    foreach(const Profile::Ptr &profile,selectedProfiles())
+    foreach(const Profile::Ptr& profile,selectedProfiles())
         group->addProfile(profile);
     group->updateValues();
 

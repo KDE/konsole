@@ -83,7 +83,7 @@ QUuid createUuid()
     qrand(); // Skip first
 
     QUuid result;
-    uint *data = &(result.data1);
+    uint* data = &(result.data1);
     int chunks = 16 / sizeof(uint);
     while (chunks--) {
         uint randNumber = 0;
@@ -239,7 +239,7 @@ void Session::setCodec(QTextCodec* codec)
 
 bool Session::setCodec(QByteArray name)
 {
-    QTextCodec *codec = QTextCodec::codecForName(name);
+    QTextCodec* codec = QTextCodec::codecForName(name);
 
     if (codec) {
         setCodec(codec);
@@ -279,7 +279,7 @@ QString Session::currentWorkingDirectory()
 }
 ProcessInfo* Session::updateWorkingDirectory()
 {
-    ProcessInfo *process = getProcessInfo();
+    ProcessInfo* process = getProcessInfo();
     _currentWorkingDir = process->validCurrentDir();
     return process;
 }
@@ -497,7 +497,7 @@ void Session::run()
     emit started();
 }
 
-void Session::setUserTitle( int what, const QString &caption )
+void Session::setUserTitle( int what, const QString& caption )
 {
     //set to true if anything is actually changed (eg. old _nameTitle != new _nameTitle )
     bool modified = false;
@@ -819,7 +819,7 @@ bool Session::closeInForceWay()
     }
 }
 
-void Session::sendText(const QString &text) const
+void Session::sendText(const QString& text) const
 {
     _emulation->sendText(text);
 }
@@ -905,7 +905,7 @@ int Session::sessionId() const
     return _sessionId;
 }
 
-void Session::setKeyBindings(const QString &id)
+void Session::setKeyBindings(const QString& id)
 {
     _emulation->setKeyBindings(id);
 }
@@ -1089,7 +1089,7 @@ QString Session::iconText() const
     return _iconText;
 }
 
-void Session::setHistoryType(const HistoryType &hType)
+void Session::setHistoryType(const HistoryType& hType)
 {
     _emulation->setHistory(hType);
 }
@@ -1189,7 +1189,7 @@ void Session::cancelZModem()
     _zmodemBusy = false;
 }
 
-void Session::startZModem(const QString &zmodem, const QString &dir, const QStringList &list)
+void Session::startZModem(const QString& zmodem, const QString& dir, const QStringList& list)
 {
     _zmodemBusy = true;
     _zmodemProc = new KProcess();
@@ -1260,7 +1260,7 @@ void Session::zmodemReadStatus()
     }
 }
 
-void Session::zmodemRcvBlock(const char *data, int len)
+void Session::zmodemRcvBlock(const char* data, int len)
 {
     QByteArray ba( data, len );
 

@@ -127,7 +127,7 @@ Emulation::~Emulation()
 
 void Emulation::setScreen(int n)
 {
-    Screen *old = _currentScreen;
+    Screen* old = _currentScreen;
     _currentScreen = _screen[n & 1];
     if (_currentScreen != old) 
     {
@@ -462,8 +462,8 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
                     // All the hashes are full, go to all Screens and try to free any
                     // This is slow but should happen very rarely
                     QSet<ushort> usedExtendedChars;
-                    const SessionManager *sm = SessionManager::instance();
-                    foreach(const Session *s, sm->sessions())
+                    const SessionManager* sm = SessionManager::instance();
+                    foreach(const Session* s, sm->sessions())
                     {
                         foreach(const TerminalDisplay* td, s->views())
                         {

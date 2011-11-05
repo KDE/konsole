@@ -188,7 +188,7 @@ bool HistoryScroll::hasScroll()
    at 0 in cells.
 */
 
-HistoryScrollFile::HistoryScrollFile(const QString &logFileName)
+HistoryScrollFile::HistoryScrollFile(const QString& logFileName)
   : HistoryScroll(new HistoryTypeFile(logFileName))
 {
 }
@@ -551,7 +551,7 @@ void CompactHistoryBlockList::deallocate(void* ptr)
   Q_ASSERT( !list.isEmpty());
 
   int i=0;  
-  CompactHistoryBlock *block = list.at(i);
+  CompactHistoryBlock* block = list.at(i);
   while ( i<list.size() && !block->contains(ptr) )
   { 
     i++;
@@ -651,7 +651,7 @@ CompactHistoryLine::~CompactHistoryLine()
   blockList.deallocate(this);  
 }
 
-void CompactHistoryLine::getCharacter ( int index, Character &r )
+void CompactHistoryLine::getCharacter ( int index, Character& r )
 {
   Q_ASSERT ( index < length );
   int formatPos=0;
@@ -692,7 +692,7 @@ CompactHistoryScroll::~CompactHistoryScroll()
 
 void CompactHistoryScroll::addCellsVector ( const TextLine& cells )
 {
-  CompactHistoryLine *line;
+  CompactHistoryLine* line;
   line = new(blockList) CompactHistoryLine ( cells, blockList );
 
   if ( lines.size() > ( int ) _maxLineCount )
@@ -711,7 +711,7 @@ void CompactHistoryScroll::addCells ( const Character a[], int count )
 
 void CompactHistoryScroll::addLine ( bool previousWrapped )
 {
-  CompactHistoryLine *line = lines.last();
+  CompactHistoryLine* line = lines.last();
   //kDebug() << "last line at address " << line;
   line->setWrapped(previousWrapped);
 }
@@ -780,7 +780,7 @@ bool HistoryTypeNone::isEnabled() const
   return false;
 }
 
-HistoryScroll* HistoryTypeNone::scroll(HistoryScroll *old) const
+HistoryScroll* HistoryTypeNone::scroll(HistoryScroll* old) const
 {
   delete old;
   return new HistoryScrollNone();
@@ -889,12 +889,12 @@ bool HistoryTypeFile::isEnabled() const
   return true;
 }
 
-HistoryScroll* HistoryTypeFile::scroll(HistoryScroll *old) const
+HistoryScroll* HistoryTypeFile::scroll(HistoryScroll* old) const
 {
   if (dynamic_cast<HistoryFile *>(old)) 
      return old; // Unchanged.
 
-  HistoryScroll *newScroll = new HistoryScrollFile(m_fileName);
+  HistoryScroll* newScroll = new HistoryScrollFile(m_fileName);
 
   Character line[LINE_SIZE];
   int lines = (old != 0) ? old->getLines() : 0;
@@ -903,7 +903,7 @@ HistoryScroll* HistoryTypeFile::scroll(HistoryScroll *old) const
      int size = old->getLineLen(i);
      if (size > LINE_SIZE)
      {
-        Character *tmp_line = new Character[size];
+        Character* tmp_line = new Character[size];
         old->getCells(i, 0, size, tmp_line);
         newScroll->addCells(tmp_line, size);
         newScroll->addLine(old->isWrappedLine(i));
@@ -943,11 +943,11 @@ int CompactHistoryType::maximumLineCount() const
   return m_nbLines;
 }
 
-HistoryScroll* CompactHistoryType::scroll ( HistoryScroll *old ) const
+HistoryScroll* CompactHistoryType::scroll ( HistoryScroll* old ) const
 {
   if ( old )
   {
-    CompactHistoryScroll *oldBuffer = dynamic_cast<CompactHistoryScroll*> ( old );
+    CompactHistoryScroll* oldBuffer = dynamic_cast<CompactHistoryScroll*> ( old );
     if ( oldBuffer )
     {
       oldBuffer->setMaxNbLines ( m_nbLines );

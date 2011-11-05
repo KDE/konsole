@@ -853,7 +853,7 @@ StackedViewContainer::StackedViewContainer(QObject* parent)
 : ViewContainer(NavigationPositionTop,parent)
 {
     _containerWidget = new QWidget;
-    QVBoxLayout *layout = new QVBoxLayout(_containerWidget);
+    QVBoxLayout* layout = new QVBoxLayout(_containerWidget);
 
     _stackWidget = new QStackedWidget(_containerWidget);
 

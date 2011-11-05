@@ -414,8 +414,8 @@ void UnixProcessInfo::readUserName()
     if (!ok) return;
 
     struct passwd passwdStruct;
-    struct passwd *getpwResult;
-    char *getpwBuffer;
+    struct passwd* getpwResult;
+    char* getpwBuffer;
     long getpwBufferSize;
     int getpwStatus;
 
@@ -584,7 +584,7 @@ private:
 
             QStringList argList = data.split( QChar('\0') );
 
-            foreach ( const QString &entry , argList )
+            foreach ( const QString& entry , argList )
             {
                 if (!entry.isEmpty())
                     addArgument(entry);
@@ -634,7 +634,7 @@ private:
 
             QStringList bindingList = data.split( QChar('\0') );
 
-            foreach( const QString &entry , bindingList )
+            foreach( const QString& entry , bindingList )
             {
                 QString name;
                 QString value;

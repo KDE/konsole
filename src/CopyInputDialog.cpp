@@ -100,7 +100,7 @@ void CopyInputDialog::setSelectionChecked(bool checked)
 
     if (selected.count() > 1)
     {
-        foreach(const QModelIndex &index,selected)
+        foreach(const QModelIndex& index, selected)
             setRowChecked(index.row(),checked);
     }
     else

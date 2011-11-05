@@ -81,7 +81,7 @@ QStringList ShellCommand::expand(const QStringList& items)
 {
     QStringList result;
 
-    foreach( const QString &item , items )
+    foreach( const QString& item , items )
         result << expand(item);
 
     return result;
@@ -99,7 +99,7 @@ QString ShellCommand::expand(const QString& text)
  * Expand environment variables in text. Escaped '$' characters are ignored.
  * Return true if any variables were expanded
  */
-static bool expandEnv( QString &text )
+static bool expandEnv( QString& text )
 {
     // Find all environment variables beginning with '$'
     //
