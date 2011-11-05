@@ -325,8 +325,6 @@ int Emulation::lineCount() const
     return _currentScreen->getLines() + _currentScreen->getHistLines();
 }
 
-const int BULK_TIMEOUT1 = 10;
-const int BULK_TIMEOUT2 = 40;
 
 void Emulation::showBulk()
 {
@@ -341,6 +339,9 @@ void Emulation::showBulk()
 
 void Emulation::bufferedUpdate()
 {
+    static const int BULK_TIMEOUT1 = 10;
+    static const int BULK_TIMEOUT2 = 40;
+
     _bulkTimer1.setSingleShot(true);
     _bulkTimer1.start(BULK_TIMEOUT1);
     if (!_bulkTimer2.isActive())
