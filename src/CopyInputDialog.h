@@ -41,7 +41,7 @@ class CheckableSessionModel;
 
 /**
  * Dialog which allows the user to mark a list of sessions to copy
- * the input from the current session to.  The current session is 
+ * the input from the current session to.  The current session is
  * set using setMasterSession().  After the dialog has been executed,
  * the set of chosen sessions can be retrieved using chosenSessions()
  */
@@ -52,8 +52,8 @@ Q_OBJECT
 public:
     CopyInputDialog(QWidget* parent = 0);
     ~CopyInputDialog();
-    /** 
-     * Sets the 'source' session whoose input will be copied to 
+    /**
+     * Sets the 'source' session whose input will be copied to
      * other sessions.  This session is displayed grayed out in the list
      * and cannot be unchecked.
      */
@@ -81,24 +81,24 @@ private:
     QPointer<Session> _masterSession;
 };
 
-/** 
- * A list of sessions with a checkbox next to each one which allows the 
+/**
+ * A list of sessions with a checkbox next to each one which allows the
  * user to select a subset of the available sessions to perform
  * some action on them.
  */
 class CheckableSessionModel : public SessionListModel
 {
-Q_OBJECT 
+Q_OBJECT
 
 public:
-    CheckableSessionModel(QObject* parent); 
+    CheckableSessionModel(QObject* parent);
 
     void setCheckColumn(int column);
     int checkColumn() const;
 
-    /** 
-     * Sets whether a session can be checked or un-checked. 
-     * Non-checkable items have the Qt::ItemIsEnabled flag unset. 
+    /**
+     * Sets whether a session can be checked or un-checked.
+     * Non-checkable items have the Qt::ItemIsEnabled flag unset.
      */
     void setCheckable(Session* session, bool checkable);
 
@@ -120,6 +120,7 @@ private:
     QSet<Session*> _fixedSessions;
     int _checkColumn;
 };
+
 inline int CheckableSessionModel::checkColumn() const
 { return _checkColumn; }
 

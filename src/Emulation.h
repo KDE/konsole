@@ -26,7 +26,7 @@
 // System
 #include <stdio.h>
 
-// Qt 
+// Qt
 #include <QtGui/QKeyEvent>
 #include <QtCore/QTextCodec>
 #include <QtCore/QTextStream>
@@ -44,23 +44,23 @@ class Screen;
 class ScreenWindow;
 class TerminalCharacterDecoder;
 
-/** 
- * This enum describes the available states which 
+/**
+ * This enum describes the available states which
  * the terminal emulation may be set to.
  *
- * These are the values used by Emulation::stateChanged() 
+ * These are the values used by Emulation::stateChanged()
  */
 enum 
 { 
     /** The emulation is currently receiving user input. */
     NOTIFYNORMAL=0, 
-    /** 
+    /**
      * The terminal program has triggered a bell event
      * to get the user's attention.
      */
     NOTIFYBELL=1, 
-    /** 
-     * The emulation is currently receiving data from its 
+    /**
+     * The emulation is currently receiving data from its
      * terminal input.
      */
     NOTIFYACTIVITY=2,
@@ -72,28 +72,28 @@ enum
 /**
  * Base class for terminal emulation back-ends.
  *
- * The back-end is responsible for decoding an incoming character stream and 
+ * The back-end is responsible for decoding an incoming character stream and
  * producing an output image of characters.
  *
  * When input from the terminal is received, the receiveData() slot should be called with
- * the data which has arrived.  The emulation will process the data and update the 
+ * the data which has arrived.  The emulation will process the data and update the
  * screen image accordingly.  The codec used to decode the incoming character stream
- * into the unicode characters used internally can be specified using setCodec() 
+ * into the unicode characters used internally can be specified using setCodec()
  *
- * The size of the screen image can be specified by calling setImageSize() with the 
+ * The size of the screen image can be specified by calling setImageSize() with the
  * desired number of lines and columns.  When new lines are added, old content
- * is moved into a history store, which can be set by calling setHistory(). 
+ * is moved into a history store, which can be set by calling setHistory().
  *
- * The screen image can be accessed by creating a ScreenWindow onto this emulation 
- * by calling createWindow().  Screen windows provide access to a section of the 
- * output.  Each screen window covers the same number of lines and columns as the 
+ * The screen image can be accessed by creating a ScreenWindow onto this emulation
+ * by calling createWindow().  Screen windows provide access to a section of the
+ * output.  Each screen window covers the same number of lines and columns as the
  * image size returned by imageSize().  The screen window can be moved up and down
- * and provides transparent access to both the current on-screen image and the 
+ * and provides transparent access to both the current on-screen image and the
  * previous output.  The screen windows emit an outputChanged signal
  * when the section of the image they are looking at changes.
  * Graphical views can then render the contents of a screen window, listening for notifications
- * of output changes from the screen window which they are associated with and updating 
- * accordingly. 
+ * of output changes from the screen window which they are associated with and updating
+ * accordingly.
  *
  * The emulation also is also responsible for converting input from the connected views such
  * as keypresses and mouse activity into a character string which can be sent
@@ -106,9 +106,9 @@ enum
  * character sequences.  The name of the key bindings set used can be specified using
  * setKeyBindings()
  *
- * The emulation maintains certain state information which changes depending on the 
- * input received.  The emulation can be reset back to its starting state by calling 
- * reset().  
+ * The emulation maintains certain state information which changes depending on the
+ * input received.  The emulation can be reset back to its starting state by calling
+ * reset().
  *
  * The emulation also maintains an activity state, which specifies whether
  * terminal is currently active ( when data is received ), normal
@@ -119,12 +119,12 @@ enum
  * a 'bell' event in different ways.
  */
 class KONSOLEPRIVATE_EXPORT Emulation : public QObject
-{ 
+{
 Q_OBJECT
 
 public:
 
-   /** Constructs a new terminal emulation */ 
+   /** Constructs a new terminal emulation */
    Emulation();
   ~Emulation();
 
@@ -140,15 +140,15 @@ public:
 
   /**
    * Returns the total number of lines, including those stored in the history.
-   */ 
+   */
   int lineCount() const;
 
-  /** 
+  /**
    * Sets the history store used by this emulation.  When new lines
    * are added to the output, older lines at the top of the screen are transferred to a history
-   * store.   
+   * store.
    *
-   * The number of lines which are kept and the storage location depend on the 
+   * The number of lines which are kept and the storage location depend on the
    * type of store.
    */
   void setHistory(const HistoryType&);
@@ -157,12 +157,12 @@ public:
   /** Clears the history scroll. */
   void clearHistory();
 
-  /** 
-   * Copies the output history from @p startLine to @p endLine 
+  /**
+   * Copies the output history from @p startLine to @p endLine
    * into @p stream, using @p decoder to convert the terminal
-   * characters into text. 
+   * characters into text.
    *
-   * @param decoder A decoder which converts lines of terminal characters with 
+   * @param decoder A decoder which converts lines of terminal characters with
    * appearance attributes into output text.  PlainTextDecoder is the most commonly
    * used decoder.
    * @param startLine Index of first line to copy
@@ -175,8 +175,8 @@ public:
   /** Sets the codec used to decode incoming characters.  */
   void setCodec(const QTextCodec*);
 
-  /** 
-   * Convenience method.  
+  /**
+   * Convenience method.
    * Returns true if the current codec used to decode incoming
    * characters is UTF-8
    */
@@ -187,19 +187,19 @@ public:
   /** Returns the special character used for erasing character. */
   virtual char eraseChar() const;
 
-  /** 
+  /**
    * Sets the key bindings used to key events
    * ( received through sendKeyEvent() ) into character
    * streams to send to the terminal.
    */
   void setKeyBindings(const QString& name);
-  /** 
+  /**
    * Returns the name of the emulation's current key bindings.
    * See setKeyBindings()
    */
   QString keyBindings() const;
 
-  /** 
+  /**
    * Copies the current image into the history and clears the screen.
    */
   virtual void clearEntireScreen() =0;
@@ -207,7 +207,7 @@ public:
   /** Resets the state of the terminal. */
   virtual void reset() =0;
 
-  /** 
+  /**
    * Returns true if the active terminal program wants
    * mouse input events.
    *
@@ -216,42 +216,42 @@ public:
    */
   bool programUsesMouse() const;
 
-public slots: 
+public slots:
 
   /** Change the size of the emulation's image */
   virtual void setImageSize(int lines, int columns);
 
-  /** 
+  /**
    * Interprets a sequence of characters and sends the result to the terminal.
    * This is equivalent to calling sendKeyEvent() for each character in @p text in succession.
    */
   virtual void sendText(const QString& text) = 0;
 
-  /** 
+  /**
    * Interprets a key press event and emits the sendData() signal with
-   * the resulting character stream. 
+   * the resulting character stream.
    */
   virtual void sendKeyEvent(QKeyEvent*);
 
-  /** 
+  /**
    * Converts information about a mouse event into an xterm-compatible escape
    * sequence and emits the character sequence via sendData()
    */
   virtual void sendMouseEvent(int buttons, int column, int line, int eventType);
 
   /**
-   * Sends a string of characters to the foreground terminal process. 
+   * Sends a string of characters to the foreground terminal process.
    *
-   * @param string The characters to send.  
+   * @param string The characters to send.
    * @param length Length of @p string or if set to a negative value, @p string will
    * be treated as a null-terminated string and its length will be determined automatically.
    */
   virtual void sendString(const char* string, int length = -1) = 0;
 
-  /** 
+  /**
    * Processes an incoming stream of characters.  receiveData() decodes the incoming
    * character buffer using the current codec(), and then calls receiveChar() for
-   * each unicode character in the resulting buffer.  
+   * each unicode character in the resulting buffer.
    *
    * receiveData() also starts a timer which causes the outputChanged() signal
    * to be emitted when it expires.  The timer allows multiple updates in quick
@@ -264,8 +264,8 @@ public slots:
 
 signals:
 
-  /** 
-   * Emitted when a buffer of data is ready to send to the 
+  /**
+   * Emitted when a buffer of data is ready to send to the
    * standard input of the terminal.
    *
    * @param data The buffer of data ready to be sent
@@ -273,20 +273,20 @@ signals:
    */
   void sendData(const char* data,int len);
 
-  /** 
+  /**
    * Requests that sending of input to the emulation
    * from the terminal process be suspended or resumed.
    *
-   * @param suspend If true, requests that sending of 
-   * input from the terminal process' stdout be 
+   * @param suspend If true, requests that sending of
+   * input from the terminal process' stdout be
    * suspended.  Otherwise requests that sending of
-   * input be resumed. 
+   * input be resumed.
    */
   void lockPtyRequest(bool suspend);
 
   /**
    * Requests that the pty used by the terminal process
-   * be set to UTF 8 mode.  
+   * be set to UTF 8 mode.
    *
    * Refer to the IUTF8 entry in termios(3) for more information.
    */
@@ -317,7 +317,7 @@ signals:
    */
   void changeTabTextColorRequest(int color);
 
-  /** 
+  /**
    * This is emitted when the program running in the shell indicates whether or
    * not it is interested in mouse events.
    *
@@ -326,7 +326,7 @@ signals:
    */
   void programUsesMouseChanged(bool usesMouse);
 
-  /** 
+  /**
    * Emitted when the contents of the screen image change.
    * The emulation buffers the updates from successive image changes,
    * and only emits outputChanged() at sensible intervals when
@@ -336,14 +336,14 @@ signals:
    * created with createWindow() to listen for this signal.
    *
    * ScreenWindow objects created using createWindow() will emit their
-   * own outputChanged() signal in response to this signal. 
+   * own outputChanged() signal in response to this signal.
    */
   void outputChanged();
 
   /**
-   * Emitted when the program running in the terminal wishes to update the 
+   * Emitted when the program running in the terminal wishes to update the
    * session's title.  This also allows terminal programs to customize other
-   * aspects of the terminal emulation display. 
+   * aspects of the terminal emulation display.
    *
    * This signal is emitted when the escape sequence "\033]ARG;VALUE\007"
    * is received in the input string, where ARG is a number specifying what
@@ -351,7 +351,7 @@ signals:
    *
    * TODO:  The name of this method is not very accurate since this method
    * is used to perform a whole range of tasks besides just setting
-   * the user-title of the session.    
+   * the user-title of the session.
    *
    * @param title Specifies what to change.
    * <ul>
@@ -360,16 +360,16 @@ signals:
    * <li>2 - Set session title to @p newTitle</li>
    * <li>11 - Set the session's default background color to @p newTitle,
    *         where @p newTitle can be an HTML-style string ("#RRGGBB") or a named
-   *         color (eg 'red', 'blue').  
+   *         color (eg 'red', 'blue').
    *         See http://doc.trolltech.com/4.2/qcolor.html#setNamedColor for more
    *         details.
    * </li>
    * <li>31 - Supposedly treats @p newTitle as a URL and opens it (NOT IMPLEMENTED)</li>
-   * <li>32 - Sets the icon associated with the session.  @p newTitle is the name 
+   * <li>32 - Sets the icon associated with the session.  @p newTitle is the name
    *    of the icon to use, which can be the name of any icon in the current KDE icon
    *    theme (eg: 'konsole', 'kate', 'folder_home')</li>
    * </ul>
-   * @param newTitle Specifies the new title 
+   * @param newTitle Specifies the new title
    */
 
   void titleChanged(int title,const QString& newTitle);
@@ -386,9 +386,9 @@ signals:
    */
   void imageSizeInitialized();
 
-  /** 
+  /**
    * Emitted when the terminal program requests to change various properties
-   * of the terminal display.  
+   * of the terminal display.
    *
    * A profile change command occurs when a special escape sequence, followed
    * by a string containing a series of name and value pairs is received.
@@ -399,7 +399,7 @@ signals:
    */
   void profileChangeCommandReceived(const QString& text);
 
-  /** 
+  /**
    * Emitted when a flow control key combination ( Ctrl+S or Ctrl+Q ) is pressed.
    * @param suspendKeyPressed True if Ctrl+S was pressed to suspend output or Ctrl+Q to
    * resume output.
@@ -422,13 +422,13 @@ protected:
   virtual void setMode(int mode) = 0;
   virtual void resetMode(int mode) = 0;
 
-  /** 
+  /**
    * Processes an incoming character.  See receiveData()
-   * @p ch A unicode character code. 
+   * @p ch A unicode character code.
    */
   virtual void receiveChar(int ch);
 
-  /** 
+  /**
    * Sets the active screen.  The terminal has two screens, primary and alternate.
    * The primary screen is used by default.  When certain interactive programs such
    * as Vim are run, they trigger a switch to the alternate screen.
@@ -447,7 +447,7 @@ protected:
 
   QList<ScreenWindow*> _windows;
 
-  Screen* _currentScreen;  // pointer to the screen which is currently active, 
+  Screen* _currentScreen;  // pointer to the screen which is currently active,
                             // this is one of the elements in the screen[] array
 
   Screen* _screen[2];      // 0 = primary screen ( used by most programs, including the shell
@@ -456,17 +456,17 @@ protected:
                             //                      scrollbars are not enabled in this mode )
 
 
-  //decodes an incoming C-style character stream into a unicode QString using 
+  //decodes an incoming C-style character stream into a unicode QString using
   //the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
   const QTextCodec* _codec;
   QTextDecoder* _decoder;
   const KeyboardTranslator* _keyTranslator; // the keyboard layout
 
 protected slots:
-  /** 
+  /**
    * Schedules an update of attached views.
    * Repeated calls to bufferedUpdate() in close succession will result in only a single update,
-   * much like the Qt buffered update of widgets. 
+   * much like the Qt buffered update of widgets.
    */
   void bufferedUpdate();
 
@@ -476,7 +476,7 @@ protected slots:
   // used to emit the selectedText(QString) signal
   void checkSelectedText();
 
-private slots: 
+private slots:
 
   // triggered by timer, causes the emulation to send an updated screen image to each
   // view

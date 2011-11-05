@@ -32,8 +32,8 @@ class KLineEdit;
 namespace Konsole
 {
 
-/** 
- * A widget which allows users to search incrementally through a document for a 
+/**
+ * A widget which allows users to search incrementally through a document for a
  * a text string or regular expression.
  *
  * The widget consists of a text box into which the user can enter their search text and
@@ -43,13 +43,13 @@ namespace Konsole
  * the document for the new text should begin immediately and the active view of the document
  * should jump to display any matches if found.  setFoundMatch() should be called whenever the
  * search text changes to indicate whether a match for the text was found in the document.
- * 
- * findNextClicked() and findPreviousClicked() signals are emitted when the user presses buttons 
+ *
+ * findNextClicked() and findPreviousClicked() signals are emitted when the user presses buttons
  * to find next and previous matches respectively.
  *
- * The first indicates whether searches are case sensitive.  
+ * The first indicates whether searches are case sensitive.
  * The matchCaseToggled() signal is emitted when this is changed.
- * The second indicates whether the search text should be treated as a plain string or 
+ * The second indicates whether the search text should be treated as a plain string or
  * as a regular expression.
  * The matchRegExpToggled() signal is emitted when this is changed.
  */
@@ -59,7 +59,7 @@ Q_OBJECT
 
 public:
 
-    /** 
+    /**
      * This enum defines the options that can be checked.
      */
     enum SearchOptions
@@ -72,16 +72,16 @@ public:
         RegExp           = 2
     };
 
-    /** 
-     * Constructs a new incremental search bar with the given parent widget 
+    /**
+     * Constructs a new incremental search bar with the given parent widget
      */
     explicit IncrementalSearchBar(QWidget* parent = 0);
 
     /* Returns search options that are checked */
     const QBitArray optionsChecked();
 
-    /** 
-     * Sets an indicator for the user as to whether or not a match for the 
+    /**
+     * Sets an indicator for the user as to whether or not a match for the
      * current search text was found in the document.
      *
      * The indicator will not be shown if the search text is empty ( because
@@ -105,7 +105,7 @@ signals:
     void findNextClicked();
     /** Emitted when the user clicks the button to find the previous match */
     void findPreviousClicked();
-    /** 
+    /**
      * Emitted when the user toggles the checkbox to indicate whether
      * matches for the search text should be highlighted
      */
@@ -117,7 +117,7 @@ signals:
     void matchCaseToggled(bool);
     /**
      * Emitted when the user toggles the checkbox to indicate whether
-     * the search text should be treated as a plain string or a regular expression 
+     * the search text should be treated as a plain string or a regular expression
      */
     void matchRegExpToggled(bool);
     /** Emitted when the close button is clicked */

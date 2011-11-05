@@ -158,7 +158,7 @@ bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* event)
                 emit closeClicked();
                 return true;
             }
-        }        
+        }
     }
 
     return QWidget::eventFilter(watched,event);

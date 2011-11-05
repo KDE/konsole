@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-// Own 
+// Own
 #include "ZModemDialog.h"
 
 // KDE

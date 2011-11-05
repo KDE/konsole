@@ -77,7 +77,7 @@ typedef QPointer<Session> SessionPtr;
  * The actions provided by this class are defined in the sessionui.rc XML file.
  *
  * SessionController monitors the session and provides access to basic information
- * about the session such as title(), icon() and currentDir().  SessionController 
+ * about the session such as title(), icon() and currentDir().  SessionController
  * provides notifications of activity in the session via the activity() signal.
  *
  * When the controlled view receives the focus, the focused() signal is emitted
@@ -101,7 +101,7 @@ public:
     /** Returns the view associated with this controller */
     QPointer<TerminalDisplay>  view()    { return _view;    }
 
-    /** 
+    /**
      * Returns true if the controller is valid.
      * A valid controller is one which has a non-null session() and view().
      *
@@ -109,22 +109,22 @@ public:
      */
     bool isValid() const;
 
-    /** 
+    /**
      * Sets the widget used for searches through the session's output.
      *
-     * When the user clicks on the "Search Output" menu action the @p searchBar 's 
-     * show() method will be called.  The SessionController will then connect to the search 
+     * When the user clicks on the "Search Output" menu action the @p searchBar 's
+     * show() method will be called.  The SessionController will then connect to the search
      * bar's signals to update the search when the widget's controls are pressed.
      */
     void setSearchBar( IncrementalSearchBar* searchBar );
-    /** 
+    /**
      * see setSearchBar()
      */
     IncrementalSearchBar* searchBar() const;
 
     /**
      * Sets the action displayed in the session's context menu to hide or
-     * show the menu bar. 
+     * show the menu bar.
      */
     void setShowMenuAction(QAction* action);
 
@@ -144,17 +144,17 @@ public:
 
 signals:
     /**
-     * Emitted when the view associated with the controller is focused.  
+     * Emitted when the view associated with the controller is focused.
      * This can be used by other classes to plug the controller's actions into a window's
-     * menus. 
+     * menus.
      */
     void focused( SessionController* controller );
 
 public slots:
     /**
      * Issues a command to the session to navigate to the specified URL.
-     * This may not succeed if the foreground program does not understand 
-     * the command sent to it ( 'cd path' for local URLs ) or is not 
+     * This may not succeed if the foreground program does not understand
+     * the command sent to it ( 'cd path' for local URLs ) or is not
      * responding to input.
      *
      * openUrl() currently supports urls for local paths and those
@@ -298,7 +298,7 @@ inline bool SessionController::isValid() const
     return !_session.isNull() && !_view.isNull();
 }
 
-/** 
+/**
  * Abstract class representing a task which can be performed on a group of sessions.
  *
  * Create a new instance of the appropriate sub-class for the task you want to perform and
@@ -314,7 +314,7 @@ Q_OBJECT
 public:
    SessionTask(QObject* parent = 0);
 
-   /** 
+   /**
     * Sets whether the task automatically deletes itself when the task has been finished.
     * Depending on whether the task operates synchronously or asynchronously, the deletion
     * may be scheduled immediately after execute() returns or it may happen some time later.
@@ -326,7 +326,7 @@ public:
    /** Adds a new session to the group */
    void addSession(Session* session);
 
-   /** 
+   /**
     * Executes the task on each of the sessions in the group.
     * The completed() signal is emitted when the task is finished, depending on the specific sub-class
     * execute() may be synchronous or asynchronous
@@ -334,8 +334,8 @@ public:
    virtual void execute() = 0;
 
 signals:
-   /** 
-    * Emitted when the task has completed.  
+   /**
+    * Emitted when the task has completed.
     * Depending on the task this may occur just before execute() returns, or it
     * may occur later
     *
@@ -416,8 +416,8 @@ class SearchHistoryTask : public SessionTask
 Q_OBJECT
 
 public:
-    /** 
-     * This enum describes the strategies available for searching through the 
+    /**
+     * This enum describes the strategies available for searching through the
      * session's output.
      */
     enum SearchDirection
@@ -428,8 +428,8 @@ public:
         BackwardsSearch  
     };
 
-    /** 
-     * Constructs a new search task. 
+    /**
+     * Constructs a new search task.
      */
     explicit SearchHistoryTask(QObject* parent = 0);
 
@@ -441,17 +441,17 @@ public:
     /** Returns the regular expression which is searched for when execute() is called */
     QRegExp regExp() const;
 
-    /** Specifies the direction to search in when execute() is called. */ 
+    /** Specifies the direction to search in when execute() is called. */
     void setSearchDirection( SearchDirection direction );
     /** Returns the current search direction.  See setSearchDirection(). */
     SearchDirection searchDirection() const;
 
-    /** 
+    /**
      * Performs a search through the session's history, starting at the position
      * of the current selection, in the direction specified by setSearchDirection().
      *
-     * If it finds a match, the ScreenWindow specified in the constructor is 
-     * scrolled to the position where the match occurred and the selection 
+     * If it finds a match, the ScreenWindow specified in the constructor is
+     * scrolled to the position where the match occurred and the selection
      * is set to the matching text.  execute() then returns immediately.
      *
      * To continue the search looking for further matches, call execute() again.

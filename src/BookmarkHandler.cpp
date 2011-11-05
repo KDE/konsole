@@ -1,7 +1,7 @@
 /*  This file was part of the KDE libraries
 
     Copyright 2002 Carsten Pfeiffer <pfeiffer@kde.org>
-    Copyright 2007-2008 Robert Knight <robertknight@gmail.com> 
+    Copyright 2007-2008 Robert Knight <robertknight@gmail.com>
 
     library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -38,9 +38,9 @@
 
 using namespace Konsole;
 
-BookmarkHandler::BookmarkHandler( KActionCollection* collection, 
-                                  KMenu* menu, 
-                                  bool toplevel , 
+BookmarkHandler::BookmarkHandler( KActionCollection* collection,
+                                  KMenu* menu,
+                                  bool toplevel,
                                   QObject* parent )
     : QObject( parent ),
       KBookmarkOwner(),
@@ -146,7 +146,7 @@ QList<QPair<QString,QString> > BookmarkHandler::currentBookmarkList() const
     return list;
 }
 
-void BookmarkHandler::setViews(const QList<ViewProperties*>& views) 
+void BookmarkHandler::setViews(const QList<ViewProperties*>& views)
 {
     _views = views;
 }

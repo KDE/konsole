@@ -43,7 +43,7 @@ class ColorScheme;
  *
  * The dialog creates a copy of the supplied color scheme to which
  * any changes made are applied.  The modified color scheme
- * can be retrieved using the colorScheme() method.  
+ * can be retrieved using the colorScheme() method.
  *
  * When changes are made the colorsChanged() signal is emitted.
  */

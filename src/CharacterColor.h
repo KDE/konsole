@@ -31,14 +31,14 @@
 namespace Konsole
 {
 
-/** 
- * An entry in a terminal display's color palette. 
+/**
+ * An entry in a terminal display's color palette.
  *
  * A color palette is an array of 16 ColorEntry instances which map
  * system color indexes (from 0 to 15) into actual colors.
  *
  * Each entry can be set as bold, in which case any text
- * drawn using the color should be drawn in bold.  
+ * drawn using the color should be drawn in bold.
  *
  * Each entry can also be transparent, in which case the terminal
  * display should avoid drawing the background for any characters
@@ -48,25 +48,25 @@ class ColorEntry
 {
 public:
   /** Specifies the weight to use when drawing text with this color. */
-  enum FontWeight 
+  enum FontWeight
   {
     /** Always draw text in this color with a bold weight. */
     Bold,
     /** Always draw text in this color with a normal weight. */
     Normal,
-    /** 
-     * Use the current font weight set by the terminal application.  
+    /**
+     * Use the current font weight set by the terminal application.
      * This is the default behavior.
      */
     UseCurrentFormat
   };
 
-  /** 
+  /**
    * Constructs a new color palette entry.
    *
    * @param c The color value for this entry.
    * @param tr Specifies that the color should be transparent when used as a background color.
-   * @param weight Specifies the font weight to use when drawing text with this color. 
+   * @param weight Specifies the font weight to use when drawing text with this color.
    */
   ColorEntry(QColor c, bool tr, FontWeight weight = UseCurrentFormat) 
           : color(c), transparent(tr), fontWeight(weight) {}
@@ -90,13 +90,13 @@ public:
   /** The color value of this entry for display. */
   QColor color;
 
-  /** 
-   * If true character backgrounds using this color should be transparent. 
+  /**
+   * If true character backgrounds using this color should be transparent.
    * This is not applicable when the color is used to render text.
    */
   bool   transparent;
   /**
-   * Specifies the font weight to use when drawing text with this color. 
+   * Specifies the font weight to use when drawing text with this color.
    * This is not applicable when the color is used to draw a character's background.
    */
   FontWeight fontWeight;        
@@ -157,8 +157,8 @@ public:
         _w(0) 
   {}
 
-  /** 
-   * Constructs a new CharacterColor using the specified @p colorSpace and with 
+  /**
+   * Constructs a new CharacterColor using the specified @p colorSpace and with
    * color value @p co
    *
    * The meaning of @p co depends on the @p colorSpace used.
@@ -195,7 +195,7 @@ public:
     }
   }
 
-  /** 
+  /**
    * Returns true if this character color entry is valid.
    */
   bool isValid() 
@@ -203,15 +203,15 @@ public:
         return _colorSpace != COLOR_SPACE_UNDEFINED;
   }
 
-  /** 
+  /**
    * Set this color as an intensive system color.
-   * 
+   *
    * This is only applicable if the color is using the COLOR_SPACE_DEFAULT or COLOR_SPACE_SYSTEM
    * color spaces.
    */
   void setIntensive();
 
-  /** 
+  /**
    * Returns the color within the specified color @p palette
    *
    * The @p palette is only used if this color is one of the 16 system colors, otherwise
@@ -219,7 +219,7 @@ public:
    */
   QColor color(const ColorEntry* palette) const;
 
-  /** 
+  /**
    * Compares two colors and returns true if they represent the same color value and
    * use the same color space.
    */
@@ -233,7 +233,7 @@ public:
 private:
   quint8 _colorSpace;
 
-  // bytes storing the character color 
+  // bytes storing the character color
   quint8 _u; 
   quint8 _v; 
   quint8 _w; 

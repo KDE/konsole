@@ -54,15 +54,15 @@ class Session;
  * Profiles in the manager have a concept of favorite status, which can be used
  * by widgets and dialogs in the application decide which sessions to list and
  * how to display them.  The favorite status of a profile can be altered using
- * setFavorite() and retrieved using isFavorite() 
+ * setFavorite() and retrieved using isFavorite()
  */
 class KONSOLEPRIVATE_EXPORT SessionManager : public QObject
 {
 Q_OBJECT
 
 public:
-    /** 
-     * Constructs a new session manager and loads information about the available 
+    /**
+     * Constructs a new session manager and loads information about the available
      * profiles.
      */
     SessionManager();
@@ -107,13 +107,13 @@ public:
 
 
     /**
-     * Loads a profile from the specified path and registers 
+     * Loads a profile from the specified path and registers
      * it with the SessionManager.
      *
-     * @p path may be relative or absolute.  The path may just be the 
+     * @p path may be relative or absolute.  The path may just be the
      * base name of the profile to load (eg. if the profile's full path
      * is "<konsole data dir>/My Profile.profile" then both
-     * "konsole/My Profile.profile" , "My Profile.profile" and 
+     * "konsole/My Profile.profile" , "My Profile.profile" and
      * "My Profile" will be accepted)
      *
      * @return Pointer to a profile which can be passed to createSession()
@@ -157,7 +157,7 @@ public:
      * must be created in order to display the output from the terminal session and
      * send keyboard or mouse input to it.
      *
-     * @param profile A profile containing the settings for the new session.  If @p profile 
+     * @param profile A profile containing the settings for the new session.  If @p profile
      * is null the default profile (see defaultProfile()) will be used.
      */
     Session* createSession(Profile::Ptr profile = Profile::Ptr());
@@ -203,14 +203,14 @@ public:
      * can be used to create new sessions based on
      * existing profiles
      *
-     * When one of the shortcuts is activated, 
+     * When one of the shortcuts is activated,
      * use findByShortcut() to load the profile associated
-     * with the shortcut. 
+     * with the shortcut.
      */
     QList<QKeySequence> shortcuts();
 
     /**
-     * Finds and loads the profile associated with 
+     * Finds and loads the profile associated with
      * the specified @p shortcut key sequence and returns a pointer to it.
      */
     Profile::Ptr findByShortcut(const QKeySequence& shortcut);
@@ -223,8 +223,8 @@ public:
     /** Returns the shortcut associated with a particular profile. */
     QKeySequence shortcut(Profile::Ptr profile) const;
 
-    /** 
-     * Registers a new type of session. 
+    /**
+     * Registers a new type of session.
      * The favorite status of the session ( as returned by isFavorite() ) is set to false by default.
      */
     void addProfile(Profile::Ptr type);
@@ -235,9 +235,9 @@ public:
      */
     void setFavorite(Profile::Ptr profile , bool favorite);
 
-    /** 
+    /**
      * Loads all available profiles.  This involves reading each
-     * profile configuration file from disk and parsing it.  
+     * profile configuration file from disk and parsing it.
      * Therefore it should only be done when necessary.
      */
     void loadAllProfiles();
@@ -265,22 +265,22 @@ signals:
     /** Emitted when a profile's properties are modified. */
     void profileChanged(Profile::Ptr ptr);
 
-    /** 
-     * Emitted when a session's settings are updated to match 
-     * its current profile. 
+    /**
+     * Emitted when a session's settings are updated to match
+     * its current profile.
      */
     void sessionUpdated(Session* session);
 
-    /** 
-     * Emitted when the favorite status of a profile changes. 
-     * 
-     * @param profile The profile to change 
-     * @param favorite Specifies whether the session is a favorite or not 
+    /**
+     * Emitted when the favorite status of a profile changes.
+     *
+     * @param profile The profile to change
+     * @param favorite Specifies whether the session is a favorite or not
      */
     void favoriteStatusChanged(Profile::Ptr profile , bool favorite);
 
-    /** 
-     * Emitted when the shortcut for a profile is changed. 
+    /**
+     * Emitted when the shortcut for a profile is changed.
      *
      * @param profile The profile whoose status was changed
      * @param newShortcut The new shortcut key sequence for the profile
@@ -307,7 +307,7 @@ private slots:
 private:
 
 
-    // loads the mappings between shortcut key sequences and 
+    // loads the mappings between shortcut key sequences and
     // profile paths
     void loadShortcuts();
     // saves the mappings between shortcut key sequences and
@@ -331,7 +331,7 @@ private:
     void applyProfile(Profile::Ptr profile , bool modifiedPropertiesOnly);
     // apples updates to the profile @p profile to the session @p session
     // if modifiedPropertiesOnly is true, only properties which
-    // are set in @p profile are update ( ie. properties for which profile->isPropertySet(<property>) 
+    // are set in @p profile are update ( ie. properties for which profile->isPropertySet(<property>)
     // returns true )
     void applyProfile(Session* session , const Profile::Ptr profile , bool modifiedPropertiesOnly); 
 
@@ -396,7 +396,7 @@ private:
     QStack<T>& _stack;
     int _count;
 };
-/** 
+/**
  * Item-view model which contains a flat list of sessions.
  * After constructing the model, call setSessions() to set the sessions displayed
  * in the list.  When a session ends (after emitting the finished() signal) it is
@@ -412,8 +412,8 @@ Q_OBJECT
 public:
     SessionListModel(QObject* parent = 0);
 
-    /** 
-     * Sets the list of sessions displayed in the model.  
+    /**
+     * Sets the list of sessions displayed in the model.
      * To display all sessions that are currently running in the list,
      * call setSessions(SessionManager::instance()->sessions())
      */

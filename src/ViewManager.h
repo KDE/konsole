@@ -46,10 +46,10 @@ class ViewProperties;
 class ViewContainer;
 class ViewSplitter;
 
-/** 
+/**
  * Manages the terminal display widgets in a Konsole window or part.
  *
- * When a view manager is created, it constructs a splitter widget ( accessed via 
+ * When a view manager is created, it constructs a splitter widget ( accessed via
  * widget() ) to hold one or more view containers.  Each view container holds
  * one or more terminal displays and a navigation widget ( eg. tabs or a list )
  * to allow the user to navigate between the displays in that container.
@@ -57,7 +57,7 @@ class ViewSplitter;
  * The view manager provides menu actions ( defined in the 'konsoleui.rc' XML file )
  * to manipulate the views and view containers - for example, actions to split the view
  * left/right or top/bottom, detach a view from the current window and navigate between
- * views and containers.  These actions are added to the collection specified in the 
+ * views and containers.  These actions are added to the collection specified in the
  * ViewManager's constructor.
  *
  * The view manager provides facilities to construct display widgets for a terminal
@@ -71,10 +71,10 @@ Q_OBJECT
 Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Konsole")
 
 public:
-    /** 
-     * Constructs a new view manager with the specified @p parent.  
+    /**
+     * Constructs a new view manager with the specified @p parent.
      * View-related actions defined in 'konsoleui.rc' are created
-     * and added to the specified @p collection.    
+     * and added to the specified @p collection.
      */
     ViewManager(QObject* parent , KActionCollection* collection);
     ~ViewManager();
@@ -97,7 +97,7 @@ public:
      */
     void applyProfileToContainer(ViewContainer* container , const Profile::Ptr profile);
 
-    /** 
+    /**
      * Return the main widget for the view manager which
      * holds all of the views managed by this ViewManager instance.
      */
@@ -112,19 +112,19 @@ public:
      * Returns the list of view properties for views in the active container.
      * Each view widget is associated with a ViewProperties instance which
      * provides access to basic information about the session being
-     * displayed in the view, such as title, current directory and 
-     * associated icon.     
+     * displayed in the view, such as title, current directory and
+     * associated icon.
      */
     QList<ViewProperties*> viewProperties() const;
 
-    /** 
-     * This enum describes the available types of navigation widget 
+    /**
+     * This enum describes the available types of navigation widget
      * which newly created containers can provide to allow navigation
      * between open sessions.
      */
     enum NavigationMethod
     {
-        /** 
+        /**
          * Each container has a row of tabs (one per session) which the user
          * can click on to navigate between open sessions.
          */
@@ -133,23 +133,23 @@ public:
         NoNavigation
     };
 
-    /** 
-     * Sets the type of widget provided to navigate between open sessions 
+    /**
+     * Sets the type of widget provided to navigate between open sessions
      * in a container.  The changes will only apply to newly created containers.
      *
      * The default method is TabbedNavigation.  To disable navigation widgets, call
-     * setNavigationMethod(ViewManager::NoNavigation) before creating any sessions. 
+     * setNavigationMethod(ViewManager::NoNavigation) before creating any sessions.
      */
     void setNavigationMethod(NavigationMethod method);
 
-    /** 
-     * Returns the type of navigation widget created in new containers. 
-     * See setNavigationMethod() 
+    /**
+     * Returns the type of navigation widget created in new containers.
+     * See setNavigationMethod()
      */
     NavigationMethod navigationMethod() const;
 
-    /** 
-     * Returns the controller for the active view.  activeViewChanged() is 
+    /**
+     * Returns the controller for the active view.  activeViewChanged() is
      * emitted when this changes.
      */
     SessionController* activeViewController() const;
@@ -172,31 +172,31 @@ signals:
     /** Emitted when a session is detached from a view owned by this ViewManager */
     void viewDetached(Session* session);
 
-    /** 
-     * Emitted when the active view changes. 
-     * @param controller The controller associated with the active view 
+    /**
+     * Emitted when the active view changes.
+     * @param controller The controller associated with the active view
      */
     void activeViewChanged(SessionController* controller);
 
-    /** 
+    /**
      * Emitted when the current session needs unplugged from factory().
-     * @param controller The controller associated with the active view 
+     * @param controller The controller associated with the active view
      */
     void unplugController(SessionController* controller);
 
     /**
      * Emitted when the list of view properties ( as returned by viewProperties() ) changes.
-     * This occurs when views are added to or removed from the active container, or 
+     * This occurs when views are added to or removed from the active container, or
      * if the active container is changed.
      */
     void viewPropertiesChanged(const QList<ViewProperties*>& propertiesList);
 
-    /** 
+    /**
      * Emitted when the number of views containers changes.  This is used to disable or
      * enable menu items which can only be used when there are one or multiple containers
      * visible.
      *
-     * @param multipleViews True if there are multiple view containers open or false if there is 
+     * @param multipleViews True if there are multiple view containers open or false if there is
      * just a single view.
      */
     void splitViewToggle(bool multipleViews);
@@ -310,15 +310,15 @@ private slots:
     void moveActiveViewLeft();
     // moves active view to the right
     void moveActiveViewRight();
-    // switches to the view at visual position 'index' 
+    // switches to the view at visual position 'index'
     // in the current container
     void switchToView(int index);
 
     // called when a SessionController gains focus
     void controllerChanged(SessionController* controller);
 
-    // called when a ViewContainer requests a view be 
-    // moved 
+    // called when a ViewContainer requests a view be
+    // moved
     void containerMoveViewRequest(int index, int id, bool& success);
 
     void detachView(ViewContainer* container, QWidget* view);
@@ -334,7 +334,7 @@ private:
     void registerView(TerminalDisplay* view);
     void unregisterView(TerminalDisplay* view);
 
-    // takes a view from a view container owned by a different manager and places it in 
+    // takes a view from a view container owned by a different manager and places it in
     // newContainer owned by this manager
     void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TerminalDisplay* view); 
     void splitView(Qt::Orientation orientation);

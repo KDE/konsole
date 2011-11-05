@@ -63,9 +63,9 @@ public:
     ManageProfilesDialog(QWidget* parent = 0);
     virtual ~ManageProfilesDialog();
 
-    /** 
+    /**
      * Specifies whether the shorcut editor should be show.
-     * The shortcut editor allows shortcuts to be associated with 
+     * The shortcut editor allows shortcuts to be associated with
      * profiles.  When a shortcut is changed, the dialog will call
      * SessionManager::instance()->setShortcut() to update the shortcut
      * associated with the profile.
@@ -87,7 +87,7 @@ private slots:
 
     void itemDataChanged(QStandardItem* item);
 
-    // enables or disables Edit/Delete/Set as Default buttons when the 
+    // enables or disables Edit/Delete/Set as Default buttons when the
     // selection changes
     void tableSelectionChanged(const QItemSelection&);
 
@@ -108,7 +108,7 @@ private:
     // their default / non-default profile status
     void updateDefaultItem(); 
     void updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem*>& items) const;
-    // updates the profile table to be in sync with the 
+    // updates the profile table to be in sync with the
     // session manager
     void populateTable();
     int rowForProfile(const Profile::Ptr profile) const;

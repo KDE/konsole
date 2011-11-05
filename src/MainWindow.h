@@ -59,7 +59,7 @@ class MainWindow : public KXmlGuiWindow
     Q_OBJECT
 
     public:
-        /** 
+        /**
          * Constructs a new main window.  Do not create new main windows directly, use Application's
          * newMainWindow() method instead.
          */
@@ -90,7 +90,7 @@ class MainWindow : public KXmlGuiWindow
         /**
          * Sets the default profile for this window.
          * This is the default value for the profile argument
-         * when the newSessionRequest() and newWindow() signals 
+         * when the newSessionRequest() and newWindow() signals
          * are emitted.
          */
         void setDefaultProfile(Profile::Ptr profile);
@@ -102,13 +102,13 @@ class MainWindow : public KXmlGuiWindow
         Profile::Ptr defaultProfile() const;
 
     signals:
-        /** 
+        /**
          * Emitted by the main window to request the creation of a new session.
          *
          * @param profile The profile to use to create the new session.
-         * @param directory Initial working directory for the new session or empty 
+         * @param directory Initial working directory for the new session or empty
          * if the default working directory associated with the profile should be used.
-         * @param view The view manager owned by this main window 
+         * @param view The view manager owned by this main window
          */
         void newSessionRequest(Profile::Ptr profile,
                                const QString& directory,
@@ -126,10 +126,10 @@ class MainWindow : public KXmlGuiWindow
                                   ViewManager* view);
 
         /**
-         * Emitted by the main window to request the creation of a 
+         * Emitted by the main window to request the creation of a
          * new session in a new window.
          *
-         * @param profile The profile to use to create the 
+         * @param profile The profile to use to create the
          * first session in the new window.
          * @param directory Initial working directory for the new window or empty
          * if the default working directory associated with the profile should

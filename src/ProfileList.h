@@ -36,25 +36,25 @@ namespace Konsole
 
 class Profile;
 
-/** 
- * ProfileList provides a list of actions which represent session profiles 
- * that a SessionManager can create a session from.  
+/**
+ * ProfileList provides a list of actions which represent session profiles
+ * that a SessionManager can create a session from.
  *
  * These actions can be plugged into a GUI.
  *
- * Currently only profiles marked as favorites in the SessionManager are included. 
+ * Currently only profiles marked as favorites in the SessionManager are included.
  *
- * The user-data associated with each session can be passed to the createProfile() method of the 
- * SessionManager to create a new terminal session. 
+ * The user-data associated with each session can be passed to the createProfile() method of the
+ * SessionManager to create a new terminal session.
  */
 class KONSOLEPRIVATE_EXPORT ProfileList : public QObject
 {
 Q_OBJECT
 
 public:
-    /** 
-     * Constructs a new session list which displays sessions 
-     * that can be created by @p manager 
+    /**
+     * Constructs a new session list which displays sessions
+     * that can be created by @p manager
      *
      * @param addShortcuts True if the shortcuts associated with profiles
      * in the session manager should be added to the actions
@@ -62,20 +62,20 @@ public:
      */
     ProfileList(bool addShortcuts , QObject* parent);
 
-    /** 
+    /**
      * Returns a list of actions representing the types of sessions which can be created by
-     * manager().  
+     * manager().
      * The user-data associated with each action is the string key that can be passed to
-     * the manager to request creation of a new session. 
+     * the manager to request creation of a new session.
      */
     QList<QAction*> actions();
 
-    /** TODO: Document me */ 
+    /** TODO: Document me */
     void syncWidgetActions(QWidget* widget,bool sync);
 signals:
-   /** 
+   /**
     * Emitted when the user selects an action from the list.
-    * 
+    *
     * @param profile The profile to select
     */
    void profileSelected(Profile::Ptr profile);

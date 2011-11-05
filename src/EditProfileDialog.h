@@ -49,9 +49,9 @@ namespace Konsole
 /**
  * A dialog which allows the user to edit a profile.
  * After the dialog is created, it can be initialised with the settings
- * for a profile using setProfile().  When the user makes changes to the 
+ * for a profile using setProfile().  When the user makes changes to the
  * dialog and accepts the changes, the dialog will update the
- * profile in the SessionManager by calling the SessionManager's 
+ * profile in the SessionManager by calling the SessionManager's
  * changeProfile() method.
  *
  * Some changes made in the dialog are preview-only changes which cause
@@ -79,8 +79,8 @@ public:
      */
     void setProfile(Profile::Ptr profile);
 
-    /** 
-     * Selects the text in the profile name edit area. 
+    /**
+     * Selects the text in the profile name edit area.
      * When the dialog is being used to create a new profile,
      * this can be used to draw the user's attention to the profile name
      * and make it easy for them to change it.
@@ -90,7 +90,7 @@ public:
 public slots:
     // reimplemented
     virtual void accept();
-    // reimplemented 
+    // reimplemented
     virtual void reject();
 
 protected:
@@ -216,7 +216,7 @@ private:
     // it to _tempProfile.
     void createTempProfile();
 
-    // Enable or disable apply button, used only within 
+    // Enable or disable apply button, used only within
     // updateTempProfileProperty().
     void updateButtonApply();
 
@@ -244,8 +244,8 @@ private:
     Profile::Ptr _profile;
 
     // keeps track of pages which need to be updated to match the current
-    // profile.  all elements in this vector are set to true when the 
-    // profile is changed and individual elements are set to false 
+    // profile.  all elements in this vector are set to true when the
+    // profile is changed and individual elements are set to false
     // after an update by a call to ensurePageLoaded()
     QVector<bool> _pageNeedsUpdate;
     QHash<int,QVariant> _previewedProperties;
@@ -272,12 +272,12 @@ public:
     virtual QSize sizeHint( const QStyleOptionViewItem& option,
                        const QModelIndex& index) const;
 
-    /** 
+    /**
      * Sets the timeline used to control the entry animation
      * for this delegate.
      *
      * During a call to paint(), the value of the timeLine is used to
-     * determine how to render the item ( with 0 being the beginning 
+     * determine how to render the item ( with 0 being the beginning
      * of the animation and 1.0 being the end )
      */
     void setEntryTimeLine( QTimeLine* timeLine );

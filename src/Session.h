@@ -89,9 +89,9 @@ public:
   explicit Session(QObject* parent = 0);
   ~Session();
 
-  /** 
-   * Connect to an existing terminal.  When a new Session() is constructed it 
-   * automatically searches for and opens a new teletype.  If you want to 
+  /**
+   * Connect to an existing terminal.  When a new Session() is constructed it
+   * automatically searches for and opens a new teletype.  If you want to
    * use an existing teletype (given its file descriptor) call this after
    * constructing the session.
    *
@@ -157,7 +157,7 @@ public:
   };
 
   /**
-   * Returns true if the session currently contains a connection to a 
+   * Returns true if the session currently contains a connection to a
    * remote computer.  It currently supports ssh.
    */
   bool isRemote();
@@ -275,7 +275,7 @@ public:
   /** Returns the session's title for the specified @p role. */
   QString title(TitleRole role) const;
 
-  /** 
+  /**
    * Specifies whether a utmp entry should be created for the pty used by this session.
    * If true, KPty::login() is called when the session is started.
    */
@@ -329,9 +329,9 @@ public:
   void cancelZModem();
   bool isZModemBusy() { return _zmodemBusy; }
 
- /** 
+ /**
    * Possible values of the @p what parameter for setUserTitle()
-   * See "Operating System Controls" section on http://rtfm.etla.org/xterm/ctlseq.html 
+   * See "Operating System Controls" section on http://rtfm.etla.org/xterm/ctlseq.html
    */
   enum UserTitleChange
   {
@@ -559,7 +559,7 @@ signals:
    * should be changed.
    */
   void changeBackgroundColorRequest(const QColor&);
-  /** 
+  /**
    * Requests that the text color of views on this session should
    * be changed to @p color.
    */
@@ -651,7 +651,7 @@ private:
   WId windowId() const;
   bool kill(int signal);
   // print a warning message in the terminal.  This is used
-  // if the program fails to start, or if the shell exits in 
+  // if the program fails to start, or if the shell exits in
   // an unsuccessful manner
   void terminalWarning(const QString& message);
   // checks that the binary 'program' is available and can be executed

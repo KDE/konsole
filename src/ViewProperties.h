@@ -35,19 +35,19 @@
 namespace Konsole
 {
 
-/** 
+/**
  * Encapsulates user-visible information about the terminal session currently being displayed in a view,
  * such as the associated title and icon.
  *
  * This can be used by navigation widgets in a ViewContainer sub-class to provide a tab, label or other
  * item for switching between views.
  */
-class KONSOLEPRIVATE_EXPORT ViewProperties : public QObject 
+class KONSOLEPRIVATE_EXPORT ViewProperties : public QObject
 {
 Q_OBJECT
 
 public:
-    ViewProperties(QObject* parent); 
+    ViewProperties(QObject* parent);
     virtual ~ViewProperties();
 
     /** Returns the icon associated with a view */
@@ -55,9 +55,9 @@ public:
     /** Returns the title associated with a view */
     QString title() const;
 
-    /** 
+    /**
      * Returns the URL current associated with a view.
-     * The default implementation returns an empty URL. 
+     * The default implementation returns an empty URL.
      */
     virtual KUrl url() const;
 
@@ -68,14 +68,14 @@ public:
      */
     virtual QString currentDir() const;
 
-    /** 
+    /**
      * A unique identifier associated with this
      * ViewProperties instance.
      */
     int identifier() const;
 
     /**
-     * Sub-classes may re-implement this method to display a message to the user 
+     * Sub-classes may re-implement this method to display a message to the user
      * to allow them to confirm whether to close a view.
      * The default implementation always returns true
      */
@@ -87,7 +87,7 @@ public:
     /** Name of mime format to use in drag-and-drop operations. */
     static QString mimeType() { return _mimeType; }
 
-    /** Returns a new QMimeData instance which represents the view with the given @p id 
+    /** Returns a new QMimeData instance which represents the view with the given @p id
      * (See identifier()).  The QMimeData instance returned must be deleted by the caller.
      */
     static QMimeData* createMimeData(int id)
@@ -97,9 +97,9 @@ public:
         mimeData->setData(mimeType(),data);
         return mimeData;
     }
-    /** Decodes a QMimeData instance created with createMimeData() and returns the identifier 
+    /** Decodes a QMimeData instance created with createMimeData() and returns the identifier
      * of the associated view.  The associated ViewProperties instance can then be retrieved by
-     * calling propertiesById() 
+     * calling propertiesById()
      *
      * The QMimeData instance must support the mime format returned by mimeType()
      */
@@ -128,9 +128,9 @@ protected slots:
     void fireActivity();
 
 protected:
-    /** 
+    /**
      * Subclasses may call this method to change the title.  This causes
-     * a titleChanged() signal to be emitted 
+     * a titleChanged() signal to be emitted
      */
     void setTitle(const QString& title);
     /**

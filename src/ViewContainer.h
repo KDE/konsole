@@ -55,7 +55,7 @@ namespace Konsole
  * An interface for container widgets which can hold one or more views.
  *
  * The container widget typically displays a list of the views which
- * it has and provides a means of switching between them.  
+ * it has and provides a means of switching between them.
  *
  * Subclasses should reimplement the addViewWidget() and removeViewWidget() functions
  * to actually add or remove view widgets from the container widget, as well
@@ -68,7 +68,7 @@ Q_OBJECT
 public:
 
     /**
-     * This enum describes the options for positioning the 
+     * This enum describes the options for positioning the
      * container's navigation widget.
      */
     enum NavigationPosition
@@ -83,16 +83,16 @@ public:
         NavigationPositionRight
     };
 
-    /** 
-     * Constructs a new view container with the specified parent. 
-     * 
+    /**
+     * Constructs a new view container with the specified parent.
+     *
      * @param position The initial position of the navigation widget
-     * @param parent The parent object of the container 
+     * @param parent The parent object of the container
      */
     ViewContainer(NavigationPosition position , QObject* parent);
 
-    /** 
-     * Called when the ViewContainer is destroyed.  When reimplementing this in 
+    /**
+     * Called when the ViewContainer is destroyed.  When reimplementing this in
      * subclasses, use object->deleteLater() to delete any widgets or other objects
      * instead of 'delete object'.
      */
@@ -101,7 +101,7 @@ public:
     /** Returns the widget which contains the view widgets */
     virtual QWidget* containerWidget() const = 0;
 
-    /** 
+    /**
      * This enum describes the options for showing or hiding the
      * container's navigation widget.
      */
@@ -118,17 +118,17 @@ public:
      * Sets the visibility of the view container's navigation widget.
      *
      * The ViewContainer sub-class is responsible for ensuring that this
-     * setting is respected as views are added or removed from the 
+     * setting is respected as views are added or removed from the
      * container.
      *
-     * ViewContainer sub-classes should reimplement the 
-     * navigationDisplayModeChanged() method to respond to changes 
+     * ViewContainer sub-classes should reimplement the
+     * navigationDisplayModeChanged() method to respond to changes
      * of this property.
      */
     void setNavigationDisplayMode(NavigationDisplayMode mode);
-    /** 
-     * Returns the current mode for controlling the visibility of the 
-     * the view container's navigation widget. 
+    /**
+     * Returns the current mode for controlling the visibility of the
+     * the view container's navigation widget.
      */
     NavigationDisplayMode navigationDisplayMode() const;
 
@@ -138,10 +138,10 @@ public:
      *
      * Depending on the ViewContainer subclass, not all
      * positions from the NavigationPosition enum may be
-     * supported.  A list of supported positions can be 
+     * supported.  A list of supported positions can be
      * obtained by calling supportedNavigationPositions()
      *
-     * ViewContainer sub-classes should re-implement the 
+     * ViewContainer sub-classes should re-implement the
      * navigationPositionChanged() method to respond
      * to changes of this property.
      */
@@ -155,10 +155,10 @@ public:
 
     /**
      * Returns the list of supported navigation positions.
-     * The supported positions will depend upon the type of the 
+     * The supported positions will depend upon the type of the
      * navigation widget used by the ViewContainer subclass.
      *
-     * The base implementation returns one item, NavigationPositionTop 
+     * The base implementation returns one item, NavigationPositionTop
      */
     virtual QList<NavigationPosition> supportedNavigationPositions() const;
 
@@ -180,10 +180,10 @@ public:
     /** Returns a list of the contained views */
     const QList<QWidget*> views();
 
-    /** 
+    /**
      * Returns the view which currently has the focus or 0 if none
      * of the child views have the focus.
-     */ 
+     */
     virtual QWidget* activeView() const = 0;
 
     /**
@@ -206,8 +206,8 @@ public:
     /** Changes the active view to the last view */
     void activateLastView();
 
-    /** 
-     * This enum describes the directions 
+    /**
+     * This enum describes the directions
      * in which views can be re-arranged within the container
      * using the moveActiveView() method.
      */
@@ -219,8 +219,8 @@ public:
         MoveViewRight
     };
 
-    /** 
-     * Moves the active view within the container and 
+    /**
+     * Moves the active view within the container and
      * updates the order in which the views are shown
      * in the container's navigation widget.
      *
@@ -228,7 +228,7 @@ public:
      */
     void moveActiveView( MoveDirection direction );
 
-    /** Enum describing extra UI features which can be 
+    /** Enum describing extra UI features which can be
      * provided by the container. */
     enum Feature
     {
@@ -239,8 +239,8 @@ public:
         QuickCloseView = 2
     };
     Q_DECLARE_FLAGS(Features,Feature)
-    /** 
-     * Sets which additional features are enabled in this container. 
+    /**
+     * Sets which additional features are enabled in this container.
      * The default implementation does thing.  Sub-classes should re-implement this
      * to hide or show the relevant parts of their UI
      */
@@ -251,7 +251,7 @@ public:
      * implementation returns 0 (no extra features) */
     virtual Features supportedFeatures() const
     { return 0; }
-    /** Sets the menu to be shown when the new view button is clicked.  
+    /** Sets the menu to be shown when the new view button is clicked.
      * Only valid if the QuickNewView feature is enabled.
      * The default implementation does nothing. */
     virtual void setNewViewMenu(QMenu* menu) { Q_UNUSED(menu); }
@@ -269,7 +269,7 @@ signals:
     /** Emitted when the user requests to open a new view */
     void newViewRequest();
 
-    /** 
+    /**
      * Emitted when the user requests to move a view from another container
      * into this container.  If 'success' is set to true by a connected slot
      * then the original view will be removed.
@@ -278,8 +278,8 @@ signals:
      * to append it.  This index should be passed to addView() when the new view
      * has been created.
      * @param id The identifier of the view.
-     * @param success The slot handling this signal should set this to true if the 
-     * new view was successfully created.  
+     * @param success The slot handling this signal should set this to true if the
+     * new view was successfully created.
      */
     void moveViewRequest(int index,int id,bool& success);
 
@@ -293,7 +293,7 @@ signals:
     void viewRemoved(QWidget* view);
 
 protected:
-    /** 
+    /**
      * Performs the task of adding the view widget
      * to the container widget.
      */
@@ -304,15 +304,15 @@ protected:
      */
     virtual void removeViewWidget(QWidget* view) = 0;
 
-    /** 
+    /**
      * Called when the navigation display mode changes.
      * See setNavigationDisplayMode
      */
     virtual void navigationDisplayModeChanged(NavigationDisplayMode) {}
 
     /**
-     * Called when the navigation position changes to re-layout 
-     * the container and place the navigation widget in the 
+     * Called when the navigation position changes to re-layout
+     * the container and place the navigation widget in the
      * specified position.
      */
     virtual void navigationPositionChanged(NavigationPosition) {}
@@ -322,7 +322,7 @@ protected:
     /** Returns the widgets which are associated with a particular navigation item */
     QList<QWidget*> widgetsForItem( ViewProperties* item ) const;
 
-    /** 
+    /**
      * Rearranges the order of widgets in the container.
      *
      * @param fromIndex Current index of the widget to move
@@ -355,7 +355,7 @@ Q_OBJECT
 public:
     ViewContainerTabBar(QWidget* parent,TabbedViewContainer* container);
 
-    // returns a pixmap image of a tab for use with QDrag 
+    // returns a pixmap image of a tab for use with QDrag
     QPixmap dragDropPixmap(int tab);
 
 protected:
@@ -383,11 +383,11 @@ private:
 
 // internal
 // this class provides a work-around for a problem in Qt 4.x
-// where the insertItem() method only has protected access - 
+// where the insertItem() method only has protected access -
 // and the TabbedViewContainer class needs to call it.
 //
 // and presumably for binary compatibility reasons will
-// not be fixed until Qt 5. 
+// not be fixed until Qt 5.
 class TabbedViewContainerLayout : public QVBoxLayout
 {
 public:
@@ -397,7 +397,7 @@ public:
     }
 };
 
-/** 
+/**
  * An alternative tabbed view container which uses a QTabBar and QStackedWidget
  * combination for navigation instead of QTabWidget
  */

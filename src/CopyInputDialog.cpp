@@ -54,8 +54,8 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     filterProxyModel->setSourceModel(_model);
     filterProxyModel->setFilterKeyColumn(-1);
 
-    connect(_ui->filterEdit,SIGNAL(textChanged(QString)),filterProxyModel,
-    SLOT(setFilterFixedString(QString)));
+    connect(_ui->filterEdit,SIGNAL(textChanged(QString)),
+            filterProxyModel, SLOT(setFilterFixedString(QString)));
 
     _ui->sessionList->setModel(filterProxyModel);
     _ui->sessionList->setColumnHidden(0,true); // Hide number column
@@ -73,13 +73,13 @@ void CopyInputDialog::setChosenSessions(const QSet<Session*>& sessions)
     if (_masterSession)
         checked.insert(_masterSession);
 
-    _model->setCheckedSessions(checked);        
+    _model->setCheckedSessions(checked);
 }
 QSet<Session*> CopyInputDialog::chosenSessions() const
 {
     return _model->checkedSessions();
 }
-void CopyInputDialog::setMasterSession(Session* session) 
+void CopyInputDialog::setMasterSession(Session* session)
 {
     if (_masterSession)
         _model->setCheckable(_masterSession,true);
@@ -103,7 +103,7 @@ void CopyInputDialog::setSelectionChecked(bool checked)
         foreach(const QModelIndex &index,selected)
             setRowChecked(index.row(),checked);
     }
-    else 
+    else
     {
         for (int i=0;i<rows;i++)
             setRowChecked(i,checked);
@@ -147,9 +147,11 @@ QVariant CheckableSessionModel::data(const QModelIndex& index, int role) const
             return QVariant::fromValue((int)Qt::Checked);
         else
             return QVariant::fromValue((int)Qt::Unchecked);
-    } 
+    }
     else
+    {
         return SessionListModel::data(index,role);
+    }
 }
 bool CheckableSessionModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
@@ -169,7 +171,9 @@ bool CheckableSessionModel::setData(const QModelIndex& index, const QVariant& va
         return true;
     }
     else
+    {
         return SessionListModel::setData(index,value,role);
+    }
 }
 void CheckableSessionModel::setCheckedSessions(const QSet<Session*> sessions)
 {

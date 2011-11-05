@@ -31,7 +31,7 @@ namespace Konsole
 
 /**
  * A dialog which allows the user to select the number of lines of output
- * which are remembered for a session. 
+ * which are remembered for a session.
  */
 class HistorySizeDialog : public KDialog
 {
@@ -46,14 +46,14 @@ public:
     /** Specifies the type of history scroll */
     enum HistoryMode
     {
-        /** 
+        /**
          * No history.  Lines of output are lost
          * as soon as they are scrolled off-screen.
-         */ 
+         */
         NoHistory,
         /**
          * A history which stores up to a fixed number of lines
-         * in memory. 
+         * in memory.
          */
         FixedSizeHistory,
         /**
@@ -68,7 +68,7 @@ public:
     void setMode( HistoryMode mode );
     /** Returns the history mode chosen by the user. */
     HistoryMode mode() const;
-    /** 
+    /**
      * Returns the number of lines of history to remember.
      * This is only valid when mode() == FixedSizeHistory,
      * and returns 0 otherwise.
@@ -98,7 +98,7 @@ private:
     QAbstractButton* _noHistoryButton;
     QAbstractButton* _fixedHistoryButton;
     QAbstractButton* _unlimitedHistoryButton;
-    KIntSpinBox* _lineCountBox;   
+    KIntSpinBox* _lineCountBox;
 
     // 1000 lines was the default in the KDE 3 series
     static const int defaultLineCount = 1000;

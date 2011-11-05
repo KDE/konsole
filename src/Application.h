@@ -20,7 +20,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-// KDE 
+// KDE
 #include <KUniqueApplication>
 
 // Konsole
@@ -39,7 +39,7 @@ class Session;
 /**
  * The Konsole Application.
  *
- * The application consists of one or more main windows and a set of factories to create 
+ * The application consists of one or more main windows and a set of factories to create
  * new sessions and views.
  *
  * To create a new main window with a default terminal session, call the newInstance() method.
@@ -60,10 +60,10 @@ public:
     /** Creates a new main window and opens a default terminal session */
     virtual int newInstance();
 
-    /** 
+    /**
      * Creates a new, empty main window and connects to its newSessionRequest()
      * and newWindowRequest() signals to trigger creation of new sessions or
-     * windows when then they are emitted.  
+     * windows when then they are emitted.
      */
     MainWindow* newMainWindow();
 

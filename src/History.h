@@ -179,7 +179,7 @@ private:
   HistoryLine* _historyBuffer;
   QBitArray _wrappedLine;
   int _maxLineCount;
-  int _usedLines;  
+  int _usedLines;
   int _head;
 
   //QVector<histline*> m_histBuffer;
@@ -388,7 +388,7 @@ public:
 
   /**
    * Returns true if the history is enabled ( can store lines of output )
-   * or false otherwise. 
+   * or false otherwise.
    */
   virtual bool isEnabled() const = 0;
   /**

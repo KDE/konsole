@@ -40,7 +40,7 @@ namespace Konsole
  * and background colours and other appearance-related properties into text strings.
  *
  * Derived classes may produce either plain text with no other colour or appearance information, or
- * they may produce text which incorporates these additional properties. 
+ * they may produce text which incorporates these additional properties.
  */
 class TerminalCharacterDecoder
 {
@@ -74,8 +74,8 @@ class PlainTextDecoder : public TerminalCharacterDecoder
 public:
     PlainTextDecoder(); 
 
-    /** 
-     * Set whether trailing whitespace at the end of lines should be included 
+    /**
+     * Set whether trailing whitespace at the end of lines should be included
      * in the output.
      * Defaults to true.
      */
@@ -85,9 +85,9 @@ public:
      * in the output.
      */
     bool trailingWhitespace() const;
-    /** 
+    /**
      * Returns of character positions in the output stream
-     * at which new lines where added.  Returns an empty if setTrackLinePositions() is false or if 
+     * at which new lines where added.  Returns an empty if setTrackLinePositions() is false or if
      * the output device is not a string.
      */
     QList<int> linePositions() const;
@@ -116,7 +116,7 @@ private:
 class HTMLDecoder : public TerminalCharacterDecoder
 {
 public:
-    /** 
+    /**
      * Constructs an HTML decoder using a default black-on-white color scheme.
      */
     HTMLDecoder();

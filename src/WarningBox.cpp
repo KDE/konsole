@@ -36,7 +36,7 @@ WarningBox::WarningBox(QWidget* parent)
 {
     KColorScheme colorScheme(QPalette::Active);
     QColor warningColor = colorScheme.background(KColorScheme::NeutralBackground).color();
-    QColor warningColorLight = KColorScheme::shade(warningColor,KColorScheme::LightShade,0.1); 
+    QColor warningColorLight = KColorScheme::shade(warningColor,KColorScheme::LightShade,0.1);
     QColor borderColor = KColorScheme::shade(warningColor,KColorScheme::DarkShade,0.15);
     QString gradient =     "qlineargradient(x1:0, y1:0, x2:0, y2:1,"
                         "stop: 0 %1, stop: 0.6 %1 ,stop: 1.0 %2)";

@@ -26,8 +26,8 @@
 namespace Konsole
 {
 
-/** 
- * A class to parse and extract information about shell commands. 
+/**
+ * A class to parse and extract information about shell commands.
  *
  * ShellCommand can be used to:
  *
@@ -36,7 +36,7 @@ namespace Konsole
  *          into its component parts (eg. the command "/bin/sh" and the arguments
  *          "-c","/path/to/my/script")
  *      </li>
- *      <li>Take a command and a list of arguments and combine them to 
+ *      <li>Take a command and a list of arguments and combine them to
  *          form a complete command line.
  *      </li>
  *      <li>Determine whether the binary specified by a command exists in the
@@ -45,7 +45,7 @@ namespace Konsole
  *      <li>Determine whether a command-line specifies the execution of
  *          another command as the root user using su/sudo etc.
  *      </li>
- * </ul> 
+ * </ul>
  */
 class ShellCommand
 {
@@ -53,7 +53,7 @@ public:
     /**
      * Constructs a ShellCommand from a command line.
      *
-     * @param fullCommand The command line to parse.  
+     * @param fullCommand The command line to parse.
      */
     ShellCommand(const QString& fullCommand);
     /**
@@ -66,8 +66,8 @@ public:
     /** Returns the arguments. */
     QStringList arguments() const;
 
-    /** 
-     * Returns the full command line. 
+    /**
+     * Returns the full command line.
      */
     QString fullCommand() const;
 
@@ -83,7 +83,7 @@ public:
     static QStringList expand(const QStringList& items);
 
 private:
-    QStringList _arguments;    
+    QStringList _arguments;
 };
 
 }

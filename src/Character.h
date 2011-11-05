@@ -80,7 +80,7 @@ inline bool isSupportedLineChar(quint16 codePoint )
 class Character
 {
 public:
-  /** 
+  /**
    * Constructs a new character.
    *
    * @param _c The unicode character value of this character.
@@ -95,7 +95,7 @@ public:
        : character(_c), rendition(_r), foregroundColor(_f), backgroundColor(_b) {}
 
   /** The unicode character value for this character.
-   * 
+   *
    * if RE_EXTENDED_CHAR character is a hash code which can be used to look up the unicode
    * character sequence in the ExtendedCharTable used to create the sequence.
    */
@@ -105,11 +105,11 @@ public:
   quint8  rendition;
 
   /** The foreground color used to draw this character. */
-  CharacterColor  foregroundColor; 
+  CharacterColor  foregroundColor;
   /** The color used to draw this character's background. */
   CharacterColor  backgroundColor;
 
-  /** 
+  /**
    * Returns true if this character has a transparent background when
    * it is drawn with the specified @p palette.
    */
@@ -117,16 +117,16 @@ public:
   /**
    * Returns true if this character should always be drawn in bold when
    * it is drawn with the specified @p palette, independent of whether
-   * or not the character has the RE_BOLD rendition flag. 
+   * or not the character has the RE_BOLD rendition flag.
    */
   ColorEntry::FontWeight fontWeight(const ColorEntry* base) const;
 
-  /** 
+  /**
    * returns true if the format (color, rendition flag) of the compared characters is equal
    */
   bool equalsFormat(const Character& other) const;
 
-  /** 
+  /**
    * Compares two characters and returns true if they have the same unicode character value,
    * rendition and colors.
    */
@@ -222,7 +222,7 @@ public:
      * which was added to the table using createExtendedChar().
      *
      * @param hash The hash key returned by createExtendedChar()
-     * @param length This variable is set to the length of the 
+     * @param length This variable is set to the length of the
      * character sequence.
      *
      * @return A unicode character sequence of size @p length.
@@ -234,7 +234,7 @@ public:
 private:
     // calculates the hash key of a sequence of unicode points of size 'length'
     ushort extendedCharHash(const ushort* unicodePoints , ushort length) const;
-    // tests whether the entry in the table specified by 'hash' matches the 
+    // tests whether the entry in the table specified by 'hash' matches the
     // character sequence 'unicodePoints' of size 'length'
     bool extendedCharMatch(ushort hash , const ushort* unicodePoints , ushort length) const;
     // internal, maps hash keys to character sequence buffers.  The first ushort

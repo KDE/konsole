@@ -30,28 +30,28 @@ namespace Konsole
 {
 
 /**
- * Takes a snapshot of the state of a process and provides access to 
+ * Takes a snapshot of the state of a process and provides access to
  * information such as the process name, parent process,
  * the foreground process in the controlling terminal,
- * the arguments with which the process was started and the 
+ * the arguments with which the process was started and the
  * environment.
  *
  * To create a new snapshot, construct a new ProcessInfo instance,
  * using ProcessInfo::newInstance(),
  * passing the process identifier of the process you are interested in.
  *
- * After creating a new instance, call the update() method to take a 
+ * After creating a new instance, call the update() method to take a
  * snapshot of the current state of the process.
  *
  * Before calling any additional methods, check that the process state
  * was read successfully using the isValid() method.
  *
- * Each accessor method which provides information about the process state ( such as pid(), 
+ * Each accessor method which provides information about the process state ( such as pid(),
  * currentDir(), name() ) takes a pointer to a boolean as an argument.  If the information
  * requested was read successfully then the boolean is set to true, otherwise it is set
  * to false, in which case the return value from the function should be ignored.
  * If this boolean is set to false, it may indicate an error reading the process information,
- * or it may indicate that the information is not available on the current platform. 
+ * or it may indicate that the information is not available on the current platform.
  *
  * eg.
  *
@@ -76,7 +76,7 @@ class ProcessInfo
 {
 public:
     /**
-     * Constructs a new instance of a suitable ProcessInfo sub-class for 
+     * Constructs a new instance of a suitable ProcessInfo sub-class for
      * the current platform which provides information about a given process.
      *
      * @param pid The pid of the process to examine
@@ -84,35 +84,35 @@ public:
      * be read.  If this is false, then environment() calls will
      * always fail.  This is an optimization to avoid the overhead
      * of reading the (potentially large) environment data when it
-     * is not required. 
+     * is not required.
      */
     static ProcessInfo* newInstance(int pid,bool readEnvironment = false);
 
     virtual ~ProcessInfo() {}
 
-    /** 
+    /**
      * Updates the information about the process.  This must
      * be called before attempting to use any of the accessor methods.
      */
     void update();
 
-    /** Returns true if the process state was read successfully. */ 
+    /** Returns true if the process state was read successfully. */
     bool isValid() const;
-    /** 
-     * Returns the process id.  
+    /**
+     * Returns the process id.
      *
-     * @param ok Set to true if the process id was read successfully or false otherwise 
+     * @param ok Set to true if the process id was read successfully or false otherwise
      */
     int pid(bool* ok) const;
-    /** 
+    /**
      * Returns the id of the parent process id was read successfully or false otherwise
-     * 
+     *
      * @param ok Set to true if the parent process id
      */
     int parentPid(bool* ok) const;
 
-    /** 
-     * Returns the id of the current foreground process 
+    /**
+     * Returns the id of the current foreground process
      *
      * NOTE:  Using the foregroundProcessGroup() method of the Pty
      * instance associated with the terminal of interest is preferred
@@ -134,7 +134,7 @@ public:
     /** Returns the name of the current process */
     QString name(bool* ok) const;
 
-    /** 
+    /**
      * Returns the command-line arguments which the process
      * was started with.
      *
@@ -169,7 +169,7 @@ public:
     void setUserHomeDir();
 
     /**
-     * Parses an input string, looking for markers beginning with a '%' 
+     * Parses an input string, looking for markers beginning with a '%'
      * character and returns a string with the markers replaced
      * with information from this process description.
      * <br>
@@ -177,9 +177,9 @@ public:
      * <ul>
      * <li> %u - Name of the user which owns the process. </li>
      * <li> %n - Replaced with the name of the process.   </li>
-     * <li> %d - Replaced with the last part of the path name of the 
+     * <li> %d - Replaced with the last part of the path name of the
      *      process' current working directory.
-     *      
+     *
      *      (eg. if the current directory is '/home/bob' then
      *      'bob' would be returned)
      * </li>
@@ -188,8 +188,8 @@ public:
      */
     QString format(const QString& text) const;
 
-    /** 
-     * This enum describes the errors which can occur when trying to read 
+    /**
+     * This enum describes the errors which can occur when trying to read
      * a process's information.
      */
     enum Error
@@ -210,14 +210,14 @@ public:
 protected:
     /**
      * Constructs a new process instance.  You should not call the constructor
-     * of ProcessInfo or its subclasses directly.  Instead use the 
+     * of ProcessInfo or its subclasses directly.  Instead use the
      * static ProcessInfo::newInstance() method which will return
      * a suitable ProcessInfo instance for the current platform.
-     */ 
+     */
     explicit ProcessInfo(int pid , bool readEnvironment = false);
 
-    /** 
-     * This is called on construction to read the process state 
+    /**
+     * This is called on construction to read the process state
      * Subclasses should reimplement this function to provide
      * platform-specific process state reading functionality.
      *
@@ -257,10 +257,10 @@ protected:
     /** Sets the error */
     void setError( Error error );
 
-    /** Convenience method.  Sets the error based on a QFile error code. */ 
-    void setFileError( QFile::FileError error ); 
+    /** Convenience method.  Sets the error based on a QFile error code. */
+    void setFileError( QFile::FileError error );
 
-    /** 
+    /**
      * Adds a commandline argument for the process, as returned
      * by arguments()
      */
@@ -283,7 +283,7 @@ protected:
 
 private:
     // takes a full directory path and returns a
-    // shortened version suitable for display in 
+    // shortened version suitable for display in
     // space-constrained UI elements (eg. tabs)
     QString formatShortDir(const QString& dirPath) const;
 
@@ -307,7 +307,7 @@ private:
         ENVIRONMENT         = 16,
         NAME                = 32,
         CURRENT_DIR         = 64,
-        UID                 =128 
+        UID                 =128
     };
 
     char _fields; // a bitmap indicating which fields are valid
@@ -335,9 +335,9 @@ private:
     static QSet<QString> _commonDirNames;
 };
 
-/** 
+/**
  * Implementation of ProcessInfo which does nothing.
- * Used on platforms where a suitable ProcessInfo subclass is not 
+ * Used on platforms where a suitable ProcessInfo subclass is not
  * available.
  *
  * isValid() will always return false for instances of NullProcessInfo
@@ -345,7 +345,7 @@ private:
 class NullProcessInfo : public ProcessInfo
 {
 public:
-    /** 
+    /**
      * Constructs a new NullProcessInfo instance.
      * See ProcessInfo::newInstance()
      */
@@ -362,14 +362,14 @@ protected:
 class UnixProcessInfo : public ProcessInfo
 {
 public:
-    /** 
+    /**
      * Constructs a new instance of UnixProcessInfo.
      * See ProcessInfo::newInstance()
      */
     explicit UnixProcessInfo(int pid,bool readEnvironment = false);
 
 protected:
-    /** 
+    /**
      * Implementation of ProcessInfo::readProcessInfo(); calls the
      * four private methods below in turn.
      */
@@ -407,13 +407,13 @@ private:
     virtual bool readCurrentDir(int pid)=0;
 };
 
-/** 
+/**
  * Lightweight class which provides additional information about SSH processes.
  */
 class SSHProcessInfo
 {
 public:
-    /** 
+    /**
      * Constructs a new SSHProcessInfo instance which provides additional
      * information about the specified SSH process.
      *
@@ -421,7 +421,7 @@ public:
      */
     SSHProcessInfo(const ProcessInfo& process);
 
-    /** 
+    /**
      * Returns the user name which the user initially logged into on
      * the remote computer.
      */
@@ -437,8 +437,8 @@ public:
      */
     QString port() const;
 
-    /** 
-     * Returns the command which the user specified to execute on the 
+    /**
+     * Returns the command which the user specified to execute on the
      * remote computer when starting the SSH process.
      */
     QString command() const;

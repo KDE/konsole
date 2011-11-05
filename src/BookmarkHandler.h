@@ -5,7 +5,7 @@
 
     library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
-    License as published by the Free Software Foundation, version 2 
+    License as published by the Free Software Foundation, version 2
     or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -46,7 +46,7 @@ class ViewProperties;
  * providing a suggested title and URL when the user clicks the "Add Bookmark" item in
  * the bookmarks menu.
  *
- * The bookmark handler is associated with a session controller, which is used to 
+ * The bookmark handler is associated with a session controller, which is used to
  * determine the working URL of the current session.  When the user changes the active
  * view, the bookmark handler's controller should be changed using setController()
  *
@@ -76,7 +76,7 @@ public:
     virtual QList<QPair<QString,QString> > currentBookmarkList() const;
     virtual void openFolderinTabs(const KBookmarkGroup& group);
 
-    /** 
+    /**
      * Returns the menu which this bookmark handler inserts its actions into.
      */
     KMenu* menu() const { return _menu; }
@@ -98,10 +98,10 @@ signals:
      *
      * @param url The url of the bookmark which was selected by the user.
      */
-    void openUrl( const KUrl& url ); 
+    void openUrl( const KUrl& url );
 
     /**
-     * Emitted when the user selects 'Open Folder in Tabs' 
+     * Emitted when the user selects 'Open Folder in Tabs'
      * from the bookmark menu.
      *
      * @param urls The urls of the bookmarks in the folder whoose

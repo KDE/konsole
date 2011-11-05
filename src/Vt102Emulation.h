@@ -26,7 +26,7 @@
 // Standard Library
 #include <stdio.h>
 
-// Qt 
+// Qt
 #include <QtGui/QKeyEvent>
 #include <QtCore/QHash>
 #include <QtCore/QTimer>
@@ -66,15 +66,15 @@ struct CharCodes
 /**
  * Provides an xterm compatible terminal emulation based on the DEC VT102 terminal.
  * A full description of this terminal can be found at http://vt100.net/docs/vt102-ug/
- * 
- * In addition, various additional xterm escape sequences are supported to provide 
+ *
+ * In addition, various additional xterm escape sequences are supported to provide
  * features such as mouse input handling.
  * See http://rtfm.etla.org/xterm/ctlseq.html for a description of xterm's escape
- * sequences. 
+ * sequences.
  *
  */
 class Vt102Emulation : public Emulation
-{ 
+{
 Q_OBJECT
 
 public:
@@ -88,7 +88,7 @@ public:
   virtual char eraseChar() const;
 
 public slots: 
-  // reimplemented from Emulation 
+  // reimplemented from Emulation
   virtual void sendString(const char*,int length = -1);
   virtual void sendText(const QString& text);
   virtual void sendKeyEvent(QKeyEvent*);
@@ -122,7 +122,7 @@ private:
   bool getMode    (int mode);
   // saves the current boolean value of 'mode'
   void saveMode   (int mode);
-  // restores the boolean value of 'mode' 
+  // restores the boolean value of 'mode'
   void restoreMode(int mode);
   // resets all modes
   // (except MODE_Allow132Columns)
@@ -179,10 +179,10 @@ private:
   TerminalState _currentModes;
   TerminalState _savedModes;
 
-  //hash table and timer for buffering calls to the session instance 
+  //hash table and timer for buffering calls to the session instance
   //to update the name of the session
   //or window title.
-  //these calls occur when certain escape sequences are seen in the 
+  //these calls occur when certain escape sequences are seen in the
   //output from the terminal
   QHash<int,QString> _pendingTitleUpdates;
   QTimer* _titleUpdateTimer;

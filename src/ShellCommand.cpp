@@ -75,7 +75,7 @@ bool ShellCommand::isRootCommand() const
 bool ShellCommand::isAvailable() const
 {
     Q_ASSERT(0); // not implemented yet
-    return false; 
+    return false;
 }
 QStringList ShellCommand::expand(const QStringList& items)
 {
