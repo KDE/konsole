@@ -351,8 +351,6 @@ void ManageProfilesDialog::moveDownSelected()
 
 void ManageProfilesDialog::createProfile()
 {
-    EditProfileDialog dialog(this);
-
     // setup a temporary profile which is a clone of the selected profile 
     // or the default if no profile is selected
     Profile::Ptr sourceProfile;
@@ -370,10 +368,11 @@ void ManageProfilesDialog::createProfile()
     newProfile->setProperty(Profile::Name, i18nc("@item This will be used as part of the file name", "New Profile"));
     newProfile->setProperty(Profile::MenuIndex, QString("0"));
 
-    dialog.setProfile(newProfile); 
-    dialog.selectProfileName();
+    QPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
+    dialog->setProfile(newProfile);
+    dialog->selectProfileName();
 
-    if ( dialog.exec() == QDialog::Accepted )
+    if ( dialog->exec() == QDialog::Accepted )
     {
         SessionManager::instance()->addProfile(newProfile);
         SessionManager::instance()->setFavorite(newProfile,true);

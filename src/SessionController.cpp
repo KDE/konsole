@@ -785,7 +785,7 @@ void SessionController::copyInputToSelectedTabs()
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
     }
 
-    CopyInputDialog* dialog = new CopyInputDialog(_view);
+    QPointer<CopyInputDialog> dialog = new CopyInputDialog(_view);
     dialog->setMasterSession(_session);
 
     QSet<Session*> currentGroup = QSet<Session*>::fromList(_copyToGroup->sessions());
@@ -798,7 +798,7 @@ void SessionController::copyInputToSelectedTabs()
     if (!guard)
         return;
 
-    if (result)
+    if ( result == QDialog::Accepted )
     {
         QSet<Session*> newGroup = dialog->chosenSessions();
         newGroup.remove(_session);
@@ -817,7 +817,6 @@ void SessionController::copyInputToSelectedTabs()
         snapshot();        
     }
 
-    delete dialog;
     _copyToAllTabsAction->setChecked(false);
     _copyToSelectedAction->setChecked(true);
     _copyToNoneAction->setChecked(false);
