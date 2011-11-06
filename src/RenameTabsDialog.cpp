@@ -32,6 +32,8 @@ RenameTabsDialog::RenameTabsDialog(QWidget* parent)
     setCaption(i18n("Rename Tab"));
     setButtons( KDialog::Ok | KDialog::Cancel );
 
+    setWindowModality(Qt::WindowModal);
+
     _ui = new Ui::RenameTabsDialog();
     _ui->setupUi(mainWidget());
 
