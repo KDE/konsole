@@ -35,6 +35,8 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     setCaption(i18n("Copy Input"));
     setButtons( KDialog::Ok | KDialog::Cancel );
 
+    setWindowModality(Qt::WindowModal);
+
     _ui = new Ui::CopyInputDialog();
     _ui->setupUi(mainWidget());
 
