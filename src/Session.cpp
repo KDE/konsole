@@ -143,8 +143,8 @@ Session::Session(QObject* parent) :
              SLOT(updateFlowControlState(bool)) );
     connect( _emulation, SIGNAL(primaryScreenInUse(bool)) , this,
              SLOT(onPrimaryScreenInUse(bool)) );
-    connect( _emulation, SIGNAL(selectedText(const QString &)) , this,
-             SLOT(onSelectedText(const QString &)) );
+    connect( _emulation, SIGNAL(selectedText(QString)) , this,
+             SLOT(onSelectedText(QString)) );
 
     //create new teletype for I/O with shell process
     openTeletype(-1);
