@@ -30,7 +30,7 @@
 #include <KLocale>
 #include <KDebug>
 
-#define KONSOLE_VERSION "2.7.999"
+#define KONSOLE_VERSION "2.8"
 
 // standard input file descriptor
 static const int STDIN = 0;
