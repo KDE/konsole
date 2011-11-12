@@ -46,8 +46,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2011-10-05</date>
-<releaseinfo>2.7.1 (&kde; 4.8)</releaseinfo>
+<date>2011-11-12</date>
+<releaseinfo>2.8 (&kde; 4.8)</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -290,7 +290,8 @@ is listed after each menu item.
 </term>
 <listitem><para><action>Opens a new tab with the default profile</action>
 <note><para>&konsole; ships with the Shell profile as the default.
-Any new profiles added by the user will be listed in the sub-menu.
+Any new profiles added by the user will be listed in the submenu.
+There will be no submenu if only the default profile is to be shown.
 </para></note>
 </para></listitem></varlistentry>
 
@@ -360,9 +361,13 @@ tab open.  This dialog can be disabled by clicking on the <guibutton>Do not ask 
 location</action></para></listitem>
 </varlistentry>
 
-<!-- missing
-Select All 
--->
+<varlistentry>
+<term><menuchoice>
+<guimenu>Edit</guimenu><guimenuitem>Select All
+</guimenuitem></menuchoice></term>
+<listitem><para><action>Selects all</action> the text in current window
+</para></listitem>
+</varlistentry>
 
 <varlistentry>
 <term><menuchoice>
@@ -783,12 +788,12 @@ The current tab will be greyed out.
 </sect1>
 
 <sect1 id="scrollback-options-dialog">
-<title>Scrollback Options Dialog</title>
+<title>Adjust Scrollback Dialog</title>
 
 <para>The
 <link linkend="scrollback">scrollback</link>
-option for the history size can be changed in this dialog. There is also
-a check box to save these settings to the current profile.
+options for the history size can be changed in this dialog.  Any changes are
+for the current tab only and will not be saved to the profile.
 </para>
 
 </sect1>
