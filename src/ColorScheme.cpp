@@ -270,9 +270,9 @@ void ColorScheme::read(KConfig& config)
 {
     KConfigGroup configGroup = config.group("General");
 
-    QString description = configGroup.readEntry("Description", I18N_NOOP2("@item:intable Palette name", "Un-named Color Scheme"));
+    QString description = configGroup.readEntry("Description", I18N_NOOP("Un-named Color Scheme"));
 
-    _description = i18nc("@item:intable Palette name", description.toUtf8());
+    _description = i18n(description.toUtf8());
     _opacity = configGroup.readEntry("Opacity",qreal(1.0));
     setWallpaper(configGroup.readEntry("Wallpaper", QString()));
 
@@ -441,7 +441,7 @@ AccessibleColorScheme::AccessibleColorScheme()
 {
     // basic attributes
     setName("accessible");
-    setDescription(i18nc("@item:intable Palette name", "Accessible Color Scheme"));
+    setDescription(i18n("Accessible Color Scheme"));
 
     // setup colors
     const int ColorRoleCount = 8;
