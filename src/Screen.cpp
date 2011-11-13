@@ -659,6 +659,13 @@ void Screen::displayCharacter(unsigned short c)
             charToCombineWithX = cuX - 1;
             charToCombineWithY = cuY;
         }
+
+        // Prevent "cat"ing binary files from causing crashes.
+        if (charToCombineWithX >= screenLines[charToCombineWithY].size())
+        {
+            return;
+        }
+
         Character& currentChar = screenLines[charToCombineWithY][charToCombineWithX];
         if ((currentChar.rendition & RE_EXTENDED_CHAR) == 0)
         {
