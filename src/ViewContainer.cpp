@@ -26,7 +26,6 @@
 // Qt
 #include <QtCore/QHash>
 #include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
 #include <QtGui/QBrush>
 #include <QtGui/QListWidget>
 #include <QtGui/QSplitter>
