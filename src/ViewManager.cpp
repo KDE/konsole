@@ -39,6 +39,8 @@
 #include <KConfigGroup>
 
 // Konsole
+#include <konsoleadaptor.h>
+
 #include "ColorScheme.h"
 #include "ProfileList.h"
 #include "Session.h"
@@ -47,7 +49,6 @@
 #include "SessionManager.h"
 #include "ViewContainer.h"
 #include "ViewSplitter.h"
-#include "konsoleadaptor.h"
 #include "Profile.h"
 
 using namespace Konsole;
