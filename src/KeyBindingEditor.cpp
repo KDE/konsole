@@ -24,6 +24,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QKeyEvent>
 
+// KDE
 #include <KDebug>
 
 // Konsole

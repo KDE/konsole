@@ -27,7 +27,7 @@
 #include <KXmlGuiWindow>
 #include <KUrl>
 
-// Local
+// Konsole
 #include "Profile.h"
 
 class KAction;

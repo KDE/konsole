@@ -30,7 +30,7 @@
 // KDE
 #include <KDialog>
 
-// Local
+// Konsole
 #include "Profile.h"
 
 class QAbstractButton;

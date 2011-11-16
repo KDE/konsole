@@ -33,12 +33,11 @@
 #include <QtGui/QTabBar>
 #include <QtGui/QToolButton>
 #include <QtGui/QWidgetAction>
-
 #include <QtGui/QDrag>
 #include <QtGui/QDragMoveEvent>
 #include <QtCore/QMimeData>
 
-// KDE 
+// KDE
 #include <KColorDialog>
 #include <KColorScheme>
 #include <KColorUtils>

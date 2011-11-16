@@ -19,6 +19,7 @@
 #ifndef ZMODEM_DIALOG_H
 #define ZMODEM_DIALOG_H
 
+// KDE
 #include <KDialog>
 
 class KTextEdit;

@@ -20,6 +20,9 @@
 // Own
 #include "EditProfileDialog.h"
 
+// Standard
+#include <cmath>
+
 // Qt
 #include <QtGui/QKeyEvent>
 #include <QtGui/QBrush>
@@ -28,7 +31,6 @@
 #include <QtCore/QTextCodec>
 #include <QtGui/QLinearGradient>
 #include <QtGui/QRadialGradient>
-
 #include <QtCore/QTimer>
 #include <QtCore/QTimeLine>
 
@@ -43,8 +45,6 @@
 #include <KWindowSystem>
 #include <KTextEdit>
 #include <KMessageBox>
-
-#include <cmath>
 
 // Konsole
 #include "ColorScheme.h"

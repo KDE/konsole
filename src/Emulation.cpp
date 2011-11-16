@@ -35,7 +35,6 @@
 #include <QtCore/QRegExp>
 #include <QtCore/QTextStream>
 #include <QtCore/QThread>
-
 #include <QtCore/QTime>
 
 // KDE

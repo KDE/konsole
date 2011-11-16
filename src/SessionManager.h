@@ -25,7 +25,6 @@
 // Qt
 #include <QtGui/QFont>
 #include <QtGui/QKeySequence>
-
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QHash>
 #include <QtCore/QList>

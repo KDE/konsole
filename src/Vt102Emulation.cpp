@@ -37,7 +37,7 @@
     void scrolllock_set_on();
 #endif
 
-// Standard 
+// Standard
 #include <stdio.h>
 #include <unistd.h>
 

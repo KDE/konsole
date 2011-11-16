@@ -22,6 +22,9 @@
 // Own
 #include "Profile.h"
 
+// System
+#include <unistd.h>
+
 // Qt
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
@@ -35,9 +38,6 @@
 #include <KLocale>
 #include <KDebug>
 #include <KStandardDirs>
-
-// System
-#include <unistd.h>
 
 // Konsole
 #include "ShellCommand.h"

@@ -24,8 +24,6 @@
 #ifndef KONSOLEBOOKMARKHANDLER_H
 #define KONSOLEBOOKMARKHANDLER_H
 
-// Qt
-
 // KDE
 #include <KBookmarkManager>
 

@@ -26,7 +26,7 @@
 // Qt
 #include <QtCore/QHash>
 
-// Local
+// Konsole
 #include "CharacterColor.h"
 
 namespace Konsole

@@ -20,8 +20,6 @@
 // Own
 #include "ViewManager.h"
 
-// System
-
 // Qt
 #include <QtCore/QDateTime>
 #include <QtCore/QSignalMapper>

@@ -21,6 +21,9 @@
 #ifndef TEHISTORY_H
 #define TEHISTORY_H
 
+// System
+#include <sys/mman.h>
+
 // Qt
 #include <QtCore/QBitRef>
 #include <QtCore/QHash>
@@ -32,9 +35,6 @@
 // Konsole
 //#include "BlockArray.h"
 #include "Character.h"
-
-// map
-#include <sys/mman.h>
 
 namespace Konsole
 {

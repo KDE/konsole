@@ -19,7 +19,6 @@
 
 // Own
 #include "MainWindow.h"
-#include "SessionManager.h"
 
 // Qt
 #include <QtGui/QBoxLayout>
@@ -55,6 +54,7 @@
 #include "Session.h"
 #include "ViewManager.h"
 #include "ViewSplitter.h"
+#include "SessionManager.h"
 
 using namespace Konsole;
 

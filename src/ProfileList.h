@@ -20,10 +20,12 @@
 #ifndef PROFILELIST_H
 #define PROFILELIST_H
 
+// Qt
 #include <QtCore/QList>
 #include <QtCore/QSet>
 #include <QtCore/QObject>
 
+// Konsole
 #include "Profile.h"
 #include "konsole_export.h"
 

@@ -28,7 +28,6 @@
 #include <QtCore/QPointer>
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
-
 #include <QtGui/QFont>
 
 // KDE

@@ -22,6 +22,7 @@
 #ifndef VIEWSPLITTER_H
 #define VIEWSPLITTER_H
 
+// Qt
 #include <QtCore/QList>
 #include <QtGui/QSplitter>
 

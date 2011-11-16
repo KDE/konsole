@@ -23,9 +23,6 @@
 #ifndef VT102EMULATION_H
 #define VT102EMULATION_H
 
-// Standard Library
-#include <stdio.h>
-
 // Qt
 #include <QtGui/QKeyEvent>
 #include <QtCore/QHash>

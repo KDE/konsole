@@ -28,7 +28,7 @@
 #include <QtCore/QHash>
 #include <QtCore/QRegExp>
 
-// Local
+// Konsole
 #include "Character.h"
 
 namespace Konsole
