@@ -183,7 +183,7 @@ FallbackProfile::FallbackProfile()
     setProperty(TripleClickMode,SelectWholeLine);
 
     setProperty(BlinkingCursorEnabled,false);
-    setProperty(BidiRenderingEnabled,false);
+    setProperty(BidiRenderingEnabled,true);
     setProperty(CursorShape,BlockCursor);
     setProperty(UseCustomCursorColor,false);
     setProperty(CustomCursorColor,Qt::black);

@@ -181,5 +181,6 @@ ColorScheme=Linux
 ScrollMode=FixedLineCount
 ScrollLineCount=1000
 
-
+[Terminal Features]
+BidiRenderingEnabled=true
 
