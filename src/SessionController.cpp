@@ -881,7 +881,7 @@ void SessionController::beginSearch(const QString& text , int direction)
     Qt::CaseSensitivity caseHandling = options.at(IncrementalSearchBar::MatchCase) ? Qt::CaseSensitive : Qt::CaseInsensitive;
     QRegExp::PatternSyntax syntax = options.at(IncrementalSearchBar::RegExp) ? QRegExp::RegExp : QRegExp::FixedString;
 
-    QRegExp regExp( text.trimmed() ,  caseHandling , syntax );
+    QRegExp regExp( text ,  caseHandling , syntax );
     _searchFilter->setRegExp(regExp);
 
     if ( !regExp.isEmpty() )
