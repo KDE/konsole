@@ -171,8 +171,8 @@ Comment[x-test]=xxKonsole default profilexx
 Comment[zh_CN]=Konsole 默认配置
 Comment[zh_TW]=Konsole 預設設定檔
 Icon=utilities-terminal
-LocalTabTitleFormat=%d : %n
-RemoteTabTitleFormat=%h : %u
+LocalTabTitleFormat=%D : %n
+RemoteTabTitleFormat=(%u) %H
 
 [Appearance]
 ColorScheme=Linux
