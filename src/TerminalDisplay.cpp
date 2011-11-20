@@ -707,6 +707,12 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
     }
     else
     {
+        // Force using LTR as the document layout for the terminal area, because
+        // there is no use cases for RTL emulator and RTL terminal application.
+        //
+        // This still allows RTL characters to be rendered in the RTL way.
+        painter.setLayoutDirection(Qt::LeftToRight) ;
+
         // the drawText(rect,flags,string) overload is used here with null flags
         // instead of drawText(rect,string) because the (rect,string) overload causes
         // the application's default layout direction to be used instead of
