@@ -91,8 +91,9 @@ public:
   explicit inline Character(quint16 _c = ' ',
             CharacterColor  _f = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR),
             CharacterColor  _b = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR),
-            quint8  _r = DEFAULT_RENDITION)
-       : character(_c), rendition(_r), foregroundColor(_f), backgroundColor(_b) {}
+            quint8  _r = DEFAULT_RENDITION,
+            bool _real = true)
+       : character(_c), rendition(_r), foregroundColor(_f), backgroundColor(_b), isRealCharacter(_real) {}
 
   /** The unicode character value for this character.
    *
@@ -108,6 +109,17 @@ public:
   CharacterColor  foregroundColor;
   /** The color used to draw this character's background. */
   CharacterColor  backgroundColor;
+
+  /** Indicate whether this character really exists, or exists simply as place holder.
+   *
+   *  TODO: this boolean filed can be further improved to become a enum filed, which
+   *  indicates different roles:
+   *
+   *    RealCharacter: a character which really exists
+   *    PlaceHolderCharacter: a character which exists as place holder
+   *    TabStopCharacter: a special place holder for HT('\t')
+   */
+  bool isRealCharacter;
 
   /**
    * Returns true if this character has a transparent background when

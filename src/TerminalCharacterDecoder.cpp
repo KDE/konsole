@@ -100,6 +100,20 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
         }
     }
 
+    // find out the last technically real character in the line
+    int guard = -1 ;
+    for (int i = count-1 ; i >= 0 ; i--)
+    {
+        // FIXME: the special case of '\n' here is really ugly
+        // Maybe the '\n' should be added after calling this method in
+        // Screen::copyLineToStream()
+        if ( characters[i].isRealCharacter && characters[i].character != '\n' )
+        {
+            guard = i;
+            break;
+        }
+    }
+
     for (int i=0;i<outputCount;)
     {
         if (characters[i].rendition & RE_EXTENDED_CHAR)
@@ -115,8 +129,22 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
         }
         else
         {
-            plainText.append( QChar(characters[i].character) );
-            i += qMax(1,konsole_wcwidth(characters[i].character));
+            // All characters which appear before the last real character are
+            // seen as real characters, even when they are technically marked as
+            // non-real.
+            //
+            // This feels tricky, but otherwise leading "whitespaces" may be
+            // lost in some situation. One typical example is copying the result
+            // of `dialog --infobox "qwe" 10 10` .
+            if ( characters[i].isRealCharacter || i <= guard )
+            {
+                plainText.append( QChar(characters[i].character) );
+                i += qMax(1,konsole_wcwidth(characters[i].character));
+            }
+            else
+            {
+                ++i;  // should we 'break' directly here?
+            }
         }
     }
     *_output << plainText;

@@ -65,7 +65,8 @@ const bool BS_CLEARS = false ;
 const Character Screen::defaultChar = Character(' ',
         CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR),
         CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR),
-        DEFAULT_RENDITION);
+        DEFAULT_RENDITION,
+        false);
 
 Screen::Screen(int l, int c):
     lines(l),
@@ -720,6 +721,7 @@ void Screen::displayCharacter(unsigned short c)
     currentChar.foregroundColor = effectiveForeground;
     currentChar.backgroundColor = effectiveBackground;
     currentChar.rendition = effectiveRendition;
+    currentChar.isRealCharacter = true;
 
     int i = 0;
     int newCursorX = cuX + w--;
@@ -735,6 +737,7 @@ void Screen::displayCharacter(unsigned short c)
         ch.foregroundColor = effectiveForeground;
         ch.backgroundColor = effectiveBackground;
         ch.rendition = effectiveRendition;
+        ch.isRealCharacter = false;
 
         w--;
     }
@@ -857,7 +860,7 @@ void Screen::clearImage(int loca, int loce, char c)
     int topLine = loca/columns;
     int bottomLine = loce/columns;
 
-    Character clearCh(c,currentForeground,currentBackground,DEFAULT_RENDITION);
+    Character clearCh(c,currentForeground,currentBackground,DEFAULT_RENDITION,false);
 
     //if the character being used to clear the area is the same as the
     //default character, the affected lines can simply be shrunk.
