@@ -117,7 +117,7 @@ public:
    *
    *    RealCharacter: a character which really exists
    *    PlaceHolderCharacter: a character which exists as place holder
-   *    TabStopCharacter: a special place holder for HT('\t')
+   *    TabStopCharacter: a special place holder for HT("\t")
    */
   bool isRealCharacter;
 
