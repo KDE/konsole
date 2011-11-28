@@ -1,0 +1,57 @@
+
+Items for the Konsole maintainer:
+=================================
+
+A new maintainer may need super powers for some of these.  If so, put in a 
+request.
+https://bugs.kde.org/enter_sysadmin_request.cgi
+
+
+A. New releases
+    1. Update src/main.cpp for version  (2.7, 2.7.1, etc)
+        a. Typically, Konsole is 2 versions behind KDE (KDE 4.7, Konsole 2.7)
+        b. If no changes are made, don't increase version.
+    2. Verify KDE bug site has all versions
+        a. When a new x.y release is coming out, create the x.y and all x.y.z
+            Example: 2.8, 2.8.1, 2.8.2, 2.8.3, 2.8.4, 2.8.5
+        b. https://bugs.kde.org/editversions.cgi?product=konsole
+            At the bottom there is an 'Add' link
+    3. Once a x.y release comes out, in git master change version to x.y+1.999
+        and add that to the Konsole BKO version.
+        Example, 4.7 has been branched and git master is open again, change
+        version to 4.7.999 in master.
+    4. Usually the KDE release team handles the git tagging
+
+B. Handbook
+    1. For x.y release try to keep handbook up to date.
+    2. Handbook is the index.docbook in konsole/doc/manual/
+
+C. Sites
+    1. konsole.kde.org is the only site the maintainer is responsible.
+        a. It is currently in svn (2011).
+            http://websvn.kde.org/trunk/www/apps/konsole/
+        b. If it becomes to much work or outdated, it might be forwarded to
+            http://userbase.kde.org/Konsole
+
+D. Mailing list
+    1. https://mail.kde.org/mailman/admin/konsole-devel
+        Password is given from previous maintainer (or someone who knows it).
+        Robert Knight or Kurt Hindenburg
+    2. Now and then you'll get a request via email about an email that requires
+        approval.  Almost always these are spam and can be discards via the
+        interface (provided in email).
+
+
+Links
+    1. General Konsole bug page:
+        https://bugs.kde.org/editproducts.cgi?action=edit&product=konsole
+    2. An attempt to get more interest in Konsole
+        http://userbase.kde.org/KonsoleDevelopment
+    3. HTML version of Handbook
+        http://docs.kde.org/development/en/kde-baseapps/konsole/index.html
+    4. KDE schedule http://techbase.kde.org/Schedules
+        Suggest using http://www.kde.org/releaseschedule.ics in your calendar
+        to watch for new releases.
+
+
+ 
