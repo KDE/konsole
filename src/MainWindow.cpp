@@ -44,6 +44,7 @@
 #include <KWindowSystem>
 #include <KXMLGUIFactory>
 #include <KNotifyConfigWidget>
+#include <KConfigDialog>
 
 // Konsole
 #include "BookmarkHandler.h"
@@ -54,6 +55,8 @@
 #include "Session.h"
 #include "ViewManager.h"
 #include "SessionManager.h"
+#include "AppSettings.h"
+#include "settings/GeneralSettings.h"
 
 using namespace Konsole;
 
@@ -284,6 +287,7 @@ void MainWindow::setupActions()
     // Settings Menu
     KStandardAction::configureNotifications(this , SLOT(configureNotifications()) , collection);
     KStandardAction::keyBindings(this , SLOT(showShortcutsDialog()) , collection);
+    KStandardAction::preferences(this, SLOT(showSettingsDialog()), collection);
 
     action = collection->addAction("manage-profiles");
     action->setText(i18n("Manage Profiles..."));
@@ -497,6 +501,22 @@ void MainWindow::showManageProfilesDialog()
     dialog->show();
 }
 
+void MainWindow::showSettingsDialog()
+{
+    if (KConfigDialog::showDialog("settings"))
+        return;
+
+    KConfigDialog* settingsDialog = new KConfigDialog(this, "settings", AppSettings::self());
+    settingsDialog->setFaceType(KPageDialog::List);
+
+    GeneralSettings* generalSettings = new GeneralSettings(settingsDialog);
+    settingsDialog->addPage(generalSettings,
+                            i18nc("@title Preferences page name", "General"),
+                            "system-run");
+
+    settingsDialog->show();
+}
+
 void MainWindow::activateMenuBar()
 {
     const QList<QAction*> menuActions = menuBar()->actions();
@@ -565,6 +585,7 @@ bool MainWindow::focusNextPrevChild(bool)
     // Kpart is another different story
     return false;
 }
+
 
 #include "MainWindow.moc"
 

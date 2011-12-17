@@ -116,6 +116,8 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
     )
 
+    kde4_add_kcfg_files(konsoleprivate_SRCS settings/AppSettings.kcfgc)
+
     set(konsole_LIBS
         ${KDE4_KPTY_LIBRARY}
         ${KDE4_KIO_LIBS}
@@ -144,6 +146,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                   KeyBindingEditor.ui
                   ManageProfilesDialog.ui
                   RenameTabsDialog.ui
+                  settings/GeneralSettings.ui
                  )
 
     kde4_add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
@@ -154,6 +157,8 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         Application.cpp
         MainWindow.cpp
         main.cpp
+        AppSettings.cpp
+        settings/GeneralSettings.cpp
     )
 
     kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")

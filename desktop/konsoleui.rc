@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsole" version="7">
+<kpartgui name="konsole" version="8">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
@@ -40,6 +40,7 @@
             <Separator/>
             <Action name="configure-notifications"/>
             <Action name="configure-shortcuts"/>
+            <Action name="configure-settings"/>
         </Menu>
         <Menu name="help"><text>Help</text>
         </Menu>

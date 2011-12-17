@@ -1,0 +1,8 @@
+File=konsole.kcfg
+NameSpace=Konsole
+ClassName=AppSettings
+Singleton=true
+MemberVariables=private
+ItemAccessors=true
+Mutators=true
+GlobalEnums=true
