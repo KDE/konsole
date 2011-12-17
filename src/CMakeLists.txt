@@ -147,6 +147,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                   ManageProfilesDialog.ui
                   RenameTabsDialog.ui
                   settings/GeneralSettings.ui
+                  settings/TabBarSettings.ui
                  )
 
     kde4_add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
@@ -159,6 +160,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         main.cpp
         AppSettings.cpp
         settings/GeneralSettings.cpp
+        settings/TabBarSettings.cpp
     )
 
     kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")

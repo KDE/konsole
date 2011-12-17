@@ -57,6 +57,7 @@
 #include "SessionManager.h"
 #include "AppSettings.h"
 #include "settings/GeneralSettings.h"
+#include "settings/TabBarSettings.h"
 
 using namespace Konsole;
 
@@ -512,6 +513,11 @@ void MainWindow::showSettingsDialog()
     GeneralSettings* generalSettings = new GeneralSettings(settingsDialog);
     settingsDialog->addPage(generalSettings,
                             i18nc("@title Preferences page name", "General"),
+                            "system-run");
+
+    TabBarSettings* tabBarSettings = new TabBarSettings(settingsDialog);
+    settingsDialog->addPage(tabBarSettings,
+                            i18nc("@title Preferences page name", "TabBar"),
                             "system-run");
 
     settingsDialog->show();

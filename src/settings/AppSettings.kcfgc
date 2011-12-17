@@ -6,3 +6,4 @@ MemberVariables=private
 ItemAccessors=true
 Mutators=true
 GlobalEnums=true
+SetUserTexts=true

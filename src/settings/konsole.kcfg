@@ -9,4 +9,31 @@
       <default>true</default>
     </entry>
   </group>
+  <group name="TabBar">
+    <entry name="TabBarMode" type="Enum">
+      <choices>
+        <choice name="AlwaysHideTabBar" />
+        <choice name="ShowTabBarAsNeeded" />
+        <choice name="AlwaysShowTabBar" />
+      </choices>
+      <default>AlwaysShowTabBar</default>
+    </entry>
+    <entry name="TabBarPosition" type="Enum">
+      <choices>
+        <choice name="Bottom" />
+        <choice name="Top" />
+      </choices>
+      <default>Bottom</default>
+    </entry>
+    <entry name="ShowQuickButtons" type="Bool">
+      <default>false</default>
+    </entry>
+    <entry name="NewTabBehavior" type="Enum">
+      <choices>
+        <choice name="PutNewTabAtTheEnd" />
+        <choice name="PutNewTabAfterCurrentTab" />
+      </choices>
+      <default>PutNewTabAtTheEnd</default>
+    </entry>
+  </group>
 </kcfg>
