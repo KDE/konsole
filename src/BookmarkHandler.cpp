@@ -30,7 +30,6 @@
 // KDE
 #include <KShell>
 #include <KBookmarkMenu>
-#include <KDebug>
 #include <KStandardDirs>
 
 // Konsole

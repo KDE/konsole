@@ -27,7 +27,6 @@
 // KDE
 #include <KIcon>
 #include <KColorScheme>
-#include <KDebug>
 
 using namespace Konsole;
 

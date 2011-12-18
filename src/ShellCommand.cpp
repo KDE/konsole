@@ -22,7 +22,6 @@
 
 // KDE
 #include <KShell>
-#include <KDebug>
 
 using namespace Konsole;
 

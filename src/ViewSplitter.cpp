@@ -25,9 +25,6 @@
 // Qt
 #include <QtGui/QKeyEvent>
 
-// KDE
-#include <KDebug>
-
 // Konsole
 #include "ViewContainer.h"
 

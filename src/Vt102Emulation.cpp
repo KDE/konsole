@@ -47,7 +47,6 @@
 #include <QtCore/QByteRef>
 
 // KDE
-#include <KDebug>
 #include <KLocale>
 
 // Konsole

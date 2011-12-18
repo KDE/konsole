@@ -20,9 +20,6 @@
 // Own
 #include "ScreenWindow.h"
 
-// KDE
-#include <KDebug>
-
 // Konsole
 #include "Screen.h"
 

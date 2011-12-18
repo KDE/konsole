@@ -28,7 +28,6 @@
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KLocale>
-#include <KDebug>
 
 #define KONSOLE_VERSION "2.8"
 

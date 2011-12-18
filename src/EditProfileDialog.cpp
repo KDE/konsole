@@ -36,7 +36,6 @@
 
 // KDE
 #include <kcodecaction.h>
-#include <KDebug>
 #include <KFontDialog>
 #include <KIcon>
 #include <KIconDialog>

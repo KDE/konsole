@@ -27,7 +27,6 @@
 // KDE
 #include <KAction>
 #include <KActionCollection>
-#include <KDebug>
 #include <KLocale>
 #include <KWindowSystem>
 #include <KPluginFactory>
