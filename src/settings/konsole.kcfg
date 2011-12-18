@@ -5,7 +5,18 @@
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="konsolerc" />
   <group name="Window">
+    <entry name="ShowMenuBar" type="Bool">
+      <label>Show menu bar</label>
+      <default>true</default>
+    </entry>
+    <entry name="ShowTerminalSizeHint" type="Bool">
+      <label>Show hint for terminal size after resizing</label>
+      <tooltip>Show terminal size in columns and lines in the center of window after resizing</tooltip>
+      <default>true</default>
+    </entry>
     <entry name="SaveGeometryOnExit" type="Bool">
+      <label>Save window size on exit</label>
+      <tooltip>The window size will be saved upon exiting Konsole</tooltip>
       <default>true</default>
     </entry>
   </group>
