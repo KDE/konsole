@@ -28,7 +28,7 @@ DEALINGS IN THE SOFTWARE.
 
 #include <config-konsole.h>
 
-#if defined(HAVE_XKB)
+#if defined(HAVE_XKB) && !defined(AVOID_XKB)
     #include <QtGui/QX11Info>
 
 
