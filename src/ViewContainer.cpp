@@ -41,7 +41,6 @@
 #include <KColorDialog>
 #include <KColorScheme>
 #include <KColorUtils>
-#include <KDebug>
 #include <KConfigGroup>
 #include <KLocale>
 #include <KMenu>

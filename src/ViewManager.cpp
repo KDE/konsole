@@ -27,7 +27,6 @@
 #include <QtGui/QMenu>
 
 // KDE
-#include <KDebug>
 #include <KAcceleratorManager>
 #include <KGlobal>
 #include <KLocale>
