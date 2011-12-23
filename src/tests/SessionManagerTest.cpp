@@ -36,7 +36,7 @@ void SessionManagerTest::cleanup()
 {
 }
 
-QTEST_KDEMAIN_CORE( SessionManagerTest )
+QTEST_KDEMAIN_CORE(SessionManagerTest)
 
 #include "SessionManagerTest.moc"
 

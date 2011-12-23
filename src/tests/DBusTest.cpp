@@ -54,7 +54,7 @@ void DBusTest::initTestCase()
 
     // Wait for above Konsole to finish starting
 #ifdef HAVE_USLEEP
-    usleep(5*1000);
+    usleep(5 * 1000);
 #else
     sleep(5);
 #endif
@@ -169,7 +169,7 @@ void DBusTest::testSessions()
         // Compare result with name due to aliases issue
         // Better way to do this?
         QCOMPARE((QTextCodec::codecForName(arrayReply.value()))->name(),
-                (QTextCodec::codecForName(availableCodecs[i]))->name());
+                 (QTextCodec::codecForName(availableCodecs[i]))->name());
     }
 
     //****************** Test is/set flowControlEnabled

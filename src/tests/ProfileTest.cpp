@@ -35,12 +35,12 @@ void ProfileTest::testProfile()
     parent->setProperty(Profile::Name, "Parent");
     parent->setProperty(Profile::Path, "FakePath");
 
-    parent->setProperty(Profile::AntiAliasFonts,false);
-    parent->setProperty(Profile::StartInCurrentSessionDir,false);
+    parent->setProperty(Profile::AntiAliasFonts, false);
+    parent->setProperty(Profile::StartInCurrentSessionDir, false);
 
     // create a child profile
     Profile* child = new Profile(Profile::Ptr(parent));
-    child->setProperty(Profile::StartInCurrentSessionDir,true);
+    child->setProperty(Profile::StartInCurrentSessionDir, true);
 
     // check which properties are set
     QVERIFY(parent->isPropertySet(Profile::Name));
@@ -55,11 +55,11 @@ void ProfileTest::testProfile()
     QVERIFY(!child->isPropertySet(Profile::AntiAliasFonts));
     QVERIFY(!child->isPropertySet(Profile::ColorScheme));
 
-    // read non-inheritable properties 
-    QCOMPARE(parent->property<QString>(Profile::Name),QString("Parent"));
-    QCOMPARE(child->property<QVariant>(Profile::Name),QVariant());
-    QCOMPARE(parent->property<QString>(Profile::Path),QString("FakePath"));
-    QCOMPARE(child->property<QVariant>(Profile::Path),QVariant());
+    // read non-inheritable properties
+    QCOMPARE(parent->property<QString>(Profile::Name), QString("Parent"));
+    QCOMPARE(child->property<QVariant>(Profile::Name), QVariant());
+    QCOMPARE(parent->property<QString>(Profile::Path), QString("FakePath"));
+    QCOMPARE(child->property<QVariant>(Profile::Path), QVariant());
 
     // read inheritable properties
     QVERIFY(parent->property<bool>(Profile::AntiAliasFonts) == false);
@@ -74,27 +74,27 @@ void ProfileTest::testClone()
 {
     // create source profile and parent
     Profile::Ptr parent(new Profile);
-    parent->setProperty(Profile::Command,"ps");
-    parent->setProperty(Profile::ColorScheme,"BlackOnWhite");
+    parent->setProperty(Profile::Command, "ps");
+    parent->setProperty(Profile::ColorScheme, "BlackOnWhite");
 
     Profile::Ptr source(new Profile(parent));
-    source->setProperty(Profile::AntiAliasFonts,false);
-    source->setProperty(Profile::HistorySize,4567);
+    source->setProperty(Profile::AntiAliasFonts, false);
+    source->setProperty(Profile::HistorySize, 4567);
 
-    source->setProperty(Profile::Name,"SourceProfile");
-    source->setProperty(Profile::Path,"SourcePath");
+    source->setProperty(Profile::Name, "SourceProfile");
+    source->setProperty(Profile::Path, "SourcePath");
 
     // create target to clone source and parent
     Profile::Ptr targetParent(new Profile);
     // same value as source parent
-    targetParent->setProperty(Profile::Command,"ps"); 
+    targetParent->setProperty(Profile::Command, "ps");
     // different value from source parent
-    targetParent->setProperty(Profile::ColorScheme,"BlackOnGrey");
+    targetParent->setProperty(Profile::ColorScheme, "BlackOnGrey");
     Profile::Ptr target(new Profile(parent));
 
     // clone source profile, setting only properties that differ
     // between the source and target
-    target->clone(source,true);
+    target->clone(source, true);
 
     // check that properties from source have been cloned into target
     QCOMPARE(source->property<bool>(Profile::AntiAliasFonts),
@@ -120,45 +120,43 @@ void ProfileTest::testProfileGroup()
 {
     // create three new profiles
     Profile::Ptr profile[3];
-    for (int i=0;i<3;i++)
-    {
+    for (int i = 0; i < 3; i++) {
         profile[i] = new Profile;
         QVERIFY(!profile[i]->asGroup());
     }
 
     // set properties with different values
-    profile[0]->setProperty(Profile::UseCustomCursorColor,true);
-    profile[1]->setProperty(Profile::UseCustomCursorColor,false);
+    profile[0]->setProperty(Profile::UseCustomCursorColor, true);
+    profile[1]->setProperty(Profile::UseCustomCursorColor, false);
 
     // set properties with same values
-    for (int i=0;i<3;i++)
-        profile[i]->setProperty(Profile::HistorySize,1234);
+    for (int i = 0; i < 3; i++)
+        profile[i]->setProperty(Profile::HistorySize, 1234);
 
     // create a group profile
     ProfileGroup::Ptr group = ProfileGroup::Ptr(new ProfileGroup);
     QVERIFY(group->asGroup());
-    for (int i=0;i<3;i++)
-    {
+    for (int i = 0; i < 3; i++) {
         group->addProfile(profile[i]);
         QVERIFY(group->profiles().contains(profile[i]));
     }
     group->updateValues();
 
     // read and check properties from the group
-    QCOMPARE(group->property<int>(Profile::HistorySize),1234);
-    QCOMPARE(group->property<QVariant>(Profile::UseCustomCursorColor),QVariant());
+    QCOMPARE(group->property<int>(Profile::HistorySize), 1234);
+    QCOMPARE(group->property<QVariant>(Profile::UseCustomCursorColor), QVariant());
 
     // set and test shareable properties in the group
-    group->setProperty(Profile::Command,"ssh");
-    group->setProperty(Profile::AntiAliasFonts,false);
+    group->setProperty(Profile::Command, "ssh");
+    group->setProperty(Profile::AntiAliasFonts, false);
 
-    QCOMPARE(profile[0]->property<QString>(Profile::Command),QString("ssh"));
+    QCOMPARE(profile[0]->property<QString>(Profile::Command), QString("ssh"));
     QVERIFY(profile[1]->property<bool>(Profile::AntiAliasFonts) == false);
 
     // set and test non-sharable properties in the group
     // (should have no effect)
-    group->setProperty(Profile::Name,"NewName");
-    group->setProperty(Profile::Path,"NewPath");
+    group->setProperty(Profile::Name, "NewName");
+    group->setProperty(Profile::Path, "NewPath");
     QVERIFY(profile[1]->property<QString>(Profile::Name) != "NewName");
     QVERIFY(profile[2]->property<QString>(Profile::Path) != "NewPath");
 
@@ -168,11 +166,11 @@ void ProfileTest::testProfileGroup()
     group->updateValues();
 
     // check that profile is no longer affected by group
-    group->setProperty(Profile::Command,"fish");
+    group->setProperty(Profile::Command, "fish");
     QVERIFY(profile[0]->property<QString>(Profile::Command) != "fish");
 }
 
-QTEST_KDEMAIN_CORE( ProfileTest )
+QTEST_KDEMAIN_CORE(ProfileTest)
 
 #include "ProfileTest.moc"
 

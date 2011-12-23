@@ -33,25 +33,25 @@ namespace Konsole
 
 class PartTest : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 private slots:
-	void testShortcutOverride();
-	void testFd();
+    void testShortcutOverride();
+    void testFd();
 
 // marked as protected so they are not treated as test cases
 protected slots:
-	void overrideShortcut(QKeyEvent* event, bool& override);
-	void shortcutTriggered();
+    void overrideShortcut(QKeyEvent* event, bool& override);
+    void shortcutTriggered();
 
 private:
-	KParts::Part* createPart();
+    KParts::Part* createPart();
 
-	// variables for testShortcutOverride() 
-	bool _shortcutTriggered;
-	bool _overrideCalled;
-	bool _override;
-	QEventLoop* _shortcutEventLoop;
+    // variables for testShortcutOverride()
+    bool _shortcutTriggered;
+    bool _overrideCalled;
+    bool _override;
+    QEventLoop* _shortcutEventLoop;
 };
 
 }
