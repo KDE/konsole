@@ -25,7 +25,7 @@
 
 namespace Ui
 {
-    class RenameTabsDialog;
+class RenameTabsDialog;
 }
 
 namespace Konsole
@@ -33,7 +33,7 @@ namespace Konsole
 
 class RenameTabsDialog : public KDialog
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     RenameTabsDialog(QWidget* parent = 0);

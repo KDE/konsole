@@ -27,10 +27,10 @@
 using namespace Konsole;
 
 RenameTabsDialog::RenameTabsDialog(QWidget* parent)
-: KDialog(parent)
+    : KDialog(parent)
 {
     setCaption(i18n("Rename Tab"));
-    setButtons( KDialog::Ok | KDialog::Cancel );
+    setButtons(KDialog::Ok | KDialog::Cancel);
 
     setWindowModality(Qt::WindowModal);
 
@@ -45,13 +45,13 @@ RenameTabsDialog::RenameTabsDialog(QWidget* parent)
     localTabTitleAction->setContext(Session::LocalTabTitle);
     _ui->tabTitleEditButton->setMenu(localTabTitleAction->menu());
     connect(localTabTitleAction, SIGNAL(dynamicElementSelected(QString)),
-             this, SLOT(insertTabTitleText(QString)));
+            this, SLOT(insertTabTitleText(QString)));
 
     TabTitleFormatAction* remoteTabTitleAction = new TabTitleFormatAction(this);
     remoteTabTitleAction->setContext(Session::RemoteTabTitle);
     _ui->remoteTabTitleEditButton->setMenu(remoteTabTitleAction->menu());
     connect(remoteTabTitleAction, SIGNAL(dynamicElementSelected(QString)),
-             this, SLOT(insertRemoteTabTitleText(QString)));
+            this, SLOT(insertRemoteTabTitleText(QString)));
 
 }
 
