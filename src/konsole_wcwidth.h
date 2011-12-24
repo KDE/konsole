@@ -12,6 +12,6 @@
 int konsole_wcwidth(quint16 ucs);
 int konsole_wcwidth_cjk(quint16 ucs);
 
-int string_width( const QString& text );
+int string_width(const QString& text);
 
 #endif
