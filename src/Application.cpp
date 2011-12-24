@@ -57,7 +57,7 @@ void Application::init()
     _backgroundInstance = 0;
 
     // check for compositing functionality
-    TerminalDisplay::setTransparencyEnabled( KWindowSystem::compositingActive() );
+    TerminalDisplay::setTransparencyEnabled(KWindowSystem::compositingActive());
 
 #if defined(Q_WS_MAC) && QT_VERSION >= 0x040600
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
@@ -79,16 +79,16 @@ Application* Application::self()
 MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
-    window->setSessionList( new ProfileList(true,window) );
+    window->setSessionList(new ProfileList(true, window));
 
-    connect( window , SIGNAL(newSessionRequest(Profile::Ptr,QString,ViewManager*)),
-            this , SLOT(createSession(Profile::Ptr,QString,ViewManager*)));
-    connect( window , SIGNAL(newSSHSessionRequest(Profile::Ptr,KUrl,ViewManager*)),
-            this , SLOT(createSSHSession(Profile::Ptr,KUrl,ViewManager*)));
-    connect( window , SIGNAL(newWindowRequest(Profile::Ptr,QString)),
-            this , SLOT(createWindow(Profile::Ptr,QString)) );
-    connect( window->viewManager() , SIGNAL(viewDetached(Session*)) ,
-            this , SLOT(detachView(Session*)) );
+    connect(window , SIGNAL(newSessionRequest(Profile::Ptr, QString, ViewManager*)),
+            this , SLOT(createSession(Profile::Ptr, QString, ViewManager*)));
+    connect(window , SIGNAL(newSSHSessionRequest(Profile::Ptr, KUrl, ViewManager*)),
+            this , SLOT(createSSHSession(Profile::Ptr, KUrl, ViewManager*)));
+    connect(window , SIGNAL(newWindowRequest(Profile::Ptr, QString)),
+            this , SLOT(createWindow(Profile::Ptr, QString)));
+    connect(window->viewManager() , SIGNAL(viewDetached(Session*)) ,
+            this , SLOT(detachView(Session*)));
 
     return window;
 }
@@ -98,8 +98,7 @@ void Application::listAvailableProfiles()
     QList<QString> paths = SessionManager::instance()->availableProfilePaths();
     QListIterator<QString> iter(paths);
 
-    while ( iter.hasNext() )
-    {
+    while (iter.hasNext()) {
         QFileInfo info(iter.next());
         std::cout << info.completeBaseName().toLocal8Bit().data() << std::endl;
     }
@@ -121,40 +120,37 @@ int Application::newInstance()
     static bool firstInstance = true;
 
     // handle session management
-    if ((args->count() != 0) || !firstInstance || !isSessionRestored())
-    {
+    if ((args->count() != 0) || !firstInstance || !isSessionRestored()) {
         // check for arguments to print help or other information to the terminal,
         // quit if such an argument was found
-        if ( processHelpArgs(args) )
+        if (processHelpArgs(args))
             return 0;
 
         // create a new window or use an existing one
         MainWindow* window = processWindowArgs(args);
 
         // select profile to use
-        processProfileSelectArgs(args,window);
+        processProfileSelectArgs(args, window);
 
         // process various command-line options which cause a property of the
         // default profile to be changed
-        processProfileChangeArgs(args,window);
+        processProfileChangeArgs(args, window);
 
-        if ( !args->isSet("tabs-from-file") )
-        {
+        if (!args->isSet("tabs-from-file")) {
             // create new session
             Session* session = createSession(window->defaultProfile(),
                                              QString(),
                                              window->viewManager());
-            if ( !args->isSet("close") ) {
+            if (!args->isSet("close")) {
                 session->setAutoClose(false);
             }
 
             // run a custom command, don't store it in the default profile.
             // Otherwise it will become the default for new tabs.
-            if ( args->isSet("e") )
-            {
+            if (args->isSet("e")) {
                 QStringList arguments;
                 arguments << args->getOption("e");
-                for ( int i = 0 ; i < args->count() ; i++ )
+                for (int i = 0 ; i < args->count() ; i++)
                     arguments << args->arg(i);
 
                 QString exec = args->getOption("e");
@@ -164,19 +160,16 @@ int Application::newInstance()
                 session->setProgram(exec);
                 session->setArguments(arguments);
             }
-        }
-        else
-        {
+        } else {
             // create new session(s) as described in file
             processTabsFromFileArgs(args, window);
         }
 
         // if the background-mode argument is supplied, start the background session
         // ( or bring to the front if it already exists )
-        if ( args->isSet("background-mode") )
+        if (args->isSet("background-mode"))
             startBackgroundMode(window);
-        else
-        {
+        else {
             // Qt constrains top-level windows which have not been manually resized
             // (via QWidget::resize()) to a maximum of 2/3rds of the screen size.
             //
@@ -216,7 +209,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window
     // Open tab configuration file
     const QString tabsFileName(args->getOption("tabs-from-file"));
     QFile tabsFile(tabsFileName);
-    if(!tabsFile.open(QFile::ReadOnly)) {
+    if (!tabsFile.open(QFile::ReadOnly)) {
         kWarning() << "ERROR: Cannot open tabs file "
                    << tabsFileName.toLocal8Bit().data();
         quit();
@@ -250,7 +243,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window
     if (sessions < 1) {
         kWarning() << "No valid lines found in "
                    << tabsFileName.toLocal8Bit().data();
-       quit();
+        quit();
     }
 }
 
@@ -273,10 +266,10 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
     newProfile->setHidden(true);
     newProfile->setProperty(Profile::Command,   command);
     newProfile->setProperty(Profile::Arguments, command.split(' '));
-    if(args->isSet("workdir")) {
-        newProfile->setProperty(Profile::Directory,args->getOption("workdir"));
+    if (args->isSet("workdir")) {
+        newProfile->setProperty(Profile::Directory, args->getOption("workdir"));
     }
-    if(!newProfile->isEmpty()) {
+    if (!newProfile->isEmpty()) {
         window->setDefaultProfile(newProfile);
     }
 
@@ -285,7 +278,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
     session->setTabTitleFormat(Session::LocalTabTitle, title);
     session->setTabTitleFormat(Session::RemoteTabTitle, title);
     session->setTitle(Session::DisplayedTitleRole, title);   // Ensure that new title is displayed
-    if ( !args->isSet("close") ) {
+    if (!args->isSet("close")) {
         session->setAutoClose(false);
     }
     if (!window->testAttribute(Qt::WA_Resized)) {
@@ -303,52 +296,45 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
 MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
 {
     MainWindow* window = 0;
-    if ( args->isSet("new-tab") )
-    {
+    if (args->isSet("new-tab")) {
         QListIterator<QWidget*> iter(topLevelWidgets());
         iter.toBack();
-        while ( iter.hasPrevious() )
-        {
+        while (iter.hasPrevious()) {
             window = qobject_cast<MainWindow*>(iter.previous());
-            if ( window != 0 )
+            if (window != 0)
                 break;
         }
     }
 
-    if ( window == 0 )
-    {
+    if (window == 0) {
         window = newMainWindow();
     }
     return window;
 }
 
-void Application::processProfileSelectArgs(KCmdLineArgs* args,MainWindow* window)
+void Application::processProfileSelectArgs(KCmdLineArgs* args, MainWindow* window)
 {
-    if ( args->isSet("profile") )
-    {
+    if (args->isSet("profile")) {
         Profile::Ptr profile = SessionManager::instance()->loadProfile(args->getOption("profile"));
         if (!profile)
             profile = SessionManager::instance()->defaultProfile();
 
-         window->setDefaultProfile(profile);
+        window->setDefaultProfile(profile);
     }
 }
 
 bool Application::processHelpArgs(KCmdLineArgs* args)
 {
-    if ( args->isSet("list-profiles") )
-    {
+    if (args->isSet("list-profiles")) {
         listAvailableProfiles();
         return true;
-    }
-    else if ( args->isSet("list-profile-properties") )
-    {
+    } else if (args->isSet("list-profile-properties")) {
         listProfilePropertyInfo();
         return true;
     }
     return false;
 }
-void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window)
+void Application::processProfileChangeArgs(KCmdLineArgs* args, MainWindow* window)
 {
     Profile::Ptr defaultProfile = window->defaultProfile();
     if (!defaultProfile)
@@ -357,61 +343,53 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
     newProfile->setHidden(true);
 
     // change the initial working directory
-    if( args->isSet("workdir") )
-    {
-        newProfile->setProperty(Profile::Directory,args->getOption("workdir"));
+    if (args->isSet("workdir")) {
+        newProfile->setProperty(Profile::Directory, args->getOption("workdir"));
     }
 
     // temporary changes to profile options specified on the command line
-    foreach( const QString& value , args->getOptionList("p") )
-    {
+    foreach(const QString & value , args->getOptionList("p")) {
         ProfileCommandParser parser;
 
-        QHashIterator<Profile::Property,QVariant> iter(parser.parse(value));
-        while ( iter.hasNext() )
-        {
+        QHashIterator<Profile::Property, QVariant> iter(parser.parse(value));
+        while (iter.hasNext()) {
             iter.next();
-            newProfile->setProperty(iter.key(),iter.value());
+            newProfile->setProperty(iter.key(), iter.value());
         }
     }
 
-    if (!newProfile->isEmpty())
-    {
+    if (!newProfile->isEmpty()) {
         window->setDefaultProfile(newProfile);
     }
 }
 
 void Application::startBackgroundMode(MainWindow* window)
 {
-    if ( _backgroundInstance )
-    {
+    if (_backgroundInstance) {
         return;
     }
 
     KAction* action = new KAction(window);
-    action->setObjectName( QLatin1String("Konsole Background Mode" ));
+    action->setObjectName(QLatin1String("Konsole Background Mode"));
     //TODO - Customizable key sequence for this
-    action->setGlobalShortcut( KShortcut(QKeySequence(Qt::Key_F12)) );
+    action->setGlobalShortcut(KShortcut(QKeySequence(Qt::Key_F12)));
 
     _backgroundInstance = window;
 
-    connect( action , SIGNAL(triggered()) , this , SLOT(toggleBackgroundInstance()) );
+    connect(action , SIGNAL(triggered()) , this , SLOT(toggleBackgroundInstance()));
 }
 
 void Application::toggleBackgroundInstance()
 {
-    Q_ASSERT( _backgroundInstance );
+    Q_ASSERT(_backgroundInstance);
 
-    if ( !_backgroundInstance->isVisible() )
-    {
+    if (!_backgroundInstance->isVisible()) {
         _backgroundInstance->show();
         // ensure that the active terminal display has the focus.
         // without this, an odd problem occurred where the focus widget would change
         // each time the background instance was shown
         _backgroundInstance->viewManager()->activeView()->setFocus();
-    }
-    else
-    {
+    } else {
         _backgroundInstance->hide();
     }
 }
@@ -433,7 +411,7 @@ void Application::createWindow(Profile::Ptr profile , const QString& directory)
 {
     MainWindow* window = newMainWindow();
     window->setDefaultProfile(profile);
-    createSession(profile,directory,window->viewManager());
+    createSession(profile, directory, window->viewManager());
     window->show();
 }
 
@@ -464,11 +442,11 @@ Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url, Vi
 
     session->sendText("ssh ");
 
-    if ( url.port() > -1 )
-        session->sendText("-p " + QString::number(url.port()) + ' ' );
-    if ( url.hasUser() )
+    if (url.port() > -1)
+        session->sendText("-p " + QString::number(url.port()) + ' ');
+    if (url.hasUser())
         session->sendText(url.user() + '@');
-    if ( url.hasHost() )
+    if (url.hasHost())
         session->sendText(url.host() + '\r');
 
     // create view before starting the session process so that the session doesn't suffer

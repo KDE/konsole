@@ -49,7 +49,7 @@ class Session;
  */
 class Application : public KUniqueApplication
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /** Constructs a new Konsole application. */
@@ -85,8 +85,8 @@ private:
     void startBackgroundMode(MainWindow* window);
     bool processHelpArgs(KCmdLineArgs* args);
     MainWindow* processWindowArgs(KCmdLineArgs* args);
-    void processProfileSelectArgs(KCmdLineArgs* args,MainWindow* window);
-    void processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window);
+    void processProfileSelectArgs(KCmdLineArgs* args, MainWindow* window);
+    void processProfileChangeArgs(KCmdLineArgs* args, MainWindow* window);
     void processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window);
     void createTabFromArgs(KCmdLineArgs* args, MainWindow* window, const QHash<QString, QString>&);
 
