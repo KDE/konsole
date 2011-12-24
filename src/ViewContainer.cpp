@@ -64,9 +64,8 @@ ViewContainer::ViewContainer(NavigationPosition position , QObject* parent)
 
 ViewContainer::~ViewContainer()
 {
-    foreach( QWidget* view , _views ) 
-    {
-        disconnect(view,SIGNAL(destroyed(QObject*)),this,SLOT(viewDestroyed(QObject*)));
+    foreach(QWidget * view , _views) {
+        disconnect(view, SIGNAL(destroyed(QObject*)), this, SLOT(viewDestroyed(QObject*)));
     }
 
     if (_searchBar) {
@@ -75,33 +74,36 @@ ViewContainer::~ViewContainer()
 
     emit destroyed(this);
 }
-void ViewContainer::moveViewWidget( int , int ) {}
+void ViewContainer::moveViewWidget(int , int) {}
 void ViewContainer::setFeatures(Features features)
-{ _features = features; }
-ViewContainer::Features ViewContainer::features() const
-{ return _features; }
-void ViewContainer::moveActiveView( MoveDirection direction )
 {
-    const int currentIndex = _views.indexOf( activeView() ) ;
-    int newIndex = -1; 
+    _features = features;
+}
+ViewContainer::Features ViewContainer::features() const
+{
+    return _features;
+}
+void ViewContainer::moveActiveView(MoveDirection direction)
+{
+    const int currentIndex = _views.indexOf(activeView()) ;
+    int newIndex = -1;
 
-    switch ( direction )
-    {
-        case MoveViewLeft:
-            newIndex = qMax( currentIndex-1 , 0 );
-            break;
-        case MoveViewRight:
-            newIndex = qMin( currentIndex+1 , _views.count() -1 );
-            break;
+    switch (direction) {
+    case MoveViewLeft:
+        newIndex = qMax(currentIndex - 1 , 0);
+        break;
+    case MoveViewRight:
+        newIndex = qMin(currentIndex + 1 , _views.count() - 1);
+        break;
     }
 
-    Q_ASSERT( newIndex != -1 );
+    Q_ASSERT(newIndex != -1);
 
-    moveViewWidget( currentIndex , newIndex );   
+    moveViewWidget(currentIndex , newIndex);
 
-    _views.swap(currentIndex,newIndex);
+    _views.swap(currentIndex, newIndex);
 
-    setActiveView( _views[newIndex] );
+    setActiveView(_views[newIndex]);
 }
 
 void ViewContainer::setNavigationDisplayMode(NavigationDisplayMode mode)
@@ -116,7 +118,7 @@ ViewContainer::NavigationPosition ViewContainer::navigationPosition() const
 void ViewContainer::setNavigationPosition(NavigationPosition position)
 {
     // assert that this position is supported
-    Q_ASSERT( supportedNavigationPositions().contains(position) );
+    Q_ASSERT(supportedNavigationPositions().contains(position));
 
     _navigationPosition = position;
 
@@ -141,15 +143,15 @@ void ViewContainer::addView(QWidget* view , ViewProperties* item, int index)
     if (index == -1)
         _views.append(view);
     else
-        _views.insert(index,view);
+        _views.insert(index, view);
 
     _navigation[view] = item;
 
-    connect( view , SIGNAL(destroyed(QObject*)) , this , SLOT(viewDestroyed(QObject*)) );
+    connect(view , SIGNAL(destroyed(QObject*)) , this , SLOT(viewDestroyed(QObject*)));
 
-    addViewWidget(view,index);
+    addViewWidget(view, index);
 
-    emit viewAdded(view,item);
+    emit viewAdded(view, item);
 }
 void ViewContainer::viewDestroyed(QObject* object)
 {
@@ -158,13 +160,13 @@ void ViewContainer::viewDestroyed(QObject* object)
     _views.removeAll(widget);
     _navigation.remove(widget);
 
-    // FIXME This can result in ViewContainerSubClass::removeViewWidget() being 
+    // FIXME This can result in ViewContainerSubClass::removeViewWidget() being
     // called after the widget's parent has been deleted or partially deleted
     // in the ViewContainerSubClass instance's destructor.
     //
-    // Currently deleteLater() is used to remove child widgets in the subclass 
+    // Currently deleteLater() is used to remove child widgets in the subclass
     // constructors to get around the problem, but this is a hack and needs
-    // to be fixed. 
+    // to be fixed.
     removeViewWidget(widget);
 
     emit viewRemoved(widget);
@@ -177,7 +179,7 @@ void ViewContainer::removeView(QWidget* view)
     _views.removeAll(view);
     _navigation.remove(view);
 
-    disconnect( view , SIGNAL(destroyed(QObject*)) , this , SLOT(viewDestroyed(QObject*)) );
+    disconnect(view , SIGNAL(destroyed(QObject*)) , this , SLOT(viewDestroyed(QObject*)));
 
     removeViewWidget(view);
 
@@ -214,20 +216,20 @@ void ViewContainer::activateNextView()
 
     int index = _views.indexOf(active);
 
-    if ( index == -1 )
+    if (index == -1)
         return;
 
-    if ( index == _views.count() - 1 )
+    if (index == _views.count() - 1)
         index = 0;
     else
         index++;
 
-    setActiveView( _views.at(index) );
+    setActiveView(_views.at(index));
 }
 
 void ViewContainer::activateLastView()
 {
-    setActiveView(_views.at(_views.count()-1));
+    setActiveView(_views.at(_views.count() - 1));
 }
 
 void ViewContainer::activatePreviousView()
@@ -236,22 +238,22 @@ void ViewContainer::activatePreviousView()
 
     int index = _views.indexOf(active);
 
-    if ( index == -1 ) 
+    if (index == -1)
         return;
 
-    if ( index == 0 )
+    if (index == 0)
         index = _views.count() - 1;
     else
         index--;
 
-    setActiveView( _views.at(index) );
+    setActiveView(_views.at(index));
 }
 
-ViewProperties* ViewContainer::viewProperties( QWidget* widget )
+ViewProperties* ViewContainer::viewProperties(QWidget* widget)
 {
-    Q_ASSERT( _navigation.contains(widget) );
+    Q_ASSERT(_navigation.contains(widget));
 
-    return _navigation[widget];    
+    return _navigation[widget];
 }
 
 QList<QWidget*> ViewContainer::widgetsForItem(ViewProperties* item) const
@@ -259,7 +261,7 @@ QList<QWidget*> ViewContainer::widgetsForItem(ViewProperties* item) const
     return _navigation.keys(item);
 }
 
-ViewContainerTabBar::ViewContainerTabBar(QWidget* parent,TabbedViewContainer* container)
+ViewContainerTabBar::ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container)
     : KTabBar(parent)
     , _container(container)
     , _dropIndicator(0)
@@ -278,27 +280,24 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
     const int ARROW_SIZE = 32;
     bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
 
-    if (!_dropIndicator || _drawIndicatorDisabled != drawDisabled)
-    {
-        if (!_dropIndicator)
-        {
+    if (!_dropIndicator || _drawIndicatorDisabled != drawDisabled) {
+        if (!_dropIndicator) {
             _dropIndicator = new QLabel(parentWidget());
-            _dropIndicator->resize(ARROW_SIZE,ARROW_SIZE);
+            _dropIndicator->resize(ARROW_SIZE, ARROW_SIZE);
         }
 
         QIcon::Mode drawMode = drawDisabled ? QIcon::Disabled : QIcon::Normal;
         const QString iconName = north ? "arrow-up" : "arrow-down";
-        _dropIndicator->setPixmap(KIcon(iconName).pixmap(ARROW_SIZE,ARROW_SIZE,drawMode));
+        _dropIndicator->setPixmap(KIcon(iconName).pixmap(ARROW_SIZE, ARROW_SIZE, drawMode));
         _drawIndicatorDisabled = drawDisabled;
     }
 
-    if (index < 0)
-    {
+    if (index < 0) {
         _dropIndicator->hide();
         return;
     }
 
-    const QRect rect = tabRect(index < count() ? index : index-1);
+    const QRect rect = tabRect(index < count() ? index : index - 1);
 
     QPoint pos;
     if (index < count())
@@ -309,11 +308,11 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
     if (north)
         pos.ry() += ARROW_SIZE;
     else
-        pos.ry() -= ARROW_SIZE; 
+        pos.ry() -= ARROW_SIZE;
 
-    pos.rx() -= ARROW_SIZE/2; 
+    pos.rx() -= ARROW_SIZE / 2;
 
-    _dropIndicator->move(mapTo(parentWidget(),pos));
+    _dropIndicator->move(mapTo(parentWidget(), pos));
     _dropIndicator->show();
 
 }
@@ -324,19 +323,18 @@ void ViewContainerTabBar::dragLeaveEvent(QDragLeaveEvent*)
 void ViewContainerTabBar::dragEnterEvent(QDragEnterEvent* event)
 {
     if (event->mimeData()->hasFormat(ViewProperties::mimeType()) &&
-        event->source() != 0)
-        event->acceptProposedAction();    
+            event->source() != 0)
+        event->acceptProposedAction();
 }
 void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent* event)
 {
     if (event->mimeData()->hasFormat(ViewProperties::mimeType())
-        && event->source() != 0)
-    {
+            && event->source() != 0) {
         int index = dropIndex(event->pos());
         if (index == -1)
             index = count();
 
-        setDropIndicator(index,proposedDropIsSameTab(event));
+        setDropIndicator(index, proposedDropIsSameTab(event));
 
         event->acceptProposedAction();
     }
@@ -347,9 +345,9 @@ int ViewContainerTabBar::dropIndex(const QPoint& pos) const
     if (tab < 0)
         return tab;
 
-    // pick the closest tab boundary 
+    // pick the closest tab boundary
     QRect rect = tabRect(tab);
-    if ( (pos.x()-rect.left()) > (rect.width()/2) )
+    if ((pos.x() - rect.left()) > (rect.width() / 2))
         tab++;
 
     if (tab == count())
@@ -368,15 +366,14 @@ bool ViewContainerTabBar::proposedDropIsSameTab(const QDropEvent* event) const
 
     const QList<QWidget*> viewList = _container->views();
     int sourceIndex = -1;
-    for (int i=0;i<count();i++)
-    {
+    for (int i = 0; i < count(); i++) {
         int idAtIndex = _container->viewProperties(viewList[i])->identifier();
         if (idAtIndex == droppedId)
             sourceIndex = i;
     }
 
-    bool sourceAndDropAreLast = sourceIndex == count()-1 && index == -1;
-    if (sourceIndex == index || sourceIndex == index-1 || sourceAndDropAreLast)
+    bool sourceAndDropAreLast = sourceIndex == count() - 1 && index == -1;
+    if (sourceIndex == index || sourceIndex == index - 1 || sourceAndDropAreLast)
         return true;
     else
         return false;
@@ -385,9 +382,8 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
 {
     setDropIndicator(-1);
 
-    if (    !event->mimeData()->hasFormat(ViewProperties::mimeType())
-        ||  proposedDropIsSameTab(event) )
-    {
+    if (!event->mimeData()->hasFormat(ViewProperties::mimeType())
+            ||  proposedDropIsSameTab(event)) {
         event->ignore();
         return;
     }
@@ -395,7 +391,7 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
     int index = dropIndex(event->pos());
     int droppedId = ViewProperties::decodeMimeData(event->mimeData());
     bool result = false;
-    emit _container->moveViewRequest(index,droppedId,result);
+    emit _container->moveViewRequest(index, droppedId, result);
 
     if (result)
         event->accept();
@@ -403,65 +399,65 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
         event->ignore();
 }
 
-QPixmap ViewContainerTabBar::dragDropPixmap(int tab) 
+QPixmap ViewContainerTabBar::dragDropPixmap(int tab)
 {
     Q_ASSERT(tab >= 0 && tab < count());
 
     // TODO - grabWidget() works except that it includes part
-    // of the tab bar outside the tab itself if the tab has 
+    // of the tab bar outside the tab itself if the tab has
     // curved corners
     const QRect rect = tabRect(tab);
     const int borderWidth = 1;
 
-    QPixmap tabPixmap(rect.width()+borderWidth,
-                      rect.height()+borderWidth);
+    QPixmap tabPixmap(rect.width() + borderWidth,
+                      rect.height() + borderWidth);
     QPainter painter(&tabPixmap);
-    painter.drawPixmap(0,0,QPixmap::grabWidget(this,rect));
+    painter.drawPixmap(0, 0, QPixmap::grabWidget(this, rect));
     QPen borderPen;
     borderPen.setBrush(palette().dark());
     borderPen.setWidth(borderWidth);
     painter.setPen(borderPen);
-    painter.drawRect(0,0,rect.width(),rect.height());
+    painter.drawRect(0, 0, rect.width(), rect.height());
     painter.end();
 
     return tabPixmap;
 }
-TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* parent) 
-: ViewContainer(position,parent)
-   , _contextMenuTabIndex(0)
+TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* parent)
+    : ViewContainer(position, parent)
+    , _contextMenuTabIndex(0)
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
 
     // The tab bar
-    _tabBar = new ViewContainerTabBar(_containerWidget,this);
+    _tabBar = new ViewContainerTabBar(_containerWidget, this);
     _tabBar->setDrawBase(true);
     _tabBar->setDocumentMode(true);
     _tabBar->setFocusPolicy(Qt::NoFocus);
     _tabBar->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
 
-    connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
-    connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
-    connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
-    connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
-    connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );
-    connect( _tabBar, SIGNAL(contextMenu(int,QPoint)), this,
-            SLOT(openTabContextMenu(int,QPoint)) );
+    connect(_tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)));
+    connect(_tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)));
+    connect(_tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()));
+    connect(_tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)));
+    connect(_tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)));
+    connect(_tabBar, SIGNAL(contextMenu(int, QPoint)), this,
+            SLOT(openTabContextMenu(int, QPoint)));
 
     // The context menu of tab bar
     _contextPopupMenu = new KMenu(_tabBar);
 
     _contextPopupMenu->addAction(KIcon("tab-detach"),
-        i18nc("@action:inmenu", "&Detach Tab"), this,
-        SLOT(tabContextMenuDetachTab()));
+                                 i18nc("@action:inmenu", "&Detach Tab"), this,
+                                 SLOT(tabContextMenuDetachTab()));
 
     _contextPopupMenu->addAction(KIcon(),
-        i18nc("@action:inmenu", "&Rename Tab..."), this,
-        SLOT(tabContextMenuRenameTab()));
+                                 i18nc("@action:inmenu", "&Rename Tab..."), this,
+                                 SLOT(tabContextMenuRenameTab()));
 
     _contextPopupMenu->addAction(KIcon("tab-close"),
-        i18nc("@action:inmenu", "&Close Tab"), this,
-        SLOT(tabContextMenuCloseTab()));
+                                 i18nc("@action:inmenu", "&Close Tab"), this,
+                                 SLOT(tabContextMenuCloseTab()));
 
     // The 'new tab' and 'close tab' button
     _newTabButton = new QToolButton(_containerWidget);
@@ -477,8 +473,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _newTabButton->setHidden(true);
     _closeTabButton->setHidden(true);
 
-    connect( _newTabButton , SIGNAL(clicked()) , this , SIGNAL(newViewRequest()) );
-    connect( _closeTabButton , SIGNAL(clicked()) , this , SLOT(closeCurrentTab()) );
+    connect(_newTabButton , SIGNAL(clicked()) , this , SIGNAL(newViewRequest()));
+    connect(_closeTabButton , SIGNAL(clicked()) , this , SLOT(closeCurrentTab()));
 
     // Combin tab bar and 'new/close tab' buttons
     _tabBarLayout = new QHBoxLayout;
@@ -499,20 +495,15 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     searchBar()->setParent(_containerWidget);
 
     // The overall layout
-    if ( position == NavigationPositionTop )
-    {
-        _layout->insertLayout(0,_tabBarLayout);
-        _layout->insertWidget(-1,searchBar());
+    if (position == NavigationPositionTop) {
+        _layout->insertLayout(0, _tabBarLayout);
+        _layout->insertWidget(-1, searchBar());
         _tabBar->setShape(QTabBar::RoundedNorth);
-    }
-    else if ( position == NavigationPositionBottom )
-    {
-        _layout->insertWidget(-1,searchBar());
-        _layout->insertLayout(-1,_tabBarLayout);
+    } else if (position == NavigationPositionBottom) {
+        _layout->insertWidget(-1, searchBar());
+        _layout->insertLayout(-1, _tabBarLayout);
         _tabBar->setShape(QTabBar::RoundedSouth);
-    }
-    else
-    {
+    } else {
         Q_ASSERT(false); // position not supported
     }
 
@@ -521,11 +512,11 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
 }
 void TabbedViewContainer::setNewViewMenu(QMenu* menu)
 {
-  _newTabButton->setMenu(menu);
+    _newTabButton->setMenu(menu);
 }
 ViewContainer::Features TabbedViewContainer::supportedFeatures() const
-{ 
-  return QuickNewView|QuickCloseView;
+{
+    return QuickNewView | QuickCloseView;
 }
 void TabbedViewContainer::setFeatures(Features features)
 {
@@ -535,8 +526,7 @@ void TabbedViewContainer::setFeatures(Features features)
 
 void TabbedViewContainer::closeCurrentTab()
 {
-    if (_stackWidget->currentIndex() != -1)
-    {
+    if (_stackWidget->currentIndex() != -1) {
         emit closeTab(this, _stackWidget->widget(_stackWidget->currentIndex()));
     }
 }
@@ -561,62 +551,56 @@ void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
 {
     // this method assumes that there are only two items
     // in the layout
-    Q_ASSERT( _layout->count() == 3 );
+    Q_ASSERT(_layout->count() == 3);
 
     // index of stack widget in the layout when tab bar is at the bottom
     const int StackIndexWithTabBottom = 0;
 
-    if ( position == NavigationPositionTop 
-            && _layout->indexOf(_stackWidget) == StackIndexWithTabBottom )
-    {
+    if (position == NavigationPositionTop
+            && _layout->indexOf(_stackWidget) == StackIndexWithTabBottom) {
         _layout->removeItem(_tabBarLayout);
         _layout->removeWidget(searchBar());
 
-        _layout->insertLayout(0,_tabBarLayout);
-        _layout->insertWidget(-1,searchBar());
+        _layout->insertLayout(0, _tabBarLayout);
+        _layout->insertWidget(-1, searchBar());
         _tabBar->setShape(QTabBar::RoundedNorth);
-    }
-    else if ( position == NavigationPositionBottom 
-            && _layout->indexOf(_stackWidget) != StackIndexWithTabBottom )
-    {
+    } else if (position == NavigationPositionBottom
+               && _layout->indexOf(_stackWidget) != StackIndexWithTabBottom) {
         _layout->removeItem(_tabBarLayout);
         _layout->removeWidget(searchBar());
 
-        _layout->insertWidget(-1,searchBar());
-        _layout->insertLayout(-1,_tabBarLayout);
+        _layout->insertWidget(-1, searchBar());
+        _layout->insertLayout(-1, _tabBarLayout);
         _tabBar->setShape(QTabBar::RoundedSouth);
     }
 }
 void TabbedViewContainer::navigationDisplayModeChanged(NavigationDisplayMode mode)
 {
-    if ( mode == AlwaysShowNavigation && _tabBar->isHidden() )
+    if (mode == AlwaysShowNavigation && _tabBar->isHidden())
         setTabBarVisible(true);
 
-    if ( mode == AlwaysHideNavigation && !_tabBar->isHidden() )
+    if (mode == AlwaysHideNavigation && !_tabBar->isHidden())
         setTabBarVisible(false);
 
-    if ( mode == ShowNavigationAsNeeded )
+    if (mode == ShowNavigationAsNeeded)
         dynamicTabBarVisibility();
 }
 void TabbedViewContainer::dynamicTabBarVisibility()
 {
-    if ( _tabBar->count() > 1 && _tabBar->isHidden() )
+    if (_tabBar->count() > 1 && _tabBar->isHidden())
         setTabBarVisible(true);
 
-    if ( _tabBar->count() < 2 && !_tabBar->isHidden() )
-        setTabBarVisible(false);    
+    if (_tabBar->count() < 2 && !_tabBar->isHidden())
+        setTabBarVisible(false);
 }
 
 void TabbedViewContainer::navigationTextModeChanged(bool useTextWidth)
 {
-    if (useTextWidth)
-    {
+    if (useTextWidth) {
         _tabBar->setStyleSheet("QTabBar::tab { }");
         _tabBar->setExpanding(false);
         _tabBar->setElideMode(Qt::ElideNone);
-    }
-    else
-    {
+    } else {
         _tabBar->setStyleSheet("QTabBar::tab { min-width: 2em; max-width: 25em }");
         _tabBar->setExpanding(true);
         _tabBar->setElideMode(Qt::ElideLeft);
@@ -633,7 +617,7 @@ void TabbedViewContainer::startTabDrag(int tab)
 {
     QDrag* drag = new QDrag(_tabBar);
     const QRect tabRect = _tabBar->tabRect(tab);
-    QPixmap tabPixmap = _tabBar->dragDropPixmap(tab); 
+    QPixmap tabPixmap = _tabBar->dragDropPixmap(tab);
 
     drag->setPixmap(tabPixmap);
 
@@ -653,14 +637,13 @@ void TabbedViewContainer::startTabDrag(int tab)
     //
     // if the tab was dragged onto another application
     // which blindly accepted the drop then ignore it
-    if (drag->exec() == Qt::MoveAction && drag->target() != 0)
-    {
+    if (drag->exec() == Qt::MoveAction && drag->target() != 0) {
         // Deleting the view may cause the view container to be deleted, which
         // will also delete the QDrag object.
         // This can cause a crash if Qt's internal drag-and-drop handling
-        // tries to delete it later.  
+        // tries to delete it later.
         //
-        // For now set the QDrag's parent to 0 so that it won't be deleted if 
+        // For now set the QDrag's parent to 0 so that it won't be deleted if
         // this view container is destroyed.
         //
         // FIXME: Resolve this properly
@@ -709,7 +692,7 @@ void TabbedViewContainer::tabContextMenuRenameTab()
     renameTab(_contextMenuTabIndex);
 }
 
-void TabbedViewContainer::moveViewWidget( int fromIndex , int toIndex )
+void TabbedViewContainer::moveViewWidget(int fromIndex , int toIndex)
 {
     QString text = _tabBar->tabText(fromIndex);
     QIcon icon = _tabBar->tabIcon(fromIndex);
@@ -718,11 +701,11 @@ void TabbedViewContainer::moveViewWidget( int fromIndex , int toIndex )
     // their text and icon when moving them
 
     _tabBar->removeTab(fromIndex);
-    _tabBar->insertTab(toIndex,icon,text);
+    _tabBar->insertTab(toIndex, icon, text);
 
     QWidget* widget = _stackWidget->widget(fromIndex);
     _stackWidget->removeWidget(widget);
-    _stackWidget->insertWidget(toIndex,widget);
+    _stackWidget->insertWidget(toIndex, widget);
 }
 void TabbedViewContainer::currentTabChanged(int index)
 {
@@ -731,12 +714,12 @@ void TabbedViewContainer::currentTabChanged(int index)
         emit activeViewChanged(_stackWidget->widget(index));
 
     // clear activity indicators
-    setTabActivity(index,false);
+    setTabActivity(index, false);
 }
 
 void TabbedViewContainer::wheelScrolled(int delta)
 {
-    if ( delta < 0 )
+    if (delta < 0)
         activateNextView();
     else
         activatePreviousView();
@@ -754,41 +737,41 @@ void TabbedViewContainer::setActiveView(QWidget* view)
 {
     const int index = _stackWidget->indexOf(view);
 
-    Q_ASSERT( index != -1 );
+    Q_ASSERT(index != -1);
 
-   _stackWidget->setCurrentWidget(view);
-   _tabBar->setCurrentIndex(index); 
+    _stackWidget->setCurrentWidget(view);
+    _tabBar->setCurrentIndex(index);
 }
-void TabbedViewContainer::addViewWidget( QWidget* view , int index)
+void TabbedViewContainer::addViewWidget(QWidget* view , int index)
 {
-    _stackWidget->insertWidget(index,view);
+    _stackWidget->insertWidget(index, view);
     _stackWidget->updateGeometry();
 
     ViewProperties* item = viewProperties(view);
-    connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , 
-                    SLOT(updateTitle(ViewProperties*))); 
-    connect( item , SIGNAL(iconChanged(ViewProperties*)) , this , 
-                    SLOT(updateIcon(ViewProperties*)));
-    connect( item , SIGNAL(activity(ViewProperties*)) , this ,
-                    SLOT(updateActivity(ViewProperties*)));
+    connect(item , SIGNAL(titleChanged(ViewProperties*)) , this ,
+            SLOT(updateTitle(ViewProperties*)));
+    connect(item , SIGNAL(iconChanged(ViewProperties*)) , this ,
+            SLOT(updateIcon(ViewProperties*)));
+    connect(item , SIGNAL(activity(ViewProperties*)) , this ,
+            SLOT(updateActivity(ViewProperties*)));
 
-    _tabBar->insertTab( index , item->icon() , item->title() );
+    _tabBar->insertTab(index , item->icon() , item->title());
 
-    if ( navigationDisplayMode() == ShowNavigationAsNeeded )
+    if (navigationDisplayMode() == ShowNavigationAsNeeded)
         dynamicTabBarVisibility();
 }
-void TabbedViewContainer::removeViewWidget( QWidget* view )
+void TabbedViewContainer::removeViewWidget(QWidget* view)
 {
     if (!_stackWidget)
         return;
     const int index = _stackWidget->indexOf(view);
 
-    Q_ASSERT( index != -1 );
+    Q_ASSERT(index != -1);
 
     _stackWidget->removeWidget(view);
     _tabBar->removeTab(index);
 
-    if ( navigationDisplayMode() == ShowNavigationAsNeeded )
+    if (navigationDisplayMode() == ShowNavigationAsNeeded)
         dynamicTabBarVisibility();
 }
 
@@ -796,58 +779,54 @@ void TabbedViewContainer::setTabActivity(int index , bool activity)
 {
     const QPalette& palette = _tabBar->palette();
     KColorScheme colorScheme(palette.currentColorGroup());
-    const QColor colorSchemeActive = colorScheme.foreground(KColorScheme::ActiveText).color();    
+    const QColor colorSchemeActive = colorScheme.foreground(KColorScheme::ActiveText).color();
 
     const QColor normalColor = palette.text().color();
-    const QColor activityColor = KColorUtils::mix(normalColor,colorSchemeActive); 
+    const QColor activityColor = KColorUtils::mix(normalColor, colorSchemeActive);
 
     QColor color = activity ? activityColor : QColor();
 
-    if ( color != _tabBar->tabTextColor(index) )
-        _tabBar->setTabTextColor(index,color);
+    if (color != _tabBar->tabTextColor(index))
+        _tabBar->setTabTextColor(index, color);
 }
 
 void TabbedViewContainer::updateActivity(ViewProperties* item)
 {
     QListIterator<QWidget*> iter(widgetsForItem(item));
-    while ( iter.hasNext() )
-    {
+    while (iter.hasNext()) {
         const int index = _stackWidget->indexOf(iter.next());
 
-        if ( index != _stackWidget->currentIndex() )
-        {
-            setTabActivity(index,true);
-        } 
+        if (index != _stackWidget->currentIndex()) {
+            setTabActivity(index, true);
+        }
     }
 }
 
 void TabbedViewContainer::updateTitle(ViewProperties* item)
 {
     QListIterator<QWidget*> iter(widgetsForItem(item));
-    while ( iter.hasNext() )
-    {
-        const int index = _stackWidget->indexOf( iter.next() );
+    while (iter.hasNext()) {
+        const int index = _stackWidget->indexOf(iter.next());
         QString tabText = item->title();
 
-        _tabBar->setTabToolTip( index , tabText );
+        _tabBar->setTabToolTip(index , tabText);
 
         // To avoid having & replaced with _ (shortcut indicator)
         tabText.replace('&', "&&");
-        _tabBar->setTabText( index , tabText );
+        _tabBar->setTabText(index , tabText);
     }
 }
 void TabbedViewContainer::updateIcon(ViewProperties* item)
 {
     QListIterator<QWidget*> iter(widgetsForItem(item));
-    while ( iter.hasNext() )
-    {
-        const int index = _stackWidget->indexOf( iter.next() );
-        _tabBar->setTabIcon( index , item->icon() );
+    while (iter.hasNext()) {
+        const int index = _stackWidget->indexOf(iter.next());
+        _tabBar->setTabIcon(index , item->icon());
     }
 }
 
-StackedViewContainer::StackedViewContainer(QObject* parent) 
-: ViewContainer(NavigationPositionTop,parent)
+StackedViewContainer::StackedViewContainer(QObject* parent)
+    : ViewContainer(NavigationPositionTop, parent)
 {
     _containerWidget = new QWidget;
     QVBoxLayout* layout = new QVBoxLayout(_containerWidget);
@@ -874,19 +853,19 @@ QWidget* StackedViewContainer::activeView() const
 }
 void StackedViewContainer::setActiveView(QWidget* view)
 {
-   _stackWidget->setCurrentWidget(view); 
+    _stackWidget->setCurrentWidget(view);
 }
-void StackedViewContainer::addViewWidget( QWidget* view , int )
+void StackedViewContainer::addViewWidget(QWidget* view , int)
 {
     _stackWidget->addWidget(view);
 }
-void StackedViewContainer::removeViewWidget( QWidget* view )
+void StackedViewContainer::removeViewWidget(QWidget* view)
 {
     if (!_stackWidget)
         return;
     const int index = _stackWidget->indexOf(view);
 
-    Q_ASSERT( index != -1);
+    Q_ASSERT(index != -1);
     Q_UNUSED(index);
 
     _stackWidget->removeWidget(view);

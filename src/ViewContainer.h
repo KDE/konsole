@@ -37,20 +37,20 @@ class QWidget;
 class QLabel;
 
 // TabbedViewContainer
-    // Qt
-    class QPoint;
-    class QToolButton;
-    class QMenu;
+// Qt
+class QPoint;
+class QToolButton;
+class QMenu;
 
-    // KDE
-    class KMenu;
+// KDE
+class KMenu;
 
 // ListViewContainer
 
 namespace Konsole
 {
-    class IncrementalSearchBar;
-    class ViewProperties;
+class IncrementalSearchBar;
+class ViewProperties;
 /**
  * An interface for container widgets which can hold one or more views.
  *
@@ -63,7 +63,7 @@ namespace Konsole
  */
 class ViewContainer : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
 
@@ -71,8 +71,7 @@ public:
      * This enum describes the options for positioning the
      * container's navigation widget.
      */
-    enum NavigationPosition
-    {
+    enum NavigationPosition {
         /** Position the navigation widget above the views. */
         NavigationPositionTop,
         /** Position the navigation widget below the views. */
@@ -105,8 +104,7 @@ public:
      * This enum describes the options for showing or hiding the
      * container's navigation widget.
      */
-    enum NavigationDisplayMode
-    {
+    enum NavigationDisplayMode {
         /** Always show the navigation widget. */
         AlwaysShowNavigation,
         /** Always hide the navigation widget. */
@@ -175,7 +173,7 @@ public:
     void removeView(QWidget* view);
 
     /** Returns the ViewProperties instance associated with a particular view in the container */
-    ViewProperties* viewProperties(  QWidget* view );   
+    ViewProperties* viewProperties(QWidget* view);
 
     /** Returns a list of the contained views */
     const QList<QWidget*> views();
@@ -211,8 +209,7 @@ public:
      * in which views can be re-arranged within the container
      * using the moveActiveView() method.
      */
-    enum MoveDirection
-    {
+    enum MoveDirection {
         /** Moves the view to the left. */
         MoveViewLeft,
         /** Moves the view to the right. */
@@ -226,19 +223,18 @@ public:
      *
      * The default implementation does nothing.
      */
-    void moveActiveView( MoveDirection direction );
+    void moveActiveView(MoveDirection direction);
 
     /** Enum describing extra UI features which can be
      * provided by the container. */
-    enum Feature
-    {
+    enum Feature {
         /** Provides a button which can be clicked to create new views quickly.
          * When the button is clicked, a newViewRequest() signal is emitted. */
         QuickNewView = 1,
         /** Provides a button which can be clicked to close views quickly. */
         QuickCloseView = 2
     };
-    Q_DECLARE_FLAGS(Features,Feature)
+    Q_DECLARE_FLAGS(Features, Feature)
     /**
      * Sets which additional features are enabled in this container.
      * The default implementation does thing.  Sub-classes should re-implement this
@@ -249,12 +245,15 @@ public:
     Features features() const;
     /** Returns a bitwise-OR of supported extra UI features.  The default
      * implementation returns 0 (no extra features) */
-    virtual Features supportedFeatures() const
-    { return 0; }
+    virtual Features supportedFeatures() const {
+        return 0;
+    }
     /** Sets the menu to be shown when the new view button is clicked.
      * Only valid if the QuickNewView feature is enabled.
      * The default implementation does nothing. */
-    virtual void setNewViewMenu(QMenu* menu) { Q_UNUSED(menu); }
+    virtual void setNewViewMenu(QMenu* menu) {
+        Q_UNUSED(menu);
+    }
 
 signals:
     /** Emitted when the container is deleted */
@@ -281,10 +280,10 @@ signals:
      * @param success The slot handling this signal should set this to true if the
      * new view was successfully created.
      */
-    void moveViewRequest(int index,int id,bool& success);
+    void moveViewRequest(int index, int id, bool& success);
 
     /** Emitted when the active view changes */
-    void activeViewChanged( QWidget* view );
+    void activeViewChanged(QWidget* view);
 
     /** Emitted when a view is added to the container. */
     void viewAdded(QWidget* view , ViewProperties* properties);
@@ -297,7 +296,7 @@ protected:
      * Performs the task of adding the view widget
      * to the container widget.
      */
-    virtual void addViewWidget(QWidget* view,int index) = 0;
+    virtual void addViewWidget(QWidget* view, int index) = 0;
     /**
      * Performs the task of removing the view widget
      * from the container widget.
@@ -320,7 +319,7 @@ protected:
     virtual void navigationTextModeChanged(bool) {}
 
     /** Returns the widgets which are associated with a particular navigation item */
-    QList<QWidget*> widgetsForItem( ViewProperties* item ) const;
+    QList<QWidget*> widgetsForItem(ViewProperties* item) const;
 
     /**
      * Rearranges the order of widgets in the container.
@@ -328,7 +327,7 @@ protected:
      * @param fromIndex Current index of the widget to move
      * @param toIndex New index for the widget
      */
-    virtual void moveViewWidget( int fromIndex , int toIndex );
+    virtual void moveViewWidget(int fromIndex , int toIndex);
 
 private slots:
     void viewDestroyed(QObject* view);
@@ -338,7 +337,7 @@ private:
     NavigationDisplayMode _navigationDisplayMode;
     NavigationPosition _navigationPosition;
     QList<QWidget*> _views;
-    QHash<QWidget*,ViewProperties*> _navigation;
+    QHash<QWidget*, ViewProperties*> _navigation;
     Features _features;
     IncrementalSearchBar* _searchBar;
 };
@@ -350,10 +349,10 @@ class TabbedViewContainer;
 // to allow for tweaks to the tab bar required by TabbedViewContainer.
 class ViewContainerTabBar : public KTabBar
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    ViewContainerTabBar(QWidget* parent,TabbedViewContainer* container);
+    ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container);
 
     // returns a pixmap image of a tab for use with QDrag
     QPixmap dragDropPixmap(int tab);
@@ -391,9 +390,8 @@ private:
 class TabbedViewContainerLayout : public QVBoxLayout
 {
 public:
-    void insertItemAt( int index , QLayoutItem* item )
-    {
-        insertItem(index,item);
+    void insertItemAt(int index , QLayoutItem* item) {
+        insertItem(index, item);
     }
 };
 
@@ -405,7 +403,7 @@ class TabbedViewContainer : public ViewContainer
 {
     Q_OBJECT
 
-friend class ViewContainerTabBar;
+    friend class ViewContainerTabBar;
 
 public:
     /**
@@ -429,7 +427,7 @@ protected:
     virtual void navigationDisplayModeChanged(NavigationDisplayMode mode);
     virtual void navigationPositionChanged(NavigationPosition position);
     virtual void navigationTextModeChanged(bool mode);
-    virtual void moveViewWidget( int fromIndex , int toIndex );
+    virtual void moveViewWidget(int fromIndex , int toIndex);
 
 private slots:
     void updateTitle(ViewProperties* item);
@@ -453,7 +451,7 @@ signals:
 private:
     void dynamicTabBarVisibility();
     void setTabBarVisible(bool visible);
-    void setTabActivity(int index,bool activity);
+    void setTabActivity(int index, bool activity);
     void renameTab(int index);
     void updateVisibilityOfQuickButtons();
 
@@ -481,8 +479,8 @@ public:
     virtual void setActiveView(QWidget* view);
 
 protected:
-    virtual void addViewWidget( QWidget* view , int index);
-    virtual void removeViewWidget( QWidget* view );
+    virtual void addViewWidget(QWidget* view , int index);
+    virtual void removeViewWidget(QWidget* view);
 
 private:
     QPointer<QWidget> _containerWidget;
