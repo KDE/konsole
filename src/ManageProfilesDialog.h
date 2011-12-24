@@ -38,7 +38,7 @@ class QTableView;
 
 namespace Ui
 {
-    class ManageProfilesDialog;
+class ManageProfilesDialog;
 }
 
 namespace Konsole
@@ -51,12 +51,12 @@ namespace Konsole
  */
 class KONSOLEPRIVATE_EXPORT ManageProfilesDialog : public KDialog
 {
-Q_OBJECT
+    Q_OBJECT
 
 
-friend class FavoriteItemDelegate;
-friend class ShortcutItemDelegate;
-friend class ::QTableView;
+    friend class FavoriteItemDelegate;
+    friend class ShortcutItemDelegate;
+    friend class ::QTableView;
 
 public:
     /** Constructs a new profile type with the specified parent. */
@@ -100,13 +100,13 @@ private slots:
     void setMenuOrder(void);
 
 private:
-    Profile::Ptr currentProfile() const; 
-    QList<Profile::Ptr> selectedProfiles() const; 
+    Profile::Ptr currentProfile() const;
+    QList<Profile::Ptr> selectedProfiles() const;
     bool isProfileDeletable(Profile::Ptr profile) const;
 
     // updates the font of the items to match
     // their default / non-default profile status
-    void updateDefaultItem(); 
+    void updateDefaultItem();
     void updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem*>& items) const;
     // updates the profile table to be in sync with the
     // session manager
@@ -123,11 +123,11 @@ private:
     static const int ShortcutRole = Qt::UserRole + 1;
 };
 
-class StyledBackgroundPainter 
+class StyledBackgroundPainter
 {
 public:
     static void drawBackground(QPainter* painter, const QStyleOptionViewItem& option,
-                const QModelIndex& index);
+                               const QModelIndex& index);
 };
 
 class FavoriteItemDelegate : public QStyledItemDelegate
@@ -135,24 +135,24 @@ class FavoriteItemDelegate : public QStyledItemDelegate
 public:
     FavoriteItemDelegate(QObject* parent = 0);
 
-    virtual bool editorEvent(QEvent* event,QAbstractItemModel* model,
-                             const QStyleOptionViewItem& option,const QModelIndex& index);
-    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, 
-                        const QModelIndex& index) const;
+    virtual bool editorEvent(QEvent* event, QAbstractItemModel* model,
+                             const QStyleOptionViewItem& option, const QModelIndex& index);
+    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option,
+                       const QModelIndex& index) const;
 };
 
 class ShortcutItemDelegate : public QStyledItemDelegate
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     ShortcutItemDelegate(QObject* parent = 0);
 
     virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
-    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, 
-                                    const QModelIndex& index) const;
-    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, 
-                        const QModelIndex& index) const;
+    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
+                                  const QModelIndex& index) const;
+    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option,
+                       const QModelIndex& index) const;
 
 private slots:
     void editorModified(const QKeySequence& keys);
