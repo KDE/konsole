@@ -34,7 +34,7 @@
 // standard input file descriptor
 static const int STDIN = 0;
 
-using namespace Konsole;
+using Konsole::Application;
 
 // fill the KAboutData structure with information about contributors to Konsole.
 void fillAboutData(KAboutData& aboutData);
