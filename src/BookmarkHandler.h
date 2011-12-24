@@ -64,20 +64,22 @@ public:
      * @param toplevel TODO: Document me
      * @param parent The parent object
      */
-    BookmarkHandler( KActionCollection* collection , KMenu* menu, bool toplevel , QObject* parent );
+    BookmarkHandler(KActionCollection* collection , KMenu* menu, bool toplevel , QObject* parent);
     ~BookmarkHandler();
 
     virtual QString currentUrl() const;
     virtual QString currentTitle() const;
     virtual bool enableOption(BookmarkOption option) const;
     virtual bool supportsTabs() const;
-    virtual QList<QPair<QString,QString> > currentBookmarkList() const;
+    virtual QList<QPair<QString, QString> > currentBookmarkList() const;
     virtual void openFolderinTabs(const KBookmarkGroup& group);
 
     /**
      * Returns the menu which this bookmark handler inserts its actions into.
      */
-    KMenu* menu() const { return _menu; }
+    KMenu* menu() const {
+        return _menu;
+    }
 
     QList<ViewProperties*> views() const;
     ViewProperties* activeView() const;
@@ -86,9 +88,9 @@ public slots:
     /**
      *
      */
-    void setViews( const QList<ViewProperties*>& views );
+    void setViews(const QList<ViewProperties*>& views);
 
-    void setActiveView( ViewProperties* view );
+    void setActiveView(ViewProperties* view);
 
 signals:
     /**
@@ -96,7 +98,7 @@ signals:
      *
      * @param url The url of the bookmark which was selected by the user.
      */
-    void openUrl( const KUrl& url );
+    void openUrl(const KUrl& url);
 
     /**
      * Emitted when the user selects 'Open Folder in Tabs'
@@ -105,14 +107,14 @@ signals:
      * @param urls The urls of the bookmarks in the folder whose
      * 'Open Folder in Tabs' action was triggered
      */
-    void openUrls( const QList<KUrl>& urls );
+    void openUrls(const QList<KUrl>& urls);
 
 private slots:
-    void openBookmark( const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers );
+    void openBookmark(const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers);
 
 private:
-    QString titleForView( ViewProperties* view ) const;
-    QString urlForView( ViewProperties* view ) const;
+    QString titleForView(ViewProperties* view) const;
+    QString urlForView(ViewProperties* view) const;
 
     KMenu* _menu;
     KBookmarkMenu* _bookmarkMenu;
