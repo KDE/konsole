@@ -47,10 +47,10 @@ class ViewContainer;
  */
 class ViewSplitter : public QSplitter
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    ViewSplitter(QWidget* parent = 0); 
+    ViewSplitter(QWidget* parent = 0);
 
     /**
      * Locates the child ViewSplitter widget which currently has the focus
@@ -67,10 +67,10 @@ public:
      *                    will be created, into which the container will
      *                    be inserted.
      */
-    void addContainer( ViewContainer* container , Qt::Orientation orientation );  
+    void addContainer(ViewContainer* container , Qt::Orientation orientation);
 
     /** Removes a container from the splitter.  The container is not deleted. */
-    void removeContainer( ViewContainer* container );
+    void removeContainer(ViewContainer* container);
 
     /** Returns the child ViewSplitter widget which currently has the focus */
     ViewSplitter* activeSplitter() ;
@@ -86,7 +86,7 @@ public:
      * mySplitter->activeSplitter()->activeContainer() where mySplitter
      * is the ViewSplitter widget at the top of the hierarchy.
      */
-    ViewContainer* activeContainer() const; 
+    ViewContainer* activeContainer() const;
 
     /**
      * Gives the focus to the active view in the specified container
@@ -96,7 +96,9 @@ public:
     /**
      * Returns a list of the containers held by this splitter
      */
-    QList<ViewContainer*> containers() const {return _containers;}
+    QList<ViewContainer*> containers() const {
+        return _containers;
+    }
 
     /**
      * Gives the focus to the active view in the next container
@@ -114,33 +116,33 @@ public:
      */
     void adjustContainerSize(ViewContainer* container , int percentage);
 
-   /**
-    * Gives the focus to the active view in the previous container
-    */
-   void activatePreviousContainer();
+    /**
+     * Gives the focus to the active view in the previous container
+     */
+    void activatePreviousContainer();
 
-   /**
-    * Specifies whether the view may be split recursively.
-    *
-    * If this is false, all containers will be placed into the same
-    * top-level splitter.  Adding a container with an orientation
-    * which is different to that specified when adding the previous
-    * containers will change the orientation for all dividers
-    * between containers.
-    *
-    * If this is true, adding a container to the view splitter with
-    * an orientation different to the orientation of the previous
-    * area will result in the previously active container being
-    * replaced with a new splitter containing the active container
-    * and the newly added container.
-    */
-   void setRecursiveSplitting(bool recursive);
+    /**
+     * Specifies whether the view may be split recursively.
+     *
+     * If this is false, all containers will be placed into the same
+     * top-level splitter.  Adding a container with an orientation
+     * which is different to that specified when adding the previous
+     * containers will change the orientation for all dividers
+     * between containers.
+     *
+     * If this is true, adding a container to the view splitter with
+     * an orientation different to the orientation of the previous
+     * area will result in the previously active container being
+     * replaced with a new splitter containing the active container
+     * and the newly added container.
+     */
+    void setRecursiveSplitting(bool recursive);
 
-   /**
-    * Returns whether the view may be split recursively.
-    * See setRecursiveSplitting()
-    */
-   bool recursiveSplitting() const;
+    /**
+     * Returns whether the view may be split recursively.
+     * See setRecursiveSplitting()
+     */
+    bool recursiveSplitting() const;
 
 signals:
     /** Signal emitted when the last child widget is removed from the splitter */
@@ -161,23 +163,23 @@ protected:
 private:
     // Adds container to splitter's internal list and
     // connects signals and slots
-    void registerContainer( ViewContainer* container );
+    void registerContainer(ViewContainer* container);
     // Removes container from splitter's internal list and
     // removes signals and slots
-    void unregisterContainer( ViewContainer* container );
+    void unregisterContainer(ViewContainer* container);
 
     void updateSizes();
 
 private slots:
     // Called to indicate that a child ViewContainer has been deleted
-    void containerDestroyed( ViewContainer* object );
+    void containerDestroyed(ViewContainer* object);
 
     // Called to indicate that a child ViewContainer is empty
-    void containerEmpty( ViewContainer* object );
+    void containerEmpty(ViewContainer* object);
 
     // Called to indicate that a child ViewSplitter is empty
     // (ie. all child widgets have been deleted)
-    void childEmpty( ViewSplitter* splitter );
+    void childEmpty(ViewSplitter* splitter);
 
 private:
     QList<ViewContainer*> _containers;
