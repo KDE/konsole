@@ -55,15 +55,14 @@ namespace Konsole
  */
 class IncrementalSearchBar : public QWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
 
     /**
      * This enum defines the options that can be checked.
      */
-    enum SearchOptions
-    {
+    enum SearchOptions {
         /** Highlight all matches */
         HighlightMatches = 0,
         /** Searches are case-sensitive or not */
@@ -91,16 +90,16 @@ public:
      * and the search text is non-empty, an indicator that no matches were
      * found will be shown.
      */
-    void setFoundMatch( bool match );
+    void setFoundMatch(bool match);
 
     /** Returns the current search text */
     QString searchText();
 
     // reimplemented
-    virtual void setVisible( bool visible );
+    virtual void setVisible(bool visible);
 signals:
     /** Emitted when the text entered in the search box is altered */
-    void searchChanged( const QString& text );
+    void searchChanged(const QString& text);
     /** Emitted when the user clicks the button to find the next match */
     void findNextClicked();
     /** Emitted when the user clicks the button to find the previous match */
@@ -124,7 +123,7 @@ signals:
     void closeClicked();
 
 protected:
-    virtual bool eventFilter( QObject* watched , QEvent* event );
+    virtual bool eventFilter(QObject* watched , QEvent* event);
 
 private slots:
     void notifySearchChanged();
