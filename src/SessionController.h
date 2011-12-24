@@ -40,7 +40,7 @@
 
 namespace KIO
 {
-    class Job;
+class Job;
 }
 
 class QAction;
@@ -87,7 +87,7 @@ typedef QPointer<Session> SessionPtr;
  */
 class KONSOLEPRIVATE_EXPORT SessionController : public ViewProperties , public KXMLGUIClient
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
@@ -97,9 +97,13 @@ public:
     ~SessionController();
 
     /** Returns the session associated with this controller */
-    QPointer<Session> session() { return _session; }
+    QPointer<Session> session() {
+        return _session;
+    }
     /** Returns the view associated with this controller */
-    QPointer<TerminalDisplay>  view()    { return _view;    }
+    QPointer<TerminalDisplay>  view()    {
+        return _view;
+    }
 
     /**
      * Returns true if the controller is valid.
@@ -116,7 +120,7 @@ public:
      * show() method will be called.  The SessionController will then connect to the search
      * bar's signals to update the search when the widget's controls are pressed.
      */
-    void setSearchBar( IncrementalSearchBar* searchBar );
+    void setSearchBar(IncrementalSearchBar* searchBar);
     /**
      * see setSearchBar()
      */
@@ -139,8 +143,9 @@ public:
     virtual bool eventFilter(QObject* watched , QEvent* event);
 
     /** Returns the set of all controllers that exist. */
-    static QSet<SessionController*> allControllers()
-    { return _allControllers; }
+    static QSet<SessionController*> allControllers() {
+        return _allControllers;
+    }
 
 signals:
     /**
@@ -148,7 +153,7 @@ signals:
      * This can be used by other classes to plug the controller's actions into a window's
      * menus.
      */
-    void focused( SessionController* controller );
+    void focused(SessionController* controller);
 
 public slots:
     /**
@@ -160,12 +165,12 @@ public slots:
      * openUrl() currently supports urls for local paths and those
      * using the 'ssh' protocol ( eg. "ssh://joebloggs@hostname" )
      */
-    void openUrl( const KUrl& url ); 
+    void openUrl(const KUrl& url);
 
     /**
      * update actions which are meaningful only when rimary screen is in use.
      */
-    void setupPrimaryScreenSpecificActions( bool use);
+    void setupPrimaryScreenSpecificActions(bool use);
 
     /**
      * close the associated session. This might involve user interaction for
@@ -176,7 +181,7 @@ public slots:
     /**
      * enable or disable the copy action
      */
-    void updateCopyAction( const QString & text );
+    void updateCopyAction(const QString & text);
 
     /**  Increase font size */
     void increaseTextSize();
@@ -218,19 +223,19 @@ private slots:
     void searchTextChanged(const QString& text);
     void searchCompleted(bool success);
     void searchClosed(); // called when the user clicks on the
-                         // history search bar's close button 
+    // history search bar's close button
 
     void snapshot(); // called periodically as the user types
-                     // to take a snapshot of the state of the
-                     // foreground process in the terminal
+    // to take a snapshot of the state of the
+    // foreground process in the terminal
 
     void requireUrlFilterUpdate();
     void highlightMatches(bool highlight);
     void scrollBackOptionsChanged(int mode , int lines);
     void sessionResizeRequest(const QSize& size);
     void trackOutput(QKeyEvent* event);  // move view to end of current output
-                                         // when a key press occurs in the 
-                                         // display area
+    // when a key press occurs in the
+    // display area
 
     void updateSearchFilter();
 
@@ -266,7 +271,7 @@ private:
     int        _previousState;
 
     UrlFilter*      _viewUrlFilter;
-    RegExpFilter*   _searchFilter; 
+    RegExpFilter*   _searchFilter;
 
     KAction* _copyToAllTabsAction;
     KAction* _copyToSelectedAction;
@@ -309,49 +314,49 @@ inline bool SessionController::isValid() const
  */
 class SessionTask : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-   SessionTask(QObject* parent = 0);
+    SessionTask(QObject* parent = 0);
 
-   /**
-    * Sets whether the task automatically deletes itself when the task has been finished.
-    * Depending on whether the task operates synchronously or asynchronously, the deletion
-    * may be scheduled immediately after execute() returns or it may happen some time later.
-    */
-   void setAutoDelete(bool enable);
-   /** Returns true if the task automatically deletes itself.  See setAutoDelete() */
-   bool autoDelete() const;
+    /**
+     * Sets whether the task automatically deletes itself when the task has been finished.
+     * Depending on whether the task operates synchronously or asynchronously, the deletion
+     * may be scheduled immediately after execute() returns or it may happen some time later.
+     */
+    void setAutoDelete(bool enable);
+    /** Returns true if the task automatically deletes itself.  See setAutoDelete() */
+    bool autoDelete() const;
 
-   /** Adds a new session to the group */
-   void addSession(Session* session);
+    /** Adds a new session to the group */
+    void addSession(Session* session);
 
-   /**
-    * Executes the task on each of the sessions in the group.
-    * The completed() signal is emitted when the task is finished, depending on the specific sub-class
-    * execute() may be synchronous or asynchronous
-    */
-   virtual void execute() = 0;
+    /**
+     * Executes the task on each of the sessions in the group.
+     * The completed() signal is emitted when the task is finished, depending on the specific sub-class
+     * execute() may be synchronous or asynchronous
+     */
+    virtual void execute() = 0;
 
 signals:
-   /**
-    * Emitted when the task has completed.
-    * Depending on the task this may occur just before execute() returns, or it
-    * may occur later
-    *
-    * @param success Indicates whether the task completed successfully or not
-    */
-   void completed(bool success);
+    /**
+     * Emitted when the task has completed.
+     * Depending on the task this may occur just before execute() returns, or it
+     * may occur later
+     *
+     * @param success Indicates whether the task completed successfully or not
+     */
+    void completed(bool success);
 
 protected:
 
-   /** Returns a list of sessions in the group */
-   QList< SessionPtr > sessions() const;
+    /** Returns a list of sessions in the group */
+    QList< SessionPtr > sessions() const;
 
 private:
 
-   bool _autoDelete;
-   QList< SessionPtr > _sessions; 
+    bool _autoDelete;
+    QList< SessionPtr > _sessions;
 };
 
 /**
@@ -360,7 +365,7 @@ private:
  */
 class SaveHistoryTask : public SessionTask
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /** Constructs a new task to save session output to URLs */
@@ -381,19 +386,19 @@ private slots:
 
 private:
     class SaveJob // structure to keep information needed to process
-                  // incoming data requests from jobs
+        // incoming data requests from jobs
     {
     public:
         SessionPtr session; // the session associated with a history save job
         int lastLineFetched; // the last line processed in the previous data request
-                             // set this to -1 at the start of the save job
+        // set this to -1 at the start of the save job
 
         TerminalCharacterDecoder* decoder;  // decoder used to convert terminal characters
-                                            // into output
+        // into output
 
     };
 
-    QHash<KJob*,SaveJob> _jobSession;
+    QHash<KJob*, SaveJob> _jobSession;
 };
 
 //class SearchHistoryThread;
@@ -413,15 +418,14 @@ private:
  */
 class SearchHistoryTask : public SessionTask
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
      * This enum describes the strategies available for searching through the
      * session's output.
      */
-    enum SearchDirection
-    {
+    enum SearchDirection {
         /** Searches forwards through the output, starting at the current selection. */
         ForwardsSearch,
         /** Searches backwards through the output, starting at the current selection. */
@@ -434,7 +438,7 @@ public:
     explicit SearchHistoryTask(QObject* parent = 0);
 
     /** Adds a screen window to the list to search when execute() is called. */
-    void addScreenWindow( Session* session , ScreenWindow* searchWindow); 
+    void addScreenWindow(Session* session , ScreenWindow* searchWindow);
 
     /** Sets the regular expression which is searched for when execute() is called */
     void setRegExp(const QRegExp& regExp);
@@ -442,7 +446,7 @@ public:
     QRegExp regExp() const;
 
     /** Specifies the direction to search in when execute() is called. */
-    void setSearchDirection( SearchDirection direction );
+    void setSearchDirection(SearchDirection direction);
     /** Returns the current search direction.  See setSearchDirection(). */
     SearchDirection searchDirection() const;
 
@@ -461,8 +465,8 @@ public:
 private:
     typedef QPointer<ScreenWindow> ScreenWindowPtr;
 
-    void executeOnScreenWindow( SessionPtr session , ScreenWindowPtr window );
-    void highlightResult( ScreenWindowPtr window , int position);
+    void executeOnScreenWindow(SessionPtr session , ScreenWindowPtr window);
+    void highlightResult(ScreenWindowPtr window , int position);
 
     QMap< SessionPtr , ScreenWindowPtr > _windows;
     QRegExp _regExp;

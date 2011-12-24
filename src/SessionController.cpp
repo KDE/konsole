@@ -95,8 +95,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
 {
-    Q_ASSERT( session );
-    Q_ASSERT( view );
+    Q_ASSERT(session);
+    Q_ASSERT(view);
 
     // handle user interface related to session (menus etc.)
     if (isKonsolePart())
@@ -106,8 +106,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     setupActions();
     actionCollection()->addAssociatedWidget(view);
-    foreach (QAction* action, actionCollection()->actions())
-        action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+    foreach(QAction * action, actionCollection()->actions())
+    action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 
     setIdentifier(++_lastControllerId);
     sessionTitleChanged();
@@ -116,40 +116,40 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     view->setSessionController(this);
 
     // listen for session resize requests
-    connect( _session , SIGNAL(resizeRequest(QSize)) , this ,
-            SLOT(sessionResizeRequest(QSize)) );
+    connect(_session , SIGNAL(resizeRequest(QSize)) , this ,
+            SLOT(sessionResizeRequest(QSize)));
 
     // listen for popup menu requests
-    connect( _view , SIGNAL(configureRequest(QPoint)) , this,
-            SLOT(showDisplayContextMenu(QPoint)) );
+    connect(_view , SIGNAL(configureRequest(QPoint)) , this,
+            SLOT(showDisplayContextMenu(QPoint)));
 
     // move view to newest output when keystrokes occur
-    connect( _view , SIGNAL(keyPressedSignal(QKeyEvent*)) , this ,
-            SLOT(trackOutput(QKeyEvent*)) );
+    connect(_view , SIGNAL(keyPressedSignal(QKeyEvent*)) , this ,
+            SLOT(trackOutput(QKeyEvent*)));
 
     // listen to activity / silence notifications from session
-    connect( _session , SIGNAL(stateChanged(int)) , this ,
+    connect(_session , SIGNAL(stateChanged(int)) , this ,
             SLOT(sessionStateChanged(int)));
     // listen to title and icon changes
-    connect( _session , SIGNAL(titleChanged()) , this , SLOT(sessionTitleChanged()) );
+    connect(_session , SIGNAL(titleChanged()) , this , SLOT(sessionTitleChanged()));
 
     // listen for color changes
-    connect( _session , SIGNAL(changeBackgroundColorRequest(QColor)) , _view , SLOT(setBackgroundColor(QColor)) );
-    connect( _session , SIGNAL(changeForegroundColorRequest(QColor)) , _view , SLOT(setForegroundColor(QColor)) );
+    connect(_session , SIGNAL(changeBackgroundColorRequest(QColor)) , _view , SLOT(setBackgroundColor(QColor)));
+    connect(_session , SIGNAL(changeForegroundColorRequest(QColor)) , _view , SLOT(setForegroundColor(QColor)));
 
     // update the title when the session starts
-    connect( _session , SIGNAL(started()) , this , SLOT(snapshot()) ); 
+    connect(_session , SIGNAL(started()) , this , SLOT(snapshot()));
 
     // listen for output changes to set activity flag
-    connect( _session->emulation() , SIGNAL(outputChanged()) , this ,
-            SLOT(fireActivity()) );
+    connect(_session->emulation() , SIGNAL(outputChanged()) , this ,
+            SLOT(fireActivity()));
 
     // listen for detection of ZModem transfer
-    connect( _session , SIGNAL(zmodemDetected()) , this , SLOT(zmodemDownload()) ); 
+    connect(_session , SIGNAL(zmodemDetected()) , this , SLOT(zmodemDownload()));
 
     // listen for flow control status changes
-    connect( _session , SIGNAL(flowControlEnabledChanged(bool)) , _view ,
-        SLOT(setFlowControlWarningEnabled(bool)) );
+    connect(_session , SIGNAL(flowControlEnabledChanged(bool)) , _view ,
+            SLOT(setFlowControlWarningEnabled(bool)));
     _view->setFlowControlWarningEnabled(_session->flowControlEnabled());
 
     // take a snapshot of the session state every so often when
@@ -160,34 +160,33 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     QTimer* activityTimer = new QTimer(_session);
     activityTimer->setSingleShot(true);
     activityTimer->setInterval(2000);
-    connect( _view , SIGNAL(keyPressedSignal(QKeyEvent*)) , activityTimer , SLOT(start()) );
-    connect( activityTimer , SIGNAL(timeout()) , this , SLOT(snapshot()) );
+    connect(_view , SIGNAL(keyPressedSignal(QKeyEvent*)) , activityTimer , SLOT(start()));
+    connect(activityTimer , SIGNAL(timeout()) , this , SLOT(snapshot()));
 
     _allControllers.insert(this);
 }
 
 SessionController::~SessionController()
 {
-   if ( _view )
-      _view->setScreenWindow(0);
+    if (_view)
+        _view->setScreenWindow(0);
 
-   _allControllers.remove(this);
+    _allControllers.remove(this);
 }
 void SessionController::trackOutput(QKeyEvent* event)
 {
-    Q_ASSERT( _view->screenWindow() );
+    Q_ASSERT(_view->screenWindow());
 
     // jump to the end of the history buffer unless the key pressed
     // is one of the three main modifiers, as these are used to select
     // the selection mode (eg. Ctrl+Alt+<Left Click> for column/block selection)
-    switch (event->key())
-    {
-        case Qt::Key_Shift:
-        case Qt::Key_Control:
-        case Qt::Key_Alt:
-            break;
-        default:
-            _view->screenWindow()->setTrackOutput(true);
+    switch (event->key()) {
+    case Qt::Key_Shift:
+    case Qt::Key_Control:
+    case Qt::Key_Alt:
+        break;
+    default:
+        _view->screenWindow()->setTrackOutput(true);
     }
 }
 void SessionController::requireUrlFilterUpdate()
@@ -199,9 +198,9 @@ void SessionController::requireUrlFilterUpdate()
 }
 void SessionController::snapshot()
 {
-    Q_ASSERT( _session != 0 );
+    Q_ASSERT(_session != 0);
 
-    QString title = _session->getDynamicTitle();    
+    QString title = _session->getDynamicTitle();
     title         = title.simplified();
 
     // Visualize that the session is broadcasting to others
@@ -211,10 +210,10 @@ void SessionController::snapshot()
     updateSessionIcon();
 
     // apply new title
-    if ( !title.isEmpty() )
-        _session->setTitle(Session::DisplayedTitleRole,title);
+    if (!title.isEmpty())
+        _session->setTitle(Session::DisplayedTitleRole, title);
     else
-        _session->setTitle(Session::DisplayedTitleRole,_session->title(Session::NameRole));
+        _session->setTitle(Session::DisplayedTitleRole, _session->title(Session::NameRole));
 }
 
 QString SessionController::currentDir() const
@@ -232,47 +231,38 @@ void SessionController::rename()
     renameSession();
 }
 
-void SessionController::openUrl( const KUrl& url )
+void SessionController::openUrl(const KUrl& url)
 {
     // handle local paths
-    if ( url.isLocalFile() )
-    {
+    if (url.isLocalFile()) {
         QString path = url.toLocalFile();
         _session->emulation()->sendText("cd " + KShell::quoteArg(path) + '\r');
-    }
-    else if (url.protocol().isEmpty())
-    {
+    } else if (url.protocol().isEmpty()) {
         // KUrl couldn't parse what the user entered into the URL field
         // so just dump it to the shell
         QString command = url.prettyUrl();
         if (!command.isEmpty())
             _session->emulation()->sendText(command + '\r');
-    }
-    else if ( url.protocol() == "ssh" )
-    {
+    } else if (url.protocol() == "ssh") {
         _session->emulation()->sendText("ssh ");
 
-        if ( url.port() > -1 )
-            _session->emulation()->sendText("-p " + QString::number(url.port()) + ' ' );
-        if ( url.hasUser() )
+        if (url.port() > -1)
+            _session->emulation()->sendText("-p " + QString::number(url.port()) + ' ');
+        if (url.hasUser())
             _session->emulation()->sendText(url.user() + '@');
-        if ( url.hasHost() )
+        if (url.hasHost())
             _session->emulation()->sendText(url.host() + '\r');
-    }
-    else if ( url.protocol() == "telnet" )
-    {
+    } else if (url.protocol() == "telnet") {
         _session->emulation()->sendText("telnet ");
 
-        if ( url.hasUser() )
+        if (url.hasUser())
             _session->emulation()->sendText("-l " + url.user() + ' ');
-        if ( url.hasHost() )
+        if (url.hasHost())
             _session->emulation()->sendText(url.host() + ' ');
-        if ( url.port() > -1 )
+        if (url.port() > -1)
             _session->emulation()->sendText(QString::number(url.port()));
-         _session->emulation()->sendText("\r");
-    }
-    else
-    {
+        _session->emulation()->sendText("\r");
+    } else {
         //TODO Implement handling for other Url types
 
         KMessageBox::sorry(_view->window(),
@@ -280,11 +270,11 @@ void SessionController::openUrl( const KUrl& url )
                            url.prettyUrl());
 
         kWarning() << "Unable to open bookmark at url" << url << ", I do not know"
-           << " how to handle the protocol " << url.protocol();
+                   << " how to handle the protocol " << url.protocol();
     }
 }
 
-void SessionController::setupPrimaryScreenSpecificActions( bool use)
+void SessionController::setupPrimaryScreenSpecificActions(bool use)
 {
     KActionCollection * collection = actionCollection() ;
     QAction * clearAction = collection->action("clear-history");
@@ -297,7 +287,7 @@ void SessionController::setupPrimaryScreenSpecificActions( bool use)
     selectAllAction->setEnabled(use);
 }
 
-void SessionController::updateCopyAction( const QString & text )
+void SessionController::updateCopyAction(const QString & text)
 {
     KActionCollection * collection = actionCollection() ;
     QAction * copyAction = collection->action("edit_copy");
@@ -308,10 +298,8 @@ void SessionController::updateCopyAction( const QString & text )
 
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
 {
-    if ( watched == _view )
-    {
-        if ( event->type() == QEvent::FocusIn )
-        {
+    if (watched == _view) {
+        if (event->type() == QEvent::FocusIn) {
             // notify the world that the view associated with this session has been focused
             // used by the view manager to update the title of the MainWindow widget containing the view
             emit focused(this);
@@ -320,12 +308,12 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             // by the focused view
 
             // first, disconnect any other views which are listening for bell signals from the session
-            disconnect( _session , SIGNAL(bellRequest(QString)) , 0 , 0 );
+            disconnect(_session , SIGNAL(bellRequest(QString)) , 0 , 0);
             // second, connect the newly focused view to listen for the session's bell signal
-            connect( _session , SIGNAL(bellRequest(QString)) ,
-                    _view , SLOT(bell(QString)) );
+            connect(_session , SIGNAL(bellRequest(QString)) ,
+                    _view , SLOT(bell(QString)));
 
-            if(_copyToAllTabsAction->isChecked()) {
+            if (_copyToAllTabsAction->isChecked()) {
                 // A session with "Copy To All Tabs" has come into focus:
                 // Ensure that newly created sessions are included in _copyToGroup!
                 copyInputToAllTabs();
@@ -337,20 +325,18 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
         //
         // also check that no mouse buttons are pressed since the URL filter only applies when
         // the mouse is hovering over the view
-        if ( event->type() == QEvent::MouseMove &&
-            (!_viewUrlFilter || _urlFilterUpdateRequired) &&
-            ((QMouseEvent*)event)->buttons() == Qt::NoButton )
-        {
-            if ( _view->screenWindow() && !_viewUrlFilter )
-            {
-                connect( _view->screenWindow() , SIGNAL(scrolled(int)) , this ,
-                        SLOT(requireUrlFilterUpdate()) );
-                connect( _view->screenWindow() , SIGNAL(outputChanged()) , this ,
-                         SLOT(requireUrlFilterUpdate()) );
+        if (event->type() == QEvent::MouseMove &&
+                (!_viewUrlFilter || _urlFilterUpdateRequired) &&
+                ((QMouseEvent*)event)->buttons() == Qt::NoButton) {
+            if (_view->screenWindow() && !_viewUrlFilter) {
+                connect(_view->screenWindow() , SIGNAL(scrolled(int)) , this ,
+                        SLOT(requireUrlFilterUpdate()));
+                connect(_view->screenWindow() , SIGNAL(outputChanged()) , this ,
+                        SLOT(requireUrlFilterUpdate()));
 
                 // install filter on the view to highlight URLs
                 _viewUrlFilter = new UrlFilter();
-                _view->filterChain()->addFilter( _viewUrlFilter );
+                _view->filterChain()->addFilter(_viewUrlFilter);
             }
 
             _view->processFilters();
@@ -374,10 +360,9 @@ void SessionController::removeSearchFilter()
 void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
 {
     // disconnect the existing search bar
-    if ( _searchBar )
-    {
-        disconnect( this , 0 , _searchBar , 0 );
-        disconnect( _searchBar , 0 , this , 0 );
+    if (_searchBar) {
+        disconnect(this , 0 , _searchBar , 0);
+        disconnect(_searchBar , 0 , this , 0);
     }
 
     // remove any existing search filter
@@ -385,17 +370,16 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
 
     // connect new search bar
     _searchBar = searchBar;
-    if ( _searchBar )
-    {
-        connect( _searchBar , SIGNAL(closeClicked()) , this , SLOT(searchClosed()) );
-        connect( _searchBar , SIGNAL(findNextClicked()) , this , SLOT(findNextInHistory()) );
-        connect( _searchBar , SIGNAL(findPreviousClicked()) , this , SLOT(findPreviousInHistory()) );
-        connect( _searchBar , SIGNAL(highlightMatchesToggled(bool)) , this , SLOT(highlightMatches(bool)) );
-	connect( _searchBar , SIGNAL(matchCaseToggled(bool)) , this , SLOT(changeSearchMatch()));
+    if (_searchBar) {
+        connect(_searchBar , SIGNAL(closeClicked()) , this , SLOT(searchClosed()));
+        connect(_searchBar , SIGNAL(findNextClicked()) , this , SLOT(findNextInHistory()));
+        connect(_searchBar , SIGNAL(findPreviousClicked()) , this , SLOT(findPreviousInHistory()));
+        connect(_searchBar , SIGNAL(highlightMatchesToggled(bool)) , this , SLOT(highlightMatches(bool)));
+        connect(_searchBar , SIGNAL(matchCaseToggled(bool)) , this , SLOT(changeSearchMatch()));
 
         // if the search bar was previously active
         // then re-enter search mode
-        searchHistory( _searchToggleAction->isChecked() );
+        searchHistory(_searchToggleAction->isChecked());
     }
 }
 IncrementalSearchBar* SessionController::searchBar() const
@@ -405,7 +389,7 @@ IncrementalSearchBar* SessionController::searchBar() const
 
 void SessionController::setShowMenuAction(QAction* action)
 {
-    actionCollection()->addAction("show-menubar",action);
+    actionCollection()->addAction("show-menubar", action);
 }
 
 void SessionController::setupActions()
@@ -439,19 +423,19 @@ void SessionController::setupActions()
 
     action = collection->addAction("paste-selection", this, SLOT(pasteFromXSelection()));
     action->setText(i18n("Paste Selection"));
-    action->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert));
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Insert));
 
     action = collection->addAction("select-all", this, SLOT(selectAll()));
     action->setText(i18n("&Select All"));
-    action->setIcon( KIcon("edit-select-all") );
+    action->setIcon(KIcon("edit-select-all"));
     // TODO: this shortcut conflict with the 'close-active-view' action
     //action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
 
     // Rename Session
     action = collection->addAction("rename-session", this, SLOT(renameSession()));
-    action->setText( i18n("&Rename Tab...") );
-    action->setIcon( KIcon("edit-rename") );
-    action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_S) );
+    action->setText(i18n("&Rename Tab..."));
+    action->setIcon(KIcon("edit-rename"));
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_S));
 
     // Copy Input To -> All Tabs in Current Window
     _copyToAllTabsAction = collection->addAction("copy-input-to-all-tabs", this, SLOT(copyInputToAllTabs()));
@@ -461,7 +445,7 @@ void SessionController::setupActions()
     // Copy Input To -> Select Tabs
     _copyToSelectedAction = collection->addAction("copy-input-to-selected-tabs", this, SLOT(copyInputToSelectedTabs()));
     _copyToSelectedAction->setText(i18n("&Select Tabs..."));
-    _copyToSelectedAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Period) );
+    _copyToSelectedAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Period));
     _copyToSelectedAction->setCheckable(true);
 
     // Copy Input To -> None
@@ -477,18 +461,18 @@ void SessionController::setupActions()
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_U));
 
     // Monitor
-    toggleAction = new KToggleAction(i18n("Monitor for &Activity"),this);
-    toggleAction->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_A));
+    toggleAction = new KToggleAction(i18n("Monitor for &Activity"), this);
+    toggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_A));
     action = collection->addAction("monitor-activity", toggleAction);
     connect(action, SIGNAL(toggled(bool)), this, SLOT(monitorActivity(bool)));
 
-    toggleAction = new KToggleAction(i18n("Monitor for &Silence"),this);
-    toggleAction->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_I));
+    toggleAction = new KToggleAction(i18n("Monitor for &Silence"), this);
+    toggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_I));
     action = collection->addAction("monitor-silence", toggleAction);
     connect(action, SIGNAL(toggled(bool)), this, SLOT(monitorSilence(bool)));
 
     // Character Encoding
-    _codecAction = new KCodecAction(i18n("Set &Encoding"),this);
+    _codecAction = new KCodecAction(i18n("Set &Encoding"), this);
     _codecAction->setIcon(KIcon("character-set"));
     collection->addAction("set-encoding", _codecAction);
     connect(_codecAction->menu(), SIGNAL(aboutToShow()), this, SLOT(updateCodecAction()));
@@ -538,7 +522,7 @@ void SessionController::setupActions()
     // Profile Options
     action = collection->addAction("edit-current-profile", this, SLOT(editCurrentProfile()));
     action->setText(i18n("Configure Current Profile..."));
-    action->setIcon(KIcon("document-properties") );
+    action->setIcon(KIcon("document-properties"));
 
     _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), _view);
     collection->addAction("switch-profile", _switchProfileMenu);
@@ -547,13 +531,13 @@ void SessionController::setupActions()
 
 void SessionController::switchProfile(Profile::Ptr profile)
 {
-    SessionManager::instance()->setSessionProfile(_session,profile);
+    SessionManager::instance()->setSessionProfile(_session, profile);
 }
 
 void SessionController::prepareSwitchProfileMenu()
 {
     if (_switchProfileMenu->menu()->isEmpty()) {
-        _profileList = new ProfileList(false,this);
+        _profileList = new ProfileList(false, this);
         connect(_profileList, SIGNAL(profileSelected(Profile::Ptr)), this, SLOT(switchProfile(Profile::Ptr)));
     }
 
@@ -572,7 +556,7 @@ void SessionController::changeCodec(QTextCodec* codec)
 
 void SessionController::editCurrentProfile()
 {
-    EditProfileDialog* dialog = new EditProfileDialog( QApplication::activeWindow() );
+    EditProfileDialog* dialog = new EditProfileDialog(QApplication::activeWindow());
 
     dialog->setProfile(SessionManager::instance()->sessionProfile(_session));
     dialog->show();
@@ -595,8 +579,7 @@ void SessionController::renameSession()
     if (!guard)
         return;
 
-    if (result)
-    {
+    if (result) {
         QString tabTitle = dialog->tabTitleText();
         QString remoteTabTitle = dialog->remoteTabTitleText();
 
@@ -610,14 +593,13 @@ void SessionController::renameSession()
 
 bool SessionController::confirmClose() const
 {
-    if (_session->isForegroundProcessActive())
-    {
+    if (_session->isForegroundProcessActive()) {
         QString title = _session->foregroundProcessName();
 
         // hard coded for now.  In future make it possible for the user to specify which programs
         // are ignored when considering whether to display a confirmation
-        QStringList ignoreList; 
-        ignoreList << QString(qgetenv("SHELL")).section('/',-1);
+        QStringList ignoreList;
+        ignoreList << QString(qgetenv("SHELL")).section('/', -1);
         if (ignoreList.contains(title))
             return true;
 
@@ -626,54 +608,49 @@ bool SessionController::confirmClose() const
             question = i18n("A program is currently running in this session."
                             "  Are you sure you want to close it?");
         else
-            question = i18n("The program '%1' is currently running in this session."  
-                            "  Are you sure you want to close it?",title);
+            question = i18n("The program '%1' is currently running in this session."
+                            "  Are you sure you want to close it?", title);
 
-        int result = KMessageBox::warningYesNo(_view->window(),question,i18n("Confirm Close"));
-        return (result == KMessageBox::Yes) ? true : false; 
+        int result = KMessageBox::warningYesNo(_view->window(), question, i18n("Confirm Close"));
+        return (result == KMessageBox::Yes) ? true : false;
     }
     return true;
 }
 bool SessionController::confirmForceClose() const
 {
-    if (_session->isRunning())
-    {
+    if (_session->isRunning()) {
         QString title = _session->program();
 
         // hard coded for now.  In future make it possible for the user to specify which programs
         // are ignored when considering whether to display a confirmation
         QStringList ignoreList;
-        ignoreList << QString(qgetenv("SHELL")).section('/',-1);
+        ignoreList << QString(qgetenv("SHELL")).section('/', -1);
         if (ignoreList.contains(title))
             return true;
 
         QString question;
-        if ( title.isEmpty() )
+        if (title.isEmpty())
             question = i18n("A program in this session would not die."
                             "  Are you sure you want to kill it by force?");
         else
             question = i18n("The program '%1' is in this session would not die."
-                            "  Are you sure you want to kill it by force?",title);
+                            "  Are you sure you want to kill it by force?", title);
 
-        int result = KMessageBox::warningYesNo(_view->window(),question,i18n("Confirm Close"));
+        int result = KMessageBox::warningYesNo(_view->window(), question, i18n("Confirm Close"));
         return (result == KMessageBox::Yes) ? true : false;
     }
     return true;
 }
 void SessionController::closeSession()
 {
-    if ( _preventClose )
+    if (_preventClose)
         return;
 
-    if ( confirmClose() )
-    {
-        if ( _session->closeInNormalWay() )
-        {
+    if (confirmClose()) {
+        if (_session->closeInNormalWay()) {
             return;
-        }
-        else if ( confirmForceClose())
-        {
-            if( _session->closeInForceWay() )
+        } else if (confirmForceClose()) {
+            if (_session->closeInForceWay())
                 return;
             else
                 kWarning() << "Konsole failed to close a session in any way.";
@@ -711,15 +688,15 @@ void SessionController::pasteFromXSelection()
 void SessionController::selectAll()
 {
     ScreenWindow * screenWindow = _view->screenWindow();
-    screenWindow->setSelectionByLineRange(0, _session->emulation()->lineCount() );
-    TerminalDisplay::setXSelection( screenWindow->selectedText(true) );
+    screenWindow->setSelectionByLineRange(0, _session->emulation()->lineCount());
+    TerminalDisplay::setXSelection(screenWindow->selectedText(true));
 }
 static const KXmlGuiWindow* findWindow(const QObject* object)
 {
     // Walk up the QObject hierarchy to find a KXmlGuiWindow.
-    while(object != NULL) {
+    while (object != NULL) {
         const KXmlGuiWindow* window = dynamic_cast<const KXmlGuiWindow*>(object);
-        if(window != NULL) {
+        if (window != NULL) {
             return(window);
         }
         object = object->parent();
@@ -731,12 +708,12 @@ static bool hasTerminalDisplayInSameWindow(const Session* session, const KXmlGui
 {
     // Iterate all TerminalDisplays of this Session ...
     QListIterator<TerminalDisplay*> terminalDisplayIterator(session->views());
-    while(terminalDisplayIterator.hasNext()) {
+    while (terminalDisplayIterator.hasNext()) {
         const TerminalDisplay* terminalDisplay = terminalDisplayIterator.next();
         // ... and check whether a TerminalDisplay has the same
         // window as given in the parameter
-        if(window == findWindow(terminalDisplay)) {
-            return(true);    
+        if (window == findWindow(terminalDisplay)) {
+            return(true);
         }
     }
     return(false);
@@ -744,7 +721,7 @@ static bool hasTerminalDisplayInSameWindow(const Session* session, const KXmlGui
 
 void SessionController::copyInputToAllTabs()
 {
-    if(!_copyToGroup) {
+    if (!_copyToGroup) {
         _copyToGroup = new SessionGroup(this);
     }
 
@@ -752,9 +729,9 @@ void SessionController::copyInputToAllTabs()
     const KXmlGuiWindow* myWindow = findWindow(_view);
 
     QSet<Session*> group =
-       QSet<Session*>::fromList(SessionManager::instance()->sessions());
-    for(QSet<Session*>::iterator iterator = group.begin();
-        iterator != group.end(); ++iterator) {
+        QSet<Session*>::fromList(SessionManager::instance()->sessions());
+    for (QSet<Session*>::iterator iterator = group.begin();
+            iterator != group.end(); ++iterator) {
         Session* session = *iterator;
 
         // First, ensure that the session is removed
@@ -762,7 +739,7 @@ void SessionController::copyInputToAllTabs()
         _copyToGroup->removeSession(session);
 
         // Add current session if it is displayed our window
-        if(hasTerminalDisplayInSameWindow(session, myWindow)) {
+        if (hasTerminalDisplayInSameWindow(session, myWindow)) {
             _copyToGroup->addSession(session);
         }
     }
@@ -777,11 +754,10 @@ void SessionController::copyInputToAllTabs()
 
 void SessionController::copyInputToSelectedTabs()
 {
-    if (!_copyToGroup)
-    {
+    if (!_copyToGroup) {
         _copyToGroup = new SessionGroup(this);
         _copyToGroup->addSession(_session);
-        _copyToGroup->setMasterStatus(_session,true);
+        _copyToGroup->setMasterStatus(_session, true);
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
     }
 
@@ -798,14 +774,12 @@ void SessionController::copyInputToSelectedTabs()
     if (!guard)
         return;
 
-    if ( result == QDialog::Accepted )
-    {
+    if (result == QDialog::Accepted) {
         QSet<Session*> newGroup = dialog->chosenSessions();
         newGroup.remove(_session);
 
         QSet<Session*> completeGroup = newGroup | currentGroup;
-        foreach(Session* session, completeGroup)
-        {
+        foreach(Session * session, completeGroup) {
             if (newGroup.contains(session) && !currentGroup.contains(session))
                 _copyToGroup->addSession(session);
             else if (!newGroup.contains(session) && currentGroup.contains(session))
@@ -814,7 +788,7 @@ void SessionController::copyInputToSelectedTabs()
 
         _copyToGroup->setMasterStatus(_session, true);
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
-        snapshot();        
+        snapshot();
     }
 
     _copyToAllTabsAction->setChecked(false);
@@ -828,12 +802,12 @@ void SessionController::copyInputToNone()
         return;
 
     QSet<Session*> group =
-       QSet<Session*>::fromList(SessionManager::instance()->sessions());
-    for(QSet<Session*>::iterator iterator = group.begin();
-        iterator != group.end(); ++iterator) {
+        QSet<Session*>::fromList(SessionManager::instance()->sessions());
+    for (QSet<Session*>::iterator iterator = group.begin();
+            iterator != group.end(); ++iterator) {
         Session* session = *iterator;
 
-        if(session != _session) {
+        if (session != _session) {
             _copyToGroup->removeSession(*iterator);
         }
     }
@@ -856,19 +830,18 @@ void SessionController::listenForScreenWindowUpdates()
     if (_listenForScreenWindowUpdates)
         return;
 
-    connect( _view->screenWindow() , SIGNAL(outputChanged()) , this , 
-            SLOT(updateSearchFilter()) );
-    connect( _view->screenWindow() , SIGNAL(scrolled(int)) , this , 
-            SLOT(updateSearchFilter()) );
+    connect(_view->screenWindow() , SIGNAL(outputChanged()) , this ,
+            SLOT(updateSearchFilter()));
+    connect(_view->screenWindow() , SIGNAL(scrolled(int)) , this ,
+            SLOT(updateSearchFilter()));
 
     _listenForScreenWindowUpdates = true;
 }
 
 void SessionController::updateSearchFilter()
 {
-    if ( _searchFilter ) 
-    {
-        Q_ASSERT( searchBar() && searchBar()->isVisible() );
+    if (_searchFilter) {
+        Q_ASSERT(searchBar() && searchBar()->isVisible());
 
         _view->processFilters();
     }
@@ -878,40 +851,35 @@ void SessionController::updateSearchFilter()
 // as a result of changing the search bar widget
 void SessionController::searchHistory(bool showSearchBar)
 {
-    if ( _searchBar )
-    {
+    if (_searchBar) {
         _searchBar->setVisible(showSearchBar);
 
-        if (showSearchBar)
-        {
+        if (showSearchBar) {
             removeSearchFilter();
 
             listenForScreenWindowUpdates();
 
             _searchFilter = new RegExpFilter();
             _view->filterChain()->addFilter(_searchFilter);
-            connect( _searchBar , SIGNAL(searchChanged(QString)) , this ,
-                    SLOT(searchTextChanged(QString)) );
+            connect(_searchBar , SIGNAL(searchChanged(QString)) , this ,
+                    SLOT(searchTextChanged(QString)));
 
             // invoke search for matches for the current search text
             const QString& currentSearchText = _searchBar->searchText();
-            if (!currentSearchText.isEmpty())
-            {
+            if (!currentSearchText.isEmpty()) {
                 searchTextChanged(currentSearchText);
             }
 
             setFindNextPrevEnabled(true);
-        }
-        else
-        {
+        } else {
             setFindNextPrevEnabled(false);
 
-            disconnect( _searchBar , SIGNAL(searchChanged(QString)) , this ,
-                    SLOT(searchTextChanged(QString)) );
+            disconnect(_searchBar , SIGNAL(searchChanged(QString)) , this ,
+                       SLOT(searchTextChanged(QString)));
 
             removeSearchFilter();
 
-            _view->setFocus( Qt::ActiveWindowFocusReason );
+            _view->setFocus(Qt::ActiveWindowFocusReason);
         }
     }
 }
@@ -922,9 +890,9 @@ void SessionController::setFindNextPrevEnabled(bool enabled)
 }
 void SessionController::searchTextChanged(const QString& text)
 {
-    Q_ASSERT( _view->screenWindow() );
+    Q_ASSERT(_view->screenWindow());
 
-    if ( text.isEmpty() )
+    if (text.isEmpty())
         _view->screenWindow()->clearSelection();
 
     // update search.  this is called even when the text is
@@ -933,33 +901,32 @@ void SessionController::searchTextChanged(const QString& text)
 }
 void SessionController::searchCompleted(bool success)
 {
-    if ( _searchBar )
+    if (_searchBar)
         _searchBar->setFoundMatch(success);
 }
 
 void SessionController::beginSearch(const QString& text , int direction)
 {
-    Q_ASSERT( _searchBar );
-    Q_ASSERT( _searchFilter );
+    Q_ASSERT(_searchBar);
+    Q_ASSERT(_searchFilter);
 
     QBitArray options = _searchBar->optionsChecked();
 
     Qt::CaseSensitivity caseHandling = options.at(IncrementalSearchBar::MatchCase) ? Qt::CaseSensitive : Qt::CaseInsensitive;
     QRegExp::PatternSyntax syntax = options.at(IncrementalSearchBar::RegExp) ? QRegExp::RegExp : QRegExp::FixedString;
 
-    QRegExp regExp( text ,  caseHandling , syntax );
+    QRegExp regExp(text ,  caseHandling , syntax);
     _searchFilter->setRegExp(regExp);
 
-    if ( !regExp.isEmpty() )
-    {
+    if (!regExp.isEmpty()) {
         SearchHistoryTask* task = new SearchHistoryTask(this);
 
-        connect( task , SIGNAL(completed(bool)) , this , SLOT(searchCompleted(bool)) );
+        connect(task , SIGNAL(completed(bool)) , this , SLOT(searchCompleted(bool)));
 
         task->setRegExp(regExp);
-        task->setSearchDirection( (SearchHistoryTask::SearchDirection)direction );
+        task->setSearchDirection((SearchHistoryTask::SearchDirection)direction);
         task->setAutoDelete(true);
-        task->addScreenWindow( _session , _view->screenWindow() );
+        task->addScreenWindow(_session , _view->screenWindow());
         task->execute();
     }
 
@@ -967,13 +934,10 @@ void SessionController::beginSearch(const QString& text , int direction)
 }
 void SessionController::highlightMatches(bool highlight)
 {
-    if ( highlight )
-    {
+    if (highlight) {
         _view->filterChain()->addFilter(_searchFilter);
         _view->processFilters();
-    }
-    else
-    {
+    } else {
         _view->filterChain()->removeFilter(_searchFilter);
     }
 
@@ -981,72 +945,65 @@ void SessionController::highlightMatches(bool highlight)
 }
 void SessionController::findNextInHistory()
 {
-    Q_ASSERT( _searchBar );
-    Q_ASSERT( _searchFilter );
+    Q_ASSERT(_searchBar);
+    Q_ASSERT(_searchFilter);
 
-    beginSearch(_searchBar->searchText(),SearchHistoryTask::ForwardsSearch);
+    beginSearch(_searchBar->searchText(), SearchHistoryTask::ForwardsSearch);
 }
 void SessionController::findPreviousInHistory()
 {
-    Q_ASSERT( _searchBar );
-    Q_ASSERT( _searchFilter );
+    Q_ASSERT(_searchBar);
+    Q_ASSERT(_searchFilter);
 
-    beginSearch(_searchBar->searchText(),SearchHistoryTask::BackwardsSearch);
+    beginSearch(_searchBar->searchText(), SearchHistoryTask::BackwardsSearch);
 }
 void SessionController::changeSearchMatch()
 {
-    Q_ASSERT( _searchBar );
-    Q_ASSERT( _searchFilter );
+    Q_ASSERT(_searchBar);
+    Q_ASSERT(_searchFilter);
 
     // reset Selection for new case match
     _view->screenWindow()->clearSelection();
-    beginSearch(_searchBar->searchText(),SearchHistoryTask::ForwardsSearch);
+    beginSearch(_searchBar->searchText(), SearchHistoryTask::ForwardsSearch);
 }
 void SessionController::showHistoryOptions()
 {
-    HistorySizeDialog* dialog = new HistorySizeDialog( QApplication::activeWindow() );
+    HistorySizeDialog* dialog = new HistorySizeDialog(QApplication::activeWindow());
     const HistoryType& currentHistory = _session->historyType();
 
-    if ( currentHistory.isEnabled() )
-    {
-        if ( currentHistory.isUnlimited() )
-        {
-            dialog->setMode( HistorySizeDialog::UnlimitedHistory );
+    if (currentHistory.isEnabled()) {
+        if (currentHistory.isUnlimited()) {
+            dialog->setMode(HistorySizeDialog::UnlimitedHistory);
+        } else {
+            dialog->setMode(HistorySizeDialog::FixedSizeHistory);
+            dialog->setLineCount(currentHistory.maximumLineCount());
         }
-        else
-        {
-            dialog->setMode( HistorySizeDialog::FixedSizeHistory );
-            dialog->setLineCount( currentHistory.maximumLineCount() );
-        }
-    }
-    else
-    {
-        dialog->setMode( HistorySizeDialog::NoHistory );
+    } else {
+        dialog->setMode(HistorySizeDialog::NoHistory);
     }
 
-    connect( dialog , SIGNAL(optionsChanged(int,int)) ,
-             this , SLOT(scrollBackOptionsChanged(int,int)) );
+    connect(dialog , SIGNAL(optionsChanged(int, int)) ,
+            this , SLOT(scrollBackOptionsChanged(int, int)));
 
     dialog->show();
 }
 void SessionController::sessionResizeRequest(const QSize& size)
 {
     //kDebug() << "View resize requested to " << size;
-    _view->setSize(size.width(),size.height());
+    _view->setSize(size.width(), size.height());
 }
 void SessionController::scrollBackOptionsChanged(int mode, int lines)
 {
-    switch (mode)
-    {
-        case HistorySizeDialog::NoHistory:
-            _session->setHistoryType( HistoryTypeNone() );
-            break;
-         case HistorySizeDialog::FixedSizeHistory:
-            _session->setHistoryType( CompactHistoryType(lines) );
-            break;
-         case HistorySizeDialog::UnlimitedHistory:
-             _session->setHistoryType( HistoryTypeFile() );
-            break;
+    switch (mode) {
+    case HistorySizeDialog::NoHistory:
+        _session->setHistoryType(HistoryTypeNone());
+        break;
+    case HistorySizeDialog::FixedSizeHistory:
+        _session->setHistoryType(CompactHistoryType(lines));
+        break;
+    case HistorySizeDialog::UnlimitedHistory:
+        _session->setHistoryType(HistoryTypeFile());
+        break;
     }
 }
 
@@ -1054,7 +1011,7 @@ void SessionController::saveHistory()
 {
     SessionTask* task = new SaveHistoryTask(this);
     task->setAutoDelete(true);
-    task->addSession( _session );
+    task->addSession(_session);
     task->execute();
 }
 
@@ -1079,7 +1036,7 @@ void SessionController::clearHistoryAndReset()
 void SessionController::increaseTextSize()
 {
     QFont font = _view->getVTFont();
-    font.setPointSizeF(font.pointSizeF()+1);
+    font.setPointSizeF(font.pointSizeF() + 1);
     _view->setVTFont(font);
 }
 
@@ -1088,7 +1045,7 @@ void SessionController::decreaseTextSize()
     static const qreal MinimumFontSize = 6;
 
     QFont font = _view->getVTFont();
-    font.setPointSizeF( qMax(font.pointSizeF()-1,MinimumFontSize) );
+    font.setPointSizeF(qMax(font.pointSizeF() - 1, MinimumFontSize));
     _view->setVTFont(font);
 }
 
@@ -1106,18 +1063,16 @@ void SessionController::updateSessionIcon()
     if (_copyToGroup && _copyToGroup->sessions().count() > 1) {
         // Master Mode: set different icon, to warn the user to be careful
         setIcon(KIcon("emblem-important"));
-    }
-    else {
+    } else {
         // Not in Master Mode: use normal icon
-        setIcon( _sessionIcon );
+        setIcon(_sessionIcon);
     }
 }
 void SessionController::sessionTitleChanged()
 {
-    if ( _sessionIconName != _session->iconName() )
-    {
+    if (_sessionIconName != _session->iconName()) {
         _sessionIconName = _session->iconName();
-        _sessionIcon = KIcon( _sessionIconName );
+        _sessionIcon = KIcon(_sessionIconName);
         updateSessionIcon();
     }
 
@@ -1125,25 +1080,23 @@ void SessionController::sessionTitleChanged()
 
     // special handling for the "%w" marker which is replaced with the
     // window title set by the shell
-    title.replace("%w",_session->userTitle());
-    // special handling for the "%#" marker which is replaced with the 
+    title.replace("%w", _session->userTitle());
+    // special handling for the "%#" marker which is replaced with the
     // number of the shell
-    title.replace("%#",QString::number(_session->sessionId()));
+    title.replace("%#", QString::number(_session->sessionId()));
 
-    if ( title.isEmpty() )
+    if (title.isEmpty())
         title = _session->title(Session::NameRole);
 
-    setTitle( title );
+    setTitle(title);
 }
 
 void SessionController::showDisplayContextMenu(const QPoint& position)
 {
     // needed to make sure the popup menu is available, even if a hosting
     // application did not merge our GUI.
-    if (!factory())
-    {
-        if (!clientBuilder())
-        {
+    if (!factory()) {
+        if (!clientBuilder()) {
             setClientBuilder(new KXMLGUIBuilder(_view));
         }
 
@@ -1152,9 +1105,8 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         //kDebug() << "Created xmlgui factory" << factory;
     }
 
-    QPointer<QMenu> popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu",this));
-    if (popup)
-    {
+    QPointer<QMenu> popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu", this));
+    if (popup) {
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
         QList<QAction*> contentActions = _view->filterActions(position);
         QAction* contentSeparator = new QAction(popup);
@@ -1163,30 +1115,27 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 
         _preventClose = true;
 
-        popup->insertActions(popup->actions().value(0,0),contentActions);
-        QAction* chosen = popup->exec( _view->mapToGlobal(position) );
+        popup->insertActions(popup->actions().value(0, 0), contentActions);
+        QAction* chosen = popup->exec(_view->mapToGlobal(position));
 
-	// check for validity of the pointer to the popup menu
-	if (popup)
-	{
+        // check for validity of the pointer to the popup menu
+        if (popup) {
             // Remove content-specific actions
             //
             // If the close action was chosen, the popup menu will be partially
             // destroyed at this point, and the rest will be destroyed later by
             // 'chosen->trigger()'
-            foreach (QAction* action,contentActions)
-		popup->removeAction(action);
+            foreach(QAction * action, contentActions)
+            popup->removeAction(action);
 
             delete contentSeparator;
-	}
+        }
 
         _preventClose = false;
 
         if (chosen && chosen->objectName() == "close-session")
             chosen->trigger();
-    }
-    else
-    {
+    } else {
         kWarning() << "Unable to display popup menu for session"
                    << _session->title(Session::NameRole)
                    << ", no GUI factory available to build the popup.";
@@ -1195,37 +1144,29 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 
 void SessionController::sessionStateChanged(int state)
 {
-    if ( state == _previousState )
+    if (state == _previousState)
         return;
 
     _previousState = state;
 
     // TODO - Replace the icon choices below when suitable icons for silence and activity
     // are available
-    if ( state == NOTIFYACTIVITY )
-    {
-        if (_activityIcon.isNull())
-        {
+    if (state == NOTIFYACTIVITY) {
+        if (_activityIcon.isNull()) {
             _activityIcon = KIcon("dialog-information");
         }
 
         setIcon(_activityIcon);
-    }
-    else if ( state == NOTIFYSILENCE )
-    {
-        if (_silenceIcon.isNull())
-        {
+    } else if (state == NOTIFYSILENCE) {
+        if (_silenceIcon.isNull()) {
             _silenceIcon = KIcon("dialog-information");
         }
 
         setIcon(_silenceIcon);
-    }
-    else if ( state == NOTIFYNORMAL )
-    {
-        if ( _sessionIconName != _session->iconName() )
-        {
+    } else if (state == NOTIFYNORMAL) {
+        if (_sessionIconName != _session->iconName()) {
             _sessionIconName = _session->iconName();
-            _sessionIcon = KIcon( _sessionIconName );
+            _sessionIcon = KIcon(_sessionIconName);
         }
 
         updateSessionIcon();
@@ -1235,24 +1176,23 @@ void SessionController::sessionStateChanged(int state)
 void SessionController::zmodemDownload()
 {
     QString zmodem = KStandardDirs::findExe("rz");
-    if(zmodem.isEmpty()) {
-       zmodem = KStandardDirs::findExe("lrz");
+    if (zmodem.isEmpty()) {
+        zmodem = KStandardDirs::findExe("lrz");
     }
-    if(!zmodem.isEmpty()) {
+    if (!zmodem.isEmpty()) {
         const QString path = KFileDialog::getExistingDirectory(
-                                QString(), _view,
-                                i18n("Save ZModem Download to..."));
+                                 QString(), _view,
+                                 i18n("Save ZModem Download to..."));
 
-        if(!path.isEmpty()) {
+        if (!path.isEmpty()) {
             _session->startZModem(zmodem, path, QStringList());
             return;
         }
-    }
-    else {
+    } else {
         KMessageBox::error(_view,
-          i18n("<p>A ZModem file transfer attempt has been detected, "
-               "but no suitable ZModem software was found on this system.</p>"
-               "<p>You may wish to install the 'rzsz' or 'lrzsz' package.</p>"));
+                           i18n("<p>A ZModem file transfer attempt has been detected, "
+                                "but no suitable ZModem software was found on this system.</p>"
+                                "<p>You may wish to install the 'rzsz' or 'lrzsz' package.</p>"));
     }
     _session->cancelZModem();
     return;
@@ -1260,25 +1200,25 @@ void SessionController::zmodemDownload()
 
 void SessionController::zmodemUpload()
 {
-    if(_session->isZModemBusy()) {
-      KMessageBox::sorry(_view,
-         i18n("<p>The current session already has a ZModem file transfer in progress.</p>"));
-      return;
+    if (_session->isZModemBusy()) {
+        KMessageBox::sorry(_view,
+                           i18n("<p>The current session already has a ZModem file transfer in progress.</p>"));
+        return;
     }
     QString zmodem = KStandardDirs::findExe("sz");
-    if(zmodem.isEmpty()) {
-       zmodem = KStandardDirs::findExe("lsz");
+    if (zmodem.isEmpty()) {
+        zmodem = KStandardDirs::findExe("lsz");
     }
-    if(zmodem.isEmpty()) {
+    if (zmodem.isEmpty()) {
         KMessageBox::sorry(_view,
-           i18n("<p>No suitable ZModem software was found on this system.</p>"
-                "<p>You may wish to install the 'rzsz' or 'lrzsz' package.</p>"));
+                           i18n("<p>No suitable ZModem software was found on this system.</p>"
+                                "<p>You may wish to install the 'rzsz' or 'lrzsz' package.</p>"));
         return;
     }
 
     QStringList files = KFileDialog::getOpenFileNames(KUrl(), QString(), _view,
-                           i18n("Select Files for ZModem Upload"));
-    if(!files.isEmpty()) {
+                        i18n("Select Files for ZModem Upload"));
+    if (!files.isEmpty()) {
         _session->startZModem(zmodem, QString(), files);
     }
 }
@@ -1332,72 +1272,71 @@ void SaveHistoryTask::execute()
     // TODO - show a warning ( preferably passive ) if saving the history output fails
     //
 
-     KFileDialog* dialog = new KFileDialog( QString(":konsole") /* check this */,
-                                               QString(), QApplication::activeWindow() );
-     dialog->setOperationMode(KFileDialog::Saving);
-     dialog->setConfirmOverwrite(true);
+    KFileDialog* dialog = new KFileDialog(QString(":konsole") /* check this */,
+                                          QString(), QApplication::activeWindow());
+    dialog->setOperationMode(KFileDialog::Saving);
+    dialog->setConfirmOverwrite(true);
 
-     QStringList mimeTypes;
-     mimeTypes << "text/plain";
-     mimeTypes << "text/html";
-     dialog->setMimeFilter(mimeTypes,"text/plain");
+    QStringList mimeTypes;
+    mimeTypes << "text/plain";
+    mimeTypes << "text/html";
+    dialog->setMimeFilter(mimeTypes, "text/plain");
 
-     // iterate over each session in the task and display a dialog to allow the user to choose where
-     // to save that session's history.
-     // then start a KIO job to transfer the data from the history to the chosen URL
-    while ( iter.hasNext() )
-    {
+    // iterate over each session in the task and display a dialog to allow the user to choose where
+    // to save that session's history.
+    // then start a KIO job to transfer the data from the history to the chosen URL
+    while (iter.hasNext()) {
         SessionPtr session = iter.next();
 
-        dialog->setCaption( i18n("Save Output From %1",session->title(Session::NameRole)) );
+        dialog->setCaption(i18n("Save Output From %1", session->title(Session::NameRole)));
 
         int result = dialog->exec();
 
-        if ( result != QDialog::Accepted )
+        if (result != QDialog::Accepted)
             continue;
 
         KUrl url = dialog->selectedUrl();
 
-        if ( !url.isValid() )
-        { // UI:  Can we make this friendlier?
-            KMessageBox::sorry( 0 , i18n("%1 is an invalid URL, the output could not be saved.",url.url()) );
+        if (!url.isValid()) {
+            // UI:  Can we make this friendlier?
+            KMessageBox::sorry(0 , i18n("%1 is an invalid URL, the output could not be saved.", url.url()));
             continue;
         }
 
-        KIO::TransferJob* job = KIO::put( url,
-                                          -1,   // no special permissions
-                                          // overwrite existing files
-                                          // do not resume an existing transfer
-                                          // show progress information only for remote
-                                          // URLs
-                                          KIO::Overwrite | (url.isLocalFile() ? KIO::HideProgressInfo : KIO::DefaultFlags)
-                                                             // a better solution would be to show progress
-                                                             // information after a certain period of time
-                                                             // instead, since the overall speed of transfer
-                                                             // depends on factors other than just the protocol
-                                                             // used
+        KIO::TransferJob* job = KIO::put(url,
+                                         -1,   // no special permissions
+                                         // overwrite existing files
+                                         // do not resume an existing transfer
+                                         // show progress information only for remote
+                                         // URLs
+                                         KIO::Overwrite | (url.isLocalFile() ? KIO::HideProgressInfo : KIO::DefaultFlags)
+                                         // a better solution would be to show progress
+                                         // information after a certain period of time
+                                         // instead, since the overall speed of transfer
+                                         // depends on factors other than just the protocol
+                                         // used
                                         );
 
 
         SaveJob jobInfo;
         jobInfo.session = session;
         jobInfo.lastLineFetched = -1;  // when each request for data comes in from the KIO subsystem
-                                       // lastLineFetched is used to keep track of how much of the history
-                                       // has already been sent, and where the next request should continue
-                                       // from.
-                                       // this is set to -1 to indicate the job has just been started
+        // lastLineFetched is used to keep track of how much of the history
+        // has already been sent, and where the next request should continue
+        // from.
+        // this is set to -1 to indicate the job has just been started
 
-        if ( dialog->currentMimeFilter() == "text/html" )
-           jobInfo.decoder = new HTMLDecoder();
+        if (dialog->currentMimeFilter() == "text/html")
+            jobInfo.decoder = new HTMLDecoder();
         else
-           jobInfo.decoder = new PlainTextDecoder();
+            jobInfo.decoder = new PlainTextDecoder();
 
-        _jobSession.insert(job,jobInfo);
+        _jobSession.insert(job, jobInfo);
 
-        connect( job , SIGNAL(dataReq(KIO::Job*,QByteArray&)),
-                 this, SLOT(jobDataRequested(KIO::Job*,QByteArray&)) );
-        connect( job , SIGNAL(result(KJob*)),
-                 this, SLOT(jobResult(KJob*)) );
+        connect(job , SIGNAL(dataReq(KIO::Job*, QByteArray&)),
+                this, SLOT(jobDataRequested(KIO::Job*, QByteArray&)));
+        connect(job , SIGNAL(result(KJob*)),
+                this, SLOT(jobResult(KJob*)));
     }
 
     dialog->deleteLater();
@@ -1413,22 +1352,21 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
 
     // transfer LINES_PER_REQUEST lines from the session's history
     // to the save location
-    if ( info.session )
-    {
+    if (info.session) {
         // note:  when retrieving lines from the emulation,
         // the first line is at index 0.
 
         int sessionLines = info.session->emulation()->lineCount();
 
-        if ( sessionLines-1 == info.lastLineFetched )
+        if (sessionLines - 1 == info.lastLineFetched)
             return; // if there is no more data to transfer then stop the job
 
-        int copyUpToLine = qMin( info.lastLineFetched + LINES_PER_REQUEST ,
-                                 sessionLines-1 );
+        int copyUpToLine = qMin(info.lastLineFetched + LINES_PER_REQUEST ,
+                                sessionLines - 1);
 
-        QTextStream stream(&data,QIODevice::ReadWrite);
+        QTextStream stream(&data, QIODevice::ReadWrite);
         info.decoder->begin(&stream);
-        info.session->emulation()->writeToStream( info.decoder , info.lastLineFetched+1 , copyUpToLine );
+        info.session->emulation()->writeToStream(info.decoder , info.lastLineFetched + 1 , copyUpToLine);
         info.decoder->end();
 
         info.lastLineFetched = copyUpToLine;
@@ -1436,9 +1374,8 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
 }
 void SaveHistoryTask::jobResult(KJob* job)
 {
-    if ( job->error() )
-    {
-        KMessageBox::sorry( 0 , i18n("A problem occurred when saving the output.\n%1",job->errorString()) );
+    if (job->error()) {
+        KMessageBox::sorry(0 , i18n("A problem occurred when saving the output.\n%1", job->errorString()));
     }
 
     TerminalCharacterDecoder * decoder = _jobSession[job].decoder;
@@ -1450,28 +1387,27 @@ void SaveHistoryTask::jobResult(KJob* job)
     // notify the world that the task is done
     emit completed(true);
 
-    if ( autoDelete() )
+    if (autoDelete())
         deleteLater();
 }
-void SearchHistoryTask::addScreenWindow( Session* session , ScreenWindow* searchWindow )
+void SearchHistoryTask::addScreenWindow(Session* session , ScreenWindow* searchWindow)
 {
-   _windows.insert(session,searchWindow);
+    _windows.insert(session, searchWindow);
 }
 void SearchHistoryTask::execute()
 {
     QMapIterator< SessionPtr , ScreenWindowPtr > iter(_windows);
 
-    while ( iter.hasNext() )
-    {
+    while (iter.hasNext()) {
         iter.next();
-        executeOnScreenWindow( iter.key() , iter.value() );
+        executeOnScreenWindow(iter.key() , iter.value());
     }
 }
 
-void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindowPtr window )
+void SearchHistoryTask::executeOnScreenWindow(SessionPtr session , ScreenWindowPtr window)
 {
-    Q_ASSERT( session );
-    Q_ASSERT( window );
+    Q_ASSERT(session);
+    Q_ASSERT(window);
 
     Emulation* emulation = session->emulation();
 
@@ -1480,11 +1416,10 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
 
     window->getSelectionEnd(selectionColumn , selectionLine);
 
-    if ( !_regExp.isEmpty() )
-    {
+    if (!_regExp.isEmpty()) {
         int pos = -1;
-        const bool forwards = ( _direction == ForwardsSearch );
-        int startLine = selectionLine + window->currentLine() + ( forwards ? 1 : -1 );
+        const bool forwards = (_direction == ForwardsSearch);
+        int startLine = selectionLine + window->currentLine() + (forwards ? 1 : -1);
         // Temporary fix for #205495
         if (startLine < 0) startLine = 0;
         const int lastLine = window->lineCount() - 1;
@@ -1503,56 +1438,50 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
         //this balances the need to retrieve lots of data from the history each time
         //(for efficient searching)
         //without using silly amounts of memory if the history is very large.
-        const int maxDelta = qMin(window->lineCount(),10000);
+        const int maxDelta = qMin(window->lineCount(), 10000);
         int delta = forwards ? maxDelta : -maxDelta;
 
         int endLine = line;
         bool hasWrapped = false;  // set to true when we reach the top/bottom
-                                  // of the output and continue from the other
-                                  // end
+        // of the output and continue from the other
+        // end
 
         //loop through history in blocks of <delta> lines.
-        do
-        {
+        do {
             // ensure that application does not appear to hang
             // if searching through a lengthy output
             QApplication::processEvents();
 
             // calculate lines to search in this iteration
-            if ( hasWrapped )
-            {
-                if ( endLine == lastLine )
+            if (hasWrapped) {
+                if (endLine == lastLine)
                     line = 0;
-                else if ( endLine == 0 )
+                else if (endLine == 0)
                     line = lastLine;
 
                 endLine += delta;
 
-                if ( forwards )
-                   endLine = qMin( startLine , endLine );
+                if (forwards)
+                    endLine = qMin(startLine , endLine);
                 else
-                   endLine = qMax( startLine , endLine );
-            }
-            else
-            {
+                    endLine = qMax(startLine , endLine);
+            } else {
                 endLine += delta;
 
-                if ( endLine > lastLine )
-                {
+                if (endLine > lastLine) {
                     hasWrapped = true;
                     endLine = lastLine;
-                } else if ( endLine < 0 )
-                {
+                } else if (endLine < 0) {
                     hasWrapped = true;
                     endLine = 0;
                 }
             }
 
             decoder.begin(&searchStream);
-            emulation->writeToStream(&decoder, qMin(endLine,line) , qMax(endLine,line) );
+            emulation->writeToStream(&decoder, qMin(endLine, line) , qMax(endLine, line));
             decoder.end();
 
-            // line number search below assumes that the buffer ends with a new-line 
+            // line number search below assumes that the buffer ends with a new-line
             string.append('\n');
 
             pos = -1;
@@ -1562,8 +1491,7 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
                 pos = string.lastIndexOf(_regExp);
 
             //if a match is found, position the cursor on that line and update the screen
-            if ( pos != -1 )
-            {
+            if (pos != -1) {
                 int newLines = 0;
                 QList<int> linePositions = decoder.linePositions();
                 while (newLines < linePositions.count() && linePositions[newLines] <= pos)
@@ -1572,9 +1500,9 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
                 // ignore the new line at the start of the buffer
                 newLines--;
 
-                int findPos = qMin(line,endLine) + newLines;
+                int findPos = qMin(line, endLine) + newLines;
 
-                highlightResult(window,findPos);
+                highlightResult(window, findPos);
 
                 emit completed(true);
 
@@ -1585,7 +1513,7 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
             string.clear();
             line = endLine;
 
-        } while ( startLine != endLine );
+        } while (startLine != endLine);
 
         // if no match was found, clear selection to indicate this
         window->clearSelection();
@@ -1596,17 +1524,17 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
 }
 void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
 {
-     //work out how many lines into the current block of text the search result was found
-     //- looks a little painful, but it only has to be done once per search.
+    //work out how many lines into the current block of text the search result was found
+    //- looks a little painful, but it only has to be done once per search.
 
-     //kDebug() << "Found result at line " << findPos;
+    //kDebug() << "Found result at line " << findPos;
 
-     //update display to show area of history containing selection
-     window->scrollTo(findPos);
-     window->setSelectionStart( 0 , findPos - window->currentLine() , false );
-     window->setSelectionEnd( window->columnCount() , findPos - window->currentLine() );
-     window->setTrackOutput(false);
-     window->notifyOutputChanged();
+    //update display to show area of history containing selection
+    window->scrollTo(findPos);
+    window->setSelectionStart(0 , findPos - window->currentLine() , false);
+    window->setSelectionEnd(window->columnCount() , findPos - window->currentLine());
+    window->setTrackOutput(false);
+    window->notifyOutputChanged();
 }
 
 SearchHistoryTask::SearchHistoryTask(QObject* parent)
@@ -1615,7 +1543,7 @@ SearchHistoryTask::SearchHistoryTask(QObject* parent)
 {
 
 }
-void SearchHistoryTask::setSearchDirection( SearchDirection direction )
+void SearchHistoryTask::setSearchDirection(SearchDirection direction)
 {
     _direction = direction;
 }
