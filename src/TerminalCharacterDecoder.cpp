@@ -30,9 +30,9 @@
 
 using namespace Konsole;
 PlainTextDecoder::PlainTextDecoder()
- : _output(0)
- , _includeTrailingWhitespace(true)
- , _recordLinePositions(false)
+    : _output(0)
+    , _includeTrailingWhitespace(true)
+    , _recordLinePositions(false)
 {
 
 }
@@ -46,9 +46,9 @@ bool PlainTextDecoder::trailingWhitespace() const
 }
 void PlainTextDecoder::begin(QTextStream* output)
 {
-   _output = output;
-   if (!_linePositions.isEmpty())
-       _linePositions.clear();
+    _output = output;
+    if (!_linePositions.isEmpty())
+        _linePositions.clear();
 }
 void PlainTextDecoder::end()
 {
@@ -64,12 +64,11 @@ QList<int> PlainTextDecoder::linePositions() const
     return _linePositions;
 }
 void PlainTextDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/
-                             )
+                                 )
 {
-    Q_ASSERT( _output );
+    Q_ASSERT(_output);
 
-    if (_recordLinePositions && _output->string())
-    {
+    if (_recordLinePositions && _output->string()) {
         int pos = _output->string()->count();
         _linePositions << pos;
     }
@@ -86,11 +85,9 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
 
     // if inclusion of trailing whitespace is disabled then find the end of the
     // line
-    if ( !_includeTrailingWhitespace )
-    {
-        for (int i = count-1 ; i >= 0 ; i--)
-        {
-            if ( !characters[i].isSpace() )
+    if (!_includeTrailingWhitespace) {
+        for (int i = count - 1 ; i >= 0 ; i--) {
+            if (!characters[i].isSpace())
                 break;
             else
                 outputCount--;
@@ -99,33 +96,26 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
 
     // find out the last technically real character in the line
     int guard = -1 ;
-    for (int i = count-1 ; i >= 0 ; i--)
-    {
+    for (int i = count - 1 ; i >= 0 ; i--) {
         // FIXME: the special case of '\n' here is really ugly
         // Maybe the '\n' should be added after calling this method in
         // Screen::copyLineToStream()
-        if ( characters[i].isRealCharacter && characters[i].character != '\n' )
-        {
+        if (characters[i].isRealCharacter && characters[i].character != '\n') {
             guard = i;
             break;
         }
     }
 
-    for (int i=0;i<outputCount;)
-    {
-        if (characters[i].rendition & RE_EXTENDED_CHAR)
-        {
+    for (int i = 0; i < outputCount;) {
+        if (characters[i].rendition & RE_EXTENDED_CHAR) {
             ushort extendedCharLength = 0;
             const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
-            if (chars)
-            {
+            if (chars) {
                 const QString s = QString::fromUtf16(chars, extendedCharLength);
                 plainText.append(s);
                 i += string_width(s);
             }
-        }
-        else
-        {
+        } else {
             // All characters which appear before the last real character are
             // seen as real characters, even when they are technically marked as
             // non-real.
@@ -133,13 +123,10 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
             // This feels tricky, but otherwise leading "whitespaces" may be
             // lost in some situation. One typical example is copying the result
             // of `dialog --infobox "qwe" 10 10` .
-            if ( characters[i].isRealCharacter || i <= guard )
-            {
-                plainText.append( QChar(characters[i].character) );
-                i += qMax(1,konsole_wcwidth(characters[i].character));
-            }
-            else
-            {
+            if (characters[i].isRealCharacter || i <= guard) {
+                plainText.append(QChar(characters[i].character));
+                i += qMax(1, konsole_wcwidth(characters[i].character));
+            } else {
                 ++i;  // should we 'break' directly here?
             }
         }
@@ -148,10 +135,10 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
 }
 
 HTMLDecoder::HTMLDecoder() :
-        _output(0)
-    ,_colorTable(base_color_table)
-       ,_innerSpanOpen(false)
-       ,_lastRendition(DEFAULT_RENDITION)
+    _output(0)
+    , _colorTable(base_color_table)
+    , _innerSpanOpen(false)
+    , _lastRendition(DEFAULT_RENDITION)
 {
 
 }
@@ -163,14 +150,14 @@ void HTMLDecoder::begin(QTextStream* output)
     QString text;
 
     //open monospace span
-    openSpan(text,"font-family:monospace");
+    openSpan(text, "font-family:monospace");
 
     *output << text;
 }
 
 void HTMLDecoder::end()
 {
-    Q_ASSERT( _output );
+    Q_ASSERT(_output);
 
     QString text;
 
@@ -186,21 +173,19 @@ void HTMLDecoder::end()
 void HTMLDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/
                             )
 {
-    Q_ASSERT( _output );
+    Q_ASSERT(_output);
 
     QString text;
 
     int spaceCount = 0;
 
-    for (int i=0;i<count;i++)
-    {
+    for (int i = 0; i < count; i++) {
         //check if appearance of character is different from previous char
-        if ( characters[i].rendition != _lastRendition  ||
-             characters[i].foregroundColor != _lastForeColor  ||
-             characters[i].backgroundColor != _lastBackColor )
-        {
-            if ( _innerSpanOpen )
-                    closeSpan(text);
+        if (characters[i].rendition != _lastRendition  ||
+                characters[i].foregroundColor != _lastForeColor  ||
+                characters[i].backgroundColor != _lastBackColor) {
+            if (_innerSpanOpen)
+                closeSpan(text);
 
             _lastRendition = characters[i].rendition;
             _lastForeColor = characters[i].foregroundColor;
@@ -219,22 +204,20 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
             if (useBold)
                 style.append("font-weight:bold;");
 
-            if ( _lastRendition & RE_UNDERLINE )
-                    style.append("font-decoration:underline;");
+            if (_lastRendition & RE_UNDERLINE)
+                style.append("font-decoration:underline;");
 
             //colors - a color table must have been defined first
-            if ( _colorTable )    
-            {
-                style.append( QString("color:%1;").arg(_lastForeColor.color(_colorTable).name() ) );
+            if (_colorTable) {
+                style.append(QString("color:%1;").arg(_lastForeColor.color(_colorTable).name()));
 
-                if (!characters[i].isTransparent(_colorTable))
-                {
-                    style.append( QString("background-color:%1;").arg(_lastBackColor.color(_colorTable).name() ) );
+                if (!characters[i].isTransparent(_colorTable)) {
+                    style.append(QString("background-color:%1;").arg(_lastBackColor.color(_colorTable).name()));
                 }
             }
 
-            //open the span with the current style    
-            openSpan(text,style);
+            //open the span with the current style
+            openSpan(text, style);
             _innerSpanOpen = true;
         }
 
@@ -246,38 +229,31 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
 
 
         //output current character
-        if (spaceCount < 2)
-        {
-            if (characters[i].rendition & RE_EXTENDED_CHAR)
-            {
+        if (spaceCount < 2) {
+            if (characters[i].rendition & RE_EXTENDED_CHAR) {
                 ushort extendedCharLength = 0;
                 const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
-                if (chars)
-                {
+                if (chars) {
                     text.append(QString::fromUtf16(chars, extendedCharLength));
                 }
-            }
-            else
-            {
+            } else {
                 //escape HTML tag characters and just display others as they are
                 const QChar ch = characters[i].character;
-                if ( ch == '<' )
+                if (ch == '<')
                     text.append("&lt;");
                 else if (ch == '>')
                     text.append("&gt;");
-                else    
+                else
                     text.append(ch);
             }
-        }
-        else
-        {
+        } else {
             text.append("&nbsp;"); //HTML truncates multiple spaces, so use a space marker instead
         }
 
     }
 
     //close any remaining open inner spans
-    if ( _innerSpanOpen )
+    if (_innerSpanOpen)
         closeSpan(text);
 
     //start new line
@@ -287,7 +263,7 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
 }
 void HTMLDecoder::openSpan(QString& text , const QString& style)
 {
-    text.append( QString("<span style=\"%1\">").arg(style) );
+    text.append(QString("<span style=\"%1\">").arg(style));
 }
 
 void HTMLDecoder::closeSpan(QString& text)

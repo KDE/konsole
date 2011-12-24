@@ -60,9 +60,9 @@ public:
      * @param count The number of characters
      * @param properties Additional properties which affect all characters in the line
      */
-    virtual void decodeLine(const Character* const characters, 
+    virtual void decodeLine(const Character* const characters,
                             int count,
-                            LineProperty properties) = 0; 
+                            LineProperty properties) = 0;
 };
 
 /**
@@ -72,7 +72,7 @@ public:
 class PlainTextDecoder : public TerminalCharacterDecoder
 {
 public:
-    PlainTextDecoder(); 
+    PlainTextDecoder();
 
     /**
      * Set whether trailing whitespace at the end of lines should be included
@@ -99,7 +99,7 @@ public:
 
     virtual void decodeLine(const Character* const characters,
                             int count,
-                            LineProperty properties);    
+                            LineProperty properties);
 
 
 private:
@@ -125,7 +125,7 @@ public:
      * Sets the color table which the decoder uses to produce the HTML color codes in its
      * output
      */
-    void setColorTable( const ColorEntry* table );
+    void setColorTable(const ColorEntry* table);
 
     virtual void decodeLine(const Character* const characters,
                             int count,
@@ -140,7 +140,7 @@ private:
 
     QTextStream* _output;
     const ColorEntry* _colorTable;
-    bool _innerSpanOpen; 
+    bool _innerSpanOpen;
     quint8 _lastRendition;
     CharacterColor _lastForeColor;
     CharacterColor _lastBackColor;
