@@ -57,7 +57,7 @@ class Session;
  */
 class KONSOLEPRIVATE_EXPORT SessionManager : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
@@ -133,8 +133,8 @@ public:
      * set this to false if you want to preview possible changes to a profile but do not
      * wish to make them permanent.
      */
-    void changeProfile(Profile::Ptr profile , QHash<Profile::Property,QVariant> propertyMap, 
-            bool persistent = true);
+    void changeProfile(Profile::Ptr profile , QHash<Profile::Property, QVariant> propertyMap,
+                       bool persistent = true);
 
     /**
      * Returns a Profile object describing the default type of session, which is used
@@ -298,7 +298,7 @@ protected slots:
      *
      * @param session The Session which has finished executing.
      */
-    void sessionTerminated( QObject* session );
+    void sessionTerminated(QObject* session);
 
 private slots:
     void sessionProfileCommandReceived(const QString& text);
@@ -332,23 +332,22 @@ private:
     // if modifiedPropertiesOnly is true, only properties which
     // are set in @p profile are update ( ie. properties for which profile->isPropertySet(<property>)
     // returns true )
-    void applyProfile(Session* session , const Profile::Ptr profile , bool modifiedPropertiesOnly); 
+    void applyProfile(Session* session , const Profile::Ptr profile , bool modifiedPropertiesOnly);
 
     QSet<Profile::Ptr> _profiles;
-    QHash<Session*,Profile::Ptr> _sessionProfiles;
-    QHash<Session*,Profile::Ptr> _sessionRuntimeProfiles;
-    QHash<Session*,int> _restoreMapping;
+    QHash<Session*, Profile::Ptr> _sessionProfiles;
+    QHash<Session*, Profile::Ptr> _sessionRuntimeProfiles;
+    QHash<Session*, int> _restoreMapping;
 
-    struct ShortcutData
-    {
+    struct ShortcutData {
         Profile::Ptr profileKey;
         QString profilePath;
     };
-    QMap<QKeySequence,ShortcutData> _shortcuts; // shortcut keys -> profile path
+    QMap<QKeySequence, ShortcutData> _shortcuts; // shortcut keys -> profile path
 
     QList<Session*> _sessions; // list of running sessions
 
-    Profile::Ptr _defaultProfile; 
+    Profile::Ptr _defaultProfile;
     Profile::Ptr _fallbackProfile;
 
     QSet<Profile::Ptr> _favorites; // list of favorite profiles
@@ -359,15 +358,14 @@ private:
 };
 
 /** Utility class to simplify code in SessionManager::applyProfile(). */
-class ShouldApplyProperty 
+class ShouldApplyProperty
 {
 public:
-    ShouldApplyProperty(const Profile::Ptr profile , bool modifiedOnly) : 
-    _profile(profile) , _modifiedPropertiesOnly(modifiedOnly) {}
+    ShouldApplyProperty(const Profile::Ptr profile , bool modifiedOnly) :
+        _profile(profile) , _modifiedPropertiesOnly(modifiedOnly) {}
 
-    bool shouldApply(Profile::Property property) const
-    {
-        return !_modifiedPropertiesOnly || _profile->isPropertySet(property); 
+    bool shouldApply(Profile::Property property) const {
+        return !_modifiedPropertiesOnly || _profile->isPropertySet(property);
     }
 private:
     const Profile::Ptr _profile;
@@ -385,11 +383,10 @@ template <class T>
 class PopStackOnExit
 {
 public:
-    PopStackOnExit(QStack<T>& stack) : _stack(stack) , _count(stack.count()) {} 
-    ~PopStackOnExit() 
-    { 
-        while (_stack.count() > _count) 
-            _stack.pop(); 
+    PopStackOnExit(QStack<T>& stack) : _stack(stack) , _count(stack.count()) {}
+    ~PopStackOnExit() {
+        while (_stack.count() > _count)
+            _stack.pop();
     }
 private:
     QStack<T>& _stack;
@@ -406,7 +403,7 @@ private:
  */
 class SessionListModel : public QAbstractListModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     SessionListModel(QObject* parent = 0);
@@ -421,8 +418,8 @@ public:
     // reimplemented from QAbstractItemModel
     virtual QModelIndex index(int row, int column, const QModelIndex& parent) const;
     virtual QVariant data(const QModelIndex& index, int role) const;
-    virtual QVariant headerData(int section, Qt::Orientation orientation, 
-                        int role) const;
+    virtual QVariant headerData(int section, Qt::Orientation orientation,
+                                int role) const;
     virtual int columnCount(const QModelIndex& parent) const;
     virtual int rowCount(const QModelIndex& parent) const;
     virtual QModelIndex parent(const QModelIndex& index) const;
@@ -434,7 +431,7 @@ private slots:
     void sessionFinished();
 
 private:
-    QList<Session*> _sessions;    
+    QList<Session*> _sessions;
 };
 
 }
