@@ -67,8 +67,8 @@ class ViewSplitter;
  */
 class KONSOLEPRIVATE_EXPORT ViewManager : public QObject
 {
-Q_OBJECT
-Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Konsole")
+    Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Konsole")
 
 public:
     /**
@@ -122,8 +122,7 @@ public:
      * which newly created containers can provide to allow navigation
      * between open sessions.
      */
-    enum NavigationMethod
-    {
+    enum NavigationMethod {
         /**
          * Each container has a row of tabs (one per session) which the user
          * can click on to navigate between open sessions.
@@ -283,7 +282,7 @@ private slots:
 
     // called when the active view in a ViewContainer changes, so
     // that we can plug the appropriate actions into the UI
-    void viewActivated( QWidget* view );
+    void viewActivated(QWidget* view);
 
     // called when "Next View" shortcut is activated
     void nextView();
@@ -336,7 +335,7 @@ private:
 
     // takes a view from a view container owned by a different manager and places it in
     // newContainer owned by this manager
-    void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TerminalDisplay* view); 
+    void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TerminalDisplay* view);
     void splitView(Qt::Orientation orientation);
 
     // creates a new container which can hold terminal displays
@@ -362,7 +361,7 @@ private:
     QPointer<ViewSplitter>          _viewSplitter;
     QPointer<SessionController>     _pluggedController;
 
-    QHash<TerminalDisplay*,Session*> _sessionMap;
+    QHash<TerminalDisplay*, Session*> _sessionMap;
 
     KActionCollection*                  _actionCollection;
     QSignalMapper*                      _containerSignalMapper;
