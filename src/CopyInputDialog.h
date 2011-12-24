@@ -32,7 +32,7 @@
 
 namespace Ui
 {
-    class CopyInputDialog;
+class CopyInputDialog;
 }
 
 namespace Konsole
@@ -47,7 +47,7 @@ class CheckableSessionModel;
  */
 class CopyInputDialog : public KDialog
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     CopyInputDialog(QWidget* parent = 0);
@@ -67,8 +67,12 @@ public:
     QSet<Session*> chosenSessions() const;
 
 private slots:
-    void selectAll() { setSelectionChecked(true); };
-    void deselectAll() { setSelectionChecked(false); };
+    void selectAll() {
+        setSelectionChecked(true);
+    };
+    void deselectAll() {
+        setSelectionChecked(false);
+    };
 
 private:
     // Checks or unchecks selected sessions.  If there are no
@@ -88,7 +92,7 @@ private:
  */
 class CheckableSessionModel : public SessionListModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     CheckableSessionModel(QObject* parent);
@@ -122,7 +126,9 @@ private:
 };
 
 inline int CheckableSessionModel::checkColumn() const
-{ return _checkColumn; }
+{
+    return _checkColumn;
+}
 
 }
 
