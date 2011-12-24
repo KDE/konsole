@@ -27,7 +27,7 @@ class QTableWidgetItem;
 
 namespace Ui
 {
-    class KeyBindingEditor;
+class KeyBindingEditor;
 }
 
 namespace Konsole
@@ -50,7 +50,7 @@ class KeyboardTranslator;
  */
 class KeyBindingEditor : public QWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /** Constructs a new key bindings editor with the specified parent. */
@@ -75,7 +75,7 @@ public:
     QString description() const;
 
     // reimplemented to handle test area input
-    virtual bool eventFilter( QObject* watched , QEvent* event );
+    virtual bool eventFilter(QObject* watched , QEvent* event);
 
 public slots:
     /**
