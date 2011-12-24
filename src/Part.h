@@ -47,7 +47,7 @@ class ViewProperties;
  */
 class Part : public KParts::ReadOnlyPart , public TerminalInterfaceV2
 {
-Q_OBJECT
+    Q_OBJECT
     Q_INTERFACES(TerminalInterface TerminalInterfaceV2)
 public:
     /** Constructs a new Konsole part with the specified parent. */
@@ -55,12 +55,12 @@ public:
     virtual ~Part();
 
     /** Reimplemented from TerminalInterface. */
-    virtual void startProgram( const QString& program,
-                               const QStringList& arguments );
+    virtual void startProgram(const QString& program,
+                              const QStringList& arguments);
     /** Reimplemented from TerminalInterface. */
-    virtual void showShellInDir( const QString& dir );
+    virtual void showShellInDir(const QString& dir);
     /** Reimplemented from TerminalInterface. */
-    virtual void sendInput( const QString& text );
+    virtual void sendInput(const QString& text);
 
     /** Reimplemented from TerminalInterfaceV2. */
     virtual int terminalProcessId();
@@ -120,12 +120,12 @@ public slots:
      * */
     void setMonitorSilenceEnabled(bool enabled);
 
-     /**
-     * Toggles monitoring for activity in the active session. If activity is detected,
-     * the activityDetected() signal is emitted.
-     *
-     * @param enabled Whether to enable or disable monitoring for activity.
-     * */
+    /**
+    * Toggles monitoring for activity in the active session. If activity is detected,
+    * the activityDetected() signal is emitted.
+    *
+    * @param enabled Whether to enable or disable monitoring for activity.
+    * */
     void setMonitorActivityEnabled(bool enabled);
 
 signals:
@@ -174,7 +174,7 @@ private slots:
     void showManageProfilesDialog();
     void terminalExited();
     void newTab();
-    void overrideTerminalShortcut(QKeyEvent*,bool& override);
+    void overrideTerminalShortcut(QKeyEvent*, bool& override);
     void sessionStateChanged(int state);
 
 private:
