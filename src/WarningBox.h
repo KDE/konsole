@@ -35,7 +35,7 @@ namespace Konsole
  */
 class WarningBox : public QFrame
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     WarningBox(QWidget* parent = 0);
