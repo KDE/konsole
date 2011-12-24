@@ -27,7 +27,7 @@ class QTableWidgetItem;
 
 namespace Ui
 {
-    class ColorSchemeEditor;
+class ColorSchemeEditor;
 }
 
 namespace Konsole
@@ -49,38 +49,38 @@ class ColorScheme;
  */
 class ColorSchemeEditor : public QWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-   /** Constructs a new color scheme editor with the specified parent. */
-   ColorSchemeEditor(QWidget* parent = 0);
-   virtual ~ColorSchemeEditor();
+    /** Constructs a new color scheme editor with the specified parent. */
+    ColorSchemeEditor(QWidget* parent = 0);
+    virtual ~ColorSchemeEditor();
 
-   /** Initializes the dialog with the properties of the specified color scheme. */
-   void setup(const ColorScheme* scheme);
-   /** Returns the modified color scheme. */
-   ColorScheme* colorScheme() const;
+    /** Initializes the dialog with the properties of the specified color scheme. */
+    void setup(const ColorScheme* scheme);
+    /** Returns the modified color scheme. */
+    ColorScheme* colorScheme() const;
 
 signals:
-   /** Emitted when the colors in the color scheme change. */
-   void colorsChanged(ColorScheme* scheme);
+    /** Emitted when the colors in the color scheme change. */
+    void colorsChanged(ColorScheme* scheme);
 
 public slots:
     /** Sets the text displayed in the description edit field. */
-   void setDescription(const QString& description);
+    void setDescription(const QString& description);
 
 private slots:
-   void setTransparencyPercentLabel(int percent);
-   void setRandomizedBackgroundColor(bool randomized); 
-   void editColorItem(QTableWidgetItem* item);
-   void wallpaperPathChanged(const QString& path);
-   void selectWallpaper();
+    void setTransparencyPercentLabel(int percent);
+    void setRandomizedBackgroundColor(bool randomized);
+    void editColorItem(QTableWidgetItem* item);
+    void wallpaperPathChanged(const QString& path);
+    void selectWallpaper();
 
 private:
-   void setupColorTable(const ColorScheme* table);
+    void setupColorTable(const ColorScheme* table);
 
-   Ui::ColorSchemeEditor* _ui;
-   ColorScheme* _colors;    
+    Ui::ColorSchemeEditor* _ui;
+    ColorScheme* _colors;
 };
 
 }

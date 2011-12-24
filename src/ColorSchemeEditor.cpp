@@ -51,18 +51,18 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
 
     // description edit
     _ui->descriptionEdit->setClearButtonShown(true);
-    connect( _ui->descriptionEdit , SIGNAL(textChanged(QString)) , this , 
-            SLOT(setDescription(QString)) );
+    connect(_ui->descriptionEdit , SIGNAL(textChanged(QString)) , this ,
+            SLOT(setDescription(QString)));
 
     // transparency slider
     QFontMetrics metrics(font());
-    _ui->transparencyPercentLabel->setMinimumWidth( metrics.width("100%") );
+    _ui->transparencyPercentLabel->setMinimumWidth(metrics.width("100%"));
 
-    connect( _ui->transparencySlider , SIGNAL(valueChanged(int)) , this , SLOT(setTransparencyPercentLabel(int)) );
+    connect(_ui->transparencySlider , SIGNAL(valueChanged(int)) , this , SLOT(setTransparencyPercentLabel(int)));
 
     // randomized background
-    connect( _ui->randomizedBackgroundCheck , SIGNAL(toggled(bool)) , this , 
-             SLOT(setRandomizedBackgroundColor(bool)) );
+    connect(_ui->randomizedBackgroundCheck , SIGNAL(toggled(bool)) , this ,
+            SLOT(setRandomizedBackgroundColor(bool)));
 
     // color table
     _ui->colorTable->setColumnCount(2);
@@ -75,27 +75,24 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     _ui->colorTable->horizontalHeader()->setStretchLastSection(true);
 
     QTableWidgetItem* item = new QTableWidgetItem("Test");
-    _ui->colorTable->setItem(0,0,item);
+    _ui->colorTable->setItem(0, 0, item);
 
     _ui->colorTable->verticalHeader()->hide();
 
-    connect( _ui->colorTable , SIGNAL(itemClicked(QTableWidgetItem*)) , this , 
-            SLOT(editColorItem(QTableWidgetItem*)) );
+    connect(_ui->colorTable , SIGNAL(itemClicked(QTableWidgetItem*)) , this ,
+            SLOT(editColorItem(QTableWidgetItem*)));
 
     // warning label when transparency is not available
-    if ( KWindowSystem::compositingActive() )
-    {
+    if (KWindowSystem::compositingActive()) {
         _ui->transparencyWarningWidget->setVisible(false);
-    }
-    else
-    {
+    } else {
         _ui->transparencyWarningWidget->setText(i18nc("@info:status",
-            "The background transparency setting will not"
-            " be used because your desktop does not appear to support"
-            " transparent windows."));
+                                                "The background transparency setting will not"
+                                                " be used because your desktop does not appear to support"
+                                                " transparent windows."));
     }
 }
-void ColorSchemeEditor::setRandomizedBackgroundColor( bool randomize )
+void ColorSchemeEditor::setRandomizedBackgroundColor(bool randomize)
 {
     _colors->setRandomizedBackgroundColor(randomize);
 }
@@ -104,32 +101,32 @@ ColorSchemeEditor::~ColorSchemeEditor()
     delete _colors;
     delete _ui;
 }
-void ColorSchemeEditor::editColorItem( QTableWidgetItem* item )
+void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
 {
     // ignore if this is not a color column
-    if ( item->column() != 1 ) 
+    if (item->column() != 1)
         return;
 
     QColor color = item->background().color();
-    int result = KColorDialog::getColor( color );
-    if ( result == KColorDialog::Accepted ) {
-        item->setBackground( color );
+    int result = KColorDialog::getColor(color);
+    if (result == KColorDialog::Accepted) {
+        item->setBackground(color);
 
-        ColorEntry entry( _colors->colorEntry(item->row()) );
+        ColorEntry entry(_colors->colorEntry(item->row()));
         entry.color = color;
-        _colors->setColorTableEntry( item->row(), entry ); 
+        _colors->setColorTableEntry(item->row(), entry);
 
-        emit colorsChanged( _colors );
+        emit colorsChanged(_colors);
 
     }
 }
 void ColorSchemeEditor::selectWallpaper()
 {
-    const KUrl url = KFileDialog::getImageOpenUrl( _ui->wallpaperPath->text(),
-                                                   this,
-                                                   i18nc("@action:button", "Select wallpaper image file"));
+    const KUrl url = KFileDialog::getImageOpenUrl(_ui->wallpaperPath->text(),
+                     this,
+                     i18nc("@action:button", "Select wallpaper image file"));
 
-    if ( !url.isEmpty() )
+    if (!url.isEmpty())
         _ui->wallpaperPath->setText(url.path());
 }
 void ColorSchemeEditor::wallpaperPathChanged(const QString& path)
@@ -145,17 +142,17 @@ void ColorSchemeEditor::wallpaperPathChanged(const QString& path)
 }
 void ColorSchemeEditor::setDescription(const QString& text)
 {
-    if ( _colors )
+    if (_colors)
         _colors->setDescription(text);
 
-    if ( _ui->descriptionEdit->text() != text )
+    if (_ui->descriptionEdit->text() != text)
         _ui->descriptionEdit->setText(text);
 }
 void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
 {
-    _ui->transparencyPercentLabel->setText( QString("%1%").arg(percent) );
+    _ui->transparencyPercentLabel->setText(QString("%1%").arg(percent));
 
-    qreal opacity = ( 100.0 - percent ) / 100.0;
+    qreal opacity = (100.0 - percent) / 100.0;
     _colors->setOpacity(opacity);
 }
 void ColorSchemeEditor::setup(const ColorScheme* scheme)
@@ -171,41 +168,40 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme)
     setupColorTable(_colors);
 
     // setup transparency slider
-    const int transparencyPercent = qRound( (1-_colors->opacity())*100 );
+    const int transparencyPercent = qRound((1 - _colors->opacity()) * 100);
 
     _ui->transparencySlider->setValue(transparencyPercent);
     setTransparencyPercentLabel(transparencyPercent);
 
     // randomized background color checkbox
-    _ui->randomizedBackgroundCheck->setChecked( scheme->randomizedBackgroundColor() );
+    _ui->randomizedBackgroundCheck->setChecked(scheme->randomizedBackgroundColor());
 
     // wallpaper stuff
     KUrlCompletion* fileCompletion = new KUrlCompletion(KUrlCompletion::FileCompletion);
     fileCompletion->setParent(this);
-    _ui->wallpaperPath->setCompletionObject( fileCompletion );
+    _ui->wallpaperPath->setCompletionObject(fileCompletion);
     _ui->wallpaperPath->setClearButtonShown(true);
-    _ui->wallpaperSelectButton->setIcon( KIcon("image-x-generic") );
-    _ui->wallpaperPath->setText( scheme->wallpaper()->path() );
+    _ui->wallpaperSelectButton->setIcon(KIcon("image-x-generic"));
+    _ui->wallpaperPath->setText(scheme->wallpaper()->path());
 
-    connect( _ui->wallpaperSelectButton, SIGNAL(clicked()),
-             this, SLOT(selectWallpaper()));
-    connect( _ui->wallpaperPath, SIGNAL(textChanged(QString)),
-             this, SLOT(wallpaperPathChanged(QString)));
+    connect(_ui->wallpaperSelectButton, SIGNAL(clicked()),
+            this, SLOT(selectWallpaper()));
+    connect(_ui->wallpaperPath, SIGNAL(textChanged(QString)),
+            this, SLOT(wallpaperPathChanged(QString)));
 }
 void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
 {
     ColorEntry table[TABLE_COLORS];
     colors->getColorTable(table);
 
-    for ( int row = 0 ; row < TABLE_COLORS ; row++ )
-    {
-        QTableWidgetItem* nameItem = new QTableWidgetItem( ColorScheme::translatedColorNameForIndex(row) );
+    for (int row = 0 ; row < TABLE_COLORS ; row++) {
+        QTableWidgetItem* nameItem = new QTableWidgetItem(ColorScheme::translatedColorNameForIndex(row));
         QTableWidgetItem* colorItem = new QTableWidgetItem();
-        colorItem->setBackground( table[row].color );
-        colorItem->setFlags( colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable );
+        colorItem->setBackground(table[row].color);
+        colorItem->setFlags(colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable);
 
-        _ui->colorTable->setItem(row,0,nameItem);
-        _ui->colorTable->setItem(row,1,colorItem);
+        _ui->colorTable->setItem(row, 0, nameItem);
+        _ui->colorTable->setItem(row, 1, colorItem);
     }
 
     // ensure that color names are as fully visible as possible
