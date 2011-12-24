@@ -37,17 +37,16 @@ ShellCommand::ShellCommand(const QString& command , const QStringList& arguments
 {
     _arguments = arguments;
 
-    if ( !_arguments.isEmpty() )
+    if (!_arguments.isEmpty())
         _arguments[0] == command;
 }
 QString ShellCommand::fullCommand() const
 {
     QStringList quotedArgs(_arguments);
-    for (int i=0;i<quotedArgs.count();i++)
-    {
+    for (int i = 0; i < quotedArgs.count(); i++) {
         QString arg = quotedArgs.at(i);
         bool hasSpace = false;
-        for (int j=0;j<arg.count();j++)
+        for (int j = 0; j < arg.count(); j++)
             if (arg[j].isSpace())
                 hasSpace = true;
         if (hasSpace)
@@ -57,7 +56,7 @@ QString ShellCommand::fullCommand() const
 }
 QString ShellCommand::command() const
 {
-    if ( !_arguments.isEmpty() )
+    if (!_arguments.isEmpty())
         return _arguments[0];
     else
         return QString();
@@ -80,8 +79,8 @@ QStringList ShellCommand::expand(const QStringList& items)
 {
     QStringList result;
 
-    foreach( const QString& item , items )
-        result << expand(item);
+    foreach(const QString & item , items)
+    result << expand(item);
 
     return result;
 }
@@ -98,7 +97,7 @@ QString ShellCommand::expand(const QString& text)
  * Expand environment variables in text. Escaped '$' characters are ignored.
  * Return true if any variables were expanded
  */
-static bool expandEnv( QString& text )
+static bool expandEnv(QString& text)
 {
     // Find all environment variables beginning with '$'
     //
@@ -106,11 +105,11 @@ static bool expandEnv( QString& text )
 
     bool expanded = false;
 
-    while ( (pos = text.indexOf(QLatin1Char('$'), pos)) != -1 ) {
+    while ((pos = text.indexOf(QLatin1Char('$'), pos)) != -1) {
 
         // Skip escaped '$'
         //
-        if ( pos > 0 && text.at(pos-1) == QLatin1Char('\\') ) {
+        if (pos > 0 && text.at(pos - 1) == QLatin1Char('\\')) {
             pos++;
         }
         // Variable found => expand
@@ -118,30 +117,29 @@ static bool expandEnv( QString& text )
         else {
             // Find the end of the variable = next '/' or ' '
             //
-            int pos2 = text.indexOf( QLatin1Char(' '), pos+1 );
-            int pos_tmp = text.indexOf( QLatin1Char('/'), pos+1 );
+            int pos2 = text.indexOf(QLatin1Char(' '), pos + 1);
+            int pos_tmp = text.indexOf(QLatin1Char('/'), pos + 1);
 
-            if ( pos2 == -1 || (pos_tmp != -1 && pos_tmp < pos2) )
+            if (pos2 == -1 || (pos_tmp != -1 && pos_tmp < pos2))
                 pos2 = pos_tmp;
 
-            if ( pos2 == -1 )
+            if (pos2 == -1)
                 pos2 = text.length();
 
             // Replace if the variable is terminated by '/' or ' '
             // and defined
             //
-            if ( pos2 >= 0 ) {
+            if (pos2 >= 0) {
                 int len    = pos2 - pos;
-                QString key    = text.mid( pos+1, len-1);
+                QString key    = text.mid(pos + 1, len - 1);
                 QString value =
-                    QString::fromLocal8Bit( qgetenv(key.toLocal8Bit()) );
+                    QString::fromLocal8Bit(qgetenv(key.toLocal8Bit()));
 
-                if ( !value.isEmpty() ) {
+                if (!value.isEmpty()) {
                     expanded = true;
-                    text.replace( pos, len, value );
+                    text.replace(pos, len, value);
                     pos = pos + value.length();
-                }
-                else {
+                } else {
                     pos = pos2;
                 }
             }
