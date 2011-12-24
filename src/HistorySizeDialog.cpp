@@ -36,7 +36,7 @@
 
 using namespace Konsole;
 
-HistorySizeDialog::HistorySizeDialog( QWidget* parent )
+HistorySizeDialog::HistorySizeDialog(QWidget* parent)
     :  KDialog(parent)
     ,  _noHistoryButton(0)
     ,  _fixedHistoryButton(0)
@@ -44,10 +44,10 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     ,  _lineCountBox(0)
 {
     // basic dialog properties
-    setPlainCaption( i18n("Adjust Scrollback") );
-    setButtons( KDialog::Ok | KDialog::Cancel );
-    setDefaultButton( KDialog::Ok );
-    setModal( false );
+    setPlainCaption(i18n("Adjust Scrollback"));
+    setButtons(KDialog::Ok | KDialog::Cancel);
+    setDefaultButton(KDialog::Ok);
+    setModal(false);
 
     // dialog widgets
     QWidget* dialogWidget = new QWidget(this);
@@ -55,9 +55,9 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
 
     QVBoxLayout* dialogLayout = new QVBoxLayout(dialogWidget);
 
-    _noHistoryButton        = new QRadioButton( i18n("No scrollback") );
-    _fixedHistoryButton     = new QRadioButton( i18n("Fixed size scrollback: ") );
-    _unlimitedHistoryButton = new QRadioButton( i18n("Unlimited scrollback") );
+    _noHistoryButton        = new QRadioButton(i18n("No scrollback"));
+    _fixedHistoryButton     = new QRadioButton(i18n("Fixed size scrollback: "));
+    _unlimitedHistoryButton = new QRadioButton(i18n("Unlimited scrollback"));
 
     QButtonGroup* modeGroup = new QButtonGroup(this);
     modeGroup->addButton(_noHistoryButton);
@@ -70,23 +70,23 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     // maximum lines is arbitrarily chosen, I do not think it is sensible to allow this
     // to be set to a very large figure because that will use large amounts of memory,
     // if a very large log is required, "Unlimited History" mode should be used
-    _lineCountBox->setRange( 1 , 100000 );
+    _lineCountBox->setRange(1 , 100000);
 
-    _lineCountBox->setValue( HistorySizeDialog::defaultLineCount );
-    _lineCountBox->setSingleStep( HistorySizeDialog::defaultLineCount / 10 );
+    _lineCountBox->setValue(HistorySizeDialog::defaultLineCount);
+    _lineCountBox->setSingleStep(HistorySizeDialog::defaultLineCount / 10);
 
     _fixedHistoryButton->setFocusProxy(_lineCountBox);
-    connect( _fixedHistoryButton , SIGNAL(clicked()) ,
-             _lineCountBox , SLOT(selectAll()) );
+    connect(_fixedHistoryButton , SIGNAL(clicked()) ,
+            _lineCountBox , SLOT(selectAll()));
 
-    QLabel* lineCountLabel = new QLabel(i18n("lines"),this);
+    QLabel* lineCountLabel = new QLabel(i18n("lines"), this);
 
     QHBoxLayout* lineCountLayout = new QHBoxLayout();
     lineCountLayout->addWidget(_fixedHistoryButton);
     lineCountLayout->addWidget(_lineCountBox);
     lineCountLayout->addWidget(lineCountLabel);
 
-    QLabel* warningLabel = new QLabel(i18n("<center>The adjustment is only temporary</center>"),this);
+    QLabel* warningLabel = new QLabel(i18n("<center>The adjustment is only temporary</center>"), this);
     warningLabel->setStyleSheet("text-align:center; font-weight:normal; color:palette(dark)");
 
     dialogLayout->addWidget(warningLabel);
@@ -96,26 +96,21 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     dialogLayout->addWidget(_unlimitedHistoryButton);
     dialogLayout->insertSpacing(-1, 10);
 
-    connect(this,SIGNAL(accepted()),this,SLOT(emitOptionsChanged()));
+    connect(this, SIGNAL(accepted()), this, SLOT(emitOptionsChanged()));
 }
 
 void HistorySizeDialog::emitOptionsChanged()
 {
-    emit optionsChanged( mode() , lineCount() );
+    emit optionsChanged(mode() , lineCount());
 }
 
-void HistorySizeDialog::setMode( HistoryMode mode )
+void HistorySizeDialog::setMode(HistoryMode mode)
 {
-    if ( mode == NoHistory )
-    {
+    if (mode == NoHistory) {
         _noHistoryButton->setChecked(true);
-    }
-    else if ( mode == FixedSizeHistory )
-    {
+    } else if (mode == FixedSizeHistory) {
         _fixedHistoryButton->setChecked(true);
-    }
-    else if ( mode == UnlimitedHistory )
-    {
+    } else if (mode == UnlimitedHistory) {
         _unlimitedHistoryButton->setChecked(true);
     }
 
@@ -123,11 +118,11 @@ void HistorySizeDialog::setMode( HistoryMode mode )
 
 HistorySizeDialog::HistoryMode HistorySizeDialog::mode() const
 {
-    if ( _noHistoryButton->isChecked() )
+    if (_noHistoryButton->isChecked())
         return NoHistory;
-    else if ( _fixedHistoryButton->isChecked() )
+    else if (_fixedHistoryButton->isChecked())
         return FixedSizeHistory;
-    else if ( _unlimitedHistoryButton->isChecked() )
+    else if (_unlimitedHistoryButton->isChecked())
         return UnlimitedHistory;
 
     Q_ASSERT(false);
@@ -142,7 +137,7 @@ int HistorySizeDialog::lineCount() const
 void HistorySizeDialog::setLineCount(int lines)
 {
     _lineCountBox->setValue(lines);
-    _lineCountBox->setSingleStep( lines / 10 );
+    _lineCountBox->setSingleStep(lines / 10);
 }
 
 

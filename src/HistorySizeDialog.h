@@ -35,17 +35,16 @@ namespace Konsole
  */
 class HistorySizeDialog : public KDialog
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
      * Construct a new history size dialog.
      */
-    HistorySizeDialog( QWidget* parent );
+    HistorySizeDialog(QWidget* parent);
 
     /** Specifies the type of history scroll */
-    enum HistoryMode
-    {
+    enum HistoryMode {
         /**
          * No history.  Lines of output are lost
          * as soon as they are scrolled off-screen.
@@ -65,7 +64,7 @@ public:
 
 
     /** Specifies the history mode. */
-    void setMode( HistoryMode mode );
+    void setMode(HistoryMode mode);
     /** Returns the history mode chosen by the user. */
     HistoryMode mode() const;
     /**
