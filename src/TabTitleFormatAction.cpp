@@ -29,8 +29,7 @@
 
 using namespace Konsole;
 
-const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] =
-{
+const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] = {
     { "%n" , I18N_NOOP("Program Name: %n") },
     { "%d" , I18N_NOOP("Current Directory (Short): %d") },
     { "%D" , I18N_NOOP("Current Directory (Long): %D") },
@@ -41,8 +40,7 @@ const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] =
 const int TabTitleFormatAction::_localElementCount =
     sizeof(_localElements) / sizeof(TabTitleFormatAction::Element);
 
-const TabTitleFormatAction::Element TabTitleFormatAction::_remoteElements[] =
-{
+const TabTitleFormatAction::Element TabTitleFormatAction::_remoteElements[] = {
     { "%u" , I18N_NOOP("User Name: %u") },
     { "%h" , I18N_NOOP("Remote Host (Short): %h") },
     { "%H" , I18N_NOOP("Remote Host (Long): %H") },
@@ -56,8 +54,8 @@ TabTitleFormatAction::TabTitleFormatAction(QObject* parent)
     : QAction(parent)
     , _context(Session::LocalTabTitle)
 {
-    setMenu( new QMenu() );
-    connect( menu() , SIGNAL(triggered(QAction*)) , this , SLOT(fireElementSelected(QAction*)) );
+    setMenu(new QMenu());
+    connect(menu() , SIGNAL(triggered(QAction*)) , this , SLOT(fireElementSelected(QAction*)));
 }
 TabTitleFormatAction::~TabTitleFormatAction()
 {
@@ -78,20 +76,16 @@ void TabTitleFormatAction::setContext(Session::TabTitleContext context)
     int count = 0;
     const Element* array = 0;
 
-    if ( context == Session::LocalTabTitle )
-    {
+    if (context == Session::LocalTabTitle) {
         array = _localElements;
         count = _localElementCount;
-    }
-    else if ( context == Session::RemoteTabTitle )
-    {
+    } else if (context == Session::RemoteTabTitle) {
         array = _remoteElements;
         count = _remoteElementCount;
     }
 
-    for ( int i = 0 ; i < count ; i++ )
-    {
-        QAction* action = new QAction(i18n(array[i].description),this);
+    for (int i = 0 ; i < count ; i++) {
+        QAction* action = new QAction(i18n(array[i].description), this);
         action->setData(array[i].element);
         actions << action;
     }

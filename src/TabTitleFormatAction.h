@@ -31,7 +31,7 @@ namespace Konsole
 
 class TabTitleFormatAction : public QAction
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     TabTitleFormatAction(QObject* parent);
@@ -49,8 +49,7 @@ private slots:
 private:
     Session::TabTitleContext _context;
 
-    struct Element
-    {
+    struct Element {
         QString element;
         const char* description;
     };
