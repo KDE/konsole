@@ -29,7 +29,7 @@ namespace Konsole
 
 class ZModemDialog : public KDialog
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     ZModemDialog(QWidget* parent, bool modal, const QString& caption);

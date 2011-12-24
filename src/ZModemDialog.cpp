@@ -26,16 +26,16 @@
 using namespace Konsole;
 
 ZModemDialog::ZModemDialog(QWidget* parent, bool modal, const QString& caption)
- : KDialog( parent )
+    : KDialog(parent)
 {
-    setObjectName( QLatin1String( "zmodem_progress" ) );
-    setModal( modal );
-    setCaption( caption );
+    setObjectName(QLatin1String("zmodem_progress"));
+    setModal(modal);
+    setCaption(caption);
 
-    setButtons( KDialog::User1 | KDialog::Close );
-    setButtonGuiItem( KDialog::User1, KGuiItem(i18n("&Stop")) );
-    setDefaultButton( KDialog::Close );
-    setEscapeButton( KDialog::User1 );
+    setButtons(KDialog::User1 | KDialog::Close);
+    setButtonGuiItem(KDialog::User1, KGuiItem(i18n("&Stop")));
+    setDefaultButton(KDialog::Close);
+    setEscapeButton(KDialog::User1);
     enableButton(KDialog::Close, false);
 
     _textEdit = new KTextEdit(this);
@@ -44,7 +44,7 @@ ZModemDialog::ZModemDialog(QWidget* parent, bool modal, const QString& caption)
     setMainWidget(_textEdit);
 
     connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClose()));
-    connect(this,SIGNAL(closeClicked()),this,SLOT(slotClose()));
+    connect(this, SIGNAL(closeClicked()), this, SLOT(slotClose()));
 }
 
 void ZModemDialog::addProgressText(const QString& text)
