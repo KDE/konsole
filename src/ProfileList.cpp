@@ -44,7 +44,7 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
 
     // Even when there are no favorite profiles, allow user to
     // create new tabs using the default profile from the menu
-    _emptyListAction = new QAction(i18n("Default profile"),_group);
+    _emptyListAction = new QAction(i18n("Default profile"), _group);
 
     // TODO - Handle re-sorts when user changes profile names
     SessionManager* manager = SessionManager::instance();
@@ -52,40 +52,38 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
 
     QListIterator<Profile::Ptr> iter(list);
 
-    while (iter.hasNext())
-    {
+    while (iter.hasNext()) {
         favoriteChanged(iter.next(), true);
     }
 
-    connect( _group , SIGNAL(triggered(QAction*)) , this , SLOT(triggered(QAction*)) );
+    connect(_group , SIGNAL(triggered(QAction*)) , this , SLOT(triggered(QAction*)));
 
 
     // listen for future changes to the profiles
-    connect( manager , SIGNAL(favoriteStatusChanged(Profile::Ptr,bool)) , this ,
-             SLOT(favoriteChanged(Profile::Ptr,bool)) );
-    connect( manager , SIGNAL(shortcutChanged(Profile::Ptr,QKeySequence)) , this , 
-             SLOT(shortcutChanged(Profile::Ptr,QKeySequence)) );
-    connect( manager , SIGNAL(profileChanged(Profile::Ptr)) , this , 
-             SLOT(profileChanged(Profile::Ptr)) );
+    connect(manager , SIGNAL(favoriteStatusChanged(Profile::Ptr, bool)) , this ,
+            SLOT(favoriteChanged(Profile::Ptr, bool)));
+    connect(manager , SIGNAL(shortcutChanged(Profile::Ptr, QKeySequence)) , this ,
+            SLOT(shortcutChanged(Profile::Ptr, QKeySequence)));
+    connect(manager , SIGNAL(profileChanged(Profile::Ptr)) , this ,
+            SLOT(profileChanged(Profile::Ptr)));
 }
 void ProfileList::updateEmptyAction()
 {
-    Q_ASSERT( _group );
-    Q_ASSERT( _emptyListAction );
+    Q_ASSERT(_group);
+    Q_ASSERT(_emptyListAction);
 
     // show this action only when it is the only action in the group
     const bool showEmptyAction = (_group->actions().count() == 1);
 
-    if ( showEmptyAction != _emptyListAction->isVisible() )
+    if (showEmptyAction != _emptyListAction->isVisible())
         _emptyListAction->setVisible(showEmptyAction);
 }
 QAction* ProfileList::actionForKey(Profile::Ptr key) const
 {
     QListIterator<QAction*> iter(_group->actions());
-    while ( iter.hasNext() )
-    {
+    while (iter.hasNext()) {
         QAction* next = iter.next();
-        if ( next->data().value<Profile::Ptr>() == key )
+        if (next->data().value<Profile::Ptr>() == key)
             return next;
     }
     return 0; // not found
@@ -94,8 +92,8 @@ QAction* ProfileList::actionForKey(Profile::Ptr key) const
 void ProfileList::profileChanged(Profile::Ptr key)
 {
     QAction* action = actionForKey(key);
-    if ( action )
-        updateAction(action,key);
+    if (action)
+        updateAction(action, key);
 }
 
 void ProfileList::updateAction(QAction* action , Profile::Ptr info)
@@ -106,22 +104,20 @@ void ProfileList::updateAction(QAction* action , Profile::Ptr info)
     action->setText(info->name());
     action->setIcon(KIcon(info->icon()));
 }
-void ProfileList::shortcutChanged(Profile::Ptr info,const QKeySequence& sequence)
+void ProfileList::shortcutChanged(Profile::Ptr info, const QKeySequence& sequence)
 {
-    if ( !_addShortcuts )
+    if (!_addShortcuts)
         return;
 
     QAction* action = actionForKey(info);
 
-    if ( action )
-    {
+    if (action) {
         action->setShortcut(sequence);
     }
 }
 void ProfileList::syncWidgetActions(QWidget* widget, bool sync)
 {
-    if (!sync)
-    {
+    if (!sync) {
         _registeredWidgets.remove(widget);
         return;
     }
@@ -129,40 +125,35 @@ void ProfileList::syncWidgetActions(QWidget* widget, bool sync)
     _registeredWidgets.insert(widget);
 
     const QList<QAction*> currentActions = widget->actions();
-    foreach(QAction* currentAction, currentActions)
-        widget->removeAction(currentAction);
+    foreach(QAction * currentAction, currentActions)
+    widget->removeAction(currentAction);
 
     widget->addActions(_group->actions());
 }
-void ProfileList::favoriteChanged(Profile::Ptr info,bool isFavorite)
+void ProfileList::favoriteChanged(Profile::Ptr info, bool isFavorite)
 {
     SessionManager* manager = SessionManager::instance();
 
-    if ( isFavorite )
-    {
+    if (isFavorite) {
         QAction* action = new QAction(_group);
-        action->setData( QVariant::fromValue(info) );
+        action->setData(QVariant::fromValue(info));
 
-        if ( _addShortcuts )
-        {
+        if (_addShortcuts) {
             action->setShortcut(manager->shortcut(info));
         }
 
-        updateAction(action,info);
+        updateAction(action, info);
 
-        foreach(QWidget* widget,_registeredWidgets)
-            widget->addAction(action);
+        foreach(QWidget * widget, _registeredWidgets)
+        widget->addAction(action);
         emit actionsChanged(_group->actions());
-    }
-    else
-    {
+    } else {
         QAction* action = actionForKey(info);
 
-        if ( action )
-        {
+        if (action) {
             _group->removeAction(action);
-            foreach(QWidget* widget,_registeredWidgets)
-                widget->removeAction(action);
+            foreach(QWidget * widget, _registeredWidgets)
+            widget->removeAction(action);
             emit actionsChanged(_group->actions());
         }
     }
@@ -171,7 +162,7 @@ void ProfileList::favoriteChanged(Profile::Ptr info,bool isFavorite)
 }
 void ProfileList::triggered(QAction* action)
 {
-    emit profileSelected( action->data().value<Profile::Ptr>() );
+    emit profileSelected(action->data().value<Profile::Ptr>());
 }
 
 QList<QAction*> ProfileList::actions()

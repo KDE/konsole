@@ -51,7 +51,7 @@ class Profile;
  */
 class KONSOLEPRIVATE_EXPORT ProfileList : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /**
@@ -73,18 +73,18 @@ public:
     QList<QAction*> actions();
 
     /** TODO: Document me */
-    void syncWidgetActions(QWidget* widget,bool sync);
+    void syncWidgetActions(QWidget* widget, bool sync);
 signals:
-   /**
-    * Emitted when the user selects an action from the list.
-    *
-    * @param profile The profile to select
-    */
-   void profileSelected(Profile::Ptr profile);
-   /**
-    * Emitted when the list of actions changes.
-    */
-   void actionsChanged(const QList<QAction*>& actions);
+    /**
+     * Emitted when the user selects an action from the list.
+     *
+     * @param profile The profile to select
+     */
+    void profileSelected(Profile::Ptr profile);
+    /**
+     * Emitted when the list of actions changes.
+     */
+    void actionsChanged(const QList<QAction*>& actions);
 
 private slots:
     void triggered(QAction* action);
