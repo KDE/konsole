@@ -53,13 +53,13 @@ namespace Konsole
  */
 class KONSOLEPRIVATE_EXPORT Pty: public KPtyProcess
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
 
     /**
      * Constructs a new Pty.
-     * 
+     *
      * Connect to the sendData() slot and receivedData() signal to prepare
      * for sending and receiving data from the terminal process.
      *
@@ -96,13 +96,13 @@ public:
      * @param dbusSession Specifies the value of the KONSOLE_DBUS_SESSION
      * environment variable in the process's environment.
      */
-    int start( const QString& program, 
-               const QStringList& arguments, 
-               const QStringList& environment, 
-               ulong winid, 
-               bool addToUtmp,
-               const QString& dbusService,
-               const QString& dbusSession
+    int start(const QString& program,
+              const QStringList& arguments,
+              const QStringList& environment,
+              ulong winid,
+              bool addToUtmp,
+              const QString& dbusService,
+              const QString& dbusSession
              );
 
     /** Control whether the pty device is writeable by group members. */
@@ -194,7 +194,7 @@ protected:
 
 private slots:
     // called when data is received from the terminal process
-    void dataReceived(); 
+    void dataReceived();
 
 private:
 
@@ -204,7 +204,7 @@ private:
     // to the environment for the process
     void addEnvironmentVariables(const QStringList& environment);
 
-    int  _windowColumns; 
+    int  _windowColumns;
     int  _windowLines;
     char _eraseChar;
     bool _xonXoff;
