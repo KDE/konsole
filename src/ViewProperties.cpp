@@ -22,12 +22,12 @@
 
 using namespace Konsole;
 
-QHash<int,ViewProperties*> ViewProperties::_viewProperties;
+QHash<int, ViewProperties*> ViewProperties::_viewProperties;
 QString ViewProperties::_mimeType = "application/x-konsole-view-id";
 
 ViewProperties::ViewProperties(QObject* parent)
-: QObject(parent)
-, _id(0)
+    : QObject(parent)
+    , _id(0)
 {
 }
 
@@ -58,8 +58,7 @@ void ViewProperties::rename()
 
 void ViewProperties::setTitle(const QString& title)
 {
-    if ( title != _title )
-    {
+    if (title != _title) {
         _title = title;
         emit titleChanged(this);
     }
@@ -69,8 +68,7 @@ void ViewProperties::setIcon(const QIcon& icon)
     // the icon's cache key is used to determine whether this icon is the same
     // as the old one.  if so no signal is emitted.
 
-    if ( icon.cacheKey() != _icon.cacheKey() )
-    {
+    if (icon.cacheKey() != _icon.cacheKey()) {
         _icon = icon;
         emit iconChanged(this);
     }
@@ -82,7 +80,7 @@ void ViewProperties::setIdentifier(int id)
 
     _id = id;
 
-    _viewProperties.insert(id,this);
+    _viewProperties.insert(id, this);
 }
 QString ViewProperties::title() const
 {

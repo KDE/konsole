@@ -44,7 +44,7 @@ namespace Konsole
  */
 class KONSOLEPRIVATE_EXPORT ViewProperties : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     ViewProperties(QObject* parent);
@@ -79,22 +79,25 @@ public:
      * to allow them to confirm whether to close a view.
      * The default implementation always returns true
      */
-    virtual bool confirmClose() const { return true; }
+    virtual bool confirmClose() const {
+        return true;
+    }
 
     /** Finds a ViewProperties instance given its numeric identifier. */
     static ViewProperties* propertiesById(int id);
 
     /** Name of mime format to use in drag-and-drop operations. */
-    static QString mimeType() { return _mimeType; }
+    static QString mimeType() {
+        return _mimeType;
+    }
 
     /** Returns a new QMimeData instance which represents the view with the given @p id
      * (See identifier()).  The QMimeData instance returned must be deleted by the caller.
      */
-    static QMimeData* createMimeData(int id)
-    {
+    static QMimeData* createMimeData(int id) {
         QMimeData* mimeData = new QMimeData;
-        QByteArray data((char*)&id,sizeof(int));
-        mimeData->setData(mimeType(),data);
+        QByteArray data((char*)&id, sizeof(int));
+        mimeData->setData(mimeType(), data);
         return mimeData;
     }
     /** Decodes a QMimeData instance created with createMimeData() and returns the identifier
@@ -103,8 +106,7 @@ public:
      *
      * The QMimeData instance must support the mime format returned by mimeType()
      */
-    static int decodeMimeData(const QMimeData* mimeData)
-    {
+    static int decodeMimeData(const QMimeData* mimeData) {
         return *(int*)(mimeData->data(ViewProperties::mimeType()).constData());
     }
 
@@ -121,7 +123,7 @@ public slots:
      * Requests the renaming of this view.
      * The default implementation does nothing.
      */
-     virtual void rename();
+    virtual void rename();
 
 protected slots:
     /** Emits the activity() signal. */
@@ -145,7 +147,7 @@ private:
     QString _title;
     int _id;
 
-    static QHash<int,ViewProperties*> _viewProperties;
+    static QHash<int, ViewProperties*> _viewProperties;
     static QString _mimeType;
 };
 
