@@ -71,12 +71,13 @@ int Session::lastSessionId = 0;
 // ...with a constant.
 QUuid createUuid()
 {
-    static const int intbits = sizeof(int)*8;
+    static const int intbits = sizeof(int) * 8;
     static int randbits = 0;
-    if (!randbits)
-    {
+    if (!randbits) {
         int max = RAND_MAX;
-        do { ++randbits; } while ((max=max>>1));
+        do {
+            ++randbits;
+        } while ((max = max >> 1));
     }
 
     qsrand(uint(QDateTime::currentDateTime().toTime_t()));
@@ -88,8 +89,8 @@ QUuid createUuid()
     while (chunks--) {
         uint randNumber = 0;
         for (int filled = 0; filled < intbits; filled += randbits)
-            randNumber |= qrand()<<filled;
-        *(data+chunks) = randNumber;
+            randNumber |= qrand() << filled;
+        *(data + chunks) = randNumber;
     }
 
     result.data4[0] = (result.data4[0] & 0x3F) | 0x80;        // UV_DCE
@@ -99,52 +100,52 @@ QUuid createUuid()
 }
 
 Session::Session(QObject* parent) :
-   QObject(parent)
-   , _shellProcess(0)
-   , _emulation(0)
-   , _monitorActivity(false)
-   , _monitorSilence(false)
-   , _notifiedActivity(false)
-   , _silenceSeconds(10)
-   , _autoClose(true)
-   , _closePerUserRequest(false)
-   , _addToUtmp(true)  
-   , _flowControl(true)
-   , _sessionId(0)
-   , _sessionProcessInfo(0)
-   , _foregroundProcessInfo(0)
-   , _foregroundPid(0)
-   , _zmodemBusy(false)
-   , _zmodemProc(0)
-   , _zmodemProgress(0)
-   , _hasDarkBackground(false)
+    QObject(parent)
+    , _shellProcess(0)
+    , _emulation(0)
+    , _monitorActivity(false)
+    , _monitorSilence(false)
+    , _notifiedActivity(false)
+    , _silenceSeconds(10)
+    , _autoClose(true)
+    , _closePerUserRequest(false)
+    , _addToUtmp(true)
+    , _flowControl(true)
+    , _sessionId(0)
+    , _sessionProcessInfo(0)
+    , _foregroundProcessInfo(0)
+    , _foregroundPid(0)
+    , _zmodemBusy(false)
+    , _zmodemProc(0)
+    , _zmodemProgress(0)
+    , _hasDarkBackground(false)
 {
     _uniqueIdentifier = createUuid();
 
     //prepare DBus communication
     new SessionAdaptor(this);
     _sessionId = ++lastSessionId;
-    QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/")+QString::number(_sessionId), this);
+    QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/") + QString::number(_sessionId), this);
 
     //create emulation backend
     _emulation = new Vt102Emulation();
 
-    connect( _emulation, SIGNAL(titleChanged(int,QString)),
-           this, SLOT(setUserTitle(int,QString)) );
-    connect( _emulation, SIGNAL(stateSet(int)),
-           this, SLOT(activityStateSet(int)) );
-    connect( _emulation, SIGNAL(zmodemDetected()), this ,
-            SLOT(fireZModemDetected()) );
-    connect( _emulation, SIGNAL(changeTabTextColorRequest(int)),
-           this, SIGNAL(changeTabTextColorRequest(int)) );
-    connect( _emulation, SIGNAL(profileChangeCommandReceived(QString)),
-           this, SIGNAL(profileChangeCommandReceived(QString)) );
-    connect( _emulation, SIGNAL(flowControlKeyPressed(bool)) , this, 
-             SLOT(updateFlowControlState(bool)) );
-    connect( _emulation, SIGNAL(primaryScreenInUse(bool)) , this,
-             SLOT(onPrimaryScreenInUse(bool)) );
-    connect( _emulation, SIGNAL(selectedText(QString)) , this,
-             SLOT(onSelectedText(QString)) );
+    connect(_emulation, SIGNAL(titleChanged(int, QString)),
+            this, SLOT(setUserTitle(int, QString)));
+    connect(_emulation, SIGNAL(stateSet(int)),
+            this, SLOT(activityStateSet(int)));
+    connect(_emulation, SIGNAL(zmodemDetected()), this ,
+            SLOT(fireZModemDetected()));
+    connect(_emulation, SIGNAL(changeTabTextColorRequest(int)),
+            this, SIGNAL(changeTabTextColorRequest(int)));
+    connect(_emulation, SIGNAL(profileChangeCommandReceived(QString)),
+            this, SIGNAL(profileChangeCommandReceived(QString)));
+    connect(_emulation, SIGNAL(flowControlKeyPressed(bool)) , this,
+            SLOT(updateFlowControlState(bool)));
+    connect(_emulation, SIGNAL(primaryScreenInUse(bool)) , this,
+            SLOT(onPrimaryScreenInUse(bool)));
+    connect(_emulation, SIGNAL(selectedText(QString)) , this,
+            SLOT(onSelectedText(QString)));
 
     //create new teletype for I/O with shell process
     openTeletype(-1);
@@ -154,15 +155,14 @@ Session::Session(QObject* parent) :
     _silenceTimer->setSingleShot(true);
     connect(_silenceTimer, SIGNAL(timeout()), this, SLOT(silenceTimerDone()));
 
-    _activityTimer= new QTimer(this);
+    _activityTimer = new QTimer(this);
     _activityTimer->setSingleShot(true);
     connect(_activityTimer, SIGNAL(timeout()), this, SLOT(activityTimerDone()));
 }
 
 void Session::openTeletype(int fd)
 {
-    if ( isRunning() )
-    {
+    if (isRunning()) {
         kWarning() << "Attempted to open teletype in a running session.";
         return;
     }
@@ -177,15 +177,15 @@ void Session::openTeletype(int fd)
     _shellProcess->setUtf8Mode(_emulation->utf8());
 
     //connect teletype to emulation backend
-    connect( _shellProcess,SIGNAL(receivedData(const char*,int)),this,
-            SLOT(onReceiveBlock(const char*,int)) );
-    connect( _emulation,SIGNAL(sendData(const char*,int)),_shellProcess,
-            SLOT(sendData(const char*,int)) );
-    connect( _emulation,SIGNAL(lockPtyRequest(bool)),_shellProcess,SLOT(lockPty(bool)) );
-    connect( _emulation,SIGNAL(useUtf8Request(bool)),_shellProcess,SLOT(setUtf8Mode(bool)) );
-    connect( _shellProcess,SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(done(int,QProcess::ExitStatus)) );
-    connect( _emulation,SIGNAL(imageSizeChanged(int,int)),this,SLOT(updateWindowSize(int,int)) );
-    connect( _emulation,SIGNAL(imageSizeInitialized()),this,SLOT(run()) );
+    connect(_shellProcess, SIGNAL(receivedData(const char*, int)), this,
+            SLOT(onReceiveBlock(const char*, int)));
+    connect(_emulation, SIGNAL(sendData(const char*, int)), _shellProcess,
+            SLOT(sendData(const char*, int)));
+    connect(_emulation, SIGNAL(lockPtyRequest(bool)), _shellProcess, SLOT(lockPty(bool)));
+    connect(_emulation, SIGNAL(useUtf8Request(bool)), _shellProcess, SLOT(setUtf8Mode(bool)));
+    connect(_shellProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(done(int, QProcess::ExitStatus)));
+    connect(_emulation, SIGNAL(imageSizeChanged(int, int)), this, SLOT(updateWindowSize(int, int)));
+    connect(_emulation, SIGNAL(imageSizeInitialized()), this, SLOT(run()));
 }
 
 WId Session::windowId() const
@@ -202,17 +202,14 @@ WId Session::windowId() const
     // top-level window which contains the first view is
     // returned
 
-    if ( _views.count() == 0 )
-    {
+    if (_views.count() == 0) {
         return 0;
-    }
-    else
-    {
+    } else {
         QWidget* window = _views.first();
 
-        Q_ASSERT( window );
+        Q_ASSERT(window);
 
-        while ( window->parentWidget() != 0 )
+        while (window->parentWidget() != 0)
             window = window->parentWidget();
 
         return window->winId();
@@ -229,7 +226,7 @@ bool Session::hasDarkBackground() const
 }
 bool Session::isRunning() const
 {
-    return _shellProcess && ( _shellProcess->state() == QProcess::Running );
+    return _shellProcess && (_shellProcess->state() == QProcess::Running);
 }
 
 void Session::setCodec(QTextCodec* codec)
@@ -244,9 +241,7 @@ bool Session::setCodec(QByteArray name)
     if (codec) {
         setCodec(codec);
         return true;
-    }
-    else
-    {
+    } else {
         return false;
     }
 }
@@ -291,43 +286,42 @@ QList<TerminalDisplay*> Session::views() const
 
 void Session::addView(TerminalDisplay* widget)
 {
-    Q_ASSERT( !_views.contains(widget) );
+    Q_ASSERT(!_views.contains(widget));
 
     _views.append(widget);
 
-    if ( _emulation != 0 )
-    {
+    if (_emulation != 0) {
         // connect emulation - view signals and slots
-        connect( widget , SIGNAL(keyPressedSignal(QKeyEvent*)) , _emulation ,
-               SLOT(sendKeyEvent(QKeyEvent*)) );
-        connect( widget , SIGNAL(mouseSignal(int,int,int,int)) , _emulation ,
-               SLOT(sendMouseEvent(int,int,int,int)) );
-        connect( widget , SIGNAL(sendStringToEmu(const char*)) , _emulation ,
-               SLOT(sendString(const char*)) );
+        connect(widget , SIGNAL(keyPressedSignal(QKeyEvent*)) , _emulation ,
+                SLOT(sendKeyEvent(QKeyEvent*)));
+        connect(widget , SIGNAL(mouseSignal(int, int, int, int)) , _emulation ,
+                SLOT(sendMouseEvent(int, int, int, int)));
+        connect(widget , SIGNAL(sendStringToEmu(const char*)) , _emulation ,
+                SLOT(sendString(const char*)));
 
         // allow emulation to notify view when the foreground process
         // indicates whether or not it is interested in mouse signals
-        connect( _emulation , SIGNAL(programUsesMouseChanged(bool)) , widget ,
-               SLOT(setUsesMouse(bool)) );
+        connect(_emulation , SIGNAL(programUsesMouseChanged(bool)) , widget ,
+                SLOT(setUsesMouse(bool)));
 
-        widget->setUsesMouse( _emulation->programUsesMouse() );
+        widget->setUsesMouse(_emulation->programUsesMouse());
 
         widget->setScreenWindow(_emulation->createWindow());
     }
 
     //connect view signals and slots
-    QObject::connect( widget ,SIGNAL(changedContentSizeSignal(int,int)),this,
-                    SLOT(onViewSizeChange(int,int)));
+    QObject::connect(widget , SIGNAL(changedContentSizeSignal(int, int)), this,
+                     SLOT(onViewSizeChange(int, int)));
 
-    QObject::connect( widget ,SIGNAL(destroyed(QObject*)) , this ,
-                    SLOT(viewDestroyed(QObject*)) );
+    QObject::connect(widget , SIGNAL(destroyed(QObject*)) , this ,
+                     SLOT(viewDestroyed(QObject*)));
 }
 
 void Session::viewDestroyed(QObject* view)
 {
     TerminalDisplay* display = (TerminalDisplay*)view;
 
-    Q_ASSERT( _views.contains(display) );
+    Q_ASSERT(_views.contains(display));
 
     removeView(display);
 }
@@ -336,25 +330,23 @@ void Session::removeView(TerminalDisplay* widget)
 {
     _views.removeAll(widget);
 
-    disconnect(widget,0,this,0);
+    disconnect(widget, 0, this, 0);
 
-    if ( _emulation != 0 )
-    {
+    if (_emulation != 0) {
         // disconnect
         //  - key presses signals from widget
         //  - mouse activity signals from widget
         //  - string sending signals from widget
         //
         //  ... and any other signals connected in addView()
-        disconnect( widget, 0, _emulation, 0);
+        disconnect(widget, 0, _emulation, 0);
 
         // disconnect state change signals emitted by emulation
-        disconnect( _emulation , 0 , widget , 0);
+        disconnect(_emulation , 0 , widget , 0);
     }
 
     // close the session automatically when the last view is removed
-    if ( _views.count() == 0 )
-    {
+    if (_views.count() == 0) {
         close();
     }
 }
@@ -371,8 +363,7 @@ QString Session::checkProgram(const QString& program) const
     exec = KRun::binaryName(exec, false);
     exec = KShell::tildeExpand(exec);
     QString pexec = KStandardDirs::findExe(exec);
-    if ( pexec.isEmpty() ) 
-    {
+    if (pexec.isEmpty()) {
         kError() << i18n("Could not find binary: ") << exec;
         return QString();
     }
@@ -382,18 +373,18 @@ QString Session::checkProgram(const QString& program) const
 
 void Session::terminalWarning(const QString& message)
 {
-    static const QByteArray warningText = i18nc("@info:shell Alert the user with red color text", "Warning: ").toLocal8Bit(); 
+    static const QByteArray warningText = i18nc("@info:shell Alert the user with red color text", "Warning: ").toLocal8Bit();
     QByteArray messageText = message.toLocal8Bit();
 
     static const char redPenOn[] = "\033[1m\033[31m";
     static const char redPenOff[] = "\033[0m";
 
-    _emulation->receiveData(redPenOn,strlen(redPenOn));
-    _emulation->receiveData("\n\r\n\r",4);
-    _emulation->receiveData(warningText.constData(),strlen(warningText.constData()));
-    _emulation->receiveData(messageText.constData(),strlen(messageText.constData()));
-    _emulation->receiveData("\n\r\n\r",4);
-    _emulation->receiveData(redPenOff,strlen(redPenOff));
+    _emulation->receiveData(redPenOn, strlen(redPenOn));
+    _emulation->receiveData("\n\r\n\r", 4);
+    _emulation->receiveData(warningText.constData(), strlen(warningText.constData()));
+    _emulation->receiveData(messageText.constData(), strlen(messageText.constData()));
+    _emulation->receiveData("\n\r\n\r", 4);
+    _emulation->receiveData(redPenOff, strlen(redPenOff));
 }
 
 QString Session::shellSessionId() const
@@ -407,34 +398,29 @@ QString Session::shellSessionId() const
 void Session::run()
 {
     // extra safeguard for potential bug.
-    if ( isRunning() )
-    {
+    if (isRunning()) {
         kWarning() << "Attempted to re-run an already running session.";
         return;
     }
 
     //check that everything is in place to run the session
-    if (_program.isEmpty())
-    {
+    if (_program.isEmpty()) {
         kWarning() << "Session::run() - program to run not set.";
     }
-    if (_arguments.isEmpty())
-    {
+    if (_arguments.isEmpty()) {
         kWarning() << "Session::run() - no command line arguments specified.";
     }
-    if (_uniqueIdentifier.isNull())
-    {
+    if (_uniqueIdentifier.isNull()) {
         _uniqueIdentifier = createUuid();
     }
 
     const int CHOICE_COUNT = 3;
     // if '_program' is empty , fall back to default shell. If that is not set
     // then fall back to /bin/sh
-    QString programs[CHOICE_COUNT] = {_program,qgetenv("SHELL"),"/bin/sh"};
+    QString programs[CHOICE_COUNT] = {_program, qgetenv("SHELL"), "/bin/sh"};
     QString exec;
     int choice = 0;
-    while (choice < CHOICE_COUNT)
-    {
+    while (choice < CHOICE_COUNT) {
         exec = checkProgram(programs[choice]);
         if (exec.isEmpty())
             choice++;
@@ -443,21 +429,19 @@ void Session::run()
     }
 
     // if a program was specified via setProgram(), but it couldn't be found, print a warning
-    if (choice != 0 && choice < CHOICE_COUNT && !_program.isEmpty())
-    {
-        terminalWarning(i18n("Could not find '%1', starting '%2' instead.  Please check your profile settings.",_program,exec)); 
+    if (choice != 0 && choice < CHOICE_COUNT && !_program.isEmpty()) {
+        terminalWarning(i18n("Could not find '%1', starting '%2' instead.  Please check your profile settings.", _program, exec));
     }
     // if none of the choices are available, print a warning
-    else if (choice == CHOICE_COUNT)
-    {
+    else if (choice == CHOICE_COUNT) {
         terminalWarning(i18n("Could not find an interactive shell to start."));
         return;
     }
 
     // if no arguments are specified, fall back to program name
     QStringList arguments = _arguments.join(QChar(' ')).isEmpty() ?
-                                            QStringList() << exec :
-                                            _arguments;
+                            QStringList() << exec :
+                            _arguments;
 
     QString dbusService = QDBusConnection::sessionBus().baseService();
 
@@ -477,17 +461,16 @@ void Session::run()
     _environment << backgroundColorHint;
     _environment << QString("SHELL_SESSION_ID=%1").arg(shellSessionId());
 
-    int result = _shellProcess->start(  exec,
-                                        arguments,
-                                        _environment,
-                                        windowId(),
-                                        _addToUtmp,
-                                        dbusService,
-                                        (QLatin1String("/Sessions/") +
-                                        QString::number(_sessionId)));
+    int result = _shellProcess->start(exec,
+                                      arguments,
+                                      _environment,
+                                      windowId(),
+                                      _addToUtmp,
+                                      dbusService,
+                                      (QLatin1String("/Sessions/") +
+                                       QString::number(_sessionId)));
 
-    if (result < 0)
-    {
+    if (result < 0) {
         terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(" ")));
         return;
     }
@@ -497,33 +480,29 @@ void Session::run()
     emit started();
 }
 
-void Session::setUserTitle( int what, const QString& caption )
+void Session::setUserTitle(int what, const QString& caption)
 {
     //set to true if anything is actually changed (eg. old _nameTitle != new _nameTitle )
     bool modified = false;
 
-    if ((what == IconNameAndWindowTitle) || (what == WindowTitle)) 
-    {
-        if ( _userTitle != caption ) {
+    if ((what == IconNameAndWindowTitle) || (what == WindowTitle)) {
+        if (_userTitle != caption) {
             _userTitle = caption;
             modified = true;
         }
     }
 
-    if ((what == IconNameAndWindowTitle) || (what == IconName))
-    {
-        if ( _iconText != caption ) {
+    if ((what == IconNameAndWindowTitle) || (what == IconName)) {
+        if (_iconText != caption) {
             _iconText = caption;
             modified = true;
         }
     }
 
-    if (what == TextColor || what == BackgroundColor) 
-    {
-        QString colorString = caption.section(';',0,0);
+    if (what == TextColor || what == BackgroundColor) {
+        QString colorString = caption.section(';', 0, 0);
         QColor color = QColor(colorString);
-        if (color.isValid())
-        {
+        if (color.isValid()) {
             if (what == TextColor)
                 emit changeForegroundColorRequest(color);
             else
@@ -531,38 +510,34 @@ void Session::setUserTitle( int what, const QString& caption )
         }
     }
 
-    if (what == SessionName) 
-    {
-        if ( _nameTitle != caption ) {
-            setTitle(Session::NameRole,caption);
+    if (what == SessionName) {
+        if (_nameTitle != caption) {
+            setTitle(Session::NameRole, caption);
             return;
         }
     }
 
-    if (what == 31) 
-    {
-        QString cwd=caption;
-        cwd=cwd.replace( QRegExp("^~"), QDir::homePath() );
+    if (what == 31) {
+        QString cwd = caption;
+        cwd = cwd.replace(QRegExp("^~"), QDir::homePath());
         emit openUrlRequest(cwd);
     }
 
     // change icon via \033]32;Icon\007
-    if (what == 32) 
-    { 
-        if ( _iconName != caption ) {
+    if (what == 32) {
+        if (_iconName != caption) {
             _iconName = caption;
 
             modified = true;
         }
     }
 
-    if (what == ProfileChange) 
-    {
+    if (what == ProfileChange) {
         emit profileChangeCommandReceived(caption);
         return;
     }
 
-    if ( modified )
+    if (modified)
         emit titleChanged();
 }
 
@@ -572,16 +547,16 @@ QString Session::userTitle() const
 }
 void Session::setTabTitleFormat(TabTitleContext context , const QString& format)
 {
-    if ( context == LocalTabTitle )
+    if (context == LocalTabTitle)
         _localTabTitleFormat = format;
-    else if ( context == RemoteTabTitle )
+    else if (context == RemoteTabTitle)
         _remoteTabTitleFormat = format;
 }
 QString Session::tabTitleFormat(TabTitleContext context) const
 {
-    if ( context == LocalTabTitle )
+    if (context == LocalTabTitle)
         return _localTabTitleFormat;
-    else if ( context == RemoteTabTitle )
+    else if (context == RemoteTabTitle)
         return _remoteTabTitleFormat;
 
     return QString();
@@ -596,15 +571,13 @@ void Session::silenceTimerDone()
     //when any of the views of the session becomes active
 
 
-    //FIXME: Make message text for this notification and the activity notification more descriptive.    
+    //FIXME: Make message text for this notification and the activity notification more descriptive.
     if (_monitorSilence) {
         KNotification::event("Silence", i18n("Silence in session '%1'", _nameTitle), QPixmap(),
-                QApplication::activeWindow(),
-                KNotification::CloseWhenWidgetActivated);
+                             QApplication::activeWindow(),
+                             KNotification::CloseWhenWidgetActivated);
         emit stateChanged(NOTIFYSILENCE);
-    }
-    else
-    {
+    } else {
         emit stateChanged(NOTIFYNORMAL);
     }
 
@@ -618,22 +591,17 @@ void Session::activityTimerDone()
 
 void Session::updateFlowControlState(bool suspended)
 {
-    if (suspended)
-    {
-        if (flowControlEnabled())
-        {
-            foreach(TerminalDisplay* display,_views)
-            {
+    if (suspended) {
+        if (flowControlEnabled()) {
+            foreach(TerminalDisplay * display, _views) {
                 if (display->flowControlWarningEnabled())
                     display->outputSuspended(true);
             }
         }
-    } 
-    else
-    {
-        foreach(TerminalDisplay* display,_views)
-            display->outputSuspended(false);
-    }   
+    } else {
+        foreach(TerminalDisplay * display, _views)
+        display->outputSuspended(false);
+    }
 }
 
 void Session::onPrimaryScreenInUse(bool use)
@@ -648,34 +616,29 @@ void Session::onSelectedText(const QString & text)
 
 void Session::activityStateSet(int state)
 {
-    if (state == NOTIFYBELL)
-    {
-        emit bellRequest( i18n("Bell in session '%1'",_nameTitle) );
-    }
-    else if (state == NOTIFYACTIVITY)
-    {
-        if ( _monitorActivity  && !_notifiedActivity )
-        {
+    if (state == NOTIFYBELL) {
+        emit bellRequest(i18n("Bell in session '%1'", _nameTitle));
+    } else if (state == NOTIFYACTIVITY) {
+        if (_monitorActivity  && !_notifiedActivity) {
             KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
-                    QApplication::activeWindow(),
-                    KNotification::CloseWhenWidgetActivated);
+                                 QApplication::activeWindow(),
+                                 KNotification::CloseWhenWidgetActivated);
 
             // mask activity notification for a while to avoid flooding
             // TODO: should this hardcoded interval be user configurable?
             _notifiedActivity = true;
             const int activitMaskSeconds = 15;
-            _activityTimer->start(activitMaskSeconds*1000);
+            _activityTimer->start(activitMaskSeconds * 1000);
         }
 
-        if (_monitorSilence)
-        {
-            _silenceTimer->start(_silenceSeconds*1000);
+        if (_monitorSilence) {
+            _silenceTimer->start(_silenceSeconds * 1000);
         }
     }
 
-    if ( state == NOTIFYACTIVITY && !_monitorActivity )
+    if (state == NOTIFYACTIVITY && !_monitorActivity)
         state = NOTIFYNORMAL;
-    if ( state == NOTIFYSILENCE && !_monitorSilence )
+    if (state == NOTIFYSILENCE && !_monitorSilence)
         state = NOTIFYNORMAL;
 
     emit stateChanged(state);
@@ -700,29 +663,26 @@ void Session::updateTerminalSize()
     const int VIEW_COLUMNS_THRESHOLD = 2;
 
     //select largest number of lines and columns that will fit in all visible views
-    while ( viewIter.hasNext() )
-    {
+    while (viewIter.hasNext()) {
         TerminalDisplay* view = viewIter.next();
-        if ( view->isHidden() == false &&
-             view->lines() >= VIEW_LINES_THRESHOLD &&
-             view->columns() >= VIEW_COLUMNS_THRESHOLD )
-        {
-            minLines = (minLines == -1) ? view->lines() : qMin( minLines , view->lines() );
-            minColumns = (minColumns == -1) ? view->columns() : qMin( minColumns , view->columns() );
+        if (view->isHidden() == false &&
+                view->lines() >= VIEW_LINES_THRESHOLD &&
+                view->columns() >= VIEW_COLUMNS_THRESHOLD) {
+            minLines = (minLines == -1) ? view->lines() : qMin(minLines , view->lines());
+            minColumns = (minColumns == -1) ? view->columns() : qMin(minColumns , view->columns());
             view->processFilters();
         }
     }
 
     // backend emulation must have a _terminal of at least 1 column x 1 line in size
-    if ( minLines > 0 && minColumns > 0 )
-    {
-        _emulation->setImageSize( minLines , minColumns );
+    if (minLines > 0 && minColumns > 0) {
+        _emulation->setImageSize(minLines , minColumns);
     }
 }
 void Session::updateWindowSize(int lines, int columns)
 {
     Q_ASSERT(lines > 0 && columns > 0);
-    _shellProcess->setWindowSize(lines,columns);
+    _shellProcess->setWindowSize(lines, columns);
 }
 void Session::refresh()
 {
@@ -741,34 +701,29 @@ void Session::refresh()
     // send an email with method or patches to konsole-devel@kde.org
 
     const QSize existingSize = _shellProcess->windowSize();
-    _shellProcess->setWindowSize(existingSize.height(),existingSize.width()+1);
-    _shellProcess->setWindowSize(existingSize.height(),existingSize.width());
+    _shellProcess->setWindowSize(existingSize.height(), existingSize.width() + 1);
+    _shellProcess->setWindowSize(existingSize.height(), existingSize.width());
 }
 
 bool Session::kill(int signal)
 {
-    int result = ::kill(_shellProcess->pid(),signal);    
+    int result = ::kill(_shellProcess->pid(), signal);
 
-    if ( result == 0 )
-    {
-        if ( _shellProcess->waitForFinished(1000) )
+    if (result == 0) {
+        if (_shellProcess->waitForFinished(1000))
             return true;
         else
             return false;
-    }
-    else
+    } else
         return false;
 }
 
 void Session::close()
 {
-    if ( isRunning() )
-    {
-        if ( !closeInNormalWay() )
+    if (isRunning()) {
+        if (!closeInNormalWay())
             closeInForceWay();
-    }
-    else
-    {
+    } else {
         // terminal process has finished, just close the session
         QTimer::singleShot(1, this, SIGNAL(finished()));
     }
@@ -785,18 +740,14 @@ bool Session::closeInNormalWay()
     // 2). the tab stays open and displays warning message
     // 3). the user closes the tab explicitly
     //
-    if ( !isRunning() )
-    {
+    if (!isRunning()) {
         emit finished();
         return true;
     }
 
-    if ( kill(SIGHUP) )
-    {
+    if (kill(SIGHUP)) {
         return true;
-    }
-    else
-    {
+    } else {
         kWarning() << "Process " << _shellProcess->pid() << " did not die with SIGHUP";
         _shellProcess->pty()->close();
         return (_shellProcess->waitForFinished(1000)) ;
@@ -808,12 +759,9 @@ bool Session::closeInForceWay()
     _autoClose    = true;
     _closePerUserRequest = true;
 
-    if( kill(SIGKILL) )
-    {
+    if (kill(SIGKILL)) {
         return true;
-    }
-    else
-    {
+    } else {
         kWarning() << "Process " << _shellProcess->pid() << " did not die with SIGKILL";
         return false;
     }
@@ -840,23 +788,20 @@ Session::~Session()
 
 void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    if ( !_autoClose )
-    {
+    if (!_autoClose) {
         _userTitle = i18nc("@info:shell This session is done", "Finished");
         emit titleChanged();
         return;
     }
 
-    if ( _closePerUserRequest )
-    {
+    if (_closePerUserRequest) {
         emit finished();
         return;
     }
 
     QString message;
 
-    if ( exitCode != 0)
-    {
+    if (exitCode != 0) {
         if (exitStatus != QProcess::NormalExit)
             message = i18n("Program '%1' crashed.", _program);
         else
@@ -864,18 +809,15 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 
         //FIXME: See comments in Session::silenceTimerDone()
         KNotification::event("Finished", message , QPixmap(),
-                            QApplication::activeWindow(),
-                            KNotification::CloseWhenWidgetActivated);
+                             QApplication::activeWindow(),
+                             KNotification::CloseWhenWidgetActivated);
     }
 
-    if ( exitStatus != QProcess::NormalExit )
-    {
+    if (exitStatus != QProcess::NormalExit) {
         // this seeming duplicated line is for the case when exitCode is 0
         message = i18n("Program '%1' crashed.", _program);
         terminalWarning(message);
-    }
-    else
-    {
+    } else {
         emit finished();
     }
 }
@@ -912,11 +854,10 @@ void Session::setKeyBindings(const QString& id)
 
 void Session::setTitle(TitleRole role , const QString& newTitle)
 {
-    if ( title(role) != newTitle )
-    {
-        if ( role == NameRole )
+    if (title(role) != newTitle) {
+        if (role == NameRole)
             _nameTitle = newTitle;
-        else if ( role == DisplayedTitleRole )
+        else if (role == DisplayedTitleRole)
             _displayTitle = newTitle;
 
         emit titleChanged();
@@ -925,9 +866,9 @@ void Session::setTitle(TitleRole role , const QString& newTitle)
 
 QString Session::title(TitleRole role) const
 {
-    if ( role == NameRole )
+    if (role == NameRole)
         return _nameTitle;
-    else if ( role == DisplayedTitleRole )
+    else if (role == DisplayedTitleRole)
         return _displayTitle;
     else
         return QString();
@@ -937,12 +878,9 @@ ProcessInfo* Session::getProcessInfo()
 {
     ProcessInfo* process = 0;
 
-    if (isForegroundProcessActive())
-    {
+    if (isForegroundProcessActive()) {
         process = _foregroundProcessInfo;
-    }
-    else
-    {
+    } else {
         updateSessionProcessInfo();
         process = _sessionProcessInfo;
     }
@@ -953,8 +891,7 @@ ProcessInfo* Session::getProcessInfo()
 void Session::updateSessionProcessInfo()
 {
     Q_ASSERT(_shellProcess);
-    if (!_sessionProcessInfo)
-    {
+    if (!_sessionProcessInfo) {
         _sessionProcessInfo = ProcessInfo::newInstance(processId());
         _sessionProcessInfo->setUserHomeDir();
     }
@@ -966,20 +903,16 @@ bool Session::updateForegroundProcessInfo()
     Q_ASSERT(_shellProcess);
 
     int pid = _shellProcess->foregroundProcessGroup();
-    if (pid != _foregroundPid)
-    {
+    if (pid != _foregroundPid) {
         delete _foregroundProcessInfo;
         _foregroundProcessInfo = ProcessInfo::newInstance(pid);
         _foregroundPid = pid;
     }
 
-    if (_foregroundProcessInfo)
-    {
+    if (_foregroundProcessInfo) {
         _foregroundProcessInfo->update();
         return _foregroundProcessInfo->isValid();
-    }
-    else
-    {
+    } else {
         return false;
     }
 }
@@ -989,7 +922,7 @@ bool Session::isRemote()
     ProcessInfo* process = getProcessInfo();
 
     bool ok = false;
-    return ( process->name(&ok) == "ssh" && ok );
+    return (process->name(&ok) == "ssh" && ok);
 }
 
 QString Session::getDynamicTitle()
@@ -1000,13 +933,10 @@ QString Session::getDynamicTitle()
     // format tab titles using process info
     bool ok = false;
     QString title;
-    if ( process->name(&ok) == "ssh" && ok )
-    {
+    if (process->name(&ok) == "ssh" && ok) {
         SSHProcessInfo sshInfo(*process);
         title = sshInfo.format(tabTitleFormat(Session::RemoteTabTitle));
-    }
-    else
-    {
+    } else {
         title = process->format(tabTitleFormat(Session::LocalTabTitle));
     }
 
@@ -1018,36 +948,28 @@ KUrl Session::getUrl()
     QString path;
 
     updateSessionProcessInfo();
-    if (_sessionProcessInfo->isValid())
-    {
+    if (_sessionProcessInfo->isValid()) {
         bool ok = false;
 
         // check if foreground process is bookmark-able
-        if (isForegroundProcessActive())
-        {
+        if (isForegroundProcessActive()) {
             // for remote connections, save the user and host
             // bright ideas to get the directory at the other end are welcome :)
-            if (_foregroundProcessInfo->name(&ok) == "ssh" && ok)
-            {
+            if (_foregroundProcessInfo->name(&ok) == "ssh" && ok) {
                 SSHProcessInfo sshInfo(*_foregroundProcessInfo);
 
                 path = "ssh://" + sshInfo.userName() + '@' + sshInfo.host();
 
                 QString port = sshInfo.port();
-                if (!port.isEmpty() && port != "22")
-                {
+                if (!port.isEmpty() && port != "22") {
                     path.append(':' + port);
                 }
-            }
-            else
-            {
+            } else {
                 path = _foregroundProcessInfo->currentDir(&ok);
                 if (!ok)
                     path.clear();
             }
-        }
-        else // otherwise use the current working directory of the shell process
-        {
+        } else { // otherwise use the current working directory of the shell process
             path = _sessionProcessInfo->currentDir(&ok);
             if (!ok)
                 path.clear();
@@ -1059,8 +981,7 @@ KUrl Session::getUrl()
 
 void Session::setIconName(const QString& iconName)
 {
-    if ( iconName != _iconName )
-    {
+    if (iconName != _iconName) {
         _iconName = iconName;
         emit titleChanged();
     }
@@ -1107,9 +1028,15 @@ QString Session::program() const
 }
 
 // unused currently
-bool Session::isMonitorActivity() const { return _monitorActivity; }
+bool Session::isMonitorActivity() const
+{
+    return _monitorActivity;
+}
 // unused currently
-bool Session::isMonitorSilence()  const { return _monitorSilence; }
+bool Session::isMonitorSilence()  const
+{
+    return _monitorSilence;
+}
 
 void Session::setMonitorActivity(bool monitor)
 {
@@ -1125,12 +1052,9 @@ void Session::setMonitorSilence(bool monitor)
         return;
 
     _monitorSilence = monitor;
-    if (_monitorSilence)
-    {
-        _silenceTimer->start(_silenceSeconds*1000);
-    }
-    else
-    {
+    if (_monitorSilence) {
+        _silenceTimer->start(_silenceSeconds * 1000);
+    } else {
         _silenceTimer->stop();
     }
 
@@ -1141,7 +1065,7 @@ void Session::setMonitorSilenceSeconds(int seconds)
 {
     _silenceSeconds = seconds;
     if (_monitorSilence) {
-        _silenceTimer->start(_silenceSeconds*1000);
+        _silenceTimer->start(_silenceSeconds * 1000);
     }
 }
 
@@ -1154,7 +1078,7 @@ void Session::setFlowControlEnabled(bool enabled)
 {
     _flowControl = enabled;
 
-    if (_shellProcess)  
+    if (_shellProcess)
         _shellProcess->setFlowControlEnabled(_flowControl);
 
     emit flowControlEnabledChanged(enabled);
@@ -1168,8 +1092,7 @@ bool Session::flowControlEnabled() const
 }
 void Session::fireZModemDetected()
 {
-    if (!_zmodemBusy)
-    {
+    if (!_zmodemBusy) {
         QTimer::singleShot(10, this, SIGNAL(zmodemDetected()));
         _zmodemBusy = true;
     }
@@ -1185,27 +1108,27 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
 {
     _zmodemBusy = true;
     _zmodemProc = new KProcess();
-    _zmodemProc->setOutputChannelMode( KProcess::SeparateChannels );
+    _zmodemProc->setOutputChannelMode(KProcess::SeparateChannels);
 
     *_zmodemProc << zmodem << "-v" << list;
 
     if (!dir.isEmpty())
         _zmodemProc->setWorkingDirectory(dir);
 
-    connect(_zmodemProc,SIGNAL (readyReadStandardOutput()),
+    connect(_zmodemProc, SIGNAL(readyReadStandardOutput()),
             this, SLOT(zmodemReadAndSendBlock()));
-    connect(_zmodemProc,SIGNAL (readyReadStandardError()),
+    connect(_zmodemProc, SIGNAL(readyReadStandardError()),
             this, SLOT(zmodemReadStatus()));
-    connect(_zmodemProc,SIGNAL (finished(int,QProcess::ExitStatus)),
+    connect(_zmodemProc, SIGNAL(finished(int, QProcess::ExitStatus)),
             this, SLOT(zmodemFinished()));
 
     _zmodemProc->start();
 
-    disconnect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
-    connect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
+    disconnect(_shellProcess, SIGNAL(receivedData(const char*, int)), this, SLOT(onReceiveBlock(const char*, int)));
+    connect(_shellProcess, SIGNAL(receivedData(const char*, int)), this, SLOT(zmodemRcvBlock(const char*, int)));
 
     _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
-            i18n("ZModem Progress"));
+                                       i18n("ZModem Progress"));
 
     connect(_zmodemProgress, SIGNAL(user1Clicked()),
             this, SLOT(zmodemFinished()));
@@ -1215,35 +1138,29 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
 
 void Session::zmodemReadAndSendBlock()
 {
-    _zmodemProc->setReadChannel( QProcess::StandardOutput );
+    _zmodemProc->setReadChannel(QProcess::StandardOutput);
     QByteArray data = _zmodemProc->readAll();
 
-    if ( data.count() == 0 )
+    if (data.count() == 0)
         return;
 
-    _shellProcess->sendData(data.constData(),data.count());
+    _shellProcess->sendData(data.constData(), data.count());
 }
 
 void Session::zmodemReadStatus()
 {
-    _zmodemProc->setReadChannel( QProcess::StandardError );
+    _zmodemProc->setReadChannel(QProcess::StandardError);
     QByteArray msg = _zmodemProc->readAll();
-    while(!msg.isEmpty())
-    {
+    while (!msg.isEmpty()) {
         int i = msg.indexOf('\015');
         int j = msg.indexOf('\012');
         QByteArray txt;
-        if ((i != -1) && ((j == -1) || (i < j)))
-        {
-            msg = msg.mid(i+1);
-        }
-        else if (j != -1)
-        {
+        if ((i != -1) && ((j == -1) || (i < j))) {
+            msg = msg.mid(i + 1);
+        } else if (j != -1) {
             txt = msg.left(j);
-            msg = msg.mid(j+1);
-        }
-        else
-        {
+            msg = msg.mid(j + 1);
+        } else {
             txt = msg;
             msg.truncate(0);
         }
@@ -1254,9 +1171,9 @@ void Session::zmodemReadStatus()
 
 void Session::zmodemRcvBlock(const char* data, int len)
 {
-    QByteArray ba( data, len );
+    QByteArray ba(data, len);
 
-    _zmodemProc->write( ba );
+    _zmodemProc->write(ba);
 }
 
 void Session::zmodemFinished()
@@ -1271,8 +1188,8 @@ void Session::zmodemFinished()
         _zmodemBusy = false;
         delete process;    // Now, the KProcess may be disposed safely.
 
-        disconnect( _shellProcess,SIGNAL(receivedData(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
-        connect( _shellProcess,SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
+        disconnect(_shellProcess, SIGNAL(receivedData(const char*, int)), this , SLOT(zmodemRcvBlock(const char*, int)));
+        connect(_shellProcess, SIGNAL(receivedData(const char*, int)), this, SLOT(onReceiveBlock(const char*, int)));
 
         _shellProcess->sendData("\030\030\030\030", 4); // Abort
         _shellProcess->sendData("\001\013\n", 3); // Try to get prompt back
@@ -1280,10 +1197,10 @@ void Session::zmodemFinished()
     }
 }
 
-void Session::onReceiveBlock( const char* buf, int len )
+void Session::onReceiveBlock(const char* buf, int len)
 {
-    _emulation->receiveData( buf, len );
-    emit receivedData( QString::fromLatin1( buf, len ) );
+    _emulation->receiveData(buf, len);
+    emit receivedData(QString::fromLatin1(buf, len));
 }
 
 QSize Session::size()
@@ -1379,8 +1296,7 @@ QString Session::foregroundProcessName()
 {
     QString name;
 
-    if (updateForegroundProcessInfo()) 
-    {
+    if (updateForegroundProcessInfo()) {
         bool ok = false;
         name = _foregroundProcessInfo->name(&ok);
         if (!ok)
@@ -1422,19 +1338,28 @@ SessionGroup::SessionGroup(QObject* parent)
 SessionGroup::~SessionGroup()
 {
 }
-int SessionGroup::masterMode() const { return _masterMode; }
-QList<Session*> SessionGroup::sessions() const { return _sessions.keys(); }
-bool SessionGroup::masterStatus(Session* session) const { return _sessions[session]; }
+int SessionGroup::masterMode() const
+{
+    return _masterMode;
+}
+QList<Session*> SessionGroup::sessions() const
+{
+    return _sessions.keys();
+}
+bool SessionGroup::masterStatus(Session* session) const
+{
+    return _sessions[session];
+}
 
 void SessionGroup::addSession(Session* session)
 {
-    connect(session,SIGNAL(finished()),this,SLOT(sessionFinished()));
-    _sessions.insert(session,false);
+    connect(session, SIGNAL(finished()), this, SLOT(sessionFinished()));
+    _sessions.insert(session, false);
 }
 void SessionGroup::removeSession(Session* session)
 {
-    disconnect(session,SIGNAL(finished()),this,SLOT(sessionFinished()));
-    setMasterStatus(session,false);
+    disconnect(session, SIGNAL(finished()), this, SLOT(sessionFinished()));
+    setMasterStatus(session, false);
     _sessions.remove(session);
 }
 void SessionGroup::sessionFinished()
@@ -1461,20 +1386,18 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
     }
     _sessions[session] = master;
 
-    if(master) {
-        connect( session->emulation() , SIGNAL(sendData(const char*,int)) , this,
-                 SLOT(forwardData(const char*,int)) );
-    }
-    else
-    {
-        disconnect( session->emulation() , SIGNAL(sendData(const char*,int)) , this,
-                    SLOT(forwardData(const char*,int)) );
+    if (master) {
+        connect(session->emulation() , SIGNAL(sendData(const char*, int)) , this,
+                SLOT(forwardData(const char*, int)));
+    } else {
+        disconnect(session->emulation() , SIGNAL(sendData(const char*, int)) , this,
+                   SLOT(forwardData(const char*, int)));
     }
 }
 void SessionGroup::forwardData(const char* data, int size)
 {
     static bool _inForwardData = false;
-    if(_inForwardData) {   // Avoid recursive calls among session groups!
+    if (_inForwardData) {  // Avoid recursive calls among session groups!
         // A recursive call happens when a master in group A calls forwardData()
         // in group B. If one of the destination sessions in group B is also a
         // master of a group including the master session of group A, this would
@@ -1484,9 +1407,9 @@ void SessionGroup::forwardData(const char* data, int size)
 
     _inForwardData = true;
     QListIterator<Session*> iter(_sessions.keys());
-    while(iter.hasNext()) {
+    while (iter.hasNext()) {
         Session* other = iter.next();
-        if(!_sessions[other]) {
+        if (!_sessions[other]) {
             other->emulation()->sendString(data, size);
         }
     }
