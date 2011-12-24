@@ -72,8 +72,8 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
     if (shouldUseNewProcess())
         startFlags = KUniqueApplication::NonUniqueInstance;
 
-    // create a new application instance if there are no running Konsole instances,
-    // otherwise inform the existing Konsole process and exit
+    // create a new application instance if there are no running Konsole
+    // instances, otherwise inform the existing Konsole process and exit
     if (!KUniqueApplication::start(startFlags)) {
         exit(0);
     }
@@ -124,7 +124,6 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("noclose",
                 ki18n("Do not close the initial session automatically when it"
                       " ends."));
-    // TODO - Document this option more clearly
     options.add("p <property=value>",
                 ki18n("Change the value of a profile property."));
     options.add("list-profile-properties",
