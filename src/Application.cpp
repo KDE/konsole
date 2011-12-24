@@ -81,14 +81,16 @@ MainWindow* Application::newMainWindow()
     MainWindow* window = new MainWindow();
     window->setSessionList(new ProfileList(true, window));
 
-    connect(window , SIGNAL(newSessionRequest(Profile::Ptr, QString, ViewManager*)),
-            this , SLOT(createSession(Profile::Ptr, QString, ViewManager*)));
-    connect(window , SIGNAL(newSSHSessionRequest(Profile::Ptr, KUrl, ViewManager*)),
-            this , SLOT(createSSHSession(Profile::Ptr, KUrl, ViewManager*)));
-    connect(window , SIGNAL(newWindowRequest(Profile::Ptr, QString)),
-            this , SLOT(createWindow(Profile::Ptr, QString)));
-    connect(window->viewManager() , SIGNAL(viewDetached(Session*)) ,
-            this , SLOT(detachView(Session*)));
+    connect(window,
+            SIGNAL(newSessionRequest(Profile::Ptr, QString, ViewManager*)),
+            this, SLOT(createSession(Profile::Ptr, QString, ViewManager*)));
+    connect(window,
+            SIGNAL(newSSHSessionRequest(Profile::Ptr, KUrl, ViewManager*)),
+            this, SLOT(createSSHSession(Profile::Ptr, KUrl, ViewManager*)));
+    connect(window, SIGNAL(newWindowRequest(Profile::Ptr, QString)),
+            this, SLOT(createWindow(Profile::Ptr, QString)));
+    connect(window->viewManager(), SIGNAL(viewDetached(Session*)),
+            this, SLOT(detachView(Session*)));
 
     return window;
 }
@@ -121,8 +123,8 @@ int Application::newInstance()
 
     // handle session management
     if ((args->count() != 0) || !firstInstance || !isSessionRestored()) {
-        // check for arguments to print help or other information to the terminal,
-        // quit if such an argument was found
+        // check for arguments to print help or other information to the
+        // terminal, quit if such an argument was found
         if (processHelpArgs(args))
             return 0;
 
@@ -165,21 +167,23 @@ int Application::newInstance()
             processTabsFromFileArgs(args, window);
         }
 
-        // if the background-mode argument is supplied, start the background session
-        // ( or bring to the front if it already exists )
-        if (args->isSet("background-mode"))
+        // if the background-mode argument is supplied, start the background
+        // session ( or bring to the front if it already exists )
+        if (args->isSet("background-mode")) {
             startBackgroundMode(window);
-        else {
-            // Qt constrains top-level windows which have not been manually resized
-            // (via QWidget::resize()) to a maximum of 2/3rds of the screen size.
+        } else {
+            // Qt constrains top-level windows which have not been manually
+            // resized (via QWidget::resize()) to a maximum of 2/3rds of the
+            //  screen size.
             //
-            // This means that the terminal display might not get the width/height
-            // it asks for.  To work around this, the widget must be manually resized
-            // to its sizeHint().
+            // This means that the terminal display might not get the width/
+            // height it asks for.  To work around this, the widget must be
+            // manually resized to its sizeHint().
             //
-            // This problem only affects the first time the application is run.  After
-            // that KMainWindow will have manually resized the window to its saved size
-            // at this point (so the Qt::WA_Resized attribute will be set)
+            // This problem only affects the first time the application is run.
+            // run. After that KMainWindow will have manually resized the
+            // window to its saved size at this point (so the Qt::WA_Resized
+            // attribute will be set)
             if (!window->testAttribute(Qt::WA_Resized))
                 window->resize(window->sizeHint());
 
@@ -204,7 +208,8 @@ title: Top this!;; command: top
 #title: This is commented out;; command: ssh jupiter
 command: ssh  earth
 */
-void Application::processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window)
+void Application::processTabsFromFileArgs(KCmdLineArgs* args,
+                                          MainWindow* window)
 {
     // Open tab configuration file
     const QString tabsFileName(args->getOption("tabs-from-file"));
@@ -247,11 +252,12 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window
     }
 }
 
-void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, const QHash<QString, QString>& tokens)
+void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
+                                    const QHash<QString, QString>& tokens)
 {
     QString title = tokens["title"];
     QString command = tokens["command"];
-    QString profile = tokens["profile"]; // currently not used
+    QString profile = tokens["profile"];  // currently not used
 
     // FIXME: A lot of duplicate code below
 
@@ -274,10 +280,12 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
     }
 
     // Create the new session
-    Session* session = createSession(window->defaultProfile(), QString(), window->viewManager());
+    Session* session = createSession(window->defaultProfile(), QString(),
+                                     window->viewManager());
     session->setTabTitleFormat(Session::LocalTabTitle, title);
     session->setTabTitleFormat(Session::RemoteTabTitle, title);
-    session->setTitle(Session::DisplayedTitleRole, title);   // Ensure that new title is displayed
+    // Ensure that new title is displayed
+    session->setTitle(Session::DisplayedTitleRole, title);
     if (!args->isSet("close")) {
         session->setAutoClose(false);
     }
@@ -290,7 +298,6 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window, cons
     newProfile = Profile::Ptr(new Profile(defaultProfile));
     newProfile->setHidden(true);
     window->setDefaultProfile(newProfile);
-
 }
 
 MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
@@ -312,7 +319,8 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
     return window;
 }
 
-void Application::processProfileSelectArgs(KCmdLineArgs* args, MainWindow* window)
+void Application::processProfileSelectArgs(KCmdLineArgs* args,
+                                           MainWindow* window)
 {
     if (args->isSet("profile")) {
         Profile::Ptr profile = SessionManager::instance()->loadProfile(args->getOption("profile"));
@@ -334,7 +342,8 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
     }
     return false;
 }
-void Application::processProfileChangeArgs(KCmdLineArgs* args, MainWindow* window)
+void Application::processProfileChangeArgs(KCmdLineArgs* args,
+                                           MainWindow* window)
 {
     Profile::Ptr defaultProfile = window->defaultProfile();
     if (!defaultProfile)
@@ -371,12 +380,13 @@ void Application::startBackgroundMode(MainWindow* window)
 
     KAction* action = new KAction(window);
     action->setObjectName(QLatin1String("Konsole Background Mode"));
-    //TODO - Customizable key sequence for this
+    // TODO - Customizable key sequence for this
     action->setGlobalShortcut(KShortcut(QKeySequence(Qt::Key_F12)));
 
     _backgroundInstance = window;
 
-    connect(action , SIGNAL(triggered()) , this , SLOT(toggleBackgroundInstance()));
+    connect(action, SIGNAL(triggered()), this,
+            SLOT(toggleBackgroundInstance()));
 }
 
 void Application::toggleBackgroundInstance()
@@ -385,8 +395,8 @@ void Application::toggleBackgroundInstance()
 
     if (!_backgroundInstance->isVisible()) {
         _backgroundInstance->show();
-        // ensure that the active terminal display has the focus.
-        // without this, an odd problem occurred where the focus widget would change
+        // ensure that the active terminal display has the focus. Without
+        // this, an odd problem occurred where the focus widget would change
         // each time the background instance was shown
         _backgroundInstance->viewManager()->activeView()->setFocus();
     } else {
@@ -407,7 +417,7 @@ void Application::detachView(Session* session)
     window->show();
 }
 
-void Application::createWindow(Profile::Ptr profile , const QString& directory)
+void Application::createWindow(Profile::Ptr profile, const QString& directory)
 {
     MainWindow* window = newMainWindow();
     window->setDefaultProfile(profile);
@@ -415,25 +425,30 @@ void Application::createWindow(Profile::Ptr profile , const QString& directory)
     window->show();
 }
 
-Session* Application::createSession(Profile::Ptr profile, const QString& directory , ViewManager* viewManager)
+Session* Application::createSession(Profile::Ptr profile,
+                                    const QString& directory,
+                                    ViewManager* viewManager)
 {
     if (!profile)
         profile = SessionManager::instance()->defaultProfile();
 
     Session* session = SessionManager::instance()->createSession(profile);
 
-    if (!directory.isEmpty() && profile->property<bool>(Profile::StartInCurrentSessionDir))
+    if (!directory.isEmpty()
+            && profile->property<bool>(Profile::StartInCurrentSessionDir))
         session->setInitialWorkingDirectory(directory);
 
-    // create view before starting the session process so that the session doesn't suffer
-    // a change in terminal size right after the session starts.  Some applications such as GNU Screen
-    // and Midnight Commander don't like this happening
+    // create view before starting the session process so that the session
+    // doesn't suffer a change in terminal size right after the session
+    // starts.  Some applications such as GNU Screen and Midnight Commander
+    // don't like this happening
     viewManager->createView(session);
 
     return session;
 }
 
-Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url, ViewManager* viewManager)
+Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url,
+                                       ViewManager* viewManager)
 {
     if (!profile)
         profile = SessionManager::instance()->defaultProfile();
@@ -449,9 +464,10 @@ Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url, Vi
     if (url.hasHost())
         session->sendText(url.host() + '\r');
 
-    // create view before starting the session process so that the session doesn't suffer
-    // a change in terminal size right after the session starts.  some applications such as GNU Screen
-    // and Midnight Commander don't like this happening
+    // create view before starting the session process so that the session
+    // doesn't suffer a change in terminal size right after the session
+    // starts.  some applications such as GNU Screen and Midnight Commander
+    // don't like this happening
     viewManager->createView(session);
     session->run();
 
