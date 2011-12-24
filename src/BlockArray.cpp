@@ -66,8 +66,16 @@ size_t BlockArray::append(Block* block)
     if (current >= size) current = 0;
 
     int rc;
-    rc = KDE_lseek(ion, current * blocksize, SEEK_SET); if (rc < 0) { perror("HistoryBuffer::add.seek"); setHistorySize(0); return size_t(-1); }
-    rc = write(ion, block, blocksize); if (rc < 0) { perror("HistoryBuffer::add.write"); setHistorySize(0); return size_t(-1); }
+    rc = KDE_lseek(ion, current * blocksize, SEEK_SET); if (rc < 0) {
+        perror("HistoryBuffer::add.seek");
+        setHistorySize(0);
+        return size_t(-1);
+    }
+    rc = write(ion, block, blocksize); if (rc < 0) {
+        perror("HistoryBuffer::add.write");
+        setHistorySize(0);
+        return size_t(-1);
+    }
 
     length++;
     if (length > size) length = size;
@@ -130,7 +138,10 @@ const Block* BlockArray::at(size_t i)
 
     Block* block = (Block*)mmap(0, blocksize, PROT_READ, MAP_PRIVATE, ion, j * blocksize);
 
-    if (block == (Block*)-1) { perror("mmap"); return 0; }
+    if (block == (Block*) - 1) {
+        perror("mmap");
+        return 0;
+    }
 
     lastmap = block;
     lastmap_index = i;
@@ -177,7 +188,7 @@ bool BlockArray::setHistorySize(size_t newsize)
             perror("konsole: cannot open temp file.\n");
         } else {
             ion = dup(fileno(tmp));
-            if (ion<0) {
+            if (ion < 0) {
                 perror("konsole: cannot dup temp file.\n");
                 fclose(tmp);
             }
@@ -198,7 +209,7 @@ bool BlockArray::setHistorySize(size_t newsize)
         return false;
     } else {
         decreaseBuffer(newsize);
-        if (ftruncate(ion, length*blocksize) == -1)
+        if (ftruncate(ion, length * blocksize) == -1)
             perror("ftruncate");
         size = newsize;
 
@@ -252,7 +263,7 @@ void BlockArray::decreaseBuffer(size_t newsize)
     }
 
     size_t oldpos;
-    for (size_t i = 0, cursor=firstblock; i < newsize; i++) {
+    for (size_t i = 0, cursor = firstblock; i < newsize; i++) {
         oldpos = (size + cursor + offset) % size;
         moveBlock(fion, oldpos, cursor, buffer1);
         if (oldpos < newsize) {
@@ -294,14 +305,13 @@ void BlockArray::increaseBuffer()
     FILE* fion = fdopen(dup(ion), "w+b");
     if (!fion) {
         perror("fdopen/dup");
-    delete [] buffer1;
-    delete [] buffer2;
+        delete [] buffer1;
+        delete [] buffer2;
         return;
     }
 
     int res;
-    for (int i = 0; i < runs; i++)
-    {
+    for (int i = 0; i < runs; i++) {
         // free one block in chain
         int firstblock = (offset + i) % size;
         res = KDE_fseek(fion, firstblock * blocksize, SEEK_SET);
@@ -311,8 +321,7 @@ void BlockArray::increaseBuffer()
         if (res != 1)
             perror("fread");
         int newpos = 0;
-        for (int j = 1, cursor=firstblock; j < bpr; j++)
-        {
+        for (int j = 1, cursor = firstblock; j < bpr; j++) {
             cursor = (cursor + offset) % size;
             newpos = (cursor - offset + size) % size;
             moveBlock(fion, cursor, newpos, buffer2);

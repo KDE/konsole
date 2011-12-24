@@ -30,14 +30,17 @@ namespace Konsole
 {
 
 struct Block {
-    Block() { size = 0; }
+    Block() {
+        size = 0;
+    }
     unsigned char data[ENTRIES];
     size_t size;
 };
 
 // ///////////////////////////////////////////////////////
 
-class BlockArray {
+class BlockArray
+{
 public:
     /**
     * Creates a history file for holding
@@ -91,11 +94,15 @@ public:
     */
     bool setSize(size_t newsize);
 
-    size_t len() const { return length; }
+    size_t len() const {
+        return length;
+    }
 
     bool has(size_t index) const;
 
-    size_t getCurrent() const { return current; }
+    size_t getCurrent() const {
+        return current;
+    }
 
 private:
     void unmap();
