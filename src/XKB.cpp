@@ -29,16 +29,16 @@ DEALINGS IN THE SOFTWARE.
 #include <config-konsole.h>
 
 #if defined(HAVE_XKB) && !defined(AVOID_XKB)
-    #include <QtGui/QX11Info>
+#include <QtGui/QX11Info>
 
 
-    #include <X11/Xlib.h>
+#include <X11/Xlib.h>
 
-    #define explicit myexplicit
-    #include <X11/XKBlib.h>
-    #undef explicit
+#define explicit myexplicit
+#include <X11/XKBlib.h>
+#undef explicit
 
-    #include <X11/keysym.h>
+#include <X11/keysym.h>
 
 /* the XKB stuff is based on code created by Oswald Buddenhagen <ossi@kde.org> */
 int xkb_init()
@@ -46,34 +46,32 @@ int xkb_init()
     int xkb_opcode, xkb_event, xkb_error;
     int xkb_lmaj = XkbMajorVersion;
     int xkb_lmin = XkbMinorVersion;
-    return XkbLibraryVersion( &xkb_lmaj, &xkb_lmin )
-        && XkbQueryExtension( QX11Info::display(), &xkb_opcode, &xkb_event, &xkb_error,
-                   &xkb_lmaj, &xkb_lmin );
+    return XkbLibraryVersion(&xkb_lmaj, &xkb_lmin)
+           && XkbQueryExtension(QX11Info::display(), &xkb_opcode, &xkb_event, &xkb_error,
+                                &xkb_lmaj, &xkb_lmin);
 }
 
 #if 0
 // This method doesn't work in all cases. The atom "ScrollLock" doesn't seem
 // to exist on all XFree versions (at least it's not here with my 3.3.6) - DF
-static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char* name )
+static unsigned int xkb_mask_modifier(XkbDescPtr xkb, const char* name)
 {
     int i;
-    if( !xkb || !xkb->names )
-    return 0;
+    if (!xkb || !xkb->names)
+        return 0;
 
-    Atom atom = XInternAtom( xkb->dpy, name, true );
+    Atom atom = XInternAtom(xkb->dpy, name, true);
     if (atom == None)
         return 0;
 
-    for( i = 0;
-         i < XkbNumVirtualMods;
-     i++ )
-    {
-    if (atom == xkb->names->vmods[i] )
-    {
-        unsigned int mask;
-        XkbVirtualModsToReal( xkb, 1 << i, &mask );
-        return mask;
-    }
+    for (i = 0;
+            i < XkbNumVirtualMods;
+            i++) {
+        if (atom == xkb->names->vmods[i]) {
+            unsigned int mask;
+            XkbVirtualModsToReal(xkb, 1 << i, &mask);
+            return mask;
+        }
     }
     return 0;
 }
@@ -81,10 +79,9 @@ static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char* name )
 static unsigned int xkb_scrolllock_mask()
 {
     XkbDescPtr xkb;
-    if(( xkb = XkbGetKeyboard( QX11Info::display(), XkbAllComponentsMask, XkbUseCoreKbd )) != NULL )
-    {
-        unsigned int mask = xkb_mask_modifier( xkb, "ScrollLock" );
-        XkbFreeKeyboard( xkb, 0, True );
+    if ((xkb = XkbGetKeyboard(QX11Info::display(), XkbAllComponentsMask, XkbUseCoreKbd)) != NULL) {
+        unsigned int mask = xkb_mask_modifier(xkb, "ScrollLock");
+        XkbFreeKeyboard(xkb, 0, True);
         return mask;
     }
     return 0;
@@ -94,19 +91,18 @@ static unsigned int xkb_scrolllock_mask()
 unsigned int xkb_scrolllock_mask()
 {
     int scrolllock_mask = 0;
-    XModifierKeymap* map = XGetModifierMapping( QX11Info::display() );
-    KeyCode scrolllock_keycode = XKeysymToKeycode( QX11Info::display(), XK_Scroll_Lock );
-    if( scrolllock_keycode == NoSymbol ) {
+    XModifierKeymap* map = XGetModifierMapping(QX11Info::display());
+    KeyCode scrolllock_keycode = XKeysymToKeycode(QX11Info::display(), XK_Scroll_Lock);
+    if (scrolllock_keycode == NoSymbol) {
         XFreeModifiermap(map);
         return 0;
     }
-    for( int i = 0;
-         i < 8;
-         ++i )
-        {
-       if( map->modifiermap[ map->max_keypermod * i ] == scrolllock_keycode )
-               scrolllock_mask += 1 << i;
-       }
+    for (int i = 0;
+            i < 8;
+            ++i) {
+        if (map->modifiermap[ map->max_keypermod * i ] == scrolllock_keycode)
+            scrolllock_mask += 1 << i;
+    }
 
     XFreeModifiermap(map);
     return scrolllock_mask;
@@ -118,29 +114,27 @@ unsigned int scrolllock_mask = 0;
 
 int xkb_set_on()
 {
-    if (!scrolllock_mask)
-    {
-       if( !xkb_init())
-          return 0;
-       scrolllock_mask = xkb_scrolllock_mask();
-       if( scrolllock_mask == 0 )
-          return 0;
+    if (!scrolllock_mask) {
+        if (!xkb_init())
+            return 0;
+        scrolllock_mask = xkb_scrolllock_mask();
+        if (scrolllock_mask == 0)
+            return 0;
     }
-    XkbLockModifiers ( QX11Info::display(), XkbUseCoreKbd, scrolllock_mask, scrolllock_mask);
+    XkbLockModifiers(QX11Info::display(), XkbUseCoreKbd, scrolllock_mask, scrolllock_mask);
     return 1;
 }
 
 int xkb_set_off()
 {
-    if (!scrolllock_mask)
-    {
-       if( !xkb_init())
-          return 0;
-       scrolllock_mask = xkb_scrolllock_mask();
-       if( scrolllock_mask == 0 )
-          return 0;
+    if (!scrolllock_mask) {
+        if (!xkb_init())
+            return 0;
+        scrolllock_mask = xkb_scrolllock_mask();
+        if (scrolllock_mask == 0)
+            return 0;
     }
-    XkbLockModifiers ( QX11Info::display(), XkbUseCoreKbd, scrolllock_mask, 0);
+    XkbLockModifiers(QX11Info::display(), XkbUseCoreKbd, scrolllock_mask, 0);
     return 1;
 }
 
