@@ -67,15 +67,14 @@ static bool useTransparency()
 }
 
 MainWindow::MainWindow()
- : KXmlGuiWindow() ,
-   _bookmarkHandler(0),
-   _pluggedController(0),
-   _menuBarInitialVisibility(true),
-   _menuBarInitialVisibilitySet(false),
-   _menuBarInitialVisibilityApplied(false)
+    : KXmlGuiWindow() ,
+      _bookmarkHandler(0),
+      _pluggedController(0),
+      _menuBarInitialVisibility(true),
+      _menuBarInitialVisibilitySet(false),
+      _menuBarInitialVisibilityApplied(false)
 {
-    if ( useTransparency() )
-    {
+    if (useTransparency()) {
         setAttribute(Qt::WA_TranslucentBackground);
         setAttribute(Qt::WA_NoSystemBackground, false);
     }
@@ -84,25 +83,25 @@ MainWindow::MainWindow()
     setupActions();
 
     // create view manager
-    _viewManager = new ViewManager(this,actionCollection());
-    connect( _viewManager , SIGNAL(empty()) , this , SLOT(close()) );
-    connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
-            SLOT(activeViewChanged(SessionController*)) );
-    connect( _viewManager , SIGNAL(unplugController(SessionController*)) , this ,
-            SLOT(disconnectController(SessionController*)) );
-    connect( _viewManager , SIGNAL(viewPropertiesChanged(QList<ViewProperties*>)) ,
-           bookmarkHandler() , SLOT(setViews(QList<ViewProperties*>)) );
+    _viewManager = new ViewManager(this, actionCollection());
+    connect(_viewManager , SIGNAL(empty()) , this , SLOT(close()));
+    connect(_viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
+            SLOT(activeViewChanged(SessionController*)));
+    connect(_viewManager , SIGNAL(unplugController(SessionController*)) , this ,
+            SLOT(disconnectController(SessionController*)));
+    connect(_viewManager , SIGNAL(viewPropertiesChanged(QList<ViewProperties*>)) ,
+            bookmarkHandler() , SLOT(setViews(QList<ViewProperties*>)));
 
-    connect( _viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , this ,
-            SLOT(setMenuBarInitialVisibility(bool)) );
-    connect( _viewManager , SIGNAL(setSaveGeometryOnExitRequest(bool)) , this ,
-	    SLOT(setSaveGeometryOnExit(bool)) );
-    connect( _viewManager , SIGNAL(updateWindowIcon()) , this ,
-	    SLOT(updateWindowIcon()) );
-    connect( _viewManager , SIGNAL(newViewRequest(Profile::Ptr)) , 
-        this , SLOT(newFromProfile(Profile::Ptr)) );
-    connect( _viewManager , SIGNAL(newViewRequest()) , 
-        this , SLOT(newTab()));
+    connect(_viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , this ,
+            SLOT(setMenuBarInitialVisibility(bool)));
+    connect(_viewManager , SIGNAL(setSaveGeometryOnExitRequest(bool)) , this ,
+            SLOT(setSaveGeometryOnExit(bool)));
+    connect(_viewManager , SIGNAL(updateWindowIcon()) , this ,
+            SLOT(updateWindowIcon()));
+    connect(_viewManager , SIGNAL(newViewRequest(Profile::Ptr)) ,
+            this , SLOT(newFromProfile(Profile::Ptr)));
+    connect(_viewManager , SIGNAL(newViewRequest()) ,
+            this , SLOT(newTab()));
 
     // create main window widgets
     setupWidgets();
@@ -128,12 +127,11 @@ MainWindow::MainWindow()
     correctShortcuts();
 
     // enable save and restore of window size
-    setAutoSaveSettings("MainWindow",true);
+    setAutoSaveSettings("MainWindow", true);
 }
 void MainWindow::removeMenuAccelerators()
 {
-    foreach(QAction* menuItem, menuBar()->actions())
-    {
+    foreach(QAction * menuItem, menuBar()->actions()) {
         QString itemText = menuItem->text();
         itemText = KGlobal::locale()->removeAcceleratorMarker(itemText);
         menuItem->setText(itemText);
@@ -142,7 +140,7 @@ void MainWindow::removeMenuAccelerators()
 void MainWindow::setMenuBarInitialVisibility(bool visible)
 {
     // Make sure the 'initial' visibility is set only once.
-    if ( _menuBarInitialVisibilitySet )
+    if (_menuBarInitialVisibilitySet)
         return;
 
     // The initial visibility of menubar will not be applied until showEvent(),
@@ -152,20 +150,20 @@ void MainWindow::setMenuBarInitialVisibility(bool visible)
 
 void MainWindow::setSaveGeometryOnExit(bool save)
 {
-    setAutoSaveSettings("MainWindow",save);
+    setAutoSaveSettings("MainWindow", save);
 }
 
 void MainWindow::correctShortcuts()
 {
     // replace F1 shortcut for help contents
     QAction* helpAction = actionCollection()->action("help_contents");
-    Q_ASSERT( helpAction );
+    Q_ASSERT(helpAction);
     helpAction->setShortcut(QKeySequence());
 
     // replace Ctrl+B shortcut for bookmarks
     QAction* bookmarkAction = actionCollection()->action("add_bookmark");
     Q_ASSERT(bookmarkAction);
-    bookmarkAction->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_B));
+    bookmarkAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_B));
 }
 
 void MainWindow::setDefaultProfile(Profile::Ptr profile)
@@ -184,8 +182,8 @@ ViewManager* MainWindow::viewManager() const
 
 void MainWindow::disconnectController(SessionController* controller)
 {
-    disconnect( controller , SIGNAL(titleChanged(ViewProperties*))
-                     , this , SLOT(activeViewTitleChanged(ViewProperties*)) );
+    disconnect(controller , SIGNAL(titleChanged(ViewProperties*))
+               , this , SLOT(activeViewTitleChanged(ViewProperties*)));
 
     // KXmlGuiFactory::removeClient() will try to access actions associated
     // with the controller internally, which may not be valid after the controller
@@ -201,24 +199,24 @@ void MainWindow::activeViewChanged(SessionController* controller)
 {
     // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
-    disconnect( bookmarkHandler() , SIGNAL(openUrl(KUrl)) , 0 , 0 );
-    connect( bookmarkHandler() , SIGNAL(openUrl(KUrl)) , controller ,
-             SLOT(openUrl(KUrl)) );
+    disconnect(bookmarkHandler() , SIGNAL(openUrl(KUrl)) , 0 , 0);
+    connect(bookmarkHandler() , SIGNAL(openUrl(KUrl)) , controller ,
+            SLOT(openUrl(KUrl)));
 
-    if ( _pluggedController )
+    if (_pluggedController)
         disconnectController(_pluggedController);
 
     // listen for title changes from the current session
-    Q_ASSERT( controller );
+    Q_ASSERT(controller);
 
-    connect( controller , SIGNAL(titleChanged(ViewProperties*)) ,
-            this , SLOT(activeViewTitleChanged(ViewProperties*)) );
+    connect(controller , SIGNAL(titleChanged(ViewProperties*)) ,
+            this , SLOT(activeViewTitleChanged(ViewProperties*)));
 
-    controller->setShowMenuAction( _toggleMenuBarAction );
+    controller->setShowMenuAction(_toggleMenuBarAction);
     guiFactory()->addClient(controller);
 
     // set the current session's search bar
-    controller->setSearchBar( searchBar() );
+    controller->setSearchBar(searchBar());
 
     // update session title to match newly activated session
     activeViewTitleChanged(controller);
@@ -252,60 +250,60 @@ void MainWindow::setupActions()
 
     // File Menu
     _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18n("&New Tab"), collection);
-    _newTabMenuAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_T) );
+    _newTabMenuAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_T));
     _newTabMenuAction->setShortcutConfigurable(true);
-    _newTabMenuAction->setAutoRepeat( false );
+    _newTabMenuAction->setAutoRepeat(false);
     connect(_newTabMenuAction, SIGNAL(triggered()), this, SLOT(newTab()));
     collection->addAction("new-tab", _newTabMenuAction);
 
     action = collection->addAction("new-window");
-    action->setIcon( KIcon("window-new") );
-    action->setText( i18n("New &Window") );
-    action->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N) );
-    action->setAutoRepeat( false );
-    connect( action , SIGNAL(triggered()) , this , SLOT(newWindow()) );
+    action->setIcon(KIcon("window-new"));
+    action->setText(i18n("New &Window"));
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N));
+    action->setAutoRepeat(false);
+    connect(action , SIGNAL(triggered()) , this , SLOT(newWindow()));
 
-    action = KStandardAction::quit( this , SLOT(close()) , collection );
+    action = KStandardAction::quit(this , SLOT(close()) , collection);
     // the default shortcut for quit is typically Ctrl+[Some Letter, usually Q]
     // but that is reserved for use by terminal applications
-    action->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Q) );
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Q));
 
     // Bookmark Menu
-    KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection );
-    _bookmarkHandler = new BookmarkHandler( collection , bookmarkMenu->menu() , true , this );
+    KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection);
+    _bookmarkHandler = new BookmarkHandler(collection , bookmarkMenu->menu() , true , this);
     collection->addAction("bookmark" , bookmarkMenu);
-    connect( _bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)) );
+    connect(_bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)));
 
     // View Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
-    _toggleMenuBarAction->setShortcut( QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M) );
+    _toggleMenuBarAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
 
     // Full Screen
     action = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
-    action->setShortcut( QKeySequence() );
+    action->setShortcut(QKeySequence());
 
     // Settings Menu
-    KStandardAction::configureNotifications( this , SLOT(configureNotifications()) , collection  );
-    KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
+    KStandardAction::configureNotifications(this , SLOT(configureNotifications()) , collection);
+    KStandardAction::keyBindings(this , SLOT(showShortcutsDialog()) , collection);
 
     action = collection->addAction("manage-profiles");
-    action->setText( i18n("Manage Profiles...") );
-    action->setIcon( KIcon("configure") );
-    connect( action, SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()) );
+    action->setText(i18n("Manage Profiles..."));
+    action->setIcon(KIcon("configure"));
+    connect(action, SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()));
 
     // Set up an action and shortcut for activating menu bar.
     action = collection->addAction("activate-menu");
     action->setText(i18n("Activate Menu"));
-    action->setShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F10));
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F10));
     connect(action, SIGNAL(triggered()), this, SLOT(activateMenuBar()));
 }
 
 void MainWindow::viewFullScreen(bool fullScreen)
 {
-    if ( fullScreen )
-        setWindowState( windowState() | Qt::WindowFullScreen );
+    if (fullScreen)
+        setWindowState(windowState() | Qt::WindowFullScreen);
     else
-        setWindowState( windowState() & ~Qt::WindowFullScreen );
+        setWindowState(windowState() & ~Qt::WindowFullScreen);
 }
 
 BookmarkHandler* MainWindow::bookmarkHandler() const
@@ -317,23 +315,22 @@ void MainWindow::setSessionList(ProfileList* list)
 {
     sessionListChanged(list->actions());
 
-    connect( list , SIGNAL(profileSelected(Profile::Ptr)) , this ,
-            SLOT(newFromProfile(Profile::Ptr)) );
+    connect(list , SIGNAL(profileSelected(Profile::Ptr)) , this ,
+            SLOT(newFromProfile(Profile::Ptr)));
 
-    connect( list , SIGNAL(actionsChanged(QList<QAction*>)) , this ,
-            SLOT(sessionListChanged(QList<QAction*>)) );
+    connect(list , SIGNAL(actionsChanged(QList<QAction*>)) , this ,
+            SLOT(sessionListChanged(QList<QAction*>)));
 }
 
 void MainWindow::sessionListChanged(const QList<QAction*>& actions)
 {
     // If only 1 profile is to be shown in the menu, only display
     // it if it is the non-default profile.
-    if (actions.size() > 2)
-    {
+    if (actions.size() > 2) {
         // Update the 'New Tab' KActionMenu
         KMenu* newTabMenu = _newTabMenuAction->menu();
         newTabMenu->clear();
-        foreach (QAction* action, actions) {
+        foreach(QAction * action, actions) {
             newTabMenu->addAction(action);
 
             // NOTE: _defaultProfile seems to not work here, sigh.
@@ -346,20 +343,15 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
                 action->setFont(font);
             }
         }
-    }
-    else
-    {
+    } else {
         KMenu* newTabMenu = _newTabMenuAction->menu();
         newTabMenu->clear();
         Profile::Ptr profile = SessionManager::instance()->defaultProfile();
 
         // NOTE: Compare names w/o any '&'
-        if (actions.size() == 2 &&  actions[1]->text().remove('&') != profile->name())
-        {
+        if (actions.size() == 2 &&  actions[1]->text().remove('&') != profile->name()) {
             newTabMenu->addAction(actions[1]);
-        }
-        else
-        {
+        } else {
             delete newTabMenu;
         }
     }
@@ -367,66 +359,59 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
 
 QString MainWindow::activeSessionDir() const
 {
-    if ( _pluggedController )
-    {
-        if ( Session* session = _pluggedController->session() )
-        {
+    if (_pluggedController) {
+        if (Session* session = _pluggedController->session()) {
             // For new tabs to get the correct working directory,
             // force the updating of the currentWorkingDirectory.
             session->getDynamicTitle();
         }
         return _pluggedController->currentDir();
-    }
-    else
-    {
+    } else {
         return QString();
     }
 }
 
 void MainWindow::openUrls(const QList<KUrl>& urls)
 {
-    foreach( const KUrl& url , urls )
-    {
-        if ( url.isLocalFile() )
-            emit newSessionRequest( _defaultProfile , url.path() , _viewManager );
+    foreach(const KUrl & url , urls) {
+        if (url.isLocalFile())
+            emit newSessionRequest(_defaultProfile , url.path() , _viewManager);
 
-        else if ( url.protocol() == "ssh" )
-            emit newSSHSessionRequest( _defaultProfile , url , _viewManager );
+        else if (url.protocol() == "ssh")
+            emit newSSHSessionRequest(_defaultProfile , url , _viewManager);
     }
 }
 
 void MainWindow::newTab()
 {
-    emit newSessionRequest( _defaultProfile , activeSessionDir() , _viewManager);
+    emit newSessionRequest(_defaultProfile , activeSessionDir() , _viewManager);
 }
 
 void MainWindow::newWindow()
 {
-    emit newWindowRequest( _defaultProfile , activeSessionDir() );
+    emit newWindowRequest(_defaultProfile , activeSessionDir());
 }
 
 bool MainWindow::queryClose()
 {
     if (kapp->sessionSaving() ||
-        _viewManager->viewProperties().count() < 2)
+            _viewManager->viewProperties().count() < 2)
         return true;
 
     int result = KMessageBox::warningYesNoCancel(this,
-                i18n("You have multiple tabs in this window, "
-                     "are you sure you want to quit?"),
-                i18n("Confirm Close"),
-                KStandardGuiItem::quit(),
-                KGuiItem(i18n("Close Current Tab"), "tab-close"),
-                KStandardGuiItem::cancel(),
-                "CloseAllTabs");
+                 i18n("You have multiple tabs in this window, "
+                      "are you sure you want to quit?"),
+                 i18n("Confirm Close"),
+                 KStandardGuiItem::quit(),
+                 KGuiItem(i18n("Close Current Tab"), "tab-close"),
+                 KStandardGuiItem::cancel(),
+                 "CloseAllTabs");
 
-    switch (result)
-    {
+    switch (result) {
     case KMessageBox::Yes:
         return true;
     case KMessageBox::No:
-        if (_pluggedController && _pluggedController->session())
-        {
+        if (_pluggedController && _pluggedController->session()) {
             disconnectController(_pluggedController);
             _pluggedController->closeSession();
         }
@@ -450,7 +435,7 @@ void MainWindow::readProperties(const KConfigGroup& group)
     SessionManager* manager = SessionManager::instance();
     QString profilePath = group.readPathEntry("Default Profile", QString());
     Profile::Ptr profile = manager->defaultProfile();
-    if (!profilePath.isEmpty()) 
+    if (!profilePath.isEmpty())
         profile = manager->loadProfile(profilePath);
     setDefaultProfile(profile);
     _viewManager->restoreSessions(group);
@@ -468,12 +453,10 @@ void MainWindow::readGlobalProperties(KConfig* config)
 
 void MainWindow::syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source)
 {
-    foreach(QAction* qAction, source->actions()) 
-    {
-        if (KAction* kAction = qobject_cast<KAction*>(qAction))
-        {
-           if (KAction* destKAction = qobject_cast<KAction*>(dest->action(kAction->objectName())))
-               destKAction->setShortcut(kAction->shortcut(KAction::ActiveShortcut),KAction::ActiveShortcut);
+    foreach(QAction * qAction, source->actions()) {
+        if (KAction* kAction = qobject_cast<KAction*>(qAction)) {
+            if (KAction* destKAction = qobject_cast<KAction*>(dest->action(kAction->objectName())))
+                destKAction->setShortcut(kAction->shortcut(KAction::ActiveShortcut), KAction::ActiveShortcut);
         }
     }
 }
@@ -482,27 +465,24 @@ void MainWindow::showShortcutsDialog()
     KShortcutsDialog dialog(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsDisallowed, this);
 
     // add actions from this window and the current session controller
-    foreach(KXMLGUIClient* client, guiFactory()->clients())
-                dialog.addCollection(client->actionCollection());
+    foreach(KXMLGUIClient * client, guiFactory()->clients())
+    dialog.addCollection(client->actionCollection());
 
-    if (dialog.configure())
-    {
+    if (dialog.configure()) {
         // sync shortcuts for non-session actions (defined in "konsoleui.rc") in other main windows
-        foreach(QWidget* widget, QApplication::topLevelWidgets())
-        {
+        foreach(QWidget * widget, QApplication::topLevelWidgets()) {
             MainWindow* window = qobject_cast<MainWindow*>(widget);
             if (window && window != this)
-                syncActiveShortcuts(window->actionCollection(),actionCollection());
+                syncActiveShortcuts(window->actionCollection(), actionCollection());
         }
         // sync shortcuts for session actions (defined in "sessionui.rc") in other session controllers.
         // Controllers which are currently plugged in (ie. their actions are part of the current menu)
         // must be updated immediately via syncActiveShortcuts().  Other controllers will be updated
         // when they are plugged into a main window.
-        foreach(SessionController* controller, SessionController::allControllers())
-        {
+        foreach(SessionController * controller, SessionController::allControllers()) {
             controller->reloadXML();
             if (controller->factory() && controller != _pluggedController)
-                syncActiveShortcuts(controller->actionCollection(),_pluggedController->actionCollection());
+                syncActiveShortcuts(controller->actionCollection(), _pluggedController->actionCollection());
         }
     }
 }
@@ -527,8 +507,7 @@ void MainWindow::activateMenuBar()
     // First menu action should be 'File'
     QAction* fileAction = menuActions.first();
 
-    if (menuBar()->isHidden()) // Show menubar if hidden
-    {
+    if (menuBar()->isHidden()) { // Show menubar if hidden
         _toggleMenuBarAction->setChecked(true);
         menuBar()->setVisible(true);
     }
@@ -542,7 +521,7 @@ void MainWindow::setupWidgets()
     QWidget* widget = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout();
 
-    layout->addWidget( _viewManager->widget() );
+    layout->addWidget(_viewManager->widget());
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
@@ -553,14 +532,13 @@ void MainWindow::setupWidgets()
 
 void MainWindow::configureNotifications()
 {
-    KNotifyConfigWidget::configure( this );
+    KNotifyConfigWidget::configure(this);
 }
 
 void MainWindow::showEvent(QShowEvent* event)
 {
     // Make sure the 'initial' visibility is applied only once.
-    if ( ! _menuBarInitialVisibilityApplied )
-    {
+    if (! _menuBarInitialVisibilityApplied) {
         // TODO: this is a workaround, not a simple and clear solution.
         //
         // Since the geometry restoration of MainWindow happens after
@@ -569,8 +547,8 @@ void MainWindow::showEvent(QShowEvent* event)
         // visibility will be determined by what is stored in konsolerc, but not
         // by the selected profile.
         //
-        menuBar()->setVisible( _menuBarInitialVisibility );
-        _toggleMenuBarAction->setChecked( _menuBarInitialVisibility );
+        menuBar()->setVisible(_menuBarInitialVisibility);
+        _toggleMenuBarAction->setChecked(_menuBarInitialVisibility);
 
         _menuBarInitialVisibilityApplied = true;
     }
@@ -579,7 +557,7 @@ void MainWindow::showEvent(QShowEvent* event)
     KXmlGuiWindow::showEvent(event);
 }
 
-bool MainWindow::focusNextPrevChild( bool )
+bool MainWindow::focusNextPrevChild(bool)
 {
     // In stand-alone konsole, always disable implicit focus switching
     // through 'Tab' and 'Shift+Tab'

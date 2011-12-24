@@ -58,154 +58,154 @@ class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 
-    public:
-        /**
-         * Constructs a new main window.  Do not create new main windows directly, use Application's
-         * newMainWindow() method instead.
-         */
-        MainWindow();
+public:
+    /**
+     * Constructs a new main window.  Do not create new main windows directly, use Application's
+     * newMainWindow() method instead.
+     */
+    MainWindow();
 
-        /**
-         * Returns the view manager associated with this window.  The view manager can be used to
-         * create new views on particular session objects inside this window.
-         */
-        ViewManager* viewManager() const;
+    /**
+     * Returns the view manager associated with this window.  The view manager can be used to
+     * create new views on particular session objects inside this window.
+     */
+    ViewManager* viewManager() const;
 
-        /**
-         * Returns the search bar.
-         *
-         * This is a convenience method. The search bar is actually owned by
-         * ViewManager, or more precisely, by ViewContainer.
-         */
-        IncrementalSearchBar* searchBar() const;
+    /**
+     * Returns the search bar.
+     *
+     * This is a convenience method. The search bar is actually owned by
+     * ViewManager, or more precisely, by ViewContainer.
+     */
+    IncrementalSearchBar* searchBar() const;
 
-        /** Sets the list of sessions to be displayed in the File menu */
-        void setSessionList(ProfileList* list);
+    /** Sets the list of sessions to be displayed in the File menu */
+    void setSessionList(ProfileList* list);
 
-        /**
-         * Returns the bookmark handler associated with this window.
-         */
-        BookmarkHandler* bookmarkHandler() const;
+    /**
+     * Returns the bookmark handler associated with this window.
+     */
+    BookmarkHandler* bookmarkHandler() const;
 
-        /**
-         * Sets the default profile for this window.
-         * This is the default value for the profile argument
-         * when the newSessionRequest() and newWindow() signals
-         * are emitted.
-         */
-        void setDefaultProfile(Profile::Ptr profile);
+    /**
+     * Sets the default profile for this window.
+     * This is the default value for the profile argument
+     * when the newSessionRequest() and newWindow() signals
+     * are emitted.
+     */
+    void setDefaultProfile(Profile::Ptr profile);
 
-        /**
-         * Returns the default profile for this window.
-         * See setDefaultProfile()
-         */
-        Profile::Ptr defaultProfile() const;
+    /**
+     * Returns the default profile for this window.
+     * See setDefaultProfile()
+     */
+    Profile::Ptr defaultProfile() const;
 
-    signals:
-        /**
-         * Emitted by the main window to request the creation of a new session.
-         *
-         * @param profile The profile to use to create the new session.
-         * @param directory Initial working directory for the new session or empty
-         * if the default working directory associated with the profile should be used.
-         * @param view The view manager owned by this main window
-         */
-        void newSessionRequest(Profile::Ptr profile,
-                               const QString& directory,
-                               ViewManager* view);
+signals:
+    /**
+     * Emitted by the main window to request the creation of a new session.
+     *
+     * @param profile The profile to use to create the new session.
+     * @param directory Initial working directory for the new session or empty
+     * if the default working directory associated with the profile should be used.
+     * @param view The view manager owned by this main window
+     */
+    void newSessionRequest(Profile::Ptr profile,
+                           const QString& directory,
+                           ViewManager* view);
 
-        /**
-         * Emitted by the main window to request the creation of a new SSH session.
-         *
-         * @param profile The profile to use to create the new session.
-         * @param url URL for the new session
-         * @param view The view manager owned by this main window
-         */
-        void newSSHSessionRequest(Profile::Ptr profile,
-                                  const KUrl& url,
-                                  ViewManager* view);
+    /**
+     * Emitted by the main window to request the creation of a new SSH session.
+     *
+     * @param profile The profile to use to create the new session.
+     * @param url URL for the new session
+     * @param view The view manager owned by this main window
+     */
+    void newSSHSessionRequest(Profile::Ptr profile,
+                              const KUrl& url,
+                              ViewManager* view);
 
-        /**
-         * Emitted by the main window to request the creation of a
-         * new session in a new window.
-         *
-         * @param profile The profile to use to create the
-         * first session in the new window.
-         * @param directory Initial working directory for the new window or empty
-         * if the default working directory associated with the profile should
-         * be used.
-         */
-        void newWindowRequest(Profile::Ptr profile,
-                              const QString& directory);
+    /**
+     * Emitted by the main window to request the creation of a
+     * new session in a new window.
+     *
+     * @param profile The profile to use to create the
+     * first session in the new window.
+     * @param directory Initial working directory for the new window or empty
+     * if the default working directory associated with the profile should
+     * be used.
+     */
+    void newWindowRequest(Profile::Ptr profile,
+                          const QString& directory);
 
-        /**
-         * Emitted by the main window to request the current session to close.
-         */
-        void closeActiveSessionRequest();
+    /**
+     * Emitted by the main window to request the current session to close.
+     */
+    void closeActiveSessionRequest();
 
-    protected:
-        // Reimplemented for internal reasons.
-        virtual void showEvent(QShowEvent* event);
+protected:
+    // Reimplemented for internal reasons.
+    virtual void showEvent(QShowEvent* event);
 
-        // reimplemented from KMainWindow
-        virtual bool queryClose();
-        virtual void saveProperties(KConfigGroup& group);
-        virtual void readProperties(const KConfigGroup& group);
-        virtual void saveGlobalProperties(KConfig* config);
-        virtual void readGlobalProperties(KConfig* config);
+    // reimplemented from KMainWindow
+    virtual bool queryClose();
+    virtual void saveProperties(KConfigGroup& group);
+    virtual void readProperties(const KConfigGroup& group);
+    virtual void saveGlobalProperties(KConfig* config);
+    virtual void readGlobalProperties(KConfig* config);
 
-        // reimplemented from QWidget
-        virtual bool focusNextPrevChild( bool next );
+    // reimplemented from QWidget
+    virtual bool focusNextPrevChild(bool next);
 
-    private slots:
-        void newTab();
-        void newWindow();
-        void showManageProfilesDialog();
-        void activateMenuBar();
-        void showShortcutsDialog();
-        void newFromProfile(Profile::Ptr profile);
-        void activeViewChanged(SessionController* controller);
-        void disconnectController(SessionController* controller);
-        void activeViewTitleChanged(ViewProperties*);
+private slots:
+    void newTab();
+    void newWindow();
+    void showManageProfilesDialog();
+    void activateMenuBar();
+    void showShortcutsDialog();
+    void newFromProfile(Profile::Ptr profile);
+    void activeViewChanged(SessionController* controller);
+    void disconnectController(SessionController* controller);
+    void activeViewTitleChanged(ViewProperties*);
 
-        void sessionListChanged(const QList<QAction*>& actions);
-        void viewFullScreen(bool fullScreen);
-        void configureNotifications();
+    void sessionListChanged(const QList<QAction*>& actions);
+    void viewFullScreen(bool fullScreen);
+    void configureNotifications();
 
-        // single shot call to set the initial visibility of the menu bar.
-        // Has no effect if the menu bar is a MacOS-style top-level menu
-        void setMenuBarInitialVisibility(bool visible);
+    // single shot call to set the initial visibility of the menu bar.
+    // Has no effect if the menu bar is a MacOS-style top-level menu
+    void setMenuBarInitialVisibility(bool visible);
 
-        void setSaveGeometryOnExit(bool visible);
+    void setSaveGeometryOnExit(bool visible);
 
-        void updateWindowIcon();
+    void updateWindowIcon();
 
-        void openUrls(const QList<KUrl>& urls);
+    void openUrls(const QList<KUrl>& urls);
 
-    private:
-        void correctShortcuts();
-        void removeMenuAccelerators();
-        void setupActions();
-        void setupWidgets();
-        QString activeSessionDir() const;
+private:
+    void correctShortcuts();
+    void removeMenuAccelerators();
+    void setupActions();
+    void setupWidgets();
+    QString activeSessionDir() const;
 
-        // sets the active shortcuts of actions in 'dest' to the shortcuts of actions
-        // with the same name in 'source' (see KAction::ActiveShortcut)
-        static void syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source);
+    // sets the active shortcuts of actions in 'dest' to the shortcuts of actions
+    // with the same name in 'source' (see KAction::ActiveShortcut)
+    static void syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source);
 
-    private:
-        ViewManager*  _viewManager;
-        BookmarkHandler* _bookmarkHandler;
-        KToggleAction* _toggleMenuBarAction;
-        KActionMenu* _newTabMenuAction;
+private:
+    ViewManager*  _viewManager;
+    BookmarkHandler* _bookmarkHandler;
+    KToggleAction* _toggleMenuBarAction;
+    KActionMenu* _newTabMenuAction;
 
-        QPointer<SessionController> _pluggedController;
+    QPointer<SessionController> _pluggedController;
 
-        Profile::Ptr _defaultProfile;
+    Profile::Ptr _defaultProfile;
 
-        bool _menuBarInitialVisibility;
-        bool _menuBarInitialVisibilitySet;
-        bool _menuBarInitialVisibilityApplied;
+    bool _menuBarInitialVisibility;
+    bool _menuBarInitialVisibilitySet;
+    bool _menuBarInitialVisibilityApplied;
 };
 
 }
