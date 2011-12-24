@@ -60,12 +60,12 @@ class ProfileGroup;
  * Profiles can be loaded from disk using ProfileReader instances
  * and saved to disk using ProfileWriter instances.
  */
-class KONSOLEPRIVATE_EXPORT Profile : public QSharedData 
+class KONSOLEPRIVATE_EXPORT Profile : public QSharedData
 {
 
-friend class KDE4ProfileReader;
-friend class KDE4ProfileWriter;
-friend class ProfileGroup;
+    friend class KDE4ProfileReader;
+    friend class KDE4ProfileWriter;
+    friend class ProfileGroup;
 
 public:
     typedef KSharedPtr<Profile> Ptr;
@@ -78,20 +78,19 @@ public:
      * Properties can be set using setProperty() and read
      * using property()
      */
-    enum Property
-    {
+    enum Property {
         /** (QString) Path to the profile's configuration file on-disk. */
-        Path,   
+        Path,
         /** (QString) The descriptive name of this profile. */
-        Name,   
+        Name,
         /** (QString) The name of the icon associated with this profile.  This
          * is used in menus and tabs to represent the profile.
          */
-        Icon, 
+        Icon,
         /** (QString) The command to execute ( excluding arguments ) when creating a new terminal
          * session using this profile.
          */
-        Command,   
+        Command,
         /** (QStringList) The arguments which are passed to the program specified by
          * the Command property when creating a new terminal session using this profile.
          */
@@ -104,30 +103,30 @@ public:
         /** (QString) The initial working directory for sessions created using this profile. */
         Directory,
         /** (QString) The format used for tab titles when running normal commands. */
-        LocalTabTitleFormat,   
+        LocalTabTitleFormat,
         /** (QString) The format used for tab titles when the session is running
          * a remote command (eg. SSH) */
-        RemoteTabTitleFormat,   
+        RemoteTabTitleFormat,
         /** (bool) Specifies whether the menu bar should be shown in the main application window. */
-        ShowMenuBar,    
+        ShowMenuBar,
         /** (bool) Specifies whether show hint for terminal size after resizing the application window. */
         ShowTerminalSizeHint,
-         /** (bool) Specifies whether the geometry information is saved when window is closed. */
+        /** (bool) Specifies whether the geometry information is saved when window is closed. */
         SaveGeometryOnExit,
         /** (TabBarModeEnum) Specifies when the tab bar should be shown in
          * the main application window. */
-        TabBarMode,    
+        TabBarMode,
         /** (QFont) The font to use in terminal displays using this profile. */
-        Font,           
+        Font,
         /** (QString)
          * The name of the color scheme to use in terminal displays using this profile.
          * Color schemes are managed by the ColorSchemeManager class.
          */
-        ColorScheme,   
+        ColorScheme,
         /** (QString) The name of the key bindings.
          * Key bindings are managed by the KeyboardTranslatorManager class.
          */
-        KeyBindings, 
+        KeyBindings,
         /** (HistoryModeEnum) Specifies the storage type used for keeping the output produced
          * by terminal sessions using this profile.
          */
@@ -140,11 +139,11 @@ public:
         /** (ScrollBarPositionEnum) Specifies the position of the scroll bar in
          * terminal displays using this profile.
          */
-        ScrollBarPosition,  
+        ScrollBarPosition,
         /** (bool) Specifies whether the terminal will enable Bidirectional text display */
         BidiRenderingEnabled,
         /** (bool) Specifies whether text in terminal displays is allowed to blink. */
-        BlinkingTextEnabled,       
+        BlinkingTextEnabled,
         /** (bool) Specifies whether the flow control keys ( typically Ctrl+S , Ctrl+Q )
          * have any effect.  Also known as Xon/Xoff
          */
@@ -163,10 +162,10 @@ public:
          */
         UseCustomCursorColor,
         /** (CursorShapeEnum) The shape used by terminal displays to represent the cursor. */
-        CursorShape,           
+        CursorShape,
         /** (QColor) The color used by terminal displays to draw the cursor.  Only applicable
          * if the UseCustomCursorColor property is true. */
-        CustomCursorColor,        
+        CustomCursorColor,
         /** (QString) A string consisting of the characters used to delimit words when
          * selecting text in the terminal display.
          */
@@ -206,8 +205,7 @@ public:
     /**
      * This enum describes the available modes for showing or hiding the tab bar.
      */
-    enum TabBarModeEnum
-    {
+    enum TabBarModeEnum {
         /** The tab bar is never shown. */
         AlwaysHideTabBar   = 0,
         /** The tab bar is shown if there are multiple tabs open or hidden otherwise. */
@@ -219,8 +217,7 @@ public:
     /**
      * This enum describes the available tab bar positions.
      */
-    enum TabBarPositionEnum
-    {
+    enum TabBarPositionEnum {
         /** Show tab bar below displays. */
         TabBarBottom = 0,
         /** Show tab bar above displays. */
@@ -230,8 +227,7 @@ public:
     /**
      * This enum describes where newly created tab should be placed.
      */
-    enum NewTabBehaviorEnum
-    {
+    enum NewTabBehaviorEnum {
         /** Put newly created tab at the end. */
         PutNewTabAtTheEnd = 0,
         /** Put newly created tab right after current tab. */
@@ -242,8 +238,7 @@ public:
      * This enum describes the modes available to remember lines of output produced
      * by the terminal.
      */
-    enum HistoryModeEnum
-    {
+    enum HistoryModeEnum {
         /** No output is remembered.  As soon as lines of text are scrolled off-screen they are lost. */
         DisableHistory   = 0,
         /** A fixed number of lines of output are remembered.  Once the limit is reached, the oldest
@@ -259,8 +254,7 @@ public:
     /**
      * This enum describes the positions where the terminal display's scroll bar may be placed.
      */
-    enum ScrollBarPositionEnum
-    {
+    enum ScrollBarPositionEnum {
         /** Show the scroll-bar on the left of the terminal display. */
         ScrollBarLeft   = 0,
         /** Show the scroll-bar on the right of the terminal display. */
@@ -270,8 +264,7 @@ public:
     };
 
     /** This enum describes the shapes used to draw the cursor in terminal displays. */
-    enum CursorShapeEnum
-    {
+    enum CursorShapeEnum {
         /** Use a solid rectangular block to draw the cursor. */
         BlockCursor     = 0,
         /** Use an 'I' shape, similar to that used in text editing applications, to draw the cursor. */
@@ -281,8 +274,7 @@ public:
     };
 
     /** This enum describes the behavior of triple click action . */
-    enum TripleClickModeEnum
-    {
+    enum TripleClickModeEnum {
         /** Select the whole line underneath the cursor. */
         SelectWholeLine = 0,
         /** Select from the current cursor position to the end of the line. */
@@ -297,7 +289,7 @@ public:
      * the parent's value for the property will be returned instead.
      */
     explicit Profile(Ptr parent = Ptr());
-    virtual ~Profile(); 
+    virtual ~Profile();
 
     /**
      * Copies all properties except Name and Path from the specified @p profile
@@ -337,12 +329,12 @@ public:
     T property(Property property) const;
 
     /** Sets the value of the specified @p property to @p value. */
-    virtual void setProperty(Property property,const QVariant& value);
+    virtual void setProperty(Property property, const QVariant& value);
     /** Returns true if the specified property has been set in this Profile instance. */
     virtual bool isPropertySet(Property property) const;
 
     /** Returns a map of the properties set in this Profile instance. */
-    virtual QHash<Property,QVariant> setProperties() const;
+    virtual QHash<Property, QVariant> setProperties() const;
 
     /** Returns true if no properties have been set in this Profile instance. */
     bool isEmpty() const;
@@ -365,35 +357,54 @@ public:
     //
 
     /** Convenience method for property<QString>(Profile::Path) */
-    QString path() const { return property<QString>(Profile::Path); }
+    QString path() const {
+        return property<QString>(Profile::Path);
+    }
 
     /** Convenience method for property<QString>(Profile::Name) */
-    QString name() const { return property<QString>(Profile::Name); }
+    QString name() const {
+        return property<QString>(Profile::Name);
+    }
 
     /** Convenience method for property<QString>(Profile::Directory) */
-    QString defaultWorkingDirectory() const 
-            { return property<QString>(Profile::Directory); }
+    QString defaultWorkingDirectory() const {
+        return property<QString>(Profile::Directory);
+    }
 
     /** Convenience method for property<QString>(Profile::Icon) */
-    QString icon() const { return property<QString>(Profile::Icon); }
+    QString icon() const {
+        return property<QString>(Profile::Icon);
+    }
 
     /** Convenience method for property<QString>(Profile::Command) */
-    QString command() const { return property<QString>(Profile::Command); }
+    QString command() const {
+        return property<QString>(Profile::Command);
+    }
 
     /** Convenience method for property<QStringList>(Profile::Arguments) */
-    QStringList arguments() const { return property<QStringList>(Profile::Arguments); }
+    QStringList arguments() const {
+        return property<QStringList>(Profile::Arguments);
+    }
 
     /** Convenience method for property<QFont>(Profile::Font) */
-    QFont font() const { return property<QFont>(Profile::Font); }
+    QFont font() const {
+        return property<QFont>(Profile::Font);
+    }
 
     /** Convenience method for property<QString>(Profile::ColorScheme) */
-    QString colorScheme() const { return property<QString>(Profile::ColorScheme); }
+    QString colorScheme() const {
+        return property<QString>(Profile::ColorScheme);
+    }
 
     /** Convenience method for property<QStringList>(Profile::Environment) */
-    QStringList environment() const { return property<QStringList>(Profile::Environment); }
+    QStringList environment() const {
+        return property<QStringList>(Profile::Environment);
+    }
 
     /** Convenience method for property<QString>(Profile::MenuIndex) */
-    QString menuIndex() const { return property<QString>(Profile::MenuIndex); }
+    QString menuIndex() const {
+        return property<QString>(Profile::MenuIndex);
+    }
 
     int menuIndexAsInt() const;
 
@@ -414,7 +425,7 @@ private:
     struct PropertyInfo;
     // Defines a new property, this property is then available
     // to all Profile instances.
-    static void registerProperty(const PropertyInfo& info); 
+    static void registerProperty(const PropertyInfo& info);
 
     // fills the table with default names for profile properties
     // the first time it is called.
@@ -424,18 +435,17 @@ private:
     // returns true if the property can be inherited
     static bool canInheritProperty(Property property);
 
-    QHash<Property,QVariant> _propertyValues;
+    QHash<Property, QVariant> _propertyValues;
     Ptr _parent;
 
     bool _hidden;
 
-    static QHash<QString,PropertyInfo> _propertyInfoByName;
-    static QHash<Property,PropertyInfo> _infoByProperty;
+    static QHash<QString, PropertyInfo> _propertyInfoByName;
+    static QHash<Property, PropertyInfo> _infoByProperty;
 
     // Describes a property.  Each property has a name and group
     // which is used when saving/loading the profile.
-    struct PropertyInfo
-    {
+    struct PropertyInfo {
         Property property;
         const char* name;
         const char* group;
@@ -452,18 +462,18 @@ inline T Profile::property(Property theProperty) const
 template <>
 inline QVariant Profile::property(Property property) const
 {
-    if ( _propertyValues.contains(property) ) {
+    if (_propertyValues.contains(property)) {
         return _propertyValues[property];
-    }
-    else if ( _parent && canInheritProperty(property) ) {
+    } else if (_parent && canInheritProperty(property)) {
         return _parent->property<QVariant>(property);
-    }
-    else {
+    } else {
         return QVariant();
     }
 }
-inline bool Profile::canInheritProperty(Property property) 
-{ return property != Name && property != Path; }
+inline bool Profile::canInheritProperty(Property property)
+{
+    return property != Name && property != Path;
+}
 
 
 /**
@@ -501,17 +511,20 @@ public:
     /** Add a profile to the group.  Calling setProperty() will update this profile.
      * When creating a group, add the profiles to the group then call updateValues() to
      * make the group's property values reflect the profiles currently in the group. */
-    void addProfile(Profile::Ptr profile)
-    { _profiles.append(profile); }
+    void addProfile(Profile::Ptr profile) {
+        _profiles.append(profile);
+    }
 
     /** Remove a profile from the group.  Calling setProperty() will no longer
      * affect this profile. */
-    void removeProfile(Profile::Ptr profile)
-    { _profiles.removeAll(profile); }
+    void removeProfile(Profile::Ptr profile) {
+        _profiles.removeAll(profile);
+    }
 
     /** Returns the profiles in this group .*/
-    QList<Profile::Ptr> profiles() const
-    { return _profiles; }
+    QList<Profile::Ptr> profiles() const {
+        return _profiles;
+    }
 
     /**
      * Updates the property values in this ProfileGroup to match those from
@@ -533,14 +546,14 @@ private:
     QList<Profile::Ptr> _profiles;
 };
 inline ProfileGroup::ProfileGroup(Profile::Ptr parent)
-: Profile(parent)
+    : Profile(parent)
 {
     setHidden(true);
 }
 inline const Profile::GroupPtr Profile::asGroup() const
 {
     const Profile::GroupPtr ptr(dynamic_cast<ProfileGroup*>(
-                                const_cast<Profile*>(this)));
+                                    const_cast<Profile*>(this)));
     return ptr;
 }
 inline Profile::GroupPtr Profile::asGroup()
@@ -554,7 +567,9 @@ class ProfileReader
 public:
     virtual ~ProfileReader() {}
     /** Returns a list of paths to profiles which this reader can read. */
-    virtual QStringList findProfiles() { return QStringList(); }
+    virtual QStringList findProfiles() {
+        return QStringList();
+    }
     /**
      * Attempts to read a profile from @p path and
      * save the property values described into @p profile.
@@ -581,7 +596,7 @@ public:
     virtual QStringList findProfiles();
     virtual bool readProfile(const QString& path , Profile::Ptr profile, QString& parentProfile);
 private:
-    void readProperties(const KConfig& config, Profile::Ptr profile, 
+    void readProperties(const KConfig& config, Profile::Ptr profile,
                         const Profile::PropertyInfo* properties);
 };
 /** Interface for all classes which can write profile settings to a file. */
@@ -609,7 +624,7 @@ public:
     virtual bool writeProfile(const QString& path , const Profile::Ptr profile);
 
 private:
-    void writeProperties(KConfig& config, const Profile::Ptr profile, 
+    void writeProperties(KConfig& config, const Profile::Ptr profile,
                          const Profile::PropertyInfo* properties);
 };
 
@@ -638,7 +653,7 @@ public:
      * and assigned values and returns a table of
      * properties and values.
      */
-    QHash<Profile::Property,QVariant> parse(const QString& input);
+    QHash<Profile::Property, QVariant> parse(const QString& input);
 
 };
 

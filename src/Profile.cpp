@@ -61,10 +61,9 @@ static const char CURSOR_GROUP[]      = "Cursor Options";
 static const char INTERACTION_GROUP[] = "Interaction Options";
 static const char ENCODING_GROUP[]    = "Encoding Options";
 
-const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
-{
+const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     // General
-      { Path , "Path" , 0 , QVariant::String }
+    { Path , "Path" , 0 , QVariant::String }
     , { Name , "Name" , GENERAL_GROUP , QVariant::String }
     , { Icon , "Icon" , GENERAL_GROUP , QVariant::String }
     , { Command , "Command" , 0 , QVariant::String }
@@ -97,17 +96,17 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
 
     // Scrolling
     , { HistoryMode , "HistoryMode" , SCROLLING_GROUP , QVariant::Int }
-    , { HistorySize , "HistorySize" , SCROLLING_GROUP , QVariant::Int } 
+    , { HistorySize , "HistorySize" , SCROLLING_GROUP , QVariant::Int }
     , { ScrollBarPosition , "ScrollBarPosition" , SCROLLING_GROUP , QVariant::Int }
 
-       // Terminal Features
+    // Terminal Features
     , { BlinkingTextEnabled , "BlinkingTextEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { FlowControlEnabled , "FlowControlEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { AllowProgramsToResizeWindow , "AllowProgramsToResizeWindow" , TERMINAL_GROUP , QVariant::Bool }
     , { BidiRenderingEnabled , "BidiRenderingEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { BlinkingCursorEnabled , "BlinkingCursorEnabled" , TERMINAL_GROUP , QVariant::Bool }
 
-    // Cursor 
+    // Cursor
     , { UseCustomCursorColor , "UseCustomCursorColor" , CURSOR_GROUP , QVariant::Bool}
     , { CursorShape , "CursorShape" , CURSOR_GROUP , QVariant::Int}
     , { CustomCursorColor , "CustomCursorColor" , CURSOR_GROUP , QVariant::Color }
@@ -123,104 +122,100 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     , { (Property)0 , 0 , 0, QVariant::Invalid }
 };
 
-QHash<QString,Profile::PropertyInfo> Profile::_propertyInfoByName;
-QHash<Profile::Property,Profile::PropertyInfo> Profile::_infoByProperty;
+QHash<QString, Profile::PropertyInfo> Profile::_propertyInfoByName;
+QHash<Profile::Property, Profile::PropertyInfo> Profile::_infoByProperty;
 
 void Profile::fillTableWithDefaultNames()
 {
     static bool filledDefaults = false;
 
-    if ( filledDefaults )
+    if (filledDefaults)
         return;
 
     const PropertyInfo* iter = DefaultPropertyNames;
-    while ( iter->name != 0 )
-    {
-       registerProperty(*iter);
-       iter++;
+    while (iter->name != 0) {
+        registerProperty(*iter);
+        iter++;
     }
 
-   filledDefaults = true; 
+    filledDefaults = true;
 }
 
 FallbackProfile::FallbackProfile()
- : Profile()
+    : Profile()
 {
     // Fallback settings
-    setProperty(Name,i18n("Shell"));
-    // magic path for the fallback profile which is not a valid 
+    setProperty(Name, i18n("Shell"));
+    // magic path for the fallback profile which is not a valid
     // non-directory file name
-    setProperty(Path,"FALLBACK/"); 
-    setProperty(Command,qgetenv("SHELL"));
-    setProperty(Icon,"utilities-terminal");
-    setProperty(Arguments,QStringList() << qgetenv("SHELL"));
-    setProperty(Environment,QStringList() << "TERM=xterm");
-    setProperty(LocalTabTitleFormat,"%D : %n");
-    setProperty(RemoteTabTitleFormat,"(%u) %H");
-    setProperty(TabBarMode,AlwaysShowTabBar);
-    setProperty(TabBarPosition,TabBarBottom);
-    setProperty(NewTabBehavior,PutNewTabAtTheEnd);
-    setProperty(ShowMenuBar,true);
-    setProperty(ShowTerminalSizeHint,true);
-    setProperty(SaveGeometryOnExit,true);
-    setProperty(StartInCurrentSessionDir,true);
-    setProperty(ShowNewAndCloseTabButtons,false);
-    setProperty(MenuIndex,"0");
-    setProperty(SilenceSeconds,10);
+    setProperty(Path, "FALLBACK/");
+    setProperty(Command, qgetenv("SHELL"));
+    setProperty(Icon, "utilities-terminal");
+    setProperty(Arguments, QStringList() << qgetenv("SHELL"));
+    setProperty(Environment, QStringList() << "TERM=xterm");
+    setProperty(LocalTabTitleFormat, "%D : %n");
+    setProperty(RemoteTabTitleFormat, "(%u) %H");
+    setProperty(TabBarMode, AlwaysShowTabBar);
+    setProperty(TabBarPosition, TabBarBottom);
+    setProperty(NewTabBehavior, PutNewTabAtTheEnd);
+    setProperty(ShowMenuBar, true);
+    setProperty(ShowTerminalSizeHint, true);
+    setProperty(SaveGeometryOnExit, true);
+    setProperty(StartInCurrentSessionDir, true);
+    setProperty(ShowNewAndCloseTabButtons, false);
+    setProperty(MenuIndex, "0");
+    setProperty(SilenceSeconds, 10);
 
-    setProperty(KeyBindings,"default");
-    setProperty(ColorScheme,"Linux"); //use DarkPastels when is start support blue ncurses UI properly
-    setProperty(Font,KGlobalSettings::fixedFont());
+    setProperty(KeyBindings, "default");
+    setProperty(ColorScheme, "Linux"); //use DarkPastels when is start support blue ncurses UI properly
+    setProperty(Font, KGlobalSettings::fixedFont());
 
-    setProperty(HistoryMode,FixedSizeHistory);
-    setProperty(HistorySize,1000);
-    setProperty(ScrollBarPosition,ScrollBarRight);
+    setProperty(HistoryMode, FixedSizeHistory);
+    setProperty(HistorySize, 1000);
+    setProperty(ScrollBarPosition, ScrollBarRight);
 
-    setProperty(FlowControlEnabled,true);
-    setProperty(AllowProgramsToResizeWindow,true);
-    setProperty(BlinkingTextEnabled,true);
-    setProperty(UnderlineLinksEnabled,true);
-    setProperty(TripleClickMode,SelectWholeLine);
+    setProperty(FlowControlEnabled, true);
+    setProperty(AllowProgramsToResizeWindow, true);
+    setProperty(BlinkingTextEnabled, true);
+    setProperty(UnderlineLinksEnabled, true);
+    setProperty(TripleClickMode, SelectWholeLine);
 
-    setProperty(BlinkingCursorEnabled,false);
-    setProperty(BidiRenderingEnabled,true);
-    setProperty(CursorShape,BlockCursor);
-    setProperty(UseCustomCursorColor,false);
-    setProperty(CustomCursorColor,Qt::black);
+    setProperty(BlinkingCursorEnabled, false);
+    setProperty(BidiRenderingEnabled, true);
+    setProperty(CursorShape, BlockCursor);
+    setProperty(UseCustomCursorColor, false);
+    setProperty(CustomCursorColor, Qt::black);
 
-    setProperty(DefaultEncoding,QString(QTextCodec::codecForLocale()->name()));
-    setProperty(AntiAliasFonts,true);
-    setProperty(BoldIntense,true);
+    setProperty(DefaultEncoding, QString(QTextCodec::codecForLocale()->name()));
+    setProperty(AntiAliasFonts, true);
+    setProperty(BoldIntense, true);
 
     // default taken from KDE 3
-    setProperty(WordCharacters,":@-./_~?&=%+#");
+    setProperty(WordCharacters, ":@-./_~?&=%+#");
 
     // Fallback should not be shown in menus
     setHidden(true);
 }
 Profile::Profile(Profile::Ptr parent)
     : _parent(parent)
-     ,_hidden(false)
+    , _hidden(false)
 {
 }
 void Profile::clone(Profile::Ptr profile, bool differentOnly)
 {
     const PropertyInfo* properties = DefaultPropertyNames;
-    while (properties->name != 0)
-    {
+    while (properties->name != 0) {
         Property current = properties->property;
         QVariant otherValue = profile->property<QVariant>(current);
-        switch (current)
-        {
-            case Name:
-            case Path:
-                break;
-            default:
-                if (!differentOnly ||
-                    property<QVariant>(current) != otherValue)
-                {
-                    setProperty(current,otherValue);
-                }
+        switch (current) {
+        case Name:
+        case Path:
+            break;
+        default:
+            if (!differentOnly ||
+                    property<QVariant>(current) != otherValue) {
+                setProperty(current, otherValue);
+            }
         }
         properties++;
     }
@@ -228,23 +223,35 @@ void Profile::clone(Profile::Ptr profile, bool differentOnly)
 Profile::~Profile()
 {
 }
-bool Profile::isHidden() const { return _hidden; }
-void Profile::setHidden(bool hidden) { _hidden = hidden; }
+bool Profile::isHidden() const
+{
+    return _hidden;
+}
+void Profile::setHidden(bool hidden)
+{
+    _hidden = hidden;
+}
 
-void Profile::setParent(Profile::Ptr parent) { _parent = parent; }
-const Profile::Ptr Profile::parent() const { return _parent; }
+void Profile::setParent(Profile::Ptr parent)
+{
+    _parent = parent;
+}
+const Profile::Ptr Profile::parent() const
+{
+    return _parent;
+}
 
 bool Profile::isEmpty() const
 {
     return _propertyValues.isEmpty();
 }
-QHash<Profile::Property,QVariant> Profile::setProperties() const
+QHash<Profile::Property, QVariant> Profile::setProperties() const
 {
     return _propertyValues;
 }
 void Profile::setProperty(Property property , const QVariant& value)
 {
-    _propertyValues.insert(property,value);
+    _propertyValues.insert(property, value);
 }
 bool Profile::isPropertySet(Property property) const
 {
@@ -259,14 +266,14 @@ Profile::Property Profile::lookupByName(const QString& name)
     return _propertyInfoByName[name.toLower()].property;
 }
 
-void Profile::registerProperty(const PropertyInfo& info) 
+void Profile::registerProperty(const PropertyInfo& info)
 {
-    _propertyInfoByName.insert(QString(info.name).toLower(),info);
+    _propertyInfoByName.insert(QString(info.name).toLower(), info);
 
     // only allow one property -> name map
     // (multiple name -> property mappings are allowed though)
-    if ( !_infoByProperty.contains(info.property) )
-        _infoByProperty.insert(info.property,info);
+    if (!_infoByProperty.contains(info.property))
+        _infoByProperty.insert(info.property, info);
 }
 
 int Profile::menuIndexAsInt() const
@@ -283,8 +290,7 @@ const QStringList Profile::propertiesInfoList() const
 {
     QStringList info;
     const PropertyInfo* iter = DefaultPropertyNames;
-    while ( iter->name != 0 )
-    {
+    while (iter->name != 0) {
         info << QString(iter->name) + " : " + QString(QVariant(iter->type).typeName());
         iter++;
     }
@@ -296,15 +302,12 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr info)
 {
     QString newPath;
 
-    if ( info->isPropertySet(Profile::Path) && 
-         info->path().startsWith(KGlobal::dirs()->saveLocation("data", "konsole/")) )
-    {
+    if (info->isPropertySet(Profile::Path) &&
+            info->path().startsWith(KGlobal::dirs()->saveLocation("data", "konsole/"))) {
         newPath = info->path();
-    }
-    else
-    {
+    } else {
         // use the profile name + ".profile" and save it in $KDEHOME
-        newPath = KGlobal::dirs()->saveLocation("data","konsole/") + info->name() + ".profile";
+        newPath = KGlobal::dirs()->saveLocation("data", "konsole/") + info->name() + ".profile";
     }
 
     //kDebug() << "Saving profile under name: " << newPath;
@@ -313,24 +316,21 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr info)
 }
 void KDE4ProfileWriter::writeProperties(KConfig& config,
                                         const Profile::Ptr profile,
-                                        const Profile::PropertyInfo* properties) 
+                                        const Profile::PropertyInfo* properties)
 {
     const char* groupName = 0;
     KConfigGroup group;
 
-    while (properties->name != 0)    
-    {
-        if (properties->group != 0)
-        {
-            if (groupName == 0 || strcmp(groupName,properties->group) != 0)
-            {
+    while (properties->name != 0) {
+        if (properties->group != 0) {
+            if (groupName == 0 || strcmp(groupName, properties->group) != 0) {
                 group = config.group(properties->group);
                 groupName = properties->group;
             }
 
-            if ( profile->isPropertySet(properties->property) )
+            if (profile->isPropertySet(properties->property))
                 group.writeEntry(QString(properties->name),
-                            profile->property<QVariant>(properties->property));
+                                 profile->property<QVariant>(properties->property));
         }
 
         properties++;
@@ -338,29 +338,29 @@ void KDE4ProfileWriter::writeProperties(KConfig& config,
 }
 bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile::Ptr profile)
 {
-    KConfig config(path,KConfig::NoGlobals);
+    KConfig config(path, KConfig::NoGlobals);
 
     KConfigGroup general = config.group(GENERAL_GROUP);
 
     // Parent profile if set, when loading the profile in future, the parent
     // must be loaded as well if it exists.
-    if ( profile->parent() )
-        general.writeEntry("Parent",profile->parent()->path());
+    if (profile->parent())
+        general.writeEntry("Parent", profile->parent()->path());
 
-    if (    profile->isPropertySet(Profile::Command) 
-         || profile->isPropertySet(Profile::Arguments) )
+    if (profile->isPropertySet(Profile::Command)
+            || profile->isPropertySet(Profile::Arguments))
         general.writeEntry("Command",
-                ShellCommand(profile->command(),profile->arguments()).fullCommand());
+                           ShellCommand(profile->command(), profile->arguments()).fullCommand());
 
     // Write remaining properties
-    writeProperties(config,profile,Profile::DefaultPropertyNames);
+    writeProperties(config, profile, Profile::DefaultPropertyNames);
 
     return true;
 }
 
 QStringList KDE4ProfileReader::findProfiles()
 {
-    return KGlobal::dirs()->findAllResources("data","konsole/*.profile",
+    return KGlobal::dirs()->findAllResources("data", "konsole/*.profile",
             KStandardDirs::NoDuplicates);
 }
 void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profile,
@@ -369,12 +369,9 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
     const char* groupName = 0;
     KConfigGroup group;
 
-    while (properties->name != 0)
-    {
-        if (properties->group != 0)
-        {
-            if (groupName == 0 || strcmp(groupName,properties->group) != 0)
-            {
+    while (properties->name != 0) {
+        if (properties->group != 0) {
+            if (groupName == 0 || strcmp(groupName, properties->group) != 0) {
                 group = config.group(properties->group);
                 groupName = properties->group;
             }
@@ -383,7 +380,7 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
 
             if (group.hasKey(name))
                 profile->setProperty(properties->property,
-                                     group.readEntry(name,QVariant(properties->type)));
+                                     group.readEntry(name, QVariant(properties->type)));
 
         }
 
@@ -396,28 +393,27 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
     if (!QFile::exists(path))
         return false;
 
-    KConfig config(path,KConfig::NoGlobals);
+    KConfig config(path, KConfig::NoGlobals);
 
     KConfigGroup general = config.group(GENERAL_GROUP);
     if (general.hasKey("Parent"))
         parentProfile = general.readEntry("Parent");
 
-    if ( general.hasKey("Command") )
-    {
+    if (general.hasKey("Command")) {
         ShellCommand shellCommand(general.readEntry("Command"));
 
-        profile->setProperty(Profile::Command,shellCommand.command());
-        profile->setProperty(Profile::Arguments,shellCommand.arguments());
+        profile->setProperty(Profile::Command, shellCommand.command());
+        profile->setProperty(Profile::Arguments, shellCommand.arguments());
     }
 
     // Read remaining properties
-    readProperties(config,profile,Profile::DefaultPropertyNames);
+    readProperties(config, profile, Profile::DefaultPropertyNames);
 
     return true;
 }
 QStringList KDE3ProfileReader::findProfiles()
 {
-    return KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", 
+    return KGlobal::dirs()->findAllResources("data", "konsole/*.desktop",
             KStandardDirs::NoDuplicates);
 }
 bool KDE3ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile)
@@ -429,44 +425,38 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
     parentProfile.clear();
 
     KDesktopFile* desktopFile = new KDesktopFile(path);
-    KConfigGroup* config = new KConfigGroup( desktopFile->desktopGroup() );
+    KConfigGroup* config = new KConfigGroup(desktopFile->desktopGroup());
 
-    if ( config->hasKey("Name") )
-        profile->setProperty(Profile::Name,config->readEntry("Name"));
+    if (config->hasKey("Name"))
+        profile->setProperty(Profile::Name, config->readEntry("Name"));
 
     //kDebug() << "reading KDE 3 profile " << profile->name();
 
-    if ( config->hasKey("Icon") )
-        profile->setProperty(Profile::Icon,config->readEntry("Icon"));
-    if ( config->hasKey("Exec") )
-    {
+    if (config->hasKey("Icon"))
+        profile->setProperty(Profile::Icon, config->readEntry("Icon"));
+    if (config->hasKey("Exec")) {
         const QString& fullCommand = config->readEntry("Exec");
         ShellCommand shellCommand(fullCommand);
 
-        profile->setProperty(Profile::Command,shellCommand.command());
-        profile->setProperty(Profile::Arguments,shellCommand.arguments());
+        profile->setProperty(Profile::Command, shellCommand.command());
+        profile->setProperty(Profile::Arguments, shellCommand.arguments());
     }
-    if ( config->hasKey("Schema") )
-    {
-        profile->setProperty(Profile::ColorScheme,config->readEntry("Schema").replace
-                                            (".schema",QString()));        
+    if (config->hasKey("Schema")) {
+        profile->setProperty(Profile::ColorScheme, config->readEntry("Schema").replace
+                             (".schema", QString()));
     }
-    if ( config->hasKey("defaultfont") )
-    {
-        profile->setProperty(Profile::Font,config->readEntry("defaultfont"));
+    if (config->hasKey("defaultfont")) {
+        profile->setProperty(Profile::Font, config->readEntry("defaultfont"));
     }
-    if ( config->hasKey("KeyTab") )
-    {
-        profile->setProperty(Profile::KeyBindings,config->readEntry("KeyTab"));
+    if (config->hasKey("KeyTab")) {
+        profile->setProperty(Profile::KeyBindings, config->readEntry("KeyTab"));
     }
-    if ( config->hasKey("Term") )
-    {
+    if (config->hasKey("Term")) {
         profile->setProperty(Profile::Environment,
-                QStringList() << "TERM="+config->readEntry("Term"));
+                             QStringList() << "TERM=" + config->readEntry("Term"));
     }
-    if ( config->hasKey("Cwd") )
-    {
-        profile->setProperty(Profile::Directory,config->readEntry("Cwd"));
+    if (config->hasKey("Cwd")) {
+        profile->setProperty(Profile::Directory, config->readEntry("Cwd"));
     }
 
     delete desktopFile;
@@ -475,9 +465,9 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
     return true;
 }
 
-QHash<Profile::Property,QVariant> ProfileCommandParser::parse(const QString& input)
+QHash<Profile::Property, QVariant> ProfileCommandParser::parse(const QString& input)
 {
-    QHash<Profile::Property,QVariant> changes;
+    QHash<Profile::Property, QVariant> changes;
 
     // regular expression to parse profile change requests.
     //
@@ -489,18 +479,16 @@ QHash<Profile::Property,QVariant> ProfileCommandParser::parse(const QString& inp
     static QRegExp regExp("([a-zA-Z]+)=([^;]+)");
 
     int offset = 0;
-    while ( regExp.indexIn(input,offset) != -1 )
-    {
-        if ( regExp.capturedTexts().count() == 3 )
-        {
+    while (regExp.indexIn(input, offset) != -1) {
+        if (regExp.capturedTexts().count() == 3) {
             Profile::Property property = Profile::lookupByName(
-                                                regExp.capturedTexts()[1]);
+                                             regExp.capturedTexts()[1]);
             const QString value = regExp.capturedTexts()[2];
-            changes.insert(property,value);
+            changes.insert(property, value);
         }
 
-        offset = input.indexOf(';',offset) + 1;
-        if ( offset == 0 )
+        offset = input.indexOf(';', offset) + 1;
+        if (offset == 0)
             break;
     }
 
@@ -510,33 +498,29 @@ QHash<Profile::Property,QVariant> ProfileCommandParser::parse(const QString& inp
 void ProfileGroup::updateValues()
 {
     const PropertyInfo* properties = Profile::DefaultPropertyNames;
-    while (properties->name != 0)
-    {
+    while (properties->name != 0) {
         // the profile group does not store a value for some properties
-        // (eg. name, path) if even they are equal between profiles - 
+        // (eg. name, path) if even they are equal between profiles -
         //
         // the exception is when the group has only one profile in which
         // case it behaves like a standard Profile
-        if (_profiles.count() > 1 && 
-            !canInheritProperty(properties->property))
-        {
+        if (_profiles.count() > 1 &&
+                !canInheritProperty(properties->property)) {
             properties++;
             continue;
         }
 
         QVariant value;
-        for (int i=0;i<_profiles.count();i++)
-        {   
+        for (int i = 0; i < _profiles.count(); i++) {
             QVariant profileValue = _profiles[i]->property<QVariant>(properties->property);
             if (value.isNull())
-                value = profileValue; 
-            else if (value != profileValue)
-            {
+                value = profileValue;
+            else if (value != profileValue) {
                 value = QVariant();
                 break;
             }
-        }   
-        Profile::setProperty(properties->property,value);
+        }
+        Profile::setProperty(properties->property, value);
         properties++;
     }
 }
@@ -545,9 +529,9 @@ void ProfileGroup::setProperty(Property property, const QVariant& value)
     if (_profiles.count() > 1 && !canInheritProperty(property))
         return;
 
-    Profile::setProperty(property,value);
-    foreach(Profile::Ptr profile,_profiles)
-        profile->setProperty(property,value);
+    Profile::setProperty(property, value);
+    foreach(Profile::Ptr profile, _profiles)
+    profile->setProperty(property, value);
 }
 
 
