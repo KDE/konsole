@@ -370,7 +370,7 @@ public:
      * @param startLine Index of first line to copy
      * @param endLine Index of last line to copy
      */
-    void getImage( Character* dest , int size , int startLine , int endLine ) const;
+    void getImage(Character* dest , int size , int startLine , int endLine) const;
 
     /**
      * Returns the additional attributes associated with lines in the image.
@@ -378,15 +378,17 @@ public:
      * line is wrapped,
      * other attributes control the size of characters in the line.
      */
-    QVector<LineProperty> getLineProperties( int startLine , int endLine ) const;
+    QVector<LineProperty> getLineProperties(int startLine , int endLine) const;
 
 
     /** Return the number of lines. */
-    int getLines() const   
-    { return lines; }
+    int getLines() const {
+        return lines;
+    }
     /** Return the number of columns. */
-    int getColumns() const 
-    { return columns; }
+    int getColumns() const {
+        return columns;
+    }
     /** Return the number of lines in the history buffer. */
     int getHistLines() const;
     /**
@@ -439,7 +441,7 @@ public:
       *  Returns true if the character at (@p column, @p line) is part of the
       *  current selection.
       */
-    bool isSelected(const int column,const int line) const;
+    bool isSelected(const int column, const int line) const;
 
     /**
      * Convenience method.  Returns the currently selected text.
@@ -547,26 +549,20 @@ public:
       */
     static void fillWithDefaultChar(Character* dest, int count);
 
-    void setCurrentTerminalDisplay(TerminalDisplay* display)
-    {
-	   _currentTerminalDisplay = display;
+    void setCurrentTerminalDisplay(TerminalDisplay* display) {
+        _currentTerminalDisplay = display;
     }
 
-    TerminalDisplay* currentTerminalDisplay()
-    {
+    TerminalDisplay* currentTerminalDisplay() {
         return _currentTerminalDisplay;
     }
 
-    QSet<ushort> usedExtendedChars() const
-    {
+    QSet<ushort> usedExtendedChars() const {
         QSet<ushort> result;
-        for (int i = 0; i < lines; ++i)
-        {
+        for (int i = 0; i < lines; ++i) {
             const ImageLine& il = screenLines[i];
-            for (int j = 0; j < columns; ++j)
-            {
-                if (il[j].rendition & RE_EXTENDED_CHAR)
-                {
+            for (int j = 0; j < columns; ++j) {
+                if (il[j].rendition & RE_EXTENDED_CHAR) {
                     result << il[j].character;
                 }
             }
@@ -589,9 +585,9 @@ private:
     //count - the number of characters on the line to copy
     //decoder - a decoder which converts terminal characters (an Character array) into text
     //appendNewLine - if true a new line character (\n) is appended to the end of the line
-    int  copyLineToStream(int line, 
-                          int start, 
-                          int count, 
+    int  copyLineToStream(int line,
+                          int start,
+                          int count,
                           TerminalCharacterDecoder* decoder,
                           bool appendNewLine,
                           bool preserveLineBreaks) const;
@@ -625,7 +621,7 @@ private:
     bool isSelectionValid() const;
     // copies text from 'startIndex' to 'endIndex' to a stream
     // startIndex and endIndex are positions generated using the loc(x,y) macro
-    void writeToStream(TerminalCharacterDecoder* decoder, int startIndex, 
+    void writeToStream(TerminalCharacterDecoder* decoder, int startIndex,
                        int endIndex, bool preserveLineBreaks = true) const;
     // copies 'count' lines from the screen buffer into 'dest',
     // starting from 'startLine', where 0 is the first line in the screen buffer
@@ -647,7 +643,7 @@ private:
 
     int _droppedLines;
 
-    QVarLengthArray<LineProperty,64> lineProperties;    
+    QVarLengthArray<LineProperty, 64> lineProperties;
 
     // history buffer ---------------
     HistoryScroll* history;
@@ -659,7 +655,7 @@ private:
     // cursor color and rendition info
     CharacterColor currentForeground;
     CharacterColor currentBackground;
-    quint8 currentRendition; 
+    quint8 currentRendition;
 
     // margins ----------------
     int _topMargin;
@@ -684,11 +680,11 @@ private:
     CharacterColor effectiveBackground; // the cu_* variables above
     quint8 effectiveRendition;          // to speed up operation
 
-    class SavedState  
+    class SavedState
     {
     public:
         SavedState()
-        : cursorColumn(0),cursorLine(0),rendition(0) {}
+            : cursorColumn(0), cursorLine(0), rendition(0) {}
 
         int cursorColumn;
         int cursorLine;
