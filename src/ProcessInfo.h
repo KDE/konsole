@@ -86,7 +86,7 @@ public:
      * of reading the (potentially large) environment data when it
      * is not required.
      */
-    static ProcessInfo* newInstance(int pid,bool readEnvironment = false);
+    static ProcessInfo* newInstance(int pid, bool readEnvironment = false);
 
     virtual ~ProcessInfo() {}
 
@@ -151,7 +151,7 @@ public:
      *
      * @param ok Set to true if the environment bindings were read successfully or false otherwise
      */
-    QMap<QString,QString> environment(bool* ok) const;
+    QMap<QString, QString> environment(bool* ok) const;
 
     /**
      * Returns the current working directory of the process
@@ -192,8 +192,7 @@ public:
      * This enum describes the errors which can occur when trying to read
      * a process's information.
      */
-    enum Error
-    {
+    enum Error {
         /** No error occurred. */
         NoError,
         /** The nature of the error is unknown. */
@@ -255,10 +254,10 @@ protected:
     void setCurrentDir(const QString& dir);
 
     /** Sets the error */
-    void setError( Error error );
+    void setError(Error error);
 
     /** Convenience method.  Sets the error based on a QFile error code. */
-    void setFileError( QFile::FileError error );
+    void setFileError(QFile::FileError error);
 
     /**
      * Adds a commandline argument for the process, as returned
@@ -287,19 +286,17 @@ private:
     // space-constrained UI elements (eg. tabs)
     QString formatShortDir(const QString& dirPath) const;
 
-    enum CommandFormat
-    {
+    enum CommandFormat {
         ShortCommandFormat,
         LongCommandFormat
     };
     // takes a process name and its arguments and produces formatted output
-    QString formatCommand(const QString& name , const QVector<QString>& arguments , 
+    QString formatCommand(const QString& name , const QVector<QString>& arguments ,
                           CommandFormat format) const;
 
     // valid bits for _fields variable, ensure that
     // _fields is changed to an int if more than 8 fields are added
-    enum FIELD_BITS
-    {
+    enum FIELD_BITS {
         PROCESS_ID          = 1,
         PARENT_PID          = 2,
         FOREGROUND_PID      = 4,
@@ -307,19 +304,19 @@ private:
         ENVIRONMENT         = 16,
         NAME                = 32,
         CURRENT_DIR         = 64,
-        UID                 =128
+        UID                 = 128
     };
 
     char _fields; // a bitmap indicating which fields are valid
-                  // used to set the "ok" parameters for the public
-                  // accessor functions
+    // used to set the "ok" parameters for the public
+    // accessor functions
 
     bool _enableEnvironmentRead; // specifies whether to read the environment
-                                 // bindings when update() is called
-    int _pid;  
+    // bindings when update() is called
+    int _pid;
     int _parentPid;
     int _foregroundPid;
-    int _userId;  
+    int _userId;
 
     Error _lastError;
 
@@ -329,7 +326,7 @@ private:
     QString _currentDir;
 
     QVector<QString> _arguments;
-    QMap<QString,QString> _environment;
+    QMap<QString, QString> _environment;
 
     static QSet<QString> commonDirNames();
     static QSet<QString> _commonDirNames;
@@ -349,9 +346,9 @@ public:
      * Constructs a new NullProcessInfo instance.
      * See ProcessInfo::newInstance()
      */
-    explicit NullProcessInfo(int pid,bool readEnvironment = false);
+    explicit NullProcessInfo(int pid, bool readEnvironment = false);
 protected:
-    virtual bool readProcessInfo(int pid,bool readEnvironment);
+    virtual bool readProcessInfo(int pid, bool readEnvironment);
     virtual void readUserName(void);
 };
 
@@ -366,7 +363,7 @@ public:
      * Constructs a new instance of UnixProcessInfo.
      * See ProcessInfo::newInstance()
      */
-    explicit UnixProcessInfo(int pid,bool readEnvironment = false);
+    explicit UnixProcessInfo(int pid, bool readEnvironment = false);
 
 protected:
     /**
@@ -383,28 +380,28 @@ private:
      * @param pid process ID to use
      * @return true on success
      */
-    virtual bool readProcInfo(int pid)=0;
+    virtual bool readProcInfo(int pid) = 0;
 
     /**
      * Read the environment of the process. Sets _environment.
      * @param pid process ID to use
      * @return true on success
      */
-    virtual bool readEnvironment(int pid)=0;
+    virtual bool readEnvironment(int pid) = 0;
 
     /**
      * Determine what arguments were passed to the process. Sets _arguments.
      * @param pid process ID to use
      * @return true on success
      */
-    virtual bool readArguments(int pid)=0;
+    virtual bool readArguments(int pid) = 0;
 
     /**
      * Determine the current directory of the process.
      * @param pid process ID to use
      * @return true on success
      */
-    virtual bool readCurrentDir(int pid)=0;
+    virtual bool readCurrentDir(int pid) = 0;
 };
 
 /**
