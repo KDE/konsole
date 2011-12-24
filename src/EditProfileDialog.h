@@ -40,7 +40,7 @@ class QTimeLine;
 
 namespace Ui
 {
-    class EditProfileDialog;
+class EditProfileDialog;
 }
 
 namespace Konsole
@@ -61,7 +61,7 @@ namespace Konsole
  */
 class KONSOLEPRIVATE_EXPORT EditProfileDialog : public KDialog
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /** Constructs a new dialog with the specified parent. */
@@ -196,13 +196,13 @@ private:
     void showColorSchemeEditor(bool newScheme);
     void showKeyBindingEditor(bool newTranslator);
 
-    void changeCheckedItem( QAbstractItemModel* mode,  const QModelIndex& to );
+    void changeCheckedItem(QAbstractItemModel* mode,  const QModelIndex& to);
 
     void preview(int property , const QVariant& value);
     void delayedPreview(int property , const QVariant& value);
     void unpreview(int property);
     void unpreviewAll();
-    void enableIfNonEmptySelection(QWidget* widget,QItemSelectionModel* selectionModel);
+    void enableIfNonEmptySelection(QWidget* widget, QItemSelectionModel* selectionModel);
 
     void updateCaption(const Profile::Ptr profile);
     void updateTransparencyWarning();
@@ -222,18 +222,16 @@ private:
 
     static QString groupProfileNames(const ProfileGroup::Ptr group, int maxLength = -1);
 
-    struct RadioOption
-    {
-       QAbstractButton* button;
-       int value;
-       const char* slot; 
+    struct RadioOption {
+        QAbstractButton* button;
+        int value;
+        const char* slot;
     };
     void setupRadio(RadioOption* possibilities, int actual);
-    struct BooleanOption
-    {
-       QAbstractButton* button;
-       Profile::Property property;
-       const char* slot;
+    struct BooleanOption {
+        QAbstractButton* button;
+        Profile::Property property;
+        const char* slot;
     };
     void setupCheckBoxes(BooleanOption* options , const Profile::Ptr profile);
 
@@ -248,11 +246,11 @@ private:
     // profile is changed and individual elements are set to false
     // after an update by a call to ensurePageLoaded()
     QVector<bool> _pageNeedsUpdate;
-    QHash<int,QVariant> _previewedProperties;
+    QHash<int, QVariant> _previewedProperties;
 
     QTimeLine* _colorSchemeAnimationTimeLine;
 
-    QHash<int,QVariant> _delayedPreviewProperties;
+    QHash<int, QVariant> _delayedPreviewProperties;
     QTimer* _delayedPreviewTimer;
 };
 
@@ -261,7 +259,7 @@ private:
  */
 class ColorSchemeViewDelegate : public QAbstractItemDelegate
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     ColorSchemeViewDelegate(QObject* parent = 0);
@@ -269,8 +267,8 @@ public:
     // reimplemented
     virtual void paint(QPainter* painter, const QStyleOptionViewItem& option,
                        const QModelIndex& index) const;
-    virtual QSize sizeHint( const QStyleOptionViewItem& option,
-                       const QModelIndex& index) const;
+    virtual QSize sizeHint(const QStyleOptionViewItem& option,
+                           const QModelIndex& index) const;
 
     /**
      * Sets the timeline used to control the entry animation
@@ -280,7 +278,7 @@ public:
      * determine how to render the item ( with 0 being the beginning
      * of the animation and 1.0 being the end )
      */
-    void setEntryTimeLine( QTimeLine* timeLine );
+    void setEntryTimeLine(QTimeLine* timeLine);
 
 private:
     QPointer<QTimeLine> _entryTimeLine;
