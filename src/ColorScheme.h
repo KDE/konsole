@@ -184,9 +184,8 @@ private:
     public:
         RandomizationRange() : hue(0) , saturation(0) , value(0) {}
 
-        bool isNull() const 
-        {
-            return ( hue == 0 && saturation == 0 && value == 0 );
+        bool isNull() const {
+            return (hue == 0 && saturation == 0 && value == 0);
         }
 
         quint16 hue;
@@ -200,26 +199,26 @@ private:
 
     // reads a single color entry from a KConfig source
     // and sets the palette entry at 'index' to the entry read.
-    void readColorEntry(KConfig& config , int index); 
+    void readColorEntry(KConfig& config , int index);
     // writes a single color entry to a KConfig source
-    void writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry,const RandomizationRange& range) const;
+    void writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry, const RandomizationRange& range) const;
 
     // sets the amount of randomization allowed for a particular color
     // in the palette.  creates the randomization table if
     // it does not already exist
-    void setRandomizationRange( int index , quint16 hue , quint8 saturation , quint8 value );
+    void setRandomizationRange(int index , quint16 hue , quint8 saturation , quint8 value);
 
     QString _description;
     QString _name;
     qreal _opacity;
     ColorEntry* _table; // pointer to custom color table or 0 if the default
-                        // color scheme is being used
+    // color scheme is being used
 
     static const quint16 MAX_HUE = 340;
 
     RandomizationRange* _randomTable;   // pointer to randomization table or 0
-                                        // if no colors in the color scheme support
-                                        // randomization
+    // if no colors in the color scheme support
+    // randomization
 
     ColorSchemeWallpaper::Ptr _wallpaper;
 
@@ -259,7 +258,7 @@ public:
      * Constructs a new reader which reads from the specified device.
      * The device should be open in read-only mode.
      */
-    KDE3ColorSchemeReader( QIODevice* device );
+    KDE3ColorSchemeReader(QIODevice* device);
 
     /**
      * Reads and parses the contents of the .schema file from the input
@@ -335,7 +334,7 @@ public:
      *
      * Subsequent calls will be inexpensive.
      */
-    QList<const ColorScheme*> allColorSchemes();    
+    QList<const ColorScheme*> allColorSchemes();
 
     /** Returns the global color scheme manager instance. */
     static ColorSchemeManager* instance();
@@ -355,7 +354,7 @@ private:
     // finds the path of a color scheme
     QString findColorSchemePath(const QString& name) const;
 
-    QHash<QString,const ColorScheme*> _colorSchemes;
+    QHash<QString, const ColorScheme*> _colorSchemes;
     QSet<ColorScheme*> _modifiedSchemes;
 
     bool _haveLoadedAll;
