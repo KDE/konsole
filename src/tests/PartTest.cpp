@@ -72,16 +72,16 @@ void PartTest::testFd()
     // as soon as it becomes available and the terminal will not display any output
     ptyProcess.pty()->setSuspended(true);
 
-    KDialog* dialog = new KDialog();
-    dialog->setButtons(0);
-    QVBoxLayout* layout = new QVBoxLayout(dialog->mainWidget());
+    QWeakPointer<KDialog> dialog = new KDialog();
+    dialog.data()->setButtons(0);
+    QVBoxLayout* layout = new QVBoxLayout(dialog.data()->mainWidget());
     layout->addWidget(new QLabel("Output of 'ping localhost' should appear in a terminal below for 5 seconds"));
     layout->addWidget(terminalPart->widget());
-    QTimer::singleShot(5000, dialog, SLOT(close()));
-    dialog->exec();
+    QTimer::singleShot(5000, dialog.data(), SLOT(close()));
+    dialog.data()->exec();
 
     delete terminalPart;
-    delete dialog;
+    delete dialog.data();
     ptyProcess.kill();
     ptyProcess.waitForFinished(1000);
 }

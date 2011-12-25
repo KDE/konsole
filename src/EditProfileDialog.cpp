@@ -303,23 +303,23 @@ void EditProfileDialog::showEnvironmentEditor()
 {
     const Profile::Ptr info = lookupProfile();
 
-    KDialog* dialog = new KDialog(this);
-    KTextEdit* edit = new KTextEdit(dialog);
+    QWeakPointer<KDialog> dialog = new KDialog(this);
+    KTextEdit* edit = new KTextEdit(dialog.data());
 
     QStringList currentEnvironment = info->property<QStringList>(Profile::Environment);
 
     edit->setPlainText(currentEnvironment.join("\n"));
     edit->setToolTip(i18n("One environment variable per line"));
 
-    dialog->setPlainCaption(i18n("Edit Environment"));
-    dialog->setMainWidget(edit);
+    dialog.data()->setPlainCaption(i18n("Edit Environment"));
+    dialog.data()->setMainWidget(edit);
 
-    if (dialog->exec() == QDialog::Accepted) {
+    if (dialog.data()->exec() == QDialog::Accepted) {
         QStringList newEnvironment = edit->toPlainText().split('\n');
         updateTempProfileProperty(Profile::Environment, newEnvironment);
     }
 
-    dialog->deleteLater();
+    delete dialog.data();
 }
 void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
 {
@@ -769,21 +769,21 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 
     Q_ASSERT(colors);
 
-    KDialog* dialog = new KDialog(this);
+    QWeakPointer<KDialog> dialog = new KDialog(this);
 
     if (isNewScheme)
-        dialog->setCaption(i18n("New Color Scheme"));
+        dialog.data()->setCaption(i18n("New Color Scheme"));
     else
-        dialog->setCaption(i18n("Edit Color Scheme"));
+        dialog.data()->setCaption(i18n("Edit Color Scheme"));
 
     ColorSchemeEditor* editor = new ColorSchemeEditor;
-    dialog->setMainWidget(editor);
+    dialog.data()->setMainWidget(editor);
     editor->setup(colors);
 
     if (isNewScheme)
         editor->setDescription(i18n("New Color Scheme"));
 
-    if (dialog->exec() == QDialog::Accepted) {
+    if (dialog.data()->exec() == QDialog::Accepted) {
         ColorScheme* newScheme = new ColorScheme(*editor->colorScheme());
 
         // if this is a new color scheme, pick a name based on the description
@@ -796,6 +796,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 
         preview(Profile::ColorScheme, newScheme->name());
     }
+    delete dialog.data();
 }
 void EditProfileDialog::newColorScheme()
 {
@@ -951,15 +952,15 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 
     Q_ASSERT(translator);
 
-    KDialog* dialog = new KDialog(this);
+    QWeakPointer<KDialog> dialog = new KDialog(this);
 
     if (isNewTranslator)
-        dialog->setCaption(i18n("New Key Binding List"));
+        dialog.data()->setCaption(i18n("New Key Binding List"));
     else
-        dialog->setCaption(i18n("Edit Key Binding List"));
+        dialog.data()->setCaption(i18n("Edit Key Binding List"));
 
     KeyBindingEditor* editor = new KeyBindingEditor;
-    dialog->setMainWidget(editor);
+    dialog.data()->setMainWidget(editor);
 
     if (translator)
         editor->setup(translator);
@@ -967,7 +968,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     if (isNewTranslator)
         editor->setDescription(i18n("New Key Binding List"));
 
-    if (dialog->exec() == QDialog::Accepted) {
+    if (dialog.data()->exec() == QDialog::Accepted) {
         KeyboardTranslator* newTranslator = new KeyboardTranslator(*editor->translator());
 
         if (isNewTranslator)
@@ -984,6 +985,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
             updateTempProfileProperty(Profile::KeyBindings, newTranslator->name());
         }
     }
+    delete dialog.data();
 }
 void EditProfileDialog::newKeyBinding()
 {
@@ -1221,13 +1223,14 @@ void EditProfileDialog::showFontDialog()
 {
     QFont currentFont = _ui->fontPreviewLabel->font();
 
-    KFontDialog* dialog = new KFontDialog(this, KFontChooser::FixedFontsOnly);
-    dialog->setFont(currentFont, true);
+    QWeakPointer<KFontDialog> dialog = new KFontDialog(this, KFontChooser::FixedFontsOnly);
+    dialog.data()->setFont(currentFont, true);
 
-    connect(dialog, SIGNAL(fontSelected(QFont)), this, SLOT(fontSelected(QFont)));
+    connect(dialog.data(), SIGNAL(fontSelected(QFont)), this, SLOT(fontSelected(QFont)));
 
-    if (dialog->exec() == QDialog::Rejected)
+    if (dialog.data()->exec() == QDialog::Rejected)
         fontSelected(currentFont);
+    delete dialog.data();
 }
 void EditProfileDialog::setFontSize(int pointSize)
 {
