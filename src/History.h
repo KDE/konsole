@@ -33,7 +33,6 @@
 #include <KTemporaryFile>
 
 // Konsole
-//#include "BlockArray.h"
 #include "Character.h"
 
 namespace Konsole
@@ -227,30 +226,6 @@ public:
     virtual void addLine(bool previousWrapped = false);
 };
 
-#if 0
-//////////////////////////////////////////////////////////////////////
-// BlockArray-based history
-//////////////////////////////////////////////////////////////////////
-class HistoryScrollBlockArray : public HistoryScroll
-{
-public:
-    HistoryScrollBlockArray(size_t size);
-    virtual ~HistoryScrollBlockArray();
-
-    virtual int  getLines();
-    virtual int  getLineLen(int lineno);
-    virtual void getCells(int lineno, int colno, int count, Character res[]);
-    virtual bool isWrappedLine(int lineno);
-
-    virtual void addCells(const Character a[], int count);
-    virtual void addLine(bool previousWrapped = false);
-
-protected:
-    BlockArray m_blockArray;
-    QHash<int, size_t> m_lineLengths;
-};
-#endif
-
 //////////////////////////////////////////////////////////////////////
 // History using compact storage
 // This implementation uses a list of fixed-sized blocks
@@ -439,22 +414,6 @@ public:
     virtual HistoryScroll* scroll(HistoryScroll *) const;
 };
 
-#if 0
-class HistoryTypeBlockArray : public HistoryType
-{
-public:
-    HistoryTypeBlockArray(size_t size);
-
-    virtual bool isEnabled() const;
-    virtual int maximumLineCount() const;
-
-    virtual HistoryScroll* scroll(HistoryScroll *) const;
-
-protected:
-    size_t m_size;
-};
-#endif
-
 class HistoryTypeFile : public HistoryType
 {
 public:
@@ -468,24 +427,6 @@ public:
 protected:
     QString m_fileName;
 };
-
-#if 0
-class HistoryTypeBuffer : public HistoryType
-{
-    friend class HistoryScrollBuffer;
-
-public:
-    HistoryTypeBuffer(unsigned int nbLines);
-
-    virtual bool isEnabled() const;
-    virtual int maximumLineCount() const;
-
-    virtual HistoryScroll* scroll(HistoryScroll *) const;
-
-protected:
-    unsigned int m_nbLines;
-};
-#endif
 
 class CompactHistoryType : public HistoryType
 {
