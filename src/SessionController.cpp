@@ -116,39 +116,39 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     view->setSessionController(this);
 
     // listen for session resize requests
-    connect(_session , SIGNAL(resizeRequest(QSize)) , this ,
+    connect(_session, SIGNAL(resizeRequest(QSize)), this,
             SLOT(sessionResizeRequest(QSize)));
 
     // listen for popup menu requests
-    connect(_view , SIGNAL(configureRequest(QPoint)) , this,
+    connect(_view, SIGNAL(configureRequest(QPoint)), this,
             SLOT(showDisplayContextMenu(QPoint)));
 
     // move view to newest output when keystrokes occur
-    connect(_view , SIGNAL(keyPressedSignal(QKeyEvent*)) , this ,
+    connect(_view, SIGNAL(keyPressedSignal(QKeyEvent*)), this,
             SLOT(trackOutput(QKeyEvent*)));
 
     // listen to activity / silence notifications from session
-    connect(_session , SIGNAL(stateChanged(int)) , this ,
+    connect(_session, SIGNAL(stateChanged(int)), this,
             SLOT(sessionStateChanged(int)));
     // listen to title and icon changes
-    connect(_session , SIGNAL(titleChanged()) , this , SLOT(sessionTitleChanged()));
+    connect(_session, SIGNAL(titleChanged()), this, SLOT(sessionTitleChanged()));
 
     // listen for color changes
-    connect(_session , SIGNAL(changeBackgroundColorRequest(QColor)) , _view , SLOT(setBackgroundColor(QColor)));
-    connect(_session , SIGNAL(changeForegroundColorRequest(QColor)) , _view , SLOT(setForegroundColor(QColor)));
+    connect(_session, SIGNAL(changeBackgroundColorRequest(QColor)), _view, SLOT(setBackgroundColor(QColor)));
+    connect(_session, SIGNAL(changeForegroundColorRequest(QColor)), _view, SLOT(setForegroundColor(QColor)));
 
     // update the title when the session starts
-    connect(_session , SIGNAL(started()) , this , SLOT(snapshot()));
+    connect(_session, SIGNAL(started()), this, SLOT(snapshot()));
 
     // listen for output changes to set activity flag
-    connect(_session->emulation() , SIGNAL(outputChanged()) , this ,
+    connect(_session->emulation(), SIGNAL(outputChanged()), this,
             SLOT(fireActivity()));
 
     // listen for detection of ZModem transfer
-    connect(_session , SIGNAL(zmodemDetected()) , this , SLOT(zmodemDownload()));
+    connect(_session, SIGNAL(zmodemDetected()), this, SLOT(zmodemDownload()));
 
     // listen for flow control status changes
-    connect(_session , SIGNAL(flowControlEnabledChanged(bool)) , _view ,
+    connect(_session, SIGNAL(flowControlEnabledChanged(bool)), _view,
             SLOT(setFlowControlWarningEnabled(bool)));
     _view->setFlowControlWarningEnabled(_session->flowControlEnabled());
 
@@ -160,8 +160,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     QTimer* activityTimer = new QTimer(_session);
     activityTimer->setSingleShot(true);
     activityTimer->setInterval(2000);
-    connect(_view , SIGNAL(keyPressedSignal(QKeyEvent*)) , activityTimer , SLOT(start()));
-    connect(activityTimer , SIGNAL(timeout()) , this , SLOT(snapshot()));
+    connect(_view, SIGNAL(keyPressedSignal(QKeyEvent*)), activityTimer, SLOT(start()));
+    connect(activityTimer, SIGNAL(timeout()), this, SLOT(snapshot()));
 
     _allControllers.insert(this);
 }
@@ -308,10 +308,10 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             // by the focused view
 
             // first, disconnect any other views which are listening for bell signals from the session
-            disconnect(_session , SIGNAL(bellRequest(QString)) , 0 , 0);
+            disconnect(_session, SIGNAL(bellRequest(QString)), 0, 0);
             // second, connect the newly focused view to listen for the session's bell signal
-            connect(_session , SIGNAL(bellRequest(QString)) ,
-                    _view , SLOT(bell(QString)));
+            connect(_session, SIGNAL(bellRequest(QString)),
+                    _view, SLOT(bell(QString)));
 
             if (_copyToAllTabsAction->isChecked()) {
                 // A session with "Copy To All Tabs" has come into focus:
@@ -329,9 +329,9 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
                 (!_viewUrlFilter || _urlFilterUpdateRequired) &&
                 ((QMouseEvent*)event)->buttons() == Qt::NoButton) {
             if (_view->screenWindow() && !_viewUrlFilter) {
-                connect(_view->screenWindow() , SIGNAL(scrolled(int)) , this ,
+                connect(_view->screenWindow(), SIGNAL(scrolled(int)), this,
                         SLOT(requireUrlFilterUpdate()));
-                connect(_view->screenWindow() , SIGNAL(outputChanged()) , this ,
+                connect(_view->screenWindow(), SIGNAL(outputChanged()), this,
                         SLOT(requireUrlFilterUpdate()));
 
                 // install filter on the view to highlight URLs
@@ -361,8 +361,8 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
 {
     // disconnect the existing search bar
     if (_searchBar) {
-        disconnect(this , 0 , _searchBar , 0);
-        disconnect(_searchBar , 0 , this , 0);
+        disconnect(this, 0, _searchBar, 0);
+        disconnect(_searchBar, 0, this, 0);
     }
 
     // remove any existing search filter
@@ -371,11 +371,11 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
     // connect new search bar
     _searchBar = searchBar;
     if (_searchBar) {
-        connect(_searchBar , SIGNAL(closeClicked()) , this , SLOT(searchClosed()));
-        connect(_searchBar , SIGNAL(findNextClicked()) , this , SLOT(findNextInHistory()));
-        connect(_searchBar , SIGNAL(findPreviousClicked()) , this , SLOT(findPreviousInHistory()));
-        connect(_searchBar , SIGNAL(highlightMatchesToggled(bool)) , this , SLOT(highlightMatches(bool)));
-        connect(_searchBar , SIGNAL(matchCaseToggled(bool)) , this , SLOT(changeSearchMatch()));
+        connect(_searchBar, SIGNAL(closeClicked()), this, SLOT(searchClosed()));
+        connect(_searchBar, SIGNAL(findNextClicked()), this, SLOT(findNextInHistory()));
+        connect(_searchBar, SIGNAL(findPreviousClicked()), this, SLOT(findPreviousInHistory()));
+        connect(_searchBar, SIGNAL(highlightMatchesToggled(bool)) , this , SLOT(highlightMatches(bool)));
+        connect(_searchBar, SIGNAL(matchCaseToggled(bool)), this, SLOT(changeSearchMatch()));
 
         // if the search bar was previously active
         // then re-enter search mode
@@ -830,9 +830,9 @@ void SessionController::listenForScreenWindowUpdates()
     if (_listenForScreenWindowUpdates)
         return;
 
-    connect(_view->screenWindow() , SIGNAL(outputChanged()) , this ,
+    connect(_view->screenWindow(), SIGNAL(outputChanged()), this,
             SLOT(updateSearchFilter()));
-    connect(_view->screenWindow() , SIGNAL(scrolled(int)) , this ,
+    connect(_view->screenWindow(), SIGNAL(scrolled(int)), this,
             SLOT(updateSearchFilter()));
 
     _listenForScreenWindowUpdates = true;
@@ -861,7 +861,7 @@ void SessionController::searchHistory(bool showSearchBar)
 
             _searchFilter = new RegExpFilter();
             _view->filterChain()->addFilter(_searchFilter);
-            connect(_searchBar , SIGNAL(searchChanged(QString)) , this ,
+            connect(_searchBar, SIGNAL(searchChanged(QString)), this,
                     SLOT(searchTextChanged(QString)));
 
             // invoke search for matches for the current search text
@@ -874,7 +874,7 @@ void SessionController::searchHistory(bool showSearchBar)
         } else {
             setFindNextPrevEnabled(false);
 
-            disconnect(_searchBar , SIGNAL(searchChanged(QString)) , this ,
+            disconnect(_searchBar, SIGNAL(searchChanged(QString)), this,
                        SLOT(searchTextChanged(QString)));
 
             removeSearchFilter();
@@ -921,7 +921,7 @@ void SessionController::beginSearch(const QString& text , int direction)
     if (!regExp.isEmpty()) {
         SearchHistoryTask* task = new SearchHistoryTask(this);
 
-        connect(task , SIGNAL(completed(bool)) , this , SLOT(searchCompleted(bool)));
+        connect(task, SIGNAL(completed(bool)), this, SLOT(searchCompleted(bool)));
 
         task->setRegExp(regExp);
         task->setSearchDirection((SearchHistoryTask::SearchDirection)direction);
@@ -982,8 +982,8 @@ void SessionController::showHistoryOptions()
         dialog->setMode(HistorySizeDialog::NoHistory);
     }
 
-    connect(dialog , SIGNAL(optionsChanged(int, int)) ,
-            this , SLOT(scrollBackOptionsChanged(int, int)));
+    connect(dialog, SIGNAL(optionsChanged(int,int)),
+            this, SLOT(scrollBackOptionsChanged(int,int)));
 
     dialog->show();
 }
@@ -1333,9 +1333,9 @@ void SaveHistoryTask::execute()
 
         _jobSession.insert(job, jobInfo);
 
-        connect(job , SIGNAL(dataReq(KIO::Job*, QByteArray&)),
-                this, SLOT(jobDataRequested(KIO::Job*, QByteArray&)));
-        connect(job , SIGNAL(result(KJob*)),
+        connect(job, SIGNAL(dataReq(KIO::Job*,QByteArray&)),
+                this, SLOT(jobDataRequested(KIO::Job*,QByteArray&)));
+        connect(job, SIGNAL(result(KJob*)),
                 this, SLOT(jobResult(KJob*)));
     }
 

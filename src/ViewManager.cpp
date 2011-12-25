@@ -641,14 +641,14 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr profile)
             new TabbedViewContainer(position, _viewSplitter);
 
         connect(container,
-                SIGNAL(detachTab(ViewContainer*, QWidget*)),
+                SIGNAL(detachTab(ViewContainer*,QWidget*)),
                 this,
-                SLOT(detachView(ViewContainer*, QWidget*))
+                SLOT(detachView(ViewContainer*,QWidget*))
                );
         connect(container,
-                SIGNAL(closeTab(ViewContainer*, QWidget*)),
+                SIGNAL(closeTab(ViewContainer*,QWidget*)),
                 this,
-                SLOT(closeTabFromContainer(ViewContainer*, QWidget*)));
+                SLOT(closeTabFromContainer(ViewContainer*,QWidget*)));
 
     }
     break;
@@ -660,15 +660,15 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr profile)
     applyProfileToContainer(container, profile);
 
     // connect signals and slots
-    connect(container , SIGNAL(viewAdded(QWidget*, ViewProperties*)) , _containerSignalMapper ,
+    connect(container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
             SLOT(map()));
     connect(container , SIGNAL(viewRemoved(QWidget*)) , _containerSignalMapper ,
             SLOT(map()));
     _containerSignalMapper->setMapping(container, container);
 
     connect(container, SIGNAL(newViewRequest()), this, SIGNAL(newViewRequest()));
-    connect(container, SIGNAL(moveViewRequest(int, int, bool&)),
-            this , SLOT(containerMoveViewRequest(int, int, bool&)));
+    connect(container, SIGNAL(moveViewRequest(int,int,bool&)),
+            this , SLOT(containerMoveViewRequest(int,int,bool&)));
     connect(container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)));
     connect(container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)));
     connect(container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));

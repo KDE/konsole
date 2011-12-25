@@ -82,13 +82,13 @@ MainWindow* Application::newMainWindow()
     window->setSessionList(new ProfileList(true, window));
 
     connect(window,
-            SIGNAL(newSessionRequest(Profile::Ptr, QString, ViewManager*)),
-            this, SLOT(createSession(Profile::Ptr, QString, ViewManager*)));
+            SIGNAL(newSessionRequest(Profile::Ptr,QString,ViewManager*)),
+            this, SLOT(createSession(Profile::Ptr,QString,ViewManager*)));
     connect(window,
-            SIGNAL(newSSHSessionRequest(Profile::Ptr, KUrl, ViewManager*)),
-            this, SLOT(createSSHSession(Profile::Ptr, KUrl, ViewManager*)));
-    connect(window, SIGNAL(newWindowRequest(Profile::Ptr, QString)),
-            this, SLOT(createWindow(Profile::Ptr, QString)));
+            SIGNAL(newSSHSessionRequest(Profile::Ptr,KUrl,ViewManager*)),
+            this, SLOT(createSSHSession(Profile::Ptr,KUrl,ViewManager*)));
+    connect(window, SIGNAL(newWindowRequest(Profile::Ptr,QString)),
+            this, SLOT(createWindow(Profile::Ptr,QString)));
     connect(window->viewManager(), SIGNAL(viewDetached(Session*)),
             this, SLOT(detachView(Session*)));
 

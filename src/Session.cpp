@@ -130,21 +130,21 @@ Session::Session(QObject* parent) :
     //create emulation backend
     _emulation = new Vt102Emulation();
 
-    connect(_emulation, SIGNAL(titleChanged(int, QString)),
-            this, SLOT(setUserTitle(int, QString)));
+    connect(_emulation, SIGNAL(titleChanged(int,QString)),
+            this, SLOT(setUserTitle(int,QString)));
     connect(_emulation, SIGNAL(stateSet(int)),
             this, SLOT(activityStateSet(int)));
-    connect(_emulation, SIGNAL(zmodemDetected()), this ,
+    connect(_emulation, SIGNAL(zmodemDetected()), this,
             SLOT(fireZModemDetected()));
     connect(_emulation, SIGNAL(changeTabTextColorRequest(int)),
             this, SIGNAL(changeTabTextColorRequest(int)));
     connect(_emulation, SIGNAL(profileChangeCommandReceived(QString)),
             this, SIGNAL(profileChangeCommandReceived(QString)));
-    connect(_emulation, SIGNAL(flowControlKeyPressed(bool)) , this,
+    connect(_emulation, SIGNAL(flowControlKeyPressed(bool)), this,
             SLOT(updateFlowControlState(bool)));
-    connect(_emulation, SIGNAL(primaryScreenInUse(bool)) , this,
+    connect(_emulation, SIGNAL(primaryScreenInUse(bool)), this,
             SLOT(onPrimaryScreenInUse(bool)));
-    connect(_emulation, SIGNAL(selectedText(QString)) , this,
+    connect(_emulation, SIGNAL(selectedText(QString)), this,
             SLOT(onSelectedText(QString)));
 
     //create new teletype for I/O with shell process
@@ -177,14 +177,14 @@ void Session::openTeletype(int fd)
     _shellProcess->setUtf8Mode(_emulation->utf8());
 
     //connect teletype to emulation backend
-    connect(_shellProcess, SIGNAL(receivedData(const char*, int)), this,
-            SLOT(onReceiveBlock(const char*, int)));
-    connect(_emulation, SIGNAL(sendData(const char*, int)), _shellProcess,
-            SLOT(sendData(const char*, int)));
+    connect(_shellProcess, SIGNAL(receivedData(const char*,int)), this,
+            SLOT(onReceiveBlock(const char*,int)));
+    connect(_emulation, SIGNAL(sendData(const char*,int)), _shellProcess,
+            SLOT(sendData(const char*,int)));
     connect(_emulation, SIGNAL(lockPtyRequest(bool)), _shellProcess, SLOT(lockPty(bool)));
     connect(_emulation, SIGNAL(useUtf8Request(bool)), _shellProcess, SLOT(setUtf8Mode(bool)));
-    connect(_shellProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(done(int, QProcess::ExitStatus)));
-    connect(_emulation, SIGNAL(imageSizeChanged(int, int)), this, SLOT(updateWindowSize(int, int)));
+    connect(_shellProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(done(int,QProcess::ExitStatus)));
+    connect(_emulation, SIGNAL(imageSizeChanged(int,int)), this, SLOT(updateWindowSize(int,int)));
     connect(_emulation, SIGNAL(imageSizeInitialized()), this, SLOT(run()));
 }
 
@@ -292,16 +292,16 @@ void Session::addView(TerminalDisplay* widget)
 
     if (_emulation != 0) {
         // connect emulation - view signals and slots
-        connect(widget , SIGNAL(keyPressedSignal(QKeyEvent*)) , _emulation ,
+        connect(widget, SIGNAL(keyPressedSignal(QKeyEvent*)), _emulation,
                 SLOT(sendKeyEvent(QKeyEvent*)));
-        connect(widget , SIGNAL(mouseSignal(int, int, int, int)) , _emulation ,
-                SLOT(sendMouseEvent(int, int, int, int)));
-        connect(widget , SIGNAL(sendStringToEmu(const char*)) , _emulation ,
+        connect(widget, SIGNAL(mouseSignal(int,int,int,int)), _emulation,
+                SLOT(sendMouseEvent(int,int,int,int)));
+        connect(widget, SIGNAL(sendStringToEmu(const char*)), _emulation,
                 SLOT(sendString(const char*)));
 
         // allow emulation to notify view when the foreground process
         // indicates whether or not it is interested in mouse signals
-        connect(_emulation , SIGNAL(programUsesMouseChanged(bool)) , widget ,
+        connect(_emulation, SIGNAL(programUsesMouseChanged(bool)), widget,
                 SLOT(setUsesMouse(bool)));
 
         widget->setUsesMouse(_emulation->programUsesMouse());
@@ -310,10 +310,10 @@ void Session::addView(TerminalDisplay* widget)
     }
 
     //connect view signals and slots
-    QObject::connect(widget , SIGNAL(changedContentSizeSignal(int, int)), this,
-                     SLOT(onViewSizeChange(int, int)));
+    QObject::connect(widget, SIGNAL(changedContentSizeSignal(int,int)), this,
+                     SLOT(onViewSizeChange(int,int)));
 
-    QObject::connect(widget , SIGNAL(destroyed(QObject*)) , this ,
+    QObject::connect(widget, SIGNAL(destroyed(QObject*)), this,
                      SLOT(viewDestroyed(QObject*)));
 }
 
@@ -342,7 +342,7 @@ void Session::removeView(TerminalDisplay* widget)
         disconnect(widget, 0, _emulation, 0);
 
         // disconnect state change signals emitted by emulation
-        disconnect(_emulation , 0 , widget , 0);
+        disconnect(_emulation, 0, widget, 0);
     }
 
     // close the session automatically when the last view is removed
@@ -1119,13 +1119,13 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
             this, SLOT(zmodemReadAndSendBlock()));
     connect(_zmodemProc, SIGNAL(readyReadStandardError()),
             this, SLOT(zmodemReadStatus()));
-    connect(_zmodemProc, SIGNAL(finished(int, QProcess::ExitStatus)),
+    connect(_zmodemProc, SIGNAL(finished(int,QProcess::ExitStatus)),
             this, SLOT(zmodemFinished()));
 
     _zmodemProc->start();
 
-    disconnect(_shellProcess, SIGNAL(receivedData(const char*, int)), this, SLOT(onReceiveBlock(const char*, int)));
-    connect(_shellProcess, SIGNAL(receivedData(const char*, int)), this, SLOT(zmodemRcvBlock(const char*, int)));
+    disconnect(_shellProcess, SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)));
+    connect(_shellProcess, SIGNAL(receivedData(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)));
 
     _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
                                        i18n("ZModem Progress"));
@@ -1188,8 +1188,8 @@ void Session::zmodemFinished()
         _zmodemBusy = false;
         delete process;    // Now, the KProcess may be disposed safely.
 
-        disconnect(_shellProcess, SIGNAL(receivedData(const char*, int)), this , SLOT(zmodemRcvBlock(const char*, int)));
-        connect(_shellProcess, SIGNAL(receivedData(const char*, int)), this, SLOT(onReceiveBlock(const char*, int)));
+        disconnect(_shellProcess, SIGNAL(receivedData(const char*,int)), this , SLOT(zmodemRcvBlock(const char*,int)));
+        connect(_shellProcess, SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)));
 
         _shellProcess->sendData("\030\030\030\030", 4); // Abort
         _shellProcess->sendData("\001\013\n", 3); // Try to get prompt back
@@ -1387,11 +1387,11 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
     _sessions[session] = master;
 
     if (master) {
-        connect(session->emulation() , SIGNAL(sendData(const char*, int)) , this,
-                SLOT(forwardData(const char*, int)));
+        connect(session->emulation(), SIGNAL(sendData(const char*,int)), this,
+                SLOT(forwardData(const char*,int)));
     } else {
-        disconnect(session->emulation() , SIGNAL(sendData(const char*, int)) , this,
-                   SLOT(forwardData(const char*, int)));
+        disconnect(session->emulation(), SIGNAL(sendData(const char*,int)), this,
+                   SLOT(forwardData(const char*,int)));
     }
 }
 void SessionGroup::forwardData(const char* data, int size)

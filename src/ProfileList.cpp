@@ -56,15 +56,15 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
         favoriteChanged(iter.next(), true);
     }
 
-    connect(_group , SIGNAL(triggered(QAction*)) , this , SLOT(triggered(QAction*)));
+    connect(_group, SIGNAL(triggered(QAction*)), this, SLOT(triggered(QAction*)));
 
 
     // listen for future changes to the profiles
-    connect(manager , SIGNAL(favoriteStatusChanged(Profile::Ptr, bool)) , this ,
-            SLOT(favoriteChanged(Profile::Ptr, bool)));
-    connect(manager , SIGNAL(shortcutChanged(Profile::Ptr, QKeySequence)) , this ,
-            SLOT(shortcutChanged(Profile::Ptr, QKeySequence)));
-    connect(manager , SIGNAL(profileChanged(Profile::Ptr)) , this ,
+    connect(manager, SIGNAL(favoriteStatusChanged(Profile::Ptr,bool)), this,
+            SLOT(favoriteChanged(Profile::Ptr,bool)));
+    connect(manager, SIGNAL(shortcutChanged(Profile::Ptr,QKeySequence)), this,
+            SLOT(shortcutChanged(Profile::Ptr,QKeySequence)));
+    connect(manager, SIGNAL(profileChanged(Profile::Ptr)), this,
             SLOT(profileChanged(Profile::Ptr)));
 }
 void ProfileList::updateEmptyAction()

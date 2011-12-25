@@ -71,10 +71,10 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
     _viewManager = new ViewManager(this, actionCollection());
     _viewManager->setNavigationMethod(ViewManager::NoNavigation);
 
-    connect(_viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
+    connect(_viewManager, SIGNAL(activeViewChanged(SessionController*)), this ,
             SLOT(activeViewChanged(SessionController*)));
-    connect(_viewManager , SIGNAL(empty()) , this , SLOT(terminalExited()));
-    connect(_viewManager , SIGNAL(newViewRequest()) , this , SLOT(newTab()));
+    connect(_viewManager, SIGNAL(empty()), this, SLOT(terminalExited()));
+    connect(_viewManager, SIGNAL(newViewRequest()), this, SLOT(newTab()));
 
     _viewManager->widget()->setParent(parentWidget);
 
@@ -219,8 +219,8 @@ void Part::activeViewChanged(SessionController* controller)
             SLOT(activeViewTitleChanged(ViewProperties*)));
     activeViewTitleChanged(controller);
 
-    const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*, bool&));
-    const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*, bool&));
+    const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*,bool&));
+    const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*,bool&));
 
     disconnect(controller->view(), displaySignal, this, partSlot);
     connect(controller->view(), displaySignal, this, partSlot);

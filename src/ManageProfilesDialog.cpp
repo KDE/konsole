@@ -49,8 +49,8 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     setButtons(KDialog::Close);
 
     //connect( this, SIGNAL(applyClicked()) , this , SLOT(setMenuOrder()) );
-    connect(this, SIGNAL(finished()) ,
-            SessionManager::instance() , SLOT(saveSettings()));
+    connect(this, SIGNAL(finished()),
+            SessionManager::instance(), SLOT(saveSettings()));
 
     _ui = new Ui::ManageProfilesDialog();
     _ui->setupUi(mainWidget());
@@ -67,15 +67,15 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     populateTable();
 
     // listen for changes to profiles
-    connect(SessionManager::instance() , SIGNAL(profileAdded(Profile::Ptr)) , this,
+    connect(SessionManager::instance(), SIGNAL(profileAdded(Profile::Ptr)), this,
             SLOT(addItems(Profile::Ptr)));
-    connect(SessionManager::instance() , SIGNAL(profileRemoved(Profile::Ptr)) , this,
+    connect(SessionManager::instance(), SIGNAL(profileRemoved(Profile::Ptr)), this,
             SLOT(removeItems(Profile::Ptr)));
-    connect(SessionManager::instance() , SIGNAL(profileChanged(Profile::Ptr)) , this,
+    connect(SessionManager::instance(), SIGNAL(profileChanged(Profile::Ptr)), this,
             SLOT(updateItems(Profile::Ptr)));
     connect(SessionManager::instance() ,
-            SIGNAL(favoriteStatusChanged(Profile::Ptr, bool)) , this ,
-            SLOT(updateFavoriteStatus(Profile::Ptr, bool)));
+            SIGNAL(favoriteStatusChanged(Profile::Ptr,bool)), this,
+            SLOT(updateFavoriteStatus(Profile::Ptr,bool)));
 
     // resize the session table to the full width of the table
     _ui->sessionTable->horizontalHeader()->setHighlightSections(false);
@@ -88,10 +88,10 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
                                       _ui->sessionTable->columnWidth(ShortcutColumn) + 100);
 
     // setup buttons
-    connect(_ui->newProfileButton , SIGNAL(clicked()) , this , SLOT(createProfile()));
-    connect(_ui->editProfileButton , SIGNAL(clicked()) , this , SLOT(editSelected()));
-    connect(_ui->deleteProfileButton , SIGNAL(clicked()) , this , SLOT(deleteSelected()));
-    connect(_ui->setAsDefaultButton , SIGNAL(clicked()) , this , SLOT(setSelectedAsDefault()));
+    connect(_ui->newProfileButton, SIGNAL(clicked()), this, SLOT(createProfile()));
+    connect(_ui->editProfileButton, SIGNAL(clicked()), this, SLOT(editSelected()));
+    connect(_ui->deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteSelected()));
+    connect(_ui->setAsDefaultButton, SIGNAL(clicked()), this, SLOT(setSelectedAsDefault()));
 }
 
 void ManageProfilesDialog::showEvent(QShowEvent*)
@@ -243,7 +243,7 @@ void ManageProfilesDialog::populateTable()
     }
     updateDefaultItem();
 
-    connect(_sessionModel , SIGNAL(itemChanged(QStandardItem*)) , this ,
+    connect(_sessionModel, SIGNAL(itemChanged(QStandardItem*)), this,
             SLOT(itemDataChanged(QStandardItem*)));
 
     // listen for changes in the table selection and update the state of the form's buttons
@@ -251,8 +251,8 @@ void ManageProfilesDialog::populateTable()
     //
     // it appears that the selection model is changed when the model itself is replaced,
     // so the signals need to be reconnected each time the model is updated.
-    connect(_ui->sessionTable->selectionModel() ,
-            SIGNAL(selectionChanged(QItemSelection, QItemSelection)) , this ,
+    connect(_ui->sessionTable->selectionModel(),
+            SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this,
             SLOT(tableSelectionChanged(QItemSelection)));
 
     _ui->sessionTable->selectRow(0);
