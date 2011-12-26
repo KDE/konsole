@@ -356,15 +356,16 @@ void ManageProfilesDialog::createProfile()
     newProfile->setProperty(Profile::Name, i18nc("@item This will be used as part of the file name", "New Profile"));
     newProfile->setProperty(Profile::MenuIndex, QString("0"));
 
-    QPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
-    dialog->setProfile(newProfile);
-    dialog->selectProfileName();
+    QWeakPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
+    dialog.data()->setProfile(newProfile);
+    dialog.data()->selectProfileName();
 
-    if (dialog->exec() == QDialog::Accepted) {
+    if (dialog.data()->exec() == QDialog::Accepted) {
         SessionManager::instance()->addProfile(newProfile);
         SessionManager::instance()->setFavorite(newProfile, true);
         SessionManager::instance()->changeProfile(newProfile, newProfile->setProperties());
     }
+    delete dialog.data();
 }
 void ManageProfilesDialog::editSelected()
 {
