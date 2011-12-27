@@ -24,7 +24,7 @@
 #include "TabTitleFormatAction.h"
 #include "ui_RenameTabsDialog.h"
 
-using namespace Konsole;
+using Konsole::RenameTabsDialog;
 
 RenameTabsDialog::RenameTabsDialog(QWidget* parent)
     : KDialog(parent)

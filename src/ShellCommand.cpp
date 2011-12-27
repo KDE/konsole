@@ -23,7 +23,7 @@
 // KDE
 #include <KShell>
 
-using namespace Konsole;
+using Konsole::ShellCommand;
 
 // expands environment variables in 'text'
 // function copied from kdelibs/kio/kio/kurlcompletion.cpp

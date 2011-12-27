@@ -54,8 +54,7 @@
 #include "Screen.h"
 #include "TerminalDisplay.h"
 
-
-using namespace Konsole;
+using Konsole::Vt102Emulation;
 
 /*
    The VT100 has 32 special graphical characters. The usual vt100 extended

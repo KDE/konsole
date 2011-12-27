@@ -20,7 +20,7 @@
 // Own
 #include "ViewProperties.h"
 
-using namespace Konsole;
+using Konsole::ViewProperties;
 
 QHash<int, ViewProperties*> ViewProperties::_viewProperties;
 QString ViewProperties::_mimeType = "application/x-konsole-view-id";

@@ -23,7 +23,7 @@
 #include <KLocale>
 #include <KTextEdit>
 
-using namespace Konsole;
+using Konsole::ZModemDialog;
 
 ZModemDialog::ZModemDialog(QWidget* parent, bool modal, const QString& caption)
     : KDialog(parent)

@@ -40,7 +40,7 @@
 #include <KPtyDevice>
 #include <kde_file.h>
 
-using namespace Konsole;
+using Konsole::Pty;
 
 void Pty::setWindowSize(int lines, int columns)
 {

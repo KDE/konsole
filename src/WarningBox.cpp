@@ -28,7 +28,7 @@
 #include <KIcon>
 #include <KColorScheme>
 
-using namespace Konsole;
+using Konsole::WarningBox;
 
 WarningBox::WarningBox(QWidget* parent)
     : QFrame(parent)

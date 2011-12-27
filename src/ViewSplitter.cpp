@@ -28,7 +28,8 @@
 // Konsole
 #include "ViewContainer.h"
 
-using namespace Konsole;
+using Konsole::ViewSplitter;
+using Konsole::ViewContainer;
 
 ViewSplitter::ViewSplitter(QWidget* parent)
     : QSplitter(parent)

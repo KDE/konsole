@@ -32,7 +32,7 @@
 // Konsole
 #include "SessionManager.h"
 
-using namespace Konsole;
+using Konsole::ProfileList;
 
 ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     : QObject(parent)
