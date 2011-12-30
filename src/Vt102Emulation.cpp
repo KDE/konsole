@@ -29,12 +29,12 @@
 // this allows konsole to be compiled without XKB and XTEST extensions
 // even though it might be available on a particular system.
 #if defined(AVOID_XKB)
-    #undef HAVE_XKB
+#undef HAVE_XKB
 #endif
 
 #if defined(HAVE_XKB)
-    void scrolllock_set_off();
-    void scrolllock_set_on();
+void scrolllock_set_off();
+void scrolllock_set_on();
 #endif
 
 // Standard
@@ -70,23 +70,23 @@ using Konsole::Vt102Emulation;
 
 // assert for i in [0..31] : vt100extended(vt100_graphics[i]) == i.
 
-unsigned short Konsole::vt100_graphics[32] =
-{ // 0/8     1/9    2/10    3/11    4/12    5/13    6/14    7/15
-  0x0020, 0x25C6, 0x2592, 0x2409, 0x240c, 0x240d, 0x240a, 0x00b0,
-  0x00b1, 0x2424, 0x240b, 0x2518, 0x2510, 0x250c, 0x2514, 0x253c,
-  0xF800, 0xF801, 0x2500, 0xF803, 0xF804, 0x251c, 0x2524, 0x2534,
-  0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
+unsigned short Konsole::vt100_graphics[32] = {
+    // 0/8     1/9    2/10    3/11    4/12    5/13    6/14    7/15
+    0x0020, 0x25C6, 0x2592, 0x2409, 0x240c, 0x240d, 0x240a, 0x00b0,
+    0x00b1, 0x2424, 0x240b, 0x2518, 0x2510, 0x250c, 0x2514, 0x253c,
+    0xF800, 0xF801, 0x2500, 0xF803, 0xF804, 0x251c, 0x2524, 0x2534,
+    0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
 };
 
-Vt102Emulation::Vt102Emulation() 
+Vt102Emulation::Vt102Emulation()
     : Emulation(),
-     _titleUpdateTimer(new QTimer(this))
+      _titleUpdateTimer(new QTimer(this))
 {
-  _titleUpdateTimer->setSingleShot(true);
-  QObject::connect(_titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
+    _titleUpdateTimer->setSingleShot(true);
+    QObject::connect(_titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
 
-  initTokenizer();
-  reset();
+    initTokenizer();
+    reset();
 }
 
 Vt102Emulation::~Vt102Emulation()
@@ -94,29 +94,29 @@ Vt102Emulation::~Vt102Emulation()
 
 void Vt102Emulation::clearEntireScreen()
 {
-  _currentScreen->clearEntireScreen();
-  bufferedUpdate(); 
+    _currentScreen->clearEntireScreen();
+    bufferedUpdate();
 }
 
 void Vt102Emulation::reset()
 {
-  // Save the current codec so we can set it later.
-  // Ideally we would want to use the profile setting
-  const QTextCodec* currentCodec = codec();
+    // Save the current codec so we can set it later.
+    // Ideally we would want to use the profile setting
+    const QTextCodec* currentCodec = codec();
 
-  resetTokenizer();
-  resetModes();
-  resetCharset(0);
-  _screen[0]->reset();
-  resetCharset(1);
-  _screen[1]->reset();
+    resetTokenizer();
+    resetModes();
+    resetCharset(0);
+    _screen[0]->reset();
+    resetCharset(1);
+    _screen[1]->reset();
 
-  if (currentCodec)
-    setCodec(currentCodec);
-  else
-    setCodec(LocaleCodec);
+    if (currentCodec)
+        setCodec(currentCodec);
+    else
+        setCodec(LocaleCodec);
 
-  bufferedUpdate();
+    bufferedUpdate();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -166,7 +166,7 @@ void Vt102Emulation::reset()
    - VT52       - VT52 escape codes
                   - <ESC><Chr>
                   - <ESC>'Y'{Pc}{Pc}
-   - XTE_HA     - Xterm window/terminal attribute commands 
+   - XTE_HA     - Xterm window/terminal attribute commands
                   of the form <ESC>`]' {Pn} `;' {Text} <BEL>
                   (Note that these are handled differently to the other formats)
 
@@ -206,28 +206,28 @@ const int MAX_ARGUMENT = 4096 ;
 
 void Vt102Emulation::resetTokenizer()
 {
-  tokenBufferPos = 0; 
-  argc = 0; 
-  argv[0] = 0; 
-  argv[1] = 0;
+    tokenBufferPos = 0;
+    argc = 0;
+    argv[0] = 0;
+    argv[1] = 0;
 }
 
 void Vt102Emulation::addDigit(int digit)
 {
-  if (argv[argc] < MAX_ARGUMENT)
-      argv[argc] = 10*argv[argc] + digit;
+    if (argv[argc] < MAX_ARGUMENT)
+        argv[argc] = 10 * argv[argc] + digit;
 }
 
 void Vt102Emulation::addArgument()
 {
-  argc = qMin(argc+1,MAXARGS-1);
-  argv[argc] = 0;
+    argc = qMin(argc + 1, MAXARGS - 1);
+    argv[argc] = 0;
 }
 
 void Vt102Emulation::addToCurrentToken(int cc)
 {
-  tokenBuffer[tokenBufferPos] = cc;
-  tokenBufferPos = qMin(tokenBufferPos+1,MAX_TOKEN_LENGTH-1);
+    tokenBuffer[tokenBufferPos] = cc;
+    tokenBufferPos = qMin(tokenBufferPos + 1, MAX_TOKEN_LENGTH - 1);
 }
 
 // Character Class flags used while decoding
@@ -239,31 +239,31 @@ void Vt102Emulation::addToCurrentToken(int cc)
 #define SCS 16  // TODO: Document me  
 #define GRP 32  // TODO: Document me
 #define CPS 64  // Character which indicates end of window resize
-                // escape sequence '\e[8;<row>;<col>t'
+// escape sequence '\e[8;<row>;<col>t'
 
 void Vt102Emulation::initTokenizer()
-{ 
-  int i; 
-  quint8* s;
-  for(i = 0;i < 256; ++i) 
-    charClass[i] = 0;
-  for(i = 0;i < 32; ++i) 
-    charClass[i] |= CTL;
-  for(i = 32;i < 256; ++i) 
-    charClass[i] |= CHR;
-  for(s = (quint8*)"@ABCDGHILMPSTXZcdfry"; *s; ++s) 
-    charClass[*s] |= CPN;
-  // resize = \e[8;<row>;<col>t
-  for(s = (quint8*)"t"; *s; ++s) 
-    charClass[*s] |= CPS;
-  for(s = (quint8*)"0123456789"; *s; ++s) 
-    charClass[*s] |= DIG;
-  for(s = (quint8*)"()+*%"; *s; ++s) 
-    charClass[*s] |= SCS;
-  for(s = (quint8*)"()+*#[]%"; *s; ++s) 
-    charClass[*s] |= GRP;
+{
+    int i;
+    quint8* s;
+    for (i = 0; i < 256; ++i)
+        charClass[i] = 0;
+    for (i = 0; i < 32; ++i)
+        charClass[i] |= CTL;
+    for (i = 32; i < 256; ++i)
+        charClass[i] |= CHR;
+    for (s = (quint8*)"@ABCDGHILMPSTXZcdfry"; *s; ++s)
+        charClass[*s] |= CPN;
+    // resize = \e[8;<row>;<col>t
+    for (s = (quint8*)"t"; *s; ++s)
+        charClass[*s] |= CPS;
+    for (s = (quint8*)"0123456789"; *s; ++s)
+        charClass[*s] |= DIG;
+    for (s = (quint8*)"()+*%"; *s; ++s)
+        charClass[*s] |= SCS;
+    for (s = (quint8*)"()+*#[]%"; *s; ++s)
+        charClass[*s] |= GRP;
 
-  resetTokenizer();
+    resetTokenizer();
 }
 
 /* Ok, here comes the nasty part of the decoder.
@@ -280,7 +280,7 @@ void Vt102Emulation::initTokenizer()
 
    - 'cc' is the current character
    - 's' is a pointer to the start of the token buffer
-   - 'p' is the current position within the token buffer 
+   - 'p' is the current position within the token buffer
 
    Note that they need to applied in proper order.
 */
@@ -892,52 +892,50 @@ void Vt102Emulation::reportAnswerBack()
         1 = Mouse drag
 */
 
-void Vt102Emulation::sendMouseEvent( int cb, int cx, int cy , int eventType )
-{ 
-  if (cx < 1 || cy < 1) 
-    return;
-
-  // normal buttons are passed as 0x20 + button,
-  // mouse wheel (buttons 4,5) as 0x5c + button
-  if (cb >= 4) 
-    cb += 0x3c;
-
-  //Mouse motion handling
-  if ((getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1)
-      cb += 0x20; //add 32 to signify motion event
-
-  char command[20];
-  sprintf(command,"\033[M%c%c%c",cb+0x20,cx+0x20,cy+0x20);
-  sendString(command);
-}
-
-void Vt102Emulation::sendText( const QString& text )
+void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
 {
-  if (!text.isEmpty()) 
-  {
-    QKeyEvent event(QEvent::KeyPress, 
-                    0, 
-                    Qt::NoModifier, 
-                    text);
-    sendKeyEvent(&event); // expose as a big fat keypress event
-  }
+    if (cx < 1 || cy < 1)
+        return;
+
+    // normal buttons are passed as 0x20 + button,
+    // mouse wheel (buttons 4,5) as 0x5c + button
+    if (cb >= 4)
+        cb += 0x3c;
+
+    //Mouse motion handling
+    if ((getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1)
+        cb += 0x20; //add 32 to signify motion event
+
+    char command[20];
+    sprintf(command, "\033[M%c%c%c", cb + 0x20, cx + 0x20, cy + 0x20);
+    sendString(command);
 }
-void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
+
+void Vt102Emulation::sendText(const QString& text)
+{
+    if (!text.isEmpty()) {
+        QKeyEvent event(QEvent::KeyPress,
+                        0,
+                        Qt::NoModifier,
+                        text);
+        sendKeyEvent(&event); // expose as a big fat keypress event
+    }
+}
+void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
 {
     Qt::KeyboardModifiers modifiers = event->modifiers();
     KeyboardTranslator::States states = KeyboardTranslator::NoState;
 
     // get current states
-    if (getMode(MODE_NewLine)  ) states |= KeyboardTranslator::NewLineState;
-    if (getMode(MODE_Ansi)     ) states |= KeyboardTranslator::AnsiState;
+    if (getMode(MODE_NewLine)) states |= KeyboardTranslator::NewLineState;
+    if (getMode(MODE_Ansi)) states |= KeyboardTranslator::AnsiState;
     if (getMode(MODE_AppCuKeys)) states |= KeyboardTranslator::CursorKeysState;
     if (getMode(MODE_AppScreen)) states |= KeyboardTranslator::AlternateScreenState;
-    if (getMode(MODE_AppKeyPad) && (modifiers & Qt::KeypadModifier)) 
+    if (getMode(MODE_AppKeyPad) && (modifiers & Qt::KeypadModifier))
         states |= KeyboardTranslator::ApplicationKeypadState;
 
     // check flow control state
-    if (modifiers & Qt::ControlModifier)
-    {
+    if (modifiers & Qt::ControlModifier) {
         if (event->key() == Qt::Key_S)
             emit flowControlKeyPressed(true);
         else if (event->key() == Qt::Key_Q)
@@ -1019,7 +1017,7 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
 
 // Character Set Conversion ------------------------------------------------ --
 
-/* 
+/*
    The processing contains a VT100 specific code translation layer.
    It's still in use and mainly responsible for the line drawing graphics.
 
@@ -1030,7 +1028,7 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
    in the pipeline. It only applies to tokens, which represent
    plain characters.
 
-   This conversion it eventually continued in TerminalDisplay.C, since 
+   This conversion it eventually continued in TerminalDisplay.C, since
    it might involve VT100 enhanced fonts, which have these
    particular glyphs allocated in (0x00-0x1f) in their code page.
 */
@@ -1041,9 +1039,9 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
 
 unsigned short Vt102Emulation::applyCharset(unsigned short c)
 {
-  if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c-0x5f];
-  if (CHARSET.pound && c == '#' ) return 0xa3; //This mode is obsolete
-  return c;
+    if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c - 0x5f];
+    if (CHARSET.pound && c == '#') return 0xa3;  //This mode is obsolete
+    return c;
 }
 
 /*
@@ -1056,31 +1054,31 @@ unsigned short Vt102Emulation::applyCharset(unsigned short c)
 
 void Vt102Emulation::resetCharset(int scrno)
 {
-  _charset[scrno].cu_cs = 0;
-  strncpy(_charset[scrno].charset,"BBBB",4);
-  _charset[scrno].sa_graphic = false;
-  _charset[scrno].sa_pound = false;
-  _charset[scrno].graphic = false;
-  _charset[scrno].pound = false;
+    _charset[scrno].cu_cs = 0;
+    strncpy(_charset[scrno].charset, "BBBB", 4);
+    _charset[scrno].sa_graphic = false;
+    _charset[scrno].sa_pound = false;
+    _charset[scrno].graphic = false;
+    _charset[scrno].pound = false;
 }
 
 void Vt102Emulation::setCharset(int n, int cs) // on both screens.
 {
-  _charset[0].charset[n&3] = cs; useCharset(_charset[0].cu_cs);
-  _charset[1].charset[n&3] = cs; useCharset(_charset[1].cu_cs);
+    _charset[0].charset[n & 3] = cs; useCharset(_charset[0].cu_cs);
+    _charset[1].charset[n & 3] = cs; useCharset(_charset[1].cu_cs);
 }
 
 void Vt102Emulation::setAndUseCharset(int n, int cs)
 {
-  CHARSET.charset[n&3] = cs;
-  useCharset(n&3);
+    CHARSET.charset[n & 3] = cs;
+    useCharset(n & 3);
 }
 
 void Vt102Emulation::useCharset(int n)
 {
-  CHARSET.cu_cs   = n&3;
-  CHARSET.graphic = (CHARSET.charset[n&3] == '0');
-  CHARSET.pound   = (CHARSET.charset[n&3] == 'A'); //This mode is obsolete
+    CHARSET.cu_cs   = n & 3;
+    CHARSET.graphic = (CHARSET.charset[n & 3] == '0');
+    CHARSET.pound   = (CHARSET.charset[n & 3] == 'A'); //This mode is obsolete
 }
 
 void Vt102Emulation::setDefaultMargins()
@@ -1091,25 +1089,25 @@ void Vt102Emulation::setDefaultMargins()
 
 void Vt102Emulation::setMargins(int t, int b)
 {
-  _screen[0]->setMargins(t, b);
-  _screen[1]->setMargins(t, b);
+    _screen[0]->setMargins(t, b);
+    _screen[1]->setMargins(t, b);
 }
 
 void Vt102Emulation::saveCursor()
 {
-  CHARSET.sa_graphic = CHARSET.graphic;
-  CHARSET.sa_pound   = CHARSET.pound; //This mode is obsolete
-  // we are not clear about these
-  //sa_charset = charsets[cScreen->_charset];
-  //sa_charset_num = cScreen->_charset;
-  _currentScreen->saveCursor();
+    CHARSET.sa_graphic = CHARSET.graphic;
+    CHARSET.sa_pound   = CHARSET.pound; //This mode is obsolete
+    // we are not clear about these
+    //sa_charset = charsets[cScreen->_charset];
+    //sa_charset_num = cScreen->_charset;
+    _currentScreen->saveCursor();
 }
 
 void Vt102Emulation::restoreCursor()
 {
-  CHARSET.graphic = CHARSET.sa_graphic;
-  CHARSET.pound   = CHARSET.sa_pound; //This mode is obsolete
-  _currentScreen->restoreCursor();
+    CHARSET.graphic = CHARSET.sa_graphic;
+    CHARSET.pound   = CHARSET.sa_pound; //This mode is obsolete
+    _currentScreen->restoreCursor();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1134,27 +1132,26 @@ void Vt102Emulation::restoreCursor()
 
 void Vt102Emulation::resetModes()
 {
-  // MODE_Allow132Columns is not reset here
-  // to match Xterm's behaviour (see Xterm's VTReset() function)
+    // MODE_Allow132Columns is not reset here
+    // to match Xterm's behaviour (see Xterm's VTReset() function)
 
-  resetMode(MODE_132Columns); saveMode(MODE_132Columns);
-  resetMode(MODE_Mouse1000);  saveMode(MODE_Mouse1000);
-  resetMode(MODE_Mouse1001);  saveMode(MODE_Mouse1001);
-  resetMode(MODE_Mouse1002);  saveMode(MODE_Mouse1002);
-  resetMode(MODE_Mouse1003);  saveMode(MODE_Mouse1003);
+    resetMode(MODE_132Columns); saveMode(MODE_132Columns);
+    resetMode(MODE_Mouse1000);  saveMode(MODE_Mouse1000);
+    resetMode(MODE_Mouse1001);  saveMode(MODE_Mouse1001);
+    resetMode(MODE_Mouse1002);  saveMode(MODE_Mouse1002);
+    resetMode(MODE_Mouse1003);  saveMode(MODE_Mouse1003);
 
-  resetMode(MODE_AppScreen);  saveMode(MODE_AppScreen);
-  resetMode(MODE_AppCuKeys);  saveMode(MODE_AppCuKeys);
-  resetMode(MODE_AppKeyPad);  saveMode(MODE_AppKeyPad);
-  resetMode(MODE_NewLine);
-  setMode(MODE_Ansi);
+    resetMode(MODE_AppScreen);  saveMode(MODE_AppScreen);
+    resetMode(MODE_AppCuKeys);  saveMode(MODE_AppCuKeys);
+    resetMode(MODE_AppKeyPad);  saveMode(MODE_AppKeyPad);
+    resetMode(MODE_NewLine);
+    setMode(MODE_Ansi);
 }
 
 void Vt102Emulation::setMode(int m)
 {
-  _currentModes.mode[m] = true;
-  switch (m)
-  {
+    _currentModes.mode[m] = true;
+    switch (m) {
     case MODE_132Columns:
         if (getMode(MODE_Allow132Columns))
             clearScreenAndSetColumns(132);
@@ -1165,100 +1162,96 @@ void Vt102Emulation::setMode(int m)
     case MODE_Mouse1001:
     case MODE_Mouse1002:
     case MODE_Mouse1003:
-         emit programUsesMouseChanged(false); 
-    break;
+        emit programUsesMouseChanged(false);
+        break;
 
     case MODE_AppScreen : _screen[1]->clearSelection();
-                          setScreen(1);
-    break;
-  }
-  if (m < MODES_SCREEN || m == MODE_NewLine)
-  {
-    _screen[0]->setMode(m);
-    _screen[1]->setMode(m);
-  }
+        setScreen(1);
+        break;
+    }
+    if (m < MODES_SCREEN || m == MODE_NewLine) {
+        _screen[0]->setMode(m);
+        _screen[1]->setMode(m);
+    }
 }
 
 void Vt102Emulation::resetMode(int m)
 {
-  _currentModes.mode[m] = false;
-  switch (m)
-  {
+    _currentModes.mode[m] = false;
+    switch (m) {
     case MODE_132Columns:
         if (getMode(MODE_Allow132Columns))
             clearScreenAndSetColumns(80);
         break;
-    case MODE_Mouse1000 : 
+    case MODE_Mouse1000 :
     case MODE_Mouse1001 :
     case MODE_Mouse1002 :
     case MODE_Mouse1003 :
-        emit programUsesMouseChanged(true); 
-    break;
+        emit programUsesMouseChanged(true);
+        break;
 
-    case MODE_AppScreen : 
+    case MODE_AppScreen :
         _screen[0]->clearSelection();
         setScreen(0);
-    break;
-  }
-  if (m < MODES_SCREEN || m == MODE_NewLine)
-  {
-    _screen[0]->resetMode(m);
-    _screen[1]->resetMode(m);
-  }
+        break;
+    }
+    if (m < MODES_SCREEN || m == MODE_NewLine) {
+        _screen[0]->resetMode(m);
+        _screen[1]->resetMode(m);
+    }
 }
 
 void Vt102Emulation::saveMode(int m)
 {
-  _savedModes.mode[m] = _currentModes.mode[m];
+    _savedModes.mode[m] = _currentModes.mode[m];
 }
 
 void Vt102Emulation::restoreMode(int m)
 {
-  if (_savedModes.mode[m]) 
-      setMode(m); 
-  else 
-      resetMode(m);
+    if (_savedModes.mode[m])
+        setMode(m);
+    else
+        resetMode(m);
 }
 
 bool Vt102Emulation::getMode(int m)
 {
-  return _currentModes.mode[m];
+    return _currentModes.mode[m];
 }
 
 char Vt102Emulation::eraseChar() const
 {
-  KeyboardTranslator::Entry entry = _keyTranslator->findEntry(
-                                            Qt::Key_Backspace,
-                                            0,
-                                            0);
-  if ( entry.text().count() > 0 )
-      return entry.text()[0];
-  else
-      return '\b';
+    KeyboardTranslator::Entry entry = _keyTranslator->findEntry(
+                                          Qt::Key_Backspace,
+                                          0,
+                                          0);
+    if (entry.text().count() > 0)
+        return entry.text()[0];
+    else
+        return '\b';
 }
 
 // print contents of the scan buffer
 static void hexdump(int* s, int len)
-{ int i;
-  for (i = 0; i < len; i++)
-  {
-    if (s[i] == '\\')
-      printf("\\\\");
-    else
-    if ((s[i]) > 32 && s[i] < 127)
-      printf("%c",s[i]);
-    else
-      printf("\\%04x(hex)",s[i]);
-  }
+{
+    int i;
+    for (i = 0; i < len; i++) {
+        if (s[i] == '\\')
+            printf("\\\\");
+        else if ((s[i]) > 32 && s[i] < 127)
+            printf("%c", s[i]);
+        else
+            printf("\\%04x(hex)", s[i]);
+    }
 }
 
 void Vt102Emulation::reportDecodingError()
 {
-  if (tokenBufferPos == 0 || ( tokenBufferPos == 1 && (tokenBuffer[0] & 0xff) >= 32) ) 
-    return;
-  printf("Undecodable sequence: "); 
-  hexdump(tokenBuffer,tokenBufferPos); 
-  printf("\n");
+    if (tokenBufferPos == 0 || (tokenBufferPos == 1 && (tokenBuffer[0] & 0xff) >= 32))
+        return;
+    printf("Undecodable sequence: ");
+    hexdump(tokenBuffer, tokenBufferPos);
+    printf("\n");
 }
 
 #include "Vt102Emulation.moc"
