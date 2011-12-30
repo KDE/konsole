@@ -209,7 +209,7 @@ title: Top this!;; command: top
 command: ssh  earth
 */
 void Application::processTabsFromFileArgs(KCmdLineArgs* args,
-                                          MainWindow* window)
+        MainWindow* window)
 {
     // Open tab configuration file
     const QString tabsFileName(args->getOption("tabs-from-file"));
@@ -320,7 +320,7 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
 }
 
 void Application::processProfileSelectArgs(KCmdLineArgs* args,
-                                           MainWindow* window)
+        MainWindow* window)
 {
     if (args->isSet("profile")) {
         Profile::Ptr profile = SessionManager::instance()->loadProfile(args->getOption("profile"));
@@ -343,7 +343,7 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
     return false;
 }
 void Application::processProfileChangeArgs(KCmdLineArgs* args,
-                                           MainWindow* window)
+        MainWindow* window)
 {
     Profile::Ptr defaultProfile = window->defaultProfile();
     if (!defaultProfile)
