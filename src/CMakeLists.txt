@@ -43,12 +43,19 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
 ### Line graphics font
     SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_BINARY_DIR}/LineFont.h PROPERTIES GENERATED 1)
 
+    if(NOT Q_WS_MAC)
     add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LineFont.h
                        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder
                        ${CMAKE_SOURCE_DIR}/src/LineFont.src
                        > ${CMAKE_CURRENT_BINARY_DIR}/LineFont.h
                        DEPENDS ${CMAKE_SOURCE_DIR}/src/LineFont.src fontembedder)
-
+    else(Q_WS_MAC)
+    add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LineFont.h
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder.app/Contents/MacOS/fontembedder
+                       ${CMAKE_SOURCE_DIR}/src/LineFont.src
+                       > ${CMAKE_CURRENT_BINARY_DIR}/LineFont.h
+                       DEPENDS ${CMAKE_SOURCE_DIR}/src/LineFont.src fontembedder)
+    endif(Q_WS_MAC)
 
      ADD_CUSTOM_TARGET(generate_linefont
                        ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/LineFont.h")
