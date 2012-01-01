@@ -49,13 +49,13 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                        ${CMAKE_SOURCE_DIR}/src/LineFont.src
                        > ${CMAKE_CURRENT_BINARY_DIR}/LineFont.h
                        DEPENDS ${CMAKE_SOURCE_DIR}/src/LineFont.src fontembedder)
-    else(Q_WS_MAC)
+    else()
     add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LineFont.h
         COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder.app/Contents/MacOS/fontembedder
                        ${CMAKE_SOURCE_DIR}/src/LineFont.src
                        > ${CMAKE_CURRENT_BINARY_DIR}/LineFont.h
                        DEPENDS ${CMAKE_SOURCE_DIR}/src/LineFont.src fontembedder)
-    endif(Q_WS_MAC)
+    endif(NOT Q_WS_MAC)
 
      ADD_CUSTOM_TARGET(generate_linefont
                        ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/LineFont.h")
