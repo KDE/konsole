@@ -47,7 +47,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder
                        ${CMAKE_SOURCE_DIR}/src/LineFont.src
                        > ${CMAKE_CURRENT_BINARY_DIR}/LineFont.h
-                       DEPENDS ${CMAKE_SOURCE_DIR}/src/LineFont.src)
+                       DEPENDS ${CMAKE_SOURCE_DIR}/src/LineFont.src fontembedder)
 
 
      ADD_CUSTOM_TARGET(generate_linefont
