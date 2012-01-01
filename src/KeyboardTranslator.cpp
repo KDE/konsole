@@ -257,7 +257,7 @@ void KeyboardTranslatorReader::readNext()
             } else if (tokens[2].type == Token::Command) {
                 // identify command
                 if (!parseAsCommand(tokens[2].text, command))
-                    kWarning() << "Command" << tokens[2].text << "not understood.";
+                    kWarning() << "Key"<<tokens[1].text<<", Command" << tokens[2].text << "not understood. ";
             }
 
             KeyboardTranslator::Entry newEntry;
