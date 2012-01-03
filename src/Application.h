@@ -68,9 +68,6 @@ public:
      */
     MainWindow* newMainWindow();
 
-    /** Returns the Application instance */
-    static Application* self();
-
 private slots:
     Session* createSession(Profile::Ptr profile, const QString& directory,
                            ViewManager* view);

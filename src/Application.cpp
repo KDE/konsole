@@ -71,11 +71,6 @@ void Application::init()
 #endif
 }
 
-Application* Application::self()
-{
-    return (Application*)KApp;
-}
-
 MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
