@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef SRC_APPLICATION_H_
+#define SRC_APPLICATION_H_
 
 // KDE
 #include <KUniqueApplication>
@@ -39,13 +39,14 @@ class Session;
 /**
  * The Konsole Application.
  *
- * The application consists of one or more main windows and a set of factories to create
- * new sessions and views.
+ * The application consists of one or more main windows and a set of
+ * factories to create new sessions and views.
  *
- * To create a new main window with a default terminal session, call the newInstance() method.
- * Empty main windows can be created using newMainWindow().
+ * To create a new main window with a default terminal session, call
+ * the newInstance(). Empty main windows can be created using newMainWindow().
  *
- * The factory used to create new terminal sessions can be retrieved using the sessionManager() accessor.
+ * The factory used to create new terminal sessions can be retrieved using
+ * the sessionManager() accessor.
  */
 class Application : public KUniqueApplication
 {
@@ -71,8 +72,10 @@ public:
     static Application* self();
 
 private slots:
-    Session* createSession(Profile::Ptr profile, const QString& directory , ViewManager* view);
-    Session* createSSHSession(Profile::Ptr profile, const KUrl& url, ViewManager* view);
+    Session* createSession(Profile::Ptr profile, const QString& directory,
+                           ViewManager* view);
+    Session* createSSHSession(Profile::Ptr profile, const KUrl& url,
+                              ViewManager* view);
     void createWindow(Profile::Ptr profile , const QString& directory);
     void detachView(Session* session);
 
@@ -88,10 +91,10 @@ private:
     void processProfileSelectArgs(KCmdLineArgs* args, MainWindow* window);
     void processProfileChangeArgs(KCmdLineArgs* args, MainWindow* window);
     void processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window);
-    void createTabFromArgs(KCmdLineArgs* args, MainWindow* window, const QHash<QString, QString>&);
+    void createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
+                           const QHash<QString, QString>&);
 
     MainWindow* _backgroundInstance;
 };
-
 }
-#endif //APPLICATION_H
+#endif  // SRC_APPLICATION_H_

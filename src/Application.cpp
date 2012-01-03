@@ -233,7 +233,6 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
             QString key = lineParts.at(i).section(':', 0, 0).trimmed().toLower();
             QString value = lineParts.at(i).section(':', 1, 1).trimmed();
             lineTokens[key] = value;
-
         }
         // command: is the only token required
         if (lineTokens.contains("command")) {
@@ -323,7 +322,8 @@ void Application::processProfileSelectArgs(KCmdLineArgs* args,
         MainWindow* window)
 {
     if (args->isSet("profile")) {
-        Profile::Ptr profile = SessionManager::instance()->loadProfile(args->getOption("profile"));
+        Profile::Ptr profile = SessionManager::instance()->loadProfile(
+                                   args->getOption("profile"));
         if (!profile)
             profile = SessionManager::instance()->defaultProfile();
 
