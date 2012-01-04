@@ -832,10 +832,11 @@ void Vt102Emulation::sendString(const char* s , int length)
 }
 
 void Vt102Emulation::reportCursorPosition()
-{ 
-  char tmp[20];
-  sprintf(tmp,"\033[%d;%dR",_currentScreen->getCursorY()+1,_currentScreen->getCursorX()+1);
-  sendString(tmp);
+{
+    QString cursor = QString("\033[%1;%2R")
+                        .arg(_currentScreen->getCursorY()+1)
+                        .arg(_currentScreen->getCursorX()+1);
+    sendString(cursor.toLocal8Bit().constData());
 }
 
 void Vt102Emulation::reportTerminalType()
@@ -861,12 +862,25 @@ void Vt102Emulation::reportSecondaryAttributes()
                                   // konsoles backward compatibility.
 }
 
+/* DECREPTPARM – Report Terminal Parameters
+    ESC [ <sol>; <par>; <nbits>; <xspeed>; <rspeed>; <clkmul>; <flags> x
+
+    http://vt100.net/docs/vt100-ug/chapter3.html
+*/
 void Vt102Emulation::reportTerminalParms(int p)
-// DECREPTPARM
-{ 
-  char tmp[100];
-  sprintf(tmp,"\033[%d;1;1;112;112;1;0x",p); // not really true.
-  sendString(tmp);
+{
+    /*
+      sol=1: This message is a request; report in response to a request.
+      par=1: No parity set
+      nbits=1: 8 bits per character
+      xspeed=112: 9600
+      rspeed=112: 9600
+      clkmul=1: The bit rate multiplier is 16.
+      flags=0: None
+    */
+    // FIXME: not really true.
+    QString parms = QString("\033[%1;1;1;112;112;1;0x").arg(p);
+    sendString(parms.toLocal8Bit().constData());
 }
 
 void Vt102Emulation::reportStatus()
@@ -906,9 +920,10 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
     if ((getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1)
         cb += 0x20; //add 32 to signify motion event
 
-    char command[20];
-    sprintf(command, "\033[M%c%c%c", cb + 0x20, cx + 0x20, cy + 0x20);
-    sendString(command);
+    QString command = QString("\033[M%1%2%3").arg(QChar(cb + 0x20))
+                                             .arg(QChar(cx + 0x20))
+                                             .arg(QChar(cy + 0x20));
+    sendString(command.toLocal8Bit().constData());
 }
 
 void Vt102Emulation::sendText(const QString& text)
