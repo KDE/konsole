@@ -323,7 +323,7 @@ void KDE4ProfileWriter::writeProperties(KConfig& config,
 
     while (properties->name != 0) {
         if (properties->group != 0) {
-            if (groupName == 0 || strcmp(groupName, properties->group) != 0) {
+            if (groupName == 0 || qstrcmp(groupName, properties->group) != 0) {
                 group = config.group(properties->group);
                 groupName = properties->group;
             }
@@ -371,7 +371,7 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
 
     while (properties->name != 0) {
         if (properties->group != 0) {
-            if (groupName == 0 || strcmp(groupName, properties->group) != 0) {
+            if (groupName == 0 || qstrcmp(groupName, properties->group) != 0) {
                 group = config.group(properties->group);
                 groupName = properties->group;
             }

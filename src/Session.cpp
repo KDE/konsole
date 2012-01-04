@@ -379,12 +379,12 @@ void Session::terminalWarning(const QString& message)
     static const char redPenOn[] = "\033[1m\033[31m";
     static const char redPenOff[] = "\033[0m";
 
-    _emulation->receiveData(redPenOn, strlen(redPenOn));
+    _emulation->receiveData(redPenOn, qstrlen(redPenOn));
     _emulation->receiveData("\n\r\n\r", 4);
-    _emulation->receiveData(warningText.constData(), strlen(warningText.constData()));
-    _emulation->receiveData(messageText.constData(), strlen(messageText.constData()));
+    _emulation->receiveData(warningText.constData(), qstrlen(warningText.constData()));
+    _emulation->receiveData(messageText.constData(), qstrlen(messageText.constData()));
     _emulation->receiveData("\n\r\n\r", 4);
-    _emulation->receiveData(redPenOff, strlen(redPenOff));
+    _emulation->receiveData(redPenOff, qstrlen(redPenOff));
 }
 
 QString Session::shellSessionId() const

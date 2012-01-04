@@ -828,7 +828,7 @@ void Vt102Emulation::sendString(const char* s , int length)
   if ( length >= 0 )
     emit sendData(s,length);
   else
-    emit sendData(s,strlen(s));
+    emit sendData(s,qstrlen(s));
 }
 
 void Vt102Emulation::reportCursorPosition()
@@ -1055,7 +1055,7 @@ unsigned short Vt102Emulation::applyCharset(unsigned short c)
 void Vt102Emulation::resetCharset(int scrno)
 {
     _charset[scrno].cu_cs = 0;
-    strncpy(_charset[scrno].charset, "BBBB", 4);
+    qstrncpy(_charset[scrno].charset, "BBBB", 4);
     _charset[scrno].sa_graphic = false;
     _charset[scrno].sa_pound = false;
     _charset[scrno].graphic = false;

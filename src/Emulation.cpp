@@ -246,7 +246,7 @@ void Emulation::receiveData(const char* text, int length)
     //this check into the above for loop?
     for (int i = 0; i < length; i++) {
         if (text[i] == '\030') {
-            if ((length - i - 1 > 3) && (strncmp(text + i + 1, "B00", 3) == 0))
+            if ((length - i - 1 > 3) && (qstrncmp(text + i + 1, "B00", 3) == 0))
                 emit zmodemDetected();
         }
     }
@@ -295,7 +295,7 @@ void Emulation::receiveData(const char* text, int length)
     }
     if (s[i] == '\030')
     {
-      if ((len-i-1 > 3) && (strncmp(s+i+1, "B00", 3) == 0))
+      if ((len-i-1 > 3) && (qstrncmp(s+i+1, "B00", 3) == 0))
           emit zmodemDetected();
     }
   }
