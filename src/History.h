@@ -150,62 +150,6 @@ private:
     HistoryFile lineflags; // flags Row(unsigned char)
 };
 
-#if 0
-//////////////////////////////////////////////////////////////////////
-// Buffer-based history (limited to a fixed nb of lines)
-//////////////////////////////////////////////////////////////////////
-class HistoryScrollBuffer : public HistoryScroll
-{
-public:
-    typedef QVector<Character> HistoryLine;
-
-    HistoryScrollBuffer(unsigned int maxNbLines = 1000);
-    virtual ~HistoryScrollBuffer();
-
-    virtual int  getLines();
-    virtual int  getLineLen(int lineno);
-    virtual void getCells(int lineno, int colno, int count, Character res[]);
-    virtual bool isWrappedLine(int lineno);
-
-    virtual void addCells(const Character a[], int count);
-    virtual void addCellsVector(const QVector<Character>& cells);
-    virtual void addLine(bool previousWrapped = false);
-
-    void setMaxNbLines(unsigned int nbLines);
-
-private:
-    int bufferIndex(int lineNumber);
-
-    HistoryLine* _historyBuffer;
-    QBitArray _wrappedLine;
-    int _maxLineCount;
-    int _usedLines;
-    int _head;
-
-    //QVector<histline*> m_histBuffer;
-    //QBitArray m_wrappedLine;
-    //unsigned int m_maxNbLines;
-    //unsigned int m_nbLines;
-    //unsigned int m_arrayIndex;
-    //bool         m_buffFilled;
-};
-
-/*class HistoryScrollBufferV2 : public HistoryScroll
-{
-public:
-  virtual int  getLines();
-  virtual int  getLineLen(int lineno);
-  virtual void getCells(int lineno, int colno, int count, Character res[]);
-  virtual bool isWrappedLine(int lineno);
-
-  virtual void addCells(const Character a[], int count);
-  virtual void addCells(const QVector<Character>& cells);
-  virtual void addLine(bool previousWrapped=false);
-
-};*/
-
-#endif
-
 //////////////////////////////////////////////////////////////////////
 // Nothing-based history (no history :-)
 //////////////////////////////////////////////////////////////////////
