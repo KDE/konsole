@@ -1,5 +1,3 @@
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
 find_package(LibKonq)
 macro_log_feature(LIBKONQ_FOUND "LibKonq" "libkonq is a construction kit for a file manager. It comes from kde-baseapps." "http://www.kde.org" TRUE)
 
@@ -41,17 +39,15 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
     target_link_libraries(fontembedder  ${KDE4_KIO_LIBS} )
 
 ### Line graphics font
-    SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_BINARY_DIR}/LineFont.h PROPERTIES GENERATED 1)
 
-    add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LineFont.h
-                       COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder
-                       ${CMAKE_SOURCE_DIR}/src/LineFont.src
-                       > ${CMAKE_CURRENT_BINARY_DIR}/LineFont.h
-                       DEPENDS ${CMAKE_SOURCE_DIR}/src/LineFont.src)
+    option(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
 
-
-     ADD_CUSTOM_TARGET(generate_linefont
-                       ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/LineFont.h")
+    if(KONSOLE_GENERATE_LINEFONT)
+	    add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/LineFont.h
+                           COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder
+                           ARGS ${CMAKE_SOURCE_DIR}/LineFont.src
+                           DEPENDS ${CMAKE_SOURCE_DIR}/LineFont.src )
+    endif(KONSOLE_GENERATE_LINEFONT)
 
 ### Konsole source files shared between embedded terminal and main application
     # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
