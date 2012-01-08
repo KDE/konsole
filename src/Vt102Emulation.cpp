@@ -885,15 +885,15 @@ void Vt102Emulation::reportTerminalParms(int p)
 
 void Vt102Emulation::reportStatus()
 {
-  sendString("\033[0n"); //VT100. Device status report. 0 = Ready.
+    sendString("\033[0n"); //VT100. Device status report. 0 = Ready.
 }
 
 void Vt102Emulation::reportAnswerBack()
 {
-  // FIXME - Test this with VTTEST
-  // This is really obsolete VT100 stuff.
-  const char* ANSWER_BACK = "";
-  sendString(ANSWER_BACK);
+    // FIXME - Test this with VTTEST
+    // This is really obsolete VT100 stuff.
+    const char* ANSWER_BACK = "";
+    sendString(ANSWER_BACK);
 }
 
 /*!
@@ -921,8 +921,8 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
         cb += 0x20; //add 32 to signify motion event
 
     QString command = QString("\033[M%1%2%3").arg(QChar(cb + 0x20))
-                                             .arg(QChar(cx + 0x20))
-                                             .arg(QChar(cy + 0x20));
+                      .arg(QChar(cx + 0x20))
+                      .arg(QChar(cy + 0x20));
     sendString(command.toLocal8Bit().constData());
 }
 
@@ -958,12 +958,11 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
     }
 
     // lookup key binding
-    if ( _keyTranslator )
-    {
-    KeyboardTranslator::Entry entry = _keyTranslator->findEntry( 
-                                                event->key() , 
-                                                modifiers,
-                                                states );
+    if (_keyTranslator) {
+        KeyboardTranslator::Entry entry = _keyTranslator->findEntry(
+                                              event->key() ,
+                                              modifiers,
+                                              states);
 
         // send result to terminal
         QByteArray textToSend;
