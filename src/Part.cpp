@@ -219,8 +219,8 @@ void Part::activeViewChanged(SessionController* controller)
             SLOT(activeViewTitleChanged(ViewProperties*)));
     activeViewTitleChanged(controller);
 
-    const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*,bool&));
-    const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*,bool&));
+    const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*, bool&));
+    const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*, bool&));
 
     disconnect(controller->view(), displaySignal, this, partSlot);
     connect(controller->view(), displaySignal, this, partSlot);
