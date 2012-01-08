@@ -1048,12 +1048,12 @@
               </property>
               <item>
                <property name="text">
-                <string> The whole current line</string>
+                <string>The whole current line</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string> From mouse position to the end of line</string>
+                <string>From mouse position to the end of line</string>
                </property>
               </item>
              </widget>
