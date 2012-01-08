@@ -34,6 +34,7 @@
 // KDE
 #include <kde_file.h>
 #include <KDebug>
+#include <KStandardDirs>
 
 // Reasonable line size
 static const int LINE_SIZE = 1024 ;
@@ -53,20 +54,18 @@ using namespace Konsole;
    The implementation provides arbitrary length and numbers
    of cells and line/column indexed read access to the scroll
    at constant costs.
-
-KDE4: Can we use QTemporaryFile here, instead of KTempFile?
-
 */
 
-
 // History File ///////////////////////////////////////////
-
 HistoryFile::HistoryFile()
     : _fd(-1),
       _length(0),
       _fileMap(0),
       _readWriteBalance(0)
 {
+    QString tmpFormat = KStandardDirs::locateLocal("tmp", QString())
+                        + "konsole-XXXXXX.history";
+    _tmpFile.setFileTemplate(tmpFormat);
     if (_tmpFile.open()) {
         _tmpFile.setAutoRemove(true);
         _fd = _tmpFile.handle();

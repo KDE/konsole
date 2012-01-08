@@ -28,9 +28,7 @@
 #include <QtCore/QBitRef>
 #include <QtCore/QHash>
 #include <QtCore/QVector>
-
-// KDE
-#include <KTemporaryFile>
+#include <QtCore/QTemporaryFile>
 
 // Konsole
 #include "Character.h"
@@ -63,7 +61,7 @@ public:
 private:
     int  _fd;
     int  _length;
-    KTemporaryFile _tmpFile;
+    QTemporaryFile _tmpFile;
 
     //pointer to start of mmap'ed file data, or 0 if the file is not mmap'ed
     char* _fileMap;
