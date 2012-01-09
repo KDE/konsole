@@ -482,7 +482,10 @@ void SessionController::setupActions()
     action = collection->addAction("enlarge-font", this, SLOT(increaseTextSize()));
     action->setText(i18n("Enlarge Font"));
     action->setIcon(KIcon("format-font-size-more"));
-    action->setShortcut(KShortcut(Qt::CTRL | Qt::Key_Plus));
+    KShortcut enlargeFontShortcut = action->shortcut();
+    enlargeFontShortcut.setPrimary(QKeySequence(Qt::CTRL + Qt::Key_Plus));
+    enlargeFontShortcut.setAlternate(QKeySequence(Qt::CTRL + Qt::Key_Equal));
+    action->setShortcut(enlargeFontShortcut);
 
     action = collection->addAction("shrink-font", this, SLOT(decreaseTextSize()));
     action->setText(i18n("Shrink Font"));
