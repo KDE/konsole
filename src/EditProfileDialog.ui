@@ -433,7 +433,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="silenceSecondsLabel">
             <property name="text">
-             <string>Seconds to detect silence:</string>
+             <string>Threshold for continuous silence: </string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -443,7 +443,7 @@
           <item row="0" column="1">
            <widget class="KIntSpinBox" name="silenceSecondsSpinner">
             <property name="toolTip">
-             <string>The threshold of detected silence in seconds</string>
+             <string>The threshold for continuous silence to be deteced by Konsole</string>
             </property>
             <property name="minimum">
              <number>1</number>

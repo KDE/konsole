@@ -359,6 +359,7 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
     // tab monitoring
     int silenceSeconds = info->property<int>(Profile::SilenceSeconds);
     _ui->silenceSecondsSpinner->setValue(silenceSeconds);
+    _ui->silenceSecondsSpinner->setSuffix(ki18ncp("Unit of time", " second", " seconds"));
 
     // signals and slots
     connect(_ui->tabBarVisibilityCombo, SIGNAL(activated(int)), this,
