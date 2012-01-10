@@ -170,17 +170,3 @@ Comment[wa]=Prémetou profil pol Konsole
 Comment[x-test]=xxKonsole default profilexx
 Comment[zh_CN]=Konsole 默认配置
 Comment[zh_TW]=Konsole 預設設定檔
-Icon=utilities-terminal
-LocalTabTitleFormat=%D : %n
-RemoteTabTitleFormat=(%u) %H
-
-[Appearance]
-ColorScheme=Linux
-
-[Scrolling]
-ScrollMode=FixedLineCount
-ScrollLineCount=1000
-
-[Terminal Features]
-BidiRenderingEnabled=true
-
