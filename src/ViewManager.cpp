@@ -790,9 +790,6 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
 {
     Q_ASSERT(profile);
 
-    // menu bar visibility
-    emit setMenuBarVisibleRequest(profile->property<bool>(Profile::ShowMenuBar));
-
     emit setSaveGeometryOnExitRequest(profile->property<bool>(Profile::SaveGeometryOnExit));
 
     emit updateWindowIcon();

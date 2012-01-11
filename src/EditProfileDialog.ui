@@ -209,22 +209,6 @@
          </property>
          <layout class="QVBoxLayout">
           <item>
-           <widget class="QCheckBox" name="showMenuBarButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="toolTip">
-             <string>Show or hide the menu bar in terminal windows</string>
-            </property>
-            <property name="text">
-             <string>Show menu bar in new windows</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QCheckBox" name="saveGeometryOnExitButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">

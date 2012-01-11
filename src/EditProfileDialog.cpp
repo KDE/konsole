@@ -274,7 +274,6 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     _ui->startInSameDirButton->setChecked(info->property<bool>(Profile::StartInCurrentSessionDir));
 
     // window options
-    _ui->showMenuBarButton->setChecked(info->property<bool>(Profile::ShowMenuBar));
     _ui->showTerminalSizeHintButton->setChecked(info->property<bool>(Profile::ShowTerminalSizeHint));
     _ui->saveGeometryOnExitButton->setChecked(info->property<bool>(Profile::SaveGeometryOnExit));
 
@@ -292,8 +291,6 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     connect(_ui->environmentEditButton , SIGNAL(clicked()), this,
             SLOT(showEnvironmentEditor()));
 
-    connect(_ui->showMenuBarButton, SIGNAL(toggled(bool)), this,
-            SLOT(showMenuBar(bool)));
     connect(_ui->saveGeometryOnExitButton, SIGNAL(toggled(bool)), this,
             SLOT(saveGeometryOnExit(bool)));
     connect(_ui->showTerminalSizeHintButton, SIGNAL(toggled(bool)), this,
@@ -415,10 +412,6 @@ void EditProfileDialog::insertTabTitleText(const QString& text)
 void EditProfileDialog::insertRemoteTabTitleText(const QString& text)
 {
     _ui->remoteTabTitleEdit->insert(text);
-}
-void EditProfileDialog::showMenuBar(bool show)
-{
-    updateTempProfileProperty(Profile::ShowMenuBar, show);
 }
 void EditProfileDialog::saveGeometryOnExit(bool save)
 {

@@ -40,7 +40,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Show menu bar</string>
+           <string>Show menubar initially in Konsole window</string>
           </property>
          </widget>
         </item>

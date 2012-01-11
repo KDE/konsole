@@ -73,8 +73,6 @@ MainWindow::MainWindow()
     : KXmlGuiWindow() ,
       _bookmarkHandler(0),
       _pluggedController(0),
-      _menuBarInitialVisibility(true),
-      _menuBarInitialVisibilitySet(false),
       _menuBarInitialVisibilityApplied(false)
 {
     if (useTransparency()) {
@@ -96,8 +94,6 @@ MainWindow::MainWindow()
     connect(_viewManager , SIGNAL(viewPropertiesChanged(QList<ViewProperties*>)) ,
             bookmarkHandler() , SLOT(setViews(QList<ViewProperties*>)));
 
-    connect(_viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , this ,
-            SLOT(setMenuBarInitialVisibility(bool)));
     connect(_viewManager , SIGNAL(setSaveGeometryOnExitRequest(bool)) , this ,
             SLOT(setSaveGeometryOnExit(bool)));
     connect(_viewManager , SIGNAL(updateWindowIcon()) , this ,
@@ -144,16 +140,6 @@ void MainWindow::removeMenuAccelerators()
         itemText = KGlobal::locale()->removeAcceleratorMarker(itemText);
         menuItem->setText(itemText);
     }
-}
-void MainWindow::setMenuBarInitialVisibility(bool visible)
-{
-    // Make sure the 'initial' visibility is set only once.
-    if (_menuBarInitialVisibilitySet)
-        return;
-
-    // The initial visibility of menubar will not be applied until showEvent(),
-    _menuBarInitialVisibility    = visible ;
-    _menuBarInitialVisibilitySet = true;
 }
 
 void MainWindow::setSaveGeometryOnExit(bool save)
@@ -583,8 +569,8 @@ void MainWindow::showEvent(QShowEvent* event)
         // visibility will be determined by what is stored in konsolerc, but not
         // by the selected profile.
         //
-        menuBar()->setVisible(_menuBarInitialVisibility);
-        _toggleMenuBarAction->setChecked(_menuBarInitialVisibility);
+        menuBar()->setVisible(AppSettings::showMenuBar());
+        _toggleMenuBarAction->setChecked(AppSettings::showMenuBar());
 
         _menuBarInitialVisibilityApplied = true;
     }

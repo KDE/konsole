@@ -6,7 +6,8 @@
   <kcfgfile name="konsolerc" />
   <group name="Window">
     <entry name="ShowMenuBar" type="Bool">
-      <label>Show menu bar</label>
+      <label>Show menubar initially in Konsole window</label>
+      <tooltip>Show menubar initially in each Konsole window</tooltip>
       <default>true</default>
     </entry>
     <entry name="ShowTerminalSizeHint" type="Bool">

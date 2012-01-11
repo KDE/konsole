@@ -117,7 +117,6 @@ private slots:
     void insertTabTitleText(const QString& text);
     void insertRemoteTabTitleText(const QString& text);
 
-    void showMenuBar(bool);
     void showTerminalSizeHint(bool);
     void saveGeometryOnExit(bool);
     void showEnvironmentEditor();
