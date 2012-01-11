@@ -582,13 +582,7 @@ public:
      */
     virtual bool readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile) = 0;
 };
-/** Reads a KDE 3 profile .desktop file. */
-class KDE3ProfileReader : public ProfileReader
-{
-public:
-    virtual QStringList findProfiles();
-    virtual bool readProfile(const QString& path , Profile::Ptr profile, QString& parentProfile);
-};
+
 /** Reads a KDE 4 .profile file. */
 class KDE4ProfileReader : public ProfileReader
 {

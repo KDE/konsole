@@ -165,16 +165,7 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
         recursionGuard.push(path);
 
     // load the profile
-    ProfileReader* reader = 0;
-    if (path.endsWith(QLatin1String(".desktop")))
-        reader = 0; // new KDE3ProfileReader;
-    else
-        reader = new KDE4ProfileReader;
-
-    if (!reader) {
-        kWarning() << "Could not create loader to read profile from" << path;
-        return Profile::Ptr();
-    }
+    ProfileReader* reader = new KDE4ProfileReader;
 
     Profile::Ptr newProfile = Profile::Ptr(new Profile(fallbackProfile()));
     newProfile->setProperty(Profile::Path, path);

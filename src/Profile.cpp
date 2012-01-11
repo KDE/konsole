@@ -411,59 +411,6 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
 
     return true;
 }
-QStringList KDE3ProfileReader::findProfiles()
-{
-    return KGlobal::dirs()->findAllResources("data", "konsole/*.desktop",
-            KStandardDirs::NoDuplicates);
-}
-bool KDE3ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile)
-{
-    if (!QFile::exists(path))
-        return false;
-
-    // KDE 3 profiles do not have parents
-    parentProfile.clear();
-
-    KDesktopFile* desktopFile = new KDesktopFile(path);
-    KConfigGroup* config = new KConfigGroup(desktopFile->desktopGroup());
-
-    if (config->hasKey("Name"))
-        profile->setProperty(Profile::Name, config->readEntry("Name"));
-
-    //kDebug() << "reading KDE 3 profile " << profile->name();
-
-    if (config->hasKey("Icon"))
-        profile->setProperty(Profile::Icon, config->readEntry("Icon"));
-    if (config->hasKey("Exec")) {
-        const QString& fullCommand = config->readEntry("Exec");
-        ShellCommand shellCommand(fullCommand);
-
-        profile->setProperty(Profile::Command, shellCommand.command());
-        profile->setProperty(Profile::Arguments, shellCommand.arguments());
-    }
-    if (config->hasKey("Schema")) {
-        profile->setProperty(Profile::ColorScheme, config->readEntry("Schema").replace
-                             (".schema", QString()));
-    }
-    if (config->hasKey("defaultfont")) {
-        profile->setProperty(Profile::Font, config->readEntry("defaultfont"));
-    }
-    if (config->hasKey("KeyTab")) {
-        profile->setProperty(Profile::KeyBindings, config->readEntry("KeyTab"));
-    }
-    if (config->hasKey("Term")) {
-        profile->setProperty(Profile::Environment,
-                             QStringList() << "TERM=" + config->readEntry("Term"));
-    }
-    if (config->hasKey("Cwd")) {
-        profile->setProperty(Profile::Directory, config->readEntry("Cwd"));
-    }
-
-    delete desktopFile;
-    delete config;
-
-    return true;
-}
 
 QHash<Profile::Property, QVariant> ProfileCommandParser::parse(const QString& input)
 {
