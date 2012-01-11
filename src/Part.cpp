@@ -62,8 +62,8 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
 {
     // make sure the konsole catalog is loaded
     KGlobal::locale()->insertCatalog("konsole");
-
-
+    // make sure the libkonq catalog is loaded( needed for drag & drop )
+    KGlobal::locale()->insertCatalog("libkonq");
 
     // setup global actions
     createGlobalActions();
