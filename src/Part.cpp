@@ -43,7 +43,6 @@
 #include "SessionManager.h"
 #include "TerminalDisplay.h"
 #include "ViewManager.h"
-#include "MainWindow.h"
 
 #include <config-konsole.h>
 
