@@ -183,6 +183,8 @@ private slots:
 
     void openUrls(const QList<KUrl>& urls);
 
+    void applyAppSettings();
+
 private:
     void correctShortcuts();
     void removeMenuAccelerators();
