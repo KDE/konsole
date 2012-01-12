@@ -692,7 +692,7 @@
              <string>Disable scroll bar and do not remember previous output</string>
             </property>
             <property name="text">
-             <string>Disable scrollback</string>
+             <string>No scrollback</string>
             </property>
            </widget>
           </item>
@@ -710,7 +710,7 @@
                <string>Limit the remembered output to a fixed number of lines</string>
               </property>
               <property name="text">
-               <string>Fixed number of lines: </string>
+               <string>Fixed size scrollback: </string>
               </property>
              </widget>
             </item>
