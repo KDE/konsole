@@ -30,6 +30,7 @@
 
 // KDE
 #include <KAction>
+#include <KActionCollection>
 #include <KCmdLineArgs>
 #include <KUrl>
 #include <KDebug>
@@ -373,15 +374,15 @@ void Application::startBackgroundMode(MainWindow* window)
         return;
     }
 
-    KAction* action = new KAction(window);
+    KAction* action = window->actionCollection()->addAction("toggle-background-window");
     action->setObjectName(QLatin1String("Konsole Background Mode"));
-    // TODO - Customizable key sequence for this
+    action->setText(i18n("Toggle Background Window"));
     action->setGlobalShortcut(KShortcut(QKeySequence(Qt::Key_F12)));
 
-    _backgroundInstance = window;
+    connect(action, SIGNAL(triggered()),
+            this, SLOT(toggleBackgroundInstance()));
 
-    connect(action, SIGNAL(triggered()), this,
-            SLOT(toggleBackgroundInstance()));
+    _backgroundInstance = window;
 }
 
 void Application::toggleBackgroundInstance()
