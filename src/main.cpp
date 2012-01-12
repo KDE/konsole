@@ -87,18 +87,23 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 }
 bool shouldUseNewProcess()
 {
+    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+
+    // the only way to create new tab is to reuse existing Konsole process.
+    if ( args->isSet("new-tab") ) {
+        return false;
+    }
+
     // when starting Konsole from a terminal, a new process must be used
     // so that the current environment is propagated into the shells of the new
     // Konsole and any debug output or warnings from Konsole are written to
     // the current terminal
-    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-
     bool hasControllingTTY = false ;
     if ( open("/dev/tty", O_RDONLY) != -1 ) {
         hasControllingTTY = true ;
     }
 
-    return hasControllingTTY && !args->isSet("new-tab");
+    return hasControllingTTY;
 }
 
 void fillCommandLineOptions(KCmdLineOptions& options)
