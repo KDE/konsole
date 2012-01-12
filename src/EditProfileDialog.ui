@@ -433,7 +433,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="silenceSecondsLabel">
             <property name="text">
-             <string>Threshold for continuous silence: </string>
+             <string>Threshold for continuous silence:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -710,7 +710,7 @@
                <string>Limit the remembered output to a fixed number of lines</string>
               </property>
               <property name="text">
-               <string>Fixed size scrollback: </string>
+               <string>Fixed size scrollback:</string>
               </property>
              </widget>
             </item>
@@ -1013,7 +1013,7 @@
             <item>
              <widget class="QLabel" name="label_11">
               <property name="text">
-               <string>Characters considered part of a word when double clicking: </string>
+               <string>Characters considered part of a word when double clicking:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1037,7 +1037,7 @@
             <item>
              <widget class="QLabel" name="label_17">
               <property name="text">
-               <string>Triple-click select: </string>
+               <string>Triple-click select:</string>
               </property>
              </widget>
             </item>
