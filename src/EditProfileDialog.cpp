@@ -1045,7 +1045,7 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     int historySize = profile->property<int>(Profile::HistorySize);
     _ui->scrollBackLinesSpinner->setValue(historySize);
     _ui->scrollBackLinesSpinner->setSingleStep(historySize / 10);
-
+    _ui->scrollBackLinesSpinner->setSuffix(ki18ncp("Unit of scrollback", " line", " lines"));
 
     // signals and slots
     connect(_ui->scrollBackLinesSpinner, SIGNAL(valueChanged(int)), this,

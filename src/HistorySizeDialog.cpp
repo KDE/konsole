@@ -74,17 +74,15 @@ HistorySizeDialog::HistorySizeDialog(QWidget* parent)
 
     _lineCountBox->setValue(HistorySizeDialog::defaultLineCount);
     _lineCountBox->setSingleStep(HistorySizeDialog::defaultLineCount / 10);
+    _lineCountBox->setSuffix(ki18ncp("Unit of scrollback", " line", " lines"));
 
     _fixedHistoryButton->setFocusProxy(_lineCountBox);
     connect(_fixedHistoryButton , SIGNAL(clicked()) ,
             _lineCountBox , SLOT(selectAll()));
 
-    QLabel* lineCountLabel = new QLabel(i18n("lines"), this);
-
     QHBoxLayout* lineCountLayout = new QHBoxLayout();
     lineCountLayout->addWidget(_fixedHistoryButton);
     lineCountLayout->addWidget(_lineCountBox);
-    lineCountLayout->addWidget(lineCountLabel);
 
     QLabel* warningLabel = new QLabel(i18n("<center>The adjustment is only temporary</center>"), this);
     warningLabel->setStyleSheet("text-align:center; font-weight:normal; color:palette(dark)");
