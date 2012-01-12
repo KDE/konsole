@@ -814,7 +814,7 @@
              <string>Hide the scroll bar</string>
             </property>
             <property name="text">
-             <string comment="@option:radio Conceal the scroll bar">Hidden</string>
+             <string comment="@option:radio Hide the scroll bar">Hide</string>
             </property>
            </widget>
           </item>
