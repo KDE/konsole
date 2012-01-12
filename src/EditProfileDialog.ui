@@ -689,7 +689,7 @@
              </sizepolicy>
             </property>
             <property name="toolTip">
-             <string>Disable scroll bar and do not remember previous output</string>
+             <string>Do not remember previous output</string>
             </property>
             <property name="text">
              <string>No scrollback</string>
