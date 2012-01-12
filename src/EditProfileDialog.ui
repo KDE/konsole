@@ -674,7 +674,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_6">
          <property name="title">
-          <string>Scrolling</string>
+          <string>Scrollback</string>
          </property>
          <property name="flat">
           <bool>true</bool>
