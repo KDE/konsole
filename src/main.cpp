@@ -23,6 +23,8 @@
 
 // Unix
 #include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 // KDE
 #include <KAboutData>
@@ -30,9 +32,6 @@
 #include <KLocale>
 
 #define KONSOLE_VERSION "2.8.999"
-
-// standard input file descriptor
-static const int STDIN = 0;
 
 using Konsole::Application;
 
@@ -93,7 +92,13 @@ bool shouldUseNewProcess()
     // Konsole and any debug output or warnings from Konsole are written to
     // the current terminal
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-    return isatty(STDIN) && !args->isSet("new-tab");
+
+    bool hasControllingTTY = false ;
+    if ( open("/dev/tty", O_RDONLY) != -1 ) {
+        hasControllingTTY = true ;
+    }
+
+    return hasControllingTTY && !args->isSet("new-tab");
 }
 
 void fillCommandLineOptions(KCmdLineOptions& options)
