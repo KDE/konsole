@@ -7,7 +7,6 @@ endif()
 
 ### Compile-time features
 macro_optional_find_package(XKB)
-macro_bool_to_01(X11_Xrender_FOUND HAVE_XRENDER)
 macro_log_feature(XKB_FOUND "XKB" "X keyboard extension" "http://www.x.org" FALSE "" "Gives Konsole better keyboard support.")
 
 include(CheckIncludeFiles)
