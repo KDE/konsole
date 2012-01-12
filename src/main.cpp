@@ -101,10 +101,9 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("profile <file>",
                 ki18n("Name of profile to use for new Konsole instance"));
     options.add("list-profiles", ki18n("List the available profiles"));
-    // TODO - Update this when F12 is no longer hard coded
     options.add("background-mode",
                 ki18n("Start Konsole in the background and bring to the front"
-                      " when the F12 key is pressed"));
+                      " when Ctrl+Shift+F12 (by default) is pressed"));
     options.add("new-tab",
                 ki18n("Create a new tab in an existing window rather than"
                       " creating a new window"));
