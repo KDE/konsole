@@ -116,37 +116,37 @@ bool shouldUseNewProcess()
 
 void fillCommandLineOptions(KCmdLineOptions& options)
 {
-    options.add("profile <file>",
+    options.add("profile <name>",
                 ki18n("Name of profile to use for new Konsole instance"));
-    options.add("list-profiles", ki18n("List the available profiles"));
-    options.add("background-mode",
-                ki18n("Start Konsole in the background and bring to the front"
-                      " when Ctrl+Shift+F12 (by default) is pressed"));
+    options.add("!e <cmd>", ki18n("Command to execute"));
+    options.add("workdir <dir>",
+                ki18n("Set the initial working directory of the new tab or"
+                      " window to 'dir'"));
+    options.add("hold");
+    options.add("noclose",
+                ki18n("Do not close the initial session automatically when it"
+                      " ends."));
     options.add("new-tab",
                 ki18n("Create a new tab in an existing window rather than"
                       " creating a new window"));
     options.add("tabs-from-file <file>",
                 ki18n("Create tabs as specified in given tabs configuration"
                       " file"));
-    options.add("workdir <dir>",
-                ki18n("Set the initial working directory of the new tab or"
-                      " window to 'dir'"));
+    options.add("background-mode",
+                ki18n("Start Konsole in the background and bring to the front"
+                      " when Ctrl+Shift+F12 (by default) is pressed"));
     options.add("notransparency",
                 ki18n("Disable transparent backgrounds, even if the system"
                       " supports them."));
     options.add("force-transparency",
                 ki18n("Try to enable transparency, even if the system does"
                       " not appear to support it."));
-    options.add("hold");
-    options.add("noclose",
-                ki18n("Do not close the initial session automatically when it"
-                      " ends."));
-    options.add("p <property=value>",
-                ki18n("Change the value of a profile property."));
+    options.add("list-profiles", ki18n("List the available profiles"));
     options.add("list-profile-properties",
                 ki18n("List all the profile properties names and their type"
                       " (for use with -p)"));
-    options.add("!e <cmd>", ki18n("Command to execute"));
+    options.add("p <property=value>",
+                ki18n("Change the value of a profile property."));
     options.add("+[args]", ki18n("Arguments passed to command"));
     options.add("", ki18n("Use --nofork to run in the foreground (helpful"
                           " with the -e option)."));
