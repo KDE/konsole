@@ -118,7 +118,6 @@ void fillCommandLineOptions(KCmdLineOptions& options)
 {
     options.add("profile <name>",
                 ki18n("Name of profile to use for new Konsole instance"));
-    options.add("!e <cmd>", ki18n("Command to execute"));
     options.add("workdir <dir>",
                 ki18n("Set the initial working directory of the new tab or"
                       " window to 'dir'"));
@@ -147,6 +146,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
                       " (for use with -p)"));
     options.add("p <property=value>",
                 ki18n("Change the value of a profile property."));
+    options.add("!e <cmd>", ki18n("Command to execute"));
     options.add("+[args]", ki18n("Arguments passed to command"));
     options.add("", ki18n("Use --nofork to run in the foreground (helpful"
                           " with the -e option)."));
