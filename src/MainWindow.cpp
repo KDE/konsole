@@ -121,7 +121,7 @@ MainWindow::MainWindow()
     // defined in ui_standards.rc to be re-defined in the local application
     // XMLGUI file (konsoleui.rc in this case) - the text for standard items
     // can then be redefined there to exclude the standard accelerators
-    removeMenuAccelerators();
+    //removeMenuAccelerators();
     // replace standard shortcuts which cannot be used in a terminal
     // (as they are reserved for use by terminal programs)
     correctShortcuts();
@@ -516,6 +516,9 @@ void MainWindow::showSettingsDialog()
 
 void MainWindow::applyAppSettings()
 {
+    if ( !AppSettings::allowMenuAccelerators() ) {
+        removeMenuAccelerators();
+    }
     // setAutoSaveSettings("MainWindow", AppSettings::saveGeometryOnExit());
 }
 

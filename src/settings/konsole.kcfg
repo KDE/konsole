@@ -20,6 +20,11 @@
       <tooltip>The window size will be saved upon exiting Konsole</tooltip>
       <default>true</default>
     </entry>
+    <entry name="AllowMenuAccelerators" type="Bool">
+      <label>Enable menu accelerators</label>
+      <tooltip>Allow users to access top menu through Alt+Key combination</tooltip>
+      <default>false</default>
+    </entry>
   </group>
   <group name="TabBar">
     <entry name="TabBarMode" type="Enum">
