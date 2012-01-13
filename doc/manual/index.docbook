@@ -1127,6 +1127,14 @@ Of course, users still can run login shell in &konsole; if they really need to. 
 </para>
 </listitem>
 
+<listitem><para>
+The <option>--new-tab</option> option sometimes behaves strangely. It may create new window, or it may create new tab in another existing &konsole; window instead of the current &konsole; window. 
+</para>
+<para>
+Those behaviors feel strange, but they are not necessarily bugs. The <option>--new-tab</option> option tries to reuse existing &konsole; windows, but not all &konsole; windows are reusable. All &konsole; windows opened through &krunner; are reusable, while most &konsole; windows opened from command line are not.
+</para>
+</listitem>
+
 </itemizedlist>
 
 </sect1>
