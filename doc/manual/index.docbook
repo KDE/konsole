@@ -809,7 +809,7 @@ can be specified to modify its behavior.</para>
 <variablelist>
 <varlistentry>
 <term><option>--help</option></term>
-<listitem><para><action>List the various options</action>.</para></listitem>
+<listitem><para><action>List various options</action>.</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -820,13 +820,19 @@ instead of the default profile.</para></listitem>
 
 <varlistentry>
 <term><option>--list-profiles</option></term>
-<listitem><para><action>List</action> all of the available profiles.
+<listitem><para><action>List</action> all available profiles.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--list-profile-properties</option></term>
+<listitem><para><action>List</action> all possible properties with name and type. See option <option>-p</option> .
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><option>--background-mode</option></term>
-<listitem><para><action>Start &konsole;</action> in the background and bring to the front when the F12 key is pressed.
+<listitem><para><action>Start &konsole;</action> in the background and bring to the front when Ctrl+Shift+F12 (by default) is pressed.
 </para></listitem>
 </varlistentry>
 
@@ -880,14 +886,13 @@ title: This is the title;; command: run me
 <term><option>-e</option> <parameter>command</parameter></term>
 <listitem><para><action>Execute</action>
 <parameter>command</parameter> instead of the normal shell.</para>
-<note><para>Any arguments after <parameter>command</parameter> will be passed to
-<parameter>command</parameter>, not &konsole;.</para></note>
+<note><para>This option will catch all following arguments passed to &konsole;, and execute it as <parameter>command</parameter>. So this option should always be used as the last option.</para></note>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term><option>--nofork</option></term>
-<listitem><para><action>Do not run in the background</action>.  This is often needed to mimic other terminals.
+<listitem><para><action>Do not run in the background</action>.  This is often needed to mimic other terminal emulators.
 </para></listitem>
 </varlistentry>
 
