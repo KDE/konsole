@@ -125,8 +125,9 @@ void ProfileList::syncWidgetActions(QWidget* widget, bool sync)
     _registeredWidgets.insert(widget);
 
     const QList<QAction*> currentActions = widget->actions();
-    foreach(QAction * currentAction, currentActions)
-    widget->removeAction(currentAction);
+    foreach(QAction * currentAction, currentActions) {
+        widget->removeAction(currentAction);
+    }
 
     widget->addActions(_group->actions());
 }
@@ -144,16 +145,18 @@ void ProfileList::favoriteChanged(Profile::Ptr info, bool isFavorite)
 
         updateAction(action, info);
 
-        foreach(QWidget * widget, _registeredWidgets)
-        widget->addAction(action);
+        foreach(QWidget * widget, _registeredWidgets) {
+            widget->addAction(action);
+        }
         emit actionsChanged(_group->actions());
     } else {
         QAction* action = actionForKey(info);
 
         if (action) {
             _group->removeAction(action);
-            foreach(QWidget * widget, _registeredWidgets)
-            widget->removeAction(action);
+            foreach(QWidget * widget, _registeredWidgets) {
+                widget->removeAction(action);
+            }
             emit actionsChanged(_group->actions());
         }
     }

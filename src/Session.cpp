@@ -599,8 +599,9 @@ void Session::updateFlowControlState(bool suspended)
             }
         }
     } else {
-        foreach(TerminalDisplay * display, _views)
-        display->outputSuspended(false);
+        foreach(TerminalDisplay * display, _views) {
+            display->outputSuspended(false);
+        }
     }
 }
 

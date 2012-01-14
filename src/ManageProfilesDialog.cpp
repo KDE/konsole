@@ -372,8 +372,9 @@ void ManageProfilesDialog::editSelected()
     EditProfileDialog dialog(this);
     // the dialog will delete the profile group when it is destroyed
     ProfileGroup* group = new ProfileGroup;
-    foreach(const Profile::Ptr & profile, selectedProfiles())
-    group->addProfile(profile);
+    foreach(const Profile::Ptr & profile, selectedProfiles()) {
+        group->addProfile(profile);
+    }
     group->updateValues();
 
     dialog.setProfile(Profile::Ptr(group));

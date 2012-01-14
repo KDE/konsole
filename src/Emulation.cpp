@@ -129,8 +129,9 @@ void Emulation::setScreen(int n)
     _currentScreen = _screen[n & 1];
     if (_currentScreen != old) {
         // tell all windows onto this emulation to switch to the newly active screen
-        foreach(ScreenWindow * window, _windows)
-        window->setScreen(_currentScreen);
+        foreach(ScreenWindow * window, _windows) {
+            window->setScreen(_currentScreen);
+        }
 
         checkScreenInUse();
         checkSelectedText();

@@ -79,8 +79,9 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
 
     setWidget(_viewManager->widget());
     actionCollection()->addAssociatedWidget(_viewManager->widget());
-    foreach(QAction * action, actionCollection()->actions())
-    action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+    foreach(QAction * action, actionCollection()->actions()) {
+        action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+    }
 
     // Enable translucency support.
     _viewManager->widget()->setAttribute(Qt::WA_TranslucentBackground, true);

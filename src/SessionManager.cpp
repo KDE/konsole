@@ -110,8 +110,9 @@ SessionManager::~SessionManager()
         kWarning() << "Konsole SessionManager destroyed with sessions still alive";
         // ensure that the Session doesn't later try to call back and do things to the
         // SessionManager
-        foreach(Session * session , _sessions)
-        disconnect(session , 0 , this , 0);
+        foreach(Session * session , _sessions) {
+            disconnect(session , 0 , this , 0);
+        }
     }
 }
 
@@ -406,8 +407,9 @@ void SessionManager::changeProfile(Profile::Ptr profile,
     // is saved to disk
     ProfileGroup::Ptr group = profile->asGroup();
     if (group) {
-        foreach(const Profile::Ptr & profile, group->profiles())
-        changeProfile(profile, propertyMap, persistent);
+        foreach(const Profile::Ptr & profile, group->profiles()) {
+            changeProfile(profile, propertyMap, persistent);
+        }
         return;
     }
 
@@ -824,10 +826,10 @@ void SessionManager::restoreSessions(KConfig* config)
 Session* SessionManager::idToSession(int id)
 {
     Q_ASSERT(id);
-    foreach(Session * session, _sessions)
-    if (session->sessionId() == id)
-        return session;
-
+    foreach(Session * session, _sessions) {
+        if (session->sessionId() == id)
+            return session;
+    }
     // this should not happen
     Q_ASSERT(0);
     return 0;
@@ -842,8 +844,9 @@ void SessionListModel::setSessions(const QList<Session*>& sessions)
 {
     _sessions = sessions;
 
-    foreach(Session * session, sessions)
-    connect(session, SIGNAL(finished()), this, SLOT(sessionFinished()));
+    foreach(Session * session, sessions) {
+        connect(session, SIGNAL(finished()), this, SLOT(sessionFinished()));
+    }
 
     reset();
 }

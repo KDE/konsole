@@ -106,8 +106,9 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     setupActions();
     actionCollection()->addAssociatedWidget(view);
-    foreach(QAction * action, actionCollection()->actions())
-    action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+    foreach(QAction * action, actionCollection()->actions()) {
+        action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+    }
 
     setIdentifier(++_lastControllerId);
     sessionTitleChanged();
@@ -1128,8 +1129,9 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
             // If the close action was chosen, the popup menu will be partially
             // destroyed at this point, and the rest will be destroyed later by
             // 'chosen->trigger()'
-            foreach(QAction * action, contentActions)
-            popup->removeAction(action);
+            foreach(QAction * action, contentActions) {
+                popup->removeAction(action);
+            }
 
             delete contentSeparator;
         }

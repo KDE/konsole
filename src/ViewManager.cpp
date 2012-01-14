@@ -977,10 +977,11 @@ void ViewManager::saveSessions(KConfigGroup& group)
 
     // second: all other sessions, in random order
     // we don't want to have sessions restored that are not connected
-    foreach(Session * session, _sessionMap)
-    if (!unique.contains(session)) {
-        ids << SessionManager::instance()->getRestoreId(session);
-        unique.insert(session, 1);
+    foreach(Session * session, _sessionMap) {
+        if (!unique.contains(session)) {
+            ids << SessionManager::instance()->getRestoreId(session);
+            unique.insert(session, 1);
+        }
     }
 
     group.writeEntry("Sessions", ids);

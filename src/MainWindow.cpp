@@ -464,8 +464,9 @@ void MainWindow::showShortcutsDialog()
     KShortcutsDialog dialog(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsDisallowed, this);
 
     // add actions from this window and the current session controller
-    foreach(KXMLGUIClient * client, guiFactory()->clients())
-    dialog.addCollection(client->actionCollection());
+    foreach(KXMLGUIClient * client, guiFactory()->clients()) {
+        dialog.addCollection(client->actionCollection());
+    }
 
     if (dialog.configure()) {
         // sync shortcuts for non-session actions (defined in "konsoleui.rc") in other main windows
