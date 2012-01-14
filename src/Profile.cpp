@@ -69,6 +69,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     , { Icon , "Icon" , GENERAL_GROUP , QVariant::String }
     , { Command , "Command" , 0 , QVariant::String }
     , { Arguments , "Arguments" , 0 , QVariant::StringList }
+    , { MenuIndex, "MenuIndex" , 0, QVariant::String }
     , { Environment , "Environment" , GENERAL_GROUP , QVariant::StringList }
     , { Directory , "Directory" , GENERAL_GROUP , QVariant::String }
     , { LocalTabTitleFormat , "LocalTabTitleFormat" , GENERAL_GROUP , QVariant::String }
@@ -82,7 +83,6 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     , { NewTabBehavior , "NewTabBehavior" , GENERAL_GROUP , QVariant::Int }
     , { StartInCurrentSessionDir , "StartInCurrentSessionDir" , GENERAL_GROUP , QVariant::Bool }
     , { ShowNewAndCloseTabButtons, "ShowNewAndCloseTabButtons" , GENERAL_GROUP , QVariant::Bool }
-    , { MenuIndex, "MenuIndex" , GENERAL_GROUP , QVariant::String }
     , { SilenceSeconds, "SilenceSeconds" , GENERAL_GROUP , QVariant::Int }
 
     // Appearance
