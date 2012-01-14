@@ -48,7 +48,6 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     setCaption(i18nc("@title:window", "Manage Profiles"));
     setButtons(KDialog::Close);
 
-    //connect( this, SIGNAL(applyClicked()) , this , SLOT(setMenuOrder()) );
     connect(this, SIGNAL(finished()),
             SessionManager::instance(), SLOT(saveSettings()));
 
@@ -139,19 +138,6 @@ void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
         }
     }
 
-}
-
-void ManageProfilesDialog::setMenuOrder(void)
-{
-    return;
-// TODO fix
-    /*
-        for (int i=0;i<_sessionModel->rowCount();i++)
-        {
-        }
-
-        SessionManager::instance()->setMenuOrder();
-    */
 }
 
 int ManageProfilesDialog::rowForProfile(const Profile::Ptr profile) const
@@ -285,18 +271,12 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
     const bool isNotDefault = (selectedRows > 0) && currentProfile() != manager->defaultProfile();
     const bool isDeletable = (selectedRows > 1) ||
                              (selectedRows == 1 && isProfileDeletable(currentProfile()));
-    //const int rowIndex = _ui->sessionTable->currentIndex().row();
 
     _ui->newProfileButton->setEnabled(selectedRows < 2);
     _ui->editProfileButton->setEnabled(selectedRows > 0);
     // do not allow the default session type to be removed
     _ui->deleteProfileButton->setEnabled(isDeletable && isNotDefault);
     _ui->setAsDefaultButton->setEnabled(isNotDefault && (selectedRows < 2));
-
-    // TODO handle multiple moves
-    // TODO re-enable when saving profile order works - khindenburg
-//    _ui->moveUpButton->setEnabled((selectedRows == 1) && (rowIndex > 0));
-//    _ui->moveDownButton->setEnabled((selectedRows == 1) && (rowIndex < (_sessionModel->rowCount()-1)));
 
 }
 void ManageProfilesDialog::deleteSelected()
