@@ -85,7 +85,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 }
 bool shouldUseNewProcess()
 {
-    KCmdLineArgs* konsoleArgs = KCmdLineArgs::parsedArgs();
+    const KCmdLineArgs* konsoleArgs = KCmdLineArgs::parsedArgs();
 
     // the only way to create new tab is to reuse existing Konsole process.
     if ( konsoleArgs->isSet("new-tab") ) {
@@ -101,12 +101,12 @@ bool shouldUseNewProcess()
         hasControllingTTY = true ;
     }
 
-    KCmdLineArgs* kUniqueAppArgs = KCmdLineArgs::parsedArgs("kuniqueapp");
+    const KCmdLineArgs* kUniqueAppArgs = KCmdLineArgs::parsedArgs("kuniqueapp");
 
     // when user asks konsole to run in foreground through the --nofork option
     // provided by KUniqueApplication, we must use new process. Otherwise, there
     // will be no process for users to wait for finishing.
-    bool shouldRunInForeground = !kUniqueAppArgs->isSet("fork");
+    const bool shouldRunInForeground = !kUniqueAppArgs->isSet("fork");
 
     return hasControllingTTY || shouldRunInForeground ;
 

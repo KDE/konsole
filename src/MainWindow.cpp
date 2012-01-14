@@ -53,16 +53,15 @@
 #include "ManageProfilesDialog.h"
 #include "Session.h"
 #include "ViewManager.h"
-#include "ViewSplitter.h"
 #include "SessionManager.h"
 
 using namespace Konsole;
 
 static bool useTransparency()
 {
-    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-    bool compositingAvailable = KWindowSystem::compositingActive() ||
-                                args->isSet("force-transparency");
+    const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+    const bool compositingAvailable = KWindowSystem::compositingActive() ||
+                                      args->isSet("force-transparency");
     return compositingAvailable && args->isSet("transparency");
 }
 
