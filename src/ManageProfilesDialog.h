@@ -97,8 +97,6 @@ private slots:
     void updateItems(const Profile::Ptr);
     void removeItems(const Profile::Ptr);
 
-    void setMenuOrder(void);
-
 private:
     Profile::Ptr currentProfile() const;
     QList<Profile::Ptr> selectedProfiles() const;
