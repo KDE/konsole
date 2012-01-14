@@ -21,10 +21,8 @@
 #include "Application.h"
 #include "MainWindow.h"
 
-// Unix
-#include <unistd.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+// OS specifc
+#include <kde_file.h>
 
 // KDE
 #include <KAboutData>
@@ -99,7 +97,7 @@ bool shouldUseNewProcess()
     // Konsole and any debug output or warnings from Konsole are written to
     // the current terminal
     bool hasControllingTTY = false ;
-    if ( open("/dev/tty", O_RDONLY) != -1 ) {
+    if ( KDE_open("/dev/tty", O_RDONLY) != -1 ) {
         hasControllingTTY = true ;
     }
 
