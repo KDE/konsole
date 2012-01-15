@@ -113,6 +113,9 @@ MainWindow::MainWindow()
 
     // create menus
     createGUI();
+
+    rememberMenuAccelerators();
+
     // remove accelerators for standard menu items (eg. &File, &View, &Edit)
     // etc. which are defined in kdelibs/kdeui/xmlgui/ui_standards.rc, again,
     // to avoid conflicting with Alt+[Letter] terminal shortcuts
@@ -122,6 +125,7 @@ MainWindow::MainWindow()
     // XMLGUI file (konsoleui.rc in this case) - the text for standard items
     // can then be redefined there to exclude the standard accelerators
     //removeMenuAccelerators();
+
     // replace standard shortcuts which cannot be used in a terminal
     // (as they are reserved for use by terminal programs)
     correctShortcuts();
@@ -133,11 +137,28 @@ MainWindow::MainWindow()
     applyAppSettings();
     connect(AppSettings::self(), SIGNAL(configChanged()), this, SLOT(applyAppSettings()));
 }
+
+void MainWindow::rememberMenuAccelerators()
+{
+    foreach(QAction * menuItem, menuBar()->actions()) {
+        QString itemText = menuItem->text();
+        menuItem->setData(itemText);
+    }
+}
+
 void MainWindow::removeMenuAccelerators()
 {
     foreach(QAction * menuItem, menuBar()->actions()) {
         QString itemText = menuItem->text();
         itemText = KGlobal::locale()->removeAcceleratorMarker(itemText);
+        menuItem->setText(itemText);
+    }
+}
+
+void MainWindow::recoverMenuAccelerators()
+{
+    foreach(QAction * menuItem, menuBar()->actions()) {
+        QString itemText = menuItem->data().toString();
         menuItem->setText(itemText);
     }
 }
@@ -516,9 +537,13 @@ void MainWindow::showSettingsDialog()
 
 void MainWindow::applyAppSettings()
 {
-    if ( !AppSettings::allowMenuAccelerators() ) {
+    if ( AppSettings::allowMenuAccelerators() ) {
+        recoverMenuAccelerators();
+    }
+    else {
         removeMenuAccelerators();
     }
+
     // setAutoSaveSettings("MainWindow", AppSettings::saveGeometryOnExit());
 }
 

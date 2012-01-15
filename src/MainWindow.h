@@ -183,7 +183,9 @@ private slots:
 
 private:
     void correctShortcuts();
+    void rememberMenuAccelerators();
     void removeMenuAccelerators();
+    void recoverMenuAccelerators();
     void setupActions();
     void setupWidgets();
     QString activeSessionDir() const;
