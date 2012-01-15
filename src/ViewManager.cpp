@@ -997,8 +997,6 @@ void ViewManager::restoreSessions(const KConfigGroup& group)
     foreach(int id, ids) {
         Session* session = SessionManager::instance()->idToSession(id);
         createView(session);
-        if (!session->isRunning())
-            session->run();
         if (tab++ == activeTab)
             display = dynamic_cast<TerminalDisplay*>(activeView());
     }
@@ -1012,8 +1010,6 @@ void ViewManager::restoreSessions(const KConfigGroup& group)
         Profile::Ptr profile = SessionManager::instance()->defaultProfile();
         Session* session = SessionManager::instance()->createSession(profile);
         createView(session);
-        if (!session->isRunning())
-            session->run();
     }
 }
 
@@ -1042,7 +1038,6 @@ int ViewManager::newSession()
     Session* session = SessionManager::instance()->createSession(profile);
 
     this->createView(session);
-    session->run();
 
     return session->sessionId();
 }
@@ -1069,7 +1064,6 @@ int ViewManager::newSession(QString profile, QString directory)
     session->setInitialWorkingDirectory(directory);
 
     this->createView(session);
-    session->run();
 
     return session->sessionId();
 }
