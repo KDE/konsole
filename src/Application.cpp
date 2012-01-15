@@ -465,7 +465,6 @@ Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url,
     // starts.  some applications such as GNU Screen and Midnight Commander
     // don't like this happening
     viewManager->createView(session);
-    session->run();
 
     return session;
 }
