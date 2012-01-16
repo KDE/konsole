@@ -1070,8 +1070,10 @@ QStringList ViewManager::profileList()
     QList<Profile::Ptr>::iterator i = profilelist.begin();
     QStringList list;
     while (i != profilelist.end()) {
-        Profile::Ptr ptr = *i;
-        list.push_back(ptr->name());
+        Profile::Ptr profile = *i;
+        if (!profile->isHidden()) {
+            list.push_back(profile->name());
+        }
         i++;
     }
 
