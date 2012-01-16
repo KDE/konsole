@@ -21,7 +21,7 @@
 #include "Application.h"
 #include "MainWindow.h"
 
-// OS specifc
+// OS specific
 #include <kde_file.h>
 
 // KDE
