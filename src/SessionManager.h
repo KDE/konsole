@@ -332,7 +332,17 @@ private:
     // returns true )
     void applyProfile(Session* session , const Profile::Ptr profile , bool modifiedPropertiesOnly);
 
-    QSet<Profile::Ptr> _profiles;
+    QSet<Profile::Ptr> _profiles;  // list of all loaded profiles
+    QSet<Profile::Ptr> _favorites; // list of favorite profiles
+
+    Profile::Ptr _defaultProfile;
+    Profile::Ptr _fallbackProfile;
+
+    bool _loadedAllProfiles; // set to true after loadAllProfiles has been called
+    bool _loadedFavorites; // set to true after loadFavorites has been called
+
+    QList<Session*> _sessions; // list of running sessions
+
     QHash<Session*, Profile::Ptr> _sessionProfiles;
     QHash<Session*, Profile::Ptr> _sessionRuntimeProfiles;
     QHash<Session*, int> _restoreMapping;
@@ -343,15 +353,6 @@ private:
     };
     QMap<QKeySequence, ShortcutData> _shortcuts; // shortcut keys -> profile path
 
-    QList<Session*> _sessions; // list of running sessions
-
-    Profile::Ptr _defaultProfile;
-    Profile::Ptr _fallbackProfile;
-
-    QSet<Profile::Ptr> _favorites; // list of favorite profiles
-
-    bool _loadedAllProfiles; // set to true after loadAllProfiles has been called
-    bool _loadedFavorites; // set to true after loadFavorites has been called
     QSignalMapper* _sessionMapper;
 };
 
