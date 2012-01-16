@@ -65,7 +65,6 @@ public:
      * profiles.
      */
     SessionManager();
-    void setMenuOrder();
 
     /**
      * Destroys the SessionManager. All running sessions should be closed
@@ -241,10 +240,6 @@ public:
      */
     void loadAllProfiles();
 
-    /**
-     * Sets the global session manager instance.
-     */
-    static void setInstance(SessionManager* instance);
     /**
      * Returns the session manager instance.
      */
