@@ -315,6 +315,12 @@ private:
     void loadFavorites();
     //saves the set of favorite sessions
     void saveFavorites();
+
+    // records which profile is set as the default profile
+    // Note: it does not save the profile itself into disk. That is
+    // what saveProfile() does.
+    void saveDefaultProfile();
+
     // saves a profile to a file
     // returns the path to which the profile was saved, which will
     // be the same as the path property of profile if valid or a newly generated path

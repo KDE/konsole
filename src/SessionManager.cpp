@@ -259,7 +259,7 @@ void SessionManager::sortProfiles(QList<Profile::Ptr>& list)
 void SessionManager::saveSettings()
 {
     // save default profile
-    setDefaultProfile(_defaultProfile);
+    saveDefaultProfile();
 
     // save shortcuts
     saveShortcuts();
@@ -570,16 +570,20 @@ bool SessionManager::deleteProfile(Profile::Ptr type)
 
     return true;
 }
+
 void SessionManager::setDefaultProfile(Profile::Ptr profile)
 {
     Q_ASSERT(_profiles.contains(profile));
 
     _defaultProfile = profile;
+}
 
-    QString path = profile->path();
+void SessionManager::saveDefaultProfile()
+{
+    QString path = _defaultProfile->path();
 
     if (path.isEmpty())
-        path = KDE4ProfileWriter().getPath(profile);
+        path = KDE4ProfileWriter().getPath(_defaultProfile);
 
     QFileInfo fileInfo(path);
 
@@ -588,6 +592,7 @@ void SessionManager::setDefaultProfile(Profile::Ptr profile)
     KConfigGroup group = config->group("Desktop Entry");
     group.writeEntry("DefaultProfile", fileInfo.fileName());
 }
+
 QSet<Profile::Ptr> SessionManager::findFavorites()
 {
     loadFavorites();
