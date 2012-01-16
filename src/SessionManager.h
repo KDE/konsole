@@ -82,16 +82,16 @@ public:
     void closeAllSessions();
 
     /**
-     * Returns a list of profiles which have been loaded.
+     * Returns a list of all available profiles
+     *
      * Initially only the profile currently set as the default is loaded.
      *
      * Favorite profiles are loaded automatically when findFavorites() is called.
      *
-     * All other profiles can be loaded by calling loadAllProfiles().  This may
-     * involves opening, reading and parsing all profiles from disk, and
-     * should only be done when necessary.
+     * When this method is called, it calls loadAllProfiles() internally to
+     * ensure all available profiles are loaded and usable.
      */
-    QList<Profile::Ptr> loadedProfiles() const;
+    QList<Profile::Ptr> allProfiles();
 
     /**
      * Loads all available profiles.  This involves reading each

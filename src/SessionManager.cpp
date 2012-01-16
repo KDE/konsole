@@ -356,8 +356,10 @@ QList<Profile::Ptr> SessionManager::sortedFavorites()
     return favorites;
 }
 
-QList<Profile::Ptr> SessionManager::loadedProfiles() const
+QList<Profile::Ptr> SessionManager::allProfiles()
 {
+    loadAllProfiles();
+
     return _profiles.toList();
 }
 
@@ -588,8 +590,7 @@ void SessionManager::setDefaultProfile(Profile::Ptr profile)
 }
 QSet<Profile::Ptr> SessionManager::findFavorites()
 {
-    if (!_loadedFavorites)
-        loadFavorites();
+    loadFavorites();
 
     return _favorites;
 }
@@ -662,6 +663,9 @@ void SessionManager::setShortcut(Profile::Ptr profile ,
 }
 void SessionManager::loadFavorites()
 {
+    if ( _loadedFavorites )
+        return ;
+
     KSharedConfigPtr appConfig = KGlobal::config();
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 

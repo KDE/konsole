@@ -216,12 +216,7 @@ void ManageProfilesDialog::populateTable()
             << i18nc("@title:column Display profile in file menu", "Show in Menu")
             << i18nc("@title:column Profile shortcut text", "Shortcut"));
 
-    // ensure profiles list is complete
-    // this may be expensive, but will only be done the first time
-    // that the dialog is shown.
-    SessionManager::instance()->loadAllProfiles();
-
-    QList<Profile::Ptr> profiles = SessionManager::instance()->loadedProfiles();
+    QList<Profile::Ptr> profiles = SessionManager::instance()->allProfiles();
     SessionManager::instance()->sortProfiles(profiles);
 
     foreach(const Profile::Ptr & profile, profiles) {
