@@ -441,7 +441,6 @@ void ViewManager::splitView(Qt::Orientation orientation)
         // session in the previous container
         if (!container) {
             container = createContainer(profile);
-            applyProfileToContainer(container, profile);
         }
 
         container->addView(display, properties);
@@ -561,10 +560,6 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
     TerminalDisplay* display = createTerminalDisplay(session);
     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
     applyProfileToView(display, profile);
-
-    bool isFirst = _sessionMap.isEmpty();
-    if (isFirst)
-        applyProfileToContainer(container, profile);
 
     // set initial size
     display->setSize(80, 40);
