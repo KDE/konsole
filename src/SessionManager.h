@@ -60,6 +60,7 @@ class KONSOLEPRIVATE_EXPORT SessionManager : public QObject
     Q_OBJECT
 
 public:
+
     /**
      * Constructs a new session manager and loads information about the available
      * profiles.
@@ -71,6 +72,11 @@ public:
      * (via closeAll()) before the SessionManager is destroyed.
      */
     virtual ~SessionManager();
+
+    /**
+     * Returns the session manager instance.
+     */
+    static SessionManager* instance();
 
     /** Kill all running sessions. */
     void closeAll();
@@ -87,22 +93,12 @@ public:
      */
     QList<Profile::Ptr> loadedProfiles() const;
 
-    QList<Profile::Ptr> sortedFavorites();
-
-    /*
-     * Sorts the profile list by menuindex; those without an menuindex, sort by name.
-     *  The menuindex list is first and then the non-menuindex list.
-     *
-     * @param list The profile list to sort
-     */
-    void sortProfiles(QList<Profile::Ptr>& list);
-
     /**
-     * Searches for available profiles on-disk and returns a list
-     * of paths of profiles which can be loaded.
+     * Loads all available profiles.  This involves reading each
+     * profile configuration file from disk and parsing it.
+     * Therefore it should only be done when necessary.
      */
-    QStringList availableProfilePaths() const;
-
+    void loadAllProfiles();
 
     /**
      * Loads a profile from the specified path and registers
@@ -118,6 +114,28 @@ public:
      * to create a new session using this profile.
      */
     Profile::Ptr loadProfile(const QString& path);
+
+    /**
+     * Searches for available profiles on-disk and returns a list
+     * of paths of profiles which can be loaded.
+     */
+    QStringList availableProfilePaths() const;
+
+    /**
+     * Registers a new type of session.
+     * The favorite status of the session ( as returned by isFavorite() ) is set to false by default.
+     */
+    void addProfile(Profile::Ptr type);
+
+    /**
+     * Deletes the configuration file used to store a profile.
+     * The profile will continue to exist while sessions are still using it.  The profile
+     * will be marked as hidden (see Profile::setHidden() ) so that it does not show
+     * up in profile lists and future changes to the profile are not stored to disk.
+     *
+     * Returns true if the profile was successfully deleted or false otherwise.
+     */
+    bool deleteProfile(Profile::Ptr profile);
 
     /**
      * Updates a @p profile with the changes specified in @p propertyMap.
@@ -136,10 +154,17 @@ public:
                        bool persistent = true);
 
     /**
+     * Sets the @p profile as the default profile for new sessions created
+     * with createSession()
+     */
+    void setDefaultProfile(Profile::Ptr profile);
+
+    /**
      * Returns a Profile object describing the default type of session, which is used
      * if createSession() is called with an empty configPath argument.
      */
     Profile::Ptr defaultProfile() const;
+
     /**
      * Returns a Profile object with hard-coded settings which is always available.
      * This can be used as a parent for new profiles which provides suitable default settings
@@ -160,10 +185,11 @@ public:
      */
     Session* createSession(Profile::Ptr profile = Profile::Ptr());
 
-    /** Returns the profile associated with a session. */
-    Profile::Ptr sessionProfile(Session* session) const;
     /** Sets the profile associated with a session. */
     void setSessionProfile(Session* session, Profile::Ptr profile);
+
+    /** Returns the profile associated with a session. */
+    Profile::Ptr sessionProfile(Session* session) const;
 
     /**
      * Updates a session's properties to match its current profile.
@@ -176,25 +202,33 @@ public:
     const QList<Session*> sessions() const;
 
     /**
-     * Deletes the configuration file used to store a profile.
-     * The profile will continue to exist while sessions are still using it.  The profile
-     * will be marked as hidden (see Profile::setHidden() ) so that it does not show
-     * up in profile lists and future changes to the profile are not stored to disk.
-     *
-     * Returns true if the profile was successfully deleted or false otherwise.
+     * Specifies whether a profile should be included in the user's
+     * list of favorite sessions.
      */
-    bool deleteProfile(Profile::Ptr profile);
-
-    /**
-     * Sets the @p profile as the default profile for new sessions created
-     * with createSession()
-     */
-    void setDefaultProfile(Profile::Ptr profile);
+    void setFavorite(Profile::Ptr profile , bool favorite);
 
     /**
      * Returns the set of the user's favorite profiles.
      */
     QSet<Profile::Ptr> findFavorites();
+
+    QList<Profile::Ptr> sortedFavorites();
+
+    /*
+     * Sorts the profile list by menuindex; those without an menuindex, sort by name.
+     *  The menuindex list is first and then the non-menuindex list.
+     *
+     * @param list The profile list to sort
+     */
+    void sortProfiles(QList<Profile::Ptr>& list);
+
+    /**
+     * Associates a shortcut with a particular profile.
+     */
+    void setShortcut(Profile::Ptr profile , const QKeySequence& shortcut);
+
+    /** Returns the shortcut associated with a particular profile. */
+    QKeySequence shortcut(Profile::Ptr profile) const;
 
     /**
      * Returns the list of shortcut key sequences which
@@ -213,45 +247,14 @@ public:
      */
     Profile::Ptr findByShortcut(const QKeySequence& shortcut);
 
-    /**
-     * Associates a shortcut with a particular profile.
-     */
-    void setShortcut(Profile::Ptr profile , const QKeySequence& shortcut);
-
-    /** Returns the shortcut associated with a particular profile. */
-    QKeySequence shortcut(Profile::Ptr profile) const;
-
-    /**
-     * Registers a new type of session.
-     * The favorite status of the session ( as returned by isFavorite() ) is set to false by default.
-     */
-    void addProfile(Profile::Ptr type);
-
-    /**
-     * Specifies whether a profile should be included in the user's
-     * list of favorite sessions.
-     */
-    void setFavorite(Profile::Ptr profile , bool favorite);
-
-    /**
-     * Loads all available profiles.  This involves reading each
-     * profile configuration file from disk and parsing it.
-     * Therefore it should only be done when necessary.
-     */
-    void loadAllProfiles();
-
-    /**
-     * Returns the session manager instance.
-     */
-    static SessionManager* instance();
-
     // session management
     void saveSessions(KConfig* config);
-    int  getRestoreId(Session* session);
     void restoreSessions(KConfig* config);
+    int  getRestoreId(Session* session);
     Session* idToSession(int id);
 
 signals:
+
     /** Emitted when a profile is added to the manager. */
     void profileAdded(Profile::Ptr ptr);
     /** Emitted when a profile is removed from the manager. */
@@ -296,10 +299,10 @@ protected slots:
     void sessionTerminated(QObject* session);
 
 private slots:
+
     void sessionProfileCommandReceived(const QString& text);
 
 private:
-
 
     // loads the mappings between shortcut key sequences and
     // profile paths
