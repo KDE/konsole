@@ -402,7 +402,7 @@ void Application::toggleBackgroundInstance()
 
 Application::~Application()
 {
-    SessionManager::instance()->closeAll();
+    SessionManager::instance()->closeAllSessions();
     SessionManager::instance()->saveSettings();
 }
 

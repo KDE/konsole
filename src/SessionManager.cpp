@@ -276,7 +276,7 @@ void SessionManager::saveSettings()
     konsoleConfig->sync();
 
 }
-void SessionManager::closeAll()
+void SessionManager::closeAllSessions()
 {
     // close remaining sessions
     foreach(Session * session , _sessions) {

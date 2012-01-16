@@ -69,7 +69,7 @@ public:
 
     /**
      * Destroys the SessionManager. All running sessions should be closed
-     * (via closeAll()) before the SessionManager is destroyed.
+     * (via closeAllSessions()) before the SessionManager is destroyed.
      */
     virtual ~SessionManager();
 
@@ -79,7 +79,7 @@ public:
     static SessionManager* instance();
 
     /** Kill all running sessions. */
-    void closeAll();
+    void closeAllSessions();
 
     /**
      * Returns a list of profiles which have been loaded.
