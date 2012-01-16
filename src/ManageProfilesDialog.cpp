@@ -451,9 +451,9 @@ bool FavoriteItemDelegate::editorEvent(QEvent* event, QAbstractItemModel*,
             event->type() == QEvent::KeyPress ||
             event->type() == QEvent::MouseButtonDblClick) {
         Profile::Ptr profile = index.data(ManageProfilesDialog::ProfileKeyRole).value<Profile::Ptr>();
-        const bool isFavorite = !SessionManager::instance()->findFavorites().contains(profile);
+        const bool isFavorite = SessionManager::instance()->findFavorites().contains(profile);
 
-        SessionManager::instance()->setFavorite(profile, isFavorite);
+        SessionManager::instance()->setFavorite(profile, !isFavorite);
     }
 
     return true;
