@@ -116,8 +116,6 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
     )
 
-    kde4_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
-
     set(konsole_LIBS
         ${KDE4_KPTY_LIBRARY}
         ${KDE4_KIO_LIBS}
@@ -158,10 +156,10 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         Application.cpp
         MainWindow.cpp
         main.cpp
-        KonsoleSettings.cpp
         settings/GeneralSettings.cpp
         settings/TabBarSettings.cpp
     )
+    kde4_add_kcfg_files(konsole_KDEINIT_SRCS settings/KonsoleSettings.kcfgc)
 
     kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
 
