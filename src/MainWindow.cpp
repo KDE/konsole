@@ -55,7 +55,7 @@
 #include "Session.h"
 #include "ViewManager.h"
 #include "SessionManager.h"
-#include "AppSettings.h"
+#include "KonsoleSettings.h"
 #include "settings/GeneralSettings.h"
 #include "settings/TabBarSettings.h"
 
@@ -134,8 +134,8 @@ MainWindow::MainWindow()
     setAutoSaveSettings("MainWindow", true);
 
     // this must come at the end
-    applyAppSettings();
-    connect(AppSettings::self(), SIGNAL(configChanged()), this, SLOT(applyAppSettings()));
+    applyKonsoleSettings();
+    connect(KonsoleSettings::self(), SIGNAL(configChanged()), this, SLOT(applyKonsoleSettings()));
 }
 
 void MainWindow::rememberMenuAccelerators()
@@ -519,7 +519,7 @@ void MainWindow::showSettingsDialog()
     if (KConfigDialog::showDialog("settings"))
         return;
 
-    KConfigDialog* settingsDialog = new KConfigDialog(this, "settings", AppSettings::self());
+    KConfigDialog* settingsDialog = new KConfigDialog(this, "settings", KonsoleSettings::self());
     settingsDialog->setFaceType(KPageDialog::List);
 
     GeneralSettings* generalSettings = new GeneralSettings(settingsDialog);
@@ -535,9 +535,9 @@ void MainWindow::showSettingsDialog()
     settingsDialog->show();
 }
 
-void MainWindow::applyAppSettings()
+void MainWindow::applyKonsoleSettings()
 {
-    if ( AppSettings::allowMenuAccelerators() ) {
+    if ( KonsoleSettings::allowMenuAccelerators() ) {
         recoverMenuAccelerators();
     }
     else {
@@ -545,14 +545,14 @@ void MainWindow::applyAppSettings()
     }
 
     ViewManager::NavigationOptions options;
-    options.visibility       = AppSettings::tabBarVisibility();
-    options.position         = AppSettings::tabBarPosition();
-    options.newTabBehavior   = AppSettings::newTabBehavior();
-    options.showQuickButtons = AppSettings::showQuickButtons();
+    options.visibility       = KonsoleSettings::tabBarVisibility();
+    options.position         = KonsoleSettings::tabBarPosition();
+    options.newTabBehavior   = KonsoleSettings::newTabBehavior();
+    options.showQuickButtons = KonsoleSettings::showQuickButtons();
 
     _viewManager->updateNavigationOptions(options);
 
-    // setAutoSaveSettings("MainWindow", AppSettings::saveGeometryOnExit());
+    // setAutoSaveSettings("MainWindow", KonsoleSettings::saveGeometryOnExit());
 }
 
 void MainWindow::activateMenuBar()
@@ -605,8 +605,8 @@ void MainWindow::showEvent(QShowEvent* event)
         // visibility will be determined by what is stored in konsolerc, but not
         // by the selected profile.
         //
-        menuBar()->setVisible(AppSettings::showMenuBar());
-        _toggleMenuBarAction->setChecked(AppSettings::showMenuBar());
+        menuBar()->setVisible(KonsoleSettings::showMenuBar());
+        _toggleMenuBarAction->setChecked(KonsoleSettings::showMenuBar());
 
         _menuBarInitialVisibilityApplied = true;
     }

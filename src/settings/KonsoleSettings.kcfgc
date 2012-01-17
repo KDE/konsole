@@ -1,6 +1,6 @@
 File=konsole.kcfg
 NameSpace=Konsole
-ClassName=AppSettings
+ClassName=KonsoleSettings
 Singleton=true
 MemberVariables=private
 ItemAccessors=true

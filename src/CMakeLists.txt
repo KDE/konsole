@@ -116,7 +116,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
     )
 
-    kde4_add_kcfg_files(konsoleprivate_SRCS settings/AppSettings.kcfgc)
+    kde4_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
     set(konsole_LIBS
         ${KDE4_KPTY_LIBRARY}
@@ -158,7 +158,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         Application.cpp
         MainWindow.cpp
         main.cpp
-        AppSettings.cpp
+        KonsoleSettings.cpp
         settings/GeneralSettings.cpp
         settings/TabBarSettings.cpp
     )

@@ -179,7 +179,7 @@ private slots:
 
     void openUrls(const QList<KUrl>& urls);
 
-    void applyAppSettings();
+    void applyKonsoleSettings();
 
 private:
     void correctShortcuts();
