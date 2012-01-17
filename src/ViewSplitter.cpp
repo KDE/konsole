@@ -169,11 +169,9 @@ void ViewSplitter::addContainer(ViewContainer* container ,
 
 void ViewSplitter::containerEmpty(ViewContainer* /*object*/)
 {
-    QListIterator<ViewContainer*> containerIter(_containers);
-
     int children = 0;
-    while (containerIter.hasNext()) {
-        children += containerIter.next()->views().count();
+    foreach ( ViewContainer* container, _containers ) {
+        children += container->views().count();
     }
 
     if (children == 0)

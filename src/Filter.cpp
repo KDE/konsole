@@ -251,11 +251,9 @@ QList<Filter::HotSpot*> Filter::hotSpotsAtLine(int line) const
 
 Filter::HotSpot* Filter::hotSpotAt(int line , int column) const
 {
-    QListIterator<HotSpot*> spotIter(_hotspots.values(line));
+    QList<HotSpot*> hotspots = _hotspots.values(line);
 
-    while (spotIter.hasNext()) {
-        HotSpot* spot = spotIter.next();
-
+    foreach ( HotSpot* spot, hotspots ) {
         if (spot->startLine() == line && spot->startColumn() > column)
             continue;
         if (spot->endLine() == line && spot->endColumn() < column)

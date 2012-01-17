@@ -572,19 +572,16 @@ void ColorSchemeManager::loadAllColorSchemes()
     int failed = 0;
 
     QList<QString> nativeColorSchemes = listColorSchemes();
-
-    QListIterator<QString> nativeIter(nativeColorSchemes);
-    while (nativeIter.hasNext()) {
-        if (loadColorScheme(nativeIter.next()))
+    foreach ( const QString& colorScheme, nativeColorSchemes) {
+        if (loadColorScheme(colorScheme))
             success++;
         else
             failed++;
     }
 
     QList<QString> kde3ColorSchemes = listKDE3ColorSchemes();
-    QListIterator<QString> kde3Iter(kde3ColorSchemes);
-    while (kde3Iter.hasNext()) {
-        if (loadKDE3ColorScheme(kde3Iter.next()))
+    foreach ( const QString& colorScheme, kde3ColorSchemes) {
+        if (loadKDE3ColorScheme(colorScheme))
             success++;
         else
             failed++;

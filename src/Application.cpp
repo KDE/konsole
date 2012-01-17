@@ -94,12 +94,12 @@ MainWindow* Application::newMainWindow()
 void Application::listAvailableProfiles()
 {
     QList<QString> paths = SessionManager::instance()->availableProfilePaths();
-    QListIterator<QString> iter(paths);
 
-    while (iter.hasNext()) {
-        QFileInfo info(iter.next());
+    foreach ( const QString& path, paths) {
+        QFileInfo info(path);
         std::cout << info.completeBaseName().toLocal8Bit().data() << std::endl;
     }
+
     quit();
 }
 

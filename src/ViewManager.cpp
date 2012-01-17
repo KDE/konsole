@@ -226,9 +226,8 @@ void ViewManager::setupActions()
         }
     }
 
-    QListIterator<QAction*> iter(multiViewOnlyActions);
-    while (iter.hasNext()) {
-        connect(this , SIGNAL(splitViewToggle(bool)) , iter.next() , SLOT(setEnabled(bool)));
+    foreach (QAction* action, multiViewOnlyActions) {
+        connect(this , SIGNAL(splitViewToggle(bool)) , action , SLOT(setEnabled(bool)));
     }
 
     // keyboard shortcut only actions
@@ -374,7 +373,7 @@ void ViewManager::sessionFinished()
     // close attached views
     QList<TerminalDisplay*> children = _viewSplitter->findChildren<TerminalDisplay*>();
 
-    foreach(TerminalDisplay * view , children) {
+    foreach (TerminalDisplay * view , children) {
         if (_sessionMap[view] == session) {
             _sessionMap.remove(view);
             view->deleteLater();
@@ -430,10 +429,8 @@ void ViewManager::splitView(Qt::Orientation orientation)
 
     // iterate over each session which has a view in the current active
     // container and create a new view for that session in a new container
-    QListIterator<QWidget*> existingViewIter(_viewSplitter->activeContainer()->views());
-
-    while (existingViewIter.hasNext()) {
-        Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
+    foreach ( QWidget* view,  _viewSplitter->activeContainer()->views() ) {
+        Session* session = _sessionMap[qobject_cast<TerminalDisplay*>(view)];
         TerminalDisplay* display = createTerminalDisplay(session);
         const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
         applyProfileToView(display, profile);
@@ -461,7 +458,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
 void ViewManager::removeContainer(ViewContainer* container)
 {
     // remove session map entries for views in this container
-    foreach(QWidget * view , container->views()) {
+    foreach (QWidget * view , container->views()) {
         TerminalDisplay* display = qobject_cast<TerminalDisplay*>(view);
         Q_ASSERT(display);
         _sessionMap.remove(display);
@@ -497,11 +494,9 @@ void ViewManager::closeOtherViews()
 {
     ViewContainer* active = _viewSplitter->activeContainer();
 
-    QListIterator<ViewContainer*> iter(_viewSplitter->containers());
-    while (iter.hasNext()) {
-        ViewContainer* next = iter.next();
-        if (next != active)
-            removeContainer(next);
+    foreach (ViewContainer* container, _viewSplitter->containers()) {
+        if (container != active)
+            removeContainer(container);
     }
 }
 
@@ -602,9 +597,7 @@ void ViewManager::createView(Session* session)
     // iterate over the view containers owned by this view manager
     // and create a new terminal display for the session in each of them, along with
     // a controller for the session/display pair
-    QListIterator<ViewContainer*> containerIter(_viewSplitter->containers());
-    while (containerIter.hasNext()) {
-        ViewContainer* container = containerIter.next();
+    foreach ( ViewContainer* container,  _viewSplitter->containers() ) {
         createView(session, container, index);
     }
 }
@@ -843,9 +836,10 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
 
 void ViewManager::updateViewsForSession(Session* session)
 {
-    QListIterator<TerminalDisplay*> iter(_sessionMap.keys(session));
-    while (iter.hasNext()) {
-        applyProfileToView(iter.next(), SessionManager::instance()->sessionProfile(session));
+    const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
+
+    foreach ( TerminalDisplay* view, _sessionMap.keys(session) ) {
+        applyProfileToView(view, profile);
     }
 }
 
@@ -873,9 +867,8 @@ QList<ViewProperties*> ViewManager::viewProperties() const
 
     Q_ASSERT(container);
 
-    QListIterator<QWidget*> viewIter(container->views());
-    while (viewIter.hasNext()) {
-        ViewProperties* properties = container->viewProperties(viewIter.next());
+    foreach ( QWidget* view, container->views() ) {
+        ViewProperties* properties = container->viewProperties(view);
         Q_ASSERT(properties);
         list << properties;
     }
@@ -997,15 +990,12 @@ int ViewManager::newSession(QString profile, QString directory)
 
 QStringList ViewManager::profileList()
 {
-    QList<Profile::Ptr> profilelist = SessionManager::instance()->allProfiles();
-    QList<Profile::Ptr>::iterator i = profilelist.begin();
     QStringList list;
-    while (i != profilelist.end()) {
-        Profile::Ptr profile = *i;
+
+    foreach ( Profile::Ptr profile, SessionManager::instance()->allProfiles() ) {
         if (!profile->isHidden()) {
             list.push_back(profile->name());
         }
-        i++;
     }
 
     return list;

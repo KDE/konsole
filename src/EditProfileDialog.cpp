@@ -570,10 +570,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     QStandardItem* selectedItem = 0;
 
     QList<QString> translatorNames = keyManager->allTranslators();
-    QListIterator<QString> iter(translatorNames);
-    while (iter.hasNext()) {
-        const QString& name = iter.next();
-
+    foreach ( const QString& name, translatorNames) {
         const KeyboardTranslator* translator = keyManager->findTranslator(name);
 
         QStandardItem* item = new QStandardItem(translator->description());

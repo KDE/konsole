@@ -131,11 +131,8 @@ QList<QPair<QString, QString> > BookmarkHandler::currentBookmarkList() const
 {
     QList<QPair<QString, QString> > list;
 
-    QListIterator<ViewProperties*> iter(_views);
-
-    while (iter.hasNext()) {
-        ViewProperties* next = iter.next();
-        list << QPair<QString, QString>(titleForView(next) , urlForView(next));
+    foreach ( ViewProperties* view, _views ) {
+        list << QPair<QString, QString>(titleForView(view) , urlForView(view));
     }
 
     return list;

@@ -137,10 +137,7 @@ void Pty::setInitialWorkingDirectory(const QString& dir)
 
 void Pty::addEnvironmentVariables(const QStringList& environment)
 {
-    QListIterator<QString> iter(environment);
-    while (iter.hasNext()) {
-        QString pair = iter.next();
-
+    foreach ( const QString& pair, environment ) {
         // split on the first '=' character
         int pos = pair.indexOf('=');
 

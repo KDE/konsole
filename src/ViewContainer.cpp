@@ -792,9 +792,8 @@ void TabbedViewContainer::setTabActivity(int index , bool activity)
 
 void TabbedViewContainer::updateActivity(ViewProperties* item)
 {
-    QListIterator<QWidget*> iter(widgetsForItem(item));
-    while (iter.hasNext()) {
-        const int index = _stackWidget->indexOf(iter.next());
+    foreach ( QWidget* widget, widgetsForItem(item) ) {
+        const int index = _stackWidget->indexOf(widget);
 
         if (index != _stackWidget->currentIndex()) {
             setTabActivity(index, true);
@@ -804,9 +803,8 @@ void TabbedViewContainer::updateActivity(ViewProperties* item)
 
 void TabbedViewContainer::updateTitle(ViewProperties* item)
 {
-    QListIterator<QWidget*> iter(widgetsForItem(item));
-    while (iter.hasNext()) {
-        const int index = _stackWidget->indexOf(iter.next());
+    foreach ( QWidget* widget, widgetsForItem(item) ) {
+        const int index = _stackWidget->indexOf(widget);
         QString tabText = item->title();
 
         _tabBar->setTabToolTip(index , tabText);
@@ -818,9 +816,8 @@ void TabbedViewContainer::updateTitle(ViewProperties* item)
 }
 void TabbedViewContainer::updateIcon(ViewProperties* item)
 {
-    QListIterator<QWidget*> iter(widgetsForItem(item));
-    while (iter.hasNext()) {
-        const int index = _stackWidget->indexOf(iter.next());
+    foreach ( QWidget* widget, widgetsForItem(item) ) {
+        const int index = _stackWidget->indexOf(widget);
         _tabBar->setTabIcon(index , item->icon());
     }
 }

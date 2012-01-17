@@ -146,9 +146,7 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
         path = KStandardDirs::locate("data", path);
 
     // check that we have not already loaded this profile
-    QSetIterator<Profile::Ptr> iter(_profiles);
-    while (iter.hasNext()) {
-        Profile::Ptr profile = iter.next();
+    foreach ( const Profile::Ptr& profile, _profiles) {
         if (profile->path() == path)
             return profile;
     }
@@ -204,11 +202,10 @@ void SessionManager::loadAllProfiles()
     if (_loadedAllProfiles)
         return;
 
-    QStringList profiles = availableProfilePaths();
-
-    QListIterator<QString> iter(profiles);
-    while (iter.hasNext())
-        loadProfile(iter.next());
+    const QStringList& paths = availableProfilePaths();
+    foreach ( const QString& path, paths) {
+        loadProfile(path);
+    }
 
     _loadedAllProfiles = true;
 }
@@ -429,11 +426,9 @@ void SessionManager::changeProfile(Profile::Ptr profile,
 }
 void SessionManager::applyProfile(Profile::Ptr profile , bool modifiedPropertiesOnly)
 {
-    QListIterator<Session*> iter(_sessions);
-    while (iter.hasNext()) {
-        Session* next = iter.next();
-        if (_sessionProfiles[next] == profile)
-            applyProfile(next, profile, modifiedPropertiesOnly);
+    foreach ( Session* session, _sessions ) {
+        if (_sessionProfiles[session] == profile)
+            applyProfile(session, profile, modifiedPropertiesOnly);
     }
 }
 Profile::Ptr SessionManager::sessionProfile(Session* session) const
@@ -705,9 +700,7 @@ void SessionManager::loadFavorites()
     }
 
     // look for favorites amongst those already loaded
-    QSetIterator<Profile::Ptr> iter(_profiles);
-    while (iter.hasNext()) {
-        Profile::Ptr profile = iter.next();
+    foreach ( const Profile::Ptr& profile, _profiles ) {
         const QString& path = profile->path();
         if (favoriteSet.contains(path)) {
             _favorites.insert(profile);
@@ -715,9 +708,8 @@ void SessionManager::loadFavorites()
         }
     }
     // load any remaining favorites
-    QSetIterator<QString> unloadedFavoriteIter(favoriteSet);
-    while (unloadedFavoriteIter.hasNext()) {
-        Profile::Ptr profile = loadProfile(unloadedFavoriteIter.next());
+    foreach ( const QString& favorite, favoriteSet ) {
+        Profile::Ptr profile = loadProfile(favorite);
         if (profile)
             _favorites.insert(profile);
     }
@@ -730,9 +722,7 @@ void SessionManager::saveFavorites()
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
     QStringList paths;
-    QSetIterator<Profile::Ptr> keyIter(_favorites);
-    while (keyIter.hasNext()) {
-        Profile::Ptr profile = keyIter.next();
+    foreach ( const Profile::Ptr& profile, _favorites ) {
 
         Q_ASSERT(_profiles.contains(profile) && profile);
 

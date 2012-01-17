@@ -48,12 +48,10 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
 
     // TODO - Handle re-sorts when user changes profile names
     SessionManager* manager = SessionManager::instance();
-    QList<Profile::Ptr> list = manager->sortedFavorites();
+    QList<Profile::Ptr> favoriteProfiles = manager->sortedFavorites();
 
-    QListIterator<Profile::Ptr> iter(list);
-
-    while (iter.hasNext()) {
-        favoriteChanged(iter.next(), true);
+    foreach ( const Profile::Ptr& profile, favoriteProfiles ) {
+        favoriteChanged(profile, true);
     }
 
     connect(_group, SIGNAL(triggered(QAction*)), this, SLOT(triggered(QAction*)));
@@ -80,11 +78,9 @@ void ProfileList::updateEmptyAction()
 }
 QAction* ProfileList::actionForKey(Profile::Ptr key) const
 {
-    QListIterator<QAction*> iter(_group->actions());
-    while (iter.hasNext()) {
-        QAction* next = iter.next();
-        if (next->data().value<Profile::Ptr>() == key)
-            return next;
+    foreach ( QAction* action, _group->actions() ) {
+        if (action->data().value<Profile::Ptr>() == key)
+            return action;
     }
     return 0; // not found
 }

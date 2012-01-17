@@ -112,10 +112,8 @@ void Emulation::checkSelectedText()
 
 Emulation::~Emulation()
 {
-    QListIterator<ScreenWindow*> windowIter(_windows);
-
-    while (windowIter.hasNext()) {
-        delete windowIter.next();
+    foreach ( ScreenWindow* window, _windows) {
+        delete window;
     }
 
     delete _screen[0];
