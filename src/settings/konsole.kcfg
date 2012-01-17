@@ -4,7 +4,7 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="konsolerc" />
-  <group name="Window">
+  <group name="KonsoleWindow">
     <entry name="ShowMenuBar" type="Bool">
       <label>Show menubar initially in Konsole window</label>
       <tooltip>Show menubar initially in each Konsole window</tooltip>
