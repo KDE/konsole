@@ -55,8 +55,12 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     , _viewSplitter(0)
     , _actionCollection(collection)
     , _containerSignalMapper(new QSignalMapper(this))
-    , _navigationMethod(TabbedNavigation)
     , _newViewMenu(0)
+    , _navigationMethod(TabbedNavigation)
+    , _navigationVisibility(ViewContainer::AlwaysShowNavigation)
+    , _navigationPosition(ViewContainer::NavigationPositionTop)
+    , _showQuickButtons(false)
+    , _newTabBehavior(PutNewTabAtTheEnd)
 {
     // create main view area
     _viewSplitter = new ViewSplitter(0);
@@ -422,11 +426,11 @@ void ViewManager::splitTopBottom()
 
 void ViewManager::splitView(Qt::Orientation orientation)
 {
+    ViewContainer* container = createContainer();
+
     // iterate over each session which has a view in the current active
     // container and create a new view for that session in a new container
     QListIterator<QWidget*> existingViewIter(_viewSplitter->activeContainer()->views());
-
-    ViewContainer* container = 0;
 
     while (existingViewIter.hasNext()) {
         Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
@@ -436,12 +440,6 @@ void ViewManager::splitView(Qt::Orientation orientation)
         ViewProperties* properties = createController(session, display);
 
         _sessionMap[display] = session;
-
-        // create a container using settings from the first
-        // session in the previous container
-        if (!container) {
-            container = createContainer(profile);
-        }
 
         container->addView(display, properties);
         session->addView(display);
@@ -585,22 +583,15 @@ void ViewManager::createView(Session* session)
 {
     // create the default container
     if (_viewSplitter->containers().count() == 0) {
-        _viewSplitter->addContainer(createContainer(SessionManager::instance()->sessionProfile(session)) ,
-                                    Qt::Vertical);
+        ViewContainer* container = createContainer();
+        _viewSplitter->addContainer(container, Qt::Vertical);
         emit splitViewToggle(false);
     }
 
     // new tab will be put at the end by default.
     int index = -1;
 
-    // TODO: currently, whether new tab should be put after current tab is a per
-    // profile setting, while in concept it should be per ViewManager or global
-    // setting. The current implementation is limited by the design of Profile.h
-    // It should be re-implmented at some appropriate time in the future.
-    // comment by jekyllwu
-    Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
-    int newTabBehavior = profile->property<int>(Profile::NewTabBehavior);
-    if (newTabBehavior == Profile::PutNewTabAfterCurrentTab) {
+    if (_newTabBehavior == PutNewTabAfterCurrentTab) {
         QWidget* view = activeView();
         if (view) {
             QList<QWidget*> views =  _viewSplitter->activeContainer()->views();
@@ -618,15 +609,10 @@ void ViewManager::createView(Session* session)
     }
 }
 
-ViewContainer* ViewManager::createContainer(const Profile::Ptr profile)
+ViewContainer* ViewManager::createContainer()
 {
-    Q_ASSERT(profile);
-
-    const int tabPosition = profile->property<int>(Profile::TabBarPosition);
-
-    ViewContainer::NavigationPosition position = (tabPosition == Profile::TabBarTop) ?
-            ViewContainer::NavigationPositionTop :
-            ViewContainer::NavigationPositionBottom;
+    ViewContainer::NavigationPosition position =
+        static_cast<ViewContainer::NavigationPosition>(_navigationPosition);
 
     ViewContainer* container = 0;
 
@@ -652,7 +638,7 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr profile)
         container = new StackedViewContainer(_viewSplitter);
     }
 
-    applyProfileToContainer(container, profile);
+    applyNavigationOptions(container);
 
     // connect signals and slots
     connect(container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
@@ -855,38 +841,6 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     view->setWordCharacters(profile->property<QString>(Profile::WordCharacters));
 }
 
-void ViewManager::applyProfileToContainer(ViewContainer* container , const Profile::Ptr profile)
-{
-    int tabBarMode = profile->property<int>(Profile::TabBarMode);
-    int tabBarPosition = profile->property<int>(Profile::TabBarPosition);
-    bool showNewCloseButtons = profile->property<bool>(Profile::ShowNewAndCloseTabButtons);
-
-    if (tabBarMode == Profile::AlwaysHideTabBar)
-        container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
-    else if (tabBarMode == Profile::AlwaysShowTabBar)
-        container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
-    else if (tabBarMode == Profile::ShowTabBarAsNeeded)
-        container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
-
-    ViewContainer::NavigationPosition position = container->navigationPosition();
-    if (tabBarPosition == Profile::TabBarTop)
-        position = ViewContainer::NavigationPositionTop;
-    else if (tabBarPosition == Profile::TabBarBottom)
-        position = ViewContainer::NavigationPositionBottom;
-
-    if (container->supportedNavigationPositions().contains(position))
-        container->setNavigationPosition(position);
-
-    if (showNewCloseButtons) {
-        container->setFeatures(container->features()
-                               | ViewContainer::QuickNewView | ViewContainer::QuickCloseView);
-        container->setNewViewMenu(createNewViewMenu());
-    } else {
-        container->setFeatures(container->features()
-                               & ~ViewContainer::QuickNewView & ~ViewContainer::QuickCloseView);
-    }
-}
-
 void ViewManager::updateViewsForSession(Session* session)
 {
     QListIterator<TerminalDisplay*> iter(_sessionMap.keys(session));
@@ -907,21 +861,6 @@ void ViewManager::profileChanged(Profile::Ptr profile)
                 iter.value() != 0 &&
                 SessionManager::instance()->sessionProfile(iter.value()) == profile) {
             applyProfileToView(iter.key(), profile);
-        }
-    }
-
-    // update containers only when this view manager only contains one session and
-    // that session is associated with this profile
-    //
-    // FIXME: this is over complex and still not ideal.
-    // TODO: settings influcing containers really should be moved out from profile.
-    QList<Session*> sessions = _sessionMap.values().toSet().toList();
-    if (sessions.count() == 1 &&
-            SessionManager::instance()->sessionProfile(sessions[0]) == profile) {
-        QListIterator<ViewContainer*> containerIter(_viewSplitter->containers());
-        while (containerIter.hasNext()) {
-            ViewContainer* container = containerIter.next();
-            applyProfileToContainer(container, profile);
         }
     }
 }
@@ -1105,6 +1044,45 @@ void ViewManager::closeTabFromContainer(ViewContainer* container, QWidget* tab)
     Q_ASSERT(controller);
     if (controller)
         controller->closeSession() ;
+}
+
+void ViewManager::updateNavigationOptions(NavigationOptions options)
+{
+    // since we have defined all valid values in konsole.kcfg, we can be sure
+    // all these values are safe to be cast into corresponding enum.
+    _navigationVisibility =
+        static_cast<ViewContainer::NavigationDisplayMode>(options.visibility);
+    _navigationPosition   =
+        static_cast<ViewContainer::NavigationPosition>(options.position);
+    _newTabBehavior       =
+        static_cast<NewTabBehavior>(options.newTabBehavior);
+    _showQuickButtons     = options.showQuickButtons;
+
+    foreach( ViewContainer* container, _viewSplitter->containers() ) {
+        applyNavigationOptions(container);
+    }
+
+}
+
+void ViewManager::applyNavigationOptions(ViewContainer* container)
+{
+
+    container->setNavigationDisplayMode(_navigationVisibility);
+
+    Q_ASSERT( container->supportedNavigationPositions().contains(_navigationPosition) );
+    container->setNavigationPosition(_navigationPosition);
+
+    if (_showQuickButtons) {
+        container->setFeatures(container->features()
+                               | ViewContainer::QuickNewView
+                               | ViewContainer::QuickCloseView);
+        container->setNewViewMenu(createNewViewMenu());
+    } else {
+        container->setFeatures(container->features()
+                               & ~ViewContainer::QuickNewView
+                               & ~ViewContainer::QuickCloseView);
+    }
+
 }
 
 #include "ViewManager.moc"

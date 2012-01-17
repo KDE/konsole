@@ -27,18 +27,18 @@
     </entry>
   </group>
   <group name="TabBar">
-    <entry name="TabBarMode" type="Enum">
+    <entry name="TabBarVisibility" type="Enum">
       <choices>
-        <choice name="AlwaysHideTabBar" />
-        <choice name="ShowTabBarAsNeeded" />
         <choice name="AlwaysShowTabBar" />
+        <choice name="ShowTabBarWhenNeeded" />
+        <choice name="AlwaysHideTabBar" />
       </choices>
       <default>AlwaysShowTabBar</default>
     </entry>
     <entry name="TabBarPosition" type="Enum">
       <choices>
-        <choice name="Bottom" />
         <choice name="Top" />
+        <choice name="Bottom" />
       </choices>
       <default>Bottom</default>
     </entry>

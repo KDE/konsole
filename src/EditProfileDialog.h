@@ -121,10 +121,6 @@ private slots:
     void saveGeometryOnExit(bool);
     void showEnvironmentEditor();
     void silenceSecondsChanged(int);
-    void tabBarVisibilityChanged(int);
-    void tabBarPositionChanged(int);
-    void newTabBehaviorChanged(int);
-    void showNewTabButton(bool);
 
     // appearance page
     void setFontSize(int pointSize);

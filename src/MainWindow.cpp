@@ -544,6 +544,14 @@ void MainWindow::applyAppSettings()
         removeMenuAccelerators();
     }
 
+    ViewManager::NavigationOptions options;
+    options.visibility       = AppSettings::tabBarVisibility();
+    options.position         = AppSettings::tabBarPosition();
+    options.newTabBehavior   = AppSettings::newTabBehavior();
+    options.showQuickButtons = AppSettings::showQuickButtons();
+
+    _viewManager->updateNavigationOptions(options);
+
     // setAutoSaveSettings("MainWindow", AppSettings::saveGeometryOnExit());
 }
 

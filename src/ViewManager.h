@@ -27,6 +27,7 @@
 
 // Konsole
 #include "Profile.h"
+#include "ViewContainer.h"
 
 class QSignalMapper;
 class QMenu;
@@ -43,7 +44,6 @@ class TerminalDisplay;
 
 class SessionController;
 class ViewProperties;
-class ViewContainer;
 class ViewSplitter;
 
 /**
@@ -92,12 +92,6 @@ public:
     void applyProfileToView(TerminalDisplay* view , const Profile::Ptr profile);
 
     /**
-     * Applies the container-specific settings associated with specified @p
-     * profile to the view container @p container.
-     */
-    void applyProfileToContainer(ViewContainer* container , const Profile::Ptr profile);
-
-    /**
      * Return the main widget for the view manager which
      * holds all of the views managed by this ViewManager instance.
      */
@@ -133,6 +127,23 @@ public:
     };
 
     /**
+     * This enum describes where newly created tab should be placed.
+     */
+    enum NewTabBehavior {
+        /** Put newly created tab at the end. */
+        PutNewTabAtTheEnd = 0,
+        /** Put newly created tab right after current tab. */
+        PutNewTabAfterCurrentTab = 1
+    };
+
+    struct NavigationOptions {
+        unsigned visibility;
+        unsigned position;
+        unsigned newTabBehavior;
+        bool     showQuickButtons;
+    };
+
+    /**
      * Sets the type of widget provided to navigate between open sessions
      * in a container.  The changes will only apply to newly created containers.
      *
@@ -163,6 +174,9 @@ public:
      */
     void saveSessions(KConfigGroup& group);
     void restoreSessions(const KConfigGroup& group);
+
+    void updateNavigationOptions(NavigationOptions options);
+    void applyNavigationOptions(ViewContainer* container);
 
 signals:
     /** Emitted when the last view is removed from the view manager */
@@ -339,9 +353,7 @@ private:
     void splitView(Qt::Orientation orientation);
 
     // creates a new container which can hold terminal displays
-    // 'profile' specifies the profile to use to get initial
-    // settings (eg. navigation position) for the container
-    ViewContainer* createContainer(const Profile::Ptr profile);
+    ViewContainer* createContainer();
     // removes a container and emits appropriate signals
     void removeContainer(ViewContainer* container);
 
@@ -365,9 +377,15 @@ private:
 
     KActionCollection*                  _actionCollection;
     QSignalMapper*                      _containerSignalMapper;
-    NavigationMethod                _navigationMethod;
 
     QMenu* _newViewMenu;
+
+    NavigationMethod  _navigationMethod;
+
+    ViewContainer::NavigationDisplayMode _navigationVisibility;
+    ViewContainer::NavigationPosition _navigationPosition;
+    bool _showQuickButtons;
+    NewTabBehavior _newTabBehavior;
 };
 
 }

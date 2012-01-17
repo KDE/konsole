@@ -31,7 +31,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="KComboBox" name="kcfg_TabBarMode">
+       <widget class="KComboBox" name="kcfg_TabBarVisibility">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>1</horstretch>
@@ -40,7 +40,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Always Hide Tab Bar</string>
+          <string>Always Show Tab Bar</string>
          </property>
         </item>
         <item>
@@ -50,7 +50,7 @@
         </item>
         <item>
          <property name="text">
-          <string>Always Show Tab Bar</string>
+          <string>Always Hide Tab Bar</string>
          </property>
         </item>
        </widget>
@@ -75,12 +75,12 @@
         </property>
         <item>
          <property name="text">
-          <string>Below Terminal Displays</string>
+          <string>Above Terminal Displays</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Above Terminal Displays</string>
+          <string>Below Terminal Displays</string>
          </property>
         </item>
        </widget>

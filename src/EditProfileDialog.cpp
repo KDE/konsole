@@ -327,46 +327,10 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
     _ui->remoteTabTitleEdit->setText(
         info->property<QString>(Profile::RemoteTabTitleFormat));
 
-    // tab bar options
-    int tabBarMode = info->property<int>(Profile::TabBarMode);
-    int tabBarPosition = info->property<int>(Profile::TabBarPosition);
-    int newTabBehavior = info->property<int>(Profile::NewTabBehavior);
-
-    // note: Items should be in the same order as the
-    // Profile::TabBarModeEnum enum
-    _ui->tabBarVisibilityCombo->addItems(QStringList() << i18n("Always Hide Tab Bar")
-                                         << i18n("Show Tab Bar When Needed")
-                                         << i18n("Always Show Tab Bar"));
-    _ui->tabBarVisibilityCombo->setCurrentIndex(tabBarMode);
-
-    // note: Items should be in the same order as the
-    // Profile::TabBarPositionEnum enum
-    _ui->tabBarPositionCombo->addItems(QStringList() << i18n("Below Terminal Displays")
-                                       << i18n("Above Terminal Displays"));
-    _ui->tabBarPositionCombo->setCurrentIndex(tabBarPosition);
-
-    // note: Items should be in the same order as the
-    // Profile::NewTabBehaviorEnum enum
-    _ui->newTabBehaviorCombo->addItems(QStringList() << i18n("Put New Tab At The End")
-                                       << i18n("Put New Tab After Current Tab"));
-    _ui->newTabBehaviorCombo->setCurrentIndex(newTabBehavior);
-
-    _ui->newTabButton->setChecked(info->property<bool>(Profile::ShowNewAndCloseTabButtons));
-
     // tab monitoring
     int silenceSeconds = info->property<int>(Profile::SilenceSeconds);
     _ui->silenceSecondsSpinner->setValue(silenceSeconds);
     _ui->silenceSecondsSpinner->setSuffix(ki18ncp("Unit of time", " second", " seconds"));
-
-    // signals and slots
-    connect(_ui->tabBarVisibilityCombo, SIGNAL(activated(int)), this,
-            SLOT(tabBarVisibilityChanged(int)));
-    connect(_ui->tabBarPositionCombo, SIGNAL(activated(int)), this,
-            SLOT(tabBarPositionChanged(int)));
-    connect(_ui->newTabBehaviorCombo, SIGNAL(activated(int)), this,
-            SLOT(newTabBehaviorChanged(int)));
-    connect(_ui->newTabButton, SIGNAL(toggled(bool)), this,
-            SLOT(showNewTabButton(bool)));
 
     connect(_ui->tabTitleEdit, SIGNAL(textChanged(QString)), this,
             SLOT(tabTitleFormatChanged(QString)));
@@ -388,22 +352,6 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
     _ui->remoteTabTitleEditButton->setMenu(remoteTabTitleAction->menu());
     connect(remoteTabTitleAction, SIGNAL(dynamicElementSelected(QString)),
             this, SLOT(insertRemoteTabTitleText(QString)));
-}
-void EditProfileDialog::showNewTabButton(bool show)
-{
-    updateTempProfileProperty(Profile::ShowNewAndCloseTabButtons, show);
-}
-void EditProfileDialog::tabBarVisibilityChanged(int newValue)
-{
-    updateTempProfileProperty(Profile::TabBarMode , newValue);
-}
-void EditProfileDialog::tabBarPositionChanged(int newValue)
-{
-    updateTempProfileProperty(Profile::TabBarPosition , newValue);
-}
-void EditProfileDialog::newTabBehaviorChanged(int newValue)
-{
-    updateTempProfileProperty(Profile::NewTabBehavior , newValue);
 }
 void EditProfileDialog::insertTabTitleText(const QString& text)
 {

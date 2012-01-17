@@ -107,10 +107,10 @@ public:
     enum NavigationDisplayMode {
         /** Always show the navigation widget. */
         AlwaysShowNavigation,
-        /** Always hide the navigation widget. */
-        AlwaysHideNavigation,
         /** Show the navigation widget only when the container has more than one view. */
-        ShowNavigationAsNeeded
+        ShowNavigationAsNeeded,
+        /** Always hide the navigation widget. */
+        AlwaysHideNavigation
     };
     /*
      * Sets the visibility of the view container's navigation widget.
