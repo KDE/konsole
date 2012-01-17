@@ -25,10 +25,7 @@
      <item>
       <widget class="QGroupBox" name="groupBox_1">
        <property name="title">
-        <string notr="true">Window</string>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
+        <string>Konsole Window</string>
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
