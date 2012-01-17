@@ -26,6 +26,9 @@ using namespace Konsole;
 GeneralSettings::GeneralSettings(QWidget* parent) : QWidget(parent)
 {
     setupUi(this);
+
+    this->kcfg_ShowTerminalSizeHint->setVisible(false);
+    this->kcfg_SaveGeometryOnExit->setVisible(false);
 }
 
 GeneralSettings::~GeneralSettings()
