@@ -137,10 +137,10 @@ public:
     };
 
     struct NavigationOptions {
-        unsigned visibility;
-        unsigned position;
-        unsigned newTabBehavior;
-        bool     showQuickButtons;
+        int visibility;
+        int position;
+        int newTabBehavior;
+        bool showQuickButtons;
     };
 
     /**
