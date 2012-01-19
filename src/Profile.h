@@ -111,9 +111,6 @@ public:
         ShowTerminalSizeHint,
         /** (bool) Specifies whether the geometry information is saved when window is closed. */
         SaveGeometryOnExit,
-        /** (TabBarModeEnum) Specifies when the tab bar should be shown in
-         * the main application window. */
-        TabBarMode,
         /** (QFont) The font to use in terminal displays using this profile. */
         Font,
         /** (QString)
@@ -168,10 +165,6 @@ public:
          * selecting text in the terminal display.
          */
         WordCharacters,
-        /** (TabBarPositionEnum) Position of the tab-bar relative to the terminal displays. */
-        TabBarPosition,
-        /** (NewTabBehaviorEnum) Specifies where the newly created tab should be placed. */
-        NewTabBehavior,
         /** (TripleClickModeEnum) Specifies which part of current line should be
          * selected with triple click action.
          */
@@ -190,36 +183,12 @@ public:
         /** (bool) Whether new sessions should be started in the same directory as the
          * currently active session. */
         StartInCurrentSessionDir,
-        /** (bool) Whether a 'New Tab' and 'Close Tab' buttons should be shown on the tab bar */
-        ShowNewAndCloseTabButtons,
         /** (int) Specifies the threshold of detected silence in seconds. */
         SilenceSeconds,
         /** Index of profile in the File Menu
          * In future, format will be #.#.# to account for levels
          */
         MenuIndex
-    };
-
-    /**
-     * This enum describes the available modes for showing or hiding the tab bar.
-     */
-    enum TabBarModeEnum {
-        /** The tab bar is never shown. */
-        AlwaysHideTabBar   = 0,
-        /** The tab bar is shown if there are multiple tabs open or hidden otherwise. */
-        ShowTabBarAsNeeded = 1,
-        /** The tab bar is always shown. */
-        AlwaysShowTabBar   = 2
-    };
-
-    /**
-     * This enum describes the available tab bar positions.
-     */
-    enum TabBarPositionEnum {
-        /** Show tab bar below displays. */
-        TabBarBottom = 0,
-        /** Show tab bar above displays. */
-        TabBarTop    = 1
     };
 
     /**

@@ -76,11 +76,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { RemoteTabTitleFormat , "RemoteTabTitleFormat" , GENERAL_GROUP , QVariant::String }
     , { ShowTerminalSizeHint , "ShowTerminalSizeHint" , GENERAL_GROUP , QVariant::Bool }
     , { SaveGeometryOnExit , "SaveGeometryOnExit" , GENERAL_GROUP , QVariant::Bool }
-    , { TabBarMode , "TabBarMode" , GENERAL_GROUP , QVariant::Int }
-    , { TabBarPosition , "TabBarPosition" , GENERAL_GROUP , QVariant::Int }
-    , { NewTabBehavior , "NewTabBehavior" , GENERAL_GROUP , QVariant::Int }
     , { StartInCurrentSessionDir , "StartInCurrentSessionDir" , GENERAL_GROUP , QVariant::Bool }
-    , { ShowNewAndCloseTabButtons, "ShowNewAndCloseTabButtons" , GENERAL_GROUP , QVariant::Bool }
     , { SilenceSeconds, "SilenceSeconds" , GENERAL_GROUP , QVariant::Int }
 
     // Appearance
@@ -154,13 +150,9 @@ FallbackProfile::FallbackProfile()
     setProperty(Environment, QStringList() << "TERM=xterm");
     setProperty(LocalTabTitleFormat, "%D : %n");
     setProperty(RemoteTabTitleFormat, "(%u) %H");
-    setProperty(TabBarMode, AlwaysShowTabBar);
-    setProperty(TabBarPosition, TabBarBottom);
-    setProperty(NewTabBehavior, PutNewTabAtTheEnd);
     setProperty(ShowTerminalSizeHint, true);
     setProperty(SaveGeometryOnExit, true);
     setProperty(StartInCurrentSessionDir, true);
-    setProperty(ShowNewAndCloseTabButtons, false);
     setProperty(MenuIndex, "0");
     setProperty(SilenceSeconds, 10);
 
