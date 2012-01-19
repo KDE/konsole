@@ -520,25 +520,25 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
         session->setMonitorSilenceSeconds(profile->property<int>(Profile::SilenceSeconds));
 }
 
-void SessionManager::addProfile(Profile::Ptr type)
+void SessionManager::addProfile(Profile::Ptr profile)
 {
     if (_profiles.isEmpty())
-        _defaultProfile = type;
+        _defaultProfile = profile;
 
-    _profiles.insert(type);
+    _profiles.insert(profile);
 
-    emit profileAdded(type);
+    emit profileAdded(profile);
 }
 
-bool SessionManager::deleteProfile(Profile::Ptr type)
+bool SessionManager::deleteProfile(Profile::Ptr profile)
 {
-    bool wasDefault = (type == defaultProfile());
+    bool wasDefault = (profile == defaultProfile());
 
-    if (type) {
+    if (profile) {
         // try to delete the config file
-        if (type->isPropertySet(Profile::Path) && QFile::exists(type->path())) {
-            if (!QFile::remove(type->path())) {
-                kWarning() << "Could not delete profile: " << type->path()
+        if (profile->isPropertySet(Profile::Path) && QFile::exists(profile->path())) {
+            if (!QFile::remove(profile->path())) {
+                kWarning() << "Could not delete profile: " << profile->path()
                            << "The file is most likely in a directory which is read-only.";
 
                 return false;
@@ -546,22 +546,22 @@ bool SessionManager::deleteProfile(Profile::Ptr type)
         }
 
         // remove from favorites, profile list, shortcut list etc.
-        setFavorite(type, false);
-        setShortcut(type, QKeySequence());
-        _profiles.remove(type);
+        setFavorite(profile, false);
+        setShortcut(profile, QKeySequence());
+        _profiles.remove(profile);
 
         // mark the profile as hidden so that it does not show up in the
         // Manage Profiles dialog and is not saved to disk
-        type->setHidden(true);
+        profile->setHidden(true);
     }
 
-    // if we just deleted the default session type,
-    // replace it with a random type from the list
+    // if we just deleted the default profile,
+    // replace it with a random profile from the list
     if (wasDefault) {
         setDefaultProfile(_profiles.toList().first());
     }
 
-    emit profileRemoved(type);
+    emit profileRemoved(profile);
 
     return true;
 }
