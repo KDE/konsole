@@ -767,6 +767,16 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case TY_CSI_PR('s', 1003) :         saveMode      (MODE_Mouse1003); break; //XTERM
     case TY_CSI_PR('r', 1003) :      restoreMode      (MODE_Mouse1003); break; //XTERM
 
+    case TY_CSI_PR('h', 1005) :          setMode      (MODE_Mouse1005); break; //XTERM
+    case TY_CSI_PR('l', 1005) :        resetMode      (MODE_Mouse1005); break; //XTERM
+    case TY_CSI_PR('s', 1005) :         saveMode      (MODE_Mouse1005); break; //XTERM
+    case TY_CSI_PR('r', 1005) :      restoreMode      (MODE_Mouse1005); break; //XTERM
+
+    case TY_CSI_PR('h', 1015) :          setMode      (MODE_Mouse1015); break; //URXVT
+    case TY_CSI_PR('l', 1015) :        resetMode      (MODE_Mouse1015); break; //URXVT
+    case TY_CSI_PR('s', 1015) :         saveMode      (MODE_Mouse1015); break; //URXVT
+    case TY_CSI_PR('r', 1015) :      restoreMode      (MODE_Mouse1015); break; //URXVT
+
     case TY_CSI_PR('h', 1034) : /* IGNORED: 8bitinput activation     */ break; //XTERM
 
     case TY_CSI_PR('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
@@ -919,8 +929,26 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
     if ((getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1)
         cb += 0x20; //add 32 to signify motion event
 
-    char command[20];
-    sprintf(command, "\033[M%c%c%c", cb + 0x20, cx + 0x20, cy + 0x20);
+    char command[32];
+    command[0] = '\0';
+    if (getMode(MODE_Mouse1015)) {
+        sprintf(command, "\033[%d;%d;%dM", cb + 0x20, cx, cy);
+    } else if (getMode(MODE_Mouse1005)) {
+        if (cx <= 2015 && cy <= 2015) {
+            // The xterm extension uses UTF-8 (up to 2 bytes) to encode
+            // coordinate+32, no matter what the locale is. We could easily
+            // convert manually, but QString can also do it for us.
+            QChar coords[2];
+            coords[0] = cx + 0x20;
+            coords[1] = cy + 0x20;
+            QString coordsStr = QString(coords, 2);
+            QByteArray utf8 = coordsStr.toUtf8();
+            sprintf(command, "\033[M%c%s", cb + 0x20, (const char *)utf8);
+        }
+    } else if (cx <= 223 && cy <= 223) {
+        sprintf(command, "\033[M%c%c%c", cb + 0x20, cx + 0x20, cy + 0x20);
+    }
+
     sendString(command);
 }
 
@@ -1152,6 +1180,8 @@ void Vt102Emulation::resetModes()
     resetMode(MODE_Mouse1001);  saveMode(MODE_Mouse1001);
     resetMode(MODE_Mouse1002);  saveMode(MODE_Mouse1002);
     resetMode(MODE_Mouse1003);  saveMode(MODE_Mouse1003);
+    resetMode(MODE_Mouse1005);  saveMode(MODE_Mouse1005);
+    resetMode(MODE_Mouse1015);  saveMode(MODE_Mouse1015);
 
     resetMode(MODE_AppScreen);  saveMode(MODE_AppScreen);
     resetMode(MODE_AppCuKeys);  saveMode(MODE_AppCuKeys);

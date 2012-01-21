@@ -39,10 +39,12 @@
 #define MODE_Mouse1001       (MODES_SCREEN+4)   // Use Hilight mouse tracking
 #define MODE_Mouse1002       (MODES_SCREEN+5)   // Use cell motion mouse tracking
 #define MODE_Mouse1003       (MODES_SCREEN+6)   // Use all motion mouse tracking 
-#define MODE_Ansi            (MODES_SCREEN+7)   // Use US Ascii for character sets G0-G3 (DECANM) 
-#define MODE_132Columns      (MODES_SCREEN+8)   // 80 <-> 132 column mode switch (DECCOLM)
-#define MODE_Allow132Columns (MODES_SCREEN+9)   // Allow DECCOLM mode
-#define MODE_total           (MODES_SCREEN+10)
+#define MODE_Mouse1005       (MODES_SCREEN+7)   // Xterm-style extended coordinates
+#define MODE_Mouse1015       (MODES_SCREEN+8)   // Urxvt-style extended coordinates
+#define MODE_Ansi            (MODES_SCREEN+9)   // Use US Ascii for character sets G0-G3 (DECANM) 
+#define MODE_132Columns      (MODES_SCREEN+10)  // 80 <-> 132 column mode switch (DECCOLM)
+#define MODE_Allow132Columns (MODES_SCREEN+11)  // Allow DECCOLM mode
+#define MODE_total           (MODES_SCREEN+12)
 
 namespace Konsole
 {
