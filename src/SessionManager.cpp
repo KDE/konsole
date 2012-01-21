@@ -627,8 +627,15 @@ void SessionManager::loadShortcuts()
         QString profilePath = iter.value();
 
         ShortcutData data;
-        data.profilePath = profilePath;
 
+        // if the file is not an absolute path, look it up
+        QFileInfo fileInfo(profilePath);
+        if (!fileInfo.isAbsolute())
+        {
+            profilePath = KStandardDirs::locate("data","konsole/" + profilePath);
+        }
+
+        data.profilePath = profilePath;
         _shortcuts.insert(shortcut, data);
     }
 }
@@ -644,8 +651,20 @@ void SessionManager::saveShortcuts()
 
         QString shortcutString = iter.key().toString();
 
-        shortcutGroup.writeEntry(shortcutString,
-                                 iter.value().profilePath);
+        // if the profile path in "Profile Shortcuts" is an absolute path,
+        // take the profile name
+        QFileInfo fileInfo(iter.value().profilePath);
+        QString profileName;
+        if (fileInfo.isAbsolute())
+        {
+            profileName = fileInfo.fileName();
+        }
+        else
+        {
+            profileName = iter.value().profilePath;
+        }
+
+        shortcutGroup.writeEntry(shortcutString, profileName);
     }
 }
 void SessionManager::setShortcut(Profile::Ptr profile ,
@@ -717,7 +736,7 @@ void SessionManager::saveFavorites()
 
         Q_ASSERT(_profiles.contains(profile) && profile);
 
-        paths << profile->path();
+        paths << profile->name() + ".profile";
     }
 
     favoriteGroup.writeEntry("Favorites", paths);
