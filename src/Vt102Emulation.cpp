@@ -861,10 +861,23 @@ void Vt102Emulation::reportSecondaryAttributes()
                                   // konsoles backward compatibility.
 }
 
+/* DECREPTPARM – Report Terminal Parameters
+    ESC [ <sol>; <par>; <nbits>; <xspeed>; <rspeed>; <clkmul>; <flags> x
+
+    http://vt100.net/docs/vt100-ug/chapter3.html
+*/
 void Vt102Emulation::reportTerminalParms(int p)
-// DECREPTPARM
-{ 
+{
   char tmp[100];
+/*
+   sol=1: This message is a request; report in response to a request.
+   par=1: No parity set
+   nbits=1: 8 bits per character
+   xspeed=112: 9600
+   rspeed=112: 9600
+   clkmul=1: The bit rate multiplier is 16.
+   flags=0: None
+*/
   sprintf(tmp,"\033[%d;1;1;112;112;1;0x",p); // not really true.
   sendString(tmp);
 }
