@@ -116,16 +116,6 @@ MainWindow::MainWindow()
 
     rememberMenuAccelerators();
 
-    // remove accelerators for standard menu items (eg. &File, &View, &Edit)
-    // etc. which are defined in kdelibs/kdeui/xmlgui/ui_standards.rc, again,
-    // to avoid conflicting with Alt+[Letter] terminal shortcuts
-    //
-    // TODO - Modify XMLGUI so that it allows the text for standard actions
-    // defined in ui_standards.rc to be re-defined in the local application
-    // XMLGUI file (konsoleui.rc in this case) - the text for standard items
-    // can then be redefined there to exclude the standard accelerators
-    //removeMenuAccelerators();
-
     // replace standard shortcuts which cannot be used in a terminal
     // (as they are reserved for use by terminal programs)
     correctShortcuts();
@@ -146,6 +136,14 @@ void MainWindow::rememberMenuAccelerators()
     }
 }
 
+// remove accelerators for standard menu items (eg. &File, &View, &Edit)
+// etc. which are defined in kdelibs/kdeui/xmlgui/ui_standards.rc, again,
+// to avoid conflicting with Alt+[Letter] terminal shortcuts
+//
+// TODO - Modify XMLGUI so that it allows the text for standard actions
+// defined in ui_standards.rc to be re-defined in the local application
+// XMLGUI file (konsoleui.rc in this case) - the text for standard items
+// can then be redefined there to exclude the standard accelerators
 void MainWindow::removeMenuAccelerators()
 {
     foreach(QAction * menuItem, menuBar()->actions()) {
