@@ -525,7 +525,7 @@ void MainWindow::showSettingsDialog()
     GeneralSettings* generalSettings = new GeneralSettings(settingsDialog);
     settingsDialog->addPage(generalSettings,
                             i18nc("@title Preferences page name", "General"),
-                            "system-run");
+                            "utilities-terminal");
 
     TabBarSettings* tabBarSettings = new TabBarSettings(settingsDialog);
     settingsDialog->addPage(tabBarSettings,
