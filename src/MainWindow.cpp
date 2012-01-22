@@ -595,14 +595,11 @@ void MainWindow::showEvent(QShowEvent* event)
 {
     // Make sure the 'initial' visibility is applied only once.
     if (! _menuBarInitialVisibilityApplied) {
-        // TODO: this is a workaround, not a simple and clear solution.
-        //
-        // Since the geometry restoration of MainWindow happens after
-        // setMenuBarInitialVisibility() is triggered, the initial visibility of
-        // menubar should be applied at this last moment. Otherwise, the initial
-        // visibility will be determined by what is stored in konsolerc, but not
-        // by the selected profile.
-        //
+
+        // the initial visibility of menubar should be applied at this last
+        // moment. Otherwise, the initial visibility will be determined by
+        // what KMainWindow has automatically stored in konsolerc, but not by
+        // what users has explicitly configured .
         menuBar()->setVisible(KonsoleSettings::showMenuBar());
         _toggleMenuBarAction->setChecked(KonsoleSettings::showMenuBar());
 
