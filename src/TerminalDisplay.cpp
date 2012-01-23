@@ -2768,7 +2768,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             // A standard popup with Copy, Move and Link as options -
             // plus an additional Paste option.
 
-            QAction* pasteAction = new QAction(i18n("&Paste as text"), this);
+            QAction* pasteAction = new QAction(i18n("&Paste Location"), this);
             pasteAction->setData(dropText);
             connect(pasteAction, SIGNAL(triggered()), this, SLOT(dropMenuPasteTriggered()));
 
