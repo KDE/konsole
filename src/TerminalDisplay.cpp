@@ -2809,7 +2809,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
     }
 }
 
-void TerminalDisplay::dropMenuPasteTriggered()
+void TerminalDisplay::dropMenuPasteActionTriggered()
 {
     if (sender()) {
         const QAction* action = dynamic_cast<const QAction*>(sender());

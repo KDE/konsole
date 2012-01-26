@@ -552,12 +552,6 @@ public slots:
      */
     void setForegroundColor(const QColor& color);
 
-    /**
-     * Called from the drag'n'drop popup. Causes the dropped URLs to be pasted as text.
-     */
-    void dropMenuPasteTriggered();
-
-    void dropMenuCdActionTriggered();
 
 signals:
 
@@ -662,6 +656,13 @@ private slots:
 
     void swapColorTable();
     void tripleClickTimeout();  // resets possibleTripleClick
+
+    /**
+     * Called from the drag'n'drop popup. Causes the dropped URLs to be pasted as text.
+     */
+    void dropMenuPasteActionTriggered();
+
+    void dropMenuCdActionTriggered();
 
 private:
 
