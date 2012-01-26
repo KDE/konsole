@@ -522,6 +522,23 @@ public slots:
      */
     Q_SCRIPTABLE QString tabTitleFormat(int context) const;
 
+    /**
+     * Sets the history capacity of this session.
+     *
+     * @param size The history capacity in unit of lines. Its value can be:
+     * <ul>
+     * <li> positive integer  -  fixed size history</li>
+     * <li> 0 -  no history</li>
+     * <li> negative integer -  unlimited history</li>
+     * </ul>
+     */
+    Q_SCRIPTABLE void setHistorySize(int lines) ;
+
+    /**
+     * Returns the history capacity of this session.
+     */
+    Q_SCRIPTABLE int historySize() const;
+
 signals:
 
     /** Emitted when the terminal process starts. */

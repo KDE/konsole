@@ -1275,6 +1275,34 @@ QString Session::tabTitleFormat(int context) const
     }
 }
 
+void Session::setHistorySize(int lines)
+{
+    if ( lines < 0 ) {
+        setHistoryType(HistoryTypeFile());
+    }
+    else if ( lines == 0 ) {
+        setHistoryType(HistoryTypeNone());
+    }
+    else {
+        setHistoryType(CompactHistoryType(lines));
+    }
+}
+
+int Session::historySize() const
+{
+    const HistoryType& currentHistory = historyType();
+
+    if (currentHistory.isEnabled()) {
+        if (currentHistory.isUnlimited()) {
+            return -1;
+        } else {
+            return currentHistory.maximumLineCount();
+        }
+    } else {
+        return 0;
+    }
+}
+
 int Session::foregroundProcessId()
 {
     int pid;
