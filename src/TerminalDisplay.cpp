@@ -30,6 +30,7 @@
 #include <QtGui/QKeyEvent>
 #include <QtCore/QEvent>
 #include <QtCore/QTime>
+#include <QtCore/QFileInfo>
 #include <QtGui/QGridLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
@@ -2774,6 +2775,23 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             QList<QAction*> additionalActions;
             additionalActions.append(pasteAction);
 
+            if ( urls.count() == 1 ) {
+
+                const KUrl url = KIO::NetAccess::mostLocalUrl(urls[0] , 0);
+
+                if ( url.isLocalFile() ) {
+                    const QFileInfo fileInfo(url.path());
+
+                    if ( fileInfo.isDir() ) {
+                        QAction* cdAction = new QAction(i18n("&Change Directory to"), this);
+                        dropText = QLatin1String(" cd ") + dropText + QChar('\n');
+                        cdAction->setData(dropText);
+                        connect(cdAction, SIGNAL(triggered()), this, SLOT(dropMenuCdActionTriggered()));
+                        additionalActions.append(cdAction);
+                    }
+                }
+            }
+
             KUrl target(_sessionController->currentDir());
 
             KonqOperations::doDrop(KFileItem(), target, event, this, additionalActions);
@@ -2792,6 +2810,16 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 }
 
 void TerminalDisplay::dropMenuPasteTriggered()
+{
+    if (sender()) {
+        const QAction* action = dynamic_cast<const QAction*>(sender());
+        if (action) {
+            emit sendStringToEmu(action->data().toString().toLocal8Bit());
+        }
+    }
+}
+
+void TerminalDisplay::dropMenuCdActionTriggered()
 {
     if (sender()) {
         const QAction* action = dynamic_cast<const QAction*>(sender());

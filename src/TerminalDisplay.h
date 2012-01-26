@@ -557,6 +557,8 @@ public slots:
      */
     void dropMenuPasteTriggered();
 
+    void dropMenuCdActionTriggered();
+
 signals:
 
     /**
