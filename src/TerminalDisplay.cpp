@@ -2783,7 +2783,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
                     const QFileInfo fileInfo(url.path());
 
                     if ( fileInfo.isDir() ) {
-                        QAction* cdAction = new QAction(i18n("&Change Directory to"), this);
+                        QAction* cdAction = new QAction(i18n("Change &Directory To"), this);
                         dropText = QLatin1String(" cd ") + dropText + QChar('\n');
                         cdAction->setData(dropText);
                         connect(cdAction, SIGNAL(triggered()), this, SLOT(dropMenuCdActionTriggered()));
