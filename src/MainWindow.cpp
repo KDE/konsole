@@ -408,8 +408,10 @@ void MainWindow::newWindow()
 
 bool MainWindow::queryClose()
 {
-    if (kapp->sessionSaving() ||
-            _viewManager->viewProperties().count() < 2)
+    // TODO: Ideally, we should check what process is running instead
+    //       of just how many sessions are running.
+    // If only 1 session is running, don't ask user to confirm close.
+    if (_viewManager->viewProperties().count() < 2)
         return true;
 
     int result = KMessageBox::warningYesNoCancel(this,
