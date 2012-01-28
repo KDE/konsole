@@ -397,12 +397,14 @@ void MainWindow::openUrls(const QList<KUrl>& urls)
 
 void MainWindow::newTab()
 {
-    emit newSessionRequest( _defaultProfile , activeSessionDir() , _viewManager);
+    Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
+    emit newSessionRequest(defaultProfile , activeSessionDir() , _viewManager);
 }
 
 void MainWindow::newWindow()
 {
-    emit newWindowRequest( _defaultProfile , activeSessionDir() );
+    Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
+    emit newWindowRequest(defaultProfile , activeSessionDir());
 }
 
 bool MainWindow::queryClose()
