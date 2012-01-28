@@ -179,15 +179,6 @@ void MainWindow::correctShortcuts()
     bookmarkAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_B));
 }
 
-void MainWindow::setDefaultProfile(Profile::Ptr profile)
-{
-    _defaultProfile = profile;
-}
-Profile::Ptr MainWindow::defaultProfile() const
-{
-    return _defaultProfile;
-}
-
 ViewManager* MainWindow::viewManager() const
 {
     return _viewManager;
@@ -347,7 +338,7 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
         foreach(QAction * action, actions) {
             newTabMenu->addAction(action);
 
-            // NOTE: _defaultProfile seems to not work here, sigh.
+            // NOTE: defaultProfile seems to not work here, sigh.
             Profile::Ptr profile = SessionManager::instance()->defaultProfile();
             if (profile && profile->name() == action->text().remove('&')) {
                 action->setIcon(KIcon(profile->icon(), NULL, QStringList("emblem-favorite")));
@@ -387,12 +378,14 @@ QString MainWindow::activeSessionDir() const
 
 void MainWindow::openUrls(const QList<KUrl>& urls)
 {
+    Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
+
     foreach(const KUrl & url , urls) {
         if (url.isLocalFile())
-            emit newSessionRequest(_defaultProfile , url.path() , _viewManager);
+            emit newSessionRequest(defaultProfile , url.path() , _viewManager);
 
         else if (url.protocol() == "ssh")
-            emit newSSHSessionRequest(_defaultProfile , url , _viewManager);
+            emit newSSHSessionRequest(defaultProfile , url , _viewManager);
     }
 }
 
@@ -443,19 +436,11 @@ bool MainWindow::queryClose()
 
 void MainWindow::saveProperties(KConfigGroup& group)
 {
-    if (_defaultProfile)
-        group.writePathEntry("Default Profile", _defaultProfile->path());
     _viewManager->saveSessions(group);
 }
 
 void MainWindow::readProperties(const KConfigGroup& group)
 {
-    SessionManager* manager = SessionManager::instance();
-    QString profilePath = group.readPathEntry("Default Profile", QString());
-    Profile::Ptr profile = manager->defaultProfile();
-    if (!profilePath.isEmpty())
-        profile = manager->loadProfile(profilePath);
-    setDefaultProfile(profile);
     _viewManager->restoreSessions(group);
 }
 

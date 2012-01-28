@@ -128,15 +128,15 @@ int Application::newInstance()
         MainWindow* window = processWindowArgs(args);
 
         // select profile to use
-        processProfileSelectArgs(args, window);
+        Profile::Ptr baseProfile = processProfileSelectArgs(args);
 
         // process various command-line options which cause a property of the
         // default profile to be changed
-        processProfileChangeArgs(args, window);
+        Profile::Ptr newProfile = processProfileChangeArgs(args, baseProfile);
 
         if (!args->isSet("tabs-from-file")) {
             // create new session
-            Session* session = createSession(window->defaultProfile(),
+            Session* session = createSession(newProfile,
                                              QString(),
                                              window->viewManager());
             if (!args->isSet("close")) {
@@ -257,10 +257,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     // FIXME: A lot of duplicate code below
 
     // Get the default profile
-    Profile::Ptr defaultProfile = window->defaultProfile();
-    if (!defaultProfile) {
-        defaultProfile = SessionManager::instance()->defaultProfile();
-    }
+    Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
 
     // Create profile setting, with command and workdir
     Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile));
@@ -270,13 +267,10 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     if (args->isSet("workdir")) {
         newProfile->setProperty(Profile::Directory, args->getOption("workdir"));
     }
-    if (!newProfile->isEmpty()) {
-        window->setDefaultProfile(newProfile);
-    }
 
     // Create the new session
-    Session* session = createSession(window->defaultProfile(), QString(),
-                                     window->viewManager());
+    Session* session = createSession(newProfile, QString(), window->viewManager());
+
     session->setTabTitleFormat(Session::LocalTabTitle, title);
     session->setTabTitleFormat(Session::RemoteTabTitle, title);
     // Ensure that new title is displayed
@@ -288,11 +282,6 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
         window->resize(window->sizeHint());
     }
 
-    // Reset the profile to default. Otherwise, the next manually
-    // created tab would have the command above!
-    newProfile = Profile::Ptr(new Profile(defaultProfile));
-    newProfile->setHidden(true);
-    window->setDefaultProfile(newProfile);
 }
 
 MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
@@ -314,17 +303,18 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
     return window;
 }
 
-void Application::processProfileSelectArgs(KCmdLineArgs* args,
-        MainWindow* window)
+Profile::Ptr Application::processProfileSelectArgs(KCmdLineArgs* args)
 {
+    Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
+
     if (args->isSet("profile")) {
         Profile::Ptr profile = SessionManager::instance()->loadProfile(
                                    args->getOption("profile"));
-        if (!profile)
-            profile = SessionManager::instance()->defaultProfile();
-
-        window->setDefaultProfile(profile);
+        if (profile)
+            return profile;
     }
+
+    return defaultProfile;
 }
 
 bool Application::processHelpArgs(KCmdLineArgs* args)
@@ -338,13 +328,10 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
     }
     return false;
 }
-void Application::processProfileChangeArgs(KCmdLineArgs* args,
-        MainWindow* window)
+
+Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::Ptr baseProfile)
 {
-    Profile::Ptr defaultProfile = window->defaultProfile();
-    if (!defaultProfile)
-        defaultProfile = SessionManager::instance()->defaultProfile();
-    Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile));
+    Profile::Ptr newProfile = Profile::Ptr(new Profile(baseProfile));
     newProfile->setHidden(true);
 
     // change the initial working directory
@@ -363,9 +350,7 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,
         }
     }
 
-    if (!newProfile->isEmpty()) {
-        window->setDefaultProfile(newProfile);
-    }
+    return newProfile;
 }
 
 void Application::startBackgroundMode(MainWindow* window)
@@ -416,7 +401,6 @@ void Application::detachView(Session* session)
 void Application::createWindow(Profile::Ptr profile, const QString& directory)
 {
     MainWindow* window = newMainWindow();
-    window->setDefaultProfile(profile);
     createSession(profile, directory, window->viewManager());
     window->show();
 }

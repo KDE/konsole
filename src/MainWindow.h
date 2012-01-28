@@ -87,20 +87,6 @@ public:
      */
     BookmarkHandler* bookmarkHandler() const;
 
-    /**
-     * Sets the default profile for this window.
-     * This is the default value for the profile argument
-     * when the newSessionRequest() and newWindow() signals
-     * are emitted.
-     */
-    void setDefaultProfile(Profile::Ptr profile);
-
-    /**
-     * Returns the default profile for this window.
-     * See setDefaultProfile()
-     */
-    Profile::Ptr defaultProfile() const;
-
 signals:
     /**
      * Emitted by the main window to request the creation of a new session.
@@ -201,8 +187,6 @@ private:
     KActionMenu* _newTabMenuAction;
 
     QPointer<SessionController> _pluggedController;
-
-    Profile::Ptr _defaultProfile;
 
     bool _menuBarInitialVisibilityApplied;
 };
