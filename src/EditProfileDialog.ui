@@ -345,7 +345,7 @@
           <item row="0" column="1">
            <widget class="KIntSpinBox" name="silenceSecondsSpinner">
             <property name="toolTip">
-             <string>The threshold for continuous silence to be deteced by Konsole</string>
+             <string>The threshold for continuous silence to be detected by Konsole</string>
             </property>
             <property name="minimum">
              <number>1</number>
