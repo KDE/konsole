@@ -142,22 +142,6 @@ int Application::newInstance()
             if (!args->isSet("close")) {
                 session->setAutoClose(false);
             }
-
-            // run a custom command, don't store it in the default profile.
-            // Otherwise it will become the default for new tabs.
-            if (args->isSet("e")) {
-                QStringList arguments;
-                arguments << args->getOption("e");
-                for (int i = 0 ; i < args->count() ; i++)
-                    arguments << args->arg(i);
-
-                QString exec = args->getOption("e");
-                if (exec.startsWith(QLatin1String("./")))
-                    exec = QDir::currentPath() + exec.mid(1);
-
-                session->setProgram(exec);
-                session->setArguments(arguments);
-            }
         } else {
             // create new session(s) as described in file
             processTabsFromFileArgs(args, window);
@@ -348,6 +332,21 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
             iter.next();
             newProfile->setProperty(iter.key(), iter.value());
         }
+    }
+
+    // run a custom command
+    if ( args->isSet("e") ) {
+        QStringList arguments;
+        arguments << args->getOption("e");
+        for ( int i = 0 ; i < args->count() ; i++ )
+            arguments << args->arg(i);
+
+        QString exec = args->getOption("e");
+        if (exec.startsWith(QLatin1String("./")))
+            exec = QDir::currentPath() + exec.mid(1);
+
+        newProfile->setProperty(Profile::Command, exec);
+        newProfile->setProperty(Profile::Arguments, arguments);
     }
 
     return newProfile;
