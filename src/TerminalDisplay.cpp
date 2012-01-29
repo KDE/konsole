@@ -2770,7 +2770,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
             QAction* pasteAction = new QAction(i18n("&Paste Location"), this);
             pasteAction->setData(dropText);
-            connect(pasteAction, SIGNAL(triggered()), this, SLOT(dropMenuPasteTriggered()));
+            connect(pasteAction, SIGNAL(triggered()), this, SLOT(dropMenuPasteActionTriggered()));
 
             QList<QAction*> additionalActions;
             additionalActions.append(pasteAction);
