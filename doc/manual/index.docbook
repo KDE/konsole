@@ -73,7 +73,9 @@
 emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.
 </para>
 
-<para>Explaining the use of the &UNIX; <acronym>CLI</acronym> is beyond the scope of this document.  A search of the web for these terms will produce more information.
+<para>&konsole; typically runs a command shell, an application that executes commands that you type. 
+The shell the &konsole; runs depends on your account settings.  
+Consult your operating system documentation to know what the shell is, how to configure it and how to use it.
 </para>
 </sect1>
 
@@ -809,7 +811,7 @@ can be specified to modify its behavior.</para>
 <variablelist>
 <varlistentry>
 <term><option>--help</option></term>
-<listitem><para><action>List the various options</action>.</para></listitem>
+<listitem><para><action>List various options</action>.</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -820,13 +822,19 @@ instead of the default profile.</para></listitem>
 
 <varlistentry>
 <term><option>--list-profiles</option></term>
-<listitem><para><action>List</action> all of the available profiles.
+<listitem><para><action>List</action> all available profiles.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--list-profile-properties</option></term>
+<listitem><para><action>List</action> all possible properties with name and type. See option <option>-p</option> .
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><option>--background-mode</option></term>
-<listitem><para><action>Start &konsole;</action> in the background and bring to the front when the F12 key is pressed.
+<listitem><para><action>Start &konsole;</action> in the background and bring to the front when Ctrl+Shift+F12 (by default) is pressed.
 </para></listitem>
 </varlistentry>
 
@@ -880,14 +888,13 @@ title: This is the title;; command: run me
 <term><option>-e</option> <parameter>command</parameter></term>
 <listitem><para><action>Execute</action>
 <parameter>command</parameter> instead of the normal shell.</para>
-<note><para>Any arguments after <parameter>command</parameter> will be passed to
-<parameter>command</parameter>, not &konsole;.</para></note>
+<note><para>This option will catch all following arguments passed to &konsole;, and execute it as <parameter>command</parameter>. So this option should always be used as the last option.</para></note>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term><option>--nofork</option></term>
-<listitem><para><action>Do not run in the background</action>.  This is often needed to mimic other terminals.
+<listitem><para><action>Do not run in the background</action>.  This is often needed to mimic other terminal emulators.
 </para></listitem>
 </varlistentry>
 
@@ -1119,6 +1126,14 @@ This is most noticeable when a command that connects to an external device or sy
 </para>
 <para>
 Of course, users still can run login shell in &konsole; if they really need to. Edit the profile in use and modify its command to the form of starting a login shell explicitly, such as "<command>bash -l</command>" and "<command>zsh -l</command>".
+</para>
+</listitem>
+
+<listitem><para>
+The <option>--new-tab</option> option sometimes behaves strangely. It may create new window, or it may create new tab in another existing &konsole; window instead of the current &konsole; window. 
+</para>
+<para>
+Those behaviors feel strange, but they are not necessarily bugs. The <option>--new-tab</option> option tries to reuse existing &konsole; windows, but not all &konsole; windows are reusable. All &konsole; windows opened through &krunner; are reusable, while most &konsole; windows opened from command line are not.
 </para>
 </listitem>
 
