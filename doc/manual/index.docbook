@@ -834,7 +834,7 @@ instead of the default profile.</para></listitem>
 
 <varlistentry>
 <term><option>--background-mode</option></term>
-<listitem><para><action>Start &konsole;</action> in the background and bring to the front when Ctrl+Shift+F12 (by default) is pressed.
+<listitem><para><action>Start &konsole;</action> in the background and bring to the front when <keycombo action="simul">&Ctrl;&Shift;<keycap>F12</keycap></keycombo> (by default) is pressed.
 </para></listitem>
 </varlistentry>
 
