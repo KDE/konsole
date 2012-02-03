@@ -525,7 +525,7 @@ public slots:
     /**
      * Sets the history capacity of this session.
      *
-     * @param size The history capacity in unit of lines. Its value can be:
+     * @param lines The history capacity in unit of lines. Its value can be:
      * <ul>
      * <li> positive integer  -  fixed size history</li>
      * <li> 0 -  no history</li>

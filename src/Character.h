@@ -85,7 +85,10 @@ public:
      * @param _c The unicode character value of this character.
      * @param _f The foreground color used to draw the character.
      * @param _b The color used to draw the character's background.
-     * @param _r A set of rendition flags which specify how this character is to be drawn.
+     * @param _r A set of rendition flags which specify how this character
+     *           is to be drawn.
+     * @param _real Indicate whether this character really exists, or exists
+     *              simply as place holder.
      */
     explicit inline Character(quint16 _c = ' ',
                               CharacterColor  _f = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR),
