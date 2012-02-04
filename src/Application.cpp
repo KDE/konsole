@@ -114,8 +114,9 @@ void Application::listProfilePropertyInfo()
 
 int Application::newInstance()
 {
-    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
     static bool firstInstance = true;
+
+    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
 
     // handle session management
     if ((args->count() != 0) || !firstInstance || !isSessionRestored()) {
