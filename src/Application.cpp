@@ -316,12 +316,15 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
 
 Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::Ptr baseProfile)
 {
+    bool shouldUseNewProfile = false;
+
     Profile::Ptr newProfile = Profile::Ptr(new Profile(baseProfile));
     newProfile->setHidden(true);
 
     // change the initial working directory
     if (args->isSet("workdir")) {
         newProfile->setProperty(Profile::Directory, args->getOption("workdir"));
+        shouldUseNewProfile = true;
     }
 
     // temporary changes to profile options specified on the command line
@@ -333,6 +336,8 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
             iter.next();
             newProfile->setProperty(iter.key(), iter.value());
         }
+
+        shouldUseNewProfile = true;
     }
 
     // run a custom command
@@ -348,9 +353,16 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
 
         newProfile->setProperty(Profile::Command, exec);
         newProfile->setProperty(Profile::Arguments, arguments);
+
+        shouldUseNewProfile = true;
     }
 
-    return newProfile;
+    if ( shouldUseNewProfile ) {
+        return newProfile;
+    }
+    else {
+        return baseProfile;
+    }
 }
 
 void Application::startBackgroundMode(MainWindow* window)
