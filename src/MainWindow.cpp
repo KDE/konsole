@@ -278,7 +278,7 @@ void MainWindow::setupActions()
     collection->addAction("bookmark" , bookmarkMenu);
     connect(_bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)));
 
-    // View Menu
+    // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
     _toggleMenuBarAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
 
@@ -286,7 +286,6 @@ void MainWindow::setupActions()
     action = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
     action->setShortcut(QKeySequence());
 
-    // Settings Menu
     KStandardAction::configureNotifications(this , SLOT(configureNotifications()) , collection);
     KStandardAction::keyBindings(this , SLOT(showShortcutsDialog()) , collection);
     KStandardAction::preferences(this, SLOT(showSettingsDialog()), collection);
