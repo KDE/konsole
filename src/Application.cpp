@@ -127,14 +127,17 @@ int Application::newInstance()
         // create a new window or use an existing one
         MainWindow* window = processWindowArgs(args);
 
-        // select profile to use
-        Profile::Ptr baseProfile = processProfileSelectArgs(args);
+        if (args->isSet("tabs-from-file")) {
+            // create new session(s) as described in file
+            processTabsFromFileArgs(args, window);
+        } else {
+            // select profile to use
+            Profile::Ptr baseProfile = processProfileSelectArgs(args);
 
-        // process various command-line options which cause a property of the
-        // default profile to be changed
-        Profile::Ptr newProfile = processProfileChangeArgs(args, baseProfile);
+            // process various command-line options which cause a property of the
+            // selected profile to be changed
+            Profile::Ptr newProfile = processProfileChangeArgs(args, baseProfile);
 
-        if (!args->isSet("tabs-from-file")) {
             // create new session
             Session* session = createSession(newProfile,
                                              QString(),
@@ -142,9 +145,6 @@ int Application::newInstance()
             if (!args->isSet("close")) {
                 session->setAutoClose(false);
             }
-        } else {
-            // create new session(s) as described in file
-            processTabsFromFileArgs(args, window);
         }
 
         // if the background-mode argument is supplied, start the background
