@@ -238,6 +238,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     const QString& title = tokens["title"];
     const QString& command = tokens["command"];
     const QString& profile = tokens["profile"];  // currently not used
+    Q_UNUSED(profile);
 
     // FIXME: A lot of duplicate code below
 
