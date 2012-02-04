@@ -235,9 +235,9 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
 void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
                                     const QHash<QString, QString>& tokens)
 {
-    QString title = tokens["title"];
-    QString command = tokens["command"];
-    QString profile = tokens["profile"];  // currently not used
+    const QString& title = tokens["title"];
+    const QString& command = tokens["command"];
+    const QString& profile = tokens["profile"];  // currently not used
 
     // FIXME: A lot of duplicate code below
 
