@@ -290,7 +290,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     // FIXME: this ugly hack here is to make the session start running, so that
     // its tab title is displayed as expected.
     //
-    // This is another side effect of the commit fixing BKO 172902.
+    // This is another side effect of the commit fixing BKO 176902.
     window->show();
     window->hide();
 
