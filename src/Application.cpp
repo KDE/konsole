@@ -271,10 +271,6 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     if (!args->isSet("close")) {
         session->setAutoClose(false);
     }
-    if (!window->testAttribute(Qt::WA_Resized)) {
-        window->resize(window->sizeHint());
-    }
-
 }
 
 MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
