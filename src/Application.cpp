@@ -279,18 +279,20 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     Profile::Ptr theProfile = shouldUseNewProfile ? newProfile :  baseProfile ;
     Session* session = createSession(theProfile, QString(), window->viewManager());
 
-    // Ensure that new tab title is displayed at first
-    // TODO: find a good solution for the case when title is not specified by users
-    if (!title.isEmpty()) {
-        session->setTitle(Session::DisplayedTitleRole, title);
-    }
-
     if (!args->isSet("close")) {
         session->setAutoClose(false);
     }
+
     if (!window->testAttribute(Qt::WA_Resized)) {
         window->resize(window->sizeHint());
     }
+
+    // FIXME: this ugly hack here is to make the session start running, so that
+    // its tab title is displayed as expected.
+    //
+    // This is another side effect of the commit fixing BKO 172902.
+    window->show();
+    window->hide();
 
 }
 
