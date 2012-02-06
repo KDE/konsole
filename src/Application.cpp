@@ -206,7 +206,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
 
     unsigned int sessions = 0;
     while (!tabsFile.atEnd()) {
-        QString lineString(tabsFile.readLine());
+        QString lineString(tabsFile.readLine().trimmed());
         if ((lineString.isEmpty()) || (lineString[0] == '#'))
             continue;
 
