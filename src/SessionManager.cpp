@@ -145,6 +145,11 @@ Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
     if (!fileInfo.isAbsolute())
         path = KStandardDirs::locate("data", path);
 
+    // if the file is not found, return imediately
+    if ( path.isEmpty() ) {
+        return Profile::Ptr();
+    }
+
     // check that we have not already loaded this profile
     foreach ( const Profile::Ptr& profile, _profiles) {
         if (profile->path() == path)
