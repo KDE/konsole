@@ -218,12 +218,12 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
             QString value = lineParts.at(i).section(':', 1, 1).trimmed();
             lineTokens[key] = value;
         }
-        // command: is the only token required
-        if (lineTokens.contains("command")) {
+        // should contain at least one of 'command' and 'profile'
+        if (lineTokens.contains("command") || lineTokens.contains("profile") ) {
             createTabFromArgs(args, window, lineTokens);
             sessions++;
         } else {
-            kWarning() << "Tab file line must have the 'command:' entry.";
+            kWarning() << "Each line should contain at least one of 'commad' and 'profile'.";
         }
     }
     tabsFile.close();
@@ -240,31 +240,48 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
 {
     const QString& title = tokens["title"];
     const QString& command = tokens["command"];
-    const QString& profile = tokens["profile"];  // currently not used
-    Q_UNUSED(profile);
+    const QString& profile = tokens["profile"];
 
-    // FIXME: A lot of duplicate code below
+    Profile::Ptr baseProfile;
+    if (!profile.isEmpty()) {
+        baseProfile = SessionManager::instance()->loadProfile(profile);
+    }
+    if (!baseProfile) {
+        // fallback to default profile
+        baseProfile = SessionManager::instance()->defaultProfile();
+    }
 
-    // Get the default profile
-    Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
-
-    // Create profile setting, with command and workdir
-    Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile));
+    Profile::Ptr newProfile = Profile::Ptr(new Profile(baseProfile));
     newProfile->setHidden(true);
-    newProfile->setProperty(Profile::Command,   command);
-    newProfile->setProperty(Profile::Arguments, command.split(' '));
+
+    // FIXME: the method of determining whethter to use newProfile does not
+    // scale well when we support more fields in the future
+    bool shouldUseNewProfile = false;
+
+    if (!command.isEmpty()) {
+        newProfile->setProperty(Profile::Command,   command);
+        newProfile->setProperty(Profile::Arguments, command.split(' '));
+        shouldUseNewProfile = true;
+    }
+
+    if (!title.isEmpty()) {
+        newProfile->setProperty(Profile::LocalTabTitleFormat, title);
+        newProfile->setProperty(Profile::RemoteTabTitleFormat, title);
+        shouldUseNewProfile = true;
+    }
+
     if (args->isSet("workdir")) {
         newProfile->setProperty(Profile::Directory, args->getOption("workdir"));
+        shouldUseNewProfile = true;
     }
 
     // Create the new session
-    Session* session = createSession(newProfile, QString(), window->viewManager());
+    Profile::Ptr theProfile = shouldUseNewProfile ? newProfile :  baseProfile ;
+    Session* session = createSession(theProfile, QString(), window->viewManager());
 
-    // customize tab title only when explicitly requested
+    // Ensure that new tab title is displayed at first
+    // TODO: find a good solution for the case when title is not specified by users
     if (!title.isEmpty()) {
-        session->setTabTitleFormat(Session::LocalTabTitle, title);
-        session->setTabTitleFormat(Session::RemoteTabTitle, title);
-        // Ensure that new title is displayed
         session->setTitle(Session::DisplayedTitleRole, title);
     }
 
