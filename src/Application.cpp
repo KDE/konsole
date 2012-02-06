@@ -260,10 +260,14 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     // Create the new session
     Session* session = createSession(newProfile, QString(), window->viewManager());
 
-    session->setTabTitleFormat(Session::LocalTabTitle, title);
-    session->setTabTitleFormat(Session::RemoteTabTitle, title);
-    // Ensure that new title is displayed
-    session->setTitle(Session::DisplayedTitleRole, title);
+    // customize tab title only when explicitly requested
+    if (!title.isEmpty()) {
+        session->setTabTitleFormat(Session::LocalTabTitle, title);
+        session->setTabTitleFormat(Session::RemoteTabTitle, title);
+        // Ensure that new title is displayed
+        session->setTitle(Session::DisplayedTitleRole, title);
+    }
+
     if (!args->isSet("close")) {
         session->setAutoClose(false);
     }
