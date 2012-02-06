@@ -107,8 +107,11 @@ void Application::listProfilePropertyInfo()
 {
     Profile::Ptr tempProfile = SessionManager::instance()->defaultProfile();
     const QStringList names = tempProfile->propertiesInfoList();
-    for (int i = 0; i < names.size(); ++i)
-        std::cout << names.at(i).toLocal8Bit().data() << std::endl;
+
+    foreach ( const QString& name, names) {
+        std::cout << name.toLocal8Bit().data() << std::endl;
+    }
+
     quit();
 }
 
