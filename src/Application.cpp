@@ -215,7 +215,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
 
         for (int i = 0; i < lineParts.size(); ++i) {
             QString key = lineParts.at(i).section(':', 0, 0).trimmed().toLower();
-            QString value = lineParts.at(i).section(':', 1, 1).trimmed();
+            QString value = lineParts.at(i).section(':', 1, -1).trimmed();
             lineTokens[key] = value;
         }
         // should contain at least one of 'command' and 'profile'
