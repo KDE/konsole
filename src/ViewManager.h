@@ -241,6 +241,9 @@ public slots:
      */
     int newSession(QString profile, QString directory);
 
+    // DBus slot that returns the name of default profile
+    QString defaultProfile();
+
     // DBus slot that returns a string list of defined (known) profiles
     QStringList profileList();
 

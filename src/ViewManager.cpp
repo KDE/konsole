@@ -988,6 +988,11 @@ int ViewManager::newSession(QString profile, QString directory)
     return session->sessionId();
 }
 
+QString ViewManager::defaultProfile()
+{
+    return SessionManager::instance()->defaultProfile()->name();
+}
+
 QStringList ViewManager::profileList()
 {
     QStringList list;
