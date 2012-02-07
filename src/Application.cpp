@@ -75,7 +75,7 @@ void Application::init()
 MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
-    window->setSessionList(new ProfileList(true, window));
+    window->setProfileList(new ProfileList(true, window));
 
     connect(window,
             SIGNAL(newSessionRequest(Profile::Ptr,QString,ViewManager*)),

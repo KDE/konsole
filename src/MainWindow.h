@@ -79,8 +79,8 @@ public:
      */
     IncrementalSearchBar* searchBar() const;
 
-    /** Sets the list of sessions to be displayed in the File menu */
-    void setSessionList(ProfileList* list);
+    /** Sets the list of profiles to be displayed in the File menu */
+    void setProfileList(ProfileList* list);
 
     /**
      * Returns the bookmark handler associated with this window.

@@ -315,7 +315,7 @@ BookmarkHandler* MainWindow::bookmarkHandler() const
     return _bookmarkHandler;
 }
 
-void MainWindow::setSessionList(ProfileList* list)
+void MainWindow::setProfileList(ProfileList* list)
 {
     sessionListChanged(list->actions());
 
