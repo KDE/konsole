@@ -83,7 +83,6 @@ MainWindow::MainWindow()
     // create actions for menus
     setupActions();
 
-
     // create view manager
     _viewManager = new ViewManager(this, actionCollection());
     connect(_viewManager , SIGNAL(empty()) , this , SLOT(close()));
@@ -114,10 +113,11 @@ MainWindow::MainWindow()
     // create menus
     createGUI();
 
+    // rememebr the original menu accelerators for later use
     rememberMenuAccelerators();
 
     // replace standard shortcuts which cannot be used in a terminal
-    // (as they are reserved for use by terminal programs)
+    // emulator (as they are reserved for use by terminal applications)
     correctShortcuts();
 
     // enable save and restore of window size
@@ -130,7 +130,7 @@ MainWindow::MainWindow()
 
 void MainWindow::rememberMenuAccelerators()
 {
-    foreach(QAction * menuItem, menuBar()->actions()) {
+    foreach(QAction* menuItem, menuBar()->actions()) {
         QString itemText = menuItem->text();
         menuItem->setData(itemText);
     }
@@ -146,7 +146,7 @@ void MainWindow::rememberMenuAccelerators()
 // can then be redefined there to exclude the standard accelerators
 void MainWindow::removeMenuAccelerators()
 {
-    foreach(QAction * menuItem, menuBar()->actions()) {
+    foreach(QAction* menuItem, menuBar()->actions()) {
         QString itemText = menuItem->text();
         itemText = KGlobal::locale()->removeAcceleratorMarker(itemText);
         menuItem->setText(itemText);
@@ -155,7 +155,7 @@ void MainWindow::removeMenuAccelerators()
 
 void MainWindow::recoverMenuAccelerators()
 {
-    foreach(QAction * menuItem, menuBar()->actions()) {
+    foreach(QAction* menuItem, menuBar()->actions()) {
         QString itemText = menuItem->data().toString();
         menuItem->setText(itemText);
     }
@@ -295,7 +295,7 @@ void MainWindow::setupActions()
     action->setIcon(KIcon("configure"));
     connect(action, SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()));
 
-    // Set up an action and shortcut for activating menu bar.
+    // Set up an shortcut-only action for activating menu bar.
     action = collection->addAction("activate-menu");
     action->setText(i18n("Activate Menu"));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F10));
@@ -379,7 +379,7 @@ void MainWindow::openUrls(const QList<KUrl>& urls)
 {
     Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
 
-    foreach(const KUrl & url , urls) {
+    foreach(const KUrl& url , urls) {
         if (url.isLocalFile())
             emit newSessionRequest(defaultProfile , url.path() , _viewManager);
 
@@ -548,16 +548,17 @@ void MainWindow::activateMenuBar()
     if (menuActions.isEmpty())
         return;
 
-    // First menu action should be 'File'
-    QAction* fileAction = menuActions.first();
-
-    if (menuBar()->isHidden()) { // Show menubar if hidden
-        _toggleMenuBarAction->setChecked(true);
+    // Show menubar if it is hidden at the moment
+    if (menuBar()->isHidden()) {
         menuBar()->setVisible(true);
+        _toggleMenuBarAction->setChecked(true);
     }
 
+    // First menu action should be 'File'
+    QAction* menuAction = menuActions.first();
+
     // TODO: Handle when menubar is top level (MacOS)
-    menuBar()->setActiveAction(fileAction);
+    menuBar()->setActiveAction(menuAction);
 }
 
 void MainWindow::setupWidgets()
