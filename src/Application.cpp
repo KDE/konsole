@@ -181,16 +181,20 @@ int Application::newInstance()
 }
 
 /* Documentation for tab file:
+ *
  * ;; is the token separator
- * # at the beginning of line results in line being ignored
- * tokens are title:, command:, profile: (not used currently)
+ * # at the beginning of line results in line being ignored.
+ * supported stokens are title, command and profile.
+ *
  * Note that the title is static and the tab will close when the
  * command is complete (do not use --noclose).  You can start new tabs.
+ *
  * Examples:
 title: This is the title;; command: ssh jupiter
 title: Top this!;; command: top
-#title: This is commented out;; command: ssh jupiter
+#this line is comment
 command: ssh  earth
+profile: Zsh
 */
 void Application::processTabsFromFileArgs(KCmdLineArgs* args,
         MainWindow* window)
