@@ -378,6 +378,8 @@ public slots:
      */
     Q_SCRIPTABLE void setEnvironment(const QStringList& environment);
 
+    void addEnvironmentEntry(const QString& entry);
+
     /**
      * Closes the terminal session. It kills the terminal process by calling
      * closeInNormalWay() and, optionally, closeInForceWay().

@@ -843,6 +843,11 @@ void Session::setEnvironment(const QStringList& environment)
     _environment = environment;
 }
 
+void Session::addEnvironmentEntry(const QString& entry)
+{
+    _environment << entry;
+}
+
 int Session::sessionId() const
 {
     return _sessionId;

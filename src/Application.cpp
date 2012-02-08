@@ -457,6 +457,8 @@ Session* Application::createSession(Profile::Ptr profile,
             && profile->property<bool>(Profile::StartInCurrentSessionDir))
         session->setInitialWorkingDirectory(directory);
 
+    session->addEnvironmentEntry( QString("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(viewManager->managerId()) );
+
     // create view before starting the session process so that the session
     // doesn't suffer a change in terminal size right after the session
     // starts.  Some applications such as GNU Screen and Midnight Commander

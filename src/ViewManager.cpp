@@ -50,6 +50,8 @@
 
 using namespace Konsole;
 
+int ViewManager::lastManagerId = 0;
+
 ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     : QObject(parent)
     , _viewSplitter(0)
@@ -61,6 +63,7 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     , _navigationPosition(ViewContainer::NavigationPositionTop)
     , _showQuickButtons(false)
     , _newTabBehavior(PutNewTabAtTheEnd)
+    , _managerId(0)
 {
     // create main view area
     _viewSplitter = new ViewSplitter(0);
@@ -96,12 +99,20 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     new KonsoleAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Konsole"), this);
 
+    _managerId = ++lastManagerId;
+    QDBusConnection::sessionBus().registerObject(QLatin1String("/Windows/") + QString::number(_managerId), this);
 }
 
 ViewManager::~ViewManager()
 {
     delete _newViewMenu;
 }
+
+int ViewManager::managerId() const
+{
+    return _managerId;
+}
+
 QMenu* ViewManager::createNewViewMenu()
 {
     if (_newViewMenu)

@@ -178,6 +178,8 @@ public:
     void updateNavigationOptions(NavigationOptions options);
     void applyNavigationOptions(ViewContainer* container);
 
+    int managerId() const;
+
 signals:
     /** Emitted when the last view is removed from the view manager */
     void empty();
@@ -389,6 +391,9 @@ private:
     ViewContainer::NavigationPosition _navigationPosition;
     bool _showQuickButtons;
     NewTabBehavior _newTabBehavior;
+
+    int _managerId;
+    static int lastManagerId;
 };
 
 }
