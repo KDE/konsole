@@ -458,8 +458,9 @@ void Session::run()
     // the color scheme as "black on white" or "white on black" depending on whether
     // the background color is deemed dark or not
     QString backgroundColorHint = _hasDarkBackground ? "COLORFGBG=15;0" : "COLORFGBG=0;15";
-    _environment << backgroundColorHint;
-    _environment << QString("SHELL_SESSION_ID=%1").arg(shellSessionId());
+    addEnvironmentEntry( backgroundColorHint );
+
+    addEnvironmentEntry( QString("SHELL_SESSION_ID=%1").arg(shellSessionId()) );
 
     int result = _shellProcess->start(exec,
                                       arguments,
