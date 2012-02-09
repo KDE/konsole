@@ -137,8 +137,8 @@ void Pty::setInitialWorkingDirectory(const QString& dir)
 
     // remove trailing slash in the path when appropriate
     // example: /usr/share/icons/ ==> /usr/share/icons
-    if ( pwd.length() > 1 && pwd.at(pwd.length()-1) == QChar('/') ) {
-        pwd.truncate(pwd.length()-1);
+    if ( pwd.length() > 1 && pwd.endsWith(QLatin1String("/")) ) {
+        pwd.chop(1);
     }
 
     setWorkingDirectory(pwd);
