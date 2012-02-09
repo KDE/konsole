@@ -161,10 +161,7 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
 int Pty::start(const QString& program,
                const QStringList& programArguments,
                const QStringList& environment,
-               ulong winid,
-               bool addToUtmp,
-               const QString& dbusService,
-               const QString& dbusSession)
+               bool addToUtmp)
 {
     clearProgram();
 
@@ -175,13 +172,6 @@ int Pty::start(const QString& program,
     setProgram(program.toLatin1(), programArguments.mid(1));
 
     addEnvironmentVariables(environment);
-
-    if (!dbusService.isEmpty())
-        setEnv("KONSOLE_DBUS_SERVICE", dbusService);
-    if (!dbusSession.isEmpty())
-        setEnv("KONSOLE_DBUS_SESSION", dbusSession);
-
-    setEnv("WINDOWID", QString::number(winid));
 
     // unless the LANGUAGE environment variable has been set explicitly
     // set it to a null string

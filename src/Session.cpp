@@ -443,8 +443,6 @@ void Session::run()
                             QStringList() << exec :
                             _arguments;
 
-    QString dbusService = QDBusConnection::sessionBus().baseService();
-
     if (!_initialWorkingDir.isEmpty())
         _shellProcess->setInitialWorkingDirectory(_initialWorkingDir);
     else
@@ -457,19 +455,23 @@ void Session::run()
     // tell the terminal exactly which colors are being used, but instead approximates
     // the color scheme as "black on white" or "white on black" depending on whether
     // the background color is deemed dark or not
-    QString backgroundColorHint = _hasDarkBackground ? "COLORFGBG=15;0" : "COLORFGBG=0;15";
+    const QString backgroundColorHint = _hasDarkBackground ? "COLORFGBG=15;0" : "COLORFGBG=0;15";
     addEnvironmentEntry( backgroundColorHint );
 
     addEnvironmentEntry( QString("SHELL_SESSION_ID=%1").arg(shellSessionId()) );
 
+    addEnvironmentEntry( QString("WINDOWID=%1").arg(QString::number(windowId())) );
+
+    const QString dbusService = QDBusConnection::sessionBus().baseService();
+    addEnvironmentEntry( QString("KONSOLE_DBUS_SERVICE=%1").arg(dbusService) );
+
+    const QString dbusObject = QString("/Sessions/%1").arg(QString::number(_sessionId));
+    addEnvironmentEntry( QString("KONSOLE_DBUS_SESSION=%1").arg(dbusObject) );
+
     int result = _shellProcess->start(exec,
                                       arguments,
                                       _environment,
-                                      windowId(),
-                                      _addToUtmp,
-                                      dbusService,
-                                      (QLatin1String("/Sessions/") +
-                                       QString::number(_sessionId)));
+                                      _addToUtmp);
 
     if (result < 0) {
         terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(" ")));
