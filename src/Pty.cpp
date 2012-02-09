@@ -145,6 +145,8 @@ void Pty::setInitialWorkingDirectory(const QString& dir)
 
 void Pty::addEnvironmentVariables(const QStringList& environment)
 {
+    bool isTermEnvAdded = false;
+
     foreach ( const QString& pair, environment ) {
         // split on the first '=' character
         int pos = pair.indexOf('=');
@@ -154,7 +156,16 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
             QString value = pair.mid(pos + 1);
 
             setEnv(variable, value);
+
+            if ( variable == "TERM" ) {
+                isTermEnvAdded = true;
+            }
         }
+    }
+
+    // extra safeguard to make sure $TERM is always set
+    if ( !isTermEnvAdded ) {
+        setEnv("TERM", "xterm");
     }
 }
 
