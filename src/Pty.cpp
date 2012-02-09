@@ -150,6 +150,8 @@ void Pty::setInitialWorkingDirectory(const QString& dir)
 
 void Pty::addEnvironmentVariables(const QStringList& environment)
 {
+    bool isTermEnvAdded = false;
+
     QListIterator<QString> iter(environment);
     while (iter.hasNext())
     {
@@ -164,7 +166,16 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
             QString value = pair.mid(pos+1);
 
             setEnv(variable,value);
+
+            if ( variable == "TERM" ) {
+                isTermEnvAdded = true;
+            }
         }
+    }
+
+    // extra safeguard to make sure $TERM is always set
+    if ( !isTermEnvAdded ) {
+        setEnv("TERM", "xterm");
     }
 }
 
