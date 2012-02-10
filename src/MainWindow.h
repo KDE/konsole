@@ -145,6 +145,7 @@ protected:
 
 private slots:
     void newTab();
+    void cloneTab();
     void newWindow();
     void showManageProfilesDialog();
     void activateMenuBar();
@@ -185,6 +186,7 @@ private:
     BookmarkHandler* _bookmarkHandler;
     KToggleAction* _toggleMenuBarAction;
     KActionMenu* _newTabMenuAction;
+    KActionMenu* _cloneTabMenuAction;
 
     QPointer<SessionController> _pluggedController;
 

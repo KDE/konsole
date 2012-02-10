@@ -1,10 +1,12 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsole" version="8">
+<kpartgui name="konsole" version="9">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
             <Action name="new-tab"/>
+            <Action name="clone-tab"/>
+            <Separator/>
             <DefineGroup name="session-tab-operations"/>
             <!-- <Action name="remote-connection"/> !-->
             <Separator/>

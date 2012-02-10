@@ -260,6 +260,13 @@ void MainWindow::setupActions()
     connect(_newTabMenuAction, SIGNAL(triggered()), this, SLOT(newTab()));
     collection->addAction("new-tab", _newTabMenuAction);
 
+    action = collection->addAction("clone-tab");
+    action->setIcon( KIcon("tab-duplicate") );
+    action->setText( i18n("&Clone Tab") );
+    action->setShortcut( QKeySequence() );
+    action->setAutoRepeat( false );
+    connect( action , SIGNAL(triggered()) , this , SLOT(cloneTab()) );
+
     action = collection->addAction("new-window");
     action->setIcon(KIcon("window-new"));
     action->setText(i18n("New &Window"));
@@ -392,6 +399,22 @@ void MainWindow::newTab()
 {
     Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
     emit newSessionRequest(defaultProfile , activeSessionDir() , _viewManager);
+}
+
+void MainWindow::cloneTab()
+{
+    Q_ASSERT(_pluggedController);
+
+    Session* session = _pluggedController->session();
+    Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
+    if ( profile) {
+        emit newSessionRequest( profile , activeSessionDir() , _viewManager);
+    }
+    else {
+        // something must be wrong: every session should be associated with profile
+        Q_ASSERT(false);
+        newTab();
+    }
 }
 
 void MainWindow::newWindow()
