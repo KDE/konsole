@@ -8,7 +8,6 @@
             <Action name="clone-tab"/>
             <Separator/>
             <DefineGroup name="session-tab-operations"/>
-            <!-- <Action name="remote-connection"/> !-->
             <Separator/>
             <DefineGroup name="session-operations"/>
             <Action name="exit"/>

@@ -41,9 +41,6 @@
             <Action name="edit-current-profile" group="session-settings"/>
             <Action name="switch-profile" group="session-settings"/>
         </Menu>
-        <!--<Menu name="debug"><text>Debug</text>
-            <Action name="debug-process"/>
-        </Menu>!-->
     </MenuBar>
     <Menu name="session-popup-menu">
         <Action name="edit_copy"/>
