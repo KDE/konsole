@@ -111,7 +111,6 @@ QList<Filter::HotSpot*> FilterChain::hotSpots() const
     }
     return list;
 }
-//QList<Filter::HotSpot*> FilterChain::hotSpotsAtLine(int line) const;
 
 TerminalImageFilterChain::TerminalImageFilterChain()
     : _buffer(0)
