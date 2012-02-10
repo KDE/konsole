@@ -527,6 +527,9 @@ void Session::setUserTitle(int what, const QString& caption)
         emit openUrlRequest(cwd);
     }*/
 
+    /* The below use of 32 works but appears to non-standard.
+       It is from a commit from 2004 c20973eca8776f9b4f15bee5fdcb5a3205aa69de
+     */
     // change icon via \033]32;Icon\007
     if (what == 32) {
         if (_iconName != caption) {
