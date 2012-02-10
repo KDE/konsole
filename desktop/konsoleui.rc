@@ -1,16 +1,16 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsole" version="9">
+<kpartgui name="konsole" version="10">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
             <Action name="new-tab"/>
             <Action name="clone-tab"/>
             <Separator/>
-            <DefineGroup name="session-tab-operations"/>
-            <Separator/>
             <DefineGroup name="session-operations"/>
-            <Action name="exit"/>
+            <Separator/>
+            <DefineGroup name="session-tab-operations"/>
+            <Action name="close-window"/>
         </Menu>
         <Menu name="edit"><text>Edit</text>
             <DefineGroup name="session-edit-operations"/>

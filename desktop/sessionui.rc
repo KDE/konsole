@@ -1,12 +1,12 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="16">
+<kpartgui name="session" version="17">
     <MenuBar>
         <Menu name="file">
-            <Action name="close-session" group="session-tab-operations"/>
             <Action name="file_save_as" group="session-operations"/>
             <Separator group="session-operations"/>
             <Action name="open-browser" group="session-operations"/>
+            <Action name="close-session" group="session-tab-operations"/>
         </Menu>
         <Menu name="edit">
             <Action name="edit_copy" group="session-edit-operations"/>
