@@ -520,11 +520,12 @@ void Session::setUserTitle(int what, const QString& caption)
         }
     }
 
+    /* I don't belive this has ever worked in KDE 4.x
     if (what == 31) {
         QString cwd = caption;
         cwd = cwd.replace(QRegExp("^~"), QDir::homePath());
         emit openUrlRequest(cwd);
-    }
+    }*/
 
     // change icon via \033]32;Icon\007
     if (what == 32) {
