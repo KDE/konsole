@@ -86,9 +86,9 @@ SessionManager::SessionManager()
     //locate and load default profile
     KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig("konsolerc");
     const KConfigGroup group = konsoleConfig->group("Desktop Entry");
-    QString defaultSessionFilename = group.readEntry("DefaultProfile", "Shell.profile");
+    const QString defaultProfileFileName = group.readEntry("DefaultProfile", "Shell.profile");
 
-    QString path = KStandardDirs::locate("data", "konsole/" + defaultSessionFilename);
+    const QString path = KStandardDirs::locate("data", "konsole/" + defaultProfileFileName);
     if (!path.isEmpty()) {
         Profile::Ptr profile = loadProfile(path);
         if (profile)
@@ -110,7 +110,7 @@ SessionManager::~SessionManager()
         kWarning() << "Konsole SessionManager destroyed with sessions still alive";
         // ensure that the Session doesn't later try to call back and do things to the
         // SessionManager
-        foreach(Session * session , _sessions) {
+        foreach(Session* session , _sessions) {
             disconnect(session , 0 , this , 0);
         }
     }
@@ -308,7 +308,6 @@ void SessionManager::updateSession(Session* session)
 
 Session* SessionManager::createSession(Profile::Ptr profile)
 {
-    Session* session = 0;
 
     if (!profile)
         profile = defaultProfile();
@@ -317,7 +316,8 @@ Session* SessionManager::createSession(Profile::Ptr profile)
         addProfile(profile);
 
     //configuration information found, create a new session based on this
-    session = new Session();
+    Session* session = new Session();
+    Q_ASSERT(session);
     applyProfile(session, profile, false);
 
     connect(session , SIGNAL(profileChangeCommandReceived(QString)) , this ,
@@ -331,8 +331,6 @@ Session* SessionManager::createSession(Profile::Ptr profile)
     //add session to active list
     _sessions << session;
     _sessionProfiles.insert(session, profile);
-
-    Q_ASSERT(session);
 
     return session;
 }
@@ -391,7 +389,6 @@ void SessionManager::changeProfile(Profile::Ptr profile,
                                    QHash<Profile::Property, QVariant> propertyMap, bool persistent)
 {
     Q_ASSERT(profile);
-
 
     // insert the changes into the existing Profile instance
     QListIterator<Profile::Property> iter(propertyMap.keys());
