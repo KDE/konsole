@@ -345,7 +345,7 @@ public:
         WindowTitle                = 2,
         TextColor                = 10,
         BackgroundColor            = 11,
-        SessionName                = 30,
+        SessionName                = 30,  // Non-standard
         ProfileChange            = 50     // this clashes with Xterm's font change command
     };
 
