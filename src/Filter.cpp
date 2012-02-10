@@ -481,13 +481,10 @@ void FilterObject::activated()
 }
 QList<QAction*> UrlFilter::HotSpot::actions()
 {
-    QList<QAction*> list;
-
-    const UrlType kind = urlType();
-
     QAction* openAction = new QAction(_urlObject);
     QAction* copyAction = new QAction(_urlObject);;
 
+    const UrlType kind = urlType();
     Q_ASSERT(kind == StandardUrl || kind == Email);
 
     if (kind == StandardUrl) {
@@ -507,10 +504,11 @@ QList<QAction*> UrlFilter::HotSpot::actions()
     QObject::connect(openAction , SIGNAL(triggered()) , _urlObject , SLOT(activated()));
     QObject::connect(copyAction , SIGNAL(triggered()) , _urlObject , SLOT(activated()));
 
-    list << openAction;
-    list << copyAction;
+    QList<QAction*> actions;
+    actions << openAction;
+    actions << copyAction;
 
-    return list;
+    return actions;
 }
 
 #include "Filter.moc"
