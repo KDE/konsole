@@ -772,19 +772,7 @@ void SessionManager::saveFavorites()
 
         Q_ASSERT( _profiles.contains(profile) && profile );
 
-        QFileInfo fileInfo(profile->path());
-        QString profileName;
-
-        if (fileInfo.isAbsolute())
-        {
-            profileName = fileInfo.fileName();
-        }
-        else
-        {
-            profileName = profile->path();
-        }
-
-        paths << profileName;
+        paths << profile->name() + ".profile";
     }
 
     favoriteGroup.writeEntry("Favorites",paths);
