@@ -451,7 +451,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
                                  i18nc("@action:inmenu", "&Detach Tab"), this,
                                  SLOT(tabContextMenuDetachTab()));
 
-    _contextPopupMenu->addAction(KIcon(),
+    _contextPopupMenu->addAction(KIcon("edit-rename"),
                                  i18nc("@action:inmenu", "&Rename Tab..."), this,
                                  SLOT(tabContextMenuRenameTab()));
 
