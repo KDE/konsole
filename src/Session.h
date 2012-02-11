@@ -378,6 +378,10 @@ public slots:
      */
     Q_SCRIPTABLE void setEnvironment(const QStringList& environment);
 
+    /**
+     * Adds one entry for the environment of this session
+     * @p entry should be like VARIABLE=VALUE
+     */
     void addEnvironmentEntry(const QString& entry);
 
     /**
