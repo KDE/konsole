@@ -938,12 +938,16 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
         states |= KeyboardTranslator::ApplicationKeypadState;
 
     // check flow control state
-    if (modifiers & Qt::ControlModifier)
-    {
-        if (event->key() == Qt::Key_S)
+    if (modifiers & Qt::ControlModifier) {
+        switch (event->key()) {
+        case Qt::Key_S:
             emit flowControlKeyPressed(true);
-        else if (event->key() == Qt::Key_Q)
+            break;
+        case Qt::Key_Q:
+        case Qt::Key_C: // cancel flow control
             emit flowControlKeyPressed(false);
+            break;
+        }
     }
 
     // lookup key binding
