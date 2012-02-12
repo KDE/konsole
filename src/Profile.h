@@ -83,38 +83,49 @@ public:
         Path,
         /** (QString) The descriptive name of this profile. */
         Name,
-        /** (QString) The name of the icon associated with this profile.  This
-         * is used in menus and tabs to represent the profile.
+        /** (QString) The name of the icon associated with this profile.
+         * This is used in menus and tabs to represent the profile.
          */
         Icon,
-        /** (QString) The command to execute ( excluding arguments ) when creating a new terminal
-         * session using this profile.
+        /** (QString) The command to execute ( excluding arguments ) when
+         * creating a new terminal session using this profile.
          */
         Command,
-        /** (QStringList) The arguments which are passed to the program specified by
-         * the Command property when creating a new terminal session using this profile.
+        /** (QStringList) The arguments which are passed to the program
+         * specified by the Command property when creating a new terminal
+         * session using this profile.
          */
         Arguments,
-        /** (QStringList) Additional environment variables ( in the form of NAME=VALUE pairs )
-         * which are passed to the program specified by the Command property
-         * when creating a new terminal session using this profile.
+        /** (QStringList) Additional environment variables (in the form of
+         * NAME=VALUE pairs) which are passed to the program specified by
+         * the Command property when creating a new terminal session using
+         * this profile.
          */
         Environment,
-        /** (QString) The initial working directory for sessions created using this profile. */
+        /** (QString) The initial working directory for sessions created
+         * using this profile.
+         */
         Directory,
-        /** (QString) The format used for tab titles when running normal commands. */
+        /** (QString) The format used for tab titles when running normal
+          * commands.
+          */
         LocalTabTitleFormat,
-        /** (QString) The format used for tab titles when the session is running
-         * a remote command (eg. SSH) */
+        /** (QString) The format used for tab titles when the session is
+         * running a remote command (eg. SSH)
+         */
         RemoteTabTitleFormat,
-        /** (bool) Specifies whether show hint for terminal size after resizing the application window. */
+        /** (bool) Specifies whether show hint for terminal size after
+         * resizing the application window.
+         */
         ShowTerminalSizeHint,
-        /** (bool) Specifies whether the geometry information is saved when window is closed. */
+        /** (bool) Specifies whether the geometry information is saved when
+         * window is closed.
+         */
         SaveGeometryOnExit,
         /** (QFont) The font to use in terminal displays using this profile. */
         Font,
-        /** (QString)
-         * The name of the color scheme to use in terminal displays using this profile.
+        /** (QString) The name of the color scheme to use in terminal
+         * displays using this profile.
          * Color schemes are managed by the ColorSchemeManager class.
          */
         ColorScheme,
@@ -122,66 +133,75 @@ public:
          * Key bindings are managed by the KeyboardTranslatorManager class.
          */
         KeyBindings,
-        /** (HistoryModeEnum) Specifies the storage type used for keeping the output produced
-         * by terminal sessions using this profile.
+        /** (HistoryModeEnum) Specifies the storage type used for keeping
+         * the output produced by terminal sessions using this profile.
          */
         HistoryMode,
-        /** (int) Specifies the number of lines of output to remember in terminal sessions
-         * using this profile.  Once the limit is reached, the oldest lines are lost.
-         * Only applicable if the HistoryMode property is FixedSizeHistory
+        /** (int) Specifies the number of lines of output to remember in
+         * terminal sessions using this profile.  Once the limit is reached,
+         * the oldest lines are lost if the HistoryMode property is 
+         * FixedSizeHistory
          */
         HistorySize,
-        /** (ScrollBarPositionEnum) Specifies the position of the scroll bar in
-         * terminal displays using this profile.
+        /** (ScrollBarPositionEnum) Specifies the position of the scroll bar
+         * in terminal displays using this profile.
          */
         ScrollBarPosition,
-        /** (bool) Specifies whether the terminal will enable Bidirectional text display */
+        /** (bool) Specifies whether the terminal will enable Bidirectional
+         * text display
+         */
         BidiRenderingEnabled,
-        /** (bool) Specifies whether text in terminal displays is allowed to blink. */
+        /** (bool) Specifies whether text in terminal displays is allowed
+         * to blink.
+         */
         BlinkingTextEnabled,
-        /** (bool) Specifies whether the flow control keys ( typically Ctrl+S , Ctrl+Q )
-         * have any effect.  Also known as Xon/Xoff
+        /** (bool) Specifies whether the flow control keys (typically Ctrl+S,
+         * Ctrl+Q) have any effect.  Also known as Xon/Xoff
          */
         FlowControlEnabled,
-        /** (bool) Specifies whether programs running in the terminal are allowed to
-         * resize the terminal display.
+        /** (bool) Specifies whether programs running in the terminal are
+         * allowed to resize the terminal display.
          */
         AllowProgramsToResizeWindow,
         /** (bool) Specifies whether the cursor blinks ( in a manner similar
          * to text editing applications )
          */
         BlinkingCursorEnabled,
-        /** (bool) If true, terminal displays use a fixed color to draw the cursor,
-         * specified by the CustomCursorColor property.  Otherwise the cursor changes
-         * color to match the character underneath it.
+        /** (bool) If true, terminal displays use a fixed color to draw the
+         * cursor, specified by the CustomCursorColor property.  Otherwise
+         * the cursor changes color to match the character underneath it.
          */
         UseCustomCursorColor,
-        /** (CursorShapeEnum) The shape used by terminal displays to represent the cursor. */
+        /** (CursorShapeEnum) The shape used by terminal displays to
+         * represent the cursor.
+         */
         CursorShape,
-        /** (QColor) The color used by terminal displays to draw the cursor.  Only applicable
-         * if the UseCustomCursorColor property is true. */
+        /** (QColor) The color used by terminal displays to draw the cursor.
+         * Only applicable if the UseCustomCursorColor property is true.
+         */
         CustomCursorColor,
-        /** (QString) A string consisting of the characters used to delimit words when
-         * selecting text in the terminal display.
+        /** (QString) A string consisting of the characters used to delimit
+         * words when selecting text in the terminal display.
          */
         WordCharacters,
-        /** (TripleClickModeEnum) Specifies which part of current line should be
-         * selected with triple click action.
+        /** (TripleClickModeEnum) Specifies which part of current line should
+         * be selected with triple click action.
          */
         TripleClickMode,
-        /** (bool) If true, text that matches a link or an email address is underlined when
-         * hovered by the mouse pointer.
+        /** (bool) If true, text that matches a link or an email address is
+         * underlined when hovered by the mouse pointer.
          */
         UnderlineLinksEnabled,
         /** (String) Default text codec */
         DefaultEncoding,
         /** (bool) Whether fonts should be aliased or not */
         AntiAliasFonts,
-        /** (bool) Whether character with intense colors should be rendered in bold font
-         * or just in bright color. */
+        /** (bool) Whether character with intense colors should be rendered
+         * in bold font or just in bright color. */
         BoldIntense,
-        /** (bool) Whether new sessions should be started in the same directory as the
-         * currently active session. */
+        /** (bool) Whether new sessions should be started in the same
+         * directory as the currently active session.
+         */
         StartInCurrentSessionDir,
         /** (int) Specifies the threshold of detected silence in seconds. */
         SilenceSeconds,
@@ -202,14 +222,17 @@ public:
     };
 
     /**
-     * This enum describes the modes available to remember lines of output produced
-     * by the terminal.
+     * This enum describes the modes available to remember lines of output
+     * produced by the terminal.
      */
     enum HistoryModeEnum {
-        /** No output is remembered.  As soon as lines of text are scrolled off-screen they are lost. */
+        /** No output is remembered.  As soon as lines of text are scrolled
+         * off-screen they are lost.
+         */
         DisableHistory   = 0,
-        /** A fixed number of lines of output are remembered.  Once the limit is reached, the oldest
-         * lines are lost. */
+        /** A fixed number of lines of output are remembered.  Once the
+         * limit is reached, the oldest lines are lost.
+         */
         FixedSizeHistory = 1,
         /** All output is remembered for the duration of the session.
          * Typically this means that lines are recorded to
@@ -219,7 +242,8 @@ public:
     };
 
     /**
-     * This enum describes the positions where the terminal display's scroll bar may be placed.
+     * This enum describes the positions where the terminal display's
+     * scroll bar may be placed.
      */
     enum ScrollBarPositionEnum {
         /** Show the scroll-bar on the left of the terminal display. */
@@ -230,11 +254,15 @@ public:
         ScrollBarHidden = 2
     };
 
-    /** This enum describes the shapes used to draw the cursor in terminal displays. */
+    /** This enum describes the shapes used to draw the cursor in terminal
+     * displays.
+     */
     enum CursorShapeEnum {
         /** Use a solid rectangular block to draw the cursor. */
         BlockCursor     = 0,
-        /** Use an 'I' shape, similar to that used in text editing applications, to draw the cursor. */
+        /** Use an 'I' shape, similar to that used in text editing
+         * applications, to draw the cursor.
+         */
         IBeamCursor     = 1,
         /** Draw a line underneath the cursor's position. */
         UnderlineCursor = 2
@@ -251,20 +279,20 @@ public:
     /**
      * Constructs a new profile
      *
-     * @param parent The parent profile.  When querying the value of a property
-     * using property(), if the property has not been set in this profile then
-     * the parent's value for the property will be returned instead.
+     * @param parent The parent profile.  When querying the value of a
+     * property using property(), if the property has not been set in this
+     * profile then the parent's value for the property will be returned.
      */
     explicit Profile(Ptr parent = Ptr());
     virtual ~Profile();
 
     /**
-     * Copies all properties except Name and Path from the specified @p profile
-     * into this profile
+     * Copies all properties except Name and Path from the specified @p
+     * profile into this profile
      *
      * @param profile The profile to copy properties from
-     * @param differentOnly If true, only properties in @p profile which have a
-     * different value from this profile's current value (either set via
+     * @param differentOnly If true, only properties in @p profile which have
+     * a different value from this profile's current value (either set via
      * setProperty() or inherited from the parent profile) will be set.
      */
     void clone(Ptr profile, bool differentOnly = true);
@@ -279,7 +307,9 @@ public:
     /** Returns the parent profile. */
     const Ptr parent() const;
 
-    /** Returns this profile as a group or null if this profile is not a group. */
+    /** Returns this profile as a group or null if this profile is not a
+     * group.
+     */
     const GroupPtr asGroup() const;
     GroupPtr asGroup();
 
@@ -297,7 +327,9 @@ public:
 
     /** Sets the value of the specified @p property to @p value. */
     virtual void setProperty(Property property, const QVariant& value);
-    /** Returns true if the specified property has been set in this Profile instance. */
+    /** Returns true if the specified property has been set in this Profile
+     * instance.
+     */
     virtual bool isPropertySet(Property property) const;
 
     /** Returns a map of the properties set in this Profile instance. */
@@ -307,8 +339,8 @@ public:
     bool isEmpty() const;
 
     /**
-     * Returns true if this is a 'hidden' profile which should not be displayed
-     * in menus or saved to disk.
+     * Returns true if this is a 'hidden' profile which should not be
+     * displayed in menus or saved to disk.
      *
      * This is used for the fallback profile, in case there are no profiles on
      * disk which can be loaded, or for overlay profiles created to handle
@@ -384,7 +416,8 @@ public:
      * Returns the element from the Property enum associated with the
      * specified @p name.
      *
-     * @param name The name of the property to look for, this is case insensitive.
+     * @param name The name of the property to look for, this is case
+     * insensitive.
      */
     static Property lookupByName(const QString& name);
 
@@ -444,9 +477,9 @@ inline bool Profile::canInheritProperty(Property property)
 
 
 /**
- * A profile which contains a number of default settings for various properties.
- * This can be used as a parent for other profiles or a fallback in case
- * a profile cannot be loaded from disk.
+ * A profile which contains a number of default settings for various
+ * properties.  This can be used as a parent for other profiles or a
+ * fallback in case a profile cannot be loaded from disk.
  */
 class KONSOLEPRIVATE_EXPORT FallbackProfile : public Profile
 {
@@ -456,16 +489,16 @@ public:
 
 /**
  * A composite profile which allows a group of profiles to be treated as one.
- * When setting a property, the new value is applied to all profiles in the group.
- * When reading a property, if all profiles in the group have the same value
- * then that value is returned, otherwise the result is null.
+ * When setting a property, the new value is applied to all profiles in the
+ * group.  When reading a property, if all profiles in the group have the same
+ * value then that value is returned, otherwise the result is null.
  *
  * Profiles can be added to the group using addProfile().  When all profiles
  * have been added updateValues() must be called
  * to sync the group's property values with those of the group's profiles.
  *
- * The Profile::Name and Profile::Path properties are unique to individual profiles,
- * setting these properties on a ProfileGroup has no effect.
+ * The Profile::Name and Profile::Path properties are unique to individual
+ * profiles, setting these properties on a ProfileGroup has no effect.
  */
 class KONSOLEPRIVATE_EXPORT ProfileGroup : public Profile
 {
@@ -475,9 +508,11 @@ public:
     /** Construct a new profile group, which is hidden by default. */
     ProfileGroup(Profile::Ptr parent = Profile::Ptr());
 
-    /** Add a profile to the group.  Calling setProperty() will update this profile.
-     * When creating a group, add the profiles to the group then call updateValues() to
-     * make the group's property values reflect the profiles currently in the group. */
+    /** Add a profile to the group.  Calling setProperty() will update this
+     * profile.  When creating a group, add the profiles to the group then
+     * call updateValues() to make the group's property values reflect the
+     * profiles currently in the group.
+     */
     void addProfile(Profile::Ptr profile) {
         _profiles.append(profile);
     }
@@ -497,16 +532,18 @@ public:
      * Updates the property values in this ProfileGroup to match those from
      * the group's profiles()
      *
-     * For each available property, if each profile in the group has the same value then
-     * the ProfileGroup will use that value for the property.  Otherwise the value for the property
-     * will be set to a null QVariant
+     * For each available property, if each profile in the group has the same
+     * value then the ProfileGroup will use that value for the property.
+     * Otherwise the value for the property will be set to a null QVariant
      *
      * Some properties such as the name and the path of the profile
      * will always be set to null if the group has more than one profile.
      */
     void updateValues();
 
-    /** Sets the value of @p property in each of the group's profiles to @p value. */
+    /** Sets the value of @p property in each of the group's profiles to
+     * @p value.
+     */
     void setProperty(Property property, const QVariant& value);
 
 private:
@@ -545,7 +582,7 @@ public:
      *
      * @param path Path to the profile to read
      * @param profile Pointer to the Profile the settings will be read into
-     * @param parentProfile Receives the name of the parent profile specified in
+     * @param parentProfile Receives the name of the parent profile
      */
     virtual bool readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile) = 0;
 };
@@ -572,8 +609,9 @@ public:
      */
     virtual QString getPath(const Profile::Ptr profile) = 0;
     /**
-     * Writes the properties and values from @p profile to the file specified by
-     * @p path.  This profile should be readable by the corresponding ProfileReader class.
+     * Writes the properties and values from @p profile to the file specified
+     * by @p path.  This profile should be readable by the corresponding
+     * ProfileReader class.
      */
     virtual bool writeProfile(const QString& path , const Profile::Ptr profile) = 0;
 };
