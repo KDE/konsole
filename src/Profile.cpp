@@ -68,6 +68,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { SaveGeometryOnExit , "SaveGeometryOnExit" , GENERAL_GROUP , QVariant::Bool }
     , { StartInCurrentSessionDir , "StartInCurrentSessionDir" , GENERAL_GROUP , QVariant::Bool }
     , { SilenceSeconds, "SilenceSeconds" , GENERAL_GROUP , QVariant::Int }
+    , { TerminalColumns, "TerminalColumns" , GENERAL_GROUP , QVariant::Int }
+    , { TerminalRows, "TerminalRows" , GENERAL_GROUP , QVariant::Int }
 
     // Appearance
     , { Font , "Font" , APPEARANCE_GROUP , QVariant::Font }
@@ -145,6 +147,8 @@ FallbackProfile::FallbackProfile()
     setProperty(StartInCurrentSessionDir, true);
     setProperty(MenuIndex, "0");
     setProperty(SilenceSeconds, 10);
+    setProperty(TerminalColumns, 80);
+    setProperty(TerminalRows, 40);
 
     setProperty(KeyBindings, "default");
     setProperty(ColorScheme, "Linux"); //use DarkPastels when is start support blue ncurses UI properly

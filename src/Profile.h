@@ -214,6 +214,8 @@ public:
          * See Enum::BellModeEnum
          */
         BellMode,
+        TerminalColumns,
+        TerminalRows,
         /** Index of profile in the File Menu
          * WARNING: this is currently an internal field, which is
          * expected to be zero on disk. Do not modify it manually.

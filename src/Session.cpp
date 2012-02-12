@@ -1248,6 +1248,17 @@ void Session::setSize(const QSize& size)
 
     emit resizeRequest(size);
 }
+
+QSize Session::preferredSize() const
+{
+    return _preferredSize;
+}
+
+void Session::setPreferredSize(const QSize& size)
+{
+    _preferredSize = size;
+}
+
 int Session::processId() const
 {
     return _shellProcess->pid();

@@ -307,6 +307,10 @@ public:
      */
     void setSize(const QSize& size);
 
+    QSize preferredSize() const;
+
+    void setPreferredSize(const QSize & size);
+
     /**
      * Sets whether the session has a dark background or not.  The session
      * uses this information to set the COLORFGBG variable in the process's
@@ -747,6 +751,8 @@ private:
     ZModemDialog*  _zmodemProgress;
 
     bool _hasDarkBackground;
+
+    QSize _preferredSize;
 
     static int lastSessionId;
 

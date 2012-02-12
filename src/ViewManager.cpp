@@ -561,7 +561,9 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
     applyProfileToView(display, profile);
 
     // set initial size
-    display->setSize(80, 40);
+    const QSize& preferredSize = session->preferredSize();
+    // FIXME: +1 is needed here for getting the expected rows
+    display->setSize(preferredSize.width(), preferredSize.height() + 1);
 
     ViewProperties* properties = createController(session, display);
 
