@@ -125,9 +125,6 @@ QString ProcessInfo::format(const QString& input) const
     // search for and replace known marker
     output.replace("%u", userName());
     output.replace("%n", name(&ok));
-    // TODO: un-comment me when ProcessInfo::formatCommand() is implemented.
-    //output.replace("%c",formatCommand(name(&ok),arguments(&ok),ShortCommandFormat));
-    //output.replace("%C",formatCommand(name(&ok),arguments(&ok),LongCommandFormat));
 
     QString dir = validCurrentDir();
     if (output.contains("%D")) {
@@ -143,17 +140,6 @@ QString ProcessInfo::format(const QString& input) const
     output.replace("%d", formatShortDir(dir));
 
     return output;
-}
-
-QString ProcessInfo::formatCommand(const QString& name,
-                                   const QVector<QString>& arguments,
-                                   CommandFormat format) const
-{
-    Q_UNUSED(name);
-    Q_UNUSED(format);
-
-    // TODO Implement me
-    return QStringList(QList<QString>::fromVector(arguments)).join(" ");
 }
 
 QSet<QString> ProcessInfo::_commonDirNames;

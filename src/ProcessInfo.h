@@ -286,14 +286,6 @@ private:
     // space-constrained UI elements (eg. tabs)
     QString formatShortDir(const QString& dirPath) const;
 
-    enum CommandFormat {
-        ShortCommandFormat,
-        LongCommandFormat
-    };
-    // takes a process name and its arguments and produces formatted output
-    QString formatCommand(const QString& name , const QVector<QString>& arguments ,
-                          CommandFormat format) const;
-
     // valid bits for _fields variable, ensure that
     // _fields is changed to an int if more than 8 fields are added
     enum FIELD_BITS {
