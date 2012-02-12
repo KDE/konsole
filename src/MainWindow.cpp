@@ -120,9 +120,6 @@ MainWindow::MainWindow()
     // emulator (as they are reserved for use by terminal applications)
     correctShortcuts();
 
-    // enable save and restore of window size
-    setAutoSaveSettings("MainWindow", true);
-
     // this must come at the end
     applyKonsoleSettings();
     connect(KonsoleSettings::self(), SIGNAL(configChanged()), this, SLOT(applyKonsoleSettings()));
@@ -163,6 +160,7 @@ void MainWindow::recoverMenuAccelerators()
 
 void MainWindow::setSaveGeometryOnExit(bool save)
 {
+    // enable save and restore of window size
     setAutoSaveSettings("MainWindow", save);
 }
 
