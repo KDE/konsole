@@ -588,7 +588,6 @@ void Session::silenceTimerDone()
         emit stateChanged(NOTIFYNORMAL);
     }
 
-    _notifiedActivity = false;
 }
 
 void Session::activityTimerDone()
