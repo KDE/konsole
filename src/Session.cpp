@@ -1037,12 +1037,10 @@ QString Session::program() const
     return _program;
 }
 
-// unused currently
 bool Session::isMonitorActivity() const
 {
     return _monitorActivity;
 }
-// unused currently
 bool Session::isMonitorSilence()  const
 {
     return _monitorSilence;
