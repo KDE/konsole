@@ -150,7 +150,7 @@ Session::Session(QObject* parent) :
     //create new teletype for I/O with shell process
     openTeletype(-1);
 
-    //setup timer for monitoring session activity
+    //setup timer for monitoring session activity & silence
     _silenceTimer = new QTimer(this);
     _silenceTimer->setSingleShot(true);
     connect(_silenceTimer, SIGNAL(timeout()), this, SLOT(silenceTimerDone()));
