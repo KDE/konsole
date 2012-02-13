@@ -235,12 +235,9 @@ ViewContainer* ViewSplitter::activeContainer() const
         ViewContainer* focusContainer = 0;
 
         while (focusW != 0) {
-            QListIterator<ViewContainer*> containerIter(_containers);
-            while (containerIter.hasNext()) {
-                ViewContainer* nextContainer = containerIter.next();
-
-                if (nextContainer->containerWidget() == focusW) {
-                    focusContainer = nextContainer;
+            foreach ( ViewContainer* container, _containers ) {
+                if (container->containerWidget() == focusW) {
+                    focusContainer = container;
                     break;
                 }
             }

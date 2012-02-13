@@ -434,9 +434,7 @@ void Vt102Emulation::processWindowAttributeChange()
 
 void Vt102Emulation::updateTitle()
 {
-    QListIterator<int> iter( _pendingTitleUpdates.keys() );
-    while (iter.hasNext()) {
-        int arg = iter.next();
+    foreach ( const int& arg, _pendingTitleUpdates.keys() ) {
         emit titleChanged( arg , _pendingTitleUpdates[arg] );    
     }
     _pendingTitleUpdates.clear();    

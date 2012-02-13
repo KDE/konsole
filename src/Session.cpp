@@ -659,8 +659,6 @@ void Session::onViewSizeChange(int /*height*/, int /*width*/)
 
 void Session::updateTerminalSize()
 {
-    QListIterator<TerminalDisplay*> viewIter(_views);
-
     int minLines = -1;
     int minColumns = -1;
 
@@ -671,8 +669,7 @@ void Session::updateTerminalSize()
     const int VIEW_COLUMNS_THRESHOLD = 2;
 
     //select largest number of lines and columns that will fit in all visible views
-    while (viewIter.hasNext()) {
-        TerminalDisplay* view = viewIter.next();
+    foreach ( TerminalDisplay* view, _views ) {
         if (view->isHidden() == false &&
                 view->lines() >= VIEW_LINES_THRESHOLD &&
                 view->columns() >= VIEW_COLUMNS_THRESHOLD) {
@@ -1447,9 +1444,7 @@ void SessionGroup::forwardData(const char* data, int size)
     }
 
     _inForwardData = true;
-    QListIterator<Session*> iter(_sessions.keys());
-    while (iter.hasNext()) {
-        Session* other = iter.next();
+    foreach ( Session* other, _sessions.keys() ) {
         if (!_sessions[other]) {
             other->emulation()->sendString(data, size);
         }

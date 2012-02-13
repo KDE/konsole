@@ -391,9 +391,7 @@ void SessionManager::changeProfile(Profile::Ptr profile,
     Q_ASSERT(profile);
 
     // insert the changes into the existing Profile instance
-    QListIterator<Profile::Property> iter(propertyMap.keys());
-    while (iter.hasNext()) {
-        const Profile::Property property = iter.next();
+    foreach ( const Profile::Property& property, propertyMap.keys() ) {
         profile->setProperty(property, propertyMap[property]);
     }
 

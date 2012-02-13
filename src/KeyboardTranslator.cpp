@@ -67,9 +67,7 @@ void KeyboardTranslatorManager::findTranslators()
     // add the name of each translator to the list and associated
     // the name with a null pointer to indicate that the translator
     // has not yet been loaded from disk
-    QStringListIterator listIter(list);
-    while (listIter.hasNext()) {
-        QString translatorPath = listIter.next();
+    foreach ( const QString& translatorPath, list) {
 
         QString name = QFileInfo(translatorPath).baseName();
 
@@ -116,9 +114,8 @@ bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator* transla
         KeyboardTranslatorWriter writer(&destination);
         writer.writeHeader(translator->description());
 
-        QListIterator<KeyboardTranslator::Entry> iter(translator->entries());
-        while (iter.hasNext())
-            writer.writeEntry(iter.next());
+        foreach ( const KeyboardTranslator::Entry& entry, translator->entries() )
+            writer.writeEntry(entry);
     }
 
     destination.close();

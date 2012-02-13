@@ -711,9 +711,7 @@ static const KXmlGuiWindow* findWindow(const QObject* object)
 static bool hasTerminalDisplayInSameWindow(const Session* session, const KXmlGuiWindow* window)
 {
     // Iterate all TerminalDisplays of this Session ...
-    QListIterator<TerminalDisplay*> terminalDisplayIterator(session->views());
-    while (terminalDisplayIterator.hasNext()) {
-        const TerminalDisplay* terminalDisplay = terminalDisplayIterator.next();
+    foreach ( const TerminalDisplay* terminalDisplay, session->views() ) {
         // ... and check whether a TerminalDisplay has the same
         // window as given in the parameter
         if (window == findWindow(terminalDisplay)) {
@@ -1269,8 +1267,6 @@ SaveHistoryTask::~SaveHistoryTask()
 
 void SaveHistoryTask::execute()
 {
-    QListIterator<SessionPtr> iter(sessions());
-
     // TODO - think about the UI when saving multiple history sessions, if there are more than two or
     //        three then providing a URL for each one will be tedious
 
@@ -1290,8 +1286,7 @@ void SaveHistoryTask::execute()
     // iterate over each session in the task and display a dialog to allow the user to choose where
     // to save that session's history.
     // then start a KIO job to transfer the data from the history to the chosen URL
-    while (iter.hasNext()) {
-        SessionPtr session = iter.next();
+    foreach ( const SessionPtr& session, sessions() ) {
 
         dialog->setCaption(i18n("Save Output From %1", session->title(Session::NameRole)));
 

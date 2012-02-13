@@ -522,18 +522,16 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 
     model->clear();
 
-    QList<const ColorScheme*> schemeList = ColorSchemeManager::instance()->allColorSchemes();
-    QListIterator<const ColorScheme*> schemeIter(schemeList);
-
     QStandardItem* selectedItem = 0;
 
-    while (schemeIter.hasNext()) {
-        const ColorScheme* colors = schemeIter.next();
-        QStandardItem* item = new QStandardItem(colors->description());
-        item->setData(QVariant::fromValue(colors) ,  Qt::UserRole + 1);
+    QList<const ColorScheme*> schemeList = ColorSchemeManager::instance()->allColorSchemes();
+
+    foreach ( const ColorScheme* scheme, schemeList) {
+        QStandardItem* item = new QStandardItem(scheme->description());
+        item->setData(QVariant::fromValue(scheme) ,  Qt::UserRole + 1);
         item->setFlags(item->flags());
 
-        if (currentScheme == colors)
+        if (currentScheme == scheme)
             selectedItem = item;
 
         model->appendRow(item);

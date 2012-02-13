@@ -1206,9 +1206,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     // and draw appropriate visuals to indicate the presence of the hotspot
 
     QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
-    QListIterator<Filter::HotSpot*> iter(spots);
-    while (iter.hasNext()) {
-        Filter::HotSpot* spot = iter.next();
+    foreach ( Filter::HotSpot* spot, spots ) {
 
         QRegion region;
         if (_underlineLinks && spot->type() == Filter::HotSpot::Link) {
