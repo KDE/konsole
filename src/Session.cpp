@@ -1050,8 +1050,14 @@ bool Session::isMonitorSilence()  const
 
 void Session::setMonitorActivity(bool monitor)
 {
+    if (_monitorActivity == monitor)
+        return;
+
     _monitorActivity  = monitor;
     _notifiedActivity = false;
+
+    // This timer is meaningful only after activity has been notified
+    _activityTimer->stop();
 
     activityStateSet(NOTIFYNORMAL);
 }
