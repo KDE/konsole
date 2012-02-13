@@ -640,6 +640,7 @@ void Session::activityStateSet(int state)
             _activityTimer->start(activityMaskInSeconds * 1000);
         }
 
+        // reset the counter for monitoring continuous silence since ther is activity
         if (_monitorSilence) {
             _silenceTimer->start(_silenceSeconds * 1000);
         }
