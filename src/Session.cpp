@@ -624,6 +624,9 @@ void Session::onSelectedText(const QString & text)
 
 void Session::activityStateSet(int state)
 {
+    // TODO: should this hardcoded interval be user configurable?
+    const int activityMaskInSeconds = 15;
+
     if (state == NOTIFYBELL) {
         emit bellRequest(i18n("Bell in session '%1'", _nameTitle));
     } else if (state == NOTIFYACTIVITY) {
@@ -633,10 +636,8 @@ void Session::activityStateSet(int state)
                                  KNotification::CloseWhenWidgetActivated);
 
             // mask activity notification for a while to avoid flooding
-            // TODO: should this hardcoded interval be user configurable?
             _notifiedActivity = true;
-            const int activitMaskSeconds = 15;
-            _activityTimer->start(activitMaskSeconds * 1000);
+            _activityTimer->start(activityMaskInSeconds * 1000);
         }
 
         if (_monitorSilence) {
