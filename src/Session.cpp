@@ -110,7 +110,7 @@ Session::Session(QObject* parent) :
     , _autoClose(true)
     , _closePerUserRequest(false)
     , _addToUtmp(true)
-    , _flowControl(true)
+    , _flowControlEnabled(true)
     , _sessionId(0)
     , _sessionProcessInfo(0)
     , _foregroundProcessInfo(0)
@@ -448,7 +448,7 @@ void Session::run()
     else
         _shellProcess->setInitialWorkingDirectory(QDir::homePath());
 
-    _shellProcess->setFlowControlEnabled(_flowControl);
+    _shellProcess->setFlowControlEnabled(_flowControlEnabled);
     _shellProcess->setEraseChar(_emulation->eraseChar());
 
     // this is not strictly accurate use of the COLORFGBG variable.  This does not
@@ -1084,17 +1084,17 @@ void Session::setMonitorSilenceSeconds(int seconds)
     }
 }
 
-void Session::setAddToUtmp(bool set)
+void Session::setAddToUtmp(bool add)
 {
-    _addToUtmp = set;
+    _addToUtmp = add;
 }
 
 void Session::setFlowControlEnabled(bool enabled)
 {
-    _flowControl = enabled;
+    _flowControlEnabled = enabled;
 
     if (_shellProcess)
-        _shellProcess->setFlowControlEnabled(_flowControl);
+        _shellProcess->setFlowControlEnabled(_flowControlEnabled);
 
     emit flowControlEnabledChanged(enabled);
 }
@@ -1103,7 +1103,7 @@ bool Session::flowControlEnabled() const
     if (_shellProcess)
         return _shellProcess->flowControlEnabled();
     else
-        return _flowControl;
+        return _flowControlEnabled;
 }
 void Session::fireZModemDetected()
 {
