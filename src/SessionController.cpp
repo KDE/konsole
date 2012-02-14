@@ -164,6 +164,13 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect(_view, SIGNAL(keyPressedSignal(QKeyEvent*)), activityTimer, SLOT(start()));
     connect(activityTimer, SIGNAL(timeout()), this, SLOT(snapshot()));
 
+    // take a snapshot of the session state periodically in the background
+    QTimer* backgroundTimer = new QTimer(_session);
+    backgroundTimer->setSingleShot(false);
+    backgroundTimer->setInterval(2000);
+    connect(backgroundTimer, SIGNAL(timeout()), this, SLOT(snapshot()));
+    backgroundTimer->start();
+
     _allControllers.insert(this);
 }
 
