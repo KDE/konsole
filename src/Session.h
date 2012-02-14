@@ -740,10 +740,6 @@ private:
     KProcess*      _zmodemProc;
     ZModemDialog*  _zmodemProgress;
 
-    // Color/Font Changes by ESC Sequences
-
-    QColor         _modifiedBackground; // as set by: echo -en '\033]11;Color\007
-
     bool _hasDarkBackground;
 
     static int lastSessionId;
