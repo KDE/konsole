@@ -1160,8 +1160,6 @@ void SessionController::sessionStateChanged(int state)
     if (state == _previousState)
         return;
 
-    _previousState = state;
-
     if (state == NOTIFYACTIVITY) {
         setIcon(_activityIcon);
     } else if (state == NOTIFYSILENCE) {
@@ -1174,6 +1172,8 @@ void SessionController::sessionStateChanged(int state)
 
         updateSessionIcon();
     }
+
+    _previousState = state;
 }
 
 void SessionController::zmodemDownload()
