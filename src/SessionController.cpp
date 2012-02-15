@@ -69,8 +69,11 @@
 
 using namespace Konsole;
 
-KIcon SessionController::_activityIcon;
-KIcon SessionController::_silenceIcon;
+// TODO - Replace the icon choices below when suitable icons for silence and
+// activity are available
+KIcon SessionController::_activityIcon("dialog-information");
+KIcon SessionController::_silenceIcon("dialog-information");
+
 QSet<SessionController*> SessionController::_allControllers;
 //QPointer<SearchHistoryThread> SearchHistoryTask::_thread;
 int SessionController::_lastControllerId;
@@ -1159,19 +1162,9 @@ void SessionController::sessionStateChanged(int state)
 
     _previousState = state;
 
-    // TODO - Replace the icon choices below when suitable icons for silence and activity
-    // are available
     if (state == NOTIFYACTIVITY) {
-        if (_activityIcon.isNull()) {
-            _activityIcon = KIcon("dialog-information");
-        }
-
         setIcon(_activityIcon);
     } else if (state == NOTIFYSILENCE) {
-        if (_silenceIcon.isNull()) {
-            _silenceIcon = KIcon("dialog-information");
-        }
-
         setIcon(_silenceIcon);
     } else if (state == NOTIFYNORMAL) {
         if (_sessionIconName != _session->iconName()) {
