@@ -28,14 +28,8 @@
 #include <unistd.h>
 
 // Qt
-#include <QtGui/QApplication>
-#include <QtGui/QClipboard>
 #include <QtCore/QHash>
 #include <QtGui/QKeyEvent>
-#include <QtCore/QRegExp>
-#include <QtCore/QTextStream>
-#include <QtCore/QThread>
-#include <QtCore/QTime>
 
 // KDE
 #include <KDebug>
