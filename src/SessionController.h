@@ -46,6 +46,7 @@ class Job;
 class QAction;
 class QTextCodec;
 class QKeyEvent;
+class QTimer;
 
 class KCodecAction;
 class KUrl;
@@ -225,6 +226,7 @@ private slots:
     void searchClosed(); // called when the user clicks on the
     // history search bar's close button
 
+    void interactionHandler();
     void snapshot(); // called periodically as the user types
     // to take a snapshot of the state of the
     // foreground process in the terminal
@@ -281,6 +283,7 @@ private:
     KAction* _findNextAction;
     KAction* _findPreviousAction;
 
+    QTimer* _interactionTimer;
 
     bool _urlFilterUpdateRequired;
 
@@ -292,6 +295,8 @@ private:
 
     bool _listenForScreenWindowUpdates;
     bool _preventClose;
+
+    bool _keepIconUntilInteraction;
 
     static QSet<SessionController*> _allControllers;
     static int _lastControllerId;

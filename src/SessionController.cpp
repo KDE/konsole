@@ -97,6 +97,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _switchProfileMenu(0)
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
+    , _keepIconUntilInteraction(false)
 {
     Q_ASSERT(session);
     Q_ASSERT(view);
@@ -161,11 +162,11 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     //
     // the timer is owned by the session so that it will be destroyed along
     // with the session
-    QTimer* activityTimer = new QTimer(_session);
-    activityTimer->setSingleShot(true);
-    activityTimer->setInterval(2000);
-    connect(_view, SIGNAL(keyPressedSignal(QKeyEvent*)), activityTimer, SLOT(start()));
-    connect(activityTimer, SIGNAL(timeout()), this, SLOT(snapshot()));
+     _interactionTimer = new QTimer(_session);
+    _interactionTimer->setSingleShot(true);
+    _interactionTimer->setInterval(2000);
+    connect(_interactionTimer, SIGNAL(timeout()), this, SLOT(snapshot()));
+    connect(_view, SIGNAL(keyPressedSignal(QKeyEvent*)), this, SLOT(interactionHandler()));
 
     // take a snapshot of the session state periodically in the background
     QTimer* backgroundTimer = new QTimer(_session);
@@ -200,6 +201,16 @@ void SessionController::trackOutput(QKeyEvent* event)
         _view->screenWindow()->setTrackOutput(true);
     }
 }
+void SessionController::interactionHandler()
+{
+    // This flag is used to make sure those special icons indicating interest
+    // events (activity/silence/bell?) remain in the tab until user interaction
+    // happens. Otherwise, those special icons will quickly be replaced by
+    // normal icon when ::snapshot() is triggered
+    _keepIconUntilInteraction = false;
+    _interactionTimer->start();
+}
+
 void SessionController::requireUrlFilterUpdate()
 {
     // this method is called every time the screen window's output changes, so do not
@@ -1076,8 +1087,10 @@ void SessionController::updateSessionIcon()
         // Master Mode: set different icon, to warn the user to be careful
         setIcon(_broadcastIcon);
     } else {
-        // Not in Master Mode: use normal icon
-        setIcon(_sessionIcon);
+        if (!_keepIconUntilInteraction) {
+            // Not in Master Mode: use normal icon
+            setIcon(_sessionIcon);
+        }
     }
 }
 void SessionController::sessionTitleChanged()
@@ -1162,8 +1175,10 @@ void SessionController::sessionStateChanged(int state)
 
     if (state == NOTIFYACTIVITY) {
         setIcon(_activityIcon);
+        _keepIconUntilInteraction = true;
     } else if (state == NOTIFYSILENCE) {
         setIcon(_silenceIcon);
+        _keepIconUntilInteraction = true;
     } else if (state == NOTIFYNORMAL) {
         if (_sessionIconName != _session->iconName()) {
             _sessionIconName = _session->iconName();
