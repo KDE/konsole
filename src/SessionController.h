@@ -297,6 +297,7 @@ private:
     static int _lastControllerId;
     static KIcon _activityIcon;
     static KIcon _silenceIcon;
+    static KIcon _broadcastIcon;
 };
 inline bool SessionController::isValid() const
 {

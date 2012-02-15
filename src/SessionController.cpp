@@ -73,6 +73,7 @@ using namespace Konsole;
 // activity are available
 KIcon SessionController::_activityIcon("dialog-information");
 KIcon SessionController::_silenceIcon("dialog-information");
+KIcon SessionController::_broadcastIcon("emblem-important");
 
 QSet<SessionController*> SessionController::_allControllers;
 //QPointer<SearchHistoryThread> SearchHistoryTask::_thread;
@@ -1074,7 +1075,7 @@ void SessionController::updateSessionIcon()
     // Visualize that the session is broadcasting to others
     if (_copyToGroup && _copyToGroup->sessions().count() > 1) {
         // Master Mode: set different icon, to warn the user to be careful
-        setIcon(KIcon("emblem-important"));
+        setIcon(_broadcastIcon);
     } else {
         // Not in Master Mode: use normal icon
         setIcon(_sessionIcon);
