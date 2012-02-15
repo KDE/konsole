@@ -76,7 +76,6 @@ KIcon SessionController::_silenceIcon("dialog-information");
 KIcon SessionController::_broadcastIcon("emblem-important");
 
 QSet<SessionController*> SessionController::_allControllers;
-//QPointer<SearchHistoryThread> SearchHistoryTask::_thread;
 int SessionController::_lastControllerId;
 
 SessionController::SessionController(Session* session , TerminalDisplay* view, QObject* parent)
