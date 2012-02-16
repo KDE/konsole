@@ -28,7 +28,6 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
-#include <KApplication>
 #include <KCmdLineArgs>
 #include <KShortcutsDialog>
 #include <KLocale>
@@ -38,7 +37,6 @@
 #include <KService>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
-#include <KToolInvocation>
 #include <KStandardAction>
 #include <KStandardGuiItem>
 #include <KWindowSystem>
