@@ -229,13 +229,17 @@ void SessionController::snapshot()
     if (_copyToGroup && _copyToGroup->sessions().count() > 1) {
         title.append('*');
     }
-    updateSessionIcon();
+
+    // use the fallback title if needed
+    if (title.isEmpty()) {
+        title = _session->title(Session::NameRole);
+    }
 
     // apply new title
-    if (!title.isEmpty())
-        _session->setTitle(Session::DisplayedTitleRole, title);
-    else
-        _session->setTitle(Session::DisplayedTitleRole, _session->title(Session::NameRole));
+    _session->setTitle(Session::DisplayedTitleRole, title);
+
+    // do not forget icon
+    updateSessionIcon();
 }
 
 QString SessionController::currentDir() const
