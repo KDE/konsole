@@ -57,7 +57,4 @@
         <Separator/>
         <Action name="close-session"/>
     </Menu>
-    <Menu name="switch-profile"><text>&amp;Switch Profile</text>
-        <ActionList name="profile-list"/>
-    </Menu>
 </kpartgui>
