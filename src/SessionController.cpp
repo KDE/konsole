@@ -71,9 +71,9 @@ using namespace Konsole;
 
 // TODO - Replace the icon choices below when suitable icons for silence and
 // activity are available
-KIcon SessionController::_activityIcon("dialog-information");
-KIcon SessionController::_silenceIcon("dialog-information");
-KIcon SessionController::_broadcastIcon("emblem-important");
+const KIcon SessionController::_activityIcon("dialog-information");
+const KIcon SessionController::_silenceIcon("dialog-information");
+const KIcon SessionController::_broadcastIcon("emblem-important");
 
 QSet<SessionController*> SessionController::_allControllers;
 int SessionController::_lastControllerId;

@@ -300,9 +300,9 @@ private:
 
     static QSet<SessionController*> _allControllers;
     static int _lastControllerId;
-    static KIcon _activityIcon;
-    static KIcon _silenceIcon;
-    static KIcon _broadcastIcon;
+    static const KIcon _activityIcon;
+    static const KIcon _silenceIcon;
+    static const KIcon _broadcastIcon;
 };
 inline bool SessionController::isValid() const
 {
