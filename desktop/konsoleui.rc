@@ -37,8 +37,8 @@
             <Separator/>
             <Action name="view-full-screen"/>
             <Separator/>
-            <Action name="configure-notifications"/>
             <Action name="configure-shortcuts"/>
+            <Action name="configure-notifications"/>
             <Action name="configure-settings"/>
         </Menu>
         <Menu name="help"><text>Help</text>
