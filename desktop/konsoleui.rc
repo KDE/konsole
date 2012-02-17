@@ -26,7 +26,6 @@
             </Menu>
             <Separator/>
             <Action name="detach-view"/>
-            <Action name="merge-windows"/>
             <Separator/>
             <DefineGroup name="session-view-operations"/>
         </Menu>
