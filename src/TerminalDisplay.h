@@ -868,11 +868,6 @@ private:
     static const int DEFAULT_TOP_MARGIN = 1;
 
     SessionController* _sessionController;
-
-public:
-    static void setTransparencyEnabled(bool enable) {
-        HAVE_TRANSPARENCY = enable;
-    }
 };
 
 class AutoScrollHandler : public QObject
