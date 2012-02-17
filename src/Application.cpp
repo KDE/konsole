@@ -37,10 +37,8 @@
 #include <KWindowSystem>
 
 // Konsole
-#include "ColorScheme.h"
 #include "ProfileList.h"
 #include "SessionManager.h"
-#include "KeyboardTranslator.h"
 #include "MainWindow.h"
 #include "Session.h"
 #include "TerminalDisplay.h"
