@@ -843,6 +843,9 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
 
     // word characters
     view->setWordCharacters(profile->property<QString>(Profile::WordCharacters));
+
+    // bell mode
+    view->setBellMode(profile->property<int>(Profile::BellMode));
 }
 
 void ViewManager::updateViewsForSession(Session* session)

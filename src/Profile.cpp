@@ -100,6 +100,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { AllowProgramsToResizeWindow , "AllowProgramsToResizeWindow" , TERMINAL_GROUP , QVariant::Bool }
     , { BidiRenderingEnabled , "BidiRenderingEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { BlinkingCursorEnabled , "BlinkingCursorEnabled" , TERMINAL_GROUP , QVariant::Bool }
+    , { BellMode , "BellMode" , TERMINAL_GROUP , QVariant::Int }
 
     // Cursor
     , { UseCustomCursorColor , "UseCustomCursorColor" , CURSOR_GROUP , QVariant::Bool}
@@ -175,6 +176,7 @@ FallbackProfile::FallbackProfile()
     setProperty(CursorShape, BlockCursor);
     setProperty(UseCustomCursorColor, false);
     setProperty(CustomCursorColor, Qt::black);
+    setProperty(BellMode, NotifyBell);
 
     setProperty(DefaultEncoding, QString(QTextCodec::codecForLocale()->name()));
     setProperty(AntiAliasFonts, true);

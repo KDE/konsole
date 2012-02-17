@@ -205,6 +205,8 @@ public:
         StartInCurrentSessionDir,
         /** (int) Specifies the threshold of detected silence in seconds. */
         SilenceSeconds,
+        /** (BellModeEnum) Specifies the behavior of bell. */
+        BellMode,
         /** Index of profile in the File Menu
          * In future, format will be #.#.# to account for levels
          */
@@ -274,6 +276,16 @@ public:
         SelectWholeLine = 0,
         /** Select from the current cursor position to the end of the line. */
         SelectForwardsFromCursor = 1
+    };
+
+    /** This enum describes the behavior of bell . */
+    enum BellModeEnum {
+        /** trigger system beep. */
+        SystemBeepBell = 0,
+        /** trigger system notification. */
+        NotifyBell = 1,
+        /** trigger visual bell(inverting the display's colors briefly). */
+        VisualBell = 2
     };
 
     /**
