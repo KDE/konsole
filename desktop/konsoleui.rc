@@ -33,7 +33,6 @@
         <Action name="bookmark"/>
         <Menu name="settings"><text>Settings</text>
             <DefineGroup name="session-settings"/>
-            <Action name="edit-current-profile"/>
             <Action name="manage-profiles"/>
             <Action name="show-menubar"/>
             <Separator/>
