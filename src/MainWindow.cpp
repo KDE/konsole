@@ -425,12 +425,14 @@ bool MainWindow::queryClose()
     // TODO: Ideally, we should check what process is running instead
     //       of just how many sessions are running.
     // If only 1 session is running, don't ask user to confirm close.
-    if (_viewManager->viewProperties().count() < 2)
+    const int openTabs = _viewManager->viewProperties().count();
+    if (openTabs < 2) {
         return true;
+    }
 
     int result = KMessageBox::warningYesNoCancel(this,
-                 i18n("You have multiple tabs in this window, "
-                      "are you sure you want to quit?"),
+                 i18nc("@info", "There are %1 tabs open in this window. "
+                      "Do you still want to quit?", openTabs),
                  i18n("Confirm Close"),
                  KStandardGuiItem::quit(),
                  KGuiItem(i18n("Close Current Tab"), "tab-close"),
