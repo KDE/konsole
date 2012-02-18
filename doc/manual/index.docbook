@@ -1003,15 +1003,15 @@ will display the &DBus; interface for &konsole;.
 <listitem><para>
 <prompt>&percnt;</prompt>
 <command>qdbus</command>
-<option>org.kde.konsole /Konsole</option>
-will display methods for controlling the main &konsole; window.
+<option>org.kde.konsole /Windows/1</option>
+will display methods for controlling window 1.
 </para></listitem>
 
 <listitem><para>
 <prompt>&percnt;</prompt>
 <command>qdbus</command>
 <option>org.kde.konsole /Sessions/1</option>
-will display methods for session 1.
+will display methods for controlling session 1.
 </para></listitem>
 
 </itemizedlist>
