@@ -826,8 +826,14 @@ instead of the default profile.</para></listitem>
 
 <varlistentry>
 <term><option>--list-profile-properties</option></term>
-<listitem><para><action>List</action> all possible properties with name and type. See option <option>-p</option> .
-</para></listitem>
+<listitem>
+<para><action>List</action> all possible properties with name and type. See option <option>-p</option> .
+</para>
+<para>
+For more information, please visit
+<ulink url="http://api.kde.org/4.x-api/kde-baseapps-apidocs/konsole/html/classKonsole_1_1Profile.html#a57848e15fe69d3f27565851fe7cda429">&konsole; API Reference</ulink>.
+</para>
+</listitem>
 </varlistentry>
 
 <varlistentry>
