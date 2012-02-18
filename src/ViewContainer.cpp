@@ -38,14 +38,12 @@
 #include <QtCore/QMimeData>
 
 // KDE
-#include <KColorDialog>
+//#include <KColorDialog>
 #include <KColorScheme>
 #include <KColorUtils>
-#include <KConfigGroup>
 #include <KLocale>
 #include <KMenu>
 #include <KIcon>
-#include <KColorCollection>
 
 // Konsole
 #include "IncrementalSearchBar.h"
