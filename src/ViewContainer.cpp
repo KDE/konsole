@@ -44,6 +44,7 @@
 #include <KConfigGroup>
 #include <KLocale>
 #include <KMenu>
+#include <KIcon>
 #include <KColorCollection>
 
 // Konsole
