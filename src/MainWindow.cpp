@@ -454,7 +454,9 @@ bool MainWindow::queryClose()
     }
 
     int result = KMessageBox::warningYesNoCancel(this,
-                 i18nc("@info", "There are %1 tabs open in this window. "
+                 i18ncp("@info", "There are %1 tab open in this window. "
+                      "Do you still want to quit?",
+		      "There are %1 tabs open in this window. "
                       "Do you still want to quit?", openTabs),
                  i18n("Confirm Close"),
                  KStandardGuiItem::quit(),
