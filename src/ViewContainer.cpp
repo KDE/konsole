@@ -267,6 +267,10 @@ ViewContainerTabBar::ViewContainerTabBar(QWidget* parent, TabbedViewContainer* c
     , _dropIndicatorIndex(-1)
     , _drawIndicatorDisabled(false)
 {
+    setDrawBase(true);
+    setDocumentMode(true);
+    setFocusPolicy(Qt::NoFocus);
+    setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
     setStyleSheet("QTabBar::tab { min-width: 2em; max-width: 25em }");
     setElideMode(Qt::ElideLeft);
 }
@@ -430,10 +434,6 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
 
     // The tab bar
     _tabBar = new ViewContainerTabBar(_containerWidget, this);
-    _tabBar->setDrawBase(true);
-    _tabBar->setDocumentMode(true);
-    _tabBar->setFocusPolicy(Qt::NoFocus);
-    _tabBar->setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
 
     connect(_tabBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
     connect(_tabBar, SIGNAL(tabDoubleClicked(int)), this, SLOT(tabDoubleClicked(int)));
