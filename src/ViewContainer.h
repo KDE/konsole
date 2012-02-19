@@ -380,21 +380,6 @@ private:
     bool _drawIndicatorDisabled;
 };
 
-// internal
-// this class provides a work-around for a problem in Qt 4.x
-// where the insertItem() method only has protected access -
-// and the TabbedViewContainer class needs to call it.
-//
-// and presumably for binary compatibility reasons will
-// not be fixed until Qt 5.
-class TabbedViewContainerLayout : public QVBoxLayout
-{
-public:
-    void insertItemAt(int index , QLayoutItem* item) {
-        insertItem(index, item);
-    }
-};
-
 /**
  * An alternative tabbed view container which uses a QTabBar and QStackedWidget
  * combination for navigation instead of QTabWidget
@@ -458,7 +443,7 @@ private:
     ViewContainerTabBar* _tabBar;
     QPointer<QStackedWidget> _stackWidget;
     QPointer<QWidget> _containerWidget;
-    TabbedViewContainerLayout* _layout;
+    QVBoxLayout* _layout;
     QHBoxLayout* _tabBarLayout;
     QToolButton* _newTabButton;
     QToolButton* _closeTabButton;

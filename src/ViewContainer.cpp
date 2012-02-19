@@ -483,7 +483,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _tabBarLayout->addWidget(_tabBar);
     _tabBarLayout->addWidget(_closeTabButton);
 
-    _layout = new TabbedViewContainerLayout;
+    _layout = new QVBoxLayout;
     _layout->setSpacing(0);
     _layout->setContentsMargins(0, 0, 0, 0);
 
