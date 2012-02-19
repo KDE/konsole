@@ -1,9 +1,11 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsolepart" version="7">
+<kpartgui name="konsolepart" version="8">
     <Menu name="session-popup-menu">
         <Action name="edit_copy"/>
         <Action name="edit_paste"/>
+        <Action name="open-browser"/>
+        <Separator/>
         <Menu name="history"><text>S&amp;crollback</text>
             <Action name="file_save_as" group="session-history-operations"/>
             <Separator group="session-history-operations"/>
@@ -12,7 +14,6 @@
             <Action name="clear-history" group="session-history-operations"/>
             <Action name="clear-history-and-reset" group="session-history-operations"/>
         </Menu>
-        <Action name="open-browser"/>
         <Separator/>
         <Action name="switch-profile"/>
         <Action name="edit-current-profile"/>
