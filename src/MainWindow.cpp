@@ -184,6 +184,8 @@ void MainWindow::disconnectController(SessionController* controller)
 {
     disconnect(controller , SIGNAL(titleChanged(ViewProperties*))
                , this , SLOT(activeViewTitleChanged(ViewProperties*)));
+    disconnect(controller , SIGNAL(rawTitleChanged())
+               , this , SLOT(updateWindowCaption()));
 
     // KXmlGuiFactory::removeClient() will try to access actions associated
     // with the controller internally, which may not be valid after the controller
@@ -206,11 +208,14 @@ void MainWindow::activeViewChanged(SessionController* controller)
     if (_pluggedController)
         disconnectController(_pluggedController);
 
-    // listen for title changes from the current session
     Q_ASSERT(controller);
+    _pluggedController = controller;
 
+    // listen for title changes from the current session
     connect(controller , SIGNAL(titleChanged(ViewProperties*)) ,
             this , SLOT(activeViewTitleChanged(ViewProperties*)));
+    connect(controller , SIGNAL(rawTitleChanged()) ,
+            this , SLOT(updateWindowCaption()));
 
     controller->setShowMenuAction(_toggleMenuBarAction);
     guiFactory()->addClient(controller);
@@ -221,15 +226,33 @@ void MainWindow::activeViewChanged(SessionController* controller)
     // update session title to match newly activated session
     activeViewTitleChanged(controller);
 
-    _pluggedController = controller;
-
     // Update window icon to newly activated session's icon
     updateWindowIcon();
 }
 
 void MainWindow::activeViewTitleChanged(ViewProperties* properties)
 {
-    setPlainCaption(properties->title());
+    Q_UNUSED(properties);
+    updateWindowCaption();
+}
+
+void MainWindow::updateWindowCaption()
+{
+    if ( !_pluggedController)
+        return;
+
+    const QString& title = _pluggedController->title();
+    const QString& userTitle = _pluggedController->userTitle();
+
+    // use tab title as caption by default
+    QString caption = title;
+
+    // use window title as caption only when enabled and it is not empty
+    if ( KonsoleSettings::showWindowTitleOnTitleBar() && !userTitle.isEmpty() ) {
+        caption = userTitle;
+    }
+
+    setCaption(caption);
 }
 
 void MainWindow::updateWindowIcon()
@@ -561,6 +584,8 @@ void MainWindow::applyKonsoleSettings()
     _viewManager->updateNavigationOptions(options);
 
     // setAutoSaveSettings("MainWindow", KonsoleSettings::saveGeometryOnExit());
+
+    updateWindowCaption();
 }
 
 void MainWindow::activateMenuBar()

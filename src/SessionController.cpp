@@ -1118,6 +1118,7 @@ void SessionController::sessionTitleChanged()
         title = _session->title(Session::NameRole);
 
     setTitle(title);
+    emit rawTitleChanged();
 }
 
 void SessionController::showDisplayContextMenu(const QPoint& position)
@@ -1577,6 +1578,17 @@ void SearchHistoryTask::setRegExp(const QRegExp& expression)
 QRegExp SearchHistoryTask::regExp() const
 {
     return _regExp;
+}
+
+QString SessionController::userTitle () const
+{
+    if ( _session) {
+        return _session->userTitle();
+    }
+    else
+    {
+        return QString();
+    }
 }
 
 #include "SessionController.moc"

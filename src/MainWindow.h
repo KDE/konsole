@@ -163,6 +163,7 @@ private slots:
     void setSaveGeometryOnExit(bool visible);
 
     void updateWindowIcon();
+    void updateWindowCaption();
 
     void openUrls(const QList<KUrl>& urls);
 

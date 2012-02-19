@@ -10,6 +10,11 @@
       <tooltip>Show menubar initially in each Konsole window</tooltip>
       <default>true</default>
     </entry>
+    <entry name="ShowWindowTitleOnTitleBar" type="Bool">
+      <label>Show window title on the titlebar</label>
+      <tooltip>Show window title set by escape sequence on the titlebar</tooltip>
+      <default>false</default>
+    </entry>
     <entry name="ShowTerminalSizeHint" type="Bool">
       <label>Show hint for terminal size after resizing</label>
       <tooltip>Show terminal size in columns and lines in the center of window after resizing</tooltip>
