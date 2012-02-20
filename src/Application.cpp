@@ -478,14 +478,18 @@ Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url,
 
     Session* session = SessionManager::instance()->createSession(profile);
 
-    session->sendText("ssh ");
+    QString sshCommand = "ssh ";
+    if (url.port() > -1) {
+        sshCommand += QString("-p %1 ").arg(url.port()) ;
+    }
+    if (url.hasUser()) {
+        sshCommand += (url.user() + '@');
+    }
+    if (url.hasHost()) {
+        sshCommand += url.host();
+    }
 
-    if (url.port() > -1)
-        session->sendText("-p " + QString::number(url.port()) + ' ');
-    if (url.hasUser())
-        session->sendText(url.user() + '@');
-    if (url.hasHost())
-        session->sendText(url.host() + '\r');
+    session->sendText(sshCommand + '\r');
 
     // create view before starting the session process so that the session
     // doesn't suffer a change in terminal size right after the session

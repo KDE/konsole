@@ -270,24 +270,35 @@ void SessionController::openUrl(const KUrl& url)
         if (!command.isEmpty())
             _session->emulation()->sendText(command + '\r');
     } else if (url.protocol() == "ssh") {
-        _session->emulation()->sendText("ssh ");
+        QString sshCommand = "ssh ";
 
-        if (url.port() > -1)
-            _session->emulation()->sendText("-p " + QString::number(url.port()) + ' ');
-        if (url.hasUser())
-            _session->emulation()->sendText(url.user() + '@');
-        if (url.hasHost())
-            _session->emulation()->sendText(url.host() + '\r');
+        if (url.port() > -1) {
+            sshCommand += QString("-p %1 ").arg(url.port()) ;
+        }
+        if (url.hasUser()) {
+            sshCommand += (url.user() + '@');
+        }
+        if (url.hasHost()) {
+            sshCommand += url.host();
+        }
+
+        _session->sendText(sshCommand + '\r');
+
     } else if (url.protocol() == "telnet") {
-        _session->emulation()->sendText("telnet ");
+        QString telnetCommand = "telnet ";
 
-        if (url.hasUser())
-            _session->emulation()->sendText("-l " + url.user() + ' ');
-        if (url.hasHost())
-            _session->emulation()->sendText(url.host() + ' ');
-        if (url.port() > -1)
-            _session->emulation()->sendText(QString::number(url.port()));
-        _session->emulation()->sendText("\r");
+        if (url.hasUser()) {
+            telnetCommand += QString("-l %1 ").arg(url.user()) ;
+        }
+        if (url.hasHost()) {
+            telnetCommand += (url.host() + ' ');
+        }
+        if (url.port() > -1) {
+            telnetCommand += QString::number(url.port()) ;
+        }
+
+        _session->sendText(telnetCommand + '\r');
+
     } else {
         //TODO Implement handling for other Url types
 
