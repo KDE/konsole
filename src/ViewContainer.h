@@ -27,7 +27,7 @@
 #include <QtCore/QPointer>
 #include <QtCore/QHash>
 #include <QtCore/QList>
-#include <QtGui/QBoxLayout>
+#include <QtGui/QHBoxLayout>
 
 // KDE
 #include <KTabBar>

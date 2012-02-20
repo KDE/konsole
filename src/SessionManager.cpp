@@ -33,14 +33,11 @@
 // KDE
 #include <KLocale>
 #include <KIcon>
-#include <KRun>
-#include <KShell>
 #include <KConfig>
 #include <KGlobal>
 #include <KDebug>
 #include <KConfigGroup>
 #include <KStandardDirs>
-#include <KDesktopFile>
 
 // Konsole
 #include "ColorScheme.h"

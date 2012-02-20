@@ -23,7 +23,6 @@
 #include "ViewSplitter.h"
 
 // Qt
-#include <QtGui/QKeyEvent>
 
 // Konsole
 #include "ViewContainer.h"

@@ -24,15 +24,11 @@
 #include "ViewContainer.h"
 
 // Qt
-#include <QtCore/QHash>
 #include <QtGui/QLabel>
-#include <QtGui/QBrush>
-#include <QtGui/QListWidget>
-#include <QtGui/QSplitter>
+//#include <QtGui/QListWidget>
 #include <QtGui/QStackedWidget>
 #include <QtGui/QTabBar>
 #include <QtGui/QToolButton>
-#include <QtGui/QWidgetAction>
 #include <QtGui/QDrag>
 #include <QtGui/QDragMoveEvent>
 #include <QtCore/QMimeData>

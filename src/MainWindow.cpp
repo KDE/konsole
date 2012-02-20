@@ -21,7 +21,7 @@
 #include "MainWindow.h"
 
 // Qt
-#include <QtGui/QBoxLayout>
+#include <QtGui/QVBoxLayout>
 
 // KDE
 #include <KAcceleratorManager>
@@ -34,7 +34,6 @@
 #include <KMenu>
 #include <KMenuBar>
 #include <KMessageBox>
-#include <KService>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
 #include <KStandardAction>

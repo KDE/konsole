@@ -23,11 +23,8 @@
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QHeaderView>
-#include <QtGui/QItemDelegate>
 #include <QtGui/QItemEditorCreator>
-#include <QtCore/QMetaEnum>
 #include <QtCore/QFileInfo>
-#include <QtGui/QShowEvent>
 #include <QtGui/QStandardItem>
 
 // KDE

@@ -24,7 +24,6 @@
 #include <QtGui/QWidget>
 #include <QtCore/QBitArray>
 
-class QCheckBox;
 class QLabel;
 class QTimer;
 class KLineEdit;

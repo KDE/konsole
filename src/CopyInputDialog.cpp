@@ -22,7 +22,6 @@
 
 // Qt
 #include <QtGui/QSortFilterProxyModel>
-#include <QtGui/QHeaderView>
 
 // Konsole
 #include "ui_CopyInputDialog.h"

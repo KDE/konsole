@@ -25,15 +25,12 @@
 
 // Qt
 #include <QtGui/QApplication>
-#include <QtGui/QBoxLayout>
 #include <QtGui/QClipboard>
 #include <QtGui/QKeyEvent>
 #include <QtCore/QEvent>
-#include <QtCore/QTime>
 #include <QtCore/QFileInfo>
 #include <QtGui/QGridLayout>
 #include <QtGui/QLabel>
-#include <QtGui/QLayout>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QtGui/QScrollBar>
@@ -47,7 +44,6 @@
 #include <KCursor>
 #include <KDebug>
 #include <KLocale>
-#include <KMenu>
 #include <KNotification>
 #include <KGlobalSettings>
 #include <KShortcut>

@@ -33,7 +33,6 @@
 #include <QtCore/QStringList>
 
 // KDE
-#include <KStandardDirs>
 #include <KLocale>
 #include <KDebug>
 #include <KPty>

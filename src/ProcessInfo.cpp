@@ -31,7 +31,6 @@
 // Qt
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
-#include <QtCore/QRegExp>
 #include <QtCore/QTextStream>
 #include <QtCore/QStringList>
 

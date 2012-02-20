@@ -21,10 +21,10 @@
 #include "ViewManager.h"
 
 // Qt
-#include <QtCore/QDateTime>
 #include <QtCore/QSignalMapper>
 #include <QtCore/QStringList>
 #include <QtGui/QMenu>
+#include <QtDBus/QtDBus>
 
 // KDE
 #include <KAcceleratorManager>

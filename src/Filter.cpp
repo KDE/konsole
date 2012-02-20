@@ -29,8 +29,6 @@
 #include <QtGui/QClipboard>
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
-#include <QtCore/QSharedData>
-#include <QtCore/QFile>
 
 // KDE
 #include <KLocale>

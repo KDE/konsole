@@ -30,18 +30,14 @@
 
 // Qt
 #include <QtGui/QApplication>
-#include <QtCore/QByteRef>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
-#include <QtCore/QRegExp>
 #include <QtCore/QStringList>
 #include <QtDBus/QtDBus>
-#include <QtCore/QDate>
 
 // KDE
 #include <KDebug>
 #include <KLocale>
-#include <KMessageBox>
 #include <KNotification>
 #include <KRun>
 #include <KShell>

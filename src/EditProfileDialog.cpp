@@ -24,7 +24,6 @@
 #include <cmath>
 
 // Qt
-#include <QtGui/QKeyEvent>
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 #include <QtGui/QStandardItem>

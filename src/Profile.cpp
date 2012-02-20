@@ -27,12 +27,10 @@
 
 // Qt
 #include <QtCore/QFile>
-#include <QtCore/QFileInfo>
 #include <QtCore/QTextCodec>
 
 // KDE
 #include <KConfigGroup>
-#include <KDesktopFile>
 #include <KGlobal>
 #include <KGlobalSettings>
 #include <KLocale>
