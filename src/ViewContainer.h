@@ -27,7 +27,6 @@
 #include <QtCore/QPointer>
 #include <QtCore/QHash>
 #include <QtCore/QList>
-#include <QtGui/QHBoxLayout>
 
 // KDE
 #include <KTabBar>
@@ -35,6 +34,8 @@
 class QStackedWidget;
 class QWidget;
 class QLabel;
+class QHBoxLayout;
+class QVBoxLayout;
 
 // TabbedViewContainer
 // Qt

@@ -32,6 +32,8 @@
 #include <QtGui/QDrag>
 #include <QtGui/QDragMoveEvent>
 #include <QtCore/QMimeData>
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QVBoxLayout>
 
 // KDE
 //#include <KColorDialog>
