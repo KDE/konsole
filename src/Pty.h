@@ -25,8 +25,6 @@
 
 // Qt
 #include <QtCore/QStringList>
-#include <QtCore/QVector>
-#include <QtCore/QList>
 #include <QtCore/QSize>
 
 // KDE

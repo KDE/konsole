@@ -27,6 +27,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtGui/QPainter>
+#include <QtCore/QIODevice>
 
 // KDE
 #include <KColorScheme>

@@ -30,6 +30,7 @@
 #include <QtCore/QEvent>
 #include <QtCore/QFileInfo>
 #include <QtGui/QGridLayout>
+#include <QtGui/QAction>
 #include <QtGui/QLabel>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>

@@ -43,6 +43,7 @@ void scrolllock_set_on();
 
 // Qt
 #include <QtCore/QEvent>
+#include <QtCore/QTimer>
 #include <QtGui/QKeyEvent>
 
 // KDE

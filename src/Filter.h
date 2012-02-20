@@ -21,15 +21,15 @@
 #define FILTER_H
 
 // Qt
-#include <QtGui/QAction>
 #include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
-#include <QtCore/QHash>
 #include <QtCore/QRegExp>
 
 // Konsole
 #include "Character.h"
+
+class QAction;
 
 namespace Konsole
 {

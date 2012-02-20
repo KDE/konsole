@@ -25,8 +25,7 @@
 #include <sys/mman.h>
 
 // Qt
-#include <QtCore/QBitRef>
-#include <QtCore/QHash>
+#include <QtCore/QList>
 #include <QtCore/QVector>
 #include <QtCore/QTemporaryFile>
 

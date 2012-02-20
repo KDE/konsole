@@ -27,11 +27,10 @@
 // Qt
 #include <QtCore/QStringList>
 #include <QtCore/QHash>
-#include <QtCore/QByteRef>
+//#include <QtCore/QByteRef>
 #include <QtCore/QUuid>
 #include <QtCore/QSize>
 #include <QtCore/QProcess>
-#include <QtGui/QColor>
 #include <QtGui/QWidget>
 
 // KDE
@@ -39,6 +38,8 @@
 
 // Konsole
 #include "konsole_export.h"
+
+class QColor;
 
 class KConfigGroup;
 class KProcess;

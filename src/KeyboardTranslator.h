@@ -25,9 +25,8 @@
 // Qt
 #include <QtCore/QHash>
 #include <QtCore/QList>
-#include <QtGui/QKeySequence>
+//#include <QtGui/QKeySequence>
 #include <QtCore/QMetaType>
-#include <QtCore/QVarLengthArray>
 
 // Konsole
 #include "konsole_export.h"

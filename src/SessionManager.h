@@ -23,15 +23,12 @@
 #define SESSIONMANAGER_H
 
 // Qt
-#include <QtGui/QFont>
 #include <QtGui/QKeySequence>
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QHash>
 #include <QtCore/QList>
 #include <QtCore/QSet>
 #include <QtCore/QStringList>
-#include <QtCore/QPair>
-#include <QtCore/QPointer>
 #include <QtCore/QVariant>
 #include <QtCore/QStack>
 

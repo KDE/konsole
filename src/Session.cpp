@@ -30,6 +30,7 @@
 
 // Qt
 #include <QtGui/QApplication>
+#include <QtGui/QColor>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QStringList>

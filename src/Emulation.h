@@ -27,13 +27,14 @@
 #include <stdio.h>
 
 // Qt
-#include <QtGui/QKeyEvent>
+#include <QtCore/QSize>
 #include <QtCore/QTextCodec>
-#include <QtCore/QTextStream>
 #include <QtCore/QTimer>
 
 // Konsole
 #include "konsole_export.h"
+
+class QKeyEvent;
 
 namespace Konsole
 {

@@ -26,7 +26,6 @@
 #include <QtCore/QHash>
 #include <QtCore/QList>
 #include <QtCore/QMetaType>
-#include <QtCore/QIODevice>
 #include <QtCore/QSet>
 
 // KDE

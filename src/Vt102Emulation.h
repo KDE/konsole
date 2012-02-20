@@ -24,13 +24,14 @@
 #define VT102EMULATION_H
 
 // Qt
-#include <QtGui/QKeyEvent>
 #include <QtCore/QHash>
-#include <QtCore/QTimer>
 
 // Konsole
 #include "Emulation.h"
 #include "Screen.h"
+
+class QTimer;
+class QKeyEvent;
 
 #define MODE_AppScreen       (MODES_SCREEN+0)   // Mode #1
 #define MODE_AppCuKeys       (MODES_SCREEN+1)   // Application cursor keys (DECCKM)

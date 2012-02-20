@@ -28,7 +28,6 @@
 #include <QtCore/QSet>
 #include <QtCore/QVector>
 #include <QtCore/QBitArray>
-#include <QtCore/QTextStream>
 #include <QtCore/QVarLengthArray>
 
 // Konsole

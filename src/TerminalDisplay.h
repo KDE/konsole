@@ -44,7 +44,6 @@ class QScrollBar;
 class QShowEvent;
 class QHideEvent;
 class QTimerEvent;
-class QWidget;
 
 class KMenu;
 

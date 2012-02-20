@@ -22,9 +22,7 @@
 
 // Qt
 #include <QtGui/QAbstractItemDelegate>
-#include <QtCore/QPair>
 #include <QtCore/QHash>
-#include <QtCore/QSet>
 #include <QtCore/QPointer>
 
 // KDE
