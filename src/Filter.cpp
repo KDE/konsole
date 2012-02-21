@@ -20,9 +20,6 @@
 // Own
 #include "Filter.h"
 
-// System
-#include <iostream>
-
 // Qt
 #include <QtGui/QAction>
 #include <QtGui/QApplication>

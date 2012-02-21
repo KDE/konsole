@@ -48,7 +48,6 @@
 #include <KConfigGroup>
 
 // Konsole
-#include <config-konsole.h>
 #include <sessionadaptor.h>
 
 #include "ProcessInfo.h"

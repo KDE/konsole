@@ -45,8 +45,6 @@
 #include "TerminalDisplay.h"
 #include "ViewManager.h"
 
-#include <config-konsole.h>
-
 using namespace Konsole;
 
 K_PLUGIN_FACTORY(KonsolePartFactory, registerPlugin<Konsole::Part>();)
