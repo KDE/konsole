@@ -25,7 +25,6 @@
 // Qt
 #include <QtCore/QHash>
 #include <QtCore/QObject>
-#include <QtCore/QPointer>
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 #include <QtGui/QFont>

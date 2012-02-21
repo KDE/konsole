@@ -24,7 +24,6 @@
 #define PTY_H
 
 // Qt
-#include <QtCore/QStringList>
 #include <QtCore/QSize>
 
 // KDE
@@ -32,6 +31,8 @@
 
 // Konsole
 #include "konsole_export.h"
+
+class QStringList;
 
 namespace Konsole
 {
