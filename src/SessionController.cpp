@@ -164,7 +164,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // with the session
      _interactionTimer = new QTimer(_session);
     _interactionTimer->setSingleShot(true);
-    _interactionTimer->setInterval(2000);
+    _interactionTimer->setInterval(1000);
     connect(_interactionTimer, SIGNAL(timeout()), this, SLOT(snapshot()));
     connect(_view, SIGNAL(keyPressedSignal(QKeyEvent*)), this, SLOT(interactionHandler()));
 
