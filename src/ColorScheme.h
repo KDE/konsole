@@ -96,7 +96,7 @@ public:
     QString name() const;
 
     /** Reads the color scheme from the specified configuration source */
-    void read(KConfig& config);
+    void read(const KConfig& config);
     /** Writes the color scheme to the specified configuration source */
     void write(KConfig& config) const;
 
@@ -198,7 +198,7 @@ private:
 
     // reads a single color entry from a KConfig source
     // and sets the palette entry at 'index' to the entry read.
-    void readColorEntry(KConfig& config , int index);
+    void readColorEntry(const KConfig& config , int index);
     // writes a single color entry to a KConfig source
     void writeColorEntry(KConfig& config , int index) const;
 

@@ -294,7 +294,7 @@ qreal ColorScheme::opacity() const
     return _opacity;
 }
 
-void ColorScheme::read(KConfig& config)
+void ColorScheme::read(const KConfig& config)
 {
     KConfigGroup configGroup = config.group("General");
 
@@ -309,7 +309,7 @@ void ColorScheme::read(KConfig& config)
     }
 }
 
-void ColorScheme::readColorEntry(KConfig& config , int index)
+void ColorScheme::readColorEntry(const KConfig& config , int index)
 {
     KConfigGroup configGroup(&config, colorNameForIndex(index));
 
