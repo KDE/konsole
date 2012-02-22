@@ -44,32 +44,32 @@ namespace {
 
 using namespace Konsole;
 
-const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] =
 // The following are almost IBM standard color codes, with some slight
 // gamma correction for the dim colors to compensate for bright X screens.
 // It contains the 8 ansiterm/xterm colors in 2 intensities.
+const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] =
 {
-    ColorEntry(QColor(0x00, 0x00, 0x00), 0), ColorEntry(
-        QColor(0xFF, 0xFF, 0xFF), 1), // Dfore, Dback
-    ColorEntry(QColor(0x00, 0x00, 0x00), 0), ColorEntry(
-        QColor(0xB2, 0x18, 0x18), 0), // Black, Red
-    ColorEntry(QColor(0x18, 0xB2, 0x18), 0), ColorEntry(
-        QColor(0xB2, 0x68, 0x18), 0), // Green, Yellow
-    ColorEntry(QColor(0x18, 0x18, 0xB2), 0), ColorEntry(
-        QColor(0xB2, 0x18, 0xB2), 0), // Blue, Magenta
-    ColorEntry(QColor(0x18, 0xB2, 0xB2), 0), ColorEntry(
-        QColor(0xB2, 0xB2, 0xB2), 0), // Cyan, White
-    // intensive
-    ColorEntry(QColor(0x00, 0x00, 0x00), 0), ColorEntry(
-        QColor(0xFF, 0xFF, 0xFF), 1),
-    ColorEntry(QColor(0x68, 0x68, 0x68), 0), ColorEntry(
-        QColor(0xFF, 0x54, 0x54), 0),
-    ColorEntry(QColor(0x54, 0xFF, 0x54), 0), ColorEntry(
-        QColor(0xFF, 0xFF, 0x54), 0),
-    ColorEntry(QColor(0x54, 0x54, 0xFF), 0), ColorEntry(
-        QColor(0xFF, 0x54, 0xFF), 0),
-    ColorEntry(QColor(0x54, 0xFF, 0xFF), 0), ColorEntry(
-        QColor(0xFF, 0xFF, 0xFF), 0)
+    ColorEntry(QColor(0x00, 0x00, 0x00), 0), // Dfore
+    ColorEntry(QColor(0xFF, 0xFF, 0xFF), 1), // Dback
+    ColorEntry(QColor(0x00, 0x00, 0x00), 0), // Black
+    ColorEntry(QColor(0xB2, 0x18, 0x18), 0), // Red
+    ColorEntry(QColor(0x18, 0xB2, 0x18), 0), // Green
+    ColorEntry(QColor(0xB2, 0x68, 0x18), 0), // Yellow
+    ColorEntry(QColor(0x18, 0x18, 0xB2), 0), // Blue
+    ColorEntry(QColor(0xB2, 0x18, 0xB2), 0), // Magenta
+    ColorEntry(QColor(0x18, 0xB2, 0xB2), 0), // Cyan
+    ColorEntry(QColor(0xB2, 0xB2, 0xB2), 0), // White
+    // intensive versions
+    ColorEntry(QColor(0x00, 0x00, 0x00), 0),
+    ColorEntry(QColor(0xFF, 0xFF, 0xFF), 1),
+    ColorEntry(QColor(0x68, 0x68, 0x68), 0),
+    ColorEntry(QColor(0xFF, 0x54, 0x54), 0),
+    ColorEntry(QColor(0x54, 0xFF, 0x54), 0),
+    ColorEntry(QColor(0xFF, 0xFF, 0x54), 0),
+    ColorEntry(QColor(0x54, 0x54, 0xFF), 0),
+    ColorEntry(QColor(0xFF, 0x54, 0xFF), 0),
+    ColorEntry(QColor(0x54, 0xFF, 0xFF), 0),
+    ColorEntry(QColor(0xFF, 0xFF, 0xFF), 0)
 };
 
 const char* const ColorScheme::colorNames[TABLE_COLORS] = {
@@ -140,9 +140,9 @@ ColorScheme::ColorScheme()
 }
 
 ColorScheme::ColorScheme(const ColorScheme& other)
-    : _opacity(other._opacity)
-    , _table(0)
+    : _table(0)
     , _randomTable(0)
+    , _opacity(other._opacity)
     , _wallpaper(other._wallpaper)
 {
     setName(other.name());
