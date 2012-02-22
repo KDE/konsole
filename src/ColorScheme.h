@@ -200,7 +200,7 @@ private:
     // and sets the palette entry at 'index' to the entry read.
     void readColorEntry(KConfig& config , int index);
     // writes a single color entry to a KConfig source
-    void writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry, const RandomizationRange& range) const;
+    void writeColorEntry(KConfig& config , int index) const;
 
     // sets the amount of randomization allowed for a particular color
     // in the palette.  creates the randomization table if

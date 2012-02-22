@@ -346,20 +346,23 @@ void ColorScheme::write(KConfig& config) const
     configGroup.writeEntry("Wallpaper", _wallpaper->path());
 
     for (int i = 0 ; i < TABLE_COLORS ; i++) {
-        RandomizationRange random = _randomTable != 0 ? _randomTable[i] : RandomizationRange();
-        writeColorEntry(config, colorNameForIndex(i), colorTable()[i], random);
+        writeColorEntry(config, i);
     }
 }
 
-void ColorScheme::writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry , const RandomizationRange& random) const
+void ColorScheme::writeColorEntry(KConfig& config , int index) const
 {
-    KConfigGroup configGroup(&config, colorName);
+    KConfigGroup configGroup(&config, colorNameForIndex(index));
+
+    const ColorEntry& entry = colorTable()[index];
 
     configGroup.writeEntry("Color", entry.color);
     configGroup.writeEntry("Transparency", (bool)entry.transparent);
     if (entry.fontWeight != ColorEntry::UseCurrentFormat) {
         configGroup.writeEntry("Bold", entry.fontWeight == ColorEntry::Bold);
     }
+
+    RandomizationRange random = _randomTable != 0 ? _randomTable[index] : RandomizationRange();
 
     // record randomization if this color has randomization or
     // if one of the keys already exists
