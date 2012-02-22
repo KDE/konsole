@@ -37,6 +37,11 @@
 #include <KConfigGroup>
 #include <KStandardDirs>
 
+namespace {
+    const int FGCOLOR_INDEX = 0;
+    const int BGCOLOR_INDEX = 1;
+}
+
 using namespace Konsole;
 
 const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] =
@@ -215,7 +220,7 @@ void ColorScheme::getColorTable(ColorEntry* table , uint randomSeed) const
 }
 bool ColorScheme::randomizedBackgroundColor() const
 {
-    return _randomTable == 0 ? false : !_randomTable[1].isNull();
+    return _randomTable == 0 ? false : !_randomTable[BGCOLOR_INDEX].isNull();
 }
 void ColorScheme::setRandomizedBackgroundColor(bool randomize)
 {
@@ -224,10 +229,10 @@ void ColorScheme::setRandomizedBackgroundColor(bool randomize)
     //
     // the value and saturation are left alone to maintain read-ability
     if (randomize) {
-        setRandomizationRange(1 /* background color index */ , MAX_HUE , 255 , 0);
+        setRandomizationRange(BGCOLOR_INDEX , MAX_HUE , 255 , 0);
     } else {
         if (_randomTable)
-            setRandomizationRange(1 /* background color index */ , 0 , 0 , 0);
+            setRandomizationRange(BGCOLOR_INDEX , 0 , 0 , 0);
     }
 }
 
@@ -254,11 +259,11 @@ const ColorEntry* ColorScheme::colorTable() const
 }
 QColor ColorScheme::foregroundColor() const
 {
-    return colorTable()[0].color;
+    return colorTable()[FGCOLOR_INDEX].color;
 }
 QColor ColorScheme::backgroundColor() const
 {
-    return colorTable()[1].color;
+    return colorTable()[BGCOLOR_INDEX].color;
 }
 bool ColorScheme::hasDarkBackground() const
 {
