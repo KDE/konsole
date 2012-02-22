@@ -209,7 +209,7 @@ private:
 
     QString _description;
     QString _name;
-    qreal _opacity;
+
     ColorEntry* _table; // pointer to custom color table or 0 if the default
     // color scheme is being used
 
@@ -218,6 +218,8 @@ private:
     RandomizationRange* _randomTable;   // pointer to randomization table or 0
     // if no colors in the color scheme support
     // randomization
+
+    qreal _opacity;
 
     ColorSchemeWallpaper::Ptr _wallpaper;
 
