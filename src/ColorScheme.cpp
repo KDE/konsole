@@ -298,7 +298,7 @@ void ColorScheme::read(const KConfig& config)
 {
     KConfigGroup configGroup = config.group("General");
 
-    QString description = configGroup.readEntry("Description", I18N_NOOP("Un-named Color Scheme"));
+    const QString description = configGroup.readEntry("Description", I18N_NOOP("Un-named Color Scheme"));
 
     _description = i18n(description.toUtf8());
     _opacity = configGroup.readEntry("Opacity", qreal(1.0));
@@ -311,7 +311,7 @@ void ColorScheme::read(const KConfig& config)
 
 void ColorScheme::readColorEntry(const KConfig& config , int index)
 {
-    KConfigGroup configGroup(&config, colorNameForIndex(index));
+    KConfigGroup configGroup = config.group(colorNameForIndex(index));
 
     ColorEntry entry;
 
@@ -327,9 +327,9 @@ void ColorScheme::readColorEntry(const KConfig& config , int index)
         entry.fontWeight = configGroup.readEntry("Bold", false) ? ColorEntry::Bold :
                            ColorEntry::UseCurrentFormat;
 
-    quint16 hue = configGroup.readEntry("MaxRandomHue", 0);
-    quint8 value = configGroup.readEntry("MaxRandomValue", 0);
-    quint8 saturation = configGroup.readEntry("MaxRandomSaturation", 0);
+    const quint16 hue = configGroup.readEntry("MaxRandomHue", 0);
+    const quint8 value = configGroup.readEntry("MaxRandomValue", 0);
+    const quint8 saturation = configGroup.readEntry("MaxRandomSaturation", 0);
 
     setColorTableEntry(index , entry);
 
@@ -352,7 +352,7 @@ void ColorScheme::write(KConfig& config) const
 
 void ColorScheme::writeColorEntry(KConfig& config , int index) const
 {
-    KConfigGroup configGroup(&config, colorNameForIndex(index));
+    KConfigGroup configGroup = config.group(colorNameForIndex(index));
 
     const ColorEntry& entry = colorTable()[index];
 
