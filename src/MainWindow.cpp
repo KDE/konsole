@@ -45,7 +45,6 @@
 
 // Konsole
 #include "BookmarkHandler.h"
-#include "IncrementalSearchBar.h"
 #include "SessionController.h"
 #include "ProfileList.h"
 #include "ManageProfilesDialog.h"
