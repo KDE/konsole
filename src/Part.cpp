@@ -34,10 +34,8 @@
 #include <kde_file.h>
 
 // Konsole
-#include "ColorScheme.h"
 #include "EditProfileDialog.h"
 #include "Emulation.h"
-#include "KeyboardTranslator.h"
 #include "ManageProfilesDialog.h"
 #include "Session.h"
 #include "SessionController.h"
@@ -49,7 +47,6 @@ using namespace Konsole;
 
 K_PLUGIN_FACTORY(KonsolePartFactory, registerPlugin<Konsole::Part>();)
 K_EXPORT_PLUGIN(KonsolePartFactory("konsole"))
-
 
 Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
     : KParts::ReadOnlyPart(parent)
