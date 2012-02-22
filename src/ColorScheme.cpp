@@ -117,6 +117,20 @@ const char* const ColorScheme::translatedColorNames[TABLE_COLORS] = {
     I18N_NOOP2("@item:intable palette", "Color 8 (Intense)")
 };
 
+QString ColorScheme::colorNameForIndex(int index)
+{
+    Q_ASSERT(index >= 0 && index < TABLE_COLORS);
+
+    return QString(colorNames[index]);
+}
+
+QString ColorScheme::translatedColorNameForIndex(int index)
+{
+    Q_ASSERT(index >= 0 && index < TABLE_COLORS);
+
+    return i18nc("@item:intable palette", translatedColorNames[index]);
+}
+
 ColorScheme::ColorScheme()
 {
     _table = 0;
@@ -294,32 +308,7 @@ void ColorScheme::read(KConfig& config)
         readColorEntry(config, i);
     }
 }
-void ColorScheme::write(KConfig& config) const
-{
-    KConfigGroup configGroup = config.group("General");
 
-    configGroup.writeEntry("Description", _description);
-    configGroup.writeEntry("Opacity", _opacity);
-    configGroup.writeEntry("Wallpaper", _wallpaper->path());
-
-    for (int i = 0 ; i < TABLE_COLORS ; i++) {
-        RandomizationRange random = _randomTable != 0 ? _randomTable[i] : RandomizationRange();
-        writeColorEntry(config, colorNameForIndex(i), colorTable()[i], random);
-    }
-}
-
-QString ColorScheme::colorNameForIndex(int index)
-{
-    Q_ASSERT(index >= 0 && index < TABLE_COLORS);
-
-    return QString(colorNames[index]);
-}
-QString ColorScheme::translatedColorNameForIndex(int index)
-{
-    Q_ASSERT(index >= 0 && index < TABLE_COLORS);
-
-    return i18nc("@item:intable palette", translatedColorNames[index]);
-}
 void ColorScheme::readColorEntry(KConfig& config , int index)
 {
     KConfigGroup configGroup(&config, colorNameForIndex(index));
@@ -347,6 +336,21 @@ void ColorScheme::readColorEntry(KConfig& config , int index)
     if (hue != 0 || value != 0 || saturation != 0)
         setRandomizationRange(index , hue , saturation , value);
 }
+
+void ColorScheme::write(KConfig& config) const
+{
+    KConfigGroup configGroup = config.group("General");
+
+    configGroup.writeEntry("Description", _description);
+    configGroup.writeEntry("Opacity", _opacity);
+    configGroup.writeEntry("Wallpaper", _wallpaper->path());
+
+    for (int i = 0 ; i < TABLE_COLORS ; i++) {
+        RandomizationRange random = _randomTable != 0 ? _randomTable[i] : RandomizationRange();
+        writeColorEntry(config, colorNameForIndex(i), colorTable()[i], random);
+    }
+}
+
 void ColorScheme::writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry , const RandomizationRange& random) const
 {
     KConfigGroup configGroup(&config, colorName);
