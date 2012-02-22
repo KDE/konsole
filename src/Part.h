@@ -179,7 +179,6 @@ private slots:
 
 private:
     Session* activeSession() const;
-    void setupActionsForSession(SessionController* session);
     void createGlobalActions();
 
 private:

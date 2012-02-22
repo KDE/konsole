@@ -95,11 +95,7 @@ void Part::createGlobalActions()
     _manageProfilesAction = new QAction(i18n("Manage Profiles..."), this);
     connect(_manageProfilesAction, SIGNAL(triggered()), this, SLOT(showManageProfilesDialog()));
 }
-void Part::setupActionsForSession(SessionController* session)
-{
-    // TODO: what meaningful operation should be placed here?
-    Q_UNUSED(session);
-}
+
 bool Part::openFile()
 {
     return false;
@@ -209,7 +205,6 @@ void Part::activeViewChanged(SessionController* controller)
     }
 
     // insert new controller
-    setupActionsForSession(controller);
     insertChildClient(controller);
     connect(controller, SIGNAL(titleChanged(ViewProperties*)), this,
             SLOT(activeViewTitleChanged(ViewProperties*)));
