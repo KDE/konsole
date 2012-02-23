@@ -197,6 +197,7 @@ void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
         QTableWidgetItem* colorItem = new QTableWidgetItem();
         colorItem->setBackground(table[row].color);
         colorItem->setFlags(colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable);
+        colorItem->setToolTip(i18n("Click to choose different color"));
 
         _ui->colorTable->setItem(row, 0, nameItem);
         _ui->colorTable->setItem(row, 1, colorItem);
