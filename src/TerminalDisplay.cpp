@@ -61,6 +61,7 @@
 #include "ScreenWindow.h"
 #include "LineFont.h"
 #include "SessionController.h"
+#include "WindowSystemInfo.h"
 
 using namespace Konsole;
 
@@ -90,9 +91,6 @@ const ColorEntry Konsole::base_color_table[TABLE_COLORS] = {
     ColorEntry(QColor(0x54, 0x54, 0xFF), 0), ColorEntry(QColor(0xFF, 0x54, 0xFF), 0),
     ColorEntry(QColor(0x54, 0xFF, 0xFF), 0), ColorEntry(QColor(0xFF, 0xFF, 0xFF), 0)
 };
-
-// static
-bool TerminalDisplay::HAVE_TRANSPARENCY = false;
 
 // we use this to force QPainter to display text in LTR mode
 // more information can be found in: http://unicode.org/reports/tr9/
@@ -577,7 +575,7 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
 
     if (useOpacitySetting && !_wallpaper->isNull() &&
             _wallpaper->draw(painter, contentsRect)) {
-    } else if (HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff && useOpacitySetting) {
+    } else if (WindowSystemInfo::HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff && useOpacitySetting) {
         QColor color(backgroundColor);
         color.setAlpha(qAlpha(_blendColor));
 

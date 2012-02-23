@@ -465,8 +465,6 @@ public:
 
     static void setXSelection(const QString& text);
 
-    static bool HAVE_TRANSPARENCY;
-
 public slots:
     /**
      * Scrolls current ScreenWindow

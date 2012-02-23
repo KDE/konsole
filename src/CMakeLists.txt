@@ -111,6 +111,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         XKB.cpp
         ZModemDialog.cpp
         konsole_wcwidth.cpp
+        WindowSystemInfo.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Konsole.xml
         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
     )

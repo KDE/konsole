@@ -53,10 +53,7 @@
 #include "SessionManager.h"
 #include "ShellCommand.h"
 #include "TabTitleFormatAction.h"
-
-// FIXME: it feels bad to include a big header file just
-// in order to use one of its static members.
-#include "TerminalDisplay.h"
+#include "WindowSystemInfo.h"
 
 using namespace Konsole;
 
@@ -792,7 +789,7 @@ void EditProfileDialog::updateTransparencyWarning()
                                                     " which does not appear to be supported on your"
                                                     " desktop"));
             _ui->transparencyWarningWidget->setHidden(false);
-        } else if (! TerminalDisplay::HAVE_TRANSPARENCY) {
+        } else if (! WindowSystemInfo::HAVE_TRANSPARENCY) {
             _ui->transparencyWarningWidget->setText(i18n("Konsole was started before desktop effects were enabled."
                                                     " You need to restart Konsole to see transparent background."));
             _ui->transparencyWarningWidget->setHidden(false);

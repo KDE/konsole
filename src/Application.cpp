@@ -40,7 +40,7 @@
 #include "SessionManager.h"
 #include "MainWindow.h"
 #include "Session.h"
-#include "TerminalDisplay.h"
+#include "WindowSystemInfo.h"
 #include "ViewManager.h"
 
 using namespace Konsole;
@@ -55,7 +55,7 @@ void Application::init()
     _backgroundInstance = 0;
 
     // check for compositing functionality
-    TerminalDisplay::HAVE_TRANSPARENCY = KWindowSystem::compositingActive();
+    WindowSystemInfo::HAVE_TRANSPARENCY = KWindowSystem::compositingActive();
 
 #if defined(Q_WS_MAC) && QT_VERSION >= 0x040600
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends

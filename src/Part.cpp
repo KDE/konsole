@@ -41,6 +41,7 @@
 #include "SessionController.h"
 #include "SessionManager.h"
 #include "TerminalDisplay.h"
+#include "WindowSystemInfo.h"
 #include "ViewManager.h"
 
 using namespace Konsole;
@@ -81,7 +82,7 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
 
     // Enable translucency support.
     _viewManager->widget()->setAttribute(Qt::WA_TranslucentBackground, true);
-    TerminalDisplay::HAVE_TRANSPARENCY = KWindowSystem::compositingActive();
+    WindowSystemInfo::HAVE_TRANSPARENCY = KWindowSystem::compositingActive();
 
     // create basic session
     createSession();
