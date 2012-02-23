@@ -108,7 +108,6 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ViewProperties.cpp
         ViewSplitter.cpp
         Vt102Emulation.cpp
-        WarningBox.cpp
         XKB.cpp
         ZModemDialog.cpp
         konsole_wcwidth.cpp

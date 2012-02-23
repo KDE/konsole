@@ -60,7 +60,7 @@
            </widget>
           </item>
           <item row="1" column="1" colspan="2">
-           <widget class="Konsole::WarningBox" name="emptyNameWarningWidget" native="true"/>
+           <widget class="KMessageWidget" name="emptyNameWarningWidget" native="true"/>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_3">
@@ -457,7 +457,7 @@
            </spacer>
           </item>
           <item row="5" column="0">
-           <widget class="Konsole::WarningBox" name="transparencyWarningWidget" native="true"/>
+           <widget class="KMessageWidget" name="transparencyWarningWidget" native="true"/>
           </item>
          </layout>
         </widget>
@@ -1207,9 +1207,9 @@
    <header>knuminput.h</header>
   </customwidget>
   <customwidget>
-   <class>Konsole::WarningBox</class>
-   <extends>QWidget</extends>
-   <header>WarningBox.h</header>
+   <class>KMessageWidget</class>
+   <extends>QFrame</extends>
+   <header>kmessagewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

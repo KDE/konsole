@@ -117,7 +117,7 @@
     </spacer>
    </item>
    <item>
-    <widget class="Konsole::WarningBox" native="1" name="transparencyWarningWidget" >
+    <widget class="KMessageWidget" native="1" name="transparencyWarningWidget" >
     </widget>
    </item>
   </layout>
@@ -129,9 +129,9 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>Konsole::WarningBox</class>
-   <extends>QWidget</extends>
-   <header>WarningBox.h</header>
+   <class>KMessageWidget</class>
+   <extends>QFrame</extends>
+   <header>kmessagewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

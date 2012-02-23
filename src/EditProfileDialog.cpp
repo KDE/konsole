@@ -238,6 +238,10 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
 {
     // basic profile options
     {
+        _ui->emptyNameWarningWidget->setWordWrap(false);
+        _ui->emptyNameWarningWidget->setCloseButtonVisible(false);
+        _ui->emptyNameWarningWidget->setMessageType(KMessageWidget::Warning);
+
         ProfileGroup::Ptr group = profile->asGroup();
         if (!group || group->profiles().count() < 2) {
             _ui->profileNameEdit->setText(profile->name());
@@ -434,6 +438,9 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
             SLOT(colorSchemeAnimationUpdate()));
 
     _ui->transparencyWarningWidget->setVisible(false);
+    _ui->transparencyWarningWidget->setWordWrap(true);
+    _ui->transparencyWarningWidget->setCloseButtonVisible(false);
+    _ui->transparencyWarningWidget->setMessageType(KMessageWidget::Warning);
 
     _ui->editColorSchemeButton->setEnabled(false);
     _ui->removeColorSchemeButton->setEnabled(false);

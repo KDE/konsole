@@ -78,6 +78,10 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     connect(_ui->colorTable , SIGNAL(itemClicked(QTableWidgetItem*)) , this ,
             SLOT(editColorItem(QTableWidgetItem*)));
 
+    _ui->transparencyWarningWidget->setWordWrap(true);
+    _ui->transparencyWarningWidget->setCloseButtonVisible(false);
+    _ui->transparencyWarningWidget->setMessageType(KMessageWidget::Warning);
+
     // warning label when transparency is not available
     if (KWindowSystem::compositingActive()) {
         _ui->transparencyWarningWidget->setVisible(false);
