@@ -199,26 +199,26 @@ const Profile::Ptr EditProfileDialog::lookupProfile() const
 }
 void EditProfileDialog::preparePage(int page)
 {
-    const Profile::Ptr info = lookupProfile();
+    const Profile::Ptr profile = lookupProfile();
 
     Q_ASSERT(_pageNeedsUpdate.count() > page);
-    Q_ASSERT(info);
+    Q_ASSERT(profile);
 
     QWidget* pageWidget = _ui->tabWidget->widget(page);
 
     if (_pageNeedsUpdate[page]) {
         if (pageWidget == _ui->generalTab)
-            setupGeneralPage(info);
+            setupGeneralPage(profile);
         else if (pageWidget == _ui->tabsTab)
-            setupTabsPage(info);
+            setupTabsPage(profile);
         else if (pageWidget == _ui->appearanceTab)
-            setupAppearancePage(info);
+            setupAppearancePage(profile);
         else if (pageWidget == _ui->scrollingTab)
-            setupScrollingPage(info);
+            setupScrollingPage(profile);
         else if (pageWidget == _ui->keyboardTab)
-            setupKeyboardPage(info);
+            setupKeyboardPage(profile);
         else if (pageWidget == _ui->advancedTab)
-            setupAdvancedPage(info);
+            setupAdvancedPage(profile);
         else
             Q_ASSERT(false);
 
@@ -234,16 +234,16 @@ void EditProfileDialog::selectProfileName()
     _ui->profileNameEdit->setFocus();
     _ui->profileNameEdit->selectAll();
 }
-void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
+void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
 {
     // basic profile options
     {
-        ProfileGroup::Ptr group = info->asGroup();
+        ProfileGroup::Ptr group = profile->asGroup();
         if (!group || group->profiles().count() < 2) {
-            _ui->profileNameEdit->setText(info->name());
+            _ui->profileNameEdit->setText(profile->name());
             _ui->profileNameEdit->setClearButtonShown(true);
 
-            _ui->emptyNameWarningWidget->setVisible(info->name().isEmpty());
+            _ui->emptyNameWarningWidget->setVisible(profile->name().isEmpty());
             _ui->emptyNameWarningWidget->setText(i18n("Profile name is empty."));
         } else {
             _ui->profileNameEdit->setText(groupProfileNames(group, -1));
@@ -255,26 +255,26 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     }
 
 
-    ShellCommand command(info->command() , info->arguments());
+    ShellCommand command(profile->command() , profile->arguments());
     _ui->commandEdit->setText(command.fullCommand());
     KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
     exeCompletion->setParent(this);
     exeCompletion->setDir(QString());
     _ui->commandEdit->setCompletionObject(exeCompletion);
 
-    _ui->initialDirEdit->setText(info->defaultWorkingDirectory());
+    _ui->initialDirEdit->setText(profile->defaultWorkingDirectory());
     KUrlCompletion* dirCompletion = new KUrlCompletion(KUrlCompletion::DirCompletion);
     dirCompletion->setParent(this);
     _ui->initialDirEdit->setCompletionObject(dirCompletion);
     _ui->initialDirEdit->setClearButtonShown(true);
 
     _ui->dirSelectButton->setIcon(KIcon("folder-open"));
-    _ui->iconSelectButton->setIcon(KIcon(info->icon()));
-    _ui->startInSameDirButton->setChecked(info->property<bool>(Profile::StartInCurrentSessionDir));
+    _ui->iconSelectButton->setIcon(KIcon(profile->icon()));
+    _ui->startInSameDirButton->setChecked(profile->property<bool>(Profile::StartInCurrentSessionDir));
 
     // window options
-    _ui->showTerminalSizeHintButton->setChecked(info->property<bool>(Profile::ShowTerminalSizeHint));
-    _ui->saveGeometryOnExitButton->setChecked(info->property<bool>(Profile::SaveGeometryOnExit));
+    _ui->showTerminalSizeHintButton->setChecked(profile->property<bool>(Profile::ShowTerminalSizeHint));
+    _ui->saveGeometryOnExitButton->setChecked(profile->property<bool>(Profile::SaveGeometryOnExit));
 
     // signals and slots
     connect(_ui->dirSelectButton, SIGNAL(clicked()), this, SLOT(selectInitialDir()));
@@ -297,12 +297,12 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
 }
 void EditProfileDialog::showEnvironmentEditor()
 {
-    const Profile::Ptr info = lookupProfile();
+    const Profile::Ptr profile = lookupProfile();
 
     QWeakPointer<KDialog> dialog = new KDialog(this);
     KTextEdit* edit = new KTextEdit(dialog.data());
 
-    QStringList currentEnvironment = info->property<QStringList>(Profile::Environment);
+    QStringList currentEnvironment = profile->property<QStringList>(Profile::Environment);
 
     edit->setPlainText(currentEnvironment.join("\n"));
     edit->setToolTip(i18n("One environment variable per line"));
@@ -317,17 +317,17 @@ void EditProfileDialog::showEnvironmentEditor()
 
     delete dialog.data();
 }
-void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
+void EditProfileDialog::setupTabsPage(const Profile::Ptr profile)
 {
     // tab title format
     _ui->tabTitleEdit->setClearButtonShown(true);
     _ui->remoteTabTitleEdit->setClearButtonShown(true);
-    _ui->tabTitleEdit->setText(info->property<QString>(Profile::LocalTabTitleFormat));
+    _ui->tabTitleEdit->setText(profile->property<QString>(Profile::LocalTabTitleFormat));
     _ui->remoteTabTitleEdit->setText(
-        info->property<QString>(Profile::RemoteTabTitleFormat));
+        profile->property<QString>(Profile::RemoteTabTitleFormat));
 
     // tab monitoring
-    int silenceSeconds = info->property<int>(Profile::SilenceSeconds);
+    int silenceSeconds = profile->property<int>(Profile::SilenceSeconds);
     _ui->silenceSecondsSpinner->setValue(silenceSeconds);
     _ui->silenceSecondsSpinner->setSuffix(ki18ncp("Unit of time", " second", " seconds"));
 
@@ -422,7 +422,7 @@ void EditProfileDialog::selectInitialDir()
     if (!url.isEmpty())
         _ui->initialDirEdit->setText(url.path());
 }
-void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
+void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
 {
     ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
     _ui->colorSchemeList->setItemDelegate(delegate);
@@ -461,9 +461,9 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
             SLOT(newColorScheme()));
 
     // setup font preview
-    bool antialias = info->property<bool>(Profile::AntiAliasFonts);
+    bool antialias = profile->property<bool>(Profile::AntiAliasFonts);
 
-    QFont font = info->font();
+    QFont font = profile->font();
     font.setStyleStrategy(antialias ? QFont::PreferAntialias : QFont::NoAntialias);
 
     _ui->fontPreviewLabel->installEventFilter(this);
@@ -481,7 +481,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
     connect(_ui->antialiasTextButton, SIGNAL(toggled(bool)), this,
             SLOT(setAntialiasText(bool)));
 
-    bool boldIntense = info->property<bool>(Profile::BoldIntense);
+    bool boldIntense = profile->property<bool>(Profile::BoldIntense);
     _ui->boldIntenseButton->setChecked(boldIntense);
     connect(_ui->boldIntenseButton, SIGNAL(toggled(bool)), this,
             SLOT(setBoldIntense(bool)));
@@ -834,7 +834,7 @@ void EditProfileDialog::updateButtonApply()
     enableButtonApply(userModified);
 }
 
-void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* info */)
+void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* profile */)
 {
     // setup translator list
     updateKeyBindingsList(true);

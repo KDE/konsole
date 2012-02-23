@@ -174,12 +174,12 @@ private slots:
 
 private:
     // initialize various pages of the dialog
-    void setupGeneralPage(const Profile::Ptr info);
-    void setupTabsPage(const Profile::Ptr info);
-    void setupAppearancePage(const Profile::Ptr info);
-    void setupKeyboardPage(const Profile::Ptr info);
-    void setupScrollingPage(const Profile::Ptr info);
-    void setupAdvancedPage(const Profile::Ptr info);
+    void setupGeneralPage(const Profile::Ptr profile);
+    void setupTabsPage(const Profile::Ptr profile);
+    void setupAppearancePage(const Profile::Ptr profile);
+    void setupKeyboardPage(const Profile::Ptr profile);
+    void setupScrollingPage(const Profile::Ptr profile);
+    void setupAdvancedPage(const Profile::Ptr profile);
 
     void updateColorSchemeList(bool selectCurrentScheme = false);
     void updateColorSchemeButtons();
