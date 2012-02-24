@@ -510,9 +510,10 @@ void Session::setUserTitle(int what, const QString& caption)
     }
 
     if (what == SessionName) {
-        if (_nameTitle != caption) {
-            setTitle(Session::NameRole, caption);
-            return;
+        if (_localTabTitleFormat != caption) {
+            _localTabTitleFormat = caption;
+            setTitle(Session::DisplayedTitleRole, caption);
+            modified = true;
         }
     }
 
