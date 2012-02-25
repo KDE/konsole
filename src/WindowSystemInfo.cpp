@@ -18,11 +18,14 @@
   along with this program. If not, see http://www.gnu.org/licenses/.
 */
 
+//KDE
+#include <KWindowSystem>
+
 // Own
 #include "WindowSystemInfo.h"
 
 using Konsole::WindowSystemInfo;
 
-bool WindowSystemInfo::HAVE_TRANSPARENCY = false;
+const bool WindowSystemInfo::HAVE_TRANSPARENCY = KWindowSystem::compositingActive();
 
 

@@ -30,7 +30,7 @@ class KONSOLEPRIVATE_EXPORT WindowSystemInfo
 {
 public:
 
-    static bool HAVE_TRANSPARENCY;
+    const static bool HAVE_TRANSPARENCY;
 };
 
 }
