@@ -79,9 +79,6 @@ public:
      */
     IncrementalSearchBar* searchBar() const;
 
-    /** Sets the list of profiles to be displayed in the File menu */
-    void setProfileList(ProfileList* list);
-
     /**
      * Returns the bookmark handler associated with this window.
      */
@@ -166,6 +163,9 @@ private slots:
     void updateWindowCaption();
 
     void openUrls(const QList<KUrl>& urls);
+
+    // Sets the list of profiles to be displayed under the "New Tab" action
+    void setProfileList(ProfileList* list);
 
     void applyKonsoleSettings();
 

@@ -116,6 +116,8 @@ MainWindow::MainWindow()
     // emulator (as they are reserved for use by terminal applications)
     correctShortcuts();
 
+    setProfileList(new ProfileList(true, this));
+
     // this must come at the end
     applyKonsoleSettings();
     connect(KonsoleSettings::self(), SIGNAL(configChanged()), this, SLOT(applyKonsoleSettings()));

@@ -37,7 +37,6 @@
 #include <KWindowSystem>
 
 // Konsole
-#include "ProfileList.h"
 #include "SessionManager.h"
 #include "MainWindow.h"
 #include "Session.h"
@@ -73,7 +72,6 @@ void Application::init()
 MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
-    window->setProfileList(new ProfileList(true, window));
 
     connect(window,
             SIGNAL(newSessionRequest(Profile::Ptr,QString,ViewManager*)),
