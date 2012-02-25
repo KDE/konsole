@@ -147,7 +147,7 @@ FallbackProfile::FallbackProfile()
     setProperty(Icon, "utilities-terminal");
     setProperty(Arguments, QStringList() << qgetenv("SHELL"));
     setProperty(Environment, QStringList() << "TERM=xterm");
-    setProperty(LocalTabTitleFormat, "%D : %n");
+    setProperty(LocalTabTitleFormat, "%d : %n");
     setProperty(RemoteTabTitleFormat, "(%u) %H");
     setProperty(ShowTerminalSizeHint, true);
     setProperty(SaveGeometryOnExit, true);
