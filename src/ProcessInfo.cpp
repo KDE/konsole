@@ -149,15 +149,7 @@ QSet<QString> ProcessInfo::commonDirNames()
         KSharedConfigPtr config = KGlobal::config();
         KConfigGroup configGroup = config->group("ProcessInfo");
 
-        QStringList defaults = QStringList()
-                               << "src" << "build" << "debug" << "release"
-                               << "bin" << "lib"   << "libs"  << "tmp"
-                               << "doc" << "docs"  << "data"  << "share"
-                               << "examples" << "icons" << "pics" << "plugins"
-                               << "tests" << "media" << "l10n" << "include"
-                               << "includes" << "locale" << "ui";
-
-        _commonDirNames = QSet<QString>::fromList(configGroup.readEntry("CommonDirNames", defaults));
+        _commonDirNames = QSet<QString>::fromList(configGroup.readEntry("CommonDirNames", QStringList()));
 
     }
 
