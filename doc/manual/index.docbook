@@ -1070,6 +1070,18 @@ Double-clicking will select a whole word. Continuing to hold the mouse button an
 Triple-clicking will select a whole line. Continuing to hold the mouse button and moving the mouse will extend the selection.
 </para></listitem>
 
+<listitem><para>
+There is a hidden feature for the "%d" formatter in tab title. You can tell &konsole; to abbreviate a directory name into its first character. For example, "/path/to/konsole/src" can be abbreciated into "konsole/s". If you want to enable and control this hidden feature, open ~/.kde4/share/config/konsolerc and add following lines:</para>
+
+<para><programlisting>
+[ProcessInfo]
+CommonDirNames=name1,name2,name3...
+</programlisting>
+
+<note><para>If you are using Yakuake, you need to edit ~/.kde4/share/config/yakuakerc instead.</para></note>
+
+</para></listitem>
+
 </itemizedlist>
 </para>
 
