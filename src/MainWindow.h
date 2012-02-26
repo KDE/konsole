@@ -141,7 +141,7 @@ private slots:
     void newWindow();
     void showManageProfilesDialog();
     void activateMenuBar();
-        void showSettingsDialog();
+    void showSettingsDialog();
     void showShortcutsDialog();
     void newFromProfile(Profile::Ptr profile);
     void activeViewChanged(SessionController* controller);
