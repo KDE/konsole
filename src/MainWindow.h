@@ -89,6 +89,16 @@ public:
      */
     Session* createSSHSession(Profile::Ptr profile, const KUrl& url);
 
+    /**
+     * create view for the specified session
+     */
+    void createView(Session* session);
+
+    /**
+     * Helper method to make this window get input focus
+     */
+    void setFocus();
+
 signals:
 
     /**
@@ -104,6 +114,10 @@ signals:
     void newWindowRequest(Profile::Ptr profile,
                           const QString& directory);
 
+    /**
+     * Emitted when a view for one session is detached from this window
+     */
+    void viewDetached(Session* session);
 
 protected:
     // Reimplemented for internal reasons.

@@ -97,6 +97,8 @@ MainWindow::MainWindow()
             this , SLOT(newFromProfile(Profile::Ptr)));
     connect(_viewManager , SIGNAL(newViewRequest()) ,
             this , SLOT(newTab()));
+    connect(_viewManager , SIGNAL(viewDetached(Session*)) ,
+            this , SIGNAL(viewDetached(Session*)) );
 
     // create main window widgets
     setupWidgets();
@@ -454,7 +456,7 @@ Session* MainWindow::createSession(Profile::Ptr profile, const QString& director
     // doesn't suffer a change in terminal size right after the session
     // starts.  Some applications such as GNU Screen and Midnight Commander
     // don't like this happening
-    _viewManager->createView(session);
+    createView(session);
 
     return session;
 }
@@ -483,9 +485,19 @@ Session* MainWindow::createSSHSession(Profile::Ptr profile, const KUrl& url)
     // doesn't suffer a change in terminal size right after the session
     // starts.  some applications such as GNU Screen and Midnight Commander
     // don't like this happening
-    _viewManager->createView(session);
+    createView(session);
 
     return session;
+}
+
+void MainWindow::createView(Session* session)
+{
+    _viewManager->createView(session);
+}
+
+void MainWindow::setFocus()
+{
+    _viewManager->activeView()->setFocus();
 }
 
 void MainWindow::newWindow()

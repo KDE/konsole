@@ -38,7 +38,6 @@
 #include "SessionManager.h"
 #include "MainWindow.h"
 #include "Session.h"
-#include "ViewManager.h"
 
 using namespace Konsole;
 
@@ -75,7 +74,7 @@ MainWindow* Application::newMainWindow()
 
     connect(window, SIGNAL(newWindowRequest(Profile::Ptr,QString)),
             this, SLOT(createWindow(Profile::Ptr,QString)));
-    connect(window->viewManager(), SIGNAL(viewDetached(Session*)),
+    connect(window, SIGNAL(viewDetached(Session*)),
             this, SLOT(detachView(Session*)));
 
     return window;
@@ -91,7 +90,7 @@ void Application::createWindow(Profile::Ptr profile, const QString& directory)
 void Application::detachView(Session* session)
 {
     MainWindow* window = newMainWindow();
-    window->viewManager()->createView(session);
+    window->createView(session);
     window->show();
 }
 
@@ -425,7 +424,7 @@ void Application::toggleBackgroundInstance()
         // ensure that the active terminal display has the focus. Without
         // this, an odd problem occurred where the focus widget would change
         // each time the background instance was shown
-        _backgroundInstance->viewManager()->activeView()->setFocus();
+        _backgroundInstance->setFocus();
     } else {
         _backgroundInstance->hide();
     }
