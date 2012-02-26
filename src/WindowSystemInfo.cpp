@@ -18,11 +18,11 @@
   along with this program. If not, see http://www.gnu.org/licenses/.
 */
 
-//KDE
-#include <KWindowSystem>
-
 // Own
 #include "WindowSystemInfo.h"
+
+// KDE
+#include <KWindowSystem>
 
 using Konsole::WindowSystemInfo;
 
