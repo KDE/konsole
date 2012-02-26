@@ -63,6 +63,12 @@ void Application::init()
 #endif
 }
 
+Application::~Application()
+{
+    SessionManager::instance()->closeAllSessions();
+    SessionManager::instance()->saveSettings();
+}
+
 MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
@@ -75,28 +81,18 @@ MainWindow* Application::newMainWindow()
     return window;
 }
 
-void Application::listAvailableProfiles()
+void Application::createWindow(Profile::Ptr profile, const QString& directory)
 {
-    QList<QString> paths = SessionManager::instance()->availableProfilePaths();
-
-    foreach ( const QString& path, paths) {
-        QFileInfo info(path);
-        std::cout << info.completeBaseName().toLocal8Bit().data() << std::endl;
-    }
-
-    quit();
+    MainWindow* window = newMainWindow();
+    window->createSession(profile, directory);
+    window->show();
 }
 
-void Application::listProfilePropertyInfo()
+void Application::detachView(Session* session)
 {
-    Profile::Ptr tempProfile = SessionManager::instance()->defaultProfile();
-    const QStringList names = tempProfile->propertiesInfoList();
-
-    foreach ( const QString& name, names) {
-        std::cout << name.toLocal8Bit().data() << std::endl;
-    }
-
-    quit();
+    MainWindow* window = newMainWindow();
+    window->viewManager()->createView(session);
+    window->show();
 }
 
 int Application::newInstance()
@@ -328,6 +324,30 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
     return false;
 }
 
+void Application::listAvailableProfiles()
+{
+    QList<QString> paths = SessionManager::instance()->availableProfilePaths();
+
+    foreach ( const QString& path, paths) {
+        QFileInfo info(path);
+        std::cout << info.completeBaseName().toLocal8Bit().data() << std::endl;
+    }
+
+    quit();
+}
+
+void Application::listProfilePropertyInfo()
+{
+    Profile::Ptr tempProfile = SessionManager::instance()->defaultProfile();
+    const QStringList names = tempProfile->propertiesInfoList();
+
+    foreach ( const QString& name, names) {
+        std::cout << name.toLocal8Bit().data() << std::endl;
+    }
+
+    quit();
+}
+
 Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::Ptr baseProfile)
 {
     bool shouldUseNewProfile = false;
@@ -409,26 +429,6 @@ void Application::toggleBackgroundInstance()
     } else {
         _backgroundInstance->hide();
     }
-}
-
-Application::~Application()
-{
-    SessionManager::instance()->closeAllSessions();
-    SessionManager::instance()->saveSettings();
-}
-
-void Application::detachView(Session* session)
-{
-    MainWindow* window = newMainWindow();
-    window->viewManager()->createView(session);
-    window->show();
-}
-
-void Application::createWindow(Profile::Ptr profile, const QString& directory)
-{
-    MainWindow* window = newMainWindow();
-    window->createSession(profile, directory);
-    window->show();
 }
 
 #include "Application.moc"
