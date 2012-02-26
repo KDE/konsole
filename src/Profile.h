@@ -207,7 +207,10 @@ public:
         /** (BellModeEnum) Specifies the behavior of bell. */
         BellMode,
         /** Index of profile in the File Menu
-         * In future, format will be #.#.# to account for levels
+         * WARNING: this is currently an internal field, which is
+         * expected to be zero on disk. Do not modify it manually.
+         *
+         * In future, the format might be #.#.# to account for levels
          */
         MenuIndex
     };
