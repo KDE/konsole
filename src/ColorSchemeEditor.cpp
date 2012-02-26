@@ -60,6 +60,18 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     connect(_ui->randomizedBackgroundCheck , SIGNAL(toggled(bool)) , this ,
             SLOT(setRandomizedBackgroundColor(bool)));
 
+    // wallpaper stuff
+    KUrlCompletion* fileCompletion = new KUrlCompletion(KUrlCompletion::FileCompletion);
+    fileCompletion->setParent(this);
+    _ui->wallpaperPath->setCompletionObject(fileCompletion);
+    _ui->wallpaperPath->setClearButtonShown(true);
+    _ui->wallpaperSelectButton->setIcon(KIcon("image-x-generic"));
+
+    connect(_ui->wallpaperSelectButton, SIGNAL(clicked()),
+            this, SLOT(selectWallpaper()));
+    connect(_ui->wallpaperPath, SIGNAL(textChanged(QString)),
+            this, SLOT(wallpaperPathChanged(QString)));
+
     // color table
     _ui->colorTable->setColumnCount(2);
     _ui->colorTable->setRowCount(TABLE_COLORS);
@@ -78,6 +90,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     connect(_ui->colorTable , SIGNAL(itemClicked(QTableWidgetItem*)) , this ,
             SLOT(editColorItem(QTableWidgetItem*)));
 
+
     _ui->transparencyWarningWidget->setWordWrap(true);
     _ui->transparencyWarningWidget->setCloseButtonVisible(false);
     _ui->transparencyWarningWidget->setMessageType(KMessageWidget::Warning);
@@ -91,10 +104,6 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
                                                 " be used because your desktop does not appear to support"
                                                 " transparent windows."));
     }
-}
-void ColorSchemeEditor::setRandomizedBackgroundColor(bool randomize)
-{
-    _colors->setRandomizedBackgroundColor(randomize);
 }
 ColorSchemeEditor::~ColorSchemeEditor()
 {
@@ -155,6 +164,10 @@ void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
     qreal opacity = (100.0 - percent) / 100.0;
     _colors->setOpacity(opacity);
 }
+void ColorSchemeEditor::setRandomizedBackgroundColor(bool randomize)
+{
+    _colors->setRandomizedBackgroundColor(randomize);
+}
 void ColorSchemeEditor::setup(const ColorScheme* scheme)
 {
     delete _colors;
@@ -169,7 +182,6 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme)
 
     // setup transparency slider
     const int transparencyPercent = qRound((1 - _colors->opacity()) * 100);
-
     _ui->transparencySlider->setValue(transparencyPercent);
     setTransparencyPercentLabel(transparencyPercent);
 
@@ -177,17 +189,7 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme)
     _ui->randomizedBackgroundCheck->setChecked(scheme->randomizedBackgroundColor());
 
     // wallpaper stuff
-    KUrlCompletion* fileCompletion = new KUrlCompletion(KUrlCompletion::FileCompletion);
-    fileCompletion->setParent(this);
-    _ui->wallpaperPath->setCompletionObject(fileCompletion);
-    _ui->wallpaperPath->setClearButtonShown(true);
-    _ui->wallpaperSelectButton->setIcon(KIcon("image-x-generic"));
     _ui->wallpaperPath->setText(scheme->wallpaper()->path());
-
-    connect(_ui->wallpaperSelectButton, SIGNAL(clicked()),
-            this, SLOT(selectWallpaper()));
-    connect(_ui->wallpaperPath, SIGNAL(textChanged(QString)),
-            this, SLOT(wallpaperPathChanged(QString)));
 }
 void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
 {
