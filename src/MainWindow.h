@@ -121,11 +121,6 @@ signals:
     void newWindowRequest(Profile::Ptr profile,
                           const QString& directory);
 
-    /**
-     * Emitted by the main window to request the current session to close.
-     */
-    void closeActiveSessionRequest();
-
 protected:
     // Reimplemented for internal reasons.
     virtual void showEvent(QShowEvent* event);
@@ -187,7 +182,6 @@ private:
     BookmarkHandler* _bookmarkHandler;
     KToggleAction* _toggleMenuBarAction;
     KActionMenu* _newTabMenuAction;
-    KActionMenu* _cloneTabMenuAction;
 
     QPointer<SessionController> _pluggedController;
 
