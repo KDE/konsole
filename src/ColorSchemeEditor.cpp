@@ -26,7 +26,6 @@
 
 // KDE
 #include <KColorDialog>
-#include <KDebug>
 #include <KWindowSystem>
 #include <KFileDialog>
 #include <KUrlCompletion>
@@ -90,12 +89,11 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     connect(_ui->colorTable , SIGNAL(itemClicked(QTableWidgetItem*)) , this ,
             SLOT(editColorItem(QTableWidgetItem*)));
 
-
+    // warning label when transparency is not available
     _ui->transparencyWarningWidget->setWordWrap(true);
     _ui->transparencyWarningWidget->setCloseButtonVisible(false);
     _ui->transparencyWarningWidget->setMessageType(KMessageWidget::Warning);
 
-    // warning label when transparency is not available
     if (KWindowSystem::compositingActive()) {
         _ui->transparencyWarningWidget->setVisible(false);
     } else {
@@ -112,8 +110,10 @@ ColorSchemeEditor::~ColorSchemeEditor()
 }
 void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
 {
+    const int COLOR_COLUMN = 1;
+
     // ignore if this is not a color column
-    if (item->column() != 1)
+    if (item->column() != COLOR_COLUMN)
         return;
 
     QColor color = item->background().color();
@@ -140,8 +140,9 @@ void ColorSchemeEditor::selectWallpaper()
 }
 void ColorSchemeEditor::wallpaperPathChanged(const QString& path)
 {
-    if (path.isEmpty())
+    if (path.isEmpty()) {
         _colors->setWallpaper(path);
+    }
     else {
         QFileInfo i(path);
 
@@ -161,7 +162,7 @@ void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
 {
     _ui->transparencyPercentLabel->setText(QString("%1%").arg(percent));
 
-    qreal opacity = (100.0 - percent) / 100.0;
+    const qreal opacity = (100.0 - percent) / 100.0;
     _colors->setOpacity(opacity);
 }
 void ColorSchemeEditor::setRandomizedBackgroundColor(bool randomize)
