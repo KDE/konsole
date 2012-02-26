@@ -32,7 +32,6 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KCmdLineArgs>
-#include <KUrl>
 #include <KDebug>
 
 // Konsole
@@ -68,12 +67,6 @@ MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
 
-    connect(window,
-            SIGNAL(newSessionRequest(Profile::Ptr,QString,ViewManager*)),
-            this, SLOT(createSession(Profile::Ptr,QString,ViewManager*)));
-    connect(window,
-            SIGNAL(newSSHSessionRequest(Profile::Ptr,KUrl,ViewManager*)),
-            this, SLOT(createSSHSession(Profile::Ptr,KUrl,ViewManager*)));
     connect(window, SIGNAL(newWindowRequest(Profile::Ptr,QString)),
             this, SLOT(createWindow(Profile::Ptr,QString)));
     connect(window->viewManager(), SIGNAL(viewDetached(Session*)),
@@ -134,9 +127,8 @@ int Application::newInstance()
             Profile::Ptr newProfile = processProfileChangeArgs(args, baseProfile);
 
             // create new session
-            Session* session = createSession(newProfile,
-                                             QString(),
-                                             window->viewManager());
+            Session* session = window->createSession(newProfile, QString());
+
             if (!args->isSet("close")) {
                 session->setAutoClose(false);
             }
@@ -272,7 +264,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
 
     // Create the new session
     Profile::Ptr theProfile = shouldUseNewProfile ? newProfile :  baseProfile ;
-    Session* session = createSession(theProfile, QString(), window->viewManager());
+    Session* session = window->createSession(theProfile, QString());
 
     if (!args->isSet("close")) {
         session->setAutoClose(false);
@@ -435,62 +427,8 @@ void Application::detachView(Session* session)
 void Application::createWindow(Profile::Ptr profile, const QString& directory)
 {
     MainWindow* window = newMainWindow();
-    createSession(profile, directory, window->viewManager());
+    window->createSession(profile, directory);
     window->show();
-}
-
-Session* Application::createSession(Profile::Ptr profile,
-                                    const QString& directory,
-                                    ViewManager* viewManager)
-{
-    if (!profile)
-        profile = SessionManager::instance()->defaultProfile();
-
-    Session* session = SessionManager::instance()->createSession(profile);
-
-    if (!directory.isEmpty()
-            && profile->property<bool>(Profile::StartInCurrentSessionDir))
-        session->setInitialWorkingDirectory(directory);
-
-    session->addEnvironmentEntry( QString("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(viewManager->managerId()) );
-
-    // create view before starting the session process so that the session
-    // doesn't suffer a change in terminal size right after the session
-    // starts.  Some applications such as GNU Screen and Midnight Commander
-    // don't like this happening
-    viewManager->createView(session);
-
-    return session;
-}
-
-Session* Application::createSSHSession(Profile::Ptr profile, const KUrl& url,
-                                       ViewManager* viewManager)
-{
-    if (!profile)
-        profile = SessionManager::instance()->defaultProfile();
-
-    Session* session = SessionManager::instance()->createSession(profile);
-
-    QString sshCommand = "ssh ";
-    if (url.port() > -1) {
-        sshCommand += QString("-p %1 ").arg(url.port()) ;
-    }
-    if (url.hasUser()) {
-        sshCommand += (url.user() + '@');
-    }
-    if (url.hasHost()) {
-        sshCommand += url.host();
-    }
-
-    session->sendText(sshCommand + '\r');
-
-    // create view before starting the session process so that the session
-    // doesn't suffer a change in terminal size right after the session
-    // starts.  some applications such as GNU Screen and Midnight Commander
-    // don't like this happening
-    viewManager->createView(session);
-
-    return session;
 }
 
 #include "Application.moc"

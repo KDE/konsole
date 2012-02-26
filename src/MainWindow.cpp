@@ -408,17 +408,17 @@ void MainWindow::openUrls(const QList<KUrl>& urls)
 
     foreach(const KUrl& url , urls) {
         if (url.isLocalFile())
-            emit newSessionRequest(defaultProfile , url.path() , _viewManager);
+            createSession(defaultProfile , url.path());
 
         else if (url.protocol() == "ssh")
-            emit newSSHSessionRequest(defaultProfile , url , _viewManager);
+            createSSHSession(defaultProfile , url );
     }
 }
 
 void MainWindow::newTab()
 {
     Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
-    emit newSessionRequest(defaultProfile , activeSessionDir() , _viewManager);
+    createSession(defaultProfile , activeSessionDir() );
 }
 
 void MainWindow::cloneTab()
@@ -428,13 +428,64 @@ void MainWindow::cloneTab()
     Session* session = _pluggedController->session();
     Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
     if ( profile) {
-        emit newSessionRequest( profile , activeSessionDir() , _viewManager);
+        createSession( profile , activeSessionDir() );
     }
     else {
         // something must be wrong: every session should be associated with profile
         Q_ASSERT(false);
         newTab();
     }
+}
+
+Session* MainWindow::createSession(Profile::Ptr profile, const QString& directory)
+{
+    if (!profile)
+        profile = SessionManager::instance()->defaultProfile();
+
+    Session* session = SessionManager::instance()->createSession(profile);
+
+    if (!directory.isEmpty()
+            && profile->property<bool>(Profile::StartInCurrentSessionDir))
+        session->setInitialWorkingDirectory(directory);
+
+    session->addEnvironmentEntry( QString("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(_viewManager->managerId()) );
+
+    // create view before starting the session process so that the session
+    // doesn't suffer a change in terminal size right after the session
+    // starts.  Some applications such as GNU Screen and Midnight Commander
+    // don't like this happening
+    _viewManager->createView(session);
+
+    return session;
+}
+
+Session* MainWindow::createSSHSession(Profile::Ptr profile, const KUrl& url)
+{
+    if (!profile)
+        profile = SessionManager::instance()->defaultProfile();
+
+    Session* session = SessionManager::instance()->createSession(profile);
+
+    QString sshCommand = "ssh ";
+    if (url.port() > -1) {
+        sshCommand += QString("-p %1 ").arg(url.port()) ;
+    }
+    if (url.hasUser()) {
+        sshCommand += (url.user() + '@');
+    }
+    if (url.hasHost()) {
+        sshCommand += url.host();
+    }
+
+    session->sendText(sshCommand + '\r');
+
+    // create view before starting the session process so that the session
+    // doesn't suffer a change in terminal size right after the session
+    // starts.  some applications such as GNU Screen and Midnight Commander
+    // don't like this happening
+    _viewManager->createView(session);
+
+    return session;
 }
 
 void MainWindow::newWindow()
@@ -539,7 +590,7 @@ void MainWindow::showShortcutsDialog()
 
 void MainWindow::newFromProfile(Profile::Ptr profile)
 {
-    emit newSessionRequest(profile, activeSessionDir(), _viewManager);
+    createSession(profile, activeSessionDir() );
 }
 void MainWindow::showManageProfilesDialog()
 {

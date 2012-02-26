@@ -40,6 +40,7 @@ namespace Konsole
 class IncrementalSearchBar;
 class ViewManager;
 class ViewProperties;
+class Session;
 class SessionController;
 class ProfileList;
 class BookmarkHandler;
@@ -71,29 +72,24 @@ public:
      */
     ViewManager* viewManager() const;
 
-signals:
     /**
-     * Emitted by the main window to request the creation of a new session.
+     * Create a new session.
      *
      * @param profile The profile to use to create the new session.
      * @param directory Initial working directory for the new session or empty
      * if the default working directory associated with the profile should be used.
-     * @param view The view manager owned by this main window
      */
-    void newSessionRequest(Profile::Ptr profile,
-                           const QString& directory,
-                           ViewManager* view);
+    Session* createSession(Profile::Ptr profile, const QString& directory);
 
     /**
-     * Emitted by the main window to request the creation of a new SSH session.
+     * create a new SSH session.
      *
      * @param profile The profile to use to create the new session.
-     * @param url URL for the new session
-     * @param view The view manager owned by this main window
+     * @param url the URL representing the new SSH connection
      */
-    void newSSHSessionRequest(Profile::Ptr profile,
-                              const KUrl& url,
-                              ViewManager* view);
+    Session* createSSHSession(Profile::Ptr profile, const KUrl& url);
+
+signals:
 
     /**
      * Emitted by the main window to request the creation of a
@@ -107,6 +103,7 @@ signals:
      */
     void newWindowRequest(Profile::Ptr profile,
                           const QString& directory);
+
 
 protected:
     // Reimplemented for internal reasons.
