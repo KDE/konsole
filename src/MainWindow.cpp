@@ -66,10 +66,10 @@ static bool useTransparency()
 }
 
 MainWindow::MainWindow()
-    : KXmlGuiWindow() ,
-      _bookmarkHandler(0),
-      _pluggedController(0),
-      _menuBarInitialVisibilityApplied(false)
+    : KXmlGuiWindow()
+    , _bookmarkHandler(0)
+    , _pluggedController(0)
+    , _menuBarInitialVisibilityApplied(false)
 {
     if (useTransparency()) {
         setAttribute(Qt::WA_TranslucentBackground);
