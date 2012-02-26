@@ -71,19 +71,6 @@ public:
      */
     ViewManager* viewManager() const;
 
-    /**
-     * Returns the search bar.
-     *
-     * This is a convenience method. The search bar is actually owned by
-     * ViewManager, or more precisely, by ViewContainer.
-     */
-    IncrementalSearchBar* searchBar() const;
-
-    /**
-     * Returns the bookmark handler associated with this window.
-     */
-    BookmarkHandler* bookmarkHandler() const;
-
 signals:
     /**
      * Emitted by the main window to request the creation of a new session.
@@ -172,6 +159,19 @@ private:
     void setupActions();
     void setupWidgets();
     QString activeSessionDir() const;
+
+    /**
+     * Returns the search bar.
+     *
+     * This is a convenience method. The search bar is actually owned by
+     * ViewManager, or more precisely, by ViewContainer.
+     */
+    IncrementalSearchBar* searchBar() const;
+
+    /**
+     * Returns the bookmark handler associated with this window.
+     */
+    BookmarkHandler* bookmarkHandler() const;
 
     // sets the active shortcuts of actions in 'dest' to the shortcuts of actions
     // with the same name in 'source' (see KAction::ActiveShortcut)
