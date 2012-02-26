@@ -92,20 +92,20 @@ void ProfileList::profileChanged(Profile::Ptr key)
         updateAction(action, key);
 }
 
-void ProfileList::updateAction(QAction* action , Profile::Ptr info)
+void ProfileList::updateAction(QAction* action , Profile::Ptr profile)
 {
     Q_ASSERT(action);
-    Q_ASSERT(info);
+    Q_ASSERT(profile);
 
-    action->setText(info->name());
-    action->setIcon(KIcon(info->icon()));
+    action->setText(profile->name());
+    action->setIcon(KIcon(profile->icon()));
 }
-void ProfileList::shortcutChanged(Profile::Ptr info, const QKeySequence& sequence)
+void ProfileList::shortcutChanged(Profile::Ptr profile, const QKeySequence& sequence)
 {
     if (!_addShortcuts)
         return;
 
-    QAction* action = actionForKey(info);
+    QAction* action = actionForKey(profile);
 
     if (action) {
         action->setShortcut(sequence);
@@ -127,26 +127,26 @@ void ProfileList::syncWidgetActions(QWidget* widget, bool sync)
 
     widget->addActions(_group->actions());
 }
-void ProfileList::favoriteChanged(Profile::Ptr info, bool isFavorite)
+void ProfileList::favoriteChanged(Profile::Ptr profile, bool isFavorite)
 {
     SessionManager* manager = SessionManager::instance();
 
     if (isFavorite) {
         QAction* action = new QAction(_group);
-        action->setData(QVariant::fromValue(info));
+        action->setData(QVariant::fromValue(profile));
 
         if (_addShortcuts) {
-            action->setShortcut(manager->shortcut(info));
+            action->setShortcut(manager->shortcut(profile));
         }
 
-        updateAction(action, info);
+        updateAction(action, profile);
 
         foreach(QWidget * widget, _registeredWidgets) {
             widget->addAction(action);
         }
         emit actionsChanged(_group->actions());
     } else {
-        QAction* action = actionForKey(info);
+        QAction* action = actionForKey(profile);
 
         if (action) {
             _group->removeAction(action);
