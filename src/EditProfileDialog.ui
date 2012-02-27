@@ -105,7 +105,7 @@
           <item row="3" column="3">
            <widget class="QToolButton" name="dirSelectButton">
             <property name="toolTip">
-             <string>Browse for initial directory</string>
+             <string>Choose the initial directory</string>
             </property>
             <property name="text">
              <string>...</string>
