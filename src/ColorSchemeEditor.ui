@@ -17,7 +17,7 @@
    <item>
     <layout class="QHBoxLayout" >
      <item>
-      <widget class="QLabel" name="label" >
+      <widget class="QLabel" name="discriptionLabel" >
        <property name="text" >
         <string>Description:</string>
        </property>
@@ -35,9 +35,16 @@
     <widget class="QTableWidget" name="colorTable" />
    </item>
    <item>
+    <widget class="QCheckBox" name="randomizedBackgroundCheck" >
+     <property name="text" >
+      <string>Vary the background color for each tab</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" >
      <item>
-      <widget class="QLabel" name="label_2" >
+      <widget class="QLabel" name="transparencyLabel" >
        <property name="text" >
         <string>Background transparency:</string>
        </property>
@@ -69,16 +76,9 @@
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="randomizedBackgroundCheck" >
-     <property name="text" >
-      <string>Vary the background color for each tab</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="_2" >
+    <layout class="QHBoxLayout" >
      <item>
-      <widget class="QLabel" name="label_3" >
+      <widget class="QLabel" name="wallpaperLabel" >
        <property name="text" >
         <string>Background image:</string>
        </property>
