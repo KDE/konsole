@@ -21,9 +21,6 @@
 #include "ManageProfilesDialog.h"
 
 // Qt
-#include <QtGui/QCheckBox>
-#include <QtGui/QHeaderView>
-#include <QtGui/QItemEditorCreator>
 #include <QtCore/QFileInfo>
 #include <QtGui/QStandardItem>
 
@@ -98,7 +95,7 @@ void ManageProfilesDialog::showEvent(QShowEvent*)
     // FIXME:  this is not a good solution, look for a more correct way to do this
 
     int totalWidth = 0;
-    int columnCount = _ui->sessionTable->model()->columnCount();
+    const int columnCount = _ui->sessionTable->model()->columnCount();
 
     for (int i = 0 ; i < columnCount ; i++)
         totalWidth += _ui->sessionTable->columnWidth(i);
@@ -139,7 +136,8 @@ void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
 
 int ManageProfilesDialog::rowForProfile(const Profile::Ptr profile) const
 {
-    for (int i = 0; i < _sessionModel->rowCount(); i++) {
+    const int rowCount = _sessionModel->rowCount();
+    for (int i = 0; i < rowCount; i++) {
         if (_sessionModel->item(i, ProfileNameColumn)->data(ProfileKeyRole)
                 .value<Profile::Ptr>() == profile) {
             return i;
@@ -157,7 +155,7 @@ void ManageProfilesDialog::removeItems(const Profile::Ptr profile)
 }
 void ManageProfilesDialog::updateItems(const Profile::Ptr profile)
 {
-    int row = rowForProfile(profile);
+    const int row = rowForProfile(profile);
     if (row < 0)
         return;
 
@@ -216,7 +214,7 @@ void ManageProfilesDialog::populateTable()
     QList<Profile::Ptr> profiles = SessionManager::instance()->allProfiles();
     SessionManager::instance()->sortProfiles(profiles);
 
-    foreach(const Profile::Ptr & profile, profiles) {
+    foreach(const Profile::Ptr& profile, profiles) {
         addItems(profile);
     }
     updateDefaultItem();
@@ -239,7 +237,8 @@ void ManageProfilesDialog::updateDefaultItem()
 {
     Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
 
-    for (int i = 0 ; i < _sessionModel->rowCount() ; i++) {
+    const int rowCount = _sessionModel->rowCount();
+    for (int i = 0; i < rowCount; i++) {
         QStandardItem* item = _sessionModel->item(i);
         QFont font = item->font();
 
@@ -395,7 +394,7 @@ void ManageProfilesDialog::updateFavoriteStatus(Profile::Ptr profile, bool favor
 {
     Q_ASSERT(_sessionModel);
 
-    int rowCount = _sessionModel->rowCount();
+    const int rowCount = _sessionModel->rowCount();
     for (int i = 0; i < rowCount; i++) {
         QModelIndex index = _sessionModel->index(i, FavoriteStatusColumn);
         if (index.data(ProfileKeyRole).value<Profile::Ptr>() == profile) {
