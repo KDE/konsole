@@ -80,14 +80,14 @@
      <item>
       <widget class="QLabel" name="label_3" >
        <property name="text" >
-        <string>Wallpaper:</string>
+        <string>Backgroun image:</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="KLineEdit" name="wallpaperPath" >
        <property name="toolTip" >
-        <string>The wallpaper picture file path</string>
+        <string>Edit the path of the background image</string>
        </property>
       </widget>
      </item>
