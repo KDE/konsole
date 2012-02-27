@@ -561,7 +561,7 @@ void SessionController::setupActions()
 
     // Profile Options
     action = collection->addAction("edit-current-profile", this, SLOT(editCurrentProfile()));
-    action->setText(i18n("Configure Current Profile..."));
+    action->setText(i18n("Edit Current Profile..."));
     action->setIcon(KIcon("document-properties"));
 
     _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), _view);
