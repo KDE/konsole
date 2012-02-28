@@ -38,6 +38,7 @@
 #include <konsoleadaptor.h>
 
 #include "ColorScheme.h"
+#include "ColorSchemeManager.h"
 #include "ProfileList.h"
 #include "Session.h"
 #include "TerminalDisplay.h"

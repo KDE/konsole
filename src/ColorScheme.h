@@ -23,10 +23,7 @@
 #define COLORSCHEME_H
 
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QList>
 #include <QtCore/QMetaType>
-#include <QtCore/QSet>
 
 // KDE
 #include <KSharedPtr>
@@ -34,7 +31,6 @@
 // Konsole
 #include "CharacterColor.h"
 
-class QIODevice;
 class KConfig;
 class QPixmap;
 class QPainter;
@@ -242,125 +238,6 @@ class AccessibleColorScheme : public ColorScheme
 {
 public:
     AccessibleColorScheme();
-};
-
-/**
- * Reads a color scheme stored in the .schema format used in the KDE 3 incarnation
- * of Konsole
- *
- * Only the basic essentials ( title and color palette entries ) are currently
- * supported.  Additional options such as background image and background
- * blend colors are ignored.
- */
-class KDE3ColorSchemeReader
-{
-public:
-    /**
-     * Constructs a new reader which reads from the specified device.
-     * The device should be open in read-only mode.
-     */
-    KDE3ColorSchemeReader(QIODevice* device);
-
-    /**
-     * Reads and parses the contents of the .schema file from the input
-     * device and returns the ColorScheme defined within it.
-     *
-     * Returns a null pointer if an error occurs whilst parsing
-     * the contents of the file.
-     */
-    ColorScheme* read();
-
-private:
-    // reads a line from the file specifying a color palette entry
-    // format is: color [index] [red] [green] [blue] [transparent] [bold]
-    bool readColorLine(const QString& line , ColorScheme* scheme);
-    bool readTitleLine(const QString& line , ColorScheme* scheme);
-
-    QIODevice* _device;
-};
-
-/**
- * Manages the color schemes available for use by terminal displays.
- * See ColorScheme
- */
-class ColorSchemeManager
-{
-public:
-
-    /**
-     * Constructs a new ColorSchemeManager and loads the list
-     * of available color schemes.
-     *
-     * The color schemes themselves are not loaded until they are first
-     * requested via a call to findColorScheme()
-     */
-    ColorSchemeManager();
-    /**
-     * Destroys the ColorSchemeManager and saves any modified color schemes to disk.
-     */
-    ~ColorSchemeManager();
-
-    /**
-     * Returns the default color scheme for Konsole
-     */
-    const ColorScheme* defaultColorScheme() const;
-
-    /**
-     * Returns the color scheme with the given name or 0 if no
-     * scheme with that name exists.  If @p name is empty, the
-     * default color scheme is returned.
-     *
-     * The first time that a color scheme with a particular name is
-     * requested, the configuration information is loaded from disk.
-     */
-    const ColorScheme* findColorScheme(const QString& name);
-
-    /**
-     * Adds a new color scheme to the manager.  If @p scheme has the same name as
-     * an existing color scheme, it replaces the existing scheme.
-     *
-     * TODO - Ensure the old color scheme gets deleted
-     */
-    void addColorScheme(ColorScheme* scheme);
-
-    /**
-     * Deletes a color scheme.  Returns true on successful deletion or false otherwise.
-     */
-    bool deleteColorScheme(const QString& name);
-
-    /**
-     * Returns a list of the all the available color schemes.
-     * This may be slow when first called because all of the color
-     * scheme resources on disk must be located, read and parsed.
-     *
-     * Subsequent calls will be inexpensive.
-     */
-    QList<const ColorScheme*> allColorSchemes();
-
-    /** Returns the global color scheme manager instance. */
-    static ColorSchemeManager* instance();
-
-private:
-    // loads a color scheme from a KDE 4+ .colorscheme file
-    bool loadColorScheme(const QString& path);
-    // loads a color scheme from a KDE 3 .schema file
-    bool loadKDE3ColorScheme(const QString& path);
-    // returns a list of paths of color schemes in the KDE 4+ .colorscheme file format
-    QList<QString> listColorSchemes();
-    // returns a list of paths of color schemes in the .schema file format
-    // used in KDE 3
-    QList<QString> listKDE3ColorSchemes();
-    // loads all of the color schemes
-    void loadAllColorSchemes();
-    // finds the path of a color scheme
-    QString findColorSchemePath(const QString& name) const;
-
-    QHash<QString, const ColorScheme*> _colorSchemes;
-    QSet<ColorScheme*> _modifiedSchemes;
-
-    bool _haveLoadedAll;
-
-    static const ColorScheme _defaultColorScheme;
 };
 
 }

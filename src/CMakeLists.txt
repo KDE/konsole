@@ -78,6 +78,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ${konsoleadaptors_SRCS}
         BookmarkHandler.cpp
         ColorScheme.cpp
+        ColorSchemeManager.cpp
         ColorSchemeEditor.cpp
         CopyInputDialog.cpp
         EditProfileDialog.cpp

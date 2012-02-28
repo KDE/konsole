@@ -46,6 +46,7 @@
 
 // Konsole
 #include "ColorScheme.h"
+#include "ColorSchemeManager.h"
 #include "ColorSchemeEditor.h"
 #include "ui_EditProfileDialog.h"
 #include "KeyBindingEditor.h"
