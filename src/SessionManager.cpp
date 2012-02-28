@@ -40,7 +40,6 @@
 #include <KStandardDirs>
 
 // Konsole
-#include "ColorScheme.h"
 #include "Session.h"
 #include "History.h"
 
