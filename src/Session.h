@@ -341,14 +341,14 @@ public:
       * See "Operating System Controls" section on http://rtfm.etla.org/xterm/ctlseq.html
       */
     enum UserTitleChange {
-        IconNameAndWindowTitle     = 0,
-        IconName                 = 1,
-        WindowTitle                = 2,
-        TextColor                = 10,
-        BackgroundColor            = 11,
-        SessionName                = 30,  // Non-standard
-        SessionIcon                = 32,  // Non-standard
-        ProfileChange            = 50     // this clashes with Xterm's font change command
+        IconNameAndWindowTitle = 0,
+        IconName               = 1,
+        WindowTitle            = 2,
+        TextColor              = 10,
+        BackgroundColor        = 11,
+        SessionName            = 30,  // Non-standard
+        SessionIcon            = 32,  // Non-standard
+        ProfileChange          = 50   // this clashes with Xterm's font change command
     };
 
     // Sets the text codec used by this sessions terminal emulation.
@@ -720,7 +720,7 @@ private:
     QString        _remoteTabTitleFormat;
 
     QString        _iconName;
-    QString        _iconText; // as set by: echo -en '\033]1;IconText\007
+    QString        _iconText; // not actually used
     bool           _addToUtmp;
     bool           _flowControlEnabled;
 
