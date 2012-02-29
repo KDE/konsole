@@ -45,8 +45,6 @@ class QShowEvent;
 class QHideEvent;
 class QTimerEvent;
 
-class KMenu;
-
 namespace Konsole
 {
 
