@@ -514,7 +514,7 @@ public:
  * The Profile::Name and Profile::Path properties are unique to individual
  * profiles, setting these properties on a ProfileGroup has no effect.
  */
-class ProfileGroup : public Profile
+class KONSOLEPRIVATE_EXPORT ProfileGroup : public Profile
 {
 public:
     typedef KSharedPtr<ProfileGroup> Ptr;
