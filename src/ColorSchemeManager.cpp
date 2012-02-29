@@ -264,9 +264,9 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 
     QFileInfo info(filePath);
 
-    if (!_colorSchemes.contains(info.baseName()))
-        _colorSchemes.insert(scheme->name(), scheme);
-    else {
+    if (!_colorSchemes.contains(info.baseName())) {
+        addColorScheme(scheme);
+    } else {
         kWarning() << "color scheme with name" << scheme->name() << "has already been" <<
                    "found, ignoring.";
         delete scheme;
