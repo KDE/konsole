@@ -441,7 +441,7 @@ private:
  * Manages the keyboard translations available for use by terminal sessions,
  * see KeyboardTranslator.
  */
-class KONSOLEPRIVATE_EXPORT KeyboardTranslatorManager
+class KeyboardTranslatorManager
 {
 public:
     /**

@@ -495,7 +495,7 @@ inline bool Profile::canInheritProperty(Property property)
  * properties.  This can be used as a parent for other profiles or a
  * fallback in case a profile cannot be loaded from disk.
  */
-class KONSOLEPRIVATE_EXPORT FallbackProfile : public Profile
+class FallbackProfile : public Profile
 {
 public:
     FallbackProfile();
@@ -514,7 +514,7 @@ public:
  * The Profile::Name and Profile::Path properties are unique to individual
  * profiles, setting these properties on a ProfileGroup has no effect.
  */
-class KONSOLEPRIVATE_EXPORT ProfileGroup : public Profile
+class ProfileGroup : public Profile
 {
 public:
     typedef KSharedPtr<ProfileGroup> Ptr;

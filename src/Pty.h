@@ -50,7 +50,7 @@ namespace Konsole
  * To start the terminal process, call the start() method
  * with the program name and appropriate arguments.
  */
-class KONSOLEPRIVATE_EXPORT Pty: public KPtyProcess
+class Pty: public KPtyProcess
 {
     Q_OBJECT
 
