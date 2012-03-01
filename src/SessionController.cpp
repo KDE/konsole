@@ -88,6 +88,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _previousState(-1)
     , _viewUrlFilter(0)
     , _searchFilter(0)
+    , _copyToAllTabsAction(0)
     , _searchToggleAction(0)
     , _findNextAction(0)
     , _findPreviousAction(0)
@@ -103,12 +104,15 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     Q_ASSERT(view);
 
     // handle user interface related to session (menus etc.)
-    if (isKonsolePart())
+    if (isKonsolePart()) {
         setXMLFile("konsole/partui.rc");
-    else
+        setupCommonActions();
+    } else {
         setXMLFile("konsole/sessionui.rc");
+        setupCommonActions();
+        setupExtraActions();
+    }
 
-    setupActions();
     actionCollection()->addAssociatedWidget(view);
     foreach(QAction * action, actionCollection()->actions()) {
         action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
@@ -350,7 +354,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             connect(_session, SIGNAL(bellRequest(QString)),
                     _view, SLOT(bell(QString)));
 
-            if (_copyToAllTabsAction->isChecked()) {
+            if(_copyToAllTabsAction && _copyToAllTabsAction->isChecked()) {
                 // A session with "Copy To All Tabs" has come into focus:
                 // Ensure that newly created sessions are included in _copyToGroup!
                 copyInputToAllTabs();
@@ -429,10 +433,10 @@ void SessionController::setShowMenuAction(QAction* action)
     actionCollection()->addAction("show-menubar", action);
 }
 
-void SessionController::setupActions()
+
+void SessionController::setupCommonActions()
 {
     KAction* action = 0;
-    KToggleAction* toggleAction = 0;
     KActionCollection* collection = actionCollection();
 
     // Close Session
@@ -467,6 +471,39 @@ void SessionController::setupActions()
     action->setIcon(KIcon("edit-select-all"));
     // TODO: this shortcut conflict with the 'close-active-view' action
     //action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
+
+    action = KStandardAction::saveAs(this, SLOT(saveHistory()), collection);
+    action->setText(i18n("Save Output &As..."));
+
+    action = collection->addAction("adjust-history", this, SLOT(showHistoryOptions()));
+    action->setText(i18n("Adjust Scrollback..."));
+    action->setIcon(KIcon("configure"));
+
+    action = collection->addAction("clear-history", this, SLOT(clearHistory()));
+    action->setText(i18n("Clear Scrollback"));
+    action->setIcon(KIcon("edit-clear-history"));
+
+    action = collection->addAction("clear-history-and-reset", this, SLOT(clearHistoryAndReset()));
+    action->setText(i18n("Clear Scrollback and Reset"));
+    action->setIcon(KIcon("edit-clear-history"));
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_X));
+
+    // Profile Options
+    action = collection->addAction("edit-current-profile", this, SLOT(editCurrentProfile()));
+    action->setText(i18n("Configure Current Profile..."));
+    action->setIcon(KIcon("document-properties") );
+
+    _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), _view);
+    collection->addAction("switch-profile", _switchProfileMenu);
+    connect(_switchProfileMenu->menu(), SIGNAL(aboutToShow()), this, SLOT(prepareSwitchProfileMenu()));
+
+}
+
+void SessionController::setupExtraActions()
+{
+    KAction* action = 0;
+    KToggleAction* toggleAction = 0;
+    KActionCollection* collection = actionCollection();
 
     // Rename Session
     action = collection->addAction("rename-session", this, SLOT(renameSession()));
@@ -541,32 +578,6 @@ void SessionController::setupActions()
     _findPreviousAction = KStandardAction::findPrev(this, SLOT(findPreviousInHistory()), collection);
     _findPreviousAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F3));
     _findPreviousAction->setEnabled(false);
-
-    action = KStandardAction::saveAs(this, SLOT(saveHistory()), collection);
-    action->setText(i18n("Save Output &As..."));
-
-    action = collection->addAction("adjust-history", this, SLOT(showHistoryOptions()));
-    action->setText(i18n("Adjust Scrollback..."));
-    // TODO: find a suitable icon which matches this action and not misleading
-    action->setIcon(KIcon("configure"));
-
-    action = collection->addAction("clear-history", this, SLOT(clearHistory()));
-    action->setText(i18n("Clear Scrollback"));
-    action->setIcon(KIcon("edit-clear-history"));
-
-    action = collection->addAction("clear-history-and-reset", this, SLOT(clearHistoryAndReset()));
-    action->setText(i18n("Clear Scrollback and Reset"));
-    action->setIcon(KIcon("edit-clear-history"));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_K));
-
-    // Profile Options
-    action = collection->addAction("edit-current-profile", this, SLOT(editCurrentProfile()));
-    action->setText(i18n("Edit Current Profile..."));
-    action->setIcon(KIcon("document-properties"));
-
-    _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), _view);
-    collection->addAction("switch-profile", _switchProfileMenu);
-    connect(_switchProfileMenu->menu(), SIGNAL(aboutToShow()), this, SLOT(prepareSwitchProfileMenu()));
 }
 
 void SessionController::switchProfile(Profile::Ptr profile)

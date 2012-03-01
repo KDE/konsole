@@ -259,7 +259,8 @@ private:
     // direction - value from SearchHistoryTask::SearchDirection enum to specify
     //             the search direction
     void beginSearch(const QString& text , int direction);
-    void setupActions();
+    void setupCommonActions();
+    void setupExtraActions();
     void removeSearchFilter(); // remove and delete the current search filter if set
     void setFindNextPrevEnabled(bool enabled);
     void listenForScreenWindowUpdates();
