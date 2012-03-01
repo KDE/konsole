@@ -278,17 +278,6 @@ signals:
     void sendData(const char* data, int len);
 
     /**
-     * Requests that sending of input to the emulation
-     * from the terminal process be suspended or resumed.
-     *
-     * @param suspend If true, requests that sending of
-     * input from the terminal process' stdout be
-     * suspended.  Otherwise requests that sending of
-     * input be resumed.
-     */
-    void lockPtyRequest(bool suspend);
-
-    /**
      * Requests that the pty used by the terminal process
      * be set to UTF 8 mode.
      *

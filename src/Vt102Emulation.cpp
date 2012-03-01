@@ -32,11 +32,6 @@
 #undef HAVE_XKB
 #endif
 
-#if defined(HAVE_XKB)
-void scrolllock_set_off();
-void scrolllock_set_on();
-#endif
-
 // Standard
 #include <stdio.h>
 #include <unistd.h>

@@ -109,8 +109,6 @@ public:
         ScrollUpToTopCommand = 32,
         /** Scroll the terminal display down to the end of history */
         ScrollDownToBottomCommand = 64,
-        /** Toggles scroll lock mode */
-        ScrollLockCommand = 128,
         /** Echos the operating system specific erase character. */
         EraseCommand = 256
     };

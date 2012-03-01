@@ -282,17 +282,6 @@ void Pty::dataReceived()
     emit receivedData(data.constData(), data.count());
 }
 
-void Pty::lockPty(bool lock)
-{
-    Q_UNUSED(lock);
-
-    //TODO: Support for locking the Pty
-    //if (lock)
-    //suspend();
-    //else
-    //resume();
-}
-
 int Pty::foregroundProcessGroup() const
 {
     int pid = tcgetpgrp(pty()->masterFd());

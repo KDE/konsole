@@ -293,8 +293,6 @@ bool KeyboardTranslatorReader::parseAsCommand(const QString& text, KeyboardTrans
         command = KeyboardTranslator::ScrollUpToTopCommand;
     else if (text.compare("scrolldowntobottom", Qt::CaseInsensitive) == 0)
         command = KeyboardTranslator::ScrollDownToBottomCommand;
-    else if (text.compare("scrolllock", Qt::CaseInsensitive) == 0)
-        command = KeyboardTranslator::ScrollLockCommand;
     else
         return false;
 
@@ -734,8 +732,6 @@ QString KeyboardTranslator::Entry::resultToString(bool expandWildCards,
         return "ScrollUpToTop";
     else if (_command == ScrollDownToBottomCommand)
         return "ScrollDownToBottom";
-    else if (_command == ScrollLockCommand)
-        return "ScrollLock";
 
     return QString();
 }

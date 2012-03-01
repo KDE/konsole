@@ -121,7 +121,6 @@ key Prior +Shift   : scrollPageUp
 key Down  +Shift   : scrollLineDown
 key Next  +Shift   : scrollPageDown
 
-key ScrollLock     : scrollLock
 
 #----------------------------------------------------------
 

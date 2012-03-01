@@ -186,7 +186,6 @@ void Session::openTeletype(int fd)
             SLOT(onReceiveBlock(const char*,int)));
     connect(_emulation, SIGNAL(sendData(const char*,int)), _shellProcess,
             SLOT(sendData(const char*,int)));
-    connect(_emulation, SIGNAL(lockPtyRequest(bool)), _shellProcess, SLOT(lockPty(bool)));
     connect(_emulation, SIGNAL(useUtf8Request(bool)), _shellProcess, SLOT(setUtf8Mode(bool)));
     connect(_shellProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(done(int,QProcess::ExitStatus)));
     connect(_emulation, SIGNAL(imageSizeChanged(int,int)), this, SLOT(updateWindowSize(int,int)));

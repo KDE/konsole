@@ -167,5 +167,4 @@ key Down  +Shift-AppScreen  : scrollLineDown
 key Next  +Shift-AppScreen  : scrollPageDown
 key End   +Shift-AppScreen  : scrollDownToBottom
 
-key ScrollLock     : scrollLock
 

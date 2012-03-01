@@ -149,17 +149,6 @@ public slots:
     void setUtf8Mode(bool on);
 
     /**
-     * Suspend or resume processing of data from the standard
-     * output of the terminal process.
-     *
-     * See K3Process::suspend() and K3Process::resume()
-     *
-     * @param lock If true, processing of output is suspended,
-     * otherwise processing is resumed.
-     */
-    void lockPty(bool lock);
-
-    /**
      * Sends data to the process currently controlling the
      * teletype ( whose id is returned by foregroundProcessGroup() )
      *

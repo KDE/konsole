@@ -5,19 +5,9 @@ if(LIBKONQ_FOUND)
   include_directories(${LIBKONQ_INCLUDE_DIR})
 endif()
 
-### Compile-time features
-macro_optional_find_package(XKB)
-macro_log_feature(XKB_FOUND "XKB" "X keyboard extension" "http://www.x.org" FALSE "" "Gives Konsole better keyboard support.")
-
 include(CheckIncludeFiles)
 check_include_files("sys/proc.h"      HAVE_SYS_PROC_H)
 check_include_files("sys/proc_info.h" HAVE_SYS_PROC_INFO_H)
-
-if (APPLE OR OSF)
-    SET(HAVE_AVOID_XKB TRUE)
-endif (APPLE OR OSF)
-
-macro_bool_to_01(HAVE_AVOID_XKB AVOID_XKB)
 
 configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h )
 
@@ -109,7 +99,6 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ViewProperties.cpp
         ViewSplitter.cpp
         Vt102Emulation.cpp
-        XKB.cpp
         ZModemDialog.cpp
         konsole_wcwidth.cpp
         WindowSystemInfo.cpp
