@@ -23,7 +23,6 @@
 
 // System
 #include <stdlib.h>
-#include <assert.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/mman.h>
@@ -82,7 +81,7 @@ HistoryFile::~HistoryFile()
 //to avoid this.
 void HistoryFile::map()
 {
-    assert(_fileMap == 0);
+    Q_ASSERT(_fileMap == 0);
 
     _fileMap = (char*)mmap(0 , _length , PROT_READ , MAP_PRIVATE , _fd , 0);
 
@@ -97,7 +96,7 @@ void HistoryFile::map()
 void HistoryFile::unmap()
 {
     int result = munmap(_fileMap , _length);
-    assert(result == 0); Q_UNUSED(result);
+    Q_ASSERT(result == 0); Q_UNUSED(result);
 
     _fileMap = 0;
 }
