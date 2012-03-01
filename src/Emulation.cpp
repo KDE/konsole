@@ -114,11 +114,11 @@ Emulation::~Emulation()
     delete _decoder;
 }
 
-void Emulation::setScreen(int n)
+void Emulation::setScreen(int index)
 {
-    Screen* old = _currentScreen;
-    _currentScreen = _screen[n & 1];
-    if (_currentScreen != old) {
+    Screen* oldScreen = _currentScreen;
+    _currentScreen = _screen[index & 1];
+    if (_currentScreen != oldScreen) {
         // tell all windows onto this emulation to switch to the newly active screen
         foreach(ScreenWindow * window, _windows) {
             window->setScreen(_currentScreen);
@@ -133,9 +133,9 @@ void Emulation::clearHistory()
 {
     _screen[0]->setScroll(_screen[0]->getScroll() , false);
 }
-void Emulation::setHistory(const HistoryType& t)
+void Emulation::setHistory(const HistoryType& history)
 {
-    _screen[0]->setScroll(t);
+    _screen[0]->setScroll(history);
 
     showBulk();
 }
