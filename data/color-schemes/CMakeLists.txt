@@ -2,12 +2,12 @@
 # at present
 
 install( FILES 
-         BlackOnLightYellow.schema
+         BlackOnLightYellow.colorscheme
          BlackOnRandomLight.colorscheme 
-         BlackOnWhite.schema  	
+         BlackOnWhite.colorscheme
          BlueOnBlack.colorscheme
          GreenOnBlack.colorscheme 
-         WhiteOnBlack.schema  	
+         WhiteOnBlack.colorscheme
          Linux.colorscheme
          DarkPastels.colorscheme
          RedOnBlack.colorscheme
