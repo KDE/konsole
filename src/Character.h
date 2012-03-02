@@ -195,10 +195,10 @@ inline bool Character::equalsFormat(const Character& other) const
 
 inline ColorEntry::FontWeight Character::fontWeight(const ColorEntry* base) const
 {
-    if (backgroundColor._colorSpace == COLOR_SPACE_DEFAULT)
-        return base[backgroundColor._u + 0 + (backgroundColor._v ? BASE_COLORS : 0)].fontWeight;
-    else if (backgroundColor._colorSpace == COLOR_SPACE_SYSTEM)
-        return base[backgroundColor._u + 2 + (backgroundColor._v ? BASE_COLORS : 0)].fontWeight;
+    if (foregroundColor._colorSpace == COLOR_SPACE_DEFAULT)
+        return base[foregroundColor._u + 0 + (foregroundColor._v ? BASE_COLORS : 0)].fontWeight;
+    else if (foregroundColor._colorSpace == COLOR_SPACE_SYSTEM)
+        return base[foregroundColor._u + 2 + (foregroundColor._v ? BASE_COLORS : 0)].fontWeight;
     else
         return ColorEntry::UseCurrentFormat;
 }
