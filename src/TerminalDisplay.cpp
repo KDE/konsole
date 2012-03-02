@@ -519,14 +519,13 @@ TerminalDisplay::KeyboardCursorShape TerminalDisplay::keyboardCursorShape() cons
 }
 void TerminalDisplay::setKeyboardCursorColor(bool useForegroundColor, const QColor& color)
 {
-    if (useForegroundColor)
-        _cursorColor = QColor(); // an invalid color means that
-    // the foreground color of the
-    // current character should
-    // be used
-
-    else
+    if (useForegroundColor) {
+        // use an invalid color to indicate that the foreground color of
+        // the current character should be used to draw the cursor
+        _cursorColor = QColor();
+    } else {
         _cursorColor = color;
+    }
 }
 QColor TerminalDisplay::keyboardCursorColor() const
 {
