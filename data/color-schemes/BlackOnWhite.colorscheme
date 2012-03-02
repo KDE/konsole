@@ -8,76 +8,58 @@ Transparent=true
 
 [Color0]
 Color=0,0,0
-Transparent=false
 
 [Color0Intense]
 Color=104,104,104
-Transparent=false
 
 [Color1]
 Color=178,24,24
-Transparent=false
 
 [Color1Intense]
 Color=255,84,84
-Transparent=false
 
 [Color2]
 Color=24,178,24
-Transparent=false
 
 [Color2Intense]
 Color=84,255,84
-Transparent=false
 
 [Color3]
 Color=178,104,24
-Transparent=false
 
 [Color3Intense]
 Color=255,255,84
-Transparent=false
 
 [Color4]
 Color=24,24,178
-Transparent=false
 
 [Color4Intense]
 Color=84,84,255
-Transparent=false
 
 [Color5]
 Color=178,24,178
-Transparent=false
 
 [Color5Intense]
 Color=255,84,255
-Transparent=false
 
 [Color6]
 Color=24,178,178
-Transparent=false
 
 [Color6Intense]
 Color=84,255,255
-Transparent=false
 
 [Color7]
 Color=178,178,178
-Transparent=false
 
 [Color7Intense]
 Color=255,255,255
-Transparent=false
 
 [Foreground]
 Color=0,0,0
-Transparent=false
 
 [ForegroundIntense]
 Bold=true
 Color=0,0,0
-Transparent=false
 
 [General]
 Description=Black on White

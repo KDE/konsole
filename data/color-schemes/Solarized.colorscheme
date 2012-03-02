@@ -8,75 +8,57 @@ Transparent=false
 
 [Color0]
 Color=203,75,22
-Transparent=false
 
 [Color0Intense]
 Color=203,75,22
-Transparent=false
 
 [Color1]
 Color=220,50,47
-Transparent=false
 
 [Color1Intense]
 Color=220,50,47
-Transparent=false
 
 [Color2]
 Color=133,153,0
-Transparent=false
 
 [Color2Intense]
 Color=133,153,0
-Transparent=false
 
 [Color3]
 Color=181,137,0
-Transparent=false
 
 [Color3Intense]
 Color=181,137,0
-Transparent=false
 
 [Color4]
 Color=38,139,210
-Transparent=false
 
 [Color4Intense]
 Color=38,139,210
-Transparent=false
 
 [Color5]
 Color=211,54,130
-Transparent=false
 
 [Color5Intense]
 Color=211,54,130
-Transparent=false
 
 [Color6]
 Color=42,161,152
-Transparent=false
 
 [Color6Intense]
 Color=42,161,152
-Transparent=false
 
 [Color7]
 Color=147,161,161
-Transparent=false
 
 [Color7Intense]
 Color=238,232,213
-Transparent=false
 
 [Foreground]
 Color=131,148,150
-Transparent=false
 
 [ForegroundIntense]
 Color=238,232,213
-Transparent=false
 
 [General]
 Description=Solarized
