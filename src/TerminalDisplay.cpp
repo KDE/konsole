@@ -47,7 +47,6 @@
 #include <KLocale>
 #include <KNotification>
 #include <KGlobalSettings>
-#include <KShortcut>
 #include <KIO/NetAccess>
 #include <konq_operations.h>
 #include <KFileItem>
