@@ -352,7 +352,7 @@ void ColorScheme::writeColorEntry(KConfig& config , int index) const
     const ColorEntry& entry = colorTable()[index];
 
     configGroup.writeEntry("Color", entry.color);
-    configGroup.writeEntry("Transparency", (bool)entry.transparent);
+    configGroup.writeEntry("Transparent", (bool)entry.transparent);
     if (entry.fontWeight != ColorEntry::UseCurrentFormat) {
         configGroup.writeEntry("Bold", entry.fontWeight == ColorEntry::Bold);
     }
