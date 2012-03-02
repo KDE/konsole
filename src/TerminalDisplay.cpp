@@ -2579,6 +2579,45 @@ void TerminalDisplay::setFlowControlWarningEnabled(bool enable)
         outputSuspended(false);
 }
 
+void TerminalDisplay::outputSuspended(bool suspended)
+{
+    //create the label when this function is first called
+    if (!_outputSuspendedLabel) {
+        //This label includes a link to an English language website
+        //describing the 'flow control' (Xon/Xoff) feature found in almost
+        //all terminal emulators.
+        //If there isn't a suitable article available in the target language the link
+        //can simply be removed.
+        _outputSuspendedLabel = new QLabel(i18n("<qt>Output has been "
+                                                "<a href=\"http://en.wikipedia.org/wiki/Flow_control\">suspended</a>"
+                                                " by pressing Ctrl+S."
+                                                "  Press <b>Ctrl+Q</b> to resume.</qt>"),
+                                           this);
+
+        QPalette palette(_outputSuspendedLabel->palette());
+        KColorScheme::adjustBackground(palette, KColorScheme::NeutralBackground);
+        _outputSuspendedLabel->setPalette(palette);
+        _outputSuspendedLabel->setAutoFillBackground(true);
+        _outputSuspendedLabel->setBackgroundRole(QPalette::Base);
+        _outputSuspendedLabel->setFont(QApplication::font());
+        _outputSuspendedLabel->setContentsMargins(5, 5, 5, 5);
+
+        //enable activation of "Xon/Xoff" link in label
+        _outputSuspendedLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse |
+                Qt::LinksAccessibleByKeyboard);
+        _outputSuspendedLabel->setOpenExternalLinks(true);
+        _outputSuspendedLabel->setVisible(false);
+
+        _gridLayout->addWidget(_outputSuspendedLabel);
+        _gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding,
+                                             QSizePolicy::Expanding),
+                             1, 0);
+
+    }
+
+    _outputSuspendedLabel->setVisible(suspended);
+}
+
 void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode mode, int amount)
 {
     _screenWindow->scrollBy(mode, amount);
@@ -2669,6 +2708,12 @@ bool TerminalDisplay::event(QEvent* event)
     return eventHandled ? true : QWidget::event(event);
 }
 
+/* --------------------------------------------------------------------- */
+/*                                                                       */
+/*                                  Bell                                 */
+/*                                                                       */
+/* --------------------------------------------------------------------- */
+
 void TerminalDisplay::setBellMode(int mode)
 {
     _bellMode = mode;
@@ -2681,12 +2726,13 @@ void TerminalDisplay::enableBell()
 
 void TerminalDisplay::bell(const QString& message)
 {
-    if (_bellMode == NoBell) return;
+    if (_bellMode == NoBell)
+        return;
 
-    //limit the rate at which bells can occur
-    //...mainly for sound effects where rapid bells in sequence
-    //produce a horrible noise
     if (_allowBell) {
+        // limit the rate at which bells can occur.
+        // ...mainly for sound effects where rapid bells in sequence
+        // produce a horrible noise.
         _allowBell = false;
         QTimer::singleShot(500, this, SLOT(enableBell()));
 
@@ -2713,6 +2759,7 @@ void TerminalDisplay::swapColorTable()
     ColorEntry color = _colorTable[DEFAULT_BACK_COLOR];
     _colorTable[DEFAULT_BACK_COLOR] = _colorTable[DEFAULT_FORE_COLOR];
     _colorTable[DEFAULT_FORE_COLOR] = color;
+
     _colorsInverted = !_colorsInverted;
 
     update();
@@ -2838,45 +2885,6 @@ void TerminalDisplay::doDrag()
     _dragInfo.dragObject->setMimeData(mimeData);
     _dragInfo.dragObject->exec(Qt::CopyAction);
     // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
-}
-
-void TerminalDisplay::outputSuspended(bool suspended)
-{
-    //create the label when this function is first called
-    if (!_outputSuspendedLabel) {
-        //This label includes a link to an English language website
-        //describing the 'flow control' (Xon/Xoff) feature found in almost
-        //all terminal emulators.
-        //If there isn't a suitable article available in the target language the link
-        //can simply be removed.
-        _outputSuspendedLabel = new QLabel(i18n("<qt>Output has been "
-                                                "<a href=\"http://en.wikipedia.org/wiki/Flow_control\">suspended</a>"
-                                                " by pressing Ctrl+S."
-                                                "  Press <b>Ctrl+Q</b> to resume.</qt>"),
-                                           this);
-
-        QPalette palette(_outputSuspendedLabel->palette());
-        KColorScheme::adjustBackground(palette, KColorScheme::NeutralBackground);
-        _outputSuspendedLabel->setPalette(palette);
-        _outputSuspendedLabel->setAutoFillBackground(true);
-        _outputSuspendedLabel->setBackgroundRole(QPalette::Base);
-        _outputSuspendedLabel->setFont(QApplication::font());
-        _outputSuspendedLabel->setContentsMargins(5, 5, 5, 5);
-
-        //enable activation of "Xon/Xoff" link in label
-        _outputSuspendedLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse |
-                Qt::LinksAccessibleByKeyboard);
-        _outputSuspendedLabel->setOpenExternalLinks(true);
-        _outputSuspendedLabel->setVisible(false);
-
-        _gridLayout->addWidget(_outputSuspendedLabel);
-        _gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding,
-                                             QSizePolicy::Expanding),
-                             1, 0);
-
-    }
-
-    _outputSuspendedLabel->setVisible(suspended);
 }
 
 void TerminalDisplay::setSessionController(SessionController* controller)
