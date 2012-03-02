@@ -1212,7 +1212,8 @@ void Vt102Emulation::setMode(int m)
         emit programUsesMouseChanged(false);
         break;
 
-    case MODE_AppScreen : _screen[1]->clearSelection();
+    case MODE_AppScreen :
+        _screen[1]->clearSelection();
         setScreen(1);
         break;
     }
