@@ -300,7 +300,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _flowControlWarningEnabled(false)
     , _outputSuspendedLabel(0)
     , _lineSpacing(0)
-    , _colorsInverted(false)
     , _blendColor(qRgba(0, 0, 0, 0xff))
     , _filterChain(new TerminalImageFilterChain())
     , _cursorShape(BlockCursor)
@@ -2759,8 +2758,6 @@ void TerminalDisplay::swapColorTable()
     ColorEntry color = _colorTable[DEFAULT_BACK_COLOR];
     _colorTable[DEFAULT_BACK_COLOR] = _colorTable[DEFAULT_FORE_COLOR];
     _colorTable[DEFAULT_FORE_COLOR] = color;
-
-    _colorsInverted = !_colorsInverted;
 
     update();
 }

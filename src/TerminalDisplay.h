@@ -829,8 +829,6 @@ private:
 
     uint _lineSpacing;
 
-    bool _colorsInverted; // true during visual bell
-
     QSize _size;
 
     QRgb _blendColor;
