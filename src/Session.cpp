@@ -216,10 +216,7 @@ void Session::setDarkBackground(bool darkBackground)
 {
     _hasDarkBackground = darkBackground;
 }
-bool Session::hasDarkBackground() const
-{
-    return _hasDarkBackground;
-}
+
 bool Session::isRunning() const
 {
     return _shellProcess && (_shellProcess->state() == QProcess::Running);

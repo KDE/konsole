@@ -317,11 +317,6 @@ public:
      * This has no effect once the session is running.
      */
     void setDarkBackground(bool darkBackground);
-    /**
-     * Returns true if the session has a dark background.
-     * See setDarkBackground()
-     */
-    bool hasDarkBackground() const;
 
     /**
      * Attempts to get the shell program to redraw the current display area.
