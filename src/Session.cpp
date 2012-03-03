@@ -156,6 +156,15 @@ Session::Session(QObject* parent) :
     connect(_activityTimer, SIGNAL(timeout()), this, SLOT(activityTimerDone()));
 }
 
+Session::~Session()
+{
+    delete _foregroundProcessInfo;
+    delete _sessionProcessInfo;
+    delete _emulation;
+    delete _shellProcess;
+    delete _zmodemProc;
+}
+
 void Session::openTeletype(int fd)
 {
     if (isRunning()) {
@@ -248,13 +257,15 @@ void Session::setProgram(const QString& program)
 {
     _program = ShellCommand::expand(program);
 }
-void Session::setInitialWorkingDirectory(const QString& dir)
-{
-    _initialWorkingDir = KShell::tildeExpand(ShellCommand::expand(dir));
-}
+
 void Session::setArguments(const QStringList& arguments)
 {
     _arguments = ShellCommand::expand(arguments);
+}
+
+void Session::setInitialWorkingDirectory(const QString& dir)
+{
+    _initialWorkingDir = KShell::tildeExpand(ShellCommand::expand(dir));
 }
 
 QString Session::currentWorkingDirectory()
@@ -773,15 +784,6 @@ void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
     _emulation->sendMouseEvent(buttons, column, line, eventType);
 }
 
-Session::~Session()
-{
-    delete _foregroundProcessInfo;
-    delete _sessionProcessInfo;
-    delete _emulation;
-    delete _shellProcess;
-    delete _zmodemProc;
-}
-
 void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 {
     if (!_autoClose) {
@@ -848,9 +850,9 @@ int Session::sessionId() const
     return _sessionId;
 }
 
-void Session::setKeyBindings(const QString& id)
+void Session::setKeyBindings(const QString& name)
 {
-    _emulation->setKeyBindings(id);
+    _emulation->setKeyBindings(name);
 }
 
 void Session::setTitle(TitleRole role , const QString& newTitle)

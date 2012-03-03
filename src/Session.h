@@ -232,7 +232,7 @@ public:
      * names of available key bindings can be determined using the
      * KeyboardTranslatorManager class.
      */
-    void setKeyBindings(const QString& id);
+    void setKeyBindings(const QString& name);
     /** Returns the name of the key bindings used by this session. */
     QString keyBindings() const;
 
