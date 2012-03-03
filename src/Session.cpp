@@ -714,8 +714,8 @@ void Session::refresh()
 
 bool Session::kill(int signal)
 {
-    if ( !isRunning() || _shellProcess->pid() <= 0 )
-        return;
+    if ( _shellProcess->pid() <= 0 )
+        return false;
 
     int result = ::kill(_shellProcess->pid(), signal);
 
