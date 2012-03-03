@@ -283,24 +283,22 @@ void Session::addView(TerminalDisplay* widget)
 
     _views.append(widget);
 
-    if (_emulation != 0) {
-        // connect emulation - view signals and slots
-        connect(widget, SIGNAL(keyPressedSignal(QKeyEvent*)), _emulation,
-                SLOT(sendKeyEvent(QKeyEvent*)));
-        connect(widget, SIGNAL(mouseSignal(int,int,int,int)), _emulation,
-                SLOT(sendMouseEvent(int,int,int,int)));
-        connect(widget, SIGNAL(sendStringToEmu(const char*)), _emulation,
-                SLOT(sendString(const char*)));
+    // connect emulation - view signals and slots
+    connect(widget, SIGNAL(keyPressedSignal(QKeyEvent*)), _emulation,
+            SLOT(sendKeyEvent(QKeyEvent*)));
+    connect(widget, SIGNAL(mouseSignal(int,int,int,int)), _emulation,
+            SLOT(sendMouseEvent(int,int,int,int)));
+    connect(widget, SIGNAL(sendStringToEmu(const char*)), _emulation,
+            SLOT(sendString(const char*)));
 
-        // allow emulation to notify view when the foreground process
-        // indicates whether or not it is interested in mouse signals
-        connect(_emulation, SIGNAL(programUsesMouseChanged(bool)), widget,
-                SLOT(setUsesMouse(bool)));
+    // allow emulation to notify view when the foreground process
+    // indicates whether or not it is interested in mouse signals
+    connect(_emulation, SIGNAL(programUsesMouseChanged(bool)), widget,
+            SLOT(setUsesMouse(bool)));
 
-        widget->setUsesMouse(_emulation->programUsesMouse());
+    widget->setUsesMouse(_emulation->programUsesMouse());
 
-        widget->setScreenWindow(_emulation->createWindow());
-    }
+    widget->setScreenWindow(_emulation->createWindow());
 
     //connect view signals and slots
     QObject::connect(widget, SIGNAL(changedContentSizeSignal(int,int)), this,
@@ -325,18 +323,16 @@ void Session::removeView(TerminalDisplay* widget)
 
     disconnect(widget, 0, this, 0);
 
-    if (_emulation != 0) {
-        // disconnect
-        //  - key presses signals from widget
-        //  - mouse activity signals from widget
-        //  - string sending signals from widget
-        //
-        //  ... and any other signals connected in addView()
-        disconnect(widget, 0, _emulation, 0);
+    // disconnect
+    //  - key presses signals from widget
+    //  - mouse activity signals from widget
+    //  - string sending signals from widget
+    //
+    //  ... and any other signals connected in addView()
+    disconnect(widget, 0, _emulation, 0);
 
-        // disconnect state change signals emitted by emulation
-        disconnect(_emulation, 0, widget, 0);
-    }
+    // disconnect state change signals emitted by emulation
+    disconnect(_emulation, 0, widget, 0);
 
     // close the session automatically when the last view is removed
     if (_views.count() == 0) {
