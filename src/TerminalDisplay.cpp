@@ -187,7 +187,7 @@ void TerminalDisplay::fontChange(const QFont&)
 
     _fixedFont = true;
 
-    int fw = fm.width(REPCHAR[0]);
+    const int fw = fm.width(REPCHAR[0]);
     for (unsigned int i = 1; i < qstrlen(REPCHAR); i++) {
         if (fw != fm.width(REPCHAR[i])) {
             _fixedFont = false;
@@ -424,12 +424,12 @@ enum LineEncode {
 static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code)
 {
     //Calculate cell midpoints, end points.
-    int cx = x + w / 2;
-    int cy = y + h / 2;
-    int ex = x + w - 1;
-    int ey = y + h - 1;
+    const int cx = x + w / 2;
+    const int cy = y + h / 2;
+    const int ex = x + w - 1;
+    const int ey = y + h - 1;
 
-    quint32 toDraw = LineChars[code];
+    const quint32 toDraw = LineChars[code];
 
     //Top _lines:
     if (toDraw & TopL)
@@ -499,7 +499,7 @@ void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const 
     }
 
     for (int i = 0 ; i < str.length(); i++) {
-        uchar code = str[i].cell();
+        const uchar code = str[i].cell();
         if (LineChars[code])
             drawLineChar(painter, x + (_fontWidth * i), y, _fontWidth, _fontHeight, code);
     }
@@ -652,7 +652,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         useBold = ((style->rendition & RE_BOLD) && _boldIntense) || font().bold();
     else
         useBold = (weight == ColorEntry::Bold) ? true : false;
-    bool useUnderline = style->rendition & RE_UNDERLINE || font().underline();
+    const bool useUnderline = style->rendition & RE_UNDERLINE || font().underline();
 
     QFont font = painter.font();
     if (font.bold() != useBold
@@ -785,7 +785,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     // Set the QT_FLUSH_PAINT environment variable to '1' before starting the
     // application to monitor repainting.
     //
-    int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->width();
+    const int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->width();
     const int SCROLLBAR_CONTENT_GAP = 1;
     QRect scrollRect;
     if (_scrollbarLocation == ScrollBarLeft) {
@@ -798,11 +798,9 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     void* firstCharPos = &_image[ region.top() * this->_columns ];
     void* lastCharPos = &_image[(region.top() + abs(lines)) * this->_columns ];
 
-    int top = _topMargin + (region.top() * _fontHeight);
-    int linesToMove = region.height() - abs(lines);
-    int bytesToMove = linesToMove *
-                      this->_columns *
-                      sizeof(Character);
+    const int top = _topMargin + (region.top() * _fontHeight);
+    const int linesToMove = region.height() - abs(lines);
+    const int bytesToMove = linesToMove * this->_columns * sizeof(Character);
 
     Q_ASSERT(linesToMove > 0);
     Q_ASSERT(bytesToMove > 0);
@@ -917,8 +915,8 @@ void TerminalDisplay::updateImage()
     }
 
     Character* const newimg = _screenWindow->getImage();
-    int lines = _screenWindow->windowLines();
-    int columns = _screenWindow->windowColumns();
+    const int lines = _screenWindow->windowLines();
+    const int columns = _screenWindow->windowColumns();
 
     setScroll(_screenWindow->currentLine() , _screenWindow->lineCount());
 
@@ -927,9 +925,9 @@ void TerminalDisplay::updateImage()
 
     int y, x, len;
 
-    QPoint tL  = contentsRect().topLeft();
-    int    tLx = tL.x();
-    int    tLy = tL.y();
+    const QPoint tL  = contentsRect().topLeft();
+    const int    tLx = tL.x();
+    const int    tLy = tL.y();
     _hasTextBlinker = false;
 
     CharacterColor cf;       // undefined
@@ -946,7 +944,7 @@ void TerminalDisplay::updateImage()
     int dirtyLineCount = 0;
 
     for (y = 0; y < linesToUpdate; ++y) {
-        const Character*       currentLine = &_image[y * this->_columns];
+        const Character* currentLine = &_image[y * this->_columns];
         const Character* const newLine = &newimg[y * columns];
 
         bool updateLine = false;
@@ -977,14 +975,14 @@ void TerminalDisplay::updateImage()
                     const quint8 cr = newLine[x].rendition;
                     const CharacterColor clipboard = newLine[x].backgroundColor;
                     if (newLine[x].foregroundColor != cf) cf = newLine[x].foregroundColor;
-                    int lln = columnsToUpdate - x;
+                    const int lln = columnsToUpdate - x;
                     for (len = 1; len < lln; ++len) {
                         const Character& ch = newLine[x + len];
 
                         if (!ch.character)
                             continue; // Skip trailing part of multi-col chars.
 
-                        bool nextIsDoubleWidth = (x + len + 1 == columnsToUpdate) ? false : (newLine[x + len + 1].character == 0);
+                        const bool nextIsDoubleWidth = (x + len + 1 == columnsToUpdate) ? false : (newLine[x + len + 1].character == 0);
 
                         if (ch.foregroundColor != cf ||
                                 ch.backgroundColor != clipboard ||
@@ -995,7 +993,7 @@ void TerminalDisplay::updateImage()
                             break;
                     }
 
-                    bool saveFixedFont = _fixedFont;
+                    const bool saveFixedFont = _fixedFont;
                     if (lineDraw)
                         _fixedFont = false;
                     if (doubleWidth)
@@ -1187,7 +1185,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     QPoint cursorPos = mapFromGlobal(QCursor::pos());
     int cursorLine;
     int cursorColumn;
-    int scrollBarWidth = (_scrollbarLocation == ScrollBarLeft) ? _scrollBar->width() : 0;
+    const int scrollBarWidth = (_scrollbarLocation == ScrollBarLeft) ? _scrollBar->width() : 0;
 
     getCharacterPosition(cursorPos , cursorLine , cursorColumn);
     Character cursorCharacter = _image[loc(cursorColumn, cursorLine)];
@@ -1269,9 +1267,9 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 
                 // find the baseline (which is the invisible line that the characters in the font sit on,
                 // with some having tails dangling below)
-                int baseline = r.bottom() - metrics.descent();
+                const int baseline = r.bottom() - metrics.descent();
                 // find the position of the underline below that
-                int underlinePos = baseline + metrics.underlinePos();
+                const int underlinePos = baseline + metrics.underlinePos();
                 if (region.contains(mapFromGlobal(QCursor::pos()))) {
                     painter.drawLine(r.left() , underlinePos ,
                                      r.right() , underlinePos);
@@ -1379,7 +1377,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             if ((x + len < _usedColumns) && (!_image[loc(x + len, y)].character))
                 len++; // Adjust for trailing part of multi-column character
 
-            bool save__fixedFont = _fixedFont;
+            const bool save__fixedFont = _fixedFont;
             if (lineDraw)
                 _fixedFont = false;
             if (doubleWidth)
@@ -1501,8 +1499,8 @@ void TerminalDisplay::propagateSize()
 void TerminalDisplay::updateImageSize()
 {
     Character* oldImage = _image;
-    int oldLines = _lines;
-    int oldColumns = _columns;
+    const int oldLines = _lines;
+    const int oldColumns = _columns;
 
     makeImage();
 
@@ -1594,9 +1592,9 @@ void TerminalDisplay::calcGeometry()
 // calculate the needed size, this must be synced with calcGeometry()
 void TerminalDisplay::setSize(int columns, int lines)
 {
-    int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->sizeHint().width();
-    int horizontalMargin = 2 * DEFAULT_LEFT_MARGIN;
-    int verticalMargin = 2 * DEFAULT_TOP_MARGIN;
+    const int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->sizeHint().width();
+    const int horizontalMargin = 2 * DEFAULT_LEFT_MARGIN;
+    const int verticalMargin = 2 * DEFAULT_TOP_MARGIN;
 
     QSize newSize = QSize(horizontalMargin + scrollBarWidth + (columns * _fontWidth)  ,
                           verticalMargin + (lines * _fontHeight));
@@ -1795,7 +1793,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     int charColumn = 0;
     getCharacterPosition(ev->pos(), charLine, charColumn);
 
-    int scrollBarWidth = (_scrollbarLocation == ScrollBarLeft) ? _scrollBar->width() : 0;
+    const int scrollBarWidth = (_scrollbarLocation == ScrollBarLeft) ? _scrollBar->width() : 0;
 
     // handle filters
     // change link hot-spot appearance on mouse-over
@@ -1871,7 +1869,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         // we had a mouse down, but haven't confirmed a drag yet
         // if the mouse has moved sufficiently, we will confirm
 
-        int distance = KGlobalSettings::dndEventDelay();
+        const int distance = KGlobalSettings::dndEventDelay();
         if (ev->x() > _dragInfo.start.x() + distance || ev->x() < _dragInfo.start.x() - distance ||
                 ev->y() > _dragInfo.start.y() + distance || ev->y() < _dragInfo.start.y() - distance) {
             // we've left the drag square, we can start a real drag operation now
@@ -1919,7 +1917,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
     QPoint pos = position;
 
     // Adjust position within text area bounds.
-    QPoint oldpos = pos;
+    const QPoint oldpos = pos;
 
     pos.setX(qBound(textBounds.left(), pos.x(), textBounds.right()));
     pos.setY(qBound(textBounds.top(), pos.y(), textBounds.bottom()));
@@ -1950,9 +1948,9 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         int i;
         QChar selClass;
 
-        bool left_not_right = (here.y() < _iPntSelCorr.y() ||
+        const bool left_not_right = (here.y() < _iPntSelCorr.y() ||
                                (here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x()));
-        bool old_left_not_right = (_pntSelCorr.y() < _iPntSelCorr.y() ||
+        const bool old_left_not_right = (_pntSelCorr.y() < _iPntSelCorr.y() ||
                                    (_pntSelCorr.y() == _iPntSelCorr.y() && _pntSelCorr.x() < _iPntSelCorr.x()));
         swapping = left_not_right != old_left_not_right;
 
@@ -1999,7 +1997,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     if (_lineSelectionMode) {
         // Extend to complete line
-        bool above_not_below = (here.y() < _iPntSelCorr.y());
+        const bool above_not_below = (here.y() < _iPntSelCorr.y());
 
         QPoint above = above_not_below ? here : _iPntSelCorr;
         QPoint below = above_not_below ? _iPntSelCorr : here;
@@ -2019,7 +2017,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
             here = below; ohere = above;
         }
 
-        QPoint newSelBegin = QPoint(ohere.x(), ohere.y());
+        const QPoint newSelBegin = QPoint(ohere.x(), ohere.y());
         swapping = !(_tripleSelBegin == newSelBegin);
         _tripleSelBegin = newSelBegin;
 
@@ -2031,14 +2029,14 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         int i;
         QChar selClass;
 
-        bool left_not_right = (here.y() < _iPntSelCorr.y() ||
+        const bool left_not_right = (here.y() < _iPntSelCorr.y() ||
                                (here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x()));
-        bool old_left_not_right = (_pntSelCorr.y() < _iPntSelCorr.y() ||
+        const bool old_left_not_right = (_pntSelCorr.y() < _iPntSelCorr.y() ||
                                    (_pntSelCorr.y() == _iPntSelCorr.y() && _pntSelCorr.x() < _iPntSelCorr.x()));
         swapping = left_not_right != old_left_not_right;
 
         // Find left (left_not_right ? from here : from start)
-        QPoint left = left_not_right ? here : _iPntSelCorr;
+        const QPoint left = left_not_right ? here : _iPntSelCorr;
 
         // Find left (left_not_right ? from start : from here)
         QPoint right = left_not_right ? _iPntSelCorr : here;
@@ -2647,7 +2645,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 
 bool TerminalDisplay::handleShortcutOverrideEvent(QKeyEvent* keyEvent)
 {
-    int modifiers = keyEvent->modifiers();
+    const int modifiers = keyEvent->modifiers();
 
     //  When a possible shortcut combination is pressed,
     //  emit the overrideShortcutCheck() signal to allow the host
