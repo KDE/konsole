@@ -97,7 +97,7 @@ void Screen::cursorUp(int n)
 //=CUU
 {
     if (n == 0) n = 1; // Default
-    int stop = cuY < _topMargin ? 0 : _topMargin;
+    const int stop = cuY < _topMargin ? 0 : _topMargin;
     cuX = qMin(columns - 1, cuX); // nowrap!
     cuY = qMax(stop, cuY - n);
 }
@@ -106,7 +106,7 @@ void Screen::cursorDown(int n)
 //=CUD
 {
     if (n == 0) n = 1; // Default
-    int stop = cuY > _bottomMargin ? lines - 1 : _bottomMargin;
+    const int stop = cuY > _bottomMargin ? lines - 1 : _bottomMargin;
     cuX = qMin(columns - 1, cuX); // nowrap!
     cuY = qMin(stop, cuY + n);
 }
@@ -180,7 +180,7 @@ void Screen::nextLine()
 void Screen::eraseChars(int n)
 {
     if (n == 0) n = 1; // Default
-    int p = qMax(0, qMin(cuX + n - 1, columns - 1));
+    const int p = qMax(0, qMin(cuX + n - 1, columns - 1));
     clearImage(loc(cuX, cuY), loc(p, cuY), ' ');
 }
 
@@ -561,12 +561,15 @@ void Screen::backtab(int n)
 
 void Screen::clearTabStops()
 {
-    for (int i = 0; i < columns; i++) tabStops[i] = false;
+    for (int i = 0; i < columns; i++)
+        tabStops[i] = false;
 }
 
 void Screen::changeTabStop(bool set)
 {
-    if (cuX >= columns) return;
+    if (cuX >= columns)
+        return;
+
     tabStops[cuX] = set;
 }
 
@@ -585,6 +588,7 @@ void Screen::newLine()
 {
     if (getMode(MODE_NewLine))
         toStartOfLine();
+
     index();
 }
 
@@ -592,7 +596,7 @@ void Screen::checkSelection(int from, int to)
 {
     if (selBegin == -1)
         return;
-    int scr_TL = loc(0, history->getLines());
+    const int scr_TL = loc(0, history->getLines());
     //Clear entire selection if it overlaps region [from, to]
     if ((selBottomRight >= (from + scr_TL)) && (selTopLeft <= (to + scr_TL)))
         clearSelection();
@@ -686,7 +690,7 @@ void Screen::displayCharacter(unsigned short c)
     currentChar.isRealCharacter = true;
 
     int i = 0;
-    int newCursorX = cuX + w--;
+    const int newCursorX = cuX + w--;
     while (w) {
         i++;
 
@@ -769,7 +773,8 @@ void Screen::scrollDown(int from, int n)
 
 void Screen::setCursorYX(int y, int x)
 {
-    setCursorY(y); setCursorX(x);
+    setCursorY(y);
+    setCursorX(x);
 }
 
 void Screen::setCursorX(int x)
@@ -809,7 +814,7 @@ int Screen::getCursorY() const
 
 void Screen::clearImage(int loca, int loce, char c)
 {
-    int scr_TL = loc(0, history->getLines());
+    const int scr_TL = loc(0, history->getLines());
     //FIXME: check positions
 
     //Clear entire selection if it overlaps region to be moved...
@@ -817,20 +822,20 @@ void Screen::clearImage(int loca, int loce, char c)
         clearSelection();
     }
 
-    int topLine = loca / columns;
-    int bottomLine = loce / columns;
+    const int topLine = loca / columns;
+    const int bottomLine = loce / columns;
 
     Character clearCh(c, currentForeground, currentBackground, DEFAULT_RENDITION, false);
 
     //if the character being used to clear the area is the same as the
     //default character, the affected lines can simply be shrunk.
-    bool isDefaultCh = (clearCh == Screen::defaultChar);
+    const bool isDefaultCh = (clearCh == Screen::defaultChar);
 
     for (int y = topLine; y <= bottomLine; y++) {
         lineProperties[y] = 0;
 
-        int endCol = (y == bottomLine) ? loce % columns : columns - 1;
-        int startCol = (y == topLine) ? loca % columns : 0;
+        const int endCol = (y == bottomLine) ? loce % columns : columns - 1;
+        const int startCol = (y == topLine) ? loca % columns : 0;
 
         QVector<Character>& line = screenLines[y];
 
@@ -851,7 +856,8 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
 {
     Q_ASSERT(sourceBegin <= sourceEnd);
 
-    int lines = (sourceEnd - sourceBegin) / columns;
+    // FIXME: bad name; same as Screen::lines
+    const int lines = (sourceEnd - sourceBegin) / columns;
 
     //move screen image and line properties:
     //the source and destination areas of the image may overlap,
@@ -871,7 +877,7 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
     }
 
     if (lastPos != -1) {
-        int diff = dest - sourceBegin; // Scroll by this amount
+        const int diff = dest - sourceBegin; // Scroll by this amount
         lastPos += diff;
         if ((lastPos < 0) || (lastPos >= (lines * columns)))
             lastPos = -1;
@@ -879,13 +885,13 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
 
     // Adjust selection to follow scroll.
     if (selBegin != -1) {
-        bool beginIsTL = (selBegin == selTopLeft);
-        int diff = dest - sourceBegin; // Scroll by this amount
-        int scr_TL = loc(0, history->getLines());
-        int srca = sourceBegin + scr_TL; // Translate index from screen to global
-        int srce = sourceEnd + scr_TL; // Translate index from screen to global
-        int desta = srca + diff;
-        int deste = srce + diff;
+        const bool beginIsTL = (selBegin == selTopLeft);
+        const int diff = dest - sourceBegin; // Scroll by this amount
+        const int scr_TL = loc(0, history->getLines());
+        const int srca = sourceBegin + scr_TL; // Translate index from screen to global
+        const int srce = sourceEnd + scr_TL; // Translate index from screen to global
+        const int desta = srca + diff;
+        const int deste = srce + diff;
 
         if ((selTopLeft >= srca) && (selTopLeft <= srce))
             selTopLeft += diff;
@@ -1054,10 +1060,10 @@ void Screen::setSelectionEnd(const int x, const int y)
 
     // Normalize the selection in column mode
     if (blockSelectionMode) {
-        int topRow = selTopLeft / columns;
-        int topColumn = selTopLeft % columns;
-        int bottomRow = selBottomRight / columns;
-        int bottomColumn = selBottomRight % columns;
+        const int topRow = selTopLeft / columns;
+        const int topColumn = selTopLeft % columns;
+        const int bottomRow = selBottomRight / columns;
+        const int bottomColumn = selBottomRight % columns;
 
         selTopLeft = loc(qMin(topColumn, bottomColumn), topRow);
         selBottomRight = loc(qMax(topColumn, bottomColumn), bottomRow);
@@ -1072,7 +1078,7 @@ bool Screen::isSelected(const int x, const int y) const
                             x <= (selBottomRight % columns);
     }
 
-    int pos = loc(x, y);
+    const int pos = loc(x, y);
     return pos >= selTopLeft && pos <= selBottomRight && columnInSelection;
 }
 
@@ -1106,11 +1112,11 @@ void Screen::writeToStream(TerminalCharacterDecoder* decoder,
                            int startIndex, int endIndex,
                            bool preserveLineBreaks) const
 {
-    int top = startIndex / columns;
-    int left = startIndex % columns;
+    const int top = startIndex / columns;
+    const int left = startIndex % columns;
 
-    int bottom = endIndex / columns;
-    int right = endIndex % columns;
+    const int bottom = endIndex / columns;
+    const int right = endIndex % columns;
 
     Q_ASSERT(top >= 0 && left >= 0 && bottom >= 0 && right >= 0);
 
@@ -1194,7 +1200,7 @@ int Screen::copyLineToStream(int line ,
         const int screenLine = line - history->getLines();
 
         Character* data = screenLines[screenLine].data();
-        int length = screenLines[screenLine].count();
+        const int length = screenLines[screenLine].count();
 
         //retrieve line from screen image
         for (int i = start; i < qMin(start + count, length); i++) {
@@ -1238,14 +1244,14 @@ void Screen::addHistLine()
     // we have to take care about scrolling, too...
 
     if (hasScroll()) {
-        int oldHistLines = history->getLines();
+        const int oldHistLines = history->getLines();
 
         history->addCellsVector(screenLines[0]);
         history->addLine(lineProperties[0] & LINE_WRAPPED);
 
-        int newHistLines = history->getLines();
+        const int newHistLines = history->getLines();
 
-        bool beginIsTL = (selBegin == selTopLeft);
+        const bool beginIsTL = (selBegin == selTopLeft);
 
         // If the history is full, increment the count
         // of dropped lines
@@ -1262,7 +1268,7 @@ void Screen::addHistLine()
 
         if (selBegin != -1) {
             // Scroll selection in history up
-            int top_BR = loc(0, 1 + newHistLines);
+            const int top_BR = loc(0, 1 + newHistLines);
 
             if (selTopLeft < top_BR)
                 selTopLeft -= columns;

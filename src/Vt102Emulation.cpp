@@ -325,7 +325,7 @@ void Vt102Emulation::receiveChar(int cc)
   addToCurrentToken(cc); 
 
   int* s = tokenBuffer;
-  int  p = tokenBufferPos;
+  const int  p = tokenBufferPos;
 
   if (getMode(MODE_Ansi)) 
   {
@@ -1002,8 +1002,8 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
         // Alt+[Character] results in Esc+[Character] being sent
         // (unless there is an entry defined for this particular combination
         //  in the keyboard modifier)
-        bool wantsAltModifier = entry.modifiers() & entry.modifierMask() & Qt::AltModifier;
-        bool wantsAnyModifier = entry.state() & 
+        const bool wantsAltModifier = entry.modifiers() & entry.modifierMask() & Qt::AltModifier;
+        const bool wantsAnyModifier = entry.state() & 
                                 entry.stateMask() & KeyboardTranslator::AnyModifierState;
 
         if ( modifiers & Qt::AltModifier && !(wantsAltModifier || wantsAnyModifier) 
