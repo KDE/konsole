@@ -468,27 +468,27 @@ private:
     static const PropertyInfo DefaultPropertyNames[];
 };
 
-template <class T>
-inline T Profile::property(Property theProperty) const
+inline bool Profile::canInheritProperty(Property aProperty)
 {
-    return property<QVariant>(theProperty).value<T>();
+    return aProperty != Name && aProperty != Path;
+}
+
+template <class T>
+inline T Profile::property(Property aProperty) const
+{
+    return property<QVariant>(aProperty).value<T>();
 }
 template <>
-inline QVariant Profile::property(Property property) const
+inline QVariant Profile::property(Property aProperty) const
 {
-    if (_propertyValues.contains(property)) {
-        return _propertyValues[property];
-    } else if (_parent && canInheritProperty(property)) {
-        return _parent->property<QVariant>(property);
+    if (_propertyValues.contains(aProperty)) {
+        return _propertyValues[aProperty];
+    } else if (_parent && canInheritProperty(aProperty)) {
+        return _parent->property<QVariant>(aProperty);
     } else {
         return QVariant();
     }
 }
-inline bool Profile::canInheritProperty(Property property)
-{
-    return property != Name && property != Path;
-}
-
 
 /**
  * A profile which contains a number of default settings for various
@@ -563,8 +563,8 @@ public:
 private:
     QList<Profile::Ptr> _profiles;
 };
-inline ProfileGroup::ProfileGroup(Profile::Ptr parent)
-    : Profile(parent)
+inline ProfileGroup::ProfileGroup(Profile::Ptr profileParent)
+    : Profile(profileParent)
 {
     setHidden(true);
 }
