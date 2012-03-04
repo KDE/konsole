@@ -54,7 +54,7 @@ const bool BS_CLEARS = false ;
 //notably moveImage() and clearImage().
 //This macro converts from an X,Y position into an image offset.
 #ifndef loc
-#define loc(X,Y) ((Y)*columns+(X))
+#define loc(X,Y) ((Y)*_columns+(X))
 #endif
 
 const Character Screen::defaultChar = Character(' ',
@@ -63,24 +63,24 @@ const Character Screen::defaultChar = Character(' ',
                                       DEFAULT_RENDITION,
                                       false);
 
-Screen::Screen(int l, int c):
-    lines(l),
-    columns(c),
-    screenLines(new ImageLine[lines + 1]),
+Screen::Screen(int lines, int columns):
+    _lines(lines),
+    _columns(columns),
+    _screenLines(new ImageLine[_lines + 1]),
     _scrolledLines(0),
     _droppedLines(0),
-    history(new HistoryScrollNone()),
-    cuX(0), cuY(0),
-    currentRendition(0),
+    _history(new HistoryScrollNone()),
+    _cuX(0), _cuY(0),
+    _currentRendition(0),
     _topMargin(0), _bottomMargin(0),
-    selBegin(0), selTopLeft(0), selBottomRight(0),
-    blockSelectionMode(false),
-    effectiveForeground(CharacterColor()), effectiveBackground(CharacterColor()), effectiveRendition(0),
-    lastPos(-1)
+    _selBegin(0), _selTopLeft(0), _selBottomRight(0),
+    _blockSelectionMode(false),
+    _effectiveForeground(CharacterColor()), _effectiveBackground(CharacterColor()), _effectiveRendition(0),
+    _lastPos(-1)
 {
-    lineProperties.resize(lines + 1);
-    for (int i = 0; i < lines + 1; i++)
-        lineProperties[i] = LINE_DEFAULT;
+    _lineProperties.resize(_lines + 1);
+    for (int i = 0; i < _lines + 1; i++)
+        _lineProperties[i] = LINE_DEFAULT;
 
     initTabStops();
     clearSelection();
@@ -89,58 +89,58 @@ Screen::Screen(int l, int c):
 
 Screen::~Screen()
 {
-    delete[] screenLines;
-    delete history;
+    delete[] _screenLines;
+    delete _history;
 }
 
 void Screen::cursorUp(int n)
 //=CUU
 {
     if (n == 0) n = 1; // Default
-    const int stop = cuY < _topMargin ? 0 : _topMargin;
-    cuX = qMin(columns - 1, cuX); // nowrap!
-    cuY = qMax(stop, cuY - n);
+    const int stop = _cuY < _topMargin ? 0 : _topMargin;
+    _cuX = qMin(_columns - 1, _cuX); // nowrap!
+    _cuY = qMax(stop, _cuY - n);
 }
 
 void Screen::cursorDown(int n)
 //=CUD
 {
     if (n == 0) n = 1; // Default
-    const int stop = cuY > _bottomMargin ? lines - 1 : _bottomMargin;
-    cuX = qMin(columns - 1, cuX); // nowrap!
-    cuY = qMin(stop, cuY + n);
+    const int stop = _cuY > _bottomMargin ? _lines - 1 : _bottomMargin;
+    _cuX = qMin(_columns - 1, _cuX); // nowrap!
+    _cuY = qMin(stop, _cuY + n);
 }
 
 void Screen::cursorLeft(int n)
 //=CUB
 {
     if (n == 0) n = 1; // Default
-    cuX = qMin(columns - 1, cuX); // nowrap!
-    cuX = qMax(0, cuX - n);
+    _cuX = qMin(_columns - 1, _cuX); // nowrap!
+    _cuX = qMax(0, _cuX - n);
 }
 
 void Screen::cursorRight(int n)
 //=CUF
 {
     if (n == 0) n = 1; // Default
-    cuX = qMin(columns - 1, cuX + n);
+    _cuX = qMin(_columns - 1, _cuX + n);
 }
 
 void Screen::setMargins(int top, int bot)
 //=STBM
 {
     if (top == 0) top = 1;      // Default
-    if (bot == 0) bot = lines;  // Default
+    if (bot == 0) bot = _lines;  // Default
     top = top - 1;              // Adjust to internal lineno
     bot = bot - 1;              // Adjust to internal lineno
-    if (!(0 <= top && top < bot && bot < lines)) {
+    if (!(0 <= top && top < bot && bot < _lines)) {
         //Debug()<<" setRegion("<<top<<","<<bot<<") : bad range.";
         return;                   // Default error action: ignore
     }
     _topMargin = top;
     _bottomMargin = bot;
-    cuX = 0;
-    cuY = getMode(MODE_Origin) ? top : 0;
+    _cuX = 0;
+    _cuY = getMode(MODE_Origin) ? top : 0;
 
 }
 
@@ -156,19 +156,19 @@ int Screen::bottomMargin() const
 void Screen::index()
 //=IND
 {
-    if (cuY == _bottomMargin)
+    if (_cuY == _bottomMargin)
         scrollUp(1);
-    else if (cuY < lines - 1)
-        cuY += 1;
+    else if (_cuY < _lines - 1)
+        _cuY += 1;
 }
 
 void Screen::reverseIndex()
 //=RI
 {
-    if (cuY == _topMargin)
+    if (_cuY == _topMargin)
         scrollDown(_topMargin, 1);
-    else if (cuY > 0)
-        cuY -= 1;
+    else if (_cuY > 0)
+        _cuY -= 1;
 }
 
 void Screen::nextLine()
@@ -180,8 +180,8 @@ void Screen::nextLine()
 void Screen::eraseChars(int n)
 {
     if (n == 0) n = 1; // Default
-    const int p = qMax(0, qMin(cuX + n - 1, columns - 1));
-    clearImage(loc(cuX, cuY), loc(p, cuY), ' ');
+    const int p = qMax(0, qMin(_cuX + n - 1, _columns - 1));
+    clearImage(loc(_cuX, _cuY), loc(p, _cuY), ' ');
 }
 
 void Screen::deleteChars(int n)
@@ -193,130 +193,130 @@ void Screen::deleteChars(int n)
         n = 1;
 
     // if cursor is beyond the end of the line there is nothing to do
-    if (cuX >= screenLines[cuY].count())
+    if (_cuX >= _screenLines[_cuY].count())
         return;
 
-    if (cuX + n > screenLines[cuY].count())
-        n = screenLines[cuY].count() - cuX;
+    if (_cuX + n > _screenLines[_cuY].count())
+        n = _screenLines[_cuY].count() - _cuX;
 
     Q_ASSERT(n >= 0);
-    Q_ASSERT(cuX + n <= screenLines[cuY].count());
+    Q_ASSERT(_cuX + n <= _screenLines[_cuY].count());
 
-    screenLines[cuY].remove(cuX, n);
+    _screenLines[_cuY].remove(_cuX, n);
 }
 
 void Screen::insertChars(int n)
 {
     if (n == 0) n = 1; // Default
 
-    if (screenLines[cuY].size() < cuX)
-        screenLines[cuY].resize(cuX);
+    if (_screenLines[_cuY].size() < _cuX)
+        _screenLines[_cuY].resize(_cuX);
 
-    screenLines[cuY].insert(cuX, n, Character(' '));
+    _screenLines[_cuY].insert(_cuX, n, Character(' '));
 
-    if (screenLines[cuY].count() > columns)
-        screenLines[cuY].resize(columns);
+    if (_screenLines[_cuY].count() > _columns)
+        _screenLines[_cuY].resize(_columns);
 }
 
 void Screen::deleteLines(int n)
 {
     if (n == 0) n = 1; // Default
-    scrollUp(cuY, n);
+    scrollUp(_cuY, n);
 }
 
 void Screen::insertLines(int n)
 {
     if (n == 0) n = 1; // Default
-    scrollDown(cuY, n);
+    scrollDown(_cuY, n);
 }
 
 void Screen::setMode(int m)
 {
-    currentModes[m] = true;
+    _currentModes[m] = true;
     switch (m) {
-    case MODE_Origin : cuX = 0; cuY = _topMargin; break; //FIXME: home
+    case MODE_Origin : _cuX = 0; _cuY = _topMargin; break; //FIXME: home
     }
 }
 
 void Screen::resetMode(int m)
 {
-    currentModes[m] = false;
+    _currentModes[m] = false;
     switch (m) {
-    case MODE_Origin : cuX = 0; cuY = 0; break; //FIXME: home
+    case MODE_Origin : _cuX = 0; _cuY = 0; break; //FIXME: home
     }
 }
 
 void Screen::saveMode(int m)
 {
-    savedModes[m] = currentModes[m];
+    _savedModes[m] = _currentModes[m];
 }
 
 void Screen::restoreMode(int m)
 {
-    currentModes[m] = savedModes[m];
+    _currentModes[m] = _savedModes[m];
 }
 
 bool Screen::getMode(int m) const
 {
-    return currentModes[m];
+    return _currentModes[m];
 }
 
 void Screen::saveCursor()
 {
-    savedState.cursorColumn = cuX;
-    savedState.cursorLine  = cuY;
-    savedState.rendition = currentRendition;
-    savedState.foreground = currentForeground;
-    savedState.background = currentBackground;
+    _savedState.cursorColumn = _cuX;
+    _savedState.cursorLine  = _cuY;
+    _savedState.rendition = _currentRendition;
+    _savedState.foreground = _currentForeground;
+    _savedState.background = _currentBackground;
 }
 
 void Screen::restoreCursor()
 {
-    cuX     = qMin(savedState.cursorColumn, columns - 1);
-    cuY     = qMin(savedState.cursorLine, lines - 1);
-    currentRendition   = savedState.rendition;
-    currentForeground   = savedState.foreground;
-    currentBackground   = savedState.background;
+    _cuX     = qMin(_savedState.cursorColumn, _columns - 1);
+    _cuY     = qMin(_savedState.cursorLine, _lines - 1);
+    _currentRendition   = _savedState.rendition;
+    _currentForeground   = _savedState.foreground;
+    _currentBackground   = _savedState.background;
     updateEffectiveRendition();
 }
 
 void Screen::resizeImage(int new_lines, int new_columns)
 {
-    if ((new_lines == lines) && (new_columns == columns)) return;
+    if ((new_lines == _lines) && (new_columns == _columns)) return;
 
-    if (cuY > new_lines - 1) {
-        // attempt to preserve focus and lines
-        _bottomMargin = lines - 1; //FIXME: margin lost
-        for (int i = 0; i < cuY - (new_lines - 1); i++) {
+    if (_cuY > new_lines - 1) {
+        // attempt to preserve focus and _lines
+        _bottomMargin = _lines - 1; //FIXME: margin lost
+        for (int i = 0; i < _cuY - (new_lines - 1); i++) {
             addHistLine(); scrollUp(0, 1);
         }
     }
 
-    // create new screen lines and copy from old to new
+    // create new screen _lines and copy from old to new
 
     ImageLine* newScreenLines = new ImageLine[new_lines + 1];
-    for (int i = 0; i < qMin(lines, new_lines + 1) ; i++)
-        newScreenLines[i] = screenLines[i];
-    for (int i = lines; (i > 0) && (i < new_lines + 1); i++)
+    for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++)
+        newScreenLines[i] = _screenLines[i];
+    for (int i = _lines; (i > 0) && (i < new_lines + 1); i++)
         newScreenLines[i].resize(new_columns);
 
-    lineProperties.resize(new_lines + 1);
-    for (int i = lines; (i > 0) && (i < new_lines + 1); i++)
-        lineProperties[i] = LINE_DEFAULT;
+    _lineProperties.resize(new_lines + 1);
+    for (int i = _lines; (i > 0) && (i < new_lines + 1); i++)
+        _lineProperties[i] = LINE_DEFAULT;
 
     clearSelection();
 
-    delete[] screenLines;
-    screenLines = newScreenLines;
+    delete[] _screenLines;
+    _screenLines = newScreenLines;
 
-    lines = new_lines;
-    columns = new_columns;
-    cuX = qMin(cuX, columns - 1);
-    cuY = qMin(cuY, lines - 1);
+    _lines = new_lines;
+    _columns = new_columns;
+    _cuX = qMin(_cuX, _columns - 1);
+    _cuY = qMin(_cuY, _lines - 1);
 
     // FIXME: try to keep values, evtl.
     _topMargin = 0;
-    _bottomMargin = lines - 1;
+    _bottomMargin = _lines - 1;
     initTabStops();
     clearSelection();
 }
@@ -324,7 +324,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
 void Screen::setDefaultMargins()
 {
     _topMargin = 0;
-    _bottomMargin = lines - 1;
+    _bottomMargin = _lines - 1;
 }
 
 
@@ -335,7 +335,7 @@ void Screen::setDefaultMargins()
    0       1       2 .. 9    10 .. 17
    dft_fg, dft_bg, dim 0..7, intensive 0..7
 
-   currentForeground, currentBackground contain values 0..8;
+   _currentForeground, _currentBackground contain values 0..8;
    - 0    = default color
    - 1..8 = ansi specified color
 
@@ -373,35 +373,35 @@ void Screen::reverseRendition(Character& p) const
 
 void Screen::updateEffectiveRendition()
 {
-    effectiveRendition = currentRendition;
-    if (currentRendition & RE_REVERSE) {
-        effectiveForeground = currentBackground;
-        effectiveBackground = currentForeground;
+    _effectiveRendition = _currentRendition;
+    if (_currentRendition & RE_REVERSE) {
+        _effectiveForeground = _currentBackground;
+        _effectiveBackground = _currentForeground;
     } else {
-        effectiveForeground = currentForeground;
-        effectiveBackground = currentBackground;
+        _effectiveForeground = _currentForeground;
+        _effectiveBackground = _currentBackground;
     }
 
-    if (currentRendition & RE_BOLD)
-        effectiveForeground.setIntensive();
+    if (_currentRendition & RE_BOLD)
+        _effectiveForeground.setIntensive();
 }
 
 void Screen::copyFromHistory(Character* dest, int startLine, int count) const
 {
-    Q_ASSERT(startLine >= 0 && count > 0 && startLine + count <= history->getLines());
+    Q_ASSERT(startLine >= 0 && count > 0 && startLine + count <= _history->getLines());
 
     for (int line = startLine; line < startLine + count; line++) {
-        const int length = qMin(columns, history->getLineLen(line));
-        const int destLineOffset  = (line - startLine) * columns;
+        const int length = qMin(_columns, _history->getLineLen(line));
+        const int destLineOffset  = (line - startLine) * _columns;
 
-        history->getCells(line, 0, length, dest + destLineOffset);
+        _history->getCells(line, 0, length, dest + destLineOffset);
 
-        for (int column = length; column < columns; column++)
+        for (int column = length; column < _columns; column++)
             dest[destLineOffset + column] = defaultChar;
 
         // invert selected text
-        if (selBegin != -1) {
-            for (int column = 0; column < columns; column++) {
+        if (_selBegin != -1) {
+            for (int column = 0; column < _columns; column++) {
                 if (isSelected(column, line)) {
                     reverseRendition(dest[destLineOffset + column]);
                 }
@@ -412,20 +412,20 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
 
 void Screen::copyFromScreen(Character* dest , int startLine , int count) const
 {
-    Q_ASSERT(startLine >= 0 && count > 0 && startLine + count <= lines);
+    Q_ASSERT(startLine >= 0 && count > 0 && startLine + count <= _lines);
 
     for (int line = startLine; line < (startLine + count) ; line++) {
-        int srcLineStartIndex  = line * columns;
-        int destLineStartIndex = (line - startLine) * columns;
+        int srcLineStartIndex  = line * _columns;
+        int destLineStartIndex = (line - startLine) * _columns;
 
-        for (int column = 0; column < columns; column++) {
+        for (int column = 0; column < _columns; column++) {
             int srcIndex = srcLineStartIndex + column;
             int destIndex = destLineStartIndex + column;
 
-            dest[destIndex] = screenLines[srcIndex / columns].value(srcIndex % columns, defaultChar);
+            dest[destIndex] = _screenLines[srcIndex / _columns].value(srcIndex % _columns, defaultChar);
 
             // invert selected text
-            if (selBegin != -1 && isSelected(column, line + history->getLines()))
+            if (_selBegin != -1 && isSelected(column, line + _history->getLines()))
                 reverseRendition(dest[destIndex]);
         }
 
@@ -435,63 +435,63 @@ void Screen::copyFromScreen(Character* dest , int startLine , int count) const
 void Screen::getImage(Character* dest, int size, int startLine, int endLine) const
 {
     Q_ASSERT(startLine >= 0);
-    Q_ASSERT(endLine >= startLine && endLine < history->getLines() + lines);
+    Q_ASSERT(endLine >= startLine && endLine < _history->getLines() + _lines);
 
     const int mergedLines = endLine - startLine + 1;
 
-    Q_ASSERT(size >= mergedLines * columns);
+    Q_ASSERT(size >= mergedLines * _columns);
     Q_UNUSED(size);
 
-    const int linesInHistoryBuffer = qBound(0, history->getLines() - startLine, mergedLines);
+    const int linesInHistoryBuffer = qBound(0, _history->getLines() - startLine, mergedLines);
     const int linesInScreenBuffer = mergedLines - linesInHistoryBuffer;
 
-    // copy lines from history buffer
+    // copy _lines from history buffer
     if (linesInHistoryBuffer > 0)
         copyFromHistory(dest, startLine, linesInHistoryBuffer);
 
-    // copy lines from screen buffer
+    // copy _lines from screen buffer
     if (linesInScreenBuffer > 0)
-        copyFromScreen(dest + linesInHistoryBuffer * columns,
-                       startLine + linesInHistoryBuffer - history->getLines(),
+        copyFromScreen(dest + linesInHistoryBuffer * _columns,
+                       startLine + linesInHistoryBuffer - _history->getLines(),
                        linesInScreenBuffer);
 
     // invert display when in screen mode
     if (getMode(MODE_Screen)) {
-        for (int i = 0; i < mergedLines * columns; i++)
+        for (int i = 0; i < mergedLines * _columns; i++)
             reverseRendition(dest[i]); // for reverse display
     }
 
     // mark the character at the current cursor position
-    int cursorIndex = loc(cuX, cuY + linesInHistoryBuffer);
-    if (getMode(MODE_Cursor) && cursorIndex < columns * mergedLines)
+    int cursorIndex = loc(_cuX, _cuY + linesInHistoryBuffer);
+    if (getMode(MODE_Cursor) && cursorIndex < _columns * mergedLines)
         dest[cursorIndex].rendition |= RE_CURSOR;
 }
 
 QVector<LineProperty> Screen::getLineProperties(int startLine , int endLine) const
 {
     Q_ASSERT(startLine >= 0);
-    Q_ASSERT(endLine >= startLine && endLine < history->getLines() + lines);
+    Q_ASSERT(endLine >= startLine && endLine < _history->getLines() + _lines);
 
     const int mergedLines = endLine - startLine + 1;
-    const int linesInHistory = qBound(0, history->getLines() - startLine, mergedLines);
+    const int linesInHistory = qBound(0, _history->getLines() - startLine, mergedLines);
     const int linesInScreen = mergedLines - linesInHistory;
 
     QVector<LineProperty> result(mergedLines);
     int index = 0;
 
-    // copy properties for lines in history
+    // copy properties for _lines in history
     for (int line = startLine; line < startLine + linesInHistory; line++) {
-        //TODO Support for line properties other than wrapped lines
-        if (history->isWrappedLine(line)) {
+        //TODO Support for line properties other than wrapped _lines
+        if (_history->isWrappedLine(line)) {
             result[index] = (LineProperty)(result[index] | LINE_WRAPPED);
         }
         index++;
     }
 
-    // copy properties for lines in screen buffer
-    const int firstScreenLine = startLine + linesInHistory - history->getLines();
+    // copy properties for _lines in screen buffer
+    const int firstScreenLine = startLine + linesInHistory - _history->getLines();
     for (int line = firstScreenLine; line < firstScreenLine + linesInScreen; line++) {
-        result[index] = lineProperties[line];
+        result[index] = _lineProperties[line];
         index++;
     }
 
@@ -508,7 +508,7 @@ void Screen::reset(bool clearScreen)
     resetMode(MODE_NewLine);
 
     _topMargin = 0;
-    _bottomMargin = lines - 1;
+    _bottomMargin = _lines - 1;
 
     setDefaultRendition();
     saveCursor();
@@ -525,15 +525,15 @@ void Screen::clear()
 
 void Screen::backspace()
 {
-    cuX = qMin(columns - 1, cuX); // nowrap!
-    cuX = qMax(0, cuX - 1);
+    _cuX = qMin(_columns - 1, _cuX); // nowrap!
+    _cuX = qMax(0, _cuX - 1);
 
-    if (screenLines[cuY].size() < cuX + 1)
-        screenLines[cuY].resize(cuX + 1);
+    if (_screenLines[_cuY].size() < _cuX + 1)
+        _screenLines[_cuY].resize(_cuX + 1);
 
     if (BS_CLEARS) {
-        screenLines[cuY][cuX].character = ' ';
-        screenLines[cuY][cuX].rendition = screenLines[cuY][cuX].rendition & ~RE_EXTENDED_CHAR;
+        _screenLines[_cuY][_cuX].character = ' ';
+        _screenLines[_cuY][_cuX].rendition = _screenLines[_cuY][_cuX].rendition & ~RE_EXTENDED_CHAR;
     }
 }
 
@@ -541,9 +541,9 @@ void Screen::tab(int n)
 {
     // note that TAB is a format effector (does not write ' ');
     if (n == 0) n = 1;
-    while ((n > 0) && (cuX < columns - 1)) {
+    while ((n > 0) && (_cuX < _columns - 1)) {
         cursorRight(1);
-        while ((cuX < columns - 1) && !tabStops[cuX])
+        while ((_cuX < _columns - 1) && !_tabStops[_cuX])
             cursorRight(1);
         n--;
     }
@@ -553,35 +553,35 @@ void Screen::backtab(int n)
 {
     // note that TAB is a format effector (does not write ' ');
     if (n == 0) n = 1;
-    while ((n > 0) && (cuX > 0)) {
-        cursorLeft(1); while ((cuX > 0) && !tabStops[cuX]) cursorLeft(1);
+    while ((n > 0) && (_cuX > 0)) {
+        cursorLeft(1); while ((_cuX > 0) && !_tabStops[_cuX]) cursorLeft(1);
         n--;
     }
 }
 
 void Screen::clearTabStops()
 {
-    for (int i = 0; i < columns; i++)
-        tabStops[i] = false;
+    for (int i = 0; i < _columns; i++)
+        _tabStops[i] = false;
 }
 
 void Screen::changeTabStop(bool set)
 {
-    if (cuX >= columns)
+    if (_cuX >= _columns)
         return;
 
-    tabStops[cuX] = set;
+    _tabStops[_cuX] = set;
 }
 
 void Screen::initTabStops()
 {
-    tabStops.resize(columns);
+    _tabStops.resize(_columns);
 
     // Arrg! The 1st tabstop has to be one longer than the other.
     // i.e. the kids start counting from 0 instead of 1.
     // Other programs might behave correctly. Be aware.
-    for (int i = 0; i < columns; i++)
-        tabStops[i] = (i % 8 == 0 && i != 0);
+    for (int i = 0; i < _columns; i++)
+        _tabStops[i] = (i % 8 == 0 && i != 0);
 }
 
 void Screen::newLine()
@@ -594,11 +594,11 @@ void Screen::newLine()
 
 void Screen::checkSelection(int from, int to)
 {
-    if (selBegin == -1)
+    if (_selBegin == -1)
         return;
-    const int scr_TL = loc(0, history->getLines());
+    const int scr_TL = loc(0, _history->getLines());
     //Clear entire selection if it overlaps region [from, to]
-    if ((selBottomRight >= (from + scr_TL)) && (selTopLeft <= (to + scr_TL)))
+    if ((_selBottomRight >= (from + scr_TL)) && (_selTopLeft <= (to + scr_TL)))
         clearSelection();
 }
 
@@ -617,12 +617,12 @@ void Screen::displayCharacter(unsigned short c)
             return;
         int charToCombineWithX = -1;
         int charToCombineWithY = -1;
-        if (cuX == 0) {
+        if (_cuX == 0) {
             // We are at the beginning of a line, check
             // if previous line has a character at the end we can combine with
-            if (cuY > 0 && columns == screenLines[cuY - 1].size()) {
-                charToCombineWithX = columns - 1;
-                charToCombineWithY = cuY - 1;
+            if (_cuY > 0 && _columns == _screenLines[_cuY - 1].size()) {
+                charToCombineWithX = _columns - 1;
+                charToCombineWithY = _cuY - 1;
             } else {
                 // There is nothing to combine with
                 // TODO Seems gnome-terminal shows the characters alone
@@ -630,16 +630,16 @@ void Screen::displayCharacter(unsigned short c)
                 return;
             }
         } else {
-            charToCombineWithX = cuX - 1;
-            charToCombineWithY = cuY;
+            charToCombineWithX = _cuX - 1;
+            charToCombineWithY = _cuY;
         }
 
         // Prevent "cat"ing binary files from causing crashes.
-        if (charToCombineWithX >= screenLines[charToCombineWithY].size()) {
+        if (charToCombineWithX >= _screenLines[charToCombineWithY].size()) {
             return;
         }
 
-        Character& currentChar = screenLines[charToCombineWithY][charToCombineWithX];
+        Character& currentChar = _screenLines[charToCombineWithY][charToCombineWithX];
         if ((currentChar.rendition & RE_EXTENDED_CHAR) == 0) {
             const ushort chars[2] = { currentChar.character, c };
             currentChar.rendition |= RE_EXTENDED_CHAR;
@@ -661,52 +661,52 @@ void Screen::displayCharacter(unsigned short c)
         return;
     }
 
-    if (cuX + w > columns) {
+    if (_cuX + w > _columns) {
         if (getMode(MODE_Wrap)) {
-            lineProperties[cuY] = (LineProperty)(lineProperties[cuY] | LINE_WRAPPED);
+            _lineProperties[_cuY] = (LineProperty)(_lineProperties[_cuY] | LINE_WRAPPED);
             nextLine();
         } else
-            cuX = columns - w;
+            _cuX = _columns - w;
     }
 
     // ensure current line vector has enough elements
-    if (screenLines[cuY].size() < cuX + w) {
-        screenLines[cuY].resize(cuX + w);
+    if (_screenLines[_cuY].size() < _cuX + w) {
+        _screenLines[_cuY].resize(_cuX + w);
     }
 
     if (getMode(MODE_Insert)) insertChars(w);
 
-    lastPos = loc(cuX, cuY);
+    _lastPos = loc(_cuX, _cuY);
 
     // check if selection is still valid.
-    checkSelection(lastPos, lastPos);
+    checkSelection(_lastPos, _lastPos);
 
-    Character& currentChar = screenLines[cuY][cuX];
+    Character& currentChar = _screenLines[_cuY][_cuX];
 
     currentChar.character = c;
-    currentChar.foregroundColor = effectiveForeground;
-    currentChar.backgroundColor = effectiveBackground;
-    currentChar.rendition = effectiveRendition;
+    currentChar.foregroundColor = _effectiveForeground;
+    currentChar.backgroundColor = _effectiveBackground;
+    currentChar.rendition = _effectiveRendition;
     currentChar.isRealCharacter = true;
 
     int i = 0;
-    const int newCursorX = cuX + w--;
+    const int newCursorX = _cuX + w--;
     while (w) {
         i++;
 
-        if (screenLines[cuY].size() < cuX + i + 1)
-            screenLines[cuY].resize(cuX + i + 1);
+        if (_screenLines[_cuY].size() < _cuX + i + 1)
+            _screenLines[_cuY].resize(_cuX + i + 1);
 
-        Character& ch = screenLines[cuY][cuX + i];
+        Character& ch = _screenLines[_cuY][_cuX + i];
         ch.character = 0;
-        ch.foregroundColor = effectiveForeground;
-        ch.backgroundColor = effectiveBackground;
-        ch.rendition = effectiveRendition;
+        ch.foregroundColor = _effectiveForeground;
+        ch.backgroundColor = _effectiveBackground;
+        ch.rendition = _effectiveRendition;
         ch.isRealCharacter = false;
 
         w--;
     }
-    cuX = newCursorX;
+    _cuX = newCursorX;
 }
 
 int Screen::scrolledLines() const
@@ -743,11 +743,11 @@ void Screen::scrollUp(int from, int n)
     if (n <= 0 || from + n > _bottomMargin) return;
 
     _scrolledLines -= n;
-    _lastScrolledRegion = QRect(0, _topMargin, columns - 1, (_bottomMargin - _topMargin));
+    _lastScrolledRegion = QRect(0, _topMargin, _columns - 1, (_bottomMargin - _topMargin));
 
     //FIXME: make sure `topMargin', `bottomMargin', `from', `n' is in bounds.
-    moveImage(loc(0, from), loc(0, from + n), loc(columns - 1, _bottomMargin));
-    clearImage(loc(0, _bottomMargin - n + 1), loc(columns - 1, _bottomMargin), ' ');
+    moveImage(loc(0, from), loc(0, from + n), loc(_columns - 1, _bottomMargin));
+    clearImage(loc(0, _bottomMargin - n + 1), loc(_columns - 1, _bottomMargin), ' ');
 }
 
 void Screen::scrollDown(int n)
@@ -767,8 +767,8 @@ void Screen::scrollDown(int from, int n)
         return;
     if (from + n > _bottomMargin)
         n = _bottomMargin - from;
-    moveImage(loc(0, from + n), loc(0, from), loc(columns - 1, _bottomMargin - n));
-    clearImage(loc(0, from), loc(columns - 1, from + n - 1), ' ');
+    moveImage(loc(0, from + n), loc(0, from), loc(_columns - 1, _bottomMargin - n));
+    clearImage(loc(0, from), loc(_columns - 1, from + n - 1), ' ');
 }
 
 void Screen::setCursorYX(int y, int x)
@@ -781,65 +781,65 @@ void Screen::setCursorX(int x)
 {
     if (x == 0) x = 1; // Default
     x -= 1; // Adjust
-    cuX = qMax(0, qMin(columns - 1, x));
+    _cuX = qMax(0, qMin(_columns - 1, x));
 }
 
 void Screen::setCursorY(int y)
 {
     if (y == 0) y = 1; // Default
     y -= 1; // Adjust
-    cuY = qMax(0, qMin(lines  - 1, y + (getMode(MODE_Origin) ? _topMargin : 0)));
+    _cuY = qMax(0, qMin(_lines  - 1, y + (getMode(MODE_Origin) ? _topMargin : 0)));
 }
 
 void Screen::home()
 {
-    cuX = 0;
-    cuY = 0;
+    _cuX = 0;
+    _cuY = 0;
 }
 
 void Screen::toStartOfLine()
 {
-    cuX = 0;
+    _cuX = 0;
 }
 
 int Screen::getCursorX() const
 {
-    return cuX;
+    return _cuX;
 }
 
 int Screen::getCursorY() const
 {
-    return cuY;
+    return _cuY;
 }
 
 void Screen::clearImage(int loca, int loce, char c)
 {
-    const int scr_TL = loc(0, history->getLines());
+    const int scr_TL = loc(0, _history->getLines());
     //FIXME: check positions
 
     //Clear entire selection if it overlaps region to be moved...
-    if ((selBottomRight > (loca + scr_TL)) && (selTopLeft < (loce + scr_TL))) {
+    if ((_selBottomRight > (loca + scr_TL)) && (_selTopLeft < (loce + scr_TL))) {
         clearSelection();
     }
 
-    const int topLine = loca / columns;
-    const int bottomLine = loce / columns;
+    const int topLine = loca / _columns;
+    const int bottomLine = loce / _columns;
 
-    Character clearCh(c, currentForeground, currentBackground, DEFAULT_RENDITION, false);
+    Character clearCh(c, _currentForeground, _currentBackground, DEFAULT_RENDITION, false);
 
     //if the character being used to clear the area is the same as the
-    //default character, the affected lines can simply be shrunk.
+    //default character, the affected _lines can simply be shrunk.
     const bool isDefaultCh = (clearCh == Screen::defaultChar);
 
     for (int y = topLine; y <= bottomLine; y++) {
-        lineProperties[y] = 0;
+        _lineProperties[y] = 0;
 
-        const int endCol = (y == bottomLine) ? loce % columns : columns - 1;
-        const int startCol = (y == topLine) ? loca % columns : 0;
+        const int endCol = (y == bottomLine) ? loce % _columns : _columns - 1;
+        const int startCol = (y == topLine) ? loca % _columns : 0;
 
-        QVector<Character>& line = screenLines[y];
+        QVector<Character>& line = _screenLines[y];
 
-        if (isDefaultCh && endCol == columns - 1) {
+        if (isDefaultCh && endCol == _columns - 1) {
             line.resize(startCol);
         } else {
             if (line.size() < endCol + 1)
@@ -856,8 +856,7 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
 {
     Q_ASSERT(sourceBegin <= sourceEnd);
 
-    // FIXME: bad name; same as Screen::lines
-    const int lines = (sourceEnd - sourceBegin) / columns;
+    const int lines = (sourceEnd - sourceBegin) / _columns;
 
     //move screen image and line properties:
     //the source and destination areas of the image may overlap,
@@ -866,75 +865,75 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
     //(search the web for 'memmove implementation' for details)
     if (dest < sourceBegin) {
         for (int i = 0; i <= lines; i++) {
-            screenLines[(dest / columns) + i ] = screenLines[(sourceBegin / columns) + i ];
-            lineProperties[(dest / columns) + i] = lineProperties[(sourceBegin / columns) + i];
+            _screenLines[(dest / _columns) + i ] = _screenLines[(sourceBegin / _columns) + i ];
+            _lineProperties[(dest / _columns) + i] = _lineProperties[(sourceBegin / _columns) + i];
         }
     } else {
         for (int i = lines; i >= 0; i--) {
-            screenLines[(dest / columns) + i ] = screenLines[(sourceBegin / columns) + i ];
-            lineProperties[(dest / columns) + i] = lineProperties[(sourceBegin / columns) + i];
+            _screenLines[(dest / _columns) + i ] = _screenLines[(sourceBegin / _columns) + i ];
+            _lineProperties[(dest / _columns) + i] = _lineProperties[(sourceBegin / _columns) + i];
         }
     }
 
-    if (lastPos != -1) {
+    if (_lastPos != -1) {
         const int diff = dest - sourceBegin; // Scroll by this amount
-        lastPos += diff;
-        if ((lastPos < 0) || (lastPos >= (lines * columns)))
-            lastPos = -1;
+        _lastPos += diff;
+        if ((_lastPos < 0) || (_lastPos >= (lines * _columns)))
+            _lastPos = -1;
     }
 
     // Adjust selection to follow scroll.
-    if (selBegin != -1) {
-        const bool beginIsTL = (selBegin == selTopLeft);
+    if (_selBegin != -1) {
+        const bool beginIsTL = (_selBegin == _selTopLeft);
         const int diff = dest - sourceBegin; // Scroll by this amount
-        const int scr_TL = loc(0, history->getLines());
+        const int scr_TL = loc(0, _history->getLines());
         const int srca = sourceBegin + scr_TL; // Translate index from screen to global
         const int srce = sourceEnd + scr_TL; // Translate index from screen to global
         const int desta = srca + diff;
         const int deste = srce + diff;
 
-        if ((selTopLeft >= srca) && (selTopLeft <= srce))
-            selTopLeft += diff;
-        else if ((selTopLeft >= desta) && (selTopLeft <= deste))
-            selBottomRight = -1; // Clear selection (see below)
+        if ((_selTopLeft >= srca) && (_selTopLeft <= srce))
+            _selTopLeft += diff;
+        else if ((_selTopLeft >= desta) && (_selTopLeft <= deste))
+            _selBottomRight = -1; // Clear selection (see below)
 
-        if ((selBottomRight >= srca) && (selBottomRight <= srce))
-            selBottomRight += diff;
-        else if ((selBottomRight >= desta) && (selBottomRight <= deste))
-            selBottomRight = -1; // Clear selection (see below)
+        if ((_selBottomRight >= srca) && (_selBottomRight <= srce))
+            _selBottomRight += diff;
+        else if ((_selBottomRight >= desta) && (_selBottomRight <= deste))
+            _selBottomRight = -1; // Clear selection (see below)
 
-        if (selBottomRight < 0) {
+        if (_selBottomRight < 0) {
             clearSelection();
         } else {
-            if (selTopLeft < 0)
-                selTopLeft = 0;
+            if (_selTopLeft < 0)
+                _selTopLeft = 0;
         }
 
         if (beginIsTL)
-            selBegin = selTopLeft;
+            _selBegin = _selTopLeft;
         else
-            selBegin = selBottomRight;
+            _selBegin = _selBottomRight;
     }
 }
 
 void Screen::clearToEndOfScreen()
 {
-    clearImage(loc(cuX, cuY), loc(columns - 1, lines - 1), ' ');
+    clearImage(loc(_cuX, _cuY), loc(_columns - 1, _lines - 1), ' ');
 }
 
 void Screen::clearToBeginOfScreen()
 {
-    clearImage(loc(0, 0), loc(cuX, cuY), ' ');
+    clearImage(loc(0, 0), loc(_cuX, _cuY), ' ');
 }
 
 void Screen::clearEntireScreen()
 {
     // Add entire screen to history
-    for (int i = 0; i < (lines - 1); i++) {
+    for (int i = 0; i < (_lines - 1); i++) {
         addHistLine(); scrollUp(0, 1);
     }
 
-    clearImage(loc(0, 0), loc(columns - 1, lines - 1), ' ');
+    clearImage(loc(0, 0), loc(_columns - 1, _lines - 1), ' ');
 }
 
 /*! fill screen with 'E'
@@ -943,33 +942,33 @@ void Screen::clearEntireScreen()
 
 void Screen::helpAlign()
 {
-    clearImage(loc(0, 0), loc(columns - 1, lines - 1), 'E');
+    clearImage(loc(0, 0), loc(_columns - 1, _lines - 1), 'E');
 }
 
 void Screen::clearToEndOfLine()
 {
-    clearImage(loc(cuX, cuY), loc(columns - 1, cuY), ' ');
+    clearImage(loc(_cuX, _cuY), loc(_columns - 1, _cuY), ' ');
 }
 
 void Screen::clearToBeginOfLine()
 {
-    clearImage(loc(0, cuY), loc(cuX, cuY), ' ');
+    clearImage(loc(0, _cuY), loc(_cuX, _cuY), ' ');
 }
 
 void Screen::clearEntireLine()
 {
-    clearImage(loc(0, cuY), loc(columns - 1, cuY), ' ');
+    clearImage(loc(0, _cuY), loc(_columns - 1, _cuY), ' ');
 }
 
 void Screen::setRendition(int re)
 {
-    currentRendition |= re;
+    _currentRendition |= re;
     updateEffectiveRendition();
 }
 
 void Screen::resetRendition(int re)
 {
-    currentRendition &= ~re;
+    _currentRendition &= ~re;
     updateEffectiveRendition();
 }
 
@@ -977,15 +976,15 @@ void Screen::setDefaultRendition()
 {
     setForeColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR);
     setBackColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR);
-    currentRendition   = DEFAULT_RENDITION;
+    _currentRendition   = DEFAULT_RENDITION;
     updateEffectiveRendition();
 }
 
 void Screen::setForeColor(int space, int color)
 {
-    currentForeground = CharacterColor(space, color);
+    _currentForeground = CharacterColor(space, color);
 
-    if (currentForeground.isValid())
+    if (_currentForeground.isValid())
         updateEffectiveRendition();
     else
         setForeColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR);
@@ -993,9 +992,9 @@ void Screen::setForeColor(int space, int color)
 
 void Screen::setBackColor(int space, int color)
 {
-    currentBackground = CharacterColor(space, color);
+    _currentBackground = CharacterColor(space, color);
 
-    if (currentBackground.isValid())
+    if (_currentBackground.isValid())
         updateEffectiveRendition();
     else
         setBackColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR);
@@ -1003,83 +1002,83 @@ void Screen::setBackColor(int space, int color)
 
 void Screen::clearSelection()
 {
-    selBottomRight = -1;
-    selTopLeft = -1;
-    selBegin = -1;
+    _selBottomRight = -1;
+    _selTopLeft = -1;
+    _selBegin = -1;
 }
 
 void Screen::getSelectionStart(int& column , int& line) const
 {
-    if (selTopLeft != -1) {
-        column = selTopLeft % columns;
-        line = selTopLeft / columns;
+    if (_selTopLeft != -1) {
+        column = _selTopLeft % _columns;
+        line = _selTopLeft / _columns;
     } else {
-        column = cuX + getHistLines();
-        line = cuY + getHistLines();
+        column = _cuX + getHistLines();
+        line = _cuY + getHistLines();
     }
 }
 void Screen::getSelectionEnd(int& column , int& line) const
 {
-    if (selBottomRight != -1) {
-        column = selBottomRight % columns;
-        line = selBottomRight / columns;
+    if (_selBottomRight != -1) {
+        column = _selBottomRight % _columns;
+        line = _selBottomRight / _columns;
     } else {
-        column = cuX + getHistLines();
-        line = cuY + getHistLines();
+        column = _cuX + getHistLines();
+        line = _cuY + getHistLines();
     }
 }
 void Screen::setSelectionStart(const int x, const int y, const bool mode)
 {
-    selBegin = loc(x, y);
+    _selBegin = loc(x, y);
     /* FIXME, HACK to correct for x too far to the right... */
-    if (x == columns) selBegin--;
+    if (x == _columns) _selBegin--;
 
-    selBottomRight = selBegin;
-    selTopLeft = selBegin;
-    blockSelectionMode = mode;
+    _selBottomRight = _selBegin;
+    _selTopLeft = _selBegin;
+    _blockSelectionMode = mode;
 }
 
 void Screen::setSelectionEnd(const int x, const int y)
 {
-    if (selBegin == -1)
+    if (_selBegin == -1)
         return;
 
     int endPos =  loc(x, y);
 
-    if (endPos < selBegin) {
-        selTopLeft = endPos;
-        selBottomRight = selBegin;
+    if (endPos < _selBegin) {
+        _selTopLeft = endPos;
+        _selBottomRight = _selBegin;
     } else {
         /* FIXME, HACK to correct for x too far to the right... */
-        if (x == columns)
+        if (x == _columns)
             endPos--;
 
-        selTopLeft = selBegin;
-        selBottomRight = endPos;
+        _selTopLeft = _selBegin;
+        _selBottomRight = endPos;
     }
 
     // Normalize the selection in column mode
-    if (blockSelectionMode) {
-        const int topRow = selTopLeft / columns;
-        const int topColumn = selTopLeft % columns;
-        const int bottomRow = selBottomRight / columns;
-        const int bottomColumn = selBottomRight % columns;
+    if (_blockSelectionMode) {
+        const int topRow = _selTopLeft / _columns;
+        const int topColumn = _selTopLeft % _columns;
+        const int bottomRow = _selBottomRight / _columns;
+        const int bottomColumn = _selBottomRight % _columns;
 
-        selTopLeft = loc(qMin(topColumn, bottomColumn), topRow);
-        selBottomRight = loc(qMax(topColumn, bottomColumn), bottomRow);
+        _selTopLeft = loc(qMin(topColumn, bottomColumn), topRow);
+        _selBottomRight = loc(qMax(topColumn, bottomColumn), bottomRow);
     }
 }
 
 bool Screen::isSelected(const int x, const int y) const
 {
     bool columnInSelection = true;
-    if (blockSelectionMode) {
-        columnInSelection = x >= (selTopLeft % columns) &&
-                            x <= (selBottomRight % columns);
+    if (_blockSelectionMode) {
+        columnInSelection = x >= (_selTopLeft % _columns) &&
+                            x <= (_selBottomRight % _columns);
     }
 
     const int pos = loc(x, y);
-    return pos >= selTopLeft && pos <= selBottomRight && columnInSelection;
+    return pos >= _selTopLeft && pos <= _selBottomRight && columnInSelection;
 }
 
 QString Screen::selectedText(bool preserveLineBreaks) const
@@ -1097,7 +1096,7 @@ QString Screen::selectedText(bool preserveLineBreaks) const
 
 bool Screen::isSelectionValid() const
 {
-    return selTopLeft >= 0 && selBottomRight >= 0;
+    return _selTopLeft >= 0 && _selBottomRight >= 0;
 }
 
 void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder ,
@@ -1105,27 +1104,27 @@ void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder ,
 {
     if (!isSelectionValid())
         return;
-    writeToStream(decoder, selTopLeft, selBottomRight, preserveLineBreaks);
+    writeToStream(decoder, _selTopLeft, _selBottomRight, preserveLineBreaks);
 }
 
 void Screen::writeToStream(TerminalCharacterDecoder* decoder,
                            int startIndex, int endIndex,
                            bool preserveLineBreaks) const
 {
-    const int top = startIndex / columns;
-    const int left = startIndex % columns;
+    const int top = startIndex / _columns;
+    const int left = startIndex % _columns;
 
-    const int bottom = endIndex / columns;
-    const int right = endIndex % columns;
+    const int bottom = endIndex / _columns;
+    const int right = endIndex % _columns;
 
     Q_ASSERT(top >= 0 && left >= 0 && bottom >= 0 && right >= 0);
 
     for (int y = top; y <= bottom; y++) {
         int start = 0;
-        if (y == top || blockSelectionMode) start = left;
+        if (y == top || _blockSelectionMode) start = left;
 
         int count = -1;
-        if (y == bottom || blockSelectionMode) count = right - start + 1;
+        if (y == bottom || _blockSelectionMode) count = right - start + 1;
 
         const bool appendNewLine = (y != bottom);
         int copied = copyLineToStream(y,
@@ -1167,8 +1166,8 @@ int Screen::copyLineToStream(int line ,
     LineProperty currentLineProperties = 0;
 
     //determine if the line is in the history buffer or the screen image
-    if (line < history->getLines()) {
-        const int lineLength = history->getLineLen(line);
+    if (line < _history->getLines()) {
+        const int lineLength = _history->getLineLen(line);
 
         // ensure that start position is before end of line
         start = qMin(start, qMax(0, lineLength - 1));
@@ -1185,22 +1184,22 @@ int Screen::copyLineToStream(int line ,
         // safety checks
         Q_ASSERT(start >= 0);
         Q_ASSERT(count >= 0);
-        Q_ASSERT((start + count) <= history->getLineLen(line));
+        Q_ASSERT((start + count) <= _history->getLineLen(line));
 
-        history->getCells(line, start, count, characterBuffer);
+        _history->getCells(line, start, count, characterBuffer);
 
-        if (history->isWrappedLine(line))
+        if (_history->isWrappedLine(line))
             currentLineProperties |= LINE_WRAPPED;
     } else {
         if (count == -1)
-            count = columns - start;
+            count = _columns - start;
 
         Q_ASSERT(count >= 0);
 
-        const int screenLine = line - history->getLines();
+        const int screenLine = line - _history->getLines();
 
-        Character* data = screenLines[screenLine].data();
-        const int length = screenLines[screenLine].count();
+        Character* data = _screenLines[screenLine].data();
+        const int length = _screenLines[screenLine].count();
 
         //retrieve line from screen image
         for (int i = start; i < qMin(start + count, length); i++) {
@@ -1210,8 +1209,8 @@ int Screen::copyLineToStream(int line ,
         // count cannot be any greater than length
         count = qBound(0, count, length - start);
 
-        Q_ASSERT(screenLine < lineProperties.count());
-        currentLineProperties |= lineProperties[screenLine];
+        Q_ASSERT(screenLine < _lineProperties.count());
+        currentLineProperties |= _lineProperties[screenLine];
     }
 
     if (appendNewLine && (count + 1 < MAX_CHARS)) {
@@ -1219,7 +1218,7 @@ int Screen::copyLineToStream(int line ,
             // do nothing extra when this line is wrapped.
         } else {
             // When users ask not to preserve the linebreaks, they usually mean:
-            // `treat LINEBREAK as SPACE, thus joining multiple lines into
+            // `treat LINEBREAK as SPACE, thus joining multiple _lines into
             // single line in the same way as 'J' does in VIM.`
             characterBuffer[count] = preserveLineBreaks ? Character('\n') : Character(' ') ;
             count++;
@@ -1235,7 +1234,7 @@ int Screen::copyLineToStream(int line ,
 
 void Screen::writeLinesToStream(TerminalCharacterDecoder* decoder, int fromLine, int toLine) const
 {
-    writeToStream(decoder, loc(0, fromLine), loc(columns - 1, toLine));
+    writeToStream(decoder, loc(0, fromLine), loc(_columns - 1, toLine));
 }
 
 void Screen::addHistLine()
@@ -1244,49 +1243,49 @@ void Screen::addHistLine()
     // we have to take care about scrolling, too...
 
     if (hasScroll()) {
-        const int oldHistLines = history->getLines();
+        const int oldHistLines = _history->getLines();
 
-        history->addCellsVector(screenLines[0]);
-        history->addLine(lineProperties[0] & LINE_WRAPPED);
+        _history->addCellsVector(_screenLines[0]);
+        _history->addLine(_lineProperties[0] & LINE_WRAPPED);
 
-        const int newHistLines = history->getLines();
+        const int newHistLines = _history->getLines();
 
-        const bool beginIsTL = (selBegin == selTopLeft);
+        const bool beginIsTL = (_selBegin == _selTopLeft);
 
         // If the history is full, increment the count
-        // of dropped lines
+        // of dropped _lines
         if (newHistLines == oldHistLines)
             _droppedLines++;
 
         // Adjust selection for the new point of reference
         if (newHistLines > oldHistLines) {
-            if (selBegin != -1) {
-                selTopLeft += columns;
-                selBottomRight += columns;
+            if (_selBegin != -1) {
+                _selTopLeft += _columns;
+                _selBottomRight += _columns;
             }
         }
 
-        if (selBegin != -1) {
+        if (_selBegin != -1) {
             // Scroll selection in history up
             const int top_BR = loc(0, 1 + newHistLines);
 
-            if (selTopLeft < top_BR)
-                selTopLeft -= columns;
+            if (_selTopLeft < top_BR)
+                _selTopLeft -= _columns;
 
-            if (selBottomRight < top_BR)
-                selBottomRight -= columns;
+            if (_selBottomRight < top_BR)
+                _selBottomRight -= _columns;
 
-            if (selBottomRight < 0)
+            if (_selBottomRight < 0)
                 clearSelection();
             else {
-                if (selTopLeft < 0)
-                    selTopLeft = 0;
+                if (_selTopLeft < 0)
+                    _selTopLeft = 0;
             }
 
             if (beginIsTL)
-                selBegin = selTopLeft;
+                _selBegin = _selTopLeft;
             else
-                selBegin = selBottomRight;
+                _selBegin = _selBottomRight;
         }
     }
 
@@ -1294,7 +1293,7 @@ void Screen::addHistLine()
 
 int Screen::getHistLines() const
 {
-    return history->getLines();
+    return _history->getLines();
 }
 
 void Screen::setScroll(const HistoryType& t , bool copyPreviousScroll)
@@ -1302,30 +1301,30 @@ void Screen::setScroll(const HistoryType& t , bool copyPreviousScroll)
     clearSelection();
 
     if (copyPreviousScroll)
-        history = t.scroll(history);
+        _history = t.scroll(_history);
     else {
-        HistoryScroll* oldScroll = history;
-        history = t.scroll(0);
+        HistoryScroll* oldScroll = _history;
+        _history = t.scroll(0);
         delete oldScroll;
     }
 }
 
 bool Screen::hasScroll() const
 {
-    return history->hasScroll();
+    return _history->hasScroll();
 }
 
 const HistoryType& Screen::getScroll() const
 {
-    return history->getType();
+    return _history->getType();
 }
 
 void Screen::setLineProperty(LineProperty property , bool enable)
 {
     if (enable)
-        lineProperties[cuY] = (LineProperty)(lineProperties[cuY] | property);
+        _lineProperties[_cuY] = (LineProperty)(_lineProperties[_cuY] | property);
     else
-        lineProperties[cuY] = (LineProperty)(lineProperties[cuY] & ~property);
+        _lineProperties[_cuY] = (LineProperty)(_lineProperties[_cuY] & ~property);
 }
 void Screen::fillWithDefaultChar(Character* dest, int count)
 {

@@ -382,11 +382,11 @@ public:
 
     /** Return the number of lines. */
     int getLines() const {
-        return lines;
+        return _lines;
     }
     /** Return the number of columns. */
     int getColumns() const {
-        return columns;
+        return _columns;
     }
     /** Return the number of lines in the history buffer. */
     int getHistLines() const;
@@ -558,9 +558,9 @@ public:
 
     QSet<ushort> usedExtendedChars() const {
         QSet<ushort> result;
-        for (int i = 0; i < lines; ++i) {
-            const ImageLine& il = screenLines[i];
-            for (int j = 0; j < columns; ++j) {
+        for (int i = 0; i < _lines; ++i) {
+            const ImageLine& il = _screenLines[i];
+            for (int j = 0; j < _columns; ++j) {
                 if (il[j].rendition & RE_EXTENDED_CHAR) {
                     result << il[j].character;
                 }
@@ -631,53 +631,53 @@ private:
 
 
     // screen image ----------------
-    int lines;
-    int columns;
+    int _lines;
+    int _columns;
 
     typedef QVector<Character> ImageLine;      // [0..columns]
-    ImageLine*          screenLines;    // [lines]
+    ImageLine*          _screenLines;    // [lines]
 
     int _scrolledLines;
     QRect _lastScrolledRegion;
 
     int _droppedLines;
 
-    QVarLengthArray<LineProperty, 64> lineProperties;
+    QVarLengthArray<LineProperty, 64> _lineProperties;
 
     // history buffer ---------------
-    HistoryScroll* history;
+    HistoryScroll* _history;
 
     // cursor location
-    int cuX;
-    int cuY;
+    int _cuX;
+    int _cuY;
 
     // cursor color and rendition info
-    CharacterColor currentForeground;
-    CharacterColor currentBackground;
-    quint8 currentRendition;
+    CharacterColor _currentForeground;
+    CharacterColor _currentBackground;
+    quint8 _currentRendition;
 
     // margins ----------------
     int _topMargin;
     int _bottomMargin;
 
     // states ----------------
-    int currentModes[MODES_SCREEN];
-    int savedModes[MODES_SCREEN];
+    int _currentModes[MODES_SCREEN];
+    int _savedModes[MODES_SCREEN];
 
     // ----------------------------
 
-    QBitArray tabStops;
+    QBitArray _tabStops;
 
     // selection -------------------
-    int selBegin; // The first location selected.
-    int selTopLeft;    // TopLeft Location.
-    int selBottomRight;    // Bottom Right Location.
-    bool blockSelectionMode;  // Column selection mode
+    int _selBegin; // The first location selected.
+    int _selTopLeft;    // TopLeft Location.
+    int _selBottomRight;    // Bottom Right Location.
+    bool _blockSelectionMode;  // Column selection mode
 
     // effective colors and rendition ------------
-    CharacterColor effectiveForeground; // These are derived from
-    CharacterColor effectiveBackground; // the cu_* variables above
-    quint8 effectiveRendition;          // to speed up operation
+    CharacterColor _effectiveForeground; // These are derived from
+    CharacterColor _effectiveBackground; // the cu_* variables above
+    quint8 _effectiveRendition;          // to speed up operation
 
     class SavedState
     {
@@ -691,10 +691,10 @@ private:
         CharacterColor foreground;
         CharacterColor background;
     };
-    SavedState savedState;
+    SavedState _savedState;
 
     // last position where we added a character
-    int lastPos;
+    int _lastPos;
 
 };
 
