@@ -22,11 +22,6 @@
 // Own
 #include "Emulation.h"
 
-// System
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
 // Qt
 #include <QtCore/QHash>
 #include <QtGui/QKeyEvent>
