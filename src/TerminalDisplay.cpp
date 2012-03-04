@@ -61,6 +61,7 @@
 #include "LineFont.h"
 #include "SessionController.h"
 #include "WindowSystemInfo.h"
+#include "ExtendedCharTable.h"
 
 using namespace Konsole;
 

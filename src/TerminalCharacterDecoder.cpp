@@ -27,6 +27,7 @@
 
 // Konsole
 #include "konsole_wcwidth.h"
+#include "ExtendedCharTable.h"
 
 using namespace Konsole;
 PlainTextDecoder::PlainTextDecoder()

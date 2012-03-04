@@ -30,6 +30,7 @@
 #include "konsole_wcwidth.h"
 #include "TerminalCharacterDecoder.h"
 #include "History.h"
+#include "ExtendedCharTable.h"
 
 using namespace Konsole;
 
