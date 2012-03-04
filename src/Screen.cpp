@@ -70,12 +70,18 @@ Screen::Screen(int lines, int columns):
     _scrolledLines(0),
     _droppedLines(0),
     _history(new HistoryScrollNone()),
-    _cuX(0), _cuY(0),
-    _currentRendition(0),
-    _topMargin(0), _bottomMargin(0),
-    _selBegin(0), _selTopLeft(0), _selBottomRight(0),
+    _cuX(0),
+    _cuY(0),
+    _currentRendition(DEFAULT_RENDITION),
+    _topMargin(0),
+    _bottomMargin(0),
+    _selBegin(0),
+    _selTopLeft(0),
+    _selBottomRight(0),
     _blockSelectionMode(false),
-    _effectiveForeground(CharacterColor()), _effectiveBackground(CharacterColor()), _effectiveRendition(0),
+    _effectiveForeground(CharacterColor()),
+    _effectiveBackground(CharacterColor()),
+    _effectiveRendition(DEFAULT_RENDITION),
     _lastPos(-1)
 {
     _lineProperties.resize(_lines + 1);
