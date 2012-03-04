@@ -138,7 +138,7 @@ public:
         /** Returns the commands associated with this entry */
         Command command() const;
         /** Sets the command associated with this entry. */
-        void setCommand(Command command);
+        void setCommand(Command aCommand);
 
         /**
          * Returns the character sequence associated with this entry, optionally replacing
@@ -153,10 +153,10 @@ public:
          * @param modifiers The keyboard modifiers being pressed.
          */
         QByteArray text(bool expandWildCards = false,
-                        Qt::KeyboardModifiers modifiers = Qt::NoModifier) const;
+                        Qt::KeyboardModifiers keyboardModifiers = Qt::NoModifier) const;
 
         /** Sets the character sequence associated with this entry */
-        void setText(const QByteArray& text);
+        void setText(const QByteArray& aText);
 
         /**
          * Returns the character sequence associated with this entry,
@@ -173,7 +173,7 @@ public:
         /** Returns the character code ( from the Qt::Key enum ) associated with this entry */
         int keyCode() const;
         /** Sets the character code associated with this entry */
-        void setKeyCode(int keyCode);
+        void setKeyCode(int aKeyCode);
 
         /**
          * Returns a bitwise-OR of the enabled keyboard modifiers associated with this entry.
@@ -207,9 +207,9 @@ public:
         States stateMask() const;
 
         /** See state() */
-        void setState(States state);
+        void setState(States aState);
         /** See stateMask() */
-        void setStateMask(States mask);
+        void setStateMask(States aStateMask);
 
         /**
          * Returns the key code and modifiers associated with this entry
@@ -511,9 +511,9 @@ inline int KeyboardTranslator::Entry::keyCode() const
 {
     return _keyCode;
 }
-inline void KeyboardTranslator::Entry::setKeyCode(int keyCode)
+inline void KeyboardTranslator::Entry::setKeyCode(int aKeyCode)
 {
-    _keyCode = keyCode;
+    _keyCode = aKeyCode;
 }
 
 inline void KeyboardTranslator::Entry::setModifiers(Qt::KeyboardModifiers modifier)
@@ -539,32 +539,33 @@ inline bool KeyboardTranslator::Entry::isNull() const
     return (*this == Entry());
 }
 
-inline void KeyboardTranslator::Entry::setCommand(Command command)
+inline void KeyboardTranslator::Entry::setCommand(Command aCommand)
 {
-    _command = command;
+    _command = aCommand;
 }
 inline KeyboardTranslator::Command KeyboardTranslator::Entry::command() const
 {
     return _command;
 }
 
-inline void KeyboardTranslator::Entry::setText(const QByteArray& text)
+inline void KeyboardTranslator::Entry::setText(const QByteArray& aText)
 {
-    _text = unescape(text);
+    _text = unescape(aText);
 }
 inline int oneOrZero(int value)
 {
     return value ? 1 : 0;
 }
-inline QByteArray KeyboardTranslator::Entry::text(bool expandWildCards, Qt::KeyboardModifiers modifiers) const
+inline QByteArray KeyboardTranslator::Entry::text(bool expandWildCards,
+        Qt::KeyboardModifiers keyboardModifiers) const
 {
     QByteArray expandedText = _text;
 
     if (expandWildCards) {
         int modifierValue = 1;
-        modifierValue += oneOrZero(modifiers & Qt::ShiftModifier);
-        modifierValue += oneOrZero(modifiers & Qt::AltModifier)     << 1;
-        modifierValue += oneOrZero(modifiers & Qt::ControlModifier) << 2;
+        modifierValue += oneOrZero(keyboardModifiers & Qt::ShiftModifier);
+        modifierValue += oneOrZero(keyboardModifiers & Qt::AltModifier)     << 1;
+        modifierValue += oneOrZero(keyboardModifiers & Qt::ControlModifier) << 2;
 
         for (int i = 0; i < _text.length(); i++) {
             if (expandedText[i] == '*')
@@ -575,18 +576,18 @@ inline QByteArray KeyboardTranslator::Entry::text(bool expandWildCards, Qt::Keyb
     return expandedText;
 }
 
-inline void KeyboardTranslator::Entry::setState(States state)
+inline void KeyboardTranslator::Entry::setState(States aState)
 {
-    _state = state;
+    _state = aState;
 }
 inline KeyboardTranslator::States KeyboardTranslator::Entry::state() const
 {
     return _state;
 }
 
-inline void KeyboardTranslator::Entry::setStateMask(States stateMask)
+inline void KeyboardTranslator::Entry::setStateMask(States aStateMask)
 {
-    _stateMask = stateMask;
+    _stateMask = aStateMask;
 }
 inline KeyboardTranslator::States KeyboardTranslator::Entry::stateMask() const
 {

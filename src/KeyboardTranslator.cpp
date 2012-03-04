@@ -559,18 +559,18 @@ bool KeyboardTranslator::Entry::operator==(const Entry& rhs) const
            _text == rhs._text;
 }
 
-bool KeyboardTranslator::Entry::matches(int keyCode ,
-                                        Qt::KeyboardModifiers modifiers,
+bool KeyboardTranslator::Entry::matches(int testKeyCode,
+                                        Qt::KeyboardModifiers testKeyboardModifiers,
                                         States testState) const
 {
-    if (_keyCode != keyCode)
+    if (_keyCode != testKeyCode)
         return false;
 
-    if ((modifiers & _modifierMask) != (_modifiers & _modifierMask))
+    if ((testKeyboardModifiers & _modifierMask) != (_modifiers & _modifierMask))
         return false;
 
-    // if modifiers is non-zero, the 'any modifier' state is implicit
-    if (modifiers != 0)
+    // if testKeyboardModifiers is non-zero, the 'any modifier' state is implicit
+    if (testKeyboardModifiers != 0)
         testState |= AnyModifierState;
 
     if ((testState & _stateMask) != (_state & _stateMask))
@@ -578,7 +578,8 @@ bool KeyboardTranslator::Entry::matches(int keyCode ,
 
     // special handling for the 'Any Modifier' state, which checks for the presence of
     // any or no modifiers.  In this context, the 'keypad' modifier does not count.
-    bool anyModifiersSet = modifiers != 0 && modifiers != Qt::KeypadModifier;
+    bool anyModifiersSet = (testKeyboardModifiers != 0) 
+        && (testKeyboardModifiers != Qt::KeypadModifier);
     bool wantAnyModifier = _state & KeyboardTranslator::AnyModifierState;
     if (_stateMask & KeyboardTranslator::AnyModifierState) {
         if (wantAnyModifier != anyModifiersSet)
@@ -587,9 +588,10 @@ bool KeyboardTranslator::Entry::matches(int keyCode ,
 
     return true;
 }
-QByteArray KeyboardTranslator::Entry::escapedText(bool expandWildCards, Qt::KeyboardModifiers modifiers) const
+QByteArray KeyboardTranslator::Entry::escapedText(bool expandWildCards,
+        Qt::KeyboardModifiers keyboardModifiers) const
 {
-    QByteArray result(text(expandWildCards, modifiers));
+    QByteArray result(text(expandWildCards, keyboardModifiers));
 
     for (int i = 0 ; i < result.count() ; i++) {
         char ch = result[i];
@@ -690,33 +692,34 @@ void KeyboardTranslator::Entry::insertModifier(QString& item , int modifier) con
     else if (modifier == Qt::KeypadModifier)
         item += "KeyPad";
 }
-void KeyboardTranslator::Entry::insertState(QString& item , int state) const
+void KeyboardTranslator::Entry::insertState(QString& item, int aState) const
 {
-    if (!(state & _stateMask))
+    if (!(aState & _stateMask))
         return;
 
-    if (state & _state)
+    if (aState & _state)
         item += '+' ;
     else
         item += '-' ;
 
-    if (state == KeyboardTranslator::AlternateScreenState)
+    if (aState == KeyboardTranslator::AlternateScreenState)
         item += "AppScreen";
-    else if (state == KeyboardTranslator::NewLineState)
+    else if (aState == KeyboardTranslator::NewLineState)
         item += "NewLine";
-    else if (state == KeyboardTranslator::AnsiState)
+    else if (aState == KeyboardTranslator::AnsiState)
         item += "Ansi";
-    else if (state == KeyboardTranslator::CursorKeysState)
+    else if (aState == KeyboardTranslator::CursorKeysState)
         item += "AppCursorKeys";
-    else if (state == KeyboardTranslator::AnyModifierState)
+    else if (aState == KeyboardTranslator::AnyModifierState)
         item += "AnyModifier";
-    else if (state == KeyboardTranslator::ApplicationKeypadState)
+    else if (aState == KeyboardTranslator::ApplicationKeypadState)
         item += "AppKeypad";
 }
-QString KeyboardTranslator::Entry::resultToString(bool expandWildCards, Qt::KeyboardModifiers modifiers) const
+QString KeyboardTranslator::Entry::resultToString(bool expandWildCards,
+        Qt::KeyboardModifiers keyboardModifiers) const
 {
     if (!_text.isEmpty())
-        return escapedText(expandWildCards, modifiers);
+        return escapedText(expandWildCards, keyboardModifiers);
     else if (_command == EraseCommand)
         return "Erase";
     else if (_command == ScrollPageUpCommand)
@@ -756,22 +759,22 @@ QString KeyboardTranslator::Entry::conditionToString() const
     return result;
 }
 
-KeyboardTranslator::KeyboardTranslator(const QString& name)
-    : _name(name)
+KeyboardTranslator::KeyboardTranslator(const QString& aName)
+    : _name(aName)
 {
 }
 
-void KeyboardTranslator::setDescription(const QString& description)
+void KeyboardTranslator::setDescription(const QString& aDescription)
 {
-    _description = description;
+    _description = aDescription;
 }
 QString KeyboardTranslator::description() const
 {
     return _description;
 }
-void KeyboardTranslator::setName(const QString& name)
+void KeyboardTranslator::setName(const QString& aName)
 {
-    _name = name;
+    _name = aName;
 }
 QString KeyboardTranslator::name() const
 {
