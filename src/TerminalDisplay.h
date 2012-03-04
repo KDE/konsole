@@ -386,8 +386,8 @@ public:
      * Specified whether anti-aliasing of text in the terminal display
      * is enabled or not.  Defaults to enabled.
      */
-    void setAntialias(bool antialias) {
-        _antialiasText = antialias;
+    void setAntialias(bool value) {
+        _antialiasText = value;
     }
     /**
      * Returns true if anti-aliasing of text in the terminal is enabled.
