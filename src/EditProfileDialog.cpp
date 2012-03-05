@@ -76,9 +76,6 @@ EditProfileDialog::EditProfileDialog(QWidget* aParent)
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
 
-    // TODO: Re-enable in a later KDE 4.x release when this feature works again
-    _ui->enableResizeWindowButton->setVisible(false);
-
     // there are various setupXYZPage() methods to load the items
     // for each page and update their states to match the profile
     // being edited.
@@ -1032,10 +1029,6 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
             SLOT(toggleFlowControl(bool))
         },
         {
-            _ui->enableResizeWindowButton , Profile::AllowProgramsToResizeWindow ,
-            SLOT(toggleResizeWindow(bool))
-        },
-        {
             _ui->enableBlinkingCursorButton , Profile::BlinkingCursorEnabled ,
             SLOT(toggleBlinkingCursor(bool))
         },
@@ -1142,10 +1135,6 @@ void EditProfileDialog::toggleBlinkingText(bool enable)
 void EditProfileDialog::toggleFlowControl(bool enable)
 {
     updateTempProfileProperty(Profile::FlowControlEnabled, enable);
-}
-void EditProfileDialog::toggleResizeWindow(bool enable)
-{
-    updateTempProfileProperty(Profile::AllowProgramsToResizeWindow, enable);
 }
 void EditProfileDialog::fontSelected(const QFont& aFont)
 {

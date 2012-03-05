@@ -95,7 +95,6 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     // Terminal Features
     , { BlinkingTextEnabled , "BlinkingTextEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { FlowControlEnabled , "FlowControlEnabled" , TERMINAL_GROUP , QVariant::Bool }
-    , { AllowProgramsToResizeWindow , "AllowProgramsToResizeWindow" , TERMINAL_GROUP , QVariant::Bool }
     , { BidiRenderingEnabled , "BidiRenderingEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { BlinkingCursorEnabled , "BlinkingCursorEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { BellMode , "BellMode" , TERMINAL_GROUP , QVariant::Int }
@@ -164,7 +163,6 @@ FallbackProfile::FallbackProfile()
     setProperty(ScrollBarPosition, ScrollBarRight);
 
     setProperty(FlowControlEnabled, true);
-    setProperty(AllowProgramsToResizeWindow, true);
     setProperty(BlinkingTextEnabled, true);
     setProperty(UnderlineLinksEnabled, true);
     setProperty(TripleClickMode, SelectWholeLine);

@@ -158,10 +158,6 @@ public:
          * Ctrl+Q) have any effect.  Also known as Xon/Xoff
          */
         FlowControlEnabled,
-        /** (bool) Specifies whether programs running in the terminal are
-         * allowed to resize the terminal display.
-         */
-        AllowProgramsToResizeWindow,
         /** (bool) Specifies whether the cursor blinks ( in a manner similar
          * to text editing applications )
          */
