@@ -53,13 +53,13 @@ public:
     /**
      * Constructs a ShellCommand from a command line.
      *
-     * @param fullCommand The command line to parse.
+     * @param aCommand The command line to parse.
      */
-    ShellCommand(const QString& fullCommand);
+    ShellCommand(const QString& aCommand);
     /**
-     * Constructs a ShellCommand with the specified @p command and @p arguments.
+     * Constructs a ShellCommand with the specified @p aCommand and @p aArguments.
      */
-    ShellCommand(const QString& command , const QStringList& arguments);
+    ShellCommand(const QString& aCommand, const QStringList& aArguments);
 
     /** Returns the command. */
     QString command() const;

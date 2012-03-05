@@ -29,16 +29,16 @@ using Konsole::ShellCommand;
 // function copied from kdelibs/kio/kio/kurlcompletion.cpp
 static bool expandEnv(QString& text);
 
-ShellCommand::ShellCommand(const QString& fullCommand)
+ShellCommand::ShellCommand(const QString& aCommand)
 {
-    _arguments = KShell::splitArgs(fullCommand);
+    _arguments = KShell::splitArgs(aCommand);
 }
-ShellCommand::ShellCommand(const QString& command , const QStringList& arguments)
+ShellCommand::ShellCommand(const QString& aCommand, const QStringList& aArguments)
 {
-    _arguments = arguments;
+    _arguments = aArguments;
 
     if (!_arguments.isEmpty())
-        _arguments[0] == command;
+        _arguments[0] == aCommand;
 }
 QString ShellCommand::fullCommand() const
 {
