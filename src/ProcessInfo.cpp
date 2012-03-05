@@ -145,12 +145,14 @@ QSet<QString> ProcessInfo::_commonDirNames;
 
 QSet<QString> ProcessInfo::commonDirNames()
 {
-    if (_commonDirNames.isEmpty()) {
-        KSharedConfigPtr config = KGlobal::config();
-        KConfigGroup configGroup = config->group("ProcessInfo");
+    static bool forTheFirstTime = true;
 
+    if ( forTheFirstTime ) {
+        const KSharedConfigPtr& config = KGlobal::config();
+        const KConfigGroup& configGroup = config->group("ProcessInfo");
         _commonDirNames = QSet<QString>::fromList(configGroup.readEntry("CommonDirNames", QStringList()));
 
+        forTheFirstTime = false;
     }
 
     return _commonDirNames;
