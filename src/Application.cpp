@@ -375,17 +375,17 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
 
     // run a custom command
     if ( args->isSet("e") ) {
-        QStringList arguments;
-        arguments << args->getOption("e");
+        QStringList commandArguments;
+        commandArguments << args->getOption("e");
         for ( int i = 0 ; i < args->count() ; i++ )
-            arguments << args->arg(i);
+            commandArguments << args->arg(i);
 
-        QString exec = args->getOption("e");
-        if (exec.startsWith(QLatin1String("./")))
-            exec = QDir::currentPath() + exec.mid(1);
+        QString commandExec = args->getOption("e");
+        if (commandExec.startsWith(QLatin1String("./")))
+            commandExec = QDir::currentPath() + commandExec.mid(1);
 
-        newProfile->setProperty(Profile::Command, exec);
-        newProfile->setProperty(Profile::Arguments, arguments);
+        newProfile->setProperty(Profile::Command, commandExec);
+        newProfile->setProperty(Profile::Arguments, commandArguments);
 
         shouldUseNewProfile = true;
     }
