@@ -282,8 +282,8 @@ void Vt102Emulation::initTokenizer()
 #define Xte        (Xpe      && cc ==  7 )
 #define ces(C)     (cc < 256 && (charClass[cc] & (C)) == (C) && !Xte)
 
-#define ESC 27
 #define CNTL(c) ((c)-'@')
+const int ESC = 27;
 
 // process an incoming unicode character
 void Vt102Emulation::receiveChar(int cc)
