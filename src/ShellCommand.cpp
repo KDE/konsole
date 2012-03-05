@@ -119,7 +119,7 @@ static bool expandEnv(QString& text)
             // Find the end of the variable = next '/' or ' '
             //
             int pos2 = text.indexOf(QLatin1Char(' '), pos + 1);
-            int pos_tmp = text.indexOf(QLatin1Char('/'), pos + 1);
+            const int pos_tmp = text.indexOf(QLatin1Char('/'), pos + 1);
 
             if (pos2 == -1 || (pos_tmp != -1 && pos_tmp < pos2))
                 pos2 = pos_tmp;
@@ -131,9 +131,9 @@ static bool expandEnv(QString& text)
             // and defined
             //
             if (pos2 >= 0) {
-                int len    = pos2 - pos;
-                QString key    = text.mid(pos + 1, len - 1);
-                QString value =
+                const int len    = pos2 - pos;
+                const QString key    = text.mid(pos + 1, len - 1);
+                const QString value =
                     QString::fromLocal8Bit(qgetenv(key.toLocal8Bit()));
 
                 if (!value.isEmpty()) {

@@ -160,9 +160,8 @@ QString ProcessInfo::formatShortDir(const QString& input) const
 {
     QString result;
 
-    QStringList parts = input.split(QDir::separator());
+    const QStringList& parts = input.split(QDir::separator());
 
-    // temporarily hard-coded
     QSet<QString> dirNamesToShorten = commonDirNames();
 
     QListIterator<QString> iter(parts);
@@ -173,7 +172,7 @@ QString ProcessInfo::formatShortDir(const QString& input) const
     // and stopping when we reach a dir name which is not
     // in the commonDirNames set
     while (iter.hasPrevious()) {
-        QString part = iter.previous();
+        const QString& part = iter.previous();
 
         if (dirNamesToShorten.contains(part)) {
             result.prepend(QDir::separator() + part[0]);
@@ -270,7 +269,7 @@ void ProcessInfo::setUserName(const QString& name)
 
 void ProcessInfo::setUserHomeDir()
 {
-    QString usersName = userName();
+    const QString& usersName = userName();
     if (!usersName.isEmpty())
         _userHomeDir = KUser(usersName).homeDir();
     else
@@ -379,7 +378,7 @@ bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
 void UnixProcessInfo::readUserName()
 {
     bool ok = false;
-    int uid = userId(&ok);
+    const int uid = userId(&ok);
     if (!ok) return;
 
     struct passwd passwdStruct;
@@ -449,7 +448,7 @@ private:
                 uidString.clear();
 
             bool ok = false;
-            int uid = uidString.toInt(&ok);
+            const int uid = uidString.toInt(&ok);
             if (ok)
                 setUserId(uid);
             readUserName();
@@ -470,7 +469,7 @@ private:
         QFile processInfo(QString("/proc/%1/stat").arg(pid));
         if (processInfo.open(QIODevice::ReadOnly)) {
             QTextStream stream(&processInfo);
-            QString data = stream.readAll();
+            const QString& data = stream.readAll();
 
             int stack = 0;
             int field = 0;
@@ -508,11 +507,11 @@ private:
 
         // check that data was read successfully
         bool ok = false;
-        int foregroundPid = foregroundPidString.toInt(&ok);
+        const int foregroundPid = foregroundPidString.toInt(&ok);
         if (ok)
             setForegroundPid(foregroundPid);
 
-        int parentPid = parentPidString.toInt(&ok);
+        const int parentPid = parentPidString.toInt(&ok);
         if (ok)
             setParentPid(parentPid);
 
@@ -533,9 +532,9 @@ private:
         QFile argumentsFile(QString("/proc/%1/cmdline").arg(pid));
         if (argumentsFile.open(QIODevice::ReadOnly)) {
             QTextStream stream(&argumentsFile);
-            QString data = stream.readAll();
+            const QString& data = stream.readAll();
 
-            QStringList argList = data.split(QChar('\0'));
+            const QStringList& argList = data.split(QChar('\0'));
 
             foreach(const QString & entry , argList) {
                 if (!entry.isEmpty())
@@ -574,15 +573,15 @@ private:
         QFile environmentFile(QString("/proc/%1/environ").arg(pid));
         if (environmentFile.open(QIODevice::ReadOnly)) {
             QTextStream stream(&environmentFile);
-            QString data = stream.readAll();
+            const QString& data = stream.readAll();
 
-            QStringList bindingList = data.split(QChar('\0'));
+            const QStringList& bindingList = data.split(QChar('\0'));
 
             foreach(const QString & entry , bindingList) {
                 QString name;
                 QString value;
 
-                int splitPos = entry.indexOf('=');
+                const int splitPos = entry.indexOf('=');
 
                 if (splitPos != -1) {
                     name = entry.mid(0, splitPos);
@@ -662,7 +661,7 @@ private:
         if (sysctl(managementInfoBase, 4, args, &len, NULL, 0) == -1)
             return false;
 
-        const QStringList argumentList = QString(args).split(QChar('\0'));
+        const QStringList& argumentList = QString(args).split(QChar('\0'));
 
         for (QStringList::const_iterator it = argumentList.begin(); it != argumentList.end(); ++it) {
             addArgument(*it);
@@ -748,11 +747,11 @@ private:
                 delete [] kInfoProc;
                 return false;
             } else {
-                QString deviceNumber = QString(devname(((&kInfoProc->kp_eproc)->e_tdev), S_IFCHR));
-                QString fullDeviceName =  QString("/dev/") + deviceNumber.rightJustified(3, '0');
+                const QString deviceNumber = QString(devname(((&kInfoProc->kp_eproc)->e_tdev), S_IFCHR));
+                const QString fullDeviceName =  QString("/dev/") + deviceNumber.rightJustified(3, '0');
                 delete [] kInfoProc;
 
-                QByteArray deviceName = fullDeviceName.toLatin1();
+                const QByteArray deviceName = fullDeviceName.toLatin1();
                 const char* ttyName = deviceName.data();
 
                 if (KDE::stat(ttyName, &statInfo) != 0)
@@ -787,7 +786,7 @@ private:
     }
     virtual bool readCurrentDir(int pid) {
         struct proc_vnodepathinfo vpi;
-        int nb = proc_pidinfo(pid, PROC_PIDVNODEPATHINFO, 0, &vpi, sizeof(vpi));
+        const int nb = proc_pidinfo(pid, PROC_PIDVNODEPATHINFO, 0, &vpi, sizeof(vpi));
         if (nb == sizeof(vpi)) {
             setCurrentDir(QString(vpi.pvi_cdir.vip_path));
             return true;
@@ -928,9 +927,9 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
             // If this one is an option ...
             // Most options together with its argument will be skipped.
             if (args[i].startsWith('-')) {
-                QChar optionChar = (args[i].length() > 1) ? args[i][1] : '\0';
+                const QChar optionChar = (args[i].length() > 1) ? args[i][1] : '\0';
                 // for example: -p2222 or -p 2222 ?
-                bool optionArgumentCombined =  args[i].length() > 2 ;
+                const bool optionArgumentCombined =  args[i].length() > 2 ;
 
                 if (noArgumentOptions.contains(optionChar)) {
                     continue;
@@ -961,7 +960,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                 // both a username and host are specified ( in which case they
                 // are separated by an '@' character:  username@host )
 
-                int separatorPosition = args[i].indexOf('@');
+                const int separatorPosition = args[i].indexOf('@');
                 if (separatorPosition != -1) {
                     // username and host specified
                     _user = args[i].left(separatorPosition);

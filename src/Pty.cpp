@@ -148,7 +148,7 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
 
     foreach ( const QString& pair, environment ) {
         // split on the first '=' character
-        int pos = pair.indexOf('=');
+        const int pos = pair.indexOf('=');
 
         if (pos >= 0) {
             QString variable = pair.left(pos);

@@ -949,7 +949,7 @@ void Vt102Emulation::sendText(const QString& text)
 }
 void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
 {
-    Qt::KeyboardModifiers modifiers = event->modifiers();
+    const Qt::KeyboardModifiers modifiers = event->modifiers();
     KeyboardTranslator::States states = KeyboardTranslator::NoState;
 
     // get current states

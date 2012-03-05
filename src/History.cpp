@@ -61,7 +61,7 @@ HistoryFile::HistoryFile()
       _fileMap(0),
       _readWriteBalance(0)
 {
-    QString tmpFormat = KStandardDirs::locateLocal("tmp", QString())
+    const QString tmpFormat = KStandardDirs::locateLocal("tmp", QString())
                         + "konsole-XXXXXX.history";
     _tmpFile.setFileTemplate(tmpFormat);
     if (_tmpFile.open()) {
