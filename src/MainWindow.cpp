@@ -271,7 +271,7 @@ IncrementalSearchBar* MainWindow::searchBar() const
 void MainWindow::setupActions()
 {
     KActionCollection* collection = actionCollection();
-    KAction* action = 0;
+    KAction* menuAction = 0;
 
     // File Menu
     _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18n("&New Tab"), collection);
@@ -281,25 +281,25 @@ void MainWindow::setupActions()
     connect(_newTabMenuAction, SIGNAL(triggered()), this, SLOT(newTab()));
     collection->addAction("new-tab", _newTabMenuAction);
 
-    action = collection->addAction("clone-tab");
-    action->setIcon( KIcon("tab-duplicate") );
-    action->setText( i18n("&Clone Tab") );
-    action->setShortcut( QKeySequence() );
-    action->setAutoRepeat( false );
-    connect( action , SIGNAL(triggered()) , this , SLOT(cloneTab()) );
+    menuAction = collection->addAction("clone-tab");
+    menuAction->setIcon( KIcon("tab-duplicate") );
+    menuAction->setText( i18n("&Clone Tab") );
+    menuAction->setShortcut( QKeySequence() );
+    menuAction->setAutoRepeat( false );
+    connect(menuAction, SIGNAL(triggered()), this, SLOT(cloneTab()));
 
-    action = collection->addAction("new-window");
-    action->setIcon(KIcon("window-new"));
-    action->setText(i18n("New &Window"));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N));
-    action->setAutoRepeat(false);
-    connect(action , SIGNAL(triggered()) , this , SLOT(newWindow()));
+    menuAction = collection->addAction("new-window");
+    menuAction->setIcon(KIcon("window-new"));
+    menuAction->setText(i18n("New &Window"));
+    menuAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N));
+    menuAction->setAutoRepeat(false);
+    connect(menuAction, SIGNAL(triggered()), this, SLOT(newWindow()));
 
-    action = collection->addAction("close-window");
-    action->setIcon(KIcon("window-close"));
-    action->setText(i18n("Close Window"));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Q));
-    connect(action , SIGNAL(triggered()) , this , SLOT(close()));
+    menuAction = collection->addAction("close-window");
+    menuAction->setIcon(KIcon("window-close"));
+    menuAction->setText(i18n("Close Window"));
+    menuAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Q));
+    connect(menuAction, SIGNAL(triggered()), this, SLOT(close()));
 
     // Bookmark Menu
     KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection);
@@ -312,23 +312,23 @@ void MainWindow::setupActions()
     _toggleMenuBarAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
 
     // Full Screen
-    action = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
-    action->setShortcut(QKeySequence());
+    menuAction = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
+    menuAction->setShortcut(QKeySequence());
 
     KStandardAction::configureNotifications(this , SLOT(configureNotifications()) , collection);
     KStandardAction::keyBindings(this , SLOT(showShortcutsDialog()) , collection);
     KStandardAction::preferences(this, SLOT(showSettingsDialog()), collection);
 
-    action = collection->addAction("manage-profiles");
-    action->setText(i18n("Manage Profiles..."));
-    action->setIcon(KIcon("configure"));
-    connect(action, SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()));
+    menuAction = collection->addAction("manage-profiles");
+    menuAction->setText(i18n("Manage Profiles..."));
+    menuAction->setIcon(KIcon("configure"));
+    connect(menuAction, SIGNAL(triggered()), this, SLOT(showManageProfilesDialog()));
 
     // Set up an shortcut-only action for activating menu bar.
-    action = collection->addAction("activate-menu");
-    action->setText(i18n("Activate Menu"));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F10));
-    connect(action, SIGNAL(triggered()), this, SLOT(activateMenuBar()));
+    menuAction = collection->addAction("activate-menu");
+    menuAction->setText(i18n("Activate Menu"));
+    menuAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F10));
+    connect(menuAction, SIGNAL(triggered()), this, SLOT(activateMenuBar()));
 }
 
 void MainWindow::viewFullScreen(bool fullScreen)
@@ -355,25 +355,25 @@ void MainWindow::setProfileList(ProfileList* list)
             SLOT(sessionListChanged(QList<QAction*>)));
 }
 
-void MainWindow::sessionListChanged(const QList<QAction*>& actions)
+void MainWindow::sessionListChanged(const QList<QAction*>& sessionActions)
 {
     // If only 1 profile is to be shown in the menu, only display
     // it if it is the non-default profile.
-    if (actions.size() > 2) {
+    if (sessionActions.size() > 2) {
         // Update the 'New Tab' KActionMenu
         KMenu* newTabMenu = _newTabMenuAction->menu();
         newTabMenu->clear();
-        foreach(QAction * action, actions) {
-            newTabMenu->addAction(action);
+        foreach(QAction* sessionAction, sessionActions) {
+            newTabMenu->addAction(sessionAction);
 
             // NOTE: defaultProfile seems to not work here, sigh.
             Profile::Ptr profile = SessionManager::instance()->defaultProfile();
-            if (profile && profile->name() == action->text().remove('&')) {
-                action->setIcon(KIcon(profile->icon(), NULL, QStringList("emblem-favorite")));
-                newTabMenu->setDefaultAction(action);
-                QFont font = action->font();
-                font.setBold(true);
-                action->setFont(font);
+            if (profile && profile->name() == sessionAction->text().remove('&')) {
+                sessionAction->setIcon(KIcon(profile->icon(), NULL, QStringList("emblem-favorite")));
+                newTabMenu->setDefaultAction(sessionAction);
+                QFont actionFont = sessionAction->font();
+                actionFont.setBold(true);
+                sessionAction->setFont(actionFont);
             }
         }
     } else {
@@ -382,8 +382,8 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
         Profile::Ptr profile = SessionManager::instance()->defaultProfile();
 
         // NOTE: Compare names w/o any '&'
-        if (actions.size() == 2 &&  actions[1]->text().remove('&') != profile->name()) {
-            newTabMenu->addAction(actions[1]);
+        if (sessionActions.size() == 2 &&  sessionActions[1]->text().remove('&') != profile->name()) {
+            newTabMenu->addAction(sessionActions[1]);
         } else {
             delete newTabMenu;
         }
@@ -583,10 +583,10 @@ void MainWindow::showShortcutsDialog()
 
     if (dialog.configure()) {
         // sync shortcuts for non-session actions (defined in "konsoleui.rc") in other main windows
-        foreach(QWidget * widget, QApplication::topLevelWidgets()) {
-            MainWindow* window = qobject_cast<MainWindow*>(widget);
-            if (window && window != this)
-                syncActiveShortcuts(window->actionCollection(), actionCollection());
+        foreach(QWidget* mainWindowWidget, QApplication::topLevelWidgets()) {
+            MainWindow* mainWindow = qobject_cast<MainWindow*>(mainWindowWidget);
+            if (mainWindow && mainWindow != this)
+                syncActiveShortcuts(mainWindow->actionCollection(), actionCollection());
         }
         // sync shortcuts for session actions (defined in "sessionui.rc") in other session controllers.
         // Controllers which are currently plugged in (ie. their actions are part of the current menu)
@@ -675,16 +675,16 @@ void MainWindow::activateMenuBar()
 
 void MainWindow::setupWidgets()
 {
-    QWidget* widget = new QWidget(this);
-    QVBoxLayout* layout = new QVBoxLayout();
+    QWidget* mainWindowWidget = new QWidget(this);
+    QVBoxLayout* mainWindowLayout = new QVBoxLayout();
 
-    layout->addWidget(_viewManager->widget());
-    layout->setContentsMargins(0, 0, 0, 0);
-    layout->setSpacing(0);
+    mainWindowLayout->addWidget(_viewManager->widget());
+    mainWindowLayout->setContentsMargins(0, 0, 0, 0);
+    mainWindowLayout->setSpacing(0);
 
-    widget->setLayout(layout);
+    mainWindowWidget->setLayout(mainWindowLayout);
 
-    setCentralWidget(widget);
+    setCentralWidget(mainWindowWidget);
 }
 
 void MainWindow::configureNotifications()
@@ -692,7 +692,7 @@ void MainWindow::configureNotifications()
     KNotifyConfigWidget::configure(this);
 }
 
-void MainWindow::showEvent(QShowEvent* event)
+void MainWindow::showEvent(QShowEvent* aEvent)
 {
     // Make sure the 'initial' visibility is applied only once.
     if (! _menuBarInitialVisibilityApplied) {
@@ -708,7 +708,7 @@ void MainWindow::showEvent(QShowEvent* event)
     }
 
     // Call parent method
-    KXmlGuiWindow::showEvent(event);
+    KXmlGuiWindow::showEvent(aEvent);
 }
 
 bool MainWindow::focusNextPrevChild(bool)
