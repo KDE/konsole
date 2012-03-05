@@ -23,9 +23,6 @@
 #ifndef EMULATION_H
 #define EMULATION_H
 
-// System
-#include <stdio.h>
-
 // Qt
 #include <QtCore/QSize>
 #include <QtCore/QTextCodec>
