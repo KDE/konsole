@@ -23,15 +23,6 @@
 // Own
 #include "Vt102Emulation.h"
 
-// XKB
-#include <config-konsole.h>
-
-// this allows konsole to be compiled without XKB and XTEST extensions
-// even though it might be available on a particular system.
-#if defined(AVOID_XKB)
-#undef HAVE_XKB
-#endif
-
 // Standard
 #include <stdio.h>
 #include <unistd.h>
