@@ -284,11 +284,12 @@ void Vt102Emulation::initTokenizer()
 
 #define CNTL(c) ((c)-'@')
 const int ESC = 27;
+const int DEL = 127;
 
 // process an incoming unicode character
 void Vt102Emulation::receiveChar(int cc)
 { 
-  if (cc == 127) 
+  if (cc == DEL) 
     return; //VT100: ignore.
 
   if (ces(CTL))
