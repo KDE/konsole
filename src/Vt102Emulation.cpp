@@ -217,15 +217,13 @@ void Vt102Emulation::addToCurrentToken(int cc)
 }
 
 // Character Class flags used while decoding
-
-#define CTL  1  // Control character
-#define CHR  2  // Printable character
-#define CPN  4  // TODO: Document me 
-#define DIG  8  // Digit
-#define SCS 16  // TODO: Document me  
-#define GRP 32  // TODO: Document me
-#define CPS 64  // Character which indicates end of window resize
-// escape sequence '\e[8;<row>;<col>t'
+const int CTL =  1;  // Control character
+const int CHR =  2;  // Printable character
+const int CPN =  4;  // TODO: Document me 
+const int DIG =  8;  // Digit
+const int SCS = 16;  // TODO: Document me  
+const int GRP = 32;  // TODO: Document me
+const int CPS = 64;  // Character which indicates end of window resize
 
 void Vt102Emulation::initTokenizer()
 {
