@@ -44,7 +44,6 @@
 #include <KShell>
 #include <KProcess>
 #include <KStandardDirs>
-#include <KPtyDevice>
 #include <KConfigGroup>
 
 // Konsole
@@ -758,7 +757,7 @@ bool Session::closeInNormalWay()
         return true;
     } else {
         kWarning() << "Process " << _shellProcess->pid() << " did not die with SIGHUP";
-        _shellProcess->pty()->close();
+        _shellProcess->closePty();
         return (_shellProcess->waitForFinished(1000)) ;
     }
 }

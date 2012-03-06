@@ -141,6 +141,11 @@ public:
      */
     int foregroundProcessGroup() const;
 
+    /**
+     * Close the underlying pty master/slave pair.
+     */
+    void closePty();
+
 public slots:
 
     /**

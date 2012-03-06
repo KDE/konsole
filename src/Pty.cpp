@@ -270,6 +270,11 @@ void Pty::setWriteable(bool writeable)
         KDE::chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP | S_IWOTH));
 }
 
+void Pty::closePty()
+{
+    pty()->close();
+}
+
 int Pty::foregroundProcessGroup() const
 {
     int pid = tcgetpgrp(pty()->masterFd());
