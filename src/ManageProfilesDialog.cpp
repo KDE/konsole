@@ -35,8 +35,8 @@
 
 using namespace Konsole;
 
-ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
-    : KDialog(parent)
+ManageProfilesDialog::ManageProfilesDialog(QWidget* aParent)
+    : KDialog(aParent)
     , _sessionModel(new QStandardItemModel(this))
 {
     setCaption(i18nc("@title:window", "Manage Profiles"));
@@ -240,18 +240,18 @@ void ManageProfilesDialog::updateDefaultItem()
     const int rowCount = _sessionModel->rowCount();
     for (int i = 0; i < rowCount; i++) {
         QStandardItem* item = _sessionModel->item(i);
-        QFont font = item->font();
+        QFont itemFont = item->font();
 
         bool isDefault = (defaultProfile == item->data().value<Profile::Ptr>());
 
-        if (isDefault && !font.bold()) {
+        if (isDefault && !itemFont.bold()) {
             item->setIcon(KIcon(defaultProfile->icon(), NULL, QStringList("emblem-favorite")));
-            font.setBold(true);
-            item->setFont(font);
-        } else if (!isDefault && font.bold()) {
+            itemFont.setBold(true);
+            item->setFont(itemFont);
+        } else if (!isDefault && itemFont.bold()) {
             item->setIcon(KIcon(defaultProfile->icon()));
-            font.setBold(false);
-            item->setFont(font);
+            itemFont.setBold(false);
+            item->setFont(itemFont);
         }
     }
 }
@@ -418,8 +418,8 @@ void StyledBackgroundPainter::drawBackground(QPainter* painter, const QStyleOpti
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, widget);
 }
 
-FavoriteItemDelegate::FavoriteItemDelegate(QObject* parent)
-    : QStyledItemDelegate(parent)
+FavoriteItemDelegate::FavoriteItemDelegate(QObject* aParent)
+    : QStyledItemDelegate(aParent)
 {
 }
 void FavoriteItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -440,12 +440,12 @@ void FavoriteItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& 
     icon.paint(painter, opt.rect, Qt::AlignCenter);
 }
 
-bool FavoriteItemDelegate::editorEvent(QEvent* event, QAbstractItemModel*,
+bool FavoriteItemDelegate::editorEvent(QEvent* aEvent, QAbstractItemModel*,
                                        const QStyleOptionViewItem&, const QModelIndex& index)
 {
-    if (event->type() == QEvent::MouseButtonPress ||
-            event->type() == QEvent::KeyPress ||
-            event->type() == QEvent::MouseButtonDblClick) {
+    if (aEvent->type() == QEvent::MouseButtonPress ||
+            aEvent->type() == QEvent::KeyPress ||
+            aEvent->type() == QEvent::MouseButtonDblClick) {
         Profile::Ptr profile = index.data(ManageProfilesDialog::ProfileKeyRole).value<Profile::Ptr>();
         const bool isFavorite = SessionManager::instance()->findFavorites().contains(profile);
 
@@ -454,8 +454,8 @@ bool FavoriteItemDelegate::editorEvent(QEvent* event, QAbstractItemModel*,
 
     return true;
 }
-ShortcutItemDelegate::ShortcutItemDelegate(QObject* parent)
-    : QStyledItemDelegate(parent)
+ShortcutItemDelegate::ShortcutItemDelegate(QObject* aParent)
+    : QStyledItemDelegate(aParent)
 {
 }
 void ShortcutItemDelegate::editorModified(const QKeySequence& keys)
@@ -481,11 +481,11 @@ void ShortcutItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* mod
     _modifiedEditors.remove(editor);
 }
 
-QWidget* ShortcutItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem&, const QModelIndex& index) const
+QWidget* ShortcutItemDelegate::createEditor(QWidget* aParent, const QStyleOptionViewItem&, const QModelIndex& index) const
 {
     _itemsBeingEdited.insert(index);
 
-    KKeySequenceWidget* editor = new KKeySequenceWidget(parent);
+    KKeySequenceWidget* editor = new KKeySequenceWidget(aParent);
     editor->setFocusPolicy(Qt::StrongFocus);
     editor->setModifierlessAllowed(false);
     QString shortcutString = index.data(Qt::DisplayRole).toString();
