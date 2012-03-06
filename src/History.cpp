@@ -106,7 +106,7 @@ bool HistoryFile::isMapped() const
     return (_fileMap != 0);
 }
 
-void HistoryFile::add(const unsigned char* bytes, int len)
+void HistoryFile::add(const unsigned char* buffer, int count)
 {
     if (_fileMap)
         unmap();
@@ -120,7 +120,7 @@ void HistoryFile::add(const unsigned char* bytes, int len)
         perror("HistoryFile::add.seek");
         return;
     }
-    rc = write(_fd, bytes, len);
+    rc = write(_fd, buffer, count);
     if (rc < 0) {
         perror("HistoryFile::add.write");
         return;
@@ -128,7 +128,7 @@ void HistoryFile::add(const unsigned char* bytes, int len)
     _length += rc;
 }
 
-void HistoryFile::get(unsigned char* bytes, int len, int loc)
+void HistoryFile::get(unsigned char* buffer, int size, int loc)
 {
     //count number of get() calls vs. number of add() calls.
     //If there are many more get() calls compared with add()
@@ -139,19 +139,19 @@ void HistoryFile::get(unsigned char* bytes, int len, int loc)
         map();
 
     if (_fileMap) {
-        for (int i = 0; i < len; i++)
-            bytes[i] = _fileMap[loc + i];
+        for (int i = 0; i < size; i++)
+            buffer[i] = _fileMap[loc + i];
     } else {
         int rc = 0;
 
-        if (loc < 0 || len < 0 || loc + len > _length)
-            fprintf(stderr, "getHist(...,%d,%d): invalid args.\n", len, loc);
+        if (loc < 0 || size < 0 || loc + size > _length)
+            fprintf(stderr, "getHist(...,%d,%d): invalid args.\n", size, loc);
         rc = KDE_lseek(_fd, loc, SEEK_SET);
         if (rc < 0) {
             perror("HistoryFile::get.seek");
             return;
         }
-        rc = read(_fd, bytes, len);
+        rc = read(_fd, buffer, size);
         if (rc < 0) {
             perror("HistoryFile::get.read");
             return;
@@ -307,14 +307,14 @@ void HistoryScrollNone::addLine(bool)
 ////////////////////////////////////////////////////////////////
 // Compact History Scroll //////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-void* CompactHistoryBlock::allocate(size_t length)
+void* CompactHistoryBlock::allocate(size_t size)
 {
-    Q_ASSERT(length > 0);
-    if (tail - blockStart + length > blockLength)
+    Q_ASSERT(size > 0);
+    if (tail - blockStart + size > blockLength)
         return NULL;
 
     void* block = tail;
-    tail += length;
+    tail += size;
     //kDebug() << "allocated " << length << " bytes at address " << block;
     allocCount++;
     return block;
@@ -451,12 +451,12 @@ void CompactHistoryLine::getCharacter(int index, Character& r)
     r.backgroundColor = formatArray[formatPos].bgColor;
 }
 
-void CompactHistoryLine::getCharacters(Character* array, int length, int startColumn)
+void CompactHistoryLine::getCharacters(Character* array, int size, int startColumn)
 {
-    Q_ASSERT(startColumn >= 0 && length >= 0);
-    Q_ASSERT(startColumn + length <= (int) getLength());
+    Q_ASSERT(startColumn >= 0 && size >= 0);
+    Q_ASSERT(startColumn + size <= (int) getLength());
 
-    for (int i = startColumn; i < length + startColumn; i++) {
+    for (int i = startColumn; i < size + startColumn; i++) {
         getCharacter(i, array[i - startColumn]);
     }
 }

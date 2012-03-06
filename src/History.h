@@ -269,8 +269,8 @@ public:
     virtual bool isWrapped() const {
         return wrapped;
     };
-    virtual void setWrapped(bool isWrapped) {
-        wrapped = isWrapped;
+    virtual void setWrapped(bool value) {
+        wrapped = value;
     };
     virtual unsigned int getLength() const {
         return length;
