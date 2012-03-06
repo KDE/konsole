@@ -58,8 +58,8 @@
 
 using namespace Konsole;
 
-EditProfileDialog::EditProfileDialog(QWidget* parent)
-    : KDialog(parent)
+EditProfileDialog::EditProfileDialog(QWidget* aParent)
+    : KDialog(aParent)
     , _colorSchemeAnimationTimeLine(0)
     , _delayedPreviewTimer(new QTimer(this))
 {
@@ -362,13 +362,13 @@ void EditProfileDialog::insertRemoteTabTitleText(const QString& text)
 {
     _ui->remoteTabTitleEdit->insert(text);
 }
-void EditProfileDialog::saveGeometryOnExit(bool save)
+void EditProfileDialog::saveGeometryOnExit(bool value)
 {
-    updateTempProfileProperty(Profile::SaveGeometryOnExit, save);
+    updateTempProfileProperty(Profile::SaveGeometryOnExit, value);
 }
-void EditProfileDialog::showTerminalSizeHint(bool show)
+void EditProfileDialog::showTerminalSizeHint(bool value)
 {
-    updateTempProfileProperty(Profile::ShowTerminalSizeHint, show);
+    updateTempProfileProperty(Profile::ShowTerminalSizeHint, value);
 }
 void EditProfileDialog::tabTitleFormatChanged(const QString& format)
 {
@@ -468,13 +468,13 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     // setup font preview
     bool antialias = profile->property<bool>(Profile::AntiAliasFonts);
 
-    QFont font = profile->font();
-    font.setStyleStrategy(antialias ? QFont::PreferAntialias : QFont::NoAntialias);
+    QFont profileFont = profile->font();
+    profileFont.setStyleStrategy(antialias ? QFont::PreferAntialias : QFont::NoAntialias);
 
     _ui->fontPreviewLabel->installEventFilter(this);
-    _ui->fontPreviewLabel->setFont(font);
-    setFontSliderRange(font);
-    setFontSliderValue(font);
+    _ui->fontPreviewLabel->setFont(profileFont);
+    setFontSliderRange(profileFont);
+    setFontSliderValue(profileFont);
 
     connect(_ui->fontSizeSlider, SIGNAL(valueChanged(int)), this,
             SLOT(setFontSize(int)));
@@ -493,11 +493,11 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
 }
 void EditProfileDialog::setAntialiasText(bool enable)
 {
-    QFont font = _ui->fontPreviewLabel->font();
-    font.setStyleStrategy(enable ? QFont::PreferAntialias : QFont::NoAntialias);
+    QFont profileFont = _ui->fontPreviewLabel->font();
+    profileFont.setStyleStrategy(enable ? QFont::PreferAntialias : QFont::NoAntialias);
 
     // update preview to reflect text smoothing state
-    fontSelected(font);
+    fontSelected(profileFont);
     updateTempProfileProperty(Profile::AntiAliasFonts, enable);
 }
 void EditProfileDialog::setBoldIntense(bool enable)
@@ -572,8 +572,8 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     QStandardItem* selectedItem = 0;
 
     QList<QString> translatorNames = keyManager->allTranslators();
-    foreach ( const QString& name, translatorNames) {
-        const KeyboardTranslator* translator = keyManager->findTranslator(name);
+    foreach (const QString& translatorName, translatorNames) {
+        const KeyboardTranslator* translator = keyManager->findTranslator(translatorName);
 
         QStandardItem* item = new QStandardItem(translator->description());
         item->setData(QVariant::fromValue(translator), Qt::UserRole + 1);
@@ -592,22 +592,22 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
                 QItemSelectionModel::Select);
     }
 }
-bool EditProfileDialog::eventFilter(QObject* watched , QEvent* event)
+bool EditProfileDialog::eventFilter(QObject* watched , QEvent* aEvent)
 {
-    if (watched == _ui->colorSchemeList && event->type() == QEvent::Leave) {
+    if (watched == _ui->colorSchemeList && aEvent->type() == QEvent::Leave) {
         if (_tempProfile->isPropertySet(Profile::ColorScheme))
             preview(Profile::ColorScheme, _tempProfile->colorScheme());
         else
             unpreview(Profile::ColorScheme);
     }
-    if (watched == _ui->fontPreviewLabel && event->type() == QEvent::FontChange) {
+    if (watched == _ui->fontPreviewLabel && aEvent->type() == QEvent::FontChange) {
         const QFont& labelFont = _ui->fontPreviewLabel->font();
-        qreal size = labelFont.pointSizeF();
-        QString fontSize  = KGlobal::locale()->formatNumber(size, size == floor(size) ? 0 : 1);
+        qreal fontSizeF = labelFont.pointSizeF();
+        QString fontSize  = KGlobal::locale()->formatNumber(fontSizeF, fontSizeF == floor(fontSizeF) ? 0 : 1);
         _ui->fontPreviewLabel->setText(i18n("%1, size %2", labelFont.family(), fontSize));
     }
 
-    return KDialog::eventFilter(watched, event);
+    return KDialog::eventFilter(watched, aEvent);
 }
 void EditProfileDialog::unpreviewAll()
 {
@@ -625,22 +625,22 @@ void EditProfileDialog::unpreviewAll()
     if (!map.isEmpty())
         SessionManager::instance()->changeProfile(_profile, map, false);
 }
-void EditProfileDialog::unpreview(int property)
+void EditProfileDialog::unpreview(int aProperty)
 {
-    _delayedPreviewProperties.remove(property);
+    _delayedPreviewProperties.remove(aProperty);
 
-    if (!_previewedProperties.contains(property))
+    if (!_previewedProperties.contains(aProperty))
         return;
 
     QHash<Profile::Property, QVariant> map;
-    map.insert((Profile::Property)property, _previewedProperties[property]);
+    map.insert((Profile::Property)aProperty, _previewedProperties[aProperty]);
     SessionManager::instance()->changeProfile(_profile, map, false);
 
-    _previewedProperties.remove(property);
+    _previewedProperties.remove(aProperty);
 }
-void EditProfileDialog::delayedPreview(int property , const QVariant& value)
+void EditProfileDialog::delayedPreview(int aProperty , const QVariant& value)
 {
-    _delayedPreviewProperties.insert(property, value);
+    _delayedPreviewProperties.insert(aProperty, value);
 
     _delayedPreviewTimer->stop();
     _delayedPreviewTimer->start(300);
@@ -655,12 +655,12 @@ void EditProfileDialog::delayedPreviewActivate()
         preview(iter.key(), iter.value());
     }
 }
-void EditProfileDialog::preview(int property , const QVariant& value)
+void EditProfileDialog::preview(int aProperty , const QVariant& value)
 {
     QHash<Profile::Property, QVariant> map;
-    map.insert((Profile::Property)property, value);
+    map.insert((Profile::Property)aProperty, value);
 
-    _delayedPreviewProperties.remove(property);
+    _delayedPreviewProperties.remove(aProperty);
 
     const Profile::Ptr original = lookupProfile();
 
@@ -670,11 +670,11 @@ void EditProfileDialog::preview(int property , const QVariant& value)
     // TODO - Save the original values for each profile and use to unpreview properties
     ProfileGroup::Ptr group = original->asGroup();
     if (group && group->profiles().count() > 1 &&
-            original->property<QVariant>((Profile::Property)property).isNull())
+            original->property<QVariant>((Profile::Property)aProperty).isNull())
         return;
 
-    if (!_previewedProperties.contains(property)) {
-        _previewedProperties.insert(property , original->property<QVariant>((Profile::Property)property));
+    if (!_previewedProperties.contains(aProperty)) {
+        _previewedProperties.insert(aProperty , original->property<QVariant>((Profile::Property)aProperty));
     }
 
     // temporary change to color scheme
@@ -805,9 +805,9 @@ void EditProfileDialog::createTempProfile()
     _tempProfile->setHidden(true);
 }
 
-void EditProfileDialog::updateTempProfileProperty(Profile::Property property, const QVariant & value)
+void EditProfileDialog::updateTempProfileProperty(Profile::Property aProperty, const QVariant & value)
 {
-    _tempProfile->setProperty(property, value);
+    _tempProfile->setProperty(aProperty, value);
     updateButtonApply();
 }
 
@@ -819,18 +819,18 @@ void EditProfileDialog::updateButtonApply()
     while (iter.hasNext()) {
         iter.next();
 
-        Profile::Property property = iter.key();
+        Profile::Property aProperty = iter.key();
         QVariant value = iter.value() ;
 
         // for previewed property
-        if (_previewedProperties.contains(int(property))) {
-            if (value != _previewedProperties.value(int(property))) {
+        if (_previewedProperties.contains(int(aProperty))) {
+            if (value != _previewedProperties.value(int(aProperty))) {
                 userModified = true ;
                 break ;
             }
         }
         // for not-previewed property
-        else if ((value != _profile->property<QVariant>(property))) {
+        else if ((value != _profile->property<QVariant>(aProperty))) {
             userModified = true ;
             break ;
         }
@@ -1147,17 +1147,17 @@ void EditProfileDialog::toggleResizeWindow(bool enable)
 {
     updateTempProfileProperty(Profile::AllowProgramsToResizeWindow, enable);
 }
-void EditProfileDialog::fontSelected(const QFont& font)
+void EditProfileDialog::fontSelected(const QFont& aFont)
 {
-    QFont previewFont = font;
+    QFont previewFont = aFont;
 
-    setFontSliderRange(font);
-    setFontSliderValue(font);
+    setFontSliderRange(aFont);
+    setFontSliderValue(aFont);
 
     _ui->fontPreviewLabel->setFont(previewFont);
 
-    preview(Profile::Font, font);
-    updateTempProfileProperty(Profile::Font, font);
+    preview(Profile::Font, aFont);
+    updateTempProfileProperty(Profile::Font, aFont);
 
 }
 void EditProfileDialog::showFontDialog()
@@ -1196,23 +1196,23 @@ void EditProfileDialog::setFontSize(int pointSize)
     updateTempProfileProperty(Profile::Font, newFont);
 }
 
-void EditProfileDialog::setFontSliderRange(const QFont& font)
+void EditProfileDialog::setFontSliderRange(const QFont& aFont)
 {
     QSlider* slider = _ui->fontSizeSlider;
     // Minimum on the slider is 4,
     // Maximum is the greater of 2 times the current size and 14
-    slider->setRange(qMin(4 * 10, qRound(font.pointSizeF() * 10)),
-                     qMax(14 * 10, 2 * qRound(font.pointSize() * 10)));
+    slider->setRange(qMin(4 * 10, qRound(aFont.pointSizeF() * 10)),
+                     qMax(14 * 10, 2 * qRound(aFont.pointSize() * 10)));
 
 }
 
-void EditProfileDialog::setFontSliderValue(const QFont& font)
+void EditProfileDialog::setFontSliderValue(const QFont& aFont)
 {
-    _ui->fontSizeSlider->setValue(qRound(font.pointSize() * 10));
+    _ui->fontSizeSlider->setValue(qRound(aFont.pointSize() * 10));
 }
 
-ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* parent)
-    : QAbstractItemDelegate(parent)
+ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* aParent)
+    : QAbstractItemDelegate(aParent)
 {
 
 }
