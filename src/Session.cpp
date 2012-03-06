@@ -403,10 +403,10 @@ void Session::run()
 
     //check that everything is in place to run the session
     if (_program.isEmpty()) {
-        kWarning() << "Session::run() - program to run not set.";
+        kWarning() << "Program to run not set.";
     }
     if (_arguments.isEmpty()) {
-        kWarning() << "Session::run() - no command line arguments specified.";
+        kWarning() << "No command line arguments specified.";
     }
     if (_uniqueIdentifier.isNull()) {
         _uniqueIdentifier = createUuid();
