@@ -25,7 +25,7 @@
 #include <QtGui/QMenu>
 
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 using namespace Konsole;
 

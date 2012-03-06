@@ -31,7 +31,7 @@
 // KDE
 #include <KColorScheme>
 #include <KLineEdit>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KIcon>
 
 using namespace Konsole;

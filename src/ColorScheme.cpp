@@ -29,7 +29,7 @@
 // KDE
 #include <KColorScheme>
 #include <KConfig>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KConfigGroup>
 
 namespace {

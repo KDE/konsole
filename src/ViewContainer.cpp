@@ -39,7 +39,7 @@
 //#include <KColorDialog>
 #include <KColorScheme>
 #include <KColorUtils>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMenu>
 #include <KIcon>
 

@@ -35,7 +35,7 @@
 
 // KDE
 #include <KDebug>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KStandardDirs>
 
 using namespace Konsole;

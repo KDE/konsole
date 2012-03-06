@@ -38,7 +38,7 @@
 
 // KDE
 #include <KDebug>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KNotification>
 #include <KRun>
 #include <KShell>

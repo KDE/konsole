@@ -44,7 +44,7 @@
 #include <KColorScheme>
 #include <KCursor>
 #include <KDebug>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KNotification>
 #include <KGlobalSettings>
 #include <KIO/NetAccess>

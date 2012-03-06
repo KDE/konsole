@@ -31,7 +31,7 @@
 #include <KActionMenu>
 #include <KActionCollection>
 #include <KIcon>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMenu>
 #include <KMessageBox>
 #include <KRun>

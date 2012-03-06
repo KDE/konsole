@@ -33,7 +33,7 @@
 #include <KConfigGroup>
 #include <KGlobal>
 #include <KGlobalSettings>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KDebug>
 #include <KStandardDirs>
 

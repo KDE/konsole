@@ -28,7 +28,7 @@
 
 // KDE
 #include <KAcceleratorManager>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KAction>
 #include <KActionCollection>
 #include <KXMLGUIFactory>

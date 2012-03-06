@@ -31,7 +31,7 @@
 #include <QtCore/QTextCodec>
 
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KIcon>
 #include <KConfig>
 #include <KGlobal>

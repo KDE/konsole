@@ -28,7 +28,7 @@
 #include <QtCore/QTextStream>
 
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KRun>
 
 // Konsole
