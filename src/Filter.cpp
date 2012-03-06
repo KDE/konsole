@@ -392,6 +392,8 @@ UrlFilter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int end
 {
     setType(Link);
 }
+
+// TODO: Correct this if we really want link tooltips; otherwise remove
 QString UrlFilter::HotSpot::tooltip() const
 {
     const QString url = capturedTexts().first();
