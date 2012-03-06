@@ -36,8 +36,8 @@
 
 using namespace Konsole;
 
-HistorySizeDialog::HistorySizeDialog(QWidget* parent)
-    :  KDialog(parent)
+HistorySizeDialog::HistorySizeDialog(QWidget* aParent)
+    :  KDialog(aParent)
     ,  _noHistoryButton(0)
     ,  _fixedHistoryButton(0)
     ,  _unlimitedHistoryButton(0)
@@ -102,13 +102,13 @@ void HistorySizeDialog::emitOptionsChanged()
     emit optionsChanged(mode() , lineCount());
 }
 
-void HistorySizeDialog::setMode(HistoryMode mode)
+void HistorySizeDialog::setMode(HistoryMode historyMode)
 {
-    if (mode == NoHistory) {
+    if (historyMode == NoHistory) {
         _noHistoryButton->setChecked(true);
-    } else if (mode == FixedSizeHistory) {
+    } else if (historyMode == FixedSizeHistory) {
         _fixedHistoryButton->setChecked(true);
-    } else if (mode == UnlimitedHistory) {
+    } else if (historyMode == UnlimitedHistory) {
         _unlimitedHistoryButton->setChecked(true);
     }
 
