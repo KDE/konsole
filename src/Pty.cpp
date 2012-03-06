@@ -41,14 +41,14 @@
 
 using Konsole::Pty;
 
-Pty::Pty(int masterFd, QObject* parent)
-    : KPtyProcess(masterFd, parent)
+Pty::Pty(int masterFd, QObject* aParent)
+    : KPtyProcess(masterFd, aParent)
 {
     init();
 }
 
-Pty::Pty(QObject* parent)
-    : KPtyProcess(parent)
+Pty::Pty(QObject* aParent)
+    : KPtyProcess(aParent)
 {
     init();
 }
@@ -148,14 +148,14 @@ void Pty::setUtf8Mode(bool enable)
 #endif
 }
 
-void Pty::setEraseChar(char eraseChar)
+void Pty::setEraseChar(char eChar)
 {
-    _eraseChar = eraseChar;
+    _eraseChar = eChar;
 
     if (pty()->masterFd() >= 0) {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        ttmode.c_cc[VERASE] = eraseChar;
+        ttmode.c_cc[VERASE] = eChar;
         if (!pty()->tcSetAttr(&ttmode))
             kWarning() << "Unable to set terminal attributes.";
     }
@@ -189,17 +189,17 @@ void Pty::setInitialWorkingDirectory(const QString& dir)
         setEnv("PWD", pwd);
 }
 
-void Pty::addEnvironmentVariables(const QStringList& environment)
+void Pty::addEnvironmentVariables(const QStringList& environmentVariables)
 {
     bool isTermEnvAdded = false;
 
-    foreach ( const QString& pair, environment ) {
+    foreach ( const QString& pair, environmentVariables ) {
         // split on the first '=' character
-        const int pos = pair.indexOf('=');
+        const int separator = pair.indexOf('=');
 
-        if (pos >= 0) {
-            QString variable = pair.left(pos);
-            QString value = pair.mid(pos + 1);
+        if (separator >= 0) {
+            QString variable = pair.left(separator);
+            QString value = pair.mid(separator + 1);
 
             setEnv(variable, value);
 
@@ -215,9 +215,9 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
     }
 }
 
-int Pty::start(const QString& program,
+int Pty::start(const QString& programName,
                const QStringList& programArguments,
-               const QStringList& environment,
+               const QStringList& environmentList,
                bool addToUtmp)
 {
     clearProgram();
@@ -226,9 +226,9 @@ int Pty::start(const QString& program,
     // name of the program to execute, so create a list consisting of all
     // but the first argument to pass to setProgram()
     Q_ASSERT(programArguments.count() >= 1);
-    setProgram(program.toLatin1(), programArguments.mid(1));
+    setProgram(programName.toLatin1(), programArguments.mid(1));
 
-    addEnvironmentVariables(environment);
+    addEnvironmentVariables(environmentList);
 
     // unless the LANGUAGE environment variable has been set explicitly
     // set it to a null string
@@ -277,10 +277,10 @@ void Pty::closePty()
 
 int Pty::foregroundProcessGroup() const
 {
-    int pid = tcgetpgrp(pty()->masterFd());
+    int foregroundPid = tcgetpgrp(pty()->masterFd());
 
-    if (pid != -1) {
-        return pid;
+    if (foregroundPid != -1) {
+        return foregroundPid;
     }
 
     return 0;
