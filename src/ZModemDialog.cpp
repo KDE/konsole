@@ -25,8 +25,8 @@
 
 using Konsole::ZModemDialog;
 
-ZModemDialog::ZModemDialog(QWidget* parent, bool modal, const QString& caption)
-    : KDialog(parent)
+ZModemDialog::ZModemDialog(QWidget* aParent, bool modal, const QString& caption)
+    : KDialog(aParent)
 {
     setObjectName(QLatin1String("zmodem_progress"));
     setModal(modal);
@@ -49,10 +49,10 @@ ZModemDialog::ZModemDialog(QWidget* parent, bool modal, const QString& caption)
 
 void ZModemDialog::addProgressText(const QString& text)
 {
-    QTextCursor cursor = _textEdit->textCursor();
+    QTextCursor currentCursor = _textEdit->textCursor();
 
-    cursor.insertBlock();
-    cursor.insertText(text);
+    currentCursor.insertBlock();
+    currentCursor.insertText(text);
 }
 
 void ZModemDialog::transferDone()
