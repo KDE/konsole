@@ -22,10 +22,6 @@
 #include "Pty.h"
 
 // System
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <errno.h>
 #include <termios.h>
 #include <signal.h>
 
@@ -33,9 +29,7 @@
 #include <QtCore/QStringList>
 
 // KDE
-#include <KLocale>
 #include <KDebug>
-#include <KPty>
 #include <KPtyDevice>
 #include <kde_file.h>
 
