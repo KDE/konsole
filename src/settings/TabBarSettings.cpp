@@ -23,7 +23,7 @@
 
 using namespace Konsole;
 
-TabBarSettings::TabBarSettings(QWidget* parent) : QWidget(parent)
+TabBarSettings::TabBarSettings(QWidget* aParent) : QWidget(aParent)
 {
     setupUi(this);
 }
