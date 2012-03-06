@@ -253,10 +253,11 @@ int Pty::start(const QString& program,
 
     KProcess::start();
 
-    if (!waitForStarted())
+    if (waitForStarted()) {
+        return 0;
+    } else {
         return -1;
-
-    return 0;
+    }
 }
 
 void Pty::setWriteable(bool writeable)
