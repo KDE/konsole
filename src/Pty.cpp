@@ -41,6 +41,51 @@
 
 using Konsole::Pty;
 
+Pty::Pty(int masterFd, QObject* parent)
+    : KPtyProcess(masterFd, parent)
+{
+    init();
+}
+
+Pty::Pty(QObject* parent)
+    : KPtyProcess(parent)
+{
+    init();
+}
+
+void Pty::init()
+{
+    _windowColumns = 0;
+    _windowLines   = 0;
+    _eraseChar     = 0;
+    _xonXoff       = true;
+    _utf8          = true;
+
+    setPtyChannels(KPtyProcess::AllChannels);
+    connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
+}
+
+Pty::~Pty()
+{
+}
+
+void Pty::sendData(const char* data, int length)
+{
+    if (length == 0)
+        return;
+
+    if (!pty()->write(data, length)) {
+        kWarning() << "Could not send input data to terminal process.";
+        return;
+    }
+}
+
+void Pty::dataReceived()
+{
+    QByteArray data = pty()->readAll();
+    emit receivedData(data.constData(), data.count());
+}
+
 void Pty::setWindowSize(int lines, int columns)
 {
     _windowColumns = columns;
@@ -49,6 +94,7 @@ void Pty::setWindowSize(int lines, int columns)
     if (pty()->masterFd() >= 0)
         pty()->setWinSize(lines, columns);
 }
+
 QSize Pty::windowSize() const
 {
     return QSize(_windowColumns, _windowLines);
@@ -70,6 +116,7 @@ void Pty::setFlowControlEnabled(bool enable)
             kWarning() << "Unable to set terminal attributes.";
     }
 }
+
 bool Pty::flowControlEnabled() const
 {
     if (pty()->masterFd() >= 0) {
@@ -237,49 +284,6 @@ void Pty::setWriteable(bool writeable)
         KDE::chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP);
     else
         KDE::chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP | S_IWOTH));
-}
-
-Pty::Pty(int masterFd, QObject* parent)
-    : KPtyProcess(masterFd, parent)
-{
-    init();
-}
-Pty::Pty(QObject* parent)
-    : KPtyProcess(parent)
-{
-    init();
-}
-void Pty::init()
-{
-    _windowColumns = 0;
-    _windowLines   = 0;
-    _eraseChar     = 0;
-    _xonXoff       = true;
-    _utf8          = true;
-
-    setPtyChannels(KPtyProcess::AllChannels);
-    connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
-}
-
-Pty::~Pty()
-{
-}
-
-void Pty::sendData(const char* data, int length)
-{
-    if (length == 0)
-        return;
-
-    if (!pty()->write(data, length)) {
-        kWarning() << "Pty::doSendJobs - Could not send input data to terminal process.";
-        return;
-    }
-}
-
-void Pty::dataReceived()
-{
-    QByteArray data = pty()->readAll();
-    emit receivedData(data.constData(), data.count());
 }
 
 int Pty::foregroundProcessGroup() const
