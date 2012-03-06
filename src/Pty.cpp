@@ -245,28 +245,11 @@ int Pty::start(const QString& program,
 
     setUseUtmp(addToUtmp);
 
-    struct ::termios ttmode;
-    pty()->tcGetAttr(&ttmode);
+    setFlowControlEnabled(_xonXoff);
+    setUtf8Mode(_utf8);
+    setEraseChar(_eraseChar);
 
-    if (_xonXoff)
-        ttmode.c_iflag |= (IXOFF | IXON);
-    else
-        ttmode.c_iflag &= ~(IXOFF | IXON);
-
-#ifdef IUTF8 // XXX not a reasonable place to check it.
-    if (_utf8)
-        ttmode.c_iflag |= IUTF8;
-    else
-        ttmode.c_iflag &= ~IUTF8;
-#endif
-
-    if (_eraseChar != 0)
-        ttmode.c_cc[VERASE] = _eraseChar;
-
-    if (!pty()->tcSetAttr(&ttmode))
-        kWarning() << "Unable to set terminal attributes.";
-
-    pty()->setWinSize(_windowLines, _windowColumns);
+    setWindowSize(_windowLines, _windowColumns);
 
     KProcess::start();
 
