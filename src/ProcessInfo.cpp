@@ -63,7 +63,7 @@
 
 using namespace Konsole;
 
-ProcessInfo::ProcessInfo(int pid , bool enableEnvironmentRead)
+ProcessInfo::ProcessInfo(int aPid , bool enableEnvironmentRead)
     : _fields(ARGUMENTS | ENVIRONMENT)   // arguments and environments
     // are currently always valid,
     // they just return an empty
@@ -72,7 +72,7 @@ ProcessInfo::ProcessInfo(int pid , bool enableEnvironmentRead)
     // or environment bindings
     // have been explicitly set
     , _enableEnvironmentRead(enableEnvironmentRead)
-    , _pid(pid)
+    , _pid(aPid)
     , _parentPid(0)
     , _foregroundPid(0)
     , _userId(0)
@@ -251,9 +251,9 @@ QString ProcessInfo::userHomeDir() const
     return _userHomeDir;
 }
 
-void ProcessInfo::setPid(int pid)
+void ProcessInfo::setPid(int aPid)
 {
-    _pid = pid;
+    _pid = aPid;
     _fields |= PROCESS_ID;
 }
 
@@ -278,14 +278,14 @@ void ProcessInfo::setUserHomeDir()
         _userHomeDir = QDir::homePath();
 }
 
-void ProcessInfo::setParentPid(int pid)
+void ProcessInfo::setParentPid(int aPid)
 {
-    _parentPid = pid;
+    _parentPid = aPid;
     _fields |= PARENT_PID;
 }
-void ProcessInfo::setForegroundPid(int pid)
+void ProcessInfo::setForegroundPid(int aPid)
 {
-    _foregroundPid = pid;
+    _foregroundPid = aPid;
     _fields |= FOREGROUND_PID;
 }
 
@@ -341,8 +341,8 @@ void ProcessInfo::setFileError(QFile::FileError error)
 // implementations of the UnixProcessInfo abstract class.
 //
 
-NullProcessInfo::NullProcessInfo(int pid, bool enableEnvironmentRead)
-    : ProcessInfo(pid, enableEnvironmentRead)
+NullProcessInfo::NullProcessInfo(int aPid, bool enableEnvironmentRead)
+    : ProcessInfo(aPid, enableEnvironmentRead)
 {
 }
 
@@ -355,23 +355,23 @@ void NullProcessInfo::readUserName()
 {
 }
 
-UnixProcessInfo::UnixProcessInfo(int pid, bool enableEnvironmentRead)
-    : ProcessInfo(pid, enableEnvironmentRead)
+UnixProcessInfo::UnixProcessInfo(int aPid, bool enableEnvironmentRead)
+    : ProcessInfo(aPid, enableEnvironmentRead)
 {
 }
 
-bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
+bool UnixProcessInfo::readProcessInfo(int aPid , bool enableEnvironmentRead)
 {
     // prevent _arguments from growing longer and longer each time this
     // method is called.
     clearArguments();
 
-    bool ok = readProcInfo(pid);
+    bool ok = readProcInfo(aPid);
     if (ok) {
-        ok |= readArguments(pid);
-        ok |= readCurrentDir(pid);
+        ok |= readArguments(aPid);
+        ok |= readCurrentDir(aPid);
         if (enableEnvironmentRead) {
-            ok |= readEnvironment(pid);
+            ok |= readEnvironment(aPid);
         }
     }
     return ok;
@@ -410,12 +410,12 @@ void UnixProcessInfo::readUserName()
 class LinuxProcessInfo : public UnixProcessInfo
 {
 public:
-    LinuxProcessInfo(int pid, bool env) :
-        UnixProcessInfo(pid, env) {
+    LinuxProcessInfo(int aPid, bool env) :
+        UnixProcessInfo(aPid, env) {
     }
 
 private:
-    virtual bool readProcInfo(int pid) {
+    virtual bool readProcInfo(int aPid) {
         // indicies of various fields within the process status file which
         // contain various information about the process
         const int PARENT_PID_FIELD = 3;
@@ -431,7 +431,7 @@ private:
 
         // For user id read process status file ( /proc/<pid>/status )
         //  Can not use getuid() due to it does not work for 'su'
-        QFile statusInfo(QString("/proc/%1/status").arg(pid));
+        QFile statusInfo(QString("/proc/%1/status").arg(aPid));
         if (statusInfo.open(QIODevice::ReadOnly)) {
             QTextStream stream(&statusInfo);
             QString statusLine;
@@ -468,7 +468,7 @@ private:
         //
         // FIELD FIELD (FIELD WITH SPACES) FIELD FIELD
         //
-        QFile processInfo(QString("/proc/%1/stat").arg(pid));
+        QFile processInfo(QString("/proc/%1/stat").arg(aPid));
         if (processInfo.open(QIODevice::ReadOnly)) {
             QTextStream stream(&processInfo);
             const QString& data = stream.readAll();
@@ -521,17 +521,17 @@ private:
             setName(processNameString);
 
         // update object state
-        setPid(pid);
+        setPid(aPid);
 
         return ok;
     }
 
-    virtual bool readArguments(int pid) {
+    virtual bool readArguments(int aPid) {
         // read command-line arguments file found at /proc/<pid>/cmdline
         // the expected format is a list of strings delimited by null characters,
         // and ending in a double null character pair.
 
-        QFile argumentsFile(QString("/proc/%1/cmdline").arg(pid));
+        QFile argumentsFile(QString("/proc/%1/cmdline").arg(aPid));
         if (argumentsFile.open(QIODevice::ReadOnly)) {
             QTextStream stream(&argumentsFile);
             const QString& data = stream.readAll();
@@ -549,8 +549,8 @@ private:
         return true;
     }
 
-    virtual bool readCurrentDir(int pid) {
-        QFileInfo info(QString("/proc/%1/cwd").arg(pid));
+    virtual bool readCurrentDir(int aPid) {
+        QFileInfo info(QString("/proc/%1/cwd").arg(aPid));
 
         const bool readable = info.isReadable();
 
@@ -567,12 +567,12 @@ private:
         }
     }
 
-    virtual bool readEnvironment(int pid) {
+    virtual bool readEnvironment(int aPid) {
         // read environment bindings file found at /proc/<pid>/environ
         // the expected format is a list of KEY=VALUE strings delimited by null
         // characters and ending in a double null character pair.
 
-        QFile environmentFile(QString("/proc/%1/environ").arg(pid));
+        QFile environmentFile(QString("/proc/%1/environ").arg(aPid));
         if (environmentFile.open(QIODevice::ReadOnly)) {
             QTextStream stream(&environmentFile);
             const QString& data = stream.readAll();
@@ -604,12 +604,12 @@ private:
 class FreeBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    FreeBSDProcessInfo(int pid, bool readEnvironment) :
-        UnixProcessInfo(pid, readEnvironment) {
+    FreeBSDProcessInfo(int aPid, bool readEnvironment) :
+        UnixProcessInfo(aPid, readEnvironment) {
     }
 
 private:
-    virtual bool readProcInfo(int pid) {
+    virtual bool readProcInfo(int aPid) {
         int managementInfoBase[4];
         size_t mibLength;
         struct kinfo_proc* kInfoProc;
@@ -617,7 +617,7 @@ private:
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
         managementInfoBase[2] = KERN_PROC_PID;
-        managementInfoBase[3] = pid;
+        managementInfoBase[3] = aPid;
 
         if (sysctl(managementInfoBase, 4, NULL, &mibLength, NULL, 0) == -1)
             return false;
@@ -649,7 +649,7 @@ private:
         return true;
     }
 
-    virtual bool readArguments(int pid) {
+    virtual bool readArguments(int aPid) {
         char args[ARG_MAX];
         int managementInfoBase[4];
         size_t len;
@@ -657,7 +657,7 @@ private:
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
         managementInfoBase[2] = KERN_PROC_PID;
-        managementInfoBase[3] = pid;
+        managementInfoBase[3] = aPid;
 
         len = sizeof(args);
         if (sysctl(managementInfoBase, 4, args, &len, NULL, 0) == -1)
@@ -672,12 +672,12 @@ private:
         return true;
     }
 
-    virtual bool readEnvironment(int pid) {
+    virtual bool readEnvironment(int aPid) {
         // Not supported in FreeBSD?
         return false;
     }
 
-    virtual bool readCurrentDir(int pid) {
+    virtual bool readCurrentDir(int aPid) {
 #if defined(__DragonFly__)
         char buf[PATH_MAX];
         int managementInfoBase[4];
@@ -686,7 +686,7 @@ private:
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
         managementInfoBase[2] = KERN_PROC_CWD;
-        managementInfoBase[3] = pid;
+        managementInfoBase[3] = aPid;
 
         len = sizeof(buf);
         if (sysctl(managementInfoBase, 4, buf, &len, NULL, 0) == -1)
@@ -699,7 +699,7 @@ private:
         int numrecords;
         struct kinfo_file* info = 0;
 
-        info = kinfo_getfile(pid, &numrecords);
+        info = kinfo_getfile(aPid, &numrecords);
 
         if (!info)
             return false;
@@ -724,12 +724,12 @@ private:
 class MacProcessInfo : public UnixProcessInfo
 {
 public:
-    MacProcessInfo(int pid, bool env) :
-        UnixProcessInfo(pid, env) {
+    MacProcessInfo(int aPid, bool env) :
+        UnixProcessInfo(aPid, env) {
     }
 
 private:
-    virtual bool readProcInfo(int pid) {
+    virtual bool readProcInfo(int aPid) {
         int managementInfoBase[4];
         size_t mibLength;
         struct kinfo_proc* kInfoProc;
@@ -739,7 +739,7 @@ private:
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
         managementInfoBase[2] = KERN_PROC_PID;
-        managementInfoBase[3] = pid;
+        managementInfoBase[3] = aPid;
 
         if (sysctl(managementInfoBase, 4, NULL, &mibLength, NULL, 0) == -1) {
             return false;
@@ -782,21 +782,21 @@ private:
         return true;
     }
 
-    virtual bool readArguments(int pid) {
-        Q_UNUSED(pid);
+    virtual bool readArguments(int aPid) {
+        Q_UNUSED(aPid);
         return false;
     }
-    virtual bool readCurrentDir(int pid) {
+    virtual bool readCurrentDir(int aPid) {
         struct proc_vnodepathinfo vpi;
-        const int nb = proc_pidinfo(pid, PROC_PIDVNODEPATHINFO, 0, &vpi, sizeof(vpi));
+        const int nb = proc_pidinfo(aPid, PROC_PIDVNODEPATHINFO, 0, &vpi, sizeof(vpi));
         if (nb == sizeof(vpi)) {
             setCurrentDir(QString(vpi.pvi_cdir.vip_path));
             return true;
         }
         return false;
     }
-    virtual bool readEnvironment(int pid) {
-        Q_UNUSED(pid);
+    virtual bool readEnvironment(int aPid) {
+        Q_UNUSED(aPid);
         return false;
     }
 } ;
@@ -832,12 +832,12 @@ static const int PRARGSZ = 1;
 class SolarisProcessInfo : public UnixProcessInfo
 {
 public:
-    SolarisProcessInfo(int pid, bool readEnvironment)
-        : UnixProcessInfo(pid, readEnvironment) {
+    SolarisProcessInfo(int aPid, bool readEnvironment)
+        : UnixProcessInfo(aPid, readEnvironment) {
     }
 private:
-    virtual bool readProcInfo(int pid) {
-        QFile psinfo(QString("/proc/%1/psinfo").arg(pid));
+    virtual bool readProcInfo(int aPid) {
+        QFile psinfo(QString("/proc/%1/psinfo").arg(aPid));
         if (psinfo.open(QIODevice::ReadOnly)) {
             struct psinfo info;
             if (psinfo.read((char *)&info, sizeof(info)) != sizeof(info)) {
@@ -847,7 +847,7 @@ private:
             setParentPid(info.pr_ppid);
             setForegroundPid(info.pr_pgid);
             setName(info.pr_fname);
-            setPid(pid);
+            setPid(aPid);
 
             // Bogus, because we're treating the arguments as one single string
             info.pr_psargs[PRARGSZ - 1] = 0;
@@ -866,8 +866,8 @@ private:
         return false;
     }
 
-    virtual bool readCurrentDir(int pid) {
-        QFileInfo info(QString("/proc/%1/path/cwd").arg(pid));
+    virtual bool readCurrentDir(int aPid) {
+        QFileInfo info(QString("/proc/%1/path/cwd").arg(aPid));
         const bool readable = info.isReadable();
 
         if (readable && info.isSymLink()) {
@@ -1030,18 +1030,18 @@ QString SSHProcessInfo::format(const QString& input) const
     return output;
 }
 
-ProcessInfo* ProcessInfo::newInstance(int pid, bool enableEnvironmentRead)
+ProcessInfo* ProcessInfo::newInstance(int aPid, bool enableEnvironmentRead)
 {
 #ifdef Q_OS_LINUX
-    return new LinuxProcessInfo(pid, enableEnvironmentRead);
+    return new LinuxProcessInfo(aPid, enableEnvironmentRead);
 #elif defined(Q_OS_SOLARIS)
-    return new SolarisProcessInfo(pid, enableEnvironmentRead);
+    return new SolarisProcessInfo(aPid, enableEnvironmentRead);
 #elif defined(Q_OS_MAC)
-    return new MacProcessInfo(pid, enableEnvironmentRead);
+    return new MacProcessInfo(aPid, enableEnvironmentRead);
 #elif defined(Q_OS_FREEBSD)
-    return new FreeBSDProcessInfo(pid, enableEnvironmentRead);
+    return new FreeBSDProcessInfo(aPid, enableEnvironmentRead);
 #else
-    return new NullProcessInfo(pid, enableEnvironmentRead);
+    return new NullProcessInfo(aPid, enableEnvironmentRead);
 #endif
 }
 
