@@ -1828,12 +1828,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
                         (spot->endLine() + 1)*_fontHeight);
             _mouseOverHotspotArea |= r;
         }
-        // display tooltips when mousing over links
-        // TODO: Extend this to work with filter types other than links
-        const QString& tooltip = spot->tooltip();
-        if (!tooltip.isEmpty()) {
-            QToolTip::showText(mapToGlobal(ev->pos()) , tooltip , this , _mouseOverHotspotArea.boundingRect());
-        }
 
         update(_mouseOverHotspotArea | previousHotspotArea);
     } else if (!_mouseOverHotspotArea.isEmpty()) {
