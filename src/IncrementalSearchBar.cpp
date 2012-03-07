@@ -36,22 +36,22 @@
 
 using namespace Konsole;
 
-IncrementalSearchBar::IncrementalSearchBar(QWidget* parent)
-    : QWidget(parent)
+IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
+    : QWidget(aParent)
     , _foundMatch(false)
     , _searchEdit(0)
     , _caseSensitive(0)
     , _regExpression(0)
     , _highlightMatches(0)
 {
-    QHBoxLayout* layout = new QHBoxLayout(this);
+    QHBoxLayout* barLayout = new QHBoxLayout(this);
 
-    QToolButton* close = new QToolButton(this);
-    close->setObjectName(QLatin1String("close-button"));
-    close->setToolTip(i18n("Close the search bar"));
-    close->setAutoRaise(true);
-    close->setIcon(KIcon("dialog-close"));
-    connect(close , SIGNAL(clicked()) , this , SIGNAL(closeClicked()));
+    QToolButton* closeButton = new QToolButton(this);
+    closeButton->setObjectName(QLatin1String("close-button"));
+    closeButton->setToolTip(i18n("Close the search bar"));
+    closeButton->setAutoRaise(true);
+    closeButton->setIcon(KIcon("dialog-close"));
+    connect(closeButton , SIGNAL(clicked()) , this , SIGNAL(closeClicked()));
 
     QLabel* findLabel = new QLabel(i18n("Find:"), this);
     _searchEdit = new KLineEdit(this);
@@ -100,12 +100,12 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* parent)
     optionsButton->setToolButtonStyle(Qt::ToolButtonTextOnly);
     optionsButton->setToolTip(i18n("Display the options menu"));
 
-    layout->addWidget(close);
-    layout->addWidget(findLabel);
-    layout->addWidget(_searchEdit);
-    layout->addWidget(findNext);
-    layout->addWidget(findPrev);
-    layout->addWidget(optionsButton);
+    barLayout->addWidget(closeButton);
+    barLayout->addWidget(findLabel);
+    barLayout->addWidget(_searchEdit);
+    barLayout->addWidget(findNext);
+    barLayout->addWidget(findPrev);
+    barLayout->addWidget(optionsButton);
 
     // Fill the options menu
     QMenu* optionsMenu = new QMenu(this);
@@ -129,11 +129,11 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* parent)
     connect(_highlightMatches, SIGNAL(toggled(bool)),
             this, SIGNAL(highlightMatchesToggled(bool)));
 
-    layout->addStretch();
+    barLayout->addStretch();
 
-    layout->setContentsMargins(4, 4, 4, 4);
+    barLayout->setContentsMargins(4, 4, 4, 4);
 
-    setLayout(layout);
+    setLayout(barLayout);
 }
 void IncrementalSearchBar::notifySearchChanged()
 {
@@ -144,11 +144,11 @@ QString IncrementalSearchBar::searchText()
     return _searchEdit->text();
 }
 
-bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* event)
+bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* aEvent)
 {
     if (watched == _searchEdit) {
-        if (event->type() == QEvent::KeyPress) {
-            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+        if (aEvent->type() == QEvent::KeyPress) {
+            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(aEvent);
 
             if (keyEvent->key() == Qt::Key_Escape) {
                 emit closeClicked();
@@ -157,7 +157,7 @@ bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* event)
         }
     }
 
-    return QWidget::eventFilter(watched, event);
+    return QWidget::eventFilter(watched, aEvent);
 }
 
 void IncrementalSearchBar::setVisible(bool visible)
@@ -176,10 +176,10 @@ void IncrementalSearchBar::setFoundMatch(bool match)
     if (!match && !_searchEdit->text().isEmpty()) {
         KStatefulBrush backgroundBrush(KColorScheme::View, KColorScheme::NegativeBackground);
 
-        QString styleSheet = QString("QLineEdit{ background-color:%1 }")
+        QString matchStyleSheet = QString("QLineEdit{ background-color:%1 }")
                              .arg(backgroundBrush.brush(_searchEdit).color().name());
 
-        _searchEdit->setStyleSheet(styleSheet);
+        _searchEdit->setStyleSheet(matchStyleSheet);
     } else {
         _searchEdit->setStyleSheet(QString());
     }
