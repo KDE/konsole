@@ -21,7 +21,7 @@
 #include "IncrementalSearchBar.h"
 
 // Qt
-#include <QtGui/QVBoxLayout>
+#include <QtGui/QHBoxLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QKeyEvent>
 #include <QtCore/QTimer>
