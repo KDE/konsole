@@ -317,10 +317,10 @@ void SessionController::openUrl(const KUrl& url)
 
 void SessionController::setupPrimaryScreenSpecificActions(bool use)
 {
-    KActionCollection * collection = actionCollection() ;
-    QAction * clearAction = collection->action("clear-history");
-    QAction * resetAction = collection->action("clear-history-and-reset");
-    QAction * selectAllAction = collection->action("select-all");
+    KActionCollection* collection = actionCollection() ;
+    QAction* clearAction = collection->action("clear-history");
+    QAction* resetAction = collection->action("clear-history-and-reset");
+    QAction* selectAllAction = collection->action("select-all");
 
     // these actions are meaningful only when primary screen is used.
     clearAction->setEnabled(use);
@@ -328,10 +328,10 @@ void SessionController::setupPrimaryScreenSpecificActions(bool use)
     selectAllAction->setEnabled(use);
 }
 
-void SessionController::updateCopyAction(const QString & text)
+void SessionController::updateCopyAction(const QString& text)
 {
-    KActionCollection * collection = actionCollection() ;
-    QAction * copyAction = collection->action("edit_copy");
+    KActionCollection* collection = actionCollection() ;
+    QAction* copyAction = collection->action("edit_copy");
 
     // copy action is meaningful only when some text is selcted.
     copyAction->setEnabled(!text.isEmpty());
