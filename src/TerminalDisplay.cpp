@@ -50,7 +50,6 @@
 #include <KIO/NetAccess>
 #include <konq_operations.h>
 #include <KFileItem>
-#include <KLocalizedString>
 
 // Konsole
 #include "Filter.h"
