@@ -89,6 +89,19 @@ class KONSOLEPRIVATE_EXPORT SessionController : public ViewProperties , public K
     Q_OBJECT
 
 public:
+
+    enum CopyInputToEnum {
+
+        /** Copy keyboard input to all the other tabs in current window */
+        CopyInputToAllTabsMode = 0 ,
+
+        /** Copy keyboard input to user selected tabs in current window */
+        CopyInputToSelectedTabsMode = 1 ,
+
+        /** Do not copy keyboard input to other tabs */
+        CopyInputToNoneMode = 2
+    };
+
     /**
      * Constructs a new SessionController which operates on @p session and @p view.
      */
@@ -202,6 +215,7 @@ private slots:
     void paste();
     void selectAll();
     void pasteFromXSelection(); // shortcut only
+    void copyInputActionsTriggered(QAction* action);
     void copyInputToAllTabs();
     void copyInputToSelectedTabs();
     void copyInputToNone();
@@ -281,9 +295,7 @@ private:
     UrlFilter*      _viewUrlFilter;
     RegExpFilter*   _searchFilter;
 
-    KAction* _copyToAllTabsAction;
-    KAction* _copyToSelectedAction;
-    KAction* _copyToNoneAction;
+    KAction* _copyInputToAllTabsAction;
 
     KAction* _searchToggleAction;
     KAction* _findNextAction;

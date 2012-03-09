@@ -38,6 +38,7 @@
 #include <KShell>
 #include <KStandardDirs>
 #include <KToggleAction>
+#include <KSelectAction>
 #include <KUrl>
 #include <KXmlGuiWindow>
 #include <KXMLGUIFactory>
@@ -66,7 +67,6 @@
 #include <KJob>
 #include "TerminalCharacterDecoder.h"
 
-
 using namespace Konsole;
 
 // TODO - Replace the icon choices below when suitable icons for silence and
@@ -88,7 +88,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _previousState(-1)
     , _viewUrlFilter(0)
     , _searchFilter(0)
-    , _copyToAllTabsAction(0)
+    , _copyInputToAllTabsAction(0)
     , _searchToggleAction(0)
     , _findNextAction(0)
     , _findPreviousAction(0)
@@ -354,7 +354,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             connect(_session, SIGNAL(bellRequest(QString)),
                     _view, SLOT(bell(QString)));
 
-            if(_copyToAllTabsAction && _copyToAllTabsAction->isChecked()) {
+            if(_copyInputToAllTabsAction && _copyInputToAllTabsAction->isChecked()) {
                 // A session with "Copy To All Tabs" has come into focus:
                 // Ensure that newly created sessions are included in _copyToGroup!
                 copyInputToAllTabs();
@@ -511,23 +511,34 @@ void SessionController::setupExtraActions()
     action->setIcon(KIcon("edit-rename"));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_S));
 
-    // Copy Input To -> All Tabs in Current Window
-    _copyToAllTabsAction = collection->addAction("copy-input-to-all-tabs", this, SLOT(copyInputToAllTabs()));
-    _copyToAllTabsAction->setText(i18n("&All Tabs in Current Window"));
-    _copyToAllTabsAction->setCheckable(true);
+    // Copy input to ==> all tabs
+    KToggleAction* copyInputToAllTabsAction = collection->add<KToggleAction>("copy-input-to-all-tabs");
+    copyInputToAllTabsAction->setText(i18n("&All Tabs in Current Window"));
+    copyInputToAllTabsAction->setData(CopyInputToAllTabsMode);
+    // this action is also used in other place, so remember it
+    _copyInputToAllTabsAction = copyInputToAllTabsAction;
 
-    // Copy Input To -> Select Tabs
-    _copyToSelectedAction = collection->addAction("copy-input-to-selected-tabs", this, SLOT(copyInputToSelectedTabs()));
-    _copyToSelectedAction->setText(i18n("&Select Tabs..."));
-    _copyToSelectedAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Period));
-    _copyToSelectedAction->setCheckable(true);
+    // Copy input to ==> selected tabs
+    KToggleAction* copyInputToSelectedTabsAction = collection->add<KToggleAction>("copy-input-to-selected-tabs");
+    copyInputToSelectedTabsAction->setText(i18n("&Select Tabs..."));
+    copyInputToSelectedTabsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Period));
+    copyInputToSelectedTabsAction->setData(CopyInputToSelectedTabsMode);
 
-    // Copy Input To -> None
-    _copyToNoneAction = collection->addAction("copy-input-to-none", this, SLOT(copyInputToNone()));
-    _copyToNoneAction->setText(i18nc("@action:inmenu Do not select any tabs", "&None"));
-    _copyToNoneAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Slash));
-    _copyToNoneAction->setCheckable(true);
-    _copyToNoneAction->setChecked(true);
+    // Copy input to ==> none
+    KToggleAction* copyInputToNoneAction = collection->add<KToggleAction>("copy-input-to-none");
+    copyInputToNoneAction->setText(i18nc("@action:inmenu Do not select any tabs", "&None"));
+    copyInputToNoneAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Slash));
+    copyInputToNoneAction->setData(CopyInputToNoneMode);
+    copyInputToNoneAction->setChecked(true); // the default state
+
+    // The "Copy Input To" submenu
+    // The above three choices are represented as combo boxes
+    KSelectAction* copyInputActions = collection->add<KSelectAction>("copy-input-to");
+    copyInputActions->setText(i18n("Copy Input To"));
+    copyInputActions->addAction(copyInputToAllTabsAction);
+    copyInputActions->addAction(copyInputToSelectedTabsAction);
+    copyInputActions->addAction(copyInputToNoneAction);
+    connect(copyInputActions, SIGNAL(triggered(QAction*)), this, SLOT(copyInputActionsTriggered(QAction*)));
 
     action = collection->addAction("zmodem-upload", this, SLOT(zmodemUpload()));
     action->setText(i18n("&ZModem Upload..."));
@@ -768,6 +779,26 @@ static bool hasTerminalDisplayInSameWindow(const Session* session, const KXmlGui
     return(false);
 }
 
+void SessionController::copyInputActionsTriggered(QAction* action)
+{
+    const int mode = action->data().value<int>();
+
+    switch (mode) {
+    case CopyInputToAllTabsMode:
+        copyInputToAllTabs();
+        break;
+    case CopyInputToSelectedTabsMode:
+        copyInputToSelectedTabs();
+        break;
+    case CopyInputToNoneMode:
+        copyInputToNone();
+        break;
+    default:
+        Q_ASSERT(false);
+    }
+}
+
+
 void SessionController::copyInputToAllTabs()
 {
     if (!_copyToGroup) {
@@ -796,9 +827,6 @@ void SessionController::copyInputToAllTabs()
     _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
 
     snapshot();
-    _copyToAllTabsAction->setChecked(true);
-    _copyToSelectedAction->setChecked(false);
-    _copyToNoneAction->setChecked(false);
 }
 
 void SessionController::copyInputToSelectedTabs()
@@ -839,10 +867,6 @@ void SessionController::copyInputToSelectedTabs()
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
         snapshot();
     }
-
-    _copyToAllTabsAction->setChecked(false);
-    _copyToSelectedAction->setChecked(true);
-    _copyToNoneAction->setChecked(false);
 }
 
 void SessionController::copyInputToNone()
@@ -864,9 +888,6 @@ void SessionController::copyInputToNone()
     _copyToGroup = NULL;
     snapshot();
 
-    _copyToAllTabsAction->setChecked(false);
-    _copyToSelectedAction->setChecked(false);
-    _copyToNoneAction->setChecked(true);
 }
 
 void SessionController::searchClosed()
