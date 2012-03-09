@@ -365,8 +365,7 @@ signals:
     void titleChanged(int title, const QString& newTitle);
 
     /**
-     * Emitted when the program running in the terminal changes the
-     * screen size.
+     * Emitted when the terminal emualtor's size has changed
      */
     void imageSizeChanged(int lineCount , int columnCount);
 
