@@ -376,6 +376,12 @@ signals:
     void imageSizeInitialized();
 
     /**
+     * Emitted after receiving the escape sequence which asks to change
+     * the terminal emulator's size
+     */
+    void imageResizeRequest(const QSize& sizz);
+
+    /**
      * Emitted when the terminal program requests to change various properties
      * of the terminal display.
      *

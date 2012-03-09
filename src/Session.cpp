@@ -141,6 +141,8 @@ Session::Session(QObject* parent) :
             SLOT(onPrimaryScreenInUse(bool)));
     connect(_emulation, SIGNAL(selectedText(QString)), this,
             SLOT(onSelectedText(QString)));
+    connect( _emulation, SIGNAL(imageResizeRequest(QSize)) , this,
+             SIGNAL(resizeRequest(QSize)) );
 
     //create new teletype for I/O with shell process
     openTeletype(-1);

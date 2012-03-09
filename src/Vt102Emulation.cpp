@@ -544,7 +544,9 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case TY_ESC_DE('8'      ) : _currentScreen->helpAlign            (          ); break;
 
 // resize = \e[8;<row>;<col>t
-    case TY_CSI_PS('t',   8) : setImageSize( p /*lines */, q /* columns */ );    break;
+    case TY_CSI_PS('t',   8) : setImageSize( p /*lines */, q /* columns */ );
+                               emit imageResizeRequest(QSize(q, p));
+                               break;
 
 // change tab text color : \e[28;<color>t  color: 0-16,777,215
     case TY_CSI_PS('t',   28) : emit changeTabTextColorRequest      ( p        );          break;
