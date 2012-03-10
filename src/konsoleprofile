@@ -35,5 +35,8 @@ if [ ! $# -eq 1 ]
     exit 0
 fi
 
-/bin/echo -e "\033]50;$1\a"
+# Depending on version of echo, -e may be needed.
+# Do we need to check echo version?
+#echo -e "\033]50;$1\a"
+echo "\033]50;$1\a"
 
