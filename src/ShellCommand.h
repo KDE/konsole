@@ -23,6 +23,9 @@
 // Qt
 #include <QtCore/QStringList>
 
+// Konsole
+#include "konsole_export.h"
+
 namespace Konsole
 {
 
@@ -47,7 +50,7 @@ namespace Konsole
  *      </li>
  * </ul>
  */
-class ShellCommand
+class KONSOLEPRIVATE_EXPORT ShellCommand
 {
 public:
     /**
