@@ -953,8 +953,14 @@ ProcessInfo* Session::getProcessInfo()
 void Session::updateSessionProcessInfo()
 {
     Q_ASSERT(_shellProcess);
-    if (!_sessionProcessInfo)
-    {
+
+    bool ok;
+    // The checking for pid changing looks stupid, but it is needed
+    // at the moment to workaround the problem that processId() might
+    // return 0
+    if (!_sessionProcessInfo ||
+        ( processId() != 0 && processId() != _sessionProcessInfo->pid(&ok) ) ) {
+        delete _sessionProcessInfo;
         _sessionProcessInfo = ProcessInfo::newInstance(processId());
         _sessionProcessInfo->setUserHomeDir();
     }
