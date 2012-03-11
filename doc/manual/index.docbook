@@ -73,7 +73,9 @@
 emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.
 </para>
 
-<para>Explaining the use of the &UNIX; <acronym>CLI</acronym> is beyond the scope of this document.  A search of the web for these terms will produce more information.
+<para>&konsole; typically runs a command shell, an application that executes commands that you type. 
+The shell the &konsole; runs depends on your account settings.  
+Consult your operating system documentation to know what the shell is, how to configure it and how to use it.
 </para>
 </sect1>
 
