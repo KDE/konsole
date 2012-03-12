@@ -667,11 +667,9 @@ void TabbedViewContainer::openTabContextMenu(int index, const QPoint& pos)
     _contextMenuTabIndex = index;
 
     // Enable 'Detach Tab' menu item only if there is more than 1 tab
-    QList<QAction *> menuActions = _contextPopupMenu->actions();
-    if (_tabBar->count() == 1)
-        menuActions.first()->setEnabled(false);
-    else
-        menuActions.first()->setEnabled(true);
+    // Note: the code is coupled with that action's position within the menu
+    QAction* detachAction = _contextPopupMenu->actions().first();
+    detachAction->setEnabled( _tabBar->count() > 1 );
 
     _contextPopupMenu->exec(pos);
 }
