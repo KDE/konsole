@@ -915,11 +915,11 @@ bool Session::updateForegroundProcessInfo()
 {
     Q_ASSERT(_shellProcess);
 
-    int pid = _shellProcess->foregroundProcessGroup();
-    if (pid != _foregroundPid) {
+    const int foregroundPid = _shellProcess->foregroundProcessGroup();
+    if (foregroundPid != _foregroundPid) {
         delete _foregroundProcessInfo;
-        _foregroundProcessInfo = ProcessInfo::newInstance(pid);
-        _foregroundPid = pid;
+        _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid);
+        _foregroundPid = foregroundPid;
     }
 
     if (_foregroundProcessInfo) {
