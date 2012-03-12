@@ -189,16 +189,6 @@ void ViewManager::setupActions()
 
         multiViewOnlyActions << closeOtherAction;
 
-        KAction* detachViewAction = collection->addAction("detach-view");
-        detachViewAction->setIcon(KIcon("tab-detach"));
-        detachViewAction->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
-        // Ctrl+Shift+D is not used as a shortcut by default because it is too close
-        // to Ctrl+D - which will terminate the session in many cases
-        detachViewAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_H));
-
-        connect(this , SIGNAL(splitViewToggle(bool)) , this , SLOT(updateDetachViewState()));
-        connect(detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()));
-
         // Expand & Shrink Active View
         KAction* expandActiveAction = new KAction(i18nc("@action:inmenu", "Expand View") , this);
         expandActiveAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_BracketRight));
@@ -215,6 +205,16 @@ void ViewManager::setupActions()
         connect(shrinkActiveAction , SIGNAL(triggered()) , this , SLOT(shrinkActiveContainer()));
 
         multiViewOnlyActions << shrinkActiveAction;
+
+        KAction* detachViewAction = collection->addAction("detach-view");
+        detachViewAction->setIcon(KIcon("tab-detach"));
+        detachViewAction->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
+        // Ctrl+Shift+D is not used as a shortcut by default because it is too close
+        // to Ctrl+D - which will terminate the session in many cases
+        detachViewAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_H));
+
+        connect(this , SIGNAL(splitViewToggle(bool)) , this , SLOT(updateDetachViewState()));
+        connect(detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()));
 
         // Next / Previous View , Next Container
         collection->addAction("next-view", nextViewAction);
