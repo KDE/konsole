@@ -451,6 +451,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
                                  i18nc("@action:inmenu", "&Rename Tab..."), this,
                                  SLOT(tabContextMenuRenameTab()));
 
+    _contextPopupMenu->addSeparator();
+
     _contextPopupMenu->addAction(KIcon("tab-close"),
                                  i18nc("@action:inmenu", "&Close Tab"), this,
                                  SLOT(tabContextMenuCloseTab()));
