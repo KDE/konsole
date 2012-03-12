@@ -375,10 +375,6 @@ void ViewManager::sessionFinished()
         return;
 
     Session* session = qobject_cast<Session*>(sender());
-
-    // We're using setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab)
-    // so no need to manually select next tab.
-
     Q_ASSERT(session);
 
     // close attached views
