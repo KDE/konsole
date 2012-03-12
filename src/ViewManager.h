@@ -279,10 +279,10 @@ private slots:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();
     void splitTopBottom();
-    void closeActiveView();
-    void closeOtherViews();
-    void expandActiveView();
-    void shrinkActiveView();
+    void closeActiveContainer();
+    void closeOtherContainers();
+    void expandActiveContainer();
+    void shrinkActiveContainer();
 
     // called when the "Detach View" menu item is selected
     void detachActiveView();

@@ -177,7 +177,7 @@ void ViewManager::setupActions()
         closeActiveAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
         closeActiveAction->setEnabled(false);
         collection->addAction("close-active-view", closeActiveAction);
-        connect(closeActiveAction , SIGNAL(triggered()) , this , SLOT(closeActiveView()));
+        connect(closeActiveAction , SIGNAL(triggered()) , this , SLOT(closeActiveContainer()));
 
         multiViewOnlyActions << closeActiveAction;
 
@@ -185,7 +185,7 @@ void ViewManager::setupActions()
         closeOtherAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_O));
         closeOtherAction->setEnabled(false);
         collection->addAction("close-other-views", closeOtherAction);
-        connect(closeOtherAction , SIGNAL(triggered()) , this , SLOT(closeOtherViews()));
+        connect(closeOtherAction , SIGNAL(triggered()) , this , SLOT(closeOtherContainers()));
 
         multiViewOnlyActions << closeOtherAction;
 
@@ -204,7 +204,7 @@ void ViewManager::setupActions()
         expandActiveAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_BracketRight));
         expandActiveAction->setEnabled(false);
         collection->addAction("expand-active-view", expandActiveAction);
-        connect(expandActiveAction , SIGNAL(triggered()) , this , SLOT(expandActiveView()));
+        connect(expandActiveAction , SIGNAL(triggered()) , this , SLOT(expandActiveContainer()));
 
         multiViewOnlyActions << expandActiveAction;
 
@@ -212,7 +212,7 @@ void ViewManager::setupActions()
         shrinkActiveAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_BracketLeft));
         shrinkActiveAction->setEnabled(false);
         collection->addAction("shrink-active-view", shrinkActiveAction);
-        connect(shrinkActiveAction , SIGNAL(triggered()) , this , SLOT(shrinkActiveView()));
+        connect(shrinkActiveAction , SIGNAL(triggered()) , this , SLOT(shrinkActiveContainer()));
 
         multiViewOnlyActions << shrinkActiveAction;
 
@@ -476,15 +476,15 @@ void ViewManager::removeContainer(ViewContainer* container)
 
     emit splitViewToggle(_viewSplitter->containers().count() > 1);
 }
-void ViewManager::expandActiveView()
+void ViewManager::expandActiveContainer()
 {
     _viewSplitter->adjustContainerSize(_viewSplitter->activeContainer(), 10);
 }
-void ViewManager::shrinkActiveView()
+void ViewManager::shrinkActiveContainer()
 {
     _viewSplitter->adjustContainerSize(_viewSplitter->activeContainer(), -10);
 }
-void ViewManager::closeActiveView()
+void ViewManager::closeActiveContainer()
 {
     // only do something if there is more than one container active
     if (_viewSplitter->containers().count() > 1) {
@@ -497,7 +497,7 @@ void ViewManager::closeActiveView()
         nextContainer();
     }
 }
-void ViewManager::closeOtherViews()
+void ViewManager::closeOtherContainers()
 {
     ViewContainer* active = _viewSplitter->activeContainer();
 
