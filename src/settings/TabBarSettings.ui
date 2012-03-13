@@ -23,7 +23,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_1">
         <property name="text">
-         <string>Tab bar display:</string>
+         <string>Tab bar visibility:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -75,12 +75,12 @@
         </property>
         <item>
          <property name="text">
-          <string>Above Terminal Displays</string>
+          <string>Above Terminal Area</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Below Terminal Displays</string>
+          <string>Below Terminal Area</string>
          </property>
         </item>
        </widget>
@@ -88,7 +88,7 @@
       <item row="2" column="0" colspan="2">
        <widget class="QCheckBox" name="kcfg_ShowQuickButtons">
         <property name="text">
-         <string>Show 'New Tab' and 'Close Tab' buttons in tab bar</string>
+         <string>Show 'New Tab' and 'Close Tab' buttons</string>
         </property>
        </widget>
       </item>

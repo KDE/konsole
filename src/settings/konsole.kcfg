@@ -33,6 +33,7 @@
   </group>
   <group name="TabBar">
     <entry name="TabBarVisibility" type="Enum">
+      <label>Control the visibility of the whole tab bar</label>
       <choices>
         <choice name="AlwaysShowTabBar" />
         <choice name="ShowTabBarWhenNeeded" />
@@ -41,6 +42,7 @@
       <default>AlwaysShowTabBar</default>
     </entry>
     <entry name="TabBarPosition" type="Enum">
+      <label>Control the position of the tab bar</label>
       <choices>
         <choice name="Top" />
         <choice name="Bottom" />
@@ -48,9 +50,11 @@
       <default>Bottom</default>
     </entry>
     <entry name="ShowQuickButtons" type="Bool">
+      <label>Control the visibility of quick buttons on the tab bar</label>
       <default>false</default>
     </entry>
     <entry name="NewTabBehavior" type="Enum">
+      <label>Control where to put the new tab</label>
       <choices>
         <choice name="PutNewTabAtTheEnd" />
         <choice name="PutNewTabAfterCurrentTab" />
