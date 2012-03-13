@@ -603,6 +603,8 @@ protected:
     virtual void hideEvent(QHideEvent* event);
     virtual void resizeEvent(QResizeEvent* event);
 
+    virtual void contextMenuEvent(QContextMenuEvent* event);
+
     virtual void fontChange(const QFont&);
     virtual void focusInEvent(QFocusEvent* event);
     virtual void focusOutEvent(QFocusEvent* event);

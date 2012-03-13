@@ -2690,6 +2690,11 @@ bool TerminalDisplay::event(QEvent* event)
     return eventHandled ? true : QWidget::event(event);
 }
 
+void TerminalDisplay::contextMenuEvent(QContextMenuEvent* )
+{
+    emit configureRequest(mapFromGlobal(QCursor::pos()));
+}
+
 /* --------------------------------------------------------------------- */
 /*                                                                       */
 /*                                  Bell                                 */
