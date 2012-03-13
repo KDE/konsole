@@ -701,8 +701,8 @@ void MainWindow::showEvent(QShowEvent* aEvent)
         // moment. Otherwise, the initial visibility will be determined by
         // what KMainWindow has automatically stored in konsolerc, but not by
         // what users has explicitly configured .
-        menuBar()->setVisible(KonsoleSettings::showMenuBar());
-        _toggleMenuBarAction->setChecked(KonsoleSettings::showMenuBar());
+        menuBar()->setVisible(KonsoleSettings::showMenuBarByDefault());
+        _toggleMenuBarAction->setChecked(KonsoleSettings::showMenuBarByDefault());
 
         _menuBarInitialVisibilityApplied = true;
     }

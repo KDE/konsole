@@ -29,7 +29,7 @@
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <widget class="QCheckBox" name="kcfg_ShowMenuBar">
+         <widget class="QCheckBox" name="kcfg_ShowMenuBarByDefault">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -37,7 +37,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Show menubar initially in Konsole window</string>
+           <string>Show menubar by default</string>
           </property>
          </widget>
         </item>

@@ -5,14 +5,19 @@
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="konsolerc" />
   <group name="KonsoleWindow">
-    <entry name="ShowMenuBar" type="Bool">
-      <label>Show menubar initially in Konsole window</label>
-      <tooltip>Show menubar initially in each Konsole window</tooltip>
+    <entry name="ShowMenuBarByDefault" type="Bool">
+      <label>Show menubar by default</label>
+      <tooltip>Show menubar by default in each Konsole window</tooltip>
       <default>true</default>
     </entry>
     <entry name="ShowWindowTitleOnTitleBar" type="Bool">
       <label>Show window title on the titlebar</label>
       <tooltip>Show window title set by escape sequence on the titlebar</tooltip>
+      <default>false</default>
+    </entry>
+    <entry name="AllowMenuAccelerators" type="Bool">
+      <label>Enable menu accelerators</label>
+      <tooltip>Allow users to access top menu through Alt+Key combination</tooltip>
       <default>false</default>
     </entry>
     <entry name="ShowTerminalSizeHint" type="Bool">
@@ -24,11 +29,6 @@
       <label>Save window size on exit</label>
       <tooltip>The window size will be saved upon exiting Konsole</tooltip>
       <default>true</default>
-    </entry>
-    <entry name="AllowMenuAccelerators" type="Bool">
-      <label>Enable menu accelerators</label>
-      <tooltip>Allow users to access top menu through Alt+Key combination</tooltip>
-      <default>false</default>
     </entry>
   </group>
   <group name="TabBar">
