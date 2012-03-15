@@ -469,8 +469,6 @@ void SessionController::setupCommonActions()
     action = collection->addAction("select-all", this, SLOT(selectAll()));
     action->setText(i18n("&Select All"));
     action->setIcon(KIcon("edit-select-all"));
-    // TODO: this shortcut conflict with the 'close-active-view' action
-    //action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
 
     action = KStandardAction::saveAs(this, SLOT(saveHistory()), collection);
     action->setText(i18n("Save Output &As..."));
