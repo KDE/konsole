@@ -24,7 +24,6 @@
 
 // Qt
 #include <QtGui/QLabel>
-//#include <QtGui/QListWidget>
 #include <QtGui/QStackedWidget>
 #include <QtGui/QTabBar>
 #include <QtGui/QToolButton>
@@ -35,7 +34,6 @@
 #include <QtGui/QVBoxLayout>
 
 // KDE
-//#include <KColorDialog>
 #include <KColorScheme>
 #include <KColorUtils>
 #include <KLocalizedString>
