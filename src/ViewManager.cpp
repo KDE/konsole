@@ -727,7 +727,9 @@ void ViewManager::containerViewsChanged(QObject* container)
 
 void ViewManager::viewCloseRequest(QWidget* view)
 {
-    TerminalDisplay* display = dynamic_cast<TerminalDisplay*>(view);
+    //FIXME Check that this cast is actually legal
+    TerminalDisplay* display = (TerminalDisplay*)view;
+
     Q_ASSERT(display);
 
     // 1. detach view from session
