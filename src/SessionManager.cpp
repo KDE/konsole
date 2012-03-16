@@ -42,6 +42,8 @@
 // Konsole
 #include "Session.h"
 #include "History.h"
+#include "ProfileReader.h"
+#include "ProfileWriter.h"
 
 using namespace Konsole;
 

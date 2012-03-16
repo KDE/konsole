@@ -569,68 +569,6 @@ inline Profile::GroupPtr Profile::asGroup()
     return Profile::GroupPtr(dynamic_cast<ProfileGroup*>(this));
 }
 
-/** Interface for all classes which can load profile settings from a file. */
-class ProfileReader
-{
-public:
-    virtual ~ProfileReader() {}
-    /** Returns a list of paths to profiles which this reader can read. */
-    virtual QStringList findProfiles() {
-        return QStringList();
-    }
-    /**
-     * Attempts to read a profile from @p path and
-     * save the property values described into @p profile.
-     *
-     * Returns true if the profile was successfully read or false otherwise.
-     *
-     * @param path Path to the profile to read
-     * @param profile Pointer to the Profile the settings will be read into
-     * @param parentProfile Receives the name of the parent profile
-     */
-    virtual bool readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile) = 0;
-};
-
-/** Reads a KDE 4 .profile file. */
-class KDE4ProfileReader : public ProfileReader
-{
-public:
-    virtual QStringList findProfiles();
-    virtual bool readProfile(const QString& path , Profile::Ptr profile, QString& parentProfile);
-private:
-    void readProperties(const KConfig& config, Profile::Ptr profile,
-                        const Profile::PropertyInfo* properties);
-};
-/** Interface for all classes which can write profile settings to a file. */
-class ProfileWriter
-{
-public:
-    virtual ~ProfileWriter() {}
-    /**
-     * Returns a suitable path-name for writing
-     * @p profile to. The path-name should be accepted by
-     * the corresponding ProfileReader class.
-     */
-    virtual QString getPath(const Profile::Ptr profile) = 0;
-    /**
-     * Writes the properties and values from @p profile to the file specified
-     * by @p path.  This profile should be readable by the corresponding
-     * ProfileReader class.
-     */
-    virtual bool writeProfile(const QString& path , const Profile::Ptr profile) = 0;
-};
-/** Writes a KDE 4 .profile file. */
-class KDE4ProfileWriter : public ProfileWriter
-{
-public:
-    virtual QString getPath(const Profile::Ptr profile);
-    virtual bool writeProfile(const QString& path , const Profile::Ptr profile);
-
-private:
-    void writeProperties(KConfig& config, const Profile::Ptr profile,
-                         const Profile::PropertyInfo* properties);
-};
-
 /**
  * Parses an input string consisting of property names
  * and assigned values and returns a table of properties
