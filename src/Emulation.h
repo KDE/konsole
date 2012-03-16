@@ -436,8 +436,8 @@ protected:
         LocaleCodec = 0,
         Utf8Codec   = 1
     };
-    void setCodec(EmulationCodec codec); // codec number, 0 = locale, 1=utf8
 
+    void setCodec(EmulationCodec codec);
 
     QList<ScreenWindow*> _windows;
 
