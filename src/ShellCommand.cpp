@@ -38,7 +38,7 @@ ShellCommand::ShellCommand(const QString& aCommand, const QStringList& aArgument
     _arguments = aArguments;
 
     if (!_arguments.isEmpty())
-        _arguments[0] == aCommand;
+        _arguments[0] = aCommand;
 }
 QString ShellCommand::fullCommand() const
 {
