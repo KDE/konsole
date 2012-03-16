@@ -650,7 +650,7 @@ ViewContainer* ViewManager::createContainer()
     connect(container, SIGNAL(newViewRequest()), this, SIGNAL(newViewRequest()));
     connect(container, SIGNAL(moveViewRequest(int,int,bool&)),
             this , SLOT(containerMoveViewRequest(int,int,bool&)));
-    connect(container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)));
+    connect(container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewDestroyed(QWidget*)));
     connect(container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
 
     return container;
@@ -724,7 +724,7 @@ void ViewManager::containerViewsChanged(QObject* container)
     }
 }
 
-void ViewManager::viewCloseRequest(QWidget* view)
+void ViewManager::viewDestroyed(QWidget* view)
 {
     // Note: the received QWidget has already been destroyed, so
     // using dynamic_cast<> or qobject_cast<> does not work here

@@ -291,8 +291,8 @@ private slots:
     // called when a session terminates - the view manager will delete any
     // views associated with the session
     void sessionFinished();
-    // called when the container requests to close a particular view
-    void viewCloseRequest(QWidget* widget);
+    // called when one view has been destroyed
+    void viewDestroyed(QWidget* widget);
 
     // controller detects when an associated view is given the focus
     // and emits a signal.  ViewManager listens for that signal
