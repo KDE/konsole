@@ -281,7 +281,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _lineSelectionMode(false)
     , _preserveLineBreaks(false)
     , _columnSelectionMode(false)
-    , _scrollbarLocation(ScrollBarRight)
+    , _scrollbarLocation(Enum::ScrollBarRight)
     , _wordCharacters(":@-./_~")
     , _bellMode(NotifyBell)
     , _allowBlinkingText(true)
@@ -783,7 +783,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     const int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->width();
     const int SCROLLBAR_CONTENT_GAP = 1;
     QRect scrollRect;
-    if (_scrollbarLocation == ScrollBarLeft) {
+    if (_scrollbarLocation == Enum::ScrollBarLeft) {
         scrollRect.setLeft(scrollBarWidth + SCROLLBAR_CONTENT_GAP);
         scrollRect.setRight(width());
     } else {
@@ -1180,7 +1180,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     QPoint cursorPos = mapFromGlobal(QCursor::pos());
     int cursorLine;
     int cursorColumn;
-    const int scrollBarWidth = (_scrollbarLocation == ScrollBarLeft) ? _scrollBar->width() : 0;
+    const int scrollBarWidth = (_scrollbarLocation == Enum::ScrollBarLeft) ? _scrollBar->width() : 0;
 
     getCharacterPosition(cursorPos , cursorLine , cursorColumn);
     Character cursorCharacter = _image[loc(cursorColumn, cursorLine)];
@@ -1553,16 +1553,16 @@ void TerminalDisplay::calcGeometry()
 {
     _scrollBar->resize(_scrollBar->sizeHint().width(), contentsRect().height());
     switch (_scrollbarLocation) {
-    case ScrollBarHidden :
+    case Enum::ScrollBarHidden :
         _leftMargin = DEFAULT_LEFT_MARGIN;
         _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN;
         break;
-    case ScrollBarLeft :
+    case Enum::ScrollBarLeft :
         _leftMargin = DEFAULT_LEFT_MARGIN + _scrollBar->width();
         _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN - _scrollBar->width();
         _scrollBar->move(contentsRect().topLeft());
         break;
-    case ScrollBarRight:
+    case Enum::ScrollBarRight:
         _leftMargin = DEFAULT_LEFT_MARGIN;
         _contentWidth = contentsRect().width()  - 2 * DEFAULT_LEFT_MARGIN - _scrollBar->width();
         _scrollBar->move(contentsRect().topRight() - QPoint(_scrollBar->width() - 1, 0));
@@ -1642,12 +1642,12 @@ void TerminalDisplay::hideEvent(QHideEvent*)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TerminalDisplay::setScrollBarPosition(ScrollBarPosition position)
+void TerminalDisplay::setScrollBarPosition(Enum::ScrollBarPositionEnum position)
 {
     if (_scrollbarLocation == position)
         return;
 
-    if (position == ScrollBarHidden)
+    if (position == Enum::ScrollBarHidden)
         _scrollBar->hide();
     else
         _scrollBar->show();
@@ -1787,7 +1787,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     int charColumn = 0;
     getCharacterPosition(ev->pos(), charLine, charColumn);
 
-    const int scrollBarWidth = (_scrollbarLocation == ScrollBarLeft) ? _scrollBar->width() : 0;
+    const int scrollBarWidth = (_scrollbarLocation == Enum::ScrollBarLeft) ? _scrollBar->width() : 0;
 
     // handle filters
     // change link hot-spot appearance on mouse-over

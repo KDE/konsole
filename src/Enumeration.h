@@ -8,8 +8,7 @@
   accepted by the membership of KDE e.V. (or its successor appro-
   ved by the membership of KDE e.V.), which shall act as a proxy
   defined in Section 14 of version 3 of the license.
-
-  This program is distributed in the hope that it will be useful,
+This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
   GNU General Public License for more details.
@@ -48,6 +47,19 @@ public:
          * a file as they are scrolled off-screen.
          */
         UnlimitedHistory = 2
+    };
+
+    /**
+     * This enum describes the positions where the terminal display's
+     * scroll bar may be placed.
+     */
+    enum ScrollBarPositionEnum {
+        /** Show the scroll-bar on the left of the terminal display. */
+        ScrollBarLeft   = 0,
+        /** Show the scroll-bar on the right of the terminal display. */
+        ScrollBarRight  = 1,
+        /** Do not show the scroll-bar. */
+        ScrollBarHidden = 2
     };
 
 };

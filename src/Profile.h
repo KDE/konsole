@@ -211,19 +211,6 @@ public:
         MenuIndex
     };
 
-    /**
-     * This enum describes the positions where the terminal display's
-     * scroll bar may be placed.
-     */
-    enum ScrollBarPositionEnum {
-        /** Show the scroll-bar on the left of the terminal display. */
-        ScrollBarLeft   = 0,
-        /** Show the scroll-bar on the right of the terminal display. */
-        ScrollBarRight  = 1,
-        /** Do not show the scroll-bar. */
-        ScrollBarHidden = 2
-    };
-
     /** This enum describes the shapes used to draw the cursor in terminal
      * displays.
      */

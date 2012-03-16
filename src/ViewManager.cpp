@@ -47,6 +47,7 @@
 #include "ViewContainer.h"
 #include "ViewSplitter.h"
 #include "Profile.h"
+#include "Enumeration.h"
 
 using namespace Konsole;
 
@@ -784,12 +785,12 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     // set scroll-bar position
     int scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
 
-    if (scrollBarPosition == Profile::ScrollBarLeft)
-        view->setScrollBarPosition(TerminalDisplay::ScrollBarLeft);
-    else if (scrollBarPosition == Profile::ScrollBarRight)
-        view->setScrollBarPosition(TerminalDisplay::ScrollBarRight);
-    else if (scrollBarPosition == Profile::ScrollBarHidden)
-        view->setScrollBarPosition(TerminalDisplay::ScrollBarHidden);
+    if (scrollBarPosition == Enum::ScrollBarLeft)
+        view->setScrollBarPosition(Enum::ScrollBarLeft);
+    else if (scrollBarPosition == Enum::ScrollBarRight)
+        view->setScrollBarPosition(Enum::ScrollBarRight);
+    else if (scrollBarPosition == Enum::ScrollBarHidden)
+        view->setScrollBarPosition(Enum::ScrollBarHidden);
 
     // show hint about termianl size after resizing
     view->setShowTerminalSizeHint(profile->property<bool>(Profile::ShowTerminalSizeHint));

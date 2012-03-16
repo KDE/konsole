@@ -955,9 +955,9 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     // setup scrollbar radio
     int scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
 
-    RadioOption positions[] = { {_ui->scrollBarHiddenButton, Profile::ScrollBarHidden, SLOT(hideScrollBar())},
-        {_ui->scrollBarLeftButton, Profile::ScrollBarLeft, SLOT(showScrollBarLeft())},
-        {_ui->scrollBarRightButton, Profile::ScrollBarRight, SLOT(showScrollBarRight())},
+    RadioOption positions[] = { {_ui->scrollBarHiddenButton, Enum::ScrollBarHidden, SLOT(hideScrollBar())},
+        {_ui->scrollBarLeftButton, Enum::ScrollBarLeft, SLOT(showScrollBarLeft())},
+        {_ui->scrollBarRightButton, Enum::ScrollBarRight, SLOT(showScrollBarRight())},
         {0, 0, 0}
     };
 
@@ -1002,15 +1002,15 @@ void EditProfileDialog::unlimitedScrollBack()
 }
 void EditProfileDialog::hideScrollBar()
 {
-    updateTempProfileProperty(Profile::ScrollBarPosition , Profile::ScrollBarHidden);
+    updateTempProfileProperty(Profile::ScrollBarPosition, Enum::ScrollBarHidden);
 }
 void EditProfileDialog::showScrollBarLeft()
 {
-    updateTempProfileProperty(Profile::ScrollBarPosition , Profile::ScrollBarLeft);
+    updateTempProfileProperty(Profile::ScrollBarPosition, Enum::ScrollBarLeft);
 }
 void EditProfileDialog::showScrollBarRight()
 {
-    updateTempProfileProperty(Profile::ScrollBarPosition , Profile::ScrollBarRight);
+    updateTempProfileProperty(Profile::ScrollBarPosition, Enum::ScrollBarRight);
 }
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {

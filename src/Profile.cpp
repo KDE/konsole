@@ -161,7 +161,7 @@ FallbackProfile::FallbackProfile()
 
     setProperty(HistoryMode, Enum::FixedSizeHistory);
     setProperty(HistorySize, 1000);
-    setProperty(ScrollBarPosition, ScrollBarRight);
+    setProperty(ScrollBarPosition, Enum::ScrollBarRight);
 
     setProperty(FlowControlEnabled, true);
     setProperty(BlinkingTextEnabled, true);

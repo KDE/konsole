@@ -31,6 +31,7 @@
 #include "konsole_export.h"
 #include "ScreenWindow.h"
 #include "ColorScheme.h"
+#include "Enumeration.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -92,21 +93,10 @@ public:
     void setWallpaper(ColorSchemeWallpaper::Ptr p);
 
     /**
-     * This enum describes the location where the scroll bar is positioned in the display widget.
-     */
-    enum ScrollBarPosition {
-        /** Show the scroll bar on the left side of the display. */
-        ScrollBarLeft = 0,
-        /** Show the scroll bar on the right side of the display. */
-        ScrollBarRight = 1,
-        /** Do not show the scroll bar. */
-        ScrollBarHidden = 2
-    };
-    /**
      * Specifies whether the terminal display has a vertical scroll bar, and if so whether it
      * is shown on the left or right side of the display.
      */
-    void setScrollBarPosition(ScrollBarPosition position);
+    void setScrollBarPosition(Enum::ScrollBarPositionEnum position);
 
     /**
      * Sets the current position and range of the display's scroll bar.
@@ -798,7 +788,7 @@ private:
     bool    _columnSelectionMode;
 
     QScrollBar* _scrollBar;
-    ScrollBarPosition _scrollbarLocation;
+    Enum::ScrollBarPositionEnum _scrollbarLocation;
     QString     _wordCharacters;
     int         _bellMode;
 
