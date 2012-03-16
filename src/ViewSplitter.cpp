@@ -74,7 +74,7 @@ ViewSplitter* ViewSplitter::activeSplitter()
     ViewSplitter* splitter = 0;
 
     while (!splitter && widget) {
-        splitter = dynamic_cast<ViewSplitter*>(widget);
+        splitter = qobject_cast<ViewSplitter*>(widget);
         widget = widget->parentWidget();
     }
 

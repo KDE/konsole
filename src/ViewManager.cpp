@@ -343,8 +343,7 @@ void ViewManager::detachActiveView()
 
 void ViewManager::detachView(ViewContainer* container, QWidget* widgetView)
 {
-    TerminalDisplay * viewToDetach =
-        dynamic_cast<TerminalDisplay*>(widgetView);
+    TerminalDisplay * viewToDetach = qobject_cast<TerminalDisplay*>(widgetView);
 
     if (!viewToDetach)
         return;
@@ -894,12 +893,12 @@ void ViewManager::saveSessions(KConfigGroup& group)
     // first: sessions in the active container, preserving the order
     ViewContainer* container = _viewSplitter->activeContainer();
     Q_ASSERT(container);
-    TerminalDisplay* activeview = dynamic_cast<TerminalDisplay*>(container->activeView());
+    TerminalDisplay* activeview = qobject_cast<TerminalDisplay*>(container->activeView());
 
     QListIterator<QWidget*> viewIter(container->views());
     int tab = 1;
     while (viewIter.hasNext()) {
-        TerminalDisplay* view = dynamic_cast<TerminalDisplay*>(viewIter.next());
+        TerminalDisplay* view = qobject_cast<TerminalDisplay*>(viewIter.next());
         Q_ASSERT(view);
         Session* session = _sessionMap[view];
         ids << SessionManager::instance()->getRestoreId(session);
@@ -931,7 +930,7 @@ void ViewManager::restoreSessions(const KConfigGroup& group)
         Session* session = SessionManager::instance()->idToSession(id);
         createView(session);
         if (tab++ == activeTab)
-            display = dynamic_cast<TerminalDisplay*>(activeView());
+            display = qobject_cast<TerminalDisplay*>(activeView());
     }
 
     if (display) {
@@ -1044,7 +1043,7 @@ void ViewManager::setTabWidthToText(bool useTextWidth)
 
 void ViewManager::closeTabFromContainer(ViewContainer* container, QWidget* tab)
 {
-    SessionController* controller = dynamic_cast<SessionController*>(container->viewProperties(tab));
+    SessionController* controller = qobject_cast<SessionController*>(container->viewProperties(tab));
     Q_ASSERT(controller);
     if (controller)
         controller->closeSession() ;

@@ -755,7 +755,7 @@ static const KXmlGuiWindow* findWindow(const QObject* object)
 {
     // Walk up the QObject hierarchy to find a KXmlGuiWindow.
     while (object != NULL) {
-        const KXmlGuiWindow* window = dynamic_cast<const KXmlGuiWindow*>(object);
+        const KXmlGuiWindow* window = qobject_cast<const KXmlGuiWindow*>(object);
         if (window != NULL) {
             return(window);
         }

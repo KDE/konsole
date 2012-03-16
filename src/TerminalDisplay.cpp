@@ -2847,7 +2847,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 void TerminalDisplay::dropMenuPasteActionTriggered()
 {
     if (sender()) {
-        const QAction* action = dynamic_cast<const QAction*>(sender());
+        const QAction* action = qobject_cast<const QAction*>(sender());
         if (action) {
             emit sendStringToEmu(action->data().toString().toLocal8Bit());
         }
@@ -2857,7 +2857,7 @@ void TerminalDisplay::dropMenuPasteActionTriggered()
 void TerminalDisplay::dropMenuCdActionTriggered()
 {
     if (sender()) {
-        const QAction* action = dynamic_cast<const QAction*>(sender());
+        const QAction* action = qobject_cast<const QAction*>(sender());
         if (action) {
             emit sendStringToEmu(action->data().toString().toLocal8Bit());
         }
