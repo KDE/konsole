@@ -301,7 +301,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _lineSpacing(0)
     , _blendColor(qRgba(0, 0, 0, 0xff))
     , _filterChain(new TerminalImageFilterChain())
-    , _cursorShape(BlockCursor)
+    , _cursorShape(Enum::BlockCursor)
     , _antialiasText(true)
     , _sessionController(0)
 {
@@ -505,11 +505,11 @@ void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const 
     painter.setPen(originalPen);
 }
 
-void TerminalDisplay::setKeyboardCursorShape(KeyboardCursorShape shape)
+void TerminalDisplay::setKeyboardCursorShape(Enum::CursorShapeEnum shape)
 {
     _cursorShape = shape;
 }
-TerminalDisplay::KeyboardCursorShape TerminalDisplay::keyboardCursorShape() const
+Enum::CursorShapeEnum TerminalDisplay::keyboardCursorShape() const
 {
     return _cursorShape;
 }
@@ -601,7 +601,7 @@ void TerminalDisplay::drawCursor(QPainter& painter,
     QColor cursorColor = _cursorColor.isValid() ? _cursorColor : foregroundColor;
     painter.setPen(cursorColor);
 
-    if (_cursorShape == BlockCursor) {
+    if (_cursorShape == Enum::BlockCursor) {
         // draw the cursor outline, adjusting the area so that
         // it is draw entirely inside 'rect'
         int penWidth = qMax(1, painter.pen().width());
@@ -620,13 +620,13 @@ void TerminalDisplay::drawCursor(QPainter& painter,
                 invertCharacterColor = true;
             }
         }
-    } else if (_cursorShape == UnderlineCursor)
+    } else if (_cursorShape == Enum::UnderlineCursor)
         painter.drawLine(cursorRect.left(),
                          cursorRect.bottom(),
                          cursorRect.right(),
                          cursorRect.bottom());
 
-    else if (_cursorShape == IBeamCursor)
+    else if (_cursorShape == Enum::IBeamCursor)
         painter.drawLine(cursorRect.left(),
                          cursorRect.top(),
                          cursorRect.left(),

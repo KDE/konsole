@@ -198,24 +198,6 @@ public:
     void setSessionController(SessionController* controller);
 
     /**
-     * This enum describes the available shapes for the keyboard cursor.
-     * See setKeyboardCursorShape()
-     */
-    enum KeyboardCursorShape {
-        /** A rectangular block which covers the entire area of the cursor character. */
-        BlockCursor,
-        /**
-         * A single flat line which occupies the space at the bottom of the cursor
-         * character's area.
-         */
-        UnderlineCursor,
-        /**
-         * An cursor shaped like the capital letter 'I', similar to the IBeam
-         * cursor used in Qt/KDE text editors.
-         */
-        IBeamCursor
-    };
-    /**
      * Sets the shape of the keyboard cursor.  This is the cursor drawn
      * at the position in the terminal where keyboard input will appear.
      *
@@ -225,11 +207,11 @@ public:
      *
      * Defaults to BlockCursor
      */
-    void setKeyboardCursorShape(KeyboardCursorShape shape);
+    void setKeyboardCursorShape(Enum::CursorShapeEnum shape);
     /**
      * Returns the shape of the keyboard cursor.  See setKeyboardCursorShape()
      */
-    KeyboardCursorShape keyboardCursorShape() const;
+    Enum::CursorShapeEnum keyboardCursorShape() const;
 
     /**
      * Sets the color used to draw the keyboard cursor.
@@ -831,7 +813,7 @@ private:
     TerminalImageFilterChain* _filterChain;
     QRegion _mouseOverHotspotArea;
 
-    KeyboardCursorShape _cursorShape;
+    Enum::CursorShapeEnum _cursorShape;
 
     // custom cursor color.  if this is invalid then the foreground
     // color of the character under the cursor is used

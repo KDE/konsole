@@ -170,7 +170,7 @@ FallbackProfile::FallbackProfile()
 
     setProperty(BlinkingCursorEnabled, false);
     setProperty(BidiRenderingEnabled, true);
-    setProperty(CursorShape, BlockCursor);
+    setProperty(CursorShape, Enum::BlockCursor);
     setProperty(UseCustomCursorColor, false);
     setProperty(CustomCursorColor, Qt::black);
     setProperty(BellMode, NotifyBell);

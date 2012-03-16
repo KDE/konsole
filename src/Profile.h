@@ -211,20 +211,6 @@ public:
         MenuIndex
     };
 
-    /** This enum describes the shapes used to draw the cursor in terminal
-     * displays.
-     */
-    enum CursorShapeEnum {
-        /** Use a solid rectangular block to draw the cursor. */
-        BlockCursor     = 0,
-        /** Use an 'I' shape, similar to that used in text editing
-         * applications, to draw the cursor.
-         */
-        IBeamCursor     = 1,
-        /** Draw a line underneath the cursor's position. */
-        UnderlineCursor = 2
-    };
-
     /** This enum describes the behavior of triple click action . */
     enum TripleClickModeEnum {
         /** Select the whole line underneath the cursor. */

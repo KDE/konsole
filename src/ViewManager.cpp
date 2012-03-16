@@ -813,12 +813,12 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     // cursor shape
     int cursorShape = profile->property<int>(Profile::CursorShape);
 
-    if (cursorShape == Profile::BlockCursor)
-        view->setKeyboardCursorShape(TerminalDisplay::BlockCursor);
-    else if (cursorShape == Profile::IBeamCursor)
-        view->setKeyboardCursorShape(TerminalDisplay::IBeamCursor);
-    else if (cursorShape == Profile::UnderlineCursor)
-        view->setKeyboardCursorShape(TerminalDisplay::UnderlineCursor);
+    if (cursorShape == Enum::BlockCursor)
+        view->setKeyboardCursorShape(Enum::BlockCursor);
+    else if (cursorShape == Enum::IBeamCursor)
+        view->setKeyboardCursorShape(Enum::IBeamCursor);
+    else if (cursorShape == Enum::UnderlineCursor)
+        view->setKeyboardCursorShape(Enum::UnderlineCursor);
 
     // cursor color
     bool useCustomColor = profile->property<bool>(Profile::UseCustomCursorColor);
