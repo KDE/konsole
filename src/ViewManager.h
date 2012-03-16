@@ -387,7 +387,7 @@ private:
 
     NavigationMethod  _navigationMethod;
 
-    ViewContainer::NavigationDisplayMode _navigationVisibility;
+    ViewContainer::NavigationVisibility _navigationVisibility;
     ViewContainer::NavigationPosition _navigationPosition;
     bool _showQuickButtons;
     NewTabBehavior _newTabBehavior;

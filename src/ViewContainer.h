@@ -105,7 +105,7 @@ public:
      * This enum describes the options for showing or hiding the
      * container's navigation widget.
      */
-    enum NavigationDisplayMode {
+    enum NavigationVisibility {
         /** Always show the navigation widget. */
         AlwaysShowNavigation,
         /** Show the navigation widget only when the container has more than one view. */
@@ -121,15 +121,15 @@ public:
      * container.
      *
      * ViewContainer sub-classes should reimplement the
-     * navigationDisplayModeChanged() method to respond to changes
+     * navigationVisibilityChanged() method to respond to changes
      * of this property.
      */
-    void setNavigationDisplayMode(NavigationDisplayMode mode);
+    void setNavigationVisibility(NavigationVisibility mode);
     /**
      * Returns the current mode for controlling the visibility of the
      * the view container's navigation widget.
      */
-    NavigationDisplayMode navigationDisplayMode() const;
+    NavigationVisibility navigationVisibility() const;
 
     /**
      * Sets the position of the navigation widget with
@@ -303,9 +303,9 @@ protected:
 
     /**
      * Called when the navigation display mode changes.
-     * See setNavigationDisplayMode
+     * See setNavigationVisibility
      */
-    virtual void navigationDisplayModeChanged(NavigationDisplayMode) {}
+    virtual void navigationVisibilityChanged(NavigationVisibility) {}
 
     /**
      * Called when the navigation position changes to re-layout
@@ -332,7 +332,7 @@ private slots:
     void searchBarDestroyed();
 
 private:
-    NavigationDisplayMode _navigationDisplayMode;
+    NavigationVisibility _navigationVisibility;
     NavigationPosition _navigationPosition;
     QList<QWidget*> _views;
     QHash<QWidget*, ViewProperties*> _navigation;
@@ -407,7 +407,7 @@ public:
 protected:
     virtual void addViewWidget(QWidget* view , int index);
     virtual void removeViewWidget(QWidget* view);
-    virtual void navigationDisplayModeChanged(NavigationDisplayMode mode);
+    virtual void navigationVisibilityChanged(NavigationVisibility mode);
     virtual void navigationPositionChanged(NavigationPosition position);
     virtual void navigationTextModeChanged(bool mode);
     virtual void moveViewWidget(int fromIndex , int toIndex);

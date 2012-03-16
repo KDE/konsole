@@ -1054,7 +1054,7 @@ void ViewManager::updateNavigationOptions(NavigationOptions options)
     // since we have defined all valid values in konsole.kcfg, we can be sure
     // all these values are safe to be cast into corresponding enum.
     _navigationVisibility =
-        static_cast<ViewContainer::NavigationDisplayMode>(options.visibility);
+        static_cast<ViewContainer::NavigationVisibility>(options.visibility);
     _navigationPosition   =
         static_cast<ViewContainer::NavigationPosition>(options.position);
     _newTabBehavior       =
@@ -1070,7 +1070,7 @@ void ViewManager::updateNavigationOptions(NavigationOptions options)
 void ViewManager::applyNavigationOptions(ViewContainer* container)
 {
 
-    container->setNavigationDisplayMode(_navigationVisibility);
+    container->setNavigationVisibility(_navigationVisibility);
 
     Q_ASSERT( container->supportedNavigationPositions().contains(_navigationPosition) );
     container->setNavigationPosition(_navigationPosition);

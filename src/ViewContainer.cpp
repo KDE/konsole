@@ -50,7 +50,7 @@ using namespace Konsole;
 
 ViewContainer::ViewContainer(NavigationPosition position , QObject* parent)
     : QObject(parent)
-    , _navigationDisplayMode(AlwaysShowNavigation)
+    , _navigationVisibility(AlwaysShowNavigation)
     , _navigationPosition(position)
     , _searchBar(0)
 {
@@ -100,10 +100,10 @@ void ViewContainer::moveActiveView(MoveDirection direction)
     setActiveView(_views[newIndex]);
 }
 
-void ViewContainer::setNavigationDisplayMode(NavigationDisplayMode mode)
+void ViewContainer::setNavigationVisibility(NavigationVisibility mode)
 {
-    _navigationDisplayMode = mode;
-    navigationDisplayModeChanged(mode);
+    _navigationVisibility = mode;
+    navigationVisibilityChanged(mode);
 }
 ViewContainer::NavigationPosition ViewContainer::navigationPosition() const
 {
@@ -122,9 +122,9 @@ QList<ViewContainer::NavigationPosition> ViewContainer::supportedNavigationPosit
 {
     return QList<NavigationPosition>() << NavigationPositionTop;
 }
-ViewContainer::NavigationDisplayMode ViewContainer::navigationDisplayMode() const
+ViewContainer::NavigationVisibility ViewContainer::navigationVisibility() const
 {
-    return _navigationDisplayMode;
+    return _navigationVisibility;
 }
 
 void ViewContainer::setNavigationTextMode(bool mode)
@@ -572,7 +572,7 @@ void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
         _tabBar->setShape(QTabBar::RoundedSouth);
     }
 }
-void TabbedViewContainer::navigationDisplayModeChanged(NavigationDisplayMode mode)
+void TabbedViewContainer::navigationVisibilityChanged(NavigationVisibility mode)
 {
     if (mode == AlwaysShowNavigation && _tabBar->isHidden())
         setTabBarVisible(true);
@@ -753,7 +753,7 @@ void TabbedViewContainer::addViewWidget(QWidget* view , int index)
 
     _tabBar->insertTab(index , item->icon() , item->title());
 
-    if (navigationDisplayMode() == ShowNavigationAsNeeded)
+    if (navigationVisibility() == ShowNavigationAsNeeded)
         dynamicTabBarVisibility();
 }
 void TabbedViewContainer::removeViewWidget(QWidget* view)
@@ -767,7 +767,7 @@ void TabbedViewContainer::removeViewWidget(QWidget* view)
     _stackWidget->removeWidget(view);
     _tabBar->removeTab(index);
 
-    if (navigationDisplayMode() == ShowNavigationAsNeeded)
+    if (navigationVisibility() == ShowNavigationAsNeeded)
         dynamicTabBarVisibility();
 }
 
