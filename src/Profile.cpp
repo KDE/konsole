@@ -39,6 +39,7 @@
 
 // Konsole
 #include "ShellCommand.h"
+#include "Enumeration.h"
 
 using namespace Konsole;
 
@@ -158,7 +159,7 @@ FallbackProfile::FallbackProfile()
     setProperty(ColorScheme, "Linux"); //use DarkPastels when is start support blue ncurses UI properly
     setProperty(Font, KGlobalSettings::fixedFont());
 
-    setProperty(HistoryMode, FixedSizeHistory);
+    setProperty(HistoryMode, Enum::FixedSizeHistory);
     setProperty(HistorySize, 1000);
     setProperty(ScrollBarPosition, ScrollBarRight);
 

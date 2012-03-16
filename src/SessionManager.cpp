@@ -44,6 +44,7 @@
 #include "History.h"
 #include "ProfileReader.h"
 #include "ProfileWriter.h"
+#include "Enumeration.h"
 
 using namespace Konsole;
 
@@ -488,18 +489,18 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
     // History
     if (apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize)) {
         int mode = profile->property<int>(Profile::HistoryMode);
-        switch ((Profile::HistoryModeEnum)mode) {
-        case Profile::DisableHistory:
+        switch ((Enum::HistoryModeEnum)mode) {
+        case Enum::NoHistory:
             session->setHistoryType(HistoryTypeNone());
             break;
 
-        case Profile::FixedSizeHistory: {
+        case Enum::FixedSizeHistory: {
             int lines = profile->property<int>(Profile::HistorySize);
             session->setHistoryType(CompactHistoryType(lines));
         }
         break;
 
-        case Profile::UnlimitedHistory:
+        case Enum::UnlimitedHistory:
             session->setHistoryType(HistoryTypeFile());
             break;
         }

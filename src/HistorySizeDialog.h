@@ -23,6 +23,9 @@
 // KDE
 #include <KDialog>
 
+// Konsole
+#include "Enumeration.h"
+
 class QAbstractButton;
 class KIntSpinBox;
 
@@ -43,29 +46,10 @@ public:
      */
     explicit HistorySizeDialog(QWidget* parent);
 
-    /** Specifies the type of history scroll */
-    enum HistoryMode {
-        /**
-         * No history.  Lines of output are lost
-         * as soon as they are scrolled off-screen.
-         */
-        NoHistory,
-        /**
-         * A history which stores up to a fixed number of lines
-         * in memory.
-         */
-        FixedSizeHistory,
-        /**
-         * An 'unlimited' history which stores lines of output in
-         * a file on disk.
-         */
-        UnlimitedHistory
-    };
-
     /** Specifies the history mode. */
-    void setMode(HistoryMode mode);
+    void setMode(Enum::HistoryModeEnum mode);
     /** Returns the history mode chosen by the user. */
-    HistoryMode mode() const;
+    Enum::HistoryModeEnum mode() const;
     /**
      * Returns the number of lines of history to remember.
      * This is only valid when mode() == FixedSizeHistory,

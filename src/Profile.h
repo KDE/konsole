@@ -212,26 +212,6 @@ public:
     };
 
     /**
-     * This enum describes the modes available to remember lines of output
-     * produced by the terminal.
-     */
-    enum HistoryModeEnum {
-        /** No output is remembered.  As soon as lines of text are scrolled
-         * off-screen they are lost.
-         */
-        DisableHistory   = 0,
-        /** A fixed number of lines of output are remembered.  Once the
-         * limit is reached, the oldest lines are lost.
-         */
-        FixedSizeHistory = 1,
-        /** All output is remembered for the duration of the session.
-         * Typically this means that lines are recorded to
-         * a file as they are scrolled off-screen.
-         */
-        UnlimitedHistory = 2
-    };
-
-    /**
      * This enum describes the positions where the terminal display's
      * scroll bar may be placed.
      */

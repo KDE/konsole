@@ -55,6 +55,7 @@
 #include "SessionManager.h"
 #include "ShellCommand.h"
 #include "WindowSystemInfo.h"
+#include "Enumeration.h"
 
 using namespace Konsole;
 
@@ -965,9 +966,9 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     // setup scrollback type radio
     int scrollBackType = profile->property<int>(Profile::HistoryMode);
 
-    RadioOption types[] = { {_ui->disableScrollbackButton, Profile::DisableHistory, SLOT(noScrollBack())},
-        {_ui->fixedScrollbackButton, Profile::FixedSizeHistory, SLOT(fixedScrollBack())},
-        {_ui->unlimitedScrollbackButton, Profile::UnlimitedHistory, SLOT(unlimitedScrollBack())},
+    RadioOption types[] = { {_ui->disableScrollbackButton, Enum::NoHistory, SLOT(noScrollBack())},
+        {_ui->fixedScrollbackButton, Enum::FixedSizeHistory, SLOT(fixedScrollBack())},
+        {_ui->unlimitedScrollbackButton, Enum::UnlimitedHistory, SLOT(unlimitedScrollBack())},
         {0, 0, 0}
     };
     setupRadio(types , scrollBackType);
@@ -989,15 +990,15 @@ void EditProfileDialog::scrollBackLinesChanged(int lineCount)
 }
 void EditProfileDialog::noScrollBack()
 {
-    updateTempProfileProperty(Profile::HistoryMode , Profile::DisableHistory);
+    updateTempProfileProperty(Profile::HistoryMode , Enum::NoHistory);
 }
 void EditProfileDialog::fixedScrollBack()
 {
-    updateTempProfileProperty(Profile::HistoryMode , Profile::FixedSizeHistory);
+    updateTempProfileProperty(Profile::HistoryMode , Enum::FixedSizeHistory);
 }
 void EditProfileDialog::unlimitedScrollBack()
 {
-    updateTempProfileProperty(Profile::HistoryMode , Profile::UnlimitedHistory);
+    updateTempProfileProperty(Profile::HistoryMode , Enum::UnlimitedHistory);
 }
 void EditProfileDialog::hideScrollBar()
 {

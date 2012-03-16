@@ -60,6 +60,7 @@
 #include "ProfileList.h"
 #include "TerminalDisplay.h"
 #include "SessionManager.h"
+#include "Enumeration.h"
 
 // for SaveHistoryTask
 #include <KFileDialog>
@@ -1039,13 +1040,13 @@ void SessionController::showHistoryOptions()
 
     if (currentHistory.isEnabled()) {
         if (currentHistory.isUnlimited()) {
-            dialog->setMode(HistorySizeDialog::UnlimitedHistory);
+            dialog->setMode(Enum::UnlimitedHistory);
         } else {
-            dialog->setMode(HistorySizeDialog::FixedSizeHistory);
+            dialog->setMode(Enum::FixedSizeHistory);
             dialog->setLineCount(currentHistory.maximumLineCount());
         }
     } else {
-        dialog->setMode(HistorySizeDialog::NoHistory);
+        dialog->setMode(Enum::NoHistory);
     }
 
     connect(dialog, SIGNAL(optionsChanged(int,int)),
@@ -1061,13 +1062,13 @@ void SessionController::sessionResizeRequest(const QSize& size)
 void SessionController::scrollBackOptionsChanged(int mode, int lines)
 {
     switch (mode) {
-    case HistorySizeDialog::NoHistory:
+    case Enum::NoHistory:
         _session->setHistoryType(HistoryTypeNone());
         break;
-    case HistorySizeDialog::FixedSizeHistory:
+    case Enum::FixedSizeHistory:
         _session->setHistoryType(CompactHistoryType(lines));
         break;
-    case HistorySizeDialog::UnlimitedHistory:
+    case Enum::UnlimitedHistory:
         _session->setHistoryType(HistoryTypeFile());
         break;
     }

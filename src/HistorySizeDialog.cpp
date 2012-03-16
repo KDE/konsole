@@ -102,29 +102,29 @@ void HistorySizeDialog::emitOptionsChanged()
     emit optionsChanged(mode() , lineCount());
 }
 
-void HistorySizeDialog::setMode(HistoryMode historyMode)
+void HistorySizeDialog::setMode(Enum::HistoryModeEnum historyMode)
 {
-    if (historyMode == NoHistory) {
+    if (historyMode == Enum::NoHistory) {
         _noHistoryButton->setChecked(true);
-    } else if (historyMode == FixedSizeHistory) {
+    } else if (historyMode == Enum::FixedSizeHistory) {
         _fixedHistoryButton->setChecked(true);
-    } else if (historyMode == UnlimitedHistory) {
+    } else if (historyMode == Enum::UnlimitedHistory) {
         _unlimitedHistoryButton->setChecked(true);
     }
 
 }
 
-HistorySizeDialog::HistoryMode HistorySizeDialog::mode() const
+Enum::HistoryModeEnum HistorySizeDialog::mode() const
 {
     if (_noHistoryButton->isChecked())
-        return NoHistory;
+        return Enum::NoHistory;
     else if (_fixedHistoryButton->isChecked())
-        return FixedSizeHistory;
+        return Enum::FixedSizeHistory;
     else if (_unlimitedHistoryButton->isChecked())
-        return UnlimitedHistory;
+        return Enum::UnlimitedHistory;
 
     Q_ASSERT(false);
-    return NoHistory;
+    return Enum::NoHistory;
 }
 
 int HistorySizeDialog::lineCount() const
