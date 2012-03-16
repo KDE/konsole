@@ -58,7 +58,7 @@ public:
      * the terminal emulation is in.  Therefore findEntry() may return a different
      * Entry depending upon the state flags supplied.
      *
-     * This enum describes the states which may be associated with with a particular
+     * This enum describes the states which may be associated with a particular
      * entry in the keyboard translation entry.
      */
     enum State {
