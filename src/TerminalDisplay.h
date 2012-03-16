@@ -305,25 +305,6 @@ public:
         return _bellMode;
     }
 
-    /**
-     * This enum describes the different types of sounds and visual effects which
-     * can be used to alert the user when a 'bell' occurs in the terminal
-     * session.
-     */
-    enum BellMode {
-        /** A system beep. */
-        SystemBeepBell = 0,
-        /**
-         * KDE notification.  This may play a sound, show a passive popup
-         * or perform some other action depending on the user's settings.
-         */
-        NotifyBell = 1,
-        /** A silent, visual bell (eg. inverting the display's colors briefly) */
-        VisualBell = 2,
-        /** No bell effects */
-        NoBell = 3
-    };
-
     /** Play a visual bell for prompt or warning. */
     void visualBell();
 

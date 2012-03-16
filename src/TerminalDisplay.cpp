@@ -283,7 +283,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _columnSelectionMode(false)
     , _scrollbarLocation(Enum::ScrollBarRight)
     , _wordCharacters(":@-./_~")
-    , _bellMode(NotifyBell)
+    , _bellMode(Enum::NotifyBell)
     , _allowBlinkingText(true)
     , _allowBlinkingCursor(false)
     , _textBlinking(false)
@@ -2718,7 +2718,7 @@ void TerminalDisplay::enableBell()
 
 void TerminalDisplay::bell(const QString& message)
 {
-    if (_bellMode == NoBell)
+    if (_bellMode == Enum::NoBell)
         return;
 
     if (_allowBell) {
@@ -2728,12 +2728,12 @@ void TerminalDisplay::bell(const QString& message)
         _allowBell = false;
         QTimer::singleShot(500, this, SLOT(enableBell()));
 
-        if (_bellMode == SystemBeepBell) {
+        if (_bellMode == Enum::SystemBeepBell) {
             KNotification::beep();
-        } else if (_bellMode == NotifyBell) {
+        } else if (_bellMode == Enum::NotifyBell) {
             KNotification::event(hasFocus() ? "BellVisible" : "BellInvisible",
                                  message, QPixmap(), this);
-        } else if (_bellMode == VisualBell) {
+        } else if (_bellMode == Enum::VisualBell) {
             visualBell();
         }
     }

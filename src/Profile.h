@@ -211,16 +211,6 @@ public:
         MenuIndex
     };
 
-    /** This enum describes the behavior of bell . */
-    enum BellModeEnum {
-        /** trigger system beep. */
-        SystemBeepBell = 0,
-        /** trigger system notification. */
-        NotifyBell = 1,
-        /** trigger visual bell(inverting the display's colors briefly). */
-        VisualBell = 2
-    };
-
     /**
      * Constructs a new profile
      *

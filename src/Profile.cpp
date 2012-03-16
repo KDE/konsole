@@ -173,7 +173,7 @@ FallbackProfile::FallbackProfile()
     setProperty(CursorShape, Enum::BlockCursor);
     setProperty(UseCustomCursorColor, false);
     setProperty(CustomCursorColor, Qt::black);
-    setProperty(BellMode, NotifyBell);
+    setProperty(BellMode, Enum::NotifyBell);
 
     setProperty(DefaultEncoding, QString(QTextCodec::codecForLocale()->name()));
     setProperty(AntiAliasFonts, true);

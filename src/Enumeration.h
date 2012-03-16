@@ -84,6 +84,22 @@ public:
         SelectForwardsFromCursor = 1
     };
 
+    /**
+     * This enum describes the different types of sounds and visual effects which
+     * can be used to alert the user when a 'bell' occurs in the terminal
+     * session.
+     */
+    enum BellModeEnum {
+        /** trigger system beep. */
+        SystemBeepBell = 0,
+        /** trigger system notification. */
+        NotifyBell = 1,
+        /** trigger visual bell(inverting the display's colors briefly). */
+        VisualBell = 2,
+        /** No bell effects */
+        NoBell = 3
+    };
+
 };
 
 }
