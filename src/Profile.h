@@ -216,16 +216,6 @@ public:
     };
 
     /**
-     * This enum describes where newly created tab should be placed.
-     */
-    enum NewTabBehaviorEnum {
-        /** Put newly created tab at the end. */
-        PutNewTabAtTheEnd = 0,
-        /** Put newly created tab right after current tab. */
-        PutNewTabAfterCurrentTab   = 1
-    };
-
-    /**
      * This enum describes the modes available to remember lines of output
      * produced by the terminal.
      */
