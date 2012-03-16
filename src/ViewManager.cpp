@@ -651,7 +651,6 @@ ViewContainer* ViewManager::createContainer()
     connect(container, SIGNAL(moveViewRequest(int,int,bool&)),
             this , SLOT(containerMoveViewRequest(int,int,bool&)));
     connect(container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)));
-    connect(container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)));
     connect(container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
 
     return container;
