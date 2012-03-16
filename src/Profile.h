@@ -134,6 +134,8 @@ public:
         KeyBindings,
         /** (HistoryModeEnum) Specifies the storage type used for keeping
          * the output produced by terminal sessions using this profile.
+         *
+         * See Enum::HistoryModeEnum
          */
         HistoryMode,
         /** (int) Specifies the number of lines of output to remember in
@@ -144,6 +146,8 @@ public:
         HistorySize,
         /** (ScrollBarPositionEnum) Specifies the position of the scroll bar
          * in terminal displays using this profile.
+         *
+         * See Enum::ScrollBarPositionEnum
          */
         ScrollBarPosition,
         /** (bool) Specifies whether the terminal will enable Bidirectional
@@ -169,6 +173,8 @@ public:
         UseCustomCursorColor,
         /** (CursorShapeEnum) The shape used by terminal displays to
          * represent the cursor.
+         *
+         * See Enum::CursorShapeEnum
          */
         CursorShape,
         /** (QColor) The color used by terminal displays to draw the cursor.
@@ -181,6 +187,8 @@ public:
         WordCharacters,
         /** (TripleClickModeEnum) Specifies which part of current line should
          * be selected with triple click action.
+         *
+         * See Enum::TripleClickModeEnum
          */
         TripleClickMode,
         /** (bool) If true, text that matches a link or an email address is
@@ -200,7 +208,10 @@ public:
         StartInCurrentSessionDir,
         /** (int) Specifies the threshold of detected silence in seconds. */
         SilenceSeconds,
-        /** (BellModeEnum) Specifies the behavior of bell. */
+        /** (BellModeEnum) Specifies the behavior of bell.
+         *
+         * See Enum::BellModeEnum
+         */
         BellMode,
         /** Index of profile in the File Menu
          * WARNING: this is currently an internal field, which is
