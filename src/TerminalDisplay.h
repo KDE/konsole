@@ -158,22 +158,12 @@ public:
         return _ctrlDrag;
     }
 
-    /**
-     *  This enum describes the methods for selecting text when
-      *  the user triple-clicks within the display.
-      */
-    enum TripleClickMode {
-        /** Select the whole line underneath the cursor. */
-        SelectWholeLine,
-        /** Select from the current cursor position to the end of the line. */
-        SelectForwardsFromCursor
-    };
     /** Sets how the text is selected when the user triple clicks within the display. */
-    void setTripleClickMode(TripleClickMode mode) {
+    void setTripleClickMode(Enum::TripleClickModeEnum mode) {
         _tripleClickMode = mode;
     }
     /** See setTripleClickSelectionMode() */
-    TripleClickMode tripleClickMode() const {
+    Enum::TripleClickModeEnum tripleClickMode() const {
         return _tripleClickMode;
     }
 
@@ -787,7 +777,7 @@ private:
 
     bool _ctrlDrag; // require Ctrl key for drag selected text
 
-    TripleClickMode _tripleClickMode;
+    Enum::TripleClickModeEnum _tripleClickMode;
     bool _possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
     // after QApplication::doubleClickInterval() delay
 

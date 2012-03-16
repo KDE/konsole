@@ -292,7 +292,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _underlineLinks(true)
     , _isFixedSize(false)
     , _ctrlDrag(true)
-    , _tripleClickMode(SelectWholeLine)
+    , _tripleClickMode(Enum::SelectWholeLine)
     , _possibleTripleClick(false)
     , _resizeWidget(0)
     , _resizeTimer(0)
@@ -2325,7 +2325,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
     while (_iPntSel.y() > 0 && (_lineProperties[_iPntSel.y() - 1] & LINE_WRAPPED))
         _iPntSel.ry()--;
 
-    if (_tripleClickMode == SelectForwardsFromCursor) {
+    if (_tripleClickMode == Enum::SelectForwardsFromCursor) {
         // find word boundary start
         int i = loc(_iPntSel.x(), _iPntSel.y());
         const QChar selClass = charClass(_image[i]);
@@ -2346,7 +2346,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 
         _screenWindow->setSelectionStart(x , _iPntSel.y() , false);
         _tripleSelBegin = QPoint(x, _iPntSel.y());
-    } else if (_tripleClickMode == SelectWholeLine) {
+    } else if (_tripleClickMode == Enum::SelectWholeLine) {
         _screenWindow->setSelectionStart(0 , _iPntSel.y() , false);
         _tripleSelBegin = QPoint(0, _iPntSel.y());
     }

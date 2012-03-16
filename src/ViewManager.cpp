@@ -803,7 +803,7 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     view->setBlinkingTextEnabled(blinkingText);
 
     int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
-    view->setTripleClickMode(TerminalDisplay::TripleClickMode(tripleClickMode));
+    view->setTripleClickMode(Enum::TripleClickModeEnum(tripleClickMode));
 
     view->setUnderlineLinks(profile->property<bool>(Profile::UnderlineLinksEnabled));
 

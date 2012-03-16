@@ -76,6 +76,14 @@ public:
         UnderlineCursor = 2
     };
 
+    /** This enum describes the behavior of triple click action . */
+    enum TripleClickModeEnum {
+        /** Select the whole line underneath the cursor. */
+        SelectWholeLine = 0,
+        /** Select from the current cursor position to the end of the line. */
+        SelectForwardsFromCursor = 1
+    };
+
 };
 
 }

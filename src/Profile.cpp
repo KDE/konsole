@@ -166,7 +166,7 @@ FallbackProfile::FallbackProfile()
     setProperty(FlowControlEnabled, true);
     setProperty(BlinkingTextEnabled, true);
     setProperty(UnderlineLinksEnabled, true);
-    setProperty(TripleClickMode, SelectWholeLine);
+    setProperty(TripleClickMode, Enum::SelectWholeLine);
 
     setProperty(BlinkingCursorEnabled, false);
     setProperty(BidiRenderingEnabled, true);
