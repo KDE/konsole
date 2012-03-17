@@ -349,8 +349,6 @@ private:
 
     void setupActions();
     void focusActiveView();
-    void registerView(TerminalDisplay* view);
-    void unregisterView(TerminalDisplay* view);
 
     // takes a view from a view container owned by a different manager and places it in
     // newContainer owned by this manager
