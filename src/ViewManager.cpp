@@ -610,26 +610,17 @@ void ViewManager::createView(Session* session)
 
 ViewContainer* ViewManager::createContainer()
 {
-    ViewContainer::NavigationPosition position =
-        static_cast<ViewContainer::NavigationPosition>(_navigationPosition);
-
     ViewContainer* container = 0;
 
     switch (_navigationMethod) {
     case TabbedNavigation: {
-        container =
-            new TabbedViewContainer(position, _viewSplitter);
+        container = new TabbedViewContainer(_navigationPosition, _viewSplitter);
 
-        connect(container,
-                SIGNAL(detachTab(ViewContainer*,QWidget*)),
-                this,
-                SLOT(detachView(ViewContainer*,QWidget*))
+        connect(container, SIGNAL(detachTab(ViewContainer*,QWidget*)),
+                this, SLOT(detachView(ViewContainer*,QWidget*))
                );
-        connect(container,
-                SIGNAL(closeTab(ViewContainer*,QWidget*)),
-                this,
-                SLOT(closeTabFromContainer(ViewContainer*,QWidget*)));
-
+        connect(container, SIGNAL(closeTab(ViewContainer*,QWidget*)),
+                this, SLOT(closeTabFromContainer(ViewContainer*,QWidget*)));
     }
     break;
     case NoNavigation:
