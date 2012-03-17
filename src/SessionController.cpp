@@ -433,7 +433,6 @@ void SessionController::setShowMenuAction(QAction* action)
     actionCollection()->addAction("show-menubar", action);
 }
 
-
 void SessionController::setupCommonActions()
 {
     KAction* action = 0;
@@ -795,7 +794,6 @@ void SessionController::copyInputActionsTriggered(QAction* action)
         Q_ASSERT(false);
     }
 }
-
 
 void SessionController::copyInputToAllTabs()
 {
@@ -1377,7 +1375,6 @@ void SaveHistoryTask::execute()
                                          // depends on factors other than just the protocol
                                          // used
                                         );
-
 
         SaveJob jobInfo;
         jobInfo.session = session;

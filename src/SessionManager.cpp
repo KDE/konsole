@@ -47,7 +47,6 @@
 
 using namespace Konsole;
 
-
 static bool profileIndexLessThan(const Profile::Ptr& p1, const Profile::Ptr& p2)
 {
     return p1->menuIndexAsInt() <= p2->menuIndexAsInt();

@@ -391,7 +391,6 @@ where _ = none
       - = horizontal line.
  */
 
-
 enum LineEncode {
     TopL  = (1 << 1),
     TopC  = (1 << 2),
@@ -419,7 +418,6 @@ enum LineEncode {
     BotC  = (1 << 22),
     BotR  = (1 << 23)
 };
-
 
 static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code)
 {
@@ -739,7 +737,6 @@ uint TerminalDisplay::randomSeed() const
 {
     return _randomSeed;
 }
-
 
 // scrolls the image by 'lines', down if lines > 0 or up otherwise.
 //
@@ -1850,7 +1847,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         if (ev->buttons() & Qt::RightButton)
             button = 2;
 
-
         emit mouseSignal(button,
                          charColumn + 1,
                          charLine + 1 + _scrollBar->value() - _scrollBar->maximum(),
@@ -2116,7 +2112,6 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
         _dragInfo.state = diNone;
     }
 
-
     if (!_mouseMarks &&
             ((ev->button() == Qt::RightButton && !(ev->modifiers() & Qt::ShiftModifier))
              || ev->button() == Qt::MidButton)) {
@@ -2230,7 +2225,6 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
                 ((endSel.x() - bgnSel.x()) > 0)) {
             endSel.setX(x - 1);
         }
-
 
         _actSel = 2; // within selection
 
@@ -2371,7 +2365,6 @@ bool TerminalDisplay::focusNextPrevChild(bool next)
     else
         return QWidget::focusNextPrevChild(next);
 }
-
 
 QChar TerminalDisplay::charClass(const Character& ch) const
 {
@@ -2636,7 +2629,6 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     event->accept();
 }
 
-
 bool TerminalDisplay::handleShortcutOverrideEvent(QKeyEvent* keyEvent)
 {
     const int modifiers = keyEvent->modifiers();
@@ -2752,7 +2744,6 @@ void TerminalDisplay::swapColorTable()
 
     update();
 }
-
 
 /* --------------------------------------------------------------------- */
 /*                                                                       */

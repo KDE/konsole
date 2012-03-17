@@ -253,7 +253,6 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
         }
     }
 
-
     ShellCommand command(profile->command() , profile->arguments());
     _ui->commandEdit->setText(command.fullCommand());
     KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
@@ -1293,7 +1292,6 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     if (isSelected) { //|| isChecked )
         static const int selectedBorderWidth = 6;
 
-
         painter->setBrush(QBrush(Qt::NoBrush));
         QPen pen;
 
@@ -1309,7 +1307,6 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
         pen.setJoinStyle(Qt::MiterJoin);
 
         painter->setPen(pen);
-
 
         painter->drawRect(option.rect.adjusted(selectedBorderWidth / 2,
                                                selectedBorderWidth / 2,

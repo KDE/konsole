@@ -228,7 +228,6 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
         else
             spaceCount = 0;
 
-
         //output current character
         if (spaceCount < 2) {
             if (characters[i].rendition & RE_EXTENDED_CHAR) {

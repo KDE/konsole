@@ -206,7 +206,6 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
             !_randomTable[index].isNull()) {
         const RandomizationRange& range = _randomTable[index];
 
-
         int hueDifference = range.hue ? (qrand() % range.hue) - range.hue / 2 : 0;
         int saturationDifference = range.saturation ? (qrand() % range.saturation) - range.saturation / 2 : 0;
         int  valueDifference = range.value ? (qrand() % range.value) - range.value / 2 : 0;

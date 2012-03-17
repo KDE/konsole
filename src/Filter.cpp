@@ -195,7 +195,6 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
     Q_ASSERT(_linePositions);
     Q_ASSERT(_buffer);
 
-
     for (int i = 0 ; i < _linePositions->count() ; i++) {
         int nextLine = 0;
 
@@ -211,7 +210,6 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
         }
     }
 }
-
 
 /*void Filter::addLine(const QString& text)
 {

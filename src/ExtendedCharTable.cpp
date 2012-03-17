@@ -99,7 +99,6 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
         }
     }
 
-
     // add the new sequence to the table and
     // return that index
     ushort* buffer = new ushort[length + 1];
@@ -152,5 +151,4 @@ bool ExtendedCharTable::extendedCharMatch(ushort hash , const ushort* unicodePoi
     }
     return true;
 }
-
 

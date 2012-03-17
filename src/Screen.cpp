@@ -327,7 +327,6 @@ void Screen::setDefaultMargins()
     _bottomMargin = _lines - 1;
 }
 
-
 /*
    Clarifying rendition here and in the display.
 

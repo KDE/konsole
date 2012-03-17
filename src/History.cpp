@@ -164,9 +164,7 @@ int HistoryFile::len() const
     return _length;
 }
 
-
 // History Scroll abstract base class //////////////////////////////////////
-
 
 HistoryScroll::HistoryScroll(HistoryType* t)
     : _historyType(t)
@@ -514,7 +512,6 @@ int CompactHistoryScroll::getLineLen(int lineNumber)
     return line->getLength();
 }
 
-
 void CompactHistoryScroll::getCells(int lineNumber, int startColumn, int count, Character buffer[])
 {
     if (count == 0) return;
@@ -540,7 +537,6 @@ bool CompactHistoryScroll::isWrappedLine(int lineNumber)
     Q_ASSERT(lineNumber < lines.size());
     return lines[lineNumber]->isWrapped();
 }
-
 
 //////////////////////////////////////////////////////////////////////
 // History Types

@@ -406,7 +406,6 @@ void UnixProcessInfo::readUserName()
     delete [] getpwBuffer;
 }
 
-
 class LinuxProcessInfo : public UnixProcessInfo
 {
 public:
@@ -458,7 +457,6 @@ private:
             setFileError(statusInfo.error());
             return false;
         }
-
 
         // read process status file ( /proc/<pid/stat )
         //

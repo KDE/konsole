@@ -409,7 +409,6 @@ void ViewManager::focusActiveView()
     }
 }
 
-
 void ViewManager::viewActivated(QWidget* view)
 {
     Q_ASSERT(view != 0);

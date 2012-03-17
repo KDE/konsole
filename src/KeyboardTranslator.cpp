@@ -40,7 +40,6 @@
 
 using namespace Konsole;
 
-
 const QByteArray KeyboardTranslatorManager::defaultTranslatorText(
     "keyboard \"Fallback Key Translator\"\n"
     "key Tab : \"\\t\""
@@ -191,7 +190,6 @@ void KeyboardTranslatorWriter::writeEntry(const KeyboardTranslator::Entry& entry
 
     *_writer << "key " << entry.conditionToString() << " : " << result << '\n';
 }
-
 
 // each line of the keyboard translation file is one of:
 //

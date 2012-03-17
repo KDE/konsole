@@ -284,7 +284,6 @@ inline void CharacterColor::setIntensive()
     }
 }
 
-
 }
 
 #endif // CHARACTERCOLOR_H

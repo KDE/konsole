@@ -412,7 +412,6 @@ signals:
      */
     void selectedText(const QString & text);
 
-
 protected:
     virtual void setMode(int mode) = 0;
     virtual void resetMode(int mode) = 0;

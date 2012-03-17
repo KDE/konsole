@@ -555,7 +555,6 @@ public slots:
      */
     void setForegroundColor(const QColor& color);
 
-
 signals:
 
     /**
@@ -845,7 +844,6 @@ private:
     // custom cursor color.  if this is invalid then the foreground
     // color of the character under the cursor is used
     QColor _cursorColor;
-
 
     struct InputMethodData {
         QString preeditString;

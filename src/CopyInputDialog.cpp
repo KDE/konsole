@@ -192,6 +192,3 @@ void CheckableSessionModel::sessionRemoved(Session* session)
     _fixedSessions.remove(session);
 }
 
-
-
-

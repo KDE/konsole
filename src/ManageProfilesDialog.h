@@ -53,7 +53,6 @@ class KONSOLEPRIVATE_EXPORT ManageProfilesDialog : public KDialog
 {
     Q_OBJECT
 
-
     friend class FavoriteItemDelegate;
     friend class ShortcutItemDelegate;
     friend class ::QTableView;

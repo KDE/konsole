@@ -580,7 +580,6 @@ void Session::silenceTimerDone()
     //This breaks with the addition of multiple views of a session.  The popup should disappear
     //when any of the views of the session becomes active
 
-
     //FIXME: Make message text for this notification and the activity notification more descriptive.
     if (_monitorSilence) {
         KNotification::event("Silence", i18n("Silence in session '%1'", _nameTitle), QPixmap(),

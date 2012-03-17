@@ -62,7 +62,6 @@ public:
         UnlimitedHistory
     };
 
-
     /** Specifies the history mode. */
     void setMode(HistoryMode mode);
     /** Returns the history mode chosen by the user. */

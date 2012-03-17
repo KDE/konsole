@@ -68,7 +68,6 @@ class HistorySizeDialog;
 // SaveHistoryTask
 class TerminalCharacterDecoder;
 
-
 typedef QPointer<Session> SessionPtr;
 
 /**

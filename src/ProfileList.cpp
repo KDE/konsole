@@ -56,7 +56,6 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
 
     connect(_group, SIGNAL(triggered(QAction*)), this, SLOT(triggered(QAction*)));
 
-
     // listen for future changes to the profiles
     connect(manager, SIGNAL(favoriteStatusChanged(Profile::Ptr,bool)), this,
             SLOT(favoriteChanged(Profile::Ptr,bool)));

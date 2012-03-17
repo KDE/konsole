@@ -356,5 +356,3 @@ void ProfileGroup::setProperty(Property property, const QVariant& value)
     }
 }
 
-
-

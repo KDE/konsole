@@ -219,7 +219,6 @@ void ViewSplitter::activatePreviousContainer()
     setActiveContainer(_containers.at(index));
 }
 
-
 void ViewSplitter::setActiveContainer(ViewContainer* container)
 {
     QWidget* activeView = container->activeView();

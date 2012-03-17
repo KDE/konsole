@@ -138,5 +138,4 @@ void HistorySizeDialog::setLineCount(int lines)
     _lineCountBox->setSingleStep(lines / 10);
 }
 
-
 #include "HistorySizeDialog.moc"

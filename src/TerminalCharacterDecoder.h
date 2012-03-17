@@ -101,7 +101,6 @@ public:
                             int count,
                             LineProperty properties);
 
-
 private:
     QTextStream* _output;
     bool _includeTrailingWhitespace;

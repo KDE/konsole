@@ -203,7 +203,6 @@ inline ColorEntry::FontWeight Character::fontWeight(const ColorEntry* base) cons
         return ColorEntry::UseCurrentFormat;
 }
 
-
 }
 Q_DECLARE_TYPEINFO(Konsole::Character, Q_MOVABLE_TYPE);
 

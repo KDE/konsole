@@ -175,7 +175,6 @@ public:
     /** Returns the format used by this session for tab titles. */
     QString tabTitleFormat(TabTitleContext context) const;
 
-
     /** Returns the arguments passed to the shell process when run() is called. */
     QStringList arguments() const;
     /** Returns the program name of the shell process started when run() is called. */
@@ -639,7 +638,6 @@ signals:
      */
     void selectedText(const QString & text);
 
-
 private slots:
     void done(int, QProcess::ExitStatus);
 
@@ -705,7 +703,6 @@ private:
     bool           _masterMode;
     bool           _autoClose;
     bool           _closePerUserRequest;
-
 
     QString        _nameTitle;
     QString        _displayTitle;

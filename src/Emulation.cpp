@@ -242,7 +242,6 @@ void Emulation::receiveData(const char* text, int length)
 //which hasn't been ported into the newer function (above).  Hopefully someone who understands this better
 //can find an alternative way of handling the check.
 
-
 /*void Emulation::onRcvBlock(const char *s, int len)
 {
   emit notifySessionState(NOTIFYACTIVITY);
@@ -293,7 +292,6 @@ int Emulation::lineCount() const
     // sum number of lines currently on _screen plus number of lines in history
     return _currentScreen->getLines() + _currentScreen->getHistLines();
 }
-
 
 void Emulation::showBulk()
 {
@@ -369,7 +367,6 @@ QSize Emulation::imageSize() const
 {
     return QSize(_currentScreen->getColumns(), _currentScreen->getLines());
 }
-
 
 #include "Emulation.moc"
 

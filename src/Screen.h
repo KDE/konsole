@@ -379,7 +379,6 @@ public:
      */
     QVector<LineProperty> getLineProperties(int startLine , int endLine) const;
 
-
     /** Return the number of lines. */
     int getLines() const {
         return _lines;
@@ -628,7 +627,6 @@ private:
     // copies 'count' lines from the history buffer into 'dest',
     // starting from 'startLine', where 0 is the first line in the history
     void copyFromHistory(Character* dest, int startLine, int count) const;
-
 
     // screen image ----------------
     int _lines;
