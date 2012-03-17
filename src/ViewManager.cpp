@@ -759,7 +759,7 @@ TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
     return display;
 }
 
-const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr profile) const
+const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr profile)
 {
     const ColorScheme* colorScheme = ColorSchemeManager::instance()->
                                      findColorScheme(profile->colorScheme());

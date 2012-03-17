@@ -345,7 +345,7 @@ private slots:
 
 private:
     void createView(Session* session, ViewContainer* container, int index);
-    const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile) const;
+    static const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile);
 
     void setupActions();
     void focusActiveView();
