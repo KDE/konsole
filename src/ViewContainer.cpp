@@ -458,12 +458,12 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     // The 'new tab' and 'close tab' button
     _newTabButton = new QToolButton(_containerWidget);
     _newTabButton->setIcon(KIcon("tab-new"));
-    _newTabButton->setToolTip(i18n("Open a new tab"));
+    _newTabButton->setToolTip(i18nc("@info:tooltip", "Create new tab"));
     _newTabButton->adjustSize();
 
     _closeTabButton = new QToolButton(_containerWidget);
     _closeTabButton->setIcon(KIcon("tab-close"));
-    _closeTabButton->setToolTip(i18n("Close the current tab"));
+    _closeTabButton->setToolTip(i18nc("@info:tooltip", "Close current tab"));
     _closeTabButton->adjustSize();
 
     // 'new tab' button is initially hidden. It will be shown when setFeatures()

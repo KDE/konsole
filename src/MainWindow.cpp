@@ -274,7 +274,7 @@ void MainWindow::setupActions()
     KAction* menuAction = 0;
 
     // File Menu
-    _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18n("&New Tab"), collection);
+    _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18nc("@action:inmenu", "&New Tab"), collection);
     _newTabMenuAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_T));
     _newTabMenuAction->setShortcutConfigurable(true);
     _newTabMenuAction->setAutoRepeat(false);
@@ -283,26 +283,26 @@ void MainWindow::setupActions()
 
     menuAction = collection->addAction("clone-tab");
     menuAction->setIcon( KIcon("tab-duplicate") );
-    menuAction->setText( i18n("&Clone Tab") );
+    menuAction->setText( i18nc("@action:inmenu", "&Clone Tab") );
     menuAction->setShortcut( QKeySequence() );
     menuAction->setAutoRepeat( false );
     connect(menuAction, SIGNAL(triggered()), this, SLOT(cloneTab()));
 
     menuAction = collection->addAction("new-window");
     menuAction->setIcon(KIcon("window-new"));
-    menuAction->setText(i18n("New &Window"));
+    menuAction->setText(i18nc("@action:inmenu", "New &Window"));
     menuAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_N));
     menuAction->setAutoRepeat(false);
     connect(menuAction, SIGNAL(triggered()), this, SLOT(newWindow()));
 
     menuAction = collection->addAction("close-window");
     menuAction->setIcon(KIcon("window-close"));
-    menuAction->setText(i18n("Close Window"));
+    menuAction->setText(i18nc("@action:inmenu", "Close Window"));
     menuAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Q));
     connect(menuAction, SIGNAL(triggered()), this, SLOT(close()));
 
     // Bookmark Menu
-    KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection);
+    KActionMenu* bookmarkMenu = new KActionMenu(i18nc("@title:menu", "&Bookmarks") , collection);
     _bookmarkHandler = new BookmarkHandler(collection , bookmarkMenu->menu() , true , this);
     collection->addAction("bookmark" , bookmarkMenu);
     connect(_bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)));
@@ -320,7 +320,7 @@ void MainWindow::setupActions()
     KStandardAction::preferences(this, SLOT(showSettingsDialog()), collection);
 
     menuAction = collection->addAction("manage-profiles");
-    menuAction->setText(i18n("Manage Profiles..."));
+    menuAction->setText(i18nc("@action:inmenu", "Manage Profiles..."));
     menuAction->setIcon(KIcon("configure"));
     connect(menuAction, SIGNAL(triggered()), this, SLOT(showManageProfilesDialog()));
 
@@ -521,7 +521,7 @@ bool MainWindow::queryClose()
                       "Do you still want to quit?",
 		      "There are %1 tabs open in this window. "
                       "Do you still want to quit?", openTabs),
-                 i18n("Confirm Close"),
+                 i18nc("@title", "Confirm Close"),
                  KStandardGuiItem::quit(),
                  KGuiItem(i18n("Close Current Tab"), "tab-close"),
                  KStandardGuiItem::cancel(),
