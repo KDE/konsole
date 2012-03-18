@@ -27,6 +27,7 @@
 
 // Konsole
 #include "KeyboardTranslator.h"
+#include "KeyboardTranslatorManager.h"
 #include "Screen.h"
 #include "ScreenWindow.h"
 

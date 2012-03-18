@@ -51,6 +51,7 @@
 #include "ui_EditProfileDialog.h"
 #include "KeyBindingEditor.h"
 #include "KeyboardTranslator.h"
+#include "KeyboardTranslatorManager.h"
 #include "SessionManager.h"
 #include "ShellCommand.h"
 #include "TabTitleFormatAction.h"

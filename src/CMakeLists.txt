@@ -79,6 +79,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         IncrementalSearchBar.cpp
         KeyBindingEditor.cpp
         KeyboardTranslator.cpp
+        KeyboardTranslatorManager.cpp
         ManageProfilesDialog.cpp
         ProcessInfo.cpp
         Profile.cpp
