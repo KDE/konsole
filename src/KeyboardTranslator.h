@@ -148,7 +148,7 @@ public:
          * @param expandWildCards Specifies whether wild cards (occurrences of the '*' character) in
          * the entry should be replaced with a number to indicate the modifier keys being pressed.
          *
-         * @param modifiers The keyboard modifiers being pressed.
+         * @param keyboardModifiers The keyboard modifiers being pressed.
          */
         QByteArray text(bool expandWildCards = false,
                         Qt::KeyboardModifiers keyboardModifiers = Qt::NoModifier) const;
