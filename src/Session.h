@@ -227,7 +227,7 @@ public:
      * specify how input key sequences are translated into
      * the character stream which is sent to the terminal.
      *
-     * @param id The name of the key bindings to use.  The
+     * @param name The name of the key bindings to use.  The
      * names of available key bindings can be determined using the
      * KeyboardTranslatorManager class.
      */
