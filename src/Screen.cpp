@@ -174,7 +174,8 @@ void Screen::reverseIndex()
 void Screen::nextLine()
 //=NEL
 {
-    toStartOfLine(); index();
+    toStartOfLine();
+    index();
 }
 
 void Screen::eraseChars(int n)
@@ -288,7 +289,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
         // attempt to preserve focus and _lines
         _bottomMargin = _lines - 1; //FIXME: margin lost
         for (int i = 0; i < _cuY - (new_lines - 1); i++) {
-            addHistLine(); scrollUp(0, 1);
+            addHistLine();
+            scrollUp(0, 1);
         }
     }
 
@@ -499,9 +501,15 @@ QVector<LineProperty> Screen::getLineProperties(int startLine , int endLine) con
 
 void Screen::reset(bool clearScreen)
 {
-    setMode(MODE_Wrap); saveMode(MODE_Wrap);      // wrap at end of margin
-    resetMode(MODE_Origin); saveMode(MODE_Origin);  // position refere to [1,1]
-    resetMode(MODE_Insert); saveMode(MODE_Insert);  // overstroke
+    setMode(MODE_Wrap);
+    saveMode(MODE_Wrap);      // wrap at end of margin
+
+    resetMode(MODE_Origin);
+    saveMode(MODE_Origin);  // position refere to [1,1]
+
+    resetMode(MODE_Insert);
+    saveMode(MODE_Insert);  // overstroke
+
     setMode(MODE_Cursor);                         // cursor visible
     resetMode(MODE_Screen);                         // screen not inverse
     resetMode(MODE_NewLine);
@@ -553,7 +561,10 @@ void Screen::backtab(int n)
     // note that TAB is a format effector (does not write ' ');
     if (n == 0) n = 1;
     while ((n > 0) && (_cuX > 0)) {
-        cursorLeft(1); while ((_cuX > 0) && !_tabStops[_cuX]) cursorLeft(1);
+        cursorLeft(1);
+        while ((_cuX > 0) && !_tabStops[_cuX]) {
+            cursorLeft(1);
+        }
         n--;
     }
 }
@@ -929,7 +940,8 @@ void Screen::clearEntireScreen()
 {
     // Add entire screen to history
     for (int i = 0; i < (_lines - 1); i++) {
-        addHistLine(); scrollUp(0, 1);
+        addHistLine();
+        scrollUp(0, 1);
     }
 
     clearImage(loc(0, 0), loc(_columns - 1, _lines - 1), ' ');

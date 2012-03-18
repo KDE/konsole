@@ -1622,9 +1622,7 @@ QString SessionController::userTitle () const
 {
     if ( _session) {
         return _session->userTitle();
-    }
-    else
-    {
+    } else {
         return QString();
     }
 }

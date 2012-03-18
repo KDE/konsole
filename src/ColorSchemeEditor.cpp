@@ -142,8 +142,7 @@ void ColorSchemeEditor::wallpaperPathChanged(const QString& path)
 {
     if (path.isEmpty()) {
         _colors->setWallpaper(path);
-    }
-    else {
+    } else {
         QFileInfo i(path);
 
         if (i.exists() && i.isFile() && i.isReadable())

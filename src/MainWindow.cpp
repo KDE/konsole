@@ -431,8 +431,7 @@ void MainWindow::cloneTab()
     Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
     if ( profile) {
         createSession( profile , activeSessionDir() );
-    }
-    else {
+    } else {
         // something must be wrong: every session should be associated with profile
         Q_ASSERT(false);
         newTab();
@@ -635,8 +634,7 @@ void MainWindow::applyKonsoleSettings()
 {
     if ( KonsoleSettings::allowMenuAccelerators() ) {
         recoverMenuAccelerators();
-    }
-    else {
+    } else {
         removeMenuAccelerators();
     }
 

@@ -406,8 +406,7 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
 
     if ( shouldUseNewProfile ) {
         return newProfile;
-    }
-    else {
+    } else {
         return baseProfile;
     }
 }

@@ -653,9 +653,7 @@ void SessionManager::saveShortcuts()
         if (fileInfo.isAbsolute())
         {
             profileName = fileInfo.fileName();
-        }
-        else
-        {
+        } else {
             profileName = iter.value().profilePath;
         }
 
@@ -732,9 +730,7 @@ void SessionManager::saveFavorites()
         if (fileInfo.isAbsolute())
         {
             profileName = fileInfo.fileName();
-        }
-        else
-        {
+        } else {
             profileName = profile->path();
         }
 

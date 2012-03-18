@@ -181,7 +181,7 @@ void Emulation::receiveChar(int c)
     case '\r'      : _currentScreen->toStartOfLine();             break;
     case 0x07      : emit stateSet(NOTIFYBELL);                   break;
     default        : _currentScreen->displayCharacter(c);         break;
-    };
+    }
 }
 
 void Emulation::sendKeyEvent(QKeyEvent* ev)

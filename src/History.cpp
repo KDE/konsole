@@ -96,7 +96,8 @@ void HistoryFile::map()
 void HistoryFile::unmap()
 {
     int result = munmap(_fileMap , _length);
-    Q_ASSERT(result == 0); Q_UNUSED(result);
+    Q_ASSERT(result == 0);
+    Q_UNUSED(result);
 
     _fileMap = 0;
 }

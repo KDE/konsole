@@ -688,9 +688,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         // This was discussed in: http://lists.kde.org/?t=120552223600002&r=1&w=2
         if (_bidiEnabled) {
             painter.drawText(rect, 0, text);
-        }
-        else
-        {
+        } else {
             // See bug 280896 for more info
 #if QT_VERSION >= 0x040800
             painter.drawText(rect, Qt::AlignBottom, LTR_OVERRIDE_CHAR + text);
@@ -844,25 +842,25 @@ QRegion TerminalDisplay::hotSpotRegion() const
             r.setTop(hotSpot->startLine());
             r.setRight(hotSpot->endColumn());
             r.setBottom(hotSpot->endLine());
-            region |= imageToWidget(r);;
+            region |= imageToWidget(r);
         } else {
             r.setLeft(hotSpot->startColumn());
             r.setTop(hotSpot->startLine());
             r.setRight(_columns);
             r.setBottom(hotSpot->startLine());
-            region |= imageToWidget(r);;
+            region |= imageToWidget(r);
             for (int line = hotSpot->startLine() + 1 ; line < hotSpot->endLine() ; line++) {
                 r.setLeft(0);
                 r.setTop(line);
                 r.setRight(_columns);
                 r.setBottom(line);
-                region |= imageToWidget(r);;
+                region |= imageToWidget(r);
             }
             r.setLeft(0);
             r.setTop(hotSpot->endLine());
             r.setRight(hotSpot->endColumn());
             r.setBottom(hotSpot->endLine());
-            region |= imageToWidget(r);;
+            region |= imageToWidget(r);
         }
     }
     return region;
@@ -1271,10 +1269,9 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                     painter.drawLine(r.left() , underlinePos ,
                                      r.right() , underlinePos);
                 }
-            }
             // Marker hotspots simply have a transparent rectanglular shape
             // drawn on top of them
-            else if (spot->type() == Filter::HotSpot::Marker) {
+            } else if (spot->type() == Filter::HotSpot::Marker) {
                 //TODO - Do not use a hardcoded color for this
                 painter.fillRect(r, QBrush(QColor(255, 0, 0, 120)));
             }
@@ -1978,9 +1975,11 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
         // Pick which is start (ohere) and which is extension (here)
         if (left_not_right) {
-            here = left; ohere = right;
+            here = left;
+            ohere = right;
         } else {
-            here = right; ohere = left;
+            here = right;
+            ohere = left;
         }
         ohere.rx()++;
     }
@@ -2002,9 +2001,11 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
         // Pick which is start (ohere) and which is extension (here)
         if (above_not_below) {
-            here = above; ohere = below;
+            here = above;
+            ohere = below;
         } else {
-            here = below; ohere = above;
+            here = below;
+            ohere = above;
         }
 
         const QPoint newSelBegin = QPoint(ohere.x(), ohere.y());
@@ -2049,9 +2050,13 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
         // Pick which is start (ohere) and which is extension (here)
         if (left_not_right) {
-            here = left; ohere = right; offset = 0;
+            here = left;
+            ohere = right;
+            offset = 0;
         } else {
-            here = right; ohere = left; offset = -1;
+            here = right;
+            ohere = left;
+            offset = -1;
         }
     }
 

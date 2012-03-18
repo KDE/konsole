@@ -819,9 +819,8 @@ void EditProfileDialog::updateButtonApply()
                 userModified = true;
                 break;
             }
-        }
         // for not-previewed property
-        else if ((value != _profile->property<QVariant>(aProperty))) {
+        } else if ((value != _profile->property<QVariant>(aProperty))) {
             userModified = true;
             break;
         }
