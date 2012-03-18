@@ -340,7 +340,7 @@ class SessionTask : public QObject
     Q_OBJECT
 
 public:
-    SessionTask(QObject* parent = 0);
+    explicit SessionTask(QObject* parent = 0);
 
     /**
      * Sets whether the task automatically deletes itself when the task has been finished.
@@ -392,7 +392,7 @@ class SaveHistoryTask : public SessionTask
 
 public:
     /** Constructs a new task to save session output to URLs */
-    SaveHistoryTask(QObject* parent = 0);
+    explicit SaveHistoryTask(QObject* parent = 0);
     virtual ~SaveHistoryTask();
 
     /**

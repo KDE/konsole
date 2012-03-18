@@ -752,7 +752,7 @@ class SessionGroup : public QObject
 
 public:
     /** Constructs an empty session group. */
-    SessionGroup(QObject* parent);
+    explicit SessionGroup(QObject* parent);
     /** Destroys the session group and removes all connections between master and slave sessions. */
     ~SessionGroup();
 

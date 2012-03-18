@@ -63,7 +63,7 @@ class KONSOLEPRIVATE_EXPORT EditProfileDialog : public KDialog
 
 public:
     /** Constructs a new dialog with the specified parent. */
-    EditProfileDialog(QWidget* parent = 0);
+    explicit EditProfileDialog(QWidget* parent = 0);
     virtual ~EditProfileDialog();
 
     /**
@@ -254,7 +254,7 @@ class ColorSchemeViewDelegate : public QAbstractItemDelegate
     Q_OBJECT
 
 public:
-    ColorSchemeViewDelegate(QObject* parent = 0);
+    explicit ColorSchemeViewDelegate(QObject* parent = 0);
 
     // reimplemented
     virtual void paint(QPainter* painter, const QStyleOptionViewItem& option,

@@ -50,7 +50,7 @@ class CopyInputDialog : public KDialog
     Q_OBJECT
 
 public:
-    CopyInputDialog(QWidget* parent = 0);
+    explicit CopyInputDialog(QWidget* parent = 0);
     ~CopyInputDialog();
     /**
      * Sets the 'source' session whose input will be copied to
@@ -95,7 +95,7 @@ class CheckableSessionModel : public SessionListModel
     Q_OBJECT
 
 public:
-    CheckableSessionModel(QObject* parent);
+    explicit CheckableSessionModel(QObject* parent);
 
     void setCheckColumn(int column);
     int checkColumn() const;

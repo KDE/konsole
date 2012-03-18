@@ -54,7 +54,7 @@ class KeyBindingEditor : public QWidget
 
 public:
     /** Constructs a new key bindings editor with the specified parent. */
-    KeyBindingEditor(QWidget* parent = 0);
+    explicit KeyBindingEditor(QWidget* parent = 0);
     virtual ~KeyBindingEditor();
 
     /**

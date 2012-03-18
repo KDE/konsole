@@ -287,7 +287,7 @@ class FilterObject : public QObject
 {
     Q_OBJECT
 public:
-    FilterObject(Filter::HotSpot* filter) : _filter(filter) {}
+    explicit FilterObject(Filter::HotSpot* filter) : _filter(filter) {}
 private slots:
     void activated();
 private:

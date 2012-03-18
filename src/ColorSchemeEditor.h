@@ -53,7 +53,7 @@ class ColorSchemeEditor : public QWidget
 
 public:
     /** Constructs a new color scheme editor with the specified parent. */
-    ColorSchemeEditor(QWidget* parent = 0);
+    explicit ColorSchemeEditor(QWidget* parent = 0);
     virtual ~ColorSchemeEditor();
 
     /** Initializes the dialog with the properties of the specified color scheme. */

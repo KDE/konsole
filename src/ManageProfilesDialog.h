@@ -59,7 +59,7 @@ class KONSOLEPRIVATE_EXPORT ManageProfilesDialog : public KDialog
 
 public:
     /** Constructs a new profile type with the specified parent. */
-    ManageProfilesDialog(QWidget* parent = 0);
+    explicit ManageProfilesDialog(QWidget* parent = 0);
     virtual ~ManageProfilesDialog();
 
     /**
@@ -130,7 +130,7 @@ public:
 class FavoriteItemDelegate : public QStyledItemDelegate
 {
 public:
-    FavoriteItemDelegate(QObject* parent = 0);
+    explicit FavoriteItemDelegate(QObject* parent = 0);
 
     virtual bool editorEvent(QEvent* event, QAbstractItemModel* model,
                              const QStyleOptionViewItem& option, const QModelIndex& index);
@@ -143,7 +143,7 @@ class ShortcutItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    ShortcutItemDelegate(QObject* parent = 0);
+    explicit ShortcutItemDelegate(QObject* parent = 0);
 
     virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
     virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,

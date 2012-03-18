@@ -85,7 +85,7 @@ class HistoryType;
 class HistoryScroll
 {
 public:
-    HistoryScroll(HistoryType*);
+    explicit HistoryScroll(HistoryType*);
     virtual ~HistoryScroll();
 
     virtual bool hasScroll();
@@ -127,7 +127,7 @@ protected:
 class HistoryScrollFile : public HistoryScroll
 {
 public:
-    HistoryScrollFile(const QString& logFileName);
+    explicit HistoryScrollFile(const QString& logFileName);
     virtual ~HistoryScrollFile();
 
     virtual int  getLines();
@@ -289,7 +289,7 @@ class CompactHistoryScroll : public HistoryScroll
     typedef QList<CompactHistoryLine*> HistoryArray;
 
 public:
-    CompactHistoryScroll(unsigned int maxNbLines = 1000);
+    explicit CompactHistoryScroll(unsigned int maxNbLines = 1000);
     virtual ~CompactHistoryScroll();
 
     virtual int  getLines();
@@ -371,7 +371,7 @@ protected:
 class CompactHistoryType : public HistoryType
 {
 public:
-    CompactHistoryType(unsigned int size);
+    explicit CompactHistoryType(unsigned int size);
 
     virtual bool isEnabled() const;
     virtual int maximumLineCount() const;

@@ -384,7 +384,7 @@ template <class T>
 class PopStackOnExit
 {
 public:
-    PopStackOnExit(QStack<T>& stack) : _stack(stack) , _count(stack.count()) {}
+    explicit PopStackOnExit(QStack<T>& stack) : _stack(stack) , _count(stack.count()) {}
     ~PopStackOnExit() {
         while (_stack.count() > _count)
             _stack.pop();
@@ -407,7 +407,7 @@ class SessionListModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    SessionListModel(QObject* parent = 0);
+    explicit SessionListModel(QObject* parent = 0);
 
     /**
      * Sets the list of sessions displayed in the model.

@@ -50,7 +50,7 @@ class ViewSplitter : public QSplitter
     Q_OBJECT
 
 public:
-    ViewSplitter(QWidget* parent = 0);
+    explicit ViewSplitter(QWidget* parent = 0);
 
     /**
      * Locates the child ViewSplitter widget which currently has the focus

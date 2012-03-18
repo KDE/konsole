@@ -51,7 +51,7 @@ public:
      * Constructs a new reader which reads from the specified device.
      * The device should be open in read-only mode.
      */
-    KDE3ColorSchemeReader(QIODevice* device);
+    explicit KDE3ColorSchemeReader(QIODevice* device);
 
     /**
      * Reads and parses the contents of the .schema file from the input

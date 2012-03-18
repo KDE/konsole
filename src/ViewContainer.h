@@ -454,7 +454,7 @@ private:
 class StackedViewContainer : public ViewContainer
 {
 public:
-    StackedViewContainer(QObject* parent);
+    explicit StackedViewContainer(QObject* parent);
     virtual ~StackedViewContainer();
 
     virtual QWidget* containerWidget() const;

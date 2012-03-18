@@ -58,7 +58,7 @@ public:
      *
      * @param aCommand The command line to parse.
      */
-    ShellCommand(const QString& aCommand);
+    explicit ShellCommand(const QString& aCommand);
     /**
      * Constructs a ShellCommand with the specified @p aCommand and @p aArguments.
      */

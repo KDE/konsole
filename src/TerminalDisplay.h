@@ -67,7 +67,7 @@ class KONSOLEPRIVATE_EXPORT TerminalDisplay : public QWidget
 
 public:
     /** Constructs a new terminal display widget with the specified parent. */
-    TerminalDisplay(QWidget* parent = 0);
+    explicit TerminalDisplay(QWidget* parent = 0);
     virtual ~TerminalDisplay();
 
     /** Returns the terminal color palette used by the display. */
@@ -868,7 +868,7 @@ class AutoScrollHandler : public QObject
     Q_OBJECT
 
 public:
-    AutoScrollHandler(QWidget* parent);
+    explicit AutoScrollHandler(QWidget* parent);
 protected:
     virtual void timerEvent(QTimerEvent* event);
     virtual bool eventFilter(QObject* watched, QEvent* event);

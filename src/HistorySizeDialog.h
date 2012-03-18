@@ -41,7 +41,7 @@ public:
     /**
      * Construct a new history size dialog.
      */
-    HistorySizeDialog(QWidget* parent);
+    explicit HistorySizeDialog(QWidget* parent);
 
     /** Specifies the type of history scroll */
     enum HistoryMode {

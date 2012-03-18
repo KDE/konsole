@@ -47,7 +47,7 @@ class ColorSchemeWallpaper : public QSharedData
 public:
     typedef KSharedPtr<ColorSchemeWallpaper> Ptr;
 
-    ColorSchemeWallpaper(const QString& path);
+    explicit ColorSchemeWallpaper(const QString& path);
     ~ColorSchemeWallpaper();
 
     void load();

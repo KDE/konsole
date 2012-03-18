@@ -408,7 +408,7 @@ public:
      *
      * @param process A ProcessInfo instance for a SSH process.
      */
-    SSHProcessInfo(const ProcessInfo& process);
+    explicit SSHProcessInfo(const ProcessInfo& process);
 
     /**
      * Returns the user name which the user initially logged into on
