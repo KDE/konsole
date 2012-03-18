@@ -54,7 +54,6 @@
 #include "KeyboardTranslatorManager.h"
 #include "SessionManager.h"
 #include "ShellCommand.h"
-#include "TabTitleFormatAction.h"
 #include "WindowSystemInfo.h"
 
 using namespace Konsole;
@@ -338,17 +337,12 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr profile)
     connect(_ui->silenceSecondsSpinner, SIGNAL(valueChanged(int)),
             this, SLOT(silenceSecondsChanged(int)));
 
-    // menus for local and remote tab title dynamic elements
-    TabTitleFormatAction* localTabTitleAction = new TabTitleFormatAction(this);
-    localTabTitleAction->setContext(Session::LocalTabTitle);
-    _ui->tabTitleEditButton->setMenu(localTabTitleAction->menu());
-    connect(localTabTitleAction, SIGNAL(dynamicElementSelected(QString)),
+    _ui->tabTitleFormatButton->setContext(Session::LocalTabTitle);
+    connect(_ui->tabTitleFormatButton, SIGNAL(dynamicElementSelected(QString)),
             this, SLOT(insertTabTitleText(QString)));
 
-    TabTitleFormatAction* remoteTabTitleAction = new TabTitleFormatAction(this);
-    remoteTabTitleAction->setContext(Session::RemoteTabTitle);
-    _ui->remoteTabTitleEditButton->setMenu(remoteTabTitleAction->menu());
-    connect(remoteTabTitleAction, SIGNAL(dynamicElementSelected(QString)),
+    _ui->remoteTabTitleFormatButton->setContext(Session::RemoteTabTitle);
+    connect(_ui->remoteTabTitleFormatButton, SIGNAL(dynamicElementSelected(QString)),
             this, SLOT(insertRemoteTabTitleText(QString)));
 }
 void EditProfileDialog::insertTabTitleText(const QString& text)

@@ -38,13 +38,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="tabTitleEditButton">
-        <property name="toolTip">
-         <string>Edit normal tab title format</string>
-        </property>
-        <property name="text">
-         <string>Insert</string>
-        </property>
+       <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton">
        </widget>
       </item>
       <item row="1" column="0">
@@ -65,13 +59,7 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QPushButton" name="remoteTabTitleEditButton">
-        <property name="toolTip">
-         <string>Edit tab title format used when executing remote commands</string>
-        </property>
-        <property name="text">
-         <string>Insert</string>
-        </property>
+       <widget class="Konsole::TabTitleFormatButton" name="remoteTabTitleFormatButton">
        </widget>
       </item>
      </layout>
@@ -84,6 +72,11 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Konsole::TabTitleFormatButton</class>
+   <extends>QPushButton</extends>
+   <header>TabTitleFormatButton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -18,7 +18,7 @@
 */
 
 // Own
-#include "TabTitleFormatAction.h"
+#include "TabTitleFormatButton.h"
 
 // Qt
 #include <QtCore/QList>
@@ -29,7 +29,7 @@
 
 using namespace Konsole;
 
-const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] = {
+const TabTitleFormatButton::Element TabTitleFormatButton::_localElements[] = {
     { "%n" , I18N_NOOP("Program Name: %n") },
     { "%d" , I18N_NOOP("Current Directory (Short): %d") },
     { "%D" , I18N_NOOP("Current Directory (Long): %D") },
@@ -37,35 +37,39 @@ const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] = {
     { "%#" , I18N_NOOP("Session Number: %#") },
     { "%u" , I18N_NOOP("User Name: %u") }
 };
-const int TabTitleFormatAction::_localElementCount =
-    sizeof(_localElements) / sizeof(TabTitleFormatAction::Element);
+const int TabTitleFormatButton::_localElementCount =
+    sizeof(_localElements) / sizeof(TabTitleFormatButton::Element);
 
-const TabTitleFormatAction::Element TabTitleFormatAction::_remoteElements[] = {
+const TabTitleFormatButton::Element TabTitleFormatButton::_remoteElements[] = {
     { "%u" , I18N_NOOP("User Name: %u") },
     { "%h" , I18N_NOOP("Remote Host (Short): %h") },
     { "%H" , I18N_NOOP("Remote Host (Long): %H") },
     { "%w" , I18N_NOOP("Window Title Set by Shell: %w") },
     { "%#" , I18N_NOOP("Session Number: %#") }
 };
-const int TabTitleFormatAction::_remoteElementCount =
-    sizeof(_remoteElements) / sizeof(TabTitleFormatAction::Element);
+const int TabTitleFormatButton::_remoteElementCount =
+    sizeof(_remoteElements) / sizeof(TabTitleFormatButton::Element);
 
-TabTitleFormatAction::TabTitleFormatAction(QObject* parent)
-    : QAction(parent)
+TabTitleFormatButton::TabTitleFormatButton(QWidget* parent)
+    : QPushButton(parent)
     , _context(Session::LocalTabTitle)
 {
+    setText(i18n("Insert"));
     setMenu(new QMenu());
     connect(menu() , SIGNAL(triggered(QAction*)) , this , SLOT(fireElementSelected(QAction*)));
 }
-TabTitleFormatAction::~TabTitleFormatAction()
+
+TabTitleFormatButton::~TabTitleFormatButton()
 {
     menu()->deleteLater();
 }
-void TabTitleFormatAction::fireElementSelected(QAction* action)
+
+void TabTitleFormatButton::fireElementSelected(QAction* action)
 {
     emit dynamicElementSelected(action->data().value<QString>());
 }
-void TabTitleFormatAction::setContext(Session::TabTitleContext context)
+
+void TabTitleFormatButton::setContext(Session::TabTitleContext context)
 {
     _context = context;
 
@@ -77,9 +81,11 @@ void TabTitleFormatAction::setContext(Session::TabTitleContext context)
     const Element* array = 0;
 
     if (context == Session::LocalTabTitle) {
+        setToolTip(i18n("Insert title format"));
         array = _localElements;
         count = _localElementCount;
     } else if (context == Session::RemoteTabTitle) {
+        setToolTip(i18n("Insert remote title format"));
         array = _remoteElements;
         count = _remoteElementCount;
     }
@@ -92,10 +98,11 @@ void TabTitleFormatAction::setContext(Session::TabTitleContext context)
 
     menu()->addActions(actions);
 }
-Session::TabTitleContext TabTitleFormatAction::context() const
+
+Session::TabTitleContext TabTitleFormatButton::context() const
 {
     return _context;
 }
 
-#include "TabTitleFormatAction.moc"
+#include "TabTitleFormatButton.moc"
 

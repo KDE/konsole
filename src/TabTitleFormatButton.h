@@ -17,10 +17,11 @@
     02110-1301  USA.
 */
 
-#ifndef TABTITLEFORMATACTION_H
-#define TABTITLEFORMATACTION_H
+#ifndef TABTITLEFORMATBUTTON_H
+#define TABTITLEFORMATBUTTON_H
 
 // Qt
+#include <QtGui/QPushButton>
 #include <QtGui/QAction>
 
 // Konsole
@@ -29,13 +30,13 @@
 namespace Konsole
 {
 
-class TabTitleFormatAction : public QAction
+class TabTitleFormatButton : public QPushButton
 {
     Q_OBJECT
 
 public:
-    TabTitleFormatAction(QObject* parent);
-    ~TabTitleFormatAction();
+    TabTitleFormatButton(QWidget* parent);
+    ~TabTitleFormatButton();
 
     void setContext(Session::TabTitleContext context);
     Session::TabTitleContext context() const;
@@ -62,4 +63,4 @@ private:
 
 }
 
-#endif // TABTITLEFORMATACTION_H
+#endif // TABTITLEFORMATBUTTON_H

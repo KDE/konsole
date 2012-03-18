@@ -21,7 +21,6 @@
 #include "RenameTabsDialog.h"
 
 // Konsole
-#include "TabTitleFormatAction.h"
 #include "ui_RenameTabsDialog.h"
 
 using Konsole::RenameTabsDialog;
@@ -40,19 +39,13 @@ RenameTabsDialog::RenameTabsDialog(QWidget* parent)
     _ui->tabTitleEdit->setClearButtonShown(true);
     _ui->remoteTabTitleEdit->setClearButtonShown(true);
 
-    // menus for local and remote tab title dynamic elements
-    TabTitleFormatAction* localTabTitleAction = new TabTitleFormatAction(this);
-    localTabTitleAction->setContext(Session::LocalTabTitle);
-    _ui->tabTitleEditButton->setMenu(localTabTitleAction->menu());
-    connect(localTabTitleAction, SIGNAL(dynamicElementSelected(QString)),
+    _ui->tabTitleFormatButton->setContext(Session::LocalTabTitle);
+    connect(_ui->tabTitleFormatButton, SIGNAL(dynamicElementSelected(QString)),
             this, SLOT(insertTabTitleText(QString)));
 
-    TabTitleFormatAction* remoteTabTitleAction = new TabTitleFormatAction(this);
-    remoteTabTitleAction->setContext(Session::RemoteTabTitle);
-    _ui->remoteTabTitleEditButton->setMenu(remoteTabTitleAction->menu());
-    connect(remoteTabTitleAction, SIGNAL(dynamicElementSelected(QString)),
+    _ui->remoteTabTitleFormatButton->setContext(Session::RemoteTabTitle);
+    connect(_ui->remoteTabTitleFormatButton, SIGNAL(dynamicElementSelected(QString)),
             this, SLOT(insertRemoteTabTitleText(QString)));
-
 }
 
 RenameTabsDialog::~RenameTabsDialog()

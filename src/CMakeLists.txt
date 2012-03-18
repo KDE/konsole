@@ -94,7 +94,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         SessionController.cpp
         SessionManager.cpp
         ShellCommand.cpp
-        TabTitleFormatAction.cpp
+        TabTitleFormatButton.cpp
         TerminalCharacterDecoder.cpp
         ExtendedCharTable.cpp
         TerminalDisplay.cpp
