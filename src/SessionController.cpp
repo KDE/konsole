@@ -277,7 +277,7 @@ void SessionController::openUrl(const KUrl& url)
         QString sshCommand = "ssh ";
 
         if (url.port() > -1) {
-            sshCommand += QString("-p %1 ").arg(url.port()) ;
+            sshCommand += QString("-p %1 ").arg(url.port());
         }
         if (url.hasUser()) {
             sshCommand += (url.user() + '@');
@@ -292,13 +292,13 @@ void SessionController::openUrl(const KUrl& url)
         QString telnetCommand = "telnet ";
 
         if (url.hasUser()) {
-            telnetCommand += QString("-l %1 ").arg(url.user()) ;
+            telnetCommand += QString("-l %1 ").arg(url.user());
         }
         if (url.hasHost()) {
             telnetCommand += (url.host() + ' ');
         }
         if (url.port() > -1) {
-            telnetCommand += QString::number(url.port()) ;
+            telnetCommand += QString::number(url.port());
         }
 
         _session->sendText(telnetCommand + '\r');
@@ -317,7 +317,7 @@ void SessionController::openUrl(const KUrl& url)
 
 void SessionController::setupPrimaryScreenSpecificActions(bool use)
 {
-    KActionCollection* collection = actionCollection() ;
+    KActionCollection* collection = actionCollection();
     QAction* clearAction = collection->action("clear-history");
     QAction* resetAction = collection->action("clear-history-and-reset");
     QAction* selectAllAction = collection->action("select-all");
@@ -330,7 +330,7 @@ void SessionController::setupPrimaryScreenSpecificActions(bool use)
 
 void SessionController::updateCopyAction(const QString& text)
 {
-    KActionCollection* collection = actionCollection() ;
+    KActionCollection* collection = actionCollection();
     QAction* copyAction = collection->action("edit_copy");
 
     // copy action is meaningful only when some text is selcted.

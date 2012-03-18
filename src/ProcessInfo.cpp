@@ -596,7 +596,7 @@ private:
 
         return true;
     }
-} ;
+};
 
 #if defined(Q_OS_FREEBSD)
 class FreeBSDProcessInfo : public UnixProcessInfo
@@ -715,7 +715,7 @@ private:
         return false;
 #endif
     }
-} ;
+};
 #endif
 
 #if defined(Q_OS_MAC)
@@ -797,7 +797,7 @@ private:
         Q_UNUSED(aPid);
         return false;
     }
-} ;
+};
 #endif
 
 #ifdef Q_OS_SOLARIS
@@ -823,7 +823,7 @@ struct psinfo {
     int pr_pgid;
     char* pr_fname;
     char* pr_psargs;
-} ;
+};
 static const int PRARGSZ = 1;
 #endif
 
@@ -880,7 +880,7 @@ private:
             return false;
         }
     }
-} ;
+};
 
 SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     : _process(process)
@@ -929,16 +929,16 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
             if (args[i].startsWith('-')) {
                 const QChar optionChar = (args[i].length() > 1) ? args[i][1] : '\0';
                 // for example: -p2222 or -p 2222 ?
-                const bool optionArgumentCombined =  args[i].length() > 2 ;
+                const bool optionArgumentCombined =  args[i].length() > 2;
 
                 if (noArgumentOptions.contains(optionChar)) {
                     continue;
                 } else if (singleArgumentOptions.contains(optionChar)) {
-                    QString argument ;
+                    QString argument;
                     if (optionArgumentCombined) {
                         argument = args[i].mid(2);
                     } else {
-                        argument = args[i + 1] ;
+                        argument = args[i + 1];
                         i++;
                     }
 

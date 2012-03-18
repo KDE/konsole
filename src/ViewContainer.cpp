@@ -79,7 +79,7 @@ ViewContainer::Features ViewContainer::features() const
 }
 void ViewContainer::moveActiveView(MoveDirection direction)
 {
-    const int currentIndex = _views.indexOf(activeView()) ;
+    const int currentIndex = _views.indexOf(activeView());
     int newIndex = -1;
 
     switch (direction) {

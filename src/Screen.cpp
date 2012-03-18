@@ -36,7 +36,7 @@ using namespace Konsole;
 
 //FIXME: this is emulation specific. Use false for xterm, true for ANSI.
 //FIXME: see if we can get this from terminfo.
-const bool BS_CLEARS = false ;
+const bool BS_CLEARS = false;
 
 //Macro to convert x,y position on screen to position within an image.
 //
@@ -1219,7 +1219,7 @@ int Screen::copyLineToStream(int line ,
             // When users ask not to preserve the linebreaks, they usually mean:
             // `treat LINEBREAK as SPACE, thus joining multiple _lines into
             // single line in the same way as 'J' does in VIM.`
-            characterBuffer[count] = preserveLineBreaks ? Character('\n') : Character(' ') ;
+            characterBuffer[count] = preserveLineBreaks ? Character('\n') : Character(' ');
             count++;
         }
     }

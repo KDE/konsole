@@ -593,12 +593,12 @@ void TerminalDisplay::drawCursor(QPainter& painter,
 {
     // don't draw cursor which is currently blinking
     if (_cursorBlinking)
-        return ;
+        return;
 
     QRect cursorRect = rect;
     cursorRect.setHeight(_fontHeight - _lineSpacing - 1);
 
-    QColor cursorColor = _cursorColor.isValid() ? _cursorColor : foregroundColor ;
+    QColor cursorColor = _cursorColor.isValid() ? _cursorColor : foregroundColor;
     painter.setPen(cursorColor);
 
     if (_cursorShape == BlockCursor) {
@@ -677,7 +677,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         // there is no use cases for RTL emulator and RTL terminal application.
         //
         // This still allows RTL characters to be rendered in the RTL way.
-        painter.setLayoutDirection(Qt::LeftToRight) ;
+        painter.setLayoutDirection(Qt::LeftToRight);
 
         // the drawText(rect,flags,string) overload is used here with null flags
         // instead of drawText(rect,string) because the (rect,string) overload causes
@@ -1069,7 +1069,7 @@ void TerminalDisplay::showResizeNotification()
     if (resizeForTheFirstTime) {
         // Do not display size hint when resizing for the first time.
         // That first resizing mostly happens on startup
-        resizeForTheFirstTime = false ;
+        resizeForTheFirstTime = false;
         return;
     }
 

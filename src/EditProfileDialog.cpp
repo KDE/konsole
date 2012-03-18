@@ -811,19 +811,19 @@ void EditProfileDialog::updateButtonApply()
         iter.next();
 
         Profile::Property aProperty = iter.key();
-        QVariant value = iter.value() ;
+        QVariant value = iter.value();
 
         // for previewed property
         if (_previewedProperties.contains(int(aProperty))) {
             if (value != _previewedProperties.value(int(aProperty))) {
-                userModified = true ;
-                break ;
+                userModified = true;
+                break;
             }
         }
         // for not-previewed property
         else if ((value != _profile->property<QVariant>(aProperty))) {
-            userModified = true ;
-            break ;
+            userModified = true;
+            break;
         }
     }
 

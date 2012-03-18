@@ -534,7 +534,7 @@ public slots:
      * <li> negative integer -  unlimited history</li>
      * </ul>
      */
-    Q_SCRIPTABLE void setHistorySize(int lines) ;
+    Q_SCRIPTABLE void setHistorySize(int lines);
 
     /**
      * Returns the history capacity of this session.

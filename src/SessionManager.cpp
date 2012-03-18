@@ -395,7 +395,7 @@ void SessionManager::changeProfile(Profile::Ptr profile,
     }
 
     // never save a profile with empty name into disk!
-    persistent = persistent && !profile->name().isEmpty() ;
+    persistent = persistent && !profile->name().isEmpty();
 
     // when changing a group, iterate through the profiles
     // in the group and call changeProfile() on each of them
@@ -683,7 +683,7 @@ void SessionManager::setShortcut(Profile::Ptr profile ,
 void SessionManager::loadFavorites()
 {
     if ( _loadedFavorites )
-        return ;
+        return;
 
     KSharedConfigPtr appConfig = KGlobal::config();
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");

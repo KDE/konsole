@@ -259,7 +259,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     }
 
     // Create the new session
-    Profile::Ptr theProfile = shouldUseNewProfile ? newProfile :  baseProfile ;
+    Profile::Ptr theProfile = shouldUseNewProfile ? newProfile :  baseProfile;
     Session* session = window->createSession(theProfile, QString());
 
     if (!args->isSet("close")) {

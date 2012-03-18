@@ -557,9 +557,9 @@ void KeyboardTranslator::Entry::insertState(QString& item, int aState) const
         return;
 
     if (aState & _state)
-        item += '+' ;
+        item += '+';
     else
-        item += '-' ;
+        item += '-';
 
     if (aState == KeyboardTranslator::AlternateScreenState)
         item += "AppScreen";

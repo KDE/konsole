@@ -761,7 +761,7 @@ bool Session::closeInNormalWay()
     } else {
         kWarning() << "Process " << _shellProcess->pid() << " did not die with SIGHUP";
         _shellProcess->closePty();
-        return (_shellProcess->waitForFinished(1000)) ;
+        return (_shellProcess->waitForFinished(1000));
     }
 }
 

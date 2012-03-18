@@ -73,7 +73,7 @@ public:
     void removeContainer(ViewContainer* container);
 
     /** Returns the child ViewSplitter widget which currently has the focus */
-    ViewSplitter* activeSplitter() ;
+    ViewSplitter* activeSplitter();
 
     /**
      * Returns the container which currently has the focus or 0 if none

@@ -96,9 +96,9 @@ bool shouldUseNewProcess()
     // so that the current environment is propagated into the shells of the new
     // Konsole and any debug output or warnings from Konsole are written to
     // the current terminal
-    bool hasControllingTTY = false ;
+    bool hasControllingTTY = false;
     if ( KDE_open("/dev/tty", O_RDONLY) != -1 ) {
-        hasControllingTTY = true ;
+        hasControllingTTY = true;
     }
 
     const KCmdLineArgs* kUniqueAppArgs = KCmdLineArgs::parsedArgs("kuniqueapp");
@@ -108,7 +108,7 @@ bool shouldUseNewProcess()
     // will be no process for users to wait for finishing.
     const bool shouldRunInForeground = !kUniqueAppArgs->isSet("fork");
 
-    return hasControllingTTY || shouldRunInForeground ;
+    return hasControllingTTY || shouldRunInForeground;
 
 }
 

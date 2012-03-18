@@ -61,7 +61,7 @@ inline bool isSupportedLineChar(quint16 codePoint)
     if ((codePoint & 0xFF80) != 0x2500)
         return false;
 
-    uchar index = (codePoint & 0x007F) ;
+    uchar index = (codePoint & 0x007F);
     if ((index >= 0x04 && index <= 0x0B) ||
             (index >= 0x4C && index <= 0x4F) ||
             (index >= 0x6D && index <= 0x73)) {

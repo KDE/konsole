@@ -96,7 +96,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     }
 
     // find out the last technically real character in the line
-    int guard = -1 ;
+    int guard = -1;
     for (int i = count - 1 ; i >= 0 ; i--) {
         // FIXME: the special case of '\n' here is really ugly
         // Maybe the '\n' should be added after calling this method in

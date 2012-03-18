@@ -226,7 +226,7 @@ public:
     virtual void deallocate();
     virtual bool isInUse() {
         return allocCount != 0;
-    } ;
+    };
 
 private:
     size_t blockLength;
@@ -261,10 +261,10 @@ public:
     static void* operator new(size_t size, CompactHistoryBlockList& blockList);
     static void operator delete(void *) {
         /* do nothing, deallocation from pool is done in destructor*/
-    } ;
+    };
 
-    virtual void getCharacters(Character* array, int length, int startColumn) ;
-    virtual void getCharacter(int index, Character& r) ;
+    virtual void getCharacters(Character* array, int length, int startColumn);
+    virtual void getCharacter(int index, Character& r);
     virtual bool isWrapped() const {
         return wrapped;
     };

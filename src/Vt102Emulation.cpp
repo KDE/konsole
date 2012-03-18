@@ -179,7 +179,7 @@ void Vt102Emulation::reset()
 #define TY_CSI_PG(A)  TY_CONSTRUCT(9,A,0)
 #define TY_CSI_PE(A)  TY_CONSTRUCT(10,A,0)
 
-const int MAX_ARGUMENT = 4096 ;
+const int MAX_ARGUMENT = 4096;
 
 // Tokenizer --------------------------------------------------------------- --
 
@@ -339,7 +339,7 @@ void Vt102Emulation::receiveChar(int cc)
     if (epe(   )) { processToken( TY_CSI_PE(cc), 0, 0); resetTokenizer(); return; }
     if (ees(DIG)) { addDigit(cc-'0'); return; }
     if (eec(';')) { addArgument();    return; }
-    for (int i=0;i<=argc;i++)
+    for (int i=0; i<=argc; i++)
     {
         if (epp())  
             processToken( TY_CSI_PR(cc,argv[i]), 0, 0);
@@ -663,8 +663,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
 
     case TY_CSI_PR('l',   2) :        resetMode      (MODE_Ansi     ); break; //VT100
 
-    case TY_CSI_PR('h',   3) :          setMode      (MODE_132Columns);break; //VT100
-    case TY_CSI_PR('l',   3) :        resetMode      (MODE_132Columns);break; //VT100
+    case TY_CSI_PR('h',   3) :          setMode      (MODE_132Columns); break; //VT100
+    case TY_CSI_PR('l',   3) :        resetMode      (MODE_132Columns); break; //VT100
 
     case TY_CSI_PR('h',   4) : /* IGNORED: soft scrolling           */ break; //VT100
     case TY_CSI_PR('l',   4) : /* IGNORED: soft scrolling           */ break; //VT100

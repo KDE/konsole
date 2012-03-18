@@ -35,7 +35,7 @@
 #include <KStandardDirs>
 
 // Reasonable line size
-static const int LINE_SIZE = 1024 ;
+static const int LINE_SIZE = 1024;
 
 using namespace Konsole;
 

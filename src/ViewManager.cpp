@@ -672,7 +672,7 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
         // a method should be devised to only enable those that are used, perhaps
         // by using a separate action collection.
 
-        const bool enable = (_navigationMethod != NoNavigation) ;
+        const bool enable = (_navigationMethod != NoNavigation);
         QAction* action;
 
         action = collection->action("next-view");
@@ -1036,7 +1036,7 @@ void ViewManager::closeTabFromContainer(ViewContainer* container, QWidget* tab)
     SessionController* controller = qobject_cast<SessionController*>(container->viewProperties(tab));
     Q_ASSERT(controller);
     if (controller)
-        controller->closeSession() ;
+        controller->closeSession();
 }
 
 void ViewManager::updateNavigationOptions(NavigationOptions options)
