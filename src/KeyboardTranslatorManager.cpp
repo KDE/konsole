@@ -42,14 +42,47 @@ KeyboardTranslatorManager::KeyboardTranslatorManager()
     : _haveLoadedAll(false)
 {
 }
+
 KeyboardTranslatorManager::~KeyboardTranslatorManager()
 {
     qDeleteAll(_translators);
 }
+
+K_GLOBAL_STATIC(KeyboardTranslatorManager , theKeyboardTranslatorManager)
+KeyboardTranslatorManager* KeyboardTranslatorManager::instance()
+{
+    return theKeyboardTranslatorManager;
+}
+
+void KeyboardTranslatorManager::addTranslator(KeyboardTranslator* translator)
+{
+    _translators.insert(translator->name(), translator);
+
+    if (!saveTranslator(translator))
+        kWarning() << "Unable to save translator" << translator->name()
+                   << "to disk.";
+}
+
+bool KeyboardTranslatorManager::deleteTranslator(const QString& name)
+{
+    Q_ASSERT(_translators.contains(name));
+
+    // locate and delete
+    QString path = findTranslatorPath(name);
+    if (QFile::remove(path)) {
+        _translators.remove(name);
+        return true;
+    } else {
+        kWarning() << "Failed to remove translator - " << path;
+        return false;
+    }
+}
+
 QString KeyboardTranslatorManager::findTranslatorPath(const QString& name)
 {
     return KStandardDirs::locate("data", "konsole/" + name + ".keytab");
 }
+
 void KeyboardTranslatorManager::findTranslators()
 {
     QStringList list = KGlobal::dirs()->findAllResources("data",
@@ -126,20 +159,6 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
     return loadTranslator(&source, name);
 }
 
-const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
-{
-    // Try to find the default.keytab file if it exists, otherwise
-    // fall back to the hard-coded one
-    const KeyboardTranslator* translator = findTranslator("default");
-    if (!translator) {
-        QBuffer textBuffer;
-        textBuffer.setData(defaultTranslatorText);
-        textBuffer.open(QIODevice::ReadOnly);
-        translator = loadTranslator(&textBuffer, "fallback");
-    }
-    return translator;
-}
-
 KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(QIODevice* source, const QString& name)
 {
     KeyboardTranslator* translator = new KeyboardTranslator(name);
@@ -158,6 +177,20 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(QIODevice* source,
     }
 }
 
+const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
+{
+    // Try to find the default.keytab file if it exists, otherwise
+    // fall back to the hard-coded one
+    const KeyboardTranslator* translator = findTranslator("default");
+    if (!translator) {
+        QBuffer textBuffer;
+        textBuffer.setData(defaultTranslatorText);
+        textBuffer.open(QIODevice::ReadOnly);
+        translator = loadTranslator(&textBuffer, "fallback");
+    }
+    return translator;
+}
+
 QList<QString> KeyboardTranslatorManager::allTranslators()
 {
     if (!_haveLoadedAll) {
@@ -165,32 +198,4 @@ QList<QString> KeyboardTranslatorManager::allTranslators()
     }
 
     return _translators.keys();
-}
-
-void KeyboardTranslatorManager::addTranslator(KeyboardTranslator* translator)
-{
-    _translators.insert(translator->name(), translator);
-
-    if (!saveTranslator(translator))
-        kWarning() << "Unable to save translator" << translator->name()
-                   << "to disk.";
-}
-bool KeyboardTranslatorManager::deleteTranslator(const QString& name)
-{
-    Q_ASSERT(_translators.contains(name));
-
-    // locate and delete
-    QString path = findTranslatorPath(name);
-    if (QFile::remove(path)) {
-        _translators.remove(name);
-        return true;
-    } else {
-        kWarning() << "Failed to remove translator - " << path;
-        return false;
-    }
-}
-K_GLOBAL_STATIC(KeyboardTranslatorManager , theKeyboardTranslatorManager)
-KeyboardTranslatorManager* KeyboardTranslatorManager::instance()
-{
-    return theKeyboardTranslatorManager;
 }
