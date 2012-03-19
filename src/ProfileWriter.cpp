@@ -39,16 +39,16 @@ using namespace Konsole;
 // FIXME: A dup line from Profile.cpp - redo these
 static const char GENERAL_GROUP[]     = "General";
 
-QString KDE4ProfileWriter::getPath(const Profile::Ptr info)
+QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
 {
     QString newPath;
 
-    if (info->isPropertySet(Profile::Path) &&
-            info->path().startsWith(KGlobal::dirs()->saveLocation("data", "konsole/"))) {
-        newPath = info->path();
+    if (profile->isPropertySet(Profile::Path) &&
+            profile->path().startsWith(KGlobal::dirs()->saveLocation("data", "konsole/"))) {
+        newPath = profile->path();
     } else {
         // use the profile name + ".profile" and save it in $KDEHOME
-        newPath = KGlobal::dirs()->saveLocation("data", "konsole/") + info->name() + ".profile";
+        newPath = KGlobal::dirs()->saveLocation("data", "konsole/") + profile->name() + ".profile";
     }
 
     return newPath;
