@@ -301,7 +301,7 @@ void EditProfileDialog::showEnvironmentEditor()
     QWeakPointer<KDialog> dialog = new KDialog(this);
     KTextEdit* edit = new KTextEdit(dialog.data());
 
-    QStringList currentEnvironment = profile->property<QStringList>(Profile::Environment);
+    QStringList currentEnvironment = profile->environment();
 
     edit->setPlainText(currentEnvironment.join("\n"));
     edit->setToolTip(i18n("One environment variable per line"));
