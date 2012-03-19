@@ -476,15 +476,15 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
 
     // Key bindings
     if (apply.shouldApply(Profile::KeyBindings))
-        session->setKeyBindings(profile->property<QString>(Profile::KeyBindings));
+        session->setKeyBindings(profile->keyBindings());
 
     // Tab formats
     if (apply.shouldApply(Profile::LocalTabTitleFormat))
         session->setTabTitleFormat(Session::LocalTabTitle ,
-                                   profile->property<QString>(Profile::LocalTabTitleFormat));
+                                   profile->localTabTitleFormat());
     if (apply.shouldApply(Profile::RemoteTabTitleFormat))
         session->setTabTitleFormat(Session::RemoteTabTitle ,
-                                   profile->property<QString>(Profile::RemoteTabTitleFormat));
+                                   profile->remoteTabTitleFormat());
 
     // History
     if (apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize)) {
@@ -495,7 +495,7 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
             break;
 
         case Enum::FixedSizeHistory: {
-            int lines = profile->property<int>(Profile::HistorySize);
+            int lines = profile->historySize();
             session->setHistoryType(CompactHistoryType(lines));
         }
         break;
@@ -508,17 +508,17 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
 
     // Terminal features
     if (apply.shouldApply(Profile::FlowControlEnabled))
-        session->setFlowControlEnabled(profile->property<bool>(Profile::FlowControlEnabled));
+        session->setFlowControlEnabled(profile->flowControlEnabled());
 
     // Encoding
     if (apply.shouldApply(Profile::DefaultEncoding)) {
-        QByteArray name = profile->property<QString>(Profile::DefaultEncoding).toUtf8();
+        QByteArray name = profile->defaultEncoding().toUtf8();
         session->setCodec(QTextCodec::codecForName(name));
     }
 
     // Monitor Silence
     if (apply.shouldApply(Profile::SilenceSeconds))
-        session->setMonitorSilenceSeconds(profile->property<int>(Profile::SilenceSeconds));
+        session->setMonitorSilenceSeconds(profile->silenceSeconds());
 }
 
 void SessionManager::addProfile(Profile::Ptr profile)

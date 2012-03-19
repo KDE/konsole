@@ -28,6 +28,7 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 #include <QtGui/QFont>
+#include <QtGui/QColor>
 
 // KDE
 #include <KSharedPtr>
@@ -331,6 +332,26 @@ public:
         return property<QStringList>(Profile::Arguments);
     }
 
+    /** Convenience method for property<QString>(Profile::LocalTabTitleFormat) */
+    QString localTabTitleFormat() const {
+        return property<QString>(Profile::LocalTabTitleFormat);
+    }
+
+    /** Convenience method for property<QString>(Profile::RemoteTabTitleFormat) */
+    QString remoteTabTitleFormat() const {
+        return property<QString>(Profile::RemoteTabTitleFormat);
+    }
+
+    /** Convenience method for property<bool>(Profile::ShowTerminalSizeHint) */
+    bool showTerminalSizeHint() const {
+        return property<bool>(Profile::ShowTerminalSizeHint);
+    }
+
+    /** Convenience method for property<bool>(Profile::SaveGeometryOnExit) */
+    bool saveGeometryOnExit() const {
+        return property<bool>(Profile::SaveGeometryOnExit);
+    }
+
     /** Convenience method for property<QFont>(Profile::Font) */
     QFont font() const {
         return property<QFont>(Profile::Font);
@@ -344,6 +365,81 @@ public:
     /** Convenience method for property<QStringList>(Profile::Environment) */
     QStringList environment() const {
         return property<QStringList>(Profile::Environment);
+    }
+
+    /** Convenience method for property<QString>(Profile::KeyBindings) */
+    QString keyBindings() const {
+        return property<QString>(Profile::KeyBindings);
+    }
+
+    /** Convenience method for property<QString>(Profile::HistorySize) */
+    int historySize() const {
+        return property<int>(Profile::HistorySize);
+    }
+
+    /** Convenience method for property<bool>(Profile::BidiRenderingEnabled) */
+    bool bidiRenderingEnabled() const {
+        return property<bool>(Profile::BidiRenderingEnabled);
+    }
+
+    /** Convenience method for property<bool>(Profile::BlinkingTextEnabled) */
+    bool blinkingTextEnabled() const {
+        return property<bool>(Profile::BlinkingTextEnabled);
+    }
+
+    /** Convenience method for property<bool>(Profile::BlinkingCursorEnabled) */
+    bool blinkingCursorEnabled() const {
+        return property<bool>(Profile::BlinkingCursorEnabled);
+    }
+
+    /** Convenience method for property<bool>(Profile::FlowControlEnabled) */
+    bool flowControlEnabled() const {
+        return property<bool>(Profile::FlowControlEnabled);
+    }
+
+    /** Convenience method for property<bool>(Profile::UseCustomCursorColor) */
+    bool useCustomCursorColor() const {
+        return property<bool>(Profile::UseCustomCursorColor);
+    }
+
+    /** Convenience method for property<bool>(Profile::CustomCursorColor) */
+    QColor customCursorColor() const {
+        return property<QColor>(Profile::CustomCursorColor);
+    }
+
+    /** Convenience method for property<QString>(Profile::WordCharacters) */
+    QString wordCharacters() const {
+        return property<QString>(Profile::WordCharacters);
+    }
+
+    /** Convenience method for property<bool>(Profile::UnderlineLinksEnabled) */
+    bool underlineLinksEnabled() const {
+        return property<bool>(Profile::UnderlineLinksEnabled);
+    }
+
+    /** Convenience method for property<QString>(Profile::DefaultEncoding) */
+    QString defaultEncoding() const {
+        return property<QString>(Profile::DefaultEncoding);
+    }
+
+    /** Convenience method for property<bool>(Profile::AntiAliasFonts) */
+    bool antiAliasFonts() const {
+        return property<bool>(Profile::AntiAliasFonts);
+    }
+
+    /** Convenience method for property<bool>(Profile::BoldIntense) */
+    bool boldIntense() const {
+        return property<bool>(Profile::BoldIntense);
+    }
+
+    /** Convenience method for property<bool>(Profile::StartInCurrentSessionDir) */
+    bool startInCurrentSessionDir() const {
+        return property<bool>(Profile::StartInCurrentSessionDir);
+    }
+
+    /** Convenience method for property<QString>(Profile::SilenceSeconds) */
+    int silenceSeconds() const {
+        return property<int>(Profile::SilenceSeconds);
     }
 
     /** Convenience method for property<QString>(Profile::MenuIndex) */

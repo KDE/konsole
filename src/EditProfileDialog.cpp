@@ -269,11 +269,11 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
 
     _ui->dirSelectButton->setIcon(KIcon("folder-open"));
     _ui->iconSelectButton->setIcon(KIcon(profile->icon()));
-    _ui->startInSameDirButton->setChecked(profile->property<bool>(Profile::StartInCurrentSessionDir));
+    _ui->startInSameDirButton->setChecked(profile->startInCurrentSessionDir());
 
     // window options
-    _ui->showTerminalSizeHintButton->setChecked(profile->property<bool>(Profile::ShowTerminalSizeHint));
-    _ui->saveGeometryOnExitButton->setChecked(profile->property<bool>(Profile::SaveGeometryOnExit));
+    _ui->showTerminalSizeHintButton->setChecked(profile->showTerminalSizeHint());
+    _ui->saveGeometryOnExitButton->setChecked(profile->saveGeometryOnExit());
 
     // signals and slots
     connect(_ui->dirSelectButton, SIGNAL(clicked()), this, SLOT(selectInitialDir()));
@@ -321,12 +321,11 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr profile)
     // tab title format
     _ui->tabTitleEdit->setClearButtonShown(true);
     _ui->remoteTabTitleEdit->setClearButtonShown(true);
-    _ui->tabTitleEdit->setText(profile->property<QString>(Profile::LocalTabTitleFormat));
-    _ui->remoteTabTitleEdit->setText(
-        profile->property<QString>(Profile::RemoteTabTitleFormat));
+    _ui->tabTitleEdit->setText(profile->localTabTitleFormat());
+    _ui->remoteTabTitleEdit->setText(profile->remoteTabTitleFormat());
 
     // tab monitoring
-    int silenceSeconds = profile->property<int>(Profile::SilenceSeconds);
+    int silenceSeconds = profile->silenceSeconds();
     _ui->silenceSecondsSpinner->setValue(silenceSeconds);
     _ui->silenceSecondsSpinner->setSuffix(ki18ncp("Unit of time", " second", " seconds"));
 
@@ -458,7 +457,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
             SLOT(newColorScheme()));
 
     // setup font preview
-    bool antialias = profile->property<bool>(Profile::AntiAliasFonts);
+    bool antialias = profile->antiAliasFonts();
 
     QFont profileFont = profile->font();
     profileFont.setStyleStrategy(antialias ? QFont::PreferAntialias : QFont::NoAntialias);
@@ -478,7 +477,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     connect(_ui->antialiasTextButton, SIGNAL(toggled(bool)), this,
             SLOT(setAntialiasText(bool)));
 
-    bool boldIntense = profile->property<bool>(Profile::BoldIntense);
+    bool boldIntense = profile->boldIntense();
     _ui->boldIntenseButton->setChecked(boldIntense);
     connect(_ui->boldIntenseButton, SIGNAL(toggled(bool)), this,
             SLOT(setBoldIntense(bool)));
@@ -974,7 +973,7 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     setupRadio(types , scrollBackType);
 
     // setup scrollback line count spinner
-    int historySize = profile->property<int>(Profile::HistorySize);
+    int historySize = profile->historySize();
     _ui->scrollBackLinesSpinner->setValue(historySize);
     _ui->scrollBackLinesSpinner->setSingleStep(historySize / 10);
     _ui->scrollBackLinesSpinner->setSuffix(ki18ncp("Unit of scrollback", " line", " lines"));
@@ -1039,7 +1038,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     setupCheckBoxes(options , profile);
 
     // interaction options
-    _ui->wordCharacterEdit->setText(profile->property<QString>(Profile::WordCharacters));
+    _ui->wordCharacterEdit->setText(profile->wordCharacters());
 
     connect(_ui->wordCharacterEdit, SIGNAL(textChanged(QString)), this,
             SLOT(wordCharactersChanged(QString)));
@@ -1051,12 +1050,12 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
             SLOT(TripleClickModeChanged(int)));
 
     // cursor options
-    if (profile->property<bool>(Profile::UseCustomCursorColor))
+    if (profile->useCustomCursorColor())
         _ui->customCursorColorButton->setChecked(true);
     else
         _ui->autoCursorColorButton->setChecked(true);
 
-    _ui->customColorSelectButton->setColor(profile->property<QColor>(Profile::CustomCursorColor));
+    _ui->customColorSelectButton->setColor(profile->customCursorColor());
 
     connect(_ui->customCursorColorButton, SIGNAL(clicked()), this, SLOT(customCursorColor()));
     connect(_ui->autoCursorColorButton, SIGNAL(clicked()), this, SLOT(autoCursorColor()));
@@ -1073,7 +1072,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     _ui->selectEncodingButton->setMenu(codecAction->menu());
     connect(codecAction, SIGNAL(triggered(QTextCodec*)), this, SLOT(setDefaultCodec(QTextCodec*)));
 
-    _ui->characterEncodingLabel->setText(profile->property<QString>(Profile::DefaultEncoding));
+    _ui->characterEncodingLabel->setText(profile->defaultEncoding());
 
 }
 void EditProfileDialog::setDefaultCodec(QTextCodec* codec)

@@ -765,7 +765,7 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
 {
     Q_ASSERT(profile);
 
-    emit setSaveGeometryOnExitRequest(profile->property<bool>(Profile::SaveGeometryOnExit));
+    emit setSaveGeometryOnExitRequest(profile->saveGeometryOnExit());
 
     emit updateWindowIcon();
 
@@ -778,8 +778,8 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     view->setWallpaper(colorScheme->wallpaper());
 
     // load font
-    view->setAntialias(profile->property<bool>(Profile::AntiAliasFonts));
-    view->setBoldIntense(profile->property<bool>(Profile::BoldIntense));
+    view->setAntialias(profile->antiAliasFonts());
+    view->setBoldIntense(profile->boldIntense());
     view->setVTFont(profile->font());
 
     // set scroll-bar position
@@ -793,21 +793,21 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
         view->setScrollBarPosition(Enum::ScrollBarHidden);
 
     // show hint about termianl size after resizing
-    view->setShowTerminalSizeHint(profile->property<bool>(Profile::ShowTerminalSizeHint));
+    view->setShowTerminalSizeHint(profile->showTerminalSizeHint());
 
     // terminal features
-    bool blinkingCursor = profile->property<bool>(Profile::BlinkingCursorEnabled);
+    bool blinkingCursor = profile->blinkingCursorEnabled();
     view->setBlinkingCursorEnabled(blinkingCursor);
 
-    bool blinkingText = profile->property<bool>(Profile::BlinkingTextEnabled);
+    bool blinkingText = profile->blinkingTextEnabled();
     view->setBlinkingTextEnabled(blinkingText);
 
     int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
     view->setTripleClickMode(Enum::TripleClickModeEnum(tripleClickMode));
 
-    view->setUnderlineLinks(profile->property<bool>(Profile::UnderlineLinksEnabled));
+    view->setUnderlineLinks(profile->underlineLinksEnabled());
 
-    bool bidiEnabled = profile->property<bool>(Profile::BidiRenderingEnabled);
+    bool bidiEnabled = profile->bidiRenderingEnabled();
     view->setBidiEnabled(bidiEnabled);
 
     // cursor shape
@@ -821,13 +821,13 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
         view->setKeyboardCursorShape(Enum::UnderlineCursor);
 
     // cursor color
-    bool useCustomColor = profile->property<bool>(Profile::UseCustomCursorColor);
-    const QColor& cursorColor = profile->property<QColor>(Profile::CustomCursorColor);
+    bool useCustomColor = profile->useCustomCursorColor();
+    const QColor& cursorColor = profile->customCursorColor();
 
     view->setKeyboardCursorColor(!useCustomColor, cursorColor);
 
     // word characters
-    view->setWordCharacters(profile->property<QString>(Profile::WordCharacters));
+    view->setWordCharacters(profile->wordCharacters());
 
     // bell mode
     view->setBellMode(profile->property<int>(Profile::BellMode));

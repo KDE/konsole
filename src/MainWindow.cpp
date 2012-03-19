@@ -445,8 +445,7 @@ Session* MainWindow::createSession(Profile::Ptr profile, const QString& director
 
     Session* session = SessionManager::instance()->createSession(profile);
 
-    if (!directory.isEmpty()
-            && profile->property<bool>(Profile::StartInCurrentSessionDir))
+    if (!directory.isEmpty() && profile->startInCurrentSessionDir() )
         session->setInitialWorkingDirectory(directory);
 
     session->addEnvironmentEntry( QString("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(_viewManager->managerId()) );
