@@ -796,19 +796,14 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     view->setShowTerminalSizeHint(profile->showTerminalSizeHint());
 
     // terminal features
-    bool blinkingCursor = profile->blinkingCursorEnabled();
-    view->setBlinkingCursorEnabled(blinkingCursor);
-
-    bool blinkingText = profile->blinkingTextEnabled();
-    view->setBlinkingTextEnabled(blinkingText);
+    view->setBlinkingCursorEnabled(profile->blinkingCursorEnabled());
+    view->setBlinkingTextEnabled(profile->blinkingTextEnabled());
 
     int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
     view->setTripleClickMode(Enum::TripleClickModeEnum(tripleClickMode));
 
     view->setUnderlineLinks(profile->underlineLinksEnabled());
-
-    bool bidiEnabled = profile->bidiRenderingEnabled();
-    view->setBidiEnabled(bidiEnabled);
+    view->setBidiEnabled(profile->bidiRenderingEnabled());
 
     // cursor shape
     int cursorShape = profile->property<int>(Profile::CursorShape);
