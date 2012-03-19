@@ -488,8 +488,8 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
 
     // History
     if (apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize)) {
-        int mode = profile->property<int>(Profile::HistoryMode);
-        switch ((Enum::HistoryModeEnum)mode) {
+        const int mode = profile->property<int>(Profile::HistoryMode);
+        switch (mode) {
         case Enum::NoHistory:
             session->setHistoryType(HistoryTypeNone());
             break;
