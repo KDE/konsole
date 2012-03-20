@@ -26,38 +26,33 @@
 // Konsole
 #include "Enumeration.h"
 
-class QAbstractButton;
-class KIntSpinBox;
-
 namespace Konsole
 {
 
+class HistorySizeWidget;
+
 /**
- * A dialog which allows the user to select the number of lines of output
- * which are remembered for a session.
+ * A dialog for controlling history related options
+ * It is only a simple container of HistorySizeWidget
  */
 class HistorySizeDialog : public KDialog
 {
     Q_OBJECT
 
 public:
-    /**
-     * Construct a new history size dialog.
-     */
     explicit HistorySizeDialog(QWidget* parent);
 
-    /** Specifies the history mode. */
-    void setMode(Enum::HistoryModeEnum mode);
-    /** Returns the history mode chosen by the user. */
+    /** See HistorySizeWidget::setMode. */
+    void setMode(Enum::HistoryModeEnum aMode);
+
+    /** See HistorySizeWidget::mode. */
     Enum::HistoryModeEnum mode() const;
-    /**
-     * Returns the number of lines of history to remember.
-     * This is only valid when mode() == FixedSizeHistory,
-     * and returns 0 otherwise.
-     */
-    int lineCount() const;
-    /** Sets the number of lines for the fixed size history mode. */
+
+    /** See HistorySizeWidget::setLineCount. */
     void setLineCount(int lines);
+
+    /** See HistorySizeWidget::lineCount. */
+    int lineCount() const;
 
 signals:
     /**
@@ -77,13 +72,8 @@ private slots:
     void emitOptionsChanged();
 
 private:
-    QAbstractButton* _noHistoryButton;
-    QAbstractButton* _fixedHistoryButton;
-    QAbstractButton* _unlimitedHistoryButton;
-    KIntSpinBox* _lineCountBox;
+    HistorySizeWidget* _historySizeWidget;
 
-    // 1000 lines was the default in the KDE 3 series
-    static const int defaultLineCount = 1000;
 };
 
 }

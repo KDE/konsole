@@ -963,40 +963,26 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
 
     // setup scrollback type radio
     int scrollBackType = profile->property<int>(Profile::HistoryMode);
-
-    RadioOption types[] = { {_ui->disableScrollbackButton, Enum::NoHistory, SLOT(noScrollBack())},
-        {_ui->fixedScrollbackButton, Enum::FixedSizeHistory, SLOT(fixedScrollBack())},
-        {_ui->unlimitedScrollbackButton, Enum::UnlimitedHistory, SLOT(unlimitedScrollBack())},
-        {0, 0, 0}
-    };
-    setupRadio(types , scrollBackType);
+    _ui->historySizeWidget->setMode(Enum::HistoryModeEnum(scrollBackType));
+    connect(_ui->historySizeWidget, SIGNAL(historyModeChanged(Enum::HistoryModeEnum)),
+            this, SLOT(historyModeChanged(Enum::HistoryModeEnum)));
 
     // setup scrollback line count spinner
     const int historySize = profile->historySize();
-    _ui->scrollBackLinesSpinner->setValue(historySize);
-    _ui->scrollBackLinesSpinner->setSingleStep(historySize / 10);
-    _ui->scrollBackLinesSpinner->setSuffix(ki18ncp("Unit of scrollback", " line", " lines"));
+    _ui->historySizeWidget->setLineCount(historySize);
 
     // signals and slots
-    connect(_ui->scrollBackLinesSpinner, SIGNAL(valueChanged(int)), this,
-            SLOT(scrollBackLinesChanged(int)));
+    connect(_ui->historySizeWidget, SIGNAL(historySizeChanged(int)),
+            this, SLOT(historySizeChanged(int)));
 }
 
-void EditProfileDialog::scrollBackLinesChanged(int lineCount)
+void EditProfileDialog::historySizeChanged(int lineCount)
 {
     updateTempProfileProperty(Profile::HistorySize , lineCount);
 }
-void EditProfileDialog::noScrollBack()
+void EditProfileDialog::historyModeChanged(Enum::HistoryModeEnum mode)
 {
-    updateTempProfileProperty(Profile::HistoryMode , Enum::NoHistory);
-}
-void EditProfileDialog::fixedScrollBack()
-{
-    updateTempProfileProperty(Profile::HistoryMode , Enum::FixedSizeHistory);
-}
-void EditProfileDialog::unlimitedScrollBack()
-{
-    updateTempProfileProperty(Profile::HistoryMode , Enum::UnlimitedHistory);
+    updateTempProfileProperty(Profile::HistoryMode, mode);
 }
 void EditProfileDialog::hideScrollBar()
 {

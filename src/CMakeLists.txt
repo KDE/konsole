@@ -76,6 +76,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         Filter.cpp
         History.cpp
         HistorySizeDialog.cpp
+        HistorySizeWidget.cpp
         IncrementalSearchBar.cpp
         KeyBindingEditor.cpp
         KeyboardTranslator.cpp
@@ -138,6 +139,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                   KeyBindingEditor.ui
                   ManageProfilesDialog.ui
                   RenameTabsDialog.ui
+                  HistorySizeWidget.ui
                   settings/GeneralSettings.ui
                   settings/TabBarSettings.ui
                  )

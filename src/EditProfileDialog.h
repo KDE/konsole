@@ -30,6 +30,7 @@
 
 // Konsole
 #include "Profile.h"
+#include "Enumeration.h"
 
 class QAbstractButton;
 class QItemSelectionModel;
@@ -137,11 +138,9 @@ private slots:
     void colorSchemeAnimationUpdate();
 
     // scrolling page
-    void noScrollBack();
-    void fixedScrollBack();
-    void unlimitedScrollBack();
+    void historyModeChanged(Enum::HistoryModeEnum mode);
 
-    void scrollBackLinesChanged(int);
+    void historySizeChanged(int);
 
     void hideScrollBar();
     void showScrollBarLeft();

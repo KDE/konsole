@@ -63,7 +63,6 @@ class IncrementalSearchBar;
 class ProfileList;
 class UrlFilter;
 class RegExpFilter;
-class HistorySizeDialog;
 
 // SaveHistoryTask
 class TerminalCharacterDecoder;
