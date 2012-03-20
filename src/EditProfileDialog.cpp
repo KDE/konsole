@@ -878,7 +878,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     if (!selected.isEmpty())
         translator = model->data(selected.first(), Qt::UserRole + 1).value<const KeyboardTranslator*>();
     else
-        translator = KeyboardTranslatorManager::instance()->fallbackTranslator();
+        translator = KeyboardTranslatorManager::instance()->defaultTranslator();
 
     Q_ASSERT(translator);
 

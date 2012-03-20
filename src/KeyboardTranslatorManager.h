@@ -67,8 +67,8 @@ public:
      */
     bool deleteTranslator(const QString& name);
 
-    /** Returns the fallback translator for Konsole. */
-    const KeyboardTranslator* fallbackTranslator();
+    /** Returns the default translator for Konsole. */
+    const KeyboardTranslator* defaultTranslator();
 
     /**
      * Returns the keyboard translator with the given name or 0 if no translator
@@ -90,7 +90,7 @@ public:
     static KeyboardTranslatorManager* instance();
 
 private:
-    static const QByteArray fallbackTranslatorText;
+    static const QByteArray defaultTranslatorText;
 
     void findTranslators(); // locate the available translators
     KeyboardTranslator* loadTranslator(const QString& name); // loads the translator
