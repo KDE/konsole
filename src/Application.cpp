@@ -20,9 +20,6 @@
 // Own
 #include "Application.h"
 
-// std
-#include <iostream>
-
 // Qt
 #include <QtCore/QHashIterator>
 #include <QtCore/QFileInfo>
@@ -330,7 +327,7 @@ void Application::listAvailableProfiles()
 
     foreach ( const QString& path, paths) {
         QFileInfo info(path);
-        std::cout << info.completeBaseName().toLocal8Bit().data() << std::endl;
+        printf("%s\n", info.completeBaseName().toLocal8Bit().constData());
     }
 
     quit();
@@ -342,7 +339,7 @@ void Application::listProfilePropertyInfo()
     const QStringList names = tempProfile->propertiesInfoList();
 
     foreach ( const QString& name, names) {
-        std::cout << name.toLocal8Bit().data() << std::endl;
+        printf("%s\n", name.toLocal8Bit().constData());
     }
 
     quit();
