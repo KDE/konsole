@@ -33,7 +33,7 @@
 
 using namespace Konsole;
 
-const QByteArray KeyboardTranslatorManager::defaultTranslatorText(
+const QByteArray KeyboardTranslatorManager::fallbackTranslatorText(
     "keyboard \"Fallback Key Translator\"\n"
     "key Tab : \"\\t\""
 );
@@ -106,7 +106,7 @@ void KeyboardTranslatorManager::findTranslators()
 const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QString& name)
 {
     if (name.isEmpty())
-        return defaultTranslator();
+        return fallbackTranslator();
 
     if (_translators.contains(name) && _translators[name] != 0)
         return _translators[name];
@@ -177,14 +177,14 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(QIODevice* source,
     }
 }
 
-const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
+const KeyboardTranslator* KeyboardTranslatorManager::fallbackTranslator()
 {
     // Try to find the default.keytab file if it exists, otherwise
     // fall back to the hard-coded one
     const KeyboardTranslator* translator = findTranslator("default");
     if (!translator) {
         QBuffer textBuffer;
-        textBuffer.setData(defaultTranslatorText);
+        textBuffer.setData(fallbackTranslatorText);
         textBuffer.open(QIODevice::ReadOnly);
         translator = loadTranslator(&textBuffer, "fallback");
     }

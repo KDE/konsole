@@ -160,7 +160,7 @@ void Emulation::setKeyBindings(const QString& name)
 {
     _keyTranslator = KeyboardTranslatorManager::instance()->findTranslator(name);
     if (!_keyTranslator) {
-        _keyTranslator = KeyboardTranslatorManager::instance()->defaultTranslator();
+        _keyTranslator = KeyboardTranslatorManager::instance()->fallbackTranslator();
     }
 }
 
