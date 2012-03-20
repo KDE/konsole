@@ -831,7 +831,7 @@ void Vt102Emulation::sendString(const char* s , int length)
 void Vt102Emulation::reportCursorPosition()
 { 
   char tmp[20];
-  sprintf(tmp,"\033[%d;%dR",_currentScreen->getCursorY()+1,_currentScreen->getCursorX()+1);
+  snprintf(tmp, sizeof(tmp), "\033[%d;%dR", _currentScreen->getCursorY()+1, _currentScreen->getCursorX()+1);
   sendString(tmp);
 }
 
@@ -875,7 +875,7 @@ void Vt102Emulation::reportTerminalParms(int p)
    clkmul=1: The bit rate multiplier is 16.
    flags=0: None
 */
-  sprintf(tmp,"\033[%d;1;1;112;112;1;0x",p); // not really true.
+  snprintf(tmp, sizeof(tmp), "\033[%d;1;1;112;112;1;0x", p); // not really true.
   sendString(tmp);
 }
 
@@ -919,7 +919,7 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
     char command[32];
     command[0] = '\0';
     if (getMode(MODE_Mouse1015)) {
-        sprintf(command, "\033[%d;%d;%dM", cb + 0x20, cx, cy);
+        snprintf(command, sizeof(command), "\033[%d;%d;%dM", cb + 0x20, cx, cy);
     } else if (getMode(MODE_Mouse1005)) {
         if (cx <= 2015 && cy <= 2015) {
             // The xterm extension uses UTF-8 (up to 2 bytes) to encode
@@ -930,10 +930,10 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
             coords[1] = cy + 0x20;
             QString coordsStr = QString(coords, 2);
             QByteArray utf8 = coordsStr.toUtf8();
-            sprintf(command, "\033[M%c%s", cb + 0x20, (const char *)utf8);
+            snprintf(command, sizeof(command), "\033[M%c%s", cb + 0x20, (const char *)utf8);
         }
     } else if (cx <= 223 && cy <= 223) {
-        sprintf(command, "\033[M%c%c%c", cb + 0x20, cx + 0x20, cy + 0x20);
+        snprintf(command, sizeof(command), "\033[M%c%c%c", cb + 0x20, cx + 0x20, cy + 0x20);
     }
 
     sendString(command);
