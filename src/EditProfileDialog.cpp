@@ -547,8 +547,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     if (!_ui->keyBindingList->model())
         _ui->keyBindingList->setModel(new QStandardItemModel(this));
 
-    const QString& name = lookupProfile()
-                          ->property<QString>(Profile::KeyBindings);
+    const QString& name = lookupProfile()->keyBindings();
 
     KeyboardTranslatorManager* keyManager = KeyboardTranslatorManager::instance();
     const KeyboardTranslator* currentTranslator = keyManager->findTranslator(name);

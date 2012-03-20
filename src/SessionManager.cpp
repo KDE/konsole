@@ -123,7 +123,7 @@ SessionManager* SessionManager::instance()
 Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
 {
     // the fallback profile has a 'special' path name, "FALLBACK/"
-    if (shortPath == _fallbackProfile->property<QString>(Profile::Path))
+    if (shortPath == _fallbackProfile->path())
         return _fallbackProfile;
 
     QString path = shortPath;
@@ -221,7 +221,7 @@ void SessionManager::sortProfiles(QList<Profile::Ptr>& list)
 
     for (int i = 0; i < list.size(); ++i) {
         // dis-regard the fallback profile
-        if (list.at(i)->path() == _fallbackProfile->property<QString>(Profile::Path))
+        if (list.at(i)->path() == _fallbackProfile->path())
             continue;
 
         if (list.at(i)->menuIndexAsInt() == 0)
