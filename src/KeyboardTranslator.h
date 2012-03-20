@@ -319,6 +319,12 @@ private:
 Q_DECLARE_OPERATORS_FOR_FLAGS(KeyboardTranslator::States)
 Q_DECLARE_OPERATORS_FOR_FLAGS(KeyboardTranslator::Commands)
 
+class FallbackKeyboardTranslator : public KeyboardTranslator
+{
+public:
+    FallbackKeyboardTranslator();
+};
+
 /**
  * Parses the contents of a Keyboard Translator (.keytab) file and
  * returns the entries found in it.

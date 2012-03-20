@@ -33,19 +33,17 @@
 
 using namespace Konsole;
 
-const QByteArray KeyboardTranslatorManager::defaultTranslatorText(
-    "keyboard \"Fallback Key Translator\"\n"
-    "key Tab : \"\\t\""
-);
-
 KeyboardTranslatorManager::KeyboardTranslatorManager()
     : _haveLoadedAll(false)
+    , _fallbackTranslator(0)
 {
+    _fallbackTranslator = new FallbackKeyboardTranslator();
 }
 
 KeyboardTranslatorManager::~KeyboardTranslatorManager()
 {
     qDeleteAll(_translators);
+    delete _fallbackTranslator;
 }
 
 K_GLOBAL_STATIC(KeyboardTranslatorManager , theKeyboardTranslatorManager)
@@ -180,13 +178,10 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(QIODevice* source,
 const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
 {
     // Try to find the default.keytab file if it exists, otherwise
-    // fall back to the hard-coded one
+    // fall back to the internal hard-coded fallback translator
     const KeyboardTranslator* translator = findTranslator("default");
     if (!translator) {
-        QBuffer textBuffer;
-        textBuffer.setData(defaultTranslatorText);
-        textBuffer.open(QIODevice::ReadOnly);
-        translator = loadTranslator(&textBuffer, "fallback");
+        translator = _fallbackTranslator;
     }
     return translator;
 }

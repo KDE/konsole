@@ -620,6 +620,18 @@ KeyboardTranslator::KeyboardTranslator(const QString& aName)
 {
 }
 
+FallbackKeyboardTranslator::FallbackKeyboardTranslator()
+    : KeyboardTranslator("fallback")
+{
+    setDescription("Fallback Keyboard Translator");
+
+    // Key "TAB" should send out '\t'
+    KeyboardTranslator::Entry entry;
+    entry.setKeyCode(Qt::Key_Tab);
+    entry.setText("\t");
+    addEntry(entry);
+}
+
 void KeyboardTranslator::setDescription(const QString& aDescription)
 {
     _description = aDescription;

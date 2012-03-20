@@ -90,7 +90,6 @@ public:
     static KeyboardTranslatorManager* instance();
 
 private:
-    static const QByteArray defaultTranslatorText;
 
     void findTranslators(); // locate the available translators
     KeyboardTranslator* loadTranslator(const QString& name); // loads the translator
@@ -100,9 +99,11 @@ private:
     bool saveTranslator(const KeyboardTranslator* translator);
     QString findTranslatorPath(const QString& name);
 
-    QHash<QString, KeyboardTranslator*> _translators; // maps translator-name -> KeyboardTranslator
-    // instance
     bool _haveLoadedAll;
+
+    const KeyboardTranslator* _fallbackTranslator;
+    QHash<QString, KeyboardTranslator*> _translators;
+
 };
 
 }
