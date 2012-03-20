@@ -34,6 +34,7 @@
 
 // KDE
 #include <KLocalizedString>
+#include <KDebug>
 
 // Konsole
 #include "KeyboardTranslator.h"
@@ -1280,13 +1281,37 @@ static void hexdump(int* s, int len)
     }
 }
 
+// return contents of the scan buffer
+static QString hexdump2(int* s, int len)
+{
+    int i;
+    char dump[128];
+    QString returnDump;
+
+    for (i = 0; i < len; i++) {
+        if (s[i] == '\\')
+            snprintf(dump, sizeof(dump), "%s", "\\\\");
+        else if ((s[i]) > 32 && s[i] < 127)
+            snprintf(dump, sizeof(dump), "%c", s[i]);
+        else
+            snprintf(dump, sizeof(dump), "\\%04x(hex)", s[i]);
+        returnDump.append(QString(dump));
+    }
+    return returnDump;
+}
+
 void Vt102Emulation::reportDecodingError()
 {
     if (tokenBufferPos == 0 || (tokenBufferPos == 1 && (tokenBuffer[0] & 0xff) >= 32))
         return;
-    printf("Undecodable sequence: ");
-    hexdump(tokenBuffer, tokenBufferPos);
-    printf("\n");
+
+//    printf("Undecodable sequence: ");
+//    hexdump(tokenBuffer, tokenBufferPos);
+//    printf("\n");
+
+    QString outputError = QString("Undecodable sequence: ");
+    outputError.append(hexdump2(tokenBuffer, tokenBufferPos));
+    kDebug()<<outputError;
 }
 
 #include "Vt102Emulation.moc"
