@@ -576,7 +576,7 @@ void SessionController::setupExtraActions()
     action->setShortcut(KShortcut(Qt::CTRL | Qt::Key_Minus));
 
     // History
-    _searchToggleAction = KStandardAction::find(this, NULL, collection);
+    _searchToggleAction = KStandardAction::find(this, 0, collection);
     _searchToggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F));
     _searchToggleAction->setCheckable(true);
     connect(_searchToggleAction, SIGNAL(toggled(bool)), this, SLOT(searchHistory(bool)));
@@ -754,14 +754,14 @@ void SessionController::selectAll()
 static const KXmlGuiWindow* findWindow(const QObject* object)
 {
     // Walk up the QObject hierarchy to find a KXmlGuiWindow.
-    while (object != NULL) {
+    while (object != 0) {
         const KXmlGuiWindow* window = qobject_cast<const KXmlGuiWindow*>(object);
-        if (window != NULL) {
+        if (window != 0) {
             return(window);
         }
         object = object->parent();
     }
-    return(NULL);
+    return(0);
 }
 
 static bool hasTerminalDisplayInSameWindow(const Session* session, const KXmlGuiWindow* window)
@@ -882,7 +882,7 @@ void SessionController::copyInputToNone()
         }
     }
     delete _copyToGroup;
-    _copyToGroup = NULL;
+    _copyToGroup = 0;
     snapshot();
 
 }

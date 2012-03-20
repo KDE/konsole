@@ -369,7 +369,7 @@ void MainWindow::sessionListChanged(const QList<QAction*>& sessionActions)
             // NOTE: defaultProfile seems to not work here, sigh.
             Profile::Ptr profile = SessionManager::instance()->defaultProfile();
             if (profile && profile->name() == sessionAction->text().remove('&')) {
-                sessionAction->setIcon(KIcon(profile->icon(), NULL, QStringList("emblem-favorite")));
+                sessionAction->setIcon(KIcon(profile->icon(), 0, QStringList("emblem-favorite")));
                 newTabMenu->setDefaultAction(sessionAction);
                 QFont actionFont = sessionAction->font();
                 actionFont.setBold(true);

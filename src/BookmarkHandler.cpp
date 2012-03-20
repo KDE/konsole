@@ -60,7 +60,7 @@ BookmarkHandler::BookmarkHandler(KActionCollection* collection,
     if (toplevel)
         _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, collection);
     else
-        _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, NULL);
+        _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, 0);
 }
 
 BookmarkHandler::~BookmarkHandler()
