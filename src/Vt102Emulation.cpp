@@ -1267,6 +1267,7 @@ char Vt102Emulation::eraseChar() const
         return '\b';
 }
 
+#if 0
 // print contents of the scan buffer
 static void hexdump(int* s, int len)
 {
@@ -1280,6 +1281,7 @@ static void hexdump(int* s, int len)
             printf("\\%04x(hex)", s[i]);
     }
 }
+#endif
 
 // return contents of the scan buffer
 static QString hexdump2(int* s, int len)
