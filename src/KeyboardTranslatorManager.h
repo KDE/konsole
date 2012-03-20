@@ -75,7 +75,7 @@ public:
      * with that name exists.
      *
      * The first time that a translator with a particular name is requested,
-     * the on-disk .keyboard file is loaded and parsed.
+     * the on-disk .keytab file is loaded and parsed.
      */
     const KeyboardTranslator* findTranslator(const QString& name);
     /**
@@ -91,9 +91,10 @@ public:
 
 private:
 
-    void findTranslators(); // locate the available translators
-    KeyboardTranslator* loadTranslator(const QString& name); // loads the translator
-    // with the given name
+    void findTranslators(); // locate all available translators
+
+    // loads the translator with the given name
+    KeyboardTranslator* loadTranslator(const QString& name);
     KeyboardTranslator* loadTranslator(QIODevice* device, const QString& name);
 
     bool saveTranslator(const KeyboardTranslator* translator);
