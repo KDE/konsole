@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>KeyBindingEditor</class>
- <widget class="QWidget" name="KeyBindingEditor" >
-  <property name="geometry" >
+ <widget class="QWidget" name="KeyBindingEditor">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,28 +10,28 @@
     <height>530</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="margin" >
+  <layout class="QVBoxLayout">
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout">
      <item>
-      <widget class="QLabel" name="descriptionLabel" >
-       <property name="text" >
+      <widget class="QLabel" name="descriptionLabel">
+       <property name="text">
         <string>Description:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="KLineEdit" name="descriptionEdit" />
+      <widget class="KLineEdit" name="descriptionEdit"/>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QTableWidget" name="keyBindingTable" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+    <widget class="QTableWidget" name="keyBindingTable">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>1</verstretch>
       </sizepolicy>
@@ -38,17 +39,17 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout">
      <item>
-      <widget class="QPushButton" name="addEntryButton" >
-       <property name="text" >
+      <widget class="QPushButton" name="addEntryButton">
+       <property name="text">
         <string>Add</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="removeEntryButton" >
-       <property name="text" >
+      <widget class="QPushButton" name="removeEntryButton">
+       <property name="text">
         <string>Remove</string>
        </property>
       </widget>
@@ -57,10 +58,10 @@
    </item>
    <item>
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>16</height>
@@ -69,40 +70,40 @@
     </spacer>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox" >
-     <property name="title" >
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
       <string comment="Title of the area where you test your keys are properly configured">Test Area</string>
      </property>
-     <property name="flat" >
+     <property name="flat">
       <bool>true</bool>
      </property>
-     <layout class="QGridLayout" >
-      <item row="0" column="0" >
-       <widget class="QLabel" name="label" >
-        <property name="text" >
+     <layout class="QGridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
          <string>Input:</string>
         </property>
-        <property name="alignment" >
+        <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" >
-       <widget class="KLineEdit" name="testAreaInputEdit" />
+      <item row="0" column="1">
+       <widget class="KLineEdit" name="testAreaInputEdit"/>
       </item>
-      <item row="1" column="0" >
-       <widget class="QLabel" name="label_2" >
-        <property name="text" >
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
          <string>Output:</string>
         </property>
-        <property name="alignment" >
+        <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" >
-       <widget class="KLineEdit" name="testAreaOutputEdit" >
-        <property name="readOnly" >
+      <item row="1" column="1">
+       <widget class="KLineEdit" name="testAreaOutputEdit">
+        <property name="readOnly">
          <bool>true</bool>
         </property>
        </widget>
@@ -112,6 +113,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

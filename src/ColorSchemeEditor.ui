@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0" >
+<ui version="4.0">
  <class>ColorSchemeEditor</class>
- <widget class="QWidget" name="ColorSchemeEditor" >
-  <property name="geometry" >
+ <widget class="QWidget" name="ColorSchemeEditor">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -10,65 +10,65 @@
     <height>502</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="margin" >
+  <layout class="QVBoxLayout">
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout">
      <item>
-      <widget class="QLabel" name="discriptionLabel" >
-       <property name="text" >
+      <widget class="QLabel" name="discriptionLabel">
+       <property name="text">
         <string>Description:</string>
        </property>
-       <property name="alignment" >
+       <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="KLineEdit" name="descriptionEdit" />
+      <widget class="KLineEdit" name="descriptionEdit"/>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QTableWidget" name="colorTable" />
+    <widget class="QTableWidget" name="colorTable"/>
    </item>
    <item>
-    <widget class="QCheckBox" name="randomizedBackgroundCheck" >
-     <property name="text" >
+    <widget class="QCheckBox" name="randomizedBackgroundCheck">
+     <property name="text">
       <string>Vary the background color for each tab</string>
      </property>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout">
      <item>
-      <widget class="QLabel" name="transparencyLabel" >
-       <property name="text" >
+      <widget class="QLabel" name="transparencyLabel">
+       <property name="text">
         <string>Background transparency:</string>
        </property>
-       <property name="alignment" >
+       <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSlider" name="transparencySlider" >
-       <property name="maximum" >
+      <widget class="QSlider" name="transparencySlider">
+       <property name="maximum">
         <number>100</number>
        </property>
-       <property name="orientation" >
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="transparencyPercentLabel" >
-       <property name="text" >
+      <widget class="QLabel" name="transparencyPercentLabel">
+       <property name="text">
         <string>Percent</string>
        </property>
-       <property name="alignment" >
+       <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
@@ -76,28 +76,28 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout">
      <item>
-      <widget class="QLabel" name="wallpaperLabel" >
-       <property name="text" >
+      <widget class="QLabel" name="wallpaperLabel">
+       <property name="text">
         <string>Background image:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="KLineEdit" name="wallpaperPath" >
-       <property name="toolTip" >
+      <widget class="KLineEdit" name="wallpaperPath">
+       <property name="toolTip">
         <string>Edit the path of the background image</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="wallpaperSelectButton" >
-       <property name="text" >
-        <string>...</string>
-       </property>
+      <widget class="QToolButton" name="wallpaperSelectButton">
        <property name="toolTip">
         <string>Choose the background image</string>
+       </property>
+       <property name="text">
+        <string>...</string>
        </property>
       </widget>
      </item>
@@ -105,13 +105,13 @@
    </item>
    <item>
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeType" >
+     <property name="sizeType">
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>364</width>
        <height>5</height>
@@ -120,8 +120,7 @@
     </spacer>
    </item>
    <item>
-    <widget class="KMessageWidget" native="1" name="transparencyWarningWidget" >
-    </widget>
+    <widget class="KMessageWidget" name="transparencyWarningWidget"/>
    </item>
   </layout>
  </widget>

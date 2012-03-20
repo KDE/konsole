@@ -60,7 +60,7 @@
            </widget>
           </item>
           <item row="1" column="1" colspan="2">
-           <widget class="KMessageWidget" name="emptyNameWarningWidget" native="true"/>
+           <widget class="KMessageWidget" name="emptyNameWarningWidget"/>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_3">
@@ -284,8 +284,7 @@
            </widget>
           </item>
           <item row="0" column="2">
-           <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton">
-           </widget>
+           <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton"/>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_2">
@@ -305,8 +304,7 @@
            </widget>
           </item>
           <item row="1" column="2">
-           <widget class="Konsole::TabTitleFormatButton" name="remoteTabTitleFormatButton">
-           </widget>
+           <widget class="Konsole::TabTitleFormatButton" name="remoteTabTitleFormatButton"/>
           </item>
          </layout>
         </widget>
@@ -445,7 +443,7 @@
            </spacer>
           </item>
           <item row="5" column="0">
-           <widget class="KMessageWidget" name="transparencyWarningWidget" native="true"/>
+           <widget class="KMessageWidget" name="transparencyWarningWidget"/>
           </item>
          </layout>
         </widget>

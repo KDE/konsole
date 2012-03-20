@@ -38,8 +38,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton">
-       </widget>
+       <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
@@ -59,8 +58,7 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="Konsole::TabTitleFormatButton" name="remoteTabTitleFormatButton">
-       </widget>
+       <widget class="Konsole::TabTitleFormatButton" name="remoteTabTitleFormatButton"/>
       </item>
      </layout>
     </widget>
