@@ -276,7 +276,7 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 
     _dropIndicatorIndex = index;
     const int ARROW_SIZE = 32;
-    bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
+    const bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
 
     if (!_dropIndicator || _drawIndicatorDisabled != drawDisabled) {
         if (!_dropIndicator) {
@@ -355,9 +355,9 @@ int ViewContainerTabBar::dropIndex(const QPoint& pos) const
 }
 bool ViewContainerTabBar::proposedDropIsSameTab(const QDropEvent* event) const
 {
-    int index = dropIndex(event->pos());
-    int droppedId = ViewProperties::decodeMimeData(event->mimeData());
-    bool sameTabBar = event->source() == this;
+    const int index = dropIndex(event->pos());
+    const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
+    const bool sameTabBar = event->source() == this;
 
     if (!sameTabBar)
         return false;
@@ -386,8 +386,8 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
         return;
     }
 
-    int index = dropIndex(event->pos());
-    int droppedId = ViewProperties::decodeMimeData(event->mimeData());
+    const int index = dropIndex(event->pos());
+    const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
     bool result = false;
     emit _container->moveViewRequest(index, droppedId, result);
 
@@ -626,7 +626,7 @@ void TabbedViewContainer::startTabDrag(int tab)
 
     drag->setHotSpot(mappedPos);
 
-    int id = viewProperties(views()[tab])->identifier();
+    const int id = viewProperties(views()[tab])->identifier();
     QWidget* view = views()[tab];
     drag->setMimeData(ViewProperties::createMimeData(id));
 
