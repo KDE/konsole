@@ -2697,7 +2697,11 @@ bool TerminalDisplay::event(QEvent* event)
 
 void TerminalDisplay::contextMenuEvent(QContextMenuEvent* )
 {
+// FIXME: On Mac OSX opening some dialogs cause the context menu to
+//  get displayed.  Example: Scrollback dialog via context menu.
+#if !defined(Q_OS_MAC)
     emit configureRequest(mapFromGlobal(QCursor::pos()));
+#endif
 }
 
 /* --------------------------------------------------------------------- */
