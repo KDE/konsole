@@ -74,7 +74,7 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
 
     setWidget(_viewManager->widget());
     actionCollection()->addAssociatedWidget(_viewManager->widget());
-    foreach(QAction * action, actionCollection()->actions()) {
+    foreach(QAction* action, actionCollection()->actions()) {
         action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
     }
 
@@ -84,10 +84,12 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
     // create basic session
     createSession();
 }
+
 Part::~Part()
 {
     SessionManager::instance()->saveSettings();
 }
+
 void Part::createGlobalActions()
 {
     _manageProfilesAction = new QAction(i18n("Manage Profiles..."), this);
@@ -98,15 +100,18 @@ bool Part::openFile()
 {
     return false;
 }
+
 void Part::terminalExited()
 {
     deleteLater();
 }
+
 void Part::newTab()
 {
     createSession();
     showShellInDir(QString());
 }
+
 Session* Part::activeSession() const
 {
     if (_viewManager->activeViewController()) {
@@ -122,35 +127,43 @@ void Part::startProgram(const QString& program,
 {
     Q_ASSERT(activeSession());
 
-    if (!activeSession()->isRunning()) {
-        if (!program.isEmpty() && !arguments.isEmpty()) {
-            activeSession()->setProgram(program);
-            activeSession()->setArguments(arguments);
-        }
+    // do nothing if the session has alreay started running
+    if ( activeSession()->isRunning() )
+        return;
 
-        activeSession()->run();
+    if (!program.isEmpty() && !arguments.isEmpty()) {
+        activeSession()->setProgram(program);
+        activeSession()->setArguments(arguments);
     }
+
+    activeSession()->run();
 }
+
 void Part::openTeletype(int fd)
 {
     Q_ASSERT(activeSession());
 
     activeSession()->openTeletype(fd);
 }
+
 void Part::showShellInDir(const QString& dir)
 {
     Q_ASSERT(activeSession());
 
-    if (!activeSession()->isRunning()) {
-        if (!dir.isEmpty())
-            activeSession()->setInitialWorkingDirectory(dir);
-        activeSession()->run();
-    }
+    // do nothing if the session has alreay started running
+    if ( activeSession()->isRunning() )
+        return;
+
+    if (!dir.isEmpty())
+        activeSession()->setInitialWorkingDirectory(dir);
+
+    activeSession()->run();
 }
+
 void Part::sendInput(const QString& text)
 {
     Q_ASSERT(activeSession());
-    activeSession()->emulation()->sendText(text);
+    activeSession()->sendText(text);
 }
 
 int Part::terminalProcessId()
@@ -158,7 +171,6 @@ int Part::terminalProcessId()
     Q_ASSERT(activeSession());
 
     return activeSession()->processId();
-
 }
 
 int Part::foregroundProcessId()
@@ -190,6 +202,7 @@ Session* Part::createSession(const Profile::Ptr profile)
 
     return session;
 }
+
 void Part::activeViewChanged(SessionController* controller)
 {
     Q_ASSERT(controller);
@@ -216,6 +229,7 @@ void Part::activeViewChanged(SessionController* controller)
 
     _pluggedController = controller;
 }
+
 void Part::overrideTerminalShortcut(QKeyEvent* event, bool& override)
 {
     // Shift+Insert is commonly used as the alternate shorcut for
@@ -231,14 +245,17 @@ void Part::overrideTerminalShortcut(QKeyEvent* event, bool& override)
     override = true;
     emit overrideShortcut(event, override);
 }
+
 void Part::activeViewTitleChanged(ViewProperties* properties)
 {
     emit setWindowCaption(properties->title());
 }
+
 void Part::showManageProfilesDialog()
 {
     showManageProfilesDialog(_viewManager->widget());
 }
+
 void Part::showManageProfilesDialog(QWidget* parent)
 {
     ManageProfilesDialog* dialog = new ManageProfilesDialog(parent);
@@ -246,6 +263,7 @@ void Part::showManageProfilesDialog(QWidget* parent)
     dialog->setShortcutEditorVisible(false);
     dialog->show();
 }
+
 void Part::showEditCurrentProfileDialog(QWidget* parent)
 {
     Q_ASSERT(activeSession());
@@ -255,6 +273,7 @@ void Part::showEditCurrentProfileDialog(QWidget* parent)
     dialog->setProfile(SessionManager::instance()->sessionProfile(activeSession()));
     dialog->show();
 }
+
 void Part::changeSessionSettings(const QString& text)
 {
     // send a profile change command, the escape code format

@@ -163,7 +163,7 @@ signals:
 protected:
     /** Reimplemented from KParts::PartBase. */
     virtual bool openFile();
-    virtual bool openUrl(const KUrl & url);
+    virtual bool openUrl(const KUrl& url);
 
 private slots:
     // creates a new session using the specified profile.
