@@ -276,14 +276,14 @@ void Part::showEditCurrentProfileDialog(QWidget* parent)
 
 void Part::changeSessionSettings(const QString& text)
 {
+    Q_ASSERT(activeSession());
+
     // send a profile change command, the escape code format
     // is the same as the normal X-Term commands used to change the window title or icon,
     // but with a magic value of '50' for the parameter which specifies what to change
-    Q_ASSERT(activeSession());
-    QByteArray buffer;
-    buffer.append("\033]50;").append(text.toUtf8()).append('\a');
+    QString command = QString("\033]50;%1\a").arg(text);
 
-    activeSession()->emulation()->receiveData(buffer.constData(), buffer.length());
+    sendInput(command);
 }
 
 // Konqueror integration
