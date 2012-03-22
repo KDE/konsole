@@ -127,7 +127,7 @@ void Part::startProgram(const QString& program,
 {
     Q_ASSERT(activeSession());
 
-    // do nothing if the session has alreay started running
+    // do nothing if the session has already started running
     if ( activeSession()->isRunning() )
         return;
 
@@ -150,7 +150,7 @@ void Part::showShellInDir(const QString& dir)
 {
     Q_ASSERT(activeSession());
 
-    // do nothing if the session has alreay started running
+    // do nothing if the session has already started running
     if ( activeSession()->isRunning() )
         return;
 
