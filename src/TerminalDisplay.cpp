@@ -2672,6 +2672,9 @@ bool TerminalDisplay::handleShortcutOverrideEvent(QKeyEvent* keyEvent)
     case Qt::Key_Backspace:
     case Qt::Key_Left:
     case Qt::Key_Right:
+    case Qt::Key_Slash:
+    case Qt::Key_Period:
+    case Qt::Key_Space:
         keyEvent->accept();
         return true;
     }
