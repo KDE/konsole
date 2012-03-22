@@ -92,8 +92,14 @@ Part::~Part()
 
 void Part::createGlobalActions()
 {
-    _manageProfilesAction = new QAction(i18n("Manage Profiles..."), this);
+    _manageProfilesAction = new KAction(i18n("Manage Profiles..."), this);
     connect(_manageProfilesAction, SIGNAL(triggered()), this, SLOT(showManageProfilesDialog()));
+}
+
+void Part::setupActionsForSession(SessionController* controller)
+{
+    KActionCollection* collection = controller->actionCollection();
+    collection->addAction("manage-profiles",_manageProfilesAction);
 }
 
 bool Part::openFile()
@@ -226,6 +232,8 @@ void Part::activeViewChanged(SessionController* controller)
 
     // insert new controller
     insertChildClient(controller);
+    setupActionsForSession(controller);
+
     connect(controller, SIGNAL(titleChanged(ViewProperties*)), this,
             SLOT(activeViewTitleChanged(ViewProperties*)));
     activeViewTitleChanged(controller);

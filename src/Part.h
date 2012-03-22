@@ -192,6 +192,7 @@ private slots:
 private:
     Session* activeSession() const;
     void createGlobalActions();
+    void setupActionsForSession(SessionController* );
 
 private:
     ViewManager* _viewManager;
