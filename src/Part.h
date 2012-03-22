@@ -128,6 +128,13 @@ public slots:
     * */
     void setMonitorActivityEnabled(bool enabled);
 
+    /**
+    * Returns the current working directory of the active session
+    *
+    * TODO: this should better be moved into TerminalInterfaceV2.
+    */
+    QString currentWorkingDirectory() const;
+
 signals:
     /**
      * Emitted when the key sequence for a shortcut, which is also a valid terminal key sequence,

@@ -195,6 +195,13 @@ QString Part::foregroundProcessName()
     }
 }
 
+QString Part::currentWorkingDirectory() const
+{
+    Q_ASSERT(activeSession());
+
+    return activeSession()->currentWorkingDirectory();
+}
+
 Session* Part::createSession(const Profile::Ptr profile)
 {
     Session* session = SessionManager::instance()->createSession(profile);
