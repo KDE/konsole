@@ -840,6 +840,10 @@ Session::~Session()
 
 void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 {
+    // This slot should be triggered only one time
+    disconnect(_shellProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
+               this, SLOT(done(int,QProcess::ExitStatus)));
+
     if ( !_autoClose )
     {
         _userTitle = i18nc("@info:shell This session is done", "Finished");
