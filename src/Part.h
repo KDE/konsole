@@ -167,6 +167,11 @@ signals:
      */
     void activityDetected();
 
+    /**
+     * Emitted when the current working directory of the active session has changed.
+     */
+    void currentDirectoryChanged(const QString& dir);
+
 protected:
     /** Reimplemented from KParts::PartBase. */
     virtual bool openFile();

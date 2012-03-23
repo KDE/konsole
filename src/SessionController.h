@@ -172,6 +172,12 @@ signals:
 
     void rawTitleChanged();
 
+    /**
+     * Emitted when the curreent working directory of the session associated with
+     * the controller is changed.
+     */
+    void currentDirectoryChanged(const QString& dir);
+
 public slots:
     /**
      * Issues a command to the session to navigate to the specified URL.

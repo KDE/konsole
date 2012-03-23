@@ -143,6 +143,9 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // listen to title and icon changes
     connect(_session, SIGNAL(titleChanged()), this, SLOT(sessionTitleChanged()));
 
+    connect( _session , SIGNAL(currentDirectoryChanged(QString)) ,
+            this , SIGNAL(currentDirectoryChanged(QString)) );
+
     // listen for color changes
     connect(_session, SIGNAL(changeBackgroundColorRequest(QColor)), _view, SLOT(setBackgroundColor(QColor)));
     connect(_session, SIGNAL(changeForegroundColorRequest(QColor)), _view, SLOT(setForegroundColor(QColor)));

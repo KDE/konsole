@@ -220,6 +220,8 @@ void Part::activeViewChanged(SessionController* controller)
         removeChildClient(_pluggedController);
         disconnect(_pluggedController, SIGNAL(titleChanged(ViewProperties*)), this,
                    SLOT(activeViewTitleChanged(ViewProperties*)));
+        disconnect(_pluggedController,SIGNAL(currentDirectoryChanged(QString)),this,
+                    SIGNAL(currentDirectoryChanged(QString)));
     }
 
     // insert new controller
@@ -227,6 +229,8 @@ void Part::activeViewChanged(SessionController* controller)
     connect(controller, SIGNAL(titleChanged(ViewProperties*)), this,
             SLOT(activeViewTitleChanged(ViewProperties*)));
     activeViewTitleChanged(controller);
+    connect(controller,SIGNAL(currentDirectoryChanged(QString)),this,
+            SIGNAL(currentDirectoryChanged(QString)));
 
     const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*,bool&));
     const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*,bool&));
