@@ -459,6 +459,11 @@ public slots:
     Q_SCRIPTABLE void sendText(const QString& text) const;
 
     /**
+     * Sends @p command to the current foreground terminal program.
+     */
+    Q_SCRIPTABLE void runCommand(const QString& command) const;
+
+    /**
      * Sends a mouse event of type @p eventType emitted by button
      * @p buttons on @p column/@p line to the current foreground
      * terminal program
