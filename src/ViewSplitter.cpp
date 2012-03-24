@@ -52,10 +52,10 @@ void ViewSplitter::adjustContainerSize(ViewContainer* container , int percentage
 
     QList<int> containerSizes = sizes();
 
-    int oldSize = containerSizes[containerIndex];
-    int newSize = (int)(oldSize * (1.0 + percentage / 100.0));
+    const int oldSize = containerSizes[containerIndex];
+    const int newSize = (int)(oldSize * (1.0 + percentage / 100.0));
 
-    int perContainerDelta = (count() == 1) ? 0 : ((newSize - oldSize) / (count() - 1)) * (-1);
+    const int perContainerDelta = (count() == 1) ? 0 : ((newSize - oldSize) / (count() - 1)) * (-1);
 
     for (int i = 0 ; i < containerSizes.count() ; i++) {
         if (i == containerIndex)
@@ -148,7 +148,7 @@ void ViewSplitter::addContainer(ViewContainer* container ,
         connect(newSplitter , SIGNAL(empty(ViewSplitter*)) , splitter , SLOT(childEmpty(ViewSplitter*)));
 
         ViewContainer* oldContainer = splitter->activeContainer();
-        int oldContainerIndex = splitter->indexOf(oldContainer->containerWidget());
+        const int oldContainerIndex = splitter->indexOf(oldContainer->containerWidget());
 
         splitter->unregisterContainer(oldContainer);
 
@@ -166,7 +166,7 @@ void ViewSplitter::addContainer(ViewContainer* container ,
 
 }
 
-void ViewSplitter::containerEmpty(ViewContainer* /*object*/)
+void ViewSplitter::containerEmpty(ViewContainer* /*container*/)
 {
     int children = 0;
     foreach ( ViewContainer* container, _containers ) {
@@ -177,11 +177,11 @@ void ViewSplitter::containerEmpty(ViewContainer* /*object*/)
         emit allContainersEmpty();
 }
 
-void ViewSplitter::containerDestroyed(ViewContainer* object)
+void ViewSplitter::containerDestroyed(ViewContainer* container)
 {
-    Q_ASSERT(_containers.contains(object));
+    Q_ASSERT(_containers.contains(container));
 
-    _containers.removeAll(object);
+    _containers.removeAll(container);
 
     if (count() == 0) {
         emit empty(this);

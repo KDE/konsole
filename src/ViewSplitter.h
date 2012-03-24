@@ -172,10 +172,10 @@ private:
 
 private slots:
     // Called to indicate that a child ViewContainer has been deleted
-    void containerDestroyed(ViewContainer* object);
+    void containerDestroyed(ViewContainer* container);
 
     // Called to indicate that a child ViewContainer is empty
-    void containerEmpty(ViewContainer* object);
+    void containerEmpty(ViewContainer* container);
 
     // Called to indicate that a child ViewSplitter is empty
     // (ie. all child widgets have been deleted)
