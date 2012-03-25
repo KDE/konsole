@@ -791,7 +791,7 @@ void Session::sendText(const QString& text) const
 
 void Session::runCommand(const QString& command) const
 {
-    _emulation->sendText( command + "\n");
+    _emulation->sendText(command + '\n');
 }
 
 void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
