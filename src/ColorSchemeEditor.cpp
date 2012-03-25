@@ -37,8 +37,8 @@
 
 using namespace Konsole;
 
-ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
-    : QWidget(parent)
+ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
+    : QWidget(aParent)
     , _colors(0)
 {
     _ui = new Ui::ColorSchemeEditor();
