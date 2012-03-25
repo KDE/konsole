@@ -161,18 +161,18 @@ ColorScheme::~ColorScheme()
     delete[] _randomTable;
 }
 
-void ColorScheme::setDescription(const QString& description)
+void ColorScheme::setDescription(const QString& aDescription)
 {
-    _description = description;
+    _description = aDescription;
 }
 QString ColorScheme::description() const
 {
     return _description;
 }
 
-void ColorScheme::setName(const QString& name)
+void ColorScheme::setName(const QString& aName)
 {
-    _name = name;
+    _name = aName;
 }
 QString ColorScheme::name() const
 {
@@ -279,9 +279,9 @@ bool ColorScheme::hasDarkBackground() const
     // so 127 is in the middle, anything less is deemed 'dark'
     return backgroundColor().value() < 127;
 }
-void ColorScheme::setOpacity(qreal opacity)
+void ColorScheme::setOpacity(qreal aOpacity)
 {
-    _opacity = opacity;
+    _opacity = aOpacity;
 }
 qreal ColorScheme::opacity() const
 {
@@ -292,9 +292,9 @@ void ColorScheme::read(const KConfig& config)
 {
     KConfigGroup configGroup = config.group("General");
 
-    const QString description = configGroup.readEntry("Description", I18N_NOOP("Un-named Color Scheme"));
+    const QString schemeDescription = configGroup.readEntry("Description", I18N_NOOP("Un-named Color Scheme"));
 
-    _description = i18n(description.toUtf8());
+    _description = i18n(schemeDescription.toUtf8());
     _opacity = configGroup.readEntry("Opacity", qreal(1.0));
     setWallpaper(configGroup.readEntry("Wallpaper", QString()));
 
@@ -377,8 +377,8 @@ ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const
     return _wallpaper;
 }
 
-ColorSchemeWallpaper::ColorSchemeWallpaper(const QString& path)
-    : _path(path),
+ColorSchemeWallpaper::ColorSchemeWallpaper(const QString& aPath)
+    : _path(aPath),
       _picture(0)
 {
 }
