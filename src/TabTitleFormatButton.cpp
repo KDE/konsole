@@ -50,8 +50,8 @@ const TabTitleFormatButton::Element TabTitleFormatButton::_remoteElements[] = {
 const int TabTitleFormatButton::_remoteElementCount =
     sizeof(_remoteElements) / sizeof(TabTitleFormatButton::Element);
 
-TabTitleFormatButton::TabTitleFormatButton(QWidget* parent)
-    : QPushButton(parent)
+TabTitleFormatButton::TabTitleFormatButton(QWidget* aParent)
+    : QPushButton(aParent)
     , _context(Session::LocalTabTitle)
 {
     setText(i18n("Insert"));
@@ -69,34 +69,33 @@ void TabTitleFormatButton::fireElementSelected(QAction* action)
     emit dynamicElementSelected(action->data().value<QString>());
 }
 
-void TabTitleFormatButton::setContext(Session::TabTitleContext context)
+void TabTitleFormatButton::setContext(Session::TabTitleContext titleContext)
 {
-    _context = context;
+    _context = titleContext;
 
     menu()->clear();
-
-    QList<QAction*> actions;
 
     int count = 0;
     const Element* array = 0;
 
-    if (context == Session::LocalTabTitle) {
+    if (titleContext == Session::LocalTabTitle) {
         setToolTip(i18n("Insert title format"));
         array = _localElements;
         count = _localElementCount;
-    } else if (context == Session::RemoteTabTitle) {
+    } else if (titleContext == Session::RemoteTabTitle) {
         setToolTip(i18n("Insert remote title format"));
         array = _remoteElements;
         count = _remoteElementCount;
     }
 
+    QList<QAction*> menuActions;
     for (int i = 0 ; i < count ; i++) {
         QAction* action = new QAction(i18n(array[i].description), this);
         action->setData(array[i].element);
-        actions << action;
+        menuActions << action;
     }
 
-    menu()->addActions(actions);
+    menu()->addActions(menuActions);
 }
 
 Session::TabTitleContext TabTitleFormatButton::context() const
