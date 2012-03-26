@@ -18,14 +18,14 @@
 */
 
 // Own
-#include "RenameTabsDialog.h"
+#include "RenameTabDialog.h"
 
 // Konsole
-#include "ui_RenameTabsDialog.h"
+#include "ui_RenameTabDialog.h"
 
-using Konsole::RenameTabsDialog;
+using Konsole::RenameTabDialog;
 
-RenameTabsDialog::RenameTabsDialog(QWidget* parent)
+RenameTabDialog::RenameTabDialog(QWidget* parent)
     : KDialog(parent)
 {
     setCaption(i18n("Rename Tab"));
@@ -33,51 +33,51 @@ RenameTabsDialog::RenameTabsDialog(QWidget* parent)
 
     setWindowModality(Qt::WindowModal);
 
-    _ui = new Ui::RenameTabsDialog();
+    _ui = new Ui::RenameTabDialog();
     _ui->setupUi(mainWidget());
 }
 
-RenameTabsDialog::~RenameTabsDialog()
+RenameTabDialog::~RenameTabDialog()
 {
     delete _ui;
 }
 
-void RenameTabsDialog::focusTabTitleText()
+void RenameTabDialog::focusTabTitleText()
 {
     _ui->renameTabWidget->focusTabTitleText();
 }
 
-void RenameTabsDialog::focusRemoteTabTitleText()
+void RenameTabDialog::focusRemoteTabTitleText()
 {
     _ui->renameTabWidget->focusRemoteTabTitleText();
 }
 
-void RenameTabsDialog::setTabTitleText(const QString& text)
+void RenameTabDialog::setTabTitleText(const QString& text)
 {
     _ui->renameTabWidget->setTabTitleText(text);
 }
 
-void RenameTabsDialog::setRemoteTabTitleText(const QString& text)
+void RenameTabDialog::setRemoteTabTitleText(const QString& text)
 {
     _ui->renameTabWidget->setRemoteTabTitleText(text);
 }
 
-QString RenameTabsDialog::tabTitleText() const
+QString RenameTabDialog::tabTitleText() const
 {
     return _ui->renameTabWidget->tabTitleText();
 }
 
-QString RenameTabsDialog::remoteTabTitleText() const
+QString RenameTabDialog::remoteTabTitleText() const
 {
     return _ui->renameTabWidget->remoteTabTitleText();
 }
 
-void RenameTabsDialog::insertTabTitleText(const QString& text)
+void RenameTabDialog::insertTabTitleText(const QString& text)
 {
     _ui->renameTabWidget->insertTabTitleText(text);
 }
 
-void RenameTabsDialog::insertRemoteTabTitleText(const QString& text)
+void RenameTabDialog::insertRemoteTabTitleText(const QString& text)
 {
     _ui->renameTabWidget->insertRemoteTabTitleText(text);
 }

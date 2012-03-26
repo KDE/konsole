@@ -54,7 +54,7 @@
 #include "History.h"
 #include "HistorySizeDialog.h"
 #include "IncrementalSearchBar.h"
-#include "RenameTabsDialog.h"
+#include "RenameTabDialog.h"
 #include "ScreenWindow.h"
 #include "Session.h"
 #include "ProfileList.h"
@@ -627,7 +627,7 @@ void SessionController::editCurrentProfile()
 
 void SessionController::renameSession()
 {
-    QScopedPointer<RenameTabsDialog> dialog(new RenameTabsDialog(QApplication::activeWindow()));
+    QScopedPointer<RenameTabDialog> dialog(new RenameTabDialog(QApplication::activeWindow()));
     dialog->setTabTitleText(_session->tabTitleFormat(Session::LocalTabTitle));
     dialog->setRemoteTabTitleText(_session->tabTitleFormat(Session::RemoteTabTitle));
 

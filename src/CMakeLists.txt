@@ -88,7 +88,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ProfileReader.cpp
         ProfileWriter.cpp
         Pty.cpp
-        RenameTabsDialog.cpp
+        RenameTabDialog.cpp
         RenameTabWidget.cpp
         Screen.cpp
         ScreenWindow.cpp
@@ -139,7 +139,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                   EditProfileDialog.ui
                   KeyBindingEditor.ui
                   ManageProfilesDialog.ui
-                  RenameTabsDialog.ui
+                  RenameTabDialog.ui
                   RenameTabWidget.ui
                   HistorySizeWidget.ui
                   settings/GeneralSettings.ui

@@ -17,27 +17,27 @@
     02110-1301  USA.
 */
 
-#ifndef RENAMETABSDIALOG
-#define RENAMETABSDIALOG
+#ifndef RENAMETABDIALOG_H
+#define RENAMETABDIALOG_H
 
 // KDE
 #include <KDialog>
 
 namespace Ui
 {
-class RenameTabsDialog;
+class RenameTabDialog;
 }
 
 namespace Konsole
 {
 
-class RenameTabsDialog : public KDialog
+class RenameTabDialog : public KDialog
 {
     Q_OBJECT
 
 public:
-    explicit RenameTabsDialog(QWidget* parent = 0);
-    ~RenameTabsDialog();
+    explicit RenameTabDialog(QWidget* parent = 0);
+    ~RenameTabDialog();
     QString tabTitleText() const;
     QString remoteTabTitleText() const;
     void setTabTitleText(const QString&);
@@ -51,7 +51,7 @@ public slots:
     void insertRemoteTabTitleText(const QString& text);
 
 private:
-    Ui::RenameTabsDialog* _ui;
+    Ui::RenameTabDialog* _ui;
 };
 
 }

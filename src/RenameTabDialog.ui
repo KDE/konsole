@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>RenameTabsDialog</class>
- <widget class="QWidget" name="RenameTabsDialog">
+ <class>RenameTabDialog</class>
+ <widget class="QWidget" name="RenameTabDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
