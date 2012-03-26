@@ -89,6 +89,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ProfileWriter.cpp
         Pty.cpp
         RenameTabsDialog.cpp
+        RenameTabWidget.cpp
         Screen.cpp
         ScreenWindow.cpp
         Session.cpp
@@ -139,6 +140,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                   KeyBindingEditor.ui
                   ManageProfilesDialog.ui
                   RenameTabsDialog.ui
+                  RenameTabWidget.ui
                   HistorySizeWidget.ui
                   settings/GeneralSettings.ui
                   settings/TabBarSettings.ui

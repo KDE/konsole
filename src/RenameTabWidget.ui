@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RenameTabWidget</class>
+ <widget class="QWidget" name="RenameTabWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>325</width>
+    <height>110</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="title">
+      <string/>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Tab title format:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="KLineEdit" name="tabTitleEdit">
+        <property name="toolTip">
+         <string>Normal tab title format</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Remote tab title format:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="KLineEdit" name="remoteTabTitleEdit">
+        <property name="toolTip">
+         <string>Tab title format used when a remote command (e.g. connection to another computer via SSH) is being executed</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="Konsole::TabTitleFormatButton" name="remoteTabTitleFormatButton"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Konsole::TabTitleFormatButton</class>
+   <extends>QPushButton</extends>
+   <header>TabTitleFormatButton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

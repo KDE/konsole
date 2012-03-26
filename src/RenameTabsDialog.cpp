@@ -35,17 +35,6 @@ RenameTabsDialog::RenameTabsDialog(QWidget* parent)
 
     _ui = new Ui::RenameTabsDialog();
     _ui->setupUi(mainWidget());
-
-    _ui->tabTitleEdit->setClearButtonShown(true);
-    _ui->remoteTabTitleEdit->setClearButtonShown(true);
-
-    _ui->tabTitleFormatButton->setContext(Session::LocalTabTitle);
-    connect(_ui->tabTitleFormatButton, SIGNAL(dynamicElementSelected(QString)),
-            this, SLOT(insertTabTitleText(QString)));
-
-    _ui->remoteTabTitleFormatButton->setContext(Session::RemoteTabTitle);
-    connect(_ui->remoteTabTitleFormatButton, SIGNAL(dynamicElementSelected(QString)),
-            this, SLOT(insertRemoteTabTitleText(QString)));
 }
 
 RenameTabsDialog::~RenameTabsDialog()
@@ -55,41 +44,41 @@ RenameTabsDialog::~RenameTabsDialog()
 
 void RenameTabsDialog::focusTabTitleText()
 {
-    _ui->tabTitleEdit->setFocus();
+    _ui->renameTabWidget->focusTabTitleText();
 }
 
 void RenameTabsDialog::focusRemoteTabTitleText()
 {
-    _ui->remoteTabTitleEdit->setFocus();
+    _ui->renameTabWidget->focusRemoteTabTitleText();
 }
 
 void RenameTabsDialog::setTabTitleText(const QString& text)
 {
-    _ui->tabTitleEdit->setText(text);
+    _ui->renameTabWidget->setTabTitleText(text);
 }
 
 void RenameTabsDialog::setRemoteTabTitleText(const QString& text)
 {
-    _ui->remoteTabTitleEdit->setText(text);
+    _ui->renameTabWidget->setRemoteTabTitleText(text);
 }
 
 QString RenameTabsDialog::tabTitleText() const
 {
-    return(_ui->tabTitleEdit->text());
+    return _ui->renameTabWidget->tabTitleText();
 }
 
 QString RenameTabsDialog::remoteTabTitleText() const
 {
-    return(_ui->remoteTabTitleEdit->text());
+    return _ui->renameTabWidget->remoteTabTitleText();
 }
 
 void RenameTabsDialog::insertTabTitleText(const QString& text)
 {
-    _ui->tabTitleEdit->insert(text);
+    _ui->renameTabWidget->insertTabTitleText(text);
 }
 
 void RenameTabsDialog::insertRemoteTabTitleText(const QString& text)
 {
-    _ui->remoteTabTitleEdit->insert(text);
+    _ui->renameTabWidget->insertRemoteTabTitleText(text);
 }
 

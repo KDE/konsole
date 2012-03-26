@@ -319,40 +319,23 @@ void EditProfileDialog::showEnvironmentEditor()
 void EditProfileDialog::setupTabsPage(const Profile::Ptr profile)
 {
     // tab title format
-    _ui->tabTitleEdit->setClearButtonShown(true);
-    _ui->remoteTabTitleEdit->setClearButtonShown(true);
-    _ui->tabTitleEdit->setText(profile->localTabTitleFormat());
-    _ui->remoteTabTitleEdit->setText(profile->remoteTabTitleFormat());
+    _ui->renameTabWidget->setTabTitleText(profile->localTabTitleFormat());
+    _ui->renameTabWidget->setRemoteTabTitleText(profile->remoteTabTitleFormat());
+
+    connect(_ui->renameTabWidget, SIGNAL(tabTitleFormatChanged(QString)), this,
+            SLOT(tabTitleFormatChanged(QString)));
+    connect(_ui->renameTabWidget, SIGNAL(remoteTabTitleFormatChanged(QString)), this,
+            SLOT(remoteTabTitleFormatChanged(QString)));
 
     // tab monitoring
     const int silenceSeconds = profile->silenceSeconds();
     _ui->silenceSecondsSpinner->setValue(silenceSeconds);
     _ui->silenceSecondsSpinner->setSuffix(ki18ncp("Unit of time", " second", " seconds"));
 
-    connect(_ui->tabTitleEdit, SIGNAL(textChanged(QString)), this,
-            SLOT(tabTitleFormatChanged(QString)));
-    connect(_ui->remoteTabTitleEdit, SIGNAL(textChanged(QString)), this,
-            SLOT(remoteTabTitleFormatChanged(QString)));
-
     connect(_ui->silenceSecondsSpinner, SIGNAL(valueChanged(int)),
             this, SLOT(silenceSecondsChanged(int)));
+}
 
-    _ui->tabTitleFormatButton->setContext(Session::LocalTabTitle);
-    connect(_ui->tabTitleFormatButton, SIGNAL(dynamicElementSelected(QString)),
-            this, SLOT(insertTabTitleText(QString)));
-
-    _ui->remoteTabTitleFormatButton->setContext(Session::RemoteTabTitle);
-    connect(_ui->remoteTabTitleFormatButton, SIGNAL(dynamicElementSelected(QString)),
-            this, SLOT(insertRemoteTabTitleText(QString)));
-}
-void EditProfileDialog::insertTabTitleText(const QString& text)
-{
-    _ui->tabTitleEdit->insert(text);
-}
-void EditProfileDialog::insertRemoteTabTitleText(const QString& text)
-{
-    _ui->remoteTabTitleEdit->insert(text);
-}
 void EditProfileDialog::saveGeometryOnExit(bool value)
 {
     updateTempProfileProperty(Profile::SaveGeometryOnExit, value);
