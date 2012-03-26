@@ -51,6 +51,7 @@
 #include "Session.h"
 #include "ViewManager.h"
 #include "SessionManager.h"
+#include "ProfileManager.h"
 #include "KonsoleSettings.h"
 #include "settings/GeneralSettings.h"
 #include "settings/TabBarSettings.h"
@@ -367,7 +368,7 @@ void MainWindow::sessionListChanged(const QList<QAction*>& sessionActions)
             newTabMenu->addAction(sessionAction);
 
             // NOTE: defaultProfile seems to not work here, sigh.
-            Profile::Ptr profile = SessionManager::instance()->defaultProfile();
+            Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
             if (profile && profile->name() == sessionAction->text().remove('&')) {
                 sessionAction->setIcon(KIcon(profile->icon(), 0, QStringList("emblem-favorite")));
                 newTabMenu->setDefaultAction(sessionAction);
@@ -379,7 +380,7 @@ void MainWindow::sessionListChanged(const QList<QAction*>& sessionActions)
     } else {
         KMenu* newTabMenu = _newTabMenuAction->menu();
         newTabMenu->clear();
-        Profile::Ptr profile = SessionManager::instance()->defaultProfile();
+        Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
 
         // NOTE: Compare names w/o any '&'
         if (sessionActions.size() == 2 &&  sessionActions[1]->text().remove('&') != profile->name()) {
@@ -406,7 +407,7 @@ QString MainWindow::activeSessionDir() const
 
 void MainWindow::openUrls(const QList<KUrl>& urls)
 {
-    Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
+    Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
     foreach(const KUrl& url , urls) {
         if (url.isLocalFile())
@@ -419,7 +420,7 @@ void MainWindow::openUrls(const QList<KUrl>& urls)
 
 void MainWindow::newTab()
 {
-    Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
+    Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
     createSession(defaultProfile , activeSessionDir() );
 }
 
@@ -441,7 +442,7 @@ void MainWindow::cloneTab()
 Session* MainWindow::createSession(Profile::Ptr profile, const QString& directory)
 {
     if (!profile)
-        profile = SessionManager::instance()->defaultProfile();
+        profile = ProfileManager::instance()->defaultProfile();
 
     Session* session = SessionManager::instance()->createSession(profile);
 
@@ -462,7 +463,7 @@ Session* MainWindow::createSession(Profile::Ptr profile, const QString& director
 Session* MainWindow::createSSHSession(Profile::Ptr profile, const KUrl& url)
 {
     if (!profile)
-        profile = SessionManager::instance()->defaultProfile();
+        profile = ProfileManager::instance()->defaultProfile();
 
     Session* session = SessionManager::instance()->createSession(profile);
 
@@ -500,7 +501,7 @@ void MainWindow::setFocus()
 
 void MainWindow::newWindow()
 {
-    Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
+    Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
     emit newWindowRequest(defaultProfile , activeSessionDir());
 }
 

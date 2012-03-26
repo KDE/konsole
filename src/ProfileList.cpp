@@ -30,7 +30,7 @@
 #include <KDebug>
 
 // Konsole
-#include "SessionManager.h"
+#include "ProfileManager.h"
 
 using Konsole::ProfileList;
 
@@ -47,7 +47,7 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     _emptyListAction = new QAction(i18n("Default profile"), _group);
 
     // TODO - Handle re-sorts when user changes profile names
-    SessionManager* manager = SessionManager::instance();
+    ProfileManager* manager = ProfileManager::instance();
     QList<Profile::Ptr> favoriteProfiles = manager->sortedFavorites();
 
     foreach ( const Profile::Ptr& profile, favoriteProfiles ) {
@@ -128,7 +128,7 @@ void ProfileList::syncWidgetActions(QWidget* widget, bool sync)
 }
 void ProfileList::favoriteChanged(Profile::Ptr profile, bool isFavorite)
 {
-    SessionManager* manager = SessionManager::instance();
+    ProfileManager* manager = ProfileManager::instance();
 
     if (isFavorite) {
         QAction* action = new QAction(_group);

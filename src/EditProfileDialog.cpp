@@ -52,7 +52,7 @@
 #include "KeyBindingEditor.h"
 #include "KeyboardTranslator.h"
 #include "KeyboardTranslatorManager.h"
-#include "SessionManager.h"
+#include "ProfileManager.h"
 #include "ShellCommand.h"
 #include "WindowSystemInfo.h"
 #include "Enumeration.h"
@@ -102,7 +102,7 @@ void EditProfileDialog::save()
     if (_tempProfile->isEmpty())
         return;
 
-    SessionManager::instance()->changeProfile(_profile, _tempProfile->setProperties());
+    ProfileManager::instance()->changeProfile(_profile, _tempProfile->setProperties());
 
     // ensure that these settings are not undone by a call
     // to unpreview()
@@ -595,7 +595,7 @@ void EditProfileDialog::unpreviewAll()
 
     // undo any preview changes
     if (!map.isEmpty())
-        SessionManager::instance()->changeProfile(_profile, map, false);
+        ProfileManager::instance()->changeProfile(_profile, map, false);
 }
 void EditProfileDialog::unpreview(int aProperty)
 {
@@ -606,7 +606,7 @@ void EditProfileDialog::unpreview(int aProperty)
 
     QHash<Profile::Property, QVariant> map;
     map.insert((Profile::Property)aProperty, _previewedProperties[aProperty]);
-    SessionManager::instance()->changeProfile(_profile, map, false);
+    ProfileManager::instance()->changeProfile(_profile, map, false);
 
     _previewedProperties.remove(aProperty);
 }
@@ -650,7 +650,7 @@ void EditProfileDialog::preview(int aProperty , const QVariant& value)
     }
 
     // temporary change to color scheme
-    SessionManager::instance()->changeProfile(_profile , map , false);
+    ProfileManager::instance()->changeProfile(_profile , map , false);
 }
 void EditProfileDialog::previewColorScheme(const QModelIndex& index)
 {

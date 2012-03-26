@@ -39,6 +39,7 @@
 #include "Session.h"
 #include "SessionController.h"
 #include "SessionManager.h"
+#include "ProfileManager.h"
 #include "TerminalDisplay.h"
 #include "ViewManager.h"
 
@@ -87,7 +88,7 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
 
 Part::~Part()
 {
-    SessionManager::instance()->saveSettings();
+    ProfileManager::instance()->saveSettings();
 }
 
 void Part::createGlobalActions()

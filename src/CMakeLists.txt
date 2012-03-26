@@ -87,6 +87,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ProfileList.cpp
         ProfileReader.cpp
         ProfileWriter.cpp
+        ProfileManager.cpp
         Pty.cpp
         RenameTabDialog.cpp
         RenameTabWidget.cpp

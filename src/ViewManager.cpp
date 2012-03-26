@@ -44,6 +44,7 @@
 #include "TerminalDisplay.h"
 #include "SessionController.h"
 #include "SessionManager.h"
+#include "ProfileManager.h"
 #include "ViewContainer.h"
 #include "ViewSplitter.h"
 #include "Profile.h"
@@ -91,7 +92,7 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
             SLOT(containerViewsChanged(QObject*)));
 
     // listen for profile changes
-    connect(SessionManager::instance() , SIGNAL(profileChanged(Profile::Ptr)) , this,
+    connect(ProfileManager::instance() , SIGNAL(profileChanged(Profile::Ptr)) , this,
             SLOT(profileChanged(Profile::Ptr)));
     connect(SessionManager::instance() , SIGNAL(sessionUpdated(Session*)) , this,
             SLOT(updateViewsForSession(Session*)));
@@ -925,7 +926,7 @@ void ViewManager::restoreSessions(const KConfigGroup& group)
     }
 
     if (ids.isEmpty()) { // Session file is unusable, start default Profile
-        Profile::Ptr profile = SessionManager::instance()->defaultProfile();
+        Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
         Session* session = SessionManager::instance()->createSession(profile);
         createView(session);
     }
@@ -952,7 +953,7 @@ int ViewManager::currentSession()
 
 int ViewManager::newSession()
 {
-    Profile::Ptr profile = SessionManager::instance()->defaultProfile();
+    Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
     Session* session = SessionManager::instance()->createSession(profile);
 
     this->createView(session);
@@ -962,10 +963,10 @@ int ViewManager::newSession()
 
 int ViewManager::newSession(QString profile, QString directory)
 {
-    QList<Profile::Ptr> profilelist = SessionManager::instance()->allProfiles();
+    QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
     QList<Profile::Ptr>::iterator i = profilelist.begin();
 
-    Profile::Ptr profileptr = SessionManager::instance()->defaultProfile();
+    Profile::Ptr profileptr = ProfileManager::instance()->defaultProfile();
 
     while (i != profilelist.end()) {
         Profile::Ptr ptr = *i;
@@ -984,14 +985,14 @@ int ViewManager::newSession(QString profile, QString directory)
 
 QString ViewManager::defaultProfile()
 {
-    return SessionManager::instance()->defaultProfile()->name();
+    return ProfileManager::instance()->defaultProfile()->name();
 }
 
 QStringList ViewManager::profileList()
 {
     QStringList list;
 
-    foreach ( Profile::Ptr profile, SessionManager::instance()->allProfiles() ) {
+    foreach ( Profile::Ptr profile, ProfileManager::instance()->allProfiles() ) {
         if (!profile->isHidden()) {
             list.push_back(profile->name());
         }

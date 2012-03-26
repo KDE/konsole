@@ -33,6 +33,7 @@
 
 // Konsole
 #include "SessionManager.h"
+#include "ProfileManager.h"
 #include "MainWindow.h"
 #include "Session.h"
 #include "ShellCommand.h"
@@ -63,7 +64,7 @@ void Application::init()
 Application::~Application()
 {
     SessionManager::instance()->closeAllSessions();
-    SessionManager::instance()->saveSettings();
+    ProfileManager::instance()->saveSettings();
 }
 
 MainWindow* Application::newMainWindow()
@@ -224,11 +225,11 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
 
     Profile::Ptr baseProfile;
     if (!profile.isEmpty()) {
-        baseProfile = SessionManager::instance()->loadProfile(profile);
+        baseProfile = ProfileManager::instance()->loadProfile(profile);
     }
     if (!baseProfile) {
         // fallback to default profile
-        baseProfile = SessionManager::instance()->defaultProfile();
+        baseProfile = ProfileManager::instance()->defaultProfile();
     }
 
     Profile::Ptr newProfile = Profile::Ptr(new Profile(baseProfile));
@@ -297,10 +298,10 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
 
 Profile::Ptr Application::processProfileSelectArgs(KCmdLineArgs* args)
 {
-    Profile::Ptr defaultProfile = SessionManager::instance()->defaultProfile();
+    Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
     if (args->isSet("profile")) {
-        Profile::Ptr profile = SessionManager::instance()->loadProfile(
+        Profile::Ptr profile = ProfileManager::instance()->loadProfile(
                                    args->getOption("profile"));
         if (profile)
             return profile;
@@ -323,7 +324,7 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
 
 void Application::listAvailableProfiles()
 {
-    QList<QString> paths = SessionManager::instance()->availableProfilePaths();
+    QList<QString> paths = ProfileManager::instance()->availableProfilePaths();
 
     foreach ( const QString& path, paths) {
         QFileInfo info(path);
@@ -335,7 +336,7 @@ void Application::listAvailableProfiles()
 
 void Application::listProfilePropertyInfo()
 {
-    Profile::Ptr tempProfile = SessionManager::instance()->defaultProfile();
+    Profile::Ptr tempProfile = ProfileManager::instance()->defaultProfile();
     const QStringList names = tempProfile->propertiesInfoList();
 
     foreach ( const QString& name, names) {
