@@ -101,6 +101,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         TerminalCharacterDecoder.cpp
         ExtendedCharTable.cpp
         TerminalDisplay.cpp
+        TerminalDisplayAccessible.cpp
         ViewContainer.cpp
         ViewManager.cpp
         ViewProperties.cpp

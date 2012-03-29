@@ -804,6 +804,7 @@ private:
     static const int DEFAULT_TOP_MARGIN = 1;
 
     SessionController* _sessionController;
+    friend class TerminalDisplayAccessible;
 };
 
 class AutoScrollHandler : public QObject

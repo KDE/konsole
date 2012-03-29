@@ -449,6 +449,13 @@ public:
     QString selectedText(bool preserveLineBreaks) const;
 
     /**
+     * Convenience method.  Returns the text from @p startIndex to @p endIndex.
+     * @param preserveLineBreaks Specifies whether new line characters should
+     * be inserted into the returned text at the end of each terminal line.
+     */
+    QString text(int startIndex, int endIndex, bool preserveLineBreaks) const;
+
+    /**
      * Copies part of the output to a stream.
      *
      * @param decoder A decoder which converts terminal characters into text

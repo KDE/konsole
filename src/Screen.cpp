@@ -1094,12 +1094,20 @@ bool Screen::isSelected(const int x, const int y) const
 
 QString Screen::selectedText(bool preserveLineBreaks) const
 {
+    if (!isSelectionValid())
+        return QString();
+
+    return text(_selTopLeft, _selBottomRight, preserveLineBreaks);
+}
+
+QString Screen::text(int startIndex, int endIndex, bool preserveLineBreaks) const
+{
     QString result;
     QTextStream stream(&result, QIODevice::ReadWrite);
 
     PlainTextDecoder decoder;
     decoder.begin(&stream);
-    writeSelectionToStream(&decoder , preserveLineBreaks);
+    writeToStream(&decoder, startIndex, endIndex, preserveLineBreaks);
     decoder.end();
 
     return result;

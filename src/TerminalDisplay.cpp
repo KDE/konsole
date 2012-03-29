@@ -38,6 +38,7 @@
 #include <QtGui/QStyle>
 #include <QtCore/QTimer>
 #include <QtGui/QToolTip>
+#include <QtGui/QAccessible>
 
 // KDE
 #include <KShell>
@@ -61,6 +62,7 @@
 #include "SessionController.h"
 #include "WindowSystemInfo.h"
 #include "ExtendedCharTable.h"
+#include "TerminalDisplayAccessible.h"
 
 using namespace Konsole;
 
@@ -250,6 +252,27 @@ void TerminalDisplay::setLineSpacing(uint i)
     setVTFont(font()); // Trigger an update.
 }
 
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                         Accessibility                                     */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+namespace Konsole {
+    /**
+     * This function installs the factory function which lets Qt instanciate the QAccessibleInterface
+     * for the TerminalDisplay.
+     */
+    QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *object)
+    {
+        Q_UNUSED(key)
+        if (TerminalDisplay *display = qobject_cast<TerminalDisplay*>(object))
+            return new TerminalDisplayAccessible(display);
+        return 0;
+    }
+}
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                         Constructor / Destructor                          */
@@ -353,6 +376,11 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     setLayout(_gridLayout);
 
     new AutoScrollHandler(this);
+
+
+#ifndef QT_NO_ACCESSIBILITY
+  QAccessible::installFactory(Konsole::accessibleInterfaceFactory);
+#endif
 }
 
 TerminalDisplay::~TerminalDisplay()
@@ -1059,6 +1087,10 @@ void TerminalDisplay::updateImage()
     }
     delete[] dirtyMask;
 
+#ifndef QT_NO_ACCESSIBILITY
+    QAccessible::updateAccessibility(this, 0, QAccessible::TextUpdated);
+    QAccessible::updateAccessibility(this, 0, QAccessible::TextCaretMoved);
+#endif
 }
 
 void TerminalDisplay::showResizeNotification()
@@ -2630,6 +2662,11 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     }
 
     emit keyPressedSignal(event);
+
+#ifndef QT_NO_ACCESSIBILITY
+    QAccessible::updateAccessibility(this, 0, QAccessible::TextCaretMoved);
+    QAccessible::updateAccessibility(this, 0, QAccessible::TextInserted);
+#endif
 
     event->accept();
 }
