@@ -1040,7 +1040,10 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     }
                     else
                     {
-                        argument = args[i+1] ;
+                        // Verify correct # arguments are given
+                        if ((i + 1) < args.count()) {
+                            argument = args[i + 1];
+                        }
                         i++;
                     }
 
