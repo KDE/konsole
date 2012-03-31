@@ -938,7 +938,10 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     if (optionArgumentCombined) {
                         argument = args[i].mid(2);
                     } else {
-                        argument = args[i + 1];
+			// Verify correct # arguments are given
+			if ((i + 1) < args.count()) {
+                            argument = args[i + 1];
+			}
                         i++;
                     }
 
