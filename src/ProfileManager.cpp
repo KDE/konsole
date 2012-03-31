@@ -473,7 +473,16 @@ void ProfileManager::saveShortcuts()
         QString profileName;
         if (fileInfo.isAbsolute())
         {
-            profileName = fileInfo.fileName();
+            // Check to see if file is under KDE's data locations.  If not,
+            // store full path.
+            QString location = KGlobal::dirs()->locate("data",
+                               "konsole/"+fileInfo.fileName());
+            if (location.isEmpty())
+            {
+                profileName = iter.value().profilePath;
+            } else  {
+                profileName = fileInfo.fileName();
+            }
         } else {
             profileName = iter.value().profilePath;
         }
@@ -550,7 +559,16 @@ void ProfileManager::saveFavorites()
 
         if (fileInfo.isAbsolute())
         {
-            profileName = fileInfo.fileName();
+            // Check to see if file is under KDE's data locations.  If not,
+            // store full path.
+            QString location = KGlobal::dirs()->locate("data",
+                               "konsole/"+fileInfo.fileName());
+            if (location.isEmpty())
+            {
+                profileName = profile->path();
+            } else {
+                profileName = fileInfo.fileName();
+            }
         } else {
             profileName = profile->path();
         }
