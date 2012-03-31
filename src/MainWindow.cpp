@@ -327,7 +327,7 @@ void MainWindow::setupActions()
 
     // Set up an shortcut-only action for activating menu bar.
     menuAction = collection->addAction("activate-menu");
-    menuAction->setText(i18n("Activate Menu"));
+    menuAction->setText(i18nc("@item", "Activate Menu"));
     menuAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F10));
     connect(menuAction, SIGNAL(triggered()), this, SLOT(activateMenuBar()));
 }
@@ -522,7 +522,7 @@ bool MainWindow::queryClose()
                       "Do you still want to quit?", openTabs),
                  i18nc("@title", "Confirm Close"),
                  KStandardGuiItem::quit(),
-                 KGuiItem(i18n("Close Current Tab"), "tab-close"),
+                 KGuiItem(i18nc("@action:button", "Close Current Tab"), "tab-close"),
                  KStandardGuiItem::cancel(),
                  "CloseAllTabs");
 
