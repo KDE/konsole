@@ -22,23 +22,14 @@
 // Own
 #include "Profile.h"
 
-// System
-#include <unistd.h>
-
 // Qt
-#include <QtCore/QFile>
 #include <QtCore/QTextCodec>
 
 // KDE
-#include <KConfigGroup>
-#include <KGlobal>
 #include <KGlobalSettings>
 #include <KLocalizedString>
-#include <KDebug>
-#include <KStandardDirs>
 
 // Konsole
-#include "ShellCommand.h"
 #include "Enumeration.h"
 
 using namespace Konsole;
