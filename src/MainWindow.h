@@ -146,7 +146,7 @@ private slots:
     void disconnectController(SessionController* controller);
     void activeViewTitleChanged(ViewProperties*);
 
-    void sessionListChanged(const QList<QAction*>& actions);
+    void profileListChanged(const QList<QAction*>& actions);
     void viewFullScreen(bool fullScreen);
     void configureNotifications();
 

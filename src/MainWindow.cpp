@@ -347,16 +347,16 @@ BookmarkHandler* MainWindow::bookmarkHandler() const
 
 void MainWindow::setProfileList(ProfileList* list)
 {
-    sessionListChanged(list->actions());
+    profileListChanged(list->actions());
 
     connect(list , SIGNAL(profileSelected(Profile::Ptr)) , this ,
             SLOT(newFromProfile(Profile::Ptr)));
 
     connect(list , SIGNAL(actionsChanged(QList<QAction*>)) , this ,
-            SLOT(sessionListChanged(QList<QAction*>)));
+            SLOT(profileListChanged(QList<QAction*>)));
 }
 
-void MainWindow::sessionListChanged(const QList<QAction*>& sessionActions)
+void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
 {
     // If only 1 profile is to be shown in the menu, only display
     // it if it is the non-default profile.
