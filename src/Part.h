@@ -179,8 +179,7 @@ protected:
 
 private slots:
     // creates a new session using the specified profile.
-    // call the run() method on the returned Session instance to begin the session
-    Session* createSession(const Profile::Ptr profile = Profile::Ptr());
+    Session* createSession(const Profile::Ptr profile = Profile::Ptr(), const QString& directory=QString() );
     void activeViewChanged(SessionController* controller);
     void activeViewTitleChanged(ViewProperties* properties);
     void showManageProfilesDialog();

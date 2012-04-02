@@ -208,9 +208,14 @@ QString Part::currentWorkingDirectory() const
     return activeSession()->currentWorkingDirectory();
 }
 
-Session* Part::createSession(const Profile::Ptr profile)
+Session* Part::createSession(const Profile::Ptr profile, const QString& directory )
 {
     Session* session = SessionManager::instance()->createSession(profile);
+
+    // override the default directory specifed in the profile
+    if (!directory.isEmpty())
+        session->setInitialWorkingDirectory(directory);
+
     _viewManager->createView(session);
 
     return session;
