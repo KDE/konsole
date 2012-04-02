@@ -55,8 +55,8 @@ class KONSOLEPRIVATE_EXPORT ProfileList : public QObject
 
 public:
     /**
-     * Constructs a new session list which displays sessions
-     * that can be created by @p manager
+     * Constructs a new profile list which displays profiles
+     * that can be used to create session
      *
      * @param addShortcuts True if the shortcuts associated with profiles
      * in the session manager should be added to the actions
@@ -65,10 +65,9 @@ public:
     ProfileList(bool addShortcuts , QObject* parent);
 
     /**
-     * Returns a list of actions representing the types of sessions which can be created by
-     * manager().
-     * The user-data associated with each action is the string key that can be passed to
-     * the manager to request creation of a new session.
+     * Returns a list of actions representing profiles
+     *
+     * The user-data associated with each action is the corresonding profile
      */
     QList<QAction*> actions();
 
