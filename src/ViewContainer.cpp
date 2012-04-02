@@ -482,28 +482,15 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _tabBarLayout->addWidget(_tabBar);
     _tabBarLayout->addWidget(_closeTabButton);
 
-    _layout = new QVBoxLayout;
-    _layout->setSpacing(0);
-    _layout->setContentsMargins(0, 0, 0, 0);
-
-    // The terminal area
-    _layout->addWidget(_stackWidget);
-
     // The search bar
     searchBar()->setParent(_containerWidget);
 
     // The overall layout
-    if (position == NavigationPositionTop) {
-        _layout->insertLayout(0, _tabBarLayout);
-        _layout->insertWidget(-1, searchBar());
-        _tabBar->setShape(QTabBar::RoundedNorth);
-    } else if (position == NavigationPositionBottom) {
-        _layout->insertWidget(-1, searchBar());
-        _layout->insertLayout(-1, _tabBarLayout);
-        _tabBar->setShape(QTabBar::RoundedSouth);
-    } else {
-        Q_ASSERT(false); // position not supported
-    }
+    _layout = new QVBoxLayout;
+    _layout->setSpacing(0);
+    _layout->setContentsMargins(0, 0, 0, 0);
+
+    setNavigationPosition(position);
 
     _containerWidget->setLayout(_layout);
 
@@ -545,32 +532,33 @@ QList<ViewContainer::NavigationPosition> TabbedViewContainer::supportedNavigatio
 {
     return QList<NavigationPosition>() << NavigationPositionTop << NavigationPositionBottom;
 }
+
 void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
 {
-    // this method assumes that there are only two items
-    // in the layout
-    Q_ASSERT(_layout->count() == 3);
+    // this method assumes that there are three or zero items in the layout
+    Q_ASSERT(_layout->count() == 3 || _layout->count() == 0);
 
-    // index of stack widget in the layout when tab bar is at the bottom
-    const int StackIndexWithTabBottom = 0;
+    // clear all existing items from the layout
+    _layout->removeItem(_tabBarLayout);
+    _tabBarLayout->setParent(0); // suppress the warning of "already has a parent"
+    _layout->removeWidget(_stackWidget);
+    _layout->removeWidget(searchBar());
 
-    if (position == NavigationPositionTop
-            && _layout->indexOf(_stackWidget) == StackIndexWithTabBottom) {
-        _layout->removeItem(_tabBarLayout);
-        _layout->removeWidget(searchBar());
-
-        _layout->insertLayout(0, _tabBarLayout);
+    if (position == NavigationPositionTop) {
+        _layout->insertLayout(-1, _tabBarLayout);
+        _layout->insertWidget(-1, _stackWidget);
         _layout->insertWidget(-1, searchBar());
         _tabBar->setShape(QTabBar::RoundedNorth);
-    } else if (position == NavigationPositionBottom
-               && _layout->indexOf(_stackWidget) != StackIndexWithTabBottom) {
-        _layout->removeItem(_tabBarLayout);
-        _layout->removeWidget(searchBar());
-
+    } else if (position == NavigationPositionBottom) {
+        _layout->insertWidget(-1, _stackWidget);
         _layout->insertWidget(-1, searchBar());
         _layout->insertLayout(-1, _tabBarLayout);
         _tabBar->setShape(QTabBar::RoundedSouth);
+    } else
+    {
+        Q_ASSERT(false); // should never reach here
     }
+
 }
 void TabbedViewContainer::navigationVisibilityChanged(NavigationVisibility mode)
 {
