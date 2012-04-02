@@ -75,20 +75,20 @@ void ProfileList::updateEmptyAction()
     if (showEmptyAction != _emptyListAction->isVisible())
         _emptyListAction->setVisible(showEmptyAction);
 }
-QAction* ProfileList::actionForKey(Profile::Ptr key) const
+QAction* ProfileList::actionForProfile(Profile::Ptr profile) const
 {
     foreach ( QAction* action, _group->actions() ) {
-        if (action->data().value<Profile::Ptr>() == key)
+        if (action->data().value<Profile::Ptr>() == profile)
             return action;
     }
     return 0; // not found
 }
 
-void ProfileList::profileChanged(Profile::Ptr key)
+void ProfileList::profileChanged(Profile::Ptr profile)
 {
-    QAction* action = actionForKey(key);
+    QAction* action = actionForProfile(profile);
     if (action)
-        updateAction(action, key);
+        updateAction(action, profile);
 }
 
 void ProfileList::updateAction(QAction* action , Profile::Ptr profile)
@@ -104,7 +104,7 @@ void ProfileList::shortcutChanged(Profile::Ptr profile, const QKeySequence& sequ
     if (!_addShortcuts)
         return;
 
-    QAction* action = actionForKey(profile);
+    QAction* action = actionForProfile(profile);
 
     if (action) {
         action->setShortcut(sequence);
@@ -145,7 +145,7 @@ void ProfileList::favoriteChanged(Profile::Ptr profile, bool isFavorite)
         }
         emit actionsChanged(_group->actions());
     } else {
-        QAction* action = actionForKey(profile);
+        QAction* action = actionForProfile(profile);
 
         if (action) {
             _group->removeAction(action);

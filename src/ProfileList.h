@@ -93,7 +93,7 @@ private slots:
     void shortcutChanged(Profile::Ptr profile, const QKeySequence& sequence);
 
 private:
-    QAction* actionForKey(Profile::Ptr profile) const;
+    QAction* actionForProfile(Profile::Ptr profile) const;
     void updateAction(QAction* action , Profile::Ptr profile);
     void updateEmptyAction();
 
