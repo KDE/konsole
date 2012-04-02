@@ -116,7 +116,6 @@ void Part::terminalExited()
 void Part::newTab()
 {
     createSession();
-    showShellInDir(QString());
 }
 
 Session* Part::activeSession() const
