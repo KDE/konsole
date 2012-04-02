@@ -311,22 +311,22 @@ void Part::changeSessionSettings(const QString& text)
 }
 
 // Konqueror integration
-bool Part::openUrl(const KUrl & _url)
+bool Part::openUrl(const KUrl& aUrl)
 {
-    if (url() == _url) {
+    if (url() == aUrl) {
         emit completed();
         return true;
     }
 
-    setUrl(_url);
-    emit setWindowCaption(_url.pathOrUrl());
+    setUrl(aUrl);
+    emit setWindowCaption(aUrl.pathOrUrl());
     //kdDebug() << "Set Window Caption to " << url.pathOrUrl();
     emit started(0);
 
-    if (_url.isLocalFile() /*&& b_openUrls*/) {
+    if (aUrl.isLocalFile() /*&& b_openUrls*/) {
         KDE_struct_stat buff;
-        KDE::stat(QFile::encodeName(_url.path()), &buff);
-        QString text = (S_ISDIR(buff.st_mode) ? _url.path() : _url.directory());
+        KDE::stat(QFile::encodeName(aUrl.path()), &buff);
+        QString text = (S_ISDIR(buff.st_mode) ? aUrl.path() : aUrl.directory());
         showShellInDir(text);
     } else {
         showShellInDir(QDir::homePath());
