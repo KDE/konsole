@@ -184,8 +184,6 @@ private:
     void showColorSchemeEditor(bool newScheme);
     void showKeyBindingEditor(bool newTranslator);
 
-    void changeCheckedItem(QAbstractItemModel* mode,  const QModelIndex& to);
-
     void preview(int property , const QVariant& value);
     void delayedPreview(int property , const QVariant& value);
     void unpreview(int property);
