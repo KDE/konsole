@@ -7,10 +7,16 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>86</height>
+    <height>143</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout">
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QRadioButton" name="noHistoryButton">
      <property name="sizePolicy">
@@ -29,6 +35,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetFixedSize</enum>
+     </property>
      <item>
       <widget class="QRadioButton" name="fixedSizeHistoryButton">
        <property name="sizePolicy">
@@ -89,6 +98,16 @@
      </property>
     </widget>
    </item>
+   <item>
+    <widget class="KMessageWidget" name="unlimitedWarningWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -96,6 +115,12 @@
    <class>KIntSpinBox</class>
    <extends>QSpinBox</extends>
    <header>knuminput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMessageWidget</class>
+   <extends>QFrame</extends>
+   <header>kmessagewidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

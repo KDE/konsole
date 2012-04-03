@@ -36,6 +36,15 @@ HistorySizeWidget::HistorySizeWidget(QWidget* parent)
     _ui = new Ui::HistorySizeWidget();
     _ui->setupUi(this);
 
+    _ui->unlimitedWarningWidget->setVisible(false);
+    _ui->unlimitedWarningWidget->setWordWrap(true);
+    _ui->unlimitedWarningWidget->setCloseButtonVisible(false);
+    _ui->unlimitedWarningWidget->setMessageType(KMessageWidget::Warning);
+    _ui->unlimitedWarningWidget->setText(i18nc("@info:status",
+        "When using this option, the scrollback data will be written "
+        "unencrypted to temporary files. Those temporary files will be "
+        "deleted automatically when quitting Konsole."));
+
     // focus and select the spinner automatically when appropriate
     _ui->fixedSizeHistoryButton->setFocusProxy(_ui->historyLineSpinner);
     connect(_ui->fixedSizeHistoryButton , SIGNAL(clicked()) ,
@@ -62,7 +71,9 @@ HistorySizeWidget::~HistorySizeWidget()
 
 void HistorySizeWidget::buttonClicked(QAbstractButton*) const
 {
-    emit historyModeChanged(mode());
+    Enum::HistoryModeEnum selectedMode = mode();
+    _ui->unlimitedWarningWidget->setVisible(Enum::UnlimitedHistory == selectedMode);
+    emit historyModeChanged(selectedMode);
 }
 
 void HistorySizeWidget::setMode(Enum::HistoryModeEnum aMode)
@@ -74,6 +85,7 @@ void HistorySizeWidget::setMode(Enum::HistoryModeEnum aMode)
     } else if (aMode == Enum::UnlimitedHistory) {
         _ui->unlimitedHistoryButton->setChecked(true);
     }
+    _ui->unlimitedWarningWidget->setVisible(Enum::UnlimitedHistory == aMode);
 
 }
 
