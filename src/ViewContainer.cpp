@@ -276,7 +276,7 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 
     _dropIndicatorIndex = index;
     const int ARROW_SIZE = 32;
-    const bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
+    const bool north = shape() == KTabBar::RoundedNorth || shape() == KTabBar::TriangularNorth;
 
     if (!_dropIndicator || _drawIndicatorDisabled != drawDisabled) {
         if (!_dropIndicator) {
