@@ -212,7 +212,7 @@ Session* Part::createSession(const Profile::Ptr profile, const QString& director
 {
     Session* session = SessionManager::instance()->createSession(profile);
 
-    // override the default directory specifed in the profile
+    // override the default directory specified in the profile
     if (!directory.isEmpty())
         session->setInitialWorkingDirectory(directory);
 
