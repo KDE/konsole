@@ -164,7 +164,7 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
 
     _sessionProfiles[session] = profile;
 
-    ShouldApplyProperty2 apply(profile, modifiedPropertiesOnly);
+    ShouldApplyProperty apply(profile, modifiedPropertiesOnly);
 
     // Basic session settings
     if (apply.shouldApply(Profile::Name))

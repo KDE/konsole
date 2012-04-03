@@ -149,10 +149,10 @@ private:
 };
 
 /** Utility class to simplify code in SessionManager::applyProfile(). */
-class ShouldApplyProperty2
+class ShouldApplyProperty
 {
 public:
-    ShouldApplyProperty2(const Profile::Ptr profile , bool modifiedOnly) :
+    ShouldApplyProperty(const Profile::Ptr profile , bool modifiedOnly) :
         _profile(profile) , _modifiedPropertiesOnly(modifiedOnly) {}
 
     bool shouldApply(Profile::Property property) const {
