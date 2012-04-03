@@ -631,10 +631,10 @@ void SessionController::renameSession()
     dialog->setTabTitleText(_session->tabTitleFormat(Session::LocalTabTitle));
     dialog->setRemoteTabTitleText(_session->tabTitleFormat(Session::RemoteTabTitle));
 
-    if (!_session->isRemote()) {
-        dialog->focusTabTitleText();
-    } else {
+    if (_session->isRemote()) {
         dialog->focusRemoteTabTitleText();
+    } else {
+        dialog->focusTabTitleText();
     }
 
     QPointer<Session> guard(_session);
