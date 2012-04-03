@@ -88,21 +88,6 @@ const QList<Session*> SessionManager::sessions() const
     return _sessions;
 }
 
-void SessionManager::updateSession(Session* session)
-{
-    Profile::Ptr profile = _sessionProfiles[session];
-
-    // Temp fix for crashes when changing profiles 256357, 246054
-    if (!profile)
-        profile = ProfileManager::instance()->defaultProfile();
-
-    Q_ASSERT(profile);
-
-    applyProfile(session, profile, false);
-
-    emit sessionUpdated(session);
-}
-
 Session* SessionManager::createSession(Profile::Ptr profile)
 {
     if (!profile)
@@ -162,8 +147,16 @@ Profile::Ptr SessionManager::sessionProfile(Session* session) const
 }
 void SessionManager::setSessionProfile(Session* session, Profile::Ptr profile)
 {
+    if (!profile)
+        profile = ProfileManager::instance()->defaultProfile();
+
+    Q_ASSERT(profile);
+
     _sessionProfiles[session] = profile;
-    updateSession(session);
+
+    applyProfile(session, profile, false);
+
+    emit sessionUpdated(session);
 }
 void SessionManager::applyProfile(Session* session, const Profile::Ptr profile , bool modifiedPropertiesOnly)
 {

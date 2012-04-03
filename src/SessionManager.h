@@ -90,11 +90,6 @@ public:
     Profile::Ptr sessionProfile(Session* session) const;
 
     /**
-     * Updates a session's properties to match its current profile.
-     */
-    void updateSession(Session* session);
-
-    /**
      * Returns a list of active sessions.
      */
     const QList<Session*> sessions() const;
