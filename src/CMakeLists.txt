@@ -143,6 +143,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                   ManageProfilesDialog.ui
                   RenameTabDialog.ui
                   RenameTabWidget.ui
+                  HistorySizeDialog.ui
                   HistorySizeWidget.ui
                   settings/GeneralSettings.ui
                   settings/TabBarSettings.ui

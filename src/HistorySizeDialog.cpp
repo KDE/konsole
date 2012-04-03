@@ -1,5 +1,6 @@
 /*
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 2012 by Kurt Hindenburg <kurt.hindenburg@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,71 +21,54 @@
 // Own
 #include "HistorySizeDialog.h"
 
-// Qt
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QWidget>
-
-// KDE
-#include <KLocalizedString>
-
 // Konsole
-#include "HistorySizeWidget.h"
+#include "ui_HistorySizeDialog.h"
 
 using namespace Konsole;
 
-HistorySizeDialog::HistorySizeDialog(QWidget* aParent)
-    :  KDialog(aParent)
-    , _historySizeWidget(0)
+HistorySizeDialog::HistorySizeDialog(QWidget* parent)
+    : KDialog(parent)
 {
-    // basic dialog properties
-    setPlainCaption(i18n("Adjust Scrollback"));
+    setCaption(i18n("Adjust Scrollback"));
     setButtons(KDialog::Ok | KDialog::Cancel);
-    setDefaultButton(KDialog::Ok);
-    setModal(false);
 
-    // dialog widgets
-    QWidget* dialogWidget = new QWidget(this);
-    setMainWidget(dialogWidget);
+    setWindowModality(Qt::WindowModal);
 
-    QVBoxLayout* dialogLayout = new QVBoxLayout(dialogWidget);
+    _ui = new Ui::HistorySizeDialog();
+    _ui->setupUi(mainWidget());
 
-    QLabel* warningLabel = new QLabel(i18n("<center>The adjustment is only temporary</center>"), this);
-    warningLabel->setStyleSheet("text-align:center; font-weight:normal; color:palette(dark)");
+    _ui->tempWarningWidget->setVisible(true);
+    _ui->tempWarningWidget->setWordWrap(true);
+    _ui->tempWarningWidget->setCloseButtonVisible(false);
+    _ui->tempWarningWidget->setMessageType(KMessageWidget::Information);
+    _ui->tempWarningWidget->setText(i18nc("@info:status",
+        "Any adjustments are only temporary to this session."));
 
-    _historySizeWidget = new HistorySizeWidget(this);
-
-    dialogLayout->addWidget(warningLabel);
-    dialogLayout->insertSpacing(-1, 5);
-    dialogLayout->addWidget(_historySizeWidget);
-    dialogLayout->insertSpacing(-1, 10);
-
-    connect(this, SIGNAL(accepted()), this, SLOT(emitOptionsChanged()));
 }
 
-void HistorySizeDialog::emitOptionsChanged()
+HistorySizeDialog::~HistorySizeDialog()
 {
-    emit optionsChanged(mode() , lineCount());
+    delete _ui;
 }
 
 void HistorySizeDialog::setMode(Enum::HistoryModeEnum aMode)
 {
-    _historySizeWidget->setMode(aMode);
+    _ui->historySizeWidget->setMode(aMode);
 }
 
 Enum::HistoryModeEnum HistorySizeDialog::mode() const
 {
-    return _historySizeWidget->mode();
+    return _ui->historySizeWidget->mode();
 }
 
 int HistorySizeDialog::lineCount() const
 {
-    return _historySizeWidget->lineCount();
+    return _ui->historySizeWidget->lineCount();
 }
 
 void HistorySizeDialog::setLineCount(int lines)
 {
-    _historySizeWidget->setLineCount(lines);
+    _ui->historySizeWidget->setLineCount(lines);
 }
 
 #include "HistorySizeDialog.moc"

@@ -1,5 +1,6 @@
 /*
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 2012 by Kurt Hindenburg <kurt.hindenburg@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,21 +27,22 @@
 // Konsole
 #include "Enumeration.h"
 
+namespace Ui
+{
+class HistorySizeDialog;
+}
+
 namespace Konsole
 {
 
-class HistorySizeWidget;
-
-/**
- * A dialog for controlling history related options
- * It is only a simple container of HistorySizeWidget
- */
 class HistorySizeDialog : public KDialog
 {
     Q_OBJECT
 
 public:
-    explicit HistorySizeDialog(QWidget* parent);
+    explicit HistorySizeDialog(QWidget* parent = 0);
+    ~HistorySizeDialog();
+
 
     /** See HistorySizeWidget::setMode. */
     void setMode(Enum::HistoryModeEnum aMode);
@@ -54,28 +56,10 @@ public:
     /** See HistorySizeWidget::lineCount. */
     int lineCount() const;
 
-signals:
-    /**
-     * Emitted when the user changes the scroll-back mode or line count and
-     * accepts the change by pressing the OK button
-     *
-     * @param mode The current history mode.  This is a value from the HistoryMode enum.
-     * @param lineCount The current line count.  This is only applicable if mode is
-     * FixedSizeHistory
-     */
-    void optionsChanged(int mode , int lineCount);
-
-private slots:
-
-    // fires the optionsChanged() signal with the current mode
-    // and line count as arguments
-    void emitOptionsChanged();
-
 private:
-    HistorySizeWidget* _historySizeWidget;
-
+    Ui::HistorySizeDialog* _ui;
 };
 
 }
 
-#endif // HISTORYSIZEDIALOG_H
+#endif

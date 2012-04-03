@@ -1038,7 +1038,7 @@ void SessionController::changeSearchMatch()
 }
 void SessionController::showHistoryOptions()
 {
-    HistorySizeDialog* dialog = new HistorySizeDialog(QApplication::activeWindow());
+    QScopedPointer<HistorySizeDialog> dialog(new HistorySizeDialog(QApplication::activeWindow()));
     const HistoryType& currentHistory = _session->historyType();
 
     if (currentHistory.isEnabled()) {
@@ -1052,10 +1052,14 @@ void SessionController::showHistoryOptions()
         dialog->setMode(Enum::NoHistory);
     }
 
-    connect(dialog, SIGNAL(optionsChanged(int,int)),
-            this, SLOT(scrollBackOptionsChanged(int,int)));
+    QPointer<Session> guard(_session);
+    int result = dialog->exec();
+    if (!guard)
+        return;
 
-    dialog->show();
+    if (result) {
+        scrollBackOptionsChanged(dialog->mode(), dialog->lineCount());
+    }
 }
 void SessionController::sessionResizeRequest(const QSize& size)
 {
