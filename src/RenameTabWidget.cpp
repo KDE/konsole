@@ -86,10 +86,12 @@ QString RenameTabWidget::remoteTabTitleText() const
 void RenameTabWidget::insertTabTitleText(const QString& text)
 {
     _ui->tabTitleEdit->insert(text);
+    focusTabTitleText();
 }
 
 void RenameTabWidget::insertRemoteTabTitleText(const QString& text)
 {
     _ui->remoteTabTitleEdit->insert(text);
+    focusRemoteTabTitleText();
 }
 
