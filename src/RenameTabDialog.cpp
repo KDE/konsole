@@ -72,13 +72,3 @@ QString RenameTabDialog::remoteTabTitleText() const
     return _ui->renameTabWidget->remoteTabTitleText();
 }
 
-void RenameTabDialog::insertTabTitleText(const QString& text)
-{
-    _ui->renameTabWidget->insertTabTitleText(text);
-}
-
-void RenameTabDialog::insertRemoteTabTitleText(const QString& text)
-{
-    _ui->renameTabWidget->insertRemoteTabTitleText(text);
-}
-

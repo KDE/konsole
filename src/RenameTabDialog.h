@@ -38,6 +38,7 @@ class RenameTabDialog : public KDialog
 public:
     explicit RenameTabDialog(QWidget* parent = 0);
     ~RenameTabDialog();
+
     QString tabTitleText() const;
     QString remoteTabTitleText() const;
     void setTabTitleText(const QString&);
@@ -45,10 +46,6 @@ public:
 
     void focusTabTitleText();
     void focusRemoteTabTitleText();
-
-public slots:
-    void insertTabTitleText(const QString& text);
-    void insertRemoteTabTitleText(const QString& text);
 
 private:
     Ui::RenameTabDialog* _ui;
