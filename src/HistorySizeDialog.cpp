@@ -29,7 +29,7 @@ using namespace Konsole;
 HistorySizeDialog::HistorySizeDialog(QWidget* parent)
     : KDialog(parent)
 {
-    setCaption(i18n("Adjust Scrollback"));
+    setCaption(i18nc("@title:window", "Adjust Scrollback"));
     setButtons(KDialog::Ok | KDialog::Cancel);
 
     setWindowModality(Qt::WindowModal);
