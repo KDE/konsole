@@ -243,9 +243,11 @@ public slots:
      */
     int newSession(QString profile, QString directory);
 
+    // TODO: its semantic is application-wide. Move it to more appropriate place
     // DBus slot that returns the name of default profile
     QString defaultProfile();
 
+    // TODO: its semantic is application-wide. Move it to more appropriate place
     // DBus slot that returns a string list of defined (known) profiles
     QStringList profileList();
 
