@@ -165,11 +165,7 @@ ColorSchemeManager::ColorSchemeManager()
 
 ColorSchemeManager::~ColorSchemeManager()
 {
-    QHashIterator<QString, const ColorScheme*> iter(_colorSchemes);
-    while (iter.hasNext()) {
-        iter.next();
-        delete iter.value();
-    }
+    qDeleteAll(_colorSchemes);
 }
 
 K_GLOBAL_STATIC(ColorSchemeManager , theColorSchemeManager)
