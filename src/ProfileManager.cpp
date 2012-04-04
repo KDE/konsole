@@ -180,6 +180,19 @@ QStringList ProfileManager::availableProfilePaths() const
     return profiles;
 }
 
+QStringList ProfileManager::availableProfileNames() const
+{
+    QStringList list;
+
+    foreach ( Profile::Ptr profile, ProfileManager::instance()->allProfiles() ) {
+        if (!profile->isHidden()) {
+            list.push_back(profile->name());
+        }
+    }
+
+    return list;
+}
+
 void ProfileManager::loadAllProfiles()
 {
     if (_loadedAllProfiles)

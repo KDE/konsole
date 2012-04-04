@@ -115,6 +115,11 @@ public:
     QStringList availableProfilePaths() const;
 
     /**
+     * Returns a list of names of all available profiles
+     */
+    QStringList availableProfileNames() const;
+
+    /**
      * Registers a new type of session.
      * The favorite status of the session ( as returned by isFavorite() ) is set to false by default.
      */

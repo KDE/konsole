@@ -990,15 +990,7 @@ QString ViewManager::defaultProfile()
 
 QStringList ViewManager::profileList()
 {
-    QStringList list;
-
-    foreach ( Profile::Ptr profile, ProfileManager::instance()->allProfiles() ) {
-        if (!profile->isHidden()) {
-            list.push_back(profile->name());
-        }
-    }
-
-    return list;
+    return ProfileManager::instance()->availableProfileNames();
 }
 
 void ViewManager::nextSession()
