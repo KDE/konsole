@@ -71,8 +71,6 @@ public:
     /**
      * Adds a new color scheme to the manager.  If @p scheme has the same name as
      * an existing color scheme, it replaces the existing scheme.
-     *
-     * TODO - Ensure the old color scheme gets deleted
      */
     void addColorScheme(ColorScheme* scheme);
 

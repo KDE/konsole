@@ -298,6 +298,12 @@ const ColorScheme* ColorSchemeManager::defaultColorScheme() const
 
 void ColorSchemeManager::addColorScheme(ColorScheme* scheme)
 {
+    // remove existing colorscheme with the same name
+    if ( _colorSchemes.contains(scheme->name()) ) {
+        delete _colorSchemes[scheme->name()];
+        _colorSchemes.remove(scheme->name());
+    }
+
     _colorSchemes.insert(scheme->name(), scheme);
 
     // save changes to disk
@@ -314,6 +320,7 @@ bool ColorSchemeManager::deleteColorScheme(const QString& name)
     // lookup the path and delete
     QString path = findColorSchemePath(name);
     if (QFile::remove(path)) {
+        delete _colorSchemes[name];
         _colorSchemes.remove(name);
         return true;
     } else {
