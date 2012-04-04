@@ -324,7 +324,7 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
 
 void Application::listAvailableProfiles()
 {
-    QList<QString> paths = ProfileManager::instance()->availableProfilePaths();
+    QStringList paths = ProfileManager::instance()->availableProfilePaths();
 
     foreach ( const QString& path, paths) {
         QFileInfo info(path);

@@ -184,7 +184,7 @@ void ColorSchemeManager::loadAllColorSchemes()
     int success = 0;
     int failed = 0;
 
-    QList<QString> nativeColorSchemes = listColorSchemes();
+    QStringList nativeColorSchemes = listColorSchemes();
     foreach ( const QString& colorScheme, nativeColorSchemes) {
         if (loadColorScheme(colorScheme))
             success++;
@@ -192,7 +192,7 @@ void ColorSchemeManager::loadAllColorSchemes()
             failed++;
     }
 
-    QList<QString> kde3ColorSchemes = listKDE3ColorSchemes();
+    QStringList kde3ColorSchemes = listKDE3ColorSchemes();
     foreach ( const QString& colorScheme, kde3ColorSchemes) {
         if (loadKDE3ColorScheme(colorScheme))
             success++;
@@ -275,14 +275,14 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
     return true;
 }
 
-QList<QString> ColorSchemeManager::listColorSchemes()
+QStringList ColorSchemeManager::listColorSchemes()
 {
     return KGlobal::dirs()->findAllResources("data",
             "konsole/*.colorscheme",
             KStandardDirs::NoDuplicates);
 }
 
-QList<QString> ColorSchemeManager::listKDE3ColorSchemes()
+QStringList ColorSchemeManager::listKDE3ColorSchemes()
 {
     return KGlobal::dirs()->findAllResources("data",
             "konsole/*.schema",

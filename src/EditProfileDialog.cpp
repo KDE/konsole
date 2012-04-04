@@ -543,7 +543,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 
     QStandardItem* selectedItem = 0;
 
-    QList<QString> translatorNames = keyManager->allTranslators();
+    QStringList translatorNames = keyManager->allTranslators();
     foreach (const QString& translatorName, translatorNames) {
         const KeyboardTranslator* translator = keyManager->findTranslator(translatorName);
 

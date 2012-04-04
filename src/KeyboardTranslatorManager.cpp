@@ -186,7 +186,7 @@ const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
     return translator;
 }
 
-QList<QString> KeyboardTranslatorManager::allTranslators()
+QStringList KeyboardTranslatorManager::allTranslators()
 {
     if (!_haveLoadedAll) {
         findTranslators();

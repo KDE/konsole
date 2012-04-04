@@ -23,9 +23,8 @@
 #define COLORSCHEMEMANAGER_H
 
 // Qt
-#include <QtCore/QList>
 #include <QtCore/QHash>
-#include <QtCore/QString>
+#include <QtCore/QStringList>
 
 // Konsole
 #include "ColorScheme.h"
@@ -100,10 +99,10 @@ private:
     // loads a color scheme from a KDE 3 .schema file
     bool loadKDE3ColorScheme(const QString& path);
     // returns a list of paths of color schemes in the KDE 4+ .colorscheme file format
-    QList<QString> listColorSchemes();
+    QStringList listColorSchemes();
     // returns a list of paths of color schemes in the .schema file format
     // used in KDE 3
-    QList<QString> listKDE3ColorSchemes();
+    QStringList listKDE3ColorSchemes();
     // loads all of the color schemes
     void loadAllColorSchemes();
     // finds the path of a color scheme

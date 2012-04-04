@@ -24,7 +24,7 @@
 
 // Qt
 #include <QtCore/QHash>
-#include <QtCore/QList>
+#include <QtCore/QStringList>
 
 // Konsole
 #include "konsole_export.h"
@@ -84,7 +84,7 @@ public:
      * The first time this is called, a search for available
      * translators is started.
      */
-    QList<QString> allTranslators();
+    QStringList allTranslators();
 
     /** Returns the global KeyboardTranslatorManager instance. */
     static KeyboardTranslatorManager* instance();
