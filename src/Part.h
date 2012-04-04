@@ -73,6 +73,16 @@ public:
 
 public slots:
     /**
+     * creates and run a session using the specified profile and directory
+     *
+     * @param profileName Specifies the  name of the profile to create session
+     * @param directory specifies The initial working directory of the created session
+     *
+     * This is highly experimental. Do not use it at the moment
+     */
+    void createSession(const QString& profileName=QString(), const QString& directory=QString());
+
+    /**
      * Shows the dialog used to manage profiles in Konsole.  The dialog
      * will be non-modal and will delete itself when it is closed.
      *
@@ -178,8 +188,6 @@ protected:
     virtual bool openUrl(const KUrl& url);
 
 private slots:
-    // creates a new session using the specified profile.
-    Session* createSession(const Profile::Ptr profile = Profile::Ptr(), const QString& directory=QString() );
     void activeViewChanged(SessionController* controller);
     void activeViewTitleChanged(ViewProperties* properties);
     void showManageProfilesDialog();
