@@ -25,7 +25,6 @@
 // Qt
 #include <QtCore/QList>
 #include <QtCore/QHash>
-#include <QtCore/QSet>
 #include <QtCore/QString>
 
 // Konsole
@@ -111,7 +110,6 @@ private:
     QString findColorSchemePath(const QString& name) const;
 
     QHash<QString, const ColorScheme*> _colorSchemes;
-    QSet<ColorScheme*> _modifiedSchemes;
 
     bool _haveLoadedAll;
 
