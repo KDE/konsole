@@ -83,6 +83,13 @@ public slots:
     void createSession(const QString& profileName=QString(), const QString& directory=QString());
 
     /**
+     * Returns a list of names of all available proifles
+     *
+     * This is highly experimental. Do not use it at the moment
+     */
+    QStringList profileNameList() const;
+
+    /**
      * Shows the dialog used to manage profiles in Konsole.  The dialog
      * will be non-modal and will delete itself when it is closed.
      *
