@@ -179,27 +179,27 @@ QStringList ProfileManager::availableProfilePaths() const
 {
     KDE4ProfileReader kde4Reader;
 
-    QStringList profiles;
-    profiles += kde4Reader.findProfiles();
+    QStringList paths;
+    paths += kde4Reader.findProfiles();
 
-    qStableSort(profiles.begin(), profiles.end(), stringLessThan);
+    qStableSort(paths.begin(), paths.end(), stringLessThan);
 
-    return profiles;
+    return paths;
 }
 
 QStringList ProfileManager::availableProfileNames() const
 {
-    QStringList list;
+    QStringList names;
 
     foreach ( Profile::Ptr profile, ProfileManager::instance()->allProfiles() ) {
         if (!profile->isHidden()) {
-            list.push_back(profile->name());
+            names.push_back(profile->name());
         }
     }
 
-    qStableSort(list.begin(), list.end(), stringLessThan);
+    qStableSort(names.begin(), names.end(), stringLessThan);
 
-    return list;
+    return names;
 }
 
 void ProfileManager::loadAllProfiles()
