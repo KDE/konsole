@@ -33,6 +33,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QTextStream>
 #include <QtCore/QStringList>
+#include <QtNetwork/QHostInfo>
 
 // KDE
 #include <KConfigGroup>
@@ -123,6 +124,7 @@ QString ProcessInfo::format(const QString& input) const
 
     // search for and replace known marker
     output.replace("%u", userName());
+    output.replace("%h", localHost());
     output.replace("%n", name(&ok));
 
     QString dir = validCurrentDir();
@@ -249,6 +251,11 @@ QString ProcessInfo::userName() const
 QString ProcessInfo::userHomeDir() const
 {
     return _userHomeDir;
+}
+
+QString ProcessInfo::localHost()
+{
+    return QHostInfo::localHostName();
 }
 
 void ProcessInfo::setPid(int aPid)

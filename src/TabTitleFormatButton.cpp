@@ -35,7 +35,8 @@ const TabTitleFormatButton::Element TabTitleFormatButton::_localElements[] = {
     { "%D" , I18N_NOOP("Current Directory (Long): %D") },
     { "%w" , I18N_NOOP("Window Title Set by Shell: %w") },
     { "%#" , I18N_NOOP("Session Number: %#") },
-    { "%u" , I18N_NOOP("User Name: %u") }
+    { "%u" , I18N_NOOP("User Name: %u") },
+    { "%h" , I18N_NOOP("Local Host: %h") }
 };
 const int TabTitleFormatButton::_localElementCount =
     sizeof(_localElements) / sizeof(TabTitleFormatButton::Element);

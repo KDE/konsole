@@ -131,6 +131,9 @@ public:
     /** Returns the user's home directory of the process */
     QString userHomeDir() const;
 
+    /** Returns the local host */
+    static QString localHost();
+
     /** Returns the name of the current process */
     QString name(bool* ok) const;
 
