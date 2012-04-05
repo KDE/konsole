@@ -51,6 +51,11 @@ static bool profileNameLessThan(const Profile::Ptr& p1, const Profile::Ptr& p2)
     return QString::localeAwareCompare(p1->name(), p2->name()) <= 0;
 }
 
+static bool stringLessThan(const QString& p1, const QString& p2)
+{
+    return QString::localeAwareCompare(p1, p2) <= 0;
+}
+
 static void sortByIndexProfileList(QList<Profile::Ptr>& list)
 {
     qStableSort(list.begin(), list.end(), profileIndexLessThan);
@@ -177,6 +182,8 @@ QStringList ProfileManager::availableProfilePaths() const
     QStringList profiles;
     profiles += kde4Reader.findProfiles();
 
+    qStableSort(profiles.begin(), profiles.end(), stringLessThan);
+
     return profiles;
 }
 
@@ -189,6 +196,8 @@ QStringList ProfileManager::availableProfileNames() const
             list.push_back(profile->name());
         }
     }
+
+    qStableSort(list.begin(), list.end(), stringLessThan);
 
     return list;
 }
