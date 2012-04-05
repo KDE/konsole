@@ -32,7 +32,7 @@
 #include <KLocale>
 #include <KDebug>
 
-#define KONSOLE_VERSION "2.8.2"
+#define KONSOLE_VERSION "2.8.3"
 
 using namespace Konsole;
 
