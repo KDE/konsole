@@ -23,7 +23,6 @@
 #include "KeyboardTranslatorManager.h"
 
 // Qt
-#include <QtCore/QBuffer>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 
