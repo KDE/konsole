@@ -238,7 +238,7 @@ void ViewManager::setupActions()
         }
     }
 
-    foreach (QAction* action, multiViewOnlyActions) {
+    foreach(QAction* action, multiViewOnlyActions) {
         connect(this , SIGNAL(splitViewToggle(bool)) , action , SLOT(setEnabled(bool)));
     }
 
@@ -380,7 +380,7 @@ void ViewManager::sessionFinished()
     // close attached views
     QList<TerminalDisplay*> children = _viewSplitter->findChildren<TerminalDisplay*>();
 
-    foreach (TerminalDisplay * view , children) {
+    foreach(TerminalDisplay* view , children) {
         if (_sessionMap[view] == session) {
             _sessionMap.remove(view);
             view->deleteLater();
@@ -435,7 +435,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
 
     // iterate over each session which has a view in the current active
     // container and create a new view for that session in a new container
-    foreach ( QWidget* view,  _viewSplitter->activeContainer()->views() ) {
+    foreach(QWidget* view,  _viewSplitter->activeContainer()->views()) {
         Session* session = _sessionMap[qobject_cast<TerminalDisplay*>(view)];
         TerminalDisplay* display = createTerminalDisplay(session);
         const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
@@ -464,7 +464,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
 void ViewManager::removeContainer(ViewContainer* container)
 {
     // remove session map entries for views in this container
-    foreach (QWidget * view , container->views()) {
+    foreach(QWidget* view , container->views()) {
         TerminalDisplay* display = qobject_cast<TerminalDisplay*>(view);
         Q_ASSERT(display);
         _sessionMap.remove(display);
@@ -500,7 +500,7 @@ void ViewManager::closeOtherContainers()
 {
     ViewContainer* active = _viewSplitter->activeContainer();
 
-    foreach (ViewContainer* container, _viewSplitter->containers()) {
+    foreach(ViewContainer* container, _viewSplitter->containers()) {
         if (container != active)
             removeContainer(container);
     }
@@ -603,7 +603,7 @@ void ViewManager::createView(Session* session)
     // iterate over the view containers owned by this view manager
     // and create a new terminal display for the session in each of them, along with
     // a controller for the session/display pair
-    foreach ( ViewContainer* container,  _viewSplitter->containers() ) {
+    foreach(ViewContainer* container,  _viewSplitter->containers()) {
         createView(session, container, index);
     }
 }
@@ -616,11 +616,11 @@ ViewContainer* ViewManager::createContainer()
     case TabbedNavigation: {
         container = new TabbedViewContainer(_navigationPosition, _viewSplitter);
 
-        connect(container, SIGNAL(detachTab(ViewContainer*,QWidget*)),
-                this, SLOT(detachView(ViewContainer*,QWidget*))
+        connect(container, SIGNAL(detachTab(ViewContainer*, QWidget*)),
+                this, SLOT(detachView(ViewContainer*, QWidget*))
                );
-        connect(container, SIGNAL(closeTab(ViewContainer*,QWidget*)),
-                this, SLOT(closeTabFromContainer(ViewContainer*,QWidget*)));
+        connect(container, SIGNAL(closeTab(ViewContainer*, QWidget*)),
+                this, SLOT(closeTabFromContainer(ViewContainer*, QWidget*)));
     }
     break;
     case NoNavigation:
@@ -631,15 +631,15 @@ ViewContainer* ViewManager::createContainer()
     applyNavigationOptions(container);
 
     // connect signals and slots
-    connect(container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
+    connect(container , SIGNAL(viewAdded(QWidget*, ViewProperties*)) , _containerSignalMapper ,
             SLOT(map()));
     connect(container , SIGNAL(viewRemoved(QWidget*)) , _containerSignalMapper ,
             SLOT(map()));
     _containerSignalMapper->setMapping(container, container);
 
     connect(container, SIGNAL(newViewRequest()), this, SIGNAL(newViewRequest()));
-    connect(container, SIGNAL(moveViewRequest(int,int,bool&)),
-            this , SLOT(containerMoveViewRequest(int,int,bool&)));
+    connect(container, SIGNAL(moveViewRequest(int, int, bool&)),
+            this , SLOT(containerMoveViewRequest(int, int, bool&)));
     connect(container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewDestroyed(QWidget*)));
     connect(container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
 
@@ -832,7 +832,7 @@ void ViewManager::updateViewsForSession(Session* session)
 {
     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
 
-    foreach ( TerminalDisplay* view, _sessionMap.keys(session) ) {
+    foreach(TerminalDisplay* view, _sessionMap.keys(session)) {
         applyProfileToView(view, profile);
     }
 }
@@ -861,7 +861,7 @@ QList<ViewProperties*> ViewManager::viewProperties() const
 
     Q_ASSERT(container);
 
-    foreach ( QWidget* view, container->views() ) {
+    foreach(QWidget* view, container->views()) {
         ViewProperties* properties = container->viewProperties(view);
         Q_ASSERT(properties);
         list << properties;
@@ -1039,7 +1039,7 @@ void ViewManager::updateNavigationOptions(NavigationOptions options)
         static_cast<NewTabBehavior>(options.newTabBehavior);
     _showQuickButtons     = options.showQuickButtons;
 
-    foreach( ViewContainer* container, _viewSplitter->containers() ) {
+    foreach(ViewContainer* container, _viewSplitter->containers()) {
         applyNavigationOptions(container);
     }
 
@@ -1050,7 +1050,7 @@ void ViewManager::applyNavigationOptions(ViewContainer* container)
 
     container->setNavigationVisibility(_navigationVisibility);
 
-    Q_ASSERT( container->supportedNavigationPositions().contains(_navigationPosition) );
+    Q_ASSERT(container->supportedNavigationPositions().contains(_navigationPosition));
     container->setNavigationPosition(_navigationPosition);
 
     if (_showQuickButtons) {

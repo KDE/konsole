@@ -141,7 +141,7 @@ public:
         HistoryMode,
         /** (int) Specifies the number of lines of output to remember in
          * terminal sessions using this profile.  Once the limit is reached,
-         * the oldest lines are lost if the HistoryMode property is 
+         * the oldest lines are lost if the HistoryMode property is
          * FixedSizeHistory
          */
         HistorySize,

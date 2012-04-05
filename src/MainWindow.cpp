@@ -82,24 +82,24 @@ MainWindow::MainWindow()
 
     // create view manager
     _viewManager = new ViewManager(this, actionCollection());
-    connect(_viewManager , SIGNAL(empty()) , this , SLOT(close()));
-    connect(_viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
+    connect(_viewManager, SIGNAL(empty()), this, SLOT(close()));
+    connect(_viewManager, SIGNAL(activeViewChanged(SessionController*)), this,
             SLOT(activeViewChanged(SessionController*)));
-    connect(_viewManager , SIGNAL(unplugController(SessionController*)) , this ,
+    connect(_viewManager, SIGNAL(unplugController(SessionController*)), this,
             SLOT(disconnectController(SessionController*)));
-    connect(_viewManager , SIGNAL(viewPropertiesChanged(QList<ViewProperties*>)) ,
-            bookmarkHandler() , SLOT(setViews(QList<ViewProperties*>)));
+    connect(_viewManager, SIGNAL(viewPropertiesChanged(QList<ViewProperties*>)),
+            bookmarkHandler(), SLOT(setViews(QList<ViewProperties*>)));
 
-    connect(_viewManager , SIGNAL(setSaveGeometryOnExitRequest(bool)) , this ,
+    connect(_viewManager, SIGNAL(setSaveGeometryOnExitRequest(bool)), this,
             SLOT(setSaveGeometryOnExit(bool)));
-    connect(_viewManager , SIGNAL(updateWindowIcon()) , this ,
+    connect(_viewManager, SIGNAL(updateWindowIcon()), this,
             SLOT(updateWindowIcon()));
-    connect(_viewManager , SIGNAL(newViewRequest(Profile::Ptr)) ,
-            this , SLOT(newFromProfile(Profile::Ptr)));
-    connect(_viewManager , SIGNAL(newViewRequest()) ,
-            this , SLOT(newTab()));
-    connect(_viewManager , SIGNAL(viewDetached(Session*)) ,
-            this , SIGNAL(viewDetached(Session*)) );
+    connect(_viewManager, SIGNAL(newViewRequest(Profile::Ptr)),
+            this, SLOT(newFromProfile(Profile::Ptr)));
+    connect(_viewManager, SIGNAL(newViewRequest()),
+            this, SLOT(newTab()));
+    connect(_viewManager, SIGNAL(viewDetached(Session*)),
+            this, SIGNAL(viewDetached(Session*)));
 
     // create main window widgets
     setupWidgets();
@@ -185,10 +185,10 @@ ViewManager* MainWindow::viewManager() const
 
 void MainWindow::disconnectController(SessionController* controller)
 {
-    disconnect(controller , SIGNAL(titleChanged(ViewProperties*))
-               , this , SLOT(activeViewTitleChanged(ViewProperties*)));
-    disconnect(controller , SIGNAL(rawTitleChanged())
-               , this , SLOT(updateWindowCaption()));
+    disconnect(controller, SIGNAL(titleChanged(ViewProperties*)),
+               this, SLOT(activeViewTitleChanged(ViewProperties*)));
+    disconnect(controller, SIGNAL(rawTitleChanged()),
+               this, SLOT(updateWindowCaption()));
 
     // KXmlGuiFactory::removeClient() will try to access actions associated
     // with the controller internally, which may not be valid after the controller
@@ -204,8 +204,8 @@ void MainWindow::activeViewChanged(SessionController* controller)
 {
     // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
-    disconnect(bookmarkHandler() , SIGNAL(openUrl(KUrl)) , 0 , 0);
-    connect(bookmarkHandler() , SIGNAL(openUrl(KUrl)) , controller ,
+    disconnect(bookmarkHandler(), SIGNAL(openUrl(KUrl)), 0, 0);
+    connect(bookmarkHandler(), SIGNAL(openUrl(KUrl)), controller,
             SLOT(openUrl(KUrl)));
 
     if (_pluggedController)
@@ -215,10 +215,10 @@ void MainWindow::activeViewChanged(SessionController* controller)
     _pluggedController = controller;
 
     // listen for title changes from the current session
-    connect(controller , SIGNAL(titleChanged(ViewProperties*)) ,
-            this , SLOT(activeViewTitleChanged(ViewProperties*)));
-    connect(controller , SIGNAL(rawTitleChanged()) ,
-            this , SLOT(updateWindowCaption()));
+    connect(controller, SIGNAL(titleChanged(ViewProperties*)),
+            this, SLOT(activeViewTitleChanged(ViewProperties*)));
+    connect(controller, SIGNAL(rawTitleChanged()),
+            this, SLOT(updateWindowCaption()));
 
     controller->setShowMenuAction(_toggleMenuBarAction);
     guiFactory()->addClient(controller);
@@ -241,7 +241,7 @@ void MainWindow::activeViewTitleChanged(ViewProperties* properties)
 
 void MainWindow::updateWindowCaption()
 {
-    if ( !_pluggedController)
+    if (!_pluggedController)
         return;
 
     const QString& title = _pluggedController->title();
@@ -251,7 +251,7 @@ void MainWindow::updateWindowCaption()
     QString caption = title;
 
     // use window title as caption only when enabled and it is not empty
-    if ( KonsoleSettings::showWindowTitleOnTitleBar() && !userTitle.isEmpty() ) {
+    if (KonsoleSettings::showWindowTitleOnTitleBar() && !userTitle.isEmpty()) {
         caption = userTitle;
     }
 
@@ -283,10 +283,10 @@ void MainWindow::setupActions()
     collection->addAction("new-tab", _newTabMenuAction);
 
     menuAction = collection->addAction("clone-tab");
-    menuAction->setIcon( KIcon("tab-duplicate") );
-    menuAction->setText( i18nc("@action:inmenu", "&Clone Tab") );
-    menuAction->setShortcut( QKeySequence() );
-    menuAction->setAutoRepeat( false );
+    menuAction->setIcon(KIcon("tab-duplicate"));
+    menuAction->setText(i18nc("@action:inmenu", "&Clone Tab"));
+    menuAction->setShortcut(QKeySequence());
+    menuAction->setAutoRepeat(false);
     connect(menuAction, SIGNAL(triggered()), this, SLOT(cloneTab()));
 
     menuAction = collection->addAction("new-window");
@@ -303,10 +303,10 @@ void MainWindow::setupActions()
     connect(menuAction, SIGNAL(triggered()), this, SLOT(close()));
 
     // Bookmark Menu
-    KActionMenu* bookmarkMenu = new KActionMenu(i18nc("@title:menu", "&Bookmarks") , collection);
-    _bookmarkHandler = new BookmarkHandler(collection , bookmarkMenu->menu() , true , this);
-    collection->addAction("bookmark" , bookmarkMenu);
-    connect(_bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)));
+    KActionMenu* bookmarkMenu = new KActionMenu(i18nc("@title:menu", "&Bookmarks"), collection);
+    _bookmarkHandler = new BookmarkHandler(collection, bookmarkMenu->menu(), true, this);
+    collection->addAction("bookmark", bookmarkMenu);
+    connect(_bookmarkHandler, SIGNAL(openUrls(QList<KUrl>)), this, SLOT(openUrls(QList<KUrl>)));
 
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
@@ -316,8 +316,8 @@ void MainWindow::setupActions()
     menuAction = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
     menuAction->setShortcut(QKeySequence());
 
-    KStandardAction::configureNotifications(this , SLOT(configureNotifications()) , collection);
-    KStandardAction::keyBindings(this , SLOT(showShortcutsDialog()) , collection);
+    KStandardAction::configureNotifications(this, SLOT(configureNotifications()), collection);
+    KStandardAction::keyBindings(this, SLOT(showShortcutsDialog()), collection);
     KStandardAction::preferences(this, SLOT(showSettingsDialog()), collection);
 
     menuAction = collection->addAction("manage-profiles");
@@ -349,10 +349,10 @@ void MainWindow::setProfileList(ProfileList* list)
 {
     profileListChanged(list->actions());
 
-    connect(list , SIGNAL(profileSelected(Profile::Ptr)) , this ,
+    connect(list, SIGNAL(profileSelected(Profile::Ptr)), this,
             SLOT(newFromProfile(Profile::Ptr)));
 
-    connect(list , SIGNAL(actionsChanged(QList<QAction*>)) , this ,
+    connect(list, SIGNAL(actionsChanged(QList<QAction*>)), this,
             SLOT(profileListChanged(QList<QAction*>)));
 }
 
@@ -409,19 +409,19 @@ void MainWindow::openUrls(const QList<KUrl>& urls)
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
-    foreach(const KUrl& url , urls) {
+    foreach(const KUrl& url, urls) {
         if (url.isLocalFile())
-            createSession(defaultProfile , url.path());
+            createSession(defaultProfile, url.path());
 
         else if (url.protocol() == "ssh")
-            createSSHSession(defaultProfile , url );
+            createSSHSession(defaultProfile, url);
     }
 }
 
 void MainWindow::newTab()
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
-    createSession(defaultProfile , activeSessionDir() );
+    createSession(defaultProfile, activeSessionDir());
 }
 
 void MainWindow::cloneTab()
@@ -430,8 +430,8 @@ void MainWindow::cloneTab()
 
     Session* session = _pluggedController->session();
     Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
-    if ( profile) {
-        createSession( profile , activeSessionDir() );
+    if (profile) {
+        createSession(profile, activeSessionDir());
     } else {
         // something must be wrong: every session should be associated with profile
         Q_ASSERT(false);
@@ -446,10 +446,10 @@ Session* MainWindow::createSession(Profile::Ptr profile, const QString& director
 
     Session* session = SessionManager::instance()->createSession(profile);
 
-    if (!directory.isEmpty() && profile->startInCurrentSessionDir() )
+    if (!directory.isEmpty() && profile->startInCurrentSessionDir())
         session->setInitialWorkingDirectory(directory);
 
-    session->addEnvironmentEntry( QString("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(_viewManager->managerId()) );
+    session->addEnvironmentEntry(QString("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(_viewManager->managerId()));
 
     // create view before starting the session process so that the session
     // doesn't suffer a change in terminal size right after the session
@@ -502,7 +502,7 @@ void MainWindow::setFocus()
 void MainWindow::newWindow()
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
-    emit newWindowRequest(defaultProfile , activeSessionDir());
+    emit newWindowRequest(defaultProfile, activeSessionDir());
 }
 
 bool MainWindow::queryClose()
@@ -517,9 +517,9 @@ bool MainWindow::queryClose()
 
     int result = KMessageBox::warningYesNoCancel(this,
                  i18ncp("@info", "There are %1 tab open in this window. "
-                      "Do you still want to quit?",
-		      "There are %1 tabs open in this window. "
-                      "Do you still want to quit?", openTabs),
+                        "Do you still want to quit?",
+                        "There are %1 tabs open in this window. "
+                        "Do you still want to quit?", openTabs),
                  i18nc("@title", "Confirm Close"),
                  KStandardGuiItem::quit(),
                  KGuiItem(i18nc("@action:button", "Close Current Tab"), "tab-close"),
@@ -601,7 +601,7 @@ void MainWindow::showShortcutsDialog()
 
 void MainWindow::newFromProfile(Profile::Ptr profile)
 {
-    createSession(profile, activeSessionDir() );
+    createSession(profile, activeSessionDir());
 }
 void MainWindow::showManageProfilesDialog()
 {
@@ -632,7 +632,7 @@ void MainWindow::showSettingsDialog()
 
 void MainWindow::applyKonsoleSettings()
 {
-    if ( KonsoleSettings::allowMenuAccelerators() ) {
+    if (KonsoleSettings::allowMenuAccelerators()) {
         recoverMenuAccelerators();
     } else {
         removeMenuAccelerators();

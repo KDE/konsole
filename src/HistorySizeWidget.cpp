@@ -55,13 +55,13 @@ HistorySizeWidget::HistorySizeWidget(QWidget* parent)
     modeGroup->addButton(_ui->fixedSizeHistoryButton);
     modeGroup->addButton(_ui->unlimitedHistoryButton);
     connect(modeGroup, SIGNAL(buttonClicked(QAbstractButton*)),
-            this, SLOT(buttonClicked(QAbstractButton*)) );
+            this, SLOT(buttonClicked(QAbstractButton*)));
 
     _ui->historyLineSpinner->setSuffix(ki18ncp("Unit of scrollback", " line", " lines"));
     this->setLineCount(HistorySizeWidget::DefaultLineCount);
 
     connect(_ui->historyLineSpinner, SIGNAL(valueChanged(int)),
-            this, SIGNAL(historySizeChanged(int)) );
+            this, SIGNAL(historySizeChanged(int)));
 }
 
 HistorySizeWidget::~HistorySizeWidget()

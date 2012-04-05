@@ -147,7 +147,7 @@ QSet<QString> ProcessInfo::commonDirNames()
 {
     static bool forTheFirstTime = true;
 
-    if ( forTheFirstTime ) {
+    if (forTheFirstTime) {
         const KSharedConfigPtr& config = KGlobal::config();
         const KConfigGroup& configGroup = config->group("ProcessInfo");
         _commonDirNames = QSet<QString>::fromList(configGroup.readEntry("CommonDirNames", QStringList()));
@@ -938,10 +938,10 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     if (optionArgumentCombined) {
                         argument = args[i].mid(2);
                     } else {
-			// Verify correct # arguments are given
-			if ((i + 1) < args.count()) {
+                        // Verify correct # arguments are given
+                        if ((i + 1) < args.count()) {
                             argument = args[i + 1];
-			}
+                        }
                         i++;
                     }
 

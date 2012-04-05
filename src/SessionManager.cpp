@@ -61,7 +61,7 @@ SessionManager::~SessionManager()
         kWarning() << "Konsole SessionManager destroyed with sessions still alive";
         // ensure that the Session doesn't later try to call back and do things to the
         // SessionManager
-        foreach(Session* session , _sessions) {
+        foreach(Session* session, _sessions) {
             disconnect(session , 0 , this , 0);
         }
     }
@@ -135,7 +135,7 @@ void SessionManager::sessionTerminated(QObject* sessionObject)
 
 void SessionManager::applyProfile(Profile::Ptr profile , bool modifiedPropertiesOnly)
 {
-    foreach ( Session* session, _sessions ) {
+    foreach(Session* session, _sessions) {
         if (_sessionProfiles[session] == profile)
             applyProfile(session, profile, modifiedPropertiesOnly);
     }

@@ -169,7 +169,7 @@ void ViewSplitter::addContainer(ViewContainer* container ,
 void ViewSplitter::containerEmpty(ViewContainer* /*container*/)
 {
     int children = 0;
-    foreach ( ViewContainer* container, _containers ) {
+    foreach(ViewContainer* container, _containers) {
         children += container->views().count();
     }
 
@@ -233,7 +233,7 @@ ViewContainer* ViewSplitter::activeContainer() const
         ViewContainer* focusContainer = 0;
 
         while (focusW != 0) {
-            foreach ( ViewContainer* container, _containers ) {
+            foreach(ViewContainer* container, _containers) {
                 if (container->containerWidget() == focusW) {
                     focusContainer = container;
                     break;

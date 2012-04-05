@@ -181,7 +181,7 @@ void ColorSchemeManager::loadAllColorSchemes()
     int failed = 0;
 
     QStringList nativeColorSchemes = listColorSchemes();
-    foreach ( const QString& colorScheme, nativeColorSchemes) {
+    foreach(const QString& colorScheme, nativeColorSchemes) {
         if (loadColorScheme(colorScheme))
             success++;
         else
@@ -189,7 +189,7 @@ void ColorSchemeManager::loadAllColorSchemes()
     }
 
     QStringList kde3ColorSchemes = listKDE3ColorSchemes();
-    foreach ( const QString& colorScheme, kde3ColorSchemes) {
+    foreach(const QString& colorScheme, kde3ColorSchemes) {
         if (loadKDE3ColorScheme(colorScheme))
             success++;
         else
@@ -295,7 +295,7 @@ const ColorScheme* ColorSchemeManager::defaultColorScheme() const
 void ColorSchemeManager::addColorScheme(ColorScheme* scheme)
 {
     // remove existing colorscheme with the same name
-    if ( _colorSchemes.contains(scheme->name()) ) {
+    if (_colorSchemes.contains(scheme->name())) {
         delete _colorSchemes[scheme->name()];
         _colorSchemes.remove(scheme->name());
     }

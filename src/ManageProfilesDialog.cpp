@@ -67,8 +67,8 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* aParent)
     connect(ProfileManager::instance(), SIGNAL(profileChanged(Profile::Ptr)), this,
             SLOT(updateItems(Profile::Ptr)));
     connect(ProfileManager::instance() ,
-            SIGNAL(favoriteStatusChanged(Profile::Ptr,bool)), this,
-            SLOT(updateFavoriteStatus(Profile::Ptr,bool)));
+            SIGNAL(favoriteStatusChanged(Profile::Ptr, bool)), this,
+            SLOT(updateFavoriteStatus(Profile::Ptr, bool)));
 
     // resize the session table to the full width of the table
     _ui->sessionTable->horizontalHeader()->setHighlightSections(false);
@@ -228,7 +228,7 @@ void ManageProfilesDialog::populateTable()
     // it appears that the selection model is changed when the model itself is replaced,
     // so the signals need to be reconnected each time the model is updated.
     connect(_ui->sessionTable->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this,
+            SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this,
             SLOT(tableSelectionChanged(QItemSelection)));
 
     _ui->sessionTable->selectRow(0);

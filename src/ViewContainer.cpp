@@ -435,8 +435,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     connect(_tabBar, SIGNAL(newTabRequest()), this, SIGNAL(newViewRequest()));
     connect(_tabBar, SIGNAL(wheelDelta(int)), this, SLOT(wheelScrolled(int)));
     connect(_tabBar, SIGNAL(initiateDrag(int)), this, SLOT(startTabDrag(int)));
-    connect(_tabBar, SIGNAL(contextMenu(int,QPoint)), this,
-            SLOT(openTabContextMenu(int,QPoint)));
+    connect(_tabBar, SIGNAL(contextMenu(int, QPoint)), this,
+            SLOT(openTabContextMenu(int, QPoint)));
 
     // The context menu of tab bar
     _contextPopupMenu = new KMenu(_tabBar);
@@ -655,7 +655,7 @@ void TabbedViewContainer::openTabContextMenu(int index, const QPoint& pos)
     // Enable 'Detach Tab' menu item only if there is more than 1 tab
     // Note: the code is coupled with that action's position within the menu
     QAction* detachAction = _contextPopupMenu->actions().first();
-    detachAction->setEnabled( _tabBar->count() > 1 );
+    detachAction->setEnabled(_tabBar->count() > 1);
 
     _contextPopupMenu->exec(pos);
 }
@@ -776,7 +776,7 @@ void TabbedViewContainer::setTabActivity(int index , bool activity)
 
 void TabbedViewContainer::updateActivity(ViewProperties* item)
 {
-    foreach ( QWidget* widget, widgetsForItem(item) ) {
+    foreach(QWidget* widget, widgetsForItem(item)) {
         const int index = _stackWidget->indexOf(widget);
 
         if (index != _stackWidget->currentIndex()) {
@@ -787,7 +787,7 @@ void TabbedViewContainer::updateActivity(ViewProperties* item)
 
 void TabbedViewContainer::updateTitle(ViewProperties* item)
 {
-    foreach ( QWidget* widget, widgetsForItem(item) ) {
+    foreach(QWidget* widget, widgetsForItem(item)) {
         const int index = _stackWidget->indexOf(widget);
         QString tabText = item->title();
 
@@ -800,7 +800,7 @@ void TabbedViewContainer::updateTitle(ViewProperties* item)
 }
 void TabbedViewContainer::updateIcon(ViewProperties* item)
 {
-    foreach ( QWidget* widget, widgetsForItem(item) ) {
+    foreach(QWidget* widget, widgetsForItem(item)) {
         const int index = _stackWidget->indexOf(widget);
         _tabBar->setTabIcon(index , item->icon());
     }

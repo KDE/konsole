@@ -235,7 +235,10 @@ void Screen::setMode(int m)
 {
     _currentModes[m] = true;
     switch (m) {
-    case MODE_Origin : _cuX = 0; _cuY = _topMargin; break; //FIXME: home
+    case MODE_Origin :
+        _cuX = 0;
+        _cuY = _topMargin;
+        break; //FIXME: home
     }
 }
 
@@ -243,7 +246,10 @@ void Screen::resetMode(int m)
 {
     _currentModes[m] = false;
     switch (m) {
-    case MODE_Origin : _cuX = 0; _cuY = 0; break; //FIXME: home
+    case MODE_Origin :
+        _cuX = 0;
+        _cuY = 0;
+        break; //FIXME: home
     }
 }
 

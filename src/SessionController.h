@@ -118,7 +118,7 @@ public:
     /**
      * Returns the "window title" of the associated session.
      */
-    QString userTitle () const;
+    QString userTitle() const;
 
     /**
      * Returns true if the controller is valid.

@@ -425,7 +425,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->colorSchemeList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
     connect(_ui->colorSchemeList->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+            SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
             this, SLOT(colorSchemeSelected()));
     connect(_ui->colorSchemeList, SIGNAL(entered(QModelIndex)), this,
             SLOT(previewColorScheme(QModelIndex)));
@@ -503,7 +503,7 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 
     QList<const ColorScheme*> schemeList = ColorSchemeManager::instance()->allColorSchemes();
 
-    foreach ( const ColorScheme* scheme, schemeList) {
+    foreach(const ColorScheme* scheme, schemeList) {
         QStandardItem* item = new QStandardItem(scheme->description());
         item->setData(QVariant::fromValue(scheme) ,  Qt::UserRole + 1);
         item->setFlags(item->flags());
@@ -544,7 +544,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     QStandardItem* selectedItem = 0;
 
     QStringList translatorNames = keyManager->allTranslators();
-    foreach (const QString& translatorName, translatorNames) {
+    foreach(const QString& translatorName, translatorNames) {
         const KeyboardTranslator* translator = keyManager->findTranslator(translatorName);
 
         QStandardItem* item = new QStandardItem(translator->description());
@@ -800,7 +800,7 @@ void EditProfileDialog::updateButtonApply()
                 userModified = true;
                 break;
             }
-        // for not-previewed property
+            // for not-previewed property
         } else if ((value != _profile->property<QVariant>(aProperty))) {
             userModified = true;
             break;
@@ -816,7 +816,7 @@ void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* profile */)
     updateKeyBindingsList(true);
 
     connect(_ui->keyBindingList->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+            SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
             SLOT(keyBindingSelected()));
     connect(_ui->newKeyBindingsButton, SIGNAL(clicked()), this,
             SLOT(newKeyBinding()));

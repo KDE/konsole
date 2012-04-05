@@ -245,7 +245,7 @@ Filter::HotSpot* Filter::hotSpotAt(int line , int column) const
 {
     QList<HotSpot*> hotspots = _hotspots.values(line);
 
-    foreach ( HotSpot* spot, hotspots ) {
+    foreach(HotSpot* spot, hotspots) {
         if (spot->startLine() == line && spot->startColumn() > column)
             continue;
         if (spot->endLine() == line && spot->endColumn() < column)

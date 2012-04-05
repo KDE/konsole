@@ -39,7 +39,7 @@ namespace Konsole {
  * Most functions are re-implemented from QAccessibleTextInterface.
  */
 class TerminalDisplayAccessible
- : public QAccessibleWidgetEx, public QAccessibleTextInterface, public QAccessibleSimpleEditableTextInterface
+    : public QAccessibleWidgetEx, public QAccessibleTextInterface, public QAccessibleSimpleEditableTextInterface
 {
     Q_ACCESSIBLE_OBJECT
 

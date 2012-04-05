@@ -131,7 +131,7 @@ QList<QPair<QString, QString> > BookmarkHandler::currentBookmarkList() const
 {
     QList<QPair<QString, QString> > list;
 
-    foreach ( ViewProperties* view, _views ) {
+    foreach(ViewProperties* view, _views) {
         list << QPair<QString, QString>(titleForView(view) , urlForView(view));
     }
 

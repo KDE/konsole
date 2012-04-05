@@ -94,7 +94,7 @@ void Emulation::checkSelectedText()
 
 Emulation::~Emulation()
 {
-    foreach ( ScreenWindow* window, _windows) {
+    foreach(ScreenWindow* window, _windows) {
         delete window;
     }
 

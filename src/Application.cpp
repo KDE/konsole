@@ -200,7 +200,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
             lineTokens[key] = value;
         }
         // should contain at least one of 'command' and 'profile'
-        if (lineTokens.contains("command") || lineTokens.contains("profile") ) {
+        if (lineTokens.contains("command") || lineTokens.contains("profile")) {
             createTabFromArgs(args, window, lineTokens);
             sessions++;
         } else {
@@ -326,7 +326,7 @@ void Application::listAvailableProfiles()
 {
     QStringList paths = ProfileManager::instance()->availableProfilePaths();
 
-    foreach ( const QString& path, paths) {
+    foreach(const QString& path, paths) {
         QFileInfo info(path);
         printf("%s\n", info.completeBaseName().toLocal8Bit().constData());
     }
@@ -339,7 +339,7 @@ void Application::listProfilePropertyInfo()
     Profile::Ptr tempProfile = ProfileManager::instance()->defaultProfile();
     const QStringList names = tempProfile->propertiesInfoList();
 
-    foreach ( const QString& name, names) {
+    foreach(const QString& name, names) {
         printf("%s\n", name.toLocal8Bit().constData());
     }
 
@@ -373,17 +373,17 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
     }
 
     // run a custom command
-    if ( args->isSet("e") ) {
+    if (args->isSet("e")) {
         QString commandExec;
         QStringList commandArguments;
 
         // Note: KCmdLineArgs::count() return the number of arguments
         // that aren't options.
-        if ( args->count() > 0 ) { // example: konsole -e man ls
+        if (args->count() > 0) {   // example: konsole -e man ls
             commandExec = args->getOption("e");
 
             commandArguments << commandExec;
-            for ( int i = 0 ; i < args->count() ; i++ )
+            for (int i = 0 ; i < args->count() ; i++)
                 commandArguments << args->arg(i);
 
         } else { // example: konsole -e "man ls"
@@ -402,7 +402,7 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
         shouldUseNewProfile = true;
     }
 
-    if ( shouldUseNewProfile ) {
+    if (shouldUseNewProfile) {
         return newProfile;
     } else {
         return baseProfile;

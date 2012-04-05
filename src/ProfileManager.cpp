@@ -129,12 +129,12 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
         path = KStandardDirs::locate("data", path);
 
     // if the file is not found, return imediately
-    if ( path.isEmpty() ) {
+    if (path.isEmpty()) {
         return Profile::Ptr();
     }
 
     // check that we have not already loaded this profile
-    foreach ( const Profile::Ptr& profile, _profiles) {
+    foreach(const Profile::Ptr& profile, _profiles) {
         if (profile->path() == path)
             return profile;
     }
@@ -191,7 +191,7 @@ QStringList ProfileManager::availableProfileNames() const
 {
     QStringList names;
 
-    foreach ( Profile::Ptr profile, ProfileManager::instance()->allProfiles() ) {
+    foreach(Profile::Ptr profile, ProfileManager::instance()->allProfiles()) {
         if (!profile->isHidden()) {
             names.push_back(profile->name());
         }
@@ -208,7 +208,7 @@ void ProfileManager::loadAllProfiles()
         return;
 
     const QStringList& paths = availableProfilePaths();
-    foreach ( const QString& path, paths) {
+    foreach(const QString& path, paths) {
         loadProfile(path);
     }
 
@@ -470,7 +470,7 @@ void ProfileManager::loadShortcuts()
         QFileInfo fileInfo(profilePath);
         if (!fileInfo.isAbsolute())
         {
-            profilePath = KStandardDirs::locate("data","konsole/" + profilePath);
+            profilePath = KStandardDirs::locate("data", "konsole/" + profilePath);
         }
 
         data.profilePath = profilePath;
@@ -498,7 +498,7 @@ void ProfileManager::saveShortcuts()
             // Check to see if file is under KDE's data locations.  If not,
             // store full path.
             QString location = KGlobal::dirs()->locate("data",
-                               "konsole/"+fileInfo.fileName());
+                               "konsole/" + fileInfo.fileName());
             if (location.isEmpty())
             {
                 profileName = iter.value().profilePath;
@@ -532,7 +532,7 @@ void ProfileManager::setShortcut(Profile::Ptr profile ,
 }
 void ProfileManager::loadFavorites()
 {
-    if ( _loadedFavorites )
+    if (_loadedFavorites)
         return;
 
     KSharedConfigPtr appConfig = KGlobal::config();
@@ -550,7 +550,7 @@ void ProfileManager::loadFavorites()
     }
 
     // look for favorites amongst those already loaded
-    foreach ( const Profile::Ptr& profile, _profiles ) {
+    foreach(const Profile::Ptr& profile, _profiles) {
         const QString& path = profile->path();
         if (favoriteSet.contains(path)) {
             _favorites.insert(profile);
@@ -558,7 +558,7 @@ void ProfileManager::loadFavorites()
         }
     }
     // load any remaining favorites
-    foreach ( const QString& favorite, favoriteSet ) {
+    foreach(const QString& favorite, favoriteSet) {
         Profile::Ptr profile = loadProfile(favorite);
         if (profile)
             _favorites.insert(profile);
@@ -572,7 +572,7 @@ void ProfileManager::saveFavorites()
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
     QStringList paths;
-    foreach ( const Profile::Ptr& profile, _favorites ) {
+    foreach(const Profile::Ptr& profile, _favorites) {
 
         Q_ASSERT(_profiles.contains(profile) && profile);
 
@@ -584,7 +584,7 @@ void ProfileManager::saveFavorites()
             // Check to see if file is under KDE's data locations.  If not,
             // store full path.
             QString location = KGlobal::dirs()->locate("data",
-                               "konsole/"+fileInfo.fileName());
+                               "konsole/" + fileInfo.fileName());
             if (location.isEmpty())
             {
                 profileName = profile->path();

@@ -269,18 +269,23 @@ inline const QColor color256(quint8 u, const ColorEntry* base)
 
     // 232..255: gray, leaving out black and white
     int gray = u * 10 + 8;
-    
+
     return QColor(gray, gray, gray);
 }
 
 inline QColor CharacterColor::color(const ColorEntry* base) const
 {
     switch (_colorSpace) {
-    case COLOR_SPACE_DEFAULT: return base[_u + 0 + (_v ? BASE_COLORS : 0)].color;
-    case COLOR_SPACE_SYSTEM: return base[_u + 2 + (_v ? BASE_COLORS : 0)].color;
-    case COLOR_SPACE_256: return color256(_u, base);
-    case COLOR_SPACE_RGB: return QColor(_u, _v, _w);
-    case COLOR_SPACE_UNDEFINED: return QColor();
+    case COLOR_SPACE_DEFAULT:
+        return base[_u + 0 + (_v ? BASE_COLORS : 0)].color;
+    case COLOR_SPACE_SYSTEM:
+        return base[_u + 2 + (_v ? BASE_COLORS : 0)].color;
+    case COLOR_SPACE_256:
+        return color256(_u, base);
+    case COLOR_SPACE_RGB:
+        return QColor(_u, _v, _w);
+    case COLOR_SPACE_UNDEFINED:
+        return QColor();
     }
 
     Q_ASSERT(false); // invalid color space

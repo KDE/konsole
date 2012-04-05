@@ -177,7 +177,7 @@ void IncrementalSearchBar::setFoundMatch(bool match)
         KStatefulBrush backgroundBrush(KColorScheme::View, KColorScheme::NegativeBackground);
 
         QString matchStyleSheet = QString("QLineEdit{ background-color:%1 }")
-                             .arg(backgroundBrush.brush(_searchEdit).color().name());
+                                  .arg(backgroundBrush.brush(_searchEdit).color().name());
 
         _searchEdit->setStyleSheet(matchStyleSheet);
     } else {

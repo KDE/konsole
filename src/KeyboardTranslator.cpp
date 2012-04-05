@@ -281,7 +281,7 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString& item , int& keyCode
         if (sequence.count() > 1) {
             kWarning() << "Unhandled key codes in sequence: " << item;
         }
-    // additional cases implemented for backwards compatibility with KDE 3
+        // additional cases implemented for backwards compatibility with KDE 3
     } else if (item == "prior")
         keyCode = Qt::Key_PageUp;
     else if (item == "next")
@@ -436,8 +436,8 @@ bool KeyboardTranslator::Entry::matches(int testKeyCode,
 
     // special handling for the 'Any Modifier' state, which checks for the presence of
     // any or no modifiers.  In this context, the 'keypad' modifier does not count.
-    bool anyModifiersSet = (testKeyboardModifiers != 0) 
-        && (testKeyboardModifiers != Qt::KeypadModifier);
+    bool anyModifiersSet = (testKeyboardModifiers != 0)
+                           && (testKeyboardModifiers != Qt::KeypadModifier);
     bool wantAnyModifier = _state & KeyboardTranslator::AnyModifierState;
     if (_stateMask & KeyboardTranslator::AnyModifierState) {
         if (wantAnyModifier != anyModifiersSet)

@@ -572,12 +572,12 @@ signals:
      */
     void stateChanged(int state);
 
-  /**
-   * Emitted when the current working directory of this session changes.
-   *
-   * @param dir The new current woking directory of the session.
-   */
-  void currentDirectoryChanged(const QString& dir);
+    /**
+     * Emitted when the current working directory of this session changes.
+     *
+     * @param dir The new current woking directory of the session.
+     */
+    void currentDirectoryChanged(const QString& dir);
 
     /** Emitted when a bell event occurs in the session. */
     void bellRequest(const QString& message);

@@ -143,8 +143,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // listen to title and icon changes
     connect(_session, SIGNAL(titleChanged()), this, SLOT(sessionTitleChanged()));
 
-    connect( _session , SIGNAL(currentDirectoryChanged(QString)) ,
-            this , SIGNAL(currentDirectoryChanged(QString)) );
+    connect(_session , SIGNAL(currentDirectoryChanged(QString)) ,
+            this , SIGNAL(currentDirectoryChanged(QString)));
 
     // listen for color changes
     connect(_session, SIGNAL(changeBackgroundColorRequest(QColor)), _view, SLOT(setBackgroundColor(QColor)));
@@ -170,7 +170,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     //
     // the timer is owned by the session so that it will be destroyed along
     // with the session
-     _interactionTimer = new QTimer(_session);
+    _interactionTimer = new QTimer(_session);
     _interactionTimer->setSingleShot(true);
     _interactionTimer->setInterval(1000);
     connect(_interactionTimer, SIGNAL(timeout()), this, SLOT(snapshot()));
@@ -358,7 +358,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             connect(_session, SIGNAL(bellRequest(QString)),
                     _view, SLOT(bell(QString)));
 
-            if(_copyInputToAllTabsAction && _copyInputToAllTabsAction->isChecked()) {
+            if (_copyInputToAllTabsAction && _copyInputToAllTabsAction->isChecked()) {
                 // A session with "Copy To All Tabs" has come into focus:
                 // Ensure that newly created sessions are included in _copyToGroup!
                 copyInputToAllTabs();
@@ -492,7 +492,7 @@ void SessionController::setupCommonActions()
     // Profile Options
     action = collection->addAction("edit-current-profile", this, SLOT(editCurrentProfile()));
     action->setText(i18n("Edit Current Profile..."));
-    action->setIcon(KIcon("document-properties") );
+    action->setIcon(KIcon("document-properties"));
 
     _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), _view);
     collection->addAction("switch-profile", _switchProfileMenu);
@@ -770,7 +770,7 @@ static const KXmlGuiWindow* findWindow(const QObject* object)
 static bool hasTerminalDisplayInSameWindow(const Session* session, const KXmlGuiWindow* window)
 {
     // Iterate all TerminalDisplays of this Session ...
-    foreach ( const TerminalDisplay* terminalDisplay, session->views() ) {
+    foreach(const TerminalDisplay* terminalDisplay, session->views()) {
         // ... and check whether a TerminalDisplay has the same
         // window as given in the parameter
         if (window == findWindow(terminalDisplay)) {
@@ -1353,7 +1353,7 @@ void SaveHistoryTask::execute()
     // iterate over each session in the task and display a dialog to allow the user to choose where
     // to save that session's history.
     // then start a KIO job to transfer the data from the history to the chosen URL
-    foreach ( const SessionPtr& session, sessions() ) {
+    foreach(const SessionPtr& session, sessions()) {
 
         dialog->setCaption(i18n("Save Output From %1", session->title(Session::NameRole)));
 
@@ -1399,8 +1399,8 @@ void SaveHistoryTask::execute()
 
         _jobSession.insert(job, jobInfo);
 
-        connect(job, SIGNAL(dataReq(KIO::Job*,QByteArray&)),
-                this, SLOT(jobDataRequested(KIO::Job*,QByteArray&)));
+        connect(job, SIGNAL(dataReq(KIO::Job*, QByteArray&)),
+                this, SLOT(jobDataRequested(KIO::Job*, QByteArray&)));
         connect(job, SIGNAL(result(KJob*)),
                 this, SLOT(jobResult(KJob*)));
     }
@@ -1626,9 +1626,9 @@ QRegExp SearchHistoryTask::regExp() const
     return _regExp;
 }
 
-QString SessionController::userTitle () const
+QString SessionController::userTitle() const
 {
-    if ( _session) {
+    if (_session) {
         return _session->userTitle();
     } else {
         return QString();

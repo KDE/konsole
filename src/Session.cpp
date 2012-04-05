@@ -125,8 +125,8 @@ Session::Session(QObject* parent) :
     //create emulation backend
     _emulation = new Vt102Emulation();
 
-    connect(_emulation, SIGNAL(titleChanged(int,QString)),
-            this, SLOT(setUserTitle(int,QString)));
+    connect(_emulation, SIGNAL(titleChanged(int, QString)),
+            this, SLOT(setUserTitle(int, QString)));
     connect(_emulation, SIGNAL(stateSet(int)),
             this, SLOT(activityStateSet(int)));
     connect(_emulation, SIGNAL(zmodemDetected()), this,
@@ -141,8 +141,8 @@ Session::Session(QObject* parent) :
             SLOT(onPrimaryScreenInUse(bool)));
     connect(_emulation, SIGNAL(selectedText(QString)), this,
             SLOT(onSelectedText(QString)));
-    connect( _emulation, SIGNAL(imageResizeRequest(QSize)) , this,
-             SIGNAL(resizeRequest(QSize)) );
+    connect(_emulation, SIGNAL(imageResizeRequest(QSize)), this,
+            SIGNAL(resizeRequest(QSize)));
 
     //create new teletype for I/O with shell process
     openTeletype(-1);
@@ -183,13 +183,13 @@ void Session::openTeletype(int fd)
     _shellProcess->setUtf8Mode(_emulation->utf8());
 
     //connect teletype to emulation backend
-    connect(_shellProcess, SIGNAL(receivedData(const char*,int)), this,
-            SLOT(onReceiveBlock(const char*,int)));
-    connect(_emulation, SIGNAL(sendData(const char*,int)), _shellProcess,
-            SLOT(sendData(const char*,int)));
+    connect(_shellProcess, SIGNAL(receivedData(const char*, int)), this,
+            SLOT(onReceiveBlock(const char*, int)));
+    connect(_emulation, SIGNAL(sendData(const char*, int)), _shellProcess,
+            SLOT(sendData(const char*, int)));
     connect(_emulation, SIGNAL(useUtf8Request(bool)), _shellProcess, SLOT(setUtf8Mode(bool)));
-    connect(_shellProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(done(int,QProcess::ExitStatus)));
-    connect(_emulation, SIGNAL(imageSizeChanged(int,int)), this, SLOT(updateWindowSize(int,int)));
+    connect(_shellProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(done(int, QProcess::ExitStatus)));
+    connect(_emulation, SIGNAL(imageSizeChanged(int, int)), this, SLOT(updateWindowSize(int, int)));
     connect(_emulation, SIGNAL(imageSizeInitialized()), this, SLOT(run()));
 }
 
@@ -281,7 +281,7 @@ ProcessInfo* Session::updateWorkingDirectory()
     ProcessInfo* process = getProcessInfo();
 
     const QString currentDir = process->validCurrentDir();
-    if ( currentDir != _currentWorkingDir )
+    if (currentDir != _currentWorkingDir)
     {
         _currentWorkingDir = currentDir;
         emit currentDirectoryChanged(_currentWorkingDir);
@@ -304,8 +304,8 @@ void Session::addView(TerminalDisplay* widget)
     // connect emulation - view signals and slots
     connect(widget, SIGNAL(keyPressedSignal(QKeyEvent*)), _emulation,
             SLOT(sendKeyEvent(QKeyEvent*)));
-    connect(widget, SIGNAL(mouseSignal(int,int,int,int)), _emulation,
-            SLOT(sendMouseEvent(int,int,int,int)));
+    connect(widget, SIGNAL(mouseSignal(int, int, int, int)), _emulation,
+            SLOT(sendMouseEvent(int, int, int, int)));
     connect(widget, SIGNAL(sendStringToEmu(const char*)), _emulation,
             SLOT(sendString(const char*)));
 
@@ -319,8 +319,8 @@ void Session::addView(TerminalDisplay* widget)
     widget->setScreenWindow(_emulation->createWindow());
 
     //connect view signals and slots
-    QObject::connect(widget, SIGNAL(changedContentSizeSignal(int,int)), this,
-                     SLOT(onViewSizeChange(int,int)));
+    QObject::connect(widget, SIGNAL(changedContentSizeSignal(int, int)), this,
+                     SLOT(onViewSizeChange(int, int)));
 
     QObject::connect(widget, SIGNAL(destroyed(QObject*)), this,
                      SLOT(viewDestroyed(QObject*)));
@@ -440,7 +440,7 @@ void Session::run()
     // if a program was specified via setProgram(), but it couldn't be found, print a warning
     if (choice != 0 && choice < CHOICE_COUNT && !_program.isEmpty()) {
         terminalWarning(i18n("Could not find '%1', starting '%2' instead.  Please check your profile settings.", _program, exec));
-    // if none of the choices are available, print a warning
+        // if none of the choices are available, print a warning
     } else if (choice == CHOICE_COUNT) {
         terminalWarning(i18n("Could not find an interactive shell to start."));
         return;
@@ -464,17 +464,17 @@ void Session::run()
     // the color scheme as "black on white" or "white on black" depending on whether
     // the background color is deemed dark or not
     const QString backgroundColorHint = _hasDarkBackground ? "COLORFGBG=15;0" : "COLORFGBG=0;15";
-    addEnvironmentEntry( backgroundColorHint );
+    addEnvironmentEntry(backgroundColorHint);
 
-    addEnvironmentEntry( QString("SHELL_SESSION_ID=%1").arg(shellSessionId()) );
+    addEnvironmentEntry(QString("SHELL_SESSION_ID=%1").arg(shellSessionId()));
 
-    addEnvironmentEntry( QString("WINDOWID=%1").arg(QString::number(windowId())) );
+    addEnvironmentEntry(QString("WINDOWID=%1").arg(QString::number(windowId())));
 
     const QString dbusService = QDBusConnection::sessionBus().baseService();
-    addEnvironmentEntry( QString("KONSOLE_DBUS_SERVICE=%1").arg(dbusService) );
+    addEnvironmentEntry(QString("KONSOLE_DBUS_SERVICE=%1").arg(dbusService));
 
     const QString dbusObject = QString("/Sessions/%1").arg(QString::number(_sessionId));
-    addEnvironmentEntry( QString("KONSOLE_DBUS_SESSION=%1").arg(dbusObject) );
+    addEnvironmentEntry(QString("KONSOLE_DBUS_SESSION=%1").arg(dbusObject));
 
     int result = _shellProcess->start(exec,
                                       arguments,
@@ -678,7 +678,7 @@ void Session::updateTerminalSize()
     const int VIEW_COLUMNS_THRESHOLD = 2;
 
     //select largest number of lines and columns that will fit in all visible views
-    foreach ( TerminalDisplay* view, _views ) {
+    foreach(TerminalDisplay* view, _views) {
         if (view->isHidden() == false &&
                 view->lines() >= VIEW_LINES_THRESHOLD &&
                 view->columns() >= VIEW_COLUMNS_THRESHOLD) {
@@ -721,7 +721,7 @@ void Session::refresh()
 
 bool Session::kill(int signal)
 {
-    if ( _shellProcess->pid() <= 0 )
+    if (_shellProcess->pid() <= 0)
         return false;
 
     int result = ::kill(_shellProcess->pid(), signal);
@@ -802,8 +802,8 @@ void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
 void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 {
     // This slot should be triggered only one time
-    disconnect(_shellProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
-               this, SLOT(done(int,QProcess::ExitStatus)));
+    disconnect(_shellProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
+               this, SLOT(done(int, QProcess::ExitStatus)));
 
     if (!_autoClose) {
         _userTitle = i18nc("@info:shell This session is done", "Finished");
@@ -919,7 +919,7 @@ void Session::updateSessionProcessInfo()
     // at the moment to workaround the problem that processId() might
     // return 0
     if (!_sessionProcessInfo ||
-        ( processId() != 0 && processId() != _sessionProcessInfo->pid(&ok) ) ) {
+            (processId() != 0 && processId() != _sessionProcessInfo->pid(&ok))) {
         delete _sessionProcessInfo;
         _sessionProcessInfo = ProcessInfo::newInstance(processId());
         _sessionProcessInfo->setUserHomeDir();
@@ -1152,13 +1152,13 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
             this, SLOT(zmodemReadAndSendBlock()));
     connect(_zmodemProc, SIGNAL(readyReadStandardError()),
             this, SLOT(zmodemReadStatus()));
-    connect(_zmodemProc, SIGNAL(finished(int,QProcess::ExitStatus)),
+    connect(_zmodemProc, SIGNAL(finished(int, QProcess::ExitStatus)),
             this, SLOT(zmodemFinished()));
 
     _zmodemProc->start();
 
-    disconnect(_shellProcess, SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)));
-    connect(_shellProcess, SIGNAL(receivedData(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)));
+    disconnect(_shellProcess, SIGNAL(receivedData(const char*, int)), this, SLOT(onReceiveBlock(const char*, int)));
+    connect(_shellProcess, SIGNAL(receivedData(const char*, int)), this, SLOT(zmodemRcvBlock(const char*, int)));
 
     _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
                                        i18n("ZModem Progress"));
@@ -1221,8 +1221,8 @@ void Session::zmodemFinished()
         _zmodemBusy = false;
         delete process;    // Now, the KProcess may be disposed safely.
 
-        disconnect(_shellProcess, SIGNAL(receivedData(const char*,int)), this , SLOT(zmodemRcvBlock(const char*,int)));
-        connect(_shellProcess, SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)));
+        disconnect(_shellProcess, SIGNAL(receivedData(const char*, int)), this , SLOT(zmodemRcvBlock(const char*, int)));
+        connect(_shellProcess, SIGNAL(receivedData(const char*, int)), this, SLOT(onReceiveBlock(const char*, int)));
 
         _shellProcess->sendData("\030\030\030\030", 4); // Abort
         _shellProcess->sendData("\001\013\n", 3); // Try to get prompt back
@@ -1309,9 +1309,9 @@ QString Session::tabTitleFormat(int context) const
 
 void Session::setHistorySize(int lines)
 {
-    if ( lines < 0 ) {
+    if (lines < 0) {
         setHistoryType(HistoryTypeFile());
-    } else if ( lines == 0 ) {
+    } else if (lines == 0) {
         setHistoryType(HistoryTypeNone());
     } else {
         setHistoryType(CompactHistoryType(lines));
@@ -1446,11 +1446,11 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
     _sessions[session] = master;
 
     if (master) {
-        connect(session->emulation(), SIGNAL(sendData(const char*,int)), this,
-                SLOT(forwardData(const char*,int)));
+        connect(session->emulation(), SIGNAL(sendData(const char*, int)), this,
+                SLOT(forwardData(const char*, int)));
     } else {
-        disconnect(session->emulation(), SIGNAL(sendData(const char*,int)), this,
-                   SLOT(forwardData(const char*,int)));
+        disconnect(session->emulation(), SIGNAL(sendData(const char*, int)), this,
+                   SLOT(forwardData(const char*, int)));
     }
 }
 void SessionGroup::forwardData(const char* data, int size)
@@ -1465,7 +1465,7 @@ void SessionGroup::forwardData(const char* data, int size)
     }
 
     _inForwardData = true;
-    foreach ( Session* other, _sessions.keys() ) {
+    foreach(Session* other, _sessions.keys()) {
         if (!_sessions[other]) {
             other->emulation()->sendString(data, size);
         }

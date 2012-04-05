@@ -33,8 +33,8 @@
 #include <KConfigGroup>
 
 namespace {
-    const int FGCOLOR_INDEX = 0;
-    const int BGCOLOR_INDEX = 1;
+const int FGCOLOR_INDEX = 0;
+const int BGCOLOR_INDEX = 1;
 }
 
 using namespace Konsole;

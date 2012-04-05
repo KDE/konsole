@@ -112,8 +112,8 @@ static bool expandEnv(QString& text)
         //
         if (pos > 0 && text.at(pos - 1) == QLatin1Char('\\')) {
             pos++;
-        // Variable found => expand
-        //
+            // Variable found => expand
+            //
         } else {
             // Find the end of the variable = next '/' or ' '
             //

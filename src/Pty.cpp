@@ -172,7 +172,7 @@ void Pty::setInitialWorkingDirectory(const QString& dir)
 
     // remove trailing slash in the path when appropriate
     // example: /usr/share/icons/ ==> /usr/share/icons
-    if ( pwd.length() > 1 && pwd.endsWith(QLatin1Char('/')) ) {
+    if (pwd.length() > 1 && pwd.endsWith(QLatin1Char('/'))) {
         pwd.chop(1);
     }
 
@@ -187,7 +187,7 @@ void Pty::addEnvironmentVariables(const QStringList& environmentVariables)
 {
     bool isTermEnvAdded = false;
 
-    foreach ( const QString& pair, environmentVariables ) {
+    foreach(const QString& pair, environmentVariables) {
         // split on the first '=' character
         const int separator = pair.indexOf('=');
 
@@ -197,14 +197,14 @@ void Pty::addEnvironmentVariables(const QStringList& environmentVariables)
 
             setEnv(variable, value);
 
-            if ( variable == "TERM" ) {
+            if (variable == "TERM") {
                 isTermEnvAdded = true;
             }
         }
     }
 
     // extra safeguard to make sure $TERM is always set
-    if ( !isTermEnvAdded ) {
+    if (!isTermEnvAdded) {
         setEnv("TERM", "xterm");
     }
 }

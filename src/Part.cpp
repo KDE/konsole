@@ -100,7 +100,7 @@ void Part::createGlobalActions()
 void Part::setupActionsForSession(SessionController* controller)
 {
     KActionCollection* collection = controller->actionCollection();
-    collection->addAction("manage-profiles",_manageProfilesAction);
+    collection->addAction("manage-profiles", _manageProfilesAction);
 }
 
 bool Part::openFile()
@@ -134,7 +134,7 @@ void Part::startProgram(const QString& program,
     Q_ASSERT(activeSession());
 
     // do nothing if the session has already started running
-    if ( activeSession()->isRunning() )
+    if (activeSession()->isRunning())
         return;
 
     if (!program.isEmpty() && !arguments.isEmpty()) {
@@ -157,7 +157,7 @@ void Part::showShellInDir(const QString& dir)
     Q_ASSERT(activeSession());
 
     // do nothing if the session has already started running
-    if ( activeSession()->isRunning() )
+    if (activeSession()->isRunning())
         return;
 
     if (!dir.isEmpty())
@@ -211,7 +211,7 @@ QString Part::currentWorkingDirectory() const
 void Part::createSession(const QString& profileName, const QString& directory)
 {
     Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
-    if ( !profileName.isEmpty() )
+    if (!profileName.isEmpty())
         profile = ProfileManager::instance()->loadProfile(profileName);
 
     Q_ASSERT(profile);
@@ -219,7 +219,7 @@ void Part::createSession(const QString& profileName, const QString& directory)
     Session* session = SessionManager::instance()->createSession(profile);
 
     // override the default directory specified in the profile
-    if (!directory.isEmpty() && profile->startInCurrentSessionDir() )
+    if (!directory.isEmpty() && profile->startInCurrentSessionDir())
         session->setInitialWorkingDirectory(directory);
 
     _viewManager->createView(session);
@@ -240,8 +240,8 @@ void Part::activeViewChanged(SessionController* controller)
         removeChildClient(_pluggedController);
         disconnect(_pluggedController, SIGNAL(titleChanged(ViewProperties*)), this,
                    SLOT(activeViewTitleChanged(ViewProperties*)));
-        disconnect(_pluggedController,SIGNAL(currentDirectoryChanged(QString)),this,
-                    SIGNAL(currentDirectoryChanged(QString)));
+        disconnect(_pluggedController, SIGNAL(currentDirectoryChanged(QString)), this,
+                   SIGNAL(currentDirectoryChanged(QString)));
     }
 
     // insert new controller
@@ -251,11 +251,11 @@ void Part::activeViewChanged(SessionController* controller)
     connect(controller, SIGNAL(titleChanged(ViewProperties*)), this,
             SLOT(activeViewTitleChanged(ViewProperties*)));
     activeViewTitleChanged(controller);
-    connect(controller,SIGNAL(currentDirectoryChanged(QString)),this,
+    connect(controller, SIGNAL(currentDirectoryChanged(QString)), this,
             SIGNAL(currentDirectoryChanged(QString)));
 
-    const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*,bool&));
-    const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*,bool&));
+    const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*, bool&));
+    const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*, bool&));
 
     disconnect(controller->view(), displaySignal, this, partSlot);
     connect(controller->view(), displaySignal, this, partSlot);

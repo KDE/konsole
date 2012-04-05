@@ -220,7 +220,7 @@ void Vt102Emulation::addToCurrentToken(int cc)
 // Character Class flags used while decoding
 const int CTL =  1;  // Control character
 const int CHR =  2;  // Printable character
-const int CPN =  4;  // TODO: Document me 
+const int CPN =  4;  // TODO: Document me
 const int DIG =  8;  // Digit
 const int SCS = 16;  // Select Character Set
 const int GRP = 32;  // TODO: Document me

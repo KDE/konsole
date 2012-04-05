@@ -88,7 +88,7 @@ bool shouldUseNewProcess()
     const KCmdLineArgs* konsoleArgs = KCmdLineArgs::parsedArgs();
 
     // the only way to create new tab is to reuse existing Konsole process.
-    if ( konsoleArgs->isSet("new-tab") ) {
+    if (konsoleArgs->isSet("new-tab")) {
         return false;
     }
 
@@ -97,7 +97,7 @@ bool shouldUseNewProcess()
     // Konsole and any debug output or warnings from Konsole are written to
     // the current terminal
     bool hasControllingTTY = false;
-    if ( KDE_open("/dev/tty", O_RDONLY) != -1 ) {
+    if (KDE_open("/dev/tty", O_RDONLY) != -1) {
         hasControllingTTY = true;
     }
 

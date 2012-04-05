@@ -80,7 +80,7 @@ public slots:
      *
      * This is highly experimental. Do not use it at the moment
      */
-    void createSession(const QString& profileName=QString(), const QString& directory=QString());
+    void createSession(const QString& profileName = QString(), const QString& directory = QString());
 
     /**
      * Returns a list of names of all available proifles
@@ -206,7 +206,7 @@ private slots:
 private:
     Session* activeSession() const;
     void createGlobalActions();
-    void setupActionsForSession(SessionController* );
+    void setupActionsForSession(SessionController*);
 
 private:
     ViewManager* _viewManager;

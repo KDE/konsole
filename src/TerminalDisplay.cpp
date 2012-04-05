@@ -260,17 +260,17 @@ void TerminalDisplay::setLineSpacing(uint i)
 /* ------------------------------------------------------------------------- */
 
 namespace Konsole {
-    /**
-     * This function installs the factory function which lets Qt instanciate the QAccessibleInterface
-     * for the TerminalDisplay.
-     */
-    QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *object)
-    {
-        Q_UNUSED(key)
-        if (TerminalDisplay *display = qobject_cast<TerminalDisplay*>(object))
-            return new TerminalDisplayAccessible(display);
-        return 0;
-    }
+/**
+ * This function installs the factory function which lets Qt instanciate the QAccessibleInterface
+ * for the TerminalDisplay.
+ */
+QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *object)
+{
+    Q_UNUSED(key)
+    if (TerminalDisplay *display = qobject_cast<TerminalDisplay*>(object))
+        return new TerminalDisplayAccessible(display);
+    return 0;
+}
 }
 
 /* ------------------------------------------------------------------------- */
@@ -379,7 +379,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
 
 
 #ifndef QT_NO_ACCESSIBILITY
-  QAccessible::installFactory(Konsole::accessibleInterfaceFactory);
+    QAccessible::installFactory(Konsole::accessibleInterfaceFactory);
 #endif
 }
 
@@ -1223,7 +1223,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     // and draw appropriate visuals to indicate the presence of the hotspot
 
     QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
-    foreach ( Filter::HotSpot* spot, spots ) {
+    foreach(Filter::HotSpot* spot, spots) {
 
         QRegion region;
         if (_underlineLinks && spot->type() == Filter::HotSpot::Link) {
@@ -1301,8 +1301,8 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                     painter.drawLine(r.left() , underlinePos ,
                                      r.right() , underlinePos);
                 }
-            // Marker hotspots simply have a transparent rectanglular shape
-            // drawn on top of them
+                // Marker hotspots simply have a transparent rectanglular shape
+                // drawn on top of them
             } else if (spot->type() == Filter::HotSpot::Marker) {
                 //TODO - Do not use a hardcoded color for this
                 painter.fillRect(r, QBrush(QColor(255, 0, 0, 120)));
@@ -1968,9 +1968,9 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         QChar selClass;
 
         const bool left_not_right = (here.y() < _iPntSelCorr.y() ||
-                               (here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x()));
+                                     (here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x()));
         const bool old_left_not_right = (_pntSelCorr.y() < _iPntSelCorr.y() ||
-                                   (_pntSelCorr.y() == _iPntSelCorr.y() && _pntSelCorr.x() < _iPntSelCorr.x()));
+                                         (_pntSelCorr.y() == _iPntSelCorr.y() && _pntSelCorr.x() < _iPntSelCorr.x()));
         swapping = left_not_right != old_left_not_right;
 
         // Find left (left_not_right ? from here : from start)
@@ -2053,9 +2053,9 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         QChar selClass;
 
         const bool left_not_right = (here.y() < _iPntSelCorr.y() ||
-                               (here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x()));
+                                     (here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x()));
         const bool old_left_not_right = (_pntSelCorr.y() < _iPntSelCorr.y() ||
-                                   (_pntSelCorr.y() == _iPntSelCorr.y() && _pntSelCorr.x() < _iPntSelCorr.x()));
+                                         (_pntSelCorr.y() == _iPntSelCorr.y() && _pntSelCorr.x() < _iPntSelCorr.x()));
         swapping = left_not_right != old_left_not_right;
 
         // Find left (left_not_right ? from here : from start)
@@ -2735,7 +2735,7 @@ bool TerminalDisplay::event(QEvent* event)
     return eventHandled ? true : QWidget::event(event);
 }
 
-void TerminalDisplay::contextMenuEvent(QContextMenuEvent* )
+void TerminalDisplay::contextMenuEvent(QContextMenuEvent*)
 {
 // FIXME: On Mac OSX opening some dialogs cause the context menu to
 //  get displayed.  Example: Scrollback dialog via context menu.
@@ -2855,14 +2855,14 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             QList<QAction*> additionalActions;
             additionalActions.append(pasteAction);
 
-            if ( urls.count() == 1 ) {
+            if (urls.count() == 1) {
 
                 const KUrl url = KIO::NetAccess::mostLocalUrl(urls[0] , 0);
 
-                if ( url.isLocalFile() ) {
+                if (url.isLocalFile()) {
                     const QFileInfo fileInfo(url.path());
 
-                    if ( fileInfo.isDir() ) {
+                    if (fileInfo.isDir()) {
                         QAction* cdAction = new QAction(i18n("Change &Directory To"), this);
                         dropText = QLatin1String(" cd ") + dropText + QChar('\n');
                         cdAction->setData(dropText);
