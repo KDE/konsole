@@ -31,7 +31,6 @@
 #include <KLocalizedString>
 #include <KAction>
 #include <KActionCollection>
-#include <KXMLGUIFactory>
 #include <KConfigGroup>
 
 // Konsole
