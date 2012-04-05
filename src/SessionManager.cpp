@@ -23,9 +23,8 @@
 #include "SessionManager.h"
 
 // Qt
-#include <QtCore/QList>
+#include <QtCore/QStringList>
 #include <QtCore/QSignalMapper>
-#include <QtCore/QString>
 #include <QtCore/QTextCodec>
 
 // KDE

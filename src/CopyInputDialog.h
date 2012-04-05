@@ -22,6 +22,7 @@
 
 // Qt
 #include <QtCore/QPointer>
+#include <QtCore/QSet>
 
 // KDE
 #include <KDialog>

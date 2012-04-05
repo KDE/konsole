@@ -23,12 +23,9 @@
 #define SESSIONMANAGER_H
 
 // Qt
-#include <QtGui/QKeySequence>
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QHash>
 #include <QtCore/QList>
-#include <QtCore/QSet>
-#include <QtCore/QStringList>
 #include <QtCore/QVariant>
 
 // Konsole
