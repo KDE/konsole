@@ -321,11 +321,11 @@ void ColorScheme::readColorEntry(const KConfig& config , int index)
         entry.fontWeight = configGroup.readEntry("Bold", false) ? ColorEntry::Bold :
                            ColorEntry::UseCurrentFormat;
 
+    setColorTableEntry(index , entry);
+
     const quint16 hue = configGroup.readEntry("MaxRandomHue", 0);
     const quint8 value = configGroup.readEntry("MaxRandomValue", 0);
     const quint8 saturation = configGroup.readEntry("MaxRandomSaturation", 0);
-
-    setColorTableEntry(index , entry);
 
     if (hue != 0 || value != 0 || saturation != 0)
         setRandomizationRange(index , hue , saturation , value);
