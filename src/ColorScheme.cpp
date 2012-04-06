@@ -369,7 +369,7 @@ void ColorScheme::writeColorEntry(KConfig& config , int index) const
 
 void ColorScheme::setWallpaper(const QString& path)
 {
-    _wallpaper.attach(new ColorSchemeWallpaper(path));
+    _wallpaper = new ColorSchemeWallpaper(path);
 }
 
 ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const
