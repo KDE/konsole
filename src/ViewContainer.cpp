@@ -435,8 +435,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     connect(_tabBar, SIGNAL(newTabRequest()), this, SIGNAL(newViewRequest()));
     connect(_tabBar, SIGNAL(wheelDelta(int)), this, SLOT(wheelScrolled(int)));
     connect(_tabBar, SIGNAL(initiateDrag(int)), this, SLOT(startTabDrag(int)));
-    connect(_tabBar, SIGNAL(contextMenu(int, QPoint)), this,
-            SLOT(openTabContextMenu(int, QPoint)));
+    connect(_tabBar, SIGNAL(contextMenu(int,QPoint)), this,
+            SLOT(openTabContextMenu(int,QPoint)));
 
     // The context menu of tab bar
     _contextPopupMenu = new KMenu(_tabBar);

@@ -616,11 +616,11 @@ ViewContainer* ViewManager::createContainer()
     case TabbedNavigation: {
         container = new TabbedViewContainer(_navigationPosition, _viewSplitter);
 
-        connect(container, SIGNAL(detachTab(ViewContainer*, QWidget*)),
-                this, SLOT(detachView(ViewContainer*, QWidget*))
+        connect(container, SIGNAL(detachTab(ViewContainer*,QWidget*)),
+                this, SLOT(detachView(ViewContainer*,QWidget*))
                );
-        connect(container, SIGNAL(closeTab(ViewContainer*, QWidget*)),
-                this, SLOT(closeTabFromContainer(ViewContainer*, QWidget*)));
+        connect(container, SIGNAL(closeTab(ViewContainer*,QWidget*)),
+                this, SLOT(closeTabFromContainer(ViewContainer*,QWidget*)));
     }
     break;
     case NoNavigation:
@@ -631,15 +631,15 @@ ViewContainer* ViewManager::createContainer()
     applyNavigationOptions(container);
 
     // connect signals and slots
-    connect(container , SIGNAL(viewAdded(QWidget*, ViewProperties*)) , _containerSignalMapper ,
+    connect(container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
             SLOT(map()));
     connect(container , SIGNAL(viewRemoved(QWidget*)) , _containerSignalMapper ,
             SLOT(map()));
     _containerSignalMapper->setMapping(container, container);
 
     connect(container, SIGNAL(newViewRequest()), this, SIGNAL(newViewRequest()));
-    connect(container, SIGNAL(moveViewRequest(int, int, bool&)),
-            this , SLOT(containerMoveViewRequest(int, int, bool&)));
+    connect(container, SIGNAL(moveViewRequest(int,int,bool&)),
+            this , SLOT(containerMoveViewRequest(int,int,bool&)));
     connect(container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewDestroyed(QWidget*)));
     connect(container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
 

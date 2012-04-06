@@ -425,7 +425,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->colorSchemeList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
     connect(_ui->colorSchemeList->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
+            SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             this, SLOT(colorSchemeSelected()));
     connect(_ui->colorSchemeList, SIGNAL(entered(QModelIndex)), this,
             SLOT(previewColorScheme(QModelIndex)));
@@ -816,7 +816,7 @@ void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* profile */)
     updateKeyBindingsList(true);
 
     connect(_ui->keyBindingList->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
+            SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             SLOT(keyBindingSelected()));
     connect(_ui->newKeyBindingsButton, SIGNAL(clicked()), this,
             SLOT(newKeyBinding()));

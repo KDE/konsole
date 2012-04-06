@@ -1399,8 +1399,8 @@ void SaveHistoryTask::execute()
 
         _jobSession.insert(job, jobInfo);
 
-        connect(job, SIGNAL(dataReq(KIO::Job*, QByteArray&)),
-                this, SLOT(jobDataRequested(KIO::Job*, QByteArray&)));
+        connect(job, SIGNAL(dataReq(KIO::Job*,QByteArray&)),
+                this, SLOT(jobDataRequested(KIO::Job*,QByteArray&)));
         connect(job, SIGNAL(result(KJob*)),
                 this, SLOT(jobResult(KJob*)));
     }
