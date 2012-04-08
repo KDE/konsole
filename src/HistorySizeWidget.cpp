@@ -43,7 +43,7 @@ HistorySizeWidget::HistorySizeWidget(QWidget* parent)
     _ui->unlimitedWarningWidget->setText(i18nc("@info:status",
         "When using this option, the scrollback data will be written "
         "unencrypted to temporary files. Those temporary files will be "
-        "deleted automatically when quitting Konsole."));
+        "deleted automatically when Konsole is closed in a normal manner."));
 
     // focus and select the spinner automatically when appropriate
     _ui->fixedSizeHistoryButton->setFocusProxy(_ui->historyLineSpinner);
