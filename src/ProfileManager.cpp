@@ -74,11 +74,22 @@ ProfileManager::ProfileManager()
     _fallbackProfile = Profile::Ptr(new FallbackProfile);
     addProfile(_fallbackProfile);
 
-    //locate and load default profile
-    KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig("konsolerc");
-    const KConfigGroup group = konsoleConfig->group("Desktop Entry");
-    const QString defaultProfileFileName = group.readEntry("DefaultProfile", "Shell.profile");
+    // lookup the default profile specifed in <App>rc
+    // for stand-alone Konsole, appConfig is just konsolerc
+    // for konsolepart, appConfig might be yakuakerc, dolphinrc, katerc...
+    KSharedConfigPtr appConfig = KGlobal::config();
+    KConfigGroup group = appConfig->group("Desktop Entry");
+    QString defaultProfileFileName = group.readEntry("DefaultProfile", "");
 
+    // if the hosting application of konsolepart does not specify its own
+    // default profile, use the default profile of stand-alone Konsole.
+    if ( defaultProfileFileName.isEmpty() ) {
+        KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig("konsolerc");
+        group = konsoleConfig->group("Desktop Entry");
+        defaultProfileFileName = group.readEntry("DefaultProfile", "Shell.profile");
+    }
+
+    // load the default profile
     const QString path = KStandardDirs::locate("data", "konsole/" + defaultProfileFileName);
     if (!path.isEmpty()) {
         Profile::Ptr profile = loadProfile(path);
@@ -269,14 +280,9 @@ void ProfileManager::saveSettings()
     // save favorites
     saveFavorites();
 
-    // ensure shortcuts/favorites settings are synced into disk
+    // ensure default/favorites/shortcuts settings are synced into disk
     KSharedConfigPtr appConfig = KGlobal::config();
     appConfig->sync();
-
-    // FIXME: another workaround for using 'DefaultProfile' entry in 'konsolerc'
-    KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig("konsolerc");
-    konsoleConfig->sync();
-
 }
 
 QList<Profile::Ptr> ProfileManager::sortedFavorites()
@@ -425,9 +431,8 @@ void ProfileManager::saveDefaultProfile()
 
     QFileInfo fileInfo(path);
 
-    // TODO: writing to konsolerc is a temporary workaround
-    KSharedConfigPtr config = KSharedConfig::openConfig("konsolerc");
-    KConfigGroup group = config->group("Desktop Entry");
+    KSharedConfigPtr appConfig = KGlobal::config();
+    KConfigGroup group = appConfig->group("Desktop Entry");
     group.writeEntry("DefaultProfile", fileInfo.fileName());
 }
 
