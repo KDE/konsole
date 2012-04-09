@@ -137,8 +137,8 @@ FallbackProfile::FallbackProfile()
     // non-directory file name
     setProperty(Path, "FALLBACK/");
     setProperty(Command, qgetenv("SHELL"));
-    setProperty(Icon, "utilities-terminal");
     setProperty(Arguments, QStringList() << qgetenv("SHELL"));
+    setProperty(Icon, "utilities-terminal");
     setProperty(Environment, QStringList() << "TERM=xterm");
     setProperty(LocalTabTitleFormat, "%d : %n");
     setProperty(RemoteTabTitleFormat, "(%u) %H");
