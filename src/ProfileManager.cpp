@@ -74,7 +74,7 @@ ProfileManager::ProfileManager()
     _fallbackProfile = Profile::Ptr(new FallbackProfile);
     addProfile(_fallbackProfile);
 
-    // lookup the default profile specifed in <App>rc
+    // lookup the default profile specified in <App>rc
     // for stand-alone Konsole, appConfig is just konsolerc
     // for konsolepart, appConfig might be yakuakerc, dolphinrc, katerc...
     KSharedConfigPtr appConfig = KGlobal::config();
