@@ -452,10 +452,13 @@ void Session::run()
                             QStringList() << exec :
                             _arguments;
 
-    if (!_initialWorkingDir.isEmpty())
+    if (!_initialWorkingDir.isEmpty()) {
         _shellProcess->setInitialWorkingDirectory(_initialWorkingDir);
-    else
-        _shellProcess->setInitialWorkingDirectory(QDir::homePath());
+    } else {
+        _shellProcess->setInitialWorkingDirectory(QDir::currentPath());
+        // for all following invocation, use $HOME as fallback
+        QDir::setCurrent(QDir::homePath());
+    }
 
     _shellProcess->setFlowControlEnabled(_flowControlEnabled);
     _shellProcess->setEraseChar(_emulation->eraseChar());
