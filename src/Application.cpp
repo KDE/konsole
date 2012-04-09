@@ -222,6 +222,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     const QString& title = tokens["title"];
     const QString& command = tokens["command"];
     const QString& profile = tokens["profile"];
+    const QString& workdir = tokens["workdir"];
 
     Profile::Ptr baseProfile;
     if (!profile.isEmpty()) {
@@ -253,6 +254,11 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
 
     if (args->isSet("workdir")) {
         newProfile->setProperty(Profile::Directory, args->getOption("workdir"));
+        shouldUseNewProfile = true;
+    }
+
+    if (!workdir.isEmpty()) {
+        newProfile->setProperty(Profile::Directory, workdir);
         shouldUseNewProfile = true;
     }
 
