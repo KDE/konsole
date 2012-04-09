@@ -27,6 +27,7 @@
 // Standard
 #include <stdlib.h>
 #include <signal.h>
+#include <unistd.h>
 
 // Qt
 #include <QtGui/QApplication>
@@ -716,6 +717,7 @@ void Session::refresh()
 
     const QSize existingSize = _shellProcess->windowSize();
     _shellProcess->setWindowSize(existingSize.height(), existingSize.width() + 1);
+    usleep(10); // introduce small dealy to avoid changing size too quickly
     _shellProcess->setWindowSize(existingSize.height(), existingSize.width());
 }
 
