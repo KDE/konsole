@@ -743,7 +743,7 @@ void Session::refresh()
 
     const QSize existingSize = _shellProcess->windowSize();
     _shellProcess->setWindowSize(existingSize.height(),existingSize.width()+1);
-    usleep(10); // introduce small delay to avoid changing size too quickly
+    usleep(500); // introduce small delay to avoid changing size too quickly
     _shellProcess->setWindowSize(existingSize.height(),existingSize.width());
 }
 
