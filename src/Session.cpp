@@ -361,11 +361,11 @@ void Session::removeView(TerminalDisplay* widget)
     }
 }
 
+// Upon a KPty error, there is no description on what that error was...
+// Check to see if the given program is executable.
 QString Session::checkProgram(const QString& program) const
 {
-    // Upon a KPty error, there is no description on what that error was...
-    // Check to see if the given program is executable.
-    QString exec = QFile::encodeName(program);
+    QString exec = program;
 
     if (exec.isEmpty())
         return QString();
