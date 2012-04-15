@@ -233,7 +233,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window
 
         for (int i = 0; i < lineParts.size(); ++i) {
             QString key = lineParts.at(i).section(':', 0, 0).trimmed().toLower();
-            QString value = lineParts.at(i).section(':', 1, 1).trimmed();
+            QString value = lineParts.at(i).section(':', 1, -1).trimmed();
             lineTokens[key] = value;
 
         }
