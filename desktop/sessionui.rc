@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="19">
+<kpartgui name="session" version="20">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
@@ -41,6 +41,7 @@
     <Menu name="session-popup-menu">
         <Action name="edit_copy"/>
         <Action name="edit_paste"/>
+        <Action name="web-search"/>
         <Action name="open-browser"/>
         <Separator/>
         <Action name="set-encoding"/>

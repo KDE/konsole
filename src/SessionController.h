@@ -196,15 +196,15 @@ public slots:
     void setupPrimaryScreenSpecificActions(bool use);
 
     /**
+     * update actions which are closely related with the selected text.
+     */
+    void selectionChanged(const QString& selectedText);
+
+    /**
      * close the associated session. This might involve user interaction for
      * confirmation.
      */
     void closeSession();
-
-    /**
-     * enable or disable the copy action
-     */
-    void updateCopyAction(const QString & text);
 
     /**  Increase font size */
     void increaseTextSize();
@@ -237,6 +237,8 @@ private slots:
     void monitorSilence(bool monitor);
     void renameSession();
     void switchProfile(Profile::Ptr profile);
+    void handleWebShortcutAction();
+    void configureWebShortcuts();
 
     // other
     void prepareSwitchProfileMenu();
@@ -270,6 +272,9 @@ private slots:
     /* Returns true if called within a KPart; false if called within Konsole. */
     bool isKonsolePart() const;
 
+    // update actions related with selected text
+    void updateCopyAction(const QString& selectedText);
+    void updateWebSearchMenu();
 
 private:
     // begins the search
@@ -314,11 +319,14 @@ private:
     KCodecAction* _codecAction;
 
     KActionMenu* _switchProfileMenu;
+    KActionMenu* _webSearchMenu;
 
     bool _listenForScreenWindowUpdates;
     bool _preventClose;
 
     bool _keepIconUntilInteraction;
+
+    QString _selectedText;
 
     static QSet<SessionController*> _allControllers;
     static int _lastControllerId;

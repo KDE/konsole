@@ -516,7 +516,7 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     connect(session , SIGNAL(primaryScreenInUse(bool)) ,
             controller , SLOT(setupPrimaryScreenSpecificActions(bool)));
     connect(session , SIGNAL(selectedText(QString)) ,
-            controller , SLOT(updateCopyAction(QString)));
+            controller , SLOT(selectionChanged(QString)));
     connect(view , SIGNAL(destroyed()) , controller , SLOT(deleteLater()));
 
     // if this is the first controller created then set it as the active controller

@@ -36,6 +36,7 @@
 #include <KMessageBox>
 #include <KRun>
 #include <KShell>
+#include <KToolInvocation>
 #include <KStandardDirs>
 #include <KToggleAction>
 #include <KSelectAction>
@@ -44,6 +45,8 @@
 #include <KXMLGUIFactory>
 #include <KXMLGUIBuilder>
 #include <KDebug>
+#include <KUriFilter>
+#include <KStringHandler>
 #include <kcodecaction.h>
 
 // Konsole
@@ -97,6 +100,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _searchBar(0)
     , _codecAction(0)
     , _switchProfileMenu(0)
+    , _webSearchMenu(0)
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
     , _keepIconUntilInteraction(false)
@@ -332,13 +336,87 @@ void SessionController::setupPrimaryScreenSpecificActions(bool use)
     selectAllAction->setEnabled(use);
 }
 
-void SessionController::updateCopyAction(const QString& text)
+void SessionController::selectionChanged(const QString& selectedText)
 {
-    KActionCollection* collection = actionCollection();
-    QAction* copyAction = collection->action("edit_copy");
+    _selectedText = selectedText;
+    updateCopyAction(selectedText);
+    updateWebSearchMenu();
+}
 
-    // copy action is meaningful only when some text is selcted.
-    copyAction->setEnabled(!text.isEmpty());
+void SessionController::updateCopyAction(const QString& selectedText)
+{
+    QAction* copyAction = actionCollection()->action("edit_copy");
+
+    // copy action is meaningful only when some text is selected.
+    copyAction->setEnabled(!selectedText.isEmpty());
+}
+
+void SessionController::updateWebSearchMenu()
+{
+    // reset
+    _webSearchMenu->setVisible(false);
+    _webSearchMenu->menu()->clear();
+
+    if ( _selectedText.isEmpty() )
+        return ;
+
+    QString searchText = _selectedText;
+    searchText = searchText.replace('\n', ' ').replace('\r', ' ').simplified();
+
+    if (searchText.isEmpty())
+        return;
+
+    KUriFilterData filterData(searchText);
+    filterData.setSearchFilteringOptions(KUriFilterData::RetrievePreferredSearchProvidersOnly);
+
+    if (KUriFilter::self()->filterSearchUri(filterData, KUriFilter::NormalTextFilter)) {
+        const QStringList searchProviders = filterData.preferredSearchProviders();
+        if (!searchProviders.isEmpty()) {
+
+            _webSearchMenu->setText(i18n("Search for '%1' with",  KStringHandler::rsqueeze(searchText, 16)));
+
+            KAction* action = 0;
+
+            foreach(const QString& searchProvider, searchProviders)
+            {
+                action = new KAction(searchProvider, _webSearchMenu);
+                action->setIcon(KIcon(filterData.iconNameForPreferredSearchProvider(searchProvider)));
+                action->setData(filterData.queryForPreferredSearchProvider(searchProvider));
+                connect(action, SIGNAL(triggered()), this, SLOT(handleWebShortcutAction()));
+                _webSearchMenu->addAction(action);
+            }
+
+            _webSearchMenu->addSeparator();
+
+            action = new KAction(i18n("Configure Web Shortcuts..."), _webSearchMenu);
+            action->setIcon(KIcon("configure"));
+            connect(action, SIGNAL(triggered()), this, SLOT(configureWebShortcuts()));
+            _webSearchMenu->addAction(action);
+
+            _webSearchMenu->setVisible(true);
+        }
+
+    }
+
+}
+
+void SessionController::handleWebShortcutAction()
+{
+    KAction* action = qobject_cast<KAction*>(sender());
+    if (!action)
+        return;
+
+    KUriFilterData filterData(action->data().toString());
+
+    if (KUriFilter::self()->filterUri(filterData, QStringList() << "kurisearchfilter")) {
+        const KUrl& url = filterData.uri();
+        new KRun(url, QApplication::activeWindow(), 0, true, true);
+    }
+}
+
+void SessionController::configureWebShortcuts()
+{
+    KToolInvocation::kdeinitExec("kcmshell4", QStringList() << "ebrowsing");
 }
 
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
@@ -468,6 +546,12 @@ void SessionController::setupCommonActions()
     action = collection->addAction("paste-selection", this, SLOT(pasteFromXSelection()));
     action->setText(i18n("Paste Selection"));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Insert));
+
+    _webSearchMenu = new KActionMenu(i18n("Web Search"), _view);
+    _webSearchMenu->setIcon(KIcon("preferences-web-browser-shortcuts"));
+    _webSearchMenu->setVisible(false);
+    collection->addAction("web-search", _webSearchMenu);
+
 
     action = collection->addAction("select-all", this, SLOT(selectAll()));
     action->setText(i18n("&Select All"));
@@ -1189,10 +1273,15 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         QAction* contentSeparator = new QAction(popup);
         contentSeparator->setSeparator(true);
         contentActions << contentSeparator;
+        popup->insertActions(popup->actions().value(0, 0), contentActions);
+
+        // always update this submenu before showing the context menu,
+        // because the available search services might have changed
+        // since the context menu is shown last time
+        updateWebSearchMenu();
 
         _preventClose = true;
 
-        popup->insertActions(popup->actions().value(0, 0), contentActions);
         QAction* chosen = popup->exec(_view->mapToGlobal(position));
 
         // check for validity of the pointer to the popup menu
