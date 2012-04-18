@@ -60,8 +60,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
     fillAboutData(about);
 
     KCmdLineArgs::init(argc, argv, &about);
-    KUniqueApplication::addCmdLineOptions();
-    KCmdLineOptions konsoleOptions;
+    KCmdLineArgs::addStdCmdLineOptions();  // Qt and KDE options
+    KUniqueApplication::addCmdLineOptions(); // KUniqueApplication options
+    KCmdLineOptions konsoleOptions; // Konsole options
     fillCommandLineOptions(konsoleOptions);
     KCmdLineArgs::addCmdLineOptions(konsoleOptions);
 
