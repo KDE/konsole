@@ -86,6 +86,34 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 }
 bool shouldUseNewProcess()
 {
+    // The "unique process" model of konsole is incompatible with some or all
+    // Qt/KDE options. When those incompatile options are given, konsole must
+    // new new process
+    //
+    // TODO: make sure the existing list is OK and add more incompatible options.
+
+    // take Qt options into consideration
+    const KCmdLineArgs* qtArgs = KCmdLineArgs::parsedArgs("qt");
+    QStringList qtProblematicOptions;
+    qtProblematicOptions << "display" << "session" << "name"
+                         << "visual" << "reverse" << "stylesheet"
+                         << "graphicssystem";
+    foreach(const QString& option, qtProblematicOptions) {
+        if ( qtArgs->isSet(option.toLocal8Bit()) ) {
+            return true;
+        }
+    }
+
+    // take KDE options into consideration
+    const KCmdLineArgs* kdeArgs = KCmdLineArgs::parsedArgs("kde");
+    QStringList kdeProblematicOptions;
+    kdeProblematicOptions << "config" << "style" << "waitforwm";
+    foreach(const QString& option, kdeProblematicOptions) {
+        if ( kdeArgs->isSet(option.toLocal8Bit()) ) {
+            return true;
+        }
+    }
+
     const KCmdLineArgs* kUniqueAppArgs = KCmdLineArgs::parsedArgs("kuniqueapp");
 
     // when user asks konsole to run in foreground through the --nofork option
