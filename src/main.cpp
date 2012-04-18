@@ -60,10 +60,10 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
     fillAboutData(about);
 
     KCmdLineArgs::init(argc, argv, &about);
-    KCmdLineOptions options;
-    fillCommandLineOptions(options);
-    KCmdLineArgs::addCmdLineOptions(options);
     KUniqueApplication::addCmdLineOptions();
+    KCmdLineOptions konsoleOptions;
+    fillCommandLineOptions(konsoleOptions);
+    KCmdLineArgs::addCmdLineOptions(konsoleOptions);
 
     KUniqueApplication::StartFlags startFlags;
     if (shouldUseNewProcess())
