@@ -26,9 +26,9 @@
 #include <QtCore/QFile>
 
 // KDE
+#include <KConfig>
 #include <KConfigGroup>
 #include <KGlobal>
-#include <KGlobalSettings>
 #include <KStandardDirs>
 
 // Konsole
