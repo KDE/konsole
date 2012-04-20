@@ -73,15 +73,15 @@ SessionManager* SessionManager::instance()
     return theSessionManager;
 }
 
-
 void SessionManager::closeAllSessions()
 {
     // close remaining sessions
-    foreach(Session * session , _sessions) {
+    foreach(Session* session , _sessions) {
         session->close();
     }
     _sessions.clear();
 }
+
 const QList<Session*> SessionManager::sessions() const
 {
     return _sessions;
@@ -188,9 +188,13 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
         session->setEnvironment(environment);
     }
 
-    const int columns = profile->property<int>(Profile::TerminalColumns);
-    const int rows = profile->property<int>(Profile::TerminalRows);
-    session->setPreferredSize( QSize(columns, rows) );
+    if ( apply.shouldApply(Profile::TerminalColumns) ||
+         apply.shouldApply(Profile::TerminalRows) ) {
+
+        const int columns = profile->property<int>(Profile::TerminalColumns);
+        const int rows = profile->property<int>(Profile::TerminalRows);
+        session->setPreferredSize( QSize(columns, rows) );
+    }
 
     if (apply.shouldApply(Profile::Icon))
         session->setIconName(profile->icon());

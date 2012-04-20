@@ -356,9 +356,6 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         return;
     }
 
-    // apply the changes to existing sessions
-    //applyProfile(profile, true);
-
     // notify the world about the change
     emit profileChanged(profile);
 
