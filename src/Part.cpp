@@ -260,6 +260,9 @@ void Part::activeViewChanged(SessionController* controller)
     disconnect(controller->view(), displaySignal, this, partSlot);
     connect(controller->view(), displaySignal, this, partSlot);
 
+    // set the current session's search bar
+    controller->setSearchBar(_viewManager->searchBar());
+
     _pluggedController = controller;
 }
 
