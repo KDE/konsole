@@ -88,7 +88,7 @@ bool shouldUseNewProcess()
 {
     // The "unique process" model of konsole is incompatible with some or all
     // Qt/KDE options. When those incompatile options are given, konsole must
-    // new new process
+    // use new process
     //
     // TODO: make sure the existing list is OK and add more incompatible options.
 
