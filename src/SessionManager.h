@@ -74,7 +74,7 @@ public:
      * send keyboard or mouse input to it.
      *
      * @param profile A profile containing the settings for the new session.  If @p profile
-     * is null the default profile (see defaultProfile()) will be used.
+     * is null the default profile (see ProfileManager::defaultProfile()) will be used.
      */
     Session* createSession(Profile::Ptr profile = Profile::Ptr());
 
@@ -89,7 +89,7 @@ public:
      */
     const QList<Session*> sessions() const;
 
-    // session management
+    // System session management
     void saveSessions(KConfig* config);
     void restoreSessions(KConfig* config);
     int  getRestoreId(Session* session);
@@ -102,8 +102,6 @@ signals:
      * its current profile.
      */
     void sessionUpdated(Session* session);
-
-public slots:
 
 protected slots:
 
@@ -128,7 +126,7 @@ private:
     // are set in the profile @p key are updated
     void applyProfile(Profile::Ptr profile , bool modifiedPropertiesOnly);
 
-    // apples updates to the profile @p profile to the session @p session
+    // applies updates to the profile @p profile to the session @p session
     // if modifiedPropertiesOnly is true, only properties which
     // are set in @p profile are update ( ie. properties for which profile->isPropertySet(<property>)
     // returns true )
