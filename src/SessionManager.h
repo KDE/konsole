@@ -23,10 +23,8 @@
 #define SESSIONMANAGER_H
 
 // Qt
-#include <QtCore/QAbstractListModel>
 #include <QtCore/QHash>
 #include <QtCore/QList>
-#include <QtCore/QVariant>
 
 // Konsole
 #include "Profile.h"
@@ -158,48 +156,6 @@ public:
 private:
     const Profile::Ptr _profile;
     bool _modifiedPropertiesOnly;
-};
-
-/**
- * Item-view model which contains a flat list of sessions.
- * After constructing the model, call setSessions() to set the sessions displayed
- * in the list.  When a session ends (after emitting the finished() signal) it is
- * automatically removed from the list.
- *
- * The internal pointer for each item in the model (index.internalPointer()) is the
- * associated Session*
- */
-class SessionListModel : public QAbstractListModel
-{
-    Q_OBJECT
-
-public:
-    explicit SessionListModel(QObject* parent = 0);
-
-    /**
-     * Sets the list of sessions displayed in the model.
-     * To display all sessions that are currently running in the list,
-     * call setSessions(SessionManager::instance()->sessions())
-     */
-    void setSessions(const QList<Session*>& sessions);
-
-    // reimplemented from QAbstractItemModel
-    virtual QModelIndex index(int row, int column, const QModelIndex& parent) const;
-    virtual QVariant data(const QModelIndex& index, int role) const;
-    virtual QVariant headerData(int section, Qt::Orientation orientation,
-                                int role) const;
-    virtual int columnCount(const QModelIndex& parent) const;
-    virtual int rowCount(const QModelIndex& parent) const;
-    virtual QModelIndex parent(const QModelIndex& index) const;
-
-protected:
-    virtual void sessionRemoved(Session*) {}
-
-private slots:
-    void sessionFinished();
-
-private:
-    QList<Session*> _sessions;
 };
 
 }

@@ -28,17 +28,15 @@
 #include <QtCore/QTextCodec>
 
 // KDE
-#include <KLocalizedString>
-#include <KIcon>
 #include <KConfig>
+#include <KConfigGroup>
 #include <KGlobal>
 #include <KDebug>
-#include <KConfigGroup>
 
 // Konsole
 #include "Session.h"
-#include "History.h"
 #include "ProfileManager.h"
+#include "History.h"
 #include "Enumeration.h"
 
 using namespace Konsole;
@@ -333,98 +331,6 @@ Session* SessionManager::idToSession(int id)
     return 0;
 }
 
-SessionListModel::SessionListModel(QObject* parent)
-    : QAbstractListModel(parent)
-{
-}
-
-void SessionListModel::setSessions(const QList<Session*>& sessions)
-{
-    _sessions = sessions;
-
-    foreach(Session * session, sessions) {
-        connect(session, SIGNAL(finished()), this, SLOT(sessionFinished()));
-    }
-
-    reset();
-}
-QVariant SessionListModel::data(const QModelIndex& index, int role) const
-{
-    Q_ASSERT(index.isValid());
-
-    int row = index.row();
-    int column = index.column();
-
-    Q_ASSERT(row >= 0 && row < _sessions.count());
-    Q_ASSERT(column >= 0 && column < 2);
-
-    switch (role) {
-    case Qt::DisplayRole:
-        if (column == 1)
-            return _sessions[row]->title(Session::DisplayedTitleRole);
-        else if (column == 0)
-            return _sessions[row]->sessionId();
-        break;
-    case Qt::DecorationRole:
-        if (column == 1)
-            return KIcon(_sessions[row]->iconName());
-        else
-            return QVariant();
-    }
-
-    return QVariant();
-}
-QVariant SessionListModel::headerData(int section, Qt::Orientation orientation,
-                                      int role) const
-{
-    if (role != Qt::DisplayRole)
-        return QVariant();
-
-    if (orientation == Qt::Vertical)
-        return QVariant();
-    else {
-        switch (section) {
-        case 0:
-            return i18nc("@item:intable The session index", "Number");
-        case 1:
-            return i18nc("@item:intable The session title", "Title");
-        default:
-            return QVariant();
-        }
-    }
-}
-
-int SessionListModel::columnCount(const QModelIndex&) const
-{
-    return 2;
-}
-int SessionListModel::rowCount(const QModelIndex&) const
-{
-    return _sessions.count();
-}
-QModelIndex SessionListModel::parent(const QModelIndex&) const
-{
-    return QModelIndex();
-}
-void SessionListModel::sessionFinished()
-{
-    Session* session = qobject_cast<Session*>(sender());
-    int row = _sessions.indexOf(session);
-
-    if (row != -1) {
-        beginRemoveRows(QModelIndex(), row, row);
-        sessionRemoved(session);
-        _sessions.removeAt(row);
-        endRemoveRows();
-    }
-}
-QModelIndex SessionListModel::index(int row, int column, const QModelIndex& parent) const
-{
-    if (hasIndex(row, column, parent))
-        return createIndex(row, column, _sessions[row]);
-    else
-        return QModelIndex();
-}
 
 #include "SessionManager.moc"
 

@@ -30,6 +30,7 @@
 // Konsole
 #include "SessionManager.h"
 #include "Session.h"
+#include "SessionListModel.h"
 
 namespace Ui
 {
