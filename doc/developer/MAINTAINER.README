@@ -28,8 +28,8 @@ B. Handbook
 
 C. Sites
     1. konsole.kde.org is the only site the maintainer is responsible.
-        a. It is currently in svn (2011).
-            http://websvn.kde.org/trunk/www/apps/konsole/
+        a. It is currently in git (2012).
+            https://projects.kde.org/projects/websites/konsole-kde-org
         b. If it becomes to much work or outdated, it might be forwarded to
             http://userbase.kde.org/Konsole
 
