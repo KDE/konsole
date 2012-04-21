@@ -183,15 +183,25 @@ void Session::openTeletype(int fd)
 
     _shellProcess->setUtf8Mode(_emulation->utf8());
 
-    //connect teletype to emulation backend
-    connect(_shellProcess, SIGNAL(receivedData(const char*,int)), this,
-            SLOT(onReceiveBlock(const char*,int)));
-    connect(_emulation, SIGNAL(sendData(const char*,int)), _shellProcess,
-            SLOT(sendData(const char*,int)));
-    connect(_emulation, SIGNAL(useUtf8Request(bool)), _shellProcess, SLOT(setUtf8Mode(bool)));
-    connect(_shellProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(done(int,QProcess::ExitStatus)));
-    connect(_emulation, SIGNAL(imageSizeChanged(int,int)), this, SLOT(updateWindowSize(int,int)));
-    connect(_emulation, SIGNAL(imageSizeInitialized()), this, SLOT(run()));
+    // connect the I/O between emulator and pty process
+    connect(_shellProcess, SIGNAL(receivedData(const char*,int)),
+            this, SLOT(onReceiveBlock(const char*,int)));
+    connect(_emulation, SIGNAL(sendData(const char*,int)),
+            _shellProcess, SLOT(sendData(const char*,int)));
+
+    // UTF8 mode
+    connect(_emulation, SIGNAL(useUtf8Request(bool)),
+            _shellProcess, SLOT(setUtf8Mode(bool)));
+
+    // get notified when the pty process is finished
+    connect(_shellProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
+            this, SLOT(done(int,QProcess::ExitStatus)));
+
+    // emulator size
+    connect(_emulation, SIGNAL(imageSizeChanged(int,int)),
+            this, SLOT(updateWindowSize(int,int)));
+    connect(_emulation, SIGNAL(imageSizeInitialized()),
+            this, SLOT(run()));
 }
 
 WId Session::windowId() const
