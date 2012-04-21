@@ -515,6 +515,12 @@ bool MainWindow::queryClose()
         return true;
     }
 
+    // make sure the window is shown on current desktop and is not minimized
+    KWindowSystem::setOnDesktop(winId(), KWindowSystem::currentDesktop());
+    if ( isMinimized() ) {
+        KWindowSystem::unminimizeWindow(winId(), true);
+    }
+
     int result = KMessageBox::warningYesNoCancel(this,
                  i18ncp("@info", "There are %1 tab open in this window. "
                         "Do you still want to quit?",
