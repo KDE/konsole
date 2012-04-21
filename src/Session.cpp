@@ -1173,7 +1173,7 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
     _zmodemProc->start();
 
     disconnect(_shellProcess, SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)));
-    connect(_shellProcess, SIGNAL(receivedData(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)));
+    connect(_shellProcess, SIGNAL(receivedData(const char*,int)), this, SLOT(zmodemReceiveBlock(const char*,int)));
 
     _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
                                        i18n("ZModem Progress"));
@@ -1217,11 +1217,11 @@ void Session::zmodemReadStatus()
     }
 }
 
-void Session::zmodemRcvBlock(const char* data, int len)
+void Session::zmodemReceiveBlock(const char* data, int len)
 {
-    QByteArray ba(data, len);
+    QByteArray bytes(data, len);
 
-    _zmodemProc->write(ba);
+    _zmodemProc->write(bytes);
 }
 
 void Session::zmodemFinished()
@@ -1236,7 +1236,7 @@ void Session::zmodemFinished()
         _zmodemBusy = false;
         delete process;    // Now, the KProcess may be disposed safely.
 
-        disconnect(_shellProcess, SIGNAL(receivedData(const char*,int)), this , SLOT(zmodemRcvBlock(const char*,int)));
+        disconnect(_shellProcess, SIGNAL(receivedData(const char*,int)), this , SLOT(zmodemReceiveBlock(const char*,int)));
         connect(_shellProcess, SIGNAL(receivedData(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)));
 
         _shellProcess->sendData("\030\030\030\030", 4); // Abort

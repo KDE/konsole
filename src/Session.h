@@ -667,7 +667,7 @@ private slots:
 
     void zmodemReadStatus();
     void zmodemReadAndSendBlock();
-    void zmodemRcvBlock(const char* data, int len);
+    void zmodemReceiveBlock(const char* data, int len);
     void zmodemFinished();
 
     void updateFlowControlState(bool suspended);
