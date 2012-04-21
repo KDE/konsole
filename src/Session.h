@@ -681,6 +681,10 @@ private slots:
 
 private:
 
+    // checks that the binary 'program' is available and can be executed
+    // returns the binary name if available or an empty string otherwise
+    static QString checkProgram(const QString& program);
+
     void updateTerminalSize();
     WId windowId() const;
     bool kill(int signal);
@@ -688,9 +692,6 @@ private:
     // if the program fails to start, or if the shell exits in
     // an unsuccessful manner
     void terminalWarning(const QString& message);
-    // checks that the binary 'program' is available and can be executed
-    // returns the binary name if available or an empty string otherwise
-    QString checkProgram(const QString& program) const;
     ProcessInfo* getProcessInfo();
     void updateSessionProcessInfo();
     bool updateForegroundProcessInfo();
