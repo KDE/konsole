@@ -413,6 +413,12 @@ bool MainWindow::queryClose()
         _viewManager->viewProperties().count() < 2)
         return true;
 
+    // make sure the window is shown on current desktop and is not minimized
+    KWindowSystem::setOnDesktop(winId(), KWindowSystem::currentDesktop());
+    if ( isMinimized() ) {
+        KWindowSystem::unminimizeWindow(winId(), true);
+    }
+
     int result = KMessageBox::warningYesNoCancel(this,
                 i18n("You have multiple tabs in this window, "
                      "are you sure you want to quit?"),
