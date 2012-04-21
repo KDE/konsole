@@ -140,8 +140,8 @@ Session::Session(QObject* parent) :
             this, SLOT(updateFlowControlState(bool)));
     connect(_emulation, SIGNAL(primaryScreenInUse(bool)),
             this, SLOT(onPrimaryScreenInUse(bool)));
-    connect(_emulation, SIGNAL(selectedText(QString)),
-            this, SLOT(onSelectedText(QString)));
+    connect(_emulation, SIGNAL(selectionChanged(QString)),
+            this, SIGNAL(selectionChanged(QString)));
     connect(_emulation, SIGNAL(imageResizeRequest(QSize)),
             this, SIGNAL(resizeRequest(QSize)));
 
@@ -636,11 +636,6 @@ void Session::updateFlowControlState(bool suspended)
 void Session::onPrimaryScreenInUse(bool use)
 {
     emit primaryScreenInUse(use);
-}
-
-void Session::onSelectedText(const QString & text)
-{
-    emit selectedText(text);
 }
 
 void Session::activityStateSet(int state)

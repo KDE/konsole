@@ -647,7 +647,7 @@ signals:
      * This signal serves as a relayer of Emulation::selectedText(QString),
      * making it usable for higher level component.
      */
-    void selectedText(const QString & text);
+    void selectionChanged(const QString& text);
 
 private slots:
     void done(int, QProcess::ExitStatus);
@@ -675,9 +675,6 @@ private slots:
 
     // signal relayer
     void onPrimaryScreenInUse(bool use);
-
-    // signal relayer
-    void onSelectedText(const QString & text);
 
 private:
 

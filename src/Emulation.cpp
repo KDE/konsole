@@ -89,7 +89,7 @@ void Emulation::checkScreenInUse()
 void Emulation::checkSelectedText()
 {
     QString text = _currentScreen->selectedText(true);
-    emit selectedText(text);
+    emit selectionChanged(text);
 }
 
 Emulation::~Emulation()

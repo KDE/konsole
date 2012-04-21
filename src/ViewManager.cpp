@@ -515,7 +515,7 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     connect(session , SIGNAL(destroyed()) , controller , SLOT(deleteLater()));
     connect(session , SIGNAL(primaryScreenInUse(bool)) ,
             controller , SLOT(setupPrimaryScreenSpecificActions(bool)));
-    connect(session , SIGNAL(selectedText(QString)) ,
+    connect(session , SIGNAL(selectionChanged(QString)) ,
             controller , SLOT(selectionChanged(QString)));
     connect(view , SIGNAL(destroyed()) , controller , SLOT(deleteLater()));
 
