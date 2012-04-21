@@ -560,11 +560,6 @@ signals:
      */
     void finished();
 
-    /**
-     * Emitted when output is received from the terminal process.
-     */
-    void receivedData(const QString& text);
-
     /** Emitted when the session's title has changed. */
     void titleChanged();
 
