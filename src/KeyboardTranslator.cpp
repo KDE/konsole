@@ -636,14 +636,17 @@ void KeyboardTranslator::setDescription(const QString& aDescription)
 {
     _description = aDescription;
 }
+
 QString KeyboardTranslator::description() const
 {
     return _description;
 }
+
 void KeyboardTranslator::setName(const QString& aName)
 {
     _name = aName;
 }
+
 QString KeyboardTranslator::name() const
 {
     return _name;
@@ -659,21 +662,26 @@ void KeyboardTranslator::addEntry(const Entry& entry)
     const int keyCode = entry.keyCode();
     _entries.insert(keyCode, entry);
 }
+
 void KeyboardTranslator::replaceEntry(const Entry& existing , const Entry& replacement)
 {
     if (!existing.isNull())
         _entries.remove(existing.keyCode(), existing);
+
     _entries.insert(replacement.keyCode(), replacement);
 }
+
 void KeyboardTranslator::removeEntry(const Entry& entry)
 {
     _entries.remove(entry.keyCode(), entry);
 }
+
 KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifiers modifiers, States state) const
 {
     foreach(const Entry & entry, _entries.values(keyCode)) {
         if (entry.matches(keyCode, modifiers, state))
             return entry;
     }
-    return Entry(); // entry not found
+
+    return Entry(); // No matching entry
 }
