@@ -309,10 +309,9 @@ public:
     QList<Entry> entries() const;
 
 private:
+    // All entries in this translator, indexed by their keycode
+    QMultiHash<int, Entry> _entries;
 
-    QMultiHash<int, Entry> _entries; // entries in this keyboard translation,
-    // entries are indexed according to
-    // their keycode
     QString _name;
     QString _description;
 };
