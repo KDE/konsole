@@ -187,8 +187,8 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
 
     for (int i = 0 ; i < text.count() ; i++) {
         const QChar& ch = text[i];
-        bool isFirstLetter = i == 0;
-        bool isLastLetter = (i == text.count() - 1);
+        const bool isFirstLetter = (i == 0);
+        const bool isLastLetter = (i == text.count() - 1);
         endOfItem = true;
         if (ch.isLetterOrNumber()) {
             endOfItem = false;
@@ -452,7 +452,7 @@ QByteArray KeyboardTranslator::Entry::escapedText(bool expandWildCards,
     QByteArray result(text(expandWildCards, keyboardModifiers));
 
     for (int i = 0 ; i < result.count() ; i++) {
-        char ch = result[i];
+        const char ch = result[i];
         char replacement = 0;
 
         switch (ch) {
