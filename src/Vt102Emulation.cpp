@@ -991,6 +991,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
         // (unless there is an entry defined for this particular combination
         //  in the keyboard modifier)
         const bool wantsAltModifier = entry.modifiers() & entry.modifierMask() & Qt::AltModifier;
+        const bool wantsMetaModifier = entry.modifiers() & entry.modifierMask() & Qt::MetaModifier;
         const bool wantsAnyModifier = entry.state() & 
                                 entry.stateMask() & KeyboardTranslator::AnyModifierState;
 
@@ -998,6 +999,11 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
              && !event->text().isEmpty() )
         {
             textToSend.prepend("\033");
+        }
+        if ( modifiers & Qt::MetaModifier && !(wantsMetaModifier || wantsAnyModifier)
+             && !event->text().isEmpty() )
+        {
+            textToSend.prepend("\030@s");
         }
 
         if ( entry.command() != KeyboardTranslator::NoCommand )
