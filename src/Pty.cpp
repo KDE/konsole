@@ -193,7 +193,7 @@ int Pty::start(const QString& program,
     // name of the program to execute, so create a list consisting of all
     // but the first argument to pass to setProgram()
     Q_ASSERT(programArguments.count() >= 1);
-    setProgram(program.toLatin1(),programArguments.mid(1));
+    setProgram(program,programArguments.mid(1));
 
     addEnvironmentVariables(environment);
 
