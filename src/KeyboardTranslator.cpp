@@ -76,7 +76,7 @@ void KeyboardTranslatorWriter::writeEntry(const KeyboardTranslator::Entry& entry
 // assumed not to be a part of the sequence.  The key sequence may contain whitespace
 //
 // eg:  "key Up+Shift : scrollLineUp"
-//      "key Next-Shift : "\E[6~"
+//      "key PgDown-Shift : "\E[6~"
 //
 // (lines containing only whitespace are ignored, parseLine assumes that comments have
 // already been removed)
@@ -282,9 +282,9 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString& item , int& keyCode
             kWarning() << "Unhandled key codes in sequence: " << item;
         }
         // additional cases implemented for backwards compatibility with KDE 3
-    } else if (item == "prior")
+    } else if (item == "prior")  // TODO: remove it in the future
         keyCode = Qt::Key_PageUp;
-    else if (item == "next")
+    else if (item == "next")     // TODO: remove it in the future
         keyCode = Qt::Key_PageDown;
     else
         return false;
