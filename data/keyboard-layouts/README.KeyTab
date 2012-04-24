@@ -1,7 +1,7 @@
 [README.KeyTab]
 
-The keytabs offered in the Options/Keyboard menu are
-taken from from configurations files with a *.keytab
+The keytabs offered in the Options/Keyboard menu
+are taken from configurations files with a *.keytab
 pattern either located in $KDEDIR/share/apps/konsole
 or ~/.kde/share/apps/konsole.
 
