@@ -36,8 +36,8 @@ key Home           : "\E[1~"
 key Insert-Shift   : "\E[2~"
 key Delete         : "\E[3~"
 key End            : "\E[4~"
-key Prior -Shift   : "\E[5~"
-key Next  -Shift   : "\E[6~"
+key PgUp -Shift   : "\E[5~"
+key PgDown  -Shift   : "\E[6~"
 
 # function keys
 
@@ -62,9 +62,9 @@ key Space +Control : "\x00"
 # The scroll* operations refer to the history buffer.
 
 key Up    +Shift   : scrollLineUp
-key Prior +Shift   : scrollPageUp
+key PgUp +Shift   : scrollPageUp
 key Down  +Shift   : scrollLineDown
-key Next  +Shift   : scrollPageDown
+key PgDown  +Shift   : scrollPageDown
 
 key ScrollLock     : scrollLock
 

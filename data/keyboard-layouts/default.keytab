@@ -101,8 +101,8 @@ key End         -AppCuKeys+KeyPad : "\E[F"
 
 key Insert      +KeyPad  : "\E[2~"
 key Delete      +KeyPad  : "\E[3~"
-key Prior -Shift+KeyPad  : "\E[5~"
-key Next  -Shift+KeyPad  : "\E[6~"
+key PgUp -Shift+KeyPad  : "\E[5~"
+key PgDown  -Shift+KeyPad  : "\E[6~"
 
 # other grey PC keys
 
@@ -121,10 +121,10 @@ key Delete      -AnyMod  : "\E[3~"
 key Insert      +AnyMod  : "\E[2;*~"
 key Delete      +AnyMod  : "\E[3;*~"
 
-key Prior -Shift-AnyMod  : "\E[5~"
-key Next  -Shift-AnyMod  : "\E[6~"
-key Prior -Shift+AnyMod  : "\E[5;*~"
-key Next  -Shift+AnyMod  : "\E[6;*~"
+key PgUp -Shift-AnyMod  : "\E[5~"
+key PgDown  -Shift-AnyMod  : "\E[6~"
+key PgUp -Shift+AnyMod  : "\E[5;*~"
+key PgDown  -Shift+AnyMod  : "\E[6;*~"
 
 # Function keys
 key F1  -AnyMod  : "\EOP"
@@ -161,10 +161,10 @@ key Space +Control : "\x00"
 # The scroll* operations refer to the history buffer.
 
 key Up    +Shift-AppScreen  : scrollLineUp
-key Prior +Shift-AppScreen  : scrollPageUp
+key PgUp +Shift-AppScreen  : scrollPageUp
 key Home  +Shift-AppScreen  : scrollUpToTop
 key Down  +Shift-AppScreen  : scrollLineDown
-key Next  +Shift-AppScreen  : scrollPageDown
+key PgDown  +Shift-AppScreen  : scrollPageDown
 key End   +Shift-AppScreen  : scrollDownToBottom
 
 

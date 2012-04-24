@@ -103,8 +103,8 @@ key F12    : "\E[24~"
 key Home   : "\E[1~"  
 key End    : "\E[4~"  
 
-key Prior -Shift : "\E[5~"  
-key Next  -Shift : "\E[6~"  
+key PgUp -Shift : "\E[5~"  
+key PgDown  -Shift : "\E[6~"  
 key Insert-Shift : "\E[2~"  
 
 # Keypad-Enter. See comment on Return above.
@@ -117,9 +117,9 @@ key Space +Control : "\x00"
 # some of keys are used by konsole.
 
 key Up    +Shift   : scrollLineUp
-key Prior +Shift   : scrollPageUp
+key PgUp +Shift   : scrollPageUp
 key Down  +Shift   : scrollLineDown
-key Next  +Shift   : scrollPageDown
+key PgDown  +Shift   : scrollPageDown
 
 
 #----------------------------------------------------------
