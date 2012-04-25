@@ -543,7 +543,7 @@ void SessionController::setupCommonActions()
     pasteShortcut.setAlternate(QKeySequence(Qt::SHIFT + Qt::Key_Insert));
     action->setShortcut(pasteShortcut);
 
-    action = collection->addAction("paste-selection", this, SLOT(pasteFromXSelection()));
+    action = collection->addAction("paste-selection", this, SLOT(pasteFromX11Selection()));
     action->setText(i18n("Paste Selection"));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Insert));
 
@@ -833,15 +833,15 @@ void SessionController::paste()
 {
     _view->pasteFromClipboard();
 }
-void SessionController::pasteFromXSelection()
+void SessionController::pasteFromX11Selection()
 {
-    _view->pasteFromXSelection();
+    _view->pasteFromX11Selection();
 }
 void SessionController::selectAll()
 {
     ScreenWindow * screenWindow = _view->screenWindow();
     screenWindow->setSelectionByLineRange(0, _session->emulation()->lineCount());
-    TerminalDisplay::setXSelection(screenWindow->selectedText(true));
+    _view->copyToX11Selection();
 }
 static const KXmlGuiWindow* findWindow(const QObject* object)
 {

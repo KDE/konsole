@@ -102,6 +102,10 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { WordCharacters , "WordCharacters" , INTERACTION_GROUP , QVariant::String }
     , { TripleClickMode , "TripleClickMode" , INTERACTION_GROUP , QVariant::Int }
     , { UnderlineLinksEnabled , "UnderlineLinksEnabled" , INTERACTION_GROUP , QVariant::Bool }
+    , { AutoCopySelectedText , "AutoCopySelectedText" , INTERACTION_GROUP , QVariant::Bool }
+    , { PasteFromSelectionEnabled , "PasteFromSelectionEnabled" , INTERACTION_GROUP , QVariant::Bool }
+    , { PasteFromClipboardEnabled , "PasteFromClipboardEnabled" , INTERACTION_GROUP , QVariant::Bool }
+    , { MiddleClickPasteMode, "MiddleClickPasteMode" , INTERACTION_GROUP , QVariant::Int }
 
     // Encoding
     , { DefaultEncoding , "DefaultEncoding" , ENCODING_GROUP , QVariant::String }
@@ -161,6 +165,10 @@ FallbackProfile::FallbackProfile()
     setProperty(FlowControlEnabled, true);
     setProperty(BlinkingTextEnabled, true);
     setProperty(UnderlineLinksEnabled, true);
+    setProperty(AutoCopySelectedText, false);
+    setProperty(PasteFromSelectionEnabled, true);
+    setProperty(PasteFromClipboardEnabled, false);
+    setProperty(MiddleClickPasteMode, Enum::PasteFromX11Selection);
     setProperty(TripleClickMode, Enum::SelectWholeLine);
 
     setProperty(BlinkingCursorEnabled, false);

@@ -88,6 +88,14 @@ public:
         SelectForwardsFromCursor = 1
     };
 
+    /** This enum describes the source from which mouse middle click pastes data . */
+    enum MiddleClickPasteModeEnum {
+        /** Paste from X11 Selection. */
+        PasteFromX11Selection = 0,
+        /** Paste from Clipboard. */
+        PasteFromClipboard = 1
+    };
+
     /**
      * This enum describes the different types of sounds and visual effects which
      * can be used to alert the user when a 'bell' occurs in the terminal

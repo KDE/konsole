@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>441</width>
+    <width>594</width>
     <height>551</height>
    </rect>
   </property>
@@ -267,7 +267,7 @@
          </property>
          <layout class="QGridLayout">
           <item row="0" column="0">
-           <widget class="Konsole::RenameTabWidget" name="renameTabWidget"/>
+           <widget class="Konsole::RenameTabWidget" name="renameTabWidget" native="true"/>
           </item>
          </layout>
         </widget>
@@ -532,8 +532,7 @@
          </property>
          <layout class="QVBoxLayout">
           <item>
-           <widget class="Konsole::HistorySizeWidget" name="historySizeWidget">
-           </widget>
+           <widget class="Konsole::HistorySizeWidget" name="historySizeWidget" native="true"/>
           </item>
          </layout>
         </widget>
@@ -615,7 +614,7 @@
      </widget>
      <widget class="QWidget" name="keyboardTab">
       <attribute name="title">
-       <string>Input</string>
+       <string>Keyboard</string>
       </attribute>
       <layout class="QVBoxLayout">
        <item>
@@ -695,6 +694,168 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="mouseTab">
+      <attribute name="title">
+       <string>Mouse</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="groupBox_9">
+         <property name="title">
+          <string>Select Text</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" name="_2">
+          <item>
+           <layout class="QHBoxLayout" name="_3">
+            <item>
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Characters considered part of a word when double clicking:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="KLineEdit" name="wordCharacterEdit">
+              <property name="toolTip">
+               <string>Characters which are considered part of a word when double-clicking to select whole words in the terminal</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="_4">
+            <item>
+             <widget class="QLabel" name="label_17">
+              <property name="text">
+               <string>Triple-click select:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="KComboBox" name="tripleClickModeCombo">
+              <property name="toolTip">
+               <string>Which part of current line should be selected with triple click .</string>
+              </property>
+              <item>
+               <property name="text">
+                <string>The whole current line</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>From mouse position to the end of line</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_14">
+         <property name="title">
+          <string>Copy &amp;&amp; Paste</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QCheckBox" name="copyTextToClipboardButton">
+            <property name="toolTip">
+             <string>Automatically copy selected text into clipboard</string>
+            </property>
+            <property name="text">
+             <string>Copy on select</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>561</width>
+              <height>5</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Mouse middle button:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="pasteFromX11SelectionButton">
+            <property name="text">
+             <string>Paste from selection</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="pasteFromClipboardButton">
+            <property name="text">
+             <string>Paste from clipboard</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Miscellaneous</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QCheckBox" name="underlineLinksButton">
+            <property name="toolTip">
+             <string>Text recognized as a link or an email address will be underlined when hovered by the mouse pointer.</string>
+            </property>
+            <property name="text">
+             <string>Underline links</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>328</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="advancedTab">
       <attribute name="title">
        <string comment="@title:tab Complex options">Advanced</string>
@@ -754,93 +915,6 @@
             </property>
             <property name="text">
              <string>Enable Bi-Directional text rendering</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox_9">
-         <property name="title">
-          <string>Mouse Interaction</string>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-         <layout class="QVBoxLayout">
-          <item>
-           <layout class="QHBoxLayout">
-            <item>
-             <widget class="QLabel" name="label_11">
-              <property name="text">
-               <string>Characters considered part of a word when double clicking:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="wordWrap">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="KLineEdit" name="wordCharacterEdit">
-              <property name="toolTip">
-               <string>Characters which are considered part of a word when double-clicking to select whole words in the terminal</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout">
-            <item>
-             <widget class="QLabel" name="label_17">
-              <property name="text">
-               <string>Triple-click select:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="KComboBox" name="tripleClickModeCombo">
-              <property name="toolTip">
-               <string>Which part of current line should be selected with triple click .</string>
-              </property>
-              <item>
-               <property name="text">
-                <string>The whole current line</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>From mouse position to the end of line</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="underlineLinksButton">
-            <property name="toolTip">
-             <string>Text recognized as a link or an email address will be underlined when hovered by the mouse pointer.</string>
-            </property>
-            <property name="text">
-             <string>Underline links</string>
             </property>
            </widget>
           </item>

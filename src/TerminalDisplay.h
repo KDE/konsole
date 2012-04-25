@@ -404,8 +404,6 @@ public:
     /** Returns the terminal screen section which is displayed in this widget.  See setScreenWindow() */
     ScreenWindow* screenWindow() const;
 
-    static void setXSelection(const QString& text);
-
 public slots:
     /**
      * Scrolls current ScreenWindow
@@ -425,18 +423,26 @@ public slots:
      */
     void updateLineProperties();
 
-    /** Copies the selected text to the clipboard. */
+    void setAutoCopySelectedText(bool enabled);
+
+    void setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum mode);
+
+    /** Copies the selected text to the X11 Selection. */
+    void copyToX11Selection();
+
+    /** Copies the selected text to the system clipboard. */
     void copyToClipboard();
+
     /**
      * Pastes the content of the clipboard into the
      * display.
      */
-    void pasteFromClipboard();
+    void pasteFromClipboard(bool appendEnter=false);
     /**
-     * Pastes the content of the X selection into the
+     * Pastes the content of the X11 selection into the
      * display.
      */
-    void pasteFromXSelection();
+    void pasteFromX11Selection(bool appendEnter=false);
 
     /**
        * Changes whether the flow control warning box should be shown when the flow control
@@ -685,7 +691,7 @@ private:
 
     bool handleShortcutOverrideEvent(QKeyEvent* event);
 
-    void doPaste(bool useXselection, bool appendReturn);
+    void doPaste(QString text, bool appendReturn);
 
     // the window onto the terminal screen which this display
     // is currently showing.
@@ -739,6 +745,9 @@ private:
     bool    _lineSelectionMode;
     bool    _preserveLineBreaks;
     bool    _columnSelectionMode;
+
+    bool _autoCopySelectedText;
+    Enum::MiddleClickPasteModeEnum _middleClickPasteMode;
 
     QScrollBar* _scrollBar;
     Enum::ScrollBarPositionEnum _scrollbarLocation;

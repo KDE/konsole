@@ -149,19 +149,25 @@ private slots:
     void keyBindingSelected();
     void removeKeyBinding();
 
+    // mouse page
+    void toggleUnderlineLinks(bool);
+    void toggleCopyTextToClipboard(bool);
+    void pasteFromX11Selection();
+    void pasteFromClipboard();
+
+    void TripleClickModeChanged(int);
+    void wordCharactersChanged(const QString&);
+
     // advanced page
     void toggleBlinkingText(bool);
     void toggleFlowControl(bool);
     void togglebidiRendering(bool);
     void toggleBlinkingCursor(bool);
-    void TripleClickModeChanged(int);
-    void toggleUnderlineLinks(bool);
 
     void setCursorShape(int);
     void autoCursorColor();
     void customCursorColor();
     void customCursorColorChanged(const QColor&);
-    void wordCharactersChanged(const QString&);
     void setDefaultCodec(QTextCodec*);
 
     // apply the first previewed changes stored up by delayedPreview()
@@ -175,6 +181,7 @@ private:
     void setupKeyboardPage(const Profile::Ptr profile);
     void setupScrollingPage(const Profile::Ptr profile);
     void setupAdvancedPage(const Profile::Ptr profile);
+    void setupMousePage(const Profile::Ptr info);
 
     void updateColorSchemeList(bool selectCurrentScheme = false);
     void updateColorSchemeButtons();

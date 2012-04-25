@@ -63,6 +63,8 @@
 #include "WindowSystemInfo.h"
 #include "ExtendedCharTable.h"
 #include "TerminalDisplayAccessible.h"
+#include "SessionManager.h"
+#include "Session.h"
 
 using namespace Konsole;
 
@@ -304,6 +306,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _lineSelectionMode(false)
     , _preserveLineBreaks(false)
     , _columnSelectionMode(false)
+    , _autoCopySelectedText(false)
+    , _middleClickPasteMode(Enum::PasteFromX11Selection)
     , _scrollbarLocation(Enum::ScrollBarRight)
     , _wordCharacters(":@-./_~")
     , _bellMode(Enum::NotifyBell)
@@ -1793,10 +1797,21 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             }
         }
     } else if (ev->button() == Qt::MidButton) {
-        if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier))
-            doPaste(true, ev->modifiers() & Qt::ControlModifier);
-        else
+        if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier)) {
+
+            const bool appendEnter = ev->modifiers() & Qt::ControlModifier;
+
+            if ( _middleClickPasteMode == Enum::PasteFromX11Selection ) {
+                pasteFromX11Selection(appendEnter);
+            } else if ( _middleClickPasteMode == Enum::PasteFromClipboard ) {
+                pasteFromClipboard(appendEnter);
+            } else {
+                Q_ASSERT(false);
+            }
+
+        } else {
             emit mouseSignal(1, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+        }
     } else if (ev->button() == Qt::RightButton) {
         if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier))
             emit configureRequest(ev->pos());
@@ -2134,7 +2149,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
             _screenWindow->clearSelection();
         } else {
             if (_actSel > 1) {
-                setXSelection(_screenWindow->selectedText(_preserveLineBreaks));
+                copyToX11Selection();
             }
 
             _actSel = 0;
@@ -2269,7 +2284,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
 
         _screenWindow->setSelectionEnd(endSel.x() , endSel.y());
 
-        setXSelection(_screenWindow->selectedText(_preserveLineBreaks));
+        copyToX11Selection();
     }
 
     _possibleTripleClick = true;
@@ -2390,7 +2405,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 
     _screenWindow->setSelectionEnd(_columns - 1 , _iPntSel.y());
 
-    setXSelection(_screenWindow->selectedText(_preserveLineBreaks));
+    copyToX11Selection();
 
     _iPntSel.ry() += _scrollBar->value();
 }
@@ -2455,28 +2470,47 @@ bool TerminalDisplay::usesMouse() const
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TerminalDisplay::doPaste(bool useXselection, bool appendReturn)
+void TerminalDisplay::doPaste(QString text, bool appendReturn)
 {
     if (!_screenWindow)
         return;
 
-    // Paste Clipboard by simulating keypress events
-    QString text = QApplication::clipboard()->text(useXselection ? QClipboard::Selection :
-                   QClipboard::Clipboard);
     if (appendReturn)
         text.append("\r");
+
     if (! text.isEmpty()) {
         text.replace('\n', '\r');
+        // perform paste by simulating keypress events
         QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
-        emit keyPressedSignal(&e); // expose as a big fat keypress event
+        emit keyPressedSignal(&e);
 
         _screenWindow->clearSelection();
     }
 }
 
-void TerminalDisplay::setXSelection(const QString& text)
+void TerminalDisplay::setAutoCopySelectedText(bool enabled)
 {
+    _autoCopySelectedText = enabled;
+}
+
+void TerminalDisplay::setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum mode)
+{
+    _middleClickPasteMode = mode;
+}
+
+void TerminalDisplay::copyToX11Selection()
+{
+    if (!_screenWindow)
+        return;
+
+    QString text = _screenWindow->selectedText(_preserveLineBreaks);
+    if (text.isEmpty())
+        return;
+
     QApplication::clipboard()->setText(text, QClipboard::Selection);
+
+    if (_autoCopySelectedText)
+        QApplication::clipboard()->setText(text, QClipboard::Clipboard);
 }
 
 void TerminalDisplay::copyToClipboard()
@@ -2485,18 +2519,22 @@ void TerminalDisplay::copyToClipboard()
         return;
 
     QString text = _screenWindow->selectedText(_preserveLineBreaks);
-    if (!text.isEmpty())
-        QApplication::clipboard()->setText(text);
+    if (text.isEmpty())
+        return;
+
+    QApplication::clipboard()->setText(text, QClipboard::Clipboard);
 }
 
-void TerminalDisplay::pasteFromClipboard()
+void TerminalDisplay::pasteFromClipboard(bool appendEnter)
 {
-    doPaste(false, false);
+    QString text = QApplication::clipboard()->text(QClipboard::Clipboard);
+    doPaste(text, appendEnter);
 }
 
-void TerminalDisplay::pasteFromXSelection()
+void TerminalDisplay::pasteFromX11Selection(bool appendEnter)
 {
-    doPaste(true, false);
+    QString text = QApplication::clipboard()->text(QClipboard::Selection);
+    doPaste(text, appendEnter);
 }
 
 /* ------------------------------------------------------------------------- */

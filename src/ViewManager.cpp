@@ -804,8 +804,15 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
     view->setTripleClickMode(Enum::TripleClickModeEnum(tripleClickMode));
 
+    view->setAutoCopySelectedText(profile->autoCopySelectedText());
     view->setUnderlineLinks(profile->underlineLinksEnabled());
     view->setBidiEnabled(profile->bidiRenderingEnabled());
+
+    int middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
+    if (middleClickPasteMode == Enum::PasteFromX11Selection)
+        view->setMiddleClickPasteMode(Enum::PasteFromX11Selection);
+    else if (middleClickPasteMode == Enum::PasteFromClipboard)
+        view->setMiddleClickPasteMode(Enum::PasteFromClipboard);
 
     // cursor shape
     int cursorShape = profile->property<int>(Profile::CursorShape);

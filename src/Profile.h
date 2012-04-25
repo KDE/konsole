@@ -196,6 +196,18 @@ public:
          * underlined when hovered by the mouse pointer.
          */
         UnderlineLinksEnabled,
+        /** (bool) If true, automatically copy selected text into the clipboard */
+        AutoCopySelectedText,
+        /** (bool) If true, middle mouse button pastes from X Selection */
+        PasteFromSelectionEnabled,
+        /** (bool) If true, middle mouse button pastes from Clipboard */
+        PasteFromClipboardEnabled,
+        /** (MiddleClickPasteModeEnum) Specifies the source from which mouse
+         * middle click pastes data.
+         *
+         * See Enum::MiddleClickPasteModeEnum
+         */
+        MiddleClickPasteMode,
         /** (String) Default text codec */
         DefaultEncoding,
         /** (bool) Whether fonts should be aliased or not */
@@ -419,6 +431,10 @@ public:
     /** Convenience method for property<bool>(Profile::UnderlineLinksEnabled) */
     bool underlineLinksEnabled() const {
         return property<bool>(Profile::UnderlineLinksEnabled);
+    }
+
+    bool autoCopySelectedText() const {
+        return property<bool>(Profile::AutoCopySelectedText);
     }
 
     /** Convenience method for property<QString>(Profile::DefaultEncoding) */

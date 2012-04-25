@@ -213,6 +213,8 @@ void EditProfileDialog::preparePage(int page)
             setupScrollingPage(profile);
         else if (pageWidget == _ui->keyboardTab)
             setupKeyboardPage(profile);
+        else if (pageWidget == _ui->mouseTab)
+            setupMousePage(profile);
         else if (pageWidget == _ui->advancedTab)
             setupAdvancedPage(profile);
         else
@@ -978,6 +980,41 @@ void EditProfileDialog::showScrollBarRight()
 {
     updateTempProfileProperty(Profile::ScrollBarPosition, Enum::ScrollBarRight);
 }
+void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
+{
+    BooleanOption  options[] = { {
+            _ui->underlineLinksButton , Profile::UnderlineLinksEnabled,
+            SLOT(toggleUnderlineLinks(bool))
+        },
+        {
+            _ui->copyTextToClipboardButton , Profile::AutoCopySelectedText,
+            SLOT(toggleCopyTextToClipboard(bool))
+        },
+        { 0 , Profile::Property(0) , 0 }
+    };
+    setupCheckBoxes(options , profile);
+
+    // setup middle click paste mode
+    const int middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
+    RadioOption pasteModes[] = {
+        {_ui->pasteFromX11SelectionButton, Enum::PasteFromX11Selection, SLOT(pasteFromX11Selection())},
+        {_ui->pasteFromClipboardButton, Enum::PasteFromClipboard, SLOT(pasteFromClipboard())},
+        {0, 0, 0}
+    };
+    setupRadio(pasteModes , middleClickPasteMode);
+
+    // interaction options
+    _ui->wordCharacterEdit->setText(profile->wordCharacters());
+
+    connect(_ui->wordCharacterEdit, SIGNAL(textChanged(QString)), this,
+            SLOT(wordCharactersChanged(QString)));
+
+    int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
+    _ui->tripleClickModeCombo->setCurrentIndex(tripleClickMode);
+
+    connect(_ui->tripleClickModeCombo, SIGNAL(activated(int)), this,
+            SLOT(TripleClickModeChanged(int)));
+}
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {
     BooleanOption  options[] = { {
@@ -993,28 +1030,12 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
             SLOT(toggleBlinkingCursor(bool))
         },
         {
-            _ui->underlineLinksButton , Profile::UnderlineLinksEnabled,
-            SLOT(toggleUnderlineLinks(bool))
-        },
-        {
             _ui->enableBidiRenderingButton , Profile::BidiRenderingEnabled ,
             SLOT(togglebidiRendering(bool))
         },
         { 0 , Profile::Property(0) , 0 }
     };
     setupCheckBoxes(options , profile);
-
-    // interaction options
-    _ui->wordCharacterEdit->setText(profile->wordCharacters());
-
-    connect(_ui->wordCharacterEdit, SIGNAL(textChanged(QString)), this,
-            SLOT(wordCharactersChanged(QString)));
-
-    int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
-    _ui->tripleClickModeCombo->setCurrentIndex(tripleClickMode);
-
-    connect(_ui->tripleClickModeCombo, SIGNAL(activated(int)), this,
-            SLOT(TripleClickModeChanged(int)));
 
     // cursor options
     if (profile->useCustomCursorColor())
@@ -1083,6 +1104,18 @@ void EditProfileDialog::toggleBlinkingCursor(bool enable)
 void EditProfileDialog::toggleUnderlineLinks(bool enable)
 {
     updateTempProfileProperty(Profile::UnderlineLinksEnabled, enable);
+}
+void EditProfileDialog::toggleCopyTextToClipboard(bool enable)
+{
+    updateTempProfileProperty(Profile::AutoCopySelectedText, enable);
+}
+void EditProfileDialog::pasteFromX11Selection()
+{
+    updateTempProfileProperty(Profile::MiddleClickPasteMode, Enum::PasteFromX11Selection);
+}
+void EditProfileDialog::pasteFromClipboard()
+{
+    updateTempProfileProperty(Profile::MiddleClickPasteMode, Enum::PasteFromClipboard);
 }
 void EditProfileDialog::TripleClickModeChanged(int newValue)
 {
