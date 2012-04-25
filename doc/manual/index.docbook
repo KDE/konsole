@@ -1007,7 +1007,9 @@ will display the &DBus; interface for &konsole;.
 <command>qdbus</command>
 <option>org.kde.konsole /Windows/1</option>
 will display methods for controlling window 1.
-</para></listitem>
+</para>
+<note><para>/Konsole was previously used for controlling the first window, which is a design mistake. Please do not use it for that purpose anymore, and consider updating existing scripts.</para></note>
+</listitem>
 
 <listitem><para>
 <prompt>&percnt;</prompt>
