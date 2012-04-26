@@ -52,12 +52,13 @@ Mode names are:
 
 Operations are
 
-  - scrollUpLine   : scroll up   one line in the history log
-  - scrollUpPage   : scroll up   one page in the history log
-  - scrollDownLine : scroll down one line in the history log
-  - scrollDownPage : scroll down one page in the history log
-  - emitClipboard  : "paste" the current clipboard
-  - emitSelection  : "paste" the current selection
+- scrollUpLine       : scroll up   one line in the history log
+- scrollUpPage       : scroll up   one page in the history log
+- scrollDownLine     : scroll down one line in the history log
+- scrollDownPage     : scroll down one page in the history log
+- scrollUpToTop      : scroll up to the begining of the history log
+- scrollDownToBottom : scroll down to the end of the history log
+
 
 Strings have the syntax of C strings,
 one may use the following escapes:
