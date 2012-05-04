@@ -266,7 +266,6 @@ ViewContainerTabBar::ViewContainerTabBar(QWidget* parent, TabbedViewContainer* c
     setDocumentMode(true);
     setFocusPolicy(Qt::NoFocus);
     setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
-    setStyleSheet("QTabBar::tab { min-width: 2em; max-width: 25em }");
     setElideMode(Qt::ElideLeft);
 }
 void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
@@ -578,6 +577,11 @@ void TabbedViewContainer::dynamicTabBarVisibility()
 
     if (_tabBar->count() < 2 && !_tabBar->isHidden())
         setTabBarVisible(false);
+}
+
+void TabbedViewContainer::setStyleSheet(const QString& styleSheet)
+{
+    _tabBar->setStyleSheet(styleSheet);
 }
 
 void TabbedViewContainer::navigationTextModeChanged(bool useTextWidth)

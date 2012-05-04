@@ -141,6 +141,7 @@ public:
         int position;
         int newTabBehavior;
         bool showQuickButtons;
+        QString styleSheet;
     };
 
     /**
@@ -391,6 +392,7 @@ private:
     ViewContainer::NavigationPosition _navigationPosition;
     bool _showQuickButtons;
     NewTabBehavior _newTabBehavior;
+    QString _navigationStyleSheet;
 
     int _managerId;
     static int lastManagerId;

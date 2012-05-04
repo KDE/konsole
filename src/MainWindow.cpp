@@ -649,6 +649,7 @@ void MainWindow::applyKonsoleSettings()
     options.position         = KonsoleSettings::tabBarPosition();
     options.newTabBehavior   = KonsoleSettings::newTabBehavior();
     options.showQuickButtons = KonsoleSettings::showQuickButtons();
+    options.styleSheet       = KonsoleSettings::tabBarStyleSheet();
 
     _viewManager->updateNavigationOptions(options);
 

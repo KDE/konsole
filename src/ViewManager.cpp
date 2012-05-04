@@ -64,6 +64,7 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     , _navigationPosition(ViewContainer::NavigationPositionTop)
     , _showQuickButtons(false)
     , _newTabBehavior(PutNewTabAtTheEnd)
+    , _navigationStyleSheet(QString())
     , _managerId(0)
 {
     // create main view area
@@ -1053,6 +1054,7 @@ void ViewManager::updateNavigationOptions(NavigationOptions options)
     _newTabBehavior       =
         static_cast<NewTabBehavior>(options.newTabBehavior);
     _showQuickButtons     = options.showQuickButtons;
+    _navigationStyleSheet = options.styleSheet;
 
     foreach(ViewContainer* container, _viewSplitter->containers()) {
         applyNavigationOptions(container);
@@ -1079,6 +1081,7 @@ void ViewManager::applyNavigationOptions(ViewContainer* container)
                                & ~ViewContainer::QuickCloseView);
     }
 
+    container->setStyleSheet(_navigationStyleSheet);
 }
 
 #include "ViewManager.moc"
