@@ -23,7 +23,7 @@
 #include "ProfileWriter.h"
 
 // Qt
-#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
 
 // KDE
 #include <KConfig>
@@ -41,14 +41,43 @@ static const char GENERAL_GROUP[]     = "General";
 
 QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
 {
+    // both location have trailing slash
+    static const QString localDataLocation = KGlobal::dirs()->saveLocation("data", "konsole/");
+    static const QString systemDataLocation = KStandardDirs::installPath("data") + "konsole/";
+
+    const QString candidateLocalPath = localDataLocation + profile->name() + ".profile";
     QString newPath;
 
-    if (profile->isPropertySet(Profile::Path) &&
-            profile->path().startsWith(KGlobal::dirs()->saveLocation("data", "konsole/"))) {
+    // when the path property is not set, it means the profile has just
+    // been created in memory and has never been saved into disk before.
+    //
+    // use "name.profile" as filename and save it under $KDEHOME
+    if (! profile->isPropertySet(Profile::Path) ) {
+        return candidateLocalPath;
+    }
+
+    // for a system wide profile, save the modified version as
+    // a local profile under $KDEHOME
+    if ( profile->path().startsWith(systemDataLocation) ) {
+        return candidateLocalPath;
+    }
+
+    // for a local profile, use its existing path
+    if ( profile->path().startsWith(localDataLocation) ) {
         newPath = profile->path();
     } else {
-        // use the profile name + ".profile" and save it in $KDEHOME
-        newPath = KGlobal::dirs()->saveLocation("data", "konsole/") + profile->name() + ".profile";
+        // for the ad-hoc profiles in non-standard places
+        //
+        //  * if its path is writable for user, use its existing path
+        //  * if its path is not writable for user, save it under $KDEHOME
+        //
+        QFileInfo fileInfo(profile->path());
+        if ( fileInfo.isWritable() ) {
+            newPath = profile->path();
+        } else {
+            newPath = candidateLocalPath;
+        }
+
     }
 
     return newPath;
