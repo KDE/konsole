@@ -2236,10 +2236,10 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
   }
 
 
-  if ( !_mouseMarks && 
-       ((ev->button() == Qt::RightButton && !(ev->modifiers() & Qt::ShiftModifier))
-                        || ev->button() == Qt::MidButton) ) 
-  {
+  if (!_mouseMarks &&
+          (ev->button() == Qt::RightButton || ev->button() == Qt::MidButton ) &&
+          !(ev->modifiers() & Qt::ShiftModifier) ) {
+
     emit mouseSignal( 3, 
                       charColumn + 1, 
                       charLine + 1 +_scrollBar->value() -_scrollBar->maximum() , 
