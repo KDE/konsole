@@ -913,9 +913,9 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     // these are taken from the SSH manual ( accessed via 'man ssh' )
 
     // options which take no arguments
-    static const QString noArgumentOptions("1246AaCfgkMNnqsTtVvXxY");
+    static const QString noArgumentOptions("1246AaCfgKkMNnqsTtVvXxYy");
     // options which take one argument
-    static const QString singleArgumentOptions("bcDeFiLlmOopRSw");
+    static const QString singleArgumentOptions("bcDeFIiLlmOopRSWw");
 
     if (ok) {
         // find the username, host and command arguments
