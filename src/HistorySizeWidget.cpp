@@ -39,7 +39,7 @@ HistorySizeWidget::HistorySizeWidget(QWidget* parent)
     _ui->unlimitedWarningWidget->setVisible(false);
     _ui->unlimitedWarningWidget->setWordWrap(true);
     _ui->unlimitedWarningWidget->setCloseButtonVisible(false);
-    _ui->unlimitedWarningWidget->setMessageType(KMessageWidget::Warning);
+    _ui->unlimitedWarningWidget->setMessageType(KMessageWidget::Information);
     _ui->unlimitedWarningWidget->setText(i18nc("@info:status",
         "When using this option, the scrollback data will be written "
         "unencrypted to temporary files. Those temporary files will be "
