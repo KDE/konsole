@@ -454,7 +454,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
 
     connect(_ui->fontSizeSlider, SIGNAL(valueChanged(int)), this,
             SLOT(setFontSize(int)));
-    connect(_ui->editFontButton, SIGNAL(clicked()), this,
+    connect(_ui->selectFontButton, SIGNAL(clicked()), this,
             SLOT(showFontDialog()));
 
     // setup font smoothing

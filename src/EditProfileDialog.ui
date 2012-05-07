@@ -487,12 +487,12 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="editFontButton">
+             <widget class="QPushButton" name="selectFontButton">
               <property name="toolTip">
-               <string>Change the font used in this profile</string>
+               <string>Select the font used in this profile</string>
               </property>
               <property name="text">
-               <string>Edit Font...</string>
+               <string>Select Font...</string>
               </property>
              </widget>
             </item>
