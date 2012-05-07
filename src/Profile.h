@@ -24,7 +24,6 @@
 
 // Qt
 #include <QtCore/QHash>
-#include <QtCore/QObject>
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 #include <QtGui/QFont>
