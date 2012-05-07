@@ -36,8 +36,6 @@
 // Konsole
 #include "konsole_export.h"
 
-class KConfig;
-
 namespace Konsole
 {
 class ProfileGroup;

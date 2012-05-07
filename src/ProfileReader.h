@@ -24,6 +24,8 @@
 
 #include "Profile.h"
 
+class KConfig;
+
 namespace Konsole
 {
 

@@ -31,6 +31,8 @@
 
 class QSignalMapper;
 
+class KConfig;
+
 namespace Konsole
 {
 
