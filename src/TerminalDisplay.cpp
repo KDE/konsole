@@ -2484,8 +2484,6 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         // perform paste by simulating keypress events
         QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
         emit keyPressedSignal(&e);
-
-        _screenWindow->clearSelection();
     }
 }
 
