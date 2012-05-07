@@ -1153,7 +1153,7 @@ void EditProfileDialog::showFontDialog()
     QFont currentFont = _ui->fontPreviewLabel->font();
 
     QWeakPointer<KFontDialog> dialog = new KFontDialog(this, KFontChooser::FixedFontsOnly);
-    dialog.data()->setCaption(i18n("Select Fixed With Font"));
+    dialog.data()->setCaption(i18n("Select Fixed Width Font"));
     dialog.data()->setFont(currentFont, true);
 
     // TODO (hindenburg): When https://git.reviewboard.kde.org/r/103357 is
