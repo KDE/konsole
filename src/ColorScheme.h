@@ -169,6 +169,8 @@ public:
     /** Returns true if the background color is randomized. */
     bool randomizedBackgroundColor() const;
 
+    static const ColorEntry defaultTable[]; // table of default color entries
+
     static QString colorNameForIndex(int index);
     static QString translatedColorNameForIndex(int index);
 
@@ -221,8 +223,6 @@ private:
 
     static const char* const colorNames[TABLE_COLORS];
     static const char* const translatedColorNames[TABLE_COLORS];
-
-    static const ColorEntry defaultTable[]; // table of default color entries
 };
 
 /**

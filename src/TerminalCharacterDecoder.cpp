@@ -28,6 +28,7 @@
 // Konsole
 #include "konsole_wcwidth.h"
 #include "ExtendedCharTable.h"
+#include "ColorScheme.h"
 
 using namespace Konsole;
 PlainTextDecoder::PlainTextDecoder()
@@ -137,7 +138,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
 
 HTMLDecoder::HTMLDecoder() :
     _output(0)
-    , _colorTable(base_color_table)
+    , _colorTable(ColorScheme::defaultTable)
     , _innerSpanOpen(false)
     , _lastRendition(DEFAULT_RENDITION)
 {

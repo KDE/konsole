@@ -113,11 +113,6 @@ public:
 #define DEFAULT_FORE_COLOR 0
 #define DEFAULT_BACK_COLOR 1
 
-//a standard set of colors using black text on a white background.
-//defined in TerminalDisplay.cpp
-
-extern const ColorEntry base_color_table[TABLE_COLORS] KDE_NO_EXPORT;
-
 /* CharacterColor is a union of the various color spaces.
 
    Assignment is as follows:
