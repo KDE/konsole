@@ -1,5 +1,4 @@
 [Background]
-Bold=false
 Color=44,44,44
 Transparent=false
 
@@ -9,7 +8,6 @@ Color=44,44,44
 Transparent=false
 
 [Color0]
-Bold=false
 Color=63,63,63
 
 [Color0Intense]
@@ -17,7 +15,6 @@ Bold=true
 Color=112,144,128
 
 [Color1]
-Bold=false
 Color=112,80,80
 
 [Color1Intense]
@@ -25,7 +22,6 @@ Bold=true
 Color=220,163,163
 
 [Color2]
-Bold=false
 Color=96,180,138
 
 [Color2Intense]
@@ -33,7 +29,6 @@ Bold=true
 Color=114,213,163
 
 [Color3]
-Bold=false
 Color=223,175,143
 
 [Color3Intense]
@@ -41,7 +36,6 @@ Bold=true
 Color=240,223,175
 
 [Color4]
-Bold=false
 Color=154,184,215
 
 [Color4Intense]
@@ -49,7 +43,6 @@ Bold=true
 Color=148,191,243
 
 [Color5]
-Bold=false
 Color=220,140,195
 
 [Color5Intense]
@@ -57,7 +50,6 @@ Bold=true
 Color=236,147,211
 
 [Color6]
-Bold=false
 Color=140,208,211
 
 [Color6Intense]
@@ -65,7 +57,6 @@ Bold=true
 Color=147,224,227
 
 [Color7]
-Bold=false
 Color=220,220,204
 
 [Color7Intense]
@@ -73,7 +64,6 @@ Bold=true
 Color=255,255,255
 
 [Foreground]
-Bold=false
 Color=220,220,204
 
 [ForegroundIntense]
