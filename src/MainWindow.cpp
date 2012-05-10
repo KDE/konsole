@@ -73,7 +73,9 @@ MainWindow::MainWindow()
     , _menuBarInitialVisibilityApplied(false)
 {
     if (useTransparency()) {
-        setAttribute(Qt::WA_TranslucentBackground);
+        // It is userful to have translucent terminal area
+        setAttribute(Qt::WA_TranslucentBackground, true);
+        // But it is mostly annoying to have translucent menubar and tabbar
         setAttribute(Qt::WA_NoSystemBackground, false);
     }
 
