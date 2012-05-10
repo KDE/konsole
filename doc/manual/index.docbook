@@ -873,12 +873,6 @@ title: This is the title;; command: run me
 </varlistentry>
 
 <varlistentry>
-<term><option>--force-transparency</option></term>
-<listitem><para><action>Try to enable transparency</action>, even if the system does not appear to support it.
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
 <term><option>--hold, --noclose</option></term>
 <listitem><para><action>Do not close</action> the initial session automatically when it ends.
 </para></listitem>

@@ -172,9 +172,6 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("notransparency",
                 ki18n("Disable transparent backgrounds, even if the system"
                       " supports them."));
-    options.add("force-transparency",
-                ki18n("Try to enable transparency, even if the system does"
-                      " not appear to support it."));
     options.add("list-profiles", ki18n("List the available profiles"));
     options.add("list-profile-properties",
                 ki18n("List all the profile properties names and their type"
