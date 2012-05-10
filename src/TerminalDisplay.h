@@ -303,12 +303,6 @@ public:
      */
     int bellMode() const;
 
-    /**
-     * Shows a notification that a bell event has occurred in the terminal.
-     * TODO: More documentation here
-     */
-    void bell(const QString& message);
-
     /** Play a visual bell for prompt or warning. */
     void visualBell();
 
@@ -495,6 +489,12 @@ public slots:
 
     /** See setUsesMouse() */
     bool usesMouse() const;
+
+    /**
+     * Shows a notification that a bell event has occurred in the terminal.
+     * TODO: More documentation here
+     */
+    void bell(const QString& message);
 
     /**
      * Sets the background of the display to the specified color.
