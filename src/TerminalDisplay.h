@@ -301,9 +301,13 @@ public:
      *
      * See setBellMode()
      */
-    int bellMode() const {
-        return _bellMode;
-    }
+    int bellMode() const;
+
+    /**
+     * Shows a notification that a bell event has occurred in the terminal.
+     * TODO: More documentation here
+     */
+    void bell(const QString& message);
 
     /** Play a visual bell for prompt or warning. */
     void visualBell();
@@ -487,12 +491,6 @@ public slots:
     bool usesMouse() const;
 
     /**
-     * Shows a notification that a bell event has occurred in the terminal.
-     * TODO: More documentation here
-     */
-    void bell(const QString& message);
-
-    /**
      * Sets the background of the display to the specified color.
      * @see setColorTable(), setForegroundColor()
      */
@@ -601,13 +599,10 @@ protected slots:
     void blinkTextEvent();
     void blinkCursorEvent();
 
-    //Re-enables bell noises and visuals.  Used to disable further bells for a short period of time
-    //after emitting the first in a sequence of bell events.
-    void enableBell();
-
 private slots:
 
-    void swapColorTable();
+    void unmaskBell();
+    void swapFGBGColors();
     void tripleClickTimeout();  // resets possibleTripleClick
 
     /**
@@ -697,7 +692,7 @@ private:
     // is currently showing.
     QPointer<ScreenWindow> _screenWindow;
 
-    bool _allowBell;
+    bool _bellMasked;
 
     QGridLayout* _gridLayout;
 

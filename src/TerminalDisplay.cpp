@@ -265,7 +265,7 @@ QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *ob
 TerminalDisplay::TerminalDisplay(QWidget* parent)
     : QWidget(parent)
     , _screenWindow(0)
-    , _allowBell(true)
+    , _bellMasked(true)
     , _gridLayout(0)
     , _fontHeight(1)
     , _fontWidth(1)
@@ -2777,41 +2777,46 @@ void TerminalDisplay::setBellMode(int mode)
     _bellMode = mode;
 }
 
-void TerminalDisplay::enableBell()
+int TerminalDisplay::bellMode() const
 {
-    _allowBell = true;
+    return _bellMode;
+}
+
+void TerminalDisplay::unmaskBell()
+{
+    _bellMasked = false;
 }
 
 void TerminalDisplay::bell(const QString& message)
 {
-    if (_bellMode == Enum::NoBell)
+    if (_bellMasked)
         return;
 
-    if (_allowBell) {
-        // limit the rate at which bells can occur.
-        // ...mainly for sound effects where rapid bells in sequence
-        // produce a horrible noise.
-        _allowBell = false;
-        QTimer::singleShot(500, this, SLOT(enableBell()));
-
-        if (_bellMode == Enum::SystemBeepBell) {
-            KNotification::beep();
-        } else if (_bellMode == Enum::NotifyBell) {
-            KNotification::event(hasFocus() ? "BellVisible" : "BellInvisible",
-                                 message, QPixmap(), this);
-        } else if (_bellMode == Enum::VisualBell) {
-            visualBell();
-        }
+    if (_bellMode == Enum::SystemBeepBell) {
+        KNotification::beep();
+    } else if (_bellMode == Enum::NotifyBell) {
+        KNotification::event(hasFocus() ? "BellVisible" : "BellInvisible",
+                message, QPixmap(), this);
+    } else if (_bellMode == Enum::VisualBell) {
+        visualBell();
+    } else if (_bellMode == Enum::NoBell) {
+        ;
     }
+
+    // limit the rate at which bells can occur.
+    // ...mainly for sound effects where rapid bells in sequence
+    // produce a horrible noise.
+    _bellMasked = true;
+    QTimer::singleShot(500, this, SLOT(unmaskBell()));
 }
 
 void TerminalDisplay::visualBell()
 {
-    swapColorTable();
-    QTimer::singleShot(200, this, SLOT(swapColorTable()));
+    swapFGBGColors();
+    QTimer::singleShot(200, this, SLOT(swapFGBGColors()));
 }
 
-void TerminalDisplay::swapColorTable()
+void TerminalDisplay::swapFGBGColors()
 {
     // swap the default foreground & backround color
     ColorEntry color = _colorTable[DEFAULT_BACK_COLOR];
