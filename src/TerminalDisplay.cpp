@@ -2939,7 +2939,6 @@ void TerminalDisplay::doDrag()
     mimeData->setText(QApplication::clipboard()->text(QClipboard::Selection));
     _dragInfo.dragObject->setMimeData(mimeData);
     _dragInfo.dragObject->exec(Qt::CopyAction);
-    // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
 }
 
 void TerminalDisplay::setSessionController(SessionController* controller)
