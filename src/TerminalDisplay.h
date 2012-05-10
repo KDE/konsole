@@ -329,6 +329,12 @@ public:
      */
     void setVTFont(const QFont& font);
 
+    /** Increases the font size */
+    void increaseFontSize();
+
+    /** Decreases the font size */
+    void decreaseFontSize();
+
     /**
      * Specified whether anti-aliasing of text in the terminal display
      * is enabled or not.  Defaults to enabled.

@@ -207,10 +207,10 @@ public slots:
     void closeSession();
 
     /**  Increase font size */
-    void increaseTextSize();
+    void increaseFontSize();
 
     /**  Decrease font size */
-    void decreaseTextSize();
+    void decreaseFontSize();
 
 private slots:
     // menu item handlers

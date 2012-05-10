@@ -662,7 +662,7 @@ void SessionController::setupExtraActions()
     connect(_codecAction, SIGNAL(triggered(QTextCodec*)), this, SLOT(changeCodec(QTextCodec*)));
 
     // Text Size
-    action = collection->addAction("enlarge-font", this, SLOT(increaseTextSize()));
+    action = collection->addAction("enlarge-font", this, SLOT(increaseFontSize()));
     action->setText(i18n("Enlarge Font"));
     action->setIcon(KIcon("format-font-size-more"));
     KShortcut enlargeFontShortcut = action->shortcut();
@@ -670,7 +670,7 @@ void SessionController::setupExtraActions()
     enlargeFontShortcut.setAlternate(QKeySequence(Qt::CTRL + Qt::Key_Equal));
     action->setShortcut(enlargeFontShortcut);
 
-    action = collection->addAction("shrink-font", this, SLOT(decreaseTextSize()));
+    action = collection->addAction("shrink-font", this, SLOT(decreaseFontSize()));
     action->setText(i18n("Shrink Font"));
     action->setIcon(KIcon("format-font-size-less"));
     action->setShortcut(KShortcut(Qt::CTRL | Qt::Key_Minus));
@@ -1196,20 +1196,14 @@ void SessionController::clearHistoryAndReset()
     clearHistory();
 }
 
-void SessionController::increaseTextSize()
+void SessionController::increaseFontSize()
 {
-    QFont font = _view->getVTFont();
-    font.setPointSizeF(font.pointSizeF() + 1);
-    _view->setVTFont(font);
+    _view->increaseFontSize();
 }
 
-void SessionController::decreaseTextSize()
+void SessionController::decreaseFontSize()
 {
-    static const qreal MinimumFontSize = 6;
-
-    QFont font = _view->getVTFont();
-    font.setPointSizeF(qMax(font.pointSizeF() - 1, MinimumFontSize));
-    _view->setVTFont(font);
+    _view->decreaseFontSize();
 }
 
 void SessionController::monitorActivity(bool monitor)

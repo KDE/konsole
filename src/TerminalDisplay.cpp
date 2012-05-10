@@ -224,6 +224,22 @@ void TerminalDisplay::setFont(const QFont &)
     // ignore font change request if not coming from konsole itself
 }
 
+void TerminalDisplay::increaseFontSize()
+{
+    QFont font = getVTFont();
+    font.setPointSizeF(font.pointSizeF() + 1);
+    setVTFont(font);
+}
+
+void TerminalDisplay::decreaseFontSize()
+{
+    const qreal MinimumFontSize = 6;
+
+    QFont font = getVTFont();
+    font.setPointSizeF(qMax(font.pointSizeF() - 1, MinimumFontSize));
+    setVTFont(font);
+}
+
 uint TerminalDisplay::lineSpacing() const
 {
     return _lineSpacing;
@@ -2282,12 +2298,13 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 
     // ctrl+<wheel> for zomming, like in konqueror and firefox
     if (ev->modifiers() & Qt::ControlModifier) {
-        if (ev->delta() > 0)
-            // wheel-up
-            _sessionController->increaseTextSize();
-        else
-            // wheel-down
-            _sessionController->decreaseTextSize();
+        if (ev->delta() > 0) {
+            // wheel-up for increasing font size
+            increaseFontSize();
+        } else {
+            // wheel-down for decreasing font size
+            decreaseFontSize();
+        }
 
         return;
     }
