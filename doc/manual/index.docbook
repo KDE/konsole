@@ -867,12 +867,6 @@ title: This is the title;; command: run me
 </varlistentry>
 
 <varlistentry>
-<term><option>--notransparency</option></term>
-<listitem><para><action>Disable</action> transparent backgrounds, even if the system supports them.
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
 <term><option>--hold, --noclose</option></term>
 <listitem><para><action>Do not close</action> the initial session automatically when it ends.
 </para></listitem>

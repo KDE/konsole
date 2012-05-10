@@ -169,9 +169,6 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("background-mode",
                 ki18n("Start Konsole in the background and bring to the front"
                       " when Ctrl+Shift+F12 (by default) is pressed"));
-    options.add("notransparency",
-                ki18n("Disable transparent backgrounds, even if the system"
-                      " supports them."));
     options.add("list-profiles", ki18n("List the available profiles"));
     options.add("list-profile-properties",
                 ki18n("List all the profile properties names and their type"
