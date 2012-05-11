@@ -593,7 +593,7 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
 
     if (useOpacitySetting && !_wallpaper->isNull() &&
             _wallpaper->draw(painter, contentsRect)) {
-    } else if (WindowSystemInfo::HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff && useOpacitySetting) {
+    } else if (qAlpha(_blendColor) < 0xff && useOpacitySetting) {
         QColor color(backgroundColor);
         color.setAlpha(qAlpha(_blendColor));
 
