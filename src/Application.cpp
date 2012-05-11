@@ -49,7 +49,7 @@ void Application::init()
 {
     _backgroundInstance = 0;
 
-#if defined(Q_WS_MAC) && QT_VERSION >= 0x040600
+#if defined(Q_WS_MAC)
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
     // will work correctly in the terminal
     setAttribute(Qt::AA_MacDontSwapCtrlAndMeta);
