@@ -209,14 +209,14 @@ public:
      * The keyboard cursor defaults to using the foreground color of the character
      * underneath it.
      *
-     * @param useForegroundColor If true, the cursor color will change to match
-     * the foreground color of the character underneath it as it is moved, in this
-     * case, the @p color parameter is ignored and the color of the character
-     * under the cursor is inverted to ensure that it is still readable.
-     * @param color The color to use to draw the cursor.  This is only taken into
-     * account if @p useForegroundColor is false.
+     * @param color By default, the widget uses the color of the
+     * character under the cursor to draw the cursor, and inverts the
+     * color of that character to make sure it is still readable. If @p
+     * color is a valid QColor, the widget uses that color to draw the
+     * cursor. If @p color is not an valid QColor, the widget falls back
+     * to the default behavior.
      */
-    void setKeyboardCursorColor(bool useForegroundColor , const QColor& color);
+    void setKeyboardCursorColor(const QColor& color);
 
     /**
      * Returns the color of the keyboard cursor, or an invalid color if the keyboard
@@ -796,7 +796,7 @@ private:
 
     Enum::CursorShapeEnum _cursorShape;
 
-    // custom cursor color.  if this is invalid then the foreground
+    // cursor color. If it is invalid (by default) then the foreground
     // color of the character under the cursor is used
     QColor _cursorColor;
 

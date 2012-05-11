@@ -826,10 +826,14 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
         view->setKeyboardCursorShape(Enum::UnderlineCursor);
 
     // cursor color
-    bool useCustomColor = profile->useCustomCursorColor();
-    const QColor& cursorColor = profile->customCursorColor();
-
-    view->setKeyboardCursorColor(!useCustomColor, cursorColor);
+    if ( profile->useCustomCursorColor() ) {
+        const QColor& cursorColor = profile->customCursorColor();
+        view->setKeyboardCursorColor(cursorColor);
+    } else {
+        // an invalid QColor is used to inform the view widget to
+        // draw the cursor using the default color( matching the text)
+        view->setKeyboardCursorColor(QColor());
+    }
 
     // word characters
     view->setWordCharacters(profile->wordCharacters());
