@@ -103,8 +103,8 @@ MainWindow::MainWindow()
     connect(_viewManager, SIGNAL(viewDetached(Session*)),
             this, SIGNAL(viewDetached(Session*)));
 
-    // create main window widgets
-    setupWidgets();
+    // create the main widget
+    setupMainWidget();
 
     // disable automatically generated accelerators in top-level
     // menu items - to avoid conflicting with Alt+[Letter] shortcuts
@@ -119,7 +119,7 @@ MainWindow::MainWindow()
 
     // replace standard shortcuts which cannot be used in a terminal
     // emulator (as they are reserved for use by terminal applications)
-    correctShortcuts();
+    correctStandardShortcuts();
 
     setProfileList(new ProfileList(true, this));
 
@@ -153,7 +153,7 @@ void MainWindow::removeMenuAccelerators()
     }
 }
 
-void MainWindow::recoverMenuAccelerators()
+void MainWindow::restoreMenuAccelerators()
 {
     foreach(QAction* menuItem, menuBar()->actions()) {
         QString itemText = menuItem->data().toString();
@@ -167,7 +167,7 @@ void MainWindow::setSaveGeometryOnExit(bool save)
     setAutoSaveSettings("MainWindow", save);
 }
 
-void MainWindow::correctShortcuts()
+void MainWindow::correctStandardShortcuts()
 {
     // replace F1 shortcut for help contents
     QAction* helpAction = actionCollection()->action("help_contents");
@@ -641,7 +641,7 @@ void MainWindow::showSettingsDialog()
 void MainWindow::applyKonsoleSettings()
 {
     if (KonsoleSettings::allowMenuAccelerators()) {
-        recoverMenuAccelerators();
+        restoreMenuAccelerators();
     } else {
         removeMenuAccelerators();
     }
@@ -680,7 +680,7 @@ void MainWindow::activateMenuBar()
     menuBar()->setActiveAction(menuAction);
 }
 
-void MainWindow::setupWidgets()
+void MainWindow::setupMainWidget()
 {
     QWidget* mainWindowWidget = new QWidget(this);
     QVBoxLayout* mainWindowLayout = new QVBoxLayout();

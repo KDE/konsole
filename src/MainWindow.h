@@ -163,12 +163,12 @@ private slots:
     void applyKonsoleSettings();
 
 private:
-    void correctShortcuts();
+    void correctStandardShortcuts();
     void rememberMenuAccelerators();
     void removeMenuAccelerators();
-    void recoverMenuAccelerators();
+    void restoreMenuAccelerators();
     void setupActions();
-    void setupWidgets();
+    void setupMainWidget();
     QString activeSessionDir() const;
 
     /**
