@@ -2656,7 +2656,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _outputSuspendedLabel->setPalette(palette);
         _outputSuspendedLabel->setAutoFillBackground(true);
         _outputSuspendedLabel->setBackgroundRole(QPalette::Base);
-        _outputSuspendedLabel->setFont(QApplication::font());
+        _outputSuspendedLabel->setFont(KGlobalSettings::generalFont());
         _outputSuspendedLabel->setContentsMargins(5, 5, 5, 5);
 
         //enable activation of "Xon/Xoff" link in label
