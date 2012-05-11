@@ -1,3 +1,6 @@
 Id=2.9.0-global-options
 File=konsolerc
 Script=konsole-2.9.0-global-options.sh
+
+Id=2.9.0-colorscheme-bold-key
+Script=konsole-2.9.0-colorscheme-bold-key.sh
