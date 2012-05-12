@@ -2287,12 +2287,16 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
 
 void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 {
+    // Only vertical scrolling is supported
     if (ev->orientation() != Qt::Vertical)
         return;
 
+    const int modifiers = ev->modifiers();
+    const int delta = ev->delta();
+
     // ctrl+<wheel> for zomming, like in konqueror and firefox
-    if (ev->modifiers() & Qt::ControlModifier) {
-        if (ev->delta() > 0) {
+    if (modifiers & Qt::ControlModifier) {
+        if (delta > 0) {
             // wheel-up for increasing font size
             increaseFontSize();
         } else {
@@ -2303,12 +2307,12 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         return;
     }
 
-    // if the terminal program is not interested mouse events
-    // then send the event to the scrollbar if the slider has room to move
-    // or otherwise send simulated up / down key presses to the terminal program
-    // for the benefit of programs such as 'less'
+    // if the terminal program is not interested with mouse events:
+    //  * send the event to the scrollbar if the slider has room to move
+    //  * otherwise, send simulated up / down key presses to the terminal program
+    //    for the benefit of programs such as 'less'
     if (_mouseMarks) {
-        bool canScroll = _scrollBar->maximum() > 0;
+        const bool canScroll = _scrollBar->maximum() > 0;
         if (canScroll) {
             _scrollBar->event(ev);
         } else {
@@ -2318,16 +2322,15 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             // to get a reasonable scrolling speed, scroll by one line for every 5 degrees
             // of mouse wheel rotation.  Mouse wheels typically move in steps of 15 degrees,
             // giving a scroll of 3 lines
-            int key = ev->delta() > 0 ? Qt::Key_Up : Qt::Key_Down;
+            const int keyCode = delta > 0 ? Qt::Key_Up : Qt::Key_Down;
+            QKeyEvent keyEvent(QEvent::KeyPress, keyCode, Qt::NoModifier);
 
             // QWheelEvent::delta() gives rotation in eighths of a degree
-            int wheelDegrees = ev->delta() / 8;
-            int linesToScroll = abs(wheelDegrees) / 5;
+            const int degrees = delta / 8;
+            const int lines = abs(degrees) / 5;
 
-            QKeyEvent keyScrollEvent(QEvent::KeyPress, key, Qt::NoModifier);
-
-            for (int i = 0; i < linesToScroll; i++)
-                emit keyPressedSignal(&keyScrollEvent);
+            for (int i = 0; i < lines; i++)
+                emit keyPressedSignal(&keyEvent);
         }
     } else {
         // terminal program wants notification of mouse activity
@@ -2336,7 +2339,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         int charColumn;
         getCharacterPosition(ev->pos() , charLine , charColumn);
 
-        emit mouseSignal(ev->delta() > 0 ? 4 : 5,
+        emit mouseSignal(delta > 0 ? 4 : 5,
                          charColumn + 1,
                          charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
                          0);
