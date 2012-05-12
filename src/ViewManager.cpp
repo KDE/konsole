@@ -631,7 +631,20 @@ ViewContainer* ViewManager::createContainer()
         container = new StackedViewContainer(_viewSplitter);
     }
 
-    applyNavigationOptions(container);
+    // FIXME: these code feels duplicated
+    container->setNavigationVisibility(_navigationVisibility);
+    container->setNavigationPosition(_navigationPosition);
+    container->setStyleSheet(_navigationStyleSheet);
+    if (_showQuickButtons) {
+        container->setFeatures(container->features()
+                | ViewContainer::QuickNewView
+                | ViewContainer::QuickCloseView);
+        container->setNewViewMenu(createNewViewMenu());
+    } else {
+        container->setFeatures(container->features()
+                & ~ViewContainer::QuickNewView
+                & ~ViewContainer::QuickCloseView);
+    }
 
     // connect signals and slots
     connect(container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
@@ -1047,45 +1060,58 @@ void ViewManager::closeTabFromContainer(ViewContainer* container, QWidget* tab)
         controller->closeSession();
 }
 
-void ViewManager::updateNavigationOptions(NavigationOptions options)
+void ViewManager::setNavigationVisibility(int visibility)
 {
-    // since we have defined all valid values in konsole.kcfg, we can be sure
-    // all these values are safe to be cast into corresponding enum.
     _navigationVisibility =
-        static_cast<ViewContainer::NavigationVisibility>(options.visibility);
-    _navigationPosition   =
-        static_cast<ViewContainer::NavigationPosition>(options.position);
-    _newTabBehavior       =
-        static_cast<NewTabBehavior>(options.newTabBehavior);
-    _showQuickButtons     = options.showQuickButtons;
-    _navigationStyleSheet = options.styleSheet;
+        static_cast<ViewContainer::NavigationVisibility>(visibility);
 
     foreach(ViewContainer* container, _viewSplitter->containers()) {
-        applyNavigationOptions(container);
+        container->setNavigationVisibility(_navigationVisibility);
     }
-
 }
 
-void ViewManager::applyNavigationOptions(ViewContainer* container)
+void ViewManager::setNavigationPosition(int position)
 {
+    _navigationPosition =
+        static_cast<ViewContainer::NavigationPosition>(position);
 
-    container->setNavigationVisibility(_navigationVisibility);
-
-    Q_ASSERT(container->supportedNavigationPositions().contains(_navigationPosition));
-    container->setNavigationPosition(_navigationPosition);
-
-    if (_showQuickButtons) {
-        container->setFeatures(container->features()
-                               | ViewContainer::QuickNewView
-                               | ViewContainer::QuickCloseView);
-        container->setNewViewMenu(createNewViewMenu());
-    } else {
-        container->setFeatures(container->features()
-                               & ~ViewContainer::QuickNewView
-                               & ~ViewContainer::QuickCloseView);
+    foreach(ViewContainer* container, _viewSplitter->containers()) {
+        Q_ASSERT(container->supportedNavigationPositions().contains(_navigationPosition));
+        container->setNavigationPosition(_navigationPosition);
     }
+}
 
-    container->setStyleSheet(_navigationStyleSheet);
+void ViewManager::setNavigationStyleSheet(const QString& styleSheet)
+{
+    _navigationStyleSheet = styleSheet;
+
+    foreach(ViewContainer* container, _viewSplitter->containers()) {
+        container->setStyleSheet(_navigationStyleSheet);
+    }
+}
+
+void ViewManager::setShowQuickButtons(bool show)
+{
+    _showQuickButtons = show;
+
+    foreach(ViewContainer* container, _viewSplitter->containers()) {
+        if (_showQuickButtons) {
+            container->setFeatures(container->features()
+                    | ViewContainer::QuickNewView
+                    | ViewContainer::QuickCloseView);
+            container->setNewViewMenu(createNewViewMenu());
+        } else {
+            container->setFeatures(container->features()
+                    & ~ViewContainer::QuickNewView
+                    & ~ViewContainer::QuickCloseView);
+        }
+    }
+}
+
+
+void ViewManager::setNavigationBehavior(int behavior)
+{
+    _newTabBehavior = static_cast<NewTabBehavior>(behavior);
 }
 
 #include "ViewManager.moc"

@@ -136,14 +136,6 @@ public:
         PutNewTabAfterCurrentTab = 1
     };
 
-    struct NavigationOptions {
-        int visibility;
-        int position;
-        int newTabBehavior;
-        bool showQuickButtons;
-        QString styleSheet;
-    };
-
     /**
      * Sets the type of widget provided to navigate between open sessions
      * in a container.  The changes will only apply to newly created containers.
@@ -176,8 +168,11 @@ public:
     void saveSessions(KConfigGroup& group);
     void restoreSessions(const KConfigGroup& group);
 
-    void updateNavigationOptions(NavigationOptions options);
-    void applyNavigationOptions(ViewContainer* container);
+    void setNavigationVisibility(int visibility);
+    void setNavigationPosition(int position);
+    void setNavigationBehavior(int behavior);
+    void setNavigationStyleSheet(const QString& styleSheet);
+    void setShowQuickButtons(bool show);
 
     int managerId() const;
 

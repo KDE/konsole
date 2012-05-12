@@ -169,6 +169,10 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("background-mode",
                 ki18n("Start Konsole in the background and bring to the front"
                       " when Ctrl+Shift+F12 (by default) is pressed"));
+    options.add("show-menubar", ki18n("Show the menubar, overriding the default setting"));
+    options.add("hide-menubar", ki18n("Hide the menubar, overriding the default setting"));
+    options.add("show-tabbar", ki18n("Show the tabbar, overriding the default setting"));
+    options.add("hide-tabbar", ki18n("Hide the tabbar, overriding the default setting"));
     options.add("list-profiles", ki18n("List the available profiles"));
     options.add("list-profile-properties",
                 ki18n("List all the profile properties names and their type"

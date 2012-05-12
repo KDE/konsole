@@ -62,6 +62,7 @@ MainWindow::MainWindow()
     : KXmlGuiWindow()
     , _bookmarkHandler(0)
     , _pluggedController(0)
+    , _menuBarInitialVisibility(true)
     , _menuBarInitialVisibilityApplied(false)
 {
     // It is userful to have translucent terminal area
@@ -630,24 +631,48 @@ void MainWindow::showSettingsDialog()
 
 void MainWindow::applyKonsoleSettings()
 {
+    setMenuBarInitialVisibility(KonsoleSettings::showMenuBarByDefault());
+
     if (KonsoleSettings::allowMenuAccelerators()) {
         restoreMenuAccelerators();
     } else {
         removeMenuAccelerators();
     }
 
-    ViewManager::NavigationOptions options;
-    options.visibility       = KonsoleSettings::tabBarVisibility();
-    options.position         = KonsoleSettings::tabBarPosition();
-    options.newTabBehavior   = KonsoleSettings::newTabBehavior();
-    options.showQuickButtons = KonsoleSettings::showQuickButtons();
-    options.styleSheet       = KonsoleSettings::tabBarStyleSheet();
-
-    _viewManager->updateNavigationOptions(options);
+    setNavigationVisibility(KonsoleSettings::tabBarVisibility());
+    setNavigationPosition(KonsoleSettings::tabBarPosition());
+    setNavigationStyleSheet(KonsoleSettings::tabBarStyleSheet());
+    setNavigationBehavior(KonsoleSettings::newTabBehavior());
+    setShowQuickButtons(KonsoleSettings::showQuickButtons());
 
     // setAutoSaveSettings("MainWindow", KonsoleSettings::saveGeometryOnExit());
 
     updateWindowCaption();
+}
+
+void MainWindow::setNavigationVisibility(int visibility)
+{
+    _viewManager->setNavigationVisibility(visibility);
+}
+
+void MainWindow::setNavigationPosition(int position)
+{
+    _viewManager->setNavigationPosition(position);
+}
+
+void MainWindow::setNavigationStyleSheet(const QString& styleSheet)
+{
+    _viewManager->setNavigationStyleSheet(styleSheet);
+}
+
+void MainWindow::setNavigationBehavior(int behavior)
+{
+    _viewManager->setNavigationBehavior(behavior);
+}
+
+void MainWindow::setShowQuickButtons(bool show)
+{
+    _viewManager->setShowQuickButtons(show);
 }
 
 void MainWindow::activateMenuBar()
@@ -689,6 +714,10 @@ void MainWindow::configureNotifications()
     KNotifyConfigWidget::configure(this);
 }
 
+void MainWindow::setMenuBarInitialVisibility(bool visible)
+{
+    _menuBarInitialVisibility = visible;
+}
 void MainWindow::showEvent(QShowEvent* aEvent)
 {
     // Make sure the 'initial' visibility is applied only once.
@@ -698,9 +727,8 @@ void MainWindow::showEvent(QShowEvent* aEvent)
         // moment. Otherwise, the initial visibility will be determined by
         // what KMainWindow has automatically stored in konsolerc, but not by
         // what users has explicitly configured .
-        menuBar()->setVisible(KonsoleSettings::showMenuBarByDefault());
-        _toggleMenuBarAction->setChecked(KonsoleSettings::showMenuBarByDefault());
-
+        menuBar()->setVisible(_menuBarInitialVisibility);
+        _toggleMenuBarAction->setChecked(_menuBarInitialVisibility);
         _menuBarInitialVisibilityApplied = true;
     }
 

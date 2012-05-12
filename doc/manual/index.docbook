@@ -867,6 +867,30 @@ title: This is the title;; command: run me
 </varlistentry>
 
 <varlistentry>
+<term><option>--show-menubar</option></term>
+<listitem><para><action>Show</action> the menubar, overriding the default behavior.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--hide-menubar</option></term>
+<listitem><para><action>Hide</action> the menubar, overriding the default behavior.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--show-tabbar</option></term>
+<listitem><para><action>Show</action> the tabbar, overriding the default behavior.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--hide-tabbar</option></term>
+<listitem><para><action>Hide</action> the tabbar, overriding the default behavior.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
 <term><option>--hold, --noclose</option></term>
 <listitem><para><action>Do not close</action> the initial session automatically when it ends.
 </para></listitem>

@@ -298,7 +298,29 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
 
     if (window == 0) {
         window = newMainWindow();
+
+        // override default menubar visibility
+        if (args->isSet("show-menubar")) {
+            window->setMenuBarInitialVisibility(true);
+        }
+        if (args->isSet("hide-menubar")) {
+            window->setMenuBarInitialVisibility(false);
+        }
+
+        // override default tabbbar visibility
+        // FIXME: remove those magic number
+        // see ViewContainer::NavigationVisibility
+        if (args->isSet("show-tabbar")) {
+            // always show
+            window->setNavigationVisibility(0);
+        }
+        if (args->isSet("hide-tabbar")) {
+            // never show
+            window->setNavigationVisibility(2);
+        }
+
     }
+
     return window;
 }
 

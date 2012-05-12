@@ -99,6 +99,17 @@ public:
      */
     void setFocus();
 
+    /**
+     * Set the initial visibility of the menubar.
+     */
+    void setMenuBarInitialVisibility(bool visible);
+
+    void setNavigationVisibility(int visibility);
+    void setNavigationPosition(int position);
+    void setNavigationStyleSheet(const QString& stylesheet);
+    void setNavigationBehavior(int behavior);
+    void setShowQuickButtons(bool show);
+
 signals:
 
     /**
@@ -196,6 +207,7 @@ private:
 
     QPointer<SessionController> _pluggedController;
 
+    bool _menuBarInitialVisibility;
     bool _menuBarInitialVisibilityApplied;
 };
 
