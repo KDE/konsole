@@ -358,7 +358,7 @@ void SessionController::updateWebSearchMenu()
     _webSearchMenu->menu()->clear();
 
     if ( _selectedText.isEmpty() )
-        return ;
+        return;
 
     QString searchText = _selectedText;
     searchText = searchText.replace('\n', ' ').replace('\r', ' ').simplified();

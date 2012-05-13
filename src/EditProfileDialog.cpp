@@ -757,14 +757,14 @@ void EditProfileDialog::updateTransparencyWarning()
     foreach(const QModelIndex & index , _ui->colorSchemeList->selectionModel()->selectedIndexes()) {
         bool needTransparency = index.data(Qt::UserRole + 1).value<const ColorScheme*>()->opacity() < 1.0;
 
-        if (! needTransparency) {
+        if (!needTransparency) {
             _ui->transparencyWarningWidget->setHidden(true);
-        } else if (! KWindowSystem::compositingActive()) {
+        } else if (!KWindowSystem::compositingActive()) {
             _ui->transparencyWarningWidget->setText(i18n("This color scheme uses a transparent background"
                                                     " which does not appear to be supported on your"
                                                     " desktop"));
             _ui->transparencyWarningWidget->setHidden(false);
-        } else if (! WindowSystemInfo::HAVE_TRANSPARENCY) {
+        } else if (!WindowSystemInfo::HAVE_TRANSPARENCY) {
             _ui->transparencyWarningWidget->setText(i18n("Konsole was started before desktop effects were enabled."
                                                     " You need to restart Konsole to see transparent background."));
             _ui->transparencyWarningWidget->setHidden(false);

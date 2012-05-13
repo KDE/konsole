@@ -145,8 +145,7 @@ bool shouldUseNewProcess()
         hasControllingTTY = true;
     }
 
-    return hasControllingTTY ;
-
+    return hasControllingTTY;
 }
 
 void fillCommandLineOptions(KCmdLineOptions& options)

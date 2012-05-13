@@ -83,7 +83,7 @@ public:
     /**
      * Returns a list of already loaded profiles
      */
-    QList<Profile::Ptr> loadedProfiles() const ;
+    QList<Profile::Ptr> loadedProfiles() const;
 
     /**
      * Loads all available profiles.  This involves reading each

@@ -2473,7 +2473,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
     if (appendReturn)
         text.append("\r");
 
-    if (! text.isEmpty()) {
+    if (!text.isEmpty()) {
         text.replace('\n', '\r');
         // perform paste by simulating keypress events
         QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
