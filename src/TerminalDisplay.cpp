@@ -60,7 +60,6 @@
 #include "ScreenWindow.h"
 #include "LineFont.h"
 #include "SessionController.h"
-#include "WindowSystemInfo.h"
 #include "ExtendedCharTable.h"
 #include "TerminalDisplayAccessible.h"
 #include "SessionManager.h"
