@@ -189,7 +189,7 @@ void ManageProfilesDialog::updateItemsForProfile(const Profile::Ptr profile, QLi
     QString shortcut = ProfileManager::instance()->shortcut(profile).toString();
     items[ShortcutColumn]->setText(shortcut);
     items[ShortcutColumn]->setData(QVariant::fromValue(profile), ShortcutRole);
-    items[ShortcutColumn]->setToolTip(i18n("Click to change shortcut"));
+    items[ShortcutColumn]->setToolTip(i18n("Double click to change shortcut"));
 }
 void ManageProfilesDialog::addItems(const Profile::Ptr profile)
 {
