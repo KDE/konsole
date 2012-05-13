@@ -78,9 +78,6 @@
    </item>
    <item row="0" column="0" rowspan="5">
     <widget class="QTableView" name="sessionTable">
-     <property name="whatsThis">
-      <string/>
-     </property>
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
