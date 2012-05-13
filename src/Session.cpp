@@ -1279,10 +1279,10 @@ int Session::processId() const
 void Session::setTitle(int role , const QString& title)
 {
     switch (role) {
-    case (0):
+    case 0:
         this->setTitle(Session::NameRole, title);
         break;
-    case (1):
+    case 1:
         this->setTitle(Session::DisplayedTitleRole, title);
 
         // without these, that title will be overridden by the expansion of
@@ -1297,9 +1297,9 @@ void Session::setTitle(int role , const QString& title)
 QString Session::title(int role) const
 {
     switch (role) {
-    case (0):
+    case 0:
         return this->title(Session::NameRole);
-    case (1):
+    case 1:
         return this->title(Session::DisplayedTitleRole);
     default:
         return QString();
@@ -1309,10 +1309,10 @@ QString Session::title(int role) const
 void Session::setTabTitleFormat(int context , const QString& format)
 {
     switch (context) {
-    case (0):
+    case 0:
         this->setTabTitleFormat(Session::LocalTabTitle, format);
         break;
-    case (1):
+    case 1:
         this->setTabTitleFormat(Session::RemoteTabTitle, format);
         break;
     }
@@ -1321,9 +1321,9 @@ void Session::setTabTitleFormat(int context , const QString& format)
 QString Session::tabTitleFormat(int context) const
 {
     switch (context) {
-    case (0):
+    case 0:
         return this->tabTitleFormat(Session::LocalTabTitle);
-    case (1):
+    case 1:
         return this->tabTitleFormat(Session::RemoteTabTitle);
     default:
         return QString();
