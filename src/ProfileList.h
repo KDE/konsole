@@ -35,7 +35,6 @@ class QKeySequence;
 
 namespace Konsole
 {
-
 class Profile;
 
 /**
@@ -103,7 +102,6 @@ private:
     QAction* _emptyListAction;
     QSet<QWidget*> _registeredWidgets;
 };
-
 }
 
 #endif // PROFILELIST_H

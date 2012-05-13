@@ -36,7 +36,6 @@ class KToggleAction;
 
 namespace Konsole
 {
-
 class IncrementalSearchBar;
 class ViewManager;
 class ViewProperties;
@@ -210,7 +209,6 @@ private:
     bool _menuBarInitialVisibility;
     bool _menuBarInitialVisibilityApplied;
 };
-
 }
 
 #endif // KONSOLEMAINWINDOW_H

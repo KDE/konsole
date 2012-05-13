@@ -35,7 +35,6 @@ class KConfig;
 
 namespace Konsole
 {
-
 class Session;
 
 /**
@@ -46,7 +45,6 @@ class KONSOLEPRIVATE_EXPORT SessionManager : public QObject
     Q_OBJECT
 
 public:
-
     /**
      * Constructs a new session manager and loads information about the available
      * profiles.
@@ -98,7 +96,6 @@ public:
     Session* idToSession(int id);
 
 signals:
-
     /**
      * Emitted when a session's settings are updated to match
      * its current profile.
@@ -106,7 +103,6 @@ signals:
     void sessionUpdated(Session* session);
 
 protected slots:
-
     /**
      * Called to inform the manager that a session has finished executing.
      *
@@ -115,13 +111,11 @@ protected slots:
     void sessionTerminated(QObject* session);
 
 private slots:
-
     void sessionProfileCommandReceived(const QString& text);
 
     void profileChanged(Profile::Ptr profile);
 
 private:
-
     // applies updates to a profile
     // to all sessions currently using that profile
     // if modifiedPropertiesOnly is true, only properties which
@@ -157,6 +151,5 @@ private:
     const Profile::Ptr _profile;
     bool _modifiedPropertiesOnly;
 };
-
 }
 #endif //SESSIONMANAGER_H

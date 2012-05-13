@@ -34,7 +34,6 @@
 
 namespace Konsole
 {
-
 /**
  * Encapsulates user-visible information about the terminal session currently being displayed in a view,
  * such as the associated title and icon.
@@ -150,7 +149,6 @@ private:
     static QHash<int, ViewProperties*> _viewProperties;
     static QString _mimeType;
 };
-
 }
 
 #endif //VIEWPROPERTIES_H

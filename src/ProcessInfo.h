@@ -28,7 +28,6 @@
 
 namespace Konsole
 {
-
 /**
  * Takes a snapshot of the state of a process and provides access to
  * information such as the process name, parent process,
@@ -457,6 +456,5 @@ private:
     QString _port;
     QString _command;
 };
-
 }
 #endif //PROCESSINFO_H

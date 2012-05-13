@@ -59,7 +59,6 @@ class ProfileGroup;
  */
 class KONSOLEPRIVATE_EXPORT Profile : public QSharedData
 {
-
     friend class KDE4ProfileReader;
     friend class KDE4ProfileWriter;
     friend class ProfileGroup;
@@ -650,9 +649,7 @@ public:
      * properties and values.
      */
     QHash<Profile::Property, QVariant> parse(const QString& input);
-
 };
-
 }
 Q_DECLARE_METATYPE(Konsole::Profile::Ptr)
 

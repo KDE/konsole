@@ -30,7 +30,6 @@ class RenameTabDialog;
 
 namespace Konsole
 {
-
 class RenameTabDialog : public KDialog
 {
     Q_OBJECT
@@ -50,7 +49,6 @@ public:
 private:
     Ui::RenameTabDialog* _ui;
 };
-
 }
 
 #endif

@@ -36,7 +36,6 @@ class KConfigGroup;
 
 namespace Konsole
 {
-
 class ColorScheme;
 class IncrementalSearchBar;
 class Session;
@@ -392,7 +391,6 @@ private:
     int _managerId;
     static int lastManagerId;
 };
-
 }
 
 #endif

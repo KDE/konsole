@@ -30,7 +30,6 @@ class RenameTabWidget;
 
 namespace Konsole
 {
-
 class RenameTabWidget : public QWidget
 {
     Q_OBJECT
@@ -58,7 +57,6 @@ public slots:
 private:
     Ui::RenameTabWidget* _ui;
 };
-
 }
 
 #endif

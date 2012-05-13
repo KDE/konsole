@@ -34,7 +34,6 @@ class QIODevice;
 
 namespace Konsole
 {
-
 /**
  * Manages the keyboard translations available for use by terminal sessions,
  * see KeyboardTranslator.
@@ -90,7 +89,6 @@ public:
     static KeyboardTranslatorManager* instance();
 
 private:
-
     void findTranslators(); // locate all available translators
 
     // loads the translator with the given name
@@ -104,9 +102,7 @@ private:
 
     const KeyboardTranslator* _fallbackTranslator;
     QHash<QString, KeyboardTranslator*> _translators;
-
 };
-
 }
 
 #endif // KEYBOARDTRANSLATOR_MANAGER_H

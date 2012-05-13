@@ -54,7 +54,6 @@ class KActionMenu;
 
 namespace Konsole
 {
-
 class Session;
 class SessionGroup;
 class ScreenWindow;
@@ -87,9 +86,7 @@ class KONSOLEPRIVATE_EXPORT SessionController : public ViewProperties , public K
     Q_OBJECT
 
 public:
-
     enum CopyInputToEnum {
-
         /** Copy keyboard input to all the other tabs in current window */
         CopyInputToAllTabsMode = 0 ,
 
@@ -385,12 +382,10 @@ signals:
     void completed(bool success);
 
 protected:
-
     /** Returns a list of sessions in the group */
     QList< SessionPtr > sessions() const;
 
 private:
-
     bool _autoDelete;
     QList< SessionPtr > _sessions;
 };
@@ -431,7 +426,6 @@ private:
 
         TerminalCharacterDecoder* decoder;  // decoder used to convert terminal characters
         // into output
-
     };
 
     QHash<KJob*, SaveJob> _jobSession;
@@ -510,7 +504,6 @@ private:
 
     //static QPointer<SearchHistoryThread> _thread;
 };
-
 }
 
 #endif //SESSIONCONTROLLER_H

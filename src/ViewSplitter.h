@@ -30,7 +30,6 @@ class QFocusEvent;
 
 namespace Konsole
 {
-
 class ViewContainer;
 
 /**
@@ -185,7 +184,6 @@ private:
     QList<ViewContainer*> _containers;
     bool _recursiveSplitting;
 };
-
 }
 #endif //VIEWSPLITTER_H
 

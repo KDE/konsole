@@ -24,7 +24,6 @@
 
 namespace Konsole
 {
-
 /**
  * This class serves as a place for putting enum definitions that are
  * used or referenced in multiple places in the code. Keep it small.
@@ -32,7 +31,6 @@ namespace Konsole
 class Enum
 {
 public:
-
     /**
      * This enum describes the modes available to remember lines of output
      * produced by the terminal.
@@ -111,9 +109,7 @@ public:
         /** No bell effects */
         NoBell = 3
     };
-
 };
-
 }
 #endif // ENUMERATION_H
 

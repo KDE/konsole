@@ -32,7 +32,6 @@ class KeyBindingEditor;
 
 namespace Konsole
 {
-
 class KeyboardTranslator;
 
 /**
@@ -99,7 +98,6 @@ private:
     // when setup() is called
     KeyboardTranslator* _translator;
 };
-
 }
 
 #endif //KEYBINDINGEDITOR_H

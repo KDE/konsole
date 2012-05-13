@@ -34,7 +34,6 @@ class HistorySizeDialog;
 
 namespace Konsole
 {
-
 class HistorySizeDialog : public KDialog
 {
     Q_OBJECT
@@ -42,7 +41,6 @@ class HistorySizeDialog : public KDialog
 public:
     explicit HistorySizeDialog(QWidget* parent = 0);
     ~HistorySizeDialog();
-
 
     /** See HistorySizeWidget::setMode. */
     void setMode(Enum::HistoryModeEnum aMode);
@@ -59,7 +57,6 @@ public:
 private:
     Ui::HistorySizeDialog* _ui;
 };
-
 }
 
 #endif

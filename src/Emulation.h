@@ -35,7 +35,6 @@ class QKeyEvent;
 
 namespace Konsole
 {
-
 class KeyboardTranslator;
 class HistoryType;
 class Screen;
@@ -120,7 +119,6 @@ class KONSOLEPRIVATE_EXPORT Emulation : public QObject
     Q_OBJECT
 
 public:
-
     /** Constructs a new terminal emulation */
     Emulation();
     ~Emulation();
@@ -470,7 +468,6 @@ protected slots:
     void checkSelectedText();
 
 private slots:
-
     // triggered by timer, causes the emulation to send an updated screen image to each
     // view
     void showBulk();
@@ -482,9 +479,7 @@ private:
     QTimer _bulkTimer1;
     QTimer _bulkTimer2;
     bool _imageSizeInitialized;
-
 };
-
 }
 
 #endif // ifndef EMULATION_H

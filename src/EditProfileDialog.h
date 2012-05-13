@@ -44,7 +44,6 @@ class EditProfileDialog;
 
 namespace Konsole
 {
-
 /**
  * A dialog which allows the user to edit a profile.
  * After the dialog is created, it can be initialized with the settings
@@ -275,9 +274,7 @@ public:
 
 private:
     QPointer<QTimeLine> _entryTimeLine;
-
 };
-
 }
 
 #endif // EDITPROFILEDIALOG_H

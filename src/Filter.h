@@ -33,7 +33,6 @@ class QAction;
 
 namespace Konsole
 {
-
 /**
  * A filter processes blocks of text looking for certain patterns (such as URLs or keywords from a list)
  * and marks the areas which match the filter's patterns as 'hotspots'.
@@ -124,7 +123,6 @@ public:
         int    _endLine;
         int    _endColumn;
         Type _type;
-
     };
 
     /** Constructs a new filter. */
@@ -275,7 +273,6 @@ protected:
     virtual RegExpFilter::HotSpot* newHotSpot(int, int, int, int);
 
 private:
-
     static const QRegExp FullUrlRegExp;
     static const QRegExp EmailAddressRegExp;
 
@@ -341,7 +338,6 @@ public:
     QList<Filter::HotSpot*> hotSpots() const;
     /** Returns a list of all hotspots at the given line in all the chain's filters */
     QList<Filter::HotSpot> hotSpotsAtLine(int line) const;
-
 };
 
 /** A filter chain which processes character images from terminal displays */
@@ -366,6 +362,5 @@ private:
     QString* _buffer;
     QList<int>* _linePositions;
 };
-
 }
 #endif //FILTER_H

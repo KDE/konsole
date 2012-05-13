@@ -36,7 +36,6 @@ class HistorySizeWidget;
 
 namespace Konsole
 {
-
 /**
  * A widget for controlling hisotry related options
  */
@@ -65,7 +64,6 @@ public:
     int lineCount() const;
 
 signals:
-
     /** Emitted when the history mode is changed. */
     void historyModeChanged(Enum::HistoryModeEnum) const;
 
@@ -73,17 +71,14 @@ signals:
     void historySizeChanged(int) const;
 
 private slots:
-
     void buttonClicked(QAbstractButton*) const;
 
 private:
-
     Ui::HistorySizeWidget* _ui;
 
     // 1000 lines was the default in the KDE3 series
     static const int DefaultLineCount = 1000;
 };
-
 }
 
 #endif // HISTORYSIZEWIDGET_H

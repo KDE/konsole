@@ -48,7 +48,6 @@ class QTimerEvent;
 
 namespace Konsole
 {
-
 class FilterChain;
 class TerminalImageFilterChain;
 class SessionController;
@@ -619,7 +618,6 @@ private slots:
     void dropMenuCdActionTriggered();
 
 private:
-
     // -- Drawing helpers --
 
     // divides the part of the display specified by 'rect' into
@@ -832,7 +830,6 @@ private:
     }
     int _timerId;
 };
-
 }
 
 #endif // TERMINALDISPLAY_H

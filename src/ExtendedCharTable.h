@@ -27,7 +27,6 @@
 
 namespace Konsole
 {
-
 /**
  * A table which stores sequences of unicode characters, referenced
  * by hash keys.  The hash key itself is the same size as a unicode
@@ -78,6 +77,5 @@ private:
     // themselves.
     QHash<ushort, ushort*> extendedCharTable;
 };
-
 }
 #endif  // end of EXTENDEDCHARTABLE_H

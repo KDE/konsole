@@ -32,7 +32,6 @@ class ColorSchemeEditor;
 
 namespace Konsole
 {
-
 class ColorScheme;
 
 /**
@@ -82,7 +81,6 @@ private:
     Ui::ColorSchemeEditor* _ui;
     ColorScheme* _colors;
 };
-
 }
 
 #endif // COLORSCHEMEEDITOR_H

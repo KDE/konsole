@@ -43,7 +43,6 @@
 
 namespace Konsole
 {
-
 class TerminalCharacterDecoder;
 class TerminalDisplay;
 class HistoryType;
@@ -578,7 +577,6 @@ public:
     static const Character defaultChar;
 
 private:
-
     //copies a line of text from the screen or history into a stream using a
     //specified character decoder.  Returns the number of lines actually copied,
     //which may be less than 'count' if (start+count) is more than the number of characters on
@@ -700,9 +698,7 @@ private:
 
     // last position where we added a character
     int _lastPos;
-
 };
-
 }
 
 #endif // SCREEN_H

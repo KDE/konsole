@@ -29,7 +29,6 @@
 
 namespace Konsole
 {
-
 class TabTitleFormatButton : public QPushButton
 {
     Q_OBJECT
@@ -58,9 +57,7 @@ private:
     static const int _localElementCount;
     static const Element _remoteElements[];
     static const int _remoteElementCount;
-
 };
-
 }
 
 #endif // TABTITLEFORMATBUTTON_H

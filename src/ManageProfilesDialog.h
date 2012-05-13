@@ -43,7 +43,6 @@ class ManageProfilesDialog;
 
 namespace Konsole
 {
-
 /**
  * A dialog which lists the available types of profiles and allows
  * the user to add new profiles, and remove or edit existing
@@ -158,7 +157,6 @@ private:
     mutable QSet<QWidget*> _modifiedEditors;
     mutable QSet<QModelIndex> _itemsBeingEdited;
 };
-
 }
 #endif // MANAGEPROFILESDIALOG_H
 

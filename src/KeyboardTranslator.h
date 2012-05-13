@@ -36,7 +36,6 @@ class QTextStream;
 
 namespace Konsole
 {
-
 /**
  * A convertor which maps between key sequences pressed by the user and the
  * character strings which should be sent to the terminal and commands
@@ -526,7 +525,6 @@ inline KeyboardTranslator::States KeyboardTranslator::Entry::stateMask() const
 {
     return _stateMask;
 }
-
 }
 
 Q_DECLARE_METATYPE(Konsole::KeyboardTranslator::Entry)

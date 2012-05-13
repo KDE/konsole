@@ -31,7 +31,6 @@
 
 namespace Konsole
 {
-
 /**
  * An entry in a terminal display's color palette.
  *
@@ -294,7 +293,6 @@ inline void CharacterColor::setIntensive()
         _v = 1;
     }
 }
-
 }
 
 #endif // CHARACTERCOLOR_H

@@ -31,7 +31,6 @@
 
 namespace Konsole
 {
-
 /**
  * Manages the color schemes available for use by terminal displays.
  * See ColorScheme
@@ -39,7 +38,6 @@ namespace Konsole
 class ColorSchemeManager
 {
 public:
-
     /**
      * Constructs a new ColorSchemeManager and loads the list
      * of available color schemes.
@@ -112,7 +110,6 @@ private:
 
     static const ColorScheme _defaultColorScheme;
 };
-
 }
 
 #endif //COLORSCHEMEMANAGER_H

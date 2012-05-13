@@ -28,7 +28,6 @@ class KConfig;
 
 namespace Konsole
 {
-
 /** Interface for all classes which can write profile settings to a file. */
 class ProfileWriter
 {
@@ -58,7 +57,6 @@ private:
     void writeProperties(KConfig& config, const Profile::Ptr profile,
                          const Profile::PropertyInfo* properties);
 };
-
 }
 
 #endif // PROFILEWRITER_H

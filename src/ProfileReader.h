@@ -28,7 +28,6 @@ class KConfig;
 
 namespace Konsole
 {
-
 /** Interface for all classes which can load profile settings from a file. */
 class ProfileReader
 {
@@ -61,7 +60,6 @@ private:
     void readProperties(const KConfig& config, Profile::Ptr profile,
                         const Profile::PropertyInfo* properties);
 };
-
 }
 
 #endif // PROFILEREADER_H

@@ -31,7 +31,6 @@
 
 namespace Konsole
 {
-
 typedef unsigned char LineProperty;
 
 static const int LINE_DEFAULT      = 0;
@@ -161,7 +160,6 @@ public:
     inline bool isSpace() const {
         return (rendition & RE_EXTENDED_CHAR) ? false : QChar(character).isSpace();
     }
-
 };
 
 inline bool operator == (const Character& a, const Character& b)
@@ -202,7 +200,6 @@ inline ColorEntry::FontWeight Character::fontWeight(const ColorEntry* base) cons
     else
         return ColorEntry::UseCurrentFormat;
 }
-
 }
 Q_DECLARE_TYPEINFO(Konsole::Character, Q_MOVABLE_TYPE);
 

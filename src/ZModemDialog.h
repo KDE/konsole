@@ -26,7 +26,6 @@ class KTextEdit;
 
 namespace Konsole
 {
-
 class ZModemDialog : public KDialog
 {
     Q_OBJECT
@@ -50,7 +49,6 @@ private slots:
 private:
     KTextEdit* _textEdit;
 };
-
 }
 
 #endif

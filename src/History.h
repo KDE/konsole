@@ -34,7 +34,6 @@
 
 namespace Konsole
 {
-
 /*
    An extendable tmpfile(1) based buffer.
 */
@@ -117,7 +116,6 @@ public:
 
 protected:
     HistoryType* _historyType;
-
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -198,7 +196,6 @@ public:
 class CompactHistoryBlock
 {
 public:
-
     CompactHistoryBlock() {
         blockLength = 4096 * 64; // 256kb
         head = (quint8*) mmap(0, blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
@@ -381,7 +378,6 @@ public:
 protected:
     unsigned int m_nbLines;
 };
-
 }
 
 #endif // TEHISTORY_H

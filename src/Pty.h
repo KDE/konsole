@@ -36,7 +36,6 @@ class QStringList;
 
 namespace Konsole
 {
-
 /**
  * The Pty class is used to start the terminal process,
  * send data to it, receive data from it and manipulate
@@ -55,7 +54,6 @@ class Pty: public KPtyProcess
     Q_OBJECT
 
 public:
-
     /**
      * Constructs a new Pty.
      *
@@ -147,7 +145,6 @@ public:
     void closePty();
 
 public slots:
-
     /**
      * Put the pty into UTF-8 mode on systems which support it.
      */
@@ -163,7 +160,6 @@ public slots:
     void sendData(const char* buffer, int length);
 
 signals:
-
     /**
      * Emitted when a new block of data is received from
      * the teletype.
@@ -181,7 +177,6 @@ private slots:
     void dataReceived();
 
 private:
-
     void init();
 
     // takes a list of key=value pairs and adds them
@@ -194,7 +189,6 @@ private:
     bool _xonXoff;
     bool _utf8;
 };
-
 }
 
 #endif // PTY_H

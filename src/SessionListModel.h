@@ -28,7 +28,6 @@
 
 namespace Konsole
 {
-
 class Session;
 
 /**
@@ -72,7 +71,6 @@ private slots:
 private:
     QList<Session*> _sessions;
 };
-
 }
 
 #endif //SESSIONLISTMODEL_H

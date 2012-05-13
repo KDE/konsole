@@ -46,7 +46,6 @@ class KProcess;
 
 namespace Konsole
 {
-
 class Emulation;
 class Pty;
 class ProcessInfo;
@@ -677,7 +676,6 @@ private slots:
     void onPrimaryScreenInUse(bool use);
 
 private:
-
     // checks that the binary 'program' is available and can be executed
     // returns the binary name if available or an empty string otherwise
     static QString checkProgram(const QString& program);
@@ -748,7 +746,6 @@ private:
     QSize _preferredSize;
 
     static int lastSessionId;
-
 };
 
 /**
@@ -824,7 +821,6 @@ private:
 
     int _masterMode;
 };
-
 }
 
 #endif

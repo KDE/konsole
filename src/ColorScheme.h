@@ -37,7 +37,6 @@ class QPainter;
 
 namespace Konsole
 {
-
 /**
  * This class holds the wallpaper pixmap associated with a color scheme.
  * The wallpaper object is shared between multiple TerminalDisplay.
@@ -239,7 +238,6 @@ class AccessibleColorScheme : public ColorScheme
 public:
     AccessibleColorScheme();
 };
-
 }
 
 Q_DECLARE_METATYPE(const Konsole::ColorScheme*)

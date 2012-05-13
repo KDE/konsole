@@ -49,7 +49,6 @@ class QKeyEvent;
 
 namespace Konsole
 {
-
 extern unsigned short vt100_graphics[32];
 
 struct CharCodes {
@@ -184,7 +183,6 @@ private:
     QHash<int, QString> _pendingTitleUpdates;
     QTimer* _titleUpdateTimer;
 };
-
 }
 
 #endif // VT102EMULATION_H

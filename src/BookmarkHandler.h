@@ -36,7 +36,6 @@ class KActionCollection;
 
 namespace Konsole
 {
-
 class ViewProperties;
 
 /**
@@ -55,7 +54,6 @@ class KONSOLEPRIVATE_EXPORT BookmarkHandler : public QObject, public KBookmarkOw
     Q_OBJECT
 
 public:
-
     /**
      * Constructs a new bookmark handler for Konsole bookmarks.
      *
@@ -123,7 +121,6 @@ private:
     ViewProperties* _activeView;
     QList<ViewProperties*> _views;
 };
-
 }
 
 #endif // KONSOLEBOOKMARKHANDLER_H

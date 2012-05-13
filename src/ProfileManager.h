@@ -36,7 +36,6 @@
 
 namespace Konsole
 {
-
 /**
  * Manages profiles which specify various settings for terminal sessions
  * and their displays.
@@ -51,7 +50,6 @@ class KONSOLEPRIVATE_EXPORT ProfileManager : public QObject
     Q_OBJECT
 
 public:
-
     /**
      * Constructs a new profile manager and loads information about the available
      * profiles.
@@ -240,7 +238,6 @@ signals:
     void shortcutChanged(Profile::Ptr profile , const QKeySequence& newShortcut);
 
 public slots:
-
     /** Saves settings (favorites, shortcuts, default profile etc.) to disk. */
     void saveSettings();
 
@@ -249,7 +246,6 @@ protected slots:
 private slots:
 
 private:
-
     // loads the mappings between shortcut key sequences and
     // profile paths
     void loadShortcuts();
@@ -287,7 +283,6 @@ private:
         QString profilePath;
     };
     QMap<QKeySequence, ShortcutData> _shortcuts; // shortcut keys -> profile path
-
 };
 
 /**
@@ -310,6 +305,5 @@ private:
     QStack<T>& _stack;
     int _count;
 };
-
 }
 #endif //PROFILEMANAGER_H

@@ -67,7 +67,6 @@ class ViewContainer : public QObject
     Q_OBJECT
 
 public:
-
     /**
      * This enum describes the options for positioning the
      * container's navigation widget.
@@ -456,7 +455,6 @@ private:
     QToolButton* _closeTabButton;
     int _contextMenuTabIndex;
     KMenu* _contextPopupMenu;
-
 };
 
 /** A plain view container with no navigation display */
@@ -478,6 +476,5 @@ private:
     QPointer<QWidget> _containerWidget;
     QPointer<QStackedWidget> _stackWidget;
 };
-
 }
 #endif //VIEWCONTAINER_H

@@ -31,7 +31,6 @@ class KLineEdit;
 
 namespace Konsole
 {
-
 /**
  * A widget which allows users to search incrementally through a document for a
  * a text string or regular expression.
@@ -58,7 +57,6 @@ class IncrementalSearchBar : public QWidget
     Q_OBJECT
 
 public:
-
     /**
      * This enum defines the options that can be checked.
      */
@@ -139,6 +137,5 @@ private:
 
     QTimer* _searchTimer;
 };
-
 }
 #endif // INCREMENTALSEARCHBAR_H

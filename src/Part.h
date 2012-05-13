@@ -213,7 +213,6 @@ private:
     SessionController* _pluggedController;
     QAction* _manageProfilesAction;
 };
-
 }
 
 #endif // PART_H

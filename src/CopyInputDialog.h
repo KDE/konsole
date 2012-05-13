@@ -131,7 +131,6 @@ inline int CheckableSessionModel::checkColumn() const
 {
     return _checkColumn;
 }
-
 }
 
 #endif // COPYINPUTDIALOG
