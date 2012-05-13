@@ -361,7 +361,6 @@ void Emulation::setImageSize(int lines, int columns)
         // SIGNAL(imageSizeChanged()); See #203185
         QTimer::singleShot(200, this, SIGNAL(imageSizeInitialized()));
     }
-
 }
 
 QSize Emulation::imageSize() const

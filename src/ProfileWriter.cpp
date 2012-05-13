@@ -77,7 +77,6 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
         } else {
             newPath = candidateLocalPath;
         }
-
     }
 
     return newPath;

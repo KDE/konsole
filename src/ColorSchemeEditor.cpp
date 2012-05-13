@@ -126,7 +126,6 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
         _colors->setColorTableEntry(item->row(), entry);
 
         emit colorsChanged(_colors);
-
     }
 }
 void ColorSchemeEditor::selectWallpaper()

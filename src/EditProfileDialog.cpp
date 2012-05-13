@@ -769,7 +769,6 @@ void EditProfileDialog::updateTransparencyWarning()
                                                     " You need to restart Konsole to see transparent background."));
             _ui->transparencyWarningWidget->setHidden(false);
         }
-
     }
 }
 
@@ -1061,7 +1060,6 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     connect(codecAction, SIGNAL(triggered(QTextCodec*)), this, SLOT(setDefaultCodec(QTextCodec*)));
 
     _ui->characterEncodingLabel->setText(profile->defaultEncoding());
-
 }
 void EditProfileDialog::setDefaultCodec(QTextCodec* codec)
 {
@@ -1140,7 +1138,6 @@ void EditProfileDialog::fontSelected(const QFont& aFont)
 
     preview(Profile::Font, aFont);
     updateTempProfileProperty(Profile::Font, aFont);
-
 }
 void EditProfileDialog::showFontDialog()
 {
@@ -1186,7 +1183,6 @@ void EditProfileDialog::setFontSliderRange(const QFont& aFont)
     // Maximum is the greater of 2 times the current size and 14
     slider->setRange(qMin(4 * 10, qRound(aFont.pointSizeF() * 10)),
                      qMax(14 * 10, 2 * qRound(aFont.pointSize() * 10)));
-
 }
 
 void EditProfileDialog::setFontSliderValue(const QFont& aFont)
@@ -1197,7 +1193,6 @@ void EditProfileDialog::setFontSliderValue(const QFont& aFont)
 ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* aParent)
     : QAbstractItemDelegate(aParent)
 {
-
 }
 
 void ColorSchemeViewDelegate::setEntryTimeLine(QTimeLine* timeLine)
@@ -1315,7 +1310,6 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
 
     painter->drawText(option.rect , Qt::AlignCenter ,
                       index.data(Qt::DisplayRole).value<QString>());
-
 }
 
 QSize ColorSchemeViewDelegate::sizeHint(const QStyleOptionViewItem& option,

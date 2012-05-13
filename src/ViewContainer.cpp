@@ -181,7 +181,6 @@ void ViewContainer::removeView(QWidget* view)
 
     if (_views.count() == 0)
         emit empty(this);
-
 }
 
 const QList<QWidget*> ViewContainer::views()
@@ -311,7 +310,6 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 
     _dropIndicator->move(mapTo(parentWidget(), pos));
     _dropIndicator->show();
-
 }
 void ViewContainerTabBar::dragLeaveEvent(QDragLeaveEvent*)
 {
@@ -492,7 +490,6 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     setNavigationPosition(position);
 
     _containerWidget->setLayout(_layout);
-
 }
 void TabbedViewContainer::setNewViewMenu(QMenu* menu)
 {
@@ -557,7 +554,6 @@ void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
     {
         Q_ASSERT(false); // should never reach here
     }
-
 }
 void TabbedViewContainer::navigationVisibilityChanged(NavigationVisibility mode)
 {

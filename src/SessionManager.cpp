@@ -188,7 +188,6 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
 
     if ( apply.shouldApply(Profile::TerminalColumns) ||
          apply.shouldApply(Profile::TerminalRows) ) {
-
         const int columns = profile->property<int>(Profile::TerminalColumns);
         const int rows = profile->property<int>(Profile::TerminalRows);
         session->setPreferredSize( QSize(columns, rows) );

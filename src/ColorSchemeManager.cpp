@@ -283,7 +283,6 @@ QStringList ColorSchemeManager::listKDE3ColorSchemes()
     return KGlobal::dirs()->findAllResources("data",
             "konsole/*.schema",
             KStandardDirs::NoDuplicates);
-
 }
 
 const ColorScheme ColorSchemeManager::_defaultColorScheme;

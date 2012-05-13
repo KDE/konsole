@@ -228,7 +228,6 @@ int HistoryScrollFile::startOfLine(int lineno)
 {
     if (lineno <= 0) return 0;
     if (lineno <= getLines()) {
-
         if (!index.isMapped())
             index.map();
 

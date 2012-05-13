@@ -365,7 +365,6 @@ void ViewManager::detachView(ViewContainer* container, QWidget* widgetView)
             container->views().count() == 0) {
         removeContainer(container);
     }
-
 }
 
 void ViewManager::sessionFinished()

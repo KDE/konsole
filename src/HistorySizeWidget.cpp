@@ -86,7 +86,6 @@ void HistorySizeWidget::setMode(Enum::HistoryModeEnum aMode)
         _ui->unlimitedHistoryButton->setChecked(true);
     }
     _ui->unlimitedWarningWidget->setVisible(Enum::UnlimitedHistory == aMode);
-
 }
 
 Enum::HistoryModeEnum HistorySizeWidget::mode() const

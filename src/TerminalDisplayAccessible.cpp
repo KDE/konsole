@@ -45,7 +45,6 @@ TerminalDisplayAccessible::TerminalDisplayAccessible(TerminalDisplay* display)
 
 int TerminalDisplayAccessible::characterCount()
 {
-
     return display()->_usedLines * display()->_usedColumns;
 }
 

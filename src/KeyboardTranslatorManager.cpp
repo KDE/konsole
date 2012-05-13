@@ -90,7 +90,6 @@ void KeyboardTranslatorManager::findTranslators()
     // the name with a null pointer to indicate that the translator
     // has not yet been loaded from disk
     foreach(const QString& translatorPath, list) {
-
         QString name = QFileInfo(translatorPath).baseName();
 
         if (!_translators.contains(name))

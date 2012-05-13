@@ -107,7 +107,6 @@ static bool expandEnv(QString& text)
     bool expanded = false;
 
     while ((pos = text.indexOf(QLatin1Char('$'), pos)) != -1) {
-
         // Skip escaped '$'
         //
         if (pos > 0 && text.at(pos - 1) == QLatin1Char('\\')) {

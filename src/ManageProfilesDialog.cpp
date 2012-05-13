@@ -132,7 +132,6 @@ void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
             ProfileManager::instance()->changeProfile(profile, properties);
         }
     }
-
 }
 
 int ManageProfilesDialog::rowForProfile(const Profile::Ptr profile) const
@@ -272,7 +271,6 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
     // do not allow the default session type to be removed
     _ui->deleteProfileButton->setEnabled(isDeletable && isNotDefault);
     _ui->setAsDefaultButton->setEnabled(isNotDefault && (selectedRows < 2));
-
 }
 void ManageProfilesDialog::deleteSelected()
 {

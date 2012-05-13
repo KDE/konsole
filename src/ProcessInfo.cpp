@@ -983,7 +983,6 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                 // host has already been found, this must be the command argument
                 _command = args[i];
             }
-
         }
     } else {
         kWarning() << "Could not read arguments";

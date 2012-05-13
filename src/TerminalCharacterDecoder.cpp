@@ -36,7 +36,6 @@ PlainTextDecoder::PlainTextDecoder()
     , _includeTrailingWhitespace(true)
     , _recordLinePositions(false)
 {
-
 }
 void PlainTextDecoder::setTrailingWhitespace(bool enable)
 {
@@ -142,7 +141,6 @@ HTMLDecoder::HTMLDecoder() :
     , _innerSpanOpen(false)
     , _lastRendition(DEFAULT_RENDITION)
 {
-
 }
 
 void HTMLDecoder::begin(QTextStream* output)
@@ -168,7 +166,6 @@ void HTMLDecoder::end()
     *_output << text;
 
     _output = 0;
-
 }
 
 //TODO: Support for LineProperty (mainly double width , double height)
@@ -250,7 +247,6 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
         } else {
             text.append("&nbsp;"); //HTML truncates multiple spaces, so use a space marker instead
         }
-
     }
 
     //close any remaining open inner spans

@@ -43,7 +43,6 @@ HistorySizeDialog::HistorySizeDialog(QWidget* parent)
     _ui->tempWarningWidget->setMessageType(KMessageWidget::Information);
     _ui->tempWarningWidget->setText(i18nc("@info:status",
         "Any adjustments are only temporary to this session."));
-
 }
 
 HistorySizeDialog::~HistorySizeDialog()

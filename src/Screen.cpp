@@ -141,7 +141,6 @@ void Screen::setMargins(int top, int bot)
     _bottomMargin = bot;
     _cuX = 0;
     _cuY = getMode(MODE_Origin) ? top : 0;
-
 }
 
 int Screen::topMargin() const
@@ -435,7 +434,6 @@ void Screen::copyFromScreen(Character* dest , int startLine , int count) const
             if (_selBegin != -1 && isSelected(column, line + _history->getLines()))
                 reverseRendition(dest[destIndex]);
         }
-
     }
 }
 
@@ -1313,7 +1311,6 @@ void Screen::addHistLine()
                 _selBegin = _selBottomRight;
         }
     }
-
 }
 
 int Screen::getHistLines() const

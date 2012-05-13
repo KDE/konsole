@@ -78,7 +78,6 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
                     foreach(const Session * s, sm->sessions()) {
                         foreach(const TerminalDisplay * td, s->views()) {
                             usedExtendedChars += td->screenWindow()->screen()->usedExtendedChars();
-
                         }
                     }
 

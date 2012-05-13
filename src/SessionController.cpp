@@ -372,7 +372,6 @@ void SessionController::updateWebSearchMenu()
     if (KUriFilter::self()->filterSearchUri(filterData, KUriFilter::NormalTextFilter)) {
         const QStringList searchProviders = filterData.preferredSearchProviders();
         if (!searchProviders.isEmpty()) {
-
             _webSearchMenu->setText(i18n("Search for '%1' with",  KStringHandler::rsqueeze(searchText, 16)));
 
             KAction* action = 0;
@@ -395,9 +394,7 @@ void SessionController::updateWebSearchMenu()
 
             _webSearchMenu->setVisible(true);
         }
-
     }
-
 }
 
 void SessionController::handleWebShortcutAction()
@@ -678,7 +675,6 @@ void SessionController::setupExtraActions()
     _searchToggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F));
     _findPreviousAction->setShortcut(QKeySequence(Qt::Key_F3));
     _findPreviousAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F3));
-
 }
 
 void SessionController::switchProfile(Profile::Ptr profile)
@@ -976,7 +972,6 @@ void SessionController::copyInputToNone()
     delete _copyToGroup;
     _copyToGroup = 0;
     snapshot();
-
 }
 
 void SessionController::searchClosed()
@@ -1442,7 +1437,6 @@ void SaveHistoryTask::execute()
     // to save that session's history.
     // then start a KIO job to transfer the data from the history to the chosen URL
     foreach(const SessionPtr& session, sessions()) {
-
         dialog->setCaption(i18n("Save Output From %1", session->title(Session::NameRole)));
 
         int result = dialog->exec();
@@ -1666,7 +1660,6 @@ void SearchHistoryTask::executeOnScreenWindow(SessionPtr session , ScreenWindowP
             //clear the current block of text and move to the next one
             string.clear();
             line = endLine;
-
         } while (startLine != endLine);
 
         // if no match was found, clear selection to indicate this
@@ -1695,7 +1688,6 @@ SearchHistoryTask::SearchHistoryTask(QObject* parent)
     : SessionTask(parent)
     , _direction(ForwardsSearch)
 {
-
 }
 void SearchHistoryTask::setSearchDirection(SearchDirection direction)
 {

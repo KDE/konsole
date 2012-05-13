@@ -510,7 +510,6 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
         paint.drawPoint(cx, cy + 1);
     if (toDraw & Int33)
         paint.drawPoint(cx + 1, cy + 1);
-
 }
 
 void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const QString& str,
@@ -1021,7 +1020,6 @@ void TerminalDisplay::updateImage()
                     _fixedFont = saveFixedFont;
                     x += len - 1;
                 }
-
             }
 
         //both the top and bottom halves of double height _lines must always be redrawn
@@ -1220,7 +1218,6 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 
     QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
     foreach(Filter::HotSpot* spot, spots) {
-
         QRegion region;
         if (_underlineLinks && spot->type() == Filter::HotSpot::Link) {
             QRect r;
@@ -1788,7 +1785,6 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
         }
     } else if (ev->button() == Qt::MidButton) {
         if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier)) {
-
             const bool appendEnter = ev->modifiers() & Qt::ControlModifier;
 
             if ( _middleClickPasteMode == Enum::PasteFromX11Selection ) {
@@ -2109,7 +2105,6 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         } else {
             _screenWindow->setSelectionStart(ohere.x() - 1 - offset , ohere.y() , false);
         }
-
     }
 
     _actSel = 2; // within selection
@@ -2121,7 +2116,6 @@ void TerminalDisplay::extendSelection(const QPoint& position)
     } else {
         _screenWindow->setSelectionEnd(here.x() + offset , here.y());
     }
-
 }
 
 void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
@@ -2159,7 +2153,6 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
     if (!_mouseMarks &&
             (ev->button() == Qt::RightButton || ev->button() == Qt::MidButton ) &&
               !(ev->modifiers() & Qt::ShiftModifier) ) {
-
         emit mouseSignal(3,
                          charColumn + 1,
                          charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
@@ -2665,7 +2658,6 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding,
                                              QSizePolicy::Expanding),
                              1, 0);
-
     }
 
     _outputSuspendedLabel->setVisible(suspended);
@@ -2896,7 +2888,6 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             additionalActions.append(pasteAction);
 
             if (urls.count() == 1) {
-
                 const KUrl url = KIO::NetAccess::mostLocalUrl(urls[0] , 0);
 
                 if (url.isLocalFile()) {

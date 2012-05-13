@@ -62,7 +62,6 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
             if (group.hasKey(name))
                 profile->setProperty(properties->property,
                                      group.readEntry(name, QVariant(properties->type)));
-
         }
 
         properties++;

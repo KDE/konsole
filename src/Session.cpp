@@ -609,7 +609,6 @@ void Session::silenceTimerDone()
     } else {
         emit stateChanged(NOTIFYNORMAL);
     }
-
 }
 
 void Session::activityTimerDone()

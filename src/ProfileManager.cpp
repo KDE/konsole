@@ -228,7 +228,6 @@ void ProfileManager::loadAllProfiles()
 
 void ProfileManager::sortProfiles(QList<Profile::Ptr>& list)
 {
-
     QList<Profile::Ptr> lackingIndices;
     QList<Profile::Ptr> havingIndices;
 
@@ -575,7 +574,6 @@ void ProfileManager::saveFavorites()
 
     QStringList paths;
     foreach(const Profile::Ptr& profile, _favorites) {
-
         Q_ASSERT(_profiles.contains(profile) && profile);
 
         QFileInfo fileInfo(profile->path());

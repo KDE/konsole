@@ -280,7 +280,6 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     // This is another side effect of the commit fixing BKO 176902.
     window->show();
     window->hide();
-
 }
 
 MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
@@ -318,9 +317,7 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
             // never show
             window->setNavigationVisibility(2);
         }
-
     }
-
     return window;
 }
 

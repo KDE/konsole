@@ -163,7 +163,6 @@ void ViewSplitter::addContainer(ViewContainer* container ,
 
         splitter->insertWidget(oldContainerIndex, newSplitter);
     }
-
 }
 
 void ViewSplitter::containerEmpty(ViewContainer* /*container*/)

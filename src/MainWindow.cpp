@@ -722,7 +722,6 @@ void MainWindow::showEvent(QShowEvent* aEvent)
 {
     // Make sure the 'initial' visibility is applied only once.
     if (!_menuBarInitialVisibilityApplied) {
-
         // the initial visibility of menubar should be applied at this last
         // moment. Otherwise, the initial visibility will be determined by
         // what KMainWindow has automatically stored in konsolerc, but not by
