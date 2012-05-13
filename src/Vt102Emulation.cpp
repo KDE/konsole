@@ -289,31 +289,31 @@ const int DEL = 127;
 
 // process an incoming unicode character
 void Vt102Emulation::receiveChar(int cc)
-{ 
-  if (cc == DEL) 
+{
+  if (cc == DEL)
     return; //VT100: ignore.
 
   if (ces(CTL))
-  { 
+  {
     // DEC HACK ALERT! Control Characters are allowed *within* esc sequences in VT100
     // This means, they do neither a resetTokenizer() nor a pushToToken(). Some of them, do
     // of course. Guess this originates from a weakly layered handling of the X-on
     // X-off protocol, which comes really below this level.
-    if (cc == CNTL('X') || cc == CNTL('Z') || cc == ESC) 
+    if (cc == CNTL('X') || cc == CNTL('Z') || cc == ESC)
         resetTokenizer(); //VT100: CAN or SUB
-    if (cc != ESC)    
-    { 
-        processToken(TY_CTL(cc+'@' ),0,0); 
-        return; 
+    if (cc != ESC)
+    {
+        processToken(TY_CTL(cc+'@' ),0,0);
+        return;
     }
   }
   // advance the state
-  addToCurrentToken(cc); 
+  addToCurrentToken(cc);
 
   int* s = tokenBuffer;
   const int  p = tokenBufferPos;
 
-  if (getMode(MODE_Ansi)) 
+  if (getMode(MODE_Ansi))
   {
     if (lec(1,0,ESC)) { return; }
     if (lec(1,0,ESC+128)) { s[0] = ESC; receiveChar('['); return; }
@@ -330,63 +330,63 @@ void Vt102Emulation::receiveChar(int cc)
     if (eps(    CPN)) { processToken( TY_CSI_PN(cc), argv[0],argv[1]);  resetTokenizer(); return; }
 
     // resize = \e[8;<row>;<col>t
-    if (eps(CPS)) 
-    { 
-        processToken( TY_CSI_PS(cc, argv[0]), argv[1], argv[2]);   
-        resetTokenizer(); 
-        return; 
+    if (eps(CPS))
+    {
+        processToken( TY_CSI_PS(cc, argv[0]), argv[1], argv[2]);
+        resetTokenizer();
+        return;
     }
 
     if (epe(   )) { processToken( TY_CSI_PE(cc), 0, 0); resetTokenizer(); return; }
     if (ees(DIG)) { addDigit(cc-'0'); return; }
     if (eec(';')) { addArgument();    return; }
-    for (int i=0; i<=argc; i++)
+    for (int i = 0; i <= argc; i++)
     {
-        if (epp())  
-            processToken( TY_CSI_PR(cc,argv[i]), 0, 0);
-        else if (egt())   
-            processToken( TY_CSI_PG(cc), 0, 0); // spec. case for ESC]>0c or ESC]>c
+        if (epp())
+            processToken(TY_CSI_PR(cc,argv[i]), 0, 0);
+        else if (egt())
+            processToken(TY_CSI_PG(cc), 0, 0); // spec. case for ESC]>0c or ESC]>c
         else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 2)
-        { 
+        {
             // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
             i += 2;
-            processToken( TY_CSI_PS(cc, argv[i-2]), COLOR_SPACE_RGB, (argv[i] << 16) | (argv[i+1] << 8) | argv[i+2]);
+            processToken(TY_CSI_PS(cc, argv[i-2]), COLOR_SPACE_RGB, (argv[i] << 16) | (argv[i+1] << 8) | argv[i+2]);
             i += 2;
         }
         else if (cc == 'm' && argc - i >= 2 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 5)
-        { 
+        {
             // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
             i += 2;
-            processToken( TY_CSI_PS(cc, argv[i-2]), COLOR_SPACE_256, argv[i]);
+            processToken(TY_CSI_PS(cc, argv[i-2]), COLOR_SPACE_256, argv[i]);
         }
         else
-            processToken( TY_CSI_PS(cc,argv[i]), 0, 0);
+            processToken(TY_CSI_PS(cc,argv[i]), 0, 0);
     }
     resetTokenizer();
   }
-  else 
+  else
   {
     // VT52 Mode
-    if (lec(1,0,ESC))                                                      
+    if (lec(1,0,ESC))
         return;
-    if (les(1,0,CHR)) 
-    { 
-        processToken( TY_CHR(), s[0], 0); 
-        resetTokenizer(); 
-        return; 
+    if (les(1,0,CHR))
+    {
+        processToken( TY_CHR(), s[0], 0);
+        resetTokenizer();
+        return;
     }
-    if (lec(2,1,'Y'))                                                      
+    if (lec(2,1,'Y'))
         return;
-    if (lec(3,1,'Y'))                                                      
+    if (lec(3,1,'Y'))
         return;
-    if (p < 4) 
-    { 
-        processToken( TY_VT52(s[1] ), 0, 0); 
-        resetTokenizer(); 
-        return; 
+    if (p < 4)
+    {
+        processToken(TY_VT52(s[1] ), 0, 0);
+        resetTokenizer();
+        return;
     }
-    processToken( TY_VT52(s[1]), s[2], s[3]); 
-    resetTokenizer(); 
+    processToken(TY_VT52(s[1]), s[2], s[3]);
+    resetTokenizer();
     return;
   }
 }
@@ -396,17 +396,17 @@ void Vt102Emulation::processWindowAttributeChange()
   // See Session::UserTitleChange for possible values
   int attributeToChange = 0;
   int i;
-  for (i = 2; i < tokenBufferPos     && 
-              tokenBuffer[i] >= '0'  && 
+  for (i = 2; i < tokenBufferPos     &&
+              tokenBuffer[i] >= '0'  &&
               tokenBuffer[i] <= '9'; i++)
   {
     attributeToChange = 10 * attributeToChange + (tokenBuffer[i]-'0');
   }
 
-  if (tokenBuffer[i] != ';') 
-  { 
-    reportDecodingError(); 
-    return; 
+  if (tokenBuffer[i] != ';')
+  {
+    reportDecodingError();
+    return;
   }
 
   QString newValue;
@@ -423,9 +423,9 @@ void Vt102Emulation::updateTitle()
     QListIterator<int> iter( _pendingTitleUpdates.keys() );
     while (iter.hasNext()) {
         int arg = iter.next();
-        emit titleChanged( arg , _pendingTitleUpdates[arg] );    
+        emit titleChanged( arg , _pendingTitleUpdates[arg] );
     }
-    _pendingTitleUpdates.clear();    
+    _pendingTitleUpdates.clear();
 }
 
 // Interpreting Codes ---------------------------------------------------------
@@ -525,11 +525,11 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case TY_ESC_CS('%', 'G') :      setCodec             (Utf8Codec   ); break; //LINUX
     case TY_ESC_CS('%', '@') :      setCodec             (LocaleCodec ); break; //LINUX
 
-    case TY_ESC_DE('3'      ) : /* Double height line, top half    */ 
+    case TY_ESC_DE('3'      ) : /* Double height line, top half    */
                                 _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
                                 _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
                                     break;
-    case TY_ESC_DE('4'      ) : /* Double height line, bottom half */ 
+    case TY_ESC_DE('4'      ) : /* Double height line, bottom half */
                                 _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
                                 _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
                                     break;
@@ -537,8 +537,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
                                 _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , false);
                                 _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
                                 break;
-    case TY_ESC_DE('6'      ) : /* Double width, single height line*/ 
-                                _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true);    
+    case TY_ESC_DE('6'      ) : /* Double width, single height line*/
+                                _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true);
                                 _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
                                 break;
     case TY_ESC_DE('8'      ) : _currentScreen->helpAlign            (          ); break;
@@ -730,7 +730,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     //Note about mouse modes:
     //There are four mouse modes which xterm-compatible terminals can support - 1000,1001,1002,1003
     //Konsole currently supports mode 1000 (basic mouse press and release) and mode 1002 (dragging the mouse).
-    //TODO:  Implementation of mouse modes 1001 (something called hilight tracking) and 
+    //TODO:  Implementation of mouse modes 1001 (something called hilight tracking) and
     //1003 (a slight variation on dragging the mouse)
     //
 
@@ -806,17 +806,17 @@ void Vt102Emulation::processToken(int token, int p, int q)
 
     case TY_CSI_PG('c'      ) :  reportSecondaryAttributes(          ); break; //VT100
 
-    default: 
-        reportDecodingError();    
+    default:
+        reportDecodingError();
         break;
   };
 }
 
 void Vt102Emulation::clearScreenAndSetColumns(int columnCount)
 {
-    setImageSize(_currentScreen->getLines(),columnCount); 
+    setImageSize(_currentScreen->getLines(),columnCount);
     clearEntireScreen();
-    setDefaultMargins(); 
+    setDefaultMargins();
     _currentScreen->setCursorYX(0,0);
 }
 
@@ -829,7 +829,7 @@ void Vt102Emulation::sendString(const char* s , int length)
 }
 
 void Vt102Emulation::reportCursorPosition()
-{ 
+{
   char tmp[20];
   snprintf(tmp, sizeof(tmp), "\033[%d;%dR", _currentScreen->getCursorY()+1, _currentScreen->getCursorX()+1);
   sendString(tmp);
@@ -991,10 +991,10 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
         //  in the keyboard modifier)
         const bool wantsAltModifier = entry.modifiers() & entry.modifierMask() & Qt::AltModifier;
         const bool wantsMetaModifier = entry.modifiers() & entry.modifierMask() & Qt::MetaModifier;
-        const bool wantsAnyModifier = entry.state() & 
+        const bool wantsAnyModifier = entry.state() &
                                 entry.stateMask() & KeyboardTranslator::AnyModifierState;
 
-        if ( modifiers & Qt::AltModifier && !(wantsAltModifier || wantsAnyModifier) 
+        if ( modifiers & Qt::AltModifier && !(wantsAltModifier || wantsAnyModifier)
              && !event->text().isEmpty() )
         {
             textToSend.prepend("\033");
@@ -1011,28 +1011,28 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
 
             if (entry.command() & KeyboardTranslator::EraseCommand) {
                 textToSend += eraseChar();
-            } else if ( entry.command() & KeyboardTranslator::ScrollPageUpCommand )
+            } else if (entry.command() & KeyboardTranslator::ScrollPageUpCommand )
                 currentView->scrollScreenWindow( ScreenWindow::ScrollPages , -1 );
-            else if ( entry.command() & KeyboardTranslator::ScrollPageDownCommand )
+            else if (entry.command() & KeyboardTranslator::ScrollPageDownCommand )
                 currentView->scrollScreenWindow( ScreenWindow::ScrollPages , 1 );
-            else if ( entry.command() & KeyboardTranslator::ScrollLineUpCommand )
+            else if (entry.command() & KeyboardTranslator::ScrollLineUpCommand )
                 currentView->scrollScreenWindow( ScreenWindow::ScrollLines , -1 );
-            else if ( entry.command() & KeyboardTranslator::ScrollLineDownCommand )
+            else if (entry.command() & KeyboardTranslator::ScrollLineDownCommand )
                 currentView->scrollScreenWindow( ScreenWindow::ScrollLines , 1 );
-            else if ( entry.command() & KeyboardTranslator::ScrollUpToTopCommand )
+            else if (entry.command() & KeyboardTranslator::ScrollUpToTopCommand )
                 currentView->scrollScreenWindow( ScreenWindow::ScrollLines ,
                                                 - currentView->screenWindow()->currentLine());
-            else if ( entry.command() & KeyboardTranslator::ScrollDownToBottomCommand)
+            else if (entry.command() & KeyboardTranslator::ScrollDownToBottomCommand)
                 currentView->scrollScreenWindow( ScreenWindow::ScrollLines , lineCount());
         }
-        else if ( !entry.text().isEmpty() ) 
+        else if (!entry.text().isEmpty())
         {
             textToSend += _codec->fromUnicode(entry.text(true,modifiers));
         }
         else
             textToSend += _codec->fromUnicode(event->text());
 
-        sendData( textToSend.constData() , textToSend.length() );
+        sendData(textToSend.constData(), textToSend.length());
     }
     else
     {
@@ -1040,7 +1040,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
         // set
         QString translatorError =  i18n("No keyboard translator available.  "
                                          "The information needed to convert key presses "
-                                         "into characters to send to the terminal " 
+                                         "into characters to send to the terminal "
                                          "is missing.");
         reset();
         receiveData( translatorError.toAscii().constData() , translatorError.count() );

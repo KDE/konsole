@@ -190,7 +190,7 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
          apply.shouldApply(Profile::TerminalRows) ) {
         const int columns = profile->property<int>(Profile::TerminalColumns);
         const int rows = profile->property<int>(Profile::TerminalRows);
-        session->setPreferredSize( QSize(columns, rows) );
+        session->setPreferredSize(QSize(columns, rows));
     }
 
     if (apply.shouldApply(Profile::Icon))

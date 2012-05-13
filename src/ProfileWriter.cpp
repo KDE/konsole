@@ -52,7 +52,7 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
     // been created in memory and has never been saved into disk before.
     //
     // use "name.profile" as filename and save it under $KDEHOME
-    if (!profile->isPropertySet(Profile::Path) ) {
+    if (!profile->isPropertySet(Profile::Path)) {
         return candidateLocalPath;
     }
 
