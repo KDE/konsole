@@ -280,7 +280,7 @@ QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *ob
 TerminalDisplay::TerminalDisplay(QWidget* parent)
     : QWidget(parent)
     , _screenWindow(0)
-    , _bellMasked(true)
+    , _bellMasked(false)
     , _gridLayout(0)
     , _fontHeight(1)
     , _fontWidth(1)
