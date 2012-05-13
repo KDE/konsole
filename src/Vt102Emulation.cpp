@@ -1011,19 +1011,19 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
 
             if (entry.command() & KeyboardTranslator::EraseCommand) {
                 textToSend += eraseChar();
-            } else if (entry.command() & KeyboardTranslator::ScrollPageUpCommand )
-                currentView->scrollScreenWindow( ScreenWindow::ScrollPages , -1 );
-            else if (entry.command() & KeyboardTranslator::ScrollPageDownCommand )
-                currentView->scrollScreenWindow( ScreenWindow::ScrollPages , 1 );
-            else if (entry.command() & KeyboardTranslator::ScrollLineUpCommand )
-                currentView->scrollScreenWindow( ScreenWindow::ScrollLines , -1 );
-            else if (entry.command() & KeyboardTranslator::ScrollLineDownCommand )
-                currentView->scrollScreenWindow( ScreenWindow::ScrollLines , 1 );
-            else if (entry.command() & KeyboardTranslator::ScrollUpToTopCommand )
-                currentView->scrollScreenWindow( ScreenWindow::ScrollLines ,
+            } else if (entry.command() & KeyboardTranslator::ScrollPageUpCommand)
+                currentView->scrollScreenWindow(ScreenWindow::ScrollPages, -1);
+            else if (entry.command() & KeyboardTranslator::ScrollPageDownCommand)
+                currentView->scrollScreenWindow(ScreenWindow::ScrollPages, 1);
+            else if (entry.command() & KeyboardTranslator::ScrollLineUpCommand)
+                currentView->scrollScreenWindow(ScreenWindow::ScrollLines, -1);
+            else if (entry.command() & KeyboardTranslator::ScrollLineDownCommand)
+                currentView->scrollScreenWindow(ScreenWindow::ScrollLines, 1);
+            else if (entry.command() & KeyboardTranslator::ScrollUpToTopCommand)
+                currentView->scrollScreenWindow(ScreenWindow::ScrollLines,
                                                 - currentView->screenWindow()->currentLine());
             else if (entry.command() & KeyboardTranslator::ScrollDownToBottomCommand)
-                currentView->scrollScreenWindow( ScreenWindow::ScrollLines , lineCount());
+                currentView->scrollScreenWindow(ScreenWindow::ScrollLines, lineCount());
         }
         else if (!entry.text().isEmpty())
         {
@@ -1043,7 +1043,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
                                          "into characters to send to the terminal "
                                          "is missing.");
         reset();
-        receiveData( translatorError.toAscii().constData() , translatorError.count() );
+        receiveData(translatorError.toAscii().constData(), translatorError.count());
     }
 }
 
@@ -1318,7 +1318,7 @@ void Vt102Emulation::reportDecodingError()
 
     QString outputError = QString("Undecodable sequence: ");
     outputError.append(hexdump2(tokenBuffer, tokenBufferPos));
-    kDebug()<<outputError;
+    kDebug() << outputError;
 }
 
 #include "Vt102Emulation.moc"

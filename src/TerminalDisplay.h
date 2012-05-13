@@ -440,12 +440,12 @@ public slots:
      * Pastes the content of the clipboard into the
      * display.
      */
-    void pasteFromClipboard(bool appendEnter=false);
+    void pasteFromClipboard(bool appendEnter = false);
     /**
      * Pastes the content of the X11 selection into the
      * display.
      */
-    void pasteFromX11Selection(bool appendEnter=false);
+    void pasteFromX11Selection(bool appendEnter = false);
 
     /**
        * Changes whether the flow control warning box should be shown when the flow control
