@@ -1143,7 +1143,7 @@ void EditProfileDialog::showFontDialog()
 {
     QString sampleText = QString("ell 'lL', one '1', little eye 'i', big eye");
     sampleText += QString("'I', lL1iI, Zero '0', little oh 'o', big oh 'O', 0oO");
-    sampleText += QString("`~!@#$%^&*()_+-=[]\{}|:\";'<>?,./");
+    sampleText += QString("`~!@#$%^&*()_+-=[]\\{}|:\";'<>?,./");
     sampleText += QString("0123456789");
     sampleText += QString("\nThe Quick Brown Fox Jumps Over The Lazy Dog\n");
     sampleText += i18n("--- Type anything in this box ---");
