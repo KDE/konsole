@@ -620,9 +620,6 @@ void TabbedViewContainer::startTabDrag(int tab)
 
     // start drag, if drag-and-drop is successful the view at 'tab' will be
     // deleted
-    //
-    // if the tab was dragged onto another application
-    // which blindly accepted the drop then ignore it
     if (drag->exec() == Qt::MoveAction && drag->target() != 0) {
         // Deleting the view may cause the view container to be deleted, which
         // will also delete the QDrag object.
@@ -635,6 +632,15 @@ void TabbedViewContainer::startTabDrag(int tab)
         // FIXME: Resolve this properly
         drag->setParent(0);
         removeView(view);
+    } else {
+        // if the tab was dragged onto another application
+        // which blindly accepted the drop, then detach the tab to achieve
+        // the effect of "dragging tab into its own window"
+        //
+        // It feels unnatural to do the detach when this is only one tab
+        // in the tabbar
+        if (_tabBar->count() > 1)
+            emit detachTab(this, view);
     }
 }
 
