@@ -266,6 +266,11 @@ ViewContainerTabBar::ViewContainerTabBar(QWidget* parent, TabbedViewContainer* c
     setFocusPolicy(Qt::NoFocus);
     setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
     setElideMode(Qt::ElideLeft);
+
+    setWhatsThis(i18nc("@info:whatsthis",
+                       "<title>Tab Bar</title>"
+                       "<para>The tab bar allows you to switch and move tabs. You can double-click a tab to change its name.</para>"));
+
 }
 void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 {
@@ -456,11 +461,13 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _newTabButton = new QToolButton(_containerWidget);
     _newTabButton->setIcon(KIcon("tab-new"));
     _newTabButton->setToolTip(i18nc("@info:tooltip", "Create new tab"));
+    _newTabButton->setWhatsThis(i18nc("@info:whatsthis", "Create a new tab. Press and hold to select profile from menu"));
     _newTabButton->adjustSize();
 
     _closeTabButton = new QToolButton(_containerWidget);
     _closeTabButton->setIcon(KIcon("tab-close"));
-    _closeTabButton->setToolTip(i18nc("@info:tooltip", "Close current tab"));
+    _closeTabButton->setToolTip(i18nc("@info:tooltip", "Close tab"));
+    _closeTabButton->setWhatsThis(i18nc("@info:whatsthis", "Close the active tab"));
     _closeTabButton->adjustSize();
 
     // 'new tab' button is initially hidden. It will be shown when setFeatures()
