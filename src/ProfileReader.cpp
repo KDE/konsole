@@ -86,6 +86,8 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
         profile->setProperty(Profile::Arguments, shellCommand.arguments());
     }
 
+    profile->setProperty(Profile::UntranslatedName, general.readEntryUntranslated("Name"));
+
     // Read remaining properties
     readProperties(config, profile, Profile::DefaultPropertyNames);
 

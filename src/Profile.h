@@ -79,6 +79,10 @@ public:
         Path,
         /** (QString) The descriptive name of this profile. */
         Name,
+        /** (QString) The untranslted name of this profile.
+         * Warning: this is an internal property. Do not touch it.
+         */
+        UntranslatedName,
         /** (QString) The name of the icon associated with this profile.
          * This is used in menus and tabs to represent the profile.
          */
@@ -322,6 +326,11 @@ public:
     /** Convenience method for property<QString>(Profile::Name) */
     QString name() const {
         return property<QString>(Profile::Name);
+    }
+
+    /** Convenience method for property<QString>(Profile::UntranslatedName) */
+    QString untranslatedName() const {
+        return property<QString>(Profile::UntranslatedName);
     }
 
     /** Convenience method for property<QString>(Profile::Directory) */

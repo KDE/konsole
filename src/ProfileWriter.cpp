@@ -45,7 +45,7 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
     static const QString localDataLocation = KGlobal::dirs()->saveLocation("data", "konsole/");
     static const QString systemDataLocation = KStandardDirs::installPath("data") + "konsole/";
 
-    const QString candidateLocalPath = localDataLocation + profile->name() + ".profile";
+    const QString candidateLocalPath = localDataLocation + profile->untranslatedName() + ".profile";
     QString newPath;
 
     // when the path property is not set, it means the profile has just

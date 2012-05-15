@@ -55,6 +55,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     // General
     { Path , "Path" , 0 , QVariant::String }
     , { Name , "Name" , GENERAL_GROUP , QVariant::String }
+    , { UntranslatedName, "UntranslatedName" , 0 , QVariant::String }
     , { Icon , "Icon" , GENERAL_GROUP , QVariant::String }
     , { Command , "Command" , 0 , QVariant::String }
     , { Arguments , "Arguments" , 0 , QVariant::StringList }
@@ -137,6 +138,7 @@ FallbackProfile::FallbackProfile()
 {
     // Fallback settings
     setProperty(Name, i18n("Shell"));
+    setProperty(UntranslatedName, "Shell");
     // magic path for the fallback profile which is not a valid
     // non-directory file name
     setProperty(Path, "FALLBACK/");
