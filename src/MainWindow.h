@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef KONSOLEMAINWINDOW_H
-#define KONSOLEMAINWINDOW_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 // Qt
 #include <QtCore/QPointer>
@@ -211,4 +211,4 @@ private:
 };
 }
 
-#endif // KONSOLEMAINWINDOW_H
+#endif // MAINWINDOW_H

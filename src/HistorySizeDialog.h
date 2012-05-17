@@ -59,4 +59,4 @@ private:
 };
 }
 
-#endif
+#endif // HISTORYSIZEDIALOG_H

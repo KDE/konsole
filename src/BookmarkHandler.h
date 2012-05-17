@@ -21,8 +21,8 @@
 
 // Born as kdelibs/kio/kfile/kfilebookmarkhandler.h
 
-#ifndef KONSOLEBOOKMARKHANDLER_H
-#define KONSOLEBOOKMARKHANDLER_H
+#ifndef BOOKMARKHANDLER_H
+#define BOOKMARKHANDLER_H
 
 // KDE
 #include <KBookmarkManager>
@@ -123,4 +123,4 @@ private:
 };
 }
 
-#endif // KONSOLEBOOKMARKHANDLER_H
+#endif // BOOKMARKHANDLER_H

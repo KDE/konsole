@@ -18,8 +18,8 @@
     02110-1301  USA.
 */
 
-#ifndef TEHISTORY_H
-#define TEHISTORY_H
+#ifndef HISTORY_H
+#define HISTORY_H
 
 // System
 #include <sys/mman.h>
@@ -382,4 +382,4 @@ protected:
 };
 }
 
-#endif // TEHISTORY_H
+#endif // HISTORY_H

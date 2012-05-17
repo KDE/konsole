@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef SRC_APPLICATION_H
-#define SRC_APPLICATION_H
+#ifndef APPLICATION_H
+#define APPLICATION_H
 
 // KDE
 #include <KUniqueApplication>
@@ -87,4 +87,4 @@ private:
     MainWindow* _backgroundInstance;
 };
 }
-#endif  // SRC_APPLICATION_H
+#endif  // APPLICATION_H

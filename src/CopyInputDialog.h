@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef COPYINPUTDIALOG
-#define COPYINPUTDIALOG
+#ifndef COPYINPUTDIALOG_H
+#define COPYINPUTDIALOG_H
 
 // Qt
 #include <QtCore/QPointer>
@@ -133,5 +133,5 @@ inline int CheckableSessionModel::checkColumn() const
 }
 }
 
-#endif // COPYINPUTDIALOG
+#endif // COPYINPUTDIALOG_H
 
