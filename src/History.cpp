@@ -447,6 +447,7 @@ void CompactHistoryLine::getCharacter(int index, Character& r)
     r.rendition = formatArray[formatPos].rendition;
     r.foregroundColor = formatArray[formatPos].fgColor;
     r.backgroundColor = formatArray[formatPos].bgColor;
+    r.isRealCharacter = formatArray[formatPos].isRealCharacter;
 }
 
 void CompactHistoryLine::getCharacters(Character* array, int size, int startColumn)
