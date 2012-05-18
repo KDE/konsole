@@ -810,6 +810,10 @@ private:
 
     //the delay in milliseconds between redrawing blinking text
     static const int TEXT_BLINK_DELAY = 500;
+
+    //the duration of the size hint in milliseconds
+    static const int SIZE_HINT_DURATION = 1000;
+
     static const int DEFAULT_LEFT_MARGIN = 1;
     static const int DEFAULT_TOP_MARGIN = 1;
 

@@ -1103,6 +1103,7 @@ void TerminalDisplay::showResizeNotification()
             _resizeWidget->setStyleSheet("background-color:palette(window);border-style:solid;border-width:1px;border-color:palette(dark)");
 
             _resizeTimer = new QTimer(this);
+            _resizeTimer->setInterval(SIZE_HINT_DURATION);
             _resizeTimer->setSingleShot(true);
             connect(_resizeTimer, SIGNAL(timeout()), _resizeWidget, SLOT(hide()));
         }
@@ -1111,7 +1112,7 @@ void TerminalDisplay::showResizeNotification()
         _resizeWidget->move((width() - _resizeWidget->width()) / 2,
                             (height() - _resizeWidget->height()) / 2 + 20);
         _resizeWidget->show();
-        _resizeTimer->start(1000);
+        _resizeTimer->start();
     }
 }
 
