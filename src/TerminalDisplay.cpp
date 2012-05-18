@@ -1124,6 +1124,7 @@ void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
             // if cursor is blinking(hidden), blink it again to make it show
             blinkCursorEvent();
         }
+        Q_ASSERT( _cursorBlinking == false );
     }
 }
 
@@ -2690,6 +2691,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
             // if cursor is blinking(hidden), blink it again to show it
             blinkCursorEvent();
         }
+        Q_ASSERT( _cursorBlinking == false );
     }
 
     emit keyPressedSignal(event);
