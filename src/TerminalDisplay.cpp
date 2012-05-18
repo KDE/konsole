@@ -1118,68 +1118,6 @@ void TerminalDisplay::showResizeNotification()
     }
 }
 
-void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
-{
-    _allowBlinkingCursor = blink;
-
-    if (blink && !_blinkCursorTimer->isActive())
-        _blinkCursorTimer->start();
-
-    if (!blink && _blinkCursorTimer->isActive()) {
-        _blinkCursorTimer->stop();
-        if (_cursorBlinking) {
-            // if cursor is blinking(hidden), blink it again to make it show
-            blinkCursorEvent();
-        }
-        Q_ASSERT( _cursorBlinking == false );
-    }
-}
-
-void TerminalDisplay::setBlinkingTextEnabled(bool blink)
-{
-    _allowBlinkingText = blink;
-
-    if (blink && !_blinkTextTimer->isActive())
-        _blinkTextTimer->start();
-
-    if (!blink && _blinkTextTimer->isActive()) {
-        _blinkTextTimer->stop();
-        _textBlinking = false;
-    }
-}
-
-void TerminalDisplay::focusOutEvent(QFocusEvent*)
-{
-    // trigger a repaint of the cursor so that it is both:
-    //
-    //   * visible (in case it was hidden during blinking)
-    //   * drawn in a focused out state
-    _cursorBlinking = false;
-    updateCursor();
-
-    // suppress furthur cursor blinking
-    _blinkCursorTimer->stop();
-    Q_ASSERT( _cursorBlinking == false );
-
-    // if text is blinking (hidden), blink it again to make it shown
-    if (_textBlinking)
-        blinkTextEvent();
-
-    // suppress furthur text blinking
-    _blinkTextTimer->stop();
-    Q_ASSERT( _textBlinking == false );
-}
-void TerminalDisplay::focusInEvent(QFocusEvent*)
-{
-    if (_allowBlinkingCursor)
-        _blinkCursorTimer->start();
-
-    updateCursor();
-
-    if (_allowBlinkingText && _hasTextBlinker)
-        _blinkTextTimer->start();
-}
-
 void TerminalDisplay::paintEvent(QPaintEvent* pe)
 {
     QPainter paint(this);
@@ -1463,6 +1401,86 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
     }
 }
 
+QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
+{
+    QRect result;
+    result.setLeft(_leftMargin + _fontWidth * imageArea.left());
+    result.setTop(_topMargin + _fontHeight * imageArea.top());
+    result.setWidth(_fontWidth * imageArea.width());
+    result.setHeight(_fontHeight * imageArea.height());
+
+    return result;
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                          Blinking Text & Cursor                           */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
+{
+    _allowBlinkingCursor = blink;
+
+    if (blink && !_blinkCursorTimer->isActive())
+        _blinkCursorTimer->start();
+
+    if (!blink && _blinkCursorTimer->isActive()) {
+        _blinkCursorTimer->stop();
+        if (_cursorBlinking) {
+            // if cursor is blinking(hidden), blink it again to make it show
+            blinkCursorEvent();
+        }
+        Q_ASSERT( _cursorBlinking == false );
+    }
+}
+
+void TerminalDisplay::setBlinkingTextEnabled(bool blink)
+{
+    _allowBlinkingText = blink;
+
+    if (blink && !_blinkTextTimer->isActive())
+        _blinkTextTimer->start();
+
+    if (!blink && _blinkTextTimer->isActive()) {
+        _blinkTextTimer->stop();
+        _textBlinking = false;
+    }
+}
+
+void TerminalDisplay::focusOutEvent(QFocusEvent*)
+{
+    // trigger a repaint of the cursor so that it is both:
+    //
+    //   * visible (in case it was hidden during blinking)
+    //   * drawn in a focused out state
+    _cursorBlinking = false;
+    updateCursor();
+
+    // suppress furthur cursor blinking
+    _blinkCursorTimer->stop();
+    Q_ASSERT( _cursorBlinking == false );
+
+    // if text is blinking (hidden), blink it again to make it shown
+    if (_textBlinking)
+        blinkTextEvent();
+
+    // suppress furthur text blinking
+    _blinkTextTimer->stop();
+    Q_ASSERT( _textBlinking == false );
+}
+
+void TerminalDisplay::focusInEvent(QFocusEvent*)
+{
+    if (_allowBlinkingCursor)
+        _blinkCursorTimer->start();
+
+    updateCursor();
+
+    if (_allowBlinkingText && _hasTextBlinker)
+        _blinkTextTimer->start();
+}
+
 void TerminalDisplay::blinkTextEvent()
 {
     Q_ASSERT(_allowBlinkingText);
@@ -1486,17 +1504,6 @@ void TerminalDisplay::updateCursor()
 {
     QRect cursorRect = imageToWidget(QRect(cursorPosition(), QSize(1, 1)));
     update(cursorRect);
-}
-
-QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
-{
-    QRect result;
-    result.setLeft(_leftMargin + _fontWidth * imageArea.left());
-    result.setTop(_topMargin + _fontHeight * imageArea.top());
-    result.setWidth(_fontWidth * imageArea.width());
-    result.setHeight(_fontHeight * imageArea.height());
-
-    return result;
 }
 
 /* ------------------------------------------------------------------------- */
