@@ -757,8 +757,8 @@ private:
 
     bool _allowBlinkingText;  // allow text to blink
     bool _allowBlinkingCursor;  // allow cursor to blink
-    bool _textBlinking;   // hide text in paintEvent
-    bool _cursorBlinking;     // hide cursor in paintEvent
+    bool _textBlinking;   // text is blinkingi, hide it when drawing
+    bool _cursorBlinking;     // cursor is blinking, hide it whe drawing
     bool _hasTextBlinker; // has characters to blink
     QTimer* _blinkTextTimer;
     QTimer* _blinkCursorTimer;
