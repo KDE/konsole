@@ -309,7 +309,7 @@ void* CompactHistoryBlock::allocate(size_t size)
 {
     Q_ASSERT(size > 0);
     if (tail - blockStart + size > blockLength)
-        return NULL;
+        return 0;
 
     void* block = tail;
     tail += size;
@@ -393,9 +393,9 @@ CompactHistoryLine::CompactHistoryLine(const TextLine& line, CompactHistoryBlock
 
         //kDebug() << "number of different formats in string: " << formatLength;
         formatArray = (CharacterFormat*) blockList.allocate(sizeof(CharacterFormat) * formatLength);
-        Q_ASSERT(formatArray != NULL);
+        Q_ASSERT(formatArray != 0);
         text = (quint16*) blockList.allocate(sizeof(quint16) * line.size());
-        Q_ASSERT(text != NULL);
+        Q_ASSERT(text != 0);
 
         length = line.size();
         wrapped = false;
