@@ -1089,14 +1089,6 @@ void TerminalDisplay::updateImage()
 
 void TerminalDisplay::showResizeNotification()
 {
-    static bool resizeForTheFirstTime = true;
-    if (resizeForTheFirstTime) {
-        // Do not display size hint when resizing for the first time.
-        // That first resizing mostly happens on startup
-        resizeForTheFirstTime = false;
-        return;
-    }
-
     if (_showTerminalSizeHint && isVisible()) {
         if (!_resizeWidget) {
             _resizeWidget = new QLabel(i18n("Size: XXX x XXX"), this);
