@@ -1460,6 +1460,18 @@ void TerminalDisplay::blinkTextEvent()
     update();
 }
 
+void TerminalDisplay::blinkCursorEvent()
+{
+    _cursorBlinking = !_cursorBlinking;
+    updateCursor();
+}
+
+void TerminalDisplay::updateCursor()
+{
+    QRect cursorRect = imageToWidget(QRect(cursorPosition(), QSize(1, 1)));
+    update(cursorRect);
+}
+
 QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
 {
     QRect result;
@@ -1469,18 +1481,6 @@ QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
     result.setHeight(_fontHeight * imageArea.height());
 
     return result;
-}
-
-void TerminalDisplay::updateCursor()
-{
-    QRect cursorRect = imageToWidget(QRect(cursorPosition(), QSize(1, 1)));
-    update(cursorRect);
-}
-
-void TerminalDisplay::blinkCursorEvent()
-{
-    _cursorBlinking = !_cursorBlinking;
-    updateCursor();
 }
 
 /* ------------------------------------------------------------------------- */
