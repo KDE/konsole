@@ -139,9 +139,9 @@ public:
 private:
     int startOfLine(int lineno);
 
-    HistoryFile index; // lines Row(int)
-    HistoryFile cells; // text  Row(Character)
-    HistoryFile lineflags; // flags Row(unsigned char)
+    HistoryFile _index; // lines Row(int)
+    HistoryFile _cells; // text  Row(Character)
+    HistoryFile _lineflags; // flags Row(unsigned char)
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -199,40 +199,40 @@ class CompactHistoryBlock
 {
 public:
     CompactHistoryBlock() {
-        blockLength = 4096 * 64; // 256kb
-        head = (quint8*) mmap(0, blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
-        //head = (quint8*) malloc(blockLength);
-        Q_ASSERT(head != MAP_FAILED);
-        tail = blockStart = head;
-        allocCount = 0;
+        _blockLength = 4096 * 64; // 256kb
+        _head = (quint8*) mmap(0, _blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
+        //_head = (quint8*) malloc(_blockLength);
+        Q_ASSERT(_head != MAP_FAILED);
+        _tail = _blockStart = _head;
+        _allocCount = 0;
     }
 
     virtual ~CompactHistoryBlock() {
-        //free(blockStart);
-        munmap(blockStart, blockLength);
+        //free(_blockStart);
+        munmap(_blockStart, _blockLength);
     }
 
     virtual unsigned int remaining() {
-        return blockStart + blockLength - tail;
+        return _blockStart + _blockLength - _tail;
     }
     virtual unsigned  length() {
-        return blockLength;
+        return _blockLength;
     }
     virtual void* allocate(size_t length);
     virtual bool contains(void* addr) {
-        return addr >= blockStart && addr < (blockStart + blockLength);
+        return addr >= _blockStart && addr < (_blockStart + _blockLength);
     }
     virtual void deallocate();
     virtual bool isInUse() {
-        return allocCount != 0;
+        return _allocCount != 0;
     };
 
 private:
-    size_t blockLength;
-    quint8* head;
-    quint8* tail;
-    quint8* blockStart;
-    int allocCount;
+    size_t _blockLength;
+    quint8* _head;
+    quint8* _tail;
+    quint8* _blockStart;
+    int _allocCount;
 };
 
 class CompactHistoryBlockList
@@ -265,22 +265,22 @@ public:
     virtual void getCharacters(Character* array, int length, int startColumn);
     virtual void getCharacter(int index, Character& r);
     virtual bool isWrapped() const {
-        return wrapped;
+        return _wrapped;
     };
     virtual void setWrapped(bool value) {
-        wrapped = value;
+        _wrapped = value;
     };
     virtual unsigned int getLength() const {
-        return length;
+        return _length;
     };
 
 protected:
-    CompactHistoryBlockList& blockList;
-    CharacterFormat* formatArray;
-    quint16 length;
-    quint16* text;
-    quint16 formatLength;
-    bool wrapped;
+    CompactHistoryBlockList& _blockListRef;
+    CharacterFormat* _formatArray;
+    quint16 _length;
+    quint16* _text;
+    quint16 _formatLength;
+    bool _wrapped;
 };
 
 class CompactHistoryScroll : public HistoryScroll
@@ -304,8 +304,8 @@ public:
 
 private:
     bool hasDifferentColors(const TextLine& line) const;
-    HistoryArray lines;
-    CompactHistoryBlockList blockList;
+    HistoryArray _lines;
+    CompactHistoryBlockList _blockList;
 
     unsigned int _maxLineCount;
 };
@@ -364,7 +364,7 @@ public:
     virtual HistoryScroll* scroll(HistoryScroll *) const;
 
 protected:
-    QString m_fileName;
+    QString _fileName;
 };
 
 class CompactHistoryType : public HistoryType
@@ -378,7 +378,7 @@ public:
     virtual HistoryScroll* scroll(HistoryScroll *) const;
 
 protected:
-    unsigned int m_nbLines;
+    unsigned int _maxLines;
 };
 }
 
