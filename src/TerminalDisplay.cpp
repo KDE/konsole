@@ -1148,17 +1148,24 @@ void TerminalDisplay::setBlinkingTextEnabled(bool blink)
 
 void TerminalDisplay::focusOutEvent(QFocusEvent*)
 {
-    // trigger a repaint of the cursor so that it is both visible (in case
-    // it was hidden during blinking)
-    // and drawn in a focused out state
+    // trigger a repaint of the cursor so that it is both:
+    //
+    //   * visible (in case it was hidden during blinking)
+    //   * drawn in a focused out state
     _cursorBlinking = false;
     updateCursor();
 
+    // suppress furthur cursor blinking
     _blinkCursorTimer->stop();
+    Q_ASSERT( _cursorBlinking == false );
+
+    // if text is blinking (hidden), blink it again to make it shown
     if (_textBlinking)
         blinkTextEvent();
 
+    // suppress furthur text blinking
     _blinkTextTimer->stop();
+    Q_ASSERT( _textBlinking == false );
 }
 void TerminalDisplay::focusInEvent(QFocusEvent*)
 {
