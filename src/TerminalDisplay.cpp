@@ -1465,8 +1465,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
 
 void TerminalDisplay::blinkTextEvent()
 {
-    if (!_allowBlinkingText)
-        return;
+    Q_ASSERT(_allowBlinkingText);
 
     _textBlinking = !_textBlinking;
 
@@ -1477,6 +1476,8 @@ void TerminalDisplay::blinkTextEvent()
 
 void TerminalDisplay::blinkCursorEvent()
 {
+    Q_ASSERT(_allowBlinkingCursor);
+
     _cursorBlinking = !_cursorBlinking;
     updateCursor();
 }
