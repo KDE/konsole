@@ -1076,7 +1076,9 @@ void TerminalDisplay::updateImage()
     // update the parts of the display which have changed
     update(dirtyRegion);
 
-    if (_hasTextBlinker && !_blinkTextTimer->isActive()) _blinkTextTimer->start();
+    if (_allowBlinkingText && _hasTextBlinker && !_blinkTextTimer->isActive()) {
+        _blinkTextTimer->start();
+    }
     if (!_hasTextBlinker && _blinkTextTimer->isActive()) {
         _blinkTextTimer->stop();
         _textBlinking = false;
@@ -1174,7 +1176,7 @@ void TerminalDisplay::focusInEvent(QFocusEvent*)
 
     updateCursor();
 
-    if (_hasTextBlinker)
+    if (_allowBlinkingText && _hasTextBlinker)
         _blinkTextTimer->start();
 }
 
