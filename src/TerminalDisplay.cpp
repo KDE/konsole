@@ -1122,8 +1122,6 @@ void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
         _blinkCursorTimer->stop();
         if (_cursorBlinking)
             blinkCursorEvent();
-        else
-            _cursorBlinking = false;
     }
 }
 
@@ -2688,8 +2686,6 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
         _blinkCursorTimer->start(QApplication::cursorFlashTime() / 2);
         if (_cursorBlinking)
             blinkCursorEvent();
-        else
-            _cursorBlinking = false;
     }
 
     emit keyPressedSignal(event);
