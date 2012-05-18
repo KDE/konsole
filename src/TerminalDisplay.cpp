@@ -343,10 +343,14 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     connect(_scrollBar, SIGNAL(valueChanged(int)),
             this, SLOT(scrollBarPositionChanged(int)));
 
-    // setup timers for blinking cursor and text
-    _blinkTextTimer   = new QTimer(this);
+    // setup timers for blinking text
+    _blinkTextTimer = new QTimer(this);
+    _blinkTextTimer->setInterval(TEXT_BLINK_DELAY);
     connect(_blinkTextTimer, SIGNAL(timeout()), this, SLOT(blinkTextEvent()));
-    _blinkCursorTimer   = new QTimer(this);
+
+    // setup timers for blinking cursor
+    _blinkCursorTimer = new QTimer(this);
+    _blinkCursorTimer->setInterval(QApplication::cursorFlashTime() / 2);
     connect(_blinkCursorTimer, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
 
     // hide mouse cursor on keystroke or idle
@@ -1072,7 +1076,7 @@ void TerminalDisplay::updateImage()
     // update the parts of the display which have changed
     update(dirtyRegion);
 
-    if (_hasTextBlinker && !_blinkTextTimer->isActive()) _blinkTextTimer->start(TEXT_BLINK_DELAY);
+    if (_hasTextBlinker && !_blinkTextTimer->isActive()) _blinkTextTimer->start();
     if (!_hasTextBlinker && _blinkTextTimer->isActive()) {
         _blinkTextTimer->stop();
         _textBlinking = false;
@@ -1116,7 +1120,7 @@ void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
     _allowBlinkingCursor = blink;
 
     if (blink && !_blinkCursorTimer->isActive())
-        _blinkCursorTimer->start(QApplication::cursorFlashTime() / 2);
+        _blinkCursorTimer->start();
 
     if (!blink && _blinkCursorTimer->isActive()) {
         _blinkCursorTimer->stop();
@@ -1133,7 +1137,7 @@ void TerminalDisplay::setBlinkingTextEnabled(bool blink)
     _allowBlinkingText = blink;
 
     if (blink && !_blinkTextTimer->isActive())
-        _blinkTextTimer->start(TEXT_BLINK_DELAY);
+        _blinkTextTimer->start();
 
     if (!blink && _blinkTextTimer->isActive()) {
         _blinkTextTimer->stop();
@@ -2686,7 +2690,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     // know where the current selection is.
 
     if (_allowBlinkingCursor) {
-        _blinkCursorTimer->start(QApplication::cursorFlashTime() / 2);
+        _blinkCursorTimer->start();
         if (_cursorBlinking) {
             // if cursor is blinking(hidden), blink it again to show it
             blinkCursorEvent();
