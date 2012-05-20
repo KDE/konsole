@@ -1116,6 +1116,16 @@ void Session::setAddToUtmp(bool add)
     _addToUtmp = add;
 }
 
+void Session::setAutoClose(bool close)
+{
+    _autoClose = close;
+}
+
+bool Session::autoClose() const
+{
+    return _autoClose;
+}
+
 void Session::setFlowControlEnabled(bool enabled)
 {
     _flowControlEnabled = enabled;

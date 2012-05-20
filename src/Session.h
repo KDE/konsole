@@ -286,9 +286,10 @@ public:
      * Specifies whether to close the session automatically when the terminal
      * process terminates.
      */
-    void setAutoClose(bool b) {
-        _autoClose = b;
-    }
+    void setAutoClose(bool close);
+
+    /** See setAutoClose() */
+    bool autoClose() const;
 
     /** Returns true if the user has started a program in the session. */
     bool isForegroundProcessActive();
