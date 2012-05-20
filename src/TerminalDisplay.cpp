@@ -1457,7 +1457,7 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     _cursorBlinking = false;
     updateCursor();
 
-    // suppress furthur cursor blinking
+    // suppress further cursor blinking
     _blinkCursorTimer->stop();
     Q_ASSERT( _cursorBlinking == false );
 
@@ -1465,7 +1465,7 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     if (_textBlinking)
         blinkTextEvent();
 
-    // suppress furthur text blinking
+    // suppress further text blinking
     _blinkTextTimer->stop();
     Q_ASSERT( _textBlinking == false );
 }
