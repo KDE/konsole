@@ -38,14 +38,14 @@ static const int LINE_WRAPPED      = (1 << 0);
 static const int LINE_DOUBLEWIDTH  = (1 << 1);
 static const int LINE_DOUBLEHEIGHT = (1 << 2);
 
-#define DEFAULT_RENDITION  0
-#define RE_BOLD            (1 << 0)
-#define RE_BLINK           (1 << 1)
-#define RE_UNDERLINE       (1 << 2)
-#define RE_REVERSE         (1 << 3) // Screen only
-#define RE_INTENSIVE       (1 << 3) // Widget only
-#define RE_CURSOR          (1 << 4)
-#define RE_EXTENDED_CHAR   (1 << 5)
+const int DEFAULT_RENDITION = 0;
+const int RE_BOLD           = (1 << 0);
+const int RE_BLINK          = (1 << 1);
+const int RE_UNDERLINE      = (1 << 2);
+const int RE_REVERSE        = (1 << 3); // Screen only
+const int RE_INTENSIVE      = (1 << 3); // Widget only
+const int RE_CURSOR         = (1 << 4);
+const int RE_EXTENDED_CHAR  = (1 << 5);
 
 /**
  * Unicode character in the range of U+2500 ~ U+257F are known as line
