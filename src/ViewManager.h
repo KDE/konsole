@@ -226,51 +226,51 @@ signals:
 
 public slots:
     /** DBus slot that returns the number of sessions in the current view. */
-    int sessionCount();
+    Q_SCRIPTABLE int sessionCount();
 
     /** DBus slot that returns the current (active) session window */
-    int currentSession();
+    Q_SCRIPTABLE int currentSession();
 
     /** DBus slot that creates a new session in the current view.
      * @param profile the name of the profile to be used
      * @param directory the working directory where the session is
      * started.
      */
-    int newSession(QString profile, QString directory);
+    Q_SCRIPTABLE int newSession(QString profile, QString directory);
 
     // TODO: its semantic is application-wide. Move it to more appropriate place
     // DBus slot that returns the name of default profile
-    QString defaultProfile();
+    Q_SCRIPTABLE QString defaultProfile();
 
     // TODO: its semantic is application-wide. Move it to more appropriate place
     // DBus slot that returns a string list of defined (known) profiles
-    QStringList profileList();
+    Q_SCRIPTABLE QStringList profileList();
 
     /** DBus slot that creates a new session in the current view with the associated
       * default profile and the default working directory
       */
-    int newSession();
+    Q_SCRIPTABLE int newSession();
 
     /** DBus slot that changes the view port to the next session */
-    void nextSession();
+    Q_SCRIPTABLE void nextSession();
 
     /** DBus slot that changes the view port to the previous session */
-    void prevSession();
+    Q_SCRIPTABLE void prevSession();
 
     /** DBus slot that switches the current session (as returned by
       * currentSession()) with the left (or previous) one in the
       * navigation tab.
       */
-    void moveSessionLeft();
+    Q_SCRIPTABLE void moveSessionLeft();
 
     /** DBus slot that Switches the current session (as returned by
       * currentSession()) with the right (or next) one in the navigation
       * tab.
       */
-    void moveSessionRight();
+    Q_SCRIPTABLE void moveSessionRight();
 
     /** DBus slot that sets ALL tabs' width to match their text */
-    void setTabWidthToText(bool);
+    Q_SCRIPTABLE void setTabWidthToText(bool);
 
 private slots:
     // called when the "Split View Left/Right" menu item is selected
