@@ -34,7 +34,7 @@
 #include <KConfigGroup>
 
 // Konsole
-#include <konsoleadaptor.h>
+#include <windowadaptor.h>
 
 #include "ColorScheme.h"
 #include "ColorSchemeManager.h"
@@ -98,7 +98,8 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
             SLOT(updateViewsForSession(Session*)));
 
     //prepare DBus communication
-    new KonsoleAdaptor(this);
+    new WindowAdaptor(this);
+    // TODO: remove this obsolete and bad name
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Konsole"), this);
 
     _managerId = ++lastManagerId;

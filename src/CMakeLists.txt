@@ -51,21 +51,21 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
     # Generate dbus .xml files; do not store .xml in source folder
     qt4_generate_dbus_interface( Session.h org.kde.konsole.Session.xml OPTIONS
  -m)
-    qt4_generate_dbus_interface( ViewManager.h org.kde.konsole.Konsole.xml OPTIONS -s -M)
+    qt4_generate_dbus_interface( ViewManager.h org.kde.konsole.Window.xml OPTIONS -s -M)
 
     qt4_add_dbus_adaptor( sessionadaptors_SRCS
                           ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
                           Session.h
                           Konsole::Session )
-    qt4_add_dbus_adaptor( konsoleadaptors_SRCS 
-                          ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Konsole.xml 
+    qt4_add_dbus_adaptor( windowadaptors_SRCS
+                          ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                           ViewManager.h 
                           Konsole::ViewManager )
 
 
     set(konsoleprivate_SRCS
         ${sessionadaptors_SRCS}
-        ${konsoleadaptors_SRCS}
+        ${windowadaptors_SRCS}
         BookmarkHandler.cpp
         ColorScheme.cpp
         ColorSchemeManager.cpp
@@ -111,7 +111,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ZModemDialog.cpp
         konsole_wcwidth.cpp
         WindowSystemInfo.cpp
-        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Konsole.xml
+        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
     )
 

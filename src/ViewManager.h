@@ -67,7 +67,7 @@ class ViewSplitter;
 class KONSOLEPRIVATE_EXPORT ViewManager : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Konsole")
+    Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Window")
 
 public:
     /**
