@@ -114,8 +114,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { (Property)0 , 0 , 0, QVariant::Invalid }
 };
 
-QHash<QString, Profile::PropertyInfo> Profile::_propertyInfoByName;
-QHash<Profile::Property, Profile::PropertyInfo> Profile::_infoByProperty;
+QHash<QString, Profile::PropertyInfo> Profile::PropertyInfoByName;
+QHash<Profile::Property, Profile::PropertyInfo> Profile::PropertyInfoByProperty;
 
 void Profile::fillTableWithDefaultNames()
 {
@@ -257,17 +257,17 @@ Profile::Property Profile::lookupByName(const QString& name)
     // insert default names into table the first time this is called
     fillTableWithDefaultNames();
 
-    return _propertyInfoByName[name.toLower()].property;
+    return PropertyInfoByName[name.toLower()].property;
 }
 
 void Profile::registerProperty(const PropertyInfo& info)
 {
-    _propertyInfoByName.insert(QString(info.name).toLower(), info);
+    PropertyInfoByName.insert(QString(info.name).toLower(), info);
 
     // only allow one property -> name map
     // (multiple name -> property mappings are allowed though)
-    if (!_infoByProperty.contains(info.property))
-        _infoByProperty.insert(info.property, info);
+    if (!PropertyInfoByProperty.contains(info.property))
+        PropertyInfoByProperty.insert(info.property, info);
 }
 
 int Profile::menuIndexAsInt() const
