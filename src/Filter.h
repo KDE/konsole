@@ -25,6 +25,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 #include <QtCore/QRegExp>
+#include <QtCore/QMultiHash>
 
 // Konsole
 #include "Character.h"

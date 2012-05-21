@@ -23,9 +23,6 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-// Qt
-#include <QtCore/QHash>
-
 // Konsole
 #include "CharacterColor.h"
 
