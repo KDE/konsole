@@ -210,9 +210,7 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
             if (_colorTable) {
                 style.append(QString("color:%1;").arg(_lastForeColor.color(_colorTable).name()));
 
-                if (!characters[i].isTransparent(_colorTable)) {
-                    style.append(QString("background-color:%1;").arg(_lastBackColor.color(_colorTable).name()));
-                }
+                style.append(QString("background-color:%1;").arg(_lastBackColor.color(_colorTable).name()));
             }
 
             //open the span with the current style

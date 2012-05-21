@@ -39,10 +39,6 @@ namespace Konsole
  *
  * Each entry can be set as bold, in which case any text
  * drawn using the color should be drawn in bold.
- *
- * Each entry can also be transparent, in which case the terminal
- * display should avoid drawing the background for any characters
- * using the entry as a background.
  */
 class ColorEntry
 {
@@ -64,35 +60,28 @@ public:
      * Constructs a new color palette entry.
      *
      * @param c The color value for this entry.
-     * @param tr Specifies that the color should be transparent when used as a background color.
      * @param weight Specifies the font weight to use when drawing text with this color.
      */
-    ColorEntry(QColor c, bool tr, FontWeight weight = UseCurrentFormat)
-        : color(c), transparent(tr), fontWeight(weight) {}
+    ColorEntry(QColor c,  FontWeight weight = UseCurrentFormat)
+        : color(c), fontWeight(weight) {}
 
     /**
      * Constructs a new color palette entry with an undefined color, and
-     * with the transparent and bold flags set to false.
+     * with the bold flags set to false.
      */
-    ColorEntry() : transparent(false), fontWeight(UseCurrentFormat) {}
+    ColorEntry() : fontWeight(UseCurrentFormat) {}
 
     /**
-     * Sets the color, transparency and boldness of this color to those of @p rhs.
+     * Sets the color and boldness of this color to those of @p rhs.
      */
     void operator=(const ColorEntry& rhs) {
         color = rhs.color;
-        transparent = rhs.transparent;
         fontWeight = rhs.fontWeight;
     }
 
     /** The color value of this entry for display. */
     QColor color;
 
-    /**
-     * If true character backgrounds using this color should be transparent.
-     * This is not applicable when the color is used to render text.
-     */
-    bool   transparent;
     /**
      * Specifies the font weight to use when drawing text with this color.
      * This is not applicable when the color is used to draw a character's background.

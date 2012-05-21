@@ -44,27 +44,27 @@ using namespace Konsole;
 // It contains the 8 ansiterm/xterm colors in 2 intensities.
 const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] =
 {
-    ColorEntry(QColor(0x00, 0x00, 0x00), 0), // Dfore
-    ColorEntry(QColor(0xFF, 0xFF, 0xFF), 1), // Dback
-    ColorEntry(QColor(0x00, 0x00, 0x00), 0), // Black
-    ColorEntry(QColor(0xB2, 0x18, 0x18), 0), // Red
-    ColorEntry(QColor(0x18, 0xB2, 0x18), 0), // Green
-    ColorEntry(QColor(0xB2, 0x68, 0x18), 0), // Yellow
-    ColorEntry(QColor(0x18, 0x18, 0xB2), 0), // Blue
-    ColorEntry(QColor(0xB2, 0x18, 0xB2), 0), // Magenta
-    ColorEntry(QColor(0x18, 0xB2, 0xB2), 0), // Cyan
-    ColorEntry(QColor(0xB2, 0xB2, 0xB2), 0), // White
+    ColorEntry(QColor(0x00, 0x00, 0x00)), // Dfore
+    ColorEntry(QColor(0xFF, 0xFF, 0xFF)), // Dback
+    ColorEntry(QColor(0x00, 0x00, 0x00)), // Black
+    ColorEntry(QColor(0xB2, 0x18, 0x18)), // Red
+    ColorEntry(QColor(0x18, 0xB2, 0x18)), // Green
+    ColorEntry(QColor(0xB2, 0x68, 0x18)), // Yellow
+    ColorEntry(QColor(0x18, 0x18, 0xB2)), // Blue
+    ColorEntry(QColor(0xB2, 0x18, 0xB2)), // Magenta
+    ColorEntry(QColor(0x18, 0xB2, 0xB2)), // Cyan
+    ColorEntry(QColor(0xB2, 0xB2, 0xB2)), // White
     // intensive versions
-    ColorEntry(QColor(0x00, 0x00, 0x00), 0),
-    ColorEntry(QColor(0xFF, 0xFF, 0xFF), 1),
-    ColorEntry(QColor(0x68, 0x68, 0x68), 0),
-    ColorEntry(QColor(0xFF, 0x54, 0x54), 0),
-    ColorEntry(QColor(0x54, 0xFF, 0x54), 0),
-    ColorEntry(QColor(0xFF, 0xFF, 0x54), 0),
-    ColorEntry(QColor(0x54, 0x54, 0xFF), 0),
-    ColorEntry(QColor(0xFF, 0x54, 0xFF), 0),
-    ColorEntry(QColor(0x54, 0xFF, 0xFF), 0),
-    ColorEntry(QColor(0xFF, 0xFF, 0xFF), 0)
+    ColorEntry(QColor(0x00, 0x00, 0x00)),
+    ColorEntry(QColor(0xFF, 0xFF, 0xFF)),
+    ColorEntry(QColor(0x68, 0x68, 0x68)),
+    ColorEntry(QColor(0xFF, 0x54, 0x54)),
+    ColorEntry(QColor(0x54, 0xFF, 0x54)),
+    ColorEntry(QColor(0xFF, 0xFF, 0x54)),
+    ColorEntry(QColor(0x54, 0x54, 0xFF)),
+    ColorEntry(QColor(0xFF, 0x54, 0xFF)),
+    ColorEntry(QColor(0x54, 0xFF, 0xFF)),
+    ColorEntry(QColor(0xFF, 0xFF, 0xFF))
 };
 
 const char* const ColorScheme::colorNames[TABLE_COLORS] = {
@@ -310,7 +310,6 @@ void ColorScheme::readColorEntry(const KConfig& config , int index)
     ColorEntry entry;
 
     entry.color = configGroup.readEntry("Color", QColor());
-    entry.transparent = configGroup.readEntry("Transparent", false);
 
     // Deprecated key from KDE 4.0 which set 'Bold' to true to force
     // a color to be bold or false to use the current format
@@ -351,7 +350,9 @@ void ColorScheme::writeColorEntry(KConfig& config , int index) const
     const ColorEntry& entry = colorTable()[index];
 
     configGroup.writeEntry("Color", entry.color);
-    configGroup.writeEntry("Transparent", (bool)entry.transparent);
+    if ( configGroup.hasKey("Transparent") ) {
+        configGroup.deleteEntry("Transparent");
+    }
     if (entry.fontWeight != ColorEntry::UseCurrentFormat) {
         configGroup.writeEntry("Bold", entry.fontWeight == ColorEntry::Bold);
     }

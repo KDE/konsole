@@ -1,11 +1,9 @@
 [Background]
 Color=247,247,214
-Transparent=true
 MaxRandomHue=340
 
 [BackgroundIntense]
 Color=255,255,221
-Transparent=true
 
 [Color0]
 Color=0,0,0

@@ -123,11 +123,6 @@ public:
     bool isRealCharacter;
 
     /**
-     * Returns true if this character has a transparent background when
-     * it is drawn with the specified @p palette.
-     */
-    bool   isTransparent(const ColorEntry* palette) const;
-    /**
      * Returns true if this character should always be drawn in bold when
      * it is drawn with the specified @p palette, independent of whether
      * or not the character has the RE_BOLD rendition flag.
@@ -173,14 +168,6 @@ inline bool operator == (const Character& a, const Character& b)
 inline bool operator != (const Character& a, const Character& b)
 {
     return !operator==(a, b);
-}
-
-inline bool Character::isTransparent(const ColorEntry* base) const
-{
-    return ((backgroundColor._colorSpace == COLOR_SPACE_DEFAULT) &&
-            base[backgroundColor._u + 0 + (backgroundColor._v ? BASE_COLORS : 0)].transparent)
-           || ((backgroundColor._colorSpace == COLOR_SPACE_SYSTEM) &&
-               base[backgroundColor._u + 2 + (backgroundColor._v ? BASE_COLORS : 0)].transparent);
 }
 
 inline bool Character::equalsFormat(const Character& other) const

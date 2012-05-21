@@ -1,11 +1,9 @@
 [Background]
 Color=44,44,44
-Transparent=false
 
 [BackgroundIntense]
 Bold=true
 Color=44,44,44
-Transparent=false
 
 [Color0]
 Color=63,63,63
