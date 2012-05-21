@@ -98,8 +98,9 @@ public:
 
     /** The unicode character value for this character.
      *
-     * if RE_EXTENDED_CHAR character is a hash code which can be used to look up the unicode
-     * character sequence in the ExtendedCharTable used to create the sequence.
+     * if RE_EXTENDED_CHAR is set, character is a hash code which can be used to
+     * look up the unicode character sequence in the ExtendedCharTable used to
+     * create the sequence.
      */
     quint16 character;
 
