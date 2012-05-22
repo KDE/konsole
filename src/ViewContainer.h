@@ -362,6 +362,9 @@ public:
     // returns a pixmap image of a tab for use with QDrag
     QPixmap dragDropPixmap(int tab);
 
+signals:
+    void querySourceIndex(const QDropEvent* event, int& sourceIndex) const;
+
 protected:
     virtual void dragEnterEvent(QDragEnterEvent* event);
     virtual void dragLeaveEvent(QDragLeaveEvent* event);
@@ -434,6 +437,7 @@ private slots:
     void tabContextMenuRenameTab();
     void tabContextMenuDetachTab();
     void startTabDrag(int index);
+    void querySourceIndex(const QDropEvent* event, int& sourceIndex);
 
 signals:
     void detachTab(ViewContainer * self, QWidget * activeView);

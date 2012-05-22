@@ -357,22 +357,15 @@ int ViewContainerTabBar::dropIndex(const QPoint& pos) const
 }
 bool ViewContainerTabBar::proposedDropIsSameTab(const QDropEvent* event) const
 {
-    const int index = dropIndex(event->pos());
-    const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
     const bool sameTabBar = event->source() == this;
-
     if (!sameTabBar)
         return false;
 
-    const QList<QWidget*> viewList = _container->views();
+    const int index = dropIndex(event->pos());
     int sourceIndex = -1;
-    for (int i = 0; i < count(); i++) {
-        int idAtIndex = _container->viewProperties(viewList[i])->identifier();
-        if (idAtIndex == droppedId)
-            sourceIndex = i;
-    }
+    emit querySourceIndex(event, sourceIndex);
 
-    bool sourceAndDropAreLast = sourceIndex == count() - 1 && index == -1;
+    const bool sourceAndDropAreLast = sourceIndex == count() - 1 && index == -1;
     if (sourceIndex == index || sourceIndex == index - 1 || sourceAndDropAreLast)
         return true;
     else
@@ -442,6 +435,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     connect(_tabBar, SIGNAL(newTabRequest()), this, SIGNAL(newViewRequest()));
     connect(_tabBar, SIGNAL(wheelDelta(int)), this, SLOT(wheelScrolled(int)));
     connect(_tabBar, SIGNAL(initiateDrag(int)), this, SLOT(startTabDrag(int)));
+    connect(_tabBar, SIGNAL(querySourceIndex(const QDropEvent*,int&)),
+            this, SLOT(querySourceIndex(const QDropEvent*,int&)));
     connect(_tabBar, SIGNAL(contextMenu(int,QPoint)), this,
             SLOT(openTabContextMenu(int,QPoint)));
 
@@ -671,6 +666,22 @@ void TabbedViewContainer::startTabDrag(int tab)
         if (_tabBar->count() > 1)
             emit detachTab(this, view);
     }
+}
+
+void TabbedViewContainer::querySourceIndex(const QDropEvent* event ,int& sourceIndex)
+{
+    const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
+
+    const QList<QWidget*> viewList = views();
+    const int count = viewList.count();
+    int index = -1 ;
+    for (index = 0; index < count; index++) {
+        const int id = viewProperties(viewList[index])->identifier();
+        if (id == droppedId)
+            break;
+    }
+
+    sourceIndex = index;
 }
 
 void TabbedViewContainer::tabDoubleClicked(int index)
