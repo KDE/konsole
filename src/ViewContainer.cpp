@@ -393,11 +393,10 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
     }
 
     const int index = dropIndex(event->pos());
-    const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
-    bool result = false;
-    emit _container->moveViewRequest(index, droppedId, result);
+    bool success = false;
+    emit moveViewRequest(index, event, success);
 
-    if (result)
+    if (success)
         event->accept();
     else
         event->ignore();
@@ -444,6 +443,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     connect(_tabBar, SIGNAL(initiateDrag(int)), this, SLOT(startTabDrag(int)));
     connect(_tabBar, SIGNAL(querySourceIndex(const QDropEvent*,int&)),
             this, SLOT(querySourceIndex(const QDropEvent*,int&)));
+    connect(_tabBar, SIGNAL(moveViewRequest(int,const QDropEvent*,bool&)),
+            this, SLOT(onMoveViewRequest(int,const QDropEvent*,bool&)));
     connect(_tabBar, SIGNAL(contextMenu(int,QPoint)), this,
             SLOT(openTabContextMenu(int,QPoint)));
 
@@ -689,6 +690,12 @@ void TabbedViewContainer::querySourceIndex(const QDropEvent* event ,int& sourceI
     }
 
     sourceIndex = index;
+}
+
+void TabbedViewContainer::onMoveViewRequest(int index, const QDropEvent* event ,bool& success)
+{
+    const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
+    emit moveViewRequest(index, droppedId, success);
 }
 
 void TabbedViewContainer::tabDoubleClicked(int index)

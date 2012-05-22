@@ -368,6 +368,8 @@ public:
 signals:
     void querySourceIndex(const QDropEvent* event, int& sourceIndex) const;
 
+    void moveViewRequest(int index, const QDropEvent* event, bool& success);
+
 protected:
     virtual void dragEnterEvent(QDragEnterEvent* event);
     virtual void dragLeaveEvent(QDragLeaveEvent* event);
@@ -442,6 +444,7 @@ private slots:
     void tabContextMenuDetachTab();
     void startTabDrag(int index);
     void querySourceIndex(const QDropEvent* event, int& sourceIndex);
+    void onMoveViewRequest(int index, const QDropEvent* event, bool& success);
 
 signals:
     void detachTab(ViewContainer * self, QWidget * activeView);
