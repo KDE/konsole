@@ -183,7 +183,7 @@ void ViewContainer::removeView(QWidget* view)
         emit empty(this);
 }
 
-const QList<QWidget*> ViewContainer::views()
+const QList<QWidget*> ViewContainer::views() const
 {
     return _views;
 }
@@ -242,7 +242,7 @@ void ViewContainer::activatePreviousView()
     setActiveView(_views.at(index));
 }
 
-ViewProperties* ViewContainer::viewProperties(QWidget* widget)
+ViewProperties* ViewContainer::viewProperties(QWidget* widget) const
 {
     Q_ASSERT(_navigation.contains(widget));
 

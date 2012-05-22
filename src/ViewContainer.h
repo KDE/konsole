@@ -181,10 +181,10 @@ public:
     void removeView(QWidget* view);
 
     /** Returns the ViewProperties instance associated with a particular view in the container */
-    ViewProperties* viewProperties(QWidget* view);
+    ViewProperties* viewProperties(QWidget* view) const;
 
     /** Returns a list of the contained views */
-    const QList<QWidget*> views();
+    const QList<QWidget*> views() const;
 
     /**
      * Returns the view which currently has the focus or 0 if none
