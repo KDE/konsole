@@ -62,8 +62,8 @@ public:
      * @param c The color value for this entry.
      * @param weight Specifies the font weight to use when drawing text with this color.
      */
-    ColorEntry(QColor c,  FontWeight weight = UseCurrentFormat)
-        : color(c), fontWeight(weight) {}
+    explicit ColorEntry(QColor c,  FontWeight weight = UseCurrentFormat)
+             : color(c), fontWeight(weight) {}
 
     /**
      * Constructs a new color palette entry with an undefined color, and
