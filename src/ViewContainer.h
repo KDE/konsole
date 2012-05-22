@@ -28,12 +28,8 @@
 #include <QtCore/QHash>
 #include <QtCore/QList>
 
-// KDE
-#include <KTabBar>
-
 class QStackedWidget;
 class QWidget;
-class QLabel;
 class QHBoxLayout;
 class QVBoxLayout;
 
@@ -42,11 +38,10 @@ class QVBoxLayout;
 class QPoint;
 class QToolButton;
 class QMenu;
+class QDropEvent;
 
 // KDE
 class KMenu;
-
-// ListViewContainer
 
 namespace Konsole
 {
@@ -348,50 +343,7 @@ private:
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(ViewContainer::Features)
 
-class TabbedViewContainer;
-
-// internal class,
-// to allow for tweaks to the tab bar required by TabbedViewContainer.
-class ViewContainerTabBar : public KTabBar
-{
-    Q_OBJECT
-
-public:
-    ViewContainerTabBar(QWidget* parent);
-
-    // returns a pixmap image of a tab for use with QDrag
-    QPixmap dragDropPixmap(int tab);
-
-    // set the mimetype of which the tabbar support d&d
-    void setSupportedMimeType(const QString& mimeType);
-
-signals:
-    void querySourceIndex(const QDropEvent* event, int& sourceIndex) const;
-
-    void moveViewRequest(int index, const QDropEvent* event, bool& success);
-
-protected:
-    virtual void dragEnterEvent(QDragEnterEvent* event);
-    virtual void dragLeaveEvent(QDragLeaveEvent* event);
-    virtual void dragMoveEvent(QDragMoveEvent* event);
-    virtual void dropEvent(QDropEvent* event);
-
-private:
-    // show the indicator arrow which shows where a dropped tab will
-    // be inserted at 'index'
-    void setDropIndicator(int index, bool drawDisabled = false);
-    // returns the index at which a tab will be inserted if the mouse
-    // in a drag-drop operation is released at 'pos'
-    int dropIndex(const QPoint& pos) const;
-    // returns true if the tab to be dropped in a drag-drop operation
-    // is the same as the tab at the drop location
-    bool proposedDropIsSameTab(const QDropEvent* event) const;
-
-    QLabel* _dropIndicator;
-    int _dropIndicatorIndex;
-    bool _drawIndicatorDisabled;
-    QString _supportedMimeType;
-};
+class ViewContainerTabBar;
 
 /**
  * An alternative tabbed view container which uses a QTabBar and QStackedWidget

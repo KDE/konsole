@@ -103,6 +103,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         TerminalDisplay.cpp
         TerminalDisplayAccessible.cpp
         ViewContainer.cpp
+        ViewContainerTabBar.cpp
         ViewManager.cpp
         ViewProperties.cpp
         ViewSplitter.cpp
