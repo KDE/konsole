@@ -362,6 +362,9 @@ public:
     // returns a pixmap image of a tab for use with QDrag
     QPixmap dragDropPixmap(int tab);
 
+    // set the mimetype of which the tabbar support d&d
+    void setSupportedMimeType(const QString& mimeType);
+
 signals:
     void querySourceIndex(const QDropEvent* event, int& sourceIndex) const;
 
@@ -386,6 +389,7 @@ private:
     QLabel* _dropIndicator;
     int _dropIndicatorIndex;
     bool _drawIndicatorDisabled;
+    QString _supportedMimeType;
 };
 
 /**

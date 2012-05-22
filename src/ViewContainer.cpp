@@ -316,19 +316,25 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
     _dropIndicator->move(mapTo(parentWidget(), pos));
     _dropIndicator->show();
 }
+
+void ViewContainerTabBar::setSupportedMimeType(const QString& mimeType)
+{
+    _supportedMimeType = mimeType;
+}
+
 void ViewContainerTabBar::dragLeaveEvent(QDragLeaveEvent*)
 {
     setDropIndicator(-1);
 }
 void ViewContainerTabBar::dragEnterEvent(QDragEnterEvent* event)
 {
-    if (event->mimeData()->hasFormat(ViewProperties::mimeType()) &&
+    if (event->mimeData()->hasFormat(_supportedMimeType) &&
             event->source() != 0)
         event->acceptProposedAction();
 }
 void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent* event)
 {
-    if (event->mimeData()->hasFormat(ViewProperties::mimeType())
+    if (event->mimeData()->hasFormat(_supportedMimeType)
             && event->source() != 0) {
         int index = dropIndex(event->pos());
         if (index == -1)
@@ -375,7 +381,7 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
 {
     setDropIndicator(-1);
 
-    if (!event->mimeData()->hasFormat(ViewProperties::mimeType())) {
+    if (!event->mimeData()->hasFormat(_supportedMimeType)) {
         event->ignore();
         return;
     }
@@ -429,6 +435,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
 
     // The tab bar
     _tabBar = new ViewContainerTabBar(_containerWidget, this);
+    _tabBar->setSupportedMimeType(ViewProperties::mimeType());
 
     connect(_tabBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
     connect(_tabBar, SIGNAL(tabDoubleClicked(int)), this, SLOT(tabDoubleClicked(int)));
