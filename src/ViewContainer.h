@@ -357,7 +357,7 @@ class ViewContainerTabBar : public KTabBar
     Q_OBJECT
 
 public:
-    ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container);
+    ViewContainerTabBar(QWidget* parent);
 
     // returns a pixmap image of a tab for use with QDrag
     QPixmap dragDropPixmap(int tab);
@@ -387,7 +387,6 @@ private:
     // is the same as the tab at the drop location
     bool proposedDropIsSameTab(const QDropEvent* event) const;
 
-    TabbedViewContainer* _container;
     QLabel* _dropIndicator;
     int _dropIndicatorIndex;
     bool _drawIndicatorDisabled;
@@ -401,8 +400,6 @@ private:
 class TabbedViewContainer : public ViewContainer
 {
     Q_OBJECT
-
-    friend class ViewContainerTabBar;
 
 public:
     /**

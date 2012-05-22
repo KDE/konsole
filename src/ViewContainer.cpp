@@ -254,9 +254,8 @@ QList<QWidget*> ViewContainer::widgetsForItem(ViewProperties* item) const
     return _navigation.keys(item);
 }
 
-ViewContainerTabBar::ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container)
+ViewContainerTabBar::ViewContainerTabBar(QWidget* parent)
     : KTabBar(parent)
-    , _container(container)
     , _dropIndicator(0)
     , _dropIndicatorIndex(-1)
     , _drawIndicatorDisabled(false)
@@ -433,7 +432,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _stackWidget = new QStackedWidget();
 
     // The tab bar
-    _tabBar = new ViewContainerTabBar(_containerWidget, this);
+    _tabBar = new ViewContainerTabBar(_containerWidget);
     _tabBar->setSupportedMimeType(ViewProperties::mimeType());
 
     connect(_tabBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
