@@ -574,7 +574,7 @@ public:
         return result;
     }
 
-    static const Character defaultChar;
+    static const Character DefaultChar;
 
 private:
     //copies a line of text from the screen or history into a stream using a

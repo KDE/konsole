@@ -51,7 +51,7 @@ const bool BS_CLEARS = false;
 #define loc(X,Y) ((Y)*_columns+(X))
 #endif
 
-const Character Screen::defaultChar = Character(' ',
+const Character Screen::DefaultChar = Character(' ',
                                       CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR),
                                       CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR),
                                       DEFAULT_RENDITION,
@@ -403,7 +403,7 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
         _history->getCells(line, 0, length, dest + destLineOffset);
 
         for (int column = length; column < _columns; column++)
-            dest[destLineOffset + column] = defaultChar;
+            dest[destLineOffset + column] = Screen::DefaultChar;
 
         // invert selected text
         if (_selBegin != -1) {
@@ -428,7 +428,7 @@ void Screen::copyFromScreen(Character* dest , int startLine , int count) const
             int srcIndex = srcLineStartIndex + column;
             int destIndex = destLineStartIndex + column;
 
-            dest[destIndex] = _screenLines[srcIndex / _columns].value(srcIndex % _columns, defaultChar);
+            dest[destIndex] = _screenLines[srcIndex / _columns].value(srcIndex % _columns, Screen::DefaultChar);
 
             // invert selected text
             if (_selBegin != -1 && isSelected(column, line + _history->getLines()))
@@ -843,7 +843,7 @@ void Screen::clearImage(int loca, int loce, char c)
 
     //if the character being used to clear the area is the same as the
     //default character, the affected _lines can simply be shrunk.
-    const bool isDefaultCh = (clearCh == Screen::defaultChar);
+    const bool isDefaultCh = (clearCh == Screen::DefaultChar);
 
     for (int y = topLine; y <= bottomLine; y++) {
         _lineProperties[y] = 0;
@@ -975,15 +975,15 @@ void Screen::clearEntireLine()
     clearImage(loc(0, _cuY), loc(_columns - 1, _cuY), ' ');
 }
 
-void Screen::setRendition(int re)
+void Screen::setRendition(int rendention)
 {
-    _currentRendition |= re;
+    _currentRendition |= rendention;
     updateEffectiveRendition();
 }
 
-void Screen::resetRendition(int re)
+void Screen::resetRendition(int rendention)
 {
-    _currentRendition &= ~re;
+    _currentRendition &= ~rendention;
     updateEffectiveRendition();
 }
 
@@ -1042,7 +1042,7 @@ void Screen::getSelectionEnd(int& column , int& line) const
         line = _cuY + getHistLines();
     }
 }
-void Screen::setSelectionStart(const int x, const int y, const bool mode)
+void Screen::setSelectionStart(const int x, const int y, const bool blockSelectionMode)
 {
     _selBegin = loc(x, y);
     /* FIXME, HACK to correct for x too far to the right... */
@@ -1050,7 +1050,7 @@ void Screen::setSelectionStart(const int x, const int y, const bool mode)
 
     _selBottomRight = _selBegin;
     _selTopLeft = _selBegin;
-    _blockSelectionMode = mode;
+    _blockSelectionMode = blockSelectionMode;
 }
 
 void Screen::setSelectionEnd(const int x, const int y)
@@ -1351,5 +1351,5 @@ void Screen::setLineProperty(LineProperty property , bool enable)
 void Screen::fillWithDefaultChar(Character* dest, int count)
 {
     for (int i = 0; i < count; i++)
-        dest[i] = defaultChar;
+        dest[i] = Screen::DefaultChar;
 }

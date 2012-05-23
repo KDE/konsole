@@ -1586,7 +1586,7 @@ void TerminalDisplay::makeImage()
 void TerminalDisplay::clearImage()
 {
     for (int i = 0; i <= _imageSize; ++i)
-        _image[i] = Screen::defaultChar;
+        _image[i] = Screen::DefaultChar;
 }
 
 void TerminalDisplay::calcGeometry()
