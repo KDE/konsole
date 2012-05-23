@@ -30,7 +30,6 @@
 #include "ViewContainer.h"
 
 class QSignalMapper;
-class QMenu;
 class KActionCollection;
 class KConfigGroup;
 
@@ -367,8 +366,6 @@ private:
     // about the session ( such as title and associated icon ) to the display.
     SessionController* createController(Session* session , TerminalDisplay* display);
 
-    // create menu for 'new tab' button
-    QMenu* createNewViewMenu();
 private:
     QPointer<ViewSplitter>          _viewSplitter;
     QPointer<SessionController>     _pluggedController;
@@ -377,8 +374,6 @@ private:
 
     KActionCollection*                  _actionCollection;
     QSignalMapper*                      _containerSignalMapper;
-
-    QMenu* _newViewMenu;
 
     NavigationMethod  _navigationMethod;
 

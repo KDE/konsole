@@ -28,6 +28,9 @@
 #include <QtCore/QHash>
 #include <QtCore/QList>
 
+// Konsole
+#include "Profile.h"
+
 class QStackedWidget;
 class QWidget;
 class QHBoxLayout;
@@ -267,6 +270,9 @@ signals:
 
     /** Emitted when the user requests to open a new view */
     void newViewRequest();
+
+    /** Requests creation of a new view, with the selected profile. */
+    void newViewRequest(Profile::Ptr);
 
     /**
      * Emitted when the user requests to move a view from another container

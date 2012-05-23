@@ -42,6 +42,7 @@
 #include "IncrementalSearchBar.h"
 #include "ViewProperties.h"
 #include "ViewContainerTabBar.h"
+#include "ProfileList.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 
@@ -299,6 +300,13 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _newTabButton->setToolTip(i18nc("@info:tooltip", "Create new tab"));
     _newTabButton->setWhatsThis(i18nc("@info:whatsthis", "Create a new tab. Press and hold to select profile from menu"));
     _newTabButton->adjustSize();
+
+    QMenu* profileMenu = new QMenu(_newTabButton);
+    ProfileList* profileList = new ProfileList(false, profileMenu);
+    profileList->syncWidgetActions(profileMenu, true);
+    connect(profileList, SIGNAL(profileSelected(Profile::Ptr)),
+            this, SIGNAL(newViewRequest(Profile::Ptr)));
+    setNewViewMenu(profileMenu);
 
     _closeTabButton = new QToolButton(_containerWidget);
     _closeTabButton->setIcon(KIcon("tab-close"));

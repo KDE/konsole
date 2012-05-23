@@ -38,7 +38,6 @@
 
 #include "ColorScheme.h"
 #include "ColorSchemeManager.h"
-#include "ProfileList.h"
 #include "Session.h"
 #include "TerminalDisplay.h"
 #include "SessionController.h"
@@ -58,7 +57,6 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     , _viewSplitter(0)
     , _actionCollection(collection)
     , _containerSignalMapper(new QSignalMapper(this))
-    , _newViewMenu(0)
     , _navigationMethod(TabbedNavigation)
     , _navigationVisibility(ViewContainer::AlwaysShowNavigation)
     , _navigationPosition(ViewContainer::NavigationPositionTop)
@@ -108,7 +106,6 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
 
 ViewManager::~ViewManager()
 {
-    delete _newViewMenu;
 }
 
 int ViewManager::managerId() const
@@ -116,19 +113,6 @@ int ViewManager::managerId() const
     return _managerId;
 }
 
-QMenu* ViewManager::createNewViewMenu()
-{
-    if (_newViewMenu)
-        return _newViewMenu;
-
-    _newViewMenu = new QMenu(0);
-    ProfileList* newViewProfiles = new ProfileList(false, _newViewMenu);
-    newViewProfiles->syncWidgetActions(_newViewMenu, true);
-    connect(newViewProfiles, SIGNAL(profileSelected(Profile::Ptr)), this,
-            SIGNAL(newViewRequest(Profile::Ptr)));
-
-    return _newViewMenu;
-}
 QWidget* ViewManager::activeView() const
 {
     ViewContainer* container = _viewSplitter->activeContainer();
@@ -639,7 +623,6 @@ ViewContainer* ViewManager::createContainer()
         container->setFeatures(container->features()
                 | ViewContainer::QuickNewView
                 | ViewContainer::QuickCloseView);
-        container->setNewViewMenu(createNewViewMenu());
     } else {
         container->setFeatures(container->features()
                 & ~ViewContainer::QuickNewView
@@ -654,6 +637,7 @@ ViewContainer* ViewManager::createContainer()
     _containerSignalMapper->setMapping(container, container);
 
     connect(container, SIGNAL(newViewRequest()), this, SIGNAL(newViewRequest()));
+    connect(container, SIGNAL(newViewRequest(Profile::Ptr)), this, SIGNAL(newViewRequest(Profile::Ptr)));
     connect(container, SIGNAL(moveViewRequest(int,int,bool&)),
             this , SLOT(containerMoveViewRequest(int,int,bool&)));
     connect(container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewDestroyed(QWidget*)));
@@ -1099,7 +1083,6 @@ void ViewManager::setShowQuickButtons(bool show)
             container->setFeatures(container->features()
                     | ViewContainer::QuickNewView
                     | ViewContainer::QuickCloseView);
-            container->setNewViewMenu(createNewViewMenu());
         } else {
             container->setFeatures(container->features()
                     & ~ViewContainer::QuickNewView
