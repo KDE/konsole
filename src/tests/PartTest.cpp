@@ -36,6 +36,7 @@
 #include <KMenuBar>
 #include <KPluginLoader>
 #include <KPluginFactory>
+#include <KService>
 #include <KParts/Part>
 #include <KPtyProcess>
 #include <KPtyDevice>
@@ -161,7 +162,11 @@ void PartTest::shortcutTriggered()
 KParts::Part* PartTest::createPart()
 {
     KPluginLoader loader("libkonsolepart");
-    KPluginFactory* factory = loader.factory();
+
+    KPluginfactoryory* factory = 0;
+    KService::Ptr service = KService::serviceByDesktopName("konsolepart");
+    Q_ASSERT(service);
+    factory = KPluginLoader(service->library()).factory();
     Q_ASSERT(factory);
 
     KParts::Part* terminalPart = factory->create<KParts::Part>(this);
