@@ -673,7 +673,7 @@ void SessionController::setupExtraActions()
     action->setShortcut(KShortcut(Qt::CTRL | Qt::Key_Minus));
 
     _searchToggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F));
-    _findPreviousAction->setShortcut(QKeySequence(Qt::Key_F3));
+    _findNextAction->setShortcut(QKeySequence(Qt::Key_F3));
     _findPreviousAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F3));
 }
 
