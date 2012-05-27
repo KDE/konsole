@@ -440,7 +440,7 @@ the name of the current tab</action>
 </varlistentry>
 
 <varlistentry>
-  <term><menuchoice><!--FIXME no F3 assigned any more?-->
+<term><menuchoice>
 <shortcut><keycombo><keycap>F3</keycap></keycombo></shortcut>
 <guimenu>Edit</guimenu><guimenuitem>Find
 Next</guimenuitem></menuchoice></term>
