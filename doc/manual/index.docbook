@@ -308,6 +308,15 @@ There will be no submenu if only the default profile is to be shown.
 </varlistentry>
 
 <varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Clone Tab</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Attempts to clone the current tab in a new tab</action>
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
 <term><menuchoice><guimenu>File</guimenu>
 <guimenuitem>Save Output As...</guimenuitem></menuchoice></term>
 <listitem><para><action>Saves the current scrollback as a text or html
@@ -699,6 +708,13 @@ Shortcuts...</guimenuitem></menuchoice></term>
 <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
 Notifications...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens the notifications editor</action></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+&konsole;...</guimenuitem></menuchoice></term>
+<listitem><para><action>Opens the &konsole; settings editor</action></para>
 </listitem>
 </varlistentry>
 
