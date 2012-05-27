@@ -46,8 +46,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2011-11-12</date>
-<releaseinfo>2.8 (&kde; 4.8)</releaseinfo>
+<date>2012-05-27</date>
+<releaseinfo>2.9 (&kde; 4.9)</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -239,10 +239,10 @@ is pressed:
 <guimenuitem>Open File Manager</guimenuitem>,
 <guimenuitem>Set Encoding</guimenuitem>,
 <guimenuitem>Clear Scrollback</guimenuitem>,
-<guimenuitem>Configure Scrollback...</guimenuitem>,
+<guimenuitem>Adjust Scrollback...</guimenuitem>,
 <guimenuitem>Show Menu Bar</guimenuitem>,
 <guimenuitem>Switch Profile</guimenuitem>,
-<guimenuitem>Configure Current Profile...</guimenuitem>,
+<guimenuitem>Edit Current Profile...</guimenuitem>,
 and <guimenuitem>Close Tab</guimenuitem>
 </para>
 
@@ -299,16 +299,6 @@ There will be no submenu if only the default profile is to be shown.
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>W</keycap></keycombo></shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Close Tab</guimenuitem></menuchoice>
-</term>
-<listitem><para><action>Closes the current tab</action>
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
 <guimenu>File</guimenu>
 <guimenuitem>Clone Tab</guimenuitem></menuchoice>
 </term>
@@ -330,6 +320,16 @@ There will be no submenu if only the default profile is to be shown.
 <listitem><para><action>Opens &kde;'s file manager
 at the current directory</action>.  By default, that is
 <ulink url="help:/dolphin/index.html">&dolphin;</ulink>.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>W</keycap></keycombo></shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Close Tab</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Closes the current tab</action>
 </para></listitem>
 </varlistentry>
 
@@ -440,7 +440,7 @@ the name of the current tab</action>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice>
+  <term><menuchoice><!--FIXME no F3 assigned any more?-->
 <shortcut><keycombo><keycap>F3</keycap></keycombo></shortcut>
 <guimenu>Edit</guimenu><guimenuitem>Find
 Next</guimenuitem></menuchoice></term>
@@ -598,7 +598,7 @@ The type of alerts can be changed through
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>X</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>K</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guimenuitem>Clear
 Scrollback and Reset</guimenuitem></menuchoice></term>
 <listitem><para><action>Clears the text in the current tab and scrollback
@@ -659,7 +659,7 @@ Currently, &konsole; accepts the following:
 <variablelist>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit 
 Current Profile...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens a dialog to configure current profile</action>
 </para>
