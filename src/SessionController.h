@@ -222,6 +222,7 @@ private slots:
     void copyInputToNone();
     void editCurrentProfile();
     void changeCodec(QTextCodec* codec);
+    void enableSearchBar(bool showSearchBar);
     void searchHistory(bool showSearchBar);
     void findNextInHistory();
     void findPreviousInHistory();

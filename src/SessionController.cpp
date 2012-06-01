@@ -485,9 +485,6 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
         disconnect(_searchBar, 0, this, 0);
     }
 
-    // remove any existing search filter
-    removeSearchFilter();
-
     // connect new search bar
     _searchBar = searchBar;
     if (_searchBar) {
@@ -499,7 +496,7 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
 
         // if the search bar was previously active
         // then re-enter search mode
-        searchHistory(_searchToggleAction->isChecked());
+        enableSearchBar(_searchToggleAction->isChecked());
     }
 }
 IncrementalSearchBar* SessionController::searchBar() const
@@ -1001,13 +998,27 @@ void SessionController::updateSearchFilter()
     }
 }
 
+void SessionController::enableSearchBar(bool showSearchBar)
+{
+    if (!_searchBar)
+        return;
+    _searchBar->setVisible(showSearchBar);
+    if (showSearchBar) {
+        connect(_searchBar, SIGNAL(searchChanged(QString)), this,
+                SLOT(searchTextChanged(QString)));
+    } else {
+        disconnect(_searchBar, SIGNAL(searchChanged(QString)), this,
+                SLOT(searchTextChanged(QString)));
+    }
+}
+
 // searchHistory() may be called either as a result of clicking a menu item or
 // as a result of changing the search bar widget
 void SessionController::searchHistory(bool showSearchBar)
 {
-    if (_searchBar) {
-        _searchBar->setVisible(showSearchBar);
+    enableSearchBar(showSearchBar);
 
+    if (_searchBar) {
         if (showSearchBar) {
             removeSearchFilter();
 
@@ -1015,8 +1026,6 @@ void SessionController::searchHistory(bool showSearchBar)
 
             _searchFilter = new RegExpFilter();
             _view->filterChain()->addFilter(_searchFilter);
-            connect(_searchBar, SIGNAL(searchChanged(QString)), this,
-                    SLOT(searchTextChanged(QString)));
 
             // invoke search for matches for the current search text
             const QString& currentSearchText = _searchBar->searchText();
@@ -1027,9 +1036,6 @@ void SessionController::searchHistory(bool showSearchBar)
             setFindNextPrevEnabled(true);
         } else {
             setFindNextPrevEnabled(false);
-
-            disconnect(_searchBar, SIGNAL(searchChanged(QString)), this,
-                       SLOT(searchTextChanged(QString)));
 
             removeSearchFilter();
 
