@@ -508,6 +508,9 @@ bool MainWindow::queryClose()
         return true;
     }
 
+    // NOTE: Some, if not all, of the below KWindowSystem calls are only
+    //       implemented under x11 (KDE4.8 kdelibs/kdeui/windowmanagement).
+
     // make sure the window is shown on current desktop and is not minimized
     KWindowSystem::setOnDesktop(winId(), KWindowSystem::currentDesktop());
     if ( isMinimized() ) {
