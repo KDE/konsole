@@ -34,7 +34,6 @@
 #include <KMenu>
 #include <KMenuBar>
 #include <KMessageBox>
-#include <KToggleAction>
 #include <KToggleFullScreenAction>
 #include <KStandardAction>
 #include <KStandardGuiItem>
