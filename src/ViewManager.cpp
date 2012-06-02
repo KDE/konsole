@@ -537,9 +537,8 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
     // notify this view manager when the session finishes so that its view
     // can be deleted
     //
-    // TODO - Find a more efficient a way to avoid multiple connections
-    disconnect(session , SIGNAL(finished()) , this , SLOT(sessionFinished()));
-    connect(session , SIGNAL(finished()) , this , SLOT(sessionFinished()));
+    // Use Qt::UniqueConnection to avoid duplicate connection
+    connect(session, SIGNAL(finished()), this, SLOT(sessionFinished()), Qt::UniqueConnection);
 
     TerminalDisplay* display = createTerminalDisplay(session);
     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
