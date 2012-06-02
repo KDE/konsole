@@ -296,6 +296,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
 
     // The 'new tab' and 'close tab' button
     _newTabButton = new QToolButton(_containerWidget);
+    _newTabButton->setFocusPolicy(Qt::NoFocus);
     _newTabButton->setIcon(KIcon("tab-new"));
     _newTabButton->setToolTip(i18nc("@info:tooltip", "Create new tab"));
     _newTabButton->setWhatsThis(i18nc("@info:whatsthis", "Create a new tab. Press and hold to select profile from menu"));
@@ -309,6 +310,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     setNewViewMenu(profileMenu);
 
     _closeTabButton = new QToolButton(_containerWidget);
+    _closeTabButton->setFocusPolicy(Qt::NoFocus);
     _closeTabButton->setIcon(KIcon("tab-close"));
     _closeTabButton->setToolTip(i18nc("@info:tooltip", "Close tab"));
     _closeTabButton->setWhatsThis(i18nc("@info:whatsthis", "Close the active tab"));
