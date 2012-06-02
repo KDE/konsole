@@ -596,6 +596,9 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
     if (useOpacitySetting && !_wallpaper->isNull() &&
             _wallpaper->draw(painter, contentsRect)) {
     } else if (qAlpha(_blendColor) < 0xff && useOpacitySetting) {
+        // TODO - On MacOS, using CompositionMode doesn't work.  Altering the
+        //        transparency in the color scheme (appears to) alter the
+        //        brightness(?).  I'm not sure #ifdef is worthwhile ATM.
         QColor color(backgroundColor);
         color.setAlpha(qAlpha(_blendColor));
 
