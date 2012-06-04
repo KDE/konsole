@@ -80,8 +80,7 @@ void PtyTest::testRunProgram()
     QStringList arguments ;
     arguments << program;
     QStringList environments;
-    const bool useUtmp = true;
-    const int result = pty.start(program, arguments, environments, useUtmp);
+    const int result = pty.start(program, arguments, environments);
     QCOMPARE( result, 0);
 }
 

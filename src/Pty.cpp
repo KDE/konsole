@@ -55,7 +55,15 @@ void Pty::init()
     _xonXoff       = true;
     _utf8          = true;
 
+    setEraseChar(_eraseChar);
+    setFlowControlEnabled(_xonXoff);
+    setUtf8Mode(_utf8);
+
+    setWindowSize(_windowColumns, _windowLines);
+
+    setUseUtmp(true);
     setPtyChannels(KPtyProcess::AllChannels);
+
     connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
 }
 
@@ -211,8 +219,7 @@ void Pty::addEnvironmentVariables(const QStringList& environmentVariables)
 
 int Pty::start(const QString& programName,
                const QStringList& programArguments,
-               const QStringList& environmentList,
-               bool addToUtmp)
+               const QStringList& environmentList)
 {
     clearProgram();
 
@@ -236,14 +243,6 @@ int Pty::start(const QString& programName,
     //
     // BR:149300
     setEnv("LANGUAGE", QString(), false /* do not overwrite existing value if any */);
-
-    setUseUtmp(addToUtmp);
-
-    setFlowControlEnabled(_xonXoff);
-    setUtf8Mode(_utf8);
-    setEraseChar(_eraseChar);
-
-    setWindowSize(_windowColumns, _windowLines);
 
     KProcess::start();
 

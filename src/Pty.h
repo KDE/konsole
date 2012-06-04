@@ -84,13 +84,10 @@ public:
      * @param environment A list of key=value pairs which will be added
      * to the environment for the new process.  At the very least this
      * should include an assignment for the TERM environment variable.
-     * @param addToUtmp Specifies whether a utmp entry should be created for
-     * the pty used.  See K3Process::setUsePty()
      */
     int start(const QString& program,
               const QStringList& arguments,
-              const QStringList& environment,
-              bool addToUtmp
+              const QStringList& environment
              );
 
     /** Control whether the pty device is writeable by group members. */

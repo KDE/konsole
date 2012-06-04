@@ -472,6 +472,7 @@ void Session::run()
 
     _shellProcess->setFlowControlEnabled(_flowControlEnabled);
     _shellProcess->setEraseChar(_emulation->eraseChar());
+    _shellProcess->setUseUtmp(_addToUtmp);
 
     // this is not strictly accurate use of the COLORFGBG variable.  This does not
     // tell the terminal exactly which colors are being used, but instead approximates
@@ -490,11 +491,7 @@ void Session::run()
     const QString dbusObject = QString("/Sessions/%1").arg(QString::number(_sessionId));
     addEnvironmentEntry(QString("KONSOLE_DBUS_SESSION=%1").arg(dbusObject));
 
-    int result = _shellProcess->start(exec,
-                                      arguments,
-                                      _environment,
-                                      _addToUtmp);
-
+    int result = _shellProcess->start(exec, arguments, _environment);
     if (result < 0) {
         terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(" ")));
         return;
