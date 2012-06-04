@@ -704,7 +704,7 @@ void Session::updateTerminalSize()
 void Session::updateWindowSize(int lines, int columns)
 {
     Q_ASSERT(lines > 0 && columns > 0);
-    _shellProcess->setWindowSize(lines, columns);
+    _shellProcess->setWindowSize(columns, lines);
 }
 void Session::refresh()
 {
@@ -723,9 +723,9 @@ void Session::refresh()
     // send an email with method or patches to konsole-devel@kde.org
 
     const QSize existingSize = _shellProcess->windowSize();
-    _shellProcess->setWindowSize(existingSize.height(), existingSize.width() + 1);
+    _shellProcess->setWindowSize(existingSize.width() + 1, existingSize.height());
     usleep(500); // introduce small delay to avoid changing size too quickly
-    _shellProcess->setWindowSize(existingSize.height(), existingSize.width());
+    _shellProcess->setWindowSize(existingSize.width(), existingSize.height());
 }
 
 bool Session::kill(int signal)

@@ -107,10 +107,10 @@ public:
     bool flowControlEnabled() const;
 
     /**
-     * Sets the size of the window (in lines and columns of characters)
+     * Sets the size of the window (in columns and lines of characters)
      * used by this teletype.
      */
-    void setWindowSize(int lines, int cols);
+    void setWindowSize(int columns, int lines);
 
     /** Returns the size of the window used by this teletype.  See setWindowSize() */
     QSize windowSize() const;

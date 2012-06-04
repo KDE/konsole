@@ -80,7 +80,7 @@ void Pty::dataReceived()
     emit receivedData(data.constData(), data.count());
 }
 
-void Pty::setWindowSize(int lines, int columns)
+void Pty::setWindowSize(int columns, int lines)
 {
     _windowColumns = columns;
     _windowLines = lines;
@@ -243,7 +243,7 @@ int Pty::start(const QString& programName,
     setUtf8Mode(_utf8);
     setEraseChar(_eraseChar);
 
-    setWindowSize(_windowLines, _windowColumns);
+    setWindowSize(_windowColumns, _windowLines);
 
     KProcess::start();
 
