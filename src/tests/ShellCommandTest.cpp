@@ -1,0 +1,75 @@
+/*
+    Copyright 2008 by Robert Knight <robertknight@gmail.com>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301  USA.
+*/
+
+// Own
+#include "ShellCommandTest.h"
+
+// Qt
+#include <QtCore/QStringList>
+#include <QtGlobal>
+
+// KDE
+#include <qtest_kde.h>
+
+using namespace Konsole;
+
+void ShellCommandTest::init()
+{
+}
+
+void ShellCommandTest::cleanup()
+{
+}
+
+void ShellCommandTest::testConstructorWithOneArguemnt()
+{
+    const QString fullCommand("sudo apt-get update");
+    ShellCommand shellCommand(fullCommand);
+    QCOMPARE(shellCommand.command(), QString("sudo"));
+    QCOMPARE(shellCommand.fullCommand(), fullCommand);
+
+}
+
+void ShellCommandTest::testConstructorWithTwoArguments()
+{
+    const QString command("wc");
+    QStringList arguments;
+    arguments << "wc" << "-l" << "*.cpp" ;
+
+    ShellCommand shellCommand(command, arguments);
+    QCOMPARE(shellCommand.command(), command);
+    QCOMPARE(shellCommand.arguments(), arguments);
+    QCOMPARE(shellCommand.fullCommand(), arguments.join(" "));
+}
+
+void ShellCommandTest::testExpandEnvironmentVariable()
+{
+    QString text = "DIR=$PATH";
+    const QString env = "PATH";
+    const QString value = "/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin";
+    qputenv(env.toLocal8Bit(), value.toLocal8Bit());
+    const QString result = ShellCommand::expand(text);
+    const QString expected = text.remove('$').replace(env, value);
+    QCOMPARE(result, expected);
+}
+
+QTEST_KDEMAIN_CORE(ShellCommandTest)
+
+#include "ShellCommandTest.moc"
+
