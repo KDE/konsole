@@ -22,6 +22,7 @@
 
 // Qt
 #include <QtCore/QSize>
+#include <QtCore/QStringList>
 
 // KDE
 #include <qtest_kde.h>
@@ -54,6 +55,15 @@ void PtyTest::testEraseChar()
     QCOMPARE(input, output);
 }
 
+void PtyTest::testUseUtmp()
+{
+    Pty pty;
+    const bool input = true;
+    pty.setUseUtmp(input);
+    const bool output = pty.isUseUtmp();
+    QCOMPARE(input, output);
+}
+
 void PtyTest::testWindowSize()
 {
     Pty pty;
@@ -61,6 +71,18 @@ void PtyTest::testWindowSize()
     pty.setWindowSize(input.width(), input.height());
     QSize output = pty.windowSize();
     QCOMPARE(input, output);
+}
+
+void PtyTest::testRunProgram()
+{
+    Pty pty;
+    QString program = "zsh";
+    QStringList arguments ;
+    arguments << program;
+    QStringList environments;
+    const bool useUtmp = true;
+    const int result = pty.start(program, arguments, environments, useUtmp);
+    QCOMPARE( result, 0);
 }
 
 QTEST_KDEMAIN_CORE(PtyTest)

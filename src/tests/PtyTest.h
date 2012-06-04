@@ -35,7 +35,10 @@ private slots:
 
     void testFlowControl();
     void testEraseChar();
+    void testUseUtmp();
     void testWindowSize();
+
+    void testRunProgram();
 };
 
 }
