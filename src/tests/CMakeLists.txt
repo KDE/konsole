@@ -6,6 +6,9 @@ set(KONSOLE_TEST_LIBS ${QT_QTTEST_LIBRARY} konsoleprivate)
 kde4_add_executable(PartTest TEST PartTest.cpp)
 target_link_libraries(PartTest ${KDE4_KPARTS_LIBS} ${KDE4_KPTY_LIBS} ${KONSOLE_TEST_LIBS})
 
+kde4_add_unit_test(PtyTest PtyTest.cpp)
+target_link_libraries(PtyTest ${KDE4_KPTY_LIBS} ${KONSOLE_TEST_LIBS})
+
 kde4_add_unit_test(ProfileTest ProfileTest.cpp)
 target_link_libraries(ProfileTest ${KONSOLE_TEST_LIBS})
 
