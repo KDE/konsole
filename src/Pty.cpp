@@ -126,9 +126,10 @@ bool Pty::flowControlEnabled() const
         pty()->tcGetAttr(&ttmode);
         return ttmode.c_iflag & IXOFF &&
                ttmode.c_iflag & IXON;
+    } else {
+        kWarning() << "Unable to get flow control status, terminal not connected.";
+        return _xonXoff;
     }
-    kWarning() << "Unable to get flow control status, terminal not connected.";
-    return false;
 }
 
 void Pty::setUtf8Mode(bool enable)
@@ -158,6 +159,7 @@ void Pty::setEraseChar(char eChar)
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
         ttmode.c_cc[VERASE] = eChar;
+
         if (!pty()->tcSetAttr(&ttmode))
             kWarning() << "Unable to set terminal attributes.";
     }
@@ -169,9 +171,10 @@ char Pty::eraseChar() const
         struct ::termios ttyAttributes;
         pty()->tcGetAttr(&ttyAttributes);
         return ttyAttributes.c_cc[VERASE];
+    } else {
+        kWarning() << "Unable to get erase char attribute, terminal not connected.";
+        return _eraseChar;
     }
-
-    return _eraseChar;
 }
 
 void Pty::setInitialWorkingDirectory(const QString& dir)
