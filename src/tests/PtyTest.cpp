@@ -43,7 +43,7 @@ void PtyTest::testFlowControl()
     const bool input = true;
     pty.setFlowControlEnabled(input);
     const bool output = pty.flowControlEnabled();
-    QCOMPARE(input, output);
+    QCOMPARE(output, input);
 }
 
 void PtyTest::testEraseChar()
@@ -52,7 +52,7 @@ void PtyTest::testEraseChar()
     const char input = 'x';
     pty.setEraseChar(input);
     const char output = pty.eraseChar();
-    QCOMPARE(input, output);
+    QCOMPARE(output, input);
 }
 
 void PtyTest::testUseUtmp()
@@ -61,7 +61,7 @@ void PtyTest::testUseUtmp()
     const bool input = true;
     pty.setUseUtmp(input);
     const bool output = pty.isUseUtmp();
-    QCOMPARE(input, output);
+    QCOMPARE(output, input);
 }
 
 void PtyTest::testWindowSize()
@@ -70,7 +70,7 @@ void PtyTest::testWindowSize()
     QSize input(80, 40);
     pty.setWindowSize(input.width(), input.height());
     QSize output = pty.windowSize();
-    QCOMPARE(input, output);
+    QCOMPARE(output, input);
 }
 
 void PtyTest::testRunProgram()
@@ -82,12 +82,11 @@ void PtyTest::testRunProgram()
     QStringList environments;
     const int result = pty.start(program, arguments, environments);
 
-    QCOMPARE( result, 0);
+    QCOMPARE(result, 0);
 
     // since there is no other processes using this pty, the two methods
     // should return the same pid.
-    QCOMPARE( pty.pid(), pty.foregroundProcessGroup());
-
+    QCOMPARE(pty.foregroundProcessGroup(), pty.pid());
 }
 
 QTEST_KDEMAIN_CORE(PtyTest)
