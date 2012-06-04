@@ -76,7 +76,7 @@ void PtyTest::testWindowSize()
 void PtyTest::testRunProgram()
 {
     Pty pty;
-    QString program = "zsh";
+    QString program = "sh";
     QStringList arguments ;
     arguments << program;
     QStringList environments;
