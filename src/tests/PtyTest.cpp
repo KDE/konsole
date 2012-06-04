@@ -81,7 +81,13 @@ void PtyTest::testRunProgram()
     arguments << program;
     QStringList environments;
     const int result = pty.start(program, arguments, environments);
+
     QCOMPARE( result, 0);
+
+    // since there is no other processes using this pty, the two methods
+    // should return the same pid.
+    QCOMPARE( pty.pid(), pty.foregroundProcessGroup());
+
 }
 
 QTEST_KDEMAIN_CORE(PtyTest)
