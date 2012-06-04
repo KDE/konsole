@@ -36,6 +36,8 @@ private slots:
     void testConstructorWithOneArguemnt();
     void testConstructorWithTwoArguments();
     void testExpandEnvironmentVariable();
+    void testValidEnvCharacter();
+    void testValidLeadingEnvCharacter();
 
 };
 

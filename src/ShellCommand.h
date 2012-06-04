@@ -84,7 +84,15 @@ public:
     /** Expands environment variables in each string in @p list. */
     static QStringList expand(const QStringList& items);
 
+
+    static bool isValidEnvCharacter(const QChar& ch);
+
+    static bool isValidLeadingEnvCharacter(const QChar& ch);
+
 private:
+
+    static bool expandEnv(QString& text);
+
     QStringList _arguments;
 };
 }

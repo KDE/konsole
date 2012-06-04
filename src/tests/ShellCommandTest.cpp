@@ -60,13 +60,27 @@ void ShellCommandTest::testConstructorWithTwoArguments()
 
 void ShellCommandTest::testExpandEnvironmentVariable()
 {
-    QString text = "DIR=$PATH";
+    QString text = "PATH=$PATH:~/bin";
     const QString env = "PATH";
     const QString value = "/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin";
     qputenv(env.toLocal8Bit(), value.toLocal8Bit());
     const QString result = ShellCommand::expand(text);
-    const QString expected = text.remove('$').replace(env, value);
+    const QString expected = text.replace("$" + env, value);
     QCOMPARE(result, expected);
+}
+
+void ShellCommandTest::testValidEnvCharacter()
+{
+    QChar validChar('A');
+    const bool result = ShellCommand::isValidEnvCharacter(validChar);
+    QCOMPARE(result, true);
+}
+
+void ShellCommandTest::testValidLeadingEnvCharacter()
+{
+    QChar invalidChar('9');
+    const bool result = ShellCommand::isValidLeadingEnvCharacter(invalidChar);
+    QCOMPARE(result, false);
 }
 
 QTEST_KDEMAIN_CORE(ShellCommandTest)

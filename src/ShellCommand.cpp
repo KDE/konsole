@@ -25,10 +25,6 @@
 
 using Konsole::ShellCommand;
 
-// expands environment variables in 'text'
-// function copied from kdelibs/kio/kio/kurlcompletion.cpp
-static bool expandEnv(QString& text);
-
 ShellCommand::ShellCommand(const QString& aCommand)
 {
     _arguments = KShell::splitArgs(aCommand);
@@ -92,56 +88,69 @@ QString ShellCommand::expand(const QString& text)
     return result;
 }
 
+bool ShellCommand::isValidEnvCharacter(const QChar& ch)
+{
+    const ushort code = ch.unicode();
+    return isValidLeadingEnvCharacter(ch) || ('0' <= code && code <= '9');
+
+}
+
+bool ShellCommand::isValidLeadingEnvCharacter(const QChar& ch)
+{
+    const ushort code = ch.unicode();
+    return (code == '_') || ('A' <= code && code <= 'Z');
+}
+
 /*
  * expandEnv
  *
  * Expand environment variables in text. Escaped '$' characters are ignored.
  * Return true if any variables were expanded
  */
-static bool expandEnv(QString& text)
+bool ShellCommand::expandEnv(QString& text)
 {
-    // Find all environment variables beginning with '$'
-    //
-    int pos = 0;
+    const QLatin1Char dollarChar('$');
+    const QLatin1Char backslashChar('\\');
 
+    int dollarPos = 0;
     bool expanded = false;
 
-    while ((pos = text.indexOf(QLatin1Char('$'), pos)) != -1) {
-        // Skip escaped '$'
-        //
-        if (pos > 0 && text.at(pos - 1) == QLatin1Char('\\')) {
-            pos++;
-            // Variable found => expand
-            //
+    // find and expand all environment variables beginning with '$'
+    while ((dollarPos = text.indexOf(dollarChar, dollarPos)) != -1) {
+
+        // if '$' is the last character, there is no way of expanding
+        if (dollarPos == text.length() -1 ) {
+            break;
+        }
+
+        // skip escaped '$'
+        if (dollarPos > 0 && text.at(dollarPos - 1) == backslashChar) {
+            dollarPos++;
+            continue;
+        }
+
+        // if '$' is followed by an invalid leading character, skip this '$'
+        if (!isValidLeadingEnvCharacter(text.at(dollarPos + 1))) {
+            dollarPos++;
+            continue;
+        }
+
+        int endPos = dollarPos + 1;
+        Q_ASSERT( endPos < text.length());
+        while (endPos < text.length() && isValidEnvCharacter(text.at(endPos))) {
+            endPos++;
+        }
+
+        const int len = endPos - dollarPos;
+        const QString key = text.mid(dollarPos + 1, len - 1);
+        const QString value = QString::fromLocal8Bit(qgetenv(key.toLocal8Bit()));
+
+        if (!value.isEmpty()) {
+            text.replace(dollarPos, len, value);
+            expanded = true;
+            dollarPos = dollarPos + value.length();
         } else {
-            // Find the end of the variable = next '/' or ' '
-            //
-            int pos2 = text.indexOf(QLatin1Char(' '), pos + 1);
-            const int pos_tmp = text.indexOf(QLatin1Char('/'), pos + 1);
-
-            if (pos2 == -1 || (pos_tmp != -1 && pos_tmp < pos2))
-                pos2 = pos_tmp;
-
-            if (pos2 == -1)
-                pos2 = text.length();
-
-            // Replace if the variable is terminated by '/' or ' '
-            // and defined
-            //
-            if (pos2 >= 0) {
-                const int len    = pos2 - pos;
-                const QString key    = text.mid(pos + 1, len - 1);
-                const QString value =
-                    QString::fromLocal8Bit(qgetenv(key.toLocal8Bit()));
-
-                if (!value.isEmpty()) {
-                    expanded = true;
-                    text.replace(pos, len, value);
-                    pos = pos + value.length();
-                } else {
-                    pos = pos2;
-                }
-            }
+            dollarPos = endPos;
         }
     }
 
