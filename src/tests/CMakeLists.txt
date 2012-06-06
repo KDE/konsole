@@ -12,6 +12,9 @@ target_link_libraries(PtyTest ${KDE4_KPTY_LIBS} ${KONSOLE_TEST_LIBS})
 kde4_add_unit_test(ShellCommandTest ShellCommandTest.cpp)
 target_link_libraries(ShellCommandTest ${KONSOLE_TEST_LIBS})
 
+kde4_add_unit_test(CharacterColorTest CharacterColorTest.cpp)
+target_link_libraries(CharacterColorTest ${KONSOLE_TEST_LIBS})
+
 kde4_add_unit_test(ProfileTest ProfileTest.cpp)
 target_link_libraries(ProfileTest ${KONSOLE_TEST_LIBS})
 
