@@ -26,9 +26,6 @@
 // Qt
 #include <QtGui/QColor>
 
-// KDE
-#include <kdemacros.h>
-
 namespace Konsole
 {
 /**
