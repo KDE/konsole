@@ -65,7 +65,7 @@ void ShellCommandTest::testExpandEnvironmentVariable()
     const QString value = "/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin";
     qputenv(env.toLocal8Bit(), value.toLocal8Bit());
     const QString result = ShellCommand::expand(text);
-    const QString expected = text.replace("$" + env, value);
+    const QString expected = text.replace('$' + env, value);
     QCOMPARE(result, expected);
 }
 
