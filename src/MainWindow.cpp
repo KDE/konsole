@@ -41,6 +41,7 @@
 #include <KXMLGUIFactory>
 #include <KNotifyConfigWidget>
 #include <KConfigDialog>
+#include <KApplication>
 
 // Konsole
 #include "BookmarkHandler.h"
@@ -499,6 +500,13 @@ void MainWindow::newWindow()
 
 bool MainWindow::queryClose()
 {
+    // Do not ask for confirmation during log out and power off
+    // TODO: rework the dealing of this case to make it has its own confirmation
+    // dialog.
+    if (kapp->sessionSaving()) {
+        return true;
+    }
+
     // TODO: Ideally, we should check what process is running instead
     //       of just how many sessions are running.
     // If only 1 session is running, don't ask user to confirm close.
