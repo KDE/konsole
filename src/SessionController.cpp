@@ -541,7 +541,7 @@ void SessionController::setupCommonActions()
     action->setText(i18n("Paste Selection"));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Insert));
 
-    _webSearchMenu = new KActionMenu(i18n("Web Search"), _view);
+    _webSearchMenu = new KActionMenu(i18n("Web Search"), this);
     _webSearchMenu->setIcon(KIcon("preferences-web-browser-shortcuts"));
     _webSearchMenu->setVisible(false);
     collection->addAction("web-search", _webSearchMenu);
@@ -572,7 +572,7 @@ void SessionController::setupCommonActions()
     action->setText(i18n("Edit Current Profile..."));
     action->setIcon(KIcon("document-properties"));
 
-    _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), _view);
+    _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), this);
     collection->addAction("switch-profile", _switchProfileMenu);
     connect(_switchProfileMenu->menu(), SIGNAL(aboutToShow()), this, SLOT(prepareSwitchProfileMenu()));
 
