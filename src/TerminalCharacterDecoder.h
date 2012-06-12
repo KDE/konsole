@@ -27,6 +27,7 @@
 
 // Konsole
 #include "Character.h"
+#include "konsole_export.h"
 
 class QTextStream;
 
@@ -41,7 +42,7 @@ namespace Konsole
  * Derived classes may produce either plain text with no other color or appearance information, or
  * they may produce text which incorporates these additional properties.
  */
-class TerminalCharacterDecoder
+class KONSOLEPRIVATE_EXPORT TerminalCharacterDecoder
 {
 public:
     virtual ~TerminalCharacterDecoder() {}
@@ -68,7 +69,7 @@ public:
  * A terminal character decoder which produces plain text, ignoring colors and other appearance-related
  * properties of the original characters.
  */
-class PlainTextDecoder : public TerminalCharacterDecoder
+class KONSOLEPRIVATE_EXPORT PlainTextDecoder : public TerminalCharacterDecoder
 {
 public:
     PlainTextDecoder();
@@ -111,7 +112,7 @@ private:
 /**
  * A terminal character decoder which produces pretty HTML markup
  */
-class HTMLDecoder : public TerminalCharacterDecoder
+class KONSOLEPRIVATE_EXPORT HTMLDecoder : public TerminalCharacterDecoder
 {
 public:
     /**
