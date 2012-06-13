@@ -353,6 +353,9 @@ void ColorScheme::writeColorEntry(KConfig& config , int index) const
     if ( configGroup.hasKey("Transparent") ) {
         configGroup.deleteEntry("Transparent");
     }
+    if ( configGroup.hasKey("Transparency") ) {
+        configGroup.deleteEntry("Transparency");
+    }
     if (entry.fontWeight != ColorEntry::UseCurrentFormat) {
         configGroup.writeEntry("Bold", entry.fontWeight == ColorEntry::Bold);
     }
