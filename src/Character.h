@@ -169,10 +169,7 @@ public:
 
 inline bool operator == (const Character& a, const Character& b)
 {
-    return a.character == b.character &&
-           a.rendition == b.rendition &&
-           a.foregroundColor == b.foregroundColor &&
-           a.backgroundColor == b.backgroundColor;
+    return a.character == b.character && a.equalsFormat(b);
 }
 
 inline bool operator != (const Character& a, const Character& b)
