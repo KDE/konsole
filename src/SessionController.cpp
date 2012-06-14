@@ -991,9 +991,7 @@ void SessionController::listenForScreenWindowUpdates()
 
 void SessionController::updateSearchFilter()
 {
-    if (_searchFilter) {
-        Q_ASSERT(searchBar());
-
+    if (_searchFilter && _searchBar) {
         _view->processFilters();
     }
 }
