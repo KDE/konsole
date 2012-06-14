@@ -17,9 +17,11 @@
     02110-1301  USA.
 */
 
+// Config
+#include <config-konsole.h>
+
 // Own
 #include "ProcessInfo.h"
-#include <config-konsole.h>
 
 // Unix
 #include <sys/socket.h>
