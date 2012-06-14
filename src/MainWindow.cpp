@@ -530,7 +530,7 @@ bool MainWindow::queryClose()
                         "There are %1 tabs open in this window. "
                         "Do you still want to quit?", openTabs),
                  i18nc("@title", "Confirm Close"),
-                 KStandardGuiItem::quit(),
+                 KStandardGuiItem::closeWindow(),
                  KGuiItem(i18nc("@action:button", "Close Current Tab"), "tab-close"),
                  KStandardGuiItem::cancel(),
                  "CloseAllTabs");
