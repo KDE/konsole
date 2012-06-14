@@ -207,18 +207,19 @@ private:
     QString _description;
     QString _name;
 
-    ColorEntry* _table; // pointer to custom color table or 0 if the default
-    // color scheme is being used
+    // pointer to custom color table, or 0 if the default color table is
+    // being used
+    ColorEntry* _table;
 
-    static const quint16 MAX_HUE = 340;
-
-    RandomizationRange* _randomTable;   // pointer to randomization table or 0
-    // if no colors in the color scheme support
-    // randomization
+    // pointer to randomization table, or 0 if no colors in the color
+    // scheme support randomization
+    RandomizationRange* _randomTable;
 
     qreal _opacity;
 
     ColorSchemeWallpaper::Ptr _wallpaper;
+
+    static const quint16 MAX_HUE = 340;
 
     static const char* const colorNames[TABLE_COLORS];
     static const char* const translatedColorNames[TABLE_COLORS];
