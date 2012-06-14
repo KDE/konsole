@@ -34,7 +34,6 @@ class QItemSelection;
 class QShowEvent;
 class QStandardItem;
 class QStandardItemModel;
-class QTableView;
 
 namespace Ui
 {
@@ -54,7 +53,6 @@ class KONSOLEPRIVATE_EXPORT ManageProfilesDialog : public KDialog
 
     friend class FavoriteItemDelegate;
     friend class ShortcutItemDelegate;
-    friend class ::QTableView;
 
 public:
     /** Constructs a new profile type with the specified parent. */
