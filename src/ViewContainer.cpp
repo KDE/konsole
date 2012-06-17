@@ -520,7 +520,7 @@ void TabbedViewContainer::querySourceIndex(const QDropEvent* event ,int& sourceI
 
     const QList<QWidget*> viewList = views();
     const int count = viewList.count();
-    int index = -1 ;
+    int index = -1;
     for (index = 0; index < count; index++) {
         const int id = viewProperties(viewList[index])->identifier();
         if (id == droppedId)
