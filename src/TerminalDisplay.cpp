@@ -2830,15 +2830,19 @@ void TerminalDisplay::bell(const QString& message)
     if (_bellMasked)
         return;
 
-    if (_bellMode == Enum::SystemBeepBell) {
+    switch (_bellMode) {
+    case Enum::SystemBeepBell:
         KNotification::beep();
-    } else if (_bellMode == Enum::NotifyBell) {
+        break;
+    case Enum::NotifyBell:
         KNotification::event(hasFocus() ? "BellVisible" : "BellInvisible",
                 message, QPixmap(), this);
-    } else if (_bellMode == Enum::VisualBell) {
+        break;
+    case Enum::VisualBell:
         visualBell();
-    } else if (_bellMode == Enum::NoBell) {
-        ;
+        break;
+    default:
+        break;
     }
 
     // limit the rate at which bells can occur.
