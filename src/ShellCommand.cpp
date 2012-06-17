@@ -92,7 +92,6 @@ bool ShellCommand::isValidEnvCharacter(const QChar& ch)
 {
     const ushort code = ch.unicode();
     return isValidLeadingEnvCharacter(ch) || ('0' <= code && code <= '9');
-
 }
 
 bool ShellCommand::isValidLeadingEnvCharacter(const QChar& ch)
@@ -117,7 +116,6 @@ bool ShellCommand::expandEnv(QString& text)
 
     // find and expand all environment variables beginning with '$'
     while ((dollarPos = text.indexOf(dollarChar, dollarPos)) != -1) {
-
         // if '$' is the last character, there is no way of expanding
         if (dollarPos == text.length() -1 ) {
             break;

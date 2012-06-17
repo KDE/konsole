@@ -90,7 +90,6 @@ public:
     static bool isValidLeadingEnvCharacter(const QChar& ch);
 
 private:
-
     static bool expandEnv(QString& text);
 
     QStringList _arguments;

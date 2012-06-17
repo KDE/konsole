@@ -29,13 +29,11 @@ class QLabel;
 
 namespace Konsole
 {
-
 class ViewContainerTabBar : public KTabBar
 {
     Q_OBJECT
 
 public:
-
     ViewContainerTabBar(QWidget* parent);
 
     // returns a pixmap image of a tab for use with QDrag
@@ -45,20 +43,17 @@ public:
     void setSupportedMimeType(const QString& mimeType);
 
 signals:
-
     void querySourceIndex(const QDropEvent* event, int& sourceIndex) const;
 
     void moveViewRequest(int index, const QDropEvent* event, bool& success);
 
 protected:
-
     virtual void dragEnterEvent(QDragEnterEvent* event);
     virtual void dragLeaveEvent(QDragLeaveEvent* event);
     virtual void dragMoveEvent(QDragMoveEvent* event);
     virtual void dropEvent(QDropEvent* event);
 
 private:
-
     // show the indicator arrow which shows where a dropped tab will
     // be inserted at 'index'
     void setDropIndicator(int index, bool drawDisabled = false);
@@ -76,7 +71,6 @@ private:
     bool _drawIndicatorDisabled;
     QString _supportedMimeType;
 };
-
 }
 
 #endif  // VIEWCONTAINERTABBAR_H
