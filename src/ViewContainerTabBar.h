@@ -34,7 +34,7 @@ class ViewContainerTabBar : public KTabBar
     Q_OBJECT
 
 public:
-    ViewContainerTabBar(QWidget* parent);
+    explicit ViewContainerTabBar(QWidget* parent);
 
     // returns a pixmap image of a tab for use with QDrag
     QPixmap dragDropPixmap(int tab);
