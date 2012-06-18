@@ -29,6 +29,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <pwd.h>
+#include <sys/param.h>
 
 // Qt
 #include <QtCore/QDir>
@@ -557,21 +558,22 @@ private:
     }
 
     virtual bool readCurrentDir(int aPid) {
-        QFileInfo info(QString("/proc/%1/cwd").arg(aPid));
-
-        const bool readable = info.isReadable();
-
-        if (readable && info.isSymLink()) {
-            setCurrentDir(info.symLinkTarget());
-            return true;
-        } else {
-            if (!readable)
-                setError(PermissionsError);
-            else
-                setError(UnknownError);
-
+        char path_buffer[MAXPATHLEN + 1];
+        path_buffer[MAXPATHLEN] = 0;
+        QByteArray procCwd = QFile::encodeName(QString("/proc/%1/cwd").arg(aPid));
+        const int length = readlink(procCwd.constData(), path_buffer, MAXPATHLEN);
+        if (length == -1) {
+            setError(UnknownError);
             return false;
         }
+
+        path_buffer[length] = '\0';
+        QString path = QFile::decodeName(path_buffer);
+
+        kWarning()<<length<<";"<<path;
+
+        setCurrentDir(path);
+        return true;
     }
 
     virtual bool readEnvironment(int aPid) {
@@ -873,6 +875,8 @@ private:
         return false;
     }
 
+    // FIXME: This will have the same issues as BKO 251351; the Linux
+    // version uses readlink.
     virtual bool readCurrentDir(int aPid) {
         QFileInfo info(QString("/proc/%1/path/cwd").arg(aPid));
         const bool readable = info.isReadable();
