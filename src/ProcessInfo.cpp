@@ -570,8 +570,6 @@ private:
         path_buffer[length] = '\0';
         QString path = QFile::decodeName(path_buffer);
 
-        kWarning()<<length<<";"<<path;
-
         setCurrentDir(path);
         return true;
     }
