@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Exec=konsole
+TryExec=konsole
 Icon=utilities-terminal
 X-DocPath=konsole/index.html
 Terminal=false
