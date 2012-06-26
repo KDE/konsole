@@ -977,16 +977,14 @@ int ViewManager::newSession()
 
 int ViewManager::newSession(QString profile, QString directory)
 {
-    QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
-    QList<Profile::Ptr>::iterator i = profilelist.begin();
-
+    const QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
     Profile::Ptr profileptr = ProfileManager::instance()->defaultProfile();
 
-    while (i != profilelist.end()) {
-        Profile::Ptr ptr = *i;
-        if (ptr->name().compare(profile) == 0)
-            profileptr = ptr;
-        i++;
+    for (int i = 0; i < profilelist.size(); ++i) {
+        if (profilelist.at(i)->name() == profile) {
+            profileptr = profilelist.at(i);
+            break;
+        }
     }
 
     Session* session = SessionManager::instance()->createSession(profileptr);
