@@ -188,6 +188,11 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     backgroundTimer->start();
 
     _allControllers.insert(this);
+
+    // A list of programs that accept Ctrl+C to clear command line used
+    // before outputting bookmark.
+    _bookmarkValidProgramsToClear << "bash" << "fish" << "sh";
+    _bookmarkValidProgramsToClear << "tcsh" << "zsh";
 }
 
 SessionController::~SessionController()
@@ -271,6 +276,13 @@ void SessionController::rename()
 
 void SessionController::openUrl(const KUrl& url)
 {
+    // Clear shell's command line
+    if (!_session->isForegroundProcessActive()
+        && _bookmarkValidProgramsToClear.contains(_session->foregroundProcessName())) {
+        _session->emulation()->sendText(QChar(0x03)); // Ctrl+C
+        _session->emulation()->sendText(QChar('\n'));
+    }
+
     // handle local paths
     if (url.isLocalFile()) {
         QString path = url.toLocalFile();

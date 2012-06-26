@@ -331,6 +331,8 @@ private:
     static const KIcon _activityIcon;
     static const KIcon _silenceIcon;
     static const KIcon _broadcastIcon;
+
+    QStringList _bookmarkValidProgramsToClear;
 };
 inline bool SessionController::isValid() const
 {
