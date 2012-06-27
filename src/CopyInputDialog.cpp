@@ -129,7 +129,7 @@ void CheckableSessionModel::setCheckColumn(int column)
 }
 Qt::ItemFlags CheckableSessionModel::flags(const QModelIndex& index) const
 {
-    Session* session = (Session*)index.internalPointer();
+    Session* session = static_cast<Session*>(index.internalPointer());
 
     if (_fixedSessions.contains(session))
         return SessionListModel::flags(index) & ~Qt::ItemIsEnabled;
@@ -139,7 +139,7 @@ Qt::ItemFlags CheckableSessionModel::flags(const QModelIndex& index) const
 QVariant CheckableSessionModel::data(const QModelIndex& index, int role) const
 {
     if (role == Qt::CheckStateRole && index.column() == _checkColumn) {
-        Session* session = (Session*)index.internalPointer();
+        Session* session = static_cast<Session*>(index.internalPointer());
 
         if (_checkedSessions.contains(session))
             return QVariant::fromValue((int)Qt::Checked);
@@ -152,7 +152,7 @@ QVariant CheckableSessionModel::data(const QModelIndex& index, int role) const
 bool CheckableSessionModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     if (role == Qt::CheckStateRole && index.column() == _checkColumn) {
-        Session* session = (Session*)index.internalPointer();
+        Session* session = static_cast<Session*>(index.internalPointer());
 
         if (_fixedSessions.contains(session))
             return false;
