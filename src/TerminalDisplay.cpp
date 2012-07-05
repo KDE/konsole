@@ -2782,7 +2782,7 @@ bool TerminalDisplay::event(QEvent* event)
     bool eventHandled = false;
     switch (event->type()) {
     case QEvent::ShortcutOverride:
-        eventHandled = handleShortcutOverrideEvent((QKeyEvent*)event);
+        eventHandled = handleShortcutOverrideEvent(static_cast<QKeyEvent*>(event));
         break;
     case QEvent::PaletteChange:
     case QEvent::ApplicationPaletteChange:
