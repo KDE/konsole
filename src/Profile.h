@@ -196,6 +196,8 @@ public:
          * underlined when hovered by the mouse pointer.
          */
         UnderlineLinksEnabled,
+        /** (bool) If true, control key must be pressed to click and drag selected text. */
+        CtrlRequiredForDrag,
         /** (bool) If true, automatically copy selected text into the clipboard */
         AutoCopySelectedText,
         /** (bool) If true, middle mouse button pastes from X Selection */

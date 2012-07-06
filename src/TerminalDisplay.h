@@ -150,11 +150,11 @@ public:
     /** Specifies whether or not text can blink. */
     void setBlinkingTextEnabled(bool blink);
 
-    void setCtrlDrag(bool enable) {
-        _ctrlDrag = enable;
+    void setControlDrag(bool enable) {
+        _ctrlRequiredForDrag = enable;
     }
-    bool ctrlDrag() const {
-        return _ctrlDrag;
+    bool ctrlRequiredForDrag() const {
+        return _ctrlRequiredForDrag;
     }
 
     /** Sets how the text is selected when the user triple clicks within the display. */
@@ -766,7 +766,7 @@ private:
     bool _underlineLinks;     // Underline URL and hosts on mouse hover
     bool _isFixedSize; // columns/lines are locked.
 
-    bool _ctrlDrag; // require Ctrl key for drag selected text
+    bool _ctrlRequiredForDrag; // require Ctrl key for drag selected text
 
     Enum::TripleClickModeEnum _tripleClickMode;
     bool _possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted

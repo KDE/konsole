@@ -103,6 +103,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { WordCharacters , "WordCharacters" , INTERACTION_GROUP , QVariant::String }
     , { TripleClickMode , "TripleClickMode" , INTERACTION_GROUP , QVariant::Int }
     , { UnderlineLinksEnabled , "UnderlineLinksEnabled" , INTERACTION_GROUP , QVariant::Bool }
+    , { CtrlRequiredForDrag, "CtrlRequiredForDrag" , INTERACTION_GROUP , QVariant::Bool }
     , { AutoCopySelectedText , "AutoCopySelectedText" , INTERACTION_GROUP , QVariant::Bool }
     , { PasteFromSelectionEnabled , "PasteFromSelectionEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { PasteFromClipboardEnabled , "PasteFromClipboardEnabled" , INTERACTION_GROUP , QVariant::Bool }
@@ -167,6 +168,7 @@ FallbackProfile::FallbackProfile()
     setProperty(FlowControlEnabled, true);
     setProperty(BlinkingTextEnabled, true);
     setProperty(UnderlineLinksEnabled, true);
+    setProperty(CtrlRequiredForDrag, true);
     setProperty(AutoCopySelectedText, false);
     setProperty(PasteFromSelectionEnabled, true);
     setProperty(PasteFromClipboardEnabled, false);

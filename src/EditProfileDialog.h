@@ -150,6 +150,7 @@ private slots:
 
     // mouse page
     void toggleUnderlineLinks(bool);
+    void toggleCtrlRequiredForDrag(bool);
     void toggleCopyTextToClipboard(bool);
     void pasteFromX11Selection();
     void pasteFromClipboard();

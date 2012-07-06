@@ -314,7 +314,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _hasTextBlinker(false)
     , _underlineLinks(true)
     , _isFixedSize(false)
-    , _ctrlDrag(true)
+    , _ctrlRequiredForDrag(true)
     , _tripleClickMode(Enum::SelectWholeLine)
     , _possibleTripleClick(false)
     , _resizeWidget(0)
@@ -1779,8 +1779,8 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
         // The user clicked inside selected text
         selected =  _screenWindow->isSelected(pos.x(), pos.y());
 
-        // Drag only when the Control key is hold
-        if ((!_ctrlDrag || ev->modifiers() & Qt::ControlModifier) && selected) {
+        // Drag only when the Control key is held
+        if ((!_ctrlRequiredForDrag || ev->modifiers() & Qt::ControlModifier) && selected) {
             _dragInfo.state = diPending;
             _dragInfo.start = ev->pos();
         } else {

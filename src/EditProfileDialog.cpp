@@ -986,6 +986,10 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
             SLOT(toggleUnderlineLinks(bool))
         },
         {
+            _ui->ctrlRequiredForDragButton, Profile::CtrlRequiredForDrag,
+            SLOT(toggleCtrlRequiredForDrag(bool))
+        },
+        {
             _ui->copyTextToClipboardButton , Profile::AutoCopySelectedText,
             SLOT(toggleCopyTextToClipboard(bool))
         },
@@ -1102,6 +1106,10 @@ void EditProfileDialog::toggleBlinkingCursor(bool enable)
 void EditProfileDialog::toggleUnderlineLinks(bool enable)
 {
     updateTempProfileProperty(Profile::UnderlineLinksEnabled, enable);
+}
+void EditProfileDialog::toggleCtrlRequiredForDrag(bool enable)
+{
+    updateTempProfileProperty(Profile::CtrlRequiredForDrag, enable);
 }
 void EditProfileDialog::toggleCopyTextToClipboard(bool enable)
 {

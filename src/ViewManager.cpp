@@ -803,6 +803,7 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
 
     view->setAutoCopySelectedText(profile->autoCopySelectedText());
     view->setUnderlineLinks(profile->underlineLinksEnabled());
+    view->setControlDrag(profile->property<bool>(Profile::CtrlRequiredForDrag));
     view->setBidiEnabled(profile->bidiRenderingEnabled());
 
     int middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);

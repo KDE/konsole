@@ -838,6 +838,16 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="ctrlRequiredForDragButton">
+            <property name="toolTip">
+             <string>Selected text will require control key plus click to drag.</string>
+            </property>
+            <property name="text">
+             <string>Require Ctrl key for drag and drop</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
