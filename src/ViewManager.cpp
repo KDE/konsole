@@ -805,6 +805,7 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     view->setUnderlineLinks(profile->underlineLinksEnabled());
     view->setControlDrag(profile->property<bool>(Profile::CtrlRequiredForDrag));
     view->setBidiEnabled(profile->bidiRenderingEnabled());
+    view->setLineSpacing(profile->lineSpacing());
 
     int middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
     if (middleClickPasteMode == Enum::PasteFromX11Selection)

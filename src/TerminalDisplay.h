@@ -379,14 +379,6 @@ public:
      */
     void setBidiEnabled(bool set) {
         _bidiEnabled = set;
-        // See bug 280896 for more info
-#if QT_VERSION >= 0x040800
-        if (_bidiEnabled) {
-            setLineSpacing(0);
-        } else {
-            setLineSpacing(2);
-        }
-#endif
     }
     /**
      * Returns the status of the BiDi rendering in this widget.

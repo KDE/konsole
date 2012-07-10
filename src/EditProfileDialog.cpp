@@ -1040,6 +1040,12 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     };
     setupCheckBoxes(options , profile);
 
+    const int lineSpacing = profile->lineSpacing();
+    _ui->lineSpacingSpinner->setValue(lineSpacing);
+
+    connect(_ui->lineSpacingSpinner, SIGNAL(valueChanged(int)),
+            this, SLOT(lineSpacingChanged(int)));
+
     // cursor options
     if (profile->useCustomCursorColor())
         _ui->customCursorColorButton->setChecked(true);
@@ -1098,6 +1104,10 @@ void EditProfileDialog::setCursorShape(int index)
 void EditProfileDialog::togglebidiRendering(bool enable)
 {
     updateTempProfileProperty(Profile::BidiRenderingEnabled, enable);
+}
+void EditProfileDialog::lineSpacingChanged(int spacing)
+{
+    updateTempProfileProperty(Profile::LineSpacing, spacing);
 }
 void EditProfileDialog::toggleBlinkingCursor(bool enable)
 {

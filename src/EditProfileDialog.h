@@ -162,6 +162,7 @@ private slots:
     void toggleBlinkingText(bool);
     void toggleFlowControl(bool);
     void togglebidiRendering(bool);
+    void lineSpacingChanged(int);
     void toggleBlinkingCursor(bool);
 
     void setCursorShape(int);

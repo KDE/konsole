@@ -163,6 +163,9 @@ public:
          * Ctrl+Q) have any effect.  Also known as Xon/Xoff
          */
         FlowControlEnabled,
+        /** (int) Specifies the pixels between the terminal lines.
+         */
+        LineSpacing,
         /** (bool) Specifies whether the cursor blinks ( in a manner similar
          * to text editing applications )
          */
@@ -404,6 +407,12 @@ public:
     bool bidiRenderingEnabled() const {
         return property<bool>(Profile::BidiRenderingEnabled);
     }
+
+    /** Convenience method for property<bool>(Profile::LineSpacing) */
+    int lineSpacing() const {
+        return property<int>(Profile::LineSpacing);
+    }
+
 
     /** Convenience method for property<bool>(Profile::BlinkingTextEnabled) */
     bool blinkingTextEnabled() const {

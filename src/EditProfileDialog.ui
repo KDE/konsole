@@ -928,6 +928,43 @@
             </property>
            </widget>
           </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="lineSpacingLabel">
+              <property name="text">
+               <string>Line Spacing:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="KIntSpinBox" name="lineSpacingSpinner">
+              <property name="toolTip">
+               <string>The number of pixels between two lines</string>
+              </property>
+              <property name="minimum">
+               <number>0</number>
+              </property>
+              <property name="maximum">
+               <number>5</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_11">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>

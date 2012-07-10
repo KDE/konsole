@@ -78,6 +78,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { ColorScheme , "colors" , 0 , QVariant::String }
     , { AntiAliasFonts, "AntiAliasFonts" , APPEARANCE_GROUP , QVariant::Bool }
     , { BoldIntense, "BoldIntense", APPEARANCE_GROUP, QVariant::Bool }
+    , { LineSpacing , "LineSpacing" , APPEARANCE_GROUP , QVariant::Int }
 
     // Keyboard
     , { KeyBindings , "KeyBindings" , KEYBOARD_GROUP , QVariant::String }
@@ -177,6 +178,7 @@ FallbackProfile::FallbackProfile()
 
     setProperty(BlinkingCursorEnabled, false);
     setProperty(BidiRenderingEnabled, true);
+    setProperty(LineSpacing, 0);
     setProperty(CursorShape, Enum::BlockCursor);
     setProperty(UseCustomCursorColor, false);
     setProperty(CustomCursorColor, Qt::black);
