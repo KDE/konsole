@@ -313,6 +313,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _cursorBlinking(false)
     , _hasTextBlinker(false)
     , _underlineLinks(true)
+    , _openLinksByDirectClick(false)
     , _isFixedSize(false)
     , _ctrlRequiredForDrag(true)
     , _tripleClickMode(Enum::SelectWholeLine)
@@ -1800,6 +1801,15 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             } else {
                 emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
             }
+
+            if (_underlineLinks && _openLinksByDirectClick) {
+                Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
+                if (spot && spot->type() == Filter::HotSpot::Link) {
+                    QObject action;
+                    action.setObjectName("open-action");
+                    spot->activate(&action);
+                }
+            }
         }
     } else if (ev->button() == Qt::MidButton) {
         processMidButtonClick(ev);
@@ -1832,38 +1842,46 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     // handle filters
     // change link hot-spot appearance on mouse-over
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
-    if (_underlineLinks && spot && spot->type() == Filter::HotSpot::Link) {
-        QRegion previousHotspotArea = _mouseOverHotspotArea;
-        _mouseOverHotspotArea = QRegion();
-        QRect r;
-        if (spot->startLine() == spot->endLine()) {
-            r.setCoords(spot->startColumn()*_fontWidth + scrollBarWidth,
-                        spot->startLine()*_fontHeight,
-                        spot->endColumn()*_fontWidth + scrollBarWidth,
-                        (spot->endLine() + 1)*_fontHeight - 1);
-            _mouseOverHotspotArea |= r;
-        } else {
-            r.setCoords(spot->startColumn()*_fontWidth + scrollBarWidth,
-                        spot->startLine()*_fontHeight,
-                        _columns * _fontWidth - 1 + scrollBarWidth,
-                        (spot->startLine() + 1)*_fontHeight);
-            _mouseOverHotspotArea |= r;
-            for (int line = spot->startLine() + 1 ; line < spot->endLine() ; line++) {
+    if (spot && spot->type() == Filter::HotSpot::Link) {
+        if (_underlineLinks) {
+             QRegion previousHotspotArea = _mouseOverHotspotArea;
+            _mouseOverHotspotArea = QRegion();
+            QRect r;
+            if (spot->startLine() == spot->endLine()) {
+                r.setCoords(spot->startColumn()*_fontWidth + scrollBarWidth,
+                            spot->startLine()*_fontHeight,
+                            spot->endColumn()*_fontWidth + scrollBarWidth,
+                            (spot->endLine() + 1)*_fontHeight - 1);
+                _mouseOverHotspotArea |= r;
+            } else {
+                r.setCoords(spot->startColumn()*_fontWidth + scrollBarWidth,
+                            spot->startLine()*_fontHeight,
+                            _columns * _fontWidth - 1 + scrollBarWidth,
+                            (spot->startLine() + 1)*_fontHeight);
+                _mouseOverHotspotArea |= r;
+                for (int line = spot->startLine() + 1 ; line < spot->endLine() ; line++) {
+                    r.setCoords(0 * _fontWidth + scrollBarWidth,
+                                line * _fontHeight,
+                                _columns * _fontWidth + scrollBarWidth,
+                                (line + 1)*_fontHeight);
+                    _mouseOverHotspotArea |= r;
+                }
                 r.setCoords(0 * _fontWidth + scrollBarWidth,
-                            line * _fontHeight,
-                            _columns * _fontWidth + scrollBarWidth,
-                            (line + 1)*_fontHeight);
+                            spot->endLine()*_fontHeight,
+                            spot->endColumn()*_fontWidth + scrollBarWidth,
+                            (spot->endLine() + 1)*_fontHeight);
                 _mouseOverHotspotArea |= r;
             }
-            r.setCoords(0 * _fontWidth + scrollBarWidth,
-                        spot->endLine()*_fontHeight,
-                        spot->endColumn()*_fontWidth + scrollBarWidth,
-                        (spot->endLine() + 1)*_fontHeight);
-            _mouseOverHotspotArea |= r;
-        }
 
-        update(_mouseOverHotspotArea | previousHotspotArea);
+            if (_openLinksByDirectClick && (cursor().shape() != Qt::PointingHandCursor))
+                setCursor(Qt::PointingHandCursor);
+
+            update(_mouseOverHotspotArea | previousHotspotArea);
+        }
     } else if (!_mouseOverHotspotArea.isEmpty()) {
+        if (_underlineLinks && _openLinksByDirectClick)
+            setCursor(_mouseMarks ? Qt::IBeamCursor : Qt::ArrowCursor);
+
         update(_mouseOverHotspotArea);
         // set hotspot area to an invalid rectangle
         _mouseOverHotspotArea = QRegion();

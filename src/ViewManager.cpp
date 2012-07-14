@@ -807,6 +807,8 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     view->setBidiEnabled(profile->bidiRenderingEnabled());
     view->setLineSpacing(profile->lineSpacing());
 
+    view->setOpenLinksByDirectClick(profile->property<bool>(Profile::OpenLinksByDirectClickEnabled));
+
     int middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
     if (middleClickPasteMode == Enum::PasteFromX11Selection)
         view->setMiddleClickPasteMode(Enum::PasteFromX11Selection);

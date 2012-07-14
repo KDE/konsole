@@ -993,6 +993,10 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
             _ui->copyTextToClipboardButton , Profile::AutoCopySelectedText,
             SLOT(toggleCopyTextToClipboard(bool))
         },
+        {
+            _ui->openLinksByDirectClickButton , Profile::OpenLinksByDirectClickEnabled,
+            SLOT(toggleOpenLinksByDirectClick(bool))
+        },
         { 0 , Profile::Property(0) , 0 }
     };
     setupCheckBoxes(options , profile);
@@ -1017,6 +1021,8 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
 
     connect(_ui->tripleClickModeCombo, SIGNAL(activated(int)), this,
             SLOT(TripleClickModeChanged(int)));
+
+    _ui->openLinksByDirectClickButton->setEnabled(_ui->underlineLinksButton->isChecked());
 }
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {
@@ -1116,10 +1122,15 @@ void EditProfileDialog::toggleBlinkingCursor(bool enable)
 void EditProfileDialog::toggleUnderlineLinks(bool enable)
 {
     updateTempProfileProperty(Profile::UnderlineLinksEnabled, enable);
+    _ui->openLinksByDirectClickButton->setEnabled(enable);
 }
 void EditProfileDialog::toggleCtrlRequiredForDrag(bool enable)
 {
     updateTempProfileProperty(Profile::CtrlRequiredForDrag, enable);
+}
+void EditProfileDialog::toggleOpenLinksByDirectClick(bool enable)
+{
+    updateTempProfileProperty(Profile::OpenLinksByDirectClickEnabled, enable);
 }
 void EditProfileDialog::toggleCopyTextToClipboard(bool enable)
 {

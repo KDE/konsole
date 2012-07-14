@@ -181,6 +181,18 @@ public:
         return _underlineLinks;
     }
 
+    /**
+     * Specifies whether links and email addresses should be opened when
+     * clicked with the mouse. Defaults to false.
+     */
+    void setOpenLinksByDirectClick(bool value) { _openLinksByDirectClick = value; }
+    /**
+     * Returns true if links and email addresses should be opened when
+     * clicked with the mouse.
+     */
+    bool getOpenLinksByDirectClick() const { return _openLinksByDirectClick; }
+
+
     void setLineSpacing(uint);
     uint lineSpacing() const;
 
@@ -756,6 +768,7 @@ private:
     QTimer* _blinkCursorTimer;
 
     bool _underlineLinks;     // Underline URL and hosts on mouse hover
+    bool _openLinksByDirectClick;     // Open URL and hosts by single mouse click
     bool _isFixedSize; // columns/lines are locked.
 
     bool _ctrlRequiredForDrag; // require Ctrl key for drag selected text

@@ -839,6 +839,39 @@
            </widget>
           </item>
           <item>
+           <layout class="QHBoxLayout">
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="openLinksByDirectClickButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="toolTip">
+               <string>Text recognized as a link or an email address can be opened by direct mouse click.</string>
+              </property>
+              <property name="text">
+               <string>Open links by direct click</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QCheckBox" name="ctrlRequiredForDragButton">
             <property name="toolTip">
              <string>Selected text will require control key plus click to drag.</string>
