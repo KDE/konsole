@@ -24,7 +24,6 @@
 
 // Qt
 #include <QtCore/QTextStream>
-#include <KDebug>
 
 // KDE
 #include <KDebug>
