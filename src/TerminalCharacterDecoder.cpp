@@ -114,13 +114,8 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
             const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
             if (chars) {
                 const QString s = QString::fromUtf16(chars, extendedCharLength);
-                const int stringWidth = string_width(s);
-                // Infinite loop here if i is not incremented bko 303390
-                if (stringWidth < 1) {
-                    break;
-                }
                 plainText.append(s);
-                i += stringWidth;
+                i += qMax(1, string_width(s));
             }
         } else {
             // All characters which appear before the last real character are
