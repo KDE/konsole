@@ -165,10 +165,14 @@ void MainWindow::correctStandardShortcuts()
     Q_ASSERT(helpAction);
     helpAction->setShortcut(QKeySequence());
 
-    // replace Ctrl+B shortcut for bookmarks
+    // replace Ctrl+B shortcut for bookmarks only if user hasn't already
+    // changed the shortcut; however, if the user changed it to Ctrl+B
+    // this will still get changed to Ctrl+Shift+B
     QAction* bookmarkAction = actionCollection()->action("add_bookmark");
     Q_ASSERT(bookmarkAction);
-    bookmarkAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_B));
+    if (bookmarkAction->shortcut() == QKeySequence(Qt::CTRL + Qt::Key_B)) {
+        bookmarkAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_B));
+    }
 }
 
 ViewManager* MainWindow::viewManager() const
