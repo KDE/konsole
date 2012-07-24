@@ -128,6 +128,7 @@ void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
         if (newName != oldName) {
             QHash<Profile::Property, QVariant> properties;
             properties.insert(Profile::Name, newName);
+            properties.insert(Profile::UntranslatedName, newName);
 
             ProfileManager::instance()->changeProfile(profile, properties);
         }
@@ -327,6 +328,7 @@ void ManageProfilesDialog::createProfile()
     Profile::Ptr newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
     newProfile->clone(sourceProfile, true);
     newProfile->setProperty(Profile::Name, i18nc("@item This will be used as part of the file name", "New Profile"));
+    newProfile->setProperty(Profile::UntranslatedName, "New Profile");
     newProfile->setProperty(Profile::MenuIndex, QString("0"));
 
     QWeakPointer<EditProfileDialog> dialog = new EditProfileDialog(this);

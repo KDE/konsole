@@ -374,6 +374,7 @@ void EditProfileDialog::profileNameChanged(const QString& text)
     _ui->emptyNameWarningWidget->setVisible(text.isEmpty());
 
     updateTempProfileProperty(Profile::Name, text);
+    updateTempProfileProperty(Profile::UntranslatedName, text);
     updateCaption(_tempProfile);
 }
 void EditProfileDialog::startInSameDir(bool sameDir)
