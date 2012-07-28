@@ -479,6 +479,8 @@ void ShortcutItemDelegate::editorModified(const QKeySequence& keys)
     KKeySequenceWidget* editor = qobject_cast<KKeySequenceWidget*>(sender());
     Q_ASSERT(editor);
     _modifiedEditors.insert(editor);
+    emit commitData(editor);
+    emit closeEditor(editor);
 }
 void ShortcutItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model,
                                         const QModelIndex& index) const
