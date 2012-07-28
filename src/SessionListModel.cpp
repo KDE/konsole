@@ -60,10 +60,20 @@ QVariant SessionListModel::data(const QModelIndex& index, int role) const
 
     switch (role) {
     case Qt::DisplayRole:
-        if (column == 1)
-            return _sessions[row]->title(Session::DisplayedTitleRole);
-        else if (column == 0)
+        if (column == 1) {
+            // This code is duplicated from SessionController.cpp
+            QString title = _sessions[row]->title(Session::DisplayedTitleRole);
+
+            // special handling for the "%w" marker which is replaced with the
+            // window title set by the shell
+            title.replace("%w", _sessions[row]->userTitle());
+            // special handling for the "%#" marker which is replaced with the
+            // number of the shell
+            title.replace("%#", QString::number(_sessions[row]->sessionId()));
+            return title;
+        } else if (column == 0) {
             return _sessions[row]->sessionId();
+        }
         break;
     case Qt::DecorationRole:
         if (column == 1)
