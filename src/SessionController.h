@@ -224,6 +224,7 @@ private slots:
     void changeCodec(QTextCodec* codec);
     void enableSearchBar(bool showSearchBar);
     void searchHistory(bool showSearchBar);
+    void searchBarEvent();
     void findNextInHistory();
     void findPreviousInHistory();
     void changeSearchMatch();
@@ -304,7 +305,7 @@ private:
 
     KAction* _copyInputToAllTabsAction;
 
-    KAction* _searchToggleAction;
+    KAction* _findAction;
     KAction* _findNextAction;
     KAction* _findPreviousAction;
 
@@ -333,6 +334,8 @@ private:
     static const KIcon _broadcastIcon;
 
     QStringList _bookmarkValidProgramsToClear;
+
+    bool _isSearchBarEnabled;
 };
 inline bool SessionController::isValid() const
 {

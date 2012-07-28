@@ -93,7 +93,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _viewUrlFilter(0)
     , _searchFilter(0)
     , _copyInputToAllTabsAction(0)
-    , _searchToggleAction(0)
+    , _findAction(0)
     , _findNextAction(0)
     , _findPreviousAction(0)
     , _urlFilterUpdateRequired(false)
@@ -104,6 +104,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
     , _keepIconUntilInteraction(false)
+    , _isSearchBarEnabled(false)
 {
     Q_ASSERT(session);
     Q_ASSERT(view);
@@ -508,7 +509,7 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
 
         // if the search bar was previously active
         // then re-enter search mode
-        enableSearchBar(_searchToggleAction->isChecked());
+        enableSearchBar(_isSearchBarEnabled);
     }
 }
 IncrementalSearchBar* SessionController::searchBar() const
@@ -589,10 +590,8 @@ void SessionController::setupCommonActions()
     connect(_switchProfileMenu->menu(), SIGNAL(aboutToShow()), this, SLOT(prepareSwitchProfileMenu()));
 
     // History
-    _searchToggleAction = KStandardAction::find(this, 0, collection);
-    _searchToggleAction->setShortcut(QKeySequence());
-    _searchToggleAction->setCheckable(true);
-    connect(_searchToggleAction, SIGNAL(toggled(bool)), this, SLOT(searchHistory(bool)));
+    _findAction = KStandardAction::find(this, SLOT(searchBarEvent()), collection);
+    _findAction->setShortcut(QKeySequence());
 
     _findNextAction = KStandardAction::findNext(this, SLOT(findNextInHistory()), collection);
     _findNextAction->setShortcut(QKeySequence());
@@ -681,7 +680,7 @@ void SessionController::setupExtraActions()
     action->setIcon(KIcon("format-font-size-less"));
     action->setShortcut(KShortcut(Qt::CTRL | Qt::Key_Minus));
 
-    _searchToggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F));
+    _findAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F));
     _findNextAction->setShortcut(QKeySequence(Qt::Key_F3));
     _findPreviousAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F3));
 }
@@ -985,7 +984,8 @@ void SessionController::copyInputToNone()
 
 void SessionController::searchClosed()
 {
-    _searchToggleAction->toggle();
+    _isSearchBarEnabled = false;
+    searchHistory(false);
 }
 
 void SessionController::listenForScreenWindowUpdates()
@@ -1005,6 +1005,20 @@ void SessionController::updateSearchFilter()
 {
     if (_searchFilter && _searchBar) {
         _view->processFilters();
+    }
+}
+
+void SessionController::searchBarEvent()
+{
+    if (_searchBar->isVisible())
+    {
+        // refresh focus
+        _searchBar->setVisible(true);
+    }
+    else
+    {
+        searchHistory(true);
+        _isSearchBarEnabled = true;
     }
 }
 
