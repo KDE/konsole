@@ -51,10 +51,11 @@ void restoreSession(Application& app);
 // ***
 extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 {
-    KAboutData about("konsole", 0,
-                     ki18n("Konsole"),
+    KAboutData about("konsole",
+                     0,
+                     ki18nc("@title", "<application>Konsole</application>"),
                      KONSOLE_VERSION,
-                     ki18n("Terminal emulator"),
+                     ki18nc("@title", "Terminal emulator"),
                      KAboutData::License_GPL_V2
                     );
     fillAboutData(about);
@@ -188,77 +189,77 @@ void fillCommandLineOptions(KCmdLineOptions& options)
 
 void fillAboutData(KAboutData& aboutData)
 {
-    aboutData.addAuthor(ki18n("Kurt Hindenburg"),
-                        ki18n("General maintainer, bug fixes and general"
+    aboutData.addAuthor(ki18nc("@info:credit", "Kurt Hindenburg"),
+                        ki18nc("@info:credit", "General maintainer, bug fixes and general"
                               " improvements"),
                         "kurt.hindenburg@gmail.com");
-    aboutData.addAuthor(ki18n("Robert Knight"),
-                        ki18n("Previous maintainer, ported to KDE4"),
+    aboutData.addAuthor(ki18nc("@info:credit", "Robert Knight"),
+                        ki18nc("@info:credit", "Previous maintainer, ported to KDE4"),
                         "robertknight@gmail.com");
-    aboutData.addAuthor(ki18n("Lars Doelle"),
-                        ki18n("Original author"),
+    aboutData.addAuthor(ki18nc("@info:credit", "Lars Doelle"),
+                        ki18nc("@info:credit", "Original author"),
                         "lars.doelle@on-line.de");
-    aboutData.addCredit(ki18n("Jekyll Wu"),
-                        ki18n("Bug fixes and general improvements"),
+    aboutData.addCredit(ki18nc("@info:credit", "Jekyll Wu"),
+                        ki18nc("@info:credit", "Bug fixes and general improvements"),
                         "adaptee@gmail.com");
-    aboutData.addCredit(ki18n("Waldo Bastian"),
-                        ki18n("Bug fixes and general improvements"),
+    aboutData.addCredit(ki18nc("@info:credit", "Waldo Bastian"),
+                        ki18nc("@info:credit", "Bug fixes and general improvements"),
                         "bastian@kde.org");
-    aboutData.addCredit(ki18n("Stephan Binner"),
-                        ki18n("Bug fixes and general improvements"),
+    aboutData.addCredit(ki18nc("@info:credit", "Stephan Binner"),
+                        ki18nc("@info:credit", "Bug fixes and general improvements"),
                         "binner@kde.org");
-    aboutData.addCredit(ki18n("Thomas Dreibholz"),
-                        ki18n("General improvements"),
+    aboutData.addCredit(ki18nc("@info:credit", "Thomas Dreibholz"),
+                        ki18nc("@info:credit", "General improvements"),
                         "dreibh@iem.uni-due.de");
-    aboutData.addCredit(ki18n("Chris Machemer"),
-                        ki18n("Bug fixes"),
+    aboutData.addCredit(ki18nc("@info:credit", "Chris Machemer"),
+                        ki18nc("@info:credit", "Bug fixes"),
                         "machey@ceinetworks.com");
-    aboutData.addCredit(ki18n("Stephan Kulow"),
-                        ki18n("Solaris support and history"),
+    aboutData.addCredit(ki18nc("@info:credit", "Stephan Kulow"),
+                        ki18nc("@info:credit", "Solaris support and history"),
                         "coolo@kde.org");
-    aboutData.addCredit(ki18n("Alexander Neundorf"),
-                        ki18n("Bug fixes and improved startup performance"),
+    aboutData.addCredit(ki18nc("@info:credit", "Alexander Neundorf"),
+                        ki18nc("@info:credit", "Bug fixes and improved startup performance"),
                         "neundorf@kde.org");
-    aboutData.addCredit(ki18n("Peter Silva"),
-                        ki18n("Marking improvements"),
+    aboutData.addCredit(ki18nc("@info:credit", "Peter Silva"),
+                        ki18nc("@info:credit", "Marking improvements"),
                         "Peter.A.Silva@gmail.com");
-    aboutData.addCredit(ki18n("Lotzi Boloni"),
-                        ki18n("Embedded Konsole\n"
+    aboutData.addCredit(ki18nc("@info:credit", "Lotzi Boloni"),
+                        ki18nc("@info:credit", "Embedded Konsole\n"
                               "Toolbar and session names"),
                         "boloni@cs.purdue.edu");
-    aboutData.addCredit(ki18n("David Faure"),
-                        ki18n("Embedded Konsole\n"
+    aboutData.addCredit(ki18nc("@info:credit", "David Faure"),
+                        ki18nc("@info:credit", "Embedded Konsole\n"
                               "General improvements"),
                         "faure@kde.org");
-    aboutData.addCredit(ki18n("Antonio Larrosa"),
-                        ki18n("Visual effects"),
+    aboutData.addCredit(ki18nc("@info:credit", "Antonio Larrosa"),
+                        ki18nc("@info:credit", "Visual effects"),
                         "larrosa@kde.org");
-    aboutData.addCredit(ki18n("Matthias Ettrich"),
-                        ki18n("Code from the kvt project\n"
+    aboutData.addCredit(ki18nc("@info:credit", "Matthias Ettrich"),
+                        ki18nc("@info:credit", "Code from the kvt project\n"
                               "General improvements"),
                         "ettrich@kde.org");
-    aboutData.addCredit(ki18n("Warwick Allison"),
-                        ki18n("Schema and text selection improvements"),
+    aboutData.addCredit(ki18nc("@info:credit", "Warwick Allison"),
+                        ki18nc("@info:credit", "Schema and text selection improvements"),
                         "warwick@troll.no");
-    aboutData.addCredit(ki18n("Dan Pilone"),
-                        ki18n("SGI port"),
+    aboutData.addCredit(ki18nc("@info:credit", "Dan Pilone"),
+                        ki18nc("@info:credit", "SGI port"),
                         "pilone@slac.com");
-    aboutData.addCredit(ki18n("Kevin Street"),
-                        ki18n("FreeBSD port"),
+    aboutData.addCredit(ki18nc("@info:credit", "Kevin Street"),
+                        ki18nc("@info:credit", "FreeBSD port"),
                         "street@iname.com");
-    aboutData.addCredit(ki18n("Sven Fischer"),
-                        ki18n("Bug fixes"),
+    aboutData.addCredit(ki18nc("@info:credit", "Sven Fischer"),
+                        ki18nc("@info:credit", "Bug fixes"),
                         "herpes@kawo2.renditionwth-aachen.de");
-    aboutData.addCredit(ki18n("Dale M. Flaven"),
-                        ki18n("Bug fixes"),
+    aboutData.addCredit(ki18nc("@info:credit", "Dale M. Flaven"),
+                        ki18nc("@info:credit", "Bug fixes"),
                         "dflaven@netport.com");
-    aboutData.addCredit(ki18n("Martin Jones"),
-                        ki18n("Bug fixes"),
+    aboutData.addCredit(ki18nc("@info:credit", "Martin Jones"),
+                        ki18nc("@info:credit", "Bug fixes"),
                         "mjones@powerup.com.au");
-    aboutData.addCredit(ki18n("Lars Knoll"),
-                        ki18n("Bug fixes"),
+    aboutData.addCredit(ki18nc("@info:credit", "Lars Knoll"),
+                        ki18nc("@info:credit", "Bug fixes"),
                         "knoll@mpi-hd.mpg.de");
-    aboutData.addCredit(ki18n("Thanks to many others.\n"));
+    aboutData.addCredit(ki18nc("@info:credit", "Thanks to many others.\n"));
     aboutData.setProgramIconName("utilities-terminal");
     aboutData.setHomepage("http://konsole.kde.org");
 }
