@@ -180,8 +180,15 @@ void IncrementalSearchBar::setFoundMatch(bool match)
                                   .arg(backgroundBrush.brush(_searchEdit).color().name());
 
         _searchEdit->setStyleSheet(matchStyleSheet);
+    } else if (_searchEdit->text().isEmpty()) {
+        clearLineEdit();
     } else {
-        _searchEdit->setStyleSheet(QString());
+        KStatefulBrush backgroundBrush(KColorScheme::View, KColorScheme::PositiveBackground);
+
+        QString matchStyleSheet = QString("QLineEdit{ background-color:%1 }")
+                                  .arg(backgroundBrush.brush(_searchEdit).color().name());
+
+        _searchEdit->setStyleSheet(matchStyleSheet);
     }
 }
 

@@ -1030,6 +1030,7 @@ void SessionController::enableSearchBar(bool showSearchBar)
     if (showSearchBar) {
         connect(_searchBar, SIGNAL(searchChanged(QString)), this,
                 SLOT(searchTextChanged(QString)));
+        _searchBar->clearLineEdit();
     } else {
         disconnect(_searchBar, SIGNAL(searchChanged(QString)), this,
                 SLOT(searchTextChanged(QString)));
@@ -1112,6 +1113,9 @@ void SessionController::beginSearch(const QString& text , int direction)
         task->setAutoDelete(true);
         task->addScreenWindow(_session , _view->screenWindow());
         task->execute();
+    }
+    else if (text.isEmpty()) {
+        searchCompleted(false);
     }
 
     _view->processFilters();
