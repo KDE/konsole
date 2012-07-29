@@ -189,6 +189,9 @@ void fillCommandLineOptions(KCmdLineOptions& options)
 
 void fillAboutData(KAboutData& aboutData)
 {
+    aboutData.setProgramIconName("utilities-terminal");
+    aboutData.setHomepage("http://konsole.kde.org");
+
     aboutData.addAuthor(ki18nc("@info:credit", "Kurt Hindenburg"),
                         ki18nc("@info:credit", "General maintainer, bug fixes and general"
                               " improvements"),
@@ -260,8 +263,6 @@ void fillAboutData(KAboutData& aboutData)
                         ki18nc("@info:credit", "Bug fixes"),
                         "knoll@mpi-hd.mpg.de");
     aboutData.addCredit(ki18nc("@info:credit", "Thanks to many others.\n"));
-    aboutData.setProgramIconName("utilities-terminal");
-    aboutData.setHomepage("http://konsole.kde.org");
 }
 
 void restoreSession(Application& app)
