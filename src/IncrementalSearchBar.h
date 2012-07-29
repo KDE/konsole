@@ -123,9 +123,11 @@ signals:
 protected:
     virtual bool eventFilter(QObject* watched , QEvent* event);
 
+public slots:
+    void clearLineEdit();
+
 private slots:
     void notifySearchChanged();
-    void clearLineEdit();
 
 private:
     bool _foundMatch;
