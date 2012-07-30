@@ -217,6 +217,9 @@ void fillAboutData(KAboutData& aboutData)
     aboutData.addCredit(ki18nc("@info:credit", "Chris Machemer"),
                         ki18nc("@info:credit", "Bug fixes"),
                         "machey@ceinetworks.com");
+    aboutData.addCredit(ki18nc("@info:credit", "Francesco Cecconi"),
+                        ki18nc("@info:credit", "Bug fixes"),
+                        "francesco.cecconi@gmail.com");
     aboutData.addCredit(ki18nc("@info:credit", "Stephan Kulow"),
                         ki18nc("@info:credit", "Solaris support and history"),
                         "coolo@kde.org");
