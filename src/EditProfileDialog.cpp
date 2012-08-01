@@ -450,10 +450,9 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
 
     _ui->fontPreviewLabel->installEventFilter(this);
     _ui->fontPreviewLabel->setFont(profileFont);
-    setFontSliderRange(profileFont);
-    setFontSliderValue(profileFont);
+    setFontInputValue(profileFont);
 
-    connect(_ui->fontSizeSlider, SIGNAL(valueChanged(int)), this,
+    connect(_ui->fontSizeInput, SIGNAL(valueChanged(int)), this,
             SLOT(setFontSize(int)));
     connect(_ui->selectFontButton, SIGNAL(clicked()), this,
             SLOT(showFontDialog()));
@@ -577,9 +576,7 @@ bool EditProfileDialog::eventFilter(QObject* watched , QEvent* aEvent)
     }
     if (watched == _ui->fontPreviewLabel && aEvent->type() == QEvent::FontChange) {
         const QFont& labelFont = _ui->fontPreviewLabel->font();
-        qreal fontSizeF = labelFont.pointSizeF();
-        QString fontSize  = KGlobal::locale()->formatNumber(fontSizeF, fontSizeF == floor(fontSizeF) ? 0 : 1);
-        _ui->fontPreviewLabel->setText(i18n("%1, size %2", labelFont.family(), fontSize));
+        _ui->fontPreviewLabel->setText(i18n("%1", labelFont.family()));
     }
 
     return KDialog::eventFilter(watched, aEvent);
@@ -1161,8 +1158,7 @@ void EditProfileDialog::fontSelected(const QFont& aFont)
 {
     QFont previewFont = aFont;
 
-    setFontSliderRange(aFont);
-    setFontSliderValue(aFont);
+    setFontInputValue(aFont);
 
     _ui->fontPreviewLabel->setFont(previewFont);
 
@@ -1199,25 +1195,16 @@ void EditProfileDialog::showFontDialog()
 void EditProfileDialog::setFontSize(int pointSize)
 {
     QFont newFont = _ui->fontPreviewLabel->font();
-    newFont.setPointSizeF(pointSize / 10.0);
+    newFont.setPointSize(pointSize);
     _ui->fontPreviewLabel->setFont(newFont);
 
     preview(Profile::Font, newFont);
     updateTempProfileProperty(Profile::Font, newFont);
 }
 
-void EditProfileDialog::setFontSliderRange(const QFont& aFont)
+void EditProfileDialog::setFontInputValue(const QFont& aFont)
 {
-    QSlider* slider = _ui->fontSizeSlider;
-    // Minimum on the slider is 4,
-    // Maximum is the greater of 2 times the current size and 14
-    slider->setRange(qMin(4 * 10, qRound(aFont.pointSizeF() * 10)),
-                     qMax(14 * 10, 2 * qRound(aFont.pointSize() * 10)));
-}
-
-void EditProfileDialog::setFontSliderValue(const QFont& aFont)
-{
-    _ui->fontSizeSlider->setValue(qRound(aFont.pointSize() * 10));
+    _ui->fontSizeInput->setValue(aFont.pointSize());
 }
 
 ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* aParent)

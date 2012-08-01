@@ -457,32 +457,15 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_5">
-              <property name="text">
-               <string comment="@item:inrange Minimum Size">Small</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSlider" name="fontSizeSlider">
-              <property name="toolTip">
-               <string>Adjust the font size used in this profile</string>
-              </property>
+             <widget class="KIntNumInput" name="fontSizeInput">
               <property name="minimum">
-               <number>9</number>
+               <number>0</number>
               </property>
               <property name="maximum">
-               <number>20</number>
+               <number>999</number>
               </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string comment="@item:inrange Maximum Size">Large</string>
+              <property name="sliderEnabled">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -495,6 +478,19 @@
                <string>Select Font...</string>
               </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>
@@ -1217,6 +1213,11 @@
   <customwidget>
    <class>KIntSpinBox</class>
    <extends>QSpinBox</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
    <header>knuminput.h</header>
   </customwidget>
   <customwidget>

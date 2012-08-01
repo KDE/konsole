@@ -119,8 +119,7 @@ private slots:
 
     // appearance page
     void setFontSize(int pointSize);
-    void setFontSliderRange(const QFont&);
-    void setFontSliderValue(const QFont&);
+    void setFontInputValue(const QFont&);
     void setAntialiasText(bool enable);
     void setBoldIntense(bool enable);
     void showFontDialog();
