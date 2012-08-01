@@ -430,7 +430,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="fontPreviewLabel">
+             <widget class="KSqueezedTextLabel" name="fontPreviewLabel">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>1</horstretch>
@@ -439,6 +439,9 @@
               </property>
               <property name="text">
                <string comment="KDE::DoNotExtract">FONT PREVIEW TEXT</string>
+              </property>
+              <property name="textElideMode">
+               <enum>Qt::ElideRight</enum>
               </property>
              </widget>
             </item>
@@ -1219,6 +1222,11 @@
    <class>KIntNumInput</class>
    <extends>QWidget</extends>
    <header>knuminput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KSqueezedTextLabel</class>
+   <extends>QLabel</extends>
+   <header>ksqueezedtextlabel.h</header>
   </customwidget>
   <customwidget>
    <class>KMessageWidget</class>
