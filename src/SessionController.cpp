@@ -1014,9 +1014,7 @@ void SessionController::searchBarEvent()
     {
         // refresh focus
         _searchBar->setVisible(true);
-    }
-    else
-    {
+    } else {
         searchHistory(true);
         _isSearchBarEnabled = true;
     }
@@ -1113,8 +1111,7 @@ void SessionController::beginSearch(const QString& text , int direction)
         task->setAutoDelete(true);
         task->addScreenWindow(_session , _view->screenWindow());
         task->execute();
-    }
-    else if (text.isEmpty()) {
+    } else if (text.isEmpty()) {
         searchCompleted(false);
     }
 
