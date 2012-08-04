@@ -452,8 +452,8 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->fontPreviewLabel->setFont(profileFont);
     setFontInputValue(profileFont);
 
-    connect(_ui->fontSizeInput, SIGNAL(valueChanged(int)), this,
-            SLOT(setFontSize(int)));
+    connect(_ui->fontSizeInput, SIGNAL(valueChanged(double)), this,
+            SLOT(setFontSize(double)));
     connect(_ui->selectFontButton, SIGNAL(clicked()), this,
             SLOT(showFontDialog()));
 
@@ -1192,10 +1192,10 @@ void EditProfileDialog::showFontDialog()
         fontSelected(currentFont);
     delete dialog.data();
 }
-void EditProfileDialog::setFontSize(int pointSize)
+void EditProfileDialog::setFontSize(double pointSize)
 {
     QFont newFont = _ui->fontPreviewLabel->font();
-    newFont.setPointSize(pointSize);
+    newFont.setPointSizeF(pointSize);
     _ui->fontPreviewLabel->setFont(newFont);
 
     preview(Profile::Font, newFont);
@@ -1204,7 +1204,7 @@ void EditProfileDialog::setFontSize(int pointSize)
 
 void EditProfileDialog::setFontInputValue(const QFont& aFont)
 {
-    _ui->fontSizeInput->setValue(aFont.pointSize());
+    _ui->fontSizeInput->setValue(aFont.pointSizeF());
 }
 
 ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* aParent)

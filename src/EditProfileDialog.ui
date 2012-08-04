@@ -460,15 +460,18 @@
              </widget>
             </item>
             <item>
-             <widget class="KIntNumInput" name="fontSizeInput">
+             <widget class="KDoubleNumInput" name="fontSizeInput">
               <property name="minimum">
-               <number>0</number>
+               <double>4.000000000000000</double>
               </property>
               <property name="maximum">
-               <number>999</number>
+               <double>999.000000000000000</double>
               </property>
-              <property name="sliderEnabled">
-               <bool>false</bool>
+              <property name="singleStep">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="decimals">
+               <number>1</number>
               </property>
              </widget>
             </item>
@@ -1199,6 +1202,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>KDoubleNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+  <customwidget>
    <class>KColorButton</class>
    <extends>QPushButton</extends>
    <header>kcolorbutton.h</header>
@@ -1216,11 +1224,6 @@
   <customwidget>
    <class>KIntSpinBox</class>
    <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
    <header>knuminput.h</header>
   </customwidget>
   <customwidget>

@@ -118,7 +118,7 @@ private slots:
     void silenceSecondsChanged(int);
 
     // appearance page
-    void setFontSize(int pointSize);
+    void setFontSize(double pointSize);
     void setFontInputValue(const QFont&);
     void setAntialiasText(bool enable);
     void setBoldIntense(bool enable);
