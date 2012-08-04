@@ -356,6 +356,8 @@ public:
     void saveSession(KConfigGroup& group);
     void restoreSession(KConfigGroup& group);
 
+    void sendSignal(int signal);
+
 public slots:
 
     /**

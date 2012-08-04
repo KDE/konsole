@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="20">
+<kpartgui name="session" version="21">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
@@ -11,6 +11,7 @@
         <Menu name="edit">
             <Action name="edit_copy" group="session-edit-operations"/>
             <Action name="edit_paste" group="session-edit-operations"/>
+            <Action name="send_signal" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>
             <Action name="select-all" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>

@@ -71,6 +71,9 @@
 #include <KJob>
 #include "TerminalCharacterDecoder.h"
 
+// For Unix signal names
+#include <signal.h>
+
 using namespace Konsole;
 
 // TODO - Replace the icon choices below when suitable icons for silence and
@@ -429,6 +432,11 @@ void SessionController::configureWebShortcuts()
     KToolInvocation::kdeinitExec("kcmshell4", QStringList() << "ebrowsing");
 }
 
+void SessionController::sendSignal(QAction* action) {
+    const int signal = action->data().value<int>();
+    _session->sendSignal(signal);
+}
+
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
 {
     if (watched == _view) {
@@ -679,6 +687,51 @@ void SessionController::setupExtraActions()
     action->setText(i18n("Shrink Font"));
     action->setIcon(KIcon("format-font-size-less"));
     action->setShortcut(KShortcut(Qt::CTRL | Qt::Key_Minus));
+
+    // Send signal
+    KSelectAction* sendSignalActions = collection->add<KSelectAction>("send_signal");
+    sendSignalActions->setText(i18n("Send Signal"));
+    connect(sendSignalActions, SIGNAL(triggered(QAction*)), this, SLOT(sendSignal(QAction*)));
+
+    action = collection->addAction("sigstop-signal");
+    action->setText(i18n("&Suspend Task")   + " (STOP)");
+    action->setData(SIGSTOP);
+    sendSignalActions->addAction(action);
+
+    action = collection->addAction("sigcont-signal");
+    action->setText(i18n("&Continue Task")  + " (CONT)");
+    action->setData(SIGCONT);
+    sendSignalActions->addAction(action);
+
+    action = collection->addAction("sighup-signal");
+    action->setText(i18n("&Hangup")         + " (HUP)");
+    action->setData(SIGHUP);
+    sendSignalActions->addAction(action);
+
+    action = collection->addAction("sigint-signal");
+    action->setText(i18n("&Interrupt Task") + " (INT)");
+    action->setData(SIGINT);
+    sendSignalActions->addAction(action);
+
+    action = collection->addAction("sigterm-signal");
+    action->setText(i18n("&Terminate Task") + " (TERM)");
+    action->setData(SIGTERM);
+    sendSignalActions->addAction(action);
+
+    action = collection->addAction("sigkill-signal");
+    action->setText(i18n("&Kill Task")      + " (KILL)");
+    action->setData(SIGKILL);
+    sendSignalActions->addAction(action);
+
+    action = collection->addAction("sigusr1-signal");
+    action->setText(i18n("User Signal &1")   + " (USR1)");
+    action->setData(SIGUSR1);
+    sendSignalActions->addAction(action);
+
+    action = collection->addAction("sigusr2-signal");
+    action->setText(i18n("User Signal &2")   + " (USR2)");
+    action->setData(SIGUSR2);
+    sendSignalActions->addAction(action);
 
     _findAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F));
     _findNextAction->setShortcut(QKeySequence(Qt::Key_F3));

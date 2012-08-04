@@ -725,6 +725,18 @@ void Session::refresh()
     _shellProcess->setWindowSize(existingSize.width(), existingSize.height());
 }
 
+void Session::sendSignal(int signal)
+{
+    const ProcessInfo* process = getProcessInfo();
+    bool ok = false;
+    int pid;
+    pid = process->foregroundPid(&ok);
+
+    if (ok) {
+        ::kill(pid, signal);
+    }
+}
+
 bool Session::kill(int signal)
 {
     if (_shellProcess->pid() <= 0)
