@@ -92,11 +92,11 @@ public:
                               CharacterColor  _b = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR),
                               quint8  _r = DEFAULT_RENDITION,
                               bool _real = true)
-          : character(_c)
-          , rendition(_r)
-          , foregroundColor(_f)
-          , backgroundColor(_b)
-          , isRealCharacter(_real) { }
+        : character(_c)
+        , rendition(_r)
+        , foregroundColor(_f)
+        , backgroundColor(_b)
+        , isRealCharacter(_real) { }
 
     /** The unicode character value for this character.
      *

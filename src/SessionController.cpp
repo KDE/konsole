@@ -282,7 +282,7 @@ void SessionController::openUrl(const KUrl& url)
 {
     // Clear shell's command line
     if (!_session->isForegroundProcessActive()
-        && _bookmarkValidProgramsToClear.contains(_session->foregroundProcessName())) {
+            && _bookmarkValidProgramsToClear.contains(_session->foregroundProcessName())) {
         _session->emulation()->sendText(QChar(0x03)); // Ctrl+C
         _session->emulation()->sendText(QChar('\n'));
     }
@@ -1084,7 +1084,7 @@ void SessionController::enableSearchBar(bool showSearchBar)
         _searchBar->clearLineEdit();
     } else {
         disconnect(_searchBar, SIGNAL(searchChanged(QString)), this,
-                SLOT(searchTextChanged(QString)));
+                   SLOT(searchTextChanged(QString)));
     }
 }
 

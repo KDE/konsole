@@ -620,12 +620,12 @@ ViewContainer* ViewManager::createContainer()
     container->setStyleSheet(_navigationStyleSheet);
     if (_showQuickButtons) {
         container->setFeatures(container->features()
-                | ViewContainer::QuickNewView
-                | ViewContainer::QuickCloseView);
+                               | ViewContainer::QuickNewView
+                               | ViewContainer::QuickCloseView);
     } else {
         container->setFeatures(container->features()
-                & ~ViewContainer::QuickNewView
-                & ~ViewContainer::QuickCloseView);
+                               & ~ViewContainer::QuickNewView
+                               & ~ViewContainer::QuickCloseView);
     }
 
     // connect signals and slots
@@ -1082,12 +1082,12 @@ void ViewManager::setShowQuickButtons(bool show)
     foreach(ViewContainer* container, _viewSplitter->containers()) {
         if (_showQuickButtons) {
             container->setFeatures(container->features()
-                    | ViewContainer::QuickNewView
-                    | ViewContainer::QuickCloseView);
+                                   | ViewContainer::QuickNewView
+                                   | ViewContainer::QuickCloseView);
         } else {
             container->setFeatures(container->features()
-                    & ~ViewContainer::QuickNewView
-                    & ~ViewContainer::QuickCloseView);
+                                   & ~ViewContainer::QuickNewView
+                                   & ~ViewContainer::QuickCloseView);
         }
     }
 }

@@ -194,7 +194,7 @@ void fillAboutData(KAboutData& aboutData)
 
     aboutData.addAuthor(ki18nc("@info:credit", "Kurt Hindenburg"),
                         ki18nc("@info:credit", "General maintainer, bug fixes and general"
-                              " improvements"),
+                               " improvements"),
                         "kurt.hindenburg@gmail.com");
     aboutData.addAuthor(ki18nc("@info:credit", "Robert Knight"),
                         ki18nc("@info:credit", "Previous maintainer, ported to KDE4"),
@@ -231,18 +231,18 @@ void fillAboutData(KAboutData& aboutData)
                         "Peter.A.Silva@gmail.com");
     aboutData.addCredit(ki18nc("@info:credit", "Lotzi Boloni"),
                         ki18nc("@info:credit", "Embedded Konsole\n"
-                              "Toolbar and session names"),
+                               "Toolbar and session names"),
                         "boloni@cs.purdue.edu");
     aboutData.addCredit(ki18nc("@info:credit", "David Faure"),
                         ki18nc("@info:credit", "Embedded Konsole\n"
-                              "General improvements"),
+                               "General improvements"),
                         "faure@kde.org");
     aboutData.addCredit(ki18nc("@info:credit", "Antonio Larrosa"),
                         ki18nc("@info:credit", "Visual effects"),
                         "larrosa@kde.org");
     aboutData.addCredit(ki18nc("@info:credit", "Matthias Ettrich"),
                         ki18nc("@info:credit", "Code from the kvt project\n"
-                              "General improvements"),
+                               "General improvements"),
                         "ettrich@kde.org");
     aboutData.addCredit(ki18nc("@info:credit", "Warwick Allison"),
                         ki18nc("@info:credit", "Schema and text selection improvements"),

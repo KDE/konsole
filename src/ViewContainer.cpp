@@ -476,30 +476,30 @@ void TabbedViewContainer::startTabDrag(int tab)
 
     if (drag->target()) {
         switch (action) {
-            case Qt::MoveAction:
-                // The MoveAction indicates the widget has been successfully
-                // moved into another tabbar/container, so remove the widget in
-                // current tabbar/container.
-                //
-                // Deleting the view may cause the view container to be deleted,
-                // which will also delete the QDrag object. This can cause a
-                // crash if Qt's internal drag-and-drop handling tries to delete
-                // it later.
-                //
-                // For now set the QDrag's parent to 0 so that it won't be
-                // deleted if this view container is destroyed.
-                //
-                // FIXME: Resolve this properly
-                drag->setParent(0);
-                removeView(view);
-                break;
-            case Qt::IgnoreAction:
-                // The IgroreAction is used by the tabbar to indicate the
-                // special case of dropping one tab into its existing position.
-                // So nothing need to do here.
-                break;
-            default:
-                break;
+        case Qt::MoveAction:
+            // The MoveAction indicates the widget has been successfully
+            // moved into another tabbar/container, so remove the widget in
+            // current tabbar/container.
+            //
+            // Deleting the view may cause the view container to be deleted,
+            // which will also delete the QDrag object. This can cause a
+            // crash if Qt's internal drag-and-drop handling tries to delete
+            // it later.
+            //
+            // For now set the QDrag's parent to 0 so that it won't be
+            // deleted if this view container is destroyed.
+            //
+            // FIXME: Resolve this properly
+            drag->setParent(0);
+            removeView(view);
+            break;
+        case Qt::IgnoreAction:
+            // The IgroreAction is used by the tabbar to indicate the
+            // special case of dropping one tab into its existing position.
+            // So nothing need to do here.
+            break;
+        default:
+            break;
         }
     } else {
         // if the tab is dragged onto something that does not accept this

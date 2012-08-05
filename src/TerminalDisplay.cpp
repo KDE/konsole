@@ -1844,7 +1844,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
     if (spot && spot->type() == Filter::HotSpot::Link) {
         if (_underlineLinks) {
-             QRegion previousHotspotArea = _mouseOverHotspotArea;
+            QRegion previousHotspotArea = _mouseOverHotspotArea;
             _mouseOverHotspotArea = QRegion();
             QRect r;
             if (spot->startLine() == spot->endLine()) {
@@ -2174,7 +2174,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
     if (!_mouseMarks &&
             (ev->button() == Qt::RightButton || ev->button() == Qt::MidButton) &&
-              !(ev->modifiers() & Qt::ShiftModifier)) {
+            !(ev->modifiers() & Qt::ShiftModifier)) {
         emit mouseSignal(3,
                          charColumn + 1,
                          charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
@@ -2852,7 +2852,7 @@ void TerminalDisplay::bell(const QString& message)
         break;
     case Enum::NotifyBell:
         KNotification::event(hasFocus() ? "BellVisible" : "BellInvisible",
-                message, QPixmap(), this);
+                             message, QPixmap(), this);
         break;
     case Enum::VisualBell:
         visualBell();

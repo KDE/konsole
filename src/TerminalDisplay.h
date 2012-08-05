@@ -185,12 +185,16 @@ public:
      * Specifies whether links and email addresses should be opened when
      * clicked with the mouse. Defaults to false.
      */
-    void setOpenLinksByDirectClick(bool value) { _openLinksByDirectClick = value; }
+    void setOpenLinksByDirectClick(bool value) {
+        _openLinksByDirectClick = value;
+    }
     /**
      * Returns true if links and email addresses should be opened when
      * clicked with the mouse.
      */
-    bool getOpenLinksByDirectClick() const { return _openLinksByDirectClick; }
+    bool getOpenLinksByDirectClick() const {
+        return _openLinksByDirectClick;
+    }
 
 
     void setLineSpacing(uint);
