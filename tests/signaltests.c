@@ -1,5 +1,6 @@
 /*
     Author: Kasper Laudrup <laudrup@stacktrace.dk> 
+    This code is in the public domain.
     From patch from bko 214908
 */
 #include <stdio.h>
