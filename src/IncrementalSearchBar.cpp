@@ -154,6 +154,11 @@ bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* aEvent)
                 emit closeClicked();
                 return true;
             }
+
+            if (keyEvent->key() == Qt::Key_Return && !keyEvent->modifiers()) {
+                emit searchReturnPressed(_searchEdit->text());
+                return true;
+            }
         }
     }
 

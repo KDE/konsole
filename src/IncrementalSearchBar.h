@@ -119,6 +119,8 @@ signals:
     void matchRegExpToggled(bool);
     /** Emitted when the close button is clicked */
     void closeClicked();
+    /** Emitted when the return button is pressed in the search box */
+    void searchReturnPressed(const QString& text);
 
 protected:
     virtual bool eventFilter(QObject* watched , QEvent* event);
