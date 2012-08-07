@@ -1004,10 +1004,14 @@ void SessionController::enableSearchBar(bool showSearchBar)
     if (showSearchBar) {
         connect(_searchBar, SIGNAL(searchChanged(QString)), this,
                 SLOT(searchTextChanged(QString)));
+        connect(_searchBar, SIGNAL(searchReturnPressed(QString)), this,
+                SLOT(searchTextChanged(QString)));
         _searchBar->clearLineEdit();
     } else {
         disconnect(_searchBar, SIGNAL(searchChanged(QString)), this,
-                SLOT(searchTextChanged(QString)));
+                   SLOT(searchTextChanged(QString)));
+        disconnect(_searchBar, SIGNAL(searchReturnPressed(QString)), this,
+                   SLOT(searchTextChanged(QString)));
     }
 }
 
