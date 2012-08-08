@@ -8,6 +8,7 @@ for i in ../data/keyboard-layouts/*.keytab; do
 grep "^keyboard" $i | sed -e 's#^keyboard \"\(.*\)\"$#i18n(\"\1\")#' >> schemas.cpp
 done
 $EXTRACTRC `find . -name \*.ui`          >>  rc.cpp
+$EXTRACTRC `find . -name \*.kcfg` >> rc.cpp
 $EXTRACTRC `find ../desktop -name \*.rc` >> rc.cpp
 $XGETTEXT *.cpp -o $podir/konsole.pot
 rm -f schemas.cpp
