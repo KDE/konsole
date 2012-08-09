@@ -1083,12 +1083,16 @@ void SessionController::enableSearchBar(bool showSearchBar)
                 SLOT(searchTextChanged(QString)));
         connect(_searchBar, SIGNAL(searchReturnPressed(QString)), this,
                 SLOT(searchTextChanged(QString)));
+        connect(_searchBar, SIGNAL(searchShiftPlusReturnPressed()), this,
+                SLOT(findPreviousInHistory()));
         _searchBar->clearLineEdit();
     } else {
         disconnect(_searchBar, SIGNAL(searchChanged(QString)), this,
                    SLOT(searchTextChanged(QString)));
         disconnect(_searchBar, SIGNAL(searchReturnPressed(QString)), this,
                    SLOT(searchTextChanged(QString)));
+        disconnect(_searchBar, SIGNAL(searchShiftPlusReturnPressed()), this,
+                   SLOT(findPreviousInHistory()));
     }
 }
 
