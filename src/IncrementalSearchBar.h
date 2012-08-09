@@ -121,6 +121,8 @@ signals:
     void closeClicked();
     /** Emitted when the return button is pressed in the search box */
     void searchReturnPressed(const QString& text);
+    /** Emitted when shift+return buttons are pressed in the search box */
+    void searchShiftPlusReturnPressed();
 
 protected:
     virtual bool eventFilter(QObject* watched , QEvent* event);

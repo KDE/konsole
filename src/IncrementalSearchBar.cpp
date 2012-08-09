@@ -159,6 +159,11 @@ bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* aEvent)
                 emit searchReturnPressed(_searchEdit->text());
                 return true;
             }
+
+            if ((keyEvent->key() == Qt::Key_Return) && (keyEvent->modifiers() == Qt::ShiftModifier)) {
+                emit searchShiftPlusReturnPressed();
+                return true;
+            }
         }
     }
 
