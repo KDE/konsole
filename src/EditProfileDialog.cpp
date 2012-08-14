@@ -26,7 +26,7 @@
 // Qt
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
-#include <QtGui/QStandardItem>
+#include <QStandardItem>
 #include <QtCore/QTextCodec>
 #include <QtGui/QLinearGradient>
 #include <QtGui/QRadialGradient>

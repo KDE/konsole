@@ -22,8 +22,8 @@
 #include "HistorySizeWidget.h"
 
 // Qt
-#include <QtGui/QButtonGroup>
-#include <QtGui/QAbstractButton>
+#include <QButtonGroup>
+#include <QAbstractButton>
 
 // Konsole
 #include "ui_HistorySizeWidget.h"

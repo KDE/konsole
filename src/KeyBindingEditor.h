@@ -21,7 +21,7 @@
 #define KEYBINDINGEDITOR_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QTableWidgetItem;
 

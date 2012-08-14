@@ -31,7 +31,7 @@
 #include <QtCore/QUuid>
 #include <QtCore/QSize>
 #include <QtCore/QProcess>
-#include <QtGui/QWidget>
+#include <QWidget>
 
 // KDE
 #include <KUrl>

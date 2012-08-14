@@ -21,12 +21,12 @@
 #include "IncrementalSearchBar.h"
 
 // Qt
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QLabel>
+#include <QHBoxLayout>
+#include <QLabel>
 #include <QtGui/QKeyEvent>
 #include <QtCore/QTimer>
-#include <QtGui/QToolButton>
-#include <QtGui/QMenu>
+#include <QToolButton>
+#include <QMenu>
 
 // KDE
 #include <KColorScheme>

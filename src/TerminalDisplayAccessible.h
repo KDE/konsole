@@ -24,7 +24,7 @@
 
 #include <QtGui/qaccessible.h>
 #include <QtGui/qaccessible2.h>
-#include <QtGui/qaccessiblewidget.h>
+#include <qaccessiblewidget.h>
 
 #include "TerminalDisplay.h"
 #include "ScreenWindow.h"

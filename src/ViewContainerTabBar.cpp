@@ -24,7 +24,7 @@
 
 // Qt
 #include <QtCore/QMimeData>
-#include <QtGui/QLabel>
+#include <QLabel>
 #include <QtGui/QPainter>
 #include <QtGui/QDragMoveEvent>
 

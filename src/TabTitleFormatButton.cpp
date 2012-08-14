@@ -22,7 +22,7 @@
 
 // Qt
 #include <QtCore/QList>
-#include <QtGui/QMenu>
+#include <QMenu>
 
 // KDE
 #include <KLocalizedString>

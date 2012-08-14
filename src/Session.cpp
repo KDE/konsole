@@ -30,7 +30,7 @@
 #include <unistd.h>
 
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtGui/QColor>
 #include <QtCore/QDir>
 #include <QtCore/QFile>

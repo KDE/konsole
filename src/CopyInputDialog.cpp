@@ -21,7 +21,7 @@
 #include "CopyInputDialog.h"
 
 // Qt
-#include <QtGui/QSortFilterProxyModel>
+#include <QSortFilterProxyModel>
 
 // Konsole
 #include "ui_CopyInputDialog.h"

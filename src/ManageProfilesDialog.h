@@ -21,7 +21,7 @@
 #define MANAGEPROFILESDIALOG_H
 
 // Qt
-#include <QtGui/QStyledItemDelegate>
+#include <QStyledItemDelegate>
 #include <QtCore/QSet>
 
 // KDE

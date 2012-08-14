@@ -21,7 +21,7 @@
 #include "MainWindow.h"
 
 // Qt
-#include <QtGui/QVBoxLayout>
+#include <QVBoxLayout>
 
 // KDE
 #include <KAcceleratorManager>

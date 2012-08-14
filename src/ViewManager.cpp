@@ -23,7 +23,7 @@
 // Qt
 #include <QtCore/QSignalMapper>
 #include <QtCore/QStringList>
-#include <QtGui/QMenu>
+#include <QMenu>
 #include <QtDBus/QtDBus>
 
 // KDE

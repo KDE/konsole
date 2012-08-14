@@ -21,7 +21,7 @@
 #define COLORSCHEMEEDITOR_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QTableWidgetItem;
 
