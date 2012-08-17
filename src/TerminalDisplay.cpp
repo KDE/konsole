@@ -2851,6 +2851,10 @@ void TerminalDisplay::bell(const QString& message)
         KNotification::beep();
         break;
     case Enum::NotifyBell:
+        // STABLE API:
+        //     Please note that these event names, "BellVisible" and "BellInvisible",
+        //     should not change and should be kept stable, because other applications
+        //     that use this code via KPart rely on these names for notifications.
         KNotification::event(hasFocus() ? "BellVisible" : "BellInvisible",
                              message, QPixmap(), this);
         break;
