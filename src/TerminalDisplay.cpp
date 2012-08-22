@@ -2794,7 +2794,6 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 #if QT_VERSION >= 0x040800 // added in Qt 4.8.0
 #ifndef QT_NO_ACCESSIBILITY
     QAccessible::updateAccessibility(this, 0, QAccessible::TextCaretMoved);
-    QAccessible::updateAccessibility(this, 0, QAccessible::TextInserted);
 #endif
 #endif
 
