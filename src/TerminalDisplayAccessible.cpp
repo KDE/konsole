@@ -120,10 +120,12 @@ QString TerminalDisplayAccessible::attributes(int offset, int* startOffset, int*
 
 QRect TerminalDisplayAccessible::characterRect(int offset, QAccessible2::CoordinateType coordType)
 {
-    // FIXME return the rect of a letter inside the display
-    Q_UNUSED(offset)
-    Q_UNUSED(coordType)
-    return QRect();
+    int row = offset / display()->_usedColumns;
+    int col = offset - row * display()->_usedColumns;
+    QPoint position = QPoint(col * display()->fontWidth() , row * display()->fontHeight());
+    if(coordType == QAccessible2::RelativeToScreen)
+        position = display()->mapToGlobal(position);
+    return QRect(position, QSize(display()->fontWidth(), display()->fontHeight()));
 }
 
 int TerminalDisplayAccessible::offsetAtPoint(const QPoint& point, QAccessible2::CoordinateType coordType)
