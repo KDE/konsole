@@ -58,6 +58,13 @@
 
 using namespace Konsole;
 
+static bool useTransparency()
+{
+    const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+    const bool compositingAvailable = KWindowSystem::compositingActive();
+    return compositingAvailable && args->isSet("transparency");
+}
+
 MainWindow::MainWindow()
     : KXmlGuiWindow()
     , _bookmarkHandler(0)
@@ -65,10 +72,12 @@ MainWindow::MainWindow()
     , _menuBarInitialVisibility(true)
     , _menuBarInitialVisibilityApplied(false)
 {
-    // It is userful to have translucent terminal area
-    setAttribute(Qt::WA_TranslucentBackground, true);
-    // But it is mostly annoying to have translucent menubar and tabbar
-    setAttribute(Qt::WA_NoSystemBackground, false);
+    if (useTransparency()) {
+        // It is userful to have translucent terminal area
+        setAttribute(Qt::WA_TranslucentBackground, true);
+        // But it is mostly annoying to have translucent menubar and tabbar
+        setAttribute(Qt::WA_NoSystemBackground, false);
+    }
 
     // create actions for menus
     setupActions();
