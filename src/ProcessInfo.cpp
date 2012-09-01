@@ -48,10 +48,10 @@
 #if defined(Q_OS_MAC)
 #include <sys/sysctl.h>
 #include <libproc.h>
-#ifdef HAVE_SYS_PROC_INFO_H
+#if defined(HAVE_SYS_PROC_INFO_H)
 #include <sys/proc_info.h>
 #endif
-#ifdef HAVE_SYS_PROC_H
+#if defined(HAVE_SYS_PROC_H)
 #include <sys/proc.h>
 #endif
 #include <kde_file.h>
@@ -946,7 +946,7 @@ private:
 };
 #endif
 
-#ifdef Q_OS_SOLARIS
+#if defined(Q_OS_SOLARIS)
 // The procfs structure definition requires off_t to be
 // 32 bits, which only applies if FILE_OFFSET_BITS=32.
 // Futz around here to get it to compile regardless,
@@ -1180,7 +1180,7 @@ QString SSHProcessInfo::format(const QString& input) const
 
 ProcessInfo* ProcessInfo::newInstance(int aPid, bool enableEnvironmentRead)
 {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX)
     return new LinuxProcessInfo(aPid, enableEnvironmentRead);
 #elif defined(Q_OS_SOLARIS)
     return new SolarisProcessInfo(aPid, enableEnvironmentRead);

@@ -134,7 +134,7 @@ bool Pty::flowControlEnabled() const
 
 void Pty::setUtf8Mode(bool enable)
 {
-#ifdef IUTF8 // XXX not a reasonable place to check it.
+#if defined(IUTF8) // XXX not a reasonable place to check it.
     _utf8 = enable;
 
     if (pty()->masterFd() >= 0) {

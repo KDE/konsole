@@ -156,7 +156,7 @@ bool KDE3ColorSchemeReader::readTitleLine(const QString& line, ColorScheme* sche
 ColorSchemeManager::ColorSchemeManager()
     : _haveLoadedAll(false)
 {
-#ifdef Q_WS_X11
+#if defined(Q_WS_X11)
     // Allow looking up colors in the X11 color database
     QColor::setAllowX11ColorNames(true);
 #endif

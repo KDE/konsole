@@ -53,7 +53,7 @@ void DBusTest::initTestCase()
         kFatal() << "Unable to exec a new Konsole : " << result;
 
     // Wait for above Konsole to finish starting
-#ifdef HAVE_USLEEP
+#if defined(HAVE_USLEEP)
     usleep(5 * 1000);
 #else
     sleep(5);
