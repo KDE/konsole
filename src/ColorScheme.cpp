@@ -32,7 +32,8 @@
 #include <KLocalizedString>
 #include <KConfigGroup>
 
-namespace {
+namespace
+{
 const int FGCOLOR_INDEX = 0;
 const int BGCOLOR_INDEX = 1;
 }
@@ -42,8 +43,7 @@ using namespace Konsole;
 // The following are almost IBM standard color codes, with some slight
 // gamma correction for the dim colors to compensate for bright X screens.
 // It contains the 8 ansiterm/xterm colors in 2 intensities.
-const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] =
-{
+const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] = {
     ColorEntry(QColor(0x00, 0x00, 0x00)), // Dfore
     ColorEntry(QColor(0xFF, 0xFF, 0xFF)), // Dback
     ColorEntry(QColor(0x00, 0x00, 0x00)), // Black
@@ -350,10 +350,10 @@ void ColorScheme::writeColorEntry(KConfig& config , int index) const
     const ColorEntry& entry = colorTable()[index];
 
     configGroup.writeEntry("Color", entry.color);
-    if ( configGroup.hasKey("Transparent") ) {
+    if (configGroup.hasKey("Transparent")) {
         configGroup.deleteEntry("Transparent");
     }
-    if ( configGroup.hasKey("Transparency") ) {
+    if (configGroup.hasKey("Transparency")) {
         configGroup.deleteEntry("Transparency");
     }
     if (entry.fontWeight != ColorEntry::UseCurrentFormat) {

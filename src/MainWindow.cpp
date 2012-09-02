@@ -61,7 +61,7 @@ using namespace Konsole;
 /* Normally it would be enough to just have this determined via the window
    manager. But there exist GPU drivers (NVIDIA) that have serious performance
    issues if transparency is enbled inside Konsole. The rest of the system
-   works fine. NVIDIA users might want to use --notransparency to work 
+   works fine. NVIDIA users might want to use --notransparency to work
    around such issues. */
 static bool useTransparency()
 {

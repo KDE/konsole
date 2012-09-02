@@ -58,12 +58,12 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
 
     // for a system wide profile, save the modified version as
     // a local profile under $KDEHOME
-    if ( profile->path().startsWith(systemDataLocation) ) {
+    if (profile->path().startsWith(systemDataLocation)) {
         return candidateLocalPath;
     }
 
     // for a local profile, use its existing path
-    if ( profile->path().startsWith(localDataLocation) ) {
+    if (profile->path().startsWith(localDataLocation)) {
         newPath = profile->path();
     } else {
         // for the ad-hoc profiles in non-standard places
@@ -72,7 +72,7 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
         //  * if its path is not writable for user, save it under $KDEHOME
         //
         QFileInfo fileInfo(profile->path());
-        if ( fileInfo.isWritable() ) {
+        if (fileInfo.isWritable()) {
             newPath = profile->path();
         } else {
             newPath = candidateLocalPath;

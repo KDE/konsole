@@ -117,7 +117,7 @@ bool ShellCommand::expandEnv(QString& text)
     // find and expand all environment variables beginning with '$'
     while ((dollarPos = text.indexOf(dollarChar, dollarPos)) != -1) {
         // if '$' is the last character, there is no way of expanding
-        if (dollarPos == text.length() -1 ) {
+        if (dollarPos == text.length() - 1) {
             break;
         }
 
@@ -134,7 +134,7 @@ bool ShellCommand::expandEnv(QString& text)
         }
 
         int endPos = dollarPos + 1;
-        Q_ASSERT( endPos < text.length());
+        Q_ASSERT(endPos < text.length());
         while (endPos < text.length() && isValidEnvCharacter(text.at(endPos))) {
             endPos++;
         }

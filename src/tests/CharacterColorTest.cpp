@@ -29,8 +29,7 @@
 
 using namespace Konsole;
 
-const ColorEntry CharacterColorTest::DefaultColorTable[TABLE_COLORS] =
-{
+const ColorEntry CharacterColorTest::DefaultColorTable[TABLE_COLORS] = {
     ColorEntry(QColor(0x00, 0x00, 0x00)), // Dfore
     ColorEntry(QColor(0xFF, 0xFF, 0xFF)), // Dback
     ColorEntry(QColor(0x00, 0x00, 0x00)), // Black
@@ -93,9 +92,9 @@ void CharacterColorTest::testColorSpaceSystem_data()
     QTest::addColumn<int>("colorValue");
     QTest::addColumn<QColor>("expected");
 
-    QTest::newRow("color 0") << 0 << DefaultColorTable[2+0].color;
-    QTest::newRow("color 1") << 1 << DefaultColorTable[2+1].color;
-    QTest::newRow("color 7") << 7 << DefaultColorTable[2+7].color;
+    QTest::newRow("color 0") << 0 << DefaultColorTable[2 + 0].color;
+    QTest::newRow("color 1") << 1 << DefaultColorTable[2 + 1].color;
+    QTest::newRow("color 7") << 7 << DefaultColorTable[2 + 7].color;
 }
 
 void CharacterColorTest::testColorSpaceSystem()

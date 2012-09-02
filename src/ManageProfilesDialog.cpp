@@ -389,7 +389,7 @@ bool ManageProfilesDialog::isProfileDeletable(Profile::Ptr profile) const
         if (fileInfo.exists()) {
             // never remove a system wide profile, no matter whether the
             // current user has enough permission
-            if ( profile->path().startsWith(systemDataLocation) ) {
+            if (profile->path().startsWith(systemDataLocation)) {
                 return false;
             }
 

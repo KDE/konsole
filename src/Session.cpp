@@ -292,8 +292,7 @@ ProcessInfo* Session::updateWorkingDirectory()
     ProcessInfo* process = getProcessInfo();
 
     const QString currentDir = process->validCurrentDir();
-    if (currentDir != _currentWorkingDir)
-    {
+    if (currentDir != _currentWorkingDir) {
         _currentWorkingDir = currentDir;
         emit currentDirectoryChanged(_currentWorkingDir);
     }

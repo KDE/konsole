@@ -126,7 +126,7 @@ bool shouldUseNewProcess()
     // provided by KUniqueApplication, we must use new process. Otherwise, there
     // will be no process for users to wait for finishing.
     const bool shouldRunInForeground = !kUniqueAppArgs->isSet("fork");
-    if ( shouldRunInForeground ) {
+    if (shouldRunInForeground) {
         return true;
     }
 

@@ -826,7 +826,7 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
         view->setKeyboardCursorShape(Enum::UnderlineCursor);
 
     // cursor color
-    if ( profile->useCustomCursorColor() ) {
+    if (profile->useCustomCursorColor()) {
         const QColor& cursorColor = profile->customCursorColor();
         view->setKeyboardCursorColor(cursorColor);
     } else {

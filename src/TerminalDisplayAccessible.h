@@ -30,7 +30,8 @@
 #include "ScreenWindow.h"
 #include "Screen.h"
 
-namespace Konsole {
+namespace Konsole
+{
 
 /**
  * Class implementing the QAccessibleInterface for the terminal display.
@@ -72,18 +73,15 @@ public:
 private:
     Konsole::TerminalDisplay *display();
 
-    inline int positionToOffset(int column, int line)
-    {
+    inline int positionToOffset(int column, int line) {
         return line * display()->_usedColumns + column;
     }
 
-    inline int lineForOffset(int offset)
-    {
+    inline int lineForOffset(int offset) {
         return offset / display()->_usedColumns;
     }
 
-    inline int columnForOffset(int offset)
-    {
+    inline int columnForOffset(int offset) {
         return offset % display()->_usedColumns;
     }
 

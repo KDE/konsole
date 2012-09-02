@@ -83,7 +83,7 @@ ProfileManager::ProfileManager()
 
     // if the hosting application of konsolepart does not specify its own
     // default profile, use the default profile of stand-alone Konsole.
-    if ( defaultProfileFileName.isEmpty() ) {
+    if (defaultProfileFileName.isEmpty()) {
         KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig("konsolerc");
         group = konsoleConfig->group("Desktop Entry");
         defaultProfileFileName = group.readEntry("DefaultProfile", "Shell.profile");
@@ -469,8 +469,7 @@ void ProfileManager::loadShortcuts()
 
         // if the file is not an absolute path, look it up
         QFileInfo fileInfo(profilePath);
-        if (!fileInfo.isAbsolute())
-        {
+        if (!fileInfo.isAbsolute()) {
             profilePath = KStandardDirs::locate("data", "konsole/" + profilePath);
         }
 
@@ -494,14 +493,12 @@ void ProfileManager::saveShortcuts()
         // take the profile name
         QFileInfo fileInfo(iter.value().profilePath);
         QString profileName;
-        if (fileInfo.isAbsolute())
-        {
+        if (fileInfo.isAbsolute()) {
             // Check to see if file is under KDE's data locations.  If not,
             // store full path.
             QString location = KGlobal::dirs()->locate("data",
                                "konsole/" + fileInfo.fileName());
-            if (location.isEmpty())
-            {
+            if (location.isEmpty()) {
                 profileName = iter.value().profilePath;
             } else  {
                 profileName = fileInfo.fileName();
@@ -579,14 +576,12 @@ void ProfileManager::saveFavorites()
         QFileInfo fileInfo(profile->path());
         QString profileName;
 
-        if (fileInfo.isAbsolute())
-        {
+        if (fileInfo.isAbsolute()) {
             // Check to see if file is under KDE's data locations.  If not,
             // store full path.
             QString location = KGlobal::dirs()->locate("data",
                                "konsole/" + fileInfo.fileName());
-            if (location.isEmpty())
-            {
+            if (location.isEmpty()) {
                 profileName = profile->path();
             } else {
                 profileName = fileInfo.fileName();
