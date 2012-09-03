@@ -130,7 +130,8 @@ void TerminalDisplay::setBackgroundColor(const QColor& color)
 
     update();
 }
-QColor TerminalDisplay::getBackgroundColor() const {
+QColor TerminalDisplay::getBackgroundColor() const
+{
     QPalette p = palette();
     return p.color(backgroundRole());
 }
@@ -261,7 +262,8 @@ void TerminalDisplay::setLineSpacing(uint i)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-namespace Konsole {
+namespace Konsole
+{
 /**
  * This function installs the factory function which lets Qt instanciate the QAccessibleInterface
  * for the TerminalDisplay.
@@ -762,9 +764,9 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
 }
 
 void TerminalDisplay::drawPrinterFriendlyTextFragment(QPainter& painter,
-                                       const QRect& rect,
-                                       const QString& text,
-                                       const Character* style)
+        const QRect& rect,
+        const QString& text,
+        const Character* style)
 {
     painter.save();
 
@@ -1424,15 +1426,15 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
 
             //paint text fragment
             if (_printerFriendly) {
-              drawPrinterFriendlyTextFragment(paint,
-                                              textArea,
-                                              unistr,
-                                              &_image[loc(x, y)]);
+                drawPrinterFriendlyTextFragment(paint,
+                                                textArea,
+                                                unistr,
+                                                &_image[loc(x, y)]);
             } else {
-              drawTextFragment(paint,
-                               textArea,
-                               unistr,
-                               &_image[loc(x, y)]);
+                drawTextFragment(paint,
+                                 textArea,
+                                 unistr,
+                                 &_image[loc(x, y)]);
             }
 
             _fixedFont = save__fixedFont;
@@ -1485,7 +1487,7 @@ void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
             // if cursor is blinking(hidden), blink it again to make it show
             blinkCursorEvent();
         }
-        Q_ASSERT( _cursorBlinking == false );
+        Q_ASSERT(_cursorBlinking == false);
     }
 }
 
@@ -1513,7 +1515,7 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
 
     // suppress further cursor blinking
     _blinkCursorTimer->stop();
-    Q_ASSERT( _cursorBlinking == false );
+    Q_ASSERT(_cursorBlinking == false);
 
     // if text is blinking (hidden), blink it again to make it shown
     if (_textBlinking)
@@ -1521,7 +1523,7 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
 
     // suppress further text blinking
     _blinkTextTimer->stop();
-    Q_ASSERT( _textBlinking == false );
+    Q_ASSERT(_textBlinking == false);
 }
 
 void TerminalDisplay::focusInEvent(QFocusEvent*)
@@ -1853,7 +1855,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             }
 
             if (_underlineLinks && _openLinksByDirectClick) {
-                Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
+                Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
                 if (spot && spot->type() == Filter::HotSpot::Link) {
                     QObject action;
                     action.setObjectName("open-action");
@@ -2267,9 +2269,9 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)
     if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier)) {
         const bool appendEnter = ev->modifiers() & Qt::ControlModifier;
 
-        if ( _middleClickPasteMode == Enum::PasteFromX11Selection ) {
+        if (_middleClickPasteMode == Enum::PasteFromX11Selection) {
             pasteFromX11Selection(appendEnter);
-        } else if ( _middleClickPasteMode == Enum::PasteFromClipboard ) {
+        } else if (_middleClickPasteMode == Enum::PasteFromClipboard) {
             pasteFromClipboard(appendEnter);
         } else {
             Q_ASSERT(false);
@@ -2783,7 +2785,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
             // if cursor is blinking(hidden), blink it again to show it
             blinkCursorEvent();
         }
-        Q_ASSERT( _cursorBlinking == false );
+        Q_ASSERT(_cursorBlinking == false);
     }
 
     emit keyPressedSignal(event);

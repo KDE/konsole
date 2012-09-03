@@ -29,11 +29,11 @@ using namespace Konsole;
 
 PrintOptions::PrintOptions(QWidget* aParent) : QWidget(aParent)
 {
-  setupUi(this);
+    setupUi(this);
 
-  KConfigGroup configGroup(KGlobal::config(), "PrintOptions");
-  printerFriendly->setChecked(configGroup.readEntry("PrinterFriendly", true));
-  scaleOutput->setChecked(configGroup.readEntry("ScaleOutput", true));
+    KConfigGroup configGroup(KGlobal::config(), "PrintOptions");
+    printerFriendly->setChecked(configGroup.readEntry("PrinterFriendly", true));
+    scaleOutput->setChecked(configGroup.readEntry("ScaleOutput", true));
 }
 
 PrintOptions::~PrintOptions()
@@ -42,7 +42,7 @@ PrintOptions::~PrintOptions()
 
 void PrintOptions::saveSettings()
 {
-  KConfigGroup configGroup(KGlobal::config(), "PrintOptions");
-  configGroup.writeEntry("PrinterFriendly", printerFriendly->isChecked());
-  configGroup.writeEntry("ScaleOutput", scaleOutput->isChecked());
+    KConfigGroup configGroup(KGlobal::config(), "PrintOptions");
+    configGroup.writeEntry("PrinterFriendly", printerFriendly->isChecked());
+    configGroup.writeEntry("ScaleOutput", scaleOutput->isChecked());
 }

@@ -379,7 +379,7 @@ void SessionController::updateWebSearchMenu()
     _webSearchMenu->setVisible(false);
     _webSearchMenu->menu()->clear();
 
-    if ( _selectedText.isEmpty() )
+    if (_selectedText.isEmpty())
         return;
 
     QString searchText = _selectedText;
@@ -398,8 +398,7 @@ void SessionController::updateWebSearchMenu()
 
             KAction* action = 0;
 
-            foreach(const QString& searchProvider, searchProviders)
-            {
+            foreach(const QString& searchProvider, searchProviders) {
                 action = new KAction(searchProvider, _webSearchMenu);
                 action->setIcon(KIcon(filterData.iconNameForPreferredSearchProvider(searchProvider)));
                 action->setData(filterData.queryForPreferredSearchProvider(searchProvider));
@@ -438,7 +437,8 @@ void SessionController::configureWebShortcuts()
     KToolInvocation::kdeinitExec("kcmshell4", QStringList() << "ebrowsing");
 }
 
-void SessionController::sendSignal(QAction* action) {
+void SessionController::sendSignal(QAction* action)
+{
     const int signal = action->data().value<int>();
     _session->sendSignal(signal);
 }
@@ -1073,8 +1073,7 @@ void SessionController::updateSearchFilter()
 
 void SessionController::searchBarEvent()
 {
-    if (_searchBar->isVisible())
-    {
+    if (_searchBar->isVisible()) {
         // refresh focus
         _searchBar->setVisible(true);
     } else {

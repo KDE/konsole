@@ -647,7 +647,7 @@ private:
                           const QString& text, const Character* style);
 
     void drawPrinterFriendlyTextFragment(QPainter& painter, const QRect& rect,
-                          const QString& text, const Character* style);
+                                         const QString& text, const Character* style);
     // draws the background for a text fragment
     // if useOpacitySetting is true then the color's alpha value will be set to
     // the display's transparency (set with setOpacity()), otherwise the background

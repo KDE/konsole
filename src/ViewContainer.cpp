@@ -403,8 +403,7 @@ void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
         _layout->insertWidget(-1, searchBar());
         _layout->insertLayout(-1, _tabBarLayout);
         _tabBar->setShape(QTabBar::RoundedSouth);
-    } else
-    {
+    } else {
         Q_ASSERT(false); // should never reach here
     }
 }
@@ -514,7 +513,7 @@ void TabbedViewContainer::startTabDrag(int tab)
     }
 }
 
-void TabbedViewContainer::querySourceIndex(const QDropEvent* event ,int& sourceIndex)
+void TabbedViewContainer::querySourceIndex(const QDropEvent* event, int& sourceIndex)
 {
     const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
 
@@ -530,7 +529,7 @@ void TabbedViewContainer::querySourceIndex(const QDropEvent* event ,int& sourceI
     sourceIndex = index;
 }
 
-void TabbedViewContainer::onMoveViewRequest(int index, const QDropEvent* event ,bool& success)
+void TabbedViewContainer::onMoveViewRequest(int index, const QDropEvent* event, bool& success)
 {
     const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
     emit moveViewRequest(index, droppedId, success);
