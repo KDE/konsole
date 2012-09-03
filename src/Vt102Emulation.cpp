@@ -759,6 +759,11 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case TY_CSI_PR('s', 1005) :         saveMode      (MODE_Mouse1005); break; //XTERM
     case TY_CSI_PR('r', 1005) :      restoreMode      (MODE_Mouse1005); break; //XTERM
 
+    case TY_CSI_PR('h', 1006) :          setMode      (MODE_Mouse1006); break; //XTERM
+    case TY_CSI_PR('l', 1006) :        resetMode      (MODE_Mouse1006); break; //XTERM
+    case TY_CSI_PR('s', 1006) :         saveMode      (MODE_Mouse1006); break; //XTERM
+    case TY_CSI_PR('r', 1006) :      restoreMode      (MODE_Mouse1006); break; //XTERM
+
     case TY_CSI_PR('h', 1015) :          setMode      (MODE_Mouse1015); break; //URXVT
     case TY_CSI_PR('l', 1015) :        resetMode      (MODE_Mouse1015); break; //URXVT
     case TY_CSI_PR('s', 1015) :         saveMode      (MODE_Mouse1015); break; //URXVT
@@ -894,18 +899,23 @@ void Vt102Emulation::reportAnswerBack()
 
 /*!
     `cx',`cy' are 1-based.
-    `eventType' indicates the button pressed (0-2)
-                or a general mouse release (3).
+    `cb' indicates the button pressed or released (0-2) or scroll event (4-5).
 
     eventType represents the kind of mouse action that occurred:
-        0 = Mouse button press or release
+        0 = Mouse button press
         1 = Mouse drag
+        2 = Mouse button release
 */
 
 void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
 {
     if (cx < 1 || cy < 1)
         return;
+
+    // With the exception of the 1006 mode, button release is encoded in cb.
+    // Note that if multiple extensions are enabled, the 1006 is used, so it's okay to check for only that.
+    if (eventType == 2 && !getMode(MODE_Mouse1006))
+        cb = 3;
 
     // normal buttons are passed as 0x20 + button,
     // mouse wheel (buttons 4,5) as 0x5c + button
@@ -918,7 +928,10 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
 
     char command[32];
     command[0] = '\0';
-    if (getMode(MODE_Mouse1015)) {
+    // Check the extensions in decreasing order of preference. Encoding the release event above assumes that 1006 comes first.
+    if (getMode(MODE_Mouse1006)) {
+        snprintf(command, sizeof(command), "\033[<%d;%d;%d%c", cb, cx, cy, eventType == 2 ? 'm' : 'M');
+    } else if (getMode(MODE_Mouse1015)) {
         snprintf(command, sizeof(command), "\033[%d;%d;%dM", cb + 0x20, cx, cy);
     } else if (getMode(MODE_Mouse1005)) {
         if (cx <= 2015 && cy <= 2015) {
@@ -1179,6 +1192,7 @@ void Vt102Emulation::resetModes()
     resetMode(MODE_Mouse1002);  saveMode(MODE_Mouse1002);
     resetMode(MODE_Mouse1003);  saveMode(MODE_Mouse1003);
     resetMode(MODE_Mouse1005);  saveMode(MODE_Mouse1005);
+    resetMode(MODE_Mouse1006);  saveMode(MODE_Mouse1006);
     resetMode(MODE_Mouse1015);  saveMode(MODE_Mouse1015);
 
     resetMode(MODE_AppScreen);  saveMode(MODE_AppScreen);

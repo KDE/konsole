@@ -2217,9 +2217,9 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
             //       applies here, too.
 
             if (!_mouseMarks && !(ev->modifiers() & Qt::ShiftModifier))
-                emit mouseSignal(3,  // release
+                emit mouseSignal(0,
                                  charColumn + 1,
-                                 charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+                                 charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 2);
         }
         _dragInfo.state = diNone;
     }
@@ -2227,10 +2227,10 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
     if (!_mouseMarks &&
             (ev->button() == Qt::RightButton || ev->button() == Qt::MidButton) &&
             !(ev->modifiers() & Qt::ShiftModifier)) {
-        emit mouseSignal(3,
+        emit mouseSignal(ev->button() == Qt::MidButton ? 1 : 2,
                          charColumn + 1,
                          charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
-                         0);
+                         2);
     }
 }
 
