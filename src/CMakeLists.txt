@@ -109,6 +109,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ViewSplitter.cpp
         Vt102Emulation.cpp
         ZModemDialog.cpp
+        PrintOptions.cpp
         konsole_wcwidth.cpp
         WindowSystemInfo.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
@@ -146,6 +147,7 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
                   RenameTabWidget.ui
                   HistorySizeDialog.ui
                   HistorySizeWidget.ui
+                  PrintOptions.ui
                   settings/GeneralSettings.ui
                   settings/TabBarSettings.ui
                  )

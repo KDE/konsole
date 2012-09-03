@@ -25,6 +25,9 @@
 #include <QApplication>
 #include <QMenu>
 #include <QtGui/QKeyEvent>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPainter>
 
 // KDE
 #include <KAction>
@@ -48,6 +51,8 @@
 #include <KUriFilter>
 #include <KStringHandler>
 #include <kcodecaction.h>
+#include <KConfigGroup>
+#include <KGlobal>
 
 // Konsole
 #include "EditProfileDialog.h"
@@ -64,6 +69,7 @@
 #include "TerminalDisplay.h"
 #include "SessionManager.h"
 #include "Enumeration.h"
+#include "PrintOptions.h"
 
 // for SaveHistoryTask
 #include <KFileDialog>
@@ -574,6 +580,10 @@ void SessionController::setupCommonActions()
 
     action = KStandardAction::saveAs(this, SLOT(saveHistory()), collection);
     action->setText(i18n("Save Output &As..."));
+
+    action = KStandardAction::print(this, SLOT(print_screen()), collection);
+    action->setText(i18n("&Print Screen..."));
+    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_P));
 
     action = collection->addAction("adjust-history", this, SLOT(showHistoryOptions()));
     action->setText(i18n("Adjust Scrollback..."));
@@ -1255,6 +1265,33 @@ void SessionController::scrollBackOptionsChanged(int mode, int lines)
         _session->setHistoryType(HistoryTypeFile());
         break;
     }
+}
+
+void SessionController::print_screen()
+{
+    QPrinter printer;
+
+    QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, _view);
+    PrintOptions* options = new PrintOptions();
+
+    dialog->setOptionTabs(QList<QWidget*>() << options);
+    dialog->setWindowTitle(i18n("Print Shell"));
+    connect(dialog, SIGNAL(accepted()), options, SLOT(saveSettings()));
+    if (dialog->exec() != QDialog::Accepted)
+        return;
+
+    QPainter painter;
+    painter.begin(&printer);
+
+    KConfigGroup configGroup(KGlobal::config(), "PrintOptions");
+
+    if (configGroup.readEntry("ScaleOutput", true)) {
+        double scale = qMin(printer.pageRect().width() / double(_view->width()),
+                            printer.pageRect().height() / double(_view->height()));
+        painter.scale(scale, scale);
+    }
+
+    _view->printContent(painter, configGroup.readEntry("PrinterFriendly", true));
 }
 
 void SessionController::saveHistory()

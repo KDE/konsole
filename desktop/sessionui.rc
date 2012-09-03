@@ -1,9 +1,11 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="21">
+<kpartgui name="session" version="22">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
+            <Separator group="session-operations"/>
+            <Action name="file_print" group="session-operations"/>
             <Separator group="session-operations"/>
             <Action name="open-browser" group="session-operations"/>
             <Action name="close-session" group="session-tab-operations"/>

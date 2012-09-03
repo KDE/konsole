@@ -66,4 +66,14 @@
       <default>PutNewTabAtTheEnd</default>
     </entry>
   </group>
+  <group name="PrintOptions">
+    <entry name="PrinterFriendly" type="Bool">
+      <label>Printer &amp;friendly mode (black text, no background)</label>
+      <default>true</default>
+    </entry>
+    <entry name="ScaleOutput" type="Bool">
+      <label>&amp;Scale output</label>
+      <default>true</default>
+    </entry>
+  </group>
 </kcfg>

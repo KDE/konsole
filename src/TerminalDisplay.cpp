@@ -130,6 +130,10 @@ void TerminalDisplay::setBackgroundColor(const QColor& color)
 
     update();
 }
+QColor TerminalDisplay::getBackgroundColor() const {
+    QPalette p = palette();
+    return p.color(backgroundRole());
+}
 void TerminalDisplay::setForegroundColor(const QColor& color)
 {
     _colorTable[DEFAULT_FORE_COLOR].color = color;
@@ -327,6 +331,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _filterChain(new TerminalImageFilterChain())
     , _cursorShape(Enum::BlockCursor)
     , _antialiasText(true)
+    , _printerFriendly(false)
     , _sessionController(0)
 {
     // terminal applications are not designed with Right-To-Left in mind,
@@ -756,6 +761,25 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
     painter.restore();
 }
 
+void TerminalDisplay::drawPrinterFriendlyTextFragment(QPainter& painter,
+                                       const QRect& rect,
+                                       const QString& text,
+                                       const Character* style)
+{
+    painter.save();
+
+    // Set the colors used to draw to black foreground and white
+    // background for printer friendly output when printing
+    Character print_style = *style;
+    print_style.foregroundColor = CharacterColor(COLOR_SPACE_RGB, 0x00000000);
+    print_style.backgroundColor = CharacterColor(COLOR_SPACE_RGB, 0xFFFFFFFF);
+
+    // draw text
+    drawCharacters(painter, rect, text, &print_style, false);
+
+    painter.restore();
+}
+
 void TerminalDisplay::setRandomSeed(uint randomSeed)
 {
     _randomSeed = randomSeed;
@@ -1135,6 +1159,27 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
     paintFilters(paint);
 }
 
+void TerminalDisplay::printContent(QPainter& painter, bool friendly)
+{
+    // Reinitialize the font with the printers paint device so the font
+    // measurement calculations will be done correctly
+    QFont savedFont = getVTFont();
+    QFont font(savedFont, painter.device());
+    painter.setFont(font);
+    setVTFont(font);
+
+    QRect rect(0, 0, size().width(), size().height());
+
+    _printerFriendly = friendly;
+    if (!friendly) {
+        drawBackground(painter, rect, getBackgroundColor(),
+                       true /* use opacity setting */);
+    }
+    drawContents(painter, rect);
+    _printerFriendly = false;
+    setVTFont(savedFont);
+}
+
 QPoint TerminalDisplay::cursorPosition() const
 {
     if (_screenWindow)
@@ -1378,12 +1423,17 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             textArea.moveTopLeft(textScale.inverted().map(textArea.topLeft()));
 
             //paint text fragment
-            drawTextFragment(paint,
-                             textArea,
-                             unistr,
-                             &_image[loc(x, y)]); //,
-            //0,
-            //!_isPrinting );
+            if (_printerFriendly) {
+              drawPrinterFriendlyTextFragment(paint,
+                                              textArea,
+                                              unistr,
+                                              &_image[loc(x, y)]);
+            } else {
+              drawTextFragment(paint,
+                               textArea,
+                               unistr,
+                               &_image[loc(x, y)]);
+            }
 
             _fixedFont = save__fixedFont;
 

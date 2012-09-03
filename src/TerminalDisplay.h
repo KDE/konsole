@@ -415,6 +415,8 @@ public:
     /** Returns the terminal screen section which is displayed in this widget.  See setScreenWindow() */
     ScreenWindow* screenWindow() const;
 
+    void printContent(QPainter& painter, bool friendly);
+
 public slots:
     /**
      * Scrolls current ScreenWindow
@@ -504,14 +506,20 @@ public slots:
     void bell(const QString& message);
 
     /**
+     * Gets the background of the display
+     * @see setBackgroundColor(), setColorTable(), setForegroundColor()
+     */
+    QColor getBackgroundColor() const;
+
+    /**
      * Sets the background of the display to the specified color.
-     * @see setColorTable(), setForegroundColor()
+     * @see setColorTable(), getBackgroundColor(), setForegroundColor()
      */
     void setBackgroundColor(const QColor& color);
 
     /**
      * Sets the text of the display to the specified color.
-     * @see setColorTable(), setBackgroundColor()
+     * @see setColorTable(), setBackgroundColor(), getBackgroundColor()
      */
     void setForegroundColor(const QColor& color);
 
@@ -630,11 +638,15 @@ private:
 
     // divides the part of the display specified by 'rect' into
     // fragments according to their colors and styles and calls
-    // drawTextFragment() to draw the fragments
+    // drawTextFragment() or drawPrinterFriendlyTextFragment()
+    // to draw the fragments
     void drawContents(QPainter& painter, const QRect& rect);
     // draws a section of text, all the text in this section
     // has a common color and style
     void drawTextFragment(QPainter& painter, const QRect& rect,
+                          const QString& text, const Character* style);
+
+    void drawPrinterFriendlyTextFragment(QPainter& painter, const QRect& rect,
                           const QString& text, const Character* style);
     // draws the background for a text fragment
     // if useOpacitySetting is true then the color's alpha value will be set to
@@ -816,6 +828,8 @@ private:
     InputMethodData _inputMethodData;
 
     bool _antialiasText;   // do we antialias or not
+
+    bool _printerFriendly; // are we currently painting to a printer in black/white mode
 
     //the delay in milliseconds between redrawing blinking text
     static const int TEXT_BLINK_DELAY = 500;
