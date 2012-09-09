@@ -335,6 +335,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _antialiasText(true)
     , _printerFriendly(false)
     , _sessionController(0)
+    , _trimTrailingSpaces(false)
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
@@ -2590,7 +2591,7 @@ void TerminalDisplay::copyToX11Selection()
     if (!_screenWindow)
         return;
 
-    QString text = _screenWindow->selectedText(_preserveLineBreaks);
+    QString text = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces);
     if (text.isEmpty())
         return;
 
@@ -2605,7 +2606,7 @@ void TerminalDisplay::copyToClipboard()
     if (!_screenWindow)
         return;
 
-    QString text = _screenWindow->selectedText(_preserveLineBreaks);
+    QString text = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces);
     if (text.isEmpty())
         return;
 

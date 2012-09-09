@@ -444,15 +444,19 @@ public:
      * Convenience method.  Returns the currently selected text.
      * @param preserveLineBreaks Specifies whether new line characters should
      * be inserted into the returned text at the end of each terminal line.
+     * @param trimTrailingSpaces Specifies whether trailing spaces should be
+     * trimmed in the returned text.
      */
-    QString selectedText(bool preserveLineBreaks) const;
+    QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false) const;
 
     /**
      * Convenience method.  Returns the text from @p startIndex to @p endIndex.
      * @param preserveLineBreaks Specifies whether new line characters should
      * be inserted into the returned text at the end of each terminal line.
+     * @param trimTrailingSpaces Specifies whether trailing spaces should be
+     * trimmed in the returned text.
      */
-    QString text(int startIndex, int endIndex, bool preserveLineBreaks) const;
+    QString text(int startIndex, int endIndex, bool preserveLineBreaks, bool trimTrailingSpaces = false) const;
 
     /**
      * Copies part of the output to a stream.
@@ -470,11 +474,12 @@ public:
      * @param decoder A decoder which converts terminal characters into text.
      * PlainTextDecoder is the most commonly used decoder which converts characters
      * into plain text with no formatting.
-     * @param preserveLineBreaks Specifies whether new line characters should
-     * be inserted into the returned text at the end of each terminal line.
+     * @param trimTrailingSpaces Specifies whether trailing spaces should be
+     * trimmed in the returned text.
      */
     void writeSelectionToStream(TerminalCharacterDecoder* decoder , bool
-                                preserveLineBreaks = true) const;
+                                preserveLineBreaks = true,
+                                bool trimTrailingSpaces = false) const;
 
     /**
      * Checks if the text between from and to is inside the current
@@ -593,7 +598,8 @@ private:
                           int count,
                           TerminalCharacterDecoder* decoder,
                           bool appendNewLine,
-                          bool preserveLineBreaks) const;
+                          bool preserveLineBreaks,
+                          bool trimTrailingSpaces) const;
 
     //fills a section of the screen image with the character 'c'
     //the parameters are specified as offsets from the start of the screen image.
@@ -625,7 +631,7 @@ private:
     // copies text from 'startIndex' to 'endIndex' to a stream
     // startIndex and endIndex are positions generated using the loc(x,y) macro
     void writeToStream(TerminalCharacterDecoder* decoder, int startIndex,
-                       int endIndex, bool preserveLineBreaks = true) const;
+                       int endIndex, bool preserveLineBreaks = true, bool trimTrailingSpaces = false) const;
     // copies 'count' lines from the screen buffer into 'dest',
     // starting from 'startLine', where 0 is the first line in the screen buffer
     void copyFromScreen(Character* dest, int startLine, int count) const;

@@ -992,6 +992,10 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
             SLOT(toggleCopyTextToClipboard(bool))
         },
         {
+            _ui->trimTrailingSpacesButton , Profile::TrimTrailingSpacesInSelectedText,
+            SLOT(toggleTrimTrailingSpacesInSelectedText(bool))
+        },
+        {
             _ui->openLinksByDirectClickButton , Profile::OpenLinksByDirectClickEnabled,
             SLOT(toggleOpenLinksByDirectClick(bool))
         },
@@ -1133,6 +1137,10 @@ void EditProfileDialog::toggleOpenLinksByDirectClick(bool enable)
 void EditProfileDialog::toggleCopyTextToClipboard(bool enable)
 {
     updateTempProfileProperty(Profile::AutoCopySelectedText, enable);
+}
+void EditProfileDialog::toggleTrimTrailingSpacesInSelectedText(bool enable)
+{
+    updateTempProfileProperty(Profile::TrimTrailingSpacesInSelectedText, enable);
 }
 void EditProfileDialog::pasteFromX11Selection()
 {

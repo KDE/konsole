@@ -205,6 +205,8 @@ public:
         CtrlRequiredForDrag,
         /** (bool) If true, automatically copy selected text into the clipboard */
         AutoCopySelectedText,
+        /** (bool) If true, trailing spaces are trimmed in selected text */
+        TrimTrailingSpacesInSelectedText,
         /** (bool) If true, middle mouse button pastes from X Selection */
         PasteFromSelectionEnabled,
         /** (bool) If true, middle mouse button pastes from Clipboard */

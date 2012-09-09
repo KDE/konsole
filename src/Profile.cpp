@@ -107,6 +107,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { OpenLinksByDirectClickEnabled , "OpenLinksByDirectClickEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { CtrlRequiredForDrag, "CtrlRequiredForDrag" , INTERACTION_GROUP , QVariant::Bool }
     , { AutoCopySelectedText , "AutoCopySelectedText" , INTERACTION_GROUP , QVariant::Bool }
+    , { TrimTrailingSpacesInSelectedText , "TrimTrailingSpacesInSelectedText" , INTERACTION_GROUP , QVariant::Bool }
     , { PasteFromSelectionEnabled , "PasteFromSelectionEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { PasteFromClipboardEnabled , "PasteFromClipboardEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { MiddleClickPasteMode, "MiddleClickPasteMode" , INTERACTION_GROUP , QVariant::Int }
@@ -173,6 +174,7 @@ FallbackProfile::FallbackProfile()
     setProperty(OpenLinksByDirectClickEnabled, false);
     setProperty(CtrlRequiredForDrag, true);
     setProperty(AutoCopySelectedText, false);
+    setProperty(TrimTrailingSpacesInSelectedText, false);
     setProperty(PasteFromSelectionEnabled, true);
     setProperty(PasteFromClipboardEnabled, false);
     setProperty(MiddleClickPasteMode, Enum::PasteFromX11Selection);

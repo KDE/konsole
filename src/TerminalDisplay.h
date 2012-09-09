@@ -196,6 +196,19 @@ public:
         return _openLinksByDirectClick;
     }
 
+    /**
+     * Sets whether trailing spaces should be trimmed in selected text.
+     */
+    void setTrimTrailingSpaces(bool enabled) {
+        _trimTrailingSpaces = enabled;
+    }
+
+    /**
+     * Returns true if trailing spaces should be trimmed in selected text.
+     */
+    bool trimTrailingSpaces() const {
+        return _trimTrailingSpaces;
+    }
 
     void setLineSpacing(uint);
     uint lineSpacing() const;
@@ -841,6 +854,9 @@ private:
     static const int DEFAULT_TOP_MARGIN = 1;
 
     SessionController* _sessionController;
+
+    bool _trimTrailingSpaces;   // trim trailing spaces in selected text
+
     friend class TerminalDisplayAccessible;
 };
 

@@ -785,6 +785,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="trimTrailingSpacesButton">
+            <property name="toolTip">
+             <string>Trim trailing spaces in selected text, useful in some instances</string>
+            </property>
+            <property name="text">
+             <string>Trim trailing spaces</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="horizontalSpacer_5">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>

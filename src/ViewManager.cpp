@@ -806,6 +806,7 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     view->setControlDrag(profile->property<bool>(Profile::CtrlRequiredForDrag));
     view->setBidiEnabled(profile->bidiRenderingEnabled());
     view->setLineSpacing(profile->lineSpacing());
+    view->setTrimTrailingSpaces(profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText));
 
     view->setOpenLinksByDirectClick(profile->property<bool>(Profile::OpenLinksByDirectClickEnabled));
 

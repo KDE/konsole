@@ -222,8 +222,9 @@ public:
      * Returns the text which is currently selected.
      *
      * @param preserveLineBreaks See Screen::selectedText()
+     * @param trimTrailingSpaces See Screen::selectedText()
      */
-    QString selectedText(bool preserveLineBreaks) const;
+    QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false) const;
 
 public slots:
     /**
