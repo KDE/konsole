@@ -19,6 +19,9 @@ Color=255,84,84
 [Color2]
 Color=24,178,24
 
+[Color2Intense]
+Color=84,255,84
+
 [Color3]
 Color=178,104,24
 
