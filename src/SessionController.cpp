@@ -428,7 +428,7 @@ void SessionController::handleWebShortcutAction()
 
     if (KUriFilter::self()->filterUri(filterData, QStringList() << "kurisearchfilter")) {
         const KUrl& url = filterData.uri();
-        new KRun(url, QApplication::activeWindow(), 0, true, true);
+        new KRun(url, QApplication::activeWindow());
     }
 }
 
