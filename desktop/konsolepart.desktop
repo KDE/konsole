@@ -10,6 +10,8 @@ X-KDE-BrowserView-Toggable=true
 X-KDE-BrowserView-ToggableView-Orientation=horizontal
 X-KDE-BrowserView-FollowActive=true
 
+X-KDE-AuthorizeAction=shell_access
+
 Name=Terminal Emulator
 Name[af]=Terminaal Emulasie
 Name[ar]=محاكي الطرفية
@@ -101,4 +103,3 @@ Name[xh]=Umzami kulinganisela ngokulinganayo Wendlela yesiphelo
 Name[x-test]=xxTerminal Emulatorxx
 Name[zh_CN]=终端仿真器
 Name[zh_TW]=終端機模擬程式
-X-KDE-AuthorizeAction=shell_access
