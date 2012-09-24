@@ -37,5 +37,4 @@ fi
 
 # Use printf since echo is not portable
 # http://pubs.opengroup.org/onlinepubs/009695399/utilities/echo.html
-printf "\033]50;%s\a" $1 
-
+printf "\033]50;%s\a" "$1"
