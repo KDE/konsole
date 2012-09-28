@@ -699,7 +699,7 @@ void SessionController::setupExtraActions()
     action->setShortcut(KShortcut(Qt::CTRL | Qt::Key_Minus));
 
     // Send signal
-    KSelectAction* sendSignalActions = collection->add<KSelectAction>("send_signal");
+    KSelectAction* sendSignalActions = collection->add<KSelectAction>("send-signal");
     sendSignalActions->setText(i18n("Send Signal"));
     connect(sendSignalActions, SIGNAL(triggered(QAction*)), this, SLOT(sendSignal(QAction*)));
 

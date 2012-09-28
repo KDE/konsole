@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="22">
+<kpartgui name="session" version="23">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
@@ -13,11 +13,11 @@
         <Menu name="edit">
             <Action name="edit_copy" group="session-edit-operations"/>
             <Action name="edit_paste" group="session-edit-operations"/>
-            <Action name="send_signal" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>
             <Action name="select-all" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>
             <Action name="copy-input-to" group="session-edit-operations"/>
+            <Action name="send-signal" group="session-edit-operations"/>
             <Action name="rename-session" group="session-edit-operations"/>
             <Action name="zmodem-upload" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>
