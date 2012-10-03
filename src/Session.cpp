@@ -466,8 +466,6 @@ void Session::run()
         _shellProcess->setInitialWorkingDirectory(_initialWorkingDir);
     } else {
         _shellProcess->setInitialWorkingDirectory(QDir::currentPath());
-        // for all following invocation, use $HOME as fallback
-        QDir::setCurrent(QDir::homePath());
     }
 
     _shellProcess->setFlowControlEnabled(_flowControlEnabled);
