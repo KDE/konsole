@@ -5,7 +5,6 @@ TryExec=konsole
 Icon=utilities-terminal
 X-DocPath=konsole/index.html
 Terminal=false
-Path=$HOME
 X-KDE-StartupNotify=true
 
 Name=Konsole
