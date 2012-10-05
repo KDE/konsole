@@ -4,7 +4,6 @@ Exec=konsole
 TryExec=konsole
 Icon=utilities-terminal
 Terminal=false
-Path=$HOME
 Categories=Qt;KDE;System;TerminalEmulator;
 X-DocPath=konsole/index.html
 X-KDE-StartupNotify=true
