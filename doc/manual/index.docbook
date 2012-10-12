@@ -9,7 +9,7 @@
 
 <book id="manual" lang="&language;">
 
-<book id="manual"info>
+<bookinfo>
 <title>The &konsole; Handbook</title>
 <authorgroup>
 <author>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
