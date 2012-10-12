@@ -7,9 +7,9 @@
 <!ENTITY % addindex "IGNORE">
 ]>
 
-<book lang="&language;">
+<book id="manual" lang="&language;">
 
-<bookinfo>
+<book id="manual"info>
 <title>The &konsole; Handbook</title>
 <authorgroup>
 <author>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
