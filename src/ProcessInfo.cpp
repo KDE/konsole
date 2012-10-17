@@ -57,12 +57,14 @@
 #include <kde_file.h>
 #endif
 
-#if defined(Q_OS_FREEBSD)
+#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
 #include <sys/sysctl.h>
 #include <sys/types.h>
 #include <sys/user.h>
 #include <sys/syslimits.h>
-#include <libutil.h>
+#   if defined(Q_OS_FREEBSD)
+#   include <libutil.h>
+#   endif
 #endif
 
 using namespace Konsole;
@@ -727,6 +729,141 @@ private:
 };
 #endif
 
+#if defined(Q_OS_OPENBSD)
+class OpenBSDProcessInfo : public UnixProcessInfo
+{
+public:
+    OpenBSDProcessInfo(int aPid, bool readEnvironment) :
+        UnixProcessInfo(aPid, readEnvironment) {
+    }
+
+private:
+    virtual bool readProcInfo(int aPid) {
+        int      managementInfoBase[6];
+        size_t   mibLength;
+        struct kinfo_proc*  kInfoProc;
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC;
+        managementInfoBase[2] = KERN_PROC_PID;
+        managementInfoBase[3] = aPid;
+        managementInfoBase[4] = sizeof(struct kinfo_proc);
+        managementInfoBase[5] = 1;
+
+        if (::sysctl(managementInfoBase, 6, NULL, &mibLength, NULL, 0) == -1) {
+            kWarning() << "first sysctl() call failed with code" << errno;
+            return false;
+        }
+
+        kInfoProc = (struct kinfo_proc*)malloc(mibLength);
+
+        if (::sysctl(managementInfoBase, 6, kInfoProc, &mibLength, NULL, 0) == -1) {
+            kWarning() << "second sysctl() call failed with code" << errno;
+            free(kInfoProc);
+            return false;
+        }
+
+        setName(kInfoProc->p_comm);
+        setPid(kInfoProc->p_pid);
+        setParentPid(kInfoProc->p_ppid);
+        setForegroundPid(kInfoProc->p_tpgid);
+        setUserId(kInfoProc->p_uid);
+        setUserName(kInfoProc->p_login);
+
+        free(kInfoProc);
+        return true;
+    }
+
+    char** readProcArgs(int aPid, int whatMib) {
+        void*   buf = NULL;
+        void*   nbuf;
+        size_t  len = 4096;
+        int     rc = -1;
+        int     managementInfoBase[4];
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC_ARGS;
+        managementInfoBase[2] = aPid;
+        managementInfoBase[3] = whatMib;
+
+        do {
+            len *= 2;
+            nbuf = realloc(buf, len);
+            if (nbuf == NULL) {
+                break;
+            }
+
+            buf = nbuf;
+            rc = ::sysctl(managementInfoBase, 4, buf, &len, NULL, 0);
+            kWarning() << "sysctl() call failed with code" << errno;
+        } while (rc == -1 && errno == ENOMEM);
+
+        if (nbuf == NULL || rc == -1) {
+            free(buf);
+            return NULL;
+        }
+
+        return (char**)buf;
+    }
+
+    virtual bool readArguments(int aPid) {
+        char**  argv;
+
+        argv = readProcArgs(aPid, KERN_PROC_ARGV);
+        if (argv == NULL) {
+            return false;
+        }
+
+        for (char** p = argv; *p != NULL; p++) {
+            addArgument(QString(*p));
+        }
+        free(argv);
+        return true;
+    }
+
+    virtual bool readEnvironment(int aPid) {
+        char**  envp;
+        char*   eqsign;
+
+        envp = readProcArgs(aPid, KERN_PROC_ENV);
+        if (envp == NULL) {
+            return false;
+        }
+
+        for (char **p = envp; *p != NULL; p++) {
+            eqsign = strchr(*p, '=');
+            if (eqsign == NULL || eqsign[1] == '\0') {
+                continue;
+            }
+            *eqsign = '\0';
+            addEnvironmentBinding(QString((const char *)p),
+                QString((const char *)eqsign + 1));
+        }
+        free(envp);
+        return true;
+    }
+
+    virtual bool readCurrentDir(int aPid) {
+        char    buf[PATH_MAX];
+        int     managementInfoBase[3];
+        size_t  len;
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC_CWD;
+        managementInfoBase[2] = aPid;
+
+        len = sizeof(buf);
+        if (::sysctl(managementInfoBase, 3, buf, &len, NULL, 0) == -1) {
+            kWarning() << "sysctl() call failed with code" << errno;
+            return false;
+        }
+
+        setCurrentDir(buf);
+        return true;
+    }
+};
+#endif
+
 #if defined(Q_OS_MAC)
 class MacProcessInfo : public UnixProcessInfo
 {
@@ -1051,6 +1188,8 @@ ProcessInfo* ProcessInfo::newInstance(int aPid, bool enableEnvironmentRead)
     return new MacProcessInfo(aPid, enableEnvironmentRead);
 #elif defined(Q_OS_FREEBSD)
     return new FreeBSDProcessInfo(aPid, enableEnvironmentRead);
+#elif defined(Q_OS_OPENBSD)
+    return new OpenBSDProcessInfo(aPid, enableEnvironmentRead);
 #else
     return new NullProcessInfo(aPid, enableEnvironmentRead);
 #endif
