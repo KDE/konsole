@@ -329,6 +329,8 @@ private:
 
     QString _selectedText;
 
+    QAction* _showMenuAction;
+
     static QSet<SessionController*> _allControllers;
     static int _lastControllerId;
     static const KIcon _activityIcon;

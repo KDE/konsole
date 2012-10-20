@@ -113,6 +113,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
     , _keepIconUntilInteraction(false)
+    , _showMenuAction(0)
     , _isSearchBarEnabled(false)
 {
     Q_ASSERT(session);
@@ -533,7 +534,7 @@ IncrementalSearchBar* SessionController::searchBar() const
 
 void SessionController::setShowMenuAction(QAction* action)
 {
-    actionCollection()->addAction("show-menubar", action);
+    _showMenuAction = action;
 }
 
 void SessionController::setupCommonActions()
@@ -1403,6 +1404,14 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         updateWebSearchMenu();
 
         _preventClose = true;
+
+        if (_showMenuAction) {
+            if (  _showMenuAction->isChecked() ) {
+                popup->removeAction( _showMenuAction);
+            } else {
+                popup->insertAction(_switchProfileMenu, _showMenuAction);
+            }
+        }
 
         QAction* chosen = popup->exec(_view->mapToGlobal(position));
 

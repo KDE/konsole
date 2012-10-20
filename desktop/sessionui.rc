@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="23">
+<kpartgui name="session" version="24">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
@@ -50,8 +50,6 @@
         <Action name="set-encoding"/>
         <Action name="clear-history"/>
         <Action name="adjust-history"/>
-        <Separator/>
-        <Action name="show-menubar"/>
         <Separator/>
         <Action name="switch-profile"/>
         <Action name="edit-current-profile"/>
