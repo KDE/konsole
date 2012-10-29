@@ -1149,6 +1149,12 @@ This is needed for some scripts and commands to work as expected:
 
 </para></listitem>
 
+<listitem>
+<para>Some fonts might be unavailable for usage in &konsole;, although they are available in other applications. That doesn't mean there is a bug in &konsole;. &konsole; requires monospaced fonts to provide the best visual result, so it asks &Qt; to only list monospaced fonts.</para>
+
+<para>If you are sure a font is really monospaced but unavailable in &konsole;, then please report the problem to <ulink url="https://bugreports.qt-project.org/">&Qt;</ulink>.</para>
+</listitem>
+
 <listitem><para>
 In KDE3, each tab had its own process ID.  However, in KDE4, all the tabs use the same process ID.  This has the side-effect that if one tab's process has issues, all the other tabs may experience issues as well.
 </para>
