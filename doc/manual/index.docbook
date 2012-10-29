@@ -871,7 +871,7 @@ For more information, please visit
 <listitem><para><action>Create tabs</action> as specified in the given tabs configuration file.
 </para>
 <note><para>The file has one tab per line in the following format:</para><para>
-title: This is the title;; command: run me
+title: PUT A TITLE ;; command: PUT A COMMAND ;; workdir: PUT A DIRECOTRY
 </para></note>
 </listitem>
 </varlistentry>
