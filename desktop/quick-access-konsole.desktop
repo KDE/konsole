@@ -1,5 +1,6 @@
 [Desktop Entry]
 Type=Application
+TryExec=konsole
 Exec=konsole --background-mode
 Icon=utilities-terminal
 X-DocPath=konsole/index.html

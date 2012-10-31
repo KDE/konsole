@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
-Icon=utilities-terminal
 X-KDE-ServiceTypes=KParts/ReadOnlyPart,Browser/View,inode/directory,TerminalEmulator
+Icon=utilities-terminal
 
 X-KDE-Library=libkonsolepart
 X-KDE-BrowserView-AllowAsDefault=false

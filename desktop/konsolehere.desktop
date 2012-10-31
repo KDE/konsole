@@ -1,10 +1,12 @@
 [Desktop Entry]
 Type=Service
-X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+MimeType=inode/directory;
 Actions=openTerminalHere;
 X-KDE-AuthorizeAction=shell_access
 
 [Desktop Action openTerminalHere]
+TryExec=konsole
 Exec=konsole --workdir %f
 Icon=utilities-terminal
 
