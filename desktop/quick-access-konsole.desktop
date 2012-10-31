@@ -3,7 +3,6 @@ Type=Application
 Exec=konsole --background-mode
 Icon=utilities-terminal
 X-DocPath=konsole/index.html
-MimeType=application/x-konsole;
 Terminal=false
 X-KDE-StartupNotify=false
 Categories=Qt;KDE;System;TerminalEmulator;
