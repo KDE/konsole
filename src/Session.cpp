@@ -380,6 +380,11 @@ QString Session::checkProgram(const QString& program)
     if (exec.isEmpty())
         return QString();
 
+    QFileInfo info(exec);
+    if (info.isAbsolute() && info.exists() && info.isExecutable()) {
+        return exec;
+    }
+
     exec = KRun::binaryName(exec, false);
     exec = KShell::tildeExpand(exec);
     QString pexec = KStandardDirs::findExe(exec);
