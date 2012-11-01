@@ -36,7 +36,6 @@
 #include "ProfileManager.h"
 #include "MainWindow.h"
 #include "Session.h"
-#include "ShellCommand.h"
 
 using namespace Konsole;
 
@@ -399,24 +398,17 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
 
     // run a custom command
     if (args->isSet("e")) {
-        QString commandExec;
+        QString commandExec = args->getOption("e");
         QStringList commandArguments;
+
+        //commandArguments << args->getOption("e");
+        commandArguments << commandExec;
 
         // Note: KCmdLineArgs::count() return the number of arguments
         // that aren't options.
-        if (args->count() > 0) {   // example: konsole -e man ls
-            commandExec = args->getOption("e");
+        for ( int i = 0 ; i < args->count() ; i++ )
+            commandArguments << args->arg(i);
 
-            commandArguments << commandExec;
-            for (int i = 0 ; i < args->count() ; i++)
-                commandArguments << args->arg(i);
-
-        } else { // example: konsole -e "man ls"
-            ShellCommand shellCommand(args->getOption("e"));
-
-            commandExec = shellCommand.command();
-            commandArguments = shellCommand.arguments();
-        }
 
         if (commandExec.startsWith(QLatin1String("./")))
             commandExec = QDir::currentPath() + commandExec.mid(1);
