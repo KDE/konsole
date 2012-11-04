@@ -450,7 +450,7 @@ public:
     QString format(const QString& input) const;
 
 private:
-    const ProcessInfo& _process;
+
     QString _user;
     QString _host;
     QString _port;
