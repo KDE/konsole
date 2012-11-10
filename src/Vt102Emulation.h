@@ -128,7 +128,7 @@ private:
     void resetModes();
 
     void resetTokenizer();
-#define MAX_TOKEN_LENGTH 80
+#define MAX_TOKEN_LENGTH 256 // Max length of tokens (e.g. window title)
     void addToCurrentToken(int cc);
     int tokenBuffer[MAX_TOKEN_LENGTH]; //FIXME: overflow?
     int tokenBufferPos;
