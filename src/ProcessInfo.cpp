@@ -36,7 +36,6 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QTextStream>
 #include <QtCore/QStringList>
-#include <QtCore/QHash>
 #include <QtNetwork/QHostInfo>
 
 // KDE
@@ -1031,92 +1030,6 @@ private:
     }
 };
 
-QHash<QString,QString> parseSSHCommand(const QVector<QString>& tokens)
-{
-    // SSH options
-    // these are taken from the SSH manual ( accessed via 'man ssh' )
-
-    // options which take no arguments
-    static const QString noArgumentOptions("1246AaCfgKkMNnqsTtVvXxYy");
-    // options which take one argument
-    static const QString singleArgumentOptions("bcDeFIiLlmOopRSWw");
-
-    QHash<QString,QString> results;
-
-    // find the username, host, port and remote command
-    //
-    // the username & host is assumed to be the first argument which :
-    //
-    //   * is not an option (does not start with a dash '-' character )
-    //   * is not an argument belong to the previous option.
-    //
-    // the remote command, if specified, is assumed to be the argument following
-    // the username and host
-    //
-    // note that we skip the argument at index 0 because that is the
-    // program name ( expected to be 'ssh' in this case )
-
-    int i = 1;
-    while (i < tokens.count() && tokens[i].startsWith('-') ) {
-
-        const QChar optionChar = (tokens[i].length() > 1) ? tokens[i][1] : '\0';
-        const QString optionKey = QString("-%1").arg(optionChar);
-
-        if (noArgumentOptions.contains(optionChar)) {
-            results[optionKey] = "set";
-            i += 1;
-        } else {
-            // This  assert might fail when openssh adds option like "--port"
-            Q_ASSERT(singleArgumentOptions.contains(optionChar));
-
-            // for example: -p2222 or -p 2222 ?
-            const bool optionArgumentCombined =  tokens[i].length() > 2;
-
-            QString optionArgument;
-            if (optionArgumentCombined) {
-                optionArgument = tokens[i].mid(2);
-                i += 1;
-            } else {
-                // Verify correct # arguments are given
-                if ((i + 1) < tokens.count()) {
-                    optionArgument = tokens[i + 1];
-                }
-                i += 2;
-            }
-            results[optionKey] =  optionArgument;
-        }
-    }
-
-    // check to see if only the hostname is specified, or whether
-    // both username and host are specified ( in which case they
-    // are separated by an '@' character:  username@host )
-
-    const QString& userAndHostToken = tokens[i++];
-    const int separatorPosition = userAndHostToken.indexOf('@');
-    if (separatorPosition != -1) {
-        // both username and host specified
-        results["user"] = userAndHostToken.left(separatorPosition);
-        results["host"] = userAndHostToken.mid(separatorPosition + 1);
-    } else {
-        // only the host specified
-        results["host"] = userAndHostToken;
-    }
-
-    // there are also other ways to specify username and port
-    if ( results.contains("-l") )
-        results["user"] = results["-l"] ;
-    if ( results.contains("-p") )
-        results["port"] = results["-p"] ;
-
-    QStringList remoteCommand;
-    while ( i < tokens.count() ) {
-        remoteCommand << tokens[i++];
-    }
-    results["command"] = remoteCommand.join(QString(' '));
-
-    return results;
-}
-
 SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     : _process(process)
 {
@@ -1125,32 +1038,98 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     // check that this is a SSH process
     const QString& name = _process.name(&ok);
 
-    if (!ok) {
-        kWarning() << "Could not read process info";
+    if (!ok || name != "ssh") {
+        if (!ok)
+            kWarning() << "Could not read process info";
+        else
+            kWarning() << "Process is not a SSH process";
+
         return;
     }
 
-    if (name != "ssh") {
-        kWarning() << "Process is not a SSH process";
-        return;
-    }
-
-    // read its whole cmdlind arguments
+    // read arguments
     const QVector<QString>& args = _process.arguments(&ok);
 
-    if (!ok) {
-        kWarning() << "Could not read process cmdline arguments";
+    // SSH options
+    // these are taken from the SSH manual ( accessed via 'man ssh' )
+
+    // options which take no arguments
+    static const QString noArgumentOptions("1246AaCfgKkMNnqsTtVvXxYy");
+    // options which take one argument
+    static const QString singleArgumentOptions("bcDeFIiLlmOopRSWw");
+
+    if (ok) {
+        // find the username, host and command arguments
+        //
+        // the username/host is assumed to be the first argument
+        // which is not an option
+        // ( ie. does not start with a dash '-' character )
+        // or an argument to a previous option.
+        //
+        // the command, if specified, is assumed to be the argument following
+        // the username and host
+        //
+        // note that we skip the argument at index 0 because that is the
+        // program name ( expected to be 'ssh' in this case )
+        for (int i = 1 ; i < args.count() ; i++) {
+            // If this one is an option ...
+            // Most options together with its argument will be skipped.
+            if (args[i].startsWith('-')) {
+                const QChar optionChar = (args[i].length() > 1) ? args[i][1] : '\0';
+                // for example: -p2222 or -p 2222 ?
+                const bool optionArgumentCombined =  args[i].length() > 2;
+
+                if (noArgumentOptions.contains(optionChar)) {
+                    continue;
+                } else if (singleArgumentOptions.contains(optionChar)) {
+                    QString argument;
+                    if (optionArgumentCombined) {
+                        argument = args[i].mid(2);
+                    } else {
+                        // Verify correct # arguments are given
+                        if ((i + 1) < args.count()) {
+                            argument = args[i + 1];
+                        }
+                        i++;
+                    }
+
+                    // support using `-l user` to specify username.
+                    if (optionChar == 'l')
+                        _user = argument;
+                    // support using `-p port` to specify port.
+                    else if (optionChar == 'p')
+                        _port = argument;
+
+                    continue;
+                }
+            }
+
+            // check whether the host has been found yet
+            // if not, this must be the username/host argument
+            if (_host.isEmpty()) {
+                // check to see if only a hostname is specified, or whether
+                // both a username and host are specified ( in which case they
+                // are separated by an '@' character:  username@host )
+
+                const int separatorPosition = args[i].indexOf('@');
+                if (separatorPosition != -1) {
+                    // username and host specified
+                    _user = args[i].left(separatorPosition);
+                    _host = args[i].mid(separatorPosition + 1);
+                } else {
+                    // just the host specified
+                    _host = args[i];
+                }
+            } else {
+                // host has already been found, this must be the command argument
+                _command = args[i];
+            }
+        }
+    } else {
+        kWarning() << "Could not read arguments";
+
         return;
     }
-
-    // now parse it to get usefule information
-    const QHash<QString,QString> results = parseSSHCommand(args);
-
-    _user = results["user"];
-    _host = results["host"];
-    _port = results["port"];
-    _command = results["command"];
-
 }
 
 QString SSHProcessInfo::userName() const
