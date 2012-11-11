@@ -1141,9 +1141,6 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
         kWarning() << "Could not read process cmdline arguments";
         return;
     }
-    if (args.isEmpty()) {
-        return;
-    }
 
     // now parse it to get useful information
     const QHash<QString,QString> results = parseSSHCommand(args);
