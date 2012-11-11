@@ -1118,11 +1118,12 @@ QHash<QString,QString> parseSSHCommand(const QVector<QString>& tokens)
 }
 
 SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
+    : _process(process)
 {
     bool ok = false;
 
     // check that this is a SSH process
-    const QString& name = process.name(&ok);
+    const QString& name = _process.name(&ok);
 
     if (!ok) {
         kWarning() << "Could not read process info";
@@ -1135,7 +1136,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     }
 
     // read its whole cmdlind arguments
-    const QVector<QString>& args = process.arguments(&ok);
+    const QVector<QString>& args = _process.arguments(&ok);
 
     if (!ok) {
         kWarning() << "Could not read process cmdline arguments";
