@@ -1143,7 +1143,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
         return;
     }
 
-    // now parse it to get useful information
+    // now parse it to get usefule information
     const QHash<QString,QString> results = parseSSHCommand(args);
 
     _user = results["user"];
