@@ -88,7 +88,7 @@ KeyboardTranslatorReader::KeyboardTranslatorReader(QIODevice* source)
 {
     // read input until we find the description
     while (_description.isEmpty() && !source->atEnd()) {
-        QList<Token> tokens = tokenize(QString(source->readLine()));
+        QList<Token> tokens = tokenize(QString::fromLocal8Bit(source->readLine()));
         if (!tokens.isEmpty() && tokens.first().type == Token::TitleKeyword)
             _description = i18n(tokens[1].text.toUtf8());
     }
@@ -99,7 +99,7 @@ void KeyboardTranslatorReader::readNext()
 {
     // find next entry
     while (!_source->atEnd()) {
-        const QList<Token>& tokens = tokenize(QString(_source->readLine()));
+        const QList<Token>& tokens = tokenize(QString::fromLocal8Bit(_source->readLine()));
         if (!tokens.isEmpty() && tokens.first().type == Token::KeyKeyword) {
             KeyboardTranslator::States flags = KeyboardTranslator::NoState;
             KeyboardTranslator::States flagMask = KeyboardTranslator::NoState;
