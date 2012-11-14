@@ -83,6 +83,7 @@ public slots:
     void setDescription(const QString& description);
 
 private slots:
+    void setTranslatorDescription(const QString& description);
     void bindingTableItemChanged(QTableWidgetItem* item);
     void removeSelectedEntry();
     void addNewEntry();
