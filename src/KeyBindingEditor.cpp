@@ -37,7 +37,8 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
     _ui->setupUi(this);
 
     // description edit
-    connect(_ui->descriptionEdit , SIGNAL(textChanged(QString)) , this , SLOT(setDescription(QString)));
+    connect(_ui->descriptionEdit , SIGNAL(textChanged(QString)) ,
+            this , SLOT(setTranslatorDescription(QString)));
 
     // key bindings table
     _ui->keyBindingTable->setColumnCount(2);
@@ -149,9 +150,15 @@ void KeyBindingEditor::setDescription(const QString& newDescription)
 {
     _ui->descriptionEdit->setText(newDescription);
 
+    setTranslatorDescription(newDescription);
+}
+
+void KeyBindingEditor::setTranslatorDescription(const QString& newDescription)
+{
     if (_translator)
         _translator->setDescription(newDescription);
 }
+
 QString KeyBindingEditor::description() const
 {
     return _ui->descriptionEdit->text();
