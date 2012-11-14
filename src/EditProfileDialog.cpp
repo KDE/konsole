@@ -550,6 +550,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
         const KeyboardTranslator* translator = keyManager->findTranslator(translatorName);
 
         QStandardItem* item = new QStandardItem(translator->description());
+        item->setEditable(false);
         item->setData(QVariant::fromValue(translator), Qt::UserRole + 1);
         item->setIcon(KIcon("preferences-desktop-keyboard"));
 
