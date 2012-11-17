@@ -142,8 +142,10 @@ bool shouldUseNewProcess()
     // Konsole and any debug output or warnings from Konsole are written to
     // the current terminal
     bool hasControllingTTY = false;
-    if (KDE_open("/dev/tty", O_RDONLY) != -1) {
+    const int fd = KDE_open("/dev/tty", O_RDONLY);
+    if (fd != -1) {
         hasControllingTTY = true;
+        close(fd);
     }
 
     return hasControllingTTY;
