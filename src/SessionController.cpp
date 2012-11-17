@@ -340,7 +340,6 @@ void SessionController::selectionChanged(const QString& selectedText)
 {
     _selectedText = selectedText;
     updateCopyAction(selectedText);
-    updateWebSearchMenu();
 }
 
 void SessionController::updateCopyAction(const QString& selectedText)
