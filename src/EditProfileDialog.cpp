@@ -34,7 +34,13 @@
 #include <QtCore/QTimeLine>
 
 // KDE
+#include <kdeversion.h>
+#if KDE_IS_VERSION(4, 9, 1)
+#include <KCodecAction>
+#else
 #include <kcodecaction.h>
+#endif
+
 #include <KFontDialog>
 #include <KIcon>
 #include <KIconDialog>
