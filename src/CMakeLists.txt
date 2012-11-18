@@ -175,7 +175,6 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
 ### Embedded Konsole KPart
 
     set(konsolepart_PART_SRCS
-      ${konsole_COMMON_SRCS}
       Part.cpp
    )
 
