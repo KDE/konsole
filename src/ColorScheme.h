@@ -225,20 +225,6 @@ private:
     static const char* const translatedColorNames[TABLE_COLORS];
 };
 
-/**
- * A color scheme which uses colors from the standard KDE color palette.
- *
- * This is designed primarily for the benefit of users who are using specially
- * designed colors.
- *
- * TODO Implement and make it the default on systems with specialized KDE
- * color schemes.
- */
-class AccessibleColorScheme : public ColorScheme
-{
-public:
-    AccessibleColorScheme();
-};
 }
 
 Q_DECLARE_METATYPE(const Konsole::ColorScheme*)
