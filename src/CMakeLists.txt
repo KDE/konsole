@@ -125,10 +125,6 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ${LIBKONQ_LIBRARY}
     )
 
-# doesn't seem to be needed
-#    if(X11_XTest_FOUND)
-#        list(APPEND konsole_LIBS ${X11_XTest_LIB})
-#    endif(X11_XTest_FOUND)
 
 ### Konsole Application
 
