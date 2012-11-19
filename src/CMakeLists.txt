@@ -125,11 +125,6 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
         ${LIBKONQ_LIBRARY}
     )
 
-    # XRender library for true transparency support
-    if(X11_Xrender_FOUND)
-        list(APPEND konsole_LIBS ${X11_Xrender_LIB})
-    endif(X11_Xrender_FOUND)
-
 # doesn't seem to be needed
 #    if(X11_XTest_FOUND)
 #        list(APPEND konsole_LIBS ${X11_XTest_LIB})
