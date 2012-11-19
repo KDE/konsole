@@ -176,10 +176,4 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
 
 ### konsoleprofile command-line tool
 
-    install(FILES konsoleprofile PERMISSIONS OWNER_READ
-                                         OWNER_WRITE
-                                         OWNER_EXECUTE
-                                         GROUP_EXECUTE
-                                         GROUP_READ
-                                         WORLD_READ
-                                         WORLD_EXECUTE DESTINATION ${BIN_INSTALL_DIR})
+    install(PROGRAMS konsoleprofile DESTINATION ${BIN_INSTALL_DIR})
