@@ -117,12 +117,12 @@ ${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
     )
 
     set(konsole_LIBS
-        ${KDE4_KPTY_LIBRARY}
-        ${KDE4_KIO_LIBS}
-        ${QT_QTXML_LIBRARY}
-        ${KDE4_KNOTIFYCONFIG_LIBRARY}
-        ${X11_LIBRARIES}
         ${LIBKONQ_LIBRARY}
+        ${KDE4_KPTY_LIBS}
+        ${KDE4_KIO_LIBS}
+        ${KDE4_KNOTIFYCONFIG_LIBS}
+        ${QT_QTXML_LIBRARY}
+        ${X11_LIBRARIES}
     )
 
 
