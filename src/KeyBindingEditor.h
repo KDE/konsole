@@ -69,18 +69,17 @@ public:
     KeyboardTranslator* translator() const;
 
     /**
+     * Sets the text of the editor's description field.
+     */
+    void setDescription(const QString& description);
+
+    /**
      * Returns the text of the editor's description field.
      */
     QString description() const;
 
     // reimplemented to handle test area input
     virtual bool eventFilter(QObject* watched , QEvent* event);
-
-public slots:
-    /**
-     * Sets the text of the editor's description field.
-     */
-    void setDescription(const QString& description);
 
 private slots:
     void setTranslatorDescription(const QString& description);
