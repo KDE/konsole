@@ -9,7 +9,7 @@ include(CheckIncludeFiles)
 check_include_files("sys/proc.h"      HAVE_SYS_PROC_H)
 check_include_files("sys/proc_info.h" HAVE_SYS_PROC_INFO_H)
 
-configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h )
+configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h)
 
 
 ### Tests
@@ -22,9 +22,9 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
     ### Use cmake -DKONSOLE_BUILD_FONTEMBEDDER or/and -DKONSOLE_GENERATE_LINEFONT=1
     if(KONSOLE_BUILD_FONTEMBEDDER OR KONSOLE_GENERATE_LINEFONT)
         ### Font Embedder
-        set(fontembedder_SRCS fontembedder.cpp )
+        set(fontembedder_SRCS fontembedder.cpp)
         kde4_add_executable(fontembedder ${fontembedder_SRCS})
-        target_link_libraries(fontembedder  ${KDE4_KIO_LIBS} )
+        target_link_libraries(fontembedder  ${KDE4_KIO_LIBS})
 
         ### Line graphics font
         ### The below cmake doesn't work; it might be possible to automate it
@@ -43,8 +43,8 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
     # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
 
     # Generate dbus .xml files; do not store .xml in source folder
-    qt4_generate_dbus_interface( Session.h org.kde.konsole.Session.xml OPTIONS -m)
-    qt4_generate_dbus_interface( ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
+    qt4_generate_dbus_interface(Session.h org.kde.konsole.Session.xml OPTIONS -m)
+    qt4_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
 
     qt4_add_dbus_adaptor( sessionadaptors_SRCS
                           ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
@@ -152,7 +152,7 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
 
     kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
 
-    kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
+    kde4_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
     target_link_libraries(kdeinit_konsole konsoleprivate)
 
     install(TARGETS kdeinit_konsole konsole konsoleprivate ${INSTALL_TARGETS_DEFAULT_ARGS})
@@ -166,7 +166,7 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
     kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
     set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
     target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} konsoleprivate)
-    install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR} )
+    install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ### konsoleprofile command-line tool
 
