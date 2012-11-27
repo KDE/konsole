@@ -11,12 +11,6 @@ check_include_files("sys/proc_info.h" HAVE_SYS_PROC_INFO_H)
 
 configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h )
 
-############### Load the CTest options ###############
-# CTestCustom.cmake has to be in the CTEST_BINARY_DIR.
-# in the KDE build system, this is the same as CMAKE_BINARY_DIR.
-configure_file(tests/CTestCustom.cmake
-${CMAKE_CURRENT_BINARY_DIR}/tests/CTestCustom.cmake)
-
 
 ### Tests
     add_subdirectory(tests)
