@@ -52,7 +52,7 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
                           Konsole::Session )
     qt4_add_dbus_adaptor( windowadaptors_SRCS
                           ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
-                          ViewManager.h 
+                          ViewManager.h
                           Konsole::ViewManager )
 
 

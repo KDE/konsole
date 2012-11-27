@@ -1,5 +1,5 @@
 
 install( FILES
-         Shell.profile 
+         Shell.profile
          DESTINATION
-         ${DATA_INSTALL_DIR}/konsole) 
+         ${DATA_INSTALL_DIR}/konsole)

@@ -2,7 +2,7 @@
 
 ########### install files ###############
 
-# quick-access-konsole.desktop is not installed at this time because 
+# quick-access-konsole.desktop is not installed at this time because
 # the feature is not polished enough to include
 
 install( PROGRAMS konsole.desktop DESTINATION  ${XDG_APPS_INSTALL_DIR} )
