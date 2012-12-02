@@ -356,7 +356,7 @@ public:
 class HistoryTypeFile : public HistoryType
 {
 public:
-    HistoryTypeFile(const QString& fileName = QString());
+    explicit HistoryTypeFile(const QString& fileName = QString());
 
     virtual bool isEnabled() const;
     virtual int maximumLineCount() const;

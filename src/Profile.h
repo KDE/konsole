@@ -588,7 +588,7 @@ public:
     typedef KSharedPtr<ProfileGroup> Ptr;
 
     /** Construct a new profile group, which is hidden by default. */
-    ProfileGroup(Profile::Ptr parent = Profile::Ptr());
+    explicit ProfileGroup(Profile::Ptr parent = Profile::Ptr());
 
     /** Add a profile to the group.  Calling setProperty() will update this
      * profile.  When creating a group, add the profiles to the group then
