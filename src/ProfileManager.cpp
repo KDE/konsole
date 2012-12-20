@@ -159,8 +159,9 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     if (recursionGuard.contains(path)) {
         kWarning() << "Ignoring attempt to load profile recursively from" << path;
         return _fallbackProfile;
-    } else
+    } else {
         recursionGuard.push(path);
+    }
 
     // load the profile
     ProfileReader* reader = new KDE4ProfileReader;

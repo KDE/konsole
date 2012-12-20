@@ -751,8 +751,9 @@ bool Session::kill(int signal)
             return true;
         else
             return false;
-    } else
+    } else {
         return false;
+    }
 }
 
 void Session::close()

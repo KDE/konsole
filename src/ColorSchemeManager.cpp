@@ -328,9 +328,9 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
     if (name.isEmpty())
         return defaultColorScheme();
 
-    if (_colorSchemes.contains(name))
+    if (_colorSchemes.contains(name)) {
         return _colorSchemes[name];
-    else {
+    } else {
         // look for this color scheme
         QString path = findColorSchemePath(name);
         if (!path.isEmpty() && loadColorScheme(path)) {

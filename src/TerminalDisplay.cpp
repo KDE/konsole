@@ -657,17 +657,18 @@ void TerminalDisplay::drawCursor(QPainter& painter,
                 invertCharacterColor = true;
             }
         }
-    } else if (_cursorShape == Enum::UnderlineCursor)
+    } else if (_cursorShape == Enum::UnderlineCursor) {
         painter.drawLine(cursorRect.left(),
                          cursorRect.bottom(),
                          cursorRect.right(),
                          cursorRect.bottom());
 
-    else if (_cursorShape == Enum::IBeamCursor)
+    } else if (_cursorShape == Enum::IBeamCursor) {
         painter.drawLine(cursorRect.left(),
                          cursorRect.top(),
                          cursorRect.left(),
                          cursorRect.bottom());
+    }
 }
 
 void TerminalDisplay::drawCharacters(QPainter& painter,
@@ -2060,8 +2061,9 @@ void TerminalDisplay::extendSelection(const QPoint& position)
             while (((left.x() > 0) || (left.y() > 0 && (_lineProperties[left.y() - 1] & LINE_WRAPPED)))
                     && charClass(_image[i - 1]) == selClass) {
                 i--;
-                if (left.x() > 0) left.rx()--;
-                else {
+                if (left.x() > 0) {
+                    left.rx()--;
+                } else {
                     left.rx() = _usedColumns - 1;
                     left.ry()--;
                 }
@@ -2076,8 +2078,9 @@ void TerminalDisplay::extendSelection(const QPoint& position)
             while (((right.x() < _usedColumns - 1) || (right.y() < _usedLines - 1 && (_lineProperties[right.y()] & LINE_WRAPPED)))
                     && charClass(_image[i + 1]) == selClass) {
                 i++;
-                if (right.x() < _usedColumns - 1) right.rx()++;
-                else {
+                if (right.x() < _usedColumns - 1) {
+                    right.rx()++;
+                } else {
                     right.rx() = 0;
                     right.ry()++;
                 }
@@ -2332,9 +2335,9 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
         while (((x > 0) || (bgnSel.y() > 0 && (_lineProperties[bgnSel.y() - 1] & LINE_WRAPPED)))
                 && charClass(_image[i - 1]) == selClass) {
             i--;
-            if (x > 0)
+            if (x > 0) {
                 x--;
-            else {
+            } else {
                 x = _usedColumns - 1;
                 bgnSel.ry()--;
             }
@@ -2349,9 +2352,9 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
         while (((x < _usedColumns - 1) || (endSel.y() < _usedLines - 1 && (_lineProperties[endSel.y()] & LINE_WRAPPED)))
                 && charClass(_image[i + 1]) == selClass) {
             i++;
-            if (x < _usedColumns - 1)
+            if (x < _usedColumns - 1) {
                 x++;
-            else {
+            } else {
                 x = 0;
                 endSel.ry()++;
             }
@@ -2475,9 +2478,9 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
                )
                 && charClass(_image[i - 1]) == selClass) {
             i--;
-            if (x > 0)
+            if (x > 0) {
                 x--;
-            else {
+            } else {
                 x = _columns - 1;
                 _iPntSel.ry()--;
             }

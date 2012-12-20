@@ -91,9 +91,9 @@ QVariant SessionListModel::headerData(int section, Qt::Orientation orientation,
     if (role != Qt::DisplayRole)
         return QVariant();
 
-    if (orientation == Qt::Vertical)
+    if (orientation == Qt::Vertical) {
         return QVariant();
-    else {
+    } else {
         switch (section) {
         case 0:
             return i18nc("@item:intable The session index", "Number");

@@ -679,8 +679,9 @@ void Screen::displayCharacter(unsigned short c)
         if (getMode(MODE_Wrap)) {
             _lineProperties[_cuY] = (LineProperty)(_lineProperties[_cuY] | LINE_WRAPPED);
             nextLine();
-        } else
+        } else {
             _cuX = _columns - w;
+        }
     }
 
     // ensure current line vector has enough elements
@@ -1315,9 +1316,9 @@ void Screen::addHistLine()
             if (_selBottomRight < top_BR)
                 _selBottomRight -= _columns;
 
-            if (_selBottomRight < 0)
+            if (_selBottomRight < 0) {
                 clearSelection();
-            else {
+            } else {
                 if (_selTopLeft < 0)
                     _selTopLeft = 0;
             }
@@ -1339,9 +1340,9 @@ void Screen::setScroll(const HistoryType& t , bool copyPreviousScroll)
 {
     clearSelection();
 
-    if (copyPreviousScroll)
+    if (copyPreviousScroll) {
         _history = t.scroll(_history);
-    else {
+    } else {
         HistoryScroll* oldScroll = _history;
         _history = t.scroll(0);
         delete oldScroll;

@@ -490,13 +490,13 @@ private:
             while (pos < data.count()) {
                 QChar c = data[pos];
 
-                if (c == '(')
+                if (c == '(') {
                     stack++;
-                else if (c == ')')
+                } else if (c == ')') {
                     stack--;
-                else if (stack == 0 && c == ' ')
+                } else if (stack == 0 && c == ' ') {
                     field++;
-                else {
+                } else {
                     switch (field) {
                     case PARENT_PID_FIELD:
                         parentPidString.append(c);
