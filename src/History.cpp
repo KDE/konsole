@@ -453,7 +453,7 @@ void CompactHistoryLine::getCharacter(int index, Character& r)
 void CompactHistoryLine::getCharacters(Character* array, int size, int startColumn)
 {
     Q_ASSERT(startColumn >= 0 && size >= 0);
-    Q_ASSERT(startColumn + size <= (int) getLength());
+    Q_ASSERT(startColumn + size <= static_cast<int>(getLength()));
 
     for (int i = startColumn; i < size + startColumn; i++) {
         getCharacter(i, array[i - startColumn]);
@@ -480,7 +480,7 @@ void CompactHistoryScroll::addCellsVector(const TextLine& cells)
     CompactHistoryLine* line;
     line = new(_blockList) CompactHistoryLine(cells, _blockList);
 
-    if (_lines.size() > (int) _maxLineCount) {
+    if (_lines.size() > static_cast<int>(_maxLineCount)) {
         delete _lines.takeAt(0);
     }
     _lines.append(line);
@@ -527,7 +527,7 @@ void CompactHistoryScroll::setMaxNbLines(unsigned int lineCount)
 {
     _maxLineCount = lineCount;
 
-    while (_lines.size() > (int) lineCount) {
+    while (_lines.size() > static_cast<int>(lineCount)) {
         delete _lines.takeAt(0);
     }
     //kDebug() << "set max lines to: " << _maxLineCount;

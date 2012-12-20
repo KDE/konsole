@@ -1291,8 +1291,8 @@ void SessionController::print_screen()
     KConfigGroup configGroup(KGlobal::config(), "PrintOptions");
 
     if (configGroup.readEntry("ScaleOutput", true)) {
-        double scale = qMin(printer.pageRect().width() / double(_view->width()),
-                            printer.pageRect().height() / double(_view->height()));
+        double scale = qMin(printer.pageRect().width() / static_cast<double>(_view->width()),
+                            printer.pageRect().height() / static_cast<double>(_view->height()));
         painter.scale(scale, scale);
     }
 

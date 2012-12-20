@@ -801,8 +801,8 @@ void EditProfileDialog::updateButtonApply()
         QVariant value = iter.value();
 
         // for previewed property
-        if (_previewedProperties.contains(int(aProperty))) {
-            if (value != _previewedProperties.value(int(aProperty))) {
+        if (_previewedProperties.contains(static_cast<int>(aProperty))) {
+            if (value != _previewedProperties.value(static_cast<int>(aProperty))) {
                 userModified = true;
                 break;
             }

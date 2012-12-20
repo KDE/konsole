@@ -113,9 +113,9 @@ void CopyInputDialog::setRowChecked(int row, bool checked)
     QAbstractItemModel* model = _ui->sessionList->model();
     QModelIndex index = model->index(row, _model->checkColumn());
     if (checked)
-        model->setData(index, (int)Qt::Checked, Qt::CheckStateRole);
+        model->setData(index, static_cast<int>(Qt::Checked), Qt::CheckStateRole);
     else
-        model->setData(index, (int)Qt::Unchecked, Qt::CheckStateRole);
+        model->setData(index, static_cast<int>(Qt::Unchecked), Qt::CheckStateRole);
 }
 CheckableSessionModel::CheckableSessionModel(QObject* parent)
     : SessionListModel(parent)
@@ -142,9 +142,9 @@ QVariant CheckableSessionModel::data(const QModelIndex& index, int role) const
         Session* session = static_cast<Session*>(index.internalPointer());
 
         if (_checkedSessions.contains(session))
-            return QVariant::fromValue((int)Qt::Checked);
+            return QVariant::fromValue(static_cast<int>(Qt::Checked));
         else
-            return QVariant::fromValue((int)Qt::Unchecked);
+            return QVariant::fromValue(static_cast<int>(Qt::Unchecked));
     } else {
         return SessionListModel::data(index, role);
     }

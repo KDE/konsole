@@ -53,7 +53,7 @@ void ViewSplitter::adjustContainerSize(ViewContainer* container , int percentage
     QList<int> containerSizes = sizes();
 
     const int oldSize = containerSizes[containerIndex];
-    const int newSize = (int)(oldSize * (1.0 + percentage / 100.0));
+    const int newSize = static_cast<int>(oldSize * (1.0 + percentage / 100.0));
 
     const int perContainerDelta = (count() == 1) ? 0 : ((newSize - oldSize) / (count() - 1)) * (-1);
 
