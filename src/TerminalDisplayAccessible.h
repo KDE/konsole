@@ -32,7 +32,6 @@
 
 namespace Konsole
 {
-
 /**
  * Class implementing the QAccessibleInterface for the terminal display.
  * This exposes information about the display to assistive technology using the QAccessible framework.
