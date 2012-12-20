@@ -27,7 +27,6 @@
 
 namespace Konsole
 {
-
 /**
  * A color scheme which uses colors from the standard KDE color palette.
  *

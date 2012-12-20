@@ -224,7 +224,6 @@ private:
     static const char* const colorNames[TABLE_COLORS];
     static const char* const translatedColorNames[TABLE_COLORS];
 };
-
 }
 
 Q_DECLARE_METATYPE(const Konsole::ColorScheme*)

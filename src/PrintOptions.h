@@ -25,7 +25,6 @@
 
 namespace Konsole
 {
-
 class PrintOptions : public QWidget, private Ui::PrintOptions
 {
     Q_OBJECT
@@ -37,7 +36,6 @@ public:
 public slots:
     void saveSettings();
 };
-
 }
 
 #endif
