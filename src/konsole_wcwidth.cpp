@@ -129,8 +129,8 @@ int konsole_wcwidth(quint16 ucs)
              (ucs >= 0xfe30 && ucs <= 0xfe6f) || /* CJK Compatibility Forms */
              (ucs >= 0xff00 && ucs <= 0xff5f) || /* Fullwidth Forms */
              (ucs >= 0xffe0 && ucs <= 0xffe6) || /* do not compare UINT16 with 0x20000 */
-             (ucs >= 0x300a && ucs <= 0x300b)  /* Specal character 《 and 》(Unicode Standard Annex #11) ||
-      (ucs >= 0x20000 && ucs <= 0x2ffff) */));
+             (ucs >= 0x300a && ucs <= 0x300b))); // Special character 《 and 》(Unicode Standard Annex #11)
+             // (ucs >= 0x20000 && ucs <= 0x2ffff) FIXME - why is this here?
 }
 
 /*
