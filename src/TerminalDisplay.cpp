@@ -51,6 +51,7 @@
 #include <KIO/NetAccess>
 #include <konq_operations.h>
 #include <KFileItem>
+#include <KMessageBox>
 
 // Konsole
 #include "Filter.h"
@@ -2570,6 +2571,17 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
 
     if (appendReturn)
         text.append("\r");
+
+    if (text.length() > 8000) {
+        if (KMessageBox::warningContinueCancel(window(),
+                        i18n("Are you sure you want to paste %1 characters?",
+                             text.length()),
+                        i18n("Confirm Paste"),
+                        KStandardGuiItem::cont(),
+                        KStandardGuiItem::cancel(),
+                        "ShowPasteHugeTextWarning") == KMessageBox::Cancel)
+            return;
+    }
 
     if (!text.isEmpty()) {
         text.replace('\n', '\r');
