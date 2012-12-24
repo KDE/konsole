@@ -1353,7 +1353,7 @@ QSize ColorSchemeViewDelegate::sizeHint(const QStyleOptionViewItem& option,
     qreal heightForWidth = (colorWidth * 2) + option.fontMetrics.height() + margin;
 
     // temporary
-    return QSize(width, (int)heightForWidth);
+    return QSize(width, static_cast<int>(heightForWidth));
 }
 
 #include "EditProfileDialog.moc"
