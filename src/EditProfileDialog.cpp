@@ -312,7 +312,7 @@ void EditProfileDialog::showEnvironmentEditor()
     QStringList currentEnvironment = profile->environment();
 
     edit->setPlainText(currentEnvironment.join("\n"));
-    edit->setToolTip(i18n("One environment variable per line"));
+    edit->setToolTip(i18nc("@info:tooltip", "One environment variable per line"));
 
     dialog.data()->setPlainCaption(i18n("Edit Environment"));
     dialog.data()->setMainWidget(edit);

@@ -48,7 +48,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
 
     QToolButton* closeButton = new QToolButton(this);
     closeButton->setObjectName(QLatin1String("close-button"));
-    closeButton->setToolTip(i18n("Close the search bar"));
+    closeButton->setToolTip(i18nc("@info:tooltip", "Close the search bar"));
     closeButton->setAutoRaise(true);
     closeButton->setIcon(KIcon("dialog-close"));
     connect(closeButton , SIGNAL(clicked()) , this , SIGNAL(closeClicked()));
@@ -58,7 +58,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     _searchEdit->setClearButtonShown(true);
     _searchEdit->installEventFilter(this);
     _searchEdit->setObjectName(QLatin1String("search-edit"));
-    _searchEdit->setToolTip(i18n("Enter the text to search for here"));
+    _searchEdit->setToolTip(i18nc("@info:tooltip", "Enter the text to search for here"));
 
     // text box may be a minimum of 6 characters wide and a maximum of 10 characters wide
     // (since the maxWidth metric is used here, more characters probably will fit in than 6
@@ -80,7 +80,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     findNext->setText(i18nc("@action:button Go to the next phrase", "Next"));
     findNext->setIcon(KIcon("go-down-search"));
     findNext->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    findNext->setToolTip(i18n("Find the next match for the current search phrase"));
+    findNext->setToolTip(i18nc("@info:tooltip", "Find the next match for the current search phrase"));
     connect(findNext , SIGNAL(clicked()) , this , SIGNAL(findNextClicked()));
 
     QToolButton* findPrev = new QToolButton(this);
@@ -88,7 +88,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     findPrev->setText(i18nc("@action:button Go to the previous phrase", "Previous"));
     findPrev->setIcon(KIcon("go-up-search"));
     findPrev->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    findPrev->setToolTip(i18n("Find the previous match for the current search phrase"));
+    findPrev->setToolTip(i18nc("@info:tooltip", "Find the previous match for the current search phrase"));
     connect(findPrev , SIGNAL(clicked()) , this , SIGNAL(findPreviousClicked()));
 
     QToolButton* optionsButton = new QToolButton(this);
@@ -98,7 +98,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     optionsButton->setPopupMode(QToolButton::InstantPopup);
     optionsButton->setArrowType(Qt::DownArrow);
     optionsButton->setToolButtonStyle(Qt::ToolButtonTextOnly);
-    optionsButton->setToolTip(i18n("Display the options menu"));
+    optionsButton->setToolTip(i18nc("@info:tooltip", "Display the options menu"));
 
     barLayout->addWidget(closeButton);
     barLayout->addWidget(findLabel);
@@ -113,7 +113,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
 
     _caseSensitive = optionsMenu->addAction(i18n("Case sensitive"));
     _caseSensitive->setCheckable(true);
-    _caseSensitive->setToolTip(i18n("Sets whether the search is case sensitive"));
+    _caseSensitive->setToolTip(i18nc("@info:tooltip", "Sets whether the search is case sensitive"));
     connect(_caseSensitive, SIGNAL(toggled(bool)),
             this, SIGNAL(matchCaseToggled(bool)));
 
@@ -124,7 +124,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
 
     _highlightMatches = optionsMenu->addAction(i18n("Highlight all matches"));
     _highlightMatches->setCheckable(true);
-    _highlightMatches->setToolTip(i18n("Sets whether matching text should be highlighted"));
+    _highlightMatches->setToolTip(i18nc("@info:tooltip", "Sets whether matching text should be highlighted"));
     _highlightMatches->setChecked(true);
     connect(_highlightMatches, SIGNAL(toggled(bool)),
             this, SIGNAL(highlightMatchesToggled(bool)));

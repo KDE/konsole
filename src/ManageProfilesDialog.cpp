@@ -174,7 +174,7 @@ void ManageProfilesDialog::updateItemsForProfile(const Profile::Ptr profile, QLi
     if (!profile->icon().isEmpty())
         items[ProfileNameColumn]->setIcon(KIcon(profile->icon()));
     items[ProfileNameColumn]->setData(QVariant::fromValue(profile), ProfileKeyRole);
-    items[ProfileNameColumn]->setToolTip(i18n("Click to rename profile"));
+    items[ProfileNameColumn]->setToolTip(i18nc("@info:tooltip", "Click to rename profile"));
 
     // Favorite Status
     const bool isFavorite = ProfileManager::instance()->findFavorites().contains(profile);
@@ -183,13 +183,13 @@ void ManageProfilesDialog::updateItemsForProfile(const Profile::Ptr profile, QLi
     else
         items[FavoriteStatusColumn]->setData(KIcon(), Qt::DecorationRole);
     items[FavoriteStatusColumn]->setData(QVariant::fromValue(profile), ProfileKeyRole);
-    items[FavoriteStatusColumn]->setToolTip(i18n("Click to toggle status"));
+    items[FavoriteStatusColumn]->setToolTip(i18nc("@info:tooltip", "Click to toggle status"));
 
     // Shortcut
     QString shortcut = ProfileManager::instance()->shortcut(profile).toString();
     items[ShortcutColumn]->setText(shortcut);
     items[ShortcutColumn]->setData(QVariant::fromValue(profile), ShortcutRole);
-    items[ShortcutColumn]->setToolTip(i18n("Double click to change shortcut"));
+    items[ShortcutColumn]->setToolTip(i18nc("@info:tooltip", "Double click to change shortcut"));
 }
 void ManageProfilesDialog::addItems(const Profile::Ptr profile)
 {

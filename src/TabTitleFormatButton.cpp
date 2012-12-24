@@ -80,11 +80,11 @@ void TabTitleFormatButton::setContext(Session::TabTitleContext titleContext)
     const Element* array = 0;
 
     if (titleContext == Session::LocalTabTitle) {
-        setToolTip(i18n("Insert title format"));
+        setToolTip(i18nc("@info:tooltip", "Insert title format"));
         array = _localElements;
         count = _localElementCount;
     } else if (titleContext == Session::RemoteTabTitle) {
-        setToolTip(i18n("Insert remote title format"));
+        setToolTip(i18nc("@info:tooltip", "Insert remote title format"));
         array = _remoteElements;
         count = _remoteElementCount;
     }
