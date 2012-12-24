@@ -31,7 +31,7 @@ class TabBarSettings : public QWidget, private Ui::TabBarSettings
     Q_OBJECT
 
 public:
-    TabBarSettings(QWidget* parent = 0);
+    explicit TabBarSettings(QWidget* parent = 0);
     ~TabBarSettings();
 
 };

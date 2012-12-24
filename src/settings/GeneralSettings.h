@@ -31,7 +31,7 @@ class GeneralSettings : public QWidget, private Ui::GeneralSettings
     Q_OBJECT
 
 public:
-    GeneralSettings(QWidget* aParent = 0);
+    explicit GeneralSettings(QWidget* aParent = 0);
     ~GeneralSettings();
 
 };
