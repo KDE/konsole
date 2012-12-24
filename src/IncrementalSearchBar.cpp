@@ -53,7 +53,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     closeButton->setIcon(KIcon("dialog-close"));
     connect(closeButton , SIGNAL(clicked()) , this , SIGNAL(closeClicked()));
 
-    QLabel* findLabel = new QLabel(i18n("Find:"), this);
+    QLabel* findLabel = new QLabel(i18nc("@label:textbox", "Find:"), this);
     _searchEdit = new KLineEdit(this);
     _searchEdit->setClearButtonShown(true);
     _searchEdit->installEventFilter(this);
@@ -111,18 +111,18 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     QMenu* optionsMenu = new QMenu(this);
     optionsButton->setMenu(optionsMenu);
 
-    _caseSensitive = optionsMenu->addAction(i18n("Case sensitive"));
+    _caseSensitive = optionsMenu->addAction(i18nc("@item:inmenu", "Case sensitive"));
     _caseSensitive->setCheckable(true);
     _caseSensitive->setToolTip(i18nc("@info:tooltip", "Sets whether the search is case sensitive"));
     connect(_caseSensitive, SIGNAL(toggled(bool)),
             this, SIGNAL(matchCaseToggled(bool)));
 
-    _regExpression = optionsMenu->addAction(i18n("Match regular expression"));
+    _regExpression = optionsMenu->addAction(i18nc("@item:inmenu", "Match regular expression"));
     _regExpression->setCheckable(true);
     connect(_regExpression, SIGNAL(toggled(bool)),
             this, SIGNAL(matchRegExpToggled(bool)));
 
-    _highlightMatches = optionsMenu->addAction(i18n("Highlight all matches"));
+    _highlightMatches = optionsMenu->addAction(i18nc("@item:inmenu", "Highlight all matches"));
     _highlightMatches->setCheckable(true);
     _highlightMatches->setToolTip(i18nc("@info:tooltip", "Sets whether matching text should be highlighted"));
     _highlightMatches->setChecked(true);
