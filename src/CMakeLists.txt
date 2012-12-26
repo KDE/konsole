@@ -36,7 +36,7 @@ configure_file(config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole
         #                   COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder
         #                   ARGS ${CMAKE_SOURCE_DIR}/LineFont.src
         #                   DEPENDS ${CMAKE_SOURCE_DIR}/LineFont.src )
-     endif(KONSOLE_BUILD_FONTEMBEDDER OR KONSOLE_GENERATE_LINEFONT)
+     endif()
 
 ### Konsole source files shared between embedded terminal and main application
     # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
