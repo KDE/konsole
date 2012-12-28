@@ -2392,8 +2392,8 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
     const int modifiers = ev->modifiers();
     const int delta = ev->delta();
 
-    // ctrl+<wheel> for zomming, like in konqueror and firefox
-    if (modifiers & Qt::ControlModifier) {
+    // ctrl+<wheel> for zooming, like in konqueror and firefox
+    if ((modifiers & Qt::ControlModifier) && mouseWheelZoom()) {
         if (delta > 0) {
             // wheel-up for increasing font size
             increaseFontSize();

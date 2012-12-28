@@ -129,6 +129,7 @@ private slots:
     void colorSchemeSelected();
     void previewColorScheme(const QModelIndex& index);
     void fontSelected(const QFont&);
+    void toggleMouseWheelZoom(bool enable);
 
     void colorSchemeAnimationUpdate();
 

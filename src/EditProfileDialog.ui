@@ -893,6 +893,16 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="enableMouseWheelZoomButton">
+            <property name="toolTip">
+             <string>Pressing Ctrl+&amp;lt;mouse-wheel&amp;gt; will increase/decrease the text size.</string>
+            </property>
+            <property name="text">
+             <string>Allow Ctrl+&amp;lt;mouse-wheel&amp;gt; to zoom text size</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

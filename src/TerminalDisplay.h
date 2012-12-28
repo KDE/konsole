@@ -335,6 +335,22 @@ public:
     void visualBell();
 
     /**
+     * Specified whether zoom terminal on Ctrl+<mouse wheel> is enabled or not.
+     * Defaults to enabled.
+     */
+    void setMouseWheelZoom(bool value) {
+        _mouseWheelZoom = value;
+    };
+    /**
+     * Returns the whether zoom terminal on Ctrl+<mouse wheel> is enabled.
+     *
+     * See setMouseWheelZoom()
+     */
+    bool mouseWheelZoom() {
+        return _mouseWheelZoom;
+    };
+
+    /**
      * Reimplemented.  Has no effect.  Use setVTFont() to change the font
      * used to draw characters in the display.
      */
@@ -856,6 +872,7 @@ private:
     SessionController* _sessionController;
 
     bool _trimTrailingSpaces;   // trim trailing spaces in selected text
+    bool _mouseWheelZoom;   // enable mouse wheel zooming or not
 
     friend class TerminalDisplayAccessible;
 };

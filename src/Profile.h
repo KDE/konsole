@@ -245,7 +245,11 @@ public:
          *
          * In future, the format might be #.#.# to account for levels
          */
-        MenuIndex
+        MenuIndex,
+        /** (bool) If true, mouse wheel scroll with Ctrl key pressed
+         * increases/decreases the terminal font size.
+         */
+        MouseWheelZoomEnabled
     };
 
     /**
@@ -421,6 +425,11 @@ public:
     /** Convenience method for property<bool>(Profile::BlinkingTextEnabled) */
     bool blinkingTextEnabled() const {
         return property<bool>(Profile::BlinkingTextEnabled);
+    }
+
+    /** Convenience method for property<bool>(Profile::MouseWheelZoomEnabled) */
+    bool mouseWheelZoomEnabled() const {
+        return property<bool>(Profile::MouseWheelZoomEnabled);
     }
 
     /** Convenience method for property<bool>(Profile::BlinkingCursorEnabled) */

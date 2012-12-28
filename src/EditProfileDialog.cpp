@@ -471,6 +471,9 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->boldIntenseButton->setChecked(profile->boldIntense());
     connect(_ui->boldIntenseButton, SIGNAL(toggled(bool)), this,
             SLOT(setBoldIntense(bool)));
+    _ui->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
+    connect(_ui->enableMouseWheelZoomButton, SIGNAL(toggled(bool)), this,
+            SLOT(toggleMouseWheelZoom(bool)));
 }
 void EditProfileDialog::setAntialiasText(bool enable)
 {
@@ -485,6 +488,10 @@ void EditProfileDialog::setBoldIntense(bool enable)
 {
     preview(Profile::BoldIntense, enable);
     updateTempProfileProperty(Profile::BoldIntense, enable);
+}
+void EditProfileDialog::toggleMouseWheelZoom(bool enable)
+{
+    updateTempProfileProperty(Profile::MouseWheelZoomEnabled, enable);
 }
 void EditProfileDialog::colorSchemeAnimationUpdate()
 {
@@ -1032,6 +1039,10 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
             SLOT(TripleClickModeChanged(int)));
 
     _ui->openLinksByDirectClickButton->setEnabled(_ui->underlineLinksButton->isChecked());
+
+    _ui->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
+    connect(_ui->enableMouseWheelZoomButton, SIGNAL(toggled(bool)), this,
+            SLOT(toggleMouseWheelZoom(bool)));
 }
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {

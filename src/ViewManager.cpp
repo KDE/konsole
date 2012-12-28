@@ -841,6 +841,9 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
 
     // bell mode
     view->setBellMode(profile->property<int>(Profile::BellMode));
+
+    // mouse wheel zoom
+    view->setMouseWheelZoom(profile->mouseWheelZoomEnabled());
 }
 
 void ViewManager::updateViewsForSession(Session* session)
