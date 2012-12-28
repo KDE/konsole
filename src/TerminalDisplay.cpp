@@ -1846,13 +1846,17 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             _preserveLineBreaks = !((ev->modifiers() & Qt::ControlModifier) && !(ev->modifiers() & Qt::AltModifier));
             _columnSelectionMode = (ev->modifiers() & Qt::AltModifier) && (ev->modifiers() & Qt::ControlModifier);
 
-            if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier)) {
-                _screenWindow->clearSelection();
+            if (_mouseMarks) {
+                if (ev->modifiers() & Qt::ShiftModifier) {
+                    extendSelection(ev->pos());
+                } else {
+                    _screenWindow->clearSelection();
 
-                pos.ry() += _scrollBar->value();
-                _iPntSel = _pntSel = pos;
-                _actSel = 1; // left mouse button pressed but nothing selected yet.
+                    pos.ry() += _scrollBar->value();
+                    _iPntSel = _pntSel = pos;
+                    _actSel = 1; // left mouse button pressed but nothing selected yet.
 
+                }
             } else {
                 emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
             }
