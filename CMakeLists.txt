@@ -1,9 +1,5 @@
 project(Konsole)
 
-# set_package_properties appeared in cmake 2.8.6
-# TODO: Remove when kdelibs >= 4.10 will be required
-cmake_minimum_required(VERSION 2.8.6 FATAL_ERROR)
-
 find_package(KDE4 4.7.0 REQUIRED)
 
 include(KDE4Defaults)
@@ -20,4 +16,4 @@ add_subdirectory( data )
 add_subdirectory( desktop )
 add_subdirectory( doc/manual )
 
-feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+macro_display_feature_log()

@@ -1,5 +1,5 @@
 find_package(LibKonq)
-set_package_properties(LibKonq PROPERTIES DESCRIPTION "LibKonq" URL "http://www.kde.org" TYPE REQUIRED PURPOSE "libkonq is a construction kit for a file manager.")
+macro_log_feature(LIBKONQ_FOUND "LibKonq" "libkonq is a construction kit for a file manager. It comes from kde-baseapps." "http://www.kde.org" TRUE)
 
 if(LIBKONQ_FOUND)
   include_directories(${LIBKONQ_INCLUDE_DIR})
