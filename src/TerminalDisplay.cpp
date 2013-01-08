@@ -2578,7 +2578,8 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
 
     if (text.length() > 8000) {
         if (KMessageBox::warningContinueCancel(window(),
-                        i18n("Are you sure you want to paste %1 characters?",
+                        i18np("Are you sure you want to paste %1 character?",
+			     "Are you sure you want to paste %1 characters?",
                              text.length()),
                         i18n("Confirm Paste"),
                         KStandardGuiItem::cont(),
