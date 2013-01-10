@@ -364,7 +364,7 @@ void Screen::setDefaultMargins()
    is to poor to distinguish between bold
    (which is a font attribute) and intensive
    (which is a color attribute), we translate
-   this and RE_BOLD in falls eventually appart
+   this and RE_BOLD in falls eventually apart
    into RE_BOLD and RE_INTENSIVE.
    */
 
@@ -509,7 +509,7 @@ void Screen::reset(bool clearScreen)
     saveMode(MODE_Wrap);      // wrap at end of margin
 
     resetMode(MODE_Origin);
-    saveMode(MODE_Origin);  // position refere to [1,1]
+    saveMode(MODE_Origin);  // position refer to [1,1]
 
     resetMode(MODE_Insert);
     saveMode(MODE_Insert);  // overstroke
@@ -1183,7 +1183,7 @@ int Screen::copyLineToStream(int line ,
                              bool trimTrailingSpaces) const
 {
     //buffer to hold characters for decoding
-    //the buffer is static to avoid initialising every
+    //the buffer is static to avoid initializing every
     //element on each call to copyLineToStream
     //(which is unnecessary since all elements will be overwritten anyway)
     static const int MAX_CHARS = 1024;

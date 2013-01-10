@@ -50,7 +50,7 @@ using Konsole::Vt102Emulation;
    QT's iso mapping leaves 0x00..0x7f without any changes. But the graphicals
    come in here as proper unicode characters.
 
-   We treat non-iso10646 fonts as VT100 extended and do the requiered mapping
+   We treat non-iso10646 fonts as VT100 extended and do the required mapping
    from unicode to 0x00..0x1f. The remaining translation is then left to the
    QCodec.
 */
@@ -160,7 +160,7 @@ void Vt102Emulation::reset()
    The last two forms allow list of arguments. Since the elements of
    the lists are treated individually the same way, they are passed
    as individual tokens to the interpretation. Further, because the
-   meaning of the parameters are names (althought represented as numbers),
+   meaning of the parameters are names (although represented as numbers),
    they are includes within the token ('N').
 
 */
@@ -435,7 +435,7 @@ void Vt102Emulation::updateTitle()
    meaning is assigned to them. These are either operations of
    the current _screen, or of the emulation class itself.
 
-   The token to be interpreteted comes in as a machine word
+   The token to be interpreted comes in as a machine word
    possibly accompanied by two parameters.
 
    Likewise, the operations assigned to, come with up to two
@@ -855,7 +855,7 @@ void Vt102Emulation::reportTerminalType()
 
 void Vt102Emulation::reportSecondaryAttributes()
 {
-  // Seconday device attribute response (Request was: ^[[>0c or ^[[>c)
+  // Secondary device attribute response (Request was: ^[[>0c or ^[[>c)
   if (getMode(MODE_Ansi))
     sendString("\033[>0;115;0c"); // Why 115?  ;)
   else
@@ -988,7 +988,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
         }
     }
 
-    // lookup key binding
+    // look up key binding
     if (_keyTranslator) {
         KeyboardTranslator::Entry entry = _keyTranslator->findEntry(
                                               event->key() ,
@@ -1184,7 +1184,7 @@ void Vt102Emulation::restoreCursor()
 void Vt102Emulation::resetModes()
 {
     // MODE_Allow132Columns is not reset here
-    // to match Xterm's behaviour (see Xterm's VTReset() function)
+    // to match Xterm's behavior (see Xterm's VTReset() function)
 
     resetMode(MODE_132Columns); saveMode(MODE_132Columns);
     resetMode(MODE_Mouse1000);  saveMode(MODE_Mouse1000);

@@ -19,7 +19,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-// Born as kdelibs/kio/kfile/kfilebookmarkhandler.characterpp
+// Born as kdelibs/kio/kfile/kfilebookmarkhandler.cpp
 
 // Own
 #include "BookmarkHandler.h"

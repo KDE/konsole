@@ -118,7 +118,7 @@ bool KeyBindingEditor::eventFilter(QObject* watched , QEvent* event)
 
             // The state here is currently set to the state that a newly started
             // terminal in Konsole will be in ( which is also the same as the
-            // state just after a reset ), this has 'Ansi' turned on and all other
+            // state just after a reset ), this has 'ANSI' turned on and all other
             // states off.
             //
             // TODO: It may be useful to be able to specify the state in the 'test input'

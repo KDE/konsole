@@ -244,7 +244,7 @@ protected:
     void setPid(int pid);
     /** Sets the parent process id as returned by parentPid() */
     void setParentPid(int pid);
-    /** Sets the foreground process id as returend by foregroundPid() */
+    /** Sets the foreground process id as returned by foregroundPid() */
     void setForegroundPid(int pid);
     /** Sets the user id associated with this ProcessInfo instance */
     void setUserId(int uid);

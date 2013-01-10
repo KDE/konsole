@@ -79,7 +79,7 @@ public:
         Path,
         /** (QString) The descriptive name of this profile. */
         Name,
-        /** (QString) The untranslted name of this profile.
+        /** (QString) The untranslated name of this profile.
          * Warning: this is an internal property. Do not touch it.
          */
         UntranslatedName,

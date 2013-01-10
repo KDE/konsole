@@ -363,7 +363,7 @@ signals:
     void titleChanged(int title, const QString& newTitle);
 
     /**
-     * Emitted when the terminal emualtor's size has changed
+     * Emitted when the terminal emulator's size has changed
      */
     void imageSizeChanged(int lineCount , int columnCount);
 

@@ -491,7 +491,7 @@ public slots:
 
     /** Sets the text codec used by this sessions terminal emulation.
       * Overloaded to accept a QByteArray for convenience since DBus
-      * does not accept QTextCodec directky.
+      * does not accept QTextCodec directly.
       */
     Q_SCRIPTABLE bool setCodec(QByteArray codec);
 
@@ -576,7 +576,7 @@ signals:
     /**
      * Emitted when the current working directory of this session changes.
      *
-     * @param dir The new current woking directory of the session.
+     * @param dir The new current working directory of the session.
      */
     void currentDirectoryChanged(const QString& dir);
 
@@ -635,7 +635,7 @@ signals:
     void flowControlEnabledChanged(bool enabled);
 
     /**
-     * Emitted when the active screen is swiched, to indicate whether the primary
+     * Emitted when the active screen is switched, to indicate whether the primary
      * screen is in use.
      *
      * This signal serves as a relayer of Emulation::priamyScreenInUse(bool),

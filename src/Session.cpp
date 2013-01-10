@@ -542,7 +542,7 @@ void Session::setUserTitle(int what, const QString& caption)
         }
     }
 
-    /* I don't belive this has ever worked in KDE 4.x
+    /* I don't believe this has ever worked in KDE 4.x
     if (what == 31) {
         QString cwd = caption;
         cwd = cwd.replace(QRegExp("^~"), QDir::homePath());
@@ -654,7 +654,7 @@ void Session::activityStateSet(int state)
             _activityTimer->start(activityMaskInSeconds * 1000);
         }
 
-        // reset the counter for monitoring continuous silence since ther is activity
+        // reset the counter for monitoring continuous silence since there is activity
         if (_monitorSilence) {
             _silenceTimer->start(_silenceSeconds * 1000);
         }

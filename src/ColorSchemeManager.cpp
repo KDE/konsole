@@ -311,7 +311,7 @@ bool ColorSchemeManager::deleteColorScheme(const QString& name)
 {
     Q_ASSERT(_colorSchemes.contains(name));
 
-    // lookup the path and delete
+    // look up the path and delete
     QString path = findColorSchemePath(name);
     if (QFile::remove(path)) {
         delete _colorSchemes[name];

@@ -736,7 +736,7 @@ void ViewManager::viewDestroyed(QWidget* view)
         updateDetachViewState();
     }
     // The below causes the menus  to be messed up
-    // Only happenss when using the tab bar close button
+    // Only happens when using the tab bar close button
 //    if (_pluggedController)
 //        emit unplugController(_pluggedController);
 }
@@ -791,7 +791,7 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     else if (scrollBarPosition == Enum::ScrollBarHidden)
         view->setScrollBarPosition(Enum::ScrollBarHidden);
 
-    // show hint about termianl size after resizing
+    // show hint about terminal size after resizing
     view->setShowTerminalSizeHint(profile->showTerminalSizeHint());
 
     // terminal features

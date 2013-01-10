@@ -60,7 +60,7 @@ using namespace Konsole;
 
 /* Normally it would be enough to just have this determined via the window
    manager. But there exist GPU drivers (NVIDIA) that have serious performance
-   issues if transparency is enbled inside Konsole. The rest of the system
+   issues if transparency is enabled inside Konsole. The rest of the system
    works fine. NVIDIA users might want to use --notransparency to work
    around such issues. */
 static bool useTransparency()
@@ -78,7 +78,7 @@ MainWindow::MainWindow()
     , _menuBarInitialVisibilityApplied(false)
 {
     if (useTransparency()) {
-        // It is userful to have translucent terminal area
+        // It is useful to have translucent terminal area
         setAttribute(Qt::WA_TranslucentBackground, true);
         // But it is mostly annoying to have translucent menubar and tabbar
         setAttribute(Qt::WA_NoSystemBackground, false);
@@ -119,7 +119,7 @@ MainWindow::MainWindow()
     // create menus
     createGUI();
 
-    // rememebr the original menu accelerators for later use
+    // remember the original menu accelerators for later use
     rememberMenuAccelerators();
 
     // replace standard shortcuts which cannot be used in a terminal

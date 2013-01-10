@@ -266,7 +266,7 @@ void TerminalDisplay::setLineSpacing(uint i)
 namespace Konsole
 {
 /**
- * This function installs the factory function which lets Qt instanciate the QAccessibleInterface
+ * This function installs the factory function which lets Qt instantiate the QAccessibleInterface
  * for the TerminalDisplay.
  */
 QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *object)
@@ -1003,7 +1003,7 @@ void TerminalDisplay::updateImage()
         bool updateLine = false;
 
         // The dirty mask indicates which characters need repainting. We also
-        // mark surrounding neighbours dirty, in case the character exceeds
+        // mark surrounding neighbors dirty, in case the character exceeds
         // its cell boundaries
         memset(dirtyMask, 0, columnsToUpdate + 2);
 
@@ -1293,7 +1293,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                     painter.drawLine(r.left() , underlinePos ,
                                      r.right() , underlinePos);
                 }
-                // Marker hotspots simply have a transparent rectanglular shape
+                // Marker hotspots simply have a transparent rectangular shape
                 // drawn on top of them
             } else if (spot->type() == Filter::HotSpot::Marker) {
                 //TODO - Do not use a hardcoded color for this
@@ -2952,7 +2952,7 @@ void TerminalDisplay::visualBell()
 
 void TerminalDisplay::swapFGBGColors()
 {
-    // swap the default foreground & backround color
+    // swap the default foreground & background color
     ColorEntry color = _colorTable[DEFAULT_BACK_COLOR];
     _colorTable[DEFAULT_BACK_COLOR] = _colorTable[DEFAULT_FORE_COLOR];
     _colorTable[DEFAULT_FORE_COLOR] = color;

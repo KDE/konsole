@@ -160,7 +160,7 @@ int Application::newInstance()
  *
  * ;; is the token separator
  * # at the beginning of line results in line being ignored.
- * supported stokens are title, command and profile.
+ * supported tokens are title, command and profile.
  *
  * Note that the title is static and the tab will close when the
  * command is complete (do not use --noclose).  You can start new tabs.
@@ -203,7 +203,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
             createTabFromArgs(args, window, lineTokens);
             sessions++;
         } else {
-            kWarning() << "Each line should contain at least one of 'commad' and 'profile'.";
+            kWarning() << "Each line should contain at least one of 'command' and 'profile'.";
         }
     }
     tabsFile.close();
@@ -235,7 +235,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     Profile::Ptr newProfile = Profile::Ptr(new Profile(baseProfile));
     newProfile->setHidden(true);
 
-    // FIXME: the method of determining whethter to use newProfile does not
+    // FIXME: the method of determining whether to use newProfile does not
     // scale well when we support more fields in the future
     bool shouldUseNewProfile = false;
 

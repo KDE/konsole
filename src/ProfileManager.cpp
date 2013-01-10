@@ -139,7 +139,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     if (!fileInfo.isAbsolute())
         path = KStandardDirs::locate("data", path);
 
-    // if the file is not found, return imediately
+    // if the file is not found, return immediately
     if (path.isEmpty()) {
         return Profile::Ptr();
     }

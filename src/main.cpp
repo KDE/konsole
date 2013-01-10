@@ -88,7 +88,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 bool shouldUseNewProcess()
 {
     // The "unique process" model of konsole is incompatible with some or all
-    // Qt/KDE options. When those incompatile options are given, konsole must
+    // Qt/KDE options. When those incompatible options are given, konsole must
     // use new process
     //
     // TODO: make sure the existing list is OK and add more incompatible options.

@@ -60,7 +60,7 @@ public:
     virtual ~ManageProfilesDialog();
 
     /**
-     * Specifies whether the shorcut editor should be show.
+     * Specifies whether the shortcut editor should be show.
      * The shortcut editor allows shortcuts to be associated with
      * profiles.  When a shortcut is changed, the dialog will call
      * SessionManager::instance()->setShortcut() to update the shortcut

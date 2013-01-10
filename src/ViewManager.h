@@ -78,7 +78,7 @@ public:
     ~ViewManager();
 
     /**
-     * Creates a new view to display the outout from and deliver input to @p session.
+     * Creates a new view to display the output from and deliver input to @p session.
      * Constructs a new container to hold the views if no container has yet been created.
      */
     void createView(Session* session);

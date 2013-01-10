@@ -287,7 +287,7 @@ public:
     void setForeColor(int space, int color);
     /**
      * Sets the cursor's background color.
-     * @param space The color space used by the @p color argumnet.
+     * @param space The color space used by the @p color argument.
      * @param color The new background color.  The meaning of this depends on
      * the color @p space used.
      *

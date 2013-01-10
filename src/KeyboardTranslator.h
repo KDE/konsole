@@ -37,7 +37,7 @@ class QTextStream;
 namespace Konsole
 {
 /**
- * A convertor which maps between key sequences pressed by the user and the
+ * A converter which maps between key sequences pressed by the user and the
  * character strings which should be sent to the terminal and commands
  * which should be invoked when those character sequences are pressed.
  *
@@ -68,7 +68,7 @@ public:
          */
         NewLineState = 1,
         /**
-         * Indicates that the terminal is in 'Ansi' mode.
+         * Indicates that the terminal is in 'ANSI' mode.
          * TODO: More documentation
          */
         AnsiState = 2,
