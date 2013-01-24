@@ -16,7 +16,7 @@ cd "${konsole_data_path}"
 
 for i in *.colorscheme ; do
     # no match? 
-    if test "$i" = "*keytab" ; then
+    if test "$i" = "*.colorscheme" ; then
         break
     fi
 
