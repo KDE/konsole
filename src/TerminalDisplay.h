@@ -335,14 +335,14 @@ public:
     void visualBell();
 
     /**
-     * Specified whether zoom terminal on Ctrl+<mouse wheel> is enabled or not.
+     * Specified whether zoom terminal on Ctrl+mousewheel  is enabled or not.
      * Defaults to enabled.
      */
     void setMouseWheelZoom(bool value) {
         _mouseWheelZoom = value;
     };
     /**
-     * Returns the whether zoom terminal on Ctrl+<mouse wheel> is enabled.
+     * Returns the whether zoom terminal on Ctrl+mousewheel is enabled.
      *
      * See setMouseWheelZoom()
      */
