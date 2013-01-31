@@ -1831,9 +1831,8 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
         _lineSelectionMode = false;
         _wordSelectionMode = false;
 
-        bool selected = false;
         // The user clicked inside selected text
-        selected =  _screenWindow->isSelected(pos.x(), pos.y());
+        bool selected =  _screenWindow->isSelected(pos.x(), pos.y());
 
         // Drag only when the Control key is held
         if ((!_ctrlRequiredForDrag || ev->modifiers() & Qt::ControlModifier) && selected) {
