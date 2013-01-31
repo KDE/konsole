@@ -1224,6 +1224,8 @@ void Vt102Emulation::setMode(int m)
         setScreen(1);
         break;
     }
+    // FIXME: Currently this has a redundant condition as MODES_SCREEN is 6
+    // and MODE_NewLine is 5
     if (m < MODES_SCREEN || m == MODE_NewLine) {
         _screen[0]->setMode(m);
         _screen[1]->setMode(m);
@@ -1250,6 +1252,8 @@ void Vt102Emulation::resetMode(int m)
         setScreen(0);
         break;
     }
+    // FIXME: Currently this has a redundant condition as MODES_SCREEN is 6
+    // and MODE_NewLine is 5
     if (m < MODES_SCREEN || m == MODE_NewLine) {
         _screen[0]->resetMode(m);
         _screen[1]->resetMode(m);
