@@ -1,4 +1,4 @@
-/* $XFree86: xc/programs/xterm/wcwidth.h,v 1.2 2001/06/18 19:09:27 dickey Exp $ */
+/* $XFree86: xc/programs/xterm/wcwidth.h,v 1.5 2005/05/03 00:38:25 dickey Exp $ */
 
 /* Markus Kuhn -- 2001-01-12 -- public domain */
 /* Adaptions for KDE by Waldo Bastian <bastian@kde.org> */
@@ -9,9 +9,10 @@
 // Qt
 #include <QtCore/QString>
 
-int konsole_wcwidth(quint16 ucs);
-int konsole_wcwidth_cjk(quint16 ucs);
+int konsole_wcwidth(quint16 oucs);
+int konsole_wcwidth_cjk(quint16 oucs);
 
 int string_width(const QString& text);
+int string_width_cjk(const QString& text);
 
 #endif
