@@ -3,3 +3,6 @@
 
 /* Defined if you have sys/proc_info.h */
 #cmakedefine HAVE_SYS_PROC_INFO_H 1
+
+/* Defined if you have LibKonq */
+#cmakedefine HAVE_LIBKONQ 1
