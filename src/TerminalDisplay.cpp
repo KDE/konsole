@@ -1852,7 +1852,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             _columnSelectionMode = (ev->modifiers() & Qt::AltModifier) && (ev->modifiers() & Qt::ControlModifier);
 
             if (_mouseMarks) {
-                if (ev->modifiers() & Qt::ShiftModifier) {
+                if (ev->modifiers() == Qt::ShiftModifier) {
                     extendSelection(ev->pos());
                 } else {
                     _screenWindow->clearSelection();
