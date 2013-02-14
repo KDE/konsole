@@ -696,12 +696,15 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
     else
         useBold = (weight == ColorEntry::Bold) ? true : false;
     const bool useUnderline = style->rendition & RE_UNDERLINE || font().underline();
+    const bool useItalic = style->rendition & RE_ITALIC || font().italic();
 
     QFont font = painter.font();
     if (font.bold() != useBold
-            || font.underline() != useUnderline) {
+            || font.underline() != useUnderline
+            || font.italic() != useItalic) {
         font.setBold(useBold);
         font.setUnderline(useUnderline);
+        font.setItalic(useItalic);
         painter.setFont(font);
     }
 
