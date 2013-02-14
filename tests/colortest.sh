@@ -17,15 +17,18 @@ do
     l2="    ";
     l3="    ";
     l4="    ";
+    l5="    ";
     for bg in 40 41 42 43 44 45 46 47 49
     do
 	l1="${l1}${CSI}${fg};${bg}m Normal ${RST}"
 	l2="${l2}${CSI}${fg};${bg};1m Bold   ${RST}"
-	l3="${l3}${CSI}${fg};${bg};5m Blink  ${RST}"
-	l4="${l4}${CSI}${fg};${bg};1;5m Bold!  ${RST}"
+	l3="${l3}${CSI}${fg};${bg};3m Italic ${RST}"
+	l4="${l4}${CSI}${fg};${bg};5m Blink  ${RST}"
+	l5="${l5}${CSI}${fg};${bg};1;5m Bold!  ${RST}"
     done
     echo "$l1"
     echo "$l2"
     echo "$l3"
     echo "$l4"
+    echo "$l5"
 done
