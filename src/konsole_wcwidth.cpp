@@ -60,6 +60,11 @@
  *
  * Latest version: http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
  */
+/*
+ *  Adaptions for KDE by Waldo Bastian <bastian@kde.org> and
+ *    Francesco Cecconi <francesco.cecconi@gmail.com>
+ *  See COPYING.Unicode for the license for the original wcwidth.c
+ */
 
 // Own
 #include "konsole_wcwidth.h"
