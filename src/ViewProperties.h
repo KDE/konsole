@@ -90,23 +90,26 @@ public:
         return _mimeType;
     }
 
-    /** Returns a new QMimeData instance which represents the view with the given @p id
-     * (See identifier()).  The QMimeData instance returned must be deleted by the caller.
+    /** Returns a new QMimeData instance which represents the view with the
+     * given @p id (See identifier()).  The QMimeData instance returned must
+     * be deleted by the caller.
      */
     static QMimeData* createMimeData(int id) {
         QMimeData* mimeData = new QMimeData;
-        QByteArray data((char*)&id, sizeof(int));
-        mimeData->setData(mimeType(), data);
+        mimeData->setData(mimeType(), QByteArray::number(id));
         return mimeData;
     }
-    /** Decodes a QMimeData instance created with createMimeData() and returns the identifier
-     * of the associated view.  The associated ViewProperties instance can then be retrieved by
-     * calling propertiesById()
+
+    /** Decodes a QMimeData instance created with createMimeData() and
+     * returns the identifier of the associated view.  The associated
+     * ViewProperties instance can then be retrieved by calling propertiesById()
      *
      * The QMimeData instance must support the mime format returned by mimeType()
      */
     static int decodeMimeData(const QMimeData* mimeData) {
-        return *(int*)(mimeData->data(ViewProperties::mimeType()).constData());
+        bool ok;
+        // we are not checking return value ok; not sure how int could be invalid
+        return mimeData->data(ViewProperties::mimeType()).toInt(&ok);
     }
 
 signals:
