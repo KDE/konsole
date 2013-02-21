@@ -304,6 +304,9 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
         if (args->isSet("hide-menubar")) {
             window->setMenuBarInitialVisibility(false);
         }
+	if (args->isSet("fullscreen")) {
+	    window->viewFullScreen(true);
+        }
 
         // override default tabbbar visibility
         // FIXME: remove those magic number

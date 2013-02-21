@@ -157,7 +157,6 @@ private slots:
     void activeViewTitleChanged(ViewProperties*);
 
     void profileListChanged(const QList<QAction*>& actions);
-    void viewFullScreen(bool fullScreen);
     void configureNotifications();
 
     void setSaveGeometryOnExit(bool visible);
@@ -171,6 +170,9 @@ private slots:
     void setProfileList(ProfileList* list);
 
     void applyKonsoleSettings();
+
+public slots:
+    void viewFullScreen(bool fullScreen);
 
 private:
     void correctStandardShortcuts();

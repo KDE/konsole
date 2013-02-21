@@ -175,6 +175,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("hide-menubar", ki18nc("@info:shell", "Hide the menubar, overriding the default setting"));
     options.add("show-tabbar", ki18nc("@info:shell", "Show the tabbar, overriding the default setting"));
     options.add("hide-tabbar", ki18nc("@info:shell", "Hide the tabbar, overriding the default setting"));
+    options.add("fullscreen", ki18nc("@info:shell", "Start Konsole in fullscreen mode"));
     options.add("notransparency",
                 ki18nc("@info:shell", "Disable transparent backgrounds, even if the system"
                       " supports them."));
