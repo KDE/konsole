@@ -87,6 +87,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { HistoryMode , "HistoryMode" , SCROLLING_GROUP , QVariant::Int }
     , { HistorySize , "HistorySize" , SCROLLING_GROUP , QVariant::Int }
     , { ScrollBarPosition , "ScrollBarPosition" , SCROLLING_GROUP , QVariant::Int }
+    , { ScrollFullPage , "ScrollFullPage" , SCROLLING_GROUP , QVariant::Bool }
 
     // Terminal Features
     , { BlinkingTextEnabled , "BlinkingTextEnabled" , TERMINAL_GROUP , QVariant::Bool }
@@ -169,6 +170,7 @@ FallbackProfile::FallbackProfile()
     setProperty(HistoryMode, Enum::FixedSizeHistory);
     setProperty(HistorySize, 1000);
     setProperty(ScrollBarPosition, Enum::ScrollBarRight);
+    setProperty(ScrollFullPage, false);
 
     setProperty(FlowControlEnabled, true);
     setProperty(BlinkingTextEnabled, true);

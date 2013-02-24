@@ -151,6 +151,10 @@ public:
          * See Enum::ScrollBarPositionEnum
          */
         ScrollBarPosition,
+	/** (bool) Specifies whether the PageUp/Down will scroll the full 
+	 * height or half height.
+         */
+        ScrollFullPage,
         /** (bool) Specifies whether the terminal will enable Bidirectional
          * text display
          */

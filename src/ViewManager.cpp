@@ -791,6 +791,9 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     else if (scrollBarPosition == Enum::ScrollBarHidden)
         view->setScrollBarPosition(Enum::ScrollBarHidden);
 
+    bool scrollFullPage = profile->property<bool>(Profile::ScrollFullPage);
+    view->setScrollFullPage(scrollFullPage);
+    
     // show hint about terminal size after resizing
     view->setShowTerminalSizeHint(profile->showTerminalSizeHint());
 

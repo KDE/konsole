@@ -318,6 +318,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _autoCopySelectedText(false)
     , _middleClickPasteMode(Enum::PasteFromX11Selection)
     , _scrollbarLocation(Enum::ScrollBarRight)
+    , _scrollFullPage(false)
     , _wordCharacters(":@-./_~")
     , _bellMode(Enum::NotifyBell)
     , _allowBlinkingText(true)
@@ -1805,6 +1806,16 @@ void TerminalDisplay::setScroll(int cursor, int slines)
     connect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
 }
 
+void TerminalDisplay::setScrollFullPage(bool fullPage)
+{
+    _scrollFullPage = fullPage;
+}
+
+bool TerminalDisplay::scrollFullPage() const
+{
+    return _scrollFullPage;
+}
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                  Mouse                                    */
@@ -2795,7 +2806,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
 
 void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode mode, int amount)
 {
-    _screenWindow->scrollBy(mode, amount);
+    _screenWindow->scrollBy(mode, amount, _scrollFullPage);
     _screenWindow->setTrackOutput(_screenWindow->atEndOfOutput());
     updateLineProperties();
     updateImage();

@@ -105,6 +105,9 @@ public:
      */
     void setScroll(int cursor, int lines);
 
+    void setScrollFullPage(bool fullPage);
+    bool scrollFullPage() const;
+
     /**
      * Returns the display's filter chain.  When the image for the display is updated,
      * the text is passed through each filter in the chain.  Each filter can define
@@ -801,6 +804,7 @@ private:
 
     QScrollBar* _scrollBar;
     Enum::ScrollBarPositionEnum _scrollbarLocation;
+    bool _scrollFullPage;
     QString     _wordCharacters;
     int         _bellMode;
 

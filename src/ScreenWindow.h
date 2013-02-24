@@ -201,8 +201,9 @@ public:
      * @param amount The number of lines or pages ( depending on @p mode ) to scroll by.  If
      * this number is positive, the view is scrolled down.  If this number is negative, the view
      * is scrolled up.
+     * @param fullPage Specifies whether to scroll by full page or half page.
      */
-    void scrollBy(RelativeScrollMode mode , int amount);
+    void scrollBy(RelativeScrollMode mode, int amount, bool fullPage);
 
     /**
      * Specifies whether the window should automatically move to the bottom
