@@ -1099,7 +1099,7 @@ void SessionController::enableSearchBar(bool showSearchBar)
         connect(_searchBar, SIGNAL(searchReturnPressed(QString)), this,
                 SLOT(searchTextChanged(QString)));
         connect(_searchBar, SIGNAL(searchShiftPlusReturnPressed()), this,
-                SLOT(findPreviousInHistory()));
+                SLOT(findNextInHistory()));
         _searchBar->clearLineEdit();
     } else {
         disconnect(_searchBar, SIGNAL(searchChanged(QString)), this,
@@ -1107,7 +1107,7 @@ void SessionController::enableSearchBar(bool showSearchBar)
         disconnect(_searchBar, SIGNAL(searchReturnPressed(QString)), this,
                    SLOT(searchTextChanged(QString)));
         disconnect(_searchBar, SIGNAL(searchShiftPlusReturnPressed()), this,
-                   SLOT(findPreviousInHistory()));
+                   SLOT(findNextInHistory()));
     }
 }
 
@@ -1156,7 +1156,7 @@ void SessionController::searchTextChanged(const QString& text)
 
     // update search.  this is called even when the text is
     // empty to clear the view's filters
-    beginSearch(text , SearchHistoryTask::ForwardsSearch);
+    beginSearch(text , SearchHistoryTask::BackwardsSearch);
 }
 void SessionController::searchCompleted(bool success)
 {
@@ -1225,7 +1225,7 @@ void SessionController::changeSearchMatch()
 
     // reset Selection for new case match
     _view->screenWindow()->clearSelection();
-    beginSearch(_searchBar->searchText(), SearchHistoryTask::ForwardsSearch);
+    beginSearch(_searchBar->searchText(), SearchHistoryTask::BackwardsSearch);
 }
 void SessionController::showHistoryOptions()
 {
@@ -1828,7 +1828,7 @@ void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
 
 SearchHistoryTask::SearchHistoryTask(QObject* parent)
     : SessionTask(parent)
-    , _direction(ForwardsSearch)
+    , _direction(BackwardsSearch)
 {
 }
 void SearchHistoryTask::setSearchDirection(SearchDirection direction)
