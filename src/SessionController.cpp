@@ -1094,18 +1094,19 @@ void SessionController::enableSearchBar(bool showSearchBar)
         return;
     _searchBar->setVisible(showSearchBar);
     if (showSearchBar) {
+        _searchBar->clearLineEdit();
+        _searchBar->setSearchText(_searchText);
         connect(_searchBar, SIGNAL(searchChanged(QString)), this,
                 SLOT(searchTextChanged(QString)));
         connect(_searchBar, SIGNAL(searchReturnPressed(QString)), this,
-                SLOT(searchTextChanged(QString)));
+                SLOT(findPreviousInHistory()));
         connect(_searchBar, SIGNAL(searchShiftPlusReturnPressed()), this,
                 SLOT(findNextInHistory()));
-        _searchBar->clearLineEdit();
     } else {
         disconnect(_searchBar, SIGNAL(searchChanged(QString)), this,
                    SLOT(searchTextChanged(QString)));
         disconnect(_searchBar, SIGNAL(searchReturnPressed(QString)), this,
-                   SLOT(searchTextChanged(QString)));
+                   SLOT(findPreviousInHistory()));
         disconnect(_searchBar, SIGNAL(searchShiftPlusReturnPressed()), this,
                    SLOT(findNextInHistory()));
     }
@@ -1150,6 +1151,11 @@ void SessionController::setFindNextPrevEnabled(bool enabled)
 void SessionController::searchTextChanged(const QString& text)
 {
     Q_ASSERT(_view->screenWindow());
+
+    if (_searchText == text)
+        return;
+
+    _searchText = text;
 
     if (text.isEmpty())
         _view->screenWindow()->clearSelection();

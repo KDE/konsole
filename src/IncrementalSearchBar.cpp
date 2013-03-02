@@ -144,6 +144,12 @@ QString IncrementalSearchBar::searchText()
     return _searchEdit->text();
 }
 
+void IncrementalSearchBar::setSearchText(const QString& text)
+{
+    if (text != searchText())
+        _searchEdit->setText(text);
+}
+
 bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* aEvent)
 {
     if (watched == _searchEdit) {

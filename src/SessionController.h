@@ -340,6 +340,8 @@ private:
     QStringList _bookmarkValidProgramsToClear;
 
     bool _isSearchBarEnabled;
+
+    QString _searchText;
 };
 inline bool SessionController::isValid() const
 {

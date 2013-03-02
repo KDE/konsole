@@ -93,6 +93,8 @@ public:
     /** Returns the current search text */
     QString searchText();
 
+    void setSearchText(const QString& text);
+
     // reimplemented
     virtual void setVisible(bool visible);
 signals:
