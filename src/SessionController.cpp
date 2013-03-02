@@ -549,7 +549,11 @@ void SessionController::setupCommonActions()
 
     // Close Session
     action = collection->addAction("close-session", this, SLOT(closeSession()));
-    action->setText(i18n("&Close Tab"));
+    if (isKonsolePart())
+        action->setText(i18n("&Close Session"));
+    else
+        action->setText(i18n("&Close Tab"));
+
     action->setIcon(KIcon("tab-close"));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_W));
 
