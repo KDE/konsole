@@ -628,6 +628,13 @@ void SessionController::setupCommonActions()
     _findPreviousAction = KStandardAction::findPrev(this, SLOT(findPreviousInHistory()), collection);
     _findPreviousAction->setShortcut(QKeySequence());
     _findPreviousAction->setEnabled(false);
+
+    // Character Encoding
+    _codecAction = new KCodecAction(i18n("Set &Encoding"), this);
+    _codecAction->setIcon(KIcon("character-set"));
+    collection->addAction("set-encoding", _codecAction);
+    connect(_codecAction->menu(), SIGNAL(aboutToShow()), this, SLOT(updateCodecAction()));
+    connect(_codecAction, SIGNAL(triggered(QTextCodec*)), this, SLOT(changeCodec(QTextCodec*)));
 }
 
 void SessionController::setupExtraActions()
@@ -686,13 +693,6 @@ void SessionController::setupExtraActions()
     toggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_I));
     action = collection->addAction("monitor-silence", toggleAction);
     connect(action, SIGNAL(toggled(bool)), this, SLOT(monitorSilence(bool)));
-
-    // Character Encoding
-    _codecAction = new KCodecAction(i18n("Set &Encoding"), this);
-    _codecAction->setIcon(KIcon("character-set"));
-    collection->addAction("set-encoding", _codecAction);
-    connect(_codecAction->menu(), SIGNAL(aboutToShow()), this, SLOT(updateCodecAction()));
-    connect(_codecAction, SIGNAL(triggered(QTextCodec*)), this, SLOT(changeCodec(QTextCodec*)));
 
     // Text Size
     action = collection->addAction("enlarge-font", this, SLOT(increaseFontSize()));

@@ -1,11 +1,13 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsolepart" version="9">
+<kpartgui name="konsolepart" version="10">
     <Menu name="session-popup-menu">
         <Action name="edit_copy"/>
         <Action name="edit_paste"/>
         <Action name="web-search"/>
         <Action name="open-browser"/>
+        <Separator/>
+        <Action name="set-encoding"/>
         <Separator/>
         <Action name="edit_find"/>
         <Menu name="history"><text>S&amp;crollback</text>
