@@ -84,6 +84,7 @@ public:
      * and make it easy for them to change it.
      */
     void selectProfileName();
+    const Profile::Ptr lookupProfile() const;
 
 public slots:
     // reimplemented
@@ -230,8 +231,6 @@ private:
         const char* slot;
     };
     void setupCheckBoxes(BooleanOption* options , const Profile::Ptr profile);
-
-    const Profile::Ptr lookupProfile() const;
 
     Ui::EditProfileDialog* _ui;
     Profile::Ptr _tempProfile;

@@ -218,6 +218,10 @@ SessionController::~SessionController()
         _view->setScreenWindow(0);
 
     _allControllers.remove(this);
+
+    if (!_editProfileDialog.isNull()) {
+        delete _editProfileDialog.data();
+    }
 }
 void SessionController::trackOutput(QKeyEvent* event)
 {
@@ -783,12 +787,31 @@ void SessionController::changeCodec(QTextCodec* codec)
     _session->setCodec(codec);
 }
 
+EditProfileDialog* SessionController::profileDialogPointer()
+{
+    return _editProfileDialog.data();
+}
+
 void SessionController::editCurrentProfile()
 {
-    EditProfileDialog* dialog = new EditProfileDialog(QApplication::activeWindow());
+    // Searching for Edit profile dialog opened with the same profile
+    foreach (SessionController* session, _allControllers.values()) {
+        if (session->profileDialogPointer()
+                && session->profileDialogPointer()->isVisible()
+                && session->profileDialogPointer()->lookupProfile() == SessionManager::instance()->sessionProfile(_session)) {
+            session->profileDialogPointer()->close();
+        }
+    }
 
-    dialog->setProfile(SessionManager::instance()->sessionProfile(_session));
-    dialog->show();
+    // NOTE bug311270: For to prevent the crash, the profile must be reset.
+    if (!_editProfileDialog.isNull()) {
+        // exists but not visible
+        delete _editProfileDialog.data();
+    }
+
+    _editProfileDialog = new EditProfileDialog(QApplication::activeWindow());
+    _editProfileDialog.data()->setProfile(SessionManager::instance()->sessionProfile(_session));
+    _editProfileDialog.data()->show();
 }
 
 void SessionController::renameSession()

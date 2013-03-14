@@ -3105,6 +3105,11 @@ void TerminalDisplay::setSessionController(SessionController* controller)
     _sessionController = controller;
 }
 
+SessionController* TerminalDisplay::sessionController()
+{
+    return _sessionController;
+}
+
 AutoScrollHandler::AutoScrollHandler(QWidget* parent)
     : QObject(parent)
     , _timerId(0)

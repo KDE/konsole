@@ -32,6 +32,10 @@
 // Konsole
 #include "EditProfileDialog.h"
 #include "ProfileManager.h"
+#include "Session.h"
+#include "TerminalDisplay.h"
+#include "SessionManager.h"
+#include "SessionController.h"
 #include "ui_ManageProfilesDialog.h"
 
 using namespace Konsole;
@@ -344,10 +348,27 @@ void ManageProfilesDialog::createProfile()
 }
 void ManageProfilesDialog::editSelected()
 {
+    QList<Profile::Ptr> profiles(selectedProfiles());
+
+    foreach (Session* session, SessionManager::instance()->sessions()) {
+         foreach (TerminalDisplay* terminal, session->views()) {
+             // Searching for opened profiles
+             if (terminal->sessionController()->profileDialogPointer() != NULL) {
+                 foreach (const Profile::Ptr & profile, profiles) {
+                     if (profile->name() == terminal->sessionController()->profileDialogPointer()->lookupProfile()->name()
+                         && terminal->sessionController()->profileDialogPointer()->isVisible()) {
+                         // close opened edit dialog
+                         terminal->sessionController()->profileDialogPointer()->close();
+                     }
+                 }
+             }
+         }
+    }
+
     EditProfileDialog dialog(this);
     // the dialog will delete the profile group when it is destroyed
     ProfileGroup* group = new ProfileGroup;
-    foreach(const Profile::Ptr & profile, selectedProfiles()) {
+    foreach (const Profile::Ptr & profile, profiles) {
         group->addProfile(profile);
     }
     group->updateValues();

@@ -51,7 +51,6 @@ namespace Konsole
 class FilterChain;
 class TerminalImageFilterChain;
 class SessionController;
-
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
  * to the terminal.
@@ -217,6 +216,7 @@ public:
     uint lineSpacing() const;
 
     void setSessionController(SessionController* controller);
+    SessionController* sessionController();
 
     /**
      * Sets the shape of the keyboard cursor.  This is the cursor drawn

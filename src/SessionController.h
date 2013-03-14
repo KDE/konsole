@@ -62,6 +62,7 @@ class IncrementalSearchBar;
 class ProfileList;
 class UrlFilter;
 class RegExpFilter;
+class EditProfileDialog;
 
 // SaveHistoryTask
 class TerminalCharacterDecoder;
@@ -143,6 +144,8 @@ public:
      * show the menu bar.
      */
     void setShowMenuAction(QAction* action);
+
+    EditProfileDialog* profileDialogPointer();
 
     // reimplemented
     virtual KUrl url() const;
@@ -340,6 +343,7 @@ private:
     QStringList _bookmarkValidProgramsToClear;
 
     bool _isSearchBarEnabled;
+    QWeakPointer<EditProfileDialog> _editProfileDialog;
 
     QString _searchText;
 };
