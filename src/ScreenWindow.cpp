@@ -216,7 +216,7 @@ void ScreenWindow::scrollBy(RelativeScrollMode mode, int amount, bool fullPage)
     if (mode == ScrollLines) {
         scrollTo(currentLine() + amount);
     } else if (mode == ScrollPages) {
-        if (fullPage) 
+        if (fullPage)
             scrollTo(currentLine() + amount * (windowLines()));
         else
             scrollTo(currentLine() + amount * (windowLines() / 2));

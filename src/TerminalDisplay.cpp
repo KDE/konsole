@@ -1874,7 +1874,6 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
                     pos.ry() += _scrollBar->value();
                     _iPntSel = _pntSel = pos;
                     _actSel = 1; // left mouse button pressed but nothing selected yet.
-
                 }
             } else {
                 emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
@@ -2598,8 +2597,8 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
     if (text.length() > 8000) {
         if (KMessageBox::warningContinueCancel(window(),
                         i18np("Are you sure you want to paste %1 character?",
-			     "Are you sure you want to paste %1 characters?",
-                             text.length()),
+                              "Are you sure you want to paste %1 characters?",
+                              text.length()),
                         i18n("Confirm Paste"),
                         KStandardGuiItem::cont(),
                         KStandardGuiItem::cancel(),
