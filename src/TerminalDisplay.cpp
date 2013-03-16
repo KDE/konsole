@@ -1263,6 +1263,10 @@ void TerminalDisplay::paintFilters(QPainter& painter)
             // occupied on this line rather than the width of the
             // display in _columns
 
+            // Check image size so _image[] is valid (see makeImage)
+            if (loc(endColumn, line) > _imageSize)
+                break;
+
             // ignore whitespace at the end of the lines
             while (_image[loc(endColumn, line)].isSpace() && endColumn > 0)
                 endColumn--;
