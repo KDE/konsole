@@ -153,7 +153,7 @@ void ProfileTest::testProfileGroup()
     QCOMPARE(profile[0]->property<QString>(Profile::Command), QString("ssh"));
     QVERIFY(profile[1]->property<bool>(Profile::AntiAliasFonts) == false);
 
-    // set and test non-sharable properties in the group
+    // set and test non-shareable properties in the group
     // (should have no effect)
     group->setProperty(Profile::Name, "NewName");
     group->setProperty(Profile::Path, "NewPath");

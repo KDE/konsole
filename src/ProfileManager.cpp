@@ -548,7 +548,7 @@ void ProfileManager::loadFavorites()
         favoriteSet << "Shell.profile";
     }
 
-    // look for favorites amongst those already loaded
+    // look for favorites among those already loaded
     foreach(const Profile::Ptr& profile, _profiles) {
         const QString& path = profile->path();
         if (favoriteSet.contains(path)) {

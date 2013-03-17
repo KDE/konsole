@@ -591,7 +591,7 @@ void Screen::initTabStops()
 {
     _tabStops.resize(_columns);
 
-    // Arrg! The 1st tabstop has to be one longer than the other.
+    // The 1st tabstop has to be one longer than the other.
     // i.e. the kids start counting from 0 instead of 1.
     // Other programs might behave correctly. Be aware.
     for (int i = 0; i < _columns; i++)

@@ -659,7 +659,7 @@ private slots:
     void tripleClickTimeout();  // resets possibleTripleClick
 
     /**
-     * Called from the drag'n'drop popup. Causes the dropped URLs to be pasted as text.
+     * Called from the drag-and-drop popup. Causes the dropped URLs to be pasted as text.
      */
     void dropMenuPasteActionTriggered();
 
