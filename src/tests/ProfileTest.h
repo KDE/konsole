@@ -33,6 +33,7 @@ private slots:
     void testProfile();
     void testClone();
     void testProfileGroup();
+    void testProfileFileNames();
 };
 
 }
