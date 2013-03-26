@@ -710,7 +710,6 @@ private:
     QTimer*        _silenceTimer;
     QTimer*        _activityTimer;
 
-    bool           _masterMode;
     bool           _autoClose;
     bool           _closePerUserRequest;
 
