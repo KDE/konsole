@@ -136,8 +136,6 @@ private slots:
     void notifySearchChanged();
 
 private:
-    bool _foundMatch;
-
     KLineEdit* _searchEdit;
     QAction* _caseSensitive;
     QAction* _regExpression;

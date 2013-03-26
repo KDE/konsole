@@ -38,7 +38,6 @@ using namespace Konsole;
 
 IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     : QWidget(aParent)
-    , _foundMatch(false)
     , _searchEdit(0)
     , _caseSensitive(0)
     , _regExpression(0)
