@@ -47,7 +47,7 @@ public:
     virtual bool writeProfile(const QString& path , const Profile::Ptr profile) = 0;
 };
 /** Writes a KDE 4 .profile file. */
-class KDE4ProfileWriter : public ProfileWriter
+class KONSOLEPRIVATE_EXPORT KDE4ProfileWriter : public ProfileWriter
 {
 public:
     virtual QString getPath(const Profile::Ptr profile);
