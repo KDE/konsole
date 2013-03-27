@@ -212,7 +212,7 @@ void ViewManager::setupActions()
         collection->addAction("move-view-right", moveViewRightAction);
 
         // Switch to tab N shortcuts
-        const int SWITCH_TO_TAB_COUNT = 10;
+        const int SWITCH_TO_TAB_COUNT = 19;
         QSignalMapper* switchToTabMapper = new QSignalMapper(this);
         connect(switchToTabMapper, SIGNAL(mapped(int)), this, SLOT(switchToView(int)));
         for (int i = 0; i < SWITCH_TO_TAB_COUNT; i++) {
