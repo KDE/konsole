@@ -328,6 +328,14 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
     if (name.isEmpty())
         return defaultColorScheme();
 
+    // A fix to prevent infinite loops if users puts / in ColorScheme name
+    // Konsole will create a sub-folder in that case (bko 315086)
+    // More code will have to go in to prevent the users from doing that.
+    if (name.contains("/")) {
+        kWarning() << name << " has an invalid character / in the name ... skipping";
+        return defaultColorScheme();
+    }
+
     if (_colorSchemes.contains(name)) {
         return _colorSchemes[name];
     } else {
