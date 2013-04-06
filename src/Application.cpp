@@ -324,6 +324,10 @@ Profile::Ptr Application::processProfileSelectArgs(KCmdLineArgs* args)
                                    args->getOption("profile"));
         if (profile)
             return profile;
+    } else if (args->isSet("fallback-profile")) {
+        Profile::Ptr profile = ProfileManager::instance()->loadProfile("FALLBACK/");
+        if (profile)
+            return profile;
     }
 
     return defaultProfile;

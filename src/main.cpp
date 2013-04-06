@@ -155,6 +155,8 @@ void fillCommandLineOptions(KCmdLineOptions& options)
 {
     options.add("profile <name>",
                 ki18nc("@info:shell", "Name of profile to use for new Konsole instance"));
+    options.add("fallback-profile",
+                ki18nc("@info:shell", "Use the internal FALLBACK profile"));
     options.add("workdir <dir>",
                 ki18nc("@info:shell", "Set the initial working directory of the new tab or"
                       " window to 'dir'"));
