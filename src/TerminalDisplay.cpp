@@ -2018,6 +2018,15 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     extendSelection(ev->pos());
 }
 
+void TerminalDisplay::leaveEvent(QEvent *)
+{
+    // remove underline from an active link when cursor leaves the widget area
+    if(!_mouseOverHotspotArea.isEmpty()) {
+        update(_mouseOverHotspotArea);
+        _mouseOverHotspotArea = QRegion();
+    }
+}
+
 void TerminalDisplay::extendSelection(const QPoint& position)
 {
     if (!_screenWindow)
