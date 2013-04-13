@@ -53,9 +53,25 @@ using namespace Konsole;
 
 void PartTest::testFd()
 {
+    // find ping
+    QStringList pingList;
+    QFileInfo info;
+    QString pingExe;
+    pingList << "/bin/ping" << "/sbin/ping";
+    for (int i = 0; i < pingList.size(); ++i) {
+        info.setFile(pingList.at(i));
+        if (info.exists() && info.isExecutable())
+            pingExe = pingList.at(i);
+    }
+
+    if (pingExe.isEmpty()) {
+        QSKIP("ping command not found.", SkipSingle);
+        return;
+    }
+
     // start a pty process
     KPtyProcess ptyProcess;
-    ptyProcess.setProgram("/bin/ping", QStringList() << "localhost");
+    ptyProcess.setProgram(pingExe, QStringList() << "localhost");
     ptyProcess.setPtyChannels(KPtyProcess::AllChannels);
     ptyProcess.start();
     QVERIFY(ptyProcess.waitForStarted());
