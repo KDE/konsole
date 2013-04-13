@@ -9,8 +9,6 @@ if(HAVE_LIBKONQ)
 endif()
 
 include(CheckIncludeFiles)
-check_include_files("sys/proc.h"      HAVE_SYS_PROC_H)
-check_include_files("sys/proc_info.h" HAVE_SYS_PROC_INFO_H)
 
 configure_file(config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h)
 

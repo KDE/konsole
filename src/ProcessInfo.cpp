@@ -48,12 +48,6 @@
 #if defined(Q_OS_MAC)
 #include <sys/sysctl.h>
 #include <libproc.h>
-#if defined(HAVE_SYS_PROC_INFO_H)
-#include <sys/proc_info.h>
-#endif
-#if defined(HAVE_SYS_PROC_H)
-#include <sys/proc.h>
-#endif
 #include <kde_file.h>
 #endif
 
