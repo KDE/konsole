@@ -47,7 +47,7 @@
 <legalnotice>&FDLNotice;</legalnotice>
 
 <date>2012-05-27</date>
-<releaseinfo>2.9 (&kde; 4.9)</releaseinfo>
+<releaseinfo>2.10 (&kde; 4.11)</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -62,7 +62,7 @@
 </keywordset>
 
 </bookinfo>
-
+<!--FIXME That drop menu is back since KDE SC 4.8, It appears when one drops a file/folder/url (?) on Konsole from KDE 3.-->
 <chapter id="introduction">
 <title>Introduction</title>
 
@@ -689,6 +689,7 @@ Profiles...</guimenuitem></menuchoice></term>
 <guimenu>Settings</guimenu><guimenuitem>Show
 Menu Bar</guimenuitem></menuchoice></term>
 <listitem><para><action>Toggles the menubar being visible</action></para></listitem>
+<!--  http://forum.kde.org/viewtopic.php?f=227&t=107321&p=262667&view=lastpost#p248129 -->
 </varlistentry>
 
 <varlistentry>
@@ -716,6 +717,11 @@ Notifications...</guimenuitem></menuchoice></term>
 &konsole;...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens the &konsole; settings editor</action></para>
 </listitem>
+<!-- 
+since 4.9 Move options influencing tabbar from profiles into global setting
+Add global option for showing window title on titlebar
+When the window title from current session is emtpy, fallback to using
+  tab title-->
 </varlistentry>
 
 </variablelist>
@@ -930,6 +936,11 @@ title: PUT A TITLE ;; command: PUT A COMMAND ;; workdir: PUT A DIRECTORY
 <term><option>--nofork</option></term>
 <listitem><para><action>Do not run in the background</action>.  This is often needed to mimic other terminal emulators.
 </para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--fullscreen</option></term>
+<listitem><para><action>Start Konsole in fullscreen mode</action>.</para></listitem>
 </varlistentry>
 
 </variablelist>
