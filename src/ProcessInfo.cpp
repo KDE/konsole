@@ -676,7 +676,7 @@ private:
     }
 
     virtual bool readEnvironment(int aPid) {
-	Q_UNUSED(aPid);
+        Q_UNUSED(aPid);
         // Not supported in FreeBSD?
         return false;
     }

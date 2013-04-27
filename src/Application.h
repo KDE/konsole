@@ -80,7 +80,6 @@ private:
     void processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window);
     void createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
                            const QHash<QString, QString>&);
-
 };
 }
 #endif  // APPLICATION_H
