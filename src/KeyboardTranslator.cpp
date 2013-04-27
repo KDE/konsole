@@ -512,7 +512,7 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray& input) const
                     hexDigits[1] = result[i + 3];
 
                 unsigned charValue = 0;
-                sscanf(hexDigits, "%x", &charValue);
+                sscanf(hexDigits, "%2x", &charValue);
 
                 replacement[0] = static_cast<char>(charValue);
                 charsToRemove = 2 + qstrlen(hexDigits);
