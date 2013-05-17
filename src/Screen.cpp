@@ -61,6 +61,7 @@ Screen::Screen(int lines, int columns):
     _lines(lines),
     _columns(columns),
     _screenLines(new ImageLine[_lines + 1]),
+    _screenLinesSize(_lines),
     _scrolledLines(0),
     _droppedLines(0),
     _history(new HistoryScrollNone()),
@@ -315,6 +316,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
     delete[] _screenLines;
     _screenLines = newScreenLines;
+    _screenLinesSize = new_lines;
 
     _lines = new_lines;
     _columns = new_columns;
@@ -1223,7 +1225,11 @@ int Screen::copyLineToStream(int line ,
 
         Q_ASSERT(count >= 0);
 
-        const int screenLine = line - _history->getLines();
+        int screenLine = line - _history->getLines();
+
+        Q_ASSERT(screenLine <= _screenLinesSize);
+
+        screenLine = qMin(screenLine, _screenLinesSize);
 
         Character* data = _screenLines[screenLine].data();
         int length = _screenLines[screenLine].count();
