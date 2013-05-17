@@ -649,6 +649,7 @@ private:
 
     typedef QVector<Character> ImageLine;      // [0..columns]
     ImageLine*          _screenLines;    // [lines]
+    int _screenLinesSize;                // _screenLines.size()
 
     int _scrolledLines;
     QRect _lastScrolledRegion;
