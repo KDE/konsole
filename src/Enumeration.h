@@ -64,6 +64,16 @@ public:
         ScrollBarHidden = 2
     };
 
+    /**
+     * This enum describes the amount that Page Up/Down scroll by.
+     */
+    enum ScrollPageAmountEnum {
+        /** Scroll half page */
+        ScrollPageHalf = 0,
+        /** Scroll full page */
+        ScrollPageFull = 1,
+    };
+
     /** This enum describes the shapes used to draw the cursor in terminal
      * displays.
      */

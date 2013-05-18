@@ -966,6 +966,17 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     const int historySize = profile->historySize();
     _ui->historySizeWidget->setLineCount(historySize);
 
+    // setup scrollpageamount type radio
+    int scrollFullPage = profile->property<int>(Profile::ScrollFullPage);
+
+    RadioOption pageamounts[] = {
+        {_ui->scrollHalfPage, Enum::ScrollPageHalf, SLOT(scrollHalfPage())},
+        {_ui->scrollFullPage, Enum::ScrollPageFull, SLOT(scrollFullPage())},
+        {0, 0, 0}
+    };
+
+    setupRadio(pageamounts, scrollFullPage);
+
     // signals and slots
     connect(_ui->historySizeWidget, SIGNAL(historySizeChanged(int)),
             this, SLOT(historySizeChanged(int)));
@@ -990,6 +1001,14 @@ void EditProfileDialog::showScrollBarLeft()
 void EditProfileDialog::showScrollBarRight()
 {
     updateTempProfileProperty(Profile::ScrollBarPosition, Enum::ScrollBarRight);
+}
+void EditProfileDialog::scrollFullPage()
+{
+    updateTempProfileProperty(Profile::ScrollFullPage, Enum::ScrollPageFull);
+}
+void EditProfileDialog::scrollHalfPage()
+{
+    updateTempProfileProperty(Profile::ScrollFullPage, Enum::ScrollPageHalf);
 }
 void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
 {
