@@ -303,8 +303,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _columns(1)
     , _usedLines(1)
     , _usedColumns(1)
-    , _contentHeight(1)
-    , _contentWidth(1)
     , _image(0)
     , _randomSeed(0)
     , _resizing(false)
@@ -344,13 +342,14 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _printerFriendly(false)
     , _sessionController(0)
     , _trimTrailingSpaces(false)
+    , _margin(1)
+    , _centerContents(false)
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
     setLayoutDirection(Qt::LeftToRight);
 
-    _topMargin = DEFAULT_TOP_MARGIN;
-    _leftMargin = DEFAULT_LEFT_MARGIN;
+    _contentRect = QRect(_margin, _margin, 1, 1);
 
     // create scroll bar for scrolling output up and down
     _scrollBar = new QScrollBar(this);
@@ -861,7 +860,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     void* firstCharPos = &_image[ region.top() * this->_columns ];
     void* lastCharPos = &_image[(region.top() + abs(lines)) * this->_columns ];
 
-    const int top = _topMargin + (region.top() * _fontHeight);
+    const int top = _contentRect.top() + (region.top() * _fontHeight);
     const int linesToMove = region.height() - abs(lines);
     const int bytesToMove = linesToMove * this->_columns * sizeof(Character);
 
@@ -1083,8 +1082,8 @@ void TerminalDisplay::updateImage()
 
             // add the area occupied by this line to the region which needs to be
             // repainted
-            QRect dirtyRect = QRect(_leftMargin + tLx ,
-                                    _topMargin + tLy + _fontHeight * y ,
+            QRect dirtyRect = QRect(_contentRect.left() + tLx ,
+                                    _contentRect.top() + tLy + _fontHeight * y ,
                                     _fontWidth * columnsToUpdate ,
                                     _fontHeight);
 
@@ -1099,16 +1098,16 @@ void TerminalDisplay::updateImage()
     // if the new _image is smaller than the previous _image, then ensure that the area
     // outside the new _image is cleared
     if (linesToUpdate < _usedLines) {
-        dirtyRegion |= QRect(_leftMargin + tLx ,
-                             _topMargin + tLy + _fontHeight * linesToUpdate ,
+        dirtyRegion |= QRect(_contentRect.left() + tLx ,
+                             _contentRect.top() + tLy + _fontHeight * linesToUpdate ,
                              _fontWidth * this->_columns ,
                              _fontHeight * (_usedLines - linesToUpdate));
     }
     _usedLines = linesToUpdate;
 
     if (columnsToUpdate < _usedColumns) {
-        dirtyRegion |= QRect(_leftMargin + tLx + columnsToUpdate * _fontWidth ,
-                             _topMargin + tLy ,
+        dirtyRegion |= QRect(_contentRect.left() + tLx + columnsToUpdate * _fontWidth ,
+                             _contentRect.top() + tLy ,
                              _fontWidth * (_usedColumns - columnsToUpdate) ,
                              _fontHeight * this->_lines);
     }
@@ -1215,7 +1214,6 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     QPoint cursorPos = mapFromGlobal(QCursor::pos());
     int cursorLine;
     int cursorColumn;
-    const int scrollBarWidth = (_scrollbarLocation == Enum::ScrollBarLeft) ? _scrollBar->width() : 0;
 
     getCharacterPosition(cursorPos , cursorLine , cursorColumn);
     Character cursorCharacter = _image[loc(cursorColumn, cursorLine)];
@@ -1231,28 +1229,28 @@ void TerminalDisplay::paintFilters(QPainter& painter)
         if (_underlineLinks && spot->type() == Filter::HotSpot::Link) {
             QRect r;
             if (spot->startLine() == spot->endLine()) {
-                r.setCoords(spot->startColumn()*_fontWidth + 1 + scrollBarWidth,
-                            spot->startLine()*_fontHeight + 1,
-                            (spot->endColumn() - 1)*_fontWidth - 1 + scrollBarWidth,
-                            (spot->endLine() + 1)*_fontHeight - 1);
+                r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
+                            spot->startLine()*_fontHeight + _contentRect.top(),
+                            (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
+                            (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
                 region |= r;
             } else {
-                r.setCoords(spot->startColumn()*_fontWidth + 1 + scrollBarWidth,
-                            spot->startLine()*_fontHeight + 1,
-                            (_columns - 1)*_fontWidth - 1 + scrollBarWidth,
-                            (spot->startLine() + 1)*_fontHeight - 1);
+                r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
+                            spot->startLine()*_fontHeight + _contentRect.top(),
+                            (_columns)*_fontWidth + _contentRect.left() - 1,
+                            (spot->startLine() + 1)*_fontHeight + _contentRect.top() - 1);
                 region |= r;
                 for (int line = spot->startLine() + 1 ; line < spot->endLine() ; line++) {
-                    r.setCoords(0 * _fontWidth + 1 + scrollBarWidth,
-                                line * _fontHeight + 1,
-                                (_columns - 1)*_fontWidth - 1 + scrollBarWidth,
-                                (line + 1)*_fontHeight - 1);
+                    r.setCoords(0 * _fontWidth + _contentRect.left(),
+                                line * _fontHeight + _contentRect.top(),
+                                (_columns)*_fontWidth + _contentRect.left() - 1,
+                                (line + 1)*_fontHeight + _contentRect.top() - 1);
                     region |= r;
                 }
-                r.setCoords(0 * _fontWidth + 1 + scrollBarWidth,
-                            spot->endLine()*_fontHeight + 1,
-                            (spot->endColumn() - 1)*_fontWidth - 1 + scrollBarWidth,
-                            (spot->endLine() + 1)*_fontHeight - 1);
+                r.setCoords(0 * _fontWidth + _contentRect.left(),
+                            spot->endLine()*_fontHeight + _contentRect.top(),
+                            (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
+                            (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
                 region |= r;
             }
         }
@@ -1280,6 +1278,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
             if (line == spot->endLine())
                 endColumn = spot->endColumn();
 
+            // TODO: resolve this comment with the new margin/center code
             // subtract one pixel from
             // the right and bottom so that
             // we do not overdraw adjacent
@@ -1290,10 +1289,10 @@ void TerminalDisplay::paintFilters(QPainter& painter)
             // because the check below for the position of the cursor
             // finds it on the border of the target area
             QRect r;
-            r.setCoords(startColumn * _fontWidth + 1 + scrollBarWidth,
-                        line * _fontHeight + 1,
-                        endColumn * _fontWidth - 1 + scrollBarWidth,
-                        (line + 1)*_fontHeight - 1);
+            r.setCoords(startColumn * _fontWidth + _contentRect.left(),
+                        line * _fontHeight + _contentRect.top(),
+                        endColumn * _fontWidth + _contentRect.left() - 1,
+                        (line + 1)*_fontHeight + _contentRect.top() - 1);
             // Underline link hotspots
             if (_underlineLinks && spot->type() == Filter::HotSpot::Link) {
                 QFontMetrics metrics(font());
@@ -1322,10 +1321,10 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
     const int    tLx = tL.x();
     const int    tLy = tL.y();
 
-    const int lux = qMin(_usedColumns - 1, qMax(0, (rect.left()   - tLx - _leftMargin) / _fontWidth));
-    const int luy = qMin(_usedLines - 1,  qMax(0, (rect.top()    - tLy - _topMargin) / _fontHeight));
-    const int rlx = qMin(_usedColumns - 1, qMax(0, (rect.right()  - tLx - _leftMargin) / _fontWidth));
-    const int rly = qMin(_usedLines - 1,  qMax(0, (rect.bottom() - tLy - _topMargin) / _fontHeight));
+    const int lux = qMin(_usedColumns - 1, qMax(0, (rect.left()   - tLx - _contentRect.left()) / _fontWidth));
+    const int luy = qMin(_usedLines - 1,  qMax(0, (rect.top()    - tLy - _contentRect.top()) / _fontHeight));
+    const int rlx = qMin(_usedColumns - 1, qMax(0, (rect.right()  - tLx - _contentRect.left()) / _fontWidth));
+    const int rly = qMin(_usedLines - 1,  qMax(0, (rect.bottom() - tLy - _contentRect.top()) / _fontHeight));
 
     const int numberOfColumns = _usedColumns;
     QString unistr;
@@ -1431,7 +1430,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             paint.setWorldMatrix(textScale, true);
 
             //calculate the area in which the text will be drawn
-            QRect textArea = QRect(_leftMargin + tLx + _fontWidth * x , _topMargin + tLy + _fontHeight * y , _fontWidth * len , _fontHeight);
+            QRect textArea = QRect(_contentRect.left() + tLx + _fontWidth * x , _contentRect.top() + tLy + _fontHeight * y , _fontWidth * len , _fontHeight);
 
             //move the calculated area to take account of scaling applied to the painter.
             //the position of the area from the origin (0,0) is scaled
@@ -1477,8 +1476,8 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
 QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
 {
     QRect result;
-    result.setLeft(_leftMargin + _fontWidth * imageArea.left());
-    result.setTop(_topMargin + _fontHeight * imageArea.top());
+    result.setLeft(_contentRect.left() + _fontWidth * imageArea.left());
+    result.setTop(_contentRect.top() + _fontHeight * imageArea.top());
     result.setWidth(_fontWidth * imageArea.width());
     result.setHeight(_fontHeight * imageArea.height());
 
@@ -1630,7 +1629,7 @@ void TerminalDisplay::updateImageSize()
 
     if (_resizing) {
         showResizeNotification();
-        emit changedContentSizeSignal(_contentHeight, _contentWidth); // expose resizeEvent
+        emit changedContentSizeSignal(_contentRect.height(), _contentRect.width()); // expose resizeEvent
     }
 
     _resizing = false;
@@ -1665,34 +1664,34 @@ void TerminalDisplay::clearImage()
 void TerminalDisplay::calcGeometry()
 {
     _scrollBar->resize(_scrollBar->sizeHint().width(), contentsRect().height());
+    _contentRect = contentsRect().adjusted(_margin, _margin, -_margin, -_margin);
+
     switch (_scrollbarLocation) {
     case Enum::ScrollBarHidden :
-        _leftMargin = DEFAULT_LEFT_MARGIN;
-        _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN;
         break;
     case Enum::ScrollBarLeft :
-        _leftMargin = DEFAULT_LEFT_MARGIN + _scrollBar->width();
-        _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN - _scrollBar->width();
+        _contentRect.setLeft(_contentRect.left() + _scrollBar->width());
         _scrollBar->move(contentsRect().topLeft());
         break;
     case Enum::ScrollBarRight:
-        _leftMargin = DEFAULT_LEFT_MARGIN;
-        _contentWidth = contentsRect().width()  - 2 * DEFAULT_LEFT_MARGIN - _scrollBar->width();
+        _contentRect.setRight(_contentRect.right() - _scrollBar->width());
         _scrollBar->move(contentsRect().topRight() - QPoint(_scrollBar->width() - 1, 0));
         break;
     }
 
-    _topMargin = DEFAULT_TOP_MARGIN;
-    _contentHeight = contentsRect().height() - 2 * DEFAULT_TOP_MARGIN + /* mysterious */ 1;
-
     if (!_isFixedSize) {
         // ensure that display is always at least one column wide
-        _columns = qMax(1, _contentWidth / _fontWidth);
+        _columns = qMax(1, _contentRect.width() / _fontWidth);
         _usedColumns = qMin(_usedColumns, _columns);
 
         // ensure that display is always at least one line high
-        _lines = qMax(1, _contentHeight / _fontHeight);
+        _lines = qMax(1, _contentRect.height() / _fontHeight);
         _usedLines = qMin(_usedLines, _lines);
+
+        if(_centerContents) {
+            QSize unusedPixels = _contentRect.size() - QSize(_columns * _fontWidth, _lines * _fontHeight);
+            _contentRect.adjust(unusedPixels.width() / 2, unusedPixels.height() / 2, 0, 0);
+        }
     }
 }
 
@@ -1700,8 +1699,8 @@ void TerminalDisplay::calcGeometry()
 void TerminalDisplay::setSize(int columns, int lines)
 {
     const int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->sizeHint().width();
-    const int horizontalMargin = 2 * DEFAULT_LEFT_MARGIN;
-    const int verticalMargin = 2 * DEFAULT_TOP_MARGIN;
+    const int horizontalMargin = _margin * 2;
+    const int verticalMargin = _margin * 2;
 
     QSize newSize = QSize(horizontalMargin + scrollBarWidth + (columns * _fontWidth)  ,
                           verticalMargin + (lines * _fontHeight));
@@ -1742,11 +1741,24 @@ QSize TerminalDisplay::sizeHint() const
 //the same signal as the one for a content size change
 void TerminalDisplay::showEvent(QShowEvent*)
 {
-    emit changedContentSizeSignal(_contentHeight, _contentWidth);
+    emit changedContentSizeSignal(_contentRect.height(), _contentRect.width());
 }
 void TerminalDisplay::hideEvent(QHideEvent*)
 {
-    emit changedContentSizeSignal(_contentHeight, _contentWidth);
+    emit changedContentSizeSignal(_contentRect.height(), _contentRect.width());
+}
+
+void TerminalDisplay::setMargin(int margin)
+{
+    _margin = margin;
+    updateImageSize();
+}
+
+void TerminalDisplay::setCenterContents(bool enable)
+{
+    _centerContents = enable;
+    calcGeometry();
+    update();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1765,7 +1777,6 @@ void TerminalDisplay::setScrollBarPosition(Enum::ScrollBarPositionEnum position)
     else
         _scrollBar->show();
 
-    _topMargin = _leftMargin = 1;
     _scrollbarLocation = position;
 
     propagateSize();
@@ -1918,8 +1929,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     int charColumn = 0;
     getCharacterPosition(ev->pos(), charLine, charColumn);
 
-    const int scrollBarWidth = (_scrollbarLocation == Enum::ScrollBarLeft) ? _scrollBar->width() : 0;
-
     // handle filters
     // change link hot-spot appearance on mouse-over
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
@@ -1929,28 +1938,28 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
             _mouseOverHotspotArea = QRegion();
             QRect r;
             if (spot->startLine() == spot->endLine()) {
-                r.setCoords(spot->startColumn()*_fontWidth + scrollBarWidth,
-                            spot->startLine()*_fontHeight,
-                            spot->endColumn()*_fontWidth + scrollBarWidth,
-                            (spot->endLine() + 1)*_fontHeight - 1);
+                r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
+                            spot->startLine()*_fontHeight + _contentRect.top(),
+                            (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
+                            (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
                 _mouseOverHotspotArea |= r;
             } else {
-                r.setCoords(spot->startColumn()*_fontWidth + scrollBarWidth,
-                            spot->startLine()*_fontHeight,
-                            _columns * _fontWidth - 1 + scrollBarWidth,
-                            (spot->startLine() + 1)*_fontHeight);
+                r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
+                            spot->startLine()*_fontHeight + _contentRect.top(),
+                            (_columns)*_fontWidth + _contentRect.left() - 1,
+                            (spot->startLine() + 1)*_fontHeight + _contentRect.top() - 1);
                 _mouseOverHotspotArea |= r;
                 for (int line = spot->startLine() + 1 ; line < spot->endLine() ; line++) {
-                    r.setCoords(0 * _fontWidth + scrollBarWidth,
-                                line * _fontHeight,
-                                _columns * _fontWidth + scrollBarWidth,
-                                (line + 1)*_fontHeight);
+                    r.setCoords(0 * _fontWidth + _contentRect.left(),
+                                line * _fontHeight + _contentRect.top(),
+                                (_columns)*_fontWidth + _contentRect.left() - 1,
+                                (line + 1)*_fontHeight + _contentRect.top() - 1);
                     _mouseOverHotspotArea |= r;
                 }
-                r.setCoords(0 * _fontWidth + scrollBarWidth,
-                            spot->endLine()*_fontHeight,
-                            spot->endColumn()*_fontWidth + scrollBarWidth,
-                            (spot->endLine() + 1)*_fontHeight);
+                r.setCoords(0 * _fontWidth + _contentRect.left(),
+                            spot->endLine()*_fontHeight + _contentRect.top(),
+                            (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
+                            (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
                 _mouseOverHotspotArea |= r;
             }
 
@@ -2044,8 +2053,8 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     int linesBeyondWidget = 0;
 
-    QRect textBounds(tLx + _leftMargin,
-                     tLy + _topMargin,
+    QRect textBounds(tLx + _contentRect.left(),
+                     tLy + _contentRect.top(),
                      _usedColumns * _fontWidth - 1,
                      _usedLines * _fontHeight - 1);
 
@@ -2276,8 +2285,8 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
 void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, int& line, int& column) const
 {
-    column = (widgetPoint.x() + _fontWidth / 2 - contentsRect().left() - _leftMargin) / _fontWidth;
-    line = (widgetPoint.y() - contentsRect().top() - _topMargin) / _fontHeight;
+    column = (widgetPoint.x() + _fontWidth / 2 - contentsRect().left() - _contentRect.left()) / _fontWidth;
+    line = (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _fontHeight;
 
     if (line < 0)
         line = 0;
@@ -2737,8 +2746,8 @@ QRect TerminalDisplay::preeditRect() const
     if (preeditLength == 0)
         return QRect();
 
-    return QRect(_leftMargin + _fontWidth * cursorPosition().x(),
-                 _topMargin + _fontHeight * cursorPosition().y(),
+    return QRect(_contentRect.left() + _fontWidth * cursorPosition().x(),
+                 _contentRect.top() + _fontHeight * cursorPosition().y(),
                  _fontWidth * preeditLength,
                  _fontHeight);
 }

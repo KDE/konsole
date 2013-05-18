@@ -555,6 +555,16 @@ public slots:
      */
     void setForegroundColor(const QColor& color);
 
+    /**
+     * Sets the display's contents margins.
+     */
+    void setMargin(int margin);
+
+    /**
+     * Sets whether the contents are centered between the margins.
+     */
+    void setCenterContents(bool enable);
+
 signals:
 
     /**
@@ -775,8 +785,7 @@ private:
     // than 'columns' if the character image provided with setImage() is smaller
     // than the maximum image size which can be displayed
 
-    int _contentHeight;
-    int _contentWidth;
+    QRect _contentRect;
     Character* _image; // [lines][columns]
     // only the area [usedLines][usedColumns] in the image contains valid data
 
@@ -871,13 +880,13 @@ private:
     //the duration of the size hint in milliseconds
     static const int SIZE_HINT_DURATION = 1000;
 
-    static const int DEFAULT_LEFT_MARGIN = 1;
-    static const int DEFAULT_TOP_MARGIN = 1;
-
     SessionController* _sessionController;
 
     bool _trimTrailingSpaces;   // trim trailing spaces in selected text
     bool _mouseWheelZoom;   // enable mouse wheel zooming or not
+
+    int _margin;      // the contents margin
+    bool _centerContents;   // center the contents between margins
 
     friend class TerminalDisplayAccessible;
 };
