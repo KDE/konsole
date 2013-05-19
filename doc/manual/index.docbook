@@ -412,7 +412,59 @@ location</action></para></listitem>
 </para>
 </listitem>
 </varlistentry>
-<!--FIXME Send Signal missing-->
+
+<varlistentry>
+<term><menuchoice><guimenu>Edit</guimenu>
+<guisubmenu>Send Signal</guisubmenu></menuchoice></term>
+<listitem><para><action>Send the specified signal to the shell
+process, or other process, that was launched when the new session was
+started</action>.</para><para>Currently available signals are:</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry><errorcode>STOP</errorcode></entry>
+<entry>to stop process</entry>
+</row>
+<row>
+<entry><errorcode>CONT</errorcode></entry>
+<entry>continue if stopped</entry>
+</row>
+<row>
+<entry><errorcode>HUP</errorcode></entry>
+<entry>hangup detected on controlling terminal, or death of controlling
+process</entry>
+</row>
+<row>
+<entry><errorcode>INT</errorcode></entry>
+<entry>interrupt from keyboard</entry>
+</row>
+<row>
+<entry><errorcode>TERM</errorcode></entry>
+<entry>termination signal</entry>
+</row>
+<row>
+<entry><errorcode>KILL</errorcode></entry>
+<entry>kill signal</entry>
+</row>
+<row>
+<entry><errorcode>USR1</errorcode></entry>
+<entry>user signal 1</entry>
+</row>
+<row>
+<entry><errorcode>USR2</errorcode></entry>
+<entry>user signal 2</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+<para>Refer to your system manual pages for further details by giving the
+command <userinput><command>man</command> <option>7
+signal</option></userinput>.</para></listitem>
+</varlistentry>
+
 <varlistentry>
 <term><menuchoice>
 <shortcut><keycombo
