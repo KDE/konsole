@@ -46,8 +46,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2012-05-27</date>
-<releaseinfo>2.10 (&kde; 4.11)</releaseinfo>
+<date>2013-05-19</date>
+<releaseinfo>2.11 (&kde; 4.11)</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -91,10 +91,14 @@ As lines of text scroll off the top of the screen, they can be reviewed
 by moving the scroll bar upwards, scrolling with a mouse wheel or through
 the use of the
 <keycombo action="simul">&Shift;<keycap>Page Up</keycap></keycombo> (to move
-back a page),
-<keycombo action="simul">&Shift;<keycap>Page Down</keycap></keycombo> (to move forward a page),
+back),
+<keycombo action="simul">&Shift;<keycap>Page Down</keycap></keycombo> (to move forward),
 <keycombo action="simul">&Shift;<keycap>Up Arrow</keycap></keycombo> (to move up a line) and
 <keycombo action="simul">&Shift;<keycap>Down Arrow</keycap></keycombo> (to move down a line) keys.
+An amount of scrolling using <keycombo action="simul">&Shift;<keycap>Page Up/Down</keycap></keycombo>
+can be switched between half and full page in the <guilabel>Scrolling</guilabel> tab of the profile configuration
+window (use <menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit Current Profile...</guimenuitem></menuchoice>
+to open this window).
 </para>
 
 </sect1>
