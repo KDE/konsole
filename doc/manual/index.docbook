@@ -275,9 +275,9 @@ If the menubar is hidden,
 window such as vi, minicom, etc.).  The default shortcut
 is listed after each menu item.
 </para>
-<!--FIXME rm guimenu markup in title ?-->
+
 <sect2 id="file-menu">
-<title><guimenu>File</guimenu> Menu</title>
+<title>File Menu</title>
 
 <variablelist>
 <varlistentry>
@@ -356,7 +356,7 @@ tab open.  This dialog can be disabled by clicking on the <guibutton>Do not ask 
 </sect2>
 
 <sect2 id="edit-menu">
-<title><guimenu>Edit</guimenu> Menu</title>
+<title>Edit Menu</title>
 <variablelist>
 
 <varlistentry>
@@ -519,7 +519,7 @@ Previous</guimenuitem></menuchoice></term>
 </sect2>
 
 <sect2 id="view-menu">
-<title><guimenu>View</guimenu> Menu</title>
+<title>View Menu</title>
 <variablelist>
 
 <varlistentry>
@@ -666,7 +666,7 @@ and resets the terminal</action></para></listitem>
 </sect2>
 
 <sect2 id="bookmarks-menu">
-<title><guimenu>Bookmarks</guimenu> Menu</title>
+<title>Bookmarks Menu</title>
 
 <variablelist>
 
@@ -712,7 +712,7 @@ Currently, &konsole; accepts the following:
 </sect2>
 
 <sect2 id="settings-menu">
-<title><guimenu>Settings</guimenu> Menu</title>
+<title>Settings Menu</title>
 <variablelist>
 
 <varlistentry>
@@ -783,15 +783,21 @@ When the window title from current session is emtpy, fallback to using
 
 </variablelist>
 </sect2>
-<!--FIXME replace with link to fundamentals? -->
+
 <sect2 id="help-menu">
-<title><guimenu>Help</guimenu> Menu</title>
-<!-- Only negative to using this is it shows shortcut F1 for Handbook -->
-&help.menu.documentation;
+<title>Help Menu</title>
+<para>&konsole; has the some of the common &kde; <guimenu>Help</guimenu>
+menu items, for more information read the sections about the <ulink url="help:/fundamentals/ui.html#menus-help">Help Menu</ulink>
+of the &kde; Fundamentals.
+</para><!-- Only negative to using this is it shows shortcut F1 for Handbook -->
 </sect2>
+
 </sect1>
-<!--FIXME all dialogs in one sect1 to avoid short (1 sentence) pages-->
-<sect1 id="rename-tab-dialog">
+
+<sect1 id="console-dialogs">
+<title>&konsole; Dialogs</title>
+
+<sect2 id="rename-tab-dialog">
 <title>Rename Tab Dialog</title>
 
 <para>The name of the current tab can be changed from this dialog.
@@ -842,9 +848,9 @@ Examples:
 
 </para>
 
-</sect1>
+</sect2>
 
-<sect1 id="copy-input-dialog">
+<sect2 id="copy-input-dialog">
 <title>Copy Input Dialog</title>
 
 <para>The text entered in one tab can simultaneously be sent to other tabs.
@@ -866,9 +872,9 @@ The current tab will be greyed out.
 
 </para>
 
-</sect1>
+</sect2>
 
-<sect1 id="scrollback-options-dialog">
+<sect2 id="scrollback-options-dialog">
 <title>Adjust Scrollback Dialog</title>
 
 <para>The
@@ -876,6 +882,8 @@ The current tab will be greyed out.
 options for the history size can be changed in this dialog.  Any changes are
 for the current tab only and will not be saved to the profile.
 </para>
+
+</sect2>
 
 </sect1>
 
