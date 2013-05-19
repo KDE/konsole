@@ -275,7 +275,7 @@ If the menubar is hidden,
 window such as vi, minicom, etc.).  The default shortcut
 is listed after each menu item.
 </para>
-
+<!--FIXME rm guimenu markup in title ?-->
 <sect2 id="file-menu">
 <title><guimenu>File</guimenu> Menu</title>
 
@@ -347,6 +347,7 @@ at the current directory</action>.  By default, that is
 <note><para>&konsole; will display a confirmation dialog if there is more than one
 tab open.  This dialog can be disabled by clicking on the <guibutton>Do not ask again</guibutton> checkbox.
 </para></note>
+<!--FIXME How to get the confirmation dialog get back?-->
 </listitem>
 </varlistentry>
 
@@ -411,7 +412,7 @@ location</action></para></listitem>
 </para>
 </listitem>
 </varlistentry>
-
+<!--FIXME Send Signal missing-->
 <varlistentry>
 <term><menuchoice>
 <shortcut><keycombo
@@ -721,7 +722,7 @@ Notifications...</guimenuitem></menuchoice></term>
 &konsole;...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens the &konsole; settings editor</action></para>
 </listitem>
-<!-- 
+<!-- FIXME
 since 4.9 Move options influencing tabbar from profiles into global setting
 Add global option for showing window title on titlebar
 When the window title from current session is emtpy, fallback to using
@@ -730,14 +731,14 @@ When the window title from current session is emtpy, fallback to using
 
 </variablelist>
 </sect2>
-
+<!--FIXME replace with link to fundamentals? -->
 <sect2 id="help-menu">
 <title><guimenu>Help</guimenu> Menu</title>
 <!-- Only negative to using this is it shows shortcut F1 for Handbook -->
 &help.menu.documentation;
 </sect2>
 </sect1>
-
+<!--FIXME all dialogs in one sect1 to avoid short (1 sentence) pages-->
 <sect1 id="rename-tab-dialog">
 <title>Rename Tab Dialog</title>
 
@@ -838,6 +839,11 @@ can be specified to modify its behavior.</para>
 <varlistentry>
 <term><option>--help</option></term>
 <listitem><para><action>List various options</action>.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--fallback-profile</option> <parameter>file</parameter></term>
+<listitem><para>Use the internal FALLBACK profile. <!--FIXME what is the internal Fallback profile--></para></listitem>
 </varlistentry>
 
 <varlistentry>
