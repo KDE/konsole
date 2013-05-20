@@ -195,7 +195,7 @@ private:
     void updateKeyBindingsList(bool selectCurrentTranslator = false);
     void updateKeyBindingsButtons();
 
-    void showColorSchemeEditor(bool newScheme);
+    void showColorSchemeEditor(bool isNewScheme);
     void showKeyBindingEditor(bool newTranslator);
 
     void preview(int property , const QVariant& value);
