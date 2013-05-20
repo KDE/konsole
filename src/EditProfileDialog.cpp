@@ -685,8 +685,8 @@ void EditProfileDialog::removeColorScheme()
 }
 void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 {
+    // Finding selected ColorScheme
     QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
-
     QAbstractItemModel* model = _ui->colorSchemeList->model();
     const ColorScheme* colors = 0;
     if (!selected.isEmpty())
@@ -696,6 +696,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 
     Q_ASSERT(colors);
 
+    // Setting up ColorSchemeEditor ui
     QWeakPointer<KDialog> dialog = new KDialog(this);
 
     if (isNewScheme)

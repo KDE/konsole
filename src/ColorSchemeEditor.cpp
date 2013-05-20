@@ -124,18 +124,21 @@ ColorSchemeEditor::~ColorSchemeEditor()
 void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
 {
     // ignore if this is not a color column
-    if (item->column() != COLOR_COLUMN && item->column() != INTENSE_COLOR_COLUMN)
-        return;	
+    if (item->column() != COLOR_COLUMN && item->column() != INTENSE_COLOR_COLUMN) {
+        return;
+    }
 
     QColor color = item->background().color();
     int result = KColorDialog::getColor(color);
+
     if (result == KColorDialog::Accepted) {
         item->setBackground(color);
 
-        int colorSchemeRow = item->row(); 
+        int colorSchemeRow = item->row();
         // Intense colors row are in the bottom half of the color table
-        if (item->column() == INTENSE_COLOR_COLUMN)
+        if (item->column() == INTENSE_COLOR_COLUMN) {
             colorSchemeRow += COLOR_TABLE_ROW_LENGTH;
+        }
 
         ColorEntry entry(_colors->colorEntry(colorSchemeRow));
         entry.color = color;
