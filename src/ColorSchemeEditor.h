@@ -56,9 +56,10 @@ public:
     virtual ~ColorSchemeEditor();
 
     /** Initializes the dialog with the properties of the specified color scheme. */
-    void setup(const ColorScheme* scheme);
+    void setup(const ColorScheme* scheme, bool isNewScheme);
     /** Returns the modified color scheme. */
     ColorScheme* colorScheme() const;
+    bool isNewScheme() const;
 
 signals:
     /** Emitted when the colors in the color scheme change. */
@@ -78,6 +79,7 @@ private slots:
 private:
     void setupColorTable(const ColorScheme* table);
 
+    bool _isNewScheme;
     Ui::ColorSchemeEditor* _ui;
     ColorScheme* _colors;
 };

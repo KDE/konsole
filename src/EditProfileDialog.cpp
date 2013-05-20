@@ -706,7 +706,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 
     ColorSchemeEditor* editor = new ColorSchemeEditor;
     dialog.data()->setMainWidget(editor);
-    editor->setup(colors);
+    editor->setup(colors, isNewScheme);
 
     if (isNewScheme)
         editor->setDescription(i18n("New Color Scheme"));

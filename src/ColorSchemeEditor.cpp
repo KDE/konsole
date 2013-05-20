@@ -47,6 +47,7 @@ const int INTENSE_COLOR_COLUMN = 2;  // column 2 : intense colors
 
 ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     : QWidget(aParent)
+    , _isNewScheme(false)
     , _colors(0)
 {
     _ui = new Ui::ColorSchemeEditor();
@@ -186,8 +187,14 @@ void ColorSchemeEditor::setRandomizedBackgroundColor(bool randomize)
 {
     _colors->setRandomizedBackgroundColor(randomize);
 }
-void ColorSchemeEditor::setup(const ColorScheme* scheme)
+void ColorSchemeEditor::setup(const ColorScheme* scheme, bool isNewScheme)
 {
+    _isNewScheme = isNewScheme;
+
+    if (_isNewScheme) {
+        setDescription(i18n("New Color Scheme"));
+    }
+
     delete _colors;
 
     _colors = new ColorScheme(*scheme);
@@ -242,6 +249,10 @@ void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
 ColorScheme* ColorSchemeEditor::colorScheme() const
 {
     return _colors;
+}
+bool ColorSchemeEditor::isNewScheme() const
+{
+    return _isNewScheme;
 }
 
 #include "ColorSchemeEditor.moc"
