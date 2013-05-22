@@ -69,6 +69,7 @@ EditProfileDialog::EditProfileDialog(QWidget* aParent)
     : KDialog(aParent)
     , _colorSchemeAnimationTimeLine(0)
     , _delayedPreviewTimer(new QTimer(this))
+    , _colorDialog(0)
 {
     setCaption(i18n("Edit Profile"));
     setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
@@ -697,34 +698,24 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
     Q_ASSERT(colors);
 
     // Setting up ColorSchemeEditor ui
-    QWeakPointer<KDialog> dialog = new KDialog(this);
-
-    if (isNewScheme)
-        dialog.data()->setCaption(i18n("New Color Scheme"));
-    else
-        dialog.data()->setCaption(i18n("Edit Color Scheme"));
-
-    ColorSchemeEditor* editor = new ColorSchemeEditor;
-    dialog.data()->setMainWidget(editor);
-    editor->setup(colors, isNewScheme);
-
-    if (isNewScheme)
-        editor->setDescription(i18n("New Color Scheme"));
-
-    if (dialog.data()->exec() == QDialog::Accepted) {
-        ColorScheme* newScheme = new ColorScheme(*editor->colorScheme());
-
-        // if this is a new color scheme, pick a name based on the description
-        if (isNewScheme)
-            newScheme->setName(newScheme->description());
-
-        ColorSchemeManager::instance()->addColorScheme(newScheme);
-
-        updateColorSchemeList(true);
-
-        preview(Profile::ColorScheme, newScheme->name());
+    // close any running ColorSchemeEditor
+    if (_colorDialog) {
+        closeColorSchemeEditor();
     }
-    delete dialog.data();
+    _colorDialog = new ColorSchemeEditor(this);
+
+    connect(_colorDialog, SIGNAL(colorSchemeSaveRequested(const ColorScheme&, bool)),
+            this, SLOT(saveColorScheme(const ColorScheme&,bool)));
+    _colorDialog->setup(colors, isNewScheme);
+
+    _colorDialog->show();
+}
+void EditProfileDialog::closeColorSchemeEditor()
+{
+    if (_colorDialog) {
+        _colorDialog->close();
+        delete _colorDialog;
+    }
 }
 void EditProfileDialog::newColorScheme()
 {
@@ -733,6 +724,21 @@ void EditProfileDialog::newColorScheme()
 void EditProfileDialog::editColorScheme()
 {
     showColorSchemeEditor(false);
+}
+void EditProfileDialog::saveColorScheme(const ColorScheme& scheme, bool isNewScheme)
+{
+    ColorScheme* newScheme = new ColorScheme(scheme);
+
+    // if this is a new color scheme, pick a name based on the description
+    if (isNewScheme) {
+        newScheme->setName(newScheme->description());
+    }
+
+    ColorSchemeManager::instance()->addColorScheme(newScheme);
+
+    updateColorSchemeList(true);
+
+    preview(Profile::ColorScheme, newScheme->name());
 }
 void EditProfileDialog::colorSchemeSelected()
 {

@@ -23,6 +23,12 @@
 // Qt
 #include <QWidget>
 
+// KDE
+#include <KDialog>
+
+// Konsole
+#include "Profile.h"
+
 class QTableWidgetItem;
 
 namespace Ui
@@ -46,7 +52,7 @@ class ColorScheme;
  *
  * When changes are made the colorsChanged() signal is emitted.
  */
-class ColorSchemeEditor : public QWidget
+class KONSOLEPRIVATE_EXPORT ColorSchemeEditor : public KDialog
 {
     Q_OBJECT
 
@@ -58,12 +64,14 @@ public:
     /** Initializes the dialog with the properties of the specified color scheme. */
     void setup(const ColorScheme* scheme, bool isNewScheme);
     /** Returns the modified color scheme. */
-    ColorScheme* colorScheme() const;
+    ColorScheme& colorScheme() const;
     bool isNewScheme() const;
 
 signals:
     /** Emitted when the colors in the color scheme change. */
     void colorsChanged(ColorScheme* scheme);
+    /** Used to send back colorscheme changes into the profile edited */
+    void colorSchemeSaveRequested(const ColorScheme& scheme,bool isNewScheme);
 
 public slots:
     /** Sets the text displayed in the description edit field. */
@@ -75,6 +83,8 @@ private slots:
     void editColorItem(QTableWidgetItem* item);
     void wallpaperPathChanged(const QString& path);
     void selectWallpaper();
+    /** Triggered by apply/ok buttons */
+    void saveColorScheme();
 
 private:
     void setupColorTable(const ColorScheme* table);

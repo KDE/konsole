@@ -31,6 +31,8 @@
 // Konsole
 #include "Profile.h"
 #include "Enumeration.h"
+#include "ColorScheme.h"
+#include "ColorSchemeEditor.h"
 
 class QAbstractButton;
 class QItemSelectionModel;
@@ -126,6 +128,7 @@ private slots:
     void showFontDialog();
     void newColorScheme();
     void editColorScheme();
+    void saveColorScheme(const ColorScheme& scheme, bool isNewScheme);
     void removeColorScheme();
     void colorSchemeSelected();
     void previewColorScheme(const QModelIndex& index);
@@ -196,6 +199,7 @@ private:
     void updateKeyBindingsButtons();
 
     void showColorSchemeEditor(bool isNewScheme);
+    void closeColorSchemeEditor();
     void showKeyBindingEditor(bool newTranslator);
 
     void preview(int property , const QVariant& value);
@@ -250,6 +254,8 @@ private:
 
     QHash<int, QVariant> _delayedPreviewProperties;
     QTimer* _delayedPreviewTimer;
+
+    ColorSchemeEditor* _colorDialog;
 };
 
 /**

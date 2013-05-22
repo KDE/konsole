@@ -46,12 +46,18 @@ const int COLOR_COLUMN = 1;          // column 1 : actual colors
 const int INTENSE_COLOR_COLUMN = 2;  // column 2 : intense colors
 
 ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
-    : QWidget(aParent)
+    : KDialog(aParent)
     , _isNewScheme(false)
     , _colors(0)
 {
+    // Kdialog buttons
+    setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+    connect(this, SIGNAL(applyClicked()), this, SLOT(saveColorScheme()));
+    connect(this, SIGNAL(okClicked()), this, SLOT(saveColorScheme()));
+
+    // ui
     _ui = new Ui::ColorSchemeEditor();
-    _ui->setupUi(this);
+    _ui->setupUi(mainWidget());
 
     // description edit
     _ui->descriptionEdit->setClearButtonShown(true);
@@ -191,13 +197,16 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme, bool isNewScheme)
 {
     _isNewScheme = isNewScheme;
 
-    if (_isNewScheme) {
-        setDescription(i18n("New Color Scheme"));
-    }
-
     delete _colors;
 
     _colors = new ColorScheme(*scheme);
+
+    if (_isNewScheme) {
+        setCaption(i18n("New Color Scheme"));
+        setDescription(i18n("New Color Scheme"));
+    } else {
+        setCaption(i18n("Edit Color Scheme"));
+    }
 
     // setup description edit
     _ui->descriptionEdit->setText(_colors->description());
@@ -246,13 +255,17 @@ void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
     _ui->colorTable->setFixedHeight(_ui->colorTable->verticalHeader()->length() + _ui->colorTable->horizontalHeader()->height() + 2);
 }
 
-ColorScheme* ColorSchemeEditor::colorScheme() const
+ColorScheme& ColorSchemeEditor::colorScheme() const
 {
-    return _colors;
+    return *_colors;
 }
 bool ColorSchemeEditor::isNewScheme() const
 {
     return _isNewScheme;
+}
+void ColorSchemeEditor::saveColorScheme()
+{
+    emit colorSchemeSaveRequested(colorScheme(), _isNewScheme);
 }
 
 #include "ColorSchemeEditor.moc"
