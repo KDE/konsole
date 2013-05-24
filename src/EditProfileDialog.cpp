@@ -704,7 +704,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
     }
     _colorDialog = new ColorSchemeEditor(this);
 
-    connect(_colorDialog, SIGNAL(colorSchemeSaveRequested(ColorScheme, bool)),
+    connect(_colorDialog, SIGNAL(colorSchemeSaveRequested(ColorScheme,bool)),
             this, SLOT(saveColorScheme(ColorScheme,bool)));
     _colorDialog->setup(colors, isNewScheme);
 
