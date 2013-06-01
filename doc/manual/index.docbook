@@ -787,7 +787,7 @@ When the window title from current session is emtpy, fallback to using
 <sect2 id="help-menu">
 <title>Help Menu</title>
 <para>&konsole; has the some of the common &kde; <guimenu>Help</guimenu>
-menu items, for more information read the sections about the <ulink url="help:/fundamentals/ui.html#menus-help">Help Menu</ulink>
+menu items, for more information read the section about the <ulink url="help:/fundamentals/ui.html#menus-help">Help Menu</ulink>
 of the &kde; Fundamentals.
 </para><!-- Only negative to using this is it shows shortcut F1 for Handbook -->
 </sect2>
