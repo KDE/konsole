@@ -62,7 +62,6 @@
 </keywordset>
 
 </bookinfo>
-<!--FIXME That drop menu is back since KDE SC 4.8, It appears when one drops a file/folder/url (?) on Konsole from KDE 3.-->
 <chapter id="introduction">
 <title>Introduction</title>
 
@@ -87,7 +86,8 @@ to allow users to view previously displayed output.
 By default, scrollback is on
 and set to save 1000 lines of
 output in addition to what is currently displayed on the screen.
-As lines of text scroll off the top of the screen, they can be reviewed
+</para>
+<para>As lines of text scroll off the top of the screen, they can be reviewed
 by moving the scroll bar upwards, scrolling with a mouse wheel or through
 the use of the
 <keycombo action="simul">&Shift;<keycap>Page Up</keycap></keycombo> (to move
@@ -95,7 +95,8 @@ back),
 <keycombo action="simul">&Shift;<keycap>Page Down</keycap></keycombo> (to move forward),
 <keycombo action="simul">&Shift;<keycap>Up Arrow</keycap></keycombo> (to move up a line) and
 <keycombo action="simul">&Shift;<keycap>Down Arrow</keycap></keycombo> (to move down a line) keys.
-The amount of scrolling using <keycombo action="simul">&Shift;<keycap>Page Up/Down</keycap></keycombo>
+</para>
+<para>The amount of scrolling using <keycombo action="simul">&Shift;<keycap>Page Up/Down</keycap></keycombo>
 can be switched between half and full page in the <guilabel>Scrolling</guilabel> tab of the profile configuration
 window (use <menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit Current Profile...</guimenuitem></menuchoice>
 to open this window).
@@ -347,7 +348,11 @@ at the current directory</action>.  By default, that is
 <note><para>&konsole; will display a confirmation dialog if there is more than one
 tab open.  This dialog can be disabled by clicking on the <guibutton>Do not ask again</guibutton> checkbox.
 </para></note>
-<!--FIXME How to get the confirmation dialog get back?-->
+<!--FIXME How to get the confirmation dialog get back?
+Delete in ~/.kde/share/config/konsolerc
+[Notification Messages]
+CloseAllTabs=true
+-->
 </listitem>
 </varlistentry>
 
@@ -773,7 +778,9 @@ Notifications...</guimenuitem></menuchoice></term>
 <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
 &konsole;...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens the &konsole; settings editor</action></para>
-</listitem>
+<para>This dialog has options influencing the appearance and behaviour of the 
+<guilabel>TabBar</guilabel> and general options for the &konsole; window.
+</para></listitem>
 <!-- FIXME
 since 4.9 Move options influencing tabbar from profiles into global setting
 Add global option for showing window title on titlebar
@@ -816,6 +823,8 @@ These changes can be made permanent by editing the current profile.
 <listitem><para>%w : window title set by shell</para></listitem>
 <listitem><para>%# : session number</para></listitem>
 <listitem><para>%u : user name</para></listitem>
+<listitem><para>%h : local host or remote host (short)</para></listitem>
+<listitem><para>%H : remote host (long)</para></listitem>
 </itemizedlist>
 
 </para>
@@ -827,7 +836,7 @@ Examples:
 <userinput>%d : %n</userinput>
  with /usr/src as current directory and running
 <application>bash</application> will display
-<guibutton>usr/s : bash</guibutton>
+<guibutton>src : bash</guibutton>
 </para></listitem>
 
 <listitem><para>
