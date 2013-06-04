@@ -1019,7 +1019,7 @@ title: PUT A TITLE ;; command: PUT A COMMAND ;; workdir: PUT A DIRECTORY
 
 <varlistentry>
 <term><option>--fullscreen</option></term>
-<listitem><para><action>Start Konsole in fullscreen mode</action>.</para></listitem>
+<listitem><para><action>Start &konsole; in fullscreen mode</action>.</para></listitem>
 </varlistentry>
 
 </variablelist>
