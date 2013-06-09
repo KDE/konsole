@@ -29,7 +29,7 @@
 #include <KCmdLineArgs>
 #include <KLocale>
 
-#define KONSOLE_VERSION "2.10.999"
+#define KONSOLE_VERSION "2.11"
 
 using Konsole::Application;
 
