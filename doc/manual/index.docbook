@@ -260,6 +260,78 @@ and <guimenuitem>Close Tab</guimenuitem>
 </variablelist>
 
 </sect1>
+
+<sect1 id="drag-and-drop">
+<title>Drag and Drop</title>
+<para>If you drop a file, folder or &URL; on a &konsole; window, a context 
+menu appears with these actions:
+</para>  
+<screenshot>
+<screeninfo>Drag and Drop Context Menu</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="draganddrop-contextmenu.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>Drag and Drop Context Menu</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<shortcut>&Shift;</shortcut><guimenuitem>Move Here</guimenuitem> </menuchoice>
+</term> <listitem>
+<para>Copy the dropped item into the current folder. This items only appears in 
+the context menu, if you have the rights to delete the dropped file or folder.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>&Ctrl;</shortcut><guimenuitem>Copy Here</guimenuitem> </menuchoice>
+</term> <listitem>
+<para>Copy the dropped item into the current folder.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo>&Ctrl;&Shift;</keycombo></shortcut><guimenuitem>Link Here</guimenuitem> </menuchoice>
+</term> <listitem>
+<para>Insert a symbolic link to the dropped item.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenuitem>Paste Location</guimenuitem> </menuchoice>
+</term> <listitem>
+<para>Insert the full file path of the dropped item at the cursor.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenuitem>Change Directory To</guimenuitem> </menuchoice>
+</term> <listitem>
+<para>If a folder is dropped, this action appears in the context menu and allows you to 
+change the working folder of the &konsole; session.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>&Esc;</shortcut><guimenuitem>Cancel</guimenuitem> </menuchoice>
+</term> <listitem>
+<para>Break the drag and drop action.</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>If you press the shortcuts while releasing the &LMB; during drag and drop, no context menu appears and 
+the actions will be executed immediately.
+</para>
+
+</sect1>
+
 </chapter>
 
 <chapter id="commandreference">
