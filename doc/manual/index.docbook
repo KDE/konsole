@@ -283,7 +283,7 @@ menu appears with these actions:
 <term><menuchoice>
 <shortcut>&Shift;</shortcut><guimenuitem>Move Here</guimenuitem> </menuchoice>
 </term> <listitem>
-<para>Copy the dropped item into the current folder. This items only appears in 
+<para>Move the dropped item into the current folder. This item only appears in 
 the context menu, if you have the rights to delete the dropped file or folder.
 </para></listitem>
 </varlistentry>
@@ -326,7 +326,7 @@ change the working folder of the &konsole; session.</para></listitem>
 
 </variablelist>
 
-<para>If you press the shortcuts while releasing the &LMB; during drag and drop, no context menu appears and 
+<para>If you press the shortcuts before releasing the &LMB; during drag and drop, no context menu appears and 
 the actions will be executed immediately.
 </para>
 
