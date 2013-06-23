@@ -1880,8 +1880,9 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             _preserveLineBreaks = !((ev->modifiers() & Qt::ControlModifier) && !(ev->modifiers() & Qt::AltModifier));
             _columnSelectionMode = (ev->modifiers() & Qt::AltModifier) && (ev->modifiers() & Qt::ControlModifier);
 
-            if (_mouseMarks) {
-                if (ev->modifiers() == Qt::ShiftModifier) {
+            if (_mouseMarks || (ev->modifiers() == Qt::ShiftModifier)) {
+                // Only extend selection for programs not interested in mouse
+                if (_mouseMarks && (ev->modifiers() == Qt::ShiftModifier)) {
                     extendSelection(ev->pos());
                 } else {
                     _screenWindow->clearSelection();
