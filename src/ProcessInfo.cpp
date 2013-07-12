@@ -45,14 +45,16 @@
 #include <KUser>
 #include <KDebug>
 
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_MAC)
 #include <sys/sysctl.h>
+#endif
+
+#if defined(Q_OS_MAC)
 #include <libproc.h>
 #include <kde_file.h>
 #endif
 
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
-#include <sys/sysctl.h>
 #include <sys/types.h>
 #include <sys/user.h>
 #include <sys/syslimits.h>
