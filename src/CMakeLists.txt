@@ -2,7 +2,10 @@
 macro_optional_find_package(LibKonq)
 macro_bool_to_01(LIBKONQ_FOUND HAVE_LIBKONQ)
 
-macro_log_feature(LIBKONQ_FOUND "LibKonq" "libkonq is a construction kit for a file manager. It comes from kde-baseapps." "http://www.kde.org" FALSE "" "Required for drag-n-drop menus")
+macro_log_feature(LIBKONQ_FOUND "LibKonq"
+  "Provides high-level file management functions"
+  "https://projects.kde.org/projects/kde/applications/kde-baseapps"
+  FALSE "" "Required for drag-n-drop menus")
 
 if(HAVE_LIBKONQ)
    include_directories(${LIBKONQ_INCLUDE_DIR})
