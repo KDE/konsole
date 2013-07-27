@@ -112,6 +112,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _findNextAction(0)
     , _findPreviousAction(0)
     , _urlFilterUpdateRequired(false)
+    , _searchStartLine(0)
+    , _prevSearchResultLine(0)
     , _searchBar(0)
     , _codecAction(0)
     , _switchProfileMenu(0)
@@ -526,6 +528,7 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
     _searchBar = searchBar;
     if (_searchBar) {
         connect(_searchBar, SIGNAL(closeClicked()), this, SLOT(searchClosed()));
+        connect(_searchBar, SIGNAL(searchFromClicked()), this, SLOT(searchFrom()));
         connect(_searchBar, SIGNAL(findNextClicked()), this, SLOT(findNextInHistory()));
         connect(_searchBar, SIGNAL(findPreviousClicked()), this, SLOT(findPreviousInHistory()));
         connect(_searchBar, SIGNAL(highlightMatchesToggled(bool)) , this , SLOT(highlightMatches(bool)));
@@ -1084,6 +1087,17 @@ void SessionController::searchClosed()
     searchHistory(false);
 }
 
+void SessionController::setSearchStartToWindowCurrentLine()
+{
+    setSearchStartTo(-1);
+}
+
+void SessionController::setSearchStartTo(int line)
+{
+    _searchStartLine = line;
+    _prevSearchResultLine = line;
+}
+
 void SessionController::listenForScreenWindowUpdates()
 {
     if (_listenForScreenWindowUpdates)
@@ -1093,6 +1107,8 @@ void SessionController::listenForScreenWindowUpdates()
             SLOT(updateSearchFilter()));
     connect(_view->screenWindow(), SIGNAL(scrolled(int)), this,
             SLOT(updateSearchFilter()));
+    connect(_view->screenWindow(), SIGNAL(currentResultLineChanged()), _view,
+            SLOT(update()));
 
     _listenForScreenWindowUpdates = true;
 }
@@ -1106,9 +1122,12 @@ void SessionController::updateSearchFilter()
 
 void SessionController::searchBarEvent()
 {
+    QString selectedText = _view->screenWindow()->selectedText(true, true);
+    if (!selectedText.isEmpty())
+        _searchBar->setSearchText(selectedText);
+
     if (_searchBar->isVisible()) {
-        // refresh focus
-        _searchBar->setVisible(true);
+        _searchBar->focusLineEdit();
     } else {
         searchHistory(true);
         _isSearchBarEnabled = true;
@@ -1119,10 +1138,13 @@ void SessionController::enableSearchBar(bool showSearchBar)
 {
     if (!_searchBar)
         return;
+
+    if (showSearchBar && !_searchBar->isVisible()) {
+        setSearchStartToWindowCurrentLine();
+    }
+
     _searchBar->setVisible(showSearchBar);
     if (showSearchBar) {
-        _searchBar->clearLineEdit();
-        _searchBar->setSearchText(_searchText);
         connect(_searchBar, SIGNAL(searchChanged(QString)), this,
                 SLOT(searchTextChanged(QString)));
         connect(_searchBar, SIGNAL(searchReturnPressed(QString)), this,
@@ -1136,7 +1158,30 @@ void SessionController::enableSearchBar(bool showSearchBar)
                    SLOT(findPreviousInHistory()));
         disconnect(_searchBar, SIGNAL(searchShiftPlusReturnPressed()), this,
                    SLOT(findNextInHistory()));
+        if (_view && _view->screenWindow()) {
+            _view->screenWindow()->setCurrentResultLine(-1);
+        }
     }
+}
+
+
+bool SessionController::reverseSearchChecked() const
+{
+    Q_ASSERT(_searchBar);
+
+    QBitArray options = _searchBar->optionsChecked();
+    return options.at(IncrementalSearchBar::ReverseSearch);
+}
+
+QRegExp SessionController::regexpFromSearchBarOptions()
+{
+    QBitArray options = _searchBar->optionsChecked();
+
+    Qt::CaseSensitivity caseHandling = options.at(IncrementalSearchBar::MatchCase) ? Qt::CaseSensitive : Qt::CaseInsensitive;
+    QRegExp::PatternSyntax syntax = options.at(IncrementalSearchBar::RegExp) ? QRegExp::RegExp : QRegExp::FixedString;
+
+    QRegExp regExp(_searchBar->searchText(),  caseHandling , syntax);
+    return regExp;
 }
 
 // searchHistory() may be called either as a result of clicking a menu item or
@@ -1152,13 +1197,9 @@ void SessionController::searchHistory(bool showSearchBar)
             listenForScreenWindowUpdates();
 
             _searchFilter = new RegExpFilter();
+            _searchFilter->setRegExp(regexpFromSearchBarOptions());
             _view->filterChain()->addFilter(_searchFilter);
-
-            // invoke search for matches for the current search text
-            const QString& currentSearchText = _searchBar->searchText();
-            if (!currentSearchText.isEmpty()) {
-                searchTextChanged(currentSearchText);
-            }
+            _view->processFilters();
 
             setFindNextPrevEnabled(true);
         } else {
@@ -1170,6 +1211,7 @@ void SessionController::searchHistory(bool showSearchBar)
         }
     }
 }
+
 void SessionController::setFindNextPrevEnabled(bool enabled)
 {
     _findNextAction->setEnabled(enabled);
@@ -1184,15 +1226,19 @@ void SessionController::searchTextChanged(const QString& text)
 
     _searchText = text;
 
-    if (text.isEmpty())
+    if (text.isEmpty()) {
         _view->screenWindow()->clearSelection();
+        _view->screenWindow()->scrollTo(_searchStartLine);
+    }
 
     // update search.  this is called even when the text is
     // empty to clear the view's filters
-    beginSearch(text , SearchHistoryTask::BackwardsSearch);
+    beginSearch(text , reverseSearchChecked() ? SearchHistoryTask::BackwardsSearch : SearchHistoryTask::ForwardsSearch);
 }
 void SessionController::searchCompleted(bool success)
 {
+    _prevSearchResultLine = _view->screenWindow()->currentResultLine();
+
     if (_searchBar)
         _searchBar->setFoundMatch(success);
 }
@@ -1202,15 +1248,19 @@ void SessionController::beginSearch(const QString& text , int direction)
     Q_ASSERT(_searchBar);
     Q_ASSERT(_searchFilter);
 
-    QBitArray options = _searchBar->optionsChecked();
-
-    Qt::CaseSensitivity caseHandling = options.at(IncrementalSearchBar::MatchCase) ? Qt::CaseSensitive : Qt::CaseInsensitive;
-    QRegExp::PatternSyntax syntax = options.at(IncrementalSearchBar::RegExp) ? QRegExp::RegExp : QRegExp::FixedString;
-
-    QRegExp regExp(text ,  caseHandling , syntax);
+    QRegExp regExp = regexpFromSearchBarOptions();
     _searchFilter->setRegExp(regExp);
 
+    if (_searchStartLine == -1) {
+        if (direction == SearchHistoryTask::ForwardsSearch) {
+            setSearchStartTo(_view->screenWindow()->currentLine());
+        } else {
+            setSearchStartTo(_view->screenWindow()->currentLine() + _view->screenWindow()->windowLines());
+        }
+    }
+
     if (!regExp.isEmpty()) {
+        _view->screenWindow()->setCurrentResultLine(-1);
         SearchHistoryTask* task = new SearchHistoryTask(this);
 
         connect(task, SIGNAL(completed(bool)), this, SLOT(searchCompleted(bool)));
@@ -1218,6 +1268,7 @@ void SessionController::beginSearch(const QString& text , int direction)
         task->setRegExp(regExp);
         task->setSearchDirection((SearchHistoryTask::SearchDirection)direction);
         task->setAutoDelete(true);
+        task->setStartLine(_searchStartLine);
         task->addScreenWindow(_session , _view->screenWindow());
         task->execute();
     } else if (text.isEmpty()) {
@@ -1237,19 +1288,38 @@ void SessionController::highlightMatches(bool highlight)
 
     _view->update();
 }
+
+void SessionController::searchFrom()
+{
+    Q_ASSERT(_searchBar);
+    Q_ASSERT(_searchFilter);
+
+    if (reverseSearchChecked()) {
+        setSearchStartTo(_view->screenWindow()->lineCount());
+    } else {
+        setSearchStartTo(0);
+    }
+
+
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? SearchHistoryTask::BackwardsSearch : SearchHistoryTask::ForwardsSearch);
+}
 void SessionController::findNextInHistory()
 {
     Q_ASSERT(_searchBar);
     Q_ASSERT(_searchFilter);
 
-    beginSearch(_searchBar->searchText(), SearchHistoryTask::ForwardsSearch);
+    setSearchStartTo(_prevSearchResultLine);
+
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? SearchHistoryTask::BackwardsSearch : SearchHistoryTask::ForwardsSearch);
 }
 void SessionController::findPreviousInHistory()
 {
     Q_ASSERT(_searchBar);
     Q_ASSERT(_searchFilter);
 
-    beginSearch(_searchBar->searchText(), SearchHistoryTask::BackwardsSearch);
+    setSearchStartTo(_prevSearchResultLine);
+
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? SearchHistoryTask::ForwardsSearch : SearchHistoryTask::BackwardsSearch);
 }
 void SessionController::changeSearchMatch()
 {
@@ -1258,7 +1328,7 @@ void SessionController::changeSearchMatch()
 
     // reset Selection for new case match
     _view->screenWindow()->clearSelection();
-    beginSearch(_searchBar->searchText(), SearchHistoryTask::BackwardsSearch);
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? SearchHistoryTask::BackwardsSearch : SearchHistoryTask::ForwardsSearch);
 }
 void SessionController::showHistoryOptions()
 {
@@ -1734,18 +1804,20 @@ void SearchHistoryTask::executeOnScreenWindow(SessionPtr session , ScreenWindowP
 
     Emulation* emulation = session->emulation();
 
-    int selectionColumn = 0;
-    int selectionLine = 0;
-
-    window->getSelectionEnd(selectionColumn , selectionLine);
-
     if (!_regExp.isEmpty()) {
         int pos = -1;
         const bool forwards = (_direction == ForwardsSearch);
-        int startLine = selectionLine + window->currentLine() + (forwards ? 1 : -1);
-        // Temporary fix for #205495
-        if (startLine < 0) startLine = 0;
         const int lastLine = window->lineCount() - 1;
+
+        int startLine;
+        if (forwards && (_startLine == lastLine)) {
+            startLine = 0;
+        } else if (!forwards && (_startLine == 0)) {
+            startLine = lastLine;
+        } else {
+            startLine = _startLine + (forwards ? 1 : -1);
+        }
+
         QString string;
 
         //text stream to read history into string for pattern or regular expression searching
@@ -1852,21 +1924,34 @@ void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
     //kDebug() << "Found result at line " << findPos;
 
     //update display to show area of history containing selection
-    window->scrollTo(findPos);
-    window->setSelectionStart(0 , findPos - window->currentLine() , false);
-    window->setSelectionEnd(window->columnCount() , findPos - window->currentLine());
+    if ((findPos < window->currentLine()) ||
+            (findPos >= (window->currentLine() + window->windowLines()))) {
+        int centeredScrollPos = findPos - window->windowLines() / 2;
+        if (centeredScrollPos < 0) {
+            centeredScrollPos = 0;
+        }
+
+        window->scrollTo(centeredScrollPos);
+    }
+
     window->setTrackOutput(false);
     window->notifyOutputChanged();
+    window->setCurrentResultLine(findPos);
 }
 
 SearchHistoryTask::SearchHistoryTask(QObject* parent)
     : SessionTask(parent)
     , _direction(BackwardsSearch)
+    , _startLine(0)
 {
 }
 void SearchHistoryTask::setSearchDirection(SearchDirection direction)
 {
     _direction = direction;
+}
+void SearchHistoryTask::setStartLine(int line)
+{
+    _startLine = line;
 }
 SearchHistoryTask::SearchDirection SearchHistoryTask::searchDirection() const
 {

@@ -126,6 +126,13 @@ public:
      */
     bool isValid() const;
 
+    /** Set the start line from which the next search will be done **/
+    void setSearchStartTo(int line);
+
+    /** set start line to the first or last line (depending on the reverse search
+     * setting) in the terminal display **/
+    void setSearchStartToWindowCurrentLine();
+
     /**
      * Sets the widget used for searches through the session's output.
      *
@@ -228,6 +235,7 @@ private slots:
     void enableSearchBar(bool showSearchBar);
     void searchHistory(bool showSearchBar);
     void searchBarEvent();
+    void searchFrom();
     void findNextInHistory();
     void findPreviousInHistory();
     void changeSearchMatch();
@@ -286,6 +294,8 @@ private:
     // direction - value from SearchHistoryTask::SearchDirection enum to specify
     //             the search direction
     void beginSearch(const QString& text , int direction);
+    QRegExp regexpFromSearchBarOptions();
+    bool reverseSearchChecked() const;
     void setupCommonActions();
     void setupExtraActions();
     void removeSearchFilter(); // remove and delete the current search filter if set
@@ -318,6 +328,8 @@ private:
 
     bool _urlFilterUpdateRequired;
 
+    int _searchStartLine;
+    int _prevSearchResultLine;
     QPointer<IncrementalSearchBar> _searchBar;
 
     KCodecAction* _codecAction;
@@ -496,6 +508,9 @@ public:
     /** Returns the current search direction.  See setSearchDirection(). */
     SearchDirection searchDirection() const;
 
+    /** The line from which the search will be done **/
+    void setStartLine(int startLine);
+
     /**
      * Performs a search through the session's history, starting at the position
      * of the current selection, in the direction specified by setSearchDirection().
@@ -517,6 +532,7 @@ private:
     QMap< SessionPtr , ScreenWindowPtr > _windows;
     QRegExp _regExp;
     SearchDirection _direction;
+    int _startLine;
 
     //static QPointer<SearchHistoryThread> _thread;
 };

@@ -116,6 +116,7 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
     if (_screenWindow) {
         connect(_screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()));
         connect(_screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()));
+        connect(_screenWindow , SIGNAL(currentResultLineChanged()) , this , SLOT(updateImage()));
         _screenWindow->setWindowLines(_lines);
     }
 }
@@ -358,6 +359,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     _scrollBar->setCursor(Qt::ArrowCursor);
     connect(_scrollBar, SIGNAL(valueChanged(int)),
             this, SLOT(scrollBarPositionChanged(int)));
+    connect(_scrollBar, SIGNAL(sliderMoved(int)),
+            this, SLOT(viewScrolledByUser()));
 
     // setup timers for blinking text
     _blinkTextTimer = new QTimer(this);
@@ -1169,6 +1172,7 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
                        true /* use opacity setting */);
         drawContents(paint, rect);
     }
+    drawCurrentResultRect(paint);
     drawInputMethodPreeditString(paint, preeditRect());
     paintFilters(paint);
 }
@@ -1310,7 +1314,9 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 // drawn on top of them
             } else if (spot->type() == Filter::HotSpot::Marker) {
                 //TODO - Do not use a hardcoded color for this
-                painter.fillRect(r, QBrush(QColor(255, 0, 0, 120)));
+                const bool isCurrentResultLine = (_screenWindow->currentResultLine() == (spot->startLine() + _screenWindow->currentLine()));
+                QColor color = isCurrentResultLine ? QColor(255, 255, 0, 120) : QColor(255, 0, 0, 120);
+                painter.fillRect(r, color);
             }
         }
     }
@@ -1471,6 +1477,17 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             x += len - 1;
         }
     }
+}
+
+void TerminalDisplay::drawCurrentResultRect(QPainter& painter)
+{
+    if(_screenWindow->currentResultLine() == -1) {
+        return;
+    }
+
+    QRect r(0, (_screenWindow->currentResultLine() - _screenWindow->currentLine())*_fontHeight,
+            contentsRect().width(), _fontHeight);
+    painter.fillRect(r, QColor(0, 0, 255, 80));
 }
 
 QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
@@ -2458,6 +2475,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         const bool canScroll = _scrollBar->maximum() > 0;
         if (canScroll) {
             _scrollBar->event(ev);
+            _sessionController->setSearchStartToWindowCurrentLine();
         } else {
             // assume that each Up / Down key event will cause the terminal application
             // to scroll by one line.
@@ -2492,6 +2510,11 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 void TerminalDisplay::tripleClickTimeout()
 {
     _possibleTripleClick = false;
+}
+
+void TerminalDisplay::viewScrolledByUser()
+{
+    _sessionController->setSearchStartToWindowCurrentLine();
 }
 
 void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
@@ -2832,6 +2855,7 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
     _screenWindow->setTrackOutput(_screenWindow->atEndOfOutput());
     updateLineProperties();
     updateImage();
+    viewScrolledByUser();
 }
 
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)

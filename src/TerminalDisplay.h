@@ -668,6 +668,7 @@ private slots:
     void unmaskBell();
     void swapFGBGColors();
     void tripleClickTimeout();  // resets possibleTripleClick
+    void viewScrolledByUser();
 
     /**
      * Called from the drag-and-drop popup. Causes the dropped URLs to be pasted as text.
@@ -684,6 +685,8 @@ private:
     // drawTextFragment() or drawPrinterFriendlyTextFragment()
     // to draw the fragments
     void drawContents(QPainter& painter, const QRect& rect);
+    // draw a transparent rectangle over the line of the current match
+    void drawCurrentResultRect(QPainter& painter);
     // draws a section of text, all the text in this section
     // has a common color and style
     void drawTextFragment(QPainter& painter, const QRect& rect,

@@ -32,10 +32,12 @@ ScreenWindow::ScreenWindow(QObject* parent)
     , _bufferNeedsUpdate(true)
     , _windowLines(1)
     , _currentLine(0)
+    , _currentResultLine(-1)
     , _trackOutput(true)
     , _scrollCount(0)
 {
 }
+
 ScreenWindow::~ScreenWindow()
 {
     delete[] _windowBuffer;
@@ -209,6 +211,21 @@ QPoint ScreenWindow::cursorPosition() const
 int ScreenWindow::currentLine() const
 {
     return qBound(0, _currentLine, lineCount() - windowLines());
+}
+
+int ScreenWindow::currentResultLine() const
+{
+    return _currentResultLine;
+}
+
+void ScreenWindow::setCurrentResultLine(int line)
+{
+    if (_currentResultLine == line) {
+        return;
+    }
+
+    _currentResultLine = line;
+    emit currentResultLineChanged();
 }
 
 void ScreenWindow::scrollBy(RelativeScrollMode mode, int amount, bool fullPage)

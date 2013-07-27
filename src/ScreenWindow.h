@@ -113,6 +113,13 @@ public:
      */
     QRect scrollRegion() const;
 
+
+    /**
+     * What line the next search will start from
+     */
+    void setCurrentResultLine(int line);
+    int currentResultLine() const;
+
     /**
      * Sets the start of the selection to the given @p line and @p column within
      * the window.
@@ -241,6 +248,8 @@ signals:
      */
     void outputChanged();
 
+    void currentResultLineChanged();
+
     /**
      * Emitted when the screen window is scrolled to a different position.
      *
@@ -262,6 +271,7 @@ private:
 
     int  _windowLines;
     int  _currentLine; // see scrollTo() , currentLine()
+    int _currentResultLine;
     bool _trackOutput; // see setTrackOutput() , trackOutput()
     int  _scrollCount; // count of lines which the window has been scrolled by since
     // the last call to resetScrollCount()

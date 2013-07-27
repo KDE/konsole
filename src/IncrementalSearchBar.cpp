@@ -42,6 +42,10 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     , _caseSensitive(0)
     , _regExpression(0)
     , _highlightMatches(0)
+    , _reverseSearch(0)
+    , _findNextButton(0)
+    , _findPreviousButton(0)
+    , _searchFromButton(0)
 {
     QHBoxLayout* barLayout = new QHBoxLayout(this);
 
@@ -74,21 +78,24 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     connect(_searchEdit , SIGNAL(clearButtonClicked()) , this , SLOT(clearLineEdit()));
     connect(_searchEdit , SIGNAL(textChanged(QString)) , _searchTimer , SLOT(start()));
 
-    QToolButton* findNext = new QToolButton(this);
-    findNext->setObjectName(QLatin1String("find-next-button"));
-    findNext->setText(i18nc("@action:button Go to the next phrase", "Next"));
-    findNext->setIcon(KIcon("go-down-search"));
-    findNext->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    findNext->setToolTip(i18nc("@info:tooltip", "Find the next match for the current search phrase"));
-    connect(findNext , SIGNAL(clicked()) , this , SIGNAL(findNextClicked()));
+    _findNextButton = new QToolButton(this);
+    _findNextButton->setObjectName(QLatin1String("find-next-button"));
+    _findNextButton->setText(i18nc("@action:button Go to the next phrase", "Next"));
+    _findNextButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    _findNextButton->setToolTip(i18nc("@info:tooltip", "Find the next match for the current search phrase"));
+    connect(_findNextButton , SIGNAL(clicked()) , this , SIGNAL(findNextClicked()));
 
-    QToolButton* findPrev = new QToolButton(this);
-    findPrev->setObjectName(QLatin1String("find-previous-button"));
-    findPrev->setText(i18nc("@action:button Go to the previous phrase", "Previous"));
-    findPrev->setIcon(KIcon("go-up-search"));
-    findPrev->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    findPrev->setToolTip(i18nc("@info:tooltip", "Find the previous match for the current search phrase"));
-    connect(findPrev , SIGNAL(clicked()) , this , SIGNAL(findPreviousClicked()));
+    _findPreviousButton = new QToolButton(this);
+    _findPreviousButton->setObjectName(QLatin1String("find-previous-button"));
+    _findPreviousButton->setText(i18nc("@action:button Go to the previous phrase", "Previous"));
+    _findPreviousButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    _findPreviousButton->setToolTip(i18nc("@info:tooltip", "Find the previous match for the current search phrase"));
+    connect(_findPreviousButton , SIGNAL(clicked()) , this , SIGNAL(findPreviousClicked()));
+
+
+    _searchFromButton = new QToolButton(this);
+    _searchFromButton->setObjectName(QLatin1String("search-from-button"));
+    connect(_searchFromButton , SIGNAL(clicked()) , this , SIGNAL(searchFromClicked()));
 
     QToolButton* optionsButton = new QToolButton(this);
     optionsButton->setObjectName(QLatin1String("find-options-button"));
@@ -102,8 +109,9 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     barLayout->addWidget(closeButton);
     barLayout->addWidget(findLabel);
     barLayout->addWidget(_searchEdit);
-    barLayout->addWidget(findNext);
-    barLayout->addWidget(findPrev);
+    barLayout->addWidget(_findNextButton);
+    barLayout->addWidget(_findPreviousButton);
+    barLayout->addWidget(_searchFromButton);
     barLayout->addWidget(optionsButton);
 
     // Fill the options menu
@@ -128,16 +136,43 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     connect(_highlightMatches, SIGNAL(toggled(bool)),
             this, SIGNAL(highlightMatchesToggled(bool)));
 
+    _reverseSearch = optionsMenu->addAction(i18n("Search backwards"));
+    _reverseSearch->setCheckable(true);
+    _reverseSearch->setToolTip(i18n("Sets whether search should start from the bottom"));
+    _reverseSearch->setChecked(true);
+    connect(_reverseSearch, SIGNAL(toggled(bool)),
+            this, SLOT(updateButtonsAccordingToReverseSearchSetting()));
+    updateButtonsAccordingToReverseSearchSetting();
+
     barLayout->addStretch();
 
     barLayout->setContentsMargins(4, 4, 4, 4);
 
     setLayout(barLayout);
 }
+
 void IncrementalSearchBar::notifySearchChanged()
 {
     emit searchChanged(searchText());
 }
+
+void IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting()
+{
+    Q_ASSERT(_reverseSearch);
+    if (_reverseSearch->isChecked()) {
+        _searchFromButton->setText(i18nc("@action:button Search from bottom", "From bottom"));
+        _searchFromButton->setToolTip(i18n("Search for the current search phrase from the bottom"));
+        _findNextButton->setIcon(KIcon("go-up-search"));
+        _findPreviousButton->setIcon(KIcon("go-down-search"));
+    } else {
+        _searchFromButton->setText(i18nc("@action:button Search from top", "From top"));
+        _searchFromButton->setToolTip(i18n("Search for the current search phrase from the top"));
+        _findNextButton->setIcon(KIcon("go-down-search"));
+        _findPreviousButton->setIcon(KIcon("go-up-search"));
+    }
+
+}
+
 QString IncrementalSearchBar::searchText()
 {
     return _searchEdit->text();
@@ -161,12 +196,17 @@ bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* aEvent)
             }
 
             if (keyEvent->key() == Qt::Key_Return && !keyEvent->modifiers()) {
-                emit searchReturnPressed(_searchEdit->text());
+                _findNextButton->click();
                 return true;
             }
 
             if ((keyEvent->key() == Qt::Key_Return) && (keyEvent->modifiers() == Qt::ShiftModifier)) {
-                emit searchShiftPlusReturnPressed();
+                _findPreviousButton->click();
+                return true;
+            }
+
+            if ((keyEvent->key() == Qt::Key_Return) && (keyEvent->modifiers() == Qt::ControlModifier)) {
+                _searchFromButton->click();
                 return true;
             }
         }
@@ -180,9 +220,7 @@ void IncrementalSearchBar::setVisible(bool visible)
     QWidget::setVisible(visible);
 
     if (visible) {
-        //TODO - Check if this is the correct reason value to use here
-        _searchEdit->setFocus(Qt::ActiveWindowFocusReason);
-        _searchEdit->selectAll();
+        focusLineEdit();
     }
 }
 
@@ -212,13 +250,20 @@ void IncrementalSearchBar::clearLineEdit()
     _searchEdit->setStyleSheet(QString());
 }
 
+void IncrementalSearchBar::focusLineEdit()
+{
+    _searchEdit->setFocus(Qt::ActiveWindowFocusReason);
+    _searchEdit->selectAll();
+}
+
 const QBitArray IncrementalSearchBar::optionsChecked()
 {
-    QBitArray options(3, 0);
+    QBitArray options(4, 0);
 
     if (_caseSensitive->isChecked()) options.setBit(MatchCase);
     if (_regExpression->isChecked()) options.setBit(RegExp);
     if (_highlightMatches->isChecked()) options.setBit(HighlightMatches);
+    if (_reverseSearch->isChecked()) options.setBit(ReverseSearch);
 
     return options;
 }
