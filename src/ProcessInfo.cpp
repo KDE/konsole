@@ -414,6 +414,7 @@ void UnixProcessInfo::readUserName()
     delete [] getpwBuffer;
 }
 
+#if defined(Q_OS_LINUX)
 class LinuxProcessInfo : public UnixProcessInfo
 {
 public:
@@ -605,7 +606,7 @@ private:
     }
 };
 
-#if defined(Q_OS_FREEBSD)
+#elif defined(Q_OS_FREEBSD)
 class FreeBSDProcessInfo : public UnixProcessInfo
 {
 public:
@@ -724,9 +725,8 @@ private:
 #endif
     }
 };
-#endif
 
-#if defined(Q_OS_OPENBSD)
+#elif defined(Q_OS_OPENBSD)
 class OpenBSDProcessInfo : public UnixProcessInfo
 {
 public:
@@ -859,9 +859,8 @@ private:
         return true;
     }
 };
-#endif
 
-#if defined(Q_OS_MAC)
+#elif defined(Q_OS_MAC)
 class MacProcessInfo : public UnixProcessInfo
 {
 public:
@@ -941,9 +940,8 @@ private:
         return false;
     }
 };
-#endif
 
-#if defined(Q_OS_SOLARIS)
+#elif defined(Q_OS_SOLARIS)
 // The procfs structure definition requires off_t to be
 // 32 bits, which only applies if FILE_OFFSET_BITS=32.
 // Futz around here to get it to compile regardless,
@@ -954,21 +952,6 @@ private:
 #undef _FILE_OFFSET_BITS
 #endif
 #include <procfs.h>
-#else
-// On non-Solaris platforms, define a fake psinfo structure
-// so that the SolarisProcessInfo class can be compiled
-//
-// That avoids the trap where you change the API and
-// don't notice it in #ifdeffed platform-specific parts
-// of the code.
-struct psinfo {
-    int pr_ppid;
-    int pr_pgid;
-    char* pr_fname;
-    char* pr_psargs;
-};
-static const int PRARGSZ = 1;
-#endif
 
 class SolarisProcessInfo : public UnixProcessInfo
 {
@@ -1026,6 +1009,7 @@ private:
         }
     }
 };
+#endif
 
 SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     : _process(process)
