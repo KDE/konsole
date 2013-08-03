@@ -4,7 +4,7 @@ Items for the Konsole maintainer:
 
 A new maintainer may need super powers for some of these.  If so, put in a 
 request.
-https://bugs.kde.org/enter_sysadmin_request.cgi
+http://sysadmin.kde.org/tickets/
 
 
 A. New releases
@@ -37,10 +37,9 @@ D. Mailing list
     1. https://mail.kde.org/mailman/admin/konsole-devel
         Password is given from previous maintainer (or someone who knows it).
         Robert Knight or Kurt Hindenburg
-    2. Now and then you'll get a request via email about an email that requires
-        approval.  Almost always these are spam and can be discards via the
-        interface (provided in email).
-
+    2. As of 2013, all new subscriptions and first post require admin
+        approval.  This was done to cut down on spam on the list. These
+        options can be changed on the link in #1
 
 Links
     1. General Konsole bug page:
@@ -48,10 +47,9 @@ Links
     2. An attempt to get more interest in Konsole
         http://userbase.kde.org/KonsoleDevelopment
     3. HTML version of Handbook
-        http://docs.kde.org/development/en/kde-baseapps/konsole/index.html
+        http://docs.kde.org/development/en/applications/konsole/index.html
     4. KDE schedule http://techbase.kde.org/Schedules
         Suggest using http://www.kde.org/releaseschedule.ics in your calendar
         to watch for new releases.
 
 
- 
