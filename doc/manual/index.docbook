@@ -1021,9 +1021,23 @@ For more information, please visit
 <term><option>--tabs-from-file </option><parameter>file</parameter></term>
 <listitem><para><action>Create tabs</action> as specified in the given tabs configuration file.
 </para>
-<note><para>The file has one tab per line in the following format:</para><para>
-title: PUT A TITLE ;; command: PUT A COMMAND ;; workdir: PUT A DIRECTORY
-</para></note>
+<note><para>The file has one tab per line in the following format:</para>
+<para>Each line specifies a tab to open using up to 4 fields specifying how it is to open. 
+Fields are delimited with <userinput>;;</userinput> and a field name must have a <userinput>:</userinput> appended.
+Empty lines or lines with <userinput>#</userinput> at the beginning are ignored, so you can use line beginning with 
+<userinput>#</userinput> to add comments.
+</para>
+
+<simplelist>
+<member><userinput>title:</userinput> a name for this tab, tab default if blank or not specified</member>
+<member><userinput>workdir:</userinput> working directory, <filename class="directory"> ~</filename> if blank or not specified</member>
+<member><userinput>profile:</userinput> a &konsole; profile to use, the default if blank or not specified</member>
+<member><userinput>command:</userinput> a command to run</member>
+</simplelist>
+<para>Each line should contain at least one of <userinput>command</userinput> or <userinput>profile</userinput> field.
+</para>
+<para>Example: <userinput>title: %n;; command: /usr/bin/top ;; profile: Shell</userinput></para>
+</note>
 </listitem>
 </varlistentry>
 
