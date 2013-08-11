@@ -12,5 +12,6 @@ install( FILES
          DarkPastels.colorscheme
          RedOnBlack.colorscheme
          Solarized.colorscheme
+         SolarizedLight.colorscheme
          DESTINATION
          ${DATA_INSTALL_DIR}/konsole )
