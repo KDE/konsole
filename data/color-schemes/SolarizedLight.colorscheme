@@ -47,17 +47,17 @@ Color=238,232,213
 Color=253,246,227
 
 [Background]
-Color=0,43,54
+Color=253,246,227
 
 [BackgroundIntense]
-Color=7,54,66
+Color=238,232,213
 
 [Foreground]
-Color=131,148,150
+Color=101,123,131
 
 [ForegroundIntense]
-Color=147,161,161
+Color=88,110,117
 
 [General]
-Description=Solarized
+Description=Solarized Light
 Opacity=1
