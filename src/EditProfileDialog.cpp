@@ -31,7 +31,6 @@
 #include <QtGui/QLinearGradient>
 #include <QtGui/QRadialGradient>
 #include <QtCore/QTimer>
-#include <QtCore/QTimeLine>
 
 // KDE
 #include <kdeversion.h>
@@ -67,7 +66,6 @@ using namespace Konsole;
 
 EditProfileDialog::EditProfileDialog(QWidget* aParent)
     : KDialog(aParent)
-    , _colorSchemeAnimationTimeLine(0)
     , _delayedPreviewTimer(new QTimer(this))
     , _colorDialog(0)
 {
@@ -229,10 +227,6 @@ void EditProfileDialog::preparePage(int page)
 
         _pageNeedsUpdate[page] = false;
     }
-
-    // start page entry animation for color schemes
-    if (pageWidget == _ui->appearanceTab)
-        _colorSchemeAnimationTimeLine->start();
 }
 void EditProfileDialog::selectProfileName()
 {
@@ -413,12 +407,6 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
     _ui->colorSchemeList->setItemDelegate(delegate);
 
-    _colorSchemeAnimationTimeLine = new QTimeLine(500 , this);
-    delegate->setEntryTimeLine(_colorSchemeAnimationTimeLine);
-
-    connect(_colorSchemeAnimationTimeLine, SIGNAL(valueChanged(qreal)), this,
-            SLOT(colorSchemeAnimationUpdate()));
-
     _ui->transparencyWarningWidget->setVisible(false);
     _ui->transparencyWarningWidget->setWordWrap(true);
     _ui->transparencyWarningWidget->setCloseButtonVisible(false);
@@ -493,13 +481,6 @@ void EditProfileDialog::setBoldIntense(bool enable)
 void EditProfileDialog::toggleMouseWheelZoom(bool enable)
 {
     updateTempProfileProperty(Profile::MouseWheelZoomEnabled, enable);
-}
-void EditProfileDialog::colorSchemeAnimationUpdate()
-{
-    QAbstractItemModel* model = _ui->colorSchemeList->model();
-
-    for (int i = model->rowCount() ; i >= 0 ; i--)
-        _ui->colorSchemeList->update(model->index(i, 0));
 }
 void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 {
@@ -1268,29 +1249,9 @@ ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* aParent)
 {
 }
 
-void ColorSchemeViewDelegate::setEntryTimeLine(QTimeLine* timeLine)
-{
-    _entryTimeLine = timeLine;
-}
-
 void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
                                     const QModelIndex& index) const
 {
-    // entry animation
-    //
-    // note that the translation occurs for each item drawn, but the
-    // painter is not reset between painting items.  this means that when
-    // the items are painted in order ( as occurs when the list is first
-    // shown ), there is a visually pleasing staggering of items as they
-    // enter.
-    if (_entryTimeLine != 0) {
-        qreal value = 1.0 - _entryTimeLine->currentValue();
-        painter->translate(value *
-                           option.rect.width() , 0);
-
-        painter->setOpacity(_entryTimeLine->currentValue());
-    }
-
     const ColorScheme* scheme = index.data(Qt::UserRole + 1).value<const ColorScheme*>();
 
     Q_ASSERT(scheme);

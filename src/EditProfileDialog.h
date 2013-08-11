@@ -37,7 +37,6 @@
 class QAbstractButton;
 class QItemSelectionModel;
 class QTextCodec;
-class QTimeLine;
 
 namespace Ui
 {
@@ -134,8 +133,6 @@ private slots:
     void previewColorScheme(const QModelIndex& index);
     void fontSelected(const QFont&);
     void toggleMouseWheelZoom(bool enable);
-
-    void colorSchemeAnimationUpdate();
 
     // scrolling page
     void historyModeChanged(Enum::HistoryModeEnum mode);
@@ -250,8 +247,6 @@ private:
     QVector<bool> _pageNeedsUpdate;
     QHash<int, QVariant> _previewedProperties;
 
-    QTimeLine* _colorSchemeAnimationTimeLine;
-
     QHash<int, QVariant> _delayedPreviewProperties;
     QTimer* _delayedPreviewTimer;
 
@@ -273,19 +268,6 @@ public:
                        const QModelIndex& index) const;
     virtual QSize sizeHint(const QStyleOptionViewItem& option,
                            const QModelIndex& index) const;
-
-    /**
-     * Sets the timeline used to control the entry animation
-     * for this delegate.
-     *
-     * During a call to paint(), the value of the timeLine is used to
-     * determine how to render the item ( with 0 being the beginning
-     * of the animation and 1.0 being the end )
-     */
-    void setEntryTimeLine(QTimeLine* timeLine);
-
-private:
-    QPointer<QTimeLine> _entryTimeLine;
 };
 }
 
