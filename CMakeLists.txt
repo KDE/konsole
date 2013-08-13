@@ -1,12 +1,13 @@
 project(Konsole)
 
 option(QT5_BUILD "Build using Qt5" OFF)
-include(FeatureSummary)
+
 if(QT5_BUILD)
   find_package(Qt5Core NO_MODULE)
   set_package_properties(Qt5Core PROPERTIES TYPE REQUIRED)
   message(STATUS "Qt5 build")
   find_package(ECM 0.0.9 NO_MODULE)
+  include(FeatureSummary)
   set_package_properties(ECM PROPERTIES TYPE REQUIRED)
   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
   find_package(Qt5Transitional MODULE)
@@ -31,14 +32,12 @@ if(QT5_BUILD)
   set(KDE4_KIO_LIBS ${KDE4_KIO_LIBS} ${KDE4Support_LIBRARIES})
 else()
   message(STATUS "Qt4 build")
-  find_package(KDE4 4.10.0)
-  set_package_properties(KDE4 PROPERTIES TYPE REQUIRED)
+  find_package(KDE4 4.10.0 REQUIRED)
   include(KDE4Defaults)
+  include(FeatureSummary)
   add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
   kde4_no_enable_final(konsole)
 endif()
-
-
 
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=1211)
