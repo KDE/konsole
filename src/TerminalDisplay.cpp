@@ -41,6 +41,7 @@
 #include <QStyle>
 #include <QtCore/QTimer>
 #include <QToolTip>
+#include <QDrag>
 #include <QtGui/QAccessible>
 
 // KDE
@@ -278,8 +279,12 @@ namespace Konsole
 QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *object)
 {
     Q_UNUSED(key)
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     if (TerminalDisplay *display = qobject_cast<TerminalDisplay*>(object))
         return new TerminalDisplayAccessible(display);
+#else
+#pragma message("This code needs proper porting to Qt5")
+#endif
     return 0;
 }
 }
@@ -3088,7 +3093,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
     if (event->mimeData()->hasFormat("text/plain") ||
             event->mimeData()->hasFormat("text/uri-list")) {
-        emit sendStringToEmu(dropText.toLocal8Bit());
+        emit sendStringToEmu(dropText.toLocal8Bit().constData());
     }
 }
 
@@ -3097,7 +3102,7 @@ void TerminalDisplay::dropMenuPasteActionTriggered()
     if (sender()) {
         const QAction* action = qobject_cast<const QAction*>(sender());
         if (action) {
-            emit sendStringToEmu(action->data().toString().toLocal8Bit());
+            emit sendStringToEmu(action->data().toString().toLocal8Bit().constData());
         }
     }
 }
@@ -3107,7 +3112,7 @@ void TerminalDisplay::dropMenuCdActionTriggered()
     if (sender()) {
         const QAction* action = qobject_cast<const QAction*>(sender());
         if (action) {
-            emit sendStringToEmu(action->data().toString().toLocal8Bit());
+            emit sendStringToEmu(action->data().toString().toLocal8Bit().constData());
         }
     }
 }

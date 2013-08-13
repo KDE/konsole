@@ -25,16 +25,26 @@
 #include <kde_file.h>
 
 // KDE
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #include <KAboutData>
+#else
+#include <k4aboutdata.h>
+#endif
 #include <KCmdLineArgs>
 #include <KLocale>
+
+
 
 #define KONSOLE_VERSION "2.11.999"
 
 using Konsole::Application;
 
 // fill the KAboutData structure with information about contributors to Konsole.
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 void fillAboutData(KAboutData& aboutData);
+#else
+void fillAboutData(K4AboutData& aboutData);
+#endif
 
 // fill the KCmdLineOptions object with konsole specific options.
 void fillCommandLineOptions(KCmdLineOptions& options);
@@ -51,12 +61,21 @@ void restoreSession(Application& app);
 // ***
 extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 {
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     KAboutData about("konsole",
+#else
+    K4AboutData about("konsole",
+#endif
                      0,
                      ki18nc("@title", "<application>Konsole</application>"),
                      KONSOLE_VERSION,
                      ki18nc("@title", "Terminal emulator"),
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
                      KAboutData::License_GPL_V2
+#else
+                     K4AboutData::License_GPL_V2
+#endif
+
                     );
     fillAboutData(about);
 
@@ -79,8 +98,10 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 
     Application app;
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     // make sure the d&d popup menu provided by libkonq get translated.
     KGlobal::locale()->insertCatalog("libkonq");
+#endif
 
     restoreSession(app);
     return app.exec();
@@ -192,7 +213,11 @@ void fillCommandLineOptions(KCmdLineOptions& options)
                           " with the -e option)."));
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 void fillAboutData(KAboutData& aboutData)
+#else
+void fillAboutData(K4AboutData& aboutData)
+#endif
 {
     aboutData.setProgramIconName("utilities-terminal");
     aboutData.setHomepage("http://konsole.kde.org");

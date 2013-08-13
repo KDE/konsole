@@ -21,6 +21,9 @@
 
 #include "TerminalDisplayAccessible.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+
+
 #if QT_VERSION >= 0x040800 // added in Qt 4.8.0
 QString Q_GUI_EXPORT qTextBeforeOffsetFromString(int offset, QAccessible2::BoundaryType boundaryType,
         int* startOffset, int* endOffset, const QString& text);
@@ -214,3 +217,7 @@ TerminalDisplay* TerminalDisplayAccessible::display()
 {
     return static_cast<TerminalDisplay*>(object());
 }
+
+#else
+#pragma message("This code needs proper porting to Qt5")
+#endif

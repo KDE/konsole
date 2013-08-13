@@ -90,7 +90,7 @@ KeyboardTranslatorReader::KeyboardTranslatorReader(QIODevice* source)
     while (_description.isEmpty() && !source->atEnd()) {
         QList<Token> tokens = tokenize(QString::fromLocal8Bit(source->readLine()));
         if (!tokens.isEmpty() && tokens.first().type == Token::TitleKeyword)
-            _description = i18n(tokens[1].text.toUtf8());
+            _description = i18n(tokens[1].text.toUtf8().constData());
     }
     // read first entry (if any)
     readNext();

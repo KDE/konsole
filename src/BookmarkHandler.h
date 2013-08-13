@@ -26,11 +26,13 @@
 
 // KDE
 #include <KBookmarkManager>
+#include <KUrl>
 
 // Konsole
 #include "konsole_export.h"
 
 class KMenu;
+class QMenu;
 class KBookmarkMenu;
 class KActionCollection;
 
@@ -62,7 +64,11 @@ public:
      * @param toplevel TODO: Document me
      * @param parent The parent object
      */
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     BookmarkHandler(KActionCollection* collection , KMenu* menu, bool toplevel , QObject* parent);
+#else
+    BookmarkHandler(KActionCollection* collection , QMenu* menu, bool toplevel , QObject* parent);
+#endif
     ~BookmarkHandler();
 
     virtual QString currentUrl() const;
@@ -75,7 +81,11 @@ public:
     /**
      * Returns the menu which this bookmark handler inserts its actions into.
      */
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     KMenu* menu() const {
+#else
+    QMenu* menu() const {
+#endif
         return _menu;
     }
 
@@ -105,7 +115,11 @@ signals:
      * @param urls The urls of the bookmarks in the folder whose
      * 'Open Folder in Tabs' action was triggered
      */
+#if QT_VERSION < 0x50000 //moc doesn't understand the QT_VERSION_CHECK macro
     void openUrls(const QList<KUrl>& urls);
+#else
+    void openUrls(const QList<QUrl>& urls);
+#endif
 
 private slots:
     void openBookmark(const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers);
@@ -114,7 +128,11 @@ private:
     QString titleForView(ViewProperties* view) const;
     QString urlForView(ViewProperties* view) const;
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     KMenu* _menu;
+#else
+    QMenu* _menu;
+#endif
     KBookmarkMenu* _bookmarkMenu;
     QString _file;
     bool _toplevel;

@@ -25,6 +25,7 @@
 // Qt
 #include <QtCore/QHash>
 #include <QtCore/QList>
+#include <QtCore/QString>
 //#include <QtGui/QKeySequence>
 #include <QtCore/QMetaType>
 

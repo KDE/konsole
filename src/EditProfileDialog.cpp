@@ -48,6 +48,7 @@
 #include <KWindowSystem>
 #include <KTextEdit>
 #include <KMessageBox>
+#include <KUrl>
 
 // Konsole
 #include "ColorScheme.h"
@@ -261,7 +262,11 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
     _ui->commandEdit->setText(command.fullCommand());
     KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
     exeCompletion->setParent(this);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     exeCompletion->setDir(QString());
+#else
+    exeCompletion->setDir(QUrl());
+#endif
     _ui->commandEdit->setCompletionObject(exeCompletion);
 
     _ui->initialDirEdit->setText(profile->defaultWorkingDirectory());
@@ -395,7 +400,7 @@ void EditProfileDialog::commandChanged(const QString& command)
 }
 void EditProfileDialog::selectInitialDir()
 {
-    const KUrl url = KFileDialog::getExistingDirectoryUrl(_ui->initialDirEdit->text(),
+    const KUrl url = KFileDialog::getExistingDirectoryUrl(KUrl(_ui->initialDirEdit->text()),
                      this,
                      i18n("Select Initial Directory"));
 
@@ -1213,7 +1218,11 @@ void EditProfileDialog::showFontDialog()
     QFont currentFont = _ui->fontPreviewLabel->font();
 
     QWeakPointer<KFontDialog> dialog = new KFontDialog(this, KFontChooser::FixedFontsOnly);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     dialog.data()->setCaption(i18n("Select Fixed Width Font"));
+#else
+    dialog.data()->setWindowTitle(i18n("Select Fixed Width Font"));
+#endif
     dialog.data()->setFont(currentFont, true);
 
     // TODO (hindenburg): When https://git.reviewboard.kde.org/r/103357 is
