@@ -28,7 +28,6 @@
 
 // KDE
 #include <KDebug>
-#include <KGlobal>
 #include <KStandardDirs>
 
 using namespace Konsole;

@@ -22,8 +22,6 @@
 
 // Qt
 #include <QtGui/QKeyEvent>
-// KDE
-#include <KIcon>
 
 // Konsole
 #include "ui_KeyBindingEditor.h"

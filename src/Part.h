@@ -33,7 +33,6 @@
 class QAction;
 class QStringList;
 class QKeyEvent;
-class KUrl;
 
 namespace Konsole
 {
@@ -192,13 +191,8 @@ signals:
 
 protected:
     /** Reimplemented from KParts::PartBase. */
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     virtual bool openFile();
     virtual bool openUrl(const KUrl& url);
-#else
-    virtual bool openFile() Q_DECL_OVERRIDE;
-    virtual bool openUrl(const QUrl& url) Q_DECL_OVERRIDE;
-#endif
 
 private slots:
     void activeViewChanged(SessionController* controller);
@@ -208,6 +202,7 @@ private slots:
     void newTab();
     void overrideTerminalShortcut(QKeyEvent*, bool& override);
     void sessionStateChanged(int state);
+
 private:
     Session* activeSession() const;
     void createGlobalActions();

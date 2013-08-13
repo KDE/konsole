@@ -22,10 +22,6 @@
 #ifndef TERMINALDISPLAYACCESSIBLE_H
 #define TERMINALDISPLAYACCESSIBLE_H
 
-#include <QtGlobal>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-
 #include <QtGui/qaccessible.h>
 #include <QtGui/qaccessible2.h>
 #include <qaccessiblewidget.h>
@@ -93,8 +89,5 @@ private:
 
 
 } // namespace
-#else
-#pragma message("This code needs proper porting to Qt5")
-#endif
 
 #endif // TERMINALDISPLAYACCESSIBLE_H

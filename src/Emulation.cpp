@@ -192,7 +192,7 @@ void Emulation::sendKeyEvent(QKeyEvent* ev)
         // A block of text
         // Note that the text is proper unicode.
         // We should do a conversion here
-        emit sendData(ev->text().toUtf8().constData(), ev->text().length());
+        emit sendData(ev->text().toUtf8(), ev->text().length());
     }
 }
 

@@ -163,12 +163,8 @@ private slots:
 
     void updateWindowIcon();
     void updateWindowCaption();
-//moc doesn't understand QT_VERSION_CHECK
-#if QT_VERSION < 0x50000
+
     void openUrls(const QList<KUrl>& urls);
-#else
-    void openUrls(const QList<QUrl>& urls);
-#endif
 
     // Sets the list of profiles to be displayed under the "New Tab" action
     void setProfileList(ProfileList* list);

@@ -50,10 +50,8 @@
 #include <KDebug>
 #include <KUriFilter>
 #include <KStringHandler>
-#include <KSharedConfig>
 #include <KConfigGroup>
 #include <KGlobal>
-#include <KShortcut>
 
 #include <kdeversion.h>
 #if KDE_IS_VERSION(4, 9, 1)
@@ -92,10 +90,9 @@ using namespace Konsole;
 
 // TODO - Replace the icon choices below when suitable icons for silence and
 // activity are available
-//having global static KIcons no longer works with Qt5/KF5, use K_GLOBAL_STATIC
-K_GLOBAL_STATIC_WITH_ARGS(KIcon, _activityIcon, ("dialog-information"));
-K_GLOBAL_STATIC_WITH_ARGS(KIcon, _silenceIcon, ("dialog-information"));
-K_GLOBAL_STATIC_WITH_ARGS(KIcon, _broadcastIcon, ("emblem-important"));
+const KIcon SessionController::_activityIcon("dialog-information");
+const KIcon SessionController::_silenceIcon("dialog-information");
+const KIcon SessionController::_broadcastIcon("emblem-important");
 
 QSet<SessionController*> SessionController::_allControllers;
 int SessionController::_lastControllerId;
@@ -551,12 +548,7 @@ void SessionController::setShowMenuAction(QAction* action)
 
 void SessionController::setupCommonActions()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     KAction* action = 0;
-#else
-    QAction* action = 0;
-#endif
-
     KActionCollection* collection = actionCollection();
 
     // Close Session
@@ -581,17 +573,10 @@ void SessionController::setupCommonActions()
     action->setEnabled(false);
 
     action = KStandardAction::paste(this, SLOT(paste()), collection);
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     KShortcut pasteShortcut = action->shortcut();
     pasteShortcut.setPrimary(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_V));
     pasteShortcut.setAlternate(QKeySequence(Qt::SHIFT + Qt::Key_Insert));
     action->setShortcut(pasteShortcut);
-#else
-    QList<QKeySequence> pasteShortcut;
-    pasteShortcut.append(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_V));
-    pasteShortcut.append(QKeySequence(Qt::SHIFT + Qt::Key_Insert));
-    action->setShortcuts(pasteShortcut);
-#endif
 
     action = collection->addAction("paste-selection", this, SLOT(pasteFromX11Selection()));
     action->setText(i18n("Paste Selection"));
@@ -658,11 +643,7 @@ void SessionController::setupCommonActions()
 
 void SessionController::setupExtraActions()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     KAction* action = 0;
-#else
-    QAction* action = 0;
-#endif
     KToggleAction* toggleAction = 0;
     KActionCollection* collection = actionCollection();
 
@@ -721,27 +702,15 @@ void SessionController::setupExtraActions()
     action = collection->addAction("enlarge-font", this, SLOT(increaseFontSize()));
     action->setText(i18n("Enlarge Font"));
     action->setIcon(KIcon("format-font-size-more"));
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     KShortcut enlargeFontShortcut = action->shortcut();
     enlargeFontShortcut.setPrimary(QKeySequence(Qt::CTRL + Qt::Key_Plus));
     enlargeFontShortcut.setAlternate(QKeySequence(Qt::CTRL + Qt::Key_Equal));
     action->setShortcut(enlargeFontShortcut);
-#else
-    QList<QKeySequence> enlargeFontShortcut;
-    enlargeFontShortcut.append(QKeySequence(Qt::CTRL + Qt::Key_Plus));
-    enlargeFontShortcut.append(QKeySequence(Qt::CTRL + Qt::Key_Equal));
-    action->setShortcuts(enlargeFontShortcut);
-#endif
 
     action = collection->addAction("shrink-font", this, SLOT(decreaseFontSize()));
     action->setText(i18n("Shrink Font"));
     action->setIcon(KIcon("format-font-size-less"));
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     action->setShortcut(KShortcut(Qt::CTRL | Qt::Key_Minus));
-#else
-    action->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Minus));
-#endif
-
 
     // Send signal
     KSelectAction* sendSignalActions = collection->add<KSelectAction>("send-signal");
@@ -949,19 +918,10 @@ void SessionController::openBrowser()
 {
     KUrl currentUrl = url();
 
-    if (currentUrl.isLocalFile()) {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+    if (currentUrl.isLocalFile())
         new KRun(currentUrl, QApplication::activeWindow(), 0, true, true);
-#else
-        new KRun(currentUrl, QApplication::activeWindow(), true);
-#endif
-    } else {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+    else
         new KRun(KUrl(QDir::homePath()), QApplication::activeWindow(), 0, true, true);
-#else
-    new KRun(QUrl::fromLocalFile(QDir::homePath()), QApplication::activeWindow(), true);
-#endif
-    }
 }
 
 void SessionController::copy()
@@ -1421,7 +1381,7 @@ void SessionController::updateSessionIcon()
     // Visualize that the session is broadcasting to others
     if (_copyToGroup && _copyToGroup->sessions().count() > 1) {
         // Master Mode: set different icon, to warn the user to be careful
-        setIcon(*_broadcastIcon);
+        setIcon(_broadcastIcon);
     } else {
         if (!_keepIconUntilInteraction) {
             // Not in Master Mode: use normal icon
@@ -1433,11 +1393,7 @@ void SessionController::sessionTitleChanged()
 {
     if (_sessionIconName != _session->iconName()) {
         _sessionIconName = _session->iconName();
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         _sessionIcon = KIcon(_sessionIconName);
-#else
-        _sessionIcon = QIcon::fromTheme(_sessionIconName);
-#endif
         updateSessionIcon();
     }
 
@@ -1528,10 +1484,10 @@ void SessionController::sessionStateChanged(int state)
         return;
 
     if (state == NOTIFYACTIVITY) {
-        setIcon(*_activityIcon);
+        setIcon(_activityIcon);
         _keepIconUntilInteraction = true;
     } else if (state == NOTIFYSILENCE) {
-        setIcon(*_silenceIcon);
+        setIcon(_silenceIcon);
         _keepIconUntilInteraction = true;
     } else if (state == NOTIFYNORMAL) {
         if (_sessionIconName != _session->iconName()) {
@@ -1553,7 +1509,7 @@ void SessionController::zmodemDownload()
     }
     if (!zmodem.isEmpty()) {
         const QString path = KFileDialog::getExistingDirectory(
-                                 KUrl(), _view,
+                                 QString(), _view,
                                  i18n("Save ZModem Download to..."));
 
         if (!path.isEmpty()) {
@@ -1642,7 +1598,7 @@ void SaveHistoryTask::execute()
     // TODO - show a warning ( preferably passive ) if saving the history output fails
     //
 
-    KFileDialog* dialog = new KFileDialog(KUrl(QString(":konsole")) /* check this */,
+    KFileDialog* dialog = new KFileDialog(QString(":konsole") /* check this */,
                                           QString(), QApplication::activeWindow());
     dialog->setOperationMode(KFileDialog::Saving);
     dialog->setConfirmOverwrite(true);
@@ -1656,11 +1612,7 @@ void SaveHistoryTask::execute()
     // to save that session's history.
     // then start a KIO job to transfer the data from the history to the chosen URL
     foreach(const SessionPtr& session, sessions()) {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         dialog->setCaption(i18n("Save Output From %1", session->title(Session::NameRole)));
-#else
-        dialog->setWindowTitle(i18n("Save Output From %1", session->title(Session::NameRole)));
-#endif
 
         int result = dialog->exec();
 

@@ -29,9 +29,6 @@
 #include <KWindowSystem>
 #include <KFileDialog>
 #include <KUrlCompletion>
-#include <KIcon>
-#include <KUrl>
-#include <KLocalizedString>
 
 // Konsole
 #include "ui_ColorSchemeEditor.h"
@@ -159,7 +156,7 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
 }
 void ColorSchemeEditor::selectWallpaper()
 {
-    const KUrl url = KFileDialog::getImageOpenUrl(KUrl(_ui->wallpaperPath->text()),
+    const KUrl url = KFileDialog::getImageOpenUrl(_ui->wallpaperPath->text(),
                      this,
                      i18nc("@action:button", "Select wallpaper image file"));
 

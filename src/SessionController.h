@@ -301,22 +301,18 @@ private:
 
     ProfileList* _profileList;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     KIcon      _sessionIcon;
-#else
-    QIcon      _sessionIcon;
-#endif
     QString    _sessionIconName;
     int        _previousState;
 
     UrlFilter*      _viewUrlFilter;
     RegExpFilter*   _searchFilter;
 
-    QAction* _copyInputToAllTabsAction;
+    KAction* _copyInputToAllTabsAction;
 
-    QAction* _findAction;
-    QAction* _findNextAction;
-    QAction* _findPreviousAction;
+    KAction* _findAction;
+    KAction* _findNextAction;
+    KAction* _findPreviousAction;
 
     QTimer* _interactionTimer;
 
@@ -340,6 +336,9 @@ private:
 
     static QSet<SessionController*> _allControllers;
     static int _lastControllerId;
+    static const KIcon _activityIcon;
+    static const KIcon _silenceIcon;
+    static const KIcon _broadcastIcon;
 
     QStringList _bookmarkValidProgramsToClear;
 

@@ -65,11 +65,7 @@ void PartTest::testFd()
     }
 
     if (pingExe.isEmpty()) {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         QSKIP("ping command not found.", SkipSingle);
-#else
-        QSKIP("ping command not found.");
-#endif
         return;
     }
 

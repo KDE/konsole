@@ -42,8 +42,6 @@
 #include <KNotifyConfigWidget>
 #include <KConfigDialog>
 #include <KApplication>
-#include <KGlobal>
-#include <KShortcut>
 
 // Konsole
 #include "BookmarkHandler.h"
@@ -155,9 +153,7 @@ void MainWindow::removeMenuAccelerators()
 {
     foreach(QAction* menuItem, menuBar()->actions()) {
         QString itemText = menuItem->text();
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         itemText = KGlobal::locale()->removeAcceleratorMarker(itemText);
-#endif
         menuItem->setText(itemText);
     }
 }
@@ -287,18 +283,12 @@ IncrementalSearchBar* MainWindow::searchBar() const
 void MainWindow::setupActions()
 {
     KActionCollection* collection = actionCollection();
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     KAction* menuAction = 0;
-#else
-    QAction* menuAction = 0;
-#endif
 
     // File Menu
     _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18nc("@action:inmenu", "&New Tab"), collection);
     _newTabMenuAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_T));
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     _newTabMenuAction->setShortcutConfigurable(true);
-#endif
     _newTabMenuAction->setAutoRepeat(false);
     connect(_newTabMenuAction, SIGNAL(triggered()), this, SLOT(newTab()));
     collection->addAction("new-tab", _newTabMenuAction);
@@ -327,11 +317,7 @@ void MainWindow::setupActions()
     KActionMenu* bookmarkMenu = new KActionMenu(i18nc("@title:menu", "&Bookmarks"), collection);
     _bookmarkHandler = new BookmarkHandler(collection, bookmarkMenu->menu(), true, this);
     collection->addAction("bookmark", bookmarkMenu);
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     connect(_bookmarkHandler, SIGNAL(openUrls(QList<KUrl>)), this, SLOT(openUrls(QList<KUrl>)));
-#else
-    connect(_bookmarkHandler, SIGNAL(openUrls(QList<QUrl>)), this, SLOT(openUrls(QList<QUrl>)));
-#endif
 
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
@@ -387,12 +373,7 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
     // it if it is the non-default profile.
     if (sessionActions.size() > 2) {
         // Update the 'New Tab' KActionMenu
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         KMenu* newTabMenu = _newTabMenuAction->menu();
-#else
-        QMenu* newTabMenu = _newTabMenuAction->menu();
-#endif
-
         newTabMenu->clear();
         foreach(QAction* sessionAction, sessionActions) {
             newTabMenu->addAction(sessionAction);
@@ -408,11 +389,7 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
             }
         }
     } else {
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
         KMenu* newTabMenu = _newTabMenuAction->menu();
-#else
-        QMenu* newTabMenu = _newTabMenuAction->menu();
-#endif
         newTabMenu->clear();
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
 
@@ -439,11 +416,7 @@ QString MainWindow::activeSessionDir() const
     }
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 void MainWindow::openUrls(const QList<KUrl>& urls)
-#else
-void MainWindow::openUrls(const QList<QUrl>& urls)
-#endif
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 

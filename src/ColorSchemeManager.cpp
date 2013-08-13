@@ -149,7 +149,7 @@ bool KDE3ColorSchemeReader::readTitleLine(const QString& line, ColorScheme* sche
 
     QString description = line.mid(spacePos + 1);
 
-    scheme->setDescription(i18n(description.toUtf8().constData()));
+    scheme->setDescription(i18n(description.toUtf8()));
     return true;
 }
 

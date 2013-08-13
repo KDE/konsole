@@ -1,13 +1,11 @@
-# cmake-options : -DCMAKE_DISABLE_FIND_PACKAGE_LibKonq=TRUE or FALSE; default is FALSE
-
-if (NOT QT5_BUILD) # there is no libkonq for Qt5 yet
-  find_package(LibKonq)
-  set_package_properties(LibKonq PROPERTIES DESCRIPTION "Provides high-level file management functions"
-                       URL "https://projects.kde.org/projects/kde/applications/kde-baseapps" TYPE OPTIONAL
-                       PURPOSE "Required for drag-n-drop menus")
-endif()
-
+# cmake-options : -WITH_LibKonq=ON or OFF; default is ON
+macro_optional_find_package(LibKonq)
 macro_bool_to_01(LIBKONQ_FOUND HAVE_LIBKONQ)
+
+macro_log_feature(LIBKONQ_FOUND "LibKonq"
+  "Provides high-level file management functions"
+  "https://projects.kde.org/projects/kde/applications/kde-baseapps"
+  FALSE "" "Required for drag-n-drop menus")
 
 if(HAVE_LIBKONQ)
   include_directories(${LIBKONQ_INCLUDE_DIR})
