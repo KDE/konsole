@@ -43,6 +43,7 @@
 #include "ViewProperties.h"
 #include "ViewContainerTabBar.h"
 #include "ProfileList.h"
+#include "ViewManager.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 
@@ -254,15 +255,16 @@ QList<QWidget*> ViewContainer::widgetsForItem(ViewProperties* item) const
     return _navigation.keys(item);
 }
 
-TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* parent)
+TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManager* connectedViewManager, QObject* parent)
     : ViewContainer(position, parent)
+    , _connectedViewManager(connectedViewManager)
     , _contextMenuTabIndex(0)
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
 
     // The tab bar
-    _tabBar = new ViewContainerTabBar(_containerWidget);
+    _tabBar = new ViewContainerTabBar(_containerWidget, this);
     _tabBar->setSupportedMimeType(ViewProperties::mimeType());
 
     connect(_tabBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
@@ -272,8 +274,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     connect(_tabBar, SIGNAL(initiateDrag(int)), this, SLOT(startTabDrag(int)));
     connect(_tabBar, SIGNAL(querySourceIndex(const QDropEvent*,int&)),
             this, SLOT(querySourceIndex(const QDropEvent*,int&)));
-    connect(_tabBar, SIGNAL(moveViewRequest(int,const QDropEvent*,bool&)),
-            this, SLOT(onMoveViewRequest(int,const QDropEvent*,bool&)));
+    connect(_tabBar, SIGNAL(moveViewRequest(int,const QDropEvent*,bool&,TabbedViewContainer*)),
+            this, SLOT(onMoveViewRequest(int,const QDropEvent*,bool&,TabbedViewContainer*)));
     connect(_tabBar, SIGNAL(contextMenu(int,QPoint)), this,
             SLOT(openTabContextMenu(int,QPoint)));
 
@@ -529,10 +531,10 @@ void TabbedViewContainer::querySourceIndex(const QDropEvent* event, int& sourceI
     sourceIndex = index;
 }
 
-void TabbedViewContainer::onMoveViewRequest(int index, const QDropEvent* event, bool& success)
+void TabbedViewContainer::onMoveViewRequest(int index, const QDropEvent* event ,bool& success, TabbedViewContainer* sourceTabbedContainer)
 {
     const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
-    emit moveViewRequest(index, droppedId, success);
+    emit moveViewRequest(index, droppedId, success, sourceTabbedContainer);
 }
 
 void TabbedViewContainer::tabDoubleClicked(int index)
@@ -701,6 +703,11 @@ void TabbedViewContainer::updateIcon(ViewProperties* item)
         const int index = _stackWidget->indexOf(widget);
         _tabBar->setTabIcon(index , item->icon());
     }
+}
+
+ViewManager* TabbedViewContainer::connectedViewManager()
+{
+    return _connectedViewManager;
 }
 
 StackedViewContainer::StackedViewContainer(QObject* parent)

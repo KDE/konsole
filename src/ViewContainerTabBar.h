@@ -29,12 +29,14 @@ class QLabel;
 
 namespace Konsole
 {
+class TabbedViewContainer;
+
 class ViewContainerTabBar : public KTabBar
 {
     Q_OBJECT
 
 public:
-    explicit ViewContainerTabBar(QWidget* parent);
+    ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container);
 
     // returns a pixmap image of a tab for use with QDrag
     QPixmap dragDropPixmap(int tab);
@@ -42,10 +44,12 @@ public:
     // set the mimetype of which the tabbar support d&d
     void setSupportedMimeType(const QString& mimeType);
 
+    // return associated tabbed container
+    TabbedViewContainer* connectedTabbedViewContainer();
+
 signals:
     void querySourceIndex(const QDropEvent* event, int& sourceIndex) const;
-
-    void moveViewRequest(int index, const QDropEvent* event, bool& success);
+    void moveViewRequest(int index, const QDropEvent* event, bool& success, TabbedViewContainer* sourceTabbedContainer);
 
 protected:
     virtual void dragEnterEvent(QDragEnterEvent* event);
@@ -70,6 +74,7 @@ private:
     int _dropIndicatorIndex;
     bool _drawIndicatorDisabled;
     QString _supportedMimeType;
+    TabbedViewContainer* _connectedContainer;
 };
 }
 

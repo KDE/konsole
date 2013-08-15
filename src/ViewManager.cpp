@@ -600,7 +600,7 @@ ViewContainer* ViewManager::createContainer()
 
     switch (_navigationMethod) {
     case TabbedNavigation: {
-        container = new TabbedViewContainer(_navigationPosition, _viewSplitter);
+        container = new TabbedViewContainer(_navigationPosition, this, _viewSplitter);
 
         connect(container, SIGNAL(detachTab(ViewContainer*,QWidget*)),
                 this, SLOT(detachView(ViewContainer*,QWidget*))
@@ -637,14 +637,15 @@ ViewContainer* ViewManager::createContainer()
 
     connect(container, SIGNAL(newViewRequest()), this, SIGNAL(newViewRequest()));
     connect(container, SIGNAL(newViewRequest(Profile::Ptr)), this, SIGNAL(newViewRequest(Profile::Ptr)));
-    connect(container, SIGNAL(moveViewRequest(int,int,bool&)),
-            this , SLOT(containerMoveViewRequest(int,int,bool&)));
+    connect(container, SIGNAL(moveViewRequest(int,int,bool&,TabbedViewContainer*)),
+            this , SLOT(containerMoveViewRequest(int,int,bool&,TabbedViewContainer*)));
     connect(container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewDestroyed(QWidget*)));
     connect(container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
 
     return container;
 }
-void ViewManager::containerMoveViewRequest(int index, int id, bool& moved)
+
+void ViewManager::containerMoveViewRequest(int index, int id, bool& moved, TabbedViewContainer* sourceTabbedContainer)
 {
     ViewContainer* container = qobject_cast<ViewContainer*>(sender());
     SessionController* controller = qobject_cast<SessionController*>(ViewProperties::propertiesById(id));
@@ -652,10 +653,27 @@ void ViewManager::containerMoveViewRequest(int index, int id, bool& moved)
     if (!controller)
         return;
 
+    // do not move the last tab in a splitted view.
+    if (sourceTabbedContainer) {
+        QPointer<ViewContainer> sourceContainer = qobject_cast<ViewContainer*>(sourceTabbedContainer);
+
+        if (_viewSplitter->containers().contains(sourceContainer)) {
+            return;
+        } else {
+            ViewManager* sourceViewManager = sourceTabbedContainer->connectedViewManager();
+
+            // do not remove the last tab on the window
+            if (qobject_cast<ViewSplitter*>(sourceViewManager->widget())->containers().size() > 1) {
+                return;
+            }
+        }
+    }
+
     createView(controller->session(), container, index);
     controller->session()->refresh();
     moved = true;
 }
+
 void ViewManager::setNavigationMethod(NavigationMethod method)
 {
     _navigationMethod = method;

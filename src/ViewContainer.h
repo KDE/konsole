@@ -50,6 +50,7 @@ namespace Konsole
 {
 class IncrementalSearchBar;
 class ViewProperties;
+class TabbedViewContainer;
 /**
  * An interface for container widgets which can hold one or more views.
  *
@@ -285,8 +286,9 @@ signals:
      * @param id The identifier of the view.
      * @param success The slot handling this signal should set this to true if the
      * new view was successfully created.
+     * @param sourceContainer Initial move event Tabbed view container.
      */
-    void moveViewRequest(int index, int id, bool& success);
+    void moveViewRequest(int index, int id, bool& success, TabbedViewContainer* sourceContainer);
 
     /** Emitted when the active view changes */
     void activeViewChanged(QWidget* view);
@@ -350,6 +352,7 @@ private:
 Q_DECLARE_OPERATORS_FOR_FLAGS(ViewContainer::Features)
 
 class ViewContainerTabBar;
+class ViewManager;
 
 /**
  * An alternative tabbed view container which uses a QTabBar and QStackedWidget
@@ -364,7 +367,7 @@ public:
      * Constructs a new tabbed view container.  Supported positions
      * are NavigationPositionTop and NavigationPositionBottom.
      */
-    TabbedViewContainer(NavigationPosition position , QObject* parent);
+    TabbedViewContainer(NavigationPosition position, ViewManager* connectedViewManager, QObject* parent);
     virtual ~TabbedViewContainer();
 
     virtual QWidget* containerWidget() const;
@@ -375,6 +378,9 @@ public:
     virtual Features supportedFeatures() const;
     virtual void setNewViewMenu(QMenu* menu);
     virtual void setStyleSheet(const QString& styleSheet);
+
+    // return associated view manager
+    ViewManager* connectedViewManager();
 
 protected:
     virtual void addViewWidget(QWidget* view , int index);
@@ -399,7 +405,7 @@ private slots:
     void tabContextMenuDetachTab();
     void startTabDrag(int index);
     void querySourceIndex(const QDropEvent* event, int& sourceIndex);
-    void onMoveViewRequest(int index, const QDropEvent* event, bool& success);
+    void onMoveViewRequest(int index, const QDropEvent* event, bool& success, TabbedViewContainer* sourceTabbedContainer);
 
 signals:
     void detachTab(ViewContainer * self, QWidget * activeView);
@@ -415,6 +421,7 @@ private:
     ViewContainerTabBar* _tabBar;
     QPointer<QStackedWidget> _stackWidget;
     QPointer<QWidget> _containerWidget;
+    ViewManager* _connectedViewManager;
     QVBoxLayout* _layout;
     QHBoxLayout* _tabBarLayout;
     QToolButton* _newTabButton;

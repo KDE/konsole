@@ -21,6 +21,7 @@
 
 // Own
 #include "ViewContainerTabBar.h"
+#include "ViewContainer.h"
 
 // Qt
 #include <QtCore/QMimeData>
@@ -33,12 +34,14 @@
 #include <KIcon>
 
 using Konsole::ViewContainerTabBar;
+using Konsole::TabbedViewContainer;
 
-ViewContainerTabBar::ViewContainerTabBar(QWidget* parent)
+ViewContainerTabBar::ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container)
     : KTabBar(parent)
     , _dropIndicator(0)
     , _dropIndicatorIndex(-1)
     , _drawIndicatorDisabled(false)
+    , _connectedContainer(container)
 {
     setDrawBase(true);
     setDocumentMode(true);
@@ -94,12 +97,26 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
 
     const int index = dropIndex(event->pos());
     bool success = false;
-    emit moveViewRequest(index, event, success);
+
+    ViewContainerTabBar* sourceContainerTabBar = static_cast<ViewContainerTabBar*>(event->source());
+
+    // check if the moved tab is the last of source view.
+    if (sourceContainerTabBar->count() == 1) {
+        TabbedViewContainer* sourceTabbedContainer = sourceContainerTabBar->connectedTabbedViewContainer();
+        emit moveViewRequest(index, event, success, sourceTabbedContainer);
+    } else {
+        emit moveViewRequest(index, event, success, NULL);
+    }
 
     if (success)
         event->accept();
     else
         event->ignore();
+}
+
+TabbedViewContainer* ViewContainerTabBar::connectedTabbedViewContainer()
+{
+    return _connectedContainer;
 }
 
 void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
