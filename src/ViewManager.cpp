@@ -20,6 +20,8 @@
 // Own
 #include "ViewManager.h"
 
+#include <config-konsole.h>
+
 // Qt
 #include <QtCore/QSignalMapper>
 #include <QtCore/QStringList>
@@ -193,6 +195,7 @@ void ViewManager::setupActions()
 
         multiViewOnlyActions << shrinkActiveAction;
 
+#if defined(ENABLE_DETACHING)
         KAction* detachViewAction = collection->addAction("detach-view");
         detachViewAction->setIcon(KIcon("tab-detach"));
         detachViewAction->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
@@ -202,6 +205,7 @@ void ViewManager::setupActions()
 
         connect(this , SIGNAL(splitViewToggle(bool)) , this , SLOT(updateDetachViewState()));
         connect(detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()));
+#endif
 
         // Next / Previous View , Next Container
         collection->addAction("next-view", nextViewAction);
@@ -330,6 +334,10 @@ void ViewManager::detachActiveView()
 
 void ViewManager::detachView(ViewContainer* container, QWidget* widgetView)
 {
+#if !defined(ENABLE_DETACHING)
+    return;
+#endif
+
     TerminalDisplay * viewToDetach = qobject_cast<TerminalDisplay*>(widgetView);
 
     if (!viewToDetach)

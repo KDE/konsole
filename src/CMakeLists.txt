@@ -11,6 +11,13 @@ if(HAVE_LIBKONQ)
   include_directories(${LIBKONQ_INCLUDE_DIR})
 endif()
 
+### Too many crashes/issues with detaching on MacOSX
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  set(ENABLE_DETACHING 0)
+else()
+  set(ENABLE_DETACHING 1)
+endif()
+
 include(CheckIncludeFiles)
 
 configure_file(config-konsole.h.cmake
