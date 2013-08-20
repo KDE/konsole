@@ -41,6 +41,7 @@
 #include <QStyle>
 #include <QtCore/QTimer>
 #include <QToolTip>
+#include <QDrag>
 #include <QtGui/QAccessible>
 
 // KDE
@@ -271,6 +272,9 @@ void TerminalDisplay::setLineSpacing(uint i)
 
 namespace Konsole
 {
+
+#pragma message("The accessibility code needs proper porting to Qt5")
+#ifndef QT_NO_ACCESSIBILITY
 /**
  * This function installs the factory function which lets Qt instantiate the QAccessibleInterface
  * for the TerminalDisplay.
@@ -282,6 +286,8 @@ QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *ob
         return new TerminalDisplayAccessible(display);
     return 0;
 }
+
+#endif
 }
 
 /* ------------------------------------------------------------------------- */
@@ -738,11 +744,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
             painter.drawText(rect, 0, text);
         } else {
             // See bug 280896 for more info
-#if QT_VERSION >= 0x040800
             painter.drawText(rect, Qt::AlignBottom, LTR_OVERRIDE_CHAR + text);
-#else
-            painter.drawText(rect, 0, LTR_OVERRIDE_CHAR + text);
-#endif
         }
     }
 }
@@ -1127,11 +1129,9 @@ void TerminalDisplay::updateImage()
     }
     delete[] dirtyMask;
 
-#if QT_VERSION >= 0x040800 // added in Qt 4.8.0
 #ifndef QT_NO_ACCESSIBILITY
     QAccessible::updateAccessibility(this, 0, QAccessible::TextUpdated);
     QAccessible::updateAccessibility(this, 0, QAccessible::TextCaretMoved);
-#endif
 #endif
 }
 
@@ -2852,10 +2852,8 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 
     emit keyPressedSignal(event);
 
-#if QT_VERSION >= 0x040800 // added in Qt 4.8.0
 #ifndef QT_NO_ACCESSIBILITY
     QAccessible::updateAccessibility(this, 0, QAccessible::TextCaretMoved);
-#endif
 #endif
 
     event->accept();
@@ -3088,7 +3086,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
     if (event->mimeData()->hasFormat("text/plain") ||
             event->mimeData()->hasFormat("text/uri-list")) {
-        emit sendStringToEmu(dropText.toLocal8Bit());
+        emit sendStringToEmu(dropText.toLocal8Bit().constData());
     }
 }
 
@@ -3097,7 +3095,7 @@ void TerminalDisplay::dropMenuPasteActionTriggered()
     if (sender()) {
         const QAction* action = qobject_cast<const QAction*>(sender());
         if (action) {
-            emit sendStringToEmu(action->data().toString().toLocal8Bit());
+            emit sendStringToEmu(action->data().toString().toLocal8Bit().constData());
         }
     }
 }
@@ -3107,7 +3105,7 @@ void TerminalDisplay::dropMenuCdActionTriggered()
     if (sender()) {
         const QAction* action = qobject_cast<const QAction*>(sender());
         if (action) {
-            emit sendStringToEmu(action->data().toString().toLocal8Bit());
+            emit sendStringToEmu(action->data().toString().toLocal8Bit().constData());
         }
     }
 }

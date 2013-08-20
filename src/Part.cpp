@@ -30,6 +30,9 @@
 #include <KActionCollection>
 #include <KLocale>
 #include <KPluginFactory>
+#include <KUrl>
+#include <KGlobal>
+#include <KLocalizedString>
 #include <kde_file.h>
 
 // Konsole
@@ -54,10 +57,13 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
     , _pluggedController(0)
     , _manageProfilesAction(0)
 {
+#pragma message("TODO: How to port KLocale::insertCatalog()?")
+#if 0
     // make sure the konsole catalog is loaded
     KGlobal::locale()->insertCatalog("konsole");
     // make sure the libkonq catalog is loaded( needed for drag & drop )
     KGlobal::locale()->insertCatalog("libkonq");
+#endif
 
     // setup global actions
     createGlobalActions();
@@ -321,10 +327,11 @@ void Part::changeSessionSettings(const QString& text)
 
     sendInput(command);
 }
-
 // Konqueror integration
-bool Part::openUrl(const KUrl& aUrl)
+bool Part::openUrl(const QUrl& aQUrl)
 {
+    KUrl aUrl = aQUrl;
+
     if (url() == aUrl) {
         emit completed();
         return true;

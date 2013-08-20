@@ -31,6 +31,8 @@
 #include <KShell>
 #include <KBookmarkMenu>
 #include <KStandardDirs>
+#include <KLocalizedString>
+#include <KMenu>
 
 // Konsole
 #include "ViewProperties.h"
@@ -38,7 +40,7 @@
 using namespace Konsole;
 
 BookmarkHandler::BookmarkHandler(KActionCollection* collection,
-                                 KMenu* menu,
+                                 QMenu* menu,
                                  bool toplevel,
                                  QObject* parent)
     : QObject(parent),

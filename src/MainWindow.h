@@ -163,8 +163,7 @@ private slots:
 
     void updateWindowIcon();
     void updateWindowCaption();
-
-    void openUrls(const QList<KUrl>& urls);
+    void openUrls(const QList<QUrl>& urls);
 
     // Sets the list of profiles to be displayed under the "New Tab" action
     void setProfileList(ProfileList* list);

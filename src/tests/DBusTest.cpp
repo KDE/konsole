@@ -98,11 +98,7 @@ void DBusTest::cleanupTestCase()
 
     QDBusInterface iface(_interfaceName,
                          QLatin1String("/konsole/MainWindow_1"),
-#if QT_VERSION < 0x040800
-                         QLatin1String("com.trolltech.Qt.QWidget"));
-#else
                          QLatin1String("org.qtproject.Qt.QWidget"));
-#endif
     if (!iface.isValid())
         kFatal() << "Unable to get a dbus interface to Konsole!";
 

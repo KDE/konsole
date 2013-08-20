@@ -31,6 +31,7 @@
 #include <KCmdLineArgs>
 #include <KShortcutsDialog>
 #include <KLocale>
+
 #include <KMenu>
 #include <KMenuBar>
 #include <KMessageBox>
@@ -42,6 +43,8 @@
 #include <KNotifyConfigWidget>
 #include <KConfigDialog>
 #include <KApplication>
+#include <KGlobal>
+#include <KShortcut>
 
 // Konsole
 #include "BookmarkHandler.h"
@@ -153,7 +156,10 @@ void MainWindow::removeMenuAccelerators()
 {
     foreach(QAction* menuItem, menuBar()->actions()) {
         QString itemText = menuItem->text();
+#pragma message("TODO: How to port KLocale::removeAcceleratorMarker()?")
+#if 0
         itemText = KGlobal::locale()->removeAcceleratorMarker(itemText);
+#endif
         menuItem->setText(itemText);
     }
 }
@@ -283,12 +289,16 @@ IncrementalSearchBar* MainWindow::searchBar() const
 void MainWindow::setupActions()
 {
     KActionCollection* collection = actionCollection();
-    KAction* menuAction = 0;
+    QAction* menuAction = 0;
 
     // File Menu
     _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18nc("@action:inmenu", "&New Tab"), collection);
     _newTabMenuAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_T));
+
+#pragma message("TODO: How to port KAction::setShortcutConfigurable()?")
+#if 0
     _newTabMenuAction->setShortcutConfigurable(true);
+#endif
     _newTabMenuAction->setAutoRepeat(false);
     connect(_newTabMenuAction, SIGNAL(triggered()), this, SLOT(newTab()));
     collection->addAction("new-tab", _newTabMenuAction);
@@ -317,7 +327,7 @@ void MainWindow::setupActions()
     KActionMenu* bookmarkMenu = new KActionMenu(i18nc("@title:menu", "&Bookmarks"), collection);
     _bookmarkHandler = new BookmarkHandler(collection, bookmarkMenu->menu(), true, this);
     collection->addAction("bookmark", bookmarkMenu);
-    connect(_bookmarkHandler, SIGNAL(openUrls(QList<KUrl>)), this, SLOT(openUrls(QList<KUrl>)));
+    connect(_bookmarkHandler, SIGNAL(openUrls(QList<QUrl>)), this, SLOT(openUrls(QList<QUrl>)));
 
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
@@ -373,7 +383,8 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
     // it if it is the non-default profile.
     if (sessionActions.size() > 2) {
         // Update the 'New Tab' KActionMenu
-        KMenu* newTabMenu = _newTabMenuAction->menu();
+        QMenu* newTabMenu = _newTabMenuAction->menu();
+
         newTabMenu->clear();
         foreach(QAction* sessionAction, sessionActions) {
             newTabMenu->addAction(sessionAction);
@@ -389,7 +400,7 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
             }
         }
     } else {
-        KMenu* newTabMenu = _newTabMenuAction->menu();
+        QMenu* newTabMenu = _newTabMenuAction->menu();
         newTabMenu->clear();
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
 
@@ -416,7 +427,7 @@ QString MainWindow::activeSessionDir() const
     }
 }
 
-void MainWindow::openUrls(const QList<KUrl>& urls)
+void MainWindow::openUrls(const QList<QUrl>& urls)
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 

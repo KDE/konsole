@@ -65,7 +65,7 @@ void PartTest::testFd()
     }
 
     if (pingExe.isEmpty()) {
-        QSKIP("ping command not found.", SkipSingle);
+        QSKIP("ping command not found.");
         return;
     }
 

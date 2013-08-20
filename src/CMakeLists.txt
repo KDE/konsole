@@ -1,11 +1,15 @@
-# cmake-options : -WITH_LibKonq=ON or OFF; default is ON
-macro_optional_find_package(LibKonq)
-macro_bool_to_01(LIBKONQ_FOUND HAVE_LIBKONQ)
+# cmake-options : -DCMAKE_DISABLE_FIND_PACKAGE_LibKonq=TRUE or FALSE; default is FALSE
 
-macro_log_feature(LIBKONQ_FOUND "LibKonq"
-  "Provides high-level file management functions"
-  "https://projects.kde.org/projects/kde/applications/kde-baseapps"
-  FALSE "" "Required for drag-n-drop menus")
+if (FALSE) # there is no libkonq for Qt5 yet
+  find_package(LibKonq)
+  set_package_properties(LibKonq PROPERTIES DESCRIPTION "Provides high-level file management functions"
+                       URL "https://projects.kde.org/projects/kde/applications/kde-baseapps" TYPE OPTIONAL
+                       PURPOSE "Required for drag-n-drop menus")
+else()
+  message(WARNING "LibKonq does not exist for KF5 yet, reenable this check once it exists.")
+endif()
+
+macro_bool_to_01(LIBKONQ_FOUND HAVE_LIBKONQ)
 
 if(HAVE_LIBKONQ)
   include_directories(${LIBKONQ_INCLUDE_DIR})
@@ -143,7 +147,15 @@ kde4_add_ui_files(konsoleprivate_SRCS ColorSchemeEditor.ui
                                       settings/TabBarSettings.ui)
 
 kde4_add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
-target_link_libraries(konsoleprivate ${konsole_LIBS})
+target_link_libraries(konsoleprivate ${konsole_LIBS}
+  KF5::XmlGui
+  Qt5::PrintSupport
+  KF5::KNotifications
+  KF5::KWindowSystem
+  KF5::KTextWidgets
+  KF5::KGuiAddons
+  KF5::KIconThemes
+)
 target_link_libraries(konsoleprivate LINK_INTERFACE_LIBRARIES ${konsole_LIBS})
 
 set(konsole_KDEINIT_SRCS
@@ -158,7 +170,7 @@ kde4_add_kcfg_files(konsole_KDEINIT_SRCS settings/KonsoleSettings.kcfgc)
 kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
 
 kde4_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
-target_link_libraries(kdeinit_konsole konsoleprivate)
+target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::KWindowSystem)
 
 install(TARGETS kdeinit_konsole konsole konsoleprivate
        ${INSTALL_TARGETS_DEFAULT_ARGS})
