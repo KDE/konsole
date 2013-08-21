@@ -661,7 +661,7 @@ void ViewManager::containerMoveViewRequest(int index, int id, bool& moved, Tabbe
     if (!controller)
         return;
 
-    // do not move the last tab in a splitted view.
+    // do not move the last tab in a split view.
     if (sourceTabbedContainer) {
         QPointer<ViewContainer> sourceContainer = qobject_cast<ViewContainer*>(sourceTabbedContainer);
 
