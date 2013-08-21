@@ -31,7 +31,7 @@
 
 
 
-#define KONSOLE_VERSION "2.11.999"
+#define KONSOLE_VERSION "2.99.900"
 
 using Konsole::Application;
 
