@@ -215,6 +215,22 @@ bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* aEvent)
     return QWidget::eventFilter(watched, aEvent);
 }
 
+void IncrementalSearchBar::keyPressEvent(QKeyEvent* event)
+{
+    static QSet<int> movementKeysToPassAlong = QSet<int>()
+        << Qt::Key_PageUp
+        << Qt::Key_PageDown
+        << Qt::Key_Up
+        << Qt::Key_Down;
+
+    if (movementKeysToPassAlong.contains(event->key()) &&
+            (event->modifiers() == Qt::ShiftModifier)) {
+        emit unhandledMovementKeyPressed(event);
+    } else {
+        QWidget::keyPressEvent(event);
+    }
+}
+
 void IncrementalSearchBar::setVisible(bool visible)
 {
     QWidget::setVisible(visible);

@@ -530,6 +530,7 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
     // connect new search bar
     _searchBar = searchBar;
     if (_searchBar) {
+        connect(_searchBar, SIGNAL(unhandledMovementKeyPressed(QKeyEvent*)), this, SLOT(movementKeyFromSearchBarReceived(QKeyEvent*)));
         connect(_searchBar, SIGNAL(closeClicked()), this, SLOT(searchClosed()));
         connect(_searchBar, SIGNAL(searchFromClicked()), this, SLOT(searchFrom()));
         connect(_searchBar, SIGNAL(findNextClicked()), this, SLOT(findNextInHistory()));
@@ -1552,6 +1553,12 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
                    << _session->title(Session::NameRole)
                    << ", no GUI factory available to build the popup.";
     }
+}
+
+void SessionController::movementKeyFromSearchBarReceived(QKeyEvent *event)
+{
+    QCoreApplication::sendEvent(_view, event);
+    setSearchStartToWindowCurrentLine();
 }
 
 void SessionController::sessionStateChanged(int state)
