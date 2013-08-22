@@ -132,9 +132,12 @@ signals:
     void searchReturnPressed(const QString& text);
     /** Emitted when shift+return buttons are pressed in the search box */
     void searchShiftPlusReturnPressed();
+    /** A movement key not handled is forwarded to the terminal display */
+    void unhandledMovementKeyPressed(QKeyEvent *event);
 
 protected:
     virtual bool eventFilter(QObject* watched , QEvent* event);
+    virtual void keyPressEvent(QKeyEvent* event);
 
 public slots:
     void clearLineEdit();

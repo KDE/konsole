@@ -256,6 +256,7 @@ private slots:
     void prepareSwitchProfileMenu();
     void updateCodecAction();
     void showDisplayContextMenu(const QPoint& position);
+    void movementKeyFromSearchBarReceived(QKeyEvent *event);
     void sessionStateChanged(int state);
     void sessionTitleChanged();
     void searchTextChanged(const QString& text);
