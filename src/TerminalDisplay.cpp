@@ -2521,6 +2521,9 @@ QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
             }
         }
 
+        if (lineInHistory < 1)
+            break;
+
         // _lineProperties is only for the visible screen, so grab new data
         int newRegionStart = qMax(0, lineInHistory - visibleScreenLines);
         lineProperties = screen->getLineProperties(newRegionStart, lineInHistory - 1);
