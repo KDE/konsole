@@ -760,6 +760,9 @@ private:
 
     void processMidButtonClick(QMouseEvent* event);
 
+    QPoint findLineStart(const QPoint &pnt);
+    QPoint findLineEnd(const QPoint &pnt);
+
     // the window onto the terminal screen which this display
     // is currently showing.
     QPointer<ScreenWindow> _screenWindow;
