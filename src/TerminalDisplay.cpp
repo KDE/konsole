@@ -2503,6 +2503,10 @@ void TerminalDisplay::viewScrolledByUser()
     _sessionController->setSearchStartToWindowCurrentLine();
 }
 
+/* Moving left/up from the line containing pnt, return the starting 
+   offset point which the given line is continiously wrapped
+   (top left corner = 0,0; previous line not visible = 0,-1).
+*/
 QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
 {
     const int visibleScreenLines = _lineProperties.size();
@@ -2533,8 +2537,8 @@ QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
 
 }
 
-/* Return the offset point/line to the current visible screen which
-    pnt is continiously wrapped (top left corner = 0,0)
+/* Moving right/down from the line containing pnt, return the ending 
+   offset point which the given line is continiously wrapped.
 */
 QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
 {
