@@ -2505,25 +2505,29 @@ void TerminalDisplay::viewScrolledByUser()
 
 QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
 {
-    const int regSize = qMax(_screenWindow->windowLines(), 10);
-    const int curLine = _screenWindow->currentLine();
-    int i = pnt.y();
-    int y = i + curLine;
-    QVector<LineProperty> lineProperties = _lineProperties;
+    const int visibleScreenLines = _lineProperties.size();
+    const int topVisibleLine = _screenWindow->currentLine();
     Screen *screen = _screenWindow->screen();
+    int line = pnt.y();
+    int lineInHistory= line + topVisibleLine;
 
-    while (true) {
-        for (;i > 0 && y > 0;i--, y--) {
-            if (!(lineProperties[i - 1] & LINE_WRAPPED)) {
-                return QPoint(0, y - curLine);
+    QVector<LineProperty> lineProperties = _lineProperties;
+
+    while (lineInHistory > 0) {
+        for (;line > 0;line--, lineInHistory--) {
+            // Does previous line wrap around?
+            if (!(lineProperties[line - 1] & LINE_WRAPPED)) {
+                return QPoint(0, lineInHistory - topVisibleLine);
             }
         }
-        if (y <= 0)
-            return QPoint(0, y - curLine);
-        int newRegStart = qMax(0, y - regSize);
-        lineProperties = screen->getLineProperties(newRegStart, y - 1);
-        i = y - newRegStart;
+
+        // _lineProperties is only for the visible screen, so grab new data
+        int newRegionStart = qMax(0, lineInHistory - visibleScreenLines);
+        lineProperties = screen->getLineProperties(newRegionStart, lineInHistory - 1);
+        line = lineInHistory - newRegionStart;
     }
+    return QPoint(0, lineInHistory - topVisibleLine);
+
 }
 
 /* Return the offset point/line to the current visible screen which
@@ -2531,25 +2535,27 @@ QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
 */
 QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
 {
-    const int regSize = qMax(_screenWindow->windowLines(), 10);
-    const int curLine = _screenWindow->currentLine();
+    const int visibleScreenLines = _lineProperties.size();
+    const int topVisibleLine = _screenWindow->currentLine();
     const int maxY = _screenWindow->lineCount() - 1;
-    int i = pnt.y();
-    int y = i + curLine;
-    QVector<LineProperty> lineProperties = _lineProperties;
     Screen *screen = _screenWindow->screen();
+    int line = pnt.y();
+    int lineInHistory= line + topVisibleLine;
 
-    while (true) {
-        for (;i < lineProperties.count() && y < maxY;i++, y++) {
-            if (!(lineProperties[i] & LINE_WRAPPED)) {
-                return QPoint(_columns - 1, y - curLine);
+    QVector<LineProperty> lineProperties = _lineProperties;
+
+    while (lineInHistory < maxY) {
+        for (;line < lineProperties.count() && lineInHistory < maxY;line++, lineInHistory++) {
+            // Does current line wrap around?
+            if (!(lineProperties[line] & LINE_WRAPPED)) {
+                return QPoint(_columns - 1, lineInHistory - topVisibleLine);
             }
         }
-        if (y >= maxY)
-            return QPoint(_columns - 1, y - curLine);
-        i = 0;
-        lineProperties = screen->getLineProperties(y, qMin(y + regSize, maxY));
+
+        line = 0;
+        lineProperties = screen->getLineProperties(lineInHistory, qMin(lineInHistory + visibleScreenLines, maxY));
     }
+    return QPoint(_columns - 1, lineInHistory - topVisibleLine);
 }
 
 void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
