@@ -2164,30 +2164,16 @@ void TerminalDisplay::extendSelection(const QPoint& position)
     if (_lineSelectionMode) {
         // Extend to complete line
         const bool above_not_below = (here.y() < _iPntSelCorr.y());
-
-        QPoint above = above_not_below ? here : _iPntSelCorr;
-        QPoint below = above_not_below ? _iPntSelCorr : here;
-
-        while (above.y() > 0 && (_lineProperties[above.y() - 1] & LINE_WRAPPED))
-            above.ry()--;
-        while (below.y() < _usedLines - 1 && (_lineProperties[below.y()] & LINE_WRAPPED))
-            below.ry()++;
-
-        above.setX(0);
-        below.setX(_usedColumns - 1);
-
-        // Pick which is start (ohere) and which is extension (here)
         if (above_not_below) {
-            here = above;
-            ohere = below;
+            ohere = findLineEnd(_iPntSelCorr);
+            here = findLineStart(here);
         } else {
-            here = below;
-            ohere = above;
+            ohere = findLineStart(_iPntSelCorr);
+            here = findLineEnd(here);
         }
 
-        const QPoint newSelBegin = QPoint(ohere.x(), ohere.y());
-        swapping = !(_tripleSelBegin == newSelBegin);
-        _tripleSelBegin = newSelBegin;
+        swapping = !(_tripleSelBegin == ohere);
+        _tripleSelBegin = ohere;
 
         ohere.rx()++;
     }
@@ -2515,6 +2501,55 @@ void TerminalDisplay::tripleClickTimeout()
 void TerminalDisplay::viewScrolledByUser()
 {
     _sessionController->setSearchStartToWindowCurrentLine();
+}
+
+QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
+{
+    const int regSize = qMax(_screenWindow->windowLines(), 10);
+    const int curLine = _screenWindow->currentLine();
+    int i = pnt.y();
+    int y = i + curLine;
+    QVector<LineProperty> lineProperties = _lineProperties;
+    Screen *screen = _screenWindow->screen();
+
+    while (true) {
+        for (;i > 0 && y > 0;i--, y--) {
+            if (!(lineProperties[i - 1] & LINE_WRAPPED)) {
+                return QPoint(0, y - curLine);
+            }
+        }
+        if (y <= 0)
+            return QPoint(0, y - curLine);
+        int newRegStart = qMax(0, y - regSize);
+        lineProperties = screen->getLineProperties(newRegStart, y - 1);
+        i = y - newRegStart;
+    }
+}
+
+/* Return the offset point/line to the current visible screen which
+    pnt is continiously wrapped (top left corner = 0,0)
+*/
+QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
+{
+    const int regSize = qMax(_screenWindow->windowLines(), 10);
+    const int curLine = _screenWindow->currentLine();
+    const int maxY = _screenWindow->lineCount() - 1;
+    int i = pnt.y();
+    int y = i + curLine;
+    QVector<LineProperty> lineProperties = _lineProperties;
+    Screen *screen = _screenWindow->screen();
+
+    while (true) {
+        for (;i < lineProperties.count() && y < maxY;i++, y++) {
+            if (!(lineProperties[i] & LINE_WRAPPED)) {
+                return QPoint(_columns - 1, y - curLine);
+            }
+        }
+        if (y >= maxY)
+            return QPoint(_columns - 1, y - curLine);
+        i = 0;
+        lineProperties = screen->getLineProperties(y, qMin(y + regSize, maxY));
+    }
 }
 
 void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
