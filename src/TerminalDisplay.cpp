@@ -2599,14 +2599,14 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
         _screenWindow->setSelectionStart(x , _iPntSel.y() , false);
         _tripleSelBegin = QPoint(x, _iPntSel.y());
     } else if (_tripleClickMode == Enum::SelectWholeLine) {
-        _screenWindow->setSelectionStart(0 , _iPntSel.y() , false);
-        _tripleSelBegin = QPoint(0, _iPntSel.y());
+        // reset _IPntSel  - remove once findWord is implemented
+        _iPntSel = QPoint(charColumn, charLine);
+        _tripleSelBegin = findLineStart(_iPntSel);
+        _screenWindow->setSelectionStart(0 , _tripleSelBegin.y() , false);
     }
 
-    while (_iPntSel.y() < _lines - 1 && (_lineProperties[_iPntSel.y()] & LINE_WRAPPED))
-        _iPntSel.ry()++;
-
-    _screenWindow->setSelectionEnd(_columns - 1 , _iPntSel.y());
+    _iPntSel = findLineEnd(_iPntSel);
+    _screenWindow->setSelectionEnd(_iPntSel.x() , _iPntSel.y());
 
     copyToX11Selection();
 
