@@ -142,7 +142,7 @@ private slots:
     void hideScrollBar();
     void showScrollBarLeft();
     void showScrollBarRight();
-    
+
     void scrollFullPage();
     void scrollHalfPage();
 

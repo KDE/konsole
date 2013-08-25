@@ -2518,7 +2518,7 @@ QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
     QVector<LineProperty> lineProperties = _lineProperties;
 
     while (lineInHistory > 0) {
-        for (;line > 0;line--, lineInHistory--) {
+        for (; line > 0; line--, lineInHistory--) {
             // Does previous line wrap around?
             if (!(lineProperties[line - 1] & LINE_WRAPPED)) {
                 return QPoint(0, lineInHistory - topVisibleLine);
@@ -2534,7 +2534,6 @@ QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
         line = lineInHistory - newRegionStart;
     }
     return QPoint(0, lineInHistory - topVisibleLine);
-
 }
 
 /* Moving right/down from the line containing pnt, return the ending 
@@ -2552,7 +2551,7 @@ QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
     QVector<LineProperty> lineProperties = _lineProperties;
 
     while (lineInHistory < maxY) {
-        for (;line < lineProperties.count() && lineInHistory < maxY;line++, lineInHistory++) {
+        for (; line < lineProperties.count() && lineInHistory < maxY; line++, lineInHistory++) {
             // Does current line wrap around?
             if (!(lineProperties[line] & LINE_WRAPPED)) {
                 return QPoint(_columns - 1, lineInHistory - topVisibleLine);
