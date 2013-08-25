@@ -42,7 +42,7 @@ using namespace Konsole;
 
 // colorTable is half the length of _table in ColorScheme class
 // since intense colors are in a separated column
-const int COLOR_TABLE_ROW_LENGTH =  TABLE_COLORS / 2; 
+const int COLOR_TABLE_ROW_LENGTH =  TABLE_COLORS / 2;
 
 const int NAME_COLUMN = 0;           // column 0 : color names
 const int COLOR_COLUMN = 1;          // column 1 : actual colors

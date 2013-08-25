@@ -170,7 +170,6 @@ void IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting()
         _findNextButton->setIcon(KIcon("go-down-search"));
         _findPreviousButton->setIcon(KIcon("go-up-search"));
     }
-
 }
 
 QString IncrementalSearchBar::searchText()
