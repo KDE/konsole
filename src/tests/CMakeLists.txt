@@ -5,7 +5,15 @@ include_directories(${KDE4_KPTY_INCLUDES}
 
 set(KONSOLE_TEST_LIBS ${QT_QTTEST_LIBRARY} konsoleprivate)
 
-kde4_add_executable(PartTest TEST PartTest.cpp)
+## If it's interactive, it shouldn't use kde4_add_unit_test,
+##  since make test is supposed to be fully automated.
+
+kde4_add_executable(PartManualTest TEST PartManualTest.cpp)
+target_link_libraries(PartManualTest ${KDE4_KPARTS_LIBS}
+                               ${KDE4_KPTY_LIBS}
+                               ${KONSOLE_TEST_LIBS})
+
+kde4_add_unit_test(PartTest PartTest.cpp)
 target_link_libraries(PartTest ${KDE4_KPARTS_LIBS}
                                ${KDE4_KPTY_LIBS}
                                ${KONSOLE_TEST_LIBS})
