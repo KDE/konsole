@@ -95,6 +95,9 @@ public:
      * is shown on the left or right side of the display.
      */
     void setScrollBarPosition(Enum::ScrollBarPositionEnum position);
+    Enum::ScrollBarPositionEnum scrollBarPosition() const {
+        return _scrollbarLocation;
+    }
 
     /**
      * Sets the current position and range of the display's scroll bar.
