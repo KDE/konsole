@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef PARTTEST_H
-#define PARTTEST_H
+#ifndef PARTMANUALTEST_H
+#define PARTMANUALTEST_H
 
 #include <QtCore/QEventLoop>
 
@@ -31,18 +31,29 @@ class QEvent;
 namespace Konsole
 {
 
-class PartTest : public QObject
+class PartManualTest : public QObject
 {
     Q_OBJECT
 
 private slots:
-    void testFd();
+    void testShortcutOverride();
+
+// marked as protected so they are not treated as test cases
+protected slots:
+    void overrideShortcut(QKeyEvent* event, bool& override);
+    void shortcutTriggered();
 
 private:
     KParts::Part* createPart();
+
+    // variables for testShortcutOverride()
+    bool _shortcutTriggered;
+    bool _overrideCalled;
+    bool _override;
+    QEventLoop* _shortcutEventLoop;
 };
 
 }
 
-#endif // PARTTEST_H
+#endif // PARTMANUALTEST_H
 
