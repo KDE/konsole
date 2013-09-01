@@ -18,6 +18,9 @@ target_link_libraries(PartTest ${KDE4_KPARTS_LIBS}
                                ${KDE4_KPTY_LIBS}
                                ${KONSOLE_TEST_LIBS})
 
+kde4_add_unit_test(SessionTest SessionTest.cpp)
+target_link_libraries(SessionTest ${KONSOLE_TEST_LIBS})
+
 kde4_add_unit_test(TerminalTest TerminalTest.cpp)
 target_link_libraries(TerminalTest ${KONSOLE_TEST_LIBS})
 
