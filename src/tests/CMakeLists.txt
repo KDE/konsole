@@ -37,8 +37,8 @@ target_link_libraries(PtyTest ${KDE4_KPTY_LIBS} ${KONSOLE_TEST_LIBS})
 kde4_add_unit_test(SessionTest SessionTest.cpp)
 target_link_libraries(SessionTest ${KONSOLE_TEST_LIBS})
 
-kde4_add_unit_test(SessionManagerTest SessionManagerTest.cpp)
-target_link_libraries(SessionManagerTest ${KONSOLE_TEST_LIBS})
+##kde4_add_unit_test(SessionManagerTest SessionManagerTest.cpp)
+##target_link_libraries(SessionManagerTest ${KONSOLE_TEST_LIBS})
 
 kde4_add_unit_test(ShellCommandTest ShellCommandTest.cpp)
 target_link_libraries(ShellCommandTest ${KONSOLE_TEST_LIBS})
