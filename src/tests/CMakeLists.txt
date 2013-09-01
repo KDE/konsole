@@ -17,15 +17,15 @@ kde4_add_unit_test(CharacterColorTest CharacterColorTest.cpp)
 target_link_libraries(CharacterColorTest ${KONSOLE_TEST_LIBS})
 
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    kde4_add_unit_test(DBusTest DBusTest.cpp)
+    target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS})
+endif()
+
+if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     kde4_add_unit_test(PartTest PartTest.cpp)
     target_link_libraries(PartTest ${KDE4_KPARTS_LIBS}
                                ${KDE4_KPTY_LIBS}
                                ${KONSOLE_TEST_LIBS})
-endif()
-
-if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    kde4_add_unit_test(DBusTest DBusTest.cpp)
-    target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS})
 endif()
 
 kde4_add_unit_test(ProfileTest ProfileTest.cpp)
