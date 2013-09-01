@@ -84,8 +84,30 @@ public:
      * This is not applicable when the color is used to draw a character's background.
      */
     FontWeight fontWeight;
+
+    /**
+     * Compares two color entries and returns true if they represent the same
+     * color and font weight.
+     */
+    friend bool operator == (const ColorEntry& a, const ColorEntry& b);
+    /**
+     * Compares two color entries and returns true if they represent different
+     * color and font weight.
+     */
+    friend bool operator != (const ColorEntry& a, const ColorEntry& b);
+
 };
 
+inline bool operator == (const ColorEntry& a, const ColorEntry& b)
+{
+    return  a.color == b.color &&
+            a.fontWeight == b.fontWeight;
+}
+
+inline bool operator != (const ColorEntry& a, const ColorEntry& b)
+{
+    return !operator==(a, b);
+}
 
 // Attributed Character Representations ///////////////////////////////
 
