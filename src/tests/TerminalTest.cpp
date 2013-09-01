@@ -24,6 +24,8 @@
 
 // Konsole
 #include "../TerminalDisplay.h"
+#include "../CharacterColor.h"
+#include "../ColorScheme.h"
 
 using namespace Konsole;
 
@@ -34,11 +36,55 @@ void TerminalTest::testScrollBarPositions()
 
     // ScrollBar Positions
     display->setScrollBarPosition(Enum::ScrollBarLeft);
-    QCOMPARE(Enum::ScrollBarLeft, display->scrollBarPosition());
+    QCOMPARE(display->scrollBarPosition(), Enum::ScrollBarLeft);
     display->setScrollBarPosition(Enum::ScrollBarRight);
-    QCOMPARE(Enum::ScrollBarRight, display->scrollBarPosition());
+    QCOMPARE(display->scrollBarPosition(), Enum::ScrollBarRight);
     display->setScrollBarPosition(Enum::ScrollBarHidden);
-    QCOMPARE(Enum::ScrollBarHidden, display->scrollBarPosition());
+    QCOMPARE(display->scrollBarPosition(), Enum::ScrollBarHidden);
+
+    delete display;
+}
+
+void TerminalTest::testColorTable()
+{
+    // These are from ColorScheme.cpp but they can be anything to test
+    ColorEntry defaultTable[TABLE_COLORS] = {
+        ColorEntry(QColor(0x00, 0x00, 0x00)), ColorEntry(QColor(0xFF, 0xFF, 0xFF)),
+        ColorEntry(QColor(0x00, 0x00, 0x00)), ColorEntry(QColor(0xB2, 0x18, 0x18)),
+        ColorEntry(QColor(0x18, 0xB2, 0x18)), ColorEntry(QColor(0xB2, 0x68, 0x18)),
+        ColorEntry(QColor(0x18, 0x18, 0xB2)), ColorEntry(QColor(0xB2, 0x18, 0xB2)),
+        ColorEntry(QColor(0x18, 0xB2, 0xB2)), ColorEntry(QColor(0xB2, 0xB2, 0xB2)),
+        ColorEntry(QColor(0x00, 0x00, 0x00)), ColorEntry(QColor(0xFF, 0xFF, 0xFF)),
+        ColorEntry(QColor(0x68, 0x68, 0x68)), ColorEntry(QColor(0xFF, 0x54, 0x54)),
+        ColorEntry(QColor(0x54, 0xFF, 0x54)), ColorEntry(QColor(0xFF, 0xFF, 0x54)),
+        ColorEntry(QColor(0x54, 0x54, 0xFF)), ColorEntry(QColor(0xFF, 0x54, 0xFF)),
+        ColorEntry(QColor(0x54, 0xFF, 0xFF)), ColorEntry(QColor(0x00, 0xFF, 0xFF))
+    };
+
+    TerminalDisplay* display = new TerminalDisplay(0);
+
+    display->setColorTable(defaultTable);
+
+    const ColorEntry* colorTable = display->colorTable();
+
+    for (int i = 0; i < TABLE_COLORS; i++)
+        QCOMPARE(colorTable[i], defaultTable[i]);
+
+    ColorEntry colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00));
+    QVERIFY(colorTable[1] != colorEntry);
+
+    // UseCurrentFormat is the default FontWeight
+    colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::Bold);
+    defaultTable[0] = colorEntry;
+    QVERIFY(colorTable[0] != colorEntry);
+
+    colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::Normal);
+    defaultTable[0] = colorEntry;
+    QVERIFY(colorTable[0] != colorEntry);
+
+    colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::UseCurrentFormat);
+    defaultTable[0] = colorEntry;
+    QVERIFY(colorTable[0] == colorEntry);
 
     delete display;
 }

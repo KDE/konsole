@@ -31,6 +31,7 @@ class TerminalTest : public QObject
 
 private slots:
     void testScrollBarPositions();
+    void testColorTable();
 
 private:
 };
