@@ -48,7 +48,7 @@ void TerminalTest::testScrollBarPositions()
 void TerminalTest::testColorTable()
 {
     // These are from ColorScheme.cpp but they can be anything to test
-    ColorEntry defaultTable[TABLE_COLORS] = {
+    const ColorEntry defaultTable[TABLE_COLORS] = {
         ColorEntry(QColor(0x00, 0x00, 0x00)), ColorEntry(QColor(0xFF, 0xFF, 0xFF)),
         ColorEntry(QColor(0x00, 0x00, 0x00)), ColorEntry(QColor(0xB2, 0x18, 0x18)),
         ColorEntry(QColor(0x18, 0xB2, 0x18)), ColorEntry(QColor(0xB2, 0x68, 0x18)),
@@ -75,15 +75,12 @@ void TerminalTest::testColorTable()
 
     // UseCurrentFormat is the default FontWeight
     colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::Bold);
-    defaultTable[0] = colorEntry;
     QVERIFY(colorTable[0] != colorEntry);
 
     colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::Normal);
-    defaultTable[0] = colorEntry;
     QVERIFY(colorTable[0] != colorEntry);
 
     colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::UseCurrentFormat);
-    defaultTable[0] = colorEntry;
     QVERIFY(colorTable[0] == colorEntry);
 
     delete display;
