@@ -13,36 +13,36 @@ target_link_libraries(PartManualTest ${KDE4_KPARTS_LIBS}
                                ${KDE4_KPTY_LIBS}
                                ${KONSOLE_TEST_LIBS})
 
+kde4_add_unit_test(CharacterColorTest CharacterColorTest.cpp)
+target_link_libraries(CharacterColorTest ${KONSOLE_TEST_LIBS})
+
+kde4_add_unit_test(DBusTest DBusTest.cpp)
+target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus)
+
 kde4_add_unit_test(PartTest PartTest.cpp)
 target_link_libraries(PartTest ${KDE4_KPARTS_LIBS}
                                ${KDE4_KPTY_LIBS}
                                ${KONSOLE_TEST_LIBS})
 
-kde4_add_unit_test(SessionTest SessionTest.cpp)
-target_link_libraries(SessionTest ${KONSOLE_TEST_LIBS})
-
-kde4_add_unit_test(TerminalTest TerminalTest.cpp)
-target_link_libraries(TerminalTest ${KONSOLE_TEST_LIBS})
+kde4_add_unit_test(ProfileTest ProfileTest.cpp)
+target_link_libraries(ProfileTest ${KONSOLE_TEST_LIBS})
 
 kde4_add_unit_test(PtyTest PtyTest.cpp)
 target_link_libraries(PtyTest ${KDE4_KPTY_LIBS} ${KONSOLE_TEST_LIBS})
 
+kde4_add_unit_test(SessionManagerTest SessionManagerTest.cpp)
+target_link_libraries(SessionManagerTest ${KONSOLE_TEST_LIBS})
+
+kde4_add_unit_test(SessionTest SessionTest.cpp)
+target_link_libraries(SessionTest ${KONSOLE_TEST_LIBS})
+
 kde4_add_unit_test(ShellCommandTest ShellCommandTest.cpp)
 target_link_libraries(ShellCommandTest ${KONSOLE_TEST_LIBS})
-
-kde4_add_unit_test(CharacterColorTest CharacterColorTest.cpp)
-target_link_libraries(CharacterColorTest ${KONSOLE_TEST_LIBS})
 
 kde4_add_unit_test(TerminalCharacterDecoderTest
                   TerminalCharacterDecoderTest.cpp)
 target_link_libraries(TerminalCharacterDecoderTest ${KONSOLE_TEST_LIBS})
 
-kde4_add_unit_test(ProfileTest ProfileTest.cpp)
-target_link_libraries(ProfileTest ${KONSOLE_TEST_LIBS})
-
-kde4_add_unit_test(SessionManagerTest SessionManagerTest.cpp)
-target_link_libraries(SessionManagerTest ${KONSOLE_TEST_LIBS})
-
-kde4_add_unit_test(DBusTest DBusTest.cpp)
-target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus)
+kde4_add_unit_test(TerminalTest TerminalTest.cpp)
+target_link_libraries(TerminalTest ${KONSOLE_TEST_LIBS})
 
