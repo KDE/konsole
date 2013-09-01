@@ -86,6 +86,27 @@ void TerminalTest::testColorTable()
     delete display;
 }
 
+void TerminalTest::testSize()
+{
+    TerminalDisplay* display = new TerminalDisplay(0);
+
+    QCOMPARE(display->columns(), 1);
+    QCOMPARE(display->lines(), 1);
+
+    // TODO: setSize doesn't change size...
+    //display->setSize(80, 25);
+
+    display->setFixedSize(-1, -1);
+    QCOMPARE(display->columns(), 1);
+    QCOMPARE(display->lines(), 1);
+
+    display->setFixedSize(80, 25);
+    QCOMPARE(display->columns(), 80);
+    QCOMPARE(display->lines(), 25);
+
+    delete display;
+}
+
 QTEST_KDEMAIN(TerminalTest , GUI)
 
 #include "TerminalTest.moc"
