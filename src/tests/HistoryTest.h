@@ -34,6 +34,7 @@ private slots:
     void testHistoryFile();
     void testCompactHistory();
     void testEmulationHistory();
+    void testHistoryScroll();
 
 private:
 };

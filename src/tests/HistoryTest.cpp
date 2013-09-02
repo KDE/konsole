@@ -94,6 +94,49 @@ void HistoryTest::testEmulationHistory()
     delete session;
 }
 
+void HistoryTest::testHistoryScroll()
+{
+    HistoryScroll* historyScroll;
+
+    // None
+    historyScroll = new HistoryScrollNone();
+    QVERIFY(!historyScroll->hasScroll());
+    QCOMPARE(historyScroll->getLines(), 0);
+    QCOMPARE(historyScroll->getLineLen(0), 0);
+    QCOMPARE(historyScroll->getLineLen(10), 0);
+
+    const HistoryType& historyTypeNone = historyScroll->getType();
+    QCOMPARE(historyTypeNone.isEnabled(), false);
+    QCOMPARE(historyTypeNone.isUnlimited(), false);
+    QCOMPARE(historyTypeNone.maximumLineCount(), 0);
+
+    // File
+    historyScroll = new HistoryScrollFile(QString("test.log"));
+    QVERIFY(historyScroll->hasScroll());
+    QCOMPARE(historyScroll->getLines(), 0);
+    QCOMPARE(historyScroll->getLineLen(0), 0);
+    QCOMPARE(historyScroll->getLineLen(10), 0);
+
+    const HistoryType& historyTypeFile = historyScroll->getType();
+    QCOMPARE(historyTypeFile.isEnabled(), true);
+    QCOMPARE(historyTypeFile.isUnlimited(), true);
+    QCOMPARE(historyTypeFile.maximumLineCount(), -1);
+
+    // Compact
+    historyScroll = new CompactHistoryScroll(42);
+    QVERIFY(historyScroll->hasScroll());
+    QCOMPARE(historyScroll->getLines(), 0);
+    // QASSERT catches this - QCOMPARE(historyScroll->getLineLen(0), 0);
+    // QASSERT catches this - QCOMPARE(historyScroll->getLineLen(10), 0);
+
+    const HistoryType& compactHistoryType = historyScroll->getType();
+    QCOMPARE(compactHistoryType.isEnabled(), true);
+    QCOMPARE(compactHistoryType.isUnlimited(), false);
+    QCOMPARE(compactHistoryType.maximumLineCount(), 42);
+
+    delete historyScroll;
+}
+
 QTEST_KDEMAIN(HistoryTest , GUI)
 
 #include "HistoryTest.moc"
