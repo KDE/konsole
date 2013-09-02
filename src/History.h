@@ -29,6 +29,8 @@
 #include <QtCore/QVector>
 #include <QtCore/QTemporaryFile>
 
+#include "konsole_export.h"
+
 // Konsole
 #include "Character.h"
 
@@ -314,7 +316,7 @@ private:
 // History type
 //////////////////////////////////////////////////////////////////////
 
-class HistoryType
+class KONSOLEPRIVATE_EXPORT HistoryType
 {
 public:
     HistoryType();
@@ -342,7 +344,7 @@ public:
     }
 };
 
-class HistoryTypeNone : public HistoryType
+class KONSOLEPRIVATE_EXPORT HistoryTypeNone : public HistoryType
 {
 public:
     HistoryTypeNone();
@@ -353,7 +355,7 @@ public:
     virtual HistoryScroll* scroll(HistoryScroll *) const;
 };
 
-class HistoryTypeFile : public HistoryType
+class KONSOLEPRIVATE_EXPORT HistoryTypeFile : public HistoryType
 {
 public:
     explicit HistoryTypeFile(const QString& fileName = QString());
@@ -367,7 +369,7 @@ protected:
     QString _fileName;
 };
 
-class CompactHistoryType : public HistoryType
+class KONSOLEPRIVATE_EXPORT CompactHistoryType : public HistoryType
 {
 public:
     explicit CompactHistoryType(unsigned int size);
