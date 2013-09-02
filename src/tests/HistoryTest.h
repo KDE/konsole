@@ -17,26 +17,28 @@
     02110-1301  USA.
 */
 
-#ifndef SESSIONTEST_H
-#define SESSIONTEST_H
+#ifndef HISTORYTEST_H
+#define HISTORYTEST_H
 
 #include <kde_terminal_interface.h>
 
 namespace Konsole
 {
 
-class SessionTest : public QObject
+class HistoryTest : public QObject
 {
     Q_OBJECT
 
 private slots:
-    void testNoProfile();
-    void testEmulation();
+    void testHistoryNone();
+    void testHistoryFile();
+    void testCompactHistory();
+    void testEmulationHistory();
 
 private:
 };
 
 }
 
-#endif // SESSIONTEST_H
+#endif // HISTORYTEST_H
 
