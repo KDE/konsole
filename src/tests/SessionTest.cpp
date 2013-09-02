@@ -56,19 +56,6 @@ void SessionTest::testEmulation()
     delete session;
 }
 
-void SessionTest::testEmulationHistory()
-{
-    Session* session = new Session();
-
-    Emulation* emulation = session->emulation();
-
-    const HistoryType& historyType = emulation->history();
-    QCOMPARE(historyType.isEnabled(), false);
-    QCOMPARE(historyType.isUnlimited(), false);
-
-    delete session;
-}
-
 QTEST_KDEMAIN(SessionTest , GUI)
 
 #include "SessionTest.moc"
