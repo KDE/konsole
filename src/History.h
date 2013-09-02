@@ -124,7 +124,7 @@ protected:
 // File-based history (e.g. file log, no limitation in length)
 //////////////////////////////////////////////////////////////////////
 
-class HistoryScrollFile : public HistoryScroll
+class KONSOLEPRIVATE_EXPORT HistoryScrollFile : public HistoryScroll
 {
 public:
     explicit HistoryScrollFile(const QString& logFileName);
@@ -149,7 +149,7 @@ private:
 //////////////////////////////////////////////////////////////////////
 // Nothing-based history (no history :-)
 //////////////////////////////////////////////////////////////////////
-class HistoryScrollNone : public HistoryScroll
+class KONSOLEPRIVATE_EXPORT HistoryScrollNone : public HistoryScroll
 {
 public:
     HistoryScrollNone();
@@ -285,7 +285,7 @@ protected:
     bool _wrapped;
 };
 
-class CompactHistoryScroll : public HistoryScroll
+class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
 {
     typedef QList<CompactHistoryLine*> HistoryArray;
 
