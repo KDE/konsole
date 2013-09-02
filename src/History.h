@@ -333,7 +333,8 @@ public:
      */
     virtual int maximumLineCount() const = 0;
     /**
-     * TODO: document me
+     * Converts from one type of HistoryScroll to another or if given the
+     * same type, returns it.
      */
     virtual HistoryScroll* scroll(HistoryScroll *) const = 0;
     /**
