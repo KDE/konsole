@@ -126,8 +126,8 @@ void HistoryTest::testHistoryScroll()
     historyScroll = new CompactHistoryScroll(42);
     QVERIFY(historyScroll->hasScroll());
     QCOMPARE(historyScroll->getLines(), 0);
-    // QASSERT catches this - QCOMPARE(historyScroll->getLineLen(0), 0);
-    // QASSERT catches this - QCOMPARE(historyScroll->getLineLen(10), 0);
+    QCOMPARE(historyScroll->getLineLen(0), 0);
+    QCOMPARE(historyScroll->getLineLen(10), 0);
 
     const HistoryType& compactHistoryType = historyScroll->getType();
     QCOMPARE(compactHistoryType.isEnabled(), true);

@@ -507,7 +507,11 @@ int CompactHistoryScroll::getLines()
 
 int CompactHistoryScroll::getLineLen(int lineNumber)
 {
-    Q_ASSERT(lineNumber >= 0 && lineNumber < _lines.size());
+    if ((lineNumber < 0) || (lineNumber >= _lines.size())) {
+        kDebug() << "requested line invalid: 0 < " << lineNumber << " < " <<_lines.size();
+        Q_ASSERT(lineNumber >= 0 && lineNumber < _lines.size());
+        return 0;
+    }
     CompactHistoryLine* line = _lines[lineNumber];
     //kDebug() << "request for line at address " << line;
     return line->getLength();
