@@ -259,7 +259,9 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
                     text.append(ch);
             }
         } else {
-            text.append("&nbsp;"); //HTML truncates multiple spaces, so use a space marker instead
+            // HTML truncates multiple spaces, so use a space marker instead
+            // Use &#160 instead of &nbsp so xmllint will work.
+            text.append("&#160;"); 
         }
     }
 
