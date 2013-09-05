@@ -184,8 +184,10 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
         if (characters[i].rendition != _lastRendition  ||
                 characters[i].foregroundColor != _lastForeColor  ||
                 characters[i].backgroundColor != _lastBackColor) {
-            if (_innerSpanOpen)
+            if (_innerSpanOpen) {
                 closeSpan(text);
+                _innerSpanOpen = false;
+            }
 
             _lastRendition = characters[i].rendition;
             _lastForeColor = characters[i].foregroundColor;
@@ -249,8 +251,10 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
     }
 
     //close any remaining open inner spans
-    if (_innerSpanOpen)
+    if (_innerSpanOpen) {
         closeSpan(text);
+        _innerSpanOpen = false;
+    }
 
     //start new line
     text.append("<br>");
