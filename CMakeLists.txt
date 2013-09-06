@@ -18,7 +18,7 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KArchive ItemModels KAuth KGuiAddons KConfigWidgets
     ItemViews KNotifications KJS
     KJobWidgets KIconThemes KCompletion KTextWidgets
-    XmlGui Solid KWallet KIO KUnitConversion KDE4Attic
+    XmlGui Solid KWallet KIO KUnitConversion KBookmarks KDE4Attic
 )
 find_package(KDELibs4 NO_MODULE) #needed for KDE4Support
 set_package_properties(KDELibs4 PROPERTIES TYPE REQUIRED)
