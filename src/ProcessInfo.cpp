@@ -918,6 +918,7 @@ private:
 
                 delete [] kInfoProc;
             }
+            setPid(aPid);
         }
         return true;
     }
