@@ -67,7 +67,7 @@ void TerminalCharacterDecoderTest::testHTMLFileForValidity()
     QFile fi(fileName);
 
     if (!fi.exists())
-        QSKIP("Test html file not found.", SkipSingle);
+        QSKIP("Test html file not found.");
 
     QXmlSimpleReader xmlReader;
     QXmlInputSource source(&fi);
