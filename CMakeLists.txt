@@ -9,8 +9,6 @@ set_package_properties(ECM PROPERTIES TYPE REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 find_package(Qt5Transitional MODULE)
 set_package_properties(Qt5Transitional PROPERTIES TYPE REQUIRED)
-find_package(kdeqt5staging NO_MODULE)
-set_package_properties(kdeqt5staging PROPERTIES TYPE REQUIRED)
 find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KDBusAddons KCoreAddons KConfig
     KCodecs KI18n KService KWidgetsAddons
