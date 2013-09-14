@@ -635,7 +635,7 @@ private:
             return false;
         }
 
-#if defined(__DragonFly__)
+#if defined(HAVE_OS_DRAGONFLYBSD)
         setName(kInfoProc->kp_comm);
         setPid(kInfoProc->kp_pid);
         setParentPid(kInfoProc->kp_ppid);
@@ -685,7 +685,7 @@ private:
     }
 
     virtual bool readCurrentDir(int aPid) {
-#if defined(__DragonFly__)
+#if defined(HAVE_OS_DRAGONFLYBSD)
         char buf[PATH_MAX];
         int managementInfoBase[4];
         size_t len;

@@ -22,6 +22,13 @@ else()
   set(ENABLE_DETACHING 1)
 endif()
 
+### Handle DragonFlyBSD here instead of using __DragonFly__
+IF(${CMAKE_SYSTEM_NAME} MATCHES "DragonFly")
+  set(HAVE_OS_DRAGONFLYBSD 1)
+else()
+  set(HAVE_OS_DRAGONFLYBSD 0)
+endif()
+
 include(CheckIncludeFiles)
 
 configure_file(config-konsole.h.cmake
