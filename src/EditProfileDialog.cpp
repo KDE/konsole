@@ -690,10 +690,6 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
             this, SLOT(saveColorScheme(ColorScheme,bool)));
     _colorDialog->setup(colors, isNewScheme);
 
-    // Hide the parent dialog while ColorScheme is open
-    this->hide();
-    connect(_colorDialog, SIGNAL(finished()), this, SLOT(show()));
-
     _colorDialog->show();
 }
 void EditProfileDialog::closeColorSchemeEditor()
