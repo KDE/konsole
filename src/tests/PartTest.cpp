@@ -59,6 +59,11 @@ void PartTest::testFd()
         return;
     }
 
+    // create a Konsole part and attempt to connect to it
+    KParts::Part* terminalPart = createPart();
+    if (!terminalPart)  // not found
+        QSKIP("konsolepart not found.", SkipSingle);
+
     // start a pty process
     KPtyProcess ptyProcess;
     ptyProcess.setProgram(pingExe, QStringList() << "localhost");
@@ -68,8 +73,6 @@ void PartTest::testFd()
 
     int fd = ptyProcess.pty()->masterFd();
 
-    // create a Konsole part and attempt to connect to it
-    KParts::Part* terminalPart = createPart();
     bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype",
                                             Qt::DirectConnection, Q_ARG(int, fd));
     QVERIFY(result);
@@ -96,9 +99,11 @@ void PartTest::testFd()
 KParts::Part* PartTest::createPart()
 {
     KService::Ptr service = KService::serviceByDesktopName("konsolepart");
-    Q_ASSERT(service);
+    if (!service)       // not found
+        return 0;
     KPluginFactory* factory = KPluginLoader(service->library()).factory();
-    Q_ASSERT(factory);
+    if (!factory)       // not found
+        return 0;
 
     KParts::Part* terminalPart = factory->create<KParts::Part>(this);
 
