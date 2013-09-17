@@ -28,6 +28,7 @@
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QPainter>
+#include <QStandardPaths>
 
 // KDE
 #include <KAction>
@@ -1586,9 +1587,9 @@ void SessionController::sessionStateChanged(int state)
 
 void SessionController::zmodemDownload()
 {
-    QString zmodem = KStandardDirs::findExe("rz");
+    QString zmodem = QStandardPaths::findExecutable("rz");
     if (zmodem.isEmpty()) {
-        zmodem = KStandardDirs::findExe("lrz");
+        zmodem = QStandardPaths::findExecutable("lrz");
     }
     if (!zmodem.isEmpty()) {
         const QString path = KFileDialog::getExistingDirectory(
@@ -1616,9 +1617,9 @@ void SessionController::zmodemUpload()
                            i18n("<p>The current session already has a ZModem file transfer in progress.</p>"));
         return;
     }
-    QString zmodem = KStandardDirs::findExe("sz");
+    QString zmodem = QStandardPaths::findExecutable("sz");
     if (zmodem.isEmpty()) {
-        zmodem = KStandardDirs::findExe("lsz");
+        zmodem = QStandardPaths::findExecutable("lsz");
     }
     if (zmodem.isEmpty()) {
         KMessageBox::sorry(_view,
