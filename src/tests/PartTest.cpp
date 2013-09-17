@@ -61,8 +61,10 @@ void PartTest::testFd()
 
     // create a Konsole part and attempt to connect to it
     KParts::Part* terminalPart = createPart();
-    if (!terminalPart)  // not found
-        QSKIP("konsolepart not found.", SkipSingle);
+    if (!terminalPart) { // not found
+        QSKIP("konsolepart not found.");
+        return;
+    }
 
     // start a pty process
     KPtyProcess ptyProcess;
