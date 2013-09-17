@@ -1591,6 +1591,7 @@ void SessionController::zmodemDownload()
     if (zmodem.isEmpty()) {
         zmodem = QStandardPaths::findExecutable("lrz");
     }
+#pragma message("Fix crashes with KFileDialog")
     if (!zmodem.isEmpty()) {
         const QString path = KFileDialog::getExistingDirectory(
                                  KUrl(), _view,
@@ -1628,6 +1629,7 @@ void SessionController::zmodemUpload()
         return;
     }
 
+#pragma message("Fix crashes with KFileDialog")
     QStringList files = KFileDialog::getOpenFileNames(KUrl(), QString(), _view,
                         i18n("Select Files for ZModem Upload"));
     if (!files.isEmpty()) {
@@ -1682,6 +1684,7 @@ void SaveHistoryTask::execute()
     // TODO - show a warning ( preferably passive ) if saving the history output fails
     //
 
+#pragma message("Fix crashes with KFileDialog")
     KFileDialog* dialog = new KFileDialog(KUrl(QString(":konsole")) /* check this */,
                                           QString(), QApplication::activeWindow());
     dialog->setOperationMode(KFileDialog::Saving);
