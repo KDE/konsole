@@ -45,7 +45,7 @@ option(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
 if(KONSOLE_BUILD_FONTEMBEDDER OR KONSOLE_GENERATE_LINEFONT)
   ### Font Embedder
   set(fontembedder_SRCS fontembedder.cpp)
-  kde4_add_executable(fontembedder ${fontembedder_SRCS})
+  add_executable(fontembedder ${fontembedder_SRCS})
   target_link_libraries(fontembedder  ${KDE4_KIO_LIBS})
 
   ### Line graphics font
