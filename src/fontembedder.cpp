@@ -62,8 +62,8 @@ static quint32 readGlyph(QTextStream& input)
 
 int main(int argc, char **argv)
 {
-    if (argc < 1) {
-        qWarning("usage: fontembedder font.src > font.h");
+    if (argc < 2) {
+        qWarning("usage: fontembedder LineFont.src > LineFont.h");
         exit(1);
     }
     QFile inFile(argv[1]);
