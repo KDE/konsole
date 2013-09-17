@@ -62,13 +62,14 @@ static quint32 readGlyph(QTextStream& input)
 
 int main(int argc, char **argv)
 {
-    if (argc < 2) {
+    if (argc != 2) {
         qWarning("usage: fontembedder LineFont.src > LineFont.h");
         exit(1);
     }
     QFile inFile(argv[1]);
     if (!inFile.open(QIODevice::ReadOnly)) {
-        qFatal("Can not open %s", argv[1]);
+        qWarning("Can not open %s", argv[1]);
+        exit(1);
     }
 
     QTextStream input(&inFile);
