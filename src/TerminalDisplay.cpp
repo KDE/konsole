@@ -52,7 +52,7 @@
 #include <KLocalizedString>
 #include <KNotification>
 #include <KGlobalSettings>
-#include <KIO/NetAccess>
+#include <netaccess.h>
 #if defined(HAVE_LIBKONQ)
     #include <konq_operations.h>
 #endif
