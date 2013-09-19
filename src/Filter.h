@@ -318,8 +318,6 @@ public:
     void addFilter(Filter* filter);
     /** Removes a filter from the chain.  The chain will no longer delete the filter when destroyed */
     void removeFilter(Filter* filter);
-    /** Returns true if the chain contains @p filter */
-    bool containsFilter(Filter* filter);
     /** Removes all filters from the chain */
     void clear();
 

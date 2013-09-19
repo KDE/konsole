@@ -57,10 +57,6 @@ void FilterChain::removeFilter(Filter* filter)
 {
     removeAll(filter);
 }
-bool FilterChain::containsFilter(Filter* filter)
-{
-    return contains(filter);
-}
 void FilterChain::reset()
 {
     QListIterator<Filter*> iter(*this);
