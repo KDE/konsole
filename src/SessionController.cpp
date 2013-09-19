@@ -1896,7 +1896,6 @@ void SearchHistoryTask::executeOnScreenWindow(SessionPtr session , ScreenWindowP
             // line number search below assumes that the buffer ends with a new-line
             string.append('\n');
 
-            pos = -1;
             if (forwards)
                 pos = string.indexOf(_regExp);
             else

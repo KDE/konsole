@@ -730,11 +730,12 @@ void EditProfileDialog::colorSchemeSelected()
     if (!selected.isEmpty()) {
         QAbstractItemModel* model = _ui->colorSchemeList->model();
         const ColorScheme* colors = model->data(selected.first(), Qt::UserRole + 1).value<const ColorScheme*>();
+        if (colors) {
+            updateTempProfileProperty(Profile::ColorScheme, colors->name());
+            previewColorScheme(selected.first());
 
-        updateTempProfileProperty(Profile::ColorScheme, colors->name());
-        previewColorScheme(selected.first());
-
-        updateTransparencyWarning();
+            updateTransparencyWarning();
+        }
     }
 
     updateColorSchemeButtons();
@@ -839,7 +840,9 @@ void EditProfileDialog::keyBindingSelected()
         QAbstractItemModel* model = _ui->keyBindingList->model();
         const KeyboardTranslator* translator = model->data(selected.first(), Qt::UserRole + 1)
                                                .value<const KeyboardTranslator*>();
-        updateTempProfileProperty(Profile::KeyBindings, translator->name());
+        if (translator) {
+            updateTempProfileProperty(Profile::KeyBindings, translator->name());
+        }
     }
 
     updateKeyBindingsButtons();
@@ -1251,8 +1254,9 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
                                     const QModelIndex& index) const
 {
     const ColorScheme* scheme = index.data(Qt::UserRole + 1).value<const ColorScheme*>();
-
     Q_ASSERT(scheme);
+    if (!scheme)
+        return;
 
     bool transparencyAvailable = KWindowSystem::compositingActive();
 
