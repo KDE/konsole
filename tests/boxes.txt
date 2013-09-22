@@ -1,0 +1,74 @@
+Single width, hollow.
+┌─┐	)0lqk
+│ │	)0x x
+└─┘	)0mqj
+┌─┐
+│ │
+└─┘
+
+Single width, single fill.
+┌┬┐	)0lwk
+├┼┤	)0tnu
+└┴┘	)0mvj
+┌┬┐
+├┼┤
+└┴┘
+
+Double width, hollow.
+┏━┓	)0   
+┃ ┃	)0   
+┗━┛	)0   
+╔═╗
+║ ║
+╚═╝
+
+Double width, double fill.
+┏┳┓	)0   
+┣╋┫	)0   
+┗┻┛	)0   
+╔╦╗
+╠╬╣
+╚╩╝
+
+Double width, single fill.
+┏┯┓	)0   
+┠┼┨	)0 n 
+┗┷┛	)0   
+╔╤╗
+╟┼╢
+╚╧╝
+
+Single width, double fill.
+┌┰┐	)0l k
+┝╋┥	)0   
+└┸┘	)0m j
+┌╥┐
+╞╬╡
+└╨┘
+
+Single width, mixed fill (double horizontal, single vertical).
+┌┬┐	)0lwk
+┝┿┥	)0   
+└┴┘	)0mvj
+┌┬┐
+╞╪╡
+└┴┘
+
+Double width, mixed fill (double vertical, single horizontal).
+┏┳┓	)0   
+┠╂┨	)0   
+┗┻┛	)0   
+╔╦╗
+╟╫╢
+╚╩╝
+
+Double horizontal, single vertical.
+╒╕ 
+╘╛ 
+
+Double vertical, single horizontal.
+╓╖ 
+╙╜ 
+
+VT-102:  http://vt100.net/docs/vt102-ug/table5-13.html
+Unicode: http://www.unicode.org/charts/PDF/U2500.pdf
