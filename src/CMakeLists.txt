@@ -35,8 +35,7 @@ configure_file(config-konsole.h.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h)
 
 ### Tests
-#add_subdirectory(tests)
-
+add_subdirectory(tests)
 
 ### Font Embedder and LineFont.h
 option(KONSOLE_BUILD_FONTEMBEDDER "Konsole: build fontembedder executable" OFF)

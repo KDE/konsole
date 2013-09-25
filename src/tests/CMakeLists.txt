@@ -9,7 +9,7 @@ set(KONSOLE_TEST_LIBS ${QT_QTTEST_LIBRARY} konsoleprivate)
 ##  since make test is supposed to be fully automated.
 
 kde4_add_executable(PartManualTest TEST PartManualTest.cpp)
-target_link_libraries(PartManualTest ${KDE4_KPARTS_LIBS}
+target_link_libraries(PartManualTest XmlGui KParts
                                ${KDE4_KPTY_LIBS}
                                ${KONSOLE_TEST_LIBS})
 
@@ -26,7 +26,7 @@ target_link_libraries(HistoryTest ${KONSOLE_TEST_LIBS})
 
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     kde4_add_unit_test(PartTest PartTest.cpp)
-    target_link_libraries(PartTest ${KDE4_KPARTS_LIBS}
+    target_link_libraries(PartTest XmlGui KParts
                                ${KDE4_KPTY_LIBS}
                                ${KONSOLE_TEST_LIBS})
 endif()
