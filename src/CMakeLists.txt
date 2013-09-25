@@ -35,7 +35,8 @@ configure_file(config-konsole.h.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h)
 
 ### Tests
-add_subdirectory(tests)
+#add_subdirectory(tests)
+
 
 ### Font Embedder and LineFont.h
 option(KONSOLE_BUILD_FONTEMBEDDER "Konsole: build fontembedder executable" OFF)
@@ -189,7 +190,7 @@ set(konsolepart_PART_SRCS Part.cpp)
 
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
-target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} konsoleprivate)
+target_link_libraries(konsolepart KParts XmlGui konsoleprivate)
 install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ### konsoleprofile command-line tool
