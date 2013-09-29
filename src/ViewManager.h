@@ -174,6 +174,9 @@ public:
 
     int managerId() const;
 
+    /** Returns a list of sessions in this ViewManager */
+    QList<Session*> sessions() { return _sessionMap.values(); }
+
 signals:
     /** Emitted when the last view is removed from the view manager */
     void empty();

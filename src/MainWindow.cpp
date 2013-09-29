@@ -525,11 +525,21 @@ bool MainWindow::queryClose()
         return true;
     }
 
-    // TODO: Ideally, we should check what process is running instead
-    //       of just how many sessions are running.
-    // If only 1 session is running, don't ask user to confirm close.
-    const int openTabs = _viewManager->viewProperties().count();
-    if (openTabs < 2) {
+    // Check what processes are running,
+    // if just the default shell is running don't ask for confirmation
+
+    QStringList processesRunning;
+    foreach(Session *session, _viewManager->sessions()) {
+        if (!session)
+            continue;
+
+        const QString defaultProc = session->program().split('/').last();
+        const QString currentProc = session->foregroundProcessName().split('/').last();
+        if (defaultProc != currentProc) {
+            processesRunning.append(currentProc);
+        }
+    }
+    if (processesRunning.count() == 0) {
         return true;
     }
 
@@ -542,11 +552,13 @@ bool MainWindow::queryClose()
         KWindowSystem::unminimizeWindow(winId(), true);
     }
 
-    int result = KMessageBox::warningYesNoCancel(this,
-                 i18ncp("@info", "There are %1 tab open in this window. "
+    int result = KMessageBox::warningYesNoCancelList(this,
+                 i18ncp("@info", "There is a process running in this window. "
                         "Do you still want to quit?",
-                        "There are %1 tabs open in this window. "
-                        "Do you still want to quit?", openTabs),
+                        "There are %1 processes running in this window. "
+                        "Do you still want to quit?",
+                        processesRunning.count()),
+                 processesRunning,
                  i18nc("@title", "Confirm Close"),
                  KGuiItem(i18nc("@action:button", "Close &Window"), "window-close"),
                  KGuiItem(i18nc("@action:button", "Close Current &Tab"), "tab-close"),
