@@ -7,8 +7,6 @@ message(STATUS "Qt5 build")
 find_package(ECM 0.0.9 NO_MODULE)
 set_package_properties(ECM PROPERTIES TYPE REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-find_package(Qt5Transitional MODULE)
-set_package_properties(Qt5Transitional PROPERTIES TYPE REQUIRED)
 find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KDBusAddons KCoreAddons KConfig
     KCodecs KI18n KService KWidgetsAddons
@@ -22,6 +20,8 @@ find_package(KDELibs4 NO_MODULE) #needed for KDE4Support
 set_package_properties(KDELibs4 PROPERTIES TYPE REQUIRED)
 find_package(KDE4Support NO_MODULE)
 set_package_properties(KDE4Support PROPERTIES TYPE REQUIRED)
+find_package(Qt5Transitional MODULE)
+set_package_properties(Qt5Transitional PROPERTIES TYPE REQUIRED)
 remove_definitions(-DQT_NO_SIGNALS_SLOTS_KEYWORDS -DQT_NO_CAST_FROM_ASCII)
 add_definitions(-Wno-deprecated-declarations)
 set(KDE4_KIO_LIBS ${KDE4_KIO_LIBS} ${KDE4Support_LIBRARIES})
