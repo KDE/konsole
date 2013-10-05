@@ -30,6 +30,7 @@
 // KDE
 #include <KShell>
 #include <KBookmarkMenu>
+#include <KBookmarkOwner>
 #include <KStandardDirs>
 #include <KLocalizedString>
 #include <KMenu>
@@ -86,17 +87,17 @@ bool BookmarkHandler::enableOption(BookmarkOption option) const
         return KBookmarkOwner::enableOption(option);
 }
 
-QString BookmarkHandler::currentUrl() const
+QUrl BookmarkHandler::currentUrl() const
 {
     return urlForView(_activeView);
 }
 
-QString BookmarkHandler::urlForView(ViewProperties* view) const
+QUrl BookmarkHandler::urlForView(ViewProperties* view) const
 {
     if (view)
-        return view->url().prettyUrl();
+        return QUrl(view->url());
     else
-        return QString();
+        return QUrl();
 }
 
 QString BookmarkHandler::currentTitle() const
@@ -124,17 +125,30 @@ QString BookmarkHandler::titleForView(ViewProperties* view) const
     return url.prettyUrl();
 }
 
+QString BookmarkHandler::currentIcon() const
+{
+    return iconForView(_activeView);
+}
+
+QString BookmarkHandler::iconForView(ViewProperties* view) const
+{
+    if (view)
+        return view->icon().name();
+    else
+        return QString();
+}
+
 bool BookmarkHandler::supportsTabs() const
 {
     return true;
 }
 
-QList<QPair<QString, QString> > BookmarkHandler::currentBookmarkList() const
+QList<KBookmarkOwner::FutureBookmark> BookmarkHandler::currentBookmarkList() const
 {
-    QList<QPair<QString, QString> > list;
+    QList<KBookmarkOwner::FutureBookmark> list;
 
     foreach(ViewProperties* view, _views) {
-        list << QPair<QString, QString>(titleForView(view) , urlForView(view));
+        list << KBookmarkOwner::FutureBookmark(titleForView(view) , urlForView(view), iconForView(view));
     }
 
     return list;
