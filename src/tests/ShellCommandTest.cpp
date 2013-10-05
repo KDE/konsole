@@ -1,5 +1,6 @@
 /*
     Copyright 2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 2013 by Kurt Hindenburg <kurt.hindenburg@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -64,8 +65,14 @@ void ShellCommandTest::testExpandEnvironmentVariable()
     const QString env = "PATH";
     const QString value = "/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin";
     qputenv(env.toLocal8Bit(), value.toLocal8Bit());
-    const QString result = ShellCommand::expand(text);
-    const QString expected = text.replace('$' + env, value);
+    QString result = ShellCommand::expand(text);
+    QString expected = text.replace('$' + env, value);
+    QCOMPARE(result, expected);
+
+    text = "PATH=$PATH:\\$ESCAPED:~/bin";
+    qputenv(env.toLocal8Bit(), value.toLocal8Bit());
+    result = ShellCommand::expand(text);
+    expected = text.replace('$' + env, value);
     QCOMPARE(result, expected);
 }
 
@@ -81,6 +88,28 @@ void ShellCommandTest::testValidLeadingEnvCharacter()
     QChar invalidChar('9');
     const bool result = ShellCommand::isValidLeadingEnvCharacter(invalidChar);
     QCOMPARE(result, false);
+}
+
+void ShellCommandTest::testArgumentsWithSpaces()
+{
+    const QString command("dir");
+    QStringList arguments;
+    arguments << "dir" << "c:\\Program Files" << "System" << "*.ini" ;
+    const QString expected_arg("dir \"c:\\Program Files\" System *.ini");
+
+    ShellCommand shellCommand(command, arguments);
+    QCOMPARE(shellCommand.command(), command);
+    QCOMPARE(shellCommand.arguments(), arguments);
+    QCOMPARE(shellCommand.fullCommand(), expected_arg);
+}
+
+void ShellCommandTest::testEmptyCommand()
+{
+    const QString command("");
+    ShellCommand shellCommand(command);
+    QCOMPARE(shellCommand.command(), QString());
+    QCOMPARE(shellCommand.arguments(), QStringList());
+    QCOMPARE(shellCommand.fullCommand(), QString());
 }
 
 QTEST_KDEMAIN_CORE(ShellCommandTest)

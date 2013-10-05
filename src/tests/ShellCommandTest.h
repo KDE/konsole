@@ -1,5 +1,6 @@
 /*
     Copyright 2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 2013 by Kurt Hindenburg <kurt.hindenburg@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,6 +39,8 @@ private slots:
     void testExpandEnvironmentVariable();
     void testValidEnvCharacter();
     void testValidLeadingEnvCharacter();
+    void testArgumentsWithSpaces();
+    void testEmptyCommand();
 
 };
 
