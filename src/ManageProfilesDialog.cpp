@@ -272,7 +272,8 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
                              (selectedRows == 1 && isProfileDeletable(currentProfile()));
 
     _ui->newProfileButton->setEnabled(selectedRows < 2);
-    _ui->editProfileButton->setEnabled(selectedRows > 0);
+    // FIXME: At some point editing 2+ profiles no longer works
+    _ui->editProfileButton->setEnabled(selectedRows == 1);
     // do not allow the default session type to be removed
     _ui->deleteProfileButton->setEnabled(isDeletable && isNotDefault);
     _ui->setAsDefaultButton->setEnabled(isNotDefault && (selectedRows < 2));
