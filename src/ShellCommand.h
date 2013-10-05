@@ -73,11 +73,6 @@ public:
      */
     QString fullCommand() const;
 
-    /** Returns true if this is a root command. */
-    bool isRootCommand() const;
-    /** Returns true if the program specified by @p command() exists. */
-    bool isAvailable() const;
-
     /** Expands environment variables in @p text .*/
     static QString expand(const QString& text);
 

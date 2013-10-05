@@ -61,16 +61,6 @@ QStringList ShellCommand::arguments() const
 {
     return _arguments;
 }
-bool ShellCommand::isRootCommand() const
-{
-    Q_ASSERT(0); // not implemented yet
-    return false;
-}
-bool ShellCommand::isAvailable() const
-{
-    Q_ASSERT(0); // not implemented yet
-    return false;
-}
 QStringList ShellCommand::expand(const QStringList& items)
 {
     QStringList result;
