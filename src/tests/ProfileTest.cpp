@@ -39,6 +39,13 @@ void ProfileTest::testProfile()
     parent->setProperty(Profile::AntiAliasFonts, false);
     parent->setProperty(Profile::StartInCurrentSessionDir, false);
 
+    parent->setProperty(Profile::UseCustomCursorColor, true);
+    QVERIFY(parent->useCustomCursorColor());
+    QCOMPARE(parent->customCursorColor(), QColor());
+    parent->setProperty(Profile::UseCustomCursorColor, false);
+    QVERIFY(!parent->useCustomCursorColor());
+    QCOMPARE(parent->customCursorColor(), QColor());
+
     // create a child profile
     Profile* child = new Profile(Profile::Ptr(parent));
     child->setProperty(Profile::StartInCurrentSessionDir, true);
@@ -66,8 +73,8 @@ void ProfileTest::testProfile()
     QVERIFY(parent->property<bool>(Profile::AntiAliasFonts) == false);
     QVERIFY(child->property<bool>(Profile::AntiAliasFonts) == false);
 
-    QVERIFY(parent->property<bool>(Profile::StartInCurrentSessionDir) == false);
-    QVERIFY(child->property<bool>(Profile::StartInCurrentSessionDir) == true);
+    QVERIFY(!parent->startInCurrentSessionDir());
+    QVERIFY(child->startInCurrentSessionDir());
 
     delete child;
 }
@@ -136,16 +143,21 @@ void ProfileTest::testProfileGroup()
 
     // create a group profile
     ProfileGroup::Ptr group = ProfileGroup::Ptr(new ProfileGroup);
+    const ProfileGroup::Ptr group_const = ProfileGroup::Ptr(new ProfileGroup);
     QVERIFY(group->asGroup());
+    QVERIFY(group_const->asGroup());
     for (int i = 0; i < 3; i++) {
         group->addProfile(profile[i]);
         QVERIFY(group->profiles().contains(profile[i]));
+        QVERIFY(!group_const->profiles().contains(profile[i]));
     }
     group->updateValues();
 
     // read and check properties from the group
     QCOMPARE(group->property<int>(Profile::HistorySize), 1234);
+    QCOMPARE(group_const->property<int>(Profile::HistorySize), 0);
     QCOMPARE(group->property<QVariant>(Profile::UseCustomCursorColor), QVariant());
+    QCOMPARE(group_const->property<QVariant>(Profile::UseCustomCursorColor), QVariant());
 
     // set and test shareable properties in the group
     group->setProperty(Profile::Command, "ssh");
