@@ -3,7 +3,7 @@ include_directories(${KDE4_KPTY_INCLUDES}
                    ${KDE4_KPARTS_INCLUDES}
                    ${QT_QTTEST_INCLUDES})
 
-set(KONSOLE_TEST_LIBS ${QT_QTTEST_LIBRARY} konsoleprivate)
+set(KONSOLE_TEST_LIBS Qt5::Test konsoleprivate)
 
 ## If it's interactive, it shouldn't use kde4_add_unit_test,
 ##  since make test is supposed to be fully automated.

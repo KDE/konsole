@@ -9,6 +9,7 @@ message(STATUS "Qt5 build")
 find_package(ECM 0.0.9 NO_MODULE)
 set_package_properties(ECM PROPERTIES TYPE REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+find_package(KBookmarks CONFIG REQUIRED)
 find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KDBusAddons KCoreAddons KConfig
     KCodecs KI18n KService KWidgetsAddons
@@ -17,6 +18,7 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     ItemViews KNotifications KJS
     KJobWidgets KIconThemes KCompletion KTextWidgets
     XmlGui Solid KWallet KIO KUnitConversion KBookmarks KDE4Attic
+    KNotifyConfig
 )
 find_package(KDELibs4 NO_MODULE) #needed for KDE4Support
 set_package_properties(KDELibs4 PROPERTIES TYPE REQUIRED)

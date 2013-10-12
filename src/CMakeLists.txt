@@ -129,10 +129,22 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
 set(konsole_LIBS ${KDE4_KPTY_LIBS}
-                 ${KDE4_KIO_LIBS}
-                 ${KDE4_KNOTIFYCONFIG_LIBS}
-                 ${QT_QTXML_LIBRARY}
-                 ${X11_LIBRARIES})
+                 ${X11_LIBRARIES}
+                 KF5::XmlGui
+                 Qt5::PrintSupport
+                 Qt5::Xml
+                 KF5::KNotifications
+                 KF5::KWindowSystem
+                 KF5::KTextWidgets
+                 KF5::KGuiAddons
+                 KF5::KIconThemes
+                 KF5::KBookmarks
+                 KF5::KI18n
+                 KF5::KDE4Attic
+                 KDE4__KDE4Support
+                 ${KDE4_KIO_LIBRARY}
+                 KF5::KIOWidgets
+)
 
 if(HAVE_LIBKONQ)
   set(konsole_LIBS ${konsole_LIBS} ${LIBKONQ_LIBRARY})
@@ -155,14 +167,6 @@ kde4_add_ui_files(konsoleprivate_SRCS ColorSchemeEditor.ui
 
 kde4_add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
 target_link_libraries(konsoleprivate ${konsole_LIBS}
-  KF5::XmlGui
-  Qt5::PrintSupport
-  KF5::KNotifications
-  KF5::KWindowSystem
-  KF5::KTextWidgets
-  KF5::KGuiAddons
-  KF5::KIconThemes
-  KF5::KBookmarks
 )
 target_link_libraries(konsoleprivate LINK_INTERFACE_LIBRARIES ${konsole_LIBS})
 
@@ -178,7 +182,12 @@ kde4_add_kcfg_files(konsole_KDEINIT_SRCS settings/KonsoleSettings.kcfgc)
 kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
 
 kde4_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
-target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::KWindowSystem KF5::KBookmarks)
+target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::KWindowSystem KF5::KBookmarks
+  KF5::KI18n
+  KF5::KDE4Attic
+  KF5::KIOWidgets
+  KF5::KNotifyConfig
+)
 
 install(TARGETS kdeinit_konsole konsole konsoleprivate
        ${INSTALL_TARGETS_DEFAULT_ARGS})
@@ -189,7 +198,7 @@ set(konsolepart_PART_SRCS Part.cpp)
 
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
-target_link_libraries(konsolepart KParts XmlGui konsoleprivate)
+target_link_libraries(konsolepart KF5::KParts KF5::XmlGui konsoleprivate)
 install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ### konsoleprofile command-line tool
