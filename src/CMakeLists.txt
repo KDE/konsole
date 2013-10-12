@@ -128,8 +128,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         WindowSystemInfo.cpp
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
-set(konsole_LIBS ${KDE4_KPTY_LIBS}
-                 ${X11_LIBRARIES}
+set(konsole_LIBS ${X11_LIBRARIES}
                  KF5::XmlGui
                  Qt5::PrintSupport
                  Qt5::Xml
@@ -141,8 +140,9 @@ set(konsole_LIBS ${KDE4_KPTY_LIBS}
                  KF5::KBookmarks
                  KF5::KI18n
                  KF5::KDE4Attic
+                 KF5::KPty
                  KDE4__KDE4Support
-                 ${KDE4_KIO_LIBRARY}
+                 KDE4__kio
                  KF5::KIOWidgets
 )
 

@@ -15,7 +15,7 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
     KCodecs KI18n KService KWidgetsAddons
     KWindowSystem KCrash Sonnet
     KArchive ItemModels KAuth KGuiAddons KConfigWidgets
-    ItemViews KNotifications KJS
+    ItemViews KNotifications KJS KPty
     KJobWidgets KIconThemes KCompletion KTextWidgets
     XmlGui Solid KWallet KIO KUnitConversion KBookmarks KDE4Attic
     KNotifyConfig
