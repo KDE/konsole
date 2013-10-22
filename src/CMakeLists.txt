@@ -139,7 +139,6 @@ set(konsole_LIBS ${X11_LIBRARIES}
                  KF5::KIconThemes
                  KF5::KBookmarks
                  KF5::KI18n
-                 KF5::KDE4Attic
                  KF5::KPty
                  KDE4__KDE4Support
                  KDE4__kio
@@ -184,7 +183,6 @@ kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/u
 kde4_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
 target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::KWindowSystem KF5::KBookmarks
   KF5::KI18n
-  KF5::KDE4Attic
   KF5::KIOWidgets
   KF5::KNotifyConfig
 )
