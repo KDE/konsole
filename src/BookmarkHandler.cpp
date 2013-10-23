@@ -171,4 +171,3 @@ ViewProperties* BookmarkHandler::activeView() const
     return _activeView;
 }
 
-#include "BookmarkHandler.moc"

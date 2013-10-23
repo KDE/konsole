@@ -70,4 +70,3 @@ void HistorySizeDialog::setLineCount(int lines)
     _ui->historySizeWidget->setLineCount(lines);
 }
 
-#include "HistorySizeDialog.moc"

@@ -485,4 +485,3 @@ QList<QAction*> UrlFilter::HotSpot::actions()
     return actions;
 }
 
-#include "Filter.moc"

@@ -168,4 +168,3 @@ QList<QAction*> ProfileList::actions()
     return _group->actions();
 }
 
-#include "ProfileList.moc"

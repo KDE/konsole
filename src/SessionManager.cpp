@@ -330,6 +330,3 @@ Session* SessionManager::idToSession(int id)
     return 0;
 }
 
-
-#include "SessionManager.moc"
-

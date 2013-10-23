@@ -226,6 +226,3 @@ void ProfileTest::testProfileFileNames()
 
 QTEST_KDEMAIN_CORE(ProfileTest)
 
-#include "ProfileTest.moc"
-
-

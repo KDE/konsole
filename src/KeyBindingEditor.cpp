@@ -229,5 +229,3 @@ void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator
             SLOT(bindingTableItemChanged(QTableWidgetItem*)));
 }
 
-#include "KeyBindingEditor.moc"
-

@@ -58,5 +58,3 @@ void SessionTest::testEmulation()
 
 QTEST_KDEMAIN(SessionTest , GUI)
 
-#include "SessionTest.moc"
-

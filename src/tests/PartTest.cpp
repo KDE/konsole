@@ -114,5 +114,3 @@ KParts::Part* PartTest::createPart()
 
 QTEST_KDEMAIN(PartTest , GUI)
 
-#include "PartTest.moc"
-

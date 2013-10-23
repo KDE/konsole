@@ -1360,4 +1360,3 @@ QSize ColorSchemeViewDelegate::sizeHint(const QStyleOptionViewItem& option,
     return QSize(width, static_cast<int>(heightForWidth));
 }
 
-#include "EditProfileDialog.moc"

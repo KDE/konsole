@@ -368,5 +368,3 @@ QSize Emulation::imageSize() const
     return QSize(_currentScreen->getColumns(), _currentScreen->getLines());
 }
 
-#include "Emulation.moc"
-

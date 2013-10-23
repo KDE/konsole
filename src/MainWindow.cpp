@@ -795,5 +795,3 @@ bool MainWindow::focusNextPrevChild(bool)
     return false;
 }
 
-#include "MainWindow.moc"
-

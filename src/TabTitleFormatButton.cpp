@@ -104,5 +104,3 @@ Session::TabTitleContext TabTitleFormatButton::context() const
     return _context;
 }
 
-#include "TabTitleFormatButton.moc"
-

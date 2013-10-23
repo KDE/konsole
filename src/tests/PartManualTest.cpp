@@ -139,5 +139,3 @@ KParts::Part* PartManualTest::createPart()
 
 QTEST_KDEMAIN(PartManualTest , GUI)
 
-#include "PartManualTest.moc"
-

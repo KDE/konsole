@@ -1991,5 +1991,3 @@ QString SessionController::userTitle() const
     }
 }
 
-#include "SessionController.moc"
-

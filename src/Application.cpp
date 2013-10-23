@@ -425,5 +425,3 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
     }
 }
 
-#include "Application.moc"
-

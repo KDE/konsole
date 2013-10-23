@@ -67,4 +67,3 @@ void ZModemDialog::slotClose()
     accept();
 }
 
-#include "ZModemDialog.moc"

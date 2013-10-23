@@ -112,4 +112,3 @@ int HistorySizeWidget::lineCount() const
     return _ui->historyLineSpinner->value();
 }
 
-#include "HistorySizeWidget.moc"
