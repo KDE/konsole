@@ -49,7 +49,7 @@ namespace Konsole
  * (Shift,Ctrl,Alt,Meta etc.) and state flags which indicate the state
  * which the terminal must be in for the key sequence to apply.
  */
-class KeyboardTranslator
+class KONSOLEPRIVATE_EXPORT KeyboardTranslator
 {
 public:
     /**
