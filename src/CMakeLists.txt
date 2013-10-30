@@ -140,7 +140,7 @@ set(konsole_LIBS ${X11_LIBRARIES}
                  KF5::KBookmarks
                  KF5::KI18n
                  KF5::KPty
-                 KDE4__KDE4Support
+                 KF5::KDE4Support
                  KDE4__kio
                  KF5::KIOWidgets
 )
