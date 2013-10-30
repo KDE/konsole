@@ -46,8 +46,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2013-05-19</date>
-<releaseinfo>2.11 (&kde; 4.11)</releaseinfo>
+<date>2013-10-30</date>
+<releaseinfo>2.11 (&kde; 4.12)</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -391,6 +391,16 @@ There will be no submenu if only the default profile is to be shown.
 </varlistentry>
 
 <varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>P</keycap></keycombo></shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Print Screen ...</guimenuitem></menuchoice></term>
+<listitem><para><action>Print the current screen.</action> By default the output is scaled to fit the size of the paper
+being printed on with black text color and no background. In the print dialog these options can be changed on the
+<guilabel>Output Options</guilabel> tab.</para></listitem>
+</varlistentry>
+
+<varlistentry>
 <term><menuchoice><guimenu>File</guimenu>
 <guimenuitem>Open File Manager</guimenuitem></menuchoice>
 </term>
@@ -572,7 +582,30 @@ the name of the current tab</action>
 <para>This allows for case sensitive, forward or backwards, and regular expressions searches.</para>
 </listitem>
 </varlistentry>
-
+<!--FIXME 4.12
+Various search improvements
+  - Do not automatically reset the search start line on search hits
+ This was causing the annoying behavior that if you were to pause while typing
+ in a search term, and it would actually find a hit, then you would be searching
+ for the term a second time once you finish typing.
+ 
+ This commit introduces two new behaviors:
+ 1. When you show the search bar, all searching will be done from the first
+ visible line in the terminal.
+ 2. This start position is only reset when you
+ advance to the next result, by pressing "next", "previous", or the shortcuts
+ RETURN or SHIFT-RETURN
+ 
+ - When the view scrolls to a result, it will appear centered.
+ - When showing the search bar, do not invoke a search, only apply the highlight filters
+ - Add "search from beginning/end" button
+ This will scroll to the top/bottom before searching
+ Ctrl+return is also bound to this action
+ - Text highlighted by mouse will be set as the current search text when the incremental
+ search bar is opened
+ - Add "Search backwards" to search bar options
+ Button text is swapped according to reverse search switch 
+-->
 <varlistentry>
 <term><menuchoice>
 <shortcut><keycombo><keycap>F3</keycap></keycombo></shortcut>
