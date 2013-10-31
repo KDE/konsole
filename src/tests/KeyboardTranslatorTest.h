@@ -21,6 +21,7 @@
 #define KEYBOARDTRANSLATORTEST_H
 
 #include "../KeyboardTranslator.h"
+#include <QObject>
 
 namespace Konsole
 {
