@@ -8,8 +8,13 @@ set_package_properties(Qt5Core PROPERTIES TYPE REQUIRED)
 message(STATUS "Qt5 build")
 find_package(ECM 0.0.9 NO_MODULE)
 set_package_properties(ECM PROPERTIES TYPE REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
+
+find_package(KF5 MODULE REQUIRED
     KDBusAddons KCoreAddons KConfig
     KCodecs KI18n KService KWidgetsAddons
     KWindowSystem KCrash Sonnet
