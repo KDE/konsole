@@ -24,10 +24,10 @@ find_package(KF5 MODULE REQUIRED
     XmlGui Solid KWallet KBookmarks KIO KUnitConversion
     KNotifyConfig
 )
-find_package(KDELibs4 NO_MODULE) #needed for KDE4Support
-set_package_properties(KDELibs4 PROPERTIES TYPE REQUIRED)
 find_package(KDE4Support NO_MODULE)
 set_package_properties(KDE4Support PROPERTIES TYPE REQUIRED)
+find_package(KDELibs4 NO_MODULE) #needed for KDE4Support
+set_package_properties(KDELibs4 PROPERTIES TYPE REQUIRED)
 find_package(Qt5Transitional MODULE)
 set_package_properties(Qt5Transitional PROPERTIES TYPE REQUIRED)
 remove_definitions(-DQT_NO_SIGNALS_SLOTS_KEYWORDS -DQT_NO_CAST_FROM_ASCII)
