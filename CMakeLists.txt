@@ -14,7 +14,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-find_package(KF5 MODULE REQUIRED
+find_package(KF5 CONFIG REQUIRED
     KDBusAddons KCoreAddons KConfig
     KCodecs KI18n KService KWidgetsAddons
     KWindowSystem KCrash Sonnet
