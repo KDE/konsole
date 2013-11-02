@@ -1912,7 +1912,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
                 emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
             }
 
-            if (_underlineLinks && _openLinksByDirectClick) {
+            if (_underlineLinks && (_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier))) {
                 Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
                 if (spot && spot->type() == Filter::HotSpot::Link) {
                     QObject action;
@@ -1981,13 +1981,13 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
                 _mouseOverHotspotArea |= r;
             }
 
-            if (_openLinksByDirectClick && (cursor().shape() != Qt::PointingHandCursor))
+            if ((_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier)) && (cursor().shape() != Qt::PointingHandCursor))
                 setCursor(Qt::PointingHandCursor);
 
             update(_mouseOverHotspotArea | previousHotspotArea);
         }
     } else if (!_mouseOverHotspotArea.isEmpty()) {
-        if (_underlineLinks && _openLinksByDirectClick)
+        if (_underlineLinks && (_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier)))
             setCursor(_mouseMarks ? Qt::IBeamCursor : Qt::ArrowCursor);
 
         update(_mouseOverHotspotArea);
