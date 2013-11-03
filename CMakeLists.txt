@@ -22,7 +22,7 @@ find_package(KF5 CONFIG REQUIRED
     ItemViews KNotifications KJS KPty
     KJobWidgets KIconThemes KCompletion KTextWidgets
     XmlGui Solid KWallet KBookmarks KIO KUnitConversion
-    KNotifyConfig
+    KNotifyConfig KParts
 )
 find_package(KDE4Support NO_MODULE)
 set_package_properties(KDE4Support PROPERTIES TYPE REQUIRED)

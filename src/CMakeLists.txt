@@ -141,7 +141,6 @@ set(konsole_LIBS ${X11_LIBRARIES}
                  KF5::KI18n
                  KF5::KPty
                  KF5::KDE4Support
-                 KDE4__kio
                  KF5::KIOWidgets
 )
 
