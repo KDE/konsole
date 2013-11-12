@@ -22,7 +22,7 @@
 
 // KDE
 #include <KParts/Part>
-#include <kde_terminal_interface_v2.h>
+#include <kde_terminal_interface.h>
 
 // Qt
 #include <QtCore/QVariantList>
