@@ -535,6 +535,10 @@ bool MainWindow::queryClose()
 
         const QString defaultProc = session->program().split('/').last();
         const QString currentProc = session->foregroundProcessName().split('/').last();
+
+        if (currentProc.isEmpty())
+            continue;
+
         if (defaultProc != currentProc) {
             processesRunning.append(currentProc);
         }
