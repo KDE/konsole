@@ -8,7 +8,7 @@ set(KONSOLE_TEST_LIBS ${QT_QTTEST_LIBRARY} konsoleprivate)
 ## If it's interactive, it shouldn't use kde4_add_unit_test,
 ##  since make test is supposed to be fully automated.
 
-if(WIN32)
+if(NOT WIN32)
 kde4_add_executable(PartManualTest TEST PartManualTest.cpp)
 target_link_libraries(PartManualTest ${KDE4_KPARTS_LIBS}
                                ${KDE4_KPTY_LIBS}
@@ -25,12 +25,12 @@ endif()
 
 kde4_add_unit_test(HistoryTest HistoryTest.cpp ../History.cpp)
 set_target_properties(HistoryTest PROPERTIES COMPILE_FLAGS -DKONSOLEPRIVATE_EXPORT=)
-target_link_libraries(HistoryTest ${QT_QTTEST_LIBRARY})
+target_link_libraries(HistoryTest ${KONSOLE_TEST_LIBS})
 
 
 kde4_add_unit_test(KeyboardTranslatorTest KeyboardTranslatorTest.cpp ../KeyboardTranslator.cpp)
 set_target_properties(KeyboardTranslatorTest PROPERTIES COMPILE_FLAGS -DKONSOLEPRIVATE_EXPORT=)
-target_link_libraries(KeyboardTranslatorTest ${QT_QTTEST_LIBRARY})
+target_link_libraries(KeyboardTranslatorTest ${KONSOLE_TEST_LIBS})
 
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND NOT WIN32)
     kde4_add_unit_test(PartTest PartTest.cpp)
