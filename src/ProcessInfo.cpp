@@ -363,6 +363,7 @@ void NullProcessInfo::readUserName()
 {
 }
 
+#if !defined(Q_OS_WIN)
 UnixProcessInfo::UnixProcessInfo(int aPid, bool enableEnvironmentRead)
     : ProcessInfo(aPid, enableEnvironmentRead)
 {
@@ -413,6 +414,7 @@ void UnixProcessInfo::readUserName()
     }
     delete [] getpwBuffer;
 }
+#endif
 
 #if defined(Q_OS_LINUX)
 class LinuxProcessInfo : public UnixProcessInfo
