@@ -441,7 +441,12 @@ void Session::run()
     const int CHOICE_COUNT = 3;
     // if '_program' is empty , fall back to default shell. If that is not set
     // then fall back to /bin/sh
+#ifndef _WIN32
     QString programs[CHOICE_COUNT] = {_program, qgetenv("SHELL"), "/bin/sh"};
+#else
+    // on windows, fall back to %COMSPEC% or to cmd.exe
+    QString programs[CHOICE_COUNT] = {_program, qgetenv("COMSPEC"), "cmd.exe"};
+#endif
     QString exec;
     int choice = 0;
     while (choice < CHOICE_COUNT) {
