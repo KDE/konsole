@@ -1988,7 +1988,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
             update(_mouseOverHotspotArea | previousHotspotArea);
         }
     } else if (!_mouseOverHotspotArea.isEmpty()) {
-        if (_underlineLinks && (_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier)))
+        if ((_underlineLinks && (_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier))) || (cursor().shape() == Qt::PointingHandCursor))
             setCursor(_mouseMarks ? Qt::IBeamCursor : Qt::ArrowCursor);
 
         update(_mouseOverHotspotArea);
