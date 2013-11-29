@@ -47,6 +47,7 @@ class TerminalCharacterDecoder;
 class TerminalDisplay;
 class HistoryType;
 class HistoryScroll;
+class WinTerminal;
 
 /**
     \brief An image of characters with associated attributes.
@@ -643,6 +644,9 @@ private:
     // starting from 'startLine', where 0 is the first line in the history
     void copyFromHistory(Character* dest, int startLine, int count) const;
 
+#ifdef _WIN32
+    friend class WinConEmulation;
+#endif
     // screen image ----------------
     int _lines;
     int _columns;
