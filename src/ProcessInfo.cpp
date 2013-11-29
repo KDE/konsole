@@ -45,6 +45,10 @@
 #include <KUser>
 #include <KDebug>
 
+#if defined(Q_OS_WIN)
+#include <windows.h>
+#endif
+
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_MAC)
 #include <sys/sysctl.h>
 #endif
@@ -363,7 +367,257 @@ void NullProcessInfo::readUserName()
 {
 }
 
-#if !defined(Q_OS_WIN)
+#if defined(Q_OS_WIN)
+typedef struct _UNICODE_STRING
+{
+    USHORT Length;
+    USHORT MaximumLength;
+    PWSTR Buffer;
+} UNICODE_STRING;
+
+typedef struct _RTL_USER_PROCESS_PARAMETERS
+{
+        ULONG MaximumLength;
+        ULONG Length;
+        ULONG Flags;
+        ULONG DebugFlags;
+        PVOID ConsoleHandle;
+        ULONG ConsoleFlags;
+        HANDLE StdInputHandle;
+        HANDLE StdOutputHandle;
+        HANDLE StdErrorHandle;
+        UNICODE_STRING CurrentDirectoryPath;
+        HANDLE CurrentDirectoryHandle;
+        UNICODE_STRING DllPath;
+        UNICODE_STRING ImagePathName;
+        UNICODE_STRING CommandLine;
+        PVOID Environment;
+    /* ... rest isn't needed anymore
+     * taken from: http://undocumented.ntinternals.net/UserMode/Structures/RTL_USER_PROCESS_PARAMETERS.html
+     */
+} RTL_USER_PROCESS_PARAMETERS;
+
+typedef struct _PEB
+{
+    BOOLEAN InheritedAddressSpace;
+    BOOLEAN ReadImageFileExecOptions;
+    BOOLEAN BeingDebugged;
+    BOOLEAN Spare;
+    HANDLE Mutant;
+    PVOID ImageBaseAddress;
+    PVOID LoaderData;
+    RTL_USER_PROCESS_PARAMETERS* ProcessParameters;
+    /* ... rest isn't needed anymore
+     * taken from: http://undocumented.ntinternals.net/UserMode/Undocumented%20Functions/NT%20Objects/Process/PEB.html
+     */
+} PEB;
+
+typedef struct _PROCESS_BASIC_INFORMATION
+{
+    LONG ExitStatus;
+    PEB* PebBaseAddress;
+    ULONG* AffinityMask;
+    LONG BasePriority;
+    ULONG_PTR UniqueProcessId;
+    ULONG_PTR ParentProcessId;
+} PROCESS_BASIC_INFORMATION;
+
+typedef PVOID (NTAPI *_NtQueryInformationProcess)(HANDLE ProcessHandle,
+            DWORD ProcessInformationClass,
+            PVOID ProcessInformation,
+            DWORD ProcessInformationLength,
+            PDWORD ReturnLength);
+
+class WindowsProcessInfo : public ProcessInfo {
+    private:
+        int _pid;
+
+        /**
+         * return the last system error message as a QString
+         */
+        QString getLastErrorString(DWORD dwError = GetLastError())
+        {
+            WCHAR *lpBuffer;
+            ::FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ALLOCATE_BUFFER,
+                            NULL, dwError, MAKELANGID(LANG_NEUTRAL,SUBLANG_DEFAULT),
+                            (LPWSTR)&lpBuffer, 0, NULL);
+            QString ret = QString::fromUtf16(reinterpret_cast<const ushort*>(lpBuffer));
+            LocalFree(lpBuffer);
+            return ret;
+        }
+
+        bool readUnicodeStringFromProcess(HANDLE hProc, void* addr, QString& s)
+        {
+            UNICODE_STRING us;
+            if(!ReadProcessMemory(hProc, addr, &us, sizeof(us), NULL))
+            {
+                const DWORD dwError = GetLastError();
+                kDebug() << "failed to read unicode_string:" << getLastErrorString(dwError);
+                return false;
+            }
+
+            WCHAR *usContents = new WCHAR[us.Length + 1];
+            ZeroMemory(usContents, sizeof(WCHAR) * (us.Length + 1));
+
+            /* now copy the string from the other process into ours */
+            if (!ReadProcessMemory(hProc, us.Buffer, usContents, us.Length, NULL))
+            {
+                const DWORD dwError = GetLastError();
+                kDebug() << "failed to copy unicode_string contents!" << getLastErrorString(dwError);
+                return false;
+            }
+            s = QString::fromUtf16(reinterpret_cast<const ushort*>(usContents));
+            return true;
+        }
+
+    public:
+        WindowsProcessInfo(int aPid, bool env)
+            : ProcessInfo(aPid, env), _pid(aPid)
+        {
+        }
+
+        bool readProcessInfo(int aPid, bool env)
+        {
+            if(aPid == GetCurrentProcessId()) return false;
+
+            HANDLE hProc = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, aPid);
+            if(hProc == 0)
+            {
+                const DWORD dwError = GetLastError();
+                kDebug() << "failed to read process:" << getLastErrorString(dwError);
+                return false;
+            }
+
+            _NtQueryInformationProcess NtQueryInformationProcess = (_NtQueryInformationProcess)
+                GetProcAddress(GetModuleHandleA("ntdll.dll"), "NtQueryInformationProcess");
+            if(NtQueryInformationProcess == NULL)
+            {
+                const DWORD dwError = GetLastError();
+                kDebug() << "failed to load NtQueryInformationProcess function:" << getLastErrorString(dwError);
+            }
+
+            PROCESS_BASIC_INFORMATION pbi;
+            NtQueryInformationProcess(hProc, 0, &pbi, sizeof(pbi), NULL);
+
+            // read parentPid and pid
+            setParentPid(pbi.ParentProcessId);
+            setPid(pbi.UniqueProcessId);
+
+            readUserName();
+            PEB* pebAddress = pbi.PebBaseAddress;
+
+            /* now we go ahead and read the address of the process parameters, see here:
+             * http://undocumented.ntinternals.net/UserMode/Undocumented%20Functions/NT%20Objects/Process/PEB.html
+             */
+            PVOID rtlUserProcParamsAddress;
+            if (!ReadProcessMemory(hProc, (char*)pebAddress + FIELD_OFFSET(_PEB, ProcessParameters), &rtlUserProcParamsAddress, sizeof(PVOID), NULL))
+            {
+                const DWORD dwError = GetLastError();
+                kDebug() << "failed to read userprocparams:" << getLastErrorString(dwError);
+                return false;
+            }
+
+            // read ImagePathName
+            QString imagePathString;
+            readUnicodeStringFromProcess(hProc, (char*)rtlUserProcParamsAddress + FIELD_OFFSET(_RTL_USER_PROCESS_PARAMETERS, ImagePathName), imagePathString);
+            setName(QFileInfo(imagePathString).baseName());
+
+            // read CurrentDirectoryPath
+            QString curdirString;
+            readUnicodeStringFromProcess(hProc, (char*)rtlUserProcParamsAddress + FIELD_OFFSET(_RTL_USER_PROCESS_PARAMETERS, CurrentDirectoryPath), curdirString);
+            if(curdirString.endsWith(QDir::separator())) curdirString = curdirString.left(curdirString.size() - 1);
+            setCurrentDir(QDir::fromNativeSeparators(curdirString));
+
+            // read arguments & commandline
+            QString args;
+            readUnicodeStringFromProcess(hProc, (char*)rtlUserProcParamsAddress + FIELD_OFFSET(_RTL_USER_PROCESS_PARAMETERS, CommandLine), args);
+            foreach(QString arg, args.split(" ").mid(1)) {
+                addArgument(arg);
+            }
+            CloseHandle(hProc);
+            return true;
+        }
+
+        void readUserName(void)
+        {
+            HANDLE tok = 0;
+            BYTE* tuBuffer;
+            TOKEN_USER* tokenUser;
+            DWORD len = 0, alen = 0;
+            WCHAR *procName = NULL, *aName = NULL;
+            SID_NAME_USE name_use;
+
+            HANDLE hProc = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, _pid);
+            if(hProc == 0)
+            {
+                const DWORD dwError = GetLastError();
+                kDebug() << "failed to read process:" << getLastErrorString(dwError);
+                return;
+            }
+
+
+            // open the process' token
+            if (!OpenProcessToken(hProc, TOKEN_QUERY, &tok))
+            {
+                const DWORD dwError = GetLastError();
+                kDebug() << "couldn't open process token:" << getLastErrorString(dwError);
+                CloseHandle(hProc);
+                return;
+            }
+
+            // get the SID of the token
+            GetTokenInformation(tok, TokenUser, NULL, 0, &len);
+            tuBuffer = new BYTE[len];
+            ZeroMemory(tuBuffer, len);
+            if(!GetTokenInformation(tok, TokenUser, tuBuffer, len, &len))
+            {
+                const DWORD dwError = GetLastError();
+                kDebug() << "failed to read sid for process:" << getLastErrorString(dwError);
+                CloseHandle(hProc);
+                return;
+            }
+            tokenUser = (TOKEN_USER*)tuBuffer;
+
+            // lookup account name of the SID
+            LookupAccountSid(NULL, tokenUser->User.Sid, procName, &len, aName, &alen, &name_use);
+            procName = new WCHAR[len];
+            aName = new WCHAR[alen];
+
+            if (!LookupAccountSid(NULL, tokenUser->User.Sid, procName, &len, aName, &alen, &name_use))
+            {
+                const DWORD dwError = GetLastError();
+                kDebug() << "failed to lookup user account name:" << getLastErrorString(dwError);
+                CloseHandle(tok);
+                CloseHandle(hProc);
+                return;
+            }
+            QString tmpuser = QString::fromUtf16(reinterpret_cast<const ushort*>(procName));
+            setUserName(tmpuser);
+
+            delete[] procName;
+            delete[] aName;
+            CloseHandle(tok);
+            CloseHandle(hProc);
+        }
+    private:
+        bool getMemorySize(HANDLE process, void* address, int& size)
+        {
+            MEMORY_BASIC_INFORMATION mi;
+
+            VirtualQueryEx(process, address, &mi, sizeof(MEMORY_BASIC_INFORMATION));
+            if( mi.Protect == PAGE_NOACCESS || mi.Protect == PAGE_EXECUTE )
+            {
+                size = 0;
+                return false;
+            }
+
+            size = mi.RegionSize;
+            return true;
+        }
+
+
+};
+#else
 UnixProcessInfo::UnixProcessInfo(int aPid, bool enableEnvironmentRead)
     : ProcessInfo(aPid, enableEnvironmentRead)
 {
@@ -1174,6 +1428,8 @@ ProcessInfo* ProcessInfo::newInstance(int aPid, bool enableEnvironmentRead)
     return new FreeBSDProcessInfo(aPid, enableEnvironmentRead);
 #elif defined(Q_OS_OPENBSD)
     return new OpenBSDProcessInfo(aPid, enableEnvironmentRead);
+#elif defined(Q_OS_WIN)
+    return new WindowsProcessInfo(aPid, enableEnvironmentRead);
 #else
     return new NullProcessInfo(aPid, enableEnvironmentRead);
 #endif
