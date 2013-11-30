@@ -160,7 +160,10 @@ void WinConEmulation::updateBuffer()
     KcwSH::OutputWriter *ow = _console->_terminal->outputWriter();
     for(int i = 0; i < _currentScreen->_lines; i++) {
         Screen::ImageLine &v = _currentScreen->_screenLines[i];
-        for(int j = 0; j < _currentScreen->_columns && j < v.size(); j++) {
+        if(v.size() < _currentScreen->_columns) {
+            v.resize(_currentScreen->_columns);
+        }
+        for(int j = 0; j < _currentScreen->_columns; j++) {
             COORD c;
             c.X = i; c.Y = j;
             v[j] = Character(ow->at(c));
