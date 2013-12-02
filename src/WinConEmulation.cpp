@@ -43,7 +43,6 @@
 #include "Character.h"
 #include "TerminalDisplay.h"
 #include "WinConsole.h"
-#include "WinTerminal.h"
 
 using namespace Konsole;
 
@@ -102,10 +101,7 @@ void WinConEmulation::updateCursorPosition(int x, int y)
 
 void WinConEmulation::sendString(const char* s, int length)
 {
-  if ( length >= 0 )
-    emit sendData(s, length);
-  else
-    emit sendData(s, qstrlen(s));
+    sendText(QString::fromLatin1(s));
 }
 
 /*!
@@ -124,6 +120,7 @@ void WinConEmulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
 
 void WinConEmulation::sendText(const QString& text)
 {
+    _console->sendText(reinterpret_cast<const ushort*>(text.utf16()));
 }
 
 void WinConEmulation::sendKeyEvent(QKeyEvent* event)
@@ -138,7 +135,7 @@ void WinConEmulation::sendKeyEvent(QKeyEvent* event)
     ir.Event.KeyEvent.wVirtualScanCode = event->nativeScanCode();
     ir.Event.KeyEvent.uChar.UnicodeChar = static_cast<WCHAR>(event->text().utf16()[0]);
     ir.Event.KeyEvent.dwControlKeyState = event->nativeModifiers();
-    _console->_terminal->inputReader()->sendKeyboardEvents(&ir, 1);
+    _console->inputReader()->sendKeyboardEvents(&ir, 1);
 
 }
 
@@ -157,7 +154,7 @@ char WinConEmulation::eraseChar() const
 
 void WinConEmulation::updateBuffer()
 {
-    KcwSH::OutputWriter *ow = _console->_terminal->outputWriter();
+    KcwSH::OutputWriter *ow = _console->outputWriter();
     for(int i = 0; i < _currentScreen->_lines; i++) {
         Screen::ImageLine &v = _currentScreen->_screenLines[i];
         if(v.size() < _currentScreen->_columns) {

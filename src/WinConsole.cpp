@@ -32,42 +32,33 @@
 // KDE
 #include <KDebug>
 
-// Konsole
-#include "WinTerminal.h"
-
 using Konsole::WinConsole;
 
 WinConsole::WinConsole(QObject* aParent)
  : QProcess(aParent)
 {
-    _terminal = new WinTerminal;
-    connect(_terminal, SIGNAL(cursorChanged(int, int)), this, SIGNAL(cursorChanged(int, int)));
-    connect(_terminal, SIGNAL(termTitleChanged(int, QString)), this, SIGNAL(termTitleChanged(int, QString)));
-    connect(_terminal, SIGNAL(outputChanged()), this, SIGNAL(outputChanged()));
-    connect(_terminal, SIGNAL(finished(int, QProcess::ExitStatus)), this, SIGNAL(finished(int, QProcess::ExitStatus)));
-
-    _terminal->setInputReader(new KcwSH::InputReader);
-    _terminal->setOutputWriter(new KcwSH::OutputWriter(_terminal));
+    setInputReader(new KcwSH::InputReader);
+    setOutputWriter(new KcwSH::OutputWriter(this));
 }
 
 int WinConsole::pid() const
 {
-    return _terminal->pid();
+    return KcwSH::Terminal::pid();
 }
 
 int WinConsole::foregroundProcessGroup() const
 {
-    return _terminal->foregroundPid();
+    return foregroundPid();
 }
 
 void WinConsole::closePty()
 {
-    _terminal->quit();
+    KcwSH::Terminal::quit();
 }
 
 QProcess::ProcessState WinConsole::state() const
 {
-    if(_terminal->isSetup())
+    if(isSetup())
         return QProcess::Running;
     else
         return QProcess::NotRunning;
@@ -77,24 +68,24 @@ QProcess::ProcessState WinConsole::state() const
 void WinConsole::setWindowSize(int columns, int lines)
 {
     COORD c = { columns, lines };
-    _terminal->setTerminalSize(c);
+    setTerminalSize(c);
 }
 
 QSize WinConsole::windowSize() const
 {
-    COORD c = _terminal->terminalSize();
+    COORD c = terminalSize();
     return QSize(c.X, c.Y);
 }
 
 void WinConsole::setInitialWorkingDirectory(const QString& dir)
 {
-    _terminal->setInitialWorkingDirectory(reinterpret_cast<const WCHAR*>(dir.utf16()));
+    KcwSH::Terminal::setInitialWorkingDirectory(reinterpret_cast<const WCHAR*>(dir.utf16()));
 }
 
 int WinConsole::start(const QString& program, const QStringList& arguments, const QStringList& environment)
 {
     QString cmd = program + QLatin1Char(' ') + arguments.join(QLatin1String(" "));
-    _terminal->setCmd(reinterpret_cast<const WCHAR*>(cmd.utf16()));
+    setCmd(reinterpret_cast<const WCHAR*>(cmd.utf16()));
 
     KcwProcess::KcwProcessEnvironment env = KcwProcess::KcwProcessEnvironment::getCurrentEnvironment();
     foreach(QString entry, environment) {
@@ -103,8 +94,8 @@ int WinConsole::start(const QString& program, const QStringList& arguments, cons
         const QString value = entry.mid(l + 1);
         env[std::wstring(reinterpret_cast<const WCHAR*>(var.utf16()))] = std::wstring(reinterpret_cast<const WCHAR*>(value.utf16()));
     }
-    _terminal->setEnvironment(env);
-    _terminal->start();
+    KcwSH::Terminal::setEnvironment(env);
+    KcwSH::Terminal::start();
     return 0;
 }
 
@@ -126,5 +117,38 @@ bool WinConsole::flowControlEnabled() const
 {
     return false;
 }
+
+void WinConsole::sizeChanged()
+{
+    OutputDebugStringA(__FUNCTION__);
+}
+
+void WinConsole::bufferChanged()
+{
+    emit outputChanged();
+}
+
+void WinConsole::cursorPositionChanged()
+{
+    COORD c = outputWriter()->cursorPosition();
+    emit cursorChanged(c.X + 1, c.Y + 1);
+}
+
+void WinConsole::titleChanged()
+{
+    std::wstring ws = title();
+    QString title = QString::fromUtf16(
+        reinterpret_cast<const ushort*>(ws.c_str())
+    );
+    emit termTitleChanged(0, title);
+}
+
+void WinConsole::hasQuit()
+{
+    OutputDebugStringA(__FUNCTION__);
+    Terminal::quit();
+    emit finished(0, QProcess::NormalExit);
+}
+
 
 #include "WinConsole.moc"

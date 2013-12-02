@@ -26,6 +26,8 @@
 #include <QtCore/QProcess>
 #include <QtCore/QSize>
 
+// KcwSH
+#include <kcwsh/terminal.h>
 
 // Konsole
 #include "konsole_export.h"
@@ -34,7 +36,6 @@ class QStringList;
 
 namespace Konsole
 {
-class WinTerminal;
 
 /**
  * The Pty class is used to start the terminal process,
@@ -49,7 +50,7 @@ class WinTerminal;
  * To start the terminal process, call the start() method
  * with the program name and appropriate arguments.
  */
-class KONSOLEPRIVATE_EXPORT WinConsole : public QProcess
+class KONSOLEPRIVATE_EXPORT WinConsole : public QProcess, public KcwSH::Terminal
 {
     Q_OBJECT
 
@@ -136,6 +137,18 @@ public:
     void setFlowControlEnabled(bool e);
     bool flowControlEnabled() const;
 
+    /**
+     * following functions are reimplemented for signal forwarding from
+     * KcwSH::Terminal
+     */
+    void sizeChanged();
+    void bufferChanged();
+    void cursorPositionChanged();
+
+    void titleChanged();
+
+    void hasQuit();
+
 signals:
     void cursorChanged(int x, int y);
     void termTitleChanged(int i, QString title);
@@ -144,7 +157,6 @@ signals:
 private:
     // FIXME:Patrick no friend declaration would be better
     friend class WinConEmulation;
-    WinTerminal* _terminal;
 };
 }
 #endif /* WINCONSOLE_H */

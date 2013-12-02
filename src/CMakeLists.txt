@@ -128,7 +128,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
 if(WIN32)
-    set(konsoleprivate_SRCS ${konsoleprivate_SRCS} WinConsole.cpp WinConEmulation.cpp WinTerminal.cpp)
+    set(konsoleprivate_SRCS ${konsoleprivate_SRCS} WinConsole.cpp WinConEmulation.cpp)
 else()
     set(konsoleprivate_SRCS ${konsoleprivate_SRCS} Pty.cpp Vt102Emulation.cpp)
 endif()
