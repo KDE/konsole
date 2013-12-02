@@ -22,12 +22,8 @@
 // Own
 #include "WinConEmulation.h"
 
-// Standard
-#include <stdio.h>
-
 // Qt
 #include <QtCore/QEvent>
-#include <QtCore/QTimer>
 #include <QtGui/QKeyEvent>
 
 // KDE
@@ -64,22 +60,6 @@ void WinConEmulation::clearEntireScreen()
 
 void WinConEmulation::reset()
 {
-    // Save the current codec so we can set it later.
-    // Ideally we would want to use the profile setting
-    const QTextCodec* currentCodec = codec();
-
-//     resetTokenizer();
-//     resetModes();
-//     resetCharset(0);
-//     _screen[0]->reset();
-//     resetCharset(1);
-//     _screen[1]->reset();
-
-    if (currentCodec)
-        setCodec(currentCodec);
-    else
-        setCodec(LocaleCodec);
-
     bufferedUpdate();
 }
 
@@ -116,6 +96,7 @@ void WinConEmulation::sendString(const char* s, int length)
 
 void WinConEmulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
 {
+    kDebug() << cb << ":" << cx << "x" << cy << eventType;
 }
 
 void WinConEmulation::sendText(const QString& text)
@@ -163,7 +144,10 @@ void WinConEmulation::updateBuffer()
         for(int j = 0; j < _currentScreen->_columns; j++) {
             COORD c;
             c.X = i; c.Y = j;
-            v[j] = Character(ow->at(c));
+            WORD attr = ow->attributesAt(c);
+            v[j] = Character(ow->at(c),
+                             CharacterColor(COLOR_SPACE_SYSTEM, attr & 0xf),
+                             CharacterColor(COLOR_SPACE_SYSTEM, (attr >> 4) & 0xf));
         }
     }
     emit outputChanged();
