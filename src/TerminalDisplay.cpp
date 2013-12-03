@@ -2702,8 +2702,15 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
     if (!text.isEmpty()) {
         text.replace('\n', '\r');
         // perform paste by simulating keypress events
+#ifndef Q_OS_WIN
         QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
         emit keyPressedSignal(&e);
+#else
+        for(int i = 0; i < text.length(); i++) {
+            QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text.mid(i, 1));
+            emit keyPressedSignal(&e);
+        }
+#endif
     }
 }
 
@@ -2765,8 +2772,16 @@ void TerminalDisplay::pasteFromX11Selection(bool appendEnter)
 void TerminalDisplay::inputMethodEvent(QInputMethodEvent* event)
 {
     if (!event->commitString().isEmpty()) {
-        QKeyEvent keyEvent(QEvent::KeyPress, 0, Qt::NoModifier, event->commitString());
+        const QString commitString = event->commitString();
+#ifndef Q_OS_WIN
+        QKeyEvent keyEvent(QEvent::KeyPress, 0, Qt::NoModifier, commitString);
         emit keyPressedSignal(&keyEvent);
+#else
+        for(int i = 0; i < commitString.length(); i++) {
+            QKeyEvent keyEvent(QEvent::KeyPress, 0, Qt::NoModifier, commitString.mid(i, 1));
+            emit keyPressedSignal(&keyEvent);
+        }
+#endif
     }
 
     _inputMethodData.preeditString = event->preeditString();
