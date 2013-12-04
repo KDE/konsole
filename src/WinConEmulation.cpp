@@ -102,7 +102,7 @@ void WinConEmulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
 
 void WinConEmulation::sendText(const QString& text)
 {
-    _console->sendText(reinterpret_cast<const ushort*>(text.utf16()));
+    _console->sendText(reinterpret_cast<const wchar_t*>(text.utf16()));
 }
 
 void WinConEmulation::sendKeyEvent(QKeyEvent* event)
