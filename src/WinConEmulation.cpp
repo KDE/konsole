@@ -45,6 +45,7 @@ using namespace Konsole;
 WinConEmulation::WinConEmulation()
     : Emulation()
 {
+    usesMouseChanged(true);
     reset();
 }
 
