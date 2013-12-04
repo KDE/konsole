@@ -467,12 +467,12 @@ protected slots:
     // used to emit the selectionChanged(QString) signal
     void checkSelectedText();
 
+    void usesMouseChanged(bool usesMouse);
+
 private slots:
     // triggered by timer, causes the emulation to send an updated screen image to each
     // view
     void showBulk();
-
-    void usesMouseChanged(bool usesMouse);
 
 private:
     bool _usesMouse;
