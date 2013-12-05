@@ -107,6 +107,12 @@ void WinConEmulation::sendText(const QString& text)
 
 void WinConEmulation::sendKeyEvent(QKeyEvent* event)
 {
+    if(event->key() == Qt::Key_C && event->modifiers() == Qt::ControlModifier)
+    {
+        _console->inputReader()->sendCtrlC();
+        return;
+    }
+
     bool keyDown = true;
     INPUT_RECORD ir;
     ZeroMemory(&ir, sizeof(INPUT_RECORD));
