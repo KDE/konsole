@@ -92,7 +92,14 @@ int WinConsole::start(const QString& program, const QStringList& arguments, cons
         const int l = entry.indexOf('=');
         const QString var = entry.left(l);
         const QString value = entry.mid(l + 1);
-        env[std::wstring(reinterpret_cast<const WCHAR*>(var.utf16()))] = std::wstring(reinterpret_cast<const WCHAR*>(value.utf16()));
+        if(!(var.isEmpty() || value.isEmpty()))
+        {
+            env[std::wstring(reinterpret_cast<const WCHAR*>(var.utf16()))] = std::wstring(reinterpret_cast<const WCHAR*>(value.utf16()));
+        }
+        if(!var.isEmpty() && value.isEmpty() && env.count(reinterpret_cast<const WCHAR*>(var.utf16())) == 1)
+        {
+            env.erase(reinterpret_cast<const WCHAR*>(var.utf16()));
+        }
     }
     KcwSH::Terminal::setEnvironment(env);
     KcwSH::Terminal::start();
