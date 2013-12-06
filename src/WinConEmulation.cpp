@@ -107,22 +107,36 @@ void WinConEmulation::sendText(const QString& text)
 
 void WinConEmulation::sendKeyEvent(QKeyEvent* event)
 {
+    kDebug() << event;
     if(event->key() == Qt::Key_C && event->modifiers() == Qt::ControlModifier)
     {
         _console->inputReader()->sendCtrlC();
         return;
     }
 
+    const int modifiers = event->modifiers();
+    const bool shiftPressed = modifiers & Qt::ShiftModifier;
+    const bool ctrlPressed = modifiers & Qt::ControlModifier;
+    const bool altPressed = modifiers & Qt::AltModifier;
+    const bool metaPressed = modifiers & Qt::MetaModifier;
+    const bool keyPadPressed = modifiers & Qt::KeypadModifier;
+    const bool enhancedKey = event->nativeModifiers() & 0x1000000;
+
     bool keyDown = true;
+    const int dwControlKeyState = (shiftPressed) ? SHIFT_PRESSED : 0
+                                + (ctrlPressed) ? LEFT_CTRL_PRESSED : 0
+                                + (altPressed) ? LEFT_ALT_PRESSED : 0
+                                + (keyPadPressed) ? NUMLOCK_ON : 0
+                                + (enhancedKey) ? ENHANCED_KEY : 0;
     INPUT_RECORD ir;
     ZeroMemory(&ir, sizeof(INPUT_RECORD));
     ir.EventType = KEY_EVENT;
     ir.Event.KeyEvent.bKeyDown = keyDown;
     ir.Event.KeyEvent.wRepeatCount = event->count();
     ir.Event.KeyEvent.wVirtualKeyCode = event->nativeVirtualKey();
-    ir.Event.KeyEvent.wVirtualScanCode = event->nativeScanCode();
+    ir.Event.KeyEvent.wVirtualScanCode = event->nativeScanCode() & 0xff;
     ir.Event.KeyEvent.uChar.UnicodeChar = static_cast<WCHAR>(event->text().utf16()[0]);
-    ir.Event.KeyEvent.dwControlKeyState = event->nativeModifiers();
+    ir.Event.KeyEvent.dwControlKeyState = dwControlKeyState;
     _console->inputReader()->sendKeyboardEvents(&ir, 1);
 
 }
