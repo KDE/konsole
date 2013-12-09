@@ -153,6 +153,15 @@ char WinConEmulation::eraseChar() const
     return 0;
 }
 
+void WinConEmulation::updateScrollHistory(int x, int y)
+{
+    if(y < 0) for(int i = 0; i > y; i--)
+    {
+        _currentScreen->addHistLine();
+        _currentScreen->scrollUp(0, 1);
+    }
+}
+
 void WinConEmulation::updateBuffer()
 {
     KcwSH::OutputWriter *ow = _console->outputWriter();

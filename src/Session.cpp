@@ -216,6 +216,7 @@ void Session::openTeletype(int fd)
     connect(_shellProcess, SIGNAL(cursorChanged(int, int)), _emulation, SLOT(updateCursorPosition(int, int)));
     connect(_shellProcess, SIGNAL(termTitleChanged(int, QString)), _emulation, SIGNAL(titleChanged(int, QString)));
     connect(_shellProcess, SIGNAL(outputChanged()), _emulation, SLOT(updateBuffer()));
+    connect(_shellProcess, SIGNAL(scrollHappened(int, int)), _emulation, SLOT(updateScrollHistory(int, int)));
     // FIXME:Patrick
     // try to find out how to let interaction happen between WinConsole and WinConEmulation
     qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");

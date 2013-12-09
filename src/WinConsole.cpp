@@ -150,6 +150,14 @@ void WinConsole::titleChanged()
     emit termTitleChanged(0, title);
 }
 
+void WinConsole::hasScrolled()
+{
+//     OutputDebugStringA(__FUNCTION__);
+    COORD c = scrolledDistance();
+    qDebug() << "scrolledDistance:" << c.X << " " << c.Y;
+    emit scrollHappened(c.X, c.Y);
+}
+
 void WinConsole::hasQuit()
 {
 //     OutputDebugStringA(__FUNCTION__);

@@ -70,6 +70,7 @@ public slots:
     virtual void sendMouseEvent(int buttons, int column, int line, int eventType);
     void updateCursorPosition(int x, int y);
     void updateBuffer();
+    void updateScrollHistory(int x, int y);
 
 protected:
     // reimplemented from Emulation

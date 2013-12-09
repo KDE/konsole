@@ -144,6 +144,7 @@ public:
     void sizeChanged();
     void bufferChanged();
     void cursorPositionChanged();
+    void hasScrolled();
 
     void titleChanged();
 
@@ -153,6 +154,7 @@ signals:
     void cursorChanged(int x, int y);
     void termTitleChanged(int i, QString title);
     void outputChanged();
+    void scrollHappened(int x, int y);
 
 private:
     // FIXME:Patrick no friend declaration would be better
