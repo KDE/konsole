@@ -127,7 +127,7 @@ bool WinConsole::flowControlEnabled() const
 
 void WinConsole::sizeChanged()
 {
-    OutputDebugStringA(__FUNCTION__);
+//     OutputDebugStringA(__FUNCTION__);
 }
 
 void WinConsole::bufferChanged()
@@ -152,7 +152,7 @@ void WinConsole::titleChanged()
 
 void WinConsole::hasQuit()
 {
-    OutputDebugStringA(__FUNCTION__);
+//     OutputDebugStringA(__FUNCTION__);
     Terminal::quit();
     emit finished(0, QProcess::NormalExit);
 }

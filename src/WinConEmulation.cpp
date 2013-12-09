@@ -107,7 +107,6 @@ void WinConEmulation::sendText(const QString& text)
 
 void WinConEmulation::sendKeyEvent(QKeyEvent* event)
 {
-    kDebug() << event;
     if(event->key() == Qt::Key_C && event->modifiers() == Qt::ControlModifier)
     {
         _console->inputReader()->sendCtrlC();
