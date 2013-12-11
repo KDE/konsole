@@ -15,16 +15,16 @@ include(KDECMakeSettings)
 include(KDECompilerSettings)
 
 find_package(KF5 CONFIG REQUIRED
-    KDBusAddons KCoreAddons KConfig
-    KCodecs KI18n KService KWidgetsAddons
-    KWindowSystem KCrash Sonnet
-    KArchive ItemModels KAuth KGuiAddons KConfigWidgets
-    ItemViews KNotifications KJS KPty
-    KJobWidgets KIconThemes KCompletion KTextWidgets
-    KF5GlobalAccel XmlGui Solid KWallet KBookmarks KIO KUnitConversion
-    KNotifyConfig KParts Kross
+    DBusAddons CoreAddons Config
+    Codecs I18n Service WidgetsAddons
+    WindowSystem Crash Sonnet
+    Archive ItemModels Auth GuiAddons ConfigWidgets
+    ItemViews Notifications JS Pty
+    JobWidgets IconThemes Completion TextWidgets
+    GlobalAccel XmlGui Solid Wallet Bookmarks KIO UnitConversion
+    NotifyConfig Parts Kross
 )
-find_package(KDE4Support NO_MODULE)
+find_package(KF5KDE4Support NO_MODULE)
 set_package_properties(KDE4Support PROPERTIES TYPE REQUIRED)
 find_package(Qt5Transitional MODULE)
 set_package_properties(Qt5Transitional PROPERTIES TYPE REQUIRED)

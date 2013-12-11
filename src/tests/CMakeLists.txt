@@ -9,7 +9,7 @@ set(KONSOLE_TEST_LIBS Qt5::Test konsoleprivate)
 ##  since make test is supposed to be fully automated.
 
 kde4_add_executable(PartManualTest TEST PartManualTest.cpp)
-target_link_libraries(PartManualTest KF5::XmlGui KF5::KParts KF5::KPty
+target_link_libraries(PartManualTest KF5::XmlGui KF5::Parts KF5::Pty
                                ${KONSOLE_TEST_LIBS})
 
 kde4_add_unit_test(CharacterColorTest CharacterColorTest.cpp)
@@ -29,7 +29,7 @@ target_link_libraries(KeyboardTranslatorTest ${KONSOLE_TEST_LIBS})
 
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     kde4_add_unit_test(PartTest PartTest.cpp)
-    target_link_libraries(PartTest KF5::XmlGui KF5::KParts KF5::KPty
+    target_link_libraries(PartTest KF5::XmlGui KF5::Parts KF5::Pty
                                ${KONSOLE_TEST_LIBS})
 endif()
 
@@ -37,7 +37,7 @@ kde4_add_unit_test(ProfileTest ProfileTest.cpp)
 target_link_libraries(ProfileTest ${KONSOLE_TEST_LIBS})
 
 kde4_add_unit_test(PtyTest PtyTest.cpp)
-target_link_libraries(PtyTest KF5::KPty ${KONSOLE_TEST_LIBS})
+target_link_libraries(PtyTest KF5::Pty ${KONSOLE_TEST_LIBS})
 
 ##kde4_add_unit_test(SessionManagerTest SessionManagerTest.cpp)
 ##target_link_libraries(SessionManagerTest ${KONSOLE_TEST_LIBS})

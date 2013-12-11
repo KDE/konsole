@@ -132,14 +132,14 @@ set(konsole_LIBS ${X11_LIBRARIES}
                  KF5::XmlGui
                  Qt5::PrintSupport
                  Qt5::Xml
-                 KF5::KNotifications
-                 KF5::KWindowSystem
-                 KF5::KTextWidgets
-                 KF5::KGuiAddons
-                 KF5::KIconThemes
-                 KF5::KBookmarks
-                 KF5::KI18n
-                 KF5::KPty
+                 KF5::Notifications
+                 KF5::WindowSystem
+                 KF5::TextWidgets
+                 KF5::GuiAddons
+                 KF5::IconThemes
+                 KF5::Bookmarks
+                 KF5::I18n
+                 KF5::Pty
                  KF5::KDE4Support
                  KF5::KIOWidgets
 )
@@ -180,10 +180,10 @@ kde4_add_kcfg_files(konsole_KDEINIT_SRCS settings/KonsoleSettings.kcfgc)
 kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
 
 kde4_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
-target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::KWindowSystem KF5::KBookmarks
-  KF5::KI18n
+target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::WindowSystem KF5::Bookmarks
+  KF5::I18n
   KF5::KIOWidgets
-  KF5::KNotifyConfig
+  KF5::NotifyConfig
 )
 
 install(TARGETS kdeinit_konsole konsole konsoleprivate
@@ -195,7 +195,7 @@ set(konsolepart_PART_SRCS Part.cpp)
 
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
-target_link_libraries(konsolepart KF5::KParts KF5::XmlGui konsoleprivate)
+target_link_libraries(konsolepart KF5::Parts KF5::XmlGui konsoleprivate)
 install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ### konsoleprofile command-line tool
