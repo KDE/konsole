@@ -21,7 +21,7 @@ find_package(KF5 CONFIG REQUIRED
     KArchive ItemModels KAuth KGuiAddons KConfigWidgets
     ItemViews KNotifications KJS KPty
     KJobWidgets KIconThemes KCompletion KTextWidgets
-    XmlGui Solid KWallet KBookmarks KIO KUnitConversion
+    KF5GlobalAccel XmlGui Solid KWallet KBookmarks KIO KUnitConversion
     KNotifyConfig KParts Kross
 )
 find_package(KDE4Support NO_MODULE)
