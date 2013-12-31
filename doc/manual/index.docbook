@@ -248,7 +248,7 @@ is pressed:
 <guimenuitem>Show Menu Bar</guimenuitem>,
 <guimenuitem>Switch Profile</guimenuitem>,
 <guimenuitem>Edit Current Profile...</guimenuitem>,
-and <guimenuitem>Close Tab</guimenuitem>
+and <guimenuitem>Close Tab</guimenuitem>.
 </para>
 
 <para>In a mouse aware application, press the &Shift; key along with the
@@ -458,16 +458,14 @@ CloseAllTabs=true
 <term><menuchoice>
 <shortcut><keycombo
  action="simul">&Ctrl;&Shift;<keycap>V</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu><guimenuitem>Paste
-</guimenuitem></menuchoice></term>
+<guimenu>Edit</guimenu><guimenuitem>Paste</guimenuitem></menuchoice></term>
 <listitem><para><action>Pastes text from the clipboard at the cursor
 location</action></para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<guimenu>Edit</guimenu><guimenuitem>Select All
-</guimenuitem></menuchoice></term>
+<guimenu>Edit</guimenu><guimenuitem>Select All</guimenuitem></menuchoice></term>
 <listitem><para><action>Selects all</action> the text in current window
 </para></listitem>
 </varlistentry>
@@ -659,8 +657,7 @@ Any output on one view is duplicated in the other view.
 <varlistentry>
 <term><menuchoice>
 <shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>S</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>
-Close Active</guimenuitem></menuchoice>
+<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Close Active</guimenuitem></menuchoice>
 </term>
 <listitem><para><action>Closes the current view</action>
 </para></listitem>
@@ -669,8 +666,7 @@ Close Active</guimenuitem></menuchoice>
 <varlistentry>
 <term><menuchoice>
 <shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>O</keycap></keycombo></shortcut>
-<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>
-Close Others</guimenuitem></menuchoice>
+<guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Close Others</guimenuitem></menuchoice>
 </term>
 <listitem><para><action>Closes all non-current views</action>
 </para></listitem>
