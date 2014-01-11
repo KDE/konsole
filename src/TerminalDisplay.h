@@ -534,6 +534,9 @@ public slots:
     /** See setUsesMouse() */
     bool usesMouse() const;
 
+    void setBracketedPasteMode(bool bracketedPasteMode);
+    bool bracketedPasteMode() const;
+
     /**
      * Shows a notification that a bell event has occurred in the terminal.
      * TODO: More documentation here
@@ -808,6 +811,7 @@ private:
     bool _showTerminalSizeHint;
     bool _bidiEnabled;
     bool _mouseMarks;
+    bool _bracketedPasteMode;
 
     QPoint  _iPntSel; // initial selection point
     QPoint  _pntSel; // current selection point

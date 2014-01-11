@@ -46,7 +46,8 @@ class QKeyEvent;
 #define MODE_Ansi            (MODES_SCREEN+10)   // Use US Ascii for character sets G0-G3 (DECANM)
 #define MODE_132Columns      (MODES_SCREEN+11)  // 80 <-> 132 column mode switch (DECCOLM)
 #define MODE_Allow132Columns (MODES_SCREEN+12)  // Allow DECCOLM mode
-#define MODE_total           (MODES_SCREEN+13)
+#define MODE_BracketedPaste  (MODES_SCREEN+13)  // Xterm-style bracketed paste mode
+#define MODE_total           (MODES_SCREEN+14)
 
 namespace Konsole
 {

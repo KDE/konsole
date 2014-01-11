@@ -326,6 +326,11 @@ void Session::addView(TerminalDisplay* widget)
 
     widget->setUsesMouse(_emulation->programUsesMouse());
 
+    connect(_emulation, SIGNAL(programBracketedPasteModeChanged(bool)),
+            widget, SLOT(setBracketedPasteMode(bool)));
+
+    widget->setBracketedPasteMode(_emulation->programBracketedPasteMode());
+
     widget->setScreenWindow(_emulation->createWindow());
 
     //connect view signals and slots
