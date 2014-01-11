@@ -39,6 +39,7 @@ Emulation::Emulation() :
     _decoder(0),
     _keyTranslator(0),
     _usesMouse(false),
+    _bracketedPasteMode(false),
     _imageSizeInitialized(false)
 {
     // create screens with a default size
@@ -52,6 +53,8 @@ Emulation::Emulation() :
     // listen for mouse status changes
     connect(this , SIGNAL(programUsesMouseChanged(bool)) ,
             SLOT(usesMouseChanged(bool)));
+    connect(this , SIGNAL(programBracketedPasteModeChanged(bool)) ,
+            SLOT(bracketedPasteModeChanged(bool)));
 }
 
 bool Emulation::programUsesMouse() const
@@ -62,6 +65,16 @@ bool Emulation::programUsesMouse() const
 void Emulation::usesMouseChanged(bool usesMouse)
 {
     _usesMouse = usesMouse;
+}
+
+bool Emulation::programBracketedPasteMode() const
+{
+    return _bracketedPasteMode;
+}
+
+void Emulation::bracketedPasteModeChanged(bool bracketedPasteMode)
+{
+    _bracketedPasteMode = bracketedPasteMode;
 }
 
 ScreenWindow* Emulation::createWindow()
