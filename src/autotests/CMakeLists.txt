@@ -1,3 +1,5 @@
+include(ECMMarkAsTest)
+
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${KDE4_KPTY_INCLUDES}
                    ${KDE4_KPARTS_INCLUDES}
@@ -5,46 +7,68 @@ include_directories(${KDE4_KPTY_INCLUDES}
 
 set(KONSOLE_TEST_LIBS Qt5::Test konsoleprivate)
 
-kde4_add_unit_test(CharacterColorTest CharacterColorTest.cpp)
+add_executable(CharacterColorTest CharacterColorTest.cpp)
+ecm_mark_as_test(CharacterColorTest)
+add_test(CharacterColorTest CharacterColorTest)
 target_link_libraries(CharacterColorTest ${KONSOLE_TEST_LIBS})
 
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    kde4_add_unit_test(DBusTest DBusTest.cpp)
+    add_executable(DBusTest DBusTest.cpp)
+    ecm_mark_as_test(DBusTest)
+    add_test(DBusTest DBusTest)
     target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus)
 endif()
 
-kde4_add_unit_test(HistoryTest HistoryTest.cpp)
+add_executable(HistoryTest HistoryTest.cpp)
+ecm_mark_as_test(HistoryTest)
+add_test(HistoryTest HistoryTest)
 target_link_libraries(HistoryTest ${KONSOLE_TEST_LIBS})
 
 
-kde4_add_unit_test(KeyboardTranslatorTest KeyboardTranslatorTest.cpp)
+add_executable(KeyboardTranslatorTest KeyboardTranslatorTest.cpp)
+ecm_mark_as_test(KeyboardTranslatorTest)
+add_test(KeyboardTranslatorTest KeyboardTranslatorTest)
 target_link_libraries(KeyboardTranslatorTest ${KONSOLE_TEST_LIBS})
 
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    kde4_add_unit_test(PartTest PartTest.cpp)
+    add_executable(PartTest PartTest.cpp)
+    ecm_mark_as_test(PartTest)
+    add_test(PartTest PartTest)
     target_link_libraries(PartTest KF5::XmlGui KF5::Parts KF5::Pty
                                ${KONSOLE_TEST_LIBS})
 endif()
 
-kde4_add_unit_test(ProfileTest ProfileTest.cpp)
+add_executable(ProfileTest ProfileTest.cpp)
+ecm_mark_as_test(ProfileTest)
+add_test(ProfileTest ProfileTest)
 target_link_libraries(ProfileTest ${KONSOLE_TEST_LIBS})
 
-kde4_add_unit_test(PtyTest PtyTest.cpp)
+add_executable(PtyTest PtyTest.cpp)
+ecm_mark_as_test(PtyTest)
+add_test(PtyTest PtyTest)
 target_link_libraries(PtyTest KF5::Pty ${KONSOLE_TEST_LIBS})
 
 ##kde4_add_unit_test(SessionManagerTest SessionManagerTest.cpp)
 ##target_link_libraries(SessionManagerTest ${KONSOLE_TEST_LIBS})
 
-kde4_add_unit_test(SessionTest SessionTest.cpp)
+add_executable(SessionTest SessionTest.cpp)
+ecm_mark_as_test(SessionTest)
+add_test(SessionTest SessionTest)
 target_link_libraries(SessionTest ${KONSOLE_TEST_LIBS})
 
-kde4_add_unit_test(ShellCommandTest ShellCommandTest.cpp)
+add_executable(ShellCommandTest ShellCommandTest.cpp)
+ecm_mark_as_test(ShellCommandTest)
+add_test(ShellCommandTest ShellCommandTest)
 target_link_libraries(ShellCommandTest ${KONSOLE_TEST_LIBS})
 
-kde4_add_unit_test(TerminalCharacterDecoderTest
-                  TerminalCharacterDecoderTest.cpp)
+add_executable(TerminalCharacterDecoderTest
+               TerminalCharacterDecoderTest.cpp)
+ecm_mark_as_test(TerminalCharacterDecoderTest)
+add_test(TerminalCharacterDecoderTest TerminalCharacterDecoderTest)
 target_link_libraries(TerminalCharacterDecoderTest ${KONSOLE_TEST_LIBS})
 
-kde4_add_unit_test(TerminalTest TerminalTest.cpp)
+add_executable(TerminalTest TerminalTest.cpp)
+ecm_mark_as_test(TerminalTest)
+add_test(TerminalTest TerminalTest)
 target_link_libraries(TerminalTest ${KONSOLE_TEST_LIBS})
 
