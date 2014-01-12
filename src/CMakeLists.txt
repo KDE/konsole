@@ -65,14 +65,14 @@ endif()
 # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
 
 # Generate dbus .xml files; do not store .xml in source folder
-qt4_generate_dbus_interface(Session.h org.kde.konsole.Session.xml OPTIONS -m)
-qt4_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
+qt5_generate_dbus_interface(Session.h org.kde.konsole.Session.xml OPTIONS -m)
+qt5_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
 
-qt4_add_dbus_adaptor(sessionadaptors_SRCS
+qt5_add_dbus_adaptor(sessionadaptors_SRCS
                     ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
                     Session.h
                     Konsole::Session)
-qt4_add_dbus_adaptor(windowadaptors_SRCS
+qt5_add_dbus_adaptor(windowadaptors_SRCS
                     ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                     ViewManager.h
                     Konsole::ViewManager)
@@ -150,6 +150,7 @@ endif()
 
 ### Konsole Application
 
+###qt5_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
 kde4_add_ui_files(konsoleprivate_SRCS ColorSchemeEditor.ui
                                       CopyInputDialog.ui
                                       EditProfileDialog.ui
@@ -163,7 +164,7 @@ kde4_add_ui_files(konsoleprivate_SRCS ColorSchemeEditor.ui
                                       settings/GeneralSettings.ui
                                       settings/TabBarSettings.ui)
 
-kde4_add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
+add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
 target_link_libraries(konsoleprivate ${konsole_LIBS}
 )
 target_link_libraries(konsoleprivate LINK_INTERFACE_LIBRARIES ${konsole_LIBS})
@@ -175,11 +176,11 @@ set(konsole_KDEINIT_SRCS
    settings/GeneralSettings.cpp
    settings/TabBarSettings.cpp)
 
-kde4_add_kcfg_files(konsole_KDEINIT_SRCS settings/KonsoleSettings.kcfgc)
+kconfig_add_kcfg_files(konsole_KDEINIT_SRCS settings/KonsoleSettings.kcfgc)
 
-kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
+###kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
 
-kde4_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
+kf5_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
 target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::WindowSystem KF5::Bookmarks
   KF5::I18n
   KF5::KIOWidgets
