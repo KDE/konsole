@@ -1,18 +1,25 @@
-cmake_minimum_required(VERSION 2.8.12)
-
+# Konsole project
 project(Konsole)
 
-include(FeatureSummary)
-find_package(Qt5Core NO_MODULE)
-set_package_properties(Qt5Core PROPERTIES TYPE REQUIRED)
-message(STATUS "Qt5 build")
-find_package(ECM 0.0.9 NO_MODULE)
-set_package_properties(ECM PROPERTIES TYPE REQUIRED)
+# minimal requirements
+cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
+set (QT_MIN_VERSION "5.2.0")
+
+find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
+include(ECMOptionalAddSubdirectory)
+include(ECMInstallIcons)
+include(ECMSetupVersion)
+include(ECMMarkNonGuiExecutable)
+include(ECMGenerateHeaders)
+include(GenerateExportHeader)
+include(FeatureSummary)
+
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Widgets Script Test)
 
 find_package(KF5 CONFIG REQUIRED
     DBusAddons CoreAddons Config
@@ -26,8 +33,7 @@ find_package(KF5 CONFIG REQUIRED
 )
 find_package(KF5KDE4Support NO_MODULE)
 set_package_properties(KDE4Support PROPERTIES TYPE REQUIRED)
-find_package(Qt5Transitional MODULE)
-set_package_properties(Qt5Transitional PROPERTIES TYPE REQUIRED)
+
 remove_definitions(-DQT_NO_SIGNALS_SLOTS_KEYWORDS -DQT_NO_CAST_FROM_ASCII)
 add_definitions(-Wno-deprecated-declarations)
 set(KDE4_KIO_LIBS ${KDE4_KIO_LIBS} ${KDE4Support_LIBRARIES})
