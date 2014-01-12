@@ -46,7 +46,7 @@ if(KONSOLE_BUILD_FONTEMBEDDER OR KONSOLE_GENERATE_LINEFONT)
   ### Font Embedder
   set(fontembedder_SRCS fontembedder.cpp)
   add_executable(fontembedder ${fontembedder_SRCS})
-  target_link_libraries(fontembedder KF5::KIOWidgets) // FIXME
+  target_link_libraries(fontembedder KF5::KIOWidgets) ### FIXME
 
   ### Line graphics font
   ### The below cmake doesn't work; it might be possible to automate it
