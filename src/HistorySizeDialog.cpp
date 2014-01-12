@@ -24,6 +24,8 @@
 // Konsole
 #include "ui_HistorySizeDialog.h"
 
+#include <KLocalizedString>
+
 using namespace Konsole;
 
 HistorySizeDialog::HistorySizeDialog(QWidget* parent)

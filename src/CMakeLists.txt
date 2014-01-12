@@ -150,19 +150,18 @@ endif()
 
 ### Konsole Application
 
-###qt5_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
-kde4_add_ui_files(konsoleprivate_SRCS ColorSchemeEditor.ui
-                                      CopyInputDialog.ui
-                                      EditProfileDialog.ui
-                                      KeyBindingEditor.ui
-                                      ManageProfilesDialog.ui
-                                      RenameTabDialog.ui
-                                      RenameTabWidget.ui
-                                      HistorySizeDialog.ui
-                                      HistorySizeWidget.ui
-                                      PrintOptions.ui
-                                      settings/GeneralSettings.ui
-                                      settings/TabBarSettings.ui)
+qt5_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
+                                CopyInputDialog.ui
+                                EditProfileDialog.ui
+                                KeyBindingEditor.ui
+                                ManageProfilesDialog.ui
+                                RenameTabDialog.ui
+                                RenameTabWidget.ui
+                                HistorySizeDialog.ui
+                                HistorySizeWidget.ui
+                                PrintOptions.ui
+                                settings/GeneralSettings.ui
+                                settings/TabBarSettings.ui)
 
 add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
 target_link_libraries(konsoleprivate ${konsole_LIBS}

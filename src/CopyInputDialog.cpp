@@ -26,6 +26,8 @@
 // Konsole
 #include "ui_CopyInputDialog.h"
 
+#include <KLocalizedString>
+
 using namespace Konsole;
 
 CopyInputDialog::CopyInputDialog(QWidget* parent)

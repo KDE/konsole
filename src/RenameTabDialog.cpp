@@ -23,6 +23,8 @@
 // Konsole
 #include "ui_RenameTabDialog.h"
 
+#include <KLocalizedString>
+
 using Konsole::RenameTabDialog;
 
 RenameTabDialog::RenameTabDialog(QWidget* parent)

@@ -49,6 +49,7 @@
 #include <KTextEdit>
 #include <KMessageBox>
 #include <KUrl>
+#include <KLocalizedString>
 
 // Konsole
 #include "ColorScheme.h"
