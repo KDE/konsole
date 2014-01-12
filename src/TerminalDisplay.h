@@ -768,6 +768,8 @@ private:
 
     QPoint findLineStart(const QPoint &pnt);
     QPoint findLineEnd(const QPoint &pnt);
+    QPoint findWordStart(const QPoint &pnt);
+    QPoint findWordEnd(const QPoint &pnt);
 
     // the window onto the terminal screen which this display
     // is currently showing.
