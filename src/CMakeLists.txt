@@ -34,6 +34,7 @@ configure_file(config-konsole.h.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h)
 
 ### Tests
+add_subdirectory(autotests)
 add_subdirectory(tests)
 
 ### Font Embedder and LineFont.h
