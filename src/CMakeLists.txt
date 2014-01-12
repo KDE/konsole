@@ -9,8 +9,7 @@ else()
   message(WARNING "LibKonq does not exist for KF5 yet, reenable this check once it exists.")
 endif()
 
-macro_bool_to_01(LIBKONQ_FOUND HAVE_LIBKONQ)
-
+set(HAVE_LIBKONQ ${LIBKONQ_FOUND})
 if(HAVE_LIBKONQ)
   include_directories(${LIBKONQ_INCLUDE_DIR})
 endif()
