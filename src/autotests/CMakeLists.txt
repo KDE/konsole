@@ -1,9 +1,6 @@
 include(ECMMarkAsTest)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
-include_directories(${KDE4_KPTY_INCLUDES}
-                   ${KDE4_KPARTS_INCLUDES}
-                   ${QT_QTTEST_INCLUDES})
 
 set(KONSOLE_TEST_LIBS Qt5::Test konsoleprivate)
 
@@ -47,9 +44,6 @@ add_executable(PtyTest PtyTest.cpp)
 ecm_mark_as_test(PtyTest)
 add_test(PtyTest PtyTest)
 target_link_libraries(PtyTest KF5::Pty ${KONSOLE_TEST_LIBS})
-
-##kde4_add_unit_test(SessionManagerTest SessionManagerTest.cpp)
-##target_link_libraries(SessionManagerTest ${KONSOLE_TEST_LIBS})
 
 add_executable(SessionTest SessionTest.cpp)
 ecm_mark_as_test(SessionTest)
