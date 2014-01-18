@@ -174,7 +174,7 @@ void KeyBindingEditor::setup(const KeyboardTranslator* translator)
     _translator = new KeyboardTranslator(*translator);
 
     // setup description edit
-    _ui->descriptionEdit->setClearButtonShown(true);
+    _ui->descriptionEdit->setClearButtonEnabled(true);
     _ui->descriptionEdit->setText(translator->description());
 
     // setup key binding table
