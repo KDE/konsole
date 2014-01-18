@@ -246,7 +246,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
         ProfileGroup::Ptr group = profile->asGroup();
         if (!group || group->profiles().count() < 2) {
             _ui->profileNameEdit->setText(profile->name());
-            _ui->profileNameEdit->setClearButtonShown(true);
+            _ui->profileNameEdit->setClearButtonEnabled(true);
 
             _ui->emptyNameWarningWidget->setVisible(profile->name().isEmpty());
             _ui->emptyNameWarningWidget->setText(i18n("Profile name is empty."));
@@ -261,16 +261,18 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
 
     ShellCommand command(profile->command() , profile->arguments());
     _ui->commandEdit->setText(command.fullCommand());
-    KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
-    exeCompletion->setParent(this);
-    exeCompletion->setDir(QUrl());
-    _ui->commandEdit->setCompletionObject(exeCompletion);
+#pragma message("Look at this setCompletionObject again")
+//    KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
+//    exeCompletion->setParent(this);
+//    exeCompletion->setDir(QUrl());
+//    _ui->commandEdit->setCompletionObject(exeCompletion);
 
     _ui->initialDirEdit->setText(profile->defaultWorkingDirectory());
-    KUrlCompletion* dirCompletion = new KUrlCompletion(KUrlCompletion::DirCompletion);
-    dirCompletion->setParent(this);
-    _ui->initialDirEdit->setCompletionObject(dirCompletion);
-    _ui->initialDirEdit->setClearButtonShown(true);
+#pragma message("Look at this setCompletionObject again")
+//    KUrlCompletion* dirCompletion = new KUrlCompletion(KUrlCompletion::DirCompletion);
+//    dirCompletion->setParent(this);
+//    _ui->initialDirEdit->setCompletionObject(dirCompletion);
+    _ui->initialDirEdit->setClearButtonEnabled(true);
 
     _ui->dirSelectButton->setIcon(KIcon("folder-open"));
     _ui->iconSelectButton->setIcon(KIcon(profile->icon()));
