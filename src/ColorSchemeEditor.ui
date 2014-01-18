@@ -27,7 +27,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KLineEdit" name="descriptionEdit"/>
+      <widget class="QLineEdit" name="descriptionEdit"/>
      </item>
     </layout>
    </item>
@@ -85,7 +85,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KLineEdit" name="wallpaperPath">
+      <widget class="QLineEdit" name="wallpaperPath">
        <property name="toolTip">
         <string>Edit the path of the background image</string>
        </property>
@@ -125,11 +125,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
   <customwidget>
    <class>KMessageWidget</class>
    <extends>QFrame</extends>

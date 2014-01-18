@@ -63,7 +63,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     _ui->setupUi(mainWidget());
 
     // description edit
-    _ui->descriptionEdit->setClearButtonShown(true);
+    _ui->descriptionEdit->setClearButtonEnabled(true);
     connect(_ui->descriptionEdit , SIGNAL(textChanged(QString)) , this ,
             SLOT(setDescription(QString)));
 
@@ -78,10 +78,11 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
             SLOT(setRandomizedBackgroundColor(bool)));
 
     // wallpaper stuff
-    KUrlCompletion* fileCompletion = new KUrlCompletion(KUrlCompletion::FileCompletion);
-    fileCompletion->setParent(this);
-    _ui->wallpaperPath->setCompletionObject(fileCompletion);
-    _ui->wallpaperPath->setClearButtonShown(true);
+#pragma message("Look at this setCompletionObject again")
+//    KUrlCompletion* fileCompletion = new KUrlCompletion(KUrlCompletion::FileCompletion);
+//    fileCompletion->setParent(this);
+//    _ui->wallpaperPath->setCompletionObject(fileCompletion);
+    _ui->wallpaperPath->setClearButtonEnabled(true);
     _ui->wallpaperSelectButton->setIcon(KIcon("image-x-generic"));
 
     connect(_ui->wallpaperSelectButton, SIGNAL(clicked()),
