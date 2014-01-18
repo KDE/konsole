@@ -30,7 +30,7 @@
 
 // KDE
 #include <KColorScheme>
-#include <KLineEdit>
+#include <QLineEdit>
 #include <KLocalizedString>
 #include <KIcon>
 
@@ -57,8 +57,8 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     connect(closeButton , SIGNAL(clicked()) , this , SIGNAL(closeClicked()));
 
     QLabel* findLabel = new QLabel(i18nc("@label:textbox", "Find:"), this);
-    _searchEdit = new KLineEdit(this);
-    _searchEdit->setClearButtonShown(true);
+    _searchEdit = new QLineEdit(this);
+    _searchEdit->setClearButtonEnabled(true);
     _searchEdit->installEventFilter(this);
     _searchEdit->setObjectName(QLatin1String("search-edit"));
     _searchEdit->setToolTip(i18nc("@info:tooltip", "Enter the text to search for here"));
