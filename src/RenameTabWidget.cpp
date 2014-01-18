@@ -31,8 +31,8 @@ RenameTabWidget::RenameTabWidget(QWidget* parent)
     _ui = new Ui::RenameTabWidget();
     _ui->setupUi(this);
 
-    _ui->tabTitleEdit->setClearButtonShown(true);
-    _ui->remoteTabTitleEdit->setClearButtonShown(true);
+    _ui->tabTitleEdit->setClearButtonEnabled(true);
+    _ui->remoteTabTitleEdit->setClearButtonEnabled(true);
 
     connect(_ui->tabTitleEdit, SIGNAL(textChanged(QString)), this,
             SIGNAL(tabTitleFormatChanged(QString)));

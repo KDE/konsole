@@ -31,7 +31,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="KLineEdit" name="tabTitleEdit">
+       <widget class="QLineEdit" name="tabTitleEdit">
         <property name="toolTip">
          <string>Normal tab title format</string>
         </property>
@@ -51,7 +51,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="KLineEdit" name="remoteTabTitleEdit">
+       <widget class="QLineEdit" name="remoteTabTitleEdit">
         <property name="toolTip">
          <string>Tab title format used when a remote command (e.g. connection to another computer via SSH) is being executed</string>
         </property>
@@ -66,11 +66,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
   <customwidget>
    <class>Konsole::TabTitleFormatButton</class>
    <extends>QPushButton</extends>
