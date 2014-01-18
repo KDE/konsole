@@ -44,7 +44,7 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     connect(_ui->selectAllButton, SIGNAL(clicked()), this, SLOT(selectAll()));
     connect(_ui->deselectAllButton, SIGNAL(clicked()), this, SLOT(deselectAll()));
 
-    _ui->filterEdit->setClearButtonShown(true);
+    _ui->filterEdit->setClearButtonEnabled(true);
     _ui->filterEdit->setFocus();
 
     _model = new CheckableSessionModel(parent);
