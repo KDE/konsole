@@ -266,7 +266,11 @@ void MainWindow::updateWindowCaption()
         caption = userTitle;
     }
 
-    setCaption(caption);
+    if (KonsoleSettings::showAppNameOnTitleBar()) {
+        setCaption(caption);
+    } else {
+        setPlainCaption(caption);
+    }
 }
 
 void MainWindow::updateWindowIcon()
