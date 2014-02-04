@@ -46,8 +46,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2013-10-30</date>
-<releaseinfo>2.11 (&kde; 4.12)</releaseinfo>
+<date>2014-02-04</date>
+<releaseinfo>2.13 (&kde; 4.13)</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
