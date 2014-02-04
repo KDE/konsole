@@ -170,6 +170,9 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("tabs-from-file <file>",
                 ki18nc("@info:shell", "Create tabs as specified in given tabs configuration"
                       " file"));
+    options.add("background-mode",
+                ki18nc("@info:shell", "Start Konsole in the background and bring to the front"
+                      " when Ctrl+Shift+F12 (by default) is pressed"));
     options.add("show-menubar", ki18nc("@info:shell", "Show the menubar, overriding the default setting"));
     options.add("hide-menubar", ki18nc("@info:shell", "Hide the menubar, overriding the default setting"));
     options.add("show-tabbar", ki18nc("@info:shell", "Show the tabbar, overriding the default setting"));

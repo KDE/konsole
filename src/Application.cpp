@@ -46,6 +46,8 @@ Application::Application() : KUniqueApplication()
 
 void Application::init()
 {
+    _backgroundInstance = 0;
+
 #if defined(Q_WS_MAC)
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
     // will work correctly in the terminal
@@ -125,22 +127,28 @@ int Application::newInstance()
             }
         }
 
-        // Qt constrains top-level windows which have not been manually
-        // resized (via QWidget::resize()) to a maximum of 2/3rds of the
-        //  screen size.
-        //
-        // This means that the terminal display might not get the width/
-        // height it asks for.  To work around this, the widget must be
-        // manually resized to its sizeHint().
-        //
-        // This problem only affects the first time the application is run.
-        // run. After that KMainWindow will have manually resized the
-        // window to its saved size at this point (so the Qt::WA_Resized
-        // attribute will be set)
-        if (!window->testAttribute(Qt::WA_Resized))
-            window->resize(window->sizeHint());
+        // if the background-mode argument is supplied, start the background
+        // session ( or bring to the front if it already exists )
+        if (args->isSet("background-mode")) {
+            startBackgroundMode(window);
+        } else {
+            // Qt constrains top-level windows which have not been manually
+            // resized (via QWidget::resize()) to a maximum of 2/3rds of the
+            //  screen size.
+            //
+            // This means that the terminal display might not get the width/
+            // height it asks for.  To work around this, the widget must be
+            // manually resized to its sizeHint().
+            //
+            // This problem only affects the first time the application is run.
+            // run. After that KMainWindow will have manually resized the
+            // window to its saved size at this point (so the Qt::WA_Resized
+            // attribute will be set)
+            if (!window->testAttribute(Qt::WA_Resized))
+                window->resize(window->sizeHint());
 
-        window->show();
+            window->show();
+        }
     }
 
     firstInstance = false;
@@ -422,6 +430,38 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
         return newProfile;
     } else {
         return baseProfile;
+    }
+}
+
+void Application::startBackgroundMode(MainWindow* window)
+{
+    if (_backgroundInstance) {
+        return;
+    }
+
+    KAction* action = window->actionCollection()->addAction("toggle-background-window");
+    action->setObjectName(QLatin1String("Konsole Background Mode"));
+    action->setText(i18n("Toggle Background Window"));
+    action->setGlobalShortcut(KShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F12)));
+
+    connect(action, SIGNAL(triggered()),
+            this, SLOT(toggleBackgroundInstance()));
+
+    _backgroundInstance = window;
+}
+
+void Application::toggleBackgroundInstance()
+{
+    Q_ASSERT(_backgroundInstance);
+
+    if (!_backgroundInstance->isVisible()) {
+        _backgroundInstance->show();
+        // ensure that the active terminal display has the focus. Without
+        // this, an odd problem occurred where the focus widget would change
+        // each time the background instance was shown
+        _backgroundInstance->setFocus();
+    } else {
+        _backgroundInstance->hide();
     }
 }
 
