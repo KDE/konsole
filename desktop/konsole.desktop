@@ -5,6 +5,7 @@ Exec=konsole
 Icon=utilities-terminal
 Terminal=false
 Categories=Qt;KDE;System;TerminalEmulator;
+Actions=NewWindow;
 X-DocPath=konsole/index.html
 X-DBUS-StartupType=Unique
 X-KDE-StartupNotify=true
@@ -187,3 +188,8 @@ GenericName[wa]=Terminå
 GenericName[x-test]=xxTerminalxx
 GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
+
+[Desktop Action NewWindow]
+Name=Open a New Window
+Exec=konsole
+OnlyShowIn=Unity;
