@@ -1041,6 +1041,12 @@ For more information, please visit
 </varlistentry>
 
 <varlistentry>
+<term><option>--background-mode</option></term>
+<listitem><para><action>Start &konsole;</action> in the background and bring to the front when <keycombo action="simul">&Ctrl;&Shift;<keycap>F12</keycap></keycombo> (by default) is pressed.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
 <term><option>--new-tab</option></term>
 <listitem><para><action>Create a new tab</action> in an existing window rather than creating a new window.
 </para></listitem>
