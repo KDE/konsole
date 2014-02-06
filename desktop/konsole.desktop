@@ -191,5 +191,11 @@ GenericName[zh_TW]=終端機
 
 [Desktop Action NewWindow]
 Name=Open a New Window
+Name[de]=Ein neues Fenster öffnen
+Name[nl]=Een nieuw venster openen
+Name[pt]=Abrir uma Nova Janela
+Name[sv]=Öppna ett nytt fönster
+Name[uk]=Відкрити нове вікно
+Name[x-test]=xxOpen a New Windowxx
 Exec=konsole
 OnlyShowIn=Unity;
