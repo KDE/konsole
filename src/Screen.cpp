@@ -204,6 +204,14 @@ void Screen::deleteChars(int n)
     Q_ASSERT(_cuX + n <= _screenLines[_cuY].count());
 
     _screenLines[_cuY].remove(_cuX, n);
+
+    // Append space(s) with current attributes
+    Character spaceWithCurrentAttrs(' ', _effectiveForeground,
+                                    _effectiveBackground,
+                                    _effectiveRendition, false);
+
+    for (int i = 0; i < n; i++)
+        _screenLines[_cuY].append(spaceWithCurrentAttrs);
 }
 
 void Screen::insertChars(int n)
