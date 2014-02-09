@@ -40,13 +40,13 @@
 <holder>&Jonathan.Singer;</holder>
 </copyright>
 <copyright>
-<year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year>
+<year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year>
 <holder>&Kurt.Hindenburg;</holder>
 </copyright>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2014-02-04</date>
+<date>2014-02-09</date>
 <releaseinfo>2.13 (&kde; 4.13)</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
@@ -1269,6 +1269,83 @@ If you start &konsole; from a terminal you may need to change
 <para>
 For more information, please visit
 <ulink url="http://techbase.kde.org/Development/Tutorials/D-Bus/Introduction">&DBus; tutorial</ulink>.
+</para>
+
+</chapter>
+
+<chapter id="tabbarstylsheet">
+<title>Using Style Sheet for the Tab Bar</title>
+<para>
+The default style sheet for the tab bar settings the minimum and maximum tab
+widths.  The user can create a .css file and have Konsole use that as the
+style sheet for the tab bar.  In the .css file, the widget to use is
+QTabBar::tab.
+
+For more information, consider reading
+<ulink url="http://qt-project.org/doc/qt-4.8/stylesheet.html">Qt Project page for Style Sheets</ulink>
+</para>
+
+<para>
+Examples:
+
+</para>
+
+<para>
+<itemizedlist mark='opencircle'>
+
+<listitem><para>
+Change the selected tab's background to a light gray
+<programlisting>
+QTabBar::tab:selected {
+    background: #999999
+}
+</programlisting>
+</para></listitem>
+
+
+<listitem><para>
+Change the selected tab's text to red
+<programlisting>
+QTabBar::tab:selected {
+    color: red
+}
+</programlisting>
+</para></listitem>
+
+<listitem><para>
+All tabs will be at least 200 pixels in width
+<programlisting>
+QTabBar::tab {
+    min-width: 200px
+}
+</programlisting>
+</para></listitem>
+
+<listitem><para>
+Only the selected tab will be at least 200 pixels in width
+<programlisting>
+QTabBar::tab::selected {
+    min-width: 200px
+}
+</programlisting>
+</para></listitem>
+
+<listitem><para>
+Any of these can be combined in one file
+<programlisting>
+QTabBar::tab::selected {
+    background: #999999;
+    color: red;
+    min-width: 200px;
+}
+QTabBar::tab {
+    min-width: 100px
+}
+</programlisting>
+</para></listitem>
+
+
+</itemizedlist>
 </para>
 
 </chapter>
