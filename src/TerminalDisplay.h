@@ -683,6 +683,8 @@ private slots:
 
     void dropMenuCdActionTriggered();
 
+    void dismissOutputSuspendedMessage();
+
 private:
     // -- Drawing helpers --
 

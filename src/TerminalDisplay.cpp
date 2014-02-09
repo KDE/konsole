@@ -2900,7 +2900,8 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _outputSuspendedLabel = new QLabel(i18n("<qt>Output has been "
                                                 "<a href=\"http://en.wikipedia.org/wiki/Software_flow_control\">suspended</a>"
                                                 " by pressing Ctrl+S."
-                                                "  Press <b>Ctrl+Q</b> to resume.</qt>"),
+                                                "  Press <b>Ctrl+Q</b> to resume."
+                                                "  This message will be dismissed in 10 seconds.</qt>"),
                                            this);
 
         QPalette palette(_outputSuspendedLabel->palette());
@@ -2908,7 +2909,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _outputSuspendedLabel->setPalette(palette);
         _outputSuspendedLabel->setAutoFillBackground(true);
         _outputSuspendedLabel->setBackgroundRole(QPalette::Base);
-        _outputSuspendedLabel->setFont(KGlobalSettings::generalFont());
+        _outputSuspendedLabel->setFont(KGlobalSettings::smallestReadableFont());
         _outputSuspendedLabel->setContentsMargins(5, 5, 5, 5);
 
         //enable activation of "Xon/Xoff" link in label
@@ -2921,9 +2922,19 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding,
                                              QSizePolicy::Expanding),
                              1, 0);
+
+    }
+    // Remove message after a few seconds
+    if (suspended) {
+        QTimer::singleShot(10000, this, SLOT(dismissOutputSuspendedMessage()));
     }
 
     _outputSuspendedLabel->setVisible(suspended);
+}
+
+void TerminalDisplay::dismissOutputSuspendedMessage()
+{
+    outputSuspended(false);
 }
 
 void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode mode, int amount)
