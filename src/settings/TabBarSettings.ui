@@ -7,14 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>503</width>
-    <height>224</height>
+    <height>375</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout">
-   <property name="margin">
-    <number>0</number>
-   </property>
-   <item>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox_1">
      <property name="title">
       <string>Appearance</string>
@@ -30,7 +27,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="0" column="1" colspan="2">
        <widget class="KComboBox" name="kcfg_TabBarVisibility">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -65,7 +62,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="1" column="1" colspan="2">
        <widget class="KComboBox" name="kcfg_TabBarPosition">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -85,17 +82,37 @@
         </item>
        </widget>
       </item>
-      <item row="2" column="0" colspan="2">
+      <item row="2" column="0" colspan="3">
        <widget class="QCheckBox" name="kcfg_ShowQuickButtons">
         <property name="text">
          <string>Show 'New Tab' and 'Close Tab' buttons</string>
         </property>
        </widget>
       </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QCheckBox" name="kcfg_TabBarUseUserStyleSheet">
+        <property name="text">
+         <string>Use user-defined stylesheet</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="KUrlRequester" name="kcfg_TabBarUserStyleSheetFile">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>2</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="filter">
+         <string>text/css</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
-   <item>
+   <item row="1" column="0">
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
       <string>Behavior</string>
@@ -134,7 +151,7 @@
      </layout>
     </widget>
    </item>
-   <item>
+   <item row="2" column="0">
     <spacer>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -154,6 +171,11 @@
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KUrlRequester</class>
+   <extends>QFrame</extends>
+   <header>kurlrequester.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

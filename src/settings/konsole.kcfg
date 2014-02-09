@@ -58,6 +58,14 @@
       <label>Control the visual style of the tab bar</label>
       <default>QTabBar::tab { min-width: 2em ; max-width: 25em }</default>
     </entry>
+    <entry name="TabBarUseUserStyleSheet" type="Bool">
+      <label>Use an user defined .css file for the tab bar</label>
+      <default>false</default>
+    </entry>
+    <entry name="TabBarUserStyleSheetFile" type="Url">
+      <label>The .css file to use for the tab bar style</label>
+      <default></default>
+    </entry>
     <entry name="ShowQuickButtons" type="Bool">
       <label>Control the visibility of quick buttons on the tab bar</label>
       <default>false</default>
