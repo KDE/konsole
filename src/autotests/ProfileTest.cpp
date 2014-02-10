@@ -212,7 +212,7 @@ void ProfileTest::testProfileFileNames()
     /* FIXME: don't allow certain characters in file names
        Consider: ,^@=+{}[]~!?:&*\"|#%<>$\"'();`'/\ 
        Suggestions: changing them all to _, just remove them, ...
-       Bug 315086 comes from an user using / in the profile name - multiple
+       Bug 315086 comes from a user using / in the profile name - multiple
          issues there.
     */
     /*
