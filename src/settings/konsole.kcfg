@@ -59,7 +59,7 @@
       <default>QTabBar::tab { min-width: 2em ; max-width: 25em }</default>
     </entry>
     <entry name="TabBarUseUserStyleSheet" type="Bool">
-      <label>Use an user defined .css file for the tab bar</label>
+      <label>Use a user-defined .css file for the tab bar</label>
       <default>false</default>
     </entry>
     <entry name="TabBarUserStyleSheetFile" type="Url">
