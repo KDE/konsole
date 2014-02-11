@@ -351,6 +351,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _trimTrailingSpaces(false)
     , _margin(1)
     , _centerContents(false)
+    , _opacity(1.0)
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
@@ -583,6 +584,7 @@ void TerminalDisplay::setOpacity(qreal opacity)
 {
     QColor color(_blendColor);
     color.setAlphaF(opacity);
+    _opacity = opacity;
 
     // enable automatic background filling to prevent the display
     // flickering if there is no transparency
@@ -620,7 +622,7 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
     QRect contentsRect = contentsRegion.boundingRect();
 
     if (useOpacitySetting && !_wallpaper->isNull() &&
-            _wallpaper->draw(painter, contentsRect)) {
+            _wallpaper->draw(painter, contentsRect, _opacity)) {
     } else if (qAlpha(_blendColor) < 0xff && useOpacitySetting) {
         // TODO - On MacOS, using CompositionMode doesn't work.  Altering the
         //        transparency in the color scheme (appears to) alter the

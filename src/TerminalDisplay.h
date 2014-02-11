@@ -905,6 +905,8 @@ private:
     int _margin;      // the contents margin
     bool _centerContents;   // center the contents between margins
 
+    qreal _opacity;
+
     friend class TerminalDisplayAccessible;
 };
 

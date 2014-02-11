@@ -401,12 +401,21 @@ bool ColorSchemeWallpaper::isNull() const
     return _path.isEmpty();
 }
 
-bool ColorSchemeWallpaper::draw(QPainter& painter, const QRect& rect)
+bool ColorSchemeWallpaper::draw(QPainter& painter, const QRect& rect, qreal opacity)
 {
     if (!_picture || _picture->isNull())
         return false;
 
+    if (qFuzzyCompare(1.0, opacity)) {
+        painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
+        return true;
+    }
+    painter.save();
+    painter.setCompositionMode(QPainter::CompositionMode_Source);
+    painter.fillRect(rect, QColor(0,0,0,0));
+    painter.setOpacity(opacity);
     painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
+    painter.restore();
     return true;
 }
 
