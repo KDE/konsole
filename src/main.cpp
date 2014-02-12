@@ -132,6 +132,11 @@ bool shouldUseNewProcess()
 
     const KCmdLineArgs* konsoleArgs = KCmdLineArgs::parsedArgs();
 
+    // if users have explictly requested starting a new process
+    if (konsoleArgs->isSet("separate")) {
+        return true;
+    }
+
     // the only way to create new tab is to reuse existing Konsole process.
     if (konsoleArgs->isSet("new-tab")) {
         return false;
@@ -173,6 +178,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("background-mode",
                 ki18nc("@info:shell", "Start Konsole in the background and bring to the front"
                       " when Ctrl+Shift+F12 (by default) is pressed"));
+    options.add("separate", ki18n("Run in a separate process"));
     options.add("show-menubar", ki18nc("@info:shell", "Show the menubar, overriding the default setting"));
     options.add("hide-menubar", ki18nc("@info:shell", "Hide the menubar, overriding the default setting"));
     options.add("show-tabbar", ki18nc("@info:shell", "Show the tabbar, overriding the default setting"));
