@@ -225,6 +225,7 @@ private slots:
     void copy();
     void paste();
     void selectAll();
+    void selectLine();
     void pasteFromX11Selection(); // shortcut only
     void copyInputActionsTriggered(QAction* action);
     void copyInputToAllTabs();

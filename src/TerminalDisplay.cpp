@@ -2647,6 +2647,13 @@ void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
     _iPntSel.ry() += _scrollBar->value();
 }
 
+void TerminalDisplay::selectCurrentLine()
+{
+    if (!_screenWindow) return;
+
+    selectLine(cursorPosition(), true);
+}
+
 bool TerminalDisplay::focusNextPrevChild(bool next)
 {
     // for 'Tab', always disable focus switching among widgets
