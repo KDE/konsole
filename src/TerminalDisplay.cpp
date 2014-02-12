@@ -2615,7 +2615,12 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
     int charLine;
     int charColumn;
     getCharacterPosition(ev->pos(), charLine, charColumn);
-    _iPntSel = QPoint(charColumn, charLine);
+    selectLine(QPoint(charColumn, charLine));
+}
+
+void TerminalDisplay::selectLine(QPoint pos)
+{
+    _iPntSel = pos;
 
     _screenWindow->clearSelection();
 
