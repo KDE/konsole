@@ -364,11 +364,13 @@ void SessionController::setupPrimaryScreenSpecificActions(bool use)
     QAction* clearAction = collection->action("clear-history");
     QAction* resetAction = collection->action("clear-history-and-reset");
     QAction* selectAllAction = collection->action("select-all");
+    QAction* selectLineAction = collection->action("select-line");
 
     // these actions are meaningful only when primary screen is used.
     clearAction->setEnabled(use);
     resetAction->setEnabled(use);
     selectAllAction->setEnabled(use);
+    selectLineAction->setEnabled(use);
 }
 
 void SessionController::selectionChanged(const QString& selectedText)
@@ -595,6 +597,9 @@ void SessionController::setupCommonActions()
     action = collection->addAction("select-all", this, SLOT(selectAll()));
     action->setText(i18n("&Select All"));
     action->setIcon(KIcon("edit-select-all"));
+
+    action = collection->addAction("select-line", this, SLOT(selectLine()));
+    action->setText(i18n("Select &Line"));
 
     action = KStandardAction::saveAs(this, SLOT(saveHistory()), collection);
     action->setText(i18n("Save Output &As..."));
@@ -946,6 +951,10 @@ void SessionController::selectAll()
     ScreenWindow * screenWindow = _view->screenWindow();
     screenWindow->setSelectionByLineRange(0, _session->emulation()->lineCount());
     _view->copyToX11Selection();
+}
+void SessionController::selectLine()
+{
+    _view->selectCurrentLine();
 }
 static const KXmlGuiWindow* findWindow(const QObject* object)
 {

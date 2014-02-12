@@ -450,6 +450,9 @@ public:
     /** Returns the terminal screen section which is displayed in this widget.  See setScreenWindow() */
     ScreenWindow* screenWindow() const;
 
+    // Select the current line.
+    void selectCurrentLine();
+
     void printContent(QPainter& painter, bool friendly);
 
 public slots:
