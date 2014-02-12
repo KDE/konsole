@@ -658,6 +658,7 @@ protected:
     void clearImage();
 
     void mouseTripleClickEvent(QMouseEvent* event);
+    void selectLine(QPoint pos);
 
     // reimplemented
     virtual void inputMethodEvent(QInputMethodEvent* event);
