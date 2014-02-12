@@ -2615,10 +2615,11 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
     int charLine;
     int charColumn;
     getCharacterPosition(ev->pos(), charLine, charColumn);
-    selectLine(QPoint(charColumn, charLine));
+    selectLine(QPoint(charColumn, charLine),
+               _tripleClickMode == Enum::SelectWholeLine);
 }
 
-void TerminalDisplay::selectLine(QPoint pos)
+void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
 {
     _iPntSel = pos;
 
@@ -2629,11 +2630,11 @@ void TerminalDisplay::selectLine(QPoint pos)
 
     _actSel = 2; // within selection
 
-    if (_tripleClickMode == Enum::SelectForwardsFromCursor) {
+    if (!entireLine) { // Select from cursor to end of line
         _tripleSelBegin = findWordStart(_iPntSel);
         _screenWindow->setSelectionStart(_tripleSelBegin.x(),
                                          _tripleSelBegin.y() , false);
-    } else if (_tripleClickMode == Enum::SelectWholeLine) {
+    } else {
         _tripleSelBegin = findLineStart(_iPntSel);
         _screenWindow->setSelectionStart(0 , _tripleSelBegin.y() , false);
     }
