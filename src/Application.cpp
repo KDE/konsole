@@ -87,6 +87,9 @@ void Application::detachView(Session* session)
 {
     MainWindow* window = newMainWindow();
     window->createView(session);
+    // Since user is dragging and dropping, move dnd window to where
+    // the user has the cursor (correct multiple monitor setups).
+    window->move(QCursor::pos());
     window->show();
 }
 
