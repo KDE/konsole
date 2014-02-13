@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/x-executable;
+Actions=runInKonsole;
+X-KDE-AuthorizeAction=shell_access
+
+[Desktop Action runInKonsole]
+TryExec=konsole
+Exec=konsole --hold -e %f
+Icon=utilities-terminal
+
+Name=Run In Konsole
