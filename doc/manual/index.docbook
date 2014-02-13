@@ -897,7 +897,7 @@ When the window title from current session is emtpy, fallback to using
 <para>&konsole; has the some of the common &kde; <guimenu>Help</guimenu>
 menu items, for more information read the section about the <ulink url="help:/fundamentals/ui.html#menus-help">Help Menu</ulink>
 of the &kde; Fundamentals.
-</para><!-- Only negative to using this is it shows shortcut F1 for Handbook -->
+</para><!-- Only negative to using this is that it shows shortcut F1 for Handbook -->
 </sect2>
 
 </sect1>
@@ -1012,37 +1012,25 @@ can be specified to modify its behavior.</para>
 </varlistentry>
 
 <varlistentry>
-<term><option>--fallback-profile</option> <parameter>file</parameter></term>
-<listitem><para>Use the internal FALLBACK profile. <!--FIXME what is the internal Fallback profile--></para></listitem>
-</varlistentry>
-
-<varlistentry>
 <term><option>--profile</option> <parameter>file</parameter></term>
 <listitem><para><action>Start &konsole;</action> using the specified profile
 instead of the default profile.</para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--list-profiles</option></term>
-<listitem><para><action>List</action> all available profiles.
-</para></listitem>
+<term><option>--fallback-profile</option></term>
+<listitem><para>Use the internal FALLBACK profile. This option is a shortcut for <option>--profile</option> <parameter>FALLBACK/</parameter>.<!--FIXME what is the internal Fallback profile--></para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--list-profile-properties</option></term>
-<listitem>
-<para><action>List</action> all possible properties with name and type. See option <option>-p</option> .
-</para>
-<para>
-For more information, please visit
-<ulink url="http://api.kde.org/4.x-api/kde-baseapps-apidocs/konsole/html/classKonsole_1_1Profile.html#a57848e15fe69d3f27565851fe7cda429">&konsole; API Reference</ulink>.
-</para>
-</listitem>
+<term><option>--workdir</option> <parameter>dir</parameter></term>
+<listitem><para><action>Open with</action>
+<parameter>dir</parameter> as the initial working directory.</para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--background-mode</option></term>
-<listitem><para><action>Start &konsole;</action> in the background and bring to the front when <keycombo action="simul">&Ctrl;&Shift;<keycap>F12</keycap></keycombo> (by default) is pressed.
+<term><option>--hold, --noclose</option></term>
+<listitem><para><action>Do not close</action> the initial session automatically when it ends.
 </para></listitem>
 </varlistentry>
 
@@ -1077,9 +1065,15 @@ Empty lines or lines with <userinput>#</userinput> at the beginning are ignored,
 </varlistentry>
 
 <varlistentry>
-<term><option>--workdir</option> <parameter>dir</parameter></term>
-<listitem><para><action>Open with</action>
-<parameter>dir</parameter> as the initial working directory.</para></listitem>
+<term><option>--background-mode</option></term>
+<listitem><para><action>Start &konsole;</action> in the background and bring to the front when <keycombo action="simul">&Ctrl;&Shift;<keycap>F12</keycap></keycombo> (by default) is pressed.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--separate</option></term>
+<listitem><para><action>Run</action> the new instance of &konsole; in a separate process.
+</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -1107,15 +1101,32 @@ Empty lines or lines with <userinput>#</userinput> at the beginning are ignored,
 </varlistentry>
 
 <varlistentry>
+<term><option>--fullscreen</option></term>
+<listitem><para><action>Start &konsole; in fullscreen mode</action>.</para></listitem>
+</varlistentry>
+
+<varlistentry>
 <term><option>--notransparency</option></term>
 <listitem><para><action>Disable</action> transparent backgrounds, even if the system supports them.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><option>--hold, --noclose</option></term>
-<listitem><para><action>Do not close</action> the initial session automatically when it ends.
+<term><option>--list-profiles</option></term>
+<listitem><para><action>List</action> all available profiles.
 </para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--list-profile-properties</option></term>
+<listitem>
+<para><action>List</action> all possible properties with name and type. See option <option>-p</option> .
+</para>
+<para>
+For more information, please visit
+<ulink url="http://api.kde.org/4.x-api/kde-baseapps-apidocs/konsole/html/classKonsole_1_1Profile.html#a57848e15fe69d3f27565851fe7cda429">&konsole; API Reference</ulink>.
+</para>
+</listitem>
 </varlistentry>
 
 <varlistentry>
@@ -1136,11 +1147,6 @@ Empty lines or lines with <userinput>#</userinput> at the beginning are ignored,
 <term><option>--nofork</option></term>
 <listitem><para><action>Do not run in the background</action>.  This is often needed to mimic other terminal emulators.
 </para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--fullscreen</option></term>
-<listitem><para><action>Start &konsole; in fullscreen mode</action>.</para></listitem>
 </varlistentry>
 
 </variablelist>
