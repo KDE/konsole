@@ -218,7 +218,6 @@ signals:
      * activated.
      */
     void setMenuBarVisibleRequest(bool);
-    void setSaveGeometryOnExitRequest(bool);
     void updateWindowIcon();
 
     /** Requests creation of a new view with the default profile. */

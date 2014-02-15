@@ -77,6 +77,23 @@ MainWindow::MainWindow()
     , _menuBarInitialVisibility(true)
     , _menuBarInitialVisibilityApplied(false)
 {
+    if (!KonsoleSettings::saveGeometryOnExit()) {
+        // If we are not using the global Konsole save geometry on exit,
+        // remove all Height and Width from [MainWindow] from konsolerc
+        // Each screen resolution will have entries (Width 1280=619)
+        KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig("konsolerc");
+        KConfigGroup group = konsoleConfig->group("MainWindow");
+        QMap<QString, QString> configEntries = group.entryMap();
+        QMapIterator<QString, QString> i(configEntries);
+        while (i.hasNext()) {
+            i.next();
+            if (i.key().startsWith(QLatin1String("Width")) 
+                    || i.key().startsWith(QLatin1String("Height"))) {
+                group.deleteEntry(i.key());
+            }
+        }
+    }
+
     if (useTransparency()) {
         // It is useful to have translucent terminal area
         setAttribute(Qt::WA_TranslucentBackground, true);
@@ -97,8 +114,6 @@ MainWindow::MainWindow()
     connect(_viewManager, SIGNAL(viewPropertiesChanged(QList<ViewProperties*>)),
             bookmarkHandler(), SLOT(setViews(QList<ViewProperties*>)));
 
-    connect(_viewManager, SIGNAL(setSaveGeometryOnExitRequest(bool)), this,
-            SLOT(setSaveGeometryOnExit(bool)));
     connect(_viewManager, SIGNAL(updateWindowIcon()), this,
             SLOT(updateWindowIcon()));
     connect(_viewManager, SIGNAL(newViewRequest(Profile::Ptr)),
@@ -164,12 +179,6 @@ void MainWindow::restoreMenuAccelerators()
         QString itemText = menuItem->data().toString();
         menuItem->setText(itemText);
     }
-}
-
-void MainWindow::setSaveGeometryOnExit(bool save)
-{
-    // enable save and restore of window size
-    setAutoSaveSettings("MainWindow", save);
 }
 
 void MainWindow::correctStandardShortcuts()
@@ -699,7 +708,7 @@ void MainWindow::applyKonsoleSettings()
         setNavigationStyleSheet(KonsoleSettings::tabBarStyleSheet());
     }
 
-    // setAutoSaveSettings("MainWindow", KonsoleSettings::saveGeometryOnExit());
+    setAutoSaveSettings("MainWindow", KonsoleSettings::saveGeometryOnExit());
 
     updateWindowCaption();
 }

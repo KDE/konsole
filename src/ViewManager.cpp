@@ -790,8 +790,6 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
 {
     Q_ASSERT(profile);
 
-    emit setSaveGeometryOnExitRequest(profile->saveGeometryOnExit());
-
     emit updateWindowIcon();
 
     // load color scheme

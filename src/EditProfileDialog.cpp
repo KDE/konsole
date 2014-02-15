@@ -274,9 +274,12 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
     _ui->iconSelectButton->setIcon(KIcon(profile->icon()));
     _ui->startInSameDirButton->setChecked(profile->startInCurrentSessionDir());
 
+    // terminal options
+    _ui->terminalColumnsEntry->setValue(profile->terminalColumns());
+    _ui->terminalRowsEntry->setValue(profile->terminalRows());
+
     // window options
     _ui->showTerminalSizeHintButton->setChecked(profile->showTerminalSizeHint());
-    _ui->saveGeometryOnExitButton->setChecked(profile->saveGeometryOnExit());
 
     // signals and slots
     connect(_ui->dirSelectButton, SIGNAL(clicked()), this, SLOT(selectInitialDir()));
@@ -292,8 +295,11 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
     connect(_ui->environmentEditButton , SIGNAL(clicked()), this,
             SLOT(showEnvironmentEditor()));
 
-    connect(_ui->saveGeometryOnExitButton, SIGNAL(toggled(bool)), this,
-            SLOT(saveGeometryOnExit(bool)));
+    connect(_ui->terminalColumnsEntry, SIGNAL(valueChanged(int)),
+            this, SLOT(terminalColumnsEntryChanged(int)));
+    connect(_ui->terminalRowsEntry, SIGNAL(valueChanged(int)),
+            this, SLOT(terminalRowsEntryChanged(int)));
+
     connect(_ui->showTerminalSizeHintButton, SIGNAL(toggled(bool)), this,
             SLOT(showTerminalSizeHint(bool)));
 }
@@ -339,9 +345,13 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr profile)
             this, SLOT(silenceSecondsChanged(int)));
 }
 
-void EditProfileDialog::saveGeometryOnExit(bool value)
+void EditProfileDialog::terminalColumnsEntryChanged(int value)
 {
-    updateTempProfileProperty(Profile::SaveGeometryOnExit, value);
+    updateTempProfileProperty(Profile::TerminalColumns, value);
+}
+void EditProfileDialog::terminalRowsEntryChanged(int value)
+{
+    updateTempProfileProperty(Profile::TerminalRows, value);
 }
 void EditProfileDialog::showTerminalSizeHint(bool value)
 {

@@ -114,8 +114,9 @@ private slots:
     void tabTitleFormatChanged(const QString& text);
     void remoteTabTitleFormatChanged(const QString& text);
 
+    void terminalColumnsEntryChanged(int);
+    void terminalRowsEntryChanged(int);
     void showTerminalSizeHint(bool);
-    void saveGeometryOnExit(bool);
     void showEnvironmentEditor();
     void silenceSecondsChanged(int);
 

@@ -32,8 +32,8 @@
       <attribute name="title">
        <string comment="@title:tab Generic, common options">General</string>
       </attribute>
-      <layout class="QVBoxLayout">
-       <item>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
         <widget class="QGroupBox" name="groupBox_10">
          <property name="title">
           <string comment="@title:group Generic, common options">General</string>
@@ -199,7 +199,112 @@
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="groupBox_16">
+         <property name="title">
+          <string>Terminal Size</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Columns</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="KIntSpinBox" name="terminalColumnsEntry">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>500</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Rows</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="KIntSpinBox" name="terminalRowsEntry">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>This will not alter any open windows.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6">
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>81</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0">
+           <spacer name="horizontalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="1" colspan="6">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Configure Konsole-&gt;General-&gt;Use current window size on next startup must be disabled for these entries to work.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0">
         <widget class="QGroupBox" name="groupBox_12">
          <property name="title">
           <string>Window</string>
@@ -208,22 +313,6 @@
           <bool>true</bool>
          </property>
          <layout class="QVBoxLayout">
-          <item>
-           <widget class="QCheckBox" name="saveGeometryOnExitButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="toolTip">
-             <string>Set the window size and position for this profile when exiting</string>
-            </property>
-            <property name="text">
-             <string>Save window size and position on exit</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <widget class="QCheckBox" name="showTerminalSizeHintButton">
             <property name="toolTip">
@@ -237,7 +326,7 @@
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="3" column="0">
         <spacer>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -438,7 +527,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string comment="KDE::DoNotExtract">FONT PREVIEW TEXT</string>
+               <string comment="KDE::DoNotExtract">KSqueezedTextLabel</string>
               </property>
               <property name="textElideMode">
                <enum>Qt::ElideRight</enum>
@@ -460,17 +549,17 @@
              </widget>
             </item>
             <item>
-             <widget class="KDoubleNumInput" name="fontSizeInput" native="true">
-              <property name="minimum" stdset="0">
+             <widget class="KDoubleNumInput" name="fontSizeInput">
+              <property name="minimum">
                <double>4.000000000000000</double>
               </property>
-              <property name="maximum" stdset="0">
+              <property name="maximum">
                <double>999.000000000000000</double>
               </property>
-              <property name="singleStep" stdset="0">
+              <property name="singleStep">
                <double>1.000000000000000</double>
               </property>
-              <property name="decimals" stdset="0">
+              <property name="decimals">
                <number>1</number>
               </property>
              </widget>
@@ -607,7 +696,7 @@
          <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" name="gridLayout4">
+         <layout class="QGridLayout" name="gridLayout_34">
           <item row="0" column="0">
            <widget class="QRadioButton" name="scrollHalfPage">
             <property name="toolTip">

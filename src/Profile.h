@@ -118,10 +118,6 @@ public:
          * resizing the application window.
          */
         ShowTerminalSizeHint,
-        /** (bool) Specifies whether the geometry information is saved when
-         * window is closed.
-         */
-        SaveGeometryOnExit,
         /** (QFont) The font to use in terminal displays using this profile. */
         Font,
         /** (QString) The name of the color scheme to use in terminal
@@ -385,11 +381,6 @@ public:
         return property<bool>(Profile::ShowTerminalSizeHint);
     }
 
-    /** Convenience method for property<bool>(Profile::SaveGeometryOnExit) */
-    bool saveGeometryOnExit() const {
-        return property<bool>(Profile::SaveGeometryOnExit);
-    }
-
     /** Convenience method for property<QFont>(Profile::Font) */
     QFont font() const {
         return property<QFont>(Profile::Font);
@@ -493,6 +484,16 @@ public:
     /** Convenience method for property<QString>(Profile::SilenceSeconds) */
     int silenceSeconds() const {
         return property<int>(Profile::SilenceSeconds);
+    }
+
+    /** Convenience method for property<QString>(Profile::TerminalColumns) */
+    int terminalColumns() const {
+        return property<int>(Profile::TerminalColumns);
+    }
+
+    /** Convenience method for property<QString>(Profile::TerminalRows) */
+    int terminalRows() const {
+        return property<int>(Profile::TerminalRows);
     }
 
     /** Convenience method for property<QString>(Profile::MenuIndex) */

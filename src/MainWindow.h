@@ -160,8 +160,6 @@ private slots:
     void profileListChanged(const QList<QAction*>& actions);
     void configureNotifications();
 
-    void setSaveGeometryOnExit(bool visible);
-
     void updateWindowIcon();
     void updateWindowCaption();
 
