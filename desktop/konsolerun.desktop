@@ -11,3 +11,10 @@ Exec=konsole --hold -e %f
 Icon=utilities-terminal
 
 Name=Run In Konsole
+Name[de]=In Konsole ausführen
+Name[nl]=In Konsole uitvoeren
+Name[pt_BR]=Executar no Konsole
+Name[sl]=Zaženi v Konzoli
+Name[sv]=Kör i Terminal
+Name[uk]=Запустити у Konsole
+Name[x-test]=xxRun In Konsolexx
