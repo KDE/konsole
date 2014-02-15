@@ -28,7 +28,6 @@ GeneralSettings::GeneralSettings(QWidget* aParent) : QWidget(aParent)
     setupUi(this);
 
     this->kcfg_ShowTerminalSizeHint->setVisible(false);
-    this->kcfg_SaveGeometryOnExit->setVisible(false);
 }
 
 GeneralSettings::~GeneralSettings()

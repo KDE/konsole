@@ -66,7 +66,6 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { LocalTabTitleFormat , "tabtitle" , 0 , QVariant::String }
     , { RemoteTabTitleFormat , "RemoteTabTitleFormat" , GENERAL_GROUP , QVariant::String }
     , { ShowTerminalSizeHint , "ShowTerminalSizeHint" , GENERAL_GROUP , QVariant::Bool }
-    , { SaveGeometryOnExit , "SaveGeometryOnExit" , GENERAL_GROUP , QVariant::Bool }
     , { StartInCurrentSessionDir , "StartInCurrentSessionDir" , GENERAL_GROUP , QVariant::Bool }
     , { SilenceSeconds, "SilenceSeconds" , GENERAL_GROUP , QVariant::Int }
     , { TerminalColumns, "TerminalColumns" , GENERAL_GROUP , QVariant::Int }
@@ -155,7 +154,6 @@ FallbackProfile::FallbackProfile()
     setProperty(LocalTabTitleFormat, "%d : %n");
     setProperty(RemoteTabTitleFormat, "(%u) %H");
     setProperty(ShowTerminalSizeHint, true);
-    setProperty(SaveGeometryOnExit, true);
     setProperty(StartInCurrentSessionDir, true);
     setProperty(MenuIndex, "0");
     setProperty(SilenceSeconds, 10);

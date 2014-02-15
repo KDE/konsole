@@ -31,7 +31,7 @@
       <default>true</default>
     </entry>
     <entry name="SaveGeometryOnExit" type="Bool">
-      <label>Save window size on exit</label>
+      <label>Use current window size on next startup</label>
       <tooltip>The window size will be saved upon exiting Konsole</tooltip>
       <default>true</default>
     </entry>

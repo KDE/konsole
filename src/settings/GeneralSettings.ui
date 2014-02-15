@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>383</width>
-    <height>156</height>
+    <width>528</width>
+    <height>197</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -62,8 +62,11 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string>If enabled, profile settings will be ignored</string>
+          </property>
           <property name="text">
-           <string>Save window size and position on exit</string>
+           <string>Use current window size on next startup</string>
           </property>
          </widget>
         </item>
