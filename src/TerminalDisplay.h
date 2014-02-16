@@ -294,7 +294,6 @@ public:
     }
 
     void setSize(int columns, int lines);
-    void setFixedSize(int columns, int lines);
 
     // reimplemented
     QSize sizeHint() const;
@@ -849,7 +848,6 @@ private:
 
     bool _underlineLinks;     // Underline URL and hosts on mouse hover
     bool _openLinksByDirectClick;     // Open URL and hosts by single mouse click
-    bool _isFixedSize; // columns/lines are locked.
 
     bool _ctrlRequiredForDrag; // require Ctrl key for drag selected text
 
