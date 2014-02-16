@@ -192,4 +192,3 @@ GenericName[zh_TW]=終端機
 [Desktop Action NewWindow]
 Name=Open a New Window
 Exec=konsole
-OnlyShowIn=Unity;
