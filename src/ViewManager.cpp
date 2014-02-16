@@ -555,6 +555,10 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
     // set initial size
     const QSize& preferredSize = session->preferredSize();
     // FIXME: +1 is needed here for getting the expected rows
+    // Note that the display shouldn't need to take into account the tabbar.
+    // However, it appears that taking into account the tabbar is needed.
+    // If tabbar is not visible, no +1 is needed here; however, depending on
+    // settings/tabbar style, +2 might be needed.
     display->setSize(preferredSize.width(), preferredSize.height() + 1);
 
     ViewProperties* properties = createController(session, display);
