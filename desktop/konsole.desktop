@@ -192,11 +192,13 @@ GenericName[zh_TW]=終端機
 [Desktop Action NewWindow]
 Name=Open a New Window
 Name[bs]=Otvori u novom prozoru
+Name[ca]=Obre una finestra nova
 Name[cs]=Otevřít nové okno
 Name[de]=Ein neues Fenster öffnen
 Name[es]=Abrir una nueva ventana
 Name[hu]=Új ablak megnyitása
 Name[nl]=Een nieuw venster openen
+Name[pl]=Otwórz nowe okno
 Name[pt]=Abrir uma Nova Janela
 Name[pt_BR]=Abre uma nova janela
 Name[sk]=Otvoriť nové okno
