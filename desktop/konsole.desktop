@@ -211,4 +211,3 @@ Name[sv]=Öppna ett nytt fönster
 Name[uk]=Відкрити нове вікно
 Name[x-test]=xxOpen a New Windowxx
 Exec=konsole
-OnlyShowIn=Unity;
