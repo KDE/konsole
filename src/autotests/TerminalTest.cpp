@@ -96,14 +96,6 @@ void TerminalTest::testSize()
     // TODO: setSize doesn't change size...
     //display->setSize(80, 25);
 
-    display->setFixedSize(-1, -1);
-    QCOMPARE(display->columns(), 1);
-    QCOMPARE(display->lines(), 1);
-
-    display->setFixedSize(80, 25);
-    QCOMPARE(display->columns(), 80);
-    QCOMPARE(display->lines(), 25);
-
     delete display;
 }
 

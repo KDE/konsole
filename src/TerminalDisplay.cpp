@@ -333,7 +333,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _hasTextBlinker(false)
     , _underlineLinks(true)
     , _openLinksByDirectClick(false)
-    , _isFixedSize(false)
     , _ctrlRequiredForDrag(true)
     , _tripleClickMode(Enum::SelectWholeLine)
     , _possibleTripleClick(false)
@@ -1614,13 +1613,6 @@ void TerminalDisplay::resizeEvent(QResizeEvent*)
 
 void TerminalDisplay::propagateSize()
 {
-    if (_isFixedSize) {
-        setSize(_columns, _lines);
-        QWidget::setFixedSize(sizeHint());
-        parentWidget()->adjustSize();
-        parentWidget()->setFixedSize(parentWidget()->sizeHint());
-        return;
-    }
     if (_image)
         updateImageSize();
 }
@@ -1702,19 +1694,17 @@ void TerminalDisplay::calcGeometry()
         break;
     }
 
-    if (!_isFixedSize) {
-        // ensure that display is always at least one column wide
-        _columns = qMax(1, _contentRect.width() / _fontWidth);
-        _usedColumns = qMin(_usedColumns, _columns);
+    // ensure that display is always at least one column wide
+    _columns = qMax(1, _contentRect.width() / _fontWidth);
+    _usedColumns = qMin(_usedColumns, _columns);
 
-        // ensure that display is always at least one line high
-        _lines = qMax(1, _contentRect.height() / _fontHeight);
-        _usedLines = qMin(_usedLines, _lines);
+    // ensure that display is always at least one line high
+    _lines = qMax(1, _contentRect.height() / _fontHeight);
+    _usedLines = qMin(_usedLines, _lines);
 
-        if(_centerContents) {
-            QSize unusedPixels = _contentRect.size() - QSize(_columns * _fontWidth, _lines * _fontHeight);
-            _contentRect.adjust(unusedPixels.width() / 2, unusedPixels.height() / 2, 0, 0);
-        }
+    if(_centerContents) {
+        QSize unusedPixels = _contentRect.size() - QSize(_columns * _fontWidth, _lines * _fontHeight);
+        _contentRect.adjust(unusedPixels.width() / 2, unusedPixels.height() / 2, 0, 0);
     }
 }
 
@@ -1732,24 +1722,6 @@ void TerminalDisplay::setSize(int columns, int lines)
         _size = newSize;
         updateGeometry();
     }
-}
-
-void TerminalDisplay::setFixedSize(int cols, int lins)
-{
-    _isFixedSize = true;
-
-    //ensure that display is at least one line by one column in size
-    _columns = qMax(1, cols);
-    _lines = qMax(1, lins);
-    _usedColumns = qMin(_usedColumns, _columns);
-    _usedLines = qMin(_usedLines, _lines);
-
-    if (_image) {
-        delete[] _image;
-        makeImage();
-    }
-    setSize(cols, lins);
-    QWidget::setFixedSize(_size);
 }
 
 QSize TerminalDisplay::sizeHint() const
