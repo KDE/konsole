@@ -26,7 +26,7 @@ find_package(KF5 CONFIG REQUIRED
     CoreAddons DocTools GuiAddons I18n IconThemes
     Init KDE4Support KIO Notifications NotifyConfig
     Parts Pty Service TextWidgets WidgetsAddons
-    WindowSystem
+    WindowSystem XmlGui
 )
 
 remove_definitions(-DQT_NO_SIGNALS_SLOTS_KEYWORDS -DQT_NO_CAST_FROM_ASCII)
