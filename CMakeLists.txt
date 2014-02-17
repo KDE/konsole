@@ -22,17 +22,12 @@ include(FeatureSummary)
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Widgets Script Test)
 
 find_package(KF5 CONFIG REQUIRED
-    DBusAddons CoreAddons Config
-    Codecs I18n Service WidgetsAddons
-    WindowSystem Crash Sonnet
-    Archive ItemModels Auth GuiAddons ConfigWidgets
-    ItemViews Notifications JS Pty
-    JobWidgets IconThemes Completion TextWidgets
-    GlobalAccel XmlGui Solid Wallet Bookmarks KIO UnitConversion
-    NotifyConfig Parts Kross
+    Bookmarks Completion Config ConfigWidgets
+    CoreAddons DocTools GuiAddons I18n IconThemes
+    Init KDE4Support KIO Notifications NotifyConfig
+    Parts Pty Service TextWidgets WidgetsAddons
+    WindowSystem
 )
-find_package(KF5KDE4Support NO_MODULE)
-set_package_properties(KDE4Support PROPERTIES TYPE REQUIRED)
 
 remove_definitions(-DQT_NO_SIGNALS_SLOTS_KEYWORDS -DQT_NO_CAST_FROM_ASCII)
 add_definitions(-Wno-deprecated-declarations)
