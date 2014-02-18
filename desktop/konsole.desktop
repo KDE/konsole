@@ -208,6 +208,7 @@ Name[sr@ijekavian]=Отвори нови прозор
 Name[sr@ijekavianlatin]=Otvori novi prozor
 Name[sr@latin]=Otvori novi prozor
 Name[sv]=Öppna ett nytt fönster
+Name[tr]=Yeni Bir Pencere Aç
 Name[uk]=Відкрити нове вікно
 Name[x-test]=xxOpen a New Windowxx
 Exec=konsole
