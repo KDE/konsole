@@ -506,6 +506,7 @@ void Session::run()
     int result = _shellProcess->start(exec, arguments, _environment);
     if (result < 0) {
         terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(" ")));
+        terminalWarning(_shellProcess->errorString());
         return;
     }
 
