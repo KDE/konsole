@@ -70,7 +70,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     // Let's trigger some signals
 
     // #1A - Test signal currentDirectoryChanged(QString)
-    currentDirectory = QString("/usr");
+    currentDirectory = QString("/tmp");
     terminal->sendInput(currentDirectory + "\n");
     sleep(2000);
     QCOMPARE(stateSpy.count(), 1);
