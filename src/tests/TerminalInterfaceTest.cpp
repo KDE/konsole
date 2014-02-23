@@ -27,12 +27,18 @@
 #include <KService>
 #include <KDebug>
 #include <qtest_kde.h>
+#include "../Part.h"
 
 using namespace Konsole;
 
+/* In KDE 4.x there are 2 versions: TerminalInterface and TerminalInterfaceV2
+   The code below uses both as well the KonsolePart API
+*/
 void TerminalInterfaceTest::testTerminalInterface()
 {
     QString currentDirectory;
+    QString retVal;
+    bool result;
 
     // create a Konsole part and attempt to connect to it
     _terminalPart = createPart();
@@ -41,7 +47,7 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     TerminalInterfaceV2* terminal = qobject_cast<TerminalInterfaceV2*>(_terminalPart);
     QVERIFY(terminal);
-    terminal->showShellInDir( QDir::home().path() );
+    terminal->showShellInDir(QDir::home().path());
 
     int foregroundProcessId  = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
@@ -53,7 +59,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     // int terminalProcessId  = terminal->terminalProcessId();
 
     // Sleep is used to allow enough time for these to work
-    // Is there a better way?!?!?
+    // In Qt5 we can use QSignalSpy::wait()
 
     // Let's try using QSignalSpy
     // http://techbase.kde.org/Development/Tutorials/Unittests
@@ -81,13 +87,27 @@ void TerminalInterfaceTest::testTerminalInterface()
     QString firstSignalState = firstSignalArgs.at(0).toString();
     QCOMPARE(firstSignalState, currentDirectory);
 
+    // Test KonsolePart API currentWorkingDirectory()
+    result = QMetaObject::invokeMethod(_terminalPart,
+                                       "currentWorkingDirectory",
+                                       Qt::DirectConnection,
+                                       Q_RETURN_ARG(QString, retVal));
+    QVERIFY(result);
+    QCOMPARE(retVal, currentDirectory);
+
     // #1B - Test signal currentDirectoryChanged(QString)
     // Invalid directory - no signal should be emitted
-    currentDirectory = QString("/usrASDFASDFASDFASDFASDFASDF");
-    terminal->sendInput("cd " + currentDirectory + "\n");
+    terminal->sendInput("cd /usrADADFASDF\n");
     sleep(2000);
     QCOMPARE(stateSpy.count(), 0);
 
+    // Should be no change since the above cd didn't work
+    result = QMetaObject::invokeMethod(_terminalPart,
+                                       "currentWorkingDirectory",
+                                       Qt::DirectConnection,
+                                       Q_RETURN_ARG(QString, retVal));
+    QVERIFY(result);
+    QCOMPARE(retVal, currentDirectory);
 
     // Test destroyed()
     QSignalSpy destroyedSpy(_terminalPart, SIGNAL(destroyed()));
