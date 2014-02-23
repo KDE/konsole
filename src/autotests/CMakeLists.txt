@@ -66,3 +66,11 @@ ecm_mark_as_test(TerminalTest)
 add_test(TerminalTest TerminalTest)
 target_link_libraries(TerminalTest ${KONSOLE_TEST_LIBS})
 
+##add_executable(TerminalInterfaceTest TerminalInterfaceTest.cpp)
+##ecm_mark_as_test(TerminalInterface)
+##add_test(TerminalInterfaceTest TerminalInterfaceTest)
+##target_link_libraries(TerminalInterfaceTest
+##                      ${KDE4_KPARTS_LIBS}
+##                      ${KDE4_KPTY_LIBS}
+##                      ${KONSOLE_TEST_LIBS})
+
