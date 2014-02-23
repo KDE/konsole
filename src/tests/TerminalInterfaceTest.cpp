@@ -54,7 +54,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     QString foregroundProcessName  = terminal->foregroundProcessName();
     QCOMPARE(foregroundProcessName, QString(""));
 
-    // terminalProcessId() is the default profile's shell
+    // terminalProcessId() is the user's default shell
     // FIXME: find a way to verify this
     // int terminalProcessId  = terminal->terminalProcessId();
 
@@ -108,6 +108,26 @@ void TerminalInterfaceTest::testTerminalInterface()
                                        Q_RETURN_ARG(QString, retVal));
     QVERIFY(result);
     QCOMPARE(retVal, currentDirectory);
+
+
+    // Test starting a new program
+    QString command = "top";
+    terminal->sendInput(command + "\n");
+    sleep(2000);
+    // FIXME: find a good way to validate process id of 'top'
+    foregroundProcessId  = terminal->foregroundProcessId();
+    QVERIFY(foregroundProcessId != -1);
+    foregroundProcessName  = terminal->foregroundProcessName();
+    QCOMPARE(foregroundProcessName, command);
+
+    terminal->sendInput("q");
+    sleep(2000);
+
+    // Nothing running in foreground
+    foregroundProcessId  = terminal->foregroundProcessId();
+    QCOMPARE(foregroundProcessId, -1);
+    foregroundProcessName  = terminal->foregroundProcessName();
+    QCOMPARE(foregroundProcessName, QString(""));
 
     // Test destroyed()
     QSignalSpy destroyedSpy(_terminalPart, SIGNAL(destroyed()));
