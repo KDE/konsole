@@ -84,7 +84,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     // #1B - Test signal currentDirectoryChanged(QString)
     // Invalid directory - no signal should be emitted
     currentDirectory = QString("/usrASDFASDFASDFASDFASDFASDF");
-    terminal->sendInput(currentDirectory + "\n");
+    terminal->sendInput("cd " + currentDirectory + "\n");
     sleep(2000);
     QCOMPARE(stateSpy.count(), 0);
 
