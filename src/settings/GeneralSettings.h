@@ -34,6 +34,8 @@ public:
     explicit GeneralSettings(QWidget* aParent = 0);
     ~GeneralSettings();
 
+public slots:
+    void slotEnableAllMessages();
 };
 
 }
