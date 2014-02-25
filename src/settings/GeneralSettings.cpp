@@ -21,16 +21,25 @@
 // Own
 #include "GeneralSettings.h"
 
+#include <KMessageBox>
+
 using namespace Konsole;
 
 GeneralSettings::GeneralSettings(QWidget* aParent) : QWidget(aParent)
 {
     setupUi(this);
 
+    connect(enableAllMessagesButton, SIGNAL(clicked()), this, SLOT(slotEnableAllMessages()));
+
     this->kcfg_ShowTerminalSizeHint->setVisible(false);
 }
 
 GeneralSettings::~GeneralSettings()
 {
+}
+
+void GeneralSettings::slotEnableAllMessages()
+{
+    KMessageBox::enableAllMessages();
 }
 
