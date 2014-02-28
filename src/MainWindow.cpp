@@ -338,7 +338,7 @@ void MainWindow::setupActions()
 
     // Full Screen
     menuAction = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
-    menuAction->setShortcut(QKeySequence());
+    menuAction->setShortcut(QKeySequence(Qt::Key_F11));
 
     KStandardAction::configureNotifications(this, SLOT(configureNotifications()), collection);
     KStandardAction::keyBindings(this, SLOT(showShortcutsDialog()), collection);
