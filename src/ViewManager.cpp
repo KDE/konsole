@@ -559,8 +559,14 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
     // However, it appears that taking into account the tabbar is needed.
     // If tabbar is not visible, no +1 is needed here; however, depending on
     // settings/tabbar style, +2 might be needed.
-    display->setSize(preferredSize.width(), preferredSize.height() + 1);
+    // 1st attempt at fixing the above:
+    // Guess if tabbar will NOT be visible; ignore ShowNavigationAsNeeded
+    int heightAdjustment = 0;
+    if (_navigationVisibility != ViewContainer::AlwaysHideNavigation) {
+        heightAdjustment = 2;
+    }
 
+    display->setSize(preferredSize.width(), preferredSize.height() + heightAdjustment);
     ViewProperties* properties = createController(session, display);
 
     _sessionMap[display] = session;
