@@ -642,6 +642,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case TY_CSI_PN('B'      ) : _currentScreen->cursorDown           (p         ); break; //VT100
     case TY_CSI_PN('C'      ) : _currentScreen->cursorRight          (p         ); break; //VT100
     case TY_CSI_PN('D'      ) : _currentScreen->cursorLeft           (p         ); break; //VT100
+    case TY_CSI_PN('E'      ) : /* Not implemented: cursor next p lines */         break; //VT100
+    case TY_CSI_PN('F'      ) : /* Not implemented: cursor preceding p lines */    break; //VT100
     case TY_CSI_PN('G'      ) : _currentScreen->setCursorX           (p         ); break; //LINUX
     case TY_CSI_PN('H'      ) : _currentScreen->setCursorYX          (p,      q); break; //VT100
     case TY_CSI_PN('I'      ) : _currentScreen->tab                  (p         ); break;
