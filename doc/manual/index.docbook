@@ -865,7 +865,47 @@ Menu Bar</guimenuitem></menuchoice></term>
 <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
 Shortcuts...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens the keyboard shortcut editor.</action> More on shortcuts configuration
-can be found <ulink url="help:/fundamentals/shortcuts.html">here</ulink>.</para>
+can be found in the <ulink url="help:/fundamentals/shortcuts.html">&kde; Fundamentals</ulink>.</para>
+
+<para>Additionally &konsole; has a few special shortcuts with no corresponding menu item:</para>
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Shortcut</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><keycombo action="simul">&Shift;<keysym>Right</keysym></keycombo></entry>
+<entry>Next Tab</entry>
+</row>
+<row>
+<entry><keycombo action="simul">&Shift;<keysym>Left</keysym></keycombo></entry>
+<entry>Previous Tab</entry>
+</row>
+<row>
+<entry><keycombo action="simul">&Ctrl;&Shift;<keysym>Left</keysym></keycombo></entry>
+<entry>Move Tab Left</entry>
+</row>
+<row>
+<entry><keycombo action="simul">&Ctrl;&Shift;<keysym>Right</keysym></keycombo></entry>
+<entry>Move Tab Right</entry>
+</row>
+<row>
+<entry><keycombo action="simul">&Ctrl;&Shift;<keysym>Ins</keysym></keycombo></entry>
+<entry>Paste Selection</entry>
+</row>
+<row>
+<entry><keycombo action="simul">&Shift;&Tab;</keycombo></entry>
+<entry>Next View Container</entry> <!--FIXME what is this:yurchor container widget which holds views-->
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
 </listitem>
 </varlistentry>
 
