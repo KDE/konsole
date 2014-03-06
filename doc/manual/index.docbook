@@ -864,7 +864,8 @@ Menu Bar</guimenuitem></menuchoice></term>
 <varlistentry>
 <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
 Shortcuts...</guimenuitem></menuchoice></term>
-<listitem><para><action>Opens the keyboard shortcut editor</action></para>
+<listitem><para><action>Opens the keyboard shortcut editor.</action> More on shortcuts configuration
+can be found <ulink url="help:/fundamentals/shortcuts.html">here</ulink>.</para>
 </listitem>
 </varlistentry>
 
