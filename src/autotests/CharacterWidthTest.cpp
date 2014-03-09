@@ -53,6 +53,7 @@ void CharacterWidthTest::testWidth_data()
 
     QTest::newRow("0x3000") << quint16(0x3000) << 2;
     QTest::newRow("0xFF01") << quint16(0xFF01) << 2;
+    QTest::newRow("0xFF5F") << quint16(0xFF5F) << 2;
     QTest::newRow("0xFF60") << quint16(0xFF60) << 2;
     QTest::newRow("0xFFe0") << quint16(0xFFe6) << 2;
 }
@@ -61,7 +62,6 @@ void CharacterWidthTest::testWidth()
 {
     QFETCH(quint16, character);
 
-    QEXPECT_FAIL("0xFF60", "0xFF60 is FULLWIDTH RIGHT WHITE PARENTHESIS and should be 2 wide", Continue);
     QTEST(konsole_wcwidth(character), "width");
 }
 
