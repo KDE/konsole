@@ -68,6 +68,7 @@
 
 // Own
 #include "konsole_wcwidth.h"
+#include "konsole_export.h"
 
 struct interval {
     unsigned long first;
@@ -125,7 +126,7 @@ static int bisearch(unsigned long ucs, const struct interval* table, int max)
  * in ISO 10646.
  */
 
-int konsole_wcwidth(quint16 oucs)
+int KONSOLEPRIVATE_EXPORT konsole_wcwidth(quint16 oucs)
 {
     /* NOTE: It is not possible to compare quint16 with the new last four lines of characters,
      * therefore this cast is now necessary.

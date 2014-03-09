@@ -18,6 +18,9 @@ endif()
 kde4_add_unit_test(CharacterColorTest CharacterColorTest.cpp)
 target_link_libraries(CharacterColorTest ${KONSOLE_TEST_LIBS})
 
+kde4_add_unit_test(CharacterWidthTest CharacterWidthTest.cpp)
+target_link_libraries(CharacterWidthTest ${KONSOLE_TEST_LIBS})
+
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     kde4_add_unit_test(DBusTest DBusTest.cpp)
     target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS})
