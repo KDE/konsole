@@ -52,6 +52,8 @@ void CharacterWidthTest::testWidth_data()
     QTest::newRow("0x10A06") << quint16(0x10A06) << 1;
 
     QTest::newRow("0x3000") << quint16(0x3000) << 2;
+    QTest::newRow("0x300a") << quint16(0x300a) << 2;
+    QTest::newRow("0x300b") << quint16(0x300b) << 2;
     QTest::newRow("0xFF01") << quint16(0xFF01) << 2;
     QTest::newRow("0xFF5F") << quint16(0xFF5F) << 2;
     QTest::newRow("0xFF60") << quint16(0xFF60) << 2;
