@@ -75,7 +75,6 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     _searchTimer->setInterval(250);
     _searchTimer->setSingleShot(true);
     connect(_searchTimer , SIGNAL(timeout()) , this , SLOT(notifySearchChanged()));
-    connect(_searchEdit , SIGNAL(clearButtonClicked()) , this , SLOT(clearLineEdit()));
     connect(_searchEdit , SIGNAL(textChanged(QString)) , _searchTimer , SLOT(start()));
 
     _findNextButton = new QToolButton(this);

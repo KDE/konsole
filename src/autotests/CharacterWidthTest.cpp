@@ -69,5 +69,3 @@ void CharacterWidthTest::testWidth()
 
 QTEST_KDEMAIN_CORE(CharacterWidthTest)
 
-#include "CharacterWidthTest.moc"
-
