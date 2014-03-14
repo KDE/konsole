@@ -9,6 +9,12 @@ ecm_mark_as_test(CharacterColorTest)
 add_test(CharacterColorTest CharacterColorTest)
 target_link_libraries(CharacterColorTest ${KONSOLE_TEST_LIBS})
 
+add_executable(CharacterWidthTest CharacterWidthTest.cpp)
+ecm_mark_as_test(CharacterWidthTest)
+add_test(CharacterWidthTest CharacterWidthTest)
+target_link_libraries(CharacterWidthTest ${KONSOLE_TEST_LIBS})
+
+
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_executable(DBusTest DBusTest.cpp)
     ecm_mark_as_test(DBusTest)
