@@ -69,7 +69,7 @@ using namespace Konsole;
 static bool useTransparency()
 {
     const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-    const bool compositingAvailable = KWindowSystem::compositingActive();
+    const bool compositingAvailable = false; // bko 332408 KWindowSystem::compositingActive();
     return compositingAvailable && args->isSet("transparency");
 }
 
