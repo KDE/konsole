@@ -12,9 +12,11 @@ Icon=utilities-terminal
 
 Name=Run In Konsole
 Name[ca]=Executa en el Konsole
+Name[ca@valencia]=Executa en el Konsole
 Name[cs]=Spustit v Konsoli
 Name[da]=Kør i Konsole
 Name[de]=In Konsole ausführen
+Name[el]=Εκτέλεση στο Konsole
 Name[es]=Ejecutar en Konsole
 Name[fi]=Suorita Konsolessa
 Name[fr]=Lancer dans Konsole
