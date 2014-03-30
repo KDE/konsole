@@ -23,6 +23,8 @@
 // Qt
 #include <QtGui/QFontMetrics>
 #include <QtCore/QFileInfo>
+#include <QCompleter>
+#include <QFileSystemModel>
 
 // KDE
 #include <KColorDialog>
@@ -78,10 +80,13 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
             SLOT(setRandomizedBackgroundColor(bool)));
 
     // wallpaper stuff
-#pragma message("Look at this setCompletionObject again")
-//    KUrlCompletion* fileCompletion = new KUrlCompletion(KUrlCompletion::FileCompletion);
-//    fileCompletion->setParent(this);
-//    _ui->wallpaperPath->setCompletionObject(fileCompletion);
+    QFileSystemModel *dirModel = new QFileSystemModel(this);
+    dirModel->setFilter(QDir::AllEntries);
+    dirModel->setRootPath(QString('/'));
+    QCompleter *completer = new QCompleter(this);
+    completer->setModel(dirModel); 
+    _ui->wallpaperPath->setCompleter(completer);
+
     _ui->wallpaperPath->setClearButtonEnabled(true);
     _ui->wallpaperSelectButton->setIcon(KIcon("image-x-generic"));
 
