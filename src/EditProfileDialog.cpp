@@ -409,7 +409,6 @@ void EditProfileDialog::commandChanged(const QString& command)
 }
 void EditProfileDialog::selectInitialDir()
 {
-#pragma message("Fix crashes with KFileDialog")
     const KUrl url = KFileDialog::getExistingDirectoryUrl(KUrl(_ui->initialDirEdit->text()),
                      this,
                      i18n("Select Initial Directory"));
