@@ -202,16 +202,16 @@ class CompactHistoryBlock
 public:
     CompactHistoryBlock() {
         _blockLength = 4096 * 64; // 256kb
-        _head = (quint8*) mmap(0, _blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
-        //_head = (quint8*) malloc(_blockLength);
+//         _head = (quint8*) mmap(0, _blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
+        _head = (quint8*) malloc(_blockLength);
         Q_ASSERT(_head != MAP_FAILED);
         _tail = _blockStart = _head;
         _allocCount = 0;
     }
 
     virtual ~CompactHistoryBlock() {
-        //free(_blockStart);
-        munmap(_blockStart, _blockLength);
+        free(_blockStart);
+//         munmap(_blockStart, _blockLength);
     }
 
     virtual unsigned int remaining() {

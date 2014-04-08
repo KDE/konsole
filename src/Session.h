@@ -47,7 +47,11 @@ class KProcess;
 namespace Konsole
 {
 class Emulation;
+#ifndef _WIN32
 class Pty;
+#else
+class WinConsole;
+#endif
 class ProcessInfo;
 class TerminalDisplay;
 class ZModemDialog;
@@ -697,7 +701,11 @@ private:
 
     QUuid            _uniqueIdentifier; // SHELL_SESSION_ID
 
+#ifndef _WIN32
     Pty*          _shellProcess;
+#else
+    WinConsole*   _shellProcess;
+#endif
     Emulation*    _emulation;
 
     QList<TerminalDisplay*> _views;

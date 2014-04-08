@@ -51,11 +51,23 @@
 #include <sessionadaptor.h>
 
 #include "ProcessInfo.h"
-#include "Pty.h"
 #include "TerminalDisplay.h"
 #include "ShellCommand.h"
+#ifndef _WIN32
+#include "Pty.h"
 #include "Vt102Emulation.h"
+#else
+#include "WinConsole.h"
+#include "WinConEmulation.h"
+#endif
+
+#ifndef _WIN32
+#define ZMODEM_SUPPORT 1
+#endif
+
+#ifdef ZMODEM_SUPPORT
 #include "ZModemDialog.h"
+#endif
 #include "History.h"
 
 using namespace Konsole;
@@ -124,7 +136,11 @@ Session::Session(QObject* parent) :
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/") + QString::number(_sessionId), this);
 
     //create emulation backend
+#ifndef _WIN32
     _emulation = new Vt102Emulation();
+#else
+    _emulation = new WinConEmulation();
+#endif
 
     connect(_emulation, SIGNAL(titleChanged(int,QString)),
             this, SLOT(setUserTitle(int,QString)));
@@ -173,9 +189,11 @@ void Session::openTeletype(int fd)
         kWarning() << "Attempted to open teletype in a running session.";
         return;
     }
-
+    // FIXME:Patrick - we need to find out whether fd is needed or useful
+    // and how to start a console process on windows
     delete _shellProcess;
 
+#ifndef _WIN32
     if (fd < 0)
         _shellProcess = new Pty();
     else
@@ -192,6 +210,17 @@ void Session::openTeletype(int fd)
     // UTF8 mode
     connect(_emulation, SIGNAL(useUtf8Request(bool)),
             _shellProcess, SLOT(setUtf8Mode(bool)));
+#else
+    _shellProcess = new WinConsole();
+    reinterpret_cast<WinConEmulation*>(_emulation)->setConsole(_shellProcess);
+    connect(_shellProcess, SIGNAL(cursorChanged(int, int)), _emulation, SLOT(updateCursorPosition(int, int)));
+    connect(_shellProcess, SIGNAL(termTitleChanged(int, QString)), _emulation, SIGNAL(titleChanged(int, QString)));
+    connect(_shellProcess, SIGNAL(outputChanged()), _emulation, SLOT(updateBuffer()));
+    connect(_shellProcess, SIGNAL(scrollHappened(int, int)), _emulation, SLOT(updateScrollHistory(int, int)));
+    // FIXME:Patrick
+    // try to find out how to let interaction happen between WinConsole and WinConEmulation
+    qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
+#endif
 
     // get notified when the pty process is finished
     connect(_shellProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
@@ -405,6 +434,7 @@ void Session::terminalWarning(const QString& message)
     static const QByteArray warningText = i18nc("@info:shell Alert the user with red color text", "Warning: ").toLocal8Bit();
     QByteArray messageText = message.toLocal8Bit();
 
+    // FIXME:Patrick this won't work with WinConEmulation!
     static const char redPenOn[] = "\033[1m\033[31m";
     static const char redPenOff[] = "\033[0m";
 
@@ -446,7 +476,12 @@ void Session::run()
     const int CHOICE_COUNT = 3;
     // if '_program' is empty , fall back to default shell. If that is not set
     // then fall back to /bin/sh
+#ifndef _WIN32
     QString programs[CHOICE_COUNT] = {_program, qgetenv("SHELL"), "/bin/sh"};
+#else
+    // on windows, fall back to %COMSPEC% or to cmd.exe
+    QString programs[CHOICE_COUNT] = {_program, qgetenv("COMSPEC"), "cmd.exe"};
+#endif
     QString exec;
     int choice = 0;
     while (choice < CHOICE_COUNT) {
@@ -478,8 +513,10 @@ void Session::run()
     }
 
     _shellProcess->setFlowControlEnabled(_flowControlEnabled);
+#ifndef _WIN32
     _shellProcess->setEraseChar(_emulation->eraseChar());
     _shellProcess->setUseUtmp(_addToUtmp);
+#endif
 
     // this is not strictly accurate use of the COLORFGBG variable.  This does not
     // tell the terminal exactly which colors are being used, but instead approximates
@@ -490,7 +527,7 @@ void Session::run()
 
     addEnvironmentEntry(QString("SHELL_SESSION_ID=%1").arg(shellSessionId()));
 
-    addEnvironmentEntry(QString("WINDOWID=%1").arg(QString::number(windowId())));
+    addEnvironmentEntry(QString("WINDOWID=%1").arg(QString::number((quintptr)windowId())));
 
     const QString dbusService = QDBusConnection::sessionBus().baseService();
     addEnvironmentEntry(QString("KONSOLE_DBUS_SERVICE=%1").arg(dbusService));
@@ -504,6 +541,9 @@ void Session::run()
         terminalWarning(_shellProcess->errorString());
         return;
     }
+#ifdef _WIN32
+    updateTerminalSize();
+#endif
 
     _shellProcess->setWriteable(false);  // We are reachable via kwrited.
 
@@ -1162,20 +1202,25 @@ bool Session::flowControlEnabled() const
 }
 void Session::fireZModemDetected()
 {
+#ifdef ZMODEM_SUPPORT
     if (!_zmodemBusy) {
         QTimer::singleShot(10, this, SIGNAL(zmodemDetected()));
         _zmodemBusy = true;
     }
+#endif
 }
 
 void Session::cancelZModem()
 {
+#ifdef ZMODEM_SUPPORT
     _shellProcess->sendData("\030\030\030\030", 4); // Abort
     _zmodemBusy = false;
+#endif
 }
 
 void Session::startZModem(const QString& zmodem, const QString& dir, const QStringList& list)
 {
+#ifdef ZMODEM_SUPPORT
     _zmodemBusy = true;
     _zmodemProc = new KProcess();
     _zmodemProc->setOutputChannelMode(KProcess::SeparateChannels);
@@ -1206,10 +1251,12 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
             this, SLOT(zmodemFinished()));
 
     _zmodemProgress->show();
+#endif
 }
 
 void Session::zmodemReadAndSendBlock()
 {
+#ifdef ZMODEM_SUPPORT
     _zmodemProc->setReadChannel(QProcess::StandardOutput);
     QByteArray data = _zmodemProc->readAll();
 
@@ -1217,10 +1264,12 @@ void Session::zmodemReadAndSendBlock()
         return;
 
     _shellProcess->sendData(data.constData(), data.count());
+#endif
 }
 
 void Session::zmodemReadStatus()
 {
+#ifdef ZMODEM_SUPPORT
     _zmodemProc->setReadChannel(QProcess::StandardError);
     QByteArray msg = _zmodemProc->readAll();
     while (!msg.isEmpty()) {
@@ -1239,17 +1288,21 @@ void Session::zmodemReadStatus()
         if (!txt.isEmpty())
             _zmodemProgress->addProgressText(QString::fromLocal8Bit(txt));
     }
+#endif
 }
 
 void Session::zmodemReceiveBlock(const char* data, int len)
 {
+#ifdef ZMODEM_SUPPORT
     QByteArray bytes(data, len);
 
     _zmodemProc->write(bytes);
+#endif
 }
 
 void Session::zmodemFinished()
 {
+#ifdef ZMODEM_SUPPORT
     /* zmodemFinished() is called by QProcess's finished() and
        ZModemDialog's user1Clicked(). Therefore, an invocation by
        user1Clicked() will recursively invoke this function again
@@ -1269,6 +1322,7 @@ void Session::zmodemFinished()
         _shellProcess->sendData("\001\013\n", 3); // Try to get prompt back
         _zmodemProgress->transferDone();
     }
+#endif
 }
 
 void Session::onReceiveBlock(const char* buf, int len)

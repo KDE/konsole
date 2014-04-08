@@ -32,6 +32,7 @@
 // Konsole
 #include "ProfileManager.h"
 
+using Konsole::Profile;
 using Konsole::ProfileList;
 
 ProfileList::ProfileList(bool addShortcuts , QObject* parent)

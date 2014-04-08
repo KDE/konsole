@@ -28,6 +28,11 @@ else()
   set(HAVE_OS_DRAGONFLYBSD 0)
 endif()
 
+if(WIN32)
+    find_package(KcwSH REQUIRED)
+    include_directories(${KCWSH_INCLUDE_DIRS})
+endif()
+
 include(CheckIncludeFiles)
 
 configure_file(config-konsole.h.cmake
@@ -101,7 +106,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ProfileReader.cpp
                         ProfileWriter.cpp
                         ProfileManager.cpp
-                        Pty.cpp
                         RenameTabDialog.cpp
                         RenameTabWidget.cpp
                         Screen.cpp
@@ -121,7 +125,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ViewManager.cpp
                         ViewProperties.cpp
                         ViewSplitter.cpp
-                        Vt102Emulation.cpp
                         ZModemDialog.cpp
                         PrintOptions.cpp
                         konsole_wcwidth.cpp
@@ -143,6 +146,11 @@ set(konsole_LIBS ${X11_LIBRARIES}
                  KF5::KDE4Support
                  KF5::KIOWidgets
 )
+if(WIN32)
+    set(konsoleprivate_SRCS ${konsoleprivate_SRCS} WinConsole.cpp WinConEmulation.cpp)
+else()
+    set(konsoleprivate_SRCS ${konsoleprivate_SRCS} Pty.cpp Vt102Emulation.cpp)
+endif()
 
 if(HAVE_LIBKONQ)
   set(konsole_LIBS ${konsole_LIBS} ${LIBKONQ_LIBRARY})
@@ -167,6 +175,10 @@ add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
 target_link_libraries(konsoleprivate ${konsole_LIBS}
 )
 target_link_libraries(konsoleprivate LINK_INTERFACE_LIBRARIES ${konsole_LIBS})
+if(WIN32)
+    target_link_libraries(konsoleprivate ${KCWSH_LIBRARIES})
+    target_link_libraries(konsoleprivate LINK_INTERFACE_LIBRARIES ${KCWSH_LIBRARIES})
+endif()
 
 set(konsole_KDEINIT_SRCS
    Application.cpp
