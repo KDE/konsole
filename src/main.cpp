@@ -20,6 +20,7 @@
 // Own
 #include "Application.h"
 #include "MainWindow.h"
+#include "config-konsole.h"
 
 // OS specific
 #include <kde_file.h>
@@ -103,7 +104,7 @@ bool shouldUseNewProcess()
     QStringList qtProblematicOptions;
     qtProblematicOptions << "session" << "name" << "reverse"
                          << "stylesheet" << "graphicssystem";
-#if defined(Q_WS_X11)
+#if HAVE_X11
     qtProblematicOptions << "display" << "visual";
 #endif
     foreach(const QString& option, qtProblematicOptions) {
@@ -116,7 +117,7 @@ bool shouldUseNewProcess()
     const KCmdLineArgs* kdeArgs = KCmdLineArgs::parsedArgs("kde");
     QStringList kdeProblematicOptions;
     kdeProblematicOptions << "config" << "style";
-#if defined(Q_WS_X11)
+#if HAVE_X11
     kdeProblematicOptions << "waitforwm";
 #endif
     foreach(const QString& option, kdeProblematicOptions) {
