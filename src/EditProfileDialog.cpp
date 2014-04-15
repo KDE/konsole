@@ -1319,22 +1319,17 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     painter->setBrush(gradient);
     painter->drawRoundRect(backgroundRect , 4 , 30);
 
-    //const bool isChecked = index.data(Qt::CheckStateRole) == Qt::Checked;
     const bool isSelected = option.state & QStyle::State_Selected;
 
     // draw border on selected items
-    if (isSelected) { //|| isChecked )
+    if (isSelected) {
         static const int selectedBorderWidth = 6;
 
         painter->setBrush(QBrush(Qt::NoBrush));
         QPen pen;
 
         QColor highlightColor = option.palette.highlight().color();
-
-        if (isSelected)
-            highlightColor.setAlphaF(1.0);
-        else
-            highlightColor.setAlphaF(0.7);
+        highlightColor.setAlphaF(1.0);
 
         pen.setBrush(highlightColor);
         pen.setWidth(selectedBorderWidth);
