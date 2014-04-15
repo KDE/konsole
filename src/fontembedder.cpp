@@ -76,6 +76,9 @@ int main(int argc, char **argv)
 
     QTextStream input(&inFile);
 
+    // Currently, for Konsole, the input glyphs file ranges from 0x2500
+    // (9472) to x257f (9599) so this 128 will handle it.  However, if
+    // more glyphs are added to the input file, this will be an issue.
     quint32 glyphStates[128];
     QMap<quint32, int> glyphMap;
 
@@ -92,19 +95,20 @@ int main(int argc, char **argv)
 
         //Must be a glyph ID.
         int glyph = line.toInt(0, 16);
-        if ((glyph < 0x2500) || (glyph > 0x257f))
-            qFatal("Invalid glyph number");
+        if ((glyph < 0x2500) || (glyph > 0x257f)) {
+            qWarning("Invalid glyph number: %d aborting...", glyph);
+            exit(1);
+        } else {
+            glyph = glyph - 0x2500;
 
-        glyph = glyph - 0x2500;
+            glyphStates[glyph] = readGlyph(input);
+            // kWarning()<<glyph<<";"<<glyphStates[glyph];
 
-        glyphStates[glyph] = readGlyph(input);
-        // kWarning()<<glyph<<";"<<glyphStates[glyph];
-
-        if (glyphMap.contains(glyphStates[glyph])) {
-            kWarning()<<"Code "<<glyph<<" and "<<glyphMap.value(glyphStates[glyph])<<"have the same glyph state"<<glyphStates[glyph];
+            if (glyphMap.contains(glyphStates[glyph])) {
+                kWarning()<<"Code "<<glyph<<" and "<<glyphMap.value(glyphStates[glyph])<<"have the same glyph state"<<glyphStates[glyph];
+            }
+            glyphMap[glyphStates[glyph]] = glyph;
         }
-        glyphMap[glyphStates[glyph]] = glyph;
-        
     }
 
     //Output.
