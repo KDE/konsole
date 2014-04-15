@@ -334,13 +334,13 @@ void ProcessInfo::setFileError(QFile::FileError error)
 {
     switch (error) {
     case PermissionsError:
-        setError(PermissionsError);
+        setError(ProcessInfo::PermissionsError);
         break;
     case NoError:
-        setError(NoError);
+        setError(ProcessInfo::NoError);
         break;
     default:
-        setError(UnknownError);
+        setError(ProcessInfo::UnknownError);
     }
 }
 
