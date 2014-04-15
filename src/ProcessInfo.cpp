@@ -333,10 +333,10 @@ void ProcessInfo::addEnvironmentBinding(const QString& name , const QString& val
 void ProcessInfo::setFileError(QFile::FileError error)
 {
     switch (error) {
-    case PermissionsError:
+    case QFile::PermissionsError:
         setError(ProcessInfo::PermissionsError);
         break;
-    case NoError:
+    case QFile::NoError:
         setError(ProcessInfo::NoError);
         break;
     default:
