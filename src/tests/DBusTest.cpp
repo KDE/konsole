@@ -78,21 +78,16 @@ void DBusTest::initTestCase()
     }
     //kDebug()<< "Using service: " + _interfaceName.toLatin1();
 
-    _iface = new QDBusInterface(_interfaceName,
-                                QLatin1String("/Konsole"),
-                                QLatin1String("org.kde.konsole.Konsole"),
-                                QDBusConnection::sessionBus(), this);
-    QVERIFY(_iface);
-    QVERIFY(_iface->isValid());
+    QDBusInterface iface(_interfaceName,
+                         QLatin1String("/Konsole"),
+                         QLatin1String("org.kde.konsole.Konsole"));
+    QVERIFY(iface.isValid());
 }
 
 /* Close the Konsole window that was opened to test the DBus interface
  */
 void DBusTest::cleanupTestCase()
 {
-    QVERIFY(_iface);
-    QVERIFY(_iface->isValid());
-
     // Need to take care of when user has CloseAllTabs=False otherwise
     // they will get a popup dialog when we try to close this.
 
@@ -118,9 +113,6 @@ void DBusTest::testSessions()
     QDBusReply<QByteArray> arrayReply;
     QDBusReply<QString> stringReply;
     QDBusReply<QStringList> listReply;
-
-    QVERIFY(_iface);
-    QVERIFY(_iface->isValid());
 
     QDBusInterface iface(_interfaceName,
                          QLatin1String("/Sessions/1"),
