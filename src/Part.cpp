@@ -337,9 +337,12 @@ bool Part::openUrl(const KUrl& aUrl)
 
     if (aUrl.isLocalFile() /*&& b_openUrls*/) {
         KDE_struct_stat buff;
-        KDE::stat(QFile::encodeName(aUrl.path()), &buff);
-        QString text = (S_ISDIR(buff.st_mode) ? aUrl.path() : aUrl.directory());
-        showShellInDir(text);
+        if (KDE::stat(QFile::encodeName(aUrl.path()), &buff) == 0) {
+            QString text = (S_ISDIR(buff.st_mode) ? aUrl.path() : aUrl.directory());
+            showShellInDir(text);
+        } else {
+            showShellInDir(QDir::homePath());
+        }
     } else {
         showShellInDir(QDir::homePath());
     }
