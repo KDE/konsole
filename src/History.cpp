@@ -373,7 +373,10 @@ void* CompactHistoryLine::operator new(size_t size, CompactHistoryBlockList& blo
 
 CompactHistoryLine::CompactHistoryLine(const TextLine& line, CompactHistoryBlockList& bList)
     : _blockListRef(bList),
-      _formatLength(0)
+      _formatArray(0),
+      _text(0),
+      _formatLength(0),
+      _wrapped(false)
 {
     _length = line.size();
 
