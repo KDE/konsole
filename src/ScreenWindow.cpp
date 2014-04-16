@@ -25,7 +25,7 @@
 
 using namespace Konsole;
 
-ScreenWindow::ScreenWindow(QObject* parent)
+ScreenWindow::ScreenWindow(Screen* screen, QObject* parent)
     : QObject(parent)
     , _windowBuffer(0)
     , _windowBufferSize(0)
@@ -36,6 +36,7 @@ ScreenWindow::ScreenWindow(QObject* parent)
     , _trackOutput(true)
     , _scrollCount(0)
 {
+    setScreen(screen);
 }
 
 ScreenWindow::~ScreenWindow()

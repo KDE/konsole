@@ -63,7 +63,7 @@ public:
      * to notify the window when the associated screen has changed and synchronize selection updates
      * between all views on a session.
      */
-    explicit ScreenWindow(QObject* parent = 0);
+    ScreenWindow(Screen* screen, QObject* parent = 0);
     virtual ~ScreenWindow();
 
     /** Sets the screen which this window looks onto */

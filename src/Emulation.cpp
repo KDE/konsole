@@ -79,8 +79,7 @@ void Emulation::bracketedPasteModeChanged(bool bracketedPasteMode)
 
 ScreenWindow* Emulation::createWindow()
 {
-    ScreenWindow* window = new ScreenWindow();
-    window->setScreen(_currentScreen);
+    ScreenWindow* window = new ScreenWindow(_currentScreen);
     _windows << window;
 
     connect(window , SIGNAL(selectionChanged()),
