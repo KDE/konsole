@@ -48,7 +48,6 @@ protected slots:
 
 private:
     QString _interfaceName;
-    QDBusInterface* _iface;
 };
 
 }
