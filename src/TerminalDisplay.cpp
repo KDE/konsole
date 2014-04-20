@@ -2912,7 +2912,6 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding,
                                              QSizePolicy::Expanding),
                              1, 0);
-
     }
     // Remove message after a few seconds
     if (suspended) {

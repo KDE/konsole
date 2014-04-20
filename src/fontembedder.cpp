@@ -118,11 +118,13 @@ int main(int argc, char **argv)
 
     //Nicely formatted: 8 per line, 16 lines
     for (int line = 0; line < 128; line += 8) {
-        cout << "\t";
+        cout << "  ";
         for (int col = line; col < line + 8; ++col) {
             cout << "0x" << hex << setw(8) << setfill('0') << glyphStates[col];
-            if (col != 127)
+            if (col != line + 7)
                 cout << ", ";
+            else if (col != 127)
+                cout << ",";
         }
         cout << "\n";
     }

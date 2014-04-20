@@ -87,7 +87,7 @@ MainWindow::MainWindow()
         QMapIterator<QString, QString> i(configEntries);
         while (i.hasNext()) {
             i.next();
-            if (i.key().startsWith(QLatin1String("Width")) 
+            if (i.key().startsWith(QLatin1String("Width"))
                     || i.key().startsWith(QLatin1String("Height"))) {
                 group.deleteEntry(i.key());
             }
