@@ -2901,6 +2901,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _outputSuspendedLabel->setBackgroundRole(QPalette::Base);
         _outputSuspendedLabel->setFont(KGlobalSettings::smallestReadableFont());
         _outputSuspendedLabel->setContentsMargins(5, 5, 5, 5);
+        _outputSuspendedLabel->setWordWrap(true);
 
         //enable activation of "Xon/Xoff" link in label
         _outputSuspendedLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse |
