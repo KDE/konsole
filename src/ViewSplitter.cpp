@@ -85,8 +85,8 @@ ViewSplitter* ViewSplitter::activeSplitter()
 void ViewSplitter::registerContainer(ViewContainer* container)
 {
     _containers << container;
-    connect(container , SIGNAL(destroyed(ViewContainer*)) , this , SLOT(containerDestroyed(ViewContainer*)));
-    connect(container , SIGNAL(empty(ViewContainer*)) , this , SLOT(containerEmpty(ViewContainer*)));
+    connect(container , static_cast<void(ViewContainer::*)(ViewContainer*)>(&Konsole::ViewContainer::destroyed) , this , &Konsole::ViewSplitter::containerDestroyed);
+    connect(container , &Konsole::ViewContainer::empty , this , &Konsole::ViewSplitter::containerEmpty);
 }
 
 void ViewSplitter::unregisterContainer(ViewContainer* container)
@@ -145,7 +145,7 @@ void ViewSplitter::addContainer(ViewContainer* container ,
         splitter->updateSizes();
     } else {
         ViewSplitter* newSplitter = new ViewSplitter(this);
-        connect(newSplitter , SIGNAL(empty(ViewSplitter*)) , splitter , SLOT(childEmpty(ViewSplitter*)));
+        connect(newSplitter , &Konsole::ViewSplitter::empty , splitter , &Konsole::ViewSplitter::childEmpty);
 
         ViewContainer* oldContainer = splitter->activeContainer();
         const int oldContainerIndex = splitter->indexOf(oldContainer->containerWidget());

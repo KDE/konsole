@@ -70,10 +70,10 @@ MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
 
-    connect(window, SIGNAL(newWindowRequest(Profile::Ptr,QString)),
-            this, SLOT(createWindow(Profile::Ptr,QString)));
-    connect(window, SIGNAL(viewDetached(Session*)),
-            this, SLOT(detachView(Session*)));
+    connect(window, &Konsole::MainWindow::newWindowRequest,
+            this, &Konsole::Application::createWindow);
+    connect(window, &Konsole::MainWindow::viewDetached,
+            this, &Konsole::Application::detachView);
 
     return window;
 }

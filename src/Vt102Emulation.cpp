@@ -70,7 +70,7 @@ Vt102Emulation::Vt102Emulation()
       _titleUpdateTimer(new QTimer(this))
 {
     _titleUpdateTimer->setSingleShot(true);
-    QObject::connect(_titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
+    QObject::connect(_titleUpdateTimer , &QTimer::timeout , this , &Konsole::Vt102Emulation::updateTitle);
 
     initTokenizer();
     reset();
@@ -834,12 +834,9 @@ void Vt102Emulation::clearScreenAndSetColumns(int columnCount)
     _currentScreen->setCursorYX(0,0);
 }
 
-void Vt102Emulation::sendString(const char* s , int length)
+void Vt102Emulation::sendString(const QByteArray& s)
 {
-  if ( length >= 0 )
-    emit sendData(s,length);
-  else
-    emit sendData(s,qstrlen(s));
+    emit sendData(s);
 }
 
 void Vt102Emulation::reportCursorPosition()
@@ -1054,7 +1051,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
         else
             textToSend += _codec->fromUnicode(event->text());
 
-        sendData(textToSend.constData(), textToSend.length());
+        sendData(textToSend);
     }
     else
     {

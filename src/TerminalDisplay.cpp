@@ -115,9 +115,9 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
     _screenWindow = window;
 
     if (_screenWindow) {
-        connect(_screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()));
-        connect(_screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()));
-        connect(_screenWindow , SIGNAL(currentResultLineChanged()) , this , SLOT(updateImage()));
+        connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateLineProperties);
+        connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateImage);
+        connect(_screenWindow.data() , &Konsole::ScreenWindow::currentResultLineChanged , this , &Konsole::TerminalDisplay::updateImage);
         _screenWindow->setWindowLines(_lines);
     }
 }
@@ -363,20 +363,20 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     // set the scroll bar's slider to occupy the whole area of the scroll bar initially
     setScroll(0, 0);
     _scrollBar->setCursor(Qt::ArrowCursor);
-    connect(_scrollBar, SIGNAL(valueChanged(int)),
-            this, SLOT(scrollBarPositionChanged(int)));
-    connect(_scrollBar, SIGNAL(sliderMoved(int)),
-            this, SLOT(viewScrolledByUser()));
+    connect(_scrollBar, &QScrollBar::valueChanged,
+            this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
+    connect(_scrollBar, &QScrollBar::sliderMoved,
+            this, &Konsole::TerminalDisplay::viewScrolledByUser);
 
     // setup timers for blinking text
     _blinkTextTimer = new QTimer(this);
     _blinkTextTimer->setInterval(TEXT_BLINK_DELAY);
-    connect(_blinkTextTimer, SIGNAL(timeout()), this, SLOT(blinkTextEvent()));
+    connect(_blinkTextTimer, &QTimer::timeout, this, &Konsole::TerminalDisplay::blinkTextEvent);
 
     // setup timers for blinking cursor
     _blinkCursorTimer = new QTimer(this);
     _blinkCursorTimer->setInterval(QApplication::cursorFlashTime() / 2);
-    connect(_blinkCursorTimer, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
+    connect(_blinkCursorTimer, &QTimer::timeout, this, &Konsole::TerminalDisplay::blinkCursorEvent);
 
     // hide mouse cursor on keystroke or idle
     KCursor::setAutoHideCursor(this, true);
@@ -1157,7 +1157,7 @@ void TerminalDisplay::showResizeNotification()
             _resizeTimer = new QTimer(this);
             _resizeTimer->setInterval(SIZE_HINT_DURATION);
             _resizeTimer->setSingleShot(true);
-            connect(_resizeTimer, SIGNAL(timeout()), _resizeWidget, SLOT(hide()));
+            connect(_resizeTimer, &QTimer::timeout, _resizeWidget, &QLabel::hide);
         }
         QString sizeStr = i18n("Size: %1 x %2", _columns, _lines);
         _resizeWidget->setText(sizeStr);
@@ -1808,12 +1808,12 @@ void TerminalDisplay::setScroll(int cursor, int slines)
         return;
     }
 
-    disconnect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
+    disconnect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
     _scrollBar->setRange(0, slines - _lines);
     _scrollBar->setSingleStep(1);
     _scrollBar->setPageStep(_lines);
     _scrollBar->setValue(cursor);
-    connect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
+    connect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
 }
 
 void TerminalDisplay::setScrollFullPage(bool fullPage)
@@ -3188,7 +3188,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
     if (event->mimeData()->hasFormat("text/plain") ||
             event->mimeData()->hasFormat("text/uri-list")) {
-        emit sendStringToEmu(dropText.toLocal8Bit().constData());
+        emit sendStringToEmu(dropText.toLocal8Bit());
     }
 }
 
@@ -3197,7 +3197,7 @@ void TerminalDisplay::dropMenuPasteActionTriggered()
     if (sender()) {
         const QAction* action = qobject_cast<const QAction*>(sender());
         if (action) {
-            emit sendStringToEmu(action->data().toString().toLocal8Bit().constData());
+            emit sendStringToEmu(action->data().toString().toLocal8Bit());
         }
     }
 }
@@ -3207,7 +3207,7 @@ void TerminalDisplay::dropMenuCdActionTriggered()
     if (sender()) {
         const QAction* action = qobject_cast<const QAction*>(sender());
         if (action) {
-            emit sendStringToEmu(action->data().toString().toLocal8Bit().constData());
+            emit sendStringToEmu(action->data().toString().toLocal8Bit());
         }
     }
 }

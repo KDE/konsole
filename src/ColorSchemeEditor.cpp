@@ -57,8 +57,8 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
 {
     // Kdialog buttons
     setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
-    connect(this, SIGNAL(applyClicked()), this, SLOT(saveColorScheme()));
-    connect(this, SIGNAL(okClicked()), this, SLOT(saveColorScheme()));
+    connect(this, &Konsole::ColorSchemeEditor::applyClicked, this, &Konsole::ColorSchemeEditor::saveColorScheme);
+    connect(this, &Konsole::ColorSchemeEditor::okClicked, this, &Konsole::ColorSchemeEditor::saveColorScheme);
 
     // ui
     _ui = new Ui::ColorSchemeEditor();
@@ -66,18 +66,18 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
 
     // description edit
     _ui->descriptionEdit->setClearButtonEnabled(true);
-    connect(_ui->descriptionEdit , SIGNAL(textChanged(QString)) , this ,
-            SLOT(setDescription(QString)));
+    connect(_ui->descriptionEdit , &QLineEdit::textChanged , this ,
+            &Konsole::ColorSchemeEditor::setDescription);
 
     // transparency slider
     QFontMetrics metrics(font());
     _ui->transparencyPercentLabel->setMinimumWidth(metrics.width("100%"));
 
-    connect(_ui->transparencySlider , SIGNAL(valueChanged(int)) , this , SLOT(setTransparencyPercentLabel(int)));
+    connect(_ui->transparencySlider , &QSlider::valueChanged , this , &Konsole::ColorSchemeEditor::setTransparencyPercentLabel);
 
     // randomized background
-    connect(_ui->randomizedBackgroundCheck , SIGNAL(toggled(bool)) , this ,
-            SLOT(setRandomizedBackgroundColor(bool)));
+    connect(_ui->randomizedBackgroundCheck , &QCheckBox::toggled , this ,
+            &Konsole::ColorSchemeEditor::setRandomizedBackgroundColor);
 
     // wallpaper stuff
     QFileSystemModel *dirModel = new QFileSystemModel(this);
@@ -90,10 +90,10 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     _ui->wallpaperPath->setClearButtonEnabled(true);
     _ui->wallpaperSelectButton->setIcon(KIcon("image-x-generic"));
 
-    connect(_ui->wallpaperSelectButton, SIGNAL(clicked()),
-            this, SLOT(selectWallpaper()));
-    connect(_ui->wallpaperPath, SIGNAL(textChanged(QString)),
-            this, SLOT(wallpaperPathChanged(QString)));
+    connect(_ui->wallpaperSelectButton, &QToolButton::clicked,
+            this, &Konsole::ColorSchemeEditor::selectWallpaper);
+    connect(_ui->wallpaperPath, &QLineEdit::textChanged,
+            this, &Konsole::ColorSchemeEditor::wallpaperPathChanged);
 
     // color table
     _ui->colorTable->setColumnCount(3);
@@ -115,8 +115,8 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
 
     _ui->colorTable->verticalHeader()->hide();
 
-    connect(_ui->colorTable , SIGNAL(itemClicked(QTableWidgetItem*)) , this ,
-            SLOT(editColorItem(QTableWidgetItem*)));
+    connect(_ui->colorTable , &QTableWidget::itemClicked , this ,
+            &Konsole::ColorSchemeEditor::editColorItem);
 
     // warning label when transparency is not available
     _ui->transparencyWarningWidget->setWordWrap(true);

@@ -54,7 +54,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     closeButton->setToolTip(i18nc("@info:tooltip", "Close the search bar"));
     closeButton->setAutoRaise(true);
     closeButton->setIcon(KIcon("dialog-close"));
-    connect(closeButton , SIGNAL(clicked()) , this , SIGNAL(closeClicked()));
+    connect(closeButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::closeClicked);
 
     QLabel* findLabel = new QLabel(i18nc("@label:textbox", "Find:"), this);
     _searchEdit = new QLineEdit(this);
@@ -74,27 +74,27 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     _searchTimer = new QTimer(this);
     _searchTimer->setInterval(250);
     _searchTimer->setSingleShot(true);
-    connect(_searchTimer , SIGNAL(timeout()) , this , SLOT(notifySearchChanged()));
-    connect(_searchEdit , SIGNAL(textChanged(QString)) , _searchTimer , SLOT(start()));
+    connect(_searchTimer , &QTimer::timeout , this , &Konsole::IncrementalSearchBar::notifySearchChanged);
+    connect(_searchEdit , &QLineEdit::textChanged , _searchTimer , static_cast<void(QTimer::*)()>(&QTimer::start));
 
     _findNextButton = new QToolButton(this);
     _findNextButton->setObjectName(QLatin1String("find-next-button"));
     _findNextButton->setText(i18nc("@action:button Go to the next phrase", "Next"));
     _findNextButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     _findNextButton->setToolTip(i18nc("@info:tooltip", "Find the next match for the current search phrase"));
-    connect(_findNextButton , SIGNAL(clicked()) , this , SIGNAL(findNextClicked()));
+    connect(_findNextButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::findNextClicked);
 
     _findPreviousButton = new QToolButton(this);
     _findPreviousButton->setObjectName(QLatin1String("find-previous-button"));
     _findPreviousButton->setText(i18nc("@action:button Go to the previous phrase", "Previous"));
     _findPreviousButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     _findPreviousButton->setToolTip(i18nc("@info:tooltip", "Find the previous match for the current search phrase"));
-    connect(_findPreviousButton , SIGNAL(clicked()) , this , SIGNAL(findPreviousClicked()));
+    connect(_findPreviousButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::findPreviousClicked);
 
 
     _searchFromButton = new QToolButton(this);
     _searchFromButton->setObjectName(QLatin1String("search-from-button"));
-    connect(_searchFromButton , SIGNAL(clicked()) , this , SIGNAL(searchFromClicked()));
+    connect(_searchFromButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::searchFromClicked);
 
     QToolButton* optionsButton = new QToolButton(this);
     optionsButton->setObjectName(QLatin1String("find-options-button"));
@@ -120,27 +120,27 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     _caseSensitive = optionsMenu->addAction(i18nc("@item:inmenu", "Case sensitive"));
     _caseSensitive->setCheckable(true);
     _caseSensitive->setToolTip(i18nc("@info:tooltip", "Sets whether the search is case sensitive"));
-    connect(_caseSensitive, SIGNAL(toggled(bool)),
-            this, SIGNAL(matchCaseToggled(bool)));
+    connect(_caseSensitive, &QAction::toggled,
+            this, &Konsole::IncrementalSearchBar::matchCaseToggled);
 
     _regExpression = optionsMenu->addAction(i18nc("@item:inmenu", "Match regular expression"));
     _regExpression->setCheckable(true);
-    connect(_regExpression, SIGNAL(toggled(bool)),
-            this, SIGNAL(matchRegExpToggled(bool)));
+    connect(_regExpression, &QAction::toggled,
+            this, &Konsole::IncrementalSearchBar::matchRegExpToggled);
 
     _highlightMatches = optionsMenu->addAction(i18nc("@item:inmenu", "Highlight all matches"));
     _highlightMatches->setCheckable(true);
     _highlightMatches->setToolTip(i18nc("@info:tooltip", "Sets whether matching text should be highlighted"));
     _highlightMatches->setChecked(true);
-    connect(_highlightMatches, SIGNAL(toggled(bool)),
-            this, SIGNAL(highlightMatchesToggled(bool)));
+    connect(_highlightMatches, &QAction::toggled,
+            this, &Konsole::IncrementalSearchBar::highlightMatchesToggled);
 
     _reverseSearch = optionsMenu->addAction(i18n("Search backwards"));
     _reverseSearch->setCheckable(true);
     _reverseSearch->setToolTip(i18n("Sets whether search should start from the bottom"));
     _reverseSearch->setChecked(true);
-    connect(_reverseSearch, SIGNAL(toggled(bool)),
-            this, SLOT(updateButtonsAccordingToReverseSearchSetting()));
+    connect(_reverseSearch, &QAction::toggled,
+            this, &Konsole::IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting);
     updateButtonsAccordingToReverseSearchSetting();
 
     barLayout->addStretch();
