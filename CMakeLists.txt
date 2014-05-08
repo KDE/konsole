@@ -24,7 +24,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Widgets Script Test
 find_package(KF5 REQUIRED
     Bookmarks Completion Config ConfigWidgets
     CoreAddons DocTools GuiAddons I18n IconThemes
-    Init KDE4Support KIO Notifications NotifyConfig
+    Init KDELibs4Support KIO Notifications NotifyConfig
     Parts Pty Service TextWidgets WidgetsAddons
     WindowSystem XmlGui
 )
