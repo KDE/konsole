@@ -63,12 +63,80 @@ Double width, mixed fill (double vertical, single horizontal).
 ╚╩╝
 
 Double horizontal, single vertical.
+┍┑
+┕┙
 ╒╕ 
 ╘╛ 
 
 Double vertical, single horizontal.
+┎┒
+┖┚
 ╓╖ 
 ╙╜ 
 
+Single width, double, triple and quadruple dash.
+┌╌╌┐  ┌┄┄┐  ┌┈┈┐
+╎  ╎  ┆  ┆  ┊  ┊
+╎  ╎  ┆  ┆  ┊  ┊
+└╌╌┘  └┄┄┘  └┈┈┘
+
+Double width, double, triple and quadruple dash.
+┏╍╍┓  ┏┅┅┓  ┏┉┉┓
+╏  ╏  ┇  ┇  ┋  ┋
+╏  ╏  ┇  ┇  ┋  ┋
+┗╍╍┛  ┗┅┅┛  ┗┉┉┛
+
+One single, two double lines meet.
+┢┪ ┲┱
+┡┩ ┺┹
+
+One double, two single lines meet.
+┞┦ ┭┮
+┟┧ ┵┶
+
+One single, three double lines meet.
+╇ ╉╊
+╈
+
+One double, three single lines meet.
+╁ ┾┽
+╀
+
+Two double, two single lines meet.
+╆╅
+╄╃
+
+Mixed width, starting, ending and changing width mid-character.
+╷ ╻ ╶╼╸
+╽ ╿ ╺╾╴
+╹ ╵
+
+Rounded.
+╭─╮
+│ │
+╰─╯
+
+Other.
+╲ ╳ ╱
+
+Block elements.
+
+ ▐     ▌ ▛▀#▀▜
+▄▞▀ ▗▄▀▘ ▌▗▄▖▐
+ ▌  ▐    #▐#▌#
+▀▚▄ ▝▀▄▖ ▌▝▀▘▐
+ ▐     ▌ ▙▄#▄▟
+
+▁▂▃▄▅▆▇█ ▖# ▗#
+       ▉ ▌# ▐#
+▔▇     ▊ ▐# ▌#
+       ▋ ▝# ▘#
+░      ▌
+▒░     ▍ ▌# ▐#
+▓▒░  ▉ ▎ ▚# ▞#
+█▓▒░ ▕ ▏ ▐# ▌#
+
+
 VT-102:  http://vt100.net/docs/vt102-ug/table5-13.html
 Unicode: http://www.unicode.org/charts/PDF/U2500.pdf
+     and http://www.unicode.org/charts/PDF/U2580.pdf
