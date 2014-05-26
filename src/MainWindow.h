@@ -169,6 +169,8 @@ private slots:
 
     void applyKonsoleSettings();
 
+    void updateUseTransparency();
+
 public slots:
     void viewFullScreen(bool fullScreen);
 

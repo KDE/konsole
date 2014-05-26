@@ -56,22 +56,11 @@
 #include "SessionManager.h"
 #include "ProfileManager.h"
 #include "KonsoleSettings.h"
+#include "WindowSystemInfo.h"
 #include "settings/GeneralSettings.h"
 #include "settings/TabBarSettings.h"
 
 using namespace Konsole;
-
-/* Normally it would be enough to just have this determined via the window
-   manager. But there exist GPU drivers (NVIDIA) that have serious performance
-   issues if transparency is enabled inside Konsole. The rest of the system
-   works fine. NVIDIA users might want to use --notransparency to work
-   around such issues. */
-static bool useTransparency()
-{
-    const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-    const bool compositingAvailable = false; // bko 332408 KWindowSystem::compositingActive();
-    return compositingAvailable && args->isSet("transparency");
-}
 
 MainWindow::MainWindow()
     : KXmlGuiWindow()
@@ -97,12 +86,9 @@ MainWindow::MainWindow()
         }
     }
 
-    if (useTransparency()) {
-        // It is useful to have translucent terminal area
-        setAttribute(Qt::WA_TranslucentBackground, true);
-        // But it is mostly annoying to have translucent menubar and tabbar
-        setAttribute(Qt::WA_NoSystemBackground, false);
-    }
+    connect(KWindowSystem::self(), SIGNAL(compositingChanged(bool)), this, SLOT(updateUseTransparency()));
+
+    updateUseTransparency();
 
     // create actions for menus
     setupActions();
@@ -149,6 +135,18 @@ MainWindow::MainWindow()
     // this must come at the end
     applyKonsoleSettings();
     connect(KonsoleSettings::self(), &Konsole::KonsoleSettings::configChanged, this, &Konsole::MainWindow::applyKonsoleSettings);
+}
+
+void MainWindow::updateUseTransparency()
+{
+    const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+
+    bool useTranslucency = KWindowSystem::compositingActive() && args->isSet("transparency");
+
+    setAttribute(Qt::WA_TranslucentBackground, useTranslucency);
+    setAttribute(Qt::WA_NoSystemBackground, false);
+
+    WindowSystemInfo::HAVE_TRANSPARENCY = useTranslucency;
 }
 
 void MainWindow::rememberMenuAccelerators()

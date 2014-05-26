@@ -26,5 +26,5 @@
 
 using Konsole::WindowSystemInfo;
 
-const bool WindowSystemInfo::HAVE_TRANSPARENCY = false; // bko 332408 KWindowSystem::compositingActive();
+bool WindowSystemInfo::HAVE_TRANSPARENCY = false;
 
