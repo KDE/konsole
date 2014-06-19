@@ -153,37 +153,25 @@ void ViewContainer::addView(QWidget* view , ViewProperties* item, int index)
 void ViewContainer::viewDestroyed(QObject* object)
 {
     QWidget* widget = static_cast<QWidget*>(object);
-
-    _views.removeAll(widget);
-    _navigation.remove(widget);
-
-    // FIXME This can result in ViewContainerSubClass::removeViewWidget() being
-    // called after the widget's parent has been deleted or partially deleted
-    // in the ViewContainerSubClass instance's destructor.
-    //
-    // Currently deleteLater() is used to remove child widgets in the subclass
-    // constructors to get around the problem, but this is a hack and needs
-    // to be fixed.
-    removeViewWidget(widget);
-
-    emit viewRemoved(widget);
-
-    if (_views.count() == 0)
-        emit empty(this);
+    forgetView(widget);
 }
-void ViewContainer::removeView(QWidget* view)
+
+void ViewContainer::forgetView(QWidget* view)
 {
     _views.removeAll(view);
     _navigation.remove(view);
-
-    disconnect(view, &QWidget::destroyed, this, &Konsole::ViewContainer::viewDestroyed);
-
-    removeViewWidget(view);
 
     emit viewRemoved(view);
 
     if (_views.count() == 0)
         emit empty(this);
+}
+
+void ViewContainer::removeView(QWidget* view)
+{
+    disconnect(view, &QWidget::destroyed, this, &Konsole::ViewContainer::viewDestroyed);
+    removeViewWidget(view);
+    forgetView(view);
 }
 
 const QList<QWidget*> ViewContainer::views() const
@@ -264,6 +252,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
+    connect(_stackWidget.data(), &QStackedWidget::widgetRemoved, this, &TabbedViewContainer::widgetRemoved);
 
     // The tab bar
     _tabBar = new ViewContainerTabBar(_containerWidget, this);
@@ -649,15 +638,18 @@ void TabbedViewContainer::addViewWidget(QWidget* view , int index)
     if (navigationVisibility() == ShowNavigationAsNeeded)
         dynamicTabBarVisibility();
 }
+
 void TabbedViewContainer::removeViewWidget(QWidget* view)
 {
     if (!_stackWidget)
         return;
-    const int index = _stackWidget->indexOf(view);
+    _stackWidget->removeWidget(view);
+}
 
+void TabbedViewContainer::widgetRemoved(int index)
+{
     Q_ASSERT(index != -1);
 
-    _stackWidget->removeWidget(view);
     _tabBar->removeTab(index);
 
     if (navigationVisibility() == ShowNavigationAsNeeded)
@@ -754,11 +746,5 @@ void StackedViewContainer::removeViewWidget(QWidget* view)
 {
     if (!_stackWidget)
         return;
-    const int index = _stackWidget->indexOf(view);
-
-    Q_ASSERT(index != -1);
-    Q_UNUSED(index);
-
     _stackWidget->removeWidget(view);
 }
-

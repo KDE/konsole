@@ -85,8 +85,13 @@ ViewSplitter* ViewSplitter::activeSplitter()
 void ViewSplitter::registerContainer(ViewContainer* container)
 {
     _containers << container;
-    connect(container , static_cast<void(ViewContainer::*)(ViewContainer*)>(&Konsole::ViewContainer::destroyed) , this , &Konsole::ViewSplitter::containerDestroyed);
-    connect(container , &Konsole::ViewContainer::empty , this , &Konsole::ViewSplitter::containerEmpty);
+    // Connecting to container::destroyed() using the new-style connection
+    // syntax causes a crash at exit. I don't know why. Using the old-style
+    // syntax works.
+    //connect(container , static_cast<void(ViewContainer::*)(ViewContainer*)>(&Konsole::ViewContainer::destroyed) , this , &Konsole::ViewSplitter::containerDestroyed);
+    //connect(container , &Konsole::ViewContainer::empty , this , &Konsole::ViewSplitter::containerEmpty);
+    connect(container , SIGNAL(destroyed(ViewContainer*)) , this , SLOT(containerDestroyed(ViewContainer*)));
+    connect(container , SIGNAL(empty(ViewContainer*)) , this , SLOT(containerEmpty(ViewContainer*)));
 }
 
 void ViewSplitter::unregisterContainer(ViewContainer* container)

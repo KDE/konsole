@@ -386,23 +386,6 @@ void ViewManager::sessionFinished()
         emit unplugController(_pluggedController);
 }
 
-void ViewManager::focusActiveView()
-{
-    // give the active view in a container the focus.  this ensures
-    // that controller associated with that view is activated and the session-specific
-    // menu items are replaced with the ones for the newly focused view
-
-    // see the viewFocused() method
-
-    ViewContainer* container = _viewSplitter->activeContainer();
-    if (container) {
-        QWidget* activeView = container->activeView();
-        if (activeView) {
-            activeView->setFocus(Qt::MouseFocusReason);
-        }
-    }
-}
-
 void ViewManager::viewActivated(QWidget* view)
 {
     Q_ASSERT(view != 0);
@@ -761,14 +744,11 @@ void ViewManager::viewDestroyed(QWidget* view)
     Session* session = _sessionMap[ display ];
     _sessionMap.remove(display);
     if (session) {
-        display->deleteLater();
-
         if (session->views().count() == 0)
             session->close();
     }
     //we only update the focus if the splitter is still alive
     if (_viewSplitter) {
-        focusActiveView();
         updateDetachViewState();
     }
     // The below causes the menus  to be messed up
