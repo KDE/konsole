@@ -394,32 +394,37 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
     // it if it is the non-default profile.
     if (sessionActions.size() > 2) {
         // Update the 'New Tab' KActionMenu
-        QMenu* newTabMenu = _newTabMenuAction->menu();
-
-        newTabMenu->clear();
+        if (_newTabMenuAction->menu()) {
+            _newTabMenuAction->menu()->clear();
+        } else {
+            _newTabMenuAction->setMenu(new QMenu());
+        }
         foreach(QAction* sessionAction, sessionActions) {
-            newTabMenu->addAction(sessionAction);
+            _newTabMenuAction->menu()->addAction(sessionAction);
 
             // NOTE: defaultProfile seems to not work here, sigh.
             Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
             if (profile && profile->name() == sessionAction->text().remove('&')) {
                 sessionAction->setIcon(KIcon(profile->icon(), 0, QStringList("emblem-favorite")));
-                newTabMenu->setDefaultAction(sessionAction);
+                _newTabMenuAction->menu()->setDefaultAction(sessionAction);
                 QFont actionFont = sessionAction->font();
                 actionFont.setBold(true);
                 sessionAction->setFont(actionFont);
             }
         }
     } else {
-        QMenu* newTabMenu = _newTabMenuAction->menu();
-        newTabMenu->clear();
+        if (_newTabMenuAction->menu()) {
+            _newTabMenuAction->menu()->clear();
+        } else {
+           _newTabMenuAction->setMenu(new QMenu());
+        }
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
 
         // NOTE: Compare names w/o any '&'
         if (sessionActions.size() == 2 &&  sessionActions[1]->text().remove('&') != profile->name()) {
-            newTabMenu->addAction(sessionActions[1]);
+            _newTabMenuAction->menu()->addAction(sessionActions[1]);
         } else {
-            delete newTabMenu;
+            _newTabMenuAction->menu()->deleteLater();
         }
     }
 }
