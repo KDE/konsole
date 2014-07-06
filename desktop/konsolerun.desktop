@@ -11,6 +11,7 @@ Exec=konsole --hold -e %f
 Icon=utilities-terminal
 
 Name=Run In Konsole
+Name[ar]=شغل في كونسول
 Name[ca]=Executa en el Konsole
 Name[ca@valencia]=Executa en el Konsole
 Name[cs]=Spustit v Konsoli
