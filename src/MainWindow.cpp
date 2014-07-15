@@ -168,12 +168,7 @@ void MainWindow::rememberMenuAccelerators()
 void MainWindow::removeMenuAccelerators()
 {
     foreach(QAction* menuItem, menuBar()->actions()) {
-        QString itemText = menuItem->text();
-#pragma message("TODO: How to port KLocale::removeAcceleratorMarker()?")
-#if 0
-        itemText = KGlobal::locale()->removeAcceleratorMarker(itemText);
-#endif
-        menuItem->setText(itemText);
+        menuItem->setText(menuItem->text().replace('&', QString()));
     }
 }
 
