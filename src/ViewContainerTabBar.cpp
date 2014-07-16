@@ -49,7 +49,7 @@ ViewContainerTabBar::ViewContainerTabBar(QWidget* parent, TabbedViewContainer* c
     setSelectionBehaviorOnRemove(QTabBar::SelectPreviousTab);
     setElideMode(Qt::ElideLeft);
 
-    setWhatsThis(i18nc("@info:whatsthis",
+    setWhatsThis(xi18nc("@info:whatsthis",
                        "<title>Tab Bar</title>"
                        "<para>The tab bar allows you to switch and move tabs. You can double-click a tab to change its name.</para>"));
 }

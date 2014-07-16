@@ -56,7 +56,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 {
     K4AboutData about("konsole",
                      0,
-                     ki18nc("@title", "<application>Konsole</application>"),
+                     kxi18nc("@title", "<application>Konsole</application>"),
                      KONSOLE_VERSION,
                      ki18nc("@title", "Terminal emulator"),
                      K4AboutData::License_GPL_V2
