@@ -133,10 +133,10 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     // handle user interface related to session (menus etc.)
     if (isKonsolePart()) {
-        setXMLFile("konsole/partui.rc");
+        setXMLFile("partui.rc");
         setupCommonActions();
     } else {
-        setXMLFile("konsole/sessionui.rc");
+        setXMLFile("sessionui.rc");
         setupCommonActions();
         setupExtraActions();
     }
