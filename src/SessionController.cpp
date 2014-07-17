@@ -133,6 +133,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     // handle user interface related to session (menus etc.)
     if (isKonsolePart()) {
+        setComponentName(QLatin1Literal("konsole"), i18n("Konsole"));
         setXMLFile("partui.rc");
         setupCommonActions();
     } else {
