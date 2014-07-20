@@ -57,14 +57,6 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
     , _pluggedController(0)
     , _manageProfilesAction(0)
 {
-#pragma message("TODO: How to port KLocale::insertCatalog()?")
-#if 0
-    // make sure the konsole catalog is loaded
-    KGlobal::locale()->insertCatalog("konsole");
-    // make sure the libkonq catalog is loaded( needed for drag & drop )
-    KGlobal::locale()->insertCatalog("libkonq");
-#endif
-
     // setup global actions
     createGlobalActions();
 

@@ -82,12 +82,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 
     Application app;
 
-#if 0
-    // make sure the d&d popup menu provided by libkonq get translated.
-    KGlobal::locale()->insertCatalog("libkonq");
-#endif
-#pragma message("TODO: Port this to the right insertCatalog() replacement.")
-
     restoreSession(app);
     return app.exec();
 }

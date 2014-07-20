@@ -1,5 +1,7 @@
 # cmake-options : -DCMAKE_DISABLE_FIND_PACKAGE_LibKonq=TRUE or FALSE; default is FALSE
 
+add_definitions(-DTRANSLATION_DOMAIN=\"konsole\")
+
 if (FALSE) # there is no libkonq for Qt5 yet
   find_package(LibKonq)
   set_package_properties(LibKonq PROPERTIES DESCRIPTION "Provides high-level file management functions"
