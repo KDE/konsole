@@ -152,7 +152,7 @@ endif()
 
 ### Konsole Application
 
-qt5_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
+ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 CopyInputDialog.ui
                                 EditProfileDialog.ui
                                 KeyBindingEditor.ui
