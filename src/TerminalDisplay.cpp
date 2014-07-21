@@ -209,6 +209,10 @@ void TerminalDisplay::setVTFont(const QFont& f)
 
     QFontMetrics metrics(font);
 
+    if (!QFontInfo(font).exactMatch()) {
+        kWarning() << "The font for use in the terminal has not been matched exactly. Perhaps it has not been found properly.";
+    }
+
     if (!QFontInfo(font).fixedPitch()) {
         kWarning() << "Using an unsupported variable-width font in the terminal.  This may produce display errors.";
     }
