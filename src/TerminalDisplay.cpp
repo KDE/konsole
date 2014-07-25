@@ -1516,6 +1516,9 @@ void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
 {
     _allowBlinkingCursor = blink;
 
+    if (!hasFocus())
+        return;
+
     if (blink && !_blinkCursorTimer->isActive())
         _blinkCursorTimer->start();
 
