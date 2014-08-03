@@ -1600,7 +1600,9 @@ void TerminalDisplay::blinkCursorEvent()
 
 void TerminalDisplay::updateCursor()
 {
-    QRect cursorRect = imageToWidget(QRect(cursorPosition(), QSize(1, 1)));
+    int cursorLocation = loc(cursorPosition().x(), cursorPosition().y());
+    int charWidth = konsole_wcwidth(_image[cursorLocation].character);
+    QRect cursorRect = imageToWidget(QRect(cursorPosition(), QSize(charWidth, 1)));
     update(cursorRect);
 }
 
