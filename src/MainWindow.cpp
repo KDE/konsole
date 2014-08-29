@@ -241,7 +241,10 @@ void MainWindow::activeViewChanged(SessionController* controller)
             this, SLOT(updateWindowCaption()));
 
     controller->setShowMenuAction(_toggleMenuBarAction);
+
+    const bool isMenuBarVisible = menuBar()->isVisible();
     guiFactory()->addClient(controller);
+    menuBar()->setVisible(isMenuBarVisible);
 
     // set the current session's search bar
     controller->setSearchBar(searchBar());
