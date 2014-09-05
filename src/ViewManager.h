@@ -346,7 +346,6 @@ private:
     static const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile);
 
     void setupActions();
-    void focusActiveView();
 
     // takes a view from a view container owned by a different manager and places it in
     // newContainer owned by this manager

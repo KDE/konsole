@@ -632,5 +632,3 @@ QKeySequence ProfileManager::shortcut(Profile::Ptr profile) const
     return QKeySequence();
 }
 
-#include "ProfileManager.moc"
-

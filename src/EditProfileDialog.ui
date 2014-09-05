@@ -53,7 +53,7 @@
            </widget>
           </item>
           <item row="0" column="1" colspan="2">
-           <widget class="KLineEdit" name="profileNameEdit">
+           <widget class="QLineEdit" name="profileNameEdit">
             <property name="toolTip">
              <string>A descriptive name for the profile</string>
             </property>
@@ -73,7 +73,7 @@
            </widget>
           </item>
           <item row="2" column="1" colspan="2">
-           <widget class="KLineEdit" name="commandEdit">
+           <widget class="QLineEdit" name="commandEdit">
             <property name="toolTip">
              <string>The command to execute when new terminal sessions are created using this profile</string>
             </property>
@@ -93,7 +93,7 @@
            </widget>
           </item>
           <item row="3" column="1" colspan="2">
-           <widget class="KLineEdit" name="initialDirEdit">
+           <widget class="QLineEdit" name="initialDirEdit">
             <property name="toolTip">
              <string>The initial working directory for new terminal sessions using this profile</string>
             </property>
@@ -847,7 +847,7 @@
              </widget>
             </item>
             <item>
-             <widget class="KLineEdit" name="wordCharacterEdit">
+             <widget class="QLineEdit" name="wordCharacterEdit">
               <property name="toolTip">
                <string>Characters which are considered part of a word when double-clicking to select whole words in the terminal</string>
               </property>
@@ -1356,11 +1356,6 @@
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
   </customwidget>
   <customwidget>
    <class>KIntSpinBox</class>

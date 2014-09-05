@@ -70,7 +70,7 @@ Vt102Emulation::Vt102Emulation()
       _titleUpdateTimer(new QTimer(this))
 {
     _titleUpdateTimer->setSingleShot(true);
-    QObject::connect(_titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
+    QObject::connect(_titleUpdateTimer , &QTimer::timeout , this , &Konsole::Vt102Emulation::updateTitle);
 
     initTokenizer();
     reset();
@@ -834,12 +834,9 @@ void Vt102Emulation::clearScreenAndSetColumns(int columnCount)
     _currentScreen->setCursorYX(0,0);
 }
 
-void Vt102Emulation::sendString(const char* s , int length)
+void Vt102Emulation::sendString(const QByteArray& s)
 {
-  if ( length >= 0 )
-    emit sendData(s,length);
-  else
-    emit sendData(s,qstrlen(s));
+    emit sendData(s);
 }
 
 void Vt102Emulation::reportCursorPosition()
@@ -952,7 +949,7 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
             coords[1] = cy + 0x20;
             QString coordsStr = QString(coords, 2);
             QByteArray utf8 = coordsStr.toUtf8();
-            snprintf(command, sizeof(command), "\033[M%c%s", cb + 0x20, (const char *)utf8);
+            snprintf(command, sizeof(command), "\033[M%c%s", cb + 0x20, utf8.constData());
         }
     } else if (cx <= 223 && cy <= 223) {
         snprintf(command, sizeof(command), "\033[M%c%c%c", cb + 0x20, cx + 0x20, cy + 0x20);
@@ -1054,7 +1051,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
         else
             textToSend += _codec->fromUnicode(event->text());
 
-        sendData(textToSend.constData(), textToSend.length());
+        sendData(textToSend);
     }
     else
     {
@@ -1065,7 +1062,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
                                          "into characters to send to the terminal "
                                          "is missing.");
         reset();
-        receiveData(translatorError.toAscii().constData(), translatorError.count());
+        receiveData(translatorError.toLatin1().constData(), translatorError.count());
     }
 }
 
@@ -1356,6 +1353,4 @@ void Vt102Emulation::reportDecodingError()
     outputError.append(hexdump2(tokenBuffer, tokenBufferPos));
     kDebug() << outputError;
 }
-
-#include "Vt102Emulation.moc"
 

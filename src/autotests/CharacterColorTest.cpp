@@ -115,5 +115,3 @@ void CharacterColorTest::testColorSpaceSystem()
 
 QTEST_KDEMAIN_CORE(CharacterColorTest)
 
-#include "CharacterColorTest.moc"
-

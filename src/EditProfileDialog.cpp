@@ -31,6 +31,8 @@
 #include <QtGui/QLinearGradient>
 #include <QtGui/QRadialGradient>
 #include <QtCore/QTimer>
+#include <QCompleter>
+#include <QFileSystemModel>
 
 // KDE
 #include <kdeversion.h>
@@ -48,6 +50,8 @@
 #include <KWindowSystem>
 #include <KTextEdit>
 #include <KMessageBox>
+#include <KUrl>
+#include <KLocalizedString>
 
 // Konsole
 #include "ColorScheme.h"
@@ -75,9 +79,9 @@ EditProfileDialog::EditProfileDialog(QWidget* aParent)
     // disable the apply button , since no modification has been made
     enableButtonApply(false);
 
-    connect(this, SIGNAL(applyClicked()), this, SLOT(save()));
+    connect(this, &Konsole::EditProfileDialog::applyClicked, this, &Konsole::EditProfileDialog::save);
 
-    connect(_delayedPreviewTimer, SIGNAL(timeout()), this, SLOT(delayedPreviewActivate()));
+    connect(_delayedPreviewTimer, &QTimer::timeout, this, &Konsole::EditProfileDialog::delayedPreviewActivate);
 
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
@@ -93,8 +97,8 @@ EditProfileDialog::EditProfileDialog(QWidget* aParent)
     // not been updated since the last profile change and will need
     // to be refreshed when the user switches to them
     _pageNeedsUpdate.resize(_ui->tabWidget->count());
-    connect(_ui->tabWidget, SIGNAL(currentChanged(int)), this,
-            SLOT(preparePage(int)));
+    connect(_ui->tabWidget, &QTabWidget::currentChanged, this,
+            &Konsole::EditProfileDialog::preparePage);
 
     createTempProfile();
 }
@@ -244,7 +248,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
         ProfileGroup::Ptr group = profile->asGroup();
         if (!group || group->profiles().count() < 2) {
             _ui->profileNameEdit->setText(profile->name());
-            _ui->profileNameEdit->setClearButtonShown(true);
+            _ui->profileNameEdit->setClearButtonEnabled(true);
 
             _ui->emptyNameWarningWidget->setVisible(profile->name().isEmpty());
             _ui->emptyNameWarningWidget->setText(i18n("Profile name is empty."));
@@ -259,16 +263,35 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
 
     ShellCommand command(profile->command() , profile->arguments());
     _ui->commandEdit->setText(command.fullCommand());
-    KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
-    exeCompletion->setParent(this);
-    exeCompletion->setDir(QString());
-    _ui->commandEdit->setCompletionObject(exeCompletion);
 
+#pragma message("Look at this setCompletionObject again")
+//    KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
+//    exeCompletion->setParent(this);
+//    exeCompletion->setDir(QUrl());
+//    _ui->commandEdit->setCompletionObject(exeCompletion);
+
+/* The below causes a noticable delay when opening the dialog - I'm not entirely sure 
+   this is the best way to handle this.
+   Issue is that QLineEdit->SetCompleter() won't work w/ KDE's KUrlCompletion
+
+    QFileSystemModel *commandEditDirModel = new QFileSystemModel(this);
+    commandEditDirModel->setFilter(QDir::AllEntries);
+    QFileInfo commandFileInfo(profile->command());
+    // If command is /usr/bin/zsh, start at /usr/bin for completion
+    commandEditDirModel->setRootPath(commandFileInfo.absolutePath());
+    QCompleter *commandEditCompleter = new QCompleter(this);
+    commandEditCompleter->setModel(commandEditDirModel); 
+    _ui->commandEdit->setCompleter(commandEditCompleter);
+
+    QFileSystemModel *initialEditDirModel = new QFileSystemModel(this);
+    initialEditDirModel->setFilter(QDir::AllEntries);
+    initialEditDirModel->setRootPath(QString('/'));
     _ui->initialDirEdit->setText(profile->defaultWorkingDirectory());
-    KUrlCompletion* dirCompletion = new KUrlCompletion(KUrlCompletion::DirCompletion);
-    dirCompletion->setParent(this);
-    _ui->initialDirEdit->setCompletionObject(dirCompletion);
-    _ui->initialDirEdit->setClearButtonShown(true);
+    QCompleter *initialDirCompleter = new QCompleter(this);
+    initialDirCompleter->setModel(initialEditDirModel); 
+    _ui->initialDirEdit->setCompleter(initialDirCompleter);
+*/
+    _ui->initialDirEdit->setClearButtonEnabled(true);
 
     _ui->dirSelectButton->setIcon(KIcon("folder-open"));
     _ui->iconSelectButton->setIcon(KIcon(profile->icon()));
@@ -282,26 +305,26 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
     _ui->showTerminalSizeHintButton->setChecked(profile->showTerminalSizeHint());
 
     // signals and slots
-    connect(_ui->dirSelectButton, SIGNAL(clicked()), this, SLOT(selectInitialDir()));
-    connect(_ui->iconSelectButton, SIGNAL(clicked()), this, SLOT(selectIcon()));
-    connect(_ui->startInSameDirButton, SIGNAL(toggled(bool)), this ,
-            SLOT(startInSameDir(bool)));
-    connect(_ui->profileNameEdit, SIGNAL(textChanged(QString)), this,
-            SLOT(profileNameChanged(QString)));
-    connect(_ui->initialDirEdit, SIGNAL(textChanged(QString)), this,
-            SLOT(initialDirChanged(QString)));
-    connect(_ui->commandEdit, SIGNAL(textChanged(QString)), this,
-            SLOT(commandChanged(QString)));
-    connect(_ui->environmentEditButton , SIGNAL(clicked()), this,
-            SLOT(showEnvironmentEditor()));
+    connect(_ui->dirSelectButton, &QToolButton::clicked, this, &Konsole::EditProfileDialog::selectInitialDir);
+    connect(_ui->iconSelectButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::selectIcon);
+    connect(_ui->startInSameDirButton, &QCheckBox::toggled, this ,
+            &Konsole::EditProfileDialog::startInSameDir);
+    connect(_ui->profileNameEdit, &QLineEdit::textChanged, this,
+            &Konsole::EditProfileDialog::profileNameChanged);
+    connect(_ui->initialDirEdit, &QLineEdit::textChanged, this,
+            &Konsole::EditProfileDialog::initialDirChanged);
+    connect(_ui->commandEdit, &QLineEdit::textChanged, this,
+            &Konsole::EditProfileDialog::commandChanged);
+    connect(_ui->environmentEditButton , &QPushButton::clicked, this,
+            &Konsole::EditProfileDialog::showEnvironmentEditor);
 
-    connect(_ui->terminalColumnsEntry, SIGNAL(valueChanged(int)),
-            this, SLOT(terminalColumnsEntryChanged(int)));
-    connect(_ui->terminalRowsEntry, SIGNAL(valueChanged(int)),
-            this, SLOT(terminalRowsEntryChanged(int)));
+    connect(_ui->terminalColumnsEntry, static_cast<void(KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged),
+            this, &Konsole::EditProfileDialog::terminalColumnsEntryChanged);
+    connect(_ui->terminalRowsEntry, static_cast<void(KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged),
+            this, &Konsole::EditProfileDialog::terminalRowsEntryChanged);
 
-    connect(_ui->showTerminalSizeHintButton, SIGNAL(toggled(bool)), this,
-            SLOT(showTerminalSizeHint(bool)));
+    connect(_ui->showTerminalSizeHintButton, &QCheckBox::toggled, this,
+            &Konsole::EditProfileDialog::showTerminalSizeHint);
 }
 void EditProfileDialog::showEnvironmentEditor()
 {
@@ -331,18 +354,18 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr profile)
     _ui->renameTabWidget->setTabTitleText(profile->localTabTitleFormat());
     _ui->renameTabWidget->setRemoteTabTitleText(profile->remoteTabTitleFormat());
 
-    connect(_ui->renameTabWidget, SIGNAL(tabTitleFormatChanged(QString)), this,
-            SLOT(tabTitleFormatChanged(QString)));
-    connect(_ui->renameTabWidget, SIGNAL(remoteTabTitleFormatChanged(QString)), this,
-            SLOT(remoteTabTitleFormatChanged(QString)));
+    connect(_ui->renameTabWidget, &Konsole::RenameTabWidget::tabTitleFormatChanged, this,
+            &Konsole::EditProfileDialog::tabTitleFormatChanged);
+    connect(_ui->renameTabWidget, &Konsole::RenameTabWidget::remoteTabTitleFormatChanged, this,
+            &Konsole::EditProfileDialog::remoteTabTitleFormatChanged);
 
     // tab monitoring
     const int silenceSeconds = profile->silenceSeconds();
     _ui->silenceSecondsSpinner->setValue(silenceSeconds);
     _ui->silenceSecondsSpinner->setSuffix(ki18ncp("Unit of time", " second", " seconds"));
 
-    connect(_ui->silenceSecondsSpinner, SIGNAL(valueChanged(int)),
-            this, SLOT(silenceSecondsChanged(int)));
+    connect(_ui->silenceSecondsSpinner, static_cast<void(KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged),
+            this, &Konsole::EditProfileDialog::silenceSecondsChanged);
 }
 
 void EditProfileDialog::terminalColumnsEntryChanged(int value)
@@ -405,7 +428,7 @@ void EditProfileDialog::commandChanged(const QString& command)
 }
 void EditProfileDialog::selectInitialDir()
 {
-    const KUrl url = KFileDialog::getExistingDirectoryUrl(_ui->initialDirEdit->text(),
+    const KUrl url = KFileDialog::getExistingDirectoryUrl(KUrl(_ui->initialDirEdit->text()),
                      this,
                      i18n("Select Initial Directory"));
 
@@ -433,19 +456,19 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->colorSchemeList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
     connect(_ui->colorSchemeList->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(colorSchemeSelected()));
-    connect(_ui->colorSchemeList, SIGNAL(entered(QModelIndex)), this,
-            SLOT(previewColorScheme(QModelIndex)));
+            &QItemSelectionModel::selectionChanged,
+            this, &Konsole::EditProfileDialog::colorSchemeSelected);
+    connect(_ui->colorSchemeList, &QListView::entered, this,
+            &Konsole::EditProfileDialog::previewColorScheme);
 
     updateColorSchemeButtons();
 
-    connect(_ui->editColorSchemeButton, SIGNAL(clicked()), this,
-            SLOT(editColorScheme()));
-    connect(_ui->removeColorSchemeButton, SIGNAL(clicked()), this,
-            SLOT(removeColorScheme()));
-    connect(_ui->newColorSchemeButton, SIGNAL(clicked()), this,
-            SLOT(newColorScheme()));
+    connect(_ui->editColorSchemeButton, &QPushButton::clicked, this,
+            &Konsole::EditProfileDialog::editColorScheme);
+    connect(_ui->removeColorSchemeButton, &QPushButton::clicked, this,
+            &Konsole::EditProfileDialog::removeColorScheme);
+    connect(_ui->newColorSchemeButton, &QPushButton::clicked, this,
+            &Konsole::EditProfileDialog::newColorScheme);
 
     // setup font preview
     const bool antialias = profile->antiAliasFonts();
@@ -457,22 +480,22 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->fontPreviewLabel->setFont(profileFont);
     setFontInputValue(profileFont);
 
-    connect(_ui->fontSizeInput, SIGNAL(valueChanged(double)), this,
-            SLOT(setFontSize(double)));
-    connect(_ui->selectFontButton, SIGNAL(clicked()), this,
-            SLOT(showFontDialog()));
+    connect(_ui->fontSizeInput, &KDoubleNumInput::valueChanged, this,
+            &Konsole::EditProfileDialog::setFontSize);
+    connect(_ui->selectFontButton, &QPushButton::clicked, this,
+            &Konsole::EditProfileDialog::showFontDialog);
 
     // setup font smoothing
     _ui->antialiasTextButton->setChecked(antialias);
-    connect(_ui->antialiasTextButton, SIGNAL(toggled(bool)), this,
-            SLOT(setAntialiasText(bool)));
+    connect(_ui->antialiasTextButton, &QCheckBox::toggled, this,
+            &Konsole::EditProfileDialog::setAntialiasText);
 
     _ui->boldIntenseButton->setChecked(profile->boldIntense());
-    connect(_ui->boldIntenseButton, SIGNAL(toggled(bool)), this,
-            SLOT(setBoldIntense(bool)));
+    connect(_ui->boldIntenseButton, &QCheckBox::toggled, this,
+            &Konsole::EditProfileDialog::setBoldIntense);
     _ui->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
-    connect(_ui->enableMouseWheelZoomButton, SIGNAL(toggled(bool)), this,
-            SLOT(toggleMouseWheelZoom(bool)));
+    connect(_ui->enableMouseWheelZoomButton, &QCheckBox::toggled, this,
+            &Konsole::EditProfileDialog::toggleMouseWheelZoom);
 }
 void EditProfileDialog::setAntialiasText(bool enable)
 {
@@ -695,8 +718,8 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
     }
     _colorDialog = new ColorSchemeEditor(this);
 
-    connect(_colorDialog, SIGNAL(colorSchemeSaveRequested(ColorScheme,bool)),
-            this, SLOT(saveColorScheme(ColorScheme,bool)));
+    connect(_colorDialog, &Konsole::ColorSchemeEditor::colorSchemeSaveRequested,
+            this, &Konsole::EditProfileDialog::saveColorScheme);
     _colorDialog->setup(colors, isNewScheme);
 
     _colorDialog->show();
@@ -828,17 +851,17 @@ void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* profile */)
     updateKeyBindingsList(true);
 
     connect(_ui->keyBindingList->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            SLOT(keyBindingSelected()));
-    connect(_ui->newKeyBindingsButton, SIGNAL(clicked()), this,
-            SLOT(newKeyBinding()));
+            &QItemSelectionModel::selectionChanged,
+            this, &Konsole::EditProfileDialog::keyBindingSelected);
+    connect(_ui->newKeyBindingsButton, &QPushButton::clicked, this,
+            &Konsole::EditProfileDialog::newKeyBinding);
 
     updateKeyBindingsButtons();
 
-    connect(_ui->editKeyBindingsButton, SIGNAL(clicked()), this,
-            SLOT(editKeyBinding()));
-    connect(_ui->removeKeyBindingsButton, SIGNAL(clicked()), this,
-            SLOT(removeKeyBinding()));
+    connect(_ui->editKeyBindingsButton, &QPushButton::clicked, this,
+            &Konsole::EditProfileDialog::editKeyBinding);
+    connect(_ui->removeKeyBindingsButton, &QPushButton::clicked, this,
+            &Konsole::EditProfileDialog::removeKeyBinding);
 }
 void EditProfileDialog::keyBindingSelected()
 {
@@ -960,8 +983,8 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     // setup scrollback type radio
     int scrollBackType = profile->property<int>(Profile::HistoryMode);
     _ui->historySizeWidget->setMode(Enum::HistoryModeEnum(scrollBackType));
-    connect(_ui->historySizeWidget, SIGNAL(historyModeChanged(Enum::HistoryModeEnum)),
-            this, SLOT(historyModeChanged(Enum::HistoryModeEnum)));
+    connect(_ui->historySizeWidget, &Konsole::HistorySizeWidget::historyModeChanged,
+            this, &Konsole::EditProfileDialog::historyModeChanged);
 
     // setup scrollback line count spinner
     const int historySize = profile->historySize();
@@ -979,8 +1002,8 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     setupRadio(pageamounts, scrollFullPage);
 
     // signals and slots
-    connect(_ui->historySizeWidget, SIGNAL(historySizeChanged(int)),
-            this, SLOT(historySizeChanged(int)));
+    connect(_ui->historySizeWidget, &Konsole::HistorySizeWidget::historySizeChanged,
+            this, &Konsole::EditProfileDialog::historySizeChanged);
 }
 
 void EditProfileDialog::historySizeChanged(int lineCount)
@@ -1049,20 +1072,20 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
     // interaction options
     _ui->wordCharacterEdit->setText(profile->wordCharacters());
 
-    connect(_ui->wordCharacterEdit, SIGNAL(textChanged(QString)), this,
-            SLOT(wordCharactersChanged(QString)));
+    connect(_ui->wordCharacterEdit, &QLineEdit::textChanged, this,
+            &Konsole::EditProfileDialog::wordCharactersChanged);
 
     int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
     _ui->tripleClickModeCombo->setCurrentIndex(tripleClickMode);
 
-    connect(_ui->tripleClickModeCombo, SIGNAL(activated(int)), this,
-            SLOT(TripleClickModeChanged(int)));
+    connect(_ui->tripleClickModeCombo, static_cast<void(KComboBox::*)(int)>(&KComboBox::activated), this,
+            &Konsole::EditProfileDialog::TripleClickModeChanged);
 
     _ui->openLinksByDirectClickButton->setEnabled(_ui->underlineLinksButton->isChecked());
 
     _ui->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
-    connect(_ui->enableMouseWheelZoomButton, SIGNAL(toggled(bool)), this,
-            SLOT(toggleMouseWheelZoom(bool)));
+    connect(_ui->enableMouseWheelZoomButton, &QCheckBox::toggled, this,
+            &Konsole::EditProfileDialog::toggleMouseWheelZoom);
 }
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {
@@ -1089,8 +1112,8 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     const int lineSpacing = profile->lineSpacing();
     _ui->lineSpacingSpinner->setValue(lineSpacing);
 
-    connect(_ui->lineSpacingSpinner, SIGNAL(valueChanged(int)),
-            this, SLOT(lineSpacingChanged(int)));
+    connect(_ui->lineSpacingSpinner, static_cast<void(KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged),
+            this, &Konsole::EditProfileDialog::lineSpacingChanged);
 
     // cursor options
     if (profile->useCustomCursorColor())
@@ -1100,20 +1123,20 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 
     _ui->customColorSelectButton->setColor(profile->customCursorColor());
 
-    connect(_ui->customCursorColorButton, SIGNAL(clicked()), this, SLOT(customCursorColor()));
-    connect(_ui->autoCursorColorButton, SIGNAL(clicked()), this, SLOT(autoCursorColor()));
-    connect(_ui->customColorSelectButton, SIGNAL(changed(QColor)),
-            SLOT(customCursorColorChanged(QColor)));
+    connect(_ui->customCursorColorButton, &QRadioButton::clicked, this, &Konsole::EditProfileDialog::customCursorColor);
+    connect(_ui->autoCursorColorButton, &QRadioButton::clicked, this, &Konsole::EditProfileDialog::autoCursorColor);
+    connect(_ui->customColorSelectButton, &KColorButton::changed,
+            this, &Konsole::EditProfileDialog::customCursorColorChanged);
 
     int shape = profile->property<int>(Profile::CursorShape);
     _ui->cursorShapeCombo->setCurrentIndex(shape);
 
-    connect(_ui->cursorShapeCombo, SIGNAL(activated(int)), this, SLOT(setCursorShape(int)));
+    connect(_ui->cursorShapeCombo, static_cast<void(KComboBox::*)(int)>(&KComboBox::activated), this, &Konsole::EditProfileDialog::setCursorShape);
 
     // encoding options
-    QAction* codecAction = new KCodecAction(this);
+    KCodecAction* codecAction = new KCodecAction(this);
     _ui->selectEncodingButton->setMenu(codecAction->menu());
-    connect(codecAction, SIGNAL(triggered(QTextCodec*)), this, SLOT(setDefaultCodec(QTextCodec*)));
+    connect(codecAction, static_cast<void(KCodecAction::*)(QTextCodec*)>(&KCodecAction::triggered), this, &Konsole::EditProfileDialog::setDefaultCodec);
 
     _ui->characterEncodingLabel->setText(profile->defaultEncoding());
 }
@@ -1222,7 +1245,7 @@ void EditProfileDialog::showFontDialog()
     QFont currentFont = _ui->fontPreviewLabel->font();
 
     QWeakPointer<KFontDialog> dialog = new KFontDialog(this, KFontChooser::FixedFontsOnly);
-    dialog.data()->setCaption(i18n("Select Fixed Width Font"));
+    dialog.data()->setWindowTitle(i18n("Select Fixed Width Font"));
     dialog.data()->setFont(currentFont, true);
 
     // TODO (hindenburg): When https://git.reviewboard.kde.org/r/103357 is
@@ -1232,7 +1255,7 @@ void EditProfileDialog::showFontDialog()
     if (!chooserList.isEmpty())
         chooserList.at(0)->setSampleText(sampleText);
 
-    connect(dialog.data(), SIGNAL(fontSelected(QFont)), this, SLOT(fontSelected(QFont)));
+    connect(dialog.data(), &KFontDialog::fontSelected, this, &Konsole::EditProfileDialog::fontSelected);
 
     if (dialog.data()->exec() == QDialog::Rejected)
         fontSelected(currentFont);
@@ -1363,4 +1386,3 @@ QSize ColorSchemeViewDelegate::sizeHint(const QStyleOptionViewItem& option,
     return QSize(width, static_cast<int>(heightForWidth));
 }
 
-#include "EditProfileDialog.moc"

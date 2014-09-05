@@ -94,4 +94,4 @@ int ViewProperties::identifier() const
 {
     return _id;
 }
-#include "ViewProperties.moc"
+

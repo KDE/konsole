@@ -30,6 +30,7 @@
 // KDE
 #include <KLocalizedString>
 #include <KRun>
+#include <KUrl>
 
 // Konsole
 #include "TerminalCharacterDecoder.h"
@@ -419,7 +420,7 @@ void UrlFilter::HotSpot::activate(QObject* object)
             url.prepend("mailto:");
         }
 
-        new KRun(url, QApplication::activeWindow());
+        new KRun(KUrl(url), QApplication::activeWindow());
     }
 }
 
@@ -474,8 +475,8 @@ QList<QAction*> UrlFilter::HotSpot::actions()
     openAction->setObjectName(QLatin1String("open-action"));
     copyAction->setObjectName(QLatin1String("copy-action"));
 
-    QObject::connect(openAction , SIGNAL(triggered()) , _urlObject , SLOT(activated()));
-    QObject::connect(copyAction , SIGNAL(triggered()) , _urlObject , SLOT(activated()));
+    QObject::connect(openAction , &QAction::triggered , _urlObject , &Konsole::FilterObject::activated);
+    QObject::connect(copyAction , &QAction::triggered , _urlObject , &Konsole::FilterObject::activated);
 
     QList<QAction*> actions;
     actions << openAction;
@@ -484,4 +485,3 @@ QList<QAction*> UrlFilter::HotSpot::actions()
     return actions;
 }
 
-#include "Filter.moc"

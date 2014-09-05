@@ -29,7 +29,7 @@ GeneralSettings::GeneralSettings(QWidget* aParent) : QWidget(aParent)
 {
     setupUi(this);
 
-    connect(enableAllMessagesButton, SIGNAL(clicked()), this, SLOT(slotEnableAllMessages()));
+    connect(enableAllMessagesButton, &QPushButton::clicked, this, &Konsole::GeneralSettings::slotEnableAllMessages);
 
     this->kcfg_ShowTerminalSizeHint->setVisible(false);
 }

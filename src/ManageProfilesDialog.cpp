@@ -28,6 +28,7 @@
 #include <KKeySequenceWidget>
 #include <KStandardDirs>
 #include <KDebug>
+#include <KLocalizedString>
 
 // Konsole
 #include "EditProfileDialog.h"
@@ -47,8 +48,8 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* aParent)
     setCaption(i18nc("@title:window", "Manage Profiles"));
     setButtons(KDialog::Close);
 
-    connect(this, SIGNAL(finished()),
-            ProfileManager::instance(), SLOT(saveSettings()));
+    connect(this, static_cast<void(ManageProfilesDialog::*)()>(&Konsole::ManageProfilesDialog::finished),
+            ProfileManager::instance(), &Konsole::ProfileManager::saveSettings);
 
     _ui = new Ui::ManageProfilesDialog();
     _ui->setupUi(mainWidget());
@@ -65,15 +66,15 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* aParent)
     populateTable();
 
     // listen for changes to profiles
-    connect(ProfileManager::instance(), SIGNAL(profileAdded(Profile::Ptr)), this,
-            SLOT(addItems(Profile::Ptr)));
-    connect(ProfileManager::instance(), SIGNAL(profileRemoved(Profile::Ptr)), this,
-            SLOT(removeItems(Profile::Ptr)));
-    connect(ProfileManager::instance(), SIGNAL(profileChanged(Profile::Ptr)), this,
-            SLOT(updateItems(Profile::Ptr)));
+    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileAdded, this,
+            &Konsole::ManageProfilesDialog::addItems);
+    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileRemoved, this,
+            &Konsole::ManageProfilesDialog::removeItems);
+    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged, this,
+            &Konsole::ManageProfilesDialog::updateItems);
     connect(ProfileManager::instance() ,
-            SIGNAL(favoriteStatusChanged(Profile::Ptr,bool)), this,
-            SLOT(updateFavoriteStatus(Profile::Ptr,bool)));
+            &Konsole::ProfileManager::favoriteStatusChanged, this,
+            &Konsole::ManageProfilesDialog::updateFavoriteStatus);
 
     // resize the session table to the full width of the table
     _ui->sessionTable->horizontalHeader()->setHighlightSections(false);
@@ -86,10 +87,10 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* aParent)
                                       _ui->sessionTable->columnWidth(ShortcutColumn) + 100);
 
     // setup buttons
-    connect(_ui->newProfileButton, SIGNAL(clicked()), this, SLOT(createProfile()));
-    connect(_ui->editProfileButton, SIGNAL(clicked()), this, SLOT(editSelected()));
-    connect(_ui->deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteSelected()));
-    connect(_ui->setAsDefaultButton, SIGNAL(clicked()), this, SLOT(setSelectedAsDefault()));
+    connect(_ui->newProfileButton, &QPushButton::clicked, this, &Konsole::ManageProfilesDialog::createProfile);
+    connect(_ui->editProfileButton, &QPushButton::clicked, this, &Konsole::ManageProfilesDialog::editSelected);
+    connect(_ui->deleteProfileButton, &QPushButton::clicked, this, &Konsole::ManageProfilesDialog::deleteSelected);
+    connect(_ui->setAsDefaultButton, &QPushButton::clicked, this, &Konsole::ManageProfilesDialog::setSelectedAsDefault);
 }
 
 void ManageProfilesDialog::showEvent(QShowEvent*)
@@ -227,8 +228,8 @@ void ManageProfilesDialog::populateTable()
     }
     updateDefaultItem();
 
-    connect(_sessionModel, SIGNAL(itemChanged(QStandardItem*)), this,
-            SLOT(itemDataChanged(QStandardItem*)));
+    connect(_sessionModel, &QStandardItemModel::itemChanged, this,
+            &Konsole::ManageProfilesDialog::itemDataChanged);
 
     // listen for changes in the table selection and update the state of the form's buttons
     // accordingly.
@@ -236,8 +237,8 @@ void ManageProfilesDialog::populateTable()
     // it appears that the selection model is changed when the model itself is replaced,
     // so the signals need to be reconnected each time the model is updated.
     connect(_ui->sessionTable->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this,
-            SLOT(tableSelectionChanged(QItemSelection)));
+            &QItemSelectionModel::selectionChanged, this,
+            &Konsole::ManageProfilesDialog::tableSelectionChanged);
 
     _ui->sessionTable->selectRow(0);
 }
@@ -527,7 +528,7 @@ QWidget* ShortcutItemDelegate::createEditor(QWidget* aParent, const QStyleOption
     editor->setModifierlessAllowed(false);
     QString shortcutString = index.data(Qt::DisplayRole).toString();
     editor->setKeySequence(QKeySequence::fromString(shortcutString));
-    connect(editor, SIGNAL(keySequenceChanged(QKeySequence)), this, SLOT(editorModified(QKeySequence)));
+    connect(editor, &KKeySequenceWidget::keySequenceChanged, this, &Konsole::ShortcutItemDelegate::editorModified);
     editor->captureKeySequence();
     return editor;
 }
@@ -540,4 +541,3 @@ void ShortcutItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& 
         QStyledItemDelegate::paint(painter, option, index);
 }
 
-#include "ManageProfilesDialog.moc"

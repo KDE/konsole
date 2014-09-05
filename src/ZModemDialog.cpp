@@ -43,8 +43,8 @@ ZModemDialog::ZModemDialog(QWidget* aParent, bool modal, const QString& caption)
     _textEdit->setReadOnly(true);
     setMainWidget(_textEdit);
 
-    connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClose()));
-    connect(this, SIGNAL(closeClicked()), this, SLOT(slotClose()));
+    connect(this, &Konsole::ZModemDialog::user1Clicked, this, &Konsole::ZModemDialog::slotClose);
+    connect(this, &Konsole::ZModemDialog::closeClicked, this, &Konsole::ZModemDialog::slotClose);
 }
 
 void ZModemDialog::addProgressText(const QString& text)
@@ -67,4 +67,3 @@ void ZModemDialog::slotClose()
     accept();
 }
 
-#include "ZModemDialog.moc"

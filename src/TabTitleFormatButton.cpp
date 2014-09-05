@@ -57,7 +57,7 @@ TabTitleFormatButton::TabTitleFormatButton(QWidget* aParent)
 {
     setText(i18n("Insert"));
     setMenu(new QMenu());
-    connect(menu() , SIGNAL(triggered(QAction*)) , this , SLOT(fireElementSelected(QAction*)));
+    connect(menu() , &QMenu::triggered , this , &Konsole::TabTitleFormatButton::fireElementSelected);
 }
 
 TabTitleFormatButton::~TabTitleFormatButton()
@@ -103,6 +103,4 @@ Session::TabTitleContext TabTitleFormatButton::context() const
 {
     return _context;
 }
-
-#include "TabTitleFormatButton.moc"
 

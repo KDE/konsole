@@ -244,10 +244,8 @@ public slots:
      * Sends a string of characters to the foreground terminal process.
      *
      * @param string The characters to send.
-     * @param length Length of @p string or if set to a negative value, @p string will
-     * be treated as a null-terminated string and its length will be determined automatically.
      */
-    virtual void sendString(const char* string, int length = -1) = 0;
+    virtual void sendString(const QByteArray &string) = 0;
 
     /**
      * Processes an incoming stream of characters.  receiveData() decodes the incoming
@@ -270,9 +268,8 @@ signals:
      * standard input of the terminal.
      *
      * @param data The buffer of data ready to be sent
-     * @param len The length of @p data in bytes
      */
-    void sendData(const char* data, int len);
+    void sendData(const QByteArray& data);
 
     /**
      * Requests that the pty used by the terminal process

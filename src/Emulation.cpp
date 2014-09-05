@@ -47,14 +47,14 @@ Emulation::Emulation() :
     _screen[1] = new Screen(40, 80);
     _currentScreen = _screen[0];
 
-    QObject::connect(&_bulkTimer1, SIGNAL(timeout()), this, SLOT(showBulk()));
-    QObject::connect(&_bulkTimer2, SIGNAL(timeout()), this, SLOT(showBulk()));
+    QObject::connect(&_bulkTimer1, &QTimer::timeout, this, &Konsole::Emulation::showBulk);
+    QObject::connect(&_bulkTimer2, &QTimer::timeout, this, &Konsole::Emulation::showBulk);
 
     // listen for mouse status changes
-    connect(this , SIGNAL(programUsesMouseChanged(bool)) ,
-            SLOT(usesMouseChanged(bool)));
-    connect(this , SIGNAL(programBracketedPasteModeChanged(bool)) ,
-            SLOT(bracketedPasteModeChanged(bool)));
+    connect(this , &Konsole::Emulation::programUsesMouseChanged ,
+            this, &Konsole::Emulation::usesMouseChanged);
+    connect(this , &Konsole::Emulation::programBracketedPasteModeChanged ,
+            this, &Konsole::Emulation::bracketedPasteModeChanged);
 }
 
 bool Emulation::programUsesMouse() const
@@ -82,13 +82,13 @@ ScreenWindow* Emulation::createWindow()
     ScreenWindow* window = new ScreenWindow(_currentScreen);
     _windows << window;
 
-    connect(window , SIGNAL(selectionChanged()),
-            this , SLOT(bufferedUpdate()));
-    connect(window, SIGNAL(selectionChanged()),
-            this, SLOT(checkSelectedText()));
+    connect(window , &Konsole::ScreenWindow::selectionChanged,
+            this , &Konsole::Emulation::bufferedUpdate);
+    connect(window, &Konsole::ScreenWindow::selectionChanged,
+            this, &Konsole::Emulation::checkSelectedText);
 
-    connect(this , SIGNAL(outputChanged()),
-            window , SLOT(notifyOutputChanged()));
+    connect(this , &Konsole::Emulation::outputChanged,
+            window , &Konsole::ScreenWindow::notifyOutputChanged);
 
     return window;
 }
@@ -204,13 +204,8 @@ void Emulation::sendKeyEvent(QKeyEvent* ev)
         // A block of text
         // Note that the text is proper unicode.
         // We should do a conversion here
-        emit sendData(ev->text().toUtf8(), ev->text().length());
+        emit sendData(ev->text().toLocal8Bit());
     }
-}
-
-void Emulation::sendString(const char*, int)
-{
-    // default implementation does nothing
 }
 
 void Emulation::sendMouseEvent(int /*buttons*/, int /*column*/, int /*row*/, int /*eventType*/)
@@ -379,6 +374,4 @@ QSize Emulation::imageSize() const
 {
     return QSize(_currentScreen->getColumns(), _currentScreen->getLines());
 }
-
-#include "Emulation.moc"
 

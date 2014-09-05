@@ -95,6 +95,7 @@ public:
      * color and font weight.
      */
     friend bool operator != (const ColorEntry& a, const ColorEntry& b);
+
 };
 
 inline bool operator == (const ColorEntry& a, const ColorEntry& b)

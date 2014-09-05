@@ -42,7 +42,7 @@ void SessionListModel::setSessions(const QList<Session*>& sessions)
     _sessions = sessions;
 
     foreach(Session * session, sessions) {
-        connect(session, SIGNAL(finished()), this, SLOT(sessionFinished()));
+        connect(session, &Konsole::Session::finished, this, &Konsole::SessionListModel::sessionFinished);
     }
 
     reset();
@@ -141,4 +141,3 @@ QModelIndex SessionListModel::index(int row, int column, const QModelIndex& pare
         return QModelIndex();
 }
 
-#include "SessionListModel.moc"

@@ -64,16 +64,17 @@ void ShellCommandTest::testExpandEnvironmentVariable()
     QString text = "PATH=$PATH:~/bin";
     const QString env = "PATH";
     const QString value = "/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin";
-    qputenv(env.toLocal8Bit(), value.toLocal8Bit());
-    QString result = ShellCommand::expand(text);
-    QString expected = text.replace('$' + env, value);
+
+    qputenv(env.toLocal8Bit().constData(), value.toLocal8Bit());
+    const QString result = ShellCommand::expand(text);
+    const QString expected = text.replace('$' + env, value);
     QCOMPARE(result, expected);
 
     text = "PATH=$PATH:\\$ESCAPED:~/bin";
-    qputenv(env.toLocal8Bit(), value.toLocal8Bit());
-    result = ShellCommand::expand(text);
-    expected = text.replace('$' + env, value);
-    QCOMPARE(result, expected);
+    qputenv(env.toLocal8Bit().constData(), value.toLocal8Bit());
+    const QString result2 = ShellCommand::expand(text);
+    const QString expected2 = text.replace('$' + env, value);
+    QCOMPARE(result2, expected2);
 }
 
 void ShellCommandTest::testValidEnvCharacter()
@@ -113,6 +114,4 @@ void ShellCommandTest::testEmptyCommand()
 }
 
 QTEST_KDEMAIN_CORE(ShellCommandTest)
-
-#include "ShellCommandTest.moc"
 

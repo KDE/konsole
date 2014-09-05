@@ -21,7 +21,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KLineEdit" name="filterEdit"/>
+      <widget class="QLineEdit" name="filterEdit"/>
      </item>
     </layout>
    </item>
@@ -71,13 +71,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

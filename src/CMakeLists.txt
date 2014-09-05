@@ -1,12 +1,17 @@
-# cmake-options : -WITH_LibKonq=ON or OFF; default is ON
-macro_optional_find_package(LibKonq)
-macro_bool_to_01(LIBKONQ_FOUND HAVE_LIBKONQ)
+# cmake-options : -DCMAKE_DISABLE_FIND_PACKAGE_LibKonq=TRUE or FALSE; default is FALSE
 
-macro_log_feature(LIBKONQ_FOUND "LibKonq"
-  "Provides high-level file management functions"
-  "https://projects.kde.org/projects/kde/applications/kde-baseapps"
-  FALSE "" "Required for drag-n-drop menus")
+add_definitions(-DTRANSLATION_DOMAIN=\"konsole\")
 
+if (FALSE) # there is no libkonq for Qt5 yet
+  find_package(LibKonq)
+  set_package_properties(LibKonq PROPERTIES DESCRIPTION "Provides high-level file management functions"
+                       URL "https://projects.kde.org/projects/kde/applications/kde-baseapps" TYPE OPTIONAL
+                       PURPOSE "Required for drag-n-drop menus")
+else()
+  message(WARNING "LibKonq does not exist for KF5 yet, reenable this check once it exists.")
+endif()
+
+set(HAVE_LIBKONQ ${LIBKONQ_FOUND})
 if(HAVE_LIBKONQ)
   include_directories(${LIBKONQ_INCLUDE_DIR})
 endif()
@@ -31,6 +36,7 @@ configure_file(config-konsole.h.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h)
 
 ### Tests
+add_subdirectory(autotests)
 add_subdirectory(tests)
 
 ### Font Embedder and LineFont.h
@@ -41,8 +47,8 @@ option(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
 if(KONSOLE_BUILD_FONTEMBEDDER OR KONSOLE_GENERATE_LINEFONT)
   ### Font Embedder
   set(fontembedder_SRCS fontembedder.cpp)
-  kde4_add_executable(fontembedder ${fontembedder_SRCS})
-  target_link_libraries(fontembedder  ${KDE4_KIO_LIBS})
+  add_executable(fontembedder ${fontembedder_SRCS})
+  target_link_libraries(fontembedder KF5::KIOWidgets) ### FIXME
 
   ### Line graphics font
   ### The below cmake doesn't work; it might be possible to automate it
@@ -61,14 +67,14 @@ endif()
 # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
 
 # Generate dbus .xml files; do not store .xml in source folder
-qt4_generate_dbus_interface(Session.h org.kde.konsole.Session.xml OPTIONS -m)
-qt4_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
+qt5_generate_dbus_interface(Session.h org.kde.konsole.Session.xml OPTIONS -m)
+qt5_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
 
-qt4_add_dbus_adaptor(sessionadaptors_SRCS
+qt5_add_dbus_adaptor(sessionadaptors_SRCS
                     ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
                     Session.h
                     Konsole::Session)
-qt4_add_dbus_adaptor(windowadaptors_SRCS
+qt5_add_dbus_adaptor(windowadaptors_SRCS
                     ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                     ViewManager.h
                     Konsole::ViewManager)
@@ -124,11 +130,21 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         WindowSystemInfo.cpp
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
-set(konsole_LIBS ${KDE4_KPTY_LIBS}
-                 ${KDE4_KIO_LIBS}
-                 ${KDE4_KNOTIFYCONFIG_LIBS}
-                 ${QT_QTXML_LIBRARY}
-                 ${X11_LIBRARIES})
+set(konsole_LIBS ${X11_LIBRARIES}
+                 KF5::XmlGui
+                 Qt5::PrintSupport
+                 Qt5::Xml
+                 KF5::Notifications
+                 KF5::WindowSystem
+                 KF5::TextWidgets
+                 KF5::GuiAddons
+                 KF5::IconThemes
+                 KF5::Bookmarks
+                 KF5::I18n
+                 KF5::Pty
+                 KF5::KDELibs4Support
+                 KF5::KIOWidgets
+)
 
 if(HAVE_LIBKONQ)
   set(konsole_LIBS ${konsole_LIBS} ${LIBKONQ_LIBRARY})
@@ -136,21 +152,22 @@ endif()
 
 ### Konsole Application
 
-kde4_add_ui_files(konsoleprivate_SRCS ColorSchemeEditor.ui
-                                      CopyInputDialog.ui
-                                      EditProfileDialog.ui
-                                      KeyBindingEditor.ui
-                                      ManageProfilesDialog.ui
-                                      RenameTabDialog.ui
-                                      RenameTabWidget.ui
-                                      HistorySizeDialog.ui
-                                      HistorySizeWidget.ui
-                                      PrintOptions.ui
-                                      settings/GeneralSettings.ui
-                                      settings/TabBarSettings.ui)
+ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
+                                CopyInputDialog.ui
+                                EditProfileDialog.ui
+                                KeyBindingEditor.ui
+                                ManageProfilesDialog.ui
+                                RenameTabDialog.ui
+                                RenameTabWidget.ui
+                                HistorySizeDialog.ui
+                                HistorySizeWidget.ui
+                                PrintOptions.ui
+                                settings/GeneralSettings.ui
+                                settings/TabBarSettings.ui)
 
-kde4_add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
-target_link_libraries(konsoleprivate ${konsole_LIBS})
+add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
+target_link_libraries(konsoleprivate ${konsole_LIBS}
+)
 target_link_libraries(konsoleprivate LINK_INTERFACE_LIBRARIES ${konsole_LIBS})
 
 set(konsole_KDEINIT_SRCS
@@ -160,12 +177,16 @@ set(konsole_KDEINIT_SRCS
    settings/GeneralSettings.cpp
    settings/TabBarSettings.cpp)
 
-kde4_add_kcfg_files(konsole_KDEINIT_SRCS settings/KonsoleSettings.kcfgc)
+kconfig_add_kcfg_files(konsole_KDEINIT_SRCS settings/KonsoleSettings.kcfgc)
 
-kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
+###kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
 
-kde4_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
-target_link_libraries(kdeinit_konsole konsoleprivate)
+kf5_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
+target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::WindowSystem KF5::Bookmarks
+  KF5::I18n
+  KF5::KIOWidgets
+  KF5::NotifyConfig
+)
 
 install(TARGETS kdeinit_konsole konsole konsoleprivate
        ${INSTALL_TARGETS_DEFAULT_ARGS})
@@ -174,9 +195,9 @@ install(TARGETS kdeinit_konsole konsole konsoleprivate
 
 set(konsolepart_PART_SRCS Part.cpp)
 
-kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
+add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
-target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} konsoleprivate)
+target_link_libraries(konsolepart KF5::Parts KF5::XmlGui konsoleprivate)
 install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ### konsoleprofile command-line tool

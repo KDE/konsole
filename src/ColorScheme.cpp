@@ -292,7 +292,7 @@ void ColorScheme::read(const KConfig& config)
 
     const QString schemeDescription = configGroup.readEntry("Description", I18N_NOOP("Un-named Color Scheme"));
 
-    _description = i18n(schemeDescription.toUtf8());
+    _description = i18n(schemeDescription.toUtf8().constData());
     _opacity = configGroup.readEntry("Opacity", qreal(1.0));
     setWallpaper(configGroup.readEntry("Wallpaper", QString()));
 

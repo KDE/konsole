@@ -319,4 +319,3 @@ void ScreenWindow::notifyOutputChanged()
     emit outputChanged();
 }
 
-#include "ScreenWindow.moc"

@@ -22,7 +22,7 @@
 
 // KDE
 #include <KParts/Part>
-#include <kde_terminal_interface_v2.h>
+#include <kde_terminal_interface.h>
 
 // Qt
 #include <QtCore/QVariantList>
@@ -33,6 +33,7 @@
 class QAction;
 class QStringList;
 class QKeyEvent;
+class KUrl;
 
 namespace Konsole
 {
@@ -45,10 +46,10 @@ class ViewProperties;
  * A re-usable terminal emulator component using the KParts framework which can
  * be used to embed terminal emulators into other applications.
  */
-class Part : public KParts::ReadOnlyPart , public TerminalInterfaceV2
+class Part : public KParts::ReadOnlyPart , public TerminalInterface
 {
     Q_OBJECT
-    Q_INTERFACES(TerminalInterface TerminalInterfaceV2)
+    Q_INTERFACES(TerminalInterface)
 public:
     /** Constructs a new Konsole part with the specified parent. */
     explicit Part(QWidget* parentWidget , QObject* parent, const QVariantList&);
@@ -56,20 +57,20 @@ public:
 
     /** Reimplemented from TerminalInterface. */
     virtual void startProgram(const QString& program,
-                              const QStringList& arguments);
+                              const QStringList& arguments) Q_DECL_OVERRIDE;
     /** Reimplemented from TerminalInterface. */
-    virtual void showShellInDir(const QString& dir);
+    virtual void showShellInDir(const QString& dir) Q_DECL_OVERRIDE;
     /** Reimplemented from TerminalInterface. */
-    virtual void sendInput(const QString& text);
+    virtual void sendInput(const QString& text) Q_DECL_OVERRIDE;
 
-    /** Reimplemented from TerminalInterfaceV2. */
-    virtual int terminalProcessId();
+    /** Reimplemented from TerminalInterface. */
+    virtual int terminalProcessId() Q_DECL_OVERRIDE;
 
-    /** Reimplemented from TerminalInterfaceV2. */
-    virtual int foregroundProcessId();
+    /** Reimplemented from TerminalInterface. */
+    virtual int foregroundProcessId() Q_DECL_OVERRIDE;
 
-    /** Reimplemented from TerminalInterfaceV2. */
-    virtual QString foregroundProcessName();
+    /** Reimplemented from TerminalInterface. */
+    virtual QString foregroundProcessName() Q_DECL_OVERRIDE;
 
 public slots:
     /**
@@ -148,7 +149,7 @@ public slots:
     /**
     * Returns the current working directory of the active session
     *
-    * TODO: this should better be moved into TerminalInterfaceV2.
+    * TODO: this should better be moved into TerminalInterface.
     */
     QString currentWorkingDirectory() const;
 
@@ -191,8 +192,8 @@ signals:
 
 protected:
     /** Reimplemented from KParts::PartBase. */
-    virtual bool openFile();
-    virtual bool openUrl(const KUrl& url);
+    virtual bool openFile() Q_DECL_OVERRIDE;
+    virtual bool openUrl(const QUrl& url) Q_DECL_OVERRIDE;
 
 private slots:
     void activeViewChanged(SessionController* controller);
@@ -202,7 +203,6 @@ private slots:
     void newTab();
     void overrideTerminalShortcut(QKeyEvent*, bool& override);
     void sessionStateChanged(int state);
-
 private:
     Session* activeSession() const;
     void createGlobalActions();

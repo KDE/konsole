@@ -64,19 +64,19 @@ void Pty::init()
     setUseUtmp(true);
     setPtyChannels(KPtyProcess::AllChannels);
 
-    connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
+    connect(pty(), &KPtyDevice::readyRead , this , &Konsole::Pty::dataReceived);
 }
 
 Pty::~Pty()
 {
 }
 
-void Pty::sendData(const char* data, int length)
+void Pty::sendData(const QByteArray& data)
 {
-    if (length == 0)
+    if (data.isEmpty())
         return;
 
-    if (!pty()->write(data, length)) {
+    if (!pty()->write(data.constData(), data.length())) {
         kWarning() << "Could not send input data to terminal process.";
         return;
     }
@@ -306,4 +306,3 @@ void Pty::setupChildProcess()
         sigaction(signal, &action, 0);
 }
 
-#include "Pty.moc"

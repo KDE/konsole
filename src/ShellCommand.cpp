@@ -131,7 +131,7 @@ bool ShellCommand::expandEnv(QString& text)
 
         const int len = endPos - dollarPos;
         const QString key = text.mid(dollarPos + 1, len - 1);
-        const QString value = QString::fromLocal8Bit(qgetenv(key.toLocal8Bit()));
+        const QString value = QString::fromLocal8Bit(qgetenv(key.toLocal8Bit().constData()));
 
         if (!value.isEmpty()) {
             text.replace(dollarPos, len, value);

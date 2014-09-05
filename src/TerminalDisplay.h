@@ -610,7 +610,7 @@ signals:
      */
     void overrideShortcutCheck(QKeyEvent* keyEvent, bool& override);
 
-    void sendStringToEmu(const char*);
+    void sendStringToEmu(const QByteArray& local8BitString);
 
 protected:
     virtual bool event(QEvent* event);

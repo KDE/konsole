@@ -20,21 +20,24 @@
 // Own
 #include "Application.h"
 #include "MainWindow.h"
+#include "config-konsole.h"
 
 // OS specific
 #include <kde_file.h>
 
 // KDE
-#include <KAboutData>
+#include <k4aboutdata.h>
 #include <KCmdLineArgs>
 #include <KLocale>
 
-#define KONSOLE_VERSION "2.14.999"
+
+
+#define KONSOLE_VERSION "2.99.900"
 
 using Konsole::Application;
 
 // fill the KAboutData structure with information about contributors to Konsole.
-void fillAboutData(KAboutData& aboutData);
+void fillAboutData(K4AboutData& aboutData);
 
 // fill the KCmdLineOptions object with konsole specific options.
 void fillCommandLineOptions(KCmdLineOptions& options);
@@ -51,12 +54,12 @@ void restoreSession(Application& app);
 // ***
 extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 {
-    KAboutData about("konsole",
+    K4AboutData about("konsole",
                      0,
-                     ki18nc("@title", "<application>Konsole</application>"),
+                     kxi18nc("@title", "<application>Konsole</application>"),
                      KONSOLE_VERSION,
                      ki18nc("@title", "Terminal emulator"),
-                     KAboutData::License_GPL_V2
+                     K4AboutData::License_GPL_V2
                     );
     fillAboutData(about);
 
@@ -79,9 +82,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 
     Application app;
 
-    // make sure the d&d popup menu provided by libkonq get translated.
-    KGlobal::locale()->insertCatalog("libkonq");
-
     restoreSession(app);
     return app.exec();
 }
@@ -98,7 +98,7 @@ bool shouldUseNewProcess()
     QStringList qtProblematicOptions;
     qtProblematicOptions << "session" << "name" << "reverse"
                          << "stylesheet" << "graphicssystem";
-#if defined(Q_WS_X11)
+#if HAVE_X11
     qtProblematicOptions << "display" << "visual";
 #endif
     foreach(const QString& option, qtProblematicOptions) {
@@ -111,7 +111,7 @@ bool shouldUseNewProcess()
     const KCmdLineArgs* kdeArgs = KCmdLineArgs::parsedArgs("kde");
     QStringList kdeProblematicOptions;
     kdeProblematicOptions << "config" << "style";
-#if defined(Q_WS_X11)
+#if HAVE_X11
     kdeProblematicOptions << "waitforwm";
 #endif
     foreach(const QString& option, kdeProblematicOptions) {
@@ -201,7 +201,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
                           " with the -e option)."));
 }
 
-void fillAboutData(KAboutData& aboutData)
+void fillAboutData(K4AboutData& aboutData)
 {
     aboutData.setProgramIconName("utilities-terminal");
     aboutData.setHomepage("http://konsole.kde.org");

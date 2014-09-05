@@ -30,6 +30,9 @@
 #include <KActionCollection>
 #include <KLocale>
 #include <KPluginFactory>
+#include <KUrl>
+#include <KGlobal>
+#include <KLocalizedString>
 #include <kde_file.h>
 
 // Konsole
@@ -54,11 +57,6 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
     , _pluggedController(0)
     , _manageProfilesAction(0)
 {
-    // make sure the konsole catalog is loaded
-    KGlobal::locale()->insertCatalog("konsole");
-    // make sure the libkonq catalog is loaded( needed for drag & drop )
-    KGlobal::locale()->insertCatalog("libkonq");
-
     // setup global actions
     createGlobalActions();
 
@@ -66,10 +64,10 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
     _viewManager = new ViewManager(this, actionCollection());
     _viewManager->setNavigationMethod(ViewManager::NoNavigation);
 
-    connect(_viewManager, SIGNAL(activeViewChanged(SessionController*)), this ,
-            SLOT(activeViewChanged(SessionController*)));
-    connect(_viewManager, SIGNAL(empty()), this, SLOT(terminalExited()));
-    connect(_viewManager, SIGNAL(newViewRequest()), this, SLOT(newTab()));
+    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this ,
+            &Konsole::Part::activeViewChanged);
+    connect(_viewManager, &Konsole::ViewManager::empty, this, &Konsole::Part::terminalExited);
+    connect(_viewManager, static_cast<void(ViewManager::*)()>(&Konsole::ViewManager::newViewRequest), this, &Konsole::Part::newTab);
 
     _viewManager->widget()->setParent(parentWidget);
 
@@ -94,7 +92,7 @@ Part::~Part()
 void Part::createGlobalActions()
 {
     _manageProfilesAction = new KAction(i18n("Manage Profiles..."), this);
-    connect(_manageProfilesAction, SIGNAL(triggered()), this, SLOT(showManageProfilesDialog()));
+    connect(_manageProfilesAction, &QAction::triggered, this, static_cast<void(Part::*)()>(&Konsole::Part::showManageProfilesDialog));
 }
 
 void Part::setupActionsForSession(SessionController* controller)
@@ -238,21 +236,21 @@ void Part::activeViewChanged(SessionController* controller)
     // remove existing controller
     if (_pluggedController) {
         removeChildClient(_pluggedController);
-        disconnect(_pluggedController, SIGNAL(titleChanged(ViewProperties*)), this,
-                   SLOT(activeViewTitleChanged(ViewProperties*)));
-        disconnect(_pluggedController, SIGNAL(currentDirectoryChanged(QString)), this,
-                   SIGNAL(currentDirectoryChanged(QString)));
+        disconnect(_pluggedController, &Konsole::SessionController::titleChanged, this,
+                   &Konsole::Part::activeViewTitleChanged);
+        disconnect(_pluggedController, &Konsole::SessionController::currentDirectoryChanged, this,
+                   &Konsole::Part::currentDirectoryChanged);
     }
 
     // insert new controller
     insertChildClient(controller);
     setupActionsForSession(controller);
 
-    connect(controller, SIGNAL(titleChanged(ViewProperties*)), this,
-            SLOT(activeViewTitleChanged(ViewProperties*)));
+    connect(controller, &Konsole::SessionController::titleChanged, this,
+            &Konsole::Part::activeViewTitleChanged);
     activeViewTitleChanged(controller);
-    connect(controller, SIGNAL(currentDirectoryChanged(QString)), this,
-            SIGNAL(currentDirectoryChanged(QString)));
+    connect(controller, &Konsole::SessionController::currentDirectoryChanged, this,
+            &Konsole::Part::currentDirectoryChanged);
 
     const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*,bool&));
     const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*,bool&));
@@ -321,10 +319,11 @@ void Part::changeSessionSettings(const QString& text)
 
     sendInput(command);
 }
-
 // Konqueror integration
-bool Part::openUrl(const KUrl& aUrl)
+bool Part::openUrl(const QUrl& aQUrl)
 {
+    KUrl aUrl = aQUrl;
+
     if (url() == aUrl) {
         emit completed();
         return true;
@@ -357,10 +356,10 @@ void Part::setMonitorSilenceEnabled(bool enabled)
 
     if (enabled) {
         activeSession()->setMonitorSilence(true);
-        connect(activeSession(), SIGNAL(stateChanged(int)), this, SLOT(sessionStateChanged(int)), Qt::UniqueConnection);
+        connect(activeSession(), &Konsole::Session::stateChanged, this, &Konsole::Part::sessionStateChanged, Qt::UniqueConnection);
     } else {
         activeSession()->setMonitorSilence(false);
-        disconnect(activeSession(), SIGNAL(stateChanged(int)), this, SLOT(sessionStateChanged(int)));
+        disconnect(activeSession(), &Konsole::Session::stateChanged, this, &Konsole::Part::sessionStateChanged);
     }
 }
 
@@ -370,10 +369,10 @@ void Part::setMonitorActivityEnabled(bool enabled)
 
     if (enabled) {
         activeSession()->setMonitorActivity(true);
-        connect(activeSession(), SIGNAL(stateChanged(int)), this, SLOT(sessionStateChanged(int)), Qt::UniqueConnection);
+        connect(activeSession(), &Konsole::Session::stateChanged, this, &Konsole::Part::sessionStateChanged, Qt::UniqueConnection);
     } else {
         activeSession()->setMonitorActivity(false);
-        disconnect(activeSession(), SIGNAL(stateChanged(int)), this, SLOT(sessionStateChanged(int)));
+        disconnect(activeSession(), &Konsole::Session::stateChanged, this, &Konsole::Part::sessionStateChanged);
     }
 }
 

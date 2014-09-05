@@ -26,6 +26,8 @@
 // Konsole
 #include "ui_CopyInputDialog.h"
 
+#include <KLocalizedString>
+
 using namespace Konsole;
 
 CopyInputDialog::CopyInputDialog(QWidget* parent)
@@ -39,10 +41,10 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     _ui = new Ui::CopyInputDialog();
     _ui->setupUi(mainWidget());
 
-    connect(_ui->selectAllButton, SIGNAL(clicked()), this, SLOT(selectAll()));
-    connect(_ui->deselectAllButton, SIGNAL(clicked()), this, SLOT(deselectAll()));
+    connect(_ui->selectAllButton, &QPushButton::clicked, this, &Konsole::CopyInputDialog::selectAll);
+    connect(_ui->deselectAllButton, &QPushButton::clicked, this, &Konsole::CopyInputDialog::deselectAll);
 
-    _ui->filterEdit->setClearButtonShown(true);
+    _ui->filterEdit->setClearButtonEnabled(true);
     _ui->filterEdit->setFocus();
 
     _model = new CheckableSessionModel(parent);
@@ -55,8 +57,8 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     filterProxyModel->setSourceModel(_model);
     filterProxyModel->setFilterKeyColumn(-1);
 
-    connect(_ui->filterEdit, SIGNAL(textChanged(QString)),
-            filterProxyModel, SLOT(setFilterFixedString(QString)));
+    connect(_ui->filterEdit, &QLineEdit::textChanged,
+            filterProxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
     _ui->sessionList->setModel(filterProxyModel);
     _ui->sessionList->setColumnHidden(0, true); // Hide number column

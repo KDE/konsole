@@ -27,8 +27,6 @@
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
 
-#include <KDebug>
-
 using namespace std;
 
 static quint32 charVal(QChar val)
@@ -105,7 +103,8 @@ int main(int argc, char **argv)
             // kWarning()<<glyph<<";"<<glyphStates[glyph];
 
             if (glyphMap.contains(glyphStates[glyph])) {
-                kWarning()<<"Code "<<glyph<<" and "<<glyphMap.value(glyphStates[glyph])<<"have the same glyph state"<<glyphStates[glyph];
+            // FIXME: get this qWarning working again
+            //qWarning()<<"Code "<<glyph<<" and "<<glyphMap.value(glyphStates[glyph])<<"have the same glyph state"<<glyphStates[glyph];
             }
             glyphMap[glyphStates[glyph]] = glyph;
         }
@@ -118,13 +117,11 @@ int main(int argc, char **argv)
 
     //Nicely formatted: 8 per line, 16 lines
     for (int line = 0; line < 128; line += 8) {
-        cout << "  ";
+        cout << "\t";
         for (int col = line; col < line + 8; ++col) {
             cout << "0x" << hex << setw(8) << setfill('0') << glyphStates[col];
-            if (col != line + 7)
+            if (col != 127)
                 cout << ", ";
-            else if (col != 127)
-                cout << ",";
         }
         cout << "\n";
     }

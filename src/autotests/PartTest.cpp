@@ -55,14 +55,16 @@ void PartTest::testFd()
     }
 
     if (pingExe.isEmpty()) {
-        QSKIP("ping command not found.", SkipSingle);
+        QSKIP("ping command not found.");
         return;
     }
 
     // create a Konsole part and attempt to connect to it
     KParts::Part* terminalPart = createPart();
-    if (!terminalPart)  // not found
-        QSKIP("konsolepart not found.", SkipSingle);
+    if (!terminalPart) { // not found
+        QSKIP("konsolepart not found.");
+        return;
+    }
 
     // start a pty process
     KPtyProcess ptyProcess;
@@ -111,6 +113,4 @@ KParts::Part* PartTest::createPart()
 }
 
 QTEST_KDEMAIN(PartTest , GUI)
-
-#include "PartTest.moc"
 

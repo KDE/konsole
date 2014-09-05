@@ -62,7 +62,7 @@ ViewContainer::ViewContainer(NavigationPosition position , QObject* parent)
 ViewContainer::~ViewContainer()
 {
     foreach(QWidget * view , _views) {
-        disconnect(view, SIGNAL(destroyed(QObject*)), this, SLOT(viewDestroyed(QObject*)));
+        disconnect(view, &QWidget::destroyed, this, &Konsole::ViewContainer::viewDestroyed);
     }
 
     if (_searchBar) {
@@ -144,7 +144,7 @@ void ViewContainer::addView(QWidget* view , ViewProperties* item, int index)
 
     _navigation[view] = item;
 
-    connect(view, SIGNAL(destroyed(QObject*)), this, SLOT(viewDestroyed(QObject*)));
+    connect(view, &QWidget::destroyed, this, &Konsole::ViewContainer::viewDestroyed);
 
     addViewWidget(view, index);
 
@@ -153,37 +153,25 @@ void ViewContainer::addView(QWidget* view , ViewProperties* item, int index)
 void ViewContainer::viewDestroyed(QObject* object)
 {
     QWidget* widget = static_cast<QWidget*>(object);
-
-    _views.removeAll(widget);
-    _navigation.remove(widget);
-
-    // FIXME This can result in ViewContainerSubClass::removeViewWidget() being
-    // called after the widget's parent has been deleted or partially deleted
-    // in the ViewContainerSubClass instance's destructor.
-    //
-    // Currently deleteLater() is used to remove child widgets in the subclass
-    // constructors to get around the problem, but this is a hack and needs
-    // to be fixed.
-    removeViewWidget(widget);
-
-    emit viewRemoved(widget);
-
-    if (_views.count() == 0)
-        emit empty(this);
+    forgetView(widget);
 }
-void ViewContainer::removeView(QWidget* view)
+
+void ViewContainer::forgetView(QWidget* view)
 {
     _views.removeAll(view);
     _navigation.remove(view);
-
-    disconnect(view, SIGNAL(destroyed(QObject*)), this, SLOT(viewDestroyed(QObject*)));
-
-    removeViewWidget(view);
 
     emit viewRemoved(view);
 
     if (_views.count() == 0)
         emit empty(this);
+}
+
+void ViewContainer::removeView(QWidget* view)
+{
+    disconnect(view, &QWidget::destroyed, this, &Konsole::ViewContainer::viewDestroyed);
+    removeViewWidget(view);
+    forgetView(view);
 }
 
 const QList<QWidget*> ViewContainer::views() const
@@ -196,7 +184,7 @@ IncrementalSearchBar* ViewContainer::searchBar()
     if (!_searchBar) {
         _searchBar = new IncrementalSearchBar(0);
         _searchBar->setVisible(false);
-        connect(_searchBar, SIGNAL(destroyed(QObject*)), this, SLOT(searchBarDestroyed()));
+        connect(_searchBar, &Konsole::IncrementalSearchBar::destroyed, this, &Konsole::ViewContainer::searchBarDestroyed);
     }
     return _searchBar;
 }
@@ -264,22 +252,23 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
+    connect(_stackWidget.data(), &QStackedWidget::widgetRemoved, this, &TabbedViewContainer::widgetRemoved);
 
     // The tab bar
     _tabBar = new ViewContainerTabBar(_containerWidget, this);
     _tabBar->setSupportedMimeType(ViewProperties::mimeType());
 
-    connect(_tabBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
-    connect(_tabBar, SIGNAL(tabDoubleClicked(int)), this, SLOT(tabDoubleClicked(int)));
-    connect(_tabBar, SIGNAL(newTabRequest()), this, SIGNAL(newViewRequest()));
-    connect(_tabBar, SIGNAL(wheelDelta(int)), this, SLOT(wheelScrolled(int)));
-    connect(_tabBar, SIGNAL(initiateDrag(int)), this, SLOT(startTabDrag(int)));
-    connect(_tabBar, SIGNAL(querySourceIndex(const QDropEvent*,int&)),
-            this, SLOT(querySourceIndex(const QDropEvent*,int&)));
-    connect(_tabBar, SIGNAL(moveViewRequest(int,const QDropEvent*,bool&,TabbedViewContainer*)),
-            this, SLOT(onMoveViewRequest(int,const QDropEvent*,bool&,TabbedViewContainer*)));
-    connect(_tabBar, SIGNAL(contextMenu(int,QPoint)), this,
-            SLOT(openTabContextMenu(int,QPoint)));
+    connect(_tabBar, &Konsole::ViewContainerTabBar::currentChanged, this, &Konsole::TabbedViewContainer::currentTabChanged);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::tabDoubleClicked, this, &Konsole::TabbedViewContainer::tabDoubleClicked);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::newTabRequest, this, static_cast<void(TabbedViewContainer::*)()>(&Konsole::TabbedViewContainer::newViewRequest));
+    connect(_tabBar, &Konsole::ViewContainerTabBar::wheelDelta, this, &Konsole::TabbedViewContainer::wheelScrolled);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::initiateDrag, this, &Konsole::TabbedViewContainer::startTabDrag);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::querySourceIndex,
+            this, &Konsole::TabbedViewContainer::querySourceIndex);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::moveViewRequest,
+            this, &Konsole::TabbedViewContainer::onMoveViewRequest);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::contextMenu, this,
+            &Konsole::TabbedViewContainer::openTabContextMenu);
 
     // The context menu of tab bar
     _contextPopupMenu = new KMenu(_tabBar);
@@ -311,8 +300,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
     QMenu* profileMenu = new QMenu(_newTabButton);
     ProfileList* profileList = new ProfileList(false, profileMenu);
     profileList->syncWidgetActions(profileMenu, true);
-    connect(profileList, SIGNAL(profileSelected(Profile::Ptr)),
-            this, SIGNAL(newViewRequest(Profile::Ptr)));
+    connect(profileList, &Konsole::ProfileList::profileSelected,
+            this, static_cast<void(TabbedViewContainer::*)(Profile::Ptr)>(&Konsole::TabbedViewContainer::newViewRequest));
     setNewViewMenu(profileMenu);
 
     _closeTabButton = new QToolButton(_containerWidget);
@@ -327,8 +316,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
     _newTabButton->setHidden(true);
     _closeTabButton->setHidden(true);
 
-    connect(_newTabButton, SIGNAL(clicked()), this, SIGNAL(newViewRequest()));
-    connect(_closeTabButton, SIGNAL(clicked()), this, SLOT(closeCurrentTab()));
+    connect(_newTabButton, &QToolButton::clicked, this, static_cast<void(TabbedViewContainer::*)()>(&Konsole::TabbedViewContainer::newViewRequest));
+    connect(_closeTabButton, &QToolButton::clicked, this, &Konsole::TabbedViewContainer::closeCurrentTab);
 
     // Combine tab bar and 'new/close tab' buttons
     _tabBarLayout = new QHBoxLayout;
@@ -637,27 +626,30 @@ void TabbedViewContainer::addViewWidget(QWidget* view , int index)
     _stackWidget->updateGeometry();
 
     ViewProperties* item = viewProperties(view);
-    connect(item, SIGNAL(titleChanged(ViewProperties*)), this ,
-            SLOT(updateTitle(ViewProperties*)));
-    connect(item, SIGNAL(iconChanged(ViewProperties*)), this ,
-            SLOT(updateIcon(ViewProperties*)));
-    connect(item, SIGNAL(activity(ViewProperties*)), this ,
-            SLOT(updateActivity(ViewProperties*)));
+    connect(item, &Konsole::ViewProperties::titleChanged, this ,
+            &Konsole::TabbedViewContainer::updateTitle);
+    connect(item, &Konsole::ViewProperties::iconChanged, this ,
+            &Konsole::TabbedViewContainer::updateIcon);
+    connect(item, &Konsole::ViewProperties::activity, this ,
+            &Konsole::TabbedViewContainer::updateActivity);
 
     _tabBar->insertTab(index , item->icon() , item->title());
 
     if (navigationVisibility() == ShowNavigationAsNeeded)
         dynamicTabBarVisibility();
 }
+
 void TabbedViewContainer::removeViewWidget(QWidget* view)
 {
     if (!_stackWidget)
         return;
-    const int index = _stackWidget->indexOf(view);
+    _stackWidget->removeWidget(view);
+}
 
+void TabbedViewContainer::widgetRemoved(int index)
+{
     Q_ASSERT(index != -1);
 
-    _stackWidget->removeWidget(view);
     _tabBar->removeTab(index);
 
     if (navigationVisibility() == ShowNavigationAsNeeded)
@@ -754,12 +746,5 @@ void StackedViewContainer::removeViewWidget(QWidget* view)
 {
     if (!_stackWidget)
         return;
-    const int index = _stackWidget->indexOf(view);
-
-    Q_ASSERT(index != -1);
-    Q_UNUSED(index);
-
     _stackWidget->removeWidget(view);
 }
-
-#include "ViewContainer.moc"

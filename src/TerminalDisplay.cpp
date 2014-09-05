@@ -41,6 +41,7 @@
 #include <QStyle>
 #include <QtCore/QTimer>
 #include <QToolTip>
+#include <QDrag>
 #include <QtGui/QAccessible>
 
 // KDE
@@ -51,7 +52,7 @@
 #include <KLocalizedString>
 #include <KNotification>
 #include <KGlobalSettings>
-#include <KIO/NetAccess>
+#include <kio/netaccess.h>
 #if defined(HAVE_LIBKONQ)
     #include <konq_operations.h>
 #endif
@@ -114,9 +115,9 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
     _screenWindow = window;
 
     if (_screenWindow) {
-        connect(_screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()));
-        connect(_screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()));
-        connect(_screenWindow , SIGNAL(currentResultLineChanged()) , this , SLOT(updateImage()));
+        connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateLineProperties);
+        connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateImage);
+        connect(_screenWindow.data() , &Konsole::ScreenWindow::currentResultLineChanged , this , &Konsole::TerminalDisplay::updateImage);
         _screenWindow->setWindowLines(_lines);
     }
 }
@@ -208,6 +209,10 @@ void TerminalDisplay::setVTFont(const QFont& f)
 
     QFontMetrics metrics(font);
 
+    if (!QFontInfo(font).exactMatch()) {
+        kWarning() << "The font for use in the terminal has not been matched exactly. Perhaps it has not been found properly.";
+    }
+
     if (!QFontInfo(font).fixedPitch()) {
         kWarning() << "Using an unsupported variable-width font in the terminal.  This may produce display errors.";
     }
@@ -272,6 +277,9 @@ void TerminalDisplay::setLineSpacing(uint i)
 
 namespace Konsole
 {
+
+#pragma message("The accessibility code needs proper porting to Qt5")
+#ifndef QT_NO_ACCESSIBILITY
 /**
  * This function installs the factory function which lets Qt instantiate the QAccessibleInterface
  * for the TerminalDisplay.
@@ -283,6 +291,8 @@ QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *ob
         return new TerminalDisplayAccessible(display);
     return 0;
 }
+
+#endif
 }
 
 /* ------------------------------------------------------------------------- */
@@ -357,20 +367,20 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     // set the scroll bar's slider to occupy the whole area of the scroll bar initially
     setScroll(0, 0);
     _scrollBar->setCursor(Qt::ArrowCursor);
-    connect(_scrollBar, SIGNAL(valueChanged(int)),
-            this, SLOT(scrollBarPositionChanged(int)));
-    connect(_scrollBar, SIGNAL(sliderMoved(int)),
-            this, SLOT(viewScrolledByUser()));
+    connect(_scrollBar, &QScrollBar::valueChanged,
+            this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
+    connect(_scrollBar, &QScrollBar::sliderMoved,
+            this, &Konsole::TerminalDisplay::viewScrolledByUser);
 
     // setup timers for blinking text
     _blinkTextTimer = new QTimer(this);
     _blinkTextTimer->setInterval(TEXT_BLINK_DELAY);
-    connect(_blinkTextTimer, SIGNAL(timeout()), this, SLOT(blinkTextEvent()));
+    connect(_blinkTextTimer, &QTimer::timeout, this, &Konsole::TerminalDisplay::blinkTextEvent);
 
     // setup timers for blinking cursor
     _blinkCursorTimer = new QTimer(this);
     _blinkCursorTimer->setInterval(QApplication::cursorFlashTime() / 2);
-    connect(_blinkCursorTimer, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
+    connect(_blinkCursorTimer, &QTimer::timeout, this, &Konsole::TerminalDisplay::blinkCursorEvent);
 
     // hide mouse cursor on keystroke or idle
     KCursor::setAutoHideCursor(this, true);
@@ -746,11 +756,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
             painter.drawText(rect, 0, text);
         } else {
             // See bug 280896 for more info
-#if QT_VERSION >= 0x040800
             painter.drawText(rect, Qt::AlignBottom, LTR_OVERRIDE_CHAR + text);
-#else
-            painter.drawText(rect, 0, LTR_OVERRIDE_CHAR + text);
-#endif
         }
     }
 }
@@ -1135,11 +1141,9 @@ void TerminalDisplay::updateImage()
     }
     delete[] dirtyMask;
 
-#if QT_VERSION >= 0x040800 // added in Qt 4.8.0
 #ifndef QT_NO_ACCESSIBILITY
     QAccessible::updateAccessibility(this, 0, QAccessible::TextUpdated);
     QAccessible::updateAccessibility(this, 0, QAccessible::TextCaretMoved);
-#endif
 #endif
 }
 
@@ -1157,7 +1161,7 @@ void TerminalDisplay::showResizeNotification()
             _resizeTimer = new QTimer(this);
             _resizeTimer->setInterval(SIZE_HINT_DURATION);
             _resizeTimer->setSingleShot(true);
-            connect(_resizeTimer, SIGNAL(timeout()), _resizeWidget, SLOT(hide()));
+            connect(_resizeTimer, &QTimer::timeout, _resizeWidget, &QLabel::hide);
         }
         QString sizeStr = i18n("Size: %1 x %2", _columns, _lines);
         _resizeWidget->setText(sizeStr);
@@ -1596,7 +1600,9 @@ void TerminalDisplay::blinkCursorEvent()
 
 void TerminalDisplay::updateCursor()
 {
-    QRect cursorRect = imageToWidget(QRect(cursorPosition(), QSize(1, 1)));
+    int cursorLocation = loc(cursorPosition().x(), cursorPosition().y());
+    int charWidth = konsole_wcwidth(_image[cursorLocation].character);
+    QRect cursorRect = imageToWidget(QRect(cursorPosition(), QSize(charWidth, 1)));
     update(cursorRect);
 }
 
@@ -1808,12 +1814,12 @@ void TerminalDisplay::setScroll(int cursor, int slines)
         return;
     }
 
-    disconnect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
+    disconnect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
     _scrollBar->setRange(0, slines - _lines);
     _scrollBar->setSingleStep(1);
     _scrollBar->setPageStep(_lines);
     _scrollBar->setValue(cursor);
-    connect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
+    connect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
 }
 
 void TerminalDisplay::setScrollFullPage(bool fullPage)
@@ -2913,6 +2919,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding,
                                              QSizePolicy::Expanding),
                              1, 0);
+
     }
     // Remove message after a few seconds
     if (suspended) {
@@ -2954,10 +2961,8 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 
     emit keyPressedSignal(event);
 
-#if QT_VERSION >= 0x040800 // added in Qt 4.8.0
 #ifndef QT_NO_ACCESSIBILITY
     QAccessible::updateAccessibility(this, 0, QAccessible::TextCaretMoved);
-#endif
 #endif
 
     event->accept();
@@ -3288,4 +3293,3 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
     return false;
 }
 
-#include "TerminalDisplay.moc"

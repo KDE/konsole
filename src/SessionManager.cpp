@@ -45,12 +45,12 @@ SessionManager::SessionManager()
 {
     //map finished() signals from sessions
     _sessionMapper = new QSignalMapper(this);
-    connect(_sessionMapper , SIGNAL(mapped(QObject*)) , this ,
-            SLOT(sessionTerminated(QObject*)));
+    connect(_sessionMapper , static_cast<void(QSignalMapper::*)(QObject*)>(&QSignalMapper::mapped) , this ,
+            &Konsole::SessionManager::sessionTerminated);
 
     ProfileManager* profileMananger = ProfileManager::instance();
-    connect(profileMananger , SIGNAL(profileChanged(Profile::Ptr)) ,
-            this , SLOT(profileChanged(Profile::Ptr)));
+    connect(profileMananger , &Konsole::ProfileManager::profileChanged ,
+            this , &Konsole::SessionManager::profileChanged);
 }
 
 SessionManager::~SessionManager()
@@ -99,13 +99,13 @@ Session* SessionManager::createSession(Profile::Ptr profile)
     Q_ASSERT(session);
     applyProfile(session, profile, false);
 
-    connect(session , SIGNAL(profileChangeCommandReceived(QString)) , this ,
-            SLOT(sessionProfileCommandReceived(QString)));
+    connect(session , &Konsole::Session::profileChangeCommandReceived , this ,
+            &Konsole::SessionManager::sessionProfileCommandReceived);
 
     //ask for notification when session dies
     _sessionMapper->setMapping(session, session);
-    connect(session , SIGNAL(finished()) , _sessionMapper ,
-            SLOT(map()));
+    connect(session , &Konsole::Session::finished , _sessionMapper ,
+            static_cast<void(QSignalMapper::*)()>(&QSignalMapper::map));
 
     //add session to active list
     _sessions << session;
@@ -329,7 +329,4 @@ Session* SessionManager::idToSession(int id)
     Q_ASSERT(0);
     return 0;
 }
-
-
-#include "SessionManager.moc"
 

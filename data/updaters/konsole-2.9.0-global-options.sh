@@ -3,7 +3,7 @@
 # Starting from konsole 2.9.0, menubar and tabbar setttings are global instead of per profile
 # This stupid script migrates those settings from default profile into konsolerc
 
-default_profile_name=`kreadconfig --file konsolerc --group 'Desktop Entry' --key DefaultProfile`
+default_profile_name=`kreadconfig5 --file konsolerc --group 'Desktop Entry' --key DefaultProfile`
 
 # empty name implies that the user use is using the stock profile 
 if test -z "$default_profile_name" ; then
@@ -29,7 +29,7 @@ fi
 
 echo "[KonsoleWindow]"
 
-show_menu_bar=`kreadconfig --file "$default_profile_path" --group 'General' --key 'ShowMenuBar'`
+show_menu_bar=`kreadconfig5 --file "$default_profile_path" --group 'General' --key 'ShowMenuBar'`
 if test -n "$show_menu_bar"; then
     echo "ShowMenuBarByDefault=$show_menu_bar"
 fi
@@ -37,7 +37,7 @@ fi
 echo "[TabBar]"
 
 # The order of enum value has changed
-tab_bar_visibility=`kreadconfig --file "$default_profile_path" --group 'General' --key 'TabBarMode'`
+tab_bar_visibility=`kreadconfig5 --file "$default_profile_path" --group 'General' --key 'TabBarMode'`
 if test -n "$tab_bar_visibility"; then
     new_value=""
 
@@ -55,7 +55,7 @@ if test -n "$tab_bar_visibility"; then
 fi
 
 # The order of this enum value has changed
-tab_bar_position=`kreadconfig --file "$default_profile_path" --group 'General' --key 'TabBarPosition'`
+tab_bar_position=`kreadconfig5 --file "$default_profile_path" --group 'General' --key 'TabBarPosition'`
 if test -n "$tab_bar_position"; then
     new_value=""
     if test "$tab_bar_position" = "0" ; then
@@ -70,12 +70,12 @@ if test -n "$tab_bar_position"; then
 fi
 
 
-show_quick_buttons=`kreadconfig --file "$default_profile_path" --group 'General' --key 'ShowNewAndCloseTabButtons'`
+show_quick_buttons=`kreadconfig5 --file "$default_profile_path" --group 'General' --key 'ShowNewAndCloseTabButtons'`
 if test -n "$show_quick_buttons"; then
     echo "ShowQuickButtons=$show_quick_buttons"
 fi
 
-new_tab_behavior=`kreadconfig --file "$default_profile_path" --group 'General' --key 'NewTabBehavior'`
+new_tab_behavior=`kreadconfig5 --file "$default_profile_path" --group 'General' --key 'NewTabBehavior'`
 if test -n "$new_tab_behavior"; then
     echo "NewTabBehavior=$new_tab_behavior"
 fi

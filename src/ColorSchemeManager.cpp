@@ -149,17 +149,13 @@ bool KDE3ColorSchemeReader::readTitleLine(const QString& line, ColorScheme* sche
 
     QString description = line.mid(spacePos + 1);
 
-    scheme->setDescription(i18n(description.toUtf8()));
+    scheme->setDescription(i18n(description.toUtf8().constData()));
     return true;
 }
 
 ColorSchemeManager::ColorSchemeManager()
     : _haveLoadedAll(false)
 {
-#if defined(Q_WS_X11)
-    // Allow looking up colors in the X11 color database
-    QColor::setAllowX11ColorNames(true);
-#endif
 }
 
 ColorSchemeManager::~ColorSchemeManager()

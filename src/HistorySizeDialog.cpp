@@ -24,6 +24,8 @@
 // Konsole
 #include "ui_HistorySizeDialog.h"
 
+#include <KLocalizedString>
+
 using namespace Konsole;
 
 HistorySizeDialog::HistorySizeDialog(QWidget* parent)
@@ -70,4 +72,3 @@ void HistorySizeDialog::setLineCount(int lines)
     _ui->historySizeWidget->setLineCount(lines);
 }
 
-#include "HistorySizeDialog.moc"

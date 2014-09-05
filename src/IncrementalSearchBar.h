@@ -27,7 +27,7 @@
 class QAction;
 class QLabel;
 class QTimer;
-class KLineEdit;
+class QLineEdit;
 class QToolButton;
 
 namespace Konsole
@@ -147,7 +147,7 @@ private slots:
     void updateButtonsAccordingToReverseSearchSetting();
 
 private:
-    KLineEdit* _searchEdit;
+    QLineEdit* _searchEdit;
     QAction* _caseSensitive;
     QAction* _regExpression;
     QAction* _highlightMatches;
