@@ -28,6 +28,7 @@
 // KDE
 #include <KGlobalSettings>
 #include <KLocalizedString>
+#include <QFontDatabase>
 
 // Konsole
 #include "Enumeration.h"
@@ -163,7 +164,7 @@ FallbackProfile::FallbackProfile()
 
     setProperty(KeyBindings, "default");
     setProperty(ColorScheme, "Linux"); //use DarkPastels when is start support blue ncurses UI properly
-    setProperty(Font, KGlobalSettings::fixedFont());
+    setProperty(Font, QFontDatabase::systemFont(QFontDatabase::FixedFont));
 
     setProperty(HistoryMode, Enum::FixedSizeHistory);
     setProperty(HistorySize, 1000);

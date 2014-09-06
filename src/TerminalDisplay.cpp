@@ -2006,7 +2006,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         // we had a mouse down, but haven't confirmed a drag yet
         // if the mouse has moved sufficiently, we will confirm
 
-        const int distance = KGlobalSettings::dndEventDelay();
+        const int distance = QApplication::startDragDistance();
         if (ev->x() > _dragInfo.start.x() + distance || ev->x() < _dragInfo.start.x() - distance ||
                 ev->y() > _dragInfo.start.y() + distance || ev->y() < _dragInfo.start.y() - distance) {
             // we've left the drag square, we can start a real drag operation now
