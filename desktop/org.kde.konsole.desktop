@@ -12,30 +12,42 @@ X-KDE-StartupNotify=true
 X-KDE-AuthorizeAction=shell_access
 
 Name=Konsole
+Name[cs]=Konsole
 Name[de]=Konsole
 Name[en_GB]=Konsole
 Name[fr]=Konsole
 Name[hu]=Konsole
+Name[nl]=Konsole
+Name[pt]=Konsole
 Name[pt_BR]=Konsole
+Name[sv]=Terminal
 Name[uk]=Konsole
 Name[x-test]=xxKonsolexx
 
 GenericName=Terminal
+GenericName[cs]=Terminál
 GenericName[de]=Terminal
 GenericName[en_GB]=Terminal
 GenericName[fr]=Terminal
 GenericName[hu]=Terminál
+GenericName[nl]=Terminal
+GenericName[pt]=Terminal
 GenericName[pt_BR]=Terminal
+GenericName[sv]=Terminal
 GenericName[uk]=Термінал
 GenericName[x-test]=xxTerminalxx
 
 [Desktop Action NewWindow]
 Name=Open a New Window
+Name[cs]=Otevřít nové okno
 Name[de]=Ein neues Fenster öffnen
 Name[en_GB]=Open a New Window
 Name[fr]=Ouvrir dans une nouvelle fenêtre
 Name[hu]=Új ablak megnyitása
+Name[nl]=Een nieuw venster openen
+Name[pt]=Abrir uma Nova Janela
 Name[pt_BR]=Abre uma nova janela
+Name[sv]=Öppna ett nytt fönster
 Name[uk]=Відкрити нове вікно
 Name[x-test]=xxOpen a New Windowxx
 Exec=konsole

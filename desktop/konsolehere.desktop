@@ -11,10 +11,14 @@ Exec=konsole --workdir %f
 Icon=utilities-terminal
 
 Name=Open Terminal Here
+Name[cs]=Otevřít terminál zde
 Name[de]=Terminal hier öffnen
 Name[en_GB]=Open Terminal Here
 Name[fr]=Ouvrir un terminal ici
 Name[hu]=Parancsértelmező megnyitása itt
+Name[nl]=Terminal openen
+Name[pt]=Abrir um Terminal Aqui
 Name[pt_BR]=Abrir o terminal aqui
+Name[sv]=Öppna terminal här
 Name[uk]=Відкрити термінал
 Name[x-test]=xxOpen Terminal Herexx

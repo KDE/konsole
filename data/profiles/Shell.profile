@@ -1,17 +1,25 @@
 [General]
 Name=Shell
+Name[cs]=Shell
 Name[de]=Shell
 Name[en_GB]=Shell
 Name[fr]=Terminal
 Name[hu]=Parancsértelmező
+Name[nl]=Shell
+Name[pt]=Consola
 Name[pt_BR]=Shell
+Name[sv]=Skal
 Name[uk]=Оболонка
 Name[x-test]=xxShellxx
 Comment=Konsole default profile
+Comment[cs]=Výchozí profil Konsole
 Comment[de]=Konsole-Standardprofil
 Comment[en_GB]=Konsole default profile
 Comment[fr]=Profil par défaut de Konsole
 Comment[hu]=Alapértelmezett Konsole-profil
+Comment[nl]=Standaardprofiel (Konsole)
+Comment[pt]=Perfil predefinido do Konsole
 Comment[pt_BR]=Perfil padrão do Konsole
+Comment[sv]=Terminalens standardprofil
 Comment[uk]=Типовий профіль Konsole
 Comment[x-test]=xxKonsole default profilexx

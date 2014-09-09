@@ -13,10 +13,14 @@ X-KDE-BrowserView-FollowActive=true
 X-KDE-AuthorizeAction=shell_access
 
 Name=Terminal Emulator
+Name[cs]=Emulátor terminálu
 Name[de]=Terminal-Emulator
 Name[en_GB]=Terminal Emulator
 Name[fr]=Émulateur de terminal
 Name[hu]=Parancsértelmező
+Name[nl]=Terminalemulator
+Name[pt]=Emulador de Terminal
 Name[pt_BR]=Emulador de Terminal
+Name[sv]=Terminalemulator
 Name[uk]=Емулятор термінала
 Name[x-test]=xxTerminal Emulatorxx
