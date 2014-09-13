@@ -30,12 +30,14 @@
 #include <KActionCollection>
 #include <KCmdLineArgs>
 #include <KDebug>
+#include <KStandardDirs>
 
 // Konsole
 #include "SessionManager.h"
 #include "ProfileManager.h"
 #include "MainWindow.h"
 #include "Session.h"
+#include "ShellCommand.h"
 
 using namespace Konsole;
 
@@ -411,14 +413,19 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
         QString commandExec = args->getOption("e");
         QStringList commandArguments;
 
-        //commandArguments << args->getOption("e");
-        commandArguments << commandExec;
-
         // Note: KCmdLineArgs::count() return the number of arguments
         // that aren't options.
-        for ( int i = 0 ; i < args->count() ; i++ )
-            commandArguments << args->arg(i);
-
+        if (args->count() == 0 && KStandardDirs::findExe(commandExec).isEmpty()) {
+            // Example: konsole -e "man ls"
+            ShellCommand shellCommand(args->getOption("e"));
+            commandExec = shellCommand.command();
+            commandArguments = shellCommand.arguments();
+        } else {
+            // Example: konsole -e man ls
+            commandArguments << commandExec;
+            for ( int i = 0 ; i < args->count() ; i++ )
+                commandArguments << args->arg(i);
+        }
 
         if (commandExec.startsWith(QLatin1String("./")))
             commandExec = QDir::currentPath() + commandExec.mid(1);
