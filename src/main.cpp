@@ -96,9 +96,8 @@ bool shouldUseNewProcess()
     QStringList qtProblematicOptions;
     qtProblematicOptions << "session" << "name" << "reverse"
                          << "stylesheet" << "graphicssystem";
-#if HAVE_X11
+    // From X11
     qtProblematicOptions << "display" << "visual";
-#endif
     foreach(const QString& option, qtProblematicOptions) {
         if ( qtArgs->isSet(option.toLocal8Bit()) ) {
             return true;
@@ -109,9 +108,8 @@ bool shouldUseNewProcess()
     const KCmdLineArgs* kdeArgs = KCmdLineArgs::parsedArgs("kde");
     QStringList kdeProblematicOptions;
     kdeProblematicOptions << "config" << "style";
-#if HAVE_X11
+    // From X11
     kdeProblematicOptions << "waitforwm";
-#endif
     foreach(const QString& option, kdeProblematicOptions) {
         if ( kdeArgs->isSet(option.toLocal8Bit()) ) {
             return true;

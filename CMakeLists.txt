@@ -36,10 +36,6 @@ find_package(KF5 REQUIRED
     WindowSystem XmlGui
 )
 
-find_package(X11)
-set_package_properties(X11 PROPERTIES TYPE OPTIONAL)
-set(HAVE_X11 ${X11_FOUND})
-
 remove_definitions(-DQT_NO_SIGNALS_SLOTS_KEYWORDS -DQT_NO_CAST_FROM_ASCII)
 add_definitions(-Wno-deprecated-declarations)
 
