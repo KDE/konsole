@@ -8,3 +8,5 @@
 #cmakedefine HAVE_OS_DRAGONFLYBSD 1
 
 #cmakedefine01 HAVE_X11
+
+#define KONSOLE_VERSION "${Konsole_VERSION}"

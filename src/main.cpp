@@ -32,8 +32,6 @@
 
 
 
-#define KONSOLE_VERSION "2.99.900"
-
 using Konsole::Application;
 
 // fill the KAboutData structure with information about contributors to Konsole.

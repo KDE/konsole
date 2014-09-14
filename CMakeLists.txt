@@ -1,5 +1,9 @@
 # Konsole project
 project(Konsole)
+set(Konsole_VERSION_MAJOR 2)
+set(Konsole_VERSION_MINOR 99)
+set(Konsole_VERSION_PATCH 900)
+set(Konsole_VERSION "${Konsole_VERSION_MAJOR}.${Konsole_VERSION_MINOR}.${Konsole_VERSION_PATCH}")
 
 # minimal requirements
 cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
@@ -19,6 +23,9 @@ include(ECMGenerateHeaders)
 include(GenerateExportHeader)
 include(FeatureSummary)
 
+ecm_setup_version(${Konsole_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
+                  SOVERSION ${Konsole_VERSION_MAJOR}
+)
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Widgets Script Test)
 
 find_package(KF5 REQUIRED

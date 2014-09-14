@@ -170,6 +170,13 @@ target_link_libraries(konsoleprivate ${konsole_LIBS}
 )
 target_link_libraries(konsoleprivate LINK_INTERFACE_LIBRARIES ${konsole_LIBS})
 
+set_target_properties(konsoleprivate PROPERTIES
+    VERSION ${KONSOLEPRIVATE_VERSION_STRING}
+    SOVERSION ${KONSOLEPRIVATE_SOVERSION}
+)
+
+install(TARGETS konsoleprivate ${INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
+
 set(konsole_KDEINIT_SRCS
    Application.cpp
    MainWindow.cpp
@@ -188,7 +195,7 @@ target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::WindowSyst
   KF5::NotifyConfig
 )
 
-install(TARGETS kdeinit_konsole konsole konsoleprivate
+install(TARGETS kdeinit_konsole konsole
        ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ### Embedded Konsole KPart
