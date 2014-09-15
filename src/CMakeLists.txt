@@ -130,7 +130,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         WindowSystemInfo.cpp
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
-set(konsole_LIBS ${X11_X11_LIB}
+set(konsole_LIBS
                  KF5::XmlGui
                  Qt5::PrintSupport
                  Qt5::Xml
