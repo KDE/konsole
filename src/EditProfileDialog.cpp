@@ -270,7 +270,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
 //    exeCompletion->setDir(QUrl());
 //    _ui->commandEdit->setCompletionObject(exeCompletion);
 
-/* The below causes a noticable delay when opening the dialog - I'm not entirely sure 
+/* The below causes a noticeable delay when opening the dialog - I'm not entirely sure
    this is the best way to handle this.
    Issue is that QLineEdit->SetCompleter() won't work w/ KDE's KUrlCompletion
 
