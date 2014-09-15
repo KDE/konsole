@@ -84,7 +84,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     dirModel->setFilter(QDir::AllEntries);
     dirModel->setRootPath(QString('/'));
     QCompleter *completer = new QCompleter(this);
-    completer->setModel(dirModel); 
+    completer->setModel(dirModel);
     _ui->wallpaperPath->setCompleter(completer);
 
     _ui->wallpaperPath->setClearButtonEnabled(true);
