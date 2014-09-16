@@ -78,7 +78,7 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     // #1A - Test signal currentDirectoryChanged(QString)
     currentDirectory = QString("/tmp");
-    terminal->sendInput("cd " + currentDirectory + "\n");
+    terminal->sendInput("cd " + currentDirectory + '\n');
     sleep(2000);
     QCOMPARE(stateSpy.count(), 1);
 
@@ -113,7 +113,7 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     // Test starting a new program
     QString command = "top";
-    terminal->sendInput(command + "\n");
+    terminal->sendInput(command + '\n');
     sleep(2000);
     // FIXME: find a good way to validate process id of 'top'
     foregroundProcessId  = terminal->foregroundProcessId();
