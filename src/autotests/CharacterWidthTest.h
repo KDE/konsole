@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef CHARACTERTWIDTHTEST_H
-#define CHARACTERTWIDTHTEST_H
+#ifndef CHARACTERWIDTHTEST_H
+#define CHARACTERWIDTHTEST_H
 
 #include <QObject>
 
@@ -38,5 +38,5 @@ private slots:
 
 }
 
-#endif // CHARACTERTWIDTHTEST_H
+#endif // CHARACTERWIDTHTEST_H
 
