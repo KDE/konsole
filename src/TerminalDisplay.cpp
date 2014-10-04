@@ -35,6 +35,7 @@
 #include <QGridLayout>
 #include <QAction>
 #include <QLabel>
+#include <QMimeData>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 #include <QScrollBar>
@@ -2751,11 +2752,16 @@ void TerminalDisplay::copyToX11Selection()
     QString text = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces);
     if (text.isEmpty())
         return;
+    QString html = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces, true);
 
-    QApplication::clipboard()->setText(text, QClipboard::Selection);
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setText(text);
+    mimeData->setHtml(html);
+
+    QApplication::clipboard()->setMimeData(mimeData, QClipboard::Selection);
 
     if (_autoCopySelectedText)
-        QApplication::clipboard()->setText(text, QClipboard::Clipboard);
+        QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
 }
 
 void TerminalDisplay::copyToClipboard()
@@ -2766,8 +2772,13 @@ void TerminalDisplay::copyToClipboard()
     QString text = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces);
     if (text.isEmpty())
         return;
+    QString html = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces, true);
 
-    QApplication::clipboard()->setText(text, QClipboard::Clipboard);
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setText(text);
+    mimeData->setHtml(html);
+
+    QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
 }
 
 void TerminalDisplay::pasteFromClipboard(bool appendEnter)
@@ -3222,8 +3233,9 @@ void TerminalDisplay::doDrag()
 {
     _dragInfo.state = diDragging;
     _dragInfo.dragObject = new QDrag(this);
-    QMimeData* mimeData = new QMimeData;
-    mimeData->setText(QApplication::clipboard()->text(QClipboard::Selection));
+    QMimeData* mimeData = new QMimeData();
+    mimeData->setText(QApplication::clipboard()->mimeData(QClipboard::Selection)->text());
+    mimeData->setHtml(QApplication::clipboard()->mimeData(QClipboard::Selection)->html());
     _dragInfo.dragObject->setMimeData(mimeData);
     _dragInfo.dragObject->exec(Qt::CopyAction);
 }

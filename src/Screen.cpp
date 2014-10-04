@@ -1107,23 +1107,35 @@ bool Screen::isSelected(const int x, const int y) const
     return pos >= _selTopLeft && pos <= _selBottomRight && columnInSelection;
 }
 
-QString Screen::selectedText(bool preserveLineBreaks, bool trimTrailingSpaces) const
+QString Screen::selectedText(bool preserveLineBreaks, bool trimTrailingSpaces, bool html) const
 {
     if (!isSelectionValid())
         return QString();
 
-    return text(_selTopLeft, _selBottomRight, preserveLineBreaks, trimTrailingSpaces);
+    return text(_selTopLeft, _selBottomRight, preserveLineBreaks, trimTrailingSpaces, html);
 }
 
-QString Screen::text(int startIndex, int endIndex, bool preserveLineBreaks, bool trimTrailingSpaces) const
+QString Screen::text(int startIndex, int endIndex, bool preserveLineBreaks, bool trimTrailingSpaces, bool html) const
 {
     QString result;
     QTextStream stream(&result, QIODevice::ReadWrite);
 
-    PlainTextDecoder decoder;
-    decoder.begin(&stream);
-    writeToStream(&decoder, startIndex, endIndex, preserveLineBreaks, trimTrailingSpaces);
-    decoder.end();
+    HTMLDecoder htmlDecoder;
+    PlainTextDecoder plainTextDecoder;
+
+    TerminalCharacterDecoder *decoder;
+    if(html)
+    {
+        decoder = &htmlDecoder;
+    }
+    else
+    {
+        decoder = &plainTextDecoder;
+    }
+
+    decoder->begin(&stream);
+    writeToStream(decoder, startIndex, endIndex, preserveLineBreaks, trimTrailingSpaces);
+    decoder->end();
 
     return result;
 }

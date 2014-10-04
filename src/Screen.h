@@ -447,7 +447,7 @@ public:
      * @param trimTrailingSpaces Specifies whether trailing spaces should be
      * trimmed in the returned text.
      */
-    QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false) const;
+    QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false, bool html = false) const;
 
     /**
      * Convenience method.  Returns the text between two indices.
@@ -458,7 +458,7 @@ public:
      * @param trimTrailingSpaces Specifies whether trailing spaces should be
      * trimmed in the returned text.
      */
-    QString text(int startIndex, int endIndex, bool preserveLineBreaks, bool trimTrailingSpaces = false) const;
+    QString text(int startIndex, int endIndex, bool preserveLineBreaks, bool trimTrailingSpaces = false, bool html = false) const;
 
     /**
      * Copies part of the output to a stream.

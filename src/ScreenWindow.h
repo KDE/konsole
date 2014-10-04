@@ -232,7 +232,7 @@ public:
      * @param preserveLineBreaks See Screen::selectedText()
      * @param trimTrailingSpaces See Screen::selectedText()
      */
-    QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false) const;
+    QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false, bool html = false) const;
 
 public slots:
     /**
