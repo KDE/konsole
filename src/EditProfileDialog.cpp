@@ -33,6 +33,7 @@
 #include <QtCore/QTimer>
 #include <QCompleter>
 #include <QFileSystemModel>
+#include <QtCore/QUrl>
 
 // KDE
 #include <kdeversion.h>
@@ -50,7 +51,6 @@
 #include <KWindowSystem>
 #include <KTextEdit>
 #include <KMessageBox>
-#include <KUrl>
 #include <KLocalizedString>
 
 // Konsole
@@ -428,7 +428,7 @@ void EditProfileDialog::commandChanged(const QString& command)
 }
 void EditProfileDialog::selectInitialDir()
 {
-    const KUrl url = KFileDialog::getExistingDirectoryUrl(KUrl(_ui->initialDirEdit->text()),
+    const QUrl url = KFileDialog::getExistingDirectoryUrl(QUrl::fromUserInput(_ui->initialDirEdit->text()),
                      this,
                      i18n("Select Initial Directory"));
 

@@ -3127,12 +3127,12 @@ void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
 
 void TerminalDisplay::dropEvent(QDropEvent* event)
 {
-    KUrl::List urls = KUrl::List::fromMimeData(event->mimeData());
+    auto urls = event->mimeData()->urls();
 
     QString dropText;
     if (!urls.isEmpty()) {
         for (int i = 0 ; i < urls.count() ; i++) {
-            KUrl url = KIO::NetAccess::mostLocalUrl(urls[i] , 0);
+            QUrl url = KIO::NetAccess::mostLocalUrl(urls[i] , 0);
             QString urlText;
 
             if (url.isLocalFile())
@@ -3165,7 +3165,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             additionalActions.append(pasteAction);
 
             if (urls.count() == 1) {
-                const KUrl url = KIO::NetAccess::mostLocalUrl(urls[0] , 0);
+                const QUrl url = KIO::NetAccess::mostLocalUrl(urls[0] , 0);
 
                 if (url.isLocalFile()) {
                     const QFileInfo fileInfo(url.path());
@@ -3180,7 +3180,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
                 }
             }
 
-            KUrl target(_sessionController->currentDir());
+            QUrl target = QUrl::fromLocalFile(_sessionController->currentDir());
 
             KonqOperations::doDrop(KFileItem(), target, event, this, additionalActions);
 

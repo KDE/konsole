@@ -25,9 +25,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QHash>
 #include <QtCore/QMimeData>
-
-// KDE
-#include <KUrl>
+#include <QtCore/QUrl>
 
 // Konsole
 #include "konsole_export.h"
@@ -58,7 +56,7 @@ public:
      * Returns the URL current associated with a view.
      * The default implementation returns an empty URL.
      */
-    virtual KUrl url() const;
+    virtual QUrl url() const;
 
     /**
      * Returns the current directory associated with a view.

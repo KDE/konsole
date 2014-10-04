@@ -33,7 +33,6 @@
 #include <KBookmarkOwner>
 #include <KStandardDirs>
 #include <KLocalizedString>
-#include <KMenu>
 
 // Konsole
 #include "ViewProperties.h"
@@ -107,7 +106,7 @@ QString BookmarkHandler::currentTitle() const
 
 QString BookmarkHandler::titleForView(ViewProperties* view) const
 {
-    const KUrl& url = view ? view->url() : KUrl();
+    const QUrl& url = view ? view->url() : QUrl();
     if (url.isLocalFile()) {
         QString path = url.path();
 
@@ -115,14 +114,14 @@ QString BookmarkHandler::titleForView(ViewProperties* view) const
         path = QFileInfo(path).baseName();
 
         return path;
-    } else if (url.hasHost()) {
-        if (url.hasUser())
-            return i18nc("@item:inmenu The user's name and host they are connected to via ssh", "%1 on %2", url.user(), url.host());
+    } else if (!url.host().isEmpty()) {
+        if (!url.userName().isEmpty())
+            return i18nc("@item:inmenu The user's name and host they are connected to via ssh", "%1 on %2", url.userName(), url.host());
         else
             return i18nc("@item:inmenu The host the user is connected to via ssh", "%1", url.host());
     }
 
-    return url.prettyUrl();
+    return url.toDisplayString();
 }
 
 QString BookmarkHandler::currentIcon() const

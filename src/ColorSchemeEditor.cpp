@@ -25,6 +25,7 @@
 #include <QtCore/QFileInfo>
 #include <QCompleter>
 #include <QFileSystemModel>
+#include <QtCore/QUrl>
 
 // KDE
 #include <KColorDialog>
@@ -32,7 +33,6 @@
 #include <KFileDialog>
 #include <KUrlCompletion>
 #include <KIcon>
-#include <KUrl>
 #include <KLocalizedString>
 
 // Konsole
@@ -165,7 +165,7 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
 }
 void ColorSchemeEditor::selectWallpaper()
 {
-    const KUrl url = KFileDialog::getImageOpenUrl(KUrl(_ui->wallpaperPath->text()),
+    const QUrl url = KFileDialog::getImageOpenUrl(QUrl::fromUserInput(_ui->wallpaperPath->text()),
                      this,
                      i18nc("@action:button", "Select wallpaper image file"));
 

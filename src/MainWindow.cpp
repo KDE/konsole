@@ -442,11 +442,11 @@ void MainWindow::openUrls(const QList<QUrl>& urls)
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
-    foreach(const KUrl& url, urls) {
+    Q_FOREACH (auto url, urls) {
         if (url.isLocalFile())
             createSession(defaultProfile, url.path());
 
-        else if (url.protocol() == "ssh")
+        else if (url.scheme() == "ssh")
             createSSHSession(defaultProfile, url);
     }
 }
@@ -493,7 +493,7 @@ Session* MainWindow::createSession(Profile::Ptr profile, const QString& director
     return session;
 }
 
-Session* MainWindow::createSSHSession(Profile::Ptr profile, const KUrl& url)
+Session* MainWindow::createSSHSession(Profile::Ptr profile, const QUrl& url)
 {
     if (!profile)
         profile = ProfileManager::instance()->defaultProfile();
@@ -504,10 +504,10 @@ Session* MainWindow::createSSHSession(Profile::Ptr profile, const KUrl& url)
     if (url.port() > -1) {
         sshCommand += QString("-p %1 ").arg(url.port());
     }
-    if (url.hasUser()) {
-        sshCommand += (url.user() + '@');
+    if (!url.userName().isEmpty()) {
+        sshCommand += (url.userName() + '@');
     }
-    if (url.hasHost()) {
+    if (!url.host().isEmpty()) {
         sshCommand += url.host();
     }
 
@@ -742,7 +742,7 @@ void MainWindow::setNavigationBehavior(int behavior)
     _viewManager->setNavigationBehavior(behavior);
 }
 
-void MainWindow::setNavigationStyleSheetFromFile(const KUrl& styleSheetFile)
+void MainWindow::setNavigationStyleSheetFromFile(const QUrl& styleSheetFile)
 {
     // Let's only deal w/ local files for now
     if (!styleSheetFile.isLocalFile()) {

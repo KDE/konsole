@@ -45,9 +45,9 @@ class QAction;
 class QTextCodec;
 class QKeyEvent;
 class QTimer;
+class QUrl;
 
 class KCodecAction;
-class KUrl;
 class KJob;
 class KAction;
 class KActionMenu;
@@ -155,7 +155,7 @@ public:
     EditProfileDialog* profileDialogPointer();
 
     // reimplemented
-    virtual KUrl url() const;
+    virtual QUrl url() const;
     virtual QString currentDir() const;
     virtual void rename();
     virtual bool confirmClose() const;
@@ -195,7 +195,7 @@ public slots:
      * openUrl() currently supports urls for local paths and those
      * using the 'ssh' protocol ( eg. "ssh://joebloggs@hostname" )
      */
-    void openUrl(const KUrl& url);
+    void openUrl(const QUrl& url);
 
     /**
      * update actions which are meaningful only when primary screen is in use.

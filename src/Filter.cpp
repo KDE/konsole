@@ -26,11 +26,11 @@
 #include <QtGui/QClipboard>
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
+#include <QtCore/QUrl>
 
 // KDE
 #include <KLocalizedString>
 #include <KRun>
-#include <KUrl>
 
 // Konsole
 #include "TerminalCharacterDecoder.h"
@@ -420,7 +420,7 @@ void UrlFilter::HotSpot::activate(QObject* object)
             url.prepend("mailto:");
         }
 
-        new KRun(KUrl(url), QApplication::activeWindow());
+        new KRun(QUrl(url), QApplication::activeWindow());
     }
 }
 

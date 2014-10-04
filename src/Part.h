@@ -33,7 +33,6 @@
 class QAction;
 class QStringList;
 class QKeyEvent;
-class KUrl;
 
 namespace Konsole
 {

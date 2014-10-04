@@ -29,6 +29,7 @@
 #include <QPrintDialog>
 #include <QPainter>
 #include <QStandardPaths>
+#include <QtCore/QUrl>
 
 // KDE
 #include <KAction>
@@ -44,7 +45,6 @@
 #include <KStandardDirs>
 #include <KToggleAction>
 #include <KSelectAction>
-#include <KUrl>
 #include <KXmlGuiWindow>
 #include <KXMLGUIFactory>
 #include <KXMLGUIBuilder>
@@ -292,7 +292,7 @@ QString SessionController::currentDir() const
     return _session->currentWorkingDirectory();
 }
 
-KUrl SessionController::url() const
+QUrl SessionController::url() const
 {
     return _session->getUrl();
 }
@@ -302,7 +302,7 @@ void SessionController::rename()
     renameSession();
 }
 
-void SessionController::openUrl(const KUrl& url)
+void SessionController::openUrl(const QUrl& url)
 {
     // Clear shell's command line
     if (!_session->isForegroundProcessActive()
@@ -315,34 +315,34 @@ void SessionController::openUrl(const KUrl& url)
     if (url.isLocalFile()) {
         QString path = url.toLocalFile();
         _session->emulation()->sendText("cd " + KShell::quoteArg(path) + '\r');
-    } else if (url.protocol().isEmpty()) {
-        // KUrl couldn't parse what the user entered into the URL field
+    } else if (url.scheme().isEmpty()) {
+        // QUrl couldn't parse what the user entered into the URL field
         // so just dump it to the shell
-        QString command = url.prettyUrl();
+        QString command = url.toDisplayString();
         if (!command.isEmpty())
             _session->emulation()->sendText(command + '\r');
-    } else if (url.protocol() == "ssh") {
+    } else if (url.scheme() == "ssh") {
         QString sshCommand = "ssh ";
 
         if (url.port() > -1) {
             sshCommand += QString("-p %1 ").arg(url.port());
         }
-        if (url.hasUser()) {
-            sshCommand += (url.user() + '@');
+        if (!url.userName().isEmpty()) {
+            sshCommand += (url.userName() + '@');
         }
-        if (url.hasHost()) {
+        if (!url.host().isEmpty()) {
             sshCommand += url.host();
         }
 
         _session->sendText(sshCommand + '\r');
 
-    } else if (url.protocol() == "telnet") {
+    } else if (url.scheme() == "telnet") {
         QString telnetCommand = "telnet ";
 
-        if (url.hasUser()) {
-            telnetCommand += QString("-l %1 ").arg(url.user());
+        if (!url.userName().isEmpty()) {
+            telnetCommand += QString("-l %1 ").arg(url.userName());
         }
-        if (url.hasHost()) {
+        if (!url.host().isEmpty()) {
             telnetCommand += (url.host() + ' ');
         }
         if (url.port() > -1) {
@@ -356,10 +356,10 @@ void SessionController::openUrl(const KUrl& url)
 
         KMessageBox::sorry(_view->window(),
                            i18n("Konsole does not know how to open the bookmark: ") +
-                           url.prettyUrl());
+                           url.toDisplayString());
 
         kWarning() << "Unable to open bookmark at url" << url << ", I do not know"
-                   << " how to handle the protocol " << url.protocol();
+                   << " how to handle the protocol " << url.scheme();
     }
 }
 
@@ -446,7 +446,7 @@ void SessionController::handleWebShortcutAction()
     KUriFilterData filterData(action->data().toString());
 
     if (KUriFilter::self()->filterUri(filterData, QStringList() << "kurisearchfilter")) {
-        const KUrl& url = filterData.uri();
+        const QUrl& url = filterData.uri();
         new KRun(url, QApplication::activeWindow());
     }
 }
@@ -932,7 +932,7 @@ void SessionController::closeSession()
 //   2) transform url to get the desired result (ssh -> sftp, etc)
 void SessionController::openBrowser()
 {
-    KUrl currentUrl = url();
+    const QUrl currentUrl = url();
 
     if (currentUrl.isLocalFile()) {
         new KRun(currentUrl, QApplication::activeWindow(), true);
@@ -1603,7 +1603,7 @@ void SessionController::zmodemDownload()
     }
     if (!zmodem.isEmpty()) {
         const QString path = KFileDialog::getExistingDirectory(
-                                 KUrl(), _view,
+                                 QUrl(), _view,
                                  i18n("Save ZModem Download to..."));
 
         if (!path.isEmpty()) {
@@ -1638,7 +1638,7 @@ void SessionController::zmodemUpload()
         return;
     }
 
-    QStringList files = KFileDialog::getOpenFileNames(KUrl(), QString(), _view,
+    QStringList files = KFileDialog::getOpenFileNames(QUrl(), QString(), _view,
                         i18n("Select Files for ZModem Upload"));
     if (!files.isEmpty()) {
         _session->startZModem(zmodem, QString(), files);
@@ -1692,7 +1692,7 @@ void SaveHistoryTask::execute()
     // TODO - show a warning ( preferably passive ) if saving the history output fails
     //
 
-    KFileDialog* dialog = new KFileDialog(KUrl(QString(":konsole")) /* check this */,
+    KFileDialog* dialog = new KFileDialog(QUrl(QString(":konsole")) /* check this */,
                                           QString(), QApplication::activeWindow());
     dialog->setOperationMode(KFileDialog::Saving);
     dialog->setConfirmOverwrite(true);
@@ -1713,7 +1713,7 @@ void SaveHistoryTask::execute()
         if (result != QDialog::Accepted)
             continue;
 
-        KUrl url = dialog->selectedUrl();
+        QUrl url = dialog->selectedUrl();
 
         if (!url.isValid()) {
             // UI:  Can we make this friendlier?

@@ -26,7 +26,8 @@
 
 // KDE
 #include <KBookmarkManager>
-#include <KUrl>
+
+#include <QtCore/QUrl>
 
 // Konsole
 #include "konsole_export.h"
@@ -99,7 +100,7 @@ signals:
      *
      * @param url The url of the bookmark which was selected by the user.
      */
-    void openUrl(const KUrl& url);
+    void openUrl(const QUrl& url);
 
     /**
      * Emitted when the user selects 'Open Folder in Tabs'

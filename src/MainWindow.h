@@ -22,10 +22,10 @@
 
 // Qt
 #include <QtCore/QPointer>
+#include <QtCore/QUrl>
 
 // KDE
 #include <KXmlGuiWindow>
-#include <KUrl>
 
 // Konsole
 #include "Profile.h"
@@ -86,7 +86,7 @@ public:
      * @param profile The profile to use to create the new session.
      * @param url the URL representing the new SSH connection
      */
-    Session* createSSHSession(Profile::Ptr profile, const KUrl& url);
+    Session* createSSHSession(Profile::Ptr profile, const QUrl& url);
 
     /**
      * create view for the specified session
@@ -106,7 +106,7 @@ public:
     void setNavigationVisibility(int visibility);
     void setNavigationPosition(int position);
     void setNavigationStyleSheet(const QString& stylesheet);
-    void setNavigationStyleSheetFromFile(const KUrl& stylesheetfile);
+    void setNavigationStyleSheetFromFile(const QUrl& stylesheetfile);
     void setNavigationBehavior(int behavior);
     void setShowQuickButtons(bool show);
 

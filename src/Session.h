@@ -32,9 +32,7 @@
 #include <QtCore/QSize>
 #include <QtCore/QProcess>
 #include <QWidget>
-
-// KDE
-#include <KUrl>
+#include <QtCore/QUrl>
 
 // Konsole
 #include "konsole_export.h"
@@ -263,7 +261,7 @@ public:
     QString iconName() const;
 
     /** Return URL for the session. */
-    KUrl getUrl();
+    QUrl getUrl();
 
     /** Sets the text of the icon associated with this session. */
     void setIconText(const QString& iconText);

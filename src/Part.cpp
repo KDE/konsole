@@ -24,13 +24,13 @@
 #include <QtCore/QStringList>
 #include <QtCore/QDir>
 #include <QtGui/QKeyEvent>
+#include <QtCore/QUrl>
 
 // KDE
 #include <KAction>
 #include <KActionCollection>
 #include <KLocale>
 #include <KPluginFactory>
-#include <KUrl>
 #include <KGlobal>
 #include <KLocalizedString>
 #include <kde_file.h>
@@ -322,7 +322,7 @@ void Part::changeSessionSettings(const QString& text)
 // Konqueror integration
 bool Part::openUrl(const QUrl& aQUrl)
 {
-    KUrl aUrl = aQUrl;
+    QUrl aUrl = aQUrl;
 
     if (url() == aUrl) {
         emit completed();
@@ -330,14 +330,14 @@ bool Part::openUrl(const QUrl& aQUrl)
     }
 
     setUrl(aUrl);
-    emit setWindowCaption(aUrl.pathOrUrl());
+    emit setWindowCaption(aUrl.toDisplayString(QUrl::PreferLocalFile));
     //kdDebug() << "Set Window Caption to " << url.pathOrUrl();
     emit started(0);
 
     if (aUrl.isLocalFile() /*&& b_openUrls*/) {
         KDE_struct_stat buff;
         if (KDE::stat(QFile::encodeName(aUrl.path()), &buff) == 0) {
-            QString text = (S_ISDIR(buff.st_mode) ? aUrl.path() : aUrl.directory());
+            QString text = (S_ISDIR(buff.st_mode) ? aUrl.path() : aUrl.adjusted(QUrl::StripTrailingSlash).path());
             showShellInDir(text);
         } else {
             showShellInDir(QDir::homePath());
