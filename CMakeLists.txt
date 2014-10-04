@@ -40,10 +40,20 @@ find_package(X11)
 set_package_properties(X11 PROPERTIES TYPE OPTIONAL)
 set(HAVE_X11 ${X11_FOUND})
 
-remove_definitions(-DQT_NO_SIGNALS_SLOTS_KEYWORDS -DQT_NO_CAST_FROM_ASCII)
-add_definitions(-Wno-deprecated-declarations)
+add_definitions(
+  -DQT_USE_QSTRINGBUILDER
+  -DQT_NO_CAST_TO_ASCII
+#  -DQT_NO_CAST_FROM_ASCII
+  -DQT_STRICT_ITERATORS
+  -DQT_NO_URL_CAST_FROM_STRING
+  -DQT_NO_CAST_FROM_BYTEARRAY
+#  -DQT_NO_SIGNALS_SLOTS_KEYWORDS
+  -DQT_USE_FAST_OPERATOR_PLUS
+  -DQT_USE_FAST_CONCATENATION
+  -Wno-deprecated-declarations
+)
 
-add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+#TODO: this still needed?
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=1211)
 #TODO: this is temporarily disabled until it has been ported to Qt5
 add_definitions(-DQT_NO_ACCESSIBILITY)
