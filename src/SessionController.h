@@ -29,7 +29,6 @@
 #include <QtCore/QHash>
 
 // KDE
-#include <KIcon>
 #include <KXMLGUIClient>
 
 // Konsole

@@ -32,7 +32,6 @@
 #include <KColorScheme>
 #include <QLineEdit>
 #include <KLocalizedString>
-#include <KIcon>
 
 using namespace Konsole;
 
@@ -53,7 +52,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     closeButton->setObjectName(QLatin1String("close-button"));
     closeButton->setToolTip(i18nc("@info:tooltip", "Close the search bar"));
     closeButton->setAutoRaise(true);
-    closeButton->setIcon(KIcon("dialog-close"));
+    closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close")));
     connect(closeButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::closeClicked);
 
     QLabel* findLabel = new QLabel(i18nc("@label:textbox", "Find:"), this);
@@ -161,13 +160,13 @@ void IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting()
     if (_reverseSearch->isChecked()) {
         _searchFromButton->setText(i18nc("@action:button Search from bottom", "From bottom"));
         _searchFromButton->setToolTip(i18n("Search for the current search phrase from the bottom"));
-        _findNextButton->setIcon(KIcon("go-up-search"));
-        _findPreviousButton->setIcon(KIcon("go-down-search"));
+        _findNextButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up-search")));
+        _findPreviousButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down-search")));
     } else {
         _searchFromButton->setText(i18nc("@action:button Search from top", "From top"));
         _searchFromButton->setToolTip(i18n("Search for the current search phrase from the top"));
-        _findNextButton->setIcon(KIcon("go-down-search"));
-        _findPreviousButton->setIcon(KIcon("go-up-search"));
+        _findNextButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down-search")));
+        _findPreviousButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up-search")));
     }
 }
 

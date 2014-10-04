@@ -26,13 +26,13 @@
 #include <QCompleter>
 #include <QFileSystemModel>
 #include <QtCore/QUrl>
+#include <QtGui/QIcon>
 
 // KDE
 #include <KColorDialog>
 #include <KWindowSystem>
 #include <KFileDialog>
 #include <KUrlCompletion>
-#include <KIcon>
 #include <KLocalizedString>
 
 // Konsole
@@ -88,7 +88,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     _ui->wallpaperPath->setCompleter(completer);
 
     _ui->wallpaperPath->setClearButtonEnabled(true);
-    _ui->wallpaperSelectButton->setIcon(KIcon("image-x-generic"));
+    _ui->wallpaperSelectButton->setIcon(QIcon::fromTheme(QStringLiteral("image-x-generic")));
 
     connect(_ui->wallpaperSelectButton, &QToolButton::clicked,
             this, &Konsole::ColorSchemeEditor::selectWallpaper);

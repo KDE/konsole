@@ -148,21 +148,21 @@ void ViewManager::setupActions()
     multiViewOnlyActions << nextContainerAction;
 
     if (collection) {
-        QAction* splitLeftRightAction = new QAction(KIcon("view-split-left-right"),
+        QAction* splitLeftRightAction = new QAction(QIcon::fromTheme(QStringLiteral("view-split-left-right")),
                 i18nc("@action:inmenu", "Split View Left/Right"),
                 this);
         collection->setDefaultShortcut(splitLeftRightAction, Qt::CTRL + Qt::Key_ParenLeft);
         collection->addAction("split-view-left-right", splitLeftRightAction);
         connect(splitLeftRightAction , &QAction::triggered , this , &Konsole::ViewManager::splitLeftRight);
 
-        QAction* splitTopBottomAction = new QAction(KIcon("view-split-top-bottom") ,
+        QAction* splitTopBottomAction = new QAction(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")) ,
                 i18nc("@action:inmenu", "Split View Top/Bottom"), this);
         collection->setDefaultShortcut(splitTopBottomAction, Qt::CTRL + Qt::Key_ParenRight);
         collection->addAction("split-view-top-bottom", splitTopBottomAction);
         connect(splitTopBottomAction , &QAction::triggered , this , &Konsole::ViewManager::splitTopBottom);
 
         QAction* closeActiveAction = new QAction(i18nc("@action:inmenu Close Active View", "Close Active") , this);
-        closeActiveAction->setIcon(KIcon("view-close"));
+        closeActiveAction->setIcon(QIcon::fromTheme(QStringLiteral("view-close")));
         collection->setDefaultShortcut(closeActiveAction, Qt::CTRL + Qt::SHIFT + Qt::Key_S);
         closeActiveAction->setEnabled(false);
         collection->addAction("close-active-view", closeActiveAction);
@@ -197,7 +197,7 @@ void ViewManager::setupActions()
 
 #if defined(ENABLE_DETACHING)
         QAction* detachViewAction = collection->addAction("detach-view");
-        detachViewAction->setIcon(KIcon("tab-detach"));
+        detachViewAction->setIcon(QIcon::fromTheme(QStringLiteral("tab-detach")));
         detachViewAction->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
         // Ctrl+Shift+D is not used as a shortcut by default because it is too close
         // to Ctrl+D - which will terminate the session in many cases

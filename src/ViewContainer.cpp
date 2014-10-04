@@ -38,7 +38,6 @@
 #include <KColorUtils>
 #include <KLocalizedString>
 #include <KMenu>
-#include <KIcon>
 
 // Konsole
 #include "IncrementalSearchBar.h"
@@ -274,25 +273,25 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
     _contextPopupMenu = new KMenu(_tabBar);
 
 #if defined(ENABLE_DETACHING)
-    _contextPopupMenu->addAction(KIcon("tab-detach"),
+    _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-detach")),
                                  i18nc("@action:inmenu", "&Detach Tab"), this,
                                  SLOT(tabContextMenuDetachTab()));
 #endif
 
-    _contextPopupMenu->addAction(KIcon("edit-rename"),
+    _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-rename")),
                                  i18nc("@action:inmenu", "&Rename Tab..."), this,
                                  SLOT(tabContextMenuRenameTab()));
 
     _contextPopupMenu->addSeparator();
 
-    _contextPopupMenu->addAction(KIcon("tab-close"),
+    _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-close")),
                                  i18nc("@action:inmenu", "&Close Tab"), this,
                                  SLOT(tabContextMenuCloseTab()));
 
     // The 'new tab' and 'close tab' button
     _newTabButton = new QToolButton(_containerWidget);
     _newTabButton->setFocusPolicy(Qt::NoFocus);
-    _newTabButton->setIcon(KIcon("tab-new"));
+    _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("tab-new")));
     _newTabButton->setToolTip(i18nc("@info:tooltip", "Create new tab"));
     _newTabButton->setWhatsThis(i18nc("@info:whatsthis", "Create a new tab. Press and hold to select profile from menu"));
     _newTabButton->adjustSize();
@@ -306,7 +305,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
 
     _closeTabButton = new QToolButton(_containerWidget);
     _closeTabButton->setFocusPolicy(Qt::NoFocus);
-    _closeTabButton->setIcon(KIcon("tab-close"));
+    _closeTabButton->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
     _closeTabButton->setToolTip(i18nc("@info:tooltip", "Close tab"));
     _closeTabButton->setWhatsThis(i18nc("@info:whatsthis", "Close the active tab"));
     _closeTabButton->adjustSize();

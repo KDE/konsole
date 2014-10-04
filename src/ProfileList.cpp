@@ -25,7 +25,6 @@
 #include <QActionGroup>
 
 // KDE
-#include <KIcon>
 #include <KLocalizedString>
 #include <KDebug>
 
@@ -98,7 +97,7 @@ void ProfileList::updateAction(QAction* action , Profile::Ptr profile)
     Q_ASSERT(profile);
 
     action->setText(profile->name());
-    action->setIcon(KIcon(profile->icon()));
+    action->setIcon(QIcon::fromTheme(profile->icon()));
 }
 void ProfileList::shortcutChanged(Profile::Ptr profile, const QKeySequence& sequence)
 {

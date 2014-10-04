@@ -30,12 +30,12 @@
 #include <QPainter>
 #include <QStandardPaths>
 #include <QtCore/QUrl>
+#include <QtGui/QIcon>
 
 // KDE
 #include <KAction>
 #include <KActionMenu>
 #include <KActionCollection>
-#include <KIcon>
 #include <KLocalizedString>
 #include <KMenu>
 #include <KMessageBox>
@@ -92,10 +92,9 @@ using namespace Konsole;
 
 // TODO - Replace the icon choices below when suitable icons for silence and
 // activity are available
-//having global static KIcons no longer works with Qt5/KF5, use K_GLOBAL_STATIC
-K_GLOBAL_STATIC_WITH_ARGS(KIcon, _activityIcon, ("dialog-information"))
-K_GLOBAL_STATIC_WITH_ARGS(KIcon, _silenceIcon, ("dialog-information"))
-K_GLOBAL_STATIC_WITH_ARGS(KIcon, _broadcastIcon, ("emblem-important"))
+Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _activityIcon, (QIcon::fromTheme("dialog-information")));
+Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _silenceIcon, (QIcon::fromTheme("dialog-information")));
+Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _broadcastIcon, (QIcon::fromTheme("emblem-important")));
 
 QSet<SessionController*> SessionController::_allControllers;
 int SessionController::_lastControllerId;
@@ -418,7 +417,7 @@ void SessionController::updateWebSearchMenu()
 
             foreach(const QString& searchProvider, searchProviders) {
                 action = new QAction(searchProvider, _webSearchMenu);
-                action->setIcon(KIcon(filterData.iconNameForPreferredSearchProvider(searchProvider)));
+                action->setIcon(QIcon::fromTheme(filterData.iconNameForPreferredSearchProvider(searchProvider)));
                 action->setData(filterData.queryForPreferredSearchProvider(searchProvider));
                 connect(action, &QAction::triggered, this, &Konsole::SessionController::handleWebShortcutAction);
                 _webSearchMenu->addAction(action);
@@ -427,7 +426,7 @@ void SessionController::updateWebSearchMenu()
             _webSearchMenu->addSeparator();
 
             action = new QAction(i18n("Configure Web Shortcuts..."), _webSearchMenu);
-            action->setIcon(KIcon("configure"));
+            action->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
             connect(action, &QAction::triggered, this, &Konsole::SessionController::configureWebShortcuts);
             _webSearchMenu->addAction(action);
 
@@ -569,13 +568,13 @@ void SessionController::setupCommonActions()
     else
         action->setText(i18n("&Close Tab"));
 
-    action->setIcon(KIcon("tab-close"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_W);
 
     // Open Browser
     action = collection->addAction("open-browser", this, SLOT(openBrowser()));
     action->setText(i18n("Open File Manager"));
-    action->setIcon(KIcon("system-file-manager"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("system-file-manager")));
 
     // Copy and Paste
     action = KStandardAction::copy(this, SLOT(copy()), collection);
@@ -594,14 +593,14 @@ void SessionController::setupCommonActions()
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Insert);
 
     _webSearchMenu = new KActionMenu(i18n("Web Search"), this);
-    _webSearchMenu->setIcon(KIcon("preferences-web-browser-shortcuts"));
+    _webSearchMenu->setIcon(QIcon::fromTheme(QStringLiteral("preferences-web-browser-shortcuts")));
     _webSearchMenu->setVisible(false);
     collection->addAction("web-search", _webSearchMenu);
 
 
     action = collection->addAction("select-all", this, SLOT(selectAll()));
     action->setText(i18n("&Select All"));
-    action->setIcon(KIcon("edit-select-all"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-select-all")));
 
     action = collection->addAction("select-line", this, SLOT(selectLine()));
     action->setText(i18n("Select &Line"));
@@ -615,21 +614,21 @@ void SessionController::setupCommonActions()
 
     action = collection->addAction("adjust-history", this, SLOT(showHistoryOptions()));
     action->setText(i18n("Adjust Scrollback..."));
-    action->setIcon(KIcon("configure"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
 
     action = collection->addAction("clear-history", this, SLOT(clearHistory()));
     action->setText(i18n("Clear Scrollback"));
-    action->setIcon(KIcon("edit-clear-history"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear-history")));
 
     action = collection->addAction("clear-history-and-reset", this, SLOT(clearHistoryAndReset()));
     action->setText(i18n("Clear Scrollback and Reset"));
-    action->setIcon(KIcon("edit-clear-history"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear-history")));
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_K);
 
     // Profile Options
     action = collection->addAction("edit-current-profile", this, SLOT(editCurrentProfile()));
     action->setText(i18n("Edit Current Profile..."));
-    action->setIcon(KIcon("document-properties"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
 
     _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), this);
     collection->addAction("switch-profile", _switchProfileMenu);
@@ -649,7 +648,7 @@ void SessionController::setupCommonActions()
 
     // Character Encoding
     _codecAction = new KCodecAction(i18n("Set &Encoding"), this);
-    _codecAction->setIcon(KIcon("character-set"));
+    _codecAction->setIcon(QIcon::fromTheme(QStringLiteral("character-set")));
     collection->addAction("set-encoding", _codecAction);
     connect(_codecAction->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::updateCodecAction);
     connect(_codecAction, static_cast<void(KCodecAction::*)(QTextCodec*)>(&KCodecAction::triggered), this, &Konsole::SessionController::changeCodec);
@@ -664,7 +663,7 @@ void SessionController::setupExtraActions()
     // Rename Session
     action = collection->addAction("rename-session", this, SLOT(renameSession()));
     action->setText(i18n("&Rename Tab..."));
-    action->setIcon(KIcon("edit-rename"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-rename")));
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::ALT + Qt::Key_S);
 
     // Copy input to ==> all tabs
@@ -698,7 +697,7 @@ void SessionController::setupExtraActions()
 
     action = collection->addAction("zmodem-upload", this, SLOT(zmodemUpload()));
     action->setText(i18n("&ZModem Upload..."));
-    action->setIcon(KIcon("document-open"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("document-open")));
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::ALT + Qt::Key_U);
 
     // Monitor
@@ -715,7 +714,7 @@ void SessionController::setupExtraActions()
     // Text Size
     action = collection->addAction("enlarge-font", this, SLOT(increaseFontSize()));
     action->setText(i18n("Enlarge Font"));
-    action->setIcon(KIcon("format-font-size-more"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("format-font-size-more")));
     QList<QKeySequence> enlargeFontShortcut;
     enlargeFontShortcut.append(QKeySequence(Qt::CTRL + Qt::Key_Plus));
     enlargeFontShortcut.append(QKeySequence(Qt::CTRL + Qt::Key_Equal));
@@ -723,7 +722,7 @@ void SessionController::setupExtraActions()
 
     action = collection->addAction("shrink-font", this, SLOT(decreaseFontSize()));
     action->setText(i18n("Shrink Font"));
-    action->setIcon(KIcon("format-font-size-less"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("format-font-size-less")));
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::Key_Minus);
 
 
@@ -1585,7 +1584,7 @@ void SessionController::sessionStateChanged(int state)
     } else if (state == NOTIFYNORMAL) {
         if (_sessionIconName != _session->iconName()) {
             _sessionIconName = _session->iconName();
-            _sessionIcon = KIcon(_sessionIconName);
+            _sessionIcon = QIcon::fromTheme(_sessionIconName);
         }
 
         updateSessionIcon();

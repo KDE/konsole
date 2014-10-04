@@ -29,6 +29,7 @@
 #include <KKeySequenceWidget>
 #include <KDebug>
 #include <KLocalizedString>
+#include <KIconLoader>
 
 // Konsole
 #include "EditProfileDialog.h"
@@ -177,16 +178,16 @@ void ManageProfilesDialog::updateItemsForProfile(const Profile::Ptr profile, QLi
     // Profile Name
     items[ProfileNameColumn]->setText(profile->name());
     if (!profile->icon().isEmpty())
-        items[ProfileNameColumn]->setIcon(KIcon(profile->icon()));
+        items[ProfileNameColumn]->setIcon(QIcon::fromTheme(profile->icon()));
     items[ProfileNameColumn]->setData(QVariant::fromValue(profile), ProfileKeyRole);
     items[ProfileNameColumn]->setToolTip(i18nc("@info:tooltip", "Click to rename profile"));
 
     // Favorite Status
     const bool isFavorite = ProfileManager::instance()->findFavorites().contains(profile);
     if (isFavorite)
-        items[FavoriteStatusColumn]->setData(KIcon("dialog-ok-apply"), Qt::DecorationRole);
+        items[FavoriteStatusColumn]->setData(QIcon::fromTheme(QStringLiteral("dialog-ok-apply")), Qt::DecorationRole);
     else
-        items[FavoriteStatusColumn]->setData(KIcon(), Qt::DecorationRole);
+        items[FavoriteStatusColumn]->setData(QIcon(), Qt::DecorationRole);
     items[FavoriteStatusColumn]->setData(QVariant::fromValue(profile), ProfileKeyRole);
     items[FavoriteStatusColumn]->setToolTip(i18nc("@info:tooltip", "Click to toggle status"));
 
@@ -254,11 +255,12 @@ void ManageProfilesDialog::updateDefaultItem()
         bool isDefault = (defaultProfile == item->data().value<Profile::Ptr>());
 
         if (isDefault && !itemFont.bold()) {
-            item->setIcon(KIcon(defaultProfile->icon(), 0, QStringList("emblem-favorite")));
+            QIcon icon(KIconLoader::global()->loadIcon(defaultProfile->icon(), KIconLoader::Small, 0, KIconLoader::DefaultState, QStringList("emblem-favorite")));
+            item->setIcon(icon);
             itemFont.setBold(true);
             item->setFont(itemFont);
         } else if (!isDefault && itemFont.bold()) {
-            item->setIcon(KIcon(defaultProfile->icon()));
+            item->setIcon(QIcon(defaultProfile->icon()));
             itemFont.setBold(false);
             item->setFont(itemFont);
         }
@@ -434,7 +436,7 @@ void ManageProfilesDialog::updateFavoriteStatus(Profile::Ptr profile, bool favor
     for (int i = 0; i < rowCount; i++) {
         QModelIndex index = _sessionModel->index(i, FavoriteStatusColumn);
         if (index.data(ProfileKeyRole).value<Profile::Ptr>() == profile) {
-            const KIcon icon = favorite ? KIcon("dialog-ok-apply") : KIcon();
+            const QIcon icon = favorite ? QIcon::fromTheme(QStringLiteral("dialog-ok-apply")) : QIcon();
             _sessionModel->setData(index, icon, Qt::DecorationRole);
         }
     }

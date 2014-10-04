@@ -23,8 +23,9 @@
 #include "SessionListModel.h"
 
 // KDE
-#include <KIcon>
 #include <KLocalizedString>
+
+#include <QtGui/QIcon>
 
 // Konsole
 #include "Session.h"
@@ -77,7 +78,7 @@ QVariant SessionListModel::data(const QModelIndex& index, int role) const
         break;
     case Qt::DecorationRole:
         if (column == 1)
-            return KIcon(_sessions[row]->iconName());
+            return QIcon::fromTheme(_sessions[row]->iconName());
         else
             return QVariant();
     }

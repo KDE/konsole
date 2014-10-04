@@ -30,6 +30,7 @@
 #include <QtCore/QTextCodec>
 #include <QtGui/QLinearGradient>
 #include <QtGui/QRadialGradient>
+#include <QtGui/QIcon>
 #include <QtCore/QTimer>
 #include <QCompleter>
 #include <QFileSystemModel>
@@ -44,7 +45,6 @@
 #endif
 
 #include <KFontDialog>
-#include <KIcon>
 #include <KIconDialog>
 #include <KFileDialog>
 #include <KUrlCompletion>
@@ -280,7 +280,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
     // If command is /usr/bin/zsh, start at /usr/bin for completion
     commandEditDirModel->setRootPath(commandFileInfo.absolutePath());
     QCompleter *commandEditCompleter = new QCompleter(this);
-    commandEditCompleter->setModel(commandEditDirModel); 
+    commandEditCompleter->setModel(commandEditDirModel);
     _ui->commandEdit->setCompleter(commandEditCompleter);
 
     QFileSystemModel *initialEditDirModel = new QFileSystemModel(this);
@@ -288,13 +288,13 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
     initialEditDirModel->setRootPath(QString('/'));
     _ui->initialDirEdit->setText(profile->defaultWorkingDirectory());
     QCompleter *initialDirCompleter = new QCompleter(this);
-    initialDirCompleter->setModel(initialEditDirModel); 
+    initialDirCompleter->setModel(initialEditDirModel);
     _ui->initialDirEdit->setCompleter(initialDirCompleter);
 */
     _ui->initialDirEdit->setClearButtonEnabled(true);
 
-    _ui->dirSelectButton->setIcon(KIcon("folder-open"));
-    _ui->iconSelectButton->setIcon(KIcon(profile->icon()));
+    _ui->dirSelectButton->setIcon(QIcon::fromTheme(QStringLiteral("folder-open")));
+    _ui->iconSelectButton->setIcon(QIcon::fromTheme(profile->icon()));
     _ui->startInSameDirButton->setChecked(profile->startInCurrentSessionDir());
 
     // terminal options
@@ -399,7 +399,7 @@ void EditProfileDialog::selectIcon()
     const QString& icon = KIconDialog::getIcon(KIconLoader::Desktop, KIconLoader::Application,
                           false, 0, false, this);
     if (!icon.isEmpty()) {
-        _ui->iconSelectButton->setIcon(KIcon(icon));
+        _ui->iconSelectButton->setIcon(QIcon::fromTheme(icon));
         updateTempProfileProperty(Profile::Icon, icon);
     }
 }
@@ -580,7 +580,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
         QStandardItem* item = new QStandardItem(translator->description());
         item->setEditable(false);
         item->setData(QVariant::fromValue(translator), Qt::UserRole + 1);
-        item->setIcon(KIcon("preferences-desktop-keyboard"));
+        item->setIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-keyboard")));
 
         if (translator == currentTranslator)
             selectedItem = item;

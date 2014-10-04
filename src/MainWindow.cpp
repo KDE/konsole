@@ -45,6 +45,7 @@
 #include <KApplication>
 #include <KGlobal>
 #include <KShortcut>
+#include <KIconLoader>
 
 // Konsole
 #include "BookmarkHandler.h"
@@ -298,7 +299,7 @@ void MainWindow::setupActions()
     QAction* menuAction = 0;
 
     // File Menu
-    _newTabMenuAction = new KActionMenu(KIcon("tab-new"), i18nc("@action:inmenu", "&New Tab"), collection);
+    _newTabMenuAction = new KActionMenu(QIcon::fromTheme(QStringLiteral("tab-new")), i18nc("@action:inmenu", "&New Tab"), collection);
     collection->setDefaultShortcut(_newTabMenuAction, Qt::CTRL + Qt::SHIFT + Qt::Key_T);
     collection->setShortcutsConfigurable(_newTabMenuAction, true);
     _newTabMenuAction->setAutoRepeat(false);
@@ -306,21 +307,21 @@ void MainWindow::setupActions()
     collection->addAction("new-tab", _newTabMenuAction);
 
     menuAction = collection->addAction("clone-tab");
-    menuAction->setIcon(KIcon("tab-duplicate"));
+    menuAction->setIcon(QIcon::fromTheme(QStringLiteral("tab-duplicate")));
     menuAction->setText(i18nc("@action:inmenu", "&Clone Tab"));
     collection->setDefaultShortcut(menuAction, QKeySequence());
     menuAction->setAutoRepeat(false);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::cloneTab);
 
     menuAction = collection->addAction("new-window");
-    menuAction->setIcon(KIcon("window-new"));
+    menuAction->setIcon(QIcon::fromTheme(QStringLiteral("window-new")));
     menuAction->setText(i18nc("@action:inmenu", "New &Window"));
     collection->setDefaultShortcut(menuAction, Qt::CTRL + Qt::SHIFT + Qt::Key_N);
     menuAction->setAutoRepeat(false);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::newWindow);
 
     menuAction = collection->addAction("close-window");
-    menuAction->setIcon(KIcon("window-close"));
+    menuAction->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
     menuAction->setText(i18nc("@action:inmenu", "Close Window"));
     collection->setDefaultShortcut(menuAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Q);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::close);
@@ -345,7 +346,7 @@ void MainWindow::setupActions()
 
     menuAction = collection->addAction("manage-profiles");
     menuAction->setText(i18nc("@action:inmenu", "Manage Profiles..."));
-    menuAction->setIcon(KIcon("configure"));
+    menuAction->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::showManageProfilesDialog);
 
     // Set up an shortcut-only action for activating menu bar.
@@ -396,7 +397,8 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
             // NOTE: defaultProfile seems to not work here, sigh.
             Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
             if (profile && profile->name() == sessionAction->text().remove('&')) {
-                sessionAction->setIcon(KIcon(profile->icon(), 0, QStringList("emblem-favorite")));
+                QIcon icon(KIconLoader::global()->loadIcon(profile->icon(), KIconLoader::Small, 0, KIconLoader::DefaultState, QStringList("emblem-favorite")));
+                sessionAction->setIcon(icon);
                 _newTabMenuAction->menu()->setDefaultAction(sessionAction);
                 QFont actionFont = sessionAction->font();
                 actionFont.setBold(true);

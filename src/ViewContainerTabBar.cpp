@@ -28,10 +28,10 @@
 #include <QLabel>
 #include <QtGui/QPainter>
 #include <QtGui/QDragMoveEvent>
+#include <QtGui/QIcon>
 
 // KDE
 #include <KLocalizedString>
-#include <KIcon>
 
 using Konsole::ViewContainerTabBar;
 using Konsole::TabbedViewContainer;
@@ -136,7 +136,7 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 
         QIcon::Mode drawMode = drawDisabled ? QIcon::Disabled : QIcon::Normal;
         const QString iconName = north ? "arrow-up" : "arrow-down";
-        _dropIndicator->setPixmap(KIcon(iconName).pixmap(ARROW_SIZE, ARROW_SIZE, drawMode));
+        _dropIndicator->setPixmap(QIcon::fromTheme(iconName).pixmap(ARROW_SIZE, ARROW_SIZE, drawMode));
         _drawIndicatorDisabled = drawDisabled;
     }
 
