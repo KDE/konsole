@@ -33,7 +33,6 @@
 #include <KGlobal>
 #include <KDebug>
 #include <KConfigGroup>
-#include <KStandardDirs>
 
 // Konsole
 #include "ProfileReader.h"
@@ -90,7 +89,8 @@ ProfileManager::ProfileManager()
     }
 
     // load the default profile
-    const QString path = KStandardDirs::locate("data", "konsole/" + defaultProfileFileName);
+    const QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + defaultProfileFileName);
+
     if (!path.isEmpty()) {
         Profile::Ptr profile = loadProfile(path);
         if (profile)
@@ -137,7 +137,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
 
     // if the file is not an absolute path, look it up
     if (!fileInfo.isAbsolute())
-        path = KStandardDirs::locate("data", path);
+        path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, path);
 
     // if the file is not found, return immediately
     if (path.isEmpty()) {
@@ -471,7 +471,7 @@ void ProfileManager::loadShortcuts()
         // if the file is not an absolute path, look it up
         QFileInfo fileInfo(profilePath);
         if (!fileInfo.isAbsolute()) {
-            profilePath = KStandardDirs::locate("data", "konsole/" + profilePath);
+            profilePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + profilePath);
         }
 
         data.profilePath = profilePath;
@@ -497,8 +497,8 @@ void ProfileManager::saveShortcuts()
         if (fileInfo.isAbsolute()) {
             // Check to see if file is under KDE's data locations.  If not,
             // store full path.
-            QString location = KGlobal::dirs()->locate("data",
-                               "konsole/" + fileInfo.fileName());
+            const QString location = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                            QStringLiteral("konsole/") + fileInfo.fileName());
             if (location.isEmpty()) {
                 profileName = iter.value().profilePath;
             } else  {
@@ -580,8 +580,8 @@ void ProfileManager::saveFavorites()
         if (fileInfo.isAbsolute()) {
             // Check to see if file is under KDE's data locations.  If not,
             // store full path.
-            QString location = KGlobal::dirs()->locate("data",
-                               "konsole/" + fileInfo.fileName());
+            const QString location = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + fileInfo.fileName());
+
             if (location.isEmpty()) {
                 profileName = profile->path();
             } else {

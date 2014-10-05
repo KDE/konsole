@@ -42,7 +42,6 @@
 #include <KRun>
 #include <KShell>
 #include <KToolInvocation>
-#include <KStandardDirs>
 #include <KToggleAction>
 #include <KSelectAction>
 #include <KXmlGuiWindow>

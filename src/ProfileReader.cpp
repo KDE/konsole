@@ -29,7 +29,6 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KGlobal>
-#include <KStandardDirs>
 
 // Konsole
 #include "ShellCommand.h"
@@ -41,8 +40,7 @@ static const char GENERAL_GROUP[]     = "General";
 
 QStringList KDE4ProfileReader::findProfiles()
 {
-    return KGlobal::dirs()->findAllResources("data", "konsole/*.profile",
-            KStandardDirs::NoDuplicates);
+    return QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/*.profile"));
 }
 void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profile,
                                        const Profile::PropertyInfo* properties)

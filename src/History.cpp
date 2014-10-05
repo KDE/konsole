@@ -32,7 +32,6 @@
 // KDE
 #include <kde_file.h>
 #include <KDebug>
-#include <KStandardDirs>
 
 #include <QDir>
 

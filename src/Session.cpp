@@ -45,7 +45,6 @@
 #include <KRun>
 #include <KShell>
 #include <KProcess>
-#include <KStandardDirs>
 #include <KConfigGroup>
 
 // Konsole
@@ -392,7 +391,7 @@ QString Session::checkProgram(const QString& program)
 
     exec = KRun::binaryName(exec, false);
     exec = KShell::tildeExpand(exec);
-    QString pexec = KStandardDirs::findExe(exec);
+    const QString pexec = QStandardPaths::findExecutable(exec);
     if (pexec.isEmpty()) {
         kError() << i18n("Could not find binary: ") << exec;
         return QString();

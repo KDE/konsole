@@ -26,9 +26,9 @@
 #include <QtCore/QIODevice>
 #include <QtCore/QFileInfo>
 #include <QtCore/QFile>
+#include <QtCore/QDir>
 
 // KDE
-#include <KStandardDirs>
 #include <KGlobal>
 #include <KConfig>
 #include <KLocalizedString>
@@ -268,16 +268,12 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 
 QStringList ColorSchemeManager::listColorSchemes()
 {
-    return KGlobal::dirs()->findAllResources("data",
-            "konsole/*.colorscheme",
-            KStandardDirs::NoDuplicates);
+    return QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/*.colorscheme"));
 }
 
 QStringList ColorSchemeManager::listKDE3ColorSchemes()
 {
-    return KGlobal::dirs()->findAllResources("data",
-            "konsole/*.schema",
-            KStandardDirs::NoDuplicates);
+    return QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/*.schema"));
 }
 
 const ColorScheme ColorSchemeManager::_defaultColorScheme;
@@ -297,7 +293,10 @@ void ColorSchemeManager::addColorScheme(ColorScheme* scheme)
     _colorSchemes.insert(scheme->name(), scheme);
 
     // save changes to disk
-    QString path = KGlobal::dirs()->saveLocation("data", "konsole/") + scheme->name() + ".colorscheme";
+
+    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("konsole/");
+    QDir().mkpath(dir);
+    const QString path = dir + scheme->name() + QStringLiteral(".colorscheme");
     KConfig config(path , KConfig::NoGlobals);
 
     scheme->write(config);
@@ -352,13 +351,12 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
 
 QString ColorSchemeManager::findColorSchemePath(const QString& name) const
 {
-    QString path = KStandardDirs::locate("data", "konsole/" + name + ".colorscheme");
+    QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".colorscheme"));
 
-    if (!path.isEmpty())
+    if (!path.isEmpty()) {
         return path;
+    }
 
-    path = KStandardDirs::locate("data", "konsole/" + name + ".schema");
-
-    return path;
+    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".schema"));
 }
 

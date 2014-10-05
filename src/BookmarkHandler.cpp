@@ -26,12 +26,13 @@
 
 // Qt
 #include <QtCore/QFileInfo>
+#include <QtCore/QStandardPaths>
+#include <QtCore/QDir>
 
 // KDE
 #include <KShell>
 #include <KBookmarkMenu>
 #include <KBookmarkOwner>
-#include <KStandardDirs>
 #include <KLocalizedString>
 
 // Konsole
@@ -51,9 +52,13 @@ BookmarkHandler::BookmarkHandler(KActionCollection* collection,
 {
     setObjectName(QLatin1String("BookmarkHandler"));
 
-    _file = KStandardDirs::locate("data", "konsole/bookmarks.xml");
-    if (_file.isEmpty())
-        _file = KStandardDirs::locateLocal("data", "konsole/bookmarks.xml");
+    _file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/bookmarks.xml"));
+
+    if (_file.isEmpty()) {
+        _file = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole");
+        QDir().mkpath(_file);
+        _file += QStringLiteral("/bookmarks.xml");
+    }
 
     KBookmarkManager* manager = KBookmarkManager::managerForFile(_file, "konsole");
 

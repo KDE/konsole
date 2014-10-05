@@ -29,7 +29,6 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KGlobal>
-#include <KStandardDirs>
 
 // Konsole
 #include "ShellCommand.h"
@@ -42,8 +41,8 @@ static const char GENERAL_GROUP[]     = "General";
 QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
 {
     // both location have trailing slash
-    static const QString localDataLocation = KGlobal::dirs()->saveLocation("data", "konsole/");
-    static const QString systemDataLocation = KStandardDirs::installPath("data") + "konsole/";
+    static const QString localDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("konsole/");
+    static const QString systemDataLocation = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).last() + QStringLiteral("konsole/");
 
     const QString candidateLocalPath = localDataLocation + profile->untranslatedName() + ".profile";
     QString newPath;

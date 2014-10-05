@@ -22,11 +22,11 @@
 
 // Qt
 #include <QtCore/QFileInfo>
+#include <QtCore/QStandardPaths>
 #include <QStandardItem>
 
 // KDE
 #include <KKeySequenceWidget>
-#include <KStandardDirs>
 #include <KDebug>
 #include <KLocalizedString>
 
@@ -404,7 +404,7 @@ Profile::Ptr ManageProfilesDialog::currentProfile() const
 }
 bool ManageProfilesDialog::isProfileDeletable(Profile::Ptr profile) const
 {
-    static const QString systemDataLocation = KStandardDirs::installPath("data") + "konsole/";
+    static const QString systemDataLocation = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).last() + QStringLiteral("konsole/");
 
     if (profile) {
         QFileInfo fileInfo(profile->path());

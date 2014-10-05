@@ -25,11 +25,11 @@
 // Qt
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
+#include <QtCore/QDir>
 
 // KDE
 #include <KDebug>
 #include <KGlobal>
-#include <KStandardDirs>
 
 using namespace Konsole;
 
@@ -78,14 +78,12 @@ bool KeyboardTranslatorManager::deleteTranslator(const QString& name)
 
 QString KeyboardTranslatorManager::findTranslatorPath(const QString& name)
 {
-    return KStandardDirs::locate("data", "konsole/" + name + ".keytab");
+    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".keytab"));
 }
 
 void KeyboardTranslatorManager::findTranslators()
 {
-    QStringList list = KGlobal::dirs()->findAllResources("data",
-                       "konsole/*.keytab",
-                       KStandardDirs::NoDuplicates);
+    QStringList list = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/*.keytab"));
 
     // add the name of each translator to the list and associated
     // the name with a null pointer to indicate that the translator
@@ -120,8 +118,9 @@ const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QStrin
 
 bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator* translator)
 {
-    const QString path = KGlobal::dirs()->saveLocation("data", "konsole/") + translator->name()
-                         + ".keytab";
+    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("konsole/");
+    QDir().mkpath(dir);
+    const QString path = dir + translator->name() + QStringLiteral(".keytab");
 
     //kDebug() << "Saving translator to" << path;
 
