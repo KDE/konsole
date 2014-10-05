@@ -29,9 +29,6 @@
 #include <QtGui/QFont>
 #include <QtGui/QColor>
 
-// KDE
-#include <KSharedPtr>
-
 // Konsole
 #include "konsole_export.h"
 
@@ -64,8 +61,8 @@ class KONSOLEPRIVATE_EXPORT Profile : public QSharedData
     friend class ProfileGroup;
 
 public:
-    typedef KSharedPtr<Profile> Ptr;
-    typedef KSharedPtr<ProfileGroup> GroupPtr;
+    typedef QExplicitlySharedDataPointer<Profile> Ptr;
+    typedef QExplicitlySharedDataPointer<ProfileGroup> GroupPtr;
 
     /**
      * This enum describes the available properties
@@ -147,7 +144,7 @@ public:
          * See Enum::ScrollBarPositionEnum
          */
         ScrollBarPosition,
-	/** (bool) Specifies whether the PageUp/Down will scroll the full 
+	/** (bool) Specifies whether the PageUp/Down will scroll the full
 	 * height or half height.
          */
         ScrollFullPage,
@@ -599,7 +596,7 @@ public:
 class KONSOLEPRIVATE_EXPORT ProfileGroup : public Profile
 {
 public:
-    typedef KSharedPtr<ProfileGroup> Ptr;
+    typedef QExplicitlySharedDataPointer<ProfileGroup> Ptr;
 
     /** Construct a new profile group, which is hidden by default. */
     explicit ProfileGroup(Profile::Ptr parent = Profile::Ptr());

@@ -24,9 +24,7 @@
 
 // Qt
 #include <QtCore/QMetaType>
-
-// KDE
-#include <KSharedPtr>
+#include <QtCore/QSharedData>
 
 // Konsole
 #include "CharacterColor.h"
@@ -44,7 +42,7 @@ namespace Konsole
 class ColorSchemeWallpaper : public QSharedData
 {
 public:
-    typedef KSharedPtr<ColorSchemeWallpaper> Ptr;
+    typedef QExplicitlySharedDataPointer<ColorSchemeWallpaper> Ptr;
 
     explicit ColorSchemeWallpaper(const QString& path);
     ~ColorSchemeWallpaper();
