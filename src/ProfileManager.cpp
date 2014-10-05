@@ -110,7 +110,7 @@ ProfileManager::~ProfileManager()
 {
 }
 
-K_GLOBAL_STATIC(ProfileManager , theProfileManager)
+Q_GLOBAL_STATIC(ProfileManager, theProfileManager)
 ProfileManager* ProfileManager::instance()
 {
     return theProfileManager;

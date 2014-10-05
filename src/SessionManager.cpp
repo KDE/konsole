@@ -65,7 +65,7 @@ SessionManager::~SessionManager()
     }
 }
 
-K_GLOBAL_STATIC(SessionManager , theSessionManager)
+Q_GLOBAL_STATIC(SessionManager, theSessionManager)
 SessionManager* SessionManager::instance()
 {
     return theSessionManager;

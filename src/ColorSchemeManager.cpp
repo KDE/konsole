@@ -163,7 +163,7 @@ ColorSchemeManager::~ColorSchemeManager()
     qDeleteAll(_colorSchemes);
 }
 
-K_GLOBAL_STATIC(ColorSchemeManager , theColorSchemeManager)
+Q_GLOBAL_STATIC(ColorSchemeManager, theColorSchemeManager)
 
 ColorSchemeManager* ColorSchemeManager::instance()
 {
