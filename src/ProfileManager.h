@@ -179,7 +179,7 @@ public:
 
     QList<Profile::Ptr> sortedFavorites();
 
-    /*
+    /**
      * Sorts the profile list by menuindex; those without an menuindex, sort by name.
      *  The menuindex list is first and then the non-menuindex list.
      *

@@ -151,19 +151,19 @@ void ViewManager::setupActions()
         QAction* splitLeftRightAction = new QAction(KIcon("view-split-left-right"),
                 i18nc("@action:inmenu", "Split View Left/Right"),
                 this);
-        splitLeftRightAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_ParenLeft));
+        collection->setDefaultShortcut(splitLeftRightAction, Qt::CTRL + Qt::Key_ParenLeft);
         collection->addAction("split-view-left-right", splitLeftRightAction);
         connect(splitLeftRightAction , &QAction::triggered , this , &Konsole::ViewManager::splitLeftRight);
 
         QAction* splitTopBottomAction = new QAction(KIcon("view-split-top-bottom") ,
                 i18nc("@action:inmenu", "Split View Top/Bottom"), this);
-        splitTopBottomAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_ParenRight));
+        collection->setDefaultShortcut(splitTopBottomAction, Qt::CTRL + Qt::Key_ParenRight);
         collection->addAction("split-view-top-bottom", splitTopBottomAction);
         connect(splitTopBottomAction , &QAction::triggered , this , &Konsole::ViewManager::splitTopBottom);
 
         QAction* closeActiveAction = new QAction(i18nc("@action:inmenu Close Active View", "Close Active") , this);
         closeActiveAction->setIcon(KIcon("view-close"));
-        closeActiveAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
+        collection->setDefaultShortcut(closeActiveAction, Qt::CTRL + Qt::SHIFT + Qt::Key_S);
         closeActiveAction->setEnabled(false);
         collection->addAction("close-active-view", closeActiveAction);
         connect(closeActiveAction , &QAction::triggered , this , &Konsole::ViewManager::closeActiveContainer);
@@ -171,7 +171,7 @@ void ViewManager::setupActions()
         multiViewOnlyActions << closeActiveAction;
 
         QAction* closeOtherAction = new QAction(i18nc("@action:inmenu Close Other Views", "Close Others") , this);
-        closeOtherAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_O));
+        collection->setDefaultShortcut(closeOtherAction, Qt::CTRL + Qt::SHIFT + Qt::Key_O);
         closeOtherAction->setEnabled(false);
         collection->addAction("close-other-views", closeOtherAction);
         connect(closeOtherAction , &QAction::triggered , this , &Konsole::ViewManager::closeOtherContainers);
@@ -180,7 +180,7 @@ void ViewManager::setupActions()
 
         // Expand & Shrink Active View
         QAction* expandActiveAction = new QAction(i18nc("@action:inmenu", "Expand View") , this);
-        expandActiveAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_BracketRight));
+        collection->setDefaultShortcut(expandActiveAction, Qt::CTRL + Qt::SHIFT + Qt::Key_BracketRight);
         expandActiveAction->setEnabled(false);
         collection->addAction("expand-active-view", expandActiveAction);
         connect(expandActiveAction , &QAction::triggered , this , &Konsole::ViewManager::expandActiveContainer);
@@ -188,7 +188,7 @@ void ViewManager::setupActions()
         multiViewOnlyActions << expandActiveAction;
 
         QAction* shrinkActiveAction = new QAction(i18nc("@action:inmenu", "Shrink View") , this);
-        shrinkActiveAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_BracketLeft));
+        collection->setDefaultShortcut(shrinkActiveAction, Qt::CTRL + Qt::SHIFT + Qt::Key_BracketLeft);
         shrinkActiveAction->setEnabled(false);
         collection->addAction("shrink-active-view", shrinkActiveAction);
         connect(shrinkActiveAction , &QAction::triggered , this , &Konsole::ViewManager::shrinkActiveContainer);
@@ -201,7 +201,7 @@ void ViewManager::setupActions()
         detachViewAction->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
         // Ctrl+Shift+D is not used as a shortcut by default because it is too close
         // to Ctrl+D - which will terminate the session in many cases
-        detachViewAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_H));
+        collection->setDefaultShortcut(detachViewAction, Qt::CTRL + Qt::SHIFT + Qt::Key_H);
 
         connect(this , &Konsole::ViewManager::splitViewToggle , this , &Konsole::ViewManager::updateDetachViewState);
         connect(detachViewAction , &QAction::triggered , this , &Konsole::ViewManager::detachActiveView);
@@ -233,23 +233,23 @@ void ViewManager::setupActions()
     }
 
     // keyboard shortcut only actions
-    nextViewAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Right));
+    collection->setDefaultShortcut(nextViewAction, Qt::SHIFT + Qt::Key_Right);
     connect(nextViewAction, &QAction::triggered , this , &Konsole::ViewManager::nextView);
     _viewSplitter->addAction(nextViewAction);
 
-    previousViewAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Left));
+    collection->setDefaultShortcut(previousViewAction, Qt::SHIFT + Qt::Key_Left);
     connect(previousViewAction, &QAction::triggered , this , &Konsole::ViewManager::previousView);
     _viewSplitter->addAction(previousViewAction);
 
-    nextContainerAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Tab));
+    collection->setDefaultShortcut(nextContainerAction, Qt::SHIFT + Qt::Key_Tab);
     connect(nextContainerAction , &QAction::triggered , this , &Konsole::ViewManager::nextContainer);
     _viewSplitter->addAction(nextContainerAction);
 
-    moveViewLeftAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Left));
+    collection->setDefaultShortcut(moveViewLeftAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Left);
     connect(moveViewLeftAction , &QAction::triggered , this , &Konsole::ViewManager::moveActiveViewLeft);
     _viewSplitter->addAction(moveViewLeftAction);
 
-    moveViewRightAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Right));
+    collection->setDefaultShortcut(moveViewRightAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Right);
     connect(moveViewRightAction , &QAction::triggered , this , &Konsole::ViewManager::moveActiveViewRight);
     _viewSplitter->addAction(moveViewRightAction);
 

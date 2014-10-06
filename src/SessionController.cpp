@@ -94,9 +94,9 @@ using namespace Konsole;
 // TODO - Replace the icon choices below when suitable icons for silence and
 // activity are available
 //having global static KIcons no longer works with Qt5/KF5, use K_GLOBAL_STATIC
-K_GLOBAL_STATIC_WITH_ARGS(KIcon, _activityIcon, ("dialog-information"));
-K_GLOBAL_STATIC_WITH_ARGS(KIcon, _silenceIcon, ("dialog-information"));
-K_GLOBAL_STATIC_WITH_ARGS(KIcon, _broadcastIcon, ("emblem-important"));
+K_GLOBAL_STATIC_WITH_ARGS(KIcon, _activityIcon, ("dialog-information"))
+K_GLOBAL_STATIC_WITH_ARGS(KIcon, _silenceIcon, ("dialog-information"))
+K_GLOBAL_STATIC_WITH_ARGS(KIcon, _broadcastIcon, ("emblem-important"))
 
 QSet<SessionController*> SessionController::_allControllers;
 int SessionController::_lastControllerId;
@@ -571,7 +571,7 @@ void SessionController::setupCommonActions()
         action->setText(i18n("&Close Tab"));
 
     action->setIcon(KIcon("tab-close"));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_W));
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_W);
 
     // Open Browser
     action = collection->addAction("open-browser", this, SLOT(openBrowser()));
@@ -580,7 +580,7 @@ void SessionController::setupCommonActions()
 
     // Copy and Paste
     action = KStandardAction::copy(this, SLOT(copy()), collection);
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_C));
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_C);
     // disabled at first, since nothing has been selected now
     action->setEnabled(false);
 
@@ -588,11 +588,11 @@ void SessionController::setupCommonActions()
     QList<QKeySequence> pasteShortcut;
     pasteShortcut.append(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_V));
     pasteShortcut.append(QKeySequence(Qt::SHIFT + Qt::Key_Insert));
-    action->setShortcuts(pasteShortcut);
+    collection->setDefaultShortcuts(action, pasteShortcut);
 
     action = collection->addAction("paste-selection", this, SLOT(pasteFromX11Selection()));
     action->setText(i18n("Paste Selection"));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Insert));
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Insert);
 
     _webSearchMenu = new KActionMenu(i18n("Web Search"), this);
     _webSearchMenu->setIcon(KIcon("preferences-web-browser-shortcuts"));
@@ -612,7 +612,7 @@ void SessionController::setupCommonActions()
 
     action = KStandardAction::print(this, SLOT(print_screen()), collection);
     action->setText(i18n("&Print Screen..."));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_P));
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_P);
 
     action = collection->addAction("adjust-history", this, SLOT(showHistoryOptions()));
     action->setText(i18n("Adjust Scrollback..."));
@@ -625,7 +625,7 @@ void SessionController::setupCommonActions()
     action = collection->addAction("clear-history-and-reset", this, SLOT(clearHistoryAndReset()));
     action->setText(i18n("Clear Scrollback and Reset"));
     action->setIcon(KIcon("edit-clear-history"));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_K));
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_K);
 
     // Profile Options
     action = collection->addAction("edit-current-profile", this, SLOT(editCurrentProfile()));
@@ -638,14 +638,14 @@ void SessionController::setupCommonActions()
 
     // History
     _findAction = KStandardAction::find(this, SLOT(searchBarEvent()), collection);
-    _findAction->setShortcut(QKeySequence());
+    collection->setDefaultShortcut(_findAction, QKeySequence());
 
     _findNextAction = KStandardAction::findNext(this, SLOT(findNextInHistory()), collection);
-    _findNextAction->setShortcut(QKeySequence());
+    collection->setDefaultShortcut(_findNextAction, QKeySequence());
     _findNextAction->setEnabled(false);
 
     _findPreviousAction = KStandardAction::findPrev(this, SLOT(findPreviousInHistory()), collection);
-    _findPreviousAction->setShortcut(QKeySequence());
+    collection->setDefaultShortcut(_findPreviousAction, QKeySequence());
     _findPreviousAction->setEnabled(false);
 
     // Character Encoding
@@ -666,7 +666,7 @@ void SessionController::setupExtraActions()
     action = collection->addAction("rename-session", this, SLOT(renameSession()));
     action->setText(i18n("&Rename Tab..."));
     action->setIcon(KIcon("edit-rename"));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_S));
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::ALT + Qt::Key_S);
 
     // Copy input to ==> all tabs
     KToggleAction* copyInputToAllTabsAction = collection->add<KToggleAction>("copy-input-to-all-tabs");
@@ -678,13 +678,13 @@ void SessionController::setupExtraActions()
     // Copy input to ==> selected tabs
     KToggleAction* copyInputToSelectedTabsAction = collection->add<KToggleAction>("copy-input-to-selected-tabs");
     copyInputToSelectedTabsAction->setText(i18n("&Select Tabs..."));
-    copyInputToSelectedTabsAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Period));
+    collection->setDefaultShortcut(copyInputToSelectedTabsAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Period);
     copyInputToSelectedTabsAction->setData(CopyInputToSelectedTabsMode);
 
     // Copy input to ==> none
     KToggleAction* copyInputToNoneAction = collection->add<KToggleAction>("copy-input-to-none");
     copyInputToNoneAction->setText(i18nc("@action:inmenu Do not select any tabs", "&None"));
-    copyInputToNoneAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Slash));
+    collection->setDefaultShortcut(copyInputToNoneAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Slash);
     copyInputToNoneAction->setData(CopyInputToNoneMode);
     copyInputToNoneAction->setChecked(true); // the default state
 
@@ -700,16 +700,16 @@ void SessionController::setupExtraActions()
     action = collection->addAction("zmodem-upload", this, SLOT(zmodemUpload()));
     action->setText(i18n("&ZModem Upload..."));
     action->setIcon(KIcon("document-open"));
-    action->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_U));
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::ALT + Qt::Key_U);
 
     // Monitor
     toggleAction = new KToggleAction(i18n("Monitor for &Activity"), this);
-    toggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_A));
+    collection->setDefaultShortcut(toggleAction, Qt::CTRL + Qt::SHIFT + Qt::Key_A);
     action = collection->addAction("monitor-activity", toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorActivity);
 
     toggleAction = new KToggleAction(i18n("Monitor for &Silence"), this);
-    toggleAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_I));
+    collection->setDefaultShortcut(toggleAction, Qt::CTRL + Qt::SHIFT + Qt::Key_I);
     action = collection->addAction("monitor-silence", toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorSilence);
 
@@ -720,12 +720,12 @@ void SessionController::setupExtraActions()
     QList<QKeySequence> enlargeFontShortcut;
     enlargeFontShortcut.append(QKeySequence(Qt::CTRL + Qt::Key_Plus));
     enlargeFontShortcut.append(QKeySequence(Qt::CTRL + Qt::Key_Equal));
-    action->setShortcuts(enlargeFontShortcut);
+    collection->setDefaultShortcuts(action, enlargeFontShortcut);
 
     action = collection->addAction("shrink-font", this, SLOT(decreaseFontSize()));
     action->setText(i18n("Shrink Font"));
     action->setIcon(KIcon("format-font-size-less"));
-    action->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Minus));
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::Key_Minus);
 
 
     // Send signal
@@ -773,9 +773,9 @@ void SessionController::setupExtraActions()
     action->setData(SIGUSR2);
     sendSignalActions->addAction(action);
 
-    _findAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F));
-    _findNextAction->setShortcut(QKeySequence(Qt::Key_F3));
-    _findPreviousAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F3));
+    collection->setDefaultShortcut(_findAction, Qt::CTRL + Qt::SHIFT + Qt::Key_F);
+    collection->setDefaultShortcut(_findNextAction, Qt::Key_F3);
+    collection->setDefaultShortcut(_findPreviousAction, Qt::SHIFT + Qt::Key_F3);
 }
 
 void SessionController::switchProfile(Profile::Ptr profile)
