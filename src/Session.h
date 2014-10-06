@@ -52,6 +52,17 @@ class ZModemDialog;
 class HistoryType;
 
 /**
+ * Platform-specific main shortcut "opcode":
+ */
+enum Modifier {
+#ifdef Q_OS_MAC
+    ACCEL = Qt::META
+#else
+    ACCEL = Qt::CTRL
+#endif
+};
+
+/**
  * Represents a terminal session consisting of a pseudo-teletype and a terminal emulation.
  * The pseudo-teletype (or PTY) handles I/O between the terminal process and Konsole.
  * The terminal emulation ( Emulation and subclasses ) processes the output stream from the
