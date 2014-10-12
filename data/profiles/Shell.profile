@@ -1,7 +1,7 @@
 [General]
 Name=Shell
 Name[af]=Tolk
-Name[ar]=الصدفة
+Name[ar]=صَدفة
 Name[as]=শ্বেল
 Name[ast]=Intérprete d'órdenes
 Name[be@latin]=Abałonka
@@ -90,7 +90,7 @@ Name[zh_CN]=Shell
 Name[zh_TW]=Shell
 Comment=Konsole default profile
 Comment[af]=Konsole verstekprofiel
-Comment[ar]=لوحة الإعدادات المبدئية
+Comment[ar]=تشكيلة كونسول الافتراضية
 Comment[as]=Konsole ৰ অবিকল্পিত পাৰ্শ্বৰূপ
 Comment[ast]=Perfil predetermináu de Konsole
 Comment[be@latin]=Zmoŭčany profil prahramy „Konsole”
