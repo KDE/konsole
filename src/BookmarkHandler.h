@@ -32,7 +32,6 @@
 // Konsole
 #include "konsole_export.h"
 
-class KMenu;
 class QMenu;
 class KBookmarkMenu;
 class KActionCollection;

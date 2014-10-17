@@ -25,7 +25,6 @@
 #include <QtCore/QBitArray>
 
 class QAction;
-class QLabel;
 class QTimer;
 class QLineEdit;
 class QToolButton;

@@ -25,7 +25,6 @@
 #include <kde_terminal_interface.h>
 #include <KParts/Part>
 
-class QKeyEvent;
 class QEvent;
 
 namespace Konsole
