@@ -39,7 +39,7 @@
 #include <QKeyEvent>
 
 // KDE
-#include <KDebug>
+#include <QDebug>
 #include <KLocalizedString>
 #include <KNotification>
 #include <KRun>
@@ -170,7 +170,7 @@ Session::~Session()
 void Session::openTeletype(int fd)
 {
     if (isRunning()) {
-        kWarning() << "Attempted to open teletype in a running session.";
+        qWarning() << "Attempted to open teletype in a running session.";
         return;
     }
 
@@ -393,7 +393,7 @@ QString Session::checkProgram(const QString& program)
     exec = KShell::tildeExpand(exec);
     const QString pexec = QStandardPaths::findExecutable(exec);
     if (pexec.isEmpty()) {
-        kError() << i18n("Could not find binary: ") << exec;
+        qCritical() << i18n("Could not find binary: ") << exec;
         return QString();
     }
 
@@ -428,16 +428,16 @@ void Session::run()
 {
     // extra safeguard for potential bug.
     if (isRunning()) {
-        kWarning() << "Attempted to re-run an already running session.";
+        qWarning() << "Attempted to re-run an already running session.";
         return;
     }
 
     //check that everything is in place to run the session
     if (_program.isEmpty()) {
-        kWarning() << "Program to run not set.";
+        qWarning() << "Program to run not set.";
     }
     if (_arguments.isEmpty()) {
-        kWarning() << "No command line arguments specified.";
+        qWarning() << "No command line arguments specified.";
     }
     if (_uniqueIdentifier.isNull()) {
         _uniqueIdentifier = createUuid();
@@ -792,7 +792,7 @@ bool Session::closeInNormalWay()
     if (kill(SIGHUP)) {
         return true;
     } else {
-        kWarning() << "Process " << _shellProcess->pid() << " did not die with SIGHUP";
+        qWarning() << "Process " << _shellProcess->pid() << " did not die with SIGHUP";
         _shellProcess->closePty();
         return (_shellProcess->waitForFinished(1000));
     }
@@ -806,7 +806,7 @@ bool Session::closeInForceWay()
     if (kill(SIGKILL)) {
         return true;
     } else {
-        kWarning() << "Process " << _shellProcess->pid() << " did not die with SIGKILL";
+        qWarning() << "Process " << _shellProcess->pid() << " did not die with SIGKILL";
         return false;
     }
 }

@@ -31,7 +31,7 @@
 // KDE
 #include <KConfig>
 #include <KGlobal>
-#include <KDebug>
+#include <QDebug>
 #include <KConfigGroup>
 
 // Konsole
@@ -157,7 +157,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     PopStackOnExit<QString> popGuardOnExit(recursionGuard);
 
     if (recursionGuard.contains(path)) {
-        kWarning() << "Ignoring attempt to load profile recursively from" << path;
+        qWarning() << "Ignoring attempt to load profile recursively from" << path;
         return _fallbackProfile;
     } else {
         recursionGuard.push(path);
@@ -180,7 +180,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     delete reader;
 
     if (!result) {
-        kWarning() << "Could not load profile from " << path;
+        qWarning() << "Could not load profile from " << path;
         return Profile::Ptr();
     } else {
         addProfile(newProfile);
@@ -384,7 +384,7 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
         // try to delete the config file
         if (profile->isPropertySet(Profile::Path) && QFile::exists(profile->path())) {
             if (!QFile::remove(profile->path())) {
-                kWarning() << "Could not delete profile: " << profile->path()
+                qWarning() << "Could not delete profile: " << profile->path()
                            << "The file is most likely in a directory which is read-only.";
 
                 return false;

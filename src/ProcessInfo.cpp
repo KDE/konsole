@@ -43,7 +43,7 @@
 #include <KGlobal>
 #include <KSharedConfig>
 #include <KUser>
-#include <KDebug>
+#include <QDebug>
 
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_MAC)
 #include <sys/sysctl.h>
@@ -410,7 +410,7 @@ void UnixProcessInfo::readUserName()
         setUserName(QString(passwdStruct.pw_name));
     } else {
         setUserName(QString());
-        kWarning() << "getpwuid_r returned error : " << getpwStatus;
+        qWarning() << "getpwuid_r returned error : " << getpwStatus;
     }
     delete [] getpwBuffer;
 }
@@ -750,14 +750,14 @@ private:
         managementInfoBase[5] = 1;
 
         if (::sysctl(managementInfoBase, 6, NULL, &mibLength, NULL, 0) == -1) {
-            kWarning() << "first sysctl() call failed with code" << errno;
+            qWarning() << "first sysctl() call failed with code" << errno;
             return false;
         }
 
         kInfoProc = (struct kinfo_proc*)malloc(mibLength);
 
         if (::sysctl(managementInfoBase, 6, kInfoProc, &mibLength, NULL, 0) == -1) {
-            kWarning() << "second sysctl() call failed with code" << errno;
+            qWarning() << "second sysctl() call failed with code" << errno;
             free(kInfoProc);
             return false;
         }
@@ -794,7 +794,7 @@ private:
 
             buf = nbuf;
             rc = ::sysctl(managementInfoBase, 4, buf, &len, NULL, 0);
-            kWarning() << "sysctl() call failed with code" << errno;
+            qWarning() << "sysctl() call failed with code" << errno;
         } while (rc == -1 && errno == ENOMEM);
 
         if (nbuf == NULL || rc == -1) {
@@ -853,7 +853,7 @@ private:
 
         len = sizeof(buf);
         if (::sysctl(managementInfoBase, 3, buf, &len, NULL, 0) == -1) {
-            kWarning() << "sysctl() call failed with code" << errno;
+            qWarning() << "sysctl() call failed with code" << errno;
             return false;
         }
 
@@ -1024,9 +1024,9 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
 
     if (!ok || name != "ssh") {
         if (!ok)
-            kWarning() << "Could not read process info";
+            qWarning() << "Could not read process info";
         else
-            kWarning() << "Process is not a SSH process";
+            qWarning() << "Process is not a SSH process";
 
         return;
     }
@@ -1110,7 +1110,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
             }
         }
     } else {
-        kWarning() << "Could not read arguments";
+        qWarning() << "Could not read arguments";
 
         return;
     }

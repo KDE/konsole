@@ -32,7 +32,7 @@
 #include <QtGui/QKeySequence>
 
 // KDE
-#include <KDebug>
+#include <QDebug>
 #include <KLocalizedString>
 
 using namespace Konsole;
@@ -124,7 +124,7 @@ void KeyboardTranslatorReader::readNext()
             } else if (tokens[2].type == Token::Command) {
                 // identify command
                 if (!parseAsCommand(tokens[2].text, command))
-                    kWarning() << "Key" << tokens[1].text << ", Command" << tokens[2].text << "not understood. ";
+                    qWarning() << "Key" << tokens[1].text << ", Command" << tokens[2].text << "not understood. ";
             }
 
             KeyboardTranslator::Entry newEntry;
@@ -215,7 +215,7 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
             } else if (parseAsKeyCode(buffer, itemKeyCode)) {
                 keyCode = itemKeyCode;
             } else {
-                kWarning() << "Unable to parse key binding item:" << buffer;
+                qWarning() << "Unable to parse key binding item:" << buffer;
             }
 
             buffer.clear();
@@ -280,7 +280,7 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString& item , int& keyCode
         keyCode = sequence[0];
 
         if (sequence.count() > 1) {
-            kWarning() << "Unhandled key codes in sequence: " << item;
+            qWarning() << "Unhandled key codes in sequence: " << item;
         }
         // additional cases implemented for backwards compatibility with KDE 3
     } else if (item == "prior") { // TODO: remove it in the future
@@ -392,7 +392,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
             list << outputToken;
         }
     } else {
-        kWarning() << "Line in keyboard translator file could not be understood:" << text;
+        qWarning() << "Line in keyboard translator file could not be understood:" << text;
     }
 
     return list;

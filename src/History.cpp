@@ -31,7 +31,7 @@
 
 // KDE
 #include <kde_file.h>
-#include <KDebug>
+#include <QDebug>
 
 #include <QDir>
 
@@ -89,7 +89,7 @@ void HistoryFile::map()
     if (_fileMap == MAP_FAILED) {
         _readWriteBalance = 0;
         _fileMap = 0;
-        kWarning() << "mmap'ing history failed.  errno = " << errno;
+        qWarning() << "mmap'ing history failed.  errno = " << errno;
     }
 }
 
@@ -313,7 +313,7 @@ void* CompactHistoryBlock::allocate(size_t size)
 
     void* block = _tail;
     _tail += size;
-    //kDebug() << "allocated " << length << " bytes at address " << block;
+    ////qDebug() << "allocated " << length << " bytes at address " << block;
     _allocCount++;
     return block;
 }
@@ -330,10 +330,10 @@ void* CompactHistoryBlockList::allocate(size_t size)
     if (list.isEmpty() || list.last()->remaining() < size) {
         block = new CompactHistoryBlock();
         list.append(block);
-        //kDebug() << "new block created, remaining " << block->remaining() << "number of blocks=" << list.size();
+        ////qDebug() << "new block created, remaining " << block->remaining() << "number of blocks=" << list.size();
     } else {
         block = list.last();
-        //kDebug() << "old block used, remaining " << block->remaining();
+        ////qDebug() << "old block used, remaining " << block->remaining();
     }
     return block->allocate(size);
 }
@@ -356,7 +356,7 @@ void CompactHistoryBlockList::deallocate(void* ptr)
     if (!block->isInUse()) {
         list.removeAt(i);
         delete block;
-        //kDebug() << "block deleted, new size = " << list.size();
+        ////qDebug() << "block deleted, new size = " << list.size();
     }
 }
 
@@ -394,7 +394,7 @@ CompactHistoryLine::CompactHistoryLine(const TextLine& line, CompactHistoryBlock
             k++;
         }
 
-        //kDebug() << "number of different formats in string: " << _formatLength;
+        ////qDebug() << "number of different formats in string: " << _formatLength;
         _formatArray = (CharacterFormat*) _blockListRef.allocate(sizeof(CharacterFormat) * _formatLength);
         Q_ASSERT(_formatArray != 0);
         _text = (quint16*) _blockListRef.allocate(sizeof(quint16) * line.size());
@@ -415,7 +415,7 @@ CompactHistoryLine::CompactHistoryLine(const TextLine& line, CompactHistoryBlock
                 c = line[k];
                 _formatArray[j].setFormat(c);
                 _formatArray[j].startPos = k;
-                //kDebug() << "format entry " << j << " at pos " << _formatArray[j].startPos << " " << &(_formatArray[j].startPos) ;
+                ////qDebug() << "format entry " << j << " at pos " << _formatArray[j].startPos << " " << &(_formatArray[j].startPos) ;
                 j++;
             }
             k++;
@@ -424,10 +424,10 @@ CompactHistoryLine::CompactHistoryLine(const TextLine& line, CompactHistoryBlock
         // copy character values
         for (int i = 0; i < line.size(); i++) {
             _text[i] = line[i].character;
-            //kDebug() << "char " << i << " at mem " << &(text[i]);
+            ////qDebug() << "char " << i << " at mem " << &(text[i]);
         }
     }
-    //kDebug() << "line created, length " << length << " at " << &(length);
+    ////qDebug() << "line created, length " << length << " at " << &(length);
 }
 
 CompactHistoryLine::~CompactHistoryLine()
@@ -468,7 +468,7 @@ CompactHistoryScroll::CompactHistoryScroll(unsigned int maxLineCount)
     , _lines()
     , _blockList()
 {
-    //kDebug() << "scroll of length " << maxLineCount << " created";
+    ////qDebug() << "scroll of length " << maxLineCount << " created";
     setMaxNbLines(maxLineCount);
 }
 
@@ -499,7 +499,7 @@ void CompactHistoryScroll::addCells(const Character a[], int count)
 void CompactHistoryScroll::addLine(bool previousWrapped)
 {
     CompactHistoryLine* line = _lines.last();
-    //kDebug() << "last line at address " << line;
+    ////qDebug() << "last line at address " << line;
     line->setWrapped(previousWrapped);
 }
 
@@ -511,12 +511,12 @@ int CompactHistoryScroll::getLines()
 int CompactHistoryScroll::getLineLen(int lineNumber)
 {
     if ((lineNumber < 0) || (lineNumber >= _lines.size())) {
-        kDebug() << "requested line invalid: 0 < " << lineNumber << " < " <<_lines.size();
+        //qDebug() << "requested line invalid: 0 < " << lineNumber << " < " <<_lines.size();
         //Q_ASSERT(lineNumber >= 0 && lineNumber < _lines.size());
         return 0;
     }
     CompactHistoryLine* line = _lines[lineNumber];
-    //kDebug() << "request for line at address " << line;
+    ////qDebug() << "request for line at address " << line;
     return line->getLength();
 }
 
@@ -537,7 +537,7 @@ void CompactHistoryScroll::setMaxNbLines(unsigned int lineCount)
     while (_lines.size() > static_cast<int>(lineCount)) {
         delete _lines.takeAt(0);
     }
-    //kDebug() << "set max lines to: " << _maxLineCount;
+    ////qDebug() << "set max lines to: " << _maxLineCount;
 }
 
 bool CompactHistoryScroll::isWrappedLine(int lineNumber)

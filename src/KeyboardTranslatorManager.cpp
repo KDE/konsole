@@ -28,7 +28,7 @@
 #include <QtCore/QDir>
 
 // KDE
-#include <KDebug>
+#include <QDebug>
 #include <KGlobal>
 
 using namespace Konsole;
@@ -57,7 +57,7 @@ void KeyboardTranslatorManager::addTranslator(KeyboardTranslator* translator)
     _translators.insert(translator->name(), translator);
 
     if (!saveTranslator(translator))
-        kWarning() << "Unable to save translator" << translator->name()
+        qWarning() << "Unable to save translator" << translator->name()
                    << "to disk.";
 }
 
@@ -71,7 +71,7 @@ bool KeyboardTranslatorManager::deleteTranslator(const QString& name)
         _translators.remove(name);
         return true;
     } else {
-        kWarning() << "Failed to remove translator - " << path;
+        qWarning() << "Failed to remove translator - " << path;
         return false;
     }
 }
@@ -111,7 +111,7 @@ const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QStrin
     if (translator != 0)
         _translators[name] = translator;
     else if (!name.isEmpty())
-        kWarning() << "Unable to load translator" << name;
+        qWarning() << "Unable to load translator" << name;
 
     return translator;
 }
@@ -122,11 +122,11 @@ bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator* transla
     QDir().mkpath(dir);
     const QString path = dir + translator->name() + QStringLiteral(".keytab");
 
-    //kDebug() << "Saving translator to" << path;
+    ////qDebug() << "Saving translator to" << path;
 
     QFile destination(path);
     if (!destination.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        kWarning() << "Unable to save keyboard translation:"
+        qWarning() << "Unable to save keyboard translation:"
                    << destination.errorString();
         return false;
     }

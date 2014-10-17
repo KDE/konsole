@@ -34,6 +34,7 @@
 #include <KGlobal>
 #include <KLocalizedString>
 #include <kde_file.h>
+#include <QDebug>
 
 // Konsole
 #include "EditProfileDialog.h"
@@ -331,7 +332,7 @@ bool Part::openUrl(const QUrl& aQUrl)
 
     setUrl(aUrl);
     emit setWindowCaption(aUrl.toDisplayString(QUrl::PreferLocalFile));
-    //kdDebug() << "Set Window Caption to " << url.pathOrUrl();
+    ////qDebug() << "Set Window Caption to " << url.pathOrUrl();
     emit started(0);
 
     if (aUrl.isLocalFile() /*&& b_openUrls*/) {

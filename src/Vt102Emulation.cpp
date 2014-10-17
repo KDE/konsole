@@ -34,7 +34,7 @@
 
 // KDE
 #include <KLocalizedString>
-#include <KDebug>
+#include <QDebug>
 
 // Konsole
 #include "KeyboardTranslator.h"
@@ -1351,6 +1351,6 @@ void Vt102Emulation::reportDecodingError()
 
     QString outputError = QString("Undecodable sequence: ");
     outputError.append(hexdump2(tokenBuffer, tokenBufferPos));
-    kDebug() << outputError;
+    //qDebug() << outputError;
 }
 

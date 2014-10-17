@@ -29,7 +29,7 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KCmdLineArgs>
-#include <KDebug>
+#include <QDebug>
 
 // Konsole
 #include "SessionManager.h"
@@ -183,7 +183,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
     const QString tabsFileName(args->getOption("tabs-from-file"));
     QFile tabsFile(tabsFileName);
     if (!tabsFile.open(QFile::ReadOnly)) {
-        kWarning() << "ERROR: Cannot open tabs file "
+        qWarning() << "ERROR: Cannot open tabs file "
                    << tabsFileName.toLocal8Bit().data();
         quit();
     }
@@ -207,13 +207,13 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
             createTabFromArgs(args, window, lineTokens);
             sessions++;
         } else {
-            kWarning() << "Each line should contain at least one of 'command' and 'profile'.";
+            qWarning() << "Each line should contain at least one of 'command' and 'profile'.";
         }
     }
     tabsFile.close();
 
     if (sessions < 1) {
-        kWarning() << "No valid lines found in "
+        qWarning() << "No valid lines found in "
                    << tabsFileName.toLocal8Bit().data();
         quit();
     }

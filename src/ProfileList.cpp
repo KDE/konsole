@@ -26,7 +26,7 @@
 
 // KDE
 #include <KLocalizedString>
-#include <KDebug>
+#include <QDebug>
 
 // Konsole
 #include "ProfileManager.h"

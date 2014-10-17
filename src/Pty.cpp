@@ -29,7 +29,7 @@
 #include <QtCore/QStringList>
 
 // KDE
-#include <KDebug>
+#include <QDebug>
 #include <KPtyDevice>
 #include <kde_file.h>
 
@@ -77,7 +77,7 @@ void Pty::sendData(const QByteArray& data)
         return;
 
     if (!pty()->write(data.constData(), data.length())) {
-        kWarning() << "Could not send input data to terminal process.";
+        qWarning() << "Could not send input data to terminal process.";
         return;
     }
 }
@@ -115,7 +115,7 @@ void Pty::setFlowControlEnabled(bool enable)
             ttmode.c_iflag &= ~(IXOFF | IXON);
 
         if (!pty()->tcSetAttr(&ttmode))
-            kWarning() << "Unable to set terminal attributes.";
+            qWarning() << "Unable to set terminal attributes.";
     }
 }
 
@@ -127,7 +127,7 @@ bool Pty::flowControlEnabled() const
         return ttmode.c_iflag & IXOFF &&
                ttmode.c_iflag & IXON;
     } else {
-        kWarning() << "Unable to get flow control status, terminal not connected.";
+        qWarning() << "Unable to get flow control status, terminal not connected.";
         return _xonXoff;
     }
 }
@@ -146,7 +146,7 @@ void Pty::setUtf8Mode(bool enable)
             ttmode.c_iflag &= ~IUTF8;
 
         if (!pty()->tcSetAttr(&ttmode))
-            kWarning() << "Unable to set terminal attributes.";
+            qWarning() << "Unable to set terminal attributes.";
     }
 #else
     Q_UNUSED(enable);
@@ -163,7 +163,7 @@ void Pty::setEraseChar(char eChar)
         ttmode.c_cc[VERASE] = eChar;
 
         if (!pty()->tcSetAttr(&ttmode))
-            kWarning() << "Unable to set terminal attributes.";
+            qWarning() << "Unable to set terminal attributes.";
     }
 }
 
@@ -174,7 +174,7 @@ char Pty::eraseChar() const
         pty()->tcGetAttr(&ttyAttributes);
         return ttyAttributes.c_cc[VERASE];
     } else {
-        kWarning() << "Unable to get erase char attribute, terminal not connected.";
+        qWarning() << "Unable to get erase char attribute, terminal not connected.";
         return _eraseChar;
     }
 }
@@ -264,11 +264,11 @@ void Pty::setWriteable(bool writeable)
     if (KDE::stat(pty()->ttyName(), &sbuf) == 0) {
         if (writeable) {
             if (KDE::chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP) < 0) {
-                kWarning() << "Could not set writeable on "<<pty()->ttyName();
+                qWarning() << "Could not set writeable on "<<pty()->ttyName();
             }
         } else {
             if (KDE::chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP | S_IWOTH)) < 0) {
-                kWarning() << "Could not unset writeable on "<<pty()->ttyName();
+                qWarning() << "Could not unset writeable on "<<pty()->ttyName();
             }
         }
     }

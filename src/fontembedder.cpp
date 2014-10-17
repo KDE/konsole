@@ -26,6 +26,7 @@
 // Qt
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
+#include <QDebug>
 
 using namespace std;
 
@@ -100,7 +101,7 @@ int main(int argc, char **argv)
             glyph = glyph - 0x2500;
 
             glyphStates[glyph] = readGlyph(input);
-            // kWarning()<<glyph<<";"<<glyphStates[glyph];
+            // qWarning()<<glyph<<";"<<glyphStates[glyph];
 
             if (glyphMap.contains(glyphStates[glyph])) {
             // FIXME: get this qWarning working again

@@ -32,7 +32,7 @@
 #include <KGlobal>
 #include <KConfig>
 #include <KLocalizedString>
-#include <KDebug>
+#include <QDebug>
 
 using namespace Konsole;
 
@@ -93,12 +93,12 @@ ColorScheme* KDE3ColorSchemeReader::read()
 
         if (line.startsWith(QLatin1String("color"))) {
             if (!readColorLine(line, scheme))
-                kWarning() << "Failed to read KDE 3 color scheme line" << line;
+                qWarning() << "Failed to read KDE 3 color scheme line" << line;
         } else if (line.startsWith(QLatin1String("title"))) {
             if (!readTitleLine(line, scheme))
-                kWarning() << "Failed to read KDE 3 color scheme title line" << line;
+                qWarning() << "Failed to read KDE 3 color scheme title line" << line;
         } else {
-            kWarning() << "KDE 3 color scheme contains an unsupported feature, '" <<
+            qWarning() << "KDE 3 color scheme contains an unsupported feature, '" <<
                        line << "'";
         }
     }
@@ -192,7 +192,7 @@ void ColorSchemeManager::loadAllColorSchemes()
     }
 
     if (failed > 0)
-        kWarning() << "failed to load " << failed << " color schemes.";
+        qWarning() << "failed to load " << failed << " color schemes.";
 
     _haveLoadedAll = true;
 }
@@ -219,7 +219,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     scheme->read(config);
 
     if (scheme->name().isEmpty()) {
-        kWarning() << "Color scheme in" << filePath << "does not have a valid name and was not loaded.";
+        qWarning() << "Color scheme in" << filePath << "does not have a valid name and was not loaded.";
         delete scheme;
         return false;
     }
@@ -227,7 +227,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     if (!_colorSchemes.contains(info.baseName())) {
         _colorSchemes.insert(scheme->name(), scheme);
     } else {
-        kDebug() << "color scheme with name" << scheme->name() << "has already been" <<
+        //qDebug() << "color scheme with name" << scheme->name() << "has already been" <<
                  "found, ignoring.";
 
         delete scheme;
@@ -248,7 +248,7 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
     file.close();
 
     if (scheme->name().isEmpty()) {
-        kWarning() << "color scheme name is not valid.";
+        qWarning() << "color scheme name is not valid.";
         delete scheme;
         return false;
     }
@@ -258,7 +258,7 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
     if (!_colorSchemes.contains(info.baseName())) {
         addColorScheme(scheme);
     } else {
-        kWarning() << "color scheme with name" << scheme->name() << "has already been" <<
+        qWarning() << "color scheme with name" << scheme->name() << "has already been" <<
                    "found, ignoring.";
         delete scheme;
     }
@@ -313,7 +313,7 @@ bool ColorSchemeManager::deleteColorScheme(const QString& name)
         _colorSchemes.remove(name);
         return true;
     } else {
-        kWarning() << "Failed to remove color scheme -" << path;
+        qWarning() << "Failed to remove color scheme -" << path;
         return false;
     }
 }
@@ -327,7 +327,7 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
     // Konsole will create a sub-folder in that case (bko 315086)
     // More code will have to go in to prevent the users from doing that.
     if (name.contains("/")) {
-        kWarning() << name << " has an invalid character / in the name ... skipping";
+        qWarning() << name << " has an invalid character / in the name ... skipping";
         return defaultColorScheme();
     }
 
@@ -343,7 +343,7 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
                 return findColorScheme(name);
         }
 
-        kWarning() << "Could not find color scheme - " << name;
+        qWarning() << "Could not find color scheme - " << name;
 
         return 0;
     }

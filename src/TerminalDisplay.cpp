@@ -49,7 +49,7 @@
 #include <KShell>
 #include <KColorScheme>
 #include <KCursor>
-#include <KDebug>
+#include <QDebug>
 #include <KLocalizedString>
 #include <KNotification>
 #include <KGlobalSettings>
@@ -211,11 +211,11 @@ void TerminalDisplay::setVTFont(const QFont& f)
     QFontMetrics metrics(font);
 
     if (!QFontInfo(font).exactMatch()) {
-        kWarning() << "The font for use in the terminal has not been matched exactly. Perhaps it has not been found properly.";
+        qWarning() << "The font for use in the terminal has not been matched exactly. Perhaps it has not been found properly.";
     }
 
     if (!QFontInfo(font).fixedPitch()) {
-        kWarning() << "Using an unsupported variable-width font in the terminal.  This may produce display errors.";
+        qWarning() << "Using an unsupported variable-width font in the terminal.  This may produce display errors.";
     }
 
     if (metrics.height() < height() && metrics.maxWidth() < width()) {

@@ -47,7 +47,7 @@
 #include <KXmlGuiWindow>
 #include <KXMLGUIFactory>
 #include <KXMLGUIBuilder>
-#include <KDebug>
+#include <QDebug>
 #include <KUriFilter>
 #include <KStringHandler>
 #include <KSharedConfig>
@@ -356,7 +356,7 @@ void SessionController::openUrl(const QUrl& url)
                            i18n("Konsole does not know how to open the bookmark: ") +
                            url.toDisplayString());
 
-        kWarning() << "Unable to open bookmark at url" << url << ", I do not know"
+        qWarning() << "Unable to open bookmark at url" << url << ", I do not know"
                    << " how to handle the protocol " << url.scheme();
     }
 }
@@ -919,7 +919,7 @@ void SessionController::closeSession()
             if (_session->closeInForceWay())
                 return;
             else
-                kWarning() << "Konsole failed to close a session in any way.";
+                qWarning() << "Konsole failed to close a session in any way.";
         }
     }
 }
@@ -1373,7 +1373,7 @@ void SessionController::showHistoryOptions()
 }
 void SessionController::sessionResizeRequest(const QSize& size)
 {
-    //kDebug() << "View resize requested to " << size;
+    ////qDebug() << "View resize requested to " << size;
     _view->setSize(size.width(), size.height());
 }
 void SessionController::scrollBackOptionsChanged(int mode, int lines)
@@ -1510,7 +1510,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 
         KXMLGUIFactory* factory = new KXMLGUIFactory(clientBuilder(), this);
         factory->addClient(this);
-        //kDebug() << "Created xmlgui factory" << factory;
+        ////qDebug() << "Created xmlgui factory" << factory;
     }
 
     QPointer<QMenu> popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu", this));
@@ -1558,7 +1558,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         if (chosen && chosen->objectName() == "close-session")
             chosen->trigger();
     } else {
-        kWarning() << "Unable to display popup menu for session"
+        qWarning() << "Unable to display popup menu for session"
                    << _session->title(Session::NameRole)
                    << ", no GUI factory available to build the popup.";
     }
@@ -1942,7 +1942,7 @@ void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
     //work out how many lines into the current block of text the search result was found
     //- looks a little painful, but it only has to be done once per search.
 
-    //kDebug() << "Found result at line " << findPos;
+    ////qDebug() << "Found result at line " << findPos;
 
     //update display to show area of history containing selection
     if ((findPos < window->currentLine()) ||

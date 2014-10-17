@@ -27,7 +27,7 @@
 
 // KDE
 #include <KKeySequenceWidget>
-#include <KDebug>
+#include <QDebug>
 #include <KLocalizedString>
 #include <KIconLoader>
 #include <KConfigGroup>
@@ -514,7 +514,7 @@ ShortcutItemDelegate::ShortcutItemDelegate(QObject* aParent)
 void ShortcutItemDelegate::editorModified(const QKeySequence& keys)
 {
     Q_UNUSED(keys);
-    //kDebug() << keys.toString();
+    ////qDebug() << keys.toString();
 
     KKeySequenceWidget* editor = qobject_cast<KKeySequenceWidget*>(sender());
     Q_ASSERT(editor);
