@@ -37,7 +37,7 @@
 #include <KColorScheme>
 #include <KColorUtils>
 #include <KLocalizedString>
-#include <KMenu>
+#include <QMenu>
 
 // Konsole
 #include "IncrementalSearchBar.h"
@@ -270,7 +270,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
             &Konsole::TabbedViewContainer::openTabContextMenu);
 
     // The context menu of tab bar
-    _contextPopupMenu = new KMenu(_tabBar);
+    _contextPopupMenu = new QMenu(_tabBar);
 
 #if defined(ENABLE_DETACHING)
     _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-detach")),

@@ -32,7 +32,7 @@
 #include <KShortcutsDialog>
 #include <KLocale>
 
-#include <KMenu>
+#include <QMenu>
 #include <KMenuBar>
 #include <KMessageBox>
 #include <KToggleFullScreenAction>

@@ -37,7 +37,7 @@
 #include <KActionMenu>
 #include <KActionCollection>
 #include <KLocalizedString>
-#include <KMenu>
+#include <QMenu>
 #include <KMessageBox>
 #include <KRun>
 #include <KShell>

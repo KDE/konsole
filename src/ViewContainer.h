@@ -44,7 +44,7 @@ class QMenu;
 class QDropEvent;
 
 // KDE
-class KMenu;
+class QMenu;
 
 namespace Konsole
 {
@@ -430,7 +430,7 @@ private:
     QToolButton* _newTabButton;
     QToolButton* _closeTabButton;
     int _contextMenuTabIndex;
-    KMenu* _contextPopupMenu;
+    QMenu* _contextPopupMenu;
 };
 
 /** A plain view container with no navigation display */
