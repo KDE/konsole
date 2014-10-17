@@ -27,7 +27,7 @@
 
 // Konsole
 #include "Profile.h"
-#include "konsole_export.h"
+#include "konsoleprivate_export.h"
 
 class QAction;
 class QActionGroup;

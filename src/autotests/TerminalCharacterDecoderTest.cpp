@@ -29,7 +29,7 @@
 #include <QXmlSimpleReader>
 
 // KDE
-#include <qtest_kde.h>
+#include <qtest.h>
 
 using namespace Konsole;
 
@@ -75,5 +75,5 @@ void TerminalCharacterDecoderTest::testHTMLFileForValidity()
     QVERIFY(xmlReader.parse(&source));
 }
 
-QTEST_KDEMAIN_CORE(TerminalCharacterDecoderTest)
+QTEST_GUILESS_MAIN(TerminalCharacterDecoderTest)
 

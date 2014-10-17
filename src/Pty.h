@@ -30,7 +30,7 @@
 #include <KPtyProcess>
 
 // Konsole
-#include "konsole_export.h"
+#include "konsoleprivate_export.h"
 
 class QStringList;
 

@@ -20,7 +20,7 @@
 // Own
 #include "SessionTest.h"
 
-#include "qtest_kde.h"
+#include "qtest.h"
 
 // Konsole
 #include "../Session.h"
@@ -56,5 +56,5 @@ void SessionTest::testEmulation()
     delete session;
 }
 
-QTEST_KDEMAIN(SessionTest , GUI)
+QTEST_MAIN(SessionTest )
 

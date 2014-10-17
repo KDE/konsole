@@ -25,7 +25,7 @@
 #include <QtCore/QStringList>
 
 // KDE
-#include <qtest_kde.h>
+#include <qtest.h>
 
 using namespace Konsole;
 
@@ -113,5 +113,5 @@ void CharacterColorTest::testColorSpaceSystem()
     //QCOMPARE(result, expected);
 }
 
-QTEST_KDEMAIN_CORE(CharacterColorTest)
+QTEST_GUILESS_MAIN(CharacterColorTest)
 

@@ -30,7 +30,7 @@
 // Konsole
 #include "Profile.h"
 
-class KAction;
+class QAction;
 class KActionMenu;
 class KToggleAction;
 
@@ -197,7 +197,7 @@ private:
     BookmarkHandler* bookmarkHandler() const;
 
     // sets the active shortcuts of actions in 'dest' to the shortcuts of actions
-    // with the same name in 'source' (see KAction::ActiveShortcut)
+    // with the same name in 'source' (see QAction::ActiveShortcut)
     static void syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source);
 
 private:

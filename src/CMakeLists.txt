@@ -166,6 +166,7 @@ ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 settings/TabBarSettings.ui)
 
 add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
+generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
 target_link_libraries(konsoleprivate ${konsole_LIBS}
 )
 target_link_libraries(konsoleprivate LINK_INTERFACE_LIBRARIES ${konsole_LIBS})
@@ -203,6 +204,7 @@ install(TARGETS kdeinit_konsole konsole
 set(konsolepart_PART_SRCS Part.cpp)
 
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
+generate_export_header(konsole BASE_NAME konsole)
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 target_link_libraries(konsolepart KF5::Parts KF5::XmlGui konsoleprivate)
 install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR})

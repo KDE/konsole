@@ -28,7 +28,7 @@
 
 // Konsole
 #include "Character.h"
-#include "konsole_export.h"
+#include "konsoleprivate_export.h"
 #include "ScreenWindow.h"
 #include "ColorScheme.h"
 #include "Enumeration.h"

@@ -29,7 +29,7 @@
 #include <QtCore/QVector>
 #include <QtCore/QTemporaryFile>
 
-#include "konsole_export.h"
+#include "konsoleprivate_export.h"
 
 // Konsole
 #include "Character.h"

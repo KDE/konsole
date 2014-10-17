@@ -25,7 +25,7 @@
 #include <QtCore/QStringList>
 
 // KDE
-#include <qtest_kde.h>
+#include <qtest.h>
 
 using namespace Konsole;
 
@@ -89,5 +89,5 @@ void PtyTest::testRunProgram()
     QCOMPARE(pty.foregroundProcessGroup(), pty.pid());
 }
 
-QTEST_KDEMAIN_CORE(PtyTest)
+QTEST_GUILESS_MAIN(PtyTest)
 

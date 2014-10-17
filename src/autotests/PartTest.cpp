@@ -23,7 +23,8 @@
 // Qt
 #include <QLabel>
 #include <QVBoxLayout>
-
+#include <QFileInfo>
+#include <QTimer>
 // KDE
 #include <KPluginLoader>
 #include <KPluginFactory>
@@ -34,7 +35,7 @@
 #include <KDialog>
 #include <KDebug>
 #include <KMainWindow>
-#include <qtest_kde.h>
+#include <qtest.h>
 
 // Konsole
 #include "../Pty.h"
@@ -112,5 +113,5 @@ KParts::Part* PartTest::createPart()
     return terminalPart;
 }
 
-QTEST_KDEMAIN(PartTest , GUI)
+QTEST_MAIN(PartTest )
 

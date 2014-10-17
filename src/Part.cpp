@@ -27,7 +27,7 @@
 #include <QtCore/QUrl>
 
 // KDE
-#include <KAction>
+#include <QAction>
 #include <KActionCollection>
 #include <KLocale>
 #include <KPluginFactory>
@@ -92,7 +92,7 @@ Part::~Part()
 
 void Part::createGlobalActions()
 {
-    _manageProfilesAction = new KAction(i18n("Manage Profiles..."), this);
+    _manageProfilesAction = new QAction(i18n("Manage Profiles..."), this);
     connect(_manageProfilesAction, &QAction::triggered, this, static_cast<void(Part::*)()>(&Konsole::Part::showManageProfilesDialog));
 }
 

@@ -9,7 +9,7 @@ set(Konsole_VERSION "${Konsole_VERSION_MAJOR}.${Konsole_VERSION_MINOR}.${Konsole
 cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
 set (QT_MIN_VERSION "5.2.0")
 
-find_package(ECM 1.1.0 REQUIRED NO_MODULE)
+find_package(ECM 1.2.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 include(KDEInstallDirs)
@@ -53,8 +53,6 @@ add_definitions(
   -Wno-deprecated-declarations
 )
 
-#TODO: this still needed?
-add_definitions(-DKDE_DEFAULT_DEBUG_AREA=1211)
 #TODO: this is temporarily disabled until it has been ported to Qt5
 add_definitions(-DQT_NO_ACCESSIBILITY)
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})

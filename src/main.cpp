@@ -29,7 +29,7 @@
 #include <k4aboutdata.h>
 #include <KCmdLineArgs>
 #include <KLocale>
-
+#include <kdemacros.h>
 
 
 using Konsole::Application;

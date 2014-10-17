@@ -29,7 +29,7 @@
 #include <QtCore/QTimer>
 
 // Konsole
-#include "konsole_export.h"
+#include "konsoleprivate_export.h"
 
 class QKeyEvent;
 

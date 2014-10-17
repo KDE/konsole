@@ -27,7 +27,7 @@
 
 // Konsole
 #include "Character.h"
-#include "konsole_export.h"
+#include "konsoleprivate_export.h"
 
 class QTextStream;
 

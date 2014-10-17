@@ -68,7 +68,7 @@
 
 // Own
 #include "konsole_wcwidth.h"
-#include "konsole_export.h"
+#include "konsoleprivate_export.h"
 
 struct interval {
     unsigned long first;

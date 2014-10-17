@@ -20,7 +20,7 @@
 // Own
 #include "TerminalTest.h"
 
-#include "qtest_kde.h"
+#include "qtest.h"
 
 // Konsole
 #include "../TerminalDisplay.h"
@@ -99,5 +99,5 @@ void TerminalTest::testSize()
     delete display;
 }
 
-QTEST_KDEMAIN(TerminalTest , GUI)
+QTEST_MAIN(TerminalTest )
 

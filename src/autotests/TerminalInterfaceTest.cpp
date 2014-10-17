@@ -26,7 +26,7 @@
 // KDE
 #include <KService>
 #include <KDebug>
-#include <qtest_kde.h>
+#include <qtest.h>
 //#include "../Part.h"
 
 using namespace Konsole;
@@ -163,7 +163,7 @@ KParts::Part* TerminalInterfaceTest::createPart()
     return terminalPart;
 }
 
-QTEST_KDEMAIN(TerminalInterfaceTest , GUI)
+QTEST_MAIN(TerminalInterfaceTest )
 
 #include "TerminalInterfaceTest.moc"
 

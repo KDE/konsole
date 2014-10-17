@@ -26,7 +26,7 @@
 #include <QtGlobal>
 
 // KDE
-#include <qtest_kde.h>
+#include <qtest.h>
 
 using namespace Konsole;
 
@@ -113,5 +113,5 @@ void ShellCommandTest::testEmptyCommand()
     QCOMPARE(shellCommand.fullCommand(), QString());
 }
 
-QTEST_KDEMAIN_CORE(ShellCommandTest)
+QTEST_GUILESS_MAIN(ShellCommandTest)
 

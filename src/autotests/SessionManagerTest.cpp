@@ -21,7 +21,7 @@
 #include "SessionManagerTest.h"
 
 // KDE
-#include <qtest_kde.h>
+#include <qtest.h>
 
 using namespace Konsole;
 
@@ -36,7 +36,7 @@ void SessionManagerTest::cleanup()
 {
 }
 
-QTEST_KDEMAIN_CORE(SessionManagerTest)
+QTEST_MAIN_CORE(SessionManagerTest)
 
 #include "SessionManagerTest.moc"
 

@@ -33,7 +33,7 @@
 #include <QtGui/QIcon>
 
 // KDE
-#include <KAction>
+#include <QAction>
 #include <KActionMenu>
 #include <KActionCollection>
 #include <KLocalizedString>
@@ -53,7 +53,6 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KGlobal>
-#include <KShortcut>
 
 #include <kdeversion.h>
 #include <KCodecAction>
@@ -433,7 +432,7 @@ void SessionController::updateWebSearchMenu()
 
 void SessionController::handleWebShortcutAction()
 {
-    KAction* action = qobject_cast<KAction*>(sender());
+    QAction * action = qobject_cast<QAction*>(sender());
     if (!action)
         return;
 

@@ -48,7 +48,7 @@ class QUrl;
 
 class KCodecAction;
 class KJob;
-class KAction;
+class QAction;
 class KActionMenu;
 
 namespace Konsole

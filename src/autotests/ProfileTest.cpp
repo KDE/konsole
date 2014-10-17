@@ -21,7 +21,9 @@
 #include "ProfileTest.h"
 
 // KDE
-#include <qtest_kde.h>
+#include <qtest.h>
+#include <QFileInfo>
+#include <QTimer>
 
 // Konsole
 #include "../Profile.h"
@@ -224,5 +226,5 @@ void ProfileTest::testProfileFileNames()
     delete writer;
 }
 
-QTEST_KDEMAIN_CORE(ProfileTest)
+QTEST_GUILESS_MAIN(ProfileTest)
 
