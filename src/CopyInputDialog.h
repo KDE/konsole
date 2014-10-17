@@ -25,7 +25,7 @@
 #include <QtCore/QSet>
 
 // KDE
-#include <KDialog>
+#include <QDialog>
 
 // Konsole
 #include "SessionManager.h"
@@ -47,7 +47,7 @@ class CheckableSessionModel;
  * set using setMasterSession().  After the dialog has been executed,
  * the set of chosen sessions can be retrieved using chosenSessions()
  */
-class CopyInputDialog : public KDialog
+class CopyInputDialog : public QDialog
 {
     Q_OBJECT
 

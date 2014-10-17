@@ -25,7 +25,7 @@
 #include <QtCore/QSet>
 
 // KDE
-#include <KDialog>
+#include <QDialog>
 
 // Konsole
 #include "Profile.h"
@@ -47,7 +47,7 @@ namespace Konsole
  * the user to add new profiles, and remove or edit existing
  * profile types.
  */
-class KONSOLEPRIVATE_EXPORT ManageProfilesDialog : public KDialog
+class KONSOLEPRIVATE_EXPORT ManageProfilesDialog : public QDialog
 {
     Q_OBJECT
 
@@ -74,6 +74,7 @@ protected:
     virtual void showEvent(QShowEvent* event);
 
 private slots:
+    void slotAccepted();
     void deleteSelected();
     void setSelectedAsDefault();
     void createProfile();

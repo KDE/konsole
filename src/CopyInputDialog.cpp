@@ -27,19 +27,33 @@
 #include "ui_CopyInputDialog.h"
 
 #include <KLocalizedString>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 using namespace Konsole;
 
 CopyInputDialog::CopyInputDialog(QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setCaption(i18n("Copy Input"));
-    setButtons(KDialog::Ok | KDialog::Cancel);
+    setWindowTitle(i18n("Copy Input"));
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    mainLayout->addWidget(buttonBox);
 
     setWindowModality(Qt::WindowModal);
 
     _ui = new Ui::CopyInputDialog();
-    _ui->setupUi(mainWidget());
+    _ui->setupUi(mainWidget);
 
     connect(_ui->selectAllButton, &QPushButton::clicked, this, &Konsole::CopyInputDialog::selectAll);
     connect(_ui->deselectAllButton, &QPushButton::clicked, this, &Konsole::CopyInputDialog::deselectAll);

@@ -30,6 +30,10 @@
 #include <KDebug>
 #include <KLocalizedString>
 #include <KIconLoader>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 // Konsole
 #include "EditProfileDialog.h"
@@ -43,17 +47,22 @@
 using namespace Konsole;
 
 ManageProfilesDialog::ManageProfilesDialog(QWidget* aParent)
-    : KDialog(aParent)
+    : QDialog(aParent)
     , _sessionModel(new QStandardItemModel(this))
 {
-    setCaption(i18nc("@title:window", "Manage Profiles"));
-    setButtons(KDialog::Close);
+    setWindowTitle(i18nc("@title:window", "Manage Profiles"));
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(slotAccepted()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    mainLayout->addWidget(buttonBox);
 
-    connect(this, static_cast<void(ManageProfilesDialog::*)()>(&Konsole::ManageProfilesDialog::finished),
-            ProfileManager::instance(), &Konsole::ProfileManager::saveSettings);
-
+    
     _ui = new Ui::ManageProfilesDialog();
-    _ui->setupUi(mainWidget());
+    _ui->setupUi(mainWidget);
 
     // hide vertical header
     _ui->sessionTable->verticalHeader()->hide();
@@ -118,6 +127,12 @@ void ManageProfilesDialog::showEvent(QShowEvent*)
 ManageProfilesDialog::~ManageProfilesDialog()
 {
     delete _ui;
+}
+
+void ManageProfilesDialog::slotAccepted()
+{
+    ProfileManager::instance()->saveSettings();
+    deleteLater();
 }
 
 void ManageProfilesDialog::itemDataChanged(QStandardItem* item)

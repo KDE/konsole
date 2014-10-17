@@ -20,13 +20,14 @@
 #define ZMODEM_DIALOG_H
 
 // KDE
-#include <KDialog>
+#include <QDialog>
 
 class KTextEdit;
-
+class QDialogButtonBox;
+class QPushButton;
 namespace Konsole
 {
-class ZModemDialog : public KDialog
+class ZModemDialog : public QDialog
 {
     Q_OBJECT
 
@@ -43,11 +44,19 @@ public:
      */
     void transferDone();
 
+Q_SIGNALS:
+    void user1Clicked();
+
 private slots:
     void slotClose();
+    void slotUser1Clicked();
 
 private:
+    void delayedDestruct();
     KTextEdit* _textEdit;
+    QDialogButtonBox *mButtonBox;
+    QPushButton *mUser1Button;
+
 };
 }
 
