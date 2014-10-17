@@ -32,7 +32,7 @@ PrintOptions::PrintOptions(QWidget* aParent) : QWidget(aParent)
 {
     setupUi(this);
 
-    KConfigGroup configGroup(KGlobal::config(), "PrintOptions");
+    KConfigGroup configGroup(KSharedConfig::openConfig(), "PrintOptions");
     printerFriendly->setChecked(configGroup.readEntry("PrinterFriendly", true));
     scaleOutput->setChecked(configGroup.readEntry("ScaleOutput", true));
 }
@@ -43,7 +43,7 @@ PrintOptions::~PrintOptions()
 
 void PrintOptions::saveSettings()
 {
-    KConfigGroup configGroup(KGlobal::config(), "PrintOptions");
+    KConfigGroup configGroup(KSharedConfig::openConfig(), "PrintOptions");
     configGroup.writeEntry("PrinterFriendly", printerFriendly->isChecked());
     configGroup.writeEntry("ScaleOutput", scaleOutput->isChecked());
 }

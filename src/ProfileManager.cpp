@@ -76,7 +76,7 @@ ProfileManager::ProfileManager()
     // lookup the default profile specified in <App>rc
     // for stand-alone Konsole, appConfig is just konsolerc
     // for konsolepart, appConfig might be yakuakerc, dolphinrc, katerc...
-    KSharedConfigPtr appConfig = KGlobal::config();
+    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup group = appConfig->group("Desktop Entry");
     QString defaultProfileFileName = group.readEntry("DefaultProfile", "");
 
@@ -281,7 +281,7 @@ void ProfileManager::saveSettings()
     saveFavorites();
 
     // ensure default/favorites/shortcuts settings are synced into disk
-    KSharedConfigPtr appConfig = KGlobal::config();
+    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     appConfig->sync();
 }
 
@@ -428,7 +428,7 @@ void ProfileManager::saveDefaultProfile()
 
     QFileInfo fileInfo(path);
 
-    KSharedConfigPtr appConfig = KGlobal::config();
+    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup group = appConfig->group("Desktop Entry");
     group.writeEntry("DefaultProfile", fileInfo.fileName());
 }
@@ -454,7 +454,7 @@ void ProfileManager::setFavorite(Profile::Ptr profile , bool favorite)
 }
 void ProfileManager::loadShortcuts()
 {
-    KSharedConfigPtr appConfig = KGlobal::config();
+    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup shortcutGroup = appConfig->group("Profile Shortcuts");
 
     QMap<QString, QString> entries = shortcutGroup.entryMap();
@@ -480,7 +480,7 @@ void ProfileManager::loadShortcuts()
 }
 void ProfileManager::saveShortcuts()
 {
-    KSharedConfigPtr appConfig = KGlobal::config();
+    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup shortcutGroup = appConfig->group("Profile Shortcuts");
     shortcutGroup.deleteGroup();
 
@@ -534,7 +534,7 @@ void ProfileManager::loadFavorites()
     if (_loadedFavorites)
         return;
 
-    KSharedConfigPtr appConfig = KGlobal::config();
+    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
     QSet<QString> favoriteSet;
@@ -567,7 +567,7 @@ void ProfileManager::loadFavorites()
 }
 void ProfileManager::saveFavorites()
 {
-    KSharedConfigPtr appConfig = KGlobal::config();
+    KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
     QStringList paths;
