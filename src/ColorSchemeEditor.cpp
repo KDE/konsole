@@ -34,6 +34,10 @@
 #include <KFileDialog>
 #include <KUrlCompletion>
 #include <KLocalizedString>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 // Konsole
 #include "ui_ColorSchemeEditor.h"
@@ -51,18 +55,28 @@ const int COLOR_COLUMN = 1;          // column 1 : actual colors
 const int INTENSE_COLOR_COLUMN = 2;  // column 2 : intense colors
 
 ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
-    : KDialog(aParent)
+    : QDialog(aParent)
     , _isNewScheme(false)
     , _colors(0)
 {
     // Kdialog buttons
-    setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
-    connect(this, &Konsole::ColorSchemeEditor::applyClicked, this, &Konsole::ColorSchemeEditor::saveColorScheme);
-    connect(this, &Konsole::ColorSchemeEditor::okClicked, this, &Konsole::ColorSchemeEditor::saveColorScheme);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    mainLayout->addWidget(buttonBox);
+    connect(buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this, &Konsole::ColorSchemeEditor::saveColorScheme);
+    connect(okButton, &QPushButton::clicked, this, &Konsole::ColorSchemeEditor::saveColorScheme);
 
     // ui
     _ui = new Ui::ColorSchemeEditor();
-    _ui->setupUi(mainWidget());
+    _ui->setupUi(mainWidget);
 
     // description edit
     _ui->descriptionEdit->setClearButtonEnabled(true);
@@ -211,10 +225,10 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme, bool isNewScheme)
     _colors = new ColorScheme(*scheme);
 
     if (_isNewScheme) {
-        setCaption(i18n("New Color Scheme"));
+        setWindowTitle(i18n("New Color Scheme"));
         setDescription(i18n("New Color Scheme"));
     } else {
-        setCaption(i18n("Edit Color Scheme"));
+        setWindowTitle(i18n("Edit Color Scheme"));
     }
 
     // setup description edit

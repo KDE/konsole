@@ -24,7 +24,7 @@
 #include <QWidget>
 
 // KDE
-#include <KDialog>
+#include <QDialog>
 
 // Konsole
 #include "Profile.h"
@@ -52,7 +52,7 @@ class ColorScheme;
  *
  * When changes are made the colorsChanged() signal is emitted.
  */
-class KONSOLEPRIVATE_EXPORT ColorSchemeEditor : public KDialog
+class KONSOLEPRIVATE_EXPORT ColorSchemeEditor : public QDialog
 {
     Q_OBJECT
 

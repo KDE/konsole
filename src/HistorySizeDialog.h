@@ -22,7 +22,7 @@
 #define HISTORYSIZEDIALOG_H
 
 // KDE
-#include <KDialog>
+#include <QDialog>
 
 // Konsole
 #include "Enumeration.h"
@@ -34,7 +34,7 @@ class HistorySizeDialog;
 
 namespace Konsole
 {
-class HistorySizeDialog : public KDialog
+class HistorySizeDialog : public QDialog
 {
     Q_OBJECT
 

@@ -21,7 +21,7 @@
 #define RENAMETABDIALOG_H
 
 // KDE
-#include <KDialog>
+#include <QDialog>
 
 namespace Ui
 {
@@ -30,7 +30,7 @@ class RenameTabDialog;
 
 namespace Konsole
 {
-class RenameTabDialog : public KDialog
+class RenameTabDialog : public QDialog
 {
     Q_OBJECT
 

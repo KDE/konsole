@@ -25,19 +25,33 @@
 #include "ui_HistorySizeDialog.h"
 
 #include <KLocalizedString>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 using namespace Konsole;
 
 HistorySizeDialog::HistorySizeDialog(QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setCaption(i18nc("@title:window", "Adjust Scrollback"));
-    setButtons(KDialog::Ok | KDialog::Cancel);
+    setWindowTitle(i18nc("@title:window", "Adjust Scrollback"));
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    mainLayout->addWidget(buttonBox);
 
     setWindowModality(Qt::WindowModal);
 
     _ui = new Ui::HistorySizeDialog();
-    _ui->setupUi(mainWidget());
+    _ui->setupUi(mainWidget);
 
     _ui->tempWarningWidget->setVisible(true);
     _ui->tempWarningWidget->setWordWrap(true);

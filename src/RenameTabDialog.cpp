@@ -24,19 +24,33 @@
 #include "ui_RenameTabDialog.h"
 
 #include <KLocalizedString>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 using Konsole::RenameTabDialog;
 
 RenameTabDialog::RenameTabDialog(QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    setCaption(i18n("Rename Tab"));
-    setButtons(KDialog::Ok | KDialog::Cancel);
+    setWindowTitle(i18n("Rename Tab"));
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    mainLayout->addWidget(buttonBox);
 
     setWindowModality(Qt::WindowModal);
 
     _ui = new Ui::RenameTabDialog();
-    _ui->setupUi(mainWidget());
+    _ui->setupUi(mainWidget);
 }
 
 RenameTabDialog::~RenameTabDialog()
