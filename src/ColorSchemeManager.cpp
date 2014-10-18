@@ -267,12 +267,28 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 
 QStringList ColorSchemeManager::listColorSchemes()
 {
-    return QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/*.colorscheme"));
+    QStringList colorschemes;
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "konsole", QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString& dir, dirs) {
+        const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.colorscheme"));
+        Q_FOREACH (const QString& file, fileNames) {
+            colorschemes.append(dir + '/' + file);
+        }
+    }
+    return colorschemes;
 }
 
 QStringList ColorSchemeManager::listKDE3ColorSchemes()
 {
-    return QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/*.schema"));
+    QStringList kde3colorschemes;
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "konsole", QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString& dir, dirs) {
+        const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.schema"));
+        Q_FOREACH (const QString& file, fileNames) {
+            kde3colorschemes.append(dir + '/' + file);
+        }
+    }
+    return kde3colorschemes;
 }
 
 const ColorScheme ColorSchemeManager::_defaultColorScheme;

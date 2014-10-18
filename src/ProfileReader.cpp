@@ -24,6 +24,7 @@
 
 // Qt
 #include <QtCore/QFile>
+#include <QtCore/QDir>
 
 // KDE
 #include <KConfig>
@@ -39,7 +40,15 @@ static const char GENERAL_GROUP[]     = "General";
 
 QStringList KDE4ProfileReader::findProfiles()
 {
-    return QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/*.profile"));
+    QStringList profiles;
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "konsole", QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString& dir, dirs) {
+        const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.profile"));
+        Q_FOREACH (const QString& file, fileNames) {
+            profiles.append(dir + '/' + file);
+        }
+    }
+    return profiles;
 }
 void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profile,
                                        const Profile::PropertyInfo* properties)

@@ -83,7 +83,15 @@ QString KeyboardTranslatorManager::findTranslatorPath(const QString& name)
 
 void KeyboardTranslatorManager::findTranslators()
 {
-    QStringList list = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/*.keytab"));
+
+    QStringList list;
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "konsole", QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString& dir, dirs) {
+        const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.keytab"));
+        Q_FOREACH (const QString& file, fileNames) {
+            list.append(dir + '/' + file);
+        }
+    }
 
     // add the name of each translator to the list and associated
     // the name with a null pointer to indicate that the translator
