@@ -24,7 +24,6 @@
 // KDE
 #include <KConfigGroup>
 #include <KSharedConfig>
-#include <KGlobal>
 
 using namespace Konsole;
 

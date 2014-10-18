@@ -21,7 +21,7 @@
 #include "CharacterWidthTest.h"
 
 // KDE
-#include <qtest_kde.h>
+#include <qtest.h>
 
 #include "../konsole_wcwidth.h"
 #include "../konsole_export.h"
@@ -67,7 +67,7 @@ void CharacterWidthTest::testWidth()
     QTEST(konsole_wcwidth(character), "width");
 }
 
-QTEST_KDEMAIN_CORE(CharacterWidthTest)
+QTEST_GUILESS_MAIN(CharacterWidthTest)
 
 #include "CharacterWidthTest.moc"
 

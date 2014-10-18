@@ -26,14 +26,14 @@
 #include <QVBoxLayout>
 #include <QtGui/QKeyEvent>
 #include <qtestkeyboard.h>
-
+#include <QMenu>
+#include <QAction>
+#include <QMenuBar>
 // System
 #include <termios.h>
 #include <sys/types.h>
 
 // KDE
-#include <KMenu>
-#include <KMenuBar>
 #include <KPluginLoader>
 #include <KPluginFactory>
 #include <KService>
@@ -41,9 +41,8 @@
 #include <KPtyProcess>
 #include <KPtyDevice>
 #include <KDialog>
-#include <KDebug>
 #include <KMainWindow>
-#include <qtest_kde.h>
+#include <qtest.h>
 
 // Konsole
 #include "../Pty.h"
@@ -137,5 +136,5 @@ KParts::Part* PartManualTest::createPart()
     return terminalPart;
 }
 
-QTEST_KDEMAIN(PartManualTest , GUI)
+QTEST_MAIN(PartManualTest)
 

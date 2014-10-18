@@ -21,7 +21,7 @@
 #include "KeyboardTranslatorTest.h"
 
 // KDE
-#include <qtest_kde.h>
+#include <qtest.h>
 
 using namespace Konsole;
 
@@ -95,7 +95,7 @@ void KeyboardTranslatorTest::testEntryTextWildcards()
     QCOMPARE(entry.text(wildcards, keyboardModifiers), result);
 }
 
-QTEST_KDEMAIN_CORE(KeyboardTranslatorTest)
+QTEST_GUILESS_MAIN(KeyboardTranslatorTest)
 
 #include "KeyboardTranslatorTest.moc"
 

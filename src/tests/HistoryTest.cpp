@@ -20,7 +20,7 @@
 // Own
 #include "HistoryTest.h"
 
-#include "qtest_kde.h"
+#include "qtest.h"
 
 // Konsole
 #include "../Session.h"
@@ -137,7 +137,7 @@ void HistoryTest::testHistoryScroll()
     delete historyScroll;
 }
 
-QTEST_KDEMAIN(HistoryTest , GUI)
+QTEST_MAIN(HistoryTest )
 
 #include "HistoryTest.moc"
 
