@@ -119,27 +119,23 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     _caseSensitive = optionsMenu->addAction(i18nc("@item:inmenu", "Case sensitive"));
     _caseSensitive->setCheckable(true);
     _caseSensitive->setToolTip(i18nc("@info:tooltip", "Sets whether the search is case sensitive"));
-    connect(_caseSensitive, &QAction::toggled,
-            this, &Konsole::IncrementalSearchBar::matchCaseToggled);
+    connect(_caseSensitive, &QAction::toggled, this, &Konsole::IncrementalSearchBar::matchCaseToggled);
 
     _regExpression = optionsMenu->addAction(i18nc("@item:inmenu", "Match regular expression"));
     _regExpression->setCheckable(true);
-    connect(_regExpression, &QAction::toggled,
-            this, &Konsole::IncrementalSearchBar::matchRegExpToggled);
+    connect(_regExpression, &QAction::toggled, this, &Konsole::IncrementalSearchBar::matchRegExpToggled);
 
     _highlightMatches = optionsMenu->addAction(i18nc("@item:inmenu", "Highlight all matches"));
     _highlightMatches->setCheckable(true);
     _highlightMatches->setToolTip(i18nc("@info:tooltip", "Sets whether matching text should be highlighted"));
     _highlightMatches->setChecked(true);
-    connect(_highlightMatches, &QAction::toggled,
-            this, &Konsole::IncrementalSearchBar::highlightMatchesToggled);
+    connect(_highlightMatches, &QAction::toggled, this, &Konsole::IncrementalSearchBar::highlightMatchesToggled);
 
     _reverseSearch = optionsMenu->addAction(i18n("Search backwards"));
     _reverseSearch->setCheckable(true);
     _reverseSearch->setToolTip(i18n("Sets whether search should start from the bottom"));
     _reverseSearch->setChecked(true);
-    connect(_reverseSearch, &QAction::toggled,
-            this, &Konsole::IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting);
+    connect(_reverseSearch, &QAction::toggled, this, &Konsole::IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting);
     updateButtonsAccordingToReverseSearchSetting();
 
     barLayout->addStretch();

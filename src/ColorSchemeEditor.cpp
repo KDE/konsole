@@ -68,8 +68,8 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::accepted, this, &ColorSchemeEditor::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &ColorSchemeEditor::reject);
     mainLayout->addWidget(buttonBox);
     connect(buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this, &Konsole::ColorSchemeEditor::saveColorScheme);
     connect(okButton, &QPushButton::clicked, this, &Konsole::ColorSchemeEditor::saveColorScheme);
@@ -80,8 +80,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
 
     // description edit
     _ui->descriptionEdit->setClearButtonEnabled(true);
-    connect(_ui->descriptionEdit , &QLineEdit::textChanged , this ,
-            &Konsole::ColorSchemeEditor::setDescription);
+    connect(_ui->descriptionEdit , &QLineEdit::textChanged , this , &Konsole::ColorSchemeEditor::setDescription);
 
     // transparency slider
     QFontMetrics metrics(font());
@@ -90,8 +89,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     connect(_ui->transparencySlider , &QSlider::valueChanged , this , &Konsole::ColorSchemeEditor::setTransparencyPercentLabel);
 
     // randomized background
-    connect(_ui->randomizedBackgroundCheck , &QCheckBox::toggled , this ,
-            &Konsole::ColorSchemeEditor::setRandomizedBackgroundColor);
+    connect(_ui->randomizedBackgroundCheck , &QCheckBox::toggled , this , &Konsole::ColorSchemeEditor::setRandomizedBackgroundColor);
 
     // wallpaper stuff
     QFileSystemModel *dirModel = new QFileSystemModel(this);
@@ -104,10 +102,8 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     _ui->wallpaperPath->setClearButtonEnabled(true);
     _ui->wallpaperSelectButton->setIcon(QIcon::fromTheme(QStringLiteral("image-x-generic")));
 
-    connect(_ui->wallpaperSelectButton, &QToolButton::clicked,
-            this, &Konsole::ColorSchemeEditor::selectWallpaper);
-    connect(_ui->wallpaperPath, &QLineEdit::textChanged,
-            this, &Konsole::ColorSchemeEditor::wallpaperPathChanged);
+    connect(_ui->wallpaperSelectButton, &QToolButton::clicked, this, &Konsole::ColorSchemeEditor::selectWallpaper);
+    connect(_ui->wallpaperPath, &QLineEdit::textChanged, this, &Konsole::ColorSchemeEditor::wallpaperPathChanged);
 
     // color table
     _ui->colorTable->setColumnCount(3);
@@ -129,8 +125,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
 
     _ui->colorTable->verticalHeader()->hide();
 
-    connect(_ui->colorTable , &QTableWidget::itemClicked , this ,
-            &Konsole::ColorSchemeEditor::editColorItem);
+    connect(_ui->colorTable , &QTableWidget::itemClicked , this , &Konsole::ColorSchemeEditor::editColorItem);
 
     // warning label when transparency is not available
     _ui->transparencyWarningWidget->setWordWrap(true);

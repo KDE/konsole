@@ -51,10 +51,8 @@ Emulation::Emulation() :
     QObject::connect(&_bulkTimer2, &QTimer::timeout, this, &Konsole::Emulation::showBulk);
 
     // listen for mouse status changes
-    connect(this , &Konsole::Emulation::programUsesMouseChanged ,
-            this, &Konsole::Emulation::usesMouseChanged);
-    connect(this , &Konsole::Emulation::programBracketedPasteModeChanged ,
-            this, &Konsole::Emulation::bracketedPasteModeChanged);
+    connect(this , &Konsole::Emulation::programUsesMouseChanged , this, &Konsole::Emulation::usesMouseChanged);
+    connect(this , &Konsole::Emulation::programBracketedPasteModeChanged , this, &Konsole::Emulation::bracketedPasteModeChanged);
 }
 
 bool Emulation::programUsesMouse() const
@@ -82,13 +80,10 @@ ScreenWindow* Emulation::createWindow()
     ScreenWindow* window = new ScreenWindow(_currentScreen);
     _windows << window;
 
-    connect(window , &Konsole::ScreenWindow::selectionChanged,
-            this , &Konsole::Emulation::bufferedUpdate);
-    connect(window, &Konsole::ScreenWindow::selectionChanged,
-            this, &Konsole::Emulation::checkSelectedText);
+    connect(window , &Konsole::ScreenWindow::selectionChanged, this , &Konsole::Emulation::bufferedUpdate);
+    connect(window, &Konsole::ScreenWindow::selectionChanged, this, &Konsole::Emulation::checkSelectedText);
 
-    connect(this , &Konsole::Emulation::outputChanged,
-            window , &Konsole::ScreenWindow::notifyOutputChanged);
+    connect(this , &Konsole::Emulation::outputChanged, window , &Konsole::ScreenWindow::notifyOutputChanged);
 
     return window;
 }

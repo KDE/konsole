@@ -71,10 +71,8 @@ MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
 
-    connect(window, &Konsole::MainWindow::newWindowRequest,
-            this, &Konsole::Application::createWindow);
-    connect(window, &Konsole::MainWindow::viewDetached,
-            this, &Konsole::Application::detachView);
+    connect(window, &Konsole::MainWindow::newWindowRequest, this, &Konsole::Application::createWindow);
+    connect(window, &Konsole::MainWindow::viewDetached, this, &Konsole::Application::detachView);
 
     return window;
 }
@@ -455,8 +453,7 @@ void Application::startBackgroundMode(MainWindow* window)
     action->setText(i18n("Toggle Background Window"));
     action->setGlobalShortcut(KShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F12)));
 
-    connect(action, SIGNAL(triggered()),
-            this, SLOT(toggleBackgroundInstance()));
+    connect(action, &KAction::triggered, this, &Application::toggleBackgroundInstance);
 */
     _backgroundInstance = window;
 }

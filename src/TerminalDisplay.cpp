@@ -368,10 +368,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     // set the scroll bar's slider to occupy the whole area of the scroll bar initially
     setScroll(0, 0);
     _scrollBar->setCursor(Qt::ArrowCursor);
-    connect(_scrollBar, &QScrollBar::valueChanged,
-            this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
-    connect(_scrollBar, &QScrollBar::sliderMoved,
-            this, &Konsole::TerminalDisplay::viewScrolledByUser);
+    connect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
+    connect(_scrollBar, &QScrollBar::sliderMoved, this, &Konsole::TerminalDisplay::viewScrolledByUser);
 
     // setup timers for blinking text
     _blinkTextTimer = new QTimer(this);
@@ -3170,7 +3168,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
             QAction* pasteAction = new QAction(i18n("&Paste Location"), this);
             pasteAction->setData(dropText);
-            connect(pasteAction, SIGNAL(triggered()), this, SLOT(dropMenuPasteActionTriggered()));
+            connect(pasteAction, &QAction::triggered, this, &TerminalDisplay::dropMenuPasteActionTriggered);
 
             QList<QAction*> additionalActions;
             additionalActions.append(pasteAction);
@@ -3185,7 +3183,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
                         QAction* cdAction = new QAction(i18n("Change &Directory To"), this);
                         dropText = QLatin1String(" cd ") + dropText + QChar('\n');
                         cdAction->setData(dropText);
-                        connect(cdAction, SIGNAL(triggered()), this, SLOT(dropMenuCdActionTriggered()));
+                        connect(cdAction, &QAction::triggered, this, &TerminalDisplay::dropMenuCdActionTriggered);
                         additionalActions.append(cdAction);
                     }
                 }

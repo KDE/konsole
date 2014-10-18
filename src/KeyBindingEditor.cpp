@@ -41,8 +41,7 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
     _ui->setupUi(this);
 
     // description edit
-    connect(_ui->descriptionEdit , &QLineEdit::textChanged ,
-            this , &Konsole::KeyBindingEditor::setTranslatorDescription);
+    connect(_ui->descriptionEdit , &QLineEdit::textChanged , this , &Konsole::KeyBindingEditor::setTranslatorDescription);
 
     // key bindings table
     _ui->keyBindingTable->setColumnCount(2);
@@ -227,7 +226,6 @@ void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator
     }
     _ui->keyBindingTable->sortItems(0);
 
-    connect(_ui->keyBindingTable , &QTableWidget::itemChanged , this ,
-            &Konsole::KeyBindingEditor::bindingTableItemChanged);
+    connect(_ui->keyBindingTable , &QTableWidget::itemChanged , this , &Konsole::KeyBindingEditor::bindingTableItemChanged);
 }
 

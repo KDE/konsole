@@ -57,12 +57,9 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     connect(_group, &QActionGroup::triggered, this, &Konsole::ProfileList::triggered);
 
     // listen for future changes to the profiles
-    connect(manager, &Konsole::ProfileManager::favoriteStatusChanged, this,
-            &Konsole::ProfileList::favoriteChanged);
-    connect(manager, &Konsole::ProfileManager::shortcutChanged, this,
-            &Konsole::ProfileList::shortcutChanged);
-    connect(manager, &Konsole::ProfileManager::profileChanged, this,
-            &Konsole::ProfileList::profileChanged);
+    connect(manager, &Konsole::ProfileManager::favoriteStatusChanged, this, &Konsole::ProfileList::favoriteChanged);
+    connect(manager, &Konsole::ProfileManager::shortcutChanged, this, &Konsole::ProfileList::shortcutChanged);
+    connect(manager, &Konsole::ProfileManager::profileChanged, this, &Konsole::ProfileList::profileChanged);
 }
 void ProfileList::updateEmptyAction()
 {

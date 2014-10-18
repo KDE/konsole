@@ -126,24 +126,15 @@ Session::Session(QObject* parent) :
     //create emulation backend
     _emulation = new Vt102Emulation();
 
-    connect(_emulation, &Konsole::Emulation::titleChanged,
-            this, &Konsole::Session::setUserTitle);
-    connect(_emulation, &Konsole::Emulation::stateSet,
-            this, &Konsole::Session::activityStateSet);
-    connect(_emulation, &Konsole::Emulation::zmodemDetected,
-            this, &Konsole::Session::fireZModemDetected);
-    connect(_emulation, &Konsole::Emulation::changeTabTextColorRequest,
-            this, &Konsole::Session::changeTabTextColorRequest);
-    connect(_emulation, &Konsole::Emulation::profileChangeCommandReceived,
-            this, &Konsole::Session::profileChangeCommandReceived);
-    connect(_emulation, &Konsole::Emulation::flowControlKeyPressed,
-            this, &Konsole::Session::updateFlowControlState);
-    connect(_emulation, &Konsole::Emulation::primaryScreenInUse,
-            this, &Konsole::Session::onPrimaryScreenInUse);
-    connect(_emulation, &Konsole::Emulation::selectionChanged,
-            this, &Konsole::Session::selectionChanged);
-    connect(_emulation, &Konsole::Emulation::imageResizeRequest,
-            this, &Konsole::Session::resizeRequest);
+    connect(_emulation, &Konsole::Emulation::titleChanged, this, &Konsole::Session::setUserTitle);
+    connect(_emulation, &Konsole::Emulation::stateSet, this, &Konsole::Session::activityStateSet);
+    connect(_emulation, &Konsole::Emulation::zmodemDetected, this, &Konsole::Session::fireZModemDetected);
+    connect(_emulation, &Konsole::Emulation::changeTabTextColorRequest, this, &Konsole::Session::changeTabTextColorRequest);
+    connect(_emulation, &Konsole::Emulation::profileChangeCommandReceived, this, &Konsole::Session::profileChangeCommandReceived);
+    connect(_emulation, &Konsole::Emulation::flowControlKeyPressed, this, &Konsole::Session::updateFlowControlState);
+    connect(_emulation, &Konsole::Emulation::primaryScreenInUse, this, &Konsole::Session::onPrimaryScreenInUse);
+    connect(_emulation, &Konsole::Emulation::selectionChanged, this, &Konsole::Session::selectionChanged);
+    connect(_emulation, &Konsole::Emulation::imageResizeRequest, this, &Konsole::Session::resizeRequest);
 
     //create new teletype for I/O with shell process
     openTeletype(-1);
@@ -184,24 +175,18 @@ void Session::openTeletype(int fd)
     _shellProcess->setUtf8Mode(_emulation->utf8());
 
     // connect the I/O between emulator and pty process
-    connect(_shellProcess, &Konsole::Pty::receivedData,
-            this, &Konsole::Session::onReceiveBlock);
-    connect(_emulation, &Konsole::Emulation::sendData,
-            _shellProcess, &Konsole::Pty::sendData);
+    connect(_shellProcess, &Konsole::Pty::receivedData, this, &Konsole::Session::onReceiveBlock);
+    connect(_emulation, &Konsole::Emulation::sendData, _shellProcess, &Konsole::Pty::sendData);
 
     // UTF8 mode
-    connect(_emulation, &Konsole::Emulation::useUtf8Request,
-            _shellProcess, &Konsole::Pty::setUtf8Mode);
+    connect(_emulation, &Konsole::Emulation::useUtf8Request, _shellProcess, &Konsole::Pty::setUtf8Mode);
 
     // get notified when the pty process is finished
-    connect(_shellProcess, static_cast<void(Pty::*)(int,QProcess::ExitStatus)>(&Konsole::Pty::finished),
-            this, &Konsole::Session::done);
+    connect(_shellProcess, static_cast<void(Pty::*)(int,QProcess::ExitStatus)>(&Konsole::Pty::finished), this, &Konsole::Session::done);
 
     // emulator size
-    connect(_emulation, &Konsole::Emulation::imageSizeChanged,
-            this, &Konsole::Session::updateWindowSize);
-    connect(_emulation, &Konsole::Emulation::imageSizeInitialized,
-            this, &Konsole::Session::run);
+    connect(_emulation, &Konsole::Emulation::imageSizeChanged, this, &Konsole::Session::updateWindowSize);
+    connect(_emulation, &Konsole::Emulation::imageSizeInitialized, this, &Konsole::Session::run);
 }
 
 WId Session::windowId() const
@@ -312,33 +297,26 @@ void Session::addView(TerminalDisplay* widget)
     _views.append(widget);
 
     // connect emulation - view signals and slots
-    connect(widget, &Konsole::TerminalDisplay::keyPressedSignal,
-            _emulation, &Konsole::Emulation::sendKeyEvent);
-    connect(widget, &Konsole::TerminalDisplay::mouseSignal,
-            _emulation, &Konsole::Emulation::sendMouseEvent);
-    connect(widget, &Konsole::TerminalDisplay::sendStringToEmu,
-            _emulation, &Konsole::Emulation::sendString);
+    connect(widget, &Konsole::TerminalDisplay::keyPressedSignal, _emulation, &Konsole::Emulation::sendKeyEvent);
+    connect(widget, &Konsole::TerminalDisplay::mouseSignal, _emulation, &Konsole::Emulation::sendMouseEvent);
+    connect(widget, &Konsole::TerminalDisplay::sendStringToEmu, _emulation, &Konsole::Emulation::sendString);
 
     // allow emulation to notify view when the foreground process
     // indicates whether or not it is interested in mouse signals
-    connect(_emulation, &Konsole::Emulation::programUsesMouseChanged,
-            widget, &Konsole::TerminalDisplay::setUsesMouse);
+    connect(_emulation, &Konsole::Emulation::programUsesMouseChanged, widget, &Konsole::TerminalDisplay::setUsesMouse);
 
     widget->setUsesMouse(_emulation->programUsesMouse());
 
-    connect(_emulation, &Konsole::Emulation::programBracketedPasteModeChanged,
-            widget, &Konsole::TerminalDisplay::setBracketedPasteMode);
+    connect(_emulation, &Konsole::Emulation::programBracketedPasteModeChanged, widget, &Konsole::TerminalDisplay::setBracketedPasteMode);
 
     widget->setBracketedPasteMode(_emulation->programBracketedPasteMode());
 
     widget->setScreenWindow(_emulation->createWindow());
 
     //connect view signals and slots
-    connect(widget, &Konsole::TerminalDisplay::changedContentSizeSignal,
-            this, &Konsole::Session::onViewSizeChange);
+    connect(widget, &Konsole::TerminalDisplay::changedContentSizeSignal, this, &Konsole::Session::onViewSizeChange);
 
-    connect(widget, &Konsole::TerminalDisplay::destroyed,
-            this, &Konsole::Session::viewDestroyed);
+    connect(widget, &Konsole::TerminalDisplay::destroyed, this, &Konsole::Session::viewDestroyed);
 }
 
 void Session::viewDestroyed(QObject* view)
@@ -1185,25 +1163,20 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
     if (!dir.isEmpty())
         _zmodemProc->setWorkingDirectory(dir);
 
-    connect(_zmodemProc, &KProcess::readyReadStandardOutput,
-            this, &Konsole::Session::zmodemReadAndSendBlock);
-    connect(_zmodemProc, &KProcess::readyReadStandardError,
-            this, &Konsole::Session::zmodemReadStatus);
-    connect(_zmodemProc, static_cast<void(KProcess::*)(int,QProcess::ExitStatus)>(&KProcess::finished),
-            this, &Konsole::Session::zmodemFinished);
+    connect(_zmodemProc, &KProcess::readyReadStandardOutput, this, &Konsole::Session::zmodemReadAndSendBlock);
+    connect(_zmodemProc, &KProcess::readyReadStandardError, this, &Konsole::Session::zmodemReadStatus);
+    connect(_zmodemProc, static_cast<void(KProcess::*)(int,QProcess::ExitStatus)>(&KProcess::finished), this, &Konsole::Session::zmodemFinished);
 
     _zmodemProc->start();
 
     disconnect(_shellProcess, &Konsole::Pty::receivedData,
                this, &Konsole::Session::onReceiveBlock);
-    connect(_shellProcess, &Konsole::Pty::receivedData,
-            this, &Konsole::Session::zmodemReceiveBlock);
+    connect(_shellProcess, &Konsole::Pty::receivedData, this, &Konsole::Session::zmodemReceiveBlock);
 
     _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
                                        i18n("ZModem Progress"));
 
-    connect(_zmodemProgress, &Konsole::ZModemDialog::user1Clicked,
-            this, &Konsole::Session::zmodemFinished);
+    connect(_zmodemProgress, &Konsole::ZModemDialog::user1Clicked, this, &Konsole::Session::zmodemFinished);
 
     _zmodemProgress->show();
 }
@@ -1262,8 +1235,7 @@ void Session::zmodemFinished()
 
         disconnect(_shellProcess, &Konsole::Pty::receivedData,
                    this , &Konsole::Session::zmodemReceiveBlock);
-        connect(_shellProcess, &Konsole::Pty::receivedData,
-                this, &Konsole::Session::onReceiveBlock);
+        connect(_shellProcess, &Konsole::Pty::receivedData, this, &Konsole::Session::onReceiveBlock);
 
         _shellProcess->sendData(QByteArrayLiteral("\030\030\030\030")); // Abort
         _shellProcess->sendData(QByteArrayLiteral("\001\013\n")); // Try to get prompt back
@@ -1497,8 +1469,7 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
     _sessions[session] = master;
 
     if (master) {
-        connect(session->emulation(), &Konsole::Emulation::sendData,
-                this, &Konsole::SessionGroup::forwardData);
+        connect(session->emulation(), &Konsole::Emulation::sendData, this, &Konsole::SessionGroup::forwardData);
     } else {
         disconnect(session->emulation(), &Konsole::Emulation::sendData,
                    this, &Konsole::SessionGroup::forwardData);

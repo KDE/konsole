@@ -88,14 +88,11 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     connect(_viewSplitter.data() , &Konsole::ViewSplitter::empty , this , &Konsole::ViewManager::empty);
 
     // listen for addition or removal of views from associated containers
-    connect(_containerSignalMapper , static_cast<void(QSignalMapper::*)(QObject*)>(&QSignalMapper::mapped) , this ,
-            &Konsole::ViewManager::containerViewsChanged);
+    connect(_containerSignalMapper , static_cast<void(QSignalMapper::*)(QObject*)>(&QSignalMapper::mapped) , this , &Konsole::ViewManager::containerViewsChanged);
 
     // listen for profile changes
-    connect(ProfileManager::instance() , &Konsole::ProfileManager::profileChanged , this,
-            &Konsole::ViewManager::profileChanged);
-    connect(SessionManager::instance() , &Konsole::SessionManager::sessionUpdated , this,
-            &Konsole::ViewManager::updateViewsForSession);
+    connect(ProfileManager::instance() , &Konsole::ProfileManager::profileChanged , this, &Konsole::ViewManager::profileChanged);
+    connect(SessionManager::instance() , &Konsole::SessionManager::sessionUpdated , this, &Konsole::ViewManager::updateViewsForSession);
 
     //prepare DBus communication
     new WindowAdaptor(this);
@@ -222,8 +219,7 @@ void ViewManager::setupActions()
         for (int i = 0; i < SWITCH_TO_TAB_COUNT; i++) {
             QAction* switchToTabAction = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);
             switchToTabMapper->setMapping(switchToTabAction, i);
-            connect(switchToTabAction, &QAction::triggered, switchToTabMapper,
-                    static_cast<void(QSignalMapper::*)()>(&QSignalMapper::map));
+            connect(switchToTabAction, &QAction::triggered, switchToTabMapper, static_cast<void(QSignalMapper::*)()>(&QSignalMapper::map));
             collection->addAction(QString("switch-to-tab-%1").arg(i), switchToTabAction);
         }
     }
@@ -489,10 +485,8 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     SessionController* controller = new SessionController(session, view, this);
     connect(controller , &Konsole::SessionController::focused , this , &Konsole::ViewManager::controllerChanged);
     connect(session , &Konsole::Session::destroyed , controller , &Konsole::SessionController::deleteLater);
-    connect(session , &Konsole::Session::primaryScreenInUse ,
-            controller , &Konsole::SessionController::setupPrimaryScreenSpecificActions);
-    connect(session , &Konsole::Session::selectionChanged ,
-            controller , &Konsole::SessionController::selectionChanged);
+    connect(session , &Konsole::Session::primaryScreenInUse , controller , &Konsole::SessionController::setupPrimaryScreenSpecificActions);
+    connect(session , &Konsole::Session::selectionChanged , controller , &Konsole::SessionController::selectionChanged);
     connect(view , &Konsole::TerminalDisplay::destroyed , controller , &Konsole::SessionController::deleteLater);
 
     // if this is the first controller created then set it as the active controller
@@ -604,10 +598,8 @@ ViewContainer* ViewManager::createContainer()
         TabbedViewContainer* tabbedContainer = new TabbedViewContainer(_navigationPosition, this, _viewSplitter);
         container = tabbedContainer;
 
-        connect(tabbedContainer, &TabbedViewContainer::detachTab,
-                this, &ViewManager::detachView);
-        connect(tabbedContainer, &TabbedViewContainer::closeTab,
-                this, &ViewManager::closeTabFromContainer);
+        connect(tabbedContainer, &TabbedViewContainer::detachTab, this, &ViewManager::detachView);
+        connect(tabbedContainer, &TabbedViewContainer::closeTab, this, &ViewManager::closeTabFromContainer);
     }
     break;
     case NoNavigation:
@@ -630,16 +622,13 @@ ViewContainer* ViewManager::createContainer()
     }
 
     // connect signals and slots
-    connect(container , &Konsole::ViewContainer::viewAdded , _containerSignalMapper ,
-            static_cast<void(QSignalMapper::*)()>(&QSignalMapper::map));
-    connect(container , &Konsole::ViewContainer::viewRemoved , _containerSignalMapper ,
-            static_cast<void(QSignalMapper::*)()>(&QSignalMapper::map));
+    connect(container , &Konsole::ViewContainer::viewAdded , _containerSignalMapper , static_cast<void(QSignalMapper::*)()>(&QSignalMapper::map));
+    connect(container , &Konsole::ViewContainer::viewRemoved , _containerSignalMapper , static_cast<void(QSignalMapper::*)()>(&QSignalMapper::map));
     _containerSignalMapper->setMapping(container, container);
 
     connect(container, static_cast<void(ViewContainer::*)()>(&Konsole::ViewContainer::newViewRequest), this, static_cast<void(ViewManager::*)()>(&Konsole::ViewManager::newViewRequest));
     connect(container, static_cast<void(ViewContainer::*)(Profile::Ptr)>(&Konsole::ViewContainer::newViewRequest), this, static_cast<void(ViewManager::*)(Profile::Ptr)>(&Konsole::ViewManager::newViewRequest));
-    connect(container, &Konsole::ViewContainer::moveViewRequest,
-            this , &Konsole::ViewManager::containerMoveViewRequest);
+    connect(container, &Konsole::ViewContainer::moveViewRequest, this , &Konsole::ViewManager::containerMoveViewRequest);
     connect(container , &Konsole::ViewContainer::viewRemoved , this , &Konsole::ViewManager::viewDestroyed);
     connect(container , &Konsole::ViewContainer::activeViewChanged , this , &Konsole::ViewManager::viewActivated);
 

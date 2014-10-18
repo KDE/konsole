@@ -46,8 +46,8 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::accepted, this, &CopyInputDialog::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &CopyInputDialog::reject);
     mainLayout->addWidget(buttonBox);
 
     setWindowModality(Qt::WindowModal);
@@ -71,8 +71,7 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     filterProxyModel->setSourceModel(_model);
     filterProxyModel->setFilterKeyColumn(-1);
 
-    connect(_ui->filterEdit, &QLineEdit::textChanged,
-            filterProxyModel, &QSortFilterProxyModel::setFilterFixedString);
+    connect(_ui->filterEdit, &QLineEdit::textChanged, filterProxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
     _ui->sessionList->setModel(filterProxyModel);
     _ui->sessionList->setColumnHidden(0, true); // Hide number column

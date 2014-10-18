@@ -87,7 +87,7 @@ MainWindow::MainWindow()
         }
     }
 
-    connect(KWindowSystem::self(), SIGNAL(compositingChanged(bool)), this, SLOT(updateUseTransparency()));
+    connect(KWindowSystem::self(), &KWindowSystem::compositingChanged, this, &MainWindow::updateUseTransparency);
 
     updateUseTransparency();
 
@@ -97,21 +97,14 @@ MainWindow::MainWindow()
     // create view manager
     _viewManager = new ViewManager(this, actionCollection());
     connect(_viewManager, &Konsole::ViewManager::empty, this, &Konsole::MainWindow::close);
-    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this,
-            &Konsole::MainWindow::activeViewChanged);
-    connect(_viewManager, &Konsole::ViewManager::unplugController, this,
-            &Konsole::MainWindow::disconnectController);
-    connect(_viewManager, &Konsole::ViewManager::viewPropertiesChanged,
-            bookmarkHandler(), &Konsole::BookmarkHandler::setViews);
+    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this, &Konsole::MainWindow::activeViewChanged);
+    connect(_viewManager, &Konsole::ViewManager::unplugController, this, &Konsole::MainWindow::disconnectController);
+    connect(_viewManager, &Konsole::ViewManager::viewPropertiesChanged, bookmarkHandler(), &Konsole::BookmarkHandler::setViews);
 
-    connect(_viewManager, &Konsole::ViewManager::updateWindowIcon, this,
-            &Konsole::MainWindow::updateWindowIcon);
-    connect(_viewManager, static_cast<void(ViewManager::*)(Profile::Ptr)>(&Konsole::ViewManager::newViewRequest),
-            this, &Konsole::MainWindow::newFromProfile);
-    connect(_viewManager, static_cast<void(ViewManager::*)()>(&Konsole::ViewManager::newViewRequest),
-            this, &Konsole::MainWindow::newTab);
-    connect(_viewManager, &Konsole::ViewManager::viewDetached,
-            this, &Konsole::MainWindow::viewDetached);
+    connect(_viewManager, &Konsole::ViewManager::updateWindowIcon, this, &Konsole::MainWindow::updateWindowIcon);
+    connect(_viewManager, static_cast<void(ViewManager::*)(Profile::Ptr)>(&Konsole::ViewManager::newViewRequest), this, &Konsole::MainWindow::newFromProfile);
+    connect(_viewManager, static_cast<void(ViewManager::*)()>(&Konsole::ViewManager::newViewRequest), this, &Konsole::MainWindow::newTab);
+    connect(_viewManager, &Konsole::ViewManager::viewDetached, this, &Konsole::MainWindow::viewDetached);
 
     // create the main widget
     setupMainWidget();
@@ -225,8 +218,7 @@ void MainWindow::activeViewChanged(SessionController* controller)
     // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
     disconnect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, 0, 0);
-    connect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, controller,
-            &Konsole::SessionController::openUrl);
+    connect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, controller, &Konsole::SessionController::openUrl);
 
     if (_pluggedController)
         disconnectController(_pluggedController);
@@ -235,10 +227,8 @@ void MainWindow::activeViewChanged(SessionController* controller)
     _pluggedController = controller;
 
     // listen for title changes from the current session
-    connect(controller, &Konsole::SessionController::titleChanged,
-            this, &Konsole::MainWindow::activeViewTitleChanged);
-    connect(controller, &Konsole::SessionController::rawTitleChanged,
-            this, &Konsole::MainWindow::updateWindowCaption);
+    connect(controller, &Konsole::SessionController::titleChanged, this, &Konsole::MainWindow::activeViewTitleChanged);
+    connect(controller, &Konsole::SessionController::rawTitleChanged, this, &Konsole::MainWindow::updateWindowCaption);
 
     controller->setShowMenuAction(_toggleMenuBarAction);
     guiFactory()->addClient(controller);
@@ -373,11 +363,9 @@ void MainWindow::setProfileList(ProfileList* list)
 {
     profileListChanged(list->actions());
 
-    connect(list, &Konsole::ProfileList::profileSelected, this,
-            &Konsole::MainWindow::newFromProfile);
+    connect(list, &Konsole::ProfileList::profileSelected, this, &Konsole::MainWindow::newFromProfile);
 
-    connect(list, &Konsole::ProfileList::actionsChanged, this,
-            &Konsole::MainWindow::profileListChanged);
+    connect(list, &Konsole::ProfileList::actionsChanged, this, &Konsole::MainWindow::profileListChanged);
 }
 
 void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)

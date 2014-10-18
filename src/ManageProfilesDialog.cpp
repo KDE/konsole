@@ -56,8 +56,8 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* aParent)
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     mainLayout->addWidget(mainWidget);
-    connect(buttonBox, SIGNAL(accepted()), this, SLOT(slotAccepted()));
-    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::accepted, this, &ManageProfilesDialog::slotAccepted);
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &ManageProfilesDialog::reject);
     mainLayout->addWidget(buttonBox);
 
     
@@ -76,15 +76,10 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* aParent)
     populateTable();
 
     // listen for changes to profiles
-    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileAdded, this,
-            &Konsole::ManageProfilesDialog::addItems);
-    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileRemoved, this,
-            &Konsole::ManageProfilesDialog::removeItems);
-    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged, this,
-            &Konsole::ManageProfilesDialog::updateItems);
-    connect(ProfileManager::instance() ,
-            &Konsole::ProfileManager::favoriteStatusChanged, this,
-            &Konsole::ManageProfilesDialog::updateFavoriteStatus);
+    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileAdded, this, &Konsole::ManageProfilesDialog::addItems);
+    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileRemoved, this, &Konsole::ManageProfilesDialog::removeItems);
+    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged, this, &Konsole::ManageProfilesDialog::updateItems);
+    connect(ProfileManager::instance() , &Konsole::ProfileManager::favoriteStatusChanged, this, &Konsole::ManageProfilesDialog::updateFavoriteStatus);
 
     // resize the session table to the full width of the table
     _ui->sessionTable->horizontalHeader()->setHighlightSections(false);
@@ -244,17 +239,14 @@ void ManageProfilesDialog::populateTable()
     }
     updateDefaultItem();
 
-    connect(_sessionModel, &QStandardItemModel::itemChanged, this,
-            &Konsole::ManageProfilesDialog::itemDataChanged);
+    connect(_sessionModel, &QStandardItemModel::itemChanged, this, &Konsole::ManageProfilesDialog::itemDataChanged);
 
     // listen for changes in the table selection and update the state of the form's buttons
     // accordingly.
     //
     // it appears that the selection model is changed when the model itself is replaced,
     // so the signals need to be reconnected each time the model is updated.
-    connect(_ui->sessionTable->selectionModel(),
-            &QItemSelectionModel::selectionChanged, this,
-            &Konsole::ManageProfilesDialog::tableSelectionChanged);
+    connect(_ui->sessionTable->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Konsole::ManageProfilesDialog::tableSelectionChanged);
 
     _ui->sessionTable->selectRow(0);
 }

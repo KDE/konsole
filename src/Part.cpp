@@ -64,8 +64,7 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
     _viewManager = new ViewManager(this, actionCollection());
     _viewManager->setNavigationMethod(ViewManager::NoNavigation);
 
-    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this ,
-            &Konsole::Part::activeViewChanged);
+    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this , &Konsole::Part::activeViewChanged);
     connect(_viewManager, &Konsole::ViewManager::empty, this, &Konsole::Part::terminalExited);
     connect(_viewManager, static_cast<void(ViewManager::*)()>(&Konsole::ViewManager::newViewRequest), this, &Konsole::Part::newTab);
 
@@ -246,11 +245,9 @@ void Part::activeViewChanged(SessionController* controller)
     insertChildClient(controller);
     setupActionsForSession(controller);
 
-    connect(controller, &Konsole::SessionController::titleChanged, this,
-            &Konsole::Part::activeViewTitleChanged);
+    connect(controller, &Konsole::SessionController::titleChanged, this, &Konsole::Part::activeViewTitleChanged);
     activeViewTitleChanged(controller);
-    connect(controller, &Konsole::SessionController::currentDirectoryChanged, this,
-            &Konsole::Part::currentDirectoryChanged);
+    connect(controller, &Konsole::SessionController::currentDirectoryChanged, this, &Konsole::Part::currentDirectoryChanged);
 
     const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*,bool&));
     const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*,bool&));

@@ -34,18 +34,14 @@ RenameTabWidget::RenameTabWidget(QWidget* parent)
     _ui->tabTitleEdit->setClearButtonEnabled(true);
     _ui->remoteTabTitleEdit->setClearButtonEnabled(true);
 
-    connect(_ui->tabTitleEdit, &QLineEdit::textChanged, this,
-            &Konsole::RenameTabWidget::tabTitleFormatChanged);
-    connect(_ui->remoteTabTitleEdit, &QLineEdit::textChanged, this,
-            &Konsole::RenameTabWidget::remoteTabTitleFormatChanged);
+    connect(_ui->tabTitleEdit, &QLineEdit::textChanged, this, &Konsole::RenameTabWidget::tabTitleFormatChanged);
+    connect(_ui->remoteTabTitleEdit, &QLineEdit::textChanged, this, &Konsole::RenameTabWidget::remoteTabTitleFormatChanged);
 
     _ui->tabTitleFormatButton->setContext(Session::LocalTabTitle);
-    connect(_ui->tabTitleFormatButton, &Konsole::TabTitleFormatButton::dynamicElementSelected,
-            this, &Konsole::RenameTabWidget::insertTabTitleText);
+    connect(_ui->tabTitleFormatButton, &Konsole::TabTitleFormatButton::dynamicElementSelected, this, &Konsole::RenameTabWidget::insertTabTitleText);
 
     _ui->remoteTabTitleFormatButton->setContext(Session::RemoteTabTitle);
-    connect(_ui->remoteTabTitleFormatButton, &Konsole::TabTitleFormatButton::dynamicElementSelected,
-            this, &Konsole::RenameTabWidget::insertRemoteTabTitleText);
+    connect(_ui->remoteTabTitleFormatButton, &Konsole::TabTitleFormatButton::dynamicElementSelected, this, &Konsole::RenameTabWidget::insertRemoteTabTitleText);
 }
 
 RenameTabWidget::~RenameTabWidget()

@@ -262,12 +262,9 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
     connect(_tabBar, &Konsole::ViewContainerTabBar::newTabRequest, this, static_cast<void(TabbedViewContainer::*)()>(&Konsole::TabbedViewContainer::newViewRequest));
     connect(_tabBar, &Konsole::ViewContainerTabBar::wheelDelta, this, &Konsole::TabbedViewContainer::wheelScrolled);
     connect(_tabBar, &Konsole::ViewContainerTabBar::initiateDrag, this, &Konsole::TabbedViewContainer::startTabDrag);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::querySourceIndex,
-            this, &Konsole::TabbedViewContainer::querySourceIndex);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::moveViewRequest,
-            this, &Konsole::TabbedViewContainer::onMoveViewRequest);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::contextMenu, this,
-            &Konsole::TabbedViewContainer::openTabContextMenu);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::querySourceIndex, this, &Konsole::TabbedViewContainer::querySourceIndex);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::moveViewRequest, this, &Konsole::TabbedViewContainer::onMoveViewRequest);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::contextMenu, this, &Konsole::TabbedViewContainer::openTabContextMenu);
 
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(_tabBar);
@@ -299,8 +296,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
     QMenu* profileMenu = new QMenu(_newTabButton);
     ProfileList* profileList = new ProfileList(false, profileMenu);
     profileList->syncWidgetActions(profileMenu, true);
-    connect(profileList, &Konsole::ProfileList::profileSelected,
-            this, static_cast<void(TabbedViewContainer::*)(Profile::Ptr)>(&Konsole::TabbedViewContainer::newViewRequest));
+    connect(profileList, &Konsole::ProfileList::profileSelected, this, static_cast<void(TabbedViewContainer::*)(Profile::Ptr)>(&Konsole::TabbedViewContainer::newViewRequest));
     setNewViewMenu(profileMenu);
 
     _closeTabButton = new QToolButton(_containerWidget);
@@ -625,12 +621,9 @@ void TabbedViewContainer::addViewWidget(QWidget* view , int index)
     _stackWidget->updateGeometry();
 
     ViewProperties* item = viewProperties(view);
-    connect(item, &Konsole::ViewProperties::titleChanged, this ,
-            &Konsole::TabbedViewContainer::updateTitle);
-    connect(item, &Konsole::ViewProperties::iconChanged, this ,
-            &Konsole::TabbedViewContainer::updateIcon);
-    connect(item, &Konsole::ViewProperties::activity, this ,
-            &Konsole::TabbedViewContainer::updateActivity);
+    connect(item, &Konsole::ViewProperties::titleChanged, this , &Konsole::TabbedViewContainer::updateTitle);
+    connect(item, &Konsole::ViewProperties::iconChanged, this , &Konsole::TabbedViewContainer::updateIcon);
+    connect(item, &Konsole::ViewProperties::activity, this , &Konsole::TabbedViewContainer::updateActivity);
 
     _tabBar->insertTab(index , item->icon() , item->title());
 

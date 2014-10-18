@@ -146,25 +146,20 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     view->setSessionController(this);
 
     // listen for session resize requests
-    connect(_session.data(), &Konsole::Session::resizeRequest, this,
-            &Konsole::SessionController::sessionResizeRequest);
+    connect(_session.data(), &Konsole::Session::resizeRequest, this, &Konsole::SessionController::sessionResizeRequest);
 
     // listen for popup menu requests
-    connect(_view.data(), &Konsole::TerminalDisplay::configureRequest, this,
-            &Konsole::SessionController::showDisplayContextMenu);
+    connect(_view.data(), &Konsole::TerminalDisplay::configureRequest, this, &Konsole::SessionController::showDisplayContextMenu);
 
     // move view to newest output when keystrokes occur
-    connect(_view.data(), &Konsole::TerminalDisplay::keyPressedSignal, this,
-            &Konsole::SessionController::trackOutput);
+    connect(_view.data(), &Konsole::TerminalDisplay::keyPressedSignal, this, &Konsole::SessionController::trackOutput);
 
     // listen to activity / silence notifications from session
-    connect(_session.data(), &Konsole::Session::stateChanged, this,
-            &Konsole::SessionController::sessionStateChanged);
+    connect(_session.data(), &Konsole::Session::stateChanged, this, &Konsole::SessionController::sessionStateChanged);
     // listen to title and icon changes
     connect(_session.data(), &Konsole::Session::titleChanged, this, &Konsole::SessionController::sessionTitleChanged);
 
-    connect(_session.data() , &Konsole::Session::currentDirectoryChanged ,
-            this , &Konsole::SessionController::currentDirectoryChanged);
+    connect(_session.data() , &Konsole::Session::currentDirectoryChanged , this , &Konsole::SessionController::currentDirectoryChanged);
 
     // listen for color changes
     connect(_session.data(), &Konsole::Session::changeBackgroundColorRequest, _view.data(), &Konsole::TerminalDisplay::setBackgroundColor);
@@ -174,15 +169,13 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect(_session.data(), &Konsole::Session::started, this, &Konsole::SessionController::snapshot);
 
     // listen for output changes to set activity flag
-    connect(_session->emulation(), &Konsole::Emulation::outputChanged, this,
-            &Konsole::SessionController::fireActivity);
+    connect(_session->emulation(), &Konsole::Emulation::outputChanged, this, &Konsole::SessionController::fireActivity);
 
     // listen for detection of ZModem transfer
     connect(_session.data(), &Konsole::Session::zmodemDetected, this, &Konsole::SessionController::zmodemDownload);
 
     // listen for flow control status changes
-    connect(_session.data(), &Konsole::Session::flowControlEnabledChanged, _view.data(),
-            &Konsole::TerminalDisplay::setFlowControlWarningEnabled);
+    connect(_session.data(), &Konsole::Session::flowControlEnabledChanged, _view.data(), &Konsole::TerminalDisplay::setFlowControlWarningEnabled);
     _view->setFlowControlWarningEnabled(_session->flowControlEnabled());
 
     // take a snapshot of the session state every so often when
@@ -468,8 +461,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             // first, disconnect any other views which are listening for bell signals from the session
             disconnect(_session.data(), &Konsole::Session::bellRequest, 0, 0);
             // second, connect the newly focused view to listen for the session's bell signal
-            connect(_session.data(), &Konsole::Session::bellRequest,
-                    _view.data(), &Konsole::TerminalDisplay::bell);
+            connect(_session.data(), &Konsole::Session::bellRequest, _view.data(), &Konsole::TerminalDisplay::bell);
 
             if (_copyInputToAllTabsAction && _copyInputToAllTabsAction->isChecked()) {
                 // A session with "Copy To All Tabs" has come into focus:
@@ -487,10 +479,8 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
                 (!_viewUrlFilter || _urlFilterUpdateRequired) &&
                 ((QMouseEvent*)event)->buttons() == Qt::NoButton) {
             if (_view->screenWindow() && !_viewUrlFilter) {
-                connect(_view->screenWindow(), &Konsole::ScreenWindow::scrolled, this,
-                        &Konsole::SessionController::requireUrlFilterUpdate);
-                connect(_view->screenWindow(), &Konsole::ScreenWindow::outputChanged, this,
-                        &Konsole::SessionController::requireUrlFilterUpdate);
+                connect(_view->screenWindow(), &Konsole::ScreenWindow::scrolled, this, &Konsole::SessionController::requireUrlFilterUpdate);
+                connect(_view->screenWindow(), &Konsole::ScreenWindow::outputChanged, this, &Konsole::SessionController::requireUrlFilterUpdate);
 
                 // install filter on the view to highlight URLs
                 _viewUrlFilter = new UrlFilter();
@@ -1113,12 +1103,9 @@ void SessionController::listenForScreenWindowUpdates()
     if (_listenForScreenWindowUpdates)
         return;
 
-    connect(_view->screenWindow(), &Konsole::ScreenWindow::outputChanged, this,
-            &Konsole::SessionController::updateSearchFilter);
-    connect(_view->screenWindow(), &Konsole::ScreenWindow::scrolled, this,
-            &Konsole::SessionController::updateSearchFilter);
-    connect(_view->screenWindow(), &Konsole::ScreenWindow::currentResultLineChanged, _view.data(),
-            static_cast<void(TerminalDisplay::*)()>(&Konsole::TerminalDisplay::update));
+    connect(_view->screenWindow(), &Konsole::ScreenWindow::outputChanged, this, &Konsole::SessionController::updateSearchFilter);
+    connect(_view->screenWindow(), &Konsole::ScreenWindow::scrolled, this, &Konsole::SessionController::updateSearchFilter);
+    connect(_view->screenWindow(), &Konsole::ScreenWindow::currentResultLineChanged, _view.data(), static_cast<void(TerminalDisplay::*)()>(&Konsole::TerminalDisplay::update));
 
     _listenForScreenWindowUpdates = true;
 }
@@ -1155,12 +1142,9 @@ void SessionController::enableSearchBar(bool showSearchBar)
 
     _searchBar->setVisible(showSearchBar);
     if (showSearchBar) {
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchChanged, this,
-                &Konsole::SessionController::searchTextChanged);
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchReturnPressed, this,
-                &Konsole::SessionController::findPreviousInHistory);
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchShiftPlusReturnPressed, this,
-                &Konsole::SessionController::findNextInHistory);
+        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchChanged, this, &Konsole::SessionController::searchTextChanged);
+        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchReturnPressed, this, &Konsole::SessionController::findPreviousInHistory);
+        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchShiftPlusReturnPressed, this, &Konsole::SessionController::findNextInHistory);
     } else {
         disconnect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchChanged, this,
                    &Konsole::SessionController::searchTextChanged);
@@ -1742,10 +1726,8 @@ void SaveHistoryTask::execute()
 
         _jobSession.insert(job, jobInfo);
 
-        connect(job, &KIO::TransferJob::dataReq,
-                this, &Konsole::SaveHistoryTask::jobDataRequested);
-        connect(job, &KIO::TransferJob::result,
-                this, &Konsole::SaveHistoryTask::jobResult);
+        connect(job, &KIO::TransferJob::dataReq, this, &Konsole::SaveHistoryTask::jobDataRequested);
+        connect(job, &KIO::TransferJob::result, this, &Konsole::SaveHistoryTask::jobResult);
     }
 
     dialog->deleteLater();
