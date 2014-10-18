@@ -29,7 +29,7 @@
 #include <QtGui/QIcon>
 
 // KDE
-#include <KColorDialog>
+#include <QColorDialog>
 #include <KWindowSystem>
 #include <KFileDialog>
 #include <KUrlCompletion>
@@ -159,9 +159,8 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
     }
 
     QColor color = item->background().color();
-    int result = KColorDialog::getColor(color);
-
-    if (result == KColorDialog::Accepted) {
+    color = QColorDialog::getColor();
+    if ( color.isValid() ) {
         item->setBackground(color);
 
         int colorSchemeRow = item->row();

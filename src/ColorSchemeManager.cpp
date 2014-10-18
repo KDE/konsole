@@ -29,7 +29,6 @@
 #include <QtCore/QDir>
 
 // KDE
-#include <KGlobal>
 #include <KConfig>
 #include <KLocalizedString>
 #include <QDebug>

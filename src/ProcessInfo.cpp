@@ -40,7 +40,6 @@
 
 // KDE
 #include <KConfigGroup>
-#include <KGlobal>
 #include <KSharedConfig>
 #include <KUser>
 #include <QDebug>

@@ -28,7 +28,6 @@
 // KDE
 #include <KConfig>
 #include <KConfigGroup>
-#include <KGlobal>
 
 // Konsole
 #include "ShellCommand.h"

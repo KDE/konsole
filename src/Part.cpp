@@ -31,7 +31,6 @@
 #include <KActionCollection>
 #include <KLocale>
 #include <KPluginFactory>
-#include <KGlobal>
 #include <KLocalizedString>
 #include <kde_file.h>
 #include <QDebug>

@@ -52,7 +52,6 @@
 #include <KStringHandler>
 #include <KSharedConfig>
 #include <KConfigGroup>
-#include <KGlobal>
 
 #include <kdeversion.h>
 #include <KCodecAction>
