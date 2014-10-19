@@ -30,7 +30,6 @@
 
 // KDE
 #include <KConfig>
-#include <KGlobal>
 #include <QDebug>
 #include <KConfigGroup>
 

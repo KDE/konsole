@@ -308,8 +308,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
     connect(_ui->commandEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::commandChanged);
     connect(_ui->environmentEditButton , &QPushButton::clicked, this, &Konsole::EditProfileDialog::showEnvironmentEditor);
 
-    connect(_ui->terminalColumnsEntry, static_cast<void(KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalColumnsEntryChanged);
-    connect(_ui->terminalRowsEntry, static_cast<void(KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalRowsEntryChanged);
+    connect(_ui->terminalColumnsEntry, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalColumnsEntryChanged);
+    connect(_ui->terminalRowsEntry, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalRowsEntryChanged);
 
     connect(_ui->showTerminalSizeHintButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::showTerminalSizeHint);
 }
@@ -349,7 +349,7 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr profile)
     _ui->silenceSecondsSpinner->setValue(silenceSeconds);
     _ui->silenceSecondsSpinner->setSuffix(ki18ncp("Unit of time", " second", " seconds"));
 
-    connect(_ui->silenceSecondsSpinner, static_cast<void(KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged), this, &Konsole::EditProfileDialog::silenceSecondsChanged);
+    connect(_ui->silenceSecondsSpinner, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::silenceSecondsChanged);
 }
 
 void EditProfileDialog::terminalColumnsEntryChanged(int value)
@@ -458,7 +458,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->fontPreviewLabel->setFont(profileFont);
     setFontInputValue(profileFont);
 
-    connect(_ui->fontSizeInput, &KDoubleNumInput::valueChanged, this, &Konsole::EditProfileDialog::setFontSize);
+    connect(_ui->fontSizeInput, SIGNAL(valueChanged(double)), this, SLOT(setFontSize(double)));
     connect(_ui->selectFontButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::showFontDialog);
 
     // setup font smoothing
@@ -1074,7 +1074,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     const int lineSpacing = profile->lineSpacing();
     _ui->lineSpacingSpinner->setValue(lineSpacing);
 
-    connect(_ui->lineSpacingSpinner, static_cast<void(KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged), this, &Konsole::EditProfileDialog::lineSpacingChanged);
+    connect(_ui->lineSpacingSpinner, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::lineSpacingChanged);
 
     // cursor options
     if (profile->useCustomCursorColor())

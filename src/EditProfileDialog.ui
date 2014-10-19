@@ -216,7 +216,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="KIntSpinBox" name="terminalColumnsEntry">
+           <widget class="QSpinBox" name="terminalColumnsEntry">
             <property name="minimum">
              <number>1</number>
             </property>
@@ -233,7 +233,7 @@
            </widget>
           </item>
           <item row="0" column="3">
-           <widget class="KIntSpinBox" name="terminalRowsEntry">
+           <widget class="QSpinBox" name="terminalRowsEntry">
             <property name="minimum">
              <number>1</number>
             </property>
@@ -381,7 +381,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="KIntSpinBox" name="silenceSecondsSpinner">
+           <widget class="KPluralHandlingSpinBox" name="silenceSecondsSpinner">
             <property name="toolTip">
              <string>The threshold for continuous silence to be detected by Konsole</string>
             </property>
@@ -549,7 +549,7 @@
              </widget>
             </item>
             <item>
-             <widget class="KDoubleNumInput" name="fontSizeInput">
+             <widget class="QDoubleSpinBox" name="fontSizeInput">
               <property name="minimum">
                <double>4.000000000000000</double>
               </property>
@@ -1114,7 +1114,7 @@
              </widget>
             </item>
             <item>
-             <widget class="KIntSpinBox" name="lineSpacingSpinner">
+             <widget class="QSpinBox" name="lineSpacingSpinner">
               <property name="toolTip">
                <string>The number of pixels between two lines</string>
               </property>
@@ -1343,9 +1343,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KDoubleNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
+   <class>KPluralHandlingSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>KPluralHandlingSpinBox</header>
   </customwidget>
   <customwidget>
    <class>KColorButton</class>
@@ -1356,11 +1356,6 @@
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KIntSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
   </customwidget>
   <customwidget>
    <class>KSqueezedTextLabel</class>
