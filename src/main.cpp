@@ -28,7 +28,7 @@
 // KDE
 #include <k4aboutdata.h>
 #include <KCmdLineArgs>
-#include <KLocale>
+#include <KLocalizedString>
 #include <kdemacros.h>
 
 
