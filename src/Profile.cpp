@@ -26,7 +26,6 @@
 #include <QtCore/QTextCodec>
 
 // KDE
-#include <KGlobalSettings>
 #include <KLocalizedString>
 #include <QFontDatabase>
 
