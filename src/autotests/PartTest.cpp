@@ -33,7 +33,6 @@
 #include <KPtyProcess>
 #include <KPtyDevice>
 #include <KDialog>
-#include <KDebug>
 #include <KMainWindow>
 #include <qtest.h>
 

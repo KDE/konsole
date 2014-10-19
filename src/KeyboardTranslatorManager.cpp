@@ -29,7 +29,7 @@
 
 // KDE
 #include <QDebug>
-#include <KGlobal>
+#include <QStandardPaths>
 
 using namespace Konsole;
 

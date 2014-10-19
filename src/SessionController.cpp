@@ -53,7 +53,6 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 
-#include <kdeversion.h>
 #include <KCodecAction>
 
 // Konsole

@@ -49,7 +49,7 @@ HistorySizeWidget::HistorySizeWidget(QWidget* parent)
 
     // focus and select the spinner automatically when appropriate
     _ui->fixedSizeHistoryButton->setFocusProxy(_ui->historyLineSpinner);
-    connect(_ui->fixedSizeHistoryButton , &QRadioButton::clicked , _ui->historyLineSpinner , &KIntSpinBox::selectAll);
+    connect(_ui->fixedSizeHistoryButton , &QRadioButton::clicked , _ui->historyLineSpinner , &KPluralHandlingSpinBox::selectAll);
 
     QButtonGroup* modeGroup = new QButtonGroup(this);
     modeGroup->addButton(_ui->noHistoryButton);
@@ -60,7 +60,7 @@ HistorySizeWidget::HistorySizeWidget(QWidget* parent)
     _ui->historyLineSpinner->setSuffix(ki18ncp("Unit of scrollback", " line", " lines"));
     this->setLineCount(HistorySizeWidget::DefaultLineCount);
 
-    connect(_ui->historyLineSpinner, static_cast<void(KIntSpinBox::*)(int)>(&KIntSpinBox::valueChanged), this, &Konsole::HistorySizeWidget::historySizeChanged);
+    connect(_ui->historyLineSpinner, static_cast<void(KPluralHandlingSpinBox::*)(int)>(&KPluralHandlingSpinBox::valueChanged), this, &Konsole::HistorySizeWidget::historySizeChanged);
 }
 
 HistorySizeWidget::~HistorySizeWidget()
