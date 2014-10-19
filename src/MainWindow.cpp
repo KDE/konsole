@@ -30,10 +30,10 @@
 #include <KActionMenu>
 #include <KCmdLineArgs>
 #include <KShortcutsDialog>
-#include <KLocale>
+#include <KLocalizedString>
 
 #include <QMenu>
-#include <KMenuBar>
+#include <QMenuBar>
 #include <KMessageBox>
 #include <KToggleFullScreenAction>
 #include <KStandardAction>
