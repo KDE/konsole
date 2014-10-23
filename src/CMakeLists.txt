@@ -2,19 +2,13 @@
 
 add_definitions(-DTRANSLATION_DOMAIN=\"konsole\")
 
-if (FALSE) # there is no libkonq for Qt5 yet
-  find_package(LibKonq)
-  set_package_properties(LibKonq PROPERTIES DESCRIPTION "Provides high-level file management functions"
+set(LIBKONQ_MIN_VERSION "5.96.0")
+find_package(KF5Konq ${LIBKONQ_MIN_VERSION} CONFIG)
+set_package_properties(LibKonq PROPERTIES DESCRIPTION "Provides high-level file management functions"
                        URL "https://projects.kde.org/projects/kde/applications/kde-baseapps" TYPE OPTIONAL
                        PURPOSE "Required for drag-n-drop menus")
-else()
-  message(WARNING "LibKonq does not exist for KF5 yet, reenable this check once it exists.")
-endif()
 
-set(HAVE_LIBKONQ ${LIBKONQ_FOUND})
-if(HAVE_LIBKONQ)
-  include_directories(${LIBKONQ_INCLUDE_DIR})
-endif()
+set(HAVE_LIBKONQ ${KF5Konq_FOUND})
 
 ### Too many crashes/issues with detaching on MacOSX
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -147,7 +141,7 @@ set(konsole_LIBS
 )
 
 if(HAVE_LIBKONQ)
-  set(konsole_LIBS ${konsole_LIBS} ${LIBKONQ_LIBRARY})
+  set(konsole_LIBS ${konsole_LIBS} KF5::Konq)
 endif()
 
 ### Konsole Application
