@@ -40,7 +40,6 @@
 #include <KParts/Part>
 #include <KPtyProcess>
 #include <KPtyDevice>
-#include <KDialog>
 #include <KMainWindow>
 #include <qtest.h>
 

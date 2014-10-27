@@ -48,6 +48,10 @@
 #include <KTextEdit>
 #include <KMessageBox>
 #include <KLocalizedString>
+#include <KConfigGroup>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 // Konsole
 #include "ColorScheme.h"
@@ -65,22 +69,32 @@
 using namespace Konsole;
 
 EditProfileDialog::EditProfileDialog(QWidget* aParent)
-    : KDialog(aParent)
+    : QDialog(aParent)
     , _delayedPreviewTimer(new QTimer(this))
     , _colorDialog(0)
 {
-    setCaption(i18n("Edit Profile"));
-    setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Apply);
+    setWindowTitle(i18n("Edit Profile"));
+    mButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);
+    QWidget *mainWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(mainWidget);
+    QPushButton *okButton = mButtonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(mButtonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(mButtonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
     // disable the apply button , since no modification has been made
-    enableButtonApply(false);
+    mButtonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 
-    connect(this, &Konsole::EditProfileDialog::applyClicked, this, &Konsole::EditProfileDialog::save);
+    connect(mButtonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this, &Konsole::EditProfileDialog::save);
 
     connect(_delayedPreviewTimer, &QTimer::timeout, this, &Konsole::EditProfileDialog::delayedPreviewActivate);
 
     _ui = new Ui::EditProfileDialog();
-    _ui->setupUi(mainWidget());
+    _ui->setupUi(mainWidget);
+    mainLayout->addWidget(mButtonBox);
 
     // there are various setupXYZPage() methods to load the items
     // for each page and update their states to match the profile
@@ -118,12 +132,12 @@ void EditProfileDialog::save()
 
     createTempProfile();
 
-    enableButtonApply(false);
+    mButtonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 }
 void EditProfileDialog::reject()
 {
     unpreviewAll();
-    KDialog::reject();
+    QDialog::reject();
 }
 void EditProfileDialog::accept()
 {
@@ -140,7 +154,7 @@ void EditProfileDialog::accept()
     }
     save();
     unpreviewAll();
-    KDialog::accept();
+    QDialog::accept();
 }
 QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr group, int maxLength)
 {
@@ -165,12 +179,12 @@ void EditProfileDialog::updateCaption(const Profile::Ptr profile)
     ProfileGroup::Ptr group = profile->asGroup();
     if (group && group->profiles().count() > 1) {
         QString caption = groupProfileNames(group, MAX_GROUP_CAPTION_LENGTH);
-        setCaption(i18np("Editing profile: %2",
+        setWindowTitle(i18np("Editing profile: %2",
                          "Editing %1 profiles: %2",
                          group->profiles().count(),
                          caption));
     } else {
-        setCaption(i18n("Edit Profile \"%1\"", profile->name()));
+        setWindowTitle(i18n("Edit Profile \"%1\"", profile->name()));
     }
 }
 void EditProfileDialog::setProfile(Profile::Ptr profile)
@@ -581,7 +595,7 @@ bool EditProfileDialog::eventFilter(QObject* watched , QEvent* aEvent)
         _ui->fontPreviewLabel->setText(i18n("%1", labelFont.family()));
     }
 
-    return KDialog::eventFilter(watched, aEvent);
+    return QDialog::eventFilter(watched, aEvent);
 }
 void EditProfileDialog::unpreviewAll()
 {
@@ -814,7 +828,7 @@ void EditProfileDialog::updateButtonApply()
         }
     }
 
-    enableButtonApply(userModified);
+    mButtonBox->button(QDialogButtonBox::Apply)->setEnabled(userModified);
 }
 
 void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* profile */)
@@ -871,9 +885,9 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     QWeakPointer<KDialog> dialog = new KDialog(this);
 
     if (isNewTranslator)
-        dialog.data()->setCaption(i18n("New Key Binding List"));
+        dialog.data()->setWindowTitle(i18n("New Key Binding List"));
     else
-        dialog.data()->setCaption(i18n("Edit Key Binding List"));
+        dialog.data()->setWindowTitle(i18n("Edit Key Binding List"));
 
     KeyBindingEditor* editor = new KeyBindingEditor;
     dialog.data()->setMainWidget(editor);

@@ -29,7 +29,7 @@
 // KDE
 #include <QAction>
 #include <KActionCollection>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KPluginFactory>
 #include <KLocalizedString>
 #include <kde_file.h>

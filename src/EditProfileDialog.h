@@ -26,7 +26,7 @@
 #include <QtCore/QPointer>
 
 // KDE
-#include <KDialog>
+#include <QDialog>
 
 // Konsole
 #include "Profile.h"
@@ -37,7 +37,7 @@
 class QAbstractButton;
 class QItemSelectionModel;
 class QTextCodec;
-
+class QDialogButtonBox;
 namespace Ui
 {
 class EditProfileDialog;
@@ -58,7 +58,7 @@ namespace Konsole
  * the persistent argument set to false.  These changes are then
  * un-done when the dialog is closed.
  */
-class KONSOLEPRIVATE_EXPORT EditProfileDialog : public KDialog
+class KONSOLEPRIVATE_EXPORT EditProfileDialog : public QDialog
 {
     Q_OBJECT
 
@@ -252,6 +252,7 @@ private:
     QTimer* _delayedPreviewTimer;
 
     ColorSchemeEditor* _colorDialog;
+    QDialogButtonBox *mButtonBox;
 };
 
 /**
