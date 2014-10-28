@@ -30,6 +30,7 @@
 #include <KCmdLineArgs>
 #include <KLocalizedString>
 #include <kdemacros.h>
+#include <Kdelibs4ConfigMigrator>
 
 
 using Konsole::Application;
@@ -52,6 +53,11 @@ void restoreSession(Application& app);
 // ***
 extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 {
+    Kdelibs4ConfigMigrator migrate(QLatin1String("konsole"));
+    migrate.setConfigFiles(QStringList() << QLatin1String("konsolerc") << QLatin1String("konsole.notifyrc"));
+    migrate.setUiFiles(QStringList() << QLatin1String("sessionui.rc") << QLatin1String("partui.rc") << QLatin1String("konsoleui.rc"));
+    migrate.migrate();
+
     K4AboutData about("konsole",
                      0,
                      kxi18nc("@title", "<application>Konsole</application>"),
