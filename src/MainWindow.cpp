@@ -295,6 +295,7 @@ void MainWindow::setupActions()
     _newTabMenuAction->setAutoRepeat(false);
     connect(_newTabMenuAction, &KActionMenu::triggered, this, &Konsole::MainWindow::newTab);
     collection->addAction("new-tab", _newTabMenuAction);
+    collection->setShortcutsConfigurable(_newTabMenuAction, true);
 
     menuAction = collection->addAction("clone-tab");
     menuAction->setIcon(QIcon::fromTheme(QStringLiteral("tab-duplicate")));
@@ -615,13 +616,13 @@ void MainWindow::readGlobalProperties(KConfig* config)
 
 void MainWindow::syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source)
 {
-    foreach(QAction * qAction, source->actions()) {
-        if (KAction* kAction = qobject_cast<KAction*>(qAction)) {
-            if (KAction* destKAction = qobject_cast<KAction*>(dest->action(kAction->objectName())))
-                destKAction->setShortcut(kAction->shortcut(KAction::ActiveShortcut), KAction::ActiveShortcut);
+    for (QAction *qAction : source->actions()) {
+        if (QAction *destQAction = dest->action(qAction->objectName())) {
+            destQAction->setShortcut(qAction->shortcut());
         }
     }
 }
+
 void MainWindow::showShortcutsDialog()
 {
     KShortcutsDialog dialog(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsDisallowed, this);
