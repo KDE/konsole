@@ -35,7 +35,7 @@
 #include <QCompleter>
 #include <QFileSystemModel>
 #include <QtCore/QUrl>
-
+#include <QDebug>
 // KDE
 #include <kdeversion.h>
 #include <KCodecAction>
@@ -563,6 +563,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     QStringList translatorNames = keyManager->allTranslators();
     foreach(const QString& translatorName, translatorNames) {
         const KeyboardTranslator* translator = keyManager->findTranslator(translatorName);
+        if (!translator) continue;
 
         QStandardItem* item = new QStandardItem(translator->description());
         item->setEditable(false);
