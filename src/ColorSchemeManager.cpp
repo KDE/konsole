@@ -309,7 +309,7 @@ void ColorSchemeManager::addColorScheme(ColorScheme* scheme)
 
     // save changes to disk
 
-    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("konsole/");
+    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole/");
     QDir().mkpath(dir);
     const QString path = dir + scheme->name() + QStringLiteral(".colorscheme");
     KConfig config(path , KConfig::NoGlobals);

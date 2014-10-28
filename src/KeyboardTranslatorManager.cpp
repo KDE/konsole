@@ -126,7 +126,7 @@ const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QStrin
 
 bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator* translator)
 {
-    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("konsole/");
+    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole/");
     QDir().mkpath(dir);
     const QString path = dir + translator->name() + QStringLiteral(".keytab");
 
