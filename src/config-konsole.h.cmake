@@ -10,3 +10,4 @@
 #cmakedefine01 HAVE_X11
 
 #define KONSOLE_VERSION "${Konsole_VERSION}"
+

@@ -23,6 +23,7 @@
 
 // Qt
 #include <QApplication>
+#include <QAction>
 #include <QMenu>
 #include <QtGui/QKeyEvent>
 #include <QPrinter>
@@ -31,13 +32,12 @@
 #include <QStandardPaths>
 #include <QtCore/QUrl>
 #include <QtGui/QIcon>
+#include <QDebug>
 
 // KDE
-#include <QAction>
 #include <KActionMenu>
 #include <KActionCollection>
 #include <KLocalizedString>
-#include <QMenu>
 #include <KMessageBox>
 #include <KRun>
 #include <KShell>
@@ -47,12 +47,10 @@
 #include <KXmlGuiWindow>
 #include <KXMLGUIFactory>
 #include <KXMLGUIBuilder>
-#include <QDebug>
 #include <KUriFilter>
 #include <KStringHandler>
 #include <KSharedConfig>
 #include <KConfigGroup>
-
 #include <KCodecAction>
 
 // Konsole
