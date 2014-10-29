@@ -41,7 +41,7 @@ RenameTabDialog::RenameTabDialog(QWidget* parent)
     setLayout(mainLayout);
     mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setDefault(true);
+    okButton->setAutoDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &RenameTabDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &RenameTabDialog::reject);
