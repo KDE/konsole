@@ -272,17 +272,15 @@ QString Session::currentWorkingDirectory()
 
     return _currentWorkingDir;
 }
-ProcessInfo* Session::updateWorkingDirectory()
+void Session::updateWorkingDirectory()
 {
-    ProcessInfo* process = getProcessInfo();
+    updateSessionProcessInfo();
 
-    const QString currentDir = process->validCurrentDir();
+    const QString currentDir = _sessionProcessInfo->validCurrentDir();
     if (currentDir != _currentWorkingDir) {
         _currentWorkingDir = currentDir;
         emit currentDirectoryChanged(_currentWorkingDir);
     }
-
-    return process;
 }
 
 QList<TerminalDisplay*> Session::views() const
@@ -962,7 +960,8 @@ bool Session::isRemote()
 QString Session::getDynamicTitle()
 {
     // update current directory from process
-    ProcessInfo* process = updateWorkingDirectory();
+    updateWorkingDirectory();
+    ProcessInfo* process = getProcessInfo();
 
     // format tab titles using process info
     bool ok = false;
