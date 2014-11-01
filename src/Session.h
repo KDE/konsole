@@ -702,7 +702,7 @@ private:
     ProcessInfo* getProcessInfo();
     void updateSessionProcessInfo();
     bool updateForegroundProcessInfo();
-    ProcessInfo* updateWorkingDirectory();
+    void updateWorkingDirectory();
 
     QUuid            _uniqueIdentifier; // SHELL_SESSION_ID
 
