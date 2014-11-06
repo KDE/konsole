@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<component type="desktop">
+  <id>org.kde.konsole.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Konsole</name>
+  <summary>Terminal</summary>
+  <description>
+    <p>Konsole is a terminal emulator.</p>
+    <p>Features:</p>
+    <ul>
+      <li>Tabs</li>
+      <li>Multiple profiles</li>
+      <li>Silence and Activity monitoring</li>
+      <li>Bookmark support</li>
+      <li>Searching</li>
+      <li>Saving output</li>
+    </ul>
+  </description>
+  <url type="homepage">http://konsole.kde.org/</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=konsole</url>
+  <url type="help">http://docs.kde.org/stable/en/applications/konsole/index.html</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://kde.org/images/screenshots/konsole.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>konsole</binary>
+  </provides>
+</component>
