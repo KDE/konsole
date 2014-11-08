@@ -1,20 +1,40 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <component type="desktop">
   <id>org.kde.konsole.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Konsole</name>
+  <name xml:lang="uk">Konsole</name>
+  <name xml:lang="x-test">xxKonsolexx</name>
   <summary>Terminal</summary>
+  <summary xml:lang="uk">Термінал</summary>
+  <summary xml:lang="x-test">xxTerminalxx</summary>
   <description>
     <p>Konsole is a terminal emulator.</p>
+    <p xml:lang="uk">Konsole — це емулятор термінала.</p>
+    <p xml:lang="x-test">xxKonsole is a terminal emulator.xx</p>
     <p>Features:</p>
+    <p xml:lang="uk">Можливості:</p>
+    <p xml:lang="x-test">xxFeatures:xx</p>
     <ul>
       <li>Tabs</li>
+      <li xml:lang="uk">Вкладки.</li>
+      <li xml:lang="x-test">xxTabsxx</li>
       <li>Multiple profiles</li>
+      <li xml:lang="uk">Підтримка роботи з декількома профілями.</li>
+      <li xml:lang="x-test">xxMultiple profilesxx</li>
       <li>Silence and Activity monitoring</li>
+      <li xml:lang="uk">Спостереження за бездіяльністю та діями.</li>
+      <li xml:lang="x-test">xxSilence and Activity monitoringxx</li>
       <li>Bookmark support</li>
+      <li xml:lang="uk">Підтримка закладок.</li>
+      <li xml:lang="x-test">xxBookmark supportxx</li>
       <li>Searching</li>
+      <li xml:lang="uk">Пошук.</li>
+      <li xml:lang="x-test">xxSearchingxx</li>
       <li>Saving output</li>
+      <li xml:lang="uk">Збереження виведених даних.</li>
+      <li xml:lang="x-test">xxSaving outputxx</li>
     </ul>
   </description>
   <url type="homepage">http://konsole.kde.org/</url>
