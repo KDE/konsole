@@ -5,82 +5,102 @@
   <project_license>GPL-2.0+</project_license>
   <name>Konsole</name>
   <name xml:lang="de">Konsole</name>
+  <name xml:lang="en-GB">Konsole</name>
   <name xml:lang="es">Konsole</name>
   <name xml:lang="nl">Konsole</name>
   <name xml:lang="pl">Konsola</name>
+  <name xml:lang="pt">Konsole</name>
   <name xml:lang="sk">Konsole</name>
   <name xml:lang="uk">Konsole</name>
   <name xml:lang="x-test">xxKonsolexx</name>
   <summary>Terminal</summary>
   <summary xml:lang="de">Terminal</summary>
+  <summary xml:lang="en-GB">Terminal</summary>
   <summary xml:lang="es">Terminal</summary>
   <summary xml:lang="nl">Terminal</summary>
   <summary xml:lang="pl">Terminal</summary>
+  <summary xml:lang="pt">Terminal</summary>
   <summary xml:lang="sk">Terminál</summary>
   <summary xml:lang="uk">Термінал</summary>
   <summary xml:lang="x-test">xxTerminalxx</summary>
   <description>
     <p>Konsole is a terminal emulator.</p>
     <p xml:lang="de">Konsole ist in Terminal-Emulator</p>
+    <p xml:lang="en-GB">Konsole is a terminal emulator.</p>
     <p xml:lang="es">Konsole es un emulador de terminal.</p>
     <p xml:lang="nl">Konsole is een terminalemulator</p>
     <p xml:lang="pl">Konsole jest emulatorem terminala.</p>
+    <p xml:lang="pt">O Konsole é um emulador de terminal.</p>
     <p xml:lang="sk">Konsole je emulátor terminálu.</p>
     <p xml:lang="uk">Konsole — це емулятор термінала.</p>
     <p xml:lang="x-test">xxKonsole is a terminal emulator.xx</p>
     <p>Features:</p>
     <p xml:lang="de">Funktionen:</p>
+    <p xml:lang="en-GB">Features:</p>
     <p xml:lang="es">Funcionalidades:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
     <p xml:lang="pl">Możliwości:</p>
+    <p xml:lang="pt">Funcionalidades:</p>
     <p xml:lang="sk">Funkcie:</p>
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="x-test">xxFeatures:xx</p>
     <ul>
       <li>Tabs</li>
       <li xml:lang="de">Unterfenster</li>
+      <li xml:lang="en-GB">Tabs</li>
       <li xml:lang="es">Pestañas</li>
       <li xml:lang="nl">Tabbladen</li>
       <li xml:lang="pl">Karty</li>
+      <li xml:lang="pt">Páginas</li>
       <li xml:lang="sk">Karty</li>
       <li xml:lang="uk">Вкладки.</li>
       <li xml:lang="x-test">xxTabsxx</li>
       <li>Multiple profiles</li>
       <li xml:lang="de">Mehrere Profile</li>
+      <li xml:lang="en-GB">Multiple profiles</li>
       <li xml:lang="es">Perfiles múltiples</li>
       <li xml:lang="nl">Meerdere profielen</li>
       <li xml:lang="pl">Wiele profili</li>
+      <li xml:lang="pt">Múltiplos perfis</li>
       <li xml:lang="sk">Viacnásobné profily.</li>
       <li xml:lang="uk">Підтримка роботи з декількома профілями.</li>
       <li xml:lang="x-test">xxMultiple profilesxx</li>
       <li>Silence and Activity monitoring</li>
       <li xml:lang="de">Überwachung auf Aktivität und Inaktivität</li>
+      <li xml:lang="en-GB">Silence and Activity monitoring</li>
       <li xml:lang="nl">Monitoring van stilte en activiteit</li>
       <li xml:lang="pl">Monitorowanie ciszy i aktywności</li>
+      <li xml:lang="pt">Monitorização do silêncio e da actividade</li>
       <li xml:lang="sk">Monitorovanie ticha a aktivity</li>
       <li xml:lang="uk">Спостереження за бездіяльністю та діями.</li>
       <li xml:lang="x-test">xxSilence and Activity monitoringxx</li>
       <li>Bookmark support</li>
       <li xml:lang="de">Lesezeichen-Unterstützung</li>
+      <li xml:lang="en-GB">Bookmark support</li>
       <li xml:lang="es">Uso de marcadores</li>
       <li xml:lang="nl">Ondersteuning van bladwijzers</li>
       <li xml:lang="pl">Obsługa zakładek</li>
+      <li xml:lang="pt">Suporte para favoritos</li>
       <li xml:lang="sk">Podpora záložiek</li>
       <li xml:lang="uk">Підтримка закладок.</li>
       <li xml:lang="x-test">xxBookmark supportxx</li>
       <li>Searching</li>
       <li xml:lang="de">Suchen</li>
+      <li xml:lang="en-GB">Searching</li>
       <li xml:lang="es">Búsqueda</li>
       <li xml:lang="nl">Zoeken</li>
       <li xml:lang="pl">Wyszukiwanie</li>
+      <li xml:lang="pt">Procurar</li>
       <li xml:lang="sk">Hľadanie</li>
       <li xml:lang="uk">Пошук.</li>
       <li xml:lang="x-test">xxSearchingxx</li>
       <li>Saving output</li>
       <li xml:lang="de">Speicherung der Ausgabe</li>
+      <li xml:lang="en-GB">Saving output</li>
       <li xml:lang="es">Guardar la salida</li>
       <li xml:lang="nl">Opslaan van uitvoer</li>
       <li xml:lang="pl">Zapisywanie wyniku</li>
+      <li xml:lang="pt">Gravação do resultado</li>
       <li xml:lang="sk">Ukladanie výstupu</li>
       <li xml:lang="uk">Збереження виведених даних.</li>
       <li xml:lang="x-test">xxSaving outputxx</li>
