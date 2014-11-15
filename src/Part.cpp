@@ -29,7 +29,6 @@
 // KDE
 #include <QAction>
 #include <KActionCollection>
-#include <KLocalizedString>
 #include <KPluginFactory>
 #include <KLocalizedString>
 #include <kde_file.h>
