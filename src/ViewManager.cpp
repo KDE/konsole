@@ -268,8 +268,8 @@ void ViewManager::updateDetachViewState()
         return;
 
     const bool splitView = _viewSplitter->containers().count() >= 2;
-    const bool shouldEnable = splitView ||
-                              _viewSplitter->activeContainer()->views().count() >= 2;
+    auto activeContainer = _viewSplitter->activeContainer();
+    const bool shouldEnable = splitView || (activeContainer && activeContainer->views().count() >= 2);
 
     QAction* detachAction = _actionCollection->action("detach-view");
 
