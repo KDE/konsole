@@ -198,7 +198,7 @@ install(TARGETS kdeinit_konsole konsole
 set(konsolepart_PART_SRCS Part.cpp)
 
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
-generate_export_header(konsole BASE_NAME konsole)
+generate_export_header(konsolepart BASE_NAME konsole)
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 target_link_libraries(konsolepart KF5::Parts KF5::XmlGui konsoleprivate)
 install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR})
