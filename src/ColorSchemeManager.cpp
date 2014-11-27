@@ -227,7 +227,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
         _colorSchemes.insert(scheme->name(), scheme);
     } else {
         //qDebug() << "color scheme with name" << scheme->name() << "has already been" <<
-                 "found, ignoring.";
+        //         "found, ignoring.";
 
         delete scheme;
     }
