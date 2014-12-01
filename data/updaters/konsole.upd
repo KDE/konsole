@@ -1,9 +1,0 @@
-Id=2.9.0-global-options
-File=konsolerc
-Script=konsole-2.9.0-global-options.sh
-
-Id=2.9.0-colorscheme-bold-key
-Script=konsole-2.9.0-colorscheme-bold-key.sh
-
-Id=2.10.0-remove-menuindex-from-profiles
-Script= konsole-2.10.0-remove-menuindex-from-profiles.sh
