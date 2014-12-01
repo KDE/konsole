@@ -11,6 +11,7 @@
   <name xml:lang="en-GB">Konsole</name>
   <name xml:lang="es">Konsole</name>
   <name xml:lang="fi">Konsole</name>
+  <name xml:lang="nb">Konsole</name>
   <name xml:lang="nl">Konsole</name>
   <name xml:lang="pl">Konsola</name>
   <name xml:lang="pt">Konsole</name>
@@ -29,6 +30,7 @@
   <summary xml:lang="en-GB">Terminal</summary>
   <summary xml:lang="es">Terminal</summary>
   <summary xml:lang="fi">Pääteikkuna</summary>
+  <summary xml:lang="nb">Terminal</summary>
   <summary xml:lang="nl">Terminal</summary>
   <summary xml:lang="pl">Terminal</summary>
   <summary xml:lang="pt">Terminal</summary>
@@ -48,6 +50,7 @@
     <p xml:lang="en-GB">Konsole is a terminal emulator.</p>
     <p xml:lang="es">Konsole es un emulador de terminal.</p>
     <p xml:lang="fi">Konsole on pääte-emulaattori.</p>
+    <p xml:lang="nb">Konsole er en terminalemulator.</p>
     <p xml:lang="nl">Konsole is een terminalemulator</p>
     <p xml:lang="pl">Konsole jest emulatorem terminala.</p>
     <p xml:lang="pt">O Konsole é um emulador de terminal.</p>
@@ -66,6 +69,7 @@
     <p xml:lang="en-GB">Features:</p>
     <p xml:lang="es">Funcionalidades:</p>
     <p xml:lang="fi">Ominaisuuksia:</p>
+    <p xml:lang="nb">Funksjoner:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
     <p xml:lang="pl">Możliwości:</p>
     <p xml:lang="pt">Funcionalidades:</p>
@@ -85,6 +89,7 @@
       <li xml:lang="en-GB">Tabs</li>
       <li xml:lang="es">Pestañas</li>
       <li xml:lang="fi">Välilehdet</li>
+      <li xml:lang="nb">Faner</li>
       <li xml:lang="nl">Tabbladen</li>
       <li xml:lang="pl">Karty</li>
       <li xml:lang="pt">Páginas</li>
@@ -103,6 +108,7 @@
       <li xml:lang="en-GB">Multiple profiles</li>
       <li xml:lang="es">Perfiles múltiples</li>
       <li xml:lang="fi">Useat profiilit</li>
+      <li xml:lang="nb">Flere profiler</li>
       <li xml:lang="nl">Meerdere profielen</li>
       <li xml:lang="pl">Wiele profili</li>
       <li xml:lang="pt">Múltiplos perfis</li>
@@ -120,6 +126,7 @@
       <li xml:lang="de">Überwachung auf Aktivität und Inaktivität</li>
       <li xml:lang="en-GB">Silence and Activity monitoring</li>
       <li xml:lang="fi">Hiljaisuuden ja aktiivisuuden tarkkailu</li>
+      <li xml:lang="nb">Overvåking av stillhet og aktivitet</li>
       <li xml:lang="nl">Monitoring van stilte en activiteit</li>
       <li xml:lang="pl">Monitorowanie ciszy i aktywności</li>
       <li xml:lang="pt">Monitorização do silêncio e da actividade</li>
@@ -138,6 +145,7 @@
       <li xml:lang="en-GB">Bookmark support</li>
       <li xml:lang="es">Uso de marcadores</li>
       <li xml:lang="fi">Kirjanmerkkituki</li>
+      <li xml:lang="nb">Støtte for bokmerker</li>
       <li xml:lang="nl">Ondersteuning van bladwijzers</li>
       <li xml:lang="pl">Obsługa zakładek</li>
       <li xml:lang="pt">Suporte para favoritos</li>
@@ -156,6 +164,7 @@
       <li xml:lang="en-GB">Searching</li>
       <li xml:lang="es">Búsqueda</li>
       <li xml:lang="fi">Haku</li>
+      <li xml:lang="nb">Søking</li>
       <li xml:lang="nl">Zoeken</li>
       <li xml:lang="pl">Wyszukiwanie</li>
       <li xml:lang="pt">Procurar</li>
@@ -174,6 +183,7 @@
       <li xml:lang="en-GB">Saving output</li>
       <li xml:lang="es">Guardar la salida</li>
       <li xml:lang="fi">Tulosteen tallennus</li>
+      <li xml:lang="nb">Lagrer utdata</li>
       <li xml:lang="nl">Opslaan van uitvoer</li>
       <li xml:lang="pl">Zapisywanie wyniku</li>
       <li xml:lang="pt">Gravação do resultado</li>
