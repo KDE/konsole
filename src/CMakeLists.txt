@@ -140,6 +140,11 @@ set(konsole_LIBS
                  KF5::KIOWidgets
 )
 
+if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+    #kinfo_getfile() is in libutil
+    list(APPEND konsole_LIBS util)
+endif()
+
 if(HAVE_LIBKONQ)
   set(konsole_LIBS ${konsole_LIBS} KF5::Konq)
 endif()
