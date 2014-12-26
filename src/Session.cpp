@@ -991,12 +991,16 @@ QUrl Session::getUrl()
             if (_foregroundProcessInfo->name(&ok) == "ssh" && ok) {
                 SSHProcessInfo sshInfo(*_foregroundProcessInfo);
 
-                path = "ssh://" + sshInfo.userName() + '@' + sshInfo.host();
+                QUrl url;
+                url.setScheme("ssh");
+                url.setUserName(sshInfo.userName());
+                url.setHost(sshInfo.host());
 
-                QString port = sshInfo.port();
+                const QString port = sshInfo.port();
                 if (!port.isEmpty() && port != "22") {
-                    path.append(':' + port);
+                    url.setPort(port.toInt());
                 }
+                return url;
             } else {
                 path = _foregroundProcessInfo->currentDir(&ok);
                 if (!ok)
@@ -1009,7 +1013,7 @@ QUrl Session::getUrl()
         }
     }
 
-    return QUrl(path);
+    return QUrl::fromLocalFile(path);
 }
 
 void Session::setIconName(const QString& iconName)
