@@ -53,10 +53,9 @@
 #include <QDebug>
 #include <KLocalizedString>
 #include <KNotification>
+#include <KIO/DropJob>
+#include <KJobWidgets>
 #include <kio/netaccess.h>
-#if defined(HAVE_LIBKONQ)
-    #include <konq_operations.h>
-#endif
 
 #include <KFileItem>
 #include <KMessageBox>
@@ -3159,7 +3158,6 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             dropText += ' ';
         }
 
-#if defined(HAVE_LIBKONQ)
         // If our target is local we will open a popup - otherwise the fallback kicks
         // in and the URLs will simply be pasted as text.
         if (_sessionController && _sessionController->url().isLocalFile()) {
@@ -3191,11 +3189,11 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
             QUrl target = QUrl::fromLocalFile(_sessionController->currentDir());
 
-            KonqOperations::doDrop(KFileItem(), target, event, this, additionalActions);
-
+            KIO::DropJob* job = KIO::drop(event, target);
+            KJobWidgets::setWindow(job, this);
+            job->setApplicationActions(additionalActions);
             return;
         }
-#endif
 
     } else {
         dropText = event->mimeData()->text();

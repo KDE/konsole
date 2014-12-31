@@ -2,14 +2,6 @@
 
 add_definitions(-DTRANSLATION_DOMAIN=\"konsole\")
 
-set(LIBKONQ_MIN_VERSION "5.96.0")
-find_package(KF5Konq ${LIBKONQ_MIN_VERSION} CONFIG)
-set_package_properties(LibKonq PROPERTIES DESCRIPTION "Provides high-level file management functions"
-                       URL "https://projects.kde.org/projects/kde/applications/kde-baseapps" TYPE OPTIONAL
-                       PURPOSE "Required for drag-n-drop menus")
-
-set(HAVE_LIBKONQ ${KF5Konq_FOUND})
-
 ### Too many crashes/issues with detaching on MacOSX
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   set(ENABLE_DETACHING 0)
@@ -143,10 +135,6 @@ set(konsole_LIBS
 if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
     #kinfo_getfile() is in libutil
     list(APPEND konsole_LIBS util)
-endif()
-
-if(HAVE_LIBKONQ)
-  set(konsole_LIBS ${konsole_LIBS} KF5::Konq)
 endif()
 
 ### Konsole Application
