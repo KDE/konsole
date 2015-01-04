@@ -34,6 +34,7 @@
 #include <QtCore/QFileInfo>
 #include <QGridLayout>
 #include <QAction>
+#include <QFontDatabase>
 #include <QLabel>
 #include <QMimeData>
 #include <QtGui/QPainter>
@@ -2914,7 +2915,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _outputSuspendedLabel->setPalette(palette);
         _outputSuspendedLabel->setAutoFillBackground(true);
         _outputSuspendedLabel->setBackgroundRole(QPalette::Base);
-        _outputSuspendedLabel->setFont(KGlobalSettings::smallestReadableFont());
+        _outputSuspendedLabel->setFont(QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont));
         _outputSuspendedLabel->setContentsMargins(5, 5, 5, 5);
         _outputSuspendedLabel->setWordWrap(true);
 
