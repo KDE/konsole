@@ -1,8 +1,8 @@
 # Konsole project
 project(Konsole)
 set(Konsole_VERSION_MAJOR 3)
-set(Konsole_VERSION_MINOR 1)
-set(Konsole_VERSION_PATCH 0)
+set(Konsole_VERSION_MINOR 0)
+set(Konsole_VERSION_PATCH 1)
 set(Konsole_VERSION "${Konsole_VERSION_MAJOR}.${Konsole_VERSION_MINOR}.${Konsole_VERSION_PATCH}")
 
 # minimal requirements
