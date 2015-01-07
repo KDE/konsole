@@ -43,7 +43,6 @@
 #include <KNotifyConfigWidget>
 #include <KConfigDialog>
 #include <KApplication>
-#include <KGlobal>
 #include <KShortcut>
 #include <KIconLoader>
 

@@ -53,7 +53,6 @@
 #include <QDebug>
 #include <KLocalizedString>
 #include <KNotification>
-#include <KGlobalSettings>
 #include <kio/netaccess.h>
 #if defined(HAVE_LIBKONQ)
     #include <konq_operations.h>
