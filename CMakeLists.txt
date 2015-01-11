@@ -55,7 +55,7 @@ add_definitions(
 
 #TODO: this is temporarily disabled until it has been ported to Qt5
 add_definitions(-DQT_NO_ACCESSIBILITY)
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 
 add_subdirectory( src )
 add_subdirectory( data )

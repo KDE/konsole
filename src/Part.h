@@ -22,6 +22,7 @@
 
 // KDE
 #include <KParts/Part>
+#include <KParts/ReadOnlyPart>
 #include <kde_terminal_interface.h>
 
 // Qt

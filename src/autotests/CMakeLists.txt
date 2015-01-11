@@ -76,7 +76,7 @@ target_link_libraries(TerminalTest ${KONSOLE_TEST_LIBS})
 ##ecm_mark_as_test(TerminalInterface)
 ##add_test(TerminalInterfaceTest TerminalInterfaceTest)
 ##target_link_libraries(TerminalInterfaceTest
-##                      ${KDE4_KPARTS_LIBS}
+##                      KF5::Parts
 ##                      ${KDE4_KPTY_LIBS}
 ##                      ${KONSOLE_TEST_LIBS})
 

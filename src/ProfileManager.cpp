@@ -29,6 +29,7 @@
 #include <QtCore/QString>
 
 // KDE
+#include <KSharedConfig>
 #include <KConfig>
 #include <QDebug>
 #include <KConfigGroup>
