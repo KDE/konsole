@@ -69,5 +69,4 @@ void CharacterWidthTest::testWidth()
 
 QTEST_GUILESS_MAIN(CharacterWidthTest)
 
-#include "CharacterWidthTest.moc"
 

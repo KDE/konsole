@@ -101,5 +101,4 @@ void TerminalTest::testSize()
 
 QTEST_MAIN(TerminalTest )
 
-#include "TerminalTest.moc"
 

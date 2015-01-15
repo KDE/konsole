@@ -165,5 +165,4 @@ KParts::Part* TerminalInterfaceTest::createPart()
 
 QTEST_MAIN(TerminalInterfaceTest )
 
-#include "TerminalInterfaceTest.moc"
 

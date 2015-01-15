@@ -97,5 +97,4 @@ void KeyboardTranslatorTest::testEntryTextWildcards()
 
 QTEST_GUILESS_MAIN(KeyboardTranslatorTest)
 
-#include "KeyboardTranslatorTest.moc"
 

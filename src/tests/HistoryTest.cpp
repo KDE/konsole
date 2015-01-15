@@ -139,5 +139,4 @@ void HistoryTest::testHistoryScroll()
 
 QTEST_MAIN(HistoryTest )
 
-#include "HistoryTest.moc"
 

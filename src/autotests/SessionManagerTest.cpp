@@ -38,5 +38,4 @@ void SessionManagerTest::cleanup()
 
 QTEST_MAIN_CORE(SessionManagerTest)
 
-#include "SessionManagerTest.moc"
 

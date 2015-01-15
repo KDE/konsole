@@ -58,5 +58,4 @@ void SessionTest::testEmulation()
 
 QTEST_MAIN(SessionTest )
 
-#include "SessionTest.moc"
 
