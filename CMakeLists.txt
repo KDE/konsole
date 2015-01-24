@@ -26,7 +26,7 @@ include(FeatureSummary)
 ecm_setup_version(${Konsole_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
                   SOVERSION ${Konsole_VERSION_MAJOR}
 )
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Widgets Script Test)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Widgets Script)
 
 find_package(KF5 REQUIRED
     Bookmarks Completion Config ConfigWidgets

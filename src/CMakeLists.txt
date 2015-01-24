@@ -22,8 +22,11 @@ configure_file(config-konsole.h.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h)
 
 ### Tests
-add_subdirectory(autotests)
-add_subdirectory(tests)
+if(BUILD_TESTING)
+  find_package(Qt5Test ${QT_MIN_VERSION} CONFIG REQUIRED)
+  add_subdirectory(autotests)
+  add_subdirectory(tests)
+endif()
 
 ### Font Embedder and LineFont.h
 option(KONSOLE_BUILD_FONTEMBEDDER "Konsole: build fontembedder executable" OFF)
