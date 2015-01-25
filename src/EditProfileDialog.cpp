@@ -37,7 +37,6 @@
 #include <QtCore/QUrl>
 #include <QDebug>
 // KDE
-#include <kdeversion.h>
 #include <KCodecAction>
 
 #include <KFontDialog>
