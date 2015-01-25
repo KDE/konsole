@@ -27,11 +27,12 @@
 #include <QFileSystemModel>
 #include <QtCore/QUrl>
 #include <QtGui/QIcon>
+#include <QFileDialog>
+#include <QImageReader>
 
 // KDE
 #include <QColorDialog>
 #include <KWindowSystem>
-#include <KFileDialog>
 #include <KUrlCompletion>
 #include <KLocalizedString>
 #include <KConfigGroup>
@@ -173,12 +174,21 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
 }
 void ColorSchemeEditor::selectWallpaper()
 {
-    const QUrl url = KFileDialog::getImageOpenUrl(QUrl::fromUserInput(_ui->wallpaperPath->text()),
-                     this,
-                     i18nc("@action:button", "Select wallpaper image file"));
+    // Get supported image formats and convert to QString for getOpenFileName()
+    const QList<QByteArray> mimeTypes = QImageReader::supportedImageFormats();
+    QString fileFormats = "(";
+    Q_FOREACH (const QByteArray &mime, mimeTypes) {
+        fileFormats += "*." + QString::fromLatin1(mime) + " ";
+    }
+    fileFormats += ")";
 
-    if (!url.isEmpty())
-        _ui->wallpaperPath->setText(url.path());
+    const QString fileName = QFileDialog::getOpenFileName(this,
+                             i18nc("@action:button", "Select wallpaper image file"),
+                             _ui->wallpaperPath->text(),
+                             i18nc("@action:button", "Supported Images") + fileFormats);
+
+    if (!fileName.isEmpty())
+        _ui->wallpaperPath->setText(fileName);
 }
 void ColorSchemeEditor::wallpaperPathChanged(const QString& path)
 {
