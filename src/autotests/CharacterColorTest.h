@@ -20,6 +20,8 @@
 #ifndef CHARACTERCOLORTEST_H
 #define CHARACTERCOLORTEST_H
 
+#include <QObject>
+
 #include "../CharacterColor.h"
 
 namespace Konsole

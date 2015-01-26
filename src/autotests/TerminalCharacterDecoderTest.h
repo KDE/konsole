@@ -20,6 +20,8 @@
 #ifndef TERMINALCHARACTERDECODERTEST_H
 #define TERMINALCHARACTERDECODERTEST_H
 
+#include <QObject>
+
 #include "../TerminalCharacterDecoder.h"
 
 namespace Konsole

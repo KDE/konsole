@@ -21,6 +21,8 @@
 #ifndef SHELLCOMMANDTEST_H
 #define SHELLCOMMANDTEST_H
 
+#include <QObject>
+
 #include "../ShellCommand.h"
 
 namespace Konsole
