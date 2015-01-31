@@ -155,7 +155,7 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
     }
 
     QColor color = item->background().color();
-    color = QColorDialog::getColor();
+    color = QColorDialog::getColor(color);
     if ( color.isValid() ) {
         item->setBackground(color);
 
