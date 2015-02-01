@@ -37,6 +37,7 @@
 #include <QtCore/QUrl>
 #include <QFontDialog>
 #include <QFileDialog>
+#include <QInputDialog>
 #include <QDialog>
 #include <QDebug>
 // KDE
@@ -330,25 +331,20 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
 }
 void EditProfileDialog::showEnvironmentEditor()
 {
+    bool ok;
     const Profile::Ptr profile = lookupProfile();
-
-    QWeakPointer<KDialog> dialog = new KDialog(this);
-    KTextEdit* edit = new KTextEdit(dialog.data());
-
     QStringList currentEnvironment = profile->environment();
 
-    edit->setPlainText(currentEnvironment.join("\n"));
-    edit->setToolTip(i18nc("@info:tooltip", "One environment variable per line"));
+    QString text = QInputDialog::getMultiLineText(this, 
+            i18n("Edit Environment"),
+            i18n("One environment variable per line"),
+            currentEnvironment.join("\n"),
+            &ok);
 
-    dialog.data()->setPlainCaption(i18n("Edit Environment"));
-    dialog.data()->setMainWidget(edit);
-
-    if (dialog.data()->exec() == QDialog::Accepted) {
-        QStringList newEnvironment = edit->toPlainText().split('\n');
+    if (ok && !text.isEmpty()) {
+        QStringList newEnvironment = text.split('\n');
         updateTempProfileProperty(Profile::Environment, newEnvironment);
     }
-
-    delete dialog.data();
 }
 void EditProfileDialog::setupTabsPage(const Profile::Ptr profile)
 {
