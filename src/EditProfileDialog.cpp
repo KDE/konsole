@@ -35,11 +35,12 @@
 #include <QCompleter>
 #include <QFileSystemModel>
 #include <QtCore/QUrl>
+#include <QFontDialog>
 #include <QDebug>
 // KDE
 #include <KCodecAction>
 
-#include <KFontDialog>
+#include <KDialog>
 #include <KIconDialog>
 #include <KFileDialog>
 #include <KUrlCompletion>
@@ -1210,30 +1211,15 @@ void EditProfileDialog::fontSelected(const QFont& aFont)
 }
 void EditProfileDialog::showFontDialog()
 {
-    QString sampleText = QString("ell 'lL', one '1', little eye 'i', big eye");
-    sampleText += QString("'I', lL1iI, Zero '0', little oh 'o', big oh 'O', 0oO");
-    sampleText += QString("`~!@#$%^&*()_+-=[]\\{}|:\";'<>?,./");
-    sampleText += QString("0123456789");
-    sampleText += QString("\nThe Quick Brown Fox Jumps Over The Lazy Dog\n");
-    sampleText += i18n("--- Type anything in this box ---");
     QFont currentFont = _ui->fontPreviewLabel->font();
 
-    QWeakPointer<KFontDialog> dialog = new KFontDialog(this, KFontChooser::FixedFontsOnly);
-    dialog.data()->setWindowTitle(i18n("Select Fixed Width Font"));
-    dialog.data()->setFont(currentFont, true);
+    bool result;
+    currentFont = QFontDialog::getFont(&result, currentFont, this,
+                                       i18n("Select Fixed Width Font"),
+                                       QFontDialog::MonospacedFonts);
+    if (!result) return;
 
-    // TODO (hindenburg): When https://git.reviewboard.kde.org/r/103357 is
-    // committed, change the below.
-    // Use text more fitting to show font differences in a terminal
-    QList<KFontChooser*> chooserList = dialog.data()->findChildren<KFontChooser*>();
-    if (!chooserList.isEmpty())
-        chooserList.at(0)->setSampleText(sampleText);
-
-    connect(dialog.data(), &KFontDialog::fontSelected, this, &Konsole::EditProfileDialog::fontSelected);
-
-    if (dialog.data()->exec() == QDialog::Rejected)
-        fontSelected(currentFont);
-    delete dialog.data();
+    fontSelected(currentFont);
 }
 void EditProfileDialog::setFontSize(double pointSize)
 {
