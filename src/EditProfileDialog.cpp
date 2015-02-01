@@ -36,13 +36,14 @@
 #include <QFileSystemModel>
 #include <QtCore/QUrl>
 #include <QFontDialog>
+#include <QFileDialog>
+#include <QDialog>
 #include <QDebug>
 // KDE
 #include <KCodecAction>
 
 #include <KDialog>
 #include <KIconDialog>
-#include <KFileDialog>
 #include <KUrlCompletion>
 #include <KWindowSystem>
 #include <KTextEdit>
@@ -426,9 +427,9 @@ void EditProfileDialog::commandChanged(const QString& command)
 }
 void EditProfileDialog::selectInitialDir()
 {
-    const QUrl url = KFileDialog::getExistingDirectoryUrl(QUrl::fromUserInput(_ui->initialDirEdit->text()),
-                     this,
-                     i18n("Select Initial Directory"));
+    const QUrl url = QFileDialog::getExistingDirectoryUrl(this,
+                     i18n("Select Initial Directory"),
+                     QUrl::fromUserInput(_ui->initialDirEdit->text()));
 
     if (!url.isEmpty())
         _ui->initialDirEdit->setText(url.path());
