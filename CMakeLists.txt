@@ -8,6 +8,7 @@ set(Konsole_VERSION "${Konsole_VERSION_MAJOR}.${Konsole_VERSION_MINOR}.${Konsole
 # minimal requirements
 cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
 set (QT_MIN_VERSION "5.2.0")
+set(KF5_MIN_VERSION "5.6.0")
 
 find_package(ECM 1.2.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
@@ -28,7 +29,7 @@ ecm_setup_version(${Konsole_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
 )
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Widgets Script)
 
-find_package(KF5 REQUIRED
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     Bookmarks Completion Config ConfigWidgets
     CoreAddons DocTools GuiAddons I18n IconThemes
     Init KDELibs4Support KIO Notifications NotifyConfig
