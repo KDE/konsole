@@ -27,6 +27,7 @@
 
 // Qt
 #include <QtCore/QStringList>
+#include <qplatformdefs.h>
 
 // KDE
 #include <QDebug>
@@ -260,8 +261,8 @@ int Pty::start(const QString& programName,
 
 void Pty::setWriteable(bool writeable)
 {
-    KDE_struct_stat sbuf;
-    if (KDE::stat(pty()->ttyName(), &sbuf) == 0) {
+    QT_STATBUF sbuf;
+    if (QT_STAT(pty()->ttyName(), &sbuf) == 0) {
         if (writeable) {
             if (KDE::chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP) < 0) {
                 qWarning() << "Could not set writeable on "<<pty()->ttyName();
@@ -271,6 +272,8 @@ void Pty::setWriteable(bool writeable)
                 qWarning() << "Could not unset writeable on "<<pty()->ttyName();
             }
         }
+    } else {
+        qWarning() << "Could not stat "<<pty()->ttyName();
     }
 }
 
