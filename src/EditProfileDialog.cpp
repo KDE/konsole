@@ -43,7 +43,6 @@
 // KDE
 #include <KCodecAction>
 
-#include <KDialog>
 #include <KIconDialog>
 #include <KUrlCompletion>
 #include <KWindowSystem>
@@ -880,15 +879,18 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 
     Q_ASSERT(translator);
 
-    QWeakPointer<KDialog> dialog = new KDialog(this);
+    QDialog dialog(this);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(&dialog);
+    buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    connect(buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
 
     if (isNewTranslator)
-        dialog.data()->setWindowTitle(i18n("New Key Binding List"));
+        dialog.setWindowTitle(i18n("New Key Binding List"));
     else
-        dialog.data()->setWindowTitle(i18n("Edit Key Binding List"));
+        dialog.setWindowTitle(i18n("Edit Key Binding List"));
 
     KeyBindingEditor* editor = new KeyBindingEditor;
-    dialog.data()->setMainWidget(editor);
 
     if (translator)
         editor->setup(translator);
@@ -896,7 +898,12 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     if (isNewTranslator)
         editor->setDescription(i18n("New Key Binding List"));
 
-    if (dialog.data()->exec() == QDialog::Accepted) {
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(editor);
+    layout->addWidget(buttonBox);
+    dialog.setLayout(layout);
+
+    if (dialog.exec() == QDialog::Accepted) {
         KeyboardTranslator* newTranslator = new KeyboardTranslator(*editor->translator());
 
         if (isNewTranslator)
@@ -913,7 +920,6 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
             updateTempProfileProperty(Profile::KeyBindings, newTranslator->name());
         }
     }
-    delete dialog.data();
 }
 void EditProfileDialog::newKeyBinding()
 {
