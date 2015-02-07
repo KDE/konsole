@@ -30,10 +30,10 @@
 #include <errno.h>
 
 // KDE
-#include <kde_file.h>
 #include <QDebug>
 
 #include <QDir>
+#include <qplatformdefs.h>
 
 // Reasonable line size
 static const int LINE_SIZE = 1024;
@@ -116,7 +116,7 @@ void HistoryFile::add(const unsigned char* buffer, int count)
 
     int rc = 0;
 
-    rc = KDE_lseek(_fd, _length, SEEK_SET);
+    rc = QT_LSEEK(_fd, _length, SEEK_SET);
     if (rc < 0) {
         perror("HistoryFile::add.seek");
         return;
@@ -147,7 +147,7 @@ void HistoryFile::get(unsigned char* buffer, int size, int loc)
 
         if (loc < 0 || size < 0 || loc + size > _length)
             fprintf(stderr, "getHist(...,%d,%d): invalid args.\n", size, loc);
-        rc = KDE_lseek(_fd, loc, SEEK_SET);
+        rc = QT_LSEEK(_fd, loc, SEEK_SET);
         if (rc < 0) {
             perror("HistoryFile::get.seek");
             return;
