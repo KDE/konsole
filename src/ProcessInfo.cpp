@@ -445,7 +445,7 @@ private:
             QTextStream stream(&statusInfo);
             QString statusLine;
             do {
-                statusLine = stream.readLine(0);
+                statusLine = stream.readLine();
                 if (statusLine.startsWith(QLatin1String("Uid:")))
                     uidLine = statusLine;
             } while (!statusLine.isNull() && uidLine.isNull());
