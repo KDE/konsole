@@ -32,7 +32,6 @@
 // KDE
 #include <QDebug>
 #include <KPtyDevice>
-#include <kde_file.h>
 
 using Konsole::Pty;
 
@@ -264,11 +263,11 @@ void Pty::setWriteable(bool writeable)
     QT_STATBUF sbuf;
     if (QT_STAT(pty()->ttyName(), &sbuf) == 0) {
         if (writeable) {
-            if (KDE::chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP) < 0) {
+            if (::chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP) < 0) {
                 qWarning() << "Could not set writeable on "<<pty()->ttyName();
             }
         } else {
-            if (KDE::chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP | S_IWOTH)) < 0) {
+            if (::chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP | S_IWOTH)) < 0) {
                 qWarning() << "Could not unset writeable on "<<pty()->ttyName();
             }
         }
