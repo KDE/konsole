@@ -31,7 +31,6 @@
 #include <KActionCollection>
 #include <KPluginFactory>
 #include <KLocalizedString>
-#include <kde_file.h>
 #include <QDebug>
 
 // Konsole
@@ -330,14 +329,8 @@ bool Part::openUrl(const QUrl& aQUrl)
     ////qDebug() << "Set Window Caption to " << url.pathOrUrl();
     emit started(0);
 
-    if (aUrl.isLocalFile() /*&& b_openUrls*/) {
-        KDE_struct_stat buff;
-        if (KDE::stat(QFile::encodeName(aUrl.path()), &buff) == 0) {
-            QString text = (S_ISDIR(buff.st_mode) ? aUrl.path() : aUrl.adjusted(QUrl::StripTrailingSlash).path());
-            showShellInDir(text);
-        } else {
-            showShellInDir(QDir::homePath());
-        }
+    if (aUrl.isLocalFile()) {
+        showShellInDir(aUrl.path());
     } else {
         showShellInDir(QDir::homePath());
     }
