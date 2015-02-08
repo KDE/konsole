@@ -72,7 +72,6 @@
 #include "PrintOptions.h"
 
 // for SaveHistoryTask
-#include <KFileDialog>
 #include <KIO/Job>
 #include <KJob>
 #include "TerminalCharacterDecoder.h"
