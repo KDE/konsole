@@ -23,7 +23,7 @@
 #include "config-konsole.h"
 
 // OS specific
-#include <kde_file.h>
+#include <qplatformdefs.h>
 
 // KDE
 #include <k4aboutdata.h>
@@ -151,7 +151,7 @@ bool shouldUseNewProcess()
     // Konsole and any debug output or warnings from Konsole are written to
     // the current terminal
     bool hasControllingTTY = false;
-    const int fd = KDE_open("/dev/tty", O_RDONLY);
+    const int fd = QT_OPEN("/dev/tty", O_RDONLY);
     if (fd != -1) {
         hasControllingTTY = true;
         close(fd);
