@@ -1666,17 +1666,14 @@ void SaveHistoryTask::execute()
     //        three then providing a URL for each one will be tedious
 
     // TODO - show a warning ( preferably passive ) if saving the history output fails
-    //
-
-    KFileDialog* dialog = new KFileDialog(QUrl(QString(":konsole")) /* check this */,
-                                          QString(), QApplication::activeWindow());
-    dialog->setOperationMode(KFileDialog::Saving);
-    dialog->setConfirmOverwrite(true);
+    QFileDialog* dialog = new QFileDialog(QApplication::activeWindow(),
+            QString(),
+            QDir::homePath());
 
     QStringList mimeTypes;
     mimeTypes << "text/plain";
     mimeTypes << "text/html";
-    dialog->setMimeFilter(mimeTypes, "text/plain");
+    dialog->setMimeTypeFilters(mimeTypes);
 
     // iterate over each session in the task and display a dialog to allow the user to choose where
     // to save that session's history.
@@ -1689,7 +1686,7 @@ void SaveHistoryTask::execute()
         if (result != QDialog::Accepted)
             continue;
 
-        QUrl url = dialog->selectedUrl();
+        QUrl url = (dialog->selectedUrls()).at(0);
 
         if (!url.isValid()) {
             // UI:  Can we make this friendlier?
@@ -1719,7 +1716,7 @@ void SaveHistoryTask::execute()
         // from.
         // this is set to -1 to indicate the job has just been started
 
-        if (dialog->currentMimeFilter() == "text/html")
+        if ((dialog->mimeTypeFilters()).contains("text/html"), Qt::CaseInsensitive)
             jobInfo.decoder = new HTMLDecoder();
         else
             jobInfo.decoder = new PlainTextDecoder();
