@@ -50,7 +50,7 @@
 
 #if defined(Q_OS_MAC)
 #include <libproc.h>
-#include <kde_file.h>
+#include <qplatformdefs.h>
 #endif
 
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
@@ -874,7 +874,7 @@ private:
         int managementInfoBase[4];
         size_t mibLength;
         struct kinfo_proc* kInfoProc;
-        KDE_struct_stat statInfo;
+        QT_STATBUFF statInfo;
 
         // Find the tty device of 'pid' (Example: /dev/ttys001)
         managementInfoBase[0] = CTL_KERN;
@@ -897,7 +897,7 @@ private:
                 const QByteArray deviceName = fullDeviceName.toLatin1();
                 const char* ttyName = deviceName.data();
 
-                if (KDE::stat(ttyName, &statInfo) != 0)
+                if (QT_STAT(ttyName, &statInfo) != 0)
                     return false;
 
                 // Find all processes attached to ttyName
