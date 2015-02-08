@@ -28,6 +28,7 @@
 #include <QtGui/QKeyEvent>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QFileDialog>
 #include <QPainter>
 #include <QStandardPaths>
 #include <QtCore/QUrl>
@@ -1575,9 +1576,10 @@ void SessionController::zmodemDownload()
         zmodem = QStandardPaths::findExecutable("lrz");
     }
     if (!zmodem.isEmpty()) {
-        const QString path = KFileDialog::getExistingDirectory(
-                                 QUrl(), _view,
-                                 i18n("Save ZModem Download to..."));
+        const QString path = QFileDialog::getExistingDirectory(_view,
+                i18n("Save ZModem Download to ..."),
+                QDir::homePath(),
+                QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
         if (!path.isEmpty()) {
             _session->startZModem(zmodem, path, QStringList());
