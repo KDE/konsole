@@ -56,8 +56,6 @@
 #include <KIO/DropJob>
 #include <KJobWidgets>
 #include <kio/netaccess.h>
-
-#include <KFileItem>
 #include <KMessageBox>
 
 // Konsole
