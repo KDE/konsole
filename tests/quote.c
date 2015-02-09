@@ -52,4 +52,5 @@ int main(int argc, char* argv[])
     pchr(cc,INDENT);
   }
   printf("\"\n");
+  fclose(sysin);
 }
