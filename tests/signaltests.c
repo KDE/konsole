@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     return 0;
   } else {
     char* error = strerror(result);
-    printf("Error calling sigwait: &s\n", error);
+    printf("Error calling sigwait: %s\n", error);
     return 1;
   }
 }
