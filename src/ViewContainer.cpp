@@ -258,13 +258,14 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
     _tabBar->setSupportedMimeType(ViewProperties::mimeType());
 
     connect(_tabBar, &Konsole::ViewContainerTabBar::currentChanged, this, &Konsole::TabbedViewContainer::currentTabChanged);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::tabDoubleClicked, this, &Konsole::TabbedViewContainer::tabDoubleClicked);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::newTabRequest, this, static_cast<void(TabbedViewContainer::*)()>(&Konsole::TabbedViewContainer::newViewRequest));
-    connect(_tabBar, &Konsole::ViewContainerTabBar::wheelDelta, this, &Konsole::TabbedViewContainer::wheelScrolled);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::initiateDrag, this, &Konsole::TabbedViewContainer::startTabDrag);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::tabBarDoubleClicked, this, &Konsole::TabbedViewContainer::tabDoubleClicked);
     connect(_tabBar, &Konsole::ViewContainerTabBar::querySourceIndex, this, &Konsole::TabbedViewContainer::querySourceIndex);
     connect(_tabBar, &Konsole::ViewContainerTabBar::moveViewRequest, this, &Konsole::TabbedViewContainer::onMoveViewRequest);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::contextMenu, this, &Konsole::TabbedViewContainer::openTabContextMenu);
+
+    // The below need converted to work with Qt5 QTabBar
+    //connect(_tabBar, &Konsole::ViewContainerTabBar::wheelDelta, this, &Konsole::TabbedViewContainer::wheelScrolled);
+    //connect(_tabBar, &Konsole::ViewContainerTabBar::initiateDrag, this, &Konsole::TabbedViewContainer::startTabDrag);
+    //connect(_tabBar, &Konsole::ViewContainerTabBar::contextMenu, this, &Konsole::TabbedViewContainer::openTabContextMenu);
 
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(_tabBar);
@@ -527,7 +528,10 @@ void TabbedViewContainer::onMoveViewRequest(int index, const QDropEvent* event ,
 
 void TabbedViewContainer::tabDoubleClicked(int index)
 {
-    renameTab(index);
+    if (index >= 0)
+        renameTab(index);
+    else
+        newViewRequest();
 }
 
 void TabbedViewContainer::renameTab(int index)

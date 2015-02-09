@@ -22,8 +22,7 @@
 #ifndef VIEWCONTAINERTABBAR_H
 #define VIEWCONTAINERTABBAR_H
 
-// KDE
-#include <KTabBar>
+#include <QTabBar>
 
 class QLabel;
 
@@ -31,7 +30,7 @@ namespace Konsole
 {
 class TabbedViewContainer;
 
-class ViewContainerTabBar : public KTabBar
+class ViewContainerTabBar : public QTabBar
 {
     Q_OBJECT
 

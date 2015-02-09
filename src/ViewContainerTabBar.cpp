@@ -29,6 +29,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QIcon>
+#include <QTabBar>
 
 // KDE
 #include <KLocalizedString>
@@ -37,7 +38,7 @@ using Konsole::ViewContainerTabBar;
 using Konsole::TabbedViewContainer;
 
 ViewContainerTabBar::ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container)
-    : KTabBar(parent)
+    : QTabBar(parent)
     , _dropIndicator(0)
     , _dropIndicatorIndex(-1)
     , _drawIndicatorDisabled(false)
@@ -126,7 +127,7 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 
     _dropIndicatorIndex = index;
     const int ARROW_SIZE = 32;
-    const bool north = shape() == KTabBar::RoundedNorth || shape() == KTabBar::TriangularNorth;
+    const bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
 
     if (!_dropIndicator || _drawIndicatorDisabled != drawDisabled) {
         if (!_dropIndicator) {
