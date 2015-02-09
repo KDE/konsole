@@ -55,8 +55,8 @@
 #include <KNotification>
 #include <KIO/DropJob>
 #include <KJobWidgets>
-#include <kio/netaccess.h>
 #include <KMessageBox>
+#include <KIO/StatJob>
 
 // Konsole
 #include "Filter.h"
@@ -3138,7 +3138,12 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
     QString dropText;
     if (!urls.isEmpty()) {
         for (int i = 0 ; i < urls.count() ; i++) {
-            QUrl url = KIO::NetAccess::mostLocalUrl(urls[i] , 0);
+            KIO::StatJob* job = KIO::mostLocalUrl(urls[i], KIO::HideProgressInfo);
+            bool ok = job->exec();
+            if (!ok)
+                continue;
+
+            QUrl url = job->mostLocalUrl();
             QString urlText;
 
             if (url.isLocalFile())
@@ -3170,17 +3175,21 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             additionalActions.append(pasteAction);
 
             if (urls.count() == 1) {
-                const QUrl url = KIO::NetAccess::mostLocalUrl(urls[0] , 0);
+                KIO::StatJob* job = KIO::mostLocalUrl(urls[0], KIO::HideProgressInfo);
+                bool ok = job->exec();
+                if (ok) {
+                    const QUrl url = job->mostLocalUrl();
 
-                if (url.isLocalFile()) {
-                    const QFileInfo fileInfo(url.path());
+                    if (url.isLocalFile()) {
+                        const QFileInfo fileInfo(url.path());
 
-                    if (fileInfo.isDir()) {
-                        QAction* cdAction = new QAction(i18n("Change &Directory To"), this);
-                        dropText = QLatin1String(" cd ") + dropText + QChar('\n');
-                        cdAction->setData(dropText);
-                        connect(cdAction, &QAction::triggered, this, &TerminalDisplay::dropMenuCdActionTriggered);
-                        additionalActions.append(cdAction);
+                        if (fileInfo.isDir()) {
+                            QAction* cdAction = new QAction(i18n("Change &Directory To"), this);
+                            dropText = QLatin1String(" cd ") + dropText + QChar('\n');
+                            cdAction->setData(dropText);
+                            connect(cdAction, &QAction::triggered, this, &TerminalDisplay::dropMenuCdActionTriggered);
+                            additionalActions.append(cdAction);
+                        }
                     }
                 }
             }
