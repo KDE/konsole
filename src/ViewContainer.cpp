@@ -255,17 +255,18 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
 
     // The tab bar
     _tabBar = new ViewContainerTabBar(_containerWidget, this);
+    _tabBar->setContextMenuPolicy(Qt::CustomContextMenu);
     _tabBar->setSupportedMimeType(ViewProperties::mimeType());
 
     connect(_tabBar, &Konsole::ViewContainerTabBar::currentChanged, this, &Konsole::TabbedViewContainer::currentTabChanged);
     connect(_tabBar, &Konsole::ViewContainerTabBar::tabBarDoubleClicked, this, &Konsole::TabbedViewContainer::tabDoubleClicked);
     connect(_tabBar, &Konsole::ViewContainerTabBar::querySourceIndex, this, &Konsole::TabbedViewContainer::querySourceIndex);
     connect(_tabBar, &Konsole::ViewContainerTabBar::moveViewRequest, this, &Konsole::TabbedViewContainer::onMoveViewRequest);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::customContextMenuRequested, this, &Konsole::TabbedViewContainer::openTabContextMenu);
 
     // The below need converted to work with Qt5 QTabBar
     //connect(_tabBar, &Konsole::ViewContainerTabBar::wheelDelta, this, &Konsole::TabbedViewContainer::wheelScrolled);
     //connect(_tabBar, &Konsole::ViewContainerTabBar::initiateDrag, this, &Konsole::TabbedViewContainer::startTabDrag);
-    //connect(_tabBar, &Konsole::ViewContainerTabBar::contextMenu, this, &Konsole::TabbedViewContainer::openTabContextMenu);
 
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(_tabBar);
@@ -539,9 +540,14 @@ void TabbedViewContainer::renameTab(int index)
     viewProperties(views()[index])->rename();
 }
 
-void TabbedViewContainer::openTabContextMenu(int index, const QPoint& pos)
+void TabbedViewContainer::openTabContextMenu(const QPoint& pos)
 {
-    _contextMenuTabIndex = index;
+    if (pos.isNull())
+        return;
+
+    _contextMenuTabIndex = _tabBar->tabAt(pos);
+    if (_contextMenuTabIndex < 0)
+        return;
 
 #if defined(ENABLE_DETACHING)
     // Enable 'Detach Tab' menu item only if there is more than 1 tab
@@ -550,7 +556,7 @@ void TabbedViewContainer::openTabContextMenu(int index, const QPoint& pos)
     detachAction->setEnabled(_tabBar->count() > 1);
 #endif
 
-    _contextPopupMenu->exec(pos);
+    _contextPopupMenu->exec(_tabBar->mapToGlobal(pos));
 }
 
 void TabbedViewContainer::tabContextMenuCloseTab()

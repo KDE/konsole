@@ -401,7 +401,7 @@ private slots:
     void wheelScrolled(int delta);
 
     void tabDoubleClicked(int index);
-    void openTabContextMenu(int index, const QPoint& point);
+    void openTabContextMenu(const QPoint& point);
     void tabContextMenuCloseTab();
     void tabContextMenuRenameTab();
     void tabContextMenuDetachTab();
