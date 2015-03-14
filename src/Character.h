@@ -49,24 +49,14 @@ const int RE_EXTENDED_CHAR  = (1 << 6);
  * Unicode character in the range of U+2500 ~ U+257F are known as line
  * characters, or box-drawing characters. Currently, konsole draws those
  * characters itself, instead of using the glyph provided by the font.
- * Unfortunately, some line characters can't be simulated by the existing 5x5
- * pixel matrix. Typical examples are ╳(U+2573) and ╰(U+2570). So those
- * unsupported line characters should be drawn in the normal way .
+ * Unfortunately, the triple and quadruple dash lines (┄┅┆┇┈┉┊┋) are too
+ * detailed too be drawn cleanly at normal font scales without anti
+ * -aliasing, so those are drawn as regular characters.
  */
 inline bool isSupportedLineChar(quint16 codePoint)
 {
-    if ((codePoint & 0xFF80) != 0x2500) {
-        return false;
-    }
-
-    uchar index = (codePoint & 0x007F);
-    if ((index >= 0x04 && index <= 0x0B) ||
-            (index >= 0x4C && index <= 0x4F) ||
-            (index >= 0x6D && index <= 0x73)) {
-        return false;
-    } else {
-        return true;
-    }
+    return (codePoint & 0xFF80) == 0x2500 // Unicode block: Mathematical Symbols - Box Drawing
+           && !(0x2504 <= codePoint && codePoint <= 0x250B); // Triple and quadruple dash range
 }
 
 /**
