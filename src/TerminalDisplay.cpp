@@ -542,6 +542,87 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
         paint.drawPoint(cx + 1, cy + 1);
 }
 
+static void drawOtherChar(QPainter& paint, int x, int y, int w, int h, uchar code)
+{
+    //Calculate cell midpoints, end points.
+    const int cx = x + w / 2;
+    const int cy = y + h / 2;
+    const int ex = x + w - 1;
+    const int ey = y + h - 1;
+
+    // Double dashes
+    if (0x4C <= code && code <= 0x4F) {
+        const int xHalfGap = qMax(w / 15, 1);
+        const int yHalfGap = qMax(h / 15, 1);
+        switch (code) {
+        case 0x4D: // BOX DRAWINGS HEAVY DOUBLE DASH HORIZONTAL
+            paint.drawLine(x, cy - 1, cx - xHalfGap - 1, cy - 1);
+            paint.drawLine(x, cy + 1, cx - xHalfGap - 1, cy + 1);
+            paint.drawLine(cx + xHalfGap, cy - 1, ex, cy - 1);
+            paint.drawLine(cx + xHalfGap, cy + 1, ex, cy + 1);
+            // No break!
+        case 0x4C: // BOX DRAWINGS LIGHT DOUBLE DASH HORIZONTAL
+            paint.drawLine(x, cy, cx - xHalfGap - 1, cy);
+            paint.drawLine(cx + xHalfGap, cy, ex, cy);
+            break;
+        case 0x4F: // BOX DRAWINGS HEAVY DOUBLE DASH VERTICAL
+            paint.drawLine(cx - 1, y, cx - 1, cy - yHalfGap - 1);
+            paint.drawLine(cx + 1, y, cx + 1, cy - yHalfGap - 1);
+            paint.drawLine(cx - 1, cy + yHalfGap, cx - 1, ey);
+            paint.drawLine(cx + 1, cy + yHalfGap, cx + 1, ey);
+            // No break!
+        case 0x4E: // BOX DRAWINGS LIGHT DOUBLE DASH VERTICAL
+            paint.drawLine(cx, y, cx, cy - yHalfGap - 1);
+            paint.drawLine(cx, cy + yHalfGap, cx, ey);
+            break;
+        }
+    }
+
+    // Rounded corner characters
+    else if (0x6D <= code && code <= 0x70) {
+        const int r = w * 3 / 8;
+        const int d = 2 * r;
+        switch (code) {
+        case 0x6D: // BOX DRAWINGS LIGHT ARC DOWN AND RIGHT
+            paint.drawLine(cx, cy + r, cx, ey);
+            paint.drawLine(cx + r, cy, ex, cy);
+            paint.drawArc(cx, cy, d, d, 90 * 16, 90 * 16);
+            break;
+        case 0x6E: // BOX DRAWINGS LIGHT ARC DOWN AND LEFT
+            paint.drawLine(cx, cy + r, cx, ey);
+            paint.drawLine(x, cy, cx - r, cy);
+            paint.drawArc(cx - d, cy, d, d, 0 * 16, 90 * 16);
+            break;
+        case 0x6F: // BOX DRAWINGS LIGHT ARC UP AND LEFT
+            paint.drawLine(cx, y, cx, cy - r);
+            paint.drawLine(x, cy, cx - r, cy);
+            paint.drawArc(cx - d, cy - d, d, d, 270 * 16, 90 * 16);
+            break;
+        case 0x70: // BOX DRAWINGS LIGHT ARC UP AND RIGHT
+            paint.drawLine(cx, y, cx, cy - r);
+            paint.drawLine(cx + r, cy, ex, cy);
+            paint.drawArc(cx, cy - d, d, d, 180 * 16, 90 * 16);
+            break;
+        }
+    }
+
+    // Diagonals
+    else if (0x71 <= code && code <= 0x73) {
+        switch (code) {
+        case 0x71: // BOX DRAWINGS LIGHT DIAGONAL UPPER RIGHT TO LOWER LEFT
+            paint.drawLine(ex, y, x, ey);
+            break;
+        case 0x72: // BOX DRAWINGS LIGHT DIAGONAL UPPER LEFT TO LOWER RIGHT
+            paint.drawLine(x, y, ex, ey);
+            break;
+        case 0x73: // BOX DRAWINGS LIGHT DIAGONAL CROSS
+            paint.drawLine(ex, y, x, ey);
+            paint.drawLine(x, y, ex, ey);
+            break;
+        }
+    }
+}
+
 void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const QString& str,
         const Character* attributes)
 {
@@ -557,6 +638,8 @@ void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const 
         const uchar code = str[i].cell();
         if (LineChars[code])
             drawLineChar(painter, x + (_fontWidth * i), y, _fontWidth, _fontHeight, code);
+        else
+            drawOtherChar(painter, x + (_fontWidth * i), y, _fontWidth, _fontHeight, code);
     }
 
     painter.setPen(originalPen);
