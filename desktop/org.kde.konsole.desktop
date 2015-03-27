@@ -8,7 +8,7 @@ Categories=Qt;KDE;System;TerminalEmulator;
 Actions=NewWindow;
 X-DocPath=konsole/index.html
 X-DBUS-StartupType=Unique
-X-KDE-StartupNotify=true
+StartupNotify=true
 X-KDE-AuthorizeAction=shell_access
 
 Name=Konsole
