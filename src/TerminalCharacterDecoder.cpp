@@ -116,6 +116,8 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
                 const QString s = QString::fromUtf16(chars, extendedCharLength);
                 plainText.append(s);
                 i += qMax(1, string_width(s));
+            } else {
+                ++i;
             }
         } else {
             // All characters which appear before the last real character are
