@@ -4,7 +4,6 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Konsole</name>
-  <name xml:lang="ast">Konsole</name>
   <name xml:lang="bs">Konzola</name>
   <name xml:lang="ca">Konsole</name>
   <name xml:lang="cs">Konsole</name>
@@ -35,7 +34,6 @@
   <name xml:lang="zh-CN">Konsole</name>
   <name xml:lang="zh-TW">Konsole</name>
   <summary>Terminal</summary>
-  <summary xml:lang="ast">Terminal</summary>
   <summary xml:lang="bs">Terminal</summary>
   <summary xml:lang="ca">Terminal</summary>
   <summary xml:lang="cs">Terminál</summary>
@@ -66,7 +64,6 @@
   <summary xml:lang="zh-TW">終端機</summary>
   <description>
     <p>Konsole is a terminal emulator.</p>
-    <p xml:lang="ast">Konsole ye un emulador de terminal.</p>
     <p xml:lang="ca">El Konsole és l'emulador de terminal del KDE.</p>
     <p xml:lang="cs">Konsole je emulátor terminálu.</p>
     <p xml:lang="de">Konsole ist in Terminal-Emulator</p>
@@ -95,7 +92,6 @@
     <p xml:lang="zh-CN">Konsole 是一个终端模拟器。</p>
     <p xml:lang="zh-TW">Konsole 是一套終端機模擬程式。</p>
     <p>Features:</p>
-    <p xml:lang="ast">Carauterístiques:</p>
     <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="cs">Vlastnosti:</p>
@@ -126,7 +122,6 @@
     <p xml:lang="zh-TW">功能：</p>
     <ul>
       <li>Tabs</li>
-      <li xml:lang="ast">Llingüetes</li>
       <li xml:lang="bs">Kartice</li>
       <li xml:lang="ca">Pestanyes</li>
       <li xml:lang="cs">Karty</li>
