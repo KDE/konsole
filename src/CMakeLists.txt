@@ -131,7 +131,6 @@ set(konsole_LIBS
                  KF5::Bookmarks
                  KF5::I18n
                  KF5::Pty
-                 KF5::KDELibs4Support
                  KF5::KIOWidgets
 )
 
@@ -182,6 +181,7 @@ target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::WindowSyst
   KF5::I18n
   KF5::KIOWidgets
   KF5::NotifyConfig
+  KF5::KDELibs4Support
 )
 
 install(TARGETS kdeinit_konsole konsole

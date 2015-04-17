@@ -25,7 +25,6 @@
 
 // KDE
 #include <KAcceleratorManager>
-#include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KCmdLineArgs>

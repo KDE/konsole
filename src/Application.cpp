@@ -26,7 +26,6 @@
 #include <QtCore/QDir>
 
 // KDE
-#include <KAction>
 #include <KActionCollection>
 #include <KCmdLineArgs>
 #include <QDebug>

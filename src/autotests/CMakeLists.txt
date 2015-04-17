@@ -19,7 +19,7 @@ if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_executable(DBusTest DBusTest.cpp)
     ecm_mark_as_test(DBusTest)
     add_test(DBusTest DBusTest)
-    target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus)
+    target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus KF5::KDELibs4Support)
 endif()
 
 add_executable(HistoryTest HistoryTest.cpp)
@@ -37,7 +37,7 @@ if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_executable(PartTest PartTest.cpp)
     ecm_mark_as_test(PartTest)
     add_test(PartTest PartTest)
-    target_link_libraries(PartTest KF5::XmlGui KF5::Parts KF5::Pty
+    target_link_libraries(PartTest KF5::XmlGui KF5::Parts KF5::Pty KF5::KDELibs4Support
                                ${KONSOLE_TEST_LIBS})
 endif()
 

@@ -20,6 +20,8 @@
 // Own
 #include "DBusTest.h"
 #include "../Session.h"
+#include <KDebug>
+#include <KProcess>
 
 using namespace Konsole;
 
