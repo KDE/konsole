@@ -155,11 +155,9 @@ ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 settings/GeneralSettings.ui
                                 settings/TabBarSettings.ui)
 
-add_library(konsoleprivate SHARED ${konsoleprivate_SRCS})
+add_library(konsoleprivate ${konsoleprivate_SRCS})
 generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
-target_link_libraries(konsoleprivate ${konsole_LIBS}
-)
-target_link_libraries(konsoleprivate LINK_INTERFACE_LIBRARIES ${konsole_LIBS})
+target_link_libraries(konsoleprivate PUBLIC ${konsole_LIBS})
 
 set_target_properties(konsoleprivate PROPERTIES
     VERSION ${KONSOLEPRIVATE_VERSION_STRING}
