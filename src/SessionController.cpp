@@ -435,7 +435,7 @@ void SessionController::handleWebShortcutAction()
 
 void SessionController::configureWebShortcuts()
 {
-    KToolInvocation::kdeinitExec("kcmshell4", QStringList() << "ebrowsing");
+    KToolInvocation::kdeinitExec("kcmshell5", QStringList() << "webshortcuts");
 }
 
 void SessionController::sendSignal(QAction* action)
