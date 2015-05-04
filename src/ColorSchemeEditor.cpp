@@ -183,9 +183,9 @@ void ColorSchemeEditor::selectWallpaper()
     fileFormats += ")";
 
     const QString fileName = QFileDialog::getOpenFileName(this,
-                             i18nc("@action:button", "Select wallpaper image file"),
+                             i18nc("@title:window", "Select wallpaper image file"),
                              _ui->wallpaperPath->text(),
-                             i18nc("@action:button", "Supported Images") + fileFormats);
+                             i18nc("Filter in file open dialog", "Supported Images") + fileFormats);
 
     if (!fileName.isEmpty())
         _ui->wallpaperPath->setText(fileName);
