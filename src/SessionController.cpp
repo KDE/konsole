@@ -1576,7 +1576,7 @@ void SessionController::zmodemDownload()
     }
     if (!zmodem.isEmpty()) {
         const QString path = QFileDialog::getExistingDirectory(_view,
-                i18n("Save ZModem Download to ..."),
+                i18n("Save ZModem Download to..."),
                 QDir::homePath(),
                 QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
