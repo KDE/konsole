@@ -1668,6 +1668,7 @@ void SaveHistoryTask::execute()
     QFileDialog* dialog = new QFileDialog(QApplication::activeWindow(),
             QString(),
             QDir::homePath());
+    dialog->setAcceptMode(QFileDialog::AcceptSave);
 
     QStringList mimeTypes;
     mimeTypes << "text/plain";
