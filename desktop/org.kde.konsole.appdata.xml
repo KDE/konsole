@@ -14,6 +14,7 @@
   <name xml:lang="es">Konsole</name>
   <name xml:lang="fi">Konsole</name>
   <name xml:lang="hu">Konsole</name>
+  <name xml:lang="it">Konsole</name>
   <name xml:lang="ko">Konsole</name>
   <name xml:lang="nb">Konsole</name>
   <name xml:lang="nl">Konsole</name>
@@ -44,6 +45,7 @@
   <summary xml:lang="es">Terminal</summary>
   <summary xml:lang="fi">Pääteikkuna</summary>
   <summary xml:lang="hu">Terminál</summary>
+  <summary xml:lang="it">Terminale</summary>
   <summary xml:lang="ko">터미널</summary>
   <summary xml:lang="nb">Terminal</summary>
   <summary xml:lang="nl">Terminal</summary>
@@ -74,6 +76,7 @@
     <p xml:lang="es">Konsole es un emulador de terminal.</p>
     <p xml:lang="fi">Konsole on pääte-emulaattori.</p>
     <p xml:lang="hu">A Konsole egy terminálemulátor.</p>
+    <p xml:lang="it">Konsole è un emulatore di terminale.</p>
     <p xml:lang="ko">Konsole은 터미널 에뮬레이터입니다.</p>
     <p xml:lang="nb">Konsole er en terminalemulator.</p>
     <p xml:lang="nl">Konsole is een terminalemulator</p>
@@ -104,6 +107,7 @@
     <p xml:lang="es">Funcionalidades:</p>
     <p xml:lang="fi">Ominaisuuksia:</p>
     <p xml:lang="hu">Szolgáltatások:</p>
+    <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="ko">기능:</p>
     <p xml:lang="nb">Funksjoner:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
@@ -135,6 +139,7 @@
       <li xml:lang="es">Pestañas</li>
       <li xml:lang="fi">Välilehdet</li>
       <li xml:lang="hu">Lapok</li>
+      <li xml:lang="it">Schede</li>
       <li xml:lang="ko">탭</li>
       <li xml:lang="nb">Faner</li>
       <li xml:lang="nl">Tabbladen</li>
@@ -163,6 +168,7 @@
       <li xml:lang="es">Perfiles múltiples</li>
       <li xml:lang="fi">Useat profiilit</li>
       <li xml:lang="hu">Több profil használatának lehetősége</li>
+      <li xml:lang="it">Profili multipli</li>
       <li xml:lang="ko">다중 프로필</li>
       <li xml:lang="nb">Flere profiler</li>
       <li xml:lang="nl">Meerdere profielen</li>
@@ -191,6 +197,7 @@
       <li xml:lang="es">Supervisión de silencios y actividad</li>
       <li xml:lang="fi">Hiljaisuuden ja aktiivisuuden tarkkailu</li>
       <li xml:lang="hu">Üresjárat- és aktivitásmonitorozás</li>
+      <li xml:lang="it">Monitoraggio del silenzio e dell'attività</li>
       <li xml:lang="ko">무음 및 활동 모니터링</li>
       <li xml:lang="nb">Overvåking av stillhet og aktivitet</li>
       <li xml:lang="nl">Monitoring van stilte en activiteit</li>
@@ -219,6 +226,7 @@
       <li xml:lang="es">Uso de marcadores</li>
       <li xml:lang="fi">Kirjanmerkkituki</li>
       <li xml:lang="hu">Könyvjelzők támogatása</li>
+      <li xml:lang="it">Supporto dei segnalibri</li>
       <li xml:lang="ko">책갈피 지원</li>
       <li xml:lang="nb">Støtte for bokmerker</li>
       <li xml:lang="nl">Ondersteuning van bladwijzers</li>
@@ -247,6 +255,7 @@
       <li xml:lang="es">Búsqueda</li>
       <li xml:lang="fi">Haku</li>
       <li xml:lang="hu">Keresés</li>
+      <li xml:lang="it">Ricerca</li>
       <li xml:lang="ko">찾기</li>
       <li xml:lang="nb">Søking</li>
       <li xml:lang="nl">Zoeken</li>
@@ -275,6 +284,7 @@
       <li xml:lang="es">Guardar la salida</li>
       <li xml:lang="fi">Tulosteen tallennus</li>
       <li xml:lang="hu">Kimenet mentése</li>
+      <li xml:lang="it">Salvataggio del risultato</li>
       <li xml:lang="ko">출력 저장</li>
       <li xml:lang="nb">Lagrer utdata</li>
       <li xml:lang="nl">Opslaan van uitvoer</li>
