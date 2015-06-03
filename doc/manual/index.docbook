@@ -46,8 +46,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2014-02-09</date>
-<releaseinfo>2.13 (&kde; 4.13)</releaseinfo>
+<date>2015-05-27</date>
+<releaseinfo>15.04</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -384,7 +384,9 @@ There will be no submenu if only the default profile is to be shown.
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><guimenu>File</guimenu>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>S</keycap></keycombo></shortcut>
+<guimenu>File</guimenu>
 <guimenuitem>Save Output As...</guimenuitem></menuchoice></term>
 <listitem><para><action>Saves the current scrollback as a text or html
  file</action></para></listitem>
@@ -424,7 +426,7 @@ at the current directory</action>.  By default, that is
 <term><menuchoice>
 <shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>Q</keycap></keycombo></shortcut>
 <guimenu>File</guimenu>
-<guimenuitem>Quit</guimenuitem></menuchoice>
+<guimenuitem>Close Window</guimenuitem></menuchoice>
 </term>
 <listitem><para><action>Quits &konsole;</action></para>
 <note><para>&konsole; will display a confirmation dialog if there is more than one
@@ -610,7 +612,7 @@ Various search improvements
 <guimenu>Edit</guimenu><guimenuitem>Find
 Next</guimenuitem></menuchoice></term>
 <listitem><para><action>Moves to the next search instance
-</action></para></listitem>
+</action>. If the search bar has the focus, you can use the shortcut &Enter; as well.</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -619,7 +621,7 @@ Next</guimenuitem></menuchoice></term>
 <guimenu>Edit</guimenu><guimenuitem>Find
 Previous</guimenuitem></menuchoice></term>
 <listitem><para><action>Moves to the previous search instance
-</action></para></listitem>
+</action>. If the search bar has the focus, you can use the shortcut <keycombo action="simul">&Shift;&Enter;</keycombo> as well.</para></listitem>
 </varlistentry>
 
 
@@ -852,11 +854,11 @@ Profiles...</guimenuitem></menuchoice></term>
 <guimenu>Settings</guimenu><guimenuitem>Show
 Menu Bar</guimenuitem></menuchoice></term>
 <listitem><para><action>Toggles the menubar being visible</action></para></listitem>
-<!--  http://forum.kde.org/viewtopic.php?f=227&t=107321&p=262667&view=lastpost#p248129 -->
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
+<shortcut><keycap>F11</keycap></shortcut>
 <guimenu>Settings</guimenu><guimenuitem>Full Screen Mode</guimenuitem></menuchoice></term>
 <listitem><para><action>Toggles &konsole; filling the entire screen</action></para></listitem>
 </varlistentry>
@@ -1165,7 +1167,8 @@ Empty lines or lines with <userinput>#</userinput> at the beginning are ignored,
 </para>
 <para>
 For more information, please visit
-<ulink url="http://api.kde.org/4.x-api/kde-baseapps-apidocs/konsole/html/classKonsole_1_1Profile.html#a57848e15fe69d3f27565851fe7cda429">&konsole; API Reference</ulink>.
+<ulink url="http://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html#a57848e15fe69d3f27565851fe7cda429">&konsole; API Reference</ulink>.
+<!--FIXME update url to kf5 if available on api.kde.org-->
 </para>
 </listitem>
 </varlistentry>
@@ -1262,8 +1265,7 @@ For more information, please visit
 <chapter id="scripting">
 <title>Scripting &konsole;</title>
 
-<para>For &kde; 4, the old &DCOP; has been replaced with &DBus;.
-&konsole; does support numerous methods that can be used with &DBus;.
+<para>&konsole; does support numerous methods that can be used with &DBus;.
 </para>
 <para>There are two ways to use the &DBus; interface: &Qt;'s &GUI;
 <application>qdbusviewer</application>
@@ -1486,7 +1488,7 @@ This is needed for some scripts and commands to work as expected:
 </listitem>
 
 <listitem><para>
-In KDE3, each tab had its own process ID.  However, in KDE4, all the tabs use the same process ID.  This has the side-effect that if one tab's process has issues, all the other tabs may experience issues as well.
+Since KDE4 all the tabs use the same process ID. This has the side-effect that if one tab's process has issues, all the other tabs may experience issues as well.
 </para>
 <para>
 This is most noticeable when a command that connects to an external device or system (ssh, nfs) has issues.
