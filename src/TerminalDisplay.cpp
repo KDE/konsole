@@ -736,8 +736,9 @@ void TerminalDisplay::drawCursor(QPainter& painter,
     if (_cursorBlinking)
         return;
 
-    QRect cursorRect = rect;
-    cursorRect.setHeight(_fontHeight - _lineSpacing - 1);
+    // shift rectangle top down one pixel to leave some space
+    // between top and bottom
+    QRect cursorRect = rect.adjusted(0, 1, 0, 0);
 
     QColor cursorColor = _cursorColor.isValid() ? _cursorColor : foregroundColor;
     painter.setPen(cursorColor);
