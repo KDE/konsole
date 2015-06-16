@@ -15,6 +15,7 @@
   <name xml:lang="fi">Konsole</name>
   <name xml:lang="gl">Konsole</name>
   <name xml:lang="hu">Konsole</name>
+  <name xml:lang="ia">Konsole</name>
   <name xml:lang="it">Konsole</name>
   <name xml:lang="ko">Konsole</name>
   <name xml:lang="nb">Konsole</name>
@@ -47,6 +48,7 @@
   <summary xml:lang="fi">Pääteikkuna</summary>
   <summary xml:lang="gl">Terminal</summary>
   <summary xml:lang="hu">Terminál</summary>
+  <summary xml:lang="ia">Terminal</summary>
   <summary xml:lang="it">Terminale</summary>
   <summary xml:lang="ko">터미널</summary>
   <summary xml:lang="nb">Terminal</summary>
@@ -111,6 +113,7 @@
     <p xml:lang="fi">Ominaisuuksia:</p>
     <p xml:lang="gl">Funcionalidades:</p>
     <p xml:lang="hu">Szolgáltatások:</p>
+    <p xml:lang="ia">Characteristicas:</p>
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="ko">기능:</p>
     <p xml:lang="nb">Funksjoner:</p>
@@ -144,6 +147,7 @@
       <li xml:lang="fi">Välilehdet</li>
       <li xml:lang="gl">Lapelas.</li>
       <li xml:lang="hu">Lapok</li>
+      <li xml:lang="ia">Schedas</li>
       <li xml:lang="it">Schede</li>
       <li xml:lang="ko">탭</li>
       <li xml:lang="nb">Faner</li>
@@ -267,6 +271,7 @@
       <li xml:lang="fi">Haku</li>
       <li xml:lang="gl">Busca.</li>
       <li xml:lang="hu">Keresés</li>
+      <li xml:lang="ia">Cercante</li>
       <li xml:lang="it">Ricerca</li>
       <li xml:lang="ko">찾기</li>
       <li xml:lang="nb">Søking</li>
