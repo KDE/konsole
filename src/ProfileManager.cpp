@@ -33,6 +33,7 @@
 #include <KConfig>
 #include <QDebug>
 #include <KConfigGroup>
+#include <KLocalizedString>
 
 // Konsole
 #include "ProfileReader.h"
@@ -342,6 +343,37 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
     // never save a profile with empty name into disk!
     persistent = persistent && !profile->name().isEmpty();
 
+    // If we are asked to store the fallback profile (which has an
+    // invalid path by design), we reset the path to an empty string
+    // which will make the profile writer automatically generate a
+    // proper path.
+    if (persistent && profile->path() == _fallbackProfile->path()) {
+        profile = new Profile(profile);
+
+        // Generate a new name, so it is obvious what is actually built-in
+        // in the profile manager
+        QList<Profile::Ptr> existingProfiles = allProfiles();
+        QStringList existingProfileNames;
+        foreach(Profile::Ptr existingProfile, existingProfiles) {
+            existingProfileNames.append(existingProfile->name());
+        }
+
+        int nameSuffix = 1;
+        QString newName;
+        QString newTranslatedName;
+        do {
+            newName = QStringLiteral("Profile ") + QString::number(nameSuffix);
+            newTranslatedName = i18nc("The default name of a profile", "Profile #%1", nameSuffix);
+            nameSuffix++;
+        } while (existingProfileNames.contains(newName));
+
+        profile->setProperty(Profile::UntranslatedName, newName);
+        profile->setProperty(Profile::Name, newTranslatedName);
+
+        addProfile(profile);
+        setDefaultProfile(profile);
+    }
+
     // when changing a group, iterate through the profiles
     // in the group and call changeProfile() on each of them
     //
@@ -356,14 +388,14 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         return;
     }
 
-    // notify the world about the change
-    emit profileChanged(profile);
-
     // save changes to disk, unless the profile is hidden, in which case
     // it has no file on disk
     if (persistent && !profile->isHidden()) {
         profile->setProperty(Profile::Path, saveProfile(profile));
     }
+
+    // notify the world about the change
+    emit profileChanged(profile);
 }
 
 void ProfileManager::addProfile(Profile::Ptr profile)

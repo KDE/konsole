@@ -142,8 +142,8 @@ FallbackProfile::FallbackProfile()
     : Profile()
 {
     // Fallback settings
-    setProperty(Name, i18n("Shell"));
-    setProperty(UntranslatedName, "Shell");
+    setProperty(Name, i18nc("Name of the default/builtin profile", "Default"));
+    setProperty(UntranslatedName, "Default");
     // magic path for the fallback profile which is not a valid
     // non-directory file name
     setProperty(Path, "FALLBACK/");
