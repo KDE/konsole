@@ -1,7 +1,7 @@
 # Konsole project
 project(Konsole)
-set(Konsole_VERSION_MAJOR 3)
-set(Konsole_VERSION_MINOR 91)
+set(Konsole_VERSION_MAJOR 15)
+set(Konsole_VERSION_MINOR 08)
 set(Konsole_VERSION_PATCH 0)
 set(Konsole_VERSION "${Konsole_VERSION_MAJOR}.${Konsole_VERSION_MINOR}.${Konsole_VERSION_PATCH}")
 
