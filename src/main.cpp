@@ -24,6 +24,7 @@
 
 // OS specific
 #include <qplatformdefs.h>
+#include <QDir>
 
 // KDE
 #include <k4aboutdata.h>
@@ -31,7 +32,7 @@
 #include <KLocalizedString>
 #include <kdemacros.h>
 #include <Kdelibs4ConfigMigrator>
-
+#include <Kdelibs4Migration>
 
 using Konsole::Application;
 
@@ -54,9 +55,31 @@ void restoreSession(Application& app);
 extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
 {
     Kdelibs4ConfigMigrator migrate(QLatin1String("konsole"));
-    migrate.setConfigFiles(QStringList() << QLatin1String("konsolerc") << QLatin1String("konsole.notifyrc"));
-    migrate.setUiFiles(QStringList() << QLatin1String("sessionui.rc") << QLatin1String("partui.rc") << QLatin1String("konsoleui.rc"));
-    migrate.migrate();
+    migrate.setConfigFiles(QStringList() << QStringLiteral("konsolerc") << QLatin1String("konsole.notifyrc"));
+    migrate.setUiFiles(QStringList() << QStringLiteral("sessionui.rc") << QLatin1String("partui.rc") << QLatin1String("konsoleui.rc"));
+
+    if (migrate.migrate()) {
+        Kdelibs4Migration dataMigrator;
+        const QString sourceBasePath = dataMigrator.saveLocation("data", "konsole");
+        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole/");
+        QString targetFilePath;
+
+        QDir sourceDir(sourceBasePath);
+        QDir targetDir(targetBasePath);
+
+        if(sourceDir.exists()) {
+            if(!targetDir.exists()) {
+                QDir().mkpath(targetBasePath);
+            }
+            QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+            foreach (const QString &fileName, fileNames) {
+                targetFilePath = targetBasePath + fileName;
+                if(!QFile::exists(targetFilePath))  {
+                    QFile::copy(sourceBasePath + fileName, targetFilePath);
+                }
+            }
+        }
+   }
 
     K4AboutData about("konsole",
                      0,
