@@ -70,6 +70,7 @@
 #include "TerminalDisplayAccessible.h"
 #include "SessionManager.h"
 #include "Session.h"
+#include "WindowSystemInfo.h"
 
 using namespace Konsole;
 
@@ -1058,7 +1059,8 @@ void TerminalDisplay::updateImage()
     // optimization - scroll the existing image where possible and
     // avoid expensive text drawing for parts of the image that
     // can simply be moved up or down
-    if (_wallpaper->isNull()) {
+    // disable this shortcut for transparent konsole with scaled pixels, otherwise we get rendering artefacts, see BUG 350651
+    if (!(WindowSystemInfo::HAVE_TRANSPARENCY && (qApp->devicePixelRatio() > 1.0)) && _wallpaper->isNull()) {
         scrollImage(_screenWindow->scrollCount() ,
                     _screenWindow->scrollRegion());
         _screenWindow->resetScrollCount();
@@ -2482,7 +2484,7 @@ void TerminalDisplay::viewScrolledByUser()
     _sessionController->setSearchStartToWindowCurrentLine();
 }
 
-/* Moving left/up from the line containing pnt, return the starting 
+/* Moving left/up from the line containing pnt, return the starting
    offset point which the given line is continiously wrapped
    (top left corner = 0,0; previous line not visible = 0,-1).
 */
@@ -2515,7 +2517,7 @@ QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
     return QPoint(0, lineInHistory - topVisibleLine);
 }
 
-/* Moving right/down from the line containing pnt, return the ending 
+/* Moving right/down from the line containing pnt, return the ending
    offset point which the given line is continiously wrapped.
 */
 QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
