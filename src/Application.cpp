@@ -48,6 +48,9 @@ void Application::init()
 {
     _backgroundInstance = 0;
 
+    // enable high dpi support
+    setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+
 #if defined(Q_OS_MAC)
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
     // will work correctly in the terminal
