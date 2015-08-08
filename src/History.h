@@ -83,7 +83,7 @@ private:
 //////////////////////////////////////////////////////////////////////
 class HistoryType;
 
-class HistoryScroll
+class KONSOLEPRIVATE_EXPORT HistoryScroll
 {
 public:
     explicit HistoryScroll(HistoryType*);
