@@ -1,9 +1,11 @@
 # Konsole project
 project(Konsole)
-set(Konsole_VERSION_MAJOR 3)
-set(Konsole_VERSION_MINOR 91)
-set(Konsole_VERSION_PATCH 0)
-set(Konsole_VERSION "${Konsole_VERSION_MAJOR}.${Konsole_VERSION_MINOR}.${Konsole_VERSION_PATCH}")
+
+# KDE Application Version, managed by release script
+set (KDE_APPLICATIONS_VERSION_MAJOR "15")
+set (KDE_APPLICATIONS_VERSION_MINOR "08")
+set (KDE_APPLICATIONS_VERSION_MICRO "0")
+set (KDE_APPLICATIONS_VERSION "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}.${KDE_APPLICATIONS_VERSION_MICRO}")
 
 # minimal requirements
 cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
@@ -24,8 +26,8 @@ include(ECMGenerateHeaders)
 include(GenerateExportHeader)
 include(FeatureSummary)
 
-ecm_setup_version(${Konsole_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
-                  SOVERSION ${Konsole_VERSION_MAJOR}
+ecm_setup_version(${KDE_APPLICATIONS_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
+    SOVERSION ${KDE_APPLICATIONS_VERSION_MAJOR}
 )
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Widgets Script)
 
