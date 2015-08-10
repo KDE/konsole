@@ -10,7 +10,7 @@ set (KDE_APPLICATIONS_VERSION "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATI
 # minimal requirements
 cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
 set (QT_MIN_VERSION "5.2.0")
-set(KF5_MIN_VERSION "5.6.0")
+set (KF5_MIN_VERSION "5.6.0")
 
 find_package(ECM 1.2.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
@@ -29,7 +29,13 @@ include(FeatureSummary)
 ecm_setup_version(${KDE_APPLICATIONS_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
     SOVERSION ${KDE_APPLICATIONS_VERSION_MAJOR}
 )
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Widgets Script)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
+    Core
+    DBus
+    PrintSupport
+    Script
+    Widgets
+)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     Bookmarks Completion Config ConfigWidgets
