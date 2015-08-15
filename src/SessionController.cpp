@@ -1716,10 +1716,11 @@ void SaveHistoryTask::execute()
         // from.
         // this is set to -1 to indicate the job has just been started
 
-        if ((dialog->mimeTypeFilters()).contains("text/html"), Qt::CaseInsensitive)
+        if ((dialog->selectedNameFilter()).contains("html", Qt::CaseInsensitive)) {
             jobInfo.decoder = new HTMLDecoder();
-        else
+        } else {
             jobInfo.decoder = new PlainTextDecoder();
+        }
 
         _jobSession.insert(job, jobInfo);
 
