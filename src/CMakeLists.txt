@@ -151,6 +151,7 @@ ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 HistorySizeDialog.ui
                                 HistorySizeWidget.ui
                                 PrintOptions.ui
+                                settings/FileLocationSettings.ui
                                 settings/GeneralSettings.ui
                                 settings/TabBarSettings.ui)
 
@@ -169,6 +170,7 @@ set(konsole_KDEINIT_SRCS
    Application.cpp
    MainWindow.cpp
    main.cpp
+   settings/FileLocationSettings.cpp
    settings/GeneralSettings.cpp
    settings/TabBarSettings.cpp)
 

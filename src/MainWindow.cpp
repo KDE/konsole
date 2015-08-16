@@ -56,6 +56,7 @@
 #include "ProfileManager.h"
 #include "KonsoleSettings.h"
 #include "WindowSystemInfo.h"
+#include "settings/FileLocationSettings.h"
 #include "settings/GeneralSettings.h"
 #include "settings/TabBarSettings.h"
 
@@ -679,6 +680,11 @@ void MainWindow::showSettingsDialog()
     settingsDialog->addPage(tabBarSettings,
                             i18nc("@title Preferences page name", "TabBar"),
                             "system-run");
+
+    FileLocationSettings* fileLocationSettings = new FileLocationSettings(settingsDialog);
+    settingsDialog->addPage(fileLocationSettings,
+                            i18nc("@title Preferences page name", "File Location"),
+                            "configure");
 
     settingsDialog->show();
 }

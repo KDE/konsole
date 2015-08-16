@@ -35,11 +35,15 @@
 #include <QDir>
 #include <qplatformdefs.h>
 #include <QStandardPaths>
+#include <KConfigGroup>
+#include <KSharedConfig>
 
 // Reasonable line size
 static const int LINE_SIZE = 1024;
 
 using namespace Konsole;
+
+Q_GLOBAL_STATIC(QString, historyFileLocation);
 
 /*
    An arbitrary long scroll.
@@ -63,8 +67,20 @@ HistoryFile::HistoryFile()
       _fileMap(0),
       _readWriteBalance(0)
 {
-    const QString tmpDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
-    QDir().mkpath(tmpDir);
+    // Determine the temp directory once
+    // This class is called 3 times for each "unlimited" scrollback.
+    // This has the down-side that users must restart to
+    // load changes (currently only 2 choices).
+    if (!historyFileLocation.exists()) {
+        KConfigGroup configGroup(KSharedConfig::openConfig(), "FileLocation");
+        if (configGroup.readEntry("scrollbackUseUsersHomeLocation", false)) {
+            *historyFileLocation() = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+        } else {
+            *historyFileLocation() = QDir::tempPath();
+        }
+        QDir().mkpath(*historyFileLocation());
+    }
+    const QString tmpDir = *historyFileLocation();
     const QString tmpFormat = tmpDir + QLatin1Char('/') + "konsole-XXXXXX.history";
     _tmpFile.setFileTemplate(tmpFormat);
     if (_tmpFile.open()) {
