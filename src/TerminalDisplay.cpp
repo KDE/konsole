@@ -2419,14 +2419,17 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         return;
 
     const int modifiers = ev->modifiers();
-    const int delta = ev->delta();
+
+    _scrollWheelState.addWheelEvent(ev);
 
     // ctrl+<wheel> for zooming, like in konqueror and firefox
     if ((modifiers & Qt::ControlModifier) && mouseWheelZoom()) {
-        if (delta > 0) {
+        int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
+        for (;steps > 0; --steps) {
             // wheel-up for increasing font size
             increaseFontSize();
-        } else {
+        }
+        for (;steps < 0; ++steps) {
             // wheel-down for decreasing font size
             decreaseFontSize();
         }
@@ -2443,6 +2446,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         if (canScroll) {
             _scrollBar->event(ev);
             _sessionController->setSearchStartToWindowCurrentLine();
+            _scrollWheelState.clearAll();
         } else {
             // assume that each Up / Down key event will cause the terminal application
             // to scroll by one line.
@@ -2450,14 +2454,12 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             // to get a reasonable scrolling speed, scroll by one line for every 5 degrees
             // of mouse wheel rotation.  Mouse wheels typically move in steps of 15 degrees,
             // giving a scroll of 3 lines
-            const int keyCode = delta > 0 ? Qt::Key_Up : Qt::Key_Down;
+
+            const int lines = _scrollWheelState.consumeSteps(_fontHeight * qApp->devicePixelRatio(), ScrollState::degreesToAngle(5));
+            const int keyCode = lines > 0 ? Qt::Key_Up : Qt::Key_Down;
             QKeyEvent keyEvent(QEvent::KeyPress, keyCode, Qt::NoModifier);
 
-            // QWheelEvent::delta() gives rotation in eighths of a degree
-            const int degrees = delta / 8;
-            const int lines = abs(degrees) / 5;
-
-            for (int i = 0; i < lines; i++)
+            for (int i = 0; i < abs(lines); i++)
                 emit keyPressedSignal(&keyEvent);
         }
     } else {
@@ -2466,11 +2468,14 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         int charLine;
         int charColumn;
         getCharacterPosition(ev->pos() , charLine , charColumn);
-
-        emit mouseSignal(delta > 0 ? 4 : 5,
-                         charColumn + 1,
-                         charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
-                         0);
+        const int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
+        const int button = (steps > 0) ? 4 : 5;
+        for (int i = 0; i < abs(steps); ++i) {
+            emit mouseSignal(button,
+                             charColumn + 1,
+                             charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
+                             0);
+        }
     }
 }
 

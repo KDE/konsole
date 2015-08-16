@@ -32,6 +32,7 @@
 #include "ScreenWindow.h"
 #include "ColorScheme.h"
 #include "Enumeration.h"
+#include "ScrollState.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -908,6 +909,8 @@ private:
     bool _centerContents;   // center the contents between margins
 
     qreal _opacity;
+
+    ScrollState _scrollWheelState;
 
     friend class TerminalDisplayAccessible;
 };

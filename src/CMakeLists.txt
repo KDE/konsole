@@ -97,6 +97,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         RenameTabWidget.cpp
                         Screen.cpp
                         ScreenWindow.cpp
+                        ScrollState.cpp
                         Session.cpp
                         SessionController.cpp
                         SessionManager.cpp
