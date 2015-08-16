@@ -25,6 +25,7 @@
 #include <QVBoxLayout>
 #include <QFileInfo>
 #include <QTimer>
+#include <QDialog>
 // KDE
 #include <KPluginLoader>
 #include <KPluginFactory>
@@ -32,7 +33,6 @@
 #include <KParts/Part>
 #include <KPtyProcess>
 #include <KPtyDevice>
-#include <KDialog>
 #include <KMainWindow>
 #include <qtest.h>
 
@@ -84,9 +84,8 @@ void PartTest::testFd()
     // as soon as it becomes available and the terminal will not display any output
     ptyProcess.pty()->setSuspended(true);
 
-    QWeakPointer<KDialog> dialog = new KDialog();
-    dialog.data()->setButtons(0);
-    QVBoxLayout* layout = new QVBoxLayout(dialog.data()->mainWidget());
+    QWeakPointer<QDialog> dialog = new QDialog();
+    QVBoxLayout* layout = new QVBoxLayout(dialog.data());
     layout->addWidget(new QLabel("Output of 'ping localhost' should appear in a terminal below for 5 seconds"));
     layout->addWidget(terminalPart->widget());
     QTimer::singleShot(5000, dialog.data(), SLOT(close()));

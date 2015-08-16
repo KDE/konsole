@@ -20,7 +20,7 @@
 // Own
 #include "DBusTest.h"
 #include "../Session.h"
-#include <KDebug>
+#include <QtDebug>
 #include <KProcess>
 
 using namespace Konsole;
@@ -34,11 +34,10 @@ void DBusTest::initTestCase()
 
     if (!QDBusConnection::sessionBus().isConnected() ||
             !(bus = QDBusConnection::sessionBus().interface()))
-        kFatal() << "Session bus not found";
+        QFAIL("Session bus not found");
 
     QDBusReply<QStringList> serviceReply = bus->registeredServiceNames();
-    if (!serviceReply.isValid())
-        kFatal() << "SessionBus interfaces not available";
+    QVERIFY2(serviceReply.isValid(), "SessionBus interfaces not available");
 
     // Find all current Konsoles' services running
     QStringList allServices = serviceReply;
@@ -52,7 +51,7 @@ void DBusTest::initTestCase()
     // Create a new Konsole with a separate process id
     int result = KProcess::execute("konsole");
     if (result)
-        kFatal() << "Unable to exec a new Konsole : " << result;
+        QFAIL(QString("Unable to exec a new Konsole: %1").arg(result).toLatin1().data());
 
     // Wait for above Konsole to finish starting
 #if defined(HAVE_USLEEP)
@@ -62,8 +61,7 @@ void DBusTest::initTestCase()
 #endif
 
     serviceReply = bus->registeredServiceNames();
-    if (!serviceReply.isValid())
-        kFatal() << "SessionBus interfaces not available";
+    QVERIFY2(serviceReply.isValid(), "SessionBus interfaces not available");
 
     // Find dbus service of above Konsole
     allServices = serviceReply;
@@ -75,10 +73,8 @@ void DBusTest::initTestCase()
                 _interfaceName = service;
     }
 
-    if (_interfaceName.isEmpty()) {
-        kFatal() << "This test will only work in a Konsole window with a new PID.  A new Konsole PID can't be found.";
-    }
-    //kDebug()<< "Using service: " + _interfaceName.toLatin1();
+    QVERIFY2(!_interfaceName.isEmpty(),
+             "This test will only work in a Konsole window with a new PID.  A new Konsole PID can't be found.");
 
     QDBusInterface iface(_interfaceName,
                          QLatin1String("/Konsole"),
@@ -96,12 +92,11 @@ void DBusTest::cleanupTestCase()
     QDBusInterface iface(_interfaceName,
                          QLatin1String("/konsole/MainWindow_1"),
                          QLatin1String("org.qtproject.Qt.QWidget"));
-    if (!iface.isValid())
-        kFatal() << "Unable to get a dbus interface to Konsole!";
+    QVERIFY2(iface.isValid(), "Unable to get a dbus interface to Konsole!");
 
     QDBusReply<void> instanceReply = iface.call("close");
     if (!instanceReply.isValid())
-        kFatal() << "Unable to close Konsole :" << instanceReply.error();
+        QFAIL(QString("Unable to close Konsole: %1").arg(instanceReply.error().message()).toLatin1().data());
 }
 
 void DBusTest::testSessions()

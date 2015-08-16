@@ -19,14 +19,13 @@ if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_executable(DBusTest DBusTest.cpp)
     ecm_mark_as_test(DBusTest)
     add_test(DBusTest DBusTest)
-    target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus KF5::KDELibs4Support)
+    target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus)
 endif()
 
 add_executable(HistoryTest HistoryTest.cpp)
 ecm_mark_as_test(HistoryTest)
 add_test(HistoryTest HistoryTest)
-target_link_libraries(HistoryTest ${KONSOLE_TEST_LIBS} KF5::KDELibs4Support)
-
+target_link_libraries(HistoryTest ${KONSOLE_TEST_LIBS} KF5::Parts)
 
 add_executable(KeyboardTranslatorTest KeyboardTranslatorTest.cpp)
 ecm_mark_as_test(KeyboardTranslatorTest)
@@ -37,7 +36,7 @@ if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_executable(PartTest PartTest.cpp)
     ecm_mark_as_test(PartTest)
     add_test(PartTest PartTest)
-    target_link_libraries(PartTest KF5::XmlGui KF5::Parts KF5::Pty KF5::KDELibs4Support
+    target_link_libraries(PartTest KF5::XmlGui KF5::Parts KF5::Pty
                                ${KONSOLE_TEST_LIBS})
 endif()
 
@@ -54,7 +53,7 @@ target_link_libraries(PtyTest KF5::Pty ${KONSOLE_TEST_LIBS})
 add_executable(SessionTest SessionTest.cpp)
 ecm_mark_as_test(SessionTest)
 add_test(SessionTest SessionTest)
-target_link_libraries(SessionTest ${KONSOLE_TEST_LIBS} KF5::KDELibs4Support)
+target_link_libraries(SessionTest ${KONSOLE_TEST_LIBS} KF5::Parts)
 
 add_executable(ShellCommandTest ShellCommandTest.cpp)
 ecm_mark_as_test(ShellCommandTest)
@@ -70,7 +69,7 @@ target_link_libraries(TerminalCharacterDecoderTest ${KONSOLE_TEST_LIBS})
 add_executable(TerminalTest TerminalTest.cpp)
 ecm_mark_as_test(TerminalTest)
 add_test(TerminalTest TerminalTest)
-target_link_libraries(TerminalTest ${KONSOLE_TEST_LIBS} KF5::KDELibs4Support)
+target_link_libraries(TerminalTest ${KONSOLE_TEST_LIBS} KF5::Parts)
 
 ##add_executable(TerminalInterfaceTest TerminalInterfaceTest.cpp)
 ##ecm_mark_as_test(TerminalInterface)
