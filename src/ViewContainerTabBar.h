@@ -47,14 +47,17 @@ public:
     TabbedViewContainer* connectedTabbedViewContainer();
 
 signals:
+    void initiateDrag(int index);
     void querySourceIndex(const QDropEvent* event, int& sourceIndex) const;
     void moveViewRequest(int index, const QDropEvent* event, bool& success, TabbedViewContainer* sourceTabbedContainer);
 
 protected:
-    virtual void dragEnterEvent(QDragEnterEvent* event);
-    virtual void dragLeaveEvent(QDragLeaveEvent* event);
-    virtual void dragMoveEvent(QDragMoveEvent* event);
-    virtual void dropEvent(QDropEvent* event);
+    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    virtual void dragEnterEvent(QDragEnterEvent* event) Q_DECL_OVERRIDE;
+    virtual void dragLeaveEvent(QDragLeaveEvent* event) Q_DECL_OVERRIDE;
+    virtual void dragMoveEvent(QDragMoveEvent* event) Q_DECL_OVERRIDE;
+    virtual void dropEvent(QDropEvent* event) Q_DECL_OVERRIDE;
 
 private:
     // show the indicator arrow which shows where a dropped tab will
@@ -74,6 +77,8 @@ private:
     bool _drawIndicatorDisabled;
     QString _supportedMimeType;
     TabbedViewContainer* _connectedContainer;
+    QPoint _dragStart;
+
 };
 }
 

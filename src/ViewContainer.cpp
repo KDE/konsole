@@ -264,9 +264,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
     connect(_tabBar, &Konsole::ViewContainerTabBar::moveViewRequest, this, &Konsole::TabbedViewContainer::onMoveViewRequest);
     connect(_tabBar, &Konsole::ViewContainerTabBar::customContextMenuRequested, this, &Konsole::TabbedViewContainer::openTabContextMenu);
 
-    // The below need converted to work with Qt5 QTabBar
-    //connect(_tabBar, &Konsole::ViewContainerTabBar::wheelDelta, this, &Konsole::TabbedViewContainer::wheelScrolled);
-    //connect(_tabBar, &Konsole::ViewContainerTabBar::initiateDrag, this, &Konsole::TabbedViewContainer::startTabDrag);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::initiateDrag, this, &Konsole::TabbedViewContainer::startTabDrag);
 
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(_tabBar);
