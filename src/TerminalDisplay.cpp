@@ -3254,7 +3254,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
         // If our target is local we will open a popup - otherwise the fallback kicks
         // in and the URLs will simply be pasted as text.
-        if (_sessionController && _sessionController->url().isLocalFile()) {
+        if (!_dropUrlsAsText && _sessionController && _sessionController->url().isLocalFile()) {
             // A standard popup with Copy, Move and Link as options -
             // plus an additional Paste option.
 

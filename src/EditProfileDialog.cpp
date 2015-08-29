@@ -1041,6 +1041,10 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
             _ui->openLinksByDirectClickButton , Profile::OpenLinksByDirectClickEnabled,
             SLOT(toggleOpenLinksByDirectClick(bool))
         },
+        {
+            _ui->dropUrlsAsText , Profile::DropUrlsAsText,
+            SLOT(toggleDropUrlsAsText(bool))
+        },
         { 0 , Profile::Property(0) , 0 }
     };
     setupCheckBoxes(options , profile);
@@ -1170,6 +1174,10 @@ void EditProfileDialog::toggleUnderlineLinks(bool enable)
 void EditProfileDialog::toggleCtrlRequiredForDrag(bool enable)
 {
     updateTempProfileProperty(Profile::CtrlRequiredForDrag, enable);
+}
+void EditProfileDialog::toggleDropUrlsAsText(bool enable)
+{
+    updateTempProfileProperty(Profile::DropUrlsAsText, enable);
 }
 void EditProfileDialog::toggleOpenLinksByDirectClick(bool enable)
 {

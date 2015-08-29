@@ -810,6 +810,7 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     view->setAutoCopySelectedText(profile->autoCopySelectedText());
     view->setUnderlineLinks(profile->underlineLinksEnabled());
     view->setControlDrag(profile->property<bool>(Profile::CtrlRequiredForDrag));
+    view->setDropUrlsAsText(profile->property<bool>(Profile::DropUrlsAsText));
     view->setBidiEnabled(profile->bidiRenderingEnabled());
     view->setLineSpacing(profile->lineSpacing());
     view->setTrimTrailingSpaces(profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText));

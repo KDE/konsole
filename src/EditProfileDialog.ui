@@ -1015,6 +1015,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="dropUrlsAsText">
+            <property name="toolTip">
+             <string>Always paste dropped URLs as text without offering move, copy and link actions.</string>
+            </property>
+            <property name="text">
+             <string>Disable drag and drop menu for URLs and files</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="enableMouseWheelZoomButton">
             <property name="toolTip">
              <string>Pressing Ctrl+scrollwheel will increase/decrease the text size.</string>

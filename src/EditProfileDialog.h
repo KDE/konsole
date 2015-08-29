@@ -157,6 +157,7 @@ private slots:
     void toggleUnderlineLinks(bool);
     void toggleOpenLinksByDirectClick(bool);
     void toggleCtrlRequiredForDrag(bool);
+    void toggleDropUrlsAsText(bool);
     void toggleCopyTextToClipboard(bool);
     void toggleTrimTrailingSpacesInSelectedText(bool);
     void pasteFromX11Selection();

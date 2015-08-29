@@ -163,6 +163,13 @@ public:
         return _ctrlRequiredForDrag;
     }
 
+    void setDropUrlsAsText(bool enable) {
+        _dropUrlsAsText = enable;
+    }
+    bool getDropUrlsAsText() const {
+        return _dropUrlsAsText;
+    }
+
     /** Sets how the text is selected when the user triple clicks within the display. */
     void setTripleClickMode(Enum::TripleClickModeEnum mode) {
         _tripleClickMode = mode;
@@ -851,6 +858,7 @@ private:
     bool _openLinksByDirectClick;     // Open URL and hosts by single mouse click
 
     bool _ctrlRequiredForDrag; // require Ctrl key for drag selected text
+    bool _dropUrlsAsText; // always paste URLs as text without showing copy/move menu
 
     Enum::TripleClickModeEnum _tripleClickMode;
     bool _possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted

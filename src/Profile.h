@@ -204,6 +204,8 @@ public:
         AutoCopySelectedText,
         /** (bool) If true, trailing spaces are trimmed in selected text */
         TrimTrailingSpacesInSelectedText,
+        /** (bool) If true, then dropped URLs will be pasted as text without asking */
+        DropUrlsAsText,
         /** (bool) If true, middle mouse button pastes from X Selection */
         PasteFromSelectionEnabled,
         /** (bool) If true, middle mouse button pastes from Clipboard */
