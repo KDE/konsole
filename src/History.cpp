@@ -73,7 +73,7 @@ HistoryFile::HistoryFile()
     // load changes (currently only 2 choices).
     if (!historyFileLocation.exists()) {
         KConfigGroup configGroup(KSharedConfig::openConfig(), "FileLocation");
-        if (configGroup.readEntry("scrollbackUseUsersHomeLocation", false)) {
+        if (configGroup.readEntry("scrollbackUseCacheLocation", false)) {
             *historyFileLocation() = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
         } else {
             *historyFileLocation() = QDir::tempPath();

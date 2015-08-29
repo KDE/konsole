@@ -94,8 +94,8 @@
       <label>For scrollback files, use system-wide folder location</label>
       <default>true</default>
     </entry>
-    <entry name="scrollbackUseUsersHomeLocation" type="Bool">
-      <label>For scrollback files, use user's home folder location</label>
+    <entry name="scrollbackUseCacheLocation" type="Bool">
+      <label>For scrollback files, use user's specific folder location</label>
       <default>false</default>
     </entry>
   </group>

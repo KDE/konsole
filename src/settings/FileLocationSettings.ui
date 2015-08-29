@@ -74,7 +74,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QRadioButton" name="kcfg_scrollbackUseUsersHomeLocation">
+       <widget class="QRadioButton" name="kcfg_scrollbackUseCacheLocation">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -82,7 +82,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Use user's ho&amp;me location</string>
+         <string>Use user specific location</string>
         </property>
        </widget>
       </item>
