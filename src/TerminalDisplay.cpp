@@ -204,35 +204,55 @@ void TerminalDisplay::fontChange(const QFont&)
 
 void TerminalDisplay::setVTFont(const QFont& f)
 {
-    QFont font = f;
+    QFont newFont(f);
+    QFontMetrics fontMetrics(newFont);
 
-    QFontMetrics metrics(font);
+    // This check seems extreme and semi-random
+    if ((fontMetrics.height() > height()) || (fontMetrics.maxWidth() > width()))
+        return;
 
-    if (!QFontInfo(font).exactMatch()) {
-        qWarning() << "The font for use in the terminal has not been matched exactly. Perhaps it has not been found properly.";
+    // hint that text should be drawn without anti-aliasing.
+    // depending on the user's font configuration, this may not be respected
+    if (!_antialiasText)
+        newFont.setStyleStrategy(QFont::StyleStrategy(newFont.styleStrategy() | QFont::NoAntialias));
+
+    // experimental optimization.  Konsole assumes that the terminal is using a
+    // mono-spaced font, in which case kerning information should have an effect.
+    // Disabling kerning saves some computation when rendering text.
+    newFont.setKerning(false);
+
+    // Konsole cannot handle non-integer font metrics
+    newFont.setStyleStrategy(QFont::StyleStrategy(newFont.styleStrategy() | QFont::ForceIntegerMetrics));
+
+    QFontInfo fontInfo(newFont);
+
+    if (!fontInfo.fixedPitch()) {
+        qWarning() << "Ignoring font change due to it being variable-width";
+        return;
     }
 
-    if (!QFontInfo(font).fixedPitch()) {
-        qWarning() << "Using an unsupported variable-width font in the terminal.  This may produce display errors.";
+    // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch()
+    // related?  https://bugreports.qt.io/browse/QTBUG-34082
+    if (!fontInfo.exactMatch()) {
+        const QChar comma(QLatin1Char(','));
+        QString nonMatching = fontInfo.family() % comma %
+            QString::number(fontInfo.pointSizeF()) % comma %
+            QString::number(fontInfo.pixelSize()) % comma %
+            QString::number((int)fontInfo.styleHint()) % comma %
+            QString::number(fontInfo.weight()) % comma %
+            QString::number((int)fontInfo.style()) % comma %
+            QString::number((int)fontInfo.underline()) % comma %
+            QString::number((int)fontInfo.strikeOut()) % comma %
+            QString::number((int)fontInfo.fixedPitch()) % comma %
+            QString::number((int)fontInfo.rawMode());
+
+        qWarning() << "The font to use in the terminal can not be matched exactly on your system.";
+        qWarning()<<" Selected: "<<newFont.toString();
+        qWarning()<<" System  : "<<nonMatching;
     }
 
-    if (metrics.height() < height() && metrics.maxWidth() < width()) {
-        // hint that text should be drawn without anti-aliasing.
-        // depending on the user's font configuration, this may not be respected
-        if (!_antialiasText)
-            font.setStyleStrategy(QFont::NoAntialias);
-
-        // experimental optimization.  Konsole assumes that the terminal is using a
-        // mono-spaced font, in which case kerning information should have an effect.
-        // Disabling kerning saves some computation when rendering text.
-        font.setKerning(false);
-
-        // Konsole cannot handle non-integer font metrics
-        font.setStyleStrategy(QFont::StyleStrategy(font.styleStrategy() | QFont::ForceIntegerMetrics));
-
-        QWidget::setFont(font);
-        fontChange(font);
-    }
+    QWidget::setFont(newFont);
+    fontChange(newFont);
 }
 
 void TerminalDisplay::setFont(const QFont &)
