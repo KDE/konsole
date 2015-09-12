@@ -60,6 +60,7 @@
 
 // Konsole
 #include "Filter.h"
+#include "konsoledebug.h"
 #include "konsole_wcwidth.h"
 #include "TerminalCharacterDecoder.h"
 #include "Screen.h"
@@ -246,9 +247,9 @@ void TerminalDisplay::setVTFont(const QFont& f)
             QString::number((int)fontInfo.fixedPitch()) % comma %
             QString::number((int)fontInfo.rawMode());
 
-        qWarning() << "The font to use in the terminal can not be matched exactly on your system.";
-        qWarning()<<" Selected: "<<newFont.toString();
-        qWarning()<<" System  : "<<nonMatching;
+        qCDebug(KonsoleDebug) << "The font to use in the terminal can not be matched exactly on your system.";
+        qCDebug(KonsoleDebug)<<" Selected: "<<newFont.toString();
+        qCDebug(KonsoleDebug)<<" System  : "<<nonMatching;
     }
 
     QWidget::setFont(newFont);

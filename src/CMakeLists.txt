@@ -116,6 +116,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         Vt102Emulation.cpp
                         ZModemDialog.cpp
                         PrintOptions.cpp
+                        konsoledebug.cpp
                         konsole_wcwidth.cpp
                         WindowSystemInfo.cpp
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
