@@ -1282,7 +1282,7 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
 
     painter->drawText(option.rect.adjusted(sampleTextWidth + 15,0,0,0),
                       Qt::AlignLeft | Qt::AlignVCenter,
-                      index.data(Qt::DisplayRole).value<QString>());
+                      index.data(Qt::DisplayRole).toString());
 
     // Draw the preview
     const int x = option.rect.left();

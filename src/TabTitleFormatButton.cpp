@@ -67,7 +67,7 @@ TabTitleFormatButton::~TabTitleFormatButton()
 
 void TabTitleFormatButton::fireElementSelected(QAction* action)
 {
-    emit dynamicElementSelected(action->data().value<QString>());
+    emit dynamicElementSelected(action->data().toString());
 }
 
 void TabTitleFormatButton::setContext(Session::TabTitleContext titleContext)
