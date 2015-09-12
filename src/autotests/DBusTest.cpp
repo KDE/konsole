@@ -77,8 +77,8 @@ void DBusTest::initTestCase()
              "This test will only work in a Konsole window with a new PID.  A new Konsole PID can't be found.");
 
     QDBusInterface iface(_interfaceName,
-                         QLatin1String("/Konsole"),
-                         QLatin1String("org.kde.konsole.Konsole"));
+                         QStringLiteral("/Konsole"),
+                         QStringLiteral("org.kde.konsole.Konsole"));
     QVERIFY(iface.isValid());
 }
 
@@ -90,8 +90,8 @@ void DBusTest::cleanupTestCase()
     // they will get a popup dialog when we try to close this.
 
     QDBusInterface iface(_interfaceName,
-                         QLatin1String("/konsole/MainWindow_1"),
-                         QLatin1String("org.qtproject.Qt.QWidget"));
+                         QStringLiteral("/konsole/MainWindow_1"),
+                         QStringLiteral("org.qtproject.Qt.QWidget"));
     QVERIFY2(iface.isValid(), "Unable to get a dbus interface to Konsole!");
 
     QDBusReply<void> instanceReply = iface.call("close");
@@ -108,8 +108,8 @@ void DBusTest::testSessions()
     QDBusReply<QStringList> listReply;
 
     QDBusInterface iface(_interfaceName,
-                         QLatin1String("/Sessions/1"),
-                         QLatin1String("org.kde.konsole.Session"));
+                         QStringLiteral("/Sessions/1"),
+                         QStringLiteral("org.kde.konsole.Session"));
     QVERIFY(iface.isValid());
 
     //****************** Test is/set MonitorActivity

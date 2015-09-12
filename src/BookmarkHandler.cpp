@@ -50,7 +50,7 @@ BookmarkHandler::BookmarkHandler(KActionCollection* collection,
       _toplevel(toplevel),
       _activeView(0)
 {
-    setObjectName(QLatin1String("BookmarkHandler"));
+    setObjectName(QStringLiteral("BookmarkHandler"));
 
     _file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/bookmarks.xml"));
 

@@ -49,7 +49,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     QHBoxLayout* barLayout = new QHBoxLayout(this);
 
     QToolButton* closeButton = new QToolButton(this);
-    closeButton->setObjectName(QLatin1String("close-button"));
+    closeButton->setObjectName(QStringLiteral("close-button"));
     closeButton->setToolTip(i18nc("@info:tooltip", "Close the search bar"));
     closeButton->setAutoRaise(true);
     closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close")));
@@ -59,7 +59,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     _searchEdit = new QLineEdit(this);
     _searchEdit->setClearButtonEnabled(true);
     _searchEdit->installEventFilter(this);
-    _searchEdit->setObjectName(QLatin1String("search-edit"));
+    _searchEdit->setObjectName(QStringLiteral("search-edit"));
     _searchEdit->setToolTip(i18nc("@info:tooltip", "Enter the text to search for here"));
 
     // text box may be a minimum of 6 characters wide and a maximum of 10 characters wide
@@ -77,14 +77,14 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     connect(_searchEdit , &QLineEdit::textChanged , _searchTimer , static_cast<void(QTimer::*)()>(&QTimer::start));
 
     _findNextButton = new QToolButton(this);
-    _findNextButton->setObjectName(QLatin1String("find-next-button"));
+    _findNextButton->setObjectName(QStringLiteral("find-next-button"));
     _findNextButton->setText(i18nc("@action:button Go to the next phrase", "Next"));
     _findNextButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     _findNextButton->setToolTip(i18nc("@info:tooltip", "Find the next match for the current search phrase"));
     connect(_findNextButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::findNextClicked);
 
     _findPreviousButton = new QToolButton(this);
-    _findPreviousButton->setObjectName(QLatin1String("find-previous-button"));
+    _findPreviousButton->setObjectName(QStringLiteral("find-previous-button"));
     _findPreviousButton->setText(i18nc("@action:button Go to the previous phrase", "Previous"));
     _findPreviousButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     _findPreviousButton->setToolTip(i18nc("@info:tooltip", "Find the previous match for the current search phrase"));
@@ -92,11 +92,11 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
 
 
     _searchFromButton = new QToolButton(this);
-    _searchFromButton->setObjectName(QLatin1String("search-from-button"));
+    _searchFromButton->setObjectName(QStringLiteral("search-from-button"));
     connect(_searchFromButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::searchFromClicked);
 
     QToolButton* optionsButton = new QToolButton(this);
-    optionsButton->setObjectName(QLatin1String("find-options-button"));
+    optionsButton->setObjectName(QStringLiteral("find-options-button"));
     optionsButton->setText(i18nc("@action:button Display options menu", "Options"));
     optionsButton->setCheckable(false);
     optionsButton->setPopupMode(QToolButton::InstantPopup);

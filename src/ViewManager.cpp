@@ -97,7 +97,7 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     //prepare DBus communication
     new WindowAdaptor(this);
     // TODO: remove this obsolete and bad name
-    QDBusConnection::sessionBus().registerObject(QLatin1String("/Konsole"), this);
+    QDBusConnection::sessionBus().registerObject(QStringLiteral("/Konsole"), this);
 
     _managerId = ++lastManagerId;
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Windows/") + QString::number(_managerId), this);
