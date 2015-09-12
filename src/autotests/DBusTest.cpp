@@ -77,7 +77,7 @@ void DBusTest::initTestCase()
              "This test will only work in a Konsole window with a new PID.  A new Konsole PID can't be found.");
 
     QDBusInterface iface(_interfaceName,
-                         QStringLiteral("/Konsole"),
+                         QStringLiteral("/Windows/1"),
                          QStringLiteral("org.kde.konsole.Konsole"));
     QVERIFY(iface.isValid());
 }
