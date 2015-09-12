@@ -436,7 +436,7 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
     // if we just deleted the default profile,
     // replace it with a random profile from the list
     if (wasDefault) {
-        setDefaultProfile(_profiles.toList().first());
+        setDefaultProfile(_profiles.toList().at(0));
     }
 
     emit profileRemoved(profile);
