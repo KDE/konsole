@@ -36,7 +36,6 @@
 // Konsole
 #include "EditProfileDialog.h"
 #include "Emulation.h"
-#include "ManageProfilesDialog.h"
 #include "Session.h"
 #include "SessionController.h"
 #include "SessionManager.h"
@@ -55,9 +54,6 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
     , _pluggedController(0)
     , _manageProfilesAction(0)
 {
-    // setup global actions
-    createGlobalActions();
-
     // create view widget
     _viewManager = new ViewManager(this, actionCollection());
     _viewManager->setNavigationMethod(ViewManager::NoNavigation);
@@ -84,18 +80,6 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
 Part::~Part()
 {
     ProfileManager::instance()->saveSettings();
-}
-
-void Part::createGlobalActions()
-{
-    _manageProfilesAction = new QAction(i18n("Manage Profiles..."), this);
-    connect(_manageProfilesAction, &QAction::triggered, this, static_cast<void(Part::*)()>(&Konsole::Part::showManageProfilesDialog));
-}
-
-void Part::setupActionsForSession(SessionController* controller)
-{
-    KActionCollection* collection = controller->actionCollection();
-    collection->addAction("manage-profiles", _manageProfilesAction);
 }
 
 bool Part::openFile()
@@ -241,7 +225,6 @@ void Part::activeViewChanged(SessionController* controller)
 
     // insert new controller
     insertChildClient(controller);
-    setupActionsForSession(controller);
 
     connect(controller, &Konsole::SessionController::titleChanged, this, &Konsole::Part::activeViewTitleChanged);
     activeViewTitleChanged(controller);
@@ -278,19 +261,6 @@ void Part::overrideTerminalShortcut(QKeyEvent* event, bool& override)
 void Part::activeViewTitleChanged(ViewProperties* properties)
 {
     emit setWindowCaption(properties->title());
-}
-
-void Part::showManageProfilesDialog()
-{
-    showManageProfilesDialog(_viewManager->widget());
-}
-
-void Part::showManageProfilesDialog(QWidget* parent)
-{
-    ManageProfilesDialog* dialog = new ManageProfilesDialog(parent);
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-    dialog->setShortcutEditorVisible(false);
-    dialog->show();
 }
 
 void Part::showEditCurrentProfileDialog(QWidget* parent)

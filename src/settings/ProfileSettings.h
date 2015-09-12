@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef MANAGEPROFILESDIALOG_H
-#define MANAGEPROFILESDIALOG_H
+#ifndef PROFILESETTINGS_H
+#define PROFILESETTINGS_H
 
 // Qt
 #include <QStyledItemDelegate>
@@ -29,16 +29,12 @@
 
 // Konsole
 #include "Profile.h"
+#include "ui_ProfileSettings.h"
 
 class QItemSelection;
 class QShowEvent;
 class QStandardItem;
 class QStandardItemModel;
-
-namespace Ui
-{
-class ManageProfilesDialog;
-}
 
 namespace Konsole
 {
@@ -47,7 +43,7 @@ namespace Konsole
  * the user to add new profiles, and remove or edit existing
  * profile types.
  */
-class KONSOLEPRIVATE_EXPORT ManageProfilesDialog : public QDialog
+class ProfileSettings : public QWidget, private Ui::ProfileSettings
 {
     Q_OBJECT
 
@@ -56,8 +52,8 @@ class KONSOLEPRIVATE_EXPORT ManageProfilesDialog : public QDialog
 
 public:
     /** Constructs a new profile type with the specified parent. */
-    explicit ManageProfilesDialog(QWidget* parent = 0);
-    virtual ~ManageProfilesDialog();
+    explicit ProfileSettings(QWidget* parent = 0);
+    virtual ~ProfileSettings();
 
     /**
      * Specifies whether the shortcut editor should be show.
@@ -108,7 +104,6 @@ private:
     void populateTable();
     int rowForProfile(const Profile::Ptr profile) const;
 
-    Ui::ManageProfilesDialog* _ui;
     QStandardItemModel* _sessionModel;
 
     static const int ProfileNameColumn = 0;

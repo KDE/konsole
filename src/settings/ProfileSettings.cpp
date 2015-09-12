@@ -18,7 +18,7 @@
 */
 
 // Own
-#include "ManageProfilesDialog.h"
+#include "ProfileSettings.h"
 
 // Qt
 #include <QtCore/QFileInfo>
@@ -42,95 +42,82 @@
 #include "TerminalDisplay.h"
 #include "SessionManager.h"
 #include "SessionController.h"
-#include "ui_ManageProfilesDialog.h"
+#include "ui_ProfileSettings.h"
 
 using namespace Konsole;
 
-ManageProfilesDialog::ManageProfilesDialog(QWidget* aParent)
-    : QDialog(aParent)
+ProfileSettings::ProfileSettings(QWidget* aParent)
+    : QWidget(aParent)
     , _sessionModel(new QStandardItemModel(this))
 {
-    setWindowTitle(i18nc("@title:window", "Manage Profiles"));
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
-    QWidget *mainWidget = new QWidget(this);
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
-    connect(buttonBox, &QDialogButtonBox::accepted, this, &ManageProfilesDialog::slotAccepted);
-    connect(buttonBox, &QDialogButtonBox::rejected, this, &ManageProfilesDialog::reject);
-    mainLayout->addWidget(buttonBox);
-
-    
-    _ui = new Ui::ManageProfilesDialog();
-    _ui->setupUi(mainWidget);
+    setupUi(this);
 
     // hide vertical header
-    _ui->sessionTable->verticalHeader()->hide();
-    _ui->sessionTable->setShowGrid(false);
+    sessionTable->verticalHeader()->hide();
+    sessionTable->setShowGrid(false);
 
-    _ui->sessionTable->setItemDelegateForColumn(FavoriteStatusColumn, new FavoriteItemDelegate(this));
-    _ui->sessionTable->setItemDelegateForColumn(ShortcutColumn, new ShortcutItemDelegate(this));
-    _ui->sessionTable->setEditTriggers(_ui->sessionTable->editTriggers() | QAbstractItemView::SelectedClicked);
+    sessionTable->setItemDelegateForColumn(FavoriteStatusColumn, new FavoriteItemDelegate(this));
+    sessionTable->setItemDelegateForColumn(ShortcutColumn, new ShortcutItemDelegate(this));
+    sessionTable->setEditTriggers(sessionTable->editTriggers() | QAbstractItemView::SelectedClicked);
 
     // populate the table with profiles
     populateTable();
 
     // listen for changes to profiles
-    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileAdded, this, &Konsole::ManageProfilesDialog::addItems);
-    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileRemoved, this, &Konsole::ManageProfilesDialog::removeItems);
-    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged, this, &Konsole::ManageProfilesDialog::updateItems);
-    connect(ProfileManager::instance() , &Konsole::ProfileManager::favoriteStatusChanged, this, &Konsole::ManageProfilesDialog::updateFavoriteStatus);
+    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileAdded, this, &Konsole::ProfileSettings::addItems);
+    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileRemoved, this, &Konsole::ProfileSettings::removeItems);
+    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged, this, &Konsole::ProfileSettings::updateItems);
+    connect(ProfileManager::instance() , &Konsole::ProfileManager::favoriteStatusChanged, this, &Konsole::ProfileSettings::updateFavoriteStatus);
 
     // resize the session table to the full width of the table
-    _ui->sessionTable->horizontalHeader()->setHighlightSections(false);
-    _ui->sessionTable->resizeColumnsToContents();
+    sessionTable->horizontalHeader()->setHighlightSections(false);
+    sessionTable->resizeColumnsToContents();
 
     // allow a larger width for the shortcut column to account for the
     // increased with needed by the shortcut editor compared with just
     // displaying the text of the shortcut
-    _ui->sessionTable->setColumnWidth(ShortcutColumn,
-                                      _ui->sessionTable->columnWidth(ShortcutColumn) + 100);
+    sessionTable->setColumnWidth(ShortcutColumn,
+                                      sessionTable->columnWidth(ShortcutColumn) + 100);
 
     // setup buttons
-    connect(_ui->newProfileButton, &QPushButton::clicked, this, &Konsole::ManageProfilesDialog::createProfile);
-    connect(_ui->editProfileButton, &QPushButton::clicked, this, &Konsole::ManageProfilesDialog::editSelected);
-    connect(_ui->deleteProfileButton, &QPushButton::clicked, this, &Konsole::ManageProfilesDialog::deleteSelected);
-    connect(_ui->setAsDefaultButton, &QPushButton::clicked, this, &Konsole::ManageProfilesDialog::setSelectedAsDefault);
+    connect(newProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::createProfile);
+    connect(editProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::editSelected);
+    connect(deleteProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::deleteSelected);
+    connect(setAsDefaultButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::setSelectedAsDefault);
 }
 
-void ManageProfilesDialog::showEvent(QShowEvent*)
+void ProfileSettings::showEvent(QShowEvent*)
 {
-    Q_ASSERT(_ui->sessionTable->model());
+    Q_ASSERT(sessionTable->model());
 
     // try to ensure that all the text in all the columns is visible initially.
     // FIXME:  this is not a good solution, look for a more correct way to do this
 
     int totalWidth = 0;
-    const int columnCount = _ui->sessionTable->model()->columnCount();
+    const int columnCount = sessionTable->model()->columnCount();
 
     for (int i = 0 ; i < columnCount ; i++)
-        totalWidth += _ui->sessionTable->columnWidth(i);
+        totalWidth += sessionTable->columnWidth(i);
 
     // the margin is added to account for the space taken by the resize grips
     // between the columns, this ensures that a horizontal scroll bar is not added
     // automatically
     int margin = style()->pixelMetric(QStyle::PM_HeaderGripMargin) * columnCount;
-    _ui->sessionTable->setMinimumWidth(totalWidth + margin);
-    _ui->sessionTable->horizontalHeader()->setStretchLastSection(true);
+    sessionTable->setMinimumWidth(totalWidth + margin);
+    sessionTable->horizontalHeader()->setStretchLastSection(true);
 }
 
-ManageProfilesDialog::~ManageProfilesDialog()
+ProfileSettings::~ProfileSettings()
 {
-    delete _ui;
 }
 
-void ManageProfilesDialog::slotAccepted()
+void ProfileSettings::slotAccepted()
 {
     ProfileManager::instance()->saveSettings();
     deleteLater();
 }
 
-void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
+void ProfileSettings::itemDataChanged(QStandardItem* item)
 {
     if (item->column() == ShortcutColumn) {
         QKeySequence sequence = QKeySequence::fromString(item->text());
@@ -151,7 +138,7 @@ void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
     }
 }
 
-int ManageProfilesDialog::rowForProfile(const Profile::Ptr profile) const
+int ProfileSettings::rowForProfile(const Profile::Ptr profile) const
 {
     const int rowCount = _sessionModel->rowCount();
     for (int i = 0; i < rowCount; i++) {
@@ -162,7 +149,7 @@ int ManageProfilesDialog::rowForProfile(const Profile::Ptr profile) const
     }
     return -1;
 }
-void ManageProfilesDialog::removeItems(const Profile::Ptr profile)
+void ProfileSettings::removeItems(const Profile::Ptr profile)
 {
     int row = rowForProfile(profile);
     if (row < 0)
@@ -170,7 +157,7 @@ void ManageProfilesDialog::removeItems(const Profile::Ptr profile)
 
     _sessionModel->removeRow(row);
 }
-void ManageProfilesDialog::updateItems(const Profile::Ptr profile)
+void ProfileSettings::updateItems(const Profile::Ptr profile)
 {
     const int row = rowForProfile(profile);
     if (row < 0)
@@ -183,7 +170,7 @@ void ManageProfilesDialog::updateItems(const Profile::Ptr profile)
 
     updateItemsForProfile(profile, items);
 }
-void ManageProfilesDialog::updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem*>& items) const
+void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem*>& items) const
 {
     // Profile Name
     items[ProfileNameColumn]->setText(profile->name());
@@ -207,7 +194,7 @@ void ManageProfilesDialog::updateItemsForProfile(const Profile::Ptr profile, QLi
     items[ShortcutColumn]->setData(QVariant::fromValue(profile), ShortcutRole);
     items[ShortcutColumn]->setToolTip(i18nc("@info:tooltip", "Double click to change shortcut"));
 }
-void ManageProfilesDialog::addItems(const Profile::Ptr profile)
+void ProfileSettings::addItems(const Profile::Ptr profile)
 {
     if (profile->isHidden())
         return;
@@ -219,11 +206,11 @@ void ManageProfilesDialog::addItems(const Profile::Ptr profile)
     updateItemsForProfile(profile, items);
     _sessionModel->appendRow(items);
 }
-void ManageProfilesDialog::populateTable()
+void ProfileSettings::populateTable()
 {
-    Q_ASSERT(!_ui->sessionTable->model());
+    Q_ASSERT(!sessionTable->model());
 
-    _ui->sessionTable->setModel(_sessionModel);
+    sessionTable->setModel(_sessionModel);
 
     _sessionModel->clear();
     // setup session table
@@ -239,18 +226,18 @@ void ManageProfilesDialog::populateTable()
     }
     updateDefaultItem();
 
-    connect(_sessionModel, &QStandardItemModel::itemChanged, this, &Konsole::ManageProfilesDialog::itemDataChanged);
+    connect(_sessionModel, &QStandardItemModel::itemChanged, this, &Konsole::ProfileSettings::itemDataChanged);
 
     // listen for changes in the table selection and update the state of the form's buttons
     // accordingly.
     //
     // it appears that the selection model is changed when the model itself is replaced,
     // so the signals need to be reconnected each time the model is updated.
-    connect(_ui->sessionTable->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Konsole::ManageProfilesDialog::tableSelectionChanged);
+    connect(sessionTable->selectionModel(), &QItemSelectionModel::selectionChanged, this, &Konsole::ProfileSettings::tableSelectionChanged);
 
-    _ui->sessionTable->selectRow(0);
+    sessionTable->selectRow(0);
 }
-void ManageProfilesDialog::updateDefaultItem()
+void ProfileSettings::updateDefaultItem()
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
@@ -273,60 +260,60 @@ void ManageProfilesDialog::updateDefaultItem()
         }
     }
 }
-void ManageProfilesDialog::tableSelectionChanged(const QItemSelection&)
+void ProfileSettings::tableSelectionChanged(const QItemSelection&)
 {
-    const int selectedRows = _ui->sessionTable->selectionModel()->selectedRows().count();
+    const int selectedRows = sessionTable->selectionModel()->selectedRows().count();
     const ProfileManager* manager = ProfileManager::instance();
     const bool isNotDefault = (selectedRows > 0) && currentProfile() != manager->defaultProfile();
     const bool isDeletable = (selectedRows > 1) ||
                              (selectedRows == 1 && isProfileDeletable(currentProfile()));
 
-    _ui->newProfileButton->setEnabled(selectedRows < 2);
+    newProfileButton->setEnabled(selectedRows < 2);
     // FIXME: At some point editing 2+ profiles no longer works
-    _ui->editProfileButton->setEnabled(selectedRows == 1);
+    editProfileButton->setEnabled(selectedRows == 1);
     // do not allow the default session type to be removed
-    _ui->deleteProfileButton->setEnabled(isDeletable && isNotDefault);
-    _ui->setAsDefaultButton->setEnabled(isNotDefault && (selectedRows < 2));
+    deleteProfileButton->setEnabled(isDeletable && isNotDefault);
+    setAsDefaultButton->setEnabled(isNotDefault && (selectedRows < 2));
 }
-void ManageProfilesDialog::deleteSelected()
+void ProfileSettings::deleteSelected()
 {
     foreach(const Profile::Ptr & profile, selectedProfiles()) {
         if (profile != ProfileManager::instance()->defaultProfile())
             ProfileManager::instance()->deleteProfile(profile);
     }
 }
-void ManageProfilesDialog::setSelectedAsDefault()
+void ProfileSettings::setSelectedAsDefault()
 {
     ProfileManager::instance()->setDefaultProfile(currentProfile());
     // do not allow the new default session type to be removed
-    _ui->deleteProfileButton->setEnabled(false);
-    _ui->setAsDefaultButton->setEnabled(false);
+    deleteProfileButton->setEnabled(false);
+    setAsDefaultButton->setEnabled(false);
 
     // update font of new default item
     updateDefaultItem();
 }
 
-void ManageProfilesDialog::moveUpSelected()
+void ProfileSettings::moveUpSelected()
 {
     Q_ASSERT(_sessionModel);
 
-    const int rowIndex = _ui->sessionTable->currentIndex().row();
+    const int rowIndex = sessionTable->currentIndex().row();
     const QList<QStandardItem*>items = _sessionModel->takeRow(rowIndex);
     _sessionModel->insertRow(rowIndex - 1, items);
-    _ui->sessionTable->selectRow(rowIndex - 1);
+    sessionTable->selectRow(rowIndex - 1);
 }
 
-void ManageProfilesDialog::moveDownSelected()
+void ProfileSettings::moveDownSelected()
 {
     Q_ASSERT(_sessionModel);
 
-    const int rowIndex = _ui->sessionTable->currentIndex().row();
+    const int rowIndex = sessionTable->currentIndex().row();
     const QList<QStandardItem*>items = _sessionModel->takeRow(rowIndex);
     _sessionModel->insertRow(rowIndex + 1, items);
-    _ui->sessionTable->selectRow(rowIndex + 1);
+    sessionTable->selectRow(rowIndex + 1);
 }
 
-void ManageProfilesDialog::createProfile()
+void ProfileSettings::createProfile()
 {
     // setup a temporary profile which is a clone of the selected profile
     // or the default if no profile is selected
@@ -357,7 +344,7 @@ void ManageProfilesDialog::createProfile()
     }
     delete dialog.data();
 }
-void ManageProfilesDialog::editSelected()
+void ProfileSettings::editSelected()
 {
     QList<Profile::Ptr> profiles(selectedProfiles());
 
@@ -387,10 +374,10 @@ void ManageProfilesDialog::editSelected()
     dialog.setProfile(Profile::Ptr(group));
     dialog.exec();
 }
-QList<Profile::Ptr> ManageProfilesDialog::selectedProfiles() const
+QList<Profile::Ptr> ProfileSettings::selectedProfiles() const
 {
     QList<Profile::Ptr> list;
-    QItemSelectionModel* selection = _ui->sessionTable->selectionModel();
+    QItemSelectionModel* selection = sessionTable->selectionModel();
     if (!selection)
         return list;
 
@@ -401,9 +388,9 @@ QList<Profile::Ptr> ManageProfilesDialog::selectedProfiles() const
 
     return list;
 }
-Profile::Ptr ManageProfilesDialog::currentProfile() const
+Profile::Ptr ProfileSettings::currentProfile() const
 {
-    QItemSelectionModel* selection = _ui->sessionTable->selectionModel();
+    QItemSelectionModel* selection = sessionTable->selectionModel();
 
     if (!selection || selection->selectedRows().count() != 1)
         return Profile::Ptr();
@@ -411,7 +398,7 @@ Profile::Ptr ManageProfilesDialog::currentProfile() const
     return  selection->
             selectedIndexes().first().data(ProfileKeyRole).value<Profile::Ptr>();
 }
-bool ManageProfilesDialog::isProfileDeletable(Profile::Ptr profile) const
+bool ProfileSettings::isProfileDeletable(Profile::Ptr profile) const
 {
     static const QString systemDataLocation = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).last() + QStringLiteral("konsole/");
 
@@ -435,7 +422,7 @@ bool ManageProfilesDialog::isProfileDeletable(Profile::Ptr profile) const
         return true;
     }
 }
-void ManageProfilesDialog::updateFavoriteStatus(Profile::Ptr profile, bool favorite)
+void ProfileSettings::updateFavoriteStatus(Profile::Ptr profile, bool favorite)
 {
     Q_ASSERT(_sessionModel);
 
@@ -448,9 +435,9 @@ void ManageProfilesDialog::updateFavoriteStatus(Profile::Ptr profile, bool favor
         }
     }
 }
-void ManageProfilesDialog::setShortcutEditorVisible(bool visible)
+void ProfileSettings::setShortcutEditorVisible(bool visible)
 {
-    _ui->sessionTable->setColumnHidden(ShortcutColumn, !visible);
+    sessionTable->setColumnHidden(ShortcutColumn, !visible);
 }
 void StyledBackgroundPainter::drawBackground(QPainter* painter, const QStyleOptionViewItem& option,
         const QModelIndex&)
@@ -491,7 +478,7 @@ bool FavoriteItemDelegate::editorEvent(QEvent* aEvent, QAbstractItemModel*,
     if (aEvent->type() == QEvent::MouseButtonPress ||
             aEvent->type() == QEvent::KeyPress ||
             aEvent->type() == QEvent::MouseButtonDblClick) {
-        Profile::Ptr profile = index.data(ManageProfilesDialog::ProfileKeyRole).value<Profile::Ptr>();
+        Profile::Ptr profile = index.data(ProfileSettings::ProfileKeyRole).value<Profile::Ptr>();
         const bool isFavorite = ProfileManager::instance()->findFavorites().contains(profile);
 
         ProfileManager::instance()->setFavorite(profile, !isFavorite);

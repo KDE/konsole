@@ -91,16 +91,6 @@ public slots:
     QStringList profileNameList() const;
 
     /**
-     * Shows the dialog used to manage profiles in Konsole.  The dialog
-     * will be non-modal and will delete itself when it is closed.
-     *
-     * This is experimental API and not guaranteed to be present in later
-     * KDE 4 releases.
-     *
-     * @param parent The parent widget of the new dialog.
-     */
-    void showManageProfilesDialog(QWidget* parent);
-    /**
      * Shows the dialog used to edit the profile used by the active session.  The
      * dialog will be non-modal and will delete itself when it is closed.
      *
@@ -198,15 +188,12 @@ protected:
 private slots:
     void activeViewChanged(SessionController* controller);
     void activeViewTitleChanged(ViewProperties* properties);
-    void showManageProfilesDialog();
     void terminalExited();
     void newTab();
     void overrideTerminalShortcut(QKeyEvent*, bool& override);
     void sessionStateChanged(int state);
 private:
     Session* activeSession() const;
-    void createGlobalActions();
-    void setupActionsForSession(SessionController*);
 
 private:
     ViewManager* _viewManager;

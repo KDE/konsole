@@ -49,7 +49,6 @@
 #include "BookmarkHandler.h"
 #include "SessionController.h"
 #include "ProfileList.h"
-#include "ManageProfilesDialog.h"
 #include "Session.h"
 #include "ViewManager.h"
 #include "SessionManager.h"
@@ -58,6 +57,7 @@
 #include "WindowSystemInfo.h"
 #include "settings/FileLocationSettings.h"
 #include "settings/GeneralSettings.h"
+#include "settings/ProfileSettings.h"
 #include "settings/TabBarSettings.h"
 
 using namespace Konsole;
@@ -659,22 +659,26 @@ void MainWindow::newFromProfile(Profile::Ptr profile)
 }
 void MainWindow::showManageProfilesDialog()
 {
-    ManageProfilesDialog* dialog = new ManageProfilesDialog(this);
-    dialog->show();
+    showSettingsDialog(true);
 }
 
-void MainWindow::showSettingsDialog()
+void MainWindow::showSettingsDialog(const bool showProfilePage)
 {
     if (KConfigDialog::showDialog("settings"))
         return;
 
     KConfigDialog* settingsDialog = new KConfigDialog(this, "settings", KonsoleSettings::self());
-    settingsDialog->setFaceType(KPageDialog::List);
+    settingsDialog->setFaceType(KPageDialog::Tabbed);
 
     GeneralSettings* generalSettings = new GeneralSettings(settingsDialog);
     settingsDialog->addPage(generalSettings,
                             i18nc("@title Preferences page name", "General"),
                             "utilities-terminal");
+
+    ProfileSettings* profileSettings = new ProfileSettings(settingsDialog);
+    KPageWidgetItem* profilePage = settingsDialog->addPage(profileSettings,
+                            i18nc("@title Preferences page name", "Profiles"),
+                            "configure");
 
     TabBarSettings* tabBarSettings = new TabBarSettings(settingsDialog);
     settingsDialog->addPage(tabBarSettings,
@@ -685,6 +689,9 @@ void MainWindow::showSettingsDialog()
     settingsDialog->addPage(fileLocationSettings,
                             i18nc("@title Preferences page name", "File Location"),
                             "configure");
+
+    if (showProfilePage)
+        settingsDialog->setCurrentPage(profilePage);
 
     settingsDialog->show();
 }
