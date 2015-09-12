@@ -431,7 +431,7 @@ void MainWindow::openUrls(const QList<QUrl>& urls)
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
-    Q_FOREACH (auto url, urls) {
+    Q_FOREACH (const auto& url, urls) {
         if (url.isLocalFile())
             createSession(defaultProfile, url.path());
 
