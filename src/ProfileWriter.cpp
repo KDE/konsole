@@ -37,47 +37,16 @@ using namespace Konsole;
 // FIXME: A dup line from Profile.cpp - redo these
 static const char GENERAL_GROUP[]     = "General";
 
+// All profiles changes are stored under users' local account
 QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
 {
-    // both location have trailing slash
-    static const QString localDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole/");
-    static const QString systemDataLocation = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).last() + QStringLiteral("konsole/");
+#if QT_VERSION < QT_VERSION_CHECK(5, 4, 0)
+    static const QString localDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole");
+#else
+    static const QString localDataLocation = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+#endif
 
-    const QString candidateLocalPath = localDataLocation + profile->untranslatedName() + ".profile";
-    QString newPath;
-
-    // when the path property is not set, it means the profile has just
-    // been created in memory and has never been saved into disk before.
-    //
-    // use "name.profile" as filename and save it under $KDEHOME
-    if (!profile->isPropertySet(Profile::Path)) {
-        return candidateLocalPath;
-    }
-
-    // for a system wide profile, save the modified version as
-    // a local profile under $KDEHOME
-    if (profile->path().startsWith(systemDataLocation)) {
-        return candidateLocalPath;
-    }
-
-    // for a local profile, use its existing path
-    if (profile->path().startsWith(localDataLocation)) {
-        newPath = profile->path();
-    } else {
-        // for the ad-hoc profiles in non-standard places
-        //
-        //  * if its path is writable for user, use its existing path
-        //  * if its path is not writable for user, save it under $KDEHOME
-        //
-        QFileInfo fileInfo(profile->path());
-        if (fileInfo.isWritable()) {
-            newPath = profile->path();
-        } else {
-            newPath = candidateLocalPath;
-        }
-    }
-
-    return newPath;
+    return localDataLocation % "/" % profile->untranslatedName() % ".profile";
 }
 void KDE4ProfileWriter::writeProperties(KConfig& config,
                                         const Profile::Ptr profile,
