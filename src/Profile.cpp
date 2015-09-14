@@ -159,7 +159,7 @@ FallbackProfile::FallbackProfile()
     setProperty(MenuIndex, "0");
     setProperty(SilenceSeconds, 10);
     setProperty(TerminalColumns, 80);
-    setProperty(TerminalRows, 40);
+    setProperty(TerminalRows, 24);
     setProperty(MouseWheelZoomEnabled, true);
 
     setProperty(KeyBindings, "default");
