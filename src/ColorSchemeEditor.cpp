@@ -117,9 +117,9 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     _ui->colorTable->setHorizontalHeaderLabels(labels);
 
     // Set resize mode for colorTable columns
-    _ui->colorTable->horizontalHeader()->setResizeMode(NAME_COLUMN, QHeaderView::ResizeToContents);
-    _ui->colorTable->horizontalHeader()->setResizeMode(COLOR_COLUMN, QHeaderView::Stretch);
-    _ui->colorTable->horizontalHeader()->setResizeMode(INTENSE_COLOR_COLUMN, QHeaderView::Stretch);
+    _ui->colorTable->horizontalHeader()->setSectionResizeMode(NAME_COLUMN, QHeaderView::ResizeToContents);
+    _ui->colorTable->horizontalHeader()->setSectionResizeMode(COLOR_COLUMN, QHeaderView::Stretch);
+    _ui->colorTable->horizontalHeader()->setSectionResizeMode(INTENSE_COLOR_COLUMN, QHeaderView::Stretch);
 
     QTableWidgetItem* item = new QTableWidgetItem("Test");
     _ui->colorTable->setItem(0, 0, item);
