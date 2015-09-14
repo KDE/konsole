@@ -50,7 +50,6 @@
 
 #if defined(Q_OS_MAC)
 #include <libproc.h>
-#include <kde_file.h>
 #endif
 
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
@@ -874,6 +873,7 @@ private:
         int managementInfoBase[4];
         size_t mibLength;
         struct kinfo_proc* kInfoProc;
+/*
         KDE_struct_stat statInfo;
 
         // Find the tty device of 'pid' (Example: /dev/ttys001)
@@ -922,6 +922,8 @@ private:
             setPid(aPid);
         }
         return true;
+*/
+        return false;
     }
 
     virtual bool readArguments(int aPid) {
