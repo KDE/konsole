@@ -237,7 +237,7 @@ public slots:
      * @param directory the working directory where the session is
      * started.
      */
-    Q_SCRIPTABLE int newSession(QString profile, QString directory);
+    Q_SCRIPTABLE int newSession(const QString& profile, const QString& directory);
 
     // TODO: its semantic is application-wide. Move it to more appropriate place
     // DBus slot that returns the name of default profile

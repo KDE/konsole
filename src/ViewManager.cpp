@@ -987,7 +987,7 @@ int ViewManager::newSession()
     return session->sessionId();
 }
 
-int ViewManager::newSession(QString profile, QString directory)
+int ViewManager::newSession(const QString& profile, const QString& directory)
 {
     const QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
     Profile::Ptr profileptr = ProfileManager::instance()->defaultProfile();

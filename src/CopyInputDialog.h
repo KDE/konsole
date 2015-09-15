@@ -109,7 +109,7 @@ public:
     void setCheckable(Session* session, bool checkable);
 
     /** Sets the list of sessions which are currently checked. */
-    void setCheckedSessions(const QSet<Session*> sessions);
+    void setCheckedSessions(const QSet<Session*>& sessions);
     /** Returns the set of checked sessions. */
     QSet<Session*> checkedSessions() const;
 
