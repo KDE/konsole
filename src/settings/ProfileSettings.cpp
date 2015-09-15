@@ -200,8 +200,9 @@ void ProfileSettings::addItems(const Profile::Ptr profile)
         return;
 
     QList<QStandardItem*> items;
+    items.reserve(3);
     for (int i = 0; i < 3; i++)
-        items << new QStandardItem;
+        items.append(new QStandardItem);
 
     updateItemsForProfile(profile, items);
     _sessionModel->appendRow(items);
