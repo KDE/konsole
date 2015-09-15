@@ -962,11 +962,6 @@ void ViewManager::restoreSessions(const KConfigGroup& group)
     }
 }
 
-uint qHash(QPointer<TerminalDisplay> display)
-{
-    return qHash((TerminalDisplay*)display);
-}
-
 int ViewManager::sessionCount()
 {
     return this->_sessionMap.size();
