@@ -400,18 +400,10 @@ Profile::Ptr ProfileSettings::currentProfile() const
 }
 bool ProfileSettings::isProfileDeletable(Profile::Ptr profile) const
 {
-    static const QString systemDataLocation = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).last() + QStringLiteral("konsole/");
-
     if (profile) {
         QFileInfo fileInfo(profile->path());
 
         if (fileInfo.exists()) {
-            // never remove a system wide profile, no matter whether the
-            // current user has enough permission
-            if (profile->path().startsWith(systemDataLocation)) {
-                return false;
-            }
-
             // check whether user has enough permission
             QFileInfo dirInfo(fileInfo.path());
             return dirInfo.isWritable();
