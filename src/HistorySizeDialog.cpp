@@ -25,7 +25,6 @@
 #include "ui_HistorySizeDialog.h"
 
 #include <KLocalizedString>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>

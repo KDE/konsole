@@ -30,10 +30,7 @@
 #include <QDebug>
 #include <KLocalizedString>
 #include <KIconLoader>
-#include <KConfigGroup>
-#include <QDialogButtonBox>
 #include <QPushButton>
-#include <QVBoxLayout>
 
 // Konsole
 #include "EditProfileDialog.h"

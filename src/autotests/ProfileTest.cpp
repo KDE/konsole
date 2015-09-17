@@ -23,7 +23,6 @@
 // KDE
 #include <qtest.h>
 #include <QFileInfo>
-#include <QTimer>
 
 // Konsole
 #include "../Profile.h"

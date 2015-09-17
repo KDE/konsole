@@ -22,7 +22,6 @@
 // KDE
 #include <KLocalizedString>
 #include <KTextEdit>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <KGuiItem>

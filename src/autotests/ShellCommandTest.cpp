@@ -23,7 +23,6 @@
 
 // Qt
 #include <QtCore/QStringList>
-#include <QtGlobal>
 
 // KDE
 #include <qtest.h>

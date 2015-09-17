@@ -21,9 +21,6 @@
 #include "PartManualTest.h"
 
 // Qt
-#include <QWidget>
-#include <QLabel>
-#include <QVBoxLayout>
 #include <QtGui/QKeyEvent>
 #include <qtestkeyboard.h>
 #include <QMenu>
@@ -38,8 +35,6 @@
 #include <KPluginFactory>
 #include <KService>
 #include <KParts/Part>
-#include <KPtyProcess>
-#include <KPtyDevice>
 #include <KMainWindow>
 #include <qtest.h>
 

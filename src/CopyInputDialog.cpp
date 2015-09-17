@@ -27,7 +27,6 @@
 #include "ui_CopyInputDialog.h"
 
 #include <KLocalizedString>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>

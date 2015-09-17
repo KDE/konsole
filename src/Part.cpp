@@ -30,7 +30,6 @@
 #include <QAction>
 #include <KActionCollection>
 #include <KPluginFactory>
-#include <KLocalizedString>
 #include <QDebug>
 
 // Konsole

@@ -39,17 +39,14 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QDialog>
-#include <QDebug>
 // KDE
 #include <KCodecAction>
 
 #include <KIconDialog>
 #include <KUrlCompletion>
 #include <KWindowSystem>
-#include <KTextEdit>
 #include <KMessageBox>
 #include <KLocalizedString>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>

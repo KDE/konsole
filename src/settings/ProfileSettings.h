@@ -25,7 +25,6 @@
 #include <QtCore/QSet>
 
 // KDE
-#include <QDialog>
 
 // Konsole
 #include "Profile.h"

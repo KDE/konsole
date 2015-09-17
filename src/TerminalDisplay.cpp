@@ -42,7 +42,6 @@
 #include <QScrollBar>
 #include <QStyle>
 #include <QtCore/QTimer>
-#include <QToolTip>
 #include <QDrag>
 #include <QtGui/QAccessible>
 

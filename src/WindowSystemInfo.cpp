@@ -21,9 +21,6 @@
 // Own
 #include "WindowSystemInfo.h"
 
-// KDE
-#include <KWindowSystem>
-
 using Konsole::WindowSystemInfo;
 
 bool WindowSystemInfo::HAVE_TRANSPARENCY = false;

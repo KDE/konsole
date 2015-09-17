@@ -25,7 +25,6 @@
 // Qt
 #include <QtCore/QSignalMapper>
 #include <QtCore/QStringList>
-#include <QMenu>
 #include <QAction>
 #include <QtDBus/QtDBus>
 

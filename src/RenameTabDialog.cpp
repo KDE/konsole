@@ -24,7 +24,6 @@
 #include "ui_RenameTabDialog.h"
 
 #include <KLocalizedString>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
