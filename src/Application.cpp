@@ -448,14 +448,14 @@ void Application::startBackgroundMode(MainWindow* window)
         return;
     }
 
-/* This doesn't work ATM - leave in here so I dont' forget about it
+/* FIXME: This doesn't work ATM - leave in here so I dont' forget about it
     KActionCollection* collection = window->actionCollection();
-    KAction* action = collection->addAction("toggle-background-window");
+    QAction * action = collection->addAction("toggle-background-window");
     action->setObjectName(QLatin1String("Konsole Background Mode"));
     action->setText(i18n("Toggle Background Window"));
     action->setGlobalShortcut(KShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F12)));
 
-    connect(action, &KAction::triggered, this, &Application::toggleBackgroundInstance);
+    connect(action, &QAction::triggered, this, &Application::toggleBackgroundInstance);
 */
     _backgroundInstance = window;
 }
