@@ -181,7 +181,7 @@ void DBusTest::testSessions()
 
     QStringList prevEnv = listReply.value();
     //for (int i = 0; i < prevEnv.size(); ++i)
-    //    kDebug()<< prevEnv.at(i).toLocal8Bit().constData() << endl;
+    //    qDebug()<< prevEnv.at(i).toLocal8Bit().constData() << endl;
 
     voidReply = iface.call("setEnvironment", QStringList());
     QVERIFY(voidReply.isValid());
@@ -202,7 +202,7 @@ void DBusTest::testSessions()
     stringReply = iface.call("title", Session::LocalTabTitle);
     QVERIFY(stringReply.isValid());
 
-    //kDebug()<< stringReply.value();
+    //qDebug()<< stringReply.value();
     QString prevLocalTitle = stringReply.value();
 
     // set title to,  what title should be

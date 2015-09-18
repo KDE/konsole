@@ -25,7 +25,6 @@
 
 // KDE
 #include <KService>
-#include <KDebug>
 #include <qtest.h>
 //#include "../Part.h"
 

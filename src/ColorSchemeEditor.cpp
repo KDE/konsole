@@ -58,7 +58,6 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     , _isNewScheme(false)
     , _colors(0)
 {
-    // Kdialog buttons
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);
     QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
