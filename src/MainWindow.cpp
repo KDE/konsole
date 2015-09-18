@@ -42,7 +42,6 @@
 #include <KNotifyConfigWidget>
 #include <KConfigDialog>
 #include <KApplication>
-#include <KShortcut>
 #include <KIconLoader>
 
 // Konsole
