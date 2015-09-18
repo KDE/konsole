@@ -80,8 +80,8 @@ EditProfileDialog::EditProfileDialog(QWidget* aParent)
     QPushButton *okButton = mButtonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-    connect(mButtonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(mButtonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(mButtonBox, &QDialogButtonBox::accepted, this, &Konsole::EditProfileDialog::accept);
+    connect(mButtonBox, &QDialogButtonBox::rejected, this, &Konsole::EditProfileDialog::reject);
 
     // disable the apply button , since no modification has been made
     mButtonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
@@ -465,7 +465,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->fontPreviewLabel->setFont(profileFont);
     setFontInputValue(profileFont);
 
-    connect(_ui->fontSizeInput, SIGNAL(valueChanged(double)), this, SLOT(setFontSize(double)));
+    connect(_ui->fontSizeInput, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &Konsole::EditProfileDialog::setFontSize);
     connect(_ui->selectFontButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::showFontDialog);
 
     // setup font smoothing
@@ -881,8 +881,8 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     QDialog dialog(this);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(&dialog);
     buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    connect(buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
 
     if (isNewTranslator)
         dialog.setWindowTitle(i18n("New Key Binding List"));
