@@ -502,7 +502,7 @@ public slots:
       * Overloaded to accept a QByteArray for convenience since DBus
       * does not accept QTextCodec directly.
       */
-    Q_SCRIPTABLE bool setCodec(QByteArray codec);
+    Q_SCRIPTABLE bool setCodec(const QByteArray& codec);
 
     /** Returns the codec used to decode incoming characters in this
      * terminal emulation
