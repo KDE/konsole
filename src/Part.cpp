@@ -84,6 +84,7 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
 Part::~Part()
 {
     ProfileManager::instance()->saveSettings();
+    delete _viewManager;
 }
 
 void Part::createGlobalActions()
