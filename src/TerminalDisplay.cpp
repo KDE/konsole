@@ -1668,6 +1668,8 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     // suppress further text blinking
     _blinkTextTimer->stop();
     Q_ASSERT(_textBlinking == false);
+
+    emit focusLost();
 }
 
 void TerminalDisplay::focusInEvent(QFocusEvent*)
@@ -1679,6 +1681,8 @@ void TerminalDisplay::focusInEvent(QFocusEvent*)
 
     if (_allowBlinkingText && _hasTextBlinker)
         _blinkTextTimer->start();
+
+    emit focusGained();
 }
 
 void TerminalDisplay::blinkTextEvent()

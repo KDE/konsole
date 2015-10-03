@@ -67,7 +67,8 @@ unsigned short Konsole::vt100_graphics[32] = {
 
 Vt102Emulation::Vt102Emulation()
     : Emulation(),
-      _titleUpdateTimer(new QTimer(this))
+      _titleUpdateTimer(new QTimer(this)),
+      _reportFocusEvents(false)
 {
     _titleUpdateTimer->setSingleShot(true);
     QObject::connect(_titleUpdateTimer , &QTimer::timeout , this , &Konsole::Vt102Emulation::updateTitle);
@@ -764,6 +765,9 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case TY_CSI_PR('s', 1003) :         saveMode      (MODE_Mouse1003); break; //XTERM
     case TY_CSI_PR('r', 1003) :      restoreMode      (MODE_Mouse1003); break; //XTERM
 
+    case TY_CSI_PR('h',  1004) : _reportFocusEvents = true; break;
+    case TY_CSI_PR('l',  1004) : _reportFocusEvents = false; break;
+
     case TY_CSI_PR('h', 1005) :          setMode      (MODE_Mouse1005); break; //XTERM
     case TY_CSI_PR('l', 1005) :        resetMode      (MODE_Mouse1005); break; //XTERM
     case TY_CSI_PR('s', 1005) :         saveMode      (MODE_Mouse1005); break; //XTERM
@@ -962,6 +966,32 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
     }
 
     sendString(command);
+}
+
+/**
+ * The focus lost event can be used by Vim (or other terminal applications)
+ * to recognize that the konsole window has lost focus.
+ * The escape sequence is also used by iTerm2.
+ * Vim needs the following plugin to be installed to convert the escape
+ * sequence into the FocusLost autocmd: https://github.com/sjl/vitality.vim
+ */
+void Vt102Emulation::focusLost(void)
+{
+    if (_reportFocusEvents)
+        sendString("\033[O");
+}
+
+/**
+ * The focus gained event can be used by Vim (or other terminal applications)
+ * to recognize that the konsole window has gained focus again.
+ * The escape sequence is also used by iTerm2.
+ * Vim needs the following plugin to be installed to convert the escape
+ * sequence into the FocusGained autocmd: https://github.com/sjl/vitality.vim
+ */
+void Vt102Emulation::focusGained(void)
+{
+    if (_reportFocusEvents)
+        sendString("\033[I");
 }
 
 void Vt102Emulation::sendText(const QString& text)

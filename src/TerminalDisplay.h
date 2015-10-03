@@ -620,6 +620,9 @@ signals:
 
     void sendStringToEmu(const QByteArray& local8BitString);
 
+    void focusLost();
+    void focusGained();
+
 protected:
     virtual bool event(QEvent* event);
 

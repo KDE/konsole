@@ -93,6 +93,8 @@ public slots:
     virtual void sendText(const QString& text) Q_DECL_OVERRIDE;
     virtual void sendKeyEvent(QKeyEvent*) Q_DECL_OVERRIDE;
     virtual void sendMouseEvent(int buttons, int column, int line, int eventType) Q_DECL_OVERRIDE;
+    virtual void focusLost() Q_DECL_OVERRIDE;
+    virtual void focusGained() Q_DECL_OVERRIDE;
 
 protected:
     // reimplemented from Emulation
@@ -185,6 +187,8 @@ private:
     //output from the terminal
     QHash<int, QString> _pendingTitleUpdates;
     QTimer* _titleUpdateTimer;
+
+    bool _reportFocusEvents;
 };
 }
 

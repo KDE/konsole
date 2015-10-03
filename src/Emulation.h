@@ -261,6 +261,16 @@ public slots:
      */
     void receiveData(const char* buffer, int len);
 
+    /**
+     * Sends information about the focus lost event to the terminal.
+     */
+    virtual void focusLost() = 0;
+
+    /**
+     * Sends information about the focus gained event to the terminal.
+     */
+    virtual void focusGained() = 0;
+
 signals:
 
     /**
