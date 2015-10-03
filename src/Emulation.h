@@ -411,6 +411,11 @@ signals:
      */
     void selectionChanged(const QString& text);
 
+    /**
+     * Emitted when terminal code requiring terminal's response received.
+     */
+    void sessionAttributeRequest(int id);
+
 protected:
     virtual void setMode(int mode) = 0;
     virtual void resetMode(int mode) = 0;

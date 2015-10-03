@@ -148,7 +148,8 @@ private:
     void reportDecodingError();
 
     void processToken(int code, int p, int q);
-    void processWindowAttributeChange();
+    void processWindowAttributeRequest();
+    void requestWindowAttribute(int);
 
     void reportTerminalType();
     void reportSecondaryAttributes();

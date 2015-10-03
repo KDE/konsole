@@ -318,7 +318,7 @@ void Vt102Emulation::receiveChar(int cc)
     if (lec(1,0,ESC)) { return; }
     if (lec(1,0,ESC+128)) { s[0] = ESC; receiveChar('['); return; }
     if (les(2,1,GRP)) { return; }
-    if (Xte         ) { processWindowAttributeChange(); resetTokenizer(); return; }
+    if (Xte         ) { processWindowAttributeRequest(); resetTokenizer(); return; }
     if (Xpe         ) { return; }
     if (lec(3,2,'?')) { return; }
     if (lec(3,2,'>')) { return; }
@@ -390,17 +390,18 @@ void Vt102Emulation::receiveChar(int cc)
     return;
   }
 }
-void Vt102Emulation::processWindowAttributeChange()
+
+void Vt102Emulation::processWindowAttributeRequest()
 {
   // Describes the window or terminal session attribute to change
   // See Session::UserTitleChange for possible values
-  int attributeToChange = 0;
+  int attribute = 0;
   int i;
   for (i = 2; i < tokenBufferPos     &&
               tokenBuffer[i] >= '0'  &&
               tokenBuffer[i] <= '9'; i++)
   {
-    attributeToChange = 10 * attributeToChange + (tokenBuffer[i]-'0');
+    attribute = 10 * attribute + (tokenBuffer[i]-'0');
   }
 
   if (tokenBuffer[i] != ';')
@@ -409,12 +410,17 @@ void Vt102Emulation::processWindowAttributeChange()
     return;
   }
 
-  QString newValue;
-  newValue.reserve(tokenBufferPos-i-2);
+  QString value;
+  value.reserve(tokenBufferPos-i-2);
   for (int j = 0; j < tokenBufferPos-i-2; j++)
-    newValue[j] = tokenBuffer[i+1+j];
+    value[j] = tokenBuffer[i+1+j];
 
-  _pendingTitleUpdates[attributeToChange] = newValue;
+  if (value == "?") {
+      emit sessionAttributeRequest(attribute);
+      return;
+  }
+
+  _pendingTitleUpdates[attribute] = value;
   _titleUpdateTimer->start(20);
 }
 

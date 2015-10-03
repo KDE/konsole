@@ -193,6 +193,10 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect(backgroundTimer, &QTimer::timeout, this, &Konsole::SessionController::snapshot);
     backgroundTimer->start();
 
+    // xterm '11;?' request
+    connect(_session.data(), &Konsole::Session::getBackgroundColor,
+            this, &Konsole::SessionController::sendBackgroundColor);
+
     _allControllers.insert(this);
 
     // A list of programs that accept Ctrl+C to clear command line used
@@ -442,6 +446,12 @@ void SessionController::sendSignal(QAction* action)
 {
     const int signal = action->data().value<int>();
     _session->sendSignal(signal);
+}
+
+void SessionController::sendBackgroundColor()
+{
+    const QColor c = _view->getBackgroundColor();
+    _session->reportBackgroundColor(c);
 }
 
 bool SessionController::eventFilter(QObject* watched , QEvent* event)

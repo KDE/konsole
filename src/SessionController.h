@@ -251,6 +251,7 @@ private slots:
     void handleWebShortcutAction();
     void configureWebShortcuts();
     void sendSignal(QAction* action);
+    void sendBackgroundColor();
 
     // other
     void prepareSwitchProfileMenu();
