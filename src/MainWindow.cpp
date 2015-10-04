@@ -617,7 +617,7 @@ void MainWindow::readGlobalProperties(KConfig* config)
 
 void MainWindow::syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source)
 {
-    for (QAction *qAction : source->actions()) {
+    foreach(QAction *qAction, source->actions()) {
         if (QAction *destQAction = dest->action(qAction->objectName())) {
             destQAction->setShortcut(qAction->shortcut());
         }
