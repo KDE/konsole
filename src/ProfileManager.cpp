@@ -86,16 +86,19 @@ ProfileManager::ProfileManager()
     if (defaultProfileFileName.isEmpty()) {
         KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig("konsolerc");
         group = konsoleConfig->group("Desktop Entry");
-        defaultProfileFileName = group.readEntry("DefaultProfile", "Shell.profile");
+        defaultProfileFileName = group.readEntry("DefaultProfile", "");
     }
 
-    // load the default profile
-    const QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + defaultProfileFileName);
+    _defaultProfile = _fallbackProfile;
+    if (!defaultProfileFileName.isEmpty()) {
+        // load the default profile
+        const QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + defaultProfileFileName);
 
-    if (!path.isEmpty()) {
-        Profile::Ptr profile = loadProfile(path);
-        if (profile)
-            _defaultProfile = profile;
+        if (!path.isEmpty()) {
+            Profile::Ptr profile = loadProfile(path);
+            if (profile)
+                _defaultProfile = profile;
+        }
     }
 
     Q_ASSERT(_profiles.count() > 0);
@@ -574,10 +577,6 @@ void ProfileManager::loadFavorites()
     if (favoriteGroup.hasKey("Favorites")) {
         QStringList list = favoriteGroup.readEntry("Favorites", QStringList());
         favoriteSet = QSet<QString>::fromList(list);
-    } else {
-        // if there is no favorites key at all, mark the
-        // supplied 'Shell.profile' as the only favorite
-        favoriteSet << "Shell.profile";
     }
 
     // look for favorites among those already loaded
