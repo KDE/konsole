@@ -60,7 +60,7 @@ BookmarkHandler::BookmarkHandler(KActionCollection* collection,
         _file += QStringLiteral("/bookmarks.xml");
     }
 
-    KBookmarkManager* manager = KBookmarkManager::managerForFile(_file, "konsole");
+    KBookmarkManager* manager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
 
     manager->setUpdate(true);
 
@@ -150,6 +150,7 @@ bool BookmarkHandler::supportsTabs() const
 QList<KBookmarkOwner::FutureBookmark> BookmarkHandler::currentBookmarkList() const
 {
     QList<KBookmarkOwner::FutureBookmark> list;
+    list.reserve(_views.size());
 
     foreach(ViewProperties* view, _views) {
         list << KBookmarkOwner::FutureBookmark(titleForView(view) , urlForView(view), iconForView(view));
