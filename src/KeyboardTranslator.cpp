@@ -282,11 +282,6 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString& item , int& keyCode
         if (sequence.count() > 1) {
             qWarning() << "Unhandled key codes in sequence: " << item;
         }
-        // additional cases implemented for backwards compatibility with KDE 3
-    } else if (item == "prior") { // TODO: remove it in the future
-        keyCode = Qt::Key_PageUp;
-    } else if (item == "next") {   // TODO: remove it in the future
-        keyCode = Qt::Key_PageDown;
     } else {
         return false;
     }

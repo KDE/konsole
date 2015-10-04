@@ -196,7 +196,6 @@ FallbackProfile::FallbackProfile()
     setProperty(AntiAliasFonts, true);
     setProperty(BoldIntense, true);
 
-    // default taken from KDE 3
     setProperty(WordCharacters, ":@-./_~?&=%+#");
 
     // Fallback should not be shown in menus

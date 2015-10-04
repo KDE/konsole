@@ -92,13 +92,8 @@ public:
 private:
     // loads a color scheme from a KDE 4+ .colorscheme file
     bool loadColorScheme(const QString& path);
-    // loads a color scheme from a KDE 3 .schema file
-    bool loadKDE3ColorScheme(const QString& path);
     // returns a list of paths of color schemes in the KDE 4+ .colorscheme file format
     QStringList listColorSchemes();
-    // returns a list of paths of color schemes in the .schema file format
-    // used in KDE 3
-    QStringList listKDE3ColorSchemes();
     // loads all of the color schemes
     void loadAllColorSchemes();
     // finds the path of a color scheme
