@@ -21,18 +21,26 @@
 #include "TerminalInterfaceTest.h"
 
 // Qt
+#include <QDir>
 #include <QSignalSpy>
+#include <QTimer>
 
 // KDE
 #include <KService>
 #include <qtest.h>
-//#include "../Part.h"
 
 using namespace Konsole;
 
-/* In KDE 4.x there are 2 versions: TerminalInterface and TerminalInterfaceV2
-   In KDE 5.x only one: TerminalInterface
-   The code below uses both as well the KonsolePart API
+/* TerminalInterface found in KParts/kde_terminal_interface.h
+ *
+ *  void startProgram(const QString &program,
+ *                    const QStringList &args)
+ *  void showShellInDir(const QString &dir)
+ *  void sendInput(const QString &text)
+ *  int terminalProcessId()
+ *  int foregroundProcessId()
+ *  QString foregroundProcessName()
+ *  QString currentWorkingDirectory() const
 */
 void TerminalInterfaceTest::testTerminalInterface()
 {
@@ -47,11 +55,21 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     TerminalInterface* terminal = qobject_cast<TerminalInterface*>(_terminalPart);
     QVERIFY(terminal);
-    terminal->showShellInDir(QDir::home().path());
 
+    // Verify results when no shell running
+    int terminalProcessId  = terminal->terminalProcessId();
+    QCOMPARE(terminalProcessId, 0);
     int foregroundProcessId  = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
     QString foregroundProcessName  = terminal->foregroundProcessName();
+    QCOMPARE(foregroundProcessName, QString(""));
+
+    // Start a shell in given directory
+    terminal->showShellInDir(QDir::home().path());
+
+    foregroundProcessId  = terminal->foregroundProcessId();
+    QCOMPARE(foregroundProcessId, -1);
+    foregroundProcessName  = terminal->foregroundProcessName();
     QCOMPARE(foregroundProcessName, QString(""));
 
     // terminalProcessId() is the user's default shell
@@ -162,6 +180,5 @@ KParts::Part* TerminalInterfaceTest::createPart()
     return terminalPart;
 }
 
-QTEST_MAIN(TerminalInterfaceTest )
-
+QTEST_MAIN(TerminalInterfaceTest)
 

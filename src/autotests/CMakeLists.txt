@@ -82,11 +82,10 @@ ecm_mark_nongui_executable(TerminalTest)
 add_test(TerminalTest TerminalTest)
 target_link_libraries(TerminalTest ${KONSOLE_TEST_LIBS} KF5::Parts)
 
-##add_executable(TerminalInterfaceTest TerminalInterfaceTest.cpp)
-##ecm_mark_as_test(TerminalInterface)
-##add_test(TerminalInterfaceTest TerminalInterfaceTest)
-##target_link_libraries(TerminalInterfaceTest
-##                      KF5::Parts
-##                      ${KDE4_KPTY_LIBS}
-##                      ${KONSOLE_TEST_LIBS})
+add_executable(TerminalInterfaceTest TerminalInterfaceTest.cpp)
+ecm_mark_as_test(TerminalInterface)
+add_test(TerminalInterfaceTest TerminalInterfaceTest)
+target_link_libraries(TerminalInterfaceTest
+                      KF5::Parts
+                      ${KONSOLE_TEST_LIBS})
 
