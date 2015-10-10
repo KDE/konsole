@@ -53,7 +53,7 @@ SessionManager::SessionManager()
 SessionManager::~SessionManager()
 {
     if (_sessions.count() > 0) {
-        qWarning() << "Konsole SessionManager destroyed with sessions still alive";
+        qWarning() << "Konsole SessionManager destroyed with"<< _sessions.count()<<"session(s) still alive";
         // ensure that the Session doesn't later try to call back and do things to the
         // SessionManager
         foreach(Session* session, _sessions) {
