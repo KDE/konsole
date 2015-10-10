@@ -42,7 +42,9 @@ using namespace Konsole;
  *  QString foregroundProcessName()
  *  QString currentWorkingDirectory() const
 */
-void TerminalInterfaceTest::testTerminalInterface()
+
+// Test with no shell running
+void TerminalInterfaceTest::testTerminalInterfaceNoShell()
 {
     QString currentDirectory;
     QString retVal;
@@ -63,13 +65,33 @@ void TerminalInterfaceTest::testTerminalInterface()
     QCOMPARE(foregroundProcessId, -1);
     QString foregroundProcessName  = terminal->foregroundProcessName();
     QCOMPARE(foregroundProcessName, QString(""));
+    const QString currentWorkingDirectory  = terminal->currentWorkingDirectory();
+    QCOMPARE(currentWorkingDirectory, QString(""));
+
+    delete _terminalPart;
+}
+
+// Test with default shell running
+void TerminalInterfaceTest::testTerminalInterface()
+{
+    QString currentDirectory;
+    QString retVal;
+    bool result;
+
+    // create a Konsole part and attempt to connect to it
+    _terminalPart = createPart();
+    if (!_terminalPart)
+        QSKIP("konsolepart not found.", SkipSingle);
+
+    TerminalInterface* terminal = qobject_cast<TerminalInterface*>(_terminalPart);
+    QVERIFY(terminal);
 
     // Start a shell in given directory
     terminal->showShellInDir(QDir::home().path());
 
-    foregroundProcessId  = terminal->foregroundProcessId();
+    int foregroundProcessId  = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
-    foregroundProcessName  = terminal->foregroundProcessName();
+    QString foregroundProcessName  = terminal->foregroundProcessName();
     QCOMPARE(foregroundProcessName, QString(""));
 
     // terminalProcessId() is the user's default shell
@@ -105,13 +127,8 @@ void TerminalInterfaceTest::testTerminalInterface()
     QString firstSignalState = firstSignalArgs.at(0).toString();
     QCOMPARE(firstSignalState, currentDirectory);
 
-    // Test KonsolePart API currentWorkingDirectory()
-    result = QMetaObject::invokeMethod(_terminalPart,
-                                       "currentWorkingDirectory",
-                                       Qt::DirectConnection,
-                                       Q_RETURN_ARG(QString, retVal));
-    QVERIFY(result);
-    QCOMPARE(retVal, currentDirectory);
+    const QString currentWorkingDirectory  = terminal->currentWorkingDirectory();
+    QCOMPARE(currentWorkingDirectory, currentDirectory);
 
     // #1B - Test signal currentDirectoryChanged(QString)
     // Invalid directory - no signal should be emitted
@@ -120,13 +137,8 @@ void TerminalInterfaceTest::testTerminalInterface()
     QCOMPARE(stateSpy.count(), 0);
 
     // Should be no change since the above cd didn't work
-    result = QMetaObject::invokeMethod(_terminalPart,
-                                       "currentWorkingDirectory",
-                                       Qt::DirectConnection,
-                                       Q_RETURN_ARG(QString, retVal));
-    QVERIFY(result);
-    QCOMPARE(retVal, currentDirectory);
-
+    const QString currentWorkingDirectory2  = terminal->currentWorkingDirectory();
+    QCOMPARE(currentWorkingDirectory2, currentDirectory);
 
     // Test starting a new program
     QString command = "top";
