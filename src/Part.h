@@ -56,21 +56,24 @@ public:
     virtual ~Part();
 
     /** Reimplemented from TerminalInterface. */
-    virtual void startProgram(const QString& program,
-                              const QStringList& arguments) Q_DECL_OVERRIDE;
+    void startProgram(const QString& program,
+                      const QStringList& arguments) Q_DECL_OVERRIDE;
     /** Reimplemented from TerminalInterface. */
-    virtual void showShellInDir(const QString& dir) Q_DECL_OVERRIDE;
+    void showShellInDir(const QString& dir) Q_DECL_OVERRIDE;
     /** Reimplemented from TerminalInterface. */
-    virtual void sendInput(const QString& text) Q_DECL_OVERRIDE;
+    void sendInput(const QString& text) Q_DECL_OVERRIDE;
 
     /** Reimplemented from TerminalInterface. */
-    virtual int terminalProcessId() Q_DECL_OVERRIDE;
+    int terminalProcessId() Q_DECL_OVERRIDE;
 
     /** Reimplemented from TerminalInterface. */
-    virtual int foregroundProcessId() Q_DECL_OVERRIDE;
+    int foregroundProcessId() Q_DECL_OVERRIDE;
 
     /** Reimplemented from TerminalInterface. */
-    virtual QString foregroundProcessName() Q_DECL_OVERRIDE;
+    QString foregroundProcessName() Q_DECL_OVERRIDE;
+
+    /** Reimplemented from TerminalInterface. */
+    QString currentWorkingDirectory() const Q_DECL_OVERRIDE;
 
 public slots:
     /**
@@ -135,13 +138,6 @@ public slots:
     * @param enabled Whether to enable or disable monitoring for activity.
     * */
     void setMonitorActivityEnabled(bool enabled);
-
-    /**
-    * Returns the current working directory of the active session
-    *
-    * TODO: this should better be moved into TerminalInterface.
-    */
-    QString currentWorkingDirectory() const;
 
 signals:
     /**
