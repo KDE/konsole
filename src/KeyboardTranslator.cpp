@@ -95,6 +95,9 @@ KeyboardTranslatorReader::KeyboardTranslatorReader(QIODevice* source)
     // read first entry (if any)
     readNext();
 }
+
+KeyboardTranslatorReader::~KeyboardTranslatorReader() {}
+
 void KeyboardTranslatorReader::readNext()
 {
     // find next entry

@@ -357,6 +357,10 @@ class KeyboardTranslatorReader
 public:
     /** Constructs a new reader which parses the given @p source */
     explicit KeyboardTranslatorReader(QIODevice* source);
+    ~KeyboardTranslatorReader();
+
+    KeyboardTranslatorReader(const KeyboardTranslatorReader&) = delete;
+    KeyboardTranslatorReader& operator=(const KeyboardTranslatorReader&) = delete;
 
     /**
      * Returns the description text.
@@ -426,6 +430,9 @@ public:
      */
     explicit KeyboardTranslatorWriter(QIODevice* destination);
     ~KeyboardTranslatorWriter();
+
+    KeyboardTranslatorWriter(const KeyboardTranslatorWriter&) = delete;
+    KeyboardTranslatorWriter& operator=(const KeyboardTranslatorWriter&) = delete;
 
     /**
      * Writes the header for the keyboard translator.
