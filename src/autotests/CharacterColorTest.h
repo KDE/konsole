@@ -35,6 +35,8 @@ private slots:
     void init();
     void cleanup();
 
+    void testColorEntry();
+
     void testDummyConstructor();
     void testColorSpaceDefault_data();
     void testColorSpaceDefault();
