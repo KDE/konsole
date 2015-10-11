@@ -78,6 +78,9 @@ public:
     Screen(int lines, int columns);
     ~Screen();
 
+    Screen(const Screen&) = delete;
+    Screen& operator=(const Screen&) = delete;
+
     // VT100/2 Operations
     // Cursor Movement
 
