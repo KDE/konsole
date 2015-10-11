@@ -208,6 +208,18 @@ public:
      */
     Error error() const;
 
+    enum Field {
+        PROCESS_ID          = 1,
+        PARENT_PID          = 2,
+        FOREGROUND_PID      = 4,
+        ARGUMENTS           = 8,
+        ENVIRONMENT         = 16,
+        NAME                = 32,
+        CURRENT_DIR         = 64,
+        UID                 = 128
+    };
+    Q_DECLARE_FLAGS(Fields, Field)
+
 protected:
     /**
      * Constructs a new process instance.  You should not call the constructor
@@ -288,22 +300,7 @@ private:
     // space-constrained UI elements (eg. tabs)
     QString formatShortDir(const QString& dirPath) const;
 
-    // valid bits for _fields variable, ensure that
-    // _fields is changed to an int if more than 8 fields are added
-    enum FIELD_BITS {
-        PROCESS_ID          = 1,
-        PARENT_PID          = 2,
-        FOREGROUND_PID      = 4,
-        ARGUMENTS           = 8,
-        ENVIRONMENT         = 16,
-        NAME                = 32,
-        CURRENT_DIR         = 64,
-        UID                 = 128
-    };
-
-    char _fields; // a bitmap indicating which fields are valid
-    // used to set the "ok" parameters for the public
-    // accessor functions
+    Fields _fields;
 
     bool _enableEnvironmentRead; // specifies whether to read the environment
     // bindings when update() is called
@@ -325,6 +322,7 @@ private:
     static QSet<QString> commonDirNames();
     static QSet<QString> _commonDirNames;
 };
+Q_DECLARE_OPERATORS_FOR_FLAGS(ProcessInfo::Fields)
 
 /**
  * Implementation of ProcessInfo which does nothing.

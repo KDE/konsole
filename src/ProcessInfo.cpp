@@ -34,6 +34,7 @@
 // Qt
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
+#include <QtCore/QFlags>
 #include <QtCore/QTextStream>
 #include <QtCore/QStringList>
 #include <QtNetwork/QHostInfo>
@@ -190,54 +191,54 @@ QString ProcessInfo::formatShortDir(const QString& input) const
 
 QVector<QString> ProcessInfo::arguments(bool* ok) const
 {
-    *ok = _fields & ARGUMENTS;
+    *ok = _fields.testFlag(ARGUMENTS);
 
     return _arguments;
 }
 
 QMap<QString, QString> ProcessInfo::environment(bool* ok) const
 {
-    *ok = _fields & ENVIRONMENT;
+    *ok = _fields.testFlag(ENVIRONMENT);
 
     return _environment;
 }
 
 bool ProcessInfo::isValid() const
 {
-    return _fields & PROCESS_ID;
+    return _fields.testFlag(PROCESS_ID);
 }
 
 int ProcessInfo::pid(bool* ok) const
 {
-    *ok = _fields & PROCESS_ID;
+    *ok = _fields.testFlag(PROCESS_ID);
 
     return _pid;
 }
 
 int ProcessInfo::parentPid(bool* ok) const
 {
-    *ok = _fields & PARENT_PID;
+    *ok = _fields.testFlag(PARENT_PID);
 
     return _parentPid;
 }
 
 int ProcessInfo::foregroundPid(bool* ok) const
 {
-    *ok = _fields & FOREGROUND_PID;
+    *ok = _fields.testFlag(FOREGROUND_PID);
 
     return _foregroundPid;
 }
 
 QString ProcessInfo::name(bool* ok) const
 {
-    *ok = _fields & NAME;
+    *ok = _fields.testFlag(NAME);
 
     return _name;
 }
 
 int ProcessInfo::userId(bool* ok) const
 {
-    *ok = _fields & UID;
+    *ok = _fields.testFlag(UID);
 
     return _userId;
 }
