@@ -48,7 +48,6 @@ void TerminalInterfaceTest::testTerminalInterfaceNoShell()
 {
     QString currentDirectory;
     QString retVal;
-    bool result;
 
     // create a Konsole part and attempt to connect to it
     _terminalPart = createPart();
@@ -76,7 +75,6 @@ void TerminalInterfaceTest::testTerminalInterface()
 {
     QString currentDirectory;
     QString retVal;
-    bool result;
 
     // create a Konsole part and attempt to connect to it
     _terminalPart = createPart();
