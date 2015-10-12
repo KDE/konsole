@@ -90,6 +90,8 @@ void TabTitleFormatButton::setContext(Session::TabTitleContext titleContext)
     }
 
     QList<QAction*> menuActions;
+    menuActions.reserve(count);
+
     for (int i = 0 ; i < count ; i++) {
         QAction* action = new QAction(i18n(array[i].description), this);
         action->setData(array[i].element);
