@@ -335,8 +335,7 @@ void RegExpFilter::process()
 
     // ignore any regular expressions which match an empty string.
     // otherwise the while loop below will run indefinitely
-    static const QString emptyString("");
-    if (_searchText.exactMatch(emptyString))
+    if (_searchText.isEmpty())
         return;
 
     while (pos >= 0) {
