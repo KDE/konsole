@@ -57,13 +57,13 @@ void TerminalCharacterDecoderTest::testPlainTextDecoder()
     decoder->begin(&outputStream);
     decoder->decodeLine(characters, 6, LINE_DEFAULT);
     decoder->end();
-    QCOMPARE(outputString, QString("hello"));
+    QCOMPARE(outputString, QStringLiteral("hello"));
     delete decoder;
 }
 
 void TerminalCharacterDecoderTest::testHTMLFileForValidity()
 {
-    QString fileName = "konsole.html";
+    QString fileName = QStringLiteral("konsole.html");
     QFile fi(fileName);
 
     if (!fi.exists())
