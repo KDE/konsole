@@ -176,7 +176,7 @@ QString Part::foregroundProcessName()
     if (activeSession()->isForegroundProcessActive()) {
         return activeSession()->foregroundProcessName();
     } else {
-        return "";
+        return QLatin1String("");
     }
 }
 
@@ -280,7 +280,7 @@ void Part::changeSessionSettings(const QString& text)
     // send a profile change command, the escape code format
     // is the same as the normal X-Term commands used to change the window title or icon,
     // but with a magic value of '50' for the parameter which specifies what to change
-    QString command = QString("\033]50;%1\a").arg(text);
+    QString command = QStringLiteral("\033]50;%1\a").arg(text);
 
     sendInput(command);
 }
