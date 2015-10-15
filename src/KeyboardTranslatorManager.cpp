@@ -85,7 +85,7 @@ void KeyboardTranslatorManager::findTranslators()
 {
 
     QStringList list;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "konsole", QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
     list.reserve(dirs.size());
 
     Q_FOREACH (const QString& dir, dirs) {
@@ -188,7 +188,7 @@ const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
 {
     // Try to find the default.keytab file if it exists, otherwise
     // fall back to the internal hard-coded fallback translator
-    const KeyboardTranslator* translator = findTranslator("default");
+    const KeyboardTranslator* translator = findTranslator(QStringLiteral("default"));
     if (!translator) {
         translator = _fallbackTranslator;
     }

@@ -403,20 +403,20 @@ void UrlFilter::HotSpot::activate(QObject* object)
 
     const QString& actionName = object ? object->objectName() : QString();
 
-    if (actionName == "copy-action") {
+    if (actionName == QLatin1String("copy-action")) {
         QApplication::clipboard()->setText(url);
         return;
     }
 
-    if (!object || actionName == "open-action") {
+    if (!object || actionName == QLatin1String("open-action")) {
         if (kind == StandardUrl) {
             // if the URL path does not include the protocol ( eg. "www.kde.org" ) then
             // prepend http:// ( eg. "www.kde.org" --> "http://www.kde.org" )
-            if (!url.contains("://")) {
-                url.prepend("http://");
+            if (!url.contains(QLatin1String("://"))) {
+                url.prepend(QLatin1String("http://"));
             }
         } else if (kind == Email) {
-            url.prepend("mailto:");
+            url.prepend(QLatin1String("mailto:"));
         }
 
         new KRun(QUrl(url), QApplication::activeWindow());

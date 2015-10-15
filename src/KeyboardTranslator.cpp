@@ -152,19 +152,19 @@ void KeyboardTranslatorReader::readNext()
 
 bool KeyboardTranslatorReader::parseAsCommand(const QString& text, KeyboardTranslator::Command& command)
 {
-    if (text.compare("erase", Qt::CaseInsensitive) == 0)
+    if (text.compare(QLatin1String("erase"), Qt::CaseInsensitive) == 0)
         command = KeyboardTranslator::EraseCommand;
-    else if (text.compare("scrollpageup", Qt::CaseInsensitive) == 0)
+    else if (text.compare(QLatin1String("scrollpageup"), Qt::CaseInsensitive) == 0)
         command = KeyboardTranslator::ScrollPageUpCommand;
-    else if (text.compare("scrollpagedown", Qt::CaseInsensitive) == 0)
+    else if (text.compare(QLatin1String("scrollpagedown"), Qt::CaseInsensitive) == 0)
         command = KeyboardTranslator::ScrollPageDownCommand;
-    else if (text.compare("scrolllineup", Qt::CaseInsensitive) == 0)
+    else if (text.compare(QLatin1String("scrolllineup"), Qt::CaseInsensitive) == 0)
         command = KeyboardTranslator::ScrollLineUpCommand;
-    else if (text.compare("scrolllinedown", Qt::CaseInsensitive) == 0)
+    else if (text.compare(QLatin1String("scrolllinedown"), Qt::CaseInsensitive) == 0)
         command = KeyboardTranslator::ScrollLineDownCommand;
-    else if (text.compare("scrolluptotop", Qt::CaseInsensitive) == 0)
+    else if (text.compare(QLatin1String("scrolluptotop"), Qt::CaseInsensitive) == 0)
         command = KeyboardTranslator::ScrollUpToTopCommand;
-    else if (text.compare("scrolldowntobottom", Qt::CaseInsensitive) == 0)
+    else if (text.compare(QLatin1String("scrolldowntobottom"), Qt::CaseInsensitive) == 0)
         command = KeyboardTranslator::ScrollDownToBottomCommand;
     else
         return false;
@@ -241,15 +241,15 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
 
 bool KeyboardTranslatorReader::parseAsModifier(const QString& item , Qt::KeyboardModifier& modifier)
 {
-    if (item == "shift")
+    if (item == QLatin1String("shift"))
         modifier = Qt::ShiftModifier;
-    else if (item == "ctrl" || item == "control")
+    else if (item == QLatin1String("ctrl") || item == QLatin1String("control"))
         modifier = Qt::ControlModifier;
-    else if (item == "alt")
+    else if (item == QLatin1String("alt"))
         modifier = Qt::AltModifier;
-    else if (item == "meta")
+    else if (item == QLatin1String("meta"))
         modifier = Qt::MetaModifier;
-    else if (item == "keypad")
+    else if (item == QLatin1String("keypad"))
         modifier = Qt::KeypadModifier;
     else
         return false;
@@ -258,17 +258,17 @@ bool KeyboardTranslatorReader::parseAsModifier(const QString& item , Qt::Keyboar
 }
 bool KeyboardTranslatorReader::parseAsStateFlag(const QString& item , KeyboardTranslator::State& flag)
 {
-    if (item == "appcukeys" || item == "appcursorkeys")
+    if (item == QLatin1String("appcukeys") || item == QLatin1String("appcursorkeys"))
         flag = KeyboardTranslator::CursorKeysState;
-    else if (item == "ansi")
+    else if (item == QLatin1String("ansi"))
         flag = KeyboardTranslator::AnsiState;
-    else if (item == "newline")
+    else if (item == QLatin1String("newline"))
         flag = KeyboardTranslator::NewLineState;
-    else if (item == "appscreen")
+    else if (item == QLatin1String("appscreen"))
         flag = KeyboardTranslator::AlternateScreenState;
-    else if (item == "anymod" || item == "anymodifier")
+    else if (item == QLatin1String("anymod") || item == QLatin1String("anymodifier"))
         flag = KeyboardTranslator::AnyModifierState;
-    else if (item == "appkeypad")
+    else if (item == QLatin1String("appkeypad"))
         flag = KeyboardTranslator::ApplicationKeypadState;
     else
         return false;
@@ -302,7 +302,7 @@ bool KeyboardTranslatorReader::hasNextEntry()
 KeyboardTranslator::Entry KeyboardTranslatorReader::createEntry(const QString& condition ,
         const QString& result)
 {
-    QString entryString("keyboard \"temporary\"\nkey ");
+    QString entryString(QStringLiteral("keyboard \"temporary\"\nkey "));
     entryString.append(condition);
     entryString.append(" : ");
 
@@ -538,15 +538,15 @@ void KeyboardTranslator::Entry::insertModifier(QString& item , int modifier) con
         item += '-';
 
     if (modifier == Qt::ShiftModifier)
-        item += "Shift";
+        item += QLatin1String("Shift");
     else if (modifier == Qt::ControlModifier)
-        item += "Ctrl";
+        item += QLatin1String("Ctrl");
     else if (modifier == Qt::AltModifier)
-        item += "Alt";
+        item += QLatin1String("Alt");
     else if (modifier == Qt::MetaModifier)
-        item += "Meta";
+        item += QLatin1String("Meta");
     else if (modifier == Qt::KeypadModifier)
-        item += "KeyPad";
+        item += QLatin1String("KeyPad");
 }
 void KeyboardTranslator::Entry::insertState(QString& item, int aState) const
 {
@@ -559,17 +559,17 @@ void KeyboardTranslator::Entry::insertState(QString& item, int aState) const
         item += '-';
 
     if (aState == KeyboardTranslator::AlternateScreenState)
-        item += "AppScreen";
+        item += QLatin1String("AppScreen");
     else if (aState == KeyboardTranslator::NewLineState)
-        item += "NewLine";
+        item += QLatin1String("NewLine");
     else if (aState == KeyboardTranslator::AnsiState)
-        item += "Ansi";
+        item += QLatin1String("Ansi");
     else if (aState == KeyboardTranslator::CursorKeysState)
-        item += "AppCursorKeys";
+        item += QLatin1String("AppCursorKeys");
     else if (aState == KeyboardTranslator::AnyModifierState)
-        item += "AnyModifier";
+        item += QLatin1String("AnyModifier");
     else if (aState == KeyboardTranslator::ApplicationKeypadState)
-        item += "AppKeypad";
+        item += QLatin1String("AppKeypad");
 }
 QString KeyboardTranslator::Entry::resultToString(bool expandWildCards,
         Qt::KeyboardModifiers keyboardModifiers) const
@@ -577,19 +577,19 @@ QString KeyboardTranslator::Entry::resultToString(bool expandWildCards,
     if (!_text.isEmpty())
         return escapedText(expandWildCards, keyboardModifiers);
     else if (_command == EraseCommand)
-        return "Erase";
+        return QStringLiteral("Erase");
     else if (_command == ScrollPageUpCommand)
-        return "ScrollPageUp";
+        return QStringLiteral("ScrollPageUp");
     else if (_command == ScrollPageDownCommand)
-        return "ScrollPageDown";
+        return QStringLiteral("ScrollPageDown");
     else if (_command == ScrollLineUpCommand)
-        return "ScrollLineUp";
+        return QStringLiteral("ScrollLineUp");
     else if (_command == ScrollLineDownCommand)
-        return "ScrollLineDown";
+        return QStringLiteral("ScrollLineDown");
     else if (_command == ScrollUpToTopCommand)
-        return "ScrollUpToTop";
+        return QStringLiteral("ScrollUpToTop");
     else if (_command == ScrollDownToBottomCommand)
-        return "ScrollDownToBottom";
+        return QStringLiteral("ScrollDownToBottom");
 
     return QString();
 }
@@ -619,9 +619,9 @@ KeyboardTranslator::KeyboardTranslator(const QString& aName)
 }
 
 FallbackKeyboardTranslator::FallbackKeyboardTranslator()
-    : KeyboardTranslator("fallback")
+    : KeyboardTranslator(QStringLiteral("fallback"))
 {
-    setDescription("Fallback Keyboard Translator");
+    setDescription(QStringLiteral("Fallback Keyboard Translator"));
 
     // Key "TAB" should send out '\t'
     KeyboardTranslator::Entry entry;
