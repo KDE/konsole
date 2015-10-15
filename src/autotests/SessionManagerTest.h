@@ -20,8 +20,6 @@
 #ifndef SESSIONMANAGERTEST_H
 #define SESSIONMANAGERTEST_H
 
-#include "../SessionManager.h"
-
 namespace Konsole
 {
 

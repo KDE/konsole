@@ -44,9 +44,7 @@
 #include "SessionController.h"
 #include "SessionManager.h"
 #include "ProfileManager.h"
-#include "ViewContainer.h"
 #include "ViewSplitter.h"
-#include "Profile.h"
 #include "Enumeration.h"
 
 using namespace Konsole;

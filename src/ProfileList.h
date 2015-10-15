@@ -35,7 +35,6 @@ class QKeySequence;
 
 namespace Konsole
 {
-class Profile;
 
 /**
  * ProfileList provides a list of actions which represent session profiles

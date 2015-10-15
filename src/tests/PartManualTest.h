@@ -26,7 +26,6 @@
 #include <KParts/Part>
 
 class QKeyEvent;
-class QEvent;
 
 namespace Konsole
 {

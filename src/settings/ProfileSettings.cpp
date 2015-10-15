@@ -39,7 +39,6 @@
 #include "TerminalDisplay.h"
 #include "SessionManager.h"
 #include "SessionController.h"
-#include "ui_ProfileSettings.h"
 
 using namespace Konsole;
 

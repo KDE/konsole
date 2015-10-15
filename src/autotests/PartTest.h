@@ -25,8 +25,6 @@
 #include <kde_terminal_interface.h>
 #include <KParts/Part>
 
-class QEvent;
-
 namespace Konsole
 {
 
