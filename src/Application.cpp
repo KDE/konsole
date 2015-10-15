@@ -195,7 +195,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
             continue;
 
         QHash<QString, QString> lineTokens;
-        QStringList lineParts = lineString.split(";;", QString::SkipEmptyParts);
+        QStringList lineParts = lineString.split(QStringLiteral(";;"), QString::SkipEmptyParts);
 
         for (int i = 0; i < lineParts.size(); ++i) {
             QString key = lineParts.at(i).section(':', 0, 0).trimmed().toLower();
@@ -203,7 +203,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
             lineTokens[key] = value;
         }
         // should contain at least one of 'command' and 'profile'
-        if (lineTokens.contains("command") || lineTokens.contains("profile")) {
+        if (lineTokens.contains(QLatin1String("command")) || lineTokens.contains(QStringLiteral("profile"))) {
             createTabFromArgs(args, window, lineTokens);
             sessions++;
         } else {
@@ -337,7 +337,7 @@ Profile::Ptr Application::processProfileSelectArgs(KCmdLineArgs* args)
         if (profile)
             return profile;
     } else if (args->isSet("fallback-profile")) {
-        Profile::Ptr profile = ProfileManager::instance()->loadProfile("FALLBACK/");
+        Profile::Ptr profile = ProfileManager::instance()->loadProfile(QStringLiteral("FALLBACK/"));
         if (profile)
             return profile;
     }

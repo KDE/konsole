@@ -82,7 +82,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
 
     // transparency slider
     QFontMetrics metrics(font());
-    _ui->transparencyPercentLabel->setMinimumWidth(metrics.width("100%"));
+    _ui->transparencyPercentLabel->setMinimumWidth(metrics.width(QStringLiteral("100%")));
 
     connect(_ui->transparencySlider , &QSlider::valueChanged , this , &Konsole::ColorSchemeEditor::setTransparencyPercentLabel);
 
@@ -118,7 +118,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     _ui->colorTable->horizontalHeader()->setSectionResizeMode(COLOR_COLUMN, QHeaderView::Stretch);
     _ui->colorTable->horizontalHeader()->setSectionResizeMode(INTENSE_COLOR_COLUMN, QHeaderView::Stretch);
 
-    QTableWidgetItem* item = new QTableWidgetItem("Test");
+    QTableWidgetItem* item = new QTableWidgetItem(QStringLiteral("Test"));
     _ui->colorTable->setItem(0, 0, item);
 
     _ui->colorTable->verticalHeader()->hide();
@@ -173,11 +173,11 @@ void ColorSchemeEditor::selectWallpaper()
 {
     // Get supported image formats and convert to QString for getOpenFileName()
     const QList<QByteArray> mimeTypes = QImageReader::supportedImageFormats();
-    QString fileFormats = "(";
+    QString fileFormats = QStringLiteral("(");
     Q_FOREACH (const QByteArray &mime, mimeTypes) {
-        fileFormats += "*." + QString::fromLatin1(mime) + " ";
+        fileFormats += QStringLiteral("*.%1 ").arg(QLatin1String(mime));
     }
-    fileFormats += ")";
+    fileFormats += QLatin1String(")");
 
     const QString fileName = QFileDialog::getOpenFileName(this,
                              i18nc("@title:window", "Select wallpaper image file"),
@@ -208,7 +208,7 @@ void ColorSchemeEditor::setDescription(const QString& text)
 }
 void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
 {
-    _ui->transparencyPercentLabel->setText(QString("%1%").arg(percent));
+    _ui->transparencyPercentLabel->setText(QStringLiteral("%1%").arg(percent));
 
     const qreal opacity = (100.0 - percent) / 100.0;
     _colors->setOpacity(opacity);

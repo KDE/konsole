@@ -164,7 +164,7 @@ QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr group, int 
             caption += ',';
             // limit caption length to prevent very long window titles
             if (maxLength > 0 && caption.length() > maxLength) {
-                caption += "...";
+                caption += QLatin1String("...");
                 break;
             }
         }
@@ -334,7 +334,7 @@ void EditProfileDialog::showEnvironmentEditor()
     QString text = QInputDialog::getMultiLineText(this, 
             i18n("Edit Environment"),
             i18n("One environment variable per line"),
-            currentEnvironment.join("\n"),
+            currentEnvironment.join(QStringLiteral("\n")),
             &ok);
 
     if (ok && !text.isEmpty()) {
