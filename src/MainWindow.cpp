@@ -490,7 +490,7 @@ Session* MainWindow::createSSHSession(Profile::Ptr profile, const QUrl& url)
 
     QString sshCommand = QStringLiteral("ssh ");
     if (url.port() > -1) {
-        sshCommand += QLatin1String("-p %1 ").arg(url.port());
+        sshCommand += QStringLiteral("-p %1 ").arg(url.port());
     }
     if (!url.userName().isEmpty()) {
         sshCommand += (url.userName() + '@');
