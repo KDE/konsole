@@ -27,7 +27,7 @@ using namespace Konsole;
 /* Exec a new Konsole and grab its dbus */
 void DBusTest::initTestCase()
 {
-    const QString interfaceName = "org.kde.konsole";
+    const QString interfaceName = QStringLiteral("org.kde.konsole");
     QDBusConnectionInterface* bus = 0;
     QStringList konsoleServices;
 
@@ -48,7 +48,7 @@ void DBusTest::initTestCase()
     }
 
     // Create a new Konsole with a separate process id
-    int result = KProcess::execute("konsole");
+    int result = KProcess::execute(QStringLiteral("konsole"));
     if (result)
         QFAIL(QString("Unable to exec a new Konsole: %1").arg(result).toLatin1().data());
 
@@ -93,7 +93,7 @@ void DBusTest::cleanupTestCase()
                          QStringLiteral("org.qtproject.Qt.QWidget"));
     QVERIFY2(iface.isValid(), "Unable to get a dbus interface to Konsole!");
 
-    QDBusReply<void> instanceReply = iface.call("close");
+    QDBusReply<void> instanceReply = iface.call(QStringLiteral("close"));
     if (!instanceReply.isValid())
         QFAIL(QString("Unable to close Konsole: %1").arg(instanceReply.error().message()).toLatin1().data());
 }
@@ -112,47 +112,47 @@ void DBusTest::testSessions()
     QVERIFY(iface.isValid());
 
     //****************** Test is/set MonitorActivity
-    voidReply = iface.call("setMonitorActivity", false);
+    voidReply = iface.call(QStringLiteral("setMonitorActivity"), false);
     QVERIFY(voidReply.isValid());
 
-    boolReply = iface.call("isMonitorActivity");
+    boolReply = iface.call(QStringLiteral("isMonitorActivity"));
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), false);
 
-    voidReply = iface.call("setMonitorActivity", true);
+    voidReply = iface.call(QStringLiteral("setMonitorActivity"), true);
     QVERIFY(voidReply.isValid());
 
-    boolReply = iface.call("isMonitorActivity");
+    boolReply = iface.call(QStringLiteral("isMonitorActivity"));
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), true);
 
     //****************** Test is/set MonitorSilence
-    voidReply = iface.call("setMonitorSilence", false);
+    voidReply = iface.call(QStringLiteral("setMonitorSilence"), false);
     QVERIFY(voidReply.isValid());
 
-    boolReply = iface.call("isMonitorSilence");
+    boolReply = iface.call(QStringLiteral("isMonitorSilence"));
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), false);
 
-    voidReply = iface.call("setMonitorSilence", true);
+    voidReply = iface.call(QStringLiteral("setMonitorSilence"), true);
     QVERIFY(voidReply.isValid());
 
-    boolReply = iface.call("isMonitorSilence");
+    boolReply = iface.call(QStringLiteral("isMonitorSilence"));
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), true);
 
     //****************** Test codec and setCodec
-    arrayReply = iface.call("codec");
+    arrayReply = iface.call(QStringLiteral("codec"));
     QVERIFY(arrayReply.isValid());
 
     // Obtain a list of system's Codecs
     QList<QByteArray> availableCodecs = QTextCodec::availableCodecs();
     for (int i = 0; i < availableCodecs.count(); ++i) {
-        boolReply = iface.call("setCodec", availableCodecs[i]);
+        boolReply = iface.call(QStringLiteral("setCodec"), availableCodecs[i]);
         QVERIFY(boolReply.isValid());
         QCOMPARE(boolReply.value(), true);
 
-        arrayReply = iface.call("codec");
+        arrayReply = iface.call(QStringLiteral("codec"));
         QVERIFY(arrayReply.isValid());
         // Compare result with name due to aliases issue
         // Better way to do this?
@@ -161,45 +161,45 @@ void DBusTest::testSessions()
     }
 
     //****************** Test is/set flowControlEnabled
-    voidReply = iface.call("setFlowControlEnabled", true);
+    voidReply = iface.call(QStringLiteral("setFlowControlEnabled"), true);
     QVERIFY(voidReply.isValid());
 
-    boolReply = iface.call("flowControlEnabled");
+    boolReply = iface.call(QStringLiteral("flowControlEnabled"));
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), true);
 
-    voidReply = iface.call("setFlowControlEnabled", false);
+    voidReply = iface.call(QStringLiteral("setFlowControlEnabled"), false);
     QVERIFY(voidReply.isValid());
 
-    boolReply = iface.call("flowControlEnabled");
+    boolReply = iface.call(QStringLiteral("flowControlEnabled"));
     QVERIFY(boolReply.isValid());
     QCOMPARE(boolReply.value(), false);
 
     //****************** Test is/set environment
-    listReply = iface.call("environment");
+    listReply = iface.call(QStringLiteral("environment"));
     QVERIFY(listReply.isValid());
 
     QStringList prevEnv = listReply.value();
     //for (int i = 0; i < prevEnv.size(); ++i)
     //    qDebug()<< prevEnv.at(i).toLocal8Bit().constData() << endl;
 
-    voidReply = iface.call("setEnvironment", QStringList());
+    voidReply = iface.call(QStringLiteral("setEnvironment"), QStringList());
     QVERIFY(voidReply.isValid());
 
-    listReply = iface.call("environment");
+    listReply = iface.call(QStringLiteral("environment"));
     QVERIFY(listReply.isValid());
     QCOMPARE(listReply.value(), QStringList());
 
-    voidReply = iface.call("setEnvironment", prevEnv);
+    voidReply = iface.call(QStringLiteral("setEnvironment"), prevEnv);
     QVERIFY(voidReply.isValid());
 
-    listReply = iface.call("environment");
+    listReply = iface.call(QStringLiteral("environment"));
     QVERIFY(listReply.isValid());
     QCOMPARE(listReply.value(), prevEnv);
 
     //****************** Test is/set title
     // TODO: Consider checking what is in Profile
-    stringReply = iface.call("title", Session::LocalTabTitle);
+    stringReply = iface.call(QStringLiteral("title"), Session::LocalTabTitle);
     QVERIFY(stringReply.isValid());
 
     //qDebug()<< stringReply.value();
@@ -207,7 +207,7 @@ void DBusTest::testSessions()
 
     // set title to,  what title should be
     QMap<QString, QString> titleMap;
-    titleMap["Shell"] = "Shell";
+    titleMap[QStringLiteral("Shell")] = QLatin1String("Shell");
 
     // BUG: It appears that Session::LocalTabTitle is set to Shell and
     // doesn't change.  While RemoteTabTitle is actually the LocalTabTitle
@@ -215,10 +215,10 @@ void DBusTest::testSessions()
     QMapIterator<QString, QString> i(titleMap);
     while (i.hasNext()) {
         i.next();
-        voidReply = iface.call("setTitle", Session::LocalTabTitle, i.key());
+        voidReply = iface.call(QStringLiteral("setTitle"), Session::LocalTabTitle, i.key());
         QVERIFY(voidReply.isValid());
 
-        stringReply = iface.call("title", Session::LocalTabTitle);
+        stringReply = iface.call(QStringLiteral("title"), Session::LocalTabTitle);
         QVERIFY(stringReply.isValid());
 
         QCOMPARE(stringReply.value(), i.value());

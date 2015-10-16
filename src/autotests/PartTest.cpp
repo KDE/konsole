@@ -46,7 +46,7 @@ void PartTest::testFd()
     QStringList pingList;
     QFileInfo info;
     QString pingExe;
-    pingList << "/bin/ping" << "/sbin/ping";
+    pingList << QStringLiteral("/bin/ping") << QStringLiteral("/sbin/ping");
     for (int i = 0; i < pingList.size(); ++i) {
         info.setFile(pingList.at(i));
         if (info.exists() && info.isExecutable())
@@ -67,7 +67,7 @@ void PartTest::testFd()
 
     // start a pty process
     KPtyProcess ptyProcess;
-    ptyProcess.setProgram(pingExe, QStringList() << "localhost");
+    ptyProcess.setProgram(pingExe, QStringList() << QStringLiteral("localhost"));
     ptyProcess.setPtyChannels(KPtyProcess::AllChannels);
     ptyProcess.start();
     QVERIFY(ptyProcess.waitForStarted());
@@ -85,7 +85,7 @@ void PartTest::testFd()
 
     QWeakPointer<QDialog> dialog = new QDialog();
     QVBoxLayout* layout = new QVBoxLayout(dialog.data());
-    layout->addWidget(new QLabel("Output of 'ping localhost' should appear in a terminal below for 5 seconds"));
+    layout->addWidget(new QLabel(QStringLiteral("Output of 'ping localhost' should appear in a terminal below for 5 seconds")));
     layout->addWidget(terminalPart->widget());
     QTimer::singleShot(5000, dialog.data(), SLOT(close()));
     dialog.data()->exec();
@@ -98,7 +98,7 @@ void PartTest::testFd()
 
 KParts::Part* PartTest::createPart()
 {
-    KService::Ptr service = KService::serviceByDesktopName("konsolepart");
+    KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
     if (!service)       // not found
         return 0;
     KPluginFactory* factory = KPluginLoader(service->library()).factory();

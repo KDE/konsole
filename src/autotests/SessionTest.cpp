@@ -37,10 +37,10 @@ void SessionTest::testNoProfile()
     QCOMPARE(session->isRunning(), false);
     QCOMPARE(session->sessionId(), 1);
     QCOMPARE(session->isRemote(), false);
-    QCOMPARE(session->program(), QString(""));
+    QCOMPARE(session->program(), QString());
     QCOMPARE(session->arguments(), QStringList());
-    QCOMPARE(session->tabTitleFormat(Session::LocalTabTitle), QString(""));
-    QCOMPARE(session->tabTitleFormat(Session::RemoteTabTitle), QString(""));
+    QCOMPARE(session->tabTitleFormat(Session::LocalTabTitle), QString());
+    QCOMPARE(session->tabTitleFormat(Session::RemoteTabTitle), QString());
 
     delete session;
 }

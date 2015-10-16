@@ -63,9 +63,9 @@ void TerminalInterfaceTest::testTerminalInterfaceNoShell()
     int foregroundProcessId  = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
     QString foregroundProcessName  = terminal->foregroundProcessName();
-    QCOMPARE(foregroundProcessName, QString(""));
+    QCOMPARE(foregroundProcessName, QString());
     const QString currentWorkingDirectory  = terminal->currentWorkingDirectory();
-    QCOMPARE(currentWorkingDirectory, QString(""));
+    QCOMPARE(currentWorkingDirectory, QString());
 
     delete _terminalPart;
 }
@@ -90,7 +90,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     int foregroundProcessId  = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
     QString foregroundProcessName  = terminal->foregroundProcessName();
-    QCOMPARE(foregroundProcessName, QString(""));
+    QCOMPARE(foregroundProcessName, QString());
 
     // terminalProcessId() is the user's default shell
     // FIXME: find a way to verify this
@@ -114,7 +114,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     // Let's trigger some signals
 
     // #1A - Test signal currentDirectoryChanged(QString)
-    currentDirectory = QString("/tmp");
+    currentDirectory = QStringLiteral("/tmp");
     terminal->sendInput("cd " + currentDirectory + '\n');
     sleep(2000);
     QCOMPARE(stateSpy.count(), 1);
@@ -130,7 +130,7 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     // #1B - Test signal currentDirectoryChanged(QString)
     // Invalid directory - no signal should be emitted
-    terminal->sendInput("cd /usrADADFASDF\n");
+    terminal->sendInput(QStringLiteral("cd /usrADADFASDF\n"));
     sleep(2000);
     QCOMPARE(stateSpy.count(), 0);
 
@@ -139,7 +139,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     QCOMPARE(currentWorkingDirectory2, currentDirectory);
 
     // Test starting a new program
-    QString command = "top";
+    QString command = QStringLiteral("top");
     terminal->sendInput(command + '\n');
     sleep(2000);
     // FIXME: find a good way to validate process id of 'top'
@@ -148,14 +148,14 @@ void TerminalInterfaceTest::testTerminalInterface()
     foregroundProcessName  = terminal->foregroundProcessName();
     QCOMPARE(foregroundProcessName, command);
 
-    terminal->sendInput("q");
+    terminal->sendInput(QStringLiteral("q"));
     sleep(2000);
 
     // Nothing running in foreground
     foregroundProcessId  = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
     foregroundProcessName  = terminal->foregroundProcessName();
-    QCOMPARE(foregroundProcessName, QString(""));
+    QCOMPARE(foregroundProcessName, QString());
 
     // Test destroyed()
     QSignalSpy destroyedSpy(_terminalPart, SIGNAL(destroyed()));
@@ -178,7 +178,7 @@ void TerminalInterfaceTest::sleep(int msecs)
 
 KParts::Part* TerminalInterfaceTest::createPart()
 {
-    KService::Ptr service = KService::serviceByDesktopName("konsolepart");
+    KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
     if (!service)       // not found
         return 0;
     KPluginFactory* factory = KPluginLoader(service->library()).factory();

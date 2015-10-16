@@ -111,7 +111,7 @@ void HistoryTest::testHistoryScroll()
     QCOMPARE(historyTypeNone.maximumLineCount(), 0);
 
     // File
-    historyScroll = new HistoryScrollFile(QString("test.log"));
+    historyScroll = new HistoryScrollFile(QStringLiteral("test.log"));
     QVERIFY(historyScroll->hasScroll());
     QCOMPARE(historyScroll->getLines(), 0);
     QCOMPARE(historyScroll->getLineLen(0), 0);

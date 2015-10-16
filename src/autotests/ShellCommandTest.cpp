@@ -39,7 +39,7 @@ void ShellCommandTest::cleanup()
 
 void ShellCommandTest::testConstructorWithOneArguemnt()
 {
-    const QString fullCommand("sudo apt-get update");
+    const QString fullCommand(QStringLiteral("sudo apt-get update"));
     ShellCommand shellCommand(fullCommand);
     QCOMPARE(shellCommand.command(), QString("sudo"));
     QCOMPARE(shellCommand.fullCommand(), fullCommand);
@@ -48,9 +48,9 @@ void ShellCommandTest::testConstructorWithOneArguemnt()
 
 void ShellCommandTest::testConstructorWithTwoArguments()
 {
-    const QString command("wc");
+    const QString command(QStringLiteral("wc"));
     QStringList arguments;
-    arguments << "wc" << "-l" << "*.cpp" ;
+    arguments << QStringLiteral("wc") << QStringLiteral("-l") << QStringLiteral("*.cpp") ;
 
     ShellCommand shellCommand(command, arguments);
     QCOMPARE(shellCommand.command(), command);
@@ -60,16 +60,16 @@ void ShellCommandTest::testConstructorWithTwoArguments()
 
 void ShellCommandTest::testExpandEnvironmentVariable()
 {
-    QString text = "PATH=$PATH:~/bin";
-    const QString env = "PATH";
-    const QString value = "/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin";
+    QString text = QStringLiteral("PATH=$PATH:~/bin");
+    const QString env = QStringLiteral("PATH");
+    const QString value = QStringLiteral("/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin");
 
     qputenv(env.toLocal8Bit().constData(), value.toLocal8Bit());
     const QString result = ShellCommand::expand(text);
     const QString expected = text.replace('$' + env, value);
     QCOMPARE(result, expected);
 
-    text = "PATH=$PATH:\\$ESCAPED:~/bin";
+    text = QLatin1String("PATH=$PATH:\\$ESCAPED:~/bin");
     qputenv(env.toLocal8Bit().constData(), value.toLocal8Bit());
     const QString result2 = ShellCommand::expand(text);
     const QString expected2 = text.replace('$' + env, value);
@@ -92,10 +92,10 @@ void ShellCommandTest::testValidLeadingEnvCharacter()
 
 void ShellCommandTest::testArgumentsWithSpaces()
 {
-    const QString command("dir");
+    const QString command(QStringLiteral("dir"));
     QStringList arguments;
-    arguments << "dir" << "c:\\Program Files" << "System" << "*.ini" ;
-    const QString expected_arg("dir \"c:\\Program Files\" System *.ini");
+    arguments << QStringLiteral("dir") << QStringLiteral("c:\\Program Files") << QStringLiteral("System") << QStringLiteral("*.ini") ;
+    const QString expected_arg(QStringLiteral("dir \"c:\\Program Files\" System *.ini"));
 
     ShellCommand shellCommand(command, arguments);
     QCOMPARE(shellCommand.command(), command);
@@ -105,7 +105,7 @@ void ShellCommandTest::testArgumentsWithSpaces()
 
 void ShellCommandTest::testEmptyCommand()
 {
-    const QString command("");
+    const QString command = QString();
     ShellCommand shellCommand(command);
     QCOMPARE(shellCommand.command(), QString());
     QCOMPARE(shellCommand.arguments(), QStringList());
