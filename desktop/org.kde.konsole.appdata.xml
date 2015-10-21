@@ -201,6 +201,7 @@
       <li xml:lang="zh-CN">多配置文件</li>
       <li xml:lang="zh-TW">多重設定檔</li>
       <li>Silence and Activity monitoring</li>
+      <li xml:lang="ast">Silenciáu y monitoréu d'actividá</li>
       <li xml:lang="ca">Monitoratge del silenci i de l'activitat</li>
       <li xml:lang="cs">Monitorování nečinnosti a aktivity</li>
       <li xml:lang="de">Überwachung auf Aktivität und Inaktivität</li>
@@ -294,6 +295,7 @@
       <li xml:lang="zh-CN">搜索</li>
       <li xml:lang="zh-TW">搜尋</li>
       <li>Saving output</li>
+      <li xml:lang="ast">Guardáu de salida</li>
       <li xml:lang="ca">Desat de la sortida</li>
       <li xml:lang="cs">Ukládání výstupu</li>
       <li xml:lang="de">Speicherung der Ausgabe</li>
