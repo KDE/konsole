@@ -7,6 +7,7 @@
   <name xml:lang="ast">Konsole</name>
   <name xml:lang="bs">Konzola</name>
   <name xml:lang="ca">Konsole</name>
+  <name xml:lang="ca-valencia">Konsole</name>
   <name xml:lang="cs">Konsole</name>
   <name xml:lang="da">Konsole</name>
   <name xml:lang="de">Konsole</name>
@@ -41,6 +42,7 @@
   <summary xml:lang="ast">Terminal</summary>
   <summary xml:lang="bs">Terminal</summary>
   <summary xml:lang="ca">Terminal</summary>
+  <summary xml:lang="ca-valencia">Terminal</summary>
   <summary xml:lang="cs">Terminál</summary>
   <summary xml:lang="de">Terminal</summary>
   <summary xml:lang="en-GB">Terminal</summary>
@@ -74,6 +76,7 @@
     <p>Konsole is a terminal emulator.</p>
     <p xml:lang="ast">Konsole ye un emulador de terminal.</p>
     <p xml:lang="ca">El Konsole és l'emulador de terminal del KDE.</p>
+    <p xml:lang="ca-valencia">El Konsole és l'emulador de terminal del KDE.</p>
     <p xml:lang="cs">Konsole je emulátor terminálu.</p>
     <p xml:lang="de">Konsole ist in Terminal-Emulator</p>
     <p xml:lang="en-GB">Konsole is a terminal emulator.</p>
@@ -106,6 +109,7 @@
     <p xml:lang="ast">Carauterístiques:</p>
     <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
+    <p xml:lang="ca-valencia">Característiques:</p>
     <p xml:lang="cs">Vlastnosti:</p>
     <p xml:lang="de">Funktionen:</p>
     <p xml:lang="en-GB">Features:</p>
@@ -140,6 +144,7 @@
       <li xml:lang="ast">Llingüetes</li>
       <li xml:lang="bs">Kartice</li>
       <li xml:lang="ca">Pestanyes</li>
+      <li xml:lang="ca-valencia">Pestanyes</li>
       <li xml:lang="cs">Karty</li>
       <li xml:lang="de">Unterfenster</li>
       <li xml:lang="en-GB">Tabs</li>
@@ -172,6 +177,7 @@
       <li>Multiple profiles</li>
       <li xml:lang="ast">Perfiles múltiples</li>
       <li xml:lang="ca">Perfils múltiples</li>
+      <li xml:lang="ca-valencia">Perfils múltiples</li>
       <li xml:lang="cs">Možnost mít několik profilů</li>
       <li xml:lang="de">Mehrere Profile</li>
       <li xml:lang="en-GB">Multiple profiles</li>
@@ -202,6 +208,7 @@
       <li xml:lang="zh-TW">多重設定檔</li>
       <li>Silence and Activity monitoring</li>
       <li xml:lang="ca">Monitoratge del silenci i de l'activitat</li>
+      <li xml:lang="ca-valencia">Monitoratge del silenci i de l'activitat</li>
       <li xml:lang="cs">Monitorování nečinnosti a aktivity</li>
       <li xml:lang="de">Überwachung auf Aktivität und Inaktivität</li>
       <li xml:lang="en-GB">Silence and Activity monitoring</li>
@@ -233,6 +240,7 @@
       <li>Bookmark support</li>
       <li xml:lang="ast">Sofitu de marcadores</li>
       <li xml:lang="ca">Implementació de punts</li>
+      <li xml:lang="ca-valencia">Implementació de punts</li>
       <li xml:lang="cs">Podpora záložek</li>
       <li xml:lang="de">Lesezeichen-Unterstützung</li>
       <li xml:lang="en-GB">Bookmark support</li>
@@ -264,6 +272,7 @@
       <li>Searching</li>
       <li xml:lang="ast">Gueta</li>
       <li xml:lang="ca">Cerques</li>
+      <li xml:lang="ca-valencia">Cerques</li>
       <li xml:lang="cs">Hledání</li>
       <li xml:lang="de">Suchen</li>
       <li xml:lang="en-GB">Searching</li>
@@ -295,6 +304,7 @@
       <li xml:lang="zh-TW">搜尋</li>
       <li>Saving output</li>
       <li xml:lang="ca">Desat de la sortida</li>
+      <li xml:lang="ca-valencia">Guardat de l'eixida</li>
       <li xml:lang="cs">Ukládání výstupu</li>
       <li xml:lang="de">Speicherung der Ausgabe</li>
       <li xml:lang="en-GB">Saving output</li>
