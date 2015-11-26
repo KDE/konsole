@@ -22,6 +22,7 @@
 #ifndef VIEWCONTAINERTABBAR_H
 #define VIEWCONTAINERTABBAR_H
 
+#include <QElapsedTimer>
 #include <QTabBar>
 
 class QLabel;
@@ -36,6 +37,7 @@ class ViewContainerTabBar : public QTabBar
 
 public:
     ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container);
+    ~ViewContainerTabBar();
 
     // returns a pixmap image of a tab for use with QDrag
     QPixmap dragDropPixmap(int tab);
@@ -78,6 +80,7 @@ private:
     QString _supportedMimeType;
     TabbedViewContainer* _connectedContainer;
     QPoint _dragStart;
+    QElapsedTimer* _mousePressTimer;
 
 };
 }
