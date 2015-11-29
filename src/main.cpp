@@ -81,6 +81,8 @@ extern "C" int KDE_EXPORT kdemain(int argc, char** argv)
         }
     }
 
+    KLocalizedString::setApplicationDomain("konsole");
+
     KAboutData about(QStringLiteral("konsole"),
                      i18nc("@title", "Konsole"),
                      QStringLiteral(KONSOLE_VERSION),
