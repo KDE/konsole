@@ -22,6 +22,7 @@
   <name xml:lang="ko">Konsole</name>
   <name xml:lang="nb">Konsole</name>
   <name xml:lang="nl">Konsole</name>
+  <name xml:lang="nn">Konsole</name>
   <name xml:lang="pa">ਕਨਸੋਲ</name>
   <name xml:lang="pl">Konsola</name>
   <name xml:lang="pt">Konsole</name>
@@ -57,6 +58,7 @@
   <summary xml:lang="ko">터미널</summary>
   <summary xml:lang="nb">Terminal</summary>
   <summary xml:lang="nl">Terminal</summary>
+  <summary xml:lang="nn">Terminal</summary>
   <summary xml:lang="pa">ਟਰਮੀਨਲ</summary>
   <summary xml:lang="pl">Terminal</summary>
   <summary xml:lang="pt">Terminal</summary>
@@ -91,6 +93,7 @@
     <p xml:lang="ko">Konsole은 터미널 에뮬레이터입니다.</p>
     <p xml:lang="nb">Konsole er en terminalemulator.</p>
     <p xml:lang="nl">Konsole is een terminalemulator</p>
+    <p xml:lang="nn">Konsole er ein terminalemulator.</p>
     <p xml:lang="pa">ਕਨਸੋਲ ਟਰਮੀਨਲ ਈਮੂਲੇਟਰ ਹੈ।</p>
     <p xml:lang="pl">Konsole jest emulatorem terminala.</p>
     <p xml:lang="pt">O Konsole é um emulador de terminal.</p>
@@ -126,6 +129,7 @@
     <p xml:lang="ko">기능:</p>
     <p xml:lang="nb">Funksjoner:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
+    <p xml:lang="nn">Funksjonar:</p>
     <p xml:lang="pa">ਫੀਚਰ:</p>
     <p xml:lang="pl">Możliwości:</p>
     <p xml:lang="pt">Funcionalidades:</p>
@@ -162,6 +166,7 @@
       <li xml:lang="ko">탭</li>
       <li xml:lang="nb">Faner</li>
       <li xml:lang="nl">Tabbladen</li>
+      <li xml:lang="nn">Faner</li>
       <li xml:lang="pa">ਟੈਬ</li>
       <li xml:lang="pl">Karty</li>
       <li xml:lang="pt">Páginas</li>
@@ -195,6 +200,7 @@
       <li xml:lang="ko">다중 프로필</li>
       <li xml:lang="nb">Flere profiler</li>
       <li xml:lang="nl">Meerdere profielen</li>
+      <li xml:lang="nn">Fleire profilar</li>
       <li xml:lang="pa">ਵੱਖ-ਵੱਖ ਪ੍ਰੋਫਾਇਲ</li>
       <li xml:lang="pl">Wiele profili</li>
       <li xml:lang="pt">Múltiplos perfis</li>
@@ -228,6 +234,7 @@
       <li xml:lang="ko">무음 및 활동 모니터링</li>
       <li xml:lang="nb">Overvåking av stillhet og aktivitet</li>
       <li xml:lang="nl">Monitoring van stilte en activiteit</li>
+      <li xml:lang="nn">Overvaking av aktivitet og inaktivitet</li>
       <li xml:lang="pa">ਸ਼ਾਂਤ ਅਤੇ ਸਰਗਰਮੀ ਨਿਗਰਾਨੀ</li>
       <li xml:lang="pl">Monitorowanie ciszy i aktywności</li>
       <li xml:lang="pt">Monitorização do silêncio e da actividade</li>
@@ -261,6 +268,7 @@
       <li xml:lang="ko">책갈피 지원</li>
       <li xml:lang="nb">Støtte for bokmerker</li>
       <li xml:lang="nl">Ondersteuning van bladwijzers</li>
+      <li xml:lang="nn">Bokmerkestøtte</li>
       <li xml:lang="pa">ਬੁੱਕਮਾਰਕ ਸਹਿਯੋਗ</li>
       <li xml:lang="pl">Obsługa zakładek</li>
       <li xml:lang="pt">Suporte para favoritos</li>
@@ -295,6 +303,7 @@
       <li xml:lang="ko">찾기</li>
       <li xml:lang="nb">Søking</li>
       <li xml:lang="nl">Zoeken</li>
+      <li xml:lang="nn">Søkjestøtte</li>
       <li xml:lang="pa">ਖੋਜ ਕਰਨੀ</li>
       <li xml:lang="pl">Wyszukiwanie</li>
       <li xml:lang="pt">Procurar</li>
@@ -328,6 +337,7 @@
       <li xml:lang="ko">출력 저장</li>
       <li xml:lang="nb">Lagrer utdata</li>
       <li xml:lang="nl">Opslaan van uitvoer</li>
+      <li xml:lang="nn">Lagring av utdata</li>
       <li xml:lang="pa">ਆਉਟਪੁੱਟ ਸੰਭਾਲਣੀ</li>
       <li xml:lang="pl">Zapisywanie wyniku</li>
       <li xml:lang="pt">Gravação do resultado</li>
