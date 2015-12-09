@@ -46,6 +46,7 @@
   <summary xml:lang="ca">Terminal</summary>
   <summary xml:lang="ca-valencia">Terminal</summary>
   <summary xml:lang="cs">Terminál</summary>
+  <summary xml:lang="da">Terminal</summary>
   <summary xml:lang="de">Terminal</summary>
   <summary xml:lang="el">Τερματικό</summary>
   <summary xml:lang="en-GB">Terminal</summary>
@@ -117,6 +118,7 @@
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="ca-valencia">Característiques:</p>
     <p xml:lang="cs">Vlastnosti:</p>
+    <p xml:lang="da">Funktioner:</p>
     <p xml:lang="de">Funktionen:</p>
     <p xml:lang="el">Χαρακτηριστικά:</p>
     <p xml:lang="en-GB">Features:</p>
@@ -154,6 +156,7 @@
       <li xml:lang="ca">Pestanyes</li>
       <li xml:lang="ca-valencia">Pestanyes</li>
       <li xml:lang="cs">Karty</li>
+      <li xml:lang="da">Faneblade</li>
       <li xml:lang="de">Unterfenster</li>
       <li xml:lang="el">Καρτέλες</li>
       <li xml:lang="en-GB">Tabs</li>
@@ -291,6 +294,7 @@
       <li xml:lang="ca">Cerques</li>
       <li xml:lang="ca-valencia">Cerques</li>
       <li xml:lang="cs">Hledání</li>
+      <li xml:lang="da">Søgning</li>
       <li xml:lang="de">Suchen</li>
       <li xml:lang="el">Αναζήτηση</li>
       <li xml:lang="en-GB">Searching</li>
@@ -326,6 +330,7 @@
       <li xml:lang="ca">Desat de la sortida</li>
       <li xml:lang="ca-valencia">Guardat de l'eixida</li>
       <li xml:lang="cs">Ukládání výstupu</li>
+      <li xml:lang="da">Gemning af output</li>
       <li xml:lang="de">Speicherung der Ausgabe</li>
       <li xml:lang="el">Αποθήκευση αποτελέσματος</li>
       <li xml:lang="en-GB">Saving output</li>
