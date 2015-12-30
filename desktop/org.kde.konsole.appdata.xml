@@ -20,6 +20,7 @@
   <name xml:lang="ia">Konsole</name>
   <name xml:lang="it">Konsole</name>
   <name xml:lang="ko">Konsole</name>
+  <name xml:lang="lt">Konsolė</name>
   <name xml:lang="nb">Konsole</name>
   <name xml:lang="nl">Konsole</name>
   <name xml:lang="nn">Konsole</name>
@@ -57,6 +58,7 @@
   <summary xml:lang="ia">Terminal</summary>
   <summary xml:lang="it">Terminale</summary>
   <summary xml:lang="ko">터미널</summary>
+  <summary xml:lang="lt">Terminalas</summary>
   <summary xml:lang="nb">Terminal</summary>
   <summary xml:lang="nl">Terminal</summary>
   <summary xml:lang="nn">Terminal</summary>
@@ -92,6 +94,7 @@
     <p xml:lang="hu">A Konsole egy terminálemulátor.</p>
     <p xml:lang="it">Konsole è un emulatore di terminale.</p>
     <p xml:lang="ko">Konsole은 터미널 에뮬레이터입니다.</p>
+    <p xml:lang="lt">Konsolė yra terminalo emuliatorius</p>
     <p xml:lang="nb">Konsole er en terminalemulator.</p>
     <p xml:lang="nl">Konsole is een terminalemulator</p>
     <p xml:lang="nn">Konsole er ein terminalemulator.</p>
@@ -129,6 +132,7 @@
     <p xml:lang="ia">Characteristicas:</p>
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="ko">기능:</p>
+    <p xml:lang="lt">Ypatybės:</p>
     <p xml:lang="nb">Funksjoner:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
     <p xml:lang="nn">Funksjonar:</p>
@@ -167,6 +171,7 @@
       <li xml:lang="ia">Schedas</li>
       <li xml:lang="it">Schede</li>
       <li xml:lang="ko">탭</li>
+      <li xml:lang="lt">Kortelės</li>
       <li xml:lang="nb">Faner</li>
       <li xml:lang="nl">Tabbladen</li>
       <li xml:lang="nn">Faner</li>
@@ -201,6 +206,7 @@
       <li xml:lang="hu">Több profil használatának lehetősége</li>
       <li xml:lang="it">Profili multipli</li>
       <li xml:lang="ko">다중 프로필</li>
+      <li xml:lang="lt">Daugybė profilių</li>
       <li xml:lang="nb">Flere profiler</li>
       <li xml:lang="nl">Meerdere profielen</li>
       <li xml:lang="nn">Fleire profilar</li>
@@ -305,6 +311,7 @@
       <li xml:lang="ia">Cercante</li>
       <li xml:lang="it">Ricerca</li>
       <li xml:lang="ko">찾기</li>
+      <li xml:lang="lt">Paieška</li>
       <li xml:lang="nb">Søking</li>
       <li xml:lang="nl">Zoeken</li>
       <li xml:lang="nn">Søkjestøtte</li>
@@ -340,6 +347,7 @@
       <li xml:lang="hu">Kimenet mentése</li>
       <li xml:lang="it">Salvataggio del risultato</li>
       <li xml:lang="ko">출력 저장</li>
+      <li xml:lang="lt">Išvesties įrašymas</li>
       <li xml:lang="nb">Lagrer utdata</li>
       <li xml:lang="nl">Opslaan van uitvoer</li>
       <li xml:lang="nn">Lagring av utdata</li>
