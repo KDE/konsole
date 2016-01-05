@@ -423,7 +423,7 @@ Comment[wa]=Cloke ki sone divins ene nén veyåve session
 Comment[x-test]=xxBell emitted within a non-visible sessionxx
 Comment[zh_CN]=不可见会话中发生的响铃
 Comment[zh_TW]=非可見工作階段中的響鈴行為
-Sound=KDE-Sys-App-Message.ogg
+Sound=Oxygen-Sys-App-Message.ogg
 Action=Popup
 
 [Event/Activity]
