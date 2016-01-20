@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Konsole</name>
+  <name xml:lang="ar">كونسول</name>
   <name xml:lang="ast">Konsole</name>
   <name xml:lang="bs">Konzola</name>
   <name xml:lang="ca">Konsole</name>
@@ -42,6 +43,7 @@
   <name xml:lang="zh-CN">Konsole</name>
   <name xml:lang="zh-TW">Konsole</name>
   <summary>Terminal</summary>
+  <summary xml:lang="ar">طرفيّة</summary>
   <summary xml:lang="ast">Terminal</summary>
   <summary xml:lang="bs">Terminal</summary>
   <summary xml:lang="ca">Terminal</summary>
@@ -81,6 +83,7 @@
   <summary xml:lang="zh-TW">終端機</summary>
   <description>
     <p>Konsole is a terminal emulator.</p>
+    <p xml:lang="ar">كونسول هو محاكي طرفيّة.</p>
     <p xml:lang="ast">Konsole ye un emulador de terminal.</p>
     <p xml:lang="ca">El Konsole és l'emulador de terminal del KDE.</p>
     <p xml:lang="ca-valencia">El Konsole és l'emulador de terminal del KDE.</p>
@@ -116,6 +119,7 @@
     <p xml:lang="zh-CN">Konsole 是一个终端模拟器。</p>
     <p xml:lang="zh-TW">Konsole 是一套終端機模擬程式。</p>
     <p>Features:</p>
+    <p xml:lang="ar">الميزات:</p>
     <p xml:lang="ast">Carauterístiques:</p>
     <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
@@ -155,6 +159,7 @@
     <p xml:lang="zh-TW">功能：</p>
     <ul>
       <li>Tabs</li>
+      <li xml:lang="ar">الألسنة</li>
       <li xml:lang="ast">Llingüetes</li>
       <li xml:lang="bs">Kartice</li>
       <li xml:lang="ca">Pestanyes</li>
@@ -193,6 +198,7 @@
       <li xml:lang="zh-CN">标签</li>
       <li xml:lang="zh-TW">分頁</li>
       <li>Multiple profiles</li>
+      <li xml:lang="ar">مختلف التّشكيلات</li>
       <li xml:lang="ast">Perfiles múltiples</li>
       <li xml:lang="ca">Perfils múltiples</li>
       <li xml:lang="ca-valencia">Perfils múltiples</li>
@@ -228,6 +234,7 @@
       <li xml:lang="zh-CN">多配置文件</li>
       <li xml:lang="zh-TW">多重設定檔</li>
       <li>Silence and Activity monitoring</li>
+      <li xml:lang="ar">مراقبة السّكوت والنّشاط</li>
       <li xml:lang="ast">Silenciáu y monitoréu d'actividá</li>
       <li xml:lang="ca">Monitoratge del silenci i de l'activitat</li>
       <li xml:lang="ca-valencia">Monitoratge del silenci i de l'activitat</li>
@@ -262,6 +269,7 @@
       <li xml:lang="zh-CN">沉默和活动监视</li>
       <li xml:lang="zh-TW">靜音與活動監控</li>
       <li>Bookmark support</li>
+      <li xml:lang="ar">دعم العلامات</li>
       <li xml:lang="ast">Sofitu de marcadores</li>
       <li xml:lang="ca">Implementació de punts</li>
       <li xml:lang="ca-valencia">Implementació de punts</li>
@@ -296,6 +304,7 @@
       <li xml:lang="zh-CN">书签支持</li>
       <li xml:lang="zh-TW">書籤支援</li>
       <li>Searching</li>
+      <li xml:lang="ar">البحث</li>
       <li xml:lang="ast">Gueta</li>
       <li xml:lang="ca">Cerques</li>
       <li xml:lang="ca-valencia">Cerques</li>
@@ -333,6 +342,7 @@
       <li xml:lang="zh-CN">搜索</li>
       <li xml:lang="zh-TW">搜尋</li>
       <li>Saving output</li>
+      <li xml:lang="ar">حفظ الخرج</li>
       <li xml:lang="ast">Guardáu de salida</li>
       <li xml:lang="ca">Desat de la sortida</li>
       <li xml:lang="ca-valencia">Guardat de l'eixida</li>
