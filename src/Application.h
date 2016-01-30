@@ -77,12 +77,13 @@ private:
     void listProfilePropertyInfo();
     void startBackgroundMode(MainWindow* window);
     bool processHelpArgs(KCmdLineArgs* args);
-    MainWindow* processWindowArgs(KCmdLineArgs* args);
+    MainWindow* processWindowArgs(KCmdLineArgs* args, bool &createdNewMainWindow);
     Profile::Ptr processProfileSelectArgs(KCmdLineArgs* args);
     Profile::Ptr processProfileChangeArgs(KCmdLineArgs* args, Profile::Ptr baseProfile);
     void processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window);
     void createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
                            const QHash<QString, QString>&);
+    void finalizeNewMainWindow(MainWindow* window);
 
     MainWindow* _backgroundInstance;
 };
