@@ -36,6 +36,7 @@
 #include "MainWindow.h"
 #include "Session.h"
 #include "ShellCommand.h"
+#include "KonsoleSettings.h"
 
 using namespace Konsole;
 
@@ -83,7 +84,7 @@ void Application::createWindow(Profile::Ptr profile, const QString& directory)
 {
     MainWindow* window = newMainWindow();
     window->createSession(profile, directory);
-    window->show();
+    finalizeNewMainWindow(window);
 }
 
 void Application::detachView(Session* session)
@@ -93,7 +94,7 @@ void Application::detachView(Session* session)
     // Since user is dragging and dropping, move dnd window to where
     // the user has the cursor (correct multiple monitor setups).
     window->move(QCursor::pos());
-    window->show();
+    finalizeNewMainWindow(window);
 }
 
 int Application::newInstance()
@@ -109,8 +110,12 @@ int Application::newInstance()
         if (processHelpArgs(args))
             return 0;
 
+        // returns from processWindowArgs(args, createdNewMainWindow)
+        // if a new window was created
+        bool createdNewMainWindow = false;
+
         // create a new window or use an existing one
-        MainWindow* window = processWindowArgs(args);
+        MainWindow* window = processWindowArgs(args, createdNewMainWindow);
 
         if (args->isSet("tabs-from-file")) {
             // create new session(s) as described in file
@@ -148,10 +153,15 @@ int Application::newInstance()
             // run. After that KMainWindow will have manually resized the
             // window to its saved size at this point (so the Qt::WA_Resized
             // attribute will be set)
-            if (!window->testAttribute(Qt::WA_Resized))
-                window->resize(window->sizeHint());
 
-            window->show();
+
+            // If not restoring size from last time or only adding new tab,
+            // resize window to chosen profile size (see Bug:345403)
+            if (createdNewMainWindow){
+                finalizeNewMainWindow(window);
+            } else{
+                window->show();
+            }
         }
     }
 
@@ -285,7 +295,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     window->hide();
 }
 
-MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
+MainWindow* Application::processWindowArgs(KCmdLineArgs* args, bool &createdNewMainWindow)
 {
     MainWindow* window = 0;
     if (args->isSet("new-tab")) {
@@ -299,6 +309,7 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
     }
 
     if (window == 0) {
+        createdNewMainWindow = true;
         window = newMainWindow();
 
         // override default menubar visibility
@@ -475,3 +486,9 @@ void Application::toggleBackgroundInstance()
     }
 }
 
+void Application::finalizeNewMainWindow(MainWindow* window)
+{
+    if (!KonsoleSettings::saveGeometryOnExit())
+        window->resize(window->sizeHint());
+    window->show();
+}
