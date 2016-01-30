@@ -226,8 +226,7 @@ void TerminalDisplay::setVTFont(const QFont& f)
     QFontInfo fontInfo(newFont);
 
     if (!fontInfo.fixedPitch()) {
-        qWarning() << "Ignoring font change due to it being variable-width";
-        return;
+        qWarning() << "Using a variable-width font - this might cause display problems";
     }
 
     // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch()
