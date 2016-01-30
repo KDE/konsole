@@ -5,7 +5,7 @@ Exec=konsole
 Icon=utilities-terminal
 Terminal=false
 Categories=Qt;KDE;System;TerminalEmulator;
-Actions=NewWindow;
+Actions=NewWindow;NewTab
 X-DocPath=konsole/index.html
 X-DBUS-StartupType=Unique
 StartupNotify=true
@@ -188,6 +188,8 @@ GenericName[x-test]=xxTerminalxx
 GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 
+Comment=Command line access
+
 [Desktop Action NewWindow]
 Name=Open a New Window
 Name[ar]=افتح نافذة جديدة
@@ -236,3 +238,7 @@ Name[x-test]=xxOpen a New Windowxx
 Name[zh_CN]=打开新窗口
 Name[zh_TW]=開啟新視窗
 Exec=konsole
+
+[Desktop Action NewTab]
+Name=Open a New Tab
+Exec=konsole --new-tab
