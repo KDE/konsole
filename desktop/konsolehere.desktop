@@ -103,3 +103,11 @@ Name[zh_CN]=在此打开终端
 Name[zh_TW]=在這裡開啟終端機
 
 Comment=Opens a terminal at the current folder
+Comment[ca]=Obre un terminal en la carpeta actual
+Comment[es]=Abre una terminal en la carpeta actual
+Comment[nl]=Opent een terminal in de huidige map
+Comment[pt]=Abre um terminal na pasta actual
+Comment[pt_BR]=Abre um terminal na pasta atual
+Comment[sl]=Odpre terminal v trenutni mapi
+Comment[uk]=Відкрити термінал у поточній теці
+Comment[x-test]=xxOpens a terminal at the current folderxx

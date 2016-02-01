@@ -189,6 +189,14 @@ GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 
 Comment=Command line access
+Comment[ca]=Accés a la línia d'ordres
+Comment[es]=Acceso a la línea de órdenes
+Comment[nl]=Toegang tot de opdrachtregel
+Comment[pt]=Acesso à linha de comandos
+Comment[pt_BR]=Acesso à linha de comandos
+Comment[sl]=Dostop do ukazne vrstice
+Comment[uk]=Доступ до командного рядка
+Comment[x-test]=xxCommand line accessxx
 
 [Desktop Action NewWindow]
 Name=Open a New Window
@@ -241,4 +249,12 @@ Exec=konsole
 
 [Desktop Action NewTab]
 Name=Open a New Tab
+Name[ca]=Obre una pestanya nova
+Name[es]=Abrir una nueva pestaña
+Name[nl]=Een nieuw tabblad openen
+Name[pt]=Abrir uma Nova Página
+Name[pt_BR]=Abre uma nova aba
+Name[sl]=Odpri nov zavihek
+Name[uk]=Відкрити нову вкладку
+Name[x-test]=xxOpen a New Tabxx
 Exec=konsole --new-tab
