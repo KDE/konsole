@@ -190,6 +190,8 @@ GenericName[zh_TW]=終端機
 
 Comment=Command line access
 Comment[ca]=Accés a la línia d'ordres
+Comment[ca@valencia]=Accés a la línia d'ordes
+Comment[de]=Zugriff auf die Befehlszeile
 Comment[es]=Acceso a la línea de órdenes
 Comment[ia]=Accesso a linea de commando
 Comment[nl]=Toegang tot de opdrachtregel
@@ -252,6 +254,8 @@ Exec=konsole
 [Desktop Action NewTab]
 Name=Open a New Tab
 Name[ca]=Obre una pestanya nova
+Name[ca@valencia]=Obri una pestanya nova
+Name[de]=Ein neues Unterfenster öffnen
 Name[es]=Abrir una nueva pestaña
 Name[ia]=Aperi un nove scheda
 Name[nl]=Een nieuw tabblad openen

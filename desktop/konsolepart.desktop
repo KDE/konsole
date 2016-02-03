@@ -106,6 +106,8 @@ Name[zh_TW]=終端機模擬程式
 
 Comment=Command line access
 Comment[ca]=Accés a la línia d'ordres
+Comment[ca@valencia]=Accés a la línia d'ordes
+Comment[de]=Zugriff auf die Befehlszeile
 Comment[es]=Acceso a la línea de órdenes
 Comment[ia]=Accesso a linea de commando
 Comment[nl]=Toegang tot de opdrachtregel
