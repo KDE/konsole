@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# This script is here only as a pattern for maintainance works.
+# This script is here only as a pattern for maintenance works.
 # It has changing contents and is of no use to anyone but me.
 
 $source = "Table.Codes";
