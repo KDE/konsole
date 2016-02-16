@@ -266,6 +266,7 @@ Exec=konsole
 Name=Open a New Tab
 Name[ca]=Obre una pestanya nova
 Name[ca@valencia]=Obri una pestanya nova
+Name[cs]=Otevřít novou kartu
 Name[de]=Ein neues Unterfenster öffnen
 Name[es]=Abrir una nueva pestaña
 Name[fi]=Avaa uusi välilehti
