@@ -531,7 +531,7 @@ bool MainWindow::queryClose()
     // Do not ask for confirmation during log out and power off
     // TODO: rework the dealing of this case to make it has its own confirmation
     // dialog.
-    if (kapp->sessionSaving()) {
+    if (qApp->isSavingSession()) {
         return true;
     }
 
