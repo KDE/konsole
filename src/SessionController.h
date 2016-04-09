@@ -354,7 +354,7 @@ private:
     QStringList _bookmarkValidProgramsToClear;
 
     bool _isSearchBarEnabled;
-    QWeakPointer<EditProfileDialog> _editProfileDialog;
+    QPointer<EditProfileDialog> _editProfileDialog;
 
     QString _searchText;
 };

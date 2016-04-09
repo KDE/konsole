@@ -24,11 +24,12 @@
 #include <QtCore/QHashIterator>
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
+#include <QCommandLineParser>
+#include <QStandardPaths>
+#include <QDebug>
 
 // KDE
 #include <KActionCollection>
-#include <KCmdLineArgs>
-#include <QDebug>
 
 // Konsole
 #include "SessionManager.h"
@@ -42,28 +43,9 @@
 
 using namespace Konsole;
 
-Application::Application() : KUniqueApplication()
-{
-    init();
-}
-
-void Application::init()
+Application::Application(QCommandLineParser &parser) : m_parser(parser)
 {
     _backgroundInstance = 0;
-
-    // enable high dpi support
-    setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-
-#if defined(Q_OS_MAC)
-    // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
-    // will work correctly in the terminal
-    setAttribute(Qt::AA_MacDontSwapCtrlAndMeta);
-
-    // KDE's menuBar()->isTopLevel() hasn't worked in a while.
-    // For now, put menus inside Konsole window; this also make
-    // the keyboard shortcut to show menus look reasonable.
-    setAttribute(Qt::AA_DontUseNativeMenuBar);
-#endif
 }
 
 Application::~Application()
@@ -75,6 +57,7 @@ Application::~Application()
 MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
+    window->setTransparency(!m_parser.isSet("notransparency"));
 
     connect(window, &Konsole::MainWindow::newWindowRequest, this, &Konsole::Application::createWindow);
     connect(window, &Konsole::MainWindow::viewDetached, this, &Konsole::Application::detachView);
@@ -107,75 +90,67 @@ void Application::detachView(Session* session)
 
 int Application::newInstance()
 {
-    static bool firstInstance = true;
-
-    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-
     // handle session management
-    if ((args->count() != 0) || !firstInstance || !isSessionRestored()) {
-        // check for arguments to print help or other information to the
-        // terminal, quit if such an argument was found
-        if (processHelpArgs(args))
-            return 0;
 
-        // returns from processWindowArgs(args, createdNewMainWindow)
-        // if a new window was created
-        bool createdNewMainWindow = false;
+    // returns from processWindowArgs(args, createdNewMainWindow)
+    // if a new window was created
+    bool createdNewMainWindow = false;
 
-        // create a new window or use an existing one
-        MainWindow* window = processWindowArgs(args, createdNewMainWindow);
+    // check for arguments to print help or other information to the
+    // terminal, quit if such an argument was found
+    if (processHelpArgs())
+        return 0;
 
-        if (args->isSet("tabs-from-file")) {
-            // create new session(s) as described in file
-            processTabsFromFileArgs(args, window);
-        } else {
-            // select profile to use
-            Profile::Ptr baseProfile = processProfileSelectArgs(args);
+    // create a new window or use an existing one
+    MainWindow* window = processWindowArgs(createdNewMainWindow);
 
-            // process various command-line options which cause a property of the
-            // selected profile to be changed
-            Profile::Ptr newProfile = processProfileChangeArgs(args, baseProfile);
+    if (m_parser.isSet("tabs-from-file")) {
+        // create new session(s) as described in file
+        processTabsFromFileArgs(window);
+    } else {
+        // select profile to use
+        Profile::Ptr baseProfile = processProfileSelectArgs();
 
-            // create new session
-            Session* session = window->createSession(newProfile, QString());
+        // process various command-line options which cause a property of the
+        // selected profile to be changed
+        Profile::Ptr newProfile = processProfileChangeArgs(baseProfile);
 
-            if (!args->isSet("close")) {
-                session->setAutoClose(false);
-            }
-        }
+        // create new session
+        Session* session = window->createSession(newProfile, QString());
 
-        // if the background-mode argument is supplied, start the background
-        // session ( or bring to the front if it already exists )
-        if (args->isSet("background-mode")) {
-            startBackgroundMode(window);
-        } else {
-            // Qt constrains top-level windows which have not been manually
-            // resized (via QWidget::resize()) to a maximum of 2/3rds of the
-            //  screen size.
-            //
-            // This means that the terminal display might not get the width/
-            // height it asks for.  To work around this, the widget must be
-            // manually resized to its sizeHint().
-            //
-            // This problem only affects the first time the application is run.
-            // run. After that KMainWindow will have manually resized the
-            // window to its saved size at this point (so the Qt::WA_Resized
-            // attribute will be set)
-
-
-            // If not restoring size from last time or only adding new tab,
-            // resize window to chosen profile size (see Bug:345403)
-            if (createdNewMainWindow){
-                finalizeNewMainWindow(window);
-            } else{
-                window->show();
-            }
+        if (m_parser.isSet("noclose")) {
+            session->setAutoClose(false);
         }
     }
 
-    firstInstance = false;
-    args->clear();
-    return 0;
+    // if the background-mode argument is supplied, start the background
+    // session ( or bring to the front if it already exists )
+    if (m_parser.isSet("background-mode")) {
+        startBackgroundMode(window);
+    } else {
+        // Qt constrains top-level windows which have not been manually
+        // resized (via QWidget::resize()) to a maximum of 2/3rds of the
+        //  screen size.
+        //
+        // This means that the terminal display might not get the width/
+        // height it asks for.  To work around this, the widget must be
+        // manually resized to its sizeHint().
+        //
+        // This problem only affects the first time the application is run.
+        // run. After that KMainWindow will have manually resized the
+        // window to its saved size at this point (so the Qt::WA_Resized
+        // attribute will be set)
+
+        // If not restoring size from last time or only adding new tab,
+        // resize window to chosen profile size (see Bug:345403)
+        if (createdNewMainWindow){
+            finalizeNewMainWindow(window);
+        } else{
+            window->show();
+        }
+    }
+
+    return 1;
 }
 
 /* Documentation for tab file:
@@ -194,16 +169,15 @@ title: Top this!;; command: top
 command: ssh  earth
 profile: Zsh
 */
-void Application::processTabsFromFileArgs(KCmdLineArgs* args,
-        MainWindow* window)
+void Application::processTabsFromFileArgs(MainWindow* window)
 {
     // Open tab configuration file
-    const QString tabsFileName(args->getOption("tabs-from-file"));
+    const QString tabsFileName(m_parser.value("tabs-from-file"));
     QFile tabsFile(tabsFileName);
     if (!tabsFile.open(QFile::ReadOnly)) {
         qWarning() << "ERROR: Cannot open tabs file "
                    << tabsFileName.toLocal8Bit().data();
-        quit();
+        return;
     }
 
     unsigned int sessions = 0;
@@ -222,7 +196,7 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
         }
         // should contain at least one of 'command' and 'profile'
         if (lineTokens.contains(QLatin1String("command")) || lineTokens.contains(QStringLiteral("profile"))) {
-            createTabFromArgs(args, window, lineTokens);
+            createTabFromArgs(window, lineTokens);
             sessions++;
         } else {
             qWarning() << "Each line should contain at least one of 'command' and 'profile'.";
@@ -233,11 +207,11 @@ void Application::processTabsFromFileArgs(KCmdLineArgs* args,
     if (sessions < 1) {
         qWarning() << "No valid lines found in "
                    << tabsFileName.toLocal8Bit().data();
-        quit();
+        return;
     }
 }
 
-void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
+void Application::createTabFromArgs(MainWindow* window,
                                     const QHash<QString, QString>& tokens)
 {
     const QString& title = tokens["title"];
@@ -273,8 +247,8 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
         shouldUseNewProfile = true;
     }
 
-    if (args->isSet("workdir")) {
-        newProfile->setProperty(Profile::Directory, args->getOption("workdir"));
+    if (m_parser.isSet("workdir")) {
+        newProfile->setProperty(Profile::Directory, m_parser.value("workdir"));
         shouldUseNewProfile = true;
     }
 
@@ -287,7 +261,7 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     Profile::Ptr theProfile = shouldUseNewProfile ? newProfile :  baseProfile;
     Session* session = window->createSession(theProfile, QString());
 
-    if (!args->isSet("close")) {
+    if (m_parser.isSet("noclose")) {
         session->setAutoClose(false);
     }
 
@@ -303,11 +277,13 @@ void Application::createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
     window->hide();
 }
 
-MainWindow* Application::processWindowArgs(KCmdLineArgs* args, bool &createdNewMainWindow)
+// Creates a new Konsole window.
+// If --new-tab is given, use existing window.
+MainWindow* Application::processWindowArgs(bool &createdNewMainWindow)
 {
     MainWindow* window = 0;
-    if (args->isSet("new-tab")) {
-        QListIterator<QWidget*> iter(topLevelWidgets());
+    if (m_parser.isSet("new-tab")) {
+        QListIterator<QWidget*> iter(QApplication::topLevelWidgets());
         iter.toBack();
         while (iter.hasPrevious()) {
             window = qobject_cast<MainWindow*>(iter.previous());
@@ -321,24 +297,24 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args, bool &createdNewM
         window = newMainWindow();
 
         // override default menubar visibility
-        if (args->isSet("show-menubar")) {
+        if (m_parser.isSet("show-menubar")) {
             window->setMenuBarInitialVisibility(true);
         }
-        if (args->isSet("hide-menubar")) {
+        if (m_parser.isSet("hide-menubar")) {
             window->setMenuBarInitialVisibility(false);
         }
-        if (args->isSet("fullscreen")) {
+        if (m_parser.isSet("fullscreen")) {
             window->viewFullScreen(true);
         }
 
         // override default tabbbar visibility
         // FIXME: remove those magic number
         // see ViewContainer::NavigationVisibility
-        if (args->isSet("show-tabbar")) {
+        if (m_parser.isSet("show-tabbar")) {
             // always show
             window->setNavigationVisibility(0);
         }
-        if (args->isSet("hide-tabbar")) {
+        if (m_parser.isSet("hide-tabbar")) {
             // never show
             window->setNavigationVisibility(2);
         }
@@ -346,16 +322,20 @@ MainWindow* Application::processWindowArgs(KCmdLineArgs* args, bool &createdNewM
     return window;
 }
 
-Profile::Ptr Application::processProfileSelectArgs(KCmdLineArgs* args)
+// Loads a profile.
+// If --profile <name> is given, loads profile <name>.
+// If --fallback-profile is given, loads profile FALLBACK/.
+// Else loads the default profile.
+Profile::Ptr Application::processProfileSelectArgs()
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
-    if (args->isSet("profile")) {
+    if (m_parser.isSet("profile")) {
         Profile::Ptr profile = ProfileManager::instance()->loadProfile(
-                                   args->getOption("profile"));
+                                   m_parser.value("profile"));
         if (profile)
             return profile;
-    } else if (args->isSet("fallback-profile")) {
+    } else if (m_parser.isSet("fallback-profile")) {
         Profile::Ptr profile = ProfileManager::instance()->loadProfile(QStringLiteral("FALLBACK/"));
         if (profile)
             return profile;
@@ -364,12 +344,12 @@ Profile::Ptr Application::processProfileSelectArgs(KCmdLineArgs* args)
     return defaultProfile;
 }
 
-bool Application::processHelpArgs(KCmdLineArgs* args)
+bool Application::processHelpArgs()
 {
-    if (args->isSet("list-profiles")) {
+    if (m_parser.isSet("list-profiles")) {
         listAvailableProfiles();
         return true;
-    } else if (args->isSet("list-profile-properties")) {
+    } else if (m_parser.isSet("list-profile-properties")) {
         listProfilePropertyInfo();
         return true;
     }
@@ -385,7 +365,7 @@ void Application::listAvailableProfiles()
         printf("%s\n", info.completeBaseName().toLocal8Bit().constData());
     }
 
-    quit();
+    return;
 }
 
 void Application::listProfilePropertyInfo()
@@ -397,10 +377,10 @@ void Application::listProfilePropertyInfo()
         printf("%s\n", name.toLocal8Bit().constData());
     }
 
-    quit();
+    return;
 }
 
-Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::Ptr baseProfile)
+Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
 {
     bool shouldUseNewProfile = false;
 
@@ -408,13 +388,13 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
     newProfile->setHidden(true);
 
     // change the initial working directory
-    if (args->isSet("workdir")) {
-        newProfile->setProperty(Profile::Directory, args->getOption("workdir"));
+    if (m_parser.isSet("workdir")) {
+        newProfile->setProperty(Profile::Directory, m_parser.value("workdir"));
         shouldUseNewProfile = true;
     }
 
     // temporary changes to profile options specified on the command line
-    foreach(const QString & value , args->getOptionList("p")) {
+    foreach(const QString & value , m_parser.values("p")) {
         ProfileCommandParser parser;
 
         QHashIterator<Profile::Property, QVariant> iter(parser.parse(value));
@@ -427,22 +407,21 @@ Profile::Ptr Application::processProfileChangeArgs(KCmdLineArgs* args, Profile::
     }
 
     // run a custom command
-    if (args->isSet("e")) {
-        QString commandExec = args->getOption("e");
+    if (m_parser.isSet("e")) {
+        QString commandExec = m_parser.value("e");
         QStringList commandArguments;
 
-        // Note: KCmdLineArgs::count() return the number of arguments
-        // that aren't options.
-        if (args->count() == 0 && QStandardPaths::findExecutable(commandExec).isEmpty()) {
+        if (m_parser.positionalArguments().count() == 0 &&
+            QStandardPaths::findExecutable(commandExec).isEmpty()) {
             // Example: konsole -e "man ls"
-            ShellCommand shellCommand(args->getOption("e"));
+            ShellCommand shellCommand(m_parser.value("e"));
             commandExec = shellCommand.command();
             commandArguments = shellCommand.arguments();
         } else {
             // Example: konsole -e man ls
             commandArguments << commandExec;
-            for ( int i = 0 ; i < args->count() ; i++ )
-                commandArguments << args->arg(i);
+            for ( int i = 0 ; i < m_parser.positionalArguments().count() ; i++ )
+                commandArguments << m_parser.positionalArguments().at(i);
         }
 
         if (commandExec.startsWith(QLatin1String("./")))
@@ -492,6 +471,14 @@ void Application::toggleBackgroundInstance()
     } else {
         _backgroundInstance->hide();
     }
+}
+
+void Application::slotActivateRequested (const QStringList &args, const QString &workingDir)
+{
+    if (!args.isEmpty()) {
+        m_parser.parse(args);
+    }
+    newInstance();
 }
 
 void Application::finalizeNewMainWindow(MainWindow* window)

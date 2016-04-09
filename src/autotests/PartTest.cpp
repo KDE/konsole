@@ -83,7 +83,7 @@ void PartTest::testFd()
     // as soon as it becomes available and the terminal will not display any output
     ptyProcess.pty()->setSuspended(true);
 
-    QWeakPointer<QDialog> dialog = new QDialog();
+    QPointer<QDialog> dialog = new QDialog();
     QVBoxLayout* layout = new QVBoxLayout(dialog.data());
     layout->addWidget(new QLabel(QStringLiteral("Output of 'ping localhost' should appear in a terminal below for 5 seconds")));
     layout->addWidget(terminalPart->widget());

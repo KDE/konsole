@@ -27,7 +27,6 @@
 #include <KAcceleratorManager>
 #include <KActionCollection>
 #include <KActionMenu>
-#include <KCmdLineArgs>
 #include <KShortcutsDialog>
 #include <KLocalizedString>
 
@@ -41,7 +40,6 @@
 #include <KXMLGUIFactory>
 #include <KNotifyConfigWidget>
 #include <KConfigDialog>
-#include <KApplication>
 #include <KIconLoader>
 
 // Konsole
@@ -67,6 +65,7 @@ MainWindow::MainWindow()
     , _pluggedController(0)
     , _menuBarInitialVisibility(true)
     , _menuBarInitialVisibilityApplied(false)
+    , _useTransparency(false)
 {
     if (!KonsoleSettings::saveGeometryOnExit()) {
         // If we are not using the global Konsole save geometry on exit,
@@ -131,9 +130,7 @@ MainWindow::MainWindow()
 
 void MainWindow::updateUseTransparency()
 {
-    const KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-
-    bool useTranslucency = KWindowSystem::compositingActive() && args->isSet("transparency");
+    bool useTranslucency = KWindowSystem::compositingActive() && _useTransparency;
 
     setAttribute(Qt::WA_TranslucentBackground, useTranslucency);
     setAttribute(Qt::WA_NoSystemBackground, false);
@@ -767,6 +764,11 @@ void MainWindow::setNavigationStyleSheetFromFile(const QUrl& styleSheetFile)
 void MainWindow::setShowQuickButtons(bool show)
 {
     _viewManager->setShowQuickButtons(show);
+}
+
+void MainWindow::setTransparency(bool useTransparency)
+{
+    _useTransparency = useTransparency;
 }
 
 void MainWindow::activateMenuBar()

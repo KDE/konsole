@@ -20,13 +20,12 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-// KDE
-#include <KUniqueApplication>
+// Qt
+#include <QApplication>
+#include <QCommandLineParser>
 
 // Konsole
 #include "Profile.h"
-
-class KCmdLineArgs;
 
 namespace Konsole
 {
@@ -45,18 +44,18 @@ class Session;
  * The factory used to create new terminal sessions can be retrieved using
  * the sessionManager() accessor.
  */
-class Application : public KUniqueApplication
+class Application : public QObject
 {
     Q_OBJECT
 
 public:
     /** Constructs a new Konsole application. */
-    Application();
+    Application(QCommandLineParser &parser);
 
-    virtual ~Application();
+    ~Application();
 
     /** Creates a new main window and opens a default terminal session */
-    virtual int newInstance();
+    int newInstance();
 
     /**
      * Creates a new, empty main window and connects to its newSessionRequest()
@@ -71,21 +70,23 @@ private slots:
 
     void toggleBackgroundInstance();
 
+public slots:
+    void slotActivateRequested (const QStringList &args, const QString &workingDir);
+
 private:
-    void init();
     void listAvailableProfiles();
     void listProfilePropertyInfo();
     void startBackgroundMode(MainWindow* window);
-    bool processHelpArgs(KCmdLineArgs* args);
-    MainWindow* processWindowArgs(KCmdLineArgs* args, bool &createdNewMainWindow);
-    Profile::Ptr processProfileSelectArgs(KCmdLineArgs* args);
-    Profile::Ptr processProfileChangeArgs(KCmdLineArgs* args, Profile::Ptr baseProfile);
-    void processTabsFromFileArgs(KCmdLineArgs* args, MainWindow* window);
-    void createTabFromArgs(KCmdLineArgs* args, MainWindow* window,
-                           const QHash<QString, QString>&);
+    bool processHelpArgs();
+    MainWindow* processWindowArgs(bool &createdNewMainWindow);
+    Profile::Ptr processProfileSelectArgs();
+    Profile::Ptr processProfileChangeArgs(Profile::Ptr baseProfile);
+    void processTabsFromFileArgs(MainWindow* window);
+    void createTabFromArgs(MainWindow* window, const QHash<QString, QString>&);
     void finalizeNewMainWindow(MainWindow* window);
 
     MainWindow* _backgroundInstance;
+    QCommandLineParser &m_parser;
 };
 }
 #endif  // APPLICATION_H

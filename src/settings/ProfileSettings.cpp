@@ -330,7 +330,7 @@ void ProfileSettings::createProfile()
     newProfile->setProperty(Profile::UntranslatedName, "New Profile");
     newProfile->setProperty(Profile::MenuIndex, QString("0"));
 
-    QWeakPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
+    QPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
     dialog.data()->setProfile(newProfile);
     dialog.data()->selectProfileName();
 

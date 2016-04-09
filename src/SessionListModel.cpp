@@ -40,13 +40,14 @@ SessionListModel::SessionListModel(QObject* parent)
 
 void SessionListModel::setSessions(const QList<Session*>& sessions)
 {
+    beginResetModel();
     _sessions = sessions;
 
     foreach(Session * session, sessions) {
         connect(session, &Konsole::Session::finished, this, &Konsole::SessionListModel::sessionFinished);
     }
 
-    reset();
+    endResetModel();
 }
 
 QVariant SessionListModel::data(const QModelIndex& index, int role) const
