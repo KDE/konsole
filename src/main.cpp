@@ -51,6 +51,17 @@ bool shouldUseNewProcess(int argc, char *argv[]);
 // restore sessions saved by KDE.
 void restoreSession(Application& app);
 
+// Workaround for a bug in KDBusService: https://bugs.kde.org/show_bug.cgi?id=355545
+// It calls exit(), but the program can't exit before the QApplication is deleted:
+// https://bugreports.qt.io/browse/QTBUG-48709
+static bool needToDeleteQApplication = false;
+void deleteQApplication()
+{
+    if (needToDeleteQApplication) {
+        delete qApp;
+    }
+}
+
 // ***
 // Entry point into the Konsole terminal application.
 // ***
@@ -62,22 +73,24 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     KDBusService::StartupOption startupOption = KDBusService::Unique;
     if (shouldUseNewProcess(argc, argv)) {
         startupOption = KDBusService::Multiple;
+    } else {
+        needToDeleteQApplication = true;
     }
 
-    QApplication app(argc, argv);
+    QApplication *app = new QApplication(argc, argv);
 
     // enable high dpi support
-    app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+    app->setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
 #if defined(Q_OS_MAC)
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
     // will work correctly in the terminal
-    app.setAttribute(Qt::AA_MacDontSwapCtrlAndMeta);
+    app->setAttribute(Qt::AA_MacDontSwapCtrlAndMeta);
 
     // KDE's menuBar()->isTopLevel() hasn't worked in a while.
     // For now, put menus inside Konsole window; this also make
     // the keyboard shortcut to show menus look reasonable.
-    app.setAttribute(Qt::AA_DontUseNativeMenuBar);
+    app->setAttribute(Qt::AA_DontUseNativeMenuBar);
 #endif
 
     KLocalizedString::setApplicationDomain("konsole");
@@ -101,12 +114,15 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     fillCommandLineOptions(parser);
     about.setupCommandLine(&parser);
 
-    parser.process(app);
+    parser.process(*app);
     about.processCommandLine(&parser);
 
+    atexit(deleteQApplication);
     // Ensure that we only launch a new instance if we need to
     // If there is already an instance running, we will quit here
     KDBusService dbusService(startupOption);
+
+    needToDeleteQApplication = false;
 
     Kdelibs4ConfigMigrator migrate(QStringLiteral("konsole"));
     migrate.setConfigFiles(QStringList() << QStringLiteral("konsolerc") << QStringLiteral("konsole.notifyrc"));
@@ -146,13 +162,18 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
 
     if (!konsoleApp.newInstance()) {
         qDebug() << "konsoleApp::init failed";
+        delete app;
         return 0;
     }
 
-    if (app.isSessionRestored())
+    if (app->isSessionRestored())
         restoreSession(konsoleApp);
 
-    return app.exec();
+    // Since we've allocated the QApplication on the heap for the KDBusService workaround,
+    // we need to delete it manually before returning from main().
+    int ret = app->exec();
+    delete app;
+    return ret;
 }
 
 bool shouldUseNewProcess(int argc, char *argv[])
