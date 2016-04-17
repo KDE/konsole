@@ -48,9 +48,11 @@ void DBusTest::initTestCase()
     }
 
     // Create a new Konsole with a separate process id
-    int result = KProcess::execute(QStringLiteral("konsole"));
-    if (result)
-        QFAIL(QString("Unable to exec a new Konsole: %1").arg(result).toLatin1().data());
+    int pid = KProcess::startDetached(QStringLiteral("konsole"),
+            QStringList(QStringLiteral("--separate")));
+    if (pid == 0) {
+        QFAIL(QString("Unable to exec a new Konsole").toLatin1().data());
+    }
 
     // Wait for above Konsole to finish starting
 #if defined(HAVE_USLEEP)
