@@ -356,12 +356,7 @@ void Emulation::setImageSize(int lines, int columns)
     if (!_imageSizeInitialized) {
         _imageSizeInitialized = true;
 
-        // FIXME
-        // a hard-coded, small delay is introduced to guarantee Session::run()
-        // does not get triggered by SIGNAL(imageSizeInitialized()) before
-        // Pty::setWindowSize() is triggered by previously emitted
-        // SIGNAL(imageSizeChanged()); See #203185
-        QTimer::singleShot(200, this, SIGNAL(imageSizeInitialized()));
+        emit imageSizeInitialized();
     }
 }
 
