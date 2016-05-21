@@ -46,8 +46,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2015-05-27</date>
-<releaseinfo>15.04</releaseinfo>
+<date>2016-04-18</date>
+<releaseinfo>Applications 16.04</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -116,6 +116,8 @@ of common commands.  Examples could include:
 </itemizedlist>
 
 </para>
+
+<para>All new and changed profiles are saved in the user's local home folder in <filename>$<envar>XDG_DATA_HOME</envar>/konsole</filename>.</para>
 
 <para>
 Procedure to create a new profile:
@@ -237,19 +239,20 @@ rolling it in a mouse-unaware program will move &konsole;'s scrollbar.</para>
 <term><mousebutton>Right</mousebutton></term>
 <listitem>
 <para>These items appear in the menu when the &RMB;
-is pressed:
-
-<guimenuitem>Copy</guimenuitem>,
-<guimenuitem>Paste</guimenuitem>,
-<guimenuitem>Open File Manager</guimenuitem>,
-<guimenuitem>Set Encoding</guimenuitem>,
-<guimenuitem>Clear Scrollback</guimenuitem>,
-<guimenuitem>Adjust Scrollback...</guimenuitem>,
-<guimenuitem>Show Menu Bar</guimenuitem>,
-<guimenuitem>Switch Profile</guimenuitem>,
-<guimenuitem>Edit Current Profile...</guimenuitem>,
-and <guimenuitem>Close Tab</guimenuitem>.
-</para>
+    is pressed:</para>
+<itemizedlist>
+<listitem><para><guimenuitem>Copy</guimenuitem></para></listitem>
+<listitem><para><guimenuitem>Paste</guimenuitem></para></listitem>
+<listitem><para>With a text selection a submenu <guisubmenu>Search for</guisubmenu> with a list of the prefered Web Shortcuts and an option to configure web shortcuts.</para></listitem>
+<listitem><para><guimenuitem>Open File Manager</guimenuitem></para></listitem>
+<listitem><para><guimenuitem>Set Encoding</guimenuitem></para></listitem>
+<listitem><para><guimenuitem>Clear Scrollback</guimenuitem></para></listitem>
+<listitem><para><guimenuitem>Adjust Scrollback...</guimenuitem></para></listitem>
+<listitem><para><guimenuitem>Show Menu Bar</guimenuitem>, only when the menubar is hidden</para></listitem>
+<listitem><para><guimenuitem>Switch Profile</guimenuitem></para></listitem>
+<listitem><para><guimenuitem>Edit Current Profile...</guimenuitem></para></listitem>
+<listitem><para><guimenuitem>Close Tab</guimenuitem></para></listitem>
+</itemizedlist>
 
 <para>In a mouse aware application, press the &Shift; key along with the
 &RMB; to get the popup menu.
@@ -368,7 +371,7 @@ is listed after each menu item.
 <guimenu>File</guimenu><guimenuitem>New Tab</guimenuitem></menuchoice>
 </term>
 <listitem><para><action>Opens a new tab with the default profile</action>
-<note><para>&konsole; ships with the Shell profile as the default.
+<note><para>&konsole; ships with a default profile.
 Any new profiles added by the user will be listed in the submenu.
 There will be no submenu if only the default profile is to be shown.
 </para></note>
@@ -431,12 +434,13 @@ at the current directory</action>.  By default, that is
 <listitem><para><action>Quits &konsole;</action></para>
 <note><para>&konsole; will display a confirmation dialog if there is more than one
 tab open.  This dialog can be disabled by clicking on the <guibutton>Do not ask again</guibutton> checkbox.
-</para></note>
-<!--FIXME How to get the confirmation dialog get back?
-Delete in ~/.kde/share/config/konsolerc
-[Notification Messages]
-CloseAllTabs=true
--->
+</para>
+<para>If you want to get the confirmation dialog get back, delete the entry 
+<screen>[Notification Messages]
+CloseAllTabs=true</screen>
+in <filename>$<envar>XDG_CONFIG_HOME</envar>/konsolerc</filename>.
+</para>
+</note>
 </listitem>
 </varlistentry>
 
