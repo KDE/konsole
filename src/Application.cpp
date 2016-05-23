@@ -37,6 +37,8 @@
 #include "Session.h"
 #include "ShellCommand.h"
 #include "KonsoleSettings.h"
+#include "ViewManager.h"
+#include "SessionController.h"
 
 using namespace Konsole;
 
@@ -91,10 +93,16 @@ void Application::detachView(Session* session)
 {
     MainWindow* window = newMainWindow();
     window->createView(session);
+
+    // When detaching a view, the size of the new window should equal the
+    // size of the source window
+    Session* newsession = window->viewManager()->activeViewController()->session();
+    newsession->setSize(session->size());
+    window->adjustSize();
     // Since user is dragging and dropping, move dnd window to where
     // the user has the cursor (correct multiple monitor setups).
     window->move(QCursor::pos());
-    finalizeNewMainWindow(window);
+    window->show();
 }
 
 int Application::newInstance()
