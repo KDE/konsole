@@ -243,7 +243,7 @@ rolling it in a mouse-unaware program will move &konsole;'s scrollbar.</para>
 <itemizedlist>
 <listitem><para><guimenuitem>Copy</guimenuitem></para></listitem>
 <listitem><para><guimenuitem>Paste</guimenuitem></para></listitem>
-<listitem><para>With a text selection a submenu <guisubmenu>Search for</guisubmenu> with a list of the prefered Web Shortcuts and an option to configure web shortcuts.</para></listitem>
+<listitem><para>With a text selection a submenu <guisubmenu>Search for</guisubmenu> with a list of the preferred Web Shortcuts and an option to configure web shortcuts.</para></listitem>
 <listitem><para><guimenuitem>Open File Manager</guimenuitem></para></listitem>
 <listitem><para><guimenuitem>Set Encoding</guimenuitem></para></listitem>
 <listitem><para><guimenuitem>Clear Scrollback</guimenuitem></para></listitem>
