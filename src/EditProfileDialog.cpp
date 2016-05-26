@@ -295,6 +295,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
     initialDirCompleter->setModel(initialEditDirModel);
     _ui->initialDirEdit->setCompleter(initialDirCompleter);
 */
+    _ui->initialDirEdit->setText(profile->defaultWorkingDirectory());
     _ui->initialDirEdit->setClearButtonEnabled(true);
 
     _ui->dirSelectButton->setIcon(QIcon::fromTheme(QStringLiteral("folder-open")));
