@@ -336,22 +336,16 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
 {
     Q_ASSERT(profile);
 
-    // insert the changes into the existing Profile instance
-    QListIterator<Profile::Property> iter(propertyMap.keys());
-    while (iter.hasNext()) {
-        const Profile::Property property = iter.next();
-        profile->setProperty(property, propertyMap[property]);
-    }
-
     // never save a profile with empty name into disk!
     persistent = persistent && !profile->name().isEmpty();
+
+    Profile::Ptr newProfile;
 
     // If we are asked to store the fallback profile (which has an
     // invalid path by design), we reset the path to an empty string
     // which will make the profile writer automatically generate a
     // proper path.
     if (persistent && profile->path() == _fallbackProfile->path()) {
-        profile = new Profile(profile);
 
         // Generate a new name, so it is obvious what is actually built-in
         // in the profile manager
@@ -367,14 +361,30 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         do {
             newName = QStringLiteral("Profile ") + QString::number(nameSuffix);
             newTranslatedName = i18nc("The default name of a profile", "Profile #%1", nameSuffix);
+            // TODO: remove the # above and below - too many issues
+            newTranslatedName.remove("#");
             nameSuffix++;
         } while (existingProfileNames.contains(newName));
 
-        profile->setProperty(Profile::UntranslatedName, newName);
-        profile->setProperty(Profile::Name, newTranslatedName);
+        newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
+        newProfile->clone(profile, true);
+        newProfile->setProperty(Profile::UntranslatedName, newName);
+        newProfile->setProperty(Profile::Name, newTranslatedName);
+        newProfile->setProperty(Profile::MenuIndex, QString("0"));
+        newProfile->setHidden(false);
 
-        addProfile(profile);
-        setDefaultProfile(profile);
+        addProfile(newProfile);
+        setDefaultProfile(newProfile);
+
+    } else {
+        newProfile = profile;
+    };
+
+    // insert the changes into the existing Profile instance
+    QListIterator<Profile::Property> iter(propertyMap.keys());
+    while (iter.hasNext()) {
+        const Profile::Property property = iter.next();
+        newProfile->setProperty(property, propertyMap[property]);
     }
 
     // when changing a group, iterate through the profiles
@@ -383,22 +393,22 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
     // this is so that each profile in the group, the profile is
     // applied, a change notification is emitted and the profile
     // is saved to disk
-    ProfileGroup::Ptr group = profile->asGroup();
+    ProfileGroup::Ptr group = newProfile->asGroup();
     if (group) {
-        foreach(const Profile::Ptr & profile, group->profiles()) {
-            changeProfile(profile, propertyMap, persistent);
+        foreach(const Profile::Ptr & newProfile, group->profiles()) {
+            changeProfile(newProfile, propertyMap, persistent);
         }
         return;
     }
 
     // save changes to disk, unless the profile is hidden, in which case
     // it has no file on disk
-    if (persistent && !profile->isHidden()) {
-        profile->setProperty(Profile::Path, saveProfile(profile));
+    if (persistent && !newProfile->isHidden()) {
+        newProfile->setProperty(Profile::Path, saveProfile(newProfile));
     }
 
     // notify the world about the change
-    emit profileChanged(profile);
+    emit profileChanged(newProfile);
 }
 
 void ProfileManager::addProfile(Profile::Ptr profile)
