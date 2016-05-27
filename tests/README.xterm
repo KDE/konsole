@@ -1,0 +1,6 @@
+
+Instead of adding all of xterm's tests, download the file from [1] and 
+use the scripts in xterm-VERSION/vttests
+
+[1] http://invisible-island.net/datafiles/release/xterm.tar.gz
+
