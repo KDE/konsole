@@ -362,7 +362,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
             newName = QStringLiteral("Profile ") + QString::number(nameSuffix);
             newTranslatedName = i18nc("The default name of a profile", "Profile #%1", nameSuffix);
             // TODO: remove the # above and below - too many issues
-            newTranslatedName.remove("#");
+            newTranslatedName.remove('#');
             nameSuffix++;
         } while (existingProfileNames.contains(newName));
 
