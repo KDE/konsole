@@ -38,6 +38,15 @@ HistorySizeWidget::HistorySizeWidget(QWidget* parent)
     _ui = new Ui::HistorySizeWidget();
     _ui->setupUi(this);
 
+    _ui->fixedSizeWarningWidget->setVisible(false);
+    _ui->fixedSizeWarningWidget->setWordWrap(true);
+    _ui->fixedSizeWarningWidget->setCloseButtonVisible(false);
+    _ui->fixedSizeWarningWidget->setMessageType(KMessageWidget::Information);
+    _ui->fixedSizeWarningWidget->setText(i18nc("@info:status",
+        "When using this option, the scrollback data will be saved "
+        "to RAM.  If you choose a huge value, your system may run out "
+        "of free RAM and cause serious issues with your system."));
+
     _ui->unlimitedWarningWidget->setVisible(false);
     _ui->unlimitedWarningWidget->setWordWrap(true);
     _ui->unlimitedWarningWidget->setCloseButtonVisible(false);
@@ -73,6 +82,7 @@ HistorySizeWidget::~HistorySizeWidget()
 void HistorySizeWidget::buttonClicked(QAbstractButton*) const
 {
     Enum::HistoryModeEnum selectedMode = mode();
+    _ui->fixedSizeWarningWidget->setVisible(Enum::FixedSizeHistory == selectedMode);
     _ui->unlimitedWarningWidget->setVisible(Enum::UnlimitedHistory == selectedMode);
     emit historyModeChanged(selectedMode);
 }
@@ -86,6 +96,7 @@ void HistorySizeWidget::setMode(Enum::HistoryModeEnum aMode)
     } else if (aMode == Enum::UnlimitedHistory) {
         _ui->unlimitedHistoryButton->setChecked(true);
     }
+    _ui->fixedSizeWarningWidget->setVisible(Enum::FixedSizeHistory == aMode);
     _ui->unlimitedWarningWidget->setVisible(Enum::UnlimitedHistory == aMode);
 }
 
