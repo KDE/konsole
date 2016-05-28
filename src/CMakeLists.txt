@@ -35,25 +35,6 @@ option(REMOVE_SENDTEXT_RUNNCOMMAND_METHODS "Konsole: remove sendText and runComm
 option(KONSOLE_BUILD_FONTEMBEDDER "Konsole: build fontembedder executable" OFF)
 option(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
 
-### Use cmake -DKONSOLE_BUILD_FONTEMBEDDER or/and -DKONSOLE_GENERATE_LINEFONT=1
-if(KONSOLE_BUILD_FONTEMBEDDER OR KONSOLE_GENERATE_LINEFONT)
-  ### Font Embedder
-  set(fontembedder_SRCS fontembedder.cpp)
-  add_executable(fontembedder ${fontembedder_SRCS})
-  target_link_libraries(fontembedder KF5::KIOWidgets) ### FIXME
-
-  ### Line graphics font
-  ### The below cmake doesn't work; it might be possible to automate it
-  ###   if LineFont.src has changed.  If automated, different OSes will
-  ###   need to be handled.
-  ###   If LineFont.h is needed to be recreated use:
-  ###     fontembedder LineFont.src > LineFont.h
-  #add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/LineFont.h
-  #                   COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder
-  #                   ARGS ${CMAKE_SOURCE_DIR}/LineFont.src
-  #                   DEPENDS ${CMAKE_SOURCE_DIR}/LineFont.src )
-endif()
-
 ### Konsole source files shared between embedded terminal and main application
 # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
 # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
