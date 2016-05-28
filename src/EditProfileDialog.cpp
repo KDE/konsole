@@ -267,34 +267,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
 
     ShellCommand command(profile->command() , profile->arguments());
     _ui->commandEdit->setText(command.fullCommand());
-
-#pragma message("Look at this setCompletionObject again")
-//    KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
-//    exeCompletion->setParent(this);
-//    exeCompletion->setDir(QUrl());
-//    _ui->commandEdit->setCompletionObject(exeCompletion);
-
-/* The below causes a noticeable delay when opening the dialog - I'm not entirely sure
-   this is the best way to handle this.
-   Issue is that QLineEdit->SetCompleter() won't work w/ KDE's KUrlCompletion
-
-    QFileSystemModel *commandEditDirModel = new QFileSystemModel(this);
-    commandEditDirModel->setFilter(QDir::AllEntries);
-    QFileInfo commandFileInfo(profile->command());
-    // If command is /usr/bin/zsh, start at /usr/bin for completion
-    commandEditDirModel->setRootPath(commandFileInfo.absolutePath());
-    QCompleter *commandEditCompleter = new QCompleter(this);
-    commandEditCompleter->setModel(commandEditDirModel);
-    _ui->commandEdit->setCompleter(commandEditCompleter);
-
-    QFileSystemModel *initialEditDirModel = new QFileSystemModel(this);
-    initialEditDirModel->setFilter(QDir::AllEntries);
-    initialEditDirModel->setRootPath(QString('/'));
-    _ui->initialDirEdit->setText(profile->defaultWorkingDirectory());
-    QCompleter *initialDirCompleter = new QCompleter(this);
-    initialDirCompleter->setModel(initialEditDirModel);
-    _ui->initialDirEdit->setCompleter(initialDirCompleter);
-*/
+    // If a "completion" is requested, consider changing this to KLineEdit
+    // and using KCompletion.
     _ui->initialDirEdit->setText(profile->defaultWorkingDirectory());
     _ui->initialDirEdit->setClearButtonEnabled(true);
 
