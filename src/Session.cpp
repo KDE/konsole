@@ -61,6 +61,7 @@
 using namespace Konsole;
 
 int Session::lastSessionId = 0;
+static bool show_disallow_certain_dbus_methods_message = true;
 
 // HACK This is copied out of QUuid::createUuid with reseeding forced.
 // Required because color schemes repeatedly seed the RNG...
@@ -822,11 +823,23 @@ void Session::sendTextToTerminal(const QString& text, bool addNewline) const
     }
 }
 
+// Only D-Bus calls this function (via SendText or runCommand)
 void Session::sendText(const QString& text) const
 {
+#if not defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
+    if (show_disallow_certain_dbus_methods_message) {
+
+        KNotification::event(KNotification::Warning, "Konsole D-Bus Warning",
+            i18n("The D-Bus methods sendText/runCommand were just used.  There are security concerns about allowing these methods to be public.  If desired, these methods can be changed to internal use only by re-compiling Konsole. <p>This warning will only show once for this Konsole instance.</p>"));
+
+        show_disallow_certain_dbus_methods_message = false;
+    }
+#endif
+
     _emulation->sendText(text);
 }
 
+// Only D-Bus calls this function
 void Session::runCommand(const QString& command) const
 {
     sendText(command + '\n');
