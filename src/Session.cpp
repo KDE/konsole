@@ -813,6 +813,15 @@ bool Session::closeInForceWay()
     }
 }
 
+void Session::sendTextToTerminal(const QString& text, bool addNewline) const
+{
+    if (addNewline) {
+        _emulation->sendText(text + '\n');
+    } else {
+        _emulation->sendText(text);
+    }
+}
+
 void Session::sendText(const QString& text) const
 {
     _emulation->sendText(text);
@@ -820,7 +829,7 @@ void Session::sendText(const QString& text) const
 
 void Session::runCommand(const QString& command) const
 {
-    _emulation->sendText(command + '\n');
+    sendText(command + '\n');
 }
 
 void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
