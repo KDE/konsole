@@ -105,6 +105,7 @@ Name[zh_TW]=在這裡開啟終端機
 Comment=Opens a terminal at the current folder
 Comment[ca]=Obre un terminal en la carpeta actual
 Comment[ca@valencia]=Obri un terminal en la carpeta actual
+Comment[da]=Åbner en terminal i den aktuelle mappe
 Comment[de]=Öffnet ein Terminal in dem aktuellen Ordner
 Comment[en_GB]=Opens a terminal at the current folder
 Comment[es]=Abre una terminal en la carpeta actual
