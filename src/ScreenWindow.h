@@ -231,6 +231,7 @@ public:
      *
      * @param preserveLineBreaks See Screen::selectedText()
      * @param trimTrailingSpaces See Screen::selectedText()
+     * @param html Specifies if returned text should have HTML tags.
      */
     QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false, bool html = false) const;
 

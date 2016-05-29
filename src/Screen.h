@@ -449,6 +449,7 @@ public:
      * be inserted into the returned text at the end of each terminal line.
      * @param trimTrailingSpaces Specifies whether trailing spaces should be
      * trimmed in the returned text.
+     * @param html Specifies if returned text should have HTML tags.
      */
     QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false, bool html = false) const;
 
@@ -460,6 +461,7 @@ public:
      * be inserted into the returned text at the end of each terminal line.
      * @param trimTrailingSpaces Specifies whether trailing spaces should be
      * trimmed in the returned text.
+     * @param html Specifies if returned text should have HTML tags.
      */
     QString text(int startIndex, int endIndex, bool preserveLineBreaks, bool trimTrailingSpaces = false, bool html = false) const;
 

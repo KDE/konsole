@@ -151,7 +151,7 @@ public slots:
      * Sends data to the process currently controlling the
      * teletype ( whose id is returned by foregroundProcessGroup() )
      *
-     * @param buffer the data to send.
+     * @param data the data to send.
      */
     void sendData(const QByteArray& data);
 
