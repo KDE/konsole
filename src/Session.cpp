@@ -972,7 +972,8 @@ void Session::updateSessionProcessInfo()
     if (!_sessionProcessInfo ||
             (processId() != 0 && processId() != _sessionProcessInfo->pid(&ok))) {
         delete _sessionProcessInfo;
-        _sessionProcessInfo = ProcessInfo::newInstance(processId());
+        _sessionProcessInfo = ProcessInfo::newInstance(processId(),
+                    tabTitleFormat(Session::LocalTabTitle));
         _sessionProcessInfo->setUserHomeDir();
     }
     _sessionProcessInfo->update();
@@ -985,7 +986,8 @@ bool Session::updateForegroundProcessInfo()
     const int foregroundPid = _shellProcess->foregroundProcessGroup();
     if (foregroundPid != _foregroundPid) {
         delete _foregroundProcessInfo;
-        _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid);
+        _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid,
+                    tabTitleFormat(Session::LocalTabTitle));
         _foregroundPid = foregroundPid;
     }
 

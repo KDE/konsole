@@ -85,7 +85,7 @@ public:
      * of reading the (potentially large) environment data when it
      * is not required.
      */
-    static ProcessInfo* newInstance(int pid, bool readEnvironment = false);
+    static ProcessInfo* newInstance(int pid, const QString& titleFormat, bool readEnvironment = false);
 
     virtual ~ProcessInfo() {}
 
@@ -294,6 +294,9 @@ protected:
      */
     void addEnvironmentBinding(const QString& name , const QString& value);
 
+    void setUserNameRequired(bool need);
+    bool userNameRequired() const;
+
 private:
     // takes a full directory path and returns a
     // shortened version suitable for display in
@@ -315,6 +318,8 @@ private:
     QString _userName;
     QString _userHomeDir;
     QString _currentDir;
+
+    bool _userNameRequired;
 
     QVector<QString> _arguments;
     QMap<QString, QString> _environment;
@@ -338,7 +343,7 @@ public:
      * Constructs a new NullProcessInfo instance.
      * See ProcessInfo::newInstance()
      */
-    explicit NullProcessInfo(int pid, bool readEnvironment = false);
+    explicit NullProcessInfo(int pid, const QString& titleFormat, bool readEnvironment = false);
 protected:
     virtual bool readProcessInfo(int pid, bool readEnvironment);
     virtual void readUserName(void);
@@ -356,7 +361,7 @@ public:
      * Constructs a new instance of UnixProcessInfo.
      * See ProcessInfo::newInstance()
      */
-    explicit UnixProcessInfo(int pid, bool readEnvironment = false);
+    explicit UnixProcessInfo(int pid, const QString& titleFormat, bool readEnvironment = false);
 
 protected:
     /**
