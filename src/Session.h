@@ -473,7 +473,7 @@ public slots:
 
     /**
      * Sends @p text to the current foreground terminal program.
-     * @addNewline if true, adds a newline "\n" to end of text
+     * @param addNewline if true, adds a newline "\n" to end of text
      */
     void sendTextToTerminal(const QString& text, bool addNewline = false) const;
 
