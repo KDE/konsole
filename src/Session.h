@@ -473,9 +473,9 @@ public slots:
 
     /**
      * Sends @p text to the current foreground terminal program.
-     * @param addNewline if true, adds a newline "\n" to end of text
+     * @param eol send this after @p text
      */
-    void sendTextToTerminal(const QString& text, bool addNewline = false) const;
+    void sendTextToTerminal(const QString& text, const QChar& eol = QChar()) const;
 
 #if defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
     void sendText(const QString& text) const;

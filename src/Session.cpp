@@ -814,13 +814,9 @@ bool Session::closeInForceWay()
     }
 }
 
-void Session::sendTextToTerminal(const QString& text, bool addNewline) const
+void Session::sendTextToTerminal(const QString& text, const QChar& eol) const
 {
-    if (addNewline) {
-        _emulation->sendText(text + '\n');
-    } else {
-        _emulation->sendText(text);
-    }
+    _emulation->sendText(text + eol);
 }
 
 // Only D-Bus calls this function (via SendText or runCommand)
