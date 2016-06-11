@@ -587,6 +587,9 @@ void TabbedViewContainer::moveViewWidget(int fromIndex , int toIndex)
     _stackWidget->insertWidget(toIndex, widget);
 
     _tabBar->insertTab(toIndex, icon, text);
+
+    if (navigationVisibility() == ShowNavigationAsNeeded)
+        dynamicTabBarVisibility();
 }
 void TabbedViewContainer::currentTabChanged(int index)
 {
