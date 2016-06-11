@@ -75,10 +75,10 @@ void ShellCommandTest::testExpandEnvironmentVariable()
     const QString expected2 = text.replace('$' + env, value);
     QCOMPARE(result2, expected2);
 
-    text = QStringLiteral("$ABC \"$ABC\"");
+    text = QStringLiteral("$ABC \"$ABC\" '$ABC'");
     qputenv("ABC", "123");
     const QString result3 = ShellCommand::expand(text);
-    const QString expected3 = QStringLiteral("123 \"$ABC\"");
+    const QString expected3 = QStringLiteral("123 \"123\" '$ABC'");
     QEXPECT_FAIL("", "Bug 361835", Continue);
     QCOMPARE(result3, expected3);
 }
