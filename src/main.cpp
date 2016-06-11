@@ -161,7 +161,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
                      &konsoleApp, SLOT(slotActivateRequested(QStringList,QString)));
 
     if (!konsoleApp.newInstance()) {
-        qDebug() << "konsoleApp::init failed";
+        // An argument that printed something and mean we should just quit was passed.
         delete app;
         return 0;
     }
