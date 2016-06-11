@@ -45,6 +45,12 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     WindowSystem XmlGui DBusAddons
 )
 
+find_package(KF5DocTools ${KF5_MIN_VERSION})
+set_package_properties(KF5DocTools PROPERTIES DESCRIPTION 
+    "Tools to generate documentation"
+    TYPE OPTIONAL
+)
+
 find_package(X11)
 set_package_properties(X11 PROPERTIES TYPE OPTIONAL)
 set(HAVE_X11 ${X11_FOUND})
@@ -69,7 +75,9 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 add_subdirectory( src )
 add_subdirectory( data )
 add_subdirectory( desktop )
-add_subdirectory( doc/manual )
+if (KF5DocTools_FOUND)
+    add_subdirectory( doc/manual )
+endif()
 
 ### -DKONSOLE_BUILD_FONTEMBEDDER=TRUE or -DKONSOLE_GENERATE_LINEFONT=TRUE
 if(KONSOLE_BUILD_FONTEMBEDDER OR KONSOLE_GENERATE_LINEFONT)
