@@ -158,14 +158,17 @@ void HistoryFile::get(unsigned char* buffer, int size, int loc)
     if (!_fileMap && _readWriteBalance < MAP_THRESHOLD)
         map();
 
+    if (loc < 0 || size < 0 || loc + size > _length) {
+        fprintf(stderr, "getHist(...,%d,%d): invalid args.\n", size, loc);
+        return;
+    }
+
     if (_fileMap) {
         for (int i = 0; i < size; i++)
             buffer[i] = _fileMap[loc + i];
     } else {
         int rc = 0;
 
-        if (loc < 0 || size < 0 || loc + size > _length)
-            fprintf(stderr, "getHist(...,%d,%d): invalid args.\n", size, loc);
         rc = QT_LSEEK(_fd, loc, SEEK_SET);
         if (rc < 0) {
             perror("HistoryFile::get.seek");
