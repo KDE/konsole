@@ -6,6 +6,7 @@ install( FILES
          BlackOnRandomLight.colorscheme
          BlackOnWhite.colorscheme
          BlueOnBlack.colorscheme
+         Breeze.colorscheme
          GreenOnBlack.colorscheme
          WhiteOnBlack.colorscheme
          Linux.colorscheme
