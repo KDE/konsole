@@ -21,9 +21,13 @@
 #include "Filter.h"
 
 // Qt
+#include <QDebug>
 #include <QAction>
 #include <QApplication>
 #include <QtGui/QClipboard>
+#include <QtCore/QDir>
+#include <QtCore/QFile>
+#include <QtCore/QMimeDatabase>
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
 #include <QtCore/QUrl>
@@ -33,6 +37,7 @@
 #include <KRun>
 
 // Konsole
+#include "Session.h"
 #include "TerminalCharacterDecoder.h"
 #include "konsole_wcwidth.h"
 
@@ -295,8 +300,11 @@ RegExpFilter::RegExpFilter()
 {
 }
 
-RegExpFilter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endColumn)
+RegExpFilter::HotSpot::HotSpot(int startLine, int startColumn,
+                               int endLine, int endColumn,
+                               const QStringList& capturedTexts)
     : Filter::HotSpot(startLine, startColumn, endLine, endColumn)
+    , _capturedTexts(capturedTexts)
 {
     setType(Marker);
 }
@@ -305,10 +313,6 @@ void RegExpFilter::HotSpot::activate(QObject*)
 {
 }
 
-void RegExpFilter::HotSpot::setCapturedTexts(const QStringList& texts)
-{
-    _capturedTexts = texts;
-}
 QStringList RegExpFilter::HotSpot::capturedTexts() const
 {
     return _capturedTexts;
@@ -350,11 +354,10 @@ void RegExpFilter::process()
             getLineColumn(pos, startLine, startColumn);
             getLineColumn(pos + _searchText.matchedLength(), endLine, endColumn);
 
-            RegExpFilter::HotSpot* spot = newHotSpot(startLine, startColumn,
-                                          endLine, endColumn);
-            spot->setCapturedTexts(_searchText.capturedTexts());
+            if (RegExpFilter::HotSpot* spot = newHotSpot(startLine, startColumn,
+                                          endLine, endColumn, _searchText.capturedTexts()))
+              addHotSpot(spot);
 
-            addHotSpot(spot);
             pos += _searchText.matchedLength();
 
             // if matchedLength == 0, the program will get stuck in an infinite loop
@@ -365,19 +368,20 @@ void RegExpFilter::process()
 }
 
 RegExpFilter::HotSpot* RegExpFilter::newHotSpot(int startLine, int startColumn,
-        int endLine, int endColumn)
+        int endLine, int endColumn, const QStringList& capturedTexts)
 {
     return new RegExpFilter::HotSpot(startLine, startColumn,
-                                     endLine, endColumn);
+                                     endLine, endColumn, capturedTexts);
 }
-RegExpFilter::HotSpot* UrlFilter::newHotSpot(int startLine, int startColumn, int endLine,
-        int endColumn)
+RegExpFilter::HotSpot* UrlFilter::newHotSpot(int startLine, int startColumn,
+        int endLine, int endColumn, const QStringList& capturedTexts)
 {
     return new UrlFilter::HotSpot(startLine, startColumn,
-                                  endLine, endColumn);
+                                  endLine, endColumn, capturedTexts);
 }
-UrlFilter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endColumn)
-    : RegExpFilter::HotSpot(startLine, startColumn, endLine, endColumn)
+UrlFilter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endColumn,
+        const QStringList& capturedTexts)
+    : RegExpFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts)
     , _urlObject(new FilterObject(this))
 {
     setType(Link);
@@ -481,6 +485,78 @@ QList<QAction*> UrlFilter::HotSpot::actions()
     actions << openAction;
     actions << copyAction;
 
+    return actions;
+}
+
+/**
+  * File Filter - Construct a filter that works on local file paths using the
+  * posix portable filename character set combined with KDE's mimetype filename
+  * extension blob patterns.
+  * http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_267
+  */
+
+RegExpFilter::HotSpot* FileFilter::newHotSpot(int startLine, int startColumn, int endLine,
+        int endColumn, const QStringList& capturedTexts)
+{
+    if (!_session) {
+        qWarning() << "Trying to create new hot spot without session!";
+        return nullptr;
+    }
+
+    FileFilter::HotSpot *spot = nullptr;
+    QDir dir(_session->currentWorkingDirectory());
+    QFileInfo file(dir, capturedTexts.first());
+    if (file.exists())
+        spot = new FileFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts, file);
+    return spot;
+}
+
+FileFilter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList& capturedTexts, const QFileInfo& file)
+    : RegExpFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts)
+    , _fileObject(new FilterObject(this))
+    , _file(file)
+{
+    setType(Link);
+}
+
+void FileFilter::HotSpot::activate(QObject*)
+{
+    QString file = _file.absoluteFilePath();
+    new KRun(QUrl::fromLocalFile(file), QApplication::activeWindow());
+}
+
+FileFilter::FileFilter(Session* session)
+  : _session(session)
+{
+    QStringList patterns;
+    QMimeDatabase mimeDatabase;
+    for (const QMimeType &mimeType : mimeDatabase.allMimeTypes()) {
+        patterns.append(mimeType.globPatterns());
+    }
+
+    patterns.removeDuplicates();
+    patterns.replaceInStrings("*", "");
+    patterns = patterns.filter(QRegExp("^[A-Za-z0-9\\._-]+$"));
+    patterns.replaceInStrings(".", "\\.");
+
+    QString regex("(\\b|/)+[A-Za-z0-9\\._-/]+(");
+    regex.append(patterns.join("|"));
+    regex.append("){1}\\b");
+    setRegExp(QRegExp(regex));
+}
+
+FileFilter::HotSpot::~HotSpot()
+{
+    delete _fileObject;
+}
+
+QList<QAction*> FileFilter::HotSpot::actions()
+{
+    QAction* openAction = new QAction(_fileObject);
+    openAction->setText(i18n("Open File"));
+    QObject::connect(openAction , SIGNAL(triggered()) , _fileObject , SLOT(activated()));
+    QList<QAction*> actions;
+    actions << openAction;
     return actions;
 }
 

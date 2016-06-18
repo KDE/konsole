@@ -21,8 +21,10 @@
 #define FILTER_H
 
 // Qt
+#include <QtCore/QFileInfo>
 #include <QtCore/QList>
 #include <QtCore/QObject>
+#include <QtCore/QPointer>
 #include <QtCore/QStringList>
 #include <QtCore/QRegExp>
 #include <QtCore/QMultiHash>
@@ -34,6 +36,9 @@ class QAction;
 
 namespace Konsole
 {
+
+class Session;
+
 /**
  * A filter processes blocks of text looking for certain patterns (such as URLs or keywords from a list)
  * and marks the areas which match the filter's patterns as 'hotspots'.
@@ -189,11 +194,9 @@ public:
     class HotSpot : public Filter::HotSpot
     {
     public:
-        HotSpot(int startLine, int startColumn, int endLine , int endColumn);
+        HotSpot(int startLine, int startColumn, int endLine , int endColumn, const QStringList& capturedTexts);
         virtual void activate(QObject* object = 0);
 
-        /** Sets the captured texts associated with this hotspot */
-        void setCapturedTexts(const QStringList& texts);
         /** Returns the texts found by the filter when matching the filter's regular expression */
         QStringList capturedTexts() const;
     private:
@@ -227,7 +230,7 @@ protected:
      * to return custom hotspot types
      */
     virtual RegExpFilter::HotSpot* newHotSpot(int startLine, int startColumn,
-            int endLine, int endColumn);
+            int endLine, int endColumn, const QStringList& capturedTexts);
 
 private:
     QRegExp _searchText;
@@ -246,7 +249,7 @@ public:
     class HotSpot : public RegExpFilter::HotSpot
     {
     public:
-        HotSpot(int startLine, int startColumn, int endLine, int endColumn);
+        HotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList& capturedTexts);
         virtual ~HotSpot();
 
         virtual QList<QAction*> actions();
@@ -271,7 +274,7 @@ public:
     UrlFilter();
 
 protected:
-    virtual RegExpFilter::HotSpot* newHotSpot(int, int, int, int);
+    virtual RegExpFilter::HotSpot* newHotSpot(int, int, int, int, const QStringList&);
 
 private:
     static const QRegExp FullUrlRegExp;
@@ -279,6 +282,43 @@ private:
 
     // combined OR of FullUrlRegExp and EmailAddressRegExp
     static const QRegExp CompleteUrlRegExp;
+};
+
+/**
+ * A filter which matches files according to POSIX Portable Filename Character Set
+ * http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_267
+ */
+class FileFilter : public RegExpFilter
+{
+public:
+    /**
+     * Hotspot type created by FileFilter instances.
+     */
+    class HotSpot : public RegExpFilter::HotSpot
+    {
+    public:
+        HotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList& capturedTexts, const QFileInfo &file);
+        virtual ~HotSpot();
+
+        virtual QList<QAction*> actions();
+
+        /**
+         * Opens kate for editing the file.
+         */
+        virtual void activate(QObject* object = 0);
+
+    private:
+        FilterObject* _fileObject;
+        QFileInfo _file;
+    };
+
+    FileFilter(Session* session);
+
+protected:
+    virtual RegExpFilter::HotSpot* newHotSpot(int, int, int, int, const QStringList&);
+
+private:
+    QPointer<Session> _session;
 };
 
 class FilterObject : public QObject

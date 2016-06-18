@@ -964,10 +964,10 @@
           <item>
            <widget class="QCheckBox" name="underlineLinksButton">
             <property name="toolTip">
-             <string>Text recognized as a link or an email address will be underlined when hovered by the mouse pointer.</string>
+             <string>Text recognized as a file, link or an email address will be underlined when hovered by the mouse pointer.</string>
             </property>
             <property name="text">
-             <string>Underline links</string>
+             <string>Underline files and links</string>
             </property>
            </widget>
           </item>
@@ -995,10 +995,10 @@
                <bool>false</bool>
               </property>
               <property name="toolTip">
-               <string>Text recognized as a link or an email address can be opened by direct mouse click.</string>
+               <string>Text recognized as a file, link or an email address can be opened by direct mouse click.</string>
               </property>
               <property name="text">
-               <string>Open links by direct click</string>
+               <string>Open files and links by direct click</string>
               </property>
              </widget>
             </item>

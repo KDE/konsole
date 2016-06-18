@@ -99,12 +99,13 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _profileList(0)
     , _previousState(-1)
     , _viewUrlFilter(0)
+    , _fileFilter(0)
     , _searchFilter(0)
     , _copyInputToAllTabsAction(0)
     , _findAction(0)
     , _findNextAction(0)
     , _findPreviousAction(0)
-    , _urlFilterUpdateRequired(false)
+    , _filterUpdateRequired(false)
     , _searchStartLine(0)
     , _prevSearchResultLine(0)
     , _searchBar(0)
@@ -242,12 +243,12 @@ void SessionController::interactionHandler()
     _interactionTimer->start();
 }
 
-void SessionController::requireUrlFilterUpdate()
+void SessionController::requireFilterUpdate()
 {
     // this method is called every time the screen window's output changes, so do not
     // do anything expensive here.
 
-    _urlFilterUpdateRequired = true;
+    _filterUpdateRequired = true;
 }
 void SessionController::snapshot()
 {
@@ -474,26 +475,30 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
                 copyInputToAllTabs();
             }
         }
-        // when a mouse move is received, create the URL filter and listen for output changes if
+        // when a mouse move is received, create the filters and listen for output changes if
         // it has not already been created.  If it already exists, then update only if the output
-        // has changed since the last update ( _urlFilterUpdateRequired == true )
+        // has changed since the last update ( _filterUpdateRequired == true )
         //
         // also check that no mouse buttons are pressed since the URL filter only applies when
         // the mouse is hovering over the view
         if (event->type() == QEvent::MouseMove &&
-                (!_viewUrlFilter || _urlFilterUpdateRequired) &&
+                (!_viewUrlFilter || !_fileFilter || _filterUpdateRequired) &&
                 ((QMouseEvent*)event)->buttons() == Qt::NoButton) {
-            if (_view->screenWindow() && !_viewUrlFilter) {
-                connect(_view->screenWindow(), &Konsole::ScreenWindow::scrolled, this, &Konsole::SessionController::requireUrlFilterUpdate);
-                connect(_view->screenWindow(), &Konsole::ScreenWindow::outputChanged, this, &Konsole::SessionController::requireUrlFilterUpdate);
+            if (_view->screenWindow() && !_viewUrlFilter && !_fileFilter) {
+                connect(_view->screenWindow(), &Konsole::ScreenWindow::scrolled, this, &Konsole::SessionController::requireFilterUpdate);
+                connect(_view->screenWindow(), &Konsole::ScreenWindow::outputChanged, this, &Konsole::SessionController::requireFilterUpdate);
 
                 // install filter on the view to highlight URLs
                 _viewUrlFilter = new UrlFilter();
                 _view->filterChain()->addFilter(_viewUrlFilter);
+
+                // install filter on the view to highlight Files
+                _fileFilter = new FileFilter(_session);
+                _view->filterChain()->addFilter(_fileFilter);
             }
 
             _view->processFilters();
-            _urlFilterUpdateRequired = false;
+            _filterUpdateRequired = false;
         }
     }
 
