@@ -149,6 +149,7 @@ FallbackProfile::FallbackProfile()
     // non-directory file name
     setProperty(Path, "FALLBACK/");
     setProperty(Command, qgetenv("SHELL"));
+    // See Pty.cpp on why Arguments is populated
     setProperty(Arguments, QStringList() << qgetenv("SHELL"));
     setProperty(Icon, "utilities-terminal");
     setProperty(Environment, QStringList() << QStringLiteral("TERM=xterm"));
