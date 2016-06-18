@@ -426,6 +426,11 @@ Comment[zh_TW]=非可見工作階段中的響鈴行為
 Sound=Oxygen-Sys-App-Message.ogg
 Action=Popup
 
+[Event/ActivityHidden]
+Name=Activity in Hidden Monitored Session
+Comment=Activity detected in a hidden monitored session
+Action=Popup
+
 [Event/Activity]
 Name=Activity in Monitored Session
 Name[af]=Aktiwiteit in gemonitorde sessie
@@ -591,6 +596,10 @@ Comment[zh_CN]=被监视会话中检测到的活动
 Comment[zh_TW]=監控工作階段中偵測到的活動
 Action=Popup
 
+[Event/SilenceHidden]
+Name=Silence in Hidden Monitored Session
+Comment=Silence detected in a hidden monitored session
+Action=Popup
 
 [Event/Silence]
 Name=Silence in Monitored Session

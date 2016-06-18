@@ -598,14 +598,24 @@ void Session::silenceTimerDone()
     //when any of the views of the session becomes active
 
     //FIXME: Make message text for this notification and the activity notification more descriptive.
-    if (_monitorSilence) {
-        KNotification::event("Silence", i18n("Silence in session '%1'", _nameTitle), QPixmap(),
-                             QApplication::activeWindow(),
-                             KNotification::CloseWhenWidgetActivated);
-        emit stateChanged(NOTIFYSILENCE);
-    } else {
+    if (!_monitorSilence) {
         emit stateChanged(NOTIFYNORMAL);
+        return;
     }
+
+    bool hasFocus = false;
+    for (TerminalDisplay *display : _views) {
+        if (display->hasFocus()) {
+            hasFocus = true;
+            break;
+        }
+    }
+
+    KNotification::event(hasFocus ? "Silence" : "SilenceHidden",
+            i18n("Silence in session '%1'", _nameTitle), QPixmap(),
+            QApplication::activeWindow(),
+            KNotification::CloseWhenWidgetActivated);
+    emit stateChanged(NOTIFYSILENCE);
 }
 
 void Session::activityTimerDone()
@@ -652,8 +662,18 @@ void Session::activityStateSet(int state)
     if (state == NOTIFYBELL) {
         emit bellRequest(i18n("Bell in session '%1'", _nameTitle));
     } else if (state == NOTIFYACTIVITY) {
+        // Don't notify if the terminal is active
+        bool hasFocus = false;
+        for (TerminalDisplay *display : _views) {
+            if (display->hasFocus()) {
+                hasFocus = true;
+                break;
+            }
+        }
+
         if (_monitorActivity  && !_notifiedActivity) {
-            KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
+            KNotification::event(hasFocus ? "Activity" : "ActivityHidden",
+                                 i18n("Activity in session '%1'", _nameTitle), QPixmap(),
                                  QApplication::activeWindow(),
                                  KNotification::CloseWhenWidgetActivated);
 
