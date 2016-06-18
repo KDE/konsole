@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/kxmlgui5/konsole">
+        <file>konsoleui.rc</file>
+        <file>partui.rc</file>
+        <file>sessionui.rc</file>
+    </qresource>
+</RCC>

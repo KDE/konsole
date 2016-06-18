@@ -141,6 +141,9 @@ ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 settings/ProfileSettings.ui
                                 settings/TabBarSettings.ui)
 
+# add the resource files for the ui files
+qt5_add_resources( konsoleprivate_SRCS ../desktop/konsole.qrc)
+
 add_library(konsoleprivate ${konsoleprivate_SRCS})
 generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
 target_link_libraries(konsoleprivate PUBLIC ${konsole_LIBS})

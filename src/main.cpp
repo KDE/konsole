@@ -120,7 +120,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     atexit(deleteQApplication);
     // Ensure that we only launch a new instance if we need to
     // If there is already an instance running, we will quit here
-    KDBusService dbusService(startupOption);
+    KDBusService dbusService(startupOption | KDBusService::NoExitOnFailure);
 
     needToDeleteQApplication = false;
 
