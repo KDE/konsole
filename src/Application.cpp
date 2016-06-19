@@ -473,7 +473,7 @@ void Application::toggleBackgroundInstance()
     }
 }
 
-void Application::slotActivateRequested (const QStringList &args, const QString &workingDir)
+void Application::slotActivateRequested (const QStringList &args, const QString & /*workingDir*/)
 {
     if (!args.isEmpty()) {
         m_parser.parse(args);
