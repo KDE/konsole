@@ -32,8 +32,6 @@
 #include <QtGui/QRadialGradient>
 #include <QtGui/QIcon>
 #include <QtCore/QTimer>
-#include <QCompleter>
-#include <QFileSystemModel>
 #include <QtCore/QUrl>
 #include <QFontDialog>
 #include <QFileDialog>
@@ -43,7 +41,6 @@
 #include <KCodecAction>
 
 #include <KIconDialog>
-#include <KUrlCompletion>
 #include <KWindowSystem>
 #include <KMessageBox>
 #include <KLocalizedString>

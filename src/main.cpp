@@ -27,7 +27,6 @@
 #include <QCommandLineParser>
 #include <QStandardPaths>
 #include <QDir>
-#include <QDebug>
 
 // KDE
 #include <KAboutData>

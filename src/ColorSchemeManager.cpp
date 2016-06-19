@@ -30,7 +30,6 @@
 
 // KDE
 #include <KConfig>
-#include <KLocalizedString>
 #include <QDebug>
 
 using namespace Konsole;

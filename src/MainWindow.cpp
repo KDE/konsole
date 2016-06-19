@@ -33,7 +33,6 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <KMessageBox>
-#include <KToggleFullScreenAction>
 #include <KStandardAction>
 #include <KStandardGuiItem>
 #include <KWindowSystem>
