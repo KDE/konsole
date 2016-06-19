@@ -156,8 +156,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
 
     // The activateRequested() signal is emitted when a second instance
     // of Konsole is started.
-    QObject::connect(&dbusService, SIGNAL(activateRequested(QStringList,QString)),
-                     &konsoleApp, SLOT(slotActivateRequested(QStringList,QString)));
+    QObject::connect(&dbusService, &KDBusService::activateRequested, &konsoleApp, &Application::slotActivateRequested);
 
     if (!konsoleApp.newInstance()) {
         // An argument that printed something and mean we should just quit was passed.
