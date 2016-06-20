@@ -677,9 +677,12 @@ void KeyboardTranslator::removeEntry(const Entry& entry)
 
 KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifiers modifiers, States state) const
 {
-    foreach(const Entry & entry, _entries.values(keyCode)) {
-        if (entry.matches(keyCode, modifiers, state))
-            return entry;
+    QHash<int, KeyboardTranslator::Entry>::const_iterator i = _entries.find(keyCode);
+    while (i != _entries.constEnd() && i.key() == keyCode) {
+        if (i.value().matches(keyCode, modifiers, state)) {
+            return i.value();
+        }
+        ++i;
     }
 
     return Entry(); // No matching entry
