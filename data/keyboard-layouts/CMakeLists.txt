@@ -5,6 +5,5 @@ install( FILES
          #  ACTUAL VT420 SYSTEMS - EITHER RENAME IT OR IMPROVE KONSOLE
          #  vt420pc.keytab
          solaris.keytab
-         README.KeyTab
          DESTINATION
          ${KDE_INSTALL_DATADIR}/konsole )
