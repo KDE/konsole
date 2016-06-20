@@ -436,6 +436,8 @@ private:
 /** A plain view container with no navigation display */
 class StackedViewContainer : public ViewContainer
 {
+    Q_OBJECT
+
 public:
     explicit StackedViewContainer(QObject* parent);
     virtual ~StackedViewContainer();
