@@ -7,4 +7,4 @@ install( FILES
          solaris.keytab
          README.KeyTab
          DESTINATION
-         ${DATA_INSTALL_DIR}/konsole )
+         ${KDE_INSTALL_DATADIR}/konsole )
