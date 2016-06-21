@@ -121,6 +121,8 @@ public:
 
 class FavoriteItemDelegate : public QStyledItemDelegate
 {
+    Q_OBJECT
+
 public:
     explicit FavoriteItemDelegate(QObject* parent = 0);
 
