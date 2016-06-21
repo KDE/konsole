@@ -129,7 +129,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
 
     if (migrate.migrate()) {
         Kdelibs4Migration dataMigrator;
-        const QString sourceBasePath = dataMigrator.saveLocation("data", "konsole");
+        const QString sourceBasePath = dataMigrator.saveLocation("data", QStringLiteral("konsole"));
         const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole/");
         QString targetFilePath;
 
@@ -191,10 +191,14 @@ bool shouldUseNewProcess(int argc, char *argv[])
 
     // take Qt options into consideration
     QStringList qtProblematicOptions;
-    qtProblematicOptions << "--session" << "--name" << "--reverse"
-                         << "--stylesheet" << "--graphicssystem";
+    qtProblematicOptions << QStringLiteral("--session") 
+                         << QStringLiteral("--name") 
+                         << QStringLiteral("--reverse")
+                         << QStringLiteral("--stylesheet")
+                         << QStringLiteral("--graphicssystem");
 #if HAVE_X11
-    qtProblematicOptions << "--display" << "--visual";
+    qtProblematicOptions << QStringLiteral("--display")
+                         << QStringLiteral("--visual");
 #endif
     foreach(const QString& option, qtProblematicOptions) {
         if (arguments.contains(option)) {
@@ -204,9 +208,10 @@ bool shouldUseNewProcess(int argc, char *argv[])
 
     // take KDE options into consideration
     QStringList kdeProblematicOptions;
-    kdeProblematicOptions << "--config" << "--style";
+    kdeProblematicOptions << QStringLiteral("--config")
+                          << QStringLiteral("--style");
 #if HAVE_X11
-    kdeProblematicOptions << "--waitforwm";
+    kdeProblematicOptions << QStringLiteral("--waitforwm");
 #endif
 
     foreach(const QString& option, kdeProblematicOptions) {
@@ -216,12 +221,12 @@ bool shouldUseNewProcess(int argc, char *argv[])
     }
 
     // if users have explictly requested starting a new process
-    if (arguments.contains("--separate")) {
+    if (arguments.contains(QStringLiteral("--separate"))) {
         return true;
     }
 
     // the only way to create new tab is to reuse existing Konsole process.
-    if (arguments.contains("--new-tab")) {
+    if (arguments.contains(QStringLiteral("--new-tab"))) {
         return false;
     }
 
@@ -241,46 +246,46 @@ bool shouldUseNewProcess(int argc, char *argv[])
 
 void fillCommandLineOptions(QCommandLineParser &parser)
 {
-    parser.addOption(QCommandLineOption(QStringList() << "profile",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("profile"),
                                         i18nc("@info:shell", "Name of profile to use for new Konsole instance"),
                                         QStringLiteral("name")));
-    parser.addOption(QCommandLineOption(QStringList() << "fallback-profile",
+    parser.addOption(QCommandLineOption(QStringList(QStringLiteral("fallback-profile")),
                                         i18nc("@info:shell", "Use the internal FALLBACK profile")));
-    parser.addOption(QCommandLineOption(QStringList() << "workdir",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("workdir"),
                                         i18nc("@info:shell", "Set the initial working directory of the new tab or"
                                               " window to 'dir'"),
                                         QStringLiteral("dir")));
-    parser.addOption(QCommandLineOption(QStringList() << "hold" << "noclose",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("hold") << QStringLiteral("noclose"),
                                         i18nc("@info:shell", "Do not close the initial session automatically when it"
                                         " ends.")));
-    parser.addOption(QCommandLineOption(QStringList() << "new-tab",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("new-tab"),
                                         i18nc("@info:shell", "Create a new tab in an existing window rather than"
                                               " creating a new window")));
-    parser.addOption(QCommandLineOption(QStringList() << "tabs-from-file",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("tabs-from-file"),
                                         i18nc("@info:shell", "Create tabs as specified in given tabs configuration"
                                         " file"),
                                         QStringLiteral("file")));
-    parser.addOption(QCommandLineOption(QStringList() << "background-mode",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("background-mode"),
                                         i18nc("@info:shell", "Start Konsole in the background and bring to the front"
                                               " when Ctrl+Shift+F12 (by default) is pressed")));
-    parser.addOption(QCommandLineOption(QStringList() << "separate", i18n("Run in a separate process")));
-    parser.addOption(QCommandLineOption(QStringList() << "show-menubar", i18nc("@info:shell", "Show the menubar, overriding the default setting")));
-    parser.addOption(QCommandLineOption(QStringList() << "hide-menubar", i18nc("@info:shell", "Hide the menubar, overriding the default setting")));
-    parser.addOption(QCommandLineOption(QStringList() << "show-tabbar", i18nc("@info:shell", "Show the tabbar, overriding the default setting")));
-    parser.addOption(QCommandLineOption(QStringList() << "hide-tabbar", i18nc("@info:shell", "Hide the tabbar, overriding the default setting")));
-    parser.addOption(QCommandLineOption(QStringList() << "fullscreen", i18nc("@info:shell", "Start Konsole in fullscreen mode")));
-    parser.addOption(QCommandLineOption(QStringList() << "notransparency",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("separate"), i18n("Run in a separate process")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("show-menubar"), i18nc("@info:shell", "Show the menubar, overriding the default setting")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-menubar"), i18nc("@info:shell", "Hide the menubar, overriding the default setting")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("show-tabbar"), i18nc("@info:shell", "Show the tabbar, overriding the default setting")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-tabbar"), i18nc("@info:shell", "Hide the tabbar, overriding the default setting")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("fullscreen"), i18nc("@info:shell", "Start Konsole in fullscreen mode")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("notransparency"),
                                         i18nc("@info:shell", "Disable transparent backgrounds, even if the system"
                                               " supports them.")));
-    parser.addOption(QCommandLineOption(QStringList() << "list-profiles",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("list-profiles"),
                                         i18nc("@info:shell", "List the available profiles")));
-    parser.addOption(QCommandLineOption(QStringList() << "list-profile-properties",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("list-profile-properties"),
                                         i18nc("@info:shell", "List all the profile properties names and their type"
                                               " (for use with -p)")));
-    parser.addOption(QCommandLineOption(QStringList() << "p",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("p"),
                                         i18nc("@info:shell", "Change the value of a profile property."),
                                         QStringLiteral("property=value")));
-    parser.addOption(QCommandLineOption(QStringList() << "e",
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("e"),
                                         i18nc("@info:shell", "Command to execute. This option will catch all following"
                                               " arguments, so use it as the last option."),
                                         QStringLiteral("cmd")));
@@ -291,82 +296,82 @@ void fillCommandLineOptions(QCommandLineParser &parser)
 
 void fillAboutData(KAboutData& aboutData)
 {
-    aboutData.setProgramIconName("utilities-terminal");
+    aboutData.setProgramIconName(QStringLiteral("utilities-terminal"));
     aboutData.setOrganizationDomain("kde.org");
 
     aboutData.addAuthor(i18nc("@info:credit", "Kurt Hindenburg"),
                         i18nc("@info:credit", "General maintainer, bug fixes and general"
                                " improvements"),
-                        "kurt.hindenburg@gmail.com");
+                        QStringLiteral("kurt.hindenburg@gmail.com"));
     aboutData.addAuthor(i18nc("@info:credit", "Robert Knight"),
                         i18nc("@info:credit", "Previous maintainer, ported to KDE4"),
-                        "robertknight@gmail.com");
+                        QStringLiteral("robertknight@gmail.com"));
     aboutData.addAuthor(i18nc("@info:credit", "Lars Doelle"),
                         i18nc("@info:credit", "Original author"),
-                        "lars.doelle@on-line.de");
+                        QStringLiteral("lars.doelle@on-line.de"));
     aboutData.addCredit(i18nc("@info:credit", "Jekyll Wu"),
                         i18nc("@info:credit", "Bug fixes and general improvements"),
-                        "adaptee@gmail.com");
+                        QStringLiteral("adaptee@gmail.com"));
     aboutData.addCredit(i18nc("@info:credit", "Waldo Bastian"),
                         i18nc("@info:credit", "Bug fixes and general improvements"),
-                        "bastian@kde.org");
+                        QStringLiteral("bastian@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Stephan Binner"),
                         i18nc("@info:credit", "Bug fixes and general improvements"),
-                        "binner@kde.org");
+                        QStringLiteral("binner@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Thomas Dreibholz"),
                         i18nc("@info:credit", "General improvements"),
-                        "dreibh@iem.uni-due.de");
+                        QStringLiteral("dreibh@iem.uni-due.de"));
     aboutData.addCredit(i18nc("@info:credit", "Chris Machemer"),
                         i18nc("@info:credit", "Bug fixes"),
-                        "machey@ceinetworks.com");
+                        QStringLiteral("machey@ceinetworks.com"));
     aboutData.addCredit(i18nc("@info:credit", "Francesco Cecconi"),
                         i18nc("@info:credit", "Bug fixes"),
-                        "francesco.cecconi@gmail.com");
+                        QStringLiteral("francesco.cecconi@gmail.com"));
     aboutData.addCredit(i18nc("@info:credit", "Stephan Kulow"),
                         i18nc("@info:credit", "Solaris support and history"),
-                        "coolo@kde.org");
+                        QStringLiteral("coolo@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Alexander Neundorf"),
                         i18nc("@info:credit", "Bug fixes and improved startup performance"),
-                        "neundorf@kde.org");
+                        QStringLiteral("neundorf@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Peter Silva"),
                         i18nc("@info:credit", "Marking improvements"),
-                        "Peter.A.Silva@gmail.com");
+                        QStringLiteral("Peter.A.Silva@gmail.com"));
     aboutData.addCredit(i18nc("@info:credit", "Lotzi Boloni"),
                         i18nc("@info:credit", "Embedded Konsole\n"
                                "Toolbar and session names"),
-                        "boloni@cs.purdue.edu");
+                        QStringLiteral("boloni@cs.purdue.edu"));
     aboutData.addCredit(i18nc("@info:credit", "David Faure"),
                         i18nc("@info:credit", "Embedded Konsole\n"
                                "General improvements"),
-                        "faure@kde.org");
+                        QStringLiteral("faure@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Antonio Larrosa"),
                         i18nc("@info:credit", "Visual effects"),
-                        "larrosa@kde.org");
+                        QStringLiteral("larrosa@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Matthias Ettrich"),
                         i18nc("@info:credit", "Code from the kvt project\n"
                                "General improvements"),
-                        "ettrich@kde.org");
+                        QStringLiteral("ettrich@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Warwick Allison"),
                         i18nc("@info:credit", "Schema and text selection improvements"),
-                        "warwick@troll.no");
+                        QStringLiteral("warwick@troll.no"));
     aboutData.addCredit(i18nc("@info:credit", "Dan Pilone"),
                         i18nc("@info:credit", "SGI port"),
-                        "pilone@slac.com");
+                        QStringLiteral("pilone@slac.com"));
     aboutData.addCredit(i18nc("@info:credit", "Kevin Street"),
                         i18nc("@info:credit", "FreeBSD port"),
-                        "street@iname.com");
+                        QStringLiteral("street@iname.com"));
     aboutData.addCredit(i18nc("@info:credit", "Sven Fischer"),
                         i18nc("@info:credit", "Bug fixes"),
-                        "herpes@kawo2.renditionwth-aachen.de");
+                        QStringLiteral("herpes@kawo2.renditionwth-aachen.de"));
     aboutData.addCredit(i18nc("@info:credit", "Dale M. Flaven"),
                         i18nc("@info:credit", "Bug fixes"),
-                        "dflaven@netport.com");
+                        QStringLiteral("dflaven@netport.com"));
     aboutData.addCredit(i18nc("@info:credit", "Martin Jones"),
                         i18nc("@info:credit", "Bug fixes"),
-                        "mjones@powerup.com.au");
+                        QStringLiteral("mjones@powerup.com.au"));
     aboutData.addCredit(i18nc("@info:credit", "Lars Knoll"),
                         i18nc("@info:credit", "Bug fixes"),
-                        "knoll@mpi-hd.mpg.de");
+                        QStringLiteral("knoll@mpi-hd.mpg.de"));
     aboutData.addCredit(i18nc("@info:credit", "Thanks to many others.\n"));
 }
 
