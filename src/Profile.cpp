@@ -321,8 +321,8 @@ QHash<Profile::Property, QVariant> ProfileCommandParser::parse(const QString& in
     while (regExp.indexIn(input, offset) != -1) {
         if (regExp.capturedTexts().count() == 3) {
             Profile::Property property = Profile::lookupByName(
-                                             regExp.capturedTexts()[1]);
-            const QString value = regExp.capturedTexts()[2];
+                                             regExp.capturedTexts().at(1));
+            const QString value = regExp.capturedTexts().at(2);
             changes.insert(property, value);
         }
 
