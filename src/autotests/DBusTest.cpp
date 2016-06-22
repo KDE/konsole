@@ -209,7 +209,7 @@ void DBusTest::testSessions()
 
     // set title to,  what title should be
     QMap<QString, QString> titleMap;
-    titleMap[QStringLiteral("Shell")] = QLatin1String("Shell");
+    titleMap[QStringLiteral("Shell")] = QStringLiteral("Shell");
 
     // BUG: It appears that Session::LocalTabTitle is set to Shell and
     // doesn't change.  While RemoteTabTitle is actually the LocalTabTitle
