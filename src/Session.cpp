@@ -77,7 +77,7 @@ QUuid createUuid()
         } while ((max = max >> 1));
     }
 
-    qsrand(uint(QDateTime::currentDateTime().toTime_t()));
+    qsrand(uint(QDateTime::currentDateTimeUtc().toTime_t()));
     qrand(); // Skip first
 
     QUuid result;
