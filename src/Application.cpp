@@ -57,7 +57,7 @@ Application::~Application()
 MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
-    window->setTransparency(!m_parser.isSet("notransparency"));
+    window->setTransparency(!m_parser.isSet(QStringLiteral("notransparency")));
 
     connect(window, &Konsole::MainWindow::newWindowRequest, this, &Konsole::Application::createWindow);
     connect(window, &Konsole::MainWindow::viewDetached, this, &Konsole::Application::detachView);
@@ -104,7 +104,7 @@ int Application::newInstance()
     // create a new window or use an existing one
     MainWindow* window = processWindowArgs(createdNewMainWindow);
 
-    if (m_parser.isSet("tabs-from-file")) {
+    if (m_parser.isSet(QStringLiteral("tabs-from-file"))) {
         // create new session(s) as described in file
         processTabsFromFileArgs(window);
     } else {
@@ -118,14 +118,14 @@ int Application::newInstance()
         // create new session
         Session* session = window->createSession(newProfile, QString());
 
-        if (m_parser.isSet("noclose")) {
+        if (m_parser.isSet(QStringLiteral("noclose"))) {
             session->setAutoClose(false);
         }
     }
 
     // if the background-mode argument is supplied, start the background
     // session ( or bring to the front if it already exists )
-    if (m_parser.isSet("background-mode")) {
+    if (m_parser.isSet(QStringLiteral("background-mode"))) {
         startBackgroundMode(window);
     } else {
         // Qt constrains top-level windows which have not been manually
@@ -172,7 +172,7 @@ profile: Zsh
 void Application::processTabsFromFileArgs(MainWindow* window)
 {
     // Open tab configuration file
-    const QString tabsFileName(m_parser.value("tabs-from-file"));
+    const QString tabsFileName(m_parser.value(QStringLiteral("tabs-from-file")));
     QFile tabsFile(tabsFileName);
     if (!tabsFile.open(QFile::ReadOnly)) {
         qWarning() << "ERROR: Cannot open tabs file "
@@ -195,7 +195,7 @@ void Application::processTabsFromFileArgs(MainWindow* window)
             lineTokens[key] = value;
         }
         // should contain at least one of 'command' and 'profile'
-        if (lineTokens.contains(QLatin1String("command")) || lineTokens.contains(QStringLiteral("profile"))) {
+        if (lineTokens.contains(QStringLiteral("command")) || lineTokens.contains(QStringLiteral("profile"))) {
             createTabFromArgs(window, lineTokens);
             sessions++;
         } else {
@@ -214,10 +214,10 @@ void Application::processTabsFromFileArgs(MainWindow* window)
 void Application::createTabFromArgs(MainWindow* window,
                                     const QHash<QString, QString>& tokens)
 {
-    const QString& title = tokens["title"];
-    const QString& command = tokens["command"];
-    const QString& profile = tokens["profile"];
-    const QString& workdir = tokens["workdir"];
+    const QString& title = tokens[QStringLiteral("title")];
+    const QString& command = tokens[QStringLiteral("command")];
+    const QString& profile = tokens[QStringLiteral("profile")];
+    const QString& workdir = tokens[QStringLiteral("workdir")];
 
     Profile::Ptr baseProfile;
     if (!profile.isEmpty()) {
@@ -247,8 +247,8 @@ void Application::createTabFromArgs(MainWindow* window,
         shouldUseNewProfile = true;
     }
 
-    if (m_parser.isSet("workdir")) {
-        newProfile->setProperty(Profile::Directory, m_parser.value("workdir"));
+    if (m_parser.isSet(QStringLiteral("workdir"))) {
+        newProfile->setProperty(Profile::Directory, m_parser.value(QStringLiteral("workdir")));
         shouldUseNewProfile = true;
     }
 
@@ -261,7 +261,7 @@ void Application::createTabFromArgs(MainWindow* window,
     Profile::Ptr theProfile = shouldUseNewProfile ? newProfile :  baseProfile;
     Session* session = window->createSession(theProfile, QString());
 
-    if (m_parser.isSet("noclose")) {
+    if (m_parser.isSet(QStringLiteral("noclose"))) {
         session->setAutoClose(false);
     }
 
@@ -282,7 +282,7 @@ void Application::createTabFromArgs(MainWindow* window,
 MainWindow* Application::processWindowArgs(bool &createdNewMainWindow)
 {
     MainWindow* window = 0;
-    if (m_parser.isSet("new-tab")) {
+    if (m_parser.isSet(QStringLiteral("new-tab"))) {
         QListIterator<QWidget*> iter(QApplication::topLevelWidgets());
         iter.toBack();
         while (iter.hasPrevious()) {
@@ -297,24 +297,24 @@ MainWindow* Application::processWindowArgs(bool &createdNewMainWindow)
         window = newMainWindow();
 
         // override default menubar visibility
-        if (m_parser.isSet("show-menubar")) {
+        if (m_parser.isSet(QStringLiteral("show-menubar"))) {
             window->setMenuBarInitialVisibility(true);
         }
-        if (m_parser.isSet("hide-menubar")) {
+        if (m_parser.isSet(QStringLiteral("hide-menubar"))) {
             window->setMenuBarInitialVisibility(false);
         }
-        if (m_parser.isSet("fullscreen")) {
+        if (m_parser.isSet(QStringLiteral("fullscreen"))) {
             window->viewFullScreen(true);
         }
 
         // override default tabbbar visibility
         // FIXME: remove those magic number
         // see ViewContainer::NavigationVisibility
-        if (m_parser.isSet("show-tabbar")) {
+        if (m_parser.isSet(QStringLiteral("show-tabbar"))) {
             // always show
             window->setNavigationVisibility(0);
         }
-        if (m_parser.isSet("hide-tabbar")) {
+        if (m_parser.isSet(QStringLiteral("hide-tabbar"))) {
             // never show
             window->setNavigationVisibility(2);
         }
@@ -330,12 +330,12 @@ Profile::Ptr Application::processProfileSelectArgs()
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
-    if (m_parser.isSet("profile")) {
+    if (m_parser.isSet(QStringLiteral("profile"))) {
         Profile::Ptr profile = ProfileManager::instance()->loadProfile(
-                                   m_parser.value("profile"));
+                                   m_parser.value(QStringLiteral("profile")));
         if (profile)
             return profile;
-    } else if (m_parser.isSet("fallback-profile")) {
+    } else if (m_parser.isSet(QStringLiteral("fallback-profile"))) {
         Profile::Ptr profile = ProfileManager::instance()->loadProfile(QStringLiteral("FALLBACK/"));
         if (profile)
             return profile;
@@ -346,10 +346,10 @@ Profile::Ptr Application::processProfileSelectArgs()
 
 bool Application::processHelpArgs()
 {
-    if (m_parser.isSet("list-profiles")) {
+    if (m_parser.isSet(QStringLiteral("list-profiles"))) {
         listAvailableProfiles();
         return true;
-    } else if (m_parser.isSet("list-profile-properties")) {
+    } else if (m_parser.isSet(QStringLiteral("list-profile-properties"))) {
         listProfilePropertyInfo();
         return true;
     }
@@ -388,8 +388,8 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
     newProfile->setHidden(true);
 
     // change the initial working directory
-    if (m_parser.isSet("workdir")) {
-        newProfile->setProperty(Profile::Directory, m_parser.value("workdir"));
+    if (m_parser.isSet(QStringLiteral("workdir"))) {
+        newProfile->setProperty(Profile::Directory, m_parser.value(QStringLiteral("workdir")));
         shouldUseNewProfile = true;
     }
 
@@ -407,14 +407,14 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
     }
 
     // run a custom command
-    if (m_parser.isSet("e")) {
-        QString commandExec = m_parser.value("e");
+    if (m_parser.isSet(QStringLiteral("e"))) {
+        QString commandExec = m_parser.value(QStringLiteral("e"));
         QStringList commandArguments;
 
         if (m_parser.positionalArguments().count() == 0 &&
             QStandardPaths::findExecutable(commandExec).isEmpty()) {
             // Example: konsole -e "man ls"
-            ShellCommand shellCommand(m_parser.value("e"));
+            ShellCommand shellCommand(m_parser.value(QStringLiteral("e")));
             commandExec = shellCommand.command();
             commandArguments = shellCommand.arguments();
         } else {
