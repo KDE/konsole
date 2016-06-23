@@ -3,8 +3,8 @@
 %Konsole is a terminal emulator for KDE.
 <p>
 To use a %Konsole part in your application, see the
-<a href="http://api.kde.org/4.0-api/kdelibs-apidocs/interfaces/html/classTerminalInterface.html">Terminal
-interface documentation</a> in kdelibs.
+<a href="https://api.kde.org/frameworks/kparts/html/classTerminalInterface.html">Terminal
+interface documentation</a> in KPart's framework.
 
 To learn more about %Konsole, visit the
 <a href="http://konsole.kde.org">Konsole home page</a>, or join the
@@ -16,14 +16,14 @@ Lars Doelle<br>
 Robert Knight
 
 @maintainers
-Robert Knight
+Kurt Hindenburg
 
 @licenses
 @gpl
 
 */
 
-// DOXYGEN_EXCLUDE = data desktop developer-doc tests user-doc
+// DOXYGEN_EXCLUDE = data desktop developer-doc tests user-doc tools
 // DOXYGEN_SET_RECURSIVE = YES
 // DOXYGEN_SET_PROJECT_NAME = Konsole
 // vim:ts=4:sw=4:expandtab:filetype=doxygen
