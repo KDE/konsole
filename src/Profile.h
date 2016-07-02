@@ -248,7 +248,11 @@ public:
         /** (bool) If true, mouse wheel scroll with Ctrl key pressed
          * increases/decreases the terminal font size.
          */
-        MouseWheelZoomEnabled
+        MouseWheelZoomEnabled,
+        /** (bool) Enables showing a hint for all visible URLs
+         * which allows activating URLs with the keyboard.
+         */
+        EnableUrlHints
     };
 
     /**

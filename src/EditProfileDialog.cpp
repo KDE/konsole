@@ -1041,7 +1041,12 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
 }
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {
-    BooleanOption  options[] = { {
+    BooleanOption  options[] = {
+        {
+            _ui->enableUrlHints , Profile::EnableUrlHints ,
+            SLOT(toggleEnableUrlHints(bool))
+        },
+        {
             _ui->enableBlinkingTextButton , Profile::BlinkingTextEnabled ,
             SLOT(toggleBlinkingText(bool))
         },
@@ -1168,6 +1173,10 @@ void EditProfileDialog::pasteFromClipboard()
 void EditProfileDialog::TripleClickModeChanged(int newValue)
 {
     updateTempProfileProperty(Profile::TripleClickMode, newValue);
+}
+void EditProfileDialog::toggleEnableUrlHints(bool enable)
+{
+    updateTempProfileProperty(Profile::EnableUrlHints, enable);
 }
 void EditProfileDialog::toggleBlinkingText(bool enable)
 {

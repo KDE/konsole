@@ -351,6 +351,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _textBlinking(false)
     , _cursorBlinking(false)
     , _hasTextBlinker(false)
+    , _showUrlHint(false)
+    , _enableShowUrlHint(false)
     , _underlineLinks(true)
     , _openLinksByDirectClick(false)
     , _ctrlRequiredForDrag(true)
@@ -1335,8 +1337,11 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     // iterate over hotspots identified by the display's currently active filters
     // and draw appropriate visuals to indicate the presence of the hotspot
 
+    int urlNumber = 0;
     QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
     foreach(Filter::HotSpot* spot, spots) {
+        urlNumber++;
+
         QRegion region;
         if (_underlineLinks && spot->type() == Filter::HotSpot::Link) {
             QRect r;
@@ -1364,6 +1369,16 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                             (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
                             (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
                 region |= r;
+            }
+
+            if (_showUrlHint) {
+                // Position at the beginning of the URL
+                QRect hintRect(region.rects().first());
+                hintRect.setWidth(r.height());
+                painter.fillRect(hintRect, QColor(0, 0, 0, 128));
+                painter.setPen(Qt::white);
+                painter.drawRect(hintRect.adjusted(0, 0, -1, -1));
+                painter.drawText(hintRect, Qt::AlignCenter, QString::number(urlNumber));
             }
         }
 
@@ -1418,6 +1433,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                     painter.drawLine(r.left() , underlinePos ,
                                      r.right() , underlinePos);
                 }
+
                 // Marker hotspots simply have a transparent rectangular shape
                 // drawn on top of them
             } else if (spot->type() == Filter::HotSpot::Marker) {
@@ -3062,6 +3078,22 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
+    if (_enableShowUrlHint && event->modifiers() & Qt::ControlModifier) {
+        int hintSelected = event->key() - 0x31;
+        if (hintSelected >= 0 && hintSelected < _filterChain->hotSpots().count()) {
+            _filterChain->hotSpots().at(hintSelected)->activate();
+            _showUrlHint = false;
+            update();
+            return;
+        }
+
+        if (!_showUrlHint) {
+            processFilters();
+            _showUrlHint = true;
+            update();
+        }
+    }
+
     _screenWindow->screen()->setCurrentTerminalDisplay(this);
 
     _actSel = 0; // Key stroke implies a screen update, so TerminalDisplay won't
@@ -3083,6 +3115,16 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 #endif
 
     event->accept();
+}
+
+void TerminalDisplay::keyReleaseEvent(QKeyEvent *event)
+{
+    if (_showUrlHint) {
+        _showUrlHint = false;
+        update();
+    }
+
+    QWidget::keyReleaseEvent(event);
 }
 
 bool TerminalDisplay::handleShortcutOverrideEvent(QKeyEvent* keyEvent)

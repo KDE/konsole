@@ -446,6 +446,20 @@ public:
     }
 
     /**
+     * Enables or disables showing hints on URLs when ctrl is pressed
+     * Defaults to disabled.
+     */
+    void setEnableUrlHints(bool on) {
+        _enableShowUrlHint = on;
+    }
+    /**
+     * Returns the status of the BiDi rendering in this widget.
+     */
+    bool areUrlHintsEnabled() const {
+        return _enableShowUrlHint;
+    }
+
+    /**
      * Sets the terminal screen section which is displayed in this widget.
      * When updateImage() is called, the display fetches the latest character image from the
      * the associated terminal screen window.
@@ -638,6 +652,7 @@ protected:
     virtual void focusInEvent(QFocusEvent* event);
     virtual void focusOutEvent(QFocusEvent* event);
     virtual void keyPressEvent(QKeyEvent* event);
+    virtual void keyReleaseEvent(QKeyEvent* event);
     virtual void leaveEvent(QEvent* event);
     virtual void mouseDoubleClickEvent(QMouseEvent* event);
     virtual void mousePressEvent(QMouseEvent* event);
@@ -857,6 +872,8 @@ private:
     QTimer* _blinkTextTimer;
     QTimer* _blinkCursorTimer;
 
+    bool _showUrlHint;
+    bool _enableShowUrlHint;
     bool _underlineLinks;     // Underline URL and hosts on mouse hover
     bool _openLinksByDirectClick;     // Open URL and hosts by single mouse click
 

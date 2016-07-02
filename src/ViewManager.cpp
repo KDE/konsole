@@ -812,6 +812,8 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
 
     view->setOpenLinksByDirectClick(profile->property<bool>(Profile::OpenLinksByDirectClickEnabled));
 
+    view->setEnableUrlHints(profile->property<bool>(Profile::EnableUrlHints));
+
     int middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
     if (middleClickPasteMode == Enum::PasteFromX11Selection)
         view->setMiddleClickPasteMode(Enum::PasteFromX11Selection);
