@@ -24,6 +24,7 @@
 
 // Qt
 #include <QtCore/QTextCodec>
+#include <QtCore/QRegularExpression>
 
 // KDE
 #include <KLocalizedString>
@@ -317,20 +318,14 @@ QHash<Profile::Property, QVariant> ProfileCommandParser::parse(const QString& in
     // where 'property' is a word consisting only of characters from A-Z
     // where 'value' is any sequence of characters other than a semi-colon
     //
-    static QRegExp regExp("([a-zA-Z]+)=([^;]+)");
+    static const QRegularExpression regExp("([a-zA-Z]+)=([^;]+)");
 
-    int offset = 0;
-    while (regExp.indexIn(input, offset) != -1) {
-        if (regExp.capturedTexts().count() == 3) {
-            Profile::Property property = Profile::lookupByName(
-                                             regExp.capturedTexts().at(1));
-            const QString value = regExp.capturedTexts().at(2);
-            changes.insert(property, value);
-        }
-
-        offset = input.indexOf(';', offset) + 1;
-        if (offset == 0)
-            break;
+    QRegularExpressionMatchIterator iterator(regExp.globalMatch(input));
+    while (iterator.hasNext()) {
+        QRegularExpressionMatch match(iterator.next());
+        Profile::Property property = Profile::lookupByName(match.captured(1));
+        const QString value = match.captured(2);
+        changes.insert(property, value);
     }
 
     return changes;

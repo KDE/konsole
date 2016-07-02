@@ -29,6 +29,7 @@
 // Qt
 #include <QtCore/QBuffer>
 #include <QtCore/QTextStream>
+#include <QtCore/QRegularExpression>
 #include <QtGui/QKeySequence>
 
 // KDE
@@ -358,39 +359,46 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
     text = text.simplified();
 
     // title line: keyboard "title"
-    static QRegExp title("keyboard\\s+\"(.*)\"");
+    static const QRegularExpression title("keyboard\\s+\"(.*)\"", QRegularExpression::OptimizeOnFirstUsageOption);
     // key line: key KeySequence : "output"
     // key line: key KeySequence : command
-    static QRegExp key("key\\s+([\\w\\+\\s\\-\\*\\.]+)\\s*:\\s*(\"(.*)\"|\\w+)");
+    static const QRegularExpression key("key\\s+([\\w\\+\\s\\-\\*\\.]+)\\s*:\\s*(\"(.*)\"|\\w+)", QRegularExpression::OptimizeOnFirstUsageOption);
 
     QList<Token> list;
     if (text.isEmpty()) {
         return list;
     }
 
-    if (title.exactMatch(text)) {
+    QRegularExpressionMatch titleMatch(title.match(text));
+
+    if (titleMatch.hasMatch()) {
         Token titleToken = { Token::TitleKeyword , QString() };
-        Token textToken = { Token::TitleText , title.capturedTexts().at(1) };
+        Token textToken = { Token::TitleText , titleMatch.captured(1) };
 
         list << titleToken << textToken;
-    } else if (key.exactMatch(text)) {
-        Token keyToken = { Token::KeyKeyword , QString() };
-        QString sequenceTokenString = key.capturedTexts().at(1);
-        Token sequenceToken = { Token::KeySequence , sequenceTokenString.remove(QChar(' ')) };
+        return list;
+    }
 
-        list << keyToken << sequenceToken;
-
-        if (key.capturedTexts().at(3).isEmpty()) {
-            // capturedTexts().at(2) is a command
-            Token commandToken = { Token::Command , key.capturedTexts().at(2) };
-            list << commandToken;
-        } else {
-            // capturedTexts().at(3) is the output string
-            Token outputToken = { Token::OutputText , key.capturedTexts().at(3) };
-            list << outputToken;
-        }
-    } else {
+    QRegularExpressionMatch keyMatch(key.match(text));
+    if (!keyMatch.hasMatch()) {
         qWarning() << "Line in keyboard translator file could not be understood:" << text;
+        return list;
+    }
+
+    Token keyToken = { Token::KeyKeyword , QString() };
+    QString sequenceTokenString = keyMatch.captured(1);
+    Token sequenceToken = { Token::KeySequence , sequenceTokenString.remove(QChar(' ')) };
+
+    list << keyToken << sequenceToken;
+
+    if (keyMatch.capturedRef(3).isEmpty()) {
+        // capturedTexts().at(2) is a command
+        Token commandToken = { Token::Command , keyMatch.captured(2) };
+        list << commandToken;
+    } else {
+        // capturedTexts().at(3) is the output string
+        Token outputToken = { Token::OutputText , keyMatch.captured(3) };
+        list << outputToken;
     }
 
     return list;

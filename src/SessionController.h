@@ -27,6 +27,7 @@
 #include <QtCore/QPointer>
 #include <QtCore/QString>
 #include <QtCore/QHash>
+#include <QtCore/QRegularExpression>
 
 // KDE
 #include <KXMLGUIClient>
@@ -297,7 +298,7 @@ private:
     // direction - value from SearchHistoryTask::SearchDirection enum to specify
     //             the search direction
     void beginSearch(const QString& text , int direction);
-    QRegExp regexpFromSearchBarOptions();
+    QRegularExpression regexpFromSearchBarOptions() const;
     bool reverseSearchChecked() const;
     void setupCommonActions();
     void setupExtraActions();
@@ -500,9 +501,9 @@ public:
     void addScreenWindow(Session* session , ScreenWindow* searchWindow);
 
     /** Sets the regular expression which is searched for when execute() is called */
-    void setRegExp(const QRegExp& regExp);
+    void setRegExp(const QRegularExpression &regExp);
     /** Returns the regular expression which is searched for when execute() is called */
-    QRegExp regExp() const;
+    QRegularExpression regExp() const;
 
     /** Specifies the direction to search in when execute() is called. */
     void setSearchDirection(SearchDirection direction);
@@ -531,7 +532,7 @@ private:
     void highlightResult(ScreenWindowPtr window , int position);
 
     QMap< SessionPtr , ScreenWindowPtr > _windows;
-    QRegExp _regExp;
+    QRegularExpression _regExp;
     SearchDirection _direction;
     int _startLine;
 

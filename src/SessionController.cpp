@@ -1177,14 +1177,23 @@ bool SessionController::reverseSearchChecked() const
     return options.at(IncrementalSearchBar::ReverseSearch);
 }
 
-QRegExp SessionController::regexpFromSearchBarOptions()
+QRegularExpression SessionController::regexpFromSearchBarOptions() const
 {
     QBitArray options = _searchBar->optionsChecked();
 
-    Qt::CaseSensitivity caseHandling = options.at(IncrementalSearchBar::MatchCase) ? Qt::CaseSensitive : Qt::CaseInsensitive;
-    QRegExp::PatternSyntax syntax = options.at(IncrementalSearchBar::RegExp) ? QRegExp::RegExp : QRegExp::FixedString;
+    QString text(_searchBar->searchText());
 
-    QRegExp regExp(_searchBar->searchText(),  caseHandling , syntax);
+    QRegularExpression regExp;
+    if (options.at(IncrementalSearchBar::RegExp)) {
+        regExp.setPattern(text);
+    } else {
+        regExp.setPattern(QRegularExpression::escape(text));
+    }
+
+    if (!options.at(IncrementalSearchBar::MatchCase)) {
+        regExp.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+    }
+
     return regExp;
 }
 
@@ -1252,7 +1261,7 @@ void SessionController::beginSearch(const QString& text , int direction)
     Q_ASSERT(_searchBar);
     Q_ASSERT(_searchFilter);
 
-    QRegExp regExp = regexpFromSearchBarOptions();
+    QRegularExpression regExp = regexpFromSearchBarOptions();
     _searchFilter->setRegExp(regExp);
 
     if (_searchStartLine == -1) {
@@ -1263,7 +1272,7 @@ void SessionController::beginSearch(const QString& text , int direction)
         }
     }
 
-    if (!regExp.isEmpty()) {
+    if (!regExp.pattern().isEmpty()) {
         _view->screenWindow()->setCurrentResultLine(-1);
         SearchHistoryTask* task = new SearchHistoryTask(this);
 
@@ -1814,7 +1823,7 @@ void SearchHistoryTask::executeOnScreenWindow(SessionPtr session , ScreenWindowP
 
     Emulation* emulation = session->emulation();
 
-    if (!_regExp.isEmpty()) {
+    if (!_regExp.pattern().isEmpty()) {
         int pos = -1;
         const bool forwards = (_direction == ForwardsSearch);
         const int lastLine = window->lineCount() - 1;
@@ -1966,11 +1975,11 @@ SearchHistoryTask::SearchDirection SearchHistoryTask::searchDirection() const
 {
     return _direction;
 }
-void SearchHistoryTask::setRegExp(const QRegExp& expression)
+void SearchHistoryTask::setRegExp(const QRegularExpression &expression)
 {
     _regExp = expression;
 }
-QRegExp SearchHistoryTask::regExp() const
+QRegularExpression SearchHistoryTask::regExp() const
 {
     return _regExp;
 }

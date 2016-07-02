@@ -318,11 +318,12 @@ QStringList RegExpFilter::HotSpot::capturedTexts() const
     return _capturedTexts;
 }
 
-void RegExpFilter::setRegExp(const QRegExp& regExp)
+void RegExpFilter::setRegExp(const QRegularExpression &regExp)
 {
     _searchText = regExp;
+    _searchText.optimize();
 }
-QRegExp RegExpFilter::regExp() const
+QRegularExpression RegExpFilter::regExp() const
 {
     return _searchText;
 }
@@ -332,38 +333,33 @@ QRegExp RegExpFilter::regExp() const
 }*/
 void RegExpFilter::process()
 {
-    int pos = 0;
     const QString* text = buffer();
 
     Q_ASSERT(text);
 
-    // ignore any regular expressions which match an empty string.
-    // otherwise the while loop below will run indefinitely
-    if (_searchText.isEmpty())
+    if (!_searchText.isValid()) {
         return;
+    }
 
-    while (pos >= 0) {
-        pos = _searchText.indexIn(*text, pos);
+    QRegularExpressionMatchIterator iterator(_searchText.globalMatch(*text));
+    while (iterator.hasNext()) {
+        QRegularExpressionMatch match(iterator.next());
 
-        if (pos >= 0) {
-            int startLine = 0;
-            int endLine = 0;
-            int startColumn = 0;
-            int endColumn = 0;
+        int startLine = 0;
+        int endLine = 0;
+        int startColumn = 0;
+        int endColumn = 0;
 
-            getLineColumn(pos, startLine, startColumn);
-            getLineColumn(pos + _searchText.matchedLength(), endLine, endColumn);
+        getLineColumn(match.capturedStart(), startLine, startColumn);
+        getLineColumn(match.capturedEnd(), endLine, endColumn);
 
-            if (RegExpFilter::HotSpot* spot = newHotSpot(startLine, startColumn,
-                                          endLine, endColumn, _searchText.capturedTexts()))
-              addHotSpot(spot);
-
-            pos += _searchText.matchedLength();
-
-            // if matchedLength == 0, the program will get stuck in an infinite loop
-            if (_searchText.matchedLength() == 0)
-                pos = -1;
+        RegExpFilter::HotSpot* spot = newHotSpot(startLine, startColumn,
+                                                 endLine, endColumn, match.capturedTexts());
+        if (!spot) {
+            continue;
         }
+
+        addHotSpot(spot);
     }
 }
 
@@ -391,12 +387,13 @@ UrlFilter::HotSpot::UrlType UrlFilter::HotSpot::urlType() const
 {
     const QString url = capturedTexts().at(0);
 
-    if (FullUrlRegExp.exactMatch(url))
+    if (FullUrlRegExp.match(url).hasMatch()) {
         return StandardUrl;
-    else if (EmailAddressRegExp.exactMatch(url))
+    } else if (EmailAddressRegExp.match(url).hasMatch()) {
         return Email;
-    else
+    } else {
         return Unknown;
+    }
 }
 
 void UrlFilter::HotSpot::activate(QObject* object)
@@ -435,14 +432,17 @@ void UrlFilter::HotSpot::activate(QObject* object)
 //regexp matches:
 // full url:
 // protocolname:// or www. followed by anything other than whitespaces, <, >, ' or ", and ends before whitespaces, <, >, ', ", ], !, ), :, comma and dot
-const QRegExp UrlFilter::FullUrlRegExp("(www\\.(?!\\.)|[a-z][a-z0-9+.-]*://)[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]\\)\\:]");
+const QRegularExpression UrlFilter::FullUrlRegExp("(www\\.(?!\\.)|[a-z][a-z0-9+.-]*://)[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]\\)\\:]",
+                                                  QRegularExpression::OptimizeOnFirstUsageOption);
 // email address:
 // [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]
-const QRegExp UrlFilter::EmailAddressRegExp("\\b(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+\\b");
+const QRegularExpression UrlFilter::EmailAddressRegExp("\\b(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+\\b",
+                                                       QRegularExpression::OptimizeOnFirstUsageOption);
 
 // matches full url or email address
-const QRegExp UrlFilter::CompleteUrlRegExp('(' + FullUrlRegExp.pattern() + '|' +
-        EmailAddressRegExp.pattern() + ')');
+const QRegularExpression UrlFilter::CompleteUrlRegExp('(' + FullUrlRegExp.pattern() + '|' +
+                                                      EmailAddressRegExp.pattern() + ')',
+                                                      QRegularExpression::OptimizeOnFirstUsageOption);
 
 UrlFilter::UrlFilter()
 {
@@ -536,13 +536,13 @@ FileFilter::FileFilter(Session* session)
 
     patterns.removeDuplicates();
     patterns.replaceInStrings("*", "");
-    patterns = patterns.filter(QRegExp("^[A-Za-z0-9\\._-]+$"));
+    patterns = patterns.filter(QRegularExpression("^[A-Za-z0-9\\._-]+$"));
     patterns.replaceInStrings(".", "\\.");
 
-    QString regex("(\\b|/)+[A-Za-z0-9\\._-/]+(");
+    QString regex("(\\b|/)+[A-Za-z0-9\\._\\-/]+(");
     regex.append(patterns.join("|"));
     regex.append("){1}\\b");
-    setRegExp(QRegExp(regex));
+    setRegExp(QRegularExpression(regex));
 }
 
 FileFilter::HotSpot::~HotSpot()
