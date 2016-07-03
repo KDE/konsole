@@ -1,8 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
  "dtd/kdedbx45.dtd" [
-<!ENTITY kappname "&konsole;">
-<!ENTITY package "kdebase">
 <!ENTITY % English "INCLUDE">
 <!ENTITY % addindex "IGNORE">
 ]>
@@ -1199,70 +1197,7 @@ For more information, please visit
 
 </variablelist>
 
-<para>&konsole; also accepts generic &Qt; and &kde; options:</para>
-
-<variablelist>
-<varlistentry>
-<term><option>--help-qt</option></term>
-<listitem><para><action>List &Qt;-specific options</action></para></listitem>
-</varlistentry>
-</variablelist>
-
-<caution><para>The following &Qt; options have no effect on &konsole;:
-<informalexample>
-<variablelist>
-
-<varlistentry>
-<term><option>--fn</option>, <option>--font</option>
-<parameter>fontname</parameter></term>
-<listitem><para><action>Defines the application font</action></para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--bg</option>, <option>--background</option>
-<parameter>color</parameter></term>
-<listitem><para><action>Sets the default background color</action></para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--fg</option>, <option>--foreground</option>
-<parameter>color</parameter></term>
-<listitem><para><action>Sets the default foreground color</action></para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><option>--btn</option>, <option>--button</option>
-<parameter>color</parameter></term>
-<listitem><para><action>Sets the default button color</action></para></listitem>
-</varlistentry>
-
-</variablelist>
-
-</informalexample>
-</para></caution>
-
-<variablelist>
-<varlistentry>
-<term><option>--help-kde</option></term>
-<listitem><para><action>List &kde;-specific options</action></para></listitem>
-</varlistentry>
-<varlistentry>
-<term><option>--help-all</option></term>
-<listitem><para><action>List all options</action></para></listitem>
-</varlistentry>
-<varlistentry>
-<term><option>--author</option></term>
-<listitem><para><action>Show the authors' names</action></para></listitem>
-</varlistentry>
-<varlistentry>
-<term><option>-v,--version</option></term>
-<listitem><para><action>Show the version number</action></para></listitem>
-</varlistentry>
-<varlistentry>
-<term><option>--license</option></term>
-<listitem><para><action>Show license information</action></para></listitem>
-</varlistentry>
-</variablelist>
+<para>&konsole; also accepts generic &Qt; and &kf5-full; options, see man pages qt5options and kf5options.</para>
 
 </chapter>
 
