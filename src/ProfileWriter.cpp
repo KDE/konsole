@@ -32,6 +32,8 @@
 // Konsole
 #include "ShellCommand.h"
 
+#include <QDebug>
+
 using namespace Konsole;
 
 // FIXME: A dup line from Profile.cpp - redo these
@@ -40,11 +42,9 @@ static const char GENERAL_GROUP[]     = "General";
 // All profiles changes are stored under users' local account
 QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 4, 0)
+    // If any changes are made to this location, check that programs using
+    // the Konsole part can write/save profiles
     static const QString localDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole");
-#else
-    static const QString localDataLocation = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-#endif
 
     return localDataLocation % "/" % profile->untranslatedName() % ".profile";
 }
