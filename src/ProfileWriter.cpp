@@ -32,8 +32,6 @@
 // Konsole
 #include "ShellCommand.h"
 
-#include <QDebug>
-
 using namespace Konsole;
 
 // FIXME: A dup line from Profile.cpp - redo these
