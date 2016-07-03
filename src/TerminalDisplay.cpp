@@ -295,7 +295,6 @@ void TerminalDisplay::setLineSpacing(uint i)
 namespace Konsole
 {
 
-#pragma message("The accessibility code needs proper porting to Qt5")
 #ifndef QT_NO_ACCESSIBILITY
 /**
  * This function installs the factory function which lets Qt instantiate the QAccessibleInterface
@@ -1242,8 +1241,8 @@ void TerminalDisplay::updateImage()
     delete[] dirtyMask;
 
 #ifndef QT_NO_ACCESSIBILITY
-    QAccessible::updateAccessibility(this, 0, QAccessible::TextUpdated);
-    QAccessible::updateAccessibility(this, 0, QAccessible::TextCaretMoved);
+    QAccessible::updateAccessibility(new QAccessibleEvent(this, QAccessible::VisibleDataChanged));
+    QAccessible::updateAccessibility(new QAccessibleTextCursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX()));
 #endif
 }
 
@@ -3080,7 +3079,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     emit keyPressedSignal(event);
 
 #ifndef QT_NO_ACCESSIBILITY
-    QAccessible::updateAccessibility(this, 0, QAccessible::TextCaretMoved);
+    QAccessible::updateAccessibility(new QAccessibleTextCursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX()));
 #endif
 
     event->accept();

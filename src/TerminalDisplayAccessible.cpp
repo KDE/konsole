@@ -20,32 +20,30 @@
  */
 
 #include "TerminalDisplayAccessible.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-
-
-QString Q_GUI_EXPORT qTextBeforeOffsetFromString(int offset, QAccessible2::BoundaryType boundaryType,
-        int* startOffset, int* endOffset, const QString& text);
-QString Q_GUI_EXPORT qTextAtOffsetFromString(int offset, QAccessible2::BoundaryType boundaryType,
-        int* startOffset, int* endOffset, const QString& text);
-QString Q_GUI_EXPORT qTextAfterOffsetFromString(int offset, QAccessible2::BoundaryType boundaryType,
-        int* startOffset, int* endOffset, const QString& text);
+#include "SessionController.h"
+#include <klocalizedstring.h>
 
 using namespace Konsole;
 
 TerminalDisplayAccessible::TerminalDisplayAccessible(TerminalDisplay* display)
-    : QAccessibleWidgetEx(display,
-                          QAccessible::Terminal
-                         )
-    , QAccessibleSimpleEditableTextInterface(this)
-{}
+    : QAccessibleWidget(display, QAccessible::Terminal, display->sessionController()->userTitle())
+{
+}
 
-int TerminalDisplayAccessible::characterCount()
+QString TerminalDisplayAccessible::text(QAccessible::Text t) const
+{
+    if (t == QAccessible::Value) {
+        return visibleText();
+    }
+    return QAccessibleWidget::text(t);
+}
+
+int TerminalDisplayAccessible::characterCount() const
 {
     return display()->_usedLines * display()->_usedColumns;
 }
 
-int TerminalDisplayAccessible::cursorPosition()
+int TerminalDisplayAccessible::cursorPosition() const
 {
     if (!display()->screenWindow())
         return 0;
@@ -54,7 +52,7 @@ int TerminalDisplayAccessible::cursorPosition()
     return offset + display()->screenWindow()->screen()->getCursorX();
 }
 
-void TerminalDisplayAccessible::selection(int selectionIndex, int* startOffset, int* endOffset)
+void TerminalDisplayAccessible::selection(int selectionIndex, int* startOffset, int* endOffset) const
 {
     *startOffset = 0;
     *endOffset = 0;
@@ -73,7 +71,7 @@ void TerminalDisplayAccessible::selection(int selectionIndex, int* startOffset, 
     *endOffset = positionToOffset(endColumn, endLine);
 }
 
-int TerminalDisplayAccessible::selectionCount()
+int TerminalDisplayAccessible::selectionCount() const
 {
     if (!display()->screenWindow())
         return 0;
@@ -105,7 +103,7 @@ void TerminalDisplayAccessible::addSelection(int startOffset, int endOffset)
     display()->screenWindow()->setSelectionEnd(columnForOffset(endOffset), lineForOffset(endOffset));
 }
 
-QString TerminalDisplayAccessible::attributes(int offset, int* startOffset, int* endOffset)
+QString TerminalDisplayAccessible::attributes(int offset, int* startOffset, int* endOffset) const
 {
     // FIXME: this function should return css like attributes
     // as defined in the web ARIA standard
@@ -115,21 +113,18 @@ QString TerminalDisplayAccessible::attributes(int offset, int* startOffset, int*
     return QString();
 }
 
-QRect TerminalDisplayAccessible::characterRect(int offset, QAccessible2::CoordinateType coordType)
+QRect TerminalDisplayAccessible::characterRect(int offset) const
 {
     int row = offset / display()->_usedColumns;
     int col = offset - row * display()->_usedColumns;
     QPoint position = QPoint(col * display()->fontWidth() , row * display()->fontHeight());
-    if(coordType == QAccessible2::RelativeToScreen)
-        position = display()->mapToGlobal(position);
     return QRect(position, QSize(display()->fontWidth(), display()->fontHeight()));
 }
 
-int TerminalDisplayAccessible::offsetAtPoint(const QPoint& point, QAccessible2::CoordinateType coordType)
+int TerminalDisplayAccessible::offsetAtPoint(const QPoint& point) const
 {
     // FIXME return the offset into the text from the given point
     Q_UNUSED(point)
-    Q_UNUSED(coordType)
     return 0;
 }
 
@@ -155,6 +150,15 @@ void TerminalDisplayAccessible::setCursorPosition(int position)
     display()->screenWindow()->screen()->setCursorYX(lineForOffset(position), columnForOffset(position));
 }
 
+void *TerminalDisplayAccessible::interface_cast(QAccessible::InterfaceType type)
+{
+    if (type == QAccessible::TextInterface) {
+        return static_cast<QAccessibleTextInterface*>(this);
+    }
+
+    return QAccessibleWidget::interface_cast(type);
+}
+
 void TerminalDisplayAccessible::setSelection(int selectionIndex, int startOffset, int endOffset)
 {
     if (selectionIndex)
@@ -162,44 +166,16 @@ void TerminalDisplayAccessible::setSelection(int selectionIndex, int startOffset
     addSelection(startOffset, endOffset);
 }
 
-QString TerminalDisplayAccessible::text(QAccessible::Text t, int child) const
+QString TerminalDisplayAccessible::text(int startOffset, int endOffset) const
 {
-    if (t == QAccessible::Value && child == 0)
-        return visibleText();
-    return QAccessibleWidgetEx::text(t, child);
-}
-
-QString TerminalDisplayAccessible::text(int startOffset, int endOffset)
-{
-    if (!display()->screenWindow())
+    if (!display()->screenWindow()) {
         return QString();
+    }
 
     return display()->screenWindow()->screen()->text(startOffset, endOffset, true);
 }
 
-QString TerminalDisplayAccessible::textAfterOffset(int offset, QAccessible2::BoundaryType boundaryType, int* startOffset, int* endOffset)
+TerminalDisplay* TerminalDisplayAccessible::display() const
 {
-    const QString text = visibleText();
-    return qTextAfterOffsetFromString(offset, boundaryType, startOffset, endOffset, text);
+    return static_cast<TerminalDisplay*>(widget());
 }
-
-QString TerminalDisplayAccessible::textAtOffset(int offset, QAccessible2::BoundaryType boundaryType, int* startOffset, int* endOffset)
-{
-    const QString text = visibleText();
-    return qTextAtOffsetFromString(offset, boundaryType, startOffset, endOffset, text);
-}
-
-QString TerminalDisplayAccessible::textBeforeOffset(int offset, QAccessible2::BoundaryType boundaryType, int* startOffset, int* endOffset)
-{
-    const QString text = visibleText();
-    return qTextBeforeOffsetFromString(offset, boundaryType, startOffset, endOffset, text);
-}
-
-TerminalDisplay* TerminalDisplayAccessible::display()
-{
-    return static_cast<TerminalDisplay*>(object());
-}
-
-#else
-#pragma message("This code needs proper porting to Qt5")
-#endif

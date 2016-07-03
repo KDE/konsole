@@ -22,13 +22,11 @@
 #ifndef TERMINALDISPLAYACCESSIBLE_H
 #define TERMINALDISPLAYACCESSIBLE_H
 
-#include <QtGlobal>
+//#include <QtGlobal>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 
-#include <QtGui/qaccessible.h>
-#include <QtGui/qaccessible2.h>
-#include <qaccessiblewidget.h>
+#include <QtGui/QAccessibleTextInterface>
+#include <QtWidgets/QAccessibleWidget>
 
 #include "TerminalDisplay.h"
 #include "ScreenWindow.h"
@@ -42,49 +40,44 @@ namespace Konsole
  *
  * Most functions are re-implemented from QAccessibleTextInterface.
  */
-class TerminalDisplayAccessible
-    : public QAccessibleWidgetEx, public QAccessibleTextInterface, public QAccessibleSimpleEditableTextInterface
+class TerminalDisplayAccessible : public QAccessibleWidget, public QAccessibleTextInterface
 {
-    Q_ACCESSIBLE_OBJECT
-
 public:
     explicit TerminalDisplayAccessible(TerminalDisplay *display);
 
-    QString text(QAccessible::Text t, int child) const;
+    QString text(QAccessible::Text t) const override;
+    QString text(int startOffset, int endOffset) const override;
+    int characterCount() const override;
 
-    QString text(int startOffset, int endOffset);
-    QString textAfterOffset(int offset, QAccessible2::BoundaryType boundaryType, int* startOffset, int* endOffset);
-    QString textAtOffset(int offset, QAccessible2::BoundaryType boundaryType, int* startOffset, int* endOffset);
-    QString textBeforeOffset(int offset, QAccessible2::BoundaryType boundaryType, int* startOffset, int* endOffset);
-    int characterCount();
+    int selectionCount() const override;
+    void selection(int selectionIndex, int *startOffset, int *endOffset) const override;
+    void addSelection(int startOffset, int endOffset) override;
+    void setSelection(int selectionIndex, int startOffset, int endOffset) override;
+    void removeSelection(int selectionIndex) override;
 
-    int selectionCount();
-    void selection(int selectionIndex, int *startOffset, int *endOffset);
-    void addSelection(int startOffset, int endOffset);
-    void setSelection(int selectionIndex, int startOffset, int endOffset);
-    void removeSelection(int selectionIndex);
+    QRect characterRect(int offset) const override;
+    int offsetAtPoint(const QPoint& point) const override;
+    void scrollToSubstring(int startIndex, int endIndex) override;
 
-    QRect characterRect(int offset, QAccessible2::CoordinateType coordType);
-    int offsetAtPoint(const QPoint& point, QAccessible2::CoordinateType coordType);
-    void scrollToSubstring(int startIndex, int endIndex);
+    QString attributes(int offset, int* startOffset, int* endOffset) const override;
 
-    QString attributes(int offset, int* startOffset, int* endOffset);
+    int cursorPosition() const override;
+    void setCursorPosition(int position) override;
 
-    int cursorPosition();
-    void setCursorPosition(int position);
+    void *interface_cast(QAccessible::InterfaceType type) override;
 
 private:
-    Konsole::TerminalDisplay *display();
+    Konsole::TerminalDisplay *display() const;
 
-    inline int positionToOffset(int column, int line) {
+    inline int positionToOffset(int column, int line) const {
         return line * display()->_usedColumns + column;
     }
 
-    inline int lineForOffset(int offset) {
+    inline int lineForOffset(int offset) const {
         return offset / display()->_usedColumns;
     }
 
-    inline int columnForOffset(int offset) {
+    inline int columnForOffset(int offset) const {
         return offset % display()->_usedColumns;
     }
 
@@ -93,8 +86,5 @@ private:
 
 
 } // namespace
-#else
-#pragma message("The accessibility code needs proper porting to Qt5")
-#endif
 
 #endif // TERMINALDISPLAYACCESSIBLE_H
