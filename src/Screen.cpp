@@ -513,13 +513,17 @@ QVector<LineProperty> Screen::getLineProperties(int startLine , int endLine) con
     return result;
 }
 
-void Screen::reset(bool clearScreen)
+void Screen::reset()
 {
+    // Clear screen, but preserve the current line
+    scrollUp(0, _cuY);
+    _cuY = 0;
+
+    _currentModes[MODE_Origin] = false;
+    _savedModes[MODE_Origin] = false;
+
     setMode(MODE_Wrap);
     saveMode(MODE_Wrap);      // wrap at end of margin
-
-    resetMode(MODE_Origin);
-    saveMode(MODE_Origin);  // position refer to [1,1]
 
     resetMode(MODE_Insert);
     saveMode(MODE_Insert);  // overstroke
@@ -531,11 +535,11 @@ void Screen::reset(bool clearScreen)
     _topMargin = 0;
     _bottomMargin = _lines - 1;
 
+    // Other terminal emulators reset the entire scroll history during a reset
+//    setScroll(getScroll(), false);
+
     setDefaultRendition();
     saveCursor();
-
-    if (clearScreen)
-        clear();
 }
 
 void Screen::clear()

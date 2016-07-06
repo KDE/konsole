@@ -334,7 +334,7 @@ public:
      * If @p clearScreen is true then the screen contents are erased entirely,
      * otherwise they are unaltered.
      */
-    void reset(bool clearScreen = true);
+    void reset();
 
     /**
      * Displays a new character at the current cursor position.
