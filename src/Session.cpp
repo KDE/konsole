@@ -269,6 +269,10 @@ void Session::setInitialWorkingDirectory(const QString& dir)
 
 QString Session::currentWorkingDirectory()
 {
+    if (_reportedWorkingUrl.isValid() && _reportedWorkingUrl.isLocalFile()) {
+        return _reportedWorkingUrl.path();
+    }
+
     // only returned cached value
     if (_currentWorkingDir.isEmpty())
         updateWorkingDirectory();
@@ -547,6 +551,12 @@ void Session::setUserTitle(int what, const QString& caption)
 
             modified = true;
         }
+    }
+
+    if (what == CurrentDirectory) {
+        _reportedWorkingUrl = QUrl::fromUserInput(caption);
+        emit currentDirectoryChanged(currentWorkingDirectory());
+        modified = true;
     }
 
     if (what == ProfileChange) {
@@ -1007,6 +1017,7 @@ QString Session::getDynamicTitle()
 {
     // update current directory from process
     updateWorkingDirectory();
+
     ProcessInfo* process = getProcessInfo();
 
     // format tab titles using process info
@@ -1024,6 +1035,10 @@ QString Session::getDynamicTitle()
 
 QUrl Session::getUrl()
 {
+    if (_reportedWorkingUrl.isValid()) {
+        return _reportedWorkingUrl;
+    }
+
     QString path;
 
     updateSessionProcessInfo();

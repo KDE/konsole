@@ -352,6 +352,7 @@ public:
         IconNameAndWindowTitle = 0,
         IconName               = 1,
         WindowTitle            = 2,
+        CurrentDirectory       = 7,   // From VTE (supposedly 6 was for dir, 7 for file, but whatever)
         TextColor              = 10,
         BackgroundColor        = 11,
         SessionName            = 30,  // Non-standard
@@ -767,6 +768,7 @@ private:
 
     QString        _initialWorkingDir;
     QString        _currentWorkingDir;
+    QUrl           _reportedWorkingUrl;
 
     ProcessInfo*   _sessionProcessInfo;
     ProcessInfo*   _foregroundProcessInfo;
