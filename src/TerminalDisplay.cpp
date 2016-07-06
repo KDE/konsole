@@ -3080,7 +3080,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
     if (_enableShowUrlHint && event->modifiers() & Qt::ControlModifier) {
         int hintSelected = event->key() - 0x31;
-        if (hintSelected >= 0 && hintSelected < _filterChain->hotSpots().count()) {
+        if (hintSelected >= 0 && hintSelected < 10 && hintSelected < _filterChain->hotSpots().count()) {
             _filterChain->hotSpots().at(hintSelected)->activate();
             _showUrlHint = false;
             update();
