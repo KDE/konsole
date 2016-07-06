@@ -1371,7 +1371,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 region |= r;
             }
 
-            if (_showUrlHint) {
+            if (_showUrlHint && urlNumber < 10) {
                 // Position at the beginning of the URL
                 QRect hintRect(region.rects().first());
                 hintRect.setWidth(r.height());
