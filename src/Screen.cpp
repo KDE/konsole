@@ -634,34 +634,34 @@ void Screen::displayCharacter(unsigned short c)
     // putting the cursor one right to the last column of the screen.
 
     int w = konsole_wcwidth(c);
-    if (w < 0)
+
+    if (w < 0) {
+        // Non-printable character
         return;
-    else if (w == 0) {
-        if (QChar(c).category() != QChar::Mark_NonSpacing)
+    } else if (w == 0) {
+        const QChar::Category category = QChar(c).category();
+        if (category != QChar::Mark_NonSpacing && category != QChar::Letter_Other) {
             return;
-        int charToCombineWithX = -1;
-        int charToCombineWithY = -1;
-        if (_cuX == 0) {
-            // We are at the beginning of a line, check
-            // if previous line has a character at the end we can combine with
-            if (_cuY > 0 && _columns == _screenLines[_cuY - 1].size()) {
-                charToCombineWithX = _columns - 1;
-                charToCombineWithY = _cuY - 1;
+        }
+        // Find previous "real character" to try to combine with
+        int charToCombineWithX = _cuX;
+        int charToCombineWithY = _cuY;
+        do {
+            if (charToCombineWithX > 0) {
+                charToCombineWithX--;
+            } else if (charToCombineWithY > 0) { // Try previous line
+                charToCombineWithY--;
+                charToCombineWithX = _screenLines[charToCombineWithY].length() - 1;
             } else {
-                // There is nothing to combine with
-                // TODO Seems gnome-terminal shows the characters alone
-                // might be worth investigating how to do that
+                // Give up
                 return;
             }
-        } else {
-            charToCombineWithX = _cuX - 1;
-            charToCombineWithY = _cuY;
-        }
 
-        // Prevent "cat"ing binary files from causing crashes.
-        if (charToCombineWithX >= _screenLines[charToCombineWithY].size()) {
-            return;
-        }
+            // Failsafe
+            if (charToCombineWithX < 0) {
+                return;
+            }
+        } while(!_screenLines[charToCombineWithY][charToCombineWithX].isRealCharacter);
 
         Character& currentChar = _screenLines[charToCombineWithY][charToCombineWithX];
         if ((currentChar.rendition & RE_EXTENDED_CHAR) == 0) {
