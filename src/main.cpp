@@ -292,6 +292,18 @@ void fillCommandLineOptions(QCommandLineParser &parser)
     parser.addPositionalArgument(QStringLiteral("[args]"),
                                  i18nc("@info:shell", "Arguments passed to command"));
 
+    // Add a no-op compatibility option to make Konsole compatible with
+    // Debian's policy on X terminal emulators.
+    // -T is technically meant to set a title, that is not really meaningful
+    // for Konsole as we have multiple user-facing options controlling
+    // the title and overriding whatever is set elsewhere.
+    // https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=532029
+    // https://www.debian.org/doc/debian-policy/ch-customized-programs.html#s11.8.3
+    auto titleOption = QCommandLineOption(QStringList() << QStringLiteral("T"),
+                                          QStringLiteral("Debian policy compatibility, not used"),
+                                          QStringLiteral("value"));
+    titleOption.setHidden(true);
+    parser.addOption(titleOption);
 }
 
 void fillAboutData(KAboutData& aboutData)
