@@ -60,8 +60,6 @@ class ScreenWindow;
 class TerminalDisplay;
 class IncrementalSearchBar;
 class ProfileList;
-class UrlFilter;
-class FileFilter;
 class RegExpFilter;
 class EditProfileDialog;
 
@@ -272,7 +270,6 @@ private slots:
     // to take a snapshot of the state of the
     // foreground process in the terminal
 
-    void requireFilterUpdate();
     void highlightMatches(bool highlight);
     void scrollBackOptionsChanged(int mode , int lines);
     void sessionResizeRequest(const QSize& size);
@@ -319,8 +316,6 @@ private:
     QString    _sessionIconName;
     int        _previousState;
 
-    UrlFilter*      _viewUrlFilter;
-    FileFilter*     _fileFilter;
     RegExpFilter*   _searchFilter;
 
     QAction* _copyInputToAllTabsAction;
@@ -330,8 +325,6 @@ private:
     QAction* _findPreviousAction;
 
     QTimer* _interactionTimer;
-
-    bool _filterUpdateRequired;
 
     int _searchStartLine;
     int _prevSearchResultLine;

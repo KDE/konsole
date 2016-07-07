@@ -117,6 +117,12 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
         connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateLineProperties);
         connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateImage);
         connect(_screenWindow.data() , &Konsole::ScreenWindow::currentResultLineChanged , this , &Konsole::TerminalDisplay::updateImage);
+        connect(_screenWindow.data(), &Konsole::ScreenWindow::outputChanged, [this]() {
+            _filterUpdateRequired = true;
+        });
+        connect(_screenWindow.data(), &Konsole::ScreenWindow::scrolled, [this]() {
+            _filterUpdateRequired = true;
+        });
         _screenWindow->setWindowLines(_lines);
     }
 }
@@ -366,6 +372,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _lineSpacing(0)
     , _blendColor(qRgba(0, 0, 0, 0xff))
     , _filterChain(new TerminalImageFilterChain())
+    , _filterUpdateRequired(true)
     , _cursorShape(Enum::BlockCursor)
     , _antialiasText(true)
     , _printerFriendly(false)
@@ -1050,8 +1057,13 @@ QRegion TerminalDisplay::hotSpotRegion() const
 
 void TerminalDisplay::processFilters()
 {
-    if (!_screenWindow)
+    if (!_screenWindow) {
         return;
+    }
+
+    if (!_filterUpdateRequired) {
+        return;
+    }
 
     QRegion preUpdateHotSpots = hotSpotRegion();
 
@@ -1069,6 +1081,7 @@ void TerminalDisplay::processFilters()
     QRegion postUpdateHotSpots = hotSpotRegion();
 
     update(preUpdateHotSpots | postUpdateHotSpots);
+    _filterUpdateRequired = false;
 }
 
 void TerminalDisplay::updateImage()
@@ -1324,6 +1337,10 @@ FilterChain* TerminalDisplay::filterChain() const
 
 void TerminalDisplay::paintFilters(QPainter& painter)
 {
+    if (_filterUpdateRequired) {
+        return;
+    }
+
     // get color of character under mouse and use it to draw
     // lines for filters
     QPoint cursorPos = mapFromGlobal(QCursor::pos());
@@ -2053,6 +2070,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     int charColumn = 0;
     getCharacterPosition(ev->pos(), charLine, charColumn);
 
+    processFilters();
     // handle filters
     // change link hot-spot appearance on mouse-over
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
