@@ -56,7 +56,7 @@ class HistoryType;
  * Platform-specific main shortcut "opcode":
  */
 enum Modifier {
-#ifdef Q_OS_MAC
+#ifdef Q_OS_OSX
     ACCEL = Qt::META
 #else
     ACCEL = Qt::CTRL

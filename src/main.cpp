@@ -81,7 +81,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     // enable high dpi support
     app->setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_OSX)
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
     // will work correctly in the terminal
     app->setAttribute(Qt::AA_MacDontSwapCtrlAndMeta);

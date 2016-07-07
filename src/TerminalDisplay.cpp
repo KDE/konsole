@@ -726,7 +726,7 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
     if (useOpacitySetting && !_wallpaper->isNull() &&
             _wallpaper->draw(painter, contentsRect, _opacity)) {
     } else if (qAlpha(_blendColor) < 0xff && useOpacitySetting) {
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_OSX)
         // TODO - On MacOS, using CompositionMode doesn't work.  Altering the
         //        transparency in the color scheme alters the brightness.
         painter.fillRect(contentsRect, backgroundColor);

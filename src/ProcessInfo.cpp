@@ -45,11 +45,11 @@
 #include <KUser>
 #include <QDebug>
 
-#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_MAC)
+#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_OSX)
 #include <sys/sysctl.h>
 #endif
 
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_OSX)
 #include <libproc.h>
 #include <qplatformdefs.h>
 #endif
@@ -878,7 +878,7 @@ private:
     }
 };
 
-#elif defined(Q_OS_MAC)
+#elif defined(Q_OS_OSX)
 class MacProcessInfo : public UnixProcessInfo
 {
 public:
@@ -1184,7 +1184,7 @@ ProcessInfo* ProcessInfo::newInstance(int aPid, const QString& titleFormat, bool
     return new LinuxProcessInfo(aPid, titleFormat, enableEnvironmentRead);
 #elif defined(Q_OS_SOLARIS)
     return new SolarisProcessInfo(aPid, titleFormat, enableEnvironmentRead);
-#elif defined(Q_OS_MAC)
+#elif defined(Q_OS_OSX)
     return new MacProcessInfo(aPid, titleFormat, enableEnvironmentRead);
 #elif defined(Q_OS_FREEBSD)
     return new FreeBSDProcessInfo(aPid, titleFormat, enableEnvironmentRead);
