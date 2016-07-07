@@ -98,14 +98,11 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _copyToGroup(0)
     , _profileList(0)
     , _previousState(-1)
-    , _viewUrlFilter(0)
-    , _fileFilter(0)
     , _searchFilter(0)
     , _copyInputToAllTabsAction(0)
     , _findAction(0)
     , _findNextAction(0)
     , _findPreviousAction(0)
-    , _filterUpdateRequired(false)
     , _searchStartLine(0)
     , _prevSearchResultLine(0)
     , _searchBar(0)
@@ -142,6 +139,12 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     view->installEventFilter(this);
     view->setSessionController(this);
+
+    // install filter on the view to highlight URLs
+    _view->filterChain()->addFilter(new UrlFilter);
+
+    // install filter on the view to highlight Files
+    _view->filterChain()->addFilter(new FileFilter(_session));
 
     // listen for session resize requests
     connect(_session.data(), &Konsole::Session::resizeRequest, this, &Konsole::SessionController::sessionResizeRequest);
@@ -243,13 +246,6 @@ void SessionController::interactionHandler()
     _interactionTimer->start();
 }
 
-void SessionController::requireFilterUpdate()
-{
-    // this method is called every time the screen window's output changes, so do not
-    // do anything expensive here.
-
-    _filterUpdateRequired = true;
-}
 void SessionController::snapshot()
 {
     Q_ASSERT(_session != 0);
@@ -474,31 +470,6 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
                 // Ensure that newly created sessions are included in _copyToGroup!
                 copyInputToAllTabs();
             }
-        }
-        // when a mouse move is received, create the filters and listen for output changes if
-        // it has not already been created.  If it already exists, then update only if the output
-        // has changed since the last update ( _filterUpdateRequired == true )
-        //
-        // also check that no mouse buttons are pressed since the URL filter only applies when
-        // the mouse is hovering over the view
-        if (event->type() == QEvent::MouseMove &&
-                (!_viewUrlFilter || !_fileFilter || _filterUpdateRequired) &&
-                ((QMouseEvent*)event)->buttons() == Qt::NoButton) {
-            if (_view->screenWindow() && !_viewUrlFilter && !_fileFilter) {
-                connect(_view->screenWindow(), &Konsole::ScreenWindow::scrolled, this, &Konsole::SessionController::requireFilterUpdate);
-                connect(_view->screenWindow(), &Konsole::ScreenWindow::outputChanged, this, &Konsole::SessionController::requireFilterUpdate);
-
-                // install filter on the view to highlight URLs
-                _viewUrlFilter = new UrlFilter();
-                _view->filterChain()->addFilter(_viewUrlFilter);
-
-                // install filter on the view to highlight Files
-                _fileFilter = new FileFilter(_session);
-                _view->filterChain()->addFilter(_fileFilter);
-            }
-
-            _view->processFilters();
-            _filterUpdateRequired = false;
         }
     }
 
