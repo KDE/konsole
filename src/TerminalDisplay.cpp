@@ -1429,7 +1429,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 const int baseline = r.bottom() - metrics.descent();
                 // find the position of the underline below that
                 const int underlinePos = baseline + metrics.underlinePos();
-                if (region.contains(mapFromGlobal(QCursor::pos()))) {
+                if (_showUrlHint || region.contains(mapFromGlobal(QCursor::pos()))) {
                     painter.drawLine(r.left() , underlinePos ,
                                      r.right() , underlinePos);
                 }
