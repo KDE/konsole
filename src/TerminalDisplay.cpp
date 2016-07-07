@@ -1682,6 +1682,8 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     _blinkTextTimer->stop();
     Q_ASSERT(_textBlinking == false);
 
+    _showUrlHint = false;
+
     emit focusLost();
 }
 
