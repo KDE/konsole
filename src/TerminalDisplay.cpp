@@ -2883,7 +2883,9 @@ void TerminalDisplay::copyToX11Selection()
     mimeData->setText(text);
     mimeData->setHtml(html);
 
-    QApplication::clipboard()->setMimeData(mimeData, QClipboard::Selection);
+    if (QApplication::clipboard()->supportsSelection()) {
+        QApplication::clipboard()->setMimeData(mimeData, QClipboard::Selection);
+    }
 
     if (_autoCopySelectedText)
         QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
@@ -2914,8 +2916,10 @@ void TerminalDisplay::pasteFromClipboard(bool appendEnter)
 
 void TerminalDisplay::pasteFromX11Selection(bool appendEnter)
 {
-    QString text = QApplication::clipboard()->text(QClipboard::Selection);
-    doPaste(text, appendEnter);
+    if (QApplication::clipboard()->supportsSelection()) {
+        QString text = QApplication::clipboard()->text(QClipboard::Selection);
+        doPaste(text, appendEnter);
+    }
 }
 
 /* ------------------------------------------------------------------------- */
