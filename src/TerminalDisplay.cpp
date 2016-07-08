@@ -43,6 +43,7 @@
 #include <QStyle>
 #include <QtCore/QTimer>
 #include <QDrag>
+#include <QDesktopServices>
 #include <QtGui/QAccessible>
 
 // KDE
@@ -3037,7 +3038,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
                                                 "<a href=\"http://en.wikipedia.org/wiki/Software_flow_control\">suspended</a>"
                                                 " by pressing Ctrl+S."
                                                 "  Press <b>Ctrl+Q</b> to resume."
-                                                "  This message will be dismissed in 10 seconds.</qt>"),
+                                                "  Click <a href=\"#close\">here</a> to dismiss this message.</qt>"),
                                            this);
 
         QPalette palette(_outputSuspendedLabel->palette());
@@ -3048,21 +3049,26 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _outputSuspendedLabel->setFont(QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont));
         _outputSuspendedLabel->setContentsMargins(5, 5, 5, 5);
         _outputSuspendedLabel->setWordWrap(true);
+        _outputSuspendedLabel->setFocusProxy(this);
+
+        connect(_outputSuspendedLabel, &QLabel::linkActivated, [this](const QString &url) {
+            if (url == "#close") {
+                _outputSuspendedLabel->setVisible(false);
+            } else {
+                QDesktopServices::openUrl(QUrl(url));
+            }
+        });
 
         //enable activation of "Xon/Xoff" link in label
         _outputSuspendedLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse |
                 Qt::LinksAccessibleByKeyboard);
-        _outputSuspendedLabel->setOpenExternalLinks(true);
+        _outputSuspendedLabel->setOpenExternalLinks(false);
         _outputSuspendedLabel->setVisible(false);
 
         _gridLayout->addWidget(_outputSuspendedLabel);
         _gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding,
                                              QSizePolicy::Expanding),
                              1, 0);
-    }
-    // Remove message after a few seconds
-    if (suspended) {
-        QTimer::singleShot(10000, this, SLOT(dismissOutputSuspendedMessage()));
     }
 
     _outputSuspendedLabel->setVisible(suspended);
