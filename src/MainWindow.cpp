@@ -271,7 +271,7 @@ void MainWindow::updateWindowCaption()
 
 void MainWindow::updateWindowIcon()
 {
-    if (_pluggedController)
+    if (_pluggedController && !_pluggedController->icon().isNull())
         setWindowIcon(_pluggedController->icon());
 }
 
