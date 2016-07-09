@@ -43,8 +43,10 @@ const int TabTitleFormatButton::_localElementCount =
 
 const TabTitleFormatButton::Element TabTitleFormatButton::_remoteElements[] = {
     { "%u" , I18N_NOOP("User Name: %u") },
+    { "%U" , I18N_NOOP("User Name@ (if given): %U") },
     { "%h" , I18N_NOOP("Remote Host (Short): %h") },
     { "%H" , I18N_NOOP("Remote Host (Long): %H") },
+    { "%c" , I18N_NOOP("Command and arguments: %c") },
     { "%w" , I18N_NOOP("Window Title Set by Shell: %w") },
     { "%#" , I18N_NOOP("Session Number: %#") }
 };
