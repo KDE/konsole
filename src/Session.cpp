@@ -822,6 +822,15 @@ bool Session::closeInNormalWay()
         return true;
     }
 
+    _shellProcess->sendEof();
+
+    if (_shellProcess->waitForFinished(1000)) {
+        return true;
+    }
+
+    qWarning() << "shell did not close, sending SIGHUP";
+
+    // We tried asking nicely, ask a bit less nicely
     if (kill(SIGHUP)) {
         return true;
     } else {
