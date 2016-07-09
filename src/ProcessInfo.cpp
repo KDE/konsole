@@ -60,6 +60,9 @@
 #include <sys/syslimits.h>
 #   if defined(Q_OS_FREEBSD)
 #   include <libutil.h>
+#   include <sys/param.h>
+#   include <sys/queue.h>
+#   include <libprocstat.h>
 #   endif
 #endif
 
@@ -680,26 +683,68 @@ private:
 
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
-        managementInfoBase[2] = KERN_PROC_PID;
+        managementInfoBase[2] = KERN_PROC_ARGS;
         managementInfoBase[3] = aPid;
 
         len = sizeof(args);
         if (sysctl(managementInfoBase, 4, args, &len, NULL, 0) == -1)
             return false;
 
-        const QStringList& argumentList = QString(args).split(QChar('\0'));
-
-        for (QStringList::const_iterator it = argumentList.begin(); it != argumentList.end(); ++it) {
-            addArgument(*it);
+        // len holds the length of the string
+        QString qargs = QString::fromLocal8Bit(args,len);
+        foreach (QString value, qargs.split('\u0000'))
+        {
+            if (!value.isEmpty())
+            {
+                addArgument(value);
+            }
         }
 
         return true;
     }
 
     virtual bool readEnvironment(int aPid) {
-        Q_UNUSED(aPid);
-        // Not supported in FreeBSD?
-        return false;
+
+        struct procstat *prstat = procstat_open_sysctl();
+        if (prstat == nullptr) {
+            return false;
+        }
+
+        kinfo_proc *procinfo;
+        unsigned int cnt;
+        procinfo = procstat_getprocs(prstat, KERN_PROC_PID, aPid, &cnt);
+        if (procinfo == nullptr || cnt != 1)
+        {
+            procstat_close(prstat);
+            return false;
+        }
+
+        // pass 0, as the third argument, as we want to have every environment
+        // variable defined -- code courtesy of procstats procstats_arg.c
+        char **envs = procstat_getenvv(prstat, procinfo, 0);
+        if (envs == nullptr)
+        {
+            procstat_close(prstat);
+            return false;
+        }
+        int i;
+        QString name, value;
+        for (i = 0; envs[i] != nullptr; i++)
+        {
+            QString entry = QString::fromLocal8Bit(envs[i]);
+            const int splitPos = entry.indexOf('=');
+
+            if (splitPos != -1) {
+                name = entry.mid(0, splitPos);
+                value = entry.mid(splitPos + 1, -1);
+
+                addEnvironmentBinding(name, value);
+            }
+        }
+
+        procstat_freeenvv(prstat);
+        procstat_close(prstat);
+        return true;
     }
 
     virtual bool readCurrentDir(int aPid) {
