@@ -1225,6 +1225,16 @@ QString SSHProcessInfo::format(const QString& input) const
     // search for and replace known markers
     output.replace(QLatin1String("%u"), _user);
 
+    // provide 'user@' if user is defined -- this makes nicer
+    // remote tabs possible: "%U%h %c" => User@Host Command
+    //                                 => Host Command
+    // Depending on whether -l was passed to ssh (which is mostly not the
+    // case due to ~/.ssh/config).
+    if (_user.isEmpty())
+        output.replace(QLatin1String("%U"), QString());
+    else
+        output.replace(QLatin1String("%U"), _user + '@');
+
     if (isIpAddress)
         output.replace(QLatin1String("%h"), _host);
     else
