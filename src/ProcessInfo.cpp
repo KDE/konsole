@@ -1077,6 +1077,10 @@ private:
 
 SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     : _process(process)
+    , _user(QString())
+    , _host(QString())
+    , _port(QString())
+    , _command(QString())
 {
     bool ok = false;
 
@@ -1166,8 +1170,17 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     _host = args[i];
                 }
             } else {
-                // host has already been found, this must be the command argument
-                _command = args[i];
+                // host has already been found, this must be part of the
+                // command arguments.
+                // Note this is not 100% correct.  If any of the above
+                // noArgumentOptions or singleArgumentOptions are found, this
+                // will not be correct (example ssh server top -i 50)
+                // Suggest putting ssh command in quotes
+                if (_command.isEmpty()) {
+                    _command = args[i];
+                } else {
+                    _command = _command + QString(' ') + args[i];
+                }
             }
         }
     } else {
