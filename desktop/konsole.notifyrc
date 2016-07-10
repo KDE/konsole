@@ -435,6 +435,7 @@ Name[pt]=Actividade em Sessão Vigiada Escondida
 Name[sv]=Aktivitet i dold bevakad session
 Name[uk]=Дії у прихованому сеансі спостереження
 Name[x-test]=xxActivity in Hidden Monitored Sessionxx
+Name[zh_TW]=隱藏的監控工作階段的活動
 Comment=Activity detected in a hidden monitored session
 Comment[ca]=Activitat detectada en una sessió controlada oculta
 Comment[ca@valencia]=Activitat detectada en una sessió controlada oculta
@@ -443,6 +444,7 @@ Comment[pt]=Actividade detectada numa sessão vigiada que esteja escondida
 Comment[sv]=Aktivitet funnen i en dold bevakad session
 Comment[uk]=У прихованому сеансі спостереження виявлено дії
 Comment[x-test]=xxActivity detected in a hidden monitored sessionxx
+Comment[zh_TW]=隱藏的監控工作階段中偵測到的活動
 Action=Popup
 
 [Event/Activity]
@@ -619,6 +621,7 @@ Name[pt]=Silêncio em Sessão Vigiada Escondida
 Name[sv]=Tystnad i dold bevakad session
 Name[uk]=Тиша у прихованому сеансі спостереження
 Name[x-test]=xxSilence in Hidden Monitored Sessionxx
+Name[zh_TW]=隱藏的監控工作階段的靜默
 Comment=Silence detected in a hidden monitored session
 Comment[ca]=Silenci detectat en una sessió controlada oculta
 Comment[ca@valencia]=Silenci detectat en una sessió controlada oculta
@@ -627,6 +630,7 @@ Comment[pt]=Silêncio detectado numa sessão vigiada que esteja escondida
 Comment[sv]=Tystnad funnen i en dold bevakad session
 Comment[uk]=У прихованому сеансі спостереження виявлено тишу
 Comment[x-test]=xxSilence detected in a hidden monitored sessionxx
+Comment[zh_TW]=隱藏的監控工作階段中偵測到靜默時的行為
 Action=Popup
 
 [Event/Silence]
