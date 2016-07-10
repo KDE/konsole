@@ -809,7 +809,7 @@ A dialog will open for the bookmark folder name.
 
 <note><para>You can use the bookmark editor to manually add URLs.
 Currently, &konsole; accepts the following:
-<itemizedlist mark='opencircle'>
+<itemizedlist mark="opencircle">
 <listitem><para>ssh://user@host:port</para></listitem>
 <listitem><para>telnet://user@host:port</para></listitem>
 </itemizedlist>
@@ -962,7 +962,8 @@ These changes can be made permanent by editing the current profile.
 
 <para>
 &konsole; will substitute these tokens for local tabs:
-<itemizedlist mark='opencircle'>
+</para>
+<itemizedlist mark="opencircle">
 <listitem><para>%n : program name</para></listitem>
 <listitem><para>%d : current directory (short)</para></listitem>
 <listitem><para>%D : current directory (long)</para></listitem>
@@ -972,8 +973,9 @@ These changes can be made permanent by editing the current profile.
 <listitem><para>%# : session number</para></listitem>
 </itemizedlist>
 
+<para>
 &konsole; will substitute these tokens for remote tabs:
-<itemizedlist mark='opencircle'>
+<itemizedlist mark="opencircle">
     <listitem><para>%c : current program</para></listitem>
     <listitem><para>%h : remote host (short)</para></listitem>
     <listitem><para>%H : remote host (long)</para></listitem>
@@ -986,7 +988,7 @@ These changes can be made permanent by editing the current profile.
 </para>
 <para>
 Examples:
-<itemizedlist mark='opencircle'>
+<itemizedlist mark="opencircle">
 
 <listitem><para>
 <userinput>%d : %n</userinput>
