@@ -38,14 +38,14 @@
 <holder>&Jonathan.Singer;</holder>
 </copyright>
 <copyright>
-<year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year>
+    <year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year><year>2016</year>
 <holder>&Kurt.Hindenburg;</holder>
 </copyright>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2016-04-18</date>
-<releaseinfo>Applications 16.04</releaseinfo>
+<date>2016-07-09</date>
+<releaseinfo>Applications 16.08</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -961,16 +961,26 @@ These changes can be made permanent by editing the current profile.
 </para>
 
 <para>
-&konsole; will substitute these tokens:
+&konsole; will substitute these tokens for local tabs:
 <itemizedlist mark='opencircle'>
 <listitem><para>%n : program name</para></listitem>
 <listitem><para>%d : current directory (short)</para></listitem>
 <listitem><para>%D : current directory (long)</para></listitem>
+<listitem><para>%h : local host (short)</para></listitem>
+<listitem><para>%u : user name</para></listitem>
 <listitem><para>%w : window title set by shell</para></listitem>
 <listitem><para>%# : session number</para></listitem>
-<listitem><para>%u : user name</para></listitem>
-<listitem><para>%h : local host or remote host (short)</para></listitem>
-<listitem><para>%H : remote host (long)</para></listitem>
+</itemizedlist>
+
+&konsole; will substitute these tokens for remote tabs:
+<itemizedlist mark='opencircle'>
+    <listitem><para>%c : current program</para></listitem>
+    <listitem><para>%h : remote host (short)</para></listitem>
+    <listitem><para>%H : remote host (long)</para></listitem>
+    <listitem><para>%u : user name</para></listitem>
+    <listitem><para>%U : user name@ (if given)</para></listitem>
+    <listitem><para>%w : window title set by shell</para></listitem>
+    <listitem><para>%# : session number</para></listitem>
 </itemizedlist>
 
 </para>
@@ -1235,7 +1245,6 @@ will display the &DBus; interface for &konsole;.
 <option>org.kde.konsole /Windows/1</option>
 will display methods for controlling window 1.
 </para>
-<note><para>/Konsole was previously used for controlling the first window, which is a design mistake. Please do not use it for that purpose anymore, and consider updating existing scripts.</para></note>
 </listitem>
 
 <listitem><para>
