@@ -434,6 +434,10 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->fontPreviewLabel->setFont(profileFont);
     setFontInputValue(profileFont);
 
+    // Always set to unchecked
+    _ui->showAllFontsButton->setChecked(false);
+    connect(_ui->showAllFontsButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::showAllFontsButtonWarning);
+
     connect(_ui->fontSizeInput, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &Konsole::EditProfileDialog::setFontSize);
     connect(_ui->selectFontButton, &QPushButton::clicked, this, &Konsole::EditProfileDialog::showFontDialog);
 
@@ -446,6 +450,16 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
     connect(_ui->enableMouseWheelZoomButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::toggleMouseWheelZoom);
 }
+
+void EditProfileDialog::showAllFontsButtonWarning(bool enable)
+{
+    if (enable) {
+        KMessageBox::information(this,
+            "By its very nature, a terminal program requires font characters that are equal width (monospace).  Any non monospaced font may cause display issues.  This should not be necessary except in rare cases.",
+            "Warning");
+    }
+}
+
 void EditProfileDialog::setAntialiasText(bool enable)
 {
     QFont profileFont = _ui->fontPreviewLabel->font();
@@ -1200,11 +1214,17 @@ void EditProfileDialog::fontSelected(const QFont& aFont)
 void EditProfileDialog::showFontDialog()
 {
     QFont currentFont = _ui->fontPreviewLabel->font();
+    bool showAllFonts = _ui->showAllFontsButton->isChecked();
 
     bool result;
-    currentFont = QFontDialog::getFont(&result, currentFont, this,
+    if (showAllFonts) {
+        currentFont = QFontDialog::getFont(&result, currentFont, this,
+                                       i18n("Select All Font"));
+    } else {
+        currentFont = QFontDialog::getFont(&result, currentFont, this,
                                        i18n("Select Fixed Width Font"),
                                        QFontDialog::MonospacedFonts);
+    }
     if (!result) return;
 
     fontSelected(currentFont);

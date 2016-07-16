@@ -123,6 +123,7 @@ private slots:
     // appearance page
     void setFontSize(double pointSize);
     void setFontInputValue(const QFont&);
+    void showAllFontsButtonWarning(bool enable);
     void setAntialiasText(bool enable);
     void setBoldIntense(bool enable);
     void showFontDialog();
