@@ -113,7 +113,7 @@ inline bool operator != (const ColorEntry& a, const ColorEntry& b)
 // Colors
 
 #define BASE_COLORS   (2+8)
-#define INTENSITIES   2
+#define INTENSITIES   3
 #define TABLE_COLORS  (INTENSITIES*BASE_COLORS)
 
 #define DEFAULT_FORE_COLOR 0
@@ -130,6 +130,8 @@ inline bool operator != (const ColorEntry& a, const ColorEntry& b)
    2     - System      - u:  0..7    v:intense  w:0
    3     - Index(256)  - u: 16..255  v:0        w:0
    4     - RGB         - u:  0..255  v:0..256   w:0..256
+
+   ``intense'' is either 0 (normal), 1 (intensive), or 2 (faint)
 
    Default color space has two separate colors, namely
    default foreground and default background color.
@@ -178,7 +180,7 @@ public:
             break;
         case COLOR_SPACE_SYSTEM:
             _u = co & 7;
-            _v = (co >> 3) & 1;
+            _v = (co >> 3) & 3;
             break;
         case COLOR_SPACE_256:
             _u = co & 255;
@@ -207,6 +209,14 @@ public:
      * color spaces.
      */
     void setIntensive();
+
+    /**
+     * Set this color as a faint system color.
+     *
+     * This is only applicable if the color is using the COLOR_SPACE_DEFAULT or COLOR_SPACE_SYSTEM
+     * color spaces.
+     */
+    void setFaint();
 
     /**
      * Returns the color within the specified color @p palette
@@ -278,9 +288,9 @@ inline QColor CharacterColor::color(const ColorEntry* base) const
 {
     switch (_colorSpace) {
     case COLOR_SPACE_DEFAULT:
-        return base[_u + 0 + (_v ? BASE_COLORS : 0)].color;
+        return base[_u + 0 + (_v * BASE_COLORS)].color;
     case COLOR_SPACE_SYSTEM:
-        return base[_u + 2 + (_v ? BASE_COLORS : 0)].color;
+        return base[_u + 2 + (_v * BASE_COLORS)].color;
     case COLOR_SPACE_256:
         return color256(_u, base);
     case COLOR_SPACE_RGB:
@@ -300,6 +310,14 @@ inline void CharacterColor::setIntensive()
         _v = 1;
     }
 }
+
+inline void CharacterColor::setFaint()
+{
+    if (_colorSpace == COLOR_SPACE_SYSTEM || _colorSpace == COLOR_SPACE_DEFAULT) {
+        _v = 2;
+    }
+}
+
 }
 
 #endif // CHARACTERCOLOR_H

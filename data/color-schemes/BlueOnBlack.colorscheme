@@ -4,11 +4,17 @@ Color=0,0,0
 [BackgroundIntense]
 Color=0,0,0
 
+[BackgroundFaint]
+Color=0,0,0
+
 [Color0]
 Color=0,0,0
 
 [Color0Intense]
 Color=104,104,104
+
+[Color0Faint]
+Color=192,192,192
 
 [Color1]
 Color=250,0,0
@@ -16,11 +22,17 @@ Color=250,0,0
 [Color1Intense]
 Color=75,93,255
 
+[Color1Faint]
+Color=250,0,0
+
 [Color2]
 Color=24,178,24
 
 [Color2Intense]
 Color=84,255,84
+
+[Color2Faint]
+Color=142,224,142
 
 [Color3]
 Color=178,104,24
@@ -28,11 +40,17 @@ Color=178,104,24
 [Color3Intense]
 Color=255,255,84
 
+[Color3Faint]
+Color=224,224,142
+
 [Color4]
 Color=125,152,35
 
 [Color4Intense]
 Color=84,84,255
+
+[Color4Faint]
+Color=125,152,35
 
 [Color5]
 Color=225,30,225
@@ -40,11 +58,17 @@ Color=225,30,225
 [Color5Intense]
 Color=255,84,255
 
+[Color5Faint]
+Color=175,29,175
+
 [Color6]
 Color=0,134,223
 
 [Color6Intense]
 Color=0,68,255
+
+[Color6Faint]
+Color=0,98,173
 
 [Color7]
 Color=255,255,255
@@ -52,12 +76,18 @@ Color=255,255,255
 [Color7Intense]
 Color=50,50,50
 
+[Color7Faint]
+Color=200,200,200
+
 [Foreground]
 Color=0,119,255
 
 [ForegroundIntense]
 Bold=true
 Color=23,74,240
+
+[ForegroundFaint]
+Color=0,90,195
 
 [General]
 Description=Blue on Black

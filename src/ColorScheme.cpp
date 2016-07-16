@@ -62,7 +62,19 @@ const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] = {
     ColorEntry(QColor(0x54, 0x54, 0xFF)),
     ColorEntry(QColor(0xFF, 0x54, 0xFF)),
     ColorEntry(QColor(0x54, 0xFF, 0xFF)),
-    ColorEntry(QColor(0xFF, 0xFF, 0xFF))
+    ColorEntry(QColor(0xFF, 0xFF, 0xFF)),
+    // Here are faint intensities, which may not be good.
+    // faint versions
+    ColorEntry(QColor(0x00, 0x00, 0x00)),
+    ColorEntry(QColor(0xFF, 0xFF, 0xFF)),
+    ColorEntry(QColor(0x00, 0x00, 0x00)),
+    ColorEntry(QColor(0x65, 0x00, 0x00)),
+    ColorEntry(QColor(0x00, 0x65, 0x00)),
+    ColorEntry(QColor(0x65, 0x5E, 0x00)),
+    ColorEntry(QColor(0x00, 0x00, 0x65)),
+    ColorEntry(QColor(0x65, 0x00, 0x65)),
+    ColorEntry(QColor(0x00, 0x65, 0x65)),
+    ColorEntry(QColor(0x65, 0x65, 0x65))
 };
 
 const char* const ColorScheme::colorNames[TABLE_COLORS] = {
@@ -85,7 +97,17 @@ const char* const ColorScheme::colorNames[TABLE_COLORS] = {
     "Color4Intense",
     "Color5Intense",
     "Color6Intense",
-    "Color7Intense"
+    "Color7Intense",
+    "ForegroundFaint",
+    "BackgroundFaint",
+    "Color0Faint",
+    "Color1Faint",
+    "Color2Faint",
+    "Color3Faint",
+    "Color4Faint",
+    "Color5Faint",
+    "Color6Faint",
+    "Color7Faint"
 };
 const char* const ColorScheme::translatedColorNames[TABLE_COLORS] = {
     I18N_NOOP2("@item:intable palette", "Foreground"),
@@ -107,7 +129,17 @@ const char* const ColorScheme::translatedColorNames[TABLE_COLORS] = {
     I18N_NOOP2("@item:intable palette", "Color 5 (Intense)"),
     I18N_NOOP2("@item:intable palette", "Color 6 (Intense)"),
     I18N_NOOP2("@item:intable palette", "Color 7 (Intense)"),
-    I18N_NOOP2("@item:intable palette", "Color 8 (Intense)")
+    I18N_NOOP2("@item:intable palette", "Color 8 (Intense)"),
+    I18N_NOOP2("@item:intable palette", "Foreground (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Background (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 1 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 2 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 3 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 4 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 5 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 6 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 7 (Faint)"),
+    I18N_NOOP2("@item:intable palette", "Color 8 (Faint)")
 };
 
 QString ColorScheme::colorNameForIndex(int index)
@@ -304,6 +336,11 @@ void ColorScheme::read(const KConfig& config)
 void ColorScheme::readColorEntry(const KConfig& config , int index)
 {
     KConfigGroup configGroup = config.group(colorNameForIndex(index));
+
+    if (!configGroup.hasKey("Color") && _table != 0) {
+        setColorTableEntry(index, _table[index%BASE_COLORS]);
+        return;
+    }
 
     ColorEntry entry;
 

@@ -47,11 +47,12 @@ using namespace Konsole;
 
 // colorTable is half the length of _table in ColorScheme class
 // since intense colors are in a separated column
-const int COLOR_TABLE_ROW_LENGTH =  TABLE_COLORS / 2;
+const int COLOR_TABLE_ROW_LENGTH =  TABLE_COLORS / 3;
 
 const int NAME_COLUMN = 0;           // column 0 : color names
 const int COLOR_COLUMN = 1;          // column 1 : actual colors
 const int INTENSE_COLOR_COLUMN = 2;  // column 2 : intense colors
+const int FAINT_COLOR_COLUMN = 3;    // column 2 : faint colors
 
 ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     : QDialog(aParent)
@@ -104,19 +105,21 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     connect(_ui->wallpaperPath, &QLineEdit::textChanged, this, &Konsole::ColorSchemeEditor::wallpaperPathChanged);
 
     // color table
-    _ui->colorTable->setColumnCount(3);
+    _ui->colorTable->setColumnCount(4);
     _ui->colorTable->setRowCount(COLOR_TABLE_ROW_LENGTH);
 
     QStringList labels;
     labels << i18nc("@label:listbox Column header text for color names", "Name")
            << i18nc("@label:listbox Column header text for the actual colors", "Color")
-           << i18nc("@label:listbox Column header text for the actual intense colors", "Intense color");
+           << i18nc("@label:listbox Column header text for the actual intense colors", "Intense color")
+           << i18nc("@label:listbox Column header text for the actual faint colors", "Faint color");
     _ui->colorTable->setHorizontalHeaderLabels(labels);
 
     // Set resize mode for colorTable columns
     _ui->colorTable->horizontalHeader()->setSectionResizeMode(NAME_COLUMN, QHeaderView::ResizeToContents);
     _ui->colorTable->horizontalHeader()->setSectionResizeMode(COLOR_COLUMN, QHeaderView::Stretch);
     _ui->colorTable->horizontalHeader()->setSectionResizeMode(INTENSE_COLOR_COLUMN, QHeaderView::Stretch);
+    _ui->colorTable->horizontalHeader()->setSectionResizeMode(FAINT_COLOR_COLUMN, QHeaderView::Stretch);
 
     QTableWidgetItem* item = new QTableWidgetItem(QStringLiteral("Test"));
     _ui->colorTable->setItem(0, 0, item);
@@ -147,7 +150,7 @@ ColorSchemeEditor::~ColorSchemeEditor()
 void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
 {
     // ignore if this is not a color column
-    if (item->column() != COLOR_COLUMN && item->column() != INTENSE_COLOR_COLUMN) {
+    if (item->column() != COLOR_COLUMN && item->column() != INTENSE_COLOR_COLUMN && item->column() != FAINT_COLOR_COLUMN) {
         return;
     }
 
@@ -157,9 +160,14 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
         item->setBackground(color);
 
         int colorSchemeRow = item->row();
-        // Intense colors row are in the bottom half of the color table
+        // Intense colors row are in the middle third of the color table
         if (item->column() == INTENSE_COLOR_COLUMN) {
             colorSchemeRow += COLOR_TABLE_ROW_LENGTH;
+        }
+
+        // and the faint color rows are in the middle third of the color table
+        if (item->column() == FAINT_COLOR_COLUMN) {
+            colorSchemeRow += 2*COLOR_TABLE_ROW_LENGTH;
         }
 
         ColorEntry entry(_colors->colorEntry(colorSchemeRow));
@@ -268,9 +276,15 @@ void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
         colorItemIntense->setFlags(colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable);
         colorItemIntense->setToolTip(i18nc("@info:tooltip", "Click to choose intense color"));
 
+        QTableWidgetItem* colorItemFaint = new QTableWidgetItem();
+        colorItemFaint->setBackground(table[2*COLOR_TABLE_ROW_LENGTH + row].color);
+        colorItemFaint->setFlags(colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable);
+        colorItemFaint->setToolTip(i18nc("@info:tooltip", "Click to choose Faint color"));
+
         _ui->colorTable->setItem(row, NAME_COLUMN, nameItem);
         _ui->colorTable->setItem(row, COLOR_COLUMN, colorItem);
         _ui->colorTable->setItem(row, INTENSE_COLOR_COLUMN, colorItemIntense);
+        _ui->colorTable->setItem(row, FAINT_COLOR_COLUMN, colorItemFaint);
     }
     // ensure that color names are as fully visible as possible
     _ui->colorTable->resizeColumnToContents(0);

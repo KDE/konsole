@@ -347,35 +347,22 @@ void Screen::setDefaultMargins()
 /*
    Clarifying rendition here and in the display.
 
-   currently, the display's color table is
-   0       1       2 .. 9    10 .. 17
-   dft_fg, dft_bg, dim 0..7, intensive 0..7
+   The rendition attributes are
 
-   _currentForeground, _currentBackground contain values 0..8;
-   - 0    = default color
-   - 1..8 = ansi specified color
+   attribute
+   --------------
+   RE_UNDERLINE
+   RE_BLINK
+   RE_BOLD
+   RE_REVERSE
+   RE_TRANSPARENT
+   RE_FAINT
+   RE_STRIKEOUT
+   RE_CONCEAL
+   RE_OVERLINE
 
-   re_fg, re_bg contain values 0..17
-   due to the TerminalDisplay's color table
-
-   rendition attributes are
-
-   attr           widget screen
-   -------------- ------ ------
-   RE_UNDERLINE     XX     XX    affects foreground only
-   RE_BLINK         XX     XX    affects foreground only
-   RE_BOLD          XX     XX    affects foreground only
-   RE_REVERSE       --     XX
-   RE_TRANSPARENT   XX     --    affects background only
-   RE_INTENSIVE     XX     --    affects foreground only
-
-   Note that RE_BOLD is used in both widget
-   and screen rendition. Since xterm/vt102
-   is to poor to distinguish between bold
-   (which is a font attribute) and intensive
-   (which is a color attribute), we translate
-   this and RE_BOLD in falls eventually apart
-   into RE_BOLD and RE_INTENSIVE.
+   Depending on settings, bold may be rendered as a heavier font
+   in addition to a different color.
    */
 
 void Screen::reverseRendition(Character& p) const
@@ -398,8 +385,13 @@ void Screen::updateEffectiveRendition()
         _effectiveBackground = _currentBackground;
     }
 
-    if (_currentRendition & RE_BOLD)
-        _effectiveForeground.setIntensive();
+    if (_currentRendition & RE_BOLD) {
+        if (!(_currentRendition & RE_FAINT))
+            _effectiveForeground.setIntensive();
+    } else {
+        if (_currentRendition & RE_FAINT)
+            _effectiveForeground.setFaint();
+    }
 }
 
 void Screen::copyFromHistory(Character* dest, int startLine, int count) const
@@ -990,13 +982,13 @@ void Screen::clearEntireLine()
     clearImage(loc(0, _cuY), loc(_columns - 1, _cuY), ' ');
 }
 
-void Screen::setRendition(int rendention)
+void Screen::setRendition(RenditionFlags rendention)
 {
     _currentRendition |= rendention;
     updateEffectiveRendition();
 }
 
-void Screen::resetRendition(int rendention)
+void Screen::resetRendition(RenditionFlags rendention)
 {
     _currentRendition &= ~rendention;
     updateEffectiveRendition();
