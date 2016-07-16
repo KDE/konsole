@@ -43,6 +43,7 @@
 
 namespace Konsole
 {
+
 class TerminalCharacterDecoder;
 class TerminalDisplay;
 class HistoryType;
@@ -270,14 +271,14 @@ public:
      *
      * @see Character::rendition
      */
-    void setRendition(int rendition);
+    void setRendition(RenditionFlags rendition);
     /**
      * Disables the given @p rendition flag.  Rendition flags control the appearance
      * of characters on the screen.
      *
      * @see Character::rendition
      */
-    void resetRendition(int rendition);
+    void resetRendition(RenditionFlags rendition);
 
     /**
      * Sets the cursor's foreground color.
@@ -673,7 +674,7 @@ private:
     // cursor color and rendition info
     CharacterColor _currentForeground;
     CharacterColor _currentBackground;
-    quint8 _currentRendition;
+    RenditionFlags _currentRendition;
 
     // margins ----------------
     int _topMargin;
@@ -696,7 +697,7 @@ private:
     // effective colors and rendition ------------
     CharacterColor _effectiveForeground; // These are derived from
     CharacterColor _effectiveBackground; // the cu_* variables above
-    quint8 _effectiveRendition;          // to speed up operation
+    RenditionFlags _effectiveRendition;  // to speed up operation
 
     class SavedState
     {
@@ -706,7 +707,7 @@ private:
 
         int cursorColumn;
         int cursorLine;
-        quint8 rendition;
+        RenditionFlags rendition;
         CharacterColor foreground;
         CharacterColor background;
     };

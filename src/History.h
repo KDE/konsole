@@ -193,7 +193,7 @@ public:
 
     CharacterColor fgColor, bgColor;
     quint16 startPos;
-    quint8 rendition;
+    RenditionFlags rendition;
     bool isRealCharacter;
 };
 
