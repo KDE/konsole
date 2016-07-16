@@ -232,9 +232,9 @@ void TerminalDisplay::setVTFont(const QFont& f)
 
     QFontInfo fontInfo(newFont);
 
-    if (!fontInfo.fixedPitch()) {
-        qWarning() << "Using a variable-width font - this might cause display problems";
-    }
+//    if (!fontInfo.fixedPitch()) {
+//        qWarning() << "Using a variable-width font - this might cause display problems";
+//    }
 
     // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch()
     // related?  https://bugreports.qt.io/browse/QTBUG-34082

@@ -575,6 +575,16 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="showAllFontsButton">
+              <property name="toolTip">
+               <string>Show all fonts instead of the monospaced fonts</string>
+              </property>
+              <property name="text">
+               <string>Show All Fonts</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer name="horizontalSpacer_4">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
