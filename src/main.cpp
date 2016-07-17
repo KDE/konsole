@@ -302,7 +302,9 @@ void fillCommandLineOptions(QCommandLineParser &parser)
     auto titleOption = QCommandLineOption(QStringList() << QStringLiteral("T"),
                                           QStringLiteral("Debian policy compatibility, not used"),
                                           QStringLiteral("value"));
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     titleOption.setHidden(true);
+#endif
     parser.addOption(titleOption);
 }
 
