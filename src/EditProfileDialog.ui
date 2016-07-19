@@ -613,6 +613,16 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="useFontLineCharactersButton">
+            <property name="toolTip">
+             <string>Use the selected font for line characters instead of the builtin code</string>
+            </property>
+            <property name="text">
+             <string>Use line characters contained in font</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

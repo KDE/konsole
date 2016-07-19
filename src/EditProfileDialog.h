@@ -126,6 +126,7 @@ private slots:
     void showAllFontsButtonWarning(bool enable);
     void setAntialiasText(bool enable);
     void setBoldIntense(bool enable);
+    void useFontLineCharacters(bool enable);
     void showFontDialog();
     void newColorScheme();
     void editColorScheme();

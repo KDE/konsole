@@ -415,6 +415,21 @@ public:
     }
 
     /**
+     * Specifies whether line characters will be displayed using font instead
+     * of builtin code.
+     * as bold. Defaults to false.
+     */
+    void setUseFontLineCharacters(bool value) {
+        _useFontLineCharacters = value;
+    }
+    /**
+     * Returns true if font line characters will be used.
+     */
+    bool getFontLineCharacters() const {
+        return _useFontLineCharacters;
+    }
+
+    /**
      * Sets whether or not the current height and width of the
      * terminal in lines and columns is displayed whilst the widget
      * is being resized.
@@ -920,6 +935,7 @@ private:
     InputMethodData _inputMethodData;
 
     bool _antialiasText;   // do we anti-alias or not
+    bool _useFontLineCharacters;
 
     bool _printerFriendly; // are we currently painting to a printer in black/white mode
 
