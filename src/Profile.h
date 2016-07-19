@@ -223,6 +223,9 @@ public:
         /** (bool) Whether character with intense colors should be rendered
          * in bold font or just in bright color. */
         BoldIntense,
+        /** (bool) Whether to use font's line characters instead of the
+         * builtin code. */
+        UseFontLineCharacters,
         /** (bool) Whether new sessions should be started in the same
          * directory as the currently active session.
          */
@@ -477,6 +480,11 @@ public:
     /** Convenience method for property<bool>(Profile::BoldIntense) */
     bool boldIntense() const {
         return property<bool>(Profile::BoldIntense);
+    }
+
+    /** Convenience method for property<bool>(Profile::UseFontLineCharacters)*/
+    bool useFontLineCharacters() const {
+        return property<bool>(Profile::UseFontLineCharacters);
     }
 
     /** Convenience method for property<bool>(Profile::StartInCurrentSessionDir) */

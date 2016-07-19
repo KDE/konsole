@@ -375,6 +375,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _filterUpdateRequired(true)
     , _cursorShape(Enum::BlockCursor)
     , _antialiasText(true)
+    , _useFontLineCharacters(false)
     , _printerFriendly(false)
     , _sessionController(0)
     , _trimTrailingSpaces(false)
@@ -854,7 +855,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
     }
 
     // draw text
-    if (isLineCharString(text)) {
+    if (isLineCharString(text) && !_useFontLineCharacters) {
         drawLineCharString(painter, rect.x(), rect.y(), text, style);
     } else {
         // Force using LTR as the document layout for the terminal area, because
