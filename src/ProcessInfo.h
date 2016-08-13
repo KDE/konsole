@@ -231,6 +231,13 @@ protected:
      */
     virtual bool readProcessInfo(int pid) = 0;
 
+    /**
+     * Determine the current directory of the process.
+     * @param pid process ID to use
+     * @return true on success
+     */
+    virtual bool readCurrentDir(int pid) = 0;
+
     /* Read the user name */
     virtual void readUserName(void) = 0;
 
@@ -316,6 +323,7 @@ public:
     explicit NullProcessInfo(int pid, const QString& titleFormat);
 protected:
     virtual bool readProcessInfo(int pid);
+    virtual bool readCurrentDir(int pid);
     virtual void readUserName(void);
 };
 
@@ -356,13 +364,6 @@ private:
      * @return true on success
      */
     virtual bool readArguments(int pid) = 0;
-
-    /**
-     * Determine the current directory of the process.
-     * @param pid process ID to use
-     * @return true on success
-     */
-    virtual bool readCurrentDir(int pid) = 0;
 };
 #endif
 

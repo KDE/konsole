@@ -97,7 +97,7 @@ void ProcessInfo::setError(Error error)
 
 void ProcessInfo::update()
 {
-    readProcessInfo(_pid);
+    readCurrentDir(_pid);
 }
 
 QString ProcessInfo::validCurrentDir() const
@@ -360,6 +360,11 @@ bool NullProcessInfo::readProcessInfo(int /*pid*/)
     return false;
 }
 
+bool NullProcessInfo::readCurrentDir(int /*pid*/)
+{
+    return false;
+}
+
 void NullProcessInfo::readUserName()
 {
 }
@@ -421,6 +426,24 @@ class LinuxProcessInfo : public UnixProcessInfo
 public:
     LinuxProcessInfo(int aPid, const QString& titleFormat) :
         UnixProcessInfo(aPid, titleFormat) {
+    }
+
+protected:
+    virtual bool readCurrentDir(int aPid) {
+        char path_buffer[MAXPATHLEN + 1];
+        path_buffer[MAXPATHLEN] = 0;
+        QByteArray procCwd = QFile::encodeName(QStringLiteral("/proc/%1/cwd").arg(aPid));
+        const int length = readlink(procCwd.constData(), path_buffer, MAXPATHLEN);
+        if (length == -1) {
+            setError(UnknownError);
+            return false;
+        }
+
+        path_buffer[length] = '\0';
+        QString path = QFile::decodeName(path_buffer);
+
+        setCurrentDir(path);
+        return true;
     }
 
 private:
@@ -559,23 +582,6 @@ private:
 
         return true;
     }
-
-    virtual bool readCurrentDir(int aPid) {
-        char path_buffer[MAXPATHLEN + 1];
-        path_buffer[MAXPATHLEN] = 0;
-        QByteArray procCwd = QFile::encodeName(QStringLiteral("/proc/%1/cwd").arg(aPid));
-        const int length = readlink(procCwd.constData(), path_buffer, MAXPATHLEN);
-        if (length == -1) {
-            setError(UnknownError);
-            return false;
-        }
-
-        path_buffer[length] = '\0';
-        QString path = QFile::decodeName(path_buffer);
-
-        setCurrentDir(path);
-        return true;
-    }
 };
 
 #elif defined(Q_OS_FREEBSD)
@@ -584,6 +590,48 @@ class FreeBSDProcessInfo : public UnixProcessInfo
 public:
     FreeBSDProcessInfo(int aPid, const QString& titleFormat) :
         UnixProcessInfo(aPid, titleFormat) {
+    }
+
+protected:
+    virtual bool readCurrentDir(int aPid) {
+#if defined(HAVE_OS_DRAGONFLYBSD)
+        char buf[PATH_MAX];
+        int managementInfoBase[4];
+        size_t len;
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC;
+        managementInfoBase[2] = KERN_PROC_CWD;
+        managementInfoBase[3] = aPid;
+
+        len = sizeof(buf);
+        if (sysctl(managementInfoBase, 4, buf, &len, NULL, 0) == -1)
+            return false;
+
+        setCurrentDir(buf);
+
+        return true;
+#else
+        int numrecords;
+        struct kinfo_file* info = 0;
+
+        info = kinfo_getfile(aPid, &numrecords);
+
+        if (!info)
+            return false;
+
+        for (int i = 0; i < numrecords; ++i) {
+            if (info[i].kf_fd == KF_FD_TYPE_CWD) {
+                setCurrentDir(info[i].kf_path);
+
+                free(info);
+                return true;
+            }
+        }
+
+        free(info);
+        return false;
+#endif
     }
 
 private:
@@ -653,47 +701,6 @@ private:
 
         return true;
     }
-
-    virtual bool readCurrentDir(int aPid) {
-#if defined(HAVE_OS_DRAGONFLYBSD)
-        char buf[PATH_MAX];
-        int managementInfoBase[4];
-        size_t len;
-
-        managementInfoBase[0] = CTL_KERN;
-        managementInfoBase[1] = KERN_PROC;
-        managementInfoBase[2] = KERN_PROC_CWD;
-        managementInfoBase[3] = aPid;
-
-        len = sizeof(buf);
-        if (sysctl(managementInfoBase, 4, buf, &len, NULL, 0) == -1)
-            return false;
-
-        setCurrentDir(buf);
-
-        return true;
-#else
-        int numrecords;
-        struct kinfo_file* info = 0;
-
-        info = kinfo_getfile(aPid, &numrecords);
-
-        if (!info)
-            return false;
-
-        for (int i = 0; i < numrecords; ++i) {
-            if (info[i].kf_fd == KF_FD_TYPE_CWD) {
-                setCurrentDir(info[i].kf_path);
-
-                free(info);
-                return true;
-            }
-        }
-
-        free(info);
-        return false;
-#endif
-    }
 };
 
 #elif defined(Q_OS_OPENBSD)
@@ -702,6 +709,26 @@ class OpenBSDProcessInfo : public UnixProcessInfo
 public:
     OpenBSDProcessInfo(int aPid, const QString& titleFormat) :
         UnixProcessInfo(aPid, titleFormat) {
+    }
+
+protected:
+    virtual bool readCurrentDir(int aPid) {
+        char    buf[PATH_MAX];
+        int     managementInfoBase[3];
+        size_t  len;
+
+        managementInfoBase[0] = CTL_KERN;
+        managementInfoBase[1] = KERN_PROC_CWD;
+        managementInfoBase[2] = aPid;
+
+        len = sizeof(buf);
+        if (::sysctl(managementInfoBase, 3, buf, &len, NULL, 0) == -1) {
+            qWarning() << "sysctl() call failed with code" << errno;
+            return false;
+        }
+
+        setCurrentDir(buf);
+        return true;
     }
 
 private:
@@ -787,25 +814,6 @@ private:
         free(argv);
         return true;
     }
-
-    virtual bool readCurrentDir(int aPid) {
-        char    buf[PATH_MAX];
-        int     managementInfoBase[3];
-        size_t  len;
-
-        managementInfoBase[0] = CTL_KERN;
-        managementInfoBase[1] = KERN_PROC_CWD;
-        managementInfoBase[2] = aPid;
-
-        len = sizeof(buf);
-        if (::sysctl(managementInfoBase, 3, buf, &len, NULL, 0) == -1) {
-            qWarning() << "sysctl() call failed with code" << errno;
-            return false;
-        }
-
-        setCurrentDir(buf);
-        return true;
-    }
 };
 
 #elif defined(Q_OS_OSX)
@@ -814,6 +822,17 @@ class MacProcessInfo : public UnixProcessInfo
 public:
     MacProcessInfo(int aPid, const QString& titleFormat) :
         UnixProcessInfo(aPid, titleFormat) {
+    }
+
+protected:
+    virtual bool readCurrentDir(int aPid) {
+        struct proc_vnodepathinfo vpi;
+        const int nb = proc_pidinfo(aPid, PROC_PIDVNODEPATHINFO, 0, &vpi, sizeof(vpi));
+        if (nb == sizeof(vpi)) {
+            setCurrentDir(QString(vpi.pvi_cdir.vip_path));
+            return true;
+        }
+        return false;
     }
 
 private:
@@ -875,15 +894,6 @@ private:
         Q_UNUSED(aPid);
         return false;
     }
-    virtual bool readCurrentDir(int aPid) {
-        struct proc_vnodepathinfo vpi;
-        const int nb = proc_pidinfo(aPid, PROC_PIDVNODEPATHINFO, 0, &vpi, sizeof(vpi));
-        if (nb == sizeof(vpi)) {
-            setCurrentDir(QString(vpi.pvi_cdir.vip_path));
-            return true;
-        }
-        return false;
-    }
 };
 
 #elif defined(Q_OS_SOLARIS)
@@ -904,6 +914,27 @@ public:
     SolarisProcessInfo(int aPid, const QString& titleFormat)
         : UnixProcessInfo(aPid, titleFormat) {
     }
+
+protected:
+    // FIXME: This will have the same issues as BKO 251351; the Linux
+    // version uses readlink.
+    virtual bool readCurrentDir(int aPid) {
+        QFileInfo info(QString("/proc/%1/path/cwd").arg(aPid));
+        const bool readable = info.isReadable();
+
+        if (readable && info.isSymLink()) {
+            setCurrentDir(info.symLinkTarget());
+            return true;
+        } else {
+            if (!readable)
+                setError(PermissionsError);
+            else
+                setError(UnknownError);
+
+            return false;
+        }
+    }
+
 private:
     virtual bool readProcInfo(int aPid) {
         QFile psinfo(QString("/proc/%1/psinfo").arg(aPid));
@@ -928,25 +959,6 @@ private:
     virtual bool readArguments(int /*pid*/) {
         // Handled in readProcInfo()
         return false;
-    }
-
-    // FIXME: This will have the same issues as BKO 251351; the Linux
-    // version uses readlink.
-    virtual bool readCurrentDir(int aPid) {
-        QFileInfo info(QString("/proc/%1/path/cwd").arg(aPid));
-        const bool readable = info.isReadable();
-
-        if (readable && info.isSymLink()) {
-            setCurrentDir(info.symLinkTarget());
-            return true;
-        } else {
-            if (!readable)
-                setError(PermissionsError);
-            else
-                setError(UnknownError);
-
-            return false;
-        }
     }
 };
 #endif
@@ -1124,18 +1136,21 @@ QString SSHProcessInfo::format(const QString& input) const
 
 ProcessInfo* ProcessInfo::newInstance(int aPid, const QString& titleFormat)
 {
+    ProcessInfo *info;
 #if defined(Q_OS_LINUX)
-    return new LinuxProcessInfo(aPid, titleFormat);
+    info = new LinuxProcessInfo(aPid, titleFormat);
 #elif defined(Q_OS_SOLARIS)
-    return new SolarisProcessInfo(aPid, titleFormat);
+    info = new SolarisProcessInfo(aPid, titleFormat);
 #elif defined(Q_OS_OSX)
-    return new MacProcessInfo(aPid, titleFormat);
+    info = new MacProcessInfo(aPid, titleFormat);
 #elif defined(Q_OS_FREEBSD)
-    return new FreeBSDProcessInfo(aPid, titleFormat);
+    info = new FreeBSDProcessInfo(aPid, titleFormat);
 #elif defined(Q_OS_OPENBSD)
-    return new OpenBSDProcessInfo(aPid, titleFormat);
+    info = new OpenBSDProcessInfo(aPid, titleFormat);
 #else
-    return new NullProcessInfo(aPid, titleFormat);
+    info = new NullProcessInfo(aPid, titleFormat);
 #endif
+    info->readProcessInfo(aPid);
+    return info;
 }
 
