@@ -109,7 +109,6 @@ public:
     void setNavigationStyleSheetFromFile(const QUrl& stylesheetfile);
     void setNavigationBehavior(int behavior);
     void setShowQuickButtons(bool show);
-    void setTransparency(bool useTransparency);
 
 signals:
 
@@ -211,7 +210,6 @@ private:
 
     bool _menuBarInitialVisibility;
     bool _menuBarInitialVisibilityApplied;
-    bool _useTransparency;
 };
 }
 

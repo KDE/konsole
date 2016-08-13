@@ -40,6 +40,7 @@
 #include "KonsoleSettings.h"
 #include "ViewManager.h"
 #include "SessionController.h"
+#include "WindowSystemInfo.h"
 
 using namespace Konsole;
 
@@ -56,8 +57,9 @@ Application::~Application()
 
 MainWindow* Application::newMainWindow()
 {
+    WindowSystemInfo::HAVE_TRANSPARENCY = !m_parser.isSet(QStringLiteral("notransparency"));
+
     MainWindow* window = new MainWindow();
-    window->setTransparency(!m_parser.isSet(QStringLiteral("notransparency")));
 
     connect(window, &Konsole::MainWindow::newWindowRequest, this, &Konsole::Application::createWindow);
     connect(window, &Konsole::MainWindow::viewDetached, this, &Konsole::Application::detachView);

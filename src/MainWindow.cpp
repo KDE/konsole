@@ -64,7 +64,6 @@ MainWindow::MainWindow()
     , _pluggedController(0)
     , _menuBarInitialVisibility(true)
     , _menuBarInitialVisibilityApplied(false)
-    , _useTransparency(false)
 {
     if (!KonsoleSettings::saveGeometryOnExit()) {
         // If we are not using the global Konsole save geometry on exit,
@@ -82,8 +81,6 @@ MainWindow::MainWindow()
             }
         }
     }
-
-    connect(KWindowSystem::self(), &KWindowSystem::compositingChanged, this, &MainWindow::updateUseTransparency);
 
     updateUseTransparency();
 
@@ -129,11 +126,14 @@ MainWindow::MainWindow()
 
 void MainWindow::updateUseTransparency()
 {
-    bool useTranslucency = KWindowSystem::compositingActive() && _useTransparency;
+    if (!WindowSystemInfo::HAVE_TRANSPARENCY) {
+        return;
+    }
+
+    bool useTranslucency = KWindowSystem::compositingActive();
 
     setAttribute(Qt::WA_TranslucentBackground, useTranslucency);
     setAttribute(Qt::WA_NoSystemBackground, false);
-
     WindowSystemInfo::HAVE_TRANSPARENCY = useTranslucency;
 }
 
@@ -763,11 +763,6 @@ void MainWindow::setNavigationStyleSheetFromFile(const QUrl& styleSheetFile)
 void MainWindow::setShowQuickButtons(bool show)
 {
     _viewManager->setShowQuickButtons(show);
-}
-
-void MainWindow::setTransparency(bool useTransparency)
-{
-    _useTransparency = useTransparency;
 }
 
 void MainWindow::activateMenuBar()
