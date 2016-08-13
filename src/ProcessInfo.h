@@ -156,26 +156,6 @@ public:
     void setUserHomeDir();
 
     /**
-     * Parses an input string, looking for markers beginning with a '%'
-     * character and returns a string with the markers replaced
-     * with information from this process description.
-     * <br>
-     * The markers recognized are:
-     * <ul>
-     * <li> %u - Name of the user which owns the process. </li>
-     * <li> %n - Replaced with the name of the process.   </li>
-     * <li> %d - Replaced with the last part of the path name of the
-     *      process' current working directory.
-     *
-     *      (eg. if the current directory is '/home/bob' then
-     *      'bob' would be returned)
-     * </li>
-     * <li> %D - Replaced with the current working directory of the process. </li>
-     * </ul>
-     */
-    QString format(const QString& text) const;
-
-    /**
      * This enum describes the errors which can occur when trying to read
      * a process's information.
      */
@@ -203,6 +183,11 @@ public:
         UID                 = 64
     };
     Q_DECLARE_FLAGS(Fields, Field)
+
+    // takes a full directory path and returns a
+    // shortened version suitable for display in
+    // space-constrained UI elements (eg. tabs)
+    QString formatShortDir(const QString& dirPath) const;
 
 protected:
     /**
@@ -278,10 +263,6 @@ protected:
     bool userNameRequired() const;
 
 private:
-    // takes a full directory path and returns a
-    // shortened version suitable for display in
-    // space-constrained UI elements (eg. tabs)
-    QString formatShortDir(const QString& dirPath) const;
 
     Fields _fields;
 

@@ -1049,20 +1049,58 @@ bool Session::isRemote()
 
 QString Session::getDynamicTitle()
 {
-    // update current directory from process
-    updateWorkingDirectory();
 
     ProcessInfo* process = getProcessInfo();
 
     // format tab titles using process info
     bool ok = false;
-    QString title;
     if (process->name(&ok) == "ssh" && ok) {
         SSHProcessInfo sshInfo(*process);
-        title = sshInfo.format(tabTitleFormat(Session::RemoteTabTitle));
-    } else {
-        title = process->format(tabTitleFormat(Session::LocalTabTitle));
+        return sshInfo.format(tabTitleFormat(Session::RemoteTabTitle));
     }
+
+    /*
+     * Parses an input string, looking for markers beginning with a '%'
+     * character and returns a string with the markers replaced
+     * with information from this process description.
+     * <br>
+     * The markers recognized are:
+     * <ul>
+     * <li> %u - Name of the user which owns the process. </li>
+     * <li> %n - Replaced with the name of the process.   </li>
+     * <li> %d - Replaced with the last part of the path name of the
+     *      process' current working directory.
+     *
+     *      (eg. if the current directory is '/home/bob' then
+     *      'bob' would be returned)
+     * </li>
+     * <li> %D - Replaced with the current working directory of the process. </li>
+     * </ul>
+     */
+    QString title = tabTitleFormat(Session::LocalTabTitle);
+    // search for and replace known marker
+    title.replace(QLatin1String("%u"), process->userName());
+    title.replace(QLatin1String("%h"), process->localHost());
+    title.replace(QLatin1String("%n"), process->name(&ok));
+
+    QString dir = _reportedWorkingUrl.toLocalFile();
+    if (dir.isEmpty()) {
+        // update current directory from process
+        updateWorkingDirectory();
+        dir = process->validCurrentDir();
+    }
+
+    if (title.contains(QLatin1String("%D"))) {
+        QString homeDir = process->userHomeDir();
+        QString tempDir = dir;
+        // Change User's Home Dir w/ ~ only at the beginning
+        if (tempDir.startsWith(homeDir)) {
+            tempDir.remove(0, homeDir.length());
+            tempDir.prepend('~');
+        }
+        title.replace(QLatin1String("%D"), tempDir);
+    }
+    title.replace(QLatin1String("%d"), process->formatShortDir(dir));
 
     return title;
 }

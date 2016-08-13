@@ -120,33 +120,6 @@ QString ProcessInfo::validCurrentDir() const
     return dir;
 }
 
-QString ProcessInfo::format(const QString& input) const
-{
-    bool ok = false;
-
-    QString output(input);
-
-    // search for and replace known marker
-    output.replace(QLatin1String("%u"), userName());
-    output.replace(QLatin1String("%h"), localHost());
-    output.replace(QLatin1String("%n"), name(&ok));
-
-    QString dir = validCurrentDir();
-    if (output.contains(QLatin1String("%D"))) {
-        QString homeDir = userHomeDir();
-        QString tempDir = dir;
-        // Change User's Home Dir w/ ~ only at the beginning
-        if (tempDir.startsWith(homeDir)) {
-            tempDir.remove(0, homeDir.length());
-            tempDir.prepend('~');
-        }
-        output.replace(QLatin1String("%D"), tempDir);
-    }
-    output.replace(QLatin1String("%d"), formatShortDir(dir));
-
-    return output;
-}
-
 QSet<QString> ProcessInfo::_commonDirNames;
 
 QSet<QString> ProcessInfo::commonDirNames()
