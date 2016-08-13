@@ -68,15 +68,13 @@
 
 using namespace Konsole;
 
-ProcessInfo::ProcessInfo(int aPid , bool enableEnvironmentRead)
-    : _fields(ARGUMENTS | ENVIRONMENT)   // arguments and environments
+ProcessInfo::ProcessInfo(int aPid)
+    : _fields(ARGUMENTS)   // arguments
     // are currently always valid,
     // they just return an empty
     // vector / map respectively
     // if no arguments
-    // or environment bindings
     // have been explicitly set
-    , _enableEnvironmentRead(enableEnvironmentRead)
     , _pid(aPid)
     , _parentPid(0)
     , _foregroundPid(0)
@@ -99,7 +97,7 @@ void ProcessInfo::setError(Error error)
 
 void ProcessInfo::update()
 {
-    readProcessInfo(_pid, _enableEnvironmentRead);
+    readProcessInfo(_pid);
 }
 
 QString ProcessInfo::validCurrentDir() const
@@ -200,13 +198,6 @@ QVector<QString> ProcessInfo::arguments(bool* ok) const
     *ok = _fields.testFlag(ARGUMENTS);
 
     return _arguments;
-}
-
-QMap<QString, QString> ProcessInfo::environment(bool* ok) const
-{
-    *ok = _fields.testFlag(ENVIRONMENT);
-
-    return _environment;
 }
 
 bool ProcessInfo::isValid() const
@@ -340,11 +331,6 @@ void ProcessInfo::clearArguments()
     _arguments.clear();
 }
 
-void ProcessInfo::addEnvironmentBinding(const QString& name , const QString& value)
-{
-    _environment.insert(name, value);
-}
-
 void ProcessInfo::setFileError(QFile::FileError error)
 {
     switch (error) {
@@ -364,12 +350,12 @@ void ProcessInfo::setFileError(QFile::FileError error)
 // implementations of the UnixProcessInfo abstract class.
 //
 
-NullProcessInfo::NullProcessInfo(int aPid, const QString& /*titleFormat*/, bool enableEnvironmentRead)
-    : ProcessInfo(aPid, enableEnvironmentRead)
+NullProcessInfo::NullProcessInfo(int aPid, const QString& /*titleFormat*/)
+    : ProcessInfo(aPid)
 {
 }
 
-bool NullProcessInfo::readProcessInfo(int /*pid*/ , bool /*enableEnvironmentRead*/)
+bool NullProcessInfo::readProcessInfo(int /*pid*/)
 {
     return false;
 }
@@ -379,13 +365,13 @@ void NullProcessInfo::readUserName()
 }
 
 #if !defined(Q_OS_WIN)
-UnixProcessInfo::UnixProcessInfo(int aPid, const QString& titleFormat, bool enableEnvironmentRead)
-    : ProcessInfo(aPid, enableEnvironmentRead)
+UnixProcessInfo::UnixProcessInfo(int aPid, const QString& titleFormat)
+    : ProcessInfo(aPid)
 {
     setUserNameRequired(titleFormat.contains(QLatin1String("%u")));
 }
 
-bool UnixProcessInfo::readProcessInfo(int aPid , bool enableEnvironmentRead)
+bool UnixProcessInfo::readProcessInfo(int aPid)
 {
     // prevent _arguments from growing longer and longer each time this
     // method is called.
@@ -395,9 +381,6 @@ bool UnixProcessInfo::readProcessInfo(int aPid , bool enableEnvironmentRead)
     if (ok) {
         ok |= readArguments(aPid);
         ok |= readCurrentDir(aPid);
-        if (enableEnvironmentRead) {
-            ok |= readEnvironment(aPid);
-        }
     }
     return ok;
 }
@@ -436,8 +419,8 @@ void UnixProcessInfo::readUserName()
 class LinuxProcessInfo : public UnixProcessInfo
 {
 public:
-    LinuxProcessInfo(int aPid, const QString& titleFormat, bool env) :
-        UnixProcessInfo(aPid, titleFormat, env) {
+    LinuxProcessInfo(int aPid, const QString& titleFormat) :
+        UnixProcessInfo(aPid, titleFormat) {
     }
 
 private:
@@ -593,46 +576,14 @@ private:
         setCurrentDir(path);
         return true;
     }
-
-    virtual bool readEnvironment(int aPid) {
-        // read environment bindings file found at /proc/<pid>/environ
-        // the expected format is a list of KEY=VALUE strings delimited by null
-        // characters and ending in a double null character pair.
-
-        QFile environmentFile(QStringLiteral("/proc/%1/environ").arg(aPid));
-        if (environmentFile.open(QIODevice::ReadOnly)) {
-            QTextStream stream(&environmentFile);
-            const QString& data = stream.readAll();
-
-            const QStringList& bindingList = data.split(QChar('\0'));
-
-            foreach(const QString & entry , bindingList) {
-                QString name;
-                QString value;
-
-                const int splitPos = entry.indexOf('=');
-
-                if (splitPos != -1) {
-                    name = entry.mid(0, splitPos);
-                    value = entry.mid(splitPos + 1, -1);
-
-                    addEnvironmentBinding(name, value);
-                }
-            }
-        } else {
-            setFileError(environmentFile.error());
-        }
-
-        return true;
-    }
 };
 
 #elif defined(Q_OS_FREEBSD)
 class FreeBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    FreeBSDProcessInfo(int aPid, const QString& titleFormat, bool readEnvironment) :
-        UnixProcessInfo(aPid, titleFormat, readEnvironment) {
+    FreeBSDProcessInfo(int aPid, const QString& titleFormat) :
+        UnixProcessInfo(aPid, titleFormat) {
     }
 
 private:
@@ -703,50 +654,6 @@ private:
         return true;
     }
 
-    virtual bool readEnvironment(int aPid) {
-
-        struct procstat *prstat = procstat_open_sysctl();
-        if (prstat == nullptr) {
-            return false;
-        }
-
-        kinfo_proc *procinfo;
-        unsigned int cnt;
-        procinfo = procstat_getprocs(prstat, KERN_PROC_PID, aPid, &cnt);
-        if (procinfo == nullptr || cnt != 1)
-        {
-            procstat_close(prstat);
-            return false;
-        }
-
-        // pass 0, as the third argument, as we want to have every environment
-        // variable defined -- code courtesy of procstats procstats_arg.c
-        char **envs = procstat_getenvv(prstat, procinfo, 0);
-        if (envs == nullptr)
-        {
-            procstat_close(prstat);
-            return false;
-        }
-        int i;
-        QString name, value;
-        for (i = 0; envs[i] != nullptr; i++)
-        {
-            QString entry = QString::fromLocal8Bit(envs[i]);
-            const int splitPos = entry.indexOf('=');
-
-            if (splitPos != -1) {
-                name = entry.mid(0, splitPos);
-                value = entry.mid(splitPos + 1, -1);
-
-                addEnvironmentBinding(name, value);
-            }
-        }
-
-        procstat_freeenvv(prstat);
-        procstat_close(prstat);
-        return true;
-    }
-
     virtual bool readCurrentDir(int aPid) {
 #if defined(HAVE_OS_DRAGONFLYBSD)
         char buf[PATH_MAX];
@@ -793,8 +700,8 @@ private:
 class OpenBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    OpenBSDProcessInfo(int aPid, const QString& titleFormat, bool readEnvironment) :
-        UnixProcessInfo(aPid, titleFormat, readEnvironment) {
+    OpenBSDProcessInfo(int aPid, const QString& titleFormat) :
+        UnixProcessInfo(aPid, titleFormat) {
     }
 
 private:
@@ -881,28 +788,6 @@ private:
         return true;
     }
 
-    virtual bool readEnvironment(int aPid) {
-        char**  envp;
-        char*   eqsign;
-
-        envp = readProcArgs(aPid, KERN_PROC_ENV);
-        if (envp == NULL) {
-            return false;
-        }
-
-        for (char **p = envp; *p != NULL; p++) {
-            eqsign = strchr(*p, '=');
-            if (eqsign == NULL || eqsign[1] == '\0') {
-                continue;
-            }
-            *eqsign = '\0';
-            addEnvironmentBinding(QString((const char *)p),
-                QString((const char *)eqsign + 1));
-        }
-        free(envp);
-        return true;
-    }
-
     virtual bool readCurrentDir(int aPid) {
         char    buf[PATH_MAX];
         int     managementInfoBase[3];
@@ -927,8 +812,8 @@ private:
 class MacProcessInfo : public UnixProcessInfo
 {
 public:
-    MacProcessInfo(int aPid, const QString& titleFormat, bool env) :
-        UnixProcessInfo(aPid, titleFormat, env) {
+    MacProcessInfo(int aPid, const QString& titleFormat) :
+        UnixProcessInfo(aPid, titleFormat) {
     }
 
 private:
@@ -999,10 +884,6 @@ private:
         }
         return false;
     }
-    virtual bool readEnvironment(int aPid) {
-        Q_UNUSED(aPid);
-        return false;
-    }
 };
 
 #elif defined(Q_OS_SOLARIS)
@@ -1020,8 +901,8 @@ private:
 class SolarisProcessInfo : public UnixProcessInfo
 {
 public:
-    SolarisProcessInfo(int aPid, const QString& titleFormat, bool readEnvironment)
-        : UnixProcessInfo(aPid, titleFormat, readEnvironment) {
+    SolarisProcessInfo(int aPid, const QString& titleFormat)
+        : UnixProcessInfo(aPid, titleFormat) {
     }
 private:
     virtual bool readProcInfo(int aPid) {
@@ -1046,11 +927,6 @@ private:
 
     virtual bool readArguments(int /*pid*/) {
         // Handled in readProcInfo()
-        return false;
-    }
-
-    virtual bool readEnvironment(int /*pid*/) {
-        // Not supported in Solaris
         return false;
     }
 
@@ -1246,20 +1122,20 @@ QString SSHProcessInfo::format(const QString& input) const
     return output;
 }
 
-ProcessInfo* ProcessInfo::newInstance(int aPid, const QString& titleFormat, bool enableEnvironmentRead)
+ProcessInfo* ProcessInfo::newInstance(int aPid, const QString& titleFormat)
 {
 #if defined(Q_OS_LINUX)
-    return new LinuxProcessInfo(aPid, titleFormat, enableEnvironmentRead);
+    return new LinuxProcessInfo(aPid, titleFormat);
 #elif defined(Q_OS_SOLARIS)
-    return new SolarisProcessInfo(aPid, titleFormat, enableEnvironmentRead);
+    return new SolarisProcessInfo(aPid, titleFormat);
 #elif defined(Q_OS_OSX)
-    return new MacProcessInfo(aPid, titleFormat, enableEnvironmentRead);
+    return new MacProcessInfo(aPid, titleFormat);
 #elif defined(Q_OS_FREEBSD)
-    return new FreeBSDProcessInfo(aPid, titleFormat, enableEnvironmentRead);
+    return new FreeBSDProcessInfo(aPid, titleFormat);
 #elif defined(Q_OS_OPENBSD)
-    return new OpenBSDProcessInfo(aPid, titleFormat, enableEnvironmentRead);
+    return new OpenBSDProcessInfo(aPid, titleFormat);
 #else
-    return new NullProcessInfo(aPid, titleFormat, enableEnvironmentRead);
+    return new NullProcessInfo(aPid, titleFormat);
 #endif
 }
 

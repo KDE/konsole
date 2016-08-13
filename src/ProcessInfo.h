@@ -32,8 +32,7 @@ namespace Konsole
  * Takes a snapshot of the state of a process and provides access to
  * information such as the process name, parent process,
  * the foreground process in the controlling terminal,
- * the arguments with which the process was started and the
- * environment.
+ * the arguments with which the process was started.
  *
  * To create a new snapshot, construct a new ProcessInfo instance,
  * using ProcessInfo::newInstance(),
@@ -79,13 +78,8 @@ public:
      * the current platform which provides information about a given process.
      *
      * @param pid The pid of the process to examine
-     * @param readEnvironment Specifies whether environment bindings should
-     * be read.  If this is false, then environment() calls will
-     * always fail.  This is an optimization to avoid the overhead
-     * of reading the (potentially large) environment data when it
-     * is not required.
      */
-    static ProcessInfo* newInstance(int pid, const QString& titleFormat, bool readEnvironment = false);
+    static ProcessInfo* newInstance(int pid, const QString& titleFormat);
 
     virtual ~ProcessInfo() {}
 
@@ -145,15 +139,6 @@ public:
      * @param ok Set to true if the arguments were read successfully or false otherwise.
      */
     QVector<QString> arguments(bool* ok) const;
-    /**
-     * Returns the environment bindings which the process
-     * was started with.
-     * In the returned map, the key is the name of the environment variable,
-     * and the value is the corresponding value.
-     *
-     * @param ok Set to true if the environment bindings were read successfully or false otherwise
-     */
-    QMap<QString, QString> environment(bool* ok) const;
 
     /**
      * Returns the current working directory of the process
@@ -213,10 +198,9 @@ public:
         PARENT_PID          = 2,
         FOREGROUND_PID      = 4,
         ARGUMENTS           = 8,
-        ENVIRONMENT         = 16,
-        NAME                = 32,
-        CURRENT_DIR         = 64,
-        UID                 = 128
+        NAME                = 16,
+        CURRENT_DIR         = 32,
+        UID                 = 64
     };
     Q_DECLARE_FLAGS(Fields, Field)
 
@@ -227,7 +211,7 @@ protected:
      * static ProcessInfo::newInstance() method which will return
      * a suitable ProcessInfo instance for the current platform.
      */
-    explicit ProcessInfo(int pid , bool readEnvironment = false);
+    explicit ProcessInfo(int pid );
 
     /**
      * This is called on construction to read the process state
@@ -244,10 +228,8 @@ protected:
      * has been set using setPid()
      *
      * @param pid The process id of the process to read
-     * @param readEnvironment Specifies whether the environment bindings
-     *                        for the process should be read
      */
-    virtual bool readProcessInfo(int pid , bool readEnvironment) = 0;
+    virtual bool readProcessInfo(int pid) = 0;
 
     /* Read the user name */
     virtual void readUserName(void) = 0;
@@ -285,15 +267,6 @@ protected:
      */
     void clearArguments();
 
-    /**
-     * Adds an environment binding for the process, as returned by
-     * environment()
-     *
-     * @param name The name of the environment variable, eg. "PATH"
-     * @param value The value of the environment variable, eg. "/bin"
-     */
-    void addEnvironmentBinding(const QString& name , const QString& value);
-
     void setUserNameRequired(bool need);
     bool userNameRequired() const;
 
@@ -305,8 +278,6 @@ private:
 
     Fields _fields;
 
-    bool _enableEnvironmentRead; // specifies whether to read the environment
-    // bindings when update() is called
     int _pid;
     int _parentPid;
     int _foregroundPid;
@@ -322,7 +293,6 @@ private:
     bool _userNameRequired;
 
     QVector<QString> _arguments;
-    QMap<QString, QString> _environment;
 
     static QSet<QString> commonDirNames();
     static QSet<QString> _commonDirNames;
@@ -343,9 +313,9 @@ public:
      * Constructs a new NullProcessInfo instance.
      * See ProcessInfo::newInstance()
      */
-    explicit NullProcessInfo(int pid, const QString& titleFormat, bool readEnvironment = false);
+    explicit NullProcessInfo(int pid, const QString& titleFormat);
 protected:
-    virtual bool readProcessInfo(int pid, bool readEnvironment);
+    virtual bool readProcessInfo(int pid);
     virtual void readUserName(void);
 };
 
@@ -361,14 +331,14 @@ public:
      * Constructs a new instance of UnixProcessInfo.
      * See ProcessInfo::newInstance()
      */
-    explicit UnixProcessInfo(int pid, const QString& titleFormat, bool readEnvironment = false);
+    explicit UnixProcessInfo(int pid, const QString& titleFormat);
 
 protected:
     /**
      * Implementation of ProcessInfo::readProcessInfo(); calls the
      * four private methods below in turn.
      */
-    virtual bool readProcessInfo(int pid , bool readEnvironment);
+    virtual bool readProcessInfo(int pid );
 
     virtual void readUserName(void);
 
@@ -379,13 +349,6 @@ private:
      * @return true on success
      */
     virtual bool readProcInfo(int pid) = 0;
-
-    /**
-     * Read the environment of the process. Sets _environment.
-     * @param pid process ID to use
-     * @return true on success
-     */
-    virtual bool readEnvironment(int pid) = 0;
 
     /**
      * Determine what arguments were passed to the process. Sets _arguments.
