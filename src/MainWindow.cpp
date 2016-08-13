@@ -581,7 +581,7 @@ bool MainWindow::queryClose()
     case KMessageBox::No:
         if (_pluggedController && _pluggedController->session()) {
             disconnectController(_pluggedController);
-            _pluggedController->closeSession();
+            _pluggedController->session()->closeInNormalWay();
         }
         return false;
     case KMessageBox::Cancel:
