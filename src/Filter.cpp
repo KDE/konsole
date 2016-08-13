@@ -337,7 +337,7 @@ void RegExpFilter::process()
 
     Q_ASSERT(text);
 
-    if (!_searchText.isValid()) {
+    if (!_searchText.isValid() || _searchText.pattern().isEmpty()) {
         return;
     }
 
