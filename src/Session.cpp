@@ -822,13 +822,18 @@ bool Session::closeInNormalWay()
         return true;
     }
 
-    _shellProcess->sendEof();
+    // Check if the default shell is running, in that case try sending an EOF for a clean exit
+    const QString defaultProc = program().split('/').last();
+    const QString currentProc = foregroundProcessName().split('/').last();
+    if (defaultProc == currentProc) {
+        _shellProcess->sendEof();
 
-    if (_shellProcess->waitForFinished(1000)) {
-        return true;
+        if (_shellProcess->waitForFinished(1000)) {
+            return true;
+        }
+        qWarning() << "shell did not close, sending SIGHUP";
     }
 
-    qWarning() << "shell did not close, sending SIGHUP";
 
     // We tried asking nicely, ask a bit less nicely
     if (kill(SIGHUP)) {
