@@ -429,7 +429,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     // that TerminalDisplay will handle repainting its entire area.
     setAttribute(Qt::WA_OpaquePaintEvent);
 
-    _gridLayout = new QGridLayout(this);
+    _gridLayout = new QGridLayout;
     _gridLayout->setContentsMargins(0, 0, 0, 0);
 
     setLayout(_gridLayout);
@@ -448,9 +448,6 @@ TerminalDisplay::~TerminalDisplay()
     disconnect(_blinkCursorTimer);
 
     delete[] _image;
-
-    delete _gridLayout;
-    delete _outputSuspendedLabel;
     delete _filterChain;
 }
 
@@ -3067,8 +3064,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
                                                 "<a href=\"http://en.wikipedia.org/wiki/Software_flow_control\">suspended</a>"
                                                 " by pressing Ctrl+S."
                                                 "  Press <b>Ctrl+Q</b> to resume."
-                                                "  Click <a href=\"#close\">here</a> to dismiss this message.</qt>"),
-                                           this);
+                                                "  Click <a href=\"#close\">here</a> to dismiss this message.</qt>"));
 
         QPalette palette(_outputSuspendedLabel->palette());
         KColorScheme::adjustBackground(palette, KColorScheme::NeutralBackground);
