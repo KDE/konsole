@@ -1201,12 +1201,6 @@ For more information, please visit
 </listitem>
 </varlistentry>
 
-<varlistentry>
-<term><option>--nofork</option></term>
-<listitem><para><action>Do not run in the background</action>.  This is often needed to mimic other terminal emulators.
-</para></listitem>
-</varlistentry>
-
 </variablelist>
 
 <para>&konsole; also accepts generic &Qt; and &kf5-full; options, see man pages qt5options and kf5options.</para>
