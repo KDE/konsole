@@ -461,17 +461,11 @@ public:
     }
 
     /**
-     * Enables or disables showing hints on URLs when ctrl is pressed
+     * Sets the modifiers that shows URL hints when they are pressed
      * Defaults to disabled.
      */
-    void setEnableUrlHints(bool on) {
-        _enableShowUrlHint = on;
-    }
-    /**
-     * Returns the status of the BiDi rendering in this widget.
-     */
-    bool areUrlHintsEnabled() const {
-        return _enableShowUrlHint;
+    void setUrlHintsModifiers(int modifiers) {
+        _urlHintsModifiers = Qt::KeyboardModifiers(modifiers);
     }
 
     /**
@@ -887,8 +881,8 @@ private:
     QTimer* _blinkTextTimer;
     QTimer* _blinkCursorTimer;
 
+    Qt::KeyboardModifiers _urlHintsModifiers;
     bool _showUrlHint;
-    bool _enableShowUrlHint;
     bool _underlineLinks;     // Underline URL and hosts on mouse hover
     bool _openLinksByDirectClick;     // Open URL and hosts by single mouse click
 

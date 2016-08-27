@@ -1066,10 +1066,6 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {
     BooleanOption  options[] = {
         {
-            _ui->enableUrlHints , Profile::EnableUrlHints ,
-            SLOT(toggleEnableUrlHints(bool))
-        },
-        {
             _ui->enableBlinkingTextButton , Profile::BlinkingTextEnabled ,
             SLOT(toggleBlinkingText(bool))
         },
@@ -1088,6 +1084,19 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
         { 0 , Profile::Property(0) , 0 }
     };
     setupCheckBoxes(options , profile);
+
+    // Setup the URL hints modifier checkboxes
+    {
+        int modifiers = profile->property<int>(Profile::UrlHintsModifiers);
+        _ui->urlHintsModifierShift->setChecked(modifiers & Qt::ShiftModifier);
+        _ui->urlHintsModifierCtrl->setChecked(modifiers & Qt::ControlModifier);
+        _ui->urlHintsModifierAlt->setChecked(modifiers & Qt::AltModifier);
+        _ui->urlHintsModifierMeta->setChecked(modifiers & Qt::MetaModifier);
+        connect(_ui->urlHintsModifierShift, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
+        connect(_ui->urlHintsModifierCtrl, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
+        connect(_ui->urlHintsModifierAlt, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
+        connect(_ui->urlHintsModifierMeta, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
+    }
 
     const int lineSpacing = profile->lineSpacing();
     _ui->lineSpacingSpinner->setValue(lineSpacing);
@@ -1197,9 +1206,14 @@ void EditProfileDialog::TripleClickModeChanged(int newValue)
 {
     updateTempProfileProperty(Profile::TripleClickMode, newValue);
 }
-void EditProfileDialog::toggleEnableUrlHints(bool enable)
+void EditProfileDialog::updateUrlHintsModifier(bool)
 {
-    updateTempProfileProperty(Profile::EnableUrlHints, enable);
+    Qt::KeyboardModifiers modifiers;
+    if (_ui->urlHintsModifierShift->isChecked()) modifiers |= Qt::ShiftModifier;
+    if (_ui->urlHintsModifierCtrl->isChecked())  modifiers |= Qt::ControlModifier;
+    if (_ui->urlHintsModifierAlt->isChecked())   modifiers |= Qt::AltModifier;
+    if (_ui->urlHintsModifierMeta->isChecked())  modifiers |= Qt::MetaModifier;
+    updateTempProfileProperty(Profile::UrlHintsModifiers, int(modifiers));
 }
 void EditProfileDialog::toggleBlinkingText(bool enable)
 {

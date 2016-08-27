@@ -252,10 +252,8 @@ public:
          * increases/decreases the terminal font size.
          */
         MouseWheelZoomEnabled,
-        /** (bool) Enables showing a hint for all visible URLs
-         * which allows activating URLs with the keyboard.
-         */
-        EnableUrlHints
+        /** (int) Keyboard modifiers to show URL hints */
+        UrlHintsModifiers
     };
 
     /**

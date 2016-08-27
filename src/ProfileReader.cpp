@@ -37,6 +37,9 @@ using namespace Konsole;
 
 // FIXME: A dup line from Profile.cpp - redo these
 static const char GENERAL_GROUP[]     = "General";
+static const char FEATURES_GROUP[]        = "Terminal Features";
+static const char URLHINTS_KEY[]          = "EnableUrlHints";
+static const char URLHINTSMODIFIERS_KEY[] = "UrlHintsModifiers";
 
 QStringList KDE4ProfileReader::findProfiles()
 {
@@ -92,6 +95,19 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile ,
 
         profile->setProperty(Profile::Command, shellCommand.command());
         profile->setProperty(Profile::Arguments, shellCommand.arguments());
+    }
+
+    // Check if the user earlier had set the URL hints option, and in that case set the default
+    // URL hints modifier to the earlier default.
+    if (config.hasGroup(FEATURES_GROUP)) {
+        KConfigGroup features = config.group(FEATURES_GROUP);
+        if (features.hasKey(URLHINTS_KEY)) {
+            bool enable = features.readEntry(URLHINTS_KEY, false);
+            if (enable && !features.hasKey(URLHINTSMODIFIERS_KEY)) {
+                features.writeEntry(URLHINTSMODIFIERS_KEY, int(Qt::ControlModifier));
+            }
+            features.deleteEntry(URLHINTS_KEY);
+        }
     }
 
     profile->setProperty(Profile::UntranslatedName, general.readEntryUntranslated("Name"));

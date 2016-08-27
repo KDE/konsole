@@ -358,8 +358,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _textBlinking(false)
     , _cursorBlinking(false)
     , _hasTextBlinker(false)
+    , _urlHintsModifiers(Qt::NoModifier)
     , _showUrlHint(false)
-    , _enableShowUrlHint(false)
     , _underlineLinks(true)
     , _openLinksByDirectClick(false)
     , _ctrlRequiredForDrag(true)
@@ -3115,7 +3115,7 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
-    if (_enableShowUrlHint && event->modifiers() & Qt::ControlModifier) {
+    if (event->modifiers() == _urlHintsModifiers) {
         int hintSelected = event->key() - 0x31;
         if (hintSelected >= 0 && hintSelected < 10 && hintSelected < _filterChain->hotSpots().count()) {
             _filterChain->hotSpots().at(hintSelected)->activate();

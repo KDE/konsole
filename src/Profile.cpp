@@ -91,7 +91,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { ScrollFullPage , "ScrollFullPage" , SCROLLING_GROUP , QVariant::Bool }
 
     // Terminal Features
-    , { EnableUrlHints , "EnableUrlHints" , TERMINAL_GROUP , QVariant::Bool }
+    , { UrlHintsModifiers , "UrlHintsModifiers" , TERMINAL_GROUP , QVariant::Int }
     , { BlinkingTextEnabled , "BlinkingTextEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { FlowControlEnabled , "FlowControlEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { BidiRenderingEnabled , "BidiRenderingEnabled" , TERMINAL_GROUP , QVariant::Bool }
@@ -176,7 +176,7 @@ FallbackProfile::FallbackProfile()
     setProperty(ScrollFullPage, false);
 
     setProperty(FlowControlEnabled, true);
-    setProperty(EnableUrlHints, false);
+    setProperty(UrlHintsModifiers, 0);
     setProperty(BlinkingTextEnabled, true);
     setProperty(UnderlineLinksEnabled, true);
     setProperty(OpenLinksByDirectClickEnabled, false);

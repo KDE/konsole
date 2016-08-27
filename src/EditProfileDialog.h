@@ -174,7 +174,7 @@ private slots:
     void togglebidiRendering(bool);
     void lineSpacingChanged(int);
     void toggleBlinkingCursor(bool);
-    void toggleEnableUrlHints(bool);
+    void updateUrlHintsModifier(bool);
 
     void setCursorShape(int);
     void autoCursorColor();
