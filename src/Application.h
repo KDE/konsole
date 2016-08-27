@@ -81,7 +81,7 @@ private:
     MainWindow* processWindowArgs(bool &createdNewMainWindow);
     Profile::Ptr processProfileSelectArgs();
     Profile::Ptr processProfileChangeArgs(Profile::Ptr baseProfile);
-    void processTabsFromFileArgs(MainWindow* window);
+    bool processTabsFromFileArgs(MainWindow* window);
     void createTabFromArgs(MainWindow* window, const QHash<QString, QString>&);
     void finalizeNewMainWindow(MainWindow* window);
 

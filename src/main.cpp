@@ -159,7 +159,9 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     QObject::connect(&dbusService, &KDBusService::activateRequested, &konsoleApp, &Application::slotActivateRequested);
 
     if (!konsoleApp.newInstance()) {
-        // An argument that printed something and mean we should just quit was passed.
+        // Do not finish starting Konsole
+        // 1. An argument was given to just printed info
+        // 2. An invalid situation ocurred
         delete app;
         return 0;
     }
