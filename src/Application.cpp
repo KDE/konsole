@@ -108,21 +108,23 @@ int Application::newInstance()
 
     if (m_parser.isSet(QStringLiteral("tabs-from-file"))) {
         // create new session(s) as described in file
-        processTabsFromFileArgs(window);
-    } else {
-        // select profile to use
-        Profile::Ptr baseProfile = processProfileSelectArgs();
-
-        // process various command-line options which cause a property of the
-        // selected profile to be changed
-        Profile::Ptr newProfile = processProfileChangeArgs(baseProfile);
-
-        // create new session
-        Session* session = window->createSession(newProfile, QString());
-
-        if (m_parser.isSet(QStringLiteral("noclose"))) {
-            session->setAutoClose(false);
+        if (!processTabsFromFileArgs(window)) {
+            return 0;
         }
+    }
+
+    // select profile to use
+    Profile::Ptr baseProfile = processProfileSelectArgs();
+
+    // process various command-line options which cause a property of the
+    // selected profile to be changed
+    Profile::Ptr newProfile = processProfileChangeArgs(baseProfile);
+
+    // create new session
+    Session* session = window->createSession(newProfile, QString());
+
+    if (m_parser.isSet(QStringLiteral("noclose"))) {
+        session->setAutoClose(false);
     }
 
     // if the background-mode argument is supplied, start the background
@@ -171,7 +173,7 @@ title: Top this!;; command: top
 command: ssh  earth
 profile: Zsh
 */
-void Application::processTabsFromFileArgs(MainWindow* window)
+bool Application::processTabsFromFileArgs(MainWindow* window)
 {
     // Open tab configuration file
     const QString tabsFileName(m_parser.value(QStringLiteral("tabs-from-file")));
@@ -179,7 +181,7 @@ void Application::processTabsFromFileArgs(MainWindow* window)
     if (!tabsFile.open(QFile::ReadOnly)) {
         qWarning() << "ERROR: Cannot open tabs file "
                    << tabsFileName.toLocal8Bit().data();
-        return;
+        return false;
     }
 
     unsigned int sessions = 0;
@@ -209,8 +211,10 @@ void Application::processTabsFromFileArgs(MainWindow* window)
     if (sessions < 1) {
         qWarning() << "No valid lines found in "
                    << tabsFileName.toLocal8Bit().data();
-        return;
+        return false;
     }
+
+    return true;
 }
 
 void Application::createTabFromArgs(MainWindow* window,
