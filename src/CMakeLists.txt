@@ -175,6 +175,7 @@ target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::WindowSyst
   KF5::I18n
   KF5::KIOWidgets
   KF5::NotifyConfig
+  KF5::Crash
 )
 
 install(TARGETS kdeinit_konsole konsole
