@@ -31,6 +31,7 @@
 // KDE
 #include <KAboutData>
 #include <KLocalizedString>
+#include <KCrash>
 #include <Kdelibs4ConfigMigrator>
 #include <Kdelibs4Migration>
 #include <kdbusservice.h>
@@ -105,6 +106,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     fillAboutData(about);
 
     KAboutData::setApplicationData(about);
+
+    KCrash::initialize();
 
     QCommandLineParser parser;
     parser.setApplicationDescription(about.shortDescription());
