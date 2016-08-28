@@ -823,9 +823,7 @@ bool Session::closeInNormalWay()
     }
 
     // Check if the default shell is running, in that case try sending an EOF for a clean exit
-    const QString defaultProc = program().split('/').last();
-    const QString currentProc = foregroundProcessName().split('/').last();
-    if (defaultProc == currentProc) {
+    if (!isForegroundProcessActive()) {
         _shellProcess->sendEof();
 
         if (_shellProcess->waitForFinished(1000)) {
@@ -992,6 +990,9 @@ ProcessInfo* Session::getProcessInfo()
     ProcessInfo* process = 0;
 
     if (isForegroundProcessActive()) {
+        if (_foregroundProcessInfo == nullptr) {
+            updateForegroundProcessInfo();
+        }
         process = _foregroundProcessInfo;
     } else {
         updateSessionProcessInfo();
@@ -1507,7 +1508,7 @@ int Session::foregroundProcessId()
 bool Session::isForegroundProcessActive()
 {
     // foreground process info is always updated after this
-    return updateForegroundProcessInfo() && (processId() != _foregroundPid);
+    return (_shellProcess->pid() != _shellProcess->foregroundProcessGroup());
 }
 
 QString Session::foregroundProcessName()

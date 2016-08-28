@@ -536,8 +536,9 @@ bool MainWindow::queryClose()
 
     QStringList processesRunning;
     foreach(Session *session, _viewManager->sessions()) {
-        if (!session)
+        if (!session || !session->isForegroundProcessActive()) {
             continue;
+        }
 
         const QString defaultProc = session->program().split('/').last();
         const QString currentProc = session->foregroundProcessName().split('/').last();
