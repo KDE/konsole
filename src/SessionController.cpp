@@ -224,17 +224,13 @@ void SessionController::trackOutput(QKeyEvent* event)
 {
     Q_ASSERT(_view->screenWindow());
 
-    // jump to the end of the history buffer unless the key pressed
-    // is one of the three main modifiers, as these are used to select
-    // the selection mode (eg. Ctrl+Alt+<Left Click> for column/block selection)
-    switch (event->key()) {
-    case Qt::Key_Shift:
-    case Qt::Key_Control:
-    case Qt::Key_Alt:
-        break;
-    default:
-        _view->screenWindow()->setTrackOutput(true);
+    // Only jump to the bottom if the user actually typed something in,
+    // not if the user e. g. just pressed a modifier.
+    if (event->text().isEmpty()) {
+        return;
     }
+
+    _view->screenWindow()->setTrackOutput(true);
 }
 void SessionController::interactionHandler()
 {
