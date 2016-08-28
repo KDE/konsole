@@ -158,16 +158,15 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     // of Konsole is started.
     QObject::connect(&dbusService, &KDBusService::activateRequested, &konsoleApp, &Application::slotActivateRequested);
 
-    if (!konsoleApp.newInstance()) {
+    if (app->isSessionRestored()) {
+        restoreSession(konsoleApp);
+    } else if (!konsoleApp.newInstance()) {
         // Do not finish starting Konsole
         // 1. An argument was given to just printed info
         // 2. An invalid situation ocurred
         delete app;
         return 0;
     }
-
-    if (app->isSessionRestored())
-        restoreSession(konsoleApp);
 
     // Since we've allocated the QApplication on the heap for the KDBusService workaround,
     // we need to delete it manually before returning from main().
