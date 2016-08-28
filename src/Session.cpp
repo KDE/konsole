@@ -822,8 +822,10 @@ bool Session::closeInNormalWay()
         return true;
     }
 
-    // Check if the default shell is running, in that case try sending an EOF for a clean exit
-    if (!isForegroundProcessActive()) {
+    static QSet<QString> knownShells({"ash", "bash", "csh", "dash", "fish", "hush", "ksh", "mksh", "pdksh", "tcsh", "zsh"});
+
+    // If only the session's shell is running, try sending an EOF for a clean exit
+    if (!isForegroundProcessActive() && knownShells.contains(QFileInfo(_program).fileName())) {
         _shellProcess->sendEof();
 
         if (_shellProcess->waitForFinished(1000)) {
