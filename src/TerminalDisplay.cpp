@@ -3115,7 +3115,7 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
-    if (event->modifiers() == _urlHintsModifiers) {
+    if (_urlHintsModifiers && event->modifiers() == _urlHintsModifiers) {
         int hintSelected = event->key() - 0x31;
         if (hintSelected >= 0 && hintSelected < 10 && hintSelected < _filterChain->hotSpots().count()) {
             _filterChain->hotSpots().at(hintSelected)->activate();
