@@ -50,7 +50,7 @@ class Application : public QObject
 
 public:
     /** Constructs a new Konsole application. */
-    Application(QCommandLineParser &parser);
+    explicit Application(QCommandLineParser &parser);
 
     ~Application();
 

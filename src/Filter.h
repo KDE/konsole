@@ -312,7 +312,7 @@ public:
         QFileInfo _file;
     };
 
-    FileFilter(Session* session);
+    explicit FileFilter(Session* session);
 
 protected:
     virtual RegExpFilter::HotSpot* newHotSpot(int, int, int, int, const QStringList&);
