@@ -178,7 +178,7 @@ FallbackProfile::FallbackProfile()
     setProperty(FlowControlEnabled, true);
     setProperty(EnableUrlHints, false);
     setProperty(BlinkingTextEnabled, true);
-    setProperty(UnderlineLinksEnabled, true);
+    setProperty(UnderlineLinksEnabled, false);
     setProperty(OpenLinksByDirectClickEnabled, false);
     setProperty(CtrlRequiredForDrag, true);
     setProperty(AutoCopySelectedText, false);
