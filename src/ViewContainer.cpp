@@ -443,7 +443,7 @@ TabbedViewContainer::~TabbedViewContainer()
 
 void TabbedViewContainer::startTabDrag(int tab)
 {
-    QDrag* drag = new QDrag(_tabBar);
+    QPointer<QDrag> drag = new QDrag(_tabBar);
     const QRect tabRect = _tabBar->tabRect(tab);
     QPixmap tabPixmap = _tabBar->dragDropPixmap(tab);
 
@@ -463,7 +463,7 @@ void TabbedViewContainer::startTabDrag(int tab)
     // start dragging
     const Qt::DropAction action = drag->exec();
 
-    if (drag->target()) {
+    if (drag && drag->target()) {
         switch (action) {
         case Qt::MoveAction:
             // The MoveAction indicates the widget has been successfully
@@ -501,6 +501,7 @@ void TabbedViewContainer::startTabDrag(int tab)
         if (_tabBar->count() > 1)
             emit detachTab(this, view);
     }
+    delete drag;
 }
 
 void TabbedViewContainer::querySourceIndex(const QDropEvent* event, int& sourceIndex)
