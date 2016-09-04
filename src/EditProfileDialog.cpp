@@ -870,16 +870,16 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 
     Q_ASSERT(translator);
 
-    QDialog dialog(this);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(&dialog);
+    QPointer<QDialog> dialog = new QDialog(this);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(dialog);
     buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    connect(buttonBox, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
-    connect(buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+    connect(buttonBox, &QDialogButtonBox::accepted, dialog, &QDialog::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected, dialog, &QDialog::reject);
 
     if (isNewTranslator)
-        dialog.setWindowTitle(i18n("New Key Binding List"));
+        dialog->setWindowTitle(i18n("New Key Binding List"));
     else
-        dialog.setWindowTitle(i18n("Edit Key Binding List"));
+        dialog->setWindowTitle(i18n("Edit Key Binding List"));
 
     KeyBindingEditor* editor = new KeyBindingEditor;
 
@@ -892,9 +892,9 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(editor);
     layout->addWidget(buttonBox);
-    dialog.setLayout(layout);
+    dialog->setLayout(layout);
 
-    if (dialog.exec() == QDialog::Accepted) {
+    if (dialog->exec() == QDialog::Accepted) {
         KeyboardTranslator* newTranslator = new KeyboardTranslator(*editor->translator());
 
         if (isNewTranslator)
@@ -911,6 +911,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
             updateTempProfileProperty(Profile::KeyBindings, newTranslator->name());
         }
     }
+    delete dialog;
 }
 void EditProfileDialog::newKeyBinding()
 {
