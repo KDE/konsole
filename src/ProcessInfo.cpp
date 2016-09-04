@@ -664,7 +664,7 @@ private:
 
         // len holds the length of the string
         QString qargs = QString::fromLocal8Bit(args,len);
-        foreach (QString value, qargs.split('\u0000'))
+        foreach (const QString& value, qargs.split('\u0000'))
         {
             if (!value.isEmpty())
             {
