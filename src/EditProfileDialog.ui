@@ -984,10 +984,20 @@
           <item>
            <widget class="QCheckBox" name="underlineLinksButton">
             <property name="toolTip">
-             <string>Text recognized as a file, link or an email address will be underlined when hovered by the mouse pointer.</string>
+             <string>Text recognized as a link or an email address will be underlined when hovered by the mouse pointer.</string>
             </property>
             <property name="text">
-             <string>Underline files and links</string>
+             <string>Underline links</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="underlineFilesButton">
+            <property name="toolTip">
+             <string>Text recognized as a file will be underlined when hovered by the mouse pointer.</string>
+            </property>
+            <property name="text">
+             <string>Underline files</string>
             </property>
            </widget>
           </item>

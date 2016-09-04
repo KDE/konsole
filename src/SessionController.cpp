@@ -20,6 +20,7 @@
 
 // Own
 #include "SessionController.h"
+#include "ProfileManager.h"
 
 // Qt
 #include <QApplication>
@@ -99,6 +100,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _profileList(0)
     , _previousState(-1)
     , _searchFilter(0)
+    , _urlFilter(0)
+    , _fileFilter(0)
     , _copyInputToAllTabsAction(0)
     , _findAction(0)
     , _findNextAction(0)
@@ -140,11 +143,11 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     view->installEventFilter(this);
     view->setSessionController(this);
 
-    // install filter on the view to highlight URLs
-    _view->filterChain()->addFilter(new UrlFilter);
+    // install filter on the view to highlight URLs and files
+    updateFilterList(SessionManager::instance()->sessionProfile(_session));
 
-    // install filter on the view to highlight Files
-    _view->filterChain()->addFilter(new FileFilter(_session));
+    // listen for changes in session, we might need to change the enabled filters
+    connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged, this, &Konsole::SessionController::updateFilterList);
 
     // listen for session resize requests
     connect(_session.data(), &Konsole::Session::resizeRequest, this, &Konsole::SessionController::sessionResizeRequest);
@@ -740,6 +743,7 @@ void SessionController::setupExtraActions()
 void SessionController::switchProfile(Profile::Ptr profile)
 {
     SessionManager::instance()->setSessionProfile(_session, profile);
+    updateFilterList(profile);
 }
 
 void SessionController::prepareSwitchProfileMenu()
@@ -1062,6 +1066,34 @@ void SessionController::searchClosed()
 {
     _isSearchBarEnabled = false;
     searchHistory(false);
+}
+
+void SessionController::updateFilterList(Profile::Ptr profile)
+{
+    if (profile != SessionManager::instance()->sessionProfile(_session)) {
+        return;
+    }
+
+    bool underlineFiles = profile->underlineFilesEnabled();
+
+    if (!underlineFiles && _fileFilter) {
+        _view->filterChain()->removeFilter(_fileFilter);
+        delete _fileFilter;
+        _fileFilter = nullptr;
+    } else if (underlineFiles && !_fileFilter) {
+        _fileFilter = new FileFilter(_session);
+        _view->filterChain()->addFilter(_fileFilter);
+    }
+
+    bool underlineLinks = profile->underlineLinksEnabled();
+    if (!underlineLinks && _urlFilter) {
+        _view->filterChain()->removeFilter(_urlFilter);
+        delete _urlFilter;
+        _urlFilter = nullptr;
+    } else if (underlineLinks && !_urlFilter) {
+        _urlFilter = new UrlFilter();
+        _view->filterChain()->addFilter(_urlFilter);
+    }
 }
 
 void SessionController::setSearchStartToWindowCurrentLine()

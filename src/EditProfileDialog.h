@@ -156,6 +156,7 @@ private slots:
     void removeKeyBinding();
 
     // mouse page
+    void toggleUnderlineFiles(bool enable);
     void toggleUnderlineLinks(bool);
     void toggleOpenLinksByDirectClick(bool);
     void toggleCtrlRequiredForDrag(bool);

@@ -61,6 +61,8 @@ class TerminalDisplay;
 class IncrementalSearchBar;
 class ProfileList;
 class RegExpFilter;
+class UrlFilter;
+class FileFilter;
 class EditProfileDialog;
 
 // SaveHistoryTask
@@ -265,6 +267,8 @@ private slots:
     void searchClosed(); // called when the user clicks on the
     // history search bar's close button
 
+    void updateFilterList(Profile::Ptr profile); // Called when the profile has changed, so we might need to change the list of filters
+
     void interactionHandler();
     void snapshot(); // called periodically as the user types
     // to take a snapshot of the state of the
@@ -317,6 +321,8 @@ private:
     int        _previousState;
 
     RegExpFilter*   _searchFilter;
+    UrlFilter*     _urlFilter;
+    FileFilter*     _fileFilter;
 
     QAction* _copyInputToAllTabsAction;
 

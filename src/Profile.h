@@ -196,6 +196,10 @@ public:
          * underlined when hovered by the mouse pointer.
          */
         UnderlineLinksEnabled,
+        /** (bool) If true, text that matches a file is
+         * underlined when hovered by the mouse pointer.
+         */
+        UnderlineFilesEnabled,
         /** (bool) If true, links can be opened by direct mouse click.*/
         OpenLinksByDirectClickEnabled,
         /** (bool) If true, control key must be pressed to click and drag selected text. */
@@ -463,6 +467,11 @@ public:
     /** Convenience method for property<bool>(Profile::UnderlineLinksEnabled) */
     bool underlineLinksEnabled() const {
         return property<bool>(Profile::UnderlineLinksEnabled);
+    }
+
+    /** Convenience method for property<bool>(Profile::UnderlineFilesEnabled) */
+    bool underlineFilesEnabled() const {
+        return property<bool>(Profile::UnderlineFilesEnabled);
     }
 
     bool autoCopySelectedText() const {

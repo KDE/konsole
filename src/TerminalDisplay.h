@@ -180,21 +180,6 @@ public:
     }
 
     /**
-     * Specifies whether links and email addresses should be underlined when
-     * hovered by the mouse. Defaults to true.
-     */
-    void setUnderlineLinks(bool value) {
-        _underlineLinks = value;
-    }
-    /**
-     * Returns true if links and email addresses should be underlined when
-     * hovered by the mouse.
-     */
-    bool getUnderlineLinks() const {
-        return _underlineLinks;
-    }
-
-    /**
      * Specifies whether links and email addresses should be opened when
      * clicked with the mouse. Defaults to false.
      */
@@ -883,7 +868,6 @@ private:
 
     Qt::KeyboardModifiers _urlHintsModifiers;
     bool _showUrlHint;
-    bool _underlineLinks;     // Underline URL and hosts on mouse hover
     bool _openLinksByDirectClick;     // Open URL and hosts by single mouse click
 
     bool _ctrlRequiredForDrag; // require Ctrl key for drag selected text

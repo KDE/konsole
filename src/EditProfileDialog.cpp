@@ -857,6 +857,7 @@ void EditProfileDialog::removeKeyBinding()
             _ui->keyBindingList->model()->removeRow(selected.first().row());
     }
 }
+
 void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 {
     QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
@@ -1011,9 +1012,14 @@ void EditProfileDialog::scrollHalfPage()
 }
 void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
 {
-    BooleanOption  options[] = { {
+    BooleanOption  options[] = {
+        {
             _ui->underlineLinksButton , Profile::UnderlineLinksEnabled,
             SLOT(toggleUnderlineLinks(bool))
+        },
+        {
+            _ui->underlineFilesButton , Profile::UnderlineFilesEnabled,
+            SLOT(toggleUnderlineFiles(bool))
         },
         {
             _ui->ctrlRequiredForDragButton, Profile::CtrlRequiredForDrag,
@@ -1058,7 +1064,7 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
 
     connect(_ui->tripleClickModeCombo, static_cast<void(KComboBox::*)(int)>(&KComboBox::activated), this, &Konsole::EditProfileDialog::TripleClickModeChanged);
 
-    _ui->openLinksByDirectClickButton->setEnabled(_ui->underlineLinksButton->isChecked());
+    _ui->openLinksByDirectClickButton->setEnabled(_ui->underlineLinksButton->isChecked() || _ui->underlineFilesButton->isChecked());
 
     _ui->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
     connect(_ui->enableMouseWheelZoomButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::toggleMouseWheelZoom);
@@ -1173,7 +1179,16 @@ void EditProfileDialog::toggleBlinkingCursor(bool enable)
 void EditProfileDialog::toggleUnderlineLinks(bool enable)
 {
     updateTempProfileProperty(Profile::UnderlineLinksEnabled, enable);
-    _ui->openLinksByDirectClickButton->setEnabled(enable);
+
+    bool enableClick = _ui->underlineFilesButton->isChecked() || enable;
+    _ui->openLinksByDirectClickButton->setEnabled(enableClick);
+}
+void EditProfileDialog::toggleUnderlineFiles(bool enable)
+{
+    updateTempProfileProperty(Profile::UnderlineFilesEnabled, enable);
+
+    bool enableClick = _ui->underlineLinksButton->isChecked() || enable;
+    _ui->openLinksByDirectClickButton->setEnabled(enableClick);
 }
 void EditProfileDialog::toggleCtrlRequiredForDrag(bool enable)
 {

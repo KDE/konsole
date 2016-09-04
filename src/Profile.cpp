@@ -109,6 +109,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { WordCharacters , "WordCharacters" , INTERACTION_GROUP , QVariant::String }
     , { TripleClickMode , "TripleClickMode" , INTERACTION_GROUP , QVariant::Int }
     , { UnderlineLinksEnabled , "UnderlineLinksEnabled" , INTERACTION_GROUP , QVariant::Bool }
+    , { UnderlineFilesEnabled , "UnderlineFilesEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { OpenLinksByDirectClickEnabled , "OpenLinksByDirectClickEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { CtrlRequiredForDrag, "CtrlRequiredForDrag" , INTERACTION_GROUP , QVariant::Bool }
     , { DropUrlsAsText , "DropUrlsAsText" , INTERACTION_GROUP , QVariant::Bool }
@@ -182,7 +183,8 @@ FallbackProfile::FallbackProfile()
     setProperty(FlowControlEnabled, true);
     setProperty(UrlHintsModifiers, 0);
     setProperty(BlinkingTextEnabled, true);
-    setProperty(UnderlineLinksEnabled, false);
+    setProperty(UnderlineLinksEnabled, true);
+    setProperty(UnderlineFilesEnabled, false);
     setProperty(OpenLinksByDirectClickEnabled, false);
     setProperty(CtrlRequiredForDrag, true);
     setProperty(AutoCopySelectedText, false);

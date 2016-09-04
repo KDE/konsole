@@ -804,7 +804,6 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     view->setTripleClickMode(Enum::TripleClickModeEnum(tripleClickMode));
 
     view->setAutoCopySelectedText(profile->autoCopySelectedText());
-    view->setUnderlineLinks(profile->underlineLinksEnabled());
     view->setControlDrag(profile->property<bool>(Profile::CtrlRequiredForDrag));
     view->setDropUrlsAsText(profile->property<bool>(Profile::DropUrlsAsText));
     view->setBidiEnabled(profile->bidiRenderingEnabled());

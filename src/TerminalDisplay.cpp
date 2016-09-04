@@ -360,7 +360,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _hasTextBlinker(false)
     , _urlHintsModifiers(Qt::NoModifier)
     , _showUrlHint(false)
-    , _underlineLinks(true)
     , _openLinksByDirectClick(false)
     , _ctrlRequiredForDrag(true)
     , _tripleClickMode(Enum::SelectWholeLine)
@@ -1364,7 +1363,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
         urlNumber++;
 
         QRegion region;
-        if (_underlineLinks && spot->type() == Filter::HotSpot::Link) {
+        if (spot->type() == Filter::HotSpot::Link) {
             QRect r;
             if (spot->startLine() == spot->endLine()) {
                 r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
@@ -1442,7 +1441,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                         endColumn * _fontWidth + _contentRect.left() - 1,
                         (line + 1)*_fontHeight + _contentRect.top() - 1);
             // Underline link hotspots
-            if (_underlineLinks && spot->type() == Filter::HotSpot::Link) {
+            if (spot->type() == Filter::HotSpot::Link) {
                 QFontMetrics metrics(font());
 
                 // find the baseline (which is the invisible line that the characters in the font sit on,
@@ -2041,7 +2040,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
                 emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
             }
 
-            if (_underlineLinks && (_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier))) {
+            if ((_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier))) {
                 Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
                 if (spot && spot->type() == Filter::HotSpot::Link) {
                     QObject action;
@@ -2081,43 +2080,41 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     // change link hot-spot appearance on mouse-over
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
     if (spot && spot->type() == Filter::HotSpot::Link) {
-        if (_underlineLinks) {
-            QRegion previousHotspotArea = _mouseOverHotspotArea;
-            _mouseOverHotspotArea = QRegion();
-            QRect r;
-            if (spot->startLine() == spot->endLine()) {
-                r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
-                            spot->startLine()*_fontHeight + _contentRect.top(),
-                            (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
-                            (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
-                _mouseOverHotspotArea |= r;
-            } else {
-                r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
-                            spot->startLine()*_fontHeight + _contentRect.top(),
-                            (_columns)*_fontWidth + _contentRect.left() - 1,
-                            (spot->startLine() + 1)*_fontHeight + _contentRect.top() - 1);
-                _mouseOverHotspotArea |= r;
-                for (int line = spot->startLine() + 1 ; line < spot->endLine() ; line++) {
-                    r.setCoords(0 * _fontWidth + _contentRect.left(),
-                                line * _fontHeight + _contentRect.top(),
-                                (_columns)*_fontWidth + _contentRect.left() - 1,
-                                (line + 1)*_fontHeight + _contentRect.top() - 1);
-                    _mouseOverHotspotArea |= r;
-                }
+        QRegion previousHotspotArea = _mouseOverHotspotArea;
+        _mouseOverHotspotArea = QRegion();
+        QRect r;
+        if (spot->startLine() == spot->endLine()) {
+            r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
+                        spot->startLine()*_fontHeight + _contentRect.top(),
+                        (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
+                        (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
+            _mouseOverHotspotArea |= r;
+        } else {
+            r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
+                        spot->startLine()*_fontHeight + _contentRect.top(),
+                        (_columns)*_fontWidth + _contentRect.left() - 1,
+                        (spot->startLine() + 1)*_fontHeight + _contentRect.top() - 1);
+            _mouseOverHotspotArea |= r;
+            for (int line = spot->startLine() + 1 ; line < spot->endLine() ; line++) {
                 r.setCoords(0 * _fontWidth + _contentRect.left(),
-                            spot->endLine()*_fontHeight + _contentRect.top(),
-                            (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
-                            (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
+                            line * _fontHeight + _contentRect.top(),
+                            (_columns)*_fontWidth + _contentRect.left() - 1,
+                            (line + 1)*_fontHeight + _contentRect.top() - 1);
                 _mouseOverHotspotArea |= r;
             }
-
-            if ((_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier)) && (cursor().shape() != Qt::PointingHandCursor))
-                setCursor(Qt::PointingHandCursor);
-
-            update(_mouseOverHotspotArea | previousHotspotArea);
+            r.setCoords(0 * _fontWidth + _contentRect.left(),
+                        spot->endLine()*_fontHeight + _contentRect.top(),
+                        (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
+                        (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
+            _mouseOverHotspotArea |= r;
         }
+
+        if ((_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier)) && (cursor().shape() != Qt::PointingHandCursor))
+            setCursor(Qt::PointingHandCursor);
+
+        update(_mouseOverHotspotArea | previousHotspotArea);
     } else if (!_mouseOverHotspotArea.isEmpty()) {
-        if ((_underlineLinks && (_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier))) || (cursor().shape() == Qt::PointingHandCursor))
+        if ((_openLinksByDirectClick || (ev->modifiers() & Qt::ControlModifier)) || (cursor().shape() == Qt::PointingHandCursor))
             setCursor(_mouseMarks ? Qt::IBeamCursor : Qt::ArrowCursor);
 
         update(_mouseOverHotspotArea);
