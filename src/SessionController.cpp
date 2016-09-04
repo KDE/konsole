@@ -226,7 +226,7 @@ void SessionController::trackOutput(QKeyEvent* event)
 
     // Only jump to the bottom if the user actually typed something in,
     // not if the user e. g. just pressed a modifier.
-    if (event->text().isEmpty()) {
+    if (event->text().isEmpty() && event->modifiers()) {
         return;
     }
 
