@@ -992,9 +992,7 @@ ProcessInfo* Session::getProcessInfo()
     ProcessInfo* process = 0;
 
     if (isForegroundProcessActive()) {
-        if (_foregroundProcessInfo == nullptr) {
-            updateForegroundProcessInfo();
-        }
+        updateForegroundProcessInfo();
         process = _foregroundProcessInfo;
     } else {
         updateSessionProcessInfo();
