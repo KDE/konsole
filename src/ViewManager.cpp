@@ -821,9 +821,9 @@ void ViewManager::applyProfileToView(TerminalDisplay* view , const Profile::Ptr 
     else if (middleClickPasteMode == Enum::PasteFromClipboard)
         view->setMiddleClickPasteMode(Enum::PasteFromClipboard);
 
-    // margin/center - these are hard-fixed ATM
-    view->setMargin(1);
-    view->setCenterContents(false);
+    // margin/center
+    view->setMargin(profile->property<int>(Profile::TerminalMargin));
+    view->setCenterContents(profile->property<bool>(Profile::TerminalCenter));
 
     // cursor shape
     int cursorShape = profile->property<int>(Profile::CursorShape);

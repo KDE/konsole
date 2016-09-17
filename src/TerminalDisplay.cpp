@@ -1898,6 +1898,9 @@ void TerminalDisplay::hideEvent(QHideEvent*)
 
 void TerminalDisplay::setMargin(int margin)
 {
+    if (margin < 0) {
+        margin = 0;
+    }
     _margin = margin;
     updateImageSize();
 }

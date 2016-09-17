@@ -248,6 +248,10 @@ public:
          * In future, the format might be #.#.# to account for levels
          */
         MenuIndex,
+	/** (int) Margin width in pixels */
+	TerminalMargin,
+	/** (bool) Center terminal when there is a margin */
+	TerminalCenter,
         /** (bool) If true, mouse wheel scroll with Ctrl key pressed
          * increases/decreases the terminal font size.
          */
@@ -503,6 +507,16 @@ public:
     /** Convenience method for property<QString>(Profile::TerminalRows) */
     int terminalRows() const {
         return property<int>(Profile::TerminalRows);
+    }
+
+    /** Convenience method for property<int>(Profile::TerminalMargin) */
+    int terminalMargin() const {
+        return property<int>(Profile::TerminalMargin);
+    }
+
+    /** Convenience method for property<bool>(Profile::TerminalCenter) */
+    bool terminalCenter() const {
+        return property<bool>(Profile::TerminalCenter);
     }
 
     /** Convenience method for property<QString>(Profile::MenuIndex) */

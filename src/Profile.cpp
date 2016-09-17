@@ -71,6 +71,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { SilenceSeconds, "SilenceSeconds" , GENERAL_GROUP , QVariant::Int }
     , { TerminalColumns, "TerminalColumns" , GENERAL_GROUP , QVariant::Int }
     , { TerminalRows, "TerminalRows" , GENERAL_GROUP , QVariant::Int }
+    , { TerminalMargin, "TerminalMargin" , GENERAL_GROUP , QVariant::Int }
+    , { TerminalCenter, "TerminalCenter" , GENERAL_GROUP , QVariant::Bool }
 
     // Appearance
     , { Font , "Font" , APPEARANCE_GROUP , QVariant::Font }
@@ -164,6 +166,8 @@ FallbackProfile::FallbackProfile()
     setProperty(SilenceSeconds, 10);
     setProperty(TerminalColumns, 80);
     setProperty(TerminalRows, 24);
+    setProperty(TerminalMargin, 1);
+    setProperty(TerminalCenter, false);
     setProperty(MouseWheelZoomEnabled, true);
 
     setProperty(KeyBindings, "default");
