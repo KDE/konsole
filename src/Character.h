@@ -123,13 +123,6 @@ public:
     bool isRealCharacter;
 
     /**
-     * Returns true if this character should always be drawn in bold when
-     * it is drawn with the specified @p palette, independent of whether
-     * or not the character has the RE_BOLD rendition flag.
-     */
-    ColorEntry::FontWeight fontWeight(const ColorEntry* base) const;
-
-    /**
      * returns true if the format (color, rendition flag) of the compared characters is equal
      */
     bool equalsFormat(const Character& other) const;
@@ -180,15 +173,6 @@ inline bool Character::equalsFormat(const Character& other) const
            rendition == other.rendition;
 }
 
-inline ColorEntry::FontWeight Character::fontWeight(const ColorEntry* base) const
-{
-    if (foregroundColor._colorSpace == COLOR_SPACE_DEFAULT)
-        return base[foregroundColor._u + 0 + (foregroundColor._v ? BASE_COLORS : 0)].fontWeight;
-    else if (foregroundColor._colorSpace == COLOR_SPACE_SYSTEM)
-        return base[foregroundColor._u + 2 + (foregroundColor._v ? BASE_COLORS : 0)].fontWeight;
-    else
-        return ColorEntry::UseCurrentFormat;
-}
 }
 Q_DECLARE_TYPEINFO(Konsole::Character, Q_MOVABLE_TYPE);
 

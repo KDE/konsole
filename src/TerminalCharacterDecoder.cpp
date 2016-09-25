@@ -199,13 +199,7 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
 
             //colors - a color table must have been defined first
             if (_colorTable) {
-                bool useBold;
-                ColorEntry::FontWeight weight = characters[i].fontWeight(_colorTable);
-                if (weight == ColorEntry::UseCurrentFormat)
-                    useBold = _lastRendition & RE_BOLD;
-                else
-                    useBold = weight == ColorEntry::Bold;
-
+                bool useBold = _lastRendition & RE_BOLD;
                 if (useBold)
                     style.append("font-weight:bold;");
 

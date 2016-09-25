@@ -73,16 +73,6 @@ void TerminalTest::testColorTable()
     ColorEntry colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00));
     QVERIFY(colorTable[1] != colorEntry);
 
-    // UseCurrentFormat is the default FontWeight
-    colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::Bold);
-    QVERIFY(colorTable[0] != colorEntry);
-
-    colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::Normal);
-    QVERIFY(colorTable[0] != colorEntry);
-
-    colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::UseCurrentFormat);
-    QVERIFY(colorTable[0] == colorEntry);
-
     delete display;
 }
 

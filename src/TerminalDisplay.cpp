@@ -817,12 +817,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         return;
 
     // setup bold and underline
-    bool useBold;
-    ColorEntry::FontWeight weight = style->fontWeight(_colorTable);
-    if (weight == ColorEntry::UseCurrentFormat)
-        useBold = ((style->rendition & RE_BOLD) && _boldIntense) || font().bold();
-    else
-        useBold = (weight == ColorEntry::Bold) ? true : false;
+    bool useBold = ((style->rendition & RE_BOLD) && _boldIntense) || font().bold();
     const bool useUnderline = style->rendition & RE_UNDERLINE || font().underline();
     const bool useItalic = style->rendition & RE_ITALIC || font().italic();
     const bool useStrikeOut = style->rendition & RE_STRIKEOUT || font().strikeOut();

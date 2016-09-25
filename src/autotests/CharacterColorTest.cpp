@@ -86,55 +86,20 @@ void CharacterColorTest::testColorEntry()
     QCOMPARE(red == green, false);
     QCOMPARE(red != green, true);
 
-    ColorEntry blackBold = ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::FontWeight::Bold);
-    ColorEntry blackNormal = ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::FontWeight::Normal);
-    ColorEntry blackUseCurrentFormat = ColorEntry(QColor(0x00, 0x00, 0x00), ColorEntry::FontWeight::UseCurrentFormat);
-
-    QCOMPARE(blackBold == white, false);
-    QCOMPARE(blackBold != white, true);
-    QCOMPARE(blackBold == black, false);
-    QCOMPARE(blackBold != black, true);
-
-    QCOMPARE(blackNormal == white, false);
-    QCOMPARE(blackNormal != white, true);
-    QCOMPARE(blackNormal == black, false);
-    QCOMPARE(blackNormal != black, true);
-
-    QCOMPARE(blackUseCurrentFormat == white, false);
-    QCOMPARE(blackUseCurrentFormat != white, true);
-    QCOMPARE(blackUseCurrentFormat == black, true);    // UseCurrentFormat is default
-    QCOMPARE(blackUseCurrentFormat != black, false);
-
-    QCOMPARE(blackUseCurrentFormat == blackBold, false);
-    QCOMPARE(blackUseCurrentFormat != blackBold, true);
-
-    QCOMPARE(blackUseCurrentFormat == blackNormal, false);
-    QCOMPARE(blackUseCurrentFormat != blackNormal, true);
-
-    QCOMPARE(blackBold == blackNormal, false);
-    QCOMPARE(blackBold != blackNormal, true);
-
     QCOMPARE(red == green, false);
     QCOMPARE(red != green, true);
 
     // Test operator=
     ColorEntry tmpColorEntry;
-    ColorEntry redBold = ColorEntry(QColor(0xB2, 0x18, 0x18), ColorEntry::FontWeight::Bold);
     tmpColorEntry = red;
     QCOMPARE(tmpColorEntry == red, true);
     QCOMPARE(red == tmpColorEntry, true);
-    tmpColorEntry = redBold;
-    QCOMPARE(tmpColorEntry == red, false);
-    QCOMPARE(red == tmpColorEntry, false);
-    QCOMPARE(tmpColorEntry != red, true);
-    QCOMPARE(red != tmpColorEntry, true);
 
     // Test ColorEntry()
     ColorEntry defaultColorEntry = ColorEntry();
     QCOMPARE(defaultColorEntry != green, true);
     QCOMPARE(defaultColorEntry == black, true);
     QCOMPARE(defaultColorEntry != black, false);
-    QCOMPARE(defaultColorEntry == blackUseCurrentFormat, true);
 
 }
 

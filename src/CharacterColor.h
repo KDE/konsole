@@ -40,67 +40,44 @@ namespace Konsole
 class ColorEntry
 {
 public:
-    /** Specifies the weight to use when drawing text with this color. */
-    enum FontWeight {
-        /** Always draw text in this color with a bold weight. */
-        Bold,
-        /** Always draw text in this color with a normal weight. */
-        Normal,
-        /**
-         * Use the current font weight set by the terminal application.
-         * This is the default behavior.
-         */
-        UseCurrentFormat
-    };
-
     /**
      * Constructs a new color palette entry.
      *
      * @param c The color value for this entry.
-     * @param weight Specifies the font weight to use when drawing text with this color.
      */
-    explicit ColorEntry(QColor c,  FontWeight weight = UseCurrentFormat)
-        : color(c), fontWeight(weight) {}
+    explicit ColorEntry(QColor c)
+        : color(c) {}
 
     /**
-     * Constructs a new color palette entry using black color and font weight set to
-     * use current format.
+     * Constructs a new color palette entry using black color.
      */
-    ColorEntry() : color(QColor(0x00, 0x00, 0x00)), fontWeight(UseCurrentFormat) {}
+    ColorEntry() : color(QColor(0x00, 0x00, 0x00)) {}
 
     /**
      * Sets the color and boldness of this color to those of @p rhs.
      */
     void operator=(const ColorEntry& rhs) {
         color = rhs.color;
-        fontWeight = rhs.fontWeight;
     }
 
     /** The color value of this entry for display. */
     QColor color;
 
     /**
-     * Specifies the font weight to use when drawing text with this color.
-     * This is not applicable when the color is used to draw a character's background.
-     */
-    FontWeight fontWeight;
-
-    /**
      * Compares two color entries and returns true if they represent the same
-     * color and font weight.
+     * color.
      */
     friend bool operator == (const ColorEntry& a, const ColorEntry& b);
     /**
      * Compares two color entries and returns true if they represent different
-     * color and font weight.
+     * color.
      */
     friend bool operator != (const ColorEntry& a, const ColorEntry& b);
 };
 
 inline bool operator == (const ColorEntry& a, const ColorEntry& b)
 {
-    return  a.color == b.color &&
-            a.fontWeight == b.fontWeight;
+    return  a.color == b.color;
 }
 
 inline bool operator != (const ColorEntry& a, const ColorEntry& b)
