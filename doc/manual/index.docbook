@@ -1276,7 +1276,7 @@ style sheet for the tab bar.  In the <filename role="extension">.css</filename> 
 </para>
 <para>
 For more information, consider reading
-<ulink url="http://qt-project.org/doc/qt-4.8/stylesheet.html">&Qt; Project page for Style Sheets</ulink>
+<ulink url="http://doc.qt.io/qt-5/stylesheet.html">&Qt; Style Sheets</ulink>
 </para>
 
 <para>
