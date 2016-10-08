@@ -1406,29 +1406,14 @@ CommonDirNames=name1,name2,name3...
 <itemizedlist>
 
 <listitem><para>
-By default when started from a terminal, &konsole; will run in the background.  Use <option>--nofork</option> to force &konsole; to run in the foreground.
+Starting with version 16.08 (August 2016), &konsole; no longer uses KDE4's KUniqueApplication and thus <option>--nofork</option> no longer exists.
 </para>
-
-<para>
-This is needed for some scripts and commands to work as expected:
-    <itemizedlist mark='opencircle'>
-
-    <listitem><para>
-<command>konsole --nofork -e sleep 3 ; echo 1</command>
-    </para></listitem>
-
-    <listitem><para>
-<command>kdesu -u kdeuser konsole --nofork</command>
-    </para></listitem>
-
-    </itemizedlist>
-
-</para></listitem>
+</listitem>
 
 <listitem>
 <para>Some fonts might be unavailable for usage in &konsole;, although they are available in other applications. That doesn't mean there is a bug in &konsole;. &konsole; requires monospaced fonts to provide the best visual result, so it asks &Qt; to only list monospaced fonts.</para>
 
-<para>If you are sure a font is really monospaced but unavailable in &konsole;, then please report the problem to <ulink url="https://bugreports.qt-project.org/">&Qt;</ulink>.</para>
+<para>Starting with version 16.08 (August 2016), &konsole; can be configured to allow selecting any font with the caveat that the display may not be correct.</para>
 </listitem>
 
 <listitem><para>
