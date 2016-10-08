@@ -295,21 +295,20 @@ int SessionManager::getRestoreId(Session* session)
 void SessionManager::restoreSessions(KConfig* config)
 {
     KConfigGroup group(config, "Number");
-    int sessions;
+    const int sessions = group.readEntry("NumberOfSessions", 0);
 
     // Any sessions saved?
-    if ((sessions = group.readEntry("NumberOfSessions", 0)) > 0) {
-        for (int n = 1; n <= sessions; n++) {
-            QString name = QLatin1String("Session") + QString::number(n);
-            KConfigGroup sessionGroup(config, name);
+    for (int n = 1; n <= sessions; n++) {
+        const QString name = QLatin1String("Session") + QString::number(n);
+        KConfigGroup sessionGroup(config, name);
 
-            QString profile = sessionGroup.readPathEntry("Profile", QString());
-            Profile::Ptr ptr = ProfileManager::instance()->defaultProfile();
-            if (!profile.isEmpty()) ptr = ProfileManager::instance()->loadProfile(profile);
-
-            Session* session = createSession(ptr);
-            session->restoreSession(sessionGroup);
+        const QString profile = sessionGroup.readPathEntry("Profile", QString());
+        Profile::Ptr ptr = ProfileManager::instance()->defaultProfile();
+        if (!profile.isEmpty()) {
+            ptr = ProfileManager::instance()->loadProfile(profile);
         }
+        Session* session = createSession(ptr);
+        session->restoreSession(sessionGroup);
     }
 }
 
