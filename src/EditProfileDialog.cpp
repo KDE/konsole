@@ -873,8 +873,8 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     QPointer<QDialog> dialog = new QDialog(this);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(dialog);
     buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    connect(buttonBox, &QDialogButtonBox::accepted, dialog, &QDialog::accept);
-    connect(buttonBox, &QDialogButtonBox::rejected, dialog, &QDialog::reject);
+    connect(buttonBox, &QDialogButtonBox::accepted, dialog.data(), &QDialog::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected, dialog.data(), &QDialog::reject);
 
     if (isNewTranslator)
         dialog->setWindowTitle(i18n("New Key Binding List"));
