@@ -264,7 +264,7 @@ void Session::setArguments(const QStringList& arguments)
 
 void Session::setInitialWorkingDirectory(const QString& dir)
 {
-    _initialWorkingDir = KShell::tildeExpand(ShellCommand::expand(dir));
+    _initialWorkingDir = validDirectory(KShell::tildeExpand(ShellCommand::expand(dir)));
 }
 
 QString Session::currentWorkingDirectory()
@@ -1548,6 +1548,21 @@ void Session::restoreSession(KConfigGroup& group)
     if (!value.isEmpty()) _uniqueIdentifier = QUuid(value);
     value = group.readEntry("Encoding");
     if (!value.isEmpty()) setCodec(value.toUtf8());
+}
+
+QString Session::validDirectory(const QString& dir) const
+{
+    QString validDir = dir;
+    if (validDir.isEmpty()) {
+        validDir = QDir::currentPath();
+    }
+
+    const QFileInfo fi(validDir);
+    if (!fi.exists() || !fi.isDir()) {
+        validDir = QDir::homePath();
+    }
+
+    return validDir;
 }
 
 SessionGroup::SessionGroup(QObject* parent)

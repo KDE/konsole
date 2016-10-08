@@ -730,6 +730,8 @@ private:
     bool updateForegroundProcessInfo();
     void updateWorkingDirectory();
 
+    QString validDirectory(const QString& directory) const;
+
     QUuid            _uniqueIdentifier; // SHELL_SESSION_ID
 
     Pty*          _shellProcess;
