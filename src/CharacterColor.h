@@ -33,9 +33,6 @@ namespace Konsole
  *
  * A color palette is an array of 16 ColorEntry instances which map
  * system color indexes (from 0 to 15) into actual colors.
- *
- * Each entry can be set as bold, in which case any text
- * drawn using the color should be drawn in bold.
  */
 class ColorEntry
 {
@@ -54,7 +51,7 @@ public:
     ColorEntry() : color(QColor(0x00, 0x00, 0x00)) {}
 
     /**
-     * Sets the color and boldness of this color to those of @p rhs.
+     * Sets the color of this color to those of @p rhs.
      */
     void operator=(const ColorEntry& rhs) {
         color = rhs.color;
