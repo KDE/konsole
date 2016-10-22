@@ -1258,7 +1258,7 @@ void EditProfileDialog::showFontDialog()
     bool result;
     if (showAllFonts) {
         currentFont = QFontDialog::getFont(&result, currentFont, this,
-                                       i18n("Select All Font"));
+                                       i18n("Select Any Font"));
     } else {
         currentFont = QFontDialog::getFont(&result, currentFont, this,
                                        i18n("Select Fixed Width Font"),
