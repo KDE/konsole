@@ -3071,7 +3071,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
         _outputSuspendedLabel->setWordWrap(true);
         _outputSuspendedLabel->setFocusProxy(this);
 
-        connect(_outputSuspendedLabel, &QLabel::linkActivated, [this](const QString &url) {
+        connect(_outputSuspendedLabel, &QLabel::linkActivated, this, [this](const QString &url) {
             if (url == "#close") {
                 _outputSuspendedLabel->setVisible(false);
             } else {
