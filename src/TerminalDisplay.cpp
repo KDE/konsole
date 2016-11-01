@@ -117,10 +117,10 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
         connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateLineProperties);
         connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateImage);
         connect(_screenWindow.data() , &Konsole::ScreenWindow::currentResultLineChanged , this , &Konsole::TerminalDisplay::updateImage);
-        connect(_screenWindow.data(), &Konsole::ScreenWindow::outputChanged, [this]() {
+        connect(_screenWindow.data(), &Konsole::ScreenWindow::outputChanged, this, [this]() {
             _filterUpdateRequired = true;
         });
-        connect(_screenWindow.data(), &Konsole::ScreenWindow::scrolled, [this]() {
+        connect(_screenWindow.data(), &Konsole::ScreenWindow::scrolled, this, [this]() {
             _filterUpdateRequired = true;
         });
         _screenWindow->setWindowLines(_lines);
