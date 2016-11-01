@@ -29,6 +29,8 @@
 #include <KActionMenu>
 #include <KShortcutsDialog>
 #include <KLocalizedString>
+#include <KToggleAction>
+#include <KToggleFullScreenAction>
 
 #include <QMenu>
 #include <QMenuBar>
