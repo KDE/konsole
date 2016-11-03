@@ -400,7 +400,6 @@ MainWindow* Application::processWindowArgs(bool &createdNewMainWindow)
 Profile::Ptr Application::processProfileSelectArgs()
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
-    qDebug() << "Default profile name:" << defaultProfile->name();
 
     if (m_parser->isSet(QStringLiteral("profile"))) {
         Profile::Ptr profile = ProfileManager::instance()->loadProfile(
