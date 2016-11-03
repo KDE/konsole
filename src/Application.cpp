@@ -544,8 +544,12 @@ void Application::toggleBackgroundInstance()
     }
 }
 
-void Application::slotActivateRequested (const QStringList &args, const QString & /*workingDir*/)
+void Application::slotActivateRequested (QStringList args, const QString & /*workingDir*/)
 {
+    // QCommandLineParser expects the first argument to be the executable name
+    // In the current version it just strips it away
+    args.prepend(qApp->applicationFilePath());
+
     // We can't re-use QCommandLineParser instances, it preserves earlier parsed values
     QCommandLineParser *parser = new QCommandLineParser;
     populateCommandLineParser(parser);

@@ -73,7 +73,7 @@ private slots:
     void toggleBackgroundInstance();
 
 public slots:
-    void slotActivateRequested (const QStringList &args, const QString &workingDir);
+    void slotActivateRequested (QStringList args, const QString &workingDir);
 
 private:
     void listAvailableProfiles();
