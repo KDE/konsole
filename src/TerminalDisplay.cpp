@@ -1259,8 +1259,10 @@ void TerminalDisplay::updateImage()
     delete[] dirtyMask;
 
 #ifndef QT_NO_ACCESSIBILITY
-    QAccessible::updateAccessibility(new QAccessibleEvent(this, QAccessible::VisibleDataChanged));
-    QAccessible::updateAccessibility(new QAccessibleTextCursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX()));
+    QAccessibleEvent dataChangeEvent(this, QAccessible::VisibleDataChanged);
+    QAccessible::updateAccessibility(&dataChangeEvent);
+    QAccessibleTextCursorEvent cursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX());
+    QAccessible::updateAccessibility(&cursorEvent);
 #endif
 }
 
@@ -3143,7 +3145,8 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     emit keyPressedSignal(event);
 
 #ifndef QT_NO_ACCESSIBILITY
-    QAccessible::updateAccessibility(new QAccessibleTextCursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX()));
+    QAccessibleTextCursorEvent textCursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX());
+    QAccessible::updateAccessibility(&textCursorEvent);
 #endif
 
     event->accept();
