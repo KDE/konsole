@@ -30,6 +30,9 @@
 #include <KLocalizedString>
 #include <KConfigGroup>
 
+// STL
+#include <random>
+
 namespace
 {
 const int FGCOLOR_INDEX = 0;
@@ -226,28 +229,45 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
 {
     Q_ASSERT(index >= 0 && index < TABLE_COLORS);
 
-    if (randomSeed != 0)
-        qsrand(randomSeed);
-
     ColorEntry entry = colorTable()[index];
 
-    if (randomSeed != 0 &&
-            _randomTable != 0 &&
-            !_randomTable[index].isNull()) {
-        const RandomizationRange& range = _randomTable[index];
-
-        int hueDifference = range.hue ? (qrand() % range.hue) - range.hue / 2 : 0;
-        int saturationDifference = range.saturation ? (qrand() % range.saturation) - range.saturation / 2 : 0;
-        int  valueDifference = range.value ? (qrand() % range.value) - range.value / 2 : 0;
-
-        QColor& color = entry.color;
-
-        int newHue = qAbs((color.hue() + hueDifference) % MAX_HUE);
-        int newValue = qMin(qAbs(color.value() + valueDifference) , 255);
-        int newSaturation = qMin(qAbs(color.saturation() + saturationDifference) , 255);
-
-        color.setHsv(newHue, newSaturation, newValue);
+    if (randomSeed == 0 || _randomTable == 0 || _randomTable[index].isNull()) {
+        return entry;
     }
+
+
+    const RandomizationRange& range = _randomTable[index];
+
+    // 32-bit Mersenne Twister
+    // Can't use default_random_engine, because in GCC this maps to
+    // minstd_rand0 which always gives us 0 on the first number.
+    std::mt19937 randomEngine(randomSeed);
+
+    int hueDifference = 0;
+    if (range.hue) {
+        std::uniform_int_distribution<int> dist(0, range.hue);
+        hueDifference = dist(randomEngine);
+    }
+
+    int saturationDifference = 0;
+    if (range.saturation) {
+        std::uniform_int_distribution<int> dist(0, range.saturation);
+        saturationDifference = dist(randomEngine) - range.saturation / 2;
+    }
+
+    int valueDifference = 0;
+    if (range.value) {
+        std::uniform_int_distribution<int> dist(0, range.value);
+        valueDifference = dist(randomEngine) - range.value / 2;
+    }
+
+    QColor& color = entry.color;
+
+    int newHue = qAbs((color.hue() + hueDifference) % MAX_HUE);
+    int newValue = qMin(qAbs(color.value() + valueDifference) , 255);
+    int newSaturation = qMin(qAbs(color.saturation() + saturationDifference) , 255);
+
+    color.setHsv(newHue, newSaturation, newValue);
 
     return entry;
 }

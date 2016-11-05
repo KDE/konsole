@@ -63,39 +63,6 @@ using namespace Konsole;
 int Session::lastSessionId = 0;
 static bool show_disallow_certain_dbus_methods_message = true;
 
-// HACK This is copied out of QUuid::createUuid with reseeding forced.
-// Required because color schemes repeatedly seed the RNG...
-// ...with a constant.
-QUuid createUuid()
-{
-    static const int intbits = sizeof(int) * 8;
-    static int randbits = 0;
-    if (!randbits) {
-        int max = RAND_MAX;
-        do {
-            ++randbits;
-        } while ((max = max >> 1));
-    }
-
-    qsrand(uint(QDateTime::currentDateTimeUtc().toTime_t()));
-    qrand(); // Skip first
-
-    QUuid result;
-    uint* data = &(result.data1);
-    int chunks = 16 / sizeof(uint);
-    while (chunks--) {
-        uint randNumber = 0;
-        for (int filled = 0; filled < intbits; filled += randbits)
-            randNumber |= qrand() << filled;
-        *(data + chunks) = randNumber;
-    }
-
-    result.data4[0] = (result.data4[0] & 0x3F) | 0x80;        // UV_DCE
-    result.data3 = (result.data3 & 0x0FFF) | 0x4000;        // UV_Random
-
-    return result;
-}
-
 Session::Session(QObject* parent) :
     QObject(parent)
     , _shellProcess(0)
@@ -117,7 +84,7 @@ Session::Session(QObject* parent) :
     , _zmodemProgress(0)
     , _hasDarkBackground(false)
 {
-    _uniqueIdentifier = createUuid();
+    _uniqueIdentifier = QUuid::createUuid();
 
     //prepare DBus communication
     new SessionAdaptor(this);
@@ -426,7 +393,7 @@ void Session::run()
         qWarning() << "No command line arguments specified.";
     }
     if (_uniqueIdentifier.isNull()) {
-        _uniqueIdentifier = createUuid();
+        _uniqueIdentifier = QUuid::createUuid();
     }
 
     const int CHOICE_COUNT = 3;
