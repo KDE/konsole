@@ -450,25 +450,23 @@ void SessionController::sendBackgroundColor()
 
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
 {
-    if (watched == _view) {
-        if (event->type() == QEvent::FocusIn) {
-            // notify the world that the view associated with this session has been focused
-            // used by the view manager to update the title of the MainWindow widget containing the view
-            emit focused(this);
+    if (event->type() == QEvent::FocusIn && watched == _view) {
+        // notify the world that the view associated with this session has been focused
+        // used by the view manager to update the title of the MainWindow widget containing the view
+        emit focused(this);
 
-            // when the view is focused, set bell events from the associated session to be delivered
-            // by the focused view
+        // when the view is focused, set bell events from the associated session to be delivered
+        // by the focused view
 
-            // first, disconnect any other views which are listening for bell signals from the session
-            disconnect(_session.data(), &Konsole::Session::bellRequest, 0, 0);
-            // second, connect the newly focused view to listen for the session's bell signal
-            connect(_session.data(), &Konsole::Session::bellRequest, _view.data(), &Konsole::TerminalDisplay::bell);
+        // first, disconnect any other views which are listening for bell signals from the session
+        disconnect(_session.data(), &Konsole::Session::bellRequest, 0, 0);
+        // second, connect the newly focused view to listen for the session's bell signal
+        connect(_session.data(), &Konsole::Session::bellRequest, _view.data(), &Konsole::TerminalDisplay::bell);
 
-            if (_copyInputToAllTabsAction && _copyInputToAllTabsAction->isChecked()) {
-                // A session with "Copy To All Tabs" has come into focus:
-                // Ensure that newly created sessions are included in _copyToGroup!
-                copyInputToAllTabs();
-            }
+        if (_copyInputToAllTabsAction && _copyInputToAllTabsAction->isChecked()) {
+            // A session with "Copy To All Tabs" has come into focus:
+            // Ensure that newly created sessions are included in _copyToGroup!
+            copyInputToAllTabs();
         }
     }
 

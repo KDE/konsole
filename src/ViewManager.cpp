@@ -720,8 +720,8 @@ void ViewManager::viewDestroyed(QWidget* view)
 {
     // Note: the received QWidget has already been destroyed, so
     // using dynamic_cast<> or qobject_cast<> does not work here
-    TerminalDisplay* display = static_cast<TerminalDisplay*>(view);
-    Q_ASSERT(display);
+    // We only need the pointer address to look it up below
+    TerminalDisplay* display = reinterpret_cast<TerminalDisplay*>(view);
 
     // 1. detach view from session
     // 2. if the session has no views left, close it

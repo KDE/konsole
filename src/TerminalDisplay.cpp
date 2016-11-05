@@ -3466,9 +3466,9 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
     Q_ASSERT(watched == parent());
     Q_UNUSED(watched);
 
-    QMouseEvent* mouseEvent = (QMouseEvent*)event;
     switch (event->type()) {
     case QEvent::MouseMove: {
+        QMouseEvent* mouseEvent = (QMouseEvent*)event;
         bool mouseInWidget = widget()->rect().contains(mouseEvent->pos());
         if (mouseInWidget) {
             if (_timerId)
@@ -3483,6 +3483,7 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
         break;
     }
     case QEvent::MouseButtonRelease: {
+        QMouseEvent* mouseEvent = (QMouseEvent*)event;
         if (_timerId && (mouseEvent->buttons() & ~Qt::LeftButton)) {
             killTimer(_timerId);
             _timerId = 0;
