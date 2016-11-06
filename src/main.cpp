@@ -21,6 +21,7 @@
 #include "Application.h"
 #include "MainWindow.h"
 #include "config-konsole.h"
+#include "KonsoleSettings.h"
 
 // OS specific
 #include <qplatformdefs.h>
@@ -115,6 +116,11 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
 
     parser->process(*app);
     about.processCommandLine(parser.data());
+
+    // Enable user to force multiple instances
+    if (!Konsole::KonsoleSettings::useSingleInstance()) {
+        startupOption = KDBusService::Multiple;
+    }
 
     atexit(deleteQApplication);
     // Ensure that we only launch a new instance if we need to

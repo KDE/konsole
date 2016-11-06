@@ -71,6 +71,22 @@
          </widget>
         </item>
         <item row="3" column="0">
+         <widget class="QCheckBox" name="kcfg_UseSingleInstance">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>When launching Konsole re-use existing process if possible</string>
+          </property>
+          <property name="text">
+           <string>Run all Konsole windows in a single process</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
          <widget class="QCheckBox" name="kcfg_AllowMenuAccelerators">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -83,7 +99,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
+        <item row="5" column="0">
          <widget class="QCheckBox" name="kcfg_ShowWindowTitleOnTitleBar">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -96,7 +112,7 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
+        <item row="6" column="0">
          <widget class="QCheckBox" name="kcfg_ShowAppNameOnTitleBar">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
