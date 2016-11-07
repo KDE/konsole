@@ -331,6 +331,11 @@ change the working folder of the &konsole; session.</para></listitem>
 the actions will be executed immediately.
 </para>
 
+<para>If you want to use the &Ctrl; key for drag and drop or disable the context
+menu to insert &URL;s as text by default, enable the corresponding options
+on the <guilabel>Mouse</guilabel> tab in the profile settings dialog.
+</para>
+
 </sect1>
 
 </chapter>
@@ -349,7 +354,10 @@ If the menubar is hidden,
 window such as vi, minicom, etc.).  The default shortcut
 is listed after each menu item.
 </para>
-
+<para>Alternatively you can use the shortcut
+<keycombo action="simul">&Ctrl;&Shift;<keycap>M</keycap></keycombo>
+to show or hide the menubar.
+</para>
 <sect2 id="file-menu">
 <title>File Menu</title>
 
@@ -1177,7 +1185,7 @@ Empty lines or lines with <userinput>#</userinput> at the beginning are ignored,
 <varlistentry>
 <term><option>--list-profile-properties</option></term>
 <listitem>
-<para><action>List</action> all possible properties with name and type. See option <option>-p</option> .
+<para><action>List</action> all possible properties with name and type. See option <option>-p</option>.
 </para>
 <para>
 For more information, please visit
