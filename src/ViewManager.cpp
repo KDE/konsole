@@ -155,7 +155,7 @@ void ViewManager::setupActions()
 
         QAction* closeActiveAction = new QAction(i18nc("@action:inmenu Close Active View", "Close Active") , this);
         closeActiveAction->setIcon(QIcon::fromTheme(QStringLiteral("view-close")));
-        collection->setDefaultShortcut(closeActiveAction, Qt::CTRL + Qt::SHIFT + Qt::Key_S);
+        collection->setDefaultShortcut(closeActiveAction, Qt::CTRL + Qt::SHIFT + Qt::Key_X);
         closeActiveAction->setEnabled(false);
         collection->addAction("close-active-view", closeActiveAction);
         connect(closeActiveAction , &QAction::triggered , this , &Konsole::ViewManager::closeActiveContainer);
