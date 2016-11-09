@@ -574,10 +574,13 @@ QString Session::userTitle() const
 }
 void Session::setTabTitleFormat(TabTitleContext context , const QString& format)
 {
-    if (context == LocalTabTitle)
+    if (context == LocalTabTitle) {
         _localTabTitleFormat = format;
-    else if (context == RemoteTabTitle)
+        ProcessInfo* process = getProcessInfo();
+        process->setUserNameRequired(format.contains(QLatin1String("%u")));
+    } else if (context == RemoteTabTitle) {
         _remoteTabTitleFormat = format;
+    }
 }
 QString Session::tabTitleFormat(TabTitleContext context) const
 {

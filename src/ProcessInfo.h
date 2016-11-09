@@ -189,6 +189,8 @@ public:
     // space-constrained UI elements (eg. tabs)
     QString formatShortDir(const QString& dirPath) const;
 
+    void setUserNameRequired(bool need);
+
 protected:
     /**
      * Constructs a new process instance.  You should not call the constructor
@@ -259,7 +261,6 @@ protected:
      */
     void clearArguments();
 
-    void setUserNameRequired(bool need);
     bool userNameRequired() const;
 
 private:
