@@ -11,13 +11,13 @@ Color=35,38,41
 Color=49,54,59
 
 [Color0]
-Color=7,54,66
+Color=49,54,59
 
 [Color0Intense]
-Color=0,43,54
+Color=127,140,141
 
 [Color0Faint]
-Color=32,43,54
+Color=49,54,59
 
 [Color1]
 Color=237,21,21
