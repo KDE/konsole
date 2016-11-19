@@ -158,7 +158,7 @@ FallbackProfile::FallbackProfile()
     // See Pty.cpp on why Arguments is populated
     setProperty(Arguments, QStringList() << qgetenv("SHELL"));
     setProperty(Icon, "utilities-terminal");
-    setProperty(Environment, QStringList() << QStringLiteral("TERM=xterm"));
+    setProperty(Environment, QStringList() << QStringLiteral("TERM=xterm") << QStringLiteral("COLORTERM=truecolor"));
     setProperty(LocalTabTitleFormat, "%d : %n");
     setProperty(RemoteTabTitleFormat, "(%u) %H");
     setProperty(ShowTerminalSizeHint, true);
