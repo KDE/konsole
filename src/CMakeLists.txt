@@ -17,6 +17,7 @@ else()
 endif()
 
 include(CheckIncludeFiles)
+include(ECMAddAppIcon)
 
 configure_file(config-konsole.h.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h)
@@ -168,7 +169,9 @@ set(konsole_KDEINIT_SRCS
 
 kconfig_add_kcfg_files(konsole_KDEINIT_SRCS settings/KonsoleSettings.kcfgc)
 
-###kde4_add_app_icon(konsole_KDEINIT_SRCS "${KDE4_ICON_INSTALL_DIR}/oxygen/*/apps/utilities-terminal.png")
+# Sets the icon on Windows and OSX
+file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../data/icons/*.png")
+ecm_add_app_icon(kdeinit_konsole ICONS ${ICONS_SRCS})
 
 kf5_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
 target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::WindowSystem KF5::Bookmarks
@@ -177,6 +180,18 @@ target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::WindowSyst
   KF5::NotifyConfig
   KF5::Crash
 )
+
+if(APPLE)
+    set_target_properties(konsole PROPERTIES
+        MACOSX_BUNDLE_GUI_IDENTIFIER "org.kde.konsole"
+        MACOSX_BUNDLE_BUNDLE_NAME "Konsole"
+        MACOSX_BUNDLE_DISPLAY_NAME "Konsole"
+        MACOSX_BUNDLE_INFO_STRING "Konsole, the KDE terminal emulator"
+        MACOSX_BUNDLE_LONG_VERSION_STRING "Konsole ${KDE_APPLICATIONS_VERSION}"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}"
+        MACOSX_BUNDLE_BUNDLE_VERSION "${KDE_APPLICATIONS_VERSION}"
+        MACOSX_BUNDLE_COPYRIGHT "1997-2016 The Konsole Developers")
+endif()
 
 install(TARGETS kdeinit_konsole konsole
        ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
