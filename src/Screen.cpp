@@ -640,7 +640,7 @@ void Screen::displayCharacter(unsigned short c)
             return;
         }
         // Find previous "real character" to try to combine with
-        int charToCombineWithX = _cuX;
+        int charToCombineWithX = qMin(_cuX, _screenLines[_cuY].length());
         int charToCombineWithY = _cuY;
         do {
             if (charToCombineWithX > 0) {
