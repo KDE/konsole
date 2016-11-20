@@ -961,8 +961,7 @@ ProcessInfo* Session::getProcessInfo()
 {
     ProcessInfo* process = 0;
 
-    if (isForegroundProcessActive()) {
-        updateForegroundProcessInfo();
+    if (isForegroundProcessActive() && updateForegroundProcessInfo()) {
         process = _foregroundProcessInfo;
     } else {
         updateSessionProcessInfo();
