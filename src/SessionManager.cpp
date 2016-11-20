@@ -314,13 +314,12 @@ void SessionManager::restoreSessions(KConfig* config)
 
 Session* SessionManager::idToSession(int id)
 {
-    Q_ASSERT(id);
     foreach(Session * session, _sessions) {
         if (session->sessionId() == id)
             return session;
     }
     // this should not happen
-    Q_ASSERT(0);
-    return 0;
+    qWarning() << "Failed to find session for ID" << id;
+    return nullptr;
 }
 
