@@ -1736,7 +1736,8 @@ void SaveHistoryTask::execute()
         // from.
         // this is set to -1 to indicate the job has just been started
 
-        if ((dialog->selectedNameFilter()).contains("html", Qt::CaseInsensitive)) {
+        if (((dialog->selectedNameFilter()).contains("html", Qt::CaseInsensitive)) ||
+           ((dialog->selectedFiles()).at(0).endsWith("html", Qt::CaseInsensitive))) {
             jobInfo.decoder = new HTMLDecoder();
         } else {
             jobInfo.decoder = new PlainTextDecoder();
