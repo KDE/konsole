@@ -51,8 +51,10 @@ set_package_properties(KF5DocTools PROPERTIES DESCRIPTION
     TYPE OPTIONAL
 )
 
-find_package(X11)
-set_package_properties(X11 PROPERTIES TYPE OPTIONAL)
+if(NOT APPLE)
+    find_package(X11)
+    set_package_properties(X11 PROPERTIES TYPE OPTIONAL)
+endif()
 set(HAVE_X11 ${X11_FOUND})
 
 add_definitions(
