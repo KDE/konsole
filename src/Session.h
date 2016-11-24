@@ -37,6 +37,7 @@
 // Konsole
 #include "konsoleprivate_export.h"
 #include "config-konsole.h"
+#include "Shortcut_p.h"
 
 class QColor;
 
@@ -51,17 +52,6 @@ class ProcessInfo;
 class TerminalDisplay;
 class ZModemDialog;
 class HistoryType;
-
-/**
- * Platform-specific main shortcut "opcode":
- */
-enum Modifier {
-#ifdef Q_OS_OSX
-    ACCEL = Qt::META
-#else
-    ACCEL = Qt::CTRL
-#endif
-};
 
 /**
  * Represents a terminal session consisting of a pseudo-teletype and a terminal emulation.

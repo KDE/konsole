@@ -42,6 +42,7 @@
 #include "ui_ColorSchemeEditor.h"
 #include "ColorScheme.h"
 #include "CharacterColor.h"
+#include "Shortcut_p.h"
 
 using namespace Konsole;
 
@@ -66,7 +67,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
-    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    okButton->setShortcut(Konsole::ACCEL | Qt::Key_Return);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &ColorSchemeEditor::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &ColorSchemeEditor::reject);
     mainLayout->addWidget(buttonBox);

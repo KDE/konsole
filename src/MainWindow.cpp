@@ -182,8 +182,8 @@ void MainWindow::correctStandardShortcuts()
     // changed the shortcut; however, if the user changed it to Ctrl+B
     // this will still get changed to Ctrl+Shift+B
     QAction* bookmarkAction = actionCollection()->action(QStringLiteral("add_bookmark"));
-    if (bookmarkAction && bookmarkAction->shortcut() == QKeySequence(Qt::CTRL + Qt::Key_B)) {
-        actionCollection()->setDefaultShortcut(bookmarkAction, Qt::CTRL + Qt::SHIFT + Qt::Key_B);
+    if (bookmarkAction && bookmarkAction->shortcut() == QKeySequence(Konsole::ACCEL + Qt::Key_B)) {
+        actionCollection()->setDefaultShortcut(bookmarkAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_B);
     }
 }
 
@@ -289,7 +289,7 @@ void MainWindow::setupActions()
 
     // File Menu
     _newTabMenuAction = new KActionMenu(QIcon::fromTheme(QStringLiteral("tab-new")), i18nc("@action:inmenu", "&New Tab"), collection);
-    collection->setDefaultShortcut(_newTabMenuAction, Qt::CTRL + Qt::SHIFT + Qt::Key_T);
+    collection->setDefaultShortcut(_newTabMenuAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_T);
     collection->setShortcutsConfigurable(_newTabMenuAction, true);
     _newTabMenuAction->setAutoRepeat(false);
     connect(_newTabMenuAction, &KActionMenu::triggered, this, &Konsole::MainWindow::newTab);
@@ -306,14 +306,14 @@ void MainWindow::setupActions()
     menuAction = collection->addAction(QStringLiteral("new-window"));
     menuAction->setIcon(QIcon::fromTheme(QStringLiteral("window-new")));
     menuAction->setText(i18nc("@action:inmenu", "New &Window"));
-    collection->setDefaultShortcut(menuAction, Qt::CTRL + Qt::SHIFT + Qt::Key_N);
+    collection->setDefaultShortcut(menuAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_N);
     menuAction->setAutoRepeat(false);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::newWindow);
 
     menuAction = collection->addAction(QStringLiteral("close-window"));
     menuAction->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
     menuAction->setText(i18nc("@action:inmenu", "Close Window"));
-    collection->setDefaultShortcut(menuAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Q);
+    collection->setDefaultShortcut(menuAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Q);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::close);
 
     // Bookmark Menu
@@ -324,7 +324,7 @@ void MainWindow::setupActions()
 
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
-    collection->setDefaultShortcut(_toggleMenuBarAction, Qt::CTRL + Qt::SHIFT + Qt::Key_M);
+    collection->setDefaultShortcut(_toggleMenuBarAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_M);
 
     // Full Screen
     menuAction = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
@@ -342,7 +342,7 @@ void MainWindow::setupActions()
     // Set up an shortcut-only action for activating menu bar.
     menuAction = collection->addAction(QStringLiteral("activate-menu"));
     menuAction->setText(i18nc("@item", "Activate Menu"));
-    collection->setDefaultShortcut(menuAction, Qt::CTRL + Qt::SHIFT + Qt::Key_F10);
+    collection->setDefaultShortcut(menuAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_F10);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::activateMenuBar);
 }
 

@@ -57,6 +57,7 @@
 #include "ProfileManager.h"
 #include "ShellCommand.h"
 #include "WindowSystemInfo.h"
+#include "Shortcut_p.h"
 
 using namespace Konsole;
 
@@ -73,7 +74,7 @@ EditProfileDialog::EditProfileDialog(QWidget* aParent)
     mainLayout->addWidget(mainWidget);
     QPushButton *okButton = mButtonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
-    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    okButton->setShortcut(Konsole::ACCEL | Qt::Key_Return);
     connect(mButtonBox, &QDialogButtonBox::accepted, this, &Konsole::EditProfileDialog::accept);
     connect(mButtonBox, &QDialogButtonBox::rejected, this, &Konsole::EditProfileDialog::reject);
 

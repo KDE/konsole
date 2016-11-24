@@ -44,7 +44,7 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
-    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    okButton->setShortcut(Konsole::ACCEL | Qt::Key_Return);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &CopyInputDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &CopyInputDialog::reject);
     mainLayout->addWidget(buttonBox);

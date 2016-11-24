@@ -61,7 +61,7 @@ void PartManualTest::testShortcutOverride()
     KMainWindow* mainWindow = new KMainWindow();
     QMenu* fileMenu = mainWindow->menuBar()->addMenu("File");
     QAction* testAction = fileMenu->addAction("Test");
-    testAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
+    testAction->setShortcut(QKeySequence(Konsole::ACCEL + Qt::Key_S));
     connect(testAction, &QAction::triggered, this, &Konsole::PartManualTest::shortcutTriggered);
 
     // Create terminal part and embed in into the main window

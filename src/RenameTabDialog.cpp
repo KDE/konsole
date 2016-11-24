@@ -22,6 +22,7 @@
 
 // Konsole
 #include "ui_RenameTabDialog.h"
+#include "Shortcut_p.h"
 
 #include <KLocalizedString>
 #include <QDialogButtonBox>
@@ -41,7 +42,7 @@ RenameTabDialog::RenameTabDialog(QWidget* parent)
     mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setAutoDefault(true);
-    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    okButton->setShortcut(Konsole::ACCEL | Qt::Key_Return);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &RenameTabDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &RenameTabDialog::reject);
     mainLayout->addWidget(buttonBox);
