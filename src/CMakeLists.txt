@@ -105,6 +105,9 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         WindowSystemInfo.cpp
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
+
+kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
+
 set(konsole_LIBS
                  KF5::XmlGui
                  Qt5::PrintSupport

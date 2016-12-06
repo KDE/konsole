@@ -99,6 +99,8 @@ public:
 
     void focusLineEdit();
 
+    void setOptions();
+
     // reimplemented
     virtual void setVisible(bool visible);
 signals:
