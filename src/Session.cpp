@@ -298,8 +298,6 @@ void Session::viewDestroyed(QObject* view)
 {
     // the received QObject has already been destroyed, so using
     // qobject_cast<> does not work here
-    // note: runtime error: downcast not an object of type 'TerminalDisplay'
-    // note: object is of type 'QWidget'
     TerminalDisplay* display = static_cast<TerminalDisplay*>(view);
 
     Q_ASSERT(_views.contains(display));
