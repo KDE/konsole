@@ -855,18 +855,10 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         // This still allows RTL characters to be rendered in the RTL way.
         painter.setLayoutDirection(Qt::LeftToRight);
 
-        // the drawText(rect,flags,string) overload is used here with null flags
-        // instead of drawText(rect,string) because the (rect,string) overload causes
-        // the application's default layout direction to be used instead of
-        // the widget-specific layout direction, which should always be
-        // Qt::LeftToRight for this widget
-        //
-        // This was discussed in: http://lists.kde.org/?t=120552223600002&r=1&w=2
         if (_bidiEnabled) {
-            painter.drawText(rect, 0, text);
+            painter.drawText(rect.x(), rect.y() + QFontMetrics(font).ascent(), text);
         } else {
-            // See bug 280896 for more info
-            painter.drawText(rect, Qt::AlignBottom, LTR_OVERRIDE_CHAR + text);
+            painter.drawText(rect.x(), rect.y() + QFontMetrics(font).ascent(), LTR_OVERRIDE_CHAR + text);
         }
     }
 }
