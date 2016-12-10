@@ -131,7 +131,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
      <property name="sizeConstraint">
       <enum>QLayout::SetNoConstraint</enum>
      </property>
@@ -140,7 +140,7 @@
        <property name="title">
         <string>Default Search Settings</string>
        </property>
-       <layout class="QGridLayout" name="gridLayout">
+       <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
          <widget class="QCheckBox" name="kcfg_SearchCaseSensitive">
           <property name="sizePolicy">
