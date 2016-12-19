@@ -50,9 +50,10 @@ class Application : public QObject
 
 public:
     /** Constructs a new Konsole application. */
-    explicit Application(QSharedPointer<QCommandLineParser> parser);
+    explicit Application(QSharedPointer<QCommandLineParser> parser, const QStringList &customCommand);
 
     static void populateCommandLineParser(QCommandLineParser *parser);
+    static QStringList getCustomCommand(QStringList &args);
 
     ~Application();
 
@@ -89,6 +90,7 @@ private:
 
     MainWindow* _backgroundInstance;
     QSharedPointer<QCommandLineParser> m_parser;
+    QStringList m_customCommand;
 };
 }
 #endif  // APPLICATION_H

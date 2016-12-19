@@ -45,7 +45,7 @@
 
 using namespace Konsole;
 
-Application::Application(QSharedPointer<QCommandLineParser> parser) : m_parser(parser)
+Application::Application(QSharedPointer<QCommandLineParser> parser, const QStringList &customCommand) : m_parser(parser), m_customCommand(customCommand)
 {
     _backgroundInstance = 0;
 }
@@ -113,6 +113,22 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
     titleOption.setHidden(true);
 #endif
     parser->addOption(titleOption);
+}
+
+QStringList Application::getCustomCommand(QStringList &args)
+{
+    int i = args.indexOf("-e");
+    QStringList customCommand;
+    if ((0 < i) && (i < (args.size() - 1))) {
+        // -e was specified with at least one extra argument
+        // if -e was specified without arguments, QCommandLineParser will deal
+        // with that
+        args.removeAt(i);
+        while (args.size() > i) {
+            customCommand << args.takeAt(i);
+        }
+    }
+    return customCommand;
 }
 
 Application::~Application()
@@ -480,21 +496,16 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
     }
 
     // run a custom command
-    if (m_parser->isSet(QStringLiteral("e"))) {
-        QString commandExec = m_parser->value(QStringLiteral("e"));
-        QStringList commandArguments;
-
-        if (m_parser->positionalArguments().count() == 0 &&
-            QStandardPaths::findExecutable(commandExec).isEmpty()) {
+    if (!m_customCommand.isEmpty()) {
+        // Example: konsole -e man ls
+        QString commandExec = m_customCommand[0];
+        QStringList commandArguments(m_customCommand);
+        if ((m_customCommand.size() == 1) &&
+            (QStandardPaths::findExecutable(commandExec).isEmpty())) {
             // Example: konsole -e "man ls"
-            ShellCommand shellCommand(m_parser->value(QStringLiteral("e")));
+            ShellCommand shellCommand(commandExec);
             commandExec = shellCommand.command();
             commandArguments = shellCommand.arguments();
-        } else {
-            // Example: konsole -e man ls
-            commandArguments << commandExec;
-            for ( int i = 0 ; i < m_parser->positionalArguments().count() ; i++ )
-                commandArguments << m_parser->positionalArguments().at(i);
         }
 
         if (commandExec.startsWith(QLatin1String("./")))
@@ -551,6 +562,8 @@ void Application::slotActivateRequested (QStringList args, const QString & /*wor
     // QCommandLineParser expects the first argument to be the executable name
     // In the current version it just strips it away
     args.prepend(qApp->applicationFilePath());
+
+    m_customCommand = getCustomCommand(args);
 
     // We can't re-use QCommandLineParser instances, it preserves earlier parsed values
     QCommandLineParser *parser = new QCommandLineParser;

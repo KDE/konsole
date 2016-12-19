@@ -112,9 +112,13 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     parser->addHelpOption();
     parser->addVersionOption();
     about.setupCommandLine(parser.data());
+
+    QStringList args = QStringList(app->arguments());
+    QStringList customCommand = Application::getCustomCommand(args);
+
     Application::populateCommandLineParser(parser.data());
 
-    parser->process(*app);
+    parser->process(args);
     about.processCommandLine(parser.data());
 
     // Enable user to force multiple instances
@@ -158,7 +162,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
 
     // If we reach this location, there was no existing copy of Konsole
     // running, so create a new instance.
-    Application konsoleApp(parser);
+    Application konsoleApp(parser, customCommand);
 
     // The activateRequested() signal is emitted when a second instance
     // of Konsole is started.
