@@ -228,7 +228,10 @@ bool shouldUseNewProcess(int argc, char *argv[])
     }
 
     // if users have explictly requested starting a new process
-    if (arguments.contains(QStringLiteral("--separate"))) {
+    // Support --nofork to retain argument compatibility with older
+    // versions.
+    if (arguments.contains(QStringLiteral("--separate")) ||
+        arguments.contains(QStringLiteral("--nofork"))) {
         return true;
     }
 
