@@ -2793,10 +2793,11 @@ QChar TerminalDisplay::charClass(const Character& ch) const
             const QString s = QString::fromUtf16(chars, extendedCharLength);
             if (_wordCharacters.contains(s, Qt::CaseInsensitive))
                 return 'a';
-            bool allLetterOrNumber = true;
-            for (int i = 0; allLetterOrNumber && i < s.size(); ++i)
-                allLetterOrNumber = s.at(i).isLetterOrNumber();
-            return allLetterOrNumber ? 'a' : s.at(0);
+            bool letterOrNumber = false;
+            for (int i = 0; !letterOrNumber && i < s.size(); ++i) {
+                letterOrNumber = s.at(i).isLetterOrNumber();
+            }
+            return letterOrNumber ? 'a' : s.at(0);
         }
         return 0;
     } else {
