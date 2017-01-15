@@ -1185,7 +1185,8 @@ void Screen::writeToStream(TerminalCharacterDecoder* decoder,
         // this makes it possible to 'select' a trailing new line character after
         // the text on a line.
         if (y == bottom &&
-                copied < count) {
+                copied < count &&
+                !trimTrailingSpaces) {
             Character newLineChar('\n');
             decoder->decodeLine(&newLineChar, 1, 0);
         }
@@ -1257,7 +1258,7 @@ int Screen::copyLineToStream(int line ,
             // ignore trailing white space at the end of the line
             for (int i = length-1; i >= 0; i--)
             {
-                if (data[i].character == ' ')
+                if (QChar(data[i].character).isSpace())
                     length--;
                 else
                     break;
