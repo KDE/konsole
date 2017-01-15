@@ -636,7 +636,7 @@ void Screen::displayCharacter(unsigned short c)
         return;
     } else if (w == 0) {
         const QChar::Category category = QChar(c).category();
-        if (category != QChar::Mark_NonSpacing && category != QChar::Letter_Other) {
+        if (category != QChar::Mark_NonSpacing && category != QChar::Letter_Other && !QChar::isLowSurrogate(c)) {
             return;
         }
         // Find previous "real character" to try to combine with

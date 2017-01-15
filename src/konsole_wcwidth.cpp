@@ -186,8 +186,14 @@ int KONSOLEPRIVATE_EXPORT konsole_wcwidth(quint16 oucs)
     };
 
     /* test for 8-bit control characters */
-    if (ucs == 0)
+    if (ucs == 0 || QChar::isLowSurrogate(ucs))
         return 0;
+
+    /* Always assume double width, otherwise we have to go back and move characters */
+    if (QChar::isHighSurrogate(ucs)) {
+        return 2;
+    }
+
     if (ucs < 32 || (ucs >= 0x7f && ucs < 0xa0))
         return -1;
 
