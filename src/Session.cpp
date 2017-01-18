@@ -866,7 +866,7 @@ void Session::sendTextToTerminal(const QString& text, const QChar& eol) const
 // Only D-Bus calls this function (via SendText or runCommand)
 void Session::sendText(const QString& text) const
 {
-#if not defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
+#if !defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
     if (show_disallow_certain_dbus_methods_message) {
 
         KNotification::event(KNotification::Warning, "Konsole D-Bus Warning",
