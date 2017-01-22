@@ -668,7 +668,7 @@ void Screen::displayCharacter(unsigned short c)
             ushort extendedCharLength;
             const ushort* oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
             Q_ASSERT(oldChars);
-            if (oldChars) {
+            if (oldChars && extendedCharLength < 3) {
                 Q_ASSERT(extendedCharLength > 1);
                 Q_ASSERT(extendedCharLength < 65535);
                 ushort* chars = new ushort[extendedCharLength + 1];
