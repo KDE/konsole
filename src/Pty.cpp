@@ -299,10 +299,14 @@ void Pty::sendEof()
 
 int Pty::foregroundProcessGroup() const
 {
-    int foregroundPid = tcgetpgrp(pty()->masterFd());
+    const int master_fd = pty()->masterFd();
 
-    if (foregroundPid != -1) {
-        return foregroundPid;
+    if (master_fd >= 0) {
+        int foregroundPid = tcgetpgrp(master_fd);
+
+        if (foregroundPid != -1) {
+            return foregroundPid;
+        }
     }
 
     return 0;
