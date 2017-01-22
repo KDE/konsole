@@ -580,7 +580,7 @@ public:
         QSet<ushort> result;
         for (int i = 0; i < _lines; ++i) {
             const ImageLine& il = _screenLines[i];
-            for (int j = 0; j < _columns; ++j) {
+            for (int j = 0; j < il.length(); ++j) {
                 if (il[j].rendition & RE_EXTENDED_CHAR) {
                     result << il[j].character;
                 }
