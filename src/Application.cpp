@@ -371,7 +371,6 @@ MainWindow* Application::processWindowArgs(bool &createdNewMainWindow)
 {
     MainWindow* window = 0;
     if (m_parser->isSet(QStringLiteral("new-tab"))) {
-        // topLevelsWidgets() now always returns no windows BUG:373440
         QListIterator<QWidget*> iter(QApplication::topLevelWidgets());
         iter.toBack();
         while (iter.hasPrevious()) {

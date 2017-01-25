@@ -121,8 +121,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     parser->process(args);
     about.processCommandLine(parser.data());
 
-    // Enable user to force multiple instances
-    if (!Konsole::KonsoleSettings::useSingleInstance()) {
+    // Enable user to force multiple instances, unless a new tab is requested
+    if (!Konsole::KonsoleSettings::useSingleInstance() && !parser->isSet(QStringLiteral("new-tab"))) {
         startupOption = KDBusService::Multiple;
     }
 
