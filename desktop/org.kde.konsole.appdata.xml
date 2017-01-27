@@ -85,7 +85,7 @@
   <summary xml:lang="zh-CN">终端</summary>
   <summary xml:lang="zh-TW">終端機</summary>
   <description>
-    <p>Konsole is a terminal emulator.</p>
+    <p>Konsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.</p>
     <p xml:lang="ar">كونسول هو محاكي طرفيّة.</p>
     <p xml:lang="ca">El Konsole és l'emulador de terminal del KDE.</p>
     <p xml:lang="ca-valencia">El Konsole és l'emulador de terminal del KDE.</p>
