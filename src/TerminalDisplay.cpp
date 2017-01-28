@@ -856,9 +856,9 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         painter.setLayoutDirection(Qt::LeftToRight);
 
         if (_bidiEnabled) {
-            painter.drawText(rect.x(), rect.y() + _fontAscent, text);
+            painter.drawText(rect.x(), rect.y() + _fontAscent + _lineSpacing, text);
         } else {
-            painter.drawText(rect.x(), rect.y() + _fontAscent, LTR_OVERRIDE_CHAR + text);
+            painter.drawText(rect.x(), rect.y() + _fontAscent + _lineSpacing, LTR_OVERRIDE_CHAR + text);
         }
     }
 }
