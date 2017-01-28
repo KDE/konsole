@@ -1344,7 +1344,7 @@ char Vt102Emulation::eraseChar() const
                                           0,
                                           0);
     if (entry.text().count() > 0)
-        return entry.text()[0];
+        return entry.text().at(0);
     else
         return '\b';
 }
