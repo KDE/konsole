@@ -530,7 +530,8 @@ FileFilter::FileFilter(Session* session)
 {
     QStringList patterns;
     QMimeDatabase mimeDatabase;
-    for (const QMimeType &mimeType : mimeDatabase.allMimeTypes()) {
+    const QList<QMimeType> allMimeTypes = mimeDatabase.allMimeTypes();
+    for (const QMimeType &mimeType : allMimeTypes) {
         patterns.append(mimeType.globPatterns());
     }
 

@@ -446,10 +446,11 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
         profile->setHidden(true);
     }
 
-    // if we just deleted the default profile,
-    // replace it with a random profile from the list
+    // If we just deleted the default profile, replace it with the first
+    // profile in the list.
     if (wasDefault) {
-        setDefaultProfile(_profiles.toList().at(0));
+        const QList<Profile::Ptr> existingProfiles = allProfiles();
+        setDefaultProfile(existingProfiles.at(0));
     }
 
     emit profileRemoved(profile);
