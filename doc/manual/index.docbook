@@ -38,14 +38,14 @@
 <holder>&Jonathan.Singer;</holder>
 </copyright>
 <copyright>
-    <year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year><year>2016</year>
+    <year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year><year>2016</year><year>2017</year>
 <holder>&Kurt.Hindenburg;</holder>
 </copyright>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2016-07-09</date>
-<releaseinfo>Applications 16.08</releaseinfo>
+<date>2017-01-28</date>
+<releaseinfo>Applications 17.04</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -1137,6 +1137,7 @@ Empty lines or lines with <userinput>#</userinput> at the beginning are ignored,
 
 <varlistentry>
 <term><option>--separate</option></term>
+<term><option>--nofork</option></term>
 <listitem><para><action>Run</action> the new instance of &konsole; in a separate process.
 </para></listitem>
 </varlistentry>
@@ -1254,17 +1255,54 @@ will display methods for controlling window 1.
 <listitem><para>
 <prompt>&percnt;</prompt>
 <command>qdbus</command>
+<option>org.kde.konsole $KONSOLE_DBUS_WINDOW</option>
+will display methods for controlling the current window.
+</para></listitem>
+
+<listitem><para>
+<prompt>&percnt;</prompt>
+<command>qdbus</command>
 <option>org.kde.konsole /Sessions/1</option>
 will display methods for controlling session 1.
+</para></listitem>
+
+<listitem><para>
+<prompt>&percnt;</prompt>
+<command>qdbus</command>
+<option>org.kde.konsole $KONSOLE_DBUS_SESSION</option>
+will display methods for controlling the current session.
+</para></listitem>
+
+<listitem><para>
+<prompt>&percnt;</prompt>
+<command>qdbus</command>
+<option>$KONSOLE_DBUS_SERVICE $KONSOLE_DBUS_SESSION</option>
+will display methods for controlling the current &konsole;'s session.
 </para></listitem>
 
 </itemizedlist>
 </para>
 
 <para>
-If you start &konsole; from a terminal you may need to change
-<option>org.kde.konsole</option> to
-<option>org.kde.konsole-`pidof -s konsole`</option>.
+If any of the above commands outputs:
+Service 'org.kde.konsole' does not exist, change
+<option>org.kde.konsole</option> to one of the following:
+
+<itemizedlist>
+
+<listitem><para>
+<option>org.kde.konsole-`pidof -s konsole`</option>
+(will select first pid)
+</para></listitem>
+<listitem><para>
+<option>$KONSOLE_DBUS_SERVICE</option>
+(this can be used from the current &konsole;)
+</para></listitem>
+<listitem><para>
+<option>select one from the output of 'qdbus | grep konsole'</option>
+</para></listitem>
+
+</itemizedlist>
 </para>
 
 <para>
@@ -1414,11 +1452,6 @@ in <userinput><command>qtpaths</command> <option>--paths GenericConfigLocation</
 <sect1 id="commonissues">
 <title>Common Issues</title>
 <itemizedlist>
-
-<listitem><para>
-Starting with version 16.08 (August 2016), &konsole; no longer uses KDE4's KUniqueApplication and thus <option>--nofork</option> no longer exists.
-</para>
-</listitem>
 
 <listitem>
 <para>Some fonts might be unavailable for usage in &konsole;, although they are available in other applications. That doesn't mean there is a bug in &konsole;. &konsole; requires monospaced fonts to provide the best visual result, so it asks &Qt; to only list monospaced fonts.</para>
