@@ -86,43 +86,6 @@
   <summary xml:lang="zh-TW">終端機</summary>
   <description>
     <p>Konsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.</p>
-    <p xml:lang="ar">كونسول هو محاكي طرفيّة.</p>
-    <p xml:lang="ca">El Konsole és l'emulador de terminal del KDE.</p>
-    <p xml:lang="ca-valencia">El Konsole és l'emulador de terminal del KDE.</p>
-    <p xml:lang="cs">Konsole je emulátor terminálu.</p>
-    <p xml:lang="de">Konsole ist in Terminal-Emulator</p>
-    <p xml:lang="el">Το Konsole είναι ένας εξομοιωτής τερματικού.</p>
-    <p xml:lang="en-GB">Konsole is a terminal emulator.</p>
-    <p xml:lang="es">Konsole es un emulador de terminal.</p>
-    <p xml:lang="et">Konsool on terminaliemulaator.</p>
-    <p xml:lang="fi">Konsole on pääte-emulaattori.</p>
-    <p xml:lang="fr">Konsole est un émulateur de terminal.</p>
-    <p xml:lang="gl">Konsole é un emulador de terminal.</p>
-    <p xml:lang="hu">A Konsole egy terminálemulátor.</p>
-    <p xml:lang="ia">Konsole es un emulator de terminal.</p>
-    <p xml:lang="it">Konsole è un emulatore di terminale.</p>
-    <p xml:lang="ko">Konsole은 터미널 에뮬레이터입니다.</p>
-    <p xml:lang="lt">Konsolė yra terminalo emuliatorius</p>
-    <p xml:lang="nb">Konsole er en terminalemulator.</p>
-    <p xml:lang="nl">Konsole is een terminalemulator</p>
-    <p xml:lang="nn">Konsole er ein terminalemulator.</p>
-    <p xml:lang="pa">ਕਨਸੋਲ ਟਰਮੀਨਲ ਈਮੂਲੇਟਰ ਹੈ।</p>
-    <p xml:lang="pl">Konsole jest emulatorem terminala.</p>
-    <p xml:lang="pt">O Konsole é um emulador de terminal.</p>
-    <p xml:lang="pt-BR">Konsole é um emulador de terminal.</p>
-    <p xml:lang="ru">Konsole — это эмулятор терминала.</p>
-    <p xml:lang="sk">Konsole je emulátor terminálu.</p>
-    <p xml:lang="sl">Konsole je posnemovalnik terminala.</p>
-    <p xml:lang="sr">Конзола је емулатор терминала.</p>
-    <p xml:lang="sr-Latn">Konsole je emulator terminala.</p>
-    <p xml:lang="sr-ijekavian">Конзола је емулатор терминала.</p>
-    <p xml:lang="sr-ijekavianlatin">Konsole je emulator terminala.</p>
-    <p xml:lang="sv">Terminal är en terminalemulator.</p>
-    <p xml:lang="tr">Konsole bir uçbirim öykünücüsüdür.</p>
-    <p xml:lang="uk">Konsole — це емулятор термінала.</p>
-    <p xml:lang="x-test">xxKonsole is a terminal emulator.xx</p>
-    <p xml:lang="zh-CN">Konsole 是一个终端模拟器。</p>
-    <p xml:lang="zh-TW">Konsole 是一套終端機模擬程式。</p>
     <p>Features:</p>
     <p xml:lang="ar">الميزات:</p>
     <p xml:lang="bs">Svojstva:</p>
