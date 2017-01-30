@@ -87,7 +87,11 @@
   <description>
     <p>Konsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.</p>
     <p xml:lang="ca">El Konsole és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordres). Emula una interfície de línia d'ordres en una finestra de només text.</p>
+    <p xml:lang="ca-valencia">El Konsole és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordes). Emula una interfície de línia d'ordes en una finestra de només text.</p>
     <p xml:lang="nl">Konsole is een X-terminalemulator, vaak een terminal of shell genoemd. Het emuleert een opdrachtprompt in een venster met alleen tekst.</p>
+    <p xml:lang="pl">Konsola jest emulatorem terminala dla X, częściej nazwyana po prostu terminalem ub powłoką. Emuluje interfejs wiersza poleceń w oknie zawierającym wyłącznie tekst.</p>
+    <p xml:lang="pt">O Konsole é um emulador de terminal do X, normalmente referido como um terminal ou consola. Ele emula uma interface de linha de comandos numa janela apenas de texto.</p>
+    <p xml:lang="sk">Konsole je emulátor terminálu X, často sa označuje ako terminál alebo shell. Emuluje rozhranie príkazového riadku v textovom okne.</p>
     <p xml:lang="sv">Terminal är en X-terminalemulator, ofta kallad bara terminal eller ett skal. Det emulerar ett kommandoradsgränssnitt i ett fönster med bara text.</p>
     <p xml:lang="uk">Konsole — це графічний емулятор термінала, який часто називають терміналом або оболонкою. Ця програма імітує інтерфейс командного рядка у вікні, що працює лише у текстовому режимі.</p>
     <p xml:lang="x-test">xxKonsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.xx</p>
