@@ -1608,7 +1608,8 @@ void SessionGroup::forwardData(const QByteArray& data)
     }
 
     _inForwardData = true;
-    foreach(Session* other, _sessions.keys()) {
+    const QList<Session*> sessionsKeys = _sessions.keys();
+    foreach(Session* other, sessionsKeys) {
         if (!_sessions[other]) {
             other->emulation()->sendString(data);
         }

@@ -796,7 +796,8 @@ EditProfileDialog* SessionController::profileDialogPointer()
 void SessionController::editCurrentProfile()
 {
     // Searching for Edit profile dialog opened with the same profile
-    foreach (SessionController* session, _allControllers.values()) {
+    const QList<SessionController*> allSessionsControllers = _allControllers.values();
+    foreach (SessionController* session, allSessionsControllers) {
         if (session->profileDialogPointer()
                 && session->profileDialogPointer()->isVisible()
                 && session->profileDialogPointer()->lookupProfile() == SessionManager::instance()->sessionProfile(_session)) {

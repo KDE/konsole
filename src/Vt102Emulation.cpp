@@ -1095,7 +1095,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
         else
             textToSend += _codec->fromUnicode(event->text());
 
-        sendData(textToSend);
+        emit sendData(textToSend);
     }
     else
     {

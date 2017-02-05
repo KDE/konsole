@@ -531,7 +531,7 @@ void TabbedViewContainer::tabDoubleClicked(int index)
     if (index >= 0)
         renameTab(index);
     else
-        newViewRequest();
+        emit newViewRequest();
 }
 
 void TabbedViewContainer::renameTab(int index)

@@ -866,7 +866,8 @@ void ViewManager::updateViewsForSession(Session* session)
 {
     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
 
-    foreach(TerminalDisplay* view, _sessionMap.keys(session)) {
+    const QList<TerminalDisplay*> sessionMapKeys = _sessionMap.keys(session);
+    foreach(TerminalDisplay* view, sessionMapKeys) {
         applyProfileToView(view, profile);
     }
 }

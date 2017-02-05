@@ -1387,7 +1387,8 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 
             if (_showUrlHint && urlNumber < 10) {
                 // Position at the beginning of the URL
-                QRect hintRect(region.rects().first());
+                const QVector<QRect> regionRects = region.rects();
+                QRect hintRect(regionRects.first());
                 hintRect.setWidth(r.height());
                 painter.fillRect(hintRect, QColor(0, 0, 0, 128));
                 painter.setPen(Qt::white);
