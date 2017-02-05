@@ -574,7 +574,7 @@ void Session::silenceTimerDone()
     }
 
     bool hasFocus = false;
-    for (TerminalDisplay *display : _views) {
+    foreach(TerminalDisplay *display, _views) {
         if (display->hasFocus()) {
             hasFocus = true;
             break;
@@ -634,7 +634,7 @@ void Session::activityStateSet(int state)
     } else if (state == NOTIFYACTIVITY) {
         // Don't notify if the terminal is active
         bool hasFocus = false;
-        for (TerminalDisplay *display : _views) {
+        foreach(TerminalDisplay *display, _views) {
             if (display->hasFocus()) {
                 hasFocus = true;
                 break;
