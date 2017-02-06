@@ -1757,7 +1757,8 @@ void TerminalDisplay::updateCursor()
 
 void TerminalDisplay::resizeEvent(QResizeEvent*)
 {
-    updateImageSize();
+    if (contentsRect().isValid())
+        updateImageSize();
 }
 
 void TerminalDisplay::propagateSize()
