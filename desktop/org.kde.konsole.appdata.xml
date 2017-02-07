@@ -88,8 +88,10 @@
     <p>Konsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.</p>
     <p xml:lang="ca">El Konsole és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordres). Emula una interfície de línia d'ordres en una finestra de només text.</p>
     <p xml:lang="ca-valencia">El Konsole és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordes). Emula una interfície de línia d'ordes en una finestra de només text.</p>
+    <p xml:lang="el">Το Konsole είναι ένας εξομοιωτής τερματικού, το οποίο συχνά αναφέρεται ως τερματικό ή κέλυφος. Εξομοιώνει ένα περιβάλλον χρήστη γραμμής εντολών σε ένα παράθυρο για κείμενο μόνο.</p>
     <p xml:lang="en-GB">Konsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.</p>
     <p xml:lang="es">Konsole es un emulador de terminal X, al que se le suele llamar terminal o shell. Emula in interfaz de línea de órdenes en una ventana solo de texto.</p>
+    <p xml:lang="it">Konsole è un emulatore di terminale per X, spesso indicato come un terminale o una shell. Emula un'interfaccia a riga di comando in una finestra di solo testo.</p>
     <p xml:lang="nl">Konsole is een X-terminalemulator, vaak een terminal of shell genoemd. Het emuleert een opdrachtprompt in een venster met alleen tekst.</p>
     <p xml:lang="pl">Konsola jest emulatorem terminala dla X, częściej nazwyana po prostu terminalem ub powłoką. Emuluje interfejs wiersza poleceń w oknie zawierającym wyłącznie tekst.</p>
     <p xml:lang="pt">O Konsole é um emulador de terminal do X, normalmente referido como um terminal ou consola. Ele emula uma interface de linha de comandos numa janela apenas de texto.</p>
@@ -98,6 +100,7 @@
     <p xml:lang="uk">Konsole — це графічний емулятор термінала, який часто називають терміналом або оболонкою. Ця програма імітує інтерфейс командного рядка у вікні, що працює лише у текстовому режимі.</p>
     <p xml:lang="x-test">xxKonsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.xx</p>
     <p xml:lang="zh-CN">Konsole 是一个 X 终端模拟器，通常称为终端或者 shell。它通过一个文本窗口来模拟命令行界面。</p>
+    <p xml:lang="zh-TW">Konsole 是一個 X 終端機模擬器，通常稱為終端機或 shell。它模擬了一個在只有文字的視窗中的指令列介面。</p>
     <p>Features:</p>
     <p xml:lang="ar">الميزات:</p>
     <p xml:lang="bs">Svojstva:</p>
