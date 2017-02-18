@@ -71,7 +71,7 @@ public:
         /** Scroll half page */
         ScrollPageHalf = 0,
         /** Scroll full page */
-        ScrollPageFull = 1,
+        ScrollPageFull = 1
     };
 
     /** This enum describes the shapes used to draw the cursor in terminal

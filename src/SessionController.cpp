@@ -84,9 +84,9 @@ using namespace Konsole;
 
 // TODO - Replace the icon choices below when suitable icons for silence and
 // activity are available
-Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _activityIcon, (QIcon::fromTheme("dialog-information")));
-Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _silenceIcon, (QIcon::fromTheme("dialog-information")));
-Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _broadcastIcon, (QIcon::fromTheme("emblem-important")));
+Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _activityIcon, (QIcon::fromTheme("dialog-information")))
+Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _silenceIcon, (QIcon::fromTheme("dialog-information")))
+Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _broadcastIcon, (QIcon::fromTheme("emblem-important")))
 
 QSet<SessionController*> SessionController::_allControllers;
 int SessionController::_lastControllerId;

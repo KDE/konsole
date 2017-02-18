@@ -338,7 +338,7 @@ public:
      */
     void setMouseWheelZoom(bool value) {
         _mouseWheelZoom = value;
-    };
+    }
     /**
      * Returns the whether zoom terminal on Ctrl+mousewheel is enabled.
      *
@@ -346,7 +346,7 @@ public:
      */
     bool mouseWheelZoom() {
         return _mouseWheelZoom;
-    };
+    }
 
     /**
      * Reimplemented.  Has no effect.  Use setVTFont() to change the font

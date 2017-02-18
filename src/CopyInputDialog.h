@@ -71,10 +71,10 @@ public:
 private slots:
     void selectAll() {
         setSelectionChecked(true);
-    };
+    }
     void deselectAll() {
         setSelectionChecked(false);
-    };
+    }
 
 private:
     // Checks or unchecks selected sessions.  If there are no

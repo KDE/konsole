@@ -43,7 +43,7 @@ static const int LINE_SIZE = 1024;
 
 using namespace Konsole;
 
-Q_GLOBAL_STATIC(QString, historyFileLocation);
+Q_GLOBAL_STATIC(QString, historyFileLocation)
 
 /*
    An arbitrary long scroll.

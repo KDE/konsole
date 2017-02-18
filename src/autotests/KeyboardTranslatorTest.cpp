@@ -25,7 +25,7 @@
 
 using namespace Konsole;
 
-Q_DECLARE_METATYPE(Qt::KeyboardModifiers);
+Q_DECLARE_METATYPE(Qt::KeyboardModifiers)
 
 void KeyboardTranslatorTest::testEntryTextWildcards_data()
 {
