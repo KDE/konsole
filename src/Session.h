@@ -463,7 +463,7 @@ public slots:
     Q_SCRIPTABLE bool flowControlEnabled() const;
 
     /**
-     * Sends @p text to the current foreground terminal program.
+     * @param text to send to the current foreground terminal program.
      * @param eol send this after @p text
      */
     void sendTextToTerminal(const QString& text, const QChar& eol = QChar()) const;

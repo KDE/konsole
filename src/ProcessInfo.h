@@ -78,6 +78,8 @@ public:
      * the current platform which provides information about a given process.
      *
      * @param pid The pid of the process to examine
+     * @param titleFormat The local title format - used to determine if it
+     *  contains %u which requires expensive prodecures to be used.
      */
     static ProcessInfo* newInstance(int pid, const QString& titleFormat);
 
