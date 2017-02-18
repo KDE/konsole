@@ -2966,14 +2966,11 @@ QVariant TerminalDisplay::inputMethodQuery(Qt::InputMethodQuery query) const
     switch (query) {
     case Qt::ImMicroFocus:
         return imageToWidget(QRect(cursorPos.x(), cursorPos.y(), 1, 1));
-        break;
     case Qt::ImFont:
         return font();
-        break;
     case Qt::ImCursorPosition:
         // return the cursor position within the current line
         return cursorPos.x();
-        break;
     case Qt::ImSurroundingText: {
         // return the text from the current line
         QString lineText;
@@ -2984,10 +2981,8 @@ QVariant TerminalDisplay::inputMethodQuery(Qt::InputMethodQuery query) const
         decoder.end();
         return lineText;
     }
-    break;
     case Qt::ImCurrentSelection:
         return QString();
-        break;
     default:
         break;
     }
