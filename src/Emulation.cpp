@@ -187,7 +187,7 @@ void Emulation::receiveChar(int c)
     case '\n'      : _currentScreen->newLine();                   break;
     case '\r'      : _currentScreen->toStartOfLine();             break;
     case 0x07      : emit stateSet(NOTIFYBELL);                   break;
-    default        : _currentScreen->displayCharacter(c);         break;
+    default        : _currentScreen->displayCharacter(static_cast<unsigned short int>(c));         break;
     }
 }
 

@@ -368,9 +368,9 @@ void ColorScheme::readColorEntry(const KConfig& config , int index)
 
     setColorTableEntry(index , entry);
 
-    const quint16 hue = configGroup.readEntry("MaxRandomHue", 0);
-    const quint8 value = configGroup.readEntry("MaxRandomValue", 0);
-    const quint8 saturation = configGroup.readEntry("MaxRandomSaturation", 0);
+    const quint16 hue = static_cast<quint16>(configGroup.readEntry("MaxRandomHue", 0));
+    const quint8 value = static_cast<quint8>(configGroup.readEntry("MaxRandomValue", 0));
+    const quint8 saturation = static_cast<quint8>(configGroup.readEntry("MaxRandomSaturation", 0));
 
     if (hue != 0 || value != 0 || saturation != 0)
         setRandomizationRange(index , hue , saturation , value);

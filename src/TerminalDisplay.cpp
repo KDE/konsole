@@ -2512,7 +2512,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             // of mouse wheel rotation.  Mouse wheels typically move in steps of 15 degrees,
             // giving a scroll of 3 lines
 
-            const int lines = _scrollWheelState.consumeSteps(_fontHeight * qApp->devicePixelRatio(), ScrollState::degreesToAngle(5));
+            const int lines = _scrollWheelState.consumeSteps(static_cast<int>(_fontHeight * qApp->devicePixelRatio()), ScrollState::degreesToAngle(5));
             const int keyCode = lines > 0 ? Qt::Key_Up : Qt::Key_Down;
             QKeyEvent keyEvent(QEvent::KeyPress, keyCode, Qt::NoModifier);
 
