@@ -106,6 +106,7 @@
     <p xml:lang="sr-ijekavian">Конзола је емулатор терминала за Икс, који се често назива само терминалом или шкољком. Емулира сучеље командне линије у чисто текстуалном прозору.</p>
     <p xml:lang="sr-ijekavianlatin">Konsole je emulator terminala za X, koji se često naziva samo terminalom ili školjkom. Emulira sučelje komandne linije u čisto tekstualnom prozoru.</p>
     <p xml:lang="sv">Terminal är en X-terminalemulator, ofta kallad bara terminal eller ett skal. Det emulerar ett kommandoradsgränssnitt i ett fönster med bara text.</p>
+    <p xml:lang="tr">Konsole, genellikle uçbirim (terminal) veya kabuk (shell) olarak adlandırılan, X uçbirim öykünücüsüdür. Komut satırı arayüzünü sadece metin penceresinde gerçekleştirir.</p>
     <p xml:lang="uk">Konsole — це графічний емулятор термінала, який часто називають терміналом або оболонкою. Ця програма імітує інтерфейс командного рядка у вікні, що працює лише у текстовому режимі.</p>
     <p xml:lang="x-test">xxKonsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.xx</p>
     <p xml:lang="zh-CN">Konsole 是一个 X 终端模拟器，通常称为终端或者 shell。它通过一个文本窗口来模拟命令行界面。</p>
