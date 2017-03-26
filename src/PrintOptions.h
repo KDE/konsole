@@ -31,7 +31,7 @@ class PrintOptions : public QWidget, private Ui::PrintOptions
 
 public:
     explicit PrintOptions(QWidget* parent = 0);
-    ~PrintOptions();
+    ~PrintOptions() Q_DECL_OVERRIDE;
 
 public slots:
     void saveSettings();

@@ -94,7 +94,7 @@ public:
      * subclasses, use object->deleteLater() to delete any widgets or other objects
      * instead of 'delete object'.
      */
-    virtual ~ViewContainer();
+    ~ViewContainer() Q_DECL_OVERRIDE;
 
     /** Returns the widget which contains the view widgets */
     virtual QWidget* containerWidget() const = 0;
@@ -370,27 +370,27 @@ public:
      * are NavigationPositionTop and NavigationPositionBottom.
      */
     TabbedViewContainer(NavigationPosition position, ViewManager* connectedViewManager, QObject* parent);
-    virtual ~TabbedViewContainer();
+    ~TabbedViewContainer() Q_DECL_OVERRIDE;
 
-    virtual QWidget* containerWidget() const;
-    virtual QWidget* activeView() const;
-    virtual void setActiveView(QWidget* view);
-    virtual QList<NavigationPosition> supportedNavigationPositions() const;
-    virtual void setFeatures(Features features);
-    virtual Features supportedFeatures() const;
-    virtual void setNewViewMenu(QMenu* menu);
-    virtual void setStyleSheet(const QString& styleSheet);
+    QWidget* containerWidget() const Q_DECL_OVERRIDE;
+    QWidget* activeView() const Q_DECL_OVERRIDE;
+    void setActiveView(QWidget* view) Q_DECL_OVERRIDE;
+    QList<NavigationPosition> supportedNavigationPositions() const Q_DECL_OVERRIDE;
+    void setFeatures(Features features) Q_DECL_OVERRIDE;
+    Features supportedFeatures() const Q_DECL_OVERRIDE;
+    void setNewViewMenu(QMenu* menu) Q_DECL_OVERRIDE;
+    void setStyleSheet(const QString& styleSheet) Q_DECL_OVERRIDE;
 
     // return associated view manager
     ViewManager* connectedViewManager();
 
 protected:
-    virtual void addViewWidget(QWidget* view , int index);
-    virtual void removeViewWidget(QWidget* view);
-    virtual void navigationVisibilityChanged(NavigationVisibility mode);
-    virtual void navigationPositionChanged(NavigationPosition position);
-    virtual void navigationTextModeChanged(bool mode);
-    virtual void moveViewWidget(int fromIndex , int toIndex);
+    void addViewWidget(QWidget* view , int index) Q_DECL_OVERRIDE;
+    void removeViewWidget(QWidget* view) Q_DECL_OVERRIDE;
+    void navigationVisibilityChanged(NavigationVisibility mode) Q_DECL_OVERRIDE;
+    void navigationPositionChanged(NavigationPosition position) Q_DECL_OVERRIDE;
+    void navigationTextModeChanged(bool mode) Q_DECL_OVERRIDE;
+    void moveViewWidget(int fromIndex , int toIndex) Q_DECL_OVERRIDE;
 
 private slots:
     void updateTitle(ViewProperties* item);
@@ -440,15 +440,15 @@ class StackedViewContainer : public ViewContainer
 
 public:
     explicit StackedViewContainer(QObject* parent);
-    virtual ~StackedViewContainer();
+    ~StackedViewContainer() Q_DECL_OVERRIDE;
 
-    virtual QWidget* containerWidget() const;
-    virtual QWidget* activeView() const;
-    virtual void setActiveView(QWidget* view);
+    QWidget* containerWidget() const Q_DECL_OVERRIDE;
+    QWidget* activeView() const Q_DECL_OVERRIDE;
+    void setActiveView(QWidget* view) Q_DECL_OVERRIDE;
 
 protected:
-    virtual void addViewWidget(QWidget* view , int index);
-    virtual void removeViewWidget(QWidget* view);
+    void addViewWidget(QWidget* view , int index) Q_DECL_OVERRIDE;
+    void removeViewWidget(QWidget* view) Q_DECL_OVERRIDE;
 
 private:
     QPointer<QWidget> _containerWidget;

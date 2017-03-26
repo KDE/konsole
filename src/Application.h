@@ -55,7 +55,7 @@ public:
     static void populateCommandLineParser(QCommandLineParser *parser);
     static QStringList getCustomCommand(QStringList &args);
 
-    ~Application();
+    ~Application() Q_DECL_OVERRIDE;
 
     /** Creates a new main window and opens a default terminal session */
     int newInstance();

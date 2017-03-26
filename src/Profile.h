@@ -672,7 +672,7 @@ public:
     /** Sets the value of @p property in each of the group's profiles to
      * @p value.
      */
-    void setProperty(Property property, const QVariant& value);
+    void setProperty(Property property, const QVariant& value) Q_DECL_OVERRIDE;
 
 private:
     QList<Profile::Ptr> _profiles;

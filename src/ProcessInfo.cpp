@@ -402,7 +402,7 @@ public:
     }
 
 protected:
-    virtual bool readCurrentDir(int aPid) {
+    bool readCurrentDir(int aPid) Q_DECL_OVERRIDE {
         char path_buffer[MAXPATHLEN + 1];
         path_buffer[MAXPATHLEN] = 0;
         QByteArray procCwd = QFile::encodeName(QStringLiteral("/proc/%1/cwd").arg(aPid));
@@ -420,7 +420,7 @@ protected:
     }
 
 private:
-    virtual bool readProcInfo(int aPid) {
+    bool readProcInfo(int aPid) Q_DECL_OVERRIDE {
         // indicies of various fields within the process status file which
         // contain various information about the process
         const int PARENT_PID_FIELD = 3;
@@ -533,7 +533,7 @@ private:
         return ok;
     }
 
-    virtual bool readArguments(int aPid) {
+    bool readArguments(int aPid) Q_DECL_OVERRIDE {
         // read command-line arguments file found at /proc/<pid>/cmdline
         // the expected format is a list of strings delimited by null characters,
         // and ending in a double null character pair.

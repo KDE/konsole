@@ -102,7 +102,7 @@ public:
     void setOptions();
 
     // reimplemented
-    virtual void setVisible(bool visible);
+    void setVisible(bool visible) Q_DECL_OVERRIDE;
 signals:
     /** Emitted when the text entered in the search box is altered */
     void searchChanged(const QString& text);
@@ -137,8 +137,8 @@ signals:
     void unhandledMovementKeyPressed(QKeyEvent *event);
 
 protected:
-    virtual bool eventFilter(QObject* watched , QEvent* event);
-    virtual void keyPressEvent(QKeyEvent* event);
+    bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
+    void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
 
 public slots:
     void clearLineEdit();

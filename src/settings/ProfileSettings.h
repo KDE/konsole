@@ -52,7 +52,7 @@ class ProfileSettings : public QWidget, private Ui::ProfileSettings
 public:
     /** Constructs a new profile type with the specified parent. */
     explicit ProfileSettings(QWidget* parent = 0);
-    virtual ~ProfileSettings();
+    ~ProfileSettings() Q_DECL_OVERRIDE;
 
     /**
      * Specifies whether the shortcut editor should be show.
@@ -66,7 +66,7 @@ public:
     void setShortcutEditorVisible(bool visible);
 
 protected:
-    virtual void showEvent(QShowEvent* event);
+    void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
 
 private slots:
     void slotAccepted();
@@ -126,10 +126,10 @@ class FavoriteItemDelegate : public QStyledItemDelegate
 public:
     explicit FavoriteItemDelegate(QObject* parent = 0);
 
-    virtual bool editorEvent(QEvent* event, QAbstractItemModel* model,
-                             const QStyleOptionViewItem& option, const QModelIndex& index);
-    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option,
-                       const QModelIndex& index) const;
+    bool editorEvent(QEvent* event, QAbstractItemModel* model,
+                             const QStyleOptionViewItem& option, const QModelIndex& index) Q_DECL_OVERRIDE;
+    void paint(QPainter* painter, const QStyleOptionViewItem& option,
+                       const QModelIndex& index) const Q_DECL_OVERRIDE;
 };
 
 class ShortcutItemDelegate : public QStyledItemDelegate
@@ -139,11 +139,11 @@ class ShortcutItemDelegate : public QStyledItemDelegate
 public:
     explicit ShortcutItemDelegate(QObject* parent = 0);
 
-    virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
-    virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
-                                  const QModelIndex& index) const;
-    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option,
-                       const QModelIndex& index) const;
+    void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const Q_DECL_OVERRIDE;
+    QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
+                                  const QModelIndex& index) const Q_DECL_OVERRIDE;
+    void paint(QPainter* painter, const QStyleOptionViewItem& option,
+                       const QModelIndex& index) const Q_DECL_OVERRIDE;
 
 private slots:
     void editorModified(const QKeySequence& keys);

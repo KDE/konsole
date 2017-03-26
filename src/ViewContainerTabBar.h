@@ -37,7 +37,7 @@ class ViewContainerTabBar : public QTabBar
 
 public:
     ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container);
-    ~ViewContainerTabBar();
+    ~ViewContainerTabBar() Q_DECL_OVERRIDE;
 
     // returns a pixmap image of a tab for use with QDrag
     QPixmap dragDropPixmap(int tab);
@@ -56,10 +56,10 @@ signals:
 protected:
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    virtual void dragEnterEvent(QDragEnterEvent* event) Q_DECL_OVERRIDE;
-    virtual void dragLeaveEvent(QDragLeaveEvent* event) Q_DECL_OVERRIDE;
-    virtual void dragMoveEvent(QDragMoveEvent* event) Q_DECL_OVERRIDE;
-    virtual void dropEvent(QDropEvent* event) Q_DECL_OVERRIDE;
+    void dragEnterEvent(QDragEnterEvent* event) Q_DECL_OVERRIDE;
+    void dragLeaveEvent(QDragLeaveEvent* event) Q_DECL_OVERRIDE;
+    void dragMoveEvent(QDragMoveEvent* event) Q_DECL_OVERRIDE;
+    void dropEvent(QDropEvent* event) Q_DECL_OVERRIDE;
 
 private:
     // show the indicator arrow which shows where a dropped tab will

@@ -59,7 +59,7 @@ public:
     /**
      * Destroys the ProfileManager.
      */
-    virtual ~ProfileManager();
+    ~ProfileManager() Q_DECL_OVERRIDE;
 
     /**
      * Returns the profile manager instance.

@@ -54,8 +54,8 @@ public:
 class KDE4ProfileReader : public ProfileReader
 {
 public:
-    virtual QStringList findProfiles();
-    virtual bool readProfile(const QString& path , Profile::Ptr profile, QString& parentProfile);
+    QStringList findProfiles() Q_DECL_OVERRIDE;
+    bool readProfile(const QString& path , Profile::Ptr profile, QString& parentProfile) Q_DECL_OVERRIDE;
 private:
     void readProperties(const KConfig& config, Profile::Ptr profile,
                         const Profile::PropertyInfo* properties);

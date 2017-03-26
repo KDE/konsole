@@ -80,27 +80,27 @@ class Vt102Emulation : public Emulation
 public:
     /** Constructs a new emulation */
     Vt102Emulation();
-    ~Vt102Emulation();
+    ~Vt102Emulation() Q_DECL_OVERRIDE;
 
     // reimplemented from Emulation
-    virtual void clearEntireScreen() Q_DECL_OVERRIDE;
-    virtual void reset() Q_DECL_OVERRIDE;
-    virtual char eraseChar() const Q_DECL_OVERRIDE;
+    void clearEntireScreen() Q_DECL_OVERRIDE;
+    void reset() Q_DECL_OVERRIDE;
+    char eraseChar() const Q_DECL_OVERRIDE;
 
 public slots:
     // reimplemented from Emulation
-    virtual void sendString(const QByteArray& string) Q_DECL_OVERRIDE;
-    virtual void sendText(const QString& text) Q_DECL_OVERRIDE;
-    virtual void sendKeyEvent(QKeyEvent*) Q_DECL_OVERRIDE;
-    virtual void sendMouseEvent(int buttons, int column, int line, int eventType) Q_DECL_OVERRIDE;
-    virtual void focusLost() Q_DECL_OVERRIDE;
-    virtual void focusGained() Q_DECL_OVERRIDE;
+    void sendString(const QByteArray& string) Q_DECL_OVERRIDE;
+    void sendText(const QString& text) Q_DECL_OVERRIDE;
+    void sendKeyEvent(QKeyEvent*) Q_DECL_OVERRIDE;
+    void sendMouseEvent(int buttons, int column, int line, int eventType) Q_DECL_OVERRIDE;
+    void focusLost() Q_DECL_OVERRIDE;
+    void focusGained() Q_DECL_OVERRIDE;
 
 protected:
     // reimplemented from Emulation
-    virtual void setMode(int mode) Q_DECL_OVERRIDE;
-    virtual void resetMode(int mode) Q_DECL_OVERRIDE;
-    virtual void receiveChar(int cc) Q_DECL_OVERRIDE;
+    void setMode(int mode) Q_DECL_OVERRIDE;
+    void resetMode(int mode) Q_DECL_OVERRIDE;
+    void receiveChar(int cc) Q_DECL_OVERRIDE;
 
 private slots:
     //causes changeTitle() to be emitted for each (int,QString) pair in pendingTitleUpdates

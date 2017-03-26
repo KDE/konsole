@@ -68,7 +68,7 @@ class KONSOLEPRIVATE_EXPORT TerminalDisplay : public QWidget
 public:
     /** Constructs a new terminal display widget with the specified parent. */
     explicit TerminalDisplay(QWidget* parent = 0);
-    virtual ~TerminalDisplay();
+    ~TerminalDisplay() Q_DECL_OVERRIDE;
 
     /** Returns the terminal color palette used by the display. */
     const ColorEntry* colorTable() const;
@@ -289,7 +289,7 @@ public:
     void setSize(int columns, int lines);
 
     // reimplemented
-    QSize sizeHint() const;
+    QSize sizeHint() const Q_DECL_OVERRIDE;
 
     /**
      * Sets which characters, in addition to letters and numbers,
@@ -632,34 +632,34 @@ signals:
     void focusGained();
 
 protected:
-    virtual bool event(QEvent* event);
+    bool event(QEvent* event) Q_DECL_OVERRIDE;
 
-    virtual void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event) Q_DECL_OVERRIDE;
 
-    virtual void showEvent(QShowEvent* event);
-    virtual void hideEvent(QHideEvent* event);
-    virtual void resizeEvent(QResizeEvent* event);
+    void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
+    void hideEvent(QHideEvent* event) Q_DECL_OVERRIDE;
+    void resizeEvent(QResizeEvent* event) Q_DECL_OVERRIDE;
 
-    virtual void contextMenuEvent(QContextMenuEvent* event);
+    void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
 
     virtual void fontChange(const QFont&);
-    virtual void focusInEvent(QFocusEvent* event);
-    virtual void focusOutEvent(QFocusEvent* event);
-    virtual void keyPressEvent(QKeyEvent* event);
-    virtual void keyReleaseEvent(QKeyEvent* event);
-    virtual void leaveEvent(QEvent* event);
-    virtual void mouseDoubleClickEvent(QMouseEvent* event);
-    virtual void mousePressEvent(QMouseEvent* event);
-    virtual void mouseReleaseEvent(QMouseEvent* event);
-    virtual void mouseMoveEvent(QMouseEvent* event);
+    void focusInEvent(QFocusEvent* event) Q_DECL_OVERRIDE;
+    void focusOutEvent(QFocusEvent* event) Q_DECL_OVERRIDE;
+    void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
+    void keyReleaseEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
+    void leaveEvent(QEvent* event) Q_DECL_OVERRIDE;
+    void mouseDoubleClickEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+    void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+    void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+    void mouseMoveEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
     virtual void extendSelection(const QPoint& pos);
-    virtual void wheelEvent(QWheelEvent* event);
+    void wheelEvent(QWheelEvent* event) Q_DECL_OVERRIDE;
 
-    virtual bool focusNextPrevChild(bool next);
+    bool focusNextPrevChild(bool next) Q_DECL_OVERRIDE;
 
     // drag and drop
-    virtual void dragEnterEvent(QDragEnterEvent* event);
-    virtual void dropEvent(QDropEvent* event);
+    void dragEnterEvent(QDragEnterEvent* event) Q_DECL_OVERRIDE;
+    void dropEvent(QDropEvent* event) Q_DECL_OVERRIDE;
     void doDrag();
     enum DragState { diNone, diPending, diDragging };
 
@@ -683,8 +683,8 @@ protected:
     void selectLine(QPoint pos, bool entireLine);
 
     // reimplemented
-    virtual void inputMethodEvent(QInputMethodEvent* event);
-    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const;
+    void inputMethodEvent(QInputMethodEvent* event) Q_DECL_OVERRIDE;
+    QVariant inputMethodQuery(Qt::InputMethodQuery query) const Q_DECL_OVERRIDE;
 
 protected slots:
 
@@ -945,8 +945,8 @@ class AutoScrollHandler : public QObject
 public:
     explicit AutoScrollHandler(QWidget* parent);
 protected:
-    virtual void timerEvent(QTimerEvent* event);
-    virtual bool eventFilter(QObject* watched, QEvent* event);
+    void timerEvent(QTimerEvent* event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject* watched, QEvent* event) Q_DECL_OVERRIDE;
 private:
     QWidget* widget() const {
         return static_cast<QWidget*>(parent());

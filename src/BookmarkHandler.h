@@ -65,15 +65,15 @@ public:
      * @param parent The parent object
      */
     BookmarkHandler(KActionCollection* collection , QMenu* menu, bool toplevel , QObject* parent);
-    ~BookmarkHandler();
+    ~BookmarkHandler() Q_DECL_OVERRIDE;
 
-    virtual QUrl currentUrl() const;
-    virtual QString currentTitle() const;
-    virtual QString currentIcon() const;
-    virtual bool enableOption(BookmarkOption option) const;
-    virtual bool supportsTabs() const;
-    virtual QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const;
-    virtual void openFolderinTabs(const KBookmarkGroup& group);
+    QUrl currentUrl() const Q_DECL_OVERRIDE;
+    QString currentTitle() const Q_DECL_OVERRIDE;
+    QString currentIcon() const Q_DECL_OVERRIDE;
+    bool enableOption(BookmarkOption option) const Q_DECL_OVERRIDE;
+    bool supportsTabs() const Q_DECL_OVERRIDE;
+    QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const Q_DECL_OVERRIDE;
+    void openFolderinTabs(const KBookmarkGroup& group) Q_DECL_OVERRIDE;
 
     /**
      * Returns the menu which this bookmark handler inserts its actions into.
@@ -111,7 +111,7 @@ signals:
     void openUrls(const QList<QUrl>& urls);
 
 private slots:
-    void openBookmark(const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers);
+    void openBookmark(const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers) Q_DECL_OVERRIDE;
 
 private:
     QString titleForView(ViewProperties* view) const;

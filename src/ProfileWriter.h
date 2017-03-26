@@ -50,8 +50,8 @@ public:
 class KONSOLEPRIVATE_EXPORT KDE4ProfileWriter : public ProfileWriter
 {
 public:
-    virtual QString getPath(const Profile::Ptr profile);
-    virtual bool writeProfile(const QString& path , const Profile::Ptr profile);
+    QString getPath(const Profile::Ptr profile) Q_DECL_OVERRIDE;
+    bool writeProfile(const QString& path , const Profile::Ptr profile) Q_DECL_OVERRIDE;
 
 private:
     void writeProperties(KConfig& config, const Profile::Ptr profile,

@@ -128,15 +128,15 @@ class KONSOLEPRIVATE_EXPORT HistoryScrollFile : public HistoryScroll
 {
 public:
     explicit HistoryScrollFile(const QString& logFileName);
-    virtual ~HistoryScrollFile();
+    ~HistoryScrollFile() Q_DECL_OVERRIDE;
 
-    virtual int  getLines();
-    virtual int  getLineLen(int lineno);
-    virtual void getCells(int lineno, int colno, int count, Character res[]);
-    virtual bool isWrappedLine(int lineno);
+    int  getLines() Q_DECL_OVERRIDE;
+    int  getLineLen(int lineno) Q_DECL_OVERRIDE;
+    void getCells(int lineno, int colno, int count, Character res[]) Q_DECL_OVERRIDE;
+    bool isWrappedLine(int lineno) Q_DECL_OVERRIDE;
 
-    virtual void addCells(const Character a[], int count);
-    virtual void addLine(bool previousWrapped = false);
+    void addCells(const Character a[], int count) Q_DECL_OVERRIDE;
+    void addLine(bool previousWrapped = false) Q_DECL_OVERRIDE;
 
 private:
     int startOfLine(int lineno);
@@ -153,17 +153,17 @@ class KONSOLEPRIVATE_EXPORT HistoryScrollNone : public HistoryScroll
 {
 public:
     HistoryScrollNone();
-    virtual ~HistoryScrollNone();
+    ~HistoryScrollNone() Q_DECL_OVERRIDE;
 
-    virtual bool hasScroll();
+    bool hasScroll() Q_DECL_OVERRIDE;
 
-    virtual int  getLines();
-    virtual int  getLineLen(int lineno);
-    virtual void getCells(int lineno, int colno, int count, Character res[]);
-    virtual bool isWrappedLine(int lineno);
+    int  getLines() Q_DECL_OVERRIDE;
+    int  getLineLen(int lineno) Q_DECL_OVERRIDE;
+    void getCells(int lineno, int colno, int count, Character res[]) Q_DECL_OVERRIDE;
+    bool isWrappedLine(int lineno) Q_DECL_OVERRIDE;
 
-    virtual void addCells(const Character a[], int count);
-    virtual void addLine(bool previousWrapped = false);
+    void addCells(const Character a[], int count) Q_DECL_OVERRIDE;
+    void addLine(bool previousWrapped = false) Q_DECL_OVERRIDE;
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -291,16 +291,16 @@ class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
 
 public:
     explicit CompactHistoryScroll(unsigned int maxNbLines = 1000);
-    virtual ~CompactHistoryScroll();
+    ~CompactHistoryScroll() Q_DECL_OVERRIDE;
 
-    virtual int  getLines();
-    virtual int  getLineLen(int lineno);
-    virtual void getCells(int lineno, int colno, int count, Character res[]);
-    virtual bool isWrappedLine(int lineno);
+    int  getLines() Q_DECL_OVERRIDE;
+    int  getLineLen(int lineno) Q_DECL_OVERRIDE;
+    void getCells(int lineno, int colno, int count, Character res[]) Q_DECL_OVERRIDE;
+    bool isWrappedLine(int lineno) Q_DECL_OVERRIDE;
 
-    virtual void addCells(const Character a[], int count);
-    virtual void addCellsVector(const TextLine& cells);
-    virtual void addLine(bool previousWrapped = false);
+    void addCells(const Character a[], int count) Q_DECL_OVERRIDE;
+    void addCellsVector(const TextLine& cells) Q_DECL_OVERRIDE;
+    void addLine(bool previousWrapped = false) Q_DECL_OVERRIDE;
 
     void setMaxNbLines(unsigned int nbLines);
 
@@ -350,10 +350,10 @@ class KONSOLEPRIVATE_EXPORT HistoryTypeNone : public HistoryType
 public:
     HistoryTypeNone();
 
-    virtual bool isEnabled() const;
-    virtual int maximumLineCount() const;
+    bool isEnabled() const Q_DECL_OVERRIDE;
+    int maximumLineCount() const Q_DECL_OVERRIDE;
 
-    virtual HistoryScroll* scroll(HistoryScroll *) const;
+    HistoryScroll* scroll(HistoryScroll *) const Q_DECL_OVERRIDE;
 };
 
 class KONSOLEPRIVATE_EXPORT HistoryTypeFile : public HistoryType
@@ -361,10 +361,10 @@ class KONSOLEPRIVATE_EXPORT HistoryTypeFile : public HistoryType
 public:
     explicit HistoryTypeFile(const QString& fileName = QString());
 
-    virtual bool isEnabled() const;
-    virtual int maximumLineCount() const;
+    bool isEnabled() const Q_DECL_OVERRIDE;
+    int maximumLineCount() const Q_DECL_OVERRIDE;
 
-    virtual HistoryScroll* scroll(HistoryScroll *) const;
+    HistoryScroll* scroll(HistoryScroll *) const Q_DECL_OVERRIDE;
 
 protected:
     QString _fileName;
@@ -375,10 +375,10 @@ class KONSOLEPRIVATE_EXPORT CompactHistoryType : public HistoryType
 public:
     explicit CompactHistoryType(unsigned int size);
 
-    virtual bool isEnabled() const;
-    virtual int maximumLineCount() const;
+    bool isEnabled() const Q_DECL_OVERRIDE;
+    int maximumLineCount() const Q_DECL_OVERRIDE;
 
-    virtual HistoryScroll* scroll(HistoryScroll *) const;
+    HistoryScroll* scroll(HistoryScroll *) const Q_DECL_OVERRIDE;
 
 protected:
     unsigned int _maxLines;

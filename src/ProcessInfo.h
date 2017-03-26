@@ -306,9 +306,9 @@ public:
      */
     explicit NullProcessInfo(int pid, const QString& titleFormat);
 protected:
-    virtual bool readProcessInfo(int pid);
-    virtual bool readCurrentDir(int pid);
-    virtual void readUserName(void);
+    bool readProcessInfo(int pid) Q_DECL_OVERRIDE;
+    bool readCurrentDir(int pid) Q_DECL_OVERRIDE;
+    void readUserName(void) Q_DECL_OVERRIDE;
 };
 
 #if !defined(Q_OS_WIN)
@@ -330,9 +330,9 @@ protected:
      * Implementation of ProcessInfo::readProcessInfo(); calls the
      * four private methods below in turn.
      */
-    virtual bool readProcessInfo(int pid );
+    bool readProcessInfo(int pid ) Q_DECL_OVERRIDE;
 
-    virtual void readUserName(void);
+    void readUserName(void) Q_DECL_OVERRIDE;
 
 private:
     /**

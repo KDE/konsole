@@ -65,7 +65,7 @@ class KONSOLEPRIVATE_EXPORT EditProfileDialog : public QDialog
 public:
     /** Constructs a new dialog with the specified parent. */
     explicit EditProfileDialog(QWidget* parent = 0);
-    virtual ~EditProfileDialog();
+    ~EditProfileDialog() Q_DECL_OVERRIDE;
 
     /**
      * Initializes the dialog with the settings for the specified session
@@ -89,12 +89,12 @@ public:
 
 public slots:
     // reimplemented
-    virtual void accept();
+    void accept() Q_DECL_OVERRIDE;
     // reimplemented
-    virtual void reject();
+    void reject() Q_DECL_OVERRIDE;
 
 protected:
-    virtual bool eventFilter(QObject* watched , QEvent* event);
+    bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
 
 private slots:
     // sets up the specified tab page if necessary
@@ -271,10 +271,10 @@ public:
     explicit ColorSchemeViewDelegate(QObject* parent = 0);
 
     // reimplemented
-    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option,
-                       const QModelIndex& index) const;
-    virtual QSize sizeHint(const QStyleOptionViewItem& option,
-                           const QModelIndex& index) const;
+    void paint(QPainter* painter, const QStyleOptionViewItem& option,
+                       const QModelIndex& index) const Q_DECL_OVERRIDE;
+    QSize sizeHint(const QStyleOptionViewItem& option,
+                           const QModelIndex& index) const Q_DECL_OVERRIDE;
 };
 }
 

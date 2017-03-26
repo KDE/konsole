@@ -54,7 +54,7 @@ class KeyBindingEditor : public QWidget
 public:
     /** Constructs a new key bindings editor with the specified parent. */
     explicit KeyBindingEditor(QWidget* parent = 0);
-    virtual ~KeyBindingEditor();
+    ~KeyBindingEditor() Q_DECL_OVERRIDE;
 
     /**
      * Initializes the dialog with the bindings and other settings
@@ -79,7 +79,7 @@ public:
     QString description() const;
 
     // reimplemented to handle test area input
-    virtual bool eventFilter(QObject* watched , QEvent* event);
+    bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
 
 private slots:
     void setTranslatorDescription(const QString& description);

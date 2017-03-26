@@ -103,7 +103,7 @@ public:
      * Constructs a new SessionController which operates on @p session and @p view.
      */
     SessionController(Session* session , TerminalDisplay* view, QObject* parent);
-    ~SessionController();
+    ~SessionController() Q_DECL_OVERRIDE;
 
     /** Returns the session associated with this controller */
     QPointer<Session> session() {
@@ -156,14 +156,14 @@ public:
     EditProfileDialog* profileDialogPointer();
 
     // reimplemented
-    virtual QUrl url() const;
-    virtual QString currentDir() const;
-    virtual void rename();
-    virtual bool confirmClose() const;
+    QUrl url() const Q_DECL_OVERRIDE;
+    QString currentDir() const Q_DECL_OVERRIDE;
+    void rename() Q_DECL_OVERRIDE;
+    bool confirmClose() const Q_DECL_OVERRIDE;
     virtual bool confirmForceClose() const;
 
     // Reimplemented to watch for events happening to the view
-    virtual bool eventFilter(QObject* watched , QEvent* event);
+    bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
 
     /** Returns the set of all controllers that exist. */
     static QSet<SessionController*> allControllers() {
@@ -430,7 +430,7 @@ class SaveHistoryTask : public SessionTask
 public:
     /** Constructs a new task to save session output to URLs */
     explicit SaveHistoryTask(QObject* parent = 0);
-    virtual ~SaveHistoryTask();
+    ~SaveHistoryTask() Q_DECL_OVERRIDE;
 
     /**
      * Opens a save file dialog for each session in the group and begins saving
@@ -438,7 +438,7 @@ public:
      *
      * The data transfer is performed asynchronously and will continue after execute() returns.
      */
-    virtual void execute();
+    void execute() Q_DECL_OVERRIDE;
 
 private slots:
     void jobDataRequested(KIO::Job* job , QByteArray& data);
@@ -522,7 +522,7 @@ public:
      *
      * To continue the search looking for further matches, call execute() again.
      */
-    virtual void execute();
+    void execute() Q_DECL_OVERRIDE;
 
 private:
     typedef QPointer<ScreenWindow> ScreenWindowPtr;

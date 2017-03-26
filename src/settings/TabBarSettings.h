@@ -32,7 +32,7 @@ class TabBarSettings : public QWidget, private Ui::TabBarSettings
 
 public:
     explicit TabBarSettings(QWidget* parent = 0);
-    ~TabBarSettings();
+    ~TabBarSettings() Q_DECL_OVERRIDE;
 
 };
 

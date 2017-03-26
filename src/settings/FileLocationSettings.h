@@ -32,7 +32,7 @@ class FileLocationSettings : public QWidget, private Ui::FileLocationSettings
 
 public:
     explicit FileLocationSettings(QWidget* aParent = 0);
-    ~FileLocationSettings();
+    ~FileLocationSettings() Q_DECL_OVERRIDE;
 
 };
 

@@ -71,7 +71,7 @@ public:
      */
     explicit Pty(int ptyMasterFd, QObject* parent = 0);
 
-    ~Pty();
+    ~Pty() Q_DECL_OVERRIDE;
 
     /**
      * Starts the terminal process.
@@ -171,7 +171,7 @@ signals:
     void receivedData(const char* buffer, int length);
 
 protected:
-    void setupChildProcess();
+    void setupChildProcess() Q_DECL_OVERRIDE;
 
 private slots:
     // called when data is received from the terminal process

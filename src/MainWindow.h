@@ -132,17 +132,17 @@ signals:
 
 protected:
     // Reimplemented for internal reasons.
-    virtual void showEvent(QShowEvent* event);
+    void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
 
     // reimplemented from KMainWindow
-    virtual bool queryClose();
-    virtual void saveProperties(KConfigGroup& group);
-    virtual void readProperties(const KConfigGroup& group);
-    virtual void saveGlobalProperties(KConfig* config);
-    virtual void readGlobalProperties(KConfig* config);
+    bool queryClose() Q_DECL_OVERRIDE;
+    void saveProperties(KConfigGroup& group) Q_DECL_OVERRIDE;
+    void readProperties(const KConfigGroup& group) Q_DECL_OVERRIDE;
+    void saveGlobalProperties(KConfig* config) Q_DECL_OVERRIDE;
+    void readGlobalProperties(KConfig* config) Q_DECL_OVERRIDE;
 
     // reimplemented from QWidget
-    virtual bool focusNextPrevChild(bool next);
+    bool focusNextPrevChild(bool next) Q_DECL_OVERRIDE;
 
 private slots:
     void newTab();
