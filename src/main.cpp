@@ -170,12 +170,15 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
 
     if (app->isSessionRestored()) {
         restoreSession(konsoleApp);
-    } else if (!konsoleApp.newInstance()) {
-        // Do not finish starting Konsole
+    } else {
+        // Do not finish starting Konsole due to:
         // 1. An argument was given to just printed info
         // 2. An invalid situation ocurred
-        delete app;
-        return 0;
+        const bool continueStarting = (konsoleApp.newInstance() != 0);
+        if (!continueStarting) {
+            delete app;
+            return 0;
+        }
     }
 
     // Since we've allocated the QApplication on the heap for the KDBusService workaround,
