@@ -71,8 +71,8 @@ void ProfileTest::testProfile()
     QCOMPARE(child->property<QVariant>(Profile::Path), QVariant());
 
     // read inheritable properties
-    QVERIFY(parent->property<bool>(Profile::AntiAliasFonts) == false);
-    QVERIFY(child->property<bool>(Profile::AntiAliasFonts) == false);
+    QVERIFY(!parent->property<bool>(Profile::AntiAliasFonts));
+    QVERIFY(!child->property<bool>(Profile::AntiAliasFonts));
 
     QVERIFY(!parent->startInCurrentSessionDir());
     QVERIFY(child->startInCurrentSessionDir());
@@ -165,7 +165,7 @@ void ProfileTest::testProfileGroup()
     group->setProperty(Profile::AntiAliasFonts, false);
 
     QCOMPARE(profile[0]->property<QString>(Profile::Command), QString("ssh"));
-    QVERIFY(profile[1]->property<bool>(Profile::AntiAliasFonts) == false);
+    QVERIFY(!profile[1]->property<bool>(Profile::AntiAliasFonts));
 
     // set and test non-shareable properties in the group
     // (should have no effect)

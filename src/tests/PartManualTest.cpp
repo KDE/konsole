@@ -106,7 +106,7 @@ void PartManualTest::testShortcutOverride()
 }
 void PartManualTest::overrideShortcut(QKeyEvent* event, bool& override)
 {
-    QVERIFY(override == true);
+    QVERIFY(override);
     if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_S) {
         _overrideCalled = true;
         override = _override;
