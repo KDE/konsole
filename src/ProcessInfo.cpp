@@ -1078,10 +1078,7 @@ QString SSHProcessInfo::format(const QString& input) const
     bool isIpAddress = false;
 
     struct in_addr address;
-    if (inet_aton(_host.toLocal8Bit().constData(), &address) != 0)
-        isIpAddress = true;
-    else
-        isIpAddress = false;
+    isIpAddress = inet_aton(_host.toLocal8Bit().constData(), &address) != 0;
 
     // search for and replace known markers
     output.replace(QLatin1String("%u"), _user);
