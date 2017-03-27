@@ -76,7 +76,7 @@ void Pty::sendData(const QByteArray& data)
     if (data.isEmpty())
         return;
 
-    if (!pty()->write(data.constData(), data.length())) {
+    if (pty()->write(data.constData()) == -1) {
         qWarning() << "Could not send input data to terminal process.";
         return;
     }
@@ -85,6 +85,9 @@ void Pty::sendData(const QByteArray& data)
 void Pty::dataReceived()
 {
     QByteArray data = pty()->readAll();
+    if (data.isEmpty())
+        return;
+
     emit receivedData(data.constData(), data.count());
 }
 
@@ -290,7 +293,7 @@ void Pty::sendEof()
     struct ::termios ttyAttributes;
     pty()->tcGetAttr(&ttyAttributes);
     char eofChar = ttyAttributes.c_cc[VEOF];
-    if (!pty()->write(QByteArray(1, eofChar))) {
+    if (pty()->write(QByteArray(1, eofChar)) == -1) {
         qWarning() << "Unable to send EOF";
     }
 
