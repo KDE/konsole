@@ -235,10 +235,7 @@ bool ViewContainerTabBar::proposedDropIsSameTab(const QDropEvent* event) const
     emit querySourceIndex(event, sourceIndex);
 
     const bool sourceAndDropAreLast = sourceIndex == count() - 1 && index == -1;
-    if (sourceIndex == index || sourceIndex == index - 1 || sourceAndDropAreLast)
-        return true;
-    else
-        return false;
+    return sourceIndex == index || sourceIndex == index - 1 || sourceAndDropAreLast;
 }
 
 

@@ -684,7 +684,7 @@ void Session::updateTerminalSize()
 
     //select largest number of lines and columns that will fit in all visible views
     foreach(TerminalDisplay* view, _views) {
-        if (view->isHidden() == false &&
+        if (!view->isHidden() &&
                 view->lines() >= VIEW_LINES_THRESHOLD &&
                 view->columns() >= VIEW_COLUMNS_THRESHOLD) {
             minLines = (minLines == -1) ? view->lines() : qMin(minLines , view->lines());
@@ -756,10 +756,7 @@ bool Session::kill(int signal)
     int result = ::kill(_shellProcess->pid(), signal);
 
     if (result == 0) {
-        if (_shellProcess->waitForFinished(1000))
-            return true;
-        else
-            return false;
+        return _shellProcess->waitForFinished(1000);
     } else {
         return false;
     }
