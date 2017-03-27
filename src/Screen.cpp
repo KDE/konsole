@@ -241,7 +241,7 @@ void Screen::insertLines(int n)
 
 void Screen::setMode(int m)
 {
-    _currentModes[m] = true;
+    _currentModes[m] = 1;
     switch (m) {
     case MODE_Origin :
         _cuX = 0;
@@ -252,7 +252,7 @@ void Screen::setMode(int m)
 
 void Screen::resetMode(int m)
 {
-    _currentModes[m] = false;
+    _currentModes[m] = 0;
     switch (m) {
     case MODE_Origin :
         _cuX = 0;
@@ -273,7 +273,7 @@ void Screen::restoreMode(int m)
 
 bool Screen::getMode(int m) const
 {
-    return _currentModes[m];
+    return _currentModes[m] != 0;
 }
 
 void Screen::saveCursor()
@@ -511,8 +511,8 @@ void Screen::reset()
     scrollUp(0, _cuY);
     _cuY = 0;
 
-    _currentModes[MODE_Origin] = false;
-    _savedModes[MODE_Origin] = false;
+    _currentModes[MODE_Origin] = 0;
+    _savedModes[MODE_Origin] = 0;
 
     setMode(MODE_Wrap);
     saveMode(MODE_Wrap);      // wrap at end of margin

@@ -171,7 +171,7 @@ private:
     public:
         // Initializes all modes to false
         TerminalState() {
-            memset(&mode, false, MODE_total * sizeof(bool));
+            memset(&mode, 0, MODE_total * sizeof(bool));
         }
 
         bool mode[MODE_total];
