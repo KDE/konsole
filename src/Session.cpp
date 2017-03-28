@@ -739,7 +739,7 @@ void Session::sendSignal(int signal)
 
 void Session::reportBackgroundColor(const QColor& c)
 {
-    #define to65k(a) (QString("%1").arg((int)(a*0xFFFF), 4, 16, QChar('0')))
+    #define to65k(a) (QString("%1").arg((int)((a)*0xFFFF), 4, 16, QChar('0')))
     QString msg = "\033]11;rgb:"
                 + to65k(c.redF())   + '/'
                 + to65k(c.greenF()) + '/'
