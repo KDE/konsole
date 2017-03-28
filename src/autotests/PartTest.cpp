@@ -84,7 +84,7 @@ void PartTest::testFd()
     ptyProcess.pty()->setSuspended(true);
 
     QPointer<QDialog> dialog = new QDialog();
-    QVBoxLayout* layout = new QVBoxLayout(dialog.data());
+    auto layout = new QVBoxLayout(dialog.data());
     layout->addWidget(new QLabel(QStringLiteral("Output of 'ping localhost' should appear in a terminal below for 5 seconds")));
     layout->addWidget(terminalPart->widget());
     QTimer::singleShot(5000, dialog.data(), SLOT(close()));

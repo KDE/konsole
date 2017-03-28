@@ -93,7 +93,7 @@ public:
      * be deleted by the caller.
      */
     static QMimeData* createMimeData(int id) {
-        QMimeData* mimeData = new QMimeData;
+        auto mimeData = new QMimeData;
         mimeData->setData(mimeType(), QByteArray::number(id));
         return mimeData;
     }

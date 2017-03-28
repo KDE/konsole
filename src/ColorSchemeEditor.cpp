@@ -60,9 +60,9 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     , _isNewScheme(false)
     , _colors(0)
 {
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);
-    QWidget *mainWidget = new QWidget(this);
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);
+    auto mainWidget = new QWidget(this);
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
@@ -92,10 +92,10 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     connect(_ui->randomizedBackgroundCheck , &QCheckBox::toggled , this , &Konsole::ColorSchemeEditor::setRandomizedBackgroundColor);
 
     // wallpaper stuff
-    QFileSystemModel *dirModel = new QFileSystemModel(this);
+    auto dirModel = new QFileSystemModel(this);
     dirModel->setFilter(QDir::AllEntries);
     dirModel->setRootPath(QString('/'));
-    QCompleter *completer = new QCompleter(this);
+    auto completer = new QCompleter(this);
     completer->setModel(dirModel);
     _ui->wallpaperPath->setCompleter(completer);
 
@@ -267,17 +267,17 @@ void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
         QTableWidgetItem* nameItem = new QTableWidgetItem(ColorScheme::translatedColorNameForIndex(row));
         nameItem->setFlags(nameItem->flags() & ~Qt::ItemIsEditable);
 
-        QTableWidgetItem* colorItem = new QTableWidgetItem();
+        auto colorItem = new QTableWidgetItem();
         colorItem->setBackground(table[row].color);
         colorItem->setFlags(colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable);
         colorItem->setToolTip(i18nc("@info:tooltip", "Click to choose color"));
 
-        QTableWidgetItem* colorItemIntense = new QTableWidgetItem();
+        auto colorItemIntense = new QTableWidgetItem();
         colorItemIntense->setBackground(table[COLOR_TABLE_ROW_LENGTH + row].color);
         colorItemIntense->setFlags(colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable);
         colorItemIntense->setToolTip(i18nc("@info:tooltip", "Click to choose intense color"));
 
-        QTableWidgetItem* colorItemFaint = new QTableWidgetItem();
+        auto colorItemFaint = new QTableWidgetItem();
         colorItemFaint->setBackground(table[2*COLOR_TABLE_ROW_LENGTH + row].color);
         colorItemFaint->setFlags(colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable);
         colorItemFaint->setToolTip(i18nc("@info:tooltip", "Click to choose Faint color"));

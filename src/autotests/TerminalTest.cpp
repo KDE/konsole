@@ -32,7 +32,7 @@ using namespace Konsole;
 void TerminalTest::testScrollBarPositions()
 {
 
-    TerminalDisplay* display = new TerminalDisplay(0);
+    auto display = new TerminalDisplay(0);
 
     // ScrollBar Positions
     display->setScrollBarPosition(Enum::ScrollBarLeft);
@@ -61,7 +61,7 @@ void TerminalTest::testColorTable()
         ColorEntry(QColor(0x54, 0xFF, 0xFF)), ColorEntry(QColor(0x00, 0xFF, 0xFF))
     };
 
-    TerminalDisplay* display = new TerminalDisplay(0);
+    auto display = new TerminalDisplay(0);
 
     display->setColorTable(defaultTable);
 
@@ -78,7 +78,7 @@ void TerminalTest::testColorTable()
 
 void TerminalTest::testSize()
 {
-    TerminalDisplay* display = new TerminalDisplay(0);
+    auto display = new TerminalDisplay(0);
 
     QCOMPARE(display->columns(), 1);
     QCOMPARE(display->lines(), 1);

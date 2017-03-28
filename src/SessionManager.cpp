@@ -92,7 +92,7 @@ Session* SessionManager::createSession(Profile::Ptr profile)
         ProfileManager::instance()->addProfile(profile);
 
     //configuration information found, create a new session based on this
-    Session* session = new Session();
+    auto session = new Session();
     Q_ASSERT(session);
     applyProfile(session, profile, false);
 

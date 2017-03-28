@@ -58,7 +58,7 @@ void PartManualTest::testShortcutOverride()
 
     // Create a main window with a menu and a test
     // action with a shortcut set to Ctrl+S, which is also used by the terminal
-    KMainWindow* mainWindow = new KMainWindow();
+    auto mainWindow = new KMainWindow();
     QMenu* fileMenu = mainWindow->menuBar()->addMenu("File");
     QAction* testAction = fileMenu->addAction("Test");
     testAction->setShortcut(QKeySequence(Konsole::ACCEL + Qt::Key_S));

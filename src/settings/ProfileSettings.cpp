@@ -508,7 +508,7 @@ QWidget* ShortcutItemDelegate::createEditor(QWidget* aParent, const QStyleOption
 {
     _itemsBeingEdited.insert(index);
 
-    KKeySequenceWidget* editor = new KKeySequenceWidget(aParent);
+    auto editor = new KKeySequenceWidget(aParent);
     editor->setFocusPolicy(Qt::StrongFocus);
     editor->setModifierlessAllowed(false);
     QString shortcutString = index.data(Qt::DisplayRole).toString();

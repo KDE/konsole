@@ -47,9 +47,9 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     , _findPreviousButton(0)
     , _searchFromButton(0)
 {
-    QHBoxLayout* barLayout = new QHBoxLayout(this);
+    auto barLayout = new QHBoxLayout(this);
 
-    QToolButton* closeButton = new QToolButton(this);
+    auto closeButton = new QToolButton(this);
     closeButton->setObjectName(QStringLiteral("close-button"));
     closeButton->setToolTip(i18nc("@info:tooltip", "Close the search bar"));
     closeButton->setAutoRaise(true);
@@ -96,7 +96,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     _searchFromButton->setObjectName(QStringLiteral("search-from-button"));
     connect(_searchFromButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::searchFromClicked);
 
-    QToolButton* optionsButton = new QToolButton(this);
+    auto optionsButton = new QToolButton(this);
     optionsButton->setObjectName(QStringLiteral("find-options-button"));
     optionsButton->setText(i18nc("@action:button Display options menu", "Options"));
     optionsButton->setCheckable(false);
@@ -114,7 +114,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     barLayout->addWidget(optionsButton);
 
     // Fill the options menu
-    QMenu* optionsMenu = new QMenu(this);
+    auto optionsMenu = new QMenu(this);
     optionsButton->setMenu(optionsMenu);
 
     _caseSensitive = optionsMenu->addAction(i18nc("@item:inmenu", "Case sensitive"));

@@ -133,8 +133,8 @@ void TerminalImageFilterChain::setImage(const Character* const image , int lines
     decoder.setTrailingWhitespace(false);
 
     // setup new shared buffers for the filters to process on
-    QString* newBuffer = new QString();
-    QList<int>* newLinePositions = new QList<int>();
+    auto newBuffer = new QString();
+    auto newLinePositions = new QList<int>();
     setBuffer(newBuffer , newLinePositions);
 
     // free the old buffers
@@ -458,8 +458,8 @@ void FilterObject::activated()
 }
 QList<QAction*> UrlFilter::HotSpot::actions()
 {
-    QAction* openAction = new QAction(_urlObject);
-    QAction* copyAction = new QAction(_urlObject);
+    auto openAction = new QAction(_urlObject);
+    auto copyAction = new QAction(_urlObject);
 
     const UrlType kind = urlType();
     Q_ASSERT(kind == StandardUrl || kind == Email);
@@ -553,7 +553,7 @@ FileFilter::HotSpot::~HotSpot()
 
 QList<QAction*> FileFilter::HotSpot::actions()
 {
-    QAction* openAction = new QAction(_fileObject);
+    auto openAction = new QAction(_fileObject);
     openAction->setText(i18n("Open File"));
     QObject::connect(openAction , SIGNAL(triggered()) , _fileObject , SLOT(activated()));
     QList<QAction*> actions;

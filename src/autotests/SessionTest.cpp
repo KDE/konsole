@@ -31,7 +31,7 @@ using namespace Konsole;
 
 void SessionTest::testNoProfile()
 {
-    Session* session = new Session();
+    auto session = new Session();
 
     // No profile loaded, nothing to run
     QCOMPARE(session->isRunning(), false);
@@ -47,7 +47,7 @@ void SessionTest::testNoProfile()
 
 void SessionTest::testEmulation()
 {
-    Session* session = new Session();
+    auto session = new Session();
 
     Emulation* emulation = session->emulation();
 

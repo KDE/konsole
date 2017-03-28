@@ -686,22 +686,22 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
     KConfigDialog* settingsDialog = new KConfigDialog(this, QStringLiteral("settings"), KonsoleSettings::self());
     settingsDialog->setFaceType(KPageDialog::Tabbed);
 
-    GeneralSettings* generalSettings = new GeneralSettings(settingsDialog);
+    auto generalSettings = new GeneralSettings(settingsDialog);
     settingsDialog->addPage(generalSettings,
                             i18nc("@title Preferences page name", "General"),
                             QStringLiteral("utilities-terminal"));
 
-    ProfileSettings* profileSettings = new ProfileSettings(settingsDialog);
+    auto profileSettings = new ProfileSettings(settingsDialog);
     KPageWidgetItem* profilePage = settingsDialog->addPage(profileSettings,
                             i18nc("@title Preferences page name", "Profiles"),
                             QStringLiteral("configure"));
 
-    TabBarSettings* tabBarSettings = new TabBarSettings(settingsDialog);
+    auto tabBarSettings = new TabBarSettings(settingsDialog);
     settingsDialog->addPage(tabBarSettings,
                             i18nc("@title Preferences page name", "TabBar"),
                             QStringLiteral("system-run"));
 
-    FileLocationSettings* fileLocationSettings = new FileLocationSettings(settingsDialog);
+    auto fileLocationSettings = new FileLocationSettings(settingsDialog);
     settingsDialog->addPage(fileLocationSettings,
                             i18nc("@title Preferences page name", "File Location"),
                             QStringLiteral("configure"));
@@ -808,8 +808,8 @@ void MainWindow::activateMenuBar()
 
 void MainWindow::setupMainWidget()
 {
-    QWidget* mainWindowWidget = new QWidget(this);
-    QVBoxLayout* mainWindowLayout = new QVBoxLayout();
+    auto mainWindowWidget = new QWidget(this);
+    auto mainWindowLayout = new QVBoxLayout();
 
     mainWindowLayout->addWidget(_viewManager->widget());
     mainWindowLayout->setContentsMargins(0, 0, 0, 0);

@@ -62,7 +62,7 @@ HistorySizeWidget::HistorySizeWidget(QWidget* parent)
     _ui->fixedSizeHistoryButton->setFocusProxy(_ui->historyLineSpinner);
     connect(_ui->fixedSizeHistoryButton , &QRadioButton::clicked , _ui->historyLineSpinner , &KPluralHandlingSpinBox::selectAll);
 
-    QButtonGroup* modeGroup = new QButtonGroup(this);
+    auto modeGroup = new QButtonGroup(this);
     modeGroup->addButton(_ui->noHistoryButton);
     modeGroup->addButton(_ui->fixedSizeHistoryButton);
     modeGroup->addButton(_ui->unlimitedHistoryButton);

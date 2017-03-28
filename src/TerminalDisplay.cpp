@@ -1120,7 +1120,7 @@ void TerminalDisplay::updateImage()
     const int linesToUpdate = qMin(this->_lines, qMax(0, lines));
     const int columnsToUpdate = qMin(this->_columns, qMax(0, columns));
 
-    char* dirtyMask = new char[columnsToUpdate + 2];
+    auto dirtyMask = new char[columnsToUpdate + 2];
     QRegion dirtyRegion;
 
     // debugging variable, this records the number of lines that are found to
@@ -2898,7 +2898,7 @@ void TerminalDisplay::copyToX11Selection()
         return;
     QString html = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces, true);
 
-    QMimeData *mimeData = new QMimeData;
+    auto mimeData = new QMimeData;
     mimeData->setText(text);
     mimeData->setHtml(html);
 
@@ -2920,7 +2920,7 @@ void TerminalDisplay::copyToClipboard()
         return;
     QString html = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces, true);
 
-    QMimeData *mimeData = new QMimeData;
+    auto mimeData = new QMimeData;
     mimeData->setText(text);
     mimeData->setHtml(html);
 
@@ -3415,7 +3415,7 @@ void TerminalDisplay::doDrag()
 {
     _dragInfo.state = diDragging;
     _dragInfo.dragObject = new QDrag(this);
-    QMimeData* mimeData = new QMimeData();
+    auto mimeData = new QMimeData();
     mimeData->setText(QApplication::clipboard()->mimeData(QClipboard::Selection)->text());
     mimeData->setHtml(QApplication::clipboard()->mimeData(QClipboard::Selection)->html());
     _dragInfo.dragObject->setMimeData(mimeData);

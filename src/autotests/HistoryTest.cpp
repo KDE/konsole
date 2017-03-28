@@ -64,7 +64,7 @@ void HistoryTest::testCompactHistory()
 
 void HistoryTest::testEmulationHistory()
 {
-    Session* session = new Session();
+    auto session = new Session();
     Emulation* emulation = session->emulation();
 
     const HistoryType& historyTypeDefault = emulation->history();

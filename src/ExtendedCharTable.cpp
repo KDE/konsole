@@ -100,7 +100,7 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
 
     // add the new sequence to the table and
     // return that index
-    ushort* buffer = new ushort[length + 1];
+    auto buffer = new ushort[length + 1];
     buffer[0] = length;
     for (int i = 0 ; i < length ; i++)
         buffer[i + 1] = unicodePoints[i];

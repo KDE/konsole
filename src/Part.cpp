@@ -268,7 +268,7 @@ void Part::showEditCurrentProfileDialog(QWidget* parent)
 {
     Q_ASSERT(activeSession());
 
-    EditProfileDialog* dialog = new EditProfileDialog(parent);
+    auto dialog = new EditProfileDialog(parent);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->setProfile(SessionManager::instance()->sessionProfile(activeSession()));
     dialog->show();

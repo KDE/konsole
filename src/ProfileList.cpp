@@ -127,7 +127,7 @@ void ProfileList::favoriteChanged(Profile::Ptr profile, bool isFavorite)
     ProfileManager* manager = ProfileManager::instance();
 
     if (isFavorite) {
-        QAction* action = new QAction(_group);
+        auto action = new QAction(_group);
         action->setData(QVariant::fromValue(profile));
 
         if (_addShortcuts) {

@@ -37,8 +37,8 @@ ZModemDialog::ZModemDialog(QWidget* aParent, bool modal, const QString& caption)
     setWindowTitle(caption);
 
     mButtonBox = new QDialogButtonBox(QDialogButtonBox::Close);
-    QWidget *mainWidget = new QWidget(this);
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainWidget = new QWidget(this);
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     mainLayout->addWidget(mainWidget);
     mUser1Button = new QPushButton;

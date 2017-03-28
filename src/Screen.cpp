@@ -306,7 +306,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
     // create new screen _lines and copy from old to new
 
-    ImageLine* newScreenLines = new ImageLine[new_lines + 1];
+    auto newScreenLines = new ImageLine[new_lines + 1];
     for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++)
         newScreenLines[i] = _screenLines[i];
     for (int i = _lines; (i > 0) && (i < new_lines + 1); i++)
@@ -662,7 +662,7 @@ void Screen::displayCharacter(unsigned short c)
             if (oldChars && extendedCharLength < 3) {
                 Q_ASSERT(extendedCharLength > 1);
                 Q_ASSERT(extendedCharLength < 65535);
-                ushort* chars = new ushort[extendedCharLength + 1];
+                auto chars = new ushort[extendedCharLength + 1];
                 memcpy(chars, oldChars, sizeof(ushort) * extendedCharLength);
                 chars[extendedCharLength] = c;
                 currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, extendedCharLength + 1);

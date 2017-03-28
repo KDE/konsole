@@ -75,7 +75,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
         needToDeleteQApplication = true;
     }
 
-    QApplication *app = new QApplication(argc, argv);
+    auto app = new QApplication(argc, argv);
 
     // enable high dpi support
     app->setAttribute(Qt::AA_UseHighDpiPixmaps, true);

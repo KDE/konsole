@@ -87,7 +87,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     QFileInfo info(filePath);
 
     KConfig config(filePath , KConfig::NoGlobals);
-    ColorScheme* scheme = new ColorScheme();
+    auto scheme = new ColorScheme();
     scheme->setName(info.baseName());
     scheme->read(config);
 

@@ -37,9 +37,9 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     : QDialog(parent)
 {
     setWindowTitle(i18n("Copy Input"));
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
-    QWidget *mainWidget = new QWidget(this);
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+    auto mainWidget = new QWidget(this);
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
@@ -64,7 +64,7 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     _model->setCheckColumn(1);
     _model->setSessions(SessionManager::instance()->sessions());
 
-    QSortFilterProxyModel* filterProxyModel = new QSortFilterProxyModel(this);
+    auto filterProxyModel = new QSortFilterProxyModel(this);
     filterProxyModel->setDynamicSortFilter(true);
     filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     filterProxyModel->setSourceModel(_model);

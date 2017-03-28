@@ -168,7 +168,7 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
 
 KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(QIODevice* source, const QString& name)
 {
-    KeyboardTranslator* translator = new KeyboardTranslator(name);
+    auto translator = new KeyboardTranslator(name);
     KeyboardTranslatorReader reader(source);
     translator->setDescription(reader.description());
     while (reader.hasNextEntry())

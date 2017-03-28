@@ -141,7 +141,7 @@ MainWindow* Application::newMainWindow()
 {
     WindowSystemInfo::HAVE_TRANSPARENCY = !m_parser->isSet(QStringLiteral("notransparency"));
 
-    MainWindow* window = new MainWindow();
+    auto window = new MainWindow();
 
     connect(window, &Konsole::MainWindow::newWindowRequest, this, &Konsole::Application::createWindow);
     connect(window, &Konsole::MainWindow::viewDetached, this, &Konsole::Application::detachView);
@@ -565,7 +565,7 @@ void Application::slotActivateRequested (QStringList args, const QString & /*wor
     m_customCommand = getCustomCommand(args);
 
     // We can't re-use QCommandLineParser instances, it preserves earlier parsed values
-    QCommandLineParser *parser = new QCommandLineParser;
+    auto parser = new QCommandLineParser;
     populateCommandLineParser(parser);
     parser->parse(args);
     m_parser.reset(parser);

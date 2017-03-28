@@ -149,7 +149,7 @@ void ViewSplitter::addContainer(ViewContainer* container ,
 
         splitter->updateSizes();
     } else {
-        ViewSplitter* newSplitter = new ViewSplitter(this);
+        auto newSplitter = new ViewSplitter(this);
         connect(newSplitter , &Konsole::ViewSplitter::empty , splitter , &Konsole::ViewSplitter::childEmpty);
 
         ViewContainer* oldContainer = splitter->activeContainer();

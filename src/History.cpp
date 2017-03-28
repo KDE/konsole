@@ -626,7 +626,7 @@ HistoryScroll* HistoryTypeFile::scroll(HistoryScroll* old) const
     for (int i = 0; i < lines; i++) {
         int size = old->getLineLen(i);
         if (size > LINE_SIZE) {
-            Character* tmp_line = new Character[size];
+            auto tmp_line = new Character[size];
             old->getCells(i, 0, size, tmp_line);
             newScroll->addCells(tmp_line, size);
             newScroll->addLine(old->isWrappedLine(i));

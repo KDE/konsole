@@ -194,7 +194,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect(_view.data(), &Konsole::TerminalDisplay::keyPressedSignal, this, &Konsole::SessionController::interactionHandler);
 
     // take a snapshot of the session state periodically in the background
-    QTimer* backgroundTimer = new QTimer(_session);
+    auto backgroundTimer = new QTimer(_session);
     backgroundTimer->setSingleShot(false);
     backgroundTimer->setInterval(2000);
     connect(backgroundTimer, &QTimer::timeout, this, &Konsole::SessionController::snapshot);
@@ -1296,7 +1296,7 @@ void SessionController::beginSearch(const QString& text , int direction)
 
     if (!regExp.pattern().isEmpty()) {
         _view->screenWindow()->setCurrentResultLine(-1);
-        SearchHistoryTask* task = new SearchHistoryTask(this);
+        auto task = new SearchHistoryTask(this);
 
         connect(task, &Konsole::SearchHistoryTask::completed, this, &Konsole::SessionController::searchCompleted);
 
@@ -1415,7 +1415,7 @@ void SessionController::print_screen()
     QPrinter printer;
 
     QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, _view);
-    PrintOptions* options = new PrintOptions();
+    auto options = new PrintOptions();
 
     dialog->setOptionTabs(QList<QWidget*>() << options);
     dialog->setWindowTitle(i18n("Print Shell"));
@@ -1527,7 +1527,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
             setClientBuilder(new KXMLGUIBuilder(_view));
         }
 
-        KXMLGUIFactory* factory = new KXMLGUIFactory(clientBuilder(), this);
+        auto factory = new KXMLGUIFactory(clientBuilder(), this);
         factory->addClient(this);
         ////qDebug() << "Created xmlgui factory" << factory;
     }
@@ -1536,7 +1536,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
     if (popup) {
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
         QList<QAction*> contentActions = _view->filterActions(position);
-        QAction* contentSeparator = new QAction(popup);
+        auto contentSeparator = new QAction(popup);
         contentSeparator->setSeparator(true);
         contentActions << contentSeparator;
         popup->insertActions(popup->actions().value(0, 0), contentActions);

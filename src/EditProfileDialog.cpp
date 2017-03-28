@@ -68,8 +68,8 @@ EditProfileDialog::EditProfileDialog(QWidget* aParent)
 {
     setWindowTitle(i18n("Edit Profile"));
     mButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);
-    QWidget *mainWidget = new QWidget(this);
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto mainWidget = new QWidget(this);
+    auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     mainLayout->addWidget(mainWidget);
     QPushButton *okButton = mButtonBox->button(QDialogButtonBox::Ok);
@@ -398,7 +398,7 @@ void EditProfileDialog::selectInitialDir()
 }
 void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
 {
-    ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
+    auto delegate = new ColorSchemeViewDelegate(this);
     _ui->colorSchemeList->setItemDelegate(delegate);
 
     _ui->transparencyWarningWidget->setVisible(false);
@@ -716,7 +716,7 @@ void EditProfileDialog::editColorScheme()
 }
 void EditProfileDialog::saveColorScheme(const ColorScheme& scheme, bool isNewScheme)
 {
-    ColorScheme* newScheme = new ColorScheme(scheme);
+    auto newScheme = new ColorScheme(scheme);
 
     // if this is a new color scheme, pick a name based on the description
     if (isNewScheme) {
@@ -873,7 +873,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     Q_ASSERT(translator);
 
     QPointer<QDialog> dialog = new QDialog(this);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(dialog);
+    auto buttonBox = new QDialogButtonBox(dialog);
     buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     connect(buttonBox, &QDialogButtonBox::accepted, dialog.data(), &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, dialog.data(), &QDialog::reject);
@@ -883,7 +883,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     else
         dialog->setWindowTitle(i18n("Edit Key Binding List"));
 
-    KeyBindingEditor* editor = new KeyBindingEditor;
+    auto editor = new KeyBindingEditor;
 
     if (translator)
         editor->setup(translator);
@@ -891,13 +891,13 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     if (isNewTranslator)
         editor->setDescription(i18n("New Key Binding List"));
 
-    QVBoxLayout *layout = new QVBoxLayout;
+    auto layout = new QVBoxLayout;
     layout->addWidget(editor);
     layout->addWidget(buttonBox);
     dialog->setLayout(layout);
 
     if (dialog->exec() == QDialog::Accepted) {
-        KeyboardTranslator* newTranslator = new KeyboardTranslator(*editor->translator());
+        auto newTranslator = new KeyboardTranslator(*editor->translator());
 
         if (isNewTranslator)
             newTranslator->setName(newTranslator->description());
@@ -1129,7 +1129,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     connect(_ui->cursorShapeCombo, static_cast<void(KComboBox::*)(int)>(&KComboBox::activated), this, &Konsole::EditProfileDialog::setCursorShape);
 
     // encoding options
-    KCodecAction* codecAction = new KCodecAction(this);
+    auto codecAction = new KCodecAction(this);
     _ui->selectEncodingButton->setMenu(codecAction->menu());
     connect(codecAction, static_cast<void(KCodecAction::*)(QTextCodec*)>(&KCodecAction::triggered), this, &Konsole::EditProfileDialog::setDefaultCodec);
 

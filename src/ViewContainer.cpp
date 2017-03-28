@@ -293,8 +293,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
     _newTabButton->setWhatsThis(i18nc("@info:whatsthis", "Create a new tab. Press and hold to select profile from menu"));
     _newTabButton->adjustSize();
 
-    QMenu* profileMenu = new QMenu(_newTabButton);
-    ProfileList* profileList = new ProfileList(false, profileMenu);
+    auto profileMenu = new QMenu(_newTabButton);
+    auto profileList = new ProfileList(false, profileMenu);
     profileList->syncWidgetActions(profileMenu, true);
     connect(profileList, &Konsole::ProfileList::profileSelected, this, static_cast<void(TabbedViewContainer::*)(Profile::Ptr)>(&Konsole::TabbedViewContainer::newViewRequest));
     setNewViewMenu(profileMenu);
@@ -716,7 +716,7 @@ StackedViewContainer::StackedViewContainer(QObject* parent)
     : ViewContainer(NavigationPositionTop, parent)
 {
     _containerWidget = new QWidget;
-    QVBoxLayout* layout = new QVBoxLayout(_containerWidget);
+    auto layout = new QVBoxLayout(_containerWidget);
 
     _stackWidget = new QStackedWidget(_containerWidget);
 

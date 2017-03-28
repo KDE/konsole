@@ -209,7 +209,7 @@ void ViewManager::setupActions()
 
         // Switch to tab N shortcuts
         const int SWITCH_TO_TAB_COUNT = 19;
-        QSignalMapper* switchToTabMapper = new QSignalMapper(this);
+        auto switchToTabMapper = new QSignalMapper(this);
         connect(switchToTabMapper, static_cast<void(QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &Konsole::ViewManager::switchToView);
         for (int i = 0; i < SWITCH_TO_TAB_COUNT; i++) {
             QAction* switchToTabAction = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);
@@ -485,7 +485,7 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
 {
     // create a new controller for the session, and ensure that this view manager
     // is notified when the view gains the focus
-    SessionController* controller = new SessionController(session, view, this);
+    auto controller = new SessionController(session, view, this);
     connect(controller , &Konsole::SessionController::focused , this , &Konsole::ViewManager::controllerChanged);
     connect(session , &Konsole::Session::destroyed , controller , &Konsole::SessionController::deleteLater);
     connect(session , &Konsole::Session::primaryScreenInUse , controller , &Konsole::SessionController::setupPrimaryScreenSpecificActions);
@@ -598,7 +598,7 @@ ViewContainer* ViewManager::createContainer()
 
     switch (_navigationMethod) {
     case TabbedNavigation: {
-        TabbedViewContainer* tabbedContainer = new TabbedViewContainer(_navigationPosition, this, _viewSplitter);
+        auto tabbedContainer = new TabbedViewContainer(_navigationPosition, this, _viewSplitter);
         container = tabbedContainer;
 
         connect(tabbedContainer, &TabbedViewContainer::detachTab, this, &ViewManager::detachView);
@@ -751,7 +751,7 @@ void ViewManager::viewDestroyed(QWidget* view)
 
 TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
 {
-    TerminalDisplay* display = new TerminalDisplay(0);
+    auto display = new TerminalDisplay(0);
     display->setRandomSeed(session->sessionId() * 31);
 
     return display;
