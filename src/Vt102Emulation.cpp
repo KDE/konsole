@@ -983,7 +983,7 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
  * Vim needs the following plugin to be installed to convert the escape
  * sequence into the FocusLost autocmd: https://github.com/sjl/vitality.vim
  */
-void Vt102Emulation::focusLost(void)
+void Vt102Emulation::focusLost()
 {
     if (_reportFocusEvents)
         sendString("\033[O");
@@ -996,7 +996,7 @@ void Vt102Emulation::focusLost(void)
  * Vim needs the following plugin to be installed to convert the escape
  * sequence into the FocusGained autocmd: https://github.com/sjl/vitality.vim
  */
-void Vt102Emulation::focusGained(void)
+void Vt102Emulation::focusGained()
 {
     if (_reportFocusEvents)
         sendString("\033[I");
