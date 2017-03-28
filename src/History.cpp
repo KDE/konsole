@@ -239,7 +239,7 @@ int HistoryScrollFile::getLineLen(int lineno)
 bool HistoryScrollFile::isWrappedLine(int lineno)
 {
     if (lineno >= 0 && lineno <= getLines()) {
-        unsigned char flag;
+        unsigned char flag = 0;
         _lineflags.get((unsigned char*)&flag, sizeof(unsigned char), (lineno)*sizeof(unsigned char));
         return flag;
     }
