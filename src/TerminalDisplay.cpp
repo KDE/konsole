@@ -2869,8 +2869,8 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
     if (!text.isEmpty()) {
         text.replace('\n', '\r');
         if (bracketedPasteMode()) {
-            text.prepend("\e[200~");
-            text.append("\e[201~");
+            text.prepend("\033[200~");
+            text.append("\033[201~");
         }
         // perform paste by simulating keypress events
         QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
