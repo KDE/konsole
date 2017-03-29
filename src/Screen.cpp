@@ -373,7 +373,7 @@ void Screen::reverseRendition(Character& p) const
 void Screen::updateEffectiveRendition()
 {
     _effectiveRendition = _currentRendition;
-    if (_currentRendition & RE_REVERSE) {
+    if ((_currentRendition & RE_REVERSE) != 0) {
         _effectiveForeground = _currentBackground;
         _effectiveBackground = _currentForeground;
     } else {
@@ -381,11 +381,11 @@ void Screen::updateEffectiveRendition()
         _effectiveBackground = _currentBackground;
     }
 
-    if (_currentRendition & RE_BOLD) {
-        if (!(_currentRendition & RE_FAINT))
+    if ((_currentRendition & RE_BOLD) != 0) {
+        if ((_currentRendition & RE_FAINT) == 0)
             _effectiveForeground.setIntensive();
     } else {
-        if (_currentRendition & RE_FAINT)
+        if ((_currentRendition & RE_FAINT) != 0)
             _effectiveForeground.setFaint();
     }
 }
@@ -659,7 +659,7 @@ void Screen::displayCharacter(unsigned short c)
             ushort extendedCharLength;
             const ushort* oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
             Q_ASSERT(oldChars);
-            if (oldChars && extendedCharLength < 3) {
+            if ((oldChars) && extendedCharLength < 3) {
                 Q_ASSERT(extendedCharLength > 1);
                 Q_ASSERT(extendedCharLength < 65535);
                 auto chars = new ushort[extendedCharLength + 1];
@@ -703,7 +703,7 @@ void Screen::displayCharacter(unsigned short c)
 
     int i = 0;
     const int newCursorX = _cuX + w--;
-    while (w) {
+    while (w != 0) {
         i++;
 
         if (_screenLines[_cuY].size() < _cuX + i + 1)
@@ -1244,7 +1244,7 @@ int Screen::copyLineToStream(int line ,
         int length = _screenLines[screenLine].count();
 
         // Don't remove end spaces in lines that wrap
-        if (trimTrailingSpaces && !(_lineProperties[screenLine] & LINE_WRAPPED))
+        if (trimTrailingSpaces && ((_lineProperties[screenLine] & LINE_WRAPPED) == 0))
         {
             // ignore trailing white space at the end of the line
             for (int i = length-1; i >= 0; i--)
@@ -1269,7 +1269,7 @@ int Screen::copyLineToStream(int line ,
     }
 
     if (appendNewLine && (count + 1 < MAX_CHARS)) {
-        if (currentLineProperties & LINE_WRAPPED) {
+        if ((currentLineProperties & LINE_WRAPPED) != 0) {
             // do nothing extra when this line is wrapped.
         } else {
             // When users ask not to preserve the linebreaks, they usually mean:
@@ -1301,7 +1301,7 @@ void Screen::addHistLine()
         const int oldHistLines = _history->getLines();
 
         _history->addCellsVector(_screenLines[0]);
-        _history->addLine(_lineProperties[0] & LINE_WRAPPED);
+        _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
 
         const int newHistLines = _history->getLines();
 

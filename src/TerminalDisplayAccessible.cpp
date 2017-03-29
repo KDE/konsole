@@ -161,7 +161,7 @@ void *TerminalDisplayAccessible::interface_cast(QAccessible::InterfaceType type)
 
 void TerminalDisplayAccessible::setSelection(int selectionIndex, int startOffset, int endOffset)
 {
-    if (selectionIndex)
+    if (selectionIndex != 0)
         return;
     addSelection(startOffset, endOffset);
 }

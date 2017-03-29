@@ -244,19 +244,19 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
     std::mt19937 randomEngine(randomSeed);
 
     int hueDifference = 0;
-    if (range.hue) {
+    if (range.hue != 0u) {
         std::uniform_int_distribution<int> dist(0, range.hue);
         hueDifference = dist(randomEngine);
     }
 
     int saturationDifference = 0;
-    if (range.saturation) {
+    if (range.saturation != 0u) {
         std::uniform_int_distribution<int> dist(0, range.saturation);
         saturationDifference = dist(randomEngine) - range.saturation / 2;
     }
 
     int valueDifference = 0;
-    if (range.value) {
+    if (range.value != 0u) {
         std::uniform_int_distribution<int> dist(0, range.value);
         valueDifference = dist(randomEngine) - range.value / 2;
     }

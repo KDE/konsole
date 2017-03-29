@@ -108,7 +108,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     }
 
     for (int i = 0; i < outputCount;) {
-        if (characters[i].rendition & RE_EXTENDED_CHAR) {
+        if ((characters[i].rendition & RE_EXTENDED_CHAR) != 0) {
             ushort extendedCharLength = 0;
             const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
             if (chars) {
@@ -199,11 +199,11 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
 
             //colors - a color table must have been defined first
             if (_colorTable) {
-                bool useBold = _lastRendition & RE_BOLD;
+                bool useBold = (_lastRendition & RE_BOLD) != 0;
                 if (useBold)
                     style.append("font-weight:bold;");
 
-                if (_lastRendition & RE_UNDERLINE)
+                if ((_lastRendition & RE_UNDERLINE) != 0)
                     style.append("font-decoration:underline;");
 
                 style.append(QString("color:%1;").arg(_lastForeColor.color(_colorTable).name()));
@@ -224,7 +224,7 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
 
         //output current character
         if (spaceCount < 2) {
-            if (characters[i].rendition & RE_EXTENDED_CHAR) {
+            if ((characters[i].rendition & RE_EXTENDED_CHAR) != 0) {
                 ushort extendedCharLength = 0;
                 const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
                 if (chars) {

@@ -229,7 +229,7 @@ void SessionController::trackOutput(QKeyEvent* event)
 
     // Only jump to the bottom if the user actually typed something in,
     // not if the user e. g. just pressed a modifier.
-    if (event->text().isEmpty() && event->modifiers()) {
+    if (event->text().isEmpty() && (event->modifiers() != 0u)) {
         return;
     }
 
@@ -833,7 +833,7 @@ void SessionController::renameSession()
     if (!guard)
         return;
 
-    if (result) {
+    if (result != 0) {
         QString tabTitle = dialog->tabTitleText();
         QString remoteTabTitle = dialog->remoteTabTitleText();
 
@@ -866,7 +866,7 @@ bool SessionController::confirmClose() const
                             "  Are you sure you want to close it?", title);
 
         int result = KMessageBox::warningYesNo(_view->window(), question, i18n("Confirm Close"));
-        return (result == KMessageBox::Yes) ? true : false;
+        return result == KMessageBox::Yes;
     }
     return true;
 }
@@ -891,7 +891,7 @@ bool SessionController::confirmForceClose() const
                             "  Are you sure you want to kill it by force?", title);
 
         int result = KMessageBox::warningYesNo(_view->window(), question, i18n("Confirm Close"));
-        return (result == KMessageBox::Yes) ? true : false;
+        return result == KMessageBox::Yes;
     }
     return true;
 }
@@ -1386,7 +1386,7 @@ void SessionController::showHistoryOptions()
     if (!guard)
         return;
 
-    if (result) {
+    if (result != 0) {
         scrollBackOptionsChanged(dialog->mode(), dialog->lineCount());
     }
 }
@@ -1667,11 +1667,7 @@ void SessionController::zmodemUpload()
 bool SessionController::isKonsolePart() const
 {
     // Check to see if we are being called from Konsole or a KPart
-    if (qApp->applicationName() == "konsole") {
-        return false;
-    } else {
-        return true;
-    }
+    return !(qApp->applicationName() == "konsole");
 }
 
 SessionTask::SessionTask(QObject* parent)
@@ -1809,7 +1805,7 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
 }
 void SaveHistoryTask::jobResult(KJob* job)
 {
-    if (job->error()) {
+    if (job->error() != 0) {
         KMessageBox::sorry(0 , i18n("A problem occurred when saving the output.\n%1", job->errorString()));
     }
 

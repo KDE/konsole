@@ -279,7 +279,7 @@ bool ProcessInfo::userNameRequired() const
 QString ProcessInfo::currentDir(bool* ok) const
 {
     if (ok)
-        *ok = _fields & CURRENT_DIR;
+        *ok = (_fields & CURRENT_DIR) != 0;
 
     return _currentDir;
 }

@@ -446,8 +446,8 @@ bool KeyboardTranslator::Entry::matches(int testKeyCode,
     // any or no modifiers.  In this context, the 'keypad' modifier does not count.
     bool anyModifiersSet = (testKeyboardModifiers != 0)
                            && (testKeyboardModifiers != Qt::KeypadModifier);
-    bool wantAnyModifier = _state & KeyboardTranslator::AnyModifierState;
-    if (_stateMask & KeyboardTranslator::AnyModifierState) {
+    bool wantAnyModifier = (_state & KeyboardTranslator::AnyModifierState) != 0;
+    if ((_stateMask & KeyboardTranslator::AnyModifierState) != 0) {
         if (wantAnyModifier != anyModifiersSet)
             return false;
     }
@@ -512,9 +512,9 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray& input) const
                 // with the corresponding character value
                 char hexDigits[3] = {0};
 
-                if ((i < result.count() - 2) && isxdigit(result[i + 2]))
+                if ((i < result.count() - 2) && (isxdigit(result[i + 2]) != 0))
                     hexDigits[0] = result[i + 2];
-                if ((i < result.count() - 3) && isxdigit(result[i + 3]))
+                if ((i < result.count() - 3) && (isxdigit(result[i + 3]) != 0))
                     hexDigits[1] = result[i + 3];
 
                 unsigned charValue = 0;
@@ -538,10 +538,10 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray& input) const
 
 void KeyboardTranslator::Entry::insertModifier(QString& item , int modifier) const
 {
-    if (!(modifier & _modifierMask))
+    if ((modifier & _modifierMask) == 0u)
         return;
 
-    if (modifier & _modifiers)
+    if ((modifier & _modifiers) != 0u)
         item += '+';
     else
         item += '-';
@@ -559,10 +559,10 @@ void KeyboardTranslator::Entry::insertModifier(QString& item , int modifier) con
 }
 void KeyboardTranslator::Entry::insertState(QString& item, int aState) const
 {
-    if (!(aState & _stateMask))
+    if ((aState & _stateMask) == 0)
         return;
 
-    if (aState & _state)
+    if ((aState & _state) != 0)
         item += '+';
     else
         item += '-';
