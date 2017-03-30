@@ -133,7 +133,7 @@ const ColorEntry* TerminalDisplay::colorTable() const
 }
 void TerminalDisplay::setBackgroundColor(const QColor& color)
 {
-    _colorTable[DEFAULT_BACK_COLOR].color = color;
+    _colorTable[DEFAULT_BACK_COLOR] = color;
 
     QPalette p = palette();
     p.setColor(backgroundRole(), color);
@@ -151,7 +151,7 @@ QColor TerminalDisplay::getBackgroundColor() const
 }
 void TerminalDisplay::setForegroundColor(const QColor& color)
 {
-    _colorTable[DEFAULT_FORE_COLOR].color = color;
+    _colorTable[DEFAULT_FORE_COLOR] = color;
 
     update();
 }
@@ -160,7 +160,7 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
     for (int i = 0; i < TABLE_COLORS; i++)
         _colorTable[i] = table[i];
 
-    setBackgroundColor(_colorTable[DEFAULT_BACK_COLOR].color);
+    setBackgroundColor(_colorTable[DEFAULT_BACK_COLOR]);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -3011,8 +3011,8 @@ void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRe
     const QPoint cursorPos = cursorPosition();
 
     bool invertColors = false;
-    const QColor background = _colorTable[DEFAULT_BACK_COLOR].color;
-    const QColor foreground = _colorTable[DEFAULT_FORE_COLOR].color;
+    const QColor background = _colorTable[DEFAULT_BACK_COLOR];
+    const QColor foreground = _colorTable[DEFAULT_FORE_COLOR];
     const Character* style = &_image[loc(cursorPos.x(), cursorPos.y())];
 
     drawBackground(painter, rect, background, true);

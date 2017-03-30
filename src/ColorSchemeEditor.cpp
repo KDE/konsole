@@ -172,7 +172,7 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem* item)
         }
 
         ColorEntry entry(_colors->colorEntry(colorSchemeRow));
-        entry.color = color;
+        entry = color;
         _colors->setColorTableEntry(colorSchemeRow, entry);
 
         emit colorsChanged(_colors);
@@ -268,17 +268,17 @@ void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
         nameItem->setFlags(nameItem->flags() & ~Qt::ItemIsEditable);
 
         auto colorItem = new QTableWidgetItem();
-        colorItem->setBackground(table[row].color);
+        colorItem->setBackground(table[row]);
         colorItem->setFlags(colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable);
         colorItem->setToolTip(i18nc("@info:tooltip", "Click to choose color"));
 
         auto colorItemIntense = new QTableWidgetItem();
-        colorItemIntense->setBackground(table[COLOR_TABLE_ROW_LENGTH + row].color);
+        colorItemIntense->setBackground(table[COLOR_TABLE_ROW_LENGTH + row]);
         colorItemIntense->setFlags(colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable);
         colorItemIntense->setToolTip(i18nc("@info:tooltip", "Click to choose intense color"));
 
         auto colorItemFaint = new QTableWidgetItem();
-        colorItemFaint->setBackground(table[2*COLOR_TABLE_ROW_LENGTH + row].color);
+        colorItemFaint->setBackground(table[2*COLOR_TABLE_ROW_LENGTH + row]);
         colorItemFaint->setFlags(colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable);
         colorItemFaint->setToolTip(i18nc("@info:tooltip", "Click to choose Faint color"));
 

@@ -34,53 +34,7 @@ namespace Konsole
  * A color palette is an array of 16 ColorEntry instances which map
  * system color indexes (from 0 to 15) into actual colors.
  */
-class ColorEntry
-{
-public:
-    /**
-     * Constructs a new color palette entry.
-     *
-     * @param c The color value for this entry.
-     */
-    explicit ColorEntry(QColor c)
-        : color(c) {}
-
-    /**
-     * Constructs a new color palette entry using black color.
-     */
-    ColorEntry() : color(QColor(0x00, 0x00, 0x00)) {}
-
-    /**
-     * Sets the color of this color to those of @p rhs.
-     */
-    void operator=(const ColorEntry& rhs) {
-        color = rhs.color;
-    }
-
-    /** The color value of this entry for display. */
-    QColor color;
-
-    /**
-     * Compares two color entries and returns true if they represent the same
-     * color.
-     */
-    friend bool operator == (const ColorEntry& a, const ColorEntry& b);
-    /**
-     * Compares two color entries and returns true if they represent different
-     * color.
-     */
-    friend bool operator != (const ColorEntry& a, const ColorEntry& b);
-};
-
-inline bool operator == (const ColorEntry& a, const ColorEntry& b)
-{
-    return  a.color == b.color;
-}
-
-inline bool operator != (const ColorEntry& a, const ColorEntry& b)
-{
-    return !operator==(a, b);
-}
+typedef QColor ColorEntry;
 
 // Attributed Character Representations ///////////////////////////////
 
@@ -236,11 +190,11 @@ inline const QColor color256(quint8 u, const ColorEntry* base)
 {
     //   0.. 16: system colors
     if (u < 8) {
-        return base[u + 2].color;
+        return base[u + 2];
     }
     u -= 8;
     if (u < 8) {
-        return base[u + 2 + BASE_COLORS].color;
+        return base[u + 2 + BASE_COLORS];
     }
     u -= 8;
 
@@ -262,9 +216,9 @@ inline QColor CharacterColor::color(const ColorEntry* base) const
 {
     switch (_colorSpace) {
     case COLOR_SPACE_DEFAULT:
-        return base[_u + 0 + (_v * BASE_COLORS)].color;
+        return base[_u + 0 + (_v * BASE_COLORS)];
     case COLOR_SPACE_SYSTEM:
-        return base[_u + 2 + (_v * BASE_COLORS)].color;
+        return base[_u + 2 + (_v * BASE_COLORS)];
     case COLOR_SPACE_256:
         return color256(_u, base);
     case COLOR_SPACE_RGB:
