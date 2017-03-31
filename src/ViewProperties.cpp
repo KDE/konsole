@@ -27,13 +27,13 @@ QString ViewProperties::_mimeType = "application/x-konsole-view-id";
 
 ViewProperties::ViewProperties(QObject* parent)
     : QObject(parent)
-    , _id(0)
+    , _identifier(0)
 {
 }
 
 ViewProperties::~ViewProperties()
 {
-    _viewProperties.remove(_id);
+    _viewProperties.remove(_identifier);
 }
 ViewProperties* ViewProperties::propertiesById(int id)
 {
@@ -75,10 +75,10 @@ void ViewProperties::setIcon(const QIcon& icon)
 }
 void ViewProperties::setIdentifier(int id)
 {
-    if (_viewProperties.contains(_id))
-        _viewProperties.remove(_id);
+    if (_viewProperties.contains(_identifier))
+        _viewProperties.remove(_identifier);
 
-    _id = id;
+    _identifier = id;
 
     _viewProperties.insert(id, this);
 }
@@ -92,6 +92,6 @@ QIcon ViewProperties::icon() const
 }
 int ViewProperties::identifier() const
 {
-    return _id;
+    return _identifier;
 }
 

@@ -145,7 +145,7 @@ protected:
 private:
     QIcon _icon;
     QString _title;
-    int _id;
+    int _identifier;
 
     static QHash<int, ViewProperties*> _viewProperties;
     static QString _mimeType;
