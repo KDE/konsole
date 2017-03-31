@@ -177,5 +177,5 @@ QString TerminalDisplayAccessible::text(int startOffset, int endOffset) const
 
 TerminalDisplay* TerminalDisplayAccessible::display() const
 {
-    return static_cast<TerminalDisplay*>(widget());
+    return qobject_cast<TerminalDisplay*>(widget());
 }

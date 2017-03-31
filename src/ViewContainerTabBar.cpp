@@ -136,7 +136,7 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
     const int index = dropIndex(event->pos());
     bool success = false;
 
-    ViewContainerTabBar* sourceContainerTabBar = static_cast<ViewContainerTabBar*>(event->source());
+    ViewContainerTabBar* sourceContainerTabBar = qobject_cast<ViewContainerTabBar*>(event->source());
 
     // check if the moved tab is the last of source view.
     if (sourceContainerTabBar->count() == 1) {
