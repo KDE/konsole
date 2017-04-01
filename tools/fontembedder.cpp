@@ -81,8 +81,8 @@ int main(int argc, char **argv)
     quint32 glyphStates[128];
     QMap<quint32, int> glyphMap;
 
-    for (int i = 0; i < 128; ++i)
-        glyphStates[i] = 0; //nothing..
+    for (unsigned int & glyphState : glyphStates)
+        glyphState = 0; //nothing..
 
     while (!input.atEnd()) {
         QString line = input.readLine();
