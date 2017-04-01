@@ -21,6 +21,8 @@
 // Own
 #include "Pty.h"
 
+#include "konsoledebug.h"
+
 // System
 #include <termios.h>
 #include <signal.h>
@@ -30,7 +32,6 @@
 #include <qplatformdefs.h>
 
 // KDE
-#include <QDebug>
 #include <KPtyDevice>
 
 using Konsole::Pty;
@@ -77,7 +78,7 @@ void Pty::sendData(const QByteArray& data)
         return;
 
     if (pty()->write(data.constData()) == -1) {
-        qWarning() << "Could not send input data to terminal process.";
+        qCDebug(KonsoleDebug) << "Could not send input data to terminal process.";
         return;
     }
 }
@@ -118,7 +119,7 @@ void Pty::setFlowControlEnabled(bool enable)
             ttmode.c_iflag &= ~(IXOFF | IXON);
 
         if (!pty()->tcSetAttr(&ttmode))
-            qWarning() << "Unable to set terminal attributes.";
+            qCDebug(KonsoleDebug) << "Unable to set terminal attributes.";
     }
 }
 
@@ -130,7 +131,7 @@ bool Pty::flowControlEnabled() const
         return ((ttmode.c_iflag & IXOFF) != 0u) &&
                ((ttmode.c_iflag & IXON) != 0u);
     } else {
-        qWarning() << "Unable to get flow control status, terminal not connected.";
+        qCDebug(KonsoleDebug) << "Unable to get flow control status, terminal not connected.";
         return _xonXoff;
     }
 }
@@ -149,7 +150,7 @@ void Pty::setUtf8Mode(bool enable)
             ttmode.c_iflag &= ~IUTF8;
 
         if (!pty()->tcSetAttr(&ttmode))
-            qWarning() << "Unable to set terminal attributes.";
+            qCDebug(KonsoleDebug) << "Unable to set terminal attributes.";
     }
 #else
     Q_UNUSED(enable);
@@ -166,7 +167,7 @@ void Pty::setEraseChar(char eChar)
         ttmode.c_cc[VERASE] = eChar;
 
         if (!pty()->tcSetAttr(&ttmode))
-            qWarning() << "Unable to set terminal attributes.";
+            qCDebug(KonsoleDebug) << "Unable to set terminal attributes.";
     }
 }
 
@@ -177,7 +178,7 @@ char Pty::eraseChar() const
         pty()->tcGetAttr(&ttyAttributes);
         return ttyAttributes.c_cc[VERASE];
     } else {
-        qWarning() << "Unable to get erase char attribute, terminal not connected.";
+        qCDebug(KonsoleDebug) << "Unable to get erase char attribute, terminal not connected.";
         return _eraseChar;
     }
 }
@@ -267,15 +268,15 @@ void Pty::setWriteable(bool writeable)
     if (QT_STAT(pty()->ttyName(), &sbuf) == 0) {
         if (writeable) {
             if (::chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP) < 0) {
-                qWarning() << "Could not set writeable on "<<pty()->ttyName();
+                qCDebug(KonsoleDebug) << "Could not set writeable on "<<pty()->ttyName();
             }
         } else {
             if (::chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP | S_IWOTH)) < 0) {
-                qWarning() << "Could not unset writeable on "<<pty()->ttyName();
+                qCDebug(KonsoleDebug) << "Could not unset writeable on "<<pty()->ttyName();
             }
         }
     } else {
-        qWarning() << "Could not stat "<<pty()->ttyName();
+        qCDebug(KonsoleDebug) << "Could not stat "<<pty()->ttyName();
     }
 }
 
@@ -287,14 +288,14 @@ void Pty::closePty()
 void Pty::sendEof()
 {
     if (pty()->masterFd() < 0) {
-        qWarning() << "Unable to get eof char attribute, terminal not connected.";
+        qCDebug(KonsoleDebug) << "Unable to get eof char attribute, terminal not connected.";
         return;
     }
     struct ::termios ttyAttributes;
     pty()->tcGetAttr(&ttyAttributes);
     char eofChar = ttyAttributes.c_cc[VEOF];
     if (pty()->write(QByteArray(1, eofChar)) == -1) {
-        qWarning() << "Unable to send EOF";
+        qCDebug(KonsoleDebug) << "Unable to send EOF";
     }
 
     pty()->waitForBytesWritten();

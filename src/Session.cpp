@@ -39,7 +39,6 @@
 #include <QKeyEvent>
 
 // KDE
-#include <QDebug>
 #include <KLocalizedString>
 #include <KNotification>
 #include <KRun>

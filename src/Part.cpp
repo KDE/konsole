@@ -30,7 +30,6 @@
 #include <QAction>
 #include <KActionCollection>
 #include <KPluginFactory>
-#include <QDebug>
 
 // Konsole
 #include "EditProfileDialog.h"

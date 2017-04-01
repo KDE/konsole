@@ -50,7 +50,6 @@
 #include <KShell>
 #include <KColorScheme>
 #include <KCursor>
-#include <QDebug>
 #include <KLocalizedString>
 #include <KNotification>
 #include <KIO/DropJob>

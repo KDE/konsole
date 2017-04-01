@@ -43,7 +43,6 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 #include <KUser>
-#include <QDebug>
 
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_OSX)
 #include <sys/sysctl.h>

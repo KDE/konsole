@@ -34,7 +34,6 @@
 
 // KDE
 #include <KLocalizedString>
-#include <QDebug>
 
 // Konsole
 #include "KeyboardTranslator.h"

@@ -22,8 +22,7 @@
 // Own
 #include "ExtendedCharTable.h"
 
-// KDE
-#include <QDebug>
+#include "konsoledebug.h"
 
 // Konsole
 #include "TerminalDisplay.h"
@@ -91,7 +90,7 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
                         }
                     }
                 } else {
-                    qWarning() << "Using all the extended char hashes, going to miss this extended character";
+                    qCDebug(KonsoleDebug) << "Using all the extended char hashes, going to miss this extended character";
                     return 0;
                 }
             }

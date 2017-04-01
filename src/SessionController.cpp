@@ -20,7 +20,9 @@
 
 // Own
 #include "SessionController.h"
+
 #include "ProfileManager.h"
+#include "konsoledebug.h"
 
 // Qt
 #include <QApplication>
@@ -34,7 +36,6 @@
 #include <QStandardPaths>
 #include <QtCore/QUrl>
 #include <QtGui/QIcon>
-#include <QDebug>
 
 // KDE
 #include <KActionMenu>
@@ -338,7 +339,7 @@ void SessionController::openUrl(const QUrl& url)
                            i18n("Konsole does not know how to open the bookmark: ") +
                            url.toDisplayString());
 
-        qWarning() << "Unable to open bookmark at url" << url << ", I do not know"
+        qCDebug(KonsoleDebug) << "Unable to open bookmark at url" << url << ", I do not know"
                    << " how to handle the protocol " << url.scheme();
     }
 }
@@ -907,7 +908,7 @@ void SessionController::closeSession()
             if (_session->closeInForceWay())
                 return;
             else
-                qWarning() << "Konsole failed to close a session in any way.";
+                qCDebug(KonsoleDebug) << "Konsole failed to close a session in any way.";
         }
     }
 }
@@ -1577,7 +1578,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         if (chosen && chosen->objectName() == "close-session")
             chosen->trigger();
     } else {
-        qWarning() << "Unable to display popup menu for session"
+        qCDebug(KonsoleDebug) << "Unable to display popup menu for session"
                    << _session->title(Session::NameRole)
                    << ", no GUI factory available to build the popup.";
     }

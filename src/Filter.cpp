@@ -20,8 +20,9 @@
 // Own
 #include "Filter.h"
 
+#include "konsoledebug.h"
+
 // Qt
-#include <QDebug>
 #include <QAction>
 #include <QApplication>
 #include <QtGui/QClipboard>
@@ -499,7 +500,7 @@ RegExpFilter::HotSpot* FileFilter::newHotSpot(int startLine, int startColumn, in
         int endColumn, const QStringList& capturedTexts)
 {
     if (!_session) {
-        qWarning() << "Trying to create new hot spot without session!";
+        qCDebug(KonsoleDebug) << "Trying to create new hot spot without session!";
         return nullptr;
     }
 

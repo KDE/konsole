@@ -22,6 +22,8 @@
 // Own
 #include "SessionManager.h"
 
+#include "konsoledebug.h"
+
 // Qt
 #include <QtCore/QStringList>
 #include <QtCore/QSignalMapper>
@@ -30,7 +32,6 @@
 // KDE
 #include <KConfig>
 #include <KConfigGroup>
-#include <QDebug>
 
 // Konsole
 #include "Session.h"
@@ -53,7 +54,7 @@ SessionManager::SessionManager()
 SessionManager::~SessionManager()
 {
     if (_sessions.count() > 0) {
-        qWarning() << "Konsole SessionManager destroyed with"<< _sessions.count()<<"session(s) still alive";
+        qCDebug(KonsoleDebug) << "Konsole SessionManager destroyed with"<< _sessions.count()<<"session(s) still alive";
         // ensure that the Session doesn't later try to call back and do things to the
         // SessionManager
         foreach(Session* session, _sessions) {
@@ -319,7 +320,7 @@ Session* SessionManager::idToSession(int id)
             return session;
     }
     // this should not happen
-    qWarning() << "Failed to find session for ID" << id;
+    qCDebug(KonsoleDebug) << "Failed to find session for ID" << id;
     return nullptr;
 }
 

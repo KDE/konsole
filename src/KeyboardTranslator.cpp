@@ -22,6 +22,8 @@
 // Own
 #include "KeyboardTranslator.h"
 
+#include "konsoledebug.h"
+
 // System
 #include <ctype.h>
 #include <stdio.h>
@@ -33,7 +35,6 @@
 #include <QtGui/QKeySequence>
 
 // KDE
-#include <QDebug>
 #include <KLocalizedString>
 
 using namespace Konsole;
@@ -128,7 +129,7 @@ void KeyboardTranslatorReader::readNext()
             } else if (tokens[2].type == Token::Command) {
                 // identify command
                 if (!parseAsCommand(tokens[2].text, command))
-                    qWarning() << "Key" << tokens[1].text << ", Command" << tokens[2].text << "not understood. ";
+                    qCDebug(KonsoleDebug) << "Key" << tokens[1].text << ", Command" << tokens[2].text << "not understood. ";
             }
 
             KeyboardTranslator::Entry newEntry;
@@ -218,7 +219,7 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
             } else if (parseAsKeyCode(buffer, itemKeyCode)) {
                 keyCode = itemKeyCode;
             } else {
-                qWarning() << "Unable to parse key binding item:" << buffer;
+                qCDebug(KonsoleDebug) << "Unable to parse key binding item:" << buffer;
             }
 
             buffer.clear();
@@ -283,7 +284,7 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString& item , int& keyCode
         keyCode = sequence[0];
 
         if (sequence.count() > 1) {
-            qWarning() << "Unhandled key codes in sequence: " << item;
+            qCDebug(KonsoleDebug) << "Unhandled key codes in sequence: " << item;
         }
     } else {
         return false;
@@ -381,7 +382,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
 
     QRegularExpressionMatch keyMatch(key.match(text));
     if (!keyMatch.hasMatch()) {
-        qWarning() << "Line in keyboard translator file could not be understood:" << text;
+        qCDebug(KonsoleDebug) << "Line in keyboard translator file could not be understood:" << text;
         return list;
     }
 

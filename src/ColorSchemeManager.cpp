@@ -22,6 +22,8 @@
 // Own
 #include "ColorSchemeManager.h"
 
+#include "konsoledebug.h"
+
 // Qt
 #include <QtCore/QIODevice>
 #include <QtCore/QFileInfo>
@@ -30,7 +32,6 @@
 
 // KDE
 #include <KConfig>
-#include <QDebug>
 
 using namespace Konsole;
 
@@ -65,7 +66,7 @@ void ColorSchemeManager::loadAllColorSchemes()
     }
 
     if (failed > 0)
-        qWarning() << "failed to load " << failed << " color schemes.";
+        qCDebug(KonsoleDebug) << "failed to load " << failed << " color schemes.";
 
     _haveLoadedAll = true;
 }
@@ -92,7 +93,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     scheme->read(config);
 
     if (scheme->name().isEmpty()) {
-        qWarning() << "Color scheme in" << filePath << "does not have a valid name and was not loaded.";
+        qCDebug(KonsoleDebug) << "Color scheme in" << filePath << "does not have a valid name and was not loaded.";
         delete scheme;
         return false;
     }
@@ -162,7 +163,7 @@ bool ColorSchemeManager::deleteColorScheme(const QString& name)
         _colorSchemes.remove(name);
         return true;
     } else {
-        qWarning() << "Failed to remove color scheme -" << path;
+        qCDebug(KonsoleDebug)<<"Failed to remove color scheme -"<<path;
         return false;
     }
 }
@@ -176,7 +177,7 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
     // Konsole will create a sub-folder in that case (bko 315086)
     // More code will have to go in to prevent the users from doing that.
     if (name.contains(QLatin1String("/"))) {
-        qWarning() << name << " has an invalid character / in the name ... skipping";
+        qCDebug(KonsoleDebug)<<name<<" has an invalid character / in the name ... skipping";
         return defaultColorScheme();
     }
 
@@ -189,7 +190,7 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
             return findColorScheme(name);
         }
 
-        qWarning() << "Could not find color scheme - " << name;
+        qCDebug(KonsoleDebug) << "Could not find color scheme - " << name;
 
         return 0;
     }

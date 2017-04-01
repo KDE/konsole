@@ -21,6 +21,8 @@
 // Own
 #include "History.h"
 
+#include "konsoledebug.h"
+
 // System
 #include <stdlib.h>
 #include <stdio.h>
@@ -30,8 +32,6 @@
 #include <errno.h>
 
 // KDE
-#include <QDebug>
-
 #include <QDir>
 #include <qplatformdefs.h>
 #include <QStandardPaths>
@@ -108,7 +108,7 @@ void HistoryFile::map()
     if (_fileMap == MAP_FAILED) {
         _readWriteBalance = 0;
         _fileMap = 0;
-        qWarning() << "mmap'ing history failed.  errno = " << errno;
+        qCDebug(KonsoleDebug) << "mmap'ing history failed.  errno = " << errno;
     }
 }
 

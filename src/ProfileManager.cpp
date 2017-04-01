@@ -22,6 +22,8 @@
 // Own
 #include "ProfileManager.h"
 
+#include "konsoledebug.h"
+
 // Qt
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
@@ -31,7 +33,6 @@
 // KDE
 #include <KSharedConfig>
 #include <KConfig>
-#include <QDebug>
 #include <KConfigGroup>
 #include <KLocalizedString>
 
@@ -161,7 +162,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     PopStackOnExit<QString> popGuardOnExit(recursionGuard);
 
     if (recursionGuard.contains(path)) {
-        qWarning() << "Ignoring attempt to load profile recursively from" << path;
+        qCDebug(KonsoleDebug) << "Ignoring attempt to load profile recursively from" << path;
         return _fallbackProfile;
     } else {
         recursionGuard.push(path);
@@ -184,7 +185,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     delete reader;
 
     if (!result) {
-        qWarning() << "Could not load profile from " << path;
+        qCDebug(KonsoleDebug) << "Could not load profile from " << path;
         return Profile::Ptr();
     } else {
         addProfile(newProfile);
@@ -429,7 +430,7 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
         // try to delete the config file
         if (profile->isPropertySet(Profile::Path) && QFile::exists(profile->path())) {
             if (!QFile::remove(profile->path())) {
-                qWarning() << "Could not delete profile: " << profile->path()
+                qCDebug(KonsoleDebug) << "Could not delete profile: " << profile->path()
                            << "The file is most likely in a directory which is read-only.";
 
                 return false;
