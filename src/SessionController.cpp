@@ -1007,10 +1007,7 @@ void SessionController::copyInputToAllTabs()
 
     QSet<Session*> group =
         QSet<Session*>::fromList(SessionManager::instance()->sessions());
-    for (QSet<Session*>::iterator iterator = group.begin();
-            iterator != group.end(); ++iterator) {
-        Session* session = *iterator;
-
+    for (auto session : group) {
         // First, ensure that the session is removed
         // (necessary to avoid duplicates on addSession()!)
         _copyToGroup->removeSession(session);
@@ -1073,12 +1070,11 @@ void SessionController::copyInputToNone()
 
     QSet<Session*> group =
         QSet<Session*>::fromList(SessionManager::instance()->sessions());
-    for (QSet<Session*>::iterator iterator = group.begin();
-            iterator != group.end(); ++iterator) {
-        Session* session = *iterator;
+    for (auto iterator : group) {
+        Session* session = iterator;
 
         if (session != _session) {
-            _copyToGroup->removeSession(*iterator);
+            _copyToGroup->removeSession(iterator);
         }
     }
     delete _copyToGroup;

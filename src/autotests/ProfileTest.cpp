@@ -129,9 +129,9 @@ void ProfileTest::testProfileGroup()
 {
     // create three new profiles
     Profile::Ptr profile[3];
-    for (int i = 0; i < 3; i++) {
-        profile[i] = new Profile;
-        QVERIFY(!profile[i]->asGroup());
+    for (auto & i : profile) {
+        i = new Profile;
+        QVERIFY(!i->asGroup());
     }
 
     // set properties with different values
@@ -139,18 +139,18 @@ void ProfileTest::testProfileGroup()
     profile[1]->setProperty(Profile::UseCustomCursorColor, false);
 
     // set properties with same values
-    for (int i = 0; i < 3; i++)
-        profile[i]->setProperty(Profile::HistorySize, 1234);
+    for (auto & i : profile)
+        i->setProperty(Profile::HistorySize, 1234);
 
     // create a group profile
     ProfileGroup::Ptr group = ProfileGroup::Ptr(new ProfileGroup);
     const ProfileGroup::Ptr group_const = ProfileGroup::Ptr(new ProfileGroup);
     QVERIFY(group->asGroup());
     QVERIFY(group_const->asGroup());
-    for (int i = 0; i < 3; i++) {
-        group->addProfile(profile[i]);
-        QVERIFY(group->profiles().contains(profile[i]));
-        QVERIFY(!group_const->profiles().contains(profile[i]));
+    for (auto & i : profile) {
+        group->addProfile(i);
+        QVERIFY(group->profiles().contains(i));
+        QVERIFY(!group_const->profiles().contains(i));
     }
     group->updateValues();
 

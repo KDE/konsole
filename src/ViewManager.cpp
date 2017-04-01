@@ -1010,9 +1010,9 @@ int ViewManager::newSession(const QString& profile, const QString& directory)
     const QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
     Profile::Ptr profileptr = ProfileManager::instance()->defaultProfile();
 
-    for (int i = 0; i < profilelist.size(); ++i) {
-        if (profilelist.at(i)->name() == profile) {
-            profileptr = profilelist.at(i);
+    for (const auto & i : profilelist) {
+        if (i->name() == profile) {
+            profileptr = i;
             break;
         }
     }

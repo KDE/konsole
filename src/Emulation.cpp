@@ -221,8 +221,8 @@ void Emulation::receiveData(const char* text, int length)
     QString unicodeText = _decoder->toUnicode(text, length);
 
     //send characters to terminal emulator
-    for (int i = 0; i < unicodeText.length(); i++)
-        receiveChar(unicodeText[i].unicode());
+    for (auto && i : unicodeText)
+        receiveChar(i.unicode());
 
     //look for z-modem indicator
     //-- someone who understands more about z-modems that I do may be able to move

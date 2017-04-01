@@ -223,8 +223,8 @@ int KONSOLEPRIVATE_EXPORT konsole_wcwidth(quint16 oucs)
 int string_width(const QString& text)
 {
     int w = 0;
-    for (int i = 0; i < text.length(); ++i)
-        w += konsole_wcwidth(text[i].unicode());
+    for (auto i : text)
+        w += konsole_wcwidth(i.unicode());
     return w;
 }
 
