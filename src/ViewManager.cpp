@@ -98,9 +98,7 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Windows/") + QString::number(_managerId), this);
 }
 
-ViewManager::~ViewManager()
-{
-}
+ViewManager::~ViewManager() = default;
 
 int ViewManager::managerId() const
 {

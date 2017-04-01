@@ -34,9 +34,7 @@ GeneralSettings::GeneralSettings(QWidget* aParent) : QWidget(aParent)
     this->kcfg_ShowTerminalSizeHint->setVisible(false);
 }
 
-GeneralSettings::~GeneralSettings()
-{
-}
+GeneralSettings::~GeneralSettings() = default;
 
 void GeneralSettings::slotEnableAllMessages()
 {

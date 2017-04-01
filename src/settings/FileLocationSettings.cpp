@@ -36,7 +36,5 @@ FileLocationSettings::FileLocationSettings(QWidget* aParent) : QWidget(aParent)
 
 }
 
-FileLocationSettings::~FileLocationSettings()
-{
-}
+FileLocationSettings::~FileLocationSettings() = default;
 

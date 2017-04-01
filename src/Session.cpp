@@ -1534,9 +1534,8 @@ SessionGroup::SessionGroup(QObject* parent)
     : QObject(parent), _masterMode(0)
 {
 }
-SessionGroup::~SessionGroup()
-{
-}
+SessionGroup::~SessionGroup() = default;
+
 int SessionGroup::masterMode() const
 {
     return _masterMode;

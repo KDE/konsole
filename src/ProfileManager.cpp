@@ -111,9 +111,7 @@ ProfileManager::ProfileManager()
     loadShortcuts();
 }
 
-ProfileManager::~ProfileManager()
-{
-}
+ProfileManager::~ProfileManager() = default;
 
 Q_GLOBAL_STATIC(ProfileManager, theProfileManager)
 ProfileManager* ProfileManager::instance()

@@ -68,9 +68,7 @@ void Pty::init()
     connect(pty(), &KPtyDevice::readyRead , this , &Konsole::Pty::dataReceived);
 }
 
-Pty::~Pty()
-{
-}
+Pty::~Pty() = default;
 
 void Pty::sendData(const QByteArray& data)
 {

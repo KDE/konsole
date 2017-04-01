@@ -224,9 +224,8 @@ const QString* Filter::buffer()
 {
     return _buffer;
 }
-Filter::HotSpot::~HotSpot()
-{
-}
+Filter::HotSpot::~HotSpot() = default;
+
 void Filter::addHotSpot(HotSpot* spot)
 {
     _hotspotList << spot;

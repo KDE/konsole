@@ -75,8 +75,7 @@ Vt102Emulation::Vt102Emulation()
     reset();
 }
 
-Vt102Emulation::~Vt102Emulation()
-{}
+Vt102Emulation::~Vt102Emulation() = default;
 
 void Vt102Emulation::clearEntireScreen()
 {

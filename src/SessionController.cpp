@@ -1693,9 +1693,7 @@ SaveHistoryTask::SaveHistoryTask(QObject* parent)
     : SessionTask(parent)
 {
 }
-SaveHistoryTask::~SaveHistoryTask()
-{
-}
+SaveHistoryTask::~SaveHistoryTask() = default;
 
 void SaveHistoryTask::execute()
 {

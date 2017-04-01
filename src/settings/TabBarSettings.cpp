@@ -28,7 +28,5 @@ TabBarSettings::TabBarSettings(QWidget* aParent) : QWidget(aParent)
     setupUi(this);
 }
 
-TabBarSettings::~TabBarSettings()
-{
-}
+TabBarSettings::~TabBarSettings() = default;
 

@@ -102,9 +102,7 @@ void ProfileSettings::showEvent(QShowEvent*)
     sessionTable->horizontalHeader()->setStretchLastSection(true);
 }
 
-ProfileSettings::~ProfileSettings()
-{
-}
+ProfileSettings::~ProfileSettings() = default;
 
 void ProfileSettings::slotAccepted()
 {

@@ -237,9 +237,9 @@ void Profile::clone(Profile::Ptr profile, bool differentOnly)
         properties++;
     }
 }
-Profile::~Profile()
-{
-}
+
+Profile::~Profile() = default;
+
 bool Profile::isHidden() const
 {
     return _hidden;

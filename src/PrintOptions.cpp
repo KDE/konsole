@@ -36,9 +36,7 @@ PrintOptions::PrintOptions(QWidget* aParent) : QWidget(aParent)
     scaleOutput->setChecked(configGroup.readEntry("ScaleOutput", true));
 }
 
-PrintOptions::~PrintOptions()
-{
-}
+PrintOptions::~PrintOptions() = default;
 
 void PrintOptions::saveSettings()
 {
