@@ -34,6 +34,7 @@ private slots:
     void testClone();
     void testProfileGroup();
     void testProfileFileNames();
+    void testFallbackProfile();
 };
 
 }

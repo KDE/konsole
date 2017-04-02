@@ -225,5 +225,16 @@ void ProfileTest::testProfileFileNames()
     delete writer;
 }
 
+void ProfileTest::testFallbackProfile()
+{
+    // create a new profile
+    Profile* fallback = new Profile();
+    fallback->useFallback();
+
+    QCOMPARE(fallback->property<QString>(Profile::Name), QString("Default"));
+    QCOMPARE(fallback->property<QString>(Profile::Path), QString("FALLBACK/"));
+    delete fallback;
+}
+
 QTEST_GUILESS_MAIN(ProfileTest)
 

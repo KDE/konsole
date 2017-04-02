@@ -72,7 +72,8 @@ ProfileManager::ProfileManager()
     , _loadedFavorites(false)
 {
     //load fallback profile
-    _fallbackProfile = Profile::Ptr(new FallbackProfile);
+    _fallbackProfile = Profile::Ptr(new Profile());
+    _fallbackProfile->useFallback();
     addProfile(_fallbackProfile);
 
     // lookup the default profile specified in <App>rc

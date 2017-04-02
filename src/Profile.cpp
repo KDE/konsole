@@ -145,8 +145,7 @@ void Profile::fillTableWithDefaultNames()
     filledDefaults = true;
 }
 
-FallbackProfile::FallbackProfile()
-    : Profile()
+void Profile::useFallback()
 {
     // Fallback settings
     setProperty(Name, i18nc("Name of the default/builtin profile", "Default"));
