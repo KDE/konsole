@@ -119,6 +119,22 @@ public:
         /** No bell effects */
         NoBell = 3
     };
+
+    /**
+     * This enum describes the strategies available for searching
+     * through the session's output.
+     */
+    enum SearchDirection {
+        /** Searches forwards through the output, starting at the
+         * current selection.
+         */
+        ForwardsSearch,
+        /** Searches backwards through the output, starting at the
+         * current selection.
+         */
+        BackwardsSearch
+    };
+
 };
 }
 #endif // ENUMERATION_H

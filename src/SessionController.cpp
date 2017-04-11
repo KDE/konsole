@@ -1265,7 +1265,7 @@ void SessionController::searchTextChanged(const QString& text)
 
     // update search.  this is called even when the text is
     // empty to clear the view's filters
-    beginSearch(text , reverseSearchChecked() ? SearchHistoryTask::BackwardsSearch : SearchHistoryTask::ForwardsSearch);
+    beginSearch(text , reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch);
 }
 void SessionController::searchCompleted(bool success)
 {
@@ -1275,7 +1275,7 @@ void SessionController::searchCompleted(bool success)
         _searchBar->setFoundMatch(success);
 }
 
-void SessionController::beginSearch(const QString& text , int direction)
+void SessionController::beginSearch(const QString& text, Enum::SearchDirection direction)
 {
     Q_ASSERT(_searchBar);
     Q_ASSERT(_searchFilter);
@@ -1284,7 +1284,7 @@ void SessionController::beginSearch(const QString& text , int direction)
     _searchFilter->setRegExp(regExp);
 
     if (_searchStartLine == -1) {
-        if (direction == SearchHistoryTask::ForwardsSearch) {
+        if (direction == Enum::ForwardsSearch) {
             setSearchStartTo(_view->screenWindow()->currentLine());
         } else {
             setSearchStartTo(_view->screenWindow()->currentLine() + _view->screenWindow()->windowLines());
@@ -1298,7 +1298,7 @@ void SessionController::beginSearch(const QString& text , int direction)
         connect(task, &Konsole::SearchHistoryTask::completed, this, &Konsole::SessionController::searchCompleted);
 
         task->setRegExp(regExp);
-        task->setSearchDirection((SearchHistoryTask::SearchDirection)direction);
+        task->setSearchDirection(direction);
         task->setAutoDelete(true);
         task->setStartLine(_searchStartLine);
         task->addScreenWindow(_session , _view->screenWindow());
@@ -1333,7 +1333,7 @@ void SessionController::searchFrom()
     }
 
 
-    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? SearchHistoryTask::BackwardsSearch : SearchHistoryTask::ForwardsSearch);
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch);
 }
 void SessionController::findNextInHistory()
 {
@@ -1342,7 +1342,7 @@ void SessionController::findNextInHistory()
 
     setSearchStartTo(_prevSearchResultLine);
 
-    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? SearchHistoryTask::BackwardsSearch : SearchHistoryTask::ForwardsSearch);
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch);
 }
 void SessionController::findPreviousInHistory()
 {
@@ -1351,7 +1351,7 @@ void SessionController::findPreviousInHistory()
 
     setSearchStartTo(_prevSearchResultLine);
 
-    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? SearchHistoryTask::ForwardsSearch : SearchHistoryTask::BackwardsSearch);
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::ForwardsSearch : Enum::BackwardsSearch);
 }
 void SessionController::changeSearchMatch()
 {
@@ -1360,7 +1360,7 @@ void SessionController::changeSearchMatch()
 
     // reset Selection for new case match
     _view->screenWindow()->clearSelection();
-    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? SearchHistoryTask::BackwardsSearch : SearchHistoryTask::ForwardsSearch);
+    beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch);
 }
 void SessionController::showHistoryOptions()
 {
@@ -1839,7 +1839,7 @@ void SearchHistoryTask::executeOnScreenWindow(SessionPtr session , ScreenWindowP
 
     if (!_regExp.pattern().isEmpty()) {
         int pos = -1;
-        const bool forwards = (_direction == ForwardsSearch);
+        const bool forwards = (_direction == Enum::ForwardsSearch);
         const int lastLine = window->lineCount() - 1;
 
         int startLine;
@@ -1973,11 +1973,11 @@ void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
 
 SearchHistoryTask::SearchHistoryTask(QObject* parent)
     : SessionTask(parent)
-    , _direction(BackwardsSearch)
+    , _direction(Enum::BackwardsSearch)
     , _startLine(0)
 {
 }
-void SearchHistoryTask::setSearchDirection(SearchDirection direction)
+void SearchHistoryTask::setSearchDirection(Enum::SearchDirection direction)
 {
     _direction = direction;
 }
@@ -1985,7 +1985,7 @@ void SearchHistoryTask::setStartLine(int line)
 {
     _startLine = line;
 }
-SearchHistoryTask::SearchDirection SearchHistoryTask::searchDirection() const
+Enum::SearchDirection SearchHistoryTask::searchDirection() const
 {
     return _direction;
 }

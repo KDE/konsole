@@ -35,6 +35,7 @@
 // Konsole
 #include "ViewProperties.h"
 #include "Profile.h"
+#include "Enumeration.h"
 
 namespace KIO
 {
@@ -298,7 +299,7 @@ private:
     // text - pattern to search for
     // direction - value from SearchHistoryTask::SearchDirection enum to specify
     //             the search direction
-    void beginSearch(const QString& text , int direction);
+    void beginSearch(const QString& text, Enum::SearchDirection direction);
     QRegularExpression regexpFromSearchBarOptions() const;
     bool reverseSearchChecked() const;
     void setupCommonActions();
@@ -481,17 +482,6 @@ class SearchHistoryTask : public SessionTask
 
 public:
     /**
-     * This enum describes the strategies available for searching through the
-     * session's output.
-     */
-    enum SearchDirection {
-        /** Searches forwards through the output, starting at the current selection. */
-        ForwardsSearch,
-        /** Searches backwards through the output, starting at the current selection. */
-        BackwardsSearch
-    };
-
-    /**
      * Constructs a new search task.
      */
     explicit SearchHistoryTask(QObject* parent = 0);
@@ -505,9 +495,9 @@ public:
     QRegularExpression regExp() const;
 
     /** Specifies the direction to search in when execute() is called. */
-    void setSearchDirection(SearchDirection direction);
+    void setSearchDirection(Enum::SearchDirection direction);
     /** Returns the current search direction.  See setSearchDirection(). */
-    SearchDirection searchDirection() const;
+    Enum::SearchDirection searchDirection() const;
 
     /** The line from which the search will be done **/
     void setStartLine(int startLine);
@@ -532,7 +522,7 @@ private:
 
     QMap< SessionPtr , ScreenWindowPtr > _windows;
     QRegularExpression _regExp;
-    SearchDirection _direction;
+    Enum::SearchDirection _direction;
     int _startLine;
 
     //static QPointer<SearchHistoryThread> _thread;
