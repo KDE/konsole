@@ -1355,11 +1355,11 @@ QSize ColorSchemeViewDelegate::sizeHint(const QStyleOptionViewItem& option,
                                         const QModelIndex& /*index*/) const
 {
     const int width = 200;
-    qreal colorWidth = (qreal)width / TABLE_COLORS;
-    int margin = 5;
-    qreal heightForWidth = (colorWidth * 2) + option.fontMetrics.height() + margin;
+    const int margin = 5;
+    const int colorWidth = width / TABLE_COLORS;
+    const int heightForWidth = (colorWidth * 2) + option.fontMetrics.height() + margin;
 
     // temporary
-    return QSize(width, static_cast<int>(heightForWidth));
+    return QSize(width, heightForWidth);
 }
 
