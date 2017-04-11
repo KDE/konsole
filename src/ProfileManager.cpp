@@ -68,8 +68,11 @@ static void sortByNameProfileList(QList<Profile::Ptr>& list)
 }
 
 ProfileManager::ProfileManager()
-    : _loadedAllProfiles(false)
+    : _profiles(QSet<Profile::Ptr>())
+    , _favorites(QSet<Profile::Ptr>())
+    , _loadedAllProfiles(false)
     , _loadedFavorites(false)
+    , _shortcuts(QMap<QKeySequence, ShortcutData>())
 {
     //load fallback profile
     _fallbackProfile = Profile::Ptr(new Profile());

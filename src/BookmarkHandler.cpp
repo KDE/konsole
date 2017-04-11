@@ -44,11 +44,14 @@ BookmarkHandler::BookmarkHandler(KActionCollection* collection,
                                  QMenu* menu,
                                  bool toplevel,
                                  QObject* parent)
-    : QObject(parent),
-      KBookmarkOwner(),
-      _menu(menu),
-      _toplevel(toplevel),
-      _activeView(0)
+    : QObject(parent)
+    , KBookmarkOwner()
+    , _menu(menu)
+    , _bookmarkMenu(0)
+    , _file(QString())
+    , _toplevel(toplevel)
+    , _activeView(0)
+    , _views(QList<ViewProperties*>())
 {
     setObjectName(QStringLiteral("BookmarkHandler"));
 

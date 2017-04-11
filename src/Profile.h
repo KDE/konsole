@@ -675,6 +675,7 @@ private:
 };
 inline ProfileGroup::ProfileGroup(Profile::Ptr profileParent)
     : Profile(profileParent)
+    , _profiles(QList<Profile::Ptr>())
 {
     setHidden(true);
 }

@@ -35,6 +35,7 @@ using namespace Konsole;
 KeyboardTranslatorManager::KeyboardTranslatorManager()
     : _haveLoadedAll(false)
     , _fallbackTranslator(0)
+    , _translators(QHash<QString, KeyboardTranslator*>())
 {
     _fallbackTranslator = new FallbackKeyboardTranslator();
 }

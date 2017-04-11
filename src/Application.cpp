@@ -44,9 +44,8 @@
 
 using namespace Konsole;
 
-Application::Application(QSharedPointer<QCommandLineParser> parser, const QStringList &customCommand) : m_parser(parser), m_customCommand(customCommand)
+Application::Application(QSharedPointer<QCommandLineParser> parser, const QStringList &customCommand) : _backgroundInstance(0), m_parser(parser), m_customCommand(customCommand)
 {
-    _backgroundInstance = 0;
 }
 
 void Application::populateCommandLineParser(QCommandLineParser *parser)

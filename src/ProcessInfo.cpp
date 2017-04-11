@@ -79,9 +79,12 @@ ProcessInfo::ProcessInfo(int aPid)
     , _foregroundPid(0)
     , _userId(0)
     , _lastError(NoError)
+    , _name(QString())
     , _userName(QString())
     , _userHomeDir(QString())
+    , _currentDir(QString())
     , _userNameRequired(true)
+    , _arguments(QVector<QString>())
 {
 }
 

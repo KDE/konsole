@@ -160,10 +160,13 @@ QString ColorScheme::translatedColorNameForIndex(int index)
 }
 
 ColorScheme::ColorScheme()
+    : _description(QString())
+    , _name(QString())
+    , _table(0)
+    , _randomTable(0)
+    , _opacity(1.0)
+    , _wallpaper(0)
 {
-    _table = 0;
-    _randomTable = 0;
-    _opacity = 1.0;
     setWallpaper(QString());
 }
 

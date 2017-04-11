@@ -213,7 +213,8 @@ void Profile::useFallback()
     setHidden(true);
 }
 Profile::Profile(Profile::Ptr parent)
-    : _parent(parent)
+    : _propertyValues(QHash<Property, QVariant>())
+    , _parent(parent)
     , _hidden(false)
 {
 }

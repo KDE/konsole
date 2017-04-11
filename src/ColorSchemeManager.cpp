@@ -36,7 +36,8 @@
 using namespace Konsole;
 
 ColorSchemeManager::ColorSchemeManager()
-    : _haveLoadedAll(false)
+    : _colorSchemes(QHash<QString, const ColorScheme*>())
+    , _haveLoadedAll(false)
 {
 }
 
