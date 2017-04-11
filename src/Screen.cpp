@@ -1236,6 +1236,8 @@ int Screen::copyLineToStream(int line ,
 
         int screenLine = line - _history->getLines();
 
+        // FIXME: This can be triggered when clearing history
+        //  while having the searchbar open and selecting next/prev
         Q_ASSERT(screenLine <= _screenLinesSize);
 
         screenLine = qMin(screenLine, _screenLinesSize);
