@@ -242,13 +242,13 @@ void TerminalDisplay::setVTFont(const QFont& f)
         QString nonMatching = fontInfo.family() % comma %
             QString::number(fontInfo.pointSizeF()) % comma %
             QString::number(fontInfo.pixelSize()) % comma %
-            QString::number((int)fontInfo.styleHint()) % comma %
+            QString::number(static_cast<int>(fontInfo.styleHint())) % comma %
             QString::number(fontInfo.weight()) % comma %
-            QString::number((int)fontInfo.style()) % comma %
-            QString::number((int)fontInfo.underline()) % comma %
-            QString::number((int)fontInfo.strikeOut()) % comma %
-            QString::number((int)fontInfo.fixedPitch()) % comma %
-            QString::number((int)fontInfo.rawMode());
+            QString::number(static_cast<int>(fontInfo.style())) % comma %
+            QString::number(static_cast<int>(fontInfo.underline())) % comma %
+            QString::number(static_cast<int>(fontInfo.strikeOut())) % comma %
+            QString::number(static_cast<int>(fontInfo.fixedPitch())) % comma %
+            QString::number(static_cast<int>(fontInfo.rawMode()));
 
         qCDebug(KonsoleDebug) << "The font to use in the terminal can not be matched exactly on your system.";
         qCDebug(KonsoleDebug)<<" Selected: "<<newFont.toString();
