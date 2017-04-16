@@ -48,7 +48,7 @@ public:
     // return associated tabbed container
     TabbedViewContainer* connectedTabbedViewContainer();
 
-signals:
+Q_SIGNALS:
     void initiateDrag(int index);
     void querySourceIndex(const QDropEvent* event, int& sourceIndex) const;
     void moveViewRequest(int index, const QDropEvent* event, bool& success, TabbedViewContainer* sourceTabbedContainer);

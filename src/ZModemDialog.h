@@ -47,7 +47,7 @@ public:
 Q_SIGNALS:
     void user1Clicked();
 
-private slots:
+private Q_SLOTS:
     void slotClose();
     void slotUser1Clicked();
 

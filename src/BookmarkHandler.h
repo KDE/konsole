@@ -85,7 +85,7 @@ public:
     QList<ViewProperties*> views() const;
     ViewProperties* activeView() const;
 
-public slots:
+public Q_SLOTS:
     /**
      *
      */
@@ -93,7 +93,7 @@ public slots:
 
     void setActiveView(ViewProperties* view);
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted when the user selects a bookmark from the bookmark menu.
      *
@@ -110,7 +110,7 @@ signals:
      */
     void openUrls(const QList<QUrl>& urls);
 
-private slots:
+private Q_SLOTS:
     void openBookmark(const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers) Q_DECL_OVERRIDE;
 
 private:

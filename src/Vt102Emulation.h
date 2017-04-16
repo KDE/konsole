@@ -87,7 +87,7 @@ public:
     void reset() Q_DECL_OVERRIDE;
     char eraseChar() const Q_DECL_OVERRIDE;
 
-public slots:
+public Q_SLOTS:
     // reimplemented from Emulation
     void sendString(const QByteArray& string) Q_DECL_OVERRIDE;
     void sendText(const QString& text) Q_DECL_OVERRIDE;
@@ -102,7 +102,7 @@ protected:
     void resetMode(int mode) Q_DECL_OVERRIDE;
     void receiveChar(int cc) Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     //causes changeTitle() to be emitted for each (int,QString) pair in pendingTitleUpdates
     //used to buffer multiple title updates
     void updateTitle();

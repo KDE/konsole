@@ -71,7 +71,7 @@ public:
 
     /** TODO: Document me */
     void syncWidgetActions(QWidget* widget, bool sync);
-signals:
+Q_SIGNALS:
     /**
      * Emitted when the user selects an action from the list.
      *
@@ -83,7 +83,7 @@ signals:
      */
     void actionsChanged(const QList<QAction*>& actions);
 
-private slots:
+private Q_SLOTS:
     void triggered(QAction* action);
     void favoriteChanged(Profile::Ptr profile, bool isFavorite);
     void profileChanged(Profile::Ptr profile);

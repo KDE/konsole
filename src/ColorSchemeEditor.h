@@ -67,17 +67,17 @@ public:
     ColorScheme& colorScheme() const;
     bool isNewScheme() const;
 
-signals:
+Q_SIGNALS:
     /** Emitted when the colors in the color scheme change. */
     void colorsChanged(ColorScheme* scheme);
     /** Used to send back colorscheme changes into the profile edited */
     void colorSchemeSaveRequested(const ColorScheme& scheme,bool isNewScheme);
 
-public slots:
+public Q_SLOTS:
     /** Sets the text displayed in the description edit field. */
     void setDescription(const QString& description);
 
-private slots:
+private Q_SLOTS:
     void setTransparencyPercentLabel(int percent);
     void setRandomizedBackgroundColor(bool randomized);
     void editColorItem(QTableWidgetItem* item);

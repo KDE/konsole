@@ -361,7 +361,7 @@ public:
 
     void reportBackgroundColor(const QColor& c);
 
-public slots:
+public Q_SLOTS:
 
     /**
      * Starts the terminal session.
@@ -566,7 +566,7 @@ public slots:
      */
     Q_SCRIPTABLE int historySize() const;
 
-signals:
+Q_SIGNALS:
 
     /** Emitted when the terminal process starts. */
     void started();
@@ -674,7 +674,7 @@ signals:
      */
     void getBackgroundColor();
 
-private slots:
+private Q_SLOTS:
     void done(int, QProcess::ExitStatus);
 
     void fireZModemDetected();
@@ -839,7 +839,7 @@ public:
      */
     int masterMode() const;
 
-private slots:
+private Q_SLOTS:
     void sessionFinished();
     void forwardData(const QByteArray& data);
 

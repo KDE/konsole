@@ -235,7 +235,7 @@ public:
      */
     QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false, bool html = false) const;
 
-public slots:
+public Q_SLOTS:
     /**
      * Notifies the window that the contents of the associated terminal screen have changed.
      * This moves the window to the bottom of the screen if trackOutput() is true and causes
@@ -243,7 +243,7 @@ public slots:
      */
     void notifyOutputChanged();
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted when the contents of the associated terminal screen (see screen()) changes.
      */

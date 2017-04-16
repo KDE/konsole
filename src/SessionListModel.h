@@ -65,7 +65,7 @@ public:
 protected:
     virtual void sessionRemoved(Session*) {}
 
-private slots:
+private Q_SLOTS:
     void sessionFinished();
 
 private:

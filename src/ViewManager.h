@@ -177,7 +177,7 @@ public:
     /** Returns a list of sessions in this ViewManager */
     QList<Session*> sessions() { return _sessionMap.values(); }
 
-signals:
+Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
     void empty();
 
@@ -225,7 +225,7 @@ signals:
     /** Requests creation of a new view, with the selected profile. */
     void newViewRequest(Profile::Ptr);
 
-public slots:
+public Q_SLOTS:
     /** DBus slot that returns the number of sessions in the current view. */
     Q_SCRIPTABLE int sessionCount();
 
@@ -273,7 +273,7 @@ public slots:
     /** DBus slot that sets ALL tabs' width to match their text */
     Q_SCRIPTABLE void setTabWidthToText(bool);
 
-private slots:
+private Q_SLOTS:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();
     void splitTopBottom();

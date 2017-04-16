@@ -32,7 +32,7 @@ class TerminalInterfaceTest : public QObject
 
 public:
 
-private slots:
+private Q_SLOTS:
     void testTerminalInterfaceNoShell();
     void testTerminalInterface();
 

@@ -46,11 +46,11 @@ public:
     void focusTabTitleText();
     void focusRemoteTabTitleText();
 
-signals:
+Q_SIGNALS:
     void tabTitleFormatChanged(const QString&);
     void remoteTabTitleFormatChanged(const QString&);
 
-public slots:
+public Q_SLOTS:
     void insertTabTitleText(const QString& text);
     void insertRemoteTabTitleText(const QString& text);
 

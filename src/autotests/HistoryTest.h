@@ -29,7 +29,7 @@ class HistoryTest : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
     void testHistoryNone();
     void testHistoryFile();
     void testCompactHistory();

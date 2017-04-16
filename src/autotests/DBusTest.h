@@ -36,13 +36,13 @@ class DBusTest : public QObject
     Q_OBJECT
 public:
 
-private slots:
+private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
     void testSessions();
 
 // protected slots are not treated as test cases
-protected slots:
+protected Q_SLOTS:
 
 private:
     QString _interfaceName;

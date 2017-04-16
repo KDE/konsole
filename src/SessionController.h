@@ -171,7 +171,7 @@ public:
         return _allControllers;
     }
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted when the view associated with the controller is focused.
      * This can be used by other classes to plug the controller's actions into a window's
@@ -187,7 +187,7 @@ signals:
      */
     void currentDirectoryChanged(const QString& dir);
 
-public slots:
+public Q_SLOTS:
     /**
      * Issues a command to the session to navigate to the specified URL.
      * This may not succeed if the foreground program does not understand
@@ -221,7 +221,7 @@ public slots:
     /**  Decrease font size */
     void decreaseFontSize();
 
-private slots:
+private Q_SLOTS:
     // menu item handlers
     void openBrowser();
     void copy();
@@ -401,7 +401,7 @@ public:
      */
     virtual void execute() = 0;
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted when the task has completed.
      * Depending on the task this may occur just before execute() returns, or it
@@ -441,7 +441,7 @@ public:
      */
     void execute() Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     void jobDataRequested(KIO::Job* job , QByteArray& data);
     void jobResult(KJob* job);
 

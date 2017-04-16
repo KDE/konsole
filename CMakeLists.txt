@@ -18,6 +18,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_D
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
+include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMOptionalAddSubdirectory)
 include(ECMInstallIcons)
 include(ECMSetupVersion)
@@ -57,17 +58,17 @@ if(NOT APPLE)
 endif()
 set(HAVE_X11 ${X11_FOUND})
 
+# See above includes for defaults
 add_definitions(
-  -DQT_USE_QSTRINGBUILDER
-  -DQT_NO_CAST_TO_ASCII
-#  -DQT_NO_CAST_FROM_ASCII
   -DQT_STRICT_ITERATORS
   -DQT_NO_URL_CAST_FROM_STRING
-  -DQT_NO_CAST_FROM_BYTEARRAY
-#  -DQT_NO_SIGNALS_SLOTS_KEYWORDS
-  -DQT_USE_FAST_OPERATOR_PLUS
   -DQT_USE_FAST_CONCATENATION
   -Wno-deprecated-declarations
+)
+
+remove_definitions(
+  -DQT_NO_CAST_FROM_ASCII
+
 )
 
 set(CMAKE_CXX_STANDARD 11)

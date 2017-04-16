@@ -470,7 +470,7 @@ public:
 
     void printContent(QPainter& painter, bool friendly);
 
-public slots:
+public Q_SLOTS:
     /**
      * Scrolls current ScreenWindow
      *
@@ -589,7 +589,7 @@ public slots:
      */
     void setCenterContents(bool enable);
 
-signals:
+Q_SIGNALS:
 
     /**
      * Emitted when the user presses a key whilst the terminal widget has focus.
@@ -686,13 +686,13 @@ protected:
     void inputMethodEvent(QInputMethodEvent* event) Q_DECL_OVERRIDE;
     QVariant inputMethodQuery(Qt::InputMethodQuery query) const Q_DECL_OVERRIDE;
 
-protected slots:
+protected Q_SLOTS:
 
     void scrollBarPositionChanged(int value);
     void blinkTextEvent();
     void blinkCursorEvent();
 
-private slots:
+private Q_SLOTS:
 
     void unmaskBell();
     void swapFGBGColors();

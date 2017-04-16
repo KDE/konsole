@@ -63,14 +63,14 @@ public:
      */
     int lineCount() const;
 
-signals:
+Q_SIGNALS:
     /** Emitted when the history mode is changed. */
     void historyModeChanged(Enum::HistoryModeEnum) const;
 
     /** Emitted when the history size is changed. */
     void historySizeChanged(int) const;
 
-private slots:
+private Q_SLOTS:
     void buttonClicked(QAbstractButton*) const;
 
 private:

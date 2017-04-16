@@ -67,13 +67,13 @@ public:
      */
     MainWindow* newMainWindow();
 
-private slots:
+private Q_SLOTS:
     void createWindow(Profile::Ptr profile , const QString& directory);
     void detachView(Session* session);
 
     void toggleBackgroundInstance();
 
-public slots:
+public Q_SLOTS:
     void slotActivateRequested (QStringList args, const QString &workingDir);
 
 private:

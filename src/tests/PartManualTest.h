@@ -34,11 +34,11 @@ class PartManualTest : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
     void testShortcutOverride();
 
 // marked as protected so they are not treated as test cases
-protected slots:
+protected Q_SLOTS:
     void overrideShortcut(QKeyEvent* event, bool& override);
     void shortcutTriggered();
 

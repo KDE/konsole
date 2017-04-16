@@ -29,7 +29,7 @@ class CharacterWidthTest : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
 
     void testWidth_data();
     void testWidth();

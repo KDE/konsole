@@ -110,7 +110,7 @@ public:
     void setNavigationBehavior(int behavior);
     void setShowQuickButtons(bool show);
 
-signals:
+Q_SIGNALS:
 
     /**
      * Emitted by the main window to request the creation of a
@@ -144,7 +144,7 @@ protected:
     // reimplemented from QWidget
     bool focusNextPrevChild(bool next) Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     void newTab();
     void cloneTab();
     void newWindow();
@@ -171,7 +171,7 @@ private slots:
 
     void updateUseTransparency();
 
-public slots:
+public Q_SLOTS:
     void viewFullScreen(bool fullScreen);
 
 private:

@@ -68,7 +68,7 @@ public:
     /** Set setChosenSessions() */
     QSet<Session*> chosenSessions() const;
 
-private slots:
+private Q_SLOTS:
     void selectAll() {
         setSelectionChecked(true);
     }

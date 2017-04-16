@@ -33,7 +33,7 @@ public:
     explicit PrintOptions(QWidget* parent = 0);
     ~PrintOptions() Q_DECL_OVERRIDE;
 
-public slots:
+public Q_SLOTS:
     void saveSettings();
 };
 }

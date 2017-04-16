@@ -30,7 +30,7 @@ class KeyboardTranslatorTest : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
     void testEntryTextWildcards();
     void testEntryTextWildcards_data();
 };

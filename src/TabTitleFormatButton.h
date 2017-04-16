@@ -40,10 +40,10 @@ public:
     void setContext(Session::TabTitleContext context);
     Session::TabTitleContext context() const;
 
-signals:
+Q_SIGNALS:
     void dynamicElementSelected(const QString&);
 
-private slots:
+private Q_SLOTS:
     void fireElementSelected(QAction*);
 
 private:

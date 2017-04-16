@@ -146,7 +146,7 @@ public:
      */
     void sendEof();
 
-public slots:
+public Q_SLOTS:
     /**
      * Put the pty into UTF-8 mode on systems which support it.
      */
@@ -160,7 +160,7 @@ public slots:
      */
     void sendData(const QByteArray& data);
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted when a new block of data is received from
      * the teletype.
@@ -173,7 +173,7 @@ signals:
 protected:
     void setupChildProcess() Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     // called when data is received from the terminal process
     void dataReceived();
 

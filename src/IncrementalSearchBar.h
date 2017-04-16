@@ -103,7 +103,7 @@ public:
 
     // reimplemented
     void setVisible(bool visible) Q_DECL_OVERRIDE;
-signals:
+Q_SIGNALS:
     /** Emitted when the text entered in the search box is altered */
     void searchChanged(const QString& text);
     /** Emitted when the user clicks the button to find the next match */
@@ -140,10 +140,10 @@ protected:
     bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
     void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
 
-public slots:
+public Q_SLOTS:
     void clearLineEdit();
 
-private slots:
+private Q_SLOTS:
     void notifySearchChanged();
     void updateButtonsAccordingToReverseSearchSetting();
 

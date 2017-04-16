@@ -75,7 +75,7 @@ public:
     /** Reimplemented from TerminalInterface. */
     QString currentWorkingDirectory() const Q_DECL_OVERRIDE;
 
-public slots:
+public Q_SLOTS:
     /**
      * creates and run a session using the specified profile and directory
      *
@@ -139,7 +139,7 @@ public slots:
     * */
     void setMonitorActivityEnabled(bool enabled);
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted when the key sequence for a shortcut, which is also a valid terminal key sequence,
      * is pressed while the terminal has focus.  By responding to this signal, the
@@ -181,7 +181,7 @@ protected:
     bool openFile() Q_DECL_OVERRIDE;
     bool openUrl(const QUrl& url) Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     void activeViewChanged(SessionController* controller);
     void activeViewTitleChanged(ViewProperties* properties);
     void terminalExited();

@@ -212,7 +212,7 @@ public:
      */
     Profile::Ptr findByShortcut(const QKeySequence& shortcut);
 
-signals:
+Q_SIGNALS:
 
     /** Emitted when a profile is added to the manager. */
     void profileAdded(Profile::Ptr ptr);
@@ -237,13 +237,13 @@ signals:
      */
     void shortcutChanged(Profile::Ptr profile , const QKeySequence& newShortcut);
 
-public slots:
+public Q_SLOTS:
     /** Saves settings (favorites, shortcuts, default profile etc.) to disk. */
     void saveSettings();
 
-protected slots:
+protected Q_SLOTS:
 
-private slots:
+private Q_SLOTS:
 
 private:
     // loads the mappings between shortcut key sequences and

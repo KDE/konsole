@@ -87,7 +87,7 @@ public:
     void selectProfileName();
     const Profile::Ptr lookupProfile() const;
 
-public slots:
+public Q_SLOTS:
     // reimplemented
     void accept() Q_DECL_OVERRIDE;
     // reimplemented
@@ -96,7 +96,7 @@ public slots:
 protected:
     bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     // sets up the specified tab page if necessary
     void preparePage(int);
 

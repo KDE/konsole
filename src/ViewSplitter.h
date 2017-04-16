@@ -143,7 +143,7 @@ public:
      */
     bool recursiveSplitting() const;
 
-signals:
+Q_SIGNALS:
     /** Signal emitted when the last child widget is removed from the splitter */
     void empty(ViewSplitter* splitter);
 
@@ -169,7 +169,7 @@ private:
 
     void updateSizes();
 
-private slots:
+private Q_SLOTS:
     // Called to indicate that a child ViewContainer has been deleted
     void containerDestroyed(ViewContainer* container);
 

@@ -68,7 +68,7 @@ public:
 protected:
     void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     void slotAccepted();
     void deleteSelected();
     void setSelectedAsDefault();
@@ -145,7 +145,7 @@ public:
     void paint(QPainter* painter, const QStyleOptionViewItem& option,
                        const QModelIndex& index) const Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     void editorModified(const QKeySequence& keys);
 
 private:

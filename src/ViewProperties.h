@@ -110,7 +110,7 @@ public:
         return mimeData->data(ViewProperties::mimeType()).toInt(&ok);
     }
 
-signals:
+Q_SIGNALS:
     /** Emitted when the icon for a view changes */
     void iconChanged(ViewProperties* properties);
     /** Emitted when the title for a view changes */
@@ -118,14 +118,14 @@ signals:
     /** Emitted when activity has occurred in this view. */
     void activity(ViewProperties* item);
 
-public slots:
+public Q_SLOTS:
     /**
      * Requests the renaming of this view.
      * The default implementation does nothing.
      */
     virtual void rename();
 
-protected slots:
+protected Q_SLOTS:
     /** Emits the activity() signal. */
     void fireActivity();
 

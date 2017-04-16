@@ -95,14 +95,14 @@ public:
     int  getRestoreId(Session* session);
     Session* idToSession(int id);
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted when a session's settings are updated to match
      * its current profile.
      */
     void sessionUpdated(Session* session);
 
-protected slots:
+protected Q_SLOTS:
     /**
      * Called to inform the manager that a session has finished executing.
      *
@@ -110,7 +110,7 @@ protected slots:
      */
     void sessionTerminated(QObject* session);
 
-private slots:
+private Q_SLOTS:
     void sessionProfileCommandReceived(const QString& text);
 
     void profileChanged(Profile::Ptr profile);

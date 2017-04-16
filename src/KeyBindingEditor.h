@@ -81,7 +81,7 @@ public:
     // reimplemented to handle test area input
     bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     void setTranslatorDescription(const QString& description);
     void bindingTableItemChanged(QTableWidgetItem* item);
     void removeSelectedEntry();

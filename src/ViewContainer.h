@@ -262,7 +262,7 @@ public:
         Q_UNUSED(menu);
     }
 
-signals:
+Q_SIGNALS:
     /** Emitted when the container is deleted */
     void destroyed(ViewContainer* container);
 
@@ -337,7 +337,7 @@ protected:
      */
     virtual void moveViewWidget(int fromIndex , int toIndex);
 
-private slots:
+private Q_SLOTS:
     void viewDestroyed(QObject* view);
     void searchBarDestroyed();
 
@@ -392,7 +392,7 @@ protected:
     void navigationTextModeChanged(bool mode) Q_DECL_OVERRIDE;
     void moveViewWidget(int fromIndex , int toIndex) Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     void updateTitle(ViewProperties* item);
     void updateIcon(ViewProperties* item);
     void updateActivity(ViewProperties* item);
@@ -409,7 +409,7 @@ private slots:
     void querySourceIndex(const QDropEvent* event, int& sourceIndex);
     void onMoveViewRequest(int index, const QDropEvent* event, bool& success, TabbedViewContainer* sourceTabbedContainer);
 
-signals:
+Q_SIGNALS:
     void detachTab(ViewContainer * self, QWidget * activeView);
     void closeTab(ViewContainer * self, QWidget * activeView);
 
