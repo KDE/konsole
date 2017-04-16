@@ -120,7 +120,7 @@ QStringList ColorSchemeManager::listColorSchemes()
     Q_FOREACH (const QString& dir, dirs) {
         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.colorscheme"));
         Q_FOREACH (const QString& file, fileNames) {
-            colorschemes.append(dir + '/' + file);
+            colorschemes.append(dir + QLatin1Char('/') + file);
         }
     }
     return colorschemes;

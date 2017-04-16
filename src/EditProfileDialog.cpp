@@ -156,7 +156,7 @@ QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr group, int 
     for (int i = 0; i < count; i++) {
         caption += group->profiles()[i]->name();
         if (i < (count - 1)) {
-            caption += ',';
+            caption += QLatin1Char(',');
             // limit caption length to prevent very long window titles
             if (maxLength > 0 && caption.length() > maxLength) {
                 caption += QLatin1String("...");
@@ -308,7 +308,7 @@ void EditProfileDialog::showEnvironmentEditor()
             &ok);
 
     if (ok && !text.isEmpty()) {
-        QStringList newEnvironment = text.split('\n');
+        QStringList newEnvironment = text.split(QLatin1Char('\n'));
         updateTempProfileProperty(Profile::Environment, newEnvironment);
     }
 }
@@ -460,8 +460,8 @@ void EditProfileDialog::showAllFontsButtonWarning(bool enable)
 {
     if (enable) {
         KMessageBox::information(this,
-            "By its very nature, a terminal program requires font characters that are equal width (monospace).  Any non monospaced font may cause display issues.  This should not be necessary except in rare cases.",
-            "Warning");
+            QLatin1String("By its very nature, a terminal program requires font characters that are equal width (monospace).  Any non monospaced font may cause display issues.  This should not be necessary except in rare cases."),
+            QLatin1String("Warning"));
     }
 }
 

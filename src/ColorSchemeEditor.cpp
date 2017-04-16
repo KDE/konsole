@@ -94,7 +94,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* aParent)
     // wallpaper stuff
     auto dirModel = new QFileSystemModel(this);
     dirModel->setFilter(QDir::AllEntries);
-    dirModel->setRootPath(QString('/'));
+    dirModel->setRootPath(QLatin1String("/"));
     auto completer = new QCompleter(this);
     completer->setModel(dirModel);
     _ui->wallpaperPath->setCompleter(completer);

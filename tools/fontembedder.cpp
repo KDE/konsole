@@ -32,7 +32,7 @@ using namespace std;
 
 static quint32 charVal(QChar val)
 {
-    if (val == ' ')
+    if (val == QLatin1Char(' '))
         return 0;
     else
         return 1;
@@ -42,7 +42,7 @@ static quint32 readGlyphLine(QTextStream& input)
 {
     QString line = input.readLine();
     while (line.length() < 5)
-        line += ' ';
+        line += QLatin1Char(' ');
 
     quint32 val =  charVal(line[0]) |
                    (charVal(line[1]) << 1)  |
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
         qWarning("usage: fontembedder LineFont.src > LineFont.h");
         exit(1);
     }
-    QFile inFile(argv[1]);
+    QFile inFile(QString::fromLocal8Bit(argv[1]));
     if (!inFile.open(QIODevice::ReadOnly)) {
         qWarning("Can not open %s", argv[1]);
         exit(1);
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
         line = line.trimmed();
         if (line.isEmpty())
             continue; //Skip empty lines
-        if (line[0] == '#')
+        if (line[0] == QLatin1Char('#'))
             continue; //Skip comments
 
         //Must be a glyph ID.

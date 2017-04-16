@@ -81,7 +81,7 @@ HistoryFile::HistoryFile()
         QDir().mkpath(*historyFileLocation());
     }
     const QString tmpDir = *historyFileLocation();
-    const QString tmpFormat = tmpDir + QLatin1Char('/') + "konsole-XXXXXX.history";
+    const QString tmpFormat = tmpDir + QLatin1Char('/') + QLatin1String("konsole-XXXXXX.history");
     _tmpFile.setFileTemplate(tmpFormat);
     if (_tmpFile.open()) {
         _tmpFile.setAutoRemove(true);

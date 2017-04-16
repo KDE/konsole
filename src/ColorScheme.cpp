@@ -149,7 +149,7 @@ QString ColorScheme::colorNameForIndex(int index)
 {
     Q_ASSERT(index >= 0 && index < TABLE_COLORS);
 
-    return QString(colorNames[index]);
+    return QString(QLatin1String(colorNames[index]));
 }
 
 QString ColorScheme::translatedColorNameForIndex(int index)
