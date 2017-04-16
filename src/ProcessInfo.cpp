@@ -111,8 +111,7 @@ QString ProcessInfo::validCurrentDir() const
     int currentPid = parentPid(&ok);
     QString dir = currentDir(&ok);
     while (!ok && currentPid != 0) {
-        QString tmp = QString("");
-        ProcessInfo* current = ProcessInfo::newInstance(currentPid, tmp);
+        ProcessInfo* current = ProcessInfo::newInstance(currentPid, QString());
         current->update();
         currentPid = current->parentPid(&ok);
         dir = current->currentDir(&ok);
@@ -386,7 +385,7 @@ void UnixProcessInfo::readUserName()
         return;
     getpwStatus = getpwuid_r(uid, &passwdStruct, getpwBuffer, getpwBufferSize, &getpwResult);
     if ((getpwStatus == 0) && (getpwResult != NULL)) {
-        setUserName(QString(passwdStruct.pw_name));
+        setUserName(QLatin1String(passwdStruct.pw_name));
     } else {
         setUserName(QString());
         qWarning() << "getpwuid_r returned error : " << getpwStatus;
@@ -448,7 +447,7 @@ private:
                     uidLine = statusLine;
             } while (!statusLine.isNull() && uidLine.isNull());
 
-            uidStrings << uidLine.split('\t', QString::SkipEmptyParts);
+            uidStrings << uidLine.split(QLatin1Char('\t'), QString::SkipEmptyParts);
             // Must be 5 entries: 'Uid: %d %d %d %d' and
             // uid string must be less than 5 chars (uint)
             if (uidStrings.size() == 5)
@@ -489,11 +488,11 @@ private:
             while (pos < data.count()) {
                 QChar c = data[pos];
 
-                if (c == '(') {
+                if (c == QLatin1Char('(')) {
                     stack++;
-                } else if (c == ')') {
+                } else if (c == QLatin1Char(')')) {
                     stack--;
-                } else if (stack == 0 && c == ' ') {
+                } else if (stack == 0 && c == QLatin1Char(' ')) {
                     field++;
                 } else {
                     switch (field) {
@@ -545,7 +544,7 @@ private:
             QTextStream stream(&argumentsFile);
             const QString& data = stream.readAll();
 
-            const QStringList& argList = data.split(QChar('\0'));
+            const QStringList& argList = data.split(QLatin1Char('\0'));
 
             foreach(const QString & entry , argList) {
                 if (!entry.isEmpty())
@@ -986,8 +985,8 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
         for (int i = 1 ; i < args.count() ; i++) {
             // If this one is an option ...
             // Most options together with its argument will be skipped.
-            if (args[i].startsWith('-')) {
-                const QChar optionChar = (args[i].length() > 1) ? args[i][1] : '\0';
+            if (args[i].startsWith(QLatin1Char('-'))) {
+                const QChar optionChar = (args[i].length() > 1) ? args[i][1] : QLatin1Char('\0');
                 // for example: -p2222 or -p 2222 ?
                 const bool optionArgumentCombined =  args[i].length() > 2;
 
@@ -1006,10 +1005,10 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     }
 
                     // support using `-l user` to specify username.
-                    if (optionChar == 'l')
+                    if (optionChar == QLatin1Char('l'))
                         _user = argument;
                     // support using `-p port` to specify port.
-                    else if (optionChar == 'p')
+                    else if (optionChar == QLatin1Char('p'))
                         _port = argument;
 
                     continue;
@@ -1023,7 +1022,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                 // both a username and host are specified ( in which case they
                 // are separated by an '@' character:  username@host )
 
-                const int separatorPosition = args[i].indexOf('@');
+                const int separatorPosition = args[i].indexOf(QLatin1Char('@'));
                 if (separatorPosition != -1) {
                     // username and host specified
                     _user = args[i].left(separatorPosition);
@@ -1042,7 +1041,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                 if (_command.isEmpty()) {
                     _command = args[i];
                 } else {
-                    _command = _command + QString(' ') + args[i];
+                    _command = _command + QLatin1Char(' ') + args[i];
                 }
             }
         }
@@ -1084,7 +1083,7 @@ QString SSHProcessInfo::format(const QString& input) const
     if (_user.isEmpty())
         output.replace(QLatin1String("%U"), QString());
     else
-        output.replace(QLatin1String("%U"), _user + '@');
+        output.replace(QLatin1String("%U"), _user + QLatin1Char('@'));
 
     // test whether host is an ip address
     // in which case 'short host' and 'full host'
@@ -1095,7 +1094,7 @@ QString SSHProcessInfo::format(const QString& input) const
     if (isIpAddress)
         output.replace(QLatin1String("%h"), _host);
     else
-        output.replace(QLatin1String("%h"), _host.left(_host.indexOf('.')));
+        output.replace(QLatin1String("%h"), _host.left(_host.indexOf(QLatin1Char('.'))));
 
     output.replace(QLatin1String("%H"), _host);
     output.replace(QLatin1String("%c"), _command);
