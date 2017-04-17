@@ -163,7 +163,7 @@ void TerminalImageFilterChain::setImage(const Character* const image , int lines
         // terminal image to avoid adding this imaginary character for wrapped
         // lines
         if ((lineProperties.value(i, LINE_DEFAULT) & LINE_WRAPPED) == 0)
-            lineStream << QChar('\n');
+            lineStream << QLatin1Char('\n');
     }
     decoder.end();
 }
@@ -435,16 +435,16 @@ void UrlFilter::HotSpot::activate(QObject* object)
 //regexp matches:
 // full url:
 // protocolname:// or www. followed by anything other than whitespaces, <, >, ' or ", and ends before whitespaces, <, >, ', ", ], !, ), :, comma and dot
-const QRegularExpression UrlFilter::FullUrlRegExp("(www\\.(?!\\.)|[a-z][a-z0-9+.-]*://)[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]\\)\\:]",
+const QRegularExpression UrlFilter::FullUrlRegExp(QStringLiteral("(www\\.(?!\\.)|[a-z][a-z0-9+.-]*://)[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]\\)\\:]"),
                                                   QRegularExpression::OptimizeOnFirstUsageOption);
 // email address:
 // [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]
-const QRegularExpression UrlFilter::EmailAddressRegExp("\\b(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+\\b",
+const QRegularExpression UrlFilter::EmailAddressRegExp(QStringLiteral("\\b(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+\\b"),
                                                        QRegularExpression::OptimizeOnFirstUsageOption);
 
 // matches full url or email address
-const QRegularExpression UrlFilter::CompleteUrlRegExp('(' + FullUrlRegExp.pattern() + '|' +
-                                                      EmailAddressRegExp.pattern() + ')',
+const QRegularExpression UrlFilter::CompleteUrlRegExp(QLatin1Char('(') + FullUrlRegExp.pattern() + QLatin1Char('|') +
+                                                      EmailAddressRegExp.pattern() + QLatin1Char(')'),
                                                       QRegularExpression::OptimizeOnFirstUsageOption);
 
 UrlFilter::UrlFilter()
@@ -539,13 +539,13 @@ FileFilter::FileFilter(Session* session)
     }
 
     patterns.removeDuplicates();
-    patterns.replaceInStrings("*", "");
-    patterns = patterns.filter(QRegularExpression("^[A-Za-z0-9\\._-]+$"));
-    patterns.replaceInStrings(".", "\\.");
+    patterns.replaceInStrings(QLatin1String("*"), QLatin1String(""));
+    patterns = patterns.filter(QRegularExpression(QStringLiteral("^[A-Za-z0-9\\._-]+$")));
+    patterns.replaceInStrings(QLatin1String("."), QLatin1String("\\."));
 
-    QString regex("(\\b|/)+[A-Za-z0-9\\._\\-/]+(");
-    regex.append(patterns.join("|"));
-    regex.append("){1}\\b");
+    QString regex(QStringLiteral("(\\b|/)+[A-Za-z0-9\\._\\-/]+("));
+    regex.append(patterns.join(QLatin1String("|")));
+    regex.append(QLatin1String("){1}\\b"));
     setRegExp(QRegularExpression(regex));
 }
 

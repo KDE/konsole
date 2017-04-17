@@ -61,7 +61,7 @@ void KeyboardTranslatorWriter::writeEntry(const KeyboardTranslator::Entry& entry
     if (entry.command() != KeyboardTranslator::NoCommand)
         result = entry.resultToString();
     else
-        result = '\"' + entry.resultToString() + '\"';
+        result = QLatin1Char('\"') + entry.resultToString() + QLatin1Char('\"');
 
     *_writer << "key " << entry.conditionToString() << " : " << result << '\n';
 }
@@ -230,9 +230,9 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
 
         // check if this is a wanted / not-wanted flag and update the
         // state ready for the next item
-        if (ch == '+')
+        if (ch == QLatin1Char('+'))
             isWanted = true;
-        else if (ch == '-')
+        else if (ch == QLatin1Char('-'))
             isWanted = false;
     }
 
@@ -309,7 +309,7 @@ KeyboardTranslator::Entry KeyboardTranslatorReader::createEntry(const QString& c
 {
     QString entryString(QStringLiteral("keyboard \"temporary\"\nkey "));
     entryString.append(condition);
-    entryString.append(" : ");
+    entryString.append(QLatin1String(" : "));
 
     // if 'result' is the name of a command then the entry result will be that command,
     // otherwise the result will be treated as a string to echo when the key sequence
@@ -318,7 +318,7 @@ KeyboardTranslator::Entry KeyboardTranslatorReader::createEntry(const QString& c
     if (parseAsCommand(result, command))
         entryString.append(result);
     else
-        entryString.append('\"' + result + '\"');
+        entryString.append(QLatin1Char('\"') + result + QLatin1Char('\"'));
 
     QByteArray array = entryString.toUtf8();
     QBuffer buffer(&array);
@@ -352,9 +352,9 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
     int commentPos = -1;
     for (int i = text.length() - 1; i >= 0; i--) {
         QChar ch = text[i];
-        if (ch == '\"')
+        if (ch == QLatin1Char('\"'))
             inQuotes = !inQuotes;
-        else if (ch == '#' && !inQuotes)
+        else if (ch == QLatin1Char('#') && !inQuotes)
             commentPos = i;
     }
     if (commentPos != -1)
@@ -363,10 +363,10 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
     text = text.simplified();
 
     // title line: keyboard "title"
-    static const QRegularExpression title("keyboard\\s+\"(.*)\"", QRegularExpression::OptimizeOnFirstUsageOption);
+    static const QRegularExpression title(QStringLiteral("keyboard\\s+\"(.*)\""), QRegularExpression::OptimizeOnFirstUsageOption);
     // key line: key KeySequence : "output"
     // key line: key KeySequence : command
-    static const QRegularExpression key("key\\s+([\\w\\+\\s\\-\\*\\.]+)\\s*:\\s*(\"(.*)\"|\\w+)", QRegularExpression::OptimizeOnFirstUsageOption);
+    static const QRegularExpression key(QStringLiteral("key\\s+([\\w\\+\\s\\-\\*\\.]+)\\s*:\\s*(\"(.*)\"|\\w+)"), QRegularExpression::OptimizeOnFirstUsageOption);
 
     QList<Token> list;
     if (text.isEmpty()) {
@@ -391,7 +391,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
 
     Token keyToken = { Token::KeyKeyword , QString() };
     QString sequenceTokenString = keyMatch.captured(1);
-    Token sequenceToken = { Token::KeySequence , sequenceTokenString.remove(QChar(' ')) };
+    Token sequenceToken = { Token::KeySequence , sequenceTokenString.remove(QLatin1Char(' ')) };
 
     list << keyToken << sequenceToken;
 
@@ -478,7 +478,7 @@ QByteArray KeyboardTranslator::Entry::escapedText(bool expandWildCards,
         default:
             // any character which is not printable is replaced by an equivalent
             // \xhh escape sequence (where 'hh' are the corresponding hex digits)
-            if (!QChar(ch).isPrint())
+            if (!QChar(QLatin1Char(ch)).isPrint())
                 replacement = 'x';
         }
 
@@ -547,9 +547,9 @@ void KeyboardTranslator::Entry::insertModifier(QString& item , int modifier) con
         return;
 
     if ((modifier & _modifiers) != 0u)
-        item += '+';
+        item += QLatin1Char('+');
     else
-        item += '-';
+        item += QLatin1Char('-');
 
     if (modifier == Qt::ShiftModifier)
         item += QLatin1String("Shift");
@@ -568,9 +568,9 @@ void KeyboardTranslator::Entry::insertState(QString& item, int aState) const
         return;
 
     if ((aState & _state) != 0)
-        item += '+';
+        item += QLatin1Char('+');
     else
-        item += '-';
+        item += QLatin1Char('-');
 
     if (aState == KeyboardTranslator::AlternateScreenState)
         item += QLatin1String("AppScreen");
@@ -589,7 +589,7 @@ QString KeyboardTranslator::Entry::resultToString(bool expandWildCards,
         Qt::KeyboardModifiers keyboardModifiers) const
 {
     if (!_text.isEmpty())
-        return escapedText(expandWildCards, keyboardModifiers);
+        return QString::fromLatin1(escapedText(expandWildCards, keyboardModifiers));
     else if (_command == EraseCommand)
         return QStringLiteral("Erase");
     else if (_command == ScrollPageUpCommand)
