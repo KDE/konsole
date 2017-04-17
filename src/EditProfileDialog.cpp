@@ -1137,10 +1137,10 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 }
 void EditProfileDialog::setDefaultCodec(QTextCodec* codec)
 {
-    QString name = QString(codec->name());
+    QString name = QString::fromLocal8Bit(codec->name());
 
     updateTempProfileProperty(Profile::DefaultEncoding, name);
-    _ui->characterEncodingLabel->setText(codec->name());
+    _ui->characterEncodingLabel->setText(name);
 }
 void EditProfileDialog::customCursorColorChanged(const QColor& color)
 {
