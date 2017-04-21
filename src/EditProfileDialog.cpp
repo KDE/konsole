@@ -1305,7 +1305,7 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, option.widget);
 
     // Draw name
-    QPalette::ColorRole textColor = (option.state & QStyle::State_Selected) ?
+    QPalette::ColorRole textColor = ((option.state & QStyle::State_Selected) != 0) ?
         QPalette::HighlightedText: QPalette::Text;
     painter->setPen(option.palette.color(textColor));
     painter->setFont(option.font);

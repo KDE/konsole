@@ -89,7 +89,7 @@ KeyboardTranslatorReader::KeyboardTranslatorReader(QIODevice* source)
     : _source(source)
     , _description(QString())
     , _nextEntry()
-    , _hasNext(0)
+    , _hasNext(false)
 {
     // read input until we find the description
     while (_description.isEmpty() && !source->atEnd()) {
