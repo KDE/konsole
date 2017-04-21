@@ -1658,7 +1658,7 @@ void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
             // if cursor is blinking(hidden), blink it again to make it show
             blinkCursorEvent();
         }
-        Q_ASSERT(_cursorBlinking == false);
+        Q_ASSERT(!_cursorBlinking);
     }
 }
 
@@ -1686,7 +1686,7 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
 
     // suppress further cursor blinking
     _blinkCursorTimer->stop();
-    Q_ASSERT(_cursorBlinking == false);
+    Q_ASSERT(!_cursorBlinking);
 
     // if text is blinking (hidden), blink it again to make it shown
     if (_textBlinking)
@@ -1694,7 +1694,7 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
 
     // suppress further text blinking
     _blinkTextTimer->stop();
-    Q_ASSERT(_textBlinking == false);
+    Q_ASSERT(!_textBlinking);
 
     _showUrlHint = false;
 
@@ -3128,7 +3128,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
             // if cursor is blinking(hidden), blink it again to show it
             blinkCursorEvent();
         }
-        Q_ASSERT(_cursorBlinking == false);
+        Q_ASSERT(!_cursorBlinking);
     }
 
     emit keyPressedSignal(event);
