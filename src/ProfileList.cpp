@@ -83,7 +83,7 @@ QAction* ProfileList::actionForProfile(Profile::Ptr profile) const
 void ProfileList::profileChanged(Profile::Ptr profile)
 {
     QAction* action = actionForProfile(profile);
-    if (action)
+    if (action != nullptr)
         updateAction(action, profile);
 }
 
@@ -102,7 +102,7 @@ void ProfileList::shortcutChanged(Profile::Ptr profile, const QKeySequence& sequ
 
     QAction* action = actionForProfile(profile);
 
-    if (action) {
+    if (action != nullptr) {
         action->setShortcut(sequence);
     }
 }
@@ -143,7 +143,7 @@ void ProfileList::favoriteChanged(Profile::Ptr profile, bool isFavorite)
     } else {
         QAction* action = actionForProfile(profile);
 
-        if (action) {
+        if (action != nullptr) {
             _group->removeAction(action);
             foreach(QWidget * widget, _registeredWidgets) {
                 widget->removeAction(action);

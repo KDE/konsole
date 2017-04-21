@@ -106,13 +106,13 @@ ScreenWindow* TerminalDisplay::screenWindow() const
 void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 {
     // disconnect existing screen window if any
-    if (_screenWindow) {
+    if (_screenWindow != nullptr) {
         disconnect(_screenWindow , 0 , this , 0);
     }
 
     _screenWindow = window;
 
-    if (_screenWindow) {
+    if (_screenWindow != nullptr) {
         connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateLineProperties);
         connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateImage);
         connect(_screenWindow.data() , &Konsole::ScreenWindow::currentResultLineChanged , this , &Konsole::TerminalDisplay::updateImage);
@@ -931,7 +931,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     // if the flow control warning is enabled this will interfere with the
     // scrolling optimizations and cause artifacts.  the simple solution here
     // is to just disable the optimization whilst it is visible
-    if (_outputSuspendedLabel && _outputSuspendedLabel->isVisible())
+    if ((_outputSuspendedLabel != nullptr) && _outputSuspendedLabel->isVisible())
         return;
 
     // constrain the region to the display
@@ -949,7 +949,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
             || this->_lines <= region.height()) return;
 
     // hide terminal size label to prevent it being scrolled
-    if (_resizeWidget && _resizeWidget->isVisible())
+    if ((_resizeWidget != nullptr) && _resizeWidget->isVisible())
         _resizeWidget->hide();
 
     // Note:  With Qt 4.4 the left edge of the scrolled area must be at 0
@@ -1050,7 +1050,7 @@ QRegion TerminalDisplay::hotSpotRegion() const
 
 void TerminalDisplay::processFilters()
 {
-    if (!_screenWindow) {
+    if (_screenWindow == nullptr) {
         return;
     }
 
@@ -1079,7 +1079,7 @@ void TerminalDisplay::processFilters()
 
 void TerminalDisplay::updateImage()
 {
-    if (!_screenWindow)
+    if (_screenWindow == nullptr)
         return;
 
     // optimization - scroll the existing image where possible and
@@ -1092,7 +1092,7 @@ void TerminalDisplay::updateImage()
         _screenWindow->resetScrollCount();
     }
 
-    if (!_image) {
+    if (_image == nullptr) {
         // Create _image.
         // The emitted changedContentSizeSignal also leads to getImage being recreated, so do this first.
         updateImageSize();
@@ -1260,7 +1260,7 @@ void TerminalDisplay::updateImage()
 void TerminalDisplay::showResizeNotification()
 {
     if (_showTerminalSizeHint && isVisible()) {
-        if (!_resizeWidget) {
+        if (_resizeWidget == nullptr) {
             _resizeWidget = new QLabel(i18n("Size: XXX x XXX"), this);
             _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().width(i18n("Size: XXX x XXX")));
             _resizeWidget->setMinimumHeight(_resizeWidget->sizeHint().height());
@@ -1319,7 +1319,7 @@ void TerminalDisplay::printContent(QPainter& painter, bool friendly)
 
 QPoint TerminalDisplay::cursorPosition() const
 {
-    if (_screenWindow)
+    if (_screenWindow != nullptr)
         return _screenWindow->cursorPosition();
     else
         return QPoint(0, 0);
@@ -1491,7 +1491,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
                 // sequence of characters
                 ushort extendedCharLength = 0;
                 const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(_image[loc(x, y)].character, extendedCharLength);
-                if (chars) {
+                if (chars != nullptr) {
                     Q_ASSERT(extendedCharLength > 1);
                     bufferSize += extendedCharLength - 1;
                     unistr.resize(bufferSize);
@@ -1527,7 +1527,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
                     // sequence of characters
                     ushort extendedCharLength = 0;
                     const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
-                    if (chars) {
+                    if (chars != nullptr) {
                         Q_ASSERT(extendedCharLength > 1);
                         bufferSize += extendedCharLength - 1;
                         unistr.resize(bufferSize);
@@ -1755,7 +1755,7 @@ void TerminalDisplay::resizeEvent(QResizeEvent*)
 
 void TerminalDisplay::propagateSize()
 {
-    if (_image)
+    if (_image != nullptr)
         updateImageSize();
 }
 
@@ -1767,7 +1767,7 @@ void TerminalDisplay::updateImageSize()
 
     makeImage();
 
-    if (oldImage) {
+    if (oldImage != nullptr) {
         // copy the old image to reduce flicker
         int lines = qMin(oldLines, _lines);
         int columns = qMin(oldColumns, _columns);
@@ -1779,7 +1779,7 @@ void TerminalDisplay::updateImageSize()
         delete[] oldImage;
     }
 
-    if (_screenWindow)
+    if (_screenWindow != nullptr)
         _screenWindow->setWindowLines(_lines);
 
     _resizing = (oldLines != _lines) || (oldColumns != _columns);
@@ -1925,7 +1925,7 @@ void TerminalDisplay::setScrollBarPosition(Enum::ScrollBarPositionEnum position)
 
 void TerminalDisplay::scrollBarPositionChanged(int)
 {
-    if (!_screenWindow)
+    if (_screenWindow == nullptr)
         return;
 
     _screenWindow->scrollTo(_scrollBar->value());
@@ -1985,7 +1985,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 
     if (!contentsRect().contains(ev->pos())) return;
 
-    if (!_screenWindow) return;
+    if (_screenWindow == nullptr) return;
 
     int charLine;
     int charColumn;
@@ -2037,7 +2037,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 
             if ((_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
                 Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
-                if (spot && spot->type() == Filter::HotSpot::Link) {
+                if ((spot != nullptr) && spot->type() == Filter::HotSpot::Link) {
                     QObject action;
                     action.setObjectName("open-action");
                     spot->activate(&action);
@@ -2061,7 +2061,7 @@ QList<QAction*> TerminalDisplay::filterActions(const QPoint& position)
 
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
 
-    return spot ? spot->actions() : QList<QAction*>();
+    return spot != nullptr ? spot->actions() : QList<QAction*>();
 }
 
 void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
@@ -2074,7 +2074,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     // handle filters
     // change link hot-spot appearance on mouse-over
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
-    if (spot && spot->type() == Filter::HotSpot::Link) {
+    if ((spot != nullptr) && spot->type() == Filter::HotSpot::Link) {
         QRegion previousHotspotArea = _mouseOverHotspotArea;
         _mouseOverHotspotArea = QRegion();
         QRect r;
@@ -2178,7 +2178,7 @@ void TerminalDisplay::leaveEvent(QEvent *)
 
 void TerminalDisplay::extendSelection(const QPoint& position)
 {
-    if (!_screenWindow)
+    if (_screenWindow == nullptr)
         return;
 
     //if ( !contentsRect().contains(ev->pos()) ) return;
@@ -2331,7 +2331,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
 void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 {
-    if (!_screenWindow)
+    if (_screenWindow == nullptr)
         return;
 
     int charLine;
@@ -2395,7 +2395,7 @@ void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, int& line,
 
 void TerminalDisplay::updateLineProperties()
 {
-    if (!_screenWindow)
+    if (_screenWindow == nullptr)
         return;
 
     _lineProperties = _screenWindow->getLineProperties();
@@ -2431,7 +2431,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
     }
 
     if (ev->button() != Qt::LeftButton) return;
-    if (!_screenWindow) return;
+    if (_screenWindow == nullptr) return;
 
     int charLine = 0;
     int charColumn = 0;
@@ -2645,7 +2645,7 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
         int newRegStart = qMax(0, y - regSize);
         lineProperties = screen->getLineProperties(newRegStart, y - 1);
         i = y - newRegStart;
-        if (!tmp_image) {
+        if (tmp_image == nullptr) {
             tmp_image = new Character[imageSize];
             image = tmp_image;
         }
@@ -2653,7 +2653,7 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
         j = loc(x, i);
     }
 out:
-    if (tmp_image) {
+    if (tmp_image != nullptr) {
         delete[] tmp_image;
     }
     return QPoint(x, y - curLine);
@@ -2703,7 +2703,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
         int newRegEnd = qMin(y + regSize - 1, maxY);
         lineProperties = screen->getLineProperties(y, newRegEnd);
         i = 0;
-        if (!tmp_image) {
+        if (tmp_image == nullptr) {
             tmp_image = new Character[imageSize];
             image = tmp_image;
         }
@@ -2723,7 +2723,7 @@ out:
             y--;
         }
     }
-    if (tmp_image) {
+    if (tmp_image != nullptr) {
         delete[] tmp_image;
     }
     return QPoint(x, y);
@@ -2731,7 +2731,7 @@ out:
 
 void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 {
-    if (!_screenWindow) return;
+    if (_screenWindow == nullptr) return;
 
     int charLine;
     int charColumn;
@@ -2770,7 +2770,7 @@ void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
 
 void TerminalDisplay::selectCurrentLine()
 {
-    if (!_screenWindow) return;
+    if (_screenWindow == nullptr) return;
 
     selectLine(cursorPosition(), true);
 }
@@ -2790,7 +2790,7 @@ QChar TerminalDisplay::charClass(const Character& ch) const
     if ((ch.rendition & RE_EXTENDED_CHAR) != 0) {
         ushort extendedCharLength = 0;
         const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
-        if (chars && extendedCharLength > 0) {
+        if ((chars != nullptr) && extendedCharLength > 0) {
             const QString s = QString::fromUtf16(chars, extendedCharLength);
             if (_wordCharacters.contains(s, Qt::CaseInsensitive))
                 return 'a';
@@ -2847,7 +2847,7 @@ bool TerminalDisplay::bracketedPasteMode() const
 
 void TerminalDisplay::doPaste(QString text, bool appendReturn)
 {
-    if (!_screenWindow)
+    if (_screenWindow == nullptr)
         return;
 
     if (appendReturn)
@@ -2889,7 +2889,7 @@ void TerminalDisplay::setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum mod
 
 void TerminalDisplay::copyToX11Selection()
 {
-    if (!_screenWindow)
+    if (_screenWindow == nullptr)
         return;
 
     QString text = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces);
@@ -2911,7 +2911,7 @@ void TerminalDisplay::copyToX11Selection()
 
 void TerminalDisplay::copyToClipboard()
 {
-    if (!_screenWindow)
+    if (_screenWindow == nullptr)
         return;
 
     QString text = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces);
@@ -3040,7 +3040,7 @@ void TerminalDisplay::setFlowControlWarningEnabled(bool enable)
 void TerminalDisplay::outputSuspended(bool suspended)
 {
     //create the label when this function is first called
-    if (!_outputSuspendedLabel) {
+    if (_outputSuspendedLabel == nullptr) {
         //This label includes a link to an English language website
         //describing the 'flow control' (Xon/Xoff) feature found in almost
         //all terminal emulators.
@@ -3341,7 +3341,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
         // If our target is local we will open a popup - otherwise the fallback kicks
         // in and the URLs will simply be pasted as text.
-        if (!_dropUrlsAsText && _sessionController && _sessionController->url().isLocalFile()) {
+        if (!_dropUrlsAsText && (_sessionController != nullptr) && _sessionController->url().isLocalFile()) {
             // A standard popup with Copy, Move and Link as options -
             // plus an additional Paste option.
 
@@ -3392,9 +3392,9 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
 void TerminalDisplay::dropMenuPasteActionTriggered()
 {
-    if (sender()) {
+    if (sender() != nullptr) {
         const QAction* action = qobject_cast<const QAction*>(sender());
-        if (action) {
+        if (action != nullptr) {
             emit sendStringToEmu(action->data().toString().toLocal8Bit());
         }
     }
@@ -3402,9 +3402,9 @@ void TerminalDisplay::dropMenuPasteActionTriggered()
 
 void TerminalDisplay::dropMenuCdActionTriggered()
 {
-    if (sender()) {
+    if (sender() != nullptr) {
         const QAction* action = qobject_cast<const QAction*>(sender());
-        if (action) {
+        if (action != nullptr) {
             emit sendStringToEmu(action->data().toString().toLocal8Bit());
         }
     }

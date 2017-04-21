@@ -69,11 +69,11 @@ void ViewSplitter::adjustContainerSize(ViewContainer* container , int percentage
 
 ViewSplitter* ViewSplitter::activeSplitter()
 {
-    QWidget* widget = focusWidget() ? focusWidget() : this;
+    QWidget* widget = focusWidget() != nullptr ? focusWidget() : this;
 
     ViewSplitter* splitter = 0;
 
-    while (!splitter && widget) {
+    while ((splitter == nullptr) && (widget != nullptr)) {
         splitter = qobject_cast<ViewSplitter*>(widget);
         widget = widget->parentWidget();
     }
@@ -227,7 +227,7 @@ void ViewSplitter::setActiveContainer(ViewContainer* container)
 {
     QWidget* activeView = container->activeView();
 
-    if (activeView)
+    if (activeView != nullptr)
         activeView->setFocus(Qt::OtherFocusReason);
 }
 
@@ -246,7 +246,7 @@ ViewContainer* ViewSplitter::activeContainer() const
             focusW = focusW->parentWidget();
         }
 
-        if (focusContainer)
+        if (focusContainer != nullptr)
             return focusContainer;
     }
 

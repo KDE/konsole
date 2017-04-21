@@ -32,7 +32,7 @@ void DBusTest::initTestCase()
     QStringList konsoleServices;
 
     if (!QDBusConnection::sessionBus().isConnected() ||
-            !(bus = QDBusConnection::sessionBus().interface()))
+            ((bus = QDBusConnection::sessionBus().interface()) == nullptr))
         QFAIL("Session bus not found");
 
     QDBusReply<QStringList> serviceReply = bus->registeredServiceNames();

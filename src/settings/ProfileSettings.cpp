@@ -372,7 +372,7 @@ QList<Profile::Ptr> ProfileSettings::selectedProfiles() const
 {
     QList<Profile::Ptr> list;
     QItemSelectionModel* selection = sessionTable->selectionModel();
-    if (!selection)
+    if (selection == nullptr)
         return list;
 
     foreach(const QModelIndex & index, selection->selectedIndexes()) {
@@ -386,7 +386,7 @@ Profile::Ptr ProfileSettings::currentProfile() const
 {
     QItemSelectionModel* selection = sessionTable->selectionModel();
 
-    if (!selection || selection->selectedRows().count() != 1)
+    if ((selection == nullptr) || selection->selectedRows().count() != 1)
         return Profile::Ptr();
 
     return  selection->
@@ -429,9 +429,9 @@ void StyledBackgroundPainter::drawBackground(QPainter* painter, const QStyleOpti
         const QModelIndex&)
 {
     const QStyleOptionViewItemV3* v3option = qstyleoption_cast<const QStyleOptionViewItemV3*>(&option);
-    const QWidget* widget = v3option ? v3option->widget : 0;
+    const QWidget* widget = v3option != nullptr ? v3option->widget : 0;
 
-    QStyle* style = widget ? widget->style() : QApplication::style();
+    QStyle* style = widget != nullptr ? widget->style() : QApplication::style();
 
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, widget);
 }

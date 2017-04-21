@@ -98,7 +98,7 @@ void Part::newTab()
 
 Session* Part::activeSession() const
 {
-    if (_viewManager->activeViewController()) {
+    if (_viewManager->activeViewController() != nullptr) {
         Q_ASSERT(_viewManager->activeViewController()->session());
 
         return _viewManager->activeViewController()->session();
@@ -215,7 +215,7 @@ void Part::activeViewChanged(SessionController* controller)
     Q_ASSERT(controller->view());
 
     // remove existing controller
-    if (_pluggedController) {
+    if (_pluggedController != nullptr) {
         removeChildClient(_pluggedController);
         disconnect(_pluggedController, &Konsole::SessionController::titleChanged, this,
                    &Konsole::Part::activeViewTitleChanged);

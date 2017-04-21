@@ -490,7 +490,7 @@ void EditProfileDialog::toggleMouseWheelZoom(bool enable)
 }
 void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 {
-    if (!_ui->colorSchemeList->model())
+    if (_ui->colorSchemeList->model() == nullptr)
         _ui->colorSchemeList->setModel(new QStandardItemModel(this));
 
     const QString& name = lookupProfile()->colorScheme();
@@ -520,7 +520,7 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 
     model->sort(0);
 
-    if (selectCurrentScheme && selectedItem) {
+    if (selectCurrentScheme && (selectedItem != nullptr)) {
         _ui->colorSchemeList->updateGeometry();
         _ui->colorSchemeList->selectionModel()->setCurrentIndex(selectedItem->index() ,
                 QItemSelectionModel::Select);
@@ -531,7 +531,7 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 }
 void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 {
-    if (!_ui->keyBindingList->model())
+    if (_ui->keyBindingList->model() == nullptr)
         _ui->keyBindingList->setModel(new QStandardItemModel(this));
 
     const QString& name = lookupProfile()->keyBindings();
@@ -550,7 +550,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     QStringList translatorNames = keyManager->allTranslators();
     foreach(const QString& translatorName, translatorNames) {
         const KeyboardTranslator* translator = keyManager->findTranslator(translatorName);
-        if (!translator) continue;
+        if (translator == nullptr) continue;
 
         QStandardItem* item = new QStandardItem(translator->description());
         item->setEditable(false);
@@ -566,7 +566,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 
     model->sort(0);
 
-    if (selectCurrentTranslator && selectedItem) {
+    if (selectCurrentTranslator && (selectedItem != nullptr)) {
         _ui->keyBindingList->selectionModel()->setCurrentIndex(selectedItem->index() ,
                 QItemSelectionModel::Select);
     }
@@ -689,7 +689,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 
     // Setting up ColorSchemeEditor ui
     // close any running ColorSchemeEditor
-    if (_colorDialog) {
+    if (_colorDialog != nullptr) {
         closeColorSchemeEditor();
     }
     _colorDialog = new ColorSchemeEditor(this);
@@ -701,7 +701,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 }
 void EditProfileDialog::closeColorSchemeEditor()
 {
-    if (_colorDialog) {
+    if (_colorDialog != nullptr) {
         _colorDialog->close();
         delete _colorDialog;
     }
@@ -736,7 +736,7 @@ void EditProfileDialog::colorSchemeSelected()
     if (!selected.isEmpty()) {
         QAbstractItemModel* model = _ui->colorSchemeList->model();
         const ColorScheme* colors = model->data(selected.first(), Qt::UserRole + 1).value<const ColorScheme*>();
-        if (colors) {
+        if (colors != nullptr) {
             updateTempProfileProperty(Profile::ColorScheme, colors->name());
             previewColorScheme(selected.first());
 
@@ -841,7 +841,7 @@ void EditProfileDialog::keyBindingSelected()
         QAbstractItemModel* model = _ui->keyBindingList->model();
         const KeyboardTranslator* translator = model->data(selected.first(), Qt::UserRole + 1)
                                                .value<const KeyboardTranslator*>();
-        if (translator) {
+        if (translator != nullptr) {
             updateTempProfileProperty(Profile::KeyBindings, translator->name());
         }
     }
@@ -885,7 +885,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 
     auto editor = new KeyBindingEditor;
 
-    if (translator)
+    if (translator != nullptr)
         editor->setup(translator);
 
     if (isNewTranslator)
@@ -1295,13 +1295,13 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     const ColorScheme* scheme = index.data(Qt::UserRole + 1).value<const ColorScheme*>();
     QFont profileFont = index.data(Qt::UserRole + 2).value<QFont>();
     Q_ASSERT(scheme);
-    if (!scheme)
+    if (scheme == nullptr)
         return;
 
     painter->setRenderHint(QPainter::Antialiasing);
 
     // Draw background
-    QStyle *style = option.widget ? option.widget->style() : QApplication::style();
+    QStyle *style = option.widget != nullptr ? option.widget->style() : QApplication::style();
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, option.widget);
 
     // Draw name

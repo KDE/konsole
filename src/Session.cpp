@@ -193,7 +193,7 @@ void Session::setDarkBackground(bool darkBackground)
 
 bool Session::isRunning() const
 {
-    return _shellProcess && (_shellProcess->state() == QProcess::Running);
+    return (_shellProcess != nullptr) && (_shellProcess->state() == QProcess::Running);
 }
 
 void Session::setCodec(QTextCodec* codec)
@@ -205,7 +205,7 @@ bool Session::setCodec(const QByteArray& name)
 {
     QTextCodec* codec = QTextCodec::codecForName(name);
 
-    if (codec) {
+    if (codec != nullptr) {
         setCodec(codec);
         return true;
     } else {
@@ -975,7 +975,7 @@ void Session::updateSessionProcessInfo()
     // The checking for pid changing looks stupid, but it is needed
     // at the moment to workaround the problem that processId() might
     // return 0
-    if (!_sessionProcessInfo ||
+    if ((_sessionProcessInfo == nullptr) ||
             (processId() != 0 && processId() != _sessionProcessInfo->pid(&ok))) {
         delete _sessionProcessInfo;
         _sessionProcessInfo = ProcessInfo::newInstance(processId(),
@@ -997,7 +997,7 @@ bool Session::updateForegroundProcessInfo()
         _foregroundPid = foregroundPid;
     }
 
-    if (_foregroundProcessInfo) {
+    if (_foregroundProcessInfo != nullptr) {
         _foregroundProcessInfo->update();
         return _foregroundProcessInfo->isValid();
     } else {
@@ -1228,14 +1228,14 @@ void Session::setFlowControlEnabled(bool enabled)
 {
     _flowControlEnabled = enabled;
 
-    if (_shellProcess)
+    if (_shellProcess != nullptr)
         _shellProcess->setFlowControlEnabled(_flowControlEnabled);
 
     emit flowControlEnabledChanged(enabled);
 }
 bool Session::flowControlEnabled() const
 {
-    if (_shellProcess)
+    if (_shellProcess != nullptr)
         return _shellProcess->flowControlEnabled();
     else
         return _flowControlEnabled;
@@ -1329,7 +1329,7 @@ void Session::zmodemFinished()
        ZModemDialog's user1Clicked(). Therefore, an invocation by
        user1Clicked() will recursively invoke this function again
        when the KProcess is deleted! */
-    if (_zmodemProc) {
+    if (_zmodemProc != nullptr) {
         KProcess* process = _zmodemProc;
         _zmodemProc = 0;   // Set _zmodemProc to 0 avoid recursive invocations!
         _zmodemBusy = false;

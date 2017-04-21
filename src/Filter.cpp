@@ -358,7 +358,7 @@ void RegExpFilter::process()
 
         RegExpFilter::HotSpot* spot = newHotSpot(startLine, startColumn,
                                                  endLine, endColumn, match.capturedTexts());
-        if (!spot) {
+        if (spot == nullptr) {
             continue;
         }
 
@@ -405,14 +405,14 @@ void UrlFilter::HotSpot::activate(QObject* object)
 
     const UrlType kind = urlType();
 
-    const QString& actionName = object ? object->objectName() : QString();
+    const QString& actionName = object != nullptr ? object->objectName() : QString();
 
     if (actionName == QLatin1String("copy-action")) {
         QApplication::clipboard()->setText(url);
         return;
     }
 
-    if (!object || actionName == QLatin1String("open-action")) {
+    if ((object == nullptr) || actionName == QLatin1String("open-action")) {
         if (kind == StandardUrl) {
             // if the URL path does not include the protocol ( eg. "www.kde.org" ) then
             // prepend http:// ( eg. "www.kde.org" --> "http://www.kde.org" )
@@ -501,7 +501,7 @@ QList<QAction*> UrlFilter::HotSpot::actions()
 RegExpFilter::HotSpot* FileFilter::newHotSpot(int startLine, int startColumn, int endLine,
         int endColumn, const QStringList& capturedTexts)
 {
-    if (!_session) {
+    if (_session == nullptr) {
         qCDebug(KonsoleDebug) << "Trying to create new hot spot without session!";
         return nullptr;
     }

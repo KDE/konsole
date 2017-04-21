@@ -189,7 +189,7 @@ const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
     // Try to find the default.keytab file if it exists, otherwise
     // fall back to the internal hard-coded fallback translator
     const KeyboardTranslator* translator = findTranslator(QStringLiteral("default"));
-    if (!translator) {
+    if (translator == nullptr) {
         translator = _fallbackTranslator;
     }
     return translator;

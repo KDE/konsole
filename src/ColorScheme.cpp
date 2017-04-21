@@ -219,7 +219,7 @@ void ColorScheme::setColorTableEntry(int index , const ColorEntry& entry)
 {
     Q_ASSERT(index >= 0 && index < TABLE_COLORS);
 
-    if (!_table) {
+    if (_table == nullptr) {
         _table = new ColorEntry[TABLE_COLORS];
 
         for (int i = 0; i < TABLE_COLORS; i++)
@@ -292,7 +292,7 @@ void ColorScheme::setRandomizedBackgroundColor(bool randomize)
     if (randomize) {
         setRandomizationRange(BGCOLOR_INDEX , MAX_HUE , 255 , 0);
     } else {
-        if (_randomTable)
+        if (_randomTable != nullptr)
             setRandomizationRange(BGCOLOR_INDEX , 0 , 0 , 0);
     }
 }
@@ -313,7 +313,7 @@ void ColorScheme::setRandomizationRange(int index , quint16 hue , quint8 saturat
 
 const ColorEntry* ColorScheme::colorTable() const
 {
-    if (_table)
+    if (_table != nullptr)
         return _table;
     else
         return defaultTable;
@@ -449,7 +449,7 @@ void ColorSchemeWallpaper::load()
         return;
 
     // Create and load original pixmap
-    if (!_picture)
+    if (_picture == nullptr)
         _picture = new QPixmap();
 
     if (_picture->isNull())
@@ -463,7 +463,7 @@ bool ColorSchemeWallpaper::isNull() const
 
 bool ColorSchemeWallpaper::draw(QPainter& painter, const QRect& rect, qreal opacity)
 {
-    if (!_picture || _picture->isNull())
+    if ((_picture == nullptr) || _picture->isNull())
         return false;
 
     if (qFuzzyCompare(1.0, opacity)) {

@@ -101,7 +101,7 @@ QUrl BookmarkHandler::currentUrl() const
 
 QUrl BookmarkHandler::urlForView(ViewProperties* view) const
 {
-    if (view)
+    if (view != nullptr)
         return QUrl(view->url());
     else
         return QUrl();
@@ -114,7 +114,7 @@ QString BookmarkHandler::currentTitle() const
 
 QString BookmarkHandler::titleForView(ViewProperties* view) const
 {
-    const QUrl& url = view ? view->url() : QUrl();
+    const QUrl& url = view != nullptr ? view->url() : QUrl();
     if (url.isLocalFile()) {
         QString path = url.path();
 
@@ -139,7 +139,7 @@ QString BookmarkHandler::currentIcon() const
 
 QString BookmarkHandler::iconForView(ViewProperties* view) const
 {
-    if (view)
+    if (view != nullptr)
         return view->icon().name();
     else
         return QString();

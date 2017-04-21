@@ -158,7 +158,7 @@ void KeyBindingEditor::setDescription(const QString& newDescription)
 
 void KeyBindingEditor::setTranslatorDescription(const QString& newDescription)
 {
-    if (_translator)
+    if (_translator != nullptr)
         _translator->setDescription(newDescription);
 }
 

@@ -159,15 +159,15 @@ TabbedViewContainer* ViewContainerTabBar::connectedTabbedViewContainer()
 
 void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 {
-    if (!parentWidget() || _dropIndicatorIndex == index)
+    if ((parentWidget() == nullptr) || _dropIndicatorIndex == index)
         return;
 
     _dropIndicatorIndex = index;
     const int ARROW_SIZE = 32;
     const bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
 
-    if (!_dropIndicator || _drawIndicatorDisabled != drawDisabled) {
-        if (!_dropIndicator) {
+    if ((_dropIndicator == nullptr) || _drawIndicatorDisabled != drawDisabled) {
+        if (_dropIndicator == nullptr) {
             _dropIndicator = new QLabel(parentWidget());
             _dropIndicator->resize(ARROW_SIZE, ARROW_SIZE);
         }

@@ -60,7 +60,7 @@ void PartTest::testFd()
 
     // create a Konsole part and attempt to connect to it
     KParts::Part* terminalPart = createPart();
-    if (!terminalPart) { // not found
+    if (terminalPart == nullptr) { // not found
         QSKIP("konsolepart not found.");
         return;
     }
@@ -102,7 +102,7 @@ KParts::Part* PartTest::createPart()
     if (!service)       // not found
         return 0;
     KPluginFactory* factory = KPluginLoader(service->library()).factory();
-    if (!factory)       // not found
+    if (factory == nullptr)       // not found
         return 0;
 
     KParts::Part* terminalPart = factory->create<KParts::Part>(this);

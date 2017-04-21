@@ -91,7 +91,7 @@ HistoryFile::HistoryFile()
 
 HistoryFile::~HistoryFile()
 {
-    if (_fileMap)
+    if (_fileMap != nullptr)
         unmap();
 }
 
@@ -128,7 +128,7 @@ bool HistoryFile::isMapped() const
 
 void HistoryFile::add(const unsigned char* buffer, int count)
 {
-    if (_fileMap)
+    if (_fileMap != nullptr)
         unmap();
 
     _readWriteBalance++;
@@ -155,7 +155,7 @@ void HistoryFile::get(unsigned char* buffer, int size, int loc)
     //calls (decided by using MAP_THRESHOLD) then mmap the log
     //file to improve performance.
     _readWriteBalance--;
-    if (!_fileMap && _readWriteBalance < MAP_THRESHOLD)
+    if ((_fileMap == nullptr) && _readWriteBalance < MAP_THRESHOLD)
         map();
 
     if (loc < 0 || size < 0 || loc + size > _length) {
@@ -163,7 +163,7 @@ void HistoryFile::get(unsigned char* buffer, int size, int loc)
         return;
     }
 
-    if (_fileMap) {
+    if (_fileMap != nullptr) {
         for (int i = 0; i < size; i++)
             buffer[i] = _fileMap[loc + i];
     } else {
@@ -607,7 +607,7 @@ bool HistoryTypeFile::isEnabled() const
 
 HistoryScroll* HistoryTypeFile::scroll(HistoryScroll* old) const
 {
-    if (dynamic_cast<HistoryFile *>(old))
+    if (dynamic_cast<HistoryFile *>(old) != nullptr)
         return old; // Unchanged.
 
     HistoryScroll* newScroll = new HistoryScrollFile(_fileName);
@@ -657,9 +657,9 @@ int CompactHistoryType::maximumLineCount() const
 
 HistoryScroll* CompactHistoryType::scroll(HistoryScroll* old) const
 {
-    if (old) {
+    if (old != nullptr) {
         CompactHistoryScroll* oldBuffer = dynamic_cast<CompactHistoryScroll*>(old);
-        if (oldBuffer) {
+        if (oldBuffer != nullptr) {
             oldBuffer->setMaxNbLines(_maxLines);
             return oldBuffer;
         }

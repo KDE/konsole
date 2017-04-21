@@ -115,7 +115,7 @@ ushort* ExtendedCharTable::lookupExtendedChar(ushort hash , ushort& length) cons
     // argument and return a pointer to the character sequence
 
     ushort* buffer = extendedCharTable[hash];
-    if (buffer) {
+    if (buffer != nullptr) {
         length = buffer[0];
         return buffer + 1;
     } else {

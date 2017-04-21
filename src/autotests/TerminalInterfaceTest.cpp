@@ -48,7 +48,7 @@ void TerminalInterfaceTest::testTerminalInterfaceNoShell()
 {
     // create a Konsole part and attempt to connect to it
     _terminalPart = createPart();
-    if (!_terminalPart)
+    if (_terminalPart == nullptr)
         QSKIP("konsolepart not found.", SkipSingle);
 
     TerminalInterface* terminal = qobject_cast<TerminalInterface*>(_terminalPart);
@@ -74,7 +74,7 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     // create a Konsole part and attempt to connect to it
     _terminalPart = createPart();
-    if (!_terminalPart)
+    if (_terminalPart == nullptr)
         QSKIP("konsolepart not found.", SkipSingle);
 
     TerminalInterface* terminal = qobject_cast<TerminalInterface*>(_terminalPart);
@@ -178,7 +178,7 @@ KParts::Part* TerminalInterfaceTest::createPart()
     if (!service)       // not found
         return 0;
     KPluginFactory* factory = KPluginLoader(service->library()).factory();
-    if (!factory)       // not found
+    if (factory == nullptr)       // not found
         return 0;
 
     KParts::Part* terminalPart = factory->create<KParts::Part>(this);

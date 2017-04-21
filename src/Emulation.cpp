@@ -143,7 +143,7 @@ const HistoryType& Emulation::history() const
 
 void Emulation::setCodec(const QTextCodec * codec)
 {
-    if (codec) {
+    if (codec != nullptr) {
         _codec = codec;
 
         delete _decoder;
@@ -166,7 +166,7 @@ void Emulation::setCodec(EmulationCodec codec)
 void Emulation::setKeyBindings(const QString& name)
 {
     _keyTranslator = KeyboardTranslatorManager::instance()->findTranslator(name);
-    if (!_keyTranslator) {
+    if (_keyTranslator == nullptr) {
         _keyTranslator = KeyboardTranslatorManager::instance()->defaultTranslator();
     }
 }

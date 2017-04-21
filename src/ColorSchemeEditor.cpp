@@ -209,7 +209,7 @@ void ColorSchemeEditor::wallpaperPathChanged(const QString& path)
 }
 void ColorSchemeEditor::setDescription(const QString& text)
 {
-    if (_colors)
+    if (_colors != nullptr)
         _colors->setDescription(text);
 
     if (_ui->descriptionEdit->text() != text)

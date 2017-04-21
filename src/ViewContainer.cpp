@@ -64,7 +64,7 @@ ViewContainer::~ViewContainer()
         disconnect(view, &QWidget::destroyed, this, &Konsole::ViewContainer::viewDestroyed);
     }
 
-    if (_searchBar) {
+    if (_searchBar != nullptr) {
         _searchBar->deleteLater();
     }
 
@@ -180,7 +180,7 @@ const QList<QWidget*> ViewContainer::views() const
 
 IncrementalSearchBar* ViewContainer::searchBar()
 {
-    if (!_searchBar) {
+    if (_searchBar == nullptr) {
         _searchBar = new IncrementalSearchBar(0);
         _searchBar->setVisible(false);
         connect(_searchBar, &Konsole::IncrementalSearchBar::destroyed, this, &Konsole::ViewContainer::searchBarDestroyed);
@@ -463,7 +463,7 @@ void TabbedViewContainer::startTabDrag(int tab)
     // start dragging
     const Qt::DropAction action = drag->exec();
 
-    if (drag && drag->target()) {
+    if ((drag != nullptr) && (drag->target() != nullptr)) {
         switch (action) {
         case Qt::MoveAction:
             // The MoveAction indicates the widget has been successfully
@@ -595,7 +595,7 @@ void TabbedViewContainer::moveViewWidget(int fromIndex , int toIndex)
 void TabbedViewContainer::currentTabChanged(int index)
 {
     _stackWidget->setCurrentIndex(index);
-    if (_stackWidget->widget(index))
+    if (_stackWidget->widget(index) != nullptr)
         emit activeViewChanged(_stackWidget->widget(index));
 
     // clear activity indicators
@@ -645,7 +645,7 @@ void TabbedViewContainer::addViewWidget(QWidget* view , int index)
 
 void TabbedViewContainer::removeViewWidget(QWidget* view)
 {
-    if (!_stackWidget)
+    if (_stackWidget == nullptr)
         return;
     _stackWidget->removeWidget(view);
 }
@@ -748,7 +748,7 @@ void StackedViewContainer::addViewWidget(QWidget* view , int)
 }
 void StackedViewContainer::removeViewWidget(QWidget* view)
 {
-    if (!_stackWidget)
+    if (_stackWidget == nullptr)
         return;
     _stackWidget->removeWidget(view);
 }

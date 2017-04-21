@@ -96,7 +96,7 @@ void Vt102Emulation::reset()
     resetCharset(1);
     _screen[1]->reset();
 
-    if (currentCodec)
+    if (currentCodec != nullptr)
         setCodec(currentCodec);
     else
         setCodec(LocaleCodec);
@@ -1037,7 +1037,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
     }
 
     // look up key binding
-    if (_keyTranslator) {
+    if (_keyTranslator != nullptr) {
         KeyboardTranslator::Entry entry = _keyTranslator->findEntry(
                                               event->key() ,
                                               modifiers,

@@ -174,7 +174,7 @@ void MainWindow::correctStandardShortcuts()
 {
     // replace F1 shortcut for help contents
     QAction* helpAction = actionCollection()->action(QStringLiteral("help_contents"));
-    if (helpAction) {
+    if (helpAction != nullptr) {
         actionCollection()->setDefaultShortcut(helpAction, QKeySequence());
     }
 
@@ -182,7 +182,7 @@ void MainWindow::correctStandardShortcuts()
     // changed the shortcut; however, if the user changed it to Ctrl+B
     // this will still get changed to Ctrl+Shift+B
     QAction* bookmarkAction = actionCollection()->action(QStringLiteral("add_bookmark"));
-    if (bookmarkAction && bookmarkAction->shortcut() == QKeySequence(Konsole::ACCEL + Qt::Key_B)) {
+    if ((bookmarkAction != nullptr) && bookmarkAction->shortcut() == QKeySequence(Konsole::ACCEL + Qt::Key_B)) {
         actionCollection()->setDefaultShortcut(bookmarkAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_B);
     }
 }
@@ -218,7 +218,7 @@ void MainWindow::activeViewChanged(SessionController* controller)
     disconnect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, 0, 0);
     connect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, controller, &Konsole::SessionController::openUrl);
 
-    if (_pluggedController)
+    if (_pluggedController != nullptr)
         disconnectController(_pluggedController);
 
     Q_ASSERT(controller);
@@ -250,7 +250,7 @@ void MainWindow::activeViewTitleChanged(ViewProperties* properties)
 
 void MainWindow::updateWindowCaption()
 {
-    if (!_pluggedController)
+    if (_pluggedController == nullptr)
         return;
 
     const QString& title = _pluggedController->title();
@@ -273,7 +273,7 @@ void MainWindow::updateWindowCaption()
 
 void MainWindow::updateWindowIcon()
 {
-    if (_pluggedController && !_pluggedController->icon().isNull())
+    if ((_pluggedController != nullptr) && !_pluggedController->icon().isNull())
         setWindowIcon(_pluggedController->icon());
 }
 
@@ -374,7 +374,7 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
     // it if it is the non-default profile.
     if (sessionActions.size() > 2) {
         // Update the 'New Tab' KActionMenu
-        if (_newTabMenuAction->menu()) {
+        if (_newTabMenuAction->menu() != nullptr) {
             _newTabMenuAction->menu()->clear();
         } else {
             _newTabMenuAction->setMenu(new QMenu());
@@ -394,7 +394,7 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
             }
         }
     } else {
-        if (_newTabMenuAction->menu()) {
+        if (_newTabMenuAction->menu() != nullptr) {
             _newTabMenuAction->menu()->clear();
         } else {
            _newTabMenuAction->setMenu(new QMenu());
@@ -412,7 +412,7 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
 
 QString MainWindow::activeSessionDir() const
 {
-    if (_pluggedController) {
+    if (_pluggedController != nullptr) {
         if (Session* session = _pluggedController->session()) {
             // For new tabs to get the correct working directory,
             // force the updating of the currentWorkingDirectory.
@@ -536,7 +536,7 @@ bool MainWindow::queryClose()
     // Check what processes are running, excluding the shell
     QStringList processesRunning;
     foreach(Session *session, _viewManager->sessions()) {
-        if (!session || !session->isForegroundProcessActive()) {
+        if ((session == nullptr) || !session->isForegroundProcessActive()) {
             continue;
         }
 
@@ -600,7 +600,7 @@ bool MainWindow::queryClose()
     case KMessageBox::Yes:
         return true;
     case KMessageBox::No:
-        if (_pluggedController && _pluggedController->session()) {
+        if ((_pluggedController != nullptr) && (_pluggedController->session() != nullptr)) {
             disconnectController(_pluggedController);
             _pluggedController->session()->closeInNormalWay();
         }
@@ -654,7 +654,7 @@ void MainWindow::showShortcutsDialog()
         // sync shortcuts for non-session actions (defined in "konsoleui.rc") in other main windows
         foreach(QWidget* mainWindowWidget, QApplication::topLevelWidgets()) {
             MainWindow* mainWindow = qobject_cast<MainWindow*>(mainWindowWidget);
-            if (mainWindow && mainWindow != this)
+            if ((mainWindow != nullptr) && mainWindow != this)
                 syncActiveShortcuts(mainWindow->actionCollection(), actionCollection());
         }
         // sync shortcuts for session actions (defined in "sessionui.rc") in other session controllers.
@@ -663,7 +663,7 @@ void MainWindow::showShortcutsDialog()
         // when they are plugged into a main window.
         foreach(SessionController * controller, SessionController::allControllers()) {
             controller->reloadXML();
-            if (controller->factory() && controller != _pluggedController)
+            if ((controller->factory() != nullptr) && controller != _pluggedController)
                 syncActiveShortcuts(controller->actionCollection(), _pluggedController->actionCollection());
         }
     }

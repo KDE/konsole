@@ -215,7 +215,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
 SessionController::~SessionController()
 {
-    if (_view)
+    if (_view != nullptr)
         _view->setScreenWindow(0);
 
     _allControllers.remove(this);
@@ -254,7 +254,7 @@ void SessionController::snapshot()
     title         = title.simplified();
 
     // Visualize that the session is broadcasting to others
-    if (_copyToGroup && _copyToGroup->sessions().count() > 1) {
+    if ((_copyToGroup != nullptr) && _copyToGroup->sessions().count() > 1) {
         title.append('*');
     }
 
@@ -421,7 +421,7 @@ void SessionController::updateWebSearchMenu()
 void SessionController::handleWebShortcutAction()
 {
     QAction * action = qobject_cast<QAction*>(sender());
-    if (!action)
+    if (action == nullptr)
         return;
 
     KUriFilterData filterData(action->data().toString());
@@ -464,7 +464,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
         // second, connect the newly focused view to listen for the session's bell signal
         connect(_session.data(), &Konsole::Session::bellRequest, _view.data(), &Konsole::TerminalDisplay::bell);
 
-        if (_copyInputToAllTabsAction && _copyInputToAllTabsAction->isChecked()) {
+        if ((_copyInputToAllTabsAction != nullptr) && _copyInputToAllTabsAction->isChecked()) {
             // A session with "Copy To All Tabs" has come into focus:
             // Ensure that newly created sessions are included in _copyToGroup!
             copyInputToAllTabs();
@@ -476,7 +476,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
 
 void SessionController::removeSearchFilter()
 {
-    if (!_searchFilter)
+    if (_searchFilter == nullptr)
         return;
 
     _view->filterChain()->removeFilter(_searchFilter);
@@ -487,14 +487,14 @@ void SessionController::removeSearchFilter()
 void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
 {
     // disconnect the existing search bar
-    if (_searchBar) {
+    if (_searchBar != nullptr) {
         disconnect(this, 0, _searchBar, 0);
         disconnect(_searchBar, 0, this, 0);
     }
 
     // connect new search bar
     _searchBar = searchBar;
-    if (_searchBar) {
+    if (_searchBar != nullptr) {
         connect(_searchBar.data(), &Konsole::IncrementalSearchBar::unhandledMovementKeyPressed, this, &Konsole::SessionController::movementKeyFromSearchBarReceived);
         connect(_searchBar.data(), &Konsole::IncrementalSearchBar::closeClicked, this, &Konsole::SessionController::searchClosed);
         connect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchFromClicked, this, &Konsole::SessionController::searchFrom);
@@ -799,7 +799,7 @@ void SessionController::editCurrentProfile()
     // Searching for Edit profile dialog opened with the same profile
     const QList<SessionController*> allSessionsControllers = _allControllers.values();
     foreach (SessionController* session, allSessionsControllers) {
-        if (session->profileDialogPointer()
+        if ((session->profileDialogPointer() != nullptr)
                 && session->profileDialogPointer()->isVisible()
                 && session->profileDialogPointer()->lookupProfile() == SessionManager::instance()->sessionProfile(_session)) {
             session->profileDialogPointer()->close();
@@ -831,7 +831,7 @@ void SessionController::renameSession()
 
     QPointer<Session> guard(_session);
     int result = dialog->exec();
-    if (!guard)
+    if (guard == nullptr)
         return;
 
     if (result != 0) {
@@ -998,7 +998,7 @@ void SessionController::copyInputActionsTriggered(QAction* action)
 
 void SessionController::copyInputToAllTabs()
 {
-    if (!_copyToGroup) {
+    if (_copyToGroup == nullptr) {
         _copyToGroup = new SessionGroup(this);
     }
 
@@ -1025,7 +1025,7 @@ void SessionController::copyInputToAllTabs()
 
 void SessionController::copyInputToSelectedTabs()
 {
-    if (!_copyToGroup) {
+    if (_copyToGroup == nullptr) {
         _copyToGroup = new SessionGroup(this);
         _copyToGroup->addSession(_session);
         _copyToGroup->setMasterStatus(_session, true);
@@ -1042,7 +1042,7 @@ void SessionController::copyInputToSelectedTabs()
 
     QPointer<Session> guard(_session);
     int result = dialog->exec();
-    if (!guard)
+    if (guard == nullptr)
         return;
 
     if (result == QDialog::Accepted) {
@@ -1065,7 +1065,7 @@ void SessionController::copyInputToSelectedTabs()
 
 void SessionController::copyInputToNone()
 {
-    if (!_copyToGroup)      // No 'Copy To' is active
+    if (_copyToGroup == nullptr)      // No 'Copy To' is active
         return;
 
     QSet<Session*> group =
@@ -1096,21 +1096,21 @@ void SessionController::updateFilterList(Profile::Ptr profile)
 
     bool underlineFiles = profile->underlineFilesEnabled();
 
-    if (!underlineFiles && _fileFilter) {
+    if (!underlineFiles && (_fileFilter != nullptr)) {
         _view->filterChain()->removeFilter(_fileFilter);
         delete _fileFilter;
         _fileFilter = nullptr;
-    } else if (underlineFiles && !_fileFilter) {
+    } else if (underlineFiles && (_fileFilter == nullptr)) {
         _fileFilter = new FileFilter(_session);
         _view->filterChain()->addFilter(_fileFilter);
     }
 
     bool underlineLinks = profile->underlineLinksEnabled();
-    if (!underlineLinks && _urlFilter) {
+    if (!underlineLinks && (_urlFilter != nullptr)) {
         _view->filterChain()->removeFilter(_urlFilter);
         delete _urlFilter;
         _urlFilter = nullptr;
-    } else if (underlineLinks && !_urlFilter) {
+    } else if (underlineLinks && (_urlFilter == nullptr)) {
         _urlFilter = new UrlFilter();
         _view->filterChain()->addFilter(_urlFilter);
     }
@@ -1141,7 +1141,7 @@ void SessionController::listenForScreenWindowUpdates()
 
 void SessionController::updateSearchFilter()
 {
-    if (_searchFilter && _searchBar) {
+    if ((_searchFilter != nullptr) && (_searchBar != nullptr)) {
         _view->processFilters();
     }
 }
@@ -1162,7 +1162,7 @@ void SessionController::searchBarEvent()
 
 void SessionController::enableSearchBar(bool showSearchBar)
 {
-    if (!_searchBar)
+    if (_searchBar == nullptr)
         return;
 
     if (showSearchBar && !_searchBar->isVisible()) {
@@ -1181,7 +1181,7 @@ void SessionController::enableSearchBar(bool showSearchBar)
                    &Konsole::SessionController::findPreviousInHistory);
         disconnect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchShiftPlusReturnPressed, this,
                    &Konsole::SessionController::findNextInHistory);
-        if (_view && _view->screenWindow()) {
+        if ((_view != nullptr) && (_view->screenWindow() != nullptr)) {
             _view->screenWindow()->setCurrentResultLine(-1);
         }
     }
@@ -1222,7 +1222,7 @@ void SessionController::searchHistory(bool showSearchBar)
 {
     enableSearchBar(showSearchBar);
 
-    if (_searchBar) {
+    if (_searchBar != nullptr) {
         if (showSearchBar) {
             removeSearchFilter();
 
@@ -1271,7 +1271,7 @@ void SessionController::searchCompleted(bool success)
 {
     _prevSearchResultLine = _view->screenWindow()->currentResultLine();
 
-    if (_searchBar)
+    if (_searchBar != nullptr)
         _searchBar->setFoundMatch(success);
 }
 
@@ -1380,7 +1380,7 @@ void SessionController::showHistoryOptions()
 
     QPointer<Session> guard(_session);
     int result = dialog->exec();
-    if (!guard)
+    if (guard == nullptr)
         return;
 
     if (result != 0) {
@@ -1481,7 +1481,7 @@ void SessionController::monitorSilence(bool monitor)
 void SessionController::updateSessionIcon()
 {
     // Visualize that the session is broadcasting to others
-    if (_copyToGroup && _copyToGroup->sessions().count() > 1) {
+    if ((_copyToGroup != nullptr) && _copyToGroup->sessions().count() > 1) {
         // Master Mode: set different icon, to warn the user to be careful
         setIcon(*_broadcastIcon);
     } else {
@@ -1519,8 +1519,8 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 {
     // needed to make sure the popup menu is available, even if a hosting
     // application did not merge our GUI.
-    if (!factory()) {
-        if (!clientBuilder()) {
+    if (factory() == nullptr) {
+        if (clientBuilder() == nullptr) {
             setClientBuilder(new KXMLGUIBuilder(_view));
         }
 
@@ -1530,7 +1530,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
     }
 
     QPointer<QMenu> popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu", this));
-    if (popup) {
+    if (popup != nullptr) {
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
         QList<QAction*> contentActions = _view->filterActions(position);
         auto contentSeparator = new QAction(popup);
@@ -1545,7 +1545,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 
         _preventClose = true;
 
-        if (_showMenuAction) {
+        if (_showMenuAction != nullptr) {
             if (  _showMenuAction->isChecked() ) {
                 popup->removeAction( _showMenuAction);
             } else {
@@ -1556,7 +1556,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         QAction* chosen = popup->exec(_view->mapToGlobal(position));
 
         // check for validity of the pointer to the popup menu
-        if (popup) {
+        if (popup != nullptr) {
             // Remove content-specific actions
             //
             // If the close action was chosen, the popup menu will be partially
@@ -1571,7 +1571,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 
         _preventClose = false;
 
-        if (chosen && chosen->objectName() == "close-session")
+        if ((chosen != nullptr) && chosen->objectName() == "close-session")
             chosen->trigger();
     } else {
         qCDebug(KonsoleDebug) << "Unable to display popup menu for session"
@@ -1778,7 +1778,7 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
 
     // transfer LINES_PER_REQUEST lines from the session's history
     // to the save location
-    if (info.session) {
+    if (info.session != nullptr) {
         // note:  when retrieving lines from the emulation,
         // the first line is at index 0.
 
@@ -2000,7 +2000,7 @@ QRegularExpression SearchHistoryTask::regExp() const
 
 QString SessionController::userTitle() const
 {
-    if (_session) {
+    if (_session != nullptr) {
         return _session->userTitle();
     } else {
         return QString();

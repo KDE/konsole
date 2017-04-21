@@ -108,7 +108,7 @@ int ViewManager::managerId() const
 QWidget* ViewManager::activeView() const
 {
     ViewContainer* container = _viewSplitter->activeContainer();
-    if (container) {
+    if (container != nullptr) {
         return container->activeView();
     } else {
         return 0;
@@ -123,7 +123,7 @@ QWidget* ViewManager::widget() const
 void ViewManager::setupActions()
 {
     Q_ASSERT(_actionCollection);
-    if (!_actionCollection) {
+    if (_actionCollection == nullptr) {
         return;
     }
 
@@ -269,16 +269,16 @@ void ViewManager::switchToView(int index)
 void ViewManager::updateDetachViewState()
 {
     Q_ASSERT(_actionCollection);
-    if (!_actionCollection)
+    if (_actionCollection == nullptr)
         return;
 
     const bool splitView = _viewSplitter->containers().count() >= 2;
     auto activeContainer = _viewSplitter->activeContainer();
-    const bool shouldEnable = splitView || (activeContainer && activeContainer->views().count() >= 2);
+    const bool shouldEnable = splitView || ((activeContainer != nullptr) && activeContainer->views().count() >= 2);
 
     QAction* detachAction = _actionCollection->action("detach-view");
 
-    if (detachAction && shouldEnable != detachAction->isEnabled())
+    if ((detachAction != nullptr) && shouldEnable != detachAction->isEnabled())
         detachAction->setEnabled(shouldEnable);
 }
 void ViewManager::moveActiveViewLeft()
@@ -341,7 +341,7 @@ void ViewManager::detachView(ViewContainer* container, QWidget* widgetView)
 
     TerminalDisplay * viewToDetach = qobject_cast<TerminalDisplay*>(widgetView);
 
-    if (!viewToDetach)
+    if (viewToDetach == nullptr)
         return;
 
     emit viewDetached(_sessionMap[viewToDetach]);
@@ -365,7 +365,7 @@ void ViewManager::sessionFinished()
 {
     // if this slot is called after the view manager's main widget
     // has been destroyed, do nothing
-    if (!_viewSplitter)
+    if (_viewSplitter == nullptr)
         return;
 
     Session* session = qobject_cast<Session*>(sender());
@@ -383,7 +383,7 @@ void ViewManager::sessionFinished()
 
     // This is needed to remove this controller from factory() in
     // order to prevent BUG: 185466 - disappearing menu popup
-    if (_pluggedController)
+    if (_pluggedController != nullptr)
         emit unplugController(_pluggedController);
 }
 
@@ -433,9 +433,9 @@ void ViewManager::splitView(Qt::Orientation orientation)
 
     // ensure that the active view is focused after the split / unsplit
     ViewContainer* activeContainer = _viewSplitter->activeContainer();
-    QWidget* activeView = activeContainer ? activeContainer->activeView() : 0;
+    QWidget* activeView = activeContainer != nullptr ? activeContainer->activeView() : 0;
 
-    if (activeView)
+    if (activeView != nullptr)
         activeView->setFocus(Qt::OtherFocusReason);
 }
 void ViewManager::removeContainer(ViewContainer* container)
@@ -495,7 +495,7 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     connect(view , &Konsole::TerminalDisplay::destroyed , controller , &Konsole::SessionController::deleteLater);
 
     // if this is the first controller created then set it as the active controller
-    if (!_pluggedController)
+    if (_pluggedController == nullptr)
         controllerChanged(controller);
 
     return controller;
@@ -580,7 +580,7 @@ void ViewManager::createView(Session* session)
 
     if (_newTabBehavior == PutNewTabAfterCurrentTab) {
         QWidget* view = activeView();
-        if (view) {
+        if (view != nullptr) {
             QList<QWidget*> views =  _viewSplitter->activeContainer()->views();
             index = views.indexOf(view) + 1;
         }
@@ -645,11 +645,11 @@ void ViewManager::containerMoveViewRequest(int index, int id, bool& moved, Tabbe
     ViewContainer* container = qobject_cast<ViewContainer*>(sender());
     SessionController* controller = qobject_cast<SessionController*>(ViewProperties::propertiesById(id));
 
-    if (!controller)
+    if (controller == nullptr)
         return;
 
     // do not move the last tab in a split view.
-    if (sourceTabbedContainer) {
+    if (sourceTabbedContainer != nullptr) {
         QPointer<ViewContainer> sourceContainer = qobject_cast<ViewContainer*>(sourceTabbedContainer);
 
         if (_viewSplitter->containers().contains(sourceContainer)) {
@@ -672,7 +672,7 @@ void ViewManager::containerMoveViewRequest(int index, int id, bool& moved, Tabbe
 void ViewManager::setNavigationMethod(NavigationMethod method)
 {
     Q_ASSERT(_actionCollection);
-    if (!_actionCollection) {
+    if (_actionCollection == nullptr) {
         return;
     }
     _navigationMethod = method;
@@ -692,28 +692,28 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
     QAction* action;
 
     action = collection->action("next-view");
-    if (action) action->setEnabled(enable);
+    if (action != nullptr) action->setEnabled(enable);
 
     action = collection->action("previous-view");
-    if (action) action->setEnabled(enable);
+    if (action != nullptr) action->setEnabled(enable);
 
     action = collection->action("last-tab");
-    if (action) action->setEnabled(enable);
+    if (action != nullptr) action->setEnabled(enable);
 
     action = collection->action("split-view-left-right");
-    if (action) action->setEnabled(enable);
+    if (action != nullptr) action->setEnabled(enable);
 
     action = collection->action("split-view-top-bottom");
-    if (action) action->setEnabled(enable);
+    if (action != nullptr) action->setEnabled(enable);
 
     action = collection->action("rename-session");
-    if (action) action->setEnabled(enable);
+    if (action != nullptr) action->setEnabled(enable);
 
     action = collection->action("move-view-left");
-    if (action) action->setEnabled(enable);
+    if (action != nullptr) action->setEnabled(enable);
 
     action = collection->action("move-view-right");
-    if (action) action->setEnabled(enable);
+    if (action != nullptr) action->setEnabled(enable);
 }
 
 ViewManager::NavigationMethod ViewManager::navigationMethod() const
@@ -723,7 +723,7 @@ ViewManager::NavigationMethod ViewManager::navigationMethod() const
 
 void ViewManager::containerViewsChanged(QObject* container)
 {
-    if (_viewSplitter && container == _viewSplitter->activeContainer()) {
+    if ((_viewSplitter != nullptr) && container == _viewSplitter->activeContainer()) {
         emit viewPropertiesChanged(viewProperties());
     }
 }
@@ -739,12 +739,12 @@ void ViewManager::viewDestroyed(QWidget* view)
     // 2. if the session has no views left, close it
     Session* session = _sessionMap[ display ];
     _sessionMap.remove(display);
-    if (session) {
+    if (session != nullptr) {
         if (session->views().count() == 0)
             session->close();
     }
     //we only update the focus if the splitter is still alive
-    if (_viewSplitter) {
+    if (_viewSplitter != nullptr) {
         updateDetachViewState();
     }
     // The below causes the menus  to be messed up
@@ -765,7 +765,7 @@ const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr profile
 {
     const ColorScheme* colorScheme = ColorSchemeManager::instance()->
                                      findColorScheme(profile->colorScheme());
-    if (!colorScheme)
+    if (colorScheme == nullptr)
         colorScheme = ColorSchemeManager::instance()->defaultColorScheme();
     Q_ASSERT(colorScheme);
 
@@ -956,7 +956,7 @@ void ViewManager::restoreSessions(const KConfigGroup& group)
     foreach(int id, ids) {
         Session* session = SessionManager::instance()->idToSession(id);
 
-        if (!session) {
+        if (session == nullptr) {
             qWarning() << "Unable to load session with id" << id;
             // Force a creation of a default session below
             ids.clear();
@@ -970,7 +970,7 @@ void ViewManager::restoreSessions(const KConfigGroup& group)
             display = qobject_cast<TerminalDisplay*>(activeView());
     }
 
-    if (display) {
+    if (display != nullptr) {
         _viewSplitter->activeContainer()->setActiveView(display);
         display->setFocus(Qt::OtherFocusReason);
     }
@@ -1071,7 +1071,7 @@ void ViewManager::closeTabFromContainer(ViewContainer* container, QWidget* tab)
 {
     SessionController* controller = qobject_cast<SessionController*>(container->viewProperties(tab));
     Q_ASSERT(controller);
-    if (controller)
+    if (controller != nullptr)
         controller->closeSession();
 }
 

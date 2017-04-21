@@ -45,7 +45,7 @@ int TerminalDisplayAccessible::characterCount() const
 
 int TerminalDisplayAccessible::cursorPosition() const
 {
-    if (!display()->screenWindow())
+    if (display()->screenWindow() == nullptr)
         return 0;
 
     int offset = display()->_usedColumns * display()->screenWindow()->screen()->getCursorY();
@@ -56,7 +56,7 @@ void TerminalDisplayAccessible::selection(int selectionIndex, int* startOffset, 
 {
     *startOffset = 0;
     *endOffset = 0;
-    if (!display()->screenWindow() || selectionIndex)
+    if ((display()->screenWindow() == nullptr) || (selectionIndex != 0))
         return;
 
     int startLine;
@@ -73,7 +73,7 @@ void TerminalDisplayAccessible::selection(int selectionIndex, int* startOffset, 
 
 int TerminalDisplayAccessible::selectionCount() const
 {
-    if (!display()->screenWindow())
+    if (display()->screenWindow() == nullptr)
         return 0;
 
     int startLine;
@@ -89,7 +89,7 @@ QString TerminalDisplayAccessible::visibleText() const
 {
     // This function should be const to allow calling it from const interface functions.
     TerminalDisplay* display = const_cast<TerminalDisplayAccessible*>(this)->display();
-    if (!display->screenWindow())
+    if (display->screenWindow() == nullptr)
         return QString();
 
     return display->screenWindow()->screen()->text(0, display->_usedColumns * display->_usedLines, true);
@@ -97,7 +97,7 @@ QString TerminalDisplayAccessible::visibleText() const
 
 void TerminalDisplayAccessible::addSelection(int startOffset, int endOffset)
 {
-    if (!display()->screenWindow())
+    if (display()->screenWindow() == nullptr)
         return;
     display()->screenWindow()->setSelectionStart(columnForOffset(startOffset), lineForOffset(startOffset), false);
     display()->screenWindow()->setSelectionEnd(columnForOffset(endOffset), lineForOffset(endOffset));
@@ -130,7 +130,7 @@ int TerminalDisplayAccessible::offsetAtPoint(const QPoint& point) const
 
 void TerminalDisplayAccessible::removeSelection(int selectionIndex)
 {
-    if (!display()->screenWindow() || selectionIndex)
+    if ((display()->screenWindow() == nullptr) || (selectionIndex != 0))
         return;
     display()->screenWindow()->clearSelection();
 }
@@ -144,7 +144,7 @@ void TerminalDisplayAccessible::scrollToSubstring(int startIndex, int endIndex)
 
 void TerminalDisplayAccessible::setCursorPosition(int position)
 {
-    if (!display()->screenWindow())
+    if (display()->screenWindow() == nullptr)
         return;
 
     display()->screenWindow()->screen()->setCursorYX(lineForOffset(position), columnForOffset(position));
@@ -168,7 +168,7 @@ void TerminalDisplayAccessible::setSelection(int selectionIndex, int startOffset
 
 QString TerminalDisplayAccessible::text(int startOffset, int endOffset) const
 {
-    if (!display()->screenWindow()) {
+    if (display()->screenWindow() == nullptr) {
         return QString();
     }
 

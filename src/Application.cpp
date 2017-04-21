@@ -523,7 +523,7 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
 
 void Application::startBackgroundMode(MainWindow* window)
 {
-    if (_backgroundInstance) {
+    if (_backgroundInstance != nullptr) {
         return;
     }
 
