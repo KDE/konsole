@@ -35,6 +35,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // Konsole
 #include "ProfileReader.h"
@@ -327,8 +328,10 @@ QString ProfileManager::saveProfile(Profile::Ptr profile)
 
     QString newPath = writer->getPath(profile);
 
-    writer->writeProfile(newPath, profile);
-
+    if (!writer->writeProfile(newPath, profile)) {
+        KMessageBox::sorry(0,
+                           i18n("Konsole does not have permission to save this profile to %1", newPath));
+    }
     delete writer;
 
     return newPath;

@@ -72,6 +72,10 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile::Ptr pr
 {
     KConfig config(path, KConfig::NoGlobals);
 
+    if (!config.isConfigWritable(false)) {
+        return false;
+    }
+
     KConfigGroup general = config.group(GENERAL_GROUP);
 
     // Parent profile if set, when loading the profile in future, the parent
