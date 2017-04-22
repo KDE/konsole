@@ -329,9 +329,8 @@ NullProcessInfo::NullProcessInfo(int aPid, const QString& /*titleFormat*/)
 {
 }
 
-bool NullProcessInfo::readProcessInfo(int /*pid*/)
+void NullProcessInfo::readProcessInfo(int /*pid*/)
 {
-    return false;
 }
 
 bool NullProcessInfo::readCurrentDir(int /*pid*/)
@@ -350,18 +349,16 @@ UnixProcessInfo::UnixProcessInfo(int aPid, const QString& titleFormat)
     setUserNameRequired(titleFormat.contains(QLatin1String("%u")));
 }
 
-bool UnixProcessInfo::readProcessInfo(int aPid)
+void UnixProcessInfo::readProcessInfo(int aPid)
 {
     // prevent _arguments from growing longer and longer each time this
     // method is called.
     clearArguments();
 
-    bool ok = readProcInfo(aPid);
-    if (ok) {
-        ok |= readArguments(aPid);
-        ok |= readCurrentDir(aPid);
+    if (readProcInfo(aPid)) {
+        readArguments(aPid);
+        readCurrentDir(aPid);
     }
-    return ok;
 }
 
 void UnixProcessInfo::readUserName()

@@ -218,7 +218,7 @@ protected:
      *
      * @param pid The process id of the process to read
      */
-    virtual bool readProcessInfo(int pid) = 0;
+    virtual void readProcessInfo(int pid) = 0;
 
     /**
      * Determine the current directory of the process.
@@ -306,7 +306,7 @@ public:
      */
     explicit NullProcessInfo(int pid, const QString& titleFormat);
 protected:
-    bool readProcessInfo(int pid) Q_DECL_OVERRIDE;
+    void readProcessInfo(int pid) Q_DECL_OVERRIDE;
     bool readCurrentDir(int pid) Q_DECL_OVERRIDE;
     void readUserName(void) Q_DECL_OVERRIDE;
 };
@@ -330,7 +330,7 @@ protected:
      * Implementation of ProcessInfo::readProcessInfo(); calls the
      * four private methods below in turn.
      */
-    bool readProcessInfo(int pid ) Q_DECL_OVERRIDE;
+    void readProcessInfo(int pid ) Q_DECL_OVERRIDE;
 
     void readUserName(void) Q_DECL_OVERRIDE;
 
