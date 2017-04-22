@@ -918,6 +918,9 @@ void ViewManager::saveSessions(KConfigGroup& group)
     // first: sessions in the active container, preserving the order
     ViewContainer* container = _viewSplitter->activeContainer();
     Q_ASSERT(container);
+    if (container == nullptr) {
+        return;
+    }
     TerminalDisplay* activeview = qobject_cast<TerminalDisplay*>(container->activeView());
 
     QListIterator<QWidget*> viewIter(container->views());
