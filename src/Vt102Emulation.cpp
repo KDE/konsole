@@ -1024,7 +1024,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
         states |= KeyboardTranslator::ApplicationKeypadState;
 
     // check flow control state
-    if (modifiers & Qt::ControlModifier != 0u) {
+    if ((modifiers & Qt::ControlModifier) != 0u) {
         switch (event->key()) {
         case Qt::Key_S:
             emit flowControlKeyPressed(true);
@@ -1050,17 +1050,17 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
         // Alt+[Character] results in Esc+[Character] being sent
         // (unless there is an entry defined for this particular combination
         //  in the keyboard modifier)
-        const bool wantsAltModifier = entry.modifiers() & entry.modifierMask() & Qt::AltModifier != 0u;
-        const bool wantsMetaModifier = entry.modifiers() & entry.modifierMask() & Qt::MetaModifier != 0u;
-        const bool wantsAnyModifier = entry.state() &
-                                entry.stateMask() & KeyboardTranslator::AnyModifierState != 0;
+        const bool wantsAltModifier = ((entry.modifiers() & entry.modifierMask() & Qt::AltModifier) != 0u);
+        const bool wantsMetaModifier = ((entry.modifiers() & entry.modifierMask() & Qt::MetaModifier) != 0u);
+        const bool wantsAnyModifier = ((entry.state() &
+                                entry.stateMask() & KeyboardTranslator::AnyModifierState) != 0);
 
-        if ( (modifiers & Qt::AltModifier != 0u) && !(wantsAltModifier || wantsAnyModifier)
+        if ( ((modifiers & Qt::AltModifier) != 0u) && !(wantsAltModifier || wantsAnyModifier)
              && !event->text().isEmpty() )
         {
             textToSend.prepend("\033");
         }
-        if ( (modifiers & Qt::MetaModifier != 0u) && !(wantsMetaModifier || wantsAnyModifier)
+        if ( ((modifiers & Qt::MetaModifier) != 0u) && !(wantsMetaModifier || wantsAnyModifier)
              && !event->text().isEmpty() )
         {
             textToSend.prepend("\030@s");

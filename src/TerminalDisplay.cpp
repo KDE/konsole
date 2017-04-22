@@ -2010,7 +2010,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
         bool selected =  _screenWindow->isSelected(pos.x(), pos.y());
 
         // Drag only when the Control key is held
-        if ((!_ctrlRequiredForDrag || (ev->modifiers() & Qt::ControlModifier != 0u)) && selected) {
+        if ((!_ctrlRequiredForDrag || ((ev->modifiers() & Qt::ControlModifier) != 0u)) && selected) {
             _dragInfo.state = diPending;
             _dragInfo.start = ev->pos();
         } else {
@@ -2125,11 +2125,11 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     // key is being held down, which overrides this.
     if (!_mouseMarks && !(ev->modifiers() & Qt::ShiftModifier)) {
         int button = 3;
-        if (ev->buttons() & Qt::LeftButton != 0u)
+        if ((ev->buttons() & Qt::LeftButton) != 0u)
             button = 0;
-        if (ev->buttons() & Qt::MidButton != 0u)
+        if ((ev->buttons() & Qt::MidButton) != 0u)
             button = 1;
-        if (ev->buttons() & Qt::RightButton != 0u)
+        if ((ev->buttons() & Qt::RightButton) != 0u)
             button = 2;
 
         emit mouseSignal(button,
@@ -2162,7 +2162,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     if (_actSel == 0) return;
 
 // don't extend selection while pasting
-    if (ev->buttons() & Qt::MidButton != 0u) return;
+    if ((ev->buttons() & Qt::MidButton) != 0u) return;
 
     extendSelection(ev->pos());
 }
@@ -2404,7 +2404,7 @@ void TerminalDisplay::updateLineProperties()
 void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)
 {
     if (_mouseMarks || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
-        const bool appendEnter = ev->modifiers() & Qt::ControlModifier != 0u;
+        const bool appendEnter = (ev->modifiers() & Qt::ControlModifier) != 0u;
 
         if (_middleClickPasteMode == Enum::PasteFromX11Selection) {
             pasteFromX11Selection(appendEnter);
