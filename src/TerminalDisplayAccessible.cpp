@@ -59,10 +59,10 @@ void TerminalDisplayAccessible::selection(int selectionIndex, int* startOffset, 
     if ((display()->screenWindow() == nullptr) || (selectionIndex != 0))
         return;
 
-    int startLine;
-    int startColumn;
-    int endLine;
-    int endColumn;
+    int startLine = 0;
+    int startColumn = 0;
+    int endLine = 0;
+    int endColumn = 0;
     display()->screenWindow()->getSelectionStart(startColumn, startLine);
     display()->screenWindow()->getSelectionEnd(endColumn, endLine);
     if ((startLine == endLine) && (startColumn == endColumn))
@@ -76,10 +76,10 @@ int TerminalDisplayAccessible::selectionCount() const
     if (display()->screenWindow() == nullptr)
         return 0;
 
-    int startLine;
-    int startColumn;
-    int endLine;
-    int endColumn;
+    int startLine = 0;
+    int startColumn = 0;
+    int endLine = 0;
+    int endColumn = 0;
     display()->screenWindow()->getSelectionStart(startColumn, startLine);
     display()->screenWindow()->getSelectionEnd(endColumn, endLine);
     return ((startLine == endLine) && (startColumn == endColumn)) ? 0 : 1;
