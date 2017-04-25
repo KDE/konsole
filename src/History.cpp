@@ -22,6 +22,7 @@
 #include "History.h"
 
 #include "konsoledebug.h"
+#include "KonsoleSettings.h"
 
 // System
 #include <stdlib.h>
@@ -70,15 +71,21 @@ HistoryFile::HistoryFile()
     // Determine the temp directory once
     // This class is called 3 times for each "unlimited" scrollback.
     // This has the down-side that users must restart to
-    // load changes (currently only 2 choices).
+    // load changes.
     if (!historyFileLocation.exists()) {
         KConfigGroup configGroup(KSharedConfig::openConfig(), "FileLocation");
         if (configGroup.readEntry("scrollbackUseCacheLocation", false)) {
             *historyFileLocation() = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+        } else if (configGroup.readEntry("scrollbackUseSpecifiedLocation", false)) {
+            const QUrl specifiedUrl = KonsoleSettings::scrollbackUseSpecifiedLocationDirectory();
+            *historyFileLocation() = specifiedUrl.path();
         } else {
             *historyFileLocation() = QDir::tempPath();
         }
-        QDir().mkpath(*historyFileLocation());
+        if (!QDir().mkpath(*historyFileLocation())) {
+            qCWarning(KonsoleDebug)<<"Unable to create scrollback folder "<<*historyFileLocation()<<" using "<<QDir::homePath();
+            *historyFileLocation() = QDir::homePath();
+        }
     }
     const QString tmpDir = *historyFileLocation();
     const QString tmpFormat = tmpDir + QLatin1Char('/') + QLatin1String("konsole-XXXXXX.history");

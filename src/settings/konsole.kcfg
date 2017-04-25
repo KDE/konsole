@@ -124,5 +124,13 @@
       <label>For scrollback files, use user's specific folder location</label>
       <default>false</default>
     </entry>
+    <entry name="scrollbackUseSpecifiedLocation" type="Bool">
+      <label>For scrollback files, use specified folder location</label>
+      <default>false</default>
+    </entry>
+    <entry name="scrollbackUseSpecifiedLocationDirectory" type="Url">
+      <label>For scrollback files, use this folder</label>
+      <default></default>
+    </entry>
   </group>
 </kcfg>

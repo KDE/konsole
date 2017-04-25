@@ -33,6 +33,7 @@ FileLocationSettings::FileLocationSettings(QWidget* aParent) : QWidget(aParent)
     // TODO: worth adding gauge on free disk space?
     useSystemLocationText->setText(QDir::tempPath());
     useUsersHomeLocationText->setText(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
+    kcfg_scrollbackUseSpecifiedLocationDirectory->setMode(KFile::Directory);
 
 }
 
