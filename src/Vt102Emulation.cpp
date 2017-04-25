@@ -280,7 +280,7 @@ void Vt102Emulation::initTokenizer()
 #define epe( )     (p >=  3  && s[2] == '!')
 #define egt( )     (p >=  3  && s[2] == '>')
 #define Xpe        (tokenBufferPos >= 2 && tokenBuffer[1] == ']')
-#define Xte        (Xpe      && (cc ==  7 || cc == 33))
+#define Xte        (Xpe      && (cc ==  7 || cc == 27))
 #define ces(C)     (cc < 256 && (charClass[cc] & (C)) == (C) && !Xte)
 
 #define CNTL(c) ((c)-'@')
