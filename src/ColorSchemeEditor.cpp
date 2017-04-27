@@ -235,10 +235,10 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme, bool isNewScheme)
     _colors = new ColorScheme(*scheme);
 
     if (_isNewScheme) {
-        setWindowTitle(i18n("New Color Scheme"));
-        setDescription(i18n("New Color Scheme"));
+        setWindowTitle(i18nc("@title:window", "New Color Scheme"));
+        setDescription(QStringLiteral("New Color Scheme"));
     } else {
-        setWindowTitle(i18n("Edit Color Scheme"));
+        setWindowTitle(i18nc("@title:window", "Edit Color Scheme"));
     }
 
     // setup description edit

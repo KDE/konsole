@@ -98,7 +98,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
                      QStringLiteral(KONSOLE_VERSION),
                      i18nc("@title", "Terminal emulator"),
                      KAboutLicense::GPL_V2,
-                     i18n("(c) 1997-2017, The Konsole Developers"),
+                     i18nc("@info:credit", "(c) 1997-2017, The Konsole Developers"),
                      QStringLiteral(),
                      QStringLiteral("https://konsole.kde.org/"));
     fillAboutData(about);

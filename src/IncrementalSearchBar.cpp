@@ -131,9 +131,9 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     _highlightMatches->setToolTip(i18nc("@info:tooltip", "Sets whether matching text should be highlighted"));
     connect(_highlightMatches, &QAction::toggled, this, &Konsole::IncrementalSearchBar::highlightMatchesToggled);
 
-    _reverseSearch = optionsMenu->addAction(i18n("Search backwards"));
+    _reverseSearch = optionsMenu->addAction(i18nc("@item:inmenu", "Search backwards"));
     _reverseSearch->setCheckable(true);
-    _reverseSearch->setToolTip(i18n("Sets whether search should start from the bottom"));
+    _reverseSearch->setToolTip(i18nc("@info:tooltip", "Sets whether search should start from the bottom"));
     connect(_reverseSearch, &QAction::toggled, this, &Konsole::IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting);
     updateButtonsAccordingToReverseSearchSetting();
     setOptions();
@@ -155,12 +155,12 @@ void IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting()
     Q_ASSERT(_reverseSearch);
     if (_reverseSearch->isChecked()) {
         _searchFromButton->setText(i18nc("@action:button Search from bottom", "From bottom"));
-        _searchFromButton->setToolTip(i18n("Search for the current search phrase from the bottom"));
+        _searchFromButton->setToolTip(i18nc("@info:tooltip", "Search for the current search phrase from the bottom"));
         _findNextButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up-search")));
         _findPreviousButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down-search")));
     } else {
         _searchFromButton->setText(i18nc("@action:button Search from top", "From top"));
-        _searchFromButton->setToolTip(i18n("Search for the current search phrase from the top"));
+        _searchFromButton->setToolTip(i18nc("@info:tooltip", "Search for the current search phrase from the top"));
         _findNextButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down-search")));
         _findPreviousButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up-search")));
     }

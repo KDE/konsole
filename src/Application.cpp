@@ -73,7 +73,7 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
                                         i18nc("@info:shell", "Start Konsole in the background and bring to the front"
                                               " when Ctrl+Shift+F12 (by default) is pressed")));
     // --nofork is a compatibility alias for separate
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("separate") << QStringLiteral("nofork"), i18n("Run in a separate process")));
+    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("separate") << QStringLiteral("nofork"), i18nc("@info:shell", "Run in a separate process")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("show-menubar"), i18nc("@info:shell", "Show the menubar, overriding the default setting")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-menubar"), i18nc("@info:shell", "Hide the menubar, overriding the default setting")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("show-tabbar"), i18nc("@info:shell", "Show the tabbar, overriding the default setting")));
