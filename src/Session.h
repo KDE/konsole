@@ -35,7 +35,7 @@
 
 // Konsole
 #include "konsoleprivate_export.h"
-#include "config-konsole.h"
+#include "config-konsole.h" //krazy:exclude=includes
 #include "Shortcut_p.h"
 
 class QColor;
