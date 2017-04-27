@@ -26,7 +26,6 @@
 #include <QSignalMapper>
 #include <QStringList>
 #include <QAction>
-#include <QtDBus>
 
 // KDE
 #include <KAcceleratorManager>
