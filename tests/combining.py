@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#// krazy:excludeall=copyright,license
 
 '''
 Generates an endless amount of combining characters
