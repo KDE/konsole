@@ -1,3 +1,6 @@
+// krazy:excludeall=copyright,license
+// krazy does not recognize Unicode License/Copyright see COPYING.Unicode
+
 /* $XFree86: xc/programs/xterm/wcwidth.characters,v 1.9 2006/06/19 00:36:52 dickey Exp $ */
 
 /*
