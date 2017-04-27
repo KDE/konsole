@@ -26,7 +26,7 @@
 #include <kde_terminal_interface.h>
 
 // Qt
-#include <QtCore/QVariantList>
+#include <QVariantList>
 
 // Konsole
 #include "Profile.h"

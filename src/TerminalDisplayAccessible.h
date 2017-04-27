@@ -25,8 +25,8 @@
 //#include <QtGlobal>
 
 
-#include <QtGui/QAccessibleTextInterface>
-#include <QtWidgets/QAccessibleWidget>
+#include <QAccessibleTextInterface>
+#include <QAccessibleWidget>
 
 #include "TerminalDisplay.h"
 #include "ScreenWindow.h"

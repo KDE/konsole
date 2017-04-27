@@ -21,11 +21,11 @@
 #define VIEWPROPERTIES_H
 
 // Qt
-#include <QtGui/QIcon>
-#include <QtCore/QObject>
-#include <QtCore/QHash>
-#include <QtCore/QMimeData>
-#include <QtCore/QUrl>
+#include <QIcon>
+#include <QObject>
+#include <QHash>
+#include <QMimeData>
+#include <QUrl>
 
 // Konsole
 #include "konsoleprivate_export.h"

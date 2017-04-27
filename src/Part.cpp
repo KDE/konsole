@@ -21,10 +21,10 @@
 #include "Part.h"
 
 // Qt
-#include <QtCore/QStringList>
-#include <QtCore/QDir>
-#include <QtGui/QKeyEvent>
-#include <QtCore/QUrl>
+#include <QStringList>
+#include <QDir>
+#include <QKeyEvent>
+#include <QUrl>
 
 // KDE
 #include <QAction>

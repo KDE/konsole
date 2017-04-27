@@ -24,7 +24,7 @@
 #include "Screen.h"
 
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 // Konsole
 #include "konsole_wcwidth.h"

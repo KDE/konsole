@@ -25,14 +25,13 @@
 #define SESSION_H
 
 // Qt
-#include <QtCore/QStringList>
-#include <QtCore/QHash>
-//#include <QtCore/QByteRef>
-#include <QtCore/QUuid>
-#include <QtCore/QSize>
-#include <QtCore/QProcess>
+#include <QStringList>
+#include <QHash>
+#include <QUuid>
+#include <QSize>
+#include <QProcess>
 #include <QWidget>
-#include <QtCore/QUrl>
+#include <QUrl>
 
 // Konsole
 #include "konsoleprivate_export.h"

@@ -25,9 +25,9 @@
 #include <sys/mman.h>
 
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QVector>
-#include <QtCore/QTemporaryFile>
+#include <QList>
+#include <QVector>
+#include <QTemporaryFile>
 
 #include "konsoleprivate_export.h"
 

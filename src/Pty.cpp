@@ -28,7 +28,7 @@
 #include <signal.h>
 
 // Qt
-#include <QtCore/QStringList>
+#include <QStringList>
 #include <qplatformdefs.h>
 
 // KDE

@@ -21,7 +21,7 @@
 #include "TabTitleFormatButton.h"
 
 // Qt
-#include <QtCore/QList>
+#include <QList>
 #include <QMenu>
 
 // KDE

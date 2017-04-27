@@ -22,7 +22,7 @@
 
 // Qt
 #include <QWidget>
-#include <QtCore/QBitArray>
+#include <QBitArray>
 
 class QAction;
 class QTimer;

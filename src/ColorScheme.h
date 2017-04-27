@@ -23,8 +23,8 @@
 #define COLORSCHEME_H
 
 // Qt
-#include <QtCore/QMetaType>
-#include <QtCore/QSharedData>
+#include <QMetaType>
+#include <QSharedData>
 
 // Konsole
 #include "CharacterColor.h"

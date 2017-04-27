@@ -22,8 +22,8 @@
 #define TERMINALDISPLAY_H
 
 // Qt
-#include <QtGui/QColor>
-#include <QtCore/QPointer>
+#include <QColor>
+#include <QPointer>
 #include <QWidget>
 
 // Konsole

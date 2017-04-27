@@ -23,7 +23,7 @@
 #define TERMINAL_CHARACTER_DECODER_H
 
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 // Konsole
 #include "Character.h"

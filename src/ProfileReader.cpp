@@ -23,8 +23,8 @@
 #include "ProfileReader.h"
 
 // Qt
-#include <QtCore/QFile>
-#include <QtCore/QDir>
+#include <QFile>
+#include <QDir>
 
 // KDE
 #include <KConfig>

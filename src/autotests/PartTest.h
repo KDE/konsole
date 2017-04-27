@@ -20,7 +20,7 @@
 #ifndef PARTTEST_H
 #define PARTTEST_H
 
-#include <QtCore/QEventLoop>
+#include <QEventLoop>
 
 #include <kde_terminal_interface.h>
 #include <KParts/Part>

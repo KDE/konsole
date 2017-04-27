@@ -25,9 +25,9 @@
 #include "konsoledebug.h"
 
 // Qt
-#include <QtCore/QStringList>
-#include <QtCore/QSignalMapper>
-#include <QtCore/QTextCodec>
+#include <QStringList>
+#include <QSignalMapper>
+#include <QTextCodec>
 
 // KDE
 #include <KConfig>

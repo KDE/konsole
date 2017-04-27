@@ -32,12 +32,12 @@
 #include <sys/param.h>
 
 // Qt
-#include <QtCore/QDir>
-#include <QtCore/QFileInfo>
-#include <QtCore/QFlags>
-#include <QtCore/QTextStream>
-#include <QtCore/QStringList>
-#include <QtNetwork/QHostInfo>
+#include <QDir>
+#include <QFileInfo>
+#include <QFlags>
+#include <QTextStream>
+#include <QStringList>
+#include <QHostInfo>
 
 // KDE
 #include <KConfigGroup>

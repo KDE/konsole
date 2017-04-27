@@ -23,7 +23,7 @@
 #define VIEWSPLITTER_H
 
 // Qt
-#include <QtCore/QList>
+#include <QList>
 #include <QSplitter>
 
 class QFocusEvent;

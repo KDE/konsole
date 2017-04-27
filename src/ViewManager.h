@@ -21,9 +21,9 @@
 #define VIEWMANAGER_H
 
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QObject>
-#include <QtCore/QPointer>
+#include <QHash>
+#include <QObject>
+#include <QPointer>
 
 // Konsole
 #include "Profile.h"

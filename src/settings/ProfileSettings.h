@@ -22,7 +22,7 @@
 
 // Qt
 #include <QStyledItemDelegate>
-#include <QtCore/QSet>
+#include <QSet>
 
 // KDE
 

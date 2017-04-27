@@ -24,7 +24,7 @@
 #include <QtDBus/QtDBus>
 #include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusReply>
-#include <QtCore/QTextCodec>
+#include <QTextCodec>
 
 #include <unistd.h>
 

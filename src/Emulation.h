@@ -24,9 +24,9 @@
 #define EMULATION_H
 
 // Qt
-#include <QtCore/QSize>
-#include <QtCore/QTextCodec>
-#include <QtCore/QTimer>
+#include <QSize>
+#include <QTextCodec>
+#include <QTimer>
 
 // Konsole
 #include "konsoleprivate_export.h"

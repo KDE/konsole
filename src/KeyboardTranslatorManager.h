@@ -23,8 +23,8 @@
 #define KEYBOARDTRANSLATOR_MANAGER_H
 
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QStringList>
+#include <QHash>
+#include <QStringList>
 
 // Konsole
 #include "konsoleprivate_export.h"

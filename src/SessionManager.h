@@ -23,8 +23,8 @@
 #define SESSIONMANAGER_H
 
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QList>
+#include <QHash>
+#include <QList>
 
 // Konsole
 #include "Profile.h"

@@ -21,13 +21,13 @@
 #define FILTER_H
 
 // Qt
-#include <QtCore/QFileInfo>
-#include <QtCore/QList>
-#include <QtCore/QObject>
-#include <QtCore/QPointer>
-#include <QtCore/QStringList>
-#include <QtCore/QRegularExpression>
-#include <QtCore/QMultiHash>
+#include <QFileInfo>
+#include <QList>
+#include <QObject>
+#include <QPointer>
+#include <QStringList>
+#include <QRegularExpression>
+#include <QMultiHash>
 
 // Konsole
 #include "Character.h"

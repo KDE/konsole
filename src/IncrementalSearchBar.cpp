@@ -23,8 +23,8 @@
 // Qt
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QtGui/QKeyEvent>
-#include <QtCore/QTimer>
+#include <QKeyEvent>
+#include <QTimer>
 #include <QToolButton>
 #include <QMenu>
 

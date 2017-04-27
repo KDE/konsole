@@ -28,23 +28,23 @@
 
 // Qt
 #include <QApplication>
-#include <QtGui/QClipboard>
-#include <QtGui/QKeyEvent>
-#include <QtCore/QEvent>
-#include <QtCore/QFileInfo>
+#include <QClipboard>
+#include <QKeyEvent>
+#include <QEvent>
+#include <QFileInfo>
 #include <QGridLayout>
 #include <QAction>
 #include <QFontDatabase>
 #include <QLabel>
 #include <QMimeData>
-#include <QtGui/QPainter>
-#include <QtGui/QPixmap>
+#include <QPainter>
+#include <QPixmap>
 #include <QScrollBar>
 #include <QStyle>
-#include <QtCore/QTimer>
+#include <QTimer>
 #include <QDrag>
 #include <QDesktopServices>
-#include <QtGui/QAccessible>
+#include <QAccessible>
 
 // KDE
 #include <KShell>

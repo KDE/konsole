@@ -22,7 +22,7 @@
 #ifndef SHORTCUT_H
 #define SHORTCUT_H
 
-#include <QtCore/qnamespace.h>
+#include <qnamespace.h>
 
 namespace Konsole
 {

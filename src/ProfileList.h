@@ -21,9 +21,9 @@
 #define PROFILELIST_H
 
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QSet>
-#include <QtCore/QObject>
+#include <QList>
+#include <QSet>
+#include <QObject>
 
 // Konsole
 #include "Profile.h"

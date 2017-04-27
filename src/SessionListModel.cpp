@@ -25,7 +25,7 @@
 // KDE
 #include <KLocalizedString>
 
-#include <QtGui/QIcon>
+#include <QIcon>
 
 // Konsole
 #include "Session.h"

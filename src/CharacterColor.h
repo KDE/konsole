@@ -24,7 +24,7 @@
 #define CHARACTERCOLOR_H
 
 // Qt
-#include <QtGui/QColor>
+#include <QColor>
 
 namespace Konsole
 {

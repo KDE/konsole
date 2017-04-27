@@ -23,7 +23,7 @@
 #define EXTENDEDCHARTABLE_H
 
 // Qt
-#include <QtCore/QHash>
+#include <QHash>
 
 namespace Konsole
 {

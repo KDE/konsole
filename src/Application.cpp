@@ -21,9 +21,9 @@
 #include "Application.h"
 
 // Qt
-#include <QtCore/QHashIterator>
-#include <QtCore/QFileInfo>
-#include <QtCore/QDir>
+#include <QHashIterator>
+#include <QFileInfo>
+#include <QDir>
 #include <QCommandLineParser>
 #include <QStandardPaths>
 

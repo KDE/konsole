@@ -25,10 +25,10 @@
 #include "konsoledebug.h"
 
 // Qt
-#include <QtCore/QDir>
-#include <QtCore/QFileInfo>
-#include <QtCore/QList>
-#include <QtCore/QString>
+#include <QDir>
+#include <QFileInfo>
+#include <QList>
+#include <QString>
 
 // KDE
 #include <KSharedConfig>

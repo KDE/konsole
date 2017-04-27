@@ -23,7 +23,7 @@
 #include "ProfileWriter.h"
 
 // Qt
-#include <QtCore/QFileInfo>
+#include <QFileInfo>
 
 // KDE
 #include <KConfig>

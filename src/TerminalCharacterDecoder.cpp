@@ -23,7 +23,7 @@
 #include "TerminalCharacterDecoder.h"
 
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 // Konsole
 #include "konsole_wcwidth.h"

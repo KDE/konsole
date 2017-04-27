@@ -21,8 +21,8 @@
 #define MAINWINDOW_H
 
 // Qt
-#include <QtCore/QPointer>
-#include <QtCore/QUrl>
+#include <QPointer>
+#include <QUrl>
 
 // KDE
 #include <KXmlGuiWindow>

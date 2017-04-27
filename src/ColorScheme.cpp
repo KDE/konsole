@@ -23,7 +23,7 @@
 #include "ColorScheme.h"
 
 // Qt
-#include <QtGui/QPainter>
+#include <QPainter>
 
 // KDE
 #include <KConfig>

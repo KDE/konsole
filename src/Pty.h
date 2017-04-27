@@ -24,7 +24,7 @@
 #define PTY_H
 
 // Qt
-#include <QtCore/QSize>
+#include <QSize>
 
 // KDE
 #include <KPtyProcess>

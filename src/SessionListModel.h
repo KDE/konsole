@@ -23,8 +23,8 @@
 #define SESSIONLISTMODEL_H
 
 // Qt
-#include <QtCore/QAbstractListModel>
-#include <QtCore/QVariant>
+#include <QAbstractListModel>
+#include <QVariant>
 
 namespace Konsole
 {

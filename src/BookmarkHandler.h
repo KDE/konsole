@@ -27,7 +27,7 @@
 // KDE
 #include <KBookmarkManager>
 
-#include <QtCore/QUrl>
+#include <QUrl>
 
 // Konsole
 #include "konsoleprivate_export.h"

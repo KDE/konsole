@@ -25,9 +25,9 @@
 #include "BookmarkHandler.h"
 
 // Qt
-#include <QtCore/QFileInfo>
-#include <QtCore/QStandardPaths>
-#include <QtCore/QDir>
+#include <QFileInfo>
+#include <QStandardPaths>
+#include <QDir>
 
 // KDE
 #include <KShell>

@@ -23,11 +23,10 @@
 #define KEYBOARDTRANSLATOR_H
 
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QList>
-#include <QtCore/QString>
-//#include <QtGui/QKeySequence>
-#include <QtCore/QMetaType>
+#include <QHash>
+#include <QList>
+#include <QString>
+#include <QMetaType>
 
 // Konsole
 #include "konsoleprivate_export.h"

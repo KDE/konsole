@@ -22,12 +22,12 @@
 #define SESSIONCONTROLLER_H
 
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QSet>
-#include <QtCore/QPointer>
-#include <QtCore/QString>
-#include <QtCore/QHash>
-#include <QtCore/QRegularExpression>
+#include <QList>
+#include <QSet>
+#include <QPointer>
+#include <QString>
+#include <QHash>
+#include <QRegularExpression>
 
 // KDE
 #include <KXMLGUIClient>

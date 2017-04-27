@@ -22,8 +22,8 @@
 
 // Qt
 #include <QAbstractItemDelegate>
-#include <QtCore/QHash>
-#include <QtCore/QPointer>
+#include <QHash>
+#include <QPointer>
 
 // KDE
 #include <QDialog>

@@ -28,9 +28,9 @@
 #include <unistd.h>
 
 // Qt
-#include <QtCore/QEvent>
-#include <QtCore/QTimer>
-#include <QtGui/QKeyEvent>
+#include <QEvent>
+#include <QTimer>
+#include <QKeyEvent>
 
 // KDE
 #include <KLocalizedString>

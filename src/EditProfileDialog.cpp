@@ -24,15 +24,15 @@
 #include <cmath>
 
 // Qt
-#include <QtGui/QBrush>
-#include <QtGui/QPainter>
+#include <QBrush>
+#include <QPainter>
 #include <QStandardItem>
-#include <QtCore/QTextCodec>
-#include <QtGui/QLinearGradient>
-#include <QtGui/QRadialGradient>
-#include <QtGui/QIcon>
-#include <QtCore/QTimer>
-#include <QtCore/QUrl>
+#include <QTextCodec>
+#include <QLinearGradient>
+#include <QRadialGradient>
+#include <QIcon>
+#include <QTimer>
+#include <QUrl>
 #include <QFontDialog>
 #include <QFileDialog>
 #include <QInputDialog>

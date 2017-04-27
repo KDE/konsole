@@ -21,12 +21,12 @@
 #include "ColorSchemeEditor.h"
 
 // Qt
-#include <QtGui/QFontMetrics>
-#include <QtCore/QFileInfo>
+#include <QFontMetrics>
+#include <QFileInfo>
 #include <QCompleter>
 #include <QFileSystemModel>
-#include <QtCore/QUrl>
-#include <QtGui/QIcon>
+#include <QUrl>
+#include <QIcon>
 #include <QFileDialog>
 #include <QImageReader>
 

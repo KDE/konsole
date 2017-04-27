@@ -21,7 +21,7 @@
 #define SHELLCOMMAND_H
 
 // Qt
-#include <QtCore/QStringList>
+#include <QStringList>
 
 // Konsole
 #include "konsoleprivate_export.h"

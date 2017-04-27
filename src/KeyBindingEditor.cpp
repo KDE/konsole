@@ -21,8 +21,8 @@
 #include "KeyBindingEditor.h"
 
 // Qt
-#include <QtGui/QKeyEvent>
-#include <QtGui/QIcon>
+#include <QKeyEvent>
+#include <QIcon>
 
 // KDE
 #include <KLocalizedString>

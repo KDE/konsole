@@ -24,11 +24,11 @@
 #define SCREEN_H
 
 // Qt
-#include <QtCore/QRect>
-#include <QtCore/QSet>
-#include <QtCore/QVector>
-#include <QtCore/QBitArray>
-#include <QtCore/QVarLengthArray>
+#include <QRect>
+#include <QSet>
+#include <QVector>
+#include <QBitArray>
+#include <QVarLengthArray>
 
 // Konsole
 #include "Character.h"

@@ -21,8 +21,8 @@
 #include "CharacterColorTest.h"
 
 // Qt
-#include <QtCore/QSize>
-#include <QtCore/QStringList>
+#include <QSize>
+#include <QStringList>
 
 // KDE
 #include <qtest.h>

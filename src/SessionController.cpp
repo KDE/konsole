@@ -28,14 +28,14 @@
 #include <QApplication>
 #include <QAction>
 #include <QMenu>
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QFileDialog>
 #include <QPainter>
 #include <QStandardPaths>
-#include <QtCore/QUrl>
-#include <QtGui/QIcon>
+#include <QUrl>
+#include <QIcon>
 
 // KDE
 #include <KActionMenu>

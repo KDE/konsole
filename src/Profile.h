@@ -23,11 +23,11 @@
 #define PROFILE_H
 
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QStringList>
-#include <QtCore/QVariant>
-#include <QtGui/QFont>
-#include <QtGui/QColor>
+#include <QHash>
+#include <QStringList>
+#include <QVariant>
+#include <QFont>
+#include <QColor>
 
 // Konsole
 #include "konsoleprivate_export.h"

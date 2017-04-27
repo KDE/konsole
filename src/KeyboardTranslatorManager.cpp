@@ -25,9 +25,9 @@
 #include "konsoledebug.h"
 
 // Qt
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QDir>
 #include <QStandardPaths>
 
 using namespace Konsole;

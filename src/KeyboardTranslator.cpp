@@ -29,10 +29,10 @@
 #include <stdio.h>
 
 // Qt
-#include <QtCore/QBuffer>
-#include <QtCore/QTextStream>
-#include <QtCore/QRegularExpression>
-#include <QtGui/QKeySequence>
+#include <QBuffer>
+#include <QTextStream>
+#include <QRegularExpression>
+#include <QKeySequence>
 
 // KDE
 #include <KLocalizedString>

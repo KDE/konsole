@@ -20,7 +20,7 @@
 #ifndef PROFILETEST_H
 #define PROFILETEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace Konsole
 {

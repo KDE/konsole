@@ -23,13 +23,13 @@
 #define PROFILEMANAGER_H
 
 // Qt
-#include <QtGui/QKeySequence>
-#include <QtCore/QHash>
-#include <QtCore/QList>
-#include <QtCore/QSet>
-#include <QtCore/QStringList>
-#include <QtCore/QVariant>
-#include <QtCore/QStack>
+#include <QKeySequence>
+#include <QHash>
+#include <QList>
+#include <QSet>
+#include <QStringList>
+#include <QVariant>
+#include <QStack>
 
 // Konsole
 #include "Profile.h"

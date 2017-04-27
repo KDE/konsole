@@ -23,10 +23,10 @@
 #include <config-konsole.h>
 
 // Qt
-#include <QtCore/QSignalMapper>
-#include <QtCore/QStringList>
+#include <QSignalMapper>
+#include <QStringList>
 #include <QAction>
-#include <QtDBus/QtDBus>
+#include <QtDBus>
 
 // KDE
 #include <KAcceleratorManager>

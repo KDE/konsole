@@ -21,9 +21,9 @@
 #define SCREENWINDOW_H
 
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QPoint>
-#include <QtCore/QRect>
+#include <QObject>
+#include <QPoint>
+#include <QRect>
 
 // Konsole
 #include "Character.h"

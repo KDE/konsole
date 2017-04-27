@@ -21,8 +21,8 @@
 #include "ProfileSettings.h"
 
 // Qt
-#include <QtCore/QFileInfo>
-#include <QtCore/QStandardPaths>
+#include <QFileInfo>
+#include <QStandardPaths>
 #include <QStandardItem>
 
 // KDE

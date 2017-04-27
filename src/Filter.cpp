@@ -25,13 +25,13 @@
 // Qt
 #include <QAction>
 #include <QApplication>
-#include <QtGui/QClipboard>
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QMimeDatabase>
-#include <QtCore/QString>
-#include <QtCore/QTextStream>
-#include <QtCore/QUrl>
+#include <QClipboard>
+#include <QDir>
+#include <QFile>
+#include <QMimeDatabase>
+#include <QString>
+#include <QTextStream>
+#include <QUrl>
 
 // KDE
 #include <KLocalizedString>

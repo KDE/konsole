@@ -22,7 +22,7 @@
 #include "ShellCommandTest.h"
 
 // Qt
-#include <QtCore/QStringList>
+#include <QStringList>
 
 // KDE
 #include <qtest.h>

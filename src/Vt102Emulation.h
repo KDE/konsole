@@ -24,7 +24,7 @@
 #define VT102EMULATION_H
 
 // Qt
-#include <QtCore/QHash>
+#include <QHash>
 
 // Konsole
 #include "Emulation.h"

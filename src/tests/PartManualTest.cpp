@@ -21,7 +21,7 @@
 #include "PartManualTest.h"
 
 // Qt
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 #include <qtestkeyboard.h>
 #include <QMenu>
 #include <QAction>

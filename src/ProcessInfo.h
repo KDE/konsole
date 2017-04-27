@@ -21,10 +21,10 @@
 #define PROCESSINFO_H
 
 // Qt
-#include <QtCore/QFile>
-#include <QtCore/QMap>
-#include <QtCore/QString>
-#include <QtCore/QVector>
+#include <QFile>
+#include <QMap>
+#include <QString>
+#include <QVector>
 
 namespace Konsole
 {

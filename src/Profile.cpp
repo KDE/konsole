@@ -23,8 +23,8 @@
 #include "Profile.h"
 
 // Qt
-#include <QtCore/QTextCodec>
-#include <QtCore/QRegularExpression>
+#include <QTextCodec>
+#include <QRegularExpression>
 
 // KDE
 #include <KLocalizedString>
