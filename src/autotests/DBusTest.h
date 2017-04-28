@@ -21,9 +21,9 @@
 #define DBUSTEST_H
 
 #include <QTest>
-#include <QtDBus/QtDBus>
-#include <QtDBus/QDBusInterface>
-#include <QtDBus/QDBusReply>
+#include <QtDBus>
+#include <QDBusInterface>
+#include <QDBusReply>
 #include <QTextCodec>
 
 #include <unistd.h>

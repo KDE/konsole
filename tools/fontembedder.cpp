@@ -24,8 +24,8 @@
 #include <iomanip>
 
 // Qt
-#include <QtCore/QFile>
-#include <QtCore/QTextStream>
+#include <QFile>
+#include <QTextStream>
 #include <QDebug>
 
 using namespace std;
