@@ -44,7 +44,7 @@ QString KDE4ProfileWriter::getPath(const Profile::Ptr profile)
     // the Konsole part can write/save profiles
     static const QString localDataLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole");
 
-    return localDataLocation % "/" % profile->untranslatedName() % ".profile";
+    return localDataLocation % QLatin1String("/") % profile->untranslatedName() % QLatin1String(".profile");
 }
 void KDE4ProfileWriter::writeProperties(KConfig& config,
                                         const Profile::Ptr profile,
@@ -61,7 +61,7 @@ void KDE4ProfileWriter::writeProperties(KConfig& config,
             }
 
             if (profile->isPropertySet(properties->property))
-                group.writeEntry(QString(properties->name),
+                group.writeEntry(QLatin1String(properties->name),
                                  profile->property<QVariant>(properties->property));
         }
 

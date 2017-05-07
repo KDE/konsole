@@ -68,10 +68,10 @@ QVariant SessionListModel::data(const QModelIndex& index, int role) const
 
             // special handling for the "%w" marker which is replaced with the
             // window title set by the shell
-            title.replace("%w", _sessions[row]->userTitle());
+            title.replace(QLatin1String("%w"), _sessions[row]->userTitle());
             // special handling for the "%#" marker which is replaced with the
             // number of the shell
-            title.replace("%#", QString::number(_sessions[row]->sessionId()));
+            title.replace(QLatin1String("%#"), QString::number(_sessions[row]->sessionId()));
             return title;
         } else if (column == 0) {
             return _sessions[row]->sessionId();

@@ -176,8 +176,8 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
         // add environment variable containing home directory of current profile
         // (if specified)
         QStringList environment = profile->environment();
-        environment << QString("PROFILEHOME=%1").arg(profile->defaultWorkingDirectory());
-        environment << QString("KONSOLE_PROFILE_NAME=%1").arg(profile->name());
+        environment << QStringLiteral("PROFILEHOME=%1").arg(profile->defaultWorkingDirectory());
+        environment << QStringLiteral("KONSOLE_PROFILE_NAME=%1").arg(profile->name());
 
         session->setEnvironment(environment);
     }

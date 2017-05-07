@@ -370,7 +370,7 @@ void Session::terminalWarning(const QString& message)
 QString Session::shellSessionId() const
 {
     QString friendlyUuid(_uniqueIdentifier.toString());
-    friendlyUuid.remove('-').remove('{').remove('}');
+    friendlyUuid.remove(QLatin1Char('-')).remove(QLatin1Char('{')).remove(QLatin1Char('}'));
 
     return friendlyUuid;
 }

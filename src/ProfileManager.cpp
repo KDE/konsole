@@ -139,7 +139,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
         return Profile::Ptr();
 
     if (fileInfo.suffix() != QLatin1String("profile"))
-        path.append(".profile");
+        path.append(QLatin1String(".profile"));
     if (fileInfo.path().isEmpty() || fileInfo.path() == QLatin1String("."))
         path.prepend(QLatin1String("konsole") + QDir::separator());
 
@@ -368,7 +368,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
             newName = QStringLiteral("Profile ") + QString::number(nameSuffix);
             newTranslatedName = i18nc("The default name of a profile", "Profile #%1", nameSuffix);
             // TODO: remove the # above and below - too many issues
-            newTranslatedName.remove('#');
+            newTranslatedName.remove(QLatin1Char('#'));
             nameSuffix++;
         } while (existingProfileNames.contains(newName));
 
@@ -376,7 +376,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         newProfile->clone(profile, true);
         newProfile->setProperty(Profile::UntranslatedName, newName);
         newProfile->setProperty(Profile::Name, newTranslatedName);
-        newProfile->setProperty(Profile::MenuIndex, QString("0"));
+        newProfile->setProperty(Profile::MenuIndex, QStringLiteral("0"));
         newProfile->setHidden(false);
 
         addProfile(newProfile);

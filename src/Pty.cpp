@@ -194,8 +194,8 @@ void Pty::setInitialWorkingDirectory(const QString& dir)
     setWorkingDirectory(pwd);
 
     // setting PWD to "." will cause problem for bash & zsh
-    if (pwd != ".")
-        setEnv("PWD", pwd);
+    if (pwd != QLatin1String("."))
+        setEnv(QStringLiteral("PWD"), pwd);
 }
 
 void Pty::addEnvironmentVariables(const QStringList& environmentVariables)
@@ -204,7 +204,7 @@ void Pty::addEnvironmentVariables(const QStringList& environmentVariables)
 
     foreach(const QString& pair, environmentVariables) {
         // split on the first '=' character
-        const int separator = pair.indexOf('=');
+        const int separator = pair.indexOf(QLatin1Char('='));
 
         if (separator >= 0) {
             QString variable = pair.left(separator);
@@ -212,7 +212,7 @@ void Pty::addEnvironmentVariables(const QStringList& environmentVariables)
 
             setEnv(variable, value);
 
-            if (variable == "TERM") {
+            if (variable == QLatin1String("TERM")) {
                 isTermEnvAdded = true;
             }
         }
@@ -220,7 +220,7 @@ void Pty::addEnvironmentVariables(const QStringList& environmentVariables)
 
     // extra safeguard to make sure $TERM is always set
     if (!isTermEnvAdded) {
-        setEnv("TERM", "xterm-256color");
+        setEnv(QStringLiteral("TERM"), QStringLiteral("xterm-256color"));
     }
 }
 
@@ -249,7 +249,7 @@ int Pty::start(const QString& programName,
     // does not have a translation for
     //
     // BR:149300
-    setEnv("LANGUAGE", QString(), false /* do not overwrite existing value if any */);
+    setEnv(QStringLiteral("LANGUAGE"), QString(), false /* do not overwrite existing value if any */);
 
     KProcess::start();
 

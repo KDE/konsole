@@ -50,7 +50,7 @@ QStringList KDE4ProfileReader::findProfiles()
     Q_FOREACH (const QString& dir, dirs) {
         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.profile"));
         Q_FOREACH (const QString& file, fileNames) {
-            profiles.append(dir + '/' + file);
+            profiles.append(dir + QLatin1Char('/') + file);
         }
     }
     return profiles;
@@ -68,7 +68,7 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
                 groupName = properties->group;
             }
 
-            QString name(properties->name);
+            QString name(QLatin1String(properties->name));
 
             if (group.hasKey(name))
                 profile->setProperty(properties->property,
