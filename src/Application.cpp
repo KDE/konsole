@@ -115,7 +115,7 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
 
 QStringList Application::getCustomCommand(QStringList &args)
 {
-    int i = args.indexOf("-e");
+    int i = args.indexOf(QLatin1String("-e"));
     QStringList customCommand;
     if ((0 < i) && (i < (args.size() - 1))) {
         // -e was specified with at least one extra argument
@@ -266,16 +266,16 @@ bool Application::processTabsFromFileArgs(MainWindow* window)
 
     unsigned int sessions = 0;
     while (!tabsFile.atEnd()) {
-        QString lineString(tabsFile.readLine().trimmed());
-        if ((lineString.isEmpty()) || (lineString[0] == '#'))
+        QString lineString(QString::fromUtf8(tabsFile.readLine()).trimmed());
+        if ((lineString.isEmpty()) || (lineString[0] == QLatin1Char('#')))
             continue;
 
         QHash<QString, QString> lineTokens;
         QStringList lineParts = lineString.split(QStringLiteral(";;"), QString::SkipEmptyParts);
 
         for (int i = 0; i < lineParts.size(); ++i) {
-            QString key = lineParts.at(i).section(':', 0, 0).trimmed().toLower();
-            QString value = lineParts.at(i).section(':', 1, -1).trimmed();
+            QString key = lineParts.at(i).section(QLatin1Char(':'), 0, 0).trimmed().toLower();
+            QString value = lineParts.at(i).section(QLatin1Char(':'), 1, -1).trimmed();
             lineTokens[key] = value;
         }
         // should contain at least one of 'command' and 'profile'
@@ -323,7 +323,7 @@ void Application::createTabFromArgs(MainWindow* window,
 
     if (!command.isEmpty()) {
         newProfile->setProperty(Profile::Command,   command);
-        newProfile->setProperty(Profile::Arguments, command.split(' '));
+        newProfile->setProperty(Profile::Arguments, command.split(QLatin1Char(' ')));
         shouldUseNewProfile = true;
     }
 
@@ -480,7 +480,7 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
     }
 
     // temporary changes to profile options specified on the command line
-    foreach(const QString & value , m_parser->values("p")) {
+    foreach(const QString & value , m_parser->values(QLatin1String("p"))) {
         ProfileCommandParser parser;
 
         QHashIterator<Profile::Property, QVariant> iter(parser.parse(value));

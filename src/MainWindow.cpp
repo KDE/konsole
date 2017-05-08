@@ -158,7 +158,7 @@ void MainWindow::rememberMenuAccelerators()
 void MainWindow::removeMenuAccelerators()
 {
     foreach(QAction* menuItem, menuBar()->actions()) {
-        menuItem->setText(menuItem->text().replace('&', QString()));
+        menuItem->setText(menuItem->text().replace(QLatin1Char('&'), QString()));
     }
 }
 
@@ -384,7 +384,7 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
 
             // NOTE: defaultProfile seems to not work here, sigh.
             Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
-            if (profile && profile->name() == sessionAction->text().remove('&')) {
+            if (profile && profile->name() == sessionAction->text().remove(QLatin1Char('&'))) {
                 QIcon icon(KIconLoader::global()->loadIcon(profile->icon(), KIconLoader::Small, 0, KIconLoader::DefaultState, QStringList(QStringLiteral("emblem-favorite"))));
                 sessionAction->setIcon(icon);
                 _newTabMenuAction->menu()->setDefaultAction(sessionAction);
@@ -402,7 +402,7 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
 
         // NOTE: Compare names w/o any '&'
-        if (sessionActions.size() == 2 &&  sessionActions[1]->text().remove('&') != profile->name()) {
+        if (sessionActions.size() == 2 &&  sessionActions[1]->text().remove(QLatin1Char('&')) != profile->name()) {
             _newTabMenuAction->menu()->addAction(sessionActions[1]);
         } else {
             _newTabMenuAction->menu()->deleteLater();
@@ -491,13 +491,13 @@ Session* MainWindow::createSSHSession(Profile::Ptr profile, const QUrl& url)
         sshCommand += QStringLiteral("-p %1 ").arg(url.port());
     }
     if (!url.userName().isEmpty()) {
-        sshCommand += (url.userName() + '@');
+        sshCommand += (url.userName() + QLatin1Char('@'));
     }
     if (!url.host().isEmpty()) {
         sshCommand += url.host();
     }
 
-    session->sendTextToTerminal(sshCommand, '\r');
+    session->sendTextToTerminal(sshCommand, QLatin1Char('\r'));
 
     // create view before starting the session process so that the session
     // doesn't suffer a change in terminal size right after the session
@@ -540,8 +540,8 @@ bool MainWindow::queryClose()
             continue;
         }
 
-        const QString defaultProc = session->program().split('/').last();
-        const QString currentProc = session->foregroundProcessName().split('/').last();
+        const QString defaultProc = session->program().split(QLatin1Char('/')).last();
+        const QString currentProc = session->foregroundProcessName().split(QLatin1Char('/')).last();
 
         if (currentProc.isEmpty())
             continue;
