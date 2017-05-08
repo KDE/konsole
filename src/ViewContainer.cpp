@@ -425,11 +425,11 @@ void TabbedViewContainer::setStyleSheet(const QString& styleSheet)
 void TabbedViewContainer::navigationTextModeChanged(bool useTextWidth)
 {
     if (useTextWidth) {
-        _tabBar->setStyleSheet("QTabBar::tab { }");
+        _tabBar->setStyleSheet(QStringLiteral("QTabBar::tab { }"));
         _tabBar->setExpanding(false);
         _tabBar->setElideMode(Qt::ElideNone);
     } else {
-        _tabBar->setStyleSheet("QTabBar::tab { min-width: 2em; max-width: 25em }");
+        _tabBar->setStyleSheet(QStringLiteral("QTabBar::tab { min-width: 2em; max-width: 25em }"));
         _tabBar->setExpanding(true);
         _tabBar->setElideMode(Qt::ElideLeft);
     }
@@ -695,7 +695,7 @@ void TabbedViewContainer::updateTitle(ViewProperties* item)
         _tabBar->setTabToolTip(index , tabText);
 
         // To avoid having & replaced with _ (shortcut indicator)
-        tabText.replace('&', "&&");
+        tabText.replace(QLatin1Char('&'), QLatin1String("&&"));
         _tabBar->setTabText(index , tabText);
     }
 }

@@ -173,7 +173,7 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
         }
 
         QIcon::Mode drawMode = drawDisabled ? QIcon::Disabled : QIcon::Normal;
-        const QString iconName = north ? "arrow-up" : "arrow-down";
+        const QString iconName = north ? QStringLiteral("arrow-up") : QStringLiteral("arrow-down");
         _dropIndicator->setPixmap(QIcon::fromTheme(iconName).pixmap(ARROW_SIZE, ARROW_SIZE, drawMode));
         _drawIndicatorDisabled = drawDisabled;
     }

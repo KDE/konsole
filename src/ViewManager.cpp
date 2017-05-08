@@ -145,20 +145,20 @@ void ViewManager::setupActions()
             i18nc("@action:inmenu", "Split View Left/Right"),
             this);
     collection->setDefaultShortcut(splitLeftRightAction, Konsole::ACCEL + Qt::Key_ParenLeft);
-    collection->addAction("split-view-left-right", splitLeftRightAction);
+    collection->addAction(QStringLiteral("split-view-left-right"), splitLeftRightAction);
     connect(splitLeftRightAction , &QAction::triggered , this , &Konsole::ViewManager::splitLeftRight);
 
     QAction* splitTopBottomAction = new QAction(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")) ,
             i18nc("@action:inmenu", "Split View Top/Bottom"), this);
     collection->setDefaultShortcut(splitTopBottomAction, Konsole::ACCEL + Qt::Key_ParenRight);
-    collection->addAction("split-view-top-bottom", splitTopBottomAction);
+    collection->addAction(QStringLiteral("split-view-top-bottom"), splitTopBottomAction);
     connect(splitTopBottomAction , &QAction::triggered , this , &Konsole::ViewManager::splitTopBottom);
 
     QAction* closeActiveAction = new QAction(i18nc("@action:inmenu Close Active View", "Close Active") , this);
     closeActiveAction->setIcon(QIcon::fromTheme(QStringLiteral("view-close")));
     collection->setDefaultShortcut(closeActiveAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_X);
     closeActiveAction->setEnabled(false);
-    collection->addAction("close-active-view", closeActiveAction);
+    collection->addAction(QStringLiteral("close-active-view"), closeActiveAction);
     connect(closeActiveAction , &QAction::triggered , this , &Konsole::ViewManager::closeActiveContainer);
 
     multiViewOnlyActions << closeActiveAction;
@@ -166,7 +166,7 @@ void ViewManager::setupActions()
     QAction* closeOtherAction = new QAction(i18nc("@action:inmenu Close Other Views", "Close Others") , this);
     collection->setDefaultShortcut(closeOtherAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_O);
     closeOtherAction->setEnabled(false);
-    collection->addAction("close-other-views", closeOtherAction);
+    collection->addAction(QStringLiteral("close-other-views"), closeOtherAction);
     connect(closeOtherAction , &QAction::triggered , this , &Konsole::ViewManager::closeOtherContainers);
 
     multiViewOnlyActions << closeOtherAction;
@@ -175,7 +175,7 @@ void ViewManager::setupActions()
     QAction* expandActiveAction = new QAction(i18nc("@action:inmenu", "Expand View") , this);
     collection->setDefaultShortcut(expandActiveAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketRight);
     expandActiveAction->setEnabled(false);
-    collection->addAction("expand-active-view", expandActiveAction);
+    collection->addAction(QStringLiteral("expand-active-view"), expandActiveAction);
     connect(expandActiveAction , &QAction::triggered , this , &Konsole::ViewManager::expandActiveContainer);
 
     multiViewOnlyActions << expandActiveAction;
@@ -183,13 +183,13 @@ void ViewManager::setupActions()
     QAction* shrinkActiveAction = new QAction(i18nc("@action:inmenu", "Shrink View") , this);
     collection->setDefaultShortcut(shrinkActiveAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketLeft);
     shrinkActiveAction->setEnabled(false);
-    collection->addAction("shrink-active-view", shrinkActiveAction);
+    collection->addAction(QStringLiteral("shrink-active-view"), shrinkActiveAction);
     connect(shrinkActiveAction , &QAction::triggered , this , &Konsole::ViewManager::shrinkActiveContainer);
 
     multiViewOnlyActions << shrinkActiveAction;
 
 #if defined(ENABLE_DETACHING)
-    QAction* detachViewAction = collection->addAction("detach-view");
+    QAction* detachViewAction = collection->addAction(QStringLiteral("detach-view"));
     detachViewAction->setIcon(QIcon::fromTheme(QStringLiteral("tab-detach")));
     detachViewAction->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
     // Ctrl+Shift+D is not used as a shortcut by default because it is too close
@@ -201,12 +201,12 @@ void ViewManager::setupActions()
 #endif
 
     // Next / Previous View , Next Container
-    collection->addAction("next-view", nextViewAction);
-    collection->addAction("previous-view", previousViewAction);
-    collection->addAction("last-tab", lastViewAction);
-    collection->addAction("next-container", nextContainerAction);
-    collection->addAction("move-view-left", moveViewLeftAction);
-    collection->addAction("move-view-right", moveViewRightAction);
+    collection->addAction(QStringLiteral("next-view"), nextViewAction);
+    collection->addAction(QStringLiteral("previous-view"), previousViewAction);
+    collection->addAction(QStringLiteral("last-tab"), lastViewAction);
+    collection->addAction(QStringLiteral("next-container"), nextContainerAction);
+    collection->addAction(QStringLiteral("move-view-left"), moveViewLeftAction);
+    collection->addAction(QStringLiteral("move-view-right"), moveViewRightAction);
 
     // Switch to tab N shortcuts
     const int SWITCH_TO_TAB_COUNT = 19;
@@ -216,7 +216,7 @@ void ViewManager::setupActions()
         QAction* switchToTabAction = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);
         switchToTabMapper->setMapping(switchToTabAction, i);
         connect(switchToTabAction, &QAction::triggered, switchToTabMapper, static_cast<void(QSignalMapper::*)()>(&QSignalMapper::map));
-        collection->addAction(QString("switch-to-tab-%1").arg(i), switchToTabAction);
+        collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), switchToTabAction);
     }
 
     foreach(QAction* action, multiViewOnlyActions) {
@@ -275,7 +275,7 @@ void ViewManager::updateDetachViewState()
     auto activeContainer = _viewSplitter->activeContainer();
     const bool shouldEnable = splitView || ((activeContainer != nullptr) && activeContainer->views().count() >= 2);
 
-    QAction* detachAction = _actionCollection->action("detach-view");
+    QAction* detachAction = _actionCollection->action(QStringLiteral("detach-view"));
 
     if ((detachAction != nullptr) && shouldEnable != detachAction->isEnabled())
         detachAction->setEnabled(shouldEnable);
@@ -690,28 +690,28 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
     const bool enable = (_navigationMethod != NoNavigation);
     QAction* action;
 
-    action = collection->action("next-view");
+    action = collection->action(QStringLiteral("next-view"));
     if (action != nullptr) action->setEnabled(enable);
 
-    action = collection->action("previous-view");
+    action = collection->action(QStringLiteral("previous-view"));
     if (action != nullptr) action->setEnabled(enable);
 
-    action = collection->action("last-tab");
+    action = collection->action(QStringLiteral("last-tab"));
     if (action != nullptr) action->setEnabled(enable);
 
-    action = collection->action("split-view-left-right");
+    action = collection->action(QStringLiteral("split-view-left-right"));
     if (action != nullptr) action->setEnabled(enable);
 
-    action = collection->action("split-view-top-bottom");
+    action = collection->action(QStringLiteral("split-view-top-bottom"));
     if (action != nullptr) action->setEnabled(enable);
 
-    action = collection->action("rename-session");
+    action = collection->action(QStringLiteral("rename-session"));
     if (action != nullptr) action->setEnabled(enable);
 
-    action = collection->action("move-view-left");
+    action = collection->action(QStringLiteral("move-view-left"));
     if (action != nullptr) action->setEnabled(enable);
 
-    action = collection->action("move-view-right");
+    action = collection->action(QStringLiteral("move-view-right"));
     if (action != nullptr) action->setEnabled(enable);
 }
 
