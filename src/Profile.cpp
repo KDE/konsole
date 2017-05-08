@@ -149,20 +149,20 @@ void Profile::useFallback()
 {
     // Fallback settings
     setProperty(Name, i18nc("Name of the default/builtin profile", "Default"));
-    setProperty(UntranslatedName, "Default");
+    setProperty(UntranslatedName, QStringLiteral("Default"));
     // magic path for the fallback profile which is not a valid
     // non-directory file name
-    setProperty(Path, "FALLBACK/");
-    setProperty(Command, qgetenv("SHELL"));
+    setProperty(Path, QStringLiteral("FALLBACK/"));
+    setProperty(Command, QString::fromUtf8(qgetenv("SHELL")));
     // See Pty.cpp on why Arguments is populated
-    setProperty(Arguments, QStringList() << qgetenv("SHELL"));
-    setProperty(Icon, "utilities-terminal");
+    setProperty(Arguments, QStringList() << QString::fromUtf8(qgetenv("SHELL")));
+    setProperty(Icon, QStringLiteral("utilities-terminal"));
     setProperty(Environment, QStringList() << QStringLiteral("TERM=xterm-256color") << QStringLiteral("COLORTERM=truecolor"));
-    setProperty(LocalTabTitleFormat, "%d : %n");
-    setProperty(RemoteTabTitleFormat, "(%u) %H");
+    setProperty(LocalTabTitleFormat, QStringLiteral("%d : %n"));
+    setProperty(RemoteTabTitleFormat, QStringLiteral("(%u) %H"));
     setProperty(ShowTerminalSizeHint, true);
     setProperty(StartInCurrentSessionDir, true);
-    setProperty(MenuIndex, "0");
+    setProperty(MenuIndex, QStringLiteral("0"));
     setProperty(SilenceSeconds, 10);
     setProperty(TerminalColumns, 80);
     setProperty(TerminalRows, 24);
@@ -170,8 +170,8 @@ void Profile::useFallback()
     setProperty(TerminalCenter, false);
     setProperty(MouseWheelZoomEnabled, true);
 
-    setProperty(KeyBindings, "default");
-    setProperty(ColorScheme, "Linux"); //use DarkPastels when is start support blue ncurses UI properly
+    setProperty(KeyBindings, QStringLiteral("default"));
+    setProperty(ColorScheme, QStringLiteral("Linux")); //use DarkPastels when is start support blue ncurses UI properly
     setProperty(Font, QFontDatabase::systemFont(QFontDatabase::FixedFont));
 
     setProperty(HistoryMode, Enum::FixedSizeHistory);
@@ -202,12 +202,12 @@ void Profile::useFallback()
     setProperty(CustomCursorColor, QColor(Qt::black));
     setProperty(BellMode, Enum::NotifyBell);
 
-    setProperty(DefaultEncoding, QString(QTextCodec::codecForLocale()->name()));
+    setProperty(DefaultEncoding, QLatin1String(QTextCodec::codecForLocale()->name()));
     setProperty(AntiAliasFonts, true);
     setProperty(BoldIntense, true);
     setProperty(UseFontLineCharacters, false);
 
-    setProperty(WordCharacters, ":@-./_~?&=%+#");
+    setProperty(WordCharacters, QStringLiteral(":@-./_~?&=%+#"));
 
     // Fallback should not be shown in menus
     setHidden(true);
@@ -285,7 +285,8 @@ Profile::Property Profile::lookupByName(const QString& name)
 
 void Profile::registerProperty(const PropertyInfo& info)
 {
-    PropertyInfoByName.insert(QString(info.name).toLower(), info);
+    QString name = QLatin1String(info.name);
+    PropertyInfoByName.insert(name.toLower(), info);
 
     // only allow one property -> name map
     // (multiple name -> property mappings are allowed though)
@@ -308,7 +309,7 @@ const QStringList Profile::propertiesInfoList() const
     QStringList info;
     const PropertyInfo* iter = DefaultPropertyNames;
     while (iter->name != 0) {
-        info << QString(iter->name) + " : " + QString(QVariant(iter->type).typeName());
+        info << QLatin1String(iter->name) + QStringLiteral(" : ") + QLatin1String(QVariant(iter->type).typeName());
         iter++;
     }
 
@@ -326,7 +327,7 @@ QHash<Profile::Property, QVariant> ProfileCommandParser::parse(const QString& in
     // where 'property' is a word consisting only of characters from A-Z
     // where 'value' is any sequence of characters other than a semi-colon
     //
-    static const QRegularExpression regExp("([a-zA-Z]+)=([^;]+)");
+    static const QRegularExpression regExp(QStringLiteral("([a-zA-Z]+)=([^;]+)"));
 
     QRegularExpressionMatchIterator iterator(regExp.globalMatch(input));
     while (iterator.hasNext()) {
