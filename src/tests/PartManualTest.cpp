@@ -59,8 +59,8 @@ void PartManualTest::testShortcutOverride()
     // Create a main window with a menu and a test
     // action with a shortcut set to Ctrl+S, which is also used by the terminal
     auto mainWindow = new KMainWindow();
-    QMenu* fileMenu = mainWindow->menuBar()->addMenu("File");
-    QAction* testAction = fileMenu->addAction("Test");
+    QMenu* fileMenu = mainWindow->menuBar()->addMenu(QStringLiteral("File"));
+    QAction* testAction = fileMenu->addAction(QStringLiteral("Test"));
     testAction->setShortcut(QKeySequence(Konsole::ACCEL + Qt::Key_S));
     connect(testAction, &QAction::triggered, this, &Konsole::PartManualTest::shortcutTriggered);
 
@@ -70,7 +70,7 @@ void PartManualTest::testShortcutOverride()
     mainWindow->setCentralWidget(terminalPart->widget());
     TerminalInterface* terminal = qobject_cast<TerminalInterface*>(terminalPart);
     QVERIFY(terminal);
-    terminal->sendInput("Press Ctrl+S twice.\n");
+    terminal->sendInput(QStringLiteral("Press Ctrl+S twice.\n"));
     mainWindow->show();
 
     // Test shortcut with override disabled, so the shortcut will be triggered
@@ -120,7 +120,7 @@ void PartManualTest::shortcutTriggered()
 
 KParts::Part* PartManualTest::createPart()
 {
-    KService::Ptr service = KService::serviceByDesktopName("konsolepart");
+    KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
     Q_ASSERT(service);
     KPluginFactory* factory = KPluginLoader(service->library()).factory();
     Q_ASSERT(factory);

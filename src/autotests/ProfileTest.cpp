@@ -34,8 +34,8 @@ void ProfileTest::testProfile()
 {
     // create a new profile
     Profile* parent = new Profile;
-    parent->setProperty(Profile::Name, "Parent");
-    parent->setProperty(Profile::Path, "FakePath");
+    parent->setProperty(Profile::Name, QStringLiteral("Parent"));
+    parent->setProperty(Profile::Path, QStringLiteral("FakePath"));
 
     parent->setProperty(Profile::AntiAliasFonts, false);
     parent->setProperty(Profile::StartInCurrentSessionDir, false);
@@ -65,9 +65,9 @@ void ProfileTest::testProfile()
     QVERIFY(!child->isPropertySet(Profile::ColorScheme));
 
     // read non-inheritable properties
-    QCOMPARE(parent->property<QString>(Profile::Name), QString("Parent"));
+    QCOMPARE(parent->property<QString>(Profile::Name), QStringLiteral("Parent"));
     QCOMPARE(child->property<QVariant>(Profile::Name), QVariant());
-    QCOMPARE(parent->property<QString>(Profile::Path), QString("FakePath"));
+    QCOMPARE(parent->property<QString>(Profile::Path), QStringLiteral("FakePath"));
     QCOMPARE(child->property<QVariant>(Profile::Path), QVariant());
 
     // read inheritable properties
@@ -83,22 +83,22 @@ void ProfileTest::testClone()
 {
     // create source profile and parent
     Profile::Ptr parent(new Profile);
-    parent->setProperty(Profile::Command, "ps");
-    parent->setProperty(Profile::ColorScheme, "BlackOnWhite");
+    parent->setProperty(Profile::Command, QStringLiteral("ps"));
+    parent->setProperty(Profile::ColorScheme, QStringLiteral("BlackOnWhite"));
 
     Profile::Ptr source(new Profile(parent));
     source->setProperty(Profile::AntiAliasFonts, false);
     source->setProperty(Profile::HistorySize, 4567);
 
-    source->setProperty(Profile::Name, "SourceProfile");
-    source->setProperty(Profile::Path, "SourcePath");
+    source->setProperty(Profile::Name, QStringLiteral("SourceProfile"));
+    source->setProperty(Profile::Path, QStringLiteral("SourcePath"));
 
     // create target to clone source and parent
     Profile::Ptr targetParent(new Profile);
     // same value as source parent
-    targetParent->setProperty(Profile::Command, "ps");
+    targetParent->setProperty(Profile::Command, QStringLiteral("ps"));
     // different value from source parent
-    targetParent->setProperty(Profile::ColorScheme, "BlackOnGrey");
+    targetParent->setProperty(Profile::ColorScheme, QStringLiteral("BlackOnGrey"));
     Profile::Ptr target(new Profile(parent));
 
     // clone source profile, setting only properties that differ
@@ -161,18 +161,18 @@ void ProfileTest::testProfileGroup()
     QCOMPARE(group_const->property<QVariant>(Profile::UseCustomCursorColor), QVariant());
 
     // set and test shareable properties in the group
-    group->setProperty(Profile::Command, "ssh");
+    group->setProperty(Profile::Command, QStringLiteral("ssh"));
     group->setProperty(Profile::AntiAliasFonts, false);
 
-    QCOMPARE(profile[0]->property<QString>(Profile::Command), QString("ssh"));
+    QCOMPARE(profile[0]->property<QString>(Profile::Command), QStringLiteral("ssh"));
     QVERIFY(!profile[1]->property<bool>(Profile::AntiAliasFonts));
 
     // set and test non-shareable properties in the group
     // (should have no effect)
-    group->setProperty(Profile::Name, "NewName");
-    group->setProperty(Profile::Path, "NewPath");
-    QVERIFY(profile[1]->property<QString>(Profile::Name) != "NewName");
-    QVERIFY(profile[2]->property<QString>(Profile::Path) != "NewPath");
+    group->setProperty(Profile::Name, QStringLiteral("NewName"));
+    group->setProperty(Profile::Path, QStringLiteral("NewPath"));
+    QVERIFY(profile[1]->property<QString>(Profile::Name) != QLatin1String("NewName"));
+    QVERIFY(profile[2]->property<QString>(Profile::Path) != QLatin1String("NewPath"));
 
     // remove a profile from the group
     group->removeProfile(profile[0]);
@@ -180,8 +180,8 @@ void ProfileTest::testProfileGroup()
     group->updateValues();
 
     // check that profile is no longer affected by group
-    group->setProperty(Profile::Command, "fish");
-    QVERIFY(profile[0]->property<QString>(Profile::Command) != "fish");
+    group->setProperty(Profile::Command, QStringLiteral("fish"));
+    QVERIFY(profile[0]->property<QString>(Profile::Command) != QLatin1String("fish"));
 }
 
 // Verify the correct file name is created from the untranslatedname
@@ -191,13 +191,13 @@ void ProfileTest::testProfileFileNames()
     QFileInfo fileInfo;
     ProfileWriter* writer = new KDE4ProfileWriter;
   
-    profile->setProperty(Profile::UntranslatedName, "Indiana");
+    profile->setProperty(Profile::UntranslatedName, QStringLiteral("Indiana"));
     fileInfo.setFile(writer->getPath(profile));
-    QCOMPARE(fileInfo.fileName(), QString("Indiana.profile"));
+    QCOMPARE(fileInfo.fileName(), QStringLiteral("Indiana.profile"));
 
-    profile->setProperty(Profile::UntranslatedName, "Old Paris");
+    profile->setProperty(Profile::UntranslatedName, QStringLiteral("Old Paris"));
     fileInfo.setFile(writer->getPath(profile));
-    QCOMPARE(fileInfo.fileName(), QString("Old Paris.profile"));
+    QCOMPARE(fileInfo.fileName(), QStringLiteral("Old Paris.profile"));
 
     /* FIXME: deal w/ file systems that are case-insensitive
        This leads to confusion as both Test and test can appear in the Manager
@@ -231,8 +231,8 @@ void ProfileTest::testFallbackProfile()
     Profile* fallback = new Profile();
     fallback->useFallback();
 
-    QCOMPARE(fallback->property<QString>(Profile::Name), QString("Default"));
-    QCOMPARE(fallback->property<QString>(Profile::Path), QString("FALLBACK/"));
+    QCOMPARE(fallback->property<QString>(Profile::Name), QStringLiteral("Default"));
+    QCOMPARE(fallback->property<QString>(Profile::Path), QStringLiteral("FALLBACK/"));
     delete fallback;
 }
 

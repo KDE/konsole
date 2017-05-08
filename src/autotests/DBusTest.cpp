@@ -51,7 +51,7 @@ void DBusTest::initTestCase()
     int pid = KProcess::startDetached(QStringLiteral("konsole"),
             QStringList(QStringLiteral("--separate")));
     if (pid == 0) {
-        QFAIL(QString("Unable to exec a new Konsole").toLatin1().data());
+        QFAIL(QStringLiteral("Unable to exec a new Konsole").toLatin1().data());
     }
 
     // Wait for above Konsole to finish starting
@@ -97,7 +97,7 @@ void DBusTest::cleanupTestCase()
 
     QDBusReply<void> instanceReply = iface.call(QStringLiteral("close"));
     if (!instanceReply.isValid())
-        QFAIL(QString("Unable to close Konsole: %1").arg(instanceReply.error().message()).toLatin1().data());
+        QFAIL(QStringLiteral("Unable to close Konsole: %1").arg(instanceReply.error().message()).toLatin1().data());
 }
 
 void DBusTest::testSessions()
