@@ -152,7 +152,7 @@ void HTMLDecoder::begin(QTextStream* output)
     QString text;
 
     //open monospace span
-    openSpan(text, "font-family:monospace");
+    openSpan(text, QStringLiteral("font-family:monospace"));
 
     *output << text;
 }
@@ -201,14 +201,14 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
             if (_colorTable != nullptr) {
                 bool useBold = (_lastRendition & RE_BOLD) != 0;
                 if (useBold)
-                    style.append("font-weight:bold;");
+                    style.append(QLatin1String("font-weight:bold;"));
 
                 if ((_lastRendition & RE_UNDERLINE) != 0)
-                    style.append("font-decoration:underline;");
+                    style.append(QLatin1String("font-decoration:underline;"));
 
-                style.append(QString("color:%1;").arg(_lastForeColor.color(_colorTable).name()));
+                style.append(QStringLiteral("color:%1;").arg(_lastForeColor.color(_colorTable).name()));
 
-                style.append(QString("background-color:%1;").arg(_lastBackColor.color(_colorTable).name()));
+                style.append(QStringLiteral("background-color:%1;").arg(_lastBackColor.color(_colorTable).name()));
             }
 
             //open the span with the current style
@@ -233,17 +233,17 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
             } else {
                 //escape HTML tag characters and just display others as they are
                 const QChar ch = characters[i].character;
-                if (ch == '<')
-                    text.append("&lt;");
-                else if (ch == '>')
-                    text.append("&gt;");
+                if (ch == QLatin1Char('<'))
+                    text.append(QLatin1String("&lt;"));
+                else if (ch == QLatin1Char('>'))
+                    text.append(QLatin1String("&gt;"));
                 else
                     text.append(ch);
             }
         } else {
             // HTML truncates multiple spaces, so use a space marker instead
             // Use &#160 instead of &nbsp so xmllint will work.
-            text.append("&#160;");
+            text.append(QLatin1String("&#160;"));
         }
     }
 
@@ -254,18 +254,18 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
     }
 
     //start new line
-    text.append("<br>");
+    text.append(QLatin1String("<br>"));
 
     *_output << text;
 }
 void HTMLDecoder::openSpan(QString& text , const QString& style)
 {
-    text.append(QString("<span style=\"%1\">").arg(style));
+    text.append(QStringLiteral("<span style=\"%1\">").arg(style));
 }
 
 void HTMLDecoder::closeSpan(QString& text)
 {
-    text.append("</span>");
+    text.append(QLatin1String("</span>"));
 }
 
 void HTMLDecoder::setColorTable(const ColorEntry* table)
