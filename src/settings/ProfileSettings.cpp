@@ -243,7 +243,7 @@ void ProfileSettings::updateDefaultItem()
         bool isDefault = (defaultProfile == item->data().value<Profile::Ptr>());
 
         if (isDefault && !itemFont.bold()) {
-            QIcon icon(KIconLoader::global()->loadIcon(defaultProfile->icon(), KIconLoader::Small, 0, KIconLoader::DefaultState, QStringList("emblem-favorite")));
+            QIcon icon(KIconLoader::global()->loadIcon(defaultProfile->icon(), KIconLoader::Small, 0, KIconLoader::DefaultState, QStringList(QStringLiteral("emblem-favorite"))));
             item->setIcon(icon);
             itemFont.setBold(true);
             item->setFont(itemFont);
@@ -324,8 +324,8 @@ void ProfileSettings::createProfile()
     Profile::Ptr newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
     newProfile->clone(sourceProfile, true);
     newProfile->setProperty(Profile::Name, i18nc("@item This will be used as part of the file name", "New Profile"));
-    newProfile->setProperty(Profile::UntranslatedName, "New Profile");
-    newProfile->setProperty(Profile::MenuIndex, QString("0"));
+    newProfile->setProperty(Profile::UntranslatedName, QStringLiteral("New Profile"));
+    newProfile->setProperty(Profile::MenuIndex, QStringLiteral("0"));
 
     QPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
     dialog.data()->setProfile(newProfile);

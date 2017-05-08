@@ -30,25 +30,25 @@
 using namespace Konsole;
 
 const TabTitleFormatButton::Element TabTitleFormatButton::_localElements[] = {
-    { "%n" , I18N_NOOP("Program Name: %n") },
-    { "%d" , I18N_NOOP("Current Directory (Short): %d") },
-    { "%D" , I18N_NOOP("Current Directory (Long): %D") },
-    { "%w" , I18N_NOOP("Window Title Set by Shell: %w") },
-    { "%#" , I18N_NOOP("Session Number: %#") },
-    { "%u" , I18N_NOOP("User Name: %u") },
-    { "%h" , I18N_NOOP("Local Host: %h") }
+    { QStringLiteral("%n") , I18N_NOOP("Program Name: %n") },
+    { QStringLiteral("%d") , I18N_NOOP("Current Directory (Short): %d") },
+    { QStringLiteral("%D") , I18N_NOOP("Current Directory (Long): %D") },
+    { QStringLiteral("%w") , I18N_NOOP("Window Title Set by Shell: %w") },
+    { QStringLiteral("%#") , I18N_NOOP("Session Number: %#") },
+    { QStringLiteral("%u") , I18N_NOOP("User Name: %u") },
+    { QStringLiteral("%h") , I18N_NOOP("Local Host: %h") }
 };
 const int TabTitleFormatButton::_localElementCount =
     sizeof(_localElements) / sizeof(TabTitleFormatButton::Element);
 
 const TabTitleFormatButton::Element TabTitleFormatButton::_remoteElements[] = {
-    { "%u" , I18N_NOOP("User Name: %u") },
-    { "%U" , I18N_NOOP("User Name@ (if given): %U") },
-    { "%h" , I18N_NOOP("Remote Host (Short): %h") },
-    { "%H" , I18N_NOOP("Remote Host (Long): %H") },
-    { "%c" , I18N_NOOP("Command and arguments: %c") },
-    { "%w" , I18N_NOOP("Window Title Set by Shell: %w") },
-    { "%#" , I18N_NOOP("Session Number: %#") }
+    { QStringLiteral("%u") , I18N_NOOP("User Name: %u") },
+    { QStringLiteral("%U") , I18N_NOOP("User Name@ (if given): %U") },
+    { QStringLiteral("%h") , I18N_NOOP("Remote Host (Short): %h") },
+    { QStringLiteral("%H") , I18N_NOOP("Remote Host (Long): %H") },
+    { QStringLiteral("%c") , I18N_NOOP("Command and arguments: %c") },
+    { QStringLiteral("%w") , I18N_NOOP("Window Title Set by Shell: %w") },
+    { QStringLiteral("%#") , I18N_NOOP("Session Number: %#") }
 };
 const int TabTitleFormatButton::_remoteElementCount =
     sizeof(_remoteElements) / sizeof(TabTitleFormatButton::Element);
