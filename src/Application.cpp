@@ -44,58 +44,81 @@
 
 using namespace Konsole;
 
-Application::Application(QSharedPointer<QCommandLineParser> parser, const QStringList &customCommand) : _backgroundInstance(0), m_parser(parser), m_customCommand(customCommand)
+Application::Application(QSharedPointer<QCommandLineParser> parser,
+                         const QStringList &customCommand)
+    : _backgroundInstance(0)
+    , m_parser(parser)
+    , m_customCommand(customCommand)
 {
 }
 
 void Application::populateCommandLineParser(QCommandLineParser *parser)
 {
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("profile"),
-                                        i18nc("@info:shell", "Name of profile to use for new Konsole instance"),
-                                        QStringLiteral("name")));
+                                         i18nc("@info:shell",
+                                               "Name of profile to use for new Konsole instance"),
+                                         QStringLiteral("name")));
     parser->addOption(QCommandLineOption(QStringList(QStringLiteral("fallback-profile")),
-                                        i18nc("@info:shell", "Use the internal FALLBACK profile")));
+                                         i18nc("@info:shell",
+                                               "Use the internal FALLBACK profile")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("workdir"),
-                                        i18nc("@info:shell", "Set the initial working directory of the new tab or"
-                                              " window to 'dir'"),
-                                        QStringLiteral("dir")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hold") << QStringLiteral("noclose"),
-                                        i18nc("@info:shell", "Do not close the initial session automatically when it"
-                                        " ends.")));
+                                         i18nc("@info:shell",
+                                               "Set the initial working directory of the new tab or"
+                                               " window to 'dir'"),
+                                         QStringLiteral("dir")));
+    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hold")
+                                                       << QStringLiteral("noclose"),
+                                         i18nc("@info:shell",
+                                               "Do not close the initial session automatically when it"
+                                               " ends.")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("new-tab"),
-                                        i18nc("@info:shell", "Create a new tab in an existing window rather than"
-                                              " creating a new window")));
+                                         i18nc("@info:shell",
+                                               "Create a new tab in an existing window rather than"
+                                               " creating a new window")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("tabs-from-file"),
-                                        i18nc("@info:shell", "Create tabs as specified in given tabs configuration"
-                                        " file"),
-                                        QStringLiteral("file")));
+                                         i18nc("@info:shell",
+                                               "Create tabs as specified in given tabs configuration"
+                                               " file"),
+                                         QStringLiteral("file")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("background-mode"),
-                                        i18nc("@info:shell", "Start Konsole in the background and bring to the front"
-                                              " when Ctrl+Shift+F12 (by default) is pressed")));
+                                         i18nc("@info:shell",
+                                               "Start Konsole in the background and bring to the front"
+                                               " when Ctrl+Shift+F12 (by default) is pressed")));
     // --nofork is a compatibility alias for separate
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("separate") << QStringLiteral("nofork"), i18nc("@info:shell", "Run in a separate process")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("show-menubar"), i18nc("@info:shell", "Show the menubar, overriding the default setting")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-menubar"), i18nc("@info:shell", "Hide the menubar, overriding the default setting")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("show-tabbar"), i18nc("@info:shell", "Show the tabbar, overriding the default setting")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-tabbar"), i18nc("@info:shell", "Hide the tabbar, overriding the default setting")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("fullscreen"), i18nc("@info:shell", "Start Konsole in fullscreen mode")));
+    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("separate")
+                                                       << QStringLiteral("nofork"),
+        i18nc("@info:shell", "Run in a separate process")));
+    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("show-menubar"),
+        i18nc("@info:shell", "Show the menubar, overriding the default setting")));
+    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-menubar"),
+        i18nc("@info:shell", "Hide the menubar, overriding the default setting")));
+    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("show-tabbar"),
+        i18nc("@info:shell", "Show the tabbar, overriding the default setting")));
+    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-tabbar"),
+        i18nc("@info:shell", "Hide the tabbar, overriding the default setting")));
+    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("fullscreen"),
+        i18nc("@info:shell", "Start Konsole in fullscreen mode")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("notransparency"),
-                                        i18nc("@info:shell", "Disable transparent backgrounds, even if the system"
-                                              " supports them.")));
+                                         i18nc("@info:shell",
+                                               "Disable transparent backgrounds, even if the system"
+                                               " supports them.")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("list-profiles"),
-                                        i18nc("@info:shell", "List the available profiles")));
+                                         i18nc("@info:shell", "List the available profiles")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("list-profile-properties"),
-                                        i18nc("@info:shell", "List all the profile properties names and their type"
-                                              " (for use with -p)")));
+                                         i18nc("@info:shell",
+                                               "List all the profile properties names and their type"
+                                               " (for use with -p)")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("p"),
-                                        i18nc("@info:shell", "Change the value of a profile property."),
-                                        QStringLiteral("property=value")));
+                                         i18nc("@info:shell",
+                                               "Change the value of a profile property."),
+                                         QStringLiteral("property=value")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("e"),
-                                        i18nc("@info:shell", "Command to execute. This option will catch all following"
-                                              " arguments, so use it as the last option."),
-                                        QStringLiteral("cmd")));
+                                         i18nc("@info:shell",
+                                               "Command to execute. This option will catch all following"
+                                               " arguments, so use it as the last option."),
+                                         QStringLiteral("cmd")));
     parser->addPositionalArgument(QStringLiteral("[args]"),
-                                 i18nc("@info:shell", "Arguments passed to command"));
+                                  i18nc("@info:shell", "Arguments passed to command"));
 
     // Add a no-op compatibility option to make Konsole compatible with
     // Debian's policy on X terminal emulators.
@@ -135,33 +158,34 @@ Application::~Application()
     ProfileManager::instance()->saveSettings();
 }
 
-MainWindow* Application::newMainWindow()
+MainWindow *Application::newMainWindow()
 {
     WindowSystemInfo::HAVE_TRANSPARENCY = !m_parser->isSet(QStringLiteral("notransparency"));
 
     auto window = new MainWindow();
 
-    connect(window, &Konsole::MainWindow::newWindowRequest, this, &Konsole::Application::createWindow);
+    connect(window, &Konsole::MainWindow::newWindowRequest, this,
+            &Konsole::Application::createWindow);
     connect(window, &Konsole::MainWindow::viewDetached, this, &Konsole::Application::detachView);
 
     return window;
 }
 
-void Application::createWindow(Profile::Ptr profile, const QString& directory)
+void Application::createWindow(Profile::Ptr profile, const QString &directory)
 {
-    MainWindow* window = newMainWindow();
+    MainWindow *window = newMainWindow();
     window->createSession(profile, directory);
     finalizeNewMainWindow(window);
 }
 
-void Application::detachView(Session* session)
+void Application::detachView(Session *session)
 {
-    MainWindow* window = newMainWindow();
+    MainWindow *window = newMainWindow();
     window->createView(session);
 
     // When detaching a view, the size of the new window should equal the
     // size of the source window
-    Session* newsession = window->viewManager()->activeViewController()->session();
+    Session *newsession = window->viewManager()->activeViewController()->session();
     newsession->setSize(session->size());
     window->adjustSize();
     // Since user is dragging and dropping, move dnd window to where
@@ -180,11 +204,12 @@ int Application::newInstance()
 
     // check for arguments to print help or other information to the
     // terminal, quit if such an argument was found
-    if (processHelpArgs())
+    if (processHelpArgs()) {
         return 0;
+    }
 
     // create a new window or use an existing one
-    MainWindow* window = processWindowArgs(createdNewMainWindow);
+    MainWindow *window = processWindowArgs(createdNewMainWindow);
 
     if (m_parser->isSet(QStringLiteral("tabs-from-file"))) {
         // create new session(s) as described in file
@@ -201,7 +226,7 @@ int Application::newInstance()
     Profile::Ptr newProfile = processProfileChangeArgs(baseProfile);
 
     // create new session
-    Session* session = window->createSession(newProfile, QString());
+    Session *session = window->createSession(newProfile, QString());
 
     if (m_parser->isSet(QStringLiteral("noclose"))) {
         session->setAutoClose(false);
@@ -227,9 +252,9 @@ int Application::newInstance()
 
         // If not restoring size from last time or only adding new tab,
         // resize window to chosen profile size (see Bug:345403)
-        if (createdNewMainWindow){
+        if (createdNewMainWindow) {
             finalizeNewMainWindow(window);
-        } else{
+        } else {
             window->show();
         }
     }
@@ -253,7 +278,7 @@ title: Top this!;; command: top
 command: ssh  earth
 profile: Zsh
 */
-bool Application::processTabsFromFileArgs(MainWindow* window)
+bool Application::processTabsFromFileArgs(MainWindow *window)
 {
     // Open tab configuration file
     const QString tabsFileName(m_parser->value(QStringLiteral("tabs-from-file")));
@@ -267,8 +292,9 @@ bool Application::processTabsFromFileArgs(MainWindow* window)
     unsigned int sessions = 0;
     while (!tabsFile.atEnd()) {
         QString lineString(QString::fromUtf8(tabsFile.readLine()).trimmed());
-        if ((lineString.isEmpty()) || (lineString[0] == QLatin1Char('#')))
+        if ((lineString.isEmpty()) || (lineString[0] == QLatin1Char('#'))) {
             continue;
+        }
 
         QHash<QString, QString> lineTokens;
         QStringList lineParts = lineString.split(QStringLiteral(";;"), QString::SkipEmptyParts);
@@ -279,7 +305,8 @@ bool Application::processTabsFromFileArgs(MainWindow* window)
             lineTokens[key] = value;
         }
         // should contain at least one of 'command' and 'profile'
-        if (lineTokens.contains(QStringLiteral("command")) || lineTokens.contains(QStringLiteral("profile"))) {
+        if (lineTokens.contains(QStringLiteral("command"))
+            || lineTokens.contains(QStringLiteral("profile"))) {
             createTabFromArgs(window, lineTokens);
             sessions++;
         } else {
@@ -297,13 +324,12 @@ bool Application::processTabsFromFileArgs(MainWindow* window)
     return true;
 }
 
-void Application::createTabFromArgs(MainWindow* window,
-                                    const QHash<QString, QString>& tokens)
+void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QString> &tokens)
 {
-    const QString& title = tokens[QStringLiteral("title")];
-    const QString& command = tokens[QStringLiteral("command")];
-    const QString& profile = tokens[QStringLiteral("profile")];
-    const QString& workdir = tokens[QStringLiteral("workdir")];
+    const QString &title = tokens[QStringLiteral("title")];
+    const QString &command = tokens[QStringLiteral("command")];
+    const QString &profile = tokens[QStringLiteral("profile")];
+    const QString &workdir = tokens[QStringLiteral("workdir")];
 
     Profile::Ptr baseProfile;
     if (!profile.isEmpty()) {
@@ -322,7 +348,7 @@ void Application::createTabFromArgs(MainWindow* window,
     bool shouldUseNewProfile = false;
 
     if (!command.isEmpty()) {
-        newProfile->setProperty(Profile::Command,   command);
+        newProfile->setProperty(Profile::Command, command);
         newProfile->setProperty(Profile::Arguments, command.split(QLatin1Char(' ')));
         shouldUseNewProfile = true;
     }
@@ -344,8 +370,8 @@ void Application::createTabFromArgs(MainWindow* window,
     }
 
     // Create the new session
-    Profile::Ptr theProfile = shouldUseNewProfile ? newProfile :  baseProfile;
-    Session* session = window->createSession(theProfile, QString());
+    Profile::Ptr theProfile = shouldUseNewProfile ? newProfile : baseProfile;
+    Session *session = window->createSession(theProfile, QString());
 
     if (m_parser->isSet(QStringLiteral("noclose"))) {
         session->setAutoClose(false);
@@ -365,16 +391,17 @@ void Application::createTabFromArgs(MainWindow* window,
 
 // Creates a new Konsole window.
 // If --new-tab is given, use existing window.
-MainWindow* Application::processWindowArgs(bool &createdNewMainWindow)
+MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
 {
-    MainWindow* window = 0;
+    MainWindow *window = 0;
     if (m_parser->isSet(QStringLiteral("new-tab"))) {
-        QListIterator<QWidget*> iter(QApplication::topLevelWidgets());
+        QListIterator<QWidget *> iter(QApplication::topLevelWidgets());
         iter.toBack();
         while (iter.hasPrevious()) {
-            window = qobject_cast<MainWindow*>(iter.previous());
-            if (window != 0)
+            window = qobject_cast<MainWindow *>(iter.previous());
+            if (window != 0) {
                 break;
+            }
         }
     }
 
@@ -418,13 +445,15 @@ Profile::Ptr Application::processProfileSelectArgs()
 
     if (m_parser->isSet(QStringLiteral("profile"))) {
         Profile::Ptr profile = ProfileManager::instance()->loadProfile(
-                                   m_parser->value(QStringLiteral("profile")));
-        if (profile)
+            m_parser->value(QStringLiteral("profile")));
+        if (profile) {
             return profile;
+        }
     } else if (m_parser->isSet(QStringLiteral("fallback-profile"))) {
         Profile::Ptr profile = ProfileManager::instance()->loadProfile(QStringLiteral("FALLBACK/"));
-        if (profile)
+        if (profile) {
             return profile;
+        }
     }
 
     return defaultProfile;
@@ -446,12 +475,10 @@ void Application::listAvailableProfiles()
 {
     QStringList paths = ProfileManager::instance()->availableProfilePaths();
 
-    foreach(const QString& path, paths) {
+    foreach (const QString &path, paths) {
         QFileInfo info(path);
         printf("%s\n", info.completeBaseName().toLocal8Bit().constData());
     }
-
-    return;
 }
 
 void Application::listProfilePropertyInfo()
@@ -459,11 +486,9 @@ void Application::listProfilePropertyInfo()
     Profile::Ptr tempProfile = ProfileManager::instance()->defaultProfile();
     const QStringList names = tempProfile->propertiesInfoList();
 
-    foreach(const QString& name, names) {
+    foreach (const QString &name, names) {
         printf("%s\n", name.toLocal8Bit().constData());
     }
-
-    return;
 }
 
 Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
@@ -480,7 +505,7 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
     }
 
     // temporary changes to profile options specified on the command line
-    foreach(const QString & value , m_parser->values(QLatin1String("p"))) {
+    foreach (const QString &value, m_parser->values(QLatin1String("p"))) {
         ProfileCommandParser parser;
 
         QHashIterator<Profile::Property, QVariant> iter(parser.parse(value));
@@ -497,16 +522,17 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
         // Example: konsole -e man ls
         QString commandExec = m_customCommand[0];
         QStringList commandArguments(m_customCommand);
-        if ((m_customCommand.size() == 1) &&
-            (QStandardPaths::findExecutable(commandExec).isEmpty())) {
+        if ((m_customCommand.size() == 1)
+            && (QStandardPaths::findExecutable(commandExec).isEmpty())) {
             // Example: konsole -e "man ls"
             ShellCommand shellCommand(commandExec);
             commandExec = shellCommand.command();
             commandArguments = shellCommand.arguments();
         }
 
-        if (commandExec.startsWith(QLatin1String("./")))
+        if (commandExec.startsWith(QLatin1String("./"))) {
             commandExec = QDir::currentPath() + commandExec.mid(1);
+        }
 
         newProfile->setProperty(Profile::Command, commandExec);
         newProfile->setProperty(Profile::Arguments, commandArguments);
@@ -521,7 +547,7 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
     }
 }
 
-void Application::startBackgroundMode(MainWindow* window)
+void Application::startBackgroundMode(MainWindow *window)
 {
     if (_backgroundInstance != nullptr) {
         return;
@@ -554,7 +580,7 @@ void Application::toggleBackgroundInstance()
     }
 }
 
-void Application::slotActivateRequested (QStringList args, const QString & /*workingDir*/)
+void Application::slotActivateRequested(QStringList args, const QString & /*workingDir*/)
 {
     // QCommandLineParser expects the first argument to be the executable name
     // In the current version it just strips it away
@@ -571,9 +597,10 @@ void Application::slotActivateRequested (QStringList args, const QString & /*wor
     newInstance();
 }
 
-void Application::finalizeNewMainWindow(MainWindow* window)
+void Application::finalizeNewMainWindow(MainWindow *window)
 {
-    if (!KonsoleSettings::saveGeometryOnExit())
+    if (!KonsoleSettings::saveGeometryOnExit()) {
         window->resize(window->sizeHint());
+    }
     window->show();
 }

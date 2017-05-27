@@ -27,8 +27,7 @@
 // Konsole
 #include "Profile.h"
 
-namespace Konsole
-{
+namespace Konsole {
 class MainWindow;
 class Session;
 
@@ -50,7 +49,8 @@ class Application : public QObject
 
 public:
     /** Constructs a new Konsole application. */
-    explicit Application(QSharedPointer<QCommandLineParser> parser, const QStringList &customCommand);
+    explicit Application(QSharedPointer<QCommandLineParser> parser,
+                         const QStringList &customCommand);
 
     static void populateCommandLineParser(QCommandLineParser *parser);
     static QStringList getCustomCommand(QStringList &args);
@@ -65,30 +65,30 @@ public:
      * and newWindowRequest() signals to trigger creation of new sessions or
      * windows when then they are emitted.
      */
-    MainWindow* newMainWindow();
+    MainWindow *newMainWindow();
 
 private Q_SLOTS:
-    void createWindow(Profile::Ptr profile , const QString& directory);
-    void detachView(Session* session);
+    void createWindow(Profile::Ptr profile, const QString &directory);
+    void detachView(Session *session);
 
     void toggleBackgroundInstance();
 
 public Q_SLOTS:
-    void slotActivateRequested (QStringList args, const QString &workingDir);
+    void slotActivateRequested(QStringList args, const QString &workingDir);
 
 private:
     void listAvailableProfiles();
     void listProfilePropertyInfo();
-    void startBackgroundMode(MainWindow* window);
+    void startBackgroundMode(MainWindow *window);
     bool processHelpArgs();
-    MainWindow* processWindowArgs(bool &createdNewMainWindow);
+    MainWindow *processWindowArgs(bool &createdNewMainWindow);
     Profile::Ptr processProfileSelectArgs();
     Profile::Ptr processProfileChangeArgs(Profile::Ptr baseProfile);
-    bool processTabsFromFileArgs(MainWindow* window);
-    void createTabFromArgs(MainWindow* window, const QHash<QString, QString>&);
-    void finalizeNewMainWindow(MainWindow* window);
+    bool processTabsFromFileArgs(MainWindow *window);
+    void createTabFromArgs(MainWindow *window, const QHash<QString, QString> &);
+    void finalizeNewMainWindow(MainWindow *window);
 
-    MainWindow* _backgroundInstance;
+    MainWindow *_backgroundInstance;
     QSharedPointer<QCommandLineParser> m_parser;
     QStringList m_customCommand;
 };
