@@ -38,13 +38,11 @@ class QAbstractButton;
 class QItemSelectionModel;
 class QTextCodec;
 class QDialogButtonBox;
-namespace Ui
-{
+namespace Ui {
 class EditProfileDialog;
 }
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * A dialog which allows the user to edit a profile.
  * After the dialog is created, it can be initialized with the settings
@@ -64,7 +62,7 @@ class KONSOLEPRIVATE_EXPORT EditProfileDialog : public QDialog
 
 public:
     /** Constructs a new dialog with the specified parent. */
-    explicit EditProfileDialog(QWidget* parent = 0);
+    explicit EditProfileDialog(QWidget *parent = 0);
     ~EditProfileDialog() Q_DECL_OVERRIDE;
 
     /**
@@ -94,7 +92,7 @@ public Q_SLOTS:
     void reject() Q_DECL_OVERRIDE;
 
 protected:
-    bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     // sets up the specified tab page if necessary
@@ -107,12 +105,12 @@ private Q_SLOTS:
     void selectInitialDir();
     void selectIcon();
 
-    void profileNameChanged(const QString& text);
-    void initialDirChanged(const QString& text);
+    void profileNameChanged(const QString &text);
+    void initialDirChanged(const QString &text);
     void startInSameDir(bool);
-    void commandChanged(const QString& text);
-    void tabTitleFormatChanged(const QString& text);
-    void remoteTabTitleFormatChanged(const QString& text);
+    void commandChanged(const QString &text);
+    void tabTitleFormatChanged(const QString &text);
+    void remoteTabTitleFormatChanged(const QString &text);
 
     void terminalColumnsEntryChanged(int);
     void terminalRowsEntryChanged(int);
@@ -122,7 +120,7 @@ private Q_SLOTS:
 
     // appearance page
     void setFontSize(double pointSize);
-    void setFontInputValue(const QFont&);
+    void setFontInputValue(const QFont &);
     void showAllFontsButtonWarning(bool enable);
     void setAntialiasText(bool enable);
     void setBoldIntense(bool enable);
@@ -130,11 +128,11 @@ private Q_SLOTS:
     void showFontDialog();
     void newColorScheme();
     void editColorScheme();
-    void saveColorScheme(const ColorScheme& scheme, bool isNewScheme);
+    void saveColorScheme(const ColorScheme &scheme, bool isNewScheme);
     void removeColorScheme();
     void colorSchemeSelected();
-    void previewColorScheme(const QModelIndex& index);
-    void fontSelected(const QFont&);
+    void previewColorScheme(const QModelIndex &index);
+    void fontSelected(const QFont &);
     void toggleMouseWheelZoom(bool enable);
 
     // scrolling page
@@ -167,7 +165,7 @@ private Q_SLOTS:
     void pasteFromClipboard();
 
     void TripleClickModeChanged(int);
-    void wordCharactersChanged(const QString&);
+    void wordCharactersChanged(const QString &);
 
     // advanced page
     void toggleBlinkingText(bool);
@@ -180,8 +178,8 @@ private Q_SLOTS:
     void setCursorShape(int);
     void autoCursorColor();
     void customCursorColor();
-    void customCursorColorChanged(const QColor&);
-    void setDefaultCodec(QTextCodec*);
+    void customCursorColorChanged(const QColor &);
+    void setDefaultCodec(QTextCodec *);
 
     // apply the first previewed changes stored up by delayedPreview()
     void delayedPreviewActivate();
@@ -205,11 +203,11 @@ private:
     void closeColorSchemeEditor();
     void showKeyBindingEditor(bool newTranslator);
 
-    void preview(int property , const QVariant& value);
-    void delayedPreview(int property , const QVariant& value);
+    void preview(int property, const QVariant &value);
+    void delayedPreview(int property, const QVariant &value);
     void unpreview(int property);
     void unpreviewAll();
-    void enableIfNonEmptySelection(QWidget* widget, QItemSelectionModel* selectionModel);
+    void enableIfNonEmptySelection(QWidget *widget, QItemSelectionModel *selectionModel);
 
     void updateCaption(const Profile::Ptr profile);
     void updateTransparencyWarning();
@@ -217,7 +215,7 @@ private:
     // Update _tempProfile in a way of respecting the apply button.
     // When used with some previewed property, this method should
     // always come after the preview operation.
-    void updateTempProfileProperty(Profile::Property, const QVariant& value);
+    void updateTempProfileProperty(Profile::Property, const QVariant &value);
 
     // helper method for creating an empty & hidden profile and assigning
     // it to _tempProfile.
@@ -230,19 +228,19 @@ private:
     static QString groupProfileNames(const ProfileGroup::Ptr group, int maxLength = -1);
 
     struct RadioOption {
-        QAbstractButton* button;
+        QAbstractButton *button;
         int value;
-        const char* slot;
+        const char *slot;
     };
-    void setupRadio(RadioOption* possibilities, int actual);
+    void setupRadio(RadioOption *possibilities, int actual);
     struct BooleanOption {
-        QAbstractButton* button;
+        QAbstractButton *button;
         Profile::Property property;
-        const char* slot;
+        const char *slot;
     };
-    void setupCheckBoxes(BooleanOption* options , const Profile::Ptr profile);
+    void setupCheckBoxes(BooleanOption *options, const Profile::Ptr profile);
 
-    Ui::EditProfileDialog* _ui;
+    Ui::EditProfileDialog *_ui;
     Profile::Ptr _tempProfile;
     Profile::Ptr _profile;
 
@@ -254,9 +252,9 @@ private:
     QHash<int, QVariant> _previewedProperties;
 
     QHash<int, QVariant> _delayedPreviewProperties;
-    QTimer* _delayedPreviewTimer;
+    QTimer *_delayedPreviewTimer;
 
-    ColorSchemeEditor* _colorDialog;
+    ColorSchemeEditor *_colorDialog;
     QDialogButtonBox *mButtonBox;
 };
 
@@ -268,13 +266,13 @@ class ColorSchemeViewDelegate : public QAbstractItemDelegate
     Q_OBJECT
 
 public:
-    explicit ColorSchemeViewDelegate(QObject* parent = 0);
+    explicit ColorSchemeViewDelegate(QObject *parent = 0);
 
     // reimplemented
-    void paint(QPainter* painter, const QStyleOptionViewItem& option,
-                       const QModelIndex& index) const Q_DECL_OVERRIDE;
-    QSize sizeHint(const QStyleOptionViewItem& option,
-                           const QModelIndex& index) const Q_DECL_OVERRIDE;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+               const QModelIndex &index) const Q_DECL_OVERRIDE;
+    QSize sizeHint(const QStyleOptionViewItem &option,
+                   const QModelIndex &index) const Q_DECL_OVERRIDE;
 };
 }
 
