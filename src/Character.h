@@ -26,8 +26,7 @@
 // Konsole
 #include "CharacterColor.h"
 
-namespace Konsole
-{
+namespace Konsole {
 typedef unsigned char LineProperty;
 
 typedef quint16 RenditionFlags;
@@ -103,13 +102,13 @@ public:
     quint16 character;
 
     /** A combination of RENDITION flags which specify options for drawing the character. */
-    RenditionFlags  rendition;
+    RenditionFlags rendition;
 
     /** The foreground color used to draw this character. */
-    CharacterColor  foregroundColor;
+    CharacterColor foregroundColor;
 
     /** The color used to draw this character's background. */
-    CharacterColor  backgroundColor;
+    CharacterColor backgroundColor;
 
     /** Indicate whether this character really exists, or exists simply as place holder.
      *
@@ -125,21 +124,22 @@ public:
     /**
      * returns true if the format (color, rendition flag) of the compared characters is equal
      */
-    bool equalsFormat(const Character& other) const;
+    bool equalsFormat(const Character &other) const;
 
     /**
      * Compares two characters and returns true if they have the same unicode character value,
      * rendition and colors.
      */
-    friend bool operator == (const Character& a, const Character& b);
+    friend bool operator ==(const Character &a, const Character &b);
 
     /**
      * Compares two characters and returns true if they have different unicode character values,
      * renditions or colors.
      */
-    friend bool operator != (const Character& a, const Character& b);
+    friend bool operator !=(const Character &a, const Character &b);
 
-    inline bool isLineChar() const {
+    inline bool isLineChar() const
+    {
         if (rendition & RE_EXTENDED_CHAR) {
             return false;
         } else {
@@ -147,7 +147,8 @@ public:
         }
     }
 
-    inline bool isSpace() const {
+    inline bool isSpace() const
+    {
         if (rendition & RE_EXTENDED_CHAR) {
             return false;
         } else {
@@ -156,25 +157,23 @@ public:
     }
 };
 
-inline bool operator == (const Character& a, const Character& b)
+inline bool operator ==(const Character &a, const Character &b)
 {
     return a.character == b.character && a.equalsFormat(b);
 }
 
-inline bool operator != (const Character& a, const Character& b)
+inline bool operator !=(const Character &a, const Character &b)
 {
     return !operator==(a, b);
 }
 
-inline bool Character::equalsFormat(const Character& other) const
+inline bool Character::equalsFormat(const Character &other) const
 {
-    return backgroundColor == other.backgroundColor &&
-           foregroundColor == other.foregroundColor &&
-           rendition == other.rendition;
+    return backgroundColor == other.backgroundColor
+           && foregroundColor == other.foregroundColor
+           && rendition == other.rendition;
 }
-
 }
 Q_DECLARE_TYPEINFO(Konsole::Character, Q_MOVABLE_TYPE);
 
 #endif // CHARACTER_H
-

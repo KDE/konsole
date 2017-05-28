@@ -26,8 +26,7 @@
 // Qt
 #include <QColor>
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * An entry in a terminal display's color palette.
  *
@@ -80,12 +79,13 @@ class CharacterColor
 
 public:
     /** Constructs a new CharacterColor whose color and color space are undefined. */
-    CharacterColor()
-        : _colorSpace(COLOR_SPACE_UNDEFINED),
-          _u(0),
-          _v(0),
-          _w(0)
-    {}
+    CharacterColor() :
+        _colorSpace(COLOR_SPACE_UNDEFINED),
+        _u(0),
+        _v(0),
+        _w(0)
+    {
+    }
 
     /**
      * Constructs a new CharacterColor using the specified @p colorSpace and with
@@ -97,11 +97,12 @@ public:
      *
      * TODO : Add documentation about available color spaces.
      */
-    CharacterColor(quint8 colorSpace, int co)
-        : _colorSpace(colorSpace),
-          _u(0),
-          _v(0),
-          _w(0) {
+    CharacterColor(quint8 colorSpace, int co) :
+        _colorSpace(colorSpace),
+        _u(0),
+        _v(0),
+        _w(0)
+    {
         switch (colorSpace) {
         case COLOR_SPACE_DEFAULT:
             _u = co & 1;
@@ -126,7 +127,8 @@ public:
     /**
      * Returns true if this character color entry is valid.
      */
-    bool isValid() const {
+    bool isValid() const
+    {
         return _colorSpace != COLOR_SPACE_UNDEFINED;
     }
 
@@ -152,18 +154,18 @@ public:
      * The @p palette is only used if this color is one of the 16 system colors, otherwise
      * it is ignored.
      */
-    QColor color(const ColorEntry* palette) const;
+    QColor color(const ColorEntry *palette) const;
 
     /**
      * Compares two colors and returns true if they represent the same color value and
      * use the same color space.
      */
-    friend bool operator == (const CharacterColor& a, const CharacterColor& b);
+    friend bool operator ==(const CharacterColor &a, const CharacterColor &b);
     /**
      * Compares two colors and returns true if they represent different color values
      * or use different color spaces.
      */
-    friend bool operator != (const CharacterColor& a, const CharacterColor& b);
+    friend bool operator !=(const CharacterColor &a, const CharacterColor &b);
 
 private:
     quint8 _colorSpace;
@@ -174,19 +176,20 @@ private:
     quint8 _w;
 };
 
-inline bool operator == (const CharacterColor& a, const CharacterColor& b)
+inline bool operator ==(const CharacterColor &a, const CharacterColor &b)
 {
-    return     a._colorSpace == b._colorSpace &&
-               a._u == b._u &&
-               a._v == b._v &&
-               a._w == b._w;
+    return a._colorSpace == b._colorSpace
+           && a._u == b._u
+           && a._v == b._v
+           && a._w == b._w;
 }
-inline bool operator != (const CharacterColor& a, const CharacterColor& b)
+
+inline bool operator !=(const CharacterColor &a, const CharacterColor &b)
 {
     return !operator==(a, b);
 }
 
-inline const QColor color256(quint8 u, const ColorEntry* base)
+inline const QColor color256(quint8 u, const ColorEntry *base)
 {
     //   0.. 16: system colors
     if (u < 8) {
@@ -212,7 +215,7 @@ inline const QColor color256(quint8 u, const ColorEntry* base)
     return QColor(gray, gray, gray);
 }
 
-inline QColor CharacterColor::color(const ColorEntry* base) const
+inline QColor CharacterColor::color(const ColorEntry *base) const
 {
     switch (_colorSpace) {
     case COLOR_SPACE_DEFAULT:
@@ -245,8 +248,6 @@ inline void CharacterColor::setFaint()
         _v = 2;
     }
 }
-
 }
 
 #endif // CHARACTERCOLOR_H
-
