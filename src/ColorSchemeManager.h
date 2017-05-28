@@ -29,8 +29,7 @@
 // Konsole
 #include "ColorScheme.h"
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * Manages the color schemes available for use by terminal displays.
  * See ColorScheme
@@ -54,7 +53,7 @@ public:
     /**
      * Returns the default color scheme for Konsole
      */
-    const ColorScheme* defaultColorScheme() const;
+    const ColorScheme *defaultColorScheme() const;
 
     /**
      * Returns the color scheme with the given name or 0 if no
@@ -64,18 +63,18 @@ public:
      * The first time that a color scheme with a particular name is
      * requested, the configuration information is loaded from disk.
      */
-    const ColorScheme* findColorScheme(const QString& name);
+    const ColorScheme *findColorScheme(const QString &name);
 
     /**
      * Adds a new color scheme to the manager.  If @p scheme has the same name as
      * an existing color scheme, it replaces the existing scheme.
      */
-    void addColorScheme(ColorScheme* scheme);
+    void addColorScheme(ColorScheme *scheme);
 
     /**
      * Deletes a color scheme.  Returns true on successful deletion or false otherwise.
      */
-    bool deleteColorScheme(const QString& name);
+    bool deleteColorScheme(const QString &name);
 
     /**
      * Returns a list of the all the available color schemes.
@@ -84,22 +83,22 @@ public:
      *
      * Subsequent calls will be inexpensive.
      */
-    QList<const ColorScheme*> allColorSchemes();
+    QList<const ColorScheme *> allColorSchemes();
 
     /** Returns the global color scheme manager instance. */
-    static ColorSchemeManager* instance();
+    static ColorSchemeManager *instance();
 
 private:
     // loads a color scheme from a KDE 4+ .colorscheme file
-    bool loadColorScheme(const QString& path);
+    bool loadColorScheme(const QString &path);
     // returns a list of paths of color schemes in the KDE 4+ .colorscheme file format
     QStringList listColorSchemes();
     // loads all of the color schemes
     void loadAllColorSchemes();
     // finds the path of a color scheme
-    QString findColorSchemePath(const QString& name) const;
+    QString findColorSchemePath(const QString &name) const;
 
-    QHash<QString, const ColorScheme*> _colorSchemes;
+    QHash<QString, const ColorScheme *> _colorSchemes;
 
     bool _haveLoadedAll;
 

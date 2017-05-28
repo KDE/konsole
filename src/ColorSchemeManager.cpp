@@ -35,9 +35,9 @@
 
 using namespace Konsole;
 
-ColorSchemeManager::ColorSchemeManager()
-    : _colorSchemes(QHash<QString, const ColorScheme*>())
-    , _haveLoadedAll(false)
+ColorSchemeManager::ColorSchemeManager() :
+    _colorSchemes(QHash<QString, const ColorScheme *>()),
+    _haveLoadedAll(false)
 {
 }
 
@@ -59,20 +59,22 @@ void ColorSchemeManager::loadAllColorSchemes()
     int failed = 0;
 
     QStringList nativeColorSchemes = listColorSchemes();
-    foreach(const QString& colorScheme, nativeColorSchemes) {
-        if (loadColorScheme(colorScheme))
+    foreach (const QString &colorScheme, nativeColorSchemes) {
+        if (loadColorScheme(colorScheme)) {
             success++;
-        else
+        } else {
             failed++;
+        }
     }
 
-    if (failed > 0)
+    if (failed > 0) {
         qCDebug(KonsoleDebug) << "failed to load " << failed << " color schemes.";
+    }
 
     _haveLoadedAll = true;
 }
 
-QList<const ColorScheme*> ColorSchemeManager::allColorSchemes()
+QList<const ColorScheme *> ColorSchemeManager::allColorSchemes()
 {
     if (!_haveLoadedAll) {
         loadAllColorSchemes();
@@ -81,20 +83,22 @@ QList<const ColorScheme*> ColorSchemeManager::allColorSchemes()
     return _colorSchemes.values();
 }
 
-bool ColorSchemeManager::loadColorScheme(const QString& filePath)
+bool ColorSchemeManager::loadColorScheme(const QString &filePath)
 {
-    if (!filePath.endsWith(QLatin1String(".colorscheme")) || !QFile::exists(filePath))
+    if (!filePath.endsWith(QLatin1String(".colorscheme")) || !QFile::exists(filePath)) {
         return false;
+    }
 
     QFileInfo info(filePath);
 
-    KConfig config(filePath , KConfig::NoGlobals);
+    KConfig config(filePath, KConfig::NoGlobals);
     auto scheme = new ColorScheme();
     scheme->setName(info.baseName());
     scheme->read(config);
 
     if (scheme->name().isEmpty()) {
-        qCDebug(KonsoleDebug) << "Color scheme in" << filePath << "does not have a valid name and was not loaded.";
+        qCDebug(KonsoleDebug) << "Color scheme in" << filePath
+                              << "does not have a valid name and was not loaded.";
         delete scheme;
         return false;
     }
@@ -114,26 +118,26 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
 QStringList ColorSchemeManager::listColorSchemes()
 {
     QStringList colorschemes;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"),
+                                                       QStandardPaths::LocateDirectory);
     colorschemes.reserve(dirs.size());
 
-    Q_FOREACH (const QString& dir, dirs) {
+    Q_FOREACH (const QString &dir, dirs) {
         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.colorscheme"));
-        Q_FOREACH (const QString& file, fileNames) {
+        Q_FOREACH (const QString &file, fileNames) {
             colorschemes.append(dir + QLatin1Char('/') + file);
         }
     }
     return colorschemes;
 }
 
-
 const ColorScheme ColorSchemeManager::_defaultColorScheme;
-const ColorScheme* ColorSchemeManager::defaultColorScheme() const
+const ColorScheme *ColorSchemeManager::defaultColorScheme() const
 {
     return &_defaultColorScheme;
 }
 
-void ColorSchemeManager::addColorScheme(ColorScheme* scheme)
+void ColorSchemeManager::addColorScheme(ColorScheme *scheme)
 {
     // remove existing colorscheme with the same name
     if (_colorSchemes.contains(scheme->name())) {
@@ -145,15 +149,16 @@ void ColorSchemeManager::addColorScheme(ColorScheme* scheme)
 
     // save changes to disk
 
-    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole/");
+    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
+                        + QStringLiteral("/konsole/");
     QDir().mkpath(dir);
     const QString path = dir + scheme->name() + QStringLiteral(".colorscheme");
-    KConfig config(path , KConfig::NoGlobals);
+    KConfig config(path, KConfig::NoGlobals);
 
     scheme->write(config);
 }
 
-bool ColorSchemeManager::deleteColorScheme(const QString& name)
+bool ColorSchemeManager::deleteColorScheme(const QString &name)
 {
     Q_ASSERT(_colorSchemes.contains(name));
 
@@ -169,10 +174,11 @@ bool ColorSchemeManager::deleteColorScheme(const QString& name)
     }
 }
 
-const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
+const ColorScheme *ColorSchemeManager::findColorScheme(const QString &name)
 {
-    if (name.isEmpty())
+    if (name.isEmpty()) {
         return defaultColorScheme();
+    }
 
     // A fix to prevent infinite loops if users puts / in ColorScheme name
     // Konsole will create a sub-folder in that case (bko 315086)
@@ -197,7 +203,7 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
     }
 }
 
-QString ColorSchemeManager::findColorSchemePath(const QString& name) const
+QString ColorSchemeManager::findColorSchemePath(const QString &name) const
 {
     QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".colorscheme"));
 
@@ -207,4 +213,3 @@ QString ColorSchemeManager::findColorSchemePath(const QString& name) const
 
     return QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".schema"));
 }
-

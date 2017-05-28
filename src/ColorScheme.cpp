@@ -33,8 +33,7 @@
 // STL
 #include <random>
 
-namespace
-{
+namespace {
 const int FGCOLOR_INDEX = 0;
 const int BGCOLOR_INDEX = 1;
 }
@@ -80,7 +79,7 @@ const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] = {
     ColorEntry(QColor(0x65, 0x65, 0x65))
 };
 
-const char* const ColorScheme::colorNames[TABLE_COLORS] = {
+const char * const ColorScheme::colorNames[TABLE_COLORS] = {
     "Foreground",
     "Background",
     "Color0",
@@ -112,7 +111,7 @@ const char* const ColorScheme::colorNames[TABLE_COLORS] = {
     "Color6Faint",
     "Color7Faint"
 };
-const char* const ColorScheme::translatedColorNames[TABLE_COLORS] = {
+const char * const ColorScheme::translatedColorNames[TABLE_COLORS] = {
     I18N_NOOP2("@item:intable palette", "Foreground"),
     I18N_NOOP2("@item:intable palette", "Background"),
     I18N_NOOP2("@item:intable palette", "Color 1"),
@@ -159,76 +158,82 @@ QString ColorScheme::translatedColorNameForIndex(int index)
     return i18nc("@item:intable palette", translatedColorNames[index]);
 }
 
-ColorScheme::ColorScheme()
-    : _description(QString())
-    , _name(QString())
-    , _table(0)
-    , _randomTable(0)
-    , _opacity(1.0)
-    , _wallpaper(0)
+ColorScheme::ColorScheme() :
+    _description(QString()),
+    _name(QString()),
+    _table(0),
+    _randomTable(0),
+    _opacity(1.0),
+    _wallpaper(0)
 {
     setWallpaper(QString());
 }
 
-ColorScheme::ColorScheme(const ColorScheme& other)
-    : _table(0)
-    , _randomTable(0)
-    , _opacity(other._opacity)
-    , _wallpaper(other._wallpaper)
+ColorScheme::ColorScheme(const ColorScheme &other) :
+    _table(0),
+    _randomTable(0),
+    _opacity(other._opacity),
+    _wallpaper(other._wallpaper)
 {
     setName(other.name());
     setDescription(other.description());
 
     if (other._table != 0) {
-        for (int i = 0 ; i < TABLE_COLORS ; i++)
+        for (int i = 0; i < TABLE_COLORS; i++) {
             setColorTableEntry(i, other._table[i]);
+        }
     }
 
     if (other._randomTable != 0) {
-        for (int i = 0 ; i < TABLE_COLORS ; i++) {
-            const RandomizationRange& range = other._randomTable[i];
+        for (int i = 0; i < TABLE_COLORS; i++) {
+            const RandomizationRange &range = other._randomTable[i];
             setRandomizationRange(i, range.hue, range.saturation, range.value);
         }
     }
 }
+
 ColorScheme::~ColorScheme()
 {
     delete[] _table;
     delete[] _randomTable;
 }
 
-void ColorScheme::setDescription(const QString& aDescription)
+void ColorScheme::setDescription(const QString &aDescription)
 {
     _description = aDescription;
 }
+
 QString ColorScheme::description() const
 {
     return _description;
 }
 
-void ColorScheme::setName(const QString& aName)
+void ColorScheme::setName(const QString &aName)
 {
     _name = aName;
 }
+
 QString ColorScheme::name() const
 {
     return _name;
 }
 
-void ColorScheme::setColorTableEntry(int index , const ColorEntry& entry)
+void ColorScheme::setColorTableEntry(int index, const ColorEntry &entry)
 {
     Q_ASSERT(index >= 0 && index < TABLE_COLORS);
 
     if (_table == nullptr) {
         _table = new ColorEntry[TABLE_COLORS];
 
-        for (int i = 0; i < TABLE_COLORS; i++)
+        for (int i = 0; i < TABLE_COLORS; i++) {
             _table[i] = defaultTable[i];
+        }
     }
 
     _table[index] = entry;
 }
-ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
+
+ColorEntry ColorScheme::colorEntry(int index, uint randomSeed) const
 {
     Q_ASSERT(index >= 0 && index < TABLE_COLORS);
 
@@ -238,8 +243,7 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
         return entry;
     }
 
-
-    const RandomizationRange& range = _randomTable[index];
+    const RandomizationRange &range = _randomTable[index];
 
     // 32-bit Mersenne Twister
     // Can't use default_random_engine, because in GCC this maps to
@@ -264,25 +268,29 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
         valueDifference = dist(randomEngine) - range.value / 2;
     }
 
-    QColor& color = entry;
+    QColor &color = entry;
 
     int newHue = qAbs((color.hue() + hueDifference) % MAX_HUE);
-    int newValue = qMin(qAbs(color.value() + valueDifference) , 255);
-    int newSaturation = qMin(qAbs(color.saturation() + saturationDifference) , 255);
+    int newValue = qMin(qAbs(color.value() + valueDifference), 255);
+    int newSaturation = qMin(qAbs(color.saturation() + saturationDifference), 255);
 
     color.setHsv(newHue, newSaturation, newValue);
 
     return entry;
 }
-void ColorScheme::getColorTable(ColorEntry* table , uint randomSeed) const
+
+void ColorScheme::getColorTable(ColorEntry *table, uint randomSeed) const
 {
-    for (int i = 0 ; i < TABLE_COLORS ; i++)
+    for (int i = 0; i < TABLE_COLORS; i++) {
         table[i] = colorEntry(i, randomSeed);
+    }
 }
+
 bool ColorScheme::randomizedBackgroundColor() const
 {
     return _randomTable == 0 ? false : !_randomTable[BGCOLOR_INDEX].isNull();
 }
+
 void ColorScheme::setRandomizedBackgroundColor(bool randomize)
 {
     // the hue of the background color is allowed to be randomly
@@ -290,58 +298,65 @@ void ColorScheme::setRandomizedBackgroundColor(bool randomize)
     //
     // the value and saturation are left alone to maintain read-ability
     if (randomize) {
-        setRandomizationRange(BGCOLOR_INDEX , MAX_HUE , 255 , 0);
+        setRandomizationRange(BGCOLOR_INDEX, MAX_HUE, 255, 0);
     } else {
-        if (_randomTable != nullptr)
-            setRandomizationRange(BGCOLOR_INDEX , 0 , 0 , 0);
+        if (_randomTable != nullptr) {
+            setRandomizationRange(BGCOLOR_INDEX, 0, 0, 0);
+        }
     }
 }
 
-void ColorScheme::setRandomizationRange(int index , quint16 hue , quint8 saturation ,
-                                        quint8 value)
+void ColorScheme::setRandomizationRange(int index, quint16 hue, quint8 saturation, quint8 value)
 {
     Q_ASSERT(hue <= MAX_HUE);
     Q_ASSERT(index >= 0 && index < TABLE_COLORS);
 
-    if (_randomTable == 0)
+    if (_randomTable == 0) {
         _randomTable = new RandomizationRange[TABLE_COLORS];
+    }
 
     _randomTable[index].hue = hue;
     _randomTable[index].value = value;
     _randomTable[index].saturation = saturation;
 }
 
-const ColorEntry* ColorScheme::colorTable() const
+const ColorEntry *ColorScheme::colorTable() const
 {
-    if (_table != nullptr)
+    if (_table != nullptr) {
         return _table;
-    else
+    } else {
         return defaultTable;
+    }
 }
+
 QColor ColorScheme::foregroundColor() const
 {
     return colorTable()[FGCOLOR_INDEX];
 }
+
 QColor ColorScheme::backgroundColor() const
 {
     return colorTable()[BGCOLOR_INDEX];
 }
+
 bool ColorScheme::hasDarkBackground() const
 {
     // value can range from 0 - 255, with larger values indicating higher brightness.
     // so 127 is in the middle, anything less is deemed 'dark'
     return backgroundColor().value() < 127;
 }
+
 void ColorScheme::setOpacity(qreal aOpacity)
 {
     _opacity = aOpacity;
 }
+
 qreal ColorScheme::opacity() const
 {
     return _opacity;
 }
 
-void ColorScheme::read(const KConfig& config)
+void ColorScheme::read(const KConfig &config)
 {
     KConfigGroup configGroup = config.group("General");
 
@@ -351,12 +366,11 @@ void ColorScheme::read(const KConfig& config)
     _opacity = configGroup.readEntry("Opacity", qreal(1.0));
     setWallpaper(configGroup.readEntry("Wallpaper", QString()));
 
-    for (int i = 0 ; i < TABLE_COLORS ; i++) {
+    for (int i = 0; i < TABLE_COLORS; i++) {
         readColorEntry(config, i);
     }
 }
-
-void ColorScheme::readColorEntry(const KConfig& config , int index)
+void ColorScheme::readColorEntry(const KConfig &config, int index)
 {
     KConfigGroup configGroup = config.group(colorNameForIndex(index));
 
@@ -369,17 +383,18 @@ void ColorScheme::readColorEntry(const KConfig& config , int index)
 
     entry = configGroup.readEntry("Color", QColor());
 
-    setColorTableEntry(index , entry);
+    setColorTableEntry(index, entry);
 
     const quint16 hue = static_cast<quint16>(configGroup.readEntry("MaxRandomHue", 0));
     const quint8 value = static_cast<quint8>(configGroup.readEntry("MaxRandomValue", 0));
     const quint8 saturation = static_cast<quint8>(configGroup.readEntry("MaxRandomSaturation", 0));
 
-    if (hue != 0 || value != 0 || saturation != 0)
-        setRandomizationRange(index , hue , saturation , value);
+    if (hue != 0 || value != 0 || saturation != 0) {
+        setRandomizationRange(index, hue, saturation, value);
+    }
 }
 
-void ColorScheme::write(KConfig& config) const
+void ColorScheme::write(KConfig &config) const
 {
     KConfigGroup configGroup = config.group("General");
 
@@ -387,16 +402,16 @@ void ColorScheme::write(KConfig& config) const
     configGroup.writeEntry("Opacity", _opacity);
     configGroup.writeEntry("Wallpaper", _wallpaper->path());
 
-    for (int i = 0 ; i < TABLE_COLORS ; i++) {
+    for (int i = 0; i < TABLE_COLORS; i++) {
         writeColorEntry(config, i);
     }
 }
 
-void ColorScheme::writeColorEntry(KConfig& config , int index) const
+void ColorScheme::writeColorEntry(KConfig &config, int index) const
 {
     KConfigGroup configGroup = config.group(colorNameForIndex(index));
 
-    const ColorEntry& entry = colorTable()[index];
+    const ColorEntry &entry = colorTable()[index];
 
     configGroup.writeEntry("Color", entry);
 
@@ -422,7 +437,7 @@ void ColorScheme::writeColorEntry(KConfig& config , int index) const
     }
 }
 
-void ColorScheme::setWallpaper(const QString& path)
+void ColorScheme::setWallpaper(const QString &path)
 {
     _wallpaper = new ColorSchemeWallpaper(path);
 }
@@ -432,9 +447,9 @@ ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const
     return _wallpaper;
 }
 
-ColorSchemeWallpaper::ColorSchemeWallpaper(const QString& aPath)
-    : _path(aPath),
-      _picture(0)
+ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &aPath) :
+    _path(aPath),
+    _picture(0)
 {
 }
 
@@ -445,15 +460,18 @@ ColorSchemeWallpaper::~ColorSchemeWallpaper()
 
 void ColorSchemeWallpaper::load()
 {
-    if (_path.isEmpty())
+    if (_path.isEmpty()) {
         return;
+    }
 
     // Create and load original pixmap
-    if (_picture == nullptr)
+    if (_picture == nullptr) {
         _picture = new QPixmap();
+    }
 
-    if (_picture->isNull())
+    if (_picture->isNull()) {
         _picture->load(_path);
+    }
 }
 
 bool ColorSchemeWallpaper::isNull() const
@@ -461,10 +479,11 @@ bool ColorSchemeWallpaper::isNull() const
     return _path.isEmpty();
 }
 
-bool ColorSchemeWallpaper::draw(QPainter& painter, const QRect& rect, qreal opacity)
+bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect &rect, qreal opacity)
 {
-    if ((_picture == nullptr) || _picture->isNull())
+    if ((_picture == nullptr) || _picture->isNull()) {
         return false;
+    }
 
     if (qFuzzyCompare(1.0, opacity)) {
         painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
@@ -472,7 +491,7 @@ bool ColorSchemeWallpaper::draw(QPainter& painter, const QRect& rect, qreal opac
     }
     painter.save();
     painter.setCompositionMode(QPainter::CompositionMode_Source);
-    painter.fillRect(rect, QColor(0,0,0,0));
+    painter.fillRect(rect, QColor(0, 0, 0, 0));
     painter.setOpacity(opacity);
     painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
     painter.restore();
@@ -483,4 +502,3 @@ QString ColorSchemeWallpaper::path() const
 {
     return _path;
 }
-

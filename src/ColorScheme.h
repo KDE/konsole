@@ -33,8 +33,7 @@ class KConfig;
 class QPixmap;
 class QPainter;
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * This class holds the wallpaper pixmap associated with a color scheme.
  * The wallpaper object is shared between multiple TerminalDisplay.
@@ -44,13 +43,13 @@ class ColorSchemeWallpaper : public QSharedData
 public:
     typedef QExplicitlySharedDataPointer<ColorSchemeWallpaper> Ptr;
 
-    explicit ColorSchemeWallpaper(const QString& path);
+    explicit ColorSchemeWallpaper(const QString &path);
     ~ColorSchemeWallpaper();
 
     void load();
 
     /** Returns true if wallpaper available and drawn */
-    bool draw(QPainter& painter, const QRect& rect, qreal opacity=1.0);
+    bool draw(QPainter &painter, const QRect &rect, qreal opacity = 1.0);
 
     bool isNull() const;
 
@@ -58,7 +57,7 @@ public:
 
 private:
     QString _path;
-    QPixmap* _picture;
+    QPixmap *_picture;
 };
 
 /**
@@ -75,26 +74,26 @@ public:
      * for Konsole.
      */
     ColorScheme();
-    ColorScheme(const ColorScheme& other);
+    ColorScheme(const ColorScheme &other);
     ~ColorScheme();
 
     /** Sets the descriptive name of the color scheme. */
-    void setDescription(const QString& description);
+    void setDescription(const QString &description);
     /** Returns the descriptive name of the color scheme. */
     QString description() const;
 
     /** Sets the name of the color scheme */
-    void setName(const QString& name);
+    void setName(const QString &name);
     /** Returns the name of the color scheme */
     QString name() const;
 
     /** Reads the color scheme from the specified configuration source */
-    void read(const KConfig& config);
+    void read(const KConfig &config);
     /** Writes the color scheme to the specified configuration source */
-    void write(KConfig& config) const;
+    void write(KConfig &config) const;
 
     /** Sets a single entry within the color palette. */
-    void setColorTableEntry(int index , const ColorEntry& entry);
+    void setColorTableEntry(int index, const ColorEntry &entry);
 
     /**
      * Copies the color entries which form the palette for this color scheme
@@ -105,14 +104,14 @@ public:
      * @param randomSeed Color schemes may allow certain colors in their
      * palette to be randomized.  The seed is used to pick the random color.
      */
-    void getColorTable(ColorEntry* table, uint randomSeed = 0) const;
+    void getColorTable(ColorEntry *table, uint randomSeed = 0) const;
 
     /**
      * Retrieves a single color entry from the table.
      *
      * See getColorTable()
      */
-    ColorEntry colorEntry(int index , uint randomSeed = 0) const;
+    ColorEntry colorEntry(int index, uint randomSeed = 0) const;
 
     /**
      * Convenience method.  Returns the
@@ -151,7 +150,7 @@ public:
      */
     qreal opacity() const;
 
-    void setWallpaper(const QString& path);
+    void setWallpaper(const QString &path);
 
     ColorSchemeWallpaper::Ptr wallpaper() const;
 
@@ -176,42 +175,47 @@ private:
     class RandomizationRange
     {
     public:
-        RandomizationRange() : hue(0) , saturation(0) , value(0) {}
+        RandomizationRange() : hue(0),
+            saturation(0),
+            value(0)
+        {
+        }
 
-        bool isNull() const {
-            return (hue == 0 && saturation == 0 && value == 0);
+        bool isNull() const
+        {
+            return hue == 0 && saturation == 0 && value == 0;
         }
 
         quint16 hue;
-        quint8  saturation;
-        quint8  value;
+        quint8 saturation;
+        quint8 value;
     };
 
     // returns the active color table.  if none has been set specifically,
     // this is the default color table.
-    const ColorEntry* colorTable() const;
+    const ColorEntry *colorTable() const;
 
     // reads a single color entry from a KConfig source
     // and sets the palette entry at 'index' to the entry read.
-    void readColorEntry(const KConfig& config , int index);
+    void readColorEntry(const KConfig &config, int index);
     // writes a single color entry to a KConfig source
-    void writeColorEntry(KConfig& config , int index) const;
+    void writeColorEntry(KConfig &config, int index) const;
 
     // sets the amount of randomization allowed for a particular color
     // in the palette.  creates the randomization table if
     // it does not already exist
-    void setRandomizationRange(int index , quint16 hue , quint8 saturation , quint8 value);
+    void setRandomizationRange(int index, quint16 hue, quint8 saturation, quint8 value);
 
     QString _description;
     QString _name;
 
     // pointer to custom color table, or 0 if the default color table is
     // being used
-    ColorEntry* _table;
+    ColorEntry *_table;
 
     // pointer to randomization table, or 0 if no colors in the color
     // scheme support randomization
-    RandomizationRange* _randomTable;
+    RandomizationRange *_randomTable;
 
     qreal _opacity;
 
@@ -219,11 +223,11 @@ private:
 
     static const quint16 MAX_HUE = 340;
 
-    static const char* const colorNames[TABLE_COLORS];
-    static const char* const translatedColorNames[TABLE_COLORS];
+    static const char * const colorNames[TABLE_COLORS];
+    static const char * const translatedColorNames[TABLE_COLORS];
 };
 }
 
-Q_DECLARE_METATYPE(const Konsole::ColorScheme*)
+Q_DECLARE_METATYPE(const Konsole::ColorScheme *)
 
 #endif //COLORSCHEME_H
