@@ -67,10 +67,11 @@ BookmarkHandler::BookmarkHandler(KActionCollection* collection,
 
     manager->setUpdate(true);
 
-    if (toplevel)
+    if (toplevel) {
         _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, collection);
-    else
+    } else {
         _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, 0);
+    }
 }
 
 BookmarkHandler::~BookmarkHandler()
@@ -78,20 +79,23 @@ BookmarkHandler::~BookmarkHandler()
     delete _bookmarkMenu;
 }
 
-void BookmarkHandler::openBookmark(const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers)
+void BookmarkHandler::openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers)
 {
     emit openUrl(bm.url());
 }
-void BookmarkHandler::openFolderinTabs(const KBookmarkGroup& group)
+
+void BookmarkHandler::openFolderinTabs(const KBookmarkGroup &group)
 {
     emit openUrls(group.groupUrlList());
 }
+
 bool BookmarkHandler::enableOption(BookmarkOption option) const
 {
-    if (option == ShowAddBookmark || option == ShowEditBookmark)
+    if (option == ShowAddBookmark || option == ShowEditBookmark) {
         return _toplevel;
-    else
+    } else {
         return KBookmarkOwner::enableOption(option);
+    }
 }
 
 QUrl BookmarkHandler::currentUrl() const
@@ -99,12 +103,13 @@ QUrl BookmarkHandler::currentUrl() const
     return urlForView(_activeView);
 }
 
-QUrl BookmarkHandler::urlForView(ViewProperties* view) const
+QUrl BookmarkHandler::urlForView(ViewProperties *view) const
 {
-    if (view != nullptr)
+    if (view != nullptr) {
         return QUrl(view->url());
-    else
+    } else {
         return QUrl();
+    }
 }
 
 QString BookmarkHandler::currentTitle() const
@@ -112,9 +117,9 @@ QString BookmarkHandler::currentTitle() const
     return titleForView(_activeView);
 }
 
-QString BookmarkHandler::titleForView(ViewProperties* view) const
+QString BookmarkHandler::titleForView(ViewProperties *view) const
 {
-    const QUrl& url = view != nullptr ? view->url() : QUrl();
+    const QUrl &url = view != nullptr ? view->url() : QUrl();
     if (url.isLocalFile()) {
         QString path = url.path();
 
@@ -123,10 +128,13 @@ QString BookmarkHandler::titleForView(ViewProperties* view) const
 
         return path;
     } else if (!url.host().isEmpty()) {
-        if (!url.userName().isEmpty())
-            return i18nc("@item:inmenu The user's name and host they are connected to via ssh", "%1 on %2", url.userName(), url.host());
-        else
-            return i18nc("@item:inmenu The host the user is connected to via ssh", "%1", url.host());
+        if (!url.userName().isEmpty()) {
+            return i18nc("@item:inmenu The user's name and host they are connected to via ssh",
+                         "%1 on %2", url.userName(), url.host());
+        } else {
+            return i18nc("@item:inmenu The host the user is connected to via ssh", "%1",
+                         url.host());
+        }
     }
 
     return url.toDisplayString();
@@ -137,12 +145,13 @@ QString BookmarkHandler::currentIcon() const
     return iconForView(_activeView);
 }
 
-QString BookmarkHandler::iconForView(ViewProperties* view) const
+QString BookmarkHandler::iconForView(ViewProperties *view) const
 {
-    if (view != nullptr)
+    if (view != nullptr) {
         return view->icon().name();
-    else
+    } else {
         return QString();
+    }
 }
 
 bool BookmarkHandler::supportsTabs() const
@@ -155,27 +164,29 @@ QList<KBookmarkOwner::FutureBookmark> BookmarkHandler::currentBookmarkList() con
     QList<KBookmarkOwner::FutureBookmark> list;
     list.reserve(_views.size());
 
-    foreach(ViewProperties* view, _views) {
-        list << KBookmarkOwner::FutureBookmark(titleForView(view) , urlForView(view), iconForView(view));
+    foreach (ViewProperties *view, _views) {
+        list << KBookmarkOwner::FutureBookmark(titleForView(view), urlForView(view), iconForView(view));
     }
 
     return list;
 }
 
-void BookmarkHandler::setViews(const QList<ViewProperties*>& views)
+void BookmarkHandler::setViews(const QList<ViewProperties *> &views)
 {
     _views = views;
 }
-QList<ViewProperties*> BookmarkHandler::views() const
+
+QList<ViewProperties *> BookmarkHandler::views() const
 {
     return _views;
 }
-void BookmarkHandler::setActiveView(ViewProperties* view)
+
+void BookmarkHandler::setActiveView(ViewProperties *view)
 {
     _activeView = view;
 }
-ViewProperties* BookmarkHandler::activeView() const
+
+ViewProperties *BookmarkHandler::activeView() const
 {
     return _activeView;
 }
-

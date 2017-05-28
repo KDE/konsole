@@ -36,8 +36,7 @@ class QMenu;
 class KBookmarkMenu;
 class KActionCollection;
 
-namespace Konsole
-{
+namespace Konsole {
 class ViewProperties;
 
 /**
@@ -64,7 +63,7 @@ public:
      * @param toplevel TODO: Document me
      * @param parent The parent object
      */
-    BookmarkHandler(KActionCollection* collection , QMenu* menu, bool toplevel , QObject* parent);
+    BookmarkHandler(KActionCollection *collection, QMenu *menu, bool toplevel, QObject *parent);
     ~BookmarkHandler() Q_DECL_OVERRIDE;
 
     QUrl currentUrl() const Q_DECL_OVERRIDE;
@@ -73,25 +72,26 @@ public:
     bool enableOption(BookmarkOption option) const Q_DECL_OVERRIDE;
     bool supportsTabs() const Q_DECL_OVERRIDE;
     QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const Q_DECL_OVERRIDE;
-    void openFolderinTabs(const KBookmarkGroup& group) Q_DECL_OVERRIDE;
+    void openFolderinTabs(const KBookmarkGroup &group) Q_DECL_OVERRIDE;
 
     /**
      * Returns the menu which this bookmark handler inserts its actions into.
      */
-    QMenu* menu() const {
+    QMenu *menu() const
+    {
         return _menu;
     }
 
-    QList<ViewProperties*> views() const;
-    ViewProperties* activeView() const;
+    QList<ViewProperties *> views() const;
+    ViewProperties *activeView() const;
 
 public Q_SLOTS:
     /**
      *
      */
-    void setViews(const QList<ViewProperties*>& views);
+    void setViews(const QList<ViewProperties *> &views);
 
-    void setActiveView(ViewProperties* view);
+    void setActiveView(ViewProperties *view);
 
 Q_SIGNALS:
     /**
@@ -99,7 +99,7 @@ Q_SIGNALS:
      *
      * @param url The url of the bookmark which was selected by the user.
      */
-    void openUrl(const QUrl& url);
+    void openUrl(const QUrl &url);
 
     /**
      * Emitted when the user selects 'Open Folder in Tabs'
@@ -108,22 +108,22 @@ Q_SIGNALS:
      * @param urls The urls of the bookmarks in the folder whose
      * 'Open Folder in Tabs' action was triggered
      */
-    void openUrls(const QList<QUrl>& urls);
+    void openUrls(const QList<QUrl> &urls);
 
 private Q_SLOTS:
-    void openBookmark(const KBookmark& bm, Qt::MouseButtons, Qt::KeyboardModifiers) Q_DECL_OVERRIDE;
+    void openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers) Q_DECL_OVERRIDE;
 
 private:
-    QString titleForView(ViewProperties* view) const;
-    QUrl urlForView(ViewProperties* view) const;
-    QString iconForView(ViewProperties* view) const;
+    QString titleForView(ViewProperties *view) const;
+    QUrl urlForView(ViewProperties *view) const;
+    QString iconForView(ViewProperties *view) const;
 
-    QMenu* _menu;
-    KBookmarkMenu* _bookmarkMenu;
+    QMenu *_menu;
+    KBookmarkMenu *_bookmarkMenu;
     QString _file;
     bool _toplevel;
-    ViewProperties* _activeView;
-    QList<ViewProperties*> _views;
+    ViewProperties *_activeView;
+    QList<ViewProperties *> _views;
 };
 }
 
