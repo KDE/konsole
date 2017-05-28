@@ -32,13 +32,11 @@
 #include "Session.h"
 #include "SessionListModel.h"
 
-namespace Ui
-{
+namespace Ui {
 class CopyInputDialog;
 }
 
-namespace Konsole
-{
+namespace Konsole {
 class CheckableSessionModel;
 
 /**
@@ -52,27 +50,30 @@ class CopyInputDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CopyInputDialog(QWidget* parent = 0);
+    explicit CopyInputDialog(QWidget *parent = 0);
     ~CopyInputDialog() Q_DECL_OVERRIDE;
     /**
      * Sets the 'source' session whose input will be copied to
      * other sessions.  This session is displayed grayed out in the list
      * and cannot be unchecked.
      */
-    void setMasterSession(Session* master);
+    void setMasterSession(Session *master);
     /** See setMasterSession() */
-    Session* masterSession() const;
+    Session *masterSession() const;
 
     /** Sets the sessions in the list which are checked. */
-    void setChosenSessions(const QSet<Session*>& sessions);
+    void setChosenSessions(const QSet<Session *> &sessions);
     /** Set setChosenSessions() */
-    QSet<Session*> chosenSessions() const;
+    QSet<Session *> chosenSessions() const;
 
 private Q_SLOTS:
-    void selectAll() {
+    void selectAll()
+    {
         setSelectionChecked(true);
     }
-    void deselectAll() {
+
+    void deselectAll()
+    {
         setSelectionChecked(false);
     }
 
@@ -82,8 +83,8 @@ private:
     void setSelectionChecked(bool checked);
     void setRowChecked(int row, bool checked);
 
-    Ui::CopyInputDialog* _ui;
-    CheckableSessionModel* _model;
+    Ui::CopyInputDialog *_ui;
+    CheckableSessionModel *_model;
     QPointer<Session> _masterSession;
 };
 
@@ -97,7 +98,7 @@ class CheckableSessionModel : public SessionListModel
     Q_OBJECT
 
 public:
-    explicit CheckableSessionModel(QObject* parent);
+    explicit CheckableSessionModel(QObject *parent);
 
     void setCheckColumn(int column);
     int checkColumn() const;
@@ -106,24 +107,24 @@ public:
      * Sets whether a session can be checked or un-checked.
      * Non-checkable items have the Qt::ItemIsEnabled flag unset.
      */
-    void setCheckable(Session* session, bool checkable);
+    void setCheckable(Session *session, bool checkable);
 
     /** Sets the list of sessions which are currently checked. */
-    void setCheckedSessions(const QSet<Session*>& sessions);
+    void setCheckedSessions(const QSet<Session *> &sessions);
     /** Returns the set of checked sessions. */
-    QSet<Session*> checkedSessions() const;
+    QSet<Session *> checkedSessions() const;
 
     // reimplemented from QAbstractItemModel
-    Qt::ItemFlags flags(const QModelIndex& index) const Q_DECL_OVERRIDE;
-    QVariant data(const QModelIndex& index, int role) const Q_DECL_OVERRIDE;
-    bool setData(const QModelIndex& index, const QVariant& value, int role) Q_DECL_OVERRIDE;
+    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+    bool setData(const QModelIndex &index, const QVariant &value, int role) Q_DECL_OVERRIDE;
 
 protected:
-    void sessionRemoved(Session*) Q_DECL_OVERRIDE;
+    void sessionRemoved(Session *) Q_DECL_OVERRIDE;
 
 private:
-    QSet<Session*> _checkedSessions;
-    QSet<Session*> _fixedSessions;
+    QSet<Session *> _checkedSessions;
+    QSet<Session *> _fixedSessions;
     int _checkColumn;
 };
 
@@ -134,4 +135,3 @@ inline int CheckableSessionModel::checkColumn() const
 }
 
 #endif // COPYINPUTDIALOG_H
-

@@ -33,8 +33,8 @@
 
 using namespace Konsole;
 
-CopyInputDialog::CopyInputDialog(QWidget* parent)
-    : QDialog(parent)
+CopyInputDialog::CopyInputDialog(QWidget *parent) :
+    QDialog(parent)
 {
     setWindowTitle(i18n("Copy Input"));
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
@@ -54,8 +54,10 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     _ui = new Ui::CopyInputDialog();
     _ui->setupUi(mainWidget);
 
-    connect(_ui->selectAllButton, &QPushButton::clicked, this, &Konsole::CopyInputDialog::selectAll);
-    connect(_ui->deselectAllButton, &QPushButton::clicked, this, &Konsole::CopyInputDialog::deselectAll);
+    connect(_ui->selectAllButton, &QPushButton::clicked, this,
+            &Konsole::CopyInputDialog::selectAll);
+    connect(_ui->deselectAllButton, &QPushButton::clicked, this,
+            &Konsole::CopyInputDialog::deselectAll);
 
     _ui->filterEdit->setClearButtonEnabled(true);
     _ui->filterEdit->setFocus();
@@ -70,7 +72,8 @@ CopyInputDialog::CopyInputDialog(QWidget* parent)
     filterProxyModel->setSourceModel(_model);
     filterProxyModel->setFilterKeyColumn(-1);
 
-    connect(_ui->filterEdit, &QLineEdit::textChanged, filterProxyModel, &QSortFilterProxyModel::setFilterFixedString);
+    connect(_ui->filterEdit, &QLineEdit::textChanged, filterProxyModel,
+            &QSortFilterProxyModel::setFilterFixedString);
 
     _ui->sessionList->setModel(filterProxyModel);
     _ui->sessionList->setColumnHidden(0, true); // Hide number column
@@ -82,100 +85,117 @@ CopyInputDialog::~CopyInputDialog()
     delete _ui;
 }
 
-void CopyInputDialog::setChosenSessions(const QSet<Session*>& sessions)
+void CopyInputDialog::setChosenSessions(const QSet<Session *> &sessions)
 {
-    QSet<Session*> checked = sessions;
-    if (_masterSession != nullptr)
+    QSet<Session *> checked = sessions;
+    if (_masterSession != nullptr) {
         checked.insert(_masterSession);
+    }
 
     _model->setCheckedSessions(checked);
 }
-QSet<Session*> CopyInputDialog::chosenSessions() const
+
+QSet<Session *> CopyInputDialog::chosenSessions() const
 {
     return _model->checkedSessions();
 }
-void CopyInputDialog::setMasterSession(Session* session)
+
+void CopyInputDialog::setMasterSession(Session *session)
 {
-    if (_masterSession != nullptr)
+    if (_masterSession != nullptr) {
         _model->setCheckable(_masterSession, true);
+    }
 
     _model->setCheckable(session, false);
-    QSet<Session*> checked = _model->checkedSessions();
+    QSet<Session *> checked = _model->checkedSessions();
     checked.insert(session);
     _model->setCheckedSessions(checked);
 
     _masterSession = session;
 }
+
 void CopyInputDialog::setSelectionChecked(bool checked)
 {
-    QAbstractItemModel* model = _ui->sessionList->model();
+    QAbstractItemModel *model = _ui->sessionList->model();
     int rows = model->rowCount();
 
     QModelIndexList selected = _ui->sessionList->selectionModel()->selectedIndexes();
 
     if (selected.count() > 1) {
-        foreach(const QModelIndex & index, selected) {
+        foreach (const QModelIndex &index, selected) {
             setRowChecked(index.row(), checked);
         }
     } else {
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < rows; i++) {
             setRowChecked(i, checked);
+        }
     }
 }
+
 void CopyInputDialog::setRowChecked(int row, bool checked)
 {
-    QAbstractItemModel* model = _ui->sessionList->model();
+    QAbstractItemModel *model = _ui->sessionList->model();
     QModelIndex index = model->index(row, _model->checkColumn());
-    if (checked)
+    if (checked) {
         model->setData(index, static_cast<int>(Qt::Checked), Qt::CheckStateRole);
-    else
+    } else {
         model->setData(index, static_cast<int>(Qt::Unchecked), Qt::CheckStateRole);
+    }
 }
-CheckableSessionModel::CheckableSessionModel(QObject* parent)
-    : SessionListModel(parent)
-    , _checkColumn(0)
+
+CheckableSessionModel::CheckableSessionModel(QObject *parent) :
+    SessionListModel(parent),
+    _checkColumn(0)
 {
 }
+
 void CheckableSessionModel::setCheckColumn(int column)
 {
     beginResetModel();
     _checkColumn = column;
     endResetModel();
 }
-Qt::ItemFlags CheckableSessionModel::flags(const QModelIndex& index) const
-{
-    Session* session = static_cast<Session*>(index.internalPointer());
 
-    if (_fixedSessions.contains(session))
+Qt::ItemFlags CheckableSessionModel::flags(const QModelIndex &index) const
+{
+    Session *session = static_cast<Session *>(index.internalPointer());
+
+    if (_fixedSessions.contains(session)) {
         return SessionListModel::flags(index) & ~Qt::ItemIsEnabled;
-    else
+    } else {
         return SessionListModel::flags(index) | Qt::ItemIsUserCheckable;
+    }
 }
-QVariant CheckableSessionModel::data(const QModelIndex& index, int role) const
+
+QVariant CheckableSessionModel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::CheckStateRole && index.column() == _checkColumn) {
-        Session* session = static_cast<Session*>(index.internalPointer());
+        Session *session = static_cast<Session *>(index.internalPointer());
 
-        if (_checkedSessions.contains(session))
+        if (_checkedSessions.contains(session)) {
             return QVariant::fromValue(static_cast<int>(Qt::Checked));
-        else
+        } else {
             return QVariant::fromValue(static_cast<int>(Qt::Unchecked));
+        }
     } else {
         return SessionListModel::data(index, role);
     }
 }
-bool CheckableSessionModel::setData(const QModelIndex& index, const QVariant& value, int role)
+
+bool CheckableSessionModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (role == Qt::CheckStateRole && index.column() == _checkColumn) {
-        Session* session = static_cast<Session*>(index.internalPointer());
+        Session *session = static_cast<Session *>(index.internalPointer());
 
-        if (_fixedSessions.contains(session))
+        if (_fixedSessions.contains(session)) {
             return false;
+        }
 
-        if (value.value<int>() == Qt::Checked)
+        if (value.value<int>() == Qt::Checked) {
             _checkedSessions.insert(session);
-        else
+        } else {
             _checkedSessions.remove(session);
+        }
 
         emit dataChanged(index, index);
         return true;
@@ -183,30 +203,34 @@ bool CheckableSessionModel::setData(const QModelIndex& index, const QVariant& va
         return SessionListModel::setData(index, value, role);
     }
 }
-void CheckableSessionModel::setCheckedSessions(const QSet<Session*>& sessions)
+
+void CheckableSessionModel::setCheckedSessions(const QSet<Session *> &sessions)
 {
     beginResetModel();
     _checkedSessions = sessions;
     endResetModel();
 }
-QSet<Session*> CheckableSessionModel::checkedSessions() const
+
+QSet<Session *> CheckableSessionModel::checkedSessions() const
 {
     return _checkedSessions;
 }
-void CheckableSessionModel::setCheckable(Session* session, bool checkable)
+
+void CheckableSessionModel::setCheckable(Session *session, bool checkable)
 {
     beginResetModel();
 
-    if (!checkable)
+    if (!checkable) {
         _fixedSessions.insert(session);
-    else
+    } else {
         _fixedSessions.remove(session);
+    }
 
     endResetModel();
 }
-void CheckableSessionModel::sessionRemoved(Session* session)
+
+void CheckableSessionModel::sessionRemoved(Session *session)
 {
     _checkedSessions.remove(session);
     _fixedSessions.remove(session);
 }
-
