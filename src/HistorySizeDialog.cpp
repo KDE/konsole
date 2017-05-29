@@ -32,8 +32,8 @@
 
 using namespace Konsole;
 
-HistorySizeDialog::HistorySizeDialog(QWidget* parent)
-    : QDialog(parent)
+HistorySizeDialog::HistorySizeDialog(QWidget *parent) :
+    QDialog(parent)
 {
     setWindowTitle(i18nc("@title:window", "Adjust Scrollback"));
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
@@ -58,7 +58,7 @@ HistorySizeDialog::HistorySizeDialog(QWidget* parent)
     _ui->tempWarningWidget->setCloseButtonVisible(false);
     _ui->tempWarningWidget->setMessageType(KMessageWidget::Information);
     _ui->tempWarningWidget->setText(i18nc("@info:status",
-        "Any adjustments are only temporary to this session."));
+                                          "Any adjustments are only temporary to this session."));
 }
 
 HistorySizeDialog::~HistorySizeDialog()
@@ -85,4 +85,3 @@ void HistorySizeDialog::setLineCount(int lines)
 {
     _ui->historySizeWidget->setLineCount(lines);
 }
-

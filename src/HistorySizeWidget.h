@@ -29,13 +29,11 @@
 
 class QAbstractButton;
 
-namespace Ui
-{
+namespace Ui {
 class HistorySizeWidget;
 }
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * A widget for controlling history related options
  */
@@ -44,7 +42,7 @@ class HistorySizeWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit HistorySizeWidget(QWidget* parent);
+    explicit HistorySizeWidget(QWidget *parent);
     ~HistorySizeWidget() Q_DECL_OVERRIDE;
 
     /** Specifies the history mode. */
@@ -71,10 +69,10 @@ Q_SIGNALS:
     void historySizeChanged(int) const;
 
 private Q_SLOTS:
-    void buttonClicked(QAbstractButton*) const;
+    void buttonClicked(QAbstractButton *) const;
 
 private:
-    Ui::HistorySizeWidget* _ui;
+    Ui::HistorySizeWidget *_ui;
 
     // 1000 lines was the default in the KDE3 series
     static const int DefaultLineCount = 1000;

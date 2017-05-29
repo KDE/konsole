@@ -27,19 +27,17 @@
 // Konsole
 #include "Enumeration.h"
 
-namespace Ui
-{
+namespace Ui {
 class HistorySizeDialog;
 }
 
-namespace Konsole
-{
+namespace Konsole {
 class HistorySizeDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit HistorySizeDialog(QWidget* parent = 0);
+    explicit HistorySizeDialog(QWidget *parent = 0);
     ~HistorySizeDialog() Q_DECL_OVERRIDE;
 
     /** See HistorySizeWidget::setMode. */
@@ -55,7 +53,7 @@ public:
     int lineCount() const;
 
 private:
-    Ui::HistorySizeDialog* _ui;
+    Ui::HistorySizeDialog *_ui;
 };
 }
 
