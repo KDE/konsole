@@ -34,8 +34,7 @@
 // Konsole
 #include "Character.h"
 
-namespace Konsole
-{
+namespace Konsole {
 /*
    An extendable tmpfile(1) based buffer.
 */
@@ -46,8 +45,8 @@ public:
     HistoryFile();
     virtual ~HistoryFile();
 
-    virtual void add(const unsigned char* bytes, int len);
-    virtual void get(unsigned char* bytes, int len, int loc);
+    virtual void add(const unsigned char *bytes, int len);
+    virtual void get(unsigned char *bytes, int len, int loc);
     virtual int  len() const;
 
     //mmaps the file in read-only mode
@@ -57,14 +56,13 @@ public:
     //returns true if the file is mmap'ed
     bool isMapped() const;
 
-
 private:
-    int  _fd;
-    int  _length;
+    int _fd;
+    int _length;
     QTemporaryFile _tmpFile;
 
     //pointer to start of mmap'ed file data, or 0 if the file is not mmap'ed
-    char* _fileMap;
+    char *_fileMap;
 
     //incremented whenever 'add' is called and decremented whenever
     //'get' is called.
@@ -86,7 +84,7 @@ class HistoryType;
 class KONSOLEPRIVATE_EXPORT HistoryScroll
 {
 public:
-    explicit HistoryScroll(HistoryType*);
+    explicit HistoryScroll(HistoryType *);
     virtual ~HistoryScroll();
 
     virtual bool hasScroll();
@@ -101,7 +99,8 @@ public:
     virtual void addCells(const Character a[], int count) = 0;
     // convenience method - this is virtual so that subclasses can take advantage
     // of QVector's implicit copying
-    virtual void addCellsVector(const QVector<Character>& cells) {
+    virtual void addCellsVector(const QVector<Character> &cells)
+    {
         addCells(cells.data(), cells.size());
     }
 
@@ -112,12 +111,13 @@ public:
     // is very unsafe, because those references will no longer
     // be valid if the history scroll is deleted.
     //
-    const HistoryType& getType() const {
+    const HistoryType &getType() const
+    {
         return *_historyType;
     }
 
 protected:
-    HistoryType* _historyType;
+    HistoryType *_historyType;
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -127,7 +127,7 @@ protected:
 class KONSOLEPRIVATE_EXPORT HistoryScrollFile : public HistoryScroll
 {
 public:
-    explicit HistoryScrollFile(const QString& logFileName);
+    explicit HistoryScrollFile(const QString &logFileName);
     ~HistoryScrollFile() Q_DECL_OVERRIDE;
 
     int  getLines() Q_DECL_OVERRIDE;
@@ -176,15 +176,20 @@ typedef QVector<Character> TextLine;
 class CharacterFormat
 {
 public:
-    bool equalsFormat(const CharacterFormat& other) const {
-        return (other.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR) && other.fgColor == fgColor && other.bgColor == bgColor;
+    bool equalsFormat(const CharacterFormat &other) const
+    {
+        return (other.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR)
+               && other.fgColor == fgColor && other.bgColor == bgColor;
     }
 
-    bool equalsFormat(const Character& c) const {
-        return (c.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR) && c.foregroundColor == fgColor && c.backgroundColor == bgColor;
+    bool equalsFormat(const Character &c) const
+    {
+        return (c.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR)
+               && c.foregroundColor == fgColor && c.backgroundColor == bgColor;
     }
 
-    void setFormat(const Character& c) {
+    void setFormat(const Character &c)
+    {
         rendition = c.rendition;
         fgColor = c.foregroundColor;
         bgColor = c.backgroundColor;
@@ -200,97 +205,116 @@ public:
 class CompactHistoryBlock
 {
 public:
-    CompactHistoryBlock()
-        : _blockLength(4096 * 64) // 256kb
-        , _head((quint8*) mmap(0, _blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0))
-        , _tail(0)
-        , _blockStart(0)
-        , _allocCount(0)
+    CompactHistoryBlock() :
+        _blockLength(4096 * 64), // 256kb
+        _head((quint8 *)mmap(0, _blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0)),
+        _tail(0),
+        _blockStart(0),
+        _allocCount(0)
     {
         Q_ASSERT(_head != MAP_FAILED);
         _tail = _blockStart = _head;
     }
 
-    virtual ~CompactHistoryBlock() {
+    virtual ~CompactHistoryBlock()
+    {
         //free(_blockStart);
         munmap(_blockStart, _blockLength);
     }
 
-    virtual unsigned int remaining() {
+    virtual unsigned int remaining()
+    {
         return _blockStart + _blockLength - _tail;
     }
-    virtual unsigned  length() {
+
+    virtual unsigned  length()
+    {
         return _blockLength;
     }
-    virtual void* allocate(size_t length);
-    virtual bool contains(void* addr) {
+
+    virtual void *allocate(size_t length);
+    virtual bool contains(void *addr)
+    {
         return addr >= _blockStart && addr < (_blockStart + _blockLength);
     }
+
     virtual void deallocate();
-    virtual bool isInUse() {
+    virtual bool isInUse()
+    {
         return _allocCount != 0;
     }
 
 private:
     size_t _blockLength;
-    quint8* _head;
-    quint8* _tail;
-    quint8* _blockStart;
+    quint8 *_head;
+    quint8 *_tail;
+    quint8 *_blockStart;
     int _allocCount;
 };
 
 class CompactHistoryBlockList
 {
 public:
-    CompactHistoryBlockList()
-        : list(QList<CompactHistoryBlock*>()) {}
+    CompactHistoryBlockList() :
+        list(QList<CompactHistoryBlock *>())
+    {
+    }
+
     ~CompactHistoryBlockList();
 
-    void* allocate(size_t size);
+    void *allocate(size_t size);
     void deallocate(void *);
-    int length() {
+    int length()
+    {
         return list.size();
     }
+
 private:
-    QList<CompactHistoryBlock*> list;
+    QList<CompactHistoryBlock *> list;
 };
 
 class CompactHistoryLine
 {
 public:
-    CompactHistoryLine(const TextLine&, CompactHistoryBlockList& blockList);
+    CompactHistoryLine(const TextLine &, CompactHistoryBlockList &blockList);
     virtual ~CompactHistoryLine();
 
     // custom new operator to allocate memory from custom pool instead of heap
-    static void* operator new(size_t size, CompactHistoryBlockList& blockList);
-    static void operator delete(void *) {
+    static void *operator new(size_t size, CompactHistoryBlockList &blockList);
+    static void operator delete(void *)
+    {
         /* do nothing, deallocation from pool is done in destructor*/
     }
 
-    virtual void getCharacters(Character* array, int length, int startColumn);
-    virtual void getCharacter(int index, Character& r);
-    virtual bool isWrapped() const {
+    virtual void getCharacters(Character *array, int length, int startColumn);
+    virtual void getCharacter(int index, Character &r);
+    virtual bool isWrapped() const
+    {
         return _wrapped;
     }
-    virtual void setWrapped(bool value) {
+
+    virtual void setWrapped(bool value)
+    {
         _wrapped = value;
     }
-    virtual unsigned int getLength() const {
+
+    virtual unsigned int getLength() const
+    {
         return _length;
     }
 
 protected:
-    CompactHistoryBlockList& _blockListRef;
-    CharacterFormat* _formatArray;
+    CompactHistoryBlockList &_blockListRef;
+    CharacterFormat *_formatArray;
     quint16 _length;
-    quint16* _text;
+    quint16 *_text;
     quint16 _formatLength;
     bool _wrapped;
 };
 
 class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
 {
-    typedef QList<CompactHistoryLine*> HistoryArray;
+    typedef QList<CompactHistoryLine *> HistoryArray;
 
 public:
     explicit CompactHistoryScroll(unsigned int maxNbLines = 1000);
@@ -302,13 +326,13 @@ public:
     bool isWrappedLine(int lineno) Q_DECL_OVERRIDE;
 
     void addCells(const Character a[], int count) Q_DECL_OVERRIDE;
-    void addCellsVector(const TextLine& cells) Q_DECL_OVERRIDE;
+    void addCellsVector(const TextLine &cells) Q_DECL_OVERRIDE;
     void addLine(bool previousWrapped = false) Q_DECL_OVERRIDE;
 
     void setMaxNbLines(unsigned int nbLines);
 
 private:
-    bool hasDifferentColors(const TextLine& line) const;
+    bool hasDifferentColors(const TextLine &line) const;
     HistoryArray _lines;
     CompactHistoryBlockList _blockList;
 
@@ -339,11 +363,12 @@ public:
      * Converts from one type of HistoryScroll to another or if given the
      * same type, returns it.
      */
-    virtual HistoryScroll* scroll(HistoryScroll *) const = 0;
+    virtual HistoryScroll *scroll(HistoryScroll *) const = 0;
     /**
      * Returns true if the history size is unlimited.
      */
-    bool isUnlimited() const {
+    bool isUnlimited() const
+    {
         return maximumLineCount() == -1;
     }
 };
@@ -356,18 +381,18 @@ public:
     bool isEnabled() const Q_DECL_OVERRIDE;
     int maximumLineCount() const Q_DECL_OVERRIDE;
 
-    HistoryScroll* scroll(HistoryScroll *) const Q_DECL_OVERRIDE;
+    HistoryScroll *scroll(HistoryScroll *) const Q_DECL_OVERRIDE;
 };
 
 class KONSOLEPRIVATE_EXPORT HistoryTypeFile : public HistoryType
 {
 public:
-    explicit HistoryTypeFile(const QString& fileName = QString());
+    explicit HistoryTypeFile(const QString &fileName = QString());
 
     bool isEnabled() const Q_DECL_OVERRIDE;
     int maximumLineCount() const Q_DECL_OVERRIDE;
 
-    HistoryScroll* scroll(HistoryScroll *) const Q_DECL_OVERRIDE;
+    HistoryScroll *scroll(HistoryScroll *) const Q_DECL_OVERRIDE;
 
 protected:
     QString _fileName;
@@ -381,7 +406,7 @@ public:
     bool isEnabled() const Q_DECL_OVERRIDE;
     int maximumLineCount() const Q_DECL_OVERRIDE;
 
-    HistoryScroll* scroll(HistoryScroll *) const Q_DECL_OVERRIDE;
+    HistoryScroll *scroll(HistoryScroll *) const Q_DECL_OVERRIDE;
 
 protected:
     unsigned int _maxLines;
