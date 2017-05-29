@@ -29,8 +29,7 @@ class QTimer;
 class QLineEdit;
 class QToolButton;
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * A widget which allows users to search incrementally through a document for a
  * a text string or regular expression.
@@ -64,9 +63,9 @@ public:
         /** Highlight all matches */
         HighlightMatches = 0,
         /** Searches are case-sensitive or not */
-        MatchCase        = 1,
+        MatchCase = 1,
         /** Searches use regular expressions */
-        RegExp           = 2,
+        RegExp = 2,
         /** Search from the bottom and up **/
         ReverseSearch = 3
     };
@@ -74,7 +73,7 @@ public:
     /**
      * Constructs a new incremental search bar with the given parent widget
      */
-    explicit IncrementalSearchBar(QWidget* parent = 0);
+    explicit IncrementalSearchBar(QWidget *parent = 0);
 
     /* Returns search options that are checked */
     const QBitArray optionsChecked();
@@ -95,7 +94,7 @@ public:
     /** Returns the current search text */
     QString searchText();
 
-    void setSearchText(const QString& text);
+    void setSearchText(const QString &text);
 
     void focusLineEdit();
 
@@ -105,7 +104,7 @@ public:
     void setVisible(bool visible) Q_DECL_OVERRIDE;
 Q_SIGNALS:
     /** Emitted when the text entered in the search box is altered */
-    void searchChanged(const QString& text);
+    void searchChanged(const QString &text);
     /** Emitted when the user clicks the button to find the next match */
     void findNextClicked();
     /** Emitted when the user clicks the button to find the previous match */
@@ -130,15 +129,15 @@ Q_SIGNALS:
     /** Emitted when the close button is clicked */
     void closeClicked();
     /** Emitted when the return button is pressed in the search box */
-    void searchReturnPressed(const QString& text);
+    void searchReturnPressed(const QString &text);
     /** Emitted when shift+return buttons are pressed in the search box */
     void searchShiftPlusReturnPressed();
     /** A movement key not handled is forwarded to the terminal display */
     void unhandledMovementKeyPressed(QKeyEvent *event);
 
 protected:
-    bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
-    void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
+    void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
     void clearLineEdit();
@@ -148,16 +147,16 @@ private Q_SLOTS:
     void updateButtonsAccordingToReverseSearchSetting();
 
 private:
-    QLineEdit* _searchEdit;
-    QAction* _caseSensitive;
-    QAction* _regExpression;
-    QAction* _highlightMatches;
-    QAction* _reverseSearch;
-    QToolButton* _findNextButton;
-    QToolButton* _findPreviousButton;
-    QToolButton* _searchFromButton;
+    QLineEdit *_searchEdit;
+    QAction *_caseSensitive;
+    QAction *_regExpression;
+    QAction *_highlightMatches;
+    QAction *_reverseSearch;
+    QToolButton *_findNextButton;
+    QToolButton *_findPreviousButton;
+    QToolButton *_searchFromButton;
 
-    QTimer* _searchTimer;
+    QTimer *_searchTimer;
 };
 }
 #endif // INCREMENTALSEARCHBAR_H

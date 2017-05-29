@@ -36,16 +36,16 @@
 
 using namespace Konsole;
 
-IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
-    : QWidget(aParent)
-    , _searchEdit(0)
-    , _caseSensitive(0)
-    , _regExpression(0)
-    , _highlightMatches(0)
-    , _reverseSearch(0)
-    , _findNextButton(0)
-    , _findPreviousButton(0)
-    , _searchFromButton(0)
+IncrementalSearchBar::IncrementalSearchBar(QWidget *aParent) :
+    QWidget(aParent),
+    _searchEdit(0),
+    _caseSensitive(0),
+    _regExpression(0),
+    _highlightMatches(0),
+    _reverseSearch(0),
+    _findNextButton(0),
+    _findPreviousButton(0),
+    _searchFromButton(0)
 {
     auto barLayout = new QHBoxLayout(this);
 
@@ -54,9 +54,9 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     closeButton->setToolTip(i18nc("@info:tooltip", "Close the search bar"));
     closeButton->setAutoRaise(true);
     closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close")));
-    connect(closeButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::closeClicked);
+    connect(closeButton, &QToolButton::clicked, this, &Konsole::IncrementalSearchBar::closeClicked);
 
-    QLabel* findLabel = new QLabel(i18nc("@label:textbox", "Find:"), this);
+    QLabel *findLabel = new QLabel(i18nc("@label:textbox", "Find:"), this);
     _searchEdit = new QLineEdit(this);
     _searchEdit->setClearButtonEnabled(true);
     _searchEdit->installEventFilter(this);
@@ -74,27 +74,33 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     _searchTimer = new QTimer(this);
     _searchTimer->setInterval(250);
     _searchTimer->setSingleShot(true);
-    connect(_searchTimer , &QTimer::timeout , this , &Konsole::IncrementalSearchBar::notifySearchChanged);
-    connect(_searchEdit , &QLineEdit::textChanged , _searchTimer , static_cast<void(QTimer::*)()>(&QTimer::start));
+    connect(_searchTimer, &QTimer::timeout, this,
+            &Konsole::IncrementalSearchBar::notifySearchChanged);
+    connect(_searchEdit, &QLineEdit::textChanged, _searchTimer,
+            static_cast<void (QTimer::*)()>(&QTimer::start));
 
     _findNextButton = new QToolButton(this);
     _findNextButton->setObjectName(QStringLiteral("find-next-button"));
     _findNextButton->setText(i18nc("@action:button Go to the next phrase", "Next"));
     _findNextButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    _findNextButton->setToolTip(i18nc("@info:tooltip", "Find the next match for the current search phrase"));
-    connect(_findNextButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::findNextClicked);
+    _findNextButton->setToolTip(i18nc("@info:tooltip",
+                                      "Find the next match for the current search phrase"));
+    connect(_findNextButton, &QToolButton::clicked, this,
+            &Konsole::IncrementalSearchBar::findNextClicked);
 
     _findPreviousButton = new QToolButton(this);
     _findPreviousButton->setObjectName(QStringLiteral("find-previous-button"));
     _findPreviousButton->setText(i18nc("@action:button Go to the previous phrase", "Previous"));
     _findPreviousButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    _findPreviousButton->setToolTip(i18nc("@info:tooltip", "Find the previous match for the current search phrase"));
-    connect(_findPreviousButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::findPreviousClicked);
-
+    _findPreviousButton->setToolTip(i18nc("@info:tooltip",
+                                          "Find the previous match for the current search phrase"));
+    connect(_findPreviousButton, &QToolButton::clicked, this,
+            &Konsole::IncrementalSearchBar::findPreviousClicked);
 
     _searchFromButton = new QToolButton(this);
     _searchFromButton->setObjectName(QStringLiteral("search-from-button"));
-    connect(_searchFromButton , &QToolButton::clicked , this , &Konsole::IncrementalSearchBar::searchFromClicked);
+    connect(_searchFromButton, &QToolButton::clicked, this,
+            &Konsole::IncrementalSearchBar::searchFromClicked);
 
     auto optionsButton = new QToolButton(this);
     optionsButton->setObjectName(QStringLiteral("find-options-button"));
@@ -120,21 +126,27 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget* aParent)
     _caseSensitive = optionsMenu->addAction(i18nc("@item:inmenu", "Case sensitive"));
     _caseSensitive->setCheckable(true);
     _caseSensitive->setToolTip(i18nc("@info:tooltip", "Sets whether the search is case sensitive"));
-    connect(_caseSensitive, &QAction::toggled, this, &Konsole::IncrementalSearchBar::matchCaseToggled);
+    connect(_caseSensitive, &QAction::toggled, this,
+            &Konsole::IncrementalSearchBar::matchCaseToggled);
 
     _regExpression = optionsMenu->addAction(i18nc("@item:inmenu", "Match regular expression"));
     _regExpression->setCheckable(true);
-    connect(_regExpression, &QAction::toggled, this, &Konsole::IncrementalSearchBar::matchRegExpToggled);
+    connect(_regExpression, &QAction::toggled, this,
+            &Konsole::IncrementalSearchBar::matchRegExpToggled);
 
     _highlightMatches = optionsMenu->addAction(i18nc("@item:inmenu", "Highlight all matches"));
     _highlightMatches->setCheckable(true);
-    _highlightMatches->setToolTip(i18nc("@info:tooltip", "Sets whether matching text should be highlighted"));
-    connect(_highlightMatches, &QAction::toggled, this, &Konsole::IncrementalSearchBar::highlightMatchesToggled);
+    _highlightMatches->setToolTip(i18nc("@info:tooltip",
+                                        "Sets whether matching text should be highlighted"));
+    connect(_highlightMatches, &QAction::toggled, this,
+            &Konsole::IncrementalSearchBar::highlightMatchesToggled);
 
     _reverseSearch = optionsMenu->addAction(i18nc("@item:inmenu", "Search backwards"));
     _reverseSearch->setCheckable(true);
-    _reverseSearch->setToolTip(i18nc("@info:tooltip", "Sets whether search should start from the bottom"));
-    connect(_reverseSearch, &QAction::toggled, this, &Konsole::IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting);
+    _reverseSearch->setToolTip(i18nc("@info:tooltip",
+                                     "Sets whether search should start from the bottom"));
+    connect(_reverseSearch, &QAction::toggled, this,
+            &Konsole::IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting);
     updateButtonsAccordingToReverseSearchSetting();
     setOptions();
 
@@ -155,12 +167,14 @@ void IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting()
     Q_ASSERT(_reverseSearch);
     if (_reverseSearch->isChecked()) {
         _searchFromButton->setText(i18nc("@action:button Search from bottom", "From bottom"));
-        _searchFromButton->setToolTip(i18nc("@info:tooltip", "Search for the current search phrase from the bottom"));
+        _searchFromButton->setToolTip(i18nc("@info:tooltip",
+                                            "Search for the current search phrase from the bottom"));
         _findNextButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up-search")));
         _findPreviousButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down-search")));
     } else {
         _searchFromButton->setText(i18nc("@action:button Search from top", "From top"));
-        _searchFromButton->setToolTip(i18nc("@info:tooltip", "Search for the current search phrase from the top"));
+        _searchFromButton->setToolTip(i18nc("@info:tooltip",
+                                            "Search for the current search phrase from the top"));
         _findNextButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down-search")));
         _findPreviousButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up-search")));
     }
@@ -171,17 +185,18 @@ QString IncrementalSearchBar::searchText()
     return _searchEdit->text();
 }
 
-void IncrementalSearchBar::setSearchText(const QString& text)
+void IncrementalSearchBar::setSearchText(const QString &text)
 {
-    if (text != searchText())
+    if (text != searchText()) {
         _searchEdit->setText(text);
+    }
 }
 
-bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* aEvent)
+bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *aEvent)
 {
     if (watched == _searchEdit) {
         if (aEvent->type() == QEvent::KeyPress) {
-            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(aEvent);
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(aEvent);
 
             if (keyEvent->key() == Qt::Key_Escape) {
                 emit closeClicked();
@@ -193,12 +208,14 @@ bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* aEvent)
                 return true;
             }
 
-            if ((keyEvent->key() == Qt::Key_Return) && (keyEvent->modifiers() == Qt::ShiftModifier)) {
+            if ((keyEvent->key() == Qt::Key_Return)
+                && (keyEvent->modifiers() == Qt::ShiftModifier)) {
                 _findPreviousButton->click();
                 return true;
             }
 
-            if ((keyEvent->key() == Qt::Key_Return) && (keyEvent->modifiers() == Qt::ControlModifier)) {
+            if ((keyEvent->key() == Qt::Key_Return)
+                && (keyEvent->modifiers() == Qt::ControlModifier)) {
                 _searchFromButton->click();
                 return true;
             }
@@ -208,16 +225,16 @@ bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* aEvent)
     return QWidget::eventFilter(watched, aEvent);
 }
 
-void IncrementalSearchBar::keyPressEvent(QKeyEvent* event)
+void IncrementalSearchBar::keyPressEvent(QKeyEvent *event)
 {
     static QSet<int> movementKeysToPassAlong = QSet<int>()
-        << Qt::Key_PageUp
-        << Qt::Key_PageDown
-        << Qt::Key_Up
-        << Qt::Key_Down;
+                                               << Qt::Key_PageUp
+                                               << Qt::Key_PageDown
+                                               << Qt::Key_Up
+                                               << Qt::Key_Down;
 
-    if (movementKeysToPassAlong.contains(event->key()) &&
-            (event->modifiers() == Qt::ShiftModifier)) {
+    if (movementKeysToPassAlong.contains(event->key())
+        && (event->modifiers() == Qt::ShiftModifier)) {
         emit unhandledMovementKeyPressed(event);
     } else {
         QWidget::keyPressEvent(event);
@@ -269,10 +286,18 @@ const QBitArray IncrementalSearchBar::optionsChecked()
 {
     QBitArray options(4, false);
 
-    if (_caseSensitive->isChecked()) options.setBit(MatchCase);
-    if (_regExpression->isChecked()) options.setBit(RegExp);
-    if (_highlightMatches->isChecked()) options.setBit(HighlightMatches);
-    if (_reverseSearch->isChecked()) options.setBit(ReverseSearch);
+    if (_caseSensitive->isChecked()) {
+        options.setBit(MatchCase);
+    }
+    if (_regExpression->isChecked()) {
+        options.setBit(RegExp);
+    }
+    if (_highlightMatches->isChecked()) {
+        options.setBit(HighlightMatches);
+    }
+    if (_reverseSearch->isChecked()) {
+        options.setBit(ReverseSearch);
+    }
 
     return options;
 }
