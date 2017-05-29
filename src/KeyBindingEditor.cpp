@@ -33,15 +33,16 @@
 
 using namespace Konsole;
 
-KeyBindingEditor::KeyBindingEditor(QWidget* parent)
-    : QWidget(parent)
-    , _translator(new KeyboardTranslator(QString()))
+KeyBindingEditor::KeyBindingEditor(QWidget *parent) :
+    QWidget(parent),
+    _translator(new KeyboardTranslator(QString()))
 {
     _ui = new Ui::KeyBindingEditor();
     _ui->setupUi(this);
 
     // description edit
-    connect(_ui->descriptionEdit , &QLineEdit::textChanged , this , &Konsole::KeyBindingEditor::setTranslatorDescription);
+    connect(_ui->descriptionEdit, &QLineEdit::textChanged, this,
+            &Konsole::KeyBindingEditor::setTranslatorDescription);
 
     // key bindings table
     _ui->keyBindingTable->setColumnCount(2);
@@ -58,8 +59,10 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
     _ui->addEntryButton->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
     _ui->removeEntryButton->setIcon(QIcon::fromTheme(QStringLiteral("list-remove")));
 
-    connect(_ui->removeEntryButton , &QPushButton::clicked , this , &Konsole::KeyBindingEditor::removeSelectedEntry);
-    connect(_ui->addEntryButton , &QPushButton::clicked , this , &Konsole::KeyBindingEditor::addNewEntry);
+    connect(_ui->removeEntryButton, &QPushButton::clicked, this,
+            &Konsole::KeyBindingEditor::removeSelectedEntry);
+    connect(_ui->addEntryButton, &QPushButton::clicked, this,
+            &Konsole::KeyBindingEditor::addNewEntry);
 
     // test area
     _ui->testAreaInputEdit->installEventFilter(this);
@@ -73,17 +76,19 @@ KeyBindingEditor::~KeyBindingEditor()
 
 void KeyBindingEditor::removeSelectedEntry()
 {
-    QList<QTableWidgetItem*> uniqueList;
+    QList<QTableWidgetItem *> uniqueList;
 
-    foreach(QTableWidgetItem* item, _ui->keyBindingTable->selectedItems()) {
-        if (item->column() == 1) //Select item at the first column
+    foreach (QTableWidgetItem *item, _ui->keyBindingTable->selectedItems()) {
+        if (item->column() == 1) { //Select item at the first column
             item = _ui->keyBindingTable->item(item->row(), 0);
+        }
 
-        if (!uniqueList.contains(item))
+        if (!uniqueList.contains(item)) {
             uniqueList.append(item);
+        }
     }
 
-    foreach(QTableWidgetItem* item, uniqueList) {
+    foreach (QTableWidgetItem *item, uniqueList) {
         // get the first item in the row which has the entry
 
         KeyboardTranslator::Entry existing = item->data(Qt::UserRole).
@@ -113,11 +118,11 @@ void KeyBindingEditor::addNewEntry()
     _ui->keyBindingTable->scrollToItem(_ui->keyBindingTable->item(newRowCount - 1, 0));
 }
 
-bool KeyBindingEditor::eventFilter(QObject* watched , QEvent* event)
+bool KeyBindingEditor::eventFilter(QObject *watched, QEvent *event)
 {
     if (watched == _ui->testAreaInputEdit) {
         if (event->type() == QEvent::KeyPress) {
-            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
 
             // The state here is currently set to the state that a newly started
             // terminal in Konsole will be in ( which is also the same as the
@@ -130,9 +135,9 @@ bool KeyBindingEditor::eventFilter(QObject* watched , QEvent* event)
             //
             const KeyboardTranslator::States states = KeyboardTranslator::AnsiState;
 
-            KeyboardTranslator::Entry entry = _translator->findEntry(keyEvent->key() ,
-                                              keyEvent->modifiers(),
-                                              states);
+            KeyboardTranslator::Entry entry = _translator->findEntry(keyEvent->key(),
+                                                                     keyEvent->modifiers(),
+                                                                     states);
 
             if (!entry.isNull()) {
                 _ui->testAreaInputEdit->setText(entry.conditionToString());
@@ -149,17 +154,18 @@ bool KeyBindingEditor::eventFilter(QObject* watched , QEvent* event)
     return false;
 }
 
-void KeyBindingEditor::setDescription(const QString& newDescription)
+void KeyBindingEditor::setDescription(const QString &newDescription)
 {
     _ui->descriptionEdit->setText(newDescription);
 
     setTranslatorDescription(newDescription);
 }
 
-void KeyBindingEditor::setTranslatorDescription(const QString& newDescription)
+void KeyBindingEditor::setTranslatorDescription(const QString &newDescription)
 {
-    if (_translator != nullptr)
+    if (_translator != nullptr) {
         _translator->setDescription(newDescription);
+    }
 }
 
 QString KeyBindingEditor::description() const
@@ -167,7 +173,7 @@ QString KeyBindingEditor::description() const
     return _ui->descriptionEdit->text();
 }
 
-void KeyBindingEditor::setup(const KeyboardTranslator* translator)
+void KeyBindingEditor::setup(const KeyboardTranslator *translator)
 {
     delete _translator;
 
@@ -181,18 +187,18 @@ void KeyBindingEditor::setup(const KeyboardTranslator* translator)
     setupKeyBindingTable(translator);
 }
 
-KeyboardTranslator* KeyBindingEditor::translator() const
+KeyboardTranslator *KeyBindingEditor::translator() const
 {
     return _translator;
 }
 
-void KeyBindingEditor::bindingTableItemChanged(QTableWidgetItem* item)
+void KeyBindingEditor::bindingTableItemChanged(QTableWidgetItem *item)
 {
-    QTableWidgetItem* key = _ui->keyBindingTable->item(item->row() , 0);
+    QTableWidgetItem *key = _ui->keyBindingTable->item(item->row(), 0);
     KeyboardTranslator::Entry existing = key->data(Qt::UserRole).value<KeyboardTranslator::Entry>();
 
     QString condition = key->text();
-    QString result = _ui->keyBindingTable->item(item->row() , 1)->text();
+    QString result = _ui->keyBindingTable->item(item->row(), 1)->text();
 
     KeyboardTranslator::Entry entry = KeyboardTranslatorReader::createEntry(condition, result);
     _translator->replaceEntry(existing, entry);
@@ -205,27 +211,27 @@ void KeyBindingEditor::bindingTableItemChanged(QTableWidgetItem* item)
     _ui->keyBindingTable->blockSignals(false);
 }
 
-void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator)
+void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator *translator)
 {
-    disconnect(_ui->keyBindingTable , &QTableWidget::itemChanged , this ,
+    disconnect(_ui->keyBindingTable, &QTableWidget::itemChanged, this,
                &Konsole::KeyBindingEditor::bindingTableItemChanged);
 
     QList<KeyboardTranslator::Entry> entries = translator->entries();
     _ui->keyBindingTable->setRowCount(entries.count());
 
-    for (int row = 0 ; row < entries.count() ; row++) {
-        const KeyboardTranslator::Entry& entry = entries.at(row);
+    for (int row = 0; row < entries.count(); row++) {
+        const KeyboardTranslator::Entry &entry = entries.at(row);
 
-        QTableWidgetItem* keyItem = new QTableWidgetItem(entry.conditionToString());
-        keyItem->setData(Qt::UserRole , QVariant::fromValue(entry));
+        QTableWidgetItem *keyItem = new QTableWidgetItem(entry.conditionToString());
+        keyItem->setData(Qt::UserRole, QVariant::fromValue(entry));
 
-        QTableWidgetItem* textItem = new QTableWidgetItem(QString(entry.resultToString()));
+        QTableWidgetItem *textItem = new QTableWidgetItem(QString(entry.resultToString()));
 
         _ui->keyBindingTable->setItem(row, 0, keyItem);
         _ui->keyBindingTable->setItem(row, 1, textItem);
     }
     _ui->keyBindingTable->sortItems(0);
 
-    connect(_ui->keyBindingTable , &QTableWidget::itemChanged , this , &Konsole::KeyBindingEditor::bindingTableItemChanged);
+    connect(_ui->keyBindingTable, &QTableWidget::itemChanged, this,
+            &Konsole::KeyBindingEditor::bindingTableItemChanged);
 }
-

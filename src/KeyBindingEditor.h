@@ -25,13 +25,11 @@
 
 class QTableWidgetItem;
 
-namespace Ui
-{
+namespace Ui {
 class KeyBindingEditor;
 }
 
-namespace Konsole
-{
+namespace Konsole {
 class KeyboardTranslator;
 
 /**
@@ -53,25 +51,25 @@ class KeyBindingEditor : public QWidget
 
 public:
     /** Constructs a new key bindings editor with the specified parent. */
-    explicit KeyBindingEditor(QWidget* parent = 0);
+    explicit KeyBindingEditor(QWidget *parent = 0);
     ~KeyBindingEditor() Q_DECL_OVERRIDE;
 
     /**
      * Initializes the dialog with the bindings and other settings
      * from the specified @p translator.
      */
-    void setup(const KeyboardTranslator* translator);
+    void setup(const KeyboardTranslator *translator);
 
     /**
      * Returns the modified translator describing the changes to the bindings
      * and other settings which the user made.
      */
-    KeyboardTranslator* translator() const;
+    KeyboardTranslator *translator() const;
 
     /**
      * Sets the text of the editor's description field.
      */
-    void setDescription(const QString& description);
+    void setDescription(const QString &description);
 
     /**
      * Returns the text of the editor's description field.
@@ -79,24 +77,24 @@ public:
     QString description() const;
 
     // reimplemented to handle test area input
-    bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
-    void setTranslatorDescription(const QString& description);
-    void bindingTableItemChanged(QTableWidgetItem* item);
+    void setTranslatorDescription(const QString &description);
+    void bindingTableItemChanged(QTableWidgetItem *item);
     void removeSelectedEntry();
     void addNewEntry();
 
 private:
-    void setupKeyBindingTable(const KeyboardTranslator* translator);
+    void setupKeyBindingTable(const KeyboardTranslator *translator);
 
-    Ui::KeyBindingEditor* _ui;
+    Ui::KeyBindingEditor *_ui;
 
     // translator to which modifications are made as the user makes
     // changes in the UI.
     // this is initialized as a copy of the translator specified
     // when setup() is called
-    KeyboardTranslator* _translator;
+    KeyboardTranslator *_translator;
 };
 }
 
