@@ -32,8 +32,7 @@
 
 class QIODevice;
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * Manages the keyboard translations available for use by terminal sessions,
  * see KeyboardTranslator.
@@ -51,8 +50,8 @@ public:
     KeyboardTranslatorManager();
     ~KeyboardTranslatorManager();
 
-    KeyboardTranslatorManager(const KeyboardTranslatorManager&) = delete;
-    KeyboardTranslatorManager& operator=(const KeyboardTranslatorManager&) = delete;
+    KeyboardTranslatorManager(const KeyboardTranslatorManager &) = delete;
+    KeyboardTranslatorManager &operator=(const KeyboardTranslatorManager &) = delete;
 
     /**
      * Adds a new translator.  If a translator with the same name
@@ -60,17 +59,17 @@ public:
      *
      * TODO: More documentation.
      */
-    void addTranslator(KeyboardTranslator* translator);
+    void addTranslator(KeyboardTranslator *translator);
 
     /**
      * Deletes a translator.  Returns true on successful deletion or false otherwise.
      *
      * TODO: More documentation
      */
-    bool deleteTranslator(const QString& name);
+    bool deleteTranslator(const QString &name);
 
     /** Returns the default translator for Konsole. */
-    const KeyboardTranslator* defaultTranslator();
+    const KeyboardTranslator *defaultTranslator();
 
     /**
      * Returns the keyboard translator with the given name or 0 if no translator
@@ -79,7 +78,7 @@ public:
      * The first time that a translator with a particular name is requested,
      * the on-disk .keytab file is loaded and parsed.
      */
-    const KeyboardTranslator* findTranslator(const QString& name);
+    const KeyboardTranslator *findTranslator(const QString &name);
     /**
      * Returns a list of the names of available keyboard translators.
      *
@@ -89,24 +88,23 @@ public:
     QStringList allTranslators();
 
     /** Returns the global KeyboardTranslatorManager instance. */
-    static KeyboardTranslatorManager* instance();
+    static KeyboardTranslatorManager *instance();
 
 private:
     void findTranslators(); // locate all available translators
 
     // loads the translator with the given name
-    KeyboardTranslator* loadTranslator(const QString& name);
-    KeyboardTranslator* loadTranslator(QIODevice* device, const QString& name);
+    KeyboardTranslator *loadTranslator(const QString &name);
+    KeyboardTranslator *loadTranslator(QIODevice *device, const QString &name);
 
-    bool saveTranslator(const KeyboardTranslator* translator);
-    QString findTranslatorPath(const QString& name);
+    bool saveTranslator(const KeyboardTranslator *translator);
+    QString findTranslatorPath(const QString &name);
 
     bool _haveLoadedAll;
 
-    const KeyboardTranslator* _fallbackTranslator;
-    QHash<QString, KeyboardTranslator*> _translators;
+    const KeyboardTranslator *_fallbackTranslator;
+    QHash<QString, KeyboardTranslator *> _translators;
 };
 }
 
 #endif // KEYBOARDTRANSLATOR_MANAGER_H
-
