@@ -40,14 +40,14 @@
 using Konsole::Application;
 
 // fill the KAboutData structure with information about contributors to Konsole.
-void fillAboutData(KAboutData& aboutData);
+void fillAboutData(KAboutData &aboutData);
 
 // check and report whether this konsole instance should use a new konsole
 // process, or re-use an existing konsole process.
 bool shouldUseNewProcess(int argc, char *argv[]);
 
 // restore sessions saved by KDE.
-void restoreSession(Application& app);
+void restoreSession(Application &app);
 
 // Workaround for a bug in KDBusService: https://bugs.kde.org/show_bug.cgi?id=355545
 // It calls exit(), but the program can't exit before the QApplication is deleted:
@@ -63,7 +63,7 @@ void deleteQApplication()
 // ***
 // Entry point into the Konsole terminal application.
 // ***
-extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
+extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
 {
     // Check if any of the arguments makes it impossible to re-use an existing process.
     // We need to do this manually and before creating a QApplication, because
@@ -122,7 +122,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     about.processCommandLine(parser.data());
 
     // Enable user to force multiple instances, unless a new tab is requested
-    if (!Konsole::KonsoleSettings::useSingleInstance() && !parser->isSet(QStringLiteral("new-tab"))) {
+    if (!Konsole::KonsoleSettings::useSingleInstance()
+        && !parser->isSet(QStringLiteral("new-tab"))) {
         startupOption = KDBusService::Multiple;
     }
 
@@ -134,7 +135,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
     needToDeleteQApplication = false;
 
     Kdelibs4ConfigMigrator migrate(QStringLiteral("konsole"));
-    migrate.setConfigFiles(QStringList() << QStringLiteral("konsolerc") << QStringLiteral("konsole.notifyrc"));
+    migrate.setConfigFiles(QStringList() << QStringLiteral("konsolerc")
+                                         << QStringLiteral("konsole.notifyrc"));
     migrate.setUiFiles(QStringList() << QStringLiteral("sessionui.rc") << QStringLiteral("partui.rc") << QStringLiteral("konsoleui.rc"));
 
     if (migrate.migrate()) {
@@ -146,14 +148,15 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
         QDir sourceDir(sourceBasePath);
         QDir targetDir(targetBasePath);
 
-        if(sourceDir.exists()) {
-            if(!targetDir.exists()) {
+        if (sourceDir.exists()) {
+            if (!targetDir.exists()) {
                 QDir().mkpath(targetBasePath);
             }
-            QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+            QStringList fileNames = sourceDir.entryList(
+                QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
             foreach (const QString &fileName, fileNames) {
                 targetFilePath = targetBasePath + fileName;
-                if(!QFile::exists(targetFilePath))  {
+                if (!QFile::exists(targetFilePath)) {
                     QFile::copy(sourceBasePath + fileName, targetFilePath);
                 }
             }
@@ -166,7 +169,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char* argv[])
 
     // The activateRequested() signal is emitted when a second instance
     // of Konsole is started.
-    QObject::connect(&dbusService, &KDBusService::activateRequested, &konsoleApp, &Application::slotActivateRequested);
+    QObject::connect(&dbusService, &KDBusService::activateRequested, &konsoleApp,
+                     &Application::slotActivateRequested);
 
     if (app->isSessionRestored()) {
         restoreSession(konsoleApp);
@@ -199,14 +203,14 @@ bool shouldUseNewProcess(int argc, char *argv[])
     // We need to manually parse the arguments because QApplication removes the
     // Qt specific arguments (like --reverse)
     QStringList arguments;
-    for (int i=0; i < argc; i++) {
+    for (int i = 0; i < argc; i++) {
         arguments.append(QString::fromLocal8Bit(argv[i]));
     }
 
     // take Qt options into consideration
     QStringList qtProblematicOptions;
-    qtProblematicOptions << QStringLiteral("--session") 
-                         << QStringLiteral("--name") 
+    qtProblematicOptions << QStringLiteral("--session")
+                         << QStringLiteral("--name")
                          << QStringLiteral("--reverse")
                          << QStringLiteral("--stylesheet")
                          << QStringLiteral("--graphicssystem");
@@ -214,7 +218,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
     qtProblematicOptions << QStringLiteral("--display")
                          << QStringLiteral("--visual");
 #endif
-    foreach(const QString& option, qtProblematicOptions) {
+    foreach (const QString &option, qtProblematicOptions) {
         if (arguments.contains(option)) {
             return true;
         }
@@ -228,7 +232,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
     kdeProblematicOptions << QStringLiteral("--waitforwm");
 #endif
 
-    foreach(const QString& option, kdeProblematicOptions) {
+    foreach (const QString &option, kdeProblematicOptions) {
         if (arguments.contains(option)) {
             return true;
         }
@@ -237,8 +241,8 @@ bool shouldUseNewProcess(int argc, char *argv[])
     // if users have explictly requested starting a new process
     // Support --nofork to retain argument compatibility with older
     // versions.
-    if (arguments.contains(QStringLiteral("--separate")) ||
-        arguments.contains(QStringLiteral("--nofork"))) {
+    if (arguments.contains(QStringLiteral("--separate"))
+        || arguments.contains(QStringLiteral("--nofork"))) {
         return true;
     }
 
@@ -261,14 +265,14 @@ bool shouldUseNewProcess(int argc, char *argv[])
     return hasControllingTTY;
 }
 
-void fillAboutData(KAboutData& aboutData)
+void fillAboutData(KAboutData &aboutData)
 {
     aboutData.setProgramIconName(QStringLiteral("utilities-terminal"));
     aboutData.setOrganizationDomain("kde.org");
 
     aboutData.addAuthor(i18nc("@info:credit", "Kurt Hindenburg"),
                         i18nc("@info:credit", "General maintainer, bug fixes and general"
-                               " improvements"),
+                                              " improvements"),
                         QStringLiteral("kurt.hindenburg@gmail.com"));
     aboutData.addAuthor(i18nc("@info:credit", "Robert Knight"),
                         i18nc("@info:credit", "Previous maintainer, ported to KDE4"),
@@ -305,18 +309,18 @@ void fillAboutData(KAboutData& aboutData)
                         QStringLiteral("Peter.A.Silva@gmail.com"));
     aboutData.addCredit(i18nc("@info:credit", "Lotzi Boloni"),
                         i18nc("@info:credit", "Embedded Konsole\n"
-                               "Toolbar and session names"),
+                                              "Toolbar and session names"),
                         QStringLiteral("boloni@cs.purdue.edu"));
     aboutData.addCredit(i18nc("@info:credit", "David Faure"),
                         i18nc("@info:credit", "Embedded Konsole\n"
-                               "General improvements"),
+                                              "General improvements"),
                         QStringLiteral("faure@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Antonio Larrosa"),
                         i18nc("@info:credit", "Visual effects"),
                         QStringLiteral("larrosa@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Matthias Ettrich"),
                         i18nc("@info:credit", "Code from the kvt project\n"
-                               "General improvements"),
+                                              "General improvements"),
                         QStringLiteral("ettrich@kde.org"));
     aboutData.addCredit(i18nc("@info:credit", "Warwick Allison"),
                         i18nc("@info:credit", "Schema and text selection improvements"),
@@ -342,10 +346,10 @@ void fillAboutData(KAboutData& aboutData)
     aboutData.addCredit(i18nc("@info:credit", "Thanks to many others.\n"));
 }
 
-void restoreSession(Application& app)
+void restoreSession(Application &app)
 {
     int n = 1;
-    while (KMainWindow::canBeRestored(n))
+    while (KMainWindow::canBeRestored(n)) {
         app.newMainWindow()->restore(n++);
+    }
 }
-

@@ -34,8 +34,7 @@ class QAction;
 class KActionMenu;
 class KToggleAction;
 
-namespace Konsole
-{
+namespace Konsole {
 class IncrementalSearchBar;
 class ViewManager;
 class ViewProperties;
@@ -69,7 +68,7 @@ public:
      * Returns the view manager associated with this window.  The view manager can be used to
      * create new views on particular session objects inside this window.
      */
-    ViewManager* viewManager() const;
+    ViewManager *viewManager() const;
 
     /**
      * Create a new session.
@@ -78,7 +77,7 @@ public:
      * @param directory Initial working directory for the new session or empty
      * if the default working directory associated with the profile should be used.
      */
-    Session* createSession(Profile::Ptr profile, const QString& directory);
+    Session *createSession(Profile::Ptr profile, const QString &directory);
 
     /**
      * create a new SSH session.
@@ -86,12 +85,12 @@ public:
      * @param profile The profile to use to create the new session.
      * @param url the URL representing the new SSH connection
      */
-    Session* createSSHSession(Profile::Ptr profile, const QUrl& url);
+    Session *createSSHSession(Profile::Ptr profile, const QUrl &url);
 
     /**
      * create view for the specified session
      */
-    void createView(Session* session);
+    void createView(Session *session);
 
     /**
      * Helper method to make this window get input focus
@@ -105,8 +104,8 @@ public:
 
     void setNavigationVisibility(int visibility);
     void setNavigationPosition(int position);
-    void setNavigationStyleSheet(const QString& stylesheet);
-    void setNavigationStyleSheetFromFile(const QUrl& stylesheetfile);
+    void setNavigationStyleSheet(const QString &stylesheet);
+    void setNavigationStyleSheetFromFile(const QUrl &stylesheetfile);
     void setNavigationBehavior(int behavior);
     void setShowQuickButtons(bool show);
 
@@ -122,24 +121,23 @@ Q_SIGNALS:
      * if the default working directory associated with the profile should
      * be used.
      */
-    void newWindowRequest(Profile::Ptr profile,
-                          const QString& directory);
+    void newWindowRequest(Profile::Ptr profile, const QString &directory);
 
     /**
      * Emitted when a view for one session is detached from this window
      */
-    void viewDetached(Session* session);
+    void viewDetached(Session *session);
 
 protected:
     // Reimplemented for internal reasons.
-    void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
+    void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 
     // reimplemented from KMainWindow
     bool queryClose() Q_DECL_OVERRIDE;
-    void saveProperties(KConfigGroup& group) Q_DECL_OVERRIDE;
-    void readProperties(const KConfigGroup& group) Q_DECL_OVERRIDE;
-    void saveGlobalProperties(KConfig* config) Q_DECL_OVERRIDE;
-    void readGlobalProperties(KConfig* config) Q_DECL_OVERRIDE;
+    void saveProperties(KConfigGroup &group) Q_DECL_OVERRIDE;
+    void readProperties(const KConfigGroup &group) Q_DECL_OVERRIDE;
+    void saveGlobalProperties(KConfig *config) Q_DECL_OVERRIDE;
+    void readGlobalProperties(KConfig *config) Q_DECL_OVERRIDE;
 
     // reimplemented from QWidget
     bool focusNextPrevChild(bool next) Q_DECL_OVERRIDE;
@@ -153,19 +151,19 @@ private Q_SLOTS:
     void showSettingsDialog(const bool showProfilePage = false);
     void showShortcutsDialog();
     void newFromProfile(Profile::Ptr profile);
-    void activeViewChanged(SessionController* controller);
-    void disconnectController(SessionController* controller);
-    void activeViewTitleChanged(ViewProperties*);
+    void activeViewChanged(SessionController *controller);
+    void disconnectController(SessionController *controller);
+    void activeViewTitleChanged(ViewProperties *);
 
-    void profileListChanged(const QList<QAction*>& actions);
+    void profileListChanged(const QList<QAction *> &actions);
     void configureNotifications();
 
     void updateWindowIcon();
     void updateWindowCaption();
-    void openUrls(const QList<QUrl>& urls);
+    void openUrls(const QList<QUrl> &urls);
 
     // Sets the list of profiles to be displayed under the "New Tab" action
-    void setProfileList(ProfileList* list);
+    void setProfileList(ProfileList *list);
 
     void applyKonsoleSettings();
 
@@ -189,22 +187,22 @@ private:
      * This is a convenience method. The search bar is actually owned by
      * ViewManager, or more precisely, by ViewContainer.
      */
-    IncrementalSearchBar* searchBar() const;
+    IncrementalSearchBar *searchBar() const;
 
     /**
      * Returns the bookmark handler associated with this window.
      */
-    BookmarkHandler* bookmarkHandler() const;
+    BookmarkHandler *bookmarkHandler() const;
 
     // sets the active shortcuts of actions in 'dest' to the shortcuts of actions
     // with the same name in 'source' (see QAction::ActiveShortcut)
-    static void syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source);
+    static void syncActiveShortcuts(KActionCollection *dest, const KActionCollection *source);
 
 private:
-    ViewManager*  _viewManager;
-    BookmarkHandler* _bookmarkHandler;
-    KToggleAction* _toggleMenuBarAction;
-    KActionMenu* _newTabMenuAction;
+    ViewManager *_viewManager;
+    BookmarkHandler *_bookmarkHandler;
+    KToggleAction *_toggleMenuBarAction;
+    KActionMenu *_newTabMenuAction;
 
     QPointer<SessionController> _pluggedController;
 

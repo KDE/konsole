@@ -60,12 +60,12 @@
 
 using namespace Konsole;
 
-MainWindow::MainWindow()
-    : KXmlGuiWindow()
-    , _bookmarkHandler(0)
-    , _pluggedController(0)
-    , _menuBarInitialVisibility(true)
-    , _menuBarInitialVisibilityApplied(false)
+MainWindow::MainWindow() :
+    KXmlGuiWindow(),
+    _bookmarkHandler(0),
+    _pluggedController(0),
+    _menuBarInitialVisibility(true),
+    _menuBarInitialVisibilityApplied(false)
 {
     if (!KonsoleSettings::saveGeometryOnExit()) {
         // If we are not using the global Konsole save geometry on exit,
@@ -78,7 +78,7 @@ MainWindow::MainWindow()
         while (i.hasNext()) {
             i.next();
             if (i.key().startsWith(QLatin1String("Width"))
-                    || i.key().startsWith(QLatin1String("Height"))) {
+                || i.key().startsWith(QLatin1String("Height"))) {
                 group.deleteEntry(i.key());
             }
         }
@@ -92,14 +92,24 @@ MainWindow::MainWindow()
     // create view manager
     _viewManager = new ViewManager(this, actionCollection());
     connect(_viewManager, &Konsole::ViewManager::empty, this, &Konsole::MainWindow::close);
-    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this, &Konsole::MainWindow::activeViewChanged);
-    connect(_viewManager, &Konsole::ViewManager::unplugController, this, &Konsole::MainWindow::disconnectController);
-    connect(_viewManager, &Konsole::ViewManager::viewPropertiesChanged, bookmarkHandler(), &Konsole::BookmarkHandler::setViews);
+    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this,
+            &Konsole::MainWindow::activeViewChanged);
+    connect(_viewManager, &Konsole::ViewManager::unplugController, this,
+            &Konsole::MainWindow::disconnectController);
+    connect(_viewManager, &Konsole::ViewManager::viewPropertiesChanged,
+            bookmarkHandler(), &Konsole::BookmarkHandler::setViews);
 
-    connect(_viewManager, &Konsole::ViewManager::updateWindowIcon, this, &Konsole::MainWindow::updateWindowIcon);
-    connect(_viewManager, static_cast<void(ViewManager::*)(Profile::Ptr)>(&Konsole::ViewManager::newViewRequest), this, &Konsole::MainWindow::newFromProfile);
-    connect(_viewManager, static_cast<void(ViewManager::*)()>(&Konsole::ViewManager::newViewRequest), this, &Konsole::MainWindow::newTab);
-    connect(_viewManager, &Konsole::ViewManager::viewDetached, this, &Konsole::MainWindow::viewDetached);
+    connect(_viewManager, &Konsole::ViewManager::updateWindowIcon, this,
+            &Konsole::MainWindow::updateWindowIcon);
+    connect(_viewManager,
+            static_cast<void (ViewManager::*)(Profile::Ptr)>(&Konsole::ViewManager::newViewRequest),
+            this,
+            &Konsole::MainWindow::newFromProfile);
+    connect(_viewManager,
+            static_cast<void (ViewManager::*)()>(&Konsole::ViewManager::newViewRequest), this,
+            &Konsole::MainWindow::newTab);
+    connect(_viewManager, &Konsole::ViewManager::viewDetached, this,
+            &Konsole::MainWindow::viewDetached);
 
     // create the main widget
     setupMainWidget();
@@ -123,7 +133,8 @@ MainWindow::MainWindow()
 
     // this must come at the end
     applyKonsoleSettings();
-    connect(KonsoleSettings::self(), &Konsole::KonsoleSettings::configChanged, this, &Konsole::MainWindow::applyKonsoleSettings);
+    connect(KonsoleSettings::self(), &Konsole::KonsoleSettings::configChanged, this,
+            &Konsole::MainWindow::applyKonsoleSettings);
 }
 
 void MainWindow::updateUseTransparency()
@@ -141,7 +152,7 @@ void MainWindow::updateUseTransparency()
 
 void MainWindow::rememberMenuAccelerators()
 {
-    foreach(QAction* menuItem, menuBar()->actions()) {
+    foreach (QAction *menuItem, menuBar()->actions()) {
         QString itemText = menuItem->text();
         menuItem->setData(itemText);
     }
@@ -157,14 +168,14 @@ void MainWindow::rememberMenuAccelerators()
 // can then be redefined there to exclude the standard accelerators
 void MainWindow::removeMenuAccelerators()
 {
-    foreach(QAction* menuItem, menuBar()->actions()) {
+    foreach (QAction *menuItem, menuBar()->actions()) {
         menuItem->setText(menuItem->text().replace(QLatin1Char('&'), QString()));
     }
 }
 
 void MainWindow::restoreMenuAccelerators()
 {
-    foreach(QAction* menuItem, menuBar()->actions()) {
+    foreach (QAction *menuItem, menuBar()->actions()) {
         QString itemText = menuItem->data().toString();
         menuItem->setText(itemText);
     }
@@ -173,7 +184,7 @@ void MainWindow::restoreMenuAccelerators()
 void MainWindow::correctStandardShortcuts()
 {
     // replace F1 shortcut for help contents
-    QAction* helpAction = actionCollection()->action(QStringLiteral("help_contents"));
+    QAction *helpAction = actionCollection()->action(QStringLiteral("help_contents"));
     if (helpAction != nullptr) {
         actionCollection()->setDefaultShortcut(helpAction, QKeySequence());
     }
@@ -181,18 +192,20 @@ void MainWindow::correctStandardShortcuts()
     // replace Ctrl+B shortcut for bookmarks only if user hasn't already
     // changed the shortcut; however, if the user changed it to Ctrl+B
     // this will still get changed to Ctrl+Shift+B
-    QAction* bookmarkAction = actionCollection()->action(QStringLiteral("add_bookmark"));
-    if ((bookmarkAction != nullptr) && bookmarkAction->shortcut() == QKeySequence(Konsole::ACCEL + Qt::Key_B)) {
-        actionCollection()->setDefaultShortcut(bookmarkAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_B);
+    QAction *bookmarkAction = actionCollection()->action(QStringLiteral("add_bookmark"));
+    if ((bookmarkAction != nullptr)
+        && bookmarkAction->shortcut() == QKeySequence(Konsole::ACCEL + Qt::Key_B)) {
+        actionCollection()->setDefaultShortcut(bookmarkAction,
+                                               Konsole::ACCEL + Qt::SHIFT + Qt::Key_B);
     }
 }
 
-ViewManager* MainWindow::viewManager() const
+ViewManager *MainWindow::viewManager() const
 {
     return _viewManager;
 }
 
-void MainWindow::disconnectController(SessionController* controller)
+void MainWindow::disconnectController(SessionController *controller)
 {
     disconnect(controller, &Konsole::SessionController::titleChanged,
                this, &Konsole::MainWindow::activeViewTitleChanged);
@@ -205,29 +218,35 @@ void MainWindow::disconnectController(SessionController* controller)
     // with the controller internally, which may not be valid after the controller
     // itself is no longer valid (after the associated session and or view have
     // been destroyed)
-    if (controller->isValid())
+    if (controller->isValid()) {
         guiFactory()->removeClient(controller);
+    }
 
     controller->setSearchBar(0);
 }
 
-void MainWindow::activeViewChanged(SessionController* controller)
+void MainWindow::activeViewChanged(SessionController *controller)
 {
     // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
     disconnect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, 0, 0);
-    connect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, controller, &Konsole::SessionController::openUrl);
+    connect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, controller,
+            &Konsole::SessionController::openUrl);
 
-    if (_pluggedController != nullptr)
+    if (_pluggedController != nullptr) {
         disconnectController(_pluggedController);
+    }
 
     Q_ASSERT(controller);
     _pluggedController = controller;
 
     // listen for title changes from the current session
-    connect(controller, &Konsole::SessionController::titleChanged, this, &Konsole::MainWindow::activeViewTitleChanged);
-    connect(controller, &Konsole::SessionController::rawTitleChanged, this, &Konsole::MainWindow::updateWindowCaption);
-    connect(controller, &Konsole::SessionController::iconChanged, this, &Konsole::MainWindow::updateWindowIcon);
+    connect(controller, &Konsole::SessionController::titleChanged, this,
+            &Konsole::MainWindow::activeViewTitleChanged);
+    connect(controller, &Konsole::SessionController::rawTitleChanged, this,
+            &Konsole::MainWindow::updateWindowCaption);
+    connect(controller, &Konsole::SessionController::iconChanged, this,
+            &Konsole::MainWindow::updateWindowIcon);
 
     controller->setShowMenuAction(_toggleMenuBarAction);
     guiFactory()->addClient(controller);
@@ -242,7 +261,7 @@ void MainWindow::activeViewChanged(SessionController* controller)
     updateWindowIcon();
 }
 
-void MainWindow::activeViewTitleChanged(ViewProperties* properties)
+void MainWindow::activeViewTitleChanged(ViewProperties *properties)
 {
     Q_UNUSED(properties);
     updateWindowCaption();
@@ -250,11 +269,12 @@ void MainWindow::activeViewTitleChanged(ViewProperties* properties)
 
 void MainWindow::updateWindowCaption()
 {
-    if (_pluggedController == nullptr)
+    if (_pluggedController == nullptr) {
         return;
+    }
 
-    const QString& title = _pluggedController->title();
-    const QString& userTitle = _pluggedController->userTitle();
+    const QString &title = _pluggedController->title();
+    const QString &userTitle = _pluggedController->userTitle();
 
     // use tab title as caption by default
     QString caption = title;
@@ -273,22 +293,24 @@ void MainWindow::updateWindowCaption()
 
 void MainWindow::updateWindowIcon()
 {
-    if ((_pluggedController != nullptr) && !_pluggedController->icon().isNull())
+    if ((_pluggedController != nullptr) && !_pluggedController->icon().isNull()) {
         setWindowIcon(_pluggedController->icon());
+    }
 }
 
-IncrementalSearchBar* MainWindow::searchBar() const
+IncrementalSearchBar *MainWindow::searchBar() const
 {
     return _viewManager->searchBar();
 }
 
 void MainWindow::setupActions()
 {
-    KActionCollection* collection = actionCollection();
-    QAction* menuAction = 0;
+    KActionCollection *collection = actionCollection();
+    QAction *menuAction = 0;
 
     // File Menu
-    _newTabMenuAction = new KActionMenu(QIcon::fromTheme(QStringLiteral("tab-new")), i18nc("@action:inmenu", "&New Tab"), collection);
+    _newTabMenuAction = new KActionMenu(QIcon::fromTheme(QStringLiteral("tab-new")),
+                                        i18nc("@action:inmenu", "&New Tab"), collection);
     collection->setDefaultShortcut(_newTabMenuAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_T);
     collection->setShortcutsConfigurable(_newTabMenuAction, true);
     _newTabMenuAction->setAutoRepeat(false);
@@ -317,10 +339,11 @@ void MainWindow::setupActions()
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::close);
 
     // Bookmark Menu
-    KActionMenu* bookmarkMenu = new KActionMenu(i18nc("@title:menu", "&Bookmarks"), collection);
+    KActionMenu *bookmarkMenu = new KActionMenu(i18nc("@title:menu", "&Bookmarks"), collection);
     _bookmarkHandler = new BookmarkHandler(collection, bookmarkMenu->menu(), true, this);
     collection->addAction(QStringLiteral("bookmark"), bookmarkMenu);
-    connect(_bookmarkHandler, &Konsole::BookmarkHandler::openUrls, this, &Konsole::MainWindow::openUrls);
+    connect(_bookmarkHandler, &Konsole::BookmarkHandler::openUrls, this,
+            &Konsole::MainWindow::openUrls);
 
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
@@ -348,27 +371,30 @@ void MainWindow::setupActions()
 
 void MainWindow::viewFullScreen(bool fullScreen)
 {
-    if (fullScreen)
+    if (fullScreen) {
         setWindowState(windowState() | Qt::WindowFullScreen);
-    else
+    } else {
         setWindowState(windowState() & ~Qt::WindowFullScreen);
+    }
 }
 
-BookmarkHandler* MainWindow::bookmarkHandler() const
+BookmarkHandler *MainWindow::bookmarkHandler() const
 {
     return _bookmarkHandler;
 }
 
-void MainWindow::setProfileList(ProfileList* list)
+void MainWindow::setProfileList(ProfileList *list)
 {
     profileListChanged(list->actions());
 
-    connect(list, &Konsole::ProfileList::profileSelected, this, &Konsole::MainWindow::newFromProfile);
+    connect(list, &Konsole::ProfileList::profileSelected, this,
+            &Konsole::MainWindow::newFromProfile);
 
-    connect(list, &Konsole::ProfileList::actionsChanged, this, &Konsole::MainWindow::profileListChanged);
+    connect(list, &Konsole::ProfileList::actionsChanged, this,
+            &Konsole::MainWindow::profileListChanged);
 }
 
-void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
+void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
 {
     // If only 1 profile is to be shown in the menu, only display
     // it if it is the non-default profile.
@@ -379,7 +405,7 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
         } else {
             _newTabMenuAction->setMenu(new QMenu());
         }
-        foreach(QAction* sessionAction, sessionActions) {
+        foreach (QAction *sessionAction, sessionActions) {
             _newTabMenuAction->menu()->addAction(sessionAction);
 
             // NOTE: defaultProfile seems to not work here, sigh.
@@ -397,12 +423,13 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
         if (_newTabMenuAction->menu() != nullptr) {
             _newTabMenuAction->menu()->clear();
         } else {
-           _newTabMenuAction->setMenu(new QMenu());
+            _newTabMenuAction->setMenu(new QMenu());
         }
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
 
         // NOTE: Compare names w/o any '&'
-        if (sessionActions.size() == 2 &&  sessionActions[1]->text().remove(QLatin1Char('&')) != profile->name()) {
+        if (sessionActions.size() == 2
+            && sessionActions[1]->text().remove(QLatin1Char('&')) != profile->name()) {
             _newTabMenuAction->menu()->addAction(sessionActions[1]);
         } else {
             _newTabMenuAction->menu()->deleteLater();
@@ -413,7 +440,7 @@ void MainWindow::profileListChanged(const QList<QAction*>& sessionActions)
 QString MainWindow::activeSessionDir() const
 {
     if (_pluggedController != nullptr) {
-        if (Session* session = _pluggedController->session()) {
+        if (Session *session = _pluggedController->session()) {
             // For new tabs to get the correct working directory,
             // force the updating of the currentWorkingDirectory.
             session->getDynamicTitle();
@@ -424,16 +451,16 @@ QString MainWindow::activeSessionDir() const
     }
 }
 
-void MainWindow::openUrls(const QList<QUrl>& urls)
+void MainWindow::openUrls(const QList<QUrl> &urls)
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
-    Q_FOREACH (const auto& url, urls) {
-        if (url.isLocalFile())
+    Q_FOREACH (const auto &url, urls) {
+        if (url.isLocalFile()) {
             createSession(defaultProfile, url.path());
-
-        else if (url.scheme() == QLatin1String("ssh"))
+        } else if (url.scheme() == QLatin1String("ssh")) {
             createSSHSession(defaultProfile, url);
+        }
     }
 }
 
@@ -447,7 +474,7 @@ void MainWindow::cloneTab()
 {
     Q_ASSERT(_pluggedController);
 
-    Session* session = _pluggedController->session();
+    Session *session = _pluggedController->session();
     Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
     if (profile) {
         createSession(profile, activeSessionDir());
@@ -458,15 +485,17 @@ void MainWindow::cloneTab()
     }
 }
 
-Session* MainWindow::createSession(Profile::Ptr profile, const QString& directory)
+Session *MainWindow::createSession(Profile::Ptr profile, const QString &directory)
 {
-    if (!profile)
+    if (!profile) {
         profile = ProfileManager::instance()->defaultProfile();
+    }
 
-    Session* session = SessionManager::instance()->createSession(profile);
+    Session *session = SessionManager::instance()->createSession(profile);
 
-    if (!directory.isEmpty() && profile->startInCurrentSessionDir())
+    if (!directory.isEmpty() && profile->startInCurrentSessionDir()) {
         session->setInitialWorkingDirectory(directory);
+    }
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(_viewManager->managerId()));
 
@@ -479,12 +508,13 @@ Session* MainWindow::createSession(Profile::Ptr profile, const QString& director
     return session;
 }
 
-Session* MainWindow::createSSHSession(Profile::Ptr profile, const QUrl& url)
+Session *MainWindow::createSSHSession(Profile::Ptr profile, const QUrl &url)
 {
-    if (!profile)
+    if (!profile) {
         profile = ProfileManager::instance()->defaultProfile();
+    }
 
-    Session* session = SessionManager::instance()->createSession(profile);
+    Session *session = SessionManager::instance()->createSession(profile);
 
     QString sshCommand = QStringLiteral("ssh ");
     if (url.port() > -1) {
@@ -508,7 +538,7 @@ Session* MainWindow::createSSHSession(Profile::Ptr profile, const QUrl& url)
     return session;
 }
 
-void MainWindow::createView(Session* session)
+void MainWindow::createView(Session *session)
 {
     _viewManager->createView(session);
 }
@@ -535,7 +565,7 @@ bool MainWindow::queryClose()
 
     // Check what processes are running, excluding the shell
     QStringList processesRunning;
-    foreach(Session *session, _viewManager->sessions()) {
+    foreach (Session *session, _viewManager->sessions()) {
         if ((session == nullptr) || !session->isForegroundProcessActive()) {
             continue;
         }
@@ -543,8 +573,9 @@ bool MainWindow::queryClose()
         const QString defaultProc = session->program().split(QLatin1Char('/')).last();
         const QString currentProc = session->foregroundProcessName().split(QLatin1Char('/')).last();
 
-        if (currentProc.isEmpty())
+        if (currentProc.isEmpty()) {
             continue;
+        }
 
         if (defaultProc != currentProc) {
             processesRunning.append(currentProc);
@@ -571,29 +602,36 @@ bool MainWindow::queryClose()
 
     if (processesRunning.count() > 0) {
         result = KMessageBox::warningYesNoCancelList(this,
-                     i18ncp("@info", "There is a process running in this window. "
-                                     "Do you still want to quit?",
-                            "There are %1 processes running in this window. "
-                            "Do you still want to quit?",
-                            processesRunning.count()),
-                 processesRunning,
-                 i18nc("@title", "Confirm Close"),
-                 KGuiItem(i18nc("@action:button", "Close &Window"), QStringLiteral("window-close")),
-                 KGuiItem(i18nc("@action:button", "Close Current &Tab"), QStringLiteral("tab-close")),
-                 KStandardGuiItem::cancel(),
-                 QStringLiteral("CloseAllTabs"));
+                                                     i18ncp("@info",
+                                                            "There is a process running in this window. "
+                                                            "Do you still want to quit?",
+                                                            "There are %1 processes running in this window. "
+                                                            "Do you still want to quit?",
+                                                            processesRunning.count()),
+                                                     processesRunning,
+                                                     i18nc("@title", "Confirm Close"),
+                                                     KGuiItem(i18nc("@action:button",
+                                                                    "Close &Window"),
+                                                              QStringLiteral("window-close")),
+                                                     KGuiItem(i18nc("@action:button",
+                                                                    "Close Current &Tab"),
+                                                              QStringLiteral("tab-close")),
+                                                     KStandardGuiItem::cancel(),
+                                                     QStringLiteral("CloseAllTabs"));
     } else {
         result = KMessageBox::warningYesNoCancel(this,
-                    i18nc("@info",
-                           "There are %1 open tabs in this window. "
-                           "Do you still want to quit?",
-                           openTabs),
-                    i18nc("@title", "Confirm Close"),
-                    KGuiItem(i18nc("@action:button", "Close &Window"), QStringLiteral("window-close")),
-                    KGuiItem(i18nc("@action:button", "Close Current &Tab"), QStringLiteral("tab-close")),
-                    KStandardGuiItem::cancel(),
-                    QStringLiteral("CloseAllEmptyTabs"));
-
+                                                 i18nc("@info",
+                                                       "There are %1 open tabs in this window. "
+                                                       "Do you still want to quit?",
+                                                       openTabs),
+                                                 i18nc("@title", "Confirm Close"),
+                                                 KGuiItem(i18nc("@action:button", "Close &Window"),
+                                                          QStringLiteral("window-close")),
+                                                 KGuiItem(i18nc("@action:button",
+                                                                "Close Current &Tab"),
+                                                          QStringLiteral("tab-close")),
+                                                 KStandardGuiItem::cancel(),
+                                                 QStringLiteral("CloseAllEmptyTabs"));
     }
 
     switch (result) {
@@ -612,29 +650,29 @@ bool MainWindow::queryClose()
     return true;
 }
 
-void MainWindow::saveProperties(KConfigGroup& group)
+void MainWindow::saveProperties(KConfigGroup &group)
 {
     _viewManager->saveSessions(group);
 }
 
-void MainWindow::readProperties(const KConfigGroup& group)
+void MainWindow::readProperties(const KConfigGroup &group)
 {
     _viewManager->restoreSessions(group);
 }
 
-void MainWindow::saveGlobalProperties(KConfig* config)
+void MainWindow::saveGlobalProperties(KConfig *config)
 {
     SessionManager::instance()->saveSessions(config);
 }
 
-void MainWindow::readGlobalProperties(KConfig* config)
+void MainWindow::readGlobalProperties(KConfig *config)
 {
     SessionManager::instance()->restoreSessions(config);
 }
 
-void MainWindow::syncActiveShortcuts(KActionCollection* dest, const KActionCollection* source)
+void MainWindow::syncActiveShortcuts(KActionCollection *dest, const KActionCollection *source)
 {
-    foreach(QAction *qAction, source->actions()) {
+    foreach (QAction *qAction, source->actions()) {
         if (QAction *destQAction = dest->action(qAction->objectName())) {
             destQAction->setShortcut(qAction->shortcut());
         }
@@ -643,28 +681,31 @@ void MainWindow::syncActiveShortcuts(KActionCollection* dest, const KActionColle
 
 void MainWindow::showShortcutsDialog()
 {
-    KShortcutsDialog dialog(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsDisallowed, this);
+    KShortcutsDialog dialog(KShortcutsEditor::AllActions,
+                            KShortcutsEditor::LetterShortcutsDisallowed, this);
 
     // add actions from this window and the current session controller
-    foreach(KXMLGUIClient * client, guiFactory()->clients()) {
+    foreach (KXMLGUIClient *client, guiFactory()->clients()) {
         dialog.addCollection(client->actionCollection());
     }
 
     if (dialog.configure()) {
         // sync shortcuts for non-session actions (defined in "konsoleui.rc") in other main windows
-        foreach(QWidget* mainWindowWidget, QApplication::topLevelWidgets()) {
-            MainWindow* mainWindow = qobject_cast<MainWindow*>(mainWindowWidget);
-            if ((mainWindow != nullptr) && mainWindow != this)
+        foreach (QWidget *mainWindowWidget, QApplication::topLevelWidgets()) {
+            MainWindow *mainWindow = qobject_cast<MainWindow *>(mainWindowWidget);
+            if ((mainWindow != nullptr) && mainWindow != this) {
                 syncActiveShortcuts(mainWindow->actionCollection(), actionCollection());
+            }
         }
         // sync shortcuts for session actions (defined in "sessionui.rc") in other session controllers.
         // Controllers which are currently plugged in (ie. their actions are part of the current menu)
         // must be updated immediately via syncActiveShortcuts().  Other controllers will be updated
         // when they are plugged into a main window.
-        foreach(SessionController * controller, SessionController::allControllers()) {
+        foreach (SessionController *controller, SessionController::allControllers()) {
             controller->reloadXML();
-            if ((controller->factory() != nullptr) && controller != _pluggedController)
+            if ((controller->factory() != nullptr) && controller != _pluggedController) {
                 syncActiveShortcuts(controller->actionCollection(), _pluggedController->actionCollection());
+            }
         }
     }
 }
@@ -673,6 +714,7 @@ void MainWindow::newFromProfile(Profile::Ptr profile)
 {
     createSession(profile, activeSessionDir());
 }
+
 void MainWindow::showManageProfilesDialog()
 {
     showSettingsDialog(true);
@@ -680,10 +722,11 @@ void MainWindow::showManageProfilesDialog()
 
 void MainWindow::showSettingsDialog(const bool showProfilePage)
 {
-    if (KConfigDialog::showDialog(QStringLiteral("settings")))
+    if (KConfigDialog::showDialog(QStringLiteral("settings"))) {
         return;
+    }
 
-    KConfigDialog* settingsDialog = new KConfigDialog(this, QStringLiteral("settings"), KonsoleSettings::self());
+    KConfigDialog *settingsDialog = new KConfigDialog(this, QStringLiteral("settings"), KonsoleSettings::self());
     settingsDialog->setFaceType(KPageDialog::Tabbed);
 
     auto generalSettings = new GeneralSettings(settingsDialog);
@@ -692,9 +735,10 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
                             QStringLiteral("utilities-terminal"));
 
     auto profileSettings = new ProfileSettings(settingsDialog);
-    KPageWidgetItem* profilePage = settingsDialog->addPage(profileSettings,
-                            i18nc("@title Preferences page name", "Profiles"),
-                            QStringLiteral("configure"));
+    KPageWidgetItem *profilePage = settingsDialog->addPage(profileSettings,
+                                                           i18nc("@title Preferences page name",
+                                                                 "Profiles"),
+                                                           QStringLiteral("configure"));
 
     auto tabBarSettings = new TabBarSettings(settingsDialog);
     settingsDialog->addPage(tabBarSettings,
@@ -706,8 +750,9 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
                             i18nc("@title Preferences page name", "File Location"),
                             QStringLiteral("configure"));
 
-    if (showProfilePage)
+    if (showProfilePage) {
         settingsDialog->setCurrentPage(profilePage);
+    }
 
     settingsDialog->show();
 }
@@ -749,7 +794,7 @@ void MainWindow::setNavigationPosition(int position)
     _viewManager->setNavigationPosition(position);
 }
 
-void MainWindow::setNavigationStyleSheet(const QString& styleSheet)
+void MainWindow::setNavigationStyleSheet(const QString &styleSheet)
 {
     _viewManager->setNavigationStyleSheet(styleSheet);
 }
@@ -759,7 +804,7 @@ void MainWindow::setNavigationBehavior(int behavior)
     _viewManager->setNavigationBehavior(behavior);
 }
 
-void MainWindow::setNavigationStyleSheetFromFile(const QUrl& styleSheetFile)
+void MainWindow::setNavigationStyleSheetFromFile(const QUrl &styleSheetFile)
 {
     // Let's only deal w/ local files for now
     if (!styleSheetFile.isLocalFile()) {
@@ -788,10 +833,11 @@ void MainWindow::setShowQuickButtons(bool show)
 
 void MainWindow::activateMenuBar()
 {
-    const QList<QAction*> menuActions = menuBar()->actions();
+    const QList<QAction *> menuActions = menuBar()->actions();
 
-    if (menuActions.isEmpty())
+    if (menuActions.isEmpty()) {
         return;
+    }
 
     // Show menubar if it is hidden at the moment
     if (menuBar()->isHidden()) {
@@ -800,7 +846,7 @@ void MainWindow::activateMenuBar()
     }
 
     // First menu action should be 'File'
-    QAction* menuAction = menuActions.first();
+    QAction *menuAction = menuActions.first();
 
     // TODO: Handle when menubar is top level (MacOS)
     menuBar()->setActiveAction(menuAction);
@@ -829,7 +875,8 @@ void MainWindow::setMenuBarInitialVisibility(bool visible)
 {
     _menuBarInitialVisibility = visible;
 }
-void MainWindow::showEvent(QShowEvent* aEvent)
+
+void MainWindow::showEvent(QShowEvent *aEvent)
 {
     // Make sure the 'initial' visibility is applied only once.
     if (!_menuBarInitialVisibilityApplied) {
@@ -840,8 +887,9 @@ void MainWindow::showEvent(QShowEvent* aEvent)
         menuBar()->setVisible(_menuBarInitialVisibility);
         _toggleMenuBarAction->setChecked(_menuBarInitialVisibility);
         _menuBarInitialVisibilityApplied = true;
-        if(!KonsoleSettings::saveGeometryOnExit())
+        if (!KonsoleSettings::saveGeometryOnExit()) {
             resize(sizeHint());
+        }
     }
 
     // Call parent method
@@ -856,4 +904,3 @@ bool MainWindow::focusNextPrevChild(bool)
     // Kpart is another different story
     return false;
 }
-
