@@ -22,8 +22,7 @@
 
 class QWheelEvent;
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * Represents accumulation of wheel scroll from scroll events.
  *
@@ -38,15 +37,29 @@ namespace Konsole
  */
 struct ScrollState
 {
-    enum { DEFAULT_ANGLE_SCROLL_LINE = 120 };
-    enum { DEGREES_PER_ANGLE_UNIT = 8 };
-    static inline int degreesToAngle(const int angle) { return angle * DEGREES_PER_ANGLE_UNIT; }
+    enum {
+        DEFAULT_ANGLE_SCROLL_LINE = 120
+    };
+    enum {
+        DEGREES_PER_ANGLE_UNIT = 8
+    };
+    static inline int degreesToAngle(const int angle)
+    {
+        return angle * DEGREES_PER_ANGLE_UNIT;
+    }
 
-    int angle() const { return _remainingScrollAngle; }
-    int pixel() const { return _remainingScrollPixel; }
+    int angle() const
+    {
+        return _remainingScrollAngle;
+    }
+
+    int pixel() const
+    {
+        return _remainingScrollPixel;
+    }
 
     /** Add scroll values from a QWheelEvent to the accumulated totals */
-    void addWheelEvent(const QWheelEvent* wheel);
+    void addWheelEvent(const QWheelEvent *wheel);
 
     /** Clear all - used when scroll is consumed by another class like QScrollBar */
     void clearAll();
@@ -59,7 +72,10 @@ struct ScrollState
      * the accumulated total. The other scroll style value is cleared. */
     int consumeSteps(int pixelStepSize, int angleStepSize);
 
-    ScrollState() : _remainingScrollAngle(0), _remainingScrollPixel(0) {}
+    ScrollState() : _remainingScrollAngle(0),
+        _remainingScrollPixel(0)
+    {
+    }
 
     int _remainingScrollAngle;
     int _remainingScrollPixel;

@@ -49,14 +49,13 @@ class QKeyEvent;
 #define MODE_BracketedPaste  (MODES_SCREEN+13)  // Xterm-style bracketed paste mode
 #define MODE_total           (MODES_SCREEN+14)
 
-namespace Konsole
-{
+namespace Konsole {
 extern unsigned short vt100_graphics[32];
 
 struct CharCodes {
     // coding info
     char charset[4]; //
-    int  cu_cs;      // actual charset.
+    int cu_cs;       // actual charset.
     bool graphic;    // Some VT100 tricks
     bool pound;      // Some VT100 tricks
     bool sa_graphic; // saved graphic
@@ -89,9 +88,9 @@ public:
 
 public Q_SLOTS:
     // reimplemented from Emulation
-    void sendString(const QByteArray& string) Q_DECL_OVERRIDE;
-    void sendText(const QString& text) Q_DECL_OVERRIDE;
-    void sendKeyEvent(QKeyEvent*) Q_DECL_OVERRIDE;
+    void sendString(const QByteArray &string) Q_DECL_OVERRIDE;
+    void sendText(const QString &text) Q_DECL_OVERRIDE;
+    void sendKeyEvent(QKeyEvent *) Q_DECL_OVERRIDE;
     void sendMouseEvent(int buttons, int column, int line, int eventType) Q_DECL_OVERRIDE;
     void focusLost() Q_DECL_OVERRIDE;
     void focusGained() Q_DECL_OVERRIDE;
@@ -170,7 +169,8 @@ private:
     {
     public:
         // Initializes all modes to false
-        TerminalState() {
+        TerminalState()
+        {
             memset(&mode, 0, MODE_total * sizeof(bool));
         }
 
@@ -186,7 +186,7 @@ private:
     //these calls occur when certain escape sequences are seen in the
     //output from the terminal
     QHash<int, QString> _pendingTitleUpdates;
-    QTimer* _titleUpdateTimer;
+    QTimer *_titleUpdateTimer;
 
     bool _reportFocusEvents;
 };

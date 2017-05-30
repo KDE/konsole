@@ -43,8 +43,7 @@ class QColor;
 class KConfigGroup;
 class KProcess;
 
-namespace Konsole
-{
+namespace Konsole {
 class Emulation;
 class Pty;
 class ProcessInfo;
@@ -85,7 +84,7 @@ public:
      * falls back to using the program specified in the SHELL environment
      * variable.
      */
-    explicit Session(QObject* parent = 0);
+    explicit Session(QObject *parent = 0);
     ~Session() Q_DECL_OVERRIDE;
 
     /**
@@ -116,7 +115,7 @@ public:
      * Views can be removed using removeView().  The session is automatically
      * closed when the last view is removed.
      */
-    void addView(TerminalDisplay* widget);
+    void addView(TerminalDisplay *widget);
     /**
      * Removes a view from this session.  When the last view is removed,
      * the session will be closed automatically.
@@ -124,18 +123,18 @@ public:
      * @p widget will no longer display output from or send input
      * to the terminal
      */
-    void removeView(TerminalDisplay* widget);
+    void removeView(TerminalDisplay *widget);
 
     /**
      * Returns the views connected to this session
      */
-    QList<TerminalDisplay*> views() const;
+    QList<TerminalDisplay *> views() const;
 
     /**
      * Returns the terminal emulation instance being used to encode / decode
      * characters to / from the process.
      */
-    Emulation*  emulation() const;
+    Emulation *emulation() const;
 
     /** Returns the unique ID for this session. */
     int sessionId() const;
@@ -169,7 +168,7 @@ public:
      * followed by a letter.  (eg. %d for directory).  The dynamic
      * elements available depend on the @p context
      */
-    void setTabTitleFormat(TabTitleContext context , const QString& format);
+    void setTabTitleFormat(TabTitleContext context, const QString &format);
     /** Returns the format used by this session for tab titles. */
     QString tabTitleFormat(TabTitleContext context) const;
 
@@ -182,12 +181,13 @@ public:
      * Sets the command line arguments which the session's program will be passed when
      * run() is called.
      */
-    void setArguments(const QStringList& arguments);
+    void setArguments(const QStringList &arguments);
     /** Sets the program to be executed when run() is called. */
-    void setProgram(const QString& program);
+    void setProgram(const QString &program);
 
     /** Returns the session's current working directory. */
-    QString initialWorkingDirectory() {
+    QString initialWorkingDirectory()
+    {
         return _initialWorkingDir;
     }
 
@@ -195,7 +195,7 @@ public:
      * Sets the initial working directory for the session when it is run
      * This has no effect once the session has been started.
      */
-    void setInitialWorkingDirectory(const QString& dir);
+    void setInitialWorkingDirectory(const QString &dir);
 
     /**
      * Returns the current directory of the foreground process in the session
@@ -210,11 +210,11 @@ public:
      * remembered before they are lost and the storage
      * (in memory, on-disk etc.) used.
      */
-    void setHistoryType(const HistoryType& type);
+    void setHistoryType(const HistoryType &type);
     /**
      * Returns the type of history store used by this session.
      */
-    const HistoryType& historyType() const;
+    const HistoryType &historyType() const;
     /**
      * Clears the history store used by this session.
      */
@@ -229,7 +229,7 @@ public:
      * names of available key bindings can be determined using the
      * KeyboardTranslatorManager class.
      */
-    void setKeyBindings(const QString& name);
+    void setKeyBindings(const QString &name);
     /** Returns the name of the key bindings used by this session. */
     QString keyBindings() const;
 
@@ -250,14 +250,16 @@ public:
     QString userTitle() const;
 
     /** Convenience method used to read the name property.  Returns title(Session::NameRole). */
-    QString nameTitle() const {
+    QString nameTitle() const
+    {
         return title(Session::NameRole);
     }
+
     /** Returns a title generated from tab format and process information. */
     QString getDynamicTitle();
 
     /** Sets the name of the icon associated with this session. */
-    void setIconName(const QString& iconName);
+    void setIconName(const QString &iconName);
     /** Returns the name of the icon associated with this session. */
     QString iconName() const;
 
@@ -265,12 +267,12 @@ public:
     QUrl getUrl();
 
     /** Sets the text of the icon associated with this session. */
-    void setIconText(const QString& iconText);
+    void setIconText(const QString &iconText);
     /** Returns the text of the icon associated with this session. */
     QString iconText() const;
 
     /** Sets the session's title for the specified @p role to @p title. */
-    void setTitle(TitleRole role , const QString& title);
+    void setTitle(TitleRole role, const QString &title);
 
     /** Returns the session's title for the specified @p role. */
     QString title(TitleRole role) const;
@@ -304,11 +306,11 @@ public:
      *
      * @param size The size in lines and columns to request.
      */
-    void setSize(const QSize& size);
+    void setSize(const QSize &size);
 
     QSize preferredSize() const;
 
-    void setPreferredSize(const QSize & size);
+    void setPreferredSize(const QSize &size);
 
     /**
      * Sets whether the session has a dark background or not.  The session
@@ -327,9 +329,10 @@ public:
      */
     void refresh();
 
-    void startZModem(const QString& rz, const QString& dir, const QStringList& list);
+    void startZModem(const QString &rz, const QString &dir, const QStringList &list);
     void cancelZModem();
-    bool isZModemBusy() {
+    bool isZModemBusy()
+    {
         return _zmodemBusy;
     }
 
@@ -339,26 +342,26 @@ public:
       */
     enum UserTitleChange {
         IconNameAndWindowTitle = 0,
-        IconName               = 1,
-        WindowTitle            = 2,
-        CurrentDirectory       = 7,   // From VTE (supposedly 6 was for dir, 7 for file, but whatever)
-        TextColor              = 10,
-        BackgroundColor        = 11,
-        SessionName            = 30,  // Non-standard
-        SessionIcon            = 32,  // Non-standard
-        ProfileChange          = 50   // this clashes with Xterm's font change command
+        IconName = 1,
+        WindowTitle = 2,
+        CurrentDirectory = 7,         // From VTE (supposedly 6 was for dir, 7 for file, but whatever)
+        TextColor = 10,
+        BackgroundColor = 11,
+        SessionName = 30,             // Non-standard
+        SessionIcon = 32,             // Non-standard
+        ProfileChange = 50            // this clashes with Xterm's font change command
     };
 
     // Sets the text codec used by this sessions terminal emulation.
-    void setCodec(QTextCodec* codec);
+    void setCodec(QTextCodec *codec);
 
     // session management
-    void saveSession(KConfigGroup& group);
-    void restoreSession(KConfigGroup& group);
+    void saveSession(KConfigGroup &group);
+    void restoreSession(KConfigGroup &group);
 
     void sendSignal(int signal);
 
-    void reportBackgroundColor(const QColor& c);
+    void reportBackgroundColor(const QColor &c);
 
 public Q_SLOTS:
 
@@ -380,13 +383,13 @@ public Q_SLOTS:
      * @p environment should be a list of strings like
      * VARIABLE=VALUE
      */
-    Q_SCRIPTABLE void setEnvironment(const QStringList& environment);
+    Q_SCRIPTABLE void setEnvironment(const QStringList &environment);
 
     /**
      * Adds one entry for the environment of this session
      * @p entry should be like VARIABLE=VALUE
      */
-    void addEnvironmentEntry(const QString& entry);
+    void addEnvironmentEntry(const QString &entry);
 
     /**
      * Closes the terminal session. It kills the terminal process by calling
@@ -421,7 +424,7 @@ public Q_SLOTS:
      * @param what The feature being changed.  Value is one of UserTitleChange
      * @param caption The text part of the terminal command
      */
-    void setUserTitle(int what , const QString& caption);
+    void setUserTitle(int what, const QString &caption);
 
     /**
      * Enables monitoring for activity in the session.
@@ -465,21 +468,21 @@ public Q_SLOTS:
      * @param text to send to the current foreground terminal program.
      * @param eol send this after @p text
      */
-    void sendTextToTerminal(const QString& text, const QChar& eol = QChar()) const;
+    void sendTextToTerminal(const QString &text, const QChar &eol = QChar()) const;
 
 #if defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
-    void sendText(const QString& text) const;
+    void sendText(const QString &text) const;
 #else
-    Q_SCRIPTABLE void sendText(const QString& text) const;
+    Q_SCRIPTABLE void sendText(const QString &text) const;
 #endif
 
     /**
      * Sends @p command to the current foreground terminal program.
      */
 #if defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
-    void runCommand(const QString& command) const;
+    void runCommand(const QString &command) const;
 #else
-    Q_SCRIPTABLE void runCommand(const QString& command) const;
+    Q_SCRIPTABLE void runCommand(const QString &command) const;
 #endif
 
     /**
@@ -506,7 +509,7 @@ public Q_SLOTS:
       * Overloaded to accept a QByteArray for convenience since DBus
       * does not accept QTextCodec directly.
       */
-    Q_SCRIPTABLE bool setCodec(const QByteArray& codec);
+    Q_SCRIPTABLE bool setCodec(const QByteArray &codec);
 
     /** Returns the codec used to decode incoming characters in this
      * terminal emulation
@@ -518,7 +521,7 @@ public Q_SLOTS:
      *  provided for convenience since enum data types may not be
      *  exported directly through DBus
      */
-    Q_SCRIPTABLE void setTitle(int role, const QString& title);
+    Q_SCRIPTABLE void setTitle(int role, const QString &title);
 
     /** Returns the session's title for the specified @p role.
      * This is an overloaded member function for  setTitle(TitleRole)
@@ -539,7 +542,7 @@ public Q_SLOTS:
      *  provided for convenience since enum data types may not be
      *  exported directly through DBus
      */
-    Q_SCRIPTABLE void setTabTitleFormat(int context, const QString& format);
+    Q_SCRIPTABLE void setTabTitleFormat(int context, const QString &format);
 
     /** Returns the session's tab title format for the specified @p context.
      * This is an overloaded member function for tabTitleFormat(TitleRole)
@@ -591,10 +594,10 @@ Q_SIGNALS:
      *
      * @param dir The new current working directory of the session.
      */
-    void currentDirectoryChanged(const QString& dir);
+    void currentDirectoryChanged(const QString &dir);
 
     /** Emitted when a bell event occurs in the session. */
-    void bellRequest(const QString& message);
+    void bellRequest(const QString &message);
 
     /**
      * Requests that the color the text for any tabs associated with
@@ -608,15 +611,15 @@ Q_SIGNALS:
      * Requests that the background color of views on this session
      * should be changed.
      */
-    void changeBackgroundColorRequest(const QColor&);
+    void changeBackgroundColorRequest(const QColor &);
     /**
      * Requests that the text color of views on this session should
      * be changed to @p color.
      */
-    void changeForegroundColorRequest(const QColor&);
+    void changeForegroundColorRequest(const QColor &);
 
     /** TODO: Document me. */
-    void openUrlRequest(const QString& url);
+    void openUrlRequest(const QString &url);
 
     /**
      * Emitted when the request for data transmission through ZModem
@@ -630,7 +633,7 @@ Q_SIGNALS:
      *
      * @param size The requested window size in terms of lines and columns.
      */
-    void resizeRequest(const QSize& size);
+    void resizeRequest(const QSize &size);
 
     /**
      * Emitted when a profile change command is received from the terminal.
@@ -638,7 +641,7 @@ Q_SIGNALS:
      * @param text The text of the command.  This is a string of the form
      * "PropertyName=Value;PropertyName=Value ..."
      */
-    void profileChangeCommandReceived(const QString& text);
+    void profileChangeCommandReceived(const QString &text);
 
     /**
      * Emitted when the flow control state changes.
@@ -662,7 +665,7 @@ Q_SIGNALS:
      * This signal serves as a relayer of Emulation::selectedText(QString),
      * making it usable for higher level component.
      */
-    void selectionChanged(const QString& text);
+    void selectionChanged(const QString &text);
 
     /**
      * Emitted when background request ("\033]11;?\a") terminal code received.
@@ -678,7 +681,7 @@ private Q_SLOTS:
 
     void fireZModemDetected();
 
-    void onReceiveBlock(const char* buffer, int len);
+    void onReceiveBlock(const char *buffer, int len);
     void silenceTimerDone();
     void activityTimerDone();
 
@@ -687,11 +690,11 @@ private Q_SLOTS:
     void activityStateSet(int);
 
     //automatically detach views from sessions when view is destroyed
-    void viewDestroyed(QObject* view);
+    void viewDestroyed(QObject *view);
 
     void zmodemReadStatus();
     void zmodemReadAndSendBlock();
-    void zmodemReceiveBlock(const char* data, int len);
+    void zmodemReceiveBlock(const char *data, int len);
     void zmodemFinished();
 
     void updateFlowControlState(bool suspended);
@@ -705,7 +708,7 @@ private Q_SLOTS:
 private:
     // checks that the binary 'program' is available and can be executed
     // returns the binary name if available or an empty string otherwise
-    static QString checkProgram(const QString& program);
+    static QString checkProgram(const QString &program);
 
     void updateTerminalSize();
     WId windowId() const;
@@ -713,62 +716,62 @@ private:
     // print a warning message in the terminal.  This is used
     // if the program fails to start, or if the shell exits in
     // an unsuccessful manner
-    void terminalWarning(const QString& message);
-    ProcessInfo* getProcessInfo();
+    void terminalWarning(const QString &message);
+    ProcessInfo *getProcessInfo();
     void updateSessionProcessInfo();
     bool updateForegroundProcessInfo();
     void updateWorkingDirectory();
 
-    QString validDirectory(const QString& directory) const;
+    QString validDirectory(const QString &directory) const;
 
-    QUuid            _uniqueIdentifier; // SHELL_SESSION_ID
+    QUuid _uniqueIdentifier;            // SHELL_SESSION_ID
 
-    Pty*          _shellProcess;
-    Emulation*    _emulation;
+    Pty *_shellProcess;
+    Emulation *_emulation;
 
-    QList<TerminalDisplay*> _views;
+    QList<TerminalDisplay *> _views;
 
     // monitor activity & silence
-    bool           _monitorActivity;
-    bool           _monitorSilence;
-    bool           _notifiedActivity;
-    int            _silenceSeconds;
-    QTimer*        _silenceTimer;
-    QTimer*        _activityTimer;
+    bool _monitorActivity;
+    bool _monitorSilence;
+    bool _notifiedActivity;
+    int _silenceSeconds;
+    QTimer *_silenceTimer;
+    QTimer *_activityTimer;
 
-    bool           _autoClose;
-    bool           _closePerUserRequest;
+    bool _autoClose;
+    bool _closePerUserRequest;
 
-    QString        _nameTitle;
-    QString        _displayTitle;
-    QString        _userTitle;
+    QString _nameTitle;
+    QString _displayTitle;
+    QString _userTitle;
 
-    QString        _localTabTitleFormat;
-    QString        _remoteTabTitleFormat;
+    QString _localTabTitleFormat;
+    QString _remoteTabTitleFormat;
 
-    QString        _iconName;
-    QString        _iconText; // not actually used
-    bool           _addToUtmp;
-    bool           _flowControlEnabled;
+    QString _iconName;
+    QString _iconText;        // not actually used
+    bool _addToUtmp;
+    bool _flowControlEnabled;
 
-    QString        _program;
-    QStringList    _arguments;
+    QString _program;
+    QStringList _arguments;
 
-    QStringList    _environment;
-    int            _sessionId;
+    QStringList _environment;
+    int _sessionId;
 
-    QString        _initialWorkingDir;
-    QString        _currentWorkingDir;
-    QUrl           _reportedWorkingUrl;
+    QString _initialWorkingDir;
+    QString _currentWorkingDir;
+    QUrl _reportedWorkingUrl;
 
-    ProcessInfo*   _sessionProcessInfo;
-    ProcessInfo*   _foregroundProcessInfo;
-    int            _foregroundPid;
+    ProcessInfo *_sessionProcessInfo;
+    ProcessInfo *_foregroundProcessInfo;
+    int _foregroundPid;
 
     // ZModem
-    bool           _zmodemBusy;
-    KProcess*      _zmodemProc;
-    ZModemDialog*  _zmodemProgress;
+    bool _zmodemBusy;
+    KProcess *_zmodemProc;
+    ZModemDialog *_zmodemProgress;
 
     bool _hasDarkBackground;
 
@@ -789,17 +792,17 @@ class SessionGroup : public QObject
 
 public:
     /** Constructs an empty session group. */
-    explicit SessionGroup(QObject* parent);
+    explicit SessionGroup(QObject *parent);
     /** Destroys the session group and removes all connections between master and slave sessions. */
     ~SessionGroup() Q_DECL_OVERRIDE;
 
     /** Adds a session to the group. */
-    void addSession(Session* session);
+    void addSession(Session *session);
     /** Removes a session from the group. */
-    void removeSession(Session* session);
+    void removeSession(Session *session);
 
     /** Returns the list of sessions currently in the group. */
-    QList<Session*> sessions() const;
+    QList<Session *> sessions() const;
 
     /**
      * Sets whether a particular session is a master within the group.
@@ -809,9 +812,9 @@ public:
      * @param session The session whose master status should be changed.
      * @param master True to make this session a master or false otherwise
      */
-    void setMasterStatus(Session* session , bool master);
+    void setMasterStatus(Session *session, bool master);
     /** Returns the master status of a session.  See setMasterStatus() */
-    bool masterStatus(Session* session) const;
+    bool masterStatus(Session *session) const;
 
     /**
      * This enum describes the options for propagating certain activity or
@@ -840,13 +843,13 @@ public:
 
 private Q_SLOTS:
     void sessionFinished();
-    void forwardData(const QByteArray& data);
+    void forwardData(const QByteArray &data);
 
 private:
-    QList<Session*> masters() const;
+    QList<Session *> masters() const;
 
     // maps sessions to their master status
-    QHash<Session*, bool> _sessions;
+    QHash<Session *, bool> _sessions;
 
     int _masterMode;
 };

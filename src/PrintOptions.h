@@ -23,14 +23,13 @@
 
 #include "ui_PrintOptions.h"
 
-namespace Konsole
-{
+namespace Konsole {
 class PrintOptions : public QWidget, private Ui::PrintOptions
 {
     Q_OBJECT
 
 public:
-    explicit PrintOptions(QWidget* parent = 0);
+    explicit PrintOptions(QWidget *parent = 0);
     ~PrintOptions() Q_DECL_OVERRIDE;
 
 public Q_SLOTS:

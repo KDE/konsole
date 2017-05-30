@@ -34,8 +34,7 @@
 
 class QStringList;
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * The Pty class is used to start the terminal process,
  * send data to it, receive data from it and manipulate
@@ -49,7 +48,7 @@ namespace Konsole
  * To start the terminal process, call the start() method
  * with the program name and appropriate arguments.
  */
-class KONSOLEPRIVATE_EXPORT Pty: public KPtyProcess
+class KONSOLEPRIVATE_EXPORT Pty : public KPtyProcess
 {
     Q_OBJECT
 
@@ -63,13 +62,13 @@ public:
      * To start the terminal process, call the run() method with the
      * name of the program to start and appropriate arguments.
      */
-    explicit Pty(QObject* parent = 0);
+    explicit Pty(QObject *parent = 0);
 
     /**
      * Construct a process using an open pty master.
      * See KPtyProcess::KPtyProcess()
      */
-    explicit Pty(int ptyMasterFd, QObject* parent = 0);
+    explicit Pty(int ptyMasterFd, QObject *parent = 0);
 
     ~Pty() Q_DECL_OVERRIDE;
 
@@ -85,10 +84,7 @@ public:
      * to the environment for the new process.  At the very least this
      * should include an assignment for the TERM environment variable.
      */
-    int start(const QString& program,
-              const QStringList& arguments,
-              const QStringList& environment
-             );
+    int start(const QString &program, const QStringList &arguments, const QStringList &environment);
 
     /** Control whether the pty device is writeable by group members. */
     void setWriteable(bool writeable);
@@ -124,7 +120,7 @@ public:
     /**
      * Sets the initial working directory.
      */
-    void setInitialWorkingDirectory(const QString& dir);
+    void setInitialWorkingDirectory(const QString &dir);
 
     /**
      * Returns the process id of the teletype's current foreground
@@ -158,7 +154,7 @@ public Q_SLOTS:
      *
      * @param data the data to send.
      */
-    void sendData(const QByteArray& data);
+    void sendData(const QByteArray &data);
 
 Q_SIGNALS:
     /**
@@ -168,7 +164,7 @@ Q_SIGNALS:
      * @param buffer Pointer to the data received.
      * @param length Length of @p buffer
      */
-    void receivedData(const char* buffer, int length);
+    void receivedData(const char *buffer, int length);
 
 protected:
     void setupChildProcess() Q_DECL_OVERRIDE;
@@ -182,10 +178,10 @@ private:
 
     // takes a list of key=value pairs and adds them
     // to the environment for the process
-    void addEnvironmentVariables(const QStringList& environment);
+    void addEnvironmentVariables(const QStringList &environment);
 
-    int  _windowColumns;
-    int  _windowLines;
+    int _windowColumns;
+    int _windowLines;
     char _eraseChar;
     bool _xonXoff;
     bool _utf8;

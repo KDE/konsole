@@ -31,8 +31,7 @@
 
 class QTextStream;
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * Base class for terminal character decoders
  *
@@ -45,10 +44,12 @@ namespace Konsole
 class KONSOLEPRIVATE_EXPORT TerminalCharacterDecoder
 {
 public:
-    virtual ~TerminalCharacterDecoder() {}
+    virtual ~TerminalCharacterDecoder()
+    {
+    }
 
     /** Begin decoding characters.  The resulting text is appended to @p output. */
-    virtual void begin(QTextStream* output) = 0;
+    virtual void begin(QTextStream *output) = 0;
     /** End decoding. */
     virtual void end() = 0;
 
@@ -60,8 +61,7 @@ public:
      * @param count The number of characters
      * @param properties Additional properties which affect all characters in the line
      */
-    virtual void decodeLine(const Character* const characters,
-                            int count,
+    virtual void decodeLine(const Character * const characters, int count,
                             LineProperty properties) = 0;
 };
 
@@ -94,15 +94,14 @@ public:
     /** Enables recording of character positions at which new lines are added.  See linePositions() */
     void setRecordLinePositions(bool record);
 
-    void begin(QTextStream* output) Q_DECL_OVERRIDE;
+    void begin(QTextStream *output) Q_DECL_OVERRIDE;
     void end() Q_DECL_OVERRIDE;
 
-    void decodeLine(const Character* const characters,
-                            int count,
-                            LineProperty properties) Q_DECL_OVERRIDE;
+    void decodeLine(const Character * const characters, int count,
+                    LineProperty properties) Q_DECL_OVERRIDE;
 
 private:
-    QTextStream* _output;
+    QTextStream *_output;
     bool _includeTrailingWhitespace;
 
     bool _recordLinePositions;
@@ -124,21 +123,20 @@ public:
      * Sets the color table which the decoder uses to produce the HTML color codes in its
      * output
      */
-    void setColorTable(const ColorEntry* table);
+    void setColorTable(const ColorEntry *table);
 
-    void decodeLine(const Character* const characters,
-                            int count,
-                            LineProperty properties) Q_DECL_OVERRIDE;
+    void decodeLine(const Character * const characters, int count,
+                    LineProperty properties) Q_DECL_OVERRIDE;
 
-    void begin(QTextStream* output) Q_DECL_OVERRIDE;
+    void begin(QTextStream *output) Q_DECL_OVERRIDE;
     void end() Q_DECL_OVERRIDE;
 
 private:
-    void openSpan(QString& text , const QString& style);
-    void closeSpan(QString& text);
+    void openSpan(QString &text, const QString &style);
+    void closeSpan(QString &text);
 
-    QTextStream* _output;
-    const ColorEntry* _colorTable;
+    QTextStream *_output;
+    const ColorEntry *_colorTable;
     bool _innerSpanOpen;
     RenditionFlags _lastRendition;
     CharacterColor _lastForeColor;

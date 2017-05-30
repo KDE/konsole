@@ -33,8 +33,7 @@
 
 class QKeyEvent;
 
-namespace Konsole
-{
+namespace Konsole {
 class KeyboardTranslator;
 class HistoryType;
 class Screen;
@@ -128,7 +127,7 @@ public:
      * of the window are then rendered by views which are set to use this window using the
      * TerminalDisplay::setScreenWindow() method.
      */
-    ScreenWindow* createWindow();
+    ScreenWindow *createWindow();
 
     /** Returns the size of the screen image which the emulation produces */
     QSize imageSize() const;
@@ -146,9 +145,9 @@ public:
      * The number of lines which are kept and the storage location depend on the
      * type of store.
      */
-    void setHistory(const HistoryType&);
+    void setHistory(const HistoryType &);
     /** Returns the history store used by this emulation.  See setHistory() */
-    const HistoryType& history() const;
+    const HistoryType &history() const;
     /** Clears the history scroll. */
     void clearHistory();
 
@@ -163,25 +162,27 @@ public:
      * @param startLine Index of first line to copy
      * @param endLine Index of last line to copy
      */
-    virtual void writeToStream(TerminalCharacterDecoder* decoder, int startLine, int endLine);
+    virtual void writeToStream(TerminalCharacterDecoder *decoder, int startLine, int endLine);
 
     /** Returns the codec used to decode incoming characters.  See setCodec() */
-    const QTextCodec* codec() const {
+    const QTextCodec *codec() const
+    {
         return _codec;
     }
+
     /** Sets the codec used to decode incoming characters.  */
-    void setCodec(const QTextCodec*);
+    void setCodec(const QTextCodec *);
 
     /**
      * Convenience method.
      * Returns true if the current codec used to decode incoming
      * characters is UTF-8
      */
-    bool utf8() const {
+    bool utf8() const
+    {
         Q_ASSERT(_codec);
         return _codec->mibEnum() == 106;
     }
-
 
     /** Returns the special character used for erasing character. */
     virtual char eraseChar() const;
@@ -191,7 +192,7 @@ public:
      * ( received through sendKeyEvent() ) into character
      * streams to send to the terminal.
      */
-    void setKeyBindings(const QString& name);
+    void setKeyBindings(const QString &name);
     /**
      * Returns the name of the emulation's current key bindings.
      * See setKeyBindings()
@@ -226,13 +227,13 @@ public Q_SLOTS:
      * Interprets a sequence of characters and sends the result to the terminal.
      * This is equivalent to calling sendKeyEvent() for each character in @p text in succession.
      */
-    virtual void sendText(const QString& text) = 0;
+    virtual void sendText(const QString &text) = 0;
 
     /**
      * Interprets a key press event and emits the sendData() signal with
      * the resulting character stream.
      */
-    virtual void sendKeyEvent(QKeyEvent*);
+    virtual void sendKeyEvent(QKeyEvent *);
 
     /**
      * Converts information about a mouse event into an xterm-compatible escape
@@ -259,7 +260,7 @@ public Q_SLOTS:
      * @param buffer A string of characters received from the terminal program.
      * @param len The length of @p buffer
      */
-    void receiveData(const char* buffer, int len);
+    void receiveData(const char *buffer, int len);
 
     /**
      * Sends information about the focus lost event to the terminal.
@@ -279,7 +280,7 @@ Q_SIGNALS:
      *
      * @param data The buffer of data ready to be sent
      */
-    void sendData(const QByteArray& data);
+    void sendData(const QByteArray &data);
 
     /**
      * Requests that the pty used by the terminal process
@@ -302,7 +303,6 @@ Q_SIGNALS:
      * transmission through ZModem protocol is detected.
      */
     void zmodemDetected();
-
 
     /**
      * Requests that the color of the text used
@@ -371,12 +371,12 @@ Q_SIGNALS:
      * @param newTitle Specifies the new title
      */
 
-    void titleChanged(int title, const QString& newTitle);
+    void titleChanged(int title, const QString &newTitle);
 
     /**
      * Emitted when the terminal emulator's size has changed
      */
-    void imageSizeChanged(int lineCount , int columnCount);
+    void imageSizeChanged(int lineCount, int columnCount);
 
     /**
      * Emitted when the setImageSize() is called on this emulation for
@@ -388,7 +388,7 @@ Q_SIGNALS:
      * Emitted after receiving the escape sequence which asks to change
      * the terminal emulator's size
      */
-    void imageResizeRequest(const QSize& sizz);
+    void imageResizeRequest(const QSize &sizz);
 
     /**
      * Emitted when the terminal program requests to change various properties
@@ -401,7 +401,7 @@ Q_SIGNALS:
      * @param text A string expected to contain a series of key and value pairs in
      * the form:  name=value;name2=value2 ...
      */
-    void profileChangeCommandReceived(const QString& text);
+    void profileChangeCommandReceived(const QString &text);
 
     /**
      * Emitted when a flow control key combination ( Ctrl+S or Ctrl+Q ) is pressed.
@@ -419,7 +419,7 @@ Q_SIGNALS:
     /**
      * Emitted when the text selection is changed
      */
-    void selectionChanged(const QString& text);
+    void selectionChanged(const QString &text);
 
     /**
      * Emitted when terminal code requiring terminal's response received.
@@ -447,27 +447,26 @@ protected:
 
     enum EmulationCodec {
         LocaleCodec = 0,
-        Utf8Codec   = 1
+        Utf8Codec = 1
     };
 
     void setCodec(EmulationCodec codec);
 
-    QList<ScreenWindow*> _windows;
+    QList<ScreenWindow *> _windows;
 
-    Screen* _currentScreen;  // pointer to the screen which is currently active,
+    Screen *_currentScreen;  // pointer to the screen which is currently active,
     // this is one of the elements in the screen[] array
 
-    Screen* _screen[2];      // 0 = primary screen ( used by most programs, including the shell
+    Screen *_screen[2];      // 0 = primary screen ( used by most programs, including the shell
     //                      scrollbars are enabled in this mode )
     // 1 = alternate      ( used by vi , emacs etc.
     //                      scrollbars are not enabled in this mode )
 
-
     //decodes an incoming C-style character stream into a unicode QString using
     //the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
-    const QTextCodec* _codec;
-    QTextDecoder* _decoder;
-    const KeyboardTranslator* _keyTranslator; // the keyboard layout
+    const QTextCodec *_codec;
+    QTextDecoder *_decoder;
+    const KeyboardTranslator *_keyTranslator; // the keyboard layout
 
 protected Q_SLOTS:
     /**

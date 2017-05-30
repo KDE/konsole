@@ -34,8 +34,7 @@
 // Konsole
 #include "Profile.h"
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * Manages profiles which specify various settings for terminal sessions
  * and their displays.
@@ -64,7 +63,7 @@ public:
     /**
      * Returns the profile manager instance.
      */
-    static ProfileManager* instance();
+    static ProfileManager *instance();
 
     /**
      * Returns a list of all available profiles
@@ -104,7 +103,7 @@ public:
      * SessionManager::createSession() to create a new session using
      * this profile.
      */
-    Profile::Ptr loadProfile(const QString& path);
+    Profile::Ptr loadProfile(const QString &path);
 
     /**
      * Searches for available profiles on-disk and returns a list
@@ -146,7 +145,7 @@ public:
      * set this to false if you want to preview possible changes to a profile but do not
      * wish to make them permanent.
      */
-    void changeProfile(Profile::Ptr profile , QHash<Profile::Property, QVariant> propertyMap,
+    void changeProfile(Profile::Ptr profile, QHash<Profile::Property, QVariant> propertyMap,
                        bool persistent = true);
 
     /**
@@ -170,7 +169,7 @@ public:
      * Specifies whether a profile should be included in the user's
      * list of favorite profiles.
      */
-    void setFavorite(Profile::Ptr profile , bool favorite);
+    void setFavorite(Profile::Ptr profile, bool favorite);
 
     /**
      * Returns the set of the user's favorite profiles.
@@ -185,12 +184,12 @@ public:
      *
      * @param list The profile list to sort
      */
-    void sortProfiles(QList<Profile::Ptr>& list);
+    void sortProfiles(QList<Profile::Ptr> &list);
 
     /**
      * Associates a shortcut with a particular profile.
      */
-    void setShortcut(Profile::Ptr profile , const QKeySequence& shortcut);
+    void setShortcut(Profile::Ptr profile, const QKeySequence &shortcut);
 
     /** Returns the shortcut associated with a particular profile. */
     QKeySequence shortcut(Profile::Ptr profile) const;
@@ -210,7 +209,7 @@ public:
      * Finds and loads the profile associated with
      * the specified @p shortcut key sequence and returns a pointer to it.
      */
-    Profile::Ptr findByShortcut(const QKeySequence& shortcut);
+    Profile::Ptr findByShortcut(const QKeySequence &shortcut);
 
 Q_SIGNALS:
 
@@ -227,7 +226,7 @@ Q_SIGNALS:
      * @param profile The profile to change
      * @param favorite Specifies whether the profile is a favorite or not
      */
-    void favoriteStatusChanged(Profile::Ptr profile , bool favorite);
+    void favoriteStatusChanged(Profile::Ptr profile, bool favorite);
 
     /**
      * Emitted when the shortcut for a profile is changed.
@@ -235,7 +234,7 @@ Q_SIGNALS:
      * @param profile The profile whose status was changed
      * @param newShortcut The new shortcut key sequence for the profile
      */
-    void shortcutChanged(Profile::Ptr profile , const QKeySequence& newShortcut);
+    void shortcutChanged(Profile::Ptr profile, const QKeySequence &newShortcut);
 
 public Q_SLOTS:
     /** Saves settings (favorites, shortcuts, default profile etc.) to disk. */
@@ -292,17 +291,24 @@ private:
  * When a PopStackOnExit instance is destroyed, elements are removed from the stack
  * until the stack count is reduced the value when the PopStackOnExit instance was created.
  */
-template <class T>
+template<class T>
 class PopStackOnExit
 {
 public:
-    explicit PopStackOnExit(QStack<T>& stack) : _stack(stack) , _count(stack.count()) {}
-    ~PopStackOnExit() {
-        while (_stack.count() > _count)
-            _stack.pop();
+    explicit PopStackOnExit(QStack<T> &stack) : _stack(stack),
+        _count(stack.count())
+    {
     }
+
+    ~PopStackOnExit()
+    {
+        while (_stack.count() > _count) {
+            _stack.pop();
+        }
+    }
+
 private:
-    QStack<T>& _stack;
+    QStack<T> &_stack;
     int _count;
 };
 }

@@ -23,39 +23,37 @@
 // Qt
 #include <QWidget>
 
-namespace Ui
-{
+namespace Ui {
 class RenameTabWidget;
 }
 
-namespace Konsole
-{
+namespace Konsole {
 class RenameTabWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit RenameTabWidget(QWidget* parent = 0);
+    explicit RenameTabWidget(QWidget *parent = 0);
     ~RenameTabWidget() Q_DECL_OVERRIDE;
 
     QString tabTitleText() const;
     QString remoteTabTitleText() const;
-    void setTabTitleText(const QString&);
-    void setRemoteTabTitleText(const QString&);
+    void setTabTitleText(const QString &);
+    void setRemoteTabTitleText(const QString &);
 
     void focusTabTitleText();
     void focusRemoteTabTitleText();
 
 Q_SIGNALS:
-    void tabTitleFormatChanged(const QString&);
-    void remoteTabTitleFormatChanged(const QString&);
+    void tabTitleFormatChanged(const QString &);
+    void remoteTabTitleFormatChanged(const QString &);
 
 public Q_SLOTS:
-    void insertTabTitleText(const QString& text);
-    void insertRemoteTabTitleText(const QString& text);
+    void insertTabTitleText(const QString &text);
+    void insertRemoteTabTitleText(const QString &text);
 
 private:
-    Ui::RenameTabWidget* _ui;
+    Ui::RenameTabWidget *_ui;
 };
 }
 

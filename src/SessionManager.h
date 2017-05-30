@@ -33,8 +33,7 @@ class QSignalMapper;
 
 class KConfig;
 
-namespace Konsole
-{
+namespace Konsole {
 class Session;
 
 /**
@@ -60,7 +59,7 @@ public:
     /**
      * Returns the session manager instance.
      */
-    static SessionManager* instance();
+    static SessionManager *instance();
 
     /** Kill all running sessions. */
     void closeAllSessions();
@@ -76,31 +75,31 @@ public:
      * @param profile A profile containing the settings for the new session.  If @p profile
      * is null the default profile (see ProfileManager::defaultProfile()) will be used.
      */
-    Session* createSession(Profile::Ptr profile = Profile::Ptr());
+    Session *createSession(Profile::Ptr profile = Profile::Ptr());
 
     /** Sets the profile associated with a session. */
-    void setSessionProfile(Session* session, Profile::Ptr profile);
+    void setSessionProfile(Session *session, Profile::Ptr profile);
 
     /** Returns the profile associated with a session. */
-    Profile::Ptr sessionProfile(Session* session) const;
+    Profile::Ptr sessionProfile(Session *session) const;
 
     /**
      * Returns a list of active sessions.
      */
-    const QList<Session*> sessions() const;
+    const QList<Session *> sessions() const;
 
     // System session management
-    void saveSessions(KConfig* config);
-    void restoreSessions(KConfig* config);
-    int  getRestoreId(Session* session);
-    Session* idToSession(int id);
+    void saveSessions(KConfig *config);
+    void restoreSessions(KConfig *config);
+    int  getRestoreId(Session *session);
+    Session *idToSession(int id);
 
 Q_SIGNALS:
     /**
      * Emitted when a session's settings are updated to match
      * its current profile.
      */
-    void sessionUpdated(Session* session);
+    void sessionUpdated(Session *session);
 
 protected Q_SLOTS:
     /**
@@ -108,10 +107,10 @@ protected Q_SLOTS:
      *
      * @param session The Session which has finished executing.
      */
-    void sessionTerminated(QObject* session);
+    void sessionTerminated(QObject *session);
 
 private Q_SLOTS:
-    void sessionProfileCommandReceived(const QString& text);
+    void sessionProfileCommandReceived(const QString &text);
 
     void profileChanged(Profile::Ptr profile);
 
@@ -120,33 +119,38 @@ private:
     // to all sessions currently using that profile
     // if modifiedPropertiesOnly is true, only properties which
     // are set in the profile @p key are updated
-    void applyProfile(Profile::Ptr profile , bool modifiedPropertiesOnly);
+    void applyProfile(Profile::Ptr profile, bool modifiedPropertiesOnly);
 
     // applies updates to the profile @p profile to the session @p session
     // if modifiedPropertiesOnly is true, only properties which
     // are set in @p profile are update ( ie. properties for which profile->isPropertySet(<property>)
     // returns true )
-    void applyProfile(Session* session , const Profile::Ptr profile , bool modifiedPropertiesOnly);
+    void applyProfile(Session *session, const Profile::Ptr profile, bool modifiedPropertiesOnly);
 
-    QList<Session*> _sessions; // list of running sessions
+    QList<Session *> _sessions; // list of running sessions
 
-    QHash<Session*, Profile::Ptr> _sessionProfiles;
-    QHash<Session*, Profile::Ptr> _sessionRuntimeProfiles;
-    QHash<Session*, int> _restoreMapping;
+    QHash<Session *, Profile::Ptr> _sessionProfiles;
+    QHash<Session *, Profile::Ptr> _sessionRuntimeProfiles;
+    QHash<Session *, int> _restoreMapping;
 
-    QSignalMapper* _sessionMapper;
+    QSignalMapper *_sessionMapper;
 };
 
 /** Utility class to simplify code in SessionManager::applyProfile(). */
 class ShouldApplyProperty
 {
 public:
-    ShouldApplyProperty(const Profile::Ptr profile , bool modifiedOnly) :
-        _profile(profile) , _modifiedPropertiesOnly(modifiedOnly) {}
+    ShouldApplyProperty(const Profile::Ptr profile, bool modifiedOnly) :
+        _profile(profile),
+        _modifiedPropertiesOnly(modifiedOnly)
+    {
+    }
 
-    bool shouldApply(Profile::Property property) const {
+    bool shouldApply(Profile::Property property) const
+    {
         return !_modifiedPropertiesOnly || _profile->isPropertySet(property);
     }
+
 private:
     const Profile::Ptr _profile;
     bool _modifiedPropertiesOnly;

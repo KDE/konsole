@@ -25,14 +25,13 @@
 class KTextEdit;
 class QDialogButtonBox;
 class QPushButton;
-namespace Konsole
-{
+namespace Konsole {
 class ZModemDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    ZModemDialog(QWidget* parent, bool modal, const QString& caption);
+    ZModemDialog(QWidget *parent, bool modal, const QString &caption);
 
     /**
      * Adds a line of text to the progress window
@@ -53,10 +52,9 @@ private Q_SLOTS:
 
 private:
     void delayedDestruct();
-    KTextEdit* _textEdit;
+    KTextEdit *_textEdit;
     QDialogButtonBox *mButtonBox;
     QPushButton *mUser1Button;
-
 };
 }
 

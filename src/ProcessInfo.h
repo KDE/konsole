@@ -26,8 +26,7 @@
 #include <QString>
 #include <QVector>
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * Takes a snapshot of the state of a process and provides access to
  * information such as the process name, parent process,
@@ -81,9 +80,11 @@ public:
      * @param titleFormat The local title format - used to determine if it
      *  contains %u which requires expensive prodecures to be used.
      */
-    static ProcessInfo* newInstance(int pid, const QString& titleFormat);
+    static ProcessInfo *newInstance(int pid, const QString &titleFormat);
 
-    virtual ~ProcessInfo() {}
+    virtual ~ProcessInfo()
+    {
+    }
 
     /**
      * Updates the information about the process.  This must
@@ -98,13 +99,13 @@ public:
      *
      * @param ok Set to true if the process id was read successfully or false otherwise
      */
-    int pid(bool* ok) const;
+    int pid(bool *ok) const;
     /**
      * Returns the id of the parent process id was read successfully or false otherwise
      *
      * @param ok Set to true if the parent process id
      */
-    int parentPid(bool* ok) const;
+    int parentPid(bool *ok) const;
 
     /**
      * Returns the id of the current foreground process
@@ -115,10 +116,10 @@ public:
      *
      * @param ok Set to true if the foreground process id was read successfully or false otherwise
      */
-    int foregroundPid(bool* ok) const;
+    int foregroundPid(bool *ok) const;
 
     /* Returns the user id of the process */
-    int userId(bool* ok) const;
+    int userId(bool *ok) const;
 
     /** Returns the user's name of the process */
     QString userName() const;
@@ -130,7 +131,7 @@ public:
     static QString localHost();
 
     /** Returns the name of the current process */
-    QString name(bool* ok) const;
+    QString name(bool *ok) const;
 
     /**
      * Returns the command-line arguments which the process
@@ -140,14 +141,14 @@ public:
      *
      * @param ok Set to true if the arguments were read successfully or false otherwise.
      */
-    QVector<QString> arguments(bool* ok) const;
+    QVector<QString> arguments(bool *ok) const;
 
     /**
      * Returns the current working directory of the process
      *
      * @param ok Set to true if the current working directory was read successfully or false otherwise
      */
-    QString currentDir(bool* ok) const;
+    QString currentDir(bool *ok) const;
 
     /**
      * Returns the current working directory of the process (or its parent)
@@ -176,20 +177,20 @@ public:
     Error error() const;
 
     enum Field {
-        PROCESS_ID          = 1,
-        PARENT_PID          = 2,
-        FOREGROUND_PID      = 4,
-        ARGUMENTS           = 8,
-        NAME                = 16,
-        CURRENT_DIR         = 32,
-        UID                 = 64
+        PROCESS_ID = 1,
+        PARENT_PID = 2,
+        FOREGROUND_PID = 4,
+        ARGUMENTS = 8,
+        NAME = 16,
+        CURRENT_DIR = 32,
+        UID = 64
     };
     Q_DECLARE_FLAGS(Fields, Field)
 
     // takes a full directory path and returns a
     // shortened version suitable for display in
     // space-constrained UI elements (eg. tabs)
-    QString formatShortDir(const QString& dirPath) const;
+    QString formatShortDir(const QString &dirPath) const;
 
     void setUserNameRequired(bool need);
 
@@ -200,7 +201,7 @@ protected:
      * static ProcessInfo::newInstance() method which will return
      * a suitable ProcessInfo instance for the current platform.
      */
-    explicit ProcessInfo(int pid );
+    explicit ProcessInfo(int pid);
 
     /**
      * This is called on construction to read the process state
@@ -239,11 +240,11 @@ protected:
     /** Sets the user id associated with this ProcessInfo instance */
     void setUserId(int uid);
     /** Sets the user name of the process as set by readUserName() */
-    void setUserName(const QString& name);
+    void setUserName(const QString &name);
     /** Sets the name of the process as returned by name() */
-    void setName(const QString& name);
+    void setName(const QString &name);
     /** Sets the current working directory for the process */
-    void setCurrentDir(const QString& dir);
+    void setCurrentDir(const QString &dir);
 
     /** Sets the error */
     void setError(Error error);
@@ -255,7 +256,7 @@ protected:
      * Adds a commandline argument for the process, as returned
      * by arguments()
      */
-    void addArgument(const QString& argument);
+    void addArgument(const QString &argument);
 
     /**
      * clear the commandline arguments for the process, as returned
@@ -304,7 +305,7 @@ public:
      * Constructs a new NullProcessInfo instance.
      * See ProcessInfo::newInstance()
      */
-    explicit NullProcessInfo(int pid, const QString& titleFormat);
+    explicit NullProcessInfo(int pid, const QString &titleFormat);
 protected:
     void readProcessInfo(int pid) Q_DECL_OVERRIDE;
     bool readCurrentDir(int pid) Q_DECL_OVERRIDE;
@@ -323,14 +324,14 @@ public:
      * Constructs a new instance of UnixProcessInfo.
      * See ProcessInfo::newInstance()
      */
-    explicit UnixProcessInfo(int pid, const QString& titleFormat);
+    explicit UnixProcessInfo(int pid, const QString &titleFormat);
 
 protected:
     /**
      * Implementation of ProcessInfo::readProcessInfo(); calls the
      * four private methods below in turn.
      */
-    void readProcessInfo(int pid ) Q_DECL_OVERRIDE;
+    void readProcessInfo(int pid) Q_DECL_OVERRIDE;
 
     void readUserName(void) Q_DECL_OVERRIDE;
 
@@ -363,7 +364,7 @@ public:
      *
      * @param process A ProcessInfo instance for a SSH process.
      */
-    explicit SSHProcessInfo(const ProcessInfo& process);
+    explicit SSHProcessInfo(const ProcessInfo &process);
 
     /**
      * Returns the user name which the user initially logged into on
@@ -400,10 +401,10 @@ public:
      * %c - Replaced with the command which the user specified
      *      to execute when starting the SSH process.
      */
-    QString format(const QString& input) const;
+    QString format(const QString &input) const;
 
 private:
-    const ProcessInfo& _process;
+    const ProcessInfo &_process;
     QString _user;
     QString _host;
     QString _port;

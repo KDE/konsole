@@ -24,7 +24,6 @@
 
 //#include <QtGlobal>
 
-
 #include <QAccessibleTextInterface>
 #include <QAccessibleWidget>
 
@@ -32,8 +31,7 @@
 #include "ScreenWindow.h"
 #include "Screen.h"
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * Class implementing the QAccessibleInterface for the terminal display.
  * This exposes information about the display to assistive technology using the QAccessible framework.
@@ -56,10 +54,10 @@ public:
     void removeSelection(int selectionIndex) override;
 
     QRect characterRect(int offset) const override;
-    int offsetAtPoint(const QPoint& point) const override;
+    int offsetAtPoint(const QPoint &point) const override;
     void scrollToSubstring(int startIndex, int endIndex) override;
 
-    QString attributes(int offset, int* startOffset, int* endOffset) const override;
+    QString attributes(int offset, int *startOffset, int *endOffset) const override;
 
     int cursorPosition() const override;
     void setCursorPosition(int position) override;
@@ -69,22 +67,23 @@ public:
 private:
     Konsole::TerminalDisplay *display() const;
 
-    inline int positionToOffset(int column, int line) const {
+    inline int positionToOffset(int column, int line) const
+    {
         return line * display()->_usedColumns + column;
     }
 
-    inline int lineForOffset(int offset) const {
+    inline int lineForOffset(int offset) const
+    {
         return offset / display()->_usedColumns;
     }
 
-    inline int columnForOffset(int offset) const {
+    inline int columnForOffset(int offset) const
+    {
         return offset % display()->_usedColumns;
     }
 
     QString visibleText() const;
 };
-
-
 } // namespace
 
 #endif // TERMINALDISPLAYACCESSIBLE_H

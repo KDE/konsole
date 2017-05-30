@@ -28,8 +28,7 @@
 
 class QFocusEvent;
 
-namespace Konsole
-{
+namespace Konsole {
 class ViewContainer;
 
 /**
@@ -49,7 +48,7 @@ class ViewSplitter : public QSplitter
     Q_OBJECT
 
 public:
-    explicit ViewSplitter(QWidget* parent = 0);
+    explicit ViewSplitter(QWidget *parent = 0);
 
     /**
      * Locates the child ViewSplitter widget which currently has the focus
@@ -66,13 +65,13 @@ public:
      *                    will be created, into which the container will
      *                    be inserted.
      */
-    void addContainer(ViewContainer* container , Qt::Orientation orientation);
+    void addContainer(ViewContainer *container, Qt::Orientation orientation);
 
     /** Removes a container from the splitter.  The container is not deleted. */
-    void removeContainer(ViewContainer* container);
+    void removeContainer(ViewContainer *container);
 
     /** Returns the child ViewSplitter widget which currently has the focus */
-    ViewSplitter* activeSplitter();
+    ViewSplitter *activeSplitter();
 
     /**
      * Returns the container which currently has the focus or 0 if none
@@ -85,17 +84,18 @@ public:
      * mySplitter->activeSplitter()->activeContainer() where mySplitter
      * is the ViewSplitter widget at the top of the hierarchy.
      */
-    ViewContainer* activeContainer() const;
+    ViewContainer *activeContainer() const;
 
     /**
      * Gives the focus to the active view in the specified container
      */
-    void setActiveContainer(ViewContainer* container);
+    void setActiveContainer(ViewContainer *container);
 
     /**
      * Returns a list of the containers held by this splitter
      */
-    QList<ViewContainer*> containers() const {
+    QList<ViewContainer *> containers() const
+    {
         return _containers;
     }
 
@@ -113,7 +113,7 @@ public:
      * The sizes of the remaining containers are increased or decreased
      * uniformly to maintain the width of the splitter.
      */
-    void adjustContainerSize(ViewContainer* container , int percentage);
+    void adjustContainerSize(ViewContainer *container, int percentage);
 
     /**
      * Gives the focus to the active view in the previous container
@@ -145,7 +145,7 @@ public:
 
 Q_SIGNALS:
     /** Signal emitted when the last child widget is removed from the splitter */
-    void empty(ViewSplitter* splitter);
+    void empty(ViewSplitter *splitter);
 
     /**
      * Signal emitted when the containers held by this splitter become empty, this
@@ -162,28 +162,27 @@ protected:
 private:
     // Adds container to splitter's internal list and
     // connects signals and slots
-    void registerContainer(ViewContainer* container);
+    void registerContainer(ViewContainer *container);
     // Removes container from splitter's internal list and
     // removes signals and slots
-    void unregisterContainer(ViewContainer* container);
+    void unregisterContainer(ViewContainer *container);
 
     void updateSizes();
 
 private Q_SLOTS:
     // Called to indicate that a child ViewContainer has been deleted
-    void containerDestroyed(ViewContainer* container);
+    void containerDestroyed(ViewContainer *container);
 
     // Called to indicate that a child ViewContainer is empty
-    void containerEmpty(ViewContainer* container);
+    void containerEmpty(ViewContainer *container);
 
     // Called to indicate that a child ViewSplitter is empty
     // (ie. all child widgets have been deleted)
-    void childEmpty(ViewSplitter* splitter);
+    void childEmpty(ViewSplitter *splitter);
 
 private:
-    QList<ViewContainer*> _containers;
+    QList<ViewContainer *> _containers;
     bool _recursiveSplitting;
 };
 }
 #endif //VIEWSPLITTER_H
-

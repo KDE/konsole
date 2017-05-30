@@ -35,8 +35,7 @@ class QAction;
 class QStringList;
 class QKeyEvent;
 
-namespace Konsole
-{
+namespace Konsole {
 class Session;
 class SessionController;
 class ViewManager;
@@ -46,22 +45,21 @@ class ViewProperties;
  * A re-usable terminal emulator component using the KParts framework which can
  * be used to embed terminal emulators into other applications.
  */
-class Part : public KParts::ReadOnlyPart , public TerminalInterface
+class Part : public KParts::ReadOnlyPart, public TerminalInterface
 {
     Q_OBJECT
     Q_INTERFACES(TerminalInterface)
 public:
     /** Constructs a new Konsole part with the specified parent. */
-    explicit Part(QWidget* parentWidget , QObject* parent, const QVariantList&);
+    explicit Part(QWidget *parentWidget, QObject *parent, const QVariantList &);
     ~Part() Q_DECL_OVERRIDE;
 
     /** Reimplemented from TerminalInterface. */
-    void startProgram(const QString& program,
-                      const QStringList& arguments) Q_DECL_OVERRIDE;
+    void startProgram(const QString &program, const QStringList &arguments) Q_DECL_OVERRIDE;
     /** Reimplemented from TerminalInterface. */
-    void showShellInDir(const QString& dir) Q_DECL_OVERRIDE;
+    void showShellInDir(const QString &dir) Q_DECL_OVERRIDE;
     /** Reimplemented from TerminalInterface. */
-    void sendInput(const QString& text) Q_DECL_OVERRIDE;
+    void sendInput(const QString &text) Q_DECL_OVERRIDE;
 
     /** Reimplemented from TerminalInterface. */
     int terminalProcessId() Q_DECL_OVERRIDE;
@@ -84,7 +82,8 @@ public Q_SLOTS:
      *
      * This is highly experimental. Do not use it at the moment
      */
-    void createSession(const QString& profileName = QString(), const QString& directory = QString());
+    void createSession(const QString &profileName = QString(),
+                       const QString &directory = QString());
 
     /**
      * Returns a list of names of all available profiles
@@ -102,7 +101,7 @@ public Q_SLOTS:
      *
      * @param parent The parent widget of the new dialog.
      */
-    void showEditCurrentProfileDialog(QWidget* parent);
+    void showEditCurrentProfileDialog(QWidget *parent);
     /**
      * Sends a profile change command to the active session.  This is equivalent to using
      * the konsoleprofile tool within the session to change its settings.  The @p text string
@@ -112,7 +111,7 @@ public Q_SLOTS:
      *
      * This is experimental API and not guaranteed to be present in later KDE 4 releases.
      */
-    void changeSessionSettings(const QString& text);
+    void changeSessionSettings(const QString &text);
 
     /**
      * Connects to an existing pseudo-teletype. See Session::openTeletype().
@@ -157,7 +156,7 @@ Q_SIGNALS:
      * @param event Describes the keys that were pressed.
      * @param override Set this to false to prevent the terminal display from overriding the shortcut
      */
-    void overrideShortcut(QKeyEvent* event, bool& override);
+    void overrideShortcut(QKeyEvent *event, bool &override);
 
     /**
      * Emitted when silence has been detected in the active session. Monitoring
@@ -174,27 +173,27 @@ Q_SIGNALS:
     /**
      * Emitted when the current working directory of the active session has changed.
      */
-    void currentDirectoryChanged(const QString& dir);
+    void currentDirectoryChanged(const QString &dir);
 
 protected:
     /** Reimplemented from KParts::PartBase. */
     bool openFile() Q_DECL_OVERRIDE;
-    bool openUrl(const QUrl& url) Q_DECL_OVERRIDE;
+    bool openUrl(const QUrl &url) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
-    void activeViewChanged(SessionController* controller);
-    void activeViewTitleChanged(ViewProperties* properties);
+    void activeViewChanged(SessionController *controller);
+    void activeViewTitleChanged(ViewProperties *properties);
     void terminalExited();
     void newTab();
-    void overrideTerminalShortcut(QKeyEvent*, bool& override);
+    void overrideTerminalShortcut(QKeyEvent *, bool &override);
     void sessionStateChanged(int state);
 private:
-    Session* activeSession() const;
+    Session *activeSession() const;
 
 private:
-    ViewManager* _viewManager;
-    SessionController* _pluggedController;
-    QAction* _manageProfilesAction;
+    ViewManager *_viewManager;
+    SessionController *_pluggedController;
+    QAction *_manageProfilesAction;
 };
 }
 

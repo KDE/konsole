@@ -27,8 +27,7 @@
 
 class QLabel;
 
-namespace Konsole
-{
+namespace Konsole {
 class TabbedViewContainer;
 
 class ViewContainerTabBar : public QTabBar
@@ -36,30 +35,31 @@ class ViewContainerTabBar : public QTabBar
     Q_OBJECT
 
 public:
-    ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container);
+    ViewContainerTabBar(QWidget *parent, TabbedViewContainer *container);
     ~ViewContainerTabBar() Q_DECL_OVERRIDE;
 
     // returns a pixmap image of a tab for use with QDrag
     QPixmap dragDropPixmap(int tab);
 
     // set the mimetype of which the tabbar support d&d
-    void setSupportedMimeType(const QString& mimeType);
+    void setSupportedMimeType(const QString &mimeType);
 
     // return associated tabbed container
-    TabbedViewContainer* connectedTabbedViewContainer();
+    TabbedViewContainer *connectedTabbedViewContainer();
 
 Q_SIGNALS:
     void initiateDrag(int index);
-    void querySourceIndex(const QDropEvent* event, int& sourceIndex) const;
-    void moveViewRequest(int index, const QDropEvent* event, bool& success, TabbedViewContainer* sourceTabbedContainer);
+    void querySourceIndex(const QDropEvent *event, int &sourceIndex) const;
+    void moveViewRequest(int index, const QDropEvent *event, bool &success,
+                         TabbedViewContainer *sourceTabbedContainer);
 
 protected:
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void dragEnterEvent(QDragEnterEvent* event) Q_DECL_OVERRIDE;
-    void dragLeaveEvent(QDragLeaveEvent* event) Q_DECL_OVERRIDE;
-    void dragMoveEvent(QDragMoveEvent* event) Q_DECL_OVERRIDE;
-    void dropEvent(QDropEvent* event) Q_DECL_OVERRIDE;
+    void dragEnterEvent(QDragEnterEvent *event) Q_DECL_OVERRIDE;
+    void dragLeaveEvent(QDragLeaveEvent *event) Q_DECL_OVERRIDE;
+    void dragMoveEvent(QDragMoveEvent *event) Q_DECL_OVERRIDE;
+    void dropEvent(QDropEvent *event) Q_DECL_OVERRIDE;
 
 private:
     // show the indicator arrow which shows where a dropped tab will
@@ -68,20 +68,19 @@ private:
 
     // returns the index at which a tab will be inserted if the mouse
     // in a drag-drop operation is released at 'pos'
-    int dropIndex(const QPoint& pos) const;
+    int dropIndex(const QPoint &pos) const;
 
     // returns true if the tab to be dropped in a drag-drop operation
     // is the same as the tab at the drop location
-    bool proposedDropIsSameTab(const QDropEvent* event) const;
+    bool proposedDropIsSameTab(const QDropEvent *event) const;
 
-    QLabel* _dropIndicator;
+    QLabel *_dropIndicator;
     int _dropIndicatorIndex;
     bool _drawIndicatorDisabled;
     QString _supportedMimeType;
-    TabbedViewContainer* _connectedContainer;
+    TabbedViewContainer *_connectedContainer;
     QPoint _dragStart;
-    QElapsedTimer* _mousePressTimer;
-
+    QElapsedTimer *_mousePressTimer;
 };
 }
 

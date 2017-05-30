@@ -24,8 +24,7 @@
 
 #include <qnamespace.h>
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * Platform-specific main shortcut "opcode":
  */
@@ -36,7 +35,6 @@ enum Modifier {
     ACCEL = Qt::CTRL
 #endif
 };
-
 }
 
 #endif //SHORTCUT_H

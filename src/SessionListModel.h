@@ -26,8 +26,7 @@
 #include <QAbstractListModel>
 #include <QVariant>
 
-namespace Konsole
-{
+namespace Konsole {
 class Session;
 
 /**
@@ -44,32 +43,33 @@ class SessionListModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    explicit SessionListModel(QObject* parent = 0);
+    explicit SessionListModel(QObject *parent = 0);
 
     /**
      * Sets the list of sessions displayed in the model.
      * To display all sessions that are currently running in the list,
      * call setSessions(SessionManager::instance()->sessions())
      */
-    void setSessions(const QList<Session*>& sessions);
+    void setSessions(const QList<Session *> &sessions);
 
     // reimplemented from QAbstractItemModel
-    QModelIndex index(int row, int column, const QModelIndex& parent) const Q_DECL_OVERRIDE;
-    QVariant data(const QModelIndex& index, int role) const Q_DECL_OVERRIDE;
-    QVariant headerData(int section, Qt::Orientation orientation,
-                                int role) const Q_DECL_OVERRIDE;
-    int columnCount(const QModelIndex& parent) const Q_DECL_OVERRIDE;
-    int rowCount(const QModelIndex& parent) const Q_DECL_OVERRIDE;
-    QModelIndex parent(const QModelIndex& index) const Q_DECL_OVERRIDE;
+    QModelIndex index(int row, int column, const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const Q_DECL_OVERRIDE;
+    int columnCount(const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    int rowCount(const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    QModelIndex parent(const QModelIndex &index) const Q_DECL_OVERRIDE;
 
 protected:
-    virtual void sessionRemoved(Session*) {}
+    virtual void sessionRemoved(Session *)
+    {
+    }
 
 private Q_SLOTS:
     void sessionFinished();
 
 private:
-    QList<Session*> _sessions;
+    QList<Session *> _sessions;
 };
 }
 

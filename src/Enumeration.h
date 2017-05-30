@@ -22,8 +22,7 @@
 #ifndef ENUMERATION_H
 #define ENUMERATION_H
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * This class serves as a place for putting enum definitions that are
  * used or referenced in multiple places in the code. Keep it small.
@@ -39,7 +38,7 @@ public:
         /** No output is remembered.  As soon as lines of text are scrolled
          * off-screen they are lost.
          */
-        NoHistory   = 0,
+        NoHistory = 0,
         /** A fixed number of lines of output are remembered.  Once the
          * limit is reached, the oldest lines are lost.
          */
@@ -57,9 +56,9 @@ public:
      */
     enum ScrollBarPositionEnum {
         /** Show the scroll-bar on the left of the terminal display. */
-        ScrollBarLeft   = 0,
+        ScrollBarLeft = 0,
         /** Show the scroll-bar on the right of the terminal display. */
-        ScrollBarRight  = 1,
+        ScrollBarRight = 1,
         /** Do not show the scroll-bar. */
         ScrollBarHidden = 2
     };
@@ -79,11 +78,11 @@ public:
      */
     enum CursorShapeEnum {
         /** Use a solid rectangular block to draw the cursor. */
-        BlockCursor     = 0,
+        BlockCursor = 0,
         /** Use an 'I' shape, similar to that used in text editing
          * applications, to draw the cursor.
          */
-        IBeamCursor     = 1,
+        IBeamCursor = 1,
         /** Draw a line underneath the cursor's position. */
         UnderlineCursor = 2
     };
@@ -134,8 +133,6 @@ public:
          */
         BackwardsSearch
     };
-
 };
 }
 #endif // ENUMERATION_H
-

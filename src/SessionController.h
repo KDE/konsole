@@ -37,8 +37,7 @@
 #include "Profile.h"
 #include "Enumeration.h"
 
-namespace KIO
-{
+namespace KIO {
 class Job;
 }
 
@@ -53,8 +52,7 @@ class KJob;
 class QAction;
 class KActionMenu;
 
-namespace Konsole
-{
+namespace Konsole {
 class Session;
 class SessionGroup;
 class ScreenWindow;
@@ -84,17 +82,17 @@ typedef QPointer<Session> SessionPtr;
  * which contains the view to plug the controller's actions into the menu when
  * the view is focused.
  */
-class KONSOLEPRIVATE_EXPORT SessionController : public ViewProperties , public KXMLGUIClient
+class KONSOLEPRIVATE_EXPORT SessionController : public ViewProperties, public KXMLGUIClient
 {
     Q_OBJECT
 
 public:
     enum CopyInputToEnum {
         /** Copy keyboard input to all the other tabs in current window */
-        CopyInputToAllTabsMode = 0 ,
+        CopyInputToAllTabsMode = 0,
 
         /** Copy keyboard input to user selected tabs in current window */
-        CopyInputToSelectedTabsMode = 1 ,
+        CopyInputToSelectedTabsMode = 1,
 
         /** Do not copy keyboard input to other tabs */
         CopyInputToNoneMode = 2
@@ -103,15 +101,18 @@ public:
     /**
      * Constructs a new SessionController which operates on @p session and @p view.
      */
-    SessionController(Session* session , TerminalDisplay* view, QObject* parent);
+    SessionController(Session *session, TerminalDisplay *view, QObject *parent);
     ~SessionController() Q_DECL_OVERRIDE;
 
     /** Returns the session associated with this controller */
-    QPointer<Session> session() {
+    QPointer<Session> session()
+    {
         return _session;
     }
+
     /** Returns the view associated with this controller */
-    QPointer<TerminalDisplay>  view()    {
+    QPointer<TerminalDisplay> view()
+    {
         return _view;
     }
 
@@ -142,19 +143,19 @@ public:
      * show() method will be called.  The SessionController will then connect to the search
      * bar's signals to update the search when the widget's controls are pressed.
      */
-    void setSearchBar(IncrementalSearchBar* searchBar);
+    void setSearchBar(IncrementalSearchBar *searchBar);
     /**
      * see setSearchBar()
      */
-    IncrementalSearchBar* searchBar() const;
+    IncrementalSearchBar *searchBar() const;
 
     /**
      * Sets the action displayed in the session's context menu to hide or
      * show the menu bar.
      */
-    void setShowMenuAction(QAction* action);
+    void setShowMenuAction(QAction *action);
 
-    EditProfileDialog* profileDialogPointer();
+    EditProfileDialog *profileDialogPointer();
 
     // reimplemented
     QUrl url() const Q_DECL_OVERRIDE;
@@ -164,10 +165,11 @@ public:
     virtual bool confirmForceClose() const;
 
     // Reimplemented to watch for events happening to the view
-    bool eventFilter(QObject* watched , QEvent* event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
 
     /** Returns the set of all controllers that exist. */
-    static QSet<SessionController*> allControllers() {
+    static QSet<SessionController *> allControllers()
+    {
         return _allControllers;
     }
 
@@ -177,7 +179,7 @@ Q_SIGNALS:
      * This can be used by other classes to plug the controller's actions into a window's
      * menus.
      */
-    void focused(SessionController* controller);
+    void focused(SessionController *controller);
 
     void rawTitleChanged();
 
@@ -185,7 +187,7 @@ Q_SIGNALS:
      * Emitted when the current working directory of the session associated with
      * the controller is changed.
      */
-    void currentDirectoryChanged(const QString& dir);
+    void currentDirectoryChanged(const QString &dir);
 
 public Q_SLOTS:
     /**
@@ -197,7 +199,7 @@ public Q_SLOTS:
      * openUrl() currently supports urls for local paths and those
      * using the 'ssh' protocol ( eg. "ssh://joebloggs@hostname" )
      */
-    void openUrl(const QUrl& url);
+    void openUrl(const QUrl &url);
 
     /**
      * update actions which are meaningful only when primary screen is in use.
@@ -207,7 +209,7 @@ public Q_SLOTS:
     /**
      * update actions which are closely related with the selected text.
      */
-    void selectionChanged(const QString& selectedText);
+    void selectionChanged(const QString &selectedText);
 
     /**
      * close the associated session. This might involve user interaction for
@@ -229,12 +231,12 @@ private Q_SLOTS:
     void selectAll();
     void selectLine();
     void pasteFromX11Selection(); // shortcut only
-    void copyInputActionsTriggered(QAction* action);
+    void copyInputActionsTriggered(QAction *action);
     void copyInputToAllTabs();
     void copyInputToSelectedTabs();
     void copyInputToNone();
     void editCurrentProfile();
-    void changeCodec(QTextCodec* codec);
+    void changeCodec(QTextCodec *codec);
     void enableSearchBar(bool showSearchBar);
     void searchHistory(bool showSearchBar);
     void searchBarEvent();
@@ -253,17 +255,17 @@ private Q_SLOTS:
     void switchProfile(Profile::Ptr profile);
     void handleWebShortcutAction();
     void configureWebShortcuts();
-    void sendSignal(QAction* action);
+    void sendSignal(QAction *action);
     void sendBackgroundColor();
 
     // other
     void prepareSwitchProfileMenu();
     void updateCodecAction();
-    void showDisplayContextMenu(const QPoint& position);
+    void showDisplayContextMenu(const QPoint &position);
     void movementKeyFromSearchBarReceived(QKeyEvent *event);
     void sessionStateChanged(int state);
     void sessionTitleChanged();
-    void searchTextChanged(const QString& text);
+    void searchTextChanged(const QString &text);
     void searchCompleted(bool success);
     void searchClosed(); // called when the user clicks on the
     // history search bar's close button
@@ -276,9 +278,9 @@ private Q_SLOTS:
     // foreground process in the terminal
 
     void highlightMatches(bool highlight);
-    void scrollBackOptionsChanged(int mode , int lines);
-    void sessionResizeRequest(const QSize& size);
-    void trackOutput(QKeyEvent* event);  // move view to end of current output
+    void scrollBackOptionsChanged(int mode, int lines);
+    void sessionResizeRequest(const QSize &size);
+    void trackOutput(QKeyEvent *event);  // move view to end of current output
     // when a key press occurs in the
     // display area
 
@@ -291,7 +293,7 @@ private Q_SLOTS:
     bool isKonsolePart() const;
 
     // update actions related with selected text
-    void updateCopyAction(const QString& selectedText);
+    void updateCopyAction(const QString &selectedText);
     void updateWebSearchMenu();
 
 private:
@@ -299,7 +301,7 @@ private:
     // text - pattern to search for
     // direction - value from SearchHistoryTask::SearchDirection enum to specify
     //             the search direction
-    void beginSearch(const QString& text, Enum::SearchDirection direction);
+    void beginSearch(const QString &text, Enum::SearchDirection direction);
     QRegularExpression regexpFromSearchBarOptions() const;
     bool reverseSearchChecked() const;
     void setupCommonActions();
@@ -311,36 +313,36 @@ private:
 private:
     void updateSessionIcon();
 
-    QPointer<Session>         _session;
+    QPointer<Session> _session;
     QPointer<TerminalDisplay> _view;
-    SessionGroup*               _copyToGroup;
+    SessionGroup *_copyToGroup;
 
-    ProfileList* _profileList;
+    ProfileList *_profileList;
 
-    QIcon      _sessionIcon;
-    QString    _sessionIconName;
-    int        _previousState;
+    QIcon _sessionIcon;
+    QString _sessionIconName;
+    int _previousState;
 
-    RegExpFilter*   _searchFilter;
-    UrlFilter*     _urlFilter;
-    FileFilter*     _fileFilter;
+    RegExpFilter *_searchFilter;
+    UrlFilter *_urlFilter;
+    FileFilter *_fileFilter;
 
-    QAction* _copyInputToAllTabsAction;
+    QAction *_copyInputToAllTabsAction;
 
-    QAction* _findAction;
-    QAction* _findNextAction;
-    QAction* _findPreviousAction;
+    QAction *_findAction;
+    QAction *_findNextAction;
+    QAction *_findPreviousAction;
 
-    QTimer* _interactionTimer;
+    QTimer *_interactionTimer;
 
     int _searchStartLine;
     int _prevSearchResultLine;
     QPointer<IncrementalSearchBar> _searchBar;
 
-    KCodecAction* _codecAction;
+    KCodecAction *_codecAction;
 
-    KActionMenu* _switchProfileMenu;
-    KActionMenu* _webSearchMenu;
+    KActionMenu *_switchProfileMenu;
+    KActionMenu *_webSearchMenu;
 
     bool _listenForScreenWindowUpdates;
     bool _preventClose;
@@ -349,9 +351,9 @@ private:
 
     QString _selectedText;
 
-    QAction* _showMenuAction;
+    QAction *_showMenuAction;
 
-    static QSet<SessionController*> _allControllers;
+    static QSet<SessionController *> _allControllers;
     static int _lastControllerId;
 
     QStringList _bookmarkValidProgramsToClear;
@@ -380,7 +382,7 @@ class SessionTask : public QObject
     Q_OBJECT
 
 public:
-    explicit SessionTask(QObject* parent = 0);
+    explicit SessionTask(QObject *parent = 0);
 
     /**
      * Sets whether the task automatically deletes itself when the task has been finished.
@@ -392,7 +394,7 @@ public:
     bool autoDelete() const;
 
     /** Adds a new session to the group */
-    void addSession(Session* session);
+    void addSession(Session *session);
 
     /**
      * Executes the task on each of the sessions in the group.
@@ -430,7 +432,7 @@ class SaveHistoryTask : public SessionTask
 
 public:
     /** Constructs a new task to save session output to URLs */
-    explicit SaveHistoryTask(QObject* parent = 0);
+    explicit SaveHistoryTask(QObject *parent = 0);
     ~SaveHistoryTask() Q_DECL_OVERRIDE;
 
     /**
@@ -442,8 +444,8 @@ public:
     void execute() Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
-    void jobDataRequested(KIO::Job* job , QByteArray& data);
-    void jobResult(KJob* job);
+    void jobDataRequested(KIO::Job *job, QByteArray &data);
+    void jobResult(KJob *job);
 
 private:
     class SaveJob // structure to keep information needed to process
@@ -454,11 +456,11 @@ private:
         int lastLineFetched; // the last line processed in the previous data request
         // set this to -1 at the start of the save job
 
-        TerminalCharacterDecoder* decoder;  // decoder used to convert terminal characters
+        TerminalCharacterDecoder *decoder;  // decoder used to convert terminal characters
         // into output
     };
 
-    QHash<KJob*, SaveJob> _jobSession;
+    QHash<KJob *, SaveJob> _jobSession;
 };
 
 //class SearchHistoryThread;
@@ -484,10 +486,10 @@ public:
     /**
      * Constructs a new search task.
      */
-    explicit SearchHistoryTask(QObject* parent = 0);
+    explicit SearchHistoryTask(QObject *parent = 0);
 
     /** Adds a screen window to the list to search when execute() is called. */
-    void addScreenWindow(Session* session , ScreenWindow* searchWindow);
+    void addScreenWindow(Session *session, ScreenWindow *searchWindow);
 
     /** Sets the regular expression which is searched for when execute() is called */
     void setRegExp(const QRegularExpression &regExp);
@@ -517,10 +519,10 @@ public:
 private:
     typedef QPointer<ScreenWindow> ScreenWindowPtr;
 
-    void executeOnScreenWindow(SessionPtr session , ScreenWindowPtr window);
-    void highlightResult(ScreenWindowPtr window , int position);
+    void executeOnScreenWindow(SessionPtr session, ScreenWindowPtr window);
+    void highlightResult(ScreenWindowPtr window, int position);
 
-    QMap< SessionPtr , ScreenWindowPtr > _windows;
+    QMap< SessionPtr, ScreenWindowPtr > _windows;
     QRegularExpression _regExp;
     Enum::SearchDirection _direction;
     int _startLine;
@@ -530,4 +532,3 @@ private:
 }
 
 #endif //SESSIONCONTROLLER_H
-

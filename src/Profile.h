@@ -32,8 +32,7 @@
 // Konsole
 #include "konsoleprivate_export.h"
 
-namespace Konsole
-{
+namespace Konsole {
 class ProfileGroup;
 
 /**
@@ -144,9 +143,9 @@ public:
          * See Enum::ScrollBarPositionEnum
          */
         ScrollBarPosition,
-	/** (bool) Specifies whether the PageUp/Down will scroll the full
-	 * height or half height.
-         */
+        /** (bool) Specifies whether the PageUp/Down will scroll the full
+         * height or half height.
+             */
         ScrollFullPage,
         /** (bool) Specifies whether the terminal will enable Bidirectional
          * text display
@@ -252,10 +251,10 @@ public:
          * In future, the format might be #.#.# to account for levels
          */
         MenuIndex,
-	/** (int) Margin width in pixels */
-	TerminalMargin,
-	/** (bool) Center terminal when there is a margin */
-	TerminalCenter,
+        /** (int) Margin width in pixels */
+        TerminalMargin,
+        /** (bool) Center terminal when there is a margin */
+        TerminalCenter,
         /** (bool) If true, mouse wheel scroll with Ctrl key pressed
          * increases/decreases the terminal font size.
          */
@@ -317,11 +316,11 @@ public:
      * and a non-null parent was specified in the Profile's constructor,
      * the parent's value for @p property will be returned.
      */
-    template <class T>
+    template<class T>
     T property(Property property) const;
 
     /** Sets the value of the specified @p property to @p value. */
-    virtual void setProperty(Property property, const QVariant& value);
+    virtual void setProperty(Property property, const QVariant &value);
     /** Returns true if the specified property has been set in this Profile
      * instance.
      */
@@ -351,192 +350,229 @@ public:
     //
 
     /** Convenience method for property<QString>(Profile::Path) */
-    QString path() const {
+    QString path() const
+    {
         return property<QString>(Profile::Path);
     }
 
     /** Convenience method for property<QString>(Profile::Name) */
-    QString name() const {
+    QString name() const
+    {
         return property<QString>(Profile::Name);
     }
 
     /** Convenience method for property<QString>(Profile::UntranslatedName) */
-    QString untranslatedName() const {
+    QString untranslatedName() const
+    {
         return property<QString>(Profile::UntranslatedName);
     }
 
     /** Convenience method for property<QString>(Profile::Directory) */
-    QString defaultWorkingDirectory() const {
+    QString defaultWorkingDirectory() const
+    {
         return property<QString>(Profile::Directory);
     }
 
     /** Convenience method for property<QString>(Profile::Icon) */
-    QString icon() const {
+    QString icon() const
+    {
         return property<QString>(Profile::Icon);
     }
 
     /** Convenience method for property<QString>(Profile::Command) */
-    QString command() const {
+    QString command() const
+    {
         return property<QString>(Profile::Command);
     }
 
     /** Convenience method for property<QStringList>(Profile::Arguments) */
-    QStringList arguments() const {
+    QStringList arguments() const
+    {
         return property<QStringList>(Profile::Arguments);
     }
 
     /** Convenience method for property<QString>(Profile::LocalTabTitleFormat) */
-    QString localTabTitleFormat() const {
+    QString localTabTitleFormat() const
+    {
         return property<QString>(Profile::LocalTabTitleFormat);
     }
 
     /** Convenience method for property<QString>(Profile::RemoteTabTitleFormat) */
-    QString remoteTabTitleFormat() const {
+    QString remoteTabTitleFormat() const
+    {
         return property<QString>(Profile::RemoteTabTitleFormat);
     }
 
     /** Convenience method for property<bool>(Profile::ShowTerminalSizeHint) */
-    bool showTerminalSizeHint() const {
+    bool showTerminalSizeHint() const
+    {
         return property<bool>(Profile::ShowTerminalSizeHint);
     }
 
     /** Convenience method for property<QFont>(Profile::Font) */
-    QFont font() const {
+    QFont font() const
+    {
         return property<QFont>(Profile::Font);
     }
 
     /** Convenience method for property<QString>(Profile::ColorScheme) */
-    QString colorScheme() const {
+    QString colorScheme() const
+    {
         return property<QString>(Profile::ColorScheme);
     }
 
     /** Convenience method for property<QStringList>(Profile::Environment) */
-    QStringList environment() const {
+    QStringList environment() const
+    {
         return property<QStringList>(Profile::Environment);
     }
 
     /** Convenience method for property<QString>(Profile::KeyBindings) */
-    QString keyBindings() const {
+    QString keyBindings() const
+    {
         return property<QString>(Profile::KeyBindings);
     }
 
     /** Convenience method for property<QString>(Profile::HistorySize) */
-    int historySize() const {
+    int historySize() const
+    {
         return property<int>(Profile::HistorySize);
     }
 
     /** Convenience method for property<bool>(Profile::BidiRenderingEnabled) */
-    bool bidiRenderingEnabled() const {
+    bool bidiRenderingEnabled() const
+    {
         return property<bool>(Profile::BidiRenderingEnabled);
     }
 
     /** Convenience method for property<bool>(Profile::LineSpacing) */
-    int lineSpacing() const {
+    int lineSpacing() const
+    {
         return property<int>(Profile::LineSpacing);
     }
 
-
     /** Convenience method for property<bool>(Profile::BlinkingTextEnabled) */
-    bool blinkingTextEnabled() const {
+    bool blinkingTextEnabled() const
+    {
         return property<bool>(Profile::BlinkingTextEnabled);
     }
 
     /** Convenience method for property<bool>(Profile::MouseWheelZoomEnabled) */
-    bool mouseWheelZoomEnabled() const {
+    bool mouseWheelZoomEnabled() const
+    {
         return property<bool>(Profile::MouseWheelZoomEnabled);
     }
 
     /** Convenience method for property<bool>(Profile::BlinkingCursorEnabled) */
-    bool blinkingCursorEnabled() const {
+    bool blinkingCursorEnabled() const
+    {
         return property<bool>(Profile::BlinkingCursorEnabled);
     }
 
     /** Convenience method for property<bool>(Profile::FlowControlEnabled) */
-    bool flowControlEnabled() const {
+    bool flowControlEnabled() const
+    {
         return property<bool>(Profile::FlowControlEnabled);
     }
 
     /** Convenience method for property<bool>(Profile::UseCustomCursorColor) */
-    bool useCustomCursorColor() const {
+    bool useCustomCursorColor() const
+    {
         return property<bool>(Profile::UseCustomCursorColor);
     }
 
     /** Convenience method for property<bool>(Profile::CustomCursorColor) */
-    QColor customCursorColor() const {
+    QColor customCursorColor() const
+    {
         return property<QColor>(Profile::CustomCursorColor);
     }
 
     /** Convenience method for property<QString>(Profile::WordCharacters) */
-    QString wordCharacters() const {
+    QString wordCharacters() const
+    {
         return property<QString>(Profile::WordCharacters);
     }
 
     /** Convenience method for property<bool>(Profile::UnderlineLinksEnabled) */
-    bool underlineLinksEnabled() const {
+    bool underlineLinksEnabled() const
+    {
         return property<bool>(Profile::UnderlineLinksEnabled);
     }
 
     /** Convenience method for property<bool>(Profile::UnderlineFilesEnabled) */
-    bool underlineFilesEnabled() const {
+    bool underlineFilesEnabled() const
+    {
         return property<bool>(Profile::UnderlineFilesEnabled);
     }
 
-    bool autoCopySelectedText() const {
+    bool autoCopySelectedText() const
+    {
         return property<bool>(Profile::AutoCopySelectedText);
     }
 
     /** Convenience method for property<QString>(Profile::DefaultEncoding) */
-    QString defaultEncoding() const {
+    QString defaultEncoding() const
+    {
         return property<QString>(Profile::DefaultEncoding);
     }
 
     /** Convenience method for property<bool>(Profile::AntiAliasFonts) */
-    bool antiAliasFonts() const {
+    bool antiAliasFonts() const
+    {
         return property<bool>(Profile::AntiAliasFonts);
     }
 
     /** Convenience method for property<bool>(Profile::BoldIntense) */
-    bool boldIntense() const {
+    bool boldIntense() const
+    {
         return property<bool>(Profile::BoldIntense);
     }
 
     /** Convenience method for property<bool>(Profile::UseFontLineCharacters)*/
-    bool useFontLineCharacters() const {
+    bool useFontLineCharacters() const
+    {
         return property<bool>(Profile::UseFontLineCharacters);
     }
 
     /** Convenience method for property<bool>(Profile::StartInCurrentSessionDir) */
-    bool startInCurrentSessionDir() const {
+    bool startInCurrentSessionDir() const
+    {
         return property<bool>(Profile::StartInCurrentSessionDir);
     }
 
     /** Convenience method for property<QString>(Profile::SilenceSeconds) */
-    int silenceSeconds() const {
+    int silenceSeconds() const
+    {
         return property<int>(Profile::SilenceSeconds);
     }
 
     /** Convenience method for property<QString>(Profile::TerminalColumns) */
-    int terminalColumns() const {
+    int terminalColumns() const
+    {
         return property<int>(Profile::TerminalColumns);
     }
 
     /** Convenience method for property<QString>(Profile::TerminalRows) */
-    int terminalRows() const {
+    int terminalRows() const
+    {
         return property<int>(Profile::TerminalRows);
     }
 
     /** Convenience method for property<int>(Profile::TerminalMargin) */
-    int terminalMargin() const {
+    int terminalMargin() const
+    {
         return property<int>(Profile::TerminalMargin);
     }
 
     /** Convenience method for property<bool>(Profile::TerminalCenter) */
-    bool terminalCenter() const {
+    bool terminalCenter() const
+    {
         return property<bool>(Profile::TerminalCenter);
     }
 
     /** Convenience method for property<QString>(Profile::MenuIndex) */
-    QString menuIndex() const {
+    QString menuIndex() const
+    {
         return property<QString>(Profile::MenuIndex);
     }
 
@@ -554,13 +590,13 @@ public:
      * @param name The name of the property to look for, this is case
      * insensitive.
      */
-    static Property lookupByName(const QString& name);
+    static Property lookupByName(const QString &name);
 
 private:
     struct PropertyInfo;
     // Defines a new property, this property is then available
     // to all Profile instances.
-    static void registerProperty(const PropertyInfo& info);
+    static void registerProperty(const PropertyInfo &info);
 
     // fills the table with default names for profile properties
     // the first time it is called.
@@ -582,8 +618,8 @@ private:
     // which is used when saving/loading the profile.
     struct PropertyInfo {
         Property property;
-        const char* name;
-        const char* group;
+        const char *name;
+        const char *group;
         QVariant::Type type;
     };
     static const PropertyInfo DefaultPropertyNames[];
@@ -594,12 +630,13 @@ inline bool Profile::canInheritProperty(Property aProperty)
     return aProperty != Name && aProperty != Path;
 }
 
-template <class T>
+template<class T>
 inline T Profile::property(Property aProperty) const
 {
     return property<QVariant>(aProperty).value<T>();
 }
-template <>
+
+template<>
 inline QVariant Profile::property(Property aProperty) const
 {
     if (_propertyValues.contains(aProperty)) {
@@ -637,18 +674,21 @@ public:
      * call updateValues() to make the group's property values reflect the
      * profiles currently in the group.
      */
-    void addProfile(Profile::Ptr profile) {
+    void addProfile(Profile::Ptr profile)
+    {
         _profiles.append(profile);
     }
 
     /** Remove a profile from the group.  Calling setProperty() will no longer
      * affect this profile. */
-    void removeProfile(Profile::Ptr profile) {
+    void removeProfile(Profile::Ptr profile)
+    {
         _profiles.removeAll(profile);
     }
 
     /** Returns the profiles in this group .*/
-    QList<Profile::Ptr> profiles() const {
+    QList<Profile::Ptr> profiles() const
+    {
         return _profiles;
     }
 
@@ -668,26 +708,28 @@ public:
     /** Sets the value of @p property in each of the group's profiles to
      * @p value.
      */
-    void setProperty(Property property, const QVariant& value) Q_DECL_OVERRIDE;
+    void setProperty(Property property, const QVariant &value) Q_DECL_OVERRIDE;
 
 private:
     QList<Profile::Ptr> _profiles;
 };
-inline ProfileGroup::ProfileGroup(Profile::Ptr profileParent)
-    : Profile(profileParent)
-    , _profiles(QList<Profile::Ptr>())
+inline ProfileGroup::ProfileGroup(Profile::Ptr profileParent) :
+    Profile(profileParent),
+    _profiles(QList<Profile::Ptr>())
 {
     setHidden(true);
 }
+
 inline const Profile::GroupPtr Profile::asGroup() const
 {
-    const Profile::GroupPtr ptr(dynamic_cast<ProfileGroup*>(
-                                    const_cast<Profile*>(this)));
+    const Profile::GroupPtr ptr(dynamic_cast<ProfileGroup *>(
+                                    const_cast<Profile *>(this)));
     return ptr;
 }
+
 inline Profile::GroupPtr Profile::asGroup()
 {
-    return Profile::GroupPtr(dynamic_cast<ProfileGroup*>(this));
+    return Profile::GroupPtr(dynamic_cast<ProfileGroup *>(this));
 }
 
 /**
@@ -715,7 +757,7 @@ public:
      * and assigned values and returns a table of
      * properties and values.
      */
-    QHash<Profile::Property, QVariant> parse(const QString& input);
+    QHash<Profile::Property, QVariant> parse(const QString &input);
 };
 }
 Q_DECLARE_METATYPE(Konsole::Profile::Ptr)

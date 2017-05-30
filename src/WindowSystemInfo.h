@@ -23,8 +23,7 @@
 
 #include "konsoleprivate_export.h"
 
-namespace Konsole
-{
+namespace Konsole {
 class KONSOLEPRIVATE_EXPORT WindowSystemInfo
 {
 public:
@@ -33,4 +32,3 @@ public:
 }
 
 #endif // WINDOWSYSTEMINFO_H
-

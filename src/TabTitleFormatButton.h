@@ -27,31 +27,30 @@
 // Konsole
 #include "Session.h"
 
-namespace Konsole
-{
+namespace Konsole {
 class TabTitleFormatButton : public QPushButton
 {
     Q_OBJECT
 
 public:
-    explicit TabTitleFormatButton(QWidget* parent);
+    explicit TabTitleFormatButton(QWidget *parent);
     ~TabTitleFormatButton() Q_DECL_OVERRIDE;
 
     void setContext(Session::TabTitleContext context);
     Session::TabTitleContext context() const;
 
 Q_SIGNALS:
-    void dynamicElementSelected(const QString&);
+    void dynamicElementSelected(const QString &);
 
 private Q_SLOTS:
-    void fireElementSelected(QAction*);
+    void fireElementSelected(QAction *);
 
 private:
     Session::TabTitleContext _context;
 
     struct Element {
         QString element;
-        const char* description;
+        const char *description;
     };
     static const Element _localElements[];
     static const int _localElementCount;

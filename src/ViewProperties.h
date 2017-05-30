@@ -30,8 +30,7 @@
 // Konsole
 #include "konsoleprivate_export.h"
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * Encapsulates user-visible information about the terminal session currently being displayed in a view,
  * such as the associated title and icon.
@@ -44,7 +43,7 @@ class KONSOLEPRIVATE_EXPORT ViewProperties : public QObject
     Q_OBJECT
 
 public:
-    explicit ViewProperties(QObject* parent);
+    explicit ViewProperties(QObject *parent);
     ~ViewProperties() Q_DECL_OVERRIDE;
 
     /** Returns the icon associated with a view */
@@ -76,15 +75,17 @@ public:
      * to allow them to confirm whether to close a view.
      * The default implementation always returns true
      */
-    virtual bool confirmClose() const {
+    virtual bool confirmClose() const
+    {
         return true;
     }
 
     /** Finds a ViewProperties instance given its numeric identifier. */
-    static ViewProperties* propertiesById(int id);
+    static ViewProperties *propertiesById(int id);
 
     /** Name of mime format to use in drag-and-drop operations. */
-    static QString mimeType() {
+    static QString mimeType()
+    {
         return _mimeType;
     }
 
@@ -92,7 +93,8 @@ public:
      * given @p id (See identifier()).  The QMimeData instance returned must
      * be deleted by the caller.
      */
-    static QMimeData* createMimeData(int id) {
+    static QMimeData *createMimeData(int id)
+    {
         auto mimeData = new QMimeData;
         mimeData->setData(mimeType(), QByteArray::number(id));
         return mimeData;
@@ -104,7 +106,8 @@ public:
      *
      * The QMimeData instance must support the mime format returned by mimeType()
      */
-    static int decodeMimeData(const QMimeData* mimeData) {
+    static int decodeMimeData(const QMimeData *mimeData)
+    {
         bool ok;
         // we are not checking return value ok; not sure how int could be invalid
         return mimeData->data(ViewProperties::mimeType()).toInt(&ok);
@@ -112,11 +115,11 @@ public:
 
 Q_SIGNALS:
     /** Emitted when the icon for a view changes */
-    void iconChanged(ViewProperties* properties);
+    void iconChanged(ViewProperties *properties);
     /** Emitted when the title for a view changes */
-    void titleChanged(ViewProperties* properties);
+    void titleChanged(ViewProperties *properties);
     /** Emitted when activity has occurred in this view. */
-    void activity(ViewProperties* item);
+    void activity(ViewProperties *item);
 
 public Q_SLOTS:
     /**
@@ -134,12 +137,12 @@ protected:
      * Subclasses may call this method to change the title.  This causes
      * a titleChanged() signal to be emitted
      */
-    void setTitle(const QString& title);
+    void setTitle(const QString &title);
     /**
      * Subclasses may call this method to change the icon.  This causes
      * an iconChanged() signal to be emitted
      */
-    void setIcon(const QIcon& icon);
+    void setIcon(const QIcon &icon);
     /** Subclasses may call this method to change the identifier. */
     void setIdentifier(int id);
 private:
@@ -147,7 +150,7 @@ private:
     QString _title;
     int _identifier;
 
-    static QHash<int, ViewProperties*> _viewProperties;
+    static QHash<int, ViewProperties *> _viewProperties;
     static QString _mimeType;
 };
 }

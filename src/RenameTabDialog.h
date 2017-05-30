@@ -23,31 +23,29 @@
 // KDE
 #include <QDialog>
 
-namespace Ui
-{
+namespace Ui {
 class RenameTabDialog;
 }
 
-namespace Konsole
-{
+namespace Konsole {
 class RenameTabDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit RenameTabDialog(QWidget* parent = 0);
+    explicit RenameTabDialog(QWidget *parent = 0);
     ~RenameTabDialog() Q_DECL_OVERRIDE;
 
     QString tabTitleText() const;
     QString remoteTabTitleText() const;
-    void setTabTitleText(const QString&);
-    void setRemoteTabTitleText(const QString&);
+    void setTabTitleText(const QString &);
+    void setRemoteTabTitleText(const QString &);
 
     void focusTabTitleText();
     void focusRemoteTabTitleText();
 
 private:
-    Ui::RenameTabDialog* _ui;
+    Ui::RenameTabDialog *_ui;
 };
 }
 

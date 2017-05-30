@@ -26,8 +26,7 @@
 // Konsole
 #include "konsoleprivate_export.h"
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * A class to parse and extract information about shell commands.
  *
@@ -57,11 +56,11 @@ public:
      *
      * @param aCommand The command line to parse.
      */
-    explicit ShellCommand(const QString& aCommand);
+    explicit ShellCommand(const QString &aCommand);
     /**
      * Constructs a ShellCommand with the specified @p aCommand and @p aArguments.
      */
-    ShellCommand(const QString& aCommand, const QStringList& aArguments);
+    ShellCommand(const QString &aCommand, const QStringList &aArguments);
 
     /** Returns the command. */
     QString command() const;
@@ -74,22 +73,20 @@ public:
     QString fullCommand() const;
 
     /** Expands environment variables in @p text .*/
-    static QString expand(const QString& text);
+    static QString expand(const QString &text);
 
     /** Expands environment variables in each string in @p list. */
-    static QStringList expand(const QStringList& items);
+    static QStringList expand(const QStringList &items);
 
+    static bool isValidEnvCharacter(const QChar &ch);
 
-    static bool isValidEnvCharacter(const QChar& ch);
-
-    static bool isValidLeadingEnvCharacter(const QChar& ch);
+    static bool isValidLeadingEnvCharacter(const QChar &ch);
 
 private:
-    static bool expandEnv(QString& text);
+    static bool expandEnv(QString &text);
 
     QStringList _arguments;
 };
 }
 
 #endif // SHELLCOMMAND_H
-

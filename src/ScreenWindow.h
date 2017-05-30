@@ -28,8 +28,7 @@
 // Konsole
 #include "Character.h"
 
-namespace Konsole
-{
+namespace Konsole {
 class Screen;
 
 /**
@@ -63,13 +62,13 @@ public:
      * to notify the window when the associated screen has changed and synchronize selection updates
      * between all views on a session.
      */
-    explicit ScreenWindow(Screen* screen, QObject* parent = 0);
+    explicit ScreenWindow(Screen *screen, QObject *parent = 0);
     ~ScreenWindow() Q_DECL_OVERRIDE;
 
     /** Sets the screen which this window looks onto */
-    void setScreen(Screen* screen);
+    void setScreen(Screen *screen);
     /** Returns the screen which this window looks onto */
-    Screen* screen() const;
+    Screen *screen() const;
 
     /**
      * Returns the image of characters which are currently visible through this window
@@ -78,7 +77,7 @@ public:
      * The returned buffer is managed by the ScreenWindow instance and does not need to be
      * deleted by the caller.
      */
-    Character* getImage();
+    Character *getImage();
 
     /**
      * Returns the line attributes associated with the lines of characters which
@@ -113,7 +112,6 @@ public:
      */
     QRect scrollRegion() const;
 
-
     /**
      * What line the next search will start from
      */
@@ -124,12 +122,12 @@ public:
      * Sets the start of the selection to the given @p line and @p column within
      * the window.
      */
-    void setSelectionStart(int column , int line , bool columnMode);
+    void setSelectionStart(int column, int line, bool columnMode);
     /**
      * Sets the end of the selection to the given @p line and @p column within
      * the window.
      */
-    void setSelectionEnd(int column , int line);
+    void setSelectionEnd(int column, int line);
 
     /**
      * Sets the selection as the range specified by line @p start and line @p
@@ -145,15 +143,15 @@ public:
     /**
      * Retrieves the start of the selection within the window.
      */
-    void getSelectionStart(int& column , int& line);
+    void getSelectionStart(int &column, int &line);
     /**
      * Retrieves the end of the selection within the window.
      */
-    void getSelectionEnd(int& column , int& line);
+    void getSelectionEnd(int &column, int &line);
     /**
      * Returns true if the character at @p line , @p column is part of the selection.
      */
-    bool isSelected(int column , int line);
+    bool isSelected(int column, int line);
     /**
      * Clears the current selection
      */
@@ -233,7 +231,8 @@ public:
      * @param trimTrailingSpaces See Screen::selectedText()
      * @param html Specifies if returned text should have HTML tags.
      */
-    QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false, bool html = false) const;
+    QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false,
+                         bool html = false) const;
 
 public Q_SLOTS:
     /**
@@ -265,16 +264,16 @@ private:
     int endWindowLine() const;
     void fillUnusedArea();
 
-    Screen* _screen; // see setScreen() , screen()
-    Character* _windowBuffer;
+    Screen *_screen; // see setScreen() , screen()
+    Character *_windowBuffer;
     int _windowBufferSize;
     bool _bufferNeedsUpdate;
 
-    int  _windowLines;
-    int  _currentLine; // see scrollTo() , currentLine()
+    int _windowLines;
+    int _currentLine;  // see scrollTo() , currentLine()
     int _currentResultLine;
     bool _trackOutput; // see setTrackOutput() , trackOutput()
-    int  _scrollCount; // count of lines which the window has been scrolled by since
+    int _scrollCount;  // count of lines which the window has been scrolled by since
     // the last call to resetScrollCount()
 };
 }

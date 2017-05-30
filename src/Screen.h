@@ -41,9 +41,7 @@
 #define MODE_NewLine   5
 #define MODES_SCREEN   6
 
-namespace Konsole
-{
-
+namespace Konsole {
 class TerminalCharacterDecoder;
 class TerminalDisplay;
 class HistoryType;
@@ -79,8 +77,8 @@ public:
     Screen(int lines, int columns);
     ~Screen();
 
-    Screen(const Screen&) = delete;
-    Screen& operator=(const Screen&) = delete;
+    Screen(const Screen &) = delete;
+    Screen &operator=(const Screen &) = delete;
 
     // VT100/2 Operations
     // Cursor Movement
@@ -117,7 +115,7 @@ public:
      * @param topLine The top line of the new scrolling margin.
      * @param bottomLine The bottom line of the new scrolling margin.
      */
-    void setMargins(int topLine , int bottomLine);
+    void setMargins(int topLine, int bottomLine);
     /** Returns the top line of the scrolling region. */
     int topMargin() const;
     /** Returns the bottom line of the scrolling region. */
@@ -372,7 +370,7 @@ public:
      * @param startLine Index of first line to copy
      * @param endLine Index of last line to copy
      */
-    void getImage(Character* dest , int size , int startLine , int endLine) const;
+    void getImage(Character *dest, int size, int startLine, int endLine) const;
 
     /**
      * Returns the additional attributes associated with lines in the image.
@@ -380,16 +378,20 @@ public:
      * line is wrapped,
      * other attributes control the size of characters in the line.
      */
-    QVector<LineProperty> getLineProperties(int startLine , int endLine) const;
+    QVector<LineProperty> getLineProperties(int startLine, int endLine) const;
 
     /** Return the number of lines. */
-    int getLines() const {
+    int getLines() const
+    {
         return _lines;
     }
+
     /** Return the number of columns. */
-    int getColumns() const {
+    int getColumns() const
+    {
         return _columns;
     }
+
     /** Return the number of lines in the history buffer. */
     int getHistLines() const;
     /**
@@ -397,9 +399,9 @@ public:
      * If @p copyPreviousScroll is true then the contents of the previous
      * history buffer are copied into the new scroll.
      */
-    void setScroll(const HistoryType& , bool copyPreviousScroll = true);
+    void setScroll(const HistoryType &, bool copyPreviousScroll = true);
     /** Returns the type of storage used to keep lines in the history. */
-    const HistoryType& getScroll() const;
+    const HistoryType &getScroll() const;
     /**
      * Returns true if this screen keeps lines that are scrolled off the screen
      * in a history buffer.
@@ -427,13 +429,13 @@ public:
      * Retrieves the start of the selection or the cursor position if there
      * is no selection.
      */
-    void getSelectionStart(int& column , int& line) const;
+    void getSelectionStart(int &column, int &line) const;
 
     /**
      * Retrieves the end of the selection or the cursor position if there
      * is no selection.
      */
-    void getSelectionEnd(int& column , int& line) const;
+    void getSelectionEnd(int &column, int &line) const;
 
     /** Clears the current selection */
     void clearSelection();
@@ -452,7 +454,8 @@ public:
      * trimmed in the returned text.
      * @param html Specifies if returned text should have HTML tags.
      */
-    QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false, bool html = false) const;
+    QString selectedText(bool preserveLineBreaks, bool trimTrailingSpaces = false,
+                         bool html = false) const;
 
     /**
      * Convenience method.  Returns the text between two indices.
@@ -464,7 +467,8 @@ public:
      * trimmed in the returned text.
      * @param html Specifies if returned text should have HTML tags.
      */
-    QString text(int startIndex, int endIndex, bool preserveLineBreaks, bool trimTrailingSpaces = false, bool html = false) const;
+    QString text(int startIndex, int endIndex, bool preserveLineBreaks,
+                 bool trimTrailingSpaces = false, bool html = false) const;
 
     /**
      * Copies part of the output to a stream.
@@ -473,7 +477,7 @@ public:
      * @param fromLine The first line in the history to retrieve
      * @param toLine The last line in the history to retrieve
      */
-    void writeLinesToStream(TerminalCharacterDecoder* decoder, int fromLine, int toLine) const;
+    void writeLinesToStream(TerminalCharacterDecoder *decoder, int fromLine, int toLine) const;
 
     /**
      * Copies the selected characters, set using @see setSelBeginXY and @see setSelExtentXY
@@ -487,9 +491,8 @@ public:
      * @param trimTrailingSpaces Specifies whether trailing spaces should be
      * trimmed in the returned text.
      */
-    void writeSelectionToStream(TerminalCharacterDecoder* decoder , bool
-                                preserveLineBreaks = true,
-                                bool trimTrailingSpaces = false) const;
+    void writeSelectionToStream(TerminalCharacterDecoder *decoder, bool
+                                preserveLineBreaks = true, bool trimTrailingSpaces = false) const;
 
     /**
      * Checks if the text between from and to is inside the current
@@ -520,7 +523,7 @@ public:
      *
      * @param enable true to apply the attribute to the current line or false to remove it
      */
-    void setLineProperty(LineProperty property , bool enable);
+    void setLineProperty(LineProperty property, bool enable);
 
     /**
      * Returns the number of lines that the image has been scrolled up or down by,
@@ -566,20 +569,23 @@ public:
       * Fills the buffer @p dest with @p count instances of the default (ie. blank)
       * Character style.
       */
-    static void fillWithDefaultChar(Character* dest, int count);
+    static void fillWithDefaultChar(Character *dest, int count);
 
-    void setCurrentTerminalDisplay(TerminalDisplay* display) {
+    void setCurrentTerminalDisplay(TerminalDisplay *display)
+    {
         _currentTerminalDisplay = display;
     }
 
-    TerminalDisplay* currentTerminalDisplay() {
+    TerminalDisplay *currentTerminalDisplay()
+    {
         return _currentTerminalDisplay;
     }
 
-    QSet<ushort> usedExtendedChars() const {
+    QSet<ushort> usedExtendedChars() const
+    {
         QSet<ushort> result;
         for (int i = 0; i < _lines; ++i) {
-            const ImageLine& il = _screenLines[i];
+            const ImageLine &il = _screenLines[i];
             for (int j = 0; j < il.length(); ++j) {
                 if (il[j].rendition & RE_EXTENDED_CHAR) {
                     result << il[j].character;
@@ -603,12 +609,8 @@ private:
     //count - the number of characters on the line to copy
     //decoder - a decoder which converts terminal characters (an Character array) into text
     //appendNewLine - if true a new line character (\n) is appended to the end of the line
-    int  copyLineToStream(int line,
-                          int start,
-                          int count,
-                          TerminalCharacterDecoder* decoder,
-                          bool appendNewLine,
-                          bool preserveLineBreaks,
+    int  copyLineToStream(int line, int start, int count, TerminalCharacterDecoder *decoder,
+                          bool appendNewLine, bool preserveLineBreaks,
                           bool trimTrailingSpaces) const;
 
     //fills a section of the screen image with the character 'c'
@@ -628,33 +630,33 @@ private:
     void scrollDown(int from, int i);
 
     //when we handle scroll commands, we need to know which screenwindow will scroll
-    TerminalDisplay* _currentTerminalDisplay;
+    TerminalDisplay *_currentTerminalDisplay;
 
     void addHistLine();
 
     void initTabStops();
 
     void updateEffectiveRendition();
-    void reverseRendition(Character& p) const;
+    void reverseRendition(Character &p) const;
 
     bool isSelectionValid() const;
     // copies text from 'startIndex' to 'endIndex' to a stream
     // startIndex and endIndex are positions generated using the loc(x,y) macro
-    void writeToStream(TerminalCharacterDecoder* decoder, int startIndex,
-                       int endIndex, bool preserveLineBreaks = true, bool trimTrailingSpaces = false) const;
+    void writeToStream(TerminalCharacterDecoder *decoder, int startIndex, int endIndex,
+                       bool preserveLineBreaks = true, bool trimTrailingSpaces = false) const;
     // copies 'count' lines from the screen buffer into 'dest',
     // starting from 'startLine', where 0 is the first line in the screen buffer
-    void copyFromScreen(Character* dest, int startLine, int count) const;
+    void copyFromScreen(Character *dest, int startLine, int count) const;
     // copies 'count' lines from the history buffer into 'dest',
     // starting from 'startLine', where 0 is the first line in the history
-    void copyFromHistory(Character* dest, int startLine, int count) const;
+    void copyFromHistory(Character *dest, int startLine, int count) const;
 
     // screen image ----------------
     int _lines;
     int _columns;
 
     typedef QVector<Character> ImageLine;      // [0..columns]
-    ImageLine*          _screenLines;    // [lines]
+    ImageLine *_screenLines;             // [lines]
     int _screenLinesSize;                // _screenLines.size()
 
     int _scrolledLines;
@@ -665,7 +667,7 @@ private:
     QVarLengthArray<LineProperty, 64> _lineProperties;
 
     // history buffer ---------------
-    HistoryScroll* _history;
+    HistoryScroll *_history;
 
     // cursor location
     int _cuX;
@@ -702,13 +704,14 @@ private:
     class SavedState
     {
     public:
-        SavedState()
-            : cursorColumn(0)
-            , cursorLine(0)
-            , rendition(0)
-            , foreground(CharacterColor())
-            , background(CharacterColor())
-        {}
+        SavedState() :
+            cursorColumn(0),
+            cursorLine(0),
+            rendition(0),
+            foreground(CharacterColor()),
+            background(CharacterColor())
+        {
+        }
 
         int cursorColumn;
         int cursorLine;

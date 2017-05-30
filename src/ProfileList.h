@@ -33,9 +33,7 @@ class QAction;
 class QActionGroup;
 class QKeySequence;
 
-namespace Konsole
-{
-
+namespace Konsole {
 /**
  * ProfileList provides a list of actions which represent session profiles
  * that a SessionManager can create a session from.
@@ -60,17 +58,17 @@ public:
      * in the session manager should be added to the actions
      * @param parent The parent GUI object
      */
-    ProfileList(bool addShortcuts , QObject* parent);
+    ProfileList(bool addShortcuts, QObject *parent);
 
     /**
      * Returns a list of actions representing profiles
      *
      * The user-data associated with each action is the corresponding profile
      */
-    QList<QAction*> actions();
+    QList<QAction *> actions();
 
     /** TODO: Document me */
-    void syncWidgetActions(QWidget* widget, bool sync);
+    void syncWidgetActions(QWidget *widget, bool sync);
 Q_SIGNALS:
     /**
      * Emitted when the user selects an action from the list.
@@ -81,25 +79,25 @@ Q_SIGNALS:
     /**
      * Emitted when the list of actions changes.
      */
-    void actionsChanged(const QList<QAction*>& actions);
+    void actionsChanged(const QList<QAction *> &actions);
 
 private Q_SLOTS:
-    void triggered(QAction* action);
+    void triggered(QAction *action);
     void favoriteChanged(Profile::Ptr profile, bool isFavorite);
     void profileChanged(Profile::Ptr profile);
-    void shortcutChanged(Profile::Ptr profile, const QKeySequence& sequence);
+    void shortcutChanged(Profile::Ptr profile, const QKeySequence &sequence);
 
 private:
-    QAction* actionForProfile(Profile::Ptr profile) const;
-    void updateAction(QAction* action , Profile::Ptr profile);
+    QAction *actionForProfile(Profile::Ptr profile) const;
+    void updateAction(QAction *action, Profile::Ptr profile);
     void updateEmptyAction();
 
-    QActionGroup*   _group;
+    QActionGroup *_group;
     bool _addShortcuts;
 
     // action to show when the list is empty
-    QAction* _emptyListAction;
-    QSet<QWidget*> _registeredWidgets;
+    QAction *_emptyListAction;
+    QSet<QWidget *> _registeredWidgets;
 };
 }
 

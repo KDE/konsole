@@ -33,8 +33,7 @@ class QSignalMapper;
 class KActionCollection;
 class KConfigGroup;
 
-namespace Konsole
-{
+namespace Konsole {
 class ColorScheme;
 class IncrementalSearchBar;
 class Session;
@@ -74,31 +73,31 @@ public:
      * View-related actions defined in 'konsoleui.rc' are created
      * and added to the specified @p collection.
      */
-    ViewManager(QObject* parent , KActionCollection* collection);
+    ViewManager(QObject *parent, KActionCollection *collection);
     ~ViewManager() Q_DECL_OVERRIDE;
 
     /**
      * Creates a new view to display the output from and deliver input to @p session.
      * Constructs a new container to hold the views if no container has yet been created.
      */
-    void createView(Session* session);
+    void createView(Session *session);
 
     /**
      * Applies the view-specific settings associated with specified @p profile
      * to the terminal display @p view.
      */
-    void applyProfileToView(TerminalDisplay* view , const Profile::Ptr profile);
+    void applyProfileToView(TerminalDisplay *view, const Profile::Ptr profile);
 
     /**
      * Return the main widget for the view manager which
      * holds all of the views managed by this ViewManager instance.
      */
-    QWidget* widget() const;
+    QWidget *widget() const;
 
     /**
      * Returns the view manager's active view.
      */
-    QWidget* activeView() const;
+    QWidget *activeView() const;
 
     /**
      * Returns the list of view properties for views in the active container.
@@ -107,7 +106,7 @@ public:
      * displayed in the view, such as title, current directory and
      * associated icon.
      */
-    QList<ViewProperties*> viewProperties() const;
+    QList<ViewProperties *> viewProperties() const;
 
     /**
      * This enum describes the available types of navigation widget
@@ -153,55 +152,58 @@ public:
      * Returns the controller for the active view.  activeViewChanged() is
      * emitted when this changes.
      */
-    SessionController* activeViewController() const;
+    SessionController *activeViewController() const;
 
     /**
      * Returns the search bar.
      */
-    IncrementalSearchBar* searchBar() const;
+    IncrementalSearchBar *searchBar() const;
 
     /**
      * Session management
      */
-    void saveSessions(KConfigGroup& group);
-    void restoreSessions(const KConfigGroup& group);
+    void saveSessions(KConfigGroup &group);
+    void restoreSessions(const KConfigGroup &group);
 
     void setNavigationVisibility(int visibility);
     void setNavigationPosition(int position);
     void setNavigationBehavior(int behavior);
-    void setNavigationStyleSheet(const QString& styleSheet);
+    void setNavigationStyleSheet(const QString &styleSheet);
     void setShowQuickButtons(bool show);
 
     int managerId() const;
 
     /** Returns a list of sessions in this ViewManager */
-    QList<Session*> sessions() { return _sessionMap.values(); }
+    QList<Session *> sessions()
+    {
+        return _sessionMap.values();
+    }
 
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
     void empty();
 
     /** Emitted when a session is detached from a view owned by this ViewManager */
-    void viewDetached(Session* session);
+    void viewDetached(Session *session);
 
     /**
      * Emitted when the active view changes.
      * @param controller The controller associated with the active view
      */
-    void activeViewChanged(SessionController* controller);
+    void activeViewChanged(SessionController *controller);
 
     /**
      * Emitted when the current session needs unplugged from factory().
      * @param controller The controller associated with the active view
      */
-    void unplugController(SessionController* controller);
+    void unplugController(SessionController *controller);
 
     /**
      * Emitted when the list of view properties ( as returned by viewProperties() ) changes.
      * This occurs when views are added to or removed from the active container, or
      * if the active container is changed.
      */
-    void viewPropertiesChanged(const QList<ViewProperties*>& propertiesList);
+    void viewPropertiesChanged(const QList<ViewProperties *> &propertiesList);
 
     /**
      * Emitted when the number of views containers changes.  This is used to disable or
@@ -237,7 +239,7 @@ public Q_SLOTS:
      * @param directory the working directory where the session is
      * started.
      */
-    Q_SCRIPTABLE int newSession(const QString& profile, const QString& directory);
+    Q_SCRIPTABLE int newSession(const QString &profile, const QString &directory);
 
     // TODO: its semantic is application-wide. Move it to more appropriate place
     // DBus slot that returns the name of default profile
@@ -290,7 +292,7 @@ private Q_SLOTS:
     // views associated with the session
     void sessionFinished();
     // called when one view has been destroyed
-    void viewDestroyed(QWidget* widget);
+    void viewDestroyed(QWidget *widget);
 
     // controller detects when an associated view is given the focus
     // and emits a signal.  ViewManager listens for that signal
@@ -299,7 +301,7 @@ private Q_SLOTS:
 
     // called when the active view in a ViewContainer changes, so
     // that we can plug the appropriate actions into the UI
-    void viewActivated(QWidget* view);
+    void viewActivated(QWidget *view);
 
     // called when "Next View" shortcut is activated
     void nextView();
@@ -315,12 +317,12 @@ private Q_SLOTS:
 
     // called when the views in a container owned by this view manager
     // changes
-    void containerViewsChanged(QObject* container);
+    void containerViewsChanged(QObject *container);
 
     // called when a profile changes
     void profileChanged(Profile::Ptr profile);
 
-    void updateViewsForSession(Session* session);
+    void updateViewsForSession(Session *session);
 
     // moves active view to the left
     void moveActiveViewLeft();
@@ -331,52 +333,54 @@ private Q_SLOTS:
     void switchToView(int index);
 
     // called when a SessionController gains focus
-    void controllerChanged(SessionController* controller);
+    void controllerChanged(SessionController *controller);
 
     // called when a ViewContainer requests a view be
     // moved
-    void containerMoveViewRequest(int index, int id, bool& success, TabbedViewContainer* sourceTabbedContainer);
+    void containerMoveViewRequest(int index, int id, bool &success,
+                                  TabbedViewContainer *sourceTabbedContainer);
 
-    void detachView(ViewContainer* container, QWidget* view);
+    void detachView(ViewContainer *container, QWidget *view);
 
-    void closeTabFromContainer(ViewContainer* container, QWidget* view);
+    void closeTabFromContainer(ViewContainer *container, QWidget *view);
 
 private:
-    void createView(Session* session, ViewContainer* container, int index);
-    static const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile);
+    void createView(Session *session, ViewContainer *container, int index);
+    static const ColorScheme *colorSchemeForProfile(const Profile::Ptr profile);
 
     void setupActions();
 
     // takes a view from a view container owned by a different manager and places it in
     // newContainer owned by this manager
-    void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TerminalDisplay* view);
+    void takeView(ViewManager *otherManager, ViewContainer *otherContainer,
+                  ViewContainer *newContainer, TerminalDisplay *view);
     void splitView(Qt::Orientation orientation);
 
     // creates a new container which can hold terminal displays
-    ViewContainer* createContainer();
+    ViewContainer *createContainer();
     // removes a container and emits appropriate signals
-    void removeContainer(ViewContainer* container);
+    void removeContainer(ViewContainer *container);
 
     // creates a new terminal display
     // the 'session' is used so that the terminal display's random seed
     // can be set to something which depends uniquely on that session
-    TerminalDisplay* createTerminalDisplay(Session* session = 0);
+    TerminalDisplay *createTerminalDisplay(Session *session = 0);
 
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information
     // about the session ( such as title and associated icon ) to the display.
-    SessionController* createController(Session* session , TerminalDisplay* display);
+    SessionController *createController(Session *session, TerminalDisplay *display);
 
 private:
-    QPointer<ViewSplitter>          _viewSplitter;
-    QPointer<SessionController>     _pluggedController;
+    QPointer<ViewSplitter> _viewSplitter;
+    QPointer<SessionController> _pluggedController;
 
-    QHash<TerminalDisplay*, Session*> _sessionMap;
+    QHash<TerminalDisplay *, Session *> _sessionMap;
 
-    KActionCollection*                  _actionCollection;
-    QSignalMapper*                      _containerSignalMapper;
+    KActionCollection *_actionCollection;
+    QSignalMapper *_containerSignalMapper;
 
-    NavigationMethod  _navigationMethod;
+    NavigationMethod _navigationMethod;
 
     ViewContainer::NavigationVisibility _navigationVisibility;
     ViewContainer::NavigationPosition _navigationPosition;
