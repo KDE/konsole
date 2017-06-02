@@ -201,8 +201,9 @@ install(TARGETS kdeinit_konsole konsole
 
 ### Embedded Konsole KPart
 
-set(konsolepart_PART_SRCS Part.cpp)
-
+set(konsolepart_PART_SRCS Part.cpp
+   settings/ProfileSettings.cpp)
+kconfig_add_kcfg_files(konsolepart_PART_SRCS settings/KonsoleSettings.kcfgc)
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 generate_export_header(konsolepart BASE_NAME konsole)
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)

@@ -92,6 +92,8 @@ public Q_SLOTS:
      */
     QStringList profileNameList() const;
 
+    void showManageProfilesDialog(QWidget* parent);
+
     /**
      * Shows the dialog used to edit the profile used by the active session.  The
      * dialog will be non-modal and will delete itself when it is closed.
@@ -193,7 +195,6 @@ private:
 private:
     ViewManager *_viewManager;
     SessionController *_pluggedController;
-    QAction *_manageProfilesAction;
 };
 }
 

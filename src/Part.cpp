@@ -30,6 +30,8 @@
 #include <QAction>
 #include <KActionCollection>
 #include <KPluginFactory>
+#include <KLocalizedString>
+#include <KConfigDialog>
 
 // Konsole
 #include "EditProfileDialog.h"
@@ -40,6 +42,8 @@
 #include "ProfileManager.h"
 #include "TerminalDisplay.h"
 #include "ViewManager.h"
+#include "KonsoleSettings.h"
+#include "settings/ProfileSettings.h"
 
 using namespace Konsole;
 
@@ -50,7 +54,6 @@ Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
     : KParts::ReadOnlyPart(parent)
     , _viewManager(0)
     , _pluggedController(0)
-    , _manageProfilesAction(0)
 {
     // create view widget
     _viewManager = new ViewManager(this, actionCollection());
@@ -261,6 +264,24 @@ void Part::overrideTerminalShortcut(QKeyEvent* event, bool& override)
 void Part::activeViewTitleChanged(ViewProperties* properties)
 {
     emit setWindowCaption(properties->title());
+}
+
+void Part::showManageProfilesDialog(QWidget* parent)
+{
+    if (KConfigDialog::showDialog(QStringLiteral("settings"))) {
+        return;
+    }
+
+    KConfigDialog *settingsDialog = new KConfigDialog(parent, QStringLiteral("settings"), KonsoleSettings::self());
+    settingsDialog->setFaceType(KPageDialog::Tabbed);
+
+    auto profileSettings = new ProfileSettings(settingsDialog);
+    settingsDialog->addPage(profileSettings,
+                            i18nc("@title Preferences page name",
+                                  "Profiles"),
+                            QStringLiteral("configure"));
+
+    settingsDialog->show();
 }
 
 void Part::showEditCurrentProfileDialog(QWidget* parent)
