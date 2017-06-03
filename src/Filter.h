@@ -21,8 +21,8 @@
 #define FILTER_H
 
 // Qt
-#include <QFileInfo>
 #include <QList>
+#include <QSet>
 #include <QObject>
 #include <QPointer>
 #include <QStringList>
@@ -298,7 +298,7 @@ public:
     {
     public:
         HotSpot(int startLine, int startColumn, int endLine, int endColumn,
-                const QStringList &capturedTexts, const QFileInfo &file);
+                const QStringList &capturedTexts, const QString &filePath);
         ~HotSpot() Q_DECL_OVERRIDE;
 
         QList<QAction *> actions() Q_DECL_OVERRIDE;
@@ -310,16 +310,20 @@ public:
 
     private:
         FilterObject *_fileObject;
-        QFileInfo _file;
+        QString _filePath;
     };
 
     explicit FileFilter(Session *session);
+
+    void process() Q_DECL_OVERRIDE;
 
 protected:
     RegExpFilter::HotSpot *newHotSpot(int, int, int, int, const QStringList &) Q_DECL_OVERRIDE;
 
 private:
     QPointer<Session> _session;
+    QString _dirPath;
+    QSet<QString> _currentFiles;
 };
 
 class FilterObject : public QObject

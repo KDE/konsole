@@ -541,28 +541,73 @@ RegExpFilter::HotSpot *FileFilter::newHotSpot(int startLine, int startColumn, in
         return nullptr;
     }
 
-    FileFilter::HotSpot *spot = nullptr;
-    QDir dir(_session->currentWorkingDirectory());
-    QFileInfo file(dir, capturedTexts.first());
-    if (file.exists()) {
-        spot = new FileFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts, file);
+    QString filename = capturedTexts.first();
+    if (filename.startsWith(QLatin1Char('\'')) && filename.endsWith(QLatin1Char('\''))) {
+        filename.remove(0, 1);
+        filename.chop(1);
     }
-    return spot;
+
+    if (!_currentFiles.contains(filename)) {
+        return nullptr;
+    }
+
+    return new FileFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts, _dirPath + filename);
+}
+
+void FileFilter::process()
+{
+    const QDir dir(_session->currentWorkingDirectory());
+    _dirPath = dir.canonicalPath() + QLatin1Char('/');
+    _currentFiles = dir.entryList(QDir::Files).toSet();
+
+    RegExpFilter::process();
 }
 
 FileFilter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endColumn,
-                             const QStringList &capturedTexts, const QFileInfo &file) :
+                             const QStringList &capturedTexts, const QString &filePath) :
     RegExpFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts),
     _fileObject(new FilterObject(this)),
-    _file(file)
+    _filePath(filePath)
 {
     setType(Link);
 }
 
 void FileFilter::HotSpot::activate(QObject *)
 {
-    QString file = _file.absoluteFilePath();
-    new KRun(QUrl::fromLocalFile(file), QApplication::activeWindow());
+    new KRun(QUrl::fromLocalFile(_filePath), QApplication::activeWindow());
+}
+
+static QString createFileRegex(const QStringList &patterns, const QString &filePattern, const QString pathPattern)
+{
+    QStringList suffixes = patterns.filter(QRegularExpression(QStringLiteral("^\\*") + filePattern + QStringLiteral("$")));
+    QStringList prefixes = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("+\\*$")));
+    QStringList fullNames = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("$")));
+
+    suffixes.replaceInStrings(QStringLiteral("*"), QStringLiteral(""));
+    suffixes.replaceInStrings(QStringLiteral("."), QStringLiteral("\\."));
+    prefixes.replaceInStrings(QStringLiteral("*"), QStringLiteral(""));
+    prefixes.replaceInStrings(QStringLiteral("."), QStringLiteral("\\."));
+
+    return QString(
+                // Optional path in front
+                pathPattern + QLatin1Char('?') +
+                // Files with known suffixes
+                QLatin1Char('(') +
+                  filePattern +
+                    QLatin1String("(") +
+                      suffixes.join(QLatin1Char('|')) +
+                    QLatin1String(")") +
+                // Files with known prefixes
+                QLatin1String("|") +
+                    QLatin1String("(") +
+                      prefixes.join(QLatin1Char('|')) +
+                    QLatin1String(")") +
+                    filePattern +
+                // Files with known full names
+                QLatin1String("|") +
+                    fullNames.join(QLatin1Char('|')) +
+                QLatin1String(")")
+    );
 }
 
 FileFilter::FileFilter(Session *session) :
@@ -576,14 +621,18 @@ FileFilter::FileFilter(Session *session) :
     }
 
     patterns.removeDuplicates();
-    patterns.replaceInStrings(QLatin1String("*"), QLatin1String(""));
-    patterns = patterns.filter(QRegularExpression(QStringLiteral("^[A-Za-z0-9\\._-]+$")));
-    patterns.replaceInStrings(QLatin1String("."), QLatin1String("\\."));
 
-    QString regex(QStringLiteral("(\\b|/)+[A-Za-z0-9\\._\\-/]+("));
-    regex.append(patterns.join(QLatin1String("|")));
-    regex.append(QLatin1String("){1}\\b"));
-    setRegExp(QRegularExpression(regex));
+    QString validFilename(QLatin1String("[A-Za-z0-9\\._\\-]+"));
+    QString pathRegex(QLatin1String("([A-Za-z0-9\\._\\-/]+/)"));
+    QString noSpaceRegex = QLatin1String("\\b") + createFileRegex(patterns, validFilename, pathRegex) + QLatin1String("\\b");
+
+    validFilename = QLatin1String("[A-Za-z0-9\\._\\- ]+");
+    pathRegex = QLatin1String("([A-Za-z0-9\\._\\-/ ]+/)");
+    QString spaceRegex = QLatin1String("'") + createFileRegex(patterns, validFilename, pathRegex) + QLatin1String("'");
+
+    QString regex = QLatin1String("(") + noSpaceRegex + QLatin1String(")|(") + spaceRegex + QLatin1String(")");
+
+    setRegExp(QRegularExpression(regex, QRegularExpression::DontCaptureOption));
 }
 
 FileFilter::HotSpot::~HotSpot()
