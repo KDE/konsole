@@ -75,6 +75,14 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
         needToDeleteQApplication = true;
     }
 
+#if defined(Q_OS_LINUX)
+    // Workaround for https://bugreports.qt.io/browse/QTBUG-48344
+    // See also https://bugs.kde.org/show_bug.cgi?id=230184
+    // The Qt glib event loop doesn't let timers deliver events if there are a
+    // lot of other events.
+    qputenv("QT_NO_GLIB", "1");
+#endif
+
     auto app = new QApplication(argc, argv);
 
     // enable high dpi support
