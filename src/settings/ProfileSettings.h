@@ -35,8 +35,7 @@ class QShowEvent;
 class QStandardItem;
 class QStandardItemModel;
 
-namespace Konsole
-{
+namespace Konsole {
 /**
  * A dialog which lists the available types of profiles and allows
  * the user to add new profiles, and remove or edit existing
@@ -51,7 +50,7 @@ class ProfileSettings : public QWidget, private Ui::ProfileSettings
 
 public:
     /** Constructs a new profile type with the specified parent. */
-    explicit ProfileSettings(QWidget* parent = 0);
+    explicit ProfileSettings(QWidget *parent = 0);
     ~ProfileSettings() Q_DECL_OVERRIDE;
 
     /**
@@ -66,7 +65,7 @@ public:
     void setShortcutEditorVisible(bool visible);
 
 protected:
-    void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
+    void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     void slotAccepted();
@@ -77,11 +76,11 @@ private Q_SLOTS:
     void moveUpSelected();
     void moveDownSelected();
 
-    void itemDataChanged(QStandardItem* item);
+    void itemDataChanged(QStandardItem *item);
 
     // enables or disables Edit/Delete/Set as Default buttons when the
     // selection changes
-    void tableSelectionChanged(const QItemSelection&);
+    void tableSelectionChanged(const QItemSelection &);
 
     void updateFavoriteStatus(Profile::Ptr profile, bool favorite);
 
@@ -97,13 +96,13 @@ private:
     // updates the font of the items to match
     // their default / non-default profile status
     void updateDefaultItem();
-    void updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem*>& items) const;
+    void updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem *> &items) const;
     // updates the profile table to be in sync with the
     // session manager
     void populateTable();
     int rowForProfile(const Profile::Ptr profile) const;
 
-    QStandardItemModel* _sessionModel;
+    QStandardItemModel *_sessionModel;
 
     static const int ProfileNameColumn = 0;
     static const int FavoriteStatusColumn = 1;
@@ -115,8 +114,8 @@ private:
 class StyledBackgroundPainter
 {
 public:
-    static void drawBackground(QPainter* painter, const QStyleOptionViewItem& option,
-                               const QModelIndex& index);
+    static void drawBackground(QPainter *painter, const QStyleOptionViewItem &option,
+                               const QModelIndex &index);
 };
 
 class FavoriteItemDelegate : public QStyledItemDelegate
@@ -124,12 +123,12 @@ class FavoriteItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    explicit FavoriteItemDelegate(QObject* parent = 0);
+    explicit FavoriteItemDelegate(QObject *parent = 0);
 
-    bool editorEvent(QEvent* event, QAbstractItemModel* model,
-                             const QStyleOptionViewItem& option, const QModelIndex& index) Q_DECL_OVERRIDE;
-    void paint(QPainter* painter, const QStyleOptionViewItem& option,
-                       const QModelIndex& index) const Q_DECL_OVERRIDE;
+    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option,
+                     const QModelIndex &index) Q_DECL_OVERRIDE;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+               const QModelIndex &index) const Q_DECL_OVERRIDE;
 };
 
 class ShortcutItemDelegate : public QStyledItemDelegate
@@ -137,21 +136,21 @@ class ShortcutItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    explicit ShortcutItemDelegate(QObject* parent = 0);
+    explicit ShortcutItemDelegate(QObject *parent = 0);
 
-    void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const Q_DECL_OVERRIDE;
-    QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
-                                  const QModelIndex& index) const Q_DECL_OVERRIDE;
-    void paint(QPainter* painter, const QStyleOptionViewItem& option,
-                       const QModelIndex& index) const Q_DECL_OVERRIDE;
+    void setModelData(QWidget *editor, QAbstractItemModel *model,
+                      const QModelIndex &index) const Q_DECL_OVERRIDE;
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                          const QModelIndex &index) const Q_DECL_OVERRIDE;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+               const QModelIndex &index) const Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
-    void editorModified(const QKeySequence& keys);
+    void editorModified(const QKeySequence &keys);
 
 private:
-    mutable QSet<QWidget*> _modifiedEditors;
+    mutable QSet<QWidget *> _modifiedEditors;
     mutable QSet<QModelIndex> _itemsBeingEdited;
 };
 }
 #endif // MANAGEPROFILESDIALOG_H
-

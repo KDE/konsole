@@ -23,19 +23,15 @@
 
 #include "ui_TabBarSettings.h"
 
-namespace Konsole
-{
-
+namespace Konsole {
 class TabBarSettings : public QWidget, private Ui::TabBarSettings
 {
     Q_OBJECT
 
 public:
-    explicit TabBarSettings(QWidget* parent = 0);
+    explicit TabBarSettings(QWidget *parent = 0);
     ~TabBarSettings() Q_DECL_OVERRIDE;
-
 };
-
 }
 
 #endif

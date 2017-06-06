@@ -23,21 +23,18 @@
 
 #include "ui_GeneralSettings.h"
 
-namespace Konsole
-{
-
+namespace Konsole {
 class GeneralSettings : public QWidget, private Ui::GeneralSettings
 {
     Q_OBJECT
 
 public:
-    explicit GeneralSettings(QWidget* aParent = 0);
+    explicit GeneralSettings(QWidget *aParent = 0);
     ~GeneralSettings() Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
     void slotEnableAllMessages();
 };
-
 }
 
 #endif

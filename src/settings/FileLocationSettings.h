@@ -23,19 +23,15 @@
 
 #include "ui_FileLocationSettings.h"
 
-namespace Konsole
-{
-
+namespace Konsole {
 class FileLocationSettings : public QWidget, private Ui::FileLocationSettings
 {
     Q_OBJECT
 
 public:
-    explicit FileLocationSettings(QWidget* aParent = 0);
+    explicit FileLocationSettings(QWidget *aParent = 0);
     ~FileLocationSettings() Q_DECL_OVERRIDE;
-
 };
-
 }
 
 #endif
