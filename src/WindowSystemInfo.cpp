@@ -24,4 +24,3 @@
 using Konsole::WindowSystemInfo;
 
 bool WindowSystemInfo::HAVE_TRANSPARENCY = false;
-

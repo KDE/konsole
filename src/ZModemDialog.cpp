@@ -29,8 +29,8 @@
 
 using Konsole::ZModemDialog;
 
-ZModemDialog::ZModemDialog(QWidget* aParent, bool modal, const QString& caption)
-    : QDialog(aParent)
+ZModemDialog::ZModemDialog(QWidget *aParent, bool modal, const QString &caption) :
+    QDialog(aParent)
 {
     setObjectName(QStringLiteral("zmodem_progress"));
     setModal(modal);
@@ -54,11 +54,14 @@ ZModemDialog::ZModemDialog(QWidget* aParent, bool modal, const QString& caption)
     _textEdit->setReadOnly(true);
     mainLayout->addWidget(_textEdit);
 
-    connect(this, &Konsole::ZModemDialog::user1Clicked, this, &Konsole::ZModemDialog::slotUser1Clicked);
-    connect(mButtonBox->button(QDialogButtonBox::Close), &QPushButton::clicked, this, &Konsole::ZModemDialog::slotClose);
+    connect(this, &Konsole::ZModemDialog::user1Clicked, this,
+            &Konsole::ZModemDialog::slotUser1Clicked);
+    connect(mButtonBox->button(QDialogButtonBox::Close),
+            &QPushButton::clicked, this,
+            &Konsole::ZModemDialog::slotClose);
 }
 
-void ZModemDialog::addProgressText(const QString& text)
+void ZModemDialog::addProgressText(const QString &text)
 {
     QTextCursor currentCursor = _textEdit->textCursor();
 
