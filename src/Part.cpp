@@ -268,11 +268,12 @@ void Part::activeViewTitleChanged(ViewProperties* properties)
 
 void Part::showManageProfilesDialog(QWidget* parent)
 {
-    if (KConfigDialog::showDialog(QStringLiteral("settings"))) {
+    // Make sure this string is unique among all users of this part
+    if (KConfigDialog::showDialog(QStringLiteral("konsolepartmanageprofiles"))) {
         return;
     }
 
-    KConfigDialog *settingsDialog = new KConfigDialog(parent, QStringLiteral("settings"), KonsoleSettings::self());
+    KConfigDialog *settingsDialog = new KConfigDialog(parent, QStringLiteral("konsolepartmanageprofiles"), KonsoleSettings::self());
     settingsDialog->setFaceType(KPageDialog::Tabbed);
 
     auto profileSettings = new ProfileSettings(settingsDialog);
