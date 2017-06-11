@@ -50,17 +50,17 @@
 
 using namespace Konsole;
 
-ViewContainer::ViewContainer(NavigationPosition position , QObject* parent)
-    : QObject(parent)
-    , _navigationVisibility(AlwaysShowNavigation)
-    , _navigationPosition(position)
-    , _searchBar(0)
+ViewContainer::ViewContainer(NavigationPosition position, QObject *parent) :
+    QObject(parent),
+    _navigationVisibility(AlwaysShowNavigation),
+    _navigationPosition(position),
+    _searchBar(0)
 {
 }
 
 ViewContainer::~ViewContainer()
 {
-    foreach(QWidget * view , _views) {
+    foreach (QWidget *view, _views) {
         disconnect(view, &QWidget::destroyed, this, &Konsole::ViewContainer::viewDestroyed);
     }
 
@@ -70,15 +70,21 @@ ViewContainer::~ViewContainer()
 
     emit destroyed(this);
 }
-void ViewContainer::moveViewWidget(int , int) {}
+
+void ViewContainer::moveViewWidget(int, int)
+{
+}
+
 void ViewContainer::setFeatures(Features features)
 {
     _features = features;
 }
+
 ViewContainer::Features ViewContainer::features() const
 {
     return _features;
 }
+
 void ViewContainer::moveActiveView(MoveDirection direction)
 {
     const int currentIndex = _views.indexOf(activeView());
@@ -86,16 +92,16 @@ void ViewContainer::moveActiveView(MoveDirection direction)
 
     switch (direction) {
     case MoveViewLeft:
-        newIndex = qMax(currentIndex - 1 , 0);
+        newIndex = qMax(currentIndex - 1, 0);
         break;
     case MoveViewRight:
-        newIndex = qMin(currentIndex + 1 , _views.count() - 1);
+        newIndex = qMin(currentIndex + 1, _views.count() - 1);
         break;
     }
 
     Q_ASSERT(newIndex != -1);
 
-    moveViewWidget(currentIndex , newIndex);
+    moveViewWidget(currentIndex, newIndex);
 
     _views.swap(currentIndex, newIndex);
 
@@ -107,10 +113,12 @@ void ViewContainer::setNavigationVisibility(NavigationVisibility mode)
     _navigationVisibility = mode;
     navigationVisibilityChanged(mode);
 }
+
 ViewContainer::NavigationPosition ViewContainer::navigationPosition() const
 {
     return _navigationPosition;
 }
+
 void ViewContainer::setNavigationPosition(NavigationPosition position)
 {
     // assert that this position is supported
@@ -120,10 +128,12 @@ void ViewContainer::setNavigationPosition(NavigationPosition position)
 
     navigationPositionChanged(position);
 }
+
 QList<ViewContainer::NavigationPosition> ViewContainer::supportedNavigationPositions() const
 {
     return QList<NavigationPosition>() << NavigationPositionTop;
 }
+
 ViewContainer::NavigationVisibility ViewContainer::navigationVisibility() const
 {
     return _navigationVisibility;
@@ -134,12 +144,13 @@ void ViewContainer::setNavigationTextMode(bool mode)
     navigationTextModeChanged(mode);
 }
 
-void ViewContainer::addView(QWidget* view , ViewProperties* item, int index)
+void ViewContainer::addView(QWidget *view, ViewProperties *item, int index)
 {
-    if (index == -1)
+    if (index == -1) {
         _views.append(view);
-    else
+    } else {
         _views.insert(index, view);
+    }
 
     _navigation[view] = item;
 
@@ -149,41 +160,44 @@ void ViewContainer::addView(QWidget* view , ViewProperties* item, int index)
 
     emit viewAdded(view, item);
 }
-void ViewContainer::viewDestroyed(QObject* object)
+
+void ViewContainer::viewDestroyed(QObject *object)
 {
-    QWidget* widget = qobject_cast<QWidget*>(object);
+    QWidget *widget = qobject_cast<QWidget *>(object);
     forgetView(widget);
 }
 
-void ViewContainer::forgetView(QWidget* view)
+void ViewContainer::forgetView(QWidget *view)
 {
     _views.removeAll(view);
     _navigation.remove(view);
 
     emit viewRemoved(view);
 
-    if (_views.count() == 0)
+    if (_views.count() == 0) {
         emit empty(this);
+    }
 }
 
-void ViewContainer::removeView(QWidget* view)
+void ViewContainer::removeView(QWidget *view)
 {
     disconnect(view, &QWidget::destroyed, this, &Konsole::ViewContainer::viewDestroyed);
     removeViewWidget(view);
     forgetView(view);
 }
 
-const QList<QWidget*> ViewContainer::views() const
+const QList<QWidget *> ViewContainer::views() const
 {
     return _views;
 }
 
-IncrementalSearchBar* ViewContainer::searchBar()
+IncrementalSearchBar *ViewContainer::searchBar()
 {
     if (_searchBar == nullptr) {
         _searchBar = new IncrementalSearchBar(0);
         _searchBar->setVisible(false);
-        connect(_searchBar, &Konsole::IncrementalSearchBar::destroyed, this, &Konsole::ViewContainer::searchBarDestroyed);
+        connect(_searchBar, &Konsole::IncrementalSearchBar::destroyed, this,
+                &Konsole::ViewContainer::searchBarDestroyed);
     }
     return _searchBar;
 }
@@ -195,17 +209,19 @@ void ViewContainer::searchBarDestroyed()
 
 void ViewContainer::activateNextView()
 {
-    QWidget* active = activeView();
+    QWidget *active = activeView();
 
     int index = _views.indexOf(active);
 
-    if (index == -1)
+    if (index == -1) {
         return;
+    }
 
-    if (index == _views.count() - 1)
+    if (index == _views.count() - 1) {
         index = 0;
-    else
+    } else {
         index++;
+    }
 
     setActiveView(_views.at(index));
 }
@@ -217,54 +233,64 @@ void ViewContainer::activateLastView()
 
 void ViewContainer::activatePreviousView()
 {
-    QWidget* active = activeView();
+    QWidget *active = activeView();
 
     int index = _views.indexOf(active);
 
-    if (index == -1)
+    if (index == -1) {
         return;
+    }
 
-    if (index == 0)
+    if (index == 0) {
         index = _views.count() - 1;
-    else
+    } else {
         index--;
+    }
 
     setActiveView(_views.at(index));
 }
 
-ViewProperties* ViewContainer::viewProperties(QWidget* widget) const
+ViewProperties *ViewContainer::viewProperties(QWidget *widget) const
 {
     Q_ASSERT(_navigation.contains(widget));
 
     return _navigation[widget];
 }
 
-QList<QWidget*> ViewContainer::widgetsForItem(ViewProperties* item) const
+QList<QWidget *> ViewContainer::widgetsForItem(ViewProperties *item) const
 {
     return _navigation.keys(item);
 }
 
-TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManager* connectedViewManager, QObject* parent)
-    : ViewContainer(position, parent)
-    , _connectedViewManager(connectedViewManager)
-    , _contextMenuTabIndex(0)
+TabbedViewContainer::TabbedViewContainer(NavigationPosition position,
+                                         ViewManager *connectedViewManager, QObject *parent) :
+    ViewContainer(position, parent),
+    _connectedViewManager(connectedViewManager),
+    _contextMenuTabIndex(0)
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
-    connect(_stackWidget.data(), &QStackedWidget::widgetRemoved, this, &TabbedViewContainer::widgetRemoved);
+    connect(_stackWidget.data(), &QStackedWidget::widgetRemoved, this,
+            &TabbedViewContainer::widgetRemoved);
 
     // The tab bar
     _tabBar = new ViewContainerTabBar(_containerWidget, this);
     _tabBar->setContextMenuPolicy(Qt::CustomContextMenu);
     _tabBar->setSupportedMimeType(ViewProperties::mimeType());
 
-    connect(_tabBar, &Konsole::ViewContainerTabBar::currentChanged, this, &Konsole::TabbedViewContainer::currentTabChanged);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::tabBarDoubleClicked, this, &Konsole::TabbedViewContainer::tabDoubleClicked);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::querySourceIndex, this, &Konsole::TabbedViewContainer::querySourceIndex);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::moveViewRequest, this, &Konsole::TabbedViewContainer::onMoveViewRequest);
-    connect(_tabBar, &Konsole::ViewContainerTabBar::customContextMenuRequested, this, &Konsole::TabbedViewContainer::openTabContextMenu);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::currentChanged, this,
+            &Konsole::TabbedViewContainer::currentTabChanged);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::tabBarDoubleClicked, this,
+            &Konsole::TabbedViewContainer::tabDoubleClicked);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::querySourceIndex, this,
+            &Konsole::TabbedViewContainer::querySourceIndex);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::moveViewRequest, this,
+            &Konsole::TabbedViewContainer::onMoveViewRequest);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::customContextMenuRequested, this,
+            &Konsole::TabbedViewContainer::openTabContextMenu);
 
-    connect(_tabBar, &Konsole::ViewContainerTabBar::initiateDrag, this, &Konsole::TabbedViewContainer::startTabDrag);
+    connect(_tabBar, &Konsole::ViewContainerTabBar::initiateDrag, this,
+            &Konsole::TabbedViewContainer::startTabDrag);
 
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(_tabBar);
@@ -290,13 +316,16 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
     _newTabButton->setFocusPolicy(Qt::NoFocus);
     _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("tab-new")));
     _newTabButton->setToolTip(i18nc("@info:tooltip", "Create new tab"));
-    _newTabButton->setWhatsThis(i18nc("@info:whatsthis", "Create a new tab. Press and hold to select profile from menu"));
+    _newTabButton->setWhatsThis(i18nc("@info:whatsthis",
+                                      "Create a new tab. Press and hold to select profile from menu"));
     _newTabButton->adjustSize();
 
     auto profileMenu = new QMenu(_newTabButton);
     auto profileList = new ProfileList(false, profileMenu);
     profileList->syncWidgetActions(profileMenu, true);
-    connect(profileList, &Konsole::ProfileList::profileSelected, this, static_cast<void(TabbedViewContainer::*)(Profile::Ptr)>(&Konsole::TabbedViewContainer::newViewRequest));
+    connect(profileList, &Konsole::ProfileList::profileSelected, this,
+            static_cast<void (TabbedViewContainer::*)(Profile::Ptr)>(&Konsole::TabbedViewContainer::
+                                                                     newViewRequest));
     setNewViewMenu(profileMenu);
 
     _closeTabButton = new QToolButton(_containerWidget);
@@ -311,8 +340,10 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
     _newTabButton->setHidden(true);
     _closeTabButton->setHidden(true);
 
-    connect(_newTabButton, &QToolButton::clicked, this, static_cast<void(TabbedViewContainer::*)()>(&Konsole::TabbedViewContainer::newViewRequest));
-    connect(_closeTabButton, &QToolButton::clicked, this, &Konsole::TabbedViewContainer::closeCurrentTab);
+    connect(_newTabButton, &QToolButton::clicked, this,
+            static_cast<void (TabbedViewContainer::*)()>(&Konsole::TabbedViewContainer::newViewRequest));
+    connect(_closeTabButton, &QToolButton::clicked, this,
+            &Konsole::TabbedViewContainer::closeCurrentTab);
 
     // Combine tab bar and 'new/close tab' buttons
     _tabBarLayout = new QHBoxLayout;
@@ -334,14 +365,17 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position, ViewManage
 
     _containerWidget->setLayout(_layout);
 }
-void TabbedViewContainer::setNewViewMenu(QMenu* menu)
+
+void TabbedViewContainer::setNewViewMenu(QMenu *menu)
 {
     _newTabButton->setMenu(menu);
 }
+
 ViewContainer::Features TabbedViewContainer::supportedFeatures() const
 {
     return QuickNewView | QuickCloseView;
 }
+
 void TabbedViewContainer::setFeatures(Features features)
 {
     ViewContainer::setFeatures(features);
@@ -367,6 +401,7 @@ void TabbedViewContainer::setTabBarVisible(bool visible)
     _tabBar->setVisible(visible);
     updateVisibilityOfQuickButtons();
 }
+
 QList<ViewContainer::NavigationPosition> TabbedViewContainer::supportedNavigationPositions() const
 {
     return QList<NavigationPosition>() << NavigationPositionTop << NavigationPositionBottom;
@@ -397,27 +432,34 @@ void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
         Q_ASSERT(false); // should never reach here
     }
 }
+
 void TabbedViewContainer::navigationVisibilityChanged(NavigationVisibility mode)
 {
-    if (mode == AlwaysShowNavigation && _tabBar->isHidden())
+    if (mode == AlwaysShowNavigation && _tabBar->isHidden()) {
         setTabBarVisible(true);
+    }
 
-    if (mode == AlwaysHideNavigation && !_tabBar->isHidden())
+    if (mode == AlwaysHideNavigation && !_tabBar->isHidden()) {
         setTabBarVisible(false);
+    }
 
-    if (mode == ShowNavigationAsNeeded)
+    if (mode == ShowNavigationAsNeeded) {
         dynamicTabBarVisibility();
+    }
 }
+
 void TabbedViewContainer::dynamicTabBarVisibility()
 {
-    if (_tabBar->count() > 1 && _tabBar->isHidden())
+    if (_tabBar->count() > 1 && _tabBar->isHidden()) {
         setTabBarVisible(true);
+    }
 
-    if (_tabBar->count() < 2 && !_tabBar->isHidden())
+    if (_tabBar->count() < 2 && !_tabBar->isHidden()) {
         setTabBarVisible(false);
+    }
 }
 
-void TabbedViewContainer::setStyleSheet(const QString& styleSheet)
+void TabbedViewContainer::setStyleSheet(const QString &styleSheet)
 {
     _tabBar->setStyleSheet(styleSheet);
 }
@@ -437,8 +479,9 @@ void TabbedViewContainer::navigationTextModeChanged(bool useTextWidth)
 
 TabbedViewContainer::~TabbedViewContainer()
 {
-    if (!_containerWidget.isNull())
+    if (!_containerWidget.isNull()) {
         _containerWidget->deleteLater();
+    }
 }
 
 void TabbedViewContainer::startTabDrag(int tab)
@@ -457,7 +500,7 @@ void TabbedViewContainer::startTabDrag(int tab)
     drag->setHotSpot(mappedPos);
 
     const int id = viewProperties(views()[tab])->identifier();
-    QWidget* view = views()[tab];
+    QWidget *view = views()[tab];
     drag->setMimeData(ViewProperties::createMimeData(id));
 
     // start dragging
@@ -498,29 +541,32 @@ void TabbedViewContainer::startTabDrag(int tab)
         //
         // It feels unnatural to do the detach when this is only one tab in the
         // tabbar
-        if (_tabBar->count() > 1)
+        if (_tabBar->count() > 1) {
             emit detachTab(this, view);
+        }
     }
     delete drag;
 }
 
-void TabbedViewContainer::querySourceIndex(const QDropEvent* event, int& sourceIndex)
+void TabbedViewContainer::querySourceIndex(const QDropEvent *event, int &sourceIndex)
 {
     const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
 
-    const QList<QWidget*> viewList = views();
+    const QList<QWidget *> viewList = views();
     const int count = viewList.count();
     int index = -1;
     for (index = 0; index < count; index++) {
         const int id = viewProperties(viewList[index])->identifier();
-        if (id == droppedId)
+        if (id == droppedId) {
             break;
+        }
     }
 
     sourceIndex = index;
 }
 
-void TabbedViewContainer::onMoveViewRequest(int index, const QDropEvent* event ,bool& success, TabbedViewContainer* sourceTabbedContainer)
+void TabbedViewContainer::onMoveViewRequest(int index, const QDropEvent *event, bool &success,
+                                            TabbedViewContainer *sourceTabbedContainer)
 {
     const int droppedId = ViewProperties::decodeMimeData(event->mimeData());
     emit moveViewRequest(index, droppedId, success, sourceTabbedContainer);
@@ -528,10 +574,11 @@ void TabbedViewContainer::onMoveViewRequest(int index, const QDropEvent* event ,
 
 void TabbedViewContainer::tabDoubleClicked(int index)
 {
-    if (index >= 0)
+    if (index >= 0) {
         renameTab(index);
-    else
+    } else {
         emit newViewRequest();
+    }
 }
 
 void TabbedViewContainer::renameTab(int index)
@@ -539,19 +586,21 @@ void TabbedViewContainer::renameTab(int index)
     viewProperties(views()[index])->rename();
 }
 
-void TabbedViewContainer::openTabContextMenu(const QPoint& pos)
+void TabbedViewContainer::openTabContextMenu(const QPoint &pos)
 {
-    if (pos.isNull())
+    if (pos.isNull()) {
         return;
+    }
 
     _contextMenuTabIndex = _tabBar->tabAt(pos);
-    if (_contextMenuTabIndex < 0)
+    if (_contextMenuTabIndex < 0) {
         return;
+    }
 
 #if defined(ENABLE_DETACHING)
     // Enable 'Detach Tab' menu item only if there is more than 1 tab
     // Note: the code is coupled with that action's position within the menu
-    QAction* detachAction = _contextPopupMenu->actions().at(0);
+    QAction *detachAction = _contextPopupMenu->actions().at(0);
     detachAction->setEnabled(_tabBar->count() > 1);
 #endif
 
@@ -574,7 +623,7 @@ void TabbedViewContainer::tabContextMenuRenameTab()
     renameTab(_contextMenuTabIndex);
 }
 
-void TabbedViewContainer::moveViewWidget(int fromIndex , int toIndex)
+void TabbedViewContainer::moveViewWidget(int fromIndex, int toIndex)
 {
     QString text = _tabBar->tabText(fromIndex);
     QIcon icon = _tabBar->tabIcon(fromIndex);
@@ -582,21 +631,24 @@ void TabbedViewContainer::moveViewWidget(int fromIndex , int toIndex)
     // FIXME (KF5?)- This will lose properties of the tab other than
     // their text and icon when moving them
 
-    QWidget* widget = _stackWidget->widget(fromIndex);
+    QWidget *widget = _stackWidget->widget(fromIndex);
     // this also removes the tab from the tab bar
     _stackWidget->removeWidget(widget);
     _stackWidget->insertWidget(toIndex, widget);
 
     _tabBar->insertTab(toIndex, icon, text);
 
-    if (navigationVisibility() == ShowNavigationAsNeeded)
+    if (navigationVisibility() == ShowNavigationAsNeeded) {
         dynamicTabBarVisibility();
+    }
 }
+
 void TabbedViewContainer::currentTabChanged(int index)
 {
     _stackWidget->setCurrentIndex(index);
-    if (_stackWidget->widget(index) != nullptr)
+    if (_stackWidget->widget(index) != nullptr) {
         emit activeViewChanged(_stackWidget->widget(index));
+    }
 
     // clear activity indicators
     setTabActivity(index, false);
@@ -604,21 +656,24 @@ void TabbedViewContainer::currentTabChanged(int index)
 
 void TabbedViewContainer::wheelScrolled(int delta)
 {
-    if (delta < 0)
+    if (delta < 0) {
         activateNextView();
-    else
+    } else {
         activatePreviousView();
+    }
 }
 
-QWidget* TabbedViewContainer::containerWidget() const
+QWidget *TabbedViewContainer::containerWidget() const
 {
     return _containerWidget;
 }
-QWidget* TabbedViewContainer::activeView() const
+
+QWidget *TabbedViewContainer::activeView() const
 {
     return _stackWidget->currentWidget();
 }
-void TabbedViewContainer::setActiveView(QWidget* view)
+
+void TabbedViewContainer::setActiveView(QWidget *view)
 {
     const int index = _stackWidget->indexOf(view);
 
@@ -627,26 +682,32 @@ void TabbedViewContainer::setActiveView(QWidget* view)
     _stackWidget->setCurrentWidget(view);
     _tabBar->setCurrentIndex(index);
 }
-void TabbedViewContainer::addViewWidget(QWidget* view , int index)
+
+void TabbedViewContainer::addViewWidget(QWidget *view, int index)
 {
     _stackWidget->insertWidget(index, view);
     _stackWidget->updateGeometry();
 
-    ViewProperties* item = viewProperties(view);
-    connect(item, &Konsole::ViewProperties::titleChanged, this , &Konsole::TabbedViewContainer::updateTitle);
-    connect(item, &Konsole::ViewProperties::iconChanged, this , &Konsole::TabbedViewContainer::updateIcon);
-    connect(item, &Konsole::ViewProperties::activity, this , &Konsole::TabbedViewContainer::updateActivity);
+    ViewProperties *item = viewProperties(view);
+    connect(item, &Konsole::ViewProperties::titleChanged, this,
+            &Konsole::TabbedViewContainer::updateTitle);
+    connect(item, &Konsole::ViewProperties::iconChanged, this,
+            &Konsole::TabbedViewContainer::updateIcon);
+    connect(item, &Konsole::ViewProperties::activity, this,
+            &Konsole::TabbedViewContainer::updateActivity);
 
-    _tabBar->insertTab(index , item->icon() , item->title());
+    _tabBar->insertTab(index, item->icon(), item->title());
 
-    if (navigationVisibility() == ShowNavigationAsNeeded)
+    if (navigationVisibility() == ShowNavigationAsNeeded) {
         dynamicTabBarVisibility();
+    }
 }
 
-void TabbedViewContainer::removeViewWidget(QWidget* view)
+void TabbedViewContainer::removeViewWidget(QWidget *view)
 {
-    if (_stackWidget == nullptr)
+    if (_stackWidget == nullptr) {
         return;
+    }
     _stackWidget->removeWidget(view);
 }
 
@@ -656,13 +717,14 @@ void TabbedViewContainer::widgetRemoved(int index)
 
     _tabBar->removeTab(index);
 
-    if (navigationVisibility() == ShowNavigationAsNeeded)
+    if (navigationVisibility() == ShowNavigationAsNeeded) {
         dynamicTabBarVisibility();
+    }
 }
 
-void TabbedViewContainer::setTabActivity(int index , bool activity)
+void TabbedViewContainer::setTabActivity(int index, bool activity)
 {
-    const QPalette& palette = _tabBar->palette();
+    const QPalette &palette = _tabBar->palette();
     KColorScheme colorScheme(palette.currentColorGroup());
     const QColor colorSchemeActive = colorScheme.foreground(KColorScheme::ActiveText).color();
 
@@ -671,13 +733,14 @@ void TabbedViewContainer::setTabActivity(int index , bool activity)
 
     QColor color = activity ? activityColor : QColor();
 
-    if (color != _tabBar->tabTextColor(index))
+    if (color != _tabBar->tabTextColor(index)) {
         _tabBar->setTabTextColor(index, color);
+    }
 }
 
-void TabbedViewContainer::updateActivity(ViewProperties* item)
+void TabbedViewContainer::updateActivity(ViewProperties *item)
 {
-    foreach(QWidget* widget, widgetsForItem(item)) {
+    foreach (QWidget *widget, widgetsForItem(item)) {
         const int index = _stackWidget->indexOf(widget);
 
         if (index != _stackWidget->currentIndex()) {
@@ -686,34 +749,35 @@ void TabbedViewContainer::updateActivity(ViewProperties* item)
     }
 }
 
-void TabbedViewContainer::updateTitle(ViewProperties* item)
+void TabbedViewContainer::updateTitle(ViewProperties *item)
 {
-    foreach(QWidget* widget, widgetsForItem(item)) {
+    foreach (QWidget *widget, widgetsForItem(item)) {
         const int index = _stackWidget->indexOf(widget);
         QString tabText = item->title();
 
-        _tabBar->setTabToolTip(index , tabText);
+        _tabBar->setTabToolTip(index, tabText);
 
         // To avoid having & replaced with _ (shortcut indicator)
         tabText.replace(QLatin1Char('&'), QLatin1String("&&"));
-        _tabBar->setTabText(index , tabText);
-    }
-}
-void TabbedViewContainer::updateIcon(ViewProperties* item)
-{
-    foreach(QWidget* widget, widgetsForItem(item)) {
-        const int index = _stackWidget->indexOf(widget);
-        _tabBar->setTabIcon(index , item->icon());
+        _tabBar->setTabText(index, tabText);
     }
 }
 
-ViewManager* TabbedViewContainer::connectedViewManager()
+void TabbedViewContainer::updateIcon(ViewProperties *item)
+{
+    foreach (QWidget *widget, widgetsForItem(item)) {
+        const int index = _stackWidget->indexOf(widget);
+        _tabBar->setTabIcon(index, item->icon());
+    }
+}
+
+ViewManager *TabbedViewContainer::connectedViewManager()
 {
     return _connectedViewManager;
 }
 
-StackedViewContainer::StackedViewContainer(QObject* parent)
-    : ViewContainer(NavigationPositionTop, parent)
+StackedViewContainer::StackedViewContainer(QObject *parent) :
+    ViewContainer(NavigationPositionTop, parent)
 {
     _containerWidget = new QWidget;
     auto layout = new QVBoxLayout(_containerWidget);
@@ -725,30 +789,38 @@ StackedViewContainer::StackedViewContainer(QObject* parent)
     layout->addWidget(_stackWidget);
     layout->setContentsMargins(0, 0, 0, 0);
 }
+
 StackedViewContainer::~StackedViewContainer()
 {
-    if (!_containerWidget.isNull())
+    if (!_containerWidget.isNull()) {
         _containerWidget->deleteLater();
+    }
 }
-QWidget* StackedViewContainer::containerWidget() const
+
+QWidget *StackedViewContainer::containerWidget() const
 {
     return _containerWidget;
 }
-QWidget* StackedViewContainer::activeView() const
+
+QWidget *StackedViewContainer::activeView() const
 {
     return _stackWidget->currentWidget();
 }
-void StackedViewContainer::setActiveView(QWidget* view)
+
+void StackedViewContainer::setActiveView(QWidget *view)
 {
     _stackWidget->setCurrentWidget(view);
 }
-void StackedViewContainer::addViewWidget(QWidget* view , int)
+
+void StackedViewContainer::addViewWidget(QWidget *view, int)
 {
     _stackWidget->addWidget(view);
 }
-void StackedViewContainer::removeViewWidget(QWidget* view)
+
+void StackedViewContainer::removeViewWidget(QWidget *view)
 {
-    if (_stackWidget == nullptr)
+    if (_stackWidget == nullptr) {
         return;
+    }
     _stackWidget->removeWidget(view);
 }
