@@ -38,12 +38,12 @@
 using Konsole::ViewContainerTabBar;
 using Konsole::TabbedViewContainer;
 
-ViewContainerTabBar::ViewContainerTabBar(QWidget* parent, TabbedViewContainer* container)
-    : QTabBar(parent)
-    , _dropIndicator(0)
-    , _dropIndicatorIndex(-1)
-    , _drawIndicatorDisabled(false)
-    , _connectedContainer(container)
+ViewContainerTabBar::ViewContainerTabBar(QWidget *parent, TabbedViewContainer *container) :
+    QTabBar(parent),
+    _dropIndicator(0),
+    _dropIndicatorIndex(-1),
+    _drawIndicatorDisabled(false),
+    _connectedContainer(container)
 {
     setDrawBase(true);
     setDocumentMode(true);
@@ -57,8 +57,8 @@ ViewContainerTabBar::ViewContainerTabBar(QWidget* parent, TabbedViewContainer* c
     _mousePressTimer = new QElapsedTimer();
 
     setWhatsThis(xi18nc("@info:whatsthis",
-                       "<title>Tab Bar</title>"
-                       "<para>The tab bar allows you to switch and move tabs. You can double-click a tab to change its name.</para>"));
+                        "<title>Tab Bar</title>"
+                        "<para>The tab bar allows you to switch and move tabs. You can double-click a tab to change its name.</para>"));
 }
 
 ViewContainerTabBar::~ViewContainerTabBar()
@@ -66,7 +66,7 @@ ViewContainerTabBar::~ViewContainerTabBar()
     delete _mousePressTimer;
 }
 
-void ViewContainerTabBar::mousePressEvent(QMouseEvent* event)
+void ViewContainerTabBar::mousePressEvent(QMouseEvent *event)
 {
     _mousePressTimer->start();
 
@@ -76,7 +76,7 @@ void ViewContainerTabBar::mousePressEvent(QMouseEvent* event)
     QTabBar::mousePressEvent(event);
 }
 
-void ViewContainerTabBar::mouseMoveEvent(QMouseEvent* event)
+void ViewContainerTabBar::mouseMoveEvent(QMouseEvent *event)
 {
     if (event->buttons() == Qt::LeftButton) {
         QPoint dragPos = _dragStart - event->pos();
@@ -91,26 +91,27 @@ void ViewContainerTabBar::mouseMoveEvent(QMouseEvent* event)
     QTabBar::mouseMoveEvent(event);
 }
 
-
-void ViewContainerTabBar::dragEnterEvent(QDragEnterEvent* event)
+void ViewContainerTabBar::dragEnterEvent(QDragEnterEvent *event)
 {
-    if (event->mimeData()->hasFormat(_supportedMimeType) &&
-            event->source() != 0)
+    if (event->mimeData()->hasFormat(_supportedMimeType)
+        && event->source() != 0) {
         event->acceptProposedAction();
+    }
 }
 
-void ViewContainerTabBar::dragLeaveEvent(QDragLeaveEvent*)
+void ViewContainerTabBar::dragLeaveEvent(QDragLeaveEvent *)
 {
     setDropIndicator(-1);
 }
 
-void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent* event)
+void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent *event)
 {
     if (event->mimeData()->hasFormat(_supportedMimeType)
-            && event->source() != 0) {
+        && event->source() != 0) {
         int index = dropIndex(event->pos());
-        if (index == -1)
+        if (index == -1) {
             index = count();
+        }
 
         setDropIndicator(index, proposedDropIsSameTab(event));
 
@@ -118,7 +119,7 @@ void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent* event)
     }
 }
 
-void ViewContainerTabBar::dropEvent(QDropEvent* event)
+void ViewContainerTabBar::dropEvent(QDropEvent *event)
 {
     setDropIndicator(-1);
 
@@ -136,31 +137,35 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
     const int index = dropIndex(event->pos());
     bool success = false;
 
-    ViewContainerTabBar* sourceContainerTabBar = qobject_cast<ViewContainerTabBar*>(event->source());
+    ViewContainerTabBar *sourceContainerTabBar
+        = qobject_cast<ViewContainerTabBar *>(event->source());
 
     // check if the moved tab is the last of source view.
     if (sourceContainerTabBar->count() == 1) {
-        TabbedViewContainer* sourceTabbedContainer = sourceContainerTabBar->connectedTabbedViewContainer();
+        TabbedViewContainer *sourceTabbedContainer
+            = sourceContainerTabBar->connectedTabbedViewContainer();
         emit moveViewRequest(index, event, success, sourceTabbedContainer);
     } else {
         emit moveViewRequest(index, event, success, NULL);
     }
 
-    if (success)
+    if (success) {
         event->accept();
-    else
+    } else {
         event->ignore();
+    }
 }
 
-TabbedViewContainer* ViewContainerTabBar::connectedTabbedViewContainer()
+TabbedViewContainer *ViewContainerTabBar::connectedTabbedViewContainer()
 {
     return _connectedContainer;
 }
 
 void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 {
-    if ((parentWidget() == nullptr) || _dropIndicatorIndex == index)
+    if ((parentWidget() == nullptr) || _dropIndicatorIndex == index) {
         return;
+    }
 
     _dropIndicatorIndex = index;
     const int ARROW_SIZE = 32;
@@ -174,7 +179,8 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 
         QIcon::Mode drawMode = drawDisabled ? QIcon::Disabled : QIcon::Normal;
         const QString iconName = north ? QStringLiteral("arrow-up") : QStringLiteral("arrow-down");
-        _dropIndicator->setPixmap(QIcon::fromTheme(iconName).pixmap(ARROW_SIZE, ARROW_SIZE, drawMode));
+        _dropIndicator->setPixmap(QIcon::fromTheme(iconName).pixmap(ARROW_SIZE, ARROW_SIZE,
+                                                                    drawMode));
         _drawIndicatorDisabled = drawDisabled;
     }
 
@@ -186,15 +192,17 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
     const QRect rect = tabRect(index < count() ? index : index - 1);
 
     QPoint pos;
-    if (index < count())
+    if (index < count()) {
         pos = rect.topLeft();
-    else
+    } else {
         pos = rect.topRight();
+    }
 
-    if (north)
+    if (north) {
         pos.ry() += ARROW_SIZE;
-    else
+    } else {
         pos.ry() -= ARROW_SIZE;
+    }
 
     pos.rx() -= ARROW_SIZE / 2;
 
@@ -202,33 +210,37 @@ void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
     _dropIndicator->show();
 }
 
-void ViewContainerTabBar::setSupportedMimeType(const QString& mimeType)
+void ViewContainerTabBar::setSupportedMimeType(const QString &mimeType)
 {
     _supportedMimeType = mimeType;
 }
 
-int ViewContainerTabBar::dropIndex(const QPoint& pos) const
+int ViewContainerTabBar::dropIndex(const QPoint &pos) const
 {
     int tab = tabAt(pos);
-    if (tab < 0)
+    if (tab < 0) {
         return tab;
+    }
 
     // pick the closest tab boundary
     QRect rect = tabRect(tab);
-    if ((pos.x() - rect.left()) > (rect.width() / 2))
+    if ((pos.x() - rect.left()) > (rect.width() / 2)) {
         tab++;
+    }
 
-    if (tab == count())
+    if (tab == count()) {
         return -1;
+    }
 
     return tab;
 }
 
-bool ViewContainerTabBar::proposedDropIsSameTab(const QDropEvent* event) const
+bool ViewContainerTabBar::proposedDropIsSameTab(const QDropEvent *event) const
 {
     const bool sameTabBar = event->source() == this;
-    if (!sameTabBar)
+    if (!sameTabBar) {
         return false;
+    }
 
     const int index = dropIndex(event->pos());
     int sourceIndex = -1;
@@ -237,7 +249,6 @@ bool ViewContainerTabBar::proposedDropIsSameTab(const QDropEvent* event) const
     const bool sourceAndDropAreLast = sourceIndex == count() - 1 && index == -1;
     return sourceIndex == index || sourceIndex == index - 1 || sourceAndDropAreLast;
 }
-
 
 QPixmap ViewContainerTabBar::dragDropPixmap(int tab)
 {
