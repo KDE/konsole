@@ -530,12 +530,6 @@ void Screen::reset()
     saveCursor();
 }
 
-void Screen::clear()
-{
-    clearEntireScreen();
-    home();
-}
-
 void Screen::backspace()
 {
     _cuX = qMin(_columns - 1, _cuX); // nowrap!
@@ -801,12 +795,6 @@ void Screen::setCursorY(int y)
     if (y == 0) y = 1; // Default
     y -= 1; // Adjust
     _cuY = qMax(0, qMin(_lines  - 1, y + (getMode(MODE_Origin) ? _topMargin : 0)));
-}
-
-void Screen::home()
-{
-    _cuX = 0;
-    _cuY = 0;
 }
 
 void Screen::toStartOfLine()
