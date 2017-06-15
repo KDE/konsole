@@ -257,7 +257,7 @@ void ViewManager::setupActions()
     connect(nextContainerAction, &QAction::triggered, this, &Konsole::ViewManager::nextContainer);
     _viewSplitter->addAction(nextContainerAction);
 
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
     collection->setDefaultShortcut(moveViewLeftAction,
                                    Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketLeft);
 #else
@@ -267,7 +267,7 @@ void ViewManager::setupActions()
             &Konsole::ViewManager::moveActiveViewLeft);
     _viewSplitter->addAction(moveViewLeftAction);
 
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
     collection->setDefaultShortcut(moveViewRightAction,
                                    Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketRight);
 #else

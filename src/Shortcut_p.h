@@ -29,7 +29,7 @@ namespace Konsole {
  * Platform-specific main shortcut "opcode":
  */
 enum Modifier {
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
     ACCEL = Qt::META
 #else
     ACCEL = Qt::CTRL

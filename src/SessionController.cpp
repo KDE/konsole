@@ -541,7 +541,7 @@ void SessionController::setupCommonActions()
 
     // Copy and Paste
     action = KStandardAction::copy(this, SLOT(copy()), collection);
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
     // Don't use the Konsole::ACCEL const here, we really want the Command key (Qt::META)
     // TODO: check what happens if we leave it to Qt to assign the default?
     collection->setDefaultShortcut(action, Qt::META + Qt::Key_C);
@@ -553,7 +553,7 @@ void SessionController::setupCommonActions()
 
     action = KStandardAction::paste(this, SLOT(paste()), collection);
     QList<QKeySequence> pasteShortcut;
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
     pasteShortcut.append(QKeySequence(Qt::META + Qt::Key_V));
     // No Insert key on Mac keyboards
 #else
@@ -564,7 +564,7 @@ void SessionController::setupCommonActions()
 
     action = collection->addAction(QStringLiteral("paste-selection"), this, SLOT(pasteFromX11Selection()));
     action->setText(i18n("Paste Selection"));
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
     collection->setDefaultShortcut(action, Qt::META + Qt::SHIFT + Qt::Key_V);
 #else
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Insert);
@@ -585,7 +585,7 @@ void SessionController::setupCommonActions()
 
     action = KStandardAction::saveAs(this, SLOT(saveHistory()), collection);
     action->setText(i18n("Save Output &As..."));
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
     action->setShortcut(QKeySequence(Qt::META + Qt::Key_S));
 #endif
 
@@ -752,7 +752,7 @@ void SessionController::setupExtraActions()
     action->setData(SIGUSR2);
     sendSignalActions->addAction(action);
 
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
     collection->setDefaultShortcut(_findAction, Qt::META + Qt::Key_F);
     collection->setDefaultShortcut(_findNextAction, Qt::META + Qt::Key_G);
     collection->setDefaultShortcut(_findPreviousAction, Qt::META + Qt::SHIFT + Qt::Key_G);
