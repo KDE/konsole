@@ -800,7 +800,7 @@ protected:
         struct proc_vnodepathinfo vpi;
         const int nb = proc_pidinfo(aPid, PROC_PIDVNODEPATHINFO, 0, &vpi, sizeof(vpi));
         if (nb == sizeof(vpi)) {
-            setCurrentDir(QString(vpi.pvi_cdir.vip_path));
+            setCurrentDir(QString::fromUtf8(vpi.pvi_cdir.vip_path));
             return true;
         }
         return false;
@@ -827,8 +827,8 @@ private:
                 delete [] kInfoProc;
                 return false;
             } else {
-                const QString deviceNumber = QString(devname(((&kInfoProc->kp_eproc)->e_tdev), S_IFCHR));
-                const QString fullDeviceName =  QString("/dev/") + deviceNumber.rightJustified(3, '0');
+                const QString deviceNumber = QString::fromUtf8(devname(((&kInfoProc->kp_eproc)->e_tdev), S_IFCHR));
+                const QString fullDeviceName =  QStringLiteral("/dev/") + deviceNumber.rightJustified(3, QLatin1Char('0'));
                 delete [] kInfoProc;
 
                 const QByteArray deviceName = fullDeviceName.toLatin1();
@@ -852,7 +852,7 @@ private:
                     return false;
 
                 // The foreground program is the first one
-                setName(QString(kInfoProc->kp_proc.p_comm));
+                setName(QString::fromUtf8(kInfoProc->kp_proc.p_comm));
 
                 delete [] kInfoProc;
             }
