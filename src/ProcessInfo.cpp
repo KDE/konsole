@@ -579,7 +579,7 @@ protected:
         if (sysctl(managementInfoBase, 4, buf, &len, NULL, 0) == -1)
             return false;
 
-        setCurrentDir(buf);
+        setCurrentDir(QString::fromUtf8(buf));
 
         return true;
 #else
@@ -593,7 +593,7 @@ protected:
 
         for (int i = 0; i < numrecords; ++i) {
             if (info[i].kf_fd == KF_FD_TYPE_CWD) {
-                setCurrentDir(info[i].kf_path);
+                setCurrentDir(QString::fromUtf8(info[i].kf_path));
 
                 free(info);
                 return true;
@@ -627,13 +627,13 @@ private:
         }
 
 #if defined(HAVE_OS_DRAGONFLYBSD)
-        setName(kInfoProc->kp_comm);
+        setName(QString::fromUtf8(kInfoProc->kp_comm));
         setPid(kInfoProc->kp_pid);
         setParentPid(kInfoProc->kp_ppid);
         setForegroundPid(kInfoProc->kp_pgid);
         setUserId(kInfoProc->kp_uid);
 #else
-        setName(kInfoProc->ki_comm);
+        setName(QString::fromUtf8(kInfoProc->ki_comm));
         setPid(kInfoProc->ki_pid);
         setParentPid(kInfoProc->ki_ppid);
         setForegroundPid(kInfoProc->ki_pgid);
@@ -662,7 +662,7 @@ private:
 
         // len holds the length of the string
         QString qargs = QString::fromLocal8Bit(args,len);
-        foreach (const QString& value, qargs.split('\u0000'))
+        foreach (const QString& value, qargs.split(QLatin1Char('\u0000')))
         {
             if (!value.isEmpty())
             {
@@ -698,7 +698,7 @@ protected:
             return false;
         }
 
-        setCurrentDir(buf);
+        setCurrentDir(QString::fromUtf8(buf));
         return true;
     }
 
