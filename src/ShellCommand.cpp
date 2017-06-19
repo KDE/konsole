@@ -25,67 +25,78 @@
 
 using Konsole::ShellCommand;
 
-ShellCommand::ShellCommand(const QString& aCommand)
+ShellCommand::ShellCommand(const QString &aCommand)
 {
     _arguments = KShell::splitArgs(aCommand);
 }
-ShellCommand::ShellCommand(const QString& aCommand, const QStringList& aArguments)
+
+ShellCommand::ShellCommand(const QString &aCommand, const QStringList &aArguments)
 {
     _arguments = aArguments;
 
-    if (!_arguments.isEmpty())
+    if (!_arguments.isEmpty()) {
         _arguments[0] = aCommand;
+    }
 }
+
 QString ShellCommand::fullCommand() const
 {
     QStringList quotedArgs(_arguments);
     for (int i = 0; i < quotedArgs.count(); i++) {
         QString arg = quotedArgs.at(i);
         bool hasSpace = false;
-        for (int j = 0; j < arg.count(); j++)
-            if (arg[j].isSpace())
+        for (int j = 0; j < arg.count(); j++) {
+            if (arg[j].isSpace()) {
                 hasSpace = true;
-        if (hasSpace)
+            }
+        }
+        if (hasSpace) {
             quotedArgs[i] = QLatin1Char('\"') + arg + QLatin1Char('\"');
+        }
     }
     return quotedArgs.join(QLatin1Char(' '));
 }
+
 QString ShellCommand::command() const
 {
-    if (!_arguments.isEmpty())
+    if (!_arguments.isEmpty()) {
         return _arguments[0];
-    else
+    } else {
         return QString();
+    }
 }
+
 QStringList ShellCommand::arguments() const
 {
     return _arguments;
 }
-QStringList ShellCommand::expand(const QStringList& items)
+
+QStringList ShellCommand::expand(const QStringList &items)
 {
     QStringList result;
     result.reserve(items.size());
 
-    foreach(const QString & item , items) {
+    foreach (const QString &item, items) {
         result << expand(item);
     }
 
     return result;
 }
-QString ShellCommand::expand(const QString& text)
+
+QString ShellCommand::expand(const QString &text)
 {
     QString result = text;
     expandEnv(result);
     return result;
 }
 
-bool ShellCommand::isValidEnvCharacter(const QChar& ch)
+bool ShellCommand::isValidEnvCharacter(const QChar &ch)
 {
     const ushort code = ch.unicode();
     return isValidLeadingEnvCharacter(ch) || ('0' <= code && code <= '9');
 }
 
-bool ShellCommand::isValidLeadingEnvCharacter(const QChar& ch)
+bool ShellCommand::isValidLeadingEnvCharacter(const QChar &ch)
 {
     const ushort code = ch.unicode();
     return (code == '_') || ('A' <= code && code <= 'Z');
@@ -97,7 +108,7 @@ bool ShellCommand::isValidLeadingEnvCharacter(const QChar& ch)
  * Expand environment variables in text. Escaped '$' characters are ignored.
  * Return true if any variables were expanded
  */
-bool ShellCommand::expandEnv(QString& text)
+bool ShellCommand::expandEnv(QString &text)
 {
     const QLatin1Char dollarChar('$');
     const QLatin1Char backslashChar('\\');
