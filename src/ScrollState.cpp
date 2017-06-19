@@ -23,12 +23,13 @@
 
 using namespace Konsole;
 
-void ScrollState::addWheelEvent(const QWheelEvent* wheel)
+void ScrollState::addWheelEvent(const QWheelEvent *wheel)
 {
-    if ((wheel->angleDelta().y() != 0) && (wheel->pixelDelta().y() == 0))
+    if ((wheel->angleDelta().y() != 0) && (wheel->pixelDelta().y() == 0)) {
         _remainingScrollPixel = 0;
-    else
+    } else {
         _remainingScrollPixel += wheel->pixelDelta().y();
+    }
     _remainingScrollAngle += wheel->angleDelta().y();
 }
 
@@ -42,8 +43,9 @@ int ScrollState::consumeLegacySteps(int stepsize)
 {
     int steps = _remainingScrollAngle / stepsize;
     _remainingScrollAngle -= steps * stepsize;
-    if (steps != 0)
+    if (steps != 0) {
         _remainingScrollPixel = 0;
+    }
     return steps;
 }
 
@@ -60,4 +62,3 @@ int ScrollState::consumeSteps(int pixelStepSize, int angleStepSize)
     _remainingScrollPixel = 0;
     return steps;
 }
-
