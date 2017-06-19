@@ -50,24 +50,27 @@ using namespace Konsole;
 K_PLUGIN_FACTORY(KonsolePartFactory, registerPlugin<Konsole::Part>();)
 K_EXPORT_PLUGIN(KonsolePartFactory("konsole"))
 
-Part::Part(QWidget* parentWidget , QObject* parent, const QVariantList&)
-    : KParts::ReadOnlyPart(parent)
-    , _viewManager(0)
-    , _pluggedController(0)
+Part::Part(QWidget *parentWidget, QObject *parent, const QVariantList &) :
+    KParts::ReadOnlyPart(parent),
+    _viewManager(0),
+    _pluggedController(0)
 {
     // create view widget
     _viewManager = new ViewManager(this, actionCollection());
     _viewManager->setNavigationMethod(ViewManager::NoNavigation);
 
-    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this , &Konsole::Part::activeViewChanged);
+    connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this,
+            &Konsole::Part::activeViewChanged);
     connect(_viewManager, &Konsole::ViewManager::empty, this, &Konsole::Part::terminalExited);
-    connect(_viewManager, static_cast<void(ViewManager::*)()>(&Konsole::ViewManager::newViewRequest), this, &Konsole::Part::newTab);
+    connect(_viewManager,
+            static_cast<void (ViewManager::*)()>(&Konsole::ViewManager::newViewRequest), this,
+            &Konsole::Part::newTab);
 
     _viewManager->widget()->setParent(parentWidget);
 
     setWidget(_viewManager->widget());
     actionCollection()->addAssociatedWidget(_viewManager->widget());
-    foreach(QAction* action, actionCollection()->actions()) {
+    foreach (QAction *action, actionCollection()->actions()) {
         action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
     }
 
@@ -99,7 +102,7 @@ void Part::newTab()
     createSession();
 }
 
-Session* Part::activeSession() const
+Session *Part::activeSession() const
 {
     if (_viewManager->activeViewController() != nullptr) {
         Q_ASSERT(_viewManager->activeViewController()->session());
@@ -109,14 +112,15 @@ Session* Part::activeSession() const
         return 0;
     }
 }
-void Part::startProgram(const QString& program,
-                        const QStringList& arguments)
+
+void Part::startProgram(const QString &program, const QStringList &arguments)
 {
     Q_ASSERT(activeSession());
 
     // do nothing if the session has already started running
-    if (activeSession()->isRunning())
+    if (activeSession()->isRunning()) {
         return;
+    }
 
     if (!program.isEmpty() && !arguments.isEmpty()) {
         activeSession()->setProgram(program);
@@ -133,22 +137,24 @@ void Part::openTeletype(int fd)
     activeSession()->openTeletype(fd);
 }
 
-void Part::showShellInDir(const QString& dir)
+void Part::showShellInDir(const QString &dir)
 {
     Q_ASSERT(activeSession());
 
     // do nothing if the session has already started running
-    if (activeSession()->isRunning())
+    if (activeSession()->isRunning()) {
         return;
+    }
 
     // All other checking is done in setInitialWorkingDirectory()
-    if (!dir.isEmpty())
+    if (!dir.isEmpty()) {
         activeSession()->setInitialWorkingDirectory(dir);
+    }
 
     activeSession()->run();
 }
 
-void Part::sendInput(const QString& text)
+void Part::sendInput(const QString &text)
 {
     Q_ASSERT(activeSession());
     activeSession()->sendTextToTerminal(text);
@@ -190,19 +196,21 @@ QString Part::currentWorkingDirectory() const
     return activeSession()->currentWorkingDirectory();
 }
 
-void Part::createSession(const QString& profileName, const QString& directory)
+void Part::createSession(const QString &profileName, const QString &directory)
 {
     Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
-    if (!profileName.isEmpty())
+    if (!profileName.isEmpty()) {
         profile = ProfileManager::instance()->loadProfile(profileName);
+    }
 
     Q_ASSERT(profile);
 
-    Session* session = SessionManager::instance()->createSession(profile);
+    Session *session = SessionManager::instance()->createSession(profile);
 
     // override the default directory specified in the profile
-    if (!directory.isEmpty() && profile->startInCurrentSessionDir())
+    if (!directory.isEmpty() && profile->startInCurrentSessionDir()) {
         session->setInitialWorkingDirectory(directory);
+    }
 
     _viewManager->createView(session);
 }
@@ -212,7 +220,7 @@ QStringList Part::profileNameList() const
     return ProfileManager::instance()->availableProfileNames();
 }
 
-void Part::activeViewChanged(SessionController* controller)
+void Part::activeViewChanged(SessionController *controller)
 {
     Q_ASSERT(controller);
     Q_ASSERT(controller->view());
@@ -229,12 +237,14 @@ void Part::activeViewChanged(SessionController* controller)
     // insert new controller
     insertChildClient(controller);
 
-    connect(controller, &Konsole::SessionController::titleChanged, this, &Konsole::Part::activeViewTitleChanged);
+    connect(controller, &Konsole::SessionController::titleChanged, this,
+            &Konsole::Part::activeViewTitleChanged);
     activeViewTitleChanged(controller);
-    connect(controller, &Konsole::SessionController::currentDirectoryChanged, this, &Konsole::Part::currentDirectoryChanged);
+    connect(controller, &Konsole::SessionController::currentDirectoryChanged, this,
+            &Konsole::Part::currentDirectoryChanged);
 
-    const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*,bool&));
-    const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*,bool&));
+    const char *displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent *,bool&));
+    const char *partSlot = SLOT(overrideTerminalShortcut(QKeyEvent *,bool&));
 
     disconnect(controller->view(), displaySignal, this, partSlot);
     connect(controller->view(), displaySignal, this, partSlot);
@@ -245,13 +255,13 @@ void Part::activeViewChanged(SessionController* controller)
     _pluggedController = controller;
 }
 
-void Part::overrideTerminalShortcut(QKeyEvent* event, bool& override)
+void Part::overrideTerminalShortcut(QKeyEvent *event, bool &override)
 {
     // Shift+Insert is commonly used as the alternate shortcut for
     // pasting in KDE apps(including konsole), so it deserves some
     // special treatment.
-    if (((event->modifiers() & Qt::ShiftModifier) != 0u) &&
-            (event->key() == Qt::Key_Insert)) {
+    if (((event->modifiers() & Qt::ShiftModifier) != 0u)
+        && (event->key() == Qt::Key_Insert)) {
         override = false;
         return;
     }
@@ -261,19 +271,20 @@ void Part::overrideTerminalShortcut(QKeyEvent* event, bool& override)
     emit overrideShortcut(event, override);
 }
 
-void Part::activeViewTitleChanged(ViewProperties* properties)
+void Part::activeViewTitleChanged(ViewProperties *properties)
 {
     emit setWindowCaption(properties->title());
 }
 
-void Part::showManageProfilesDialog(QWidget* parent)
+void Part::showManageProfilesDialog(QWidget *parent)
 {
     // Make sure this string is unique among all users of this part
     if (KConfigDialog::showDialog(QStringLiteral("konsolepartmanageprofiles"))) {
         return;
     }
 
-    KConfigDialog *settingsDialog = new KConfigDialog(parent, QStringLiteral("konsolepartmanageprofiles"), KonsoleSettings::self());
+    KConfigDialog *settingsDialog = new KConfigDialog(parent, QStringLiteral("konsolepartmanageprofiles"),
+                                                      KonsoleSettings::self());
     settingsDialog->setFaceType(KPageDialog::Tabbed);
 
     auto profileSettings = new ProfileSettings(settingsDialog);
@@ -285,7 +296,7 @@ void Part::showManageProfilesDialog(QWidget* parent)
     settingsDialog->show();
 }
 
-void Part::showEditCurrentProfileDialog(QWidget* parent)
+void Part::showEditCurrentProfileDialog(QWidget *parent)
 {
     Q_ASSERT(activeSession());
 
@@ -295,7 +306,7 @@ void Part::showEditCurrentProfileDialog(QWidget* parent)
     dialog->show();
 }
 
-void Part::changeSessionSettings(const QString& text)
+void Part::changeSessionSettings(const QString &text)
 {
     Q_ASSERT(activeSession());
 
@@ -306,8 +317,9 @@ void Part::changeSessionSettings(const QString& text)
 
     sendInput(command);
 }
+
 // Konqueror integration
-bool Part::openUrl(const QUrl& aQUrl)
+bool Part::openUrl(const QUrl &aQUrl)
 {
     QUrl aUrl = aQUrl;
 
@@ -337,10 +349,13 @@ void Part::setMonitorSilenceEnabled(bool enabled)
 
     if (enabled) {
         activeSession()->setMonitorSilence(true);
-        connect(activeSession(), &Konsole::Session::stateChanged, this, &Konsole::Part::sessionStateChanged, Qt::UniqueConnection);
+        connect(activeSession(), &Konsole::Session::stateChanged,
+                this, &Konsole::Part::sessionStateChanged,
+                Qt::UniqueConnection);
     } else {
         activeSession()->setMonitorSilence(false);
-        disconnect(activeSession(), &Konsole::Session::stateChanged, this, &Konsole::Part::sessionStateChanged);
+        disconnect(activeSession(), &Konsole::Session::stateChanged,
+                   this, &Konsole::Part::sessionStateChanged);
     }
 }
 
@@ -350,19 +365,24 @@ void Part::setMonitorActivityEnabled(bool enabled)
 
     if (enabled) {
         activeSession()->setMonitorActivity(true);
-        connect(activeSession(), &Konsole::Session::stateChanged, this, &Konsole::Part::sessionStateChanged, Qt::UniqueConnection);
+        connect(activeSession(), &Konsole::Session::stateChanged,
+                this, &Konsole::Part::sessionStateChanged,
+                Qt::UniqueConnection);
     } else {
         activeSession()->setMonitorActivity(false);
-        disconnect(activeSession(), &Konsole::Session::stateChanged, this, &Konsole::Part::sessionStateChanged);
+        disconnect(activeSession(), &Konsole::Session::stateChanged,
+                   this,
+                   &Konsole::Part::sessionStateChanged);
     }
 }
 
 void Part::sessionStateChanged(int state)
 {
-    if (state == NOTIFYSILENCE)
+    if (state == NOTIFYSILENCE) {
         emit silenceDetected();
-    else if (state == NOTIFYACTIVITY)
+    } else if (state == NOTIFYACTIVITY) {
         emit activityDetected();
+    }
 }
 
 #include "Part.moc"
