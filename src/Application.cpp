@@ -45,10 +45,10 @@
 using namespace Konsole;
 
 Application::Application(QSharedPointer<QCommandLineParser> parser,
-                         const QStringList &customCommand)
-    : _backgroundInstance(0)
-    , m_parser(parser)
-    , m_customCommand(customCommand)
+                         const QStringList &customCommand) :
+    _backgroundInstance(0),
+    m_parser(parser),
+    m_customCommand(customCommand)
 {
 }
 
@@ -87,17 +87,21 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
     // --nofork is a compatibility alias for separate
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("separate")
                                                        << QStringLiteral("nofork"),
-        i18nc("@info:shell", "Run in a separate process")));
+                                         i18nc("@info:shell", "Run in a separate process")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("show-menubar"),
-        i18nc("@info:shell", "Show the menubar, overriding the default setting")));
+                                         i18nc("@info:shell",
+                                               "Show the menubar, overriding the default setting")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-menubar"),
-        i18nc("@info:shell", "Hide the menubar, overriding the default setting")));
+                                         i18nc("@info:shell",
+                                               "Hide the menubar, overriding the default setting")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("show-tabbar"),
-        i18nc("@info:shell", "Show the tabbar, overriding the default setting")));
+                                         i18nc("@info:shell",
+                                               "Show the tabbar, overriding the default setting")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-tabbar"),
-        i18nc("@info:shell", "Hide the tabbar, overriding the default setting")));
+                                         i18nc("@info:shell",
+                                               "Hide the tabbar, overriding the default setting")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("fullscreen"),
-        i18nc("@info:shell", "Start Konsole in fullscreen mode")));
+                                         i18nc("@info:shell", "Start Konsole in fullscreen mode")));
     parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("notransparency"),
                                          i18nc("@info:shell",
                                                "Disable transparent backgrounds, even if the system"

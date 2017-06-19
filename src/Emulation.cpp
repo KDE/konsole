@@ -51,8 +51,10 @@ Emulation::Emulation() :
     QObject::connect(&_bulkTimer2, &QTimer::timeout, this, &Konsole::Emulation::showBulk);
 
     // listen for mouse status changes
-    connect(this , &Konsole::Emulation::programUsesMouseChanged , this, &Konsole::Emulation::usesMouseChanged);
-    connect(this , &Konsole::Emulation::programBracketedPasteModeChanged , this, &Konsole::Emulation::bracketedPasteModeChanged);
+    connect(this, &Konsole::Emulation::programUsesMouseChanged, this,
+            &Konsole::Emulation::usesMouseChanged);
+    connect(this, &Konsole::Emulation::programBracketedPasteModeChanged, this,
+            &Konsole::Emulation::bracketedPasteModeChanged);
 }
 
 bool Emulation::programUsesMouse() const
@@ -75,15 +77,18 @@ void Emulation::bracketedPasteModeChanged(bool bracketedPasteMode)
     _bracketedPasteMode = bracketedPasteMode;
 }
 
-ScreenWindow* Emulation::createWindow()
+ScreenWindow *Emulation::createWindow()
 {
     auto window = new ScreenWindow(_currentScreen);
     _windows << window;
 
-    connect(window , &Konsole::ScreenWindow::selectionChanged, this , &Konsole::Emulation::bufferedUpdate);
-    connect(window, &Konsole::ScreenWindow::selectionChanged, this, &Konsole::Emulation::checkSelectedText);
+    connect(window, &Konsole::ScreenWindow::selectionChanged, this,
+            &Konsole::Emulation::bufferedUpdate);
+    connect(window, &Konsole::ScreenWindow::selectionChanged, this,
+            &Konsole::Emulation::checkSelectedText);
 
-    connect(this , &Konsole::Emulation::outputChanged, window , &Konsole::ScreenWindow::notifyOutputChanged);
+    connect(this, &Konsole::Emulation::outputChanged, window,
+            &Konsole::ScreenWindow::notifyOutputChanged);
 
     return window;
 }
@@ -101,7 +106,7 @@ void Emulation::checkSelectedText()
 
 Emulation::~Emulation()
 {
-    foreach(ScreenWindow* window, _windows) {
+    foreach (ScreenWindow *window, _windows) {
         delete window;
     }
 
@@ -112,11 +117,11 @@ Emulation::~Emulation()
 
 void Emulation::setScreen(int index)
 {
-    Screen* oldScreen = _currentScreen;
+    Screen *oldScreen = _currentScreen;
     _currentScreen = _screen[index & 1];
     if (_currentScreen != oldScreen) {
         // tell all windows onto this emulation to switch to the newly active screen
-        foreach(ScreenWindow * window, _windows) {
+        foreach (ScreenWindow *window, _windows) {
             window->setScreen(_currentScreen);
         }
 
@@ -127,21 +132,22 @@ void Emulation::setScreen(int index)
 
 void Emulation::clearHistory()
 {
-    _screen[0]->setScroll(_screen[0]->getScroll() , false);
+    _screen[0]->setScroll(_screen[0]->getScroll(), false);
 }
-void Emulation::setHistory(const HistoryType& history)
+
+void Emulation::setHistory(const HistoryType &history)
 {
     _screen[0]->setScroll(history);
 
     showBulk();
 }
 
-const HistoryType& Emulation::history() const
+const HistoryType &Emulation::history() const
 {
     return _screen[0]->getScroll();
 }
 
-void Emulation::setCodec(const QTextCodec * codec)
+void Emulation::setCodec(const QTextCodec *codec)
 {
     if (codec != nullptr) {
         _codec = codec;
@@ -157,13 +163,14 @@ void Emulation::setCodec(const QTextCodec * codec)
 
 void Emulation::setCodec(EmulationCodec codec)
 {
-    if (codec == Utf8Codec)
+    if (codec == Utf8Codec) {
         setCodec(QTextCodec::codecForName("utf8"));
-    else if (codec == LocaleCodec)
+    } else if (codec == LocaleCodec) {
         setCodec(QTextCodec::codecForLocale());
+    }
 }
 
-void Emulation::setKeyBindings(const QString& name)
+void Emulation::setKeyBindings(const QString &name)
 {
     _keyTranslator = KeyboardTranslatorManager::instance()->findTranslator(name);
     if (_keyTranslator == nullptr) {
@@ -182,16 +189,28 @@ void Emulation::receiveChar(int c)
 {
     c &= 0xff;
     switch (c) {
-    case '\b'      : _currentScreen->backspace();                 break;
-    case '\t'      : _currentScreen->tab();                       break;
-    case '\n'      : _currentScreen->newLine();                   break;
-    case '\r'      : _currentScreen->toStartOfLine();             break;
-    case 0x07      : emit stateSet(NOTIFYBELL);                   break;
-    default        : _currentScreen->displayCharacter(static_cast<unsigned short int>(c));         break;
+    case '\b':
+        _currentScreen->backspace();
+        break;
+    case '\t':
+        _currentScreen->tab();
+        break;
+    case '\n':
+        _currentScreen->newLine();
+        break;
+    case '\r':
+        _currentScreen->toStartOfLine();
+        break;
+    case 0x07:
+        emit stateSet(NOTIFYBELL);
+        break;
+    default:
+        _currentScreen->displayCharacter(static_cast<unsigned short int>(c));
+        break;
     }
 }
 
-void Emulation::sendKeyEvent(QKeyEvent* ev)
+void Emulation::sendKeyEvent(QKeyEvent *ev)
 {
     emit stateSet(NOTIFYNORMAL);
 
@@ -212,7 +231,7 @@ void Emulation::sendMouseEvent(int /*buttons*/, int /*column*/, int /*row*/, int
    We are doing code conversion from locale to unicode first.
 */
 
-void Emulation::receiveData(const char* text, int length)
+void Emulation::receiveData(const char *text, int length)
 {
     emit stateSet(NOTIFYACTIVITY);
 
@@ -221,16 +240,18 @@ void Emulation::receiveData(const char* text, int length)
     QString unicodeText = _decoder->toUnicode(text, length);
 
     //send characters to terminal emulator
-    for (auto && i : unicodeText)
+    for (auto &&i : unicodeText) {
         receiveChar(i.unicode());
+    }
 
     //look for z-modem indicator
     //-- someone who understands more about z-modems that I do may be able to move
     //this check into the above for loop?
     for (int i = 0; i < length; i++) {
         if (text[i] == '\030') {
-            if ((length - i - 1 > 3) && (qstrncmp(text + i + 1, "B00", 3) == 0))
+            if ((length - i - 1 > 3) && (qstrncmp(text + i + 1, "B00", 3) == 0)) {
                 emit zmodemDetected();
+            }
         }
     }
 }
@@ -283,9 +304,7 @@ void Emulation::receiveData(const char* text, int length)
   }
 }*/
 
-void Emulation::writeToStream(TerminalCharacterDecoder* decoder ,
-                              int startLine ,
-                              int endLine)
+void Emulation::writeToStream(TerminalCharacterDecoder *decoder, int startLine, int endLine)
 {
     _currentScreen->writeLinesToStream(decoder, startLine, endLine);
 }
@@ -327,14 +346,16 @@ char Emulation::eraseChar() const
 
 void Emulation::setImageSize(int lines, int columns)
 {
-    if ((lines < 1) || (columns < 1))
+    if ((lines < 1) || (columns < 1)) {
         return;
+    }
 
-    QSize screenSize[2] = { QSize(_screen[0]->getColumns(),
-                                  _screen[0]->getLines()),
-                            QSize(_screen[1]->getColumns(),
-                                  _screen[1]->getLines())
-                          };
+    QSize screenSize[2] = {
+        QSize(_screen[0]->getColumns(),
+              _screen[0]->getLines()),
+        QSize(_screen[1]->getColumns(),
+              _screen[1]->getLines())
+    };
     QSize newSize(columns, lines);
 
     if (newSize == screenSize[0] && newSize == screenSize[1]) {
@@ -364,4 +385,3 @@ QSize Emulation::imageSize() const
 {
     return QSize(_currentScreen->getColumns(), _currentScreen->getLines());
 }
-

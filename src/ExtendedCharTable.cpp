@@ -39,7 +39,7 @@ ExtendedCharTable::ExtendedCharTable()
 ExtendedCharTable::~ExtendedCharTable()
 {
     // free all allocated character buffers
-    QHashIterator<ushort, ushort*> iter(extendedCharTable);
+    QHashIterator<ushort, ushort *> iter(extendedCharTable);
     while (iter.hasNext()) {
         iter.next();
         delete[] iter.value();
@@ -49,7 +49,7 @@ ExtendedCharTable::~ExtendedCharTable()
 // global instance
 ExtendedCharTable ExtendedCharTable::instance;
 
-ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushort length)
+ushort ExtendedCharTable::createExtendedChar(const ushort *unicodePoints, ushort length)
 {
     // look for this sequence of points in the table
     ushort hash = extendedCharHash(unicodePoints, length);
@@ -73,15 +73,15 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
                     // All the hashes are full, go to all Screens and try to free any
                     // This is slow but should happen very rarely
                     QSet<ushort> usedExtendedChars;
-                    const SessionManager* sm = SessionManager::instance();
-                    foreach(const Session * s, sm->sessions()) {
-                        foreach(const TerminalDisplay * td, s->views()) {
+                    const SessionManager *sm = SessionManager::instance();
+                    foreach (const Session *s, sm->sessions()) {
+                        foreach (const TerminalDisplay *td, s->views()) {
                             usedExtendedChars += td->screenWindow()->screen()->usedExtendedChars();
                         }
                     }
 
-                    QHash<ushort, ushort*>::iterator it = extendedCharTable.begin();
-                    QHash<ushort, ushort*>::iterator itEnd = extendedCharTable.end();
+                    QHash<ushort, ushort *>::iterator it = extendedCharTable.begin();
+                    QHash<ushort, ushort *>::iterator itEnd = extendedCharTable.end();
                     while (it != itEnd) {
                         if (usedExtendedChars.contains(it.key())) {
                             ++it;
@@ -101,20 +101,21 @@ ushort ExtendedCharTable::createExtendedChar(const ushort* unicodePoints , ushor
     // return that index
     auto buffer = new ushort[length + 1];
     buffer[0] = length;
-    for (int i = 0 ; i < length ; i++)
+    for (int i = 0; i < length; i++) {
         buffer[i + 1] = unicodePoints[i];
+    }
 
     extendedCharTable.insert(hash, buffer);
 
     return hash;
 }
 
-ushort* ExtendedCharTable::lookupExtendedChar(ushort hash , ushort& length) const
+ushort *ExtendedCharTable::lookupExtendedChar(ushort hash, ushort &length) const
 {
     // look up index in table and if found, set the length
     // argument and return a pointer to the character sequence
 
-    ushort* buffer = extendedCharTable[hash];
+    ushort *buffer = extendedCharTable[hash];
     if (buffer != nullptr) {
         length = buffer[0];
         return buffer + 1;
@@ -124,29 +125,31 @@ ushort* ExtendedCharTable::lookupExtendedChar(ushort hash , ushort& length) cons
     }
 }
 
-ushort ExtendedCharTable::extendedCharHash(const ushort* unicodePoints , ushort length) const
+ushort ExtendedCharTable::extendedCharHash(const ushort *unicodePoints, ushort length) const
 {
     ushort hash = 0;
-    for (ushort i = 0 ; i < length ; i++) {
+    for (ushort i = 0; i < length; i++) {
         hash = 31 * hash + unicodePoints[i];
     }
     return hash;
 }
 
-bool ExtendedCharTable::extendedCharMatch(ushort hash , const ushort* unicodePoints , ushort length) const
+bool ExtendedCharTable::extendedCharMatch(ushort hash, const ushort *unicodePoints,
+                                          ushort length) const
 {
-    ushort* entry = extendedCharTable[hash];
+    ushort *entry = extendedCharTable[hash];
 
     // compare given length with stored sequence length ( given as the first ushort in the
     // stored buffer )
-    if (entry == 0 || entry[0] != length)
+    if (entry == 0 || entry[0] != length) {
         return false;
+    }
     // if the lengths match, each character must be checked.  the stored buffer starts at
     // entry[1]
-    for (int i = 0 ; i < length ; i++) {
-        if (entry[i + 1] != unicodePoints[i])
+    for (int i = 0; i < length; i++) {
+        if (entry[i + 1] != unicodePoints[i]) {
             return false;
+        }
     }
     return true;
 }
-
