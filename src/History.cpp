@@ -25,6 +25,7 @@
 #include "KonsoleSettings.h"
 
 // System
+#include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
