@@ -144,6 +144,7 @@ ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 PrintOptions.ui
                                 settings/FileLocationSettings.ui
                                 settings/GeneralSettings.ui
+                                settings/PartInfo.ui
                                 settings/ProfileSettings.ui
                                 settings/TabBarSettings.ui)
 
@@ -202,7 +203,8 @@ install(TARGETS kdeinit_konsole konsole
 ### Embedded Konsole KPart
 
 set(konsolepart_PART_SRCS Part.cpp
-   settings/ProfileSettings.cpp)
+    settings/PartInfo.cpp
+    settings/ProfileSettings.cpp)
 kconfig_add_kcfg_files(konsolepart_PART_SRCS settings/KonsoleSettings.kcfgc)
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 generate_export_header(konsolepart BASE_NAME konsole)

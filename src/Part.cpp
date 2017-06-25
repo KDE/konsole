@@ -43,6 +43,7 @@
 #include "TerminalDisplay.h"
 #include "ViewManager.h"
 #include "KonsoleSettings.h"
+#include "settings/PartInfo.h"
 #include "settings/ProfileSettings.h"
 
 using namespace Konsole;
@@ -292,6 +293,12 @@ void Part::showManageProfilesDialog(QWidget *parent)
                             i18nc("@title Preferences page name",
                                   "Profiles"),
                             QStringLiteral("configure"));
+
+    auto partInfoSettings = new PartInfoSettings(settingsDialog);
+    settingsDialog->addPage(partInfoSettings,
+                            i18nc("@title Preferences page name",
+                                  "Part Info"),
+                            QStringLiteral("dialog-information"));
 
     settingsDialog->show();
 }
