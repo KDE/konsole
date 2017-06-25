@@ -1,3 +1,5 @@
+add_subdirectory(demo_konsolepart)
+
 include(ECMMarkAsTest)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
