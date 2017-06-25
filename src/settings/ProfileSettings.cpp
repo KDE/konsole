@@ -66,40 +66,14 @@ ProfileSettings::ProfileSettings(QWidget* aParent)
 
     // resize the session table to the full width of the table
     sessionTable->horizontalHeader()->setHighlightSections(false);
+    sessionTable->horizontalHeader()->setStretchLastSection(true);
     sessionTable->resizeColumnsToContents();
-
-    // allow a larger width for the shortcut column to account for the
-    // increased with needed by the shortcut editor compared with just
-    // displaying the text of the shortcut
-    sessionTable->setColumnWidth(ShortcutColumn,
-                                      sessionTable->columnWidth(ShortcutColumn) + 100);
 
     // setup buttons
     connect(newProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::createProfile);
     connect(editProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::editSelected);
     connect(deleteProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::deleteSelected);
     connect(setAsDefaultButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::setSelectedAsDefault);
-}
-
-void ProfileSettings::showEvent(QShowEvent*)
-{
-    Q_ASSERT(sessionTable->model());
-
-    // try to ensure that all the text in all the columns is visible initially.
-    // FIXME:  this is not a good solution, look for a more correct way to do this
-
-    int totalWidth = 0;
-    const int columnCount = sessionTable->model()->columnCount();
-
-    for (int i = 0 ; i < columnCount ; i++)
-        totalWidth += sessionTable->columnWidth(i);
-
-    // the margin is added to account for the space taken by the resize grips
-    // between the columns, this ensures that a horizontal scroll bar is not added
-    // automatically
-    int margin = style()->pixelMetric(QStyle::PM_HeaderGripMargin) * columnCount;
-    sessionTable->setMinimumWidth(totalWidth + margin);
-    sessionTable->horizontalHeader()->setStretchLastSection(true);
 }
 
 ProfileSettings::~ProfileSettings() = default;
@@ -209,7 +183,7 @@ void ProfileSettings::populateTable()
     _sessionModel->clear();
     // setup session table
     _sessionModel->setHorizontalHeaderLabels(QStringList() << i18nc("@title:column Profile label", "Name")
-            << i18nc("@title:column Display profile in file menu", "Show in Menu")
+            << i18nc("@title:column Display profile in file menu", "Show")
             << i18nc("@title:column Profile shortcut text", "Shortcut"));
 
     QList<Profile::Ptr> profiles = ProfileManager::instance()->allProfiles();

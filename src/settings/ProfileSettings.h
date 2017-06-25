@@ -65,7 +65,6 @@ public:
     void setShortcutEditorVisible(bool visible);
 
 protected:
-    void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     void slotAccepted();
