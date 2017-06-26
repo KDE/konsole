@@ -62,9 +62,6 @@
 #   include <libutil.h>
 #   include <sys/param.h>
 #   include <sys/queue.h>
-    #if !defined(HAVE_OS_DRAGONFLYBSD)
-        #include <libprocstat.h>
-    #endif
 #   endif
 #endif
 

@@ -127,8 +127,6 @@ set(konsole_LIBS
 if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
     #kinfo_getfile() is in libutil
     list(APPEND konsole_LIBS util)
-    #procstat_getenvv() is in libprocstat
-    list(APPEND konsole_LIBS procstat)
 endif()
 
 ### Konsole Application
