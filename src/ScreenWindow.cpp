@@ -25,16 +25,16 @@
 
 using namespace Konsole;
 
-ScreenWindow::ScreenWindow(Screen* screen, QObject* parent)
-    : QObject(parent)
-    , _windowBuffer(0)
-    , _windowBufferSize(0)
-    , _bufferNeedsUpdate(true)
-    , _windowLines(1)
-    , _currentLine(0)
-    , _currentResultLine(-1)
-    , _trackOutput(true)
-    , _scrollCount(0)
+ScreenWindow::ScreenWindow(Screen *screen, QObject *parent) :
+    QObject(parent),
+    _windowBuffer(0),
+    _windowBufferSize(0),
+    _bufferNeedsUpdate(true),
+    _windowLines(1),
+    _currentLine(0),
+    _currentResultLine(-1),
+    _trackOutput(true),
+    _scrollCount(0)
 {
     setScreen(screen);
 }
@@ -43,19 +43,20 @@ ScreenWindow::~ScreenWindow()
 {
     delete[] _windowBuffer;
 }
-void ScreenWindow::setScreen(Screen* screen)
+
+void ScreenWindow::setScreen(Screen *screen)
 {
     Q_ASSERT(screen);
 
     _screen = screen;
 }
 
-Screen* ScreenWindow::screen() const
+Screen *ScreenWindow::screen() const
 {
     return _screen;
 }
 
-Character* ScreenWindow::getImage()
+Character *ScreenWindow::getImage()
 {
     // reallocate internal buffer if the window size has changed
     int size = windowLines() * windowColumns();
@@ -66,8 +67,9 @@ Character* ScreenWindow::getImage()
         _bufferNeedsUpdate = true;
     }
 
-    if (!_bufferNeedsUpdate)
+    if (!_bufferNeedsUpdate) {
         return _windowBuffer;
+    }
 
     _screen->getImage(_windowBuffer, size,
                       currentLine(), endWindowLine());
@@ -90,8 +92,9 @@ void ScreenWindow::fillUnusedArea()
 
     // stop when unusedLines is negative; there is an issue w/ charsToFill
     //  being greater than an int can hold
-    if (unusedLines <= 0)
+    if (unusedLines <= 0) {
         return;
+    }
 
     int charsToFill = unusedLines * windowColumns();
 
@@ -110,42 +113,47 @@ int ScreenWindow::endWindowLine() const
     return qMin(currentLine() + windowLines() - 1,
                 lineCount() - 1);
 }
+
 QVector<LineProperty> ScreenWindow::getLineProperties()
 {
     QVector<LineProperty> result = _screen->getLineProperties(currentLine(), endWindowLine());
 
-    if (result.count() != windowLines())
+    if (result.count() != windowLines()) {
         result.resize(windowLines());
+    }
 
     return result;
 }
 
-QString ScreenWindow::selectedText(bool preserveLineBreaks, bool trimTrailingSpaces, bool html) const
+QString ScreenWindow::selectedText(bool preserveLineBreaks, bool trimTrailingSpaces,
+                                   bool html) const
 {
     return _screen->selectedText(preserveLineBreaks, trimTrailingSpaces, html);
 }
 
-void ScreenWindow::getSelectionStart(int& column , int& line)
+void ScreenWindow::getSelectionStart(int &column, int &line)
 {
     _screen->getSelectionStart(column, line);
     line -= currentLine();
 }
-void ScreenWindow::getSelectionEnd(int& column , int& line)
+
+void ScreenWindow::getSelectionEnd(int &column, int &line)
 {
     _screen->getSelectionEnd(column, line);
     line -= currentLine();
 }
-void ScreenWindow::setSelectionStart(int column , int line , bool columnMode)
+
+void ScreenWindow::setSelectionStart(int column, int line, bool columnMode)
 {
-    _screen->setSelectionStart(column , line + currentLine() , columnMode);
+    _screen->setSelectionStart(column, line + currentLine(), columnMode);
 
     _bufferNeedsUpdate = true;
     emit selectionChanged();
 }
 
-void ScreenWindow::setSelectionEnd(int column , int line)
+void ScreenWindow::setSelectionEnd(int column, int line)
 {
-    _screen->setSelectionEnd(column , line + currentLine());
+    _screen->setSelectionEnd(column, line + currentLine());
 
     _bufferNeedsUpdate = true;
     emit selectionChanged();
@@ -155,16 +163,16 @@ void ScreenWindow::setSelectionByLineRange(int start, int end)
 {
     clearSelection();
 
-    _screen->setSelectionStart(0 , start , false);
-    _screen->setSelectionEnd(windowColumns() , end);
+    _screen->setSelectionStart(0, start, false);
+    _screen->setSelectionEnd(windowColumns(), end);
 
     _bufferNeedsUpdate = true;
     emit selectionChanged();
 }
 
-bool ScreenWindow::isSelected(int column , int line)
+bool ScreenWindow::isSelected(int column, int line)
 {
-    return _screen->isSelected(column , qMin(line + currentLine(), endWindowLine()));
+    return _screen->isSelected(column, qMin(line + currentLine(), endWindowLine()));
 }
 
 void ScreenWindow::clearSelection()
@@ -179,6 +187,7 @@ void ScreenWindow::setWindowLines(int lines)
     Q_ASSERT(lines > 0);
     _windowLines = lines;
 }
+
 int ScreenWindow::windowLines() const
 {
     return _windowLines;
@@ -234,10 +243,11 @@ void ScreenWindow::scrollBy(RelativeScrollMode mode, int amount, bool fullPage)
     if (mode == ScrollLines) {
         scrollTo(currentLine() + amount);
     } else if (mode == ScrollPages) {
-        if (fullPage)
+        if (fullPage) {
             scrollTo(currentLine() + amount * (windowLines()));
-        else
+        } else {
             scrollTo(currentLine() + amount * (windowLines() / 2));
+        }
     }
 }
 
@@ -287,10 +297,11 @@ QRect ScreenWindow::scrollRegion() const
 {
     bool equalToScreenSize = windowLines() == _screen->getLines();
 
-    if (atEndOfOutput() && equalToScreenSize)
+    if (atEndOfOutput() && equalToScreenSize) {
         return _screen->lastScrolledRegion();
-    else
+    } else {
         return QRect(0, 0, windowColumns(), windowLines());
+    }
 }
 
 void ScreenWindow::notifyOutputChanged()
@@ -306,16 +317,15 @@ void ScreenWindow::notifyOutputChanged()
         // lines of output - in this case the screen
         // window's current line number will need to
         // be adjusted - otherwise the output will scroll
-        _currentLine = qMax(0, _currentLine -
-                            _screen->droppedLines());
+        _currentLine = qMax(0, _currentLine
+                            -_screen->droppedLines());
 
         // ensure that the screen window's current position does
         // not go beyond the bottom of the screen
-        _currentLine = qMin(_currentLine , _screen->getHistLines());
+        _currentLine = qMin(_currentLine, _screen->getHistLines());
     }
 
     _bufferNeedsUpdate = true;
 
     emit outputChanged();
 }
-
