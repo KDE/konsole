@@ -40,30 +40,30 @@
 
 using namespace Konsole;
 
-BookmarkHandler::BookmarkHandler(KActionCollection* collection,
-                                 QMenu* menu,
-                                 bool toplevel,
-                                 QObject* parent)
-    : QObject(parent)
-    , KBookmarkOwner()
-    , _menu(menu)
-    , _bookmarkMenu(0)
-    , _file(QString())
-    , _toplevel(toplevel)
-    , _activeView(0)
-    , _views(QList<ViewProperties*>())
+BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, bool toplevel,
+                                 QObject *parent) :
+    QObject(parent),
+    KBookmarkOwner(),
+    _menu(menu),
+    _bookmarkMenu(0),
+    _file(QString()),
+    _toplevel(toplevel),
+    _activeView(0),
+    _views(QList<ViewProperties *>())
 {
     setObjectName(QStringLiteral("BookmarkHandler"));
 
-    _file = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/bookmarks.xml"));
+    _file = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                   QStringLiteral("konsole/bookmarks.xml"));
 
     if (_file.isEmpty()) {
-        _file = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/konsole");
+        _file = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
+                + QStringLiteral("/konsole");
         QDir().mkpath(_file);
         _file += QStringLiteral("/bookmarks.xml");
     }
 
-    KBookmarkManager* manager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
+    KBookmarkManager *manager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
 
     manager->setUpdate(true);
 
