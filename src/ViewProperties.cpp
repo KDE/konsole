@@ -22,12 +22,12 @@
 
 using Konsole::ViewProperties;
 
-QHash<int, ViewProperties*> ViewProperties::_viewProperties;
+QHash<int, ViewProperties *> ViewProperties::_viewProperties;
 QString ViewProperties::_mimeType = QStringLiteral("application/x-konsole-view-id");
 
-ViewProperties::ViewProperties(QObject* parent)
-    : QObject(parent)
-    , _identifier(0)
+ViewProperties::ViewProperties(QObject *parent) :
+    QObject(parent),
+    _identifier(0)
 {
 }
 
@@ -35,18 +35,22 @@ ViewProperties::~ViewProperties()
 {
     _viewProperties.remove(_identifier);
 }
-ViewProperties* ViewProperties::propertiesById(int id)
+
+ViewProperties *ViewProperties::propertiesById(int id)
 {
     return _viewProperties[id];
 }
+
 QUrl ViewProperties::url() const
 {
     return QUrl();
 }
+
 QString ViewProperties::currentDir() const
 {
     return QString();
 }
+
 void ViewProperties::fireActivity()
 {
     emit activity(this);
@@ -56,14 +60,15 @@ void ViewProperties::rename()
 {
 }
 
-void ViewProperties::setTitle(const QString& title)
+void ViewProperties::setTitle(const QString &title)
 {
     if (title != _title) {
         _title = title;
         emit titleChanged(this);
     }
 }
-void ViewProperties::setIcon(const QIcon& icon)
+
+void ViewProperties::setIcon(const QIcon &icon)
 {
     // the icon's cache key is used to determine whether this icon is the same
     // as the old one.  if so no signal is emitted.
@@ -73,25 +78,29 @@ void ViewProperties::setIcon(const QIcon& icon)
         emit iconChanged(this);
     }
 }
+
 void ViewProperties::setIdentifier(int id)
 {
-    if (_viewProperties.contains(_identifier))
+    if (_viewProperties.contains(_identifier)) {
         _viewProperties.remove(_identifier);
+    }
 
     _identifier = id;
 
     _viewProperties.insert(id, this);
 }
+
 QString ViewProperties::title() const
 {
     return _title;
 }
+
 QIcon ViewProperties::icon() const
 {
     return _icon;
 }
+
 int ViewProperties::identifier() const
 {
     return _identifier;
 }
-
