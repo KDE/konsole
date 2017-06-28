@@ -31,8 +31,8 @@
 
 using Konsole::RenameTabDialog;
 
-RenameTabDialog::RenameTabDialog(QWidget* parent)
-    : QDialog(parent)
+RenameTabDialog::RenameTabDialog(QWidget *parent) :
+    QDialog(parent)
 {
     setWindowTitle(i18n("Rename Tab"));
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
@@ -68,12 +68,12 @@ void RenameTabDialog::focusRemoteTabTitleText()
     _ui->renameTabWidget->focusRemoteTabTitleText();
 }
 
-void RenameTabDialog::setTabTitleText(const QString& text)
+void RenameTabDialog::setTabTitleText(const QString &text)
 {
     _ui->renameTabWidget->setTabTitleText(text);
 }
 
-void RenameTabDialog::setRemoteTabTitleText(const QString& text)
+void RenameTabDialog::setRemoteTabTitleText(const QString &text)
 {
     _ui->renameTabWidget->setRemoteTabTitleText(text);
 }
@@ -87,4 +87,3 @@ QString RenameTabDialog::remoteTabTitleText() const
 {
     return _ui->renameTabWidget->remoteTabTitleText();
 }
-
