@@ -67,24 +67,25 @@
 
 using namespace Konsole;
 
-ProcessInfo::ProcessInfo(int aPid)
-    : _fields(ARGUMENTS)   // arguments
+ProcessInfo::ProcessInfo(int aPid) :
+    _fields(ARGUMENTS)     // arguments
     // are currently always valid,
     // they just return an empty
     // vector / map respectively
     // if no arguments
     // have been explicitly set
-    , _pid(aPid)
-    , _parentPid(0)
-    , _foregroundPid(0)
-    , _userId(0)
-    , _lastError(NoError)
-    , _name(QString())
-    , _userName(QString())
-    , _userHomeDir(QString())
-    , _currentDir(QString())
-    , _userNameRequired(true)
-    , _arguments(QVector<QString>())
+    ,
+    _pid(aPid),
+    _parentPid(0),
+    _foregroundPid(0),
+    _userId(0),
+    _lastError(NoError),
+    _name(QString()),
+    _userName(QString()),
+    _userHomeDir(QString()),
+    _currentDir(QString()),
+    _userNameRequired(true),
+    _arguments(QVector<QString>())
 {
 }
 
@@ -92,6 +93,7 @@ ProcessInfo::Error ProcessInfo::error() const
 {
     return _lastError;
 }
+
 void ProcessInfo::setError(Error error)
 {
     _lastError = error;
@@ -111,7 +113,7 @@ QString ProcessInfo::validCurrentDir() const
     int currentPid = parentPid(&ok);
     QString dir = currentDir(&ok);
     while (!ok && currentPid != 0) {
-        ProcessInfo* current = ProcessInfo::newInstance(currentPid, QString());
+        ProcessInfo *current = ProcessInfo::newInstance(currentPid, QString());
         current->update();
         currentPid = current->parentPid(&ok);
         dir = current->currentDir(&ok);
@@ -128,8 +130,8 @@ QSet<QString> ProcessInfo::commonDirNames()
     static bool forTheFirstTime = true;
 
     if (forTheFirstTime) {
-        const KSharedConfigPtr& config = KSharedConfig::openConfig();
-        const KConfigGroup& configGroup = config->group("ProcessInfo");
+        const KSharedConfigPtr &config = KSharedConfig::openConfig();
+        const KConfigGroup &configGroup = config->group("ProcessInfo");
         _commonDirNames = QSet<QString>::fromList(configGroup.readEntry("CommonDirNames", QStringList()));
 
         forTheFirstTime = false;
@@ -138,11 +140,11 @@ QSet<QString> ProcessInfo::commonDirNames()
     return _commonDirNames;
 }
 
-QString ProcessInfo::formatShortDir(const QString& input) const
+QString ProcessInfo::formatShortDir(const QString &input) const
 {
     QString result;
 
-    const QStringList& parts = input.split(QDir::separator());
+    const QStringList &parts = input.split(QDir::separator());
 
     QSet<QString> dirNamesToShorten = commonDirNames();
 
@@ -154,7 +156,7 @@ QString ProcessInfo::formatShortDir(const QString& input) const
     // and stopping when we reach a dir name which is not
     // in the commonDirNames set
     while (iter.hasPrevious()) {
-        const QString& part = iter.previous();
+        const QString &part = iter.previous();
 
         if (dirNamesToShorten.contains(part)) {
             result.prepend(QDir::separator() + part[0]);
@@ -167,7 +169,7 @@ QString ProcessInfo::formatShortDir(const QString& input) const
     return result;
 }
 
-QVector<QString> ProcessInfo::arguments(bool* ok) const
+QVector<QString> ProcessInfo::arguments(bool *ok) const
 {
     *ok = _fields.testFlag(ARGUMENTS);
 
@@ -179,35 +181,35 @@ bool ProcessInfo::isValid() const
     return _fields.testFlag(PROCESS_ID);
 }
 
-int ProcessInfo::pid(bool* ok) const
+int ProcessInfo::pid(bool *ok) const
 {
     *ok = _fields.testFlag(PROCESS_ID);
 
     return _pid;
 }
 
-int ProcessInfo::parentPid(bool* ok) const
+int ProcessInfo::parentPid(bool *ok) const
 {
     *ok = _fields.testFlag(PARENT_PID);
 
     return _parentPid;
 }
 
-int ProcessInfo::foregroundPid(bool* ok) const
+int ProcessInfo::foregroundPid(bool *ok) const
 {
     *ok = _fields.testFlag(FOREGROUND_PID);
 
     return _foregroundPid;
 }
 
-QString ProcessInfo::name(bool* ok) const
+QString ProcessInfo::name(bool *ok) const
 {
     *ok = _fields.testFlag(NAME);
 
     return _name;
 }
 
-int ProcessInfo::userId(bool* ok) const
+int ProcessInfo::userId(bool *ok) const
 {
     *ok = _fields.testFlag(UID);
 
@@ -241,7 +243,7 @@ void ProcessInfo::setUserId(int uid)
     _fields |= UID;
 }
 
-void ProcessInfo::setUserName(const QString& name)
+void ProcessInfo::setUserName(const QString &name)
 {
     _userName = name;
     setUserHomeDir();
@@ -249,11 +251,12 @@ void ProcessInfo::setUserName(const QString& name)
 
 void ProcessInfo::setUserHomeDir()
 {
-    const QString& usersName = userName();
-    if (!usersName.isEmpty())
+    const QString &usersName = userName();
+    if (!usersName.isEmpty()) {
         _userHomeDir = KUser(usersName).homeDir();
-    else
+    } else {
         _userHomeDir = QDir::homePath();
+    }
 }
 
 void ProcessInfo::setParentPid(int aPid)
@@ -261,6 +264,7 @@ void ProcessInfo::setParentPid(int aPid)
     _parentPid = aPid;
     _fields |= PARENT_PID;
 }
+
 void ProcessInfo::setForegroundPid(int aPid)
 {
     _foregroundPid = aPid;
@@ -277,25 +281,28 @@ bool ProcessInfo::userNameRequired() const
     return _userNameRequired;
 }
 
-QString ProcessInfo::currentDir(bool* ok) const
+QString ProcessInfo::currentDir(bool *ok) const
 {
-    if (ok != nullptr)
+    if (ok != nullptr) {
         *ok = (_fields & CURRENT_DIR) != 0;
+    }
 
     return _currentDir;
 }
-void ProcessInfo::setCurrentDir(const QString& dir)
+
+void ProcessInfo::setCurrentDir(const QString &dir)
 {
     _fields |= CURRENT_DIR;
     _currentDir = dir;
 }
 
-void ProcessInfo::setName(const QString& name)
+void ProcessInfo::setName(const QString &name)
 {
     _name = name;
     _fields |= NAME;
 }
-void ProcessInfo::addArgument(const QString& argument)
+
+void ProcessInfo::addArgument(const QString &argument)
 {
     _arguments << argument;
 }
@@ -324,8 +331,8 @@ void ProcessInfo::setFileError(QFile::FileError error)
 // implementations of the UnixProcessInfo abstract class.
 //
 
-NullProcessInfo::NullProcessInfo(int aPid, const QString& /*titleFormat*/)
-    : ProcessInfo(aPid)
+NullProcessInfo::NullProcessInfo(int aPid, const QString & /*titleFormat*/) :
+    ProcessInfo(aPid)
 {
 }
 
@@ -343,8 +350,8 @@ void NullProcessInfo::readUserName()
 }
 
 #if !defined(Q_OS_WIN)
-UnixProcessInfo::UnixProcessInfo(int aPid, const QString& titleFormat)
-    : ProcessInfo(aPid)
+UnixProcessInfo::UnixProcessInfo(int aPid, const QString &titleFormat) :
+    ProcessInfo(aPid)
 {
     setUserNameRequired(titleFormat.contains(QLatin1String("%u")));
 }
@@ -365,21 +372,25 @@ void UnixProcessInfo::readUserName()
 {
     bool ok = false;
     const int uid = userId(&ok);
-    if (!ok) return;
+    if (!ok) {
+        return;
+    }
 
     struct passwd passwdStruct;
-    struct passwd* getpwResult;
-    char* getpwBuffer;
+    struct passwd *getpwResult;
+    char *getpwBuffer;
     long getpwBufferSize;
     int getpwStatus;
 
     getpwBufferSize = sysconf(_SC_GETPW_R_SIZE_MAX);
-    if (getpwBufferSize == -1)
+    if (getpwBufferSize == -1) {
         getpwBufferSize = 16384;
+    }
 
     getpwBuffer = new char[getpwBufferSize];
-    if (getpwBuffer == NULL)
+    if (getpwBuffer == NULL) {
         return;
+    }
     getpwStatus = getpwuid_r(uid, &passwdStruct, getpwBuffer, getpwBufferSize, &getpwResult);
     if ((getpwStatus == 0) && (getpwResult != NULL)) {
         setUserName(QLatin1String(passwdStruct.pw_name));
@@ -389,18 +400,21 @@ void UnixProcessInfo::readUserName()
     }
     delete [] getpwBuffer;
 }
+
 #endif
 
 #if defined(Q_OS_LINUX)
 class LinuxProcessInfo : public UnixProcessInfo
 {
 public:
-    LinuxProcessInfo(int aPid, const QString& titleFormat) :
-        UnixProcessInfo(aPid, titleFormat) {
+    LinuxProcessInfo(int aPid, const QString &titleFormat) :
+        UnixProcessInfo(aPid, titleFormat)
+    {
     }
 
 protected:
-    bool readCurrentDir(int aPid) Q_DECL_OVERRIDE {
+    bool readCurrentDir(int aPid) Q_DECL_OVERRIDE
+    {
         char path_buffer[MAXPATHLEN + 1];
         path_buffer[MAXPATHLEN] = 0;
         QByteArray procCwd = QFile::encodeName(QStringLiteral("/proc/%1/cwd").arg(aPid));
@@ -418,7 +432,8 @@ protected:
     }
 
 private:
-    bool readProcInfo(int aPid) Q_DECL_OVERRIDE {
+    bool readProcInfo(int aPid) Q_DECL_OVERRIDE
+    {
         // indicies of various fields within the process status file which
         // contain various information about the process
         const int PARENT_PID_FIELD = 3;
@@ -440,22 +455,26 @@ private:
             QString statusLine;
             do {
                 statusLine = stream.readLine();
-                if (statusLine.startsWith(QLatin1String("Uid:")))
+                if (statusLine.startsWith(QLatin1String("Uid:"))) {
                     uidLine = statusLine;
+                }
             } while (!statusLine.isNull() && uidLine.isNull());
 
             uidStrings << uidLine.split(QLatin1Char('\t'), QString::SkipEmptyParts);
             // Must be 5 entries: 'Uid: %d %d %d %d' and
             // uid string must be less than 5 chars (uint)
-            if (uidStrings.size() == 5)
+            if (uidStrings.size() == 5) {
                 uidString = uidStrings[1];
-            if (uidString.size() > 5)
+            }
+            if (uidString.size() > 5) {
                 uidString.clear();
+            }
 
             bool ok = false;
             const int uid = uidString.toInt(&ok);
-            if (ok)
+            if (ok) {
                 setUserId(uid);
+            }
             // This will cause constant opening of /etc/passwd
             if (userNameRequired()) {
                 readUserName();
@@ -476,7 +495,7 @@ private:
         QFile processInfo(QStringLiteral("/proc/%1/stat").arg(aPid));
         if (processInfo.open(QIODevice::ReadOnly)) {
             QTextStream stream(&processInfo);
-            const QString& data = stream.readAll();
+            const QString &data = stream.readAll();
 
             int stack = 0;
             int field = 0;
@@ -515,15 +534,18 @@ private:
         // check that data was read successfully
         bool ok = false;
         const int foregroundPid = foregroundPidString.toInt(&ok);
-        if (ok)
+        if (ok) {
             setForegroundPid(foregroundPid);
+        }
 
         const int parentPid = parentPidString.toInt(&ok);
-        if (ok)
+        if (ok) {
             setParentPid(parentPid);
+        }
 
-        if (!processNameString.isEmpty())
+        if (!processNameString.isEmpty()) {
             setName(processNameString);
+        }
 
         // update object state
         setPid(aPid);
@@ -531,7 +553,8 @@ private:
         return ok;
     }
 
-    bool readArguments(int aPid) Q_DECL_OVERRIDE {
+    bool readArguments(int aPid) Q_DECL_OVERRIDE
+    {
         // read command-line arguments file found at /proc/<pid>/cmdline
         // the expected format is a list of strings delimited by null characters,
         // and ending in a double null character pair.
@@ -539,13 +562,14 @@ private:
         QFile argumentsFile(QStringLiteral("/proc/%1/cmdline").arg(aPid));
         if (argumentsFile.open(QIODevice::ReadOnly)) {
             QTextStream stream(&argumentsFile);
-            const QString& data = stream.readAll();
+            const QString &data = stream.readAll();
 
-            const QStringList& argList = data.split(QLatin1Char('\0'));
+            const QStringList &argList = data.split(QLatin1Char('\0'));
 
-            foreach(const QString & entry , argList) {
-                if (!entry.isEmpty())
+            foreach (const QString &entry, argList) {
+                if (!entry.isEmpty()) {
                     addArgument(entry);
+                }
             }
         } else {
             setFileError(argumentsFile.error());
@@ -559,12 +583,14 @@ private:
 class FreeBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    FreeBSDProcessInfo(int aPid, const QString& titleFormat) :
-        UnixProcessInfo(aPid, titleFormat) {
+    FreeBSDProcessInfo(int aPid, const QString &titleFormat) :
+        UnixProcessInfo(aPid, titleFormat)
+    {
     }
 
 protected:
-    virtual bool readCurrentDir(int aPid) {
+    virtual bool readCurrentDir(int aPid)
+    {
 #if defined(HAVE_OS_DRAGONFLYBSD)
         char buf[PATH_MAX];
         int managementInfoBase[4];
@@ -576,20 +602,22 @@ protected:
         managementInfoBase[3] = aPid;
 
         len = sizeof(buf);
-        if (sysctl(managementInfoBase, 4, buf, &len, NULL, 0) == -1)
+        if (sysctl(managementInfoBase, 4, buf, &len, NULL, 0) == -1) {
             return false;
+        }
 
         setCurrentDir(QString::fromUtf8(buf));
 
         return true;
 #else
         int numrecords;
-        struct kinfo_file* info = 0;
+        struct kinfo_file *info = 0;
 
         info = kinfo_getfile(aPid, &numrecords);
 
-        if (!info)
+        if (!info) {
             return false;
+        }
 
         for (int i = 0; i < numrecords; ++i) {
             if (info[i].kf_fd == KF_FD_TYPE_CWD) {
@@ -606,18 +634,20 @@ protected:
     }
 
 private:
-    virtual bool readProcInfo(int aPid) {
+    virtual bool readProcInfo(int aPid)
+    {
         int managementInfoBase[4];
         size_t mibLength;
-        struct kinfo_proc* kInfoProc;
+        struct kinfo_proc *kInfoProc;
 
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
         managementInfoBase[2] = KERN_PROC_PID;
         managementInfoBase[3] = aPid;
 
-        if (sysctl(managementInfoBase, 4, NULL, &mibLength, NULL, 0) == -1)
+        if (sysctl(managementInfoBase, 4, NULL, &mibLength, NULL, 0) == -1) {
             return false;
+        }
 
         kInfoProc = new struct kinfo_proc [mibLength];
 
@@ -646,7 +676,8 @@ private:
         return true;
     }
 
-    virtual bool readArguments(int aPid) {
+    virtual bool readArguments(int aPid)
+    {
         char args[ARG_MAX];
         int managementInfoBase[4];
         size_t len;
@@ -657,15 +688,14 @@ private:
         managementInfoBase[3] = aPid;
 
         len = sizeof(args);
-        if (sysctl(managementInfoBase, 4, args, &len, NULL, 0) == -1)
+        if (sysctl(managementInfoBase, 4, args, &len, NULL, 0) == -1) {
             return false;
+        }
 
         // len holds the length of the string
-        QString qargs = QString::fromLocal8Bit(args,len);
-        foreach (const QString& value, qargs.split(QLatin1Char('\u0000')))
-        {
-            if (!value.isEmpty())
-            {
+        QString qargs = QString::fromLocal8Bit(args, len);
+        foreach (const QString &value, qargs.split(QLatin1Char('\u0000'))) {
+            if (!value.isEmpty()) {
                 addArgument(value);
             }
         }
@@ -678,15 +708,17 @@ private:
 class OpenBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    OpenBSDProcessInfo(int aPid, const QString& titleFormat) :
-        UnixProcessInfo(aPid, titleFormat) {
+    OpenBSDProcessInfo(int aPid, const QString &titleFormat) :
+        UnixProcessInfo(aPid, titleFormat)
+    {
     }
 
 protected:
-    virtual bool readCurrentDir(int aPid) {
-        char    buf[PATH_MAX];
-        int     managementInfoBase[3];
-        size_t  len;
+    virtual bool readCurrentDir(int aPid)
+    {
+        char buf[PATH_MAX];
+        int managementInfoBase[3];
+        size_t len;
 
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC_CWD;
@@ -703,10 +735,11 @@ protected:
     }
 
 private:
-    virtual bool readProcInfo(int aPid) {
-        int      managementInfoBase[6];
-        size_t   mibLength;
-        struct kinfo_proc*  kInfoProc;
+    virtual bool readProcInfo(int aPid)
+    {
+        int managementInfoBase[6];
+        size_t mibLength;
+        struct kinfo_proc *kInfoProc;
 
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC;
@@ -720,7 +753,7 @@ private:
             return false;
         }
 
-        kInfoProc = (struct kinfo_proc*)malloc(mibLength);
+        kInfoProc = (struct kinfo_proc *)malloc(mibLength);
 
         if (::sysctl(managementInfoBase, 6, kInfoProc, &mibLength, NULL, 0) == -1) {
             qWarning() << "second sysctl() call failed with code" << errno;
@@ -739,12 +772,13 @@ private:
         return true;
     }
 
-    char** readProcArgs(int aPid, int whatMib) {
-        void*   buf = NULL;
-        void*   nbuf;
-        size_t  len = 4096;
-        int     rc = -1;
-        int     managementInfoBase[4];
+    char **readProcArgs(int aPid, int whatMib)
+    {
+        void *buf = NULL;
+        void *nbuf;
+        size_t len = 4096;
+        int rc = -1;
+        int managementInfoBase[4];
 
         managementInfoBase[0] = CTL_KERN;
         managementInfoBase[1] = KERN_PROC_ARGS;
@@ -768,18 +802,19 @@ private:
             return NULL;
         }
 
-        return (char**)buf;
+        return (char **)buf;
     }
 
-    virtual bool readArguments(int aPid) {
-        char**  argv;
+    virtual bool readArguments(int aPid)
+    {
+        char **argv;
 
         argv = readProcArgs(aPid, KERN_PROC_ARGV);
         if (argv == NULL) {
             return false;
         }
 
-        for (char** p = argv; *p != NULL; p++) {
+        for (char **p = argv; *p != NULL; p++) {
             addArgument(QString(*p));
         }
         free(argv);
@@ -791,12 +826,14 @@ private:
 class MacProcessInfo : public UnixProcessInfo
 {
 public:
-    MacProcessInfo(int aPid, const QString& titleFormat) :
-        UnixProcessInfo(aPid, titleFormat) {
+    MacProcessInfo(int aPid, const QString &titleFormat) :
+        UnixProcessInfo(aPid, titleFormat)
+    {
     }
 
 protected:
-    virtual bool readCurrentDir(int aPid) {
+    virtual bool readCurrentDir(int aPid)
+    {
         struct proc_vnodepathinfo vpi;
         const int nb = proc_pidinfo(aPid, PROC_PIDVNODEPATHINFO, 0, &vpi, sizeof(vpi));
         if (nb == sizeof(vpi)) {
@@ -807,10 +844,11 @@ protected:
     }
 
 private:
-    virtual bool readProcInfo(int aPid) {
+    virtual bool readProcInfo(int aPid)
+    {
         int managementInfoBase[4];
         size_t mibLength;
-        struct kinfo_proc* kInfoProc;
+        struct kinfo_proc *kInfoProc;
         QT_STATBUF statInfo;
 
         // Find the tty device of 'pid' (Example: /dev/ttys001)
@@ -828,14 +866,16 @@ private:
                 return false;
             } else {
                 const QString deviceNumber = QString::fromUtf8(devname(((&kInfoProc->kp_eproc)->e_tdev), S_IFCHR));
-                const QString fullDeviceName =  QStringLiteral("/dev/") + deviceNumber.rightJustified(3, QLatin1Char('0'));
+                const QString fullDeviceName = QStringLiteral("/dev/")
+                                               + deviceNumber.rightJustified(3, QLatin1Char('0'));
                 delete [] kInfoProc;
 
                 const QByteArray deviceName = fullDeviceName.toLatin1();
-                const char* ttyName = deviceName.data();
+                const char *ttyName = deviceName.data();
 
-                if (QT_STAT(ttyName, &statInfo) != 0)
+                if (QT_STAT(ttyName, &statInfo) != 0) {
                     return false;
+                }
 
                 // Find all processes attached to ttyName
                 managementInfoBase[0] = CTL_KERN;
@@ -844,12 +884,16 @@ private:
                 managementInfoBase[3] = statInfo.st_rdev;
 
                 mibLength = 0;
-                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), NULL, &mibLength, NULL, 0) == -1)
+                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), NULL,
+                           &mibLength, NULL, 0) == -1) {
                     return false;
+                }
 
                 kInfoProc = new struct kinfo_proc [mibLength];
-                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), kInfoProc, &mibLength, NULL, 0) == -1)
+                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), kInfoProc,
+                           &mibLength, NULL, 0) == -1) {
                     return false;
+                }
 
                 // The foreground program is the first one
                 setName(QString::fromUtf8(kInfoProc->kp_proc.p_comm));
@@ -861,7 +905,8 @@ private:
         return true;
     }
 
-    virtual bool readArguments(int aPid) {
+    virtual bool readArguments(int aPid)
+    {
         Q_UNUSED(aPid);
         return false;
     }
@@ -874,7 +919,7 @@ private:
 // although some of the structure sizes might be wrong.
 // Fortunately, the structures we actually use don't use
 // off_t, and we're safe.
-#if defined(_FILE_OFFSET_BITS) && (_FILE_OFFSET_BITS==64)
+#if defined(_FILE_OFFSET_BITS) && (_FILE_OFFSET_BITS == 64)
 #undef _FILE_OFFSET_BITS
 #endif
 #include <procfs.h>
@@ -882,14 +927,16 @@ private:
 class SolarisProcessInfo : public UnixProcessInfo
 {
 public:
-    SolarisProcessInfo(int aPid, const QString& titleFormat)
-        : UnixProcessInfo(aPid, titleFormat) {
+    SolarisProcessInfo(int aPid, const QString &titleFormat) :
+        UnixProcessInfo(aPid, titleFormat)
+    {
     }
 
 protected:
     // FIXME: This will have the same issues as BKO 251351; the Linux
     // version uses readlink.
-    virtual bool readCurrentDir(int aPid) {
+    virtual bool readCurrentDir(int aPid)
+    {
         QFileInfo info(QString("/proc/%1/path/cwd").arg(aPid));
         const bool readable = info.isReadable();
 
@@ -897,17 +944,19 @@ protected:
             setCurrentDir(info.symLinkTarget());
             return true;
         } else {
-            if (!readable)
+            if (!readable) {
                 setError(PermissionsError);
-            else
+            } else {
                 setError(UnknownError);
+            }
 
             return false;
         }
     }
 
 private:
-    virtual bool readProcInfo(int aPid) {
+    virtual bool readProcInfo(int aPid)
+    {
         QFile psinfo(QString("/proc/%1/psinfo").arg(aPid));
         if (psinfo.open(QIODevice::ReadOnly)) {
             struct psinfo info;
@@ -927,36 +976,38 @@ private:
         return true;
     }
 
-    virtual bool readArguments(int /*pid*/) {
+    virtual bool readArguments(int /*pid*/)
+    {
         // Handled in readProcInfo()
         return false;
     }
 };
 #endif
 
-SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
-    : _process(process)
-    , _user(QString())
-    , _host(QString())
-    , _port(QString())
-    , _command(QString())
+SSHProcessInfo::SSHProcessInfo(const ProcessInfo &process) :
+    _process(process),
+    _user(QString()),
+    _host(QString()),
+    _port(QString()),
+    _command(QString())
 {
     bool ok = false;
 
     // check that this is a SSH process
-    const QString& name = _process.name(&ok);
+    const QString &name = _process.name(&ok);
 
     if (!ok || name != QLatin1String("ssh")) {
-        if (!ok)
+        if (!ok) {
             qWarning() << "Could not read process info";
-        else
+        } else {
             qWarning() << "Process is not a SSH process";
+        }
 
         return;
     }
 
     // read arguments
-    const QVector<QString>& args = _process.arguments(&ok);
+    const QVector<QString> &args = _process.arguments(&ok);
 
     // SSH options
     // these are taken from the SSH manual ( accessed via 'man ssh' )
@@ -979,13 +1030,13 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
         //
         // note that we skip the argument at index 0 because that is the
         // program name ( expected to be 'ssh' in this case )
-        for (int i = 1 ; i < args.count() ; i++) {
+        for (int i = 1; i < args.count(); i++) {
             // If this one is an option ...
             // Most options together with its argument will be skipped.
             if (args[i].startsWith(QLatin1Char('-'))) {
                 const QChar optionChar = (args[i].length() > 1) ? args[i][1] : QLatin1Char('\0');
                 // for example: -p2222 or -p 2222 ?
-                const bool optionArgumentCombined =  args[i].length() > 2;
+                const bool optionArgumentCombined = args[i].length() > 2;
 
                 if (noArgumentOptions.contains(optionChar)) {
                     continue;
@@ -1002,11 +1053,13 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     }
 
                     // support using `-l user` to specify username.
-                    if (optionChar == QLatin1Char('l'))
+                    if (optionChar == QLatin1Char('l')) {
                         _user = argument;
+                    }
                     // support using `-p port` to specify port.
-                    else if (optionChar == QLatin1Char('p'))
+                    else if (optionChar == QLatin1Char('p')) {
                         _port = argument;
+                    }
 
                     continue;
                 }
@@ -1053,19 +1106,23 @@ QString SSHProcessInfo::userName() const
 {
     return _user;
 }
+
 QString SSHProcessInfo::host() const
 {
     return _host;
 }
+
 QString SSHProcessInfo::port() const
 {
     return _port;
 }
+
 QString SSHProcessInfo::command() const
 {
     return _command;
 }
-QString SSHProcessInfo::format(const QString& input) const
+
+QString SSHProcessInfo::format(const QString &input) const
 {
     QString output(input);
 
@@ -1077,10 +1134,11 @@ QString SSHProcessInfo::format(const QString& input) const
     //                                 => Host Command
     // Depending on whether -l was passed to ssh (which is mostly not the
     // case due to ~/.ssh/config).
-    if (_user.isEmpty())
+    if (_user.isEmpty()) {
         output.replace(QLatin1String("%U"), QString());
-    else
+    } else {
         output.replace(QLatin1String("%U"), _user + QLatin1Char('@'));
+    }
 
     // test whether host is an ip address
     // in which case 'short host' and 'full host'
@@ -1088,10 +1146,11 @@ QString SSHProcessInfo::format(const QString& input) const
     // the full address
     struct in_addr address;
     const bool isIpAddress = inet_aton(_host.toLocal8Bit().constData(), &address) != 0;
-    if (isIpAddress)
+    if (isIpAddress) {
         output.replace(QLatin1String("%h"), _host);
-    else
+    } else {
         output.replace(QLatin1String("%h"), _host.left(_host.indexOf(QLatin1Char('.'))));
+    }
 
     output.replace(QLatin1String("%H"), _host);
     output.replace(QLatin1String("%c"), _command);
@@ -1099,7 +1158,7 @@ QString SSHProcessInfo::format(const QString& input) const
     return output;
 }
 
-ProcessInfo* ProcessInfo::newInstance(int aPid, const QString& titleFormat)
+ProcessInfo *ProcessInfo::newInstance(int aPid, const QString &titleFormat)
 {
     ProcessInfo *info;
 #if defined(Q_OS_LINUX)
@@ -1118,4 +1177,3 @@ ProcessInfo* ProcessInfo::newInstance(int aPid, const QString& titleFormat)
     info->readProcessInfo(aPid);
     return info;
 }
-
