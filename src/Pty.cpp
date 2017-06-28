@@ -36,14 +36,14 @@
 
 using Konsole::Pty;
 
-Pty::Pty(int masterFd, QObject* aParent)
-    : KPtyProcess(masterFd, aParent)
+Pty::Pty(int masterFd, QObject *aParent) :
+    KPtyProcess(masterFd, aParent)
 {
     init();
 }
 
-Pty::Pty(QObject* aParent)
-    : KPtyProcess(aParent)
+Pty::Pty(QObject *aParent) :
+    KPtyProcess(aParent)
 {
     init();
 }
@@ -51,10 +51,10 @@ Pty::Pty(QObject* aParent)
 void Pty::init()
 {
     _windowColumns = 0;
-    _windowLines   = 0;
-    _eraseChar     = 0;
-    _xonXoff       = true;
-    _utf8          = true;
+    _windowLines = 0;
+    _eraseChar = 0;
+    _xonXoff = true;
+    _utf8 = true;
 
     setEraseChar(_eraseChar);
     setFlowControlEnabled(_xonXoff);
@@ -65,15 +65,16 @@ void Pty::init()
     setUseUtmp(true);
     setPtyChannels(KPtyProcess::AllChannels);
 
-    connect(pty(), &KPtyDevice::readyRead , this , &Konsole::Pty::dataReceived);
+    connect(pty(), &KPtyDevice::readyRead, this, &Konsole::Pty::dataReceived);
 }
 
 Pty::~Pty() = default;
 
-void Pty::sendData(const QByteArray& data)
+void Pty::sendData(const QByteArray &data)
 {
-    if (data.isEmpty())
+    if (data.isEmpty()) {
         return;
+    }
 
     if (pty()->write(data.constData()) == -1) {
         qCDebug(KonsoleDebug) << "Could not send input data to terminal process.";
@@ -84,8 +85,9 @@ void Pty::sendData(const QByteArray& data)
 void Pty::dataReceived()
 {
     QByteArray data = pty()->readAll();
-    if (data.isEmpty())
+    if (data.isEmpty()) {
         return;
+    }
 
     emit receivedData(data.constData(), data.count());
 }
@@ -95,8 +97,9 @@ void Pty::setWindowSize(int columns, int lines)
     _windowColumns = columns;
     _windowLines = lines;
 
-    if (pty()->masterFd() >= 0)
+    if (pty()->masterFd() >= 0) {
         pty()->setWinSize(lines, columns);
+    }
 }
 
 QSize Pty::windowSize() const
@@ -111,13 +114,15 @@ void Pty::setFlowControlEnabled(bool enable)
     if (pty()->masterFd() >= 0) {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        if (enable)
+        if (enable) {
             ttmode.c_iflag |= (IXOFF | IXON);
-        else
+        } else {
             ttmode.c_iflag &= ~(IXOFF | IXON);
+        }
 
-        if (!pty()->tcSetAttr(&ttmode))
+        if (!pty()->tcSetAttr(&ttmode)) {
             qCDebug(KonsoleDebug) << "Unable to set terminal attributes.";
+        }
     }
 }
 
@@ -126,8 +131,8 @@ bool Pty::flowControlEnabled() const
     if (pty()->masterFd() >= 0) {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        return ((ttmode.c_iflag & IXOFF) != 0u) &&
-               ((ttmode.c_iflag & IXON) != 0u);
+        return ((ttmode.c_iflag & IXOFF) != 0u)
+               && ((ttmode.c_iflag & IXON) != 0u);
     } else {
         qCDebug(KonsoleDebug) << "Unable to get flow control status, terminal not connected.";
         return _xonXoff;
@@ -142,13 +147,15 @@ void Pty::setUtf8Mode(bool enable)
     if (pty()->masterFd() >= 0) {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        if (enable)
+        if (enable) {
             ttmode.c_iflag |= IUTF8;
-        else
+        } else {
             ttmode.c_iflag &= ~IUTF8;
+        }
 
-        if (!pty()->tcSetAttr(&ttmode))
+        if (!pty()->tcSetAttr(&ttmode)) {
             qCDebug(KonsoleDebug) << "Unable to set terminal attributes.";
+        }
     }
 #else
     Q_UNUSED(enable);
@@ -164,8 +171,9 @@ void Pty::setEraseChar(char eChar)
         pty()->tcGetAttr(&ttmode);
         ttmode.c_cc[VERASE] = eChar;
 
-        if (!pty()->tcSetAttr(&ttmode))
+        if (!pty()->tcSetAttr(&ttmode)) {
             qCDebug(KonsoleDebug) << "Unable to set terminal attributes.";
+        }
     }
 }
 
@@ -181,7 +189,7 @@ char Pty::eraseChar() const
     }
 }
 
-void Pty::setInitialWorkingDirectory(const QString& dir)
+void Pty::setInitialWorkingDirectory(const QString &dir)
 {
     QString pwd = dir;
 
@@ -194,15 +202,16 @@ void Pty::setInitialWorkingDirectory(const QString& dir)
     setWorkingDirectory(pwd);
 
     // setting PWD to "." will cause problem for bash & zsh
-    if (pwd != QLatin1String("."))
+    if (pwd != QLatin1String(".")) {
         setEnv(QStringLiteral("PWD"), pwd);
+    }
 }
 
-void Pty::addEnvironmentVariables(const QStringList& environmentVariables)
+void Pty::addEnvironmentVariables(const QStringList &environmentVariables)
 {
     bool isTermEnvAdded = false;
 
-    foreach(const QString& pair, environmentVariables) {
+    foreach (const QString &pair, environmentVariables) {
         // split on the first '=' character
         const int separator = pair.indexOf(QLatin1Char('='));
 
@@ -224,9 +233,8 @@ void Pty::addEnvironmentVariables(const QStringList& environmentVariables)
     }
 }
 
-int Pty::start(const QString& programName,
-               const QStringList& programArguments,
-               const QStringList& environmentList)
+int Pty::start(const QString &programName, const QStringList &programArguments,
+               const QStringList &environmentList)
 {
     clearProgram();
 
@@ -249,7 +257,8 @@ int Pty::start(const QString& programName,
     // does not have a translation for
     //
     // BR:149300
-    setEnv(QStringLiteral("LANGUAGE"), QString(), false /* do not overwrite existing value if any */);
+    setEnv(QStringLiteral("LANGUAGE"), QString(),
+           false /* do not overwrite existing value if any */);
 
     KProcess::start();
 
@@ -326,7 +335,7 @@ void Pty::setupChildProcess()
     sigemptyset(&action.sa_mask);
     action.sa_handler = SIG_DFL;
     action.sa_flags = 0;
-    for (int signal = 1; signal < NSIG; signal++)
+    for (int signal = 1; signal < NSIG; signal++) {
         sigaction(signal, &action, 0);
+    }
 }
-
