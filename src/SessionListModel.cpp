@@ -33,24 +33,25 @@
 using Konsole::Session;
 using Konsole::SessionListModel;
 
-SessionListModel::SessionListModel(QObject* parent)
-    : QAbstractListModel(parent)
+SessionListModel::SessionListModel(QObject *parent) :
+    QAbstractListModel(parent)
 {
 }
 
-void SessionListModel::setSessions(const QList<Session*>& sessions)
+void SessionListModel::setSessions(const QList<Session *> &sessions)
 {
     beginResetModel();
     _sessions = sessions;
 
-    foreach(Session * session, sessions) {
-        connect(session, &Konsole::Session::finished, this, &Konsole::SessionListModel::sessionFinished);
+    foreach (Session *session, sessions) {
+        connect(session, &Konsole::Session::finished, this,
+                &Konsole::SessionListModel::sessionFinished);
     }
 
     endResetModel();
 }
 
-QVariant SessionListModel::data(const QModelIndex& index, int role) const
+QVariant SessionListModel::data(const QModelIndex &index, int role) const
 {
     Q_ASSERT(index.isValid());
 
@@ -78,20 +79,21 @@ QVariant SessionListModel::data(const QModelIndex& index, int role) const
         }
         break;
     case Qt::DecorationRole:
-        if (column == 1)
+        if (column == 1) {
             return QIcon::fromTheme(_sessions[row]->iconName());
-        else
+        } else {
             return QVariant();
+        }
     }
 
     return QVariant();
 }
 
-QVariant SessionListModel::headerData(int section, Qt::Orientation orientation,
-                                      int role) const
+QVariant SessionListModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if (role != Qt::DisplayRole)
+    if (role != Qt::DisplayRole) {
         return QVariant();
+    }
 
     if (orientation == Qt::Vertical) {
         return QVariant();
@@ -107,24 +109,24 @@ QVariant SessionListModel::headerData(int section, Qt::Orientation orientation,
     }
 }
 
-int SessionListModel::columnCount(const QModelIndex&) const
+int SessionListModel::columnCount(const QModelIndex &) const
 {
     return 2;
 }
 
-int SessionListModel::rowCount(const QModelIndex&) const
+int SessionListModel::rowCount(const QModelIndex &) const
 {
     return _sessions.count();
 }
 
-QModelIndex SessionListModel::parent(const QModelIndex&) const
+QModelIndex SessionListModel::parent(const QModelIndex &) const
 {
     return QModelIndex();
 }
 
 void SessionListModel::sessionFinished()
 {
-    Session* session = qobject_cast<Session*>(sender());
+    Session *session = qobject_cast<Session *>(sender());
     int row = _sessions.indexOf(session);
 
     if (row != -1) {
@@ -135,11 +137,11 @@ void SessionListModel::sessionFinished()
     }
 }
 
-QModelIndex SessionListModel::index(int row, int column, const QModelIndex& parent) const
+QModelIndex SessionListModel::index(int row, int column, const QModelIndex &parent) const
 {
-    if (hasIndex(row, column, parent))
+    if (hasIndex(row, column, parent)) {
         return createIndex(row, column, _sessions[row]);
-    else
+    } else {
         return QModelIndex();
+    }
 }
-
