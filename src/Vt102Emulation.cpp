@@ -63,13 +63,14 @@ unsigned short Konsole::vt100_graphics[32] = {
     0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
 };
 
-Vt102Emulation::Vt102Emulation()
-    : Emulation(),
-      _titleUpdateTimer(new QTimer(this)),
-      _reportFocusEvents(false)
+Vt102Emulation::Vt102Emulation() :
+    Emulation(),
+    _titleUpdateTimer(new QTimer(this)),
+    _reportFocusEvents(false)
 {
     _titleUpdateTimer->setSingleShot(true);
-    QObject::connect(_titleUpdateTimer , &QTimer::timeout , this , &Konsole::Vt102Emulation::updateTitle);
+    QObject::connect(_titleUpdateTimer, &QTimer::timeout, this,
+                     &Konsole::Vt102Emulation::updateTitle);
 
     initTokenizer();
     reset();
@@ -87,7 +88,7 @@ void Vt102Emulation::reset()
 {
     // Save the current codec so we can set it later.
     // Ideally we would want to use the profile setting
-    const QTextCodec* currentCodec = codec();
+    const QTextCodec *currentCodec = codec();
 
     resetTokenizer();
     resetModes();
@@ -96,10 +97,11 @@ void Vt102Emulation::reset()
     resetCharset(1);
     _screen[1]->reset();
 
-    if (currentCodec != nullptr)
+    if (currentCodec != nullptr) {
         setCodec(currentCodec);
-    else
+    } else {
         setCodec(LocaleCodec);
+    }
 
     bufferedUpdate();
 }
@@ -199,8 +201,9 @@ void Vt102Emulation::resetTokenizer()
 
 void Vt102Emulation::addDigit(int digit)
 {
-    if (argv[argc] < MAX_ARGUMENT)
+    if (argv[argc] < MAX_ARGUMENT) {
         argv[argc] = 10 * argv[argc] + digit;
+    }
 }
 
 void Vt102Emulation::addArgument()
@@ -216,10 +219,10 @@ void Vt102Emulation::addToCurrentToken(int cc)
 }
 
 // Character Class flags used while decoding
-const int CTL =  1;  // Control character
-const int CHR =  2;  // Printable character
-const int CPN =  4;  // TODO: Document me
-const int DIG =  8;  // Digit
+const int CTL = 1;   // Control character
+const int CHR = 2;   // Printable character
+const int CPN = 4;   // TODO: Document me
+const int DIG = 8;   // Digit
 const int SCS = 16;  // Select Character Set
 const int GRP = 32;  // TODO: Document me
 const int CPS = 64;  // Character which indicates end of window resize
@@ -227,24 +230,32 @@ const int CPS = 64;  // Character which indicates end of window resize
 void Vt102Emulation::initTokenizer()
 {
     int i;
-    quint8* s;
-    for (i = 0; i < 256; ++i)
+    quint8 *s;
+    for (i = 0; i < 256; ++i) {
         charClass[i] = 0;
-    for (i = 0; i < 32; ++i)
+    }
+    for (i = 0; i < 32; ++i) {
         charClass[i] |= CTL;
-    for (i = 32; i < 256; ++i)
+    }
+    for (i = 32; i < 256; ++i) {
         charClass[i] |= CHR;
-    for (s = (quint8*)"@ABCDGHILMPSTXZcdfry"; *s != 0u; ++s)
+    }
+    for (s = (quint8 *)"@ABCDGHILMPSTXZcdfry"; *s != 0u; ++s) {
         charClass[*s] |= CPN;
+    }
     // resize = \e[8;<row>;<col>t
-    for (s = (quint8*)"t"; *s != 0u; ++s)
+    for (s = (quint8 *)"t"; *s != 0u; ++s) {
         charClass[*s] |= CPS;
-    for (s = (quint8*)"0123456789"; *s != 0u; ++s)
+    }
+    for (s = (quint8 *)"0123456789"; *s != 0u; ++s) {
         charClass[*s] |= DIG;
-    for (s = (quint8*)"()+*%"; *s != 0u; ++s)
+    }
+    for (s = (quint8 *)"()+*%"; *s != 0u; ++s) {
         charClass[*s] |= SCS;
-    for (s = (quint8*)"()+*#[]%"; *s != 0u; ++s)
+    }
+    for (s = (quint8 *)"()+*#[]%"; *s != 0u; ++s) {
         charClass[*s] |= GRP;
+    }
 
     resetTokenizer();
 }
@@ -892,7 +903,7 @@ void Vt102Emulation::reportSecondaryAttributes()
 */
 void Vt102Emulation::reportTerminalParms(int p)
 {
-  char tmp[100];
+    char tmp[100];
 /*
    sol=1: This message is a request; report in response to a request.
    par=1: No parity set
@@ -902,8 +913,8 @@ void Vt102Emulation::reportTerminalParms(int p)
    clkmul=1: The bit rate multiplier is 16.
    flags=0: None
 */
-  snprintf(tmp, sizeof(tmp), "\033[%d;1;1;112;112;1;0x", p); // not really true.
-  sendString(tmp);
+    snprintf(tmp, sizeof(tmp), "\033[%d;1;1;112;112;1;0x", p); // not really true.
+    sendString(tmp);
 }
 
 void Vt102Emulation::reportStatus()
@@ -915,7 +926,7 @@ void Vt102Emulation::reportAnswerBack()
 {
     // FIXME - Test this with VTTEST
     // This is really obsolete VT100 stuff.
-    const char* ANSWER_BACK = "";
+    const char *ANSWER_BACK = "";
     sendString(ANSWER_BACK);
 }
 
@@ -929,30 +940,34 @@ void Vt102Emulation::reportAnswerBack()
         2 = Mouse button release
 */
 
-void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
+void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
 {
-    if (cx < 1 || cy < 1)
+    if (cx < 1 || cy < 1) {
         return;
+    }
 
     // With the exception of the 1006 mode, button release is encoded in cb.
     // Note that if multiple extensions are enabled, the 1006 is used, so it's okay to check for only that.
-    if (eventType == 2 && !getMode(MODE_Mouse1006))
+    if (eventType == 2 && !getMode(MODE_Mouse1006)) {
         cb = 3;
+    }
 
     // normal buttons are passed as 0x20 + button,
     // mouse wheel (buttons 4,5) as 0x5c + button
-    if (cb >= 4)
+    if (cb >= 4) {
         cb += 0x3c;
+    }
 
     //Mouse motion handling
-    if ((getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1)
+    if ((getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1) {
         cb += 0x20; //add 32 to signify motion event
-
+    }
     char command[32];
     command[0] = '\0';
     // Check the extensions in decreasing order of preference. Encoding the release event above assumes that 1006 comes first.
     if (getMode(MODE_Mouse1006)) {
-        snprintf(command, sizeof(command), "\033[<%d;%d;%d%c", cb, cx, cy, eventType == 2 ? 'm' : 'M');
+        snprintf(command, sizeof(command), "\033[<%d;%d;%d%c", cb, cx, cy,
+                 eventType == 2 ? 'm' : 'M');
     } else if (getMode(MODE_Mouse1015)) {
         snprintf(command, sizeof(command), "\033[%d;%d;%dM", cb + 0x20, cx, cy);
     } else if (getMode(MODE_Mouse1005)) {
@@ -983,8 +998,9 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy , int eventType)
  */
 void Vt102Emulation::focusLost()
 {
-    if (_reportFocusEvents)
+    if (_reportFocusEvents) {
         sendString("\033[O");
+    }
 }
 
 /**
@@ -996,11 +1012,12 @@ void Vt102Emulation::focusLost()
  */
 void Vt102Emulation::focusGained()
 {
-    if (_reportFocusEvents)
+    if (_reportFocusEvents) {
         sendString("\033[I");
+    }
 }
 
-void Vt102Emulation::sendText(const QString& text)
+void Vt102Emulation::sendText(const QString &text)
 {
     if (!text.isEmpty()) {
         QKeyEvent event(QEvent::KeyPress,
@@ -1010,21 +1027,31 @@ void Vt102Emulation::sendText(const QString& text)
         sendKeyEvent(&event); // expose as a big fat keypress event
     }
 }
-void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
+
+void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 {
     const Qt::KeyboardModifiers modifiers = event->modifiers();
     KeyboardTranslator::States states = KeyboardTranslator::NoState;
 
     // get current states
-    if (getMode(MODE_NewLine)) states |= KeyboardTranslator::NewLineState;
-    if (getMode(MODE_Ansi)) states |= KeyboardTranslator::AnsiState;
-    if (getMode(MODE_AppCuKeys)) states |= KeyboardTranslator::CursorKeysState;
-    if (getMode(MODE_AppScreen)) states |= KeyboardTranslator::AlternateScreenState;
-    if (getMode(MODE_AppKeyPad) && ((modifiers & Qt::KeypadModifier) != 0u))
+    if (getMode(MODE_NewLine)) {
+        states |= KeyboardTranslator::NewLineState;
+    }
+    if (getMode(MODE_Ansi)) {
+        states |= KeyboardTranslator::AnsiState;
+    }
+    if (getMode(MODE_AppCuKeys)) {
+        states |= KeyboardTranslator::CursorKeysState;
+    }
+    if (getMode(MODE_AppScreen)) {
+        states |= KeyboardTranslator::AlternateScreenState;
+    }
+    if (getMode(MODE_AppKeyPad) && ((modifiers &Qt::KeypadModifier) != 0u)) {
         states |= KeyboardTranslator::ApplicationKeypadState;
+    }
 
     // check flow control state
-    if ((modifiers & Qt::ControlModifier) != 0u) {
+    if ((modifiers &Qt::ControlModifier) != 0u) {
         switch (event->key()) {
         case Qt::Key_S:
             emit flowControlKeyPressed(true);
@@ -1039,9 +1066,9 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
     // look up key binding
     if (_keyTranslator != nullptr) {
         KeyboardTranslator::Entry entry = _keyTranslator->findEntry(
-                                              event->key() ,
-                                              modifiers,
-                                              states);
+            event->key(),
+            modifiers,
+            states);
 
         // send result to terminal
         QByteArray textToSend;
@@ -1132,14 +1159,18 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent* event)
    particular glyphs allocated in (0x00-0x1f) in their code page.
 */
 
-#define CHARSET _charset[_currentScreen==_screen[1]]
+#define CHARSET _charset[_currentScreen == _screen[1]]
 
 // Apply current character map.
 
 unsigned short Vt102Emulation::applyCharset(unsigned short c)
 {
-    if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c - 0x5f];
-    if (CHARSET.pound && c == '#') return 0xa3;  //This mode is obsolete
+    if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) {
+        return vt100_graphics[c - 0x5f];
+    }
+    if (CHARSET.pound && c == '#') {
+        return 0xa3;                             //This mode is obsolete
+    }
     return c;
 }
 
@@ -1163,8 +1194,10 @@ void Vt102Emulation::resetCharset(int scrno)
 
 void Vt102Emulation::setCharset(int n, int cs) // on both screens.
 {
-    _charset[0].charset[n & 3] = cs; useCharset(_charset[0].cu_cs);
-    _charset[1].charset[n & 3] = cs; useCharset(_charset[1].cu_cs);
+    _charset[0].charset[n & 3] = cs;
+    useCharset(_charset[0].cu_cs);
+    _charset[1].charset[n & 3] = cs;
+    useCharset(_charset[1].cu_cs);
 }
 
 void Vt102Emulation::setAndUseCharset(int n, int cs)
@@ -1175,9 +1208,9 @@ void Vt102Emulation::setAndUseCharset(int n, int cs)
 
 void Vt102Emulation::useCharset(int n)
 {
-    CHARSET.cu_cs   = n & 3;
+    CHARSET.cu_cs = n & 3;
     CHARSET.graphic = (CHARSET.charset[n & 3] == '0');
-    CHARSET.pound   = (CHARSET.charset[n & 3] == 'A'); //This mode is obsolete
+    CHARSET.pound = (CHARSET.charset[n & 3] == 'A');   //This mode is obsolete
 }
 
 void Vt102Emulation::setDefaultMargins()
@@ -1195,7 +1228,7 @@ void Vt102Emulation::setMargins(int t, int b)
 void Vt102Emulation::saveCursor()
 {
     CHARSET.sa_graphic = CHARSET.graphic;
-    CHARSET.sa_pound   = CHARSET.pound; //This mode is obsolete
+    CHARSET.sa_pound = CHARSET.pound;   //This mode is obsolete
     // we are not clear about these
     //sa_charset = charsets[cScreen->_charset];
     //sa_charset_num = cScreen->_charset;
@@ -1205,7 +1238,7 @@ void Vt102Emulation::saveCursor()
 void Vt102Emulation::restoreCursor()
 {
     CHARSET.graphic = CHARSET.sa_graphic;
-    CHARSET.pound   = CHARSET.sa_pound; //This mode is obsolete
+    CHARSET.pound = CHARSET.sa_pound;   //This mode is obsolete
     _currentScreen->restoreCursor();
 }
 
@@ -1256,10 +1289,11 @@ void Vt102Emulation::setMode(int m)
     _currentModes.mode[m] = true;
     switch (m) {
     case MODE_132Columns:
-        if (getMode(MODE_Allow132Columns))
+        if (getMode(MODE_Allow132Columns)) {
             clearScreenAndSetColumns(132);
-        else
+        } else {
             _currentModes.mode[m] = false;
+        }
         break;
     case MODE_Mouse1000:
     case MODE_Mouse1001:
@@ -1272,7 +1306,7 @@ void Vt102Emulation::setMode(int m)
         emit programBracketedPasteModeChanged(true);
         break;
 
-    case MODE_AppScreen :
+    case MODE_AppScreen:
         _screen[1]->clearSelection();
         setScreen(1);
         break;
@@ -1290,13 +1324,14 @@ void Vt102Emulation::resetMode(int m)
     _currentModes.mode[m] = false;
     switch (m) {
     case MODE_132Columns:
-        if (getMode(MODE_Allow132Columns))
+        if (getMode(MODE_Allow132Columns)) {
             clearScreenAndSetColumns(80);
+        }
         break;
-    case MODE_Mouse1000 :
-    case MODE_Mouse1001 :
-    case MODE_Mouse1002 :
-    case MODE_Mouse1003 :
+    case MODE_Mouse1000:
+    case MODE_Mouse1001:
+    case MODE_Mouse1002:
+    case MODE_Mouse1003:
         emit programUsesMouseChanged(true);
         break;
 
@@ -1304,7 +1339,7 @@ void Vt102Emulation::resetMode(int m)
         emit programBracketedPasteModeChanged(false);
         break;
 
-    case MODE_AppScreen :
+    case MODE_AppScreen:
         _screen[0]->clearSelection();
         setScreen(0);
         break;
@@ -1324,10 +1359,11 @@ void Vt102Emulation::saveMode(int m)
 
 void Vt102Emulation::restoreMode(int m)
 {
-    if (_savedModes.mode[m])
+    if (_savedModes.mode[m]) {
         setMode(m);
-    else
+    } else {
         resetMode(m);
+    }
 }
 
 bool Vt102Emulation::getMode(int m)
@@ -1338,45 +1374,49 @@ bool Vt102Emulation::getMode(int m)
 char Vt102Emulation::eraseChar() const
 {
     KeyboardTranslator::Entry entry = _keyTranslator->findEntry(
-                                          Qt::Key_Backspace,
-                                          0,
-                                          0);
-    if (entry.text().count() > 0)
+        Qt::Key_Backspace,
+        0,
+        0);
+    if (entry.text().count() > 0) {
         return entry.text().at(0);
-    else
+    } else {
         return '\b';
+    }
 }
 
 #if 0
 // print contents of the scan buffer
-static void hexdump(int* s, int len)
+static void hexdump(int *s, int len)
 {
     int i;
     for (i = 0; i < len; i++) {
-        if (s[i] == '\\')
+        if (s[i] == '\\') {
             printf("\\\\");
-        else if ((s[i]) > 32 && s[i] < 127)
+        } else if ((s[i]) > 32 && s[i] < 127) {
             printf("%c", s[i]);
-        else
+        } else {
             printf("\\%04x(hex)", s[i]);
+        }
     }
 }
+
 #endif
 
 // return contents of the scan buffer
-static QString hexdump2(int* s, int len)
+static QString hexdump2(int *s, int len)
 {
     int i;
     char dump[128];
     QString returnDump;
 
     for (i = 0; i < len; i++) {
-        if (s[i] == '\\')
+        if (s[i] == '\\') {
             snprintf(dump, sizeof(dump), "%s", "\\\\");
-        else if ((s[i]) > 32 && s[i] < 127)
+        } else if ((s[i]) > 32 && s[i] < 127) {
             snprintf(dump, sizeof(dump), "%c", s[i]);
-        else
+        } else {
             snprintf(dump, sizeof(dump), "\\%04x(hex)", s[i]);
+        }
         returnDump.append(QLatin1String(dump));
     }
     return returnDump;
@@ -1384,8 +1424,9 @@ static QString hexdump2(int* s, int len)
 
 void Vt102Emulation::reportDecodingError()
 {
-    if (tokenBufferPos == 0 || (tokenBufferPos == 1 && (tokenBuffer[0] & 0xff) >= 32))
+    if (tokenBufferPos == 0 || (tokenBufferPos == 1 && (tokenBuffer[0] & 0xff) >= 32)) {
         return;
+    }
 
 //    printf("Undecodable sequence: ");
 //    hexdump(tokenBuffer, tokenBufferPos);
@@ -1395,4 +1436,3 @@ void Vt102Emulation::reportDecodingError()
     outputError.append(hexdump2(tokenBuffer, tokenBufferPos));
     //qDebug() << outputError;
 }
-
