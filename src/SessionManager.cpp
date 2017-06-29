@@ -45,20 +45,24 @@ SessionManager::SessionManager()
 {
     //map finished() signals from sessions
     _sessionMapper = new QSignalMapper(this);
-    connect(_sessionMapper , static_cast<void(QSignalMapper::*)(QObject*)>(&QSignalMapper::mapped) , this , &Konsole::SessionManager::sessionTerminated);
+    connect(_sessionMapper, static_cast<void (QSignalMapper::*)(QObject *)>(&QSignalMapper::mapped),
+            this, &Konsole::SessionManager::sessionTerminated);
 
-    ProfileManager* profileMananger = ProfileManager::instance();
-    connect(profileMananger , &Konsole::ProfileManager::profileChanged , this , &Konsole::SessionManager::profileChanged);
+    ProfileManager *profileMananger = ProfileManager::instance();
+    connect(profileMananger, &Konsole::ProfileManager::profileChanged, this,
+            &Konsole::SessionManager::profileChanged);
 }
 
 SessionManager::~SessionManager()
 {
     if (_sessions.count() > 0) {
-        qCDebug(KonsoleDebug) << "Konsole SessionManager destroyed with"<< _sessions.count()<<"session(s) still alive";
+        qCDebug(KonsoleDebug) << "Konsole SessionManager destroyed with"
+                              << _sessions.count()
+                              <<"session(s) still alive";
         // ensure that the Session doesn't later try to call back and do things to the
         // SessionManager
-        foreach(Session* session, _sessions) {
-            disconnect(session , 0 , this , 0);
+        foreach (Session *session, _sessions) {
+            disconnect(session, 0, this, 0);
         }
     }
 }
@@ -72,36 +76,40 @@ SessionManager* SessionManager::instance()
 void SessionManager::closeAllSessions()
 {
     // close remaining sessions
-    foreach(Session* session , _sessions) {
+    foreach (Session *session, _sessions) {
         session->close();
     }
     _sessions.clear();
 }
 
-const QList<Session*> SessionManager::sessions() const
+const QList<Session *> SessionManager::sessions() const
 {
     return _sessions;
 }
 
-Session* SessionManager::createSession(Profile::Ptr profile)
+Session *SessionManager::createSession(Profile::Ptr profile)
 {
-    if (!profile)
+    if (!profile) {
         profile = ProfileManager::instance()->defaultProfile();
+    }
 
     // TODO: check whether this is really needed
-    if (!ProfileManager::instance()->loadedProfiles().contains(profile))
+    if (!ProfileManager::instance()->loadedProfiles().contains(profile)) {
         ProfileManager::instance()->addProfile(profile);
+    }
 
     //configuration information found, create a new session based on this
     auto session = new Session();
     Q_ASSERT(session);
     applyProfile(session, profile, false);
 
-    connect(session , &Konsole::Session::profileChangeCommandReceived , this , &Konsole::SessionManager::sessionProfileCommandReceived);
+    connect(session, &Konsole::Session::profileChangeCommandReceived, this,
+            &Konsole::SessionManager::sessionProfileCommandReceived);
 
     //ask for notification when session dies
     _sessionMapper->setMapping(session, session);
-    connect(session , &Konsole::Session::finished , _sessionMapper , static_cast<void(QSignalMapper::*)()>(&QSignalMapper::map));
+    connect(session, &Konsole::Session::finished, _sessionMapper,
+            static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
 
     //add session to active list
     _sessions << session;
@@ -109,14 +117,15 @@ Session* SessionManager::createSession(Profile::Ptr profile)
 
     return session;
 }
+
 void SessionManager::profileChanged(Profile::Ptr profile)
 {
     applyProfile(profile, true);
 }
 
-void SessionManager::sessionTerminated(QObject* sessionObject)
+void SessionManager::sessionTerminated(QObject *sessionObject)
 {
-    Session* session = qobject_cast<Session*>(sessionObject);
+    Session *session = qobject_cast<Session *>(sessionObject);
 
     Q_ASSERT(session);
 
@@ -127,21 +136,25 @@ void SessionManager::sessionTerminated(QObject* sessionObject)
     session->deleteLater();
 }
 
-void SessionManager::applyProfile(Profile::Ptr profile , bool modifiedPropertiesOnly)
+void SessionManager::applyProfile(Profile::Ptr profile, bool modifiedPropertiesOnly)
 {
-    foreach(Session* session, _sessions) {
-        if (_sessionProfiles[session] == profile)
+    foreach (Session *session, _sessions) {
+        if (_sessionProfiles[session] == profile) {
             applyProfile(session, profile, modifiedPropertiesOnly);
+        }
     }
 }
-Profile::Ptr SessionManager::sessionProfile(Session* session) const
+
+Profile::Ptr SessionManager::sessionProfile(Session *session) const
 {
     return _sessionProfiles[session];
 }
-void SessionManager::setSessionProfile(Session* session, Profile::Ptr profile)
+
+void SessionManager::setSessionProfile(Session *session, Profile::Ptr profile)
 {
-    if (!profile)
+    if (!profile) {
         profile = ProfileManager::instance()->defaultProfile();
+    }
 
     Q_ASSERT(profile);
 
@@ -151,7 +164,9 @@ void SessionManager::setSessionProfile(Session* session, Profile::Ptr profile)
 
     emit sessionUpdated(session);
 }
-void SessionManager::applyProfile(Session* session, const Profile::Ptr profile , bool modifiedPropertiesOnly)
+
+void SessionManager::applyProfile(Session *session, const Profile::Ptr profile,
+                                  bool modifiedPropertiesOnly)
 {
     Q_ASSERT(profile);
 
@@ -160,17 +175,21 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
     ShouldApplyProperty apply(profile, modifiedPropertiesOnly);
 
     // Basic session settings
-    if (apply.shouldApply(Profile::Name))
+    if (apply.shouldApply(Profile::Name)) {
         session->setTitle(Session::NameRole, profile->name());
+    }
 
-    if (apply.shouldApply(Profile::Command))
+    if (apply.shouldApply(Profile::Command)) {
         session->setProgram(profile->command());
+    }
 
-    if (apply.shouldApply(Profile::Arguments))
+    if (apply.shouldApply(Profile::Arguments)) {
         session->setArguments(profile->arguments());
+    }
 
-    if (apply.shouldApply(Profile::Directory))
+    if (apply.shouldApply(Profile::Directory)) {
         session->setInitialWorkingDirectory(profile->defaultWorkingDirectory());
+    }
 
     if (apply.shouldApply(Profile::Environment)) {
         // add environment variable containing home directory of current profile
@@ -182,27 +201,31 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
         session->setEnvironment(environment);
     }
 
-    if ( apply.shouldApply(Profile::TerminalColumns) ||
-            apply.shouldApply(Profile::TerminalRows) ) {
+    if (apply.shouldApply(Profile::TerminalColumns)
+        || apply.shouldApply(Profile::TerminalRows)) {
         const int columns = profile->property<int>(Profile::TerminalColumns);
         const int rows = profile->property<int>(Profile::TerminalRows);
         session->setPreferredSize(QSize(columns, rows));
     }
 
-    if (apply.shouldApply(Profile::Icon))
+    if (apply.shouldApply(Profile::Icon)) {
         session->setIconName(profile->icon());
+    }
 
     // Key bindings
-    if (apply.shouldApply(Profile::KeyBindings))
+    if (apply.shouldApply(Profile::KeyBindings)) {
         session->setKeyBindings(profile->keyBindings());
+    }
 
     // Tab formats
-    if (apply.shouldApply(Profile::LocalTabTitleFormat))
-        session->setTabTitleFormat(Session::LocalTabTitle ,
+    if (apply.shouldApply(Profile::LocalTabTitleFormat)) {
+        session->setTabTitleFormat(Session::LocalTabTitle,
                                    profile->localTabTitleFormat());
-    if (apply.shouldApply(Profile::RemoteTabTitleFormat))
-        session->setTabTitleFormat(Session::RemoteTabTitle ,
+    }
+    if (apply.shouldApply(Profile::RemoteTabTitleFormat)) {
+        session->setTabTitleFormat(Session::RemoteTabTitle,
                                    profile->remoteTabTitleFormat());
+    }
 
     // History
     if (apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize)) {
@@ -212,11 +235,12 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
             session->setHistoryType(HistoryTypeNone());
             break;
 
-        case Enum::FixedSizeHistory: {
+        case Enum::FixedSizeHistory:
+        {
             int lines = profile->historySize();
             session->setHistoryType(CompactHistoryType(lines));
+            break;
         }
-        break;
 
         case Enum::UnlimitedHistory:
             session->setHistoryType(HistoryTypeFile());
@@ -225,8 +249,9 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
     }
 
     // Terminal features
-    if (apply.shouldApply(Profile::FlowControlEnabled))
+    if (apply.shouldApply(Profile::FlowControlEnabled)) {
         session->setFlowControlEnabled(profile->flowControlEnabled());
+    }
 
     // Encoding
     if (apply.shouldApply(Profile::DefaultEncoding)) {
@@ -235,13 +260,14 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr profile ,
     }
 
     // Monitor Silence
-    if (apply.shouldApply(Profile::SilenceSeconds))
+    if (apply.shouldApply(Profile::SilenceSeconds)) {
         session->setMonitorSilenceSeconds(profile->silenceSeconds());
+    }
 }
 
-void SessionManager::sessionProfileCommandReceived(const QString& text)
+void SessionManager::sessionProfileCommandReceived(const QString &text)
 {
-    Session* session = qobject_cast<Session*>(sender());
+    Session *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
 
     ProfileCommandParser parser;
@@ -266,14 +292,14 @@ void SessionManager::sessionProfileCommandReceived(const QString& text)
     emit sessionUpdated(session);
 }
 
-void SessionManager::saveSessions(KConfig* config)
+void SessionManager::saveSessions(KConfig *config)
 {
     // The session IDs can't be restored.
     // So we need to map the old ID to the future new ID.
     int n = 1;
     _restoreMapping.clear();
 
-    foreach(Session * session, _sessions) {
+    foreach (Session *session, _sessions) {
         QString name = QLatin1String("Session") + QString::number(n);
         KConfigGroup group(config, name);
 
@@ -288,12 +314,12 @@ void SessionManager::saveSessions(KConfig* config)
     group.writeEntry("NumberOfSessions", _sessions.count());
 }
 
-int SessionManager::getRestoreId(Session* session)
+int SessionManager::getRestoreId(Session *session)
 {
     return _restoreMapping.value(session);
 }
 
-void SessionManager::restoreSessions(KConfig* config)
+void SessionManager::restoreSessions(KConfig *config)
 {
     KConfigGroup group(config, "Number");
     const int sessions = group.readEntry("NumberOfSessions", 0);
@@ -308,19 +334,19 @@ void SessionManager::restoreSessions(KConfig* config)
         if (!profile.isEmpty()) {
             ptr = ProfileManager::instance()->loadProfile(profile);
         }
-        Session* session = createSession(ptr);
+        Session *session = createSession(ptr);
         session->restoreSession(sessionGroup);
     }
 }
 
-Session* SessionManager::idToSession(int id)
+Session *SessionManager::idToSession(int id)
 {
-    foreach(Session * session, _sessions) {
-        if (session->sessionId() == id)
+    foreach (Session *session, _sessions) {
+        if (session->sessionId() == id) {
             return session;
+        }
     }
     // this should not happen
     qCDebug(KonsoleDebug) << "Failed to find session for ID" << id;
     return nullptr;
 }
-
