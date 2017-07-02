@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     parser->process(args);
     about.processCommandLine(parser.data());
 
-    demo_konsolepart *demo = new demo_konsolepart();
+    auto demo = new demo_konsolepart();
     demo->show();
 
     int ret = app->exec();
