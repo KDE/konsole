@@ -100,10 +100,10 @@ KParts::Part* PartTest::createPart()
 {
     KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
     if (!service)       // not found
-        return 0;
+        return nullptr;
     KPluginFactory* factory = KPluginLoader(service->library()).factory();
     if (factory == nullptr)       // not found
-        return 0;
+        return nullptr;
 
     KParts::Part* terminalPart = factory->create<KParts::Part>(this);
 

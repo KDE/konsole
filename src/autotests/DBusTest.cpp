@@ -28,7 +28,7 @@ using namespace Konsole;
 void DBusTest::initTestCase()
 {
     const QString interfaceName = QStringLiteral("org.kde.konsole");
-    QDBusConnectionInterface* bus = 0;
+    QDBusConnectionInterface* bus = nullptr;
     QStringList konsoleServices;
 
     if (!QDBusConnection::sessionBus().isConnected() ||
