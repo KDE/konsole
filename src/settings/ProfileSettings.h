@@ -50,7 +50,7 @@ class ProfileSettings : public QWidget, private Ui::ProfileSettings
 
 public:
     /** Constructs a new profile type with the specified parent. */
-    explicit ProfileSettings(QWidget *parent = 0);
+    explicit ProfileSettings(QWidget *parent = nullptr);
     ~ProfileSettings() Q_DECL_OVERRIDE;
 
     /**
@@ -122,7 +122,7 @@ class FavoriteItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    explicit FavoriteItemDelegate(QObject *parent = 0);
+    explicit FavoriteItemDelegate(QObject *parent = nullptr);
 
     bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option,
                      const QModelIndex &index) Q_DECL_OVERRIDE;
@@ -135,7 +135,7 @@ class ShortcutItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    explicit ShortcutItemDelegate(QObject *parent = 0);
+    explicit ShortcutItemDelegate(QObject *parent = nullptr);
 
     void setModelData(QWidget *editor, QAbstractItemModel *model,
                       const QModelIndex &index) const Q_DECL_OVERRIDE;

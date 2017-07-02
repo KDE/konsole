@@ -29,7 +29,7 @@ class GeneralSettings : public QWidget, private Ui::GeneralSettings
     Q_OBJECT
 
 public:
-    explicit GeneralSettings(QWidget *aParent = 0);
+    explicit GeneralSettings(QWidget *aParent = nullptr);
     ~GeneralSettings() Q_DECL_OVERRIDE;
 
 public Q_SLOTS:

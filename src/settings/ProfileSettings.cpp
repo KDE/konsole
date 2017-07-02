@@ -319,7 +319,7 @@ void ProfileSettings::editSelected()
     foreach (Session* session, SessionManager::instance()->sessions()) {
          foreach (TerminalDisplay* terminal, session->views()) {
              // Searching for opened profiles
-             if (terminal->sessionController()->profileDialogPointer() != NULL) {
+             if (terminal->sessionController()->profileDialogPointer() != nullptr) {
                  foreach (const Profile::Ptr & profile, profiles) {
                      if (profile->name() == terminal->sessionController()->profileDialogPointer()->lookupProfile()->name()
                          && terminal->sessionController()->profileDialogPointer()->isVisible()) {
@@ -403,7 +403,7 @@ void StyledBackgroundPainter::drawBackground(QPainter* painter, const QStyleOpti
         const QModelIndex&)
 {
     const QStyleOptionViewItemV3* v3option = qstyleoption_cast<const QStyleOptionViewItemV3*>(&option);
-    const QWidget* widget = v3option != nullptr ? v3option->widget : 0;
+    const QWidget* widget = v3option != nullptr ? v3option->widget : nullptr;
 
     QStyle* style = widget != nullptr ? widget->style() : QApplication::style();
 
