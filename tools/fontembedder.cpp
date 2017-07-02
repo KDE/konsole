@@ -93,7 +93,7 @@ int main(int argc, char **argv)
             continue; //Skip comments
 
         //Must be a glyph ID.
-        int glyph = line.toInt(0, 16);
+        int glyph = line.toInt(nullptr, 16);
         if ((glyph < 0x2500) || (glyph > 0x257f)) {
             qWarning("Invalid glyph number: %d aborting...", glyph);
             exit(1);
