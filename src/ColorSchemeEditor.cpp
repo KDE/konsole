@@ -207,7 +207,7 @@ void ColorSchemeEditor::selectWallpaper()
                                                           i18nc("@title:window",
                                                                 "Select wallpaper image file"),
                                                           _ui->wallpaperPath->text(),
-                                                          i18nc("Filter in file open dialog",
+                                                          i18nc("@label:textbox Filter in file open dialog",
                                                                 "Supported Images") + fileFormats);
 
     if (!fileName.isEmpty()) {
