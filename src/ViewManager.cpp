@@ -1099,6 +1099,8 @@ int ViewManager::newSession()
     Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
     Session *session = SessionManager::instance()->createSession(profile);
 
+    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
+
     this->createView(session);
     session->run();
 
@@ -1119,6 +1121,8 @@ int ViewManager::newSession(const QString &profile, const QString &directory)
 
     Session *session = SessionManager::instance()->createSession(profileptr);
     session->setInitialWorkingDirectory(directory);
+
+    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
     this->createView(session);
     session->run();
