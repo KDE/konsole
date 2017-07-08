@@ -236,6 +236,12 @@ public Q_SLOTS:
 
     /** DBus slot that creates a new session in the current view.
      * @param profile the name of the profile to be used
+     * started.
+     */
+    Q_SCRIPTABLE int newSession(const QString &profile);
+
+    /** DBus slot that creates a new session in the current view.
+     * @param profile the name of the profile to be used
      * @param directory the working directory where the session is
      * started.
      */
