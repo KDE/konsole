@@ -55,6 +55,7 @@
 #include "Vt102Emulation.h"
 #include "ZModemDialog.h"
 #include "History.h"
+#include "konsoledebug.h"
 
 using namespace Konsole;
 
@@ -377,9 +378,9 @@ QString Session::shellSessionId() const
 
 void Session::run()
 {
-    // extra safeguard for potential bug.
+    // FIXME: run() is called twice in some instances
     if (isRunning()) {
-        qWarning() << "Attempted to re-run an already running session.";
+        qCDebug(KonsoleDebug) << "Attempted to re-run an already running session (" << _shellProcess->pid() << ")";
         return;
     }
 
