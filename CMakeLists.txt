@@ -26,6 +26,7 @@ include(ECMMarkNonGuiExecutable)
 include(ECMGenerateHeaders)
 include(GenerateExportHeader)
 include(FeatureSummary)
+include(ECMQtDeclareLoggingCategory)
 
 ecm_setup_version(${KDE_APPLICATIONS_VERSION} VARIABLE_PREFIX KONSOLEPRIVATE
     SOVERSION ${KDE_APPLICATIONS_VERSION_MAJOR}

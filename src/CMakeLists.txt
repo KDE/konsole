@@ -100,11 +100,12 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         Vt102Emulation.cpp
                         ZModemDialog.cpp
                         PrintOptions.cpp
-                        konsoledebug.cpp
                         konsole_wcwidth.cpp
                         WindowSystemInfo.cpp
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
+
+ecm_qt_declare_logging_category(konsoleprivate_SRCS HEADER konsoledebug.h IDENTIFIER KonsoleDebug CATEGORY_NAME org.kde.konsole)
 
 kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
