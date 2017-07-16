@@ -329,7 +329,7 @@ QString ProfileManager::saveProfile(Profile::Ptr profile)
     QString newPath = writer->getPath(profile);
 
     if (!writer->writeProfile(newPath, profile)) {
-        KMessageBox::sorry(0,
+        KMessageBox::sorry(nullptr,
                            i18n("Konsole does not have permission to save this profile to %1", newPath));
     }
     delete writer;

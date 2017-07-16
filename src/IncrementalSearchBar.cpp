@@ -38,14 +38,14 @@ using namespace Konsole;
 
 IncrementalSearchBar::IncrementalSearchBar(QWidget *aParent) :
     QWidget(aParent),
-    _searchEdit(0),
-    _caseSensitive(0),
-    _regExpression(0),
-    _highlightMatches(0),
-    _reverseSearch(0),
-    _findNextButton(0),
-    _findPreviousButton(0),
-    _searchFromButton(0)
+    _searchEdit(nullptr),
+    _caseSensitive(nullptr),
+    _regExpression(nullptr),
+    _highlightMatches(nullptr),
+    _reverseSearch(nullptr),
+    _findNextButton(nullptr),
+    _findPreviousButton(nullptr),
+    _searchFromButton(nullptr)
 {
     auto barLayout = new QHBoxLayout(this);
 

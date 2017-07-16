@@ -62,8 +62,8 @@ using namespace Konsole;
 
 MainWindow::MainWindow() :
     KXmlGuiWindow(),
-    _bookmarkHandler(0),
-    _pluggedController(0),
+    _bookmarkHandler(nullptr),
+    _pluggedController(nullptr),
     _menuBarInitialVisibility(true),
     _menuBarInitialVisibilityApplied(false)
 {
@@ -222,14 +222,14 @@ void MainWindow::disconnectController(SessionController *controller)
         guiFactory()->removeClient(controller);
     }
 
-    controller->setSearchBar(0);
+    controller->setSearchBar(nullptr);
 }
 
 void MainWindow::activeViewChanged(SessionController *controller)
 {
     // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
-    disconnect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, 0, 0);
+    disconnect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, nullptr, nullptr);
     connect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, controller,
             &Konsole::SessionController::openUrl);
 
@@ -306,7 +306,7 @@ IncrementalSearchBar *MainWindow::searchBar() const
 void MainWindow::setupActions()
 {
     KActionCollection *collection = actionCollection();
-    QAction *menuAction = 0;
+    QAction *menuAction = nullptr;
 
     // File Menu
     _newTabMenuAction = new KActionMenu(QIcon::fromTheme(QStringLiteral("tab-new")),

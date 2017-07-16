@@ -46,7 +46,7 @@ using namespace Konsole;
 
 Application::Application(QSharedPointer<QCommandLineParser> parser,
                          const QStringList &customCommand) :
-    _backgroundInstance(0),
+    _backgroundInstance(nullptr),
     m_parser(parser),
     m_customCommand(customCommand)
 {
@@ -397,19 +397,19 @@ void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QSt
 // If --new-tab is given, use existing window.
 MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
 {
-    MainWindow *window = 0;
+    MainWindow *window = nullptr;
     if (m_parser->isSet(QStringLiteral("new-tab"))) {
         QListIterator<QWidget *> iter(QApplication::topLevelWidgets());
         iter.toBack();
         while (iter.hasPrevious()) {
             window = qobject_cast<MainWindow *>(iter.previous());
-            if (window != 0) {
+            if (window != nullptr) {
                 break;
             }
         }
     }
 
-    if (window == 0) {
+    if (window == nullptr) {
         createdNewMainWindow = true;
         window = newMainWindow();
 

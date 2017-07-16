@@ -84,7 +84,7 @@ public:
      * falls back to using the program specified in the SHELL environment
      * variable.
      */
-    explicit Session(QObject *parent = 0);
+    explicit Session(QObject *parent = nullptr);
     ~Session() Q_DECL_OVERRIDE;
 
     /**

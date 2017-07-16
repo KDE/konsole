@@ -54,7 +54,7 @@ ViewContainer::ViewContainer(NavigationPosition position, QObject *parent) :
     QObject(parent),
     _navigationVisibility(AlwaysShowNavigation),
     _navigationPosition(position),
-    _searchBar(0)
+    _searchBar(nullptr)
 {
 }
 
@@ -194,7 +194,7 @@ const QList<QWidget *> ViewContainer::views() const
 IncrementalSearchBar *ViewContainer::searchBar()
 {
     if (_searchBar == nullptr) {
-        _searchBar = new IncrementalSearchBar(0);
+        _searchBar = new IncrementalSearchBar(nullptr);
         _searchBar->setVisible(false);
         connect(_searchBar, &Konsole::IncrementalSearchBar::destroyed, this,
                 &Konsole::ViewContainer::searchBarDestroyed);
@@ -204,7 +204,7 @@ IncrementalSearchBar *ViewContainer::searchBar()
 
 void ViewContainer::searchBarDestroyed()
 {
-    _searchBar = 0;
+    _searchBar = nullptr;
 }
 
 void ViewContainer::activateNextView()
@@ -414,7 +414,7 @@ void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
 
     // clear all existing items from the layout
     _layout->removeItem(_tabBarLayout);
-    _tabBarLayout->setParent(0); // suppress the warning of "already has a parent"
+    _tabBarLayout->setParent(nullptr); // suppress the warning of "already has a parent"
     _layout->removeWidget(_stackWidget);
     _layout->removeWidget(searchBar());
 
@@ -522,7 +522,7 @@ void TabbedViewContainer::startTabDrag(int tab)
             // deleted if this view container is destroyed.
             //
             // FIXME: Resolve this properly
-            drag->setParent(0);
+            drag->setParent(nullptr);
             removeView(view);
             break;
         case Qt::IgnoreAction:

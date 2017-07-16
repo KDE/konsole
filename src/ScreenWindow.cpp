@@ -27,7 +27,7 @@ using namespace Konsole;
 
 ScreenWindow::ScreenWindow(Screen *screen, QObject *parent) :
     QObject(parent),
-    _windowBuffer(0),
+    _windowBuffer(nullptr),
     _windowBufferSize(0),
     _bufferNeedsUpdate(true),
     _windowLines(1),
@@ -60,7 +60,7 @@ Character *ScreenWindow::getImage()
 {
     // reallocate internal buffer if the window size has changed
     int size = windowLines() * windowColumns();
-    if (_windowBuffer == 0 || _windowBufferSize != size) {
+    if (_windowBuffer == nullptr || _windowBufferSize != size) {
         delete[] _windowBuffer;
         _windowBufferSize = size;
         _windowBuffer = new Character[size];

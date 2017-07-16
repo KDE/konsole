@@ -64,7 +64,7 @@ using namespace Konsole;
 EditProfileDialog::EditProfileDialog(QWidget *aParent) :
     QDialog(aParent),
     _delayedPreviewTimer(new QTimer(this)),
-    _colorDialog(0)
+    _colorDialog(nullptr)
 {
     setWindowTitle(i18n("Edit Profile"));
     mButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);
@@ -568,7 +568,7 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 
     model->clear();
 
-    QStandardItem *selectedItem = 0;
+    QStandardItem *selectedItem = nullptr;
 
     QList<const ColorScheme *> schemeList = ColorSchemeManager::instance()->allColorSchemes();
 
@@ -614,7 +614,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 
     model->clear();
 
-    QStandardItem *selectedItem = 0;
+    QStandardItem *selectedItem = nullptr;
 
     QStringList translatorNames = keyManager->allTranslators();
     foreach (const QString &translatorName, translatorNames) {
@@ -766,7 +766,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
     // Finding selected ColorScheme
     QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
     QAbstractItemModel *model = _ui->colorSchemeList->model();
-    const ColorScheme *colors = 0;
+    const ColorScheme *colors = nullptr;
     if (!selected.isEmpty()) {
         colors = model->data(selected.first(), Qt::UserRole + 1).value<const ColorScheme *>();
     } else {
@@ -972,7 +972,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
     QAbstractItemModel *model = _ui->keyBindingList->model();
 
-    const KeyboardTranslator *translator = 0;
+    const KeyboardTranslator *translator = nullptr;
     if (!selected.isEmpty()) {
         translator = model->data(selected.first(), Qt::UserRole + 1).value<const KeyboardTranslator *>();
     } else {
@@ -1041,7 +1041,7 @@ void EditProfileDialog::editKeyBinding()
 
 void EditProfileDialog::setupCheckBoxes(BooleanOption *options, const Profile::Ptr profile)
 {
-    while (options->button != 0) {
+    while (options->button != nullptr) {
         options->button->setChecked(profile->property<bool>(options->property));
         connect(options->button, SIGNAL(toggled(bool)), this, options->slot);
 
@@ -1051,7 +1051,7 @@ void EditProfileDialog::setupCheckBoxes(BooleanOption *options, const Profile::P
 
 void EditProfileDialog::setupRadio(RadioOption *possibilities, int actual)
 {
-    while (possibilities->button != 0) {
+    while (possibilities->button != nullptr) {
         if (possibilities->value == actual) {
             possibilities->button->setChecked(true);
         } else {
@@ -1072,7 +1072,7 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     RadioOption positions[] = { {_ui->scrollBarHiddenButton, Enum::ScrollBarHidden, SLOT(hideScrollBar())},
                                 {_ui->scrollBarLeftButton, Enum::ScrollBarLeft, SLOT(showScrollBarLeft())},
                                 {_ui->scrollBarRightButton, Enum::ScrollBarRight, SLOT(showScrollBarRight())},
-                                {0, 0, 0}};
+                                {nullptr, 0, nullptr}};
 
     setupRadio(positions, scrollBarPosition);
 
@@ -1092,7 +1092,7 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     RadioOption pageamounts[] = {
         {_ui->scrollHalfPage, Enum::ScrollPageHalf, SLOT(scrollHalfPage())},
         {_ui->scrollFullPage, Enum::ScrollPageFull, SLOT(scrollFullPage())},
-        {0, 0, 0}
+        {nullptr, 0, nullptr}
     };
 
     setupRadio(pageamounts, scrollFullPage);
@@ -1168,7 +1168,7 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
             _ui->dropUrlsAsText, Profile::DropUrlsAsText,
             SLOT(toggleDropUrlsAsText(bool))
         },
-        { 0, Profile::Property(0), 0 }
+        { nullptr, Profile::Property(0), nullptr }
     };
     setupCheckBoxes(options, profile);
 
@@ -1177,7 +1177,7 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
     RadioOption pasteModes[] = {
         {_ui->pasteFromX11SelectionButton, Enum::PasteFromX11Selection, SLOT(pasteFromX11Selection())},
         {_ui->pasteFromClipboardButton, Enum::PasteFromClipboard, SLOT(pasteFromClipboard())},
-        {0, 0, 0}
+        {nullptr, 0, nullptr}
     };
     setupRadio(pasteModes, middleClickPasteMode);
 
@@ -1216,7 +1216,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
             _ui->enableBidiRenderingButton, Profile::BidiRenderingEnabled,
             SLOT(togglebidiRendering(bool))
         },
-        { 0, Profile::Property(0), 0 }
+        { nullptr, Profile::Property(0), nullptr }
     };
     setupCheckBoxes(options, profile);
 

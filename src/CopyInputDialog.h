@@ -50,7 +50,7 @@ class CopyInputDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CopyInputDialog(QWidget *parent = 0);
+    explicit CopyInputDialog(QWidget *parent = nullptr);
     ~CopyInputDialog() Q_DECL_OVERRIDE;
     /**
      * Sets the 'source' session whose input will be copied to

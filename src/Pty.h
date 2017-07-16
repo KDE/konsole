@@ -62,13 +62,13 @@ public:
      * To start the terminal process, call the run() method with the
      * name of the program to start and appropriate arguments.
      */
-    explicit Pty(QObject *parent = 0);
+    explicit Pty(QObject *parent = nullptr);
 
     /**
      * Construct a process using an open pty master.
      * See KPtyProcess::KPtyProcess()
      */
-    explicit Pty(int ptyMasterFd, QObject *parent = 0);
+    explicit Pty(int ptyMasterFd, QObject *parent = nullptr);
 
     ~Pty() Q_DECL_OVERRIDE;
 

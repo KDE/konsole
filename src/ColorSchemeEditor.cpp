@@ -58,7 +58,7 @@ const int FAINT_COLOR_COLUMN = 3;    // column 2 : faint colors
 ColorSchemeEditor::ColorSchemeEditor(QWidget *aParent) :
     QDialog(aParent),
     _isNewScheme(false),
-    _colors(0)
+    _colors(nullptr)
 {
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);
     auto mainWidget = new QWidget(this);

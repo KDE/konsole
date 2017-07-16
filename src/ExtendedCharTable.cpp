@@ -121,7 +121,7 @@ ushort *ExtendedCharTable::lookupExtendedChar(ushort hash, ushort &length) const
         return buffer + 1;
     } else {
         length = 0;
-        return 0;
+        return nullptr;
     }
 }
 
@@ -141,7 +141,7 @@ bool ExtendedCharTable::extendedCharMatch(ushort hash, const ushort *unicodePoin
 
     // compare given length with stored sequence length ( given as the first ushort in the
     // stored buffer )
-    if (entry == 0 || entry[0] != length) {
+    if (entry == nullptr || entry[0] != length) {
         return false;
     }
     // if the lengths match, each character must be checked.  the stored buffer starts at

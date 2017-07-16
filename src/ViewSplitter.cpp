@@ -73,7 +73,7 @@ ViewSplitter *ViewSplitter::activeSplitter()
 {
     QWidget *widget = focusWidget() != nullptr ? focusWidget() : this;
 
-    ViewSplitter *splitter = 0;
+    ViewSplitter *splitter = nullptr;
 
     while ((splitter == nullptr) && (widget != nullptr)) {
         splitter = qobject_cast<ViewSplitter *>(widget);
@@ -100,7 +100,7 @@ void ViewSplitter::registerContainer(ViewContainer *container)
 void ViewSplitter::unregisterContainer(ViewContainer *container)
 {
     _containers.removeAll(container);
-    disconnect(container, 0, this, 0);
+    disconnect(container, nullptr, this, nullptr);
 }
 
 void ViewSplitter::updateSizes()
@@ -245,9 +245,9 @@ void ViewSplitter::setActiveContainer(ViewContainer *container)
 ViewContainer *ViewSplitter::activeContainer() const
 {
     if (QWidget *focusW = focusWidget()) {
-        ViewContainer *focusContainer = 0;
+        ViewContainer *focusContainer = nullptr;
 
-        while (focusW != 0) {
+        while (focusW != nullptr) {
             foreach (ViewContainer *container, _containers) {
                 if (container->containerWidget() == focusW) {
                     focusContainer = container;
@@ -270,7 +270,7 @@ ViewContainer *ViewSplitter::activeContainer() const
         if (_containers.count() > 0) {
             return _containers.last();
         } else {
-            return 0;
+            return nullptr;
         }
     }
 }

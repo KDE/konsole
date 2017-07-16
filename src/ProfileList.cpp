@@ -36,7 +36,7 @@ using Konsole::ProfileList;
 ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     : QObject(parent)
     , _addShortcuts(addShortcuts)
-    , _emptyListAction(0)
+    , _emptyListAction(nullptr)
 {
     // construct the list of favorite profiles
     _group = new QActionGroup(this);
@@ -77,7 +77,7 @@ QAction* ProfileList::actionForProfile(Profile::Ptr profile) const
         if (action->data().value<Profile::Ptr>() == profile)
             return action;
     }
-    return 0; // not found
+    return nullptr; // not found
 }
 
 void ProfileList::profileChanged(Profile::Ptr profile)

@@ -37,7 +37,7 @@ class HistorySizeDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit HistorySizeDialog(QWidget *parent = 0);
+    explicit HistorySizeDialog(QWidget *parent = nullptr);
     ~HistorySizeDialog() Q_DECL_OVERRIDE;
 
     /** See HistorySizeWidget::setMode. */

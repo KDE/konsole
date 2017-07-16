@@ -66,7 +66,7 @@ class KONSOLEPRIVATE_EXPORT TerminalDisplay : public QWidget
 
 public:
     /** Constructs a new terminal display widget with the specified parent. */
-    explicit TerminalDisplay(QWidget *parent = 0);
+    explicit TerminalDisplay(QWidget *parent = nullptr);
     ~TerminalDisplay() Q_DECL_OVERRIDE;
 
     /** Returns the terminal color palette used by the display. */

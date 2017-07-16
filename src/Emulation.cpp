@@ -34,10 +34,10 @@
 using namespace Konsole;
 
 Emulation::Emulation() :
-    _currentScreen(0),
-    _codec(0),
-    _decoder(0),
-    _keyTranslator(0),
+    _currentScreen(nullptr),
+    _codec(nullptr),
+    _decoder(nullptr),
+    _keyTranslator(nullptr),
     _usesMouse(false),
     _bracketedPasteMode(false),
     _imageSizeInitialized(false)

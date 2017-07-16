@@ -43,7 +43,7 @@ class SessionListModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    explicit SessionListModel(QObject *parent = 0);
+    explicit SessionListModel(QObject *parent = nullptr);
 
     /**
      * Sets the list of sessions displayed in the model.

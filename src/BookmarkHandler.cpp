@@ -45,10 +45,10 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
     QObject(parent),
     KBookmarkOwner(),
     _menu(menu),
-    _bookmarkMenu(0),
+    _bookmarkMenu(nullptr),
     _file(QString()),
     _toplevel(toplevel),
-    _activeView(0),
+    _activeView(nullptr),
     _views(QList<ViewProperties *>())
 {
     setObjectName(QStringLiteral("BookmarkHandler"));
@@ -70,7 +70,7 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
     if (toplevel) {
         _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, collection);
     } else {
-        _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, 0);
+        _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, nullptr);
     }
 }
 

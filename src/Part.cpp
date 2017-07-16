@@ -54,8 +54,8 @@ K_PLUGIN_FACTORY_WITH_JSON(KonsolePartFactory,
 
 Part::Part(QWidget *parentWidget, QObject *parent, const QVariantList &) :
     KParts::ReadOnlyPart(parent),
-    _viewManager(0),
-    _pluggedController(0)
+    _viewManager(nullptr),
+    _pluggedController(nullptr)
 {
     // create view widget
     _viewManager = new ViewManager(this, actionCollection());
@@ -111,7 +111,7 @@ Session *Part::activeSession() const
 
         return _viewManager->activeViewController()->session();
     } else {
-        return 0;
+        return nullptr;
     }
 }
 
@@ -339,7 +339,7 @@ bool Part::openUrl(const QUrl &aQUrl)
     setUrl(aUrl);
     emit setWindowCaption(aUrl.toDisplayString(QUrl::PreferLocalFile));
     ////qDebug() << "Set Window Caption to " << url.pathOrUrl();
-    emit started(0);
+    emit started(nullptr);
 
     if (aUrl.isLocalFile()) {
         showShellInDir(aUrl.path());

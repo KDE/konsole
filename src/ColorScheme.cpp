@@ -161,30 +161,30 @@ QString ColorScheme::translatedColorNameForIndex(int index)
 ColorScheme::ColorScheme() :
     _description(QString()),
     _name(QString()),
-    _table(0),
-    _randomTable(0),
+    _table(nullptr),
+    _randomTable(nullptr),
     _opacity(1.0),
-    _wallpaper(0)
+    _wallpaper(nullptr)
 {
     setWallpaper(QString());
 }
 
 ColorScheme::ColorScheme(const ColorScheme &other) :
-    _table(0),
-    _randomTable(0),
+    _table(nullptr),
+    _randomTable(nullptr),
     _opacity(other._opacity),
     _wallpaper(other._wallpaper)
 {
     setName(other.name());
     setDescription(other.description());
 
-    if (other._table != 0) {
+    if (other._table != nullptr) {
         for (int i = 0; i < TABLE_COLORS; i++) {
             setColorTableEntry(i, other._table[i]);
         }
     }
 
-    if (other._randomTable != 0) {
+    if (other._randomTable != nullptr) {
         for (int i = 0; i < TABLE_COLORS; i++) {
             const RandomizationRange &range = other._randomTable[i];
             setRandomizationRange(i, range.hue, range.saturation, range.value);
@@ -239,7 +239,7 @@ ColorEntry ColorScheme::colorEntry(int index, uint randomSeed) const
 
     ColorEntry entry = colorTable()[index];
 
-    if (randomSeed == 0 || _randomTable == 0 || _randomTable[index].isNull()) {
+    if (randomSeed == 0 || _randomTable == nullptr || _randomTable[index].isNull()) {
         return entry;
     }
 
@@ -288,7 +288,7 @@ void ColorScheme::getColorTable(ColorEntry *table, uint randomSeed) const
 
 bool ColorScheme::randomizedBackgroundColor() const
 {
-    return _randomTable == 0 ? false : !_randomTable[BGCOLOR_INDEX].isNull();
+    return _randomTable == nullptr ? false : !_randomTable[BGCOLOR_INDEX].isNull();
 }
 
 void ColorScheme::setRandomizedBackgroundColor(bool randomize)
@@ -311,7 +311,7 @@ void ColorScheme::setRandomizationRange(int index, quint16 hue, quint8 saturatio
     Q_ASSERT(hue <= MAX_HUE);
     Q_ASSERT(index >= 0 && index < TABLE_COLORS);
 
-    if (_randomTable == 0) {
+    if (_randomTable == nullptr) {
         _randomTable = new RandomizationRange[TABLE_COLORS];
     }
 
@@ -374,7 +374,7 @@ void ColorScheme::readColorEntry(const KConfig &config, int index)
 {
     KConfigGroup configGroup = config.group(colorNameForIndex(index));
 
-    if (!configGroup.hasKey("Color") && _table != 0) {
+    if (!configGroup.hasKey("Color") && _table != nullptr) {
         setColorTableEntry(index, _table[index%BASE_COLORS]);
         return;
     }
@@ -426,7 +426,7 @@ void ColorScheme::writeColorEntry(KConfig &config, int index) const
         configGroup.deleteEntry("Bold");
     }
 
-    RandomizationRange random = _randomTable != 0 ? _randomTable[index] : RandomizationRange();
+    RandomizationRange random = _randomTable != nullptr ? _randomTable[index] : RandomizationRange();
 
     // record randomization if this color has randomization or
     // if one of the keys already exists
@@ -449,7 +449,7 @@ ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const
 
 ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &aPath) :
     _path(aPath),
-    _picture(0)
+    _picture(nullptr)
 {
 }
 

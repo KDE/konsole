@@ -50,12 +50,12 @@ void KDE4ProfileWriter::writeProperties(KConfig& config,
                                         const Profile::Ptr profile,
                                         const Profile::PropertyInfo* properties)
 {
-    const char* groupName = 0;
+    const char* groupName = nullptr;
     KConfigGroup group;
 
-    while (properties->name != 0) {
-        if (properties->group != 0) {
-            if (groupName == 0 || qstrcmp(groupName, properties->group) != 0) {
+    while (properties->name != nullptr) {
+        if (properties->group != nullptr) {
+            if (groupName == nullptr || qstrcmp(groupName, properties->group) != 0) {
                 group = config.group(properties->group);
                 groupName = properties->group;
             }

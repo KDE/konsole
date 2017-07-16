@@ -79,7 +79,7 @@ void TabTitleFormatButton::setContext(Session::TabTitleContext titleContext)
     menu()->clear();
 
     int count = 0;
-    const Element *array = 0;
+    const Element *array = nullptr;
 
     if (titleContext == Session::LocalTabTitle) {
         setToolTip(i18nc("@info:tooltip", "Insert title format"));

@@ -110,7 +110,7 @@ public:
          * one of the objects from the actions() list.  In which case the associated
          * action should be performed.
          */
-        virtual void activate(QObject *object = 0) = 0;
+        virtual void activate(QObject *object = nullptr) = 0;
         /**
          * Returns a list of actions associated with the hotspot which can be used in a
          * menu or toolbar
@@ -194,7 +194,7 @@ public:
     public:
         HotSpot(int startLine, int startColumn, int endLine, int endColumn,
                 const QStringList &capturedTexts);
-        void activate(QObject *object = 0) Q_DECL_OVERRIDE;
+        void activate(QObject *object = nullptr) Q_DECL_OVERRIDE;
 
         /** Returns the texts found by the filter when matching the filter's regular expression */
         QStringList capturedTexts() const;
@@ -258,7 +258,7 @@ public:
          * Open a web browser at the current URL.  The url itself can be determined using
          * the capturedTexts() method.
          */
-        void activate(QObject *object = 0) Q_DECL_OVERRIDE;
+        void activate(QObject *object = nullptr) Q_DECL_OVERRIDE;
 
     private:
         enum UrlType {
@@ -306,7 +306,7 @@ public:
         /**
          * Opens kate for editing the file.
          */
-        void activate(QObject *object = 0) Q_DECL_OVERRIDE;
+        void activate(QObject *object = nullptr) Q_DECL_OVERRIDE;
 
     private:
         FilterObject *_fileObject;

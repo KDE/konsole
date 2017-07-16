@@ -52,7 +52,7 @@ int ViewManager::lastManagerId = 0;
 
 ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     QObject(parent),
-    _viewSplitter(0),
+    _viewSplitter(nullptr),
     _actionCollection(collection),
     _containerSignalMapper(new QSignalMapper(this)),
     _navigationMethod(TabbedNavigation),
@@ -64,7 +64,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _managerId(0)
 {
     // create main view area
-    _viewSplitter = new ViewSplitter(0);
+    _viewSplitter = new ViewSplitter(nullptr);
     KAcceleratorManager::setNoAccel(_viewSplitter);
 
     // the ViewSplitter class supports both recursive and non-recursive splitting,
@@ -117,7 +117,7 @@ QWidget *ViewManager::activeView() const
     if (container != nullptr) {
         return container->activeView();
     } else {
-        return 0;
+        return nullptr;
     }
 }
 
@@ -426,7 +426,7 @@ void ViewManager::sessionFinished()
 
 void ViewManager::viewActivated(QWidget *view)
 {
-    Q_ASSERT(view != 0);
+    Q_ASSERT(view != nullptr);
 
     // focus the activated view, this will cause the SessionController
     // to notify the world that the view has been focused and the appropriate UI
@@ -471,7 +471,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
 
     // ensure that the active view is focused after the split / unsplit
     ViewContainer *activeContainer = _viewSplitter->activeContainer();
-    QWidget *activeView = activeContainer != nullptr ? activeContainer->activeView() : 0;
+    QWidget *activeView = activeContainer != nullptr ? activeContainer->activeView() : nullptr;
 
     if (activeView != nullptr) {
         activeView->setFocus(Qt::OtherFocusReason);
@@ -649,7 +649,7 @@ void ViewManager::createView(Session *session)
 
 ViewContainer *ViewManager::createContainer()
 {
-    ViewContainer *container = 0;
+    ViewContainer *container = nullptr;
 
     switch (_navigationMethod) {
     case TabbedNavigation:
@@ -839,7 +839,7 @@ void ViewManager::viewDestroyed(QWidget *view)
 
 TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
 {
-    auto display = new TerminalDisplay(0);
+    auto display = new TerminalDisplay(nullptr);
     display->setRandomSeed(session->sessionId() * 31);
 
     return display;
@@ -972,8 +972,8 @@ void ViewManager::profileChanged(Profile::Ptr profile)
         iter.next();
 
         // if session uses this profile, update the display
-        if (iter.key() != 0
-            && iter.value() != 0
+        if (iter.key() != nullptr
+            && iter.value() != nullptr
             && SessionManager::instance()->sessionProfile(iter.value()) == profile) {
             applyProfileToView(iter.key(), profile);
         }
@@ -1041,7 +1041,7 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
 {
     QList<int> ids = group.readEntry("Sessions", QList<int>());
     int activeTab = group.readEntry("Active", 0);
-    TerminalDisplay *display = 0;
+    TerminalDisplay *display = nullptr;
 
     int tab = 1;
     foreach (int id, ids) {

@@ -199,7 +199,7 @@ const ColorScheme *ColorSchemeManager::findColorScheme(const QString &name)
 
         qCDebug(KonsoleDebug) << "Could not find color scheme - " << name;
 
-        return 0;
+        return nullptr;
     }
 }
 

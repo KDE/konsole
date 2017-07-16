@@ -62,7 +62,7 @@ SessionManager::~SessionManager()
         // ensure that the Session doesn't later try to call back and do things to the
         // SessionManager
         foreach (Session *session, _sessions) {
-            disconnect(session, 0, this, 0);
+            disconnect(session, nullptr, this, nullptr);
         }
     }
 }
