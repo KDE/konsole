@@ -48,8 +48,9 @@
 
 using namespace Konsole;
 
-K_PLUGIN_FACTORY(KonsolePartFactory, registerPlugin<Konsole::Part>();)
-K_EXPORT_PLUGIN(KonsolePartFactory("konsole"))
+K_PLUGIN_FACTORY_WITH_JSON(KonsolePartFactory,
+                           "konsolepart.json",
+                           registerPlugin<Konsole::Part>();)
 
 Part::Part(QWidget *parentWidget, QObject *parent, const QVariantList &) :
     KParts::ReadOnlyPart(parent),

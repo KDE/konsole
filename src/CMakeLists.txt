@@ -207,6 +207,7 @@ set(konsolepart_PART_SRCS Part.cpp
 kconfig_add_kcfg_files(konsolepart_PART_SRCS settings/KonsoleSettings.kcfgc)
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 generate_export_header(konsolepart BASE_NAME konsole)
+kcoreaddons_desktop_to_json(konsolepart ../desktop/konsolepart.desktop)
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 target_link_libraries(konsolepart KF5::Parts KF5::XmlGui konsoleprivate)
 install(TARGETS konsolepart  DESTINATION ${KDE_INSTALL_PLUGINDIR})
