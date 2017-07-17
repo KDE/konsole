@@ -92,9 +92,9 @@ void ViewSplitter::registerContainer(ViewContainer *container)
     // syntax works.
     //connect(container , static_cast<void(ViewContainer::*)(ViewContainer*)>(&Konsole::ViewContainer::destroyed) , this , &Konsole::ViewSplitter::containerDestroyed);
     //connect(container , &Konsole::ViewContainer::empty , this , &Konsole::ViewSplitter::containerEmpty);
-    connect(container, SIGNAL(destroyed(ViewContainer *)), this,
-            SLOT(containerDestroyed(ViewContainer *)));
-    connect(container, SIGNAL(empty(ViewContainer *)), this, SLOT(containerEmpty(ViewContainer *)));
+    connect(container, SIGNAL(destroyed(ViewContainer*)), this,
+            SLOT(containerDestroyed(ViewContainer*)));
+    connect(container, SIGNAL(empty(ViewContainer*)), this, SLOT(containerEmpty(ViewContainer*)));
 }
 
 void ViewSplitter::unregisterContainer(ViewContainer *container)
