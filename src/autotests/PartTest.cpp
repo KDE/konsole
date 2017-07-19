@@ -49,8 +49,9 @@ void PartTest::testFd()
     pingList << QStringLiteral("/bin/ping") << QStringLiteral("/sbin/ping");
     for (int i = 0; i < pingList.size(); ++i) {
         info.setFile(pingList.at(i));
-        if (info.exists() && info.isExecutable())
+        if (info.exists() && info.isExecutable()) {
             pingExe = pingList.at(i);
+        }
     }
 
     if (pingExe.isEmpty()) {
@@ -59,7 +60,7 @@ void PartTest::testFd()
     }
 
     // create a Konsole part and attempt to connect to it
-    KParts::Part* terminalPart = createPart();
+    KParts::Part *terminalPart = createPart();
     if (terminalPart == nullptr) { // not found
         QSKIP("konsolepart not found.");
         return;
@@ -96,19 +97,20 @@ void PartTest::testFd()
     ptyProcess.waitForFinished(1000);
 }
 
-KParts::Part* PartTest::createPart()
+KParts::Part *PartTest::createPart()
 {
     KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
-    if (!service)       // not found
+    if (!service) {       // not found
         return nullptr;
-    KPluginFactory* factory = KPluginLoader(service->library()).factory();
-    if (factory == nullptr)       // not found
+    }
+    KPluginFactory *factory = KPluginLoader(service->library()).factory();
+    if (factory == nullptr) {       // not found
         return nullptr;
+    }
 
-    KParts::Part* terminalPart = factory->create<KParts::Part>(this);
+    KParts::Part *terminalPart = factory->create<KParts::Part>(this);
 
     return terminalPart;
 }
 
-QTEST_MAIN(PartTest )
-
+QTEST_MAIN(PartTest)

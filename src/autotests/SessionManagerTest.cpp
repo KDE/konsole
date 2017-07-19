@@ -29,13 +29,13 @@ void SessionManagerTest::testWarnNotImplemented()
 {
     qWarning() << "SessionManager tests not implemented";
 }
+
 void SessionManagerTest::init()
 {
 }
+
 void SessionManagerTest::cleanup()
 {
 }
 
 QTEST_MAIN_CORE(SessionManagerTest)
-
-

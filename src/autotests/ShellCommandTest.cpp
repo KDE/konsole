@@ -43,14 +43,13 @@ void ShellCommandTest::testConstructorWithOneArguemnt()
     ShellCommand shellCommand(fullCommand);
     QCOMPARE(shellCommand.command(), QStringLiteral("sudo"));
     QCOMPARE(shellCommand.fullCommand(), fullCommand);
-
 }
 
 void ShellCommandTest::testConstructorWithTwoArguments()
 {
     const QString command(QStringLiteral("wc"));
     QStringList arguments;
-    arguments << QStringLiteral("wc") << QStringLiteral("-l") << QStringLiteral("*.cpp") ;
+    arguments << QStringLiteral("wc") << QStringLiteral("-l") << QStringLiteral("*.cpp");
 
     ShellCommand shellCommand(command, arguments);
     QCOMPARE(shellCommand.command(), command);
@@ -101,7 +100,7 @@ void ShellCommandTest::testArgumentsWithSpaces()
 {
     const QString command(QStringLiteral("dir"));
     QStringList arguments;
-    arguments << QStringLiteral("dir") << QStringLiteral("c:\\Program Files") << QStringLiteral("System") << QStringLiteral("*.ini") ;
+    arguments << QStringLiteral("dir") << QStringLiteral("c:\\Program Files") << QStringLiteral("System") << QStringLiteral("*.ini");
     const QString expected_arg(QStringLiteral("dir \"c:\\Program Files\" System *.ini"));
 
     ShellCommand shellCommand(command, arguments);
@@ -120,4 +119,3 @@ void ShellCommandTest::testEmptyCommand()
 }
 
 QTEST_GUILESS_MAIN(ShellCommandTest)
-

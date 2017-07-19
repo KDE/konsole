@@ -48,10 +48,11 @@ void TerminalInterfaceTest::testTerminalInterfaceNoShell()
 {
     // create a Konsole part and attempt to connect to it
     _terminalPart = createPart();
-    if (_terminalPart == nullptr)
+    if (_terminalPart == nullptr) {
         QSKIP("konsolepart not found.", SkipSingle);
+    }
 
-    TerminalInterface* terminal = qobject_cast<TerminalInterface*>(_terminalPart);
+    TerminalInterface *terminal = qobject_cast<TerminalInterface *>(_terminalPart);
     QVERIFY(terminal);
 
 #if !defined(Q_OS_FREEBSD)
@@ -59,13 +60,13 @@ void TerminalInterfaceTest::testTerminalInterfaceNoShell()
     // -1 is current foreground process and name for process 0 is "kernel"
 
     // Verify results when no shell running
-    int terminalProcessId  = terminal->terminalProcessId();
+    int terminalProcessId = terminal->terminalProcessId();
     QCOMPARE(terminalProcessId, 0);
-    int foregroundProcessId  = terminal->foregroundProcessId();
+    int foregroundProcessId = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
-    QString foregroundProcessName  = terminal->foregroundProcessName();
+    QString foregroundProcessName = terminal->foregroundProcessName();
     QCOMPARE(foregroundProcessName, QString());
-    const QString currentWorkingDirectory  = terminal->currentWorkingDirectory();
+    const QString currentWorkingDirectory = terminal->currentWorkingDirectory();
     QCOMPARE(currentWorkingDirectory, QString());
 
 #endif
@@ -79,18 +80,19 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     // create a Konsole part and attempt to connect to it
     _terminalPart = createPart();
-    if (_terminalPart == nullptr)
+    if (_terminalPart == nullptr) {
         QSKIP("konsolepart not found.", SkipSingle);
+    }
 
-    TerminalInterface* terminal = qobject_cast<TerminalInterface*>(_terminalPart);
+    TerminalInterface *terminal = qobject_cast<TerminalInterface *>(_terminalPart);
     QVERIFY(terminal);
 
     // Start a shell in given directory
     terminal->showShellInDir(QDir::home().path());
 
-    int foregroundProcessId  = terminal->foregroundProcessId();
+    int foregroundProcessId = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
-    QString foregroundProcessName  = terminal->foregroundProcessName();
+    QString foregroundProcessName = terminal->foregroundProcessName();
     QCOMPARE(foregroundProcessName, QString());
 
     // terminalProcessId() is the user's default shell
@@ -108,7 +110,7 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     QSignalSpy stateSpy(_terminalPart, SIGNAL(currentDirectoryChanged(QString)));
     QVERIFY(stateSpy.isValid());
- 
+
     // Now we check to make sure we don't have any signals already
     QCOMPARE(stateSpy.count(), 0);
 
@@ -126,7 +128,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     QString firstSignalState = firstSignalArgs.at(0).toString();
     QCOMPARE(firstSignalState, currentDirectory);
 
-    const QString currentWorkingDirectory  = terminal->currentWorkingDirectory();
+    const QString currentWorkingDirectory = terminal->currentWorkingDirectory();
     QCOMPARE(currentWorkingDirectory, currentDirectory);
 
     // #1B - Test signal currentDirectoryChanged(QString)
@@ -136,7 +138,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     QCOMPARE(stateSpy.count(), 0);
 
     // Should be no change since the above cd didn't work
-    const QString currentWorkingDirectory2  = terminal->currentWorkingDirectory();
+    const QString currentWorkingDirectory2 = terminal->currentWorkingDirectory();
     QCOMPARE(currentWorkingDirectory2, currentDirectory);
 
     // Test starting a new program
@@ -144,30 +146,29 @@ void TerminalInterfaceTest::testTerminalInterface()
     terminal->sendInput(command + QLatin1Char('\n'));
     sleep(2000);
     // FIXME: find a good way to validate process id of 'top'
-    foregroundProcessId  = terminal->foregroundProcessId();
+    foregroundProcessId = terminal->foregroundProcessId();
     QVERIFY(foregroundProcessId != -1);
-    foregroundProcessName  = terminal->foregroundProcessName();
+    foregroundProcessName = terminal->foregroundProcessName();
     QCOMPARE(foregroundProcessName, command);
 
     terminal->sendInput(QStringLiteral("q"));
     sleep(2000);
 
     // Nothing running in foreground
-    foregroundProcessId  = terminal->foregroundProcessId();
+    foregroundProcessId = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
-    foregroundProcessName  = terminal->foregroundProcessName();
+    foregroundProcessName = terminal->foregroundProcessName();
     QCOMPARE(foregroundProcessName, QString());
 
     // Test destroyed()
     QSignalSpy destroyedSpy(_terminalPart, SIGNAL(destroyed()));
     QVERIFY(destroyedSpy.isValid());
- 
+
     // Now we check to make sure we don't have any signals already
     QCOMPARE(destroyedSpy.count(), 0);
 
     delete _terminalPart;
     QCOMPARE(destroyedSpy.count(), 1);
-
 }
 
 void TerminalInterfaceTest::sleep(int msecs)
@@ -177,19 +178,20 @@ void TerminalInterfaceTest::sleep(int msecs)
     loop.exec(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
 }
 
-KParts::Part* TerminalInterfaceTest::createPart()
+KParts::Part *TerminalInterfaceTest::createPart()
 {
     KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
-    if (!service)       // not found
+    if (!service) {       // not found
         return nullptr;
-    KPluginFactory* factory = KPluginLoader(service->library()).factory();
-    if (factory == nullptr)       // not found
+    }
+    KPluginFactory *factory = KPluginLoader(service->library()).factory();
+    if (factory == nullptr) {       // not found
         return nullptr;
+    }
 
-    KParts::Part* terminalPart = factory->create<KParts::Part>(this);
+    KParts::Part *terminalPart = factory->create<KParts::Part>(this);
 
     return terminalPart;
 }
 
 QTEST_MAIN(TerminalInterfaceTest)
-

@@ -49,12 +49,11 @@ void SessionTest::testEmulation()
 {
     auto session = new Session();
 
-    Emulation* emulation = session->emulation();
+    Emulation *emulation = session->emulation();
 
     QCOMPARE(emulation->lineCount(), 40);
 
     delete session;
 }
 
-QTEST_MAIN(SessionTest )
-
+QTEST_MAIN(SessionTest)

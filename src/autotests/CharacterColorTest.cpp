@@ -100,7 +100,6 @@ void CharacterColorTest::testColorEntry()
     QCOMPARE(defaultColorEntry != green, true);
     QCOMPARE(defaultColorEntry != black, true);
     QCOMPARE(defaultColorEntry.isValid(), false);
-
 }
 
 void CharacterColorTest::testDummyConstructor()
@@ -156,4 +155,3 @@ void CharacterColorTest::testColorSpaceSystem()
 }
 
 QTEST_GUILESS_MAIN(CharacterColorTest)
-

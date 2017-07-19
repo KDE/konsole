@@ -31,7 +31,7 @@ using namespace Konsole;
 
 void HistoryTest::testHistoryNone()
 {
-    HistoryType* history;
+    HistoryType *history;
 
     history = new HistoryTypeNone();
     QCOMPARE(history->isEnabled(), false);
@@ -42,7 +42,7 @@ void HistoryTest::testHistoryNone()
 
 void HistoryTest::testHistoryFile()
 {
-    HistoryType* history;
+    HistoryType *history;
 
     history = new HistoryTypeFile();
     QCOMPARE(history->isEnabled(), true);
@@ -53,7 +53,7 @@ void HistoryTest::testHistoryFile()
 
 void HistoryTest::testCompactHistory()
 {
-    HistoryType* history;
+    HistoryType *history;
 
     history = new CompactHistoryType(42);
     QCOMPARE(history->isEnabled(), true);
@@ -65,38 +65,37 @@ void HistoryTest::testCompactHistory()
 void HistoryTest::testEmulationHistory()
 {
     auto session = new Session();
-    Emulation* emulation = session->emulation();
+    Emulation *emulation = session->emulation();
 
-    const HistoryType& historyTypeDefault = emulation->history();
+    const HistoryType &historyTypeDefault = emulation->history();
     QCOMPARE(historyTypeDefault.isEnabled(), false);
     QCOMPARE(historyTypeDefault.isUnlimited(), false);
     QCOMPARE(historyTypeDefault.maximumLineCount(), 0);
 
     emulation->setHistory(HistoryTypeNone());
-    const HistoryType& historyTypeNone = emulation->history();
+    const HistoryType &historyTypeNone = emulation->history();
     QCOMPARE(historyTypeNone.isEnabled(), false);
     QCOMPARE(historyTypeNone.isUnlimited(), false);
     QCOMPARE(historyTypeNone.maximumLineCount(), 0);
 
     emulation->setHistory(HistoryTypeFile());
-    const HistoryType& historyTypeFile = emulation->history();
+    const HistoryType &historyTypeFile = emulation->history();
     QCOMPARE(historyTypeFile.isEnabled(), true);
     QCOMPARE(historyTypeFile.isUnlimited(), true);
     QCOMPARE(historyTypeFile.maximumLineCount(), -1);
 
     emulation->setHistory(CompactHistoryType(42));
-    const HistoryType& compactHistoryType = emulation->history();
+    const HistoryType &compactHistoryType = emulation->history();
     QCOMPARE(compactHistoryType.isEnabled(), true);
     QCOMPARE(compactHistoryType.isUnlimited(), false);
     QCOMPARE(compactHistoryType.maximumLineCount(), 42);
-
 
     delete session;
 }
 
 void HistoryTest::testHistoryScroll()
 {
-    HistoryScroll* historyScroll;
+    HistoryScroll *historyScroll;
 
     // None
     historyScroll = new HistoryScrollNone();
@@ -105,7 +104,7 @@ void HistoryTest::testHistoryScroll()
     QCOMPARE(historyScroll->getLineLen(0), 0);
     QCOMPARE(historyScroll->getLineLen(10), 0);
 
-    const HistoryType& historyTypeNone = historyScroll->getType();
+    const HistoryType &historyTypeNone = historyScroll->getType();
     QCOMPARE(historyTypeNone.isEnabled(), false);
     QCOMPARE(historyTypeNone.isUnlimited(), false);
     QCOMPARE(historyTypeNone.maximumLineCount(), 0);
@@ -117,7 +116,7 @@ void HistoryTest::testHistoryScroll()
     QCOMPARE(historyScroll->getLineLen(0), 0);
     QCOMPARE(historyScroll->getLineLen(10), 0);
 
-    const HistoryType& historyTypeFile = historyScroll->getType();
+    const HistoryType &historyTypeFile = historyScroll->getType();
     QCOMPARE(historyTypeFile.isEnabled(), true);
     QCOMPARE(historyTypeFile.isUnlimited(), true);
     QCOMPARE(historyTypeFile.maximumLineCount(), -1);
@@ -129,7 +128,7 @@ void HistoryTest::testHistoryScroll()
     QCOMPARE(historyScroll->getLineLen(0), 0);
     QCOMPARE(historyScroll->getLineLen(10), 0);
 
-    const HistoryType& compactHistoryType = historyScroll->getType();
+    const HistoryType &compactHistoryType = historyScroll->getType();
     QCOMPARE(compactHistoryType.isEnabled(), true);
     QCOMPARE(compactHistoryType.isUnlimited(), false);
     QCOMPARE(compactHistoryType.maximumLineCount(), 42);
@@ -137,5 +136,4 @@ void HistoryTest::testHistoryScroll()
     delete historyScroll;
 }
 
-QTEST_MAIN(HistoryTest )
-
+QTEST_MAIN(HistoryTest)

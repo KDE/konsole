@@ -77,7 +77,7 @@ void PtyTest::testRunProgram()
 {
     Pty pty;
     QString program = QStringLiteral("sh");
-    QStringList arguments ;
+    QStringList arguments;
     arguments << program;
     QStringList environments;
     const int result = pty.start(program, arguments, environments);
@@ -90,4 +90,3 @@ void PtyTest::testRunProgram()
 }
 
 QTEST_GUILESS_MAIN(PtyTest)
-

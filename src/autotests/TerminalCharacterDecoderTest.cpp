@@ -43,7 +43,7 @@ void TerminalCharacterDecoderTest::cleanup()
 
 void TerminalCharacterDecoderTest::testPlainTextDecoder()
 {
-    TerminalCharacterDecoder* decoder = new PlainTextDecoder();
+    TerminalCharacterDecoder *decoder = new PlainTextDecoder();
     Character characters[6];
     characters[0] = Character('h');
     characters[1] = Character('e');
@@ -66,8 +66,9 @@ void TerminalCharacterDecoderTest::testHTMLFileForValidity()
     QString fileName = QStringLiteral("konsole.html");
     QFile fi(fileName);
 
-    if (!fi.exists())
+    if (!fi.exists()) {
         QSKIP("Test html file not found.");
+    }
 
     QXmlSimpleReader xmlReader;
     QXmlInputSource source(&fi);
@@ -76,4 +77,3 @@ void TerminalCharacterDecoderTest::testHTMLFileForValidity()
 }
 
 QTEST_GUILESS_MAIN(TerminalCharacterDecoderTest)
-

@@ -68,4 +68,3 @@ void CharacterWidthTest::testWidth()
 }
 
 QTEST_GUILESS_MAIN(CharacterWidthTest)
-

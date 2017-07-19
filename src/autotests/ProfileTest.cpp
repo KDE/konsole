@@ -33,7 +33,7 @@ using namespace Konsole;
 void ProfileTest::testProfile()
 {
     // create a new profile
-    Profile* parent = new Profile;
+    Profile *parent = new Profile;
     parent->setProperty(Profile::Name, QStringLiteral("Parent"));
     parent->setProperty(Profile::Path, QStringLiteral("FakePath"));
 
@@ -48,7 +48,7 @@ void ProfileTest::testProfile()
     QCOMPARE(parent->customCursorColor(), QColor());
 
     // create a child profile
-    Profile* child = new Profile(Profile::Ptr(parent));
+    Profile *child = new Profile(Profile::Ptr(parent));
     child->setProperty(Profile::StartInCurrentSessionDir, true);
 
     // check which properties are set
@@ -79,6 +79,7 @@ void ProfileTest::testProfile()
 
     delete child;
 }
+
 void ProfileTest::testClone()
 {
     // create source profile and parent
@@ -112,10 +113,10 @@ void ProfileTest::testClone()
              target->property<int>(Profile::HistorySize));
 
     // check that Name and Path properties are handled specially and not cloned
-    QVERIFY(source->property<QString>(Profile::Name) !=
-            target->property<QString>(Profile::Name));
-    QVERIFY(source->property<QString>(Profile::Path) !=
-            target->property<QString>(Profile::Path));
+    QVERIFY(source->property<QString>(Profile::Name)
+            != target->property<QString>(Profile::Name));
+    QVERIFY(source->property<QString>(Profile::Path)
+            != target->property<QString>(Profile::Path));
 
     // check that Command property is not set in target because the values
     // are the same
@@ -125,11 +126,12 @@ void ProfileTest::testClone()
     QCOMPARE(source->property<QString>(Profile::ColorScheme),
              target->property<QString>(Profile::ColorScheme));
 }
+
 void ProfileTest::testProfileGroup()
 {
     // create three new profiles
     Profile::Ptr profile[3];
-    for (auto & i : profile) {
+    for (auto &i : profile) {
         i = new Profile;
         QVERIFY(!i->asGroup());
     }
@@ -139,15 +141,16 @@ void ProfileTest::testProfileGroup()
     profile[1]->setProperty(Profile::UseCustomCursorColor, false);
 
     // set properties with same values
-    for (auto & i : profile)
+    for (auto &i : profile) {
         i->setProperty(Profile::HistorySize, 1234);
+    }
 
     // create a group profile
     ProfileGroup::Ptr group = ProfileGroup::Ptr(new ProfileGroup);
     const ProfileGroup::Ptr group_const = ProfileGroup::Ptr(new ProfileGroup);
     QVERIFY(group->asGroup());
     QVERIFY(group_const->asGroup());
-    for (auto & i : profile) {
+    for (auto &i : profile) {
         group->addProfile(i);
         QVERIFY(group->profiles().contains(i));
         QVERIFY(!group_const->profiles().contains(i));
@@ -189,8 +192,8 @@ void ProfileTest::testProfileFileNames()
 {
     Profile::Ptr profile = Profile::Ptr(new Profile);
     QFileInfo fileInfo;
-    ProfileWriter* writer = new KDE4ProfileWriter;
-  
+    ProfileWriter *writer = new KDE4ProfileWriter;
+
     profile->setProperty(Profile::UntranslatedName, QStringLiteral("Indiana"));
     fileInfo.setFile(writer->getPath(profile));
     QCOMPARE(fileInfo.fileName(), QStringLiteral("Indiana.profile"));
@@ -209,9 +212,9 @@ void ProfileTest::testProfileFileNames()
     fileInfo.setFile(writer->getPath(profile));
     QCOMPARE(fileInfo.fileName(), QString("new profile.profile"));
     */
-    
+
     /* FIXME: don't allow certain characters in file names
-       Consider: ,^@=+{}[]~!?:&*\"|#%<>$\"'();`'/\ 
+       Consider: ,^@=+{}[]~!?:&*\"|#%<>$\"'();`'/\
        Suggestions: changing them all to _, just remove them, ...
        Bug 315086 comes from a user using / in the profile name - multiple
          issues there.
@@ -228,7 +231,7 @@ void ProfileTest::testProfileFileNames()
 void ProfileTest::testFallbackProfile()
 {
     // create a new profile
-    Profile* fallback = new Profile();
+    Profile *fallback = new Profile();
     fallback->useFallback();
 
     QCOMPARE(fallback->property<QString>(Profile::Name), QStringLiteral("Default"));
@@ -237,4 +240,3 @@ void ProfileTest::testFallbackProfile()
 }
 
 QTEST_GUILESS_MAIN(ProfileTest)
-

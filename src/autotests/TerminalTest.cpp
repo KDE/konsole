@@ -31,7 +31,6 @@ using namespace Konsole;
 
 void TerminalTest::testScrollBarPositions()
 {
-
     auto display = new TerminalDisplay(nullptr);
 
     // ScrollBar Positions
@@ -65,12 +64,13 @@ void TerminalTest::testColorTable()
 
     display->setColorTable(defaultTable);
 
-    const ColorEntry* colorTable = display->colorTable();
+    const ColorEntry *colorTable = display->colorTable();
 
-    for (int i = 0; i < TABLE_COLORS; i++)
+    for (int i = 0; i < TABLE_COLORS; i++) {
         QCOMPARE(colorTable[i], defaultTable[i]);
+    }
 
-    ColorEntry colorEntry =  ColorEntry(QColor(0x00, 0x00, 0x00));
+    ColorEntry colorEntry = ColorEntry(QColor(0x00, 0x00, 0x00));
     QVERIFY(colorTable[1] != colorEntry);
 
     delete display;
@@ -89,5 +89,4 @@ void TerminalTest::testSize()
     delete display;
 }
 
-QTEST_MAIN(TerminalTest )
-
+QTEST_MAIN(TerminalTest)

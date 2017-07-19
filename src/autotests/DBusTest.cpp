@@ -28,12 +28,13 @@ using namespace Konsole;
 void DBusTest::initTestCase()
 {
     const QString interfaceName = QStringLiteral("org.kde.konsole");
-    QDBusConnectionInterface* bus = nullptr;
+    QDBusConnectionInterface *bus = nullptr;
     QStringList konsoleServices;
 
-    if (!QDBusConnection::sessionBus().isConnected() ||
-            ((bus = QDBusConnection::sessionBus().interface()) == nullptr))
+    if (!QDBusConnection::sessionBus().isConnected()
+        || ((bus = QDBusConnection::sessionBus().interface()) == nullptr)) {
         QFAIL("Session bus not found");
+    }
 
     QDBusReply<QStringList> serviceReply = bus->registeredServiceNames();
     QVERIFY2(serviceReply.isValid(), "SessionBus interfaces not available");
@@ -41,15 +42,16 @@ void DBusTest::initTestCase()
     // Find all current Konsoles' services running
     QStringList allServices = serviceReply;
     for (QStringList::const_iterator it = allServices.constBegin(),
-            end = allServices.constEnd(); it != end; ++it) {
+         end = allServices.constEnd(); it != end; ++it) {
         const QString service = *it;
-        if (service.startsWith(interfaceName))
+        if (service.startsWith(interfaceName)) {
             konsoleServices << service;
+        }
     }
 
     // Create a new Konsole with a separate process id
     int pid = KProcess::startDetached(QStringLiteral("konsole"),
-            QStringList(QStringLiteral("--separate")));
+                                      QStringList(QStringLiteral("--separate")));
     if (pid == 0) {
         QFAIL(QStringLiteral("Unable to exec a new Konsole").toLatin1().data());
     }
@@ -67,11 +69,13 @@ void DBusTest::initTestCase()
     // Find dbus service of above Konsole
     allServices = serviceReply;
     for (QStringList::const_iterator it = allServices.constBegin(),
-            end = allServices.constEnd(); it != end; ++it) {
+         end = allServices.constEnd(); it != end; ++it) {
         const QString service = *it;
-        if (service.startsWith(interfaceName))
-            if (!konsoleServices.contains(service))
+        if (service.startsWith(interfaceName)) {
+            if (!konsoleServices.contains(service)) {
                 _interfaceName = service;
+            }
+        }
     }
 
     QVERIFY2(!_interfaceName.isEmpty(),
@@ -96,8 +100,9 @@ void DBusTest::cleanupTestCase()
     QVERIFY2(iface.isValid(), "Unable to get a dbus interface to Konsole!");
 
     QDBusReply<void> instanceReply = iface.call(QStringLiteral("close"));
-    if (!instanceReply.isValid())
+    if (!instanceReply.isValid()) {
         QFAIL(QStringLiteral("Unable to close Konsole: %1").arg(instanceReply.error().message()).toLatin1().data());
+    }
 }
 
 void DBusTest::testSessions()
@@ -221,9 +226,7 @@ void DBusTest::testSessions()
         QVERIFY(stringReply.isValid());
 
         QCOMPARE(stringReply.value(), i.value());
-
     }
 }
 
 QTEST_MAIN(DBusTest)
-
