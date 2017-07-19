@@ -34,7 +34,7 @@ demo_konsolepart::demo_konsolepart()
 {
     // Create terminal part and embed in into the main window
     _terminalPart = createPart();
-    if (!_terminalPart) {
+    if (_terminalPart == nullptr) {
         return;
     }
 
@@ -53,7 +53,7 @@ demo_konsolepart::demo_konsolepart()
 
 demo_konsolepart::~demo_konsolepart()
 {
-    if (_terminalPart) {
+    if (_terminalPart != nullptr) {
         disconnect(_terminalPart, &KParts::ReadOnlyPart::destroyed, this, &demo_konsolepart::quit);
     }
 }
