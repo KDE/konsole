@@ -589,7 +589,7 @@ public:
     }
 
 protected:
-    virtual bool readCurrentDir(int aPid)
+    bool readCurrentDir(int aPid) Q_DECL_OVERRIDE
     {
 #if defined(HAVE_OS_DRAGONFLYBSD)
         char buf[PATH_MAX];
@@ -634,7 +634,7 @@ protected:
     }
 
 private:
-    virtual bool readProcInfo(int aPid)
+    bool readProcInfo(int aPid) Q_DECL_OVERRIDE
     {
         int managementInfoBase[4];
         size_t mibLength;
@@ -676,7 +676,7 @@ private:
         return true;
     }
 
-    virtual bool readArguments(int aPid)
+    bool readArguments(int aPid) Q_DECL_OVERRIDE
     {
         char args[ARG_MAX];
         int managementInfoBase[4];
@@ -714,7 +714,7 @@ public:
     }
 
 protected:
-    virtual bool readCurrentDir(int aPid)
+    bool readCurrentDir(int aPid) Q_DECL_OVERRIDE
     {
         char buf[PATH_MAX];
         int managementInfoBase[3];
@@ -735,7 +735,7 @@ protected:
     }
 
 private:
-    virtual bool readProcInfo(int aPid)
+    bool readProcInfo(int aPid) Q_DECL_OVERRIDE
     {
         int managementInfoBase[6];
         size_t mibLength;
@@ -805,7 +805,7 @@ private:
         return (char **)buf;
     }
 
-    virtual bool readArguments(int aPid)
+    bool readArguments(int aPid) Q_DECL_OVERRIDE
     {
         char **argv;
 
@@ -832,7 +832,7 @@ public:
     }
 
 protected:
-    virtual bool readCurrentDir(int aPid)
+    bool readCurrentDir(int aPid) Q_DECL_OVERRIDE
     {
         struct proc_vnodepathinfo vpi;
         const int nb = proc_pidinfo(aPid, PROC_PIDVNODEPATHINFO, 0, &vpi, sizeof(vpi));
@@ -844,7 +844,7 @@ protected:
     }
 
 private:
-    virtual bool readProcInfo(int aPid)
+    bool readProcInfo(int aPid) Q_DECL_OVERRIDE
     {
         int managementInfoBase[4];
         size_t mibLength;
@@ -905,7 +905,7 @@ private:
         return true;
     }
 
-    virtual bool readArguments(int aPid)
+    bool readArguments(int aPid) Q_DECL_OVERRIDE
     {
         Q_UNUSED(aPid);
         return false;
@@ -935,7 +935,7 @@ public:
 protected:
     // FIXME: This will have the same issues as BKO 251351; the Linux
     // version uses readlink.
-    virtual bool readCurrentDir(int aPid)
+    bool readCurrentDir(int aPid) Q_DECL_OVERRIDE
     {
         QFileInfo info(QString("/proc/%1/path/cwd").arg(aPid));
         const bool readable = info.isReadable();
@@ -955,7 +955,7 @@ protected:
     }
 
 private:
-    virtual bool readProcInfo(int aPid)
+    bool readProcInfo(int aPid) Q_DECL_OVERRIDE
     {
         QFile psinfo(QString("/proc/%1/psinfo").arg(aPid));
         if (psinfo.open(QIODevice::ReadOnly)) {
@@ -976,7 +976,7 @@ private:
         return true;
     }
 
-    virtual bool readArguments(int /*pid*/)
+    bool readArguments(int /*pid*/) Q_DECL_OVERRIDE
     {
         // Handled in readProcInfo()
         return false;
