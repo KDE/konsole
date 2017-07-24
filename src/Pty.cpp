@@ -76,7 +76,7 @@ void Pty::sendData(const QByteArray &data)
         return;
     }
 
-    if (pty()->write(data.constData()) == -1) {
+    if (pty()->write(data) == -1) {
         qCDebug(KonsoleDebug) << "Could not send input data to terminal process.";
         return;
     }
