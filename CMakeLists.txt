@@ -35,7 +35,6 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     DBus
     PrintSupport
-    Script
     Widgets
 )
 
