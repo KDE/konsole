@@ -1083,6 +1083,18 @@ int ViewManager::sessionCount()
     return this->_sessionMap.size();
 }
 
+QStringList ViewManager::sessionList()
+{
+    QStringList ids;
+
+    QHash<TerminalDisplay *, Session *>::const_iterator i;
+    for (i = _sessionMap.constBegin(); i != _sessionMap.constEnd(); ++i) {
+        ids.append(QString::number(i.value()->sessionId()));
+    }
+
+    return ids;
+}
+
 int ViewManager::currentSession()
 {
     QHash<TerminalDisplay *, Session *>::iterator i;

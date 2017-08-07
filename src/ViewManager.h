@@ -231,6 +231,13 @@ public Q_SLOTS:
     /** DBus slot that returns the number of sessions in the current view. */
     Q_SCRIPTABLE int sessionCount();
 
+    /**
+     * DBus slot that returns the unique ids of the sessions in the
+     * current view.  The returned list is not sorted.
+     * QList<int> is not printable by qdbus so we use QStringList
+     */
+    Q_SCRIPTABLE QStringList sessionList();
+
     /** DBus slot that returns the current (active) session window */
     Q_SCRIPTABLE int currentSession();
 
