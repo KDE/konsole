@@ -241,6 +241,9 @@ public Q_SLOTS:
     /** DBus slot that returns the current (active) session window */
     Q_SCRIPTABLE int currentSession();
 
+    /** DBus slot that sets the current (active) session window */
+    Q_SCRIPTABLE void setCurrentSession(int sessionId);
+
     /** DBus slot that creates a new session in the current view.
      * @param profile the name of the profile to be used
      * started.
