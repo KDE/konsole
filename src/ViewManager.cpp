@@ -1097,8 +1097,8 @@ QStringList ViewManager::sessionList()
 
 int ViewManager::currentSession()
 {
-    QHash<TerminalDisplay *, Session *>::iterator i;
-    for (i = this->_sessionMap.begin(); i != this->_sessionMap.end(); ++i) {
+    QHash<TerminalDisplay *, Session *>::const_iterator i;
+    for (i = _sessionMap.constBegin(); i != _sessionMap.constEnd(); ++i) {
         if (i.key()->isVisible()) {
             return i.value()->sessionId();
         }
