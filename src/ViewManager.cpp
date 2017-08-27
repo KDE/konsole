@@ -245,11 +245,13 @@ void ViewManager::setupActions()
     }
 
     // keyboard shortcut only actions
-    collection->setDefaultShortcut(nextViewAction, Qt::SHIFT + Qt::Key_Right);
+    const QList<QKeySequence> nextViewActionKeys{Qt::SHIFT + Qt::Key_Right, Qt::CTRL + Qt::Key_PageDown};
+    collection->setDefaultShortcuts(nextViewAction, nextViewActionKeys);
     connect(nextViewAction, &QAction::triggered, this, &Konsole::ViewManager::nextView);
     _viewSplitter->addAction(nextViewAction);
 
-    collection->setDefaultShortcut(previousViewAction, Qt::SHIFT + Qt::Key_Left);
+    const QList<QKeySequence> previousViewActionKeys{Qt::SHIFT + Qt::Key_Left, Qt::CTRL + Qt::Key_PageUp};
+    collection->setDefaultShortcuts(previousViewAction, previousViewActionKeys);
     connect(previousViewAction, &QAction::triggered, this, &Konsole::ViewManager::previousView);
     _viewSplitter->addAction(previousViewAction);
 
