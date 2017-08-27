@@ -70,7 +70,17 @@ HistoryFile::HistoryFile() :
     // This has the down-side that users must restart to
     // load changes.
     if (!historyFileLocation.exists()) {
-        KConfigGroup configGroup(KSharedConfig::openConfig(), "FileLocation");
+        KSharedConfigPtr appConfig = KSharedConfig::openConfig();
+        if (qApp->applicationName() != QLatin1String("konsole")) {
+            // Check if "kpart"rc has "FileLocation" group; AFAIK
+            // only possible if user manually added it. If not
+            // found, use konsole's config.
+            if (!appConfig->hasGroup("FileLocation")) {
+                appConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
+            }
+        }
+
+        KConfigGroup configGroup = appConfig->group("FileLocation");
         if (configGroup.readEntry("scrollbackUseCacheLocation", false)) {
             *historyFileLocation() = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
         } else if (configGroup.readEntry("scrollbackUseSpecifiedLocation", false)) {
