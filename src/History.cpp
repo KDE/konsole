@@ -70,6 +70,7 @@ HistoryFile::HistoryFile() :
     // This has the down-side that users must restart to
     // load changes.
     if (!historyFileLocation.exists()) {
+        QString fileLocation;
         KSharedConfigPtr appConfig = KSharedConfig::openConfig();
         if (qApp->applicationName() != QLatin1String("konsole")) {
             // Check if "kpart"rc has "FileLocation" group; AFAIK
@@ -82,18 +83,28 @@ HistoryFile::HistoryFile() :
 
         KConfigGroup configGroup = appConfig->group("FileLocation");
         if (configGroup.readEntry("scrollbackUseCacheLocation", false)) {
-            *historyFileLocation() = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+            fileLocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
         } else if (configGroup.readEntry("scrollbackUseSpecifiedLocation", false)) {
             const QUrl specifiedUrl = KonsoleSettings::scrollbackUseSpecifiedLocationDirectory();
-            *historyFileLocation() = specifiedUrl.path();
+            fileLocation = specifiedUrl.path();
         } else {
-            *historyFileLocation() = QDir::tempPath();
+            fileLocation = QDir::tempPath();
         }
-        if (!QDir().mkpath(*historyFileLocation())) {
-            qCWarning(KonsoleDebug)<<"Unable to create scrollback folder "<<*historyFileLocation()
-                                   <<" using "<<QDir::homePath();
-            *historyFileLocation() = QDir::homePath();
+        // Validate file location
+        const QFileInfo fi(fileLocation);
+        if (fileLocation.isEmpty() || !fi.exists() || !fi.isDir() || !fi.isWritable()) {
+            qCWarning(KonsoleDebug)<<"Invalid scrollback folder "<<fileLocation<<"; using " << QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+            // Per Qt docs, this path is never empty; not sure if that
+            // means it always exists.
+            fileLocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+            const QFileInfo fi2(fileLocation);
+            if (!fi2.exists()) {
+                if (!QDir().mkpath(fileLocation)) {
+                    qCWarning(KonsoleDebug)<<"Unable to create scrollback folder "<<fileLocation;
+                }
+            }
         }
+        *historyFileLocation() = fileLocation;
     }
     const QString tmpDir = *historyFileLocation();
     const QString tmpFormat = tmpDir + QLatin1Char('/') + QLatin1String("konsole-XXXXXX.history");
