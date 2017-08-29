@@ -81,7 +81,7 @@ void ViewContainerTabBar::mouseMoveEvent(QMouseEvent *event)
     if (event->buttons() == Qt::LeftButton) {
         QPoint dragPos = _dragStart - event->pos();
         if (dragPos.manhattanLength() > QApplication::startDragDistance()
-            && _mousePressTimer->elapsed() > QApplication::startDragTime()) {
+            || _mousePressTimer->elapsed() > QApplication::startDragTime()) {
             int tab = tabAt(_dragStart);
             if (tab != -1) {
                 emit initiateDrag(tab);
