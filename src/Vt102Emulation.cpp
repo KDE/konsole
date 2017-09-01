@@ -291,6 +291,7 @@ void Vt102Emulation::initTokenizer()
 #define Xpe        (tokenBufferPos >= 2 && tokenBuffer[1] == ']')
 #define Xte        (Xpe      && (cc ==  7 || cc == 27))
 #define ces(C)     (cc < 256 && (charClass[cc] & (C)) == (C) && !Xte)
+#define dcs        (p >= 2   && s[0] == ESC && s[1] == 'P')
 
 #define CNTL(c) ((c)-'@')
 const int ESC = 27;
@@ -333,6 +334,7 @@ void Vt102Emulation::receiveChar(int cc)
     if (lec(3,2,'>')) { return; }
     if (lec(3,2,'!')) { return; }
     if (lun(       )) { processToken( TY_CHR(), applyCharset(cc), 0);   resetTokenizer(); return; }
+    if (dcs         ) { return; /* TODO We don't xterm DCS, so we just eat it */ }
     if (lec(2,0,ESC)) { processToken( TY_ESC(s[1]), 0, 0);              resetTokenizer(); return; }
     if (les(3,1,SCS)) { processToken( TY_ESC_CS(s[1],s[2]), 0, 0);      resetTokenizer(); return; }
     if (lec(3,1,'#')) { processToken( TY_ESC_DE(s[2]), 0, 0);           resetTokenizer(); return; }
