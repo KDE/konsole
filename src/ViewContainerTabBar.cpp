@@ -254,16 +254,16 @@ QPixmap ViewContainerTabBar::dragDropPixmap(int tab)
 {
     Q_ASSERT(tab >= 0 && tab < count());
 
-    // TODO - grabWidget() works except that it includes part
-    // of the tab bar outside the tab itself if the tab has
-    // curved corners
+    // QWidget::grab() (depreciated QPixmap::grabWidget())
+    // does not show right and bottom edges on certain themes
+    // (curved corners) so increase size of rectangle.
     const QRect rect = tabRect(tab);
     const int borderWidth = 1;
 
     QPixmap tabPixmap(rect.width() + borderWidth,
                       rect.height() + borderWidth);
     QPainter painter(&tabPixmap);
-    painter.drawPixmap(0, 0, QPixmap::grabWidget(this, rect));
+    painter.drawPixmap(0, 0, this->grab(rect));
     QPen borderPen;
     borderPen.setBrush(palette().dark());
     borderPen.setWidth(borderWidth);
