@@ -1,5 +1,4 @@
 # Konsole project
-project(Konsole)
 
 # KDE Application Version, managed by release script
 set (KDE_APPLICATIONS_VERSION_MAJOR "17")
@@ -11,6 +10,9 @@ set (KDE_APPLICATIONS_VERSION "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATI
 cmake_minimum_required (VERSION 3.0 FATAL_ERROR)
 set (QT_MIN_VERSION "5.6.0")
 set (KF5_MIN_VERSION "5.6.0")
+
+# Release script will create bugzilla versions
+project(konsole VERSION ${KDE_APPLICATIONS_VERSION})
 
 find_package(ECM 1.6.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
