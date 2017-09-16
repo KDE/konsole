@@ -106,7 +106,7 @@ QUrl BookmarkHandler::currentUrl() const
 QUrl BookmarkHandler::urlForView(ViewProperties *view) const
 {
     if (view != nullptr) {
-        return QUrl(view->url());
+        return view->url();
     } else {
         return QUrl();
     }

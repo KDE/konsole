@@ -52,7 +52,7 @@ int main(int argc, char **argv)
     parser->addVersionOption();
     about.setupCommandLine(parser.data());
 
-    QStringList args = QStringList(app->arguments());
+    QStringList args = app->arguments();
 
     parser->process(args);
     about.processCommandLine(parser.data());

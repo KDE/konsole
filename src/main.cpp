@@ -113,7 +113,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
     parser->addVersionOption();
     about.setupCommandLine(parser.data());
 
-    QStringList args = QStringList(app->arguments());
+    QStringList args = app->arguments();
     QStringList customCommand = Application::getCustomCommand(args);
 
     Application::populateCommandLineParser(parser.data());
