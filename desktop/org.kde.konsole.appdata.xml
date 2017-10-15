@@ -21,6 +21,7 @@
   <name xml:lang="gl">Konsole</name>
   <name xml:lang="hu">Konsole</name>
   <name xml:lang="ia">Konsole</name>
+  <name xml:lang="id">Konsole</name>
   <name xml:lang="it">Konsole</name>
   <name xml:lang="ko">Konsole</name>
   <name xml:lang="lt">Konsolė</name>
@@ -61,6 +62,7 @@
   <summary xml:lang="gl">Terminal</summary>
   <summary xml:lang="hu">Terminál</summary>
   <summary xml:lang="ia">Terminal</summary>
+  <summary xml:lang="id">Terminal</summary>
   <summary xml:lang="it">Terminale</summary>
   <summary xml:lang="ko">터미널</summary>
   <summary xml:lang="lt">Terminalas</summary>
@@ -131,6 +133,7 @@
     <p xml:lang="gl">Funcionalidades:</p>
     <p xml:lang="hu">Szolgáltatások:</p>
     <p xml:lang="ia">Characteristicas:</p>
+    <p xml:lang="id">Fitur:</p>
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="ko">기능:</p>
     <p xml:lang="lt">Ypatybės:</p>
@@ -172,6 +175,7 @@
       <li xml:lang="gl">Lapelas.</li>
       <li xml:lang="hu">Lapok</li>
       <li xml:lang="ia">Schedas</li>
+      <li xml:lang="id">Tab</li>
       <li xml:lang="it">Schede</li>
       <li xml:lang="ko">탭</li>
       <li xml:lang="lt">Kortelės</li>
@@ -210,6 +214,7 @@
       <li xml:lang="gl">Varios perfís.</li>
       <li xml:lang="hu">Több profil használatának lehetősége</li>
       <li xml:lang="ia">Profilos multiple</li>
+      <li xml:lang="id">Beberapa profil</li>
       <li xml:lang="it">Profili multipli</li>
       <li xml:lang="ko">다중 프로필</li>
       <li xml:lang="lt">Daugybė profilių</li>
@@ -248,6 +253,7 @@
       <li xml:lang="gl">Control de actividade e inactividade.</li>
       <li xml:lang="hu">Üresjárat- és aktivitásmonitorozás</li>
       <li xml:lang="ia">Controlante silentio e activitate </li>
+      <li xml:lang="id">Pemantauan diam dan aktivitas</li>
       <li xml:lang="it">Monitoraggio del silenzio e dell'attività</li>
       <li xml:lang="ko">무음 및 활동 모니터링</li>
       <li xml:lang="nb">Overvåking av stillhet og aktivitet</li>
@@ -285,6 +291,7 @@
       <li xml:lang="gl">Funcionalidade de marcadores.</li>
       <li xml:lang="hu">Könyvjelzők támogatása</li>
       <li xml:lang="ia">Supporto de marcator de libro</li>
+      <li xml:lang="id">Dukungan tanda buku</li>
       <li xml:lang="it">Supporto dei segnalibri</li>
       <li xml:lang="ko">책갈피 지원</li>
       <li xml:lang="nb">Støtte for bokmerker</li>
@@ -323,6 +330,7 @@
       <li xml:lang="gl">Busca.</li>
       <li xml:lang="hu">Keresés</li>
       <li xml:lang="ia">Cercante</li>
+      <li xml:lang="id">Mencari</li>
       <li xml:lang="it">Ricerca</li>
       <li xml:lang="ko">찾기</li>
       <li xml:lang="lt">Paieška</li>
@@ -362,6 +370,7 @@
       <li xml:lang="gl">Posibilidade de gardar a saída.</li>
       <li xml:lang="hu">Kimenet mentése</li>
       <li xml:lang="ia">Salveguardante exito</li>
+      <li xml:lang="id">Menyimpan keluaran</li>
       <li xml:lang="it">Salvataggio del risultato</li>
       <li xml:lang="ko">출력 저장</li>
       <li xml:lang="lt">Išvesties įrašymas</li>
