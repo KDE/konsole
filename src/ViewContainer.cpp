@@ -45,6 +45,7 @@
 #include "ViewContainerTabBar.h"
 #include "ProfileList.h"
 #include "ViewManager.h"
+#include "KonsoleSettings.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 
@@ -132,6 +133,11 @@ void ViewContainer::setNavigationPosition(NavigationPosition position)
 QList<ViewContainer::NavigationPosition> ViewContainer::supportedNavigationPositions() const
 {
     return QList<NavigationPosition>() << NavigationPositionTop;
+}
+
+void ViewContainer::setNavigationTabWidthExpanding(bool expand)
+{
+    navigationTabWidthExpandingChanged(expand);
 }
 
 ViewContainer::NavigationVisibility ViewContainer::navigationVisibility() const
@@ -433,6 +439,11 @@ void TabbedViewContainer::navigationPositionChanged(NavigationPosition position)
     }
 }
 
+void TabbedViewContainer::navigationTabWidthExpandingChanged(bool expand)
+{
+    _tabBar->setExpanding(expand);
+}
+
 void TabbedViewContainer::navigationVisibilityChanged(NavigationVisibility mode)
 {
     if (mode == AlwaysShowNavigation && _tabBar->isHidden()) {
@@ -464,8 +475,10 @@ void TabbedViewContainer::setStyleSheet(const QString &styleSheet)
     _tabBar->setStyleSheet(styleSheet);
 }
 
+// TODO: Only called via dbus method - remove
 void TabbedViewContainer::navigationTextModeChanged(bool useTextWidth)
 {
+    // Qt 5.9 changed how tabs are displayed
     if (useTextWidth) {
         _tabBar->setStyleSheet(QStringLiteral("QTabBar::tab { }"));
         _tabBar->setExpanding(false);

@@ -770,6 +770,7 @@ void MainWindow::applyKonsoleSettings()
     setNavigationVisibility(KonsoleSettings::tabBarVisibility());
     setNavigationPosition(KonsoleSettings::tabBarPosition());
     setNavigationBehavior(KonsoleSettings::newTabBehavior());
+    setNavigationTabWidthExpanding(KonsoleSettings::expandTabWidth());
     setShowQuickButtons(KonsoleSettings::showQuickButtons());
 
     if (KonsoleSettings::tabBarUseUserStyleSheet()) {
@@ -802,6 +803,11 @@ void MainWindow::setNavigationStyleSheet(const QString &styleSheet)
 void MainWindow::setNavigationBehavior(int behavior)
 {
     _viewManager->setNavigationBehavior(behavior);
+}
+
+void MainWindow::setNavigationTabWidthExpanding(bool expand)
+{
+    _viewManager->setNavigationTabWidthExpanding(expand);
 }
 
 void MainWindow::setNavigationStyleSheetFromFile(const QUrl &styleSheetFile)

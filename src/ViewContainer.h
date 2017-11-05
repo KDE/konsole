@@ -150,6 +150,11 @@ public:
     NavigationPosition navigationPosition() const;
 
     /**
+     * Set whether tab width are expanding
+     */
+    void setNavigationTabWidthExpanding(bool expand);
+
+    /**
      * Returns the list of supported navigation positions.
      * The supported positions will depend upon the type of the
      * navigation widget used by the ViewContainer subclass.
@@ -323,6 +328,14 @@ protected:
     }
 
     /**
+     * Called when the navigation tab width expanding option changes.
+     * See setNavigationTabWidthExpanding
+     */
+    virtual void navigationTabWidthExpandingChanged(bool)
+    {
+    }
+
+    /**
      * Called when the navigation position changes to re-layout
      * the container and place the navigation widget in the
      * specified position.
@@ -399,6 +412,7 @@ protected:
     void removeViewWidget(QWidget *view) Q_DECL_OVERRIDE;
     void navigationVisibilityChanged(NavigationVisibility mode) Q_DECL_OVERRIDE;
     void navigationPositionChanged(NavigationPosition position) Q_DECL_OVERRIDE;
+    void navigationTabWidthExpandingChanged(bool expand) Q_DECL_OVERRIDE;
     void navigationTextModeChanged(bool mode) Q_DECL_OVERRIDE;
     void moveViewWidget(int fromIndex, int toIndex) Q_DECL_OVERRIDE;
 

@@ -107,6 +107,7 @@ public:
     void setNavigationStyleSheet(const QString &stylesheet);
     void setNavigationStyleSheetFromFile(const QUrl &stylesheetfile);
     void setNavigationBehavior(int behavior);
+    void setNavigationTabWidthExpanding(bool expand);
     void setShowQuickButtons(bool show);
 
 Q_SIGNALS:

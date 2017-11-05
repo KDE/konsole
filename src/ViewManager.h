@@ -168,6 +168,7 @@ public:
     void setNavigationVisibility(int visibility);
     void setNavigationPosition(int position);
     void setNavigationBehavior(int behavior);
+    void setNavigationTabWidthExpanding(bool expand);
     void setNavigationStyleSheet(const QString &styleSheet);
     void setShowQuickButtons(bool show);
 
@@ -401,6 +402,7 @@ private:
     ViewContainer::NavigationVisibility _navigationVisibility;
     ViewContainer::NavigationPosition _navigationPosition;
     bool _showQuickButtons;
+    bool _navigationTabWidthExpanding;
     NewTabBehavior _newTabBehavior;
     QString _navigationStyleSheet;
 

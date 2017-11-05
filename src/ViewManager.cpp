@@ -59,6 +59,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _navigationVisibility(ViewContainer::AlwaysShowNavigation),
     _navigationPosition(ViewContainer::NavigationPositionTop),
     _showQuickButtons(false),
+    _navigationTabWidthExpanding(true),
     _newTabBehavior(PutNewTabAtTheEnd),
     _navigationStyleSheet(QString()),
     _managerId(0)
@@ -672,6 +673,7 @@ ViewContainer *ViewManager::createContainer()
     // FIXME: these code feels duplicated
     container->setNavigationVisibility(_navigationVisibility);
     container->setNavigationPosition(_navigationPosition);
+    container->setNavigationTabWidthExpanding(_navigationTabWidthExpanding);
     container->setStyleSheet(_navigationStyleSheet);
     if (_showQuickButtons) {
         container->setFeatures(container->features()
@@ -1241,6 +1243,15 @@ void ViewManager::setNavigationPosition(int position)
     foreach (ViewContainer *container, _viewSplitter->containers()) {
         Q_ASSERT(container->supportedNavigationPositions().contains(_navigationPosition));
         container->setNavigationPosition(_navigationPosition);
+    }
+}
+
+void ViewManager::setNavigationTabWidthExpanding(bool expand)
+{
+    _navigationTabWidthExpanding = expand;
+
+    foreach (ViewContainer *container, _viewSplitter->containers()) {
+        container->setNavigationTabWidthExpanding(expand);
     }
 }
 

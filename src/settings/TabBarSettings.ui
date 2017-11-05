@@ -17,10 +17,10 @@
       <string>Appearance</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_1">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Tab bar visibility:</string>
+         <string>Tab bar position:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -52,13 +52,47 @@
         </item>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_1">
         <property name="text">
-         <string>Tab bar position:</string>
+         <string>Tab bar visibility:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QCheckBox" name="kcfg_ExpandTabWidth">
+        <property name="text">
+         <string>Expand Individual Tab Widths to Full Window</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="KUrlRequester" name="kcfg_TabBarUserStyleSheetFile">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>2</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="filter" stdset="0">
+         <string>text/css</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="3">
+       <widget class="QCheckBox" name="kcfg_ShowQuickButtons">
+        <property name="text">
+         <string>Show 'New Tab' and 'Close Tab' buttons</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QCheckBox" name="kcfg_TabBarUseUserStyleSheet">
+        <property name="text">
+         <string>Use user-defined stylesheet</string>
         </property>
        </widget>
       </item>
@@ -82,30 +116,22 @@
         </item>
        </widget>
       </item>
-      <item row="2" column="0" colspan="3">
-       <widget class="QCheckBox" name="kcfg_ShowQuickButtons">
+      <item row="3" column="0" colspan="3">
+       <widget class="QLabel" name="Qt59label">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
         <property name="text">
-         <string>Show 'New Tab' and 'Close Tab' buttons</string>
+         <string>Qt 5.9+ has changes that will affect the below two options.</string>
         </property>
-       </widget>
-      </item>
-      <item row="3" column="0" colspan="2">
-       <widget class="QCheckBox" name="kcfg_TabBarUseUserStyleSheet">
-        <property name="text">
-         <string>Use user-defined stylesheet</string>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="KUrlRequester" name="kcfg_TabBarUserStyleSheetFile">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>2</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="filter">
-         <string>text/css</string>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -176,6 +202,7 @@
    <class>KUrlRequester</class>
    <extends>QFrame</extends>
    <header>kurlrequester.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
