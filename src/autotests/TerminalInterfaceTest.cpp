@@ -99,9 +99,6 @@ void TerminalInterfaceTest::testTerminalInterface()
     // FIXME: find a way to verify this
     // int terminalProcessId  = terminal->terminalProcessId();
 
-    // Sleep is used to allow enough time for these to work
-    // In Qt5 we can use QSignalSpy::wait()
-
     // Let's try using QSignalSpy
     // http://techbase.kde.org/Development/Tutorials/Unittests
     // QSignalSpy is really a QList of QLists, so we take the first
@@ -119,7 +116,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     // #1A - Test signal currentDirectoryChanged(QString)
     currentDirectory = QStringLiteral("/tmp");
     terminal->sendInput(QStringLiteral("cd ") + currentDirectory + QLatin1Char('\n'));
-    sleep(2000);
+    stateSpy.wait(2000);
     QCOMPARE(stateSpy.count(), 1);
 
     // Correct result?
@@ -134,7 +131,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     // #1B - Test signal currentDirectoryChanged(QString)
     // Invalid directory - no signal should be emitted
     terminal->sendInput(QStringLiteral("cd /usrADADFASDF\n"));
-    sleep(2000);
+    stateSpy.wait(2000);
     QCOMPARE(stateSpy.count(), 0);
 
     // Should be no change since the above cd didn't work
@@ -144,7 +141,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     // Test starting a new program
     QString command = QStringLiteral("top");
     terminal->sendInput(command + QLatin1Char('\n'));
-    sleep(2000);
+    stateSpy.wait(2000);
     // FIXME: find a good way to validate process id of 'top'
     foregroundProcessId = terminal->foregroundProcessId();
     QVERIFY(foregroundProcessId != -1);
@@ -152,7 +149,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     QCOMPARE(foregroundProcessName, command);
 
     terminal->sendInput(QStringLiteral("q"));
-    sleep(2000);
+    stateSpy.wait(2000);
 
     // Nothing running in foreground
     foregroundProcessId = terminal->foregroundProcessId();
@@ -169,13 +166,6 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     delete _terminalPart;
     QCOMPARE(destroyedSpy.count(), 1);
-}
-
-void TerminalInterfaceTest::sleep(int msecs)
-{
-    QEventLoop loop;
-    QTimer::singleShot(msecs, &loop, SLOT(quit()));
-    loop.exec(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
 }
 
 KParts::Part *TerminalInterfaceTest::createPart()
