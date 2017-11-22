@@ -328,7 +328,17 @@ void EditProfileDialog::showEnvironmentEditor()
 {
     bool ok;
     const Profile::Ptr profile = lookupProfile();
-    QStringList currentEnvironment = profile->environment();
+
+    QStringList currentEnvironment;
+
+    // the user could re-open the environment editor before clicking OK/Apply
+    // in the parent edit profile dialog, so we make sure to show the the new
+    // environment vars
+    if (_tempProfile->isPropertySet(Profile::Environment)) {
+            currentEnvironment  = _tempProfile->environment();
+    } else {
+        currentEnvironment = profile->environment();
+    }
 
     QString text = QInputDialog::getMultiLineText(this,
                                                   i18n("Edit Environment"),
@@ -336,9 +346,16 @@ void EditProfileDialog::showEnvironmentEditor()
                                                   currentEnvironment.join(QStringLiteral("\n")),
                                                   &ok);
 
-    if (ok && !text.isEmpty()) {
-        QStringList newEnvironment = text.split(QLatin1Char('\n'));
-        updateTempProfileProperty(Profile::Environment, newEnvironment);
+    QStringList newEnvironment;
+
+    if (ok) {
+        if(!text.isEmpty()) {
+            newEnvironment = text.split(QLatin1Char('\n'));
+            updateTempProfileProperty(Profile::Environment, newEnvironment);
+        } else {
+            // the user could have removed all entries so we return an empty list
+            updateTempProfileProperty(Profile::Environment, newEnvironment);
+        }
     }
 }
 
