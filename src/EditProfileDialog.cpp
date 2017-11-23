@@ -331,9 +331,9 @@ void EditProfileDialog::showEnvironmentEditor()
 
     QStringList currentEnvironment;
 
-    // the user could re-open the environment editor before clicking OK/Apply
-    // in the parent edit profile dialog, so we make sure to show the the new
-    // environment vars
+    // The user could re-open the environment editor before clicking
+    // OK/Apply in the parent edit profile dialog, so we make sure
+    // to show the new environment vars
     if (_tempProfile->isPropertySet(Profile::Environment)) {
             currentEnvironment  = _tempProfile->environment();
     } else {
