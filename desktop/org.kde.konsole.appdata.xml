@@ -90,6 +90,7 @@
     <p>Konsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.</p>
     <p xml:lang="ca">El Konsole és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordres). Emula una interfície de línia d'ordres en una finestra de només text.</p>
     <p xml:lang="ca-valencia">El Konsole és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordes). Emula una interfície de línia d'ordes en una finestra de només text.</p>
+    <p xml:lang="da">Konsole er en X-terminalemulator, ofte omtal som en terminal eller en skal. Den emulerer en kommandolinjegrænseflade i et vindue kun med tekst.</p>
     <p xml:lang="de">Konsole ist ein X-Terminal-Emulator, oftmals auch einfach nur als Terminal oder Shell bezeichnet. Es emuliert die Befehlszeile in einem Textfenster.</p>
     <p xml:lang="el">Το Konsole είναι ένας εξομοιωτής τερματικού, το οποίο συχνά αναφέρεται ως τερματικό ή κέλυφος. Εξομοιώνει ένα περιβάλλον χρήστη γραμμής εντολών σε ένα παράθυρο για κείμενο μόνο.</p>
     <p xml:lang="en-GB">Konsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.</p>
@@ -205,6 +206,7 @@
       <li xml:lang="ca">Perfils múltiples</li>
       <li xml:lang="ca-valencia">Perfils múltiples</li>
       <li xml:lang="cs">Možnost mít několik profilů</li>
+      <li xml:lang="da">Flere profiler</li>
       <li xml:lang="de">Mehrere Profile</li>
       <li xml:lang="el">Πολλαπλά προφίλ</li>
       <li xml:lang="en-GB">Multiple profiles</li>
@@ -244,6 +246,7 @@
       <li xml:lang="ca">Monitoratge del silenci i de l'activitat</li>
       <li xml:lang="ca-valencia">Monitoratge del silenci i de l'activitat</li>
       <li xml:lang="cs">Monitorování nečinnosti a aktivity</li>
+      <li xml:lang="da">Overvågning af stilhed og aktivitet</li>
       <li xml:lang="de">Überwachung auf Aktivität und Inaktivität</li>
       <li xml:lang="el">Παρακολούθηση κατάστασης αδράνειας και δραστηριοτήτων</li>
       <li xml:lang="en-GB">Silence and Activity monitoring</li>
@@ -282,6 +285,7 @@
       <li xml:lang="ca">Implementació de punts</li>
       <li xml:lang="ca-valencia">Implementació de punts</li>
       <li xml:lang="cs">Podpora záložek</li>
+      <li xml:lang="da">Understøttelse af bogmærker</li>
       <li xml:lang="de">Lesezeichen-Unterstützung</li>
       <li xml:lang="el">υποστήριξη σελιδοδεικτών</li>
       <li xml:lang="en-GB">Bookmark support</li>
