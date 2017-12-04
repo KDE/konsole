@@ -101,6 +101,7 @@
     <p xml:lang="hu">A Konsole egy X terminálemulátor, más néven terminál vagy parancsértelmező. Parancssori felületet emulál egy szöveges ablakba,</p>
     <p xml:lang="ia">Konsole es un emulator de terminal de X, sovente referite como unterminal o un shell. Illo emula uninterfacie de linea de commando in un fenestra de sol texto.</p>
     <p xml:lang="it">Konsole è un emulatore di terminale per X, spesso indicato come un terminale o una shell. Emula un'interfaccia a riga di comando in una finestra di solo testo.</p>
+    <p xml:lang="ko">Konsole은 X 터미널 에뮬레이터입니다. 텍스트 창의 명령행 인터페이스를 제공합니다.</p>
     <p xml:lang="nl">Konsole is een X-terminalemulator, vaak een terminal of shell genoemd. Het emuleert een opdrachtprompt in een venster met alleen tekst.</p>
     <p xml:lang="nn">Konsole er ein såkalla terminalemulator for X, gjerne kalla ein «terminal» eller eit «skal». Han emulerer eit tekstbasert kommandolinjegrensesnitt.</p>
     <p xml:lang="pl">Konsola jest emulatorem terminala dla X, częściej nazwyana po prostu terminalem ub powłoką. Emuluje interfejs wiersza poleceń w oknie zawierającym wyłącznie tekst.</p>
@@ -361,7 +362,7 @@
       <li xml:lang="zh-TW">搜尋</li>
       <li>Saving output</li>
       <li xml:lang="ar">حفظ الخرج</li>
-      <li xml:lang="ca">Desat de la sortida</li>
+      <li xml:lang="ca">Desament de la sortida</li>
       <li xml:lang="ca-valencia">Guardat de l'eixida</li>
       <li xml:lang="cs">Ukládání výstupu</li>
       <li xml:lang="da">Gemning af output</li>
