@@ -402,12 +402,12 @@
       <li xml:lang="zh-TW">儲存輸出</li>
     </ul>
   </description>
-  <url type="homepage">http://konsole.kde.org/</url>
+  <url type="homepage">https://konsole.kde.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=konsole</url>
-  <url type="help">http://docs.kde.org/stable/en/applications/konsole/index.html</url>
+  <url type="help">https://docs.kde.org/?application=konsole</url>
   <screenshots>
     <screenshot type="default">
-      <image>http://kde.org/images/screenshots/konsole.png</image>
+      <image>https://kde.org/images/screenshots/konsole.png</image>
     </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
