@@ -87,6 +87,9 @@ private Q_SLOTS:
     void updateItems(const Profile::Ptr);
     void removeItems(const Profile::Ptr);
 
+    // double clicking the profile name opens the edit profile dialog
+    void doubleClicked(const QModelIndex &index);
+
 private:
     Profile::Ptr currentProfile() const;
     QList<Profile::Ptr> selectedProfiles() const;

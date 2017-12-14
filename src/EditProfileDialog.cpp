@@ -83,7 +83,7 @@ EditProfileDialog::EditProfileDialog(QWidget *aParent) :
 
     connect(mButtonBox->button(QDialogButtonBox::Apply),
             &QPushButton::clicked, this,
-            &Konsole::EditProfileDialog::save);
+            &Konsole::EditProfileDialog::apply);
 
     connect(_delayedPreviewTimer, &QTimer::timeout, this,
             &Konsole::EditProfileDialog::delayedPreviewActivate);
@@ -143,8 +143,35 @@ void EditProfileDialog::reject()
 
 void EditProfileDialog::accept()
 {
+    if (!isValidProfileName()) {
+        return;
+    }
+    save();
+    unpreviewAll();
+    QDialog::accept();
+}
+
+void EditProfileDialog::apply()
+{
+    if (!isValidProfileName()) {
+        return;
+    }
+    save();
+}
+
+bool EditProfileDialog::isValidProfileName()
+{
     Q_ASSERT(_profile);
     Q_ASSERT(_tempProfile);
+
+    const QList<Profile::Ptr> existingProfiles = ProfileManager::instance()->allProfiles();
+    QStringList otherExistingProfileNames;
+
+    foreach(auto existingProfile, existingProfiles) {
+        if (existingProfile->name() != _profile->name()) {
+            otherExistingProfileNames.append(existingProfile->name());
+        }
+    }
 
     if ((_tempProfile->isPropertySet(Profile::Name)
          && _tempProfile->name().isEmpty())
@@ -152,11 +179,20 @@ void EditProfileDialog::accept()
         KMessageBox::sorry(this,
                            i18n("<p>Each profile must have a name before it can be saved "
                                 "into disk.</p>"));
-        return;
+        // revert the name in the dialog
+        _ui->profileNameEdit->setText(_profile->name());
+        selectProfileName();
+        return false;
+    } else if (!_tempProfile->name().isEmpty() && otherExistingProfileNames.contains(_tempProfile->name())) {
+        KMessageBox::sorry(this,
+                            i18n("<p>A profile with this name already exists.</p>"));
+        // revert the name in the dialog
+        _ui->profileNameEdit->setText(_profile->name());
+        selectProfileName();
+        return false;
+    } else {
+        return true;
     }
-    save();
-    unpreviewAll();
-    QDialog::accept();
 }
 
 QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr group, int maxLength)

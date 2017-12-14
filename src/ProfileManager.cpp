@@ -342,6 +342,8 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
 {
     Q_ASSERT(profile);
 
+    const QString origPath = profile->path();
+
     // never save a profile with empty name into disk!
     persistent = persistent && !profile->name().isEmpty();
 
@@ -411,6 +413,25 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
     // it has no file on disk
     if (persistent && !newProfile->isHidden()) {
         newProfile->setProperty(Profile::Path, saveProfile(newProfile));
+        // if the profile was renamed, after saving the new profile
+        // delete the the old/redundant profile.
+        // only do this if origPath is not empty, because it's empty
+        // when creating a new profile, this works around a bug where
+        // the newly created profile appears twice in the ProfileSettings
+        // dialog
+        if (!origPath.isEmpty() && (newProfile->path() != origPath)) {
+            // this is needed to include the old profile too
+            _loadedAllProfiles = false;
+           const QList<Profile::Ptr> availableProfiles = ProfileManager::instance()->allProfiles();
+            foreach(auto oldProfile, availableProfiles) {
+                if (oldProfile->path() == origPath) {
+                    // assign the same shortcut of the old profile to
+                    // the newly renamed profile
+                    setShortcut(newProfile, shortcut(oldProfile));
+                    deleteProfile(oldProfile);
+                }
+            }
+        }
     }
 
     // notify the world about the change

@@ -55,6 +55,9 @@ ProfileSettings::ProfileSettings(QWidget* aParent)
     sessionTable->setItemDelegateForColumn(ShortcutColumn, new ShortcutItemDelegate(this));
     sessionTable->setEditTriggers(sessionTable->editTriggers() | QAbstractItemView::SelectedClicked);
 
+    // double clicking the profile name opens the profile edit dialog
+    connect(sessionTable, &QTableView::doubleClicked, this, &Konsole::ProfileSettings::doubleClicked);
+
     // populate the table with profiles
     populateTable();
 
@@ -90,18 +93,6 @@ void ProfileSettings::itemDataChanged(QStandardItem* item)
         QKeySequence sequence = QKeySequence::fromString(item->text());
         ProfileManager::instance()->setShortcut(item->data(ShortcutRole).value<Profile::Ptr>(),
                                                 sequence);
-    } else if (item->column() == ProfileNameColumn) {
-        QString newName = item->text();
-        Profile::Ptr profile = item->data(ProfileKeyRole).value<Profile::Ptr>();
-        QString oldName = profile->name();
-
-        if (newName != oldName) {
-            QHash<Profile::Property, QVariant> properties;
-            properties.insert(Profile::Name, newName);
-            properties.insert(Profile::UntranslatedName, newName);
-
-            ProfileManager::instance()->changeProfile(profile, properties);
-        }
     }
 }
 
@@ -144,7 +135,9 @@ void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, QList<QS
     if (!profile->icon().isEmpty())
         items[ProfileNameColumn]->setIcon(QIcon::fromTheme(profile->icon()));
     items[ProfileNameColumn]->setData(QVariant::fromValue(profile), ProfileKeyRole);
-    items[ProfileNameColumn]->setToolTip(i18nc("@info:tooltip", "Click to rename profile"));
+    // only allow renaming the profile from the edit profile dialog
+    // so as to use ProfileManager::checkProfileName()
+    items[ProfileNameColumn]->setEditable(false);
 
     // Favorite Status
     const bool isFavorite = ProfileManager::instance()->findFavorites().contains(profile);
@@ -161,6 +154,15 @@ void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, QList<QS
     items[ShortcutColumn]->setData(QVariant::fromValue(profile), ShortcutRole);
     items[ShortcutColumn]->setToolTip(i18nc("@info:tooltip", "Double click to change shortcut"));
 }
+
+void ProfileSettings::doubleClicked(const QModelIndex &index)
+{
+    QStandardItem *item = _sessionModel->itemFromIndex(index);
+    if (item->column() == ProfileNameColumn) {
+        editSelected();
+    }
+}
+
 void ProfileSettings::addItems(const Profile::Ptr profile)
 {
     if (profile->isHidden())

@@ -91,6 +91,8 @@ public Q_SLOTS:
     // reimplemented
     void reject() Q_DECL_OVERRIDE;
 
+    void apply();
+
 protected:
     bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
 
@@ -239,6 +241,10 @@ private:
         const char *slot;
     };
     void setupCheckBoxes(BooleanOption *options, const Profile::Ptr profile);
+
+    // returns false if the profile name is empty or if the name matches
+    // the name of an already existing profile; otherwise return true.
+    bool isValidProfileName();
 
     Ui::EditProfileDialog *_ui;
     Profile::Ptr _tempProfile;
