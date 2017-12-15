@@ -430,8 +430,10 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
                 if (oldProfile->path() == origPath) {
                     // assign the same shortcut of the old profile to
                     // the newly renamed profile
-                    setShortcut(newProfile, shortcut(oldProfile));
-                    deleteProfile(oldProfile);
+                    const auto oldShortcut = shortcut(oldProfile);
+                    if (deleteProfile(oldProfile)) {
+                        setShortcut(newProfile, oldShortcut);
+                    }
                 }
             }
         }
