@@ -190,6 +190,9 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     if (!result) {
         qCDebug(KonsoleDebug) << "Could not load profile from " << path;
         return Profile::Ptr();
+    } else if (newProfile->name().isEmpty()) {
+        qCWarning(KonsoleDebug) << path << " does not have a valid name, ignoring.";
+        return Profile::Ptr();
     } else {
         addProfile(newProfile);
         return newProfile;
