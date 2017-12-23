@@ -420,9 +420,12 @@ void ViewManager::sessionFinished()
         }
     }
 
-    // This is needed to remove this controller from factory() in
-    // order to prevent BUG: 185466 - disappearing menu popup
-    if (_pluggedController != nullptr) {
+    // Only remove the controller from factory() if it's actually controlling
+    // the session from the sender.
+    // This fixes BUG: 348478 - messed up menus after a detached tab is closed
+    if ((_pluggedController != nullptr) && (_pluggedController->session() == session)) {
+        // This is needed to remove this controller from factory() in
+        // order to prevent BUG: 185466 - disappearing menu popup
         emit unplugController(_pluggedController);
     }
 }
