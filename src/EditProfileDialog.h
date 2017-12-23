@@ -242,8 +242,11 @@ private:
     };
     void setupCheckBoxes(BooleanOption *options, const Profile::Ptr profile);
 
-    // returns false if the profile name is empty or if the name matches
-    // the name of an already existing profile; otherwise return true.
+    // returns false if:
+    // - the profile name is empty
+    // - the name matches the name of an already existing profile
+    // - the existing profile config file is read-only
+    // otherwise returns true.
     bool isValidProfileName();
 
     Ui::EditProfileDialog *_ui;

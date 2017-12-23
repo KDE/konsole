@@ -143,10 +143,15 @@ void EditProfileDialog::reject()
 
 void EditProfileDialog::accept()
 {
-    if (!isValidProfileName()) {
-        return;
+    // if the Apply button is disabled then no settings were changed
+    // or the changes have already been saved by apply()
+    if (mButtonBox->button(QDialogButtonBox::Apply)->isEnabled()) {
+        if (!isValidProfileName()) {
+            return;
+        }
+        save();
     }
-    save();
+
     unpreviewAll();
     QDialog::accept();
 }
@@ -163,6 +168,20 @@ bool EditProfileDialog::isValidProfileName()
 {
     Q_ASSERT(_profile);
     Q_ASSERT(_tempProfile);
+
+    // check whether the user has enough permissions to save the profile
+    QFileInfo fileInfo(_profile->path());
+    if (fileInfo.exists() && !fileInfo.isWritable()) {
+        if (!_tempProfile->isPropertySet(Profile::Name)
+            || (_tempProfile->isPropertySet(Profile::Name) && _tempProfile->name() == _profile->name())) {
+                KMessageBox::sorry(this,
+                                   i18n("<p>Konsole does not have permission to save this profile to:<br /> \"%1\"</p>"
+                                        "<p>To be able to save settings you can either change the permissions "
+                                        "of the profile configuration file or change the profile name to save "
+                                        "the settings to a new profile.</p>", _profile->path()));
+                return false;
+        }
+    }
 
     const QList<Profile::Ptr> existingProfiles = ProfileManager::instance()->allProfiles();
     QStringList otherExistingProfileNames;
