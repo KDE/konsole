@@ -93,18 +93,48 @@ Comment[zh_TW]=Konsole
 
 [Event/BellVisible]
 Name=Bell in Focused Session
+Name[ca]=Timbre en una sessió amb focus
+Name[nl]=Geluidssignaal in zichtbare sessie
+Name[pt]=Campainha na Sessão Visível
+Name[uk]=Гудок у фокусований сеанс
+Name[x-test]=xxBell in Focused Sessionxx
 Comment=Bell emitted within a focused session
+Comment[ca]=Timbre emès en una sessió amb focus
+Comment[nl]=Geluidssignaal uitgezonden in sessie met focus
+Comment[pt]=Campainha emitida dentro de uma sessão em primeiro plano
+Comment[uk]=Звучить гудок у фокусованому сеансі
+Comment[x-test]=xxBell emitted within a focused sessionxx
 Action=None
 
 [Event/BellInvisible]
 Name=Bell in Non-Focused Session
+Name[ca]=Timbre en una sessió sense focus
+Name[nl]=Geluidssignaal in sessie zonder focus
+Name[pt]=Campainha numa Sessão Invisível
+Name[uk]=Гудок у нефокусованому сеансі
+Name[x-test]=xxBell in Non-Focused Sessionxx
 Comment=Bell emitted within a non-focused session
+Comment[ca]=Timbre emès en una sessió sense focus
+Comment[nl]=Geluidssignaal uitgezonden in sessie zonder focus
+Comment[pt]=Campainha emitida dentro de uma sessão que não está em primeiro plano
+Comment[uk]=Звучить гудок у нефокусованому сеансі
+Comment[x-test]=xxBell emitted within a non-focused sessionxx
 Sound=Oxygen-Sys-App-Message.ogg
 Action=Popup
 
 [Event/ActivityHidden]
 Name=Activity in Non-Focused Monitored Session
+Name[ca]=Activitat en una sessió controlada sense focus
+Name[nl]=Activiteit in gevolgde sessie zonder focus
+Name[pt]=Actividade numa Sessão Vigiada Invisível
+Name[uk]=Дії у нефокусованому сеансі спостереження
+Name[x-test]=xxActivity in Non-Focused Monitored Sessionxx
 Comment=Activity detected in a non-focused monitored session
+Comment[ca]=Activitat detectada en una sessió controlada sense focus
+Comment[nl]=Activiteit ontdekt in een gevolgde sessie zonder focus
+Comment[pt]=Actividade detectada numa sessão vigiada e que não está em primeiro plano
+Comment[uk]=У нефокусованому сеансі спостереження виявлено дії
+Comment[x-test]=xxActivity detected in a non-focused monitored sessionxx
 Action=Popup
 
 [Event/Activity]
@@ -274,7 +304,17 @@ Action=Popup
 
 [Event/SilenceHidden]
 Name=Silence in Non-Focused Monitored Session
+Name[ca]=Silenci en una sessió controlada sense focus
+Name[nl]=Stilte in gevolgde sessie zonder focus
+Name[pt]=Silêncio numa Sessão Vigiada Invisível
+Name[uk]=Тиша у нефокусованому сеансі спостереження
+Name[x-test]=xxSilence in Non-Focused Monitored Sessionxx
 Comment=Silence detected in a non-focused monitored session
+Comment[ca]=Silenci detectat en una sessió controlada sense focus
+Comment[nl]=Stilte ontdekt in een gevolgde sessie zonder focus
+Comment[pt]=Silêncio detectado numa sessão vigiada e que não está em primeiro plano
+Comment[uk]=В нефокусованому сеансі спостереження виявлено тишу
+Comment[x-test]=xxSilence detected in a non-focused monitored sessionxx
 Action=Popup
 
 [Event/Silence]
