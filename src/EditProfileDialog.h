@@ -162,6 +162,7 @@ private Q_SLOTS:
     void toggleCtrlRequiredForDrag(bool);
     void toggleDropUrlsAsText(bool);
     void toggleCopyTextToClipboard(bool);
+    void toggleTrimLeadingSpacesInSelectedText(bool);
     void toggleTrimTrailingSpacesInSelectedText(bool);
     void pasteFromX11Selection();
     void pasteFromClipboard();

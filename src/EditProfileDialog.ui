@@ -926,6 +926,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="trimLeadingSpacesButton">
+            <property name="toolTip">
+             <string>Trim leading spaces in selected text, useful in some instances</string>
+            </property>
+            <property name="text">
+             <string>Trim leading spaces</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="trimTrailingSpacesButton">
             <property name="toolTip">
              <string>Trim trailing spaces in selected text, useful in some instances</string>

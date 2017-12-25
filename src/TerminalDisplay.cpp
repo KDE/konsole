@@ -377,6 +377,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _useFontLineCharacters(false)
     , _printerFriendly(false)
     , _sessionController(nullptr)
+    , _trimLeadingSpaces(false)
     , _trimTrailingSpaces(false)
     , _margin(1)
     , _centerContents(false)
@@ -2730,6 +2731,22 @@ out:
     return QPoint(x, y);
 }
 
+Screen::DecodingOptions TerminalDisplay::currentDecodingOptions()
+{
+    Screen::DecodingOptions decodingOptions;
+    if (_preserveLineBreaks) {
+        decodingOptions |= Screen::PreserveLineBreaks;
+    }
+    if (_trimLeadingSpaces) {
+        decodingOptions |= Screen::TrimLeadingWhitespace;
+    }
+    if (_trimTrailingSpaces) {
+        decodingOptions |= Screen::TrimTrailingWhitespace;
+    }
+
+    return decodingOptions;
+}
+
 void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 {
     if (_screenWindow == nullptr) return;
@@ -2893,10 +2910,11 @@ void TerminalDisplay::copyToX11Selection()
     if (_screenWindow == nullptr)
         return;
 
-    QString text = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces);
+
+    QString text = _screenWindow->selectedText(currentDecodingOptions());
     if (text.isEmpty())
         return;
-    QString html = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces, true);
+    QString html = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
 
     auto mimeData = new QMimeData;
     mimeData->setText(text);
@@ -2915,10 +2933,10 @@ void TerminalDisplay::copyToClipboard()
     if (_screenWindow == nullptr)
         return;
 
-    QString text = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces);
+    QString text = _screenWindow->selectedText(currentDecodingOptions());
     if (text.isEmpty())
         return;
-    QString html = _screenWindow->selectedText(_preserveLineBreaks, _trimTrailingSpaces, true);
+    QString html = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
 
     auto mimeData = new QMimeData;
     mimeData->setText(text);

@@ -100,7 +100,7 @@ void Emulation::checkScreenInUse()
 
 void Emulation::checkSelectedText()
 {
-    QString text = _currentScreen->selectedText(true);
+    QString text = _currentScreen->selectedText(Screen::PreserveLineBreaks);
     emit selectionChanged(text);
 }
 

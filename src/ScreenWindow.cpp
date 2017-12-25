@@ -125,10 +125,9 @@ QVector<LineProperty> ScreenWindow::getLineProperties()
     return result;
 }
 
-QString ScreenWindow::selectedText(bool preserveLineBreaks, bool trimTrailingSpaces,
-                                   bool html) const
+QString ScreenWindow::selectedText(const Screen::DecodingOptions options) const
 {
-    return _screen->selectedText(preserveLineBreaks, trimTrailingSpaces, html);
+    return _screen->selectedText(options);
 }
 
 void ScreenWindow::getSelectionStart(int &column, int &line)

@@ -913,6 +913,7 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
     view->setDropUrlsAsText(profile->property<bool>(Profile::DropUrlsAsText));
     view->setBidiEnabled(profile->bidiRenderingEnabled());
     view->setLineSpacing(profile->lineSpacing());
+    view->setTrimLeadingSpaces(profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText));
     view->setTrimTrailingSpaces(profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText));
 
     view->setOpenLinksByDirectClick(profile->property<bool>(Profile::OpenLinksByDirectClickEnabled));

@@ -1148,7 +1148,7 @@ void SessionController::updateSearchFilter()
 
 void SessionController::searchBarEvent()
 {
-    QString selectedText = _view->screenWindow()->selectedText(true, true);
+    QString selectedText = _view->screenWindow()->selectedText(Screen::PreserveLineBreaks | Screen::TrimLeadingWhitespace | Screen::TrimTrailingWhitespace);
     if (!selectedText.isEmpty())
         _searchBar->setSearchText(selectedText);
 

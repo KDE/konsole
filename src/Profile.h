@@ -205,6 +205,8 @@ public:
         CtrlRequiredForDrag,
         /** (bool) If true, automatically copy selected text into the clipboard */
         AutoCopySelectedText,
+        /** (bool) If true, leading spaces are trimmed in selected text */
+        TrimLeadingSpacesInSelectedText,
         /** (bool) If true, trailing spaces are trimmed in selected text */
         TrimTrailingSpacesInSelectedText,
         /** (bool) If true, then dropped URLs will be pasted as text without asking */

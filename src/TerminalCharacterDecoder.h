@@ -75,6 +75,17 @@ public:
     PlainTextDecoder();
 
     /**
+     * Set whether leading whitespace at the end of lines should be included
+     * in the output.
+     * Defaults to true.
+     */
+    void setLeadingWhitespace(bool enable);
+    /**
+     * Returns whether leading whitespace at the end of lines is included
+     * in the output.
+     */
+    bool leadingWhitespace() const;
+    /**
      * Set whether trailing whitespace at the end of lines should be included
      * in the output.
      * Defaults to true.
@@ -102,6 +113,7 @@ public:
 
 private:
     QTextStream *_output;
+    bool _includeLeadingWhitespace;
     bool _includeTrailingWhitespace;
 
     bool _recordLinePositions;

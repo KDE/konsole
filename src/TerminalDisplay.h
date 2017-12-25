@@ -208,6 +208,22 @@ public:
     }
 
     /**
+     * Sets whether leading spaces should be trimmed in selected text.
+     */
+    void setTrimLeadingSpaces(bool enabled)
+    {
+        _trimLeadingSpaces = enabled;
+    }
+
+    /**
+     * Returns true if leading spaces should be trimmed in selected text.
+     */
+    bool trimLeadingSpaces() const
+    {
+        return _trimLeadingSpaces;
+    }
+
+    /**
      * Sets whether trailing spaces should be trimmed in selected text.
      */
     void setTrimTrailingSpaces(bool enabled)
@@ -841,6 +857,9 @@ private:
     QPoint findWordStart(const QPoint &pnt);
     QPoint findWordEnd(const QPoint &pnt);
 
+    // Uses the current settings for trimming whitespace and preserving linebreaks to create a proper flag value for Screen
+    Screen::DecodingOptions currentDecodingOptions();
+
     // the window onto the terminal screen which this display
     // is currently showing.
     QPointer<ScreenWindow> _screenWindow;
@@ -970,6 +989,7 @@ private:
 
     SessionController *_sessionController;
 
+    bool _trimLeadingSpaces;   // trim leading spaces in selected text
     bool _trimTrailingSpaces;   // trim trailing spaces in selected text
     bool _mouseWheelZoom;   // enable mouse wheel zooming or not
 

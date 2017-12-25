@@ -33,9 +33,18 @@
 using namespace Konsole;
 PlainTextDecoder::PlainTextDecoder()
     : _output(nullptr)
+    , _includeLeadingWhitespace(true)
     , _includeTrailingWhitespace(true)
     , _recordLinePositions(false)
 {
+}
+void PlainTextDecoder::setLeadingWhitespace(bool enable)
+{
+    _includeLeadingWhitespace = enable;
+}
+bool PlainTextDecoder::leadingWhitespace() const
+{
+    return _includeLeadingWhitespace;
 }
 void PlainTextDecoder::setTrailingWhitespace(bool enable)
 {
@@ -82,12 +91,26 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     QString plainText;
     plainText.reserve(count);
 
-    int outputCount = count;
+    // If we should remove leading whitespace find the first non-space character
+    int start = 0;
+    if (!_includeLeadingWhitespace) {
+        for (start = 0; start < count; start++) {
+            if (!characters[start].isSpace()) {
+                break;
+            }
+        }
+    }
+
+    int outputCount = count - start;
+
+    if (outputCount <= 0) {
+        return;
+    }
 
     // if inclusion of trailing whitespace is disabled then find the end of the
     // line
     if (!_includeTrailingWhitespace) {
-        for (int i = count - 1 ; i >= 0 ; i--) {
+        for (int i = count - 1 ; i >= start ; i--) {
             if (!characters[i].isSpace())
                 break;
             else
@@ -97,7 +120,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
 
     // find out the last technically real character in the line
     int realCharacterGuard = -1;
-    for (int i = count - 1 ; i >= 0 ; i--) {
+    for (int i = count - 1 ; i >= start ; i--) {
         // FIXME: the special case of '\n' here is really ugly
         // Maybe the '\n' should be added after calling this method in
         // Screen::copyLineToStream()
@@ -107,7 +130,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
         }
     }
 
-    for (int i = 0; i < outputCount;) {
+    for (int i = start; i < outputCount;) {
         if ((characters[i].rendition & RE_EXTENDED_CHAR) != 0) {
             ushort extendedCharLength = 0;
             const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
