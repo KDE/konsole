@@ -261,6 +261,8 @@ Q_SIGNALS:
     void selectionChanged();
 
 private:
+    Q_DISABLE_COPY(ScreenWindow)
+
     int endWindowLine() const;
     void fillUnusedArea();
 

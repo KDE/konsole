@@ -77,6 +77,8 @@ public Q_SLOTS:
     void slotActivateRequested(QStringList args, const QString &workingDir);
 
 private:
+    Q_DISABLE_COPY(Application)
+
     void listAvailableProfiles();
     void listProfilePropertyInfo();
     void startBackgroundMode(MainWindow *window);

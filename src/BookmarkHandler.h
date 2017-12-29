@@ -114,6 +114,8 @@ private Q_SLOTS:
     void openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers) Q_DECL_OVERRIDE;
 
 private:
+    Q_DISABLE_COPY(BookmarkHandler)
+
     QString titleForView(ViewProperties *view) const;
     QUrl urlForView(ViewProperties *view) const;
     QString iconForView(ViewProperties *view) const;

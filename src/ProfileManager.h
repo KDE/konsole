@@ -245,6 +245,8 @@ protected Q_SLOTS:
 private Q_SLOTS:
 
 private:
+    Q_DISABLE_COPY(ProfileManager)
+
     // loads the mappings between shortcut key sequences and
     // profile paths
     void loadShortcuts();

@@ -115,6 +115,8 @@ private Q_SLOTS:
     void profileChanged(Profile::Ptr profile);
 
 private:
+    Q_DISABLE_COPY(SessionManager)
+
     // applies updates to a profile
     // to all sessions currently using that profile
     // if modifiedPropertiesOnly is true, only properties which

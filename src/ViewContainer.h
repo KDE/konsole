@@ -364,6 +364,8 @@ private Q_SLOTS:
     void searchBarDestroyed();
 
 private:
+    Q_DISABLE_COPY(ViewContainer)
+
     void forgetView(QWidget *view);
 
     NavigationVisibility _navigationVisibility;

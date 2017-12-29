@@ -362,6 +362,8 @@ private Q_SLOTS:
     void closeTabFromContainer(ViewContainer *container, QWidget *view);
 
 private:
+    Q_DISABLE_COPY(ViewManager)
+
     void createView(Session *session, ViewContainer *container, int index);
     static const ColorScheme *colorSchemeForProfile(const Profile::Ptr profile);
 

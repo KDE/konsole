@@ -146,6 +146,8 @@ protected:
     /** Subclasses may call this method to change the identifier. */
     void setIdentifier(int id);
 private:
+    Q_DISABLE_COPY(ViewProperties)
+
     QIcon _icon;
     QString _title;
     int _identifier;

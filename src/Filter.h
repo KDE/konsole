@@ -337,6 +337,8 @@ public:
 public Q_SLOTS:
     void activated();
 private:
+    Q_DISABLE_COPY(FilterObject)
+
     Filter::HotSpot *_filter;
 };
 
