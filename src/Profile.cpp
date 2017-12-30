@@ -268,13 +268,13 @@ QHash<Profile::Property, QVariant> Profile::setProperties() const
 {
     return _propertyValues;
 }
-void Profile::setProperty(Property property , const QVariant& value)
+void Profile::setProperty(Property p, const QVariant& value)
 {
-    _propertyValues.insert(property, value);
+    _propertyValues.insert(p, value);
 }
-bool Profile::isPropertySet(Property property) const
+bool Profile::isPropertySet(Property p) const
 {
-    return _propertyValues.contains(property);
+    return _propertyValues.contains(p);
 }
 
 Profile::Property Profile::lookupByName(const QString& name)
@@ -371,14 +371,14 @@ void ProfileGroup::updateValues()
         properties++;
     }
 }
-void ProfileGroup::setProperty(Property property, const QVariant& value)
+void ProfileGroup::setProperty(Property p, const QVariant& value)
 {
-    if (_profiles.count() > 1 && !canInheritProperty(property))
+    if (_profiles.count() > 1 && !canInheritProperty(p))
         return;
 
-    Profile::setProperty(property, value);
+    Profile::setProperty(p, value);
     foreach(Profile::Ptr profile, _profiles) {
-        profile->setProperty(property, value);
+        profile->setProperty(p, value);
     }
 }
 
