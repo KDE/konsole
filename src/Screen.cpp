@@ -1291,7 +1291,7 @@ int Screen::copyLineToStream(int line ,
     }
 
     //decode line and write to text stream
-    decoder->decodeLine((Character*) characterBuffer ,
+    decoder->decodeLine(characterBuffer,
                         count, currentLineProperties);
 
     return count;
