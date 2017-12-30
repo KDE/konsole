@@ -742,7 +742,7 @@ void EditProfileDialog::unpreviewAll()
     QHashIterator<int, QVariant> iter(_previewedProperties);
     while (iter.hasNext()) {
         iter.next();
-        map.insert((Profile::Property)iter.key(), iter.value());
+        map.insert(static_cast<Profile::Property>(iter.key()), iter.value());
     }
 
     // undo any preview changes
@@ -760,7 +760,7 @@ void EditProfileDialog::unpreview(int aProperty)
     }
 
     QHash<Profile::Property, QVariant> map;
-    map.insert((Profile::Property)aProperty, _previewedProperties[aProperty]);
+    map.insert(static_cast<Profile::Property>(aProperty), _previewedProperties[aProperty]);
     ProfileManager::instance()->changeProfile(_profile, map, false);
 
     _previewedProperties.remove(aProperty);
@@ -788,7 +788,7 @@ void EditProfileDialog::delayedPreviewActivate()
 void EditProfileDialog::preview(int aProperty, const QVariant &value)
 {
     QHash<Profile::Property, QVariant> map;
-    map.insert((Profile::Property)aProperty, value);
+    map.insert(static_cast<Profile::Property>(aProperty), value);
 
     _delayedPreviewProperties.remove(aProperty);
 
@@ -800,13 +800,13 @@ void EditProfileDialog::preview(int aProperty, const QVariant &value)
     // TODO - Save the original values for each profile and use to unpreview properties
     ProfileGroup::Ptr group = original->asGroup();
     if (group && group->profiles().count() > 1
-        && original->property<QVariant>((Profile::Property)aProperty).isNull()) {
+        && original->property<QVariant>(static_cast<Profile::Property>(aProperty)).isNull()) {
         return;
     }
 
     if (!_previewedProperties.contains(aProperty)) {
         _previewedProperties.insert(aProperty,
-                                    original->property<QVariant>((Profile::Property)aProperty));
+                                    original->property<QVariant>(static_cast<Profile::Property>(aProperty)));
     }
 
     // temporary change to color scheme
