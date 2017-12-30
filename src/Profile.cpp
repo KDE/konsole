@@ -124,7 +124,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     // Encoding
     , { DefaultEncoding , "DefaultEncoding" , ENCODING_GROUP , QVariant::String }
 
-    , { (Property)0 , nullptr , nullptr, QVariant::Invalid }
+    , { static_cast<Profile::Property>(0) , nullptr , nullptr, QVariant::Invalid }
 };
 
 QHash<QString, Profile::PropertyInfo> Profile::PropertyInfoByName;
