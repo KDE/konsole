@@ -89,6 +89,8 @@ public:
     static ColorSchemeManager *instance();
 
 private:
+    Q_DISABLE_COPY(ColorSchemeManager)
+
     // loads a color scheme from a KDE 4+ .colorscheme file
     bool loadColorScheme(const QString &path);
     // returns a list of paths of color schemes in the KDE 4+ .colorscheme file format

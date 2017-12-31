@@ -56,6 +56,8 @@ public:
     QString path() const;
 
 private:
+    Q_DISABLE_COPY(ColorSchemeWallpaper)
+
     QString _path;
     QPixmap *_picture;
 };
