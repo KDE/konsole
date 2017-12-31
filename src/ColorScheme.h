@@ -49,7 +49,7 @@ public:
     void load();
 
     /** Returns true if wallpaper available and drawn */
-    bool draw(QPainter &painter, const QRect &rect, qreal opacity = 1.0);
+    bool draw(QPainter &painter, const QRect rect, qreal opacity = 1.0);
 
     bool isNull() const;
 
