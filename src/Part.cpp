@@ -217,11 +217,6 @@ void Part::createSession(const QString &profileName, const QString &directory)
     _viewManager->createView(session);
 }
 
-QStringList Part::profileNameList() const
-{
-    return ProfileManager::instance()->availableProfileNames();
-}
-
 void Part::activeViewChanged(SessionController *controller)
 {
     Q_ASSERT(controller);

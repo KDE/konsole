@@ -85,13 +85,6 @@ public Q_SLOTS:
     void createSession(const QString &profileName = QString(),
                        const QString &directory = QString());
 
-    /**
-     * Returns a list of names of all available profiles
-     *
-     * This is highly experimental. Do not use it at the moment
-     */
-    QStringList profileNameList() const;
-
     void showManageProfilesDialog(QWidget* parent);
 
     /**
