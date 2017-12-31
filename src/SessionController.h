@@ -289,9 +289,6 @@ private Q_SLOTS:
     void zmodemDownload();
     void zmodemUpload();
 
-    /* Returns true if called within a KPart; false if called within Konsole. */
-    bool isKonsolePart() const;
-
     // update actions related with selected text
     void updateCopyAction(const QString &selectedText);
     void updateWebSearchMenu();
@@ -309,6 +306,9 @@ private:
     void removeSearchFilter(); // remove and delete the current search filter if set
     void setFindNextPrevEnabled(bool enabled);
     void listenForScreenWindowUpdates();
+
+    /* Returns true if called within a KPart; false if called within Konsole. */
+    bool isKonsolePart() const;
 
 private:
     void updateSessionIcon();
