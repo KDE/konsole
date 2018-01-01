@@ -713,6 +713,8 @@ public:
     void setProperty(Property p, const QVariant &value) Q_DECL_OVERRIDE;
 
 private:
+    Q_DISABLE_COPY(ProfileGroup)
+
     QList<Profile::Ptr> _profiles;
 };
 inline ProfileGroup::ProfileGroup(Profile::Ptr profileParent) :
