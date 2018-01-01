@@ -756,7 +756,6 @@ protected Q_SLOTS:
 
 private Q_SLOTS:
 
-    void unmaskBell();
     void swapFGBGColors();
     void viewScrolledByUser();
 

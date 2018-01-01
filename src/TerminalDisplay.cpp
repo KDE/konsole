@@ -3254,11 +3254,6 @@ int TerminalDisplay::bellMode() const
     return _bellMode;
 }
 
-void TerminalDisplay::unmaskBell()
-{
-    _bellMasked = false;
-}
-
 void TerminalDisplay::bell(const QString& message)
 {
     if (_bellMasked)
@@ -3287,7 +3282,9 @@ void TerminalDisplay::bell(const QString& message)
     // ...mainly for sound effects where rapid bells in sequence
     // produce a horrible noise.
     _bellMasked = true;
-    QTimer::singleShot(500, this, SLOT(unmaskBell()));
+    QTimer::singleShot(500, [this]() {
+        _bellMasked = false;
+    });
 }
 
 void TerminalDisplay::visualBell()
