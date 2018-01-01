@@ -645,7 +645,8 @@ QList<QAction *> FileFilter::HotSpot::actions()
 {
     auto openAction = new QAction(_fileObject);
     openAction->setText(i18n("Open File"));
-    QObject::connect(openAction, SIGNAL(triggered()), _fileObject, SLOT(activated()));
+    QObject::connect(openAction, &QAction::triggered, _fileObject,
+                     &Konsole::FilterObject::activated);
     QList<QAction *> actions;
     actions << openAction;
     return actions;
