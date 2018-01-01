@@ -2466,8 +2466,9 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
 
     _possibleTripleClick = true;
 
-    QTimer::singleShot(QApplication::doubleClickInterval(), this,
-                       SLOT(tripleClickTimeout()));
+    QTimer::singleShot(QApplication::doubleClickInterval(), [this]() {
+        _possibleTripleClick = false;
+    });
 }
 
 void TerminalDisplay::wheelEvent(QWheelEvent* ev)
@@ -2535,11 +2536,6 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
                              0);
         }
     }
-}
-
-void TerminalDisplay::tripleClickTimeout()
-{
-    _possibleTripleClick = false;
 }
 
 void TerminalDisplay::viewScrolledByUser()

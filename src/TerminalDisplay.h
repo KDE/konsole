@@ -758,7 +758,6 @@ private Q_SLOTS:
 
     void unmaskBell();
     void swapFGBGColors();
-    void tripleClickTimeout();  // resets possibleTripleClick
     void viewScrolledByUser();
 
     /**
