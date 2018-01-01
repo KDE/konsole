@@ -63,13 +63,13 @@ public:
 
 Q_SIGNALS:
     /** Emitted when the history mode is changed. */
-    void historyModeChanged(Enum::HistoryModeEnum) const;
+    void historyModeChanged(Enum::HistoryModeEnum);
 
     /** Emitted when the history size is changed. */
     void historySizeChanged(int);
 
 private Q_SLOTS:
-    void buttonClicked(QAbstractButton *) const;
+    void buttonClicked(QAbstractButton *);
 
 private:
     Ui::HistorySizeWidget *_ui;
