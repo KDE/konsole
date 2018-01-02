@@ -470,8 +470,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             copyInputToAllTabs();
         }
     }
-
-    return false;
+    return Konsole::ViewProperties::eventFilter(watched, event);
 }
 
 void SessionController::removeSearchFilter()
