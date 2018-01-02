@@ -68,14 +68,16 @@ void ProfileList::updateEmptyAction()
     // show this action only when it is the only action in the group
     const bool showEmptyAction = (_group->actions().count() == 1);
 
-    if (showEmptyAction != _emptyListAction->isVisible())
+    if (showEmptyAction != _emptyListAction->isVisible()) {
         _emptyListAction->setVisible(showEmptyAction);
+    }
 }
 QAction* ProfileList::actionForProfile(Profile::Ptr profile) const
 {
     foreach(QAction* action, _group->actions()) {
-        if (action->data().value<Profile::Ptr>() == profile)
+        if (action->data().value<Profile::Ptr>() == profile) {
             return action;
+        }
     }
     return nullptr; // not found
 }
@@ -83,8 +85,9 @@ QAction* ProfileList::actionForProfile(Profile::Ptr profile) const
 void ProfileList::profileChanged(Profile::Ptr profile)
 {
     QAction* action = actionForProfile(profile);
-    if (action != nullptr)
+    if (action != nullptr) {
         updateAction(action, profile);
+    }
 }
 
 void ProfileList::updateAction(QAction* action , Profile::Ptr profile)
@@ -97,8 +100,9 @@ void ProfileList::updateAction(QAction* action , Profile::Ptr profile)
 }
 void ProfileList::shortcutChanged(Profile::Ptr profile, const QKeySequence& sequence)
 {
-    if (!_addShortcuts)
+    if (!_addShortcuts) {
         return;
+    }
 
     QAction* action = actionForProfile(profile);
 

@@ -70,9 +70,10 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
 
             QString name(QLatin1String(properties->name));
 
-            if (group.hasKey(name))
+            if (group.hasKey(name)) {
                 profile->setProperty(properties->property,
                                      group.readEntry(name, QVariant(properties->type)));
+            }
         }
 
         properties++;
@@ -81,14 +82,16 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
 
 bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile)
 {
-    if (!QFile::exists(path))
+    if (!QFile::exists(path)) {
         return false;
+    }
 
     KConfig config(path, KConfig::NoGlobals);
 
     KConfigGroup general = config.group(GENERAL_GROUP);
-    if (general.hasKey("Parent"))
+    if (general.hasKey("Parent")) {
         parentProfile = general.readEntry("Parent");
+    }
 
     if (general.hasKey("Command")) {
         ShellCommand shellCommand(general.readEntry("Command"));

@@ -60,9 +60,10 @@ void KDE4ProfileWriter::writeProperties(KConfig& config,
                 groupName = properties->group;
             }
 
-            if (profile->isPropertySet(properties->property))
+            if (profile->isPropertySet(properties->property)) {
                 group.writeEntry(QLatin1String(properties->name),
                                  profile->property<QVariant>(properties->property));
+            }
         }
 
         properties++;
@@ -80,13 +81,15 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile::Ptr pr
 
     // Parent profile if set, when loading the profile in future, the parent
     // must be loaded as well if it exists.
-    if (profile->parent())
+    if (profile->parent()) {
         general.writeEntry("Parent", profile->parent()->path());
+    }
 
     if (profile->isPropertySet(Profile::Command)
-            || profile->isPropertySet(Profile::Arguments))
+            || profile->isPropertySet(Profile::Arguments)) {
         general.writeEntry("Command",
                            ShellCommand(profile->command(), profile->arguments()).fullCommand());
+     }
 
     // Write remaining properties
     writeProperties(config, profile, Profile::DefaultPropertyNames);

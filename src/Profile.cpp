@@ -134,8 +134,9 @@ void Profile::fillTableWithDefaultNames()
 {
     static bool filledDefaults = false;
 
-    if (filledDefaults)
+    if (filledDefaults) {
         return;
+    }
 
     const PropertyInfo* iter = DefaultPropertyNames;
     while (iter->name != nullptr) {
@@ -292,18 +293,19 @@ void Profile::registerProperty(const PropertyInfo& info)
 
     // only allow one property -> name map
     // (multiple name -> property mappings are allowed though)
-    if (!PropertyInfoByProperty.contains(info.property))
+    if (!PropertyInfoByProperty.contains(info.property)) {
         PropertyInfoByProperty.insert(info.property, info);
+    }
 }
 
 int Profile::menuIndexAsInt() const
 {
     bool ok;
     int index = menuIndex().toInt(&ok, 10);
-    if (ok)
+    if (ok) {
         return index;
-    else
-        return 0;
+    }
+    return 0;
 }
 
 const QStringList Profile::propertiesInfoList() const
@@ -360,9 +362,9 @@ void ProfileGroup::updateValues()
         QVariant value;
         for (int i = 0; i < _profiles.count(); i++) {
             QVariant profileValue = _profiles[i]->property<QVariant>(properties->property);
-            if (value.isNull())
+            if (value.isNull()) {
                 value = profileValue;
-            else if (value != profileValue) {
+            } else if (value != profileValue) {
                 value = QVariant();
                 break;
             }
@@ -373,8 +375,9 @@ void ProfileGroup::updateValues()
 }
 void ProfileGroup::setProperty(Property p, const QVariant& value)
 {
-    if (_profiles.count() > 1 && !canInheritProperty(p))
+    if (_profiles.count() > 1 && !canInheritProperty(p)) {
         return;
+    }
 
     Profile::setProperty(p, value);
     foreach(Profile::Ptr profile, _profiles) {

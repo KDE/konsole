@@ -102,8 +102,9 @@ ProfileManager::ProfileManager()
 
         if (!path.isEmpty()) {
             Profile::Ptr profile = loadProfile(path);
-            if (profile)
+            if (profile) {
                 _defaultProfile = profile;
+            }
         }
     }
 
@@ -127,25 +128,30 @@ ProfileManager* ProfileManager::instance()
 Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
 {
     // the fallback profile has a 'special' path name, "FALLBACK/"
-    if (shortPath == _fallbackProfile->path())
+    if (shortPath == _fallbackProfile->path()) {
         return _fallbackProfile;
+    }
 
     QString path = shortPath;
 
     // add a suggested suffix and relative prefix if missing
     QFileInfo fileInfo(path);
 
-    if (fileInfo.isDir())
+    if (fileInfo.isDir()) {
         return Profile::Ptr();
+    }
 
-    if (fileInfo.suffix() != QLatin1String("profile"))
+    if (fileInfo.suffix() != QLatin1String("profile")) {
         path.append(QLatin1String(".profile"));
-    if (fileInfo.path().isEmpty() || fileInfo.path() == QLatin1String("."))
+    }
+    if (fileInfo.path().isEmpty() || fileInfo.path() == QLatin1String(".")) {
         path.prepend(QLatin1String("konsole") + QDir::separator());
+    }
 
     // if the file is not an absolute path, look it up
-    if (!fileInfo.isAbsolute())
+    if (!fileInfo.isAbsolute()) {
         path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, path);
+    }
 
     // if the file is not found, return immediately
     if (path.isEmpty()) {
@@ -154,8 +160,9 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
 
     // check that we have not already loaded this profile
     foreach(const Profile::Ptr& profile, _profiles) {
-        if (profile->path() == path)
+        if (profile->path() == path) {
             return profile;
+        }
     }
 
     // guard to prevent problems if a profile specifies itself as its parent
@@ -227,8 +234,9 @@ QStringList ProfileManager::availableProfileNames() const
 
 void ProfileManager::loadAllProfiles()
 {
-    if (_loadedAllProfiles)
+    if (_loadedAllProfiles) {
         return;
+    }
 
     const QStringList& paths = availableProfilePaths();
     foreach(const QString& path, paths) {
@@ -245,13 +253,15 @@ void ProfileManager::sortProfiles(QList<Profile::Ptr>& list)
 
     for (const auto & i : list) {
         // dis-regard the fallback profile
-        if (i->path() == _fallbackProfile->path())
+        if (i->path() == _fallbackProfile->path()) {
             continue;
+        }
 
-        if (i->menuIndexAsInt() == 0)
+        if (i->menuIndexAsInt() == 0) {
             lackingIndices.append(i);
-        else
+        } else {
             havingIndices.append(i);
+        }
     }
 
     // sort by index
@@ -445,8 +455,9 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
 
 void ProfileManager::addProfile(Profile::Ptr profile)
 {
-    if (_profiles.isEmpty())
+    if (_profiles.isEmpty()) {
         _defaultProfile = profile;
+    }
 
     _profiles.insert(profile);
 
@@ -501,8 +512,9 @@ void ProfileManager::saveDefaultProfile()
 {
     QString path = _defaultProfile->path();
 
-    if (path.isEmpty())
+    if (path.isEmpty()) {
         path = KDE4ProfileWriter().getPath(_defaultProfile);
+    }
 
     QFileInfo fileInfo(path);
 
@@ -519,8 +531,9 @@ QSet<Profile::Ptr> ProfileManager::findFavorites()
 }
 void ProfileManager::setFavorite(Profile::Ptr profile , bool favorite)
 {
-    if (!_profiles.contains(profile))
+    if (!_profiles.contains(profile)) {
         addProfile(profile);
+    }
 
     if (favorite && !_favorites.contains(profile)) {
         _favorites.insert(profile);
@@ -595,8 +608,9 @@ void ProfileManager::setShortcut(Profile::Ptr profile ,
     QKeySequence existingShortcut = shortcut(profile);
     _shortcuts.remove(existingShortcut);
 
-    if (keySequence.isEmpty())
+    if (keySequence.isEmpty()) {
         return;
+    }
 
     ShortcutData data;
     data.profileKey = profile;
@@ -609,8 +623,9 @@ void ProfileManager::setShortcut(Profile::Ptr profile ,
 }
 void ProfileManager::loadFavorites()
 {
-    if (_loadedFavorites)
+    if (_loadedFavorites) {
         return;
+    }
 
     KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
@@ -633,8 +648,9 @@ void ProfileManager::loadFavorites()
     // load any remaining favorites
     foreach(const QString& favorite, favoriteSet) {
         Profile::Ptr profile = loadProfile(favorite);
-        if (profile)
+        if (profile) {
             _favorites.insert(profile);
+        }
     }
 
     _loadedFavorites = true;
@@ -699,8 +715,9 @@ QKeySequence ProfileManager::shortcut(Profile::Ptr profile) const
     while (iter.hasNext()) {
         iter.next();
         if (iter.value().profileKey == profile
-                || iter.value().profilePath == profile->path())
+                || iter.value().profilePath == profile->path()) {
             return iter.key();
+        }
     }
 
     return QKeySequence();
