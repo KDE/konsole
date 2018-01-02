@@ -623,12 +623,10 @@ FileFilter::FileFilter(Session *session) :
 
     patterns.removeDuplicates();
 
-    QString validFilename(QLatin1String("[A-Za-z0-9\\._\\-]+"));
-    QString pathRegex(QLatin1String("([A-Za-z0-9\\._\\-/]+/)"));
+    QString validFilename(QStringLiteral("[A-Za-z0-9\\._\\-]+"));
+    QString pathRegex(QStringLiteral("([A-Za-z0-9\\._\\-/]+/)"));
     QString noSpaceRegex = QLatin1String("\\b") + createFileRegex(patterns, validFilename, pathRegex) + QLatin1String("\\b");
 
-    validFilename = QLatin1String("[A-Za-z0-9\\._\\- ]+");
-    pathRegex = QLatin1String("([A-Za-z0-9\\._\\-/ ]+/)");
     QString spaceRegex = QLatin1String("'") + createFileRegex(patterns, validFilename, pathRegex) + QLatin1String("'");
 
     QString regex = QLatin1String("(") + noSpaceRegex + QLatin1String(")|(") + spaceRegex + QLatin1String(")");
