@@ -32,17 +32,19 @@ using namespace std;
 
 static quint32 charVal(QChar val)
 {
-    if (val == QLatin1Char(' '))
+    if (val == QLatin1Char(' ')) {
         return 0;
-    else
+    } else {
         return 1;
+    }
 }
 
 static quint32 readGlyphLine(QTextStream& input)
 {
     QString line = input.readLine();
-    while (line.length() < 5)
+    while (line.length() < 5) {
         line += QLatin1Char(' ');
+    }
 
     quint32 val =  charVal(line[0]) |
                    (charVal(line[1]) << 1)  |
@@ -81,16 +83,19 @@ int main(int argc, char **argv)
     quint32 glyphStates[128];
     QMap<quint32, int> glyphMap;
 
-    for (unsigned int & glyphState : glyphStates)
+    for (unsigned int & glyphState : glyphStates) {
         glyphState = 0; //nothing..
+    }
 
     while (!input.atEnd()) {
         QString line = input.readLine();
         line = line.trimmed();
-        if (line.isEmpty())
+        if (line.isEmpty()) {
             continue; //Skip empty lines
-        if (line[0] == QLatin1Char('#'))
+        }
+        if (line[0] == QLatin1Char('#')) {
             continue; //Skip comments
+        }
 
         //Must be a glyph ID.
         int glyph = line.toInt(nullptr, 16);
@@ -121,8 +126,9 @@ int main(int argc, char **argv)
         cout << "\t";
         for (int col = line; col < line + 8; ++col) {
             cout << "0x" << hex << setw(8) << setfill('0') << glyphStates[col];
-            if (col != 127)
+            if (col != 127) {
                 cout << ", ";
+            }
         }
         cout << "\n";
     }
