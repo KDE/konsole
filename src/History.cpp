@@ -144,8 +144,9 @@ void HistoryFile::unmap()
 {
     Q_ASSERT(_fileMap != nullptr);
 
-    if (_tmpFile.unmap(_fileMap))
+    if (_tmpFile.unmap(_fileMap)) {
         _fileMap = nullptr;
+    }
 
     Q_ASSERT(_fileMap == nullptr);
 
@@ -162,8 +163,9 @@ void HistoryFile::add(const char *buffer, qint64 count)
         unmap();
     }
 
-    if (_readWriteBalance < INT_MAX)
+    if (_readWriteBalance < INT_MAX) {
         _readWriteBalance++;
+    }
 
     qint64 rc = 0;
 
@@ -191,8 +193,9 @@ void HistoryFile::get(char *buffer, qint64 size, qint64 loc)
     //If there are many more get() calls compared with add()
     //calls (decided by using MAP_THRESHOLD) then mmap the log
     //file to improve performance.
-    if (_readWriteBalance > INT_MIN)
+    if (_readWriteBalance > INT_MIN) {
         _readWriteBalance--;
+    }
     if ((_fileMap == nullptr) && _readWriteBalance < MAP_THRESHOLD) {
         map();
     }
