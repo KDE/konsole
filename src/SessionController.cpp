@@ -215,8 +215,9 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
 SessionController::~SessionController()
 {
-    if (_view != nullptr)
+    if (_view != nullptr) {
         _view->setScreenWindow(nullptr);
+    }
 
     _allControllers.remove(this);
 
@@ -301,8 +302,9 @@ void SessionController::openUrl(const QUrl& url)
         // QUrl couldn't parse what the user entered into the URL field
         // so just dump it to the shell
         QString command = url.toDisplayString();
-        if (!command.isEmpty())
+        if (!command.isEmpty()) {
             _session->sendTextToTerminal(command, QLatin1Char('\r'));
+        }
     } else if (url.scheme() == QLatin1String("ssh")) {
         QString sshCommand = QStringLiteral("ssh ");
 
@@ -379,14 +381,16 @@ void SessionController::updateWebSearchMenu()
     _webSearchMenu->setVisible(false);
     _webSearchMenu->menu()->clear();
 
-    if (_selectedText.isEmpty())
+    if (_selectedText.isEmpty()) {
         return;
+    }
 
     QString searchText = _selectedText;
     searchText = searchText.replace(QLatin1Char('\n'), QLatin1Char(' ')).replace(QLatin1Char('\r'), QLatin1Char(' ')).simplified();
 
-    if (searchText.isEmpty())
+    if (searchText.isEmpty()) {
         return;
+    }
 
     KUriFilterData filterData(searchText);
     filterData.setSearchFilteringOptions(KUriFilterData::RetrievePreferredSearchProvidersOnly);
@@ -421,8 +425,9 @@ void SessionController::updateWebSearchMenu()
 void SessionController::handleWebShortcutAction()
 {
     QAction * action = qobject_cast<QAction*>(sender());
-    if (action == nullptr)
+    if (action == nullptr) {
         return;
+    }
 
     KUriFilterData filterData(action->data().toString());
 
@@ -475,8 +480,9 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
 
 void SessionController::removeSearchFilter()
 {
-    if (_searchFilter == nullptr)
+    if (_searchFilter == nullptr) {
         return;
+    }
 
     _view->filterChain()->removeFilter(_searchFilter);
     delete _searchFilter;
@@ -525,10 +531,11 @@ void SessionController::setupCommonActions()
 
     // Close Session
     action = collection->addAction(QStringLiteral("close-session"), this, SLOT(closeSession()));
-    if (isKonsolePart())
+    if (isKonsolePart()) {
         action->setText(i18n("&Close Session"));
-    else
+    } else {
         action->setText(i18n("&Close Tab"));
+    }
 
     action->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_W);
@@ -830,8 +837,9 @@ void SessionController::renameSession()
 
     QPointer<Session> guard(_session);
     int result = dialog->exec();
-    if (guard == nullptr)
+    if (guard == nullptr) {
         return;
+    }
 
     if (result != 0) {
         QString tabTitle = dialog->tabTitleText();
@@ -854,16 +862,18 @@ bool SessionController::confirmClose() const
         // are ignored when considering whether to display a confirmation
         QStringList ignoreList;
         ignoreList << QString::fromUtf8(qgetenv("SHELL")).section(QLatin1Char('/'), -1);
-        if (ignoreList.contains(title))
+        if (ignoreList.contains(title)) {
             return true;
+        }
 
         QString question;
-        if (title.isEmpty())
+        if (title.isEmpty()) {
             question = i18n("A program is currently running in this session."
                             "  Are you sure you want to close it?");
-        else
+        } else {
             question = i18n("The program '%1' is currently running in this session."
                             "  Are you sure you want to close it?", title);
+        }
 
         int result = KMessageBox::warningYesNo(_view->window(), question, i18n("Confirm Close"));
         return result == KMessageBox::Yes;
@@ -879,16 +889,18 @@ bool SessionController::confirmForceClose() const
         // are ignored when considering whether to display a confirmation
         QStringList ignoreList;
         ignoreList << QString::fromUtf8(qgetenv("SHELL")).section(QLatin1Char('/'), -1);
-        if (ignoreList.contains(title))
+        if (ignoreList.contains(title)) {
             return true;
+        }
 
         QString question;
-        if (title.isEmpty())
+        if (title.isEmpty()) {
             question = i18n("A program in this session would not die."
                             "  Are you sure you want to kill it by force?");
-        else
+        } else {
             question = i18n("The program '%1' is in this session would not die."
                             "  Are you sure you want to kill it by force?", title);
+        }
 
         int result = KMessageBox::warningYesNo(_view->window(), question, i18n("Confirm Close"));
         return result == KMessageBox::Yes;
@@ -897,17 +909,19 @@ bool SessionController::confirmForceClose() const
 }
 void SessionController::closeSession()
 {
-    if (_preventClose)
+    if (_preventClose) {
         return;
+    }
 
     if (confirmClose()) {
         if (_session->closeInNormalWay()) {
             return;
         } else if (confirmForceClose()) {
-            if (_session->closeInForceWay())
+            if (_session->closeInForceWay()) {
                 return;
-            else
+            } else {
                 qCDebug(KonsoleDebug) << "Konsole failed to close a session in any way.";
+            }
         }
     }
 }
@@ -1041,8 +1055,9 @@ void SessionController::copyInputToSelectedTabs()
 
     QPointer<Session> guard(_session);
     int result = dialog->exec();
-    if (guard == nullptr)
+    if (guard == nullptr) {
         return;
+    }
 
     if (result == QDialog::Accepted) {
         QSet<Session*> newGroup = dialog->chosenSessions();
@@ -1050,10 +1065,11 @@ void SessionController::copyInputToSelectedTabs()
 
         QSet<Session*> completeGroup = newGroup | currentGroup;
         foreach(Session * session, completeGroup) {
-            if (newGroup.contains(session) && !currentGroup.contains(session))
+            if (newGroup.contains(session) && !currentGroup.contains(session)) {
                 _copyToGroup->addSession(session);
-            else if (!newGroup.contains(session) && currentGroup.contains(session))
+            } else if (!newGroup.contains(session) && currentGroup.contains(session)) {
                 _copyToGroup->removeSession(session);
+            }
         }
 
         _copyToGroup->setMasterStatus(_session, true);
@@ -1064,8 +1080,9 @@ void SessionController::copyInputToSelectedTabs()
 
 void SessionController::copyInputToNone()
 {
-    if (_copyToGroup == nullptr)      // No 'Copy To' is active
+    if (_copyToGroup == nullptr) {      // No 'Copy To' is active
         return;
+    }
 
     QSet<Session*> group =
         QSet<Session*>::fromList(SessionManager::instance()->sessions());
@@ -1128,8 +1145,9 @@ void SessionController::setSearchStartTo(int line)
 
 void SessionController::listenForScreenWindowUpdates()
 {
-    if (_listenForScreenWindowUpdates)
+    if (_listenForScreenWindowUpdates) {
         return;
+    }
 
     connect(_view->screenWindow(), &Konsole::ScreenWindow::outputChanged, this, &Konsole::SessionController::updateSearchFilter);
     connect(_view->screenWindow(), &Konsole::ScreenWindow::scrolled, this, &Konsole::SessionController::updateSearchFilter);
@@ -1148,8 +1166,9 @@ void SessionController::updateSearchFilter()
 void SessionController::searchBarEvent()
 {
     QString selectedText = _view->screenWindow()->selectedText(Screen::PreserveLineBreaks | Screen::TrimLeadingWhitespace | Screen::TrimTrailingWhitespace);
-    if (!selectedText.isEmpty())
+    if (!selectedText.isEmpty()) {
         _searchBar->setSearchText(selectedText);
+    }
 
     if (_searchBar->isVisible()) {
         _searchBar->focusLineEdit();
@@ -1161,8 +1180,9 @@ void SessionController::searchBarEvent()
 
 void SessionController::enableSearchBar(bool showSearchBar)
 {
-    if (_searchBar == nullptr)
+    if (_searchBar == nullptr) {
         return;
+    }
 
     if (showSearchBar && !_searchBar->isVisible()) {
         setSearchStartToWindowCurrentLine();
@@ -1252,8 +1272,9 @@ void SessionController::searchTextChanged(const QString& text)
 {
     Q_ASSERT(_view->screenWindow());
 
-    if (_searchText == text)
+    if (_searchText == text) {
         return;
+    }
 
     _searchText = text;
 
@@ -1270,8 +1291,9 @@ void SessionController::searchCompleted(bool success)
 {
     _prevSearchResultLine = _view->screenWindow()->currentResultLine();
 
-    if (_searchBar != nullptr)
+    if (_searchBar != nullptr) {
         _searchBar->setFoundMatch(success);
+    }
 }
 
 void SessionController::beginSearch(const QString& text, Enum::SearchDirection direction)
@@ -1379,8 +1401,9 @@ void SessionController::showHistoryOptions()
 
     QPointer<Session> guard(_session);
     int result = dialog->exec();
-    if (guard == nullptr)
+    if (guard == nullptr) {
         return;
+    }
 
     if (result != 0) {
         scrollBackOptionsChanged(dialog->mode(), dialog->lineCount());
@@ -1416,8 +1439,9 @@ void SessionController::print_screen()
     dialog->setOptionTabs(QList<QWidget*>() << options);
     dialog->setWindowTitle(i18n("Print Shell"));
     connect(dialog.data(), static_cast<void(QPrintDialog::*)()>(&QPrintDialog::accepted), options, &Konsole::PrintOptions::saveSettings);
-    if (dialog->exec() != QDialog::Accepted)
+    if (dialog->exec() != QDialog::Accepted) {
         return;
+    }
 
     QPainter painter;
     painter.begin(&printer);
@@ -1507,8 +1531,9 @@ void SessionController::sessionTitleChanged()
     // number of the shell
     title.replace(QLatin1String("%#"), QString::number(_session->sessionId()));
 
-    if (title.isEmpty())
+    if (title.isEmpty()) {
         title = _session->title(Session::NameRole);
+    }
 
     setTitle(title);
     emit rawTitleChanged();
@@ -1570,8 +1595,9 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 
         _preventClose = false;
 
-        if ((chosen != nullptr) && chosen->objectName() == QLatin1String("close-session"))
+        if ((chosen != nullptr) && chosen->objectName() == QLatin1String("close-session")) {
             chosen->trigger();
+        }
     } else {
         qCDebug(KonsoleDebug) << "Unable to display popup menu for session"
                    << _session->title(Session::NameRole)
@@ -1587,8 +1613,9 @@ void SessionController::movementKeyFromSearchBarReceived(QKeyEvent *event)
 
 void SessionController::sessionStateChanged(int state)
 {
-    if (state == _previousState)
+    if (state == _previousState) {
         return;
+    }
 
     if (state == NOTIFYACTIVITY) {
         setIcon(*_activityIcon);
@@ -1718,8 +1745,9 @@ void SaveHistoryTask::execute()
 
         int result = dialog->exec();
 
-        if (result != QDialog::Accepted)
+        if (result != QDialog::Accepted) {
             continue;
+        }
 
         QUrl url = (dialog->selectedUrls()).at(0);
 
@@ -1783,8 +1811,9 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
 
         int sessionLines = info.session->emulation()->lineCount();
 
-        if (sessionLines - 1 == info.lastLineFetched)
+        if (sessionLines - 1 == info.lastLineFetched) {
             return; // if there is no more data to transfer then stop the job
+        }
 
         int copyUpToLine = qMin(info.lastLineFetched + LINES_PER_REQUEST ,
                                 sessionLines - 1);
@@ -1812,8 +1841,9 @@ void SaveHistoryTask::jobResult(KJob* job)
     // notify the world that the task is done
     emit completed(true);
 
-    if (autoDelete())
+    if (autoDelete()) {
         deleteLater();
+    }
 }
 void SearchHistoryTask::addScreenWindow(Session* session , ScreenWindow* searchWindow)
 {
@@ -1881,17 +1911,19 @@ void SearchHistoryTask::executeOnScreenWindow(SessionPtr session , ScreenWindowP
 
             // calculate lines to search in this iteration
             if (hasWrapped) {
-                if (endLine == lastLine)
+                if (endLine == lastLine) {
                     line = 0;
-                else if (endLine == 0)
+                } else if (endLine == 0) {
                     line = lastLine;
+                }
 
                 endLine += delta;
 
-                if (forwards)
+                if (forwards) {
                     endLine = qMin(startLine , endLine);
-                else
+                } else {
                     endLine = qMax(startLine , endLine);
+                }
             } else {
                 endLine += delta;
 
@@ -1911,17 +1943,19 @@ void SearchHistoryTask::executeOnScreenWindow(SessionPtr session , ScreenWindowP
             // line number search below assumes that the buffer ends with a new-line
             string.append(QLatin1Char('\n'));
 
-            if (forwards)
+            if (forwards) {
                 pos = string.indexOf(_regExp);
-            else
+            } else {
                 pos = string.lastIndexOf(_regExp);
+            }
 
             //if a match is found, position the cursor on that line and update the screen
             if (pos != -1) {
                 int newLines = 0;
                 QList<int> linePositions = decoder.linePositions();
-                while (newLines < linePositions.count() && linePositions[newLines] <= pos)
+                while (newLines < linePositions.count() && linePositions[newLines] <= pos) {
                     newLines++;
+                }
 
                 // ignore the new line at the start of the buffer
                 newLines--;
