@@ -135,10 +135,11 @@ void Session::openTeletype(int fd)
 
     delete _shellProcess;
 
-    if (fd < 0)
+    if (fd < 0) {
         _shellProcess = new Pty();
-    else
+    } else {
         _shellProcess = new Pty(fd);
+    }
 
     _shellProcess->setUtf8Mode(_emulation->utf8());
 
@@ -179,8 +180,9 @@ WId Session::windowId() const
 
         Q_ASSERT(window);
 
-        while (window->parentWidget() != nullptr)
+        while (window->parentWidget() != nullptr) {
             window = window->parentWidget();
+        }
 
         return window->winId();
     }
@@ -240,8 +242,9 @@ QString Session::currentWorkingDirectory()
     }
 
     // only returned cached value
-    if (_currentWorkingDir.isEmpty())
+    if (_currentWorkingDir.isEmpty()) {
         updateWorkingDirectory();
+    }
 
     return _currentWorkingDir;
 }
@@ -333,8 +336,9 @@ QString Session::checkProgram(const QString& program)
 {
     QString exec = program;
 
-    if (exec.isEmpty())
+    if (exec.isEmpty()) {
         return QString();
+    }
 
     QFileInfo info(exec);
     if (info.isAbsolute() && info.exists() && info.isExecutable()) {
@@ -403,10 +407,11 @@ void Session::run()
     int choice = 0;
     while (choice < CHOICE_COUNT) {
         exec = checkProgram(programs[choice]);
-        if (exec.isEmpty())
+        if (exec.isEmpty()) {
             choice++;
-        else
+        } else {
             break;
+        }
     }
 
     // if a program was specified via setProgram(), but it couldn't be found, print a warning
@@ -485,10 +490,11 @@ void Session::setUserTitle(int what, const QString& caption)
         QString colorString = caption.section(QLatin1Char(';'), 0, 0);
         QColor color = QColor(colorString);
         if (color.isValid()) {
-            if (what == TextColor)
+            if (what == TextColor) {
                 emit changeForegroundColorRequest(color);
-            else
+            } else {
                 emit changeBackgroundColorRequest(color);
+            }
         }
     }
 
@@ -530,8 +536,9 @@ void Session::setUserTitle(int what, const QString& caption)
         return;
     }
 
-    if (modified)
+    if (modified) {
         emit titleChanged();
+    }
 }
 
 QString Session::userTitle() const
@@ -550,10 +557,11 @@ void Session::setTabTitleFormat(TabTitleContext context , const QString& format)
 }
 QString Session::tabTitleFormat(TabTitleContext context) const
 {
-    if (context == LocalTabTitle)
+    if (context == LocalTabTitle) {
         return _localTabTitleFormat;
-    else if (context == RemoteTabTitle)
+    } else if (context == RemoteTabTitle) {
         return _remoteTabTitleFormat;
+    }
 
     return QString();
 }
@@ -597,8 +605,9 @@ void Session::updateFlowControlState(bool suspended)
     if (suspended) {
         if (flowControlEnabled()) {
             foreach(TerminalDisplay * display, _views) {
-                if (display->flowControlWarningEnabled())
+                if (display->flowControlWarningEnabled()) {
                     display->outputSuspended(true);
+                }
             }
         }
     } else {
@@ -657,10 +666,12 @@ void Session::activityStateSet(int state)
         }
     }
 
-    if (state == NOTIFYACTIVITY && !_monitorActivity)
+    if (state == NOTIFYACTIVITY && !_monitorActivity) {
         state = NOTIFYNORMAL;
-    if (state == NOTIFYSILENCE && !_monitorSilence)
+    }
+    if (state == NOTIFYSILENCE && !_monitorSilence) {
         state = NOTIFYNORMAL;
+    }
 
     emit stateChanged(state);
 }
@@ -750,8 +761,9 @@ void Session::reportBackgroundColor(const QColor& c)
 
 bool Session::kill(int signal)
 {
-    if (_shellProcess->pid() <= 0)
+    if (_shellProcess->pid() <= 0) {
         return false;
+    }
 
     int result = ::kill(_shellProcess->pid(), signal);
 
@@ -765,8 +777,9 @@ bool Session::kill(int signal)
 void Session::close()
 {
     if (isRunning()) {
-        if (!closeInNormalWay())
+        if (!closeInNormalWay()) {
             closeInForceWay();
+        }
     } else {
         // terminal process has finished, just close the session
         QTimer::singleShot(1, this, SIGNAL(finished()));
@@ -877,10 +890,11 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
     QString message;
 
     if (exitCode != 0) {
-        if (exitStatus != QProcess::NormalExit)
+        if (exitStatus != QProcess::NormalExit) {
             message = i18n("Program '%1' crashed.", _program);
-        else
+        } else {
             message = i18n("Program '%1' exited with status %2.", _program, exitCode);
+        }
 
         //FIXME: See comments in Session::silenceTimerDone()
         KNotification::event(QStringLiteral("Finished"), message , QPixmap(),
@@ -935,10 +949,11 @@ void Session::setKeyBindings(const QString& name)
 void Session::setTitle(TitleRole role , const QString& newTitle)
 {
     if (title(role) != newTitle) {
-        if (role == NameRole)
+        if (role == NameRole) {
             _nameTitle = newTitle;
-        else if (role == DisplayedTitleRole)
+        } else if (role == DisplayedTitleRole) {
             _displayTitle = newTitle;
+        }
 
         emit titleChanged();
     }
@@ -946,12 +961,13 @@ void Session::setTitle(TitleRole role , const QString& newTitle)
 
 QString Session::title(TitleRole role) const
 {
-    if (role == NameRole)
+    if (role == NameRole) {
         return _nameTitle;
-    else if (role == DisplayedTitleRole)
+    } else if (role == DisplayedTitleRole) {
         return _displayTitle;
-    else
+    } else {
         return QString();
+    }
 }
 
 ProcessInfo* Session::getProcessInfo()
@@ -1103,13 +1119,15 @@ QUrl Session::getUrl()
                 return url;
             } else {
                 path = _foregroundProcessInfo->currentDir(&ok);
-                if (!ok)
+                if (!ok) {
                     path.clear();
+                }
             }
         } else { // otherwise use the current working directory of the shell process
             path = _sessionProcessInfo->currentDir(&ok);
-            if (!ok)
+            if (!ok) {
                 path.clear();
+            }
         }
     }
 
@@ -1175,8 +1193,9 @@ bool Session::isMonitorSilence()  const
 
 void Session::setMonitorActivity(bool monitor)
 {
-    if (_monitorActivity == monitor)
+    if (_monitorActivity == monitor) {
         return;
+    }
 
     _monitorActivity  = monitor;
     _notifiedActivity = false;
@@ -1189,8 +1208,9 @@ void Session::setMonitorActivity(bool monitor)
 
 void Session::setMonitorSilence(bool monitor)
 {
-    if (_monitorSilence == monitor)
+    if (_monitorSilence == monitor) {
         return;
+    }
 
     _monitorSilence = monitor;
     if (_monitorSilence) {
@@ -1229,17 +1249,19 @@ void Session::setFlowControlEnabled(bool enabled)
 {
     _flowControlEnabled = enabled;
 
-    if (_shellProcess != nullptr)
+    if (_shellProcess != nullptr) {
         _shellProcess->setFlowControlEnabled(_flowControlEnabled);
+    }
 
     emit flowControlEnabledChanged(enabled);
 }
 bool Session::flowControlEnabled() const
 {
-    if (_shellProcess != nullptr)
+    if (_shellProcess != nullptr) {
         return _shellProcess->flowControlEnabled();
-    else
+    } else {
         return _flowControlEnabled;
+    }
 }
 void Session::fireZModemDetected()
 {
@@ -1263,8 +1285,9 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
 
     *_zmodemProc << zmodem << QStringLiteral("-v") << list;
 
-    if (!dir.isEmpty())
+    if (!dir.isEmpty()) {
         _zmodemProc->setWorkingDirectory(dir);
+    }
 
     connect(_zmodemProc, &KProcess::readyReadStandardOutput, this, &Konsole::Session::zmodemReadAndSendBlock);
     connect(_zmodemProc, &KProcess::readyReadStandardError, this, &Konsole::Session::zmodemReadStatus);
@@ -1289,8 +1312,9 @@ void Session::zmodemReadAndSendBlock()
     _zmodemProc->setReadChannel(QProcess::StandardOutput);
     QByteArray data = _zmodemProc->readAll();
 
-    if (data.count() == 0)
+    if (data.count() == 0) {
         return;
+    }
 
     _shellProcess->sendData(data);
 }
@@ -1312,8 +1336,9 @@ void Session::zmodemReadStatus()
             txt = msg;
             msg.truncate(0);
         }
-        if (!txt.isEmpty())
+        if (!txt.isEmpty()) {
             _zmodemProgress->addProgressText(QString::fromLocal8Bit(txt));
+        }
     }
 }
 
@@ -1358,8 +1383,9 @@ QSize Session::size()
 
 void Session::setSize(const QSize& size)
 {
-    if ((size.width() <= 1) || (size.height() <= 1))
+    if ((size.width() <= 1) || (size.height() <= 1)) {
         return;
+    }
 
     emit resizeRequest(size);
 }
@@ -1465,8 +1491,9 @@ int Session::foregroundProcessId()
 
     bool ok = false;
     pid = getProcessInfo()->pid(&ok);
-    if (!ok)
+    if (!ok) {
         pid = -1;
+    }
 
     return pid;
 }
@@ -1484,8 +1511,9 @@ QString Session::foregroundProcessName()
     if (updateForegroundProcessInfo()) {
         bool ok = false;
         name = _foregroundProcessInfo->name(&ok);
-        if (!ok)
+        if (!ok) {
             name.clear();
+        }
     }
 
     return name;
@@ -1505,15 +1533,25 @@ void Session::restoreSession(KConfigGroup& group)
     QString value;
 
     value = group.readPathEntry("WorkingDir", QString());
-    if (!value.isEmpty()) setInitialWorkingDirectory(value);
+    if (!value.isEmpty()) {
+        setInitialWorkingDirectory(value);
+    }
     value = group.readEntry("LocalTab");
-    if (!value.isEmpty()) setTabTitleFormat(LocalTabTitle, value);
+    if (!value.isEmpty()) {
+        setTabTitleFormat(LocalTabTitle, value);
+    }
     value = group.readEntry("RemoteTab");
-    if (!value.isEmpty()) setTabTitleFormat(RemoteTabTitle, value);
+    if (!value.isEmpty()) {
+        setTabTitleFormat(RemoteTabTitle, value);
+    }
     value = group.readEntry("SessionGuid");
-    if (!value.isEmpty()) _uniqueIdentifier = QUuid(value);
+    if (!value.isEmpty()) {
+        _uniqueIdentifier = QUuid(value);
+    }
     value = group.readEntry("Encoding");
-    if (!value.isEmpty()) setCodec(value.toUtf8());
+    if (!value.isEmpty()) {
+        setCodec(value.toUtf8());
+    }
 }
 
 QString Session::validDirectory(const QString& dir) const
