@@ -203,6 +203,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
     // We need to manually parse the arguments because QApplication removes the
     // Qt specific arguments (like --reverse)
     QStringList arguments;
+    arguments.reserve(argc);
     for (int i = 0; i < argc; i++) {
         arguments.append(QString::fromLocal8Bit(argv[i]));
     }
