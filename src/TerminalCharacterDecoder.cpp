@@ -57,8 +57,9 @@ bool PlainTextDecoder::trailingWhitespace() const
 void PlainTextDecoder::begin(QTextStream* output)
 {
     _output = output;
-    if (!_linePositions.isEmpty())
+    if (!_linePositions.isEmpty()) {
         _linePositions.clear();
+    }
 }
 void PlainTextDecoder::end()
 {
@@ -111,10 +112,11 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     // line
     if (!_includeTrailingWhitespace) {
         for (int i = count - 1 ; i >= start ; i--) {
-            if (!characters[i].isSpace())
+            if (!characters[i].isSpace()) {
                 break;
-            else
+            } else {
                 outputCount--;
+            }
         }
     }
 
@@ -223,11 +225,13 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
             //colors - a color table must have been defined first
             if (_colorTable != nullptr) {
                 bool useBold = (_lastRendition & RE_BOLD) != 0;
-                if (useBold)
+                if (useBold) {
                     style.append(QLatin1String("font-weight:bold;"));
+                }
 
-                if ((_lastRendition & RE_UNDERLINE) != 0)
+                if ((_lastRendition & RE_UNDERLINE) != 0) {
                     style.append(QLatin1String("font-decoration:underline;"));
+                }
 
                 style.append(QStringLiteral("color:%1;").arg(_lastForeColor.color(_colorTable).name()));
 
@@ -240,10 +244,11 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
         }
 
         //handle whitespace
-        if (characters[i].isSpace())
+        if (characters[i].isSpace()) {
             spaceCount++;
-        else
+        } else {
             spaceCount = 0;
+        }
 
         //output current character
         if (spaceCount < 2) {
@@ -256,12 +261,13 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
             } else {
                 //escape HTML tag characters and just display others as they are
                 const QChar ch = characters[i].character;
-                if (ch == QLatin1Char('<'))
+                if (ch == QLatin1Char('<')) {
                     text.append(QLatin1String("&lt;"));
-                else if (ch == QLatin1Char('>'))
+                } else if (ch == QLatin1Char('>')) {
                     text.append(QLatin1String("&gt;"));
-                else
+                } else {
                     text.append(ch);
+                }
             }
         } else {
             // HTML truncates multiple spaces, so use a space marker instead
