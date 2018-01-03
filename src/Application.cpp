@@ -142,7 +142,7 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
 
 QStringList Application::getCustomCommand(QStringList &args)
 {
-    int i = args.indexOf(QLatin1String("-e"));
+    int i = args.indexOf(QStringLiteral("-e"));
     QStringList customCommand;
     if ((0 < i) && (i < (args.size() - 1))) {
         // -e was specified with at least one extra argument
@@ -509,7 +509,7 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
     }
 
     // temporary changes to profile options specified on the command line
-    foreach (const QString &value, m_parser->values(QLatin1String("p"))) {
+    foreach (const QString &value, m_parser->values(QStringLiteral("p"))) {
         ProfileCommandParser parser;
 
         QHashIterator<Profile::Property, QVariant> iter(parser.parse(value));
