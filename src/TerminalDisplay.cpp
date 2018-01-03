@@ -3450,7 +3450,7 @@ void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
     //   and pcmanfm
     // That also applies in dropEvent()
     const auto mimeData = event->mimeData();
-    if (mimeData
+    if ((mimeData != nullptr)
             && (mimeData->hasFormat(QStringLiteral("text/plain"))
                 || mimeData->hasFormat(QStringLiteral("text/uri-list")))) {
         event->acceptProposedAction();
@@ -3460,7 +3460,7 @@ void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
 void TerminalDisplay::dropEvent(QDropEvent* event)
 {
     const auto mimeData = event->mimeData();
-    if (!mimeData) {
+    if (mimeData == nullptr) {
         return;
     }
     auto urls = mimeData->urls();
