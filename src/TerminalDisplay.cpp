@@ -3422,9 +3422,7 @@ void TerminalDisplay::bell(const QString& message)
 void TerminalDisplay::visualBell()
 {
     swapFGBGColors();
-    QTimer::singleShot(200, [this]() {
-        swapFGBGColors();
-    });
+    QTimer::singleShot(200, this, &Konsole::TerminalDisplay::swapFGBGColors);
 }
 
 void TerminalDisplay::swapFGBGColors()
