@@ -134,12 +134,5 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>fixedSizeHistoryButton</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>historyLineSpinner</receiver>
-   <slot>setEnabled(bool)</slot>
-  </connection>
- </connections>
+ <connections/>
 </ui>
