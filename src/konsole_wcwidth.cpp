@@ -83,16 +83,18 @@ static int bisearch(unsigned long ucs, const struct interval* table, int max)
 {
     int min = 0;
 
-    if (ucs < table[0].first || ucs > table[max].last)
+    if (ucs < table[0].first || ucs > table[max].last) {
         return 0;
+    }
     while (max >= min) {
         const int mid = (min + max) / 2;
-        if (ucs > table[mid].last)
+        if (ucs > table[mid].last) {
             min = mid + 1;
-        else if (ucs < table[mid].first)
+        } else if (ucs < table[mid].first) {
             max = mid - 1;
-        else
+        } else {
             return 1;
+        }
     }
 
     return 0;
@@ -188,21 +190,24 @@ int KONSOLEPRIVATE_EXPORT konsole_wcwidth(quint16 oucs)
     };
 
     /* test for 8-bit control characters */
-    if (ucs == 0 || QChar::isLowSurrogate(ucs))
+    if (ucs == 0 || QChar::isLowSurrogate(ucs)) {
         return 0;
+    }
 
     /* Always assume double width, otherwise we have to go back and move characters */
     if (QChar::isHighSurrogate(ucs)) {
         return 2;
     }
 
-    if (ucs < 32 || (ucs >= 0x7f && ucs < 0xa0))
+    if (ucs < 32 || (ucs >= 0x7f && ucs < 0xa0)) {
         return -1;
+    }
 
     /* binary search in table of non-spacing characters */
     if (bisearch(ucs, combining,
-                 sizeof(combining) / sizeof(struct interval) - 1) != 0)
+                 sizeof(combining) / sizeof(struct interval) - 1) != 0) {
         return 0;
+    }
 
     /* if we arrive here, ucs is not a combining or C0/C1 control character */
 
@@ -225,8 +230,9 @@ int KONSOLEPRIVATE_EXPORT konsole_wcwidth(quint16 oucs)
 int string_width(const QString& text)
 {
     int w = 0;
-    for (auto i : text)
+    for (auto i : text) {
         w += konsole_wcwidth(i.unicode());
+    }
     return w;
 }
 
