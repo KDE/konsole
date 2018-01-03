@@ -592,9 +592,9 @@ void EditProfileDialog::showAllFontsButtonWarning(bool enable)
 {
     if (enable) {
         KMessageBox::information(this,
-                                 QLatin1String(
+                                 QStringLiteral(
                                      "By its very nature, a terminal program requires font characters that are equal width (monospace).  Any non monospaced font may cause display issues.  This should not be necessary except in rare cases."),
-                                 QLatin1String("Warning"));
+                                 QStringLiteral("Warning"));
     }
 }
 
