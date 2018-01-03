@@ -110,16 +110,18 @@ int ProfileSettings::rowForProfile(const Profile::Ptr profile) const
 void ProfileSettings::removeItems(const Profile::Ptr profile)
 {
     int row = rowForProfile(profile);
-    if (row < 0)
+    if (row < 0) {
         return;
+    }
 
     _sessionModel->removeRow(row);
 }
 void ProfileSettings::updateItems(const Profile::Ptr profile)
 {
     const int row = rowForProfile(profile);
-    if (row < 0)
+    if (row < 0) {
         return;
+    }
 
     QList<QStandardItem*> items;
     items << _sessionModel->item(row, ProfileNameColumn);
@@ -132,8 +134,9 @@ void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, QList<QS
 {
     // Profile Name
     items[ProfileNameColumn]->setText(profile->name());
-    if (!profile->icon().isEmpty())
+    if (!profile->icon().isEmpty()) {
         items[ProfileNameColumn]->setIcon(QIcon::fromTheme(profile->icon()));
+    }
     items[ProfileNameColumn]->setData(QVariant::fromValue(profile), ProfileKeyRole);
     // only allow renaming the profile from the edit profile dialog
     // so as to use ProfileManager::checkProfileName()
@@ -141,10 +144,11 @@ void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, QList<QS
 
     // Favorite Status
     const bool isFavorite = ProfileManager::instance()->findFavorites().contains(profile);
-    if (isFavorite)
+    if (isFavorite) {
         items[FavoriteStatusColumn]->setData(QIcon::fromTheme(QStringLiteral("dialog-ok-apply")), Qt::DecorationRole);
-    else
+    } else {
         items[FavoriteStatusColumn]->setData(QIcon(), Qt::DecorationRole);
+    }
     items[FavoriteStatusColumn]->setData(QVariant::fromValue(profile), ProfileKeyRole);
     items[FavoriteStatusColumn]->setToolTip(i18nc("@info:tooltip", "Click to toggle status"));
 
@@ -165,13 +169,15 @@ void ProfileSettings::doubleClicked(const QModelIndex &index)
 
 void ProfileSettings::addItems(const Profile::Ptr profile)
 {
-    if (profile->isHidden())
+    if (profile->isHidden()) {
         return;
+    }
 
     QList<QStandardItem*> items;
     items.reserve(3);
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 3; i++) {
         items.append(new QStandardItem);
+    }
 
     updateItemsForProfile(profile, items);
     _sessionModel->appendRow(items);
@@ -248,8 +254,9 @@ void ProfileSettings::tableSelectionChanged(const QItemSelection&)
 void ProfileSettings::deleteSelected()
 {
     foreach(const Profile::Ptr & profile, selectedProfiles()) {
-        if (profile != ProfileManager::instance()->defaultProfile())
+        if (profile != ProfileManager::instance()->defaultProfile()) {
             ProfileManager::instance()->deleteProfile(profile);
+        }
     }
 }
 void ProfileSettings::setSelectedAsDefault()
@@ -290,10 +297,11 @@ void ProfileSettings::createProfile()
     Profile::Ptr sourceProfile;
 
     Profile::Ptr selectedProfile = currentProfile();
-    if (!selectedProfile)
+    if (!selectedProfile) {
         sourceProfile = ProfileManager::instance()->defaultProfile();
-    else
+    } else {
         sourceProfile = selectedProfile;
+    }
 
     Q_ASSERT(sourceProfile);
 
@@ -348,12 +356,14 @@ QList<Profile::Ptr> ProfileSettings::selectedProfiles() const
 {
     QList<Profile::Ptr> list;
     QItemSelectionModel* selection = sessionTable->selectionModel();
-    if (selection == nullptr)
+    if (selection == nullptr) {
         return list;
+    }
 
     foreach(const QModelIndex & index, selection->selectedIndexes()) {
-        if (index.column() == ProfileNameColumn)
+        if (index.column() == ProfileNameColumn) {
             list << index.data(ProfileKeyRole).value<Profile::Ptr>();
+        }
     }
 
     return list;
@@ -362,8 +372,9 @@ Profile::Ptr ProfileSettings::currentProfile() const
 {
     QItemSelectionModel* selection = sessionTable->selectionModel();
 
-    if ((selection == nullptr) || selection->selectedRows().count() != 1)
+    if ((selection == nullptr) || selection->selectedRows().count() != 1) {
         return Profile::Ptr();
+    }
 
     return  selection->
             selectedIndexes().first().data(ProfileKeyRole).value<Profile::Ptr>();
@@ -467,8 +478,9 @@ void ShortcutItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* mod
 {
     _itemsBeingEdited.remove(index);
 
-    if (!_modifiedEditors.contains(editor))
+    if (!_modifiedEditors.contains(editor)) {
         return;
+    }
 
     QString shortcut = qobject_cast<KKeySequenceWidget*>(editor)->keySequence().toString();
     model->setData(index, shortcut, Qt::DisplayRole);
@@ -492,9 +504,10 @@ QWidget* ShortcutItemDelegate::createEditor(QWidget* aParent, const QStyleOption
 void ShortcutItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
                                  const QModelIndex& index) const
 {
-    if (_itemsBeingEdited.contains(index))
+    if (_itemsBeingEdited.contains(index)) {
         StyledBackgroundPainter::drawBackground(painter, option, index);
-    else
+    } else {
         QStyledItemDelegate::paint(painter, option, index);
+    }
 }
 
