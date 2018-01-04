@@ -63,8 +63,15 @@ using namespace Konsole;
 
 EditProfileDialog::EditProfileDialog(QWidget *aParent) :
     QDialog(aParent),
+    _ui(nullptr),
+    _tempProfile(nullptr),
+    _profile(nullptr),
+    _pageNeedsUpdate(QVector<bool>()),
+    _previewedProperties(QHash<int, QVariant>()),
+    _delayedPreviewProperties(QHash<int, QVariant>()),
     _delayedPreviewTimer(new QTimer(this)),
-    _colorDialog(nullptr)
+    _colorDialog(nullptr),
+    mButtonBox(nullptr)
 {
     setWindowTitle(i18n("Edit Profile"));
     mButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);

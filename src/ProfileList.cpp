@@ -35,8 +35,10 @@ using Konsole::ProfileList;
 
 ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     : QObject(parent)
+    , _group(nullptr)
     , _addShortcuts(addShortcuts)
     , _emptyListAction(nullptr)
+    , _registeredWidgets(QSet<QWidget *>())
 {
     // construct the list of favorite profiles
     _group = new QActionGroup(this);

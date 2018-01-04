@@ -34,12 +34,15 @@
 using namespace Konsole;
 
 Emulation::Emulation() :
+    _windows(QList<ScreenWindow *>()),
     _currentScreen(nullptr),
     _codec(nullptr),
     _decoder(nullptr),
     _keyTranslator(nullptr),
     _usesMouse(false),
     _bracketedPasteMode(false),
+    _bulkTimer1(new QTimer(this)),
+    _bulkTimer2(new QTimer(this)),
     _imageSizeInitialized(false)
 {
     // create screens with a default size

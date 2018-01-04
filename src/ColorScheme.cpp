@@ -170,6 +170,8 @@ ColorScheme::ColorScheme() :
 }
 
 ColorScheme::ColorScheme(const ColorScheme &other) :
+    _description(QString()),
+    _name(QString()),
     _table(nullptr),
     _randomTable(nullptr),
     _opacity(other._opacity),

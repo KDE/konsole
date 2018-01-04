@@ -613,6 +613,8 @@ static QString createFileRegex(const QStringList &patterns, const QString &fileP
 
 FileFilter::FileFilter(Session *session) :
     _session(session)
+    , _dirPath(QString())
+    , _currentFiles(QSet<QString>())
 {
     QStringList patterns;
     QMimeDatabase mimeDatabase;
