@@ -180,7 +180,7 @@ bool EditProfileDialog::isValidProfileName()
     QFileInfo fileInfo(_profile->path());
     if (fileInfo.exists() && !fileInfo.isWritable()) {
         if (!_tempProfile->isPropertySet(Profile::Name)
-            || (_tempProfile->isPropertySet(Profile::Name) && _tempProfile->name() == _profile->name())) {
+            || (_tempProfile->name() == _profile->name())) {
                 KMessageBox::sorry(this,
                                    i18n("<p>Konsole does not have permission to save this profile to:<br /> \"%1\"</p>"
                                         "<p>To be able to save settings you can either change the permissions "
