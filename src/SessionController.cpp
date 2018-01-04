@@ -525,12 +525,10 @@ void SessionController::setShowMenuAction(QAction* action)
 
 void SessionController::setupCommonActions()
 {
-    QAction* action = nullptr;
-
     KActionCollection* collection = actionCollection();
 
     // Close Session
-    action = collection->addAction(QStringLiteral("close-session"), this, SLOT(closeSession()));
+    QAction* action = collection->addAction(QStringLiteral("close-session"), this, SLOT(closeSession()));
     if (isKonsolePart()) {
         action->setText(i18n("&Close Session"));
     } else {
@@ -643,12 +641,10 @@ void SessionController::setupCommonActions()
 
 void SessionController::setupExtraActions()
 {
-    QAction* action = nullptr;
-    KToggleAction* toggleAction = nullptr;
     KActionCollection* collection = actionCollection();
 
     // Rename Session
-    action = collection->addAction(QStringLiteral("rename-session"), this, SLOT(renameSession()));
+    QAction* action = collection->addAction(QStringLiteral("rename-session"), this, SLOT(renameSession()));
     action->setText(i18n("&Rename Tab..."));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-rename")));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_S);
@@ -688,7 +684,7 @@ void SessionController::setupExtraActions()
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_U);
 
     // Monitor
-    toggleAction = new KToggleAction(i18n("Monitor for &Activity"), this);
+    KToggleAction* toggleAction = new KToggleAction(i18n("Monitor for &Activity"), this);
     collection->setDefaultShortcut(toggleAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_A);
     action = collection->addAction(QStringLiteral("monitor-activity"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorActivity);

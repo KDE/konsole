@@ -306,7 +306,6 @@ IncrementalSearchBar *MainWindow::searchBar() const
 void MainWindow::setupActions()
 {
     KActionCollection *collection = actionCollection();
-    QAction *menuAction = nullptr;
 
     // File Menu
     _newTabMenuAction = new KActionMenu(QIcon::fromTheme(QStringLiteral("tab-new")),
@@ -318,7 +317,7 @@ void MainWindow::setupActions()
     collection->addAction(QStringLiteral("new-tab"), _newTabMenuAction);
     collection->setShortcutsConfigurable(_newTabMenuAction, true);
 
-    menuAction = collection->addAction(QStringLiteral("clone-tab"));
+    QAction* menuAction = collection->addAction(QStringLiteral("clone-tab"));
     menuAction->setIcon(QIcon::fromTheme(QStringLiteral("tab-duplicate")));
     menuAction->setText(i18nc("@action:inmenu", "&Clone Tab"));
     collection->setDefaultShortcut(menuAction, QKeySequence());
