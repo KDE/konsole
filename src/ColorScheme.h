@@ -77,6 +77,7 @@ public:
      */
     ColorScheme();
     ColorScheme(const ColorScheme &other);
+    ColorScheme& operator=(const ColorScheme &other) = delete;
     ~ColorScheme();
 
     /** Sets the descriptive name of the color scheme. */
