@@ -30,7 +30,10 @@
 #include <QMenuBar>
 
 demo_konsolepart::demo_konsolepart()
-    : KMainWindow()
+    : KMainWindow(),
+      _mainWindow(nullptr),
+      _terminalPart(nullptr),
+      _terminal(nullptr)
 {
     // Create terminal part and embed in into the main window
     _terminalPart = createPart();

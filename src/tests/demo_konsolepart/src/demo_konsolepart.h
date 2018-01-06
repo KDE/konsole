@@ -40,6 +40,8 @@ public Q_SLOTS:
     void quit();
 
 private:
+    Q_DISABLE_COPY(demo_konsolepart)
+
     KParts::ReadOnlyPart* createPart();
 
     KMainWindow *_mainWindow;
