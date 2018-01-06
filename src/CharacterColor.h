@@ -149,12 +149,12 @@ public:
     void setFaint();
 
     /**
-     * Returns the color within the specified color @p palette
+     * Returns the color within the specified color @p base
      *
-     * The @p palette is only used if this color is one of the 16 system colors, otherwise
+     * The @p base is only used if this color is one of the 16 system colors, otherwise
      * it is ignored.
      */
-    QColor color(const ColorEntry *palette) const;
+    QColor color(const ColorEntry *base) const;
 
     /**
      * Compares two colors and returns true if they represent the same color value and

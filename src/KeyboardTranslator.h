@@ -187,7 +187,7 @@ public:
         /** See modifiers() */
         void setModifiers(Qt::KeyboardModifiers modifiers);
         /** See modifierMask() and modifiers() */
-        void setModifierMask(Qt::KeyboardModifiers modifiers);
+        void setModifierMask(Qt::KeyboardModifiers mask);
 
         /**
          * Returns a bitwise-OR of the enabled state flags associated with this entry.
@@ -231,9 +231,9 @@ public:
 
         /**
          * Returns true if this entry matches the given key sequence, specified
-         * as a combination of @p keyCode , @p modifiers and @p state.
+         * as a combination of @p testKeyCode , @p testKeyboardModifiers and @p testState.
          */
-        bool matches(int keyCode, Qt::KeyboardModifiers modifiers, States flags) const;
+        bool matches(int testKeyCode, Qt::KeyboardModifiers testKeyboardModifiers, States testState) const;
 
         bool operator==(const Entry &rhs) const;
 
@@ -396,11 +396,11 @@ private:
     QList<Token> tokenize(const QString &);
     void readNext();
     bool decodeSequence(const QString &, int &keyCode, Qt::KeyboardModifiers &modifiers,
-                        Qt::KeyboardModifiers &modifierMask, KeyboardTranslator::States &state,
-                        KeyboardTranslator::States &stateFlags);
+                        Qt::KeyboardModifiers &modifierMask, KeyboardTranslator::States &flags,
+                        KeyboardTranslator::States &flagMask);
 
     static bool parseAsModifier(const QString &item, Qt::KeyboardModifier &modifier);
-    static bool parseAsStateFlag(const QString &item, KeyboardTranslator::State &state);
+    static bool parseAsStateFlag(const QString &item, KeyboardTranslator::State &flag);
     static bool parseAsKeyCode(const QString &item, int &keyCode);
     static bool parseAsCommand(const QString &text, KeyboardTranslator::Command &command);
 
@@ -447,9 +447,9 @@ inline void KeyboardTranslator::Entry::setKeyCode(int aKeyCode)
     _keyCode = aKeyCode;
 }
 
-inline void KeyboardTranslator::Entry::setModifiers(Qt::KeyboardModifiers modifier)
+inline void KeyboardTranslator::Entry::setModifiers(Qt::KeyboardModifiers modifiers)
 {
-    _modifiers = modifier;
+    _modifiers = modifiers;
 }
 
 inline Qt::KeyboardModifiers KeyboardTranslator::Entry::modifiers() const

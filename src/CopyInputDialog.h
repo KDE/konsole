@@ -57,7 +57,7 @@ public:
      * other sessions.  This session is displayed grayed out in the list
      * and cannot be unchecked.
      */
-    void setMasterSession(Session *master);
+    void setMasterSession(Session *session);
     /** See setMasterSession() */
     Session *masterSession() const;
 

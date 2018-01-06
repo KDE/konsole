@@ -192,11 +192,11 @@ void IncrementalSearchBar::setSearchText(const QString &text)
     }
 }
 
-bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *aEvent)
+bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *event)
 {
     if (watched == _searchEdit) {
-        if (aEvent->type() == QEvent::KeyPress) {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(aEvent);
+        if (event->type() == QEvent::KeyPress) {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
 
             if (keyEvent->key() == Qt::Key_Escape) {
                 emit closeClicked();
@@ -222,7 +222,7 @@ bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *aEvent)
         }
     }
 
-    return QWidget::eventFilter(watched, aEvent);
+    return QWidget::eventFilter(watched, event);
 }
 
 void IncrementalSearchBar::keyPressEvent(QKeyEvent *event)

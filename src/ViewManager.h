@@ -309,7 +309,7 @@ private Q_SLOTS:
     // views associated with the session
     void sessionFinished();
     // called when one view has been destroyed
-    void viewDestroyed(QWidget *widget);
+    void viewDestroyed(QWidget *view);
 
     // controller detects when an associated view is given the focus
     // and emits a signal.  ViewManager listens for that signal
@@ -359,7 +359,7 @@ private Q_SLOTS:
 
     void detachView(ViewContainer *container, QWidget *view);
 
-    void closeTabFromContainer(ViewContainer *container, QWidget *view);
+    void closeTabFromContainer(ViewContainer *container, QWidget *tab);
 
 private:
     Q_DISABLE_COPY(ViewManager)
@@ -388,7 +388,7 @@ private:
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information
     // about the session ( such as title and associated icon ) to the display.
-    SessionController *createController(Session *session, TerminalDisplay *display);
+    SessionController *createController(Session *session, TerminalDisplay *view);
 
 private:
     QPointer<ViewSplitter> _viewSplitter;

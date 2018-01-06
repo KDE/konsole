@@ -540,9 +540,9 @@ QByteArray KeyboardTranslator::Entry::escapedText(bool expandWildCards,
     return result;
 }
 
-QByteArray KeyboardTranslator::Entry::unescape(const QByteArray &input) const
+QByteArray KeyboardTranslator::Entry::unescape(const QByteArray &text) const
 {
-    QByteArray result(input);
+    QByteArray result(text);
 
     for (int i = 0; i < result.count() - 1; i++) {
         QByteRef ch = result[i];

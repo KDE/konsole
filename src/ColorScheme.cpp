@@ -200,9 +200,9 @@ ColorScheme::~ColorScheme()
     delete[] _randomTable;
 }
 
-void ColorScheme::setDescription(const QString &aDescription)
+void ColorScheme::setDescription(const QString &description)
 {
-    _description = aDescription;
+    _description = description;
 }
 
 QString ColorScheme::description() const
@@ -210,9 +210,9 @@ QString ColorScheme::description() const
     return _description;
 }
 
-void ColorScheme::setName(const QString &aName)
+void ColorScheme::setName(const QString &name)
 {
-    _name = aName;
+    _name = name;
 }
 
 QString ColorScheme::name() const
@@ -348,9 +348,9 @@ bool ColorScheme::hasDarkBackground() const
     return backgroundColor().value() < 127;
 }
 
-void ColorScheme::setOpacity(qreal aOpacity)
+void ColorScheme::setOpacity(qreal opacity)
 {
-    _opacity = aOpacity;
+    _opacity = opacity;
 }
 
 qreal ColorScheme::opacity() const
@@ -449,8 +449,8 @@ ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const
     return _wallpaper;
 }
 
-ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &aPath) :
-    _path(aPath),
+ColorSchemeWallpaper::ColorSchemeWallpaper(const QString &path) :
+    _path(path),
     _picture(nullptr)
 {
 }

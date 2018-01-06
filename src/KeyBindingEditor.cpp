@@ -154,17 +154,17 @@ bool KeyBindingEditor::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 
-void KeyBindingEditor::setDescription(const QString &newDescription)
+void KeyBindingEditor::setDescription(const QString &description)
 {
-    _ui->descriptionEdit->setText(newDescription);
+    _ui->descriptionEdit->setText(description);
 
-    setTranslatorDescription(newDescription);
+    setTranslatorDescription(description);
 }
 
-void KeyBindingEditor::setTranslatorDescription(const QString &newDescription)
+void KeyBindingEditor::setTranslatorDescription(const QString &description)
 {
     if (_translator != nullptr) {
-        _translator->setDescription(newDescription);
+        _translator->setDescription(description);
     }
 }
 

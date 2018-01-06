@@ -213,7 +213,7 @@ public:
      * Regular expressions which match the empty string are treated as not matching
      * anything.
      */
-    void setRegExp(const QRegularExpression &text);
+    void setRegExp(const QRegularExpression &regExp);
     /** Returns the regular expression which the filter searches for in blocks of text */
     QRegularExpression regExp() const;
 

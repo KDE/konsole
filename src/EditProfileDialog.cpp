@@ -482,12 +482,12 @@ void EditProfileDialog::selectIcon()
     }
 }
 
-void EditProfileDialog::profileNameChanged(const QString &text)
+void EditProfileDialog::profileNameChanged(const QString &name)
 {
-    _ui->emptyNameWarningWidget->setVisible(text.isEmpty());
+    _ui->emptyNameWarningWidget->setVisible(name.isEmpty());
 
-    updateTempProfileProperty(Profile::Name, text);
-    updateTempProfileProperty(Profile::UntranslatedName, text);
+    updateTempProfileProperty(Profile::Name, name);
+    updateTempProfileProperty(Profile::UntranslatedName, name);
     updateCaption(_tempProfile);
 }
 
@@ -723,21 +723,21 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     }
 }
 
-bool EditProfileDialog::eventFilter(QObject *watched, QEvent *aEvent)
+bool EditProfileDialog::eventFilter(QObject *watched, QEvent *event)
 {
-    if (watched == _ui->colorSchemeList && aEvent->type() == QEvent::Leave) {
+    if (watched == _ui->colorSchemeList && event->type() == QEvent::Leave) {
         if (_tempProfile->isPropertySet(Profile::ColorScheme)) {
             preview(Profile::ColorScheme, _tempProfile->colorScheme());
         } else {
             unpreview(Profile::ColorScheme);
         }
     }
-    if (watched == _ui->fontPreviewLabel && aEvent->type() == QEvent::FontChange) {
+    if (watched == _ui->fontPreviewLabel && event->type() == QEvent::FontChange) {
         const QFont &labelFont = _ui->fontPreviewLabel->font();
         _ui->fontPreviewLabel->setText(i18n("%1", labelFont.family()));
     }
 
-    return QDialog::eventFilter(watched, aEvent);
+    return QDialog::eventFilter(watched, event);
 }
 
 void EditProfileDialog::unpreviewAll()
@@ -758,24 +758,24 @@ void EditProfileDialog::unpreviewAll()
     }
 }
 
-void EditProfileDialog::unpreview(int aProperty)
+void EditProfileDialog::unpreview(int property)
 {
-    _delayedPreviewProperties.remove(aProperty);
+    _delayedPreviewProperties.remove(property);
 
-    if (!_previewedProperties.contains(aProperty)) {
+    if (!_previewedProperties.contains(property)) {
         return;
     }
 
     QHash<Profile::Property, QVariant> map;
-    map.insert(static_cast<Profile::Property>(aProperty), _previewedProperties[aProperty]);
+    map.insert(static_cast<Profile::Property>(property), _previewedProperties[property]);
     ProfileManager::instance()->changeProfile(_profile, map, false);
 
-    _previewedProperties.remove(aProperty);
+    _previewedProperties.remove(property);
 }
 
-void EditProfileDialog::delayedPreview(int aProperty, const QVariant &value)
+void EditProfileDialog::delayedPreview(int property, const QVariant &value)
 {
-    _delayedPreviewProperties.insert(aProperty, value);
+    _delayedPreviewProperties.insert(property, value);
 
     _delayedPreviewTimer->stop();
     _delayedPreviewTimer->start(300);
@@ -792,12 +792,12 @@ void EditProfileDialog::delayedPreviewActivate()
     }
 }
 
-void EditProfileDialog::preview(int aProperty, const QVariant &value)
+void EditProfileDialog::preview(int property, const QVariant &value)
 {
     QHash<Profile::Property, QVariant> map;
-    map.insert(static_cast<Profile::Property>(aProperty), value);
+    map.insert(static_cast<Profile::Property>(property), value);
 
-    _delayedPreviewProperties.remove(aProperty);
+    _delayedPreviewProperties.remove(property);
 
     const Profile::Ptr original = lookupProfile();
 
@@ -807,13 +807,13 @@ void EditProfileDialog::preview(int aProperty, const QVariant &value)
     // TODO - Save the original values for each profile and use to unpreview properties
     ProfileGroup::Ptr group = original->asGroup();
     if (group && group->profiles().count() > 1
-        && original->property<QVariant>(static_cast<Profile::Property>(aProperty)).isNull()) {
+        && original->property<QVariant>(static_cast<Profile::Property>(property)).isNull()) {
         return;
     }
 
-    if (!_previewedProperties.contains(aProperty)) {
-        _previewedProperties.insert(aProperty,
-                                    original->property<QVariant>(static_cast<Profile::Property>(aProperty)));
+    if (!_previewedProperties.contains(property)) {
+        _previewedProperties.insert(property,
+                                    original->property<QVariant>(static_cast<Profile::Property>(property)));
     }
 
     // temporary change to color scheme
@@ -966,9 +966,9 @@ void EditProfileDialog::createTempProfile()
     _tempProfile->setHidden(true);
 }
 
-void EditProfileDialog::updateTempProfileProperty(Profile::Property aProperty, const QVariant &value)
+void EditProfileDialog::updateTempProfileProperty(Profile::Property property, const QVariant &value)
 {
-    _tempProfile->setProperty(aProperty, value);
+    _tempProfile->setProperty(property, value);
     updateButtonApply();
 }
 
@@ -980,17 +980,17 @@ void EditProfileDialog::updateButtonApply()
     while (iter.hasNext()) {
         iter.next();
 
-        Profile::Property aProperty = iter.key();
+        Profile::Property property = iter.key();
         QVariant value = iter.value();
 
         // for previewed property
-        if (_previewedProperties.contains(static_cast<int>(aProperty))) {
-            if (value != _previewedProperties.value(static_cast<int>(aProperty))) {
+        if (_previewedProperties.contains(static_cast<int>(property))) {
+            if (value != _previewedProperties.value(static_cast<int>(property))) {
                 userModified = true;
                 break;
             }
             // for not-previewed property
-        } else if ((value != _profile->property<QVariant>(aProperty))) {
+        } else if ((value != _profile->property<QVariant>(property))) {
             userModified = true;
             break;
         }

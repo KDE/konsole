@@ -415,7 +415,7 @@ protected:
     void navigationVisibilityChanged(NavigationVisibility mode) Q_DECL_OVERRIDE;
     void navigationPositionChanged(NavigationPosition position) Q_DECL_OVERRIDE;
     void navigationTabWidthExpandingChanged(bool expand) Q_DECL_OVERRIDE;
-    void navigationTextModeChanged(bool mode) Q_DECL_OVERRIDE;
+    void navigationTextModeChanged(bool useTextWidth) Q_DECL_OVERRIDE;
     void moveViewWidget(int fromIndex, int toIndex) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
