@@ -881,7 +881,7 @@ void MainWindow::setMenuBarInitialVisibility(bool visible)
     _menuBarInitialVisibility = visible;
 }
 
-void MainWindow::showEvent(QShowEvent *aEvent)
+void MainWindow::showEvent(QShowEvent *event)
 {
     // Make sure the 'initial' visibility is applied only once.
     if (!_menuBarInitialVisibilityApplied) {
@@ -898,7 +898,7 @@ void MainWindow::showEvent(QShowEvent *aEvent)
     }
 
     // Call parent method
-    KXmlGuiWindow::showEvent(aEvent);
+    KXmlGuiWindow::showEvent(event);
 }
 
 bool MainWindow::focusNextPrevChild(bool)

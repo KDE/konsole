@@ -629,29 +629,29 @@ void KeyboardTranslator::Entry::insertModifier(QString &item, int modifier) cons
     }
 }
 
-void KeyboardTranslator::Entry::insertState(QString &item, int aState) const
+void KeyboardTranslator::Entry::insertState(QString &item, int state) const
 {
-    if ((aState & _stateMask) == 0) {
+    if ((state & _stateMask) == 0) {
         return;
     }
 
-    if ((aState & _state) != 0) {
+    if ((state & _state) != 0) {
         item += QLatin1Char('+');
     } else {
         item += QLatin1Char('-');
     }
 
-    if (aState == KeyboardTranslator::AlternateScreenState) {
+    if (state == KeyboardTranslator::AlternateScreenState) {
         item += QLatin1String("AppScreen");
-    } else if (aState == KeyboardTranslator::NewLineState) {
+    } else if (state == KeyboardTranslator::NewLineState) {
         item += QLatin1String("NewLine");
-    } else if (aState == KeyboardTranslator::AnsiState) {
+    } else if (state == KeyboardTranslator::AnsiState) {
         item += QLatin1String("Ansi");
-    } else if (aState == KeyboardTranslator::CursorKeysState) {
+    } else if (state == KeyboardTranslator::CursorKeysState) {
         item += QLatin1String("AppCursorKeys");
-    } else if (aState == KeyboardTranslator::AnyModifierState) {
+    } else if (state == KeyboardTranslator::AnyModifierState) {
         item += QLatin1String("AnyModifier");
-    } else if (aState == KeyboardTranslator::ApplicationKeypadState) {
+    } else if (state == KeyboardTranslator::ApplicationKeypadState) {
         item += QLatin1String("AppKeypad");
     }
 }
@@ -700,9 +700,9 @@ QString KeyboardTranslator::Entry::conditionToString() const
     return result;
 }
 
-KeyboardTranslator::KeyboardTranslator(const QString &aName) :
+KeyboardTranslator::KeyboardTranslator(const QString &name) :
     _entries(QMultiHash<int, Entry>()),
-    _name(aName),
+    _name(name),
     _description(QString())
 {
 }
@@ -719,9 +719,9 @@ FallbackKeyboardTranslator::FallbackKeyboardTranslator() :
     addEntry(entry);
 }
 
-void KeyboardTranslator::setDescription(const QString &aDescription)
+void KeyboardTranslator::setDescription(const QString &description)
 {
-    _description = aDescription;
+    _description = description;
 }
 
 QString KeyboardTranslator::description() const
@@ -729,9 +729,9 @@ QString KeyboardTranslator::description() const
     return _description;
 }
 
-void KeyboardTranslator::setName(const QString &aName)
+void KeyboardTranslator::setName(const QString &name)
 {
-    _name = aName;
+    _name = name;
 }
 
 QString KeyboardTranslator::name() const

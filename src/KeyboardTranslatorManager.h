@@ -95,7 +95,7 @@ private:
 
     // loads the translator with the given name
     KeyboardTranslator *loadTranslator(const QString &name);
-    KeyboardTranslator *loadTranslator(QIODevice *device, const QString &name);
+    KeyboardTranslator *loadTranslator(QIODevice *source, const QString &name);
 
     bool saveTranslator(const KeyboardTranslator *translator);
     QString findTranslatorPath(const QString &name);

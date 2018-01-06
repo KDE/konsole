@@ -103,7 +103,7 @@ public:
      * SessionManager::createSession() to create a new session using
      * this profile.
      */
-    Profile::Ptr loadProfile(const QString &path);
+    Profile::Ptr loadProfile(const QString &shortPath);
 
     /**
      * Searches for available profiles on-disk and returns a list

@@ -104,8 +104,8 @@ public:
 
     void setNavigationVisibility(int visibility);
     void setNavigationPosition(int position);
-    void setNavigationStyleSheet(const QString &stylesheet);
-    void setNavigationStyleSheetFromFile(const QUrl &stylesheetfile);
+    void setNavigationStyleSheet(const QString &styleSheet);
+    void setNavigationStyleSheetFromFile(const QUrl &styleSheetFile);
     void setNavigationBehavior(int behavior);
     void setNavigationTabWidthExpanding(bool expand);
     void setShowQuickButtons(bool show);
@@ -156,7 +156,7 @@ private Q_SLOTS:
     void disconnectController(SessionController *controller);
     void activeViewTitleChanged(ViewProperties *);
 
-    void profileListChanged(const QList<QAction *> &actions);
+    void profileListChanged(const QList<QAction *> &sessionActions);
     void configureNotifications();
 
     void updateWindowIcon();
