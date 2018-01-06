@@ -132,11 +132,11 @@ void Part::startProgram(const QString &program, const QStringList &arguments)
     activeSession()->run();
 }
 
-void Part::openTeletype(int fd)
+void Part::openTeletype(int ptyMasterFd)
 {
     Q_ASSERT(activeSession());
 
-    activeSession()->openTeletype(fd);
+    activeSession()->openTeletype(ptyMasterFd);
 }
 
 void Part::showShellInDir(const QString &dir)
@@ -322,22 +322,20 @@ void Part::changeSessionSettings(const QString &text)
 }
 
 // Konqueror integration
-bool Part::openUrl(const QUrl &aQUrl)
+bool Part::openUrl(const QUrl &url)
 {
-    QUrl aUrl = aQUrl;
-
-    if (url() == aUrl) {
+    if (KParts::ReadOnlyPart::url() == url) {
         emit completed();
         return true;
     }
 
-    setUrl(aUrl);
-    emit setWindowCaption(aUrl.toDisplayString(QUrl::PreferLocalFile));
+    setUrl(url);
+    emit setWindowCaption(url.toDisplayString(QUrl::PreferLocalFile));
     ////qDebug() << "Set Window Caption to " << url.pathOrUrl();
     emit started(nullptr);
 
-    if (aUrl.isLocalFile()) {
-        showShellInDir(aUrl.path());
+    if (url.isLocalFile()) {
+        showShellInDir(url.path());
     } else {
         showShellInDir(QDir::homePath());
     }
