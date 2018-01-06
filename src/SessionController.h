@@ -294,6 +294,8 @@ private Q_SLOTS:
     void updateWebSearchMenu();
 
 private:
+    Q_DISABLE_COPY(SessionController)
+
     // begins the search
     // text - pattern to search for
     // direction - value from SearchHistoryTask::SearchDirection enum to specify

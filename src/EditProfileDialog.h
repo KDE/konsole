@@ -188,6 +188,8 @@ private Q_SLOTS:
     void delayedPreviewActivate();
 
 private:
+    Q_DISABLE_COPY(EditProfileDialog)
+
     // initialize various pages of the dialog
     void setupGeneralPage(const Profile::Ptr profile);
     void setupTabsPage(const Profile::Ptr profile);

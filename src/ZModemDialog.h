@@ -51,6 +51,8 @@ private Q_SLOTS:
     void slotUser1Clicked();
 
 private:
+    Q_DISABLE_COPY(ZModemDialog)
+
     void delayedDestruct();
     KTextEdit *_textEdit;
     QDialogButtonBox *mButtonBox;

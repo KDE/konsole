@@ -45,6 +45,8 @@ public:
     void focusRemoteTabTitleText();
 
 private:
+    Q_DISABLE_COPY(RenameTabDialog)
+
     Ui::RenameTabDialog *_ui;
 };
 }

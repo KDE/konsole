@@ -769,6 +769,8 @@ private Q_SLOTS:
     void dismissOutputSuspendedMessage();
 
 private:
+    Q_DISABLE_COPY(TerminalDisplay)
+
     // -- Drawing helpers --
 
     // divides the part of the display specified by 'rect' into
