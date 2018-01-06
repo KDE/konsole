@@ -41,7 +41,10 @@ void ScrollState::clearAll()
 
 int ScrollState::consumeLegacySteps(int stepsize)
 {
-    int steps = _remainingScrollAngle / stepsize;
+    if (stepsize < 1) {
+        stepsize = DEFAULT_ANGLE_SCROLL_LINE;
+    }
+    const int steps = _remainingScrollAngle / stepsize;
     _remainingScrollAngle -= steps * stepsize;
     if (steps != 0) {
         _remainingScrollPixel = 0;
