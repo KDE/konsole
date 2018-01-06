@@ -53,8 +53,8 @@ const TabTitleFormatButton::Element TabTitleFormatButton::_remoteElements[] = {
 const int TabTitleFormatButton::_remoteElementCount
     = sizeof(_remoteElements) / sizeof(TabTitleFormatButton::Element);
 
-TabTitleFormatButton::TabTitleFormatButton(QWidget *aParent) :
-    QPushButton(aParent),
+TabTitleFormatButton::TabTitleFormatButton(QWidget *parent) :
+    QPushButton(parent),
     _context(Session::LocalTabTitle)
 {
     setText(i18n("Insert"));

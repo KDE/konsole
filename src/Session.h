@@ -97,7 +97,7 @@ public:
      *
      * @param masterFd The file descriptor of the pseudo-teletype master (See KPtyProcess::KPtyProcess())
      */
-    void openTeletype(int masterFd);
+    void openTeletype(int fd);
 
     /**
      * Returns true if the session is currently running.  This will be true
@@ -210,7 +210,7 @@ public:
      * remembered before they are lost and the storage
      * (in memory, on-disk etc.) used.
      */
-    void setHistoryType(const HistoryType &type);
+    void setHistoryType(const HistoryType &hType);
     /**
      * Returns the type of history store used by this session.
      */
@@ -272,7 +272,7 @@ public:
     QString iconText() const;
 
     /** Sets the session's title for the specified @p role to @p title. */
-    void setTitle(TitleRole role, const QString &title);
+    void setTitle(TitleRole role, const QString &newTitle);
 
     /** Returns the session's title for the specified @p role. */
     QString title(TitleRole role) const;
@@ -329,7 +329,7 @@ public:
      */
     void refresh();
 
-    void startZModem(const QString &rz, const QString &dir, const QStringList &list);
+    void startZModem(const QString &zmodem, const QString &dir, const QStringList &list);
     void cancelZModem();
     bool isZModemBusy()
     {
@@ -509,7 +509,7 @@ public Q_SLOTS:
       * Overloaded to accept a QByteArray for convenience since DBus
       * does not accept QTextCodec directly.
       */
-    Q_SCRIPTABLE bool setCodec(const QByteArray &codec);
+    Q_SCRIPTABLE bool setCodec(const QByteArray &name);
 
     /** Returns the codec used to decode incoming characters in this
      * terminal emulation
@@ -681,7 +681,7 @@ private Q_SLOTS:
 
     void fireZModemDetected();
 
-    void onReceiveBlock(const char *buffer, int len);
+    void onReceiveBlock(const char *buf, int len);
     void silenceTimerDone();
     void activityTimerDone();
 
@@ -724,7 +724,7 @@ private:
     bool updateForegroundProcessInfo();
     void updateWorkingDirectory();
 
-    QString validDirectory(const QString &directory) const;
+    QString validDirectory(const QString &dir) const;
 
     QUuid _uniqueIdentifier;            // SHELL_SESSION_ID
 

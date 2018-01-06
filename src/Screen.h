@@ -121,10 +121,10 @@ public:
     /**
      * Sets the margins for scrolling the screen.
      *
-     * @param topLine The top line of the new scrolling margin.
-     * @param bottomLine The bottom line of the new scrolling margin.
+     * @param top The top line of the new scrolling margin.
+     * @param bot The bottom line of the new scrolling margin.
      */
-    void setMargins(int topLine, int bottomLine);
+    void setMargins(int top, int bot);
     /** Returns the top line of the scrolling region. */
     int topMargin() const;
     /** Returns the bottom line of the scrolling region. */
@@ -228,19 +228,19 @@ public:
     /**  Sets or removes a tab stop at the cursor's current column. */
     void changeTabStop(bool set);
 
-    /** Resets (clears) the specified screen @p mode. */
-    void resetMode(int mode);
-    /** Sets (enables) the specified screen @p mode. */
-    void setMode(int mode);
+    /** Resets (clears) the specified screen @p m. */
+    void resetMode(int m);
+    /** Sets (enables) the specified screen @p m. */
+    void setMode(int m);
     /**
-     * Saves the state of the specified screen @p mode.  It can be restored
+     * Saves the state of the specified screen @p m.  It can be restored
      * using restoreMode()
      */
-    void saveMode(int mode);
-    /** Restores the state of a screen @p mode saved by calling saveMode() */
-    void restoreMode(int mode);
-    /** Returns whether the specified screen @p mode is enabled or not .*/
-    bool getMode(int mode) const;
+    void saveMode(int m);
+    /** Restores the state of a screen @p m saved by calling saveMode() */
+    void restoreMode(int m);
+    /** Returns whether the specified screen @p me is enabled or not .*/
+    bool getMode(int m) const;
 
     /**
      * Saves the current position and appearance (text color and style) of the cursor.
@@ -411,19 +411,19 @@ public:
     /**
      * Sets the start of the selection.
      *
-     * @param column The column index of the first character in the selection.
-     * @param line The line index of the first character in the selection.
+     * @param xThe column index of the first character in the selection.
+     * @param y The line index of the first character in the selection.
      * @param blockSelectionMode True if the selection is in column mode.
      */
-    void setSelectionStart(const int column, const int line, const bool blockSelectionMode);
+    void setSelectionStart(const int x, const int y, const bool blockSelectionMode);
 
     /**
      * Sets the end of the current selection.
      *
-     * @param column The column index of the last character in the selection.
-     * @param line The line index of the last character in the selection.
+     * @param x The column index of the last character in the selection.
+     * @param y The line index of the last character in the selection.
      */
-    void setSelectionEnd(const int column, const int line);
+    void setSelectionEnd(const int x, const int y);
 
     /**
      * Retrieves the start of the selection or the cursor position if there
@@ -441,10 +441,10 @@ public:
     void clearSelection();
 
     /**
-      *  Returns true if the character at (@p column, @p line) is part of the
+      *  Returns true if the character at (@p x, @p y) is part of the
       *  current selection.
       */
-    bool isSelected(const int column, const int line) const;
+    bool isSelected(const int x, const int y) const;
 
     /**
      * Convenience method.  Returns the currently selected text.
@@ -626,10 +626,10 @@ private:
     //
     //NOTE: moveImage() can only move whole lines
     void moveImage(int dest, int sourceBegin, int sourceEnd);
-    // scroll up 'i' lines in current region, clearing the bottom 'i' lines
-    void scrollUp(int from, int i);
-    // scroll down 'i' lines in current region, clearing the top 'i' lines
-    void scrollDown(int from, int i);
+    // scroll up 'n' lines in current region, clearing the bottom 'n' lines
+    void scrollUp(int from, int n);
+    // scroll down 'n' lines in current region, clearing the top 'n' lines
+    void scrollDown(int from, int n);
 
     //when we handle scroll commands, we need to know which screenwindow will scroll
     TerminalDisplay *_currentTerminalDisplay;

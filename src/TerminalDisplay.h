@@ -77,7 +77,7 @@ public:
      * Sets the seed used to generate random colors for the display
      * (in color schemes that support them).
      */
-    void setRandomSeed(uint seed);
+    void setRandomSeed(uint randomSeed);
     /**
      * Returns the seed used to generate random colors for the display
      * (in color schemes that support them).
@@ -106,7 +106,7 @@ public:
      * @param cursor The position of the scroll bar's thumb.
      * @param lines The maximum value of the scroll bar.
      */
-    void setScroll(int cursor, int lines);
+    void setScroll(int cursor, int slines);
 
     void setScrollFullPage(bool fullPage);
     bool scrollFullPage() const;
@@ -405,7 +405,7 @@ public:
      * Sets the font used to draw the display.  Has no effect if @p font
      * is larger than the size of the display itself.
      */
-    void setVTFont(const QFont &font);
+    void setVTFont(const QFont &f);
 
     /** Increases the font size */
     void increaseFontSize();
@@ -592,7 +592,7 @@ public Q_SLOTS:
        * Changes whether the flow control warning box should be shown when the flow control
        * stop key (Ctrl+S) are pressed.
        */
-    void setFlowControlWarningEnabled(bool enabled);
+    void setFlowControlWarningEnabled(bool enable);
     /**
      * Causes the widget to display or hide a message informing the user that terminal
      * output has been suspended (by using the flow control key combination Ctrl+S)
@@ -617,9 +617,9 @@ public Q_SLOTS:
      * @param usesMouse Set to true if the program running in the terminal is interested in mouse events
      * or false otherwise.
      */
-    void setUsesMouse(bool usesMouse);
+    void setUsesMouse(bool on);
 
-    void setBracketedPasteMode(bool bracketedPasteMode);
+    void setBracketedPasteMode(bool on);
 
     /**
      * Shows a notification that a bell event has occurred in the terminal.
@@ -694,7 +694,7 @@ Q_SIGNALS:
 protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
 
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *pe) Q_DECL_OVERRIDE;
 
     void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
     void hideEvent(QHideEvent *event) Q_DECL_OVERRIDE;
@@ -708,12 +708,12 @@ protected:
     void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
     void keyReleaseEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
     void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
-    void mouseDoubleClickEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    virtual void extendSelection(const QPoint &pos);
-    void wheelEvent(QWheelEvent *event) Q_DECL_OVERRIDE;
+    void mouseDoubleClickEvent(QMouseEvent *ev) Q_DECL_OVERRIDE;
+    void mousePressEvent(QMouseEvent *ev) Q_DECL_OVERRIDE;
+    void mouseReleaseEvent(QMouseEvent *ev) Q_DECL_OVERRIDE;
+    void mouseMoveEvent(QMouseEvent *ev) Q_DECL_OVERRIDE;
+    virtual void extendSelection(const QPoint &position);
+    void wheelEvent(QWheelEvent *ev) Q_DECL_OVERRIDE;
 
     bool focusNextPrevChild(bool next) Q_DECL_OVERRIDE;
 
@@ -741,7 +741,7 @@ protected:
 
     void clearImage();
 
-    void mouseTripleClickEvent(QMouseEvent *event);
+    void mouseTripleClickEvent(QMouseEvent *ev);
     void selectLine(QPoint pos, bool entireLine);
 
     // reimplemented
@@ -791,11 +791,11 @@ private:
     // if useOpacitySetting is true then the color's alpha value will be set to
     // the display's transparency (set with setOpacity()), otherwise the background
     // will be drawn fully opaque
-    void drawBackground(QPainter &painter, const QRect &rect, const QColor &color,
+    void drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor,
                         bool useOpacitySetting);
     // draws the cursor character
     void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor,
-                    const QColor &backgroundColor, bool &invertColors);
+                    const QColor &backgroundColor, bool &invertCharacterColor);
     // draws the characters or line graphics in a text fragment
     void drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
                         const Character *style, bool invertCharacterColor);
@@ -828,7 +828,7 @@ private:
     // 'region' is the part of the image to scroll - currently only
     // the top, bottom and height of 'region' are taken into account,
     // the left and right are ignored.
-    void scrollImage(int lines, const QRect &region);
+    void scrollImage(int lines, const QRect &screenWindowRegion);
 
     void calcGeometry();
     void propagateSize();
@@ -847,11 +847,11 @@ private:
     // redraws the cursor
     void updateCursor();
 
-    bool handleShortcutOverrideEvent(QKeyEvent *event);
+    bool handleShortcutOverrideEvent(QKeyEvent *keyEvent);
 
     void doPaste(QString text, bool appendReturn);
 
-    void processMidButtonClick(QMouseEvent *event);
+    void processMidButtonClick(QMouseEvent *ev);
 
     QPoint findLineStart(const QPoint &pnt);
     QPoint findLineEnd(const QPoint &pnt);

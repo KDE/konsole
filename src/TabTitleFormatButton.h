@@ -36,7 +36,7 @@ public:
     explicit TabTitleFormatButton(QWidget *parent);
     ~TabTitleFormatButton() Q_DECL_OVERRIDE;
 
-    void setContext(Session::TabTitleContext context);
+    void setContext(Session::TabTitleContext titleContext);
     Session::TabTitleContext context() const;
 
 Q_SIGNALS:

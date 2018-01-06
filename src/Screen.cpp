@@ -1046,15 +1046,15 @@ void Screen::clearEntireLine()
     clearImage(loc(0, _cuY), loc(_columns - 1, _cuY), ' ');
 }
 
-void Screen::setRendition(RenditionFlags rendention)
+void Screen::setRendition(RenditionFlags rendition)
 {
-    _currentRendition |= rendention;
+    _currentRendition |= rendition;
     updateEffectiveRendition();
 }
 
-void Screen::resetRendition(RenditionFlags rendention)
+void Screen::resetRendition(RenditionFlags rendition)
 {
-    _currentRendition &= ~rendention;
+    _currentRendition &= ~rendition;
     updateEffectiveRendition();
 }
 
