@@ -429,7 +429,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
     if (persistent && !newProfile->isHidden()) {
         newProfile->setProperty(Profile::Path, saveProfile(newProfile));
         // if the profile was renamed, after saving the new profile
-        // delete the the old/redundant profile.
+        // delete the old/redundant profile.
         // only do this if origPath is not empty, because it's empty
         // when creating a new profile, this works around a bug where
         // the newly created profile appears twice in the ProfileSettings
