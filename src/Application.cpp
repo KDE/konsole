@@ -509,7 +509,7 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
     }
 
     // temporary changes to profile options specified on the command line
-    foreach (const QString &value, m_parser->values(QStringLiteral("p"))) {
+    foreach (const QString &value, m_parser->values(QLatin1String("p"))) {
         ProfileCommandParser parser;
 
         QHashIterator<Profile::Property, QVariant> iter(parser.parse(value));
