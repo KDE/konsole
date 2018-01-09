@@ -107,7 +107,7 @@ protected Q_SLOTS:
      *
      * @param session The Session which has finished executing.
      */
-    void sessionTerminated(QObject *sessionObject);
+    void sessionTerminated(Session *session);
 
 private Q_SLOTS:
     void sessionProfileCommandReceived(const QString &text);

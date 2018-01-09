@@ -26,7 +26,6 @@
 
 // Qt
 #include <QStringList>
-#include <QSignalMapper>
 #include <QTextCodec>
 
 // KDE
@@ -43,11 +42,6 @@ using namespace Konsole;
 
 SessionManager::SessionManager()
 {
-    //map finished() signals from sessions
-    _sessionMapper = new QSignalMapper(this);
-    connect(_sessionMapper, static_cast<void (QSignalMapper::*)(QObject *)>(&QSignalMapper::mapped),
-            this, &Konsole::SessionManager::sessionTerminated);
-
     ProfileManager *profileMananger = ProfileManager::instance();
     connect(profileMananger, &Konsole::ProfileManager::profileChanged, this,
             &Konsole::SessionManager::profileChanged);
@@ -107,9 +101,10 @@ Session *SessionManager::createSession(Profile::Ptr profile)
             &Konsole::SessionManager::sessionProfileCommandReceived);
 
     //ask for notification when session dies
-    _sessionMapper->setMapping(session, session);
-    connect(session, &Konsole::Session::finished, _sessionMapper,
-            static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
+    connect(session, &Konsole::Session::finished, this,
+            [this, session]() {
+                sessionTerminated(session);
+            });
 
     //add session to active list
     _sessions << session;
@@ -123,10 +118,8 @@ void SessionManager::profileChanged(Profile::Ptr profile)
     applyProfile(profile, true);
 }
 
-void SessionManager::sessionTerminated(QObject *sessionObject)
+void SessionManager::sessionTerminated(Session *session)
 {
-    Session *session = qobject_cast<Session *>(sessionObject);
-
     Q_ASSERT(session);
 
     _sessions.removeAll(session);
