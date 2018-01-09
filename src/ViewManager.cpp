@@ -223,14 +223,13 @@ void ViewManager::setupActions()
 
     // Switch to tab N shortcuts
     const int SWITCH_TO_TAB_COUNT = 19;
-    auto switchToTabMapper = new QSignalMapper(this);
-    connect(switchToTabMapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped),
-            this, &Konsole::ViewManager::switchToView);
     for (int i = 0; i < SWITCH_TO_TAB_COUNT; i++) {
         QAction *switchToTabAction = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);
-        switchToTabMapper->setMapping(switchToTabAction, i);
-        connect(switchToTabAction, &QAction::triggered, switchToTabMapper,
-                static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
+
+        connect(switchToTabAction, &QAction::triggered, this,
+           [this, i]() {
+               switchToView(i);
+           });
         collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), switchToTabAction);
     }
 
