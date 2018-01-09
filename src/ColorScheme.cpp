@@ -487,7 +487,7 @@ bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect rect, qreal opaci
         return false;
     }
 
-    if (qFuzzyCompare(1.0, opacity)) {
+    if (qFuzzyCompare(qreal(1.0), opacity)) {
         painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
         return true;
     }
