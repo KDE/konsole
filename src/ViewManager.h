@@ -29,7 +29,6 @@
 #include "Profile.h"
 #include "ViewContainer.h"
 
-class QSignalMapper;
 class KActionCollection;
 class KConfigGroup;
 
@@ -334,7 +333,7 @@ private Q_SLOTS:
 
     // called when the views in a container owned by this view manager
     // changes
-    void containerViewsChanged(QObject *container);
+    void containerViewsChanged(ViewContainer *container);
 
     // called when a profile changes
     void profileChanged(Profile::Ptr profile);
@@ -397,7 +396,6 @@ private:
     QHash<TerminalDisplay *, Session *> _sessionMap;
 
     KActionCollection *_actionCollection;
-    QSignalMapper *_containerSignalMapper;
 
     NavigationMethod _navigationMethod;
 

@@ -23,7 +23,6 @@
 #include <config-konsole.h>
 
 // Qt
-#include <QSignalMapper>
 #include <QStringList>
 #include <QAction>
 
@@ -54,7 +53,6 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     QObject(parent),
     _viewSplitter(nullptr),
     _actionCollection(collection),
-    _containerSignalMapper(new QSignalMapper(this)),
     _navigationMethod(TabbedNavigation),
     _navigationVisibility(ViewContainer::AlwaysShowNavigation),
     _navigationPosition(ViewContainer::NavigationPositionTop),
@@ -85,11 +83,6 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
             this, &Konsole::ViewManager::empty);
     connect(_viewSplitter.data(), &Konsole::ViewSplitter::empty, this,
             &Konsole::ViewManager::empty);
-
-    // listen for addition or removal of views from associated containers
-    connect(_containerSignalMapper,
-            static_cast<void (QSignalMapper::*)(QObject *)>(&QSignalMapper::mapped),
-            this, &Konsole::ViewManager::containerViewsChanged);
 
     // listen for profile changes
     connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged,
@@ -689,11 +682,15 @@ ViewContainer *ViewManager::createContainer()
     }
 
     // connect signals and slots
-    connect(container, &Konsole::ViewContainer::viewAdded, _containerSignalMapper,
-            static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
-    connect(container, &Konsole::ViewContainer::viewRemoved, _containerSignalMapper,
-            static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
-    _containerSignalMapper->setMapping(container, container);
+    connect(container, &Konsole::ViewContainer::viewAdded, this,
+           [this, container]() {
+               containerViewsChanged(container);
+           });
+
+    connect(container, &Konsole::ViewContainer::viewRemoved, this,
+           [this, container]() {
+               containerViewsChanged(container);
+           });
 
     connect(container,
             static_cast<void (ViewContainer::*)()>(&Konsole::ViewContainer::newViewRequest), this,
@@ -811,7 +808,7 @@ ViewManager::NavigationMethod ViewManager::navigationMethod() const
     return _navigationMethod;
 }
 
-void ViewManager::containerViewsChanged(QObject *container)
+void ViewManager::containerViewsChanged(ViewContainer *container)
 {
     if ((_viewSplitter != nullptr) && container == _viewSplitter->activeContainer()) {
         emit viewPropertiesChanged(viewProperties());
