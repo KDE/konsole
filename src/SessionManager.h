@@ -29,8 +29,6 @@
 // Konsole
 #include "Profile.h"
 
-class QSignalMapper;
-
 class KConfig;
 
 namespace Konsole {
@@ -134,8 +132,6 @@ private:
     QHash<Session *, Profile::Ptr> _sessionProfiles;
     QHash<Session *, Profile::Ptr> _sessionRuntimeProfiles;
     QHash<Session *, int> _restoreMapping;
-
-    QSignalMapper *_sessionMapper;
 };
 
 /** Utility class to simplify code in SessionManager::applyProfile(). */
