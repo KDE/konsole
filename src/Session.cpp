@@ -298,9 +298,7 @@ void Session::addView(TerminalDisplay* widget)
 
 void Session::viewDestroyed(QObject* view)
 {
-    // the received QObject has already been destroyed, so using
-    // qobject_cast<> does not work here
-    TerminalDisplay* display = static_cast<TerminalDisplay*>(view);
+    TerminalDisplay* display = reinterpret_cast<TerminalDisplay*>(view);
 
     Q_ASSERT(_views.contains(display));
 
