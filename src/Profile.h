@@ -56,7 +56,7 @@ class ProfileGroup;
 class KONSOLEPRIVATE_EXPORT Profile : public QSharedData
 {
     friend class KDE4ProfileReader;
-    friend class KDE4ProfileWriter;
+    friend class ProfileWriter;
     friend class ProfileGroup;
 
 public:

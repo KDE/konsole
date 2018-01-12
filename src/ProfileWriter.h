@@ -28,32 +28,24 @@ class KConfig;
 
 namespace Konsole {
 /** Interface for all classes which can write profile settings to a file. */
-class ProfileWriter
+class KONSOLEPRIVATE_EXPORT ProfileWriter
 {
 public:
-    virtual ~ProfileWriter()
-    {
-    }
+    ProfileWriter();
+    ~ProfileWriter();
 
     /**
      * Returns a suitable path-name for writing
      * @p profile to. The path-name should be accepted by
      * the corresponding ProfileReader class.
      */
-    virtual QString getPath(const Profile::Ptr profile) = 0;
+    QString getPath(const Profile::Ptr profile);
     /**
      * Writes the properties and values from @p profile to the file specified
      * by @p path.  This profile should be readable by the corresponding
      * ProfileReader class.
      */
-    virtual bool writeProfile(const QString &path, const Profile::Ptr profile) = 0;
-};
-/** Writes a KDE 4 .profile file. */
-class KONSOLEPRIVATE_EXPORT KDE4ProfileWriter : public ProfileWriter
-{
-public:
-    QString getPath(const Profile::Ptr profile) Q_DECL_OVERRIDE;
-    bool writeProfile(const QString &path, const Profile::Ptr profile) Q_DECL_OVERRIDE;
+    bool writeProfile(const QString &path, const Profile::Ptr profile);
 
 private:
     void writeProperties(KConfig &config, const Profile::Ptr profile,

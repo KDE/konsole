@@ -339,7 +339,7 @@ Profile::Ptr ProfileManager::fallbackProfile() const
 
 QString ProfileManager::saveProfile(Profile::Ptr profile)
 {
-    ProfileWriter* writer = new KDE4ProfileWriter;
+    ProfileWriter* writer = new ProfileWriter();
 
     QString newPath = writer->getPath(profile);
 
@@ -513,9 +513,10 @@ void ProfileManager::setDefaultProfile(Profile::Ptr profile)
 void ProfileManager::saveDefaultProfile()
 {
     QString path = _defaultProfile->path();
+    ProfileWriter* writer = new ProfileWriter();
 
     if (path.isEmpty()) {
-        path = KDE4ProfileWriter().getPath(_defaultProfile);
+        path = writer->getPath(_defaultProfile);
     }
 
     QFileInfo fileInfo(path);
@@ -523,6 +524,8 @@ void ProfileManager::saveDefaultProfile()
     KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup group = appConfig->group("Desktop Entry");
     group.writeEntry("DefaultProfile", fileInfo.fileName());
+
+    delete writer;
 }
 
 QSet<Profile::Ptr> ProfileManager::findFavorites()
