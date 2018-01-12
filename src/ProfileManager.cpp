@@ -181,7 +181,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     }
 
     // load the profile
-    ProfileReader* reader = new KDE4ProfileReader;
+    ProfileReader* reader = new ProfileReader();
 
     Profile::Ptr newProfile = Profile::Ptr(new Profile(fallbackProfile()));
     newProfile->setProperty(Profile::Path, path);
@@ -209,13 +209,14 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
 }
 QStringList ProfileManager::availableProfilePaths() const
 {
-    KDE4ProfileReader kde4Reader;
+    ProfileReader* reader = new ProfileReader();
 
     QStringList paths;
-    paths += kde4Reader.findProfiles();
+    paths += reader->findProfiles();
 
     qStableSort(paths.begin(), paths.end(), stringLessThan);
 
+    delete reader;
     return paths;
 }
 

@@ -41,7 +41,10 @@ static const char FEATURES_GROUP[]        = "Terminal Features";
 static const char URLHINTS_KEY[]          = "EnableUrlHints";
 static const char URLHINTSMODIFIERS_KEY[] = "UrlHintsModifiers";
 
-QStringList KDE4ProfileReader::findProfiles()
+ProfileReader::ProfileReader() = default;
+ProfileReader::~ProfileReader() = default;
+
+QStringList ProfileReader::findProfiles()
 {
     QStringList profiles;
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
@@ -55,7 +58,7 @@ QStringList KDE4ProfileReader::findProfiles()
     }
     return profiles;
 }
-void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profile,
+void ProfileReader::readProperties(const KConfig& config, Profile::Ptr profile,
                                        const Profile::PropertyInfo* properties)
 {
     const char* groupName = nullptr;
@@ -80,7 +83,7 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profi
     }
 }
 
-bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile)
+bool ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile)
 {
     if (!QFile::exists(path)) {
         return false;
