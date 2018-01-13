@@ -104,7 +104,7 @@ public:
      * Sets the current position and range of the display's scroll bar.
      *
      * @param cursor The position of the scroll bar's thumb.
-     * @param lines The maximum value of the scroll bar.
+     * @param slines The maximum value of the scroll bar.
      */
     void setScroll(int cursor, int slines);
 
@@ -614,7 +614,7 @@ public Q_SLOTS:
      * view area - since the program running in the terminal is being allowed to handle normal mouse
      * events itself.
      *
-     * @param usesMouse Set to true if the program running in the terminal is interested in mouse events
+     * @param on Set to true if the program running in the terminal is interested in mouse events
      * or false otherwise.
      */
     void setUsesMouse(bool on);

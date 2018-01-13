@@ -95,7 +95,7 @@ public:
      *
      * Calling openTeletype() while a session is running has no effect.
      *
-     * @param masterFd The file descriptor of the pseudo-teletype master (See KPtyProcess::KPtyProcess())
+     * @param fd The file descriptor of the pseudo-teletype master (See KPtyProcess::KPtyProcess())
      */
     void openTeletype(int fd);
 

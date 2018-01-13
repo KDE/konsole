@@ -227,10 +227,7 @@ public:
     /**
      * Returns the text which is currently selected.
      *
-     * @param preserveLineBreaks See Screen::selectedText()
-     * @param trimTrailingSpaces See Screen::selectedText()
-     * @param trimLeadingSpaces See Screen::selectedText()
-     * @param html Specifies if returned text should have HTML tags.
+     * @param options See Screen::DecodingOptions
      */
     QString selectedText(const Konsole::Screen::DecodingOptions options) const;
 
