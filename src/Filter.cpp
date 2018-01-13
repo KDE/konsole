@@ -232,12 +232,6 @@ void Filter::getLineColumn(int position, int &startLine, int &startColumn)
     }
 }
 
-/*void Filter::addLine(const QString& text)
-{
-    _linePositions << _buffer.length();
-    _buffer.append(text);
-}*/
-
 const QString *Filter::buffer()
 {
     return _buffer;
@@ -359,10 +353,6 @@ QRegularExpression RegExpFilter::regExp() const
     return _searchText;
 }
 
-/*void RegExpFilter::reset(int)
-{
-    _buffer = QString();
-}*/
 void RegExpFilter::process()
 {
     const QString *text = buffer();

@@ -142,9 +142,6 @@ public:
      */
     void reset();
 
-    /** Adds a new line of text to the filter and increments the line count */
-    //void addLine(const QString& string);
-
     /** Returns the hotspot which covers the given @p line and @p column, or 0 if no hotspot covers that area */
     HotSpot *hotSpotAt(int line, int column) const;
 
