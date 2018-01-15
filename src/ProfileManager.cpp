@@ -181,7 +181,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     }
 
     // load the profile
-    ProfileReader* reader = new ProfileReader();
+    auto reader = new ProfileReader();
 
     Profile::Ptr newProfile = Profile::Ptr(new Profile(fallbackProfile()));
     newProfile->setProperty(Profile::Path, path);
@@ -209,7 +209,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
 }
 QStringList ProfileManager::availableProfilePaths() const
 {
-    ProfileReader* reader = new ProfileReader();
+    auto reader = new ProfileReader();
 
     QStringList paths;
     paths += reader->findProfiles();
@@ -340,7 +340,7 @@ Profile::Ptr ProfileManager::fallbackProfile() const
 
 QString ProfileManager::saveProfile(Profile::Ptr profile)
 {
-    ProfileWriter* writer = new ProfileWriter();
+    auto writer = new ProfileWriter();
 
     QString newPath = writer->getPath(profile);
 
@@ -514,7 +514,7 @@ void ProfileManager::setDefaultProfile(Profile::Ptr profile)
 void ProfileManager::saveDefaultProfile()
 {
     QString path = _defaultProfile->path();
-    ProfileWriter* writer = new ProfileWriter();
+    auto writer = new ProfileWriter();
 
     if (path.isEmpty()) {
         path = writer->getPath(_defaultProfile);
