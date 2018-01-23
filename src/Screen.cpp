@@ -73,7 +73,8 @@ Screen::Screen(int lines, int columns):
     _effectiveForeground(CharacterColor()),
     _effectiveBackground(CharacterColor()),
     _effectiveRendition(DEFAULT_RENDITION),
-    _lastPos(-1)
+    _lastPos(-1),
+    _lastDrawnChar(0)
 {
     _lineProperties.resize(_lines + 1);
     for (int i = 0; i < _lines + 1; i++) {
@@ -245,6 +246,24 @@ void Screen::insertChars(int n)
 
     if (_screenLines[_cuY].count() > _columns) {
         _screenLines[_cuY].resize(_columns);
+    }
+}
+
+void Screen::repeatChars(int n)
+{
+    if (n == 0) {
+        n = 1; // Default
+    }
+
+    // From ECMA-48 version 5, section 8.3.103:
+    // "If the character preceding REP is a control function or part of a
+    // control function, the effect of REP is not defined by this Standard."
+    //
+    // So, a "normal" program should always use REP immediately after a visible
+    // character (those other than escape sequences). So, _lastDrawnChar can be
+    // safely used.
+    for (int i = 0; i < n; i++) {
+        displayCharacter(_lastDrawnChar);
     }
 }
 
@@ -750,6 +769,8 @@ void Screen::displayCharacter(unsigned short c)
     currentChar.backgroundColor = _effectiveBackground;
     currentChar.rendition = _effectiveRendition;
     currentChar.isRealCharacter = true;
+
+    _lastDrawnChar = c;
 
     int i = 0;
     const int newCursorX = _cuX + w--;

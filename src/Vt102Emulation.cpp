@@ -240,7 +240,7 @@ void Vt102Emulation::initTokenizer()
     for (i = 32; i < 256; ++i) {
         charClass[i] |= CHR;
     }
-    for (s = (quint8 *)"@ABCDGHILMPSTXZcdfry"; *s != 0u; ++s) {
+    for (s = (quint8 *)"@ABCDGHILMPSTXZbcdfry"; *s != 0u; ++s) {
         charClass[*s] |= CPN;
     }
     // resize = \e[8;<row>;<col>t
@@ -684,6 +684,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case TY_CSI_PN('T'      ) : _currentScreen->scrollDown           (p         ); break;
     case TY_CSI_PN('X'      ) : _currentScreen->eraseChars           (p         ); break;
     case TY_CSI_PN('Z'      ) : _currentScreen->backtab              (p         ); break;
+    case TY_CSI_PN('b'      ) : _currentScreen->repeatChars          (p         ); break;
     case TY_CSI_PN('c'      ) :      reportTerminalType   (          ); break; //VT100
     case TY_CSI_PN('d'      ) : _currentScreen->setCursorY           (p         ); break; //LINUX
     case TY_CSI_PN('f'      ) : _currentScreen->setCursorYX          (p,      q); break; //VT100
