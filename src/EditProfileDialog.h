@@ -132,6 +132,14 @@ private Q_SLOTS:
     void editColorScheme();
     void saveColorScheme(const ColorScheme &scheme, bool isNewScheme);
     void removeColorScheme();
+
+    /**
+     * Deletes the selected colorscheme from the user's home dir location
+     * so that the original one from the system-wide location can be used
+     * instead
+     */
+    void resetColorScheme();
+
     void colorSchemeSelected();
     void previewColorScheme(const QModelIndex &index);
     void fontSelected(const QFont &);

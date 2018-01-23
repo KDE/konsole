@@ -533,6 +533,7 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
 
     _ui->editColorSchemeButton->setEnabled(false);
     _ui->removeColorSchemeButton->setEnabled(false);
+    _ui->resetColorSchemeButton->setEnabled(false);
 
     // setup color list
     updateColorSchemeList(true);
@@ -555,6 +556,9 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
             &Konsole::EditProfileDialog::removeColorScheme);
     connect(_ui->newColorSchemeButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::newColorScheme);
+
+    connect(_ui->resetColorSchemeButton, &QPushButton::clicked, this,
+            &Konsole::EditProfileDialog::resetColorScheme);
 
     // setup font preview
     const bool antialias = profile->antiAliasFonts();
@@ -840,6 +844,12 @@ void EditProfileDialog::removeColorScheme()
     }
 }
 
+void EditProfileDialog::resetColorScheme()
+{
+    removeColorScheme();
+    updateColorSchemeList(true);
+}
+
 void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 {
     // Finding selected ColorScheme
@@ -923,7 +933,23 @@ void EditProfileDialog::colorSchemeSelected()
 void EditProfileDialog::updateColorSchemeButtons()
 {
     enableIfNonEmptySelection(_ui->editColorSchemeButton, _ui->colorSchemeList->selectionModel());
-    enableIfNonEmptySelection(_ui->removeColorSchemeButton, _ui->colorSchemeList->selectionModel());
+
+    QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
+
+    if (!selected.isEmpty()) {
+        const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
+
+        bool isResettable = ColorSchemeManager::instance()->canResetColorScheme(name);
+        _ui->resetColorSchemeButton->setEnabled(isResettable);
+
+        bool isDeletable = ColorSchemeManager::instance()->isColorSchemeDeletable(name);
+        // if a colorScheme can be restored then it can't be deleted
+        _ui->removeColorSchemeButton->setEnabled(isDeletable && !isResettable);
+    } else {
+        _ui->removeColorSchemeButton->setEnabled(false);
+        _ui->resetColorSchemeButton->setEnabled(false);
+    }
+
 }
 
 void EditProfileDialog::updateKeyBindingsButtons()

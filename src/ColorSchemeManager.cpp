@@ -213,3 +213,25 @@ QString ColorSchemeManager::findColorSchemePath(const QString &name) const
 
     return QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".schema"));
 }
+
+bool ColorSchemeManager::isColorSchemeDeletable(const QString &name)
+{
+    const QString path = findColorSchemePath(name);
+
+    QFileInfo fileInfo(path);
+    QFileInfo dirInfo = fileInfo.path();
+
+    return dirInfo.isWritable();
+}
+
+bool ColorSchemeManager::canResetColorScheme(const QString &name)
+{
+    const QStringList paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".colorscheme"));
+
+    // if the colorscheme exists in both a writable location under the
+    // user's home dir and a system-wide location, then it's possible
+    // to delete the colorscheme under the user's home dir so that the
+    // colorscheme from the system-wide location can be used instead,
+    // i.e. resetting the colorscheme
+    return (paths.count() > 1);
+}

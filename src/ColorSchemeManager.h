@@ -88,6 +88,18 @@ public:
     /** Returns the global color scheme manager instance. */
     static ColorSchemeManager *instance();
 
+    /**
+     * Returns @c true if a colorscheme with @p name exists both under
+     * the user's home dir location, and a system-wide location
+     */
+    bool canResetColorScheme(const QString &name);
+
+    /**
+     * Returns @c true if a colorscheme with @p name exists under the
+     * user's home dir location, and hence can be deleted
+     */
+    bool isColorSchemeDeletable(const QString &name);
+
 private:
     Q_DISABLE_COPY(ColorSchemeManager)
 
