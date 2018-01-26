@@ -7,11 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>594</width>
-    <height>551</height>
+    <height>536</height>
    </rect>
   </property>
   <layout class="QHBoxLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -41,25 +50,79 @@
          <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout">
-          <item row="0" column="0">
-           <widget class="QLabel" name="profileNameLabel">
-            <property name="text">
-             <string>Profile name:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0" rowspan="2" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QPushButton" name="iconSelectButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>64</width>
+                <height>64</height>
+               </size>
+              </property>
+              <property name="baseSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Select the icon displayed on tabs using this profile</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>48</width>
+                <height>48</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="profileNameLabel">
+              <property name="text">
+               <string>Profile name:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="profileNameEdit">
+              <property name="toolTip">
+               <string>A descriptive name for the profile</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
-          <item row="0" column="1" colspan="2">
-           <widget class="QLineEdit" name="profileNameEdit">
-            <property name="toolTip">
-             <string>A descriptive name for the profile</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1" colspan="2">
+          <item row="1" column="1">
            <widget class="KMessageWidget" name="emptyNameWarningWidget"/>
           </item>
           <item row="2" column="0">
@@ -72,7 +135,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1" colspan="2">
+          <item row="2" column="1">
            <widget class="QLineEdit" name="commandEdit">
             <property name="toolTip">
              <string>The command to execute when new terminal sessions are created using this profile</string>
@@ -92,7 +155,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1" colspan="2">
+          <item row="3" column="1">
            <widget class="QLineEdit" name="initialDirEdit">
             <property name="toolTip">
              <string>The initial working directory for new terminal sessions using this profile</string>
@@ -102,7 +165,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="3">
+          <item row="3" column="2">
            <widget class="QToolButton" name="dirSelectButton">
             <property name="toolTip">
              <string>Choose the initial directory</string>
@@ -112,89 +175,49 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1" colspan="2">
+          <item row="4" column="1">
            <widget class="QCheckBox" name="startInSameDirButton">
             <property name="text">
              <string>Start in same directory as current tab</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_10">
-            <property name="text">
-             <string>Icon:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QPushButton" name="iconSelectButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>64</width>
-              <height>64</height>
-             </size>
-            </property>
-            <property name="baseSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>Select the icon displayed on tabs using this profile</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>48</width>
-              <height>48</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="2">
-           <spacer>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="environmentLabel">
-            <property name="text">
-             <string>Environment:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QPushButton" name="environmentEditButton">
-            <property name="toolTip">
-             <string>Edit the list of environment variables and associated values</string>
-            </property>
-            <property name="text">
-             <string>Edit...</string>
-            </property>
-           </widget>
+          <item row="5" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="environmentLabel">
+              <property name="text">
+               <string>Environment:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="environmentEditButton">
+              <property name="toolTip">
+               <string>Edit the list of environment variables and associated values</string>
+              </property>
+              <property name="text">
+               <string>Edit...</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>81</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -491,7 +514,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1" rowspan="1">
+          <item row="4" column="1">
            <spacer>
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -539,8 +562,8 @@
               <property name="text">
                <string comment="KDE::DoNotExtract">KSqueezedTextLabel</string>
               </property>
-              <property name="textElideMode">
-               <enum>Qt::ElideRight</enum>
+              <property name="textElideMode" stdset="0">
+               <string>Qt::ElideRight</string>
               </property>
              </widget>
             </item>
@@ -560,6 +583,9 @@
             </item>
             <item>
              <widget class="QDoubleSpinBox" name="fontSizeInput">
+              <property name="decimals">
+               <number>1</number>
+              </property>
               <property name="minimum">
                <double>4.000000000000000</double>
               </property>
@@ -568,9 +594,6 @@
               </property>
               <property name="singleStep">
                <double>1.000000000000000</double>
-              </property>
-              <property name="decimals">
-               <number>1</number>
               </property>
              </widget>
             </item>
@@ -924,70 +947,65 @@
          <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QCheckBox" name="copyTextToClipboardButton">
-            <property name="toolTip">
-             <string>Automatically copy selected text into clipboard</string>
-            </property>
-            <property name="text">
-             <string>Copy on select</string>
-            </property>
-           </widget>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QCheckBox" name="copyTextToClipboardButton">
+              <property name="toolTip">
+               <string>Automatically copy selected text into clipboard</string>
+              </property>
+              <property name="text">
+               <string>Copy on select</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="trimLeadingSpacesButton">
+              <property name="toolTip">
+               <string>Trim leading spaces in selected text, useful in some instances</string>
+              </property>
+              <property name="text">
+               <string>Trim leading spaces</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="trimTrailingSpacesButton">
+              <property name="toolTip">
+               <string>Trim trailing spaces in selected text, useful in some instances</string>
+              </property>
+              <property name="text">
+               <string>Trim trailing spaces</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
-          <item>
-           <widget class="QCheckBox" name="trimLeadingSpacesButton">
-            <property name="toolTip">
-             <string>Trim leading spaces in selected text, useful in some instances</string>
-            </property>
-            <property name="text">
-             <string>Trim leading spaces</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="trimTrailingSpacesButton">
-            <property name="toolTip">
-             <string>Trim trailing spaces in selected text, useful in some instances</string>
-            </property>
-            <property name="text">
-             <string>Trim trailing spaces</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>561</width>
-              <height>5</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_13">
-            <property name="text">
-             <string>Mouse middle button:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="pasteFromX11SelectionButton">
-            <property name="text">
-             <string>Paste from selection</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="pasteFromClipboardButton">
-            <property name="text">
-             <string>Paste from clipboard</string>
-            </property>
-           </widget>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>Mouse middle button:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="pasteFromClipboardButton">
+              <property name="text">
+               <string>Paste from clipboard</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="pasteFromX11SelectionButton">
+              <property name="text">
+               <string>Paste from selection</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -1267,7 +1285,7 @@
          <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <widget class="QCheckBox" name="enableBlinkingCursorButton">
             <property name="sizePolicy">
@@ -1331,25 +1349,9 @@
            </layout>
           </item>
           <item>
-           <widget class="QRadioButton" name="autoCursorColorButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="toolTip">
-             <string>Set the cursor to match the color of the character underneath it.</string>
-            </property>
-            <property name="text">
-             <string>Set cursor color to match current character</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout">
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
-             <widget class="QRadioButton" name="customCursorColorButton">
+             <widget class="QRadioButton" name="autoCursorColorButton">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1357,41 +1359,61 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>Use a custom, fixed color for the cursor</string>
+               <string>Set the cursor to match the color of the character underneath it.</string>
               </property>
               <property name="text">
-               <string>Custom cursor color:</string>
+               <string>Set cursor color to match current character</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="KColorButton" name="customColorSelectButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="toolTip">
-               <string>Select the color used to draw the cursor</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
+             <layout class="QHBoxLayout">
+              <item>
+               <widget class="QRadioButton" name="customCursorColorButton">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="toolTip">
+                 <string>Use a custom, fixed color for the cursor</string>
+                </property>
+                <property name="text">
+                 <string>Custom cursor color:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="KColorButton" name="customColorSelectButton">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="toolTip">
+                 <string>Select the color used to draw the cursor</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
@@ -1458,6 +1480,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
    <class>KPluralHandlingSpinBox</class>
    <extends>QSpinBox</extends>
    <header>KPluralHandlingSpinBox</header>
@@ -1466,11 +1493,6 @@
    <class>KColorButton</class>
    <extends>QPushButton</extends>
    <header>kcolorbutton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KSqueezedTextLabel</class>
