@@ -187,7 +187,7 @@ QString Part::foregroundProcessName()
     if (activeSession()->isForegroundProcessActive()) {
         return activeSession()->foregroundProcessName();
     } else {
-        return QLatin1String("");
+        return QString();
     }
 }
 
