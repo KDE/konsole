@@ -12,4 +12,5 @@ target_link_libraries(demo_konsolepart
     KF5::Pty
     Qt5::Widgets
     KF5::XmlGui
+    KF5::WindowSystem
 )

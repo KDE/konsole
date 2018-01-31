@@ -20,14 +20,18 @@
 
 #include "demo_konsolepart.h"
 
+#include <QApplication>
+#include <QMenu>
+#include <QMenuBar>
+
 #include <KPluginLoader>
 #include <KPluginFactory>
 #include <KService>
 #include <KStandardAction>
+#include <KWindowSystem>
 
-#include <QApplication>
-#include <QMenu>
-#include <QMenuBar>
+// see below notes
+//#include "../../../WindowSystemInfo.h"
 
 demo_konsolepart::demo_konsolepart()
     : KMainWindow(),
@@ -35,6 +39,16 @@ demo_konsolepart::demo_konsolepart()
       _terminalPart(nullptr),
       _terminal(nullptr)
 {
+    const bool useTranslucency = KWindowSystem::compositingActive();
+
+    setAttribute(Qt::WA_TranslucentBackground, useTranslucency);
+    setAttribute(Qt::WA_NoSystemBackground, false);
+
+    // This is used in EditProfileDialog to show the warnings about
+    // transparency issues - needs refactoring as the above
+    // include does not work
+//    WindowSystemInfo::HAVE_TRANSPARENCY = useTranslucency;
+
     // Create terminal part and embed in into the main window
     _terminalPart = createPart();
     if (_terminalPart == nullptr) {
