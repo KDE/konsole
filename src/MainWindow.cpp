@@ -31,6 +31,7 @@
 #include <KLocalizedString>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
+#include <KWindowEffects>
 
 #include <QMenu>
 #include <QMenuBar>
@@ -98,6 +99,8 @@ MainWindow::MainWindow() :
             &Konsole::MainWindow::disconnectController);
     connect(_viewManager, &Konsole::ViewManager::viewPropertiesChanged,
             bookmarkHandler(), &Konsole::BookmarkHandler::setViews);
+    connect(_viewManager, &Konsole::ViewManager::blurSettingChanged,
+            this, &Konsole::MainWindow::setBlur);
 
     connect(_viewManager, &Konsole::ViewManager::updateWindowIcon, this,
             &Konsole::MainWindow::updateWindowIcon);
@@ -239,6 +242,8 @@ void MainWindow::activeViewChanged(SessionController *controller)
 
     Q_ASSERT(controller);
     _pluggedController = controller;
+
+    setBlur(ViewManager::profileHasBlurEnabled(SessionManager::instance()->sessionProfile(_pluggedController->session())));
 
     // listen for title changes from the current session
     connect(controller, &Konsole::SessionController::titleChanged, this,
@@ -874,6 +879,17 @@ void MainWindow::setupMainWidget()
 void MainWindow::configureNotifications()
 {
     KNotifyConfigWidget::configure(this);
+}
+
+void MainWindow::setBlur(bool blur)
+{
+    if (_pluggedController == nullptr) {
+        return;
+    }
+
+    if (!_pluggedController->isKonsolePart()) {
+        KWindowEffects::enableBlurBehind(winId(), blur);
+    }
 }
 
 void MainWindow::setMenuBarInitialVisibility(bool visible)

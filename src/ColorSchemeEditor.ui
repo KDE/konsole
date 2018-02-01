@@ -42,6 +42,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QCheckBox" name="blurCheckBox">
+     <property name="text">
+      <string>Blur background</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout">
      <item>
       <widget class="QLabel" name="transparencyLabel">

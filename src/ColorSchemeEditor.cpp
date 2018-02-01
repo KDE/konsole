@@ -93,6 +93,10 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *aParent) :
     connect(_ui->transparencySlider, &QSlider::valueChanged, this,
             &Konsole::ColorSchemeEditor::setTransparencyPercentLabel);
 
+    // blur behind window
+    connect(_ui->blurCheckBox, &QCheckBox::toggled, this,
+            &Konsole::ColorSchemeEditor::setBlur);
+
     // randomized background
     connect(_ui->randomizedBackgroundCheck, &QCheckBox::toggled, this,
             &Konsole::ColorSchemeEditor::setRandomizedBackgroundColor);
@@ -248,6 +252,11 @@ void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
     _colors->setOpacity(opacity);
 }
 
+void ColorSchemeEditor::setBlur(bool blur)
+{
+    _colors->setBlur(blur);
+}
+
 void ColorSchemeEditor::setRandomizedBackgroundColor(bool randomized)
 {
     _colors->setRandomizedBackgroundColor(randomized);
@@ -278,6 +287,9 @@ void ColorSchemeEditor::setup(const ColorScheme *scheme, bool isNewScheme)
     const int transparencyPercent = qRound((1 - _colors->opacity()) * 100);
     _ui->transparencySlider->setValue(transparencyPercent);
     setTransparencyPercentLabel(transparencyPercent);
+
+    // blur behind window checkbox
+    _ui->blurCheckBox->setChecked(scheme->blur());
 
     // randomized background color checkbox
     _ui->randomizedBackgroundCheck->setChecked(scheme->randomizedBackgroundColor());

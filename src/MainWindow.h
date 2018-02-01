@@ -158,6 +158,7 @@ private Q_SLOTS:
 
     void profileListChanged(const QList<QAction *> &sessionActions);
     void configureNotifications();
+    void setBlur(bool blur);
 
     void updateWindowIcon();
     void updateWindowCaption();

@@ -173,6 +173,9 @@ public:
         return _allControllers;
     }
 
+    /* Returns true if called within a KPart; false if called within Konsole. */
+    bool isKonsolePart() const;
+
 Q_SIGNALS:
     /**
      * Emitted when the view associated with the controller is focused.
@@ -308,9 +311,6 @@ private:
     void removeSearchFilter(); // remove and delete the current search filter if set
     void setFindNextPrevEnabled(bool enabled);
     void listenForScreenWindowUpdates();
-
-    /* Returns true if called within a KPart; false if called within Konsole. */
-    bool isKonsolePart() const;
 
 private:
     void updateSessionIcon();

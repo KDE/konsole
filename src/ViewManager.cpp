@@ -860,6 +860,11 @@ const ColorScheme *ViewManager::colorSchemeForProfile(const Profile::Ptr profile
     return colorScheme;
 }
 
+bool ViewManager::profileHasBlurEnabled(const Profile::Ptr profile)
+{
+    return colorSchemeForProfile(profile)->blur();
+}
+
 void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr profile)
 {
     Q_ASSERT(profile);
@@ -873,6 +878,8 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
     view->setColorTable(table);
     view->setOpacity(colorScheme->opacity());
     view->setWallpaper(colorScheme->wallpaper());
+
+    emit blurSettingChanged(colorScheme->blur());
 
     // load font
     view->setAntialias(profile->antiAliasFonts());

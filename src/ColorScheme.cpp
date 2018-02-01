@@ -164,6 +164,7 @@ ColorScheme::ColorScheme() :
     _table(nullptr),
     _randomTable(nullptr),
     _opacity(1.0),
+    _blur(false),
     _wallpaper(nullptr)
 {
     setWallpaper(QString());
@@ -175,6 +176,7 @@ ColorScheme::ColorScheme(const ColorScheme &other) :
     _table(nullptr),
     _randomTable(nullptr),
     _opacity(other._opacity),
+    _blur(other._blur),
     _wallpaper(other._wallpaper)
 {
     setName(other.name());
@@ -358,6 +360,16 @@ qreal ColorScheme::opacity() const
     return _opacity;
 }
 
+void ColorScheme::setBlur(bool blur)
+{
+    _blur = blur;
+}
+
+bool ColorScheme::blur() const
+{
+    return _blur;
+}
+
 void ColorScheme::read(const KConfig &config)
 {
     KConfigGroup configGroup = config.group("General");
@@ -366,6 +378,7 @@ void ColorScheme::read(const KConfig &config)
 
     _description = i18n(schemeDescription.toUtf8().constData());
     _opacity = configGroup.readEntry("Opacity", 1.0);
+    _blur = configGroup.readEntry("Blur", false);
     setWallpaper(configGroup.readEntry("Wallpaper", QString()));
 
     for (int i = 0; i < TABLE_COLORS; i++) {
@@ -402,6 +415,7 @@ void ColorScheme::write(KConfig &config) const
 
     configGroup.writeEntry("Description", _description);
     configGroup.writeEntry("Opacity", _opacity);
+    configGroup.writeEntry("Blur", _blur);
     configGroup.writeEntry("Wallpaper", _wallpaper->path());
 
     for (int i = 0; i < TABLE_COLORS; i++) {

@@ -179,6 +179,11 @@ public:
         return _sessionMap.values();
     }
 
+    /**
+     * Returns whether the @p profile has the blur setting enabled
+     */
+    static bool profileHasBlurEnabled(const Profile::Ptr profile);
+
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
     void empty();
@@ -221,6 +226,8 @@ Q_SIGNALS:
      */
     void setMenuBarVisibleRequest(bool);
     void updateWindowIcon();
+
+    void blurSettingChanged(bool);
 
     /** Requests creation of a new view with the default profile. */
     void newViewRequest();
