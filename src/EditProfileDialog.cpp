@@ -280,6 +280,12 @@ const Profile::Ptr EditProfileDialog::lookupProfile() const
     return _profile;
 }
 
+const QString EditProfileDialog::currentColorSchemeName() const
+{
+    const QString &currentColorSchemeName = lookupProfile()->colorScheme();
+    return currentColorSchemeName;
+}
+
 void EditProfileDialog::preparePage(int page)
 {
     const Profile::Ptr profile = lookupProfile();
@@ -536,7 +542,8 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->resetColorSchemeButton->setEnabled(false);
 
     // setup color list
-    updateColorSchemeList(true);
+    // select the colorScheme used in the current profile
+    updateColorSchemeList(currentColorSchemeName());
 
     _ui->colorSchemeList->setMouseTracking(true);
     _ui->colorSchemeList->installEventFilter(this);
@@ -636,14 +643,13 @@ void EditProfileDialog::toggleMouseWheelZoom(bool enable)
     updateTempProfileProperty(Profile::MouseWheelZoomEnabled, enable);
 }
 
-void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
+void EditProfileDialog::updateColorSchemeList(const QString &selectedColorSchemeName)
 {
     if (_ui->colorSchemeList->model() == nullptr) {
         _ui->colorSchemeList->setModel(new QStandardItemModel(this));
     }
 
-    const QString &name = lookupProfile()->colorScheme();
-    const ColorScheme *currentScheme = ColorSchemeManager::instance()->findColorScheme(name);
+    const ColorScheme *selectedColorScheme = ColorSchemeManager::instance()->findColorScheme(selectedColorSchemeName);
 
     QStandardItemModel *model = qobject_cast<QStandardItemModel *>(_ui->colorSchemeList->model());
 
@@ -661,7 +667,9 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
         item->setData(QVariant::fromValue(_profile->font()), Qt::UserRole + 2);
         item->setFlags(item->flags());
 
-        if (currentScheme == scheme) {
+        // if selectedColorSchemeName is not empty then select that scheme
+        // after saving the changes in the colorScheme editor
+        if (selectedColorScheme == scheme) {
             selectedItem = item;
         }
 
@@ -670,7 +678,7 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 
     model->sort(0);
 
-    if (selectCurrentScheme && (selectedItem != nullptr)) {
+    if (selectedItem != nullptr) {
         _ui->colorSchemeList->updateGeometry();
         _ui->colorSchemeList->selectionModel()->setCurrentIndex(selectedItem->index(),
                                                                 QItemSelectionModel::Select);
@@ -847,7 +855,8 @@ void EditProfileDialog::removeColorScheme()
 void EditProfileDialog::resetColorScheme()
 {
     removeColorScheme();
-    updateColorSchemeList(true);
+    // select the colorScheme used in the current profile
+    updateColorSchemeList(currentColorSchemeName());
 }
 
 void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
@@ -907,7 +916,10 @@ void EditProfileDialog::saveColorScheme(const ColorScheme &scheme, bool isNewSch
 
     ColorSchemeManager::instance()->addColorScheme(newScheme);
 
-    updateColorSchemeList(true);
+    const QString &selectedColorSchemeName = newScheme->name();
+
+    // select the edited or the new colorScheme after saving the changes
+    updateColorSchemeList(selectedColorSchemeName);
 
     preview(Profile::ColorScheme, newScheme->name());
 }

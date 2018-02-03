@@ -207,7 +207,13 @@ private:
     void setupAdvancedPage(const Profile::Ptr profile);
     void setupMousePage(const Profile::Ptr info);
 
-    void updateColorSchemeList(bool selectCurrentScheme = false);
+    // Returns the name of the colorScheme used in the current profile
+    const QString currentColorSchemeName() const;
+
+    // select @p selectedColorSchemeName after the changes are saved
+    // in the colorScheme editor
+    void updateColorSchemeList(const QString &selectedColorSchemeName = QString());
+
     void updateColorSchemeButtons();
     void updateKeyBindingsList(bool selectCurrentTranslator = false);
     void updateKeyBindingsButtons();
