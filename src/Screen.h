@@ -221,6 +221,11 @@ public:
      */
     void insertChars(int n);
     /**
+     * Repeat the preceeding graphic character @n times, including SPACE.
+     * If @n is 0 then the character is repeated once.
+     */
+    void repeatChars(int n);
+    /**
      * Removes @p n lines beginning from the current cursor position.
      * The position of the cursor is not altered.
      * If @p n is 0 then one line is removed.
@@ -717,6 +722,9 @@ private:
 
     // last position where we added a character
     int _lastPos;
+
+    // used in REP (repeating char)
+    unsigned short _lastDrawnChar;
 };
 
 }
