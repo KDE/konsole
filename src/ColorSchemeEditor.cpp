@@ -330,11 +330,6 @@ void ColorSchemeEditor::setupColorTable(const ColorScheme *colors)
     }
     // ensure that color names are as fully visible as possible
     _ui->colorTable->resizeColumnToContents(0);
-
-    // set the widget height to the table content
-    _ui->colorTable->setFixedHeight(
-        _ui->colorTable->verticalHeader()->length() + _ui->colorTable->horizontalHeader()->height()
-        + 2);
 }
 
 ColorScheme &ColorSchemeEditor::colorScheme() const
