@@ -221,7 +221,7 @@ public:
      */
     void insertChars(int n);
     /**
-     * Repeat the preceeding graphic character @n times, including SPACE.
+     * Repeat the preceding graphic character @n times, including SPACE.
      * If @n is 0 then the character is repeated once.
      */
     void repeatChars(int n);
