@@ -408,10 +408,12 @@
   <screenshots>
     <screenshot type="default">
       <image>https://kde.org/images/screenshots/konsole.png</image>
+      <caption>Konsole being used as a terminal emulator</caption>
     </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
   <provides>
     <binary>konsole</binary>
   </provides>
+  <update_contact>konsole-devel_AT_kde.org</update_contact>
 </component>
