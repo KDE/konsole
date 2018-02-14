@@ -23,6 +23,7 @@
 #include <QApplication>
 #include <QMenu>
 #include <QMenuBar>
+#include <QDebug>
 
 #include <KPluginLoader>
 #include <KPluginFactory>
@@ -65,6 +66,13 @@ demo_konsolepart::demo_konsolepart()
 
     setCentralWidget(_terminalPart->widget());
     _terminal = qobject_cast<TerminalInterface*>(_terminalPart);
+
+    // Test if blur is enabled for profile
+    bool blurEnabled;
+    QMetaObject::invokeMethod(_terminalPart, "isBlurEnabled",
+                              Qt::DirectConnection,
+                              Q_RETURN_ARG(bool, blurEnabled));
+    qWarning()<<"blur enabled: "<<blurEnabled;
 
 }
 
