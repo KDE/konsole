@@ -133,6 +133,13 @@ public Q_SLOTS:
     * */
     void setMonitorActivityEnabled(bool enabled);
 
+    /**
+     * Returns the status of the blur of the current profile.
+     *
+     * @return True if blur is enabled for the current active Konsole color profile.
+     * */
+    bool isBlurEnabled();
+
 Q_SIGNALS:
     /**
      * Emitted when the key sequence for a shortcut, which is also a valid terminal key sequence,

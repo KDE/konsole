@@ -377,6 +377,11 @@ void Part::setMonitorActivityEnabled(bool enabled)
     }
 }
 
+bool Part::isBlurEnabled()
+{
+    return ViewManager::profileHasBlurEnabled(SessionManager::instance()->sessionProfile(activeSession()));
+}
+
 void Part::sessionStateChanged(int state)
 {
     if (state == NOTIFYSILENCE) {
