@@ -460,7 +460,7 @@ const QRegularExpression UrlFilter::FullUrlRegExp(QStringLiteral("(www\\.(?!\\.)
                                                   QRegularExpression::OptimizeOnFirstUsageOption);
 // email address:
 // [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]
-const QRegularExpression UrlFilter::EmailAddressRegExp(QStringLiteral("\\b(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+\\b"),
+const QRegularExpression UrlFilter::EmailAddressRegExp(QStringLiteral("\\b(\\w|\\.|-|\\+)+@(\\w|\\.|-)+\\.\\w+\\b"),
                                                        QRegularExpression::OptimizeOnFirstUsageOption);
 
 // matches full url or email address
