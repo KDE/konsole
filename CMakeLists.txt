@@ -45,7 +45,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     CoreAddons Crash GuiAddons DBusAddons
     I18n IconThemes Init KIO Notifications NotifyConfig
     Parts Pty Service TextWidgets WidgetsAddons
-    WindowSystem XmlGui DBusAddons
+    WindowSystem XmlGui DBusAddons GlobalAccel
 )
 
 find_package(KF5DocTools ${KF5_MIN_VERSION})
