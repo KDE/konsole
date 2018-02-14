@@ -354,6 +354,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _preserveLineBreaks(false)
     , _columnSelectionMode(false)
     , _autoCopySelectedText(false)
+    , _copyTextAsHTML(true)
     , _middleClickPasteMode(Enum::PasteFromX11Selection)
     , _scrollbarLocation(Enum::ScrollBarRight)
     , _scrollFullPage(false)
@@ -3108,6 +3109,11 @@ void TerminalDisplay::setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum mod
     _middleClickPasteMode = mode;
 }
 
+void TerminalDisplay::setCopyTextAsHTML(bool enabled)
+{
+    _copyTextAsHTML = enabled;
+}
+
 void TerminalDisplay::copyToX11Selection()
 {
     if (_screenWindow == nullptr) {
@@ -3115,15 +3121,17 @@ void TerminalDisplay::copyToX11Selection()
     }
 
 
-    QString text = _screenWindow->selectedText(currentDecodingOptions());
+    const QString &text = _screenWindow->selectedText(currentDecodingOptions());
     if (text.isEmpty()) {
         return;
     }
-    QString html = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
 
     auto mimeData = new QMimeData;
     mimeData->setText(text);
-    mimeData->setHtml(html);
+
+    if (_copyTextAsHTML) {
+        mimeData->setHtml(_screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml));
+    }
 
     if (QApplication::clipboard()->supportsSelection()) {
         QApplication::clipboard()->setMimeData(mimeData, QClipboard::Selection);
@@ -3140,15 +3148,17 @@ void TerminalDisplay::copyToClipboard()
         return;
     }
 
-    QString text = _screenWindow->selectedText(currentDecodingOptions());
+    const QString &text = _screenWindow->selectedText(currentDecodingOptions());
     if (text.isEmpty()) {
         return;
     }
-    QString html = _screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml);
 
     auto mimeData = new QMimeData;
     mimeData->setText(text);
-    mimeData->setHtml(html);
+
+    if (_copyTextAsHTML) {
+        mimeData->setHtml(_screenWindow->selectedText(currentDecodingOptions() | Screen::ConvertToHtml));
+    }
 
     QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
 }

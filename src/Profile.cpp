@@ -114,6 +114,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { CtrlRequiredForDrag, "CtrlRequiredForDrag" , INTERACTION_GROUP , QVariant::Bool }
     , { DropUrlsAsText , "DropUrlsAsText" , INTERACTION_GROUP , QVariant::Bool }
     , { AutoCopySelectedText , "AutoCopySelectedText" , INTERACTION_GROUP , QVariant::Bool }
+    , { CopyTextAsHTML , "CopyTextAsHTML" , INTERACTION_GROUP , QVariant::Bool }
     , { TrimLeadingSpacesInSelectedText , "TrimLeadingSpacesInSelectedText" , INTERACTION_GROUP , QVariant::Bool }
     , { TrimTrailingSpacesInSelectedText , "TrimTrailingSpacesInSelectedText" , INTERACTION_GROUP , QVariant::Bool }
     , { PasteFromSelectionEnabled , "PasteFromSelectionEnabled" , INTERACTION_GROUP , QVariant::Bool }
@@ -189,6 +190,7 @@ void Profile::useFallback()
     setProperty(OpenLinksByDirectClickEnabled, false);
     setProperty(CtrlRequiredForDrag, true);
     setProperty(AutoCopySelectedText, false);
+    setProperty(CopyTextAsHTML, true);
     setProperty(TrimLeadingSpacesInSelectedText, false);
     setProperty(TrimTrailingSpacesInSelectedText, false);
     setProperty(DropUrlsAsText, false);

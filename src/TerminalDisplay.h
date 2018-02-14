@@ -569,6 +569,8 @@ public Q_SLOTS:
 
     void setAutoCopySelectedText(bool enabled);
 
+    void setCopyTextAsHTML(bool enabled);
+
     void setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum mode);
 
     /** Copies the selected text to the X11 Selection. */
@@ -915,6 +917,7 @@ private:
     bool _columnSelectionMode;
 
     bool _autoCopySelectedText;
+    bool _copyTextAsHTML;
     Enum::MiddleClickPasteModeEnum _middleClickPasteMode;
 
     QScrollBar *_scrollBar;

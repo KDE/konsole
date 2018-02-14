@@ -1270,6 +1270,10 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
             SLOT(toggleCtrlRequiredForDrag(bool))
         },
         {
+            _ui->copyTextAsHTMLButton, Profile::CopyTextAsHTML,
+            SLOT(toggleCopyTextAsHTML(bool))
+        },
+        {
             _ui->copyTextToClipboardButton, Profile::AutoCopySelectedText,
             SLOT(toggleCopyTextToClipboard(bool))
         },
@@ -1465,6 +1469,11 @@ void EditProfileDialog::toggleDropUrlsAsText(bool enable)
 void EditProfileDialog::toggleOpenLinksByDirectClick(bool enable)
 {
     updateTempProfileProperty(Profile::OpenLinksByDirectClickEnabled, enable);
+}
+
+void EditProfileDialog::toggleCopyTextAsHTML(bool enable)
+{
+    updateTempProfileProperty(Profile::CopyTextAsHTML, enable);
 }
 
 void EditProfileDialog::toggleCopyTextToClipboard(bool enable)

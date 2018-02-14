@@ -952,18 +952,8 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
+          <item row="3" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QCheckBox" name="copyTextToClipboardButton">
-              <property name="toolTip">
-               <string>Automatically copy selected text into clipboard</string>
-              </property>
-              <property name="text">
-               <string>Copy on select</string>
-              </property>
-             </widget>
-            </item>
             <item>
              <widget class="QCheckBox" name="trimLeadingSpacesButton">
               <property name="toolTip">
@@ -986,7 +976,7 @@
             </item>
            </layout>
           </item>
-          <item row="1" column="0">
+          <item row="4" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
              <widget class="QLabel" name="label_13">
@@ -1006,6 +996,30 @@
              <widget class="QRadioButton" name="pasteFromX11SelectionButton">
               <property name="text">
                <string>Paste from selection</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <item>
+             <widget class="QCheckBox" name="copyTextToClipboardButton">
+              <property name="toolTip">
+               <string>Automatically copy selected text into clipboard</string>
+              </property>
+              <property name="text">
+               <string>Copy on select</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="copyTextAsHTMLButton">
+              <property name="toolTip">
+               <string>Copy text as HTML (including formatting, font faces, colors... etc)</string>
+              </property>
+              <property name="text">
+               <string>Copy text as HTML</string>
               </property>
              </widget>
             </item>
@@ -1108,19 +1122,6 @@
           </item>
          </layout>
         </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>328</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>

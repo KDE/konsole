@@ -930,6 +930,8 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
         view->setMiddleClickPasteMode(Enum::PasteFromClipboard);
     }
 
+    view->setCopyTextAsHTML(profile->property<bool>(Profile::CopyTextAsHTML));
+
     // margin/center
     view->setMargin(profile->property<int>(Profile::TerminalMargin));
     view->setCenterContents(profile->property<bool>(Profile::TerminalCenter));

@@ -205,6 +205,14 @@ public:
         CtrlRequiredForDrag,
         /** (bool) If true, automatically copy selected text into the clipboard */
         AutoCopySelectedText,
+        /** (bool) The QMimeData object used when copying text always
+         * has the plain/text MIME set and if this is @c true then the
+         * text/html MIME is set too in that object i.e. the copied
+         * text will include formatting, font faces, colors... etc; users
+         * can paste the text as HTML (default) or as plain/text by using
+         * e.g. the "Paste Special" functionality in LibreOffice.
+         */
+        CopyTextAsHTML,
         /** (bool) If true, leading spaces are trimmed in selected text */
         TrimLeadingSpacesInSelectedText,
         /** (bool) If true, trailing spaces are trimmed in selected text */
