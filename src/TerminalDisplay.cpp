@@ -615,7 +615,9 @@ static void drawOtherChar(QPainter& paint, int x, int y, int w, int h, uchar cod
             paint.drawLine(cx + xHalfGap, cy - 1, ex, cy - 1);
             paint.drawLine(cx + xHalfGap, cy + 1, ex, cy + 1);
             // No break!
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 8, 0))
             Q_FALLTHROUGH();
+#endif
         case 0x4C: // BOX DRAWINGS LIGHT DOUBLE DASH HORIZONTAL
             paint.drawLine(x, cy, cx - xHalfGap - 1, cy);
             paint.drawLine(cx + xHalfGap, cy, ex, cy);
@@ -626,7 +628,9 @@ static void drawOtherChar(QPainter& paint, int x, int y, int w, int h, uchar cod
             paint.drawLine(cx - 1, cy + yHalfGap, cx - 1, ey);
             paint.drawLine(cx + 1, cy + yHalfGap, cx + 1, ey);
             // No break!
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 8, 0))
             Q_FALLTHROUGH();
+#endif
         case 0x4E: // BOX DRAWINGS LIGHT DOUBLE DASH VERTICAL
             paint.drawLine(cx, y, cx, cy - yHalfGap - 1);
             paint.drawLine(cx, cy + yHalfGap, cx, ey);
