@@ -2,7 +2,8 @@
 # cat this file to test underline/copy/paste/etc
 # resize the terminal to test edges
 # This should be cleaned up to have only 1 of each 'test' and seperate into
-$ passing and failing.
+# passing and failing.
+# email links at bottom
 FILE://localhost/home/root
 audiocd:/By%20Name/15%20Geantra%C3%AE.wav
 audiocd:/By%20Name/15%252FGeantra%C3%AE.wav
@@ -253,3 +254,56 @@ http://www.website.com/directory/relative.html?query=test&name=harry            
 http://www.website.com/directory/relative.html?query=test&name=harry            http://www.website.com/directory/relative.html?query=test&name=harry             http://www.website.com/directory/relative.html?query=test&name=harry
 --------------
 http://www.website.com/directory/relative.html?query=test&name=harry             http://www.website.com/directory/relative.html?query=test&name=harry           http://www.website.com/directory/relative.html?query=test&name=harry
+
+# http://codefool.tumblr.com/post/15288874550/list-of-valid-and-invalid-email-addresses
+
+List of Valid Email Addresses
+# Added spaces to double-check if links are found correctly
+
+email@example.com  email@example.com 
+firstname.lastname@example.com  firstname.lastname@example.com                         
+email@subdomain.example.com email@subdomain.example.com 
+firstname+lastname@example.com firstname+lastname@example.com   
+email@123.123.123.123  email@123.123.123.123   
+email@[123.123.123.123] email@[123.123.123.123]   
+“email”@example.com  “email”@example.com   
+1234567890@example.com 1234567890@example.com   
+email@example-one.com email@example-one.com  
+_______@example.com _______@example.com 
+email@example.name email@example.name   
+email@example.museum email@example.museum   
+email@example.co.jp email@example.co.jp  
+firstname-lastname@example.com  firstname-lastname@example.com   
+
+List of Strange Valid Email Addresses
+
+much.“more\ unusual”@example.com
+very.unusual.“@”.unusual.com@example.com
+very.“(),:;<>[]”.VERY.“very@\\ "very”.unusual@strange.example.com
+
+List of Invalid Email Addresses
+
+plainaddress
+#@%^%#$@#$@#.com
+@example.com
+Joe Smith <email@example.com>
+email.example.com
+email@example@example.com
+.email@example.com
+email.@example.com
+email..email@example.com
+あいうえお@example.com
+email@example.com (Joe Smith)
+email@example
+email@-example.com
+email@example.web
+email@111.222.333.44444
+email@example..com
+Abc..123@example.com
+
+List of Strange Invalid Email Addresses
+
+“(),:;<>[\]@example.com
+just"not"right@example.com
+this\ is"really"not\allowed@example.com
+
