@@ -409,6 +409,12 @@
     <screenshot type="default">
       <image>https://kde.org/images/screenshots/konsole.png</image>
       <caption>Konsole being used as a terminal emulator</caption>
+      <caption xml:lang="ca">El Konsole s'usa com a emulador de terminal</caption>
+      <caption xml:lang="nl">Konsole wordt gebruikt als een terminalemulator</caption>
+      <caption xml:lang="pt">O Konsole a ser usado como um emulador de terminal</caption>
+      <caption xml:lang="sv">Terminal används som en terminalemulator.</caption>
+      <caption xml:lang="uk">Konsole використовується як емулятор термінала</caption>
+      <caption xml:lang="x-test">xxKonsole being used as a terminal emulatorxx</caption>
     </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
