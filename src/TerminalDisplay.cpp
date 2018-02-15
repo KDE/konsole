@@ -56,7 +56,6 @@
 #include <KJobWidgets>
 #include <KMessageBox>
 #include <KIO/StatJob>
-#include <KWindowSystem>
 
 // Konsole
 #include "Filter.h"
@@ -3565,8 +3564,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
     auto urls = mimeData->urls();
 
     QString dropText;
-    // temporary prevent menu/dnd on Wayland - crash in KIO::drop
-    if (!urls.isEmpty() && (!KWindowSystem::isPlatformWayland())) {
+    if (!urls.isEmpty()) {
         for (int i = 0 ; i < urls.count() ; i++) {
             KIO::StatJob* job = KIO::mostLocalUrl(urls[i], KIO::HideProgressInfo);
             bool ok = job->exec();
