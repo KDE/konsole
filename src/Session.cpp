@@ -62,6 +62,8 @@ using namespace Konsole;
 int Session::lastSessionId = 0;
 static bool show_disallow_certain_dbus_methods_message = true;
 
+static const int ZMODEM_BUFFER_SIZE = 1048576; // 1 Mb
+
 Session::Session(QObject* parent) :
     QObject(parent)
     , _shellProcess(nullptr)
@@ -1281,7 +1283,7 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
     _zmodemProc = new KProcess();
     _zmodemProc->setOutputChannelMode(KProcess::SeparateChannels);
 
-    *_zmodemProc << zmodem << QStringLiteral("-v") << list;
+    *_zmodemProc << zmodem << QStringLiteral("-v") << QStringLiteral("-e") << list;
 
     if (!dir.isEmpty()) {
         _zmodemProc->setWorkingDirectory(dir);
@@ -1308,13 +1310,12 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
 void Session::zmodemReadAndSendBlock()
 {
     _zmodemProc->setReadChannel(QProcess::StandardOutput);
-    QByteArray data = _zmodemProc->readAll();
+    QByteArray data = _zmodemProc->read(ZMODEM_BUFFER_SIZE);
 
-    if (data.count() == 0) {
-        return;
+    while (data.count() != 0) {
+        _shellProcess->sendData(data);
+        data = _zmodemProc->read(ZMODEM_BUFFER_SIZE);
     }
-
-    _shellProcess->sendData(data);
 }
 
 void Session::zmodemReadStatus()
