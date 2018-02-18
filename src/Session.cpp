@@ -1300,7 +1300,7 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
     _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
                                        i18n("ZModem Progress"));
 
-    connect(_zmodemProgress, &Konsole::ZModemDialog::user1Clicked, this, &Konsole::Session::zmodemFinished);
+    connect(_zmodemProgress, &Konsole::ZModemDialog::zmodemCancel, this, &Konsole::Session::zmodemFinished);
 
     _zmodemProgress->show();
 }
@@ -1335,7 +1335,7 @@ void Session::zmodemReadStatus()
             msg.truncate(0);
         }
         if (!txt.isEmpty()) {
-            _zmodemProgress->addProgressText(QString::fromLocal8Bit(txt));
+            _zmodemProgress->addText(QString::fromLocal8Bit(txt));
         }
     }
 }
@@ -1345,6 +1345,9 @@ void Session::zmodemReceiveBlock(const char* data, int len)
     QByteArray bytes(data, len);
 
     _zmodemProc->write(bytes);
+
+    // Provide some feedback to dialog
+    _zmodemProgress->addProgressText(QStringLiteral("."));
 }
 
 void Session::zmodemFinished()

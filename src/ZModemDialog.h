@@ -19,10 +19,9 @@
 #ifndef ZMODEM_DIALOG_H
 #define ZMODEM_DIALOG_H
 
-// KDE
 #include <QDialog>
 
-class KTextEdit;
+class QTextEdit;
 class QDialogButtonBox;
 class QPushButton;
 namespace Konsole {
@@ -36,6 +35,11 @@ public:
     /**
      * Adds a line of text to the progress window
      */
+    void addText(const QString &);
+
+    /**
+     * Adds a line of text without a new line to the progress window
+     */
     void addProgressText(const QString &);
 
     /**
@@ -44,19 +48,18 @@ public:
     void transferDone();
 
 Q_SIGNALS:
-    void user1Clicked();
+    void zmodemCancel();
 
 private Q_SLOTS:
     void slotClose();
-    void slotUser1Clicked();
+    void slotCancel();
 
 private:
     Q_DISABLE_COPY(ZModemDialog)
 
     void delayedDestruct();
-    KTextEdit *_textEdit;
+    QTextEdit *_textEdit;
     QDialogButtonBox *mButtonBox;
-    QPushButton *mUser1Button;
 };
 }
 

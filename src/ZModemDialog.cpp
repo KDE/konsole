@@ -21,7 +21,7 @@
 
 // KDE
 #include <KLocalizedString>
-#include <KTextEdit>
+#include <QTextEdit>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <KGuiItem>
@@ -36,49 +36,49 @@ ZModemDialog::ZModemDialog(QWidget *aParent, bool modal, const QString &caption)
     setModal(modal);
     setWindowTitle(caption);
 
-    mButtonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+    mButtonBox = new QDialogButtonBox(QDialogButtonBox::Cancel | QDialogButtonBox::Close);
     auto mainWidget = new QWidget(this);
     auto mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     mainLayout->addWidget(mainWidget);
-    mUser1Button = new QPushButton;
-    mButtonBox->addButton(mUser1Button, QDialogButtonBox::ActionRole);
     mainLayout->addWidget(mButtonBox);
-    KGuiItem::assign(mUser1Button, KGuiItem(i18n("&Stop")));
-    mButtonBox->button(QDialogButtonBox::Close)->setDefault(true);
-    mUser1Button->setShortcut(Qt::Key_Escape);
+
+    // Use Cancel here to stop the transfer
+    mButtonBox->button(QDialogButtonBox::Cancel)->setEnabled(true);
     mButtonBox->button(QDialogButtonBox::Close)->setEnabled(false);
 
-    _textEdit = new KTextEdit(this);
+    connect(mButtonBox, &QDialogButtonBox::rejected, this, &Konsole::ZModemDialog::slotCancel);
+    connect(mButtonBox, &QDialogButtonBox::accepted, this, &Konsole::ZModemDialog::slotClose);
+
+    _textEdit = new QTextEdit(this);
     _textEdit->setMinimumSize(400, 100);
     _textEdit->setReadOnly(true);
     mainLayout->addWidget(_textEdit);
 
-    connect(this, &Konsole::ZModemDialog::user1Clicked, this,
-            &Konsole::ZModemDialog::slotUser1Clicked);
-    connect(mButtonBox->button(QDialogButtonBox::Close),
-            &QPushButton::clicked, this,
-            &Konsole::ZModemDialog::slotClose);
+    addText(QStringLiteral("Note: pressing Cancel will almost certainly cause the terminal to be unusable."));
+    addText(QStringLiteral("-----------------"));
+}
+
+void ZModemDialog::addText(const QString &text)
+{
+    _textEdit->append(text);
 }
 
 void ZModemDialog::addProgressText(const QString &text)
 {
-    QTextCursor currentCursor = _textEdit->textCursor();
-
-    currentCursor.insertBlock();
-    currentCursor.insertText(text);
+    _textEdit->insertPlainText(text);
 }
 
-void ZModemDialog::slotUser1Clicked()
+void ZModemDialog::slotCancel()
 {
-    Q_EMIT user1Clicked();
+    Q_EMIT zmodemCancel();
     slotClose();
 }
 
 void ZModemDialog::transferDone()
 {
+    mButtonBox->button(QDialogButtonBox::Cancel)->setEnabled(false);
     mButtonBox->button(QDialogButtonBox::Close)->setEnabled(true);
-    mUser1Button->setEnabled(false);
 }
 
 void ZModemDialog::slotClose()
