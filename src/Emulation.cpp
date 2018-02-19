@@ -252,8 +252,12 @@ void Emulation::receiveData(const char *text, int length)
     //this check into the above for loop?
     for (int i = 0; i < length; i++) {
         if (text[i] == '\030') {
-            if ((length - i - 1 > 3) && (qstrncmp(text + i + 1, "B00", 3) == 0)) {
-                emit zmodemDetected();
+            if (length - i - 1 > 3) {
+                if (qstrncmp(text + i + 1, "B00", 3) == 0) {
+                    emit zmodemDownloadDetected();
+                } else if (qstrncmp(text + i + 1, "B01", 3) == 0) {
+                    emit zmodemUploadDetected();
+                }
             }
         }
     }

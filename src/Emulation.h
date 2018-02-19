@@ -302,7 +302,8 @@ Q_SIGNALS:
      * Emitted when the special sequence indicating the request for data
      * transmission through ZModem protocol is detected.
      */
-    void zmodemDetected();
+    void zmodemDownloadDetected();
+    void zmodemUploadDetected();
 
     /**
      * Requests that the color of the text used

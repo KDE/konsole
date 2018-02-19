@@ -97,7 +97,8 @@ Session::Session(QObject* parent) :
 
     connect(_emulation, &Konsole::Emulation::titleChanged, this, &Konsole::Session::setUserTitle);
     connect(_emulation, &Konsole::Emulation::stateSet, this, &Konsole::Session::activityStateSet);
-    connect(_emulation, &Konsole::Emulation::zmodemDetected, this, &Konsole::Session::fireZModemDetected);
+    connect(_emulation, &Konsole::Emulation::zmodemDownloadDetected, this, &Konsole::Session::fireZModemDownloadDetected);
+    connect(_emulation, &Konsole::Emulation::zmodemUploadDetected, this, &Konsole::Session::fireZModemUploadDetected);
     connect(_emulation, &Konsole::Emulation::changeTabTextColorRequest, this, &Konsole::Session::changeTabTextColorRequest);
     connect(_emulation, &Konsole::Emulation::profileChangeCommandReceived, this, &Konsole::Session::profileChangeCommandReceived);
     connect(_emulation, &Konsole::Emulation::flowControlKeyPressed, this, &Konsole::Session::updateFlowControlState);
@@ -1263,11 +1264,18 @@ bool Session::flowControlEnabled() const
         return _flowControlEnabled;
     }
 }
-void Session::fireZModemDetected()
+void Session::fireZModemDownloadDetected()
 {
     if (!_zmodemBusy) {
-        QTimer::singleShot(10, this, &Konsole::Session::zmodemDetected);
+        QTimer::singleShot(10, this, &Konsole::Session::zmodemDownloadDetected);
         _zmodemBusy = true;
+    }
+}
+
+void Session::fireZModemUploadDetected()
+{
+    if (!_zmodemBusy) {
+        QTimer::singleShot(10, this, &Konsole::Session::zmodemUploadDetected);
     }
 }
 
