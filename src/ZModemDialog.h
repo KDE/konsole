@@ -21,7 +21,7 @@
 
 #include <QDialog>
 
-class QTextEdit;
+class KTextEdit;
 class QDialogButtonBox;
 class QPushButton;
 namespace Konsole {
@@ -58,7 +58,7 @@ private:
     Q_DISABLE_COPY(ZModemDialog)
 
     void delayedDestruct();
-    QTextEdit *_textEdit;
+    KTextEdit *_textEdit;
     QDialogButtonBox *mButtonBox;
 };
 }
