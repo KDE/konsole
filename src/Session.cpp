@@ -1351,12 +1351,17 @@ void Session::zmodemReadStatus()
 
 void Session::zmodemReceiveBlock(const char* data, int len)
 {
+    static int steps = 0;
     QByteArray bytes(data, len);
 
     _zmodemProc->write(bytes);
 
     // Provide some feedback to dialog
-    _zmodemProgress->addProgressText(QStringLiteral("."));
+    if (steps > 100) {
+        _zmodemProgress->addProgressText(QStringLiteral("."));
+        steps = 0;
+    }
+    steps++;
 }
 
 void Session::zmodemFinished()
