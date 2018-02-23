@@ -86,6 +86,8 @@ private Q_SLOTS:
     void favoriteChanged(Profile::Ptr profile, bool isFavorite);
     void profileChanged(Profile::Ptr profile);
     void shortcutChanged(Profile::Ptr profile, const QKeySequence &sequence);
+    void addShortcutAction(Profile::Ptr profile);
+    void removeShortcutAction(Profile::Ptr profile);
 
 private:
     Q_DISABLE_COPY(ProfileList)
