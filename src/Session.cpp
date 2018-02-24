@@ -1075,14 +1075,19 @@ QString Session::getDynamicTitle()
     }
 
     if (title.contains(QLatin1String("%D"))) {
-        QString homeDir = process->userHomeDir();
-        QString tempDir = dir;
-        // Change User's Home Dir w/ ~ only at the beginning
-        if (tempDir.startsWith(homeDir)) {
-            tempDir.remove(0, homeDir.length());
-            tempDir.prepend(QLatin1Char('~'));
+        const QString homeDir = process->userHomeDir();
+        if (!homeDir.isEmpty()) {
+            QString tempDir = dir;
+            // Change User's Home Dir w/ ~ only at the beginning
+            if (tempDir.startsWith(homeDir)) {
+                tempDir.remove(0, homeDir.length());
+                tempDir.prepend(QLatin1Char('~'));
+            }
+            title.replace(QLatin1String("%D"), tempDir);
+        } else {
+            // Example: 'sudo top'  We have to replace %D with something
+            title.replace(QLatin1String("%D"), QStringLiteral("-"));
         }
-        title.replace(QLatin1String("%D"), tempDir);
     }
     title.replace(QLatin1String("%d"), process->formatShortDir(dir));
 
