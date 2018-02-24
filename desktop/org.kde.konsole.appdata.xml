@@ -421,6 +421,7 @@
       <caption xml:lang="sv">Terminal används som en terminalemulator.</caption>
       <caption xml:lang="uk">Konsole використовується як емулятор термінала</caption>
       <caption xml:lang="x-test">xxKonsole being used as a terminal emulatorxx</caption>
+      <caption xml:lang="zh-CN">将 Konsole 用作终端仿真器</caption>
     </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
