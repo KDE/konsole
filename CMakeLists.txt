@@ -43,7 +43,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     Bookmarks Completion Config ConfigWidgets
     CoreAddons Crash GuiAddons DBusAddons
-    I18n IconThemes Init KIO Notifications NotifyConfig
+    I18n IconThemes Init KIO NewStuff NewStuffCore Notifications NotifyConfig
     Parts Pty Service TextWidgets WidgetsAddons
     WindowSystem XmlGui DBusAddons GlobalAccel
 )

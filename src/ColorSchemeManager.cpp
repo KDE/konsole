@@ -2,6 +2,7 @@
     This source file is part of Konsole, a terminal emulator.
 
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 2018 by Harald Sitter <sitter@kde.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -85,15 +86,15 @@ QList<const ColorScheme *> ColorSchemeManager::allColorSchemes()
 
 bool ColorSchemeManager::loadColorScheme(const QString &filePath)
 {
-    if (!filePath.endsWith(QLatin1String(".colorscheme")) || !QFile::exists(filePath)) {
+    if (!pathIsColorScheme(filePath) || !QFile::exists(filePath)) {
         return false;
     }
 
-    QFileInfo info(filePath);
+    auto name = colorSchemeNameFromPath(filePath);
 
     KConfig config(filePath, KConfig::NoGlobals);
     auto scheme = new ColorScheme();
-    scheme->setName(info.completeBaseName());
+    scheme->setName(name);
     scheme->read(config);
 
     if (scheme->name().isEmpty()) {
@@ -103,7 +104,7 @@ bool ColorSchemeManager::loadColorScheme(const QString &filePath)
         return false;
     }
 
-    if (!_colorSchemes.contains(info.completeBaseName())) {
+    if (!_colorSchemes.contains(name)) {
         _colorSchemes.insert(scheme->name(), scheme);
     } else {
         //qDebug() << "color scheme with name" << scheme->name() << "has already been" <<
@@ -113,6 +114,24 @@ bool ColorSchemeManager::loadColorScheme(const QString &filePath)
     }
 
     return true;
+}
+
+bool ColorSchemeManager::unloadColorScheme(const QString &filePath)
+{
+    if (!pathIsColorScheme(filePath)) {
+        return false;
+    }
+    auto name = colorSchemeNameFromPath(filePath);
+    delete _colorSchemes.take(name);
+    return true;
+}
+
+QString ColorSchemeManager::colorSchemeNameFromPath(const QString &path)
+{
+    if (!pathIsColorScheme(path)) {
+        return QString();
+    }
+    return QFileInfo(path).completeBaseName();
 }
 
 QStringList ColorSchemeManager::listColorSchemes()
@@ -141,8 +160,7 @@ void ColorSchemeManager::addColorScheme(ColorScheme *scheme)
 {
     // remove existing colorscheme with the same name
     if (_colorSchemes.contains(scheme->name())) {
-        delete _colorSchemes[scheme->name()];
-        _colorSchemes.remove(scheme->name());
+        delete _colorSchemes.take(scheme->name());
     }
 
     _colorSchemes.insert(scheme->name(), scheme);
@@ -165,8 +183,7 @@ bool ColorSchemeManager::deleteColorScheme(const QString &name)
     // look up the path and delete
     QString path = findColorSchemePath(name);
     if (QFile::remove(path)) {
-        delete _colorSchemes[name];
-        _colorSchemes.remove(name);
+        delete _colorSchemes.take(name);
         return true;
     } else {
         qCDebug(KonsoleDebug)<<"Failed to remove color scheme -"<<path;
@@ -212,6 +229,11 @@ QString ColorSchemeManager::findColorSchemePath(const QString &name) const
     }
 
     return QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".schema"));
+}
+
+bool ColorSchemeManager::pathIsColorScheme(const QString &path)
+{
+    return path.endsWith(QLatin1String(".colorscheme"));
 }
 
 bool ColorSchemeManager::isColorSchemeDeletable(const QString &name)

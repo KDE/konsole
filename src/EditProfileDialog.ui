@@ -467,44 +467,7 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout">
-          <item row="0" column="0" rowspan="5">
-           <widget class="QListView" name="colorSchemeList">
-            <property name="verticalScrollMode">
-             <enum>QAbstractItemView::ScrollPerPixel</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QPushButton" name="newColorSchemeButton">
-            <property name="toolTip">
-             <string>Create a new color scheme based upon the selected scheme</string>
-            </property>
-            <property name="text">
-             <string comment="@action:button Create an alternate color scheme">New...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="editColorSchemeButton">
-            <property name="toolTip">
-             <string>Edit the selected color scheme</string>
-            </property>
-            <property name="text">
-             <string>Edit...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="removeColorSchemeButton">
-            <property name="toolTip">
-             <string>Delete the selected color scheme</string>
-            </property>
-            <property name="text">
-             <string>Remove</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QPushButton" name="resetColorSchemeButton">
             <property name="toolTip">
              <string>Reset the selected color scheme settings to the default values</string>
@@ -514,7 +477,41 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="3" column="1">
+           <widget class="QPushButton" name="removeColorSchemeButton">
+            <property name="toolTip">
+             <string>Delete the selected color scheme</string>
+            </property>
+            <property name="text">
+             <string>Remove</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" rowspan="6">
+           <widget class="QListView" name="colorSchemeList">
+            <property name="verticalScrollMode">
+             <enum>QAbstractItemView::ScrollPerPixel</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="KNS3::Button" name="downloadColorSchemeButton">
+            <property name="text">
+             <string>Get New...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="newColorSchemeButton">
+            <property name="toolTip">
+             <string>Create a new color scheme based upon the selected scheme</string>
+            </property>
+            <property name="text">
+             <string comment="@action:button Create an alternate color scheme">New...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
            <spacer>
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -527,8 +524,28 @@
             </property>
            </spacer>
           </item>
-          <item row="5" column="0">
+          <item row="7" column="0">
            <widget class="KMessageWidget" name="transparencyWarningWidget"/>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="editColorSchemeButton">
+            <property name="toolTip">
+             <string>Edit the selected color scheme</string>
+            </property>
+            <property name="text">
+             <string>Edit...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="KMessageWidget" name="colorSchemeMessageWidget">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -1490,6 +1507,11 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
+   <class>KNS3::Button</class>
+   <extends>QPushButton</extends>
+   <header location="global">KNS3/Button</header>
+  </customwidget>
+  <customwidget>
    <class>KPluralHandlingSpinBox</class>
    <extends>QSpinBox</extends>
    <header>KPluralHandlingSpinBox</header>
@@ -1507,7 +1529,7 @@
   <customwidget>
    <class>KMessageWidget</class>
    <extends>QFrame</extends>
-   <header>kmessagewidget.h</header>
+   <header location="global">kmessagewidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

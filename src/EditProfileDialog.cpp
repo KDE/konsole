@@ -1,5 +1,6 @@
 /*
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 2018 by Harald Sitter <sitter@kde.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,13 +38,14 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QDialog>
+
 // KDE
 #include <KCodecAction>
-
 #include <KIconDialog>
 #include <KWindowSystem>
 #include <KMessageBox>
 #include <KLocalizedString>
+#include <KNSCore/DownloadManager>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -537,9 +539,16 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->transparencyWarningWidget->setCloseButtonVisible(false);
     _ui->transparencyWarningWidget->setMessageType(KMessageWidget::Warning);
 
+    _ui->colorSchemeMessageWidget->setVisible(false);
+    _ui->colorSchemeMessageWidget->setWordWrap(true);
+    _ui->colorSchemeMessageWidget->setCloseButtonVisible(false);
+    _ui->colorSchemeMessageWidget->setMessageType(KMessageWidget::Warning);
+
     _ui->editColorSchemeButton->setEnabled(false);
     _ui->removeColorSchemeButton->setEnabled(false);
     _ui->resetColorSchemeButton->setEnabled(false);
+
+    _ui->downloadColorSchemeButton->setConfigFile(QStringLiteral("konsole.knsrc"));
 
     // setup color list
     // select the colorScheme used in the current profile
@@ -563,6 +572,8 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
             &Konsole::EditProfileDialog::removeColorScheme);
     connect(_ui->newColorSchemeButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::newColorScheme);
+    connect(_ui->downloadColorSchemeButton, &KNS3::Button::dialogFinished, this,
+            &Konsole::EditProfileDialog::gotNewColorSchemes);
 
     connect(_ui->resetColorSchemeButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::resetColorScheme);
@@ -842,14 +853,98 @@ void EditProfileDialog::previewColorScheme(const QModelIndex &index)
 void EditProfileDialog::removeColorScheme()
 {
     QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
+    if (selected.isEmpty()) {
+        return;
+    }
 
-    if (!selected.isEmpty()) {
+    // The actual delete runs async because we need to on-demand query
+    // files managed by KNS. Deleting files managed by KNS screws up the
+    // KNS states (entry gets shown as installed when in fact we deleted it).
+    auto *manager = new KNSCore::DownloadManager(QStringLiteral("konsole.knsrc"), this);
+    connect(manager, &KNSCore::DownloadManager::searchResult,
+            [=](const KNSCore::EntryInternal::List &entries) {
         const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
+        Q_ASSERT(!name.isEmpty());
+        bool uninstalled = false;
+        // Check if the theme was installed by KNS, if so uninstall it through
+        // there and unload it.
+        for (auto entry : entries) {
+            for (const auto &file : entry.installedFiles()) {
+                if (ColorSchemeManager::colorSchemeNameFromPath(file) != name) {
+                    continue;
+                }
+                // Make sure the manager can unload it before uninstalling it.
+                if (ColorSchemeManager::instance()->unloadColorScheme(file)) {
+                    manager->uninstallEntry(entry);
+                    uninstalled = true;
+                }
+            }
+            if (uninstalled) {
+                break;
+            }
+        }
 
-        if (ColorSchemeManager::instance()->deleteColorScheme(name)) {
+        // If KNS wasn't able to remove it is a custom theme and we'll drop
+        // it manually.
+        if (!uninstalled) {
+            uninstalled = ColorSchemeManager::instance()->deleteColorScheme(name);
+        }
+
+        if (uninstalled) {
             _ui->colorSchemeList->model()->removeRow(selected.first().row());
         }
+
+        manager->deleteLater();
+    });
+    manager->checkForInstalled();
+
+    return;
+}
+
+void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntries)
+{
+    int failures = 0;
+    for (auto entry : changedEntries) {
+        switch (entry.status()) {
+        case KNS3::Entry::Installed:
+            for (const auto &file : entry.installedFiles()) {
+                if (ColorSchemeManager::instance()->loadColorScheme(file)) {
+                    continue;
+                }
+                qWarning() << "Failed to load file" << file;
+                ++failures;
+            }
+            if (failures == entry.installedFiles().size()) {
+                _ui->colorSchemeMessageWidget->setText(
+                            xi18nc("@info",
+                                   "Scheme <resource>%1</resource> failed to load.",
+                                   entry.name()));
+                _ui->colorSchemeMessageWidget->animatedShow();
+                QTimer::singleShot(8000,
+                                   _ui->colorSchemeMessageWidget,
+                                   &KMessageWidget::animatedHide);
+            }
+            break;
+        case KNS3::Entry::Deleted:
+            for (const auto &file : entry.uninstalledFiles()) {
+                if (ColorSchemeManager::instance()->unloadColorScheme(file)) {
+                    continue;
+                }
+                qWarning() << "Failed to unload file" << file;
+                // If unloading fails we do not care. Iff the scheme failed here
+                // it either wasn't loaded or was invalid to begin with.
+            }
+            break;
+        case KNS3::Entry::Invalid:
+        case KNS3::Entry::Installing:
+        case KNS3::Entry::Downloadable:
+        case KNS3::Entry::Updateable:
+        case KNS3::Entry::Updating:
+            // Not interesting.
+            break;
+        }
     }
+    updateColorSchemeList(currentColorSchemeName());
 }
 
 void EditProfileDialog::resetColorScheme()

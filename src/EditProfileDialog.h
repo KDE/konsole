@@ -1,5 +1,6 @@
 /*
     Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 2018 by Harald Sitter <sitter@kde.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,11 +23,12 @@
 
 // Qt
 #include <QAbstractItemDelegate>
+#include <QDialog>
 #include <QHash>
 #include <QPointer>
 
-// KDE
-#include <QDialog>
+// KDe
+#include <KNS3/Entry>
 
 // Konsole
 #include "Profile.h"
@@ -132,6 +134,7 @@ private Q_SLOTS:
     void editColorScheme();
     void saveColorScheme(const ColorScheme &scheme, bool isNewScheme);
     void removeColorScheme();
+    void gotNewColorSchemes(const KNS3::Entry::List &changedEntries);
 
     /**
      * Deletes the selected colorscheme from the user's home dir location

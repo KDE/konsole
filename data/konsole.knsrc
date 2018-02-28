@@ -1,0 +1,5 @@
+[KNewStuff3]
+ProvidersUrl=https://download.kde.org/ocs/providers.xml
+Categories=Konsole Color Schemes
+TargetDir=konsole
+AcceptHtmlDownloads=false
