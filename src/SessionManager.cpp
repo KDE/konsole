@@ -37,6 +37,7 @@
 #include "ProfileManager.h"
 #include "History.h"
 #include "Enumeration.h"
+#include "TerminalDisplay.h"
 
 using namespace Konsole;
 
@@ -263,6 +264,17 @@ void SessionManager::sessionProfileCommandReceived(const QString &text)
     Session *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
 
+    // store the font for each view if zoom was applied so that they can
+    // be restored after applying the new profile
+    QHash<TerminalDisplay *, QFont> zoomFontSizes;
+
+    foreach (TerminalDisplay *view, session->views()) {
+        const QFont &viewCurFont = view->getVTFont();
+        if (viewCurFont != _sessionProfiles[session]->font()) {
+            zoomFontSizes.insert(view, viewCurFont);
+        }
+    }
+
     ProfileCommandParser parser;
     QHash<Profile::Property, QVariant> changes = parser.parse(text);
 
@@ -283,6 +295,14 @@ void SessionManager::sessionProfileCommandReceived(const QString &text)
     _sessionProfiles[session] = newProfile;
     applyProfile(newProfile, true);
     emit sessionUpdated(session);
+
+    if (!zoomFontSizes.isEmpty()) {
+        QHashIterator<TerminalDisplay *, QFont> it(zoomFontSizes);
+        while (it.hasNext()) {
+            it.next();
+            it.key()->setVTFont(it.value());
+        }
+    }
 }
 
 void SessionManager::saveSessions(KConfig *config)
