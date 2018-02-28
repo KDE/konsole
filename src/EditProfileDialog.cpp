@@ -26,29 +26,29 @@
 
 // Qt
 #include <QBrush>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QFileDialog>
+#include <QFontDialog>
+#include <QInputDialog>
+#include <QIcon>
+#include <QLinearGradient>
 #include <QPainter>
+#include <QPushButton>
+#include <QRadialGradient>
 #include <QStandardItem>
 #include <QTextCodec>
-#include <QLinearGradient>
-#include <QRadialGradient>
-#include <QIcon>
 #include <QTimer>
 #include <QUrl>
-#include <QFontDialog>
-#include <QFileDialog>
-#include <QInputDialog>
-#include <QDialog>
+#include <QVBoxLayout>
 
 // KDE
 #include <KCodecAction>
 #include <KIconDialog>
-#include <KWindowSystem>
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 #include <KNSCore/DownloadManager>
-#include <QDialogButtonBox>
-#include <QPushButton>
-#include <QVBoxLayout>
+#include <KWindowSystem>
 
 // Konsole
 #include "ColorSchemeManager.h"

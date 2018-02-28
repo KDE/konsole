@@ -27,7 +27,7 @@
 #include <QHash>
 #include <QPointer>
 
-// KDe
+// KDE
 #include <KNS3/Entry>
 
 // Konsole
