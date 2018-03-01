@@ -43,7 +43,6 @@ HistorySizeDialog::HistorySizeDialog(QWidget *parent) :
     mainLayout->addWidget(mainWidget);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
-    okButton->setShortcut(Konsole::ACCEL | Qt::Key_Return);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &HistorySizeDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &HistorySizeDialog::reject);
     mainLayout->addWidget(buttonBox);

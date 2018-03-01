@@ -83,7 +83,6 @@ EditProfileDialog::EditProfileDialog(QWidget *aParent) :
     mainLayout->addWidget(mainWidget);
     QPushButton *okButton = mButtonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
-    okButton->setShortcut(Konsole::ACCEL | Qt::Key_Return);
     connect(mButtonBox, &QDialogButtonBox::accepted, this, &Konsole::EditProfileDialog::accept);
     connect(mButtonBox, &QDialogButtonBox::rejected, this, &Konsole::EditProfileDialog::reject);
 
