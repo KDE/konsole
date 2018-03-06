@@ -112,6 +112,11 @@ HistoryFile::HistoryFile() :
     if (_tmpFile.open()) {
         _tmpFile.setAutoRemove(true);
     }
+    // Force Qt to use named files so I don't waste hours trying to find
+    // these files again.  Perhaps investigate if there are any downsides
+    // to doing this.
+    // https://bugreports.qt.io/browse/QTBUG-66577
+    Q_UNUSED(_tmpFile.fileName());
 }
 
 HistoryFile::~HistoryFile()
