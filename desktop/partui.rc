@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsolepart" version="11" translationDomain="konsole">
+<kpartgui name="konsolepart" version="12" translationDomain="konsole">
     <Menu name="session-popup-menu">
         <Action name="edit_copy"/>
         <Action name="edit_paste"/>
@@ -19,6 +19,7 @@
             <Action name="clear-history-and-reset" group="session-history-operations"/>
         </Menu>
         <Separator/>
+        <Action name="view-readonly" />
         <Action name="switch-profile"/>
         <Action name="edit-current-profile"/>
         <Action name="manage-profiles"/>

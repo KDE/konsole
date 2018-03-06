@@ -84,6 +84,8 @@ Session::Session(QObject* parent) :
     , _zmodemProc(nullptr)
     , _zmodemProgress(nullptr)
     , _hasDarkBackground(false)
+    , _preferredSize(QSize())
+    , _readOnly(false)
 {
     _uniqueIdentifier = QUuid::createUuid();
 
@@ -1155,7 +1157,7 @@ void Session::setIconText(const QString& iconText)
 
 QString Session::iconName() const
 {
-    return _iconName;
+    return isReadOnly() ? QStringLiteral("object-locked") : _iconName;
 }
 
 QString Session::iconText() const
@@ -1587,6 +1589,21 @@ QString Session::validDirectory(const QString& dir) const
     }
 
     return validDir;
+}
+
+bool Session::isReadOnly() const
+{
+    return _readOnly;
+}
+
+void Session::setReadOnly(bool readOnly)
+{
+    if (_readOnly != readOnly) {
+        _readOnly = readOnly;
+
+        // Needed to update the tab icon
+        emit titleChanged();
+    }
 }
 
 SessionGroup::SessionGroup(QObject* parent)

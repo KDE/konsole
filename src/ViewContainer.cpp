@@ -37,6 +37,7 @@
 #include <KColorScheme>
 #include <KColorUtils>
 #include <KLocalizedString>
+#include <KActionCollection>
 #include <QMenu>
 
 // Konsole
@@ -46,6 +47,7 @@
 #include "ProfileList.h"
 #include "ViewManager.h"
 #include "KonsoleSettings.h"
+#include "SessionController.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 
@@ -300,6 +302,15 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position,
 
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(_tabBar);
+    connect(_contextPopupMenu, &QMenu::aboutToHide, this, [this]() {
+        // Remove the read-only action when the popup closes
+        for (auto &action : _contextPopupMenu->actions()) {
+            if (action->objectName() == QStringLiteral("view-readonly")) {
+                _contextPopupMenu->removeAction(action);
+                break;
+            }
+        }
+    });
 
 #if defined(ENABLE_DETACHING)
     _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-detach")),
@@ -616,6 +627,16 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
     QAction *detachAction = _contextPopupMenu->actions().at(0);
     detachAction->setEnabled(_tabBar->count() > 1);
 #endif
+
+    // Add the read-only action
+    SessionController *sessionController = qobject_cast<SessionController*>(viewProperties(views()[_contextMenuTabIndex]));
+    if (sessionController != nullptr) {
+        auto collection = sessionController->actionCollection();
+        auto readonlyAction = collection->action(QStringLiteral("view-readonly"));
+        if (readonlyAction != nullptr) {
+            _contextPopupMenu->insertAction(_contextPopupMenu->actions().last(), readonlyAction);
+        }
+    }
 
     _contextPopupMenu->exec(_tabBar->mapToGlobal(point));
 }

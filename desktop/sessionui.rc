@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="24">
+<kpartgui name="session" version="25">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
@@ -29,6 +29,8 @@
             <Action name="monitor-silence" group="session-view-operations"/>
             <Action name="monitor-activity" group="session-view-operations"/>
             <Separator group="session-view-operations"/>
+            <Action name="view-readonly" group="session-view-operations"/>
+            <Separator group="session-view-operations"/>
             <Action name="enlarge-font" group="session-view-operations"/>
             <Action name="shrink-font" group="session-view-operations"/>
             <Action name="set-encoding" group="session-view-operations"/>
@@ -51,6 +53,7 @@
         <Action name="clear-history"/>
         <Action name="adjust-history"/>
         <Separator/>
+        <Action name="view-readonly" />
         <Action name="switch-profile"/>
         <Action name="edit-current-profile"/>
         <Separator/>

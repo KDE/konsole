@@ -175,6 +175,7 @@ public:
 
     /* Returns true if called within a KPart; false if called within Konsole. */
     bool isKonsolePart() const;
+    bool isReadOnly() const;
 
 Q_SIGNALS:
     /**
@@ -260,6 +261,7 @@ private Q_SLOTS:
     void configureWebShortcuts();
     void sendSignal(QAction *action);
     void sendBackgroundColor();
+    void toggleReadOnly();
 
     // other
     void prepareSwitchProfileMenu();
@@ -314,6 +316,7 @@ private:
 
 private:
     void updateSessionIcon();
+    void updateReadOnlyActionState(QAction *action, bool readonly);
 
     QPointer<Session> _session;
     QPointer<TerminalDisplay> _view;

@@ -367,6 +367,9 @@ public:
 
     void reportBackgroundColor(const QColor &c);
 
+    bool isReadOnly() const;
+    void setReadOnly(bool readOnly);
+
 public Q_SLOTS:
 
     /**
@@ -785,6 +788,7 @@ private:
 
     QSize _preferredSize;
 
+    bool _readOnly;
     static int lastSessionId;
 };
 

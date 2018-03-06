@@ -3075,6 +3075,10 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         return;
     }
 
+    if (_sessionController->isReadOnly()) {
+        return;
+    }
+
     if (appendReturn) {
         text.append(QLatin1String("\r"));
     }
@@ -3195,9 +3199,10 @@ void TerminalDisplay::inputMethodEvent(QInputMethodEvent* event)
         emit keyPressedSignal(&keyEvent);
     }
 
-    _inputMethodData.preeditString = event->preeditString();
-    update(preeditRect() | _inputMethodData.previousPreeditRect);
-
+    if (!_sessionController->isReadOnly()) {
+        _inputMethodData.preeditString = event->preeditString();
+        update(preeditRect() | _inputMethodData.previousPreeditRect);
+    }
     event->accept();
 }
 
@@ -3346,6 +3351,12 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
+
+    if (_sessionController->isReadOnly()) {
+        event->accept();
+        return;
+    }
+
     if ((_urlHintsModifiers != 0u) && event->modifiers() == _urlHintsModifiers) {
         int hintSelected = event->key() - 0x31;
         if (hintSelected >= 0 && hintSelected < 10 && hintSelected < _filterChain->hotSpots().count()) {
@@ -3391,6 +3402,11 @@ void TerminalDisplay::keyReleaseEvent(QKeyEvent *event)
     if (_showUrlHint) {
         _showUrlHint = false;
         update();
+    }
+
+    if (_sessionController->isReadOnly()) {
+        event->accept();
+        return;
     }
 
     QWidget::keyReleaseEvent(event);
@@ -3548,7 +3564,7 @@ void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
     //   and pcmanfm
     // That also applies in dropEvent()
     const auto mimeData = event->mimeData();
-    if ((mimeData != nullptr)
+    if ((!_sessionController->isReadOnly()) && (mimeData != nullptr)
             && (mimeData->hasFormat(QStringLiteral("text/plain"))
                 || mimeData->hasFormat(QStringLiteral("text/uri-list")))) {
         event->acceptProposedAction();
@@ -3557,6 +3573,11 @@ void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
 
 void TerminalDisplay::dropEvent(QDropEvent* event)
 {
+    if (_sessionController->isReadOnly()) {
+        event->accept();
+        return;
+    }
+
     const auto mimeData = event->mimeData();
     if (mimeData == nullptr) {
         return;

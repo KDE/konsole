@@ -455,6 +455,16 @@ void SessionController::sendBackgroundColor()
     _session->reportBackgroundColor(c);
 }
 
+void SessionController::toggleReadOnly()
+{
+    QAction *action = qobject_cast<QAction*>(sender());
+    if (action != nullptr) {
+        bool readonly = !isReadOnly();
+        updateReadOnlyActionState(action, readonly);
+        _session->setReadOnly(readonly);
+    }
+}
+
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
 {
     if (event->type() == QEvent::FocusIn && watched == _view) {
@@ -619,6 +629,12 @@ void SessionController::setupCommonActions()
     _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), this);
     collection->addAction(QStringLiteral("switch-profile"), _switchProfileMenu);
     connect(_switchProfileMenu->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::prepareSwitchProfileMenu);
+
+    // Read-only
+    action = collection->addAction(QStringLiteral("view-readonly"), this, SLOT(toggleReadOnly()));
+    action->setText(i18n("Read-only"));
+    action->setCheckable(true);
+    updateReadOnlyActionState(action, isReadOnly());
 
     // History
     _findAction = KStandardAction::find(this, SLOT(searchBarEvent()), collection);
@@ -1511,6 +1527,23 @@ void SessionController::updateSessionIcon()
         }
     }
 }
+
+void SessionController::updateReadOnlyActionState(QAction *action, bool readonly)
+{
+    action->setIcon(QIcon::fromTheme(readonly ? QStringLiteral("object-locked") : QStringLiteral("object-unlocked")));
+    action->setChecked(readonly);
+
+    QAction *editAction = actionCollection()->action(QStringLiteral("edit_paste"));
+    if (editAction != nullptr) {
+        editAction->setEnabled(!readonly);
+    }
+}
+
+bool SessionController::isReadOnly() const
+{
+    return _session->isReadOnly();
+}
+
 void SessionController::sessionTitleChanged()
 {
     if (_sessionIconName != _session->iconName()) {
