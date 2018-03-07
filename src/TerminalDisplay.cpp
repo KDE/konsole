@@ -32,7 +32,7 @@
 #include <QKeyEvent>
 #include <QEvent>
 #include <QFileInfo>
-#include <QGridLayout>
+#include <QVBoxLayout>
 #include <QAction>
 #include <QFontDatabase>
 #include <QLabel>
@@ -55,6 +55,7 @@
 #include <KIO/DropJob>
 #include <KJobWidgets>
 #include <KMessageBox>
+#include <KMessageWidget>
 #include <KIO/StatJob>
 
 // Konsole
@@ -333,7 +334,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     : QWidget(parent)
     , _screenWindow(nullptr)
     , _bellMasked(false)
-    , _gridLayout(nullptr)
+    , _verticalLayout(new QVBoxLayout(this))
     , _fontHeight(1)
     , _fontWidth(1)
     , _fontAscent(1)
@@ -373,7 +374,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _resizeWidget(nullptr)
     , _resizeTimer(nullptr)
     , _flowControlWarningEnabled(false)
-    , _outputSuspendedLabel(nullptr)
+    , _outputSuspendedMessageWidget(nullptr)
     , _lineSpacing(0)
     , _blendColor(qRgba(0, 0, 0, 0xff))
     , _filterChain(new TerminalImageFilterChain())
@@ -387,6 +388,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _trimTrailingSpaces(false)
     , _margin(1)
     , _centerContents(false)
+    , _readOnlyMessageWidget(nullptr)
     , _opacity(1.0)
 {
     // terminal applications are not designed with Right-To-Left in mind,
@@ -435,10 +437,18 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     // that TerminalDisplay will handle repainting its entire area.
     setAttribute(Qt::WA_OpaquePaintEvent);
 
-    _gridLayout = new QGridLayout;
-    _gridLayout->setContentsMargins(0, 0, 0, 0);
+    // Add the stretch item once, the KMessageWidgets are inserted at index 0.
+    _verticalLayout->addStretch();
+    _verticalLayout->setSpacing(0);
 
-    setLayout(_gridLayout);
+    setLayout(_verticalLayout);
+
+    // Take the scrollbar into account and add a margin to the layout. Without the timer the scrollbar width
+    // is garbage.
+    QTimer::singleShot(0, this, [this]() {
+        const int scrollBarWidth = _scrollBar->isVisible() ? geometry().intersected(_scrollBar->geometry()).width() : 0;
+        _verticalLayout->setContentsMargins(0, 0, scrollBarWidth, 0);
+    });
 
     new AutoScrollHandler(this);
 
@@ -455,6 +465,11 @@ TerminalDisplay::~TerminalDisplay()
 
     delete[] _image;
     delete _filterChain;
+    delete _readOnlyMessageWidget;
+    delete _outputSuspendedMessageWidget;
+
+    _readOnlyMessageWidget = nullptr;
+    _outputSuspendedMessageWidget = nullptr;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -972,7 +987,11 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     // if the flow control warning is enabled this will interfere with the
     // scrolling optimizations and cause artifacts.  the simple solution here
     // is to just disable the optimization whilst it is visible
-    if ((_outputSuspendedLabel != nullptr) && _outputSuspendedLabel->isVisible()) {
+    if ((_outputSuspendedMessageWidget != nullptr) && _outputSuspendedMessageWidget->isVisible()) {
+        return;
+    }
+
+    if ((_readOnlyMessageWidget != nullptr) && _readOnlyMessageWidget->isVisible()) {
         return;
     }
 
@@ -2069,6 +2088,19 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 
     if (_screenWindow == nullptr) {
         return;
+    }
+
+    // Ignore clicks on the message widget
+    if (_readOnlyMessageWidget != nullptr) {
+        if (_readOnlyMessageWidget->isVisible() && _readOnlyMessageWidget->frameGeometry().contains(ev->pos())) {
+            return;
+        }
+    }
+
+    if (_outputSuspendedMessageWidget != nullptr) {
+        if (_outputSuspendedMessageWidget->isVisible() && _outputSuspendedMessageWidget->frameGeometry().contains(ev->pos())) {
+            return;
+        }
     }
 
     int charLine;
@@ -3290,54 +3322,71 @@ void TerminalDisplay::setFlowControlWarningEnabled(bool enable)
 void TerminalDisplay::outputSuspended(bool suspended)
 {
     //create the label when this function is first called
-    if (_outputSuspendedLabel == nullptr) {
+    if (_outputSuspendedMessageWidget == nullptr) {
         //This label includes a link to an English language website
         //describing the 'flow control' (Xon/Xoff) feature found in almost
         //all terminal emulators.
         //If there isn't a suitable article available in the target language the link
         //can simply be removed.
-        _outputSuspendedLabel = new QLabel(i18n("<qt>Output has been "
-                                                "<a href=\"http://en.wikipedia.org/wiki/Software_flow_control\">suspended</a>"
-                                                " by pressing Ctrl+S."
-                                                "  Press <b>Ctrl+Q</b> to resume."
-                                                "  Click <a href=\"#close\">here</a> to dismiss this message.</qt>"));
-
-        QPalette palette(_outputSuspendedLabel->palette());
-        KColorScheme::adjustBackground(palette, KColorScheme::NeutralBackground);
-        _outputSuspendedLabel->setPalette(palette);
-        _outputSuspendedLabel->setAutoFillBackground(true);
-        _outputSuspendedLabel->setBackgroundRole(QPalette::Base);
-        _outputSuspendedLabel->setFont(QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont));
-        _outputSuspendedLabel->setContentsMargins(5, 5, 5, 5);
-        _outputSuspendedLabel->setWordWrap(true);
-        _outputSuspendedLabel->setFocusProxy(this);
-
-        connect(_outputSuspendedLabel, &QLabel::linkActivated, this, [this](const QString &url) {
+        auto linkHandler = [this](const QString &url) {
             if (url == QLatin1String("#close")) {
-                _outputSuspendedLabel->setVisible(false);
+                _outputSuspendedMessageWidget->hide();
             } else {
                 QDesktopServices::openUrl(QUrl(url));
             }
-        });
+        };
 
-        //enable activation of "Xon/Xoff" link in label
-        _outputSuspendedLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse |
-                Qt::LinksAccessibleByKeyboard);
-        _outputSuspendedLabel->setOpenExternalLinks(false);
-        _outputSuspendedLabel->setVisible(false);
+        _outputSuspendedMessageWidget = createMessageWidget(i18n("<qt>Output has been "
+                                                    "<a href=\"http://en.wikipedia.org/wiki/Software_flow_control\">suspended</a>"
+                                                    " by pressing Ctrl+S."
+                                                    "  Press <b>Ctrl+Q</b> to resume."
+                                                    "  Click <a href=\"#close\">here</a> to dismiss this message.</qt>"), linkHandler);
 
-        _gridLayout->addWidget(_outputSuspendedLabel);
-        _gridLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding,
-                                             QSizePolicy::Expanding),
-                             1, 0);
+        _outputSuspendedMessageWidget->setMessageType(KMessageWidget::Warning);
+        _outputSuspendedMessageWidget->hide();
     }
 
-    _outputSuspendedLabel->setVisible(suspended);
+    _outputSuspendedMessageWidget->setVisible(suspended);
 }
 
 void TerminalDisplay::dismissOutputSuspendedMessage()
 {
     outputSuspended(false);
+}
+
+KMessageWidget* TerminalDisplay::createMessageWidget(const QString &text, std::function<void (const QString&)> linkHandler) {
+    auto widget = new KMessageWidget(text);
+    widget->setWordWrap(true);
+    widget->setFocusProxy(this);
+    widget->setCloseButtonVisible(false);
+    widget->setCursor(Qt::ArrowCursor);
+
+    connect(widget, &KMessageWidget::linkActivated, this, linkHandler);
+
+    _verticalLayout->insertWidget(0, widget);
+    return widget;
+}
+
+void TerminalDisplay::updateReadOnlyState(bool readonly) {
+
+    if (readonly) {
+        // Lazy create the readonly messagewidget
+        if (_readOnlyMessageWidget == nullptr) {
+
+            auto linkHandler = [this](const QString &url) {
+                if (url == QLatin1String("#close")) {
+                    _readOnlyMessageWidget->hide();
+                }
+            };
+
+            _readOnlyMessageWidget = createMessageWidget(i18n("<qt>This terminal is read-only. <a href=\"#close\">Dismiss</a></qt>"), linkHandler);
+            _readOnlyMessageWidget->setIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
+        }
+    }
+
+    if (_readOnlyMessageWidget != nullptr) {
+        _readOnlyMessageWidget->setVisible(readonly);
+    }
 }
 
 void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode mode, int amount)

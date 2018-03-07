@@ -1537,6 +1537,12 @@ void SessionController::updateReadOnlyActionState(QAction *action, bool readonly
     if (editAction != nullptr) {
         editAction->setEnabled(!readonly);
     }
+
+    // Without the timer, when detaching a tab while the message widget is visible,
+    // the size of the terminal becomes really small...
+    QTimer::singleShot(0, this, [this, readonly]() {
+        _view->updateReadOnlyState(readonly);
+    });
 }
 
 bool SessionController::isReadOnly() const

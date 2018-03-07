@@ -21,6 +21,8 @@
 #ifndef TERMINALDISPLAY_H
 #define TERMINALDISPLAY_H
 
+#include <functional>
+
 // Qt
 #include <QColor>
 #include <QPointer>
@@ -40,12 +42,14 @@ class QDropEvent;
 class QLabel;
 class QTimer;
 class QEvent;
-class QGridLayout;
+class QVBoxLayout;
 class QKeyEvent;
 class QScrollBar;
 class QShowEvent;
 class QHideEvent;
 class QTimerEvent;
+
+class KMessageWidget;
 
 namespace Konsole {
 class FilterChain;
@@ -651,6 +655,9 @@ public Q_SLOTS:
      */
     void setCenterContents(bool enable);
 
+    // Used to show/hide the message widget
+    void updateReadOnlyState(bool readonly);
+
 Q_SIGNALS:
 
     /**
@@ -863,13 +870,16 @@ private:
     // Uses the current settings for trimming whitespace and preserving linebreaks to create a proper flag value for Screen
     Screen::DecodingOptions currentDecodingOptions();
 
+    // Boilerplate setup for MessageWidget
+    KMessageWidget* createMessageWidget(const QString &text, std::function<void (const QString&)> linkHandler);
+
     // the window onto the terminal screen which this display
     // is currently showing.
     QPointer<ScreenWindow> _screenWindow;
 
     bool _bellMasked;
 
-    QGridLayout *_gridLayout;
+    QVBoxLayout *_verticalLayout;
 
     bool _fixedFont; // has fixed pitch
     int _fontHeight;      // height
@@ -952,7 +962,7 @@ private:
 
     //widgets related to the warning message that appears when the user presses Ctrl+S to suspend
     //terminal output - informing them what has happened and how to resume output
-    QLabel *_outputSuspendedLabel;
+    KMessageWidget *_outputSuspendedMessageWidget;
 
     uint _lineSpacing;
 
@@ -999,6 +1009,8 @@ private:
 
     int _margin;      // the contents margin
     bool _centerContents;   // center the contents between margins
+
+    KMessageWidget *_readOnlyMessageWidget; // Message shown at the top when read-only mode gets activated
 
     qreal _opacity;
 
