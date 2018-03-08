@@ -634,7 +634,8 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
         auto collection = sessionController->actionCollection();
         auto readonlyAction = collection->action(QStringLiteral("view-readonly"));
         if (readonlyAction != nullptr) {
-            _contextPopupMenu->insertAction(_contextPopupMenu->actions().last(), readonlyAction);
+            const auto readonlyActions = _contextPopupMenu->actions();
+            _contextPopupMenu->insertAction(readonlyActions.last(), readonlyAction);
         }
     }
 
