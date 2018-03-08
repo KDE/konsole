@@ -632,7 +632,7 @@ void SessionController::setupCommonActions()
 
     // Read-only
     action = collection->addAction(QStringLiteral("view-readonly"), this, SLOT(toggleReadOnly()));
-    action->setText(i18n("Read-only"));
+    action->setText(i18nc("@item:inmenu A read only (locked) session", "Read-only"));
     action->setCheckable(true);
     updateReadOnlyActionState(action, isReadOnly());
 
