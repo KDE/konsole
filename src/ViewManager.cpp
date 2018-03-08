@@ -374,7 +374,12 @@ void ViewManager::detachView(ViewContainer *container, QWidget *view)
         return;
     }
 
-    emit viewDetached(_sessionMap[viewToDetach]);
+    // BR390736 - some instances are sending invalid session to viewDetached()
+    Session *sessionToDetach = _sessionMap[viewToDetach];
+    if (sessionToDetach == nullptr) {
+        return;
+    }
+    emit viewDetached(sessionToDetach);
 
     _sessionMap.remove(viewToDetach);
 
