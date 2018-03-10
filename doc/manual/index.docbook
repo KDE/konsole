@@ -38,14 +38,14 @@
 <holder>&Jonathan.Singer;</holder>
 </copyright>
 <copyright>
-    <year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year><year>2016</year><year>2017</year>
+    <year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year><year>2016</year><year>2017</year><year>2018</year>
 <holder>&Kurt.Hindenburg;</holder>
 </copyright>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2017-01-28</date>
-<releaseinfo>Applications 17.04</releaseinfo>
+<date>2018-03-10</date>
+<releaseinfo>Applications 18.04</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -743,6 +743,14 @@ Upon any activity, an info icon will appear on the session's tab.
 The type of alerts can be changed through
 <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Notifications</guimenuitem><guimenuitem>Activity in monitored session</guimenuitem></menuchoice>.
 </para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu><guimenuitem>Read-only</guimenuitem></menuchoice></term>
+<listitem><para><action>Toggles the session to be read-only: no input is accepted,
+drag and drop is disabled.
+</action></para></listitem>
 </varlistentry>
 
 <varlistentry>
