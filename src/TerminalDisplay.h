@@ -757,6 +757,8 @@ protected:
     void inputMethodEvent(QInputMethodEvent *event) Q_DECL_OVERRIDE;
     QVariant inputMethodQuery(Qt::InputMethodQuery query) const Q_DECL_OVERRIDE;
 
+    void updateScrollBarPalette();
+
 protected Q_SLOTS:
 
     void scrollBarPositionChanged(int value);

@@ -131,6 +131,26 @@ const ColorEntry* TerminalDisplay::colorTable() const
 {
     return _colorTable;
 }
+
+void TerminalDisplay::updateScrollBarPalette()
+{
+    QColor backgroundColor = _colorTable[DEFAULT_BACK_COLOR];
+    backgroundColor.setAlphaF(_opacity);
+    QPalette p = palette();
+    p.setColor(QPalette::Window, backgroundColor);
+
+    //this is a workaround to add some readability to old themes like Fusion
+    //changing the light value for button a bit makes themes like fusion, windows and oxygen way more readable and pleasing
+    QColor buttonColor;
+    buttonColor.setHsvF(backgroundColor.hueF(), backgroundColor.saturationF(), backgroundColor.valueF() + (backgroundColor.valueF() < 0.5 ? 0.2 : -0.2));
+    p.setColor(QPalette::Button, buttonColor);
+
+    p.setColor(QPalette::WindowText, _colorTable[DEFAULT_FORE_COLOR]);
+    p.setColor(QPalette::ButtonText, _colorTable[DEFAULT_FORE_COLOR]);
+    _scrollBar->setPalette(p);
+
+}
+
 void TerminalDisplay::setBackgroundColor(const QColor& color)
 {
     _colorTable[DEFAULT_BACK_COLOR] = color;
@@ -139,9 +159,7 @@ void TerminalDisplay::setBackgroundColor(const QColor& color)
     p.setColor(backgroundRole(), color);
     setPalette(p);
 
-    // Avoid propagating the palette change to the scroll bar
-    _scrollBar->setPalette(QApplication::palette());
-
+    updateScrollBarPalette();
     update();
 }
 QColor TerminalDisplay::getBackgroundColor() const
@@ -153,6 +171,7 @@ void TerminalDisplay::setForegroundColor(const QColor& color)
 {
     _colorTable[DEFAULT_FORE_COLOR] = color;
 
+    updateScrollBarPalette();
     update();
 }
 void TerminalDisplay::setColorTable(const ColorEntry table[])
@@ -399,6 +418,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
 
     // create scroll bar for scrolling output up and down
     _scrollBar = new QScrollBar(this);
+    _scrollBar->setAutoFillBackground(false);
     // set the scroll bar's slider to occupy the whole area of the scroll bar initially
     setScroll(0, 0);
     _scrollBar->setCursor(Qt::ArrowCursor);
@@ -755,6 +775,7 @@ void TerminalDisplay::setOpacity(qreal opacity)
     }*/
 
     _blendColor = color.rgba();
+    updateScrollBarPalette();
 }
 
 void TerminalDisplay::setWallpaper(ColorSchemeWallpaper::Ptr p)
