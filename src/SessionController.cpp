@@ -206,6 +206,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect(_session.data(), &Konsole::Session::getBackgroundColor,
             this, &Konsole::SessionController::sendBackgroundColor);
 
+    connect(_session, &Konsole::Session::primaryScreenInUse, view, &Konsole::TerminalDisplay::usingPrimaryScreen);
+
     _allControllers.insert(this);
 
     // A list of programs that accept Ctrl+C to clear command line used
