@@ -291,7 +291,7 @@ qint64 HistoryScrollFile::startOfLine(int lineno)
         return 0;
     }
     if (lineno <= getLines()) {
-        qint64 res;
+        qint64 res = 0;
         _index.get(reinterpret_cast<char*>(&res), sizeof(qint64), (lineno - 1)*sizeof(qint64));
         return res;
     }
