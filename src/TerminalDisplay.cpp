@@ -1005,6 +1005,11 @@ uint TerminalDisplay::randomSeed() const
 // Instead only new lines have to be drawn
 void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
 {
+    // return if there is nothing to do
+    if ((lines == 0) || (_image == nullptr)) {
+        return;
+    }
+
     // if the flow control warning is enabled this will interfere with the
     // scrolling optimizations and cause artifacts.  the simple solution here
     // is to just disable the optimization whilst it is visible
@@ -1024,9 +1029,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     region.setBottom(qMin(region.bottom(), this->_lines - 2));
 
     // return if there is nothing to do
-    if (lines == 0
-            || _image == nullptr
-            || !region.isValid()
+    if (!region.isValid()
             || (region.top() + abs(lines)) >= region.bottom()
             || this->_lines <= region.height()) {
         return;
