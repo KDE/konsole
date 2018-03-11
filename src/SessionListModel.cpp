@@ -77,7 +77,7 @@ QVariant SessionListModel::data(const QModelIndex &index, int role) const
         } else if (column == 0) {
             return _sessions[row]->sessionId();
         }
-        break;
+        break; // Due to the above 'column' constraints, this is never reached.
     case Qt::DecorationRole:
         if (column == 1) {
             return QIcon::fromTheme(_sessions[row]->iconName());
