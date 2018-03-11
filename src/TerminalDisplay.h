@@ -21,8 +21,6 @@
 #ifndef TERMINALDISPLAY_H
 #define TERMINALDISPLAY_H
 
-#include <functional>
-
 // Qt
 #include <QColor>
 #include <QPointer>
@@ -882,7 +880,7 @@ private:
     Screen::DecodingOptions currentDecodingOptions();
 
     // Boilerplate setup for MessageWidget
-    KMessageWidget* createMessageWidget(const QString &text, std::function<void (const QString&)> linkHandler);
+    KMessageWidget* createMessageWidget(const QString &text);
 
     // the window onto the terminal screen which this display
     // is currently showing.

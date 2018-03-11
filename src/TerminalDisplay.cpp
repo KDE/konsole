@@ -3355,25 +3355,19 @@ void TerminalDisplay::outputSuspended(bool suspended)
         //all terminal emulators.
         //If there isn't a suitable article available in the target language the link
         //can simply be removed.
-        auto linkHandler = [this](const QString &url) {
-            if (url == QLatin1String("#close")) {
-                _outputSuspendedMessageWidget->hide();
-            } else {
-                QDesktopServices::openUrl(QUrl(url));
-            }
-        };
-
         _outputSuspendedMessageWidget = createMessageWidget(i18n("<qt>Output has been "
                                                     "<a href=\"http://en.wikipedia.org/wiki/Software_flow_control\">suspended</a>"
                                                     " by pressing Ctrl+S."
-                                                    "  Press <b>Ctrl+Q</b> to resume."
-                                                    "  Click <a href=\"#close\">here</a> to dismiss this message.</qt>"), linkHandler);
+                                                    " Press <b>Ctrl+Q</b> to resume.</qt>"));
+
+        connect(_outputSuspendedMessageWidget, &KMessageWidget::linkActivated, this, [this](const QString &url) {
+            QDesktopServices::openUrl(QUrl(url));
+        });
 
         _outputSuspendedMessageWidget->setMessageType(KMessageWidget::Warning);
-        _outputSuspendedMessageWidget->hide();
     }
 
-    _outputSuspendedMessageWidget->setVisible(suspended);
+    suspended ? _outputSuspendedMessageWidget->animatedShow() : _outputSuspendedMessageWidget->animatedHide();
 }
 
 void TerminalDisplay::dismissOutputSuspendedMessage()
@@ -3381,14 +3375,11 @@ void TerminalDisplay::dismissOutputSuspendedMessage()
     outputSuspended(false);
 }
 
-KMessageWidget* TerminalDisplay::createMessageWidget(const QString &text, std::function<void (const QString&)> linkHandler) {
+KMessageWidget* TerminalDisplay::createMessageWidget(const QString &text) {
     auto widget = new KMessageWidget(text);
     widget->setWordWrap(true);
     widget->setFocusProxy(this);
-    widget->setCloseButtonVisible(false);
     widget->setCursor(Qt::ArrowCursor);
-
-    connect(widget, &KMessageWidget::linkActivated, this, linkHandler);
 
     _verticalLayout->insertWidget(0, widget);
     return widget;
@@ -3399,20 +3390,13 @@ void TerminalDisplay::updateReadOnlyState(bool readonly) {
     if (readonly) {
         // Lazy create the readonly messagewidget
         if (_readOnlyMessageWidget == nullptr) {
-
-            auto linkHandler = [this](const QString &url) {
-                if (url == QLatin1String("#close")) {
-                    _readOnlyMessageWidget->hide();
-                }
-            };
-
-            _readOnlyMessageWidget = createMessageWidget(i18n("<qt>This terminal is read-only. <a href=\"#close\">Dismiss</a></qt>"), linkHandler);
+            _readOnlyMessageWidget = createMessageWidget(i18n("This terminal is read-only."));
             _readOnlyMessageWidget->setIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
         }
     }
 
     if (_readOnlyMessageWidget != nullptr) {
-        _readOnlyMessageWidget->setVisible(readonly);
+        readonly ? _readOnlyMessageWidget->animatedShow() : _readOnlyMessageWidget->animatedHide();
     }
 }
 
