@@ -259,7 +259,7 @@ public:
      * implementation returns 0 (no extra features) */
     virtual Features supportedFeatures() const
     {
-        return 0;
+        return nullptr;
     }
 
     /** Sets the menu to be shown when the new view button is clicked.

@@ -56,7 +56,7 @@ class KONSOLEPRIVATE_EXPORT ColorSchemeEditor : public QDialog
 
 public:
     /** Constructs a new color scheme editor with the specified parent. */
-    explicit ColorSchemeEditor(QWidget *parent = 0);
+    explicit ColorSchemeEditor(QWidget *parent = nullptr);
     ~ColorSchemeEditor() Q_DECL_OVERRIDE;
 
     /** Initializes the dialog with the properties of the specified color scheme. */

@@ -206,9 +206,9 @@ class CompactHistoryBlock
 public:
     CompactHistoryBlock() :
         _blockLength(4096 * 64), // 256kb
-        _head(static_cast<quint8 *>(mmap(0, _blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0))),
-        _tail(0),
-        _blockStart(0),
+        _head(static_cast<quint8 *>(mmap(nullptr, _blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0))),
+        _tail(nullptr),
+        _blockStart(nullptr),
         _allocCount(0)
     {
         Q_ASSERT(_head != MAP_FAILED);
