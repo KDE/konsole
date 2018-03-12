@@ -1313,6 +1313,7 @@ void Vt102Emulation::setMode(int m)
         break;
 
     case MODE_AppScreen:
+        _screen[1]->setDefaultRendition();
         _screen[1]->clearSelection();
         setScreen(1);
         break;
