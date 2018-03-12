@@ -520,6 +520,7 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
         connect(_searchBar.data(), &Konsole::IncrementalSearchBar::findPreviousClicked, this, &Konsole::SessionController::findPreviousInHistory);
         connect(_searchBar.data(), &Konsole::IncrementalSearchBar::highlightMatchesToggled , this , &Konsole::SessionController::highlightMatches);
         connect(_searchBar.data(), &Konsole::IncrementalSearchBar::matchCaseToggled, this, &Konsole::SessionController::changeSearchMatch);
+        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::matchRegExpToggled, this, &Konsole::SessionController::changeSearchMatch);
 
         // if the search bar was previously active
         // then re-enter search mode
