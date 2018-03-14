@@ -70,7 +70,7 @@
         <choice name="ShowTabBarWhenNeeded" />
         <choice name="AlwaysHideTabBar" />
       </choices>
-      <default>AlwaysShowTabBar</default>
+      <default>ShowTabBarWhenNeeded</default>
     </entry>
     <entry name="TabBarPosition" type="Enum">
       <label>Control the position of the tab bar</label>
