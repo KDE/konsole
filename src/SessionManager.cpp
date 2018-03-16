@@ -212,11 +212,13 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr profile,
     }
 
     // Tab formats
-    if (apply.shouldApply(Profile::LocalTabTitleFormat)) {
+    // Preserve tab title changes, made by the user, when applying profile
+    // changes or previewing color schemes
+    if (apply.shouldApply(Profile::LocalTabTitleFormat) && !session->isTabTitleSetByUser()) {
         session->setTabTitleFormat(Session::LocalTabTitle,
                                    profile->localTabTitleFormat());
     }
-    if (apply.shouldApply(Profile::RemoteTabTitleFormat)) {
+    if (apply.shouldApply(Profile::RemoteTabTitleFormat) && !session->isTabTitleSetByUser()) {
         session->setTabTitleFormat(Session::RemoteTabTitle,
                                    profile->remoteTabTitleFormat());
     }

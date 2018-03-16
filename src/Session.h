@@ -172,6 +172,12 @@ public:
     /** Returns the format used by this session for tab titles. */
     QString tabTitleFormat(TabTitleContext context) const;
 
+    /**
+     * Returns true if the tab title has been changed by the user via the
+     * rename-tab dialog.
+     */
+    bool isTabTitleSetByUser() const;
+
     /** Returns the arguments passed to the shell process when run() is called. */
     QStringList arguments() const;
     /** Returns the program name of the shell process started when run() is called. */
@@ -684,6 +690,11 @@ Q_SIGNALS:
      */
     void getBackgroundColor();
 
+    /**
+     * Relays the tabRenamedByUser signal from SessionController
+     */
+    void tabRenamedByUser(bool renamed) const;
+
 private Q_SLOTS:
     void done(int, QProcess::ExitStatus);
 
@@ -713,6 +724,8 @@ private Q_SLOTS:
     void onPrimaryScreenInUse(bool use);
 
     void sessionAttributeRequest(int id);
+
+    void tabTitleSetByUser(bool set);
 
 private:
     Q_DISABLE_COPY(Session)
@@ -759,6 +772,8 @@ private:
 
     QString _localTabTitleFormat;
     QString _remoteTabTitleFormat;
+
+    bool _tabTitleSetByUser;
 
     QString _iconName;
     QString _iconText;        // not actually used

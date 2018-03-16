@@ -74,6 +74,7 @@ Session::Session(QObject* parent) :
     , _silenceSeconds(10)
     , _autoClose(true)
     , _closePerUserRequest(false)
+    , _tabTitleSetByUser(false)
     , _addToUtmp(true)
     , _flowControlEnabled(true)
     , _sessionId(0)
@@ -120,6 +121,8 @@ Session::Session(QObject* parent) :
     _activityTimer = new QTimer(this);
     _activityTimer->setSingleShot(true);
     connect(_activityTimer, &QTimer::timeout, this, &Konsole::Session::activityTimerDone);
+
+    connect(this, &Konsole::Session::tabRenamedByUser, this, &Konsole::Session::tabTitleSetByUser);
 }
 
 Session::~Session()
@@ -567,6 +570,16 @@ QString Session::tabTitleFormat(TabTitleContext context) const
     }
 
     return QString();
+}
+
+void Session::tabTitleSetByUser(bool set)
+{
+    _tabTitleSetByUser = set;
+}
+
+bool Session::isTabTitleSetByUser() const
+{
+    return _tabTitleSetByUser;
 }
 
 void Session::silenceTimerDone()

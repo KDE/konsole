@@ -164,6 +164,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // listen to title and icon changes
     connect(_session.data(), &Konsole::Session::titleChanged, this, &Konsole::SessionController::sessionTitleChanged);
 
+    connect(this, &Konsole::SessionController::tabRenamedByUser,  _session,  &Konsole::Session::tabRenamedByUser);
+
     connect(_session.data() , &Konsole::Session::currentDirectoryChanged , this , &Konsole::SessionController::currentDirectoryChanged);
 
     // listen for color changes
@@ -841,9 +843,12 @@ void SessionController::editCurrentProfile()
 
 void SessionController::renameSession()
 {
+    const QString &sessionLocalTabTitleFormat = _session->tabTitleFormat(Session::LocalTabTitle);
+    const QString &sessionRemoteTabTitleFormat = _session->tabTitleFormat(Session::RemoteTabTitle);
+
     QScopedPointer<RenameTabDialog> dialog(new RenameTabDialog(QApplication::activeWindow()));
-    dialog->setTabTitleText(_session->tabTitleFormat(Session::LocalTabTitle));
-    dialog->setRemoteTabTitleText(_session->tabTitleFormat(Session::RemoteTabTitle));
+    dialog->setTabTitleText(sessionLocalTabTitleFormat);
+    dialog->setRemoteTabTitleText(sessionRemoteTabTitleFormat);
 
     if (_session->isRemote()) {
         dialog->focusRemoteTabTitleText();
@@ -858,14 +863,21 @@ void SessionController::renameSession()
     }
 
     if (result != 0) {
-        QString tabTitle = dialog->tabTitleText();
-        QString remoteTabTitle = dialog->remoteTabTitleText();
+        const QString &tabTitle = dialog->tabTitleText();
+        const QString &remoteTabTitle = dialog->remoteTabTitleText();
 
-        _session->setTabTitleFormat(Session::LocalTabTitle, tabTitle);
-        _session->setTabTitleFormat(Session::RemoteTabTitle, remoteTabTitle);
+        if (tabTitle != sessionLocalTabTitleFormat) {
+            _session->setTabTitleFormat(Session::LocalTabTitle, tabTitle);
+            emit tabRenamedByUser(true);
+            // trigger an update of the tab text
+            snapshot();
+        }
 
-        // trigger an update of the tab text
-        snapshot();
+        if(remoteTabTitle != sessionRemoteTabTitleFormat) {
+            _session->setTabTitleFormat(Session::RemoteTabTitle, remoteTabTitle);
+            emit tabRenamedByUser(true);
+            snapshot();
+        }
     }
 }
 
