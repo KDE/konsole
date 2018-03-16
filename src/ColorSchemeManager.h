@@ -102,10 +102,10 @@ public:
     bool isColorSchemeDeletable(const QString &name);
 
     // loads a color scheme from a KDE 4+ .colorscheme file
-    bool loadColorScheme(const QString &path);
+    bool loadColorScheme(const QString &filePath);
 
     // unloads a color scheme by it's file path (doesn't delete!)
-    bool unloadColorScheme(const QString &path);
+    bool unloadColorScheme(const QString &filePath);
 
     // @returns the scheme name of a given file or a null string if the file is
     //   no theme
