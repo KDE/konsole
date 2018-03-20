@@ -409,6 +409,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _margin(1)
     , _centerContents(false)
     , _readOnlyMessageWidget(nullptr)
+    , _readOnly(false)
     , _opacity(1.0)
 {
     // terminal applications are not designed with Right-To-Left in mind,
@@ -3138,7 +3139,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         return;
     }
 
-    if (_sessionController->isReadOnly()) {
+    if (_readOnly) {
         return;
     }
 
@@ -3262,7 +3263,7 @@ void TerminalDisplay::inputMethodEvent(QInputMethodEvent* event)
         emit keyPressedSignal(&keyEvent);
     }
 
-    if (!_sessionController->isReadOnly()) {
+    if (!_readOnly) {
         _inputMethodData.preeditString = event->preeditString();
         update(preeditRect() | _inputMethodData.previousPreeditRect);
     }
@@ -3390,6 +3391,9 @@ KMessageWidget* TerminalDisplay::createMessageWidget(const QString &text) {
 }
 
 void TerminalDisplay::updateReadOnlyState(bool readonly) {
+    if (_readOnly == readonly) {
+        return;
+    }
 
     if (readonly) {
         // Lazy create the readonly messagewidget
@@ -3402,6 +3406,8 @@ void TerminalDisplay::updateReadOnlyState(bool readonly) {
     if (_readOnlyMessageWidget != nullptr) {
         readonly ? _readOnlyMessageWidget->animatedShow() : _readOnlyMessageWidget->animatedHide();
     }
+
+    _readOnly = readonly;
 }
 
 void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode mode, int amount)
@@ -3416,7 +3422,7 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
 
-    if (_sessionController->isReadOnly()) {
+    if (_readOnly) {
         event->accept();
         return;
     }
@@ -3468,7 +3474,7 @@ void TerminalDisplay::keyReleaseEvent(QKeyEvent *event)
         update();
     }
 
-    if (_sessionController->isReadOnly()) {
+    if (_readOnly) {
         event->accept();
         return;
     }
@@ -3628,7 +3634,7 @@ void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
     //   and pcmanfm
     // That also applies in dropEvent()
     const auto mimeData = event->mimeData();
-    if ((!_sessionController->isReadOnly()) && (mimeData != nullptr)
+    if ((!_readOnly) && (mimeData != nullptr)
             && (mimeData->hasFormat(QStringLiteral("text/plain"))
                 || mimeData->hasFormat(QStringLiteral("text/uri-list")))) {
         event->acceptProposedAction();
@@ -3637,7 +3643,7 @@ void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
 
 void TerminalDisplay::dropEvent(QDropEvent* event)
 {
-    if (_sessionController->isReadOnly()) {
+    if (_readOnly) {
         event->accept();
         return;
     }

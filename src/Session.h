@@ -594,6 +594,9 @@ Q_SIGNALS:
     /** Emitted when the session's title has changed. */
     void titleChanged();
 
+    /** Emitted when the session gets locked / unlocked. */
+    void readOnlyChanged();
+
     /**
      * Emitted when the activity state of this session changes.
      *
