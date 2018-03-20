@@ -275,6 +275,7 @@ private Q_SLOTS:
     void movementKeyFromSearchBarReceived(QKeyEvent *event);
     void sessionStateChanged(int state);
     void sessionTitleChanged();
+    void sessionReadOnlyChanged();
     void searchTextChanged(const QString &text);
     void searchCompleted(bool success);
     void searchClosed(); // called when the user clicks on the
@@ -321,7 +322,7 @@ private:
 
 private:
     void updateSessionIcon();
-    void updateReadOnlyActionState(QAction *action, bool readonly);
+    void updateReadOnlyActionStates();
 
     QPointer<Session> _session;
     QPointer<TerminalDisplay> _view;

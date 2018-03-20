@@ -163,6 +163,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect(_session.data(), &Konsole::Session::stateChanged, this, &Konsole::SessionController::sessionStateChanged);
     // listen to title and icon changes
     connect(_session.data(), &Konsole::Session::titleChanged, this, &Konsole::SessionController::sessionTitleChanged);
+    connect(_session.data(), &Konsole::Session::readOnlyChanged, this, &Konsole::SessionController::sessionReadOnlyChanged);
 
     connect(this, &Konsole::SessionController::tabRenamedByUser,  _session,  &Konsole::Session::tabRenamedByUser);
 
@@ -464,7 +465,6 @@ void SessionController::toggleReadOnly()
     QAction *action = qobject_cast<QAction*>(sender());
     if (action != nullptr) {
         bool readonly = !isReadOnly();
-        updateReadOnlyActionState(action, readonly);
         _session->setReadOnly(readonly);
     }
 }
@@ -635,12 +635,6 @@ void SessionController::setupCommonActions()
     collection->addAction(QStringLiteral("switch-profile"), _switchProfileMenu);
     connect(_switchProfileMenu->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::prepareSwitchProfileMenu);
 
-    // Read-only
-    action = collection->addAction(QStringLiteral("view-readonly"), this, SLOT(toggleReadOnly()));
-    action->setText(i18nc("@item:inmenu A read only (locked) session", "Read-only"));
-    action->setCheckable(true);
-    updateReadOnlyActionState(action, isReadOnly());
-
     // History
     _findAction = KStandardAction::find(this, SLOT(searchBarEvent()), collection);
     collection->setDefaultShortcut(_findAction, QKeySequence());
@@ -659,6 +653,12 @@ void SessionController::setupCommonActions()
     collection->addAction(QStringLiteral("set-encoding"), _codecAction);
     connect(_codecAction->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::updateCodecAction);
     connect(_codecAction, static_cast<void(KCodecAction::*)(QTextCodec*)>(&KCodecAction::triggered), this, &Konsole::SessionController::changeCodec);
+
+    // Read-only
+    action = collection->addAction(QStringLiteral("view-readonly"), this, SLOT(toggleReadOnly()));
+    action->setText(i18nc("@item:inmenu A read only (locked) session", "Read-only"));
+    action->setCheckable(true);
+    updateReadOnlyActionStates();
 }
 
 void SessionController::setupExtraActions()
@@ -1543,15 +1543,31 @@ void SessionController::updateSessionIcon()
     }
 }
 
-void SessionController::updateReadOnlyActionState(QAction *action, bool readonly)
+void SessionController::updateReadOnlyActionStates()
 {
-    action->setIcon(QIcon::fromTheme(readonly ? QStringLiteral("object-locked") : QStringLiteral("object-unlocked")));
-    action->setChecked(readonly);
+    bool readonly = isReadOnly();
+    QAction *readonlyAction = actionCollection()->action(QStringLiteral("view-readonly"));
+    Q_ASSERT(readonlyAction != nullptr);
+    readonlyAction->setIcon(QIcon::fromTheme(readonly ? QStringLiteral("object-locked") : QStringLiteral("object-unlocked")));
+    readonlyAction->setChecked(readonly);
 
-    QAction *editAction = actionCollection()->action(QStringLiteral("edit_paste"));
-    if (editAction != nullptr) {
-        editAction->setEnabled(!readonly);
-    }
+    auto updateActionState = [this, readonly](const QString &name) {
+        QAction *action = actionCollection()->action(name);
+        if (action != nullptr) {
+            action->setEnabled(!readonly);
+        }
+    };
+
+    updateActionState(QStringLiteral("edit_paste"));
+    updateActionState(QStringLiteral("clear-history"));
+    updateActionState(QStringLiteral("clear-history-and-reset"));
+    updateActionState(QStringLiteral("edit-current-profile"));
+    updateActionState(QStringLiteral("switch-profile"));
+    updateActionState(QStringLiteral("adjust-history"));
+    updateActionState(QStringLiteral("send-signal"));
+    updateActionState(QStringLiteral("zmodem-upload"));
+
+    _codecAction->setEnabled(!readonly);
 
     // Without the timer, when detaching a tab while the message widget is visible,
     // the size of the terminal becomes really small...
@@ -1590,6 +1606,20 @@ void SessionController::sessionTitleChanged()
     emit rawTitleChanged();
 }
 
+void SessionController::sessionReadOnlyChanged() {
+    // Trigger icon update
+    sessionTitleChanged();
+
+    updateReadOnlyActionStates();
+
+    // Update all views
+    for (TerminalDisplay* view : session()->views()) {
+        if (view != _view.data()) {
+            view->updateReadOnlyState(isReadOnly());
+        }
+    }
+}
+
 void SessionController::showDisplayContextMenu(const QPoint& position)
 {
     // needed to make sure the popup menu is available, even if a hosting
@@ -1606,6 +1636,8 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 
     QPointer<QMenu> popup = qobject_cast<QMenu*>(factory()->container(QStringLiteral("session-popup-menu"), this));
     if (popup != nullptr) {
+        updateReadOnlyActionStates();
+
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
         QList<QAction*> contentActions = _view->filterActions(position);
         auto contentSeparator = new QAction(popup);

@@ -208,6 +208,10 @@ bool Session::isRunning() const
 
 void Session::setCodec(QTextCodec* codec)
 {
+    if (isReadOnly()) {
+        return;
+    }
+
     emulation()->setCodec(codec);
 }
 
@@ -856,12 +860,20 @@ bool Session::closeInForceWay()
 
 void Session::sendTextToTerminal(const QString& text, const QChar& eol) const
 {
+    if (isReadOnly()) {
+        return;
+    }
+
     _emulation->sendText(text + eol);
 }
 
 // Only D-Bus calls this function (via SendText or runCommand)
 void Session::sendText(const QString& text) const
 {
+    if (isReadOnly()) {
+        return;
+    }
+
 #if !defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
     if (show_disallow_certain_dbus_methods_message) {
 
@@ -944,6 +956,10 @@ QStringList Session::environment() const
 
 void Session::setEnvironment(const QStringList& environment)
 {
+    if (isReadOnly()) {
+        return;
+    }
+
     _environment = environment;
 }
 
@@ -1268,6 +1284,10 @@ bool Session::autoClose() const
 
 void Session::setFlowControlEnabled(bool enabled)
 {
+    if (isReadOnly()) {
+        return;
+    }
+
     _flowControlEnabled = enabled;
 
     if (_shellProcess != nullptr) {
@@ -1496,6 +1516,10 @@ QString Session::tabTitleFormat(int context) const
 
 void Session::setHistorySize(int lines)
 {
+    if (isReadOnly()) {
+        return;
+    }
+
     if (lines < 0) {
         setHistoryType(HistoryTypeFile());
     } else if (lines == 0) {
@@ -1614,8 +1638,9 @@ void Session::setReadOnly(bool readOnly)
     if (_readOnly != readOnly) {
         _readOnly = readOnly;
 
-        // Needed to update the tab icon
-        emit titleChanged();
+        // Needed to update the tab icons and all
+        // attached views.
+        emit readOnlyChanged();
     }
 }
 

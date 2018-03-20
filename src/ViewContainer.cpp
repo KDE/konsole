@@ -321,13 +321,13 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position,
     _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-rename")),
                                  i18nc("@action:inmenu", "&Rename Tab..."), this,
                                  SLOT(tabContextMenuRenameTab()));
+    _contextPopupMenu->actions().last()->setObjectName(QStringLiteral("edit-rename"));
 
     _contextPopupMenu->addSeparator();
 
     _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-close")),
                                  i18nc("@action:inmenu", "&Close Tab"), this,
                                  SLOT(tabContextMenuCloseTab()));
-
     // The 'new tab' and 'close tab' button
     _newTabButton = new QToolButton(_containerWidget);
     _newTabButton->setFocusPolicy(Qt::NoFocus);
@@ -636,6 +636,14 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
         if (readonlyAction != nullptr) {
             const auto readonlyActions = _contextPopupMenu->actions();
             _contextPopupMenu->insertAction(readonlyActions.last(), readonlyAction);
+        }
+
+        // Disable tab rename
+        for (auto *action : _contextPopupMenu->actions()) {
+            if (action->objectName() == QStringLiteral("edit-rename")) {
+                action->setEnabled(!sessionController->isReadOnly());
+                break;
+            }
         }
     }
 
