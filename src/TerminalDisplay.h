@@ -1022,7 +1022,7 @@ private:
 
     KMessageWidget *_readOnlyMessageWidget; // Message shown at the top when read-only mode gets activated
 
-    // Needed to know wether the mode really changed between update calls
+    // Needed to know whether the mode really changed between update calls
     bool _readOnly;
 
     qreal _opacity;
