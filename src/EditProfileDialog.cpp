@@ -1218,6 +1218,9 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     layout->addWidget(editor);
     layout->addWidget(buttonBox);
     dialog->setLayout(layout);
+    // see also the size set in the KeyBindingEditor constructor
+    dialog->setMinimumSize(480, 430);
+    dialog->resize(500, 500);
 
     if (dialog->exec() == QDialog::Accepted) {
         auto newTranslator = new KeyboardTranslator(*editor->translator());
