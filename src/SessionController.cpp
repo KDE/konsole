@@ -1578,7 +1578,11 @@ void SessionController::updateReadOnlyActionStates()
 
 bool SessionController::isReadOnly() const
 {
-    return _session->isReadOnly();
+    if (!_session.isNull()) {
+        return _session->isReadOnly();
+    } else {
+        return false;
+    }
 }
 
 void SessionController::sessionTitleChanged()
