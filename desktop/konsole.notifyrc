@@ -117,6 +117,7 @@ Name[sv]=Ljudsignal i fokuserad session
 Name[uk]=Гудок у фокусований сеанс
 Name[x-test]=xxBell in Focused Sessionxx
 Name[zh_CN]=取得焦点的会话中的响铃
+Name[zh_TW]=取得焦點的工作階段響鈴
 Comment=Bell emitted within a focused session
 Comment[ca]=Timbre emès en una sessió amb focus
 Comment[ca@valencia]=Timbre emés en una sessió amb focus
@@ -142,6 +143,7 @@ Comment[sv]=Ljudsignal avges inne i en fokuserad session
 Comment[uk]=Звучить гудок у фокусованому сеансі
 Comment[x-test]=xxBell emitted within a focused sessionxx
 Comment[zh_CN]=取得焦点的会话中发生的响铃
+Comment[zh_TW]=取得焦點的工作階段響鈴行為
 Action=None
 
 [Event/BellInvisible]
@@ -170,6 +172,7 @@ Name[sv]=Ljudsignal i icke-fokuserad session
 Name[uk]=Гудок у нефокусованому сеансі
 Name[x-test]=xxBell in Non-Focused Sessionxx
 Name[zh_CN]=未取得焦点的会话中的响铃
+Name[zh_TW]=未取得焦點的工作階段響鈴
 Comment=Bell emitted within a non-focused session
 Comment[ca]=Timbre emès en una sessió sense focus
 Comment[ca@valencia]=Timbre emés en una sessió sense focus
@@ -195,6 +198,7 @@ Comment[sv]=Ljudsignal avges inne i en icke-fokuserad session
 Comment[uk]=Звучить гудок у нефокусованому сеансі
 Comment[x-test]=xxBell emitted within a non-focused sessionxx
 Comment[zh_CN]=未取得焦点的会话中发生的响铃
+Comment[zh_TW]=未取得焦點的工作階段中的響鈴行為
 Sound=Oxygen-Sys-App-Message.ogg
 Action=Popup
 
@@ -224,6 +228,7 @@ Name[sv]=Aktivitet i icke-fokuserad bevakad session
 Name[uk]=Дії у нефокусованому сеансі спостереження
 Name[x-test]=xxActivity in Non-Focused Monitored Sessionxx
 Name[zh_CN]=未取得焦点的被监视会话中的活动
+Name[zh_TW]=監控未取得焦點的工作階段
 Comment=Activity detected in a non-focused monitored session
 Comment[ca]=Activitat detectada en una sessió controlada sense focus
 Comment[ca@valencia]=Activitat detectada en una sessió controlada sense focus
@@ -249,6 +254,7 @@ Comment[sv]=Aktivitet funnen i en icke-fokuserad bevakad session
 Comment[uk]=У нефокусованому сеансі спостереження виявлено дії
 Comment[x-test]=xxActivity detected in a non-focused monitored sessionxx
 Comment[zh_CN]=未取得焦点的被监视会话中检测到的活动
+Comment[zh_TW]=監控未取得焦點的工作階段中偵測到的活動
 Action=Popup
 
 [Event/Activity]
@@ -442,6 +448,7 @@ Name[sv]=Tystnad i icke-fokuserad bevakad session
 Name[uk]=Тиша у нефокусованому сеансі спостереження
 Name[x-test]=xxSilence in Non-Focused Monitored Sessionxx
 Name[zh_CN]=未取得焦点的被监视会话中的静默
+Name[zh_TW]=監控未取得焦點工作階段的靜默行為
 Comment=Silence detected in a non-focused monitored session
 Comment[ca]=Silenci detectat en una sessió controlada sense focus
 Comment[ca@valencia]=Silenci detectat en una sessió controlada sense focus
@@ -467,6 +474,7 @@ Comment[sv]=Tystnad funnen i en icke-fokuserad bevakad session
 Comment[uk]=В нефокусованому сеансі спостереження виявлено тишу
 Comment[x-test]=xxSilence detected in a non-focused monitored sessionxx
 Comment[zh_CN]=未取得焦点的被监视会话中检测到的静默
+Comment[zh_TW]=監控未取得焦點的工作階段中偵測到靜默時的行為
 Action=Popup
 
 [Event/Silence]
