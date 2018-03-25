@@ -3421,6 +3421,12 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
+
+    if (_readOnly) {
+        event->accept();
+        return;
+    }
+
     if ((_urlHintsModifiers != 0u) && event->modifiers() == _urlHintsModifiers) {
         int hintSelected = event->key() - 0x31;
         if (hintSelected >= 0 && hintSelected < 10 && hintSelected < _filterChain->hotSpots().count()) {
@@ -3437,29 +3443,25 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
         }
     }
 
-    if (!_readOnly) {
-        _screenWindow->screen()->setCurrentTerminalDisplay(this);
+    _screenWindow->screen()->setCurrentTerminalDisplay(this);
 
-        _actSel = 0; // Key stroke implies a screen update, so TerminalDisplay won't
-        // know where the current selection is.
+    _actSel = 0; // Key stroke implies a screen update, so TerminalDisplay won't
+    // know where the current selection is.
 
-        if (_allowBlinkingCursor) {
-            _blinkCursorTimer->start();
-            if (_cursorBlinking) {
-                // if cursor is blinking(hidden), blink it again to show it
-                blinkCursorEvent();
-            }
-            Q_ASSERT(!_cursorBlinking);
+    if (_allowBlinkingCursor) {
+        _blinkCursorTimer->start();
+        if (_cursorBlinking) {
+            // if cursor is blinking(hidden), blink it again to show it
+            blinkCursorEvent();
         }
+        Q_ASSERT(!_cursorBlinking);
     }
 
     emit keyPressedSignal(event);
 
 #ifndef QT_NO_ACCESSIBILITY
-    if (!_readOnly) {
-        QAccessibleTextCursorEvent textCursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX());
-        QAccessible::updateAccessibility(&textCursorEvent);
-    }
+    QAccessibleTextCursorEvent textCursorEvent(this, _usedColumns * screenWindow()->screen()->getCursorY() + screenWindow()->screen()->getCursorX());
+    QAccessible::updateAccessibility(&textCursorEvent);
 #endif
 
     event->accept();
