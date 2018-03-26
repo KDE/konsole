@@ -1578,7 +1578,7 @@ void SessionController::updateReadOnlyActionStates()
 
 bool SessionController::isReadOnly() const
 {
-    if (!_session.isNull()) {
+    if (_session != nullptr) {
         return _session->isReadOnly();
     } else {
         return false;

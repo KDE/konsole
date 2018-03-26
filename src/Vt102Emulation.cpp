@@ -37,6 +37,7 @@
 
 // Konsole
 #include "KeyboardTranslator.h"
+#include "SessionController.h"
 #include "TerminalDisplay.h"
 
 using Konsole::Vt102Emulation;
@@ -1042,6 +1043,12 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
     const Qt::KeyboardModifiers modifiers = event->modifiers();
     KeyboardTranslator::States states = KeyboardTranslator::NoState;
 
+    TerminalDisplay * currentView = _currentScreen->currentTerminalDisplay();
+    bool isReadOnly = false;
+    if (currentView->sessionController() != nullptr) {
+        isReadOnly = currentView->sessionController()->isReadOnly();
+    }
+
     // get current states
     if (getMode(MODE_NewLine)) {
         states |= KeyboardTranslator::NewLineState;
@@ -1059,16 +1066,18 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         states |= KeyboardTranslator::ApplicationKeypadState;
     }
 
-    // check flow control state
-    if ((modifiers &Qt::ControlModifier) != 0u) {
-        switch (event->key()) {
-        case Qt::Key_S:
-            emit flowControlKeyPressed(true);
-            break;
-        case Qt::Key_Q:
-        case Qt::Key_C: // cancel flow control
-            emit flowControlKeyPressed(false);
-            break;
+    if (!isReadOnly) {
+        // check flow control state
+        if ((modifiers &Qt::ControlModifier) != 0u) {
+            switch (event->key()) {
+            case Qt::Key_S:
+                emit flowControlKeyPressed(true);
+                break;
+            case Qt::Key_Q:
+            case Qt::Key_C: // cancel flow control
+                emit flowControlKeyPressed(false);
+                break;
+            }
         }
     }
 
@@ -1104,8 +1113,6 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 
         if ( entry.command() != KeyboardTranslator::NoCommand )
         {
-            TerminalDisplay * currentView = _currentScreen->currentTerminalDisplay();
-
             if ((entry.command() & KeyboardTranslator::EraseCommand) != 0) {
                 textToSend += eraseChar();
             } else if ((entry.command() & KeyboardTranslator::ScrollPageUpCommand) != 0) {
@@ -1128,16 +1135,20 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
             textToSend += _codec->fromUnicode(event->text());
         }
 
-        emit sendData(textToSend);
+        if (!isReadOnly) {
+            emit sendData(textToSend);
+        }
     } else {
-        // print an error message to the terminal if no key translator has been
-        // set
-        QString translatorError =  i18n("No keyboard translator available.  "
-                                         "The information needed to convert key presses "
-                                         "into characters to send to the terminal "
-                                         "is missing.");
-        reset();
-        receiveData(translatorError.toLatin1().constData(), translatorError.count());
+        if (!isReadOnly) {
+            // print an error message to the terminal if no key translator has been
+            // set
+            QString translatorError =  i18n("No keyboard translator available.  "
+                                             "The information needed to convert key presses "
+                                             "into characters to send to the terminal "
+                                             "is missing.");
+            reset();
+            receiveData(translatorError.toLatin1().constData(), translatorError.count());
+        }
     }
 }
 
