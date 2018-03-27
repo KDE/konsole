@@ -485,10 +485,10 @@ TerminalDisplay::~TerminalDisplay()
     disconnect(_blinkTextTimer);
     disconnect(_blinkCursorTimer);
 
-    delete[] _image;
-    delete _filterChain;
     delete _readOnlyMessageWidget;
     delete _outputSuspendedMessageWidget;
+    delete[] _image;
+    delete _filterChain;
 
     _readOnlyMessageWidget = nullptr;
     _outputSuspendedMessageWidget = nullptr;
