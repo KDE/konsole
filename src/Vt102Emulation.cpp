@@ -1044,6 +1044,9 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
     KeyboardTranslator::States states = KeyboardTranslator::NoState;
 
     TerminalDisplay * currentView = _currentScreen->currentTerminalDisplay();
+    if (currentView == nullptr) {
+        return;
+    }
     bool isReadOnly = false;
     if (currentView->sessionController() != nullptr) {
         isReadOnly = currentView->sessionController()->isReadOnly();
