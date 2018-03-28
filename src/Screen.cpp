@@ -54,6 +54,7 @@ const Character Screen::DefaultChar = Character(' ',
                                       false);
 
 Screen::Screen(int lines, int columns):
+    _currentTerminalDisplay(nullptr),
     _lines(lines),
     _columns(columns),
     _screenLines(new ImageLine[_lines + 1]),
