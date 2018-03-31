@@ -2166,7 +2166,9 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
                     _actSel = 1; // left mouse button pressed but nothing selected yet.
                 }
             } else {
-                emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+                if(!_readOnly) {
+                    emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+                }
             }
 
             if ((_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
@@ -2184,7 +2186,9 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
         if (_mouseMarks || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
             emit configureRequest(ev->pos());
         } else {
-            emit mouseSignal(2, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+            if(!_readOnly) {
+                emit mouseSignal(2, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+            }
         }
     }
 }
@@ -2610,11 +2614,13 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)
             Q_ASSERT(false);
         }
     } else {
-        int charLine = 0;
-        int charColumn = 0;
-        getCharacterPosition(ev->pos(), charLine, charColumn);
+        if(!_readOnly) {
+            int charLine = 0;
+            int charColumn = 0;
+            getCharacterPosition(ev->pos(), charLine, charColumn);
 
-        emit mouseSignal(1, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+            emit mouseSignal(1, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+        }
     }
 }
 
@@ -2642,11 +2648,13 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
 
     // pass on double click as two clicks.
     if (!_mouseMarks && !(ev->modifiers() & Qt::ShiftModifier)) {
-        // Send just _ONE_ click event, since the first click of the double click
-        // was already sent by the click handler
-        emit mouseSignal(0, charColumn + 1,
-                         charLine + 1 + _scrollBar->value() - _scrollBar->maximum(),
-                         0);  // left button
+        if(!_readOnly) {
+            // Send just _ONE_ click event, since the first click of the double click
+            // was already sent by the click handler
+            emit mouseSignal(0, charColumn + 1,
+                             charLine + 1 + _scrollBar->value() - _scrollBar->maximum(),
+                             0);  // left button
+        }
         return;
     }
 
@@ -2725,10 +2733,10 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 
     const int modifiers = ev->modifiers();
 
-    _scrollWheelState.addWheelEvent(ev);
-
     // ctrl+<wheel> for zooming, like in konqueror and firefox
     if (((modifiers & Qt::ControlModifier) != 0u) && mouseWheelZoom()) {
+        _scrollWheelState.addWheelEvent(ev);
+
         int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
         for (;steps > 0; --steps) {
             // wheel-up for increasing font size
@@ -2738,21 +2746,22 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             // wheel-down for decreasing font size
             decreaseFontSize();
         }
+    } else if (_mouseMarks && (_scrollBar->maximum() > 0)) {
+        // If the program running in the terminal is not interested in mouse events,
+        // send the event to the scrollbar if the slider has room to move
 
-        return;
-    }
+        _scrollWheelState.addWheelEvent(ev);
 
-    // If the program running in the terminal is not interested in mouse events:
-    //  - Send the event to the scrollbar if the slider has room to move
-    //  - Otherwise, send simulated up / down key presses to the terminal program
-    //    for the benefit of programs such as 'less' (which use the alternate screen)
-    if (_mouseMarks) {
-        const bool canScroll = _scrollBar->maximum() > 0;
-        if (canScroll) {
-            _scrollBar->event(ev);
-            _sessionController->setSearchStartToWindowCurrentLine();
-            _scrollWheelState.clearAll();
-        } else if (!_isPrimaryScreen) {
+        _scrollBar->event(ev);
+        _sessionController->setSearchStartToWindowCurrentLine();
+        _scrollWheelState.clearAll();
+    } else if (!_readOnly) {
+        _scrollWheelState.addWheelEvent(ev);
+
+        if(_mouseMarks && !_isPrimaryScreen) {
+            // Send simulated up / down key presses to the terminal program
+            // for the benefit of programs such as 'less' (which use the alternate screen)
+
             // assume that each Up / Down key event will cause the terminal application
             // to scroll by one line.
             //
@@ -2765,22 +2774,23 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             QKeyEvent keyEvent(QEvent::KeyPress, keyCode, Qt::NoModifier);
 
             for (int i = 0; i < abs(lines); i++) {
+                _screenWindow->screen()->setCurrentTerminalDisplay(this);
                 emit keyPressedSignal(&keyEvent);
             }
-        }
-    } else {
-        // terminal program wants notification of mouse activity
+        } else if (!_mouseMarks) {
+            // terminal program wants notification of mouse activity
 
-        int charLine;
-        int charColumn;
-        getCharacterPosition(ev->pos() , charLine , charColumn);
-        const int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
-        const int button = (steps > 0) ? 4 : 5;
-        for (int i = 0; i < abs(steps); ++i) {
-            emit mouseSignal(button,
-                             charColumn + 1,
-                             charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
-                             0);
+            int charLine;
+            int charColumn;
+            getCharacterPosition(ev->pos() , charLine , charColumn);
+            const int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
+            const int button = (steps > 0) ? 4 : 5;
+            for (int i = 0; i < abs(steps); ++i) {
+                emit mouseSignal(button,
+                                 charColumn + 1,
+                                 charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
+                                 0);
+            }
         }
     }
 }
