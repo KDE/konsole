@@ -948,9 +948,17 @@ void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntri
 
 void EditProfileDialog::resetColorScheme()
 {
-    removeColorScheme();
-    // select the colorScheme used in the current profile
-    updateColorSchemeList(currentColorSchemeName());
+
+    QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
+
+    if (!selected.isEmpty()) {
+        const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
+
+        ColorSchemeManager::instance()->deleteColorScheme(name);
+
+        // select the colorScheme used in the current profile
+        updateColorSchemeList(currentColorSchemeName());
+    }
 }
 
 void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
