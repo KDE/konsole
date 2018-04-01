@@ -27,6 +27,7 @@ using namespace Konsole;
 
 ScreenWindow::ScreenWindow(Screen *screen, QObject *parent) :
     QObject(parent),
+    _screen(nullptr),
     _windowBuffer(nullptr),
     _windowBufferSize(0),
     _bufferNeedsUpdate(true),

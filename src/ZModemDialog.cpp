@@ -30,7 +30,9 @@
 using Konsole::ZModemDialog;
 
 ZModemDialog::ZModemDialog(QWidget *aParent, bool modal, const QString &caption) :
-    QDialog(aParent)
+    QDialog(aParent),
+    _textEdit(nullptr),
+    mButtonBox(nullptr)
 {
     setObjectName(QStringLiteral("zmodem_progress"));
     setModal(modal);

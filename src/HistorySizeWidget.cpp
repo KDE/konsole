@@ -33,7 +33,8 @@
 using namespace Konsole;
 
 HistorySizeWidget::HistorySizeWidget(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent),
+    _ui(nullptr)
 {
     _ui = new Ui::HistorySizeWidget();
     _ui->setupUi(this);

@@ -27,6 +27,8 @@ QString ViewProperties::_mimeType = QStringLiteral("application/x-konsole-view-i
 
 ViewProperties::ViewProperties(QObject *parent) :
     QObject(parent),
+    _icon(QIcon()),
+    _title(QString()),
     _identifier(0)
 {
 }

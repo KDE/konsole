@@ -33,7 +33,8 @@
 using namespace Konsole;
 
 HistorySizeDialog::HistorySizeDialog(QWidget *parent) :
-    QDialog(parent)
+    QDialog(parent),
+    _ui(nullptr)
 {
     setWindowTitle(i18nc("@title:window", "Adjust Scrollback"));
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);

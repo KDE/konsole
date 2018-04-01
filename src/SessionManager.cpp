@@ -41,7 +41,11 @@
 
 using namespace Konsole;
 
-SessionManager::SessionManager()
+SessionManager::SessionManager() :
+    _sessions(QList<Session *>()),
+    _sessionProfiles(QHash<Session *, Profile::Ptr>()),
+    _sessionRuntimeProfiles(QHash<Session *, Profile::Ptr>()),
+    _restoreMapping(QHash<Session *, int>())
 {
     ProfileManager *profileMananger = ProfileManager::instance();
     connect(profileMananger, &Konsole::ProfileManager::profileChanged, this,

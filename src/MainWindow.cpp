@@ -63,7 +63,10 @@ using namespace Konsole;
 
 MainWindow::MainWindow() :
     KXmlGuiWindow(),
+    _viewManager(nullptr),
     _bookmarkHandler(nullptr),
+    _toggleMenuBarAction(nullptr),
+    _newTabMenuAction(nullptr),
     _pluggedController(nullptr),
     _menuBarInitialVisibility(true),
     _menuBarInitialVisibilityApplied(false)

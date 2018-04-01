@@ -36,6 +36,7 @@ PlainTextDecoder::PlainTextDecoder()
     , _includeLeadingWhitespace(true)
     , _includeTrailingWhitespace(true)
     , _recordLinePositions(false)
+    , _linePositions(QList<int>())
 {
 }
 void PlainTextDecoder::setLeadingWhitespace(bool enable)
@@ -167,6 +168,8 @@ HTMLDecoder::HTMLDecoder() :
     , _colorTable(ColorScheme::defaultTable)
     , _innerSpanOpen(false)
     , _lastRendition(DEFAULT_RENDITION)
+    , _lastForeColor(CharacterColor())
+    , _lastBackColor(CharacterColor())
 {
 }
 

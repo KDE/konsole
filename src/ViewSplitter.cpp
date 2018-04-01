@@ -32,6 +32,7 @@ using Konsole::ViewContainer;
 
 ViewSplitter::ViewSplitter(QWidget *parent) :
     QSplitter(parent),
+    _containers(QList<ViewContainer *>()),
     _recursiveSplitting(true)
 {
 }

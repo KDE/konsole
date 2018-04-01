@@ -32,7 +32,8 @@
 using Konsole::RenameTabDialog;
 
 RenameTabDialog::RenameTabDialog(QWidget *parent) :
-    QDialog(parent)
+    QDialog(parent),
+    _ui(nullptr)
 {
     setWindowTitle(i18n("Rename Tab"));
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);

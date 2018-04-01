@@ -43,7 +43,10 @@ ViewContainerTabBar::ViewContainerTabBar(QWidget *parent, TabbedViewContainer *c
     _dropIndicator(nullptr),
     _dropIndicatorIndex(-1),
     _drawIndicatorDisabled(false),
-    _connectedContainer(container)
+    _supportedMimeType(QString()),
+    _connectedContainer(container),
+    _dragStart(QPoint()),
+    _mousePressTimer(nullptr)
 {
     setDrawBase(true);
     setDocumentMode(true);

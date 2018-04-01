@@ -52,6 +52,8 @@ int ViewManager::lastManagerId = 0;
 ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     QObject(parent),
     _viewSplitter(nullptr),
+    _pluggedController(nullptr),
+    _sessionMap(QHash<TerminalDisplay *, Session *>()),
     _actionCollection(collection),
     _navigationMethod(TabbedNavigation),
     _navigationVisibility(ViewContainer::AlwaysShowNavigation),

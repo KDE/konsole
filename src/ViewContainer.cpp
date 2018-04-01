@@ -57,6 +57,9 @@ ViewContainer::ViewContainer(NavigationPosition position, QObject *parent) :
     QObject(parent),
     _navigationVisibility(AlwaysShowNavigation),
     _navigationPosition(position),
+    _views(QList<QWidget *>()),
+    _navigation(QHash<QWidget *, ViewProperties *>()),
+    _features(nullptr),
     _searchBar(nullptr)
 {
 }
@@ -273,8 +276,16 @@ QList<QWidget *> ViewContainer::widgetsForItem(ViewProperties *item) const
 TabbedViewContainer::TabbedViewContainer(NavigationPosition position,
                                          ViewManager *connectedViewManager, QObject *parent) :
     ViewContainer(position, parent),
+    _tabBar(nullptr),
+    _stackWidget(nullptr),
+    _containerWidget(nullptr),
     _connectedViewManager(connectedViewManager),
-    _contextMenuTabIndex(0)
+    _layout(nullptr),
+    _tabBarLayout(nullptr),
+    _newTabButton(nullptr),
+    _closeTabButton(nullptr),
+    _contextMenuTabIndex(0),
+    _contextPopupMenu(nullptr)
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
@@ -820,7 +831,9 @@ ViewManager *TabbedViewContainer::connectedViewManager()
 }
 
 StackedViewContainer::StackedViewContainer(QObject *parent) :
-    ViewContainer(NavigationPositionTop, parent)
+    ViewContainer(NavigationPositionTop, parent),
+    _containerWidget(nullptr),
+    _stackWidget(nullptr)
 {
     _containerWidget = new QWidget;
     auto layout = new QVBoxLayout(_containerWidget);

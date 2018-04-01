@@ -35,6 +35,7 @@ using namespace Konsole;
 
 KeyBindingEditor::KeyBindingEditor(QWidget *parent) :
     QWidget(parent),
+    _ui(nullptr),
     _translator(new KeyboardTranslator(QString()))
 {
     _ui = new Ui::KeyBindingEditor();

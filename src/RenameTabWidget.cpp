@@ -26,7 +26,8 @@
 using Konsole::RenameTabWidget;
 
 RenameTabWidget::RenameTabWidget(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent),
+    _ui(nullptr)
 {
     _ui = new Ui::RenameTabWidget();
     _ui->setupUi(this);

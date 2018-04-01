@@ -34,7 +34,8 @@ using Konsole::Session;
 using Konsole::SessionListModel;
 
 SessionListModel::SessionListModel(QObject *parent) :
-    QAbstractListModel(parent)
+    QAbstractListModel(parent),
+    _sessions(QList<Session *>())
 {
 }
 

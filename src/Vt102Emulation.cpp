@@ -66,6 +66,9 @@ unsigned short Konsole::vt100_graphics[32] = {
 
 Vt102Emulation::Vt102Emulation() :
     Emulation(),
+    _currentModes(TerminalState()),
+    _savedModes(TerminalState()),
+    _pendingTitleUpdates(QHash<int, QString>()),
     _titleUpdateTimer(new QTimer(this)),
     _reportFocusEvents(false)
 {

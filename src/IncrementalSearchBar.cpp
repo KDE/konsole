@@ -45,7 +45,8 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *aParent) :
     _reverseSearch(nullptr),
     _findNextButton(nullptr),
     _findPreviousButton(nullptr),
-    _searchFromButton(nullptr)
+    _searchFromButton(nullptr),
+    _searchTimer(nullptr)
 {
     auto barLayout = new QHBoxLayout(this);
 

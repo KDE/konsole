@@ -99,6 +99,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _view(view)
     , _copyToGroup(nullptr)
     , _profileList(nullptr)
+    , _sessionIcon(QIcon())
+    , _sessionIconName(QString())
     , _previousState(-1)
     , _searchFilter(nullptr)
     , _urlFilter(nullptr)
@@ -107,6 +109,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _findAction(nullptr)
     , _findNextAction(nullptr)
     , _findPreviousAction(nullptr)
+    , _interactionTimer(nullptr)
     , _searchStartLine(0)
     , _prevSearchResultLine(0)
     , _searchBar(nullptr)
@@ -116,8 +119,11 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
     , _keepIconUntilInteraction(false)
+    , _selectedText(QString())
     , _showMenuAction(nullptr)
+    , _bookmarkValidProgramsToClear(QStringList())
     , _isSearchBarEnabled(false)
+    , _editProfileDialog(nullptr)
 {
     Q_ASSERT(session);
     Q_ASSERT(view);
