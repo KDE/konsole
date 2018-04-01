@@ -32,14 +32,15 @@
 
 using namespace Konsole;
 
-ExtendedCharTable::ExtendedCharTable()
+ExtendedCharTable::ExtendedCharTable() :
+    _extendedCharTable(QHash<ushort, ushort *>())
 {
 }
 
 ExtendedCharTable::~ExtendedCharTable()
 {
     // free all allocated character buffers
-    QHashIterator<ushort, ushort *> iter(extendedCharTable);
+    QHashIterator<ushort, ushort *> iter(_extendedCharTable);
     while (iter.hasNext()) {
         iter.next();
         delete[] iter.value();
@@ -57,7 +58,7 @@ ushort ExtendedCharTable::createExtendedChar(const ushort *unicodePoints, ushort
     bool triedCleaningSolution = false;
 
     // check existing entry for match
-    while (extendedCharTable.contains(hash) && hash != 0) { // 0 has a special meaning for chars so we don't use it
+    while (_extendedCharTable.contains(hash) && hash != 0) { // 0 has a special meaning for chars so we don't use it
         if (extendedCharMatch(hash, unicodePoints, length)) {
             // this sequence already has an entry in the table,
             // return its hash
@@ -80,13 +81,13 @@ ushort ExtendedCharTable::createExtendedChar(const ushort *unicodePoints, ushort
                         }
                     }
 
-                    QHash<ushort, ushort *>::iterator it = extendedCharTable.begin();
-                    QHash<ushort, ushort *>::iterator itEnd = extendedCharTable.end();
+                    QHash<ushort, ushort *>::iterator it = _extendedCharTable.begin();
+                    QHash<ushort, ushort *>::iterator itEnd = _extendedCharTable.end();
                     while (it != itEnd) {
                         if (usedExtendedChars.contains(it.key())) {
                             ++it;
                         } else {
-                            it = extendedCharTable.erase(it);
+                            it = _extendedCharTable.erase(it);
                         }
                     }
                 } else {
@@ -105,7 +106,7 @@ ushort ExtendedCharTable::createExtendedChar(const ushort *unicodePoints, ushort
         buffer[i + 1] = unicodePoints[i];
     }
 
-    extendedCharTable.insert(hash, buffer);
+    _extendedCharTable.insert(hash, buffer);
 
     return hash;
 }
@@ -115,7 +116,7 @@ ushort *ExtendedCharTable::lookupExtendedChar(ushort hash, ushort &length) const
     // look up index in table and if found, set the length
     // argument and return a pointer to the character sequence
 
-    ushort *buffer = extendedCharTable[hash];
+    ushort *buffer = _extendedCharTable[hash];
     if (buffer != nullptr) {
         length = buffer[0];
         return buffer + 1;
@@ -137,7 +138,7 @@ ushort ExtendedCharTable::extendedCharHash(const ushort *unicodePoints, ushort l
 bool ExtendedCharTable::extendedCharMatch(ushort hash, const ushort *unicodePoints,
                                           ushort length) const
 {
-    ushort *entry = extendedCharTable[hash];
+    ushort *entry = _extendedCharTable[hash];
 
     // compare given length with stored sequence length ( given as the first ushort in the
     // stored buffer )

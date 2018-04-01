@@ -74,7 +74,7 @@ private:
     // internal, maps hash keys to character sequence buffers.  The first ushort
     // in each value is the length of the buffer, followed by the ushorts in the buffer
     // themselves.
-    QHash<ushort, ushort *> extendedCharTable;
+    QHash<ushort, ushort *> _extendedCharTable;
 };
 }
 #endif  // end of EXTENDEDCHARTABLE_H
