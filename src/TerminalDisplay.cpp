@@ -3357,7 +3357,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
                                                     " by pressing Ctrl+S."
                                                     " Press <b>Ctrl+Q</b> to resume.</qt>"));
 
-        connect(_outputSuspendedMessageWidget, &KMessageWidget::linkActivated, this, [this](const QString &url) {
+        connect(_outputSuspendedMessageWidget, &KMessageWidget::linkActivated, this, [](const QString &url) {
             QDesktopServices::openUrl(QUrl(url));
         });
 
