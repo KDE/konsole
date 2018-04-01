@@ -811,34 +811,26 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
     // brush from the scroll-bar's palette, to give the effect of the scroll-bar
     // being outside of the terminal display and visual consistency with other KDE
     // applications.
-    //
-    QRect scrollBarArea = _scrollBar->isVisible() ?
-                          rect.intersected(_scrollBar->geometry()) :
-                          QRect();
-    QRegion contentsRegion = QRegion(rect).subtracted(scrollBarArea);
-    QRect contentsRect = contentsRegion.boundingRect();
 
     if (useOpacitySetting && !_wallpaper->isNull() &&
-            _wallpaper->draw(painter, contentsRect, _opacity)) {
+            _wallpaper->draw(painter, rect, _opacity)) {
     } else if (qAlpha(_blendColor) < 0xff && useOpacitySetting) {
 #if defined(Q_OS_MACOS)
         // TODO - On MacOS, using CompositionMode doesn't work.  Altering the
         //        transparency in the color scheme alters the brightness.
-        painter.fillRect(contentsRect, backgroundColor);
+        painter.fillRect(rect, backgroundColor);
 #else
         QColor color(backgroundColor);
         color.setAlpha(qAlpha(_blendColor));
 
         painter.save();
         painter.setCompositionMode(QPainter::CompositionMode_Source);
-        painter.fillRect(contentsRect, color);
+        painter.fillRect(rect, color);
         painter.restore();
 #endif
     } else {
-        painter.fillRect(contentsRect, backgroundColor);
+        painter.fillRect(rect, backgroundColor);
     }
-
-    painter.fillRect(scrollBarArea, _scrollBar->palette().background());
 }
 
 void TerminalDisplay::drawCursor(QPainter& painter,
