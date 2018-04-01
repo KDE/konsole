@@ -227,7 +227,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
 SessionController::~SessionController()
 {
-    if (_view != nullptr) {
+    if (!_view.isNull()) {
         _view->setScreenWindow(nullptr);
     }
 
@@ -261,7 +261,7 @@ void SessionController::interactionHandler()
 
 void SessionController::snapshot()
 {
-    Q_ASSERT(_session != nullptr);
+    Q_ASSERT(!_session.isNull());
 
     QString title = _session->getDynamicTitle();
     title         = title.simplified();
@@ -513,14 +513,14 @@ void SessionController::removeSearchFilter()
 void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
 {
     // disconnect the existing search bar
-    if (_searchBar != nullptr) {
+    if (!_searchBar.isNull()) {
         disconnect(this, nullptr, _searchBar, nullptr);
         disconnect(_searchBar, nullptr, this, nullptr);
     }
 
     // connect new search bar
     _searchBar = searchBar;
-    if (_searchBar != nullptr) {
+    if (!_searchBar.isNull()) {
         connect(_searchBar.data(), &Konsole::IncrementalSearchBar::unhandledMovementKeyPressed, this, &Konsole::SessionController::movementKeyFromSearchBarReceived);
         connect(_searchBar.data(), &Konsole::IncrementalSearchBar::closeClicked, this, &Konsole::SessionController::searchClosed);
         connect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchFromClicked, this, &Konsole::SessionController::searchFrom);
@@ -864,7 +864,7 @@ void SessionController::renameSession()
 
     QPointer<Session> guard(_session);
     int result = dialog->exec();
-    if (guard == nullptr) {
+    if (guard.isNull()) {
         return;
     }
 
@@ -1089,7 +1089,7 @@ void SessionController::copyInputToSelectedTabs()
 
     QPointer<Session> guard(_session);
     int result = dialog->exec();
-    if (guard == nullptr) {
+    if (guard.isNull()) {
         return;
     }
 
@@ -1192,7 +1192,7 @@ void SessionController::listenForScreenWindowUpdates()
 
 void SessionController::updateSearchFilter()
 {
-    if ((_searchFilter != nullptr) && (_searchBar != nullptr)) {
+    if ((_searchFilter != nullptr) && (!_searchBar.isNull())) {
         _view->processFilters();
     }
 }
@@ -1214,7 +1214,7 @@ void SessionController::searchBarEvent()
 
 void SessionController::enableSearchBar(bool showSearchBar)
 {
-    if (_searchBar == nullptr) {
+    if (_searchBar.isNull()) {
         return;
     }
 
@@ -1234,7 +1234,7 @@ void SessionController::enableSearchBar(bool showSearchBar)
                    &Konsole::SessionController::findPreviousInHistory);
         disconnect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchShiftPlusReturnPressed, this,
                    &Konsole::SessionController::findNextInHistory);
-        if ((_view != nullptr) && (_view->screenWindow() != nullptr)) {
+        if ((!_view.isNull()) && (_view->screenWindow() != nullptr)) {
             _view->screenWindow()->setCurrentResultLine(-1);
         }
     }
@@ -1275,7 +1275,7 @@ void SessionController::searchHistory(bool showSearchBar)
 {
     enableSearchBar(showSearchBar);
 
-    if (_searchBar != nullptr) {
+    if (!_searchBar.isNull()) {
         if (showSearchBar) {
             removeSearchFilter();
 
@@ -1325,7 +1325,7 @@ void SessionController::searchCompleted(bool success)
 {
     _prevSearchResultLine = _view->screenWindow()->currentResultLine();
 
-    if (_searchBar != nullptr) {
+    if (!_searchBar.isNull()) {
         _searchBar->setFoundMatch(success);
     }
 }
@@ -1435,7 +1435,7 @@ void SessionController::showHistoryOptions()
 
     QPointer<Session> guard(_session);
     int result = dialog->exec();
-    if (guard == nullptr) {
+    if (guard.isNull()) {
         return;
     }
 
@@ -1584,7 +1584,7 @@ void SessionController::updateReadOnlyActionStates()
 
 bool SessionController::isReadOnly() const
 {
-    if (_session != nullptr) {
+    if (!_session.isNull()) {
         return _session->isReadOnly();
     } else {
         return false;
@@ -1645,7 +1645,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
     }
 
     QPointer<QMenu> popup = qobject_cast<QMenu*>(factory()->container(QStringLiteral("session-popup-menu"), this));
-    if (popup != nullptr) {
+    if (!popup.isNull()) {
         updateReadOnlyActionStates();
 
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
@@ -1673,7 +1673,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         QAction* chosen = popup->exec(_view->mapToGlobal(position));
 
         // check for validity of the pointer to the popup menu
-        if (popup != nullptr) {
+        if (!popup.isNull()) {
             // Remove content-specific actions
             //
             // If the close action was chosen, the popup menu will be partially
@@ -1900,7 +1900,7 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
 
     // transfer LINES_PER_REQUEST lines from the session's history
     // to the save location
-    if (info.session != nullptr) {
+    if (!info.session.isNull()) {
         // note:  when retrieving lines from the emulation,
         // the first line is at index 0.
 
@@ -2128,7 +2128,7 @@ QRegularExpression SearchHistoryTask::regExp() const
 
 QString SessionController::userTitle() const
 {
-    if (_session != nullptr) {
+    if (!_session.isNull()) {
         return _session->userTitle();
     } else {
         return QString();

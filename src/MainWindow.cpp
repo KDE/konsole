@@ -239,7 +239,7 @@ void MainWindow::activeViewChanged(SessionController *controller)
     connect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, controller,
             &Konsole::SessionController::openUrl);
 
-    if (_pluggedController != nullptr) {
+    if (!_pluggedController.isNull()) {
         disconnectController(_pluggedController);
     }
 
@@ -277,7 +277,7 @@ void MainWindow::activeViewTitleChanged(ViewProperties *properties)
 
 void MainWindow::updateWindowCaption()
 {
-    if (_pluggedController == nullptr) {
+    if (_pluggedController.isNull()) {
         return;
     }
 
@@ -301,7 +301,7 @@ void MainWindow::updateWindowCaption()
 
 void MainWindow::updateWindowIcon()
 {
-    if ((_pluggedController != nullptr) && !_pluggedController->icon().isNull()) {
+    if ((!_pluggedController.isNull()) && !_pluggedController->icon().isNull()) {
         setWindowIcon(_pluggedController->icon());
     }
 }
@@ -446,7 +446,7 @@ void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
 
 QString MainWindow::activeSessionDir() const
 {
-    if (_pluggedController != nullptr) {
+    if (!_pluggedController.isNull()) {
         if (Session *session = _pluggedController->session()) {
             // For new tabs to get the correct working directory,
             // force the updating of the currentWorkingDirectory.
@@ -645,7 +645,7 @@ bool MainWindow::queryClose()
     case KMessageBox::Yes:
         return true;
     case KMessageBox::No:
-        if ((_pluggedController != nullptr) && (_pluggedController->session() != nullptr)) {
+        if ((!_pluggedController.isNull()) && (!_pluggedController->session().isNull())) {
             disconnectController(_pluggedController);
             _pluggedController->session()->closeInNormalWay();
         }
@@ -886,7 +886,7 @@ void MainWindow::configureNotifications()
 
 void MainWindow::setBlur(bool blur)
 {
-    if (_pluggedController == nullptr) {
+    if (_pluggedController.isNull()) {
         return;
     }
 

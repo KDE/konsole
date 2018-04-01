@@ -402,7 +402,7 @@ void ViewManager::sessionFinished()
 {
     // if this slot is called after the view manager's main widget
     // has been destroyed, do nothing
-    if (_viewSplitter == nullptr) {
+    if (_viewSplitter.isNull()) {
         return;
     }
 
@@ -422,7 +422,7 @@ void ViewManager::sessionFinished()
     // Only remove the controller from factory() if it's actually controlling
     // the session from the sender.
     // This fixes BUG: 348478 - messed up menus after a detached tab is closed
-    if ((_pluggedController != nullptr) && (_pluggedController->session() == session)) {
+    if ((!_pluggedController.isNull()) && (_pluggedController->session() == session)) {
         // This is needed to remove this controller from factory() in
         // order to prevent BUG: 185466 - disappearing menu popup
         emit unplugController(_pluggedController);
@@ -550,7 +550,7 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
             &Konsole::SessionController::deleteLater);
 
     // if this is the first controller created then set it as the active controller
-    if (_pluggedController == nullptr) {
+    if (_pluggedController.isNull()) {
         controllerChanged(controller);
     }
 
@@ -816,7 +816,7 @@ ViewManager::NavigationMethod ViewManager::navigationMethod() const
 
 void ViewManager::containerViewsChanged(ViewContainer *container)
 {
-    if ((_viewSplitter != nullptr) && container == _viewSplitter->activeContainer()) {
+    if ((!_viewSplitter.isNull()) && container == _viewSplitter->activeContainer()) {
         emit viewPropertiesChanged(viewProperties());
     }
 }
@@ -838,7 +838,7 @@ void ViewManager::viewDestroyed(QWidget *view)
         }
     }
     //we only update the focus if the splitter is still alive
-    if (_viewSplitter != nullptr) {
+    if (!_viewSplitter.isNull()) {
         updateDetachViewState();
     }
     // The below causes the menus  to be messed up

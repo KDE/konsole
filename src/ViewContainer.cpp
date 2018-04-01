@@ -541,7 +541,7 @@ void TabbedViewContainer::startTabDrag(int index)
     // start dragging
     const Qt::DropAction action = drag->exec();
 
-    if ((drag != nullptr) && (drag->target() != nullptr)) {
+    if ((!drag.isNull()) && (drag->target() != nullptr)) {
         switch (action) {
         case Qt::MoveAction:
             // The MoveAction indicates the widget has been successfully
@@ -759,7 +759,7 @@ void TabbedViewContainer::addViewWidget(QWidget *view, int index)
 
 void TabbedViewContainer::removeViewWidget(QWidget *view)
 {
-    if (_stackWidget == nullptr) {
+    if (_stackWidget.isNull()) {
         return;
     }
     _stackWidget->removeWidget(view);
@@ -875,7 +875,7 @@ void StackedViewContainer::addViewWidget(QWidget *view, int)
 
 void StackedViewContainer::removeViewWidget(QWidget *view)
 {
-    if (_stackWidget == nullptr) {
+    if (_stackWidget.isNull()) {
         return;
     }
     _stackWidget->removeWidget(view);

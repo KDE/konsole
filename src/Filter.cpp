@@ -527,7 +527,7 @@ QList<QAction *> UrlFilter::HotSpot::actions()
 RegExpFilter::HotSpot *FileFilter::newHotSpot(int startLine, int startColumn, int endLine,
                                               int endColumn, const QStringList &capturedTexts)
 {
-    if (_session == nullptr) {
+    if (_session.isNull()) {
         qCDebug(KonsoleDebug) << "Trying to create new hot spot without session!";
         return nullptr;
     }

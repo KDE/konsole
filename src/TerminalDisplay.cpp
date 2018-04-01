@@ -107,13 +107,13 @@ ScreenWindow* TerminalDisplay::screenWindow() const
 void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 {
     // disconnect existing screen window if any
-    if (_screenWindow != nullptr) {
+    if (!_screenWindow.isNull()) {
         disconnect(_screenWindow , nullptr , this , nullptr);
     }
 
     _screenWindow = window;
 
-    if (_screenWindow != nullptr) {
+    if (!_screenWindow.isNull()) {
         connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateLineProperties);
         connect(_screenWindow.data() , &Konsole::ScreenWindow::outputChanged , this , &Konsole::TerminalDisplay::updateImage);
         connect(_screenWindow.data() , &Konsole::ScreenWindow::currentResultLineChanged , this , &Konsole::TerminalDisplay::updateImage);
@@ -1149,7 +1149,7 @@ QRegion TerminalDisplay::hotSpotRegion() const
 
 void TerminalDisplay::processFilters()
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -1178,7 +1178,7 @@ void TerminalDisplay::processFilters()
 
 void TerminalDisplay::updateImage()
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -1428,7 +1428,7 @@ void TerminalDisplay::printContent(QPainter& painter, bool friendly)
 
 QPoint TerminalDisplay::cursorPosition() const
 {
-    if (_screenWindow != nullptr) {
+    if (!_screenWindow.isNull()) {
         return _screenWindow->cursorPosition();
     } else {
         return QPoint(0, 0);
@@ -1908,7 +1908,7 @@ void TerminalDisplay::updateImageSize()
         delete[] oldImage;
     }
 
-    if (_screenWindow != nullptr) {
+    if (!_screenWindow.isNull()) {
         _screenWindow->setWindowLines(_lines);
     }
 
@@ -2058,7 +2058,7 @@ void TerminalDisplay::setScrollBarPosition(Enum::ScrollBarPositionEnum position)
 
 void TerminalDisplay::scrollBarPositionChanged(int)
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -2121,7 +2121,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
         return;
     }
 
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -2345,7 +2345,7 @@ void TerminalDisplay::leaveEvent(QEvent *)
 
 void TerminalDisplay::extendSelection(const QPoint& position)
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -2541,7 +2541,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
 void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -2611,7 +2611,7 @@ void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, int& line,
 
 void TerminalDisplay::updateLineProperties()
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -2652,7 +2652,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
     if (ev->button() != Qt::LeftButton) {
         return;
     }
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -3023,7 +3023,7 @@ Screen::DecodingOptions TerminalDisplay::currentDecodingOptions()
 
 void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -3064,7 +3064,7 @@ void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
 
 void TerminalDisplay::selectCurrentLine()
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -3154,7 +3154,7 @@ bool TerminalDisplay::bracketedPasteMode() const
 
 void TerminalDisplay::doPaste(QString text, bool appendReturn)
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -3208,7 +3208,7 @@ void TerminalDisplay::setCopyTextAsHTML(bool enabled)
 
 void TerminalDisplay::copyToX11Selection()
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
@@ -3236,7 +3236,7 @@ void TerminalDisplay::copyToX11Selection()
 
 void TerminalDisplay::copyToClipboard()
 {
-    if (_screenWindow == nullptr) {
+    if (_screenWindow.isNull()) {
         return;
     }
 
