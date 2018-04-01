@@ -896,9 +896,6 @@ private:
     int _fontAscent;      // ascend
     bool _boldIntense;   // Whether intense colors should be rendered with bold font
 
-    int _leftMargin;    // offset
-    int _topMargin;    // offset
-
     int _lines;      // the number of lines that can be displayed in the widget
     int _columns;    // the number of columns that can be displayed in the widget
 
