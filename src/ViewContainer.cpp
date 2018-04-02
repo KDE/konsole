@@ -332,7 +332,8 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position,
     _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-rename")),
                                  i18nc("@action:inmenu", "&Rename Tab..."), this,
                                  SLOT(tabContextMenuRenameTab()));
-    _contextPopupMenu->actions().last()->setObjectName(QStringLiteral("edit-rename"));
+    const auto contextPopupMenuActions = _contextPopupMenu->actions();
+    contextPopupMenuActions.last()->setObjectName(QStringLiteral("edit-rename"));
 
     _contextPopupMenu->addSeparator();
 
@@ -650,7 +651,7 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
         }
 
         // Disable tab rename
-        for (auto *action : _contextPopupMenu->actions()) {
+        for (auto &action : _contextPopupMenu->actions()) {
             if (action->objectName() == QStringLiteral("edit-rename")) {
                 action->setEnabled(!sessionController->isReadOnly());
                 break;
