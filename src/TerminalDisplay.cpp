@@ -940,11 +940,13 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         // This still allows RTL characters to be rendered in the RTL way.
         painter.setLayoutDirection(Qt::LeftToRight);
 
+        painter.setClipRect(rect);
         if (_bidiEnabled) {
             painter.drawText(rect.x(), rect.y() + _fontAscent + _lineSpacing, text);
         } else {
             painter.drawText(rect.x(), rect.y() + _fontAscent + _lineSpacing, LTR_OVERRIDE_CHAR + text);
         }
+        painter.setClipping(false);
     }
 }
 
@@ -1631,39 +1633,42 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             const CharacterColor currentBackground = _image[loc(x, y)].backgroundColor;
             const RenditionFlags currentRendition = _image[loc(x, y)].rendition;
 
-            while (x + len <= rlx &&
-                    _image[loc(x + len, y)].foregroundColor == currentForeground &&
-                    _image[loc(x + len, y)].backgroundColor == currentBackground &&
-                    (_image[loc(x + len, y)].rendition & ~RE_EXTENDED_CHAR) == (currentRendition & ~RE_EXTENDED_CHAR) &&
-                    (_image[ qMin(loc(x + len, y) + 1, _imageSize) ].character == 0) == doubleWidth &&
-                    _image[loc(x + len, y)].isLineChar() == lineDraw) {
-                const quint16 c = _image[loc(x + len, y)].character;
-                if ((_image[loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
-                    // sequence of characters
-                    ushort extendedCharLength = 0;
-                    const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
-                    if (chars != nullptr) {
-                        Q_ASSERT(extendedCharLength > 1);
-                        bufferSize += extendedCharLength - 1;
-                        unistr.resize(bufferSize);
-                        disstrU = unistr.data();
-                        for (int index = 0 ; index < extendedCharLength ; index++) {
+            if(_image[loc(x, y)].character <= 0x7e) {
+                while (x + len <= rlx &&
+                        _image[loc(x + len, y)].foregroundColor == currentForeground &&
+                        _image[loc(x + len, y)].backgroundColor == currentBackground &&
+                        (_image[loc(x + len, y)].rendition & ~RE_EXTENDED_CHAR) == (currentRendition & ~RE_EXTENDED_CHAR) &&
+                        (_image[ qMin(loc(x + len, y) + 1, _imageSize) ].character == 0) == doubleWidth &&
+                        _image[loc(x + len, y)].isLineChar() == lineDraw &&
+                        _image[loc(x + len, y)].character <= 0x7e) {
+                    const quint16 c = _image[loc(x + len, y)].character;
+                    if ((_image[loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
+                        // sequence of characters
+                        ushort extendedCharLength = 0;
+                        const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
+                        if (chars != nullptr) {
+                            Q_ASSERT(extendedCharLength > 1);
+                            bufferSize += extendedCharLength - 1;
+                            unistr.resize(bufferSize);
+                            disstrU = unistr.data();
+                            for (int index = 0 ; index < extendedCharLength ; index++) {
+                                Q_ASSERT(p < bufferSize);
+                                disstrU[p++] = chars[index];
+                            }
+                        }
+                    } else {
+                        // single character
+                        if (c != 0u) {
                             Q_ASSERT(p < bufferSize);
-                            disstrU[p++] = chars[index];
+                            disstrU[p++] = c; //fontMap(c);
                         }
                     }
-                } else {
-                    // single character
-                    if (c != 0u) {
-                        Q_ASSERT(p < bufferSize);
-                        disstrU[p++] = c; //fontMap(c);
-                    }
-                }
 
-                if (doubleWidth) { // assert((_image[loc(x+len,y)+1].character == 0)), see above if condition
-                    len++; // Skip trailing part of multi-column character
+                    if (doubleWidth) { // assert((_image[loc(x+len,y)+1].character == 0)), see above if condition
+                        len++; // Skip trailing part of multi-column character
+                    }
+                    len++;
                 }
-                len++;
             }
             if ((x + len < _usedColumns) && (_image[loc(x + len, y)].character == 0u)) {
                 len++; // Adjust for trailing part of multi-column character
