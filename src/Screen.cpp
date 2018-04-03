@@ -361,9 +361,6 @@ void Screen::resizeImage(int new_lines, int new_columns)
     for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++) {
         newScreenLines[i] = _screenLines[i];
     }
-    for (int i = _lines; (i > 0) && (i < new_lines + 1); i++) {
-        newScreenLines[i].resize(new_columns);
-    }
 
     _lineProperties.resize(new_lines + 1);
     for (int i = _lines; (i > 0) && (i < new_lines + 1); i++) {
