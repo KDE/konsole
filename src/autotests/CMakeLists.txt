@@ -89,3 +89,9 @@ target_link_libraries(TerminalInterfaceTest
                       KF5::Parts
                       ${KONSOLE_TEST_LIBS})
 
+add_executable(Vt102EmulationTest Vt102EmulationTest.cpp)
+ecm_mark_as_test(Vt102EmulationTest)
+ecm_mark_nongui_executable(Vt102EmulationTest)
+add_test(Vt102EmulationTest Vt102EmulationTest)
+target_link_libraries(Vt102EmulationTest ${KONSOLE_TEST_LIBS})
+
