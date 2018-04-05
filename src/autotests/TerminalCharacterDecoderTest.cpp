@@ -81,7 +81,7 @@ void TerminalCharacterDecoderTest::testPlainTextDecoder()
     decoder->decodeLine(testCharacters, text.size(), /* ignored */ LINE_DEFAULT);
     decoder->end();
     QCOMPARE(outputString, result);
-    delete testCharacters;
+    delete[] testCharacters;
     delete decoder;
 }
 
@@ -117,7 +117,7 @@ void TerminalCharacterDecoderTest::testHTMLDecoder()
     decoder->decodeLine(testCharacters, text.size(), /* ignored */ LINE_DEFAULT);
     decoder->end();
     QCOMPARE(outputString, result);
-    delete testCharacters;
+    delete[] testCharacters;
     delete decoder;
 }
 
