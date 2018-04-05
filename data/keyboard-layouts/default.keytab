@@ -113,6 +113,10 @@ key Delete      +KeyPad  : "\E[3~"
 key PgUp -Shift+KeyPad  : "\E[5~"
 key PgDown  -Shift+KeyPad  : "\E[6~"
 
+# the key labelled 5 on the Keypad, is Qt::Key_Clear (a very intuitive
+# and discoverable name...)
+key Clear       +KeyPad : "\E[E"
+
 # other grey PC keys
 
 key Enter+NewLine : "\r\n"
