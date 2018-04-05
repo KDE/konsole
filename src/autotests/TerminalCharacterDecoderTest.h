@@ -1,5 +1,6 @@
 /*
     Copyright 2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 2018 by Kurt Hindenburg <kurt.hindenburg@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,11 +33,11 @@ class TerminalCharacterDecoderTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void init();
-    void cleanup();
-
+    Character* convertToCharacter(QString text, QVector<RenditionFlags> renditions);
     void testPlainTextDecoder();
-    void testHTMLFileForValidity();
+    void testPlainTextDecoder_data();
+    void testHTMLDecoder();
+    void testHTMLDecoder_data();
 };
 
 }
