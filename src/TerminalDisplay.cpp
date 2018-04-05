@@ -2416,7 +2416,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         i = loc(left.x(), left.y());
         if (i >= 0 && i <= _imageSize) {
             selClass = charClass(_image[i]);
-            while (((left.x() > 0) || (left.y() > 0 && (_lineProperties[left.y() - 1] & LINE_WRAPPED)))
+            while (((left.x() > 0) || (left.y() > 0 && ((_lineProperties[left.y() - 1] & LINE_WRAPPED) != 0)))
                     && charClass(_image[i - 1]) == selClass) {
                 i--;
                 if (left.x() > 0) {
@@ -2433,7 +2433,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         i = loc(right.x(), right.y());
         if (i >= 0 && i <= _imageSize) {
             selClass = charClass(_image[i]);
-            while (((right.x() < _usedColumns - 1) || (right.y() < _usedLines - 1 && (_lineProperties[right.y()] & LINE_WRAPPED)))
+            while (((right.x() < _usedColumns - 1) || (right.y() < _usedLines - 1 && ((_lineProperties[right.y()] & LINE_WRAPPED) != 0)))
                     && charClass(_image[i + 1]) == selClass) {
                 i++;
                 if (right.x() < _usedColumns - 1) {
@@ -2695,7 +2695,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
     {
         // find the start of the word
         int x = bgnSel.x();
-        while (((x > 0) || (bgnSel.y() > 0 && (_lineProperties[bgnSel.y() - 1] & LINE_WRAPPED)))
+        while (((x > 0) || (bgnSel.y() > 0 && ((_lineProperties[bgnSel.y() - 1] & LINE_WRAPPED) != 0)))
                 && charClass(_image[i - 1]) == selClass) {
             i--;
             if (x > 0) {
@@ -2712,7 +2712,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
         // find the end of the word
         i = loc(endSel.x(), endSel.y());
         x = endSel.x();
-        while (((x < _usedColumns - 1) || (endSel.y() < _usedLines - 1 && (_lineProperties[endSel.y()] & LINE_WRAPPED)))
+        while (((x < _usedColumns - 1) || (endSel.y() < _usedLines - 1 && ((_lineProperties[endSel.y()] & LINE_WRAPPED) != 0)))
                 && charClass(_image[i + 1]) == selClass) {
             i++;
             if (x < _usedColumns - 1) {
