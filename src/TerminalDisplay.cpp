@@ -3187,6 +3187,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
     if (!text.isEmpty()) {
         text.replace(QLatin1Char('\n'), QLatin1Char('\r'));
         if (bracketedPasteMode()) {
+            text.remove(QLatin1String("\033"));
             text.prepend(QLatin1String("\033[200~"));
             text.append(QLatin1String("\033[201~"));
         }
