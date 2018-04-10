@@ -528,6 +528,11 @@ public:
     // Select the current line.
     void selectCurrentLine();
 
+    /**
+     * Selects everything in the terminal
+     */
+    void selectAll();
+
     void printContent(QPainter &painter, bool friendly);
 
     /**

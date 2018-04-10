@@ -990,9 +990,7 @@ void SessionController::pasteFromX11Selection()
 }
 void SessionController::selectAll()
 {
-    ScreenWindow * screenWindow = _view->screenWindow();
-    screenWindow->setSelectionByLineRange(0, _session->emulation()->lineCount());
-    _view->copyToX11Selection();
+    _view->selectAll();
 }
 void SessionController::selectLine()
 {

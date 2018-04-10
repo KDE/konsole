@@ -380,7 +380,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _actSel(0)
     , _wordSelectionMode(false)
     , _lineSelectionMode(false)
-    , _preserveLineBreaks(false)
+    , _preserveLineBreaks(true)
     , _columnSelectionMode(false)
     , _autoCopySelectedText(false)
     , _copyTextAsHTML(true)
@@ -3074,6 +3074,17 @@ void TerminalDisplay::selectCurrentLine()
     }
 
     selectLine(cursorPosition(), true);
+}
+
+void TerminalDisplay::selectAll()
+{
+    if (_screenWindow.isNull()) {
+        return;
+    }
+
+    _preserveLineBreaks = true;
+    _screenWindow->setSelectionByLineRange(0, _screenWindow->lineCount());
+    copyToX11Selection();
 }
 
 bool TerminalDisplay::focusNextPrevChild(bool next)
