@@ -830,8 +830,8 @@ A dialog will open for the bookmark folder name.
 <varlistentry>
 <term><menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>Edit Bookmarks</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens the bookmark editor</action></para>
-
-<note><para>You can use the bookmark editor to manually add URLs.
+<note><para>The keditbookmarks program must be installed for this menu item to appear.</para>
+<para>You can use the bookmark editor to manually add URLs.
 Currently, &konsole; accepts the following:
 <itemizedlist mark="opencircle">
 <listitem><para>ssh://user@host:port</para></listitem>
