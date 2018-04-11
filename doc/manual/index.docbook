@@ -3,6 +3,8 @@
  "dtd/kdedbx45.dtd" [
 <!ENTITY % English "INCLUDE">
 <!ENTITY % addindex "IGNORE">
+<!ENTITY Ahmad.Samir '<personname><firstname>Ahmad</firstname><surname>Samir</surname></personname>'>
+<!ENTITY Ahmad.Samir.mail '<email>a.samirh78@gmail.com</email>'>
 ]>
 
 <book id="konsole" lang="&language;">
@@ -12,6 +14,7 @@
 <authorgroup>
 <author>&Jonathan.Singer; &Jonathan.Singer.mail;</author>
 <author>&Kurt.Hindenburg; &Kurt.Hindenburg.mail;</author>
+<author>&Ahmad.Samir; &Ahmad.Samir.mail;</author>
 
 <othercredit role="developer">
 &Robert.Knight; &Robert.Knight.mail;
@@ -42,10 +45,15 @@
 <holder>&Kurt.Hindenburg;</holder>
 </copyright>
 
+<copyright>
+    <year>2018</year>
+<holder>&Ahmad.Samir;</holder>
+</copyright>
+
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2018-03-10</date>
-<releaseinfo>Applications 18.04</releaseinfo>
+<date>2018-04-03</date>
+<releaseinfo>Applications 18.08</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -1317,6 +1325,205 @@ Service 'org.kde.konsole' does not exist, change
 For more information, please visit
 <ulink url="http://techbase.kde.org/Development/Tutorials/D-Bus/Introduction">&DBus; tutorial</ulink>.
 </para>
+
+</chapter>
+
+<chapter id="key-bindings">
+<title>Terminal Key Bindings</title>
+
+<sect1>
+<title>How &konsole; Uses Key Bindings</title>
+
+<sect2 id="intro">
+<title>Introduction</title>
+<para>&konsole; uses *.keytab files to translate key combinations into control characters and escape sequences that are sent to the shell or to interactive programs (typically programs that use the Alternate Screen buffer, &eg; <application>vim</application>, <application>less</application>, <application>screen</application>) running in the shell.</para>
+
+<para>Users can customize the key bindings settings in &konsole; using the Key Bindings Editor. A key combination can be configured to send a specific control or escape sequence to the terminal.</para>
+
+<para>You can open the Key Bindings Editor from the menu entry <menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit Current Profile</guimenuitem></menuchoice>, and going to the <guilabel>Keyboard</guilabel> tab. Listed there are the Key Bindings schemas that come by default with &konsole;.</para>
+</sect2>
+
+<sect2 id="table-fields">
+<title>Key Combinations and Modes</title>
+
+<para>Key combinations follow the pattern:
+<programlisting>Key (+|-) Modes</programlisting>
+</para>
+
+<para>for example:
+<programlisting>
+Up+Shift+AppScreen
+Down+Shift-AppScreen
+Space+Ctrl
+</programlisting>
+</para>
+
+<para>Key names are defined in the qnamespace.h header file, with the <quote>Qt::Key_</quote> prefix removed, for a list of key names check the <ulink url="https://doc.qt.io/qt-5/qt.html#Key-enum">Qt::Key enumeration in the &Qt; documentation</ulink>.</para>
+
+<para>A <quote>+</quote> preceding a Mode name means that mode is <emphasis>set</emphasis>; for a modifier key, that means it's pressed, whereas for all other modes it means that particular mode is in effect (&ie; active). For example <quote>+Ctrl</quote> means the key combination will work only if the &Ctrl; key is pressed.</para>
+
+<para>A <quote>-</quote> preceding a Mode name means that mode is <emphasis>reset</emphasis>; basically this is the opposite of putting <quote>+</quote> before a Mode name, so for a modifier key that means the key isn't pressed, whereas for all other modes it means that particular mode is inactive. For example <quote>-Ctrl</quote> means the key combination will work only if the &Ctrl; key is <emphasis>not</emphasis> pressed.</para>
+
+<note>
+<para>If a Mode name isn't present in a key combination, its state is ignored.</para>
+</note>
+
+<para>The supported Key Bindings modes are listed below:</para>
+
+<variablelist>
+
+<varlistentry>
+<term>Alt, Ctrl, Shift</term>
+<listitem>
+<para>One or more of these Modes can be used in a key combination, if any of them is set, the key combination uses that modifier key, respectively; and vice versa if it's reset</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>AnyModifier</term>
+<listitem>
+<para>If this mode is set, the key combination uses any modifier key (any of the previous three modifier keys); and vice versa if it's reset</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Ansi</term>
+<listitem>
+<para>If this mode is set, &konsole; will send ANSI escape and control sequences</para>
+<para>If this mode is reset &konsole; will send VT52 escape and control sequences</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>AppScreen</term>
+<listitem>
+<para>If this mode is set, the key combination will only affect interactive programs that use the Alternate Screen buffer</para>
+<para>If this mode is reset the key combination will only affect the terminal when it's using the Normal Screen buffer</para>
+
+<note>
+<para>&konsole; makes use of two screen buffers:</para>
+<itemizedlist>
+<listitem>
+<para>The Normal Screen buffer (default): allows you to scroll back to view previous lines of output, this is the default buffer you usually use to execute commands... &etc;</para>
+</listitem>
+<listitem>
+<para>The Alternate Screen buffer: the terminal switches to this buffer when you run an interactive program (&eg; <application>less</application>, <application>vim</application>, <application>screen</application>, <application>tmux</application>... &etc;)</para>
+</listitem>
+</itemizedlist>
+</note>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>KeyPad</term>
+<listitem>
+<para>If this mode is set, the key combination uses a key on the Keypad (Number Pad). This mode is useful to distinguish between keys on the keyboard and keys on the Keypad. For example when Num Lock is <emphasis>on</emphasis> you can configure two separate key combinations, one using the key labelled <quote>1</quote> on the keyboard (usually under the <keycap>F1</keycap> key) and the other using the key labelled <quote>1</quote> on the Keypad. The same concept applies when Num Lock is <emphasis>off</emphasis> for the End, Home, Cursor Keys ...etc on the Keypad</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>AppCursorKeys</term>
+<listitem>
+<para>This mode implements the VT100 <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#DECCKM">Cursor Keys Mode (DECCKM)</ulink>. It controls the escape sequences each Cursor Key (<keycap>Up</keycap>, <keycap>Down</keycap>, <keycap>Right</keycap>, <keycap>Left</keycap>) sends, depending on whether this mode is set or reset</para>
+<para>By default &konsole; follows the XTerm behavior of treating the <keycap>Home</keycap> and <keycap>End</keycap> keys as cursor keys with respect to DECCKM</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>AppKeyPad</term>
+<listitem>
+<para>If this mode is set, the key combination will only work when the Keypad is in Application Mode (DECKPAM)</para>
+<para>If this mode is reset, the key combination will only work when the Keypad is in Numeric Mode (DECKPNM)</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>NewLine</term>
+<listitem>
+<para>If this mode is set, the <keycap>Return</keycap> (Enter) key on the keyboard will send both Carriage Return "\r" and New Line "\n" control characters</para>
+<para>If this mode is reset, the <keycap>Return</keycap> key will send only a Carriage Return "\r"</para>
+<para>The same applies to the <keycap>Enter</keycap> key on the Keypad</para>
+<para>This mode emulates the <ulink url="https://www.vt100.net/docs/vt100-ug/chapter3.html#LNM">LNM - Line Feed/New Line Mode</ulink></para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>Note that each combination of Key and Modes (set/reset) must be unique. For example, consider the following two rules:</para>
+
+<itemizedlist>
+<listitem><para>A+Shift : <quote>A</quote></para></listitem>
+<listitem><para>a       : <quote>a</quote></para></listitem>
+</itemizedlist>
+<para>&konsole; will <emphasis>not</emphasis> accept the small letter <quote>a</quote> rule, you have to add a <quote>-Shift</quote> to that rule to make it work.</para>
+</sect2>
+
+<sect2 id="output-field">
+<title>The Output Field</title>
+
+<para>In the Output field you can add the escape sequences or control characters that you want &konsole; to send to the terminal when the associated key combination is pressed.</para>
+
+<para>You can also use any of the following keywords, each of which has a special meaning in &konsole;:</para>
+
+<itemizedlist>
+<listitem><para>scrollUpLine       : scroll up one line in the shell history scrollback buffer</para></listitem>
+<listitem><para>scrollUpPage       : scroll up one page in the shell history scrollback buffer</para></listitem>
+<listitem><para>scrollDownLine     : scroll down one line in the shell history scrollback buffer</para></listitem>
+<listitem><para>scrollDownPage     : scroll down one page in the shell history scrollback buffer</para></listitem>
+<listitem><para>scrollUpToTop      : scroll up to the begining of the shell history scrollback buffer</para></listitem>
+<listitem><para>scrollDownToBottom : scroll down to the end of the shell history scrollback buffer</para></listitem>
+</itemizedlist>
+
+<para>You can also use strings with C-string syntax; you may use the following escapes sequences:</para>
+
+<itemizedlist>
+<listitem><para>\E   : Escape</para></listitem>
+<listitem><para>\\   : Backslash</para></listitem>
+<listitem><para>\"   : Double quote</para></listitem>
+<listitem><para>\t   : Tab</para></listitem>
+<listitem><para>\r   : Carriage Return</para></listitem>
+<listitem><para>\n   : New line</para></listitem>
+<listitem><para>\b   : Backspace</para></listitem>
+<listitem>
+<para>\xHH : where HH are two hex digits</para>
+<tip>
+<para>This can be used to send ASCII control characters, &eg; <quote>\x00</quote> which is the NUL character</para>
+</tip>
+</listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="other-factors">
+<title>Other System Resources</title>
+<para>There are other system resources that can affect terminal Key Bindings:</para>
+<itemizedlist>
+<listitem>
+<para>Consult the <ulink url="man:terminfo(5)">terminfo</ulink> or <ulink url="man:termcap(5)">termcap</ulink> database for the expected escape sequences and control characters that each key combination is supposed to send.</para>
+</listitem>
+<listitem>
+<para>It is likely that your system has other keyboard databases which have to be in sync too, (&eg; <ulink url="man:bash(1)">/etc/inputrc and readline</ulink> for the <application>BASH shell</application>) as they affect the operations (interactions) bound to key combinations.</para>
+</listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="further-reading">
+<title>Further Reading</title>
+<para>For more information on escape sequences and control characters, check the following documentation:</para>
+<itemizedlist>
+<listitem>
+<para><ulink url="https://www.vt100.net/docs/vt100-ug/">The VT100 user guide</ulink></para>
+</listitem>
+<listitem>
+<para><ulink url="https://vt100.net/docs/vt102-ug/">The VT102 user guide</ulink></para>
+</listitem>
+<listitem>
+<para>The comprehensive and indispensable <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html">XTerm Control Sequences</ulink> documentation</para>
+</listitem>
+</itemizedlist>
+</sect2>
+</sect1>
 
 </chapter>
 
