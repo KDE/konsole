@@ -1053,18 +1053,8 @@
          <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QCheckBox" name="underlineLinksButton">
-            <property name="toolTip">
-             <string>Text recognized as a link or an email address will be underlined when hovered by the mouse pointer.</string>
-            </property>
-            <property name="text">
-             <string>Underline links</string>
-            </property>
-           </widget>
-          </item>
-          <item>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="1" column="0" colspan="2">
            <widget class="QCheckBox" name="underlineFilesButton">
             <property name="toolTip">
              <string>Text recognized as a file will be underlined when hovered by the mouse pointer.</string>
@@ -1074,8 +1064,38 @@
             </property>
            </widget>
           </item>
-          <item>
-           <layout class="QHBoxLayout">
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="ctrlRequiredForDragButton">
+            <property name="toolTip">
+             <string>Selected text will require control key plus click to drag.</string>
+            </property>
+            <property name="text">
+             <string>Require Ctrl key for drag &amp;&amp; drop</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="dropUrlsAsText">
+            <property name="toolTip">
+             <string>Always paste dropped files and URLs as text without offering move, copy and link actions.</string>
+            </property>
+            <property name="text">
+             <string>Disable drag &amp;&amp; drop menu for files &amp;&amp; URLs</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QCheckBox" name="enableAlternateScrollingButton">
+            <property name="toolTip">
+             <string>Mouse scroll wheel will emulate up/down key presses in programs that use the Alternate Screen buffer (e.g. less)</string>
+            </property>
+            <property name="text">
+             <string>Enable Alternate Screen buffer scrolling</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
              <spacer name="horizontalSpacer">
               <property name="orientation">
@@ -1097,37 +1117,33 @@
               <property name="enabled">
                <bool>false</bool>
               </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="toolTip">
                <string>Text recognized as a file, link or an email address can be opened by direct mouse click.</string>
               </property>
               <property name="text">
-               <string>Open files and links by direct click</string>
+               <string>Open by direct click</string>
               </property>
              </widget>
             </item>
            </layout>
           </item>
-          <item>
-           <widget class="QCheckBox" name="ctrlRequiredForDragButton">
+          <item row="0" column="0" colspan="2">
+           <widget class="QCheckBox" name="underlineLinksButton">
             <property name="toolTip">
-             <string>Selected text will require control key plus click to drag.</string>
+             <string>Text recognized as a link or an email address will be underlined when hovered by the mouse pointer.</string>
             </property>
             <property name="text">
-             <string>Require Ctrl key for drag and drop</string>
+             <string>Underline links</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QCheckBox" name="dropUrlsAsText">
-            <property name="toolTip">
-             <string>Always paste dropped URLs as text without offering move, copy and link actions.</string>
-            </property>
-            <property name="text">
-             <string>Disable drag and drop menu for URLs and files</string>
-            </property>
-           </widget>
-          </item>
-          <item>
+          <item row="2" column="2">
            <widget class="QCheckBox" name="enableMouseWheelZoomButton">
             <property name="toolTip">
              <string>Pressing Ctrl+scrollwheel will increase/decrease the text size.</string>

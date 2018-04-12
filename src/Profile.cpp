@@ -121,6 +121,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { PasteFromClipboardEnabled , "PasteFromClipboardEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { MiddleClickPasteMode, "MiddleClickPasteMode" , INTERACTION_GROUP , QVariant::Int }
     , { MouseWheelZoomEnabled, "MouseWheelZoomEnabled", INTERACTION_GROUP, QVariant::Bool }
+    , { AlternateScrolling, "AlternateScrolling", INTERACTION_GROUP, QVariant::Bool }
 
     // Encoding
     , { DefaultEncoding , "DefaultEncoding" , ENCODING_GROUP , QVariant::String }
@@ -172,6 +173,7 @@ void Profile::useFallback()
     setProperty(TerminalMargin, 1);
     setProperty(TerminalCenter, false);
     setProperty(MouseWheelZoomEnabled, true);
+    setProperty(AlternateScrolling, true);
 
     setProperty(KeyBindings, QStringLiteral("default"));
     setProperty(ColorScheme, QStringLiteral("Linux")); //use DarkPastels when is start support blue ncurses UI properly

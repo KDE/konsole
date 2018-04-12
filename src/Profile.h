@@ -269,6 +269,19 @@ public:
          * increases/decreases the terminal font size.
          */
         MouseWheelZoomEnabled,
+        /** (bool) Specifies whether emulated up/down key presses are sent
+         * for mouse scroll wheel events, to programs using the Alternate
+         * Screen buffer if those programs indicate they're not interested
+         * in mouse events (check _usesMouse in the Emulation header); this
+         * is mainly for the benefit of programs that are never interested
+         * in mouse events (e.g. less).
+         * Some programs, such as vim, can tell the terminal whether they
+         * are interested in mouse events or not. Consequently, this option
+         * affects vim only if it indicates that it's not interested in
+         * mouse events.
+         * Default value is true.
+        */
+        AlternateScrolling,
         /** (int) Keyboard modifiers to show URL hints */
         UrlHintsModifiers
     };

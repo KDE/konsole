@@ -972,6 +972,8 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
 
     // mouse wheel zoom
     view->setMouseWheelZoom(profile->mouseWheelZoomEnabled());
+
+    view->setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
 }
 
 void ViewManager::updateViewsForSession(Session *session)

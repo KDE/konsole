@@ -372,6 +372,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _showTerminalSizeHint(true)
     , _bidiEnabled(false)
     , _mouseMarks(false)
+    , _alternateScrolling(true)
     , _isPrimaryScreen(true)
     , _bracketedPasteMode(false)
     , _iPntSel(QPoint())
@@ -2780,7 +2781,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
     } else if (!_readOnly) {
         _scrollWheelState.addWheelEvent(ev);
 
-        if(_mouseMarks && !_isPrimaryScreen) {
+        if(_mouseMarks && !_isPrimaryScreen && _alternateScrolling) {
             // Send simulated up / down key presses to the terminal program
             // for the benefit of programs such as 'less' (which use the alternate screen)
 
@@ -3147,6 +3148,14 @@ bool TerminalDisplay::usesMouse() const
     return _mouseMarks;
 }
 
+void TerminalDisplay::setAlternateScrolling(bool enable)
+{
+    _alternateScrolling = enable;
+}
+bool TerminalDisplay::alternateScrolling() const
+{
+    return _alternateScrolling;
+}
 
 void TerminalDisplay::usingPrimaryScreen(bool use)
 {

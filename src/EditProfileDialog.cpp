@@ -653,6 +653,11 @@ void EditProfileDialog::toggleMouseWheelZoom(bool enable)
     updateTempProfileProperty(Profile::MouseWheelZoomEnabled, enable);
 }
 
+void EditProfileDialog::toggleAlternateScrolling(bool enable)
+{
+    updateTempProfileProperty(Profile::AlternateScrolling, enable);
+}
+
 void EditProfileDialog::updateColorSchemeList(const QString &selectedColorSchemeName)
 {
     if (_ui->colorSchemeList->model() == nullptr) {
@@ -1397,6 +1402,10 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
         {
             _ui->dropUrlsAsText, Profile::DropUrlsAsText,
             SLOT(toggleDropUrlsAsText(bool))
+        },
+        {
+            _ui->enableAlternateScrollingButton, Profile::AlternateScrolling,
+            SLOT(toggleAlternateScrolling(bool))
         },
         { nullptr, Profile::Property(0), nullptr }
     };

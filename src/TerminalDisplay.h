@@ -555,6 +555,9 @@ public:
     /** See setUsesMouse() */
     bool usesMouse() const;
 
+    /** See setAlternateScrolling() */
+    bool alternateScrolling() const;
+
 public Q_SLOTS:
     /**
      * Scrolls current ScreenWindow
@@ -627,6 +630,15 @@ public Q_SLOTS:
      * or false otherwise.
      */
     void setUsesMouse(bool on);
+
+    /**
+     * Sets the AlternateScrolling profile property which controls whether
+     * to emulate up/down key presses for mouse scroll wheel events.
+     * For more details, check the documentation of that property in the
+     * Profile header.
+     * Enabled by default.
+     */
+    void setAlternateScrolling(bool enable);
 
     /**
      * Sets _isPrimaryScreen depending on which screen is currently in
@@ -926,6 +938,7 @@ private:
     bool _showTerminalSizeHint;
     bool _bidiEnabled;
     bool _mouseMarks;
+    bool _alternateScrolling;
     bool _isPrimaryScreen;
     bool _bracketedPasteMode;
 
