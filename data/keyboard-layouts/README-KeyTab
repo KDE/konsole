@@ -1,0 +1,78 @@
+[README-KeyTab]
+
+The keytabs shown in the Edit Profile dialog -> Keyboard tab are taken from
+*.keytab configuration files located in the system-wide location (typically
+/usr/share/applications/konsole on Linux) or the writable location in the
+user's home directory (typically ~/.local/share/applications/konsole on Linux).
+
+Keytabs allow users to configure the behavior of konsole on keyboard events,
+especially functions keys. Have a look at doc/user/README.keyboard.
+
+The syntax of each entry/rule follows the pattern:
+
+  "key" Keyname { ("+"|"-") Modename } ":" (String|Operation)
+
+Key names are those defined in <qnamespace.h> with the "Qt::Key_" prefix
+removed. For a list of key names check the Qt::Key enum at:
+https://doc.qt.io/qt-5/qt.html#Key-enum
+
+Mode names are:
+
+  - Shift   : Shift Key pressed
+  - Alt     : Alt Key pressed
+  - Control : Control Key pressed
+
+  ( The VT100 emulation has modes that can affect the sequences emitted
+    by certain keys. Those modes are under control of the client program.
+
+    - Newline     : affects Return and Enter keys, when set makes them send
+                    both \r and \n control characters; when reset makes them
+                    send \r only.
+
+    - Application : affects applications that use the Alternate Screen buffer.
+
+    - Ansi        : send ANSI escape and control sequences (v.s. sending VT52
+                    escape and control sequences).
+
+    Since sending a state to a program that has set the state itself is
+    positivly wrong and obsolete design, better forget about this nasty
+    detail. I may well remove this "feature" in a future clean up round. )
+
+  A "+" preceding a Modename means the Key/mode is pressed/active respectively.
+
+  A "-" preceding a Modename means the Key/mode isn't pressed/active respectively.
+
+  If a mode isn't present in a key combination, its state is ignored.
+
+  Note that the combination of Key and Modes (set/reset) has to be unique.
+  This means, that
+
+    key A + Shift : "A"
+    key A : "a"
+
+  will not accept the small letter "a" rule as you'd exepct, you'll have
+  to add a "- Shift" to the latter rule to make it work.
+  Use the stdout/stderr dianostics of konsole when modifying keytabs to
+  find problems like these.
+
+Supported operations are
+
+- scrollUpLine       : scroll up   one line in the history log
+- scrollUpPage       : scroll up   one page in the history log
+- scrollDownLine     : scroll down one line in the history log
+- scrollDownPage     : scroll down one page in the history log
+- scrollUpToTop      : scroll up to the begining of the history log
+- scrollDownToBottom : scroll down to the end of the history log
+
+
+Strings have the syntax of C strings,
+one may use the following escapes:
+
+  - \E - Escape
+  - \\ - Backslash
+  - \" - Double quote
+  - \t - Tab
+  - \r - Carriage Return
+  - \n - New Line
+  - \b - Backspace
+  - \xHH - where HH are two hex digits (e.g. \x00 (the NUL character))

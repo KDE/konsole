@@ -1,16 +1,17 @@
 [README.keyboard]
 
-The *.keytab files (located in $KDEDIR/share/apps/konsole) allow
-to configure the keyboard due to your specific environment.
+The *.keytab files (located in /usr/share/applications/konsole and
+~/.local/share/applications/konsole) allow you to configure the keyboard
+to suit your specific environment/requirements.
 
-Beside that you can use them to make the keyboard emit virtually
-any escape sequence you want, here a probe of more typical problems
-related to keyboards, that can be coped with this way:
+Beside that you can use them to make the keyboard emit virtually any
+escape sequence you want, here are some notes about the more typical
+problems related to keyboards, that can be coped with this way:
 
 - BS Hack
 
-  While one would expect, that the Backspace key send ASCII
-  Backspace, this is not the case in many Linux installations.
+  While one would expect, that the Backspace key send ASCII Backspace,
+  this is not the case in many Linux installations.
 
   The idea behind this hack is to preserve the CTRL-H.
 
@@ -36,9 +37,8 @@ Consult your terminfo or termcap database for the expected values.
 Note that your system is not unlikely to have other keyboard databases
 which have to be in sync, too (e.g. /etc/inputrc for readline(3)).
 
-If you want to adjust things to your needs, copy one of the
-*.keytab files and edit it. When restarted, konsole offers
-you this new entry on it's menu.
+If you want to adjust things to your needs you can copy one of the *.keytab
+files and edit it. The changes will take effect after restarting konsole.
 
-In case your new keytab is likely to suit common needs,
-please contribute to konsole by sending me the file.
+In case your new keytab is likely to suit common needs, please contribute
+to konsole by sending us the file.
