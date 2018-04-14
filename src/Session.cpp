@@ -310,6 +310,8 @@ void Session::addView(TerminalDisplay* widget)
 
     widget->setUsesMouse(_emulation->programUsesMouse());
 
+    connect(_emulation, &Konsole::Emulation::enableAlternateScrolling, widget, &Konsole::TerminalDisplay::setAlternateScrolling);
+
     connect(_emulation, &Konsole::Emulation::programBracketedPasteModeChanged, widget, &Konsole::TerminalDisplay::setBracketedPasteMode);
 
     widget->setBracketedPasteMode(_emulation->programBracketedPasteMode());

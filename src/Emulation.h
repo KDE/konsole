@@ -324,6 +324,8 @@ Q_SIGNALS:
      */
     void programUsesMouseChanged(bool usesMouse);
 
+    void enableAlternateScrolling(bool enable);
+
     void programBracketedPasteModeChanged(bool bracketedPasteMode);
 
     /**

@@ -280,6 +280,8 @@ public:
          * affects vim only if it indicates that it's not interested in
          * mouse events.
          * Default value is true.
+         * See also, MODE_Mouse1007 in the Emulation header, which toggles
+         * Alternate Scrolling with escape sequences.
         */
         AlternateScrolling,
         /** (int) Keyboard modifiers to show URL hints */

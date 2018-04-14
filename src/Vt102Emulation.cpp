@@ -839,6 +839,11 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('s', 1006) :         saveMode      (MODE_Mouse1006); break; //XTERM
     case token_csi_pr('r', 1006) :      restoreMode      (MODE_Mouse1006); break; //XTERM
 
+    case token_csi_pr('h', 1007) :          setMode      (MODE_Mouse1007); break; //XTERM
+    case token_csi_pr('l', 1007) :        resetMode      (MODE_Mouse1007); break; //XTERM
+    case token_csi_pr('s', 1007) :         saveMode      (MODE_Mouse1007); break; //XTERM
+    case token_csi_pr('r', 1007) :      restoreMode      (MODE_Mouse1007); break; //XTERM
+
     case token_csi_pr('h', 1015) :          setMode      (MODE_Mouse1015); break; //URXVT
     case token_csi_pr('l', 1015) :        resetMode      (MODE_Mouse1015); break; //URXVT
     case token_csi_pr('s', 1015) :         saveMode      (MODE_Mouse1015); break; //URXVT
@@ -1327,6 +1332,7 @@ void Vt102Emulation::resetModes()
     resetMode(MODE_Mouse1003);  saveMode(MODE_Mouse1003);
     resetMode(MODE_Mouse1005);  saveMode(MODE_Mouse1005);
     resetMode(MODE_Mouse1006);  saveMode(MODE_Mouse1006);
+    resetMode(MODE_Mouse1007);  saveMode(MODE_Mouse1007);
     resetMode(MODE_Mouse1015);  saveMode(MODE_Mouse1015);
     resetMode(MODE_BracketedPaste);  saveMode(MODE_BracketedPaste);
 
@@ -1353,6 +1359,9 @@ void Vt102Emulation::setMode(int m)
     case MODE_Mouse1002:
     case MODE_Mouse1003:
         emit programUsesMouseChanged(false);
+        break;
+    case MODE_Mouse1007:
+        emit enableAlternateScrolling(true);
         break;
 
     case MODE_BracketedPaste:
@@ -1387,6 +1396,9 @@ void Vt102Emulation::resetMode(int m)
     case MODE_Mouse1002:
     case MODE_Mouse1003:
         emit programUsesMouseChanged(true);
+        break;
+    case MODE_Mouse1007:
+        emit enableAlternateScrolling(false);
         break;
 
     case MODE_BracketedPaste:
