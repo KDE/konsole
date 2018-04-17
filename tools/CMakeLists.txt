@@ -10,5 +10,5 @@ find_package(Qt5Core ${QT_MIN_VERSION} CONFIG REQUIRED)
 ### Font Embedder
 set(fontembedder_SRCS fontembedder.cpp)
 add_executable(fontembedder ${fontembedder_SRCS})
-qt5_use_modules(fontembedder Core)
+target_link_libraries(fontembedder Qt5::Core)
 
