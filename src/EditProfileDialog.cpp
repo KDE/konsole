@@ -1134,8 +1134,12 @@ void EditProfileDialog::updateButtonApply()
                 userModified = true;
                 break;
             }
-            // for not-previewed property
-        } else if ((value != _profile->property<QVariant>(property))) {
+        // for not-previewed property
+        //
+        // for the Profile::KeyBindings property, if it's set in the _tempProfile
+        // then the user opened the edit key bindings dialog and clicked
+        // OK, and could have add/removed a key bindings rule
+        } else if (property == Profile::KeyBindings || (value != _profile->property<QVariant>(property))) {
             userModified = true;
             break;
         }
