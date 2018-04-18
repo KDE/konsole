@@ -97,7 +97,7 @@ public:
      *
      * TODO : Add documentation about available color spaces.
      */
-    CharacterColor(int colorSpace, int co) :
+    CharacterColor(quint8 colorSpace, int co) :
         _colorSpace(colorSpace),
         _u(0),
         _v(0),
@@ -168,12 +168,12 @@ public:
     friend bool operator !=(const CharacterColor &a, const CharacterColor &b);
 
 private:
-    int _colorSpace;
+    quint8 _colorSpace;
 
     // bytes storing the character color
-    int _u;
-    int _v;
-    int _w;
+    quint8 _u;
+    quint8 _v;
+    quint8 _w;
 };
 
 inline bool operator ==(const CharacterColor &a, const CharacterColor &b)
@@ -189,7 +189,7 @@ inline bool operator !=(const CharacterColor &a, const CharacterColor &b)
     return !operator==(a, b);
 }
 
-inline const QColor color256(int u, const ColorEntry *base)
+inline const QColor color256(quint8 u, const ColorEntry *base)
 {
     //   0.. 16: system colors
     if (u < 8) {
