@@ -325,6 +325,9 @@ void Session::addView(TerminalDisplay* widget)
 
     connect(widget, &Konsole::TerminalDisplay::focusLost, _emulation, &Konsole::Emulation::focusLost);
     connect(widget, &Konsole::TerminalDisplay::focusGained, _emulation, &Konsole::Emulation::focusGained);
+
+    connect(_emulation, &Konsole::Emulation::setCursorStyleRequest, widget, &Konsole::TerminalDisplay::setCursorStyle);
+    connect(_emulation, &Konsole::Emulation::resetCursorStyleRequest, widget, &Konsole::TerminalDisplay::resetCursorStyle);
 }
 
 void Session::viewDestroyed(QObject* view)

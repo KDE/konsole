@@ -107,6 +107,8 @@ void Vt102Emulation::reset()
         setCodec(LocaleCodec);
     }
 
+    emit resetCursorStyleRequest();
+
     bufferedUpdate();
 }
 
@@ -154,6 +156,10 @@ void Vt102Emulation::reset()
    - CSI_PS     - Escape codes of the form <ESC>'['     {Pn} ';' ...  C
    - CSI_PR     - Escape codes of the form <ESC>'[' '?' {Pn} ';' ...  C
    - CSI_PE     - Escape codes of the form <ESC>'[' '!' {Pn} ';' ...  C
+   - CSI_SP     - Escape codes of the form <ESC>'[' ' ' C
+                  (3rd field is a space)
+   - CSI_PSP    - Escape codes of the form <ESC>'[' '{Pn}' ' ' C
+                  (4th field is a space)
    - VT52       - VT52 escape codes
                   - <ESC><Chr>
                   - <ESC>'Y'{Pc}{Pc}
@@ -215,6 +221,14 @@ constexpr int token_csi_pg(int a)
 constexpr int token_csi_pe(int a)
 {
     return token_construct(10, a, 0);
+}
+constexpr int token_csi_sp(int a)
+{
+    return token_construct(11, a, 0);
+}
+constexpr int token_csi_psp(int a, int n)
+{
+    return token_construct(12, a, n);
 }
 
 const int MAX_ARGUMENT = 4096;
@@ -325,6 +339,8 @@ void Vt102Emulation::initTokenizer()
 #define epp( )     (p >=  3  && s[2] == '?')
 #define epe( )     (p >=  3  && s[2] == '!')
 #define egt( )     (p >=  3  && s[2] == '>')
+#define esp( )     (p >=  4  && s[2] == SP )
+#define epsp( )    (p >=  5  && s[3] == SP )
 #define Xpe        (tokenBufferPos >= 2 && tokenBuffer[1] == ']')
 #define Xte        (Xpe      && (cc ==  7 || cc == 27))
 #define ces(C)     (cc < 256 && (charClass[cc] & (C)) == (C) && !Xte)
@@ -333,6 +349,7 @@ void Vt102Emulation::initTokenizer()
 #define CNTL(c) ((c)-'@')
 const int ESC = 27;
 const int DEL = 127;
+const int SP  = 32;
 
 // process an incoming unicode character
 void Vt102Emulation::receiveChar(int cc)
@@ -372,6 +389,8 @@ void Vt102Emulation::receiveChar(int cc)
     if (lec(3,2,'?')) { return; }
     if (lec(3,2,'>')) { return; }
     if (lec(3,2,'!')) { return; }
+    if (lec(3,2,SP )) { return; }
+    if (lec(4,3,SP )) { return; }
     if (lun(       )) { processToken(token_chr(), applyCharset(cc), 0);   resetTokenizer(); return; }
     if (dcs         ) { return; /* TODO We don't xterm DCS, so we just eat it */ }
     if (lec(2,0,ESC)) { processToken(token_esc(s[1]), 0, 0);              resetTokenizer(); return; }
@@ -388,6 +407,10 @@ void Vt102Emulation::receiveChar(int cc)
     }
 
     if (epe(   )) { processToken(token_csi_pe(cc), 0, 0); resetTokenizer(); return; }
+
+    if (esp (   )) { processToken(token_csi_sp(cc), 0, 0);           resetTokenizer(); return; }
+    if (epsp(   )) { processToken(token_csi_psp(cc, argv[0]), 0, 0); resetTokenizer(); return; }
+
     if (ees(DIG)) { addDigit(cc-'0'); return; }
     if (eec(';')) { addArgument();    return; }
     for (int i = 0; i <= argc; i++)
@@ -871,6 +894,17 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pr('l', 2004) :        resetMode      (MODE_BracketedPaste); break; //XTERM
     case token_csi_pr('s', 2004) :         saveMode      (MODE_BracketedPaste); break; //XTERM
     case token_csi_pr('r', 2004) :      restoreMode      (MODE_BracketedPaste); break; //XTERM
+
+    // Set Cursor Style (DECSCUSR), VT520, with the extra xterm sequences
+    // the first one is a special case, 'ESC[ q', which mimics 'ESC[1 q'
+    case token_csi_sp ('q'    ) : emit setCursorStyleRequest(Enum::BlockCursor,     true);  break;
+    case token_csi_psp('q',  0) : emit setCursorStyleRequest(Enum::BlockCursor,     true);  break;
+    case token_csi_psp('q',  1) : emit setCursorStyleRequest(Enum::BlockCursor,     true);  break;
+    case token_csi_psp('q',  2) : emit setCursorStyleRequest(Enum::BlockCursor,     false); break;
+    case token_csi_psp('q',  3) : emit setCursorStyleRequest(Enum::UnderlineCursor, true);  break;
+    case token_csi_psp('q',  4) : emit setCursorStyleRequest(Enum::UnderlineCursor, false); break;
+    case token_csi_psp('q',  5) : emit setCursorStyleRequest(Enum::IBeamCursor,     true);  break;
+    case token_csi_psp('q',  6) : emit setCursorStyleRequest(Enum::IBeamCursor,     false); break;
 
     //FIXME: weird DEC reset sequence
     case token_csi_pe('p'      ) : /* IGNORED: reset         (        ) */ break;

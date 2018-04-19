@@ -264,6 +264,18 @@ public:
     Enum::CursorShapeEnum keyboardCursorShape() const;
 
     /**
+     * Sets the Cursor Style (DECSCUSR) via escape sequences
+     * @p shape cursor shape
+     * @p isBlinking if true, the cursor will be set to blink
+    */
+    void setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinking);
+    /**
+     * Resets the cursor style to the current profile cursor shape and
+     * blinking settings
+    */
+    void resetCursorStyle();
+
+    /**
      * Sets the color used to draw the keyboard cursor.
      *
      * The keyboard cursor defaults to using the foreground color of the character

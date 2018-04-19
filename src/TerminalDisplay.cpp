@@ -768,6 +768,36 @@ Enum::CursorShapeEnum TerminalDisplay::keyboardCursorShape() const
 {
     return _cursorShape;
 }
+
+void TerminalDisplay::setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinking)
+{
+    setKeyboardCursorShape(shape);
+
+    setBlinkingCursorEnabled(isBlinking);
+
+    // when the cursor shape and blinking state are changed via the
+    // Set Cursor Style (DECSCUSR) escape sequences in vim, and if the
+    // cursor isn't set to blink, the cursor shape doesn't actually
+    // change until the cursor is moved by the user; calling update()
+    // makes the cursor shape get updated sooner.
+    if (!isBlinking) {
+        update();
+    }
+}
+void TerminalDisplay::resetCursorStyle()
+{
+    if (sessionController() != nullptr) {
+        Profile::Ptr currentProfile = SessionManager::instance()->sessionProfile(sessionController()->session());
+
+        if (currentProfile != nullptr) {
+            Enum::CursorShapeEnum shape = static_cast<Enum::CursorShapeEnum>(currentProfile->property<int>(Profile::CursorShape));
+
+            setKeyboardCursorShape(shape);
+            setBlinkingCursorEnabled(currentProfile->blinkingCursorEnabled());
+        }
+    }
+}
+
 void TerminalDisplay::setKeyboardCursorColor(const QColor& color)
 {
     _cursorColor = color;
