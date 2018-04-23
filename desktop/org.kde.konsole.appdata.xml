@@ -97,7 +97,7 @@
     <p xml:lang="es">Konsole es un emulador de terminal X, al que se le suele llamar terminal o shell. Emula in interfaz de línea de órdenes en una ventana solo de texto.</p>
     <p xml:lang="fi">Konsole on X-pääte-emulaattori eli pääte eli komentotulkki. Se mukailee tekstitilan komentorivikäyttöliittymää.</p>
     <p xml:lang="fr">Konsole est un émulateur de terminal, souvent utilisé appelé console ou shell. Il émule une interface de ligne de commande dans une fenêtre de texte seulement.</p>
-    <p xml:lang="gl">Konsole é un emulador de terminal de X, comunmente denominado terminal ou consola. Emula unha interface de liña de ordes nunha xanela de só texto.</p>
+    <p xml:lang="gl">Konsole é un emulador de terminal de X, comunmente denominado terminal ou intérprete de ordes. Emula unha interface de liña de ordes nunha xanela de só texto.</p>
     <p xml:lang="hu">A Konsole egy X terminálemulátor, más néven terminál vagy parancsértelmező. Parancssori felületet emulál egy szöveges ablakba,</p>
     <p xml:lang="ia">Konsole es un emulator de terminal de X, sovente referite como unterminal o un shell. Illo emula uninterfacie de linea de commando in un fenestra de sol texto.</p>
     <p xml:lang="it">Konsole è un emulatore di terminale per X, spesso indicato come un terminale o una shell. Emula un'interfaccia a riga di comando in una finestra di solo testo.</p>
@@ -416,6 +416,7 @@
       <caption xml:lang="es">Konsole usado como un emulador de terminal</caption>
       <caption xml:lang="fi">Pääte-emulaattorina käytetään Konsolea.</caption>
       <caption xml:lang="fr">Konsole est un émulateur de terminal</caption>
+      <caption xml:lang="gl">Konsole usado como emulador de terminal.</caption>
       <caption xml:lang="it">Konsole utilizzata come un emulatore di terminale</caption>
       <caption xml:lang="ko">터미널 에뮬레이터로 사용 중인 Konsole</caption>
       <caption xml:lang="nl">Konsole wordt gebruikt als een terminalemulator</caption>
