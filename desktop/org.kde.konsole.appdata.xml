@@ -429,6 +429,7 @@
       <caption xml:lang="uk">Konsole використовується як емулятор термінала</caption>
       <caption xml:lang="x-test">xxKonsole being used as a terminal emulatorxx</caption>
       <caption xml:lang="zh-CN">将 Konsole 用作终端仿真器</caption>
+      <caption xml:lang="zh-TW">Konsole 是一款使用中的終端模擬器</caption>
     </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
