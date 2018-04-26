@@ -195,7 +195,7 @@ void Profile::useFallback()
     setProperty(CopyTextAsHTML, true);
     setProperty(TrimLeadingSpacesInSelectedText, false);
     setProperty(TrimTrailingSpacesInSelectedText, false);
-    setProperty(DropUrlsAsText, false);
+    setProperty(DropUrlsAsText, true);
     setProperty(PasteFromSelectionEnabled, true);
     setProperty(PasteFromClipboardEnabled, false);
     setProperty(MiddleClickPasteMode, Enum::PasteFromX11Selection);
