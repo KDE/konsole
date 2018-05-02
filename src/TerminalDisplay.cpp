@@ -1606,6 +1606,31 @@ void TerminalDisplay::paintFilters(QPainter& painter)
         }
     }
 }
+
+inline static bool isRtl(const Character &chr) {
+    ushort c = 0;
+    if ((chr.rendition & RE_EXTENDED_CHAR) == 0) {
+        c = chr.character;
+    } else {
+        ushort extendedCharLength = 0;
+        const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(chr.character, extendedCharLength);
+        if (chars != nullptr) {
+            c = chars[0];
+        }
+    }
+
+    switch(QChar::direction(c)) {
+    case QChar::DirR:
+    case QChar::DirAL:
+    case QChar::DirRLE:
+    case QChar::DirRLI:
+    case QChar::DirRLO:
+        return true;
+    default:
+        return false;
+    }
+}
+
 void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
 {
     const QPoint tL  = contentsRect().topLeft();
@@ -1663,15 +1688,16 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             const CharacterColor currentForeground = _image[loc(x, y)].foregroundColor;
             const CharacterColor currentBackground = _image[loc(x, y)].backgroundColor;
             const RenditionFlags currentRendition = _image[loc(x, y)].rendition;
+            const bool rtl = isRtl(_image[loc(x, y)]);
 
-            if(_image[loc(x, y)].character <= 0x7e) {
+            if(_image[loc(x, y)].character <= 0x7e || rtl) {
                 while (x + len <= rlx &&
                         _image[loc(x + len, y)].foregroundColor == currentForeground &&
                         _image[loc(x + len, y)].backgroundColor == currentBackground &&
                         (_image[loc(x + len, y)].rendition & ~RE_EXTENDED_CHAR) == (currentRendition & ~RE_EXTENDED_CHAR) &&
                         (_image[ qMin(loc(x + len, y) + 1, _imageSize) ].character == 0) == doubleWidth &&
                         _image[loc(x + len, y)].isLineChar() == lineDraw &&
-                        _image[loc(x + len, y)].character <= 0x7e) {
+                        (_image[loc(x + len, y)].character <= 0x7e || rtl)) {
                     const quint16 c = _image[loc(x + len, y)].character;
                     if ((_image[loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                         // sequence of characters
