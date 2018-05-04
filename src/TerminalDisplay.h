@@ -859,8 +859,9 @@ private:
     QRect imageToWidget(const QRect &imageArea) const;
 
     // maps a point on the widget to the position ( ie. line and column )
-    // of the character at that point.
-    void getCharacterPosition(const QPoint &widgetPoint, int &line, int &column) const;
+    // of the character at that point. When the edge is true, it maps to
+    // a character which left edge is closest to the point.
+    void getCharacterPosition(const QPoint &widgetPoint, int &line, int &column, bool edge = true) const;
 
     // the area where the preedit string for input methods will be draw
     QRect preeditRect() const;

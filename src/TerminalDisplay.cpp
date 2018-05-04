@@ -1485,7 +1485,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     int cursorLine;
     int cursorColumn;
 
-    getCharacterPosition(cursorPos , cursorLine , cursorColumn);
+    getCharacterPosition(cursorPos, cursorLine, cursorColumn, false);
     Character cursorCharacter = _image[loc(cursorColumn, cursorLine)];
 
     painter.setPen(QPen(cursorCharacter.foregroundColor.color(colorTable())));
@@ -2275,7 +2275,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 QList<QAction*> TerminalDisplay::filterActions(const QPoint& position)
 {
     int charLine, charColumn;
-    getCharacterPosition(position, charLine, charColumn);
+    getCharacterPosition(position, charLine, charColumn, false);
 
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
 
@@ -2645,30 +2645,17 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
     }
 }
 
-void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, int& line, int& column) const
+void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, int& line, int& column, bool edge) const
 {
-    column = (widgetPoint.x() + _fontWidth / 2 - contentsRect().left() - _contentRect.left()) / _fontWidth;
-    line = (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _fontHeight;
-
-    if (line < 0) {
-        line = 0;
-    }
-    if (column < 0) {
-        column = 0;
-    }
-
-    if (line >= _usedLines) {
-        line = _usedLines - 1;
-    }
-
-    // the column value returned can be equal to _usedColumns, which
-    // is the position just after the last character displayed in a line.
+    // the column value returned can be equal to _usedColumns (when edge == true),
+    // which is the position just after the last character displayed in a line.
     //
     // this is required so that the user can select characters in the right-most
     // column (or left-most for right-to-left input)
-    if (column > _usedColumns) {
-        column = _usedColumns;
-    }
+    const int columnMax = edge ? _usedColumns : _usedColumns - 1;
+    const int xOffset = edge ? _fontWidth / 2 : 0;
+    column = qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _fontWidth, columnMax);
+    line = qBound(0, (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _fontHeight, _usedLines - 1);
 }
 
 void TerminalDisplay::updateLineProperties()
