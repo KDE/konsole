@@ -3395,11 +3395,12 @@ QRect TerminalDisplay::preeditRect() const
     if (preeditLength == 0) {
         return QRect();
     }
+    const QRect stringRect(_contentRect.left() + _fontWidth * cursorPosition().x(),
+                           _contentRect.top() + _fontHeight * cursorPosition().y(),
+                           _fontWidth * preeditLength,
+                           _fontHeight);
 
-    return QRect(_contentRect.left() + _fontWidth * cursorPosition().x(),
-                 _contentRect.top() + _fontHeight * cursorPosition().y(),
-                 _fontWidth * preeditLength,
-                 _fontHeight);
+    return stringRect.intersected(_contentRect);
 }
 
 void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRect& rect)
