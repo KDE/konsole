@@ -233,6 +233,11 @@ void TerminalDisplay::fontChange(const QFont&)
 void TerminalDisplay::setVTFont(const QFont& f)
 {
     QFont newFont(f);
+
+    // In case the provided font doesn't have some specific characters it should
+    // fall back to a Monospace fonts.
+    newFont.setStyleHint(QFont::TypeWriter);
+
     QFontMetrics fontMetrics(newFont);
 
     // This check seems extreme and semi-random
