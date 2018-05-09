@@ -192,10 +192,23 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr profile,
     if (apply.shouldApply(Profile::Environment)) {
         // add environment variable containing home directory of current profile
         // (if specified)
+
+        // prepend a 0 to the VERSION_MICRO part to make the version string
+        // length consistent, so that conditions that depend on the exported
+        // env var actually work
+        // e.g. the second version should be higher than the first one:
+        // 18.04.12 -> 180412
+        // 18.08.0  -> 180800
+        QStringList list = QStringLiteral(KONSOLE_VERSION).split(QLatin1String("."));
+        if (list[2].length() < 2) {
+                list[2].prepend(QLatin1String("0"));
+        }
+        const QString &numericVersion = list.join(QString());
+
         QStringList environment = profile->environment();
         environment << QStringLiteral("PROFILEHOME=%1").arg(profile->defaultWorkingDirectory());
         environment << QStringLiteral("KONSOLE_PROFILE_NAME=%1").arg(profile->name());
-        environment << QStringLiteral("KONSOLE_VERSION=%1").arg(QStringLiteral(KONSOLE_VERSION).remove(QLatin1String(".")));
+        environment << QStringLiteral("KONSOLE_VERSION=%1").arg(numericVersion);
 
         session->setEnvironment(environment);
     }
