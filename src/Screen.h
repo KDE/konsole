@@ -492,7 +492,7 @@ public:
      * into plain text with no formatting.
      * @param options See Screen::DecodingOptions
      */
-    void writeSelectionToStream(TerminalCharacterDecoder *decoder, const Konsole::Screen::DecodingOptions options) const;
+    void writeSelectionToStream(TerminalCharacterDecoder *decoder, const DecodingOptions options) const;
 
     /**
      * Checks if the text between from and to is inside the current
@@ -610,7 +610,7 @@ private:
     //decoder - a decoder which converts terminal characters (an Character array) into text
     //appendNewLine - if true a new line character (\n) is appended to the end of the line
     int  copyLineToStream(int line, int start, int count, TerminalCharacterDecoder *decoder,
-                          bool appendNewLine, const Konsole::Screen::DecodingOptions options) const;
+                          bool appendNewLine, const DecodingOptions options) const;
 
     //fills a section of the screen image with the character 'c'
     //the parameters are specified as offsets from the start of the screen image.
@@ -642,7 +642,7 @@ private:
     // copies text from 'startIndex' to 'endIndex' to a stream
     // startIndex and endIndex are positions generated using the loc(x,y) macro
     void writeToStream(TerminalCharacterDecoder *decoder, int startIndex, int endIndex,
-                       const Konsole::Screen::DecodingOptions options) const;
+                       const DecodingOptions options) const;
     // copies 'count' lines from the screen buffer into 'dest',
     // starting from 'startLine', where 0 is the first line in the screen buffer
     void copyFromScreen(Character *dest, int startLine, int count) const;
@@ -727,9 +727,10 @@ private:
     unsigned short _lastDrawnChar;
 };
 
+Q_DECLARE_OPERATORS_FOR_FLAGS(Screen::DecodingOptions)
+
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Konsole::Screen::DecodingOptions)
 
 
 #endif // SCREEN_H

@@ -229,7 +229,7 @@ public:
      *
      * @param options See Screen::DecodingOptions
      */
-    QString selectedText(const Konsole::Screen::DecodingOptions options) const;
+    QString selectedText(const Screen::DecodingOptions options) const;
 
 public Q_SLOTS:
     /**
