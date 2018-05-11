@@ -1473,6 +1473,12 @@ QPoint TerminalDisplay::cursorPosition() const
     }
 }
 
+inline bool TerminalDisplay::isCursorOnDisplay() const
+{
+    return cursorPosition().x() < _columns &&
+           cursorPosition().y() < _lines;
+}
+
 FilterChain* TerminalDisplay::filterChain() const
 {
     return _filterChain;
@@ -1491,7 +1497,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     int cursorColumn;
 
     getCharacterPosition(cursorPos, cursorLine, cursorColumn, false);
-    Character cursorCharacter = _image[loc(cursorColumn, cursorLine)];
+    Character cursorCharacter = _image[loc(qMin(cursorColumn, _columns - 1), cursorLine)];
 
     painter.setPen(QPen(cursorCharacter.foregroundColor.color(colorTable())));
 
@@ -1551,7 +1557,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
             // display in _columns
 
             // Check image size so _image[] is valid (see makeImage)
-            if (loc(endColumn, line) > _imageSize) {
+            if (endColumn >= _columns || line >= _lines) {
                 break;
             }
 
@@ -1689,7 +1695,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             }
 
             const bool lineDraw = _image[loc(x, y)].isLineChar();
-            const bool doubleWidth = (_image[ qMin(loc(x, y) + 1, _imageSize) ].character == 0);
+            const bool doubleWidth = (_image[qMin(loc(x, y) + 1, _imageSize - 1)].character == 0);
             const CharacterColor currentForeground = _image[loc(x, y)].foregroundColor;
             const CharacterColor currentBackground = _image[loc(x, y)].backgroundColor;
             const RenditionFlags currentRendition = _image[loc(x, y)].rendition;
@@ -1700,7 +1706,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
                         _image[loc(x + len, y)].foregroundColor == currentForeground &&
                         _image[loc(x + len, y)].backgroundColor == currentBackground &&
                         (_image[loc(x + len, y)].rendition & ~RE_EXTENDED_CHAR) == (currentRendition & ~RE_EXTENDED_CHAR) &&
-                        (_image[ qMin(loc(x + len, y) + 1, _imageSize) ].character == 0) == doubleWidth &&
+                        (_image[qMin(loc(x + len, y) + 1, _imageSize - 1)].character == 0) == doubleWidth &&
                         _image[loc(x + len, y)].isLineChar() == lineDraw &&
                         (_image[loc(x + len, y)].character <= 0x7e || rtl)) {
                     const quint16 c = _image[loc(x + len, y)].character;
@@ -1929,7 +1935,13 @@ void TerminalDisplay::blinkCursorEvent()
 
 void TerminalDisplay::updateCursor()
 {
-    int cursorLocation = loc(cursorPosition().x(), cursorPosition().y());
+    if (!isCursorOnDisplay()){
+        return;
+    }
+
+    const int cursorLocation = loc(cursorPosition().x(), cursorPosition().y());
+    Q_ASSERT(cursorLocation < _imageSize);
+
     int charWidth = konsole_wcwidth(_image[cursorLocation].character);
     QRect cursorRect = imageToWidget(QRect(cursorPosition(), QSize(charWidth, 1)));
     update(cursorRect);
@@ -2002,16 +2014,14 @@ void TerminalDisplay::makeImage()
 
     _imageSize = _lines * _columns;
 
-    // We over-commit one character so that we can be more relaxed in dealing with
-    // certain boundary conditions: _image[_imageSize] is a valid but unused position
-    _image = new Character[_imageSize + 1];
+    _image = new Character[_imageSize];
 
     clearImage();
 }
 
 void TerminalDisplay::clearImage()
 {
-    for (int i = 0; i <= _imageSize; ++i) {
+    for (int i = 0; i < _imageSize; ++i) {
         _image[i] = Screen::DefaultChar;
     }
 }
@@ -2475,9 +2485,9 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
         // Find left (left_not_right ? from here : from start)
         QPoint left = left_not_right ? here : _iPntSelCorr;
-        i = loc(left.x(), left.y());
-        if (i >= 0 && i <= _imageSize) {
-            selClass = charClass(_image[i]);
+        i = loc(qBound(0, left.x(), _columns - 1), qBound(0, left.y(), _lines - 1));
+        if (i >= 0 && i < _imageSize) {
+            selClass = charClass(_image[qMin(i, _imageSize - 1)]);
             while (((left.x() > 0) || (left.y() > 0 && ((_lineProperties[left.y() - 1] & LINE_WRAPPED) != 0)))
                     && charClass(_image[i - 1]) == selClass) {
                 i--;
@@ -2492,9 +2502,9 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
         // Find left (left_not_right ? from start : from here)
         QPoint right = left_not_right ? _iPntSelCorr : here;
-        i = loc(right.x(), right.y());
-        if (i >= 0 && i <= _imageSize) {
-            selClass = charClass(_image[i]);
+        i = loc(qBound(0, left.x(), _columns - 1), qBound(0, left.y(), _lines - 1));
+        if (i >= 0 && i < _imageSize) {
+            selClass = charClass(_image[qMin(i, _imageSize - 1)]);
             while (((right.x() < _usedColumns - 1) || (right.y() < _usedLines - 1 && ((_lineProperties[right.y()] & LINE_WRAPPED) != 0)))
                     && charClass(_image[i + 1]) == selClass) {
                 i++;
@@ -2551,19 +2561,8 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         // Find left (left_not_right ? from start : from here)
         QPoint right = left_not_right ? _iPntSelCorr : here;
         if (right.x() > 0 && !_columnSelectionMode) {
-            int i = loc(right.x(), right.y());
-            if (i >= 0 && i <= _imageSize) {
-                selClass = charClass(_image[i - 1]);
-                /* if (selClass == ' ')
-                 {
-                   while ( right.x() < _usedColumns-1 && charClass(_image[i+1].character) == selClass && (right.y()<_usedLines-1) &&
-                                   !(_lineProperties[right.y()] & LINE_WRAPPED))
-                   { i++; right.rx()++; }
-                   if (right.x() < _usedColumns-1)
-                     right = left_not_right ? _iPntSelCorr : here;
-                   else
-                     right.rx()++;  // will be balanced later because of offset=-1;
-                 }*/
+            if (right.x() - 1 < _columns && right.y() < _lines) {
+                selClass = charClass(_image[loc(right.x() - 1, right.y())]);
             }
         }
 
@@ -2715,7 +2714,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
 
     getCharacterPosition(ev->pos(), charLine, charColumn);
 
-    QPoint pos(charColumn, charLine);
+    QPoint pos(qMin(charColumn, _columns - 1), qMin(charLine, _lines - 1));
 
     // pass on double click as two clicks.
     if (!_mouseMarks && !(ev->modifiers() & Qt::ShiftModifier)) {
@@ -3356,7 +3355,7 @@ void TerminalDisplay::inputMethodEvent(QInputMethodEvent* event)
         emit keyPressedSignal(&keyEvent);
     }
 
-    if (!_readOnly) {
+    if (!_readOnly && isCursorOnDisplay()) {
         _inputMethodData.preeditString = event->preeditString();
         update(preeditRect() | _inputMethodData.previousPreeditRect);
     }
@@ -3380,7 +3379,9 @@ QVariant TerminalDisplay::inputMethodQuery(Qt::InputMethodQuery query) const
         QTextStream stream(&lineText);
         PlainTextDecoder decoder;
         decoder.begin(&stream);
-        decoder.decodeLine(&_image[loc(0, cursorPos.y())], _usedColumns, LINE_DEFAULT);
+        if (isCursorOnDisplay()) {
+            decoder.decodeLine(&_image[loc(0, cursorPos.y())], _usedColumns, LINE_DEFAULT);
+        }
         decoder.end();
         return lineText;
     }
@@ -3410,7 +3411,7 @@ QRect TerminalDisplay::preeditRect() const
 
 void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRect& rect)
 {
-    if (_inputMethodData.preeditString.isEmpty()) {
+    if (_inputMethodData.preeditString.isEmpty() || !isCursorOnDisplay()) {
         return;
     }
 

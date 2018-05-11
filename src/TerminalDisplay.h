@@ -892,6 +892,9 @@ private:
     // returns the position of the cursor in columns and lines
     QPoint cursorPosition() const;
 
+    // returns true if the cursor's position is on display.
+    bool isCursorOnDisplay() const;
+
     // redraws the cursor
     void updateCursor();
 
