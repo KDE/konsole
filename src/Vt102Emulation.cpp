@@ -1190,19 +1190,22 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         {
             if ((entry.command() & KeyboardTranslator::EraseCommand) != 0) {
                 textToSend += eraseChar();
-            } else if ((entry.command() & KeyboardTranslator::ScrollPageUpCommand) != 0) {
-                currentView->scrollScreenWindow(ScreenWindow::ScrollPages, -1);
-            } else if ((entry.command() & KeyboardTranslator::ScrollPageDownCommand) != 0) {
-                currentView->scrollScreenWindow(ScreenWindow::ScrollPages, 1);
-            } else if ((entry.command() & KeyboardTranslator::ScrollLineUpCommand) != 0) {
-                currentView->scrollScreenWindow(ScreenWindow::ScrollLines, -1);
-            } else if ((entry.command() & KeyboardTranslator::ScrollLineDownCommand) != 0) {
-                currentView->scrollScreenWindow(ScreenWindow::ScrollLines, 1);
-            } else if ((entry.command() & KeyboardTranslator::ScrollUpToTopCommand) != 0) {
-                currentView->scrollScreenWindow(ScreenWindow::ScrollLines,
-                                                - currentView->screenWindow()->currentLine());
-            } else if ((entry.command() & KeyboardTranslator::ScrollDownToBottomCommand) != 0) {
-                currentView->scrollScreenWindow(ScreenWindow::ScrollLines, lineCount());
+            }
+            if (currentView != nullptr) {
+                if ((entry.command() & KeyboardTranslator::ScrollPageUpCommand) != 0) {
+                    currentView->scrollScreenWindow(ScreenWindow::ScrollPages, -1);
+                } else if ((entry.command() & KeyboardTranslator::ScrollPageDownCommand) != 0) {
+                    currentView->scrollScreenWindow(ScreenWindow::ScrollPages, 1);
+                } else if ((entry.command() & KeyboardTranslator::ScrollLineUpCommand) != 0) {
+                    currentView->scrollScreenWindow(ScreenWindow::ScrollLines, -1);
+                } else if ((entry.command() & KeyboardTranslator::ScrollLineDownCommand) != 0) {
+                    currentView->scrollScreenWindow(ScreenWindow::ScrollLines, 1);
+                } else if ((entry.command() & KeyboardTranslator::ScrollUpToTopCommand) != 0) {
+                    currentView->scrollScreenWindow(ScreenWindow::ScrollLines,
+                                                    - currentView->screenWindow()->currentLine());
+                } else if ((entry.command() & KeyboardTranslator::ScrollDownToBottomCommand) != 0) {
+                    currentView->scrollScreenWindow(ScreenWindow::ScrollLines, lineCount());
+                }
             }
         } else if (!entry.text().isEmpty()) {
             textToSend += entry.text(true,modifiers);
