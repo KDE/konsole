@@ -365,6 +365,17 @@ void UnixProcessInfo::readProcessInfo(int pid)
     if (readProcInfo(pid)) {
         readArguments(pid);
         readCurrentDir(pid);
+
+        bool ok = false;
+        const QString &processNameString = name(&ok);
+
+        if (ok && processNameString == QLatin1String("sudo")) {
+            //Append process name along with sudo
+            const QVector<QString> &args = arguments(&ok);
+
+            if (ok && args.size() > 1)
+                setName(processNameString + QStringLiteral(" ") + args[1]);
+        }
     }
 }
 
