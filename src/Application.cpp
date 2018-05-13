@@ -269,17 +269,19 @@ int Application::newInstance()
  *
  * ;; is the token separator
  * # at the beginning of line results in line being ignored.
- * supported tokens are title, command and profile.
+ * supported tokens: title, command, profile and workdir
  *
  * Note that the title is static and the tab will close when the
  * command is complete (do not use --noclose).  You can start new tabs.
  *
- * Examples:
-title: This is the title;; command: ssh jupiter
+ * Example below will create 6 tabs as listed and a 7th default tab
+title: This is the title;; command: ssh localhost
+title: This is the title;; command: ssh localhost;; profile: Shell
 title: Top this!;; command: top
+title: mc this!;; command: mc;; workdir: /tmp
 #this line is comment
-command: ssh  earth
-profile: Zsh
+command: ssh localhost
+profile: Shell
 */
 bool Application::processTabsFromFileArgs(MainWindow *window)
 {
