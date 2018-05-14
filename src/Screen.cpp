@@ -527,8 +527,9 @@ void Screen::getImage(Character* dest, int size, int startLine, int endLine) con
         }
     }
 
+    int visX = qMin(_cuX, _columns - 1);
     // mark the character at the current cursor position
-    int cursorIndex = loc(_cuX, _cuY + linesInHistoryBuffer);
+    int cursorIndex = loc(visX, _cuY + linesInHistoryBuffer);
     if (getMode(MODE_Cursor) && cursorIndex < _columns * mergedLines) {
         dest[cursorIndex].rendition |= RE_CURSOR;
     }
@@ -747,7 +748,7 @@ void Screen::displayCharacter(unsigned short c)
             _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties[_cuY] | LINE_WRAPPED);
             nextLine();
         } else {
-            _cuX = _columns - w;
+            _cuX = qMax(_columns - w, 0);
         }
     }
 
@@ -906,7 +907,7 @@ void Screen::toStartOfLine()
 
 int Screen::getCursorX() const
 {
-    return _cuX;
+    return qMin(_cuX, _columns - 1);
 }
 
 int Screen::getCursorY() const
