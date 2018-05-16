@@ -100,7 +100,7 @@ protected:
     // reimplemented from Emulation
     void setMode(int mode) Q_DECL_OVERRIDE;
     void resetMode(int mode) Q_DECL_OVERRIDE;
-    void receiveChar(int cc) Q_DECL_OVERRIDE;
+    void receiveChar(uint cc) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     //causes changeTitle() to be emitted for each (int,QString) pair in pendingTitleUpdates
@@ -108,7 +108,7 @@ private Q_SLOTS:
     void updateTitle();
 
 private:
-    unsigned short applyCharset(unsigned short c);
+    unsigned int applyCharset(uint c);
     void setCharset(int n, int cs);
     void useCharset(int n);
     void setAndUseCharset(int n, int cs);

@@ -188,7 +188,7 @@ QString Emulation::keyBindings() const
 
 // process application unicode input to terminal
 // this is a trivial scanner
-void Emulation::receiveChar(int c)
+void Emulation::receiveChar(uint c)
 {
     c &= 0xff;
     switch (c) {
@@ -208,7 +208,7 @@ void Emulation::receiveChar(int c)
         emit stateSet(NOTIFYBELL);
         break;
     default:
-        _currentScreen->displayCharacter(static_cast<unsigned short int>(c));
+        _currentScreen->displayCharacter(c);
         break;
     }
 }
@@ -240,11 +240,11 @@ void Emulation::receiveData(const char *text, int length)
 
     bufferedUpdate();
 
-    QString unicodeText = _decoder->toUnicode(text, length);
+    QVector<uint> unicodeText = _decoder->toUnicode(text, length).toUcs4();
 
     //send characters to terminal emulator
     for (auto &&i : unicodeText) {
-        receiveChar(i.unicode());
+        receiveChar(i);
     }
 
     //look for z-modem indicator

@@ -451,7 +451,7 @@ protected:
      * Processes an incoming character.  See receiveData()
      * @p c A unicode character code.
      */
-    virtual void receiveChar(int c);
+    virtual void receiveChar(uint c);
 
     /**
      * Sets the active screen.  The terminal has two screens, primary and alternate.

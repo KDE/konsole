@@ -57,7 +57,7 @@ const RenditionFlags RE_OVERLINE       = (1 << 10);
  * detailed too be drawn cleanly at normal font scales without anti
  * -aliasing, so those are drawn as regular characters.
  */
-inline bool isSupportedLineChar(quint16 codePoint)
+inline bool isSupportedLineChar(uint codePoint)
 {
     return (codePoint & 0xFF80) == 0x2500 // Unicode block: Mathematical Symbols - Box Drawing
            && !(0x2504 <= codePoint && codePoint <= 0x250B); // Triple and quadruple dash range
@@ -82,7 +82,7 @@ public:
      * @param _real Indicate whether this character really exists, or exists
      *              simply as place holder.
      */
-    explicit inline Character(quint16 _c = ' ',
+    explicit inline Character(uint _c = ' ',
                               CharacterColor  _f = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR),
                               CharacterColor  _b = CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR),
                               RenditionFlags  _r = DEFAULT_RENDITION,
@@ -99,7 +99,7 @@ public:
      * look up the unicode character sequence in the ExtendedCharTable used to
      * create the sequence.
      */
-    quint16 character;
+    uint character;
 
     /** A combination of RENDITION flags which specify options for drawing the character. */
     RenditionFlags rendition;

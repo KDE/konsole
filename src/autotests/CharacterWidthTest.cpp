@@ -30,39 +30,39 @@ using namespace Konsole;
 
 void CharacterWidthTest::testWidth_data()
 {
-    QTest::addColumn<quint16>("character");
+    QTest::addColumn<uint>("character");
     QTest::addColumn<int>("width");
 
     /* This is a work in progress.... */
 
     /* konsole_wcwidth uses -1 C0/C1 and DEL */
-    QTest::newRow("0xE007F") << quint16(0xE007F) << -1;
+    QTest::newRow("0x007F") << uint(0x007F) << -1;
 
-    QTest::newRow("0x0300") << quint16(0x0300) << 0;
-    QTest::newRow("0x070F") << quint16(0x070F) << 0;
-    QTest::newRow("0x1160") << quint16(0x1160) << 0;
-    QTest::newRow("0x10300") << quint16(0x10300) << 0;
+    QTest::newRow("0x0300") << uint(0x0300) << 0;
+    QTest::newRow("0x070F") << uint(0x070F) << 0;
+    QTest::newRow("0x1160") << uint(0x1160) << 0;
+    QTest::newRow("0x10300") << uint(0x10300) << 1;
 
-    QTest::newRow("a") << quint16('a') << 1;
-    QTest::newRow("0x00AD") << quint16(0x00AD) << 1;
-    QTest::newRow("0x00A0") << quint16(0x00A0) << 1;
-    QTest::newRow("0x10FB") << quint16(0x10FB) << 1;
-    QTest::newRow("0xFF76") << quint16(0xFF76) << 1;
-    QTest::newRow("0x103A0") << quint16(0x103A0) << 1;
-    QTest::newRow("0x10A06") << quint16(0x10A06) << 1;
+    QTest::newRow("a") << uint('a') << 1;
+    QTest::newRow("0x00AD") << uint(0x00AD) << 1;
+    QTest::newRow("0x00A0") << uint(0x00A0) << 1;
+    QTest::newRow("0x10FB") << uint(0x10FB) << 1;
+    QTest::newRow("0xFF76") << uint(0xFF76) << 1;
+    QTest::newRow("0x103A0") << uint(0x103A0) << 1;
+    QTest::newRow("0x10A06") << uint(0x10A06) << 0;
 
-    QTest::newRow("0x3000") << quint16(0x3000) << 2;
-    QTest::newRow("0x300a") << quint16(0x300a) << 2;
-    QTest::newRow("0x300b") << quint16(0x300b) << 2;
-    QTest::newRow("0xFF01") << quint16(0xFF01) << 2;
-    QTest::newRow("0xFF5F") << quint16(0xFF5F) << 2;
-    QTest::newRow("0xFF60") << quint16(0xFF60) << 2;
-    QTest::newRow("0xFFe0") << quint16(0xFFe6) << 2;
+    QTest::newRow("0x3000") << uint(0x3000) << 2;
+    QTest::newRow("0x300a") << uint(0x300a) << 2;
+    QTest::newRow("0x300b") << uint(0x300b) << 2;
+    QTest::newRow("0xFF01") << uint(0xFF01) << 2;
+    QTest::newRow("0xFF5F") << uint(0xFF5F) << 2;
+    QTest::newRow("0xFF60") << uint(0xFF60) << 2;
+    QTest::newRow("0xFFe0") << uint(0xFFe6) << 2;
 }
 
 void CharacterWidthTest::testWidth()
 {
-    QFETCH(quint16, character);
+    QFETCH(uint, character);
 
     QTEST(konsole_wcwidth(character), "width");
 }
