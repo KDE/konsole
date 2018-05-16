@@ -34,8 +34,12 @@ key Return-Shift+NewLine : "\r\n"
 key Return+Shift         : "\EOM"
 
 # Backspace and Delete codes are preserving CTRL-H.
-# Backspace without any modifiers sends '^?'
-key Backspace   -AnyMod : "\x7f"
+#
+# Backspace without CTRL sends '^?'; this matches XTerm behaviour, so that
+# pressing Alt+Backspace will send \E + Del, which is the expected behaviour
+# in some apps (e.g. emacs), and it was the behaviour before the commit
+# that add the Backspace +Control rule
+key Backspace   -Control : "\x7f"
 
 # Match xterm behaviour: Backspace sends '^H' when Control is pressed
 # BS, hex \x08, \b
