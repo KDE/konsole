@@ -915,6 +915,8 @@ private:
     // Boilerplate setup for MessageWidget
     KMessageWidget* createMessageWidget(const QString &text);
 
+    int loc(int x, int y) const;
+
     // the window onto the terminal screen which this display
     // is currently showing.
     QPointer<ScreenWindow> _screenWindow;
