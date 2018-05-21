@@ -329,23 +329,16 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
 {
     // basic profile options
     {
-        _ui->emptyNameWarningWidget->setWordWrap(false);
-        _ui->emptyNameWarningWidget->setCloseButtonVisible(false);
-        _ui->emptyNameWarningWidget->setMessageType(KMessageWidget::Warning);
+        _ui->profileNameEdit->setPlaceholderText(i18nc("@label:textbox", "Enter descriptive label"));
 
         ProfileGroup::Ptr group = profile->asGroup();
         if (!group || group->profiles().count() < 2) {
             _ui->profileNameEdit->setText(profile->name());
             _ui->profileNameEdit->setClearButtonEnabled(true);
-
-            _ui->emptyNameWarningWidget->setVisible(profile->name().isEmpty());
-            _ui->emptyNameWarningWidget->setText(i18n("Profile name is empty."));
         } else {
             _ui->profileNameEdit->setText(groupProfileNames(group, -1));
             _ui->profileNameEdit->setEnabled(false);
             _ui->profileNameLabel->setEnabled(false);
-
-            _ui->emptyNameWarningWidget->setVisible(false);
         }
     }
 
@@ -491,8 +484,6 @@ void EditProfileDialog::selectIcon()
 
 void EditProfileDialog::profileNameChanged(const QString &name)
 {
-    _ui->emptyNameWarningWidget->setVisible(name.isEmpty());
-
     updateTempProfileProperty(Profile::Name, name);
     updateTempProfileProperty(Profile::UntranslatedName, name);
     updateCaption(_tempProfile);
