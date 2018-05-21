@@ -2504,7 +2504,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
         // Find left (left_not_right ? from start : from here)
         QPoint right = left_not_right ? _iPntSelCorr : here;
-        i = loc(qBound(0, left.x(), _columns - 1), qBound(0, left.y(), _lines - 1));
+        i = loc(qBound(0, right.x(), _columns - 1), qBound(0, right.y(), _lines - 1));
         if (i >= 0 && i < _imageSize) {
             selClass = charClass(_image[qMin(i, _imageSize - 1)]);
             while (((right.x() < _usedColumns - 1) || (right.y() < _usedLines - 1 && ((_lineProperties[right.y()] & LINE_WRAPPED) != 0)))
