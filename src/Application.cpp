@@ -55,73 +55,71 @@ Application::Application(QSharedPointer<QCommandLineParser> parser,
 
 void Application::populateCommandLineParser(QCommandLineParser *parser)
 {
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("profile"),
-                                         i18nc("@info:shell",
-                                               "Name of profile to use for new Konsole instance"),
-                                         QStringLiteral("name")));
-    parser->addOption(QCommandLineOption(QStringList(QStringLiteral("fallback-profile")),
-                                         i18nc("@info:shell",
-                                               "Use the internal FALLBACK profile")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("workdir"),
-                                         i18nc("@info:shell",
-                                               "Set the initial working directory of the new tab or"
-                                               " window to 'dir'"),
-                                         QStringLiteral("dir")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hold")
-                                                       << QStringLiteral("noclose"),
-                                         i18nc("@info:shell",
-                                               "Do not close the initial session automatically when it"
-                                               " ends.")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("new-tab"),
-                                         i18nc("@info:shell",
-                                               "Create a new tab in an existing window rather than"
-                                               " creating a new window")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("tabs-from-file"),
-                                         i18nc("@info:shell",
-                                               "Create tabs as specified in given tabs configuration"
-                                               " file"),
-                                         QStringLiteral("file")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("background-mode"),
-                                         i18nc("@info:shell",
-                                               "Start Konsole in the background and bring to the front"
-                                               " when Ctrl+Shift+F12 (by default) is pressed")));
-    // --nofork is a compatibility alias for separate
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("separate")
-                                                       << QStringLiteral("nofork"),
-                                         i18nc("@info:shell", "Run in a separate process")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("show-menubar"),
-                                         i18nc("@info:shell",
-                                               "Show the menubar, overriding the default setting")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-menubar"),
-                                         i18nc("@info:shell",
-                                               "Hide the menubar, overriding the default setting")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("show-tabbar"),
-                                         i18nc("@info:shell",
-                                               "Show the tabbar, overriding the default setting")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("hide-tabbar"),
-                                         i18nc("@info:shell",
-                                               "Hide the tabbar, overriding the default setting")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("fullscreen"),
-                                         i18nc("@info:shell", "Start Konsole in fullscreen mode")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("notransparency"),
-                                         i18nc("@info:shell",
-                                               "Disable transparent backgrounds, even if the system"
-                                               " supports them.")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("list-profiles"),
-                                         i18nc("@info:shell", "List the available profiles")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("list-profile-properties"),
-                                         i18nc("@info:shell",
-                                               "List all the profile properties names and their type"
-                                               " (for use with -p)")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("p"),
-                                         i18nc("@info:shell",
-                                               "Change the value of a profile property."),
-                                         QStringLiteral("property=value")));
-    parser->addOption(QCommandLineOption(QStringList() << QStringLiteral("e"),
-                                         i18nc("@info:shell",
-                                               "Command to execute. This option will catch all following"
-                                               " arguments, so use it as the last option."),
-                                         QStringLiteral("cmd")));
+    auto options = QVector<QCommandLineOption> {
+        { { QStringLiteral("profile") },
+            i18nc("@info:shell", "Name of profile to use for new Konsole instance"),
+            QStringLiteral("name")
+        },
+        { { QStringLiteral("fallback-profile") },
+            i18nc("@info:shell", "Use the internal FALLBACK profile")
+        },
+        { { QStringLiteral("workdir") },
+            i18nc("@info:shell", "Set the initial working directory of the new tab or window to 'dir'"),
+            QStringLiteral("dir")
+        },
+        { { QStringLiteral("hold"), QStringLiteral("noclose") },
+           i18nc("@info:shell", "Do not close the initial session automatically when it ends.")
+        },
+        {  {QStringLiteral("new-tab") },
+            i18nc("@info:shell", "Create a new tab in an existing window rather than creating a new window")
+        },
+        { { QStringLiteral("tabs-from-file") },
+            i18nc("@info:shell","Create tabs as specified in given tabs configuration"" file"),
+            QStringLiteral("file")
+        },
+        { { QStringLiteral("background-mode") },
+            i18nc("@info:shell", "Start Konsole in the background and bring to the front when Ctrl+Shift+F12 (by default) is pressed")
+        },
+        { { QStringLiteral("separate"), QStringLiteral("nofork") },
+            i18nc("@info:shell", "Run in a separate process")
+        },
+        { { QStringLiteral("show-menubar") },
+            i18nc("@info:shell", "Show the menubar, overriding the default setting")
+        },
+        { { QStringLiteral("hide-menubar") },
+            i18nc("@info:shell", "Hide the menubar, overriding the default setting")
+        },
+        { { QStringLiteral("show-tabbar") },
+            i18nc("@info:shell", "Show the tabbar, overriding the default setting")
+        },
+        { { QStringLiteral("hide-tabbar") },
+            i18nc("@info:shell", "Hide the tabbar, overriding the default setting")
+        },
+        { { QStringLiteral("fullscreen") },
+            i18nc("@info:shell", "Start Konsole in fullscreen mode")
+        },
+        { { QStringLiteral("notransparency") },
+            i18nc("@info:shell", "Disable transparent backgrounds, even if the system supports them.")
+        },
+        { { QStringLiteral("list-profiles") },
+            i18nc("@info:shell", "List the available profiles")
+        },
+        { { QStringLiteral("list-profile-properties") },
+            i18nc("@info:shell", "List all the profile properties names and their type (for use with -p)")
+        },
+        { { QStringLiteral("p") },
+            i18nc("@info:shell", "Change the value of a profile property."),
+            QStringLiteral("property=value")
+        },
+        { { QStringLiteral("e") },
+            i18nc("@info:shell", "Command to execute. This option will catch all following arguments, so use it as the last option."),
+            QStringLiteral("cmd")
+        }
+    };
+    foreach(const auto& option, options) {
+        parser->addOption(option);
+    }
+
     parser->addPositionalArgument(QStringLiteral("[args]"),
                                   i18nc("@info:shell", "Arguments passed to command"));
 
@@ -132,7 +130,7 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
     // the title and overriding whatever is set elsewhere.
     // https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=532029
     // https://www.debian.org/doc/debian-policy/ch-customized-programs.html#s11.8.3
-    auto titleOption = QCommandLineOption(QStringList() << QStringLiteral("T"),
+    auto titleOption = QCommandLineOption({ QStringLiteral("T") },
                                           QStringLiteral("Debian policy compatibility, not used"),
                                           QStringLiteral("value"));
     titleOption.setHidden(true);
