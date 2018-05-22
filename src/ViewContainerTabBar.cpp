@@ -266,7 +266,7 @@ QPixmap ViewContainerTabBar::dragDropPixmap(int tab)
     QPixmap tabPixmap(rect.width() + borderWidth,
                       rect.height() + borderWidth);
     QPainter painter(&tabPixmap);
-    painter.drawPixmap(0, 0, this->grab(rect));
+    painter.drawPixmap(0, 0, grab(rect));
     QPen borderPen;
     borderPen.setBrush(palette().dark());
     borderPen.setWidth(borderWidth);

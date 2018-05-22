@@ -1102,7 +1102,7 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
 
 int ViewManager::sessionCount()
 {
-    return this->_sessionMap.size();
+    return _sessionMap.size();
 }
 
 QStringList ViewManager::sessionList()
@@ -1148,7 +1148,7 @@ int ViewManager::newSession()
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    this->createView(session);
+    createView(session);
     session->run();
 
     return session->sessionId();
@@ -1170,7 +1170,7 @@ int ViewManager::newSession(const QString &profile)
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    this->createView(session);
+    createView(session);
     session->run();
 
     return session->sessionId();
@@ -1193,7 +1193,7 @@ int ViewManager::newSession(const QString &profile, const QString &directory)
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    this->createView(session);
+    createView(session);
     session->run();
 
     return session->sessionId();
@@ -1211,22 +1211,22 @@ QStringList ViewManager::profileList()
 
 void ViewManager::nextSession()
 {
-    this->nextView();
+    nextView();
 }
 
 void ViewManager::prevSession()
 {
-    this->previousView();
+    previousView();
 }
 
 void ViewManager::moveSessionLeft()
 {
-    this->moveActiveViewLeft();
+    moveActiveViewLeft();
 }
 
 void ViewManager::moveSessionRight()
 {
-    this->moveActiveViewRight();
+    moveActiveViewRight();
 }
 
 void ViewManager::setTabWidthToText(bool useTextWidth)

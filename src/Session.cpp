@@ -1486,10 +1486,10 @@ void Session::setTitle(int role , const QString& title)
 {
     switch (role) {
     case 0:
-        this->setTitle(Session::NameRole, title);
+        setTitle(Session::NameRole, title);
         break;
     case 1:
-        this->setTitle(Session::DisplayedTitleRole, title);
+        setTitle(Session::DisplayedTitleRole, title);
 
         // without these, that title will be overridden by the expansion of
         // title format shortly after, which will confuses users.
@@ -1504,9 +1504,9 @@ QString Session::title(int role) const
 {
     switch (role) {
     case 0:
-        return this->title(Session::NameRole);
+        return title(Session::NameRole);
     case 1:
-        return this->title(Session::DisplayedTitleRole);
+        return title(Session::DisplayedTitleRole);
     default:
         return QString();
     }
@@ -1516,10 +1516,10 @@ void Session::setTabTitleFormat(int context , const QString& format)
 {
     switch (context) {
     case 0:
-        this->setTabTitleFormat(Session::LocalTabTitle, format);
+        setTabTitleFormat(Session::LocalTabTitle, format);
         break;
     case 1:
-        this->setTabTitleFormat(Session::RemoteTabTitle, format);
+        setTabTitleFormat(Session::RemoteTabTitle, format);
         break;
     }
 }
@@ -1528,9 +1528,9 @@ QString Session::tabTitleFormat(int context) const
 {
     switch (context) {
     case 0:
-        return this->tabTitleFormat(Session::LocalTabTitle);
+        return tabTitleFormat(Session::LocalTabTitle);
     case 1:
-        return this->tabTitleFormat(Session::RemoteTabTitle);
+        return tabTitleFormat(Session::RemoteTabTitle);
     default:
         return QString();
     }

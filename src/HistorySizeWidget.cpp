@@ -74,7 +74,7 @@ HistorySizeWidget::HistorySizeWidget(QWidget *parent) :
             this, &Konsole::HistorySizeWidget::buttonClicked);
 
     _ui->historyLineSpinner->setSuffix(ki18ncp("@label:textbox Unit of scrollback", " line", " lines"));
-    this->setLineCount(HistorySizeWidget::DefaultLineCount);
+    setLineCount(HistorySizeWidget::DefaultLineCount);
 
     connect(_ui->historyLineSpinner,
             static_cast<void (KPluralHandlingSpinBox::*)(int)>(&KPluralHandlingSpinBox::valueChanged),
