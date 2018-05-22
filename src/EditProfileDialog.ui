@@ -843,7 +843,7 @@
           <item row="1" column="1">
            <widget class="QPushButton" name="newKeyBindingsButton">
             <property name="toolTip">
-             <string>Create a new key bindings list based upon the selected bindings</string>
+             <string>Create a new key bindings scheme based upon the selected bindings</string>
             </property>
             <property name="text">
              <string comment="@action:button Create an alternate key binding">New...</string>
@@ -853,7 +853,7 @@
           <item row="2" column="1">
            <widget class="QPushButton" name="editKeyBindingsButton">
             <property name="toolTip">
-             <string>Edit the selected key bindings list</string>
+             <string>Edit the selected key bindings scheme</string>
             </property>
             <property name="text">
              <string>Edit...</string>
@@ -863,7 +863,7 @@
           <item row="3" column="1">
            <widget class="QPushButton" name="removeKeyBindingsButton">
             <property name="toolTip">
-             <string>Delete the selected key bindings list</string>
+             <string>Delete the selected key bindings scheme</string>
             </property>
             <property name="text">
              <string>Remove</string>
@@ -882,6 +882,16 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="4" column="1">
+           <widget class="QPushButton" name="resetKeyBindingsButton">
+            <property name="toolTip">
+             <string>Reset the selected key bindings scheme to its default values</string>
+            </property>
+            <property name="text">
+             <string>Defaults</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

@@ -694,16 +694,11 @@ void EditProfileDialog::updateColorSchemeList(const QString &selectedColorScheme
     }
 }
 
-void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
+void EditProfileDialog::updateKeyBindingsList(const QString &selectKeyBindingsName)
 {
     if (_ui->keyBindingList->model() == nullptr) {
         _ui->keyBindingList->setModel(new QStandardItemModel(this));
     }
-
-    const QString &name = lookupProfile()->keyBindings();
-
-    KeyboardTranslatorManager *keyManager = KeyboardTranslatorManager::instance();
-    const KeyboardTranslator *currentTranslator = keyManager->findTranslator(name);
 
     QStandardItemModel *model = qobject_cast<QStandardItemModel *>(_ui->keyBindingList->model());
 
@@ -713,9 +708,9 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 
     QStandardItem *selectedItem = nullptr;
 
-    QStringList translatorNames = keyManager->allTranslators();
-    foreach (const QString &translatorName, translatorNames) {
-        const KeyboardTranslator *translator = keyManager->findTranslator(translatorName);
+    const QStringList &translatorNames = _keyManager->allTranslators();
+    for (const QString &translatorName : translatorNames) {
+        const KeyboardTranslator *translator = _keyManager->findTranslator(translatorName);
         if (translator == nullptr) {
             continue;
         }
@@ -723,10 +718,11 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
         QStandardItem *item = new QStandardItem(translator->description());
         item->setEditable(false);
         item->setData(QVariant::fromValue(translator), Qt::UserRole + 1);
+        item->setData(QVariant::fromValue(_keyManager->findTranslatorPath(translatorName)), Qt::ToolTipRole);
         item->setData(QVariant::fromValue(_profile->font()), Qt::UserRole + 2);
         item->setIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-keyboard")));
 
-        if (translator == currentTranslator) {
+        if (selectKeyBindingsName == translatorName) {
             selectedItem = item;
         }
 
@@ -735,7 +731,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 
     model->sort(0);
 
-    if (selectCurrentTranslator && (selectedItem != nullptr)) {
+    if (selectedItem != nullptr) {
         _ui->keyBindingList->selectionModel()->setCurrentIndex(selectedItem->index(),
                                                                QItemSelectionModel::Select);
     }
@@ -1064,8 +1060,21 @@ void EditProfileDialog::updateColorSchemeButtons()
 
 void EditProfileDialog::updateKeyBindingsButtons()
 {
-    enableIfNonEmptySelection(_ui->editKeyBindingsButton, _ui->keyBindingList->selectionModel());
-    enableIfNonEmptySelection(_ui->removeKeyBindingsButton, _ui->keyBindingList->selectionModel());
+    QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
+
+    if (!selected.isEmpty()) {
+        _ui->editKeyBindingsButton->setEnabled(true);
+
+        const QString &name = selected.first().data(Qt::UserRole + 1).value<const KeyboardTranslator *>()->name();
+
+        bool isResettable = _keyManager->isTranslatorResettable(name);
+        _ui->resetKeyBindingsButton->setEnabled(isResettable);
+
+        bool isDeletable = _keyManager->isTranslatorDeletable(name);
+
+        // if a key bindings scheme can be reset then it can't be deleted
+        _ui->removeKeyBindingsButton->setEnabled(isDeletable && !isResettable);
+    }
 }
 
 void EditProfileDialog::enableIfNonEmptySelection(QWidget *widget, QItemSelectionModel *selectionModel)
@@ -1142,7 +1151,7 @@ void EditProfileDialog::updateButtonApply()
 void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* profile */)
 {
     // setup translator list
-    updateKeyBindingsList(true);
+    updateKeyBindingsList(lookupProfile()->keyBindings());
 
     connect(_ui->keyBindingList->selectionModel(),
             &QItemSelectionModel::selectionChanged, this,
@@ -1150,12 +1159,18 @@ void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* profile */)
     connect(_ui->newKeyBindingsButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::newKeyBinding);
 
+    _ui->editKeyBindingsButton->setEnabled(false);
+    _ui->removeKeyBindingsButton->setEnabled(false);
+    _ui->resetKeyBindingsButton->setEnabled(false);
+
     updateKeyBindingsButtons();
 
     connect(_ui->editKeyBindingsButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::editKeyBinding);
     connect(_ui->removeKeyBindingsButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::removeKeyBinding);
+    connect(_ui->resetKeyBindingsButton, &QPushButton::clicked, this,
+            &Konsole::EditProfileDialog::resetKeyBindings);
 }
 
 void EditProfileDialog::keyBindingSelected()
@@ -1195,60 +1210,24 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     if (!selected.isEmpty()) {
         translator = model->data(selected.first(), Qt::UserRole + 1).value<const KeyboardTranslator *>();
     } else {
-        translator = KeyboardTranslatorManager::instance()->defaultTranslator();
+        translator = _keyManager->defaultTranslator();
     }
 
     Q_ASSERT(translator);
 
-    QPointer<QDialog> dialog = new QDialog(this);
-    auto buttonBox = new QDialogButtonBox(dialog);
-    buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    connect(buttonBox, &QDialogButtonBox::accepted, dialog.data(), &QDialog::accept);
-    connect(buttonBox, &QDialogButtonBox::rejected, dialog.data(), &QDialog::reject);
-
-    if (isNewTranslator) {
-        dialog->setWindowTitle(i18n("New Key Binding List"));
-    } else {
-        dialog->setWindowTitle(i18n("Edit Key Binding List"));
-    }
-
-    auto editor = new KeyBindingEditor;
+    auto editor = new KeyBindingEditor(this);
 
     if (translator != nullptr) {
-        editor->setup(translator);
+        editor->setup(translator, lookupProfile()->keyBindings(), isNewTranslator);
     }
 
-    if (isNewTranslator) {
-        editor->setDescription(i18n("New Key Binding List"));
-    }
+    connect(editor, &Konsole::KeyBindingEditor::updateKeyBindingsListRequest,
+            this, &Konsole::EditProfileDialog::updateKeyBindingsList);
 
-    auto layout = new QVBoxLayout;
-    layout->addWidget(editor);
-    layout->addWidget(buttonBox);
-    dialog->setLayout(layout);
-    // see also the size set in the KeyBindingEditor constructor
-    dialog->setMinimumSize(480, 430);
-    dialog->resize(500, 500);
+    connect(editor, &Konsole::KeyBindingEditor::updateTempProfileKeyBindingsRequest,
+            this, &Konsole::EditProfileDialog::updateTempProfileProperty);
 
-    if (dialog->exec() == QDialog::Accepted) {
-        auto newTranslator = new KeyboardTranslator(*editor->translator());
-
-        if (isNewTranslator) {
-            newTranslator->setName(newTranslator->description());
-        }
-
-        KeyboardTranslatorManager::instance()->addTranslator(newTranslator);
-
-        updateKeyBindingsList();
-
-        const QString &currentTranslator = lookupProfile()
-                                           ->property<QString>(Profile::KeyBindings);
-
-        if (newTranslator->name() == currentTranslator) {
-            updateTempProfileProperty(Profile::KeyBindings, newTranslator->name());
-        }
-    }
-    delete dialog;
+    editor->exec();
 }
 
 void EditProfileDialog::newKeyBinding()
@@ -1259,6 +1238,21 @@ void EditProfileDialog::newKeyBinding()
 void EditProfileDialog::editKeyBinding()
 {
     showKeyBindingEditor(false);
+}
+
+void EditProfileDialog::resetKeyBindings()
+{
+    QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
+
+    if (!selected.isEmpty()) {
+        const QString &name = selected.first().data(Qt::UserRole + 1).value<const KeyboardTranslator *>()->name();
+
+        _keyManager->deleteTranslator(name);
+        // find and load the translator
+        _keyManager->findTranslator(name);
+
+        updateKeyBindingsList(name);
+    }
 }
 
 void EditProfileDialog::setupCheckBoxes(BooleanOption *options, const Profile::Ptr profile)

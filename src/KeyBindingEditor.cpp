@@ -16,34 +16,59 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301  USA.
 */
-
 // Own
 #include "KeyBindingEditor.h"
 
 // Qt
+#include <QDialog>
+#include <QDialogButtonBox>
 #include <QKeyEvent>
 #include <QIcon>
 
 // KDE
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // Konsole
 #include "ui_KeyBindingEditor.h"
+#include "EditProfileDialog.h"
 #include "KeyboardTranslator.h"
+#include "KeyboardTranslatorManager.h"
 
 using namespace Konsole;
 
 KeyBindingEditor::KeyBindingEditor(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     _ui(nullptr),
-    _translator(new KeyboardTranslator(QString()))
+    _translator(new KeyboardTranslator(QString())),
+    _isNewTranslator(false)
 {
+    auto layout = new QVBoxLayout;
+
+    auto mainWidget = new QWidget(this);
+    layout->addWidget(mainWidget);
+
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    buttonBox->button(QDialogButtonBox::Cancel)->setDefault(true);
+    layout->addWidget(buttonBox);
+
+    setLayout(layout);
+
+    connect(buttonBox, &QDialogButtonBox::accepted, this, &Konsole::KeyBindingEditor::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+
+    setAttribute(Qt::WA_DeleteOnClose);
+
     _ui = new Ui::KeyBindingEditor();
-    _ui->setupUi(this);
+    _ui->setupUi(mainWidget);
 
     // description edit
+    _ui->descriptionEdit->setPlaceholderText(i18nc("@label:textbox", "Enter descriptive label"));
     connect(_ui->descriptionEdit, &QLineEdit::textChanged, this,
             &Konsole::KeyBindingEditor::setTranslatorDescription);
+    // filter edit
+    connect(_ui->filterEdit, &QLineEdit::textChanged, this,
+            &Konsole::KeyBindingEditor::filterRows);
 
     // key bindings table
     _ui->keyBindingTable->setColumnCount(2);
@@ -52,10 +77,7 @@ KeyBindingEditor::KeyBindingEditor(QWidget *parent) :
     labels << i18n("Key Combination") << i18n("Output");
 
     _ui->keyBindingTable->setHorizontalHeaderLabels(labels);
-    _ui->keyBindingTable->horizontalHeader()->setStretchLastSection(true);
-
-    // see also the sizes set in EditProfileDialog::showKeyBindingEditor()
-    _ui->keyBindingTable->setColumnWidth(0, 300);
+    _ui->keyBindingTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     _ui->keyBindingTable->verticalHeader()->hide();
     _ui->keyBindingTable->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -77,6 +99,25 @@ KeyBindingEditor::~KeyBindingEditor()
 {
     delete _ui;
     delete _translator;
+}
+
+void KeyBindingEditor::filterRows(const QString &text)
+{
+    const int rows = _ui->keyBindingTable->rowCount();
+
+    QList<int> matchedRows;
+
+    for (QTableWidgetItem *matchedItem : _ui->keyBindingTable->findItems(text, Qt::MatchContains)) {
+        matchedRows.append(matchedItem->row());
+    }
+
+    for (int i = 0; i < rows; i++) {
+        if (matchedRows.contains(i) && _ui->keyBindingTable->isRowHidden(i)) {
+            _ui->keyBindingTable->showRow(i);
+        } else if (!matchedRows.contains(i)) {
+            _ui->keyBindingTable->hideRow(i);
+        }
+    }
 }
 
 void KeyBindingEditor::removeSelectedEntry()
@@ -178,15 +219,29 @@ QString KeyBindingEditor::description() const
     return _ui->descriptionEdit->text();
 }
 
-void KeyBindingEditor::setup(const KeyboardTranslator *translator)
+void KeyBindingEditor::setup(const KeyboardTranslator *translator,
+                             const QString &currentProfileTranslator, bool isNewTranslator)
 {
     delete _translator;
 
+    _isNewTranslator = isNewTranslator;
+
+    _currentProfileTranslator  = currentProfileTranslator;
+
     _translator = new KeyboardTranslator(*translator);
 
-    // setup description edit
+    // setup description edit line
     _ui->descriptionEdit->setClearButtonEnabled(true);
-    _ui->descriptionEdit->setText(translator->description());
+    // setup filter edit line
+    _ui->filterEdit->setClearButtonEnabled(true);
+
+    if (_isNewTranslator) {
+        setDescription(i18n("New Key Binding List"));
+        setWindowTitle(i18n("New Key Binding List"));
+    } else {
+        _ui->descriptionEdit->setText(translator->description());
+        setWindowTitle(i18n("Edit Key Binding List"));
+    }
 
     // setup key binding table
     setupKeyBindingTable(translator);
@@ -239,4 +294,44 @@ void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator *translator
 
     connect(_ui->keyBindingTable, &QTableWidget::itemChanged, this,
             &Konsole::KeyBindingEditor::bindingTableItemChanged);
+}
+
+void KeyBindingEditor::accept()
+{
+    if (_translator == nullptr) {
+        return;
+    }
+
+    const auto newTranslator = new KeyboardTranslator(*_translator);
+
+    if (newTranslator->description().isEmpty()) {
+        KMessageBox::sorry(this, i18n("A key bindings scheme cannot be saved with an empty description."));
+        return;
+    }
+
+    if (_isNewTranslator) {
+        newTranslator->setName(newTranslator->description());
+    }
+
+    KeyboardTranslatorManager::instance()->addTranslator(newTranslator);
+
+    const QString &currentTranslatorName = newTranslator->name();
+
+    emit updateKeyBindingsListRequest(currentTranslatorName);
+
+    if (currentTranslatorName == _currentProfileTranslator) {
+        emit updateTempProfileKeyBindingsRequest(Profile::KeyBindings, currentTranslatorName);
+    }
+
+    QDialog::accept();
+}
+
+QSize KeyBindingEditor::sizeHint() const
+{
+    const auto parent = parentWidget();
+    if (parent != nullptr) {
+        return QSize(parent->width() * 0.9, parent->height() * 0.95);
+    }
+
+    return QSize();
 }
