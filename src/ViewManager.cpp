@@ -654,22 +654,12 @@ void ViewManager::createView(Session *session)
 
 ViewContainer *ViewManager::createContainer()
 {
-    ViewContainer *container = nullptr;
 
-    switch (_navigationMethod) {
-    case TabbedNavigation:
-    {
-        auto tabbedContainer = new TabbedViewContainer(_navigationPosition, this, _viewSplitter);
-        container = tabbedContainer;
-
-        connect(tabbedContainer, &TabbedViewContainer::detachTab, this, &ViewManager::detachView);
-        connect(tabbedContainer, &TabbedViewContainer::closeTab, this,
+    auto *container = new TabbedViewContainer(_navigationPosition, this, _viewSplitter);
+    if (_navigationMethod == TabbedNavigation) {
+        connect(container, &TabbedViewContainer::detachTab, this, &ViewManager::detachView);
+        connect(container, &TabbedViewContainer::closeTab, this,
                 &ViewManager::closeTabFromContainer);
-        break;
-    }
-    case NoNavigation:
-    default:
-        container = new StackedViewContainer(_viewSplitter);
     }
 
     // FIXME: these code feels duplicated
@@ -711,6 +701,10 @@ ViewContainer *ViewManager::createContainer()
             &Konsole::ViewManager::viewDestroyed);
     connect(container, &Konsole::ViewContainer::activeViewChanged, this,
             &Konsole::ViewManager::viewActivated);
+
+    if (_navigationMethod != TabbedNavigation) {
+        container->setTabBarVisible(false);
+    }
 
     return container;
 }

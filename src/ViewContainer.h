@@ -405,6 +405,7 @@ public:
     Features supportedFeatures() const Q_DECL_OVERRIDE;
     void setNewViewMenu(QMenu *menu) Q_DECL_OVERRIDE;
     void setStyleSheet(const QString &styleSheet) Q_DECL_OVERRIDE;
+    void setTabBarVisible(bool visible);
 
     // return associated view manager
     ViewManager *connectedViewManager();
@@ -444,7 +445,6 @@ private:
     Q_DISABLE_COPY(TabbedViewContainer)
 
     void dynamicTabBarVisibility();
-    void setTabBarVisible(bool visible);
     void setTabActivity(int index, bool activity);
     void renameTab(int index);
     void updateVisibilityOfQuickButtons();
@@ -462,26 +462,5 @@ private:
     QMenu *_contextPopupMenu;
 };
 
-/** A plain view container with no navigation display */
-class StackedViewContainer : public ViewContainer
-{
-    Q_OBJECT
-
-public:
-    explicit StackedViewContainer(QObject *parent);
-    ~StackedViewContainer() Q_DECL_OVERRIDE;
-
-    QWidget *containerWidget() const Q_DECL_OVERRIDE;
-    QWidget *activeView() const Q_DECL_OVERRIDE;
-    void setActiveView(QWidget *view) Q_DECL_OVERRIDE;
-
-protected:
-    void addViewWidget(QWidget *view, int index) Q_DECL_OVERRIDE;
-    void removeViewWidget(QWidget *view) Q_DECL_OVERRIDE;
-
-private:
-    QPointer<QWidget> _containerWidget;
-    QPointer<QStackedWidget> _stackWidget;
-};
 }
 #endif //VIEWCONTAINER_H
