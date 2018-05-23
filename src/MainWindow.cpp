@@ -287,9 +287,12 @@ void MainWindow::updateWindowCaption()
     // use tab title as caption by default
     QString caption = title;
 
-    // use window title as caption only when enabled and it is not empty
-    if (KonsoleSettings::showWindowTitleOnTitleBar() && !userTitle.isEmpty()) {
-        caption = userTitle;
+    // use window title as caption when this setting is enabled
+    // if the userTitle is empty, use a blank space (using an empty string
+    // removes the dash — before the application name; leaving the dash
+    // looks better)
+    if (KonsoleSettings::showWindowTitleOnTitleBar()) {
+        !userTitle.isEmpty() ? caption = userTitle : caption = QStringLiteral(" ");
     }
 
     if (KonsoleSettings::showAppNameOnTitleBar()) {

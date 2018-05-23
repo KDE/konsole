@@ -360,6 +360,12 @@ void Vt102Emulation::receiveChar(uint cc)
 
   if (ces(CTL))
   {
+    // ignore control characters in the text part of Xpe (aka OSC) "ESC]"
+    // escape sequences; this matches what XTERM docs say
+    if (Xpe) {
+        return;
+    }
+
     // DEC HACK ALERT! Control Characters are allowed *within* esc sequences in VT100
     // This means, they do neither a resetTokenizer() nor a pushToToken(). Some of them, do
     // of course. Guess this originates from a weakly layered handling of the X-on
