@@ -391,7 +391,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
                                           QRegularExpression::OptimizeOnFirstUsageOption);
     // key line: key KeySequence : "output"
     // key line: key KeySequence : command
-    static const QRegularExpression key(QStringLiteral("key\\s+([\\w\\+\\s\\-\\*\\.]+)\\s*:\\s*(\"(.*)\"|\\w+)"),
+    static const QRegularExpression key(QStringLiteral("key\\s+(.+?)\\s*:\\s*(\"(.*)\"|\\w+)"),
                                         QRegularExpression::OptimizeOnFirstUsageOption);
 
     QList<Token> list;
