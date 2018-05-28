@@ -274,7 +274,7 @@ private Q_SLOTS:
     void showDisplayContextMenu(const QPoint &position);
     void movementKeyFromSearchBarReceived(QKeyEvent *event);
     void sessionStateChanged(int state);
-    void sessionTitleChanged();
+    void sessionAttributeChanged();
     void sessionReadOnlyChanged();
     void searchTextChanged(const QString &text);
     void searchCompleted(bool success);

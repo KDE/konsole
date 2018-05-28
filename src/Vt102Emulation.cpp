@@ -68,13 +68,13 @@ Vt102Emulation::Vt102Emulation() :
     Emulation(),
     _currentModes(TerminalState()),
     _savedModes(TerminalState()),
-    _pendingTitleUpdates(QHash<int, QString>()),
-    _titleUpdateTimer(new QTimer(this)),
+    _pendingSessionAttributesUpdates(QHash<int, QString>()),
+    _sessionAttributesUpdateTimer(new QTimer(this)),
     _reportFocusEvents(false)
 {
-    _titleUpdateTimer->setSingleShot(true);
-    QObject::connect(_titleUpdateTimer, &QTimer::timeout, this,
-                     &Konsole::Vt102Emulation::updateTitle);
+    _sessionAttributesUpdateTimer->setSingleShot(true);
+    QObject::connect(_sessionAttributesUpdateTimer, &QTimer::timeout, this,
+                     &Konsole::Vt102Emulation::updateSessionAttributes);
 
     initTokenizer();
     reset();
@@ -390,7 +390,7 @@ void Vt102Emulation::receiveChar(uint cc)
     if (lec(1,0,ESC)) { return; }
     if (lec(1,0,ESC+128)) { s[0] = ESC; receiveChar('['); return; }
     if (les(2,1,GRP)) { return; }
-    if (Xte         ) { processWindowAttributeRequest(); resetTokenizer(); return; }
+    if (Xte         ) { processSessionAttributeRequest(); resetTokenizer(); return; }
     if (Xpe         ) { return; }
     if (lec(3,2,'?')) { return; }
     if (lec(3,2,'>')) { return; }
@@ -471,10 +471,10 @@ void Vt102Emulation::receiveChar(uint cc)
   }
 }
 
-void Vt102Emulation::processWindowAttributeRequest()
+void Vt102Emulation::processSessionAttributeRequest()
 {
   // Describes the window or terminal session attribute to change
-  // See Session::UserTitleChange for possible values
+  // See Session::SessionAttributes for possible values
   int attribute = 0;
   int i;
   for (i = 2; i < tokenBufferPos     &&
@@ -501,18 +501,18 @@ void Vt102Emulation::processWindowAttributeRequest()
       return;
   }
 
-  _pendingTitleUpdates[attribute] = value;
-  _titleUpdateTimer->start(20);
+  _pendingSessionAttributesUpdates[attribute] = value;
+  _sessionAttributesUpdateTimer->start(20);
 }
 
-void Vt102Emulation::updateTitle()
+void Vt102Emulation::updateSessionAttributes()
 {
-    QListIterator<int> iter( _pendingTitleUpdates.keys() );
+    QListIterator<int> iter(_pendingSessionAttributesUpdates.keys());
     while (iter.hasNext()) {
         int arg = iter.next();
-        emit titleChanged( arg , _pendingTitleUpdates[arg] );
+        emit sessionAttributeChanged(arg , _pendingSessionAttributesUpdates[arg]);
     }
-    _pendingTitleUpdates.clear();
+    _pendingSessionAttributesUpdates.clear();
 }
 
 // Interpreting Codes ---------------------------------------------------------

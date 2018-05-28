@@ -115,7 +115,7 @@ Session::Session(QObject* parent) :
     //create emulation backend
     _emulation = new Vt102Emulation();
 
-    connect(_emulation, &Konsole::Emulation::titleChanged, this, &Konsole::Session::setUserTitle);
+    connect(_emulation, &Konsole::Emulation::sessionAttributeChanged, this, &Konsole::Session::setSessionAttribute);
     connect(_emulation, &Konsole::Emulation::stateSet, this, &Konsole::Session::activityStateSet);
     connect(_emulation, &Konsole::Emulation::zmodemDownloadDetected, this, &Konsole::Session::fireZModemDownloadDetected);
     connect(_emulation, &Konsole::Emulation::zmodemUploadDetected, this, &Konsole::Session::fireZModemUploadDetected);
@@ -499,9 +499,10 @@ void Session::run()
     emit started();
 }
 
-void Session::setUserTitle(int what, const QString& caption)
+void Session::setSessionAttribute(int what, const QString& caption)
 {
-    //set to true if anything is actually changed (eg. old _nameTitle != new _nameTitle )
+    // set to true if anything has actually changed
+    // eg. old _nameTitle != new _nameTitle
     bool modified = false;
 
     if ((what == IconNameAndWindowTitle) || (what == WindowTitle)) {
@@ -569,7 +570,7 @@ void Session::setUserTitle(int what, const QString& caption)
     }
 
     if (modified) {
-        emit titleChanged();
+        emit sessionAttributeChanged();
     }
 }
 
@@ -928,7 +929,7 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 
     if (!_autoClose) {
         _userTitle = i18nc("@info:shell This session is done", "Finished");
-        emit titleChanged();
+        emit sessionAttributeChanged();
         return;
     }
 
@@ -1009,7 +1010,7 @@ void Session::setTitle(TitleRole role , const QString& newTitle)
             _displayTitle = newTitle;
         }
 
-        emit titleChanged();
+        emit sessionAttributeChanged();
     }
 }
 
@@ -1197,7 +1198,7 @@ void Session::setIconName(const QString& iconName)
 {
     if (iconName != _iconName) {
         _iconName = iconName;
-        emit titleChanged();
+        emit sessionAttributeChanged();
     }
 }
 

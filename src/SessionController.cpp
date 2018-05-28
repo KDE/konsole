@@ -145,7 +145,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     }
 
     setIdentifier(++_lastControllerId);
-    sessionTitleChanged();
+    sessionAttributeChanged();
 
     view->installEventFilter(this);
     view->setSessionController(this);
@@ -168,7 +168,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // listen to activity / silence notifications from session
     connect(_session.data(), &Konsole::Session::stateChanged, this, &Konsole::SessionController::sessionStateChanged);
     // listen to title and icon changes
-    connect(_session.data(), &Konsole::Session::titleChanged, this, &Konsole::SessionController::sessionTitleChanged);
+    connect(_session.data(), &Konsole::Session::sessionAttributeChanged, this, &Konsole::SessionController::sessionAttributeChanged);
     connect(_session.data(), &Konsole::Session::readOnlyChanged, this, &Konsole::SessionController::sessionReadOnlyChanged);
 
     connect(this, &Konsole::SessionController::tabRenamedByUser,  _session,  &Konsole::Session::tabRenamedByUser);
@@ -1589,7 +1589,7 @@ bool SessionController::isReadOnly() const
     }
 }
 
-void SessionController::sessionTitleChanged()
+void SessionController::sessionAttributeChanged()
 {
     if (_sessionIconName != _session->iconName()) {
         _sessionIconName = _session->iconName();
@@ -1616,7 +1616,7 @@ void SessionController::sessionTitleChanged()
 
 void SessionController::sessionReadOnlyChanged() {
     // Trigger icon update
-    sessionTitleChanged();
+    sessionAttributeChanged();
 
     updateReadOnlyActionStates();
 

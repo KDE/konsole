@@ -347,10 +347,11 @@ public:
     }
 
     /**
-      * Possible values of the @p what parameter for setUserTitle()
-      * See "Operating System Controls" section on http://rtfm.etla.org/xterm/ctlseq.html
+      * Possible values of the @p what parameter for setSessionAttribute().
+      * See the "Operating System Commands" section at:
+      * http://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Operating-System-Commands
       */
-    enum UserTitleChange {
+    enum SessionAttributes {
         IconNameAndWindowTitle = 0,
         IconName = 1,
         WindowTitle = 2,
@@ -430,14 +431,15 @@ public Q_SLOTS:
     bool closeInForceWay();
 
     /**
-     * Changes the session title or other customizable aspects of the terminal
-     * emulation display. For a list of what may be changed see the
-     * Emulation::titleChanged() signal.
+     * Changes one of certain session attributes in the terminal emulation
+     * display. For a list of what may be changed see the
+     * Emulation::sessionAttributeChanged() signal.
      *
-     * @param what The feature being changed.  Value is one of UserTitleChange
+     * @param what The session attribute being changed, it is one of the
+     * SessionAttributes enum
      * @param caption The text part of the terminal command
      */
-    void setUserTitle(int what, const QString &caption);
+    void setSessionAttribute(int what, const QString &caption);
 
     /**
      * Enables monitoring for activity in the session.
@@ -591,8 +593,11 @@ Q_SIGNALS:
      */
     void finished();
 
-    /** Emitted when the session's title has changed. */
-    void titleChanged();
+    /**
+     * Emitted when one of certain session attributes has been changed.
+     * See setSessionAttribute().
+     */
+    void sessionAttributeChanged();
 
     /** Emitted when the session gets locked / unlocked. */
     void readOnlyChanged();
