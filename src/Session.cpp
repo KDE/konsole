@@ -304,11 +304,11 @@ void Session::addView(TerminalDisplay* widget)
     connect(widget, &Konsole::TerminalDisplay::mouseSignal, _emulation, &Konsole::Emulation::sendMouseEvent);
     connect(widget, &Konsole::TerminalDisplay::sendStringToEmu, _emulation, &Konsole::Emulation::sendString);
 
-    // allow emulation to notify view when the foreground process
-    // indicates whether or not it is interested in mouse signals
-    connect(_emulation, &Konsole::Emulation::programUsesMouseChanged, widget, &Konsole::TerminalDisplay::setUsesMouse);
+    // allow emulation to notify the view when the foreground process
+    // indicates whether or not it is interested in Mouse Tracking events
+    connect(_emulation, &Konsole::Emulation::programRequestsMouseTracking, widget, &Konsole::TerminalDisplay::setUsesMouseTracking);
 
-    widget->setUsesMouse(_emulation->programUsesMouse());
+    widget->setUsesMouseTracking(_emulation->programUsesMouseTracking());
 
     connect(_emulation, &Konsole::Emulation::enableAlternateScrolling, widget, &Konsole::TerminalDisplay::setAlternateScrolling);
 

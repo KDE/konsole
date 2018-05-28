@@ -381,7 +381,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _resizing(false)
     , _showTerminalSizeHint(true)
     , _bidiEnabled(false)
-    , _mouseMarks(false)
+    , _usesMouseTracking(false)
     , _alternateScrolling(true)
     , _isPrimaryScreen(true)
     , _bracketedPasteMode(false)
@@ -469,7 +469,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     KCursor::setAutoHideCursor(this, true);
     setMouseTracking(true);
 
-    setUsesMouse(true);
+    setUsesMouseTracking(false);
     setBracketedPasteMode(false);
 
     setColorTable(ColorScheme::defaultTable);
@@ -2255,9 +2255,9 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             _preserveLineBreaks = !(((ev->modifiers() & Qt::ControlModifier) != 0u) && !(ev->modifiers() & Qt::AltModifier));
             _columnSelectionMode = ((ev->modifiers() & Qt::AltModifier) != 0u) && ((ev->modifiers() & Qt::ControlModifier) != 0u);
 
-            if (_mouseMarks || (ev->modifiers() == Qt::ShiftModifier)) {
+            if (!_usesMouseTracking || (ev->modifiers() == Qt::ShiftModifier)) {
                 // Only extend selection for programs not interested in mouse
-                if (_mouseMarks && (ev->modifiers() == Qt::ShiftModifier)) {
+                if (!_usesMouseTracking && (ev->modifiers() == Qt::ShiftModifier)) {
                     extendSelection(ev->pos());
                 } else {
                     _screenWindow->clearSelection();
@@ -2284,7 +2284,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
     } else if (ev->button() == Qt::MidButton) {
         processMidButtonClick(ev);
     } else if (ev->button() == Qt::RightButton) {
-        if (_mouseMarks || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
+        if (!_usesMouseTracking || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
             emit configureRequest(ev->pos());
         } else {
             if(!_readOnly) {
@@ -2351,7 +2351,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         update(_mouseOverHotspotArea | previousHotspotArea);
     } else if (!_mouseOverHotspotArea.isEmpty()) {
         if ((_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u)) || (cursor().shape() == Qt::PointingHandCursor)) {
-            setCursor(_mouseMarks ? Qt::IBeamCursor : Qt::ArrowCursor);
+            setCursor(_usesMouseTracking ? Qt::ArrowCursor : Qt::IBeamCursor);
         }
 
         update(_mouseOverHotspotArea);
@@ -2364,10 +2364,10 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         return;
     }
 
-    // if the terminal is interested in mouse movements
-    // then emit a mouse movement signal, unless the shift
-    // key is being held down, which overrides this.
-    if (!_mouseMarks && !(ev->modifiers() & Qt::ShiftModifier)) {
+    // if the program running in the terminal is interested in Mouse Tracking
+    // evnets then emit a mouse movement signal, unless the shift key is
+    // being held down, which overrides this.
+    if (_usesMouseTracking && !(ev->modifiers() & Qt::ShiftModifier)) {
         int button = 3;
         if ((ev->buttons() & Qt::LeftButton) != 0u) {
             button = 0;
@@ -2637,7 +2637,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
             //       outside the range. The procedure used in `mouseMoveEvent'
             //       applies here, too.
 
-            if (!_mouseMarks && !(ev->modifiers() & Qt::ShiftModifier)) {
+            if (_usesMouseTracking && !(ev->modifiers() & Qt::ShiftModifier)) {
                 emit mouseSignal(0,
                                  charColumn + 1,
                                  charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 2);
@@ -2646,7 +2646,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
         _dragInfo.state = diNone;
     }
 
-    if (!_mouseMarks &&
+    if (_usesMouseTracking &&
             (ev->button() == Qt::RightButton || ev->button() == Qt::MidButton) &&
             !(ev->modifiers() & Qt::ShiftModifier)) {
         emit mouseSignal(ev->button() == Qt::MidButton ? 1 : 2,
@@ -2680,7 +2680,7 @@ void TerminalDisplay::updateLineProperties()
 
 void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)
 {
-    if (_mouseMarks || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
+    if (!_usesMouseTracking || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
         const bool appendEnter = (ev->modifiers() & Qt::ControlModifier) != 0u;
 
         if (_middleClickPasteMode == Enum::PasteFromX11Selection) {
@@ -2724,7 +2724,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
     QPoint pos(qMin(charColumn, _columns - 1), qMin(charLine, _lines - 1));
 
     // pass on double click as two clicks.
-    if (!_mouseMarks && !(ev->modifiers() & Qt::ShiftModifier)) {
+    if (_usesMouseTracking && !(ev->modifiers() & Qt::ShiftModifier)) {
         if(!_readOnly) {
             // Send just _ONE_ click event, since the first click of the double click
             // was already sent by the click handler
@@ -2823,9 +2823,10 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             // wheel-down for decreasing font size
             decreaseFontSize();
         }
-    } else if (_mouseMarks && (_scrollBar->maximum() > 0)) {
-        // If the program running in the terminal is not interested in mouse events,
-        // send the event to the scrollbar if the slider has room to move
+    } else if (!_usesMouseTracking && (_scrollBar->maximum() > 0)) {
+        // If the program running in the terminal is not interested in Mouse
+        // Tracking events, send the event to the scrollbar if the slider
+        // has room to move
 
         _scrollWheelState.addWheelEvent(ev);
 
@@ -2835,7 +2836,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
     } else if (!_readOnly) {
         _scrollWheelState.addWheelEvent(ev);
 
-        if(_mouseMarks && !_isPrimaryScreen && _alternateScrolling) {
+        if(!_usesMouseTracking && !_isPrimaryScreen && _alternateScrolling) {
             // Send simulated up / down key presses to the terminal program
             // for the benefit of programs such as 'less' (which use the alternate screen)
 
@@ -2854,7 +2855,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
                 _screenWindow->screen()->setCurrentTerminalDisplay(this);
                 emit keyPressedSignal(&keyEvent);
             }
-        } else if (!_mouseMarks) {
+        } else if (_usesMouseTracking) {
             // terminal program wants notification of mouse activity
 
             int charLine;
@@ -3189,17 +3190,14 @@ void TerminalDisplay::setWordCharacters(const QString& wc)
     _wordCharacters = wc;
 }
 
-// FIXME: the actual value of _mouseMarks is the opposite of its semantic.
-// When using programs not interested with mouse(shell, less), it is true.
-// When using programs interested with mouse(vim,mc), it is false.
-void TerminalDisplay::setUsesMouse(bool on)
+void TerminalDisplay::setUsesMouseTracking(bool on)
 {
-    _mouseMarks = on;
-    setCursor(_mouseMarks ? Qt::IBeamCursor : Qt::ArrowCursor);
+    _usesMouseTracking = on;
+    setCursor(_usesMouseTracking ? Qt::ArrowCursor : Qt::IBeamCursor);
 }
-bool TerminalDisplay::usesMouse() const
+bool TerminalDisplay::usesMouseTracking() const
 {
-    return _mouseMarks;
+    return _usesMouseTracking;
 }
 
 void TerminalDisplay::setAlternateScrolling(bool enable)

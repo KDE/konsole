@@ -564,8 +564,8 @@ public:
         return _flowControlWarningEnabled;
     }
 
-    /** See setUsesMouse() */
-    bool usesMouse() const;
+    /** See setUsesMouseTracking() */
+    bool usesMouseTracking() const;
 
     /** See setAlternateScrolling() */
     bool alternateScrolling() const;
@@ -628,20 +628,21 @@ public Q_SLOTS:
     void outputSuspended(bool suspended);
 
     /**
-     * Sets whether the program whose output is being displayed in the view
-     * is interested in mouse events.
+     * Sets whether the program currently running in the terminal is interested
+     * in Mouse Tracking events.
      *
-     * If this is set to true, mouse signals will be emitted by the view when the user clicks, drags
-     * or otherwise moves the mouse inside the view.
-     * The user interaction needed to create selections will also change, and the user will be required
-     * to hold down the shift key to create a selection or perform other mouse activities inside the
-     * view area - since the program running in the terminal is being allowed to handle normal mouse
-     * events itself.
+     * When set to true, Konsole will send Mouse Tracking events.
      *
-     * @param on Set to true if the program running in the terminal is interested in mouse events
-     * or false otherwise.
+     * The user interaction needed to create text selections will change
+     * also, and the user will be required to hold down the Shift key to
+     * create a selection or perform other mouse activities inside the view
+     * area, since the program running in the terminal is being allowed
+     * to handle normal mouse events itself.
+     *
+     * @param on Set to true if the program running in the terminal is
+     * interested in Mouse Tracking events or false otherwise.
      */
-    void setUsesMouse(bool on);
+    void setUsesMouseTracking(bool on);
 
     /**
      * Sets the AlternateScrolling profile property which controls whether
@@ -713,8 +714,8 @@ Q_SIGNALS:
     void changedContentSizeSignal(int height, int width);
 
     /**
-     * Emitted when the user right clicks on the display, or right-clicks with the Shift
-     * key held down if usesMouse() is true.
+     * Emitted when the user right clicks on the display, or right-clicks
+     * with the Shift key held down if usesMouseTracking() is true.
      *
      * This can be used to display a context menu.
      */
@@ -955,7 +956,7 @@ private:
     bool _resizing;
     bool _showTerminalSizeHint;
     bool _bidiEnabled;
-    bool _mouseMarks;
+    bool _usesMouseTracking;
     bool _alternateScrolling;
     bool _isPrimaryScreen;
     bool _bracketedPasteMode;

@@ -209,13 +209,15 @@ public:
     virtual void reset() = 0;
 
     /**
-     * Returns true if the active terminal program wants
-     * mouse input events.
+     * Returns true if the active terminal program is interested in Mouse
+     * Tracking events.
      *
-     * The programUsesMouseChanged() signal is emitted when this
-     * changes.
+     * The programRequestsMouseTracking() signal is emitted when a program
+     * indicates it's interested in Mouse Tracking events.
+     *
+     * See MODE_Mouse100{0,1,2,3} in Vt102Emulation.
      */
-    bool programUsesMouse() const;
+    bool programUsesMouseTracking() const;
 
     bool programBracketedPasteMode() const;
 
@@ -317,13 +319,16 @@ Q_SIGNALS:
     void changeTabTextColorRequest(int color);
 
     /**
-     * This is emitted when the program running in the shell indicates whether or
-     * not it is interested in mouse events.
+     * This is emitted when the program (typically editors and other full-screen
+     * applications, ones that take up the whole terminal display), running in
+     * the terminal indicates whether or not it is interested in Mouse Tracking
+     * events. This is an XTerm extension, for more information have a look at:
+     * http://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Mouse-Tracking
      *
-     * @param usesMouse This will be true if the program wants to be informed about
-     * mouse events or false otherwise.
+     * @param usesMouseTracking This will be true if the program is interested
+     * in Mouse Tracking events or false otherwise.
      */
-    void programUsesMouseChanged(bool usesMouse);
+    void programRequestsMouseTracking(bool usesMouseTracking);
 
     void enableAlternateScrolling(bool enable);
 
@@ -504,14 +509,14 @@ private Q_SLOTS:
     // view
     void showBulk();
 
-    void usesMouseChanged(bool usesMouse);
+    void setUsesMouseTracking(bool usesMouseTracking);
 
     void bracketedPasteModeChanged(bool bracketedPasteMode);
 
 private:
     Q_DISABLE_COPY(Emulation)
 
-    bool _usesMouse;
+    bool _usesMouseTracking;
     bool _bracketedPasteMode;
     QTimer _bulkTimer1;
     QTimer _bulkTimer2;

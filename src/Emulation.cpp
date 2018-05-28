@@ -39,7 +39,7 @@ Emulation::Emulation() :
     _codec(nullptr),
     _decoder(nullptr),
     _keyTranslator(nullptr),
-    _usesMouse(false),
+    _usesMouseTracking(false),
     _bracketedPasteMode(false),
     _bulkTimer1(new QTimer(this)),
     _bulkTimer2(new QTimer(this)),
@@ -54,20 +54,20 @@ Emulation::Emulation() :
     QObject::connect(&_bulkTimer2, &QTimer::timeout, this, &Konsole::Emulation::showBulk);
 
     // listen for mouse status changes
-    connect(this, &Konsole::Emulation::programUsesMouseChanged, this,
-            &Konsole::Emulation::usesMouseChanged);
+    connect(this, &Konsole::Emulation::programRequestsMouseTracking, this,
+            &Konsole::Emulation::setUsesMouseTracking);
     connect(this, &Konsole::Emulation::programBracketedPasteModeChanged, this,
             &Konsole::Emulation::bracketedPasteModeChanged);
 }
 
-bool Emulation::programUsesMouse() const
+bool Emulation::programUsesMouseTracking() const
 {
-    return _usesMouse;
+    return _usesMouseTracking;
 }
 
-void Emulation::usesMouseChanged(bool usesMouse)
+void Emulation::setUsesMouseTracking(bool usesMouseTracking)
 {
-    _usesMouse = usesMouse;
+    _usesMouseTracking = usesMouseTracking;
 }
 
 bool Emulation::programBracketedPasteMode() const
