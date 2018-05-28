@@ -125,7 +125,7 @@
          <enum>QFrame::Plain</enum>
         </property>
         <property name="text">
-         <string>Starting with Qt 5.9, the next two options will have different affects.</string>
+         <string>Starting with Qt 5.9, the next two options have different effects.</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
