@@ -2224,7 +2224,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 
     int charLine;
     int charColumn;
-    getCharacterPosition(ev->pos(), charLine, charColumn);
+    getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
     QPoint pos = QPoint(charColumn, charLine);
 
     if (ev->button() == Qt::LeftButton) {
@@ -2308,7 +2308,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
 {
     int charLine = 0;
     int charColumn = 0;
-    getCharacterPosition(ev->pos(), charLine, charColumn);
+    getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
 
     processFilters();
     // handle filters
@@ -2620,7 +2620,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
     int charLine;
     int charColumn;
-    getCharacterPosition(ev->pos(), charLine, charColumn);
+    getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
 
     if (ev->button() == Qt::LeftButton) {
         if (_dragInfo.state == diPending) {
@@ -2694,7 +2694,7 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)
         if(!_readOnly) {
             int charLine = 0;
             int charColumn = 0;
-            getCharacterPosition(ev->pos(), charLine, charColumn);
+            getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
 
             emit mouseSignal(1, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
         }
@@ -2719,7 +2719,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
     int charLine = 0;
     int charColumn = 0;
 
-    getCharacterPosition(ev->pos(), charLine, charColumn);
+    getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
 
     QPoint pos(qMin(charColumn, _columns - 1), qMin(charLine, _lines - 1));
 
@@ -2860,7 +2860,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 
             int charLine;
             int charColumn;
-            getCharacterPosition(ev->pos() , charLine , charColumn);
+            getCharacterPosition(ev->pos() , charLine , charColumn, !_usesMouseTracking);
             const int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
             const int button = (steps > 0) ? 4 : 5;
             for (int i = 0; i < abs(steps); ++i) {
