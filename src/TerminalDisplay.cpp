@@ -2469,7 +2469,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     int charColumn = 0;
     int charLine = 0;
-    getCharacterPosition(pos, charLine, charColumn);
+    getCharacterPosition(pos, charLine, charColumn, true);
 
     QPoint here = QPoint(charColumn, charLine);
     QPoint ohere;
@@ -3090,7 +3090,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 
     int charLine;
     int charColumn;
-    getCharacterPosition(ev->pos(), charLine, charColumn);
+    getCharacterPosition(ev->pos(), charLine, charColumn, true);
     selectLine(QPoint(charColumn, charLine),
                _tripleClickMode == Enum::SelectWholeLine);
 }
