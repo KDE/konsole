@@ -383,7 +383,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _bidiEnabled(false)
     , _usesMouseTracking(false)
     , _alternateScrolling(true)
-    , _isPrimaryScreen(true)
     , _bracketedPasteMode(false)
     , _iPntSel(QPoint())
     , _pntSel(QPoint())
@@ -2836,7 +2835,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
     } else if (!_readOnly) {
         _scrollWheelState.addWheelEvent(ev);
 
-        if(!_usesMouseTracking && !_isPrimaryScreen && _alternateScrolling) {
+        if(!_usesMouseTracking && !sessionIsPrimaryScreen() && _alternateScrolling) {
             // Send simulated up / down key presses to the terminal program
             // for the benefit of programs such as 'less' (which use the alternate screen)
 
@@ -3207,11 +3206,6 @@ void TerminalDisplay::setAlternateScrolling(bool enable)
 bool TerminalDisplay::alternateScrolling() const
 {
     return _alternateScrolling;
-}
-
-void TerminalDisplay::usingPrimaryScreen(bool use)
-{
-    _isPrimaryScreen = use;
 }
 
 void TerminalDisplay::setBracketedPasteMode(bool on)
@@ -3870,6 +3864,16 @@ void TerminalDisplay::setSessionController(SessionController* controller)
 SessionController* TerminalDisplay::sessionController()
 {
     return _sessionController;
+}
+
+bool TerminalDisplay::sessionIsPrimaryScreen()
+{
+    Session *currentSession = _sessionController->session();
+    if (currentSession !=nullptr) {
+        return currentSession->isPrimaryScreen();
+    }
+
+    return true;
 }
 
 AutoScrollHandler::AutoScrollHandler(QWidget* parent)

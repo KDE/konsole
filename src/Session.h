@@ -377,6 +377,10 @@ public:
     bool isReadOnly() const;
     void setReadOnly(bool readOnly);
 
+    // Returns true if the current screen is the secondary/alternate one
+    // or false if it's the primary/normal buffer
+    bool isPrimaryScreen();
+
 public Q_SLOTS:
 
     /**
@@ -728,7 +732,7 @@ private Q_SLOTS:
     void updateFlowControlState(bool suspended);
     void updateWindowSize(int lines, int columns);
 
-    // signal relayer
+    // Relays the signal from Emulation and sets _isPrimaryScreen
     void onPrimaryScreenInUse(bool use);
 
     void sessionAttributeRequest(int id);
@@ -813,6 +817,8 @@ private:
 
     bool _readOnly;
     static int lastSessionId;
+
+    bool _isPrimaryScreen;
 };
 
 /**

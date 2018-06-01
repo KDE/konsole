@@ -653,15 +653,6 @@ public Q_SLOTS:
      */
     void setAlternateScrolling(bool enable);
 
-    /**
-     * Sets _isPrimaryScreen depending on which screen is currently in
-     * use, primary or alternate
-     *
-     * @param use Set to @c true if the primary screen is in use or to
-     * @c false otherwise (i.e. the alternate screen is in use)
-     */
-    void usingPrimaryScreen(bool use);
-
     void setBracketedPasteMode(bool on);
 
     /**
@@ -958,7 +949,6 @@ private:
     bool _bidiEnabled;
     bool _usesMouseTracking;
     bool _alternateScrolling;
-    bool _isPrimaryScreen;
     bool _bracketedPasteMode;
 
     QPoint _iPntSel;  // initial selection point
@@ -1046,6 +1036,11 @@ private:
     static const int SIZE_HINT_DURATION = 1000;
 
     SessionController *_sessionController;
+
+    // Returns true if the screen buffer used in the current session is
+    // the primary/normal buffer or false if it's the alternate/secondary
+    // one
+    bool sessionIsPrimaryScreen();
 
     bool _trimLeadingSpaces;   // trim leading spaces in selected text
     bool _trimTrailingSpaces;   // trim trailing spaces in selected text

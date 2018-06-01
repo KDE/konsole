@@ -104,6 +104,7 @@ Session::Session(QObject* parent) :
     , _hasDarkBackground(false)
     , _preferredSize(QSize())
     , _readOnly(false)
+    , _isPrimaryScreen(true)
 {
     _uniqueIdentifier = QUuid::createUuid();
 
@@ -662,7 +663,13 @@ void Session::updateFlowControlState(bool suspended)
 
 void Session::onPrimaryScreenInUse(bool use)
 {
+
+    _isPrimaryScreen = use;
     emit primaryScreenInUse(use);
+}
+bool Session::isPrimaryScreen()
+{
+    return _isPrimaryScreen;
 }
 
 void Session::sessionAttributeRequest(int id)
