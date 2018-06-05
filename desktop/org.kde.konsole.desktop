@@ -234,6 +234,7 @@ Comment[zh_TW]=指令列
 [Desktop Action NewWindow]
 Name=Open a New Window
 Name[ar]=افتح نافذة جديدة
+Name[ast]=Abrir nuna ventana nueva
 Name[bs]=Otvori u novom prozoru
 Name[ca]=Obre una finestra nova
 Name[ca@valencia]=Obri una finestra nova
@@ -282,6 +283,7 @@ Exec=konsole
 
 [Desktop Action NewTab]
 Name=Open a New Tab
+Name[ast]=Abrir nun llingüeta nueva
 Name[ca]=Obre una pestanya nova
 Name[ca@valencia]=Obri una pestanya nova
 Name[cs]=Otevřít novou kartu
