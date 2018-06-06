@@ -191,6 +191,7 @@ GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 
 Comment=Command line access
+Comment[ast]=Accesu a la llinia de comandos
 Comment[ca]=Accés a la línia d'ordres
 Comment[ca@valencia]=Accés a la línia d'ordres
 Comment[cs]=Přístup k příkazové řádce
@@ -283,7 +284,7 @@ Exec=konsole
 
 [Desktop Action NewTab]
 Name=Open a New Tab
-Name[ast]=Abrir nun llingüeta nueva
+Name[ast]=Abrir nuna llingüeta nueva
 Name[ca]=Obre una pestanya nova
 Name[ca@valencia]=Obri una pestanya nova
 Name[cs]=Otevřít novou kartu
