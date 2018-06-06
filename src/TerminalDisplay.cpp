@@ -2254,21 +2254,25 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             _preserveLineBreaks = !(((ev->modifiers() & Qt::ControlModifier) != 0u) && !(ev->modifiers() & Qt::AltModifier));
             _columnSelectionMode = ((ev->modifiers() & Qt::AltModifier) != 0u) && ((ev->modifiers() & Qt::ControlModifier) != 0u);
 
-            if (!_usesMouseTracking || (ev->modifiers() == Qt::ShiftModifier)) {
-                // Only extend selection for programs not interested in mouse
-                if (!_usesMouseTracking && (ev->modifiers() == Qt::ShiftModifier)) {
+    // There are a couple of use cases when selecting text :
+    // Normal buffer or Alternate buffer when not using Mouse Tracking:
+    //  select text or extendSelection or columnSelection or columnSelection + extendSelection
+    //
+    // Alternate buffer when using Mouse Tracking and with Shift pressed:
+    //  select text or columnSelection
+            if (!_usesMouseTracking &&
+                ((ev->modifiers() == Qt::ShiftModifier) ||
+                (((ev->modifiers() & Qt::ShiftModifier) != 0u) && _columnSelectionMode))) {
                     extendSelection(ev->pos());
-                } else {
-                    _screenWindow->clearSelection();
+            } else if ((!_usesMouseTracking && !((ev->modifiers() & Qt::ShiftModifier))) ||
+                       (_usesMouseTracking && ((ev->modifiers() & Qt::ShiftModifier) != 0u))) {
+                _screenWindow->clearSelection();
 
-                    pos.ry() += _scrollBar->value();
-                    _iPntSel = _pntSel = pos;
-                    _actSel = 1; // left mouse button pressed but nothing selected yet.
-                }
-            } else {
-                if(!_readOnly) {
+                pos.ry() += _scrollBar->value();
+                _iPntSel = _pntSel = pos;
+                _actSel = 1; // left mouse button pressed but nothing selected yet.
+            } else if (_usesMouseTracking && !_readOnly) {
                     emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
-                }
             }
 
             if ((_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
