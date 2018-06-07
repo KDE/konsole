@@ -795,15 +795,16 @@ void TerminalDisplay::setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinkin
 }
 void TerminalDisplay::resetCursorStyle()
 {
-    if (sessionController() != nullptr) {
-        Profile::Ptr currentProfile = SessionManager::instance()->sessionProfile(sessionController()->session());
+    Q_ASSERT(_sessionController != nullptr);
+    Q_ASSERT(_sessionController->session() != nullptr);
 
-        if (currentProfile != nullptr) {
-            Enum::CursorShapeEnum shape = static_cast<Enum::CursorShapeEnum>(currentProfile->property<int>(Profile::CursorShape));
+    Profile::Ptr currentProfile = SessionManager::instance()->sessionProfile(_sessionController->session());
 
-            setKeyboardCursorShape(shape);
-            setBlinkingCursorEnabled(currentProfile->blinkingCursorEnabled());
-        }
+    if (currentProfile != nullptr) {
+        Enum::CursorShapeEnum shape = static_cast<Enum::CursorShapeEnum>(currentProfile->property<int>(Profile::CursorShape));
+
+        setKeyboardCursorShape(shape);
+        setBlinkingCursorEnabled(currentProfile->blinkingCursorEnabled());
     }
 }
 
@@ -2834,12 +2835,17 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         _scrollWheelState.addWheelEvent(ev);
 
         _scrollBar->event(ev);
+
+        Q_ASSERT(_sessionController != nullptr);
+
         _sessionController->setSearchStartToWindowCurrentLine();
         _scrollWheelState.clearAll();
     } else if (!_readOnly) {
         _scrollWheelState.addWheelEvent(ev);
 
-        if(!_usesMouseTracking && !sessionIsPrimaryScreen() && _alternateScrolling) {
+        Q_ASSERT(_sessionController->session() != nullptr);
+
+        if(!_usesMouseTracking && !_sessionController->session()->isPrimaryScreen() && _alternateScrolling) {
             // Send simulated up / down key presses to the terminal program
             // for the benefit of programs such as 'less' (which use the alternate screen)
 
@@ -2878,6 +2884,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 
 void TerminalDisplay::viewScrolledByUser()
 {
+    Q_ASSERT(_sessionController != nullptr);
     _sessionController->setSearchStartToWindowCurrentLine();
 }
 
@@ -3868,16 +3875,6 @@ void TerminalDisplay::setSessionController(SessionController* controller)
 SessionController* TerminalDisplay::sessionController()
 {
     return _sessionController;
-}
-
-bool TerminalDisplay::sessionIsPrimaryScreen()
-{
-    Session *currentSession = _sessionController->session();
-    if (currentSession !=nullptr) {
-        return currentSession->isPrimaryScreen();
-    }
-
-    return true;
 }
 
 AutoScrollHandler::AutoScrollHandler(QWidget* parent)

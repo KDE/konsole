@@ -1037,11 +1037,6 @@ private:
 
     SessionController *_sessionController;
 
-    // Returns true if the screen buffer used in the current session is
-    // the primary/normal buffer or false if it's the alternate/secondary
-    // one
-    bool sessionIsPrimaryScreen();
-
     bool _trimLeadingSpaces;   // trim leading spaces in selected text
     bool _trimTrailingSpaces;   // trim trailing spaces in selected text
     bool _mouseWheelZoom;   // enable mouse wheel zooming or not
