@@ -1255,28 +1255,19 @@ void EditProfileDialog::resetKeyBindings()
     }
 }
 
-void EditProfileDialog::setupCheckBoxes(BooleanOption *options, const Profile::Ptr profile)
+void EditProfileDialog::setupCheckBoxes(const QVector<BooleanOption>& options, const Profile::Ptr profile)
 {
-    while (options->button != nullptr) {
-        options->button->setChecked(profile->property<bool>(options->property));
-        connect(options->button, SIGNAL(toggled(bool)), this, options->slot);
-
-        ++options;
+    for(const auto& option : options) {
+        option.button->setChecked(profile->property<bool>(option.property));
+        connect(option.button, SIGNAL(toggled(bool)), this, option.slot);
     }
 }
 
-void EditProfileDialog::setupRadio(RadioOption *possibilities, int actual)
+void EditProfileDialog::setupRadio(const QVector<RadioOption>& possibilities, int actual)
 {
-    while (possibilities->button != nullptr) {
-        if (possibilities->value == actual) {
-            possibilities->button->setChecked(true);
-        } else {
-            possibilities->button->setChecked(false);
-        }
-
-        connect(possibilities->button, SIGNAL(clicked()), this, possibilities->slot);
-
-        ++possibilities;
+    for(const auto& possibility : possibilities) {
+        possibility.button->setChecked(possibility.value == actual);
+        connect(possibility.button, SIGNAL(clicked()), this, possibility.slot);
     }
 }
 
@@ -1285,10 +1276,9 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     // setup scrollbar radio
     int scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
 
-    RadioOption positions[] = { {_ui->scrollBarHiddenButton, Enum::ScrollBarHidden, SLOT(hideScrollBar())},
+    const auto positions = QVector<RadioOption>{ {_ui->scrollBarHiddenButton, Enum::ScrollBarHidden, SLOT(hideScrollBar())},
                                 {_ui->scrollBarLeftButton, Enum::ScrollBarLeft, SLOT(showScrollBarLeft())},
-                                {_ui->scrollBarRightButton, Enum::ScrollBarRight, SLOT(showScrollBarRight())},
-                                {nullptr, 0, nullptr}};
+                                {_ui->scrollBarRightButton, Enum::ScrollBarRight, SLOT(showScrollBarRight())}};
 
     setupRadio(positions, scrollBarPosition);
 
@@ -1305,10 +1295,9 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     // setup scrollpageamount type radio
     int scrollFullPage = profile->property<int>(Profile::ScrollFullPage);
 
-    RadioOption pageamounts[] = {
+    const auto pageamounts = QVector<RadioOption>{
         {_ui->scrollHalfPage, Enum::ScrollPageHalf, SLOT(scrollHalfPage())},
-        {_ui->scrollFullPage, Enum::ScrollPageFull, SLOT(scrollFullPage())},
-        {nullptr, 0, nullptr}
+        {_ui->scrollFullPage, Enum::ScrollPageFull, SLOT(scrollFullPage())}
     };
 
     setupRadio(pageamounts, scrollFullPage);
@@ -1355,7 +1344,7 @@ void EditProfileDialog::scrollHalfPage()
 
 void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
 {
-    BooleanOption options[] = {
+    const auto options = QVector<BooleanOption>{
         {
             _ui->underlineLinksButton, Profile::UnderlineLinksEnabled,
             SLOT(toggleUnderlineLinks(bool))
@@ -1395,18 +1384,15 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
         {
             _ui->enableAlternateScrollingButton, Profile::AlternateScrolling,
             SLOT(toggleAlternateScrolling(bool))
-        },
-        { nullptr, Profile::Property(0), nullptr }
+        }
     };
     setupCheckBoxes(options, profile);
 
     // setup middle click paste mode
     const int middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
-    RadioOption pasteModes[] = {
+    const auto pasteModes = QVector<RadioOption> {
         {_ui->pasteFromX11SelectionButton, Enum::PasteFromX11Selection, SLOT(pasteFromX11Selection())},
-        {_ui->pasteFromClipboardButton, Enum::PasteFromClipboard, SLOT(pasteFromClipboard())},
-        {nullptr, 0, nullptr}
-    };
+        {_ui->pasteFromClipboardButton, Enum::PasteFromClipboard, SLOT(pasteFromClipboard())}    };
     setupRadio(pasteModes, middleClickPasteMode);
 
     // interaction options
@@ -1427,7 +1413,7 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
 
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {
-    BooleanOption options[] = {
+    const auto options = QVector<BooleanOption>{
         {
             _ui->enableBlinkingTextButton, Profile::BlinkingTextEnabled,
             SLOT(toggleBlinkingText(bool))
@@ -1443,8 +1429,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
         {
             _ui->enableBidiRenderingButton, Profile::BidiRenderingEnabled,
             SLOT(togglebidiRendering(bool))
-        },
-        { nullptr, Profile::Property(0), nullptr }
+        }
     };
     setupCheckBoxes(options, profile);
 

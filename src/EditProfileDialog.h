@@ -264,13 +264,13 @@ private:
         int value;
         const char *slot;
     };
-    void setupRadio(RadioOption *possibilities, int actual);
+    void setupRadio(const QVector<RadioOption>& possibilities, int actual);
     struct BooleanOption {
         QAbstractButton *button;
         Profile::Property property;
         const char *slot;
     };
-    void setupCheckBoxes(BooleanOption *options, const Profile::Ptr profile);
+    void setupCheckBoxes(const QVector<BooleanOption>& options, const Profile::Ptr profile);
 
     // returns false if:
     // - the profile name is empty
