@@ -760,47 +760,22 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
     // by using a separate action collection.
 
     const bool enable = (_navigationMethod != NoNavigation);
-    QAction *action;
 
-    action = collection->action(QStringLiteral("next-view"));
-    if (action != nullptr) {
-        action->setEnabled(enable);
-    }
+    auto enableAction = [&enable, &collection](const QString& actionName) {
+        auto *action = collection->action(actionName);
+        if (action != nullptr) {
+            action->setEnabled(enable);
+        }
+    };
 
-    action = collection->action(QStringLiteral("previous-view"));
-    if (action != nullptr) {
-        action->setEnabled(enable);
-    }
-
-    action = collection->action(QStringLiteral("last-tab"));
-    if (action != nullptr) {
-        action->setEnabled(enable);
-    }
-
-    action = collection->action(QStringLiteral("split-view-left-right"));
-    if (action != nullptr) {
-        action->setEnabled(enable);
-    }
-
-    action = collection->action(QStringLiteral("split-view-top-bottom"));
-    if (action != nullptr) {
-        action->setEnabled(enable);
-    }
-
-    action = collection->action(QStringLiteral("rename-session"));
-    if (action != nullptr) {
-        action->setEnabled(enable);
-    }
-
-    action = collection->action(QStringLiteral("move-view-left"));
-    if (action != nullptr) {
-        action->setEnabled(enable);
-    }
-
-    action = collection->action(QStringLiteral("move-view-right"));
-    if (action != nullptr) {
-        action->setEnabled(enable);
-    }
+    enableAction(QStringLiteral("next-view"));
+    enableAction(QStringLiteral("previous-view"));
+    enableAction(QStringLiteral("last-tab"));
+    enableAction(QStringLiteral("split-view-left-right"));
+    enableAction(QStringLiteral("split-view-top-bottom"));
+    enableAction(QStringLiteral("rename-session"));
+    enableAction(QStringLiteral("move-view-left"));
+    enableAction(QStringLiteral("move-view-right"));
 }
 
 ViewManager::NavigationMethod ViewManager::navigationMethod() const
