@@ -667,15 +667,7 @@ ViewContainer *ViewManager::createContainer()
     container->setNavigationPosition(_navigationPosition);
     container->setNavigationTabWidthExpanding(_navigationTabWidthExpanding);
     container->setStyleSheet(_navigationStyleSheet);
-    if (_showQuickButtons) {
-        container->setFeatures(container->features()
-                               | ViewContainer::QuickNewView
-                               | ViewContainer::QuickCloseView);
-    } else {
-        container->setFeatures(container->features()
-                               & ~ViewContainer::QuickNewView
-                               & ~ViewContainer::QuickCloseView);
-    }
+    setContainerFeatures(container);
 
     // connect signals and slots
     connect(container, &Konsole::ViewContainer::viewAdded, this,
@@ -1215,20 +1207,24 @@ void ViewManager::setNavigationStyleSheet(const QString &styleSheet)
     }
 }
 
+void ViewManager::setContainerFeatures(ViewContainer *container)
+{
+    if (_showQuickButtons) {
+        container->setFeatures(container->features()
+                               | ViewContainer::QuickNewView
+                               | ViewContainer::QuickCloseView);
+    } else {
+        container->setFeatures(container->features()
+                               & ~ViewContainer::QuickNewView
+                               & ~ViewContainer::QuickCloseView);
+    }
+}
 void ViewManager::setShowQuickButtons(bool show)
 {
     _showQuickButtons = show;
 
-    foreach (ViewContainer *container, _viewSplitter->containers()) {
-        if (_showQuickButtons) {
-            container->setFeatures(container->features()
-                                   | ViewContainer::QuickNewView
-                                   | ViewContainer::QuickCloseView);
-        } else {
-            container->setFeatures(container->features()
-                                   & ~ViewContainer::QuickNewView
-                                   & ~ViewContainer::QuickCloseView);
-        }
+    for (auto *container : _viewSplitter->containers()) {
+        setContainerFeatures(container);
     }
 }
 

@@ -396,6 +396,9 @@ private:
     // about the session ( such as title and associated icon ) to the display.
     SessionController *createController(Session *session, TerminalDisplay *view);
 
+    // Sets the  possible features for a container.
+    void setContainerFeatures(ViewContainer* container);
+
 private:
     QPointer<ViewSplitter> _viewSplitter;
     QPointer<SessionController> _pluggedController;
