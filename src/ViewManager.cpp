@@ -864,18 +864,8 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
     view->setVTFont(profile->font());
 
     // set scroll-bar position
-    int scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
-
-    if (scrollBarPosition == Enum::ScrollBarLeft) {
-        view->setScrollBarPosition(Enum::ScrollBarLeft);
-    } else if (scrollBarPosition == Enum::ScrollBarRight) {
-        view->setScrollBarPosition(Enum::ScrollBarRight);
-    } else if (scrollBarPosition == Enum::ScrollBarHidden) {
-        view->setScrollBarPosition(Enum::ScrollBarHidden);
-    }
-
-    bool scrollFullPage = profile->property<bool>(Profile::ScrollFullPage);
-    view->setScrollFullPage(scrollFullPage);
+    view->setScrollBarPosition(Enum::ScrollBarPositionEnum(profile->property<int>(Profile::ScrollBarPosition)));
+    view->setScrollFullPage(profile->property<bool>(Profile::ScrollFullPage));
 
     // show hint about terminal size after resizing
     view->setShowTerminalSizeHint(profile->showTerminalSizeHint());
@@ -883,10 +873,7 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
     // terminal features
     view->setBlinkingCursorEnabled(profile->blinkingCursorEnabled());
     view->setBlinkingTextEnabled(profile->blinkingTextEnabled());
-
-    int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
-    view->setTripleClickMode(Enum::TripleClickModeEnum(tripleClickMode));
-
+    view->setTripleClickMode(Enum::TripleClickModeEnum(profile->property<int>(Profile::TripleClickMode)));
     view->setAutoCopySelectedText(profile->autoCopySelectedText());
     view->setControlDrag(profile->property<bool>(Profile::CtrlRequiredForDrag));
     view->setDropUrlsAsText(profile->property<bool>(Profile::DropUrlsAsText));
@@ -894,18 +881,9 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
     view->setLineSpacing(profile->lineSpacing());
     view->setTrimLeadingSpaces(profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText));
     view->setTrimTrailingSpaces(profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText));
-
     view->setOpenLinksByDirectClick(profile->property<bool>(Profile::OpenLinksByDirectClickEnabled));
-
     view->setUrlHintsModifiers(profile->property<int>(Profile::UrlHintsModifiers));
-
-    int middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
-    if (middleClickPasteMode == Enum::PasteFromX11Selection) {
-        view->setMiddleClickPasteMode(Enum::PasteFromX11Selection);
-    } else if (middleClickPasteMode == Enum::PasteFromClipboard) {
-        view->setMiddleClickPasteMode(Enum::PasteFromClipboard);
-    }
-
+    view->setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum(profile->property<int>(Profile::MiddleClickPasteMode)));
     view->setCopyTextAsHTML(profile->property<bool>(Profile::CopyTextAsHTML));
 
     // margin/center
@@ -913,25 +891,12 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
     view->setCenterContents(profile->property<bool>(Profile::TerminalCenter));
 
     // cursor shape
-    int cursorShape = profile->property<int>(Profile::CursorShape);
-
-    if (cursorShape == Enum::BlockCursor) {
-        view->setKeyboardCursorShape(Enum::BlockCursor);
-    } else if (cursorShape == Enum::IBeamCursor) {
-        view->setKeyboardCursorShape(Enum::IBeamCursor);
-    } else if (cursorShape == Enum::UnderlineCursor) {
-        view->setKeyboardCursorShape(Enum::UnderlineCursor);
-    }
+    view->setKeyboardCursorShape(Enum::CursorShapeEnum(profile->property<int>(Profile::CursorShape)));
 
     // cursor color
-    if (profile->useCustomCursorColor()) {
-        const QColor &cursorColor = profile->customCursorColor();
-        view->setKeyboardCursorColor(cursorColor);
-    } else {
-        // an invalid QColor is used to inform the view widget to
-        // draw the cursor using the default color( matching the text)
-        view->setKeyboardCursorColor(QColor());
-    }
+    // an invalid QColor is used to inform the view widget to
+    // draw the cursor using the default color( matching the text)
+    view->setKeyboardCursorColor(profile->useCustomCursorColor() ? profile->customCursorColor() : QColor());
 
     // word characters
     view->setWordCharacters(profile->wordCharacters());
@@ -941,7 +906,6 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
 
     // mouse wheel zoom
     view->setMouseWheelZoom(profile->mouseWheelZoomEnabled());
-
     view->setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
 }
 
