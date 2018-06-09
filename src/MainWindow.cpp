@@ -513,7 +513,7 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
     // doesn't suffer a change in terminal size right after the session
     // starts.  Some applications such as GNU Screen and Midnight Commander
     // don't like this happening
-    createView(session);
+    _viewManager->createView(session);
 
     return session;
 }
@@ -543,14 +543,9 @@ Session *MainWindow::createSSHSession(Profile::Ptr profile, const QUrl &url)
     // doesn't suffer a change in terminal size right after the session
     // starts.  some applications such as GNU Screen and Midnight Commander
     // don't like this happening
-    createView(session);
+    _viewManager->createView(session);
 
     return session;
-}
-
-void MainWindow::createView(Session *session)
-{
-    _viewManager->createView(session);
 }
 
 void MainWindow::setFocus()
@@ -779,17 +774,17 @@ void MainWindow::applyKonsoleSettings()
         removeMenuAccelerators();
     }
 
-    setNavigationVisibility(KonsoleSettings::tabBarVisibility());
-    setNavigationPosition(KonsoleSettings::tabBarPosition());
-    setNavigationBehavior(KonsoleSettings::newTabBehavior());
-    setNavigationTabWidthExpanding(KonsoleSettings::expandTabWidth());
-    setShowQuickButtons(KonsoleSettings::showQuickButtons());
+    _viewManager->setNavigationVisibility(KonsoleSettings::tabBarVisibility());
+    _viewManager->setNavigationPosition(KonsoleSettings::tabBarPosition());
+    _viewManager->setNavigationBehavior(KonsoleSettings::newTabBehavior());
+    _viewManager->setNavigationTabWidthExpanding(KonsoleSettings::expandTabWidth());
+    _viewManager->setShowQuickButtons(KonsoleSettings::showQuickButtons());
 
     if (KonsoleSettings::tabBarUseUserStyleSheet()) {
         setNavigationStyleSheetFromFile(KonsoleSettings::tabBarUserStyleSheetFile());
     } else {
         // Apply default values
-        setNavigationStyleSheet(KonsoleSettings::tabBarStyleSheet());
+        _viewManager->setNavigationStyleSheet(KonsoleSettings::tabBarStyleSheet());
     }
 
     setAutoSaveSettings(QStringLiteral("MainWindow"), KonsoleSettings::saveGeometryOnExit());
@@ -797,41 +792,17 @@ void MainWindow::applyKonsoleSettings()
     updateWindowCaption();
 }
 
-void MainWindow::setNavigationVisibility(int visibility)
-{
-    _viewManager->setNavigationVisibility(visibility);
-}
-
-void MainWindow::setNavigationPosition(int position)
-{
-    _viewManager->setNavigationPosition(position);
-}
-
-void MainWindow::setNavigationStyleSheet(const QString &styleSheet)
-{
-    _viewManager->setNavigationStyleSheet(styleSheet);
-}
-
-void MainWindow::setNavigationBehavior(int behavior)
-{
-    _viewManager->setNavigationBehavior(behavior);
-}
-
-void MainWindow::setNavigationTabWidthExpanding(bool expand)
-{
-    _viewManager->setNavigationTabWidthExpanding(expand);
-}
 
 void MainWindow::setNavigationStyleSheetFromFile(const QUrl &styleSheetFile)
 {
     // Let's only deal w/ local files for now
     if (!styleSheetFile.isLocalFile()) {
-        setNavigationStyleSheet(KonsoleSettings::tabBarStyleSheet());
+        _viewManager->setNavigationStyleSheet(KonsoleSettings::tabBarStyleSheet());
     }
 
     QFile file(styleSheetFile.toLocalFile());
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        setNavigationStyleSheet(KonsoleSettings::tabBarStyleSheet());
+        _viewManager->setNavigationStyleSheet(KonsoleSettings::tabBarStyleSheet());
     }
 
     QString styleSheetText;
@@ -841,12 +812,7 @@ void MainWindow::setNavigationStyleSheetFromFile(const QUrl &styleSheetFile)
     }
 
     // Replace current style sheet w/ loaded file
-    setNavigationStyleSheet(styleSheetText);
-}
-
-void MainWindow::setShowQuickButtons(bool show)
-{
-    _viewManager->setShowQuickButtons(show);
+    _viewManager->setNavigationStyleSheet(styleSheetText);
 }
 
 void MainWindow::activateMenuBar()
