@@ -226,11 +226,9 @@ bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *event)
 
 void IncrementalSearchBar::keyPressEvent(QKeyEvent *event)
 {
-    static QSet<int> movementKeysToPassAlong = QSet<int>()
-                                               << Qt::Key_PageUp
-                                               << Qt::Key_PageDown
-                                               << Qt::Key_Up
-                                               << Qt::Key_Down;
+    static auto movementKeysToPassAlong = QSet<int>{
+        Qt::Key_PageUp, Qt::Key_PageDown, Qt::Key_Up, Qt::Key_Down
+    };
 
     if (movementKeysToPassAlong.contains(event->key())
         && (event->modifiers() == Qt::ShiftModifier)) {
