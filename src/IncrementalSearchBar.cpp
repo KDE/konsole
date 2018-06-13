@@ -195,32 +195,30 @@ void IncrementalSearchBar::setSearchText(const QString &text)
 
 bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *event)
 {
-    if (watched == _searchEdit) {
-        if (event->type() == QEvent::KeyPress) {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+    if ((event->type() != QEvent::KeyPress) || watched != _searchEdit)
+        return QWidget::eventFilter(watched, event);
 
-            if (keyEvent->key() == Qt::Key_Escape) {
-                emit closeClicked();
-                return true;
-            }
+    QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+    if (keyEvent->key() == Qt::Key_Escape) {
+        emit closeClicked();
+        return true;
+    }
 
-            if (keyEvent->key() == Qt::Key_Return && !keyEvent->modifiers()) {
-                _findNextButton->click();
-                return true;
-            }
+    if (keyEvent->key() == Qt::Key_Return && !keyEvent->modifiers()) {
+        _findNextButton->click();
+        return true;
+    }
 
-            if ((keyEvent->key() == Qt::Key_Return)
-                && (keyEvent->modifiers() == Qt::ShiftModifier)) {
-                _findPreviousButton->click();
-                return true;
-            }
+    if ((keyEvent->key() == Qt::Key_Return)
+        && (keyEvent->modifiers() == Qt::ShiftModifier)) {
+        _findPreviousButton->click();
+        return true;
+    }
 
-            if ((keyEvent->key() == Qt::Key_Return)
-                && (keyEvent->modifiers() == Qt::ControlModifier)) {
-                _searchFromButton->click();
-                return true;
-            }
-        }
+    if ((keyEvent->key() == Qt::Key_Return)
+        && (keyEvent->modifiers() == Qt::ControlModifier)) {
+        _searchFromButton->click();
+        return true;
     }
 
     return QWidget::eventFilter(watched, event);
