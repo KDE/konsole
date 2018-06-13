@@ -291,24 +291,8 @@ const QBitArray IncrementalSearchBar::optionsChecked()
 
 void IncrementalSearchBar::setOptions()
 {
-    if (KonsoleSettings::searchCaseSensitive()) {
-        _caseSensitive->setChecked(true);
-    } else {
-        _caseSensitive->setChecked(false);
-    }
-    if (KonsoleSettings::searchRegExpression()) {
-        _regExpression->setChecked(true);
-    } else {
-        _regExpression->setChecked(false);
-    }
-    if (KonsoleSettings::searchHighlightMatches()) {
-        _highlightMatches->setChecked(true);
-    } else {
-        _highlightMatches->setChecked(false);
-    }
-    if (KonsoleSettings::searchReverseSearch()) {
-        _reverseSearch->setChecked(true);
-    } else {
-        _reverseSearch->setChecked(false);
-    }
+    _caseSensitive->setChecked(KonsoleSettings::searchCaseSensitive());
+    _regExpression->setChecked(KonsoleSettings::searchRegExpression());
+    _highlightMatches->setChecked(KonsoleSettings::searchHighlightMatches());
+    _reverseSearch->setChecked(KonsoleSettings::searchReverseSearch());
 }
