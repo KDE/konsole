@@ -282,20 +282,10 @@ void IncrementalSearchBar::focusLineEdit()
 const QBitArray IncrementalSearchBar::optionsChecked()
 {
     QBitArray options(4, false);
-
-    if (_caseSensitive->isChecked()) {
-        options.setBit(MatchCase);
-    }
-    if (_regExpression->isChecked()) {
-        options.setBit(RegExp);
-    }
-    if (_highlightMatches->isChecked()) {
-        options.setBit(HighlightMatches);
-    }
-    if (_reverseSearch->isChecked()) {
-        options.setBit(ReverseSearch);
-    }
-
+    options.setBit(MatchCase, _caseSensitive->isChecked());
+    options.setBit(RegExp, _regExpression->isChecked());
+    options.setBit(HighlightMatches, _highlightMatches->isChecked());
+    options.setBit(ReverseSearch, _reverseSearch->isChecked());
     return options;
 }
 
