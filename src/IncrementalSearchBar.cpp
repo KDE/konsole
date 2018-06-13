@@ -249,23 +249,18 @@ void IncrementalSearchBar::setVisible(bool visible)
 
 void IncrementalSearchBar::setFoundMatch(bool match)
 {
-    if (!match && !_searchEdit->text().isEmpty()) {
-        KStatefulBrush backgroundBrush(KColorScheme::View, KColorScheme::NegativeBackground);
-
-        QString matchStyleSheet = QStringLiteral("QLineEdit{ background-color:%1 }")
-                                  .arg(backgroundBrush.brush(_searchEdit).color().name());
-
-        _searchEdit->setStyleSheet(matchStyleSheet);
-    } else if (_searchEdit->text().isEmpty()) {
-        clearLineEdit();
-    } else {
-        KStatefulBrush backgroundBrush(KColorScheme::View, KColorScheme::PositiveBackground);
-
-        QString matchStyleSheet = QStringLiteral("QLineEdit{ background-color:%1 }")
-                                  .arg(backgroundBrush.brush(_searchEdit).color().name());
-
-        _searchEdit->setStyleSheet(matchStyleSheet);
+    if (_searchEdit->text().isEmpty()) {
+         clearLineEdit();
+         return;
     }
+
+    const auto backgroundBrush = KStatefulBrush(KColorScheme::View,
+        match ? KColorScheme::PositiveBackground : KColorScheme::NegativeBackground);
+
+    const auto matchStyleSheet = QStringLiteral("QLineEdit{ background-color:%1 }")
+                              .arg(backgroundBrush.brush(_searchEdit).color().name());
+
+    _searchEdit->setStyleSheet(matchStyleSheet);
 }
 
 void IncrementalSearchBar::clearLineEdit()
