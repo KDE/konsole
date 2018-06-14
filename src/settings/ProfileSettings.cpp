@@ -123,11 +123,11 @@ void ProfileSettings::updateItems(const Profile::Ptr profile)
         return;
     }
 
-    QList<QStandardItem*> items;
-    items << _sessionModel->item(row, ProfileNameColumn);
-    items << _sessionModel->item(row, FavoriteStatusColumn);
-    items << _sessionModel->item(row, ShortcutColumn);
-
+    const auto items = QList<QStandardItem*> {
+        _sessionModel->item(row, ProfileNameColumn),
+        _sessionModel->item(row, FavoriteStatusColumn),
+        _sessionModel->item(row, ShortcutColumn)
+    };
     updateItemsForProfile(profile, items);
 }
 void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem*>& items) const
@@ -190,9 +190,9 @@ void ProfileSettings::populateTable()
 
     _sessionModel->clear();
     // setup session table
-    _sessionModel->setHorizontalHeaderLabels(QStringList() << i18nc("@title:column Profile label", "Name")
-            << i18nc("@title:column Display profile in file menu", "Show")
-            << i18nc("@title:column Profile shortcut text", "Shortcut"));
+    _sessionModel->setHorizontalHeaderLabels({i18nc("@title:column Profile label", "Name"),
+            i18nc("@title:column Display profile in file menu", "Show"),
+            i18nc("@title:column Profile shortcut text", "Shortcut")});
 
     QList<Profile::Ptr> profiles = ProfileManager::instance()->allProfiles();
     ProfileManager::instance()->sortProfiles(profiles);
