@@ -292,14 +292,7 @@ void ProfileSettings::createProfile()
 {
     // setup a temporary profile which is a clone of the selected profile
     // or the default if no profile is selected
-    Profile::Ptr sourceProfile;
-
-    Profile::Ptr selectedProfile = currentProfile();
-    if (!selectedProfile) {
-        sourceProfile = ProfileManager::instance()->defaultProfile();
-    } else {
-        sourceProfile = selectedProfile;
-    }
+    Profile::Ptr sourceProfile = currentProfile() ? currentProfile() : ProfileManager::instance()->defaultProfile();
 
     Q_ASSERT(sourceProfile);
 
