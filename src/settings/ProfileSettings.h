@@ -98,7 +98,7 @@ private:
     // updates the font of the items to match
     // their default / non-default profile status
     void updateDefaultItem();
-    void updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem *> &items) const;
+    void updateItemsForProfile(const Profile::Ptr profile,const QList<QStandardItem *> &items) const;
     // updates the profile table to be in sync with the
     // session manager
     void populateTable();

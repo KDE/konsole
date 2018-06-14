@@ -130,7 +130,7 @@ void ProfileSettings::updateItems(const Profile::Ptr profile)
     };
     updateItemsForProfile(profile, items);
 }
-void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem*>& items) const
+void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, const QList<QStandardItem*>& items) const
 {
     // Profile Name
     items[ProfileNameColumn]->setText(profile->name());
@@ -173,11 +173,12 @@ void ProfileSettings::addItems(const Profile::Ptr profile)
         return;
     }
 
-    QList<QStandardItem*> items;
-    items.reserve(3);
-    for (int i = 0; i < 3; i++) {
-        items.append(new QStandardItem);
-    }
+    // each _sessionModel row has three items.
+    const auto items = QList<QStandardItem*> {
+        new QStandardItem(),
+        new QStandardItem(),
+        new QStandardItem()
+    };
 
     updateItemsForProfile(profile, items);
     _sessionModel->appendRow(items);
