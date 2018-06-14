@@ -500,22 +500,8 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
     if (!profile) {
         profile = ProfileManager::instance()->defaultProfile();
     }
-
-    Session *session = SessionManager::instance()->createSession(profile);
-
-    if (!directory.isEmpty() && profile->startInCurrentSessionDir()) {
-        session->setInitialWorkingDirectory(directory);
-    }
-
-    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(_viewManager->managerId()));
-
-    // create view before starting the session process so that the session
-    // doesn't suffer a change in terminal size right after the session
-    // starts.  Some applications such as GNU Screen and Midnight Commander
-    // don't like this happening
-    _viewManager->createView(session);
-
-    return session;
+    int sessionId = _viewManager->newSession(profile->name(), directory, false);
+    return SessionManager::instance()->idToSession(sessionId);
 }
 
 Session *MainWindow::createSSHSession(Profile::Ptr profile, const QUrl &url)

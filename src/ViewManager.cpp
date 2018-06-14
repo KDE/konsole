@@ -1066,60 +1066,29 @@ void ViewManager::setCurrentSession(int sessionId)
     }
 }
 
-int ViewManager::newSession()
+int ViewManager::newSession(const QString &profile, const QString &directory, bool runSession)
 {
-    Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
-    Session *session = SessionManager::instance()->createSession(profile);
-
-    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
-
-    createView(session);
-    session->run();
-
-    return session->sessionId();
-}
-
-int ViewManager::newSession(const QString &profile)
-{
-    const QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
     Profile::Ptr profileptr = ProfileManager::instance()->defaultProfile();
 
-    for (const auto &i : profilelist) {
-        if (i->name() == profile) {
-            profileptr = i;
-            break;
+    if (!profile.isEmpty()) {
+        const QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
+        for (const auto &i : profilelist) {
+            if (i->name() == profile) {
+                profileptr = i;
+                break;
+            }
         }
     }
 
     Session *session = SessionManager::instance()->createSession(profileptr);
+    if (!directory.isEmpty())
+        session->setInitialWorkingDirectory(directory);
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
     createView(session);
-    session->run();
-
-    return session->sessionId();
-}
-
-int ViewManager::newSession(const QString &profile, const QString &directory)
-{
-    const QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
-    Profile::Ptr profileptr = ProfileManager::instance()->defaultProfile();
-
-    for (const auto &i : profilelist) {
-        if (i->name() == profile) {
-            profileptr = i;
-            break;
-        }
-    }
-
-    Session *session = SessionManager::instance()->createSession(profileptr);
-    session->setInitialWorkingDirectory(directory);
-
-    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
-
-    createView(session);
-    session->run();
+    if (runSession)
+        session->run();
 
     return session->sessionId();
 }

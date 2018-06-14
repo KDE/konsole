@@ -200,21 +200,14 @@ QString Part::currentWorkingDirectory() const
 
 void Part::createSession(const QString &profileName, const QString &directory)
 {
-    Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
-    if (!profileName.isEmpty()) {
-        profile = ProfileManager::instance()->loadProfile(profileName);
-    }
+    auto profile = profileName.isEmpty() ?
+                ProfileManager::instance()->defaultProfile() :
+                ProfileManager::instance()->loadProfile(profileName);
 
     Q_ASSERT(profile);
 
-    Session *session = SessionManager::instance()->createSession(profile);
-
-    // override the default directory specified in the profile
-    if (!directory.isEmpty() && profile->startInCurrentSessionDir()) {
-        session->setInitialWorkingDirectory(directory);
-    }
-
-    _viewManager->createView(session);
+    const auto initialDir = profile->startInCurrentSessionDir() ? directory : QString();
+    _viewManager->newSession(profile->name(), initialDir, false);
 }
 
 void Part::activeViewChanged(SessionController *controller)

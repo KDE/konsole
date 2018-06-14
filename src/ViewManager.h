@@ -253,16 +253,10 @@ public Q_SLOTS:
 
     /** DBus slot that creates a new session in the current view.
      * @param profile the name of the profile to be used
-     * started.
-     */
-    Q_SCRIPTABLE int newSession(const QString &profile);
-
-    /** DBus slot that creates a new session in the current view.
-     * @param profile the name of the profile to be used
      * @param directory the working directory where the session is
      * started.
      */
-    Q_SCRIPTABLE int newSession(const QString &profile, const QString &directory);
+    Q_SCRIPTABLE int newSession(const QString &profile = QString(), const QString &directory = QString(), bool runSession = true);
 
     // TODO: its semantic is application-wide. Move it to more appropriate place
     // DBus slot that returns the name of default profile
@@ -271,11 +265,6 @@ public Q_SLOTS:
     // TODO: its semantic is application-wide. Move it to more appropriate place
     // DBus slot that returns a string list of defined (known) profiles
     Q_SCRIPTABLE QStringList profileList();
-
-    /** DBus slot that creates a new session in the current view with the associated
-      * default profile and the default working directory
-      */
-    Q_SCRIPTABLE int newSession();
 
     /** DBus slot that changes the view port to the next session */
     Q_SCRIPTABLE void nextSession();
