@@ -143,12 +143,9 @@ void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, const QL
     items[ProfileNameColumn]->setEditable(false);
 
     // Favorite Status
-    const bool isFavorite = ProfileManager::instance()->findFavorites().contains(profile);
-    if (isFavorite) {
-        items[FavoriteStatusColumn]->setData(QIcon::fromTheme(QStringLiteral("dialog-ok-apply")), Qt::DecorationRole);
-    } else {
-        items[FavoriteStatusColumn]->setData(QIcon(), Qt::DecorationRole);
-    }
+    const auto isFavorite = ProfileManager::instance()->findFavorites().contains(profile);
+    const auto icon = isFavorite ? QIcon::fromTheme(QStringLiteral("dialog-ok-apply")) :  QIcon();
+    items[FavoriteStatusColumn]->setData(icon, Qt::DecorationRole);
     items[FavoriteStatusColumn]->setData(QVariant::fromValue(profile), ProfileKeyRole);
     items[FavoriteStatusColumn]->setToolTip(i18nc("@info:tooltip", "Click to toggle status"));
 
