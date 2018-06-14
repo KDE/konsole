@@ -123,14 +123,14 @@ void ProfileSettings::updateItems(const Profile::Ptr profile)
         return;
     }
 
-    QList<QStandardItem*> items;
-    items << _sessionModel->item(row, ProfileNameColumn);
-    items << _sessionModel->item(row, FavoriteStatusColumn);
-    items << _sessionModel->item(row, ShortcutColumn);
-
+    const auto items = QList<QStandardItem*> {
+        _sessionModel->item(row, ProfileNameColumn),
+        _sessionModel->item(row, FavoriteStatusColumn),
+        _sessionModel->item(row, ShortcutColumn)
+    };
     updateItemsForProfile(profile, items);
 }
-void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, QList<QStandardItem*>& items) const
+void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, const QList<QStandardItem*>& items) const
 {
     // Profile Name
     items[ProfileNameColumn]->setText(profile->name());
@@ -143,17 +143,14 @@ void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, QList<QS
     items[ProfileNameColumn]->setEditable(false);
 
     // Favorite Status
-    const bool isFavorite = ProfileManager::instance()->findFavorites().contains(profile);
-    if (isFavorite) {
-        items[FavoriteStatusColumn]->setData(QIcon::fromTheme(QStringLiteral("dialog-ok-apply")), Qt::DecorationRole);
-    } else {
-        items[FavoriteStatusColumn]->setData(QIcon(), Qt::DecorationRole);
-    }
+    const auto isFavorite = ProfileManager::instance()->findFavorites().contains(profile);
+    const auto icon = isFavorite ? QIcon::fromTheme(QStringLiteral("dialog-ok-apply")) :  QIcon();
+    items[FavoriteStatusColumn]->setData(icon, Qt::DecorationRole);
     items[FavoriteStatusColumn]->setData(QVariant::fromValue(profile), ProfileKeyRole);
     items[FavoriteStatusColumn]->setToolTip(i18nc("@info:tooltip", "Click to toggle status"));
 
     // Shortcut
-    QString shortcut = ProfileManager::instance()->shortcut(profile).toString();
+    const auto shortcut = ProfileManager::instance()->shortcut(profile).toString();
     items[ShortcutColumn]->setText(shortcut);
     items[ShortcutColumn]->setData(QVariant::fromValue(profile), ShortcutRole);
     items[ShortcutColumn]->setToolTip(i18nc("@info:tooltip", "Double click to change shortcut"));
@@ -173,11 +170,12 @@ void ProfileSettings::addItems(const Profile::Ptr profile)
         return;
     }
 
-    QList<QStandardItem*> items;
-    items.reserve(3);
-    for (int i = 0; i < 3; i++) {
-        items.append(new QStandardItem);
-    }
+    // each _sessionModel row has three items.
+    const auto items = QList<QStandardItem*> {
+        new QStandardItem(),
+        new QStandardItem(),
+        new QStandardItem()
+    };
 
     updateItemsForProfile(profile, items);
     _sessionModel->appendRow(items);
@@ -190,9 +188,9 @@ void ProfileSettings::populateTable()
 
     _sessionModel->clear();
     // setup session table
-    _sessionModel->setHorizontalHeaderLabels(QStringList() << i18nc("@title:column Profile label", "Name")
-            << i18nc("@title:column Display profile in file menu", "Show")
-            << i18nc("@title:column Profile shortcut text", "Shortcut"));
+    _sessionModel->setHorizontalHeaderLabels({i18nc("@title:column Profile label", "Name"),
+            i18nc("@title:column Display profile in file menu", "Show"),
+            i18nc("@title:column Profile shortcut text", "Shortcut")});
 
     QList<Profile::Ptr> profiles = ProfileManager::instance()->allProfiles();
     ProfileManager::instance()->sortProfiles(profiles);
@@ -294,33 +292,25 @@ void ProfileSettings::createProfile()
 {
     // setup a temporary profile which is a clone of the selected profile
     // or the default if no profile is selected
-    Profile::Ptr sourceProfile;
-
-    Profile::Ptr selectedProfile = currentProfile();
-    if (!selectedProfile) {
-        sourceProfile = ProfileManager::instance()->defaultProfile();
-    } else {
-        sourceProfile = selectedProfile;
-    }
+    Profile::Ptr sourceProfile = currentProfile() ? currentProfile() : ProfileManager::instance()->defaultProfile();
 
     Q_ASSERT(sourceProfile);
 
-    Profile::Ptr newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
+    auto newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
     newProfile->clone(sourceProfile, true);
     newProfile->setProperty(Profile::Name, i18nc("@item This will be used as part of the file name", "New Profile"));
     newProfile->setProperty(Profile::UntranslatedName, QStringLiteral("New Profile"));
     newProfile->setProperty(Profile::MenuIndex, QStringLiteral("0"));
 
-    QPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
-    dialog.data()->setProfile(newProfile);
-    dialog.data()->selectProfileName();
+    EditProfileDialog dialog(this);
+    dialog.setProfile(newProfile);
+    dialog.selectProfileName();
 
-    if (dialog.data()->exec() == QDialog::Accepted) {
+    if (dialog.exec() == QDialog::Accepted) {
         ProfileManager::instance()->addProfile(newProfile);
         ProfileManager::instance()->setFavorite(newProfile, true);
         ProfileManager::instance()->changeProfile(newProfile, newProfile->setProperties());
     }
-    delete dialog.data();
 }
 void ProfileSettings::editSelected()
 {
