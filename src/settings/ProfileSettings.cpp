@@ -381,19 +381,17 @@ Profile::Ptr ProfileSettings::currentProfile() const
 }
 bool ProfileSettings::isProfileDeletable(Profile::Ptr profile) const
 {
-    if (profile) {
-        QFileInfo fileInfo(profile->path());
-
-        if (fileInfo.exists()) {
-            // check whether user has enough permission
-            QFileInfo dirInfo(fileInfo.path());
-            return dirInfo.isWritable();
-        } else {
-            return true;
-        }
-    } else {
-        return true;
+    if (!profile) {
+        return false;
     }
+
+    const QFileInfo fileInfo(profile->path());
+    if (!fileInfo.exists()) {
+        return false;
+    }
+
+    const QFileInfo dirInfo(fileInfo.path());
+    return dirInfo.isWritable();
 }
 void ProfileSettings::updateFavoriteStatus(Profile::Ptr profile, bool favorite)
 {
