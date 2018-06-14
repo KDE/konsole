@@ -296,7 +296,7 @@ void ProfileSettings::createProfile()
 
     Q_ASSERT(sourceProfile);
 
-    Profile::Ptr newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
+    auto newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
     newProfile->clone(sourceProfile, true);
     newProfile->setProperty(Profile::Name, i18nc("@item This will be used as part of the file name", "New Profile"));
     newProfile->setProperty(Profile::UntranslatedName, QStringLiteral("New Profile"));
