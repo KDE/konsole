@@ -150,7 +150,7 @@ void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, const QL
     items[FavoriteStatusColumn]->setToolTip(i18nc("@info:tooltip", "Click to toggle status"));
 
     // Shortcut
-    QString shortcut = ProfileManager::instance()->shortcut(profile).toString();
+    const auto shortcut = ProfileManager::instance()->shortcut(profile).toString();
     items[ShortcutColumn]->setText(shortcut);
     items[ShortcutColumn]->setData(QVariant::fromValue(profile), ShortcutRole);
     items[ShortcutColumn]->setToolTip(i18nc("@info:tooltip", "Double click to change shortcut"));
