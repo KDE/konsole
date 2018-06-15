@@ -447,7 +447,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
 
     // create scroll bar for scrolling output up and down
     _scrollBar = new QScrollBar(this);
-    _scrollBar->setAutoFillBackground(false);
     // set the scroll bar's slider to occupy the whole area of the scroll bar initially
     setScroll(0, 0);
     _scrollBar->setCursor(Qt::ArrowCursor);
@@ -1104,16 +1103,10 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     // Set the QT_FLUSH_PAINT environment variable to '1' before starting the
     // application to monitor repainting.
     //
-    const int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->width();
-    const int SCROLLBAR_CONTENT_GAP = 1;
     QRect scrollRect;
-    if (_scrollbarLocation == Enum::ScrollBarLeft) {
-        scrollRect.setLeft(scrollBarWidth + SCROLLBAR_CONTENT_GAP);
-        scrollRect.setRight(width());
-    } else {
-        scrollRect.setLeft(0);
-        scrollRect.setRight(width() - scrollBarWidth - SCROLLBAR_CONTENT_GAP);
-    }
+    scrollRect.setLeft(0);
+    scrollRect.setRight(width());
+
     void* firstCharPos = &_image[ region.top() * _columns ];
     void* lastCharPos = &_image[(region.top() + abs(lines)) * _columns ];
 
@@ -2042,11 +2035,9 @@ void TerminalDisplay::calcGeometry()
     case Enum::ScrollBarHidden :
         break;
     case Enum::ScrollBarLeft :
-        _contentRect.setLeft(_contentRect.left() + _scrollBar->width());
         _scrollBar->move(contentsRect().topLeft());
         break;
     case Enum::ScrollBarRight:
-        _contentRect.setRight(_contentRect.right() - _scrollBar->width());
         _scrollBar->move(contentsRect().topRight() - QPoint(_scrollBar->width() - 1, 0));
         break;
     }
@@ -2068,11 +2059,10 @@ void TerminalDisplay::calcGeometry()
 // calculate the needed size, this must be synced with calcGeometry()
 void TerminalDisplay::setSize(int columns, int lines)
 {
-    const int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->sizeHint().width();
     const int horizontalMargin = _margin * 2;
     const int verticalMargin = _margin * 2;
 
-    QSize newSize = QSize(horizontalMargin + scrollBarWidth + (columns * _fontWidth)  ,
+    QSize newSize = QSize(horizontalMargin + (columns * _fontWidth)  ,
                           verticalMargin + (lines * _fontHeight));
 
     if (newSize != size()) {
@@ -2128,12 +2118,7 @@ void TerminalDisplay::setScrollBarPosition(Enum::ScrollBarPositionEnum position)
         return;
     }
 
-    if (position == Enum::ScrollBarHidden) {
-        _scrollBar->hide();
-    } else {
-        _scrollBar->show();
-    }
-
+    _scrollBar->setVisible(position != Enum::ScrollBarHidden);
     _scrollbarLocation = position;
 
     propagateSize();
