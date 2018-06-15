@@ -181,20 +181,18 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     }
 
     // load the profile
-    auto reader = new ProfileReader();
+    ProfileReader reader;
 
     Profile::Ptr newProfile = Profile::Ptr(new Profile(fallbackProfile()));
     newProfile->setProperty(Profile::Path, path);
 
     QString parentProfilePath;
-    bool result = reader->readProfile(path, newProfile, parentProfilePath);
+    bool result = reader.readProfile(path, newProfile, parentProfilePath);
 
     if (!parentProfilePath.isEmpty()) {
         Profile::Ptr parentProfile = loadProfile(parentProfilePath);
         newProfile->setParent(parentProfile);
     }
-
-    delete reader;
 
     if (!result) {
         qCDebug(KonsoleDebug) << "Could not load profile from " << path;
@@ -209,14 +207,13 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
 }
 QStringList ProfileManager::availableProfilePaths() const
 {
-    auto reader = new ProfileReader();
+    ProfileReader reader;
 
     QStringList paths;
-    paths += reader->findProfiles();
+    paths += reader.findProfiles();
 
     qStableSort(paths.begin(), paths.end(), stringLessThan);
 
-    delete reader;
     return paths;
 }
 
@@ -340,15 +337,14 @@ Profile::Ptr ProfileManager::fallbackProfile() const
 
 QString ProfileManager::saveProfile(Profile::Ptr profile)
 {
-    auto writer = new ProfileWriter();
+    ProfileWriter writer;
 
-    QString newPath = writer->getPath(profile);
+    QString newPath = writer.getPath(profile);
 
-    if (!writer->writeProfile(newPath, profile)) {
+    if (!writer.writeProfile(newPath, profile)) {
         KMessageBox::sorry(nullptr,
                            i18n("Konsole does not have permission to save this profile to %1", newPath));
     }
-    delete writer;
 
     return newPath;
 }
@@ -514,10 +510,10 @@ void ProfileManager::setDefaultProfile(Profile::Ptr profile)
 void ProfileManager::saveDefaultProfile()
 {
     QString path = _defaultProfile->path();
-    auto writer = new ProfileWriter();
+    ProfileWriter writer;
 
     if (path.isEmpty()) {
-        path = writer->getPath(_defaultProfile);
+        path = writer.getPath(_defaultProfile);
     }
 
     QFileInfo fileInfo(path);
@@ -525,8 +521,6 @@ void ProfileManager::saveDefaultProfile()
     KSharedConfigPtr appConfig = KSharedConfig::openConfig();
     KConfigGroup group = appConfig->group("Desktop Entry");
     group.writeEntry("DefaultProfile", fileInfo.fileName());
-
-    delete writer;
 }
 
 QSet<Profile::Ptr> ProfileManager::findFavorites()
