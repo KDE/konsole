@@ -2118,7 +2118,12 @@ void TerminalDisplay::setScrollBarPosition(Enum::ScrollBarPositionEnum position)
         return;
     }
 
-    _scrollBar->setVisible(position != Enum::ScrollBarHidden);
+    if (position == Enum::ScrollBarHidden) {
+        _scrollBar->hide();
+    } else if (_scrollBar->maximum() != 0) {
+        _scrollBar->show();
+    }
+
     _scrollbarLocation = position;
 
     propagateSize();
@@ -2150,10 +2155,14 @@ void TerminalDisplay::setScroll(int cursor, int slines)
     //
     // setting the range or value of a _scrollBar will always trigger
     // a repaint, so it should be avoided if it is not necessary
-    if (_scrollBar->minimum() == 0                 &&
-            _scrollBar->maximum() == (slines - _lines) &&
-            _scrollBar->value()   == cursor) {
+
+    if (_scrollBar->maximum() == 0 && _scrollBar->value() == cursor) {
+        // hide the scrollbar if it's not needed
+        _scrollBar->hide();
         return;
+
+    } else if (_scrollbarLocation != Enum::ScrollBarHidden){
+        _scrollBar->show();
     }
 
     disconnect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
