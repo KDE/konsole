@@ -587,6 +587,11 @@ public Q_SLOTS:
      */
     Q_SCRIPTABLE int historySize() const;
 
+    /**
+     * Sets the current session's profile
+     */
+    Q_SCRIPTABLE void setProfile(const QString &profile);
+
 Q_SIGNALS:
 
     /** Emitted when the terminal process starts. */

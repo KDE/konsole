@@ -56,6 +56,9 @@
 #include "ZModemDialog.h"
 #include "History.h"
 #include "konsoledebug.h"
+#include "SessionManager.h"
+#include "ProfileManager.h"
+#include "Profile.h"
 
 using namespace Konsole;
 
@@ -1572,6 +1575,17 @@ int Session::historySize() const
     } else {
         return 0;
     }
+}
+
+
+void Session::setProfile(const QString &profileName)
+{
+  const QList<Profile::Ptr> profiles = ProfileManager::instance()->allProfiles();
+  foreach (const Profile::Ptr &profile, profiles) {
+    if (profile->name() == profileName) {
+      SessionManager::instance()->setSessionProfile(this, profile);
+    }
+  }
 }
 
 int Session::foregroundProcessId()
