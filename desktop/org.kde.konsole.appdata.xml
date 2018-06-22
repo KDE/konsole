@@ -47,6 +47,7 @@
   <name xml:lang="zh-TW">Konsole</name>
   <summary>Terminal</summary>
   <summary xml:lang="ar">طرفيّة</summary>
+  <summary xml:lang="ast">Terminal</summary>
   <summary xml:lang="bs">Terminal</summary>
   <summary xml:lang="ca">Terminal</summary>
   <summary xml:lang="ca-valencia">Terminal</summary>
@@ -122,6 +123,7 @@
     <p xml:lang="zh-TW">Konsole 是一個 X 終端機模擬器，通常稱為終端機或 shell。它模擬了一個在只有文字的視窗中的指令列介面。</p>
     <p>Features:</p>
     <p xml:lang="ar">الميزات:</p>
+    <p xml:lang="ast">Carauterístiques:</p>
     <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="ca-valencia">Característiques:</p>
