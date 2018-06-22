@@ -302,6 +302,7 @@ void ProfileSettings::createProfile()
     newProfile->setProperty(Profile::UntranslatedName, QStringLiteral("New Profile"));
     newProfile->setProperty(Profile::MenuIndex, QStringLiteral("0"));
 
+    // Consider https://blogs.kde.org/2009/03/26/how-crash-almost-every-qtkde-application-and-how-fix-it-0 before changing the below
     QPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
     dialog.data()->setProfile(newProfile);
     dialog.data()->selectProfileName();
