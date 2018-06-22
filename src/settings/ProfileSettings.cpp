@@ -302,15 +302,16 @@ void ProfileSettings::createProfile()
     newProfile->setProperty(Profile::UntranslatedName, QStringLiteral("New Profile"));
     newProfile->setProperty(Profile::MenuIndex, QStringLiteral("0"));
 
-    EditProfileDialog dialog(this);
-    dialog.setProfile(newProfile);
-    dialog.selectProfileName();
+    QPointer<EditProfileDialog> dialog = new EditProfileDialog(this);
+    dialog.data()->setProfile(newProfile);
+    dialog.data()->selectProfileName();
 
-    if (dialog.exec() == QDialog::Accepted) {
+    if (dialog.data()->exec() == QDialog::Accepted) {
         ProfileManager::instance()->addProfile(newProfile);
         ProfileManager::instance()->setFavorite(newProfile, true);
         ProfileManager::instance()->changeProfile(newProfile, newProfile->setProperties());
     }
+    delete dialog.data();
 }
 void ProfileSettings::editSelected()
 {
