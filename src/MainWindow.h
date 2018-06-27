@@ -173,14 +173,6 @@ private:
     QString activeSessionDir() const;
 
     /**
-     * Returns the search bar.
-     *
-     * This is a convenience method. The search bar is actually owned by
-     * ViewManager, or more precisely, by ViewContainer.
-     */
-    IncrementalSearchBar *searchBar() const;
-
-    /**
      * Returns the bookmark handler associated with this window.
      */
     BookmarkHandler *bookmarkHandler() const;

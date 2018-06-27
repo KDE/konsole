@@ -27,6 +27,9 @@
 #include <QTimer>
 #include <QToolButton>
 #include <QMenu>
+#include <QApplication>
+#include <QPaintEvent>
+#include <QPainter>
 
 // KDE
 #include <KColorScheme>
@@ -48,7 +51,6 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *aParent) :
     _searchFromButton(nullptr),
     _searchTimer(nullptr)
 {
-    auto barLayout = new QHBoxLayout(this);
 
     auto closeButton = new QToolButton(this);
     closeButton->setObjectName(QStringLiteral("close-button"));
@@ -57,17 +59,19 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *aParent) :
     closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close")));
     connect(closeButton, &QToolButton::clicked, this, &Konsole::IncrementalSearchBar::closeClicked);
 
-    QLabel *findLabel = new QLabel(i18nc("@label:textbox", "Find:"), this);
     _searchEdit = new QLineEdit(this);
     _searchEdit->setClearButtonEnabled(true);
     _searchEdit->installEventFilter(this);
+    _searchEdit->setPlaceholderText(i18nc("@label:textbox", "Find..."));
     _searchEdit->setObjectName(QStringLiteral("search-edit"));
     _searchEdit->setToolTip(i18nc("@info:tooltip", "Enter the text to search for here"));
-
+    _searchEdit->setCursor(Qt::IBeamCursor);
+    setCursor(Qt::ArrowCursor);
     // text box may be a minimum of 6 characters wide and a maximum of 10 characters wide
     // (since the maxWidth metric is used here, more characters probably will fit in than 6
     //  and 10)
-    QFontMetrics metrics(_searchEdit->font());
+    _searchEditFont = _searchEdit->font();
+    QFontMetrics metrics(_searchEditFont);
     int maxWidth = metrics.maxWidth();
     _searchEdit->setMinimumWidth(maxWidth * 6);
     _searchEdit->setMaximumWidth(maxWidth * 10);
@@ -83,42 +87,38 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *aParent) :
     _findNextButton = new QToolButton(this);
     _findNextButton->setObjectName(QStringLiteral("find-next-button"));
     _findNextButton->setText(i18nc("@action:button Go to the next phrase", "Next"));
-    _findNextButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    _findNextButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    _findNextButton->setAutoRaise(true);
     _findNextButton->setToolTip(i18nc("@info:tooltip",
                                       "Find the next match for the current search phrase"));
     connect(_findNextButton, &QToolButton::clicked, this,
             &Konsole::IncrementalSearchBar::findNextClicked);
 
     _findPreviousButton = new QToolButton(this);
+    _findPreviousButton->setAutoRaise(true);
     _findPreviousButton->setObjectName(QStringLiteral("find-previous-button"));
     _findPreviousButton->setText(i18nc("@action:button Go to the previous phrase", "Previous"));
-    _findPreviousButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    _findPreviousButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
     _findPreviousButton->setToolTip(i18nc("@info:tooltip",
                                           "Find the previous match for the current search phrase"));
     connect(_findPreviousButton, &QToolButton::clicked, this,
             &Konsole::IncrementalSearchBar::findPreviousClicked);
 
     _searchFromButton = new QToolButton(this);
+    _searchFromButton->setAutoRaise(true);
+
     _searchFromButton->setObjectName(QStringLiteral("search-from-button"));
     connect(_searchFromButton, &QToolButton::clicked, this,
             &Konsole::IncrementalSearchBar::searchFromClicked);
 
     auto optionsButton = new QToolButton(this);
     optionsButton->setObjectName(QStringLiteral("find-options-button"));
-    optionsButton->setText(i18nc("@action:button Display options menu", "Options"));
     optionsButton->setCheckable(false);
     optionsButton->setPopupMode(QToolButton::InstantPopup);
-    optionsButton->setArrowType(Qt::DownArrow);
-    optionsButton->setToolButtonStyle(Qt::ToolButtonTextOnly);
+    optionsButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
     optionsButton->setToolTip(i18nc("@info:tooltip", "Display the options menu"));
-
-    barLayout->addWidget(closeButton);
-    barLayout->addWidget(findLabel);
-    barLayout->addWidget(_searchEdit);
-    barLayout->addWidget(_findNextButton);
-    barLayout->addWidget(_findPreviousButton);
-    barLayout->addWidget(_searchFromButton);
-    barLayout->addWidget(optionsButton);
+    optionsButton->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
+    optionsButton->setAutoRaise(true);
 
     // Fill the options menu
     auto optionsMenu = new QMenu(this);
@@ -151,11 +151,19 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *aParent) :
     updateButtonsAccordingToReverseSearchSetting();
     setOptions();
 
-    barLayout->addStretch();
-
+    auto barLayout = new QHBoxLayout(this);
+    barLayout->addWidget(_searchEdit);
+    barLayout->addWidget(_findNextButton);
+    barLayout->addWidget(_findPreviousButton);
+    barLayout->addWidget(_searchFromButton);
+    barLayout->addWidget(optionsButton);
+    barLayout->addWidget(closeButton);
     barLayout->setContentsMargins(4, 4, 4, 4);
+    barLayout->setSpacing(0);
 
     setLayout(barLayout);
+    adjustSize();
+    clearLineEdit();
 }
 
 void IncrementalSearchBar::notifySearchChanged()
@@ -167,17 +175,17 @@ void IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting()
 {
     Q_ASSERT(_reverseSearch);
     if (_reverseSearch->isChecked()) {
-        _searchFromButton->setText(i18nc("@action:button Search from bottom", "From bottom"));
         _searchFromButton->setToolTip(i18nc("@info:tooltip",
                                             "Search for the current search phrase from the bottom"));
-        _findNextButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up-search")));
-        _findPreviousButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down-search")));
+        _searchFromButton->setIcon(QIcon::fromTheme(QStringLiteral("go-bottom")));
+        _findNextButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up")));
+        _findPreviousButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
     } else {
-        _searchFromButton->setText(i18nc("@action:button Search from top", "From top"));
         _searchFromButton->setToolTip(i18nc("@info:tooltip",
                                             "Search for the current search phrase from the top"));
-        _findNextButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down-search")));
-        _findPreviousButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up-search")));
+        _searchFromButton->setIcon(QIcon::fromTheme(QStringLiteral("go-top")));
+        _findNextButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
+        _findPreviousButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up")));
     }
 }
 
@@ -224,6 +232,14 @@ bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *event)
     return QWidget::eventFilter(watched, event);
 }
 
+void IncrementalSearchBar::correctPosition(const QSize &parentSize)
+{
+    const auto width = geometry().width();
+    const auto height = geometry().height();
+    const auto x = parentSize.width() - width;
+    setGeometry(x, 0, width, height);
+}
+
 void IncrementalSearchBar::keyPressEvent(QKeyEvent *event)
 {
     static auto movementKeysToPassAlong = QSet<int>{
@@ -266,6 +282,7 @@ void IncrementalSearchBar::setFoundMatch(bool match)
 void IncrementalSearchBar::clearLineEdit()
 {
     _searchEdit->setStyleSheet(QString());
+    _searchEdit->setFont(_searchEditFont);
 }
 
 void IncrementalSearchBar::focusLineEdit()
@@ -290,4 +307,21 @@ void IncrementalSearchBar::setOptions()
     _regExpression->setChecked(KonsoleSettings::searchRegExpression());
     _highlightMatches->setChecked(KonsoleSettings::searchHighlightMatches());
     _reverseSearch->setChecked(KonsoleSettings::searchReverseSearch());
+}
+
+void IncrementalSearchBar::paintEvent(QPaintEvent *event)
+{
+    /* For some reason setAutoFillBackground was filling with
+     * black - I guess it's because it's the parent's palette,
+     * I'v tried to set the palette to the window but that was
+     * a no go, so we paint manually. */
+
+    if ( QApplication::topLevelWidgets().count()) {
+        auto topLevelWindow = QApplication::topLevelWidgets().at(0);
+        QPainter painter(this);
+        painter.setPen(topLevelWindow->palette().window().color());
+        painter.setBrush(topLevelWindow->palette().window());
+        painter.drawRect(0, 0, geometry().width(), geometry().height());
+    }
+    QWidget::paintEvent(event);
 }

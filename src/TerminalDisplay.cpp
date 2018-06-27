@@ -71,6 +71,7 @@
 #include "SessionManager.h"
 #include "Session.h"
 #include "WindowSystemInfo.h"
+#include "IncrementalSearchBar.h"
 
 using namespace Konsole;
 
@@ -438,6 +439,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _readOnly(false)
     , _opacity(1.0)
     , _scrollWheelState(ScrollState())
+    , _searchBar(new IncrementalSearchBar(this))
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
@@ -1953,8 +1955,10 @@ void TerminalDisplay::updateCursor()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TerminalDisplay::resizeEvent(QResizeEvent*)
+void TerminalDisplay::resizeEvent(QResizeEvent *event)
 {
+    const auto width = event->size().width() - _scrollBar->geometry().width();
+    _searchBar->correctPosition(QSize(width, event->size().height()));
     if (contentsRect().isValid()) {
         updateImageSize();
     }
@@ -3869,6 +3873,11 @@ void TerminalDisplay::setSessionController(SessionController* controller)
 SessionController* TerminalDisplay::sessionController()
 {
     return _sessionController;
+}
+
+IncrementalSearchBar *TerminalDisplay::searchBar() const
+{
+    return _searchBar;
 }
 
 AutoScrollHandler::AutoScrollHandler(QWidget* parent)

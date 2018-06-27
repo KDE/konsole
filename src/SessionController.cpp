@@ -112,7 +112,6 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _interactionTimer(nullptr)
     , _searchStartLine(0)
     , _prevSearchResultLine(0)
-    , _searchBar(nullptr)
     , _codecAction(nullptr)
     , _switchProfileMenu(nullptr)
     , _webSearchMenu(nullptr)
@@ -124,6 +123,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _bookmarkValidProgramsToClear(QStringList())
     , _isSearchBarEnabled(false)
     , _editProfileDialog(nullptr)
+    , _searchBar(view->searchBar())
 {
     Q_ASSERT(session);
     Q_ASSERT(view);
@@ -221,6 +221,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // before outputting bookmark.
     _bookmarkValidProgramsToClear << QStringLiteral("bash") << QStringLiteral("fish") << QStringLiteral("sh");
     _bookmarkValidProgramsToClear << QStringLiteral("tcsh") << QStringLiteral("zsh");
+    setupSearchBar();
+    _searchBar->setVisible(_isSearchBarEnabled);
 }
 
 SessionController::~SessionController()
@@ -508,34 +510,16 @@ void SessionController::removeSearchFilter()
     _searchFilter = nullptr;
 }
 
-void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
+void SessionController::setupSearchBar()
 {
-    // disconnect the existing search bar
-    if (!_searchBar.isNull()) {
-        disconnect(this, nullptr, _searchBar, nullptr);
-        disconnect(_searchBar, nullptr, this, nullptr);
-    }
-
-    // connect new search bar
-    _searchBar = searchBar;
-    if (!_searchBar.isNull()) {
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::unhandledMovementKeyPressed, this, &Konsole::SessionController::movementKeyFromSearchBarReceived);
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::closeClicked, this, &Konsole::SessionController::searchClosed);
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchFromClicked, this, &Konsole::SessionController::searchFrom);
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::findNextClicked, this, &Konsole::SessionController::findNextInHistory);
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::findPreviousClicked, this, &Konsole::SessionController::findPreviousInHistory);
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::highlightMatchesToggled , this , &Konsole::SessionController::highlightMatches);
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::matchCaseToggled, this, &Konsole::SessionController::changeSearchMatch);
-        connect(_searchBar.data(), &Konsole::IncrementalSearchBar::matchRegExpToggled, this, &Konsole::SessionController::changeSearchMatch);
-
-        // if the search bar was previously active
-        // then re-enter search mode
-        enableSearchBar(_isSearchBarEnabled);
-    }
-}
-IncrementalSearchBar* SessionController::searchBar() const
-{
-    return _searchBar;
+    connect(_searchBar.data(), &Konsole::IncrementalSearchBar::unhandledMovementKeyPressed, this, &Konsole::SessionController::movementKeyFromSearchBarReceived);
+    connect(_searchBar.data(), &Konsole::IncrementalSearchBar::closeClicked, this, &Konsole::SessionController::searchClosed);
+    connect(_searchBar.data(), &Konsole::IncrementalSearchBar::searchFromClicked, this, &Konsole::SessionController::searchFrom);
+    connect(_searchBar.data(), &Konsole::IncrementalSearchBar::findNextClicked, this, &Konsole::SessionController::findNextInHistory);
+    connect(_searchBar.data(), &Konsole::IncrementalSearchBar::findPreviousClicked, this, &Konsole::SessionController::findPreviousInHistory);
+    connect(_searchBar.data(), &Konsole::IncrementalSearchBar::highlightMatchesToggled , this , &Konsole::SessionController::highlightMatches);
+    connect(_searchBar.data(), &Konsole::IncrementalSearchBar::matchCaseToggled, this, &Konsole::SessionController::changeSearchMatch);
+    connect(_searchBar.data(), &Konsole::IncrementalSearchBar::matchRegExpToggled, this, &Konsole::SessionController::changeSearchMatch);
 }
 
 void SessionController::setShowMenuAction(QAction* action)
@@ -1499,6 +1483,7 @@ void SessionController::clearHistory()
 {
     _session->clearHistory();
     _view->updateImage();   // To reset view scrollbar
+    _view->repaint();
 }
 
 void SessionController::clearHistoryAndReset()
