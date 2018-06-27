@@ -46,13 +46,13 @@ class QScrollBar;
 class QShowEvent;
 class QHideEvent;
 class QTimerEvent;
-
 class KMessageWidget;
 
 namespace Konsole {
 class FilterChain;
 class TerminalImageFilterChain;
 class SessionController;
+class IncrementalSearchBar;
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
  * to the terminal.
@@ -685,7 +685,7 @@ public Q_SLOTS:
 
     // Used to show/hide the message widget
     void updateReadOnlyState(bool readonly);
-
+    IncrementalSearchBar *searchBar() const;
 Q_SIGNALS:
 
     /**
@@ -786,7 +786,6 @@ protected:
     QVariant inputMethodQuery(Qt::InputMethodQuery query) const Q_DECL_OVERRIDE;
 
     void updateScrollBarPalette();
-
 protected Q_SLOTS:
 
     void scrollBarPositionChanged(int value);
@@ -1052,6 +1051,7 @@ private:
     qreal _opacity;
 
     ScrollState _scrollWheelState;
+    IncrementalSearchBar *_searchBar;
 
     friend class TerminalDisplayAccessible;
 };

@@ -227,8 +227,6 @@ void MainWindow::disconnectController(SessionController *controller)
     if (controller->isValid()) {
         guiFactory()->removeClient(controller);
     }
-
-    controller->setSearchBar(nullptr);
 }
 
 void MainWindow::activeViewChanged(SessionController *controller)
@@ -258,9 +256,6 @@ void MainWindow::activeViewChanged(SessionController *controller)
 
     controller->setShowMenuAction(_toggleMenuBarAction);
     guiFactory()->addClient(controller);
-
-    // set the current session's search bar
-    controller->setSearchBar(searchBar());
 
     // update session title to match newly activated session
     activeViewTitleChanged(controller);
@@ -307,11 +302,6 @@ void MainWindow::updateWindowIcon()
     if ((!_pluggedController.isNull()) && !_pluggedController->icon().isNull()) {
         setWindowIcon(_pluggedController->icon());
     }
-}
-
-IncrementalSearchBar *MainWindow::searchBar() const
-{
-    return _viewManager->searchBar();
 }
 
 void MainWindow::setupActions()

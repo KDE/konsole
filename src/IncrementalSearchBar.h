@@ -99,6 +99,7 @@ public:
     void focusLineEdit();
 
     void setOptions();
+    void correctPosition(const QSize& parentSize);
 
     // reimplemented
     void setVisible(bool visible) Q_DECL_OVERRIDE;
@@ -138,7 +139,7 @@ Q_SIGNALS:
 protected:
     bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
     void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
-
+    void paintEvent(QPaintEvent *event) override;
 public Q_SLOTS:
     void clearLineEdit();
 
@@ -157,7 +158,7 @@ private:
     QToolButton *_findNextButton;
     QToolButton *_findPreviousButton;
     QToolButton *_searchFromButton;
-
+    QFont _searchEditFont;
     QTimer *_searchTimer;
 };
 }
