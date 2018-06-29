@@ -64,7 +64,6 @@ set(HAVE_X11 ${X11_FOUND})
 add_definitions(
   -DQT_STRICT_ITERATORS
   -DQT_NO_URL_CAST_FROM_STRING
-  -DQT_USE_FAST_CONCATENATION
   -Wno-deprecated-declarations
 )
 
