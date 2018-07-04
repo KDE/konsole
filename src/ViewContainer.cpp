@@ -49,7 +49,16 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     QTabWidget(parent),
     _connectedViewManager(connectedViewManager)
 {
+
+    setTabBarAutoHide((bool) KonsoleSettings::tabBarVisibility());
+    setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
+
     tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, [this] {
+        setTabBarAutoHide((bool) KonsoleSettings::tabBarVisibility());
+        setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
+    });
 
     connect(tabBar(), &QTabBar::tabBarDoubleClicked, this,
             &Konsole::TabbedViewContainer::tabDoubleClicked);

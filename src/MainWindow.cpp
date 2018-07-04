@@ -774,7 +774,6 @@ void MainWindow::applyKonsoleSettings()
     }
 
     setAutoSaveSettings(QStringLiteral("MainWindow"), KonsoleSettings::saveGeometryOnExit());
-
     updateWindowCaption();
 }
 
