@@ -172,7 +172,6 @@ set(konsole_KDEINIT_SRCS
    settings/ProfileSettings.cpp
    settings/TabBarSettings.cpp)
 
-kconfig_add_kcfg_files(konsole_KDEINIT_SRCS settings/KonsoleSettings.kcfgc)
 
 # Sets the icon on Windows and OSX
 file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../data/icons/*.png")
@@ -206,7 +205,6 @@ install(TARGETS kdeinit_konsole konsole
 set(konsolepart_PART_SRCS Part.cpp
     settings/PartInfo.cpp
     settings/ProfileSettings.cpp)
-kconfig_add_kcfg_files(konsolepart_PART_SRCS settings/KonsoleSettings.kcfgc)
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 generate_export_header(konsolepart BASE_NAME konsole)
 kcoreaddons_desktop_to_json(konsolepart ../desktop/konsolepart.desktop)

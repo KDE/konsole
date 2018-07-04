@@ -7,3 +7,4 @@ ItemAccessors=true
 Mutators=true
 GlobalEnums=true
 SetUserTexts=true
+Visibility=Q_DECL_EXPORT
