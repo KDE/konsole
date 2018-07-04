@@ -27,17 +27,15 @@
 
 // Konsole
 #include "Profile.h"
-#include "ViewContainer.h"
 
 class KActionCollection;
 class KConfigGroup;
 
 namespace Konsole {
 class ColorScheme;
-class IncrementalSearchBar;
 class Session;
 class TerminalDisplay;
-
+class TabbedViewContainer;
 class SessionController;
 class ViewProperties;
 class ViewSplitter;
@@ -154,22 +152,14 @@ public:
     SessionController *activeViewController() const;
 
     /**
-     * Returns the search bar.
-     */
-    IncrementalSearchBar *searchBar() const;
-
-    /**
      * Session management
      */
     void saveSessions(KConfigGroup &group);
     void restoreSessions(const KConfigGroup &group);
 
-    void setNavigationVisibility(int visibility);
+    void setTabbarAutoHide(bool autoHide);
     void setNavigationPosition(int position);
-    void setNavigationBehavior(int behavior);
-    void setNavigationTabWidthExpanding(bool expand);
     void setNavigationStyleSheet(const QString &styleSheet);
-    void setShowQuickButtons(bool show);
 
     int managerId() const;
 
@@ -295,9 +285,6 @@ public Q_SLOTS:
       */
     Q_SCRIPTABLE void moveSessionRight();
 
-    /** DBus slot that sets ALL tabs' width to match their text */
-    Q_SCRIPTABLE void setTabWidthToText(bool);
-
 private Q_SLOTS:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();
@@ -340,7 +327,7 @@ private Q_SLOTS:
 
     // called when the views in a container owned by this view manager
     // changes
-    void containerViewsChanged(ViewContainer *container);
+    void containerViewsChanged(TabbedViewContainer *container);
 
     // called when a profile changes
     void profileChanged(Profile::Ptr profile);
@@ -363,28 +350,28 @@ private Q_SLOTS:
     void containerMoveViewRequest(int index, int id, bool &success,
                                   TabbedViewContainer *sourceTabbedContainer);
 
-    void detachView(ViewContainer *container, QWidget *view);
+    void detachView(TabbedViewContainer *container, QWidget *view);
 
-    void closeTabFromContainer(ViewContainer *container, QWidget *tab);
+    void closeTabFromContainer(TabbedViewContainer *container, QWidget *tab);
 
 private:
     Q_DISABLE_COPY(ViewManager)
 
-    void createView(Session *session, ViewContainer *container, int index);
+    void createView(Session *session, TabbedViewContainer *container, int index);
     static const ColorScheme *colorSchemeForProfile(const Profile::Ptr profile);
 
     void setupActions();
 
     // takes a view from a view container owned by a different manager and places it in
     // newContainer owned by this manager
-    void takeView(ViewManager *otherManager, ViewContainer *otherContainer,
-                  ViewContainer *newContainer, TerminalDisplay *view);
+    void takeView(ViewManager *otherManager, TabbedViewContainer *otherContainer,
+                  TabbedViewContainer *newContainer, TerminalDisplay *view);
     void splitView(Qt::Orientation orientation);
 
     // creates a new container which can hold terminal displays
-    ViewContainer *createContainer();
+    TabbedViewContainer *createContainer();
     // removes a container and emits appropriate signals
-    void removeContainer(ViewContainer *container);
+    void removeContainer(TabbedViewContainer *container);
 
     // creates a new terminal display
     // the 'session' is used so that the terminal display's random seed
@@ -396,9 +383,6 @@ private:
     // about the session ( such as title and associated icon ) to the display.
     SessionController *createController(Session *session, TerminalDisplay *view);
 
-    // Sets the  possible features for a container.
-    void setContainerFeatures(ViewContainer* container);
-
 private:
     QPointer<ViewSplitter> _viewSplitter;
     QPointer<SessionController> _pluggedController;
@@ -408,14 +392,7 @@ private:
     KActionCollection *_actionCollection;
 
     NavigationMethod _navigationMethod;
-
-    ViewContainer::NavigationVisibility _navigationVisibility;
-    ViewContainer::NavigationPosition _navigationPosition;
-    bool _showQuickButtons;
-    bool _navigationTabWidthExpanding;
-    NewTabBehavior _newTabBehavior;
     QString _navigationStyleSheet;
-
     int _managerId;
     static int lastManagerId;
 };

@@ -93,7 +93,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         TerminalDisplay.cpp
                         TerminalDisplayAccessible.cpp
                         ViewContainer.cpp
-                        ViewContainerTabBar.cpp
                         ViewManager.cpp
                         ViewProperties.cpp
                         ViewSplitter.cpp

@@ -422,18 +422,6 @@ MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
         if (m_parser->isSet(QStringLiteral("fullscreen"))) {
             window->viewFullScreen(true);
         }
-
-        // override default tabbbar visibility
-        // FIXME: remove those magic number
-        // see ViewContainer::NavigationVisibility
-        if (m_parser->isSet(QStringLiteral("show-tabbar"))) {
-            // always show
-            window->viewManager()->setNavigationVisibility(0);
-        }
-        if (m_parser->isSet(QStringLiteral("hide-tabbar"))) {
-            // never show
-            window->viewManager()->setNavigationVisibility(2);
-        }
     }
     return window;
 }
