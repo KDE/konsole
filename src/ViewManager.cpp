@@ -1109,25 +1109,3 @@ void ViewManager::closeTabFromContainer(TabbedViewContainer *container, QWidget 
         controller->closeSession();
     }
 }
-
-void ViewManager::setTabbarAutoHide(bool autoHide)
-{
-    foreach (TabbedViewContainer *container, _viewSplitter->containers()) {
-        container->setTabBarAutoHide(autoHide);
-    }
-}
-
-void ViewManager::setNavigationPosition(int position)
-{
-    auto navigationPosition = static_cast<QTabWidget::TabPosition>(position);
-    foreach (TabbedViewContainer *container, _viewSplitter->containers()) {
-        container->setTabPosition(navigationPosition);
-    }
-}
-
-void ViewManager::setNavigationStyleSheet(const QString &styleSheet)
-{
-    foreach (TabbedViewContainer *container, _viewSplitter->containers()) {
-        container->setStyleSheet(styleSheet);
-    }
-}

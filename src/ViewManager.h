@@ -157,10 +157,6 @@ public:
     void saveSessions(KConfigGroup &group);
     void restoreSessions(const KConfigGroup &group);
 
-    void setTabbarAutoHide(bool autoHide);
-    void setNavigationPosition(int position);
-    void setNavigationStyleSheet(const QString &styleSheet);
-
     int managerId() const;
 
     /** Returns a list of sessions in this ViewManager */

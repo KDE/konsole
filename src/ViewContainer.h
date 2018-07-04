@@ -97,6 +97,7 @@ public:
     /** Changes the active view to the last view */
     void activateLastView();
 
+    void setCssFromFile(const QUrl& url);
     /**
      * This enum describes the directions
      * in which views can be re-arranged within the container
@@ -193,6 +194,7 @@ protected:
 
 private Q_SLOTS:
     void viewDestroyed(QObject *view);
+    void konsoleConfigChanged();
 
 private:
     void forgetView(QWidget *view);

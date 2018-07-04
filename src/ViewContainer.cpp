@@ -26,6 +26,7 @@
 // Qt
 #include <QTabBar>
 #include <QMenu>
+#include <QFile>
 
 // KDE
 #include <KColorScheme>
@@ -49,16 +50,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     QTabWidget(parent),
     _connectedViewManager(connectedViewManager)
 {
-
-    setTabBarAutoHide((bool) KonsoleSettings::tabBarVisibility());
-    setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
-
     tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
-
-    connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, [this] {
-        setTabBarAutoHide((bool) KonsoleSettings::tabBarVisibility());
-        setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
-    });
 
     connect(tabBar(), &QTabBar::tabBarDoubleClicked, this,
             &Konsole::TabbedViewContainer::tabDoubleClicked);
@@ -95,6 +87,9 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(profileList, &Konsole::ProfileList::profileSelected, this,
             static_cast<void (TabbedViewContainer::*)(Profile::Ptr)>(&Konsole::TabbedViewContainer::newViewRequest));
   //  setNewViewMenu(profileMenu);
+
+    konsoleConfigChanged();
+    connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TabbedViewContainer::konsoleConfigChanged);
 }
 
 TabbedViewContainer::~TabbedViewContainer()
@@ -105,6 +100,37 @@ TabbedViewContainer::~TabbedViewContainer()
     }
 
     emit destroyed(this);
+}
+
+void TabbedViewContainer::konsoleConfigChanged()
+{
+    setTabBarAutoHide((bool) KonsoleSettings::tabBarVisibility());
+    setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
+    setTabsClosable(KonsoleSettings::showQuickButtons());
+
+    if (KonsoleSettings::tabBarUseUserStyleSheet()) {
+        setCssFromFile(KonsoleSettings::tabBarUserStyleSheetFile());
+    }
+}
+
+void TabbedViewContainer::setCssFromFile(const QUrl &url)
+{
+    // Let's only deal w/ local files for now
+    if (!url.isLocalFile()) {
+        setStyleSheet(KonsoleSettings::tabBarStyleSheet());
+    }
+
+    QFile file(url.toLocalFile());
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        setStyleSheet(KonsoleSettings::tabBarStyleSheet());
+    }
+
+    QString styleSheetText;
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        styleSheetText.append(in.readLine());
+    }
+    setStyleSheet(styleSheetText);
 }
 
 void TabbedViewContainer::moveActiveView(MoveDirection direction)

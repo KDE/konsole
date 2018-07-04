@@ -97,8 +97,6 @@ public:
      */
     void setMenuBarInitialVisibility(bool visible);
 
-    void setNavigationStyleSheetFromFile(const QUrl &styleSheetFile);
-
 Q_SIGNALS:
 
     /**
