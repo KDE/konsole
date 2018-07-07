@@ -30,6 +30,7 @@
 #include <KService>
 #include <KStandardAction>
 #include <KWindowSystem>
+#include <KWindowEffects>
 
 // see below notes
 //#include "../../../WindowSystemInfo.h"
@@ -73,7 +74,7 @@ demo_konsolepart::demo_konsolepart()
                               Qt::DirectConnection,
                               Q_RETURN_ARG(bool, blurEnabled));
     qWarning()<<"blur enabled: "<<blurEnabled;
-
+    KWindowEffects::enableBlurBehind(winId(), blurEnabled);
 }
 
 demo_konsolepart::~demo_konsolepart()
