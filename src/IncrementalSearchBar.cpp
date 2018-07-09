@@ -66,12 +66,14 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *aParent) :
     _searchEdit->setObjectName(QStringLiteral("search-edit"));
     _searchEdit->setToolTip(i18nc("@info:tooltip", "Enter the text to search for here"));
     _searchEdit->setCursor(Qt::IBeamCursor);
+    _searchEdit->setStyleSheet(QString());
+    _searchEdit->setFont(QApplication::font());
+
     setCursor(Qt::ArrowCursor);
     // text box may be a minimum of 6 characters wide and a maximum of 10 characters wide
     // (since the maxWidth metric is used here, more characters probably will fit in than 6
     //  and 10)
-    _searchEditFont = _searchEdit->font();
-    QFontMetrics metrics(_searchEditFont);
+    QFontMetrics metrics(_searchEdit->font());
     int maxWidth = metrics.maxWidth();
     _searchEdit->setMinimumWidth(maxWidth * 6);
     _searchEdit->setMaximumWidth(maxWidth * 10);
@@ -282,7 +284,6 @@ void IncrementalSearchBar::setFoundMatch(bool match)
 void IncrementalSearchBar::clearLineEdit()
 {
     _searchEdit->setStyleSheet(QString());
-    _searchEdit->setFont(_searchEditFont);
 }
 
 void IncrementalSearchBar::focusLineEdit()

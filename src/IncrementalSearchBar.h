@@ -158,7 +158,6 @@ private:
     QToolButton *_findNextButton;
     QToolButton *_findPreviousButton;
     QToolButton *_searchFromButton;
-    QFont _searchEditFont;
     QTimer *_searchTimer;
 };
 }
