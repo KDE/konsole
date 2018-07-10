@@ -209,6 +209,8 @@ void TerminalDisplay::fontChange(const QFont&)
     QFontMetrics fm(font());
     _fontHeight = fm.height() + _lineSpacing;
 
+    Q_ASSERT(_fontHeight > 0);
+
     // waba TerminalDisplay 1.123:
     // "Base character width on widest ASCII character. This prevents too wide
     //  characters in the presence of double wide (e.g. Japanese) characters."
@@ -247,7 +249,12 @@ void TerminalDisplay::setVTFont(const QFont& f)
     QFontMetrics fontMetrics(newFont);
 
     // This check seems extreme and semi-random
+    // TODO: research if these checks are still needed to prevent
+    // enorgous fonts from being used; consider usage on big TV
+    // screens.
     if ((fontMetrics.height() > height()) || (fontMetrics.maxWidth() > width())) {
+        // return here will cause the "general" non-fixed width font
+        // to be selected
         return;
     }
 
@@ -264,6 +271,19 @@ void TerminalDisplay::setVTFont(const QFont& f)
 
     // Konsole cannot handle non-integer font metrics
     newFont.setStyleStrategy(QFont::StyleStrategy(newFont.styleStrategy() | QFont::ForceIntegerMetrics));
+
+    // Try to check that a good font has been loaded.
+    // For some fonts, ForceIntegerMetrics causes height() == 0 which
+    // will cause Konsole to crash later.
+    QFontMetrics fontMetrics2(newFont);
+    if ((fontMetrics2.height() < 1)) {
+        qCDebug(KonsoleDebug)<<"The font "<<newFont.toString()<<" has an invalid height()";
+        // Ask for a generic font so at least it is usable.
+        // Font listed in profile's dialog will not be updated.
+        newFont = QFont(QStringLiteral("Monospace"));
+        newFont.setStyleHint(QFont::TypeWriter);
+        qCDebug(KonsoleDebug)<<"Font changed to "<<newFont.toString();
+    }
 
     QFontInfo fontInfo(newFont);
 
