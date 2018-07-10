@@ -818,7 +818,7 @@ void TerminalDisplay::setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinkin
 void TerminalDisplay::resetCursorStyle()
 {
     Q_ASSERT(_sessionController != nullptr);
-    Q_ASSERT(_sessionController->session() != nullptr);
+    Q_ASSERT(!_sessionController->session().isNull());
 
     Profile::Ptr currentProfile = SessionManager::instance()->sessionProfile(_sessionController->session());
 
@@ -2867,7 +2867,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
     } else if (!_readOnly) {
         _scrollWheelState.addWheelEvent(ev);
 
-        Q_ASSERT(_sessionController->session() != nullptr);
+        Q_ASSERT(!_sessionController->session().isNull());
 
         if(!_usesMouseTracking && !_sessionController->session()->isPrimaryScreen() && _alternateScrolling) {
             // Send simulated up / down key presses to the terminal program
