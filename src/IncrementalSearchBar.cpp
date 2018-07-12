@@ -251,8 +251,6 @@ void IncrementalSearchBar::keyPressEvent(QKeyEvent *event)
     if (movementKeysToPassAlong.contains(event->key())
         && (event->modifiers() == Qt::ShiftModifier)) {
         emit unhandledMovementKeyPressed(event);
-    } else {
-        QWidget::keyPressEvent(event);
     }
 }
 
