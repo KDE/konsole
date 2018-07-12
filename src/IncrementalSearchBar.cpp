@@ -51,6 +51,8 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *aParent) :
     _searchFromButton(nullptr),
     _searchTimer(nullptr)
 {
+    setPalette(qApp->palette());
+    setAutoFillBackground(true);
 
     auto closeButton = new QToolButton(this);
     closeButton->setObjectName(QStringLiteral("close-button"));
@@ -306,21 +308,4 @@ void IncrementalSearchBar::setOptions()
     _regExpression->setChecked(KonsoleSettings::searchRegExpression());
     _highlightMatches->setChecked(KonsoleSettings::searchHighlightMatches());
     _reverseSearch->setChecked(KonsoleSettings::searchReverseSearch());
-}
-
-void IncrementalSearchBar::paintEvent(QPaintEvent *event)
-{
-    /* For some reason setAutoFillBackground was filling with
-     * black - I guess it's because it's the parent's palette,
-     * I'v tried to set the palette to the window but that was
-     * a no go, so we paint manually. */
-
-    if ( QApplication::topLevelWidgets().count()) {
-        auto topLevelWindow = QApplication::topLevelWidgets().at(0);
-        QPainter painter(this);
-        painter.setPen(topLevelWindow->palette().window().color());
-        painter.setBrush(topLevelWindow->palette().window());
-        painter.drawRect(0, 0, geometry().width(), geometry().height());
-    }
-    QWidget::paintEvent(event);
 }

@@ -139,7 +139,6 @@ Q_SIGNALS:
 protected:
     bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
     void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) override;
 public Q_SLOTS:
     void clearLineEdit();
 
