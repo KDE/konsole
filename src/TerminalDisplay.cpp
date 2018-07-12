@@ -1251,7 +1251,7 @@ void TerminalDisplay::updateImage()
     // avoid expensive text drawing for parts of the image that
     // can simply be moved up or down
     // disable this shortcut for transparent konsole with scaled pixels, otherwise we get rendering artefacts, see BUG 350651
-    if (!(WindowSystemInfo::HAVE_TRANSPARENCY && (qApp->devicePixelRatio() > 1.0)) && _wallpaper->isNull()) {
+    if (!(WindowSystemInfo::HAVE_TRANSPARENCY && (qApp->devicePixelRatio() > 1.0)) && _wallpaper->isNull() && !_searchBar->isVisible()) {
         scrollImage(_screenWindow->scrollCount() ,
                     _screenWindow->scrollRegion());
         _screenWindow->resetScrollCount();
