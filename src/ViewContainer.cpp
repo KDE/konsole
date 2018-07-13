@@ -50,6 +50,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     QTabWidget(parent),
     _connectedViewManager(connectedViewManager)
 {
+    setDocumentMode(true);
     tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
 
     connect(tabBar(), &QTabBar::tabBarDoubleClicked, this,
