@@ -202,6 +202,7 @@ private:
     QHash<QWidget *, ViewProperties *> _navigation;
     ViewManager *_connectedViewManager;
     QMenu *_contextPopupMenu;
+    QToolButton *_newTabButton;
 };
 
 

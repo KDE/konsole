@@ -48,10 +48,22 @@ using namespace Konsole;
 
 TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWidget *parent) :
     QTabWidget(parent),
-    _connectedViewManager(connectedViewManager)
+    _connectedViewManager(connectedViewManager),
+    _newTabButton(new QToolButton())
 {
     setDocumentMode(true);
     tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
+    _newTabButton->setAutoRaise(true);
+
+    connect(_newTabButton, &QToolButton::clicked, this, [this]{
+        emit newViewRequest();
+    });
+
+    connect(tabBar(), &QTabBar::tabCloseRequested, this, [this](int idx) {
+        closeTab(this, widget(idx));
+    });
 
     connect(tabBar(), &QTabBar::tabBarDoubleClicked, this,
             &Konsole::TabbedViewContainer::tabDoubleClicked);
@@ -108,7 +120,7 @@ void TabbedViewContainer::konsoleConfigChanged()
     setTabBarAutoHide((bool) KonsoleSettings::tabBarVisibility());
     setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
     setTabsClosable(KonsoleSettings::showQuickButtons());
-
+    setCornerWidget( KonsoleSettings::showQuickButtons() ? _newTabButton : nullptr, Qt::TopLeftCorner);
     if (KonsoleSettings::tabBarUseUserStyleSheet()) {
         setCssFromFile(KonsoleSettings::tabBarUserStyleSheetFile());
     }
