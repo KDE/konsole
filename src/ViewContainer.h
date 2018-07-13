@@ -143,8 +143,6 @@ Q_SIGNALS:
     /** Requests creation of a new view, with the selected profile. */
     void newViewRequest(Profile::Ptr);
 
-    void closeTab(TabbedViewContainer *tabbedViewContainer, QWidget *index);
-
     /**
      * Emitted when the user requests to move a view from another container
      * into this container.  If 'success' is set to true by a connected slot
@@ -191,6 +189,9 @@ protected:
      * @param toIndex New index for the widget
      */
     void moveViewWidget(int fromIndex, int toIndex);
+
+    // close tabs and unregister
+    void closeTerminalTab(int index);
 
 private Q_SLOTS:
     void viewDestroyed(QObject *view);

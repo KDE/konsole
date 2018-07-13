@@ -61,9 +61,8 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
         emit newViewRequest();
     });
 
-    connect(tabBar(), &QTabBar::tabCloseRequested, this, [this](int idx) {
-        closeTab(this, widget(idx));
-    });
+    connect(tabBar(), &QTabBar::tabCloseRequested,
+            this, &TabbedViewContainer::closeTerminalTab);
 
     connect(tabBar(), &QTabBar::tabBarDoubleClicked, this,
             &Konsole::TabbedViewContainer::tabDoubleClicked);
@@ -88,11 +87,10 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
 //                                 SLOT(tabContextMenuDetachTab()));
 #endif
 
-    _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-rename")),
+    auto editAction = _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-rename")),
                                  i18nc("@action:inmenu", "&Rename Tab..."), this,
                                  SLOT(tabContextMenuRenameTab()));
-    const auto contextPopupMenuActions = _contextPopupMenu->actions();
-    contextPopupMenuActions.last()->setObjectName(QStringLiteral("edit-rename"));
+    editAction->setObjectName(QStringLiteral("edit-rename"));
 
     auto profileMenu = new QMenu();
     auto profileList = new ProfileList(false, profileMenu);
@@ -182,7 +180,10 @@ void TabbedViewContainer::addView(QWidget *view, ViewProperties *item, int index
 
 void TabbedViewContainer::viewDestroyed(QObject *view)
 {
-    QWidget *widget = qobject_cast<QWidget *>(view);
+    auto widget = static_cast<QWidget*>(view);
+    const auto idx = indexOf(widget);
+
+    removeTab(idx);
     forgetView(widget);
 }
 
@@ -236,7 +237,7 @@ QList<QWidget *> TabbedViewContainer::widgetsForItem(ViewProperties *item) const
 void TabbedViewContainer::closeCurrentTab()
 {
     if (currentIndex() != -1) {
-        emit closeTab(this, widget(currentIndex()));
+        closeTerminalTab(currentIndex());
     }
 }
 
@@ -377,6 +378,12 @@ void TabbedViewContainer::updateIcon(ViewProperties *item)
         const int index = indexOf(widget);
         setTabIcon(index, item->icon());
     }
+}
+
+void TabbedViewContainer::closeTerminalTab(int idx) {
+    auto currWidget = widget(idx);
+    auto controller = qobject_cast<SessionController *>(_navigation[currWidget]);
+    controller->closeSession();
 }
 
 ViewManager *TabbedViewContainer::connectedViewManager()

@@ -348,8 +348,6 @@ private Q_SLOTS:
 
     void detachView(TabbedViewContainer *container, QWidget *view);
 
-    void closeTabFromContainer(TabbedViewContainer *container, QWidget *tab);
-
 private:
     Q_DISABLE_COPY(ViewManager)
 

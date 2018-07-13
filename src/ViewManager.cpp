@@ -616,7 +616,6 @@ TabbedViewContainer *ViewManager::createContainer()
     auto *container = new TabbedViewContainer(this, _viewSplitter);
     //TODO: Fix Detaching.
     //    connect(container, &TabbedViewContainer::detachTab, this, &ViewManager::detachView);
-    connect(container, &TabbedViewContainer::closeTab, this, &ViewManager::closeTabFromContainer);
 
     // connect signals and slots
     connect(container, &Konsole::TabbedViewContainer::viewAdded, this,
@@ -1099,13 +1098,4 @@ void ViewManager::moveSessionLeft()
 void ViewManager::moveSessionRight()
 {
     moveActiveViewRight();
-}
-
-void ViewManager::closeTabFromContainer(TabbedViewContainer *container, QWidget *tab)
-{
-    SessionController *controller = qobject_cast<SessionController *>(container->viewProperties(tab));
-    Q_ASSERT(controller);
-    if (controller != nullptr) {
-        controller->closeSession();
-    }
 }
