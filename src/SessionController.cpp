@@ -1318,7 +1318,7 @@ void SessionController::beginSearch(const QString& text, Enum::SearchDirection d
     QRegularExpression regExp = regexpFromSearchBarOptions();
     _searchFilter->setRegExp(regExp);
 
-    if (_searchStartLine == -1) {
+    if (_searchStartLine < 0 || _searchStartLine > _view->screenWindow()->lineCount()) {
         if (direction == Enum::ForwardsSearch) {
             setSearchStartTo(_view->screenWindow()->currentLine());
         } else {
