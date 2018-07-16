@@ -27,6 +27,7 @@
 #include <QTabBar>
 #include <QMenu>
 #include <QFile>
+#include <QOperatingSystemVersion>
 
 // KDE
 #include <KColorScheme>
@@ -90,12 +91,10 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
         }
     });
 
-
-#if defined(ENABLE_DETACHING)
-//    _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-detach")),
-//                                 i18nc("@action:inmenu", "&Detach Tab"), this,
-//                                 SLOT(tabContextMenuDetachTab()));
-#endif
+    auto detachAction = _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-detach")),
+                                 i18nc("@action:inmenu", "&Detach Tab"), this,
+                                 SLOT(tabContextMenuDetachTab()));
+    detachAction->setObjectName(QStringLiteral("tab-detach"));
 
     auto editAction = _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-rename")),
                                  i18nc("@action:inmenu", "&Rename Tab..."), this,
@@ -285,12 +284,14 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
         return;
     }
 
-#if defined(ENABLE_DETACHING)
-    // Enable 'Detach Tab' menu item only if there is more than 1 tab
-    // Note: the code is coupled with that action's position within the menu
-    QAction *detachAction = _contextPopupMenu->actions().at(0);
-    detachAction->setEnabled(count() > 1);
-#endif
+    //TODO: add a countChanged signal so we can remove this for.
+    // Detaching in mac causes crashes.
+    const auto isDarwin = QOperatingSystemVersion::currentType() == QOperatingSystemVersion::MacOS;
+    for(auto action : _contextPopupMenu->actions()) {
+        if (action->objectName() == QStringLiteral("tab-detach")) {
+            action->setEnabled( !isDarwin && count() > 1);
+        }
+    }
 
     // Add the read-only action
     auto controller = _navigation[widget(contextMenuTabIndex)];
