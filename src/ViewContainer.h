@@ -194,6 +194,7 @@ private:
     ViewManager *_connectedViewManager;
     QMenu *_contextPopupMenu;
     QToolButton *_newTabButton;
+    int _contextMenuTabIndex;
 };
 
 

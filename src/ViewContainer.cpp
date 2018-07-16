@@ -53,7 +53,8 @@ using namespace Konsole;
 TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWidget *parent) :
     QTabWidget(parent),
     _connectedViewManager(connectedViewManager),
-    _newTabButton(new QToolButton())
+    _newTabButton(new QToolButton()),
+    _contextMenuTabIndex(-1)
 {
     auto tabBarWidget = new DetachableTabBar();
     setTabBar(tabBarWidget);
@@ -103,9 +104,11 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
                                  SLOT(tabContextMenuDetachTab()));
     detachAction->setObjectName(QStringLiteral("tab-detach"));
 
-    auto editAction = _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-rename")),
-                                 i18nc("@action:inmenu", "&Rename Tab..."), this,
-                                 SLOT(tabContextMenuRenameTab()));
+    auto editAction = _contextPopupMenu->addAction(
+        QIcon::fromTheme(QStringLiteral("edit-rename")),
+        i18nc("@action:inmenu", "&Rename Tab..."), this,
+        [this]{ renameTab(_contextMenuTabIndex); }
+    );
     editAction->setObjectName(QStringLiteral("edit-rename"));
 
     auto profileMenu = new QMenu();
@@ -285,8 +288,8 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
         return;
     }
 
-    const int contextMenuTabIndex = tabBar()->tabAt(point);
-    if (contextMenuTabIndex < 0) {
+    _contextMenuTabIndex = tabBar()->tabAt(point);
+    if (_contextMenuTabIndex < 0) {
         return;
     }
 
@@ -300,7 +303,7 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
     }
 
     // Add the read-only action
-    auto controller = _navigation[widget(contextMenuTabIndex)];
+    auto controller = _navigation[widget(_contextMenuTabIndex)];
     auto sessionController = qobject_cast<SessionController*>(controller);
 
     if (sessionController != nullptr) {
