@@ -28,6 +28,7 @@
 #include <QMenu>
 #include <QFile>
 #include <QOperatingSystemVersion>
+#include <QMouseEvent>
 
 // KDE
 #include <KColorScheme>
@@ -42,16 +43,20 @@
 #include "ViewManager.h"
 #include "KonsoleSettings.h"
 #include "SessionController.h"
+#include "DetachableTabBar.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 
 using namespace Konsole;
+
 
 TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWidget *parent) :
     QTabWidget(parent),
     _connectedViewManager(connectedViewManager),
     _newTabButton(new QToolButton())
 {
+    auto tabBarWidget = new DetachableTabBar();
+    setTabBar(tabBarWidget);
     setDocumentMode(true);
     setMovable(true);
 
@@ -66,11 +71,13 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
 
     connect(tabBar(), &QTabBar::tabCloseRequested,
             this, &TabbedViewContainer::closeTerminalTab);
-
     connect(tabBar(), &QTabBar::tabBarDoubleClicked, this,
             &Konsole::TabbedViewContainer::tabDoubleClicked);
     connect(tabBar(), &QTabBar::customContextMenuRequested, this,
             &Konsole::TabbedViewContainer::openTabContextMenu);
+    connect(tabBarWidget, &DetachableTabBar::detachTab, this, [this](int idx) {
+        qDebug() << "Trying to detach this";
+    });
 
     connect(this, &TabbedViewContainer::currentChanged, this, [this](int index) {
         if (index != -1) {

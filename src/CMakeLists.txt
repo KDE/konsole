@@ -55,6 +55,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         CopyInputDialog.cpp
                         EditProfileDialog.cpp
                         Emulation.cpp
+                        DetachableTabBar.cpp
                         Filter.cpp
                         History.cpp
                         HistorySizeDialog.cpp
