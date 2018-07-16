@@ -156,22 +156,21 @@ void TabbedViewContainer::setCssFromFile(const QUrl &url)
 void TabbedViewContainer::moveActiveView(MoveDirection direction)
 {
     const int currentIndex = indexOf(currentWidget());
-    int newIndex = -1;
+    int newIndex = direction  == MoveViewLeft ? qMax(currentIndex - 1, 0) : qMin(currentIndex + 1, count() - 1);
 
-    switch (direction) {
-    case MoveViewLeft:
-        newIndex = qMax(currentIndex - 1, 0);
-        break;
-    case MoveViewRight:
-        newIndex = qMin(currentIndex + 1, count() - 1);
-        break;
-    }
-
-    Q_ASSERT(newIndex != -1);
     auto swappedWidget = widget(newIndex);
     auto currentWidget = widget(currentIndex);
-    removeTab(newIndex);
-    removeTab(currentIndex);
+    auto swappedContext = _navigation[swappedWidget];
+    auto currentContext = _navigation[currentWidget];
+
+    if (newIndex < currentIndex) {
+        insertTab(newIndex, currentWidget, currentContext->icon(), currentContext->title());
+        insertTab(currentIndex, swappedWidget, swappedContext->icon(), swappedContext->title());
+    } else {
+        insertTab(currentIndex, swappedWidget, swappedContext->icon(), swappedContext->title());
+        insertTab(newIndex, currentWidget, currentContext->icon(), currentContext->title());
+    }
+    setCurrentIndex(newIndex);
 }
 
 void TabbedViewContainer::addView(QWidget *view, ViewProperties *item, int index)
