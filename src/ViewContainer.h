@@ -168,17 +168,6 @@ Q_SIGNALS:
     void viewRemoved(QWidget *view);
 
 protected:
-    /**
-     * Performs the task of adding the view widget
-     * to the container widget.
-     */
-    void addViewWidget(QWidget *view, int index);
-    /**
-     * Performs the task of removing the view widget
-     * from the container widget.
-     */
-    void removeViewWidget(QWidget *view);
-
     /** Returns the widgets which are associated with a particular navigation item */
     QList<QWidget *> widgetsForItem(ViewProperties *item) const;
 

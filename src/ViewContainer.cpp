@@ -181,7 +181,14 @@ void TabbedViewContainer::addView(QWidget *view, ViewProperties *item, int index
     }
 
     _navigation[view] = item;
-    connect(view, &QWidget::destroyed, this, &Konsole::TabbedViewContainer::viewDestroyed);
+    connect(item, &Konsole::ViewProperties::titleChanged, this,
+            &Konsole::TabbedViewContainer::updateTitle);
+    connect(item, &Konsole::ViewProperties::iconChanged, this,
+            &Konsole::TabbedViewContainer::updateIcon);
+    connect(item, &Konsole::ViewProperties::activity, this,
+            &Konsole::TabbedViewContainer::updateActivity);
+    connect(view, &QWidget::destroyed, this,
+            &Konsole::TabbedViewContainer::viewDestroyed);
     emit viewAdded(view, item);
 }
 
@@ -324,19 +331,6 @@ void TabbedViewContainer::wheelScrolled(int delta)
     } else {
         activatePreviousView();
     }
-}
-
-void TabbedViewContainer::addViewWidget(QWidget *view, int index)
-{
-    ViewProperties *item = viewProperties(view);
-    connect(item, &Konsole::ViewProperties::titleChanged, this,
-            &Konsole::TabbedViewContainer::updateTitle);
-    connect(item, &Konsole::ViewProperties::iconChanged, this,
-            &Konsole::TabbedViewContainer::updateIcon);
-    connect(item, &Konsole::ViewProperties::activity, this,
-            &Konsole::TabbedViewContainer::updateActivity);
-
-    insertTab(index, view, item->icon(), item->title());
 }
 
 void TabbedViewContainer::setTabActivity(int index, bool activity)
