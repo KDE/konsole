@@ -168,6 +168,9 @@ Q_SIGNALS:
     /** Emitted when a view is removed from the container. */
     void viewRemoved(QWidget *view);
 
+    /** detach the specific tab */
+    void detachTab(TabbedViewContainer *self, QWidget *activeView);
+
 protected:
     /** Returns the widgets which are associated with a particular navigation item */
     QList<QWidget *> widgetsForItem(ViewProperties *item) const;

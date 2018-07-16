@@ -71,21 +71,19 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     });
 
     connect(tabBar(), &QTabBar::tabCloseRequested,
-            this, &TabbedViewContainer::closeTerminalTab);
+        this, &TabbedViewContainer::closeTerminalTab);
     connect(tabBar(), &QTabBar::tabBarDoubleClicked, this,
-            &Konsole::TabbedViewContainer::tabDoubleClicked);
+        &Konsole::TabbedViewContainer::tabDoubleClicked);
     connect(tabBar(), &QTabBar::customContextMenuRequested, this,
-            &Konsole::TabbedViewContainer::openTabContextMenu);
+        &Konsole::TabbedViewContainer::openTabContextMenu);
     connect(tabBarWidget, &DetachableTabBar::detachTab, this, [this](int idx) {
-        qDebug() << "Trying to detach this";
+        emit detachTab(this, widget(idx));
     });
-
     connect(this, &TabbedViewContainer::currentChanged, this, [this](int index) {
         if (index != -1) {
             widget(index)->setFocus();
         }
     });
-
 
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(tabBar());
@@ -99,9 +97,11 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
         }
     });
 
-    auto detachAction = _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-detach")),
-                                 i18nc("@action:inmenu", "&Detach Tab"), this,
-                                 SLOT(tabContextMenuDetachTab()));
+    auto detachAction = _contextPopupMenu->addAction(
+        QIcon::fromTheme(QStringLiteral("tab-detach")),
+        i18nc("@action:inmenu", "&Detach Tab"), this,
+        [this] { emit detachTab(this, currentWidget()); }
+    );
     detachAction->setObjectName(QStringLiteral("tab-detach"));
 
     auto editAction = _contextPopupMenu->addAction(

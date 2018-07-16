@@ -346,10 +346,6 @@ void ViewManager::detachActiveView()
 
 void ViewManager::detachView(TabbedViewContainer *container, QWidget *view)
 {
-#if !defined(ENABLE_DETACHING)
-    return;
-#endif
-
     TerminalDisplay *viewToDetach = qobject_cast<TerminalDisplay *>(view);
 
     if (viewToDetach == nullptr) {
@@ -615,7 +611,7 @@ TabbedViewContainer *ViewManager::createContainer()
 
     auto *container = new TabbedViewContainer(this, _viewSplitter);
     //TODO: Fix Detaching.
-    //    connect(container, &TabbedViewContainer::detachTab, this, &ViewManager::detachView);
+    connect(container, &TabbedViewContainer::detachTab, this, &ViewManager::detachView);
 
     // connect signals and slots
     connect(container, &Konsole::TabbedViewContainer::viewAdded, this,
