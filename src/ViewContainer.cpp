@@ -52,6 +52,8 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     _newTabButton(new QToolButton())
 {
     setDocumentMode(true);
+    setMovable(true);
+
     tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
 
     _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
@@ -87,6 +89,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
             }
         }
     });
+
 
 #if defined(ENABLE_DETACHING)
 //    _contextPopupMenu->addAction(QIcon::fromTheme(QStringLiteral("tab-detach")),
