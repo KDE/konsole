@@ -69,6 +69,13 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(tabBar(), &QTabBar::customContextMenuRequested, this,
             &Konsole::TabbedViewContainer::openTabContextMenu);
 
+    connect(this, &TabbedViewContainer::currentChanged, this, [this](int index) {
+        if (index != -1) {
+            widget(index)->setFocus();
+        }
+    });
+
+
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(tabBar());
     connect(_contextPopupMenu, &QMenu::aboutToHide, this, [this]() {
