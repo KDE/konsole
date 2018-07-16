@@ -259,8 +259,9 @@ void TabbedViewContainer::tabDoubleClicked(int index)
 
 void TabbedViewContainer::renameTab(int index)
 {
-    // TODO: Fix rename.
-    // _navigation[index]->rename();
+    if (index != -1) {
+        _navigation[widget(index)]->rename();
+    }
 }
 
 void TabbedViewContainer::openTabContextMenu(const QPoint &point)
