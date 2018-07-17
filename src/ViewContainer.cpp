@@ -65,7 +65,6 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
 
     _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
     _newTabButton->setAutoRaise(true);
-
     connect(_newTabButton, &QToolButton::clicked, this, [this]{
         emit newViewRequest();
     });
@@ -149,6 +148,11 @@ void TabbedViewContainer::konsoleConfigChanged()
     setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
     setTabsClosable(KonsoleSettings::showQuickButtons());
     setCornerWidget( KonsoleSettings::showQuickButtons() ? _newTabButton : nullptr, Qt::TopLeftCorner);
+
+    if (isVisible() && KonsoleSettings::showQuickButtons()) {
+        _newTabButton->setVisible(true);
+    }
+
     if (KonsoleSettings::tabBarUseUserStyleSheet()) {
         setCssFromFile(KonsoleSettings::tabBarUserStyleSheetFile());
     }
