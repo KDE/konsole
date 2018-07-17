@@ -8,7 +8,7 @@ DetachableTabBar::DetachableTabBar(QWidget *parent) :
 void DetachableTabBar::mouseMoveEvent(QMouseEvent *event)
 {
     QTabBar::mouseMoveEvent(event);
-    if (!contentsRect().adjusted(-10,-10,10,10).contains(event->pos())) {
+    if (!contentsRect().adjusted(-30,-30,30,30).contains(event->pos())) {
         if (!_draggingOutside) {
             _draggingOutside = true;
             _originalCursor = cursor();
@@ -23,7 +23,7 @@ void DetachableTabBar::mouseMoveEvent(QMouseEvent *event)
 void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
     QTabBar::mouseReleaseEvent(event);
-    if (!contentsRect().adjusted(-10,-10,10,10).contains(event->pos())) {
+    if (!contentsRect().adjusted(-30,-30,30,30).contains(event->pos())) {
         setCursor(_originalCursor);
         emit detachTab(currentIndex());
     }
