@@ -100,7 +100,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     auto detachAction = _contextPopupMenu->addAction(
         QIcon::fromTheme(QStringLiteral("tab-detach")),
         i18nc("@action:inmenu", "&Detach Tab"), this,
-        [this] { emit detachTab(this, currentWidget()); }
+        [this] { emit detachTab(this, widget(_contextMenuTabIndex)); }
     );
     detachAction->setObjectName(QStringLiteral("tab-detach"));
 
