@@ -142,8 +142,6 @@ Session::Session(QObject* parent) :
     _activityTimer = new QTimer(this);
     _activityTimer->setSingleShot(true);
     connect(_activityTimer, &QTimer::timeout, this, &Konsole::Session::activityTimerDone);
-
-    connect(this, &Konsole::Session::tabRenamedByUser, this, &Konsole::Session::tabTitleSetByUser);
 }
 
 Session::~Session()

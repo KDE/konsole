@@ -2117,6 +2117,7 @@ QSize TerminalDisplay::sizeHint() const
 //the same signal as the one for a content size change
 void TerminalDisplay::showEvent(QShowEvent*)
 {
+    propagateSize();
     emit changedContentSizeSignal(_contentRect.height(), _contentRect.width());
 }
 void TerminalDisplay::hideEvent(QHideEvent*)

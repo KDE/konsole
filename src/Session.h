@@ -380,6 +380,7 @@ public:
     // Returns true if the current screen is the secondary/alternate one
     // or false if it's the primary/normal buffer
     bool isPrimaryScreen();
+    void tabTitleSetByUser(bool set);
 
 public Q_SLOTS:
 
@@ -707,11 +708,6 @@ Q_SIGNALS:
      */
     void getBackgroundColor();
 
-    /**
-     * Relays the tabRenamedByUser signal from SessionController
-     */
-    void tabRenamedByUser(bool renamed) const;
-
 private Q_SLOTS:
     void done(int, QProcess::ExitStatus);
 
@@ -741,8 +737,6 @@ private Q_SLOTS:
     void onPrimaryScreenInUse(bool use);
 
     void sessionAttributeRequest(int id);
-
-    void tabTitleSetByUser(bool set);
 
 private:
     Q_DISABLE_COPY(Session)

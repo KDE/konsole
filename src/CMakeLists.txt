@@ -2,13 +2,6 @@
 
 add_definitions(-DTRANSLATION_DOMAIN=\"konsole\")
 
-### Too many crashes/issues with detaching on MacOSX
-IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  set(ENABLE_DETACHING 0)
-else()
-  set(ENABLE_DETACHING 1)
-endif()
-
 ### Handle DragonFlyBSD here instead of using __DragonFly__
 IF(${CMAKE_SYSTEM_NAME} MATCHES "DragonFly")
   set(HAVE_OS_DRAGONFLYBSD 1)
@@ -62,6 +55,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         CopyInputDialog.cpp
                         EditProfileDialog.cpp
                         Emulation.cpp
+                        DetachableTabBar.cpp
                         Filter.cpp
                         History.cpp
                         HistorySizeDialog.cpp
@@ -93,7 +87,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         TerminalDisplay.cpp
                         TerminalDisplayAccessible.cpp
                         ViewContainer.cpp
-                        ViewContainerTabBar.cpp
                         ViewManager.cpp
                         ViewProperties.cpp
                         ViewSplitter.cpp
