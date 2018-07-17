@@ -11,7 +11,7 @@ void DetachableTabBar::mouseMoveEvent(QMouseEvent *event)
 void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
     QTabBar::mouseReleaseEvent(event);
-    if (!contentsRect().contains(event->pos())) {
+    if (!contentsRect().adjusted(-10,-10,10,10).contains(event->pos())) {
         emit detachTab(currentIndex());
     }
 }
