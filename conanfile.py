@@ -47,9 +47,15 @@ class KonsoleConan(ConanFile):
         "kf5-XmlGui/5.6.0@kde/testing",
         "kf5-DBusAddons/5.6.0@kde/testing",
         "kf5-GlobalAccel/5.6.0@kde/testing",
+
+        "kf5-DocTools/5.6.0@kde/testing",
     )
 
     generators = "cmake"
+
+    def requirements(self):
+        if self.settings.os != "Macos":
+            self.requires("x11/latest@kde/testing")
 
     def build(self):
         cmake = CMake(self)
