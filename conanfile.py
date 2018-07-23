@@ -13,10 +13,11 @@ class KonsoleConan(ConanFile):
     build_requires = (
         "extra-cmake-modules/1.6.0@kde/testing",
 
-        "qt-core/5.6.0@qt/testing",
-        "qt-dbus/5.6.0@qt/testing",
-        "qt-printingsupport/5.6.0@qt/testing",
-        "qt-widgets/5.6.0@qt/testing",
+        "Qt/5.6.3@bincrafters/stable"
+        # "qt-core/5.6.0@qt/testing",
+        # "qt-dbus/5.6.0@qt/testing",
+        # "qt-printingsupport/5.6.0@qt/testing",
+        # "qt-widgets/5.6.0@qt/testing",
 
         "kf5-Bookmarks/5.6.0@kde/testing",
         "kf5-Completion/5.6.0@kde/testing",
