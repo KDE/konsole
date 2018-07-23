@@ -115,11 +115,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
         i18nc("@action:inmenu", "Close Tab"), this,
         [this] { closeTerminalTab(_contextMenuTabIndex); }
     );
-    closeAction->setVisible(!KonsoleSettings::showQuickButtons());
     closeAction->setObjectName(QStringLiteral("tab-close"));
-    connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, [closeAction] {
-        closeAction->setVisible(!KonsoleSettings::showQuickButtons());
-    });
 
     auto profileMenu = new QMenu();
     auto profileList = new ProfileList(false, profileMenu);
