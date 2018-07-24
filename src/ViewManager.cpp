@@ -196,9 +196,10 @@ void ViewManager::setupActions()
 
     multiViewOnlyActions << shrinkActiveAction;
 
-    QAction *detachViewAction = collection->addAction(QStringLiteral("detach-view"));
     // Crashes on Mac.
-    detachViewAction->setEnabled(QOperatingSystemVersion::currentType() != QOperatingSystemVersion::MacOS);
+#if defined(ENABLE_DETACHING)
+    QAction *detachViewAction = collection->addAction(QStringLiteral("detach-view"));
+    detachViewAction->setEnabled(true);
     detachViewAction->setIcon(QIcon::fromTheme(QStringLiteral("tab-detach")));
     detachViewAction->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
     // Ctrl+Shift+D is not used as a shortcut by default because it is too close
@@ -208,6 +209,7 @@ void ViewManager::setupActions()
     connect(this, &Konsole::ViewManager::splitViewToggle, this,
             &Konsole::ViewManager::updateDetachViewState);
     connect(detachViewAction, &QAction::triggered, this, &Konsole::ViewManager::detachActiveView);
+#endif
 
     // Next / Previous View , Next Container
     collection->addAction(QStringLiteral("next-view"), nextViewAction);
@@ -346,6 +348,10 @@ void ViewManager::detachActiveView()
 
 void ViewManager::detachView(TabbedViewContainer *container, QWidget *view)
 {
+#if !defined(ENABLE_DETACHING)
+    return;
+#endif
+
     TerminalDisplay *viewToDetach = qobject_cast<TerminalDisplay *>(view);
 
     if (viewToDetach == nullptr) {

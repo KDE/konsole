@@ -27,7 +27,6 @@
 #include <QTabBar>
 #include <QMenu>
 #include <QFile>
-#include <QOperatingSystemVersion>
 #include <QMouseEvent>
 
 // KDE
@@ -101,12 +100,14 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
         }
     });
 
+#if defined(ENABLE_DETACHING)
     auto detachAction = _contextPopupMenu->addAction(
         QIcon::fromTheme(QStringLiteral("tab-detach")),
         i18nc("@action:inmenu", "&Detach Tab"), this,
         [this] { emit detachTab(this, widget(_contextMenuTabIndex)); }
     );
     detachAction->setObjectName(QStringLiteral("tab-detach"));
+#endif
 
     auto editAction = _contextPopupMenu->addAction(
         QIcon::fromTheme(QStringLiteral("edit-rename")),
@@ -313,12 +314,13 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
 
     //TODO: add a countChanged signal so we can remove this for.
     // Detaching in mac causes crashes.
-    const auto isDarwin = QOperatingSystemVersion::currentType() == QOperatingSystemVersion::MacOS;
+#if defined(ENABLE_DETACHING)
     for(auto action : _contextPopupMenu->actions()) {
         if (action->objectName() == QStringLiteral("tab-detach")) {
-            action->setEnabled( !isDarwin && count() > 1);
+            action->setEnabled(count() > 1);
         }
     }
+#endif
 
     // Add the read-only action
     auto controller = _navigation[widget(_contextMenuTabIndex)];

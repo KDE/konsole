@@ -2,6 +2,14 @@
 
 add_definitions(-DTRANSLATION_DOMAIN=\"konsole\")
 
+# When Qt5.9+ is required, consider using QOperatingSystemVersion
+### Too many crashes/issues with detaching on MacOSX
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  set(ENABLE_DETACHING 0)
+else()
+  set(ENABLE_DETACHING 1)
+endif()
+
 ### Handle DragonFlyBSD here instead of using __DragonFly__
 IF(${CMAKE_SYSTEM_NAME} MATCHES "DragonFly")
   set(HAVE_OS_DRAGONFLYBSD 1)
