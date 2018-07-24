@@ -199,7 +199,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr profile,
         // e.g. the second version should be higher than the first one:
         // 18.04.12 -> 180412
         // 18.08.0  -> 180800
-        QStringList list = QStringLiteral(KONSOLE_VERSION).split(QLatin1String("."));
+        QStringList list = QStringLiteral(KONSOLE_VERSION).split(QLatin1Char('.'));
         if (list[2].length() < 2) {
                 list[2].prepend(QLatin1String("0"));
         }
