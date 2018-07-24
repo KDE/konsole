@@ -63,7 +63,7 @@ public:
     /**
      * Constructs a new view container with the specified parent.
      *
-     * @param position The initial position of the navigation widget
+     * @param connectedViewManager Connect the new view to this manager
      * @param parent The parent object of the container
      */
     TabbedViewContainer(ViewManager *connectedViewManager, QWidget *parent);
