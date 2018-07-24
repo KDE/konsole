@@ -26,7 +26,7 @@
 class DetachableTabBar : public QTabBar {
     Q_OBJECT
 public:
-    DetachableTabBar(QWidget *parent = nullptr);
+    explicit DetachableTabBar(QWidget *parent = nullptr);
 Q_SIGNALS:
     void detachTab(int idx);
 protected:
