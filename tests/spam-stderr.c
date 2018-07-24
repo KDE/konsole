@@ -1,5 +1,6 @@
 // from https://bugs.kde.org/show_bug.cgi?id=230184
 // author Stefan Westerfeld
+// This code is in the public domain.
 
 #include <stdio.h>
 
