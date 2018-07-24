@@ -54,6 +54,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     QTabWidget(parent),
     _connectedViewManager(connectedViewManager),
     _newTabButton(new QToolButton()),
+    _closeTabButton(new QToolButton()),
     _contextMenuTabIndex(-1)
 {
     auto tabBarWidget = new DetachableTabBar();
@@ -69,8 +70,12 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
         emit newViewRequest();
     });
 
-    connect(tabBar(), &QTabBar::tabCloseRequested,
-        this, &TabbedViewContainer::closeTerminalTab);
+    _closeTabButton->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
+    _closeTabButton->setAutoRaise(true);
+    connect(_closeTabButton, &QToolButton::clicked, this, [this]{
+       closeCurrentTab();
+    });
+
     connect(tabBar(), &QTabBar::tabBarDoubleClicked, this,
         &Konsole::TabbedViewContainer::tabDoubleClicked);
     connect(tabBar(), &QTabBar::customContextMenuRequested, this,
@@ -122,7 +127,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     profileList->syncWidgetActions(profileMenu, true);
     connect(profileList, &Konsole::ProfileList::profileSelected, this,
             static_cast<void (TabbedViewContainer::*)(Profile::Ptr)>(&Konsole::TabbedViewContainer::newViewRequest));
-  //  setNewViewMenu(profileMenu);
+    _newTabButton->setMenu(profileMenu);
 
     konsoleConfigChanged();
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TabbedViewContainer::konsoleConfigChanged);
@@ -142,11 +147,13 @@ void TabbedViewContainer::konsoleConfigChanged()
 {
     setTabBarAutoHide((bool) KonsoleSettings::tabBarVisibility());
     setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
-    setTabsClosable(KonsoleSettings::showQuickButtons());
+
     setCornerWidget( KonsoleSettings::showQuickButtons() ? _newTabButton : nullptr, Qt::TopLeftCorner);
+    setCornerWidget( KonsoleSettings::showQuickButtons() ? _closeTabButton : nullptr, Qt::TopRightCorner);
 
     if (isVisible() && KonsoleSettings::showQuickButtons()) {
         _newTabButton->setVisible(true);
+        _closeTabButton->setVisible(true);
     }
 
     if (KonsoleSettings::tabBarUseUserStyleSheet()) {
