@@ -281,6 +281,9 @@ public Q_SLOTS:
       */
     Q_SCRIPTABLE void moveSessionRight();
 
+    /** DBus slot that sets ALL tabs' width to match their text */
+    Q_SCRIPTABLE void setTabWidthToText(bool);
+
 private Q_SLOTS:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();

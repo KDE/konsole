@@ -152,6 +152,8 @@ void TabbedViewContainer::konsoleConfigChanged()
     setCornerWidget( KonsoleSettings::showQuickButtons() ? _newTabButton : nullptr, Qt::TopLeftCorner);
     setCornerWidget( KonsoleSettings::showQuickButtons() ? _closeTabButton : nullptr, Qt::TopRightCorner);
 
+    tabBar()->setExpanding(KonsoleSettings::expandTabWidth());
+    tabBar()->update();
     if (isVisible() && KonsoleSettings::showQuickButtons()) {
         _newTabButton->setVisible(true);
         _closeTabButton->setVisible(true);

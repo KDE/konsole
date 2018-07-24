@@ -1101,3 +1101,11 @@ void ViewManager::moveSessionRight()
 {
     moveActiveViewRight();
 }
+
+void ViewManager::setTabWidthToText(bool setTabWidthToText)
+{
+    for(auto container : _viewSplitter->containers()) {
+        container->tabBar()->setExpanding(!setTabWidthToText);
+        container->tabBar()->update();
+    }
+}
