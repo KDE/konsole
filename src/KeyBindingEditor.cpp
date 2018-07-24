@@ -197,7 +197,7 @@ bool KeyBindingEditor::eventFilter(QObject *watched, QEvent *event)
             return true;
         }
     }
-    return false;
+    return QDialog::eventFilter(watched, event);
 }
 
 void KeyBindingEditor::setDescription(const QString &description)
