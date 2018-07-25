@@ -56,6 +56,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _pluggedController(nullptr),
     _sessionMap(QHash<TerminalDisplay *, Session *>()),
     _actionCollection(collection),
+    _navigationVisibility(NavigationNotSet),
     _managerId(0)
 {
     // create main view area
@@ -616,6 +617,7 @@ TabbedViewContainer *ViewManager::createContainer()
 {
 
     auto *container = new TabbedViewContainer(this, _viewSplitter);
+    container->setNavigationVisibility(_navigationVisibility);
     //TODO: Fix Detaching.
     connect(container, &TabbedViewContainer::detachTab, this, &ViewManager::detachView);
 
@@ -1107,5 +1109,14 @@ void ViewManager::setTabWidthToText(bool setTabWidthToText)
     for(auto container : _viewSplitter->containers()) {
         container->tabBar()->setExpanding(!setTabWidthToText);
         container->tabBar()->update();
+    }
+}
+
+void ViewManager::setNavigationVisibility(NavigationVisibility navigationVisibility) {
+    if (_navigationVisibility != navigationVisibility) {
+        _navigationVisibility = navigationVisibility;
+        for(auto *container : _viewSplitter->containers()) {
+            container->setNavigationVisibility(navigationVisibility);
+        }
     }
 }

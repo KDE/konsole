@@ -32,6 +32,7 @@
 
 // Konsole
 #include "Profile.h"
+#include "ViewManager.h"
 
 // Qt
 class QPoint;
@@ -133,6 +134,7 @@ public:
 
     void tabDoubleClicked(int index);
     void openTabContextMenu(const QPoint &point);
+    void setNavigationVisibility(ViewManager::NavigationVisibility navigationVisibility);
 
 Q_SIGNALS:
     /** Emitted when the container has no more children */
@@ -199,6 +201,7 @@ private:
     QToolButton *_newTabButton;
     QToolButton *_closeTabButton;
     int _contextMenuTabIndex;
+    ViewManager::NavigationVisibility _navigationVisibility;
 };
 
 

@@ -422,6 +422,12 @@ MainWindow *Application::processWindowArgs(bool &createdNewMainWindow)
         if (m_parser->isSet(QStringLiteral("fullscreen"))) {
             window->viewFullScreen(true);
         }
+        if (m_parser->isSet(QStringLiteral("show-tabbar"))) {
+            window->viewManager()->setNavigationVisibility(ViewManager::AlwaysShowNavigation);
+        }
+        else if (m_parser->isSet(QStringLiteral("hide-tabbar"))) {
+            window->viewManager()->setNavigationVisibility(ViewManager::AlwaysHideNavigation);
+        }
     }
     return window;
 }

@@ -131,6 +131,28 @@ public:
     };
 
     /**
+     * Describes the options for showing or hiding the container's navigation widget.
+    */
+    enum NavigationVisibility {
+        NavigationNotSet,       // Don't rely on this information, Only use the settings.
+        AlwaysShowNavigation,
+        ShowNavigationAsNeeded,
+        AlwaysHideNavigation
+    };
+
+    /**
+      * Sets the visibility of the view container's navigation widget.
+      * The ViewContainer subclass is responsible for ensuring that this
+      * setting is respected as views are dded or removed from the container
+      */
+    void setNavigationVisibility(NavigationVisibility Mode);
+
+    /** Returns the current mode for controlling the visibility of the
+     * view container's navigation widget.
+     */
+    NavigationVisibility navigationVisibility() const;
+
+    /**
      * Sets the type of widget provided to navigate between open sessions
      * in a container.  The changes will only apply to newly created containers.
      *
@@ -389,6 +411,7 @@ private:
     KActionCollection *_actionCollection;
 
     NavigationMethod _navigationMethod;
+    NavigationVisibility _navigationVisibility;
     QString _navigationStyleSheet;
     int _managerId;
     static int lastManagerId;

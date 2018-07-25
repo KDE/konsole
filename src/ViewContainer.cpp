@@ -54,7 +54,8 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     _connectedViewManager(connectedViewManager),
     _newTabButton(new QToolButton()),
     _closeTabButton(new QToolButton()),
-    _contextMenuTabIndex(-1)
+    _contextMenuTabIndex(-1),
+    _navigationVisibility(ViewManager::NavigationVisibility::NavigationNotSet)
 {
     auto tabBarWidget = new DetachableTabBar();
     setTabBar(tabBarWidget);
@@ -146,7 +147,14 @@ TabbedViewContainer::~TabbedViewContainer()
 
 void TabbedViewContainer::konsoleConfigChanged()
 {
-    setTabBarAutoHide((bool) KonsoleSettings::tabBarVisibility());
+    // if we start with --show-tabbar or --hide-tabbar we ignore the preferences.
+    setTabBarAutoHide(KonsoleSettings::tabBarVisibility() == KonsoleSettings::EnumTabBarVisibility::ShowTabBarWhenNeeded);
+    if (KonsoleSettings::tabBarVisibility() == KonsoleSettings::EnumTabBarVisibility::AlwaysShowTabBar) {
+        tabBar()->setVisible(true);
+    } else if (KonsoleSettings::tabBarVisibility() == KonsoleSettings::EnumTabBarVisibility::AlwaysHideTabBar) {
+        tabBar()->setVisible(false);
+    }
+
     setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
 
     setCornerWidget( KonsoleSettings::showQuickButtons() ? _newTabButton : nullptr, Qt::TopLeftCorner);
@@ -426,4 +434,17 @@ void TabbedViewContainer::closeTerminalTab(int idx) {
 ViewManager *TabbedViewContainer::connectedViewManager()
 {
     return _connectedViewManager;
+}
+
+void TabbedViewContainer::setNavigationVisibility(ViewManager::NavigationVisibility navigationVisibility) {
+    if (navigationVisibility == ViewManager::NavigationNotSet) {
+        return;
+    }
+
+    setTabBarAutoHide(navigationVisibility == ViewManager::ShowNavigationAsNeeded);
+    if (navigationVisibility == ViewManager::AlwaysShowNavigation) {
+        tabBar()->setVisible(true);
+    } else if (navigationVisibility == ViewManager::AlwaysHideNavigation) {
+        tabBar()->setVisible(false);
+    }
 }
