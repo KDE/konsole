@@ -186,7 +186,7 @@ protected:
     void moveViewWidget(int fromIndex, int toIndex);
 
     // close tabs and unregister
-    void closeTerminalTab(int index);
+    void closeTerminalTab(int idx);
 
 private Q_SLOTS:
     void viewDestroyed(QObject *view);
