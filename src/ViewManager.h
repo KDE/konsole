@@ -145,7 +145,7 @@ public:
       * The ViewContainer subclass is responsible for ensuring that this
       * setting is respected as views are dded or removed from the container
       */
-    void setNavigationVisibility(NavigationVisibility Mode);
+    void setNavigationVisibility(NavigationVisibility navigationVisibility);
 
     /** Returns the current mode for controlling the visibility of the
      * view container's navigation widget.
