@@ -900,13 +900,13 @@ void ViewManager::saveSessions(KConfigGroup &group)
     int tab = 1;
 
     TabbedViewContainer *container = _viewSplitter->activeContainer();
-    ids.reserve(container->count());
 
     // first: sessions in the active container, preserving the order
     Q_ASSERT(container);
     if (container == nullptr) {
         return;
     }
+    ids.reserve(container->count());
 
     TerminalDisplay *activeview = qobject_cast<TerminalDisplay *>(container->currentWidget());
     for (int i = 0, end = container->count(); i < end; i++) {
