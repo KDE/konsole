@@ -352,7 +352,7 @@ const int DEL = 127;
 const int SP  = 32;
 
 // process an incoming unicode character
-void Vt102Emulation::receiveChar(uint cc)
+void Vt102Emulation::receiveChar(int cc)
 {
   if (cc == DEL) {
     return; //VT100: ignore.
@@ -1264,7 +1264,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
 
 // Apply current character map.
 
-unsigned int Vt102Emulation::applyCharset(uint c)
+unsigned short Vt102Emulation::applyCharset(unsigned short c)
 {
     if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) {
         return vt100_graphics[c - 0x5f];

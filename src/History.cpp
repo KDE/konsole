@@ -453,7 +453,7 @@ CompactHistoryLine::CompactHistoryLine(const TextLine &line, CompactHistoryBlock
         ////qDebug() << "number of different formats in string: " << _formatLength;
         _formatArray = static_cast<CharacterFormat *>(_blockListRef.allocate(sizeof(CharacterFormat) * _formatLength));
         Q_ASSERT(_formatArray != nullptr);
-        _text = static_cast<uint *>(_blockListRef.allocate(sizeof(uint) * line.size()));
+        _text = static_cast<quint16 *>(_blockListRef.allocate(sizeof(quint16) * line.size()));
         Q_ASSERT(_text != nullptr);
 
         _length = line.size();

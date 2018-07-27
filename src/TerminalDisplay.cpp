@@ -1646,12 +1646,12 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 }
 
 inline static bool isRtl(const Character &chr) {
-    uint c = 0;
+    ushort c = 0;
     if ((chr.rendition & RE_EXTENDED_CHAR) == 0) {
         c = chr.character;
     } else {
         ushort extendedCharLength = 0;
-        const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(chr.character, extendedCharLength);
+        const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(chr.character, extendedCharLength);
         if (chars != nullptr) {
             c = chars[0];
         }
@@ -1681,8 +1681,8 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
     const int rly = qMin(_usedLines - 1,  qMax(0, (rect.bottom() - tLy - _contentRect.top()) / _fontHeight));
 
     const int numberOfColumns = _usedColumns;
-    QVector<uint> univec;
-    univec.reserve(numberOfColumns);
+    QString unistr;
+    unistr.reserve(numberOfColumns);
     for (int y = luy; y <= rly; y++) {
         int x = lux;
         if ((_image[loc(lux, y)].character == 0u) && (x != 0)) {
@@ -1694,19 +1694,19 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
 
             // reset our buffer to the number of columns
             int bufferSize = numberOfColumns;
-            univec.resize(bufferSize);
-            uint *disstrU = univec.data();
+            unistr.resize(bufferSize);
+            QChar *disstrU = unistr.data();
 
             // is this a single character or a sequence of characters ?
             if ((_image[loc(x, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                 // sequence of characters
                 ushort extendedCharLength = 0;
-                const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(_image[loc(x, y)].character, extendedCharLength);
+                const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(_image[loc(x, y)].character, extendedCharLength);
                 if (chars != nullptr) {
                     Q_ASSERT(extendedCharLength > 1);
                     bufferSize += extendedCharLength - 1;
-                    univec.resize(bufferSize);
-                    disstrU = univec.data();
+                    unistr.resize(bufferSize);
+                    disstrU = unistr.data();
                     for (int index = 0 ; index < extendedCharLength ; index++) {
                         Q_ASSERT(p < bufferSize);
                         disstrU[p++] = chars[index];
@@ -1714,10 +1714,10 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
                 }
             } else {
                 // single character
-                const uint c = _image[loc(x, y)].character;
+                const quint16 c = _image[loc(x, y)].character;
                 if (c != 0u) {
                     Q_ASSERT(p < bufferSize);
-                    disstrU[p++] = c;
+                    disstrU[p++] = c; //fontMap(c);
                 }
             }
 
@@ -1736,16 +1736,16 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
                         (_image[qMin(loc(x + len, y) + 1, _imageSize - 1)].character == 0) == doubleWidth &&
                         _image[loc(x + len, y)].isLineChar() == lineDraw &&
                         (_image[loc(x + len, y)].character <= 0x7e || rtl)) {
-                    const uint c = _image[loc(x + len, y)].character;
+                    const quint16 c = _image[loc(x + len, y)].character;
                     if ((_image[loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                         // sequence of characters
                         ushort extendedCharLength = 0;
-                        const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
+                        const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
                         if (chars != nullptr) {
                             Q_ASSERT(extendedCharLength > 1);
                             bufferSize += extendedCharLength - 1;
-                            univec.resize(bufferSize);
-                            disstrU = univec.data();
+                            unistr.resize(bufferSize);
+                            disstrU = unistr.data();
                             for (int index = 0 ; index < extendedCharLength ; index++) {
                                 Q_ASSERT(p < bufferSize);
                                 disstrU[p++] = chars[index];
@@ -1755,7 +1755,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
                         // single character
                         if (c != 0u) {
                             Q_ASSERT(p < bufferSize);
-                            disstrU[p++] = c;
+                            disstrU[p++] = c; //fontMap(c);
                         }
                     }
 
@@ -1776,7 +1776,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             if (doubleWidth) {
                 _fixedFont = false;
             }
-            univec.resize(p);
+            unistr.resize(p);
 
             // Create a text scaling matrix for double width and double height lines.
             QMatrix textScale;
@@ -1804,8 +1804,6 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             //painting does actually start from textArea.topLeft()
             //(instead of textArea.topLeft() * painter-scale)
             textArea.moveTopLeft(textScale.inverted().map(textArea.topLeft()));
-
-            QString unistr = QString::fromUcs4(univec.data(), univec.length());
 
             //paint text fragment
             if (_printerFriendly) {
@@ -3192,9 +3190,9 @@ QChar TerminalDisplay::charClass(const Character& ch) const
 {
     if ((ch.rendition & RE_EXTENDED_CHAR) != 0) {
         ushort extendedCharLength = 0;
-        const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
+        const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
         if ((chars != nullptr) && extendedCharLength > 0) {
-            const QString s = QString::fromUcs4(chars, extendedCharLength);
+            const QString s = QString::fromUtf16(chars, extendedCharLength);
             if (_wordCharacters.contains(s, Qt::CaseInsensitive)) {
                 return QLatin1Char('a');
             }

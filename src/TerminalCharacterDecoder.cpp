@@ -136,9 +136,9 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     for (int i = start; i < outputCount;) {
         if ((characters[i].rendition & RE_EXTENDED_CHAR) != 0) {
             ushort extendedCharLength = 0;
-            const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
+            const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
             if (chars != nullptr) {
-                const QString s = QString::fromUcs4(chars, extendedCharLength);
+                const QString s = QString::fromUtf16(chars, extendedCharLength);
                 plainText.append(s);
                 i += qMax(1, string_width(s));
             } else {
@@ -153,7 +153,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
             // lost in some situation. One typical example is copying the result
             // of `dialog --infobox "qwe" 10 10` .
             if (characters[i].isRealCharacter || i <= realCharacterGuard) {
-                plainText.append(QString::fromUcs4(&characters[i].character, 1));
+                plainText.append(QChar(characters[i].character));
                 i += qMax(1, konsole_wcwidth(characters[i].character));
             } else {
                 ++i;  // should we 'break' directly here?
@@ -257,9 +257,9 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
         if (spaceCount < 2) {
             if ((characters[i].rendition & RE_EXTENDED_CHAR) != 0) {
                 ushort extendedCharLength = 0;
-                const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
+                const ushort* chars = ExtendedCharTable::instance.lookupExtendedChar(characters[i].character, extendedCharLength);
                 if (chars != nullptr) {
-                    text.append(QString::fromUcs4(chars, extendedCharLength));
+                    text.append(QString::fromUtf16(chars, extendedCharLength));
                 }
             } else {
                 //escape HTML tag characters and just display others as they are
