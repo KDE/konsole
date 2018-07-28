@@ -213,6 +213,3 @@ set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 target_link_libraries(konsolepart KF5::Parts KF5::XmlGui konsoleprivate)
 install(TARGETS konsolepart  DESTINATION ${KDE_INSTALL_PLUGINDIR})
 
-### konsoleprofile command-line tool
-install(PROGRAMS konsoleprofile DESTINATION ${KDE_INSTALL_BINDIR})
-

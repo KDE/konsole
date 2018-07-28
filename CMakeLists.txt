@@ -80,9 +80,6 @@ if (KF5DocTools_FOUND)
     add_subdirectory( doc/manual )
 endif()
 
-### -DKONSOLE_BUILD_FONTEMBEDDER=TRUE or -DKONSOLE_GENERATE_LINEFONT=TRUE
-if(KONSOLE_BUILD_FONTEMBEDDER OR KONSOLE_GENERATE_LINEFONT)
-    add_subdirectory( tools )
-endif()
+add_subdirectory( tools )
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
