@@ -16,6 +16,7 @@
   <name xml:lang="en-GB">Konsole</name>
   <name xml:lang="es">Konsole</name>
   <name xml:lang="et">Konsool</name>
+  <name xml:lang="eu">Konsole</name>
   <name xml:lang="fi">Konsole</name>
   <name xml:lang="fr">Konsole</name>
   <name xml:lang="gl">Konsole</name>
@@ -58,6 +59,7 @@
   <summary xml:lang="en-GB">Terminal</summary>
   <summary xml:lang="es">Terminal</summary>
   <summary xml:lang="et">Terminal</summary>
+  <summary xml:lang="eu">Terminala</summary>
   <summary xml:lang="fi">Pääteikkuna</summary>
   <summary xml:lang="fr">Terminal</summary>
   <summary xml:lang="gl">Terminal</summary>
@@ -96,6 +98,7 @@
     <p xml:lang="el">Το Konsole είναι ένας εξομοιωτής τερματικού, το οποίο συχνά αναφέρεται ως τερματικό ή κέλυφος. Εξομοιώνει ένα περιβάλλον χρήστη γραμμής εντολών σε ένα παράθυρο για κείμενο μόνο.</p>
     <p xml:lang="en-GB">Konsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.</p>
     <p xml:lang="es">Konsole es un emulador de terminal X, al que se le suele llamar terminal o shell. Emula in interfaz de línea de órdenes en una ventana solo de texto.</p>
+    <p xml:lang="eu">Konsole X terminal emulatzaile bat da, askotan terminal edo shell gisa izendatua. Testu soileko leiho bateko komando-lerroko interfaze bat emulatzen du.</p>
     <p xml:lang="fi">Konsole on X-pääte-emulaattori eli pääte eli komentotulkki. Se mukailee tekstitilan komentorivikäyttöliittymää.</p>
     <p xml:lang="fr">Konsole est un émulateur de terminal, souvent utilisé appelé console ou shell. Il émule une interface de ligne de commande dans une fenêtre de texte seulement.</p>
     <p xml:lang="gl">Konsole é un emulador de terminal de X, comunmente denominado terminal ou intérprete de ordes. Emula unha interface de liña de ordes nunha xanela de só texto.</p>
@@ -134,6 +137,7 @@
     <p xml:lang="en-GB">Features:</p>
     <p xml:lang="es">Funcionalidades:</p>
     <p xml:lang="et">Omadused:</p>
+    <p xml:lang="eu">Eginbideak:</p>
     <p xml:lang="fi">Ominaisuuksia:</p>
     <p xml:lang="fr">Fonctionnalités :</p>
     <p xml:lang="gl">Funcionalidades:</p>
@@ -176,6 +180,7 @@
       <li xml:lang="en-GB">Tabs</li>
       <li xml:lang="es">Pestañas</li>
       <li xml:lang="et">Kaardid</li>
+      <li xml:lang="eu">Fitxak</li>
       <li xml:lang="fi">Välilehdet</li>
       <li xml:lang="fr">Onglets</li>
       <li xml:lang="gl">Lapelas.</li>
@@ -216,6 +221,7 @@
       <li xml:lang="en-GB">Multiple profiles</li>
       <li xml:lang="es">Perfiles múltiples</li>
       <li xml:lang="et">Mitme profiili võimalus</li>
+      <li xml:lang="eu">Askotariko profilak</li>
       <li xml:lang="fi">Useat profiilit</li>
       <li xml:lang="fr">Multi profiles</li>
       <li xml:lang="gl">Varios perfís.</li>
@@ -256,6 +262,7 @@
       <li xml:lang="en-GB">Silence and Activity monitoring</li>
       <li xml:lang="es">Supervisión de silencios y actividad</li>
       <li xml:lang="et">Vaikuse ja aktiivsuse jälgimine</li>
+      <li xml:lang="eu">Isilaldi eta jardueren gainbegiratzea</li>
       <li xml:lang="fi">Hiljaisuuden ja aktiivisuuden tarkkailu</li>
       <li xml:lang="fr">Détection d'activité et de non activité</li>
       <li xml:lang="gl">Control de actividade e inactividade.</li>
@@ -295,6 +302,7 @@
       <li xml:lang="en-GB">Bookmark support</li>
       <li xml:lang="es">Uso de marcadores</li>
       <li xml:lang="et">Järjehoidjate toetus</li>
+      <li xml:lang="eu">Laster-markak onartzen ditu</li>
       <li xml:lang="fi">Kirjanmerkkituki</li>
       <li xml:lang="fr">Prise en charge des signets</li>
       <li xml:lang="gl">Funcionalidade de marcadores.</li>
@@ -334,6 +342,7 @@
       <li xml:lang="en-GB">Searching</li>
       <li xml:lang="es">Búsqueda</li>
       <li xml:lang="et">Otsimine</li>
+      <li xml:lang="eu">Bilatzea</li>
       <li xml:lang="fi">Haku</li>
       <li xml:lang="fr">Recherche</li>
       <li xml:lang="gl">Busca.</li>
@@ -374,6 +383,7 @@
       <li xml:lang="en-GB">Saving output</li>
       <li xml:lang="es">Guardar la salida</li>
       <li xml:lang="et">Väljundi salvestamine</li>
+      <li xml:lang="eu">Irteera gordetzea</li>
       <li xml:lang="fi">Tulosteen tallennus</li>
       <li xml:lang="fr">Enregistrement de la sortie</li>
       <li xml:lang="gl">Posibilidade de gardar a saída.</li>
@@ -419,6 +429,7 @@
       <caption xml:lang="de">Konsole wird als Terminal-Emulator verwendet</caption>
       <caption xml:lang="en-GB">Konsole being used as a terminal emulator</caption>
       <caption xml:lang="es">Konsole usado como un emulador de terminal</caption>
+      <caption xml:lang="eu">Konsole terminal emulatzaile gisa erabilia</caption>
       <caption xml:lang="fi">Pääte-emulaattorina käytetään Konsolea.</caption>
       <caption xml:lang="fr">Konsole est un émulateur de terminal</caption>
       <caption xml:lang="gl">Konsole usado como emulador de terminal.</caption>
