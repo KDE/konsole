@@ -112,4 +112,4 @@ void Vt102EmulationTest::testTokenFunctions()
 
 }
 
-QTEST_MAIN(Vt102EmulationTest)
+QTEST_GUILESS_MAIN(Vt102EmulationTest)
