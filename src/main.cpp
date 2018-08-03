@@ -80,10 +80,19 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
     // See also https://bugs.kde.org/show_bug.cgi?id=230184
     // The Qt glib event loop doesn't let timers deliver events if there are a
     // lot of other events.
+    const QByteArray qtUseGLibOld = qgetenv("QT_NO_GLIB");
     qputenv("QT_NO_GLIB", "1");
 #endif
 
     auto app = new QApplication(argc, argv);
+
+#if defined(Q_OS_LINUX)
+    if (qtUseGLibOld.isNull()) {
+        qunsetenv("QT_NO_GLIB");
+    } else {
+        qputenv("QT_NO_GLIB", qtUseGLibOld);
+    }
+#endif
 
     // enable high dpi support
     app->setAttribute(Qt::AA_UseHighDpiPixmaps, true);
