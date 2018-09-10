@@ -117,8 +117,7 @@ MainWindow::MainWindow() :
     connect(_viewManager, &Konsole::ViewManager::viewDetached, this,
             &Konsole::MainWindow::viewDetached);
 
-    // create the main widget
-    setupMainWidget();
+    setCentralWidget(_viewManager->widget());
 
     // disable automatically generated accelerators in top-level
     // menu items - to avoid conflicting with Alt+[Letter] shortcuts
@@ -787,20 +786,6 @@ void MainWindow::activateMenuBar()
 
     // TODO: Handle when menubar is top level (MacOS)
     menuBar()->setActiveAction(menuAction);
-}
-
-void MainWindow::setupMainWidget()
-{
-    auto mainWindowWidget = new QWidget(this);
-    auto mainWindowLayout = new QVBoxLayout();
-
-    mainWindowLayout->addWidget(_viewManager->widget());
-    mainWindowLayout->setContentsMargins(0, 0, 0, 0);
-    mainWindowLayout->setSpacing(0);
-
-    mainWindowWidget->setLayout(mainWindowLayout);
-
-    setCentralWidget(mainWindowWidget);
 }
 
 void MainWindow::configureNotifications()

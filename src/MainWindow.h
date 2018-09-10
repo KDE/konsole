@@ -167,7 +167,6 @@ private:
     void removeMenuAccelerators();
     void restoreMenuAccelerators();
     void setupActions();
-    void setupMainWidget();
     QString activeSessionDir() const;
 
     /**
