@@ -170,9 +170,6 @@ private:
     void updateSizes();
 
 private Q_SLOTS:
-    // Called to indicate that a child ViewContainer has been deleted
-    void containerDestroyed(TabbedViewContainer *container);
-
     // Called to indicate that a child ViewContainer is empty
     void containerEmpty(TabbedViewContainer *container);
 

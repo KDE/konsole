@@ -23,6 +23,7 @@
 #include "ViewSplitter.h"
 
 // Qt
+#include <QDebug>
 
 // Konsole
 #include "ViewContainer.h"
@@ -88,13 +89,6 @@ ViewSplitter *ViewSplitter::activeSplitter()
 void ViewSplitter::registerContainer(TabbedViewContainer *container)
 {
     _containers << container;
-    // Connecting to container::destroyed() using the new-style connection
-    // syntax causes a crash at exit. I don't know why. Using the old-style
-    // syntax works.
-    //connect(container , static_cast<void(ViewContainer::*)(ViewContainer*)>(&Konsole::ViewContainer::destroyed) , this , &Konsole::ViewSplitter::containerDestroyed);
-    //connect(container , &Konsole::ViewContainer::empty , this , &Konsole::ViewSplitter::containerEmpty);
-    connect(container, SIGNAL(destroyed(TabbedViewContainer*)), this,
-            SLOT(containerDestroyed(TabbedViewContainer*)));
     connect(container, SIGNAL(empty(TabbedViewContainer*)), this, SLOT(containerEmpty(TabbedViewContainer*)));
 }
 
@@ -179,26 +173,20 @@ void ViewSplitter::addContainer(TabbedViewContainer *container, Qt::Orientation 
     }
 }
 
-void ViewSplitter::containerEmpty(TabbedViewContainer * /*container*/)
+void ViewSplitter::containerEmpty(TabbedViewContainer * myContainer)
 {
+    _containers.removeAll(myContainer);
+    if (count() == 0) {
+        emit empty(this);
+    }
+
     int children = 0;
-    foreach (TabbedViewContainer *container, _containers) {
+    foreach (auto container, _containers) {
         children += container->count();
     }
 
     if (children == 0) {
         emit allContainersEmpty();
-    }
-}
-
-void ViewSplitter::containerDestroyed(TabbedViewContainer *container)
-{
-    Q_ASSERT(_containers.contains(container));
-
-    _containers.removeAll(container);
-
-    if (count() == 0) {
-        emit empty(this);
     }
 }
 

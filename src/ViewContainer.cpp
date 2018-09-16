@@ -90,6 +90,8 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(this, &TabbedViewContainer::currentChanged, this, [this](int index) {
         if (index != -1) {
             widget(index)->setFocus();
+        } else {
+            deleteLater();
         }
     });
 
@@ -145,8 +147,6 @@ TabbedViewContainer::~TabbedViewContainer()
         auto view = widget(i);
         disconnect(view, &QWidget::destroyed, this, &Konsole::TabbedViewContainer::viewDestroyed);
     }
-
-    emit destroyed(this);
 }
 
 void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)

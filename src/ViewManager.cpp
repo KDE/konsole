@@ -877,8 +877,10 @@ QList<ViewProperties *> ViewManager::viewProperties() const
     QList<ViewProperties *> list;
 
     TabbedViewContainer *container = _viewSplitter->activeContainer();
+    if (container == nullptr) {
+        return {};
+    }
 
-    Q_ASSERT(container);
     list.reserve(container->count());
 
     for(int i = 0, end = container->count(); i < end; i++) {
