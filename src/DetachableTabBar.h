@@ -23,18 +23,28 @@
 #include <QTabBar>
 #include <QCursor>
 
+namespace Konsole {
+class TabbedViewContainer;
 class DetachableTabBar : public QTabBar {
     Q_OBJECT
 public:
+    enum class DragType : unsigned char {NONE, OUTSIDE, WINDOW};
+
     explicit DetachableTabBar(QWidget *parent = nullptr);
 Q_SIGNALS:
-    void detachTab(int idx);
+    void detachTab(int index);
+    void moveTabToWindow(int tabIndex, QWidget *otherWindow);
 protected:
+    void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent*event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
+    bool droppedContainerIsNotThis(const QPoint& currentPos) const;
+
 private:
-    bool _draggingOutside;
+    DragType dragType;
     QCursor _originalCursor;
+    QList<TabbedViewContainer*> _containers;
 };
+}
 
 #endif

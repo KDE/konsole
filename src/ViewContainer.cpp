@@ -28,6 +28,9 @@
 #include <QMenu>
 #include <QFile>
 #include <QMouseEvent>
+#include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QDrag>
 
 // KDE
 #include <KColorScheme>
@@ -57,13 +60,14 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     _contextMenuTabIndex(-1),
     _navigationVisibility(ViewManager::NavigationVisibility::NavigationNotSet)
 {
+    setAcceptDrops(true);
+
     auto tabBarWidget = new DetachableTabBar();
     setTabBar(tabBarWidget);
     setDocumentMode(true);
     setMovable(true);
-
+    connect(tabBarWidget, &DetachableTabBar::moveTabToWindow, this, &TabbedViewContainer::moveTabToWindow);
     tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
-
     _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
     _newTabButton->setAutoRaise(true);
     connect(_newTabButton, &QToolButton::clicked, this, [this]{
@@ -143,6 +147,21 @@ TabbedViewContainer::~TabbedViewContainer()
     }
 
     emit destroyed(this);
+}
+
+void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
+{
+    const int id = viewProperties(widget(index))->identifier();
+    // This one line here will be removed as soon as I finish my new split handling.
+    // it's hacky but it works.
+    const auto widgets = window->findChildren<TabbedViewContainer*>();
+    const auto currentPos = QCursor::pos();
+    for(const auto dropWidget : widgets) {
+        if (dropWidget->rect().contains(dropWidget->mapFromGlobal(currentPos))) {
+            dropWidget->moveViewRequest(-1, id, this);
+            removeView(widget(index));
+        }
+    }
 }
 
 void TabbedViewContainer::konsoleConfigChanged()

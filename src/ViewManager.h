@@ -368,7 +368,7 @@ private Q_SLOTS:
 
     // called when a ViewContainer requests a view be
     // moved
-    void containerMoveViewRequest(int index, int id, bool &success,
+    void containerMoveViewRequest(int index, int id,
                                   TabbedViewContainer *sourceTabbedContainer);
 
     void detachView(TabbedViewContainer *container, QWidget *view);

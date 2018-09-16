@@ -649,7 +649,7 @@ TabbedViewContainer *ViewManager::createContainer()
     return container;
 }
 
-void ViewManager::containerMoveViewRequest(int index, int id, bool &success,
+void ViewManager::containerMoveViewRequest(int index, int id,
                                            TabbedViewContainer *sourceTabbedContainer)
 {
     TabbedViewContainer *container = qobject_cast<TabbedViewContainer *>(sender());
@@ -677,7 +677,6 @@ void ViewManager::containerMoveViewRequest(int index, int id, bool &success,
 
     createView(controller->session(), container, index);
     controller->session()->refresh();
-    success = true;
 }
 
 void ViewManager::setNavigationMethod(NavigationMethod method)

@@ -39,6 +39,7 @@ class QPoint;
 class QToolButton;
 class QMenu;
 class QDropEvent;
+class QDragEnterEvent;
 
 namespace Konsole {
 class IncrementalSearchBar;
@@ -135,7 +136,7 @@ public:
     void tabDoubleClicked(int index);
     void openTabContextMenu(const QPoint &point);
     void setNavigationVisibility(ViewManager::NavigationVisibility navigationVisibility);
-
+    void moveTabToWindow(int index, QWidget *window);
 Q_SIGNALS:
     /** Emitted when the container has no more children */
     void empty(TabbedViewContainer *container);
@@ -155,11 +156,9 @@ Q_SIGNALS:
      * to append it.  This index should be passed to addView() when the new view
      * has been created.
      * @param id The identifier of the view.
-     * @param success The slot handling this signal should set this to true if the
-     * new view was successfully created.
      * @param sourceContainer Initial move event Tabbed view container.
      */
-    void moveViewRequest(int index, int id, bool &success, TabbedViewContainer *sourceContainer);
+    void moveViewRequest(int index, int id, TabbedViewContainer *sourceContainer);
 
     /** Emitted when the active view changes */
     void activeViewChanged(QWidget *view);
@@ -187,7 +186,6 @@ protected:
 
     // close tabs and unregister
     void closeTerminalTab(int idx);
-
 private Q_SLOTS:
     void viewDestroyed(QObject *view);
     void konsoleConfigChanged();

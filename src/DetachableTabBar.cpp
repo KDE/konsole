@@ -18,32 +18,92 @@
 */
 
 #include "DetachableTabBar.h"
+#include "ViewContainer.h"
+
 #include <QMouseEvent>
+#include <QApplication>
+
+namespace Konsole {
 
 DetachableTabBar::DetachableTabBar(QWidget *parent) :
     QTabBar(parent),
-    _draggingOutside(false) {}
+    dragType(DragType::NONE),
+    _originalCursor(cursor())
+{}
+
+bool DetachableTabBar::droppedContainerIsNotThis(const QPoint& currentPos) const
+{
+    for(const auto dropWidget : _containers) {
+        if (dropWidget->rect().contains(dropWidget->mapFromGlobal(currentPos))) {
+            if (dropWidget != parent()) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void DetachableTabBar::mousePressEvent(QMouseEvent *event)
+{
+    QTabBar::mousePressEvent(event);
+    _containers = window()->findChildren<Konsole::TabbedViewContainer*>();
+}
 
 void DetachableTabBar::mouseMoveEvent(QMouseEvent *event)
 {
     QTabBar::mouseMoveEvent(event);
-    if (!contentsRect().adjusted(-30,-30,30,30).contains(event->pos())) {
-        if (!_draggingOutside) {
-            _draggingOutside = true;
-            _originalCursor = cursor();
+    auto widgetAtPos = qApp->topLevelAt(event->globalPos());
+    if (widgetAtPos){
+        if (window() == widgetAtPos->window()) {
+            if (droppedContainerIsNotThis(event->globalPos())) {
+                if (dragType != DragType::WINDOW) {
+                    dragType = DragType::WINDOW;
+                    setCursor(QCursor(Qt::DragMoveCursor));
+                }
+            } else {
+                if (dragType != DragType::NONE) {
+                    dragType = DragType::NONE;
+                    setCursor(_originalCursor);
+                }
+            }
+        } else {
+            if (dragType != DragType::WINDOW) {
+                dragType = DragType::WINDOW;
+                setCursor(QCursor(Qt::DragMoveCursor));
+            }
+        }
+    } else if (!contentsRect().adjusted(-30,-30,30,30).contains(event->pos())) {
+        // Don't let it detach the last tab.
+        if (count() == 1)
+            return;
+        if (dragType != DragType::OUTSIDE) {
+            dragType = DragType::OUTSIDE;
             setCursor(QCursor(Qt::DragCopyCursor));
         }
-    } else if (_draggingOutside) {
-        _draggingOutside = false;
-        setCursor(_originalCursor);
     }
 }
 
 void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
     QTabBar::mouseReleaseEvent(event);
-    if (!contentsRect().adjusted(-30,-30,30,30).contains(event->pos())) {
-        setCursor(_originalCursor);
-        emit detachTab(currentIndex());
+    setCursor(_originalCursor);
+
+    if (contentsRect().adjusted(-30,-30,30,30).contains(event->pos())) {
+        return;
     }
+
+    auto widgetAtPos = qApp->topLevelAt(event->globalPos());
+    if (!widgetAtPos) {
+        if (count() != 1)
+            emit detachTab(currentIndex());
+    } else if (window() != widgetAtPos->window()) {
+        // splits have a tendency to break, forbid to detach if splitted and it's the last tab.
+        if (_containers.size() == 1 || count() > 1)
+            emit moveTabToWindow(currentIndex(), widgetAtPos);
+    } else if (droppedContainerIsNotThis(event->globalPos())){
+        if (count() != 1)
+            emit moveTabToWindow(currentIndex(), widgetAtPos);
+    }
+}
+
 }
