@@ -119,6 +119,7 @@ Q_SIGNALS:
 protected:
     // Reimplemented for internal reasons.
     void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
 
     // reimplemented from KMainWindow
     bool queryClose() Q_DECL_OVERRIDE;
@@ -168,6 +169,7 @@ private:
     void restoreMenuAccelerators();
     void setupActions();
     QString activeSessionDir() const;
+    void triggerAction(const QString &name) const;
 
     /**
      * Returns the bookmark handler associated with this window.
