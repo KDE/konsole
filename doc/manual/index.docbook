@@ -770,6 +770,14 @@ drag and drop is disabled.
 
 <varlistentry>
 <term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>0</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Reset Font Size</guimenuitem></menuchoice></term>
+<listitem><para><action>Reset the text font size to the profile default</action></para></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term><menuchoice>
 <shortcut><keycombo action="simul">&Ctrl;<keycap>-</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guimenuitem>Shrink Font</guimenuitem></menuchoice></term>
 <listitem><para><action>Decreases the text font size</action></para></listitem>

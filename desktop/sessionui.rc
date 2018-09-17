@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="25">
+<kpartgui name="session" version="26">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
@@ -32,6 +32,7 @@
             <Action name="view-readonly" group="session-view-operations"/>
             <Separator group="session-view-operations"/>
             <Action name="enlarge-font" group="session-view-operations"/>
+            <Action name="reset-font-size" group="session-view-operations"/>
             <Action name="shrink-font" group="session-view-operations"/>
             <Action name="set-encoding" group="session-view-operations"/>
             <Separator group="session-view-operations"/>

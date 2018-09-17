@@ -427,6 +427,9 @@ public:
     /** Decreases the font size */
     void decreaseFontSize();
 
+    /** Reset the font size */
+    void resetFontSize();
+
     /**
      * Specified whether anti-aliasing of text in the terminal display
      * is enabled or not.  Defaults to enabled.

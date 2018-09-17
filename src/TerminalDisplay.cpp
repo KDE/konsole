@@ -336,6 +336,18 @@ void TerminalDisplay::decreaseFontSize()
     setVTFont(font);
 }
 
+void TerminalDisplay::resetFontSize()
+{
+    const qreal MinimumFontSize = 6;
+
+    QFont font = getVTFont();
+    Profile::Ptr currentProfile = SessionManager::instance()->sessionProfile(_sessionController->session());
+    const qreal defaultFontSize = currentProfile->font().pointSizeF();
+
+    font.setPointSizeF(qMax(defaultFontSize, MinimumFontSize));
+    setVTFont(font);
+}
+
 uint TerminalDisplay::lineSpacing() const
 {
     return _lineSpacing;

@@ -219,6 +219,9 @@ public Q_SLOTS:
     /**  Decrease font size */
     void decreaseFontSize();
 
+    /** Reset font size */
+    void resetFontSize();
+
 private Q_SLOTS:
     // menu item handlers
     void openBrowser();
