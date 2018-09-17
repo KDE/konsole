@@ -83,36 +83,6 @@ public:
     /** Finds a ViewProperties instance given its numeric identifier. */
     static ViewProperties *propertiesById(int id);
 
-    /** Name of mime format to use in drag-and-drop operations. */
-    static QString mimeType()
-    {
-        return _mimeType;
-    }
-
-    /** Returns a new QMimeData instance which represents the view with the
-     * given @p id (See identifier()).  The QMimeData instance returned must
-     * be deleted by the caller.
-     */
-    static QMimeData *createMimeData(int id)
-    {
-        auto mimeData = new QMimeData;
-        mimeData->setData(mimeType(), QByteArray::number(id));
-        return mimeData;
-    }
-
-    /** Decodes a QMimeData instance created with createMimeData() and
-     * returns the identifier of the associated view.  The associated
-     * ViewProperties instance can then be retrieved by calling propertiesById()
-     *
-     * The QMimeData instance must support the mime format returned by mimeType()
-     */
-    static int decodeMimeData(const QMimeData *mimeData)
-    {
-        bool ok;
-        // we are not checking return value ok; not sure how int could be invalid
-        return mimeData->data(ViewProperties::mimeType()).toInt(&ok);
-    }
-
 Q_SIGNALS:
     /** Emitted when the icon for a view changes */
     void iconChanged(ViewProperties *properties);
@@ -153,7 +123,6 @@ private:
     int _identifier;
 
     static QHash<int, ViewProperties *> _viewProperties;
-    static QString _mimeType;
 };
 }
 
