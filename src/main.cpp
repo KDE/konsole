@@ -194,7 +194,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
     } else {
         // Do not finish starting Konsole due to:
         // 1. An argument was given to just printed info
-        // 2. An invalid situation ocurred
+        // 2. An invalid situation occurred
         const bool continueStarting = (konsoleApp.newInstance() != 0);
         if (!continueStarting) {
             delete app;

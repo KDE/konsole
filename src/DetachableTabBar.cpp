@@ -97,7 +97,7 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
         if (count() != 1)
             emit detachTab(currentIndex());
     } else if (window() != widgetAtPos->window()) {
-        // splits have a tendency to break, forbid to detach if splitted and it's the last tab.
+        // splits have a tendency to break, forbid to detach if split and it's the last tab.
         if (_containers.size() == 1 || count() > 1)
             emit moveTabToWindow(currentIndex(), widgetAtPos);
     } else if (droppedContainerIsNotThis(event->globalPos())){

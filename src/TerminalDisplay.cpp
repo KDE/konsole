@@ -1262,7 +1262,7 @@ void TerminalDisplay::updateImage()
     // optimization - scroll the existing image where possible and
     // avoid expensive text drawing for parts of the image that
     // can simply be moved up or down
-    // disable this shortcut for transparent konsole with scaled pixels, otherwise we get rendering artefacts, see BUG 350651
+    // disable this shortcut for transparent konsole with scaled pixels, otherwise we get rendering artifacts, see BUG 350651
     if (!(WindowSystemInfo::HAVE_TRANSPARENCY && (qApp->devicePixelRatio() > 1.0)) && _wallpaper->isNull() && !_searchBar->isVisible()) {
         scrollImage(_screenWindow->scrollCount() ,
                     _screenWindow->scrollRegion());
@@ -2926,7 +2926,7 @@ void TerminalDisplay::viewScrolledByUser()
 }
 
 /* Moving left/up from the line containing pnt, return the starting
-   offset point which the given line is continiously wrapped
+   offset point which the given line is continuously wrapped
    (top left corner = 0,0; previous line not visible = 0,-1).
 */
 QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
@@ -2960,7 +2960,7 @@ QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
 }
 
 /* Moving right/down from the line containing pnt, return the ending
-   offset point which the given line is continiously wrapped.
+   offset point which the given line is continuously wrapped.
 */
 QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
 {
