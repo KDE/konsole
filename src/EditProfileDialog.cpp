@@ -1429,6 +1429,10 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
         {
             _ui->enableBidiRenderingButton, Profile::BidiRenderingEnabled,
             SLOT(togglebidiRendering(bool))
+        },
+        {
+            _ui->enableReverseUrlHints, Profile::ReverseUrlHints,
+            SLOT(toggleReverseUrlHints(bool))
         }
     };
     setupCheckBoxes(options, profile);
@@ -1610,6 +1614,11 @@ void EditProfileDialog::updateUrlHintsModifier(bool)
         modifiers |= Qt::MetaModifier;
     }
     updateTempProfileProperty(Profile::UrlHintsModifiers, int(modifiers));
+}
+
+void EditProfileDialog::toggleReverseUrlHints(bool enable)
+{
+    updateTempProfileProperty(Profile::ReverseUrlHints, enable);
 }
 
 void EditProfileDialog::toggleBlinkingText(bool enable)

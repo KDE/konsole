@@ -94,6 +94,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
 
     // Terminal Features
     , { UrlHintsModifiers , "UrlHintsModifiers" , TERMINAL_GROUP , QVariant::Int }
+    , { ReverseUrlHints , "ReverseUrlHints" , TERMINAL_GROUP , QVariant::Bool }
     , { BlinkingTextEnabled , "BlinkingTextEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { FlowControlEnabled , "FlowControlEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { BidiRenderingEnabled , "BidiRenderingEnabled" , TERMINAL_GROUP , QVariant::Bool }
@@ -186,6 +187,7 @@ void Profile::useFallback()
 
     setProperty(FlowControlEnabled, true);
     setProperty(UrlHintsModifiers, 0);
+    setProperty(ReverseUrlHints, false);
     setProperty(BlinkingTextEnabled, true);
     setProperty(UnderlineLinksEnabled, true);
     setProperty(UnderlineFilesEnabled, false);

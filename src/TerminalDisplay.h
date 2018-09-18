@@ -528,6 +528,16 @@ public:
         _urlHintsModifiers = Qt::KeyboardModifiers(modifiers);
     }
 
+    void setReverseUrlHintsEnabled(bool set)
+    {
+        _reverseUrlHints = set;
+    }
+
+    bool isReverseUrlHintsEnabled() const
+    {
+        return _reverseUrlHints;
+    }
+
     /**
      * Sets the terminal screen section which is displayed in this widget.
      * When updateImage() is called, the display fetches the latest character image from the
@@ -982,6 +992,7 @@ private:
 
     Qt::KeyboardModifiers _urlHintsModifiers;
     bool _showUrlHint;
+    bool _reverseUrlHints;
     bool _openLinksByDirectClick;     // Open URL and hosts by single mouse click
 
     bool _ctrlRequiredForDrag; // require Ctrl key for drag selected text

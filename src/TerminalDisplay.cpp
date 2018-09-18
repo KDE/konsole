@@ -440,6 +440,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _hasTextBlinker(false)
     , _urlHintsModifiers(Qt::NoModifier)
     , _showUrlHint(false)
+    , _reverseUrlHints(false)
     , _openLinksByDirectClick(false)
     , _ctrlRequiredForDrag(true)
     , _dropUrlsAsText(false)
@@ -1543,10 +1544,17 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     // iterate over hotspots identified by the display's currently active filters
     // and draw appropriate visuals to indicate the presence of the hotspot
 
-    int urlNumber = 0;
     QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
+    int urlNumber, urlNumInc;
+    if (_reverseUrlHints) {
+        urlNumber = spots.size() + 1;
+        urlNumInc = -1;
+    } else {
+        urlNumber = 0;
+        urlNumInc = 1;
+    }
     foreach(Filter::HotSpot* spot, spots) {
-        urlNumber++;
+        urlNumber += urlNumInc;
 
         QRegion region;
         if (spot->type() == Filter::HotSpot::Link) {
@@ -3564,8 +3572,12 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
     if ((_urlHintsModifiers != 0u) && event->modifiers() == _urlHintsModifiers) {
+        int nHotSpots = _filterChain->hotSpots().count();
         int hintSelected = event->key() - 0x31;
-        if (hintSelected >= 0 && hintSelected < 10 && hintSelected < _filterChain->hotSpots().count()) {
+        if (hintSelected >= 0 && hintSelected < 10 && hintSelected < nHotSpots) {
+            if (_reverseUrlHints) {
+                hintSelected = nHotSpots - hintSelected - 1;
+            }
             _filterChain->hotSpots().at(hintSelected)->activate();
             _showUrlHint = false;
             update();

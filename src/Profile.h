@@ -288,7 +288,9 @@ public:
         */
         AlternateScrolling,
         /** (int) Keyboard modifiers to show URL hints */
-        UrlHintsModifiers
+        UrlHintsModifiers,
+        /** (bool) Reverse the order of URL hints */
+        ReverseUrlHints
     };
 
     /**

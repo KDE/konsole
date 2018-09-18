@@ -192,6 +192,7 @@ private Q_SLOTS:
     void lineSpacingChanged(int);
     void toggleBlinkingCursor(bool);
     void updateUrlHintsModifier(bool);
+    void toggleReverseUrlHints(bool);
 
     void setCursorShape(int);
     void autoCursorColor();

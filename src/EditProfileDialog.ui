@@ -1235,6 +1235,16 @@
            </layout>
           </item>
           <item>
+           <widget class="QCheckBox" name="enableReverseUrlHints">
+            <property name="toolTip">
+             <string>Number URL hints in reverse, starting from the bottom</string>
+            </property>
+            <property name="text">
+             <string>Reverse URL hint numbering</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="enableBlinkingTextButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">

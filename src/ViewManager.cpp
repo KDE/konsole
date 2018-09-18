@@ -820,6 +820,7 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
     view->setTrimTrailingSpaces(profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText));
     view->setOpenLinksByDirectClick(profile->property<bool>(Profile::OpenLinksByDirectClickEnabled));
     view->setUrlHintsModifiers(profile->property<int>(Profile::UrlHintsModifiers));
+    view->setReverseUrlHintsEnabled(profile->property<int>(Profile::ReverseUrlHints));
     view->setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum(profile->property<int>(Profile::MiddleClickPasteMode)));
     view->setCopyTextAsHTML(profile->property<bool>(Profile::CopyTextAsHTML));
 
