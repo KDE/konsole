@@ -57,9 +57,8 @@ public:
     const ColorScheme *defaultColorScheme() const;
 
     /**
-     * Returns the color scheme with the given name or 0 if no
-     * scheme with that name exists.  If @p name is empty, the
-     * default color scheme is returned.
+     * Returns the color scheme with the given name or the default if no
+     * scheme with that name exists.
      *
      * The first time that a color scheme with a particular name is
      * requested, the configuration information is loaded from disk.

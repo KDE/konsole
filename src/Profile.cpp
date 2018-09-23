@@ -32,6 +32,7 @@
 
 // Konsole
 #include "Enumeration.h"
+#include "ColorSchemeManager.h"
 
 using namespace Konsole;
 
@@ -76,8 +77,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
 
     // Appearance
     , { Font , "Font" , APPEARANCE_GROUP , QVariant::Font }
-    , { ColorScheme , "ColorScheme" , APPEARANCE_GROUP , QVariant::String }
-    , { ColorScheme , "colors" , nullptr , QVariant::String }
+    , { ColorSchemeName , "ColorScheme" , APPEARANCE_GROUP , QVariant::String }
+    , { ColorSchemeName , "colors" , nullptr , QVariant::String }
     , { AntiAliasFonts, "AntiAliasFonts" , APPEARANCE_GROUP , QVariant::Bool }
     , { BoldIntense, "BoldIntense", APPEARANCE_GROUP, QVariant::Bool }
     , { UseFontLineCharacters, "UseFontLineChararacters", APPEARANCE_GROUP, QVariant::Bool }
@@ -177,7 +178,7 @@ void Profile::useFallback()
     setProperty(AlternateScrolling, true);
 
     setProperty(KeyBindings, QStringLiteral("default"));
-    setProperty(ColorScheme, QStringLiteral("Linux")); //use DarkPastels when is start support blue ncurses UI properly
+    setProperty(ColorSchemeName, QStringLiteral("Linux")); //use DarkPastels when is start support blue ncurses UI properly
     setProperty(Font, QFontDatabase::systemFont(QFontDatabase::FixedFont));
 
     setProperty(HistoryMode, Enum::FixedSizeHistory);
@@ -278,6 +279,11 @@ QHash<Profile::Property, QVariant> Profile::setProperties() const
 void Profile::setProperty(Property p, const QVariant& value)
 {
     _propertyValues.insert(p, value);
+
+    // Not the best place but we have just one set method.
+    if (p == ColorSchemeName) {
+        _colorScheme = ColorSchemeManager::instance()->findColorScheme(value.toString());
+    }
 }
 bool Profile::isPropertySet(Property p) const
 {
@@ -324,6 +330,10 @@ const QStringList Profile::propertiesInfoList() const
     }
 
     return info;
+}
+
+ColorScheme const *Profile::colorScheme() const {
+    return _colorScheme;
 }
 
 QHash<Profile::Property, QVariant> ProfileCommandParser::parse(const QString& input)
@@ -379,6 +389,7 @@ void ProfileGroup::updateValues()
         properties++;
     }
 }
+
 void ProfileGroup::setProperty(Property p, const QVariant& value)
 {
     if (_profiles.count() > 1 && !canInheritProperty(p)) {
