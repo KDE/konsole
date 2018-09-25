@@ -583,7 +583,7 @@ void ViewManager::createView(Session *session, TabbedViewContainer *container, i
     session->addView(display);
 
     // tell the session whether it has a light or dark background
-    session->setDarkBackground(profile->colorScheme()->hasDarkBackground());
+    session->setDarkBackground(colorSchemeForProfile(profile)->hasDarkBackground());
 
     if (container == _viewSplitter->activeContainer()) {
         container->setCurrentWidget(display);
@@ -761,6 +761,22 @@ TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
     return display;
 }
 
+const ColorScheme *ViewManager::colorSchemeForProfile(const Profile::Ptr profile)
+{
+    const ColorScheme *colorScheme = ColorSchemeManager::instance()->
+                                     findColorScheme(profile->colorScheme());
+    if (colorScheme == nullptr) {
+        colorScheme = ColorSchemeManager::instance()->defaultColorScheme();
+    }
+    Q_ASSERT(colorScheme);
+
+    return colorScheme;
+}
+
+bool ViewManager::profileHasBlurEnabled(const Profile::Ptr profile)
+{
+    return colorSchemeForProfile(profile)->blur();
+}
 
 void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr profile)
 {
@@ -770,7 +786,7 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
 
     // load color scheme
     ColorEntry table[TABLE_COLORS];
-    const ColorScheme *colorScheme = profile->colorScheme();
+    const ColorScheme *colorScheme = colorSchemeForProfile(profile);
     colorScheme->getColorTable(table, view->randomSeed());
     view->setColorTable(table);
     view->setOpacity(colorScheme->opacity());

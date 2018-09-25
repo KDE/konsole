@@ -376,8 +376,7 @@ void Part::setMonitorActivityEnabled(bool enabled)
 
 bool Part::isBlurEnabled()
 {
-    auto profile = SessionManager::instance()->sessionProfile(activeSession());
-    return profile->colorScheme()->blur();
+    return ViewManager::profileHasBlurEnabled(SessionManager::instance()->sessionProfile(activeSession()));
 }
 
 void Part::sessionStateChanged(int state)

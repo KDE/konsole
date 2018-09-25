@@ -62,7 +62,7 @@ void ProfileTest::testProfile()
     QVERIFY(child->isPropertySet(Profile::StartInCurrentSessionDir));
     QVERIFY(!child->isPropertySet(Profile::Name));
     QVERIFY(!child->isPropertySet(Profile::AntiAliasFonts));
-    QVERIFY(!child->isPropertySet(Profile::ColorSchemeName));
+    QVERIFY(!child->isPropertySet(Profile::ColorScheme));
 
     // read non-inheritable properties
     QCOMPARE(parent->property<QString>(Profile::Name), QStringLiteral("Parent"));
@@ -85,7 +85,7 @@ void ProfileTest::testClone()
     // create source profile and parent
     Profile::Ptr parent(new Profile);
     parent->setProperty(Profile::Command, QStringLiteral("ps"));
-    parent->setProperty(Profile::ColorSchemeName, QStringLiteral("BlackOnWhite"));
+    parent->setProperty(Profile::ColorScheme, QStringLiteral("BlackOnWhite"));
 
     Profile::Ptr source(new Profile(parent));
     source->setProperty(Profile::AntiAliasFonts, false);
@@ -99,7 +99,7 @@ void ProfileTest::testClone()
     // same value as source parent
     targetParent->setProperty(Profile::Command, QStringLiteral("ps"));
     // different value from source parent
-    targetParent->setProperty(Profile::ColorSchemeName, QStringLiteral("BlackOnGrey"));
+    targetParent->setProperty(Profile::ColorScheme, QStringLiteral("BlackOnGrey"));
     Profile::Ptr target(new Profile(parent));
 
     // clone source profile, setting only properties that differ
@@ -123,8 +123,8 @@ void ProfileTest::testClone()
     QVERIFY(!target->isPropertySet(Profile::Command));
     // check that ColorScheme property is cloned because the inherited values
     // from the source parent and target parent differ
-    QCOMPARE(source->property<QString>(Profile::ColorSchemeName),
-             target->property<QString>(Profile::ColorSchemeName));
+    QCOMPARE(source->property<QString>(Profile::ColorScheme),
+             target->property<QString>(Profile::ColorScheme));
 }
 
 void ProfileTest::testProfileGroup()

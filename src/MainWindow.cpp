@@ -250,8 +250,7 @@ void MainWindow::activeViewChanged(SessionController *controller)
     _pluggedController = controller;
     _pluggedController->view()->installEventFilter(this);
 
-    auto profile = SessionManager::instance()->sessionProfile(_pluggedController->session());
-    setBlur(profile->colorScheme()->blur());
+    setBlur(ViewManager::profileHasBlurEnabled(SessionManager::instance()->sessionProfile(_pluggedController->session())));
 
     // listen for title changes from the current session
     connect(controller, &Konsole::SessionController::titleChanged, this,
