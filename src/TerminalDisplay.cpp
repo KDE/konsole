@@ -61,7 +61,6 @@
 // Konsole
 #include "Filter.h"
 #include "konsoledebug.h"
-#include "konsole_wcwidth.h"
 #include "TerminalCharacterDecoder.h"
 #include "Screen.h"
 #include "LineFont.h"
@@ -1991,7 +1990,7 @@ void TerminalDisplay::updateCursor()
     const int cursorLocation = loc(cursorPosition().x(), cursorPosition().y());
     Q_ASSERT(cursorLocation < _imageSize);
 
-    int charWidth = konsole_wcwidth(_image[cursorLocation].character);
+    int charWidth = _image[cursorLocation].width();
     QRect cursorRect = imageToWidget(QRect(cursorPosition(), QSize(charWidth, 1)));
     update(cursorRect);
 }

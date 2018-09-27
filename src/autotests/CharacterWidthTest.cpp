@@ -23,7 +23,7 @@
 // KDE
 #include <qtest.h>
 
-#include "../konsole_wcwidth.h"
+#include "../Character.h"
 #include "konsoleprivate_export.h"
 
 using namespace Konsole;
@@ -69,7 +69,7 @@ void CharacterWidthTest::testWidth()
 
     QEXPECT_FAIL("0x1F943 tumbler glass", "emoji width currently broken", Continue);
     QEXPECT_FAIL("0x1F944 spoon", "emoji width currently broken", Continue);
-    QTEST(konsole_wcwidth(character), "width");
+    QTEST(Character::width(character), "width");
 }
 
 QTEST_GUILESS_MAIN(CharacterWidthTest)

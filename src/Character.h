@@ -25,6 +25,10 @@
 
 // Konsole
 #include "CharacterColor.h"
+#include "konsole_wcwidth.h"
+
+// Qt
+#include <QVector>
 
 namespace Konsole {
 typedef unsigned char LineProperty;
@@ -154,6 +158,27 @@ public:
         } else {
             return QChar(character).isSpace();
         }
+    }
+
+    inline int width() const {
+        return width(character);
+    }
+
+    static int width(uint ucs4) {
+        return konsole_wcwidth(ucs4);
+    }
+
+    static int stringWidth(const uint *ucs4Str, int len) {
+        int w = 0;
+        for (int i = 0; i < len; ++i) {
+            w += width(ucs4Str[i]);
+        }
+        return w;
+    }
+
+    inline static int stringWidth(const QString &str) {
+        auto ucs4Str = str.toUcs4();
+        return stringWidth(ucs4Str.constData(), ucs4Str.length());
     }
 };
 

@@ -27,7 +27,6 @@
 #include <QTextStream>
 
 // Konsole
-#include "konsole_wcwidth.h"
 #include "TerminalCharacterDecoder.h"
 #include "History.h"
 #include "ExtendedCharTable.h"
@@ -691,7 +690,7 @@ void Screen::displayCharacter(uint c)
     // We indicate the fact that a newline has to be triggered by
     // putting the cursor one right to the last column of the screen.
 
-    int w = konsole_wcwidth(c);
+    int w = Character::width(c);
 
     if (w < 0) {
         // Non-printable character

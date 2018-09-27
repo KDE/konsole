@@ -26,7 +26,6 @@
 #include <QTextStream>
 
 // Konsole
-#include "konsole_wcwidth.h"
 #include "ExtendedCharTable.h"
 #include "ColorScheme.h"
 
@@ -154,7 +153,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
             // of `dialog --infobox "qwe" 10 10` .
             if (characters[i].isRealCharacter || i <= realCharacterGuard) {
                 plainText.append(QString::fromUcs4(&characters[i].character, 1));
-                i += qMax(1, konsole_wcwidth(characters[i].character));
+                i += qMax(1, characters[i].width());
             } else {
                 ++i;  // should we 'break' directly here?
             }
