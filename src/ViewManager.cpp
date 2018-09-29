@@ -57,6 +57,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _sessionMap(QHash<TerminalDisplay *, Session *>()),
     _actionCollection(collection),
     _navigationVisibility(NavigationNotSet),
+    _newTabBehavior(PutNewTabAtTheEnd),
     _managerId(0)
 {
     // create main view area
@@ -605,6 +606,10 @@ void ViewManager::createView(Session *session)
     // new tab will be put at the end by default.
     int index = -1;
 
+    if (_newTabBehavior == PutNewTabAfterCurrentTab) {
+        index = _viewSplitter->activeContainer()->currentIndex() + 1;
+    }
+
     // iterate over the view containers owned by this view manager
     // and create a new terminal display for the session in each of them, along with
     // a controller for the session/display pair
@@ -1121,4 +1126,9 @@ void ViewManager::setNavigationVisibility(NavigationVisibility navigationVisibil
             container->setNavigationVisibility(navigationVisibility);
         }
     }
+}
+
+void ViewManager::setNavigationBehavior(int behavior)
+{
+    _newTabBehavior = static_cast<NewTabBehavior>(behavior);
 }

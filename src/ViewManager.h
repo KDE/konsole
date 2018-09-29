@@ -179,6 +179,7 @@ public:
     void saveSessions(KConfigGroup &group);
     void restoreSessions(const KConfigGroup &group);
 
+    void setNavigationBehavior(int behavior);
     int managerId() const;
 
     /** Returns a list of sessions in this ViewManager */
@@ -412,6 +413,7 @@ private:
 
     NavigationMethod _navigationMethod;
     NavigationVisibility _navigationVisibility;
+    NewTabBehavior _newTabBehavior;
     QString _navigationStyleSheet;
     int _managerId;
     static int lastManagerId;
