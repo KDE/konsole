@@ -3910,11 +3910,15 @@ void TerminalDisplay::dropMenuCdActionTriggered()
 
 void TerminalDisplay::doDrag()
 {
+    const QMimeData *clipboardMimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
+    if (!clipboardMimeData) {
+        return;
+    }
+    auto mimeData = new QMimeData();
     _dragInfo.state = diDragging;
     _dragInfo.dragObject = new QDrag(this);
-    auto mimeData = new QMimeData();
-    mimeData->setText(QApplication::clipboard()->mimeData(QClipboard::Selection)->text());
-    mimeData->setHtml(QApplication::clipboard()->mimeData(QClipboard::Selection)->html());
+    mimeData->setText(clipboardMimeData->text());
+    mimeData->setHtml(clipboardMimeData->html());
     _dragInfo.dragObject->setMimeData(mimeData);
     _dragInfo.dragObject->exec(Qt::CopyAction);
 }
