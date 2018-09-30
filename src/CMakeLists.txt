@@ -33,9 +33,10 @@ endif()
 ### Security concerns about sendText and runCommand dbus methods being public
 option(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS "Konsole: remove sendText and runCommand dbus methods" OFF)
 
-### Font Embedder and LineFont.h
+### Development tools
 option(KONSOLE_BUILD_FONTEMBEDDER "Konsole: build fontembedder executable" OFF)
 option(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
+option(KONSOLE_BUILD_UNI2CHARACTERWIDTH "Konsole: build uni2characterwidth executable" OFF)
 
 ### Konsole source files shared between embedded terminal and main application
 # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml

@@ -1,0 +1,77 @@
+«*COMMENT:----------------------------------------------------------------------
+
+Tags:
+
+«*anything:comment where everything but closing sequence is allowed:anything*»
+
+«NAME:any content, including other tags. \: have to be escaped. It is processed
+using data passed from code() function under NAME key. It should contain other
+tags, without them this text will be replaced with passed data or removed.»
+
+«NAME» - like before, used when data should replace it, so content is
+         unnecessary
+
+EXAMPLE:
+data:     Map{ "exampleA", Map{ { "Number", 42 }, { "String", "hello" } } }
+template: «exampleA:number\: «Number», string\: «String»»
+result:   number: 42, string: hello
+
+«» - empty anonymous element. Used in named elements which receive lists.
+     The element will be replaced with list item, and duplicated if
+
+«:anonymous container. It should contain some elements which receive data.
+The element will disappear when child element will not receive any value.
+Useful to add suffixes/prefixes to data»
+
+EXAMPLE:
+data:     Map{ "exampleB", Vector{ 1, 2, 3, 4, 5, 6, 7 } }
+template: «exampleB:«:[«»] »»
+result:   [1] [2] [3] [4] [5] [6] [7]
+
+data:     Map{ "exampleC", Vector{ "a", "b", "c" } }
+template: «exampleC:«:first = «»»«:, second = «»»«:, third = «»»«:, fourth = «»»»
+result:   first = a, second = b, third = c
+
+«!fmt "XXX":a wrapper which sets printf-like format XXX for numbers and
+strings inside it. Starts with %.»
+
+«!repeat N:repeats contents inside N times.»
+
+EXAMPLE:
+data:     Map{ "exampleD", Vector{ 1, 2, 3, 4, 10, 11, 12, 13 } }
+template: «exampleD:«!fmt "%#.2x":«!repeat 3:«» »«»; »»
+result:   0x01 0x02 0x03 0x04; 0x0a 0x0b 0x0c 0x0d;
+
+D: «exampleD:«!fmt "%#.2x":«!repeat 3:«» »«»; »»
+----------------------------------------------------------------------:COMMENT*»
+For available data see code() function. Below are usage examples
+
+Warning about generated file - putting "this is a generated file" text in a
+template file could be misleading.
+«gen-file-warning»
+
+
+Command used to generate the file:
+«cmdline»
+
+
+Direct LUT - widths of the first 256 code points in direct access array:
+{«!fmt "% d":«direct-lut:
+    «!repeat 32:«:«»,»»
+»»}
+
+
+Arrays with code point ranges for every width:
+«ranges-luts:«:
+«name» = {«!fmt "%#.6x":«ranges:
+    «!repeat 8:«:{«first»,«last»},»»
+»»}
+Number of elements in the array: «size»
+
+»»
+List of array names, sizes, and widths:
+{«ranges-lut-list:
+    «:{«!fmt "% d":«width»», «!fmt "%-16s":«name»», «size»},»
+»}
+Number of elements in the array: «ranges-lut-list-size»;
+

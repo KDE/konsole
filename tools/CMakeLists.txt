@@ -17,3 +17,4 @@ if(KONSOLE_BUILD_FONTEMBEDDER OR KONSOLE_GENERATE_LINEFONT)
     target_link_libraries(fontembedder Qt5::Core)
 endif()
 
+add_subdirectory( uni2characterwidth )
