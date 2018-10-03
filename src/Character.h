@@ -25,7 +25,7 @@
 
 // Konsole
 #include "CharacterColor.h"
-#include "konsole_wcwidth.h"
+#include "CharacterWidth.h"
 
 // Qt
 #include <QVector>
@@ -165,7 +165,7 @@ public:
     }
 
     static int width(uint ucs4) {
-        return konsole_wcwidth(ucs4);
+        return characterWidth(ucs4);
     }
 
     static int stringWidth(const uint *ucs4Str, int len) {

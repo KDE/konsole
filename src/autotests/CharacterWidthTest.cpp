@@ -61,14 +61,18 @@ void CharacterWidthTest::testWidth_data()
 
     QTest::newRow("0x1F943 tumbler glass") << uint(0x1F943) << 2;
     QTest::newRow("0x1F944 spoon") << uint(0x1F944) << 2;
+
+    QTest::newRow("0x26A1  high voltage sign (BUG 378124)") << uint(0x026A1) << 2;
+    QTest::newRow("0x2615  hot beverage (BUG 392171)") << uint(0x02615) << 2;
+    QTest::newRow("0x26EA  church (BUG 392171)") << uint(0x026EA) << 2;
+    QTest::newRow("0x1D11E musical symbol g clef (BUG 339439)") << uint(0x1D11E) << 1;
+
 }
 
 void CharacterWidthTest::testWidth()
 {
     QFETCH(uint, character);
 
-    QEXPECT_FAIL("0x1F943 tumbler glass", "emoji width currently broken", Continue);
-    QEXPECT_FAIL("0x1F944 spoon", "emoji width currently broken", Continue);
     QTEST(Character::width(character), "width");
 }
 

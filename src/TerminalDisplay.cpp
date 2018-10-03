@@ -3450,7 +3450,7 @@ QVariant TerminalDisplay::inputMethodQuery(Qt::InputMethodQuery query) const
 
 QRect TerminalDisplay::preeditRect() const
 {
-    const int preeditLength = string_width(_inputMethodData.preeditString);
+    const int preeditLength = Character::stringWidth(_inputMethodData.preeditString);
 
     if (preeditLength == 0) {
         return QRect();

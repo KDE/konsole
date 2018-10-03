@@ -139,7 +139,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
             if (chars != nullptr) {
                 const QString s = QString::fromUcs4(chars, extendedCharLength);
                 plainText.append(s);
-                i += qMax(1, string_width(s));
+                i += qMax(1, Character::stringWidth(s));
             } else {
                 ++i;
             }

@@ -1,0 +1,3 @@
+000AD        ; 1    # (­) Soft Hyphen (originally 0)
+01160        ; 0    # (ᅠ) Hangul Jungseong Filler (originally 1)
+1F1E6..1F1FF ; 2    # (🇦..🇿) Regional indicators/flag codes (originally 1)
