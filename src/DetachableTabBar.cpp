@@ -93,7 +93,7 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
     }
 
     auto widgetAtPos = qApp->topLevelAt(event->globalPos());
-    if (!widgetAtPos) {
+    if (widgetAtPos == nullptr) {
         if (count() != 1)
             emit detachTab(currentIndex());
     } else if (window() != widgetAtPos->window()) {
