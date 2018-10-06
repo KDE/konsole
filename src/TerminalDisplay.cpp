@@ -3914,7 +3914,7 @@ void TerminalDisplay::dropMenuCdActionTriggered()
 void TerminalDisplay::doDrag()
 {
     const QMimeData *clipboardMimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
-    if (!clipboardMimeData) {
+    if (clipboardMimeData == nullptr) {
         return;
     }
     auto mimeData = new QMimeData();

@@ -53,7 +53,7 @@ void DetachableTabBar::mouseMoveEvent(QMouseEvent *event)
 {
     QTabBar::mouseMoveEvent(event);
     auto widgetAtPos = qApp->topLevelAt(event->globalPos());
-    if (widgetAtPos){
+    if (widgetAtPos != nullptr) {
         if (window() == widgetAtPos->window()) {
             if (droppedContainerIsNotThis(event->globalPos())) {
                 if (dragType != DragType::WINDOW) {
