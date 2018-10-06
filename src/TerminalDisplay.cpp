@@ -3045,9 +3045,8 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
         j = loc(x, i);
     }
 out:
-    if (tmp_image != nullptr) {
-        delete[] tmp_image;
-    }
+    delete[] tmp_image;
+
     return QPoint(x, y - curLine);
 }
 
@@ -3117,9 +3116,8 @@ out:
             y--;
         }
     }
-    if (tmp_image != nullptr) {
-        delete[] tmp_image;
-    }
+    delete[] tmp_image;
+
     return QPoint(x, y);
 }
 
