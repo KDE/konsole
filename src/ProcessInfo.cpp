@@ -498,7 +498,7 @@ private:
         // read process status file ( /proc/<pid/stat )
         //
         // the expected file format is a list of fields separated by spaces, using
-        // parenthesies to escape fields such as the process name which may itself contain
+        // parentheses to escape fields such as the process name which may itself contain
         // spaces:
         //
         // FIELD FIELD (FIELD WITH SPACES) FIELD FIELD

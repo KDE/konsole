@@ -85,7 +85,7 @@ public:
      *  - writable user-specific location under the user's home directory
      *    (typically ~/.local/share/konsole on Linux)
      *
-     * Reseting here basically means it deletes the translator from the
+     * Resetting here basically means it deletes the translator from the
      * location under the user's home directory, then "reloads" it from
      * the system-wide location.
      */

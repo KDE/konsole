@@ -249,7 +249,7 @@ void TerminalDisplay::setVTFont(const QFont& f)
 
     // This check seems extreme and semi-random
     // TODO: research if these checks are still needed to prevent
-    // enorgous fonts from being used; consider usage on big TV
+    // enormous fonts from being used; consider usage on big TV
     // screens.
     if ((fontMetrics.height() > height()) || (fontMetrics.maxWidth() > width())) {
         // return here will cause the "general" non-fixed width font

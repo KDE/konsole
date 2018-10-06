@@ -499,7 +499,7 @@ QVector<WidthsRange> rangesFromWidths(const QVector<CharacterWidth> &widths, QPa
 //
 // First range is always without change. Last range (A) can be dropped
 // (it always contains everything). Search should be done in order: D, C, B (A).
-// For simplicity the funtion returns all ranges, including first and last.
+// For simplicity the function returns all ranges, including first and last.
 QMap<CharacterWidth, QVector<QPair<uint, uint>>> mergedRangesFromWidths(const QVector<CharacterWidth> &widths, const QVector<CharacterWidth> widthsSortOrder,
                                                                         QPair<uint, uint> ucsRange = {0, CODE_POINTS_NUM}) {
     if(ucsRange.second >= CODE_POINTS_NUM)
@@ -509,7 +509,7 @@ QMap<CharacterWidth, QVector<QPair<uint, uint>>> mergedRangesFromWidths(const QV
 
     int cmwi;           // Currently Merged Width Index
     int sri = -1;       // Start Range Index (for current width)
-    int cri;            // Currrent Range Index
+    int cri;            // Current Range Index
 
     // First width ranges are without change. Last one has one range spanning everything, so we can skip this
     for(cmwi = 1; cmwi < widthsSortOrder.size() - 1; ++cmwi) {

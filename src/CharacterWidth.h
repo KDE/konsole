@@ -1,5 +1,5 @@
-#ifndef CHARACTERINFO_H
-#define CHARACTERINFO_H
+#ifndef CHARACTERWIDTH_H
+#define CHARACTERWIDTH_H
 
 #include <QtGlobal>
 
