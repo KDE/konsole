@@ -1130,7 +1130,7 @@ QString Session::getDynamicTitle()
     QString title = tabTitleFormat(Session::LocalTabTitle);
     // search for and replace known marker
     title.replace(QLatin1String("%u"), process->userName());
-    title.replace(QLatin1String("%h"), process->localHost());
+    title.replace(QLatin1String("%h"), Konsole::ProcessInfo::localHost());
     title.replace(QLatin1String("%n"), process->name(&ok));
 
     QString dir = _reportedWorkingUrl.toLocalFile();
