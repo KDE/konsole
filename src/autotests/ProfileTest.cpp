@@ -234,7 +234,7 @@ void ProfileTest::testFallbackProfile()
     Profile *fallback = new Profile();
     fallback->useFallback();
 
-    QCOMPARE(fallback->property<QString>(Profile::Name), QStringLiteral("Default"));
+    QCOMPARE(fallback->property<QString>(Profile::UntranslatedName), QStringLiteral("Default"));
     QCOMPARE(fallback->property<QString>(Profile::Path), QStringLiteral("FALLBACK/"));
     delete fallback;
 }
