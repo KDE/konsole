@@ -783,6 +783,9 @@ static void drawOtherChar(QPainter& paint, int x, int y, int w, int h, uchar cod
 void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const QString& str,
         const Character* attributes)
 {
+    painter.save();
+    painter.setRenderHint(QPainter::Antialiasing);
+
     const QPen& originalPen = painter.pen();
 
     if (((attributes->rendition & RE_BOLD) != 0) && _boldIntense) {
@@ -800,7 +803,7 @@ void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const 
         }
     }
 
-    painter.setPen(originalPen);
+    painter.restore();
 }
 
 void TerminalDisplay::setKeyboardCursorShape(Enum::CursorShapeEnum shape)
