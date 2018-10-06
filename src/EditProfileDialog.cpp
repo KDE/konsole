@@ -888,8 +888,6 @@ void EditProfileDialog::removeColorScheme()
         manager->deleteLater();
     });
     manager->checkForInstalled();
-
-    return;
 }
 
 void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntries)

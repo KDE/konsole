@@ -1740,7 +1740,6 @@ void SessionController::zmodemDownload()
                                 "<p>You may wish to install the 'rzsz' or 'lrzsz' package.</p>"));
     }
     _session->cancelZModem();
-    return;
 }
 
 void SessionController::zmodemUpload()
