@@ -207,8 +207,9 @@ void IncrementalSearchBar::setSearchText(const QString &text)
 
 bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *event)
 {
-    if ((event->type() != QEvent::KeyPress) || watched != _searchEdit)
+    if ((event->type() != QEvent::KeyPress) || watched != _searchEdit) {
         return QWidget::eventFilter(watched, event);
+    }
 
     QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
     if (keyEvent->key() == Qt::Key_Escape) {

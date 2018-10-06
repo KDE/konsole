@@ -74,8 +74,9 @@ void DetachableTabBar::mouseMoveEvent(QMouseEvent *event)
         }
     } else if (!contentsRect().adjusted(-30,-30,30,30).contains(event->pos())) {
         // Don't let it detach the last tab.
-        if (count() == 1)
+        if (count() == 1) {
             return;
+        }
         if (dragType != DragType::OUTSIDE) {
             dragType = DragType::OUTSIDE;
             setCursor(QCursor(Qt::DragCopyCursor));
@@ -94,15 +95,18 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
 
     auto widgetAtPos = qApp->topLevelAt(event->globalPos());
     if (widgetAtPos == nullptr) {
-        if (count() != 1)
+        if (count() != 1) {
             emit detachTab(currentIndex());
+        }
     } else if (window() != widgetAtPos->window()) {
         // splits have a tendency to break, forbid to detach if split and it's the last tab.
-        if (_containers.size() == 1 || count() > 1)
+        if (_containers.size() == 1 || count() > 1) {
             emit moveTabToWindow(currentIndex(), widgetAtPos);
+        }
     } else if (droppedContainerIsNotThis(event->globalPos())){
-        if (count() != 1)
+        if (count() != 1) {
             emit moveTabToWindow(currentIndex(), widgetAtPos);
+        }
     }
 }
 
