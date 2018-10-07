@@ -1342,6 +1342,8 @@ int Screen::copyLineToStream(int line ,
 
         Q_ASSERT(screenLine <= _screenLinesSize);
 
+        screenLine = qMin(screenLine, _screenLinesSize);
+
         Character* data = _screenLines[screenLine].data();
         int length = _screenLines[screenLine].count();
 
