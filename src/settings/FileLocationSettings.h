@@ -31,6 +31,9 @@ class FileLocationSettings : public QWidget, private Ui::FileLocationSettings
 public:
     explicit FileLocationSettings(QWidget *aParent = nullptr);
     ~FileLocationSettings() Q_DECL_OVERRIDE;
+
+public Q_SLOTS:
+    void browse();
 };
 }
 

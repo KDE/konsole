@@ -23,6 +23,7 @@
 
 #include <QDir>
 #include <QStandardPaths>
+#include <QFileDialog>
 
 using namespace Konsole;
 
@@ -33,9 +34,16 @@ FileLocationSettings::FileLocationSettings(QWidget* aParent) : QWidget(aParent)
     // TODO: worth adding gauge on free disk space?
     useSystemLocationText->setText(QDir::tempPath());
     useUsersHomeLocationText->setText(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
-    kcfg_scrollbackUseSpecifiedLocationDirectory->setMode(KFile::Directory);
-
 }
 
 FileLocationSettings::~FileLocationSettings() = default;
 
+void FileLocationSettings::browse()
+{
+    QString path = kcfg_scrollbackUseSpecifiedLocationDirectory->text();
+    path = QFileDialog::getExistingDirectory(this, i18n("Select directory"), path);
+    if (path.isEmpty()) {
+        return;
+    }
+    kcfg_scrollbackUseSpecifiedLocationDirectory->setText(path);
+}

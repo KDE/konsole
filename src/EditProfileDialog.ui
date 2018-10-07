@@ -939,7 +939,7 @@
              </widget>
             </item>
             <item>
-             <widget class="KComboBox" name="tripleClickModeCombo">
+             <widget class="QComboBox" name="tripleClickModeCombo">
               <property name="toolTip">
                <string>Which part of current line should be selected with triple click .</string>
               </property>
@@ -1360,7 +1360,7 @@
              </widget>
             </item>
             <item>
-             <widget class="KComboBox" name="cursorShapeCombo">
+             <widget class="QComboBox" name="cursorShapeCombo">
               <property name="toolTip">
                <string>Change the shape of the cursor</string>
               </property>
@@ -1527,11 +1527,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
   <customwidget>
    <class>KColorButton</class>
    <extends>QPushButton</extends>

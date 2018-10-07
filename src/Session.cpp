@@ -39,7 +39,7 @@
 
 // KDE
 #include <KLocalizedString>
-#include <KRun>
+#include <KIO/DesktopExecParser>
 #include <KShell>
 #include <KProcess>
 #include <KConfigGroup>
@@ -382,7 +382,7 @@ QString Session::checkProgram(const QString& program)
         return exec;
     }
 
-    exec = KRun::binaryName(exec, false);
+    exec = KIO::DesktopExecParser::executablePath(exec);
     exec = KShell::tildeExpand(exec);
     const QString pexec = QStandardPaths::findExecutable(exec);
     if (pexec.isEmpty()) {

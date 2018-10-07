@@ -119,7 +119,7 @@ set(konsole_LIBS
                  KF5::IconThemes
                  KF5::I18n
                  KF5::Pty
-                 KF5::KIOWidgets
+                 KF5::KIOCore
                  KF5::DBusAddons
                  KF5::GlobalAccel
 )
@@ -135,6 +135,10 @@ endif()
 if (NOT WITHOUT_KBOOKMARKS)
     list(APPEND konsole_LIBS KF5::Bookmarks)
     list(APPEND konsoleprivate_SRCS BookmarkHandler.cpp)
+endif()
+
+if (NOT WITHOUT_KIO)
+    list(APPEND konsole_LIBS KF5::KIOWidgets)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
@@ -193,7 +197,7 @@ set(konsole_KDEINIT_LIBS
     KF5::XmlGui
     KF5::WindowSystem
     KF5::I18n
-    KF5::KIOWidgets
+    KF5::KIOCore
     KF5::Crash
     )
 

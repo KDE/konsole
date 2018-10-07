@@ -43,7 +43,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     Completion Config ConfigWidgets
     CoreAddons Crash GuiAddons DBusAddons
-    I18n IconThemes Init KIO
+    I18n IconThemes Init
     Parts Pty Service WidgetsAddons
     WindowSystem XmlGui DBusAddons GlobalAccel
 )
@@ -66,6 +66,13 @@ option(WITHOUT_KBOOKMARKS "Build without KBookmarks support" OFF)
 if (NOT WITHOUT_KBOOKMARKS)
     find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
         Bookmarks
+    )
+endif()
+
+option(WITHOUT_KIO "Build without KIO support" OFF)
+if (NOT WITHOUT_KIO)
+    find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
+        KIO
     )
 endif()
 

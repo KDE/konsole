@@ -42,7 +42,7 @@
 #include <KActionCollection>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KRun>
+#include <QDesktopServices>
 #include <KShell>
 #include <KToolInvocation>
 #include <KToggleAction>
@@ -50,11 +50,15 @@
 #include <KXmlGuiWindow>
 #include <KXMLGUIFactory>
 #include <KXMLGUIBuilder>
-#include <KUriFilter>
 #include <KStringHandler>
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KCodecAction>
+
+#include <KIO/TransferJob>
+#ifndef WITHOUT_KIO
+#include <KUriFilter>
+#endif
 
 // Konsole
 #include "EditProfileDialog.h"
@@ -74,7 +78,10 @@
 #include "PrintOptions.h"
 
 // for SaveHistoryTask
+#ifndef WITHOUT_KIO
 #include <KIO/Job>
+#endif
+
 #include <KJob>
 #include "TerminalCharacterDecoder.h"
 
@@ -114,7 +121,9 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _prevSearchResultLine(0)
     , _codecAction(nullptr)
     , _switchProfileMenu(nullptr)
+#ifndef WITHOUT_KIO
     , _webSearchMenu(nullptr)
+#endif
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
     , _keepIconUntilInteraction(false)
@@ -387,6 +396,7 @@ void SessionController::updateCopyAction(const QString& selectedText)
     copyAction->setEnabled(!selectedText.isEmpty());
 }
 
+#ifndef WITHOUT_KIO
 void SessionController::updateWebSearchMenu()
 {
     // reset
@@ -445,7 +455,7 @@ void SessionController::handleWebShortcutAction()
 
     if (KUriFilter::self()->filterUri(filterData, QStringList() << QStringLiteral("kurisearchfilter"))) {
         const QUrl& url = filterData.uri();
-        new KRun(url, QApplication::activeWindow());
+        QDesktopServices::openUrl(url);
     }
 }
 
@@ -453,6 +463,7 @@ void SessionController::configureWebShortcuts()
 {
     KToolInvocation::kdeinitExec(QStringLiteral("kcmshell5"), QStringList() << QStringLiteral("webshortcuts"));
 }
+#endif//WITHOUT_KIO
 
 void SessionController::sendSignal(QAction* action)
 {
@@ -578,10 +589,12 @@ void SessionController::setupCommonActions()
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Insert);
 #endif
 
+#ifndef WITHOUT_KIO
     _webSearchMenu = new KActionMenu(i18n("Web Search"), this);
     _webSearchMenu->setIcon(QIcon::fromTheme(QStringLiteral("preferences-web-browser-shortcuts")));
     _webSearchMenu->setVisible(false);
     collection->addAction(QStringLiteral("web-search"), _webSearchMenu);
+#endif
 
 
     action = collection->addAction(QStringLiteral("select-all"), this, SLOT(selectAll()));
@@ -954,9 +967,9 @@ void SessionController::openBrowser()
     const QUrl currentUrl = url();
 
     if (currentUrl.isLocalFile()) {
-        new KRun(currentUrl, QApplication::activeWindow(), true);
+        QDesktopServices::openUrl(currentUrl);
     } else {
-        new KRun(QUrl::fromLocalFile(QDir::homePath()), QApplication::activeWindow(), true);
+        QDesktopServices::openUrl(QUrl::fromLocalFile(QDir::homePath()));
     }
 }
 
@@ -1644,10 +1657,12 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         contentActions << contentSeparator;
         popup->insertActions(popup->actions().value(0, nullptr), contentActions);
 
+#ifndef WITHOUT_KIO
         // always update this submenu before showing the context menu,
         // because the available search services might have changed
         // since the context menu is shown last time
         updateWebSearchMenu();
+#endif
 
         _preventClose = true;
 

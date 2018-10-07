@@ -14,3 +14,4 @@
 #cmakedefine WITHOUT_KNOTIFY
 #cmakedefine WITHOUT_KNEWSTUFF
 #cmakedefine WITHOUT_KBOOKMARKS
+#cmakedefine WITHOUT_KIO

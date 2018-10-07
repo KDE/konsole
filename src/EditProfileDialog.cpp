@@ -1423,7 +1423,7 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
     int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
     _ui->tripleClickModeCombo->setCurrentIndex(tripleClickMode);
 
-    connect(_ui->tripleClickModeCombo, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &Konsole::EditProfileDialog::TripleClickModeChanged);
+    connect(_ui->tripleClickModeCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &Konsole::EditProfileDialog::TripleClickModeChanged);
 
     _ui->openLinksByDirectClickButton->setEnabled(_ui->underlineLinksButton->isChecked() || _ui->underlineFilesButton->isChecked());
 
@@ -1491,7 +1491,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     int shape = profile->property<int>(Profile::CursorShape);
     _ui->cursorShapeCombo->setCurrentIndex(shape);
 
-    connect(_ui->cursorShapeCombo, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &Konsole::EditProfileDialog::setCursorShape);
+    connect(_ui->cursorShapeCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &Konsole::EditProfileDialog::setCursorShape);
 
     // encoding options
     auto codecAction = new KCodecAction(this);

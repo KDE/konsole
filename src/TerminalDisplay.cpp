@@ -51,11 +51,14 @@
 #include <KColorScheme>
 #include <KCursor>
 #include <KLocalizedString>
-#include <KIO/DropJob>
-#include <KJobWidgets>
 #include <KMessageBox>
 #include <KMessageWidget>
 #include <KIO/StatJob>
+
+#ifndef WITHOUT_KIO
+#include <KJobWidgets>
+#include <KIO/DropJob>
+#endif
 
 #ifndef WITHOUT_KNOTIFY
 #include <KNotification>
@@ -3845,6 +3848,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             dropText += QLatin1Char(' ');
         }
 
+#ifndef WITHOUT_KIO
         // If our target is local we will open a popup - otherwise the fallback kicks
         // in and the URLs will simply be pasted as text.
         if (!_dropUrlsAsText && (_sessionController != nullptr) && _sessionController->url().isLocalFile()) {
@@ -3885,10 +3889,12 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             job->setApplicationActions(additionalActions);
             return;
         }
+#endif//WITHOUT_KIO
 
     } else {
         dropText = mimeData->text();
     }
+    dropText = mimeData->text();
 
     if (mimeData->hasFormat(QStringLiteral("text/plain")) ||
             mimeData->hasFormat(QStringLiteral("text/uri-list"))) {

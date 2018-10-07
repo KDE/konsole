@@ -32,10 +32,10 @@
 #include <QString>
 #include <QTextStream>
 #include <QUrl>
+#include <QDesktopServices>
 
 // KDE
 #include <KLocalizedString>
-#include <KRun>
 
 // Konsole
 #include "Session.h"
@@ -443,7 +443,7 @@ void UrlFilter::HotSpot::activate(QObject *object)
             url.prepend(QLatin1String("mailto:"));
         }
 
-        new KRun(QUrl(url), QApplication::activeWindow());
+        QDesktopServices::openUrl(QUrl(url));
     }
 }
 
@@ -564,7 +564,7 @@ FileFilter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int en
 
 void FileFilter::HotSpot::activate(QObject *)
 {
-    new KRun(QUrl::fromLocalFile(_filePath), QApplication::activeWindow());
+    QDesktopServices::openUrl(QUrl::fromLocalFile(_filePath));
 }
 
 static QString createFileRegex(const QStringList &patterns, const QString &filePattern, const QString pathPattern)

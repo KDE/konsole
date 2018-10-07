@@ -145,7 +145,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="KUrlRequester" name="kcfg_scrollbackUseSpecifiedLocationDirectory">
+         <widget class="QLineEdit" name="kcfg_scrollbackUseSpecifiedLocationDirectory">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>2</horstretch>
@@ -154,6 +154,19 @@
           </property>
           <property name="filter" stdset="0">
            <string>text/css</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="browseScrollbackHistory">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>2</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+              <string>Browse...</string>
           </property>
          </widget>
         </item>

@@ -21,6 +21,9 @@
 #ifndef SESSIONCONTROLLER_H
 #define SESSIONCONTROLLER_H
 
+// Config
+#include <config-konsole.h>
+
 // Qt
 #include <QList>
 #include <QSet>
@@ -252,8 +255,10 @@ private Q_SLOTS:
     void monitorSilence(bool monitor);
     void renameSession();
     void switchProfile(Profile::Ptr profile);
+#ifndef WITHOUT_KIO
     void handleWebShortcutAction();
     void configureWebShortcuts();
+#endif
     void sendSignal(QAction *action);
     void sendBackgroundColor();
     void toggleReadOnly();
@@ -293,7 +298,9 @@ private Q_SLOTS:
 
     // update actions related with selected text
     void updateCopyAction(const QString &selectedText);
+#ifndef WITHOUT_KIO
     void updateWebSearchMenu();
+#endif
 
 private:
     Q_DISABLE_COPY(SessionController)
@@ -343,7 +350,9 @@ private:
     KCodecAction *_codecAction;
 
     KActionMenu *_switchProfileMenu;
+#ifndef WITHOUT_KIO
     KActionMenu *_webSearchMenu;
+#endif
 
     bool _listenForScreenWindowUpdates;
     bool _preventClose;
