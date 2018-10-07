@@ -52,7 +52,10 @@
 #endif
 
 // Konsole
+#ifndef WITHOUT_KBOOKMARKS
 #include "BookmarkHandler.h"
+#endif
+
 #include "SessionController.h"
 #include "ProfileList.h"
 #include "Session.h"
@@ -72,7 +75,9 @@ using namespace Konsole;
 MainWindow::MainWindow() :
     KXmlGuiWindow(),
     _viewManager(nullptr),
+#ifndef WITHOUT_KBOOKMARKS
     _bookmarkHandler(nullptr),
+#endif
     _toggleMenuBarAction(nullptr),
     _newTabMenuAction(nullptr),
     _pluggedController(nullptr),
@@ -108,8 +113,10 @@ MainWindow::MainWindow() :
             &Konsole::MainWindow::activeViewChanged);
     connect(_viewManager, &Konsole::ViewManager::unplugController, this,
             &Konsole::MainWindow::disconnectController);
+#ifndef WITHOUT_KBOOKMARKS
     connect(_viewManager, &Konsole::ViewManager::viewPropertiesChanged,
             bookmarkHandler(), &Konsole::BookmarkHandler::setViews);
+#endif
     connect(_viewManager, &Konsole::ViewManager::blurSettingChanged,
             this, &Konsole::MainWindow::setBlur);
 
@@ -202,6 +209,7 @@ void MainWindow::correctStandardShortcuts()
         actionCollection()->setDefaultShortcut(helpAction, QKeySequence());
     }
 
+#ifndef WITHOUT_KBOOKMARKS
     // replace Ctrl+B shortcut for bookmarks only if user hasn't already
     // changed the shortcut; however, if the user changed it to Ctrl+B
     // this will still get changed to Ctrl+Shift+B
@@ -211,6 +219,7 @@ void MainWindow::correctStandardShortcuts()
         actionCollection()->setDefaultShortcut(bookmarkAction,
                                                Konsole::ACCEL + Qt::SHIFT + Qt::Key_B);
     }
+#endif
 }
 
 ViewManager *MainWindow::viewManager() const
@@ -242,11 +251,13 @@ void MainWindow::disconnectController(SessionController *controller)
 
 void MainWindow::activeViewChanged(SessionController *controller)
 {
+#ifndef WITHOUT_KBOOKMARKS
     // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
     disconnect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, nullptr, nullptr);
     connect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, controller,
             &Konsole::SessionController::openUrl);
+#endif
 
     if (!_pluggedController.isNull()) {
         disconnectController(_pluggedController);
@@ -350,12 +361,14 @@ void MainWindow::setupActions()
     collection->setDefaultShortcut(menuAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Q);
     connect(menuAction, &QAction::triggered, this, &Konsole::MainWindow::close);
 
+#ifndef WITHOUT_KBOOKMARKS
     // Bookmark Menu
     KActionMenu *bookmarkMenu = new KActionMenu(i18nc("@title:menu", "&Bookmarks"), collection);
     _bookmarkHandler = new BookmarkHandler(collection, bookmarkMenu->menu(), true, this);
     collection->addAction(QStringLiteral("bookmark"), bookmarkMenu);
     connect(_bookmarkHandler, &Konsole::BookmarkHandler::openUrls, this,
             &Konsole::MainWindow::openUrls);
+#endif
 
     // Settings Menu
     _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
@@ -393,10 +406,12 @@ void MainWindow::viewFullScreen(bool fullScreen)
     }
 }
 
+#ifndef WITHOUT_KBOOKMARKS
 BookmarkHandler *MainWindow::bookmarkHandler() const
 {
     return _bookmarkHandler;
 }
+#endif
 
 void MainWindow::setProfileList(ProfileList *list)
 {

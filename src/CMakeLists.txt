@@ -57,7 +57,6 @@ qt5_add_dbus_adaptor(windowadaptors_SRCS
 
 set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ${windowadaptors_SRCS}
-                        BookmarkHandler.cpp
                         ColorScheme.cpp
                         ColorSchemeManager.cpp
                         ColorSchemeEditor.cpp
@@ -118,7 +117,6 @@ set(konsole_LIBS
                  KF5::WindowSystem
                  KF5::GuiAddons
                  KF5::IconThemes
-                 KF5::Bookmarks
                  KF5::I18n
                  KF5::Pty
                  KF5::KIOWidgets
@@ -132,6 +130,11 @@ endif()
 
 if (NOT WITHOUT_KNEWSTUFF)
     list(APPEND konsole_LIBS KF5::NewStuff)
+endif()
+
+if (NOT WITHOUT_KBOOKMARKS)
+    list(APPEND konsole_LIBS KF5::Bookmarks)
+    list(APPEND konsoleprivate_SRCS BookmarkHandler.cpp)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
@@ -187,7 +190,8 @@ ecm_add_app_icon(kdeinit_konsole ICONS ${ICONS_SRCS})
 kf5_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
 
 set(konsole_KDEINIT_LIBS
-    KF5::XmlGui KF5::WindowSystem KF5::Bookmarks
+    KF5::XmlGui
+    KF5::WindowSystem
     KF5::I18n
     KF5::KIOWidgets
     KF5::Crash
@@ -195,6 +199,10 @@ set(konsole_KDEINIT_LIBS
 
 if (NOT WITHOUT_KNOTIFY)
     list(APPEND konsole_KDEINIT_LIBS KF5::NotifyConfig)
+endif()
+
+if (NOT WITHOUT_KBOOKMARKS)
+    list(APPEND konsole_KDEINIT_LIBS KF5::Bookmarks)
 endif()
 
 target_link_libraries(kdeinit_konsole konsoleprivate

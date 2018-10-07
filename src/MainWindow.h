@@ -171,10 +171,12 @@ private:
     QString activeSessionDir() const;
     void triggerAction(const QString &name) const;
 
+#ifndef WITHOUT_KBOOKMARKS
     /**
      * Returns the bookmark handler associated with this window.
      */
     BookmarkHandler *bookmarkHandler() const;
+#endif
 
     // sets the active shortcuts of actions in 'dest' to the shortcuts of actions
     // with the same name in 'source' (see QAction::ActiveShortcut)
@@ -182,7 +184,11 @@ private:
 
 private:
     ViewManager *_viewManager;
+
+#ifndef WITHOUT_KBOOKMARKS
     BookmarkHandler *_bookmarkHandler;
+#endif
+
     KToggleAction *_toggleMenuBarAction;
     KActionMenu *_newTabMenuAction;
 
