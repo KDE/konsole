@@ -44,7 +44,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     Bookmarks Completion Config ConfigWidgets
     CoreAddons Crash GuiAddons DBusAddons
     I18n IconThemes Init KIO NewStuff NewStuffCore
-    Parts Pty Service TextWidgets WidgetsAddons
+    Parts Pty Service WidgetsAddons
     WindowSystem XmlGui DBusAddons GlobalAccel
 )
 

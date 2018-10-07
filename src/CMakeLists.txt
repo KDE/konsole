@@ -116,7 +116,6 @@ set(konsole_LIBS
                  Qt5::PrintSupport
                  Qt5::Xml
                  KF5::WindowSystem
-                 KF5::TextWidgets
                  KF5::GuiAddons
                  KF5::IconThemes
                  KF5::Bookmarks

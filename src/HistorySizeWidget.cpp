@@ -63,7 +63,7 @@ HistorySizeWidget::HistorySizeWidget(QWidget *parent) :
     _ui->fixedSizeHistoryButton->setFocusProxy(_ui->historyLineSpinner);
     connect(_ui->fixedSizeHistoryButton, &QRadioButton::clicked,
             _ui->historyLineSpinner,
-            &KPluralHandlingSpinBox::selectAll);
+            &QSpinBox::selectAll);
 
     auto modeGroup = new QButtonGroup(this);
     modeGroup->addButton(_ui->noHistoryButton);
@@ -73,11 +73,11 @@ HistorySizeWidget::HistorySizeWidget(QWidget *parent) :
             static_cast<void (QButtonGroup::*)(QAbstractButton *)>(&QButtonGroup::buttonClicked),
             this, &Konsole::HistorySizeWidget::buttonClicked);
 
-    _ui->historyLineSpinner->setSuffix(ki18ncp("@label:textbox Unit of scrollback", " line", " lines"));
+    _ui->historyLineSpinner->setSuffix(i18n(" line(s)"));
     setLineCount(HistorySizeWidget::DefaultLineCount);
 
     connect(_ui->historyLineSpinner,
-            static_cast<void (KPluralHandlingSpinBox::*)(int)>(&KPluralHandlingSpinBox::valueChanged),
+            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this, &Konsole::HistorySizeWidget::historySizeChanged);
 }
 

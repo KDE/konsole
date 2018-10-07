@@ -21,11 +21,13 @@
 
 // KDE
 #include <KLocalizedString>
-#include <KTextEdit>
+#include <KGuiItem>
+
+// Qt
 #include <QDialogButtonBox>
 #include <QPushButton>
-#include <KGuiItem>
 #include <QVBoxLayout>
+#include <QTextEdit>
 
 using Konsole::ZModemDialog;
 
@@ -52,7 +54,7 @@ ZModemDialog::ZModemDialog(QWidget *aParent, bool modal, const QString &caption)
     connect(mButtonBox, &QDialogButtonBox::rejected, this, &Konsole::ZModemDialog::slotCancel);
     connect(mButtonBox, &QDialogButtonBox::accepted, this, &Konsole::ZModemDialog::slotClose);
 
-    _textEdit = new KTextEdit(this);
+    _textEdit = new QTextEdit(this);
     _textEdit->setMinimumSize(400, 100);
     _textEdit->setReadOnly(true);
     mainLayout->addWidget(_textEdit);

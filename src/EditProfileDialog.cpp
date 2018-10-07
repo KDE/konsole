@@ -435,7 +435,7 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr profile)
     // tab monitoring
     const int silenceSeconds = profile->silenceSeconds();
     _ui->silenceSecondsSpinner->setValue(silenceSeconds);
-    _ui->silenceSecondsSpinner->setSuffix(ki18ncp("Unit of time", " second", " seconds"));
+    _ui->silenceSecondsSpinner->setSuffix(i18n(" second(s)"));
 
     connect(_ui->silenceSecondsSpinner,
             static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,

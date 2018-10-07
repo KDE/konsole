@@ -55,7 +55,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KPluralHandlingSpinBox" name="historyLineSpinner">
+      <widget class="QSpinBox" name="historyLineSpinner">
        <property name="toolTip">
         <string>Number of lines of output to remember</string>
        </property>
@@ -121,11 +121,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KPluralHandlingSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>KPluralHandlingSpinBox</header>
-  </customwidget>
   <customwidget>
    <class>KMessageWidget</class>
    <extends>QFrame</extends>
