@@ -491,13 +491,6 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
-           <widget class="KNS3::Button" name="downloadColorSchemeButton">
-            <property name="text">
-             <string>Get New...</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="1">
            <widget class="QPushButton" name="newColorSchemeButton">
             <property name="toolTip">
@@ -1538,11 +1531,6 @@
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KNS3::Button</class>
-   <extends>QPushButton</extends>
-   <header location="global">KNS3/Button</header>
   </customwidget>
   <customwidget>
    <class>KColorButton</class>

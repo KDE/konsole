@@ -124,10 +124,14 @@ set(konsole_LIBS
                  KF5::KIOWidgets
                  KF5::DBusAddons
                  KF5::GlobalAccel
-                 KF5::NewStuff
 )
+
 if (NOT WITHOUT_KNOTIFY)
     list(APPEND konsole_LIBS KF5::Notifications)
+endif()
+
+if (NOT WITHOUT_KNEWSTUFF)
+    list(APPEND konsole_LIBS KF5::NewStuff)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")

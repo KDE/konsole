@@ -47,8 +47,11 @@
 #include <KIconDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KNSCore/DownloadManager>
 #include <KWindowSystem>
+
+#ifndef WITHOUT_KNEWSTUFF
+#include <KNSCore/DownloadManager>
+#endif
 
 // Konsole
 #include "ColorSchemeManager.h"
@@ -98,6 +101,10 @@ EditProfileDialog::EditProfileDialog(QWidget *aParent) :
 
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget);
+#ifndef WITHOUT_KNEWSTUFF
+    _downloadColorSchemeButton = new KNS3::Button(_ui->groupBox);
+    _ui->gridLayout3->addWidget(_downloadColorSchemeButton, 5, 1, 1, 1);
+#endif
     mainLayout->addWidget(mButtonBox);
 
     // there are various setupXYZPage() methods to load the items
@@ -538,7 +545,9 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     _ui->removeColorSchemeButton->setEnabled(false);
     _ui->resetColorSchemeButton->setEnabled(false);
 
-    _ui->downloadColorSchemeButton->setConfigFile(QStringLiteral("konsole.knsrc"));
+#ifndef WITHOUT_KNEWSTUFF
+    _downloadColorSchemeButton->setConfigFile(QStringLiteral("konsole.knsrc"));
+#endif
 
     // setup color list
     // select the colorScheme used in the current profile
@@ -562,8 +571,11 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
             &Konsole::EditProfileDialog::removeColorScheme);
     connect(_ui->newColorSchemeButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::newColorScheme);
-    connect(_ui->downloadColorSchemeButton, &KNS3::Button::dialogFinished, this,
+
+#ifndef WITHOUT_KNEWSTUFF
+    connect(_downloadColorSchemeButton, &KNS3::Button::dialogFinished, this,
             &Konsole::EditProfileDialog::gotNewColorSchemes);
+#endif
 
     connect(_ui->resetColorSchemeButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::resetColorScheme);
@@ -848,6 +860,7 @@ void EditProfileDialog::removeColorScheme()
         return;
     }
 
+#ifndef WITHOUT_KNEWSTUFF
     // The actual delete runs async because we need to on-demand query
     // files managed by KNS. Deleting files managed by KNS screws up the
     // KNS states (entry gets shown as installed when in fact we deleted it).
@@ -888,8 +901,16 @@ void EditProfileDialog::removeColorScheme()
         manager->deleteLater();
     });
     manager->checkForInstalled();
+#else //WITHOUT_KNEWSTUFF
+    const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
+    bool uninstalled = ColorSchemeManager::instance()->deleteColorScheme(name);
+    if (uninstalled) {
+        _ui->colorSchemeList->model()->removeRow(selected.first().row());
+    }
+#endif //WITHOUT_KNEWSTUFF
 }
 
+#ifndef WITHOUT_KNEWSTUFF
 void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntries)
 {
     int failures = 0;
@@ -935,6 +956,7 @@ void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntri
     }
     updateColorSchemeList(currentColorSchemeName());
 }
+#endif //WITHOUT_KNEWSTUFF
 
 void EditProfileDialog::resetColorScheme()
 {

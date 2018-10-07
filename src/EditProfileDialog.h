@@ -21,6 +21,9 @@
 #ifndef EDITPROFILEDIALOG_H
 #define EDITPROFILEDIALOG_H
 
+// config
+#include "config-konsole.h"
+
 // Qt
 #include <QAbstractItemDelegate>
 #include <QDialog>
@@ -28,7 +31,10 @@
 #include <QPointer>
 
 // KDE
+#ifndef WITHOUT_KNEWSTUFF
 #include <KNS3/Entry>
+#include <KNS3/Button>
+#endif
 
 // Konsole
 #include "Profile.h"
@@ -135,7 +141,10 @@ private Q_SLOTS:
     void editColorScheme();
     void saveColorScheme(const ColorScheme &scheme, bool isNewScheme);
     void removeColorScheme();
+
+#ifndef WITHOUT_KNEWSTUFF
     void gotNewColorSchemes(const KNS3::Entry::List &changedEntries);
+#endif
 
     /**
      * Deletes the selected colorscheme from the user's home dir location
@@ -296,6 +305,10 @@ private:
 
     ColorSchemeEditor *_colorDialog;
     QDialogButtonBox *mButtonBox;
+
+#ifndef WITHOUT_KNEWSTUFF
+    KNS3::Button *_downloadColorSchemeButton;
+#endif
 };
 
 /**
