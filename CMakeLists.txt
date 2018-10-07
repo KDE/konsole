@@ -43,10 +43,18 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
     Bookmarks Completion Config ConfigWidgets
     CoreAddons Crash GuiAddons DBusAddons
-    I18n IconThemes Init KIO NewStuff NewStuffCore Notifications NotifyConfig
+    I18n IconThemes Init KIO NewStuff NewStuffCore
     Parts Pty Service TextWidgets WidgetsAddons
     WindowSystem XmlGui DBusAddons GlobalAccel
 )
+
+option(WITHOUT_KNOTIFY "Build without KNotify support" OFF)
+
+if (NOT WITHOUT_KNOTIFY)
+    find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
+        Notifications NotifyConfig
+    )
+endif()
 
 find_package(KF5DocTools ${KF5_MIN_VERSION})
 set_package_properties(KF5DocTools PROPERTIES DESCRIPTION 

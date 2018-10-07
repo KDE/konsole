@@ -39,11 +39,14 @@
 
 // KDE
 #include <KLocalizedString>
-#include <KNotification>
 #include <KRun>
 #include <KShell>
 #include <KProcess>
 #include <KConfigGroup>
+
+#ifndef WITHOUT_KNOTIFY
+#include <KNotification>
+#endif
 
 // Konsole
 #include <sessionadaptor.h>
@@ -633,10 +636,15 @@ void Session::silenceTimerDone()
         }
     }
 
+#ifndef WITHOUT_KNOTIFY
     KNotification::event(hasFocus ? QStringLiteral("Silence") : QStringLiteral("SilenceHidden"),
             i18n("Silence in session '%1'", _nameTitle), QPixmap(),
             QApplication::activeWindow(),
             KNotification::CloseWhenWidgetActivated);
+#else
+    emit bellRequest(i18n("Silence in session '%1'", _nameTitle));
+#endif
+
     emit stateChanged(NOTIFYSILENCE);
 }
 
@@ -701,10 +709,14 @@ void Session::activityStateSet(int state)
         }
 
         if (_monitorActivity  && !_notifiedActivity) {
+#ifndef WITHOUT_KNOTIFY
             KNotification::event(hasFocus ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"),
                                  i18n("Activity in session '%1'", _nameTitle), QPixmap(),
                                  QApplication::activeWindow(),
                                  KNotification::CloseWhenWidgetActivated);
+#else
+            emit bellRequest(i18n("Activity in session '%1'", _nameTitle));
+#endif
 
             // mask activity notification for a while to avoid flooding
             _notifiedActivity = true;
@@ -912,8 +924,12 @@ void Session::sendText(const QString& text) const
 #if !defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
     if (show_disallow_certain_dbus_methods_message) {
 
+#ifndef WITHOUT_KNOTIFY
         KNotification::event(KNotification::Warning, QStringLiteral("Konsole D-Bus Warning"),
             i18n("The D-Bus methods sendText/runCommand were just used.  There are security concerns about allowing these methods to be public.  If desired, these methods can be changed to internal use only by re-compiling Konsole. <p>This warning will only show once for this Konsole instance.</p>"));
+#else
+        emit bellRequest(i18n("The D-Bus methods sendText/runCommand were just used.  There are security concerns about allowing these methods to be public.  If desired, these methods can be changed to internal use only by re-compiling Konsole. <p>This warning will only show once for this Konsole instance.</p>"));
+#endif
 
         show_disallow_certain_dbus_methods_message = false;
     }
@@ -959,10 +975,12 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
             message = i18n("Program '%1' exited with status %2.", _program, exitCode);
         }
 
+#ifndef WITHOUT_KNOTIFY
         //FIXME: See comments in Session::silenceTimerDone()
         KNotification::event(QStringLiteral("Finished"), message , QPixmap(),
                              QApplication::activeWindow(),
                              KNotification::CloseWhenWidgetActivated);
+#endif
     }
 
     if (exitStatus != QProcess::NormalExit) {

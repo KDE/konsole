@@ -51,12 +51,15 @@
 #include <KColorScheme>
 #include <KCursor>
 #include <KLocalizedString>
-#include <KNotification>
 #include <KIO/DropJob>
 #include <KJobWidgets>
 #include <KMessageBox>
 #include <KMessageWidget>
 #include <KIO/StatJob>
+
+#ifndef WITHOUT_KNOTIFY
+#include <KNotification>
+#endif
 
 // Konsole
 #include "Filter.h"
@@ -3735,15 +3738,19 @@ void TerminalDisplay::bell(const QString& message)
 
     switch (_bellMode) {
     case Enum::SystemBeepBell:
-        KNotification::beep();
+        QApplication::beep();
         break;
     case Enum::NotifyBell:
         // STABLE API:
         //     Please note that these event names, "BellVisible" and "BellInvisible",
         //     should not change and should be kept stable, because other applications
         //     that use this code via KPart rely on these names for notifications.
+#ifndef WITHOUT_KNOTIFY
         KNotification::event(hasFocus() ? QStringLiteral("BellVisible") : QStringLiteral("BellInvisible"),
                              message, QPixmap(), this);
+#else
+        QApplication::alert(this);
+#endif
         break;
     case Enum::VisualBell:
         visualBell();

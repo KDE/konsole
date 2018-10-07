@@ -628,7 +628,7 @@ Q_SIGNALS:
     void currentDirectoryChanged(const QString &dir);
 
     /** Emitted when a bell event occurs in the session. */
-    void bellRequest(const QString &message);
+    void bellRequest(const QString &message) const;
 
     /**
      * Requests that the color the text for any tabs associated with

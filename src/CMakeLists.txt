@@ -115,7 +115,6 @@ set(konsole_LIBS
                  KF5::XmlGui
                  Qt5::PrintSupport
                  Qt5::Xml
-                 KF5::Notifications
                  KF5::WindowSystem
                  KF5::TextWidgets
                  KF5::GuiAddons
@@ -128,6 +127,9 @@ set(konsole_LIBS
                  KF5::GlobalAccel
                  KF5::NewStuff
 )
+if (NOT WITHOUT_KNOTIFY)
+    list(APPEND konsole_LIBS KF5::Notifications)
+endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
     #kinfo_getfile() is in libutil
@@ -180,11 +182,20 @@ file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../data/icons/*.png")
 ecm_add_app_icon(kdeinit_konsole ICONS ${ICONS_SRCS})
 
 kf5_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
-target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::WindowSystem KF5::Bookmarks
-  KF5::I18n
-  KF5::KIOWidgets
-  KF5::NotifyConfig
-  KF5::Crash
+
+set(konsole_KDEINIT_LIBS
+    KF5::XmlGui KF5::WindowSystem KF5::Bookmarks
+    KF5::I18n
+    KF5::KIOWidgets
+    KF5::Crash
+    )
+
+if (NOT WITHOUT_KNOTIFY)
+    list(APPEND konsole_KDEINIT_LIBS KF5::NotifyConfig)
+endif()
+
+target_link_libraries(kdeinit_konsole konsoleprivate
+    ${konsole_KDEINIT_LIBS}
 )
 
 if(APPLE)

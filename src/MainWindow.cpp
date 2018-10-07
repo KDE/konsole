@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Config
+#include <config-konsole.h>
+
 // Own
 #include "MainWindow.h"
 
@@ -41,9 +44,12 @@
 #include <KStandardGuiItem>
 #include <KWindowSystem>
 #include <KXMLGUIFactory>
-#include <KNotifyConfigWidget>
 #include <KConfigDialog>
 #include <KIconLoader>
+
+#ifndef WITHOUT_KNOTIFY
+#include <KNotifyConfigWidget>
+#endif
 
 // Konsole
 #include "BookmarkHandler.h"
@@ -359,7 +365,10 @@ void MainWindow::setupActions()
     menuAction = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
     collection->setDefaultShortcut(menuAction, Qt::Key_F11);
 
+#ifndef WITHOUT_KNOTIFY
     KStandardAction::configureNotifications(this, SLOT(configureNotifications()), collection);
+#endif
+
     KStandardAction::keyBindings(this, SLOT(showShortcutsDialog()), collection);
     KStandardAction::preferences(this, SLOT(showSettingsDialog()), collection);
 
@@ -798,7 +807,9 @@ void MainWindow::activateMenuBar()
 
 void MainWindow::configureNotifications()
 {
+#ifndef WITHOUT_KNOTIFY
     KNotifyConfigWidget::configure(this);
+#endif
 }
 
 void MainWindow::setBlur(bool blur)
