@@ -170,6 +170,7 @@
     <ul>
       <li>Tabs</li>
       <li xml:lang="ar">الألسنة</li>
+      <li xml:lang="ast">Llingüetes</li>
       <li xml:lang="bs">Kartice</li>
       <li xml:lang="ca">Pestanyes</li>
       <li xml:lang="ca-valencia">Pestanyes</li>
@@ -212,6 +213,7 @@
       <li xml:lang="zh-TW">分頁</li>
       <li>Multiple profiles</li>
       <li xml:lang="ar">مختلف التّشكيلات</li>
+      <li xml:lang="ast">Perfiles múltiples</li>
       <li xml:lang="ca">Perfils múltiples</li>
       <li xml:lang="ca-valencia">Perfils múltiples</li>
       <li xml:lang="cs">Možnost mít několik profilů</li>
