@@ -91,6 +91,7 @@
   <summary xml:lang="zh-TW">終端機</summary>
   <description>
     <p>Konsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.</p>
+    <p xml:lang="ast">Konsole ye un emulador de terminal X, davezu llamáu como terminal o shell. Emula una interfaz en llinia de comandos nuna ventana de namái testu.</p>
     <p xml:lang="ca">El Konsole és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordres). Emula una interfície de línia d'ordres en una finestra de només text.</p>
     <p xml:lang="ca-valencia">El Konsole és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordres). Emula una interfície de línia d'ordres en una finestra de només text.</p>
     <p xml:lang="da">Konsole er en X-terminalemulator, ofte omtal som en terminal eller en skal. Den emulerer en kommandolinjegrænseflade i et vindue kun med tekst.</p>
@@ -255,6 +256,7 @@
       <li xml:lang="zh-TW">多重設定檔</li>
       <li>Silence and Activity monitoring</li>
       <li xml:lang="ar">مراقبة السّكوت والنّشاط</li>
+      <li xml:lang="ast">Supervisión de l'actividá y los silencios</li>
       <li xml:lang="ca">Monitoratge del silenci i de l'activitat</li>
       <li xml:lang="ca-valencia">Monitoratge del silenci i de l'activitat</li>
       <li xml:lang="cs">Monitorování nečinnosti a aktivity</li>
@@ -295,6 +297,7 @@
       <li xml:lang="zh-TW">靜音與活動監控</li>
       <li>Bookmark support</li>
       <li xml:lang="ar">دعم العلامات</li>
+      <li xml:lang="ast">Sofitu pa marcadores</li>
       <li xml:lang="ca">Implementació de punts</li>
       <li xml:lang="ca-valencia">Implementació de punts</li>
       <li xml:lang="cs">Podpora záložek</li>
@@ -335,6 +338,7 @@
       <li xml:lang="zh-TW">書籤支援</li>
       <li>Searching</li>
       <li xml:lang="ar">البحث</li>
+      <li xml:lang="ast">Gueta</li>
       <li xml:lang="ca">Cerques</li>
       <li xml:lang="ca-valencia">Cerques</li>
       <li xml:lang="cs">Hledání</li>
@@ -376,6 +380,7 @@
       <li xml:lang="zh-TW">搜尋</li>
       <li>Saving output</li>
       <li xml:lang="ar">حفظ الخرج</li>
+      <li xml:lang="ast">Guardáu de la salida</li>
       <li xml:lang="ca">Desament de la sortida</li>
       <li xml:lang="ca-valencia">Desament de l'eixida</li>
       <li xml:lang="cs">Ukládání výstupu</li>
@@ -424,6 +429,7 @@
     <screenshot type="default">
       <image>https://kde.org/images/screenshots/konsole.png</image>
       <caption>Konsole being used as a terminal emulator</caption>
+      <caption xml:lang="ast">Konsole usandose como un emulador de terminal</caption>
       <caption xml:lang="ca">El Konsole s'usa com a emulador de terminal</caption>
       <caption xml:lang="ca-valencia">El Konsole s'usa com a emulador de terminal</caption>
       <caption xml:lang="cs">Konsole je použita jako emulátor terminálu</caption>
