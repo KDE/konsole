@@ -162,9 +162,8 @@ void TerminalDisplay::onColorsChanged()
         _dimColorTable[i] = _colorTable[i].darker();
     }
 
-
     // Update the normal widget palette
-    QPalette p = palette();
+    QPalette p = QApplication::palette();
 
     QColor backgroundColor, buttonColor, buttonTextColor;
 
@@ -179,7 +178,6 @@ void TerminalDisplay::onColorsChanged()
     backgroundColor = _dimColorTable[DEFAULT_BACK_COLOR];
     backgroundColor.setAlphaF(_opacity);
     setPaletteColors(&p, QPalette::Inactive, buttonTextColor, backgroundColor);
-
 
     setPalette(p);
 
@@ -1085,7 +1083,7 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
     const QColor backgroundColor = style->backgroundColor.color(_currentColorTable);
 
     // draw background if different from the display's background color
-    if (backgroundColor != palette().background().color()) {
+    if (backgroundColor != getBackgroundColor()) {
         drawBackground(painter, rect, backgroundColor,
                        false /* do not use transparency */);
     }
@@ -1527,7 +1525,7 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
     }
 
     foreach(const QRect & rect, (pe->region() & contentsRect()).rects()) {
-        drawBackground(paint, rect, palette().background().color(),
+        drawBackground(paint, rect, getBackgroundColor(),
                        true /* use opacity setting */);
         drawContents(paint, rect);
     }
@@ -3746,7 +3744,7 @@ bool TerminalDisplay::event(QEvent* event)
         break;
     case QEvent::PaletteChange:
     case QEvent::ApplicationPaletteChange:
-        _scrollBar->setPalette(QApplication::palette());
+        onColorsChanged();
         break;
     default:
         break;
