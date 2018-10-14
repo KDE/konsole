@@ -962,8 +962,6 @@ private:
     QVector<LineProperty> _lineProperties;
 
     ColorEntry _colorTable[TABLE_COLORS];
-    ColorEntry _dimColorTable[TABLE_COLORS];
-    ColorEntry *_currentColorTable = _colorTable;
 
     uint _randomSeed;
 

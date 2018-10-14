@@ -137,51 +137,31 @@ const ColorEntry* TerminalDisplay::colorTable() const
     return _colorTable;
 }
 
-static void setPaletteColors(QPalette *palette, const QPalette::ColorGroup group, const QColor &fg, const QColor &bg)
-{
-    palette->setColor(group, QPalette::Window, bg);
-
-    // Fix the scrollbar
-    // this is a workaround to add some readability to old themes like Fusion
-    // changing the light value for button a bit makes themes like fusion, windows and oxygen way more readable and pleasing
-    QColor button = bg.toHsv();
-    if (button.valueF() < 0.5) {
-        button = button.lighter();
-    } else {
-        button = button.darker();
-    }
-    palette->setColor(group, QPalette::Button, button);
-    palette->setColor(group, QPalette::WindowText, fg);
-    palette->setColor(group, QPalette::ButtonText, fg);
-}
-
 void TerminalDisplay::onColorsChanged()
 {
-    // Create a dimmed version for indicating unfocused window
-    for (int i = 0; i < TABLE_COLORS; i++) {
-        _dimColorTable[i] = _colorTable[i].darker();
-    }
+    // Mostly just fix the scrollbar
+    // this is a workaround to add some readability to old themes like Fusion
+    // changing the light value for button a bit makes themes like fusion, windows and oxygen way more readable and pleasing
 
-    // Update the normal widget palette
     QPalette p = QApplication::palette();
 
-    QColor backgroundColor, buttonColor, buttonTextColor;
-
-    // First set the normal active colors
-    buttonTextColor = _colorTable[DEFAULT_FORE_COLOR];
-    backgroundColor = _colorTable[DEFAULT_BACK_COLOR];
+    QColor buttonTextColor = _colorTable[DEFAULT_FORE_COLOR];
+    QColor backgroundColor = _colorTable[DEFAULT_BACK_COLOR];
     backgroundColor.setAlphaF(_opacity);
-    setPaletteColors(&p, QPalette::Active, buttonTextColor, backgroundColor);
 
-    // Now set the inactive color palette
-    buttonTextColor = _dimColorTable[DEFAULT_FORE_COLOR];
-    backgroundColor = _dimColorTable[DEFAULT_BACK_COLOR];
-    backgroundColor.setAlphaF(_opacity);
-    setPaletteColors(&p, QPalette::Inactive, buttonTextColor, backgroundColor);
+    QColor buttonColor = backgroundColor.toHsv();
+    if (buttonColor.valueF() < 0.5) {
+        buttonColor = buttonColor.lighter();
+    } else {
+        buttonColor = buttonColor.darker();
+    }
+    p.setColor(QPalette::Button, buttonColor);
+    p.setColor(QPalette::Window, backgroundColor);
+    p.setColor(QPalette::WindowText, buttonTextColor);
+    p.setColor(QPalette::ButtonText, buttonTextColor);
 
     setPalette(p);
 
-    // As explained above, we need to fix the scrollbar palette as well to make fusion look nice
     _scrollBar->setPalette(p);
 
     update();
@@ -189,14 +169,14 @@ void TerminalDisplay::onColorsChanged()
 
 void TerminalDisplay::setBackgroundColor(const QColor& color)
 {
-    _currentColorTable[DEFAULT_BACK_COLOR] = color;
+    _colorTable[DEFAULT_BACK_COLOR] = color;
 
     onColorsChanged();
 }
 
 QColor TerminalDisplay::getBackgroundColor() const
 {
-    return _currentColorTable[DEFAULT_BACK_COLOR];
+    return _colorTable[DEFAULT_BACK_COLOR];
 }
 
 void TerminalDisplay::setForegroundColor(const QColor& color)
@@ -562,19 +542,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
         const int scrollBarWidth = _scrollBar->isVisible() ? geometry().intersected(_scrollBar->geometry()).width() : 0;
         _verticalLayout->setContentsMargins(0, 0, scrollBarWidth, 0);
     });
-
-    // To redraw when focused window changes
-    connect(qApp, &QApplication::focusChanged, this, [=](QWidget *old, QWidget *now) {
-        if (!_dimWhenInactive) {
-            return;
-        }
-        // If old or now is a nullptr, it means that either the old or new widget is not in this application
-        if (!old || !now) {
-            update();
-        }
-    });
-
-
 
     new AutoScrollHandler(this);
 
@@ -1044,7 +1011,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
 
     // setup pen
     const CharacterColor& textColor = (invertCharacterColor ? style->backgroundColor : style->foregroundColor);
-    const QColor color = textColor.color(_currentColorTable);
+    const QColor color = textColor.color(_colorTable);
     QPen pen = painter.pen();
     if (pen.color() != color) {
         pen.setColor(color);
@@ -1079,8 +1046,8 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
     painter.save();
 
     // setup painter
-    const QColor foregroundColor = style->foregroundColor.color(_currentColorTable);
-    const QColor backgroundColor = style->backgroundColor.color(_currentColorTable);
+    const QColor foregroundColor = style->foregroundColor.color(_colorTable);
+    const QColor backgroundColor = style->backgroundColor.color(_colorTable);
 
     // draw background if different from the display's background color
     if (backgroundColor != getBackgroundColor()) {
@@ -1518,16 +1485,16 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 {
     QPainter paint(this);
 
-    if (_dimWhenInactive && !isActiveWindow()) {
-        _currentColorTable = _dimColorTable;
-    } else {
-        _currentColorTable = _colorTable;
-    }
+    const bool drawDimmed = _dimWhenInactive && !hasFocus();
+    const QColor dimColor(0, 0, 0, 128);
 
     foreach(const QRect & rect, (pe->region() & contentsRect()).rects()) {
         drawBackground(paint, rect, getBackgroundColor(),
                        true /* use opacity setting */);
         drawContents(paint, rect);
+        if (drawDimmed) {
+            paint.fillRect(rect, dimColor);
+        }
     }
     drawCurrentResultRect(paint);
     drawInputMethodPreeditString(paint, preeditRect());
@@ -1590,7 +1557,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     getCharacterPosition(cursorPos, cursorLine, cursorColumn, false);
     Character cursorCharacter = _image[loc(qMin(cursorColumn, _columns - 1), cursorLine)];
 
-    painter.setPen(QPen(cursorCharacter.foregroundColor.color(_currentColorTable)));
+    painter.setPen(QPen(cursorCharacter.foregroundColor.color(_colorTable)));
 
     // iterate over hotspots identified by the display's currently active filters
     // and draw appropriate visuals to indicate the presence of the hotspot
@@ -3522,8 +3489,8 @@ void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRe
     const QPoint cursorPos = cursorPosition();
 
     bool invertColors = false;
-    const QColor background = _currentColorTable[DEFAULT_BACK_COLOR];
-    const QColor foreground = _currentColorTable[DEFAULT_FORE_COLOR];
+    const QColor background = _colorTable[DEFAULT_BACK_COLOR];
+    const QColor foreground = _colorTable[DEFAULT_FORE_COLOR];
     const Character* style = &_image[loc(cursorPos.x(), cursorPos.y())];
 
     drawBackground(painter, rect, background, true);
@@ -3745,6 +3712,10 @@ bool TerminalDisplay::event(QEvent* event)
     case QEvent::PaletteChange:
     case QEvent::ApplicationPaletteChange:
         onColorsChanged();
+        break;
+    case QEvent::FocusOut:
+    case QEvent::FocusIn:
+        update();
         break;
     default:
         break;
