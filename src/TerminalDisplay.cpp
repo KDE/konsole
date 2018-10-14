@@ -134,7 +134,7 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 
 const ColorEntry* TerminalDisplay::colorTable() const
 {
-    return _currentColorTable;
+    return _colorTable;
 }
 
 static void setPaletteColors(QPalette *palette, const QPalette::ColorGroup group, const QColor &fg, const QColor &bg)
@@ -180,8 +180,10 @@ void TerminalDisplay::onColorsChanged()
     backgroundColor.setAlphaF(_opacity);
     setPaletteColors(&p, QPalette::Inactive, buttonTextColor, backgroundColor);
 
+
     setPalette(p);
 
+    // As explained above, we need to fix the scrollbar palette as well to make fusion look nice
     _scrollBar->setPalette(p);
 
     update();
@@ -1590,7 +1592,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     getCharacterPosition(cursorPos, cursorLine, cursorColumn, false);
     Character cursorCharacter = _image[loc(qMin(cursorColumn, _columns - 1), cursorLine)];
 
-    painter.setPen(QPen(cursorCharacter.foregroundColor.color(colorTable())));
+    painter.setPen(QPen(cursorCharacter.foregroundColor.color(_currentColorTable)));
 
     // iterate over hotspots identified by the display's currently active filters
     // and draw appropriate visuals to indicate the presence of the hotspot
@@ -3819,11 +3821,11 @@ void TerminalDisplay::visualBell()
 void TerminalDisplay::swapFGBGColors()
 {
     // swap the default foreground & background color
-    ColorEntry color = _currentColorTable[DEFAULT_BACK_COLOR];
-    _currentColorTable[DEFAULT_BACK_COLOR] = _currentColorTable[DEFAULT_FORE_COLOR];
-    _currentColorTable[DEFAULT_FORE_COLOR] = color;
+    ColorEntry color = _colorTable[DEFAULT_BACK_COLOR];
+    _colorTable[DEFAULT_BACK_COLOR] = _colorTable[DEFAULT_FORE_COLOR];
+    _colorTable[DEFAULT_FORE_COLOR] = color;
 
-    update();
+    onColorsChanged();
 }
 
 /* --------------------------------------------------------------------- */
