@@ -139,34 +139,46 @@ const ColorEntry* TerminalDisplay::colorTable() const
 
 void TerminalDisplay::onColorsChanged()
 {
+    // Create a dimmed version for indicating unfocused window
     for (int i = 0; i < TABLE_COLORS; i++) {
         _dimColorTable[i] = _colorTable[i].darker();
     }
 
+
     // Update the normal widget palette
     QPalette p = palette();
 
-    QColor backgroundColor = _colorTable[DEFAULT_BACK_COLOR];
+    QColor backgroundColor, buttonColor, buttonTextColor;
+
+    // First set the normal active colors
+    backgroundColor = _colorTable[DEFAULT_BACK_COLOR];
+    buttonTextColor = _colorTable[DEFAULT_FORE_COLOR];
+    buttonColor.setHsvF(backgroundColor.hueF(), backgroundColor.saturationF(), backgroundColor.valueF() + (backgroundColor.valueF() < 0.5 ? 0.2 : -0.2));
     backgroundColor.setAlphaF(_opacity);
+
     p.setColor(QPalette::Active, backgroundRole(), backgroundColor);
     p.setColor(QPalette::Active, QPalette::Window, backgroundColor);
+    p.setColor(QPalette::Active, QPalette::Button, buttonColor);
+    p.setColor(QPalette::Active, QPalette::WindowText, buttonTextColor);
+    p.setColor(QPalette::Active, QPalette::ButtonText, buttonTextColor);
 
+    // Now set the inactive color palette
     backgroundColor = _dimColorTable[DEFAULT_BACK_COLOR];
+    buttonTextColor = _dimColorTable[DEFAULT_FORE_COLOR];
+    buttonColor.setHsvF(backgroundColor.hueF(), backgroundColor.saturationF(), backgroundColor.valueF() + (backgroundColor.valueF() < 0.5 ? 0.2 : -0.2));
     backgroundColor.setAlphaF(_opacity);
+
     p.setColor(QPalette::Inactive, backgroundRole(), backgroundColor);
     p.setColor(QPalette::Inactive, QPalette::Window, backgroundColor);
+    p.setColor(QPalette::Inactive, QPalette::Button, buttonColor);
+    p.setColor(QPalette::Inactive, QPalette::WindowText, buttonTextColor);
+    p.setColor(QPalette::Inactive, QPalette::ButtonText, buttonTextColor);
 
     setPalette(p);
 
     // Fix the scrollbar
-    //this is a workaround to add some readability to old themes like Fusion
-    //changing the light value for button a bit makes themes like fusion, windows and oxygen way more readable and pleasing
-    QColor buttonColor;
-    buttonColor.setHsvF(backgroundColor.hueF(), backgroundColor.saturationF(), backgroundColor.valueF() + (backgroundColor.valueF() < 0.5 ? 0.2 : -0.2));
-    p.setColor(QPalette::Button, buttonColor);
-
-    p.setColor(QPalette::WindowText, _currentColorTable[DEFAULT_FORE_COLOR]);
-    p.setColor(QPalette::ButtonText, _currentColorTable[DEFAULT_FORE_COLOR]);
+    // this is a workaround to add some readability to old themes like Fusion
+    // changing the light value for button a bit makes themes like fusion, windows and oxygen way more readable and pleasing
     _scrollBar->setPalette(p);
 
     update();
