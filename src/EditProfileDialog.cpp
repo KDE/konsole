@@ -359,7 +359,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
 
     // window options
     _ui->showTerminalSizeHintButton->setChecked(profile->showTerminalSizeHint());
-    _ui->indicateActiveButton->setChecked(profile->indicateActiveWindow());
+    _ui->dimWhenInactiveCheckbox->setChecked(profile->dimWhenInactive());
 
     // signals and slots
     connect(_ui->dirSelectButton, &QToolButton::clicked, this,
@@ -386,8 +386,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
     connect(_ui->showTerminalSizeHintButton, &QCheckBox::toggled, this,
             &Konsole::EditProfileDialog::showTerminalSizeHint);
 
-    connect(_ui->indicateActiveButton, &QCheckBox::toggled, this,
-            &Konsole::EditProfileDialog::setIndicateActive);
+    connect(_ui->dimWhenInactiveCheckbox, &QCheckBox::toggled, this,
+            &Konsole::EditProfileDialog::setDimWhenInactive);
 }
 
 void EditProfileDialog::showEnvironmentEditor()
@@ -461,9 +461,9 @@ void EditProfileDialog::showTerminalSizeHint(bool value)
     updateTempProfileProperty(Profile::ShowTerminalSizeHint, value);
 }
 
-void EditProfileDialog::setIndicateActive(bool value)
+void EditProfileDialog::setDimWhenInactive(bool value)
 {
-    updateTempProfileProperty(Profile::IndicateActiveWindow, value);
+    updateTempProfileProperty(Profile::DimWhenInactive, value);
 }
 
 void EditProfileDialog::tabTitleFormatChanged(const QString &format)
