@@ -811,6 +811,7 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr p
 
     // show hint about terminal size after resizing
     view->setShowTerminalSizeHint(profile->showTerminalSizeHint());
+    view->setIndicateActive(profile->indicateActiveWindow());
 
     // terminal features
     view->setBlinkingCursorEnabled(profile->blinkingCursorEnabled());

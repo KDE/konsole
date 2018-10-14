@@ -343,6 +343,16 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="indicateActiveButton">
+            <property name="toolTip">
+             <string>Indicate whether the window is active by changing background color</string>
+            </property>
+            <property name="text">
+             <string>Change background color when window loses focus</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

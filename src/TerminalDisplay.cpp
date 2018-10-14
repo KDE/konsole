@@ -470,6 +470,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _readOnlyMessageWidget(nullptr)
     , _readOnly(false)
     , _opacity(1.0)
+    , _indicateActive(false)
     , _scrollWheelState(ScrollState())
     , _searchBar(new IncrementalSearchBar(this))
 {
@@ -532,6 +533,19 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
         const int scrollBarWidth = _scrollBar->isVisible() ? geometry().intersected(_scrollBar->geometry()).width() : 0;
         _verticalLayout->setContentsMargins(0, 0, scrollBarWidth, 0);
     });
+
+    // To redraw when focused window changes
+    connect(qApp, &QApplication::focusChanged, this, [=](QWidget *old, QWidget *now) {
+        if (!_indicateActive) {
+            return;
+        }
+        // If old or now is a nullptr, it means that either the old or new widget is not in this application
+        if (!old || !now) {
+            update();
+        }
+    });
+
+
 
     new AutoScrollHandler(this);
 
@@ -901,13 +915,33 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
         QColor color(backgroundColor);
         color.setAlpha(qAlpha(_blendColor));
 
+        if (_indicateActive && !isActiveWindow()) {
+            if (color.lightness() < 128) {
+                color = color.lighter();
+            } else {
+                color = color.darker();
+            }
+        }
+
         painter.save();
         painter.setCompositionMode(QPainter::CompositionMode_Source);
         painter.fillRect(rect, color);
         painter.restore();
 #endif
     } else {
-        painter.fillRect(rect, backgroundColor);
+        QColor color = backgroundColor.toHsv();
+        if (_indicateActive && !isActiveWindow()) {
+            if (color.lightness() == 0) {
+                const qreal hue = color.hue();
+                const qreal saturation = color.saturation();
+                color = QColor::fromHsv(hue, saturation, 64);
+            } else if (color.lightness() < 128) {
+                color = color.lighter();
+            } else {
+                color = color.darker();
+            }
+        }
+        painter.fillRect(rect, color);
     }
 }
 

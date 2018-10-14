@@ -696,6 +696,13 @@ public Q_SLOTS:
      */
     void setCenterContents(bool enable);
 
+    /**
+     * Sets whether the background should change when the window loses focus
+     */
+    void setIndicateActive(bool shouldIndicate) {
+        _indicateActive = shouldIndicate;
+    }
+
     // Used to show/hide the message widget
     void updateReadOnlyState(bool readonly);
     IncrementalSearchBar *searchBar() const;
@@ -1063,6 +1070,8 @@ private:
     bool _readOnly;
 
     qreal _opacity;
+
+    bool _indicateActive;
 
     ScrollState _scrollWheelState;
     IncrementalSearchBar *_searchBar;

@@ -114,6 +114,9 @@ public:
          * resizing the application window.
          */
         ShowTerminalSizeHint,
+        /** (bool) If the background color should change to indicate if the window is active
+         */
+        IndicateActiveWindow,
         /** (QFont) The font to use in terminal displays using this profile. */
         Font,
         /** (QString) The name of the color scheme to use in terminal
@@ -437,6 +440,12 @@ public:
     bool showTerminalSizeHint() const
     {
         return property<bool>(Profile::ShowTerminalSizeHint);
+    }
+
+    /** Convenience method for property<bool>(Profile::IndicateActiveWindow) */
+    bool indicateActiveWindow() const
+    {
+        return property<bool>(Profile::IndicateActiveWindow);
     }
 
     /** Convenience method for property<QFont>(Profile::Font) */
