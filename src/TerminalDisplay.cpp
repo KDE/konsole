@@ -134,51 +134,63 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 
 const ColorEntry* TerminalDisplay::colorTable() const
 {
-    return _colorTable;
+    return _currentColorTable;
 }
 
-void TerminalDisplay::updateScrollBarPalette()
+void TerminalDisplay::onColorsChanged()
 {
+    for (int i = 0; i < TABLE_COLORS; i++) {
+        _dimColorTable[i] = _colorTable[i].darker();
+    }
+
+    // Update the normal widget palette
+    QPalette p = palette();
+
     QColor backgroundColor = _colorTable[DEFAULT_BACK_COLOR];
     backgroundColor.setAlphaF(_opacity);
-    QPalette p = palette();
-    p.setColor(QPalette::Window, backgroundColor);
+    p.setColor(QPalette::Active, backgroundRole(), backgroundColor);
+    p.setColor(QPalette::Active, QPalette::Window, backgroundColor);
 
+    backgroundColor = _dimColorTable[DEFAULT_BACK_COLOR];
+    backgroundColor.setAlphaF(_opacity);
+    p.setColor(QPalette::Inactive, backgroundRole(), backgroundColor);
+    p.setColor(QPalette::Inactive, QPalette::Window, backgroundColor);
+
+    setPalette(p);
+
+    // Fix the scrollbar
     //this is a workaround to add some readability to old themes like Fusion
     //changing the light value for button a bit makes themes like fusion, windows and oxygen way more readable and pleasing
     QColor buttonColor;
     buttonColor.setHsvF(backgroundColor.hueF(), backgroundColor.saturationF(), backgroundColor.valueF() + (backgroundColor.valueF() < 0.5 ? 0.2 : -0.2));
     p.setColor(QPalette::Button, buttonColor);
 
-    p.setColor(QPalette::WindowText, _colorTable[DEFAULT_FORE_COLOR]);
-    p.setColor(QPalette::ButtonText, _colorTable[DEFAULT_FORE_COLOR]);
+    p.setColor(QPalette::WindowText, _currentColorTable[DEFAULT_FORE_COLOR]);
+    p.setColor(QPalette::ButtonText, _currentColorTable[DEFAULT_FORE_COLOR]);
     _scrollBar->setPalette(p);
 
+    update();
 }
 
 void TerminalDisplay::setBackgroundColor(const QColor& color)
 {
-    _colorTable[DEFAULT_BACK_COLOR] = color;
+    _currentColorTable[DEFAULT_BACK_COLOR] = color;
 
-    QPalette p = palette();
-    p.setColor(backgroundRole(), color);
-    setPalette(p);
-
-    updateScrollBarPalette();
-    update();
+    onColorsChanged();
 }
+
 QColor TerminalDisplay::getBackgroundColor() const
 {
-    QPalette p = palette();
-    return p.color(backgroundRole());
+    return _currentColorTable[DEFAULT_BACK_COLOR];
 }
+
 void TerminalDisplay::setForegroundColor(const QColor& color)
 {
     _colorTable[DEFAULT_FORE_COLOR] = color;
 
-    updateScrollBarPalette();
-    update();
+    onColorsChanged();
 }
+
 void TerminalDisplay::setColorTable(const ColorEntry table[])
 {
     for (int i = 0; i < TABLE_COLORS; i++) {
@@ -186,6 +198,8 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
     }
 
     setBackgroundColor(_colorTable[DEFAULT_BACK_COLOR]);
+
+    onColorsChanged();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -470,7 +484,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _readOnlyMessageWidget(nullptr)
     , _readOnly(false)
     , _opacity(1.0)
-    , _indicateActive(false)
+    , _dimWhenInactive(false)
     , _scrollWheelState(ScrollState())
     , _searchBar(new IncrementalSearchBar(this))
 {
@@ -536,7 +550,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
 
     // To redraw when focused window changes
     connect(qApp, &QApplication::focusChanged, this, [=](QWidget *old, QWidget *now) {
-        if (!_indicateActive) {
+        if (!_dimWhenInactive) {
             return;
         }
         // If old or now is a nullptr, it means that either the old or new widget is not in this application
@@ -886,7 +900,7 @@ void TerminalDisplay::setOpacity(qreal opacity)
     }*/
 
     _blendColor = color.rgba();
-    updateScrollBarPalette();
+    onColorsChanged();
 }
 
 void TerminalDisplay::setWallpaper(ColorSchemeWallpaper::Ptr p)
@@ -915,33 +929,13 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
         QColor color(backgroundColor);
         color.setAlpha(qAlpha(_blendColor));
 
-        if (_indicateActive && !isActiveWindow()) {
-            if (color.lightness() < 128) {
-                color = color.lighter();
-            } else {
-                color = color.darker();
-            }
-        }
-
         painter.save();
         painter.setCompositionMode(QPainter::CompositionMode_Source);
         painter.fillRect(rect, color);
         painter.restore();
 #endif
     } else {
-        QColor color = backgroundColor.toHsv();
-        if (_indicateActive && !isActiveWindow()) {
-            if (color.lightness() == 0) {
-                const qreal hue = color.hue();
-                const qreal saturation = color.saturation();
-                color = QColor::fromHsv(hue, saturation, 64);
-            } else if (color.lightness() < 128) {
-                color = color.lighter();
-            } else {
-                color = color.darker();
-            }
-        }
-        painter.fillRect(rect, color);
+        painter.fillRect(rect, backgroundColor);
     }
 }
 
@@ -1035,7 +1029,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
 
     // setup pen
     const CharacterColor& textColor = (invertCharacterColor ? style->backgroundColor : style->foregroundColor);
-    const QColor color = textColor.color(_colorTable);
+    const QColor color = textColor.color(_currentColorTable);
     QPen pen = painter.pen();
     if (pen.color() != color) {
         pen.setColor(color);
@@ -1070,8 +1064,8 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
     painter.save();
 
     // setup painter
-    const QColor foregroundColor = style->foregroundColor.color(_colorTable);
-    const QColor backgroundColor = style->backgroundColor.color(_colorTable);
+    const QColor foregroundColor = style->foregroundColor.color(_currentColorTable);
+    const QColor backgroundColor = style->backgroundColor.color(_currentColorTable);
 
     // draw background if different from the display's background color
     if (backgroundColor != palette().background().color()) {
@@ -1508,6 +1502,12 @@ void TerminalDisplay::showResizeNotification()
 void TerminalDisplay::paintEvent(QPaintEvent* pe)
 {
     QPainter paint(this);
+
+    if (_dimWhenInactive && !isActiveWindow()) {
+        _currentColorTable = _dimColorTable;
+    } else {
+        _currentColorTable = _colorTable;
+    }
 
     foreach(const QRect & rect, (pe->region() & contentsRect()).rects()) {
         drawBackground(paint, rect, palette().background().color(),
@@ -3507,8 +3507,8 @@ void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRe
     const QPoint cursorPos = cursorPosition();
 
     bool invertColors = false;
-    const QColor background = _colorTable[DEFAULT_BACK_COLOR];
-    const QColor foreground = _colorTable[DEFAULT_FORE_COLOR];
+    const QColor background = _currentColorTable[DEFAULT_BACK_COLOR];
+    const QColor foreground = _currentColorTable[DEFAULT_FORE_COLOR];
     const Character* style = &_image[loc(cursorPos.x(), cursorPos.y())];
 
     drawBackground(painter, rect, background, true);
@@ -3804,9 +3804,9 @@ void TerminalDisplay::visualBell()
 void TerminalDisplay::swapFGBGColors()
 {
     // swap the default foreground & background color
-    ColorEntry color = _colorTable[DEFAULT_BACK_COLOR];
-    _colorTable[DEFAULT_BACK_COLOR] = _colorTable[DEFAULT_FORE_COLOR];
-    _colorTable[DEFAULT_FORE_COLOR] = color;
+    ColorEntry color = _currentColorTable[DEFAULT_BACK_COLOR];
+    _currentColorTable[DEFAULT_BACK_COLOR] = _currentColorTable[DEFAULT_FORE_COLOR];
+    _currentColorTable[DEFAULT_FORE_COLOR] = color;
 
     update();
 }

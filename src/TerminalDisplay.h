@@ -699,8 +699,8 @@ public Q_SLOTS:
     /**
      * Sets whether the background should change when the window loses focus
      */
-    void setIndicateActive(bool shouldIndicate) {
-        _indicateActive = shouldIndicate;
+    void setDimWhenInactive(bool shouldDim) {
+        _dimWhenInactive = shouldDim;
     }
 
     // Used to show/hide the message widget
@@ -805,7 +805,8 @@ protected:
     void inputMethodEvent(QInputMethodEvent *event) Q_DECL_OVERRIDE;
     QVariant inputMethodQuery(Qt::InputMethodQuery query) const Q_DECL_OVERRIDE;
 
-    void updateScrollBarPalette();
+    void onColorsChanged();
+
 protected Q_SLOTS:
 
     void scrollBarPositionChanged(int value);
@@ -961,6 +962,9 @@ private:
     QVector<LineProperty> _lineProperties;
 
     ColorEntry _colorTable[TABLE_COLORS];
+    ColorEntry _dimColorTable[TABLE_COLORS];
+    ColorEntry *_currentColorTable = _colorTable;
+
     uint _randomSeed;
 
     bool _resizing;
@@ -1071,7 +1075,7 @@ private:
 
     qreal _opacity;
 
-    bool _indicateActive;
+    bool _dimWhenInactive;
 
     ScrollState _scrollWheelState;
     IncrementalSearchBar *_searchBar;
