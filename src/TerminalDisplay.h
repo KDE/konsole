@@ -861,6 +861,7 @@ private:
 
     // maps an area in the character image to an area on the widget
     QRect imageToWidget(const QRect &imageArea) const;
+    QRect widgetToImage(const QRect &widgetArea) const;
 
     // maps a point on the widget to the position ( ie. line and column )
     // of the character at that point. When the edge is true, it maps to

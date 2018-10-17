@@ -1475,9 +1475,13 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 {
     QPainter paint(this);
 
+    // Determine which characters should be repainted (1 region unit = 1 character)
+    QRegion dirtyImageRegion;
     foreach(const QRect & rect, (pe->region() & contentsRect()).rects()) {
-        drawBackground(paint, rect, palette().background().color(),
-                       true /* use opacity setting */);
+        dirtyImageRegion += widgetToImage(rect);
+        drawBackground(paint, rect, palette().background().color(), true /* use opacity setting */);
+    }
+    foreach(const QRect & rect, dirtyImageRegion.rects()) {
         drawContents(paint, rect);
     }
     drawCurrentResultRect(paint);
@@ -1494,7 +1498,7 @@ void TerminalDisplay::printContent(QPainter& painter, bool friendly)
     painter.setFont(font);
     setVTFont(font);
 
-    QRect rect(0, 0, size().width(), size().height());
+    QRect rect(0, 0, _usedColumns, _usedLines);
 
     _printerFriendly = friendly;
     if (!friendly) {
@@ -1693,24 +1697,15 @@ inline static bool isRtl(const Character &chr) {
 
 void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
 {
-    const QPoint tL  = contentsRect().topLeft();
-    const int    tLx = tL.x();
-    const int    tLy = tL.y();
-
-    const int lux = qMin(_usedColumns - 1, qMax(0, (rect.left()   - tLx - _contentRect.left()) / _fontWidth));
-    const int luy = qMin(_usedLines - 1,  qMax(0, (rect.top()    - tLy - _contentRect.top()) / _fontHeight));
-    const int rlx = qMin(_usedColumns - 1, qMax(0, (rect.right()  - tLx - _contentRect.left()) / _fontWidth));
-    const int rly = qMin(_usedLines - 1,  qMax(0, (rect.bottom() - tLy - _contentRect.top()) / _fontHeight));
-
     const int numberOfColumns = _usedColumns;
     QVector<uint> univec;
     univec.reserve(numberOfColumns);
-    for (int y = luy; y <= rly; y++) {
-        int x = lux;
-        if ((_image[loc(lux, y)].character == 0u) && (x != 0)) {
+    for (int y = rect.y(); y <= rect.bottom(); y++) {
+        int x = rect.x();
+        if ((_image[loc(rect.x(), y)].character == 0u) && (x != 0)) {
             x--; // Search for start of multi-column character
         }
-        for (; x <= rlx; x++) {
+        for (; x <= rect.right(); x++) {
             int len = 1;
             int p = 0;
 
@@ -1751,7 +1746,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             const bool rtl = isRtl(_image[loc(x, y)]);
 
             if(_image[loc(x, y)].character <= 0x7e || rtl) {
-                while (x + len <= rlx &&
+                while (x + len <= rect.right() &&
                         _image[loc(x + len, y)].foregroundColor == currentForeground &&
                         _image[loc(x + len, y)].backgroundColor == currentBackground &&
                         (_image[loc(x + len, y)].rendition & ~RE_EXTENDED_CHAR) == (currentRendition & ~RE_EXTENDED_CHAR) &&
@@ -1817,7 +1812,10 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             paint.setWorldMatrix(textScale, true);
 
             //calculate the area in which the text will be drawn
-            QRect textArea = QRect(_contentRect.left() + tLx + _fontWidth * x , _contentRect.top() + tLy + _fontHeight * y , _fontWidth * len , _fontHeight);
+            QRect textArea = QRect(_contentRect.left() + contentsRect().left() + _fontWidth * x,
+                                   _contentRect.top() + contentsRect().top() + _fontHeight * y,
+                                   _fontWidth * len,
+                                   _fontHeight);
 
             //move the calculated area to take account of scaling applied to the painter.
             //the position of the area from the origin (0,0) is scaled
@@ -1882,6 +1880,16 @@ QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
     result.setWidth(_fontWidth * imageArea.width());
     result.setHeight(_fontHeight * imageArea.height());
 
+    return result;
+}
+
+QRect TerminalDisplay::widgetToImage(const QRect &widgetArea) const
+{
+    QRect result;
+    result.setLeft(  qMin(_usedColumns - 1, qMax(0, (widgetArea.left()   - contentsRect().left() - _contentRect.left()) / _fontWidth )));
+    result.setTop(   qMin(_usedLines   - 1, qMax(0, (widgetArea.top()    - contentsRect().top()  - _contentRect.top() ) / _fontHeight)));
+    result.setRight( qMin(_usedColumns - 1, qMax(0, (widgetArea.right()  - contentsRect().left() - _contentRect.left()) / _fontWidth )));
+    result.setBottom(qMin(_usedLines   - 1, qMax(0, (widgetArea.bottom() - contentsRect().top()  - _contentRect.top() ) / _fontHeight)));
     return result;
 }
 
