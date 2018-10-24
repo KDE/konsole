@@ -240,10 +240,7 @@ void TerminalDisplay::fontChange(const QFont&)
 void TerminalDisplay::setVTFont(const QFont& f)
 {
     QFont newFont(f);
-
-    // In case the provided font doesn't have some specific characters it should
-    // fall back to a Monospace fonts.
-    newFont.setStyleHint(QFont::TypeWriter);
+    int strategy = 0;
 
     QFontMetrics fontMetrics(newFont);
 
@@ -257,10 +254,30 @@ void TerminalDisplay::setVTFont(const QFont& f)
         return;
     }
 
-    // hint that text should be drawn without anti-aliasing.
+    // hint that text should be drawn with- or without anti-aliasing.
     // depending on the user's font configuration, this may not be respected
-    if (!_antialiasText) {
-        newFont.setStyleStrategy(QFont::StyleStrategy(newFont.styleStrategy() | QFont::NoAntialias));
+    strategy |= _antialiasText ? QFont::PreferAntialias : QFont::NoAntialias;
+
+    // Konsole cannot handle non-integer font metrics
+    strategy |= QFont::ForceIntegerMetrics;
+
+    // In case the provided font doesn't have some specific characters it should
+    // fall back to a Monospace fonts.
+    newFont.setStyleHint(QFont::TypeWriter, QFont::StyleStrategy(strategy));
+
+    // Try to check that a good font has been loaded.
+    // For some fonts, ForceIntegerMetrics causes height() == 0 which
+    // will cause Konsole to crash later.
+    QFontMetrics fontMetrics2(newFont);
+    if (fontMetrics2.height() < 1) {
+        qCDebug(KonsoleDebug)<<"The font "<<newFont.toString()<<" has an invalid height()";
+        // Ask for a generic font so at least it is usable.
+        // Font listed in profile's dialog will not be updated.
+        newFont = QFont(QStringLiteral("Monospace"));
+        // Set style strategy without ForceIntegerMetrics for the font
+        strategy &= ~QFont::ForceIntegerMetrics;
+        newFont.setStyleHint(QFont::TypeWriter, QFont::StyleStrategy(strategy));
+        qCDebug(KonsoleDebug)<<"Font changed to "<<newFont.toString();
     }
 
     // experimental optimization.  Konsole assumes that the terminal is using a
@@ -268,27 +285,7 @@ void TerminalDisplay::setVTFont(const QFont& f)
     // Disabling kerning saves some computation when rendering text.
     newFont.setKerning(false);
 
-    // Konsole cannot handle non-integer font metrics
-    newFont.setStyleStrategy(QFont::StyleStrategy(newFont.styleStrategy() | QFont::ForceIntegerMetrics));
-
-    // Try to check that a good font has been loaded.
-    // For some fonts, ForceIntegerMetrics causes height() == 0 which
-    // will cause Konsole to crash later.
-    QFontMetrics fontMetrics2(newFont);
-    if ((fontMetrics2.height() < 1)) {
-        qCDebug(KonsoleDebug)<<"The font "<<newFont.toString()<<" has an invalid height()";
-        // Ask for a generic font so at least it is usable.
-        // Font listed in profile's dialog will not be updated.
-        newFont = QFont(QStringLiteral("Monospace"));
-        newFont.setStyleHint(QFont::TypeWriter);
-        qCDebug(KonsoleDebug)<<"Font changed to "<<newFont.toString();
-    }
-
     QFontInfo fontInfo(newFont);
-
-//    if (!fontInfo.fixedPitch()) {
-//        qWarning() << "Using a variable-width font - this might cause display problems";
-//    }
 
     // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch()
     // related?  https://bugreports.qt.io/browse/QTBUG-34082

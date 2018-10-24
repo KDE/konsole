@@ -624,6 +624,7 @@ void EditProfileDialog::setAntialiasText(bool enable)
 
     // update preview to reflect text smoothing state
     fontSelected(profileFont);
+    preview(Profile::AntiAliasFonts, enable);
     updateTempProfileProperty(Profile::AntiAliasFonts, enable);
 }
 
