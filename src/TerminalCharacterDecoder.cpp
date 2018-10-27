@@ -264,21 +264,18 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
             //build up style string
             QString style;
 
-            //colors - a color table must have been defined first
-            if (_colorTable != nullptr) {
-                bool useBold = (_lastRendition & RE_BOLD) != 0;
-                if (useBold) {
-                    style.append(QLatin1String("font-weight:bold;"));
-                }
-
-                if ((_lastRendition & RE_UNDERLINE) != 0) {
-                    style.append(QLatin1String("font-decoration:underline;"));
-                }
-
-                style.append(QStringLiteral("color:%1;").arg(_lastForeColor.color(_colorTable).name()));
-
-                style.append(QStringLiteral("background-color:%1;").arg(_lastBackColor.color(_colorTable).name()));
+            bool useBold = (_lastRendition & RE_BOLD) != 0;
+            if (useBold) {
+                style.append(QLatin1String("font-weight:bold;"));
             }
+
+            if ((_lastRendition & RE_UNDERLINE) != 0) {
+                style.append(QLatin1String("font-decoration:underline;"));
+            }
+
+            style.append(QStringLiteral("color:%1;").arg(_lastForeColor.color(_colorTable).name()));
+
+            style.append(QStringLiteral("background-color:%1;").arg(_lastBackColor.color(_colorTable).name()));
 
             //open the span with the current style
             openSpan(text, style);
