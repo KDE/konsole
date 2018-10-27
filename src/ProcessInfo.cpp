@@ -623,7 +623,7 @@ protected:
         return true;
 #else
         int numrecords;
-        struct kinfo_file *info = 0;
+        struct kinfo_file *info = nullptr;
 
         info = kinfo_getfile(pid, &numrecords);
 
