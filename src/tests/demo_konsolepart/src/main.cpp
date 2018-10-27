@@ -41,7 +41,7 @@ int main(int argc, char **argv)
                      i18nc("@title", "Terminal emulator"),
                      KAboutLicense::GPL_V2,
                      i18nc("@info:credit", "(c) 2017, The Konsole Developers"),
-                     QStringLiteral(),
+                     QString(),
                      QStringLiteral("https://konsole.kde.org/"));
 
     KAboutData::setApplicationData(about);
