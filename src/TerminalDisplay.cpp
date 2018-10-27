@@ -137,48 +137,55 @@ const ColorEntry* TerminalDisplay::colorTable() const
     return _colorTable;
 }
 
-void TerminalDisplay::updateScrollBarPalette()
+void TerminalDisplay::onColorsChanged()
 {
+    // Mostly just fix the scrollbar
+    // this is a workaround to add some readability to old themes like Fusion
+    // changing the light value for button a bit makes themes like fusion, windows and oxygen way more readable and pleasing
+
+    QPalette p = QApplication::palette();
+
+    QColor buttonTextColor = _colorTable[DEFAULT_FORE_COLOR];
     QColor backgroundColor = _colorTable[DEFAULT_BACK_COLOR];
     backgroundColor.setAlphaF(_opacity);
-    QPalette p = palette();
-    p.setColor(QPalette::Window, backgroundColor);
 
-    //this is a workaround to add some readability to old themes like Fusion
-    //changing the light value for button a bit makes themes like fusion, windows and oxygen way more readable and pleasing
-    QColor buttonColor;
-    buttonColor.setHsvF(backgroundColor.hueF(), backgroundColor.saturationF(), backgroundColor.valueF() + (backgroundColor.valueF() < 0.5 ? 0.2 : -0.2));
+    QColor buttonColor = backgroundColor.toHsv();
+    if (buttonColor.valueF() < 0.5) {
+        buttonColor = buttonColor.lighter();
+    } else {
+        buttonColor = buttonColor.darker();
+    }
     p.setColor(QPalette::Button, buttonColor);
+    p.setColor(QPalette::Window, backgroundColor);
+    p.setColor(QPalette::WindowText, buttonTextColor);
+    p.setColor(QPalette::ButtonText, buttonTextColor);
 
-    p.setColor(QPalette::WindowText, _colorTable[DEFAULT_FORE_COLOR]);
-    p.setColor(QPalette::ButtonText, _colorTable[DEFAULT_FORE_COLOR]);
+    setPalette(p);
+
     _scrollBar->setPalette(p);
 
+    update();
 }
 
 void TerminalDisplay::setBackgroundColor(const QColor& color)
 {
     _colorTable[DEFAULT_BACK_COLOR] = color;
 
-    QPalette p = palette();
-    p.setColor(backgroundRole(), color);
-    setPalette(p);
-
-    updateScrollBarPalette();
-    update();
+    onColorsChanged();
 }
+
 QColor TerminalDisplay::getBackgroundColor() const
 {
-    QPalette p = palette();
-    return p.color(backgroundRole());
+    return _colorTable[DEFAULT_BACK_COLOR];
 }
+
 void TerminalDisplay::setForegroundColor(const QColor& color)
 {
     _colorTable[DEFAULT_FORE_COLOR] = color;
 
-    updateScrollBarPalette();
-    update();
+    onColorsChanged();
 }
+
 void TerminalDisplay::setColorTable(const ColorEntry table[])
 {
     for (int i = 0; i < TABLE_COLORS; i++) {
@@ -186,6 +193,8 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
     }
 
     setBackgroundColor(_colorTable[DEFAULT_BACK_COLOR]);
+
+    onColorsChanged();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -467,6 +476,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _readOnlyMessageWidget(nullptr)
     , _readOnly(false)
     , _opacity(1.0)
+    , _dimWhenInactive(false)
     , _scrollWheelState(ScrollState())
     , _searchBar(new IncrementalSearchBar(this))
 {
@@ -869,7 +879,7 @@ void TerminalDisplay::setOpacity(qreal opacity)
     }*/
 
     _blendColor = color.rgba();
-    updateScrollBarPalette();
+    onColorsChanged();
 }
 
 void TerminalDisplay::setWallpaper(ColorSchemeWallpaper::Ptr p)
@@ -1037,7 +1047,7 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
     const QColor backgroundColor = style->backgroundColor.color(_colorTable);
 
     // draw background if different from the display's background color
-    if (backgroundColor != palette().background().color()) {
+    if (backgroundColor != getBackgroundColor()) {
         drawBackground(painter, rect, backgroundColor,
                        false /* do not use transparency */);
     }
@@ -1476,14 +1486,23 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
     QRegion dirtyImageRegion;
     foreach(const QRect & rect, (pe->region() & contentsRect()).rects()) {
         dirtyImageRegion += widgetToImage(rect);
-        drawBackground(paint, rect, palette().background().color(), true /* use opacity setting */);
+        drawBackground(paint, rect, getBackgroundColor(), true /* use opacity setting */);
     }
+
     foreach(const QRect & rect, dirtyImageRegion.rects()) {
         drawContents(paint, rect);
     }
     drawCurrentResultRect(paint);
     drawInputMethodPreeditString(paint, preeditRect());
     paintFilters(paint);
+
+    const bool drawDimmed = _dimWhenInactive && !hasFocus();
+    const QColor dimColor(0, 0, 0, 128);
+    foreach(const QRect & rect, (pe->region() & contentsRect()).rects()) {
+        if (drawDimmed) {
+            paint.fillRect(rect, dimColor);
+        }
+    }
 }
 
 void TerminalDisplay::printContent(QPainter& painter, bool friendly)
@@ -1542,7 +1561,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     getCharacterPosition(cursorPos, cursorLine, cursorColumn, false);
     Character cursorCharacter = _image[loc(qMin(cursorColumn, _columns - 1), cursorLine)];
 
-    painter.setPen(QPen(cursorCharacter.foregroundColor.color(colorTable())));
+    painter.setPen(QPen(cursorCharacter.foregroundColor.color(_colorTable)));
 
     // iterate over hotspots identified by the display's currently active filters
     // and draw appropriate visuals to indicate the presence of the hotspot
@@ -3653,7 +3672,11 @@ bool TerminalDisplay::event(QEvent* event)
         break;
     case QEvent::PaletteChange:
     case QEvent::ApplicationPaletteChange:
-        _scrollBar->setPalette(QApplication::palette());
+        onColorsChanged();
+        break;
+    case QEvent::FocusOut:
+    case QEvent::FocusIn:
+        update();
         break;
     default:
         break;
@@ -3732,7 +3755,7 @@ void TerminalDisplay::swapFGBGColors()
     _colorTable[DEFAULT_BACK_COLOR] = _colorTable[DEFAULT_FORE_COLOR];
     _colorTable[DEFAULT_FORE_COLOR] = color;
 
-    update();
+    onColorsChanged();
 }
 
 /* --------------------------------------------------------------------- */

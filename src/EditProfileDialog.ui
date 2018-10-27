@@ -343,6 +343,16 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="dimWhenInactiveCheckbox">
+            <property name="toolTip">
+             <string>Indicate whether the window is active by dimming the colors</string>
+            </property>
+            <property name="text">
+             <string>Dim the colors when the window loses focus</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

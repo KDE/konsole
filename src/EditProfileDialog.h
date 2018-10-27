@@ -120,6 +120,7 @@ private Q_SLOTS:
     void terminalColumnsEntryChanged(int);
     void terminalRowsEntryChanged(int);
     void showTerminalSizeHint(bool);
+    void setDimWhenInactive(bool);
     void showEnvironmentEditor();
     void silenceSecondsChanged(int);
 
