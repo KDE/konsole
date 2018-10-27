@@ -158,7 +158,7 @@ void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
     const auto currentPos = QCursor::pos();
     for(const auto dropWidget : widgets) {
         if (dropWidget->rect().contains(dropWidget->mapFromGlobal(currentPos))) {
-            dropWidget->moveViewRequest(-1, id, this);
+            emit dropWidget->moveViewRequest(-1, id, this);
             removeView(widget(index));
         }
     }
