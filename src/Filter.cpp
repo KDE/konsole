@@ -573,9 +573,9 @@ static QString createFileRegex(const QStringList &patterns, const QString &fileP
     QStringList prefixes = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("+\\*$")));
     QStringList fullNames = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("$")));
 
-    suffixes.replaceInStrings(QStringLiteral("*"), QStringLiteral(""));
+    suffixes.replaceInStrings(QStringLiteral("*"), QString());
     suffixes.replaceInStrings(QStringLiteral("."), QStringLiteral("\\."));
-    prefixes.replaceInStrings(QStringLiteral("*"), QStringLiteral(""));
+    prefixes.replaceInStrings(QStringLiteral("*"), QString());
     prefixes.replaceInStrings(QStringLiteral("."), QStringLiteral("\\."));
 
     return QString(
