@@ -2782,8 +2782,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
     }
 
     _screenWindow->clearSelection();
-    QPoint bgnSel = pos;
-    _iPntSel = bgnSel;
+    _iPntSel = pos;
     _iPntSel.ry() += _scrollBar->value();
 
     _wordSelectionMode = true;
