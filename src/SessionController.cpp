@@ -1612,7 +1612,7 @@ void SessionController::sessionReadOnlyChanged() {
     updateReadOnlyActionStates();
 
     // Update all views
-    for (TerminalDisplay* view : session()->views()) {
+    foreach (TerminalDisplay* view, session()->views()) {
         if (view != _view.data()) {
             view->updateReadOnlyState(isReadOnly());
         }
