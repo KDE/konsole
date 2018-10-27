@@ -27,6 +27,7 @@
 
 // Konsole
 #include "Character.h"
+#include "Profile.h"
 #include "konsoleprivate_export.h"
 
 class QTextStream;
@@ -129,13 +130,7 @@ public:
     /**
      * Constructs an HTML decoder using a default black-on-white color scheme.
      */
-    HTMLDecoder();
-
-    /**
-     * Sets the color table which the decoder uses to produce the HTML color codes in its
-     * output
-     */
-    void setColorTable(const ColorEntry *table);
+    HTMLDecoder(const Profile::Ptr &profile = Profile::Ptr());
 
     void decodeLine(const Character * const characters, int count,
                     LineProperty properties) Q_DECL_OVERRIDE;
@@ -148,7 +143,8 @@ private:
     void closeSpan(QString &text);
 
     QTextStream *_output;
-    const ColorEntry *_colorTable;
+    Profile::Ptr _profile;
+    ColorEntry _colorTable[TABLE_COLORS];
     bool _innerSpanOpen;
     RenditionFlags _lastRendition;
     CharacterColor _lastForeColor;

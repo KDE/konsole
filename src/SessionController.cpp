@@ -1864,7 +1864,8 @@ void SaveHistoryTask::execute()
 
         if (((dialog->selectedNameFilter()).contains(QLatin1String("html"), Qt::CaseInsensitive)) ||
            ((dialog->selectedFiles()).at(0).endsWith(QLatin1String("html"), Qt::CaseInsensitive))) {
-            jobInfo.decoder = new HTMLDecoder();
+            Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
+            jobInfo.decoder = new HTMLDecoder(profile);
         } else {
             jobInfo.decoder = new PlainTextDecoder();
         }
