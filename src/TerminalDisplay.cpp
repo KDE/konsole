@@ -1531,7 +1531,7 @@ QPoint TerminalDisplay::cursorPosition() const
     if (!_screenWindow.isNull()) {
         return _screenWindow->cursorPosition();
     } else {
-        return QPoint(0, 0);
+        return {0, 0};
     }
 }
 
@@ -2910,7 +2910,7 @@ QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
         for (; line > 0; line--, lineInHistory--) {
             // Does previous line wrap around?
             if ((lineProperties[line - 1] & LINE_WRAPPED) == 0) {
-                return QPoint(0, lineInHistory - topVisibleLine);
+                return {0, lineInHistory - topVisibleLine};
             }
         }
 
@@ -2944,7 +2944,7 @@ QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
         for (; line < lineProperties.count() && lineInHistory < maxY; line++, lineInHistory++) {
             // Does current line wrap around?
             if ((lineProperties[line] & LINE_WRAPPED) == 0) {
-                return QPoint(_columns - 1, lineInHistory - topVisibleLine);
+                return {_columns - 1, lineInHistory - topVisibleLine};
             }
         }
 
@@ -3023,7 +3023,7 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
     }
 out:
     delete[] tmp_image;
-    return QPoint(x, y - firstVisibleLine);
+    return {x, y - firstVisibleLine};
 }
 
 QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
@@ -3094,7 +3094,7 @@ out:
     }
     delete[] tmp_image;
 
-    return QPoint(x, y);
+    return {x, y};
 }
 
 Screen::DecodingOptions TerminalDisplay::currentDecodingOptions()
@@ -3430,7 +3430,7 @@ QRect TerminalDisplay::preeditRect() const
     const int preeditLength = Character::stringWidth(_inputMethodData.preeditString);
 
     if (preeditLength == 0) {
-        return QRect();
+        return {};
     }
     const QRect stringRect(_contentRect.left() + _fontWidth * cursorPosition().x(),
                            _contentRect.top() + _fontHeight * cursorPosition().y(),

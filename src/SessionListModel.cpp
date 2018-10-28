@@ -122,7 +122,7 @@ int SessionListModel::rowCount(const QModelIndex &) const
 
 QModelIndex SessionListModel::parent(const QModelIndex &) const
 {
-    return QModelIndex();
+    return {};
 }
 
 void SessionListModel::sessionFinished()
@@ -143,6 +143,6 @@ QModelIndex SessionListModel::index(int row, int column, const QModelIndex &pare
     if (hasIndex(row, column, parent)) {
         return createIndex(row, column, _sessions[row]);
     } else {
-        return QModelIndex();
+        return {};
     }
 }

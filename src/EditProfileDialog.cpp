@@ -1762,5 +1762,5 @@ QSize ColorSchemeViewDelegate::sizeHint(const QStyleOptionViewItem &option, cons
     const int heightForWidth = (colorWidth * 2) + option.fontMetrics.height() + margin;
 
     // temporary
-    return QSize(width, heightForWidth);
+    return {width, heightForWidth};
 }

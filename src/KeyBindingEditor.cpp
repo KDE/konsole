@@ -330,7 +330,8 @@ QSize KeyBindingEditor::sizeHint() const
 {
     const auto parent = parentWidget();
     if (parent != nullptr) {
-        return QSize(parent->width() * 0.9, parent->height() * 0.95);
+        return {static_cast<int>(parent->width() * 0.9),
+                static_cast<int>(parent->height() * 0.95)};
     }
 
     return QSize();
