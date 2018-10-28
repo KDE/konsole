@@ -334,5 +334,5 @@ QSize KeyBindingEditor::sizeHint() const
                 static_cast<int>(parent->height() * 0.95)};
     }
 
-    return QSize();
+    return {};
 }

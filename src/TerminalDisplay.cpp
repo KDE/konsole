@@ -2923,7 +2923,7 @@ QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
         lineProperties = screen->getLineProperties(newRegionStart, lineInHistory - 1);
         line = lineInHistory - newRegionStart;
     }
-    return QPoint(0, lineInHistory - topVisibleLine);
+    return {0, lineInHistory - topVisibleLine};
 }
 
 /* Moving right/down from the line containing pnt, return the ending
@@ -2951,7 +2951,7 @@ QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
         line = 0;
         lineProperties = screen->getLineProperties(lineInHistory, qMin(lineInHistory + visibleScreenLines, maxY));
     }
-    return QPoint(_columns - 1, lineInHistory - topVisibleLine);
+    return {_columns - 1, lineInHistory - topVisibleLine};
 }
 
 QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
