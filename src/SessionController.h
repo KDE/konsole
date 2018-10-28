@@ -67,7 +67,7 @@ class EditProfileDialog;
 // SaveHistoryTask
 class TerminalCharacterDecoder;
 
-typedef QPointer<Session> SessionPtr;
+using SessionPtr = QPointer<Session>;
 
 /**
  * Provides the menu actions to manipulate a single terminal session and view pair.
@@ -519,7 +519,7 @@ public:
     void execute() Q_DECL_OVERRIDE;
 
 private:
-    typedef QPointer<ScreenWindow> ScreenWindowPtr;
+    using ScreenWindowPtr = QPointer<ScreenWindow>;
 
     void executeOnScreenWindow(SessionPtr session, ScreenWindowPtr window);
     void highlightResult(ScreenWindowPtr window, int position);
