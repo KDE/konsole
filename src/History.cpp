@@ -697,7 +697,7 @@ int CompactHistoryType::maximumLineCount() const
 HistoryScroll *CompactHistoryType::scroll(HistoryScroll *old) const
 {
     if (old != nullptr) {
-        CompactHistoryScroll *oldBuffer = dynamic_cast<CompactHistoryScroll *>(old);
+        auto *oldBuffer = dynamic_cast<CompactHistoryScroll *>(old);
         if (oldBuffer != nullptr) {
             oldBuffer->setMaxNbLines(_maxLines);
             return oldBuffer;
