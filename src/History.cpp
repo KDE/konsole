@@ -614,9 +614,7 @@ HistoryType::~HistoryType() = default;
 
 //////////////////////////////
 
-HistoryTypeNone::HistoryTypeNone()
-{
-}
+HistoryTypeNone::HistoryTypeNone() = default;
 
 bool HistoryTypeNone::isEnabled() const
 {
