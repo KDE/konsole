@@ -56,6 +56,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _pluggedController(nullptr),
     _sessionMap(QHash<TerminalDisplay *, Session *>()),
     _actionCollection(collection),
+    _navigationMethod(NoNavigation),
     _navigationVisibility(NavigationNotSet),
     _newTabBehavior(PutNewTabAtTheEnd),
     _managerId(0)
@@ -691,6 +692,8 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
         return;
     }
     KActionCollection *collection = _actionCollection;
+
+    _navigationMethod = method;
 
     // FIXME: The following disables certain actions for the KPart that it
     // doesn't actually have a use for, to avoid polluting the action/shortcut
