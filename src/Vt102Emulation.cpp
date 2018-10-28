@@ -24,7 +24,7 @@
 #include "Vt102Emulation.h"
 
 // Standard
-#include <stdio.h>
+#include <cstdio>
 #include <unistd.h>
 
 // Qt

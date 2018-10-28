@@ -25,8 +25,8 @@
 #include "Session.h"
 
 // Standard
-#include <stdlib.h>
-#include <signal.h>
+#include <cstdlib>
+#include <csignal>
 #include <unistd.h>
 
 // Qt

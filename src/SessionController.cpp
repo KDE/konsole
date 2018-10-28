@@ -79,7 +79,7 @@
 #include "TerminalCharacterDecoder.h"
 
 // For Unix signal names
-#include <signal.h>
+#include <csignal>
 
 using namespace Konsole;
 

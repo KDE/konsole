@@ -30,7 +30,7 @@
 #include <unistd.h>
 #include <pwd.h>
 #include <sys/param.h>
-#include <errno.h>
+#include <cerrno>
 
 // Qt
 #include <QDir>

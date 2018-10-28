@@ -25,7 +25,7 @@
 
 // System
 #include <termios.h>
-#include <signal.h>
+#include <csignal>
 
 // Qt
 #include <QStringList>

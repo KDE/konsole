@@ -25,9 +25,9 @@
 #include "KonsoleSettings.h"
 
 // System
-#include <errno.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cerrno>
+#include <cstdlib>
+#include <cstdio>
 #include <sys/types.h>
 
 // KDE
