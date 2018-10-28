@@ -125,7 +125,7 @@ KParts::Part* PartManualTest::createPart()
     KPluginFactory* factory = KPluginLoader(service->library()).factory();
     Q_ASSERT(factory);
 
-    KParts::Part* terminalPart = factory->create<KParts::Part>(this);
+    auto* terminalPart = factory->create<KParts::Part>(this);
 
     return terminalPart;
 }

@@ -91,7 +91,7 @@ KParts::ReadOnlyPart* demo_konsolepart::createPart()
     KPluginFactory* factory = KPluginLoader(service->library()).factory();
     Q_ASSERT(factory);
 
-    KParts::ReadOnlyPart* terminalPart = factory->create<KParts::ReadOnlyPart>(this);
+    auto* terminalPart = factory->create<KParts::ReadOnlyPart>(this);
 
     return terminalPart;
 }

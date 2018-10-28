@@ -334,7 +334,7 @@ void Session::addView(TerminalDisplay* widget)
 
 void Session::viewDestroyed(QObject* view)
 {
-    TerminalDisplay* display = reinterpret_cast<TerminalDisplay*>(view);
+    auto* display = reinterpret_cast<TerminalDisplay*>(view);
 
     Q_ASSERT(_views.contains(display));
 
@@ -1722,7 +1722,7 @@ void SessionGroup::removeSession(Session* session)
 }
 void SessionGroup::sessionFinished()
 {
-    Session* session = qobject_cast<Session*>(sender());
+    auto* session = qobject_cast<Session*>(sender());
     Q_ASSERT(session);
     removeSession(session);
 }

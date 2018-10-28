@@ -56,7 +56,7 @@ void ViewSplitter::adjustContainerSize(TabbedViewContainer *container, int perce
     QList<int> containerSizes = sizes();
 
     const int oldSize = containerSizes[containerIndex];
-    const int newSize = static_cast<int>(oldSize * (1.0 + percentage / 100.0));
+    const auto newSize = static_cast<int>(oldSize * (1.0 + percentage / 100.0));
 
     const int perContainerDelta = (count() == 1) ? 0 : ((newSize - oldSize) / (count() - 1)) * (-1);
 

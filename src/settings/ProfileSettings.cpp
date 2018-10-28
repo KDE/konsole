@@ -405,7 +405,7 @@ void ProfileSettings::setShortcutEditorVisible(bool visible)
 void StyledBackgroundPainter::drawBackground(QPainter* painter, const QStyleOptionViewItem& option,
         const QModelIndex&)
 {
-    const QStyleOptionViewItemV3* v3option = qstyleoption_cast<const QStyleOptionViewItemV3*>(&option);
+    const auto* v3option = qstyleoption_cast<const QStyleOptionViewItemV3*>(&option);
     const QWidget* widget = v3option != nullptr ? v3option->widget : nullptr;
 
     QStyle* style = widget != nullptr ? widget->style() : QApplication::style();
@@ -459,7 +459,7 @@ void ShortcutItemDelegate::editorModified(const QKeySequence& keys)
 {
     Q_UNUSED(keys);
 
-    KKeySequenceWidget* editor = qobject_cast<KKeySequenceWidget*>(sender());
+    auto* editor = qobject_cast<KKeySequenceWidget*>(sender());
     Q_ASSERT(editor);
     _modifiedEditors.insert(editor);
     emit commitData(editor);

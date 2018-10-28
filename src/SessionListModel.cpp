@@ -127,7 +127,7 @@ QModelIndex SessionListModel::parent(const QModelIndex &) const
 
 void SessionListModel::sessionFinished()
 {
-    Session *session = qobject_cast<Session *>(sender());
+    auto *session = qobject_cast<Session *>(sender());
     int row = _sessions.indexOf(session);
 
     if (row != -1) {

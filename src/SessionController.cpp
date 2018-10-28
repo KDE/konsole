@@ -436,7 +436,7 @@ void SessionController::updateWebSearchMenu()
 
 void SessionController::handleWebShortcutAction()
 {
-    QAction * action = qobject_cast<QAction*>(sender());
+    auto * action = qobject_cast<QAction*>(sender());
     if (action == nullptr) {
         return;
     }
@@ -456,7 +456,7 @@ void SessionController::configureWebShortcuts()
 
 void SessionController::sendSignal(QAction* action)
 {
-    const int signal = action->data().value<int>();
+    const auto signal = action->data().value<int>();
     _session->sendSignal(signal);
 }
 
@@ -468,7 +468,7 @@ void SessionController::sendBackgroundColor()
 
 void SessionController::toggleReadOnly()
 {
-    QAction *action = qobject_cast<QAction*>(sender());
+    auto *action = qobject_cast<QAction*>(sender());
     if (action != nullptr) {
         bool readonly = !isReadOnly();
         _session->setReadOnly(readonly);
@@ -660,20 +660,20 @@ void SessionController::setupExtraActions()
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_S);
 
     // Copy input to ==> all tabs
-    KToggleAction* copyInputToAllTabsAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-all-tabs"));
+    auto* copyInputToAllTabsAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-all-tabs"));
     copyInputToAllTabsAction->setText(i18n("&All Tabs in Current Window"));
     copyInputToAllTabsAction->setData(CopyInputToAllTabsMode);
     // this action is also used in other place, so remember it
     _copyInputToAllTabsAction = copyInputToAllTabsAction;
 
     // Copy input to ==> selected tabs
-    KToggleAction* copyInputToSelectedTabsAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-selected-tabs"));
+    auto* copyInputToSelectedTabsAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-selected-tabs"));
     copyInputToSelectedTabsAction->setText(i18n("&Select Tabs..."));
     collection->setDefaultShortcut(copyInputToSelectedTabsAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Period);
     copyInputToSelectedTabsAction->setData(CopyInputToSelectedTabsMode);
 
     // Copy input to ==> none
-    KToggleAction* copyInputToNoneAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-none"));
+    auto* copyInputToNoneAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-none"));
     copyInputToNoneAction->setText(i18nc("@action:inmenu Do not select any tabs", "&None"));
     collection->setDefaultShortcut(copyInputToNoneAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Slash);
     copyInputToNoneAction->setData(CopyInputToNoneMode);
@@ -681,7 +681,7 @@ void SessionController::setupExtraActions()
 
     // The "Copy Input To" submenu
     // The above three choices are represented as combo boxes
-    KSelectAction* copyInputActions = collection->add<KSelectAction>(QStringLiteral("copy-input-to"));
+    auto* copyInputActions = collection->add<KSelectAction>(QStringLiteral("copy-input-to"));
     copyInputActions->setText(i18n("Copy Input To"));
     copyInputActions->addAction(copyInputToAllTabsAction);
     copyInputActions->addAction(copyInputToSelectedTabsAction);
@@ -723,7 +723,7 @@ void SessionController::setupExtraActions()
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_0);
 
     // Send signal
-    KSelectAction* sendSignalActions = collection->add<KSelectAction>(QStringLiteral("send-signal"));
+    auto* sendSignalActions = collection->add<KSelectAction>(QStringLiteral("send-signal"));
     sendSignalActions->setText(i18n("Send Signal"));
     connect(sendSignalActions, static_cast<void(KSelectAction::*)(QAction*)>(&KSelectAction::triggered), this, &Konsole::SessionController::sendSignal);
 
@@ -985,7 +985,7 @@ static const KXmlGuiWindow* findWindow(const QObject* object)
 {
     // Walk up the QObject hierarchy to find a KXmlGuiWindow.
     while (object != nullptr) {
-        const KXmlGuiWindow* window = qobject_cast<const KXmlGuiWindow*>(object);
+        const auto* window = qobject_cast<const KXmlGuiWindow*>(object);
         if (window != nullptr) {
             return(window);
         }
@@ -1009,7 +1009,7 @@ static bool hasTerminalDisplayInSameWindow(const Session* session, const KXmlGui
 
 void SessionController::copyInputActionsTriggered(QAction* action)
 {
-    const int mode = action->data().value<int>();
+    const auto mode = action->data().value<int>();
 
     switch (mode) {
     case CopyInputToAllTabsMode:

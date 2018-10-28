@@ -382,7 +382,7 @@ namespace Konsole
 QAccessibleInterface* accessibleInterfaceFactory(const QString &key, QObject *object)
 {
     Q_UNUSED(key)
-    if (TerminalDisplay *display = qobject_cast<TerminalDisplay*>(object)) {
+    if (auto *display = qobject_cast<TerminalDisplay*>(object)) {
         return new TerminalDisplayAccessible(display);
     }
     return nullptr;
@@ -845,7 +845,7 @@ void TerminalDisplay::resetCursorStyle()
     Profile::Ptr currentProfile = SessionManager::instance()->sessionProfile(_sessionController->session());
 
     if (currentProfile != nullptr) {
-        Enum::CursorShapeEnum shape = static_cast<Enum::CursorShapeEnum>(currentProfile->property<int>(Profile::CursorShape));
+        auto shape = static_cast<Enum::CursorShapeEnum>(currentProfile->property<int>(Profile::CursorShape));
 
         setKeyboardCursorShape(shape);
         setBlinkingCursorEnabled(currentProfile->blinkingCursorEnabled());
@@ -2301,7 +2301,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
     if (ev->button() == Qt::LeftButton) {
         // request the software keyboard, if any
         if (qApp->autoSipEnabled()) {
-            QStyle::RequestSoftwareInputPanel behavior = QStyle::RequestSoftwareInputPanel(
+            auto behavior = QStyle::RequestSoftwareInputPanel(
                         style()->styleHint(QStyle::SH_RequestSoftwareInputPanel));
             if (hasFocus() || behavior == QStyle::RSIP_OnMouseClick) {
                 QEvent event(QEvent::RequestSoftwareInputPanel);
@@ -3872,7 +3872,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 void TerminalDisplay::dropMenuPasteActionTriggered()
 {
     if (sender() != nullptr) {
-        const QAction* action = qobject_cast<const QAction*>(sender());
+        const auto* action = qobject_cast<const QAction*>(sender());
         if (action != nullptr) {
             emit sendStringToEmu(action->data().toString().toLocal8Bit());
         }
@@ -3882,7 +3882,7 @@ void TerminalDisplay::dropMenuPasteActionTriggered()
 void TerminalDisplay::dropMenuCdActionTriggered()
 {
     if (sender() != nullptr) {
-        const QAction* action = qobject_cast<const QAction*>(sender());
+        const auto* action = qobject_cast<const QAction*>(sender());
         if (action != nullptr) {
             emit sendStringToEmu(action->data().toString().toLocal8Bit());
         }
@@ -3946,7 +3946,7 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
 
     switch (event->type()) {
     case QEvent::MouseMove: {
-        QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+        auto* mouseEvent = static_cast<QMouseEvent*>(event);
         bool mouseInWidget = widget()->rect().contains(mouseEvent->pos());
         if (mouseInWidget) {
             if (_timerId != 0) {
@@ -3963,7 +3963,7 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
         break;
     }
     case QEvent::MouseButtonRelease: {
-        QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+        auto* mouseEvent = static_cast<QMouseEvent*>(event);
         if ((_timerId != 0) && ((mouseEvent->buttons() & ~Qt::LeftButton) != 0u)) {
             killTimer(_timerId);
             _timerId = 0;

@@ -215,8 +215,8 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr profile,
 
     if (apply.shouldApply(Profile::TerminalColumns)
         || apply.shouldApply(Profile::TerminalRows)) {
-        const int columns = profile->property<int>(Profile::TerminalColumns);
-        const int rows = profile->property<int>(Profile::TerminalRows);
+        const auto columns = profile->property<int>(Profile::TerminalColumns);
+        const auto rows = profile->property<int>(Profile::TerminalRows);
         session->setPreferredSize(QSize(columns, rows));
     }
 
@@ -243,7 +243,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr profile,
 
     // History
     if (apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize)) {
-        const int mode = profile->property<int>(Profile::HistoryMode);
+        const auto mode = profile->property<int>(Profile::HistoryMode);
         switch (mode) {
         case Enum::NoHistory:
             session->setHistoryType(HistoryTypeNone());
@@ -281,7 +281,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr profile,
 
 void SessionManager::sessionProfileCommandReceived(const QString &text)
 {
-    Session *session = qobject_cast<Session *>(sender());
+    auto *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
 
     // store the font for each view if zoom was applied so that they can

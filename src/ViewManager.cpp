@@ -354,7 +354,7 @@ void ViewManager::detachView(TabbedViewContainer *container, QWidget *view)
     return;
 #endif
 
-    TerminalDisplay *viewToDetach = qobject_cast<TerminalDisplay *>(view);
+    auto *viewToDetach = qobject_cast<TerminalDisplay *>(view);
 
     if (viewToDetach == nullptr) {
         return;
@@ -390,7 +390,7 @@ void ViewManager::sessionFinished()
         return;
     }
 
-    Session *session = qobject_cast<Session *>(sender());
+    auto *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
 
     // close attached views
@@ -473,7 +473,7 @@ void ViewManager::removeContainer(TabbedViewContainer *container)
     // remove session map entries for views in this container
     for(int i = 0, end = container->count(); i < end; i++) {
         auto view = container->widget(i);
-        TerminalDisplay *display = qobject_cast<TerminalDisplay *>(view);
+        auto *display = qobject_cast<TerminalDisplay *>(view);
         Q_ASSERT(display);
         _sessionMap.remove(display);
     }
@@ -657,8 +657,8 @@ TabbedViewContainer *ViewManager::createContainer()
 void ViewManager::containerMoveViewRequest(int index, int id,
                                            TabbedViewContainer *sourceTabbedContainer)
 {
-    TabbedViewContainer *container = qobject_cast<TabbedViewContainer *>(sender());
-    SessionController *controller = qobject_cast<SessionController *>(ViewProperties::propertiesById(id));
+    auto *container = qobject_cast<TabbedViewContainer *>(sender());
+    auto *controller = qobject_cast<SessionController *>(ViewProperties::propertiesById(id));
 
     if (controller == nullptr) {
         return;
@@ -737,7 +737,7 @@ void ViewManager::viewDestroyed(QWidget *view)
     // Note: the received QWidget has already been destroyed, so
     // using dynamic_cast<> or qobject_cast<> does not work here
     // We only need the pointer address to look it up below
-    TerminalDisplay *display = reinterpret_cast<TerminalDisplay *>(view);
+    auto *display = reinterpret_cast<TerminalDisplay *>(view);
 
     // 1. detach view from session
     // 2. if the session has no views left, close it
@@ -916,9 +916,9 @@ void ViewManager::saveSessions(KConfigGroup &group)
     }
     ids.reserve(container->count());
 
-    TerminalDisplay *activeview = qobject_cast<TerminalDisplay *>(container->currentWidget());
+    auto *activeview = qobject_cast<TerminalDisplay *>(container->currentWidget());
     for (int i = 0, end = container->count(); i < end; i++) {
-        TerminalDisplay *view = qobject_cast<TerminalDisplay *>(container->widget(i));
+        auto *view = qobject_cast<TerminalDisplay *>(container->widget(i));
         Q_ASSERT(view);
 
         Session *session = _sessionMap[view];

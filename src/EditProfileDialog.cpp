@@ -667,7 +667,7 @@ void EditProfileDialog::updateColorSchemeList(const QString &selectedColorScheme
 
     const ColorScheme *selectedColorScheme = ColorSchemeManager::instance()->findColorScheme(selectedColorSchemeName);
 
-    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(_ui->colorSchemeList->model());
+    auto *model = qobject_cast<QStandardItemModel *>(_ui->colorSchemeList->model());
 
     Q_ASSERT(model);
 
@@ -710,7 +710,7 @@ void EditProfileDialog::updateKeyBindingsList(const QString &selectKeyBindingsNa
         _ui->keyBindingList->setModel(new QStandardItemModel(this));
     }
 
-    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(_ui->keyBindingList->model());
+    auto *model = qobject_cast<QStandardItemModel *>(_ui->keyBindingList->model());
 
     Q_ASSERT(model);
 
@@ -1032,7 +1032,7 @@ void EditProfileDialog::colorSchemeSelected()
 
     if (!selected.isEmpty()) {
         QAbstractItemModel *model = _ui->colorSchemeList->model();
-        const ColorScheme *colors = model->data(selected.first(), Qt::UserRole + 1).value<const ColorScheme *>();
+        const auto *colors = model->data(selected.first(), Qt::UserRole + 1).value<const ColorScheme *>();
         if (colors != nullptr) {
             updateTempProfileProperty(Profile::ColorScheme, colors->name());
             previewColorScheme(selected.first());
@@ -1187,7 +1187,7 @@ void EditProfileDialog::keyBindingSelected()
 
     if (!selected.isEmpty()) {
         QAbstractItemModel *model = _ui->keyBindingList->model();
-        const KeyboardTranslator *translator = model->data(selected.first(), Qt::UserRole + 1)
+        const auto *translator = model->data(selected.first(), Qt::UserRole + 1)
                                                .value<const KeyboardTranslator *>();
         if (translator != nullptr) {
             updateTempProfileProperty(Profile::KeyBindings, translator->name());
@@ -1282,7 +1282,7 @@ void EditProfileDialog::setupRadio(const QVector<RadioOption>& possibilities, in
 void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
 {
     // setup scrollbar radio
-    int scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
+    auto scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
 
     const auto positions = QVector<RadioOption>{ {_ui->scrollBarHiddenButton, Enum::ScrollBarHidden, SLOT(hideScrollBar())},
                                 {_ui->scrollBarLeftButton, Enum::ScrollBarLeft, SLOT(showScrollBarLeft())},
@@ -1291,7 +1291,7 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     setupRadio(positions, scrollBarPosition);
 
     // setup scrollback type radio
-    int scrollBackType = profile->property<int>(Profile::HistoryMode);
+    auto scrollBackType = profile->property<int>(Profile::HistoryMode);
     _ui->historySizeWidget->setMode(Enum::HistoryModeEnum(scrollBackType));
     connect(_ui->historySizeWidget, &Konsole::HistorySizeWidget::historyModeChanged, this,
             &Konsole::EditProfileDialog::historyModeChanged);
@@ -1301,7 +1301,7 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
     _ui->historySizeWidget->setLineCount(historySize);
 
     // setup scrollpageamount type radio
-    int scrollFullPage = profile->property<int>(Profile::ScrollFullPage);
+    auto scrollFullPage = profile->property<int>(Profile::ScrollFullPage);
 
     const auto pageamounts = QVector<RadioOption>{
         {_ui->scrollHalfPage, Enum::ScrollPageHalf, SLOT(scrollHalfPage())},
@@ -1397,7 +1397,7 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
     setupCheckBoxes(options, profile);
 
     // setup middle click paste mode
-    const int middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
+    const auto middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
     const auto pasteModes = QVector<RadioOption> {
         {_ui->pasteFromX11SelectionButton, Enum::PasteFromX11Selection, SLOT(pasteFromX11Selection())},
         {_ui->pasteFromClipboardButton, Enum::PasteFromClipboard, SLOT(pasteFromClipboard())}    };
@@ -1408,7 +1408,7 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
 
     connect(_ui->wordCharacterEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::wordCharactersChanged);
 
-    int tripleClickMode = profile->property<int>(Profile::TripleClickMode);
+    auto tripleClickMode = profile->property<int>(Profile::TripleClickMode);
     _ui->tripleClickModeCombo->setCurrentIndex(tripleClickMode);
 
     connect(_ui->tripleClickModeCombo, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &Konsole::EditProfileDialog::TripleClickModeChanged);
@@ -1447,7 +1447,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 
     // Setup the URL hints modifier checkboxes
     {
-        int modifiers = profile->property<int>(Profile::UrlHintsModifiers);
+        auto modifiers = profile->property<int>(Profile::UrlHintsModifiers);
         _ui->urlHintsModifierShift->setChecked((modifiers &Qt::ShiftModifier) != 0u);
         _ui->urlHintsModifierCtrl->setChecked((modifiers &Qt::ControlModifier) != 0u);
         _ui->urlHintsModifierAlt->setChecked((modifiers &Qt::AltModifier) != 0u);
@@ -1476,7 +1476,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     connect(_ui->autoCursorColorButton, &QRadioButton::clicked, this, &Konsole::EditProfileDialog::autoCursorColor);
     connect(_ui->customColorSelectButton, &KColorButton::changed, this, &Konsole::EditProfileDialog::customCursorColorChanged);
 
-    int shape = profile->property<int>(Profile::CursorShape);
+    auto shape = profile->property<int>(Profile::CursorShape);
     _ui->cursorShapeCombo->setCurrentIndex(shape);
 
     connect(_ui->cursorShapeCombo, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &Konsole::EditProfileDialog::setCursorShape);
@@ -1694,7 +1694,7 @@ ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject *aParent) :
 
 void ColorSchemeViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    const ColorScheme *scheme = index.data(Qt::UserRole + 1).value<const ColorScheme *>();
+    const auto *scheme = index.data(Qt::UserRole + 1).value<const ColorScheme *>();
     QFont profileFont = index.data(Qt::UserRole + 2).value<QFont>();
     Q_ASSERT(scheme);
     if (scheme == nullptr) {

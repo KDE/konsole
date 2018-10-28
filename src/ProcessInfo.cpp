@@ -430,7 +430,7 @@ protected:
         char path_buffer[MAXPATHLEN + 1];
         path_buffer[MAXPATHLEN] = 0;
         QByteArray procCwd = QFile::encodeName(QStringLiteral("/proc/%1/cwd").arg(pid));
-        const int length = static_cast<int>(readlink(procCwd.constData(), path_buffer, MAXPATHLEN));
+        const auto length = static_cast<int>(readlink(procCwd.constData(), path_buffer, MAXPATHLEN));
         if (length == -1) {
             setError(UnknownError);
             return false;
