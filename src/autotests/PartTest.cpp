@@ -108,7 +108,7 @@ KParts::Part *PartTest::createPart()
         return nullptr;
     }
 
-    KParts::Part *terminalPart = factory->create<KParts::Part>(this);
+    auto *terminalPart = factory->create<KParts::Part>(this);
 
     return terminalPart;
 }
