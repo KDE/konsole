@@ -414,7 +414,6 @@ private:
     NavigationMethod _navigationMethod;
     NavigationVisibility _navigationVisibility;
     NewTabBehavior _newTabBehavior;
-    QString _navigationStyleSheet;
     int _managerId;
     static int lastManagerId;
 };
