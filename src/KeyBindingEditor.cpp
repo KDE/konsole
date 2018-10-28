@@ -168,7 +168,7 @@ bool KeyBindingEditor::eventFilter(QObject *watched, QEvent *event)
 {
     if (watched == _ui->testAreaInputEdit) {
         if (event->type() == QEvent::KeyPress) {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            auto *keyEvent = static_cast<QKeyEvent *>(event);
 
             // The state here is currently set to the state that a newly started
             // terminal in Konsole will be in ( which is also the same as the

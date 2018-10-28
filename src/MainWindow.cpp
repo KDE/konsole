@@ -695,7 +695,7 @@ void MainWindow::showShortcutsDialog()
     if (dialog.configure()) {
         // sync shortcuts for non-session actions (defined in "konsoleui.rc") in other main windows
         foreach (QWidget *mainWindowWidget, QApplication::topLevelWidgets()) {
-            MainWindow *mainWindow = qobject_cast<MainWindow *>(mainWindowWidget);
+            auto *mainWindow = qobject_cast<MainWindow *>(mainWindowWidget);
             if ((mainWindow != nullptr) && mainWindow != this) {
                 syncActiveShortcuts(mainWindow->actionCollection(), actionCollection());
             }
