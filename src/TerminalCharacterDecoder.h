@@ -130,7 +130,7 @@ public:
     /**
      * Constructs an HTML decoder using a default black-on-white color scheme.
      */
-    HTMLDecoder(const Profile::Ptr &profile = Profile::Ptr());
+    explicit HTMLDecoder(const Profile::Ptr &profile = Profile::Ptr());
 
     void decodeLine(const Character * const characters, int count,
                     LineProperty properties) Q_DECL_OVERRIDE;
