@@ -87,6 +87,7 @@ using namespace Konsole;
 // activity are available
 Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _activityIcon, (QIcon::fromTheme(QLatin1String("dialog-information"))))
 Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _silenceIcon, (QIcon::fromTheme(QLatin1String("dialog-information"))))
+Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _bellIcon, (QIcon::fromTheme(QLatin1String("preferences-desktop-notification-bell"))))
 Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _broadcastIcon, (QIcon::fromTheme(QLatin1String("emblem-important"))))
 
 QSet<SessionController*> SessionController::_allControllers;
@@ -202,6 +203,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     _interactionTimer->setSingleShot(true);
     _interactionTimer->setInterval(500);
     connect(_interactionTimer, &QTimer::timeout, this, &Konsole::SessionController::snapshot);
+    connect(_view.data(), &Konsole::TerminalDisplay::focusGained, this, &Konsole::SessionController::interactionHandler);
     connect(_view.data(), &Konsole::TerminalDisplay::keyPressedSignal, this, &Konsole::SessionController::interactionHandler);
 
     // take a snapshot of the session state periodically in the background
@@ -1704,6 +1706,9 @@ void SessionController::sessionStateChanged(int state)
         _keepIconUntilInteraction = true;
     } else if (state == NOTIFYSILENCE) {
         setIcon(*_silenceIcon);
+        _keepIconUntilInteraction = true;
+    } else if (state == NOTIFYBELL) {
+        setIcon(*_bellIcon);
         _keepIconUntilInteraction = true;
     } else if (state == NOTIFYNORMAL) {
         if (_sessionIconName != _session->iconName()) {
