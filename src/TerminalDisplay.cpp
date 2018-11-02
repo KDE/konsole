@@ -3047,13 +3047,17 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
         const int lineCount = lineProperties.count();
         for (;;j++, x++) {
             if (x < maxX) {
-                if (charClass(image[j + 1]) == selClass) {
+                if (charClass(image[j + 1]) == selClass &&
+                    // A colon right before whitespace is never part of a word
+                    ! (image[j + 1].character == ':' && charClass(image[j + 2]) == QLatin1Char(' '))) {
                     continue;
                 }
                 goto out;
             } else if (i < lineCount - 1) {
                 if (((lineProperties[i] & LINE_WRAPPED) != 0) &&
-                    charClass(image[j + 1]) == selClass) {
+                    charClass(image[j + 1]) == selClass &&
+                    // A colon right before whitespace is never part of a word
+                    ! (image[j + 1].character == ':' && charClass(image[j + 2]) == QLatin1Char(' '))) {
                     x = -1;
                     i++;
                     y++;
