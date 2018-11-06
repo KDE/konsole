@@ -166,12 +166,22 @@ void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
 
 void TabbedViewContainer::konsoleConfigChanged()
 {
-    // if we start with --show-tabbar or --hide-tabbar we ignore the preferences.
-    setTabBarAutoHide(KonsoleSettings::tabBarVisibility() == KonsoleSettings::EnumTabBarVisibility::ShowTabBarWhenNeeded);
-    if (KonsoleSettings::tabBarVisibility() == KonsoleSettings::EnumTabBarVisibility::AlwaysShowTabBar) {
-        tabBar()->setVisible(true);
-    } else if (KonsoleSettings::tabBarVisibility() == KonsoleSettings::EnumTabBarVisibility::AlwaysHideTabBar) {
+    // don't show tabs if we are in KParts mode.
+    // This is a hack, and this needs to be rewritten.
+    // The container should not be part of the KParts, perhaps just the
+    // TerminalDisplay should.
+    auto controller = _navigation[widget(_contextMenuTabIndex)];
+    auto sessionController = qobject_cast<SessionController*>(controller);
+    if (sessionController->isKonsolePart()) {
         tabBar()->setVisible(false);
+    } else {
+        // if we start with --show-tabbar or --hide-tabbar we ignore the preferences.
+        setTabBarAutoHide(KonsoleSettings::tabBarVisibility() == KonsoleSettings::EnumTabBarVisibility::ShowTabBarWhenNeeded);
+        if (KonsoleSettings::tabBarVisibility() == KonsoleSettings::EnumTabBarVisibility::AlwaysShowTabBar) {
+            tabBar()->setVisible(true);
+        } else if (KonsoleSettings::tabBarVisibility() == KonsoleSettings::EnumTabBarVisibility::AlwaysHideTabBar) {
+            tabBar()->setVisible(false);
+        }
     }
 
     setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
