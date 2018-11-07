@@ -425,6 +425,7 @@
   <url type="homepage">https://konsole.kde.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=konsole</url>
   <url type="help">https://docs.kde.org/?application=konsole</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=konsole&amp;source=appdata</url>
   <screenshots>
     <screenshot type="default">
       <image>https://kde.org/images/screenshots/konsole.png</image>
