@@ -1884,7 +1884,7 @@ void TerminalDisplay::drawCurrentResultRect(QPainter& painter)
     }
 
     QRect r(0, _contentRect.top() + (_screenWindow->currentResultLine() - _screenWindow->currentLine()) * _fontHeight,
-            contentsRect().width(), _fontHeight);
+            _columns * _fontWidth, _fontHeight);
     painter.fillRect(r, QColor(0, 0, 255, 80));
 }
 
