@@ -528,8 +528,6 @@ private:
     QRegularExpression _regExp;
     Enum::SearchDirection _direction;
     int _startLine;
-
-    //static QPointer<SearchHistoryThread> _thread;
 };
 }
 
