@@ -229,8 +229,8 @@ private:
     KeyboardTranslatorManager *_keyManager = KeyboardTranslatorManager::instance();
 
     // Updates the key bindings list widget on the Keyboard tab and selects
-    // @p selectTranslatorName
-    void updateKeyBindingsList(const QString &selectTranslatorName = QString());
+    // @p selectKeyBindingsName
+    void updateKeyBindingsList(const QString &selectKeyBindingsName = QString());
     void updateKeyBindingsButtons();
     void showKeyBindingEditor(bool isNewTranslator);
 

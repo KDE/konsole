@@ -591,7 +591,7 @@ public Q_SLOTS:
     /**
      * Sets the current session's profile
      */
-    Q_SCRIPTABLE void setProfile(const QString &profile);
+    Q_SCRIPTABLE void setProfile(const QString &profileName);
 
 Q_SIGNALS:
 

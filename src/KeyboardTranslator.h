@@ -161,10 +161,10 @@ public:
          * eg. \\E for Escape, \\t for tab, \\n for new line.
          *
          * @param expandWildCards See text()
-         * @param modifiers See text()
+         * @param keyboardModifiers The keyboard modifiers being pressed.
          */
         QByteArray escapedText(bool expandWildCards = false,
-                               Qt::KeyboardModifiers modifiers = Qt::NoModifier) const;
+                               Qt::KeyboardModifiers keyboardModifiers = Qt::NoModifier) const;
 
         /** Returns the character code ( from the Qt::Key enum ) associated with this entry */
         int keyCode() const;
@@ -224,10 +224,10 @@ public:
          * as a string.
          *
          * @param expandWildCards See text()
-         * @param modifiers See text()
+         * @param keyboardModifiers The keyboard modifiers being pressed.
          */
         QString resultToString(bool expandWildCards = false,
-                               Qt::KeyboardModifiers modifiers = Qt::NoModifier) const;
+                               Qt::KeyboardModifiers keyboardModifiers = Qt::NoModifier) const;
 
         /**
          * Returns true if this entry matches the given key sequence, specified

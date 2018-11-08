@@ -27,7 +27,7 @@
 
 using namespace Konsole;
 
-PrintOptions::PrintOptions(QWidget *aParent) : QWidget(aParent)
+PrintOptions::PrintOptions(QWidget *parent) : QWidget(parent)
 {
     setupUi(this);
 

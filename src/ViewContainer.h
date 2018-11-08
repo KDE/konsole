@@ -78,7 +78,7 @@ public:
     ~TabbedViewContainer() Q_DECL_OVERRIDE;
 
     /** Adds a new view to the container widget */
-    void addView(QWidget *view, ViewProperties *navigationItem, int index = -1);
+    void addView(QWidget *view, ViewProperties *item, int index = -1);
 
     /** Removes a view from the container */
     void removeView(QWidget *view);

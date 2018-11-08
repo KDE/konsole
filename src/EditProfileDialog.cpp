@@ -63,8 +63,8 @@
 
 using namespace Konsole;
 
-EditProfileDialog::EditProfileDialog(QWidget *aParent) :
-    QDialog(aParent),
+EditProfileDialog::EditProfileDialog(QWidget *parent) :
+    QDialog(parent),
     _ui(nullptr),
     _tempProfile(nullptr),
     _profile(nullptr),
@@ -1687,8 +1687,8 @@ void EditProfileDialog::setFontInputValue(const QFont &aFont)
     _ui->fontSizeInput->setValue(aFont.pointSizeF());
 }
 
-ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject *aParent) :
-    QAbstractItemDelegate(aParent)
+ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject *parent) :
+    QAbstractItemDelegate(parent)
 {
 }
 

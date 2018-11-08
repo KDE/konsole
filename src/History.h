@@ -316,7 +316,7 @@ class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
     typedef QList<CompactHistoryLine *> HistoryArray;
 
 public:
-    explicit CompactHistoryScroll(unsigned int maxNbLines = 1000);
+    explicit CompactHistoryScroll(unsigned int maxLineCount = 1000);
     ~CompactHistoryScroll() Q_DECL_OVERRIDE;
 
     int  getLines() Q_DECL_OVERRIDE;

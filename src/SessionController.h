@@ -522,7 +522,7 @@ private:
     using ScreenWindowPtr = QPointer<ScreenWindow>;
 
     void executeOnScreenWindow(SessionPtr session, ScreenWindowPtr window);
-    void highlightResult(ScreenWindowPtr window, int position);
+    void highlightResult(ScreenWindowPtr window, int findPos);
 
     QMap< SessionPtr, ScreenWindowPtr > _windows;
     QRegularExpression _regExp;
