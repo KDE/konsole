@@ -3588,7 +3588,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     }
 
     if (_searchBar->isVisible() && event->key() == Qt::Key_Escape) {
-        _searchBar->hide();
+        _sessionController->searchClosed();
     }
 
     emit keyPressedSignal(event);
