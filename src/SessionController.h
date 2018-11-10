@@ -222,6 +222,9 @@ public Q_SLOTS:
     /** Reset font size */
     void resetFontSize();
 
+    /** Close the incremental search */
+    void searchClosed(); // called when the user clicks on the
+
 private Q_SLOTS:
     // menu item handlers
     void openBrowser();
@@ -269,8 +272,6 @@ private Q_SLOTS:
     void sessionReadOnlyChanged();
     void searchTextChanged(const QString &text);
     void searchCompleted(bool success);
-    void searchClosed(); // called when the user clicks on the
-    // history search bar's close button
 
     void updateFilterList(Profile::Ptr profile); // Called when the profile has changed, so we might need to change the list of filters
 
