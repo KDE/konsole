@@ -94,6 +94,8 @@ void Vt102EmulationTest::testTokenFunctions()
     QCOMPARE(token_chr(), TY_CHR());
     QCOMPARE(token_ctl(8+'@'), TY_CTL(8+'@'));
     QCOMPARE(token_ctl('G'), TY_CTL('G'));
+    QCOMPARE(token_csi_pe('p'), TY_CSI_PE('p'));
+    QCOMPARE(token_csi_pg('c'), TY_CSI_PG('c'));
     QCOMPARE(token_csi_pn(8), TY_CSI_PN(8));
     QCOMPARE(token_csi_pn('N'), TY_CSI_PN('N'));
     QCOMPARE(token_csi_pr('r', 2), TY_CSI_PR('r', 2));
@@ -109,7 +111,10 @@ void Vt102EmulationTest::testTokenFunctions()
     QCOMPARE(token_esc_cs(')', 'B'), TY_ESC_CS(')', 'B'));
     QCOMPARE(token_esc_de(8), TY_ESC_DE(8));
     QCOMPARE(token_esc_de('3'), TY_ESC_DE('3'));
-
+    QCOMPARE(token_vt52('A'), TY_VT52('A'));
+    QCOMPARE(token_vt52('Z'), TY_VT52('Z'));
+    QCOMPARE(token_vt52('='), TY_VT52('='));
+    QCOMPARE(token_vt52('>'), TY_VT52('>'));
 }
 
 QTEST_GUILESS_MAIN(Vt102EmulationTest)
