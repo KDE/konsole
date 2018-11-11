@@ -10,6 +10,7 @@ X-DocPath=konsole/index.html
 X-DBUS-StartupType=Unique
 StartupNotify=true
 X-KDE-AuthorizeAction=shell_access
+StartupWMClass=konsole
 
 Name=Konsole
 Name[af]=Konsole
