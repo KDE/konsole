@@ -2309,8 +2309,10 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             }
         }
 
-        _lineSelectionMode = false;
-        _wordSelectionMode = false;
+        if (!ev->modifiers()) {
+            _lineSelectionMode = false;
+            _wordSelectionMode = false;
+        }
 
         // The user clicked inside selected text
         bool selected =  _screenWindow->isSelected(pos.x(), pos.y());
