@@ -1079,6 +1079,7 @@ private:
     ScrollState _scrollWheelState;
     IncrementalSearchBar *_searchBar;
 
+    QRect _searchResultRect;
     friend class TerminalDisplayAccessible;
 };
 
