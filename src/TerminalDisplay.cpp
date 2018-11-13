@@ -479,6 +479,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _dimWhenInactive(false)
     , _scrollWheelState(ScrollState())
     , _searchBar(new IncrementalSearchBar(this))
+    , _searchResultRect(QRect())
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
@@ -1432,7 +1433,7 @@ void TerminalDisplay::updateImage()
 
     dirtyRegion |= _inputMethodData.previousPreeditRect;
 
-    if ((_screenWindow->currentResultLine() != -1) && (_screenWindow->scrollCount())) {
+    if ((_screenWindow->currentResultLine() != -1) && (_screenWindow->scrollCount() > 0)) {
         // De-highlight previous result region
         dirtyRegion |= _searchResultRect;
         // Highlight new result region
