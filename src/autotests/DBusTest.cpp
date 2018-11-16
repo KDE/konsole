@@ -20,13 +20,16 @@
 // Own
 #include "DBusTest.h"
 #include "../Session.h"
-#include <KProcess>
+#include <QProcess>
+#include <QSignalSpy>
 
 using namespace Konsole;
 
 /* Exec a new Konsole and grab its dbus */
 void DBusTest::initTestCase()
 {
+    qRegisterMetaType<QProcess::ExitStatus>();
+
     const QString interfaceName = QStringLiteral("org.kde.konsole");
     QDBusConnectionInterface *bus = nullptr;
     QStringList konsoleServices;
@@ -50,9 +53,11 @@ void DBusTest::initTestCase()
     }
 
     // Create a new Konsole with a separate process id
-    int pid = KProcess::startDetached(QStringLiteral("konsole"),
-                                      QStringList(QStringLiteral("--separate")));
-    if (pid == 0) {
+    _process = new QProcess;
+    _process->setProcessChannelMode(QProcess::ForwardedChannels);
+    _process->start(QStringLiteral("konsole"),                                     QStringList(QStringLiteral("--separate")));
+
+    if (!_process->waitForStarted()) {
         QFAIL(QStringLiteral("Unable to exec a new Konsole").toLatin1().data());
     }
 
@@ -93,6 +98,7 @@ void DBusTest::cleanupTestCase()
 {
     // Need to take care of when user has CloseAllTabs=False otherwise
     // they will get a popup dialog when we try to close this.
+    QSignalSpy quitSpy(_process, SIGNAL(finished(int,QProcess::ExitStatus)));
 
     QDBusInterface iface(_interfaceName,
                          QStringLiteral("/konsole/MainWindow_1"),
@@ -103,6 +109,9 @@ void DBusTest::cleanupTestCase()
     if (!instanceReply.isValid()) {
         QFAIL(QStringLiteral("Unable to close Konsole: %1").arg(instanceReply.error().message()).toLatin1().data());
     }
+    QVERIFY(quitSpy.wait());
+    _process->kill();
+    _process->deleteLater();
 }
 
 void DBusTest::testSessions()

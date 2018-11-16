@@ -28,6 +28,8 @@
 
 #include <unistd.h>
 
+class QProcess;
+
 namespace Konsole
 {
 
@@ -46,6 +48,7 @@ protected Q_SLOTS:
 
 private:
     QString _interfaceName;
+    QProcess *_process = nullptr;
 };
 
 }
