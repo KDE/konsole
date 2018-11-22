@@ -15,11 +15,6 @@
       <tooltip>Show window title set by escape sequence on the titlebar</tooltip>
       <default>false</default>
     </entry>
-    <entry name="ShowAppNameOnTitleBar" type="Bool">
-      <label>Show "- Konsole" on the titlebar</label>
-      <tooltip>Show "- Konsole" on the titlebar</tooltip>
-      <default>true</default>
-    </entry>
     <entry name="AllowMenuAccelerators" type="Bool">
       <label>Enable menu accelerators</label>
       <tooltip>Allow users to access top menu through Alt+Key combination</tooltip>

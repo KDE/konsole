@@ -296,11 +296,7 @@ void MainWindow::updateWindowCaption()
         !userTitle.isEmpty() ? caption = userTitle : caption = QStringLiteral(" ");
     }
 
-    if (KonsoleSettings::showAppNameOnTitleBar()) {
-        setCaption(caption);
-    } else {
-        setPlainCaption(caption);
-    }
+    setCaption(caption);
 }
 
 void MainWindow::updateWindowIcon()

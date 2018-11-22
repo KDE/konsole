@@ -112,19 +112,6 @@
           </property>
          </widget>
         </item>
-        <item row="6" column="0">
-         <widget class="QCheckBox" name="kcfg_ShowAppNameOnTitleBar">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Show application name on the titlebar</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
      </item>
