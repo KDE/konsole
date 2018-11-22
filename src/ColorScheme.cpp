@@ -301,8 +301,16 @@ void ColorScheme::setRandomizedBackgroundColor(bool randomize)
     // adjusted as much as possible.
     //
     // the value and saturation are left alone to maintain read-ability
+    // except for dark background schemes which allow a change in the
+    // colour value (one less than the dark background threshold)
     if (randomize) {
-        setRandomizationRange(BGCOLOR_INDEX, MAX_HUE, 255, 0);
+        int maxValue = 0;
+
+        if (hasDarkBackground()) {
+            maxValue = 126;
+        }
+
+        setRandomizationRange(BGCOLOR_INDEX, MAX_HUE, 255, maxValue);
     } else {
         if (_randomTable != nullptr) {
             setRandomizationRange(BGCOLOR_INDEX, 0, 0, 0);
