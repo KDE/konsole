@@ -170,9 +170,10 @@ void TabbedViewContainer::konsoleConfigChanged()
     // This is a hack, and this needs to be rewritten.
     // The container should not be part of the KParts, perhaps just the
     // TerminalDisplay should.
-    auto controller = _navigation[widget(_contextMenuTabIndex)];
-    auto sessionController = qobject_cast<SessionController*>(controller);
-    if (sessionController->isKonsolePart()) {
+
+    // ASAN issue if using sessionController->isKonsolePart(), just
+    // duplicate code for now
+    if (qApp->applicationName() != QLatin1String("konsole")) {
         tabBar()->setVisible(false);
     } else {
         // if we start with --show-tabbar or --hide-tabbar we ignore the preferences.
