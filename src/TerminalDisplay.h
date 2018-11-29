@@ -749,17 +749,13 @@ Q_SIGNALS:
     void focusGained();
 
 protected:
+    // events
     bool event(QEvent *event) Q_DECL_OVERRIDE;
-
     void paintEvent(QPaintEvent *pe) Q_DECL_OVERRIDE;
-
     void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
     void hideEvent(QHideEvent *event) Q_DECL_OVERRIDE;
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
-
     void contextMenuEvent(QContextMenuEvent *event) Q_DECL_OVERRIDE;
-
-    virtual void fontChange(const QFont &);
     void focusInEvent(QFocusEvent *event) Q_DECL_OVERRIDE;
     void focusOutEvent(QFocusEvent *event) Q_DECL_OVERRIDE;
     void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
@@ -769,10 +765,11 @@ protected:
     void mousePressEvent(QMouseEvent *ev) Q_DECL_OVERRIDE;
     void mouseReleaseEvent(QMouseEvent *ev) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *ev) Q_DECL_OVERRIDE;
-    virtual void extendSelection(const QPoint &position);
     void wheelEvent(QWheelEvent *ev) Q_DECL_OVERRIDE;
-
     bool focusNextPrevChild(bool next) Q_DECL_OVERRIDE;
+
+    void fontChange(const QFont &);
+    void extendSelection(const QPoint &position);
 
     // drag and drop
     void dragEnterEvent(QDragEnterEvent *event) Q_DECL_OVERRIDE;
