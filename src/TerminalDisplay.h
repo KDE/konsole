@@ -403,12 +403,6 @@ public:
         return _mouseWheelZoom;
     }
 
-    /**
-     * Reimplemented.  Has no effect.  Use setVTFont() to change the font
-     * used to draw characters in the display.
-     */
-    virtual void setFont(const QFont &);
-
     /** Returns the font used to draw characters in the display */
     QFont getVTFont()
     {

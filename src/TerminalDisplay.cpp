@@ -320,11 +320,6 @@ void TerminalDisplay::setVTFont(const QFont& f)
     fontChange(newFont);
 }
 
-void TerminalDisplay::setFont(const QFont &)
-{
-    // ignore font change request if not coming from konsole itself
-}
-
 void TerminalDisplay::increaseFontSize()
 {
     QFont font = getVTFont();
