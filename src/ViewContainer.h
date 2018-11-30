@@ -100,6 +100,9 @@ public:
     /** Changes the active view to the last view */
     void activateLastView();
 
+    /** Changes the active view to the last used view */
+    void activateLastUsedView(bool reverse);
+
     void setCssFromFile(const QUrl& url);
     /**
      * This enum describes the directions
@@ -186,20 +189,25 @@ protected:
 
     // close tabs and unregister
     void closeTerminalTab(int idx);
+
+    void keyReleaseEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 private Q_SLOTS:
     void viewDestroyed(QObject *view);
     void konsoleConfigChanged();
 
 private:
     void forgetView(QWidget *view);
+    void updateTabHistory(QWidget *view, bool remove = false);
 
     QHash<QWidget *, ViewProperties *> _navigation;
+    QList<QWidget *> _tabHistory;
     ViewManager *_connectedViewManager;
     QMenu *_contextPopupMenu;
     QToolButton *_newTabButton;
     QToolButton *_closeTabButton;
     int _contextMenuTabIndex;
     ViewManager::NavigationVisibility _navigationVisibility;
+    int _tabHistoryIndex;
 };
 
 

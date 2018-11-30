@@ -58,7 +58,8 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     _newTabButton(new QToolButton()),
     _closeTabButton(new QToolButton()),
     _contextMenuTabIndex(-1),
-    _navigationVisibility(ViewManager::NavigationVisibility::NavigationNotSet)
+    _navigationVisibility(ViewManager::NavigationVisibility::NavigationNotSet),
+    _tabHistoryIndex(-1)
 {
     setAcceptDrops(true);
 
@@ -89,7 +90,9 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     });
     connect(this, &TabbedViewContainer::currentChanged, this, [this](int index) {
         if (index != -1) {
-            widget(index)->setFocus();
+            QWidget *view = widget(index);
+            view->setFocus();
+            updateTabHistory(view);
         } else {
             deleteLater();
         }
@@ -251,6 +254,7 @@ void TabbedViewContainer::addView(QWidget *view, ViewProperties *item, int index
     }
 
     _navigation[view] = item;
+    _tabHistory.append(view);
     connect(item, &Konsole::ViewProperties::titleChanged, this,
             &Konsole::TabbedViewContainer::updateTitle);
     connect(item, &Konsole::ViewProperties::iconChanged, this,
@@ -274,6 +278,7 @@ void TabbedViewContainer::viewDestroyed(QObject *view)
 void TabbedViewContainer::forgetView(QWidget *view)
 {
     _navigation.remove(view);
+    updateTabHistory(view, true);
     emit viewRemoved(view);
     if (count() == 0) {
         emit empty(this);
@@ -305,6 +310,62 @@ void TabbedViewContainer::activatePreviousView()
     QWidget *active = currentWidget();
     int index = indexOf(active);
     setCurrentIndex(index == 0 ? count() - 1 : index - 1);
+}
+
+void TabbedViewContainer::activateLastUsedView(bool reverse)
+{
+    if (_tabHistory.count() <= 1) {
+        return;
+    }
+
+    if (_tabHistoryIndex == -1) {
+        _tabHistoryIndex = reverse ? _tabHistory.count() - 1 : 1;
+    } else if (reverse) {
+        if (_tabHistoryIndex == 0) {
+            _tabHistoryIndex = _tabHistory.count() - 1;
+        } else {
+            _tabHistoryIndex--;
+        }
+    } else {
+        if (_tabHistoryIndex >= _tabHistory.count() - 1) {
+            _tabHistoryIndex = 0;
+        } else {
+            _tabHistoryIndex++;
+        }
+    }
+
+    int index = indexOf(_tabHistory[_tabHistoryIndex]);
+    setCurrentIndex(index);
+}
+
+void TabbedViewContainer::keyReleaseEvent(QKeyEvent* event)
+{
+    if (_tabHistoryIndex != -1 && event->modifiers() == Qt::NoModifier) {
+        _tabHistoryIndex = -1;
+        QWidget *active = currentWidget();
+        if (active != _tabHistory[0]) {
+            // Update the tab history now that we have ended the walk-through
+            updateTabHistory(active);
+        }
+    }
+}
+
+void TabbedViewContainer::updateTabHistory(QWidget* view, bool remove)
+{
+    if (_tabHistoryIndex != -1 && !remove) {
+        // Do not reorder the tab history while we are walking through it
+        return;
+    }
+
+    for (int i = 0; i < _tabHistory.count(); ++i ) {
+        if (_tabHistory[i] == view) {
+            _tabHistory.removeAt(i);
+            if (!remove) {
+                _tabHistory.prepend(view);
+            }
+            break;
+        }
+    }
 }
 
 ViewProperties *TabbedViewContainer::viewProperties(QWidget *view) const

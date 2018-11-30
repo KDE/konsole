@@ -132,6 +132,9 @@ void ViewManager::setupActions()
     QAction *previousViewAction = new QAction(i18nc("@action Shortcut entry", "Previous Tab"), this);
     QAction *lastViewAction = new QAction(i18nc("@action Shortcut entry",
                                                 "Switch to Last Tab"), this);
+    QAction *lastUsedViewAction = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs"), this);
+    QAction *lastUsedViewReverseAction = new QAction(i18nc("@action Shortcut entry",
+                                                           "Last Used Tabs (Reverse)"), this);
     QAction *nextContainerAction = new QAction(i18nc("@action Shortcut entry",
                                                      "Next View Container"), this);
 
@@ -218,6 +221,8 @@ void ViewManager::setupActions()
     collection->addAction(QStringLiteral("next-view"), nextViewAction);
     collection->addAction(QStringLiteral("previous-view"), previousViewAction);
     collection->addAction(QStringLiteral("last-tab"), lastViewAction);
+    collection->addAction(QStringLiteral("last-used-tab"), lastUsedViewAction);
+    collection->addAction(QStringLiteral("last-used-tab-reverse"), lastUsedViewReverseAction);
     collection->addAction(QStringLiteral("next-container"), nextContainerAction);
     collection->addAction(QStringLiteral("move-view-left"), moveViewLeftAction);
     collection->addAction(QStringLiteral("move-view-right"), moveViewRightAction);
@@ -275,6 +280,14 @@ void ViewManager::setupActions()
 
     connect(lastViewAction, &QAction::triggered, this, &Konsole::ViewManager::lastView);
     _viewSplitter->addAction(lastViewAction);
+
+    collection->setDefaultShortcut(lastUsedViewAction, Qt::CTRL + Qt::Key_Tab);
+    connect(lastUsedViewAction, &QAction::triggered, this, &Konsole::ViewManager::lastUsedView);
+    _viewSplitter->addAction(lastUsedViewAction);
+
+    collection->setDefaultShortcut(lastUsedViewReverseAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Tab);
+    connect(lastUsedViewReverseAction, &QAction::triggered, this, &Konsole::ViewManager::lastUsedViewReverse);
+    _viewSplitter->addAction(lastUsedViewReverseAction);
 }
 
 void ViewManager::switchToView(int index)
@@ -340,6 +353,20 @@ void ViewManager::lastView()
     TabbedViewContainer *container = _viewSplitter->activeContainer();
     Q_ASSERT(container);
     container->activateLastView();
+}
+
+void ViewManager::lastUsedView()
+{
+    TabbedViewContainer *container = _viewSplitter->activeContainer();
+    Q_ASSERT(container);
+    container->activateLastUsedView(false);
+}
+
+void ViewManager::lastUsedViewReverse()
+{
+    TabbedViewContainer *container = _viewSplitter->activeContainer();
+    Q_ASSERT(container);
+    container->activateLastUsedView(true);
 }
 
 void ViewManager::detachActiveView()
@@ -716,6 +743,8 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
     enableAction(QStringLiteral("next-view"));
     enableAction(QStringLiteral("previous-view"));
     enableAction(QStringLiteral("last-tab"));
+    enableAction(QStringLiteral("last-used-tab"));
+    enableAction(QStringLiteral("last-used-tab-reverse"));
     enableAction(QStringLiteral("split-view-left-right"));
     enableAction(QStringLiteral("split-view-top-bottom"));
     enableAction(QStringLiteral("rename-session"));
