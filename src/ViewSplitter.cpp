@@ -255,10 +255,10 @@ TabbedViewContainer *ViewSplitter::activeContainer() const
 
     QList<ViewSplitter *> splitters = findChildren<ViewSplitter *>();
 
-    if (splitters.count() > 0) {
+    if (!splitters.isEmpty()) {
         return splitters.last()->activeContainer();
     } else {
-        if (_containers.count() > 0) {
+        if (!_containers.isEmpty()) {
             return _containers.last();
         } else {
             return nullptr;

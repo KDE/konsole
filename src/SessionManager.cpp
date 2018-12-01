@@ -54,7 +54,7 @@ SessionManager::SessionManager() :
 
 SessionManager::~SessionManager()
 {
-    if (_sessions.count() > 0) {
+    if (!_sessions.isEmpty()) {
         qCDebug(KonsoleDebug) << "Konsole SessionManager destroyed with"
                               << _sessions.count()
                               <<"session(s) still alive";

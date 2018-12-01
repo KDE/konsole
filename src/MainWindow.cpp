@@ -599,7 +599,7 @@ bool MainWindow::queryClose()
     }
     int result;
 
-    if (processesRunning.count() > 0) {
+    if (!processesRunning.isEmpty()) {
         result = KMessageBox::warningYesNoCancelList(this,
                                                      i18ncp("@info",
                                                             "There is a process running in this window. "
