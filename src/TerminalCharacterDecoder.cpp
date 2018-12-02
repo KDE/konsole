@@ -177,13 +177,13 @@ HTMLDecoder::HTMLDecoder(const QExplicitlySharedDataPointer<Profile> &profile) :
     if (profile) {
         colorScheme = ColorSchemeManager::instance()->findColorScheme(profile->colorScheme());
 
-        if (!colorScheme) {
+        if (colorScheme == nullptr) {
             colorScheme = ColorSchemeManager::instance()->defaultColorScheme();
         }
 
     }
 
-    if (colorScheme) {
+    if (colorScheme != nullptr) {
         colorScheme->getColorTable(_colorTable);
     } else {
         for (int i = 0; i < TABLE_COLORS; i++) {
