@@ -1932,7 +1932,8 @@ void TerminalDisplay::setBlinkingCursorEnabled(bool blink)
         _blinkCursorTimer->stop();
         if (_cursorBlinking) {
             // if cursor is blinking(hidden), blink it again to make it show
-            blinkCursorEvent();
+            _cursorBlinking = false;
+            updateCursor();
         }
         Q_ASSERT(!_cursorBlinking);
     }
