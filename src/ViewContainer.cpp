@@ -217,12 +217,8 @@ void TabbedViewContainer::setCssFromFile(const QUrl &url)
         setStyleSheet(KonsoleSettings::tabBarStyleSheet());
     }
 
-    QString styleSheetText;
     QTextStream in(&file);
-    while (!in.atEnd()) {
-        styleSheetText.append(in.readLine());
-    }
-    setStyleSheet(styleSheetText);
+    setStyleSheet(in.readAll());
 }
 
 void TabbedViewContainer::moveActiveView(MoveDirection direction)
