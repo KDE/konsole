@@ -42,6 +42,7 @@
 #include "ProfileManager.h"
 #include "TerminalDisplay.h"
 #include "ViewManager.h"
+#include "ViewContainer.h"
 #include "KonsoleSettings.h"
 #include "settings/PartInfo.h"
 #include "settings/ProfileSettings.h"
@@ -64,9 +65,7 @@ Part::Part(QWidget *parentWidget, QObject *parent, const QVariantList &) :
     connect(_viewManager, &Konsole::ViewManager::activeViewChanged, this,
             &Konsole::Part::activeViewChanged);
     connect(_viewManager, &Konsole::ViewManager::empty, this, &Konsole::Part::terminalExited);
-    connect(_viewManager,
-            static_cast<void (ViewManager::*)()>(&Konsole::ViewManager::newViewRequest), this,
-            &Konsole::Part::newTab);
+    connect(_viewManager, &Konsole::ViewManager::newViewRequest, this, &Konsole::Part::newTab);
 
     _viewManager->widget()->setParent(parentWidget);
 
@@ -214,7 +213,7 @@ void Part::createSession(const QString &profileName, const QString &directory)
         session->setInitialWorkingDirectory(directory);
     }
 
-    _viewManager->createView(session);
+    _viewManager->createView(_viewManager->activeContainer(), session);
 }
 
 void Part::activeViewChanged(SessionController *controller)

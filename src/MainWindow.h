@@ -42,6 +42,7 @@ class Session;
 class SessionController;
 class ProfileList;
 class BookmarkHandler;
+class TabbedViewContainer;
 
 /**
  * The main window.  This contains the menus and an area which contains the terminal displays.
@@ -73,19 +74,21 @@ public:
     /**
      * Create a new session.
      *
+     * @param tabWidget where the new widget should be added.
      * @param profile The profile to use to create the new session.
      * @param directory Initial working directory for the new session or empty
      * if the default working directory associated with the profile should be used.
      */
-    Session *createSession(Profile::Ptr profile, const QString &directory);
+    Session *createSession(TabbedViewContainer *tabWidget, Profile::Ptr profile, const QString &directory);
 
     /**
      * create a new SSH session.
      *
+     * @param tabWidget where the new widget should be added.
      * @param profile The profile to use to create the new session.
      * @param url the URL representing the new SSH connection
      */
-    Session *createSSHSession(Profile::Ptr profile, const QUrl &url);
+    Session *createSSHSession(TabbedViewContainer *tabWidget, Profile::Ptr profile, const QUrl &url);
 
     /**
      * Helper method to make this window get input focus
@@ -132,14 +135,14 @@ protected:
     bool focusNextPrevChild(bool next) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
-    void newTab();
+    void newTab(TabbedViewContainer *tabWidget);
     void cloneTab();
     void newWindow();
     void showManageProfilesDialog();
     void activateMenuBar();
     void showSettingsDialog(const bool showProfilePage = false);
     void showShortcutsDialog();
-    void newFromProfile(Profile::Ptr profile);
+    void newFromProfile(TabbedViewContainer *tabWidget, Profile::Ptr profile);
     void activeViewChanged(SessionController *controller);
     void disconnectController(SessionController *controller);
     void activeViewTitleChanged(ViewProperties *);

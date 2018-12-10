@@ -39,6 +39,7 @@ class TabbedViewContainer;
 class SessionController;
 class ViewProperties;
 class ViewSplitter;
+class TabbedViewContainer;
 
 /**
  * Manages the terminal display widgets in a Konsole window or part.
@@ -77,7 +78,7 @@ public:
      * Creates a new view to display the output from and deliver input to @p session.
      * Constructs a new container to hold the views if no container has yet been created.
      */
-    void createView(Session *session);
+    void createView(TabbedViewContainer *tabWidget, Session *session);
 
     /**
      * Applies the view-specific settings associated with specified @p profile
@@ -193,6 +194,10 @@ public:
      */
     static bool profileHasBlurEnabled(const Profile::Ptr profile);
 
+    /** returns the active tab from the view
+    */
+    TabbedViewContainer *activeContainer();
+
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
     void empty();
@@ -239,9 +244,9 @@ Q_SIGNALS:
     void blurSettingChanged(bool);
 
     /** Requests creation of a new view with the default profile. */
-    void newViewRequest();
+    void newViewRequest(TabbedViewContainer *tabWidget);
     /** Requests creation of a new view, with the selected profile. */
-    void newViewRequest(Profile::Ptr);
+    void newViewWithProfileRequest(TabbedViewContainer *tabWidget, Profile::Ptr);
 
 public Q_SLOTS:
     /** DBus slot that returns the number of sessions in the current view. */
@@ -375,8 +380,7 @@ private Q_SLOTS:
 
     // called when a ViewContainer requests a view be
     // moved
-    void containerMoveViewRequest(int index, int id,
-                                  TabbedViewContainer *sourceTabbedContainer);
+    void containerMoveViewRequest(int index, int sessionControllerId);
 
     void detachView(TabbedViewContainer *container, QWidget *view);
 

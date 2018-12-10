@@ -57,7 +57,7 @@ class TabbedViewContainer;
  * to actually add or remove view widgets from the container widget, as well
  * as updating any navigation aids.
  */
-class TabbedViewContainer : public QTabWidget
+class KONSOLEPRIVATE_EXPORT TabbedViewContainer : public QTabWidget
 {
     Q_OBJECT
 
@@ -145,10 +145,10 @@ Q_SIGNALS:
     void empty(TabbedViewContainer *container);
 
     /** Emitted when the user requests to open a new view */
-    void newViewRequest();
+    void newViewRequest(TabbedViewContainer *thisContainer);
 
     /** Requests creation of a new view, with the selected profile. */
-    void newViewRequest(Profile::Ptr);
+    void newViewWithProfileRequest(TabbedViewContainer *thisContainer, Profile::Ptr);
 
     /**
      * Emitted when the user requests to move a view from another container
@@ -159,9 +159,8 @@ Q_SIGNALS:
      * to append it.  This index should be passed to addView() when the new view
      * has been created.
      * @param id The identifier of the view.
-     * @param sourceContainer Initial move event Tabbed view container.
      */
-    void moveViewRequest(int index, int id, TabbedViewContainer *sourceContainer);
+    void moveViewRequest(int index, int sessionControllerId);
 
     /** Emitted when the active view changes */
     void activeViewChanged(QWidget *view);

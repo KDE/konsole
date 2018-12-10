@@ -3818,6 +3818,12 @@ bool TerminalDisplay::event(QEvent* event)
         break;
     case QEvent::FocusOut:
     case QEvent::FocusIn:
+        if(_screenWindow) {
+            // force a redraw on focusIn, fixes the
+            // black screen bug when the view is focused
+            // but doesn't redraws.
+            _screenWindow->notifyOutputChanged();
+        }
         update();
         break;
     default:

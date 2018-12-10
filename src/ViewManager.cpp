@@ -95,6 +95,8 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _managerId = ++lastManagerId;
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Windows/")
                                                  + QString::number(_managerId), this);
+
+    _viewSplitter->addContainer(createContainer(), Qt::Vertical);
 }
 
 ViewManager::~ViewManager() = default;
@@ -465,20 +467,17 @@ void ViewManager::splitView(Qt::Orientation orientation)
 {
     TabbedViewContainer *container = createContainer();
 
-    // iterate over each session which has a view in the current active
-    // container and create a new view for that session in a new container
-    for(int i = 0, end = _viewSplitter->activeContainer()->count(); i < end; i++) {
-        auto view = _viewSplitter->activeContainer()->widget(i);
-        Session *session = _sessionMap[qobject_cast<TerminalDisplay *>(view)];
-        TerminalDisplay *display = createTerminalDisplay(session);
-        const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
-        applyProfileToView(display, profile);
-        ViewProperties *properties = createController(session, display);
+    if (_viewSplitter->activeContainer()->count()) {
+        // get the currently applied profile and use it to create the new tab.
+        auto *activeContainer= _viewSplitter->activeContainer();
+        auto *currentDisplay = qobject_cast<TerminalDisplay*>(activeContainer->currentWidget());
+        auto profile = SessionManager::instance()->sessionProfile(_sessionMap[currentDisplay]);
 
-        _sessionMap[display] = session;
+        // Create a new session with the selected profile.
+        auto *session = SessionManager::instance()->createSession(profile);
+        session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-        container->addView(display, properties);
-        session->addView(display);
+        createView(session, container, 0);
     }
 
     _viewSplitter->addContainer(container, orientation);
@@ -613,37 +612,18 @@ void ViewManager::createView(Session *session, TabbedViewContainer *container, i
 
     // tell the session whether it has a light or dark background
     session->setDarkBackground(colorSchemeForProfile(profile)->hasDarkBackground());
-
-    if (container == _viewSplitter->activeContainer()) {
-        container->setCurrentWidget(display);
-        display->setFocus(Qt::OtherFocusReason);
-    }
+    container->setCurrentWidget(display);
+    display->setFocus(Qt::OtherFocusReason);
 
     updateDetachViewState();
 }
 
-void ViewManager::createView(Session *session)
+void ViewManager::createView(TabbedViewContainer *tabWidget, Session *session)
 {
-    // create the default container
-    if (_viewSplitter->containers().count() == 0) {
-        TabbedViewContainer *container = createContainer();
-        _viewSplitter->addContainer(container, Qt::Vertical);
-        emit splitViewToggle(false);
-    }
+    const int index = _newTabBehavior == PutNewTabAfterCurrentTab ?
+                _viewSplitter->activeContainer()->currentIndex() + 1 : -1;
 
-    // new tab will be put at the end by default.
-    int index = -1;
-
-    if (_newTabBehavior == PutNewTabAfterCurrentTab) {
-        index = _viewSplitter->activeContainer()->currentIndex() + 1;
-    }
-
-    // iterate over the view containers owned by this view manager
-    // and create a new terminal display for the session in each of them, along with
-    // a controller for the session/display pair
-    foreach (TabbedViewContainer *container, _viewSplitter->containers()) {
-        createView(session, container, index);
-    }
+    createView(session, tabWidget, index);
 }
 
 TabbedViewContainer *ViewManager::createContainer()
@@ -665,13 +645,10 @@ TabbedViewContainer *ViewManager::createContainer()
                containerViewsChanged(container);
            });
 
-    connect(container,
-            static_cast<void (TabbedViewContainer::*)()>(&Konsole::TabbedViewContainer::newViewRequest), this,
-            static_cast<void (ViewManager::*)()>(&Konsole::ViewManager::newViewRequest));
-    connect(container,
-            static_cast<void (TabbedViewContainer::*)(Profile::Ptr)>(&Konsole::TabbedViewContainer::newViewRequest),
-            this,
-            static_cast<void (ViewManager::*)(Profile::Ptr)>(&Konsole::ViewManager::newViewRequest));
+    connect(container, &TabbedViewContainer::newViewRequest,
+            this, &ViewManager::newViewRequest);
+    connect(container, &Konsole::TabbedViewContainer::newViewWithProfileRequest,
+            this, &Konsole::ViewManager::newViewWithProfileRequest);
     connect(container, &Konsole::TabbedViewContainer::moveViewRequest, this,
             &Konsole::ViewManager::containerMoveViewRequest);
     connect(container, &Konsole::TabbedViewContainer::viewRemoved, this,
@@ -682,34 +659,16 @@ TabbedViewContainer *ViewManager::createContainer()
     return container;
 }
 
-void ViewManager::containerMoveViewRequest(int index, int id,
-                                           TabbedViewContainer *sourceTabbedContainer)
+void ViewManager::containerMoveViewRequest(int index, int id)
 {
     auto *container = qobject_cast<TabbedViewContainer *>(sender());
     auto *controller = qobject_cast<SessionController *>(ViewProperties::propertiesById(id));
-
-    if (controller == nullptr) {
-        return;
-    }
-
-    // do not move the last tab in a split view.
-    if (sourceTabbedContainer != nullptr) {
-        QPointer<TabbedViewContainer> sourceContainer = qobject_cast<TabbedViewContainer *>(sourceTabbedContainer);
-
-        if (_viewSplitter->containers().contains(sourceContainer)) {
-            return;
-        } else {
-            ViewManager *sourceViewManager = sourceTabbedContainer->connectedViewManager();
-
-            // do not remove the last tab on the window
-            if (qobject_cast<ViewSplitter *>(sourceViewManager->widget())->containers().size() > 1) {
-                return;
-            }
-        }
-    }
+    Q_ASSERT(container);
+    Q_ASSERT(controller);
 
     createView(controller->session(), container, index);
     controller->session()->refresh();
+    container->currentWidget()->setFocus();
 }
 
 void ViewManager::setNavigationMethod(NavigationMethod method)
@@ -974,6 +933,11 @@ void ViewManager::saveSessions(KConfigGroup &group)
     group.writeEntry("Sessions", ids);
 }
 
+TabbedViewContainer *ViewManager::activeContainer()
+{
+    return _viewSplitter->activeContainer();
+}
+
 void ViewManager::restoreSessions(const KConfigGroup &group)
 {
     QList<int> ids = group.readEntry("Sessions", QList<int>());
@@ -991,7 +955,7 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
             break;
         }
 
-        createView(session);
+        createView(activeContainer(), session);
         if (!session->isRunning()) {
             session->run();
         }
@@ -1008,7 +972,7 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
     if (ids.isEmpty()) { // Session file is unusable, start default Profile
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
         Session *session = SessionManager::instance()->createSession(profile);
-        createView(session);
+        createView(activeContainer(), session);
         if (!session->isRunning()) {
             session->run();
         }
@@ -1063,7 +1027,7 @@ int ViewManager::newSession()
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    createView(session);
+    createView(activeContainer(), session);
     session->run();
 
     return session->sessionId();
@@ -1085,7 +1049,7 @@ int ViewManager::newSession(const QString &profile)
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    createView(session);
+    createView(activeContainer(), session);
     session->run();
 
     return session->sessionId();
@@ -1108,7 +1072,7 @@ int ViewManager::newSession(const QString &profile, const QString &directory)
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    createView(session);
+    createView(activeContainer(), session);
     session->run();
 
     return session->sessionId();

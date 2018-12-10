@@ -188,6 +188,18 @@ void ViewSplitter::containerEmpty(TabbedViewContainer * myContainer)
     if (children == 0) {
         emit allContainersEmpty();
     }
+
+    // This container is no more, try to find another container to focus.
+    ViewSplitter *currentSplitter = activeSplitter();
+    while(qobject_cast<ViewSplitter*>(currentSplitter->parent())) {
+        currentSplitter = qobject_cast<ViewSplitter*>(currentSplitter->parent());
+    }
+
+    for(auto tabWidget : currentSplitter->findChildren<TabbedViewContainer*>()) {
+        if (tabWidget != myContainer && tabWidget->count()) {
+            tabWidget->setCurrentIndex(0);
+        }
+    }
 }
 
 void ViewSplitter::activateNextContainer()

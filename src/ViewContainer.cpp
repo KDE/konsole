@@ -72,7 +72,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
     _newTabButton->setAutoRaise(true);
     connect(_newTabButton, &QToolButton::clicked, this, [this]{
-        emit newViewRequest();
+        emit newViewRequest(this);
     });
 
     _closeTabButton->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
@@ -88,15 +88,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(tabBarWidget, &DetachableTabBar::detachTab, this, [this](int idx) {
         emit detachTab(this, widget(idx));
     });
-    connect(this, &TabbedViewContainer::currentChanged, this, [this](int index) {
-        if (index != -1) {
-            QWidget *view = widget(index);
-            view->setFocus();
-            updateTabHistory(view);
-        } else {
-            deleteLater();
-        }
-    });
+    connect(this, &TabbedViewContainer::currentChanged, this, &TabbedViewContainer::currentTabChanged);
 
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(tabBar());
@@ -137,7 +129,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     auto profileList = new ProfileList(false, profileMenu);
     profileList->syncWidgetActions(profileMenu, true);
     connect(profileList, &Konsole::ProfileList::profileSelected, this,
-            static_cast<void (TabbedViewContainer::*)(Profile::Ptr)>(&Konsole::TabbedViewContainer::newViewRequest));
+            [this](Profile::Ptr profile) { newViewWithProfileRequest(this, profile); });
     _newTabButton->setMenu(profileMenu);
 
     konsoleConfigChanged();
@@ -161,7 +153,7 @@ void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
     const auto currentPos = QCursor::pos();
     for(const auto dropWidget : widgets) {
         if (dropWidget->rect().contains(dropWidget->mapFromGlobal(currentPos))) {
-            emit dropWidget->moveViewRequest(-1, id, this);
+            emit dropWidget->moveViewRequest(-1, id);
             removeView(widget(index));
         }
     }
@@ -387,7 +379,7 @@ void TabbedViewContainer::tabDoubleClicked(int index)
     if (index >= 0) {
         renameTab(index);
     } else {
-        emit newViewRequest();
+        emit newViewRequest(this);
     }
 }
 
@@ -445,13 +437,15 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
 
 void TabbedViewContainer::currentTabChanged(int index)
 {
-    setCurrentIndex(index);
-    if (widget(index) != nullptr) {
-        emit activeViewChanged(widget(index));
+    if (index != -1) {
+        QWidget *view = widget(index);
+        view->setFocus();
+        updateTabHistory(view);
+        emit activeViewChanged(view);
+        setTabActivity(index, false);
+    } else {
+        deleteLater();
     }
-
-    // clear activity indicators
-    setTabActivity(index, false);
 }
 
 void TabbedViewContainer::wheelScrolled(int delta)

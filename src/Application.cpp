@@ -175,23 +175,23 @@ MainWindow *Application::newMainWindow()
 void Application::createWindow(Profile::Ptr profile, const QString &directory)
 {
     MainWindow *window = newMainWindow();
-    window->createSession(profile, directory);
+    ViewManager *viewManager = window->viewManager();
+    window->createSession(viewManager->activeContainer(), profile, directory);
     finalizeNewMainWindow(window);
 }
 
 void Application::detachView(Session *session)
 {
+    MainWindow *currentWindow = qobject_cast<MainWindow*>(sender());
     MainWindow *window = newMainWindow();
-    window->viewManager()->createView(session);
+    ViewManager *manager = window->viewManager();
 
-    // When detaching a view, the size of the new window should equal the
-    // size of the source window
-    Session *newsession = window->viewManager()->activeViewController()->session();
-    newsession->setSize(session->size());
-    window->adjustSize();
+    manager->createView(manager->activeContainer(), session);
+
     // Since user is dragging and dropping, move dnd window to where
     // the user has the cursor (correct multiple monitor setups).
     window->move(QCursor::pos());
+    window->resize(currentWindow->geometry().width(), currentWindow->geometry().height());
     window->show();
 }
 
@@ -227,7 +227,8 @@ int Application::newInstance()
     Profile::Ptr newProfile = processProfileChangeArgs(baseProfile);
 
     // create new session
-    Session *session = window->createSession(newProfile, QString());
+    ViewManager *viewManager = window->viewManager();
+    Session *session = window->createSession(viewManager->activeContainer(), newProfile, QString());
 
     if (m_parser->isSet(QStringLiteral("noclose"))) {
         session->setAutoClose(false);
@@ -374,7 +375,8 @@ void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QSt
 
     // Create the new session
     Profile::Ptr theProfile = shouldUseNewProfile ? newProfile : baseProfile;
-    Session *session = window->createSession(theProfile, QString());
+    ViewManager *viewManager = window->viewManager();
+    Session *session = window->createSession(viewManager->activeContainer(), theProfile, QString());
 
     if (m_parser->isSet(QStringLiteral("noclose"))) {
         session->setAutoClose(false);
