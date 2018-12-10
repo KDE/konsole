@@ -783,6 +783,139 @@ static void drawOtherChar(QPainter& paint, int x, int y, int w, int h, uchar cod
     }
 }
 
+static void drawBlockChar(QPainter& paint, int x, int y, int w, int h, uchar code)
+{
+    const QColor color = paint.pen().color();
+
+    const float left = x - 0.5;
+    const float top = y - 0.5;
+
+    const float cx = left + w / 2;
+    const float cy = top + h / 2;
+    const float right = x + w - 0.5;
+    const float bottom = y + h - 0.5;
+
+    // Default rect fills entire cell
+    QRectF rect(left, top, w, h);
+
+    // LOWER ONE EIGHTH BLOCK to LEFT ONE EIGHTH BLOCK
+    if (code >= 0x81 && code <= 0x8f) {
+        if (code < 0x88) { // Horizontal
+            const int height = h * (0x88 - code) / 8;
+            rect.setY(top + height);
+            rect.setHeight(h - height);
+        } else if (code > 0x88) { // Vertical
+            const int width = w * (0x90 - code) / 8;
+            rect.setWidth(width);
+        }
+
+        paint.fillRect(rect, color);
+
+        return;
+    }
+
+    // Combinations of quarter squares
+    // LEFT ONE EIGHTH BLOCK to QUADRANT UPPER RIGHT AND LOWER LEFT AND LOWER RIGHT
+    if (code >= 0x96 && code <= 0x9F) {
+        bool upperLeft = false, upperRight = false,
+             lowerLeft = false, lowerRight = false;
+
+        switch(code) {
+        case 0x96:
+            lowerLeft = true;
+            break;
+        case 0x97:
+            lowerRight = true;
+            break;
+        case 0x98:
+            upperLeft = true;
+            break;
+        case 0x99:
+            upperLeft = true;
+            lowerLeft = true;
+            lowerRight = true;
+            break;
+        case 0x9a:
+            upperLeft = true;
+            lowerRight = true;
+            break;
+        case 0x9b:
+            upperLeft = true;
+            upperRight = true;
+            lowerLeft = true;
+            break;
+        case 0x9c:
+            upperLeft = true;
+            upperRight = true;
+            lowerRight = true;
+            break;
+        case 0x9d:
+            upperRight = true;
+            break;
+        case 0x9e:
+            upperRight = true;
+            lowerLeft = true;
+            break;
+        case 0x9f:
+            upperRight = true;
+            lowerLeft = true;
+            lowerRight = true;
+            break;
+        default:
+            break;
+        }
+
+        if (upperLeft) {
+            paint.fillRect(QRectF(QPointF(left, top), QPointF(cx, cy)), color);
+        }
+        if (upperRight) {
+            paint.fillRect(QRectF(QPointF(cx, top), QPointF(right, cy)), color);
+        }
+        if (lowerLeft) {
+            paint.fillRect(QRectF(QPointF(left, cy), QPointF(cx, bottom)), color);
+        }
+        if (lowerRight) {
+            paint.fillRect(QRectF(QPointF(cx, cy), QPointF(right, bottom)), color);
+        }
+
+        return;
+    }
+
+    // And the random stuff
+    switch(code) {
+    case 0x80: // Top half block
+        rect.setHeight(h / 2);
+        paint.fillRect(rect, color);
+        return;
+    case 0x90: // Right half block
+        paint.fillRect(QRectF(QPointF(cx, top), QPointF(right, bottom)), color);
+        return;
+    case 0x94: // Top one eighth block
+        rect.setHeight(h / 8);
+        paint.fillRect(rect, color);
+        return;
+    case 0x95: { // Right one eighth block
+        const float width = 7 * w / 8;
+        rect.setX(left + width);
+        rect.setWidth(w - width);
+        paint.fillRect(rect, color);
+        return;
+    }
+    case 0x91: // Light shade
+        paint.fillRect(rect, QBrush(color, Qt::Dense6Pattern));
+        return;
+    case 0x92: // Medium shade
+        paint.fillRect(rect, QBrush(color, Qt::Dense4Pattern));
+        return;
+    case 0x93: // Dark shade
+        paint.fillRect(rect, QBrush(color, Qt::Dense2Pattern));
+        return;
+
+    default:
+        break;
+    }
+}
+
 void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const QString& str,
         const Character* attributes)
 {
@@ -800,7 +933,10 @@ void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const 
 
     for (int i = 0 ; i < str.length(); i++) {
         const uchar code = str[i].cell();
-        if (LineChars[code] != 0u) {
+
+        if (code >= 0x80 && code <= 0x9F) { // UPPER HALF BLOCK to QUADRANT UPPER RIGHT AND LOWER LEFT AND LOWER RIGHT
+            drawBlockChar(painter, x + (_fontWidth * i), y, _fontWidth, _fontHeight, code);
+        } else if (LineChars[code] != 0u) {
             drawLineChar(painter, x + (_fontWidth * i), y, _fontWidth, _fontHeight, code);
         } else {
             drawOtherChar(painter, x + (_fontWidth * i), y, _fontWidth, _fontHeight, code);

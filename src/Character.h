@@ -63,8 +63,9 @@ const RenditionFlags RE_OVERLINE       = (1 << 10);
  */
 inline bool isSupportedLineChar(uint codePoint)
 {
-    return (codePoint & 0xFF80) == 0x2500 // Unicode block: Mathematical Symbols - Box Drawing
-           && !(0x2504 <= codePoint && codePoint <= 0x250B); // Triple and quadruple dash range
+    return ((codePoint & 0xFF80) == 0x2500 // Unicode block: Mathematical Symbols - Box Drawing
+           && !(0x2504 <= codePoint && codePoint <= 0x250B)) || // Triple and quadruple dash range
+        (codePoint >= 0x2580 && codePoint <= 0x259F); // Block characters
 }
 
 /**
