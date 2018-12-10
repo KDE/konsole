@@ -1433,7 +1433,7 @@ void TerminalDisplay::updateImage()
 
     dirtyRegion |= _inputMethodData.previousPreeditRect;
 
-    if ((_screenWindow->currentResultLine() != -1) && (_screenWindow->scrollCount() > 0)) {
+    if ((_screenWindow->currentResultLine() != -1) && (_screenWindow->scrollCount() != 0)) {
         // De-highlight previous result region
         dirtyRegion |= _searchResultRect;
         // Highlight new result region
