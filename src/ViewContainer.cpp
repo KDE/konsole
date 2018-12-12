@@ -46,6 +46,7 @@
 #include "KonsoleSettings.h"
 #include "SessionController.h"
 #include "DetachableTabBar.h"
+#include "TerminalDisplay.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 
@@ -86,7 +87,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(tabBar(), &QTabBar::customContextMenuRequested, this,
         &Konsole::TabbedViewContainer::openTabContextMenu);
     connect(tabBarWidget, &DetachableTabBar::detachTab, this, [this](int idx) {
-        emit detachTab(this, widget(idx));
+        emit detachTab(this, terminalAt(idx));
     });
     connect(this, &TabbedViewContainer::currentChanged, this, &TabbedViewContainer::currentTabChanged);
 
@@ -106,7 +107,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     auto detachAction = _contextPopupMenu->addAction(
         QIcon::fromTheme(QStringLiteral("tab-detach")),
         i18nc("@action:inmenu", "&Detach Tab"), this,
-        [this] { emit detachTab(this, widget(_contextMenuTabIndex)); }
+        [this] { emit detachTab(this, terminalAt(_contextMenuTabIndex)); }
     );
     detachAction->setObjectName(QStringLiteral("tab-detach"));
 #endif
@@ -144,9 +145,14 @@ TabbedViewContainer::~TabbedViewContainer()
     }
 }
 
+TerminalDisplay *TabbedViewContainer::terminalAt(int index)
+{
+    return qobject_cast<TerminalDisplay*>(widget(index));
+}
+
 void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
 {
-    const int id = viewProperties(widget(index))->identifier();
+    const int id = terminalAt(index)->sessionController()->identifier();
     // This one line here will be removed as soon as I finish my new split handling.
     // it's hacky but it works.
     const auto widgets = window->findChildren<TabbedViewContainer*>();
@@ -154,7 +160,7 @@ void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
     for(const auto dropWidget : widgets) {
         if (dropWidget->rect().contains(dropWidget->mapFromGlobal(currentPos))) {
             emit dropWidget->moveViewRequest(-1, id);
-            removeView(widget(index));
+            removeView(terminalAt(index));
         }
     }
 }
@@ -218,10 +224,10 @@ void TabbedViewContainer::moveActiveView(MoveDirection direction)
     const int currentIndex = indexOf(currentWidget());
     int newIndex = direction  == MoveViewLeft ? qMax(currentIndex - 1, 0) : qMin(currentIndex + 1, count() - 1);
 
-    auto swappedWidget = widget(newIndex);
-    auto currentWidget = widget(currentIndex);
-    auto swappedContext = _navigation[swappedWidget];
-    auto currentContext = _navigation[currentWidget];
+    auto swappedWidget = terminalAt(newIndex);
+    auto currentWidget = terminalAt(currentIndex);
+    auto swappedContext = swappedWidget->sessionController();
+    auto currentContext = currentWidget->sessionController();
 
     if (newIndex < currentIndex) {
         insertTab(newIndex, currentWidget, currentContext->icon(), currentContext->title());
@@ -233,7 +239,7 @@ void TabbedViewContainer::moveActiveView(MoveDirection direction)
     setCurrentIndex(newIndex);
 }
 
-void TabbedViewContainer::addView(QWidget *view, ViewProperties *item, int index)
+void TabbedViewContainer::addView(TerminalDisplay *view, ViewProperties *item, int index)
 {
     if (index == -1) {
         addTab(view, item->icon(), item->title());
@@ -241,7 +247,6 @@ void TabbedViewContainer::addView(QWidget *view, ViewProperties *item, int index
         insertTab(index, view, item->icon(), item->title());
     }
 
-    _navigation[view] = item;
     _tabHistory.append(view);
     connect(item, &Konsole::ViewProperties::titleChanged, this,
             &Konsole::TabbedViewContainer::updateTitle);
@@ -256,16 +261,15 @@ void TabbedViewContainer::addView(QWidget *view, ViewProperties *item, int index
 
 void TabbedViewContainer::viewDestroyed(QObject *view)
 {
-    auto widget = static_cast<QWidget*>(view);
+    auto widget = static_cast<TerminalDisplay*>(view);
     const auto idx = indexOf(widget);
 
     removeTab(idx);
     forgetView(widget);
 }
 
-void TabbedViewContainer::forgetView(QWidget *view)
+void TabbedViewContainer::forgetView(TerminalDisplay *view)
 {
-    _navigation.remove(view);
     updateTabHistory(view, true);
     emit viewRemoved(view);
     if (count() == 0) {
@@ -273,7 +277,7 @@ void TabbedViewContainer::forgetView(QWidget *view)
     }
 }
 
-void TabbedViewContainer::removeView(QWidget *view)
+void TabbedViewContainer::removeView(TerminalDisplay *view)
 {
     const int idx = indexOf(view);
     disconnect(view, &QWidget::destroyed, this, &Konsole::TabbedViewContainer::viewDestroyed);
@@ -330,7 +334,7 @@ void TabbedViewContainer::keyReleaseEvent(QKeyEvent* event)
 {
     if (_tabHistoryIndex != -1 && event->modifiers() == Qt::NoModifier) {
         _tabHistoryIndex = -1;
-        QWidget *active = currentWidget();
+        auto *active = qobject_cast<TerminalDisplay*>(currentWidget());
         if (active != _tabHistory[0]) {
             // Update the tab history now that we have ended the walk-through
             updateTabHistory(active);
@@ -338,7 +342,7 @@ void TabbedViewContainer::keyReleaseEvent(QKeyEvent* event)
     }
 }
 
-void TabbedViewContainer::updateTabHistory(QWidget* view, bool remove)
+void TabbedViewContainer::updateTabHistory(TerminalDisplay* view, bool remove)
 {
     if (_tabHistoryIndex != -1 && !remove) {
         // Do not reorder the tab history while we are walking through it
@@ -354,17 +358,6 @@ void TabbedViewContainer::updateTabHistory(QWidget* view, bool remove)
             break;
         }
     }
-}
-
-ViewProperties *TabbedViewContainer::viewProperties(QWidget *view) const
-{
-    Q_ASSERT(_navigation.contains(view));
-    return _navigation[view];
-}
-
-QList<QWidget *> TabbedViewContainer::widgetsForItem(ViewProperties *item) const
-{
-    return _navigation.keys(item);
 }
 
 void TabbedViewContainer::closeCurrentTab()
@@ -386,7 +379,7 @@ void TabbedViewContainer::tabDoubleClicked(int index)
 void TabbedViewContainer::renameTab(int index)
 {
     if (index != -1) {
-        _navigation[widget(index)]->rename();
+        terminalAt(index)->sessionController()->rename();
     }
 }
 
@@ -412,7 +405,7 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
 #endif
 
     // Add the read-only action
-    auto controller = _navigation[widget(_contextMenuTabIndex)];
+    auto controller = terminalAt(_contextMenuTabIndex)->sessionController();
     auto sessionController = qobject_cast<SessionController*>(controller);
 
     if (sessionController != nullptr) {
@@ -438,7 +431,7 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
 void TabbedViewContainer::currentTabChanged(int index)
 {
     if (index != -1) {
-        QWidget *view = widget(index);
+        auto *view = terminalAt(index);
         view->setFocus();
         updateTabHistory(view);
         emit activeViewChanged(view);
@@ -475,41 +468,36 @@ void TabbedViewContainer::setTabActivity(int index, bool activity)
 
 void TabbedViewContainer::updateActivity(ViewProperties *item)
 {
-    foreach (QWidget *widget, widgetsForItem(item)) {
-        const int index = indexOf(widget);
-
-        if (index != currentIndex()) {
-            setTabActivity(index, true);
-        }
+    auto controller = qobject_cast<SessionController*>(item);
+    auto index = indexOf(controller->view());
+    if (index != currentIndex()) {
+        setTabActivity(index, true);
     }
 }
 
 void TabbedViewContainer::updateTitle(ViewProperties *item)
 {
-    foreach (QWidget *widget, widgetsForItem(item)) {
-        const int index = indexOf(widget);
-        QString tabText = item->title();
+    auto controller = qobject_cast<SessionController*>(item);
 
-        setTabToolTip(index, tabText);
+    const int index = indexOf(controller->view());
+    QString tabText = item->title();
 
-        // To avoid having & replaced with _ (shortcut indicator)
-        tabText.replace(QLatin1Char('&'), QLatin1String("&&"));
-        setTabText(index, tabText);
-    }
+    setTabToolTip(index, tabText);
+
+    // To avoid having & replaced with _ (shortcut indicator)
+    tabText.replace(QLatin1Char('&'), QLatin1String("&&"));
+    setTabText(index, tabText);
 }
 
 void TabbedViewContainer::updateIcon(ViewProperties *item)
 {
-    foreach (QWidget *widget, widgetsForItem(item)) {
-        const int index = indexOf(widget);
-        setTabIcon(index, item->icon());
-    }
+    auto controller = qobject_cast<SessionController*>(item);
+    const int index = indexOf(controller->view());
+    setTabIcon(index, item->icon());
 }
 
 void TabbedViewContainer::closeTerminalTab(int idx) {
-    auto currWidget = widget(idx);
-    auto controller = qobject_cast<SessionController *>(_navigation[currWidget]);
-    controller->closeSession();
+    terminalAt(idx)->sessionController()->closeSession();
 }
 
 ViewManager *TabbedViewContainer::connectedViewManager()

@@ -882,8 +882,8 @@ QList<ViewProperties *> ViewManager::viewProperties() const
     list.reserve(container->count());
 
     for(int i = 0, end = container->count(); i < end; i++) {
-        auto view = container->widget(i);
-        ViewProperties *properties = container->viewProperties(view);
+        auto view = container->terminalAt(i);
+        ViewProperties *properties = view->sessionController();
         Q_ASSERT(properties);
         list << properties;
     }

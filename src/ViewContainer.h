@@ -78,13 +78,11 @@ public:
     ~TabbedViewContainer() Q_DECL_OVERRIDE;
 
     /** Adds a new view to the container widget */
-    void addView(QWidget *view, ViewProperties *item, int index = -1);
+    void addView(TerminalDisplay *view, ViewProperties *item, int index = -1);
 
     /** Removes a view from the container */
-    void removeView(QWidget *view);
+    void removeView(TerminalDisplay *view);
 
-    /** Returns the ViewProperties instance associated with a particular view in the container */
-    ViewProperties *viewProperties(QWidget *view) const;
     void setTabActivity(int index, bool activity);
 
     void updateTitle(ViewProperties *item);
@@ -140,6 +138,13 @@ public:
     void openTabContextMenu(const QPoint &point);
     void setNavigationVisibility(ViewManager::NavigationVisibility navigationVisibility);
     void moveTabToWindow(int index, QWidget *window);
+
+    /* return the widget(int index) casted to TerminalDisplay*
+     *
+     * The only thing that this class holds are TerminalDisplays, so
+     * this is the only thing that should be used to retrieve widgets.
+     */
+    TerminalDisplay *terminalAt(int index);
 Q_SIGNALS:
     /** Emitted when the container has no more children */
     void empty(TabbedViewContainer *container);
@@ -163,21 +168,18 @@ Q_SIGNALS:
     void moveViewRequest(int index, int sessionControllerId);
 
     /** Emitted when the active view changes */
-    void activeViewChanged(QWidget *view);
+    void activeViewChanged(TerminalDisplay *view);
 
     /** Emitted when a view is added to the container. */
-    void viewAdded(QWidget *view, ViewProperties *properties);
+    void viewAdded(TerminalDisplay *view, ViewProperties *properties);
 
     /** Emitted when a view is removed from the container. */
-    void viewRemoved(QWidget *view);
+    void viewRemoved(TerminalDisplay *view);
 
     /** detach the specific tab */
-    void detachTab(TabbedViewContainer *self, QWidget *activeView);
+    void detachTab(TabbedViewContainer *self, TerminalDisplay *activeView);
 
 protected:
-    /** Returns the widgets which are associated with a particular navigation item */
-    QList<QWidget *> widgetsForItem(ViewProperties *item) const;
-
     /**
      * Rearranges the order of widgets in the container.
      *
@@ -195,11 +197,10 @@ private Q_SLOTS:
     void konsoleConfigChanged();
 
 private:
-    void forgetView(QWidget *view);
-    void updateTabHistory(QWidget *view, bool remove = false);
+    void forgetView(TerminalDisplay *view);
+    void updateTabHistory(TerminalDisplay *view, bool remove = false);
 
-    QHash<QWidget *, ViewProperties *> _navigation;
-    QList<QWidget *> _tabHistory;
+    QList<TerminalDisplay *> _tabHistory;
     ViewManager *_connectedViewManager;
     QMenu *_contextPopupMenu;
     QToolButton *_newTabButton;
