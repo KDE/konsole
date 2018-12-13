@@ -8,8 +8,8 @@ set (KDE_APPLICATIONS_VERSION "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATI
 
 # minimal requirements
 cmake_minimum_required (VERSION 3.0 FATAL_ERROR)
-# Consider changing to Qt 5.9 when Qt 5.6 hits EOL Mar 2019
-set (QT_MIN_VERSION "5.6.0")
+# Qt 5.9 LTS EOL May 2020
+set (QT_MIN_VERSION "5.9.7")
 set (KF5_MIN_VERSION "5.6.0")
 
 # Release script will create bugzilla versions
