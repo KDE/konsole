@@ -1331,7 +1331,7 @@ Service 'org.kde.konsole' does not exist, change
 
 <para>
 For more information, please visit
-<ulink url="http://techbase.kde.org/Development/Tutorials/D-Bus/Introduction">&DBus; tutorial</ulink>.
+<ulink url="https://techbase.kde.org/Development/Tutorials/D-Bus/Introduction">&DBus; tutorial</ulink>.
 </para>
 
 </chapter>
@@ -1545,7 +1545,7 @@ style sheet for the tab bar.  In the <filename role="extension">.css</filename> 
 </para>
 <para>
 For more information, consider reading
-<ulink url="http://doc.qt.io/qt-5/stylesheet.html">&Qt; Style Sheets</ulink>
+<ulink url="https://doc.qt.io/qt-5/stylesheet.html">&Qt; Style Sheets</ulink>
 </para>
 
 <para>
@@ -1763,12 +1763,12 @@ Those behaviors feel strange, but they are not necessarily bugs. The <option>--n
 
 <para>For more information please visit these websites:</para>
 <itemizedlist>
-<listitem><para><ulink url="http://userbase.kde.org/Konsole">&konsole;'s homepage on &kde;'s UserBase</ulink>&nbsp;</para></listitem>
-<listitem><para><ulink url="http://konsole.kde.org/">&konsole;'s homepage</ulink></para></listitem>
-<listitem><para><ulink url="http://mail.kde.org/mailman/listinfo/konsole-devel">&konsole;'s mailing list</ulink></para></listitem>
-<listitem><para><ulink url="http://freebsd.kde.org/">&kde; on
+<listitem><para><ulink url="https://userbase.kde.org/Konsole">&konsole;'s homepage on &kde;'s UserBase</ulink>&nbsp;</para></listitem>
+<listitem><para><ulink url="https://konsole.kde.org/">&konsole;'s homepage</ulink></para></listitem>
+<listitem><para><ulink url="https://mail.kde.org/mailman/listinfo/konsole-devel">&konsole;'s mailing list</ulink></para></listitem>
+<listitem><para><ulink url="https://freebsd.kde.org/">&kde; on
 FreeBSD</ulink></para></listitem>
-<listitem><para><ulink url="http://solaris.kde.org/">&kde; on &Solaris;</ulink></para></listitem>
+<listitem><para><ulink url="https://solaris.kde.org/">&kde; on &Solaris;</ulink></para></listitem>
 </itemizedlist>
 
 </appendix>
