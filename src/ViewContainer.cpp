@@ -200,6 +200,8 @@ void TabbedViewContainer::konsoleConfigChanged()
 
     if (KonsoleSettings::tabBarUseUserStyleSheet()) {
         setCssFromFile(KonsoleSettings::tabBarUserStyleSheetFile());
+    } else {
+        setStyleSheet(QString());
     }
 }
 
