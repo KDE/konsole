@@ -903,8 +903,9 @@ void Vt102Emulation::processToken(int token, int p, int q)
 
     // Set Cursor Style (DECSCUSR), VT520, with the extra xterm sequences
     // the first one is a special case, 'ESC[ q', which mimics 'ESC[1 q'
+    // Using 0 to reset to default is matching VTE, but not any official standard.
     case token_csi_sp ('q'    ) : emit setCursorStyleRequest(Enum::BlockCursor,     true);  break;
-    case token_csi_psp('q',  0) : emit setCursorStyleRequest(Enum::BlockCursor,     true);  break;
+    case token_csi_psp('q',  0) : emit resetCursorStyleRequest();                           break;
     case token_csi_psp('q',  1) : emit setCursorStyleRequest(Enum::BlockCursor,     true);  break;
     case token_csi_psp('q',  2) : emit setCursorStyleRequest(Enum::BlockCursor,     false); break;
     case token_csi_psp('q',  3) : emit setCursorStyleRequest(Enum::UnderlineCursor, true);  break;
