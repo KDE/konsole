@@ -3425,6 +3425,77 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         }
     }
 
+    QStringList unsafeCharacters;
+    for (const QChar &c : text) {
+        if (!c.isPrint() && c != QLatin1Char('\t') && c != QLatin1Char('\n')) {
+            QString description;
+            switch(c.unicode()) {
+            case '\x03':
+                description = i18n("^C Interrupt: May abort the current process");
+                break;
+            case '\x04':
+                description = i18n("^D End of transmission: May exit the current process");
+                break;
+            case '\x07':
+                description = i18n("^G Bell: Will try to emit an audible warning");
+                break;
+            case '\x08':
+                description = i18n("^H Backspace");
+                break;
+            case '\x13':
+                description = i18n("^S Scroll lock: Locks terminal output");
+                break;
+            case '\x1a':
+                description = i18n("^Z Suspend: Stops current process");
+                break;
+            case '\x1b':
+                description = i18n("ESC: Used for special commands to the current process");
+                break;
+            default:
+                description = i18n("Other unprintable character (\\x%1)").arg(QString::number(c.unicode(), 16));
+                break;
+            }
+            unsafeCharacters.append(description);
+        }
+    }
+    unsafeCharacters.removeDuplicates();
+
+    if (!unsafeCharacters.isEmpty()) {
+        int result = KMessageBox::warningYesNoCancelList(window(),
+                i18n("The text you're trying to paste contains hidden unprintable characters, "
+                    "do you want to filter them out?"),
+                unsafeCharacters,
+                i18nc("@title", "Filter"),
+                KGuiItem(i18nc("@action:button",
+                    "&Remove unprintable"),
+                    QStringLiteral("filter-symbolic")),
+                KGuiItem(i18nc("@action:button",
+                    "Confirm &paste"),
+                    QStringLiteral("edit-paste")),
+                KGuiItem(i18nc("@action:button",
+                    "&Cancel paste"),
+                    QStringLiteral("dialog-cancel")),
+                QStringLiteral("ShowPasteUnprintableWarning")
+            );
+        switch(result){
+        case KMessageBox::Cancel:
+            return;
+        case KMessageBox::Yes: {
+            QString sanitized;
+            for (const QChar &c : text) {
+                if (c.isPrint() || c == QLatin1Char('\t') || c == QLatin1Char('\n')) {
+                    sanitized.append(c);
+                }
+            }
+            text = sanitized;
+        }
+        case KMessageBox::No:
+            break;
+        default:
+            break;
+        }
+    }
+
     if (!text.isEmpty()) {
         text.replace(QLatin1Char('\n'), QLatin1Char('\r'));
         if (bracketedPasteMode()) {
