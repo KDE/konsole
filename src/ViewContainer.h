@@ -145,7 +145,7 @@ public:
      * The only thing that this class holds are TerminalDisplays, so
      * this is the only thing that should be used to retrieve widgets.
      */
-    TerminalDisplay *terminalAt(int index);
+    ViewSplitter *viewSplitterAt(int index);
 Q_SIGNALS:
     /** Emitted when the container has no more children */
     void empty(TabbedViewContainer *container);
@@ -209,6 +209,7 @@ private:
     int _contextMenuTabIndex;
     ViewManager::NavigationVisibility _navigationVisibility;
     int _tabHistoryIndex;
+    ViewSplitter *_viewSplitter;
 };
 
 

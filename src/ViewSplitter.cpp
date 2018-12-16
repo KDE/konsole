@@ -32,6 +32,8 @@
 using Konsole::ViewSplitter;
 using Konsole::TerminalDisplay;
 
+//TODO: Connect the TerminalDisplay destroyed signal here.
+
 ViewSplitter::ViewSplitter(QWidget *parent) :
     QSplitter(parent)
 {

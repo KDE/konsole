@@ -47,6 +47,7 @@
 #include "SessionController.h"
 #include "DetachableTabBar.h"
 #include "TerminalDisplay.h"
+#include "ViewSplitter.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 
@@ -86,9 +87,12 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
         &Konsole::TabbedViewContainer::tabDoubleClicked);
     connect(tabBar(), &QTabBar::customContextMenuRequested, this,
         &Konsole::TabbedViewContainer::openTabContextMenu);
-    connect(tabBarWidget, &DetachableTabBar::detachTab, this, [this](int idx) {
-        emit detachTab(this, terminalAt(idx));
-    });
+
+    //TODO: Fix Detach.
+    // connect(tabBarWidget, &DetachableTabBar::detachTab, this, [this](int idx) {
+    //    emit detachTab(this, terminalAt(idx));
+    //});
+
     connect(this, &TabbedViewContainer::currentChanged, this, &TabbedViewContainer::currentTabChanged);
 
     // The context menu of tab bar
@@ -104,12 +108,14 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     });
 
 #if defined(ENABLE_DETACHING)
+    /* TODO FIX DETACH
     auto detachAction = _contextPopupMenu->addAction(
         QIcon::fromTheme(QStringLiteral("tab-detach")),
         i18nc("@action:inmenu", "&Detach Tab"), this,
         [this] { emit detachTab(this, terminalAt(_contextMenuTabIndex)); }
     );
     detachAction->setObjectName(QStringLiteral("tab-detach"));
+    */
 #endif
 
     auto editAction = _contextPopupMenu->addAction(
@@ -145,13 +151,15 @@ TabbedViewContainer::~TabbedViewContainer()
     }
 }
 
-TerminalDisplay *TabbedViewContainer::terminalAt(int index)
+ViewSplitter *TabbedViewContainer::viewSplitterAt(int index)
 {
-    return qobject_cast<TerminalDisplay*>(widget(index));
+    return qobject_cast<ViewSplitter*>(widget(index));
 }
 
 void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
 {
+    // TODO: Fix Detaching.
+    /*
     const int id = terminalAt(index)->sessionController()->identifier();
     // This one line here will be removed as soon as I finish my new split handling.
     // it's hacky but it works.
@@ -163,6 +171,7 @@ void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
             removeView(terminalAt(index));
         }
     }
+    */
 }
 
 void TabbedViewContainer::konsoleConfigChanged()
@@ -235,28 +244,33 @@ void TabbedViewContainer::moveActiveView(MoveDirection direction)
     const int currentIndex = indexOf(currentWidget());
     int newIndex = direction  == MoveViewLeft ? qMax(currentIndex - 1, 0) : qMin(currentIndex + 1, count() - 1);
 
-    auto swappedWidget = terminalAt(newIndex);
-    auto currentWidget = terminalAt(currentIndex);
-    auto swappedContext = swappedWidget->sessionController();
-    auto currentContext = currentWidget->sessionController();
+    auto swappedWidget = viewSplitterAt(newIndex);
+    auto swappedTitle = tabBar()->tabText(newIndex);
+    auto swappedIcon = tabBar()->tabIcon(newIndex);
+
+    auto currentWidget = viewSplitterAt(currentIndex);
+    auto currentTitle = tabBar()->tabText(currentIndex);
+    auto currentIcon = tabBar()->tabIcon(currentIndex);
 
     if (newIndex < currentIndex) {
-        insertTab(newIndex, currentWidget, currentContext->icon(), currentContext->title());
-        insertTab(currentIndex, swappedWidget, swappedContext->icon(), swappedContext->title());
+        insertTab(newIndex, currentWidget, currentIcon, currentTitle);
+        insertTab(currentIndex, swappedWidget, swappedIcon, swappedTitle);
     } else {
-        insertTab(currentIndex, swappedWidget, swappedContext->icon(), swappedContext->title());
-        insertTab(newIndex, currentWidget, currentContext->icon(), currentContext->title());
+        insertTab(currentIndex, swappedWidget, swappedIcon, swappedTitle);
+        insertTab(newIndex, currentWidget, currentIcon, currentTitle);
     }
     setCurrentIndex(newIndex);
 }
 
 void TabbedViewContainer::addView(TerminalDisplay *view, int index)
 {
+    auto viewSplitter = new ViewSplitter();
+    viewSplitter->addTerminalDisplay(view, Qt::Horizontal);
     auto item = view->sessionController();
     if (index == -1) {
-        addTab(view, item->icon(), item->title());
+        addTab(viewSplitter, item->icon(), item->title());
     } else {
-        insertTab(index, view, item->icon(), item->title());
+        insertTab(index, viewSplitter, item->icon(), item->title());
     }
 
     _tabHistory.append(view);
@@ -266,8 +280,6 @@ void TabbedViewContainer::addView(TerminalDisplay *view, int index)
             &Konsole::TabbedViewContainer::updateIcon);
     connect(item, &Konsole::ViewProperties::activity, this,
             &Konsole::TabbedViewContainer::updateActivity);
-    connect(view, &QWidget::destroyed, this,
-            &Konsole::TabbedViewContainer::viewDestroyed);
     emit viewAdded(view);
 }
 
@@ -402,8 +414,12 @@ void TabbedViewContainer::tabDoubleClicked(int index)
 
 void TabbedViewContainer::renameTab(int index)
 {
+    /* TODO: Fix renaming.
+        The problem with the renaming right now is that many Terminals can be at a tab.
+    */
+
     if (index != -1) {
-        terminalAt(index)->sessionController()->rename();
+//        terminalAt(index)->sessionController()->rename();
     }
 }
 
@@ -428,9 +444,13 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
     }
 #endif
 
+    /* This needs to nove away fro the tab or to lock every thing inside of it.
+     * for now, disable.
+     * */
+    //
     // Add the read-only action
-    auto controller = terminalAt(_contextMenuTabIndex)->sessionController();
-    auto sessionController = qobject_cast<SessionController*>(controller);
+#if 0
+    auto sessionController = terminalAt(_contextMenuTabIndex)->sessionController();
 
     if (sessionController != nullptr) {
         auto collection = sessionController->actionCollection();
@@ -448,14 +468,14 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
             }
         }
     }
-
+#endif
     _contextPopupMenu->exec(tabBar()->mapToGlobal(point));
 }
 
 void TabbedViewContainer::currentTabChanged(int index)
 {
     if (index != -1) {
-        auto *view = terminalAt(index);
+        auto view = widget(index)->findChild<TerminalDisplay*>();
         view->setFocus();
         updateTabHistory(view);
         emit activeViewChanged(view);
@@ -521,7 +541,10 @@ void TabbedViewContainer::updateIcon(ViewProperties *item)
 }
 
 void TabbedViewContainer::closeTerminalTab(int idx) {
-    terminalAt(idx)->sessionController()->closeSession();
+    //TODO: This for should probably go to the ViewSplitter
+    for (auto terminal : viewSplitterAt(idx)->findChildren<TerminalDisplay*>()) {
+        terminal->sessionController()->closeSession();
+    }
 }
 
 ViewManager *TabbedViewContainer::connectedViewManager()

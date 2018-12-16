@@ -885,13 +885,11 @@ QList<ViewProperties *> ViewManager::viewProperties() const
         return {};
     }
 
-    list.reserve(container->count());
+    auto terminalContainers = _viewContainer->findChildren<TerminalDisplay*>();
+    list.reserve(terminalContainers.size());
 
-    for(int i = 0, end = container->count(); i < end; i++) {
-        auto view = container->terminalAt(i);
-        ViewProperties *properties = view->sessionController();
-        Q_ASSERT(properties);
-        list << properties;
+    for(auto terminalDisplay : _viewContainer->findChildren<TerminalDisplay*>()) {
+        list.append(terminalDisplay->sessionController());
     }
 
     return list;
