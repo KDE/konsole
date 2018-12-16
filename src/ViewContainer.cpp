@@ -201,8 +201,14 @@ void TabbedViewContainer::konsoleConfigChanged()
     if (KonsoleSettings::tabBarUseUserStyleSheet()) {
         setCssFromFile(KonsoleSettings::tabBarUserStyleSheetFile());
     } else {
-        setStyleSheet(QString());
+        setCss();
     }
+}
+
+void TabbedViewContainer::setCss(const QString& styleSheet)
+{
+    static const QString defaultCss = QStringLiteral("QTabWidget::tab-bar, QTabWidget::pane { margin: 0; }\n");
+    setStyleSheet(defaultCss + styleSheet);
 }
 
 void TabbedViewContainer::setCssFromFile(const QUrl &url)
@@ -218,7 +224,7 @@ void TabbedViewContainer::setCssFromFile(const QUrl &url)
     }
 
     QTextStream in(&file);
-    setStyleSheet(in.readAll());
+    setCss(in.readAll());
 }
 
 void TabbedViewContainer::moveActiveView(MoveDirection direction)

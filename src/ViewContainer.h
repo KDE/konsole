@@ -101,6 +101,7 @@ public:
     /** Changes the active view to the last used view */
     void activateLastUsedView(bool reverse);
 
+    void setCss(const QString& styleSheet = QString());
     void setCssFromFile(const QUrl& url);
     /**
      * This enum describes the directions
