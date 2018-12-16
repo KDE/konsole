@@ -53,7 +53,7 @@ int ViewManager::lastManagerId = 0;
 
 ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     QObject(parent),
-    _viewSplitter(nullptr),
+    _viewContainer(),
     _pluggedController(nullptr),
     _sessionMap(QHash<TerminalDisplay *, Session *>()),
     _actionCollection(collection),
@@ -62,27 +62,17 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _newTabBehavior(PutNewTabAtTheEnd),
     _managerId(0)
 {
-    // create main view area
-    _viewSplitter = new ViewSplitter(nullptr);
-    KAcceleratorManager::setNoAccel(_viewSplitter);
-
-    // the ViewSplitter class supports both recursive and non-recursive splitting,
-    // in non-recursive mode, all containers are inserted into the same top-level splitter
-    // widget, and all the divider lines between the containers have the same orientation
-    //
-    // the ViewManager class is not currently able to handle a ViewSplitter in recursive-splitting
-    // mode
-    _viewSplitter->setRecursiveSplitting(false);
-    _viewSplitter->setFocusPolicy(Qt::NoFocus);
-
+    createContainer();
     // setup actions which are related to the views
     setupActions();
 
+    /* TODO: Reconnect
     // emit a signal when all of the views held by this view manager are destroyed
     connect(_viewSplitter.data(), &Konsole::ViewSplitter::allContainersEmpty,
             this, &Konsole::ViewManager::empty);
     connect(_viewSplitter.data(), &Konsole::ViewSplitter::empty, this,
             &Konsole::ViewManager::empty);
+    */
 
     // listen for profile changes
     connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged,
@@ -97,7 +87,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Windows/")
                                                  + QString::number(_managerId), this);
 
-    _viewSplitter->addContainer(createContainer(), Qt::Vertical);
+//    _viewSplitter->addContainer(createContainer(), Qt::Vertical);
 }
 
 ViewManager::~ViewManager() = default;
@@ -109,17 +99,12 @@ int ViewManager::managerId() const
 
 QWidget *ViewManager::activeView() const
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    if (container != nullptr) {
-        return container->currentWidget();
-    } else {
-        return nullptr;
-    }
+    return _viewContainer->currentWidget();
 }
 
 QWidget *ViewManager::widget() const
 {
-    return _viewSplitter;
+    return _viewContainer;
 }
 
 void ViewManager::setupActions()
@@ -252,16 +237,16 @@ void ViewManager::setupActions()
     const QList<QKeySequence> nextViewActionKeys{Qt::SHIFT + Qt::Key_Right, Qt::CTRL + Qt::Key_PageDown};
     collection->setDefaultShortcuts(nextViewAction, nextViewActionKeys);
     connect(nextViewAction, &QAction::triggered, this, &Konsole::ViewManager::nextView);
-    _viewSplitter->addAction(nextViewAction);
+   // _viewSplitter->addAction(nextViewAction);
 
     const QList<QKeySequence> previousViewActionKeys{Qt::SHIFT + Qt::Key_Left, Qt::CTRL + Qt::Key_PageUp};
     collection->setDefaultShortcuts(previousViewAction, previousViewActionKeys);
     connect(previousViewAction, &QAction::triggered, this, &Konsole::ViewManager::previousView);
-    _viewSplitter->addAction(previousViewAction);
+    // _viewSplitter->addAction(previousViewAction);
 
     collection->setDefaultShortcut(nextContainerAction, Qt::SHIFT + Qt::Key_Tab);
     connect(nextContainerAction, &QAction::triggered, this, &Konsole::ViewManager::nextContainer);
-    _viewSplitter->addAction(nextContainerAction);
+    // _viewSplitter->addAction(nextContainerAction);
 
 #ifdef Q_OS_MACOS
     collection->setDefaultShortcut(moveViewLeftAction,
@@ -271,7 +256,7 @@ void ViewManager::setupActions()
 #endif
     connect(moveViewLeftAction, &QAction::triggered, this,
             &Konsole::ViewManager::moveActiveViewLeft);
-    _viewSplitter->addAction(moveViewLeftAction);
+    // _viewSplitter->addAction(moveViewLeftAction);
 
 #ifdef Q_OS_MACOS
     collection->setDefaultShortcut(moveViewRightAction,
@@ -281,26 +266,26 @@ void ViewManager::setupActions()
 #endif
     connect(moveViewRightAction, &QAction::triggered, this,
             &Konsole::ViewManager::moveActiveViewRight);
-    _viewSplitter->addAction(moveViewRightAction);
+    // _viewSplitter->addAction(moveViewRightAction);
 
     connect(lastViewAction, &QAction::triggered, this, &Konsole::ViewManager::lastView);
-    _viewSplitter->addAction(lastViewAction);
+    // _viewSplitter->addAction(lastViewAction);
 
     collection->setDefaultShortcut(lastUsedViewAction, Qt::CTRL + Qt::Key_Tab);
     connect(lastUsedViewAction, &QAction::triggered, this, &Konsole::ViewManager::lastUsedView);
-    _viewSplitter->addAction(lastUsedViewAction);
+    // _viewSplitter->addAction(lastUsedViewAction);
 
     collection->setDefaultShortcut(lastUsedViewReverseAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Tab);
     connect(lastUsedViewReverseAction, &QAction::triggered, this, &Konsole::ViewManager::lastUsedViewReverse);
-    _viewSplitter->addAction(lastUsedViewReverseAction);
+    //_viewSplitter->addAction(lastUsedViewReverseAction);
 
     connect(toggleTwoViewsAction, &QAction::triggered, this, &Konsole::ViewManager::toggleTwoViews);
-    _viewSplitter->addAction(toggleTwoViewsAction);
+    //_viewSplitter->addAction(toggleTwoViewsAction);
 }
 
 void ViewManager::switchToView(int index)
 {
-    _viewSplitter->activeContainer()->setCurrentIndex(index);
+    _viewContainer->setCurrentIndex(index);
 }
 
 void ViewManager::updateDetachViewState()
@@ -310,6 +295,7 @@ void ViewManager::updateDetachViewState()
         return;
     }
 
+#if 0
     const bool splitView = _viewSplitter->containers().count() >= 2;
     auto activeContainer = _viewSplitter->activeContainer();
     const bool shouldEnable = splitView
@@ -321,60 +307,47 @@ void ViewManager::updateDetachViewState()
     if ((detachAction != nullptr) && shouldEnable != detachAction->isEnabled()) {
         detachAction->setEnabled(shouldEnable);
     }
+#endif
 }
 
 void ViewManager::moveActiveViewLeft()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->moveActiveView(TabbedViewContainer::MoveViewLeft);
+    _viewContainer->moveActiveView(TabbedViewContainer::MoveViewLeft);
 }
 
 void ViewManager::moveActiveViewRight()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->moveActiveView(TabbedViewContainer::MoveViewRight);
+    _viewContainer->moveActiveView(TabbedViewContainer::MoveViewRight);
 }
 
 void ViewManager::nextContainer()
 {
-    _viewSplitter->activateNextContainer();
+    //_viewSplitter->activateNextContainer();
 }
 
 void ViewManager::nextView()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->activateNextView();
+    _viewContainer->activateNextView();
 }
 
 void ViewManager::previousView()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->activatePreviousView();
+    _viewContainer->activatePreviousView();
 }
 
 void ViewManager::lastView()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->activateLastView();
+    _viewContainer->activateLastView();
 }
 
 void ViewManager::lastUsedView()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->activateLastUsedView(false);
+    _viewContainer->activateLastUsedView(false);
 }
 
 void ViewManager::lastUsedViewReverse()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->activateLastUsedView(true);
+    _viewContainer->activateLastUsedView(true);
 }
 
 void ViewManager::toggleTwoViews()
@@ -386,9 +359,12 @@ void ViewManager::toggleTwoViews()
 
 void ViewManager::detachActiveView()
 {
+    //TODO: Disable Detach temporarely.
+#if 0
     // find the currently active view and remove it from its container
     TabbedViewContainer *container = _viewSplitter->activeContainer();
     detachView(container, container->currentWidget());
+#endif
 }
 
 void ViewManager::detachView(TabbedViewContainer *container, QWidget *view)
@@ -419,17 +395,20 @@ void ViewManager::detachView(TabbedViewContainer *container, QWidget *view)
     // if the container from which the view was removed is now empty then it can be deleted,
     // unless it is the only container in the window, in which case it is left empty
     // so that there is always an active container
+//TODO: Verify if this is correct.
+#if 0
     if (_viewSplitter->containers().count() > 1
         && container->count() == 0) {
         removeContainer(container);
     }
+#endif
 }
 
 void ViewManager::sessionFinished()
 {
     // if this slot is called after the view manager's main widget
     // has been destroyed, do nothing
-    if (_viewSplitter.isNull()) {
+    if (_viewContainer.isNull()) {
         return;
     }
 
@@ -437,7 +416,7 @@ void ViewManager::sessionFinished()
     Q_ASSERT(session);
 
     // close attached views
-    QList<TerminalDisplay *> children = _viewSplitter->findChildren<TerminalDisplay *>();
+    QList<TerminalDisplay *> children = _viewContainer->findChildren<TerminalDisplay *>();
 
     foreach (TerminalDisplay *view, children) {
         if (_sessionMap[view] == session) {
@@ -478,6 +457,7 @@ void ViewManager::splitTopBottom()
 
 void ViewManager::splitView(Qt::Orientation orientation)
 {
+#if 0
     TabbedViewContainer *container = createContainer();
 
     if (_viewSplitter->activeContainer()->count()) {
@@ -506,10 +486,12 @@ void ViewManager::splitView(Qt::Orientation orientation)
     if (activeView != nullptr) {
         activeView->setFocus(Qt::OtherFocusReason);
     }
+#endif
 }
 
 void ViewManager::removeContainer(TabbedViewContainer *container)
 {
+#if 0
     // remove session map entries for views in this container
     for(int i = 0, end = container->count(); i < end; i++) {
         auto view = container->widget(i);
@@ -522,20 +504,26 @@ void ViewManager::removeContainer(TabbedViewContainer *container)
     container->deleteLater();
 
     emit splitViewToggle(_viewSplitter->containers().count() > 1);
+#endif
 }
 
 void ViewManager::expandActiveContainer()
 {
+#if 0
     _viewSplitter->adjustContainerSize(_viewSplitter->activeContainer(), 10);
+#endif
 }
 
 void ViewManager::shrinkActiveContainer()
 {
+#if 0
     _viewSplitter->adjustContainerSize(_viewSplitter->activeContainer(), -10);
+#endif
 }
 
 void ViewManager::closeActiveContainer()
 {
+#if 0
     // only do something if there is more than one container active
     if (_viewSplitter->containers().count() > 1) {
         TabbedViewContainer *container = _viewSplitter->activeContainer();
@@ -546,10 +534,12 @@ void ViewManager::closeActiveContainer()
         // without having to manually focus it themselves
         nextContainer();
     }
+#endif
 }
 
 void ViewManager::closeOtherContainers()
 {
+#if 0
     TabbedViewContainer *active = _viewSplitter->activeContainer();
 
     foreach (TabbedViewContainer *container, _viewSplitter->containers()) {
@@ -557,6 +547,7 @@ void ViewManager::closeOtherContainers()
             removeContainer(container);
         }
     }
+#endif
 }
 
 SessionController *ViewManager::createController(Session *session, TerminalDisplay *view)
@@ -589,7 +580,8 @@ void ViewManager::controllerChanged(SessionController *controller)
         return;
     }
 
-    _viewSplitter->setFocusProxy(controller->view());
+    //TODO: Verify This.
+    // _viewSplitter->setFocusProxy(controller->view());
 
     _pluggedController = controller;
     emit activeViewChanged(controller);
@@ -634,7 +626,7 @@ void ViewManager::createView(Session *session, TabbedViewContainer *container, i
 void ViewManager::createView(TabbedViewContainer *tabWidget, Session *session)
 {
     const int index = _newTabBehavior == PutNewTabAfterCurrentTab ?
-                _viewSplitter->activeContainer()->currentIndex() + 1 : -1;
+                _viewContainer->currentIndex() + 1 : -1;
 
     createView(session, tabWidget, index);
 }
@@ -642,7 +634,7 @@ void ViewManager::createView(TabbedViewContainer *tabWidget, Session *session)
 TabbedViewContainer *ViewManager::createContainer()
 {
 
-    auto *container = new TabbedViewContainer(this, _viewSplitter);
+    auto *container = new TabbedViewContainer(this, nullptr);
     container->setNavigationVisibility(_navigationVisibility);
     //TODO: Fix Detaching.
     connect(container, &TabbedViewContainer::detachTab, this, &ViewManager::detachView);
@@ -669,6 +661,7 @@ TabbedViewContainer *ViewManager::createContainer()
     connect(container, &Konsole::TabbedViewContainer::activeViewChanged, this,
             &Konsole::ViewManager::viewActivated);
 
+    _viewContainer = container;
     return container;
 }
 
@@ -731,9 +724,8 @@ ViewManager::NavigationMethod ViewManager::navigationMethod() const
 
 void ViewManager::containerViewsChanged(TabbedViewContainer *container)
 {
-    if ((!_viewSplitter.isNull()) && container == _viewSplitter->activeContainer()) {
-        emit viewPropertiesChanged(viewProperties());
-    }
+    // TODO: Verify that this is right.
+    emit viewPropertiesChanged(viewProperties());
 }
 
 void ViewManager::viewDestroyed(QWidget *view)
@@ -753,9 +745,12 @@ void ViewManager::viewDestroyed(QWidget *view)
         }
     }
     //we only update the focus if the splitter is still alive
+    // TODO: Verify.
+#if 0
     if (!_viewSplitter.isNull()) {
         updateDetachViewState();
     }
+#endif
     // The below causes the menus  to be messed up
     // Only happens when using the tab bar close button
 //    if (_pluggedController)
@@ -887,7 +882,7 @@ QList<ViewProperties *> ViewManager::viewProperties() const
 {
     QList<ViewProperties *> list;
 
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
+    TabbedViewContainer *container = _viewContainer;
     if (container == nullptr) {
         return {};
     }
@@ -911,7 +906,7 @@ void ViewManager::saveSessions(KConfigGroup &group)
     QSet<Session *> unique;
     int tab = 1;
 
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
+    TabbedViewContainer *container = _viewContainer;
 
     // first: sessions in the active container, preserving the order
     Q_ASSERT(container);
@@ -948,7 +943,7 @@ void ViewManager::saveSessions(KConfigGroup &group)
 
 TabbedViewContainer *ViewManager::activeContainer()
 {
-    return _viewSplitter->activeContainer();
+    return _viewContainer;
 }
 
 void ViewManager::restoreSessions(const KConfigGroup &group)
@@ -978,7 +973,7 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
     }
 
     if (display != nullptr) {
-        _viewSplitter->activeContainer()->setCurrentWidget(display);
+        activeContainer()->setCurrentWidget(display);
         display->setFocus(Qt::OtherFocusReason);
     }
 
@@ -1025,7 +1020,7 @@ void ViewManager::setCurrentSession(int sessionId)
     QHash<TerminalDisplay *, Session *>::const_iterator i;
     for (i = _sessionMap.constBegin(); i != _sessionMap.constEnd(); ++i) {
         if (i.value()->sessionId() == sessionId) {
-            TabbedViewContainer *container = _viewSplitter->activeContainer();
+            TabbedViewContainer *container = activeContainer();
             if (container != nullptr) {
                 container->setCurrentWidget(i.key());
             }
@@ -1123,18 +1118,14 @@ void ViewManager::moveSessionRight()
 
 void ViewManager::setTabWidthToText(bool setTabWidthToText)
 {
-    for(auto container : _viewSplitter->containers()) {
-        container->tabBar()->setExpanding(!setTabWidthToText);
-        container->tabBar()->update();
-    }
+    _viewContainer->tabBar()->setExpanding(!setTabWidthToText);
+    _viewContainer->tabBar()->update();
 }
 
 void ViewManager::setNavigationVisibility(NavigationVisibility navigationVisibility) {
     if (_navigationVisibility != navigationVisibility) {
         _navigationVisibility = navigationVisibility;
-        for(auto *container : _viewSplitter->containers()) {
-            container->setNavigationVisibility(navigationVisibility);
-        }
+        _viewContainer->setNavigationVisibility(navigationVisibility);
     }
 }
 

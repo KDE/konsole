@@ -417,7 +417,7 @@ private:
     SessionController *createController(Session *session, TerminalDisplay *view);
 
 private:
-    QPointer<ViewSplitter> _viewSplitter;
+    QPointer<TabbedViewContainer> _viewContainer;
     QPointer<SessionController> _pluggedController;
 
     QHash<TerminalDisplay *, Session *> _sessionMap;
