@@ -27,14 +27,13 @@
 
 // Konsole
 #include "ViewContainer.h"
+#include "TerminalDisplay.h"
 
 using Konsole::ViewSplitter;
-using Konsole::TabbedViewContainer;
+using Konsole::TerminalDisplay;
 
 ViewSplitter::ViewSplitter(QWidget *parent) :
-    QSplitter(parent),
-    _containers(QList<TabbedViewContainer *>()),
-    _recursiveSplitting(true)
+    QSplitter(parent)
 {
 }
 
@@ -47,7 +46,7 @@ void ViewSplitter::childEmpty(ViewSplitter *splitter)
     }
 }
 
-void ViewSplitter::adjustContainerSize(TabbedViewContainer *container, int percentage)
+void ViewSplitter::adjustTerminalDisplaySize(TerminalDisplay *container, int percentage)
 {
     int containerIndex = indexOf(container);
 
@@ -86,16 +85,14 @@ ViewSplitter *ViewSplitter::activeSplitter()
     return splitter;
 }
 
-void ViewSplitter::registerContainer(TabbedViewContainer *container)
+void ViewSplitter::registerTerminalDisplay(TerminalDisplay *container)
 {
-    _containers << container;
-    connect(container, &TabbedViewContainer::empty, this, &ViewSplitter::containerEmpty);
+    _terminalDisplays.append(container);
 }
 
-void ViewSplitter::unregisterContainer(TabbedViewContainer *container)
+void ViewSplitter::unregisterTerminalDisplay(TerminalDisplay *container)
 {
-    _containers.removeAll(container);
-    disconnect(container, nullptr, this, nullptr);
+    _terminalDisplays.removeOne(container);
 }
 
 void ViewSplitter::updateSizes()
@@ -118,32 +115,21 @@ void ViewSplitter::updateSizes()
     setSizes(widgetSizes);
 }
 
-void ViewSplitter::setRecursiveSplitting(bool recursive)
+void ViewSplitter::removeTerminalDisplay(TerminalDisplay *terminalDisplay)
 {
-    _recursiveSplitting = recursive;
+    Q_ASSERT(terminalDisplays().contains(terminalDisplay));
+
+    unregisterTerminalDisplay(terminalDisplay);
 }
 
-bool ViewSplitter::recursiveSplitting() const
-{
-    return _recursiveSplitting;
-}
-
-void ViewSplitter::removeContainer(TabbedViewContainer *container)
-{
-    Q_ASSERT(containers().contains(container));
-
-    unregisterContainer(container);
-}
-
-void ViewSplitter::addContainer(TabbedViewContainer *container, Qt::Orientation containerOrientation)
+void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation containerOrientation)
 {
     ViewSplitter *splitter = activeSplitter();
 
     if (splitter->count() < 2
-        || containerOrientation == splitter->orientation()
-        || !_recursiveSplitting) {
-        splitter->registerContainer(container);
-        splitter->addWidget(container);
+        || containerOrientation == splitter->orientation()) {
+        splitter->registerTerminalDisplay(terminalDisplay);
+        splitter->addWidget(terminalDisplay);
 
         if (splitter->orientation() != containerOrientation) {
             splitter->setOrientation(containerOrientation);
@@ -155,16 +141,16 @@ void ViewSplitter::addContainer(TabbedViewContainer *container, Qt::Orientation 
         connect(newSplitter, &Konsole::ViewSplitter::empty, splitter,
                 &Konsole::ViewSplitter::childEmpty);
 
-        TabbedViewContainer *oldContainer = splitter->activeContainer();
-        const int oldContainerIndex = splitter->indexOf(oldContainer);
+        TerminalDisplay *oldTerminalDisplay = splitter->activeTerminalDisplay();
+        const int oldContainerIndex = splitter->indexOf(oldTerminalDisplay);
 
-        splitter->unregisterContainer(oldContainer);
+        splitter->unregisterTerminalDisplay(oldTerminalDisplay);
 
-        newSplitter->registerContainer(oldContainer);
-        newSplitter->registerContainer(container);
+        newSplitter->registerTerminalDisplay(oldTerminalDisplay);
+        newSplitter->registerTerminalDisplay(terminalDisplay);
 
-        newSplitter->addWidget(oldContainer);
-        newSplitter->addWidget(container);
+        newSplitter->addWidget(oldTerminalDisplay);
+        newSplitter->addWidget(terminalDisplay);
         newSplitter->setOrientation(containerOrientation);
         newSplitter->updateSizes();
         newSplitter->show();
@@ -173,7 +159,9 @@ void ViewSplitter::addContainer(TabbedViewContainer *container, Qt::Orientation 
     }
 }
 
-void ViewSplitter::containerEmpty(TabbedViewContainer * myContainer)
+//TODO: Maybe move this to the TabbedViewContainer ?
+/*
+void ViewSplitter::containerEmpty(TerminalDisplay * myContainer)
 {
     _containers.removeAll(myContainer);
     if (count() == 0) {
@@ -195,85 +183,56 @@ void ViewSplitter::containerEmpty(TabbedViewContainer * myContainer)
         currentSplitter = qobject_cast<ViewSplitter*>(currentSplitter->parent());
     }
 
-    for(auto tabWidget : currentSplitter->findChildren<TabbedViewContainer*>()) {
+    for(auto tabWidget : currentSplitter->findChildren<TerminalDisplay*>()) {
         if (tabWidget != myContainer && tabWidget->count()) {
             tabWidget->setCurrentIndex(0);
         }
     }
 }
+*/
 
-void ViewSplitter::activateNextContainer()
+void ViewSplitter::activateNextTerminalDisplay()
 {
-    TabbedViewContainer *active = activeContainer();
+    TerminalDisplay *active = activeTerminalDisplay();
 
-    int index = _containers.indexOf(active);
+    int index = _terminalDisplays.indexOf(active);
 
     if (index == -1) {
         return;
     }
 
-    if (index == _containers.count() - 1) {
+    if (index == _terminalDisplays.count() - 1) {
         index = 0;
     } else {
         index++;
     }
 
-    setActiveContainer(_containers.at(index));
+    setActiveTerminalDisplay(_terminalDisplays.at(index));
 }
 
-void ViewSplitter::activatePreviousContainer()
+void ViewSplitter::activatePreviousTerminalDisplay()
 {
-    TabbedViewContainer *active = activeContainer();
+    TerminalDisplay *active = activeTerminalDisplay();
 
-    int index = _containers.indexOf(active);
+    int index = _terminalDisplays.indexOf(active);
 
     if (index == 0) {
-        index = _containers.count() - 1;
+        index = _terminalDisplays.count() - 1;
     } else {
         index--;
     }
 
-    setActiveContainer(_containers.at(index));
+    setActiveTerminalDisplay(_terminalDisplays.at(index));
 }
 
-void ViewSplitter::setActiveContainer(TabbedViewContainer *container)
+void ViewSplitter::setActiveTerminalDisplay(TerminalDisplay *terminalDisplay)
 {
-    QWidget *activeView = container->currentWidget();
-
-    if (activeView != nullptr) {
-        activeView->setFocus(Qt::OtherFocusReason);
+    if (terminalDisplay != nullptr) {
+        terminalDisplay->setFocus(Qt::OtherFocusReason);
     }
 }
 
-TabbedViewContainer *ViewSplitter::activeContainer() const
+TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
 {
-    if (QWidget *focusW = focusWidget()) {
-        TabbedViewContainer *focusContainer = nullptr;
-
-        while (focusW != nullptr) {
-            foreach (TabbedViewContainer *container, _containers) {
-                if (container == focusW) {
-                    focusContainer = container;
-                    break;
-                }
-            }
-            focusW = focusW->parentWidget();
-        }
-
-        if (focusContainer != nullptr) {
-            return focusContainer;
-        }
-    }
-
-    QList<ViewSplitter *> splitters = findChildren<ViewSplitter *>();
-
-    if (!splitters.isEmpty()) {
-        return splitters.last()->activeContainer();
-    } else {
-        if (!_containers.isEmpty()) {
-            return _containers.last();
-        } else {
-            return nullptr;
-        }
-    }
+    return qobject_cast<TerminalDisplay*>(focusWidget());
 }

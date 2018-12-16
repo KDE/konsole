@@ -68,11 +68,9 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
 
     /* TODO: Reconnect
     // emit a signal when all of the views held by this view manager are destroyed
-    connect(_viewSplitter.data(), &Konsole::ViewSplitter::allContainersEmpty,
-            this, &Konsole::ViewManager::empty);
-    connect(_viewSplitter.data(), &Konsole::ViewSplitter::empty, this,
-            &Konsole::ViewManager::empty);
     */
+    connect(_viewContainer.data(), &Konsole::TabbedViewContainer::empty,
+            this, &Konsole::ViewManager::empty);
 
     // listen for profile changes
     connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged,

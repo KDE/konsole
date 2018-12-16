@@ -29,7 +29,7 @@
 class QFocusEvent;
 
 namespace Konsole {
-class TabbedViewContainer;
+class TerminalDisplay;
 
 /**
  * A splitter which holds a number of ViewContainer objects and allows
@@ -65,10 +65,10 @@ public:
      *                    will be created, into which the container will
      *                    be inserted.
      */
-    void addContainer(TabbedViewContainer *container, Qt::Orientation orientation);
+    void addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation orientation);
 
     /** Removes a container from the splitter.  The container is not deleted. */
-    void removeContainer(TabbedViewContainer *container);
+    void removeTerminalDisplay(TerminalDisplay *terminalDisplay);
 
     /** Returns the child ViewSplitter widget which currently has the focus */
     ViewSplitter *activeSplitter();
@@ -84,25 +84,25 @@ public:
      * mySplitter->activeSplitter()->activeContainer() where mySplitter
      * is the ViewSplitter widget at the top of the hierarchy.
      */
-    TabbedViewContainer *activeContainer() const;
+    TerminalDisplay *activeTerminalDisplay() const;
 
     /**
      * Gives the focus to the active view in the specified container
      */
-    void setActiveContainer(TabbedViewContainer *container);
+    void setActiveTerminalDisplay(TerminalDisplay *container);
 
     /**
      * Returns a list of the containers held by this splitter
      */
-    QList<TabbedViewContainer *> containers() const
+    QList<TerminalDisplay *> terminalDisplays() const
     {
-        return _containers;
+        return _terminalDisplays;
     }
 
     /**
      * Gives the focus to the active view in the next container
      */
-    void activateNextContainer();
+    void activateNextTerminalDisplay();
 
     /**
      * Changes the size of the specified @p container by a given @p percentage.
@@ -113,48 +113,16 @@ public:
      * The sizes of the remaining containers are increased or decreased
      * uniformly to maintain the width of the splitter.
      */
-    void adjustContainerSize(TabbedViewContainer *container, int percentage);
+    void adjustTerminalDisplaySize(TerminalDisplay *container, int percentage);
 
     /**
      * Gives the focus to the active view in the previous container
      */
-    void activatePreviousContainer();
-
-    /**
-     * Specifies whether the view may be split recursively.
-     *
-     * If this is false, all containers will be placed into the same
-     * top-level splitter.  Adding a container with an orientation
-     * which is different to that specified when adding the previous
-     * containers will change the orientation for all dividers
-     * between containers.
-     *
-     * If this is true, adding a container to the view splitter with
-     * an orientation different to the orientation of the previous
-     * area will result in the previously active container being
-     * replaced with a new splitter containing the active container
-     * and the newly added container.
-     */
-    void setRecursiveSplitting(bool recursive);
-
-    /**
-     * Returns whether the view may be split recursively.
-     * See setRecursiveSplitting()
-     */
-    bool recursiveSplitting() const;
+    void activatePreviousTerminalDisplay();
 
 Q_SIGNALS:
     /** Signal emitted when the last child widget is removed from the splitter */
     void empty(ViewSplitter *splitter);
-
-    /**
-     * Signal emitted when the containers held by this splitter become empty, this
-     * differs from the empty() signal which is only emitted when all of the containers
-     * are deleted.  This signal is emitted even if there are still container widgets.
-     *
-     * TODO: This does not yet work recursively (ie. when splitters inside splitters have empty containers)
-     */
-    void allContainersEmpty();
 
 protected:
     //virtual void focusEvent(QFocusEvent* event);
@@ -162,24 +130,20 @@ protected:
 private:
     // Adds container to splitter's internal list and
     // connects signals and slots
-    void registerContainer(TabbedViewContainer *container);
+    void registerTerminalDisplay(TerminalDisplay *terminalDisplay);
     // Removes container from splitter's internal list and
     // removes signals and slots
-    void unregisterContainer(TabbedViewContainer *container);
+    void unregisterTerminalDisplay(TerminalDisplay *container);
 
     void updateSizes();
 
 private Q_SLOTS:
-    // Called to indicate that a child ViewContainer is empty
-    void containerEmpty(TabbedViewContainer *container);
-
     // Called to indicate that a child ViewSplitter is empty
     // (ie. all child widgets have been deleted)
     void childEmpty(ViewSplitter *splitter);
 
 private:
-    QList<TabbedViewContainer *> _containers;
-    bool _recursiveSplitting;
+    QList<TerminalDisplay *> _terminalDisplays;
 };
 }
 #endif //VIEWSPLITTER_H
