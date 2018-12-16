@@ -26,8 +26,14 @@
 #include <QDialog>
 #include <QHash>
 #include <QPointer>
+#include <QButtonGroup>
+#include <QWidget>
+#include <QGridLayout>
+#include <QCheckBox>
+#include <QSpinBox>
 
 // KDE
+#include <KPageDialog>
 #include <KNS3/Entry>
 
 // Konsole
@@ -36,13 +42,24 @@
 #include "ColorScheme.h"
 #include "ColorSchemeEditor.h"
 #include "KeyboardTranslatorManager.h"
+#include "FontDialog.h"
 
-class QAbstractButton;
+// Backward compatibility
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#define qAsConst(code)
+#endif
+
+class KPluralHandlingSpinBox;
+class KLocalizedString;
 class QItemSelectionModel;
-class QTextCodec;
-class QDialogButtonBox;
 namespace Ui {
-class EditProfileDialog;
+    class EditProfileGeneralPage;
+    class EditProfileTabsPage;
+    class EditProfileAppearancePage;
+    class EditProfileScrollingPage;
+    class EditProfileKeyboardPage;
+    class EditProfileMousePage;
+    class EditProfileAdvancedPage;
 }
 
 namespace Konsole {
@@ -59,7 +76,7 @@ namespace Konsole {
  * the persistent argument set to false.  These changes are then
  * un-done when the dialog is closed.
  */
-class KONSOLEPRIVATE_EXPORT EditProfileDialog : public QDialog
+class KONSOLEPRIVATE_EXPORT EditProfileDialog: public KPageDialog
 {
     Q_OBJECT
 
@@ -100,8 +117,10 @@ protected:
     bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
+    QSize sizeHint() const override;
+
     // sets up the specified tab page if necessary
-    void preparePage(int);
+    void preparePage(KPageWidgetItem *current, KPageWidgetItem *before = nullptr);
 
     // saves changes to profile
     void save();
@@ -125,18 +144,23 @@ private Q_SLOTS:
     void silenceSecondsChanged(int);
 
     // appearance page
-    void setFontSize(double pointSize);
-    void setFontInputValue(const QFont &);
-    void showAllFontsButtonWarning(bool enable);
     void setAntialiasText(bool enable);
     void setBoldIntense(bool enable);
     void useFontLineCharacters(bool enable);
-    void showFontDialog();
     void newColorScheme();
     void editColorScheme();
     void saveColorScheme(const ColorScheme &scheme, bool isNewScheme);
     void removeColorScheme();
     void gotNewColorSchemes(const KNS3::Entry::List &changedEntries);
+
+    void toggleBlinkingCursor(bool);
+    void setCursorShape(int);
+    void autoCursorColor();
+    void customCursorColor();
+    void customCursorColorChanged(const QColor &);
+    void terminalMarginChanged(int margin);
+    void lineSpacingChanged(int);
+    void setTerminalCenter(bool enable);
 
     /**
      * Deletes the selected colorscheme from the user's home dir location
@@ -147,17 +171,13 @@ private Q_SLOTS:
 
     void colorSchemeSelected();
     void previewColorScheme(const QModelIndex &index);
-    void fontSelected(const QFont &);
+    void showFontDialog();
     void toggleMouseWheelZoom(bool enable);
 
     // scrolling page
     void historyModeChanged(Enum::HistoryModeEnum mode);
 
     void historySizeChanged(int);
-
-    void hideScrollBar();
-    void showScrollBarLeft();
-    void showScrollBarRight();
 
     void scrollFullPage();
     void scrollHalfPage();
@@ -190,15 +210,9 @@ private Q_SLOTS:
     void toggleBlinkingText(bool);
     void toggleFlowControl(bool);
     void togglebidiRendering(bool);
-    void lineSpacingChanged(int);
-    void toggleBlinkingCursor(bool);
     void updateUrlHintsModifier(bool);
     void toggleReverseUrlHints(bool);
 
-    void setCursorShape(int);
-    void autoCursorColor();
-    void customCursorColor();
-    void customCursorColorChanged(const QColor &);
     void setDefaultCodec(QTextCodec *);
 
     // apply the first previewed changes stored up by delayedPreview()
@@ -207,14 +221,28 @@ private Q_SLOTS:
 private:
     Q_DISABLE_COPY(EditProfileDialog)
 
+    enum PageID {
+        GeneralPage = 0,
+        TabsPage,
+        AppearancePage,
+        ScrollingPage,
+        KeyboardPage,
+        MousePage,
+        AdvancedPage,
+
+        PagesCount,
+    };
+
     // initialize various pages of the dialog
-    void setupGeneralPage(const Profile::Ptr profile);
-    void setupTabsPage(const Profile::Ptr profile);
-    void setupAppearancePage(const Profile::Ptr profile);
-    void setupKeyboardPage(const Profile::Ptr profile);
-    void setupScrollingPage(const Profile::Ptr profile);
-    void setupAdvancedPage(const Profile::Ptr profile);
-    void setupMousePage(const Profile::Ptr info);
+    void setupGeneralPage(const Profile::Ptr &profile);
+    void setupTabsPage(const Profile::Ptr &profile);
+    void setupAppearancePage(const Profile::Ptr &profile);
+    void setupKeyboardPage(const Profile::Ptr &profile);
+    void setupScrollingPage(const Profile::Ptr &profile);
+    void setupAdvancedPage(const Profile::Ptr &profile);
+    void setupMousePage(const Profile::Ptr &profile);
+
+    int maxSpinBoxWidth(const KPluralHandlingSpinBox *spinBox, const KLocalizedString &suffix);
 
     // Returns the name of the colorScheme used in the current profile
     const QString currentColorSchemeName() const;
@@ -246,6 +274,8 @@ private:
     void updateCaption(const Profile::Ptr profile);
     void updateTransparencyWarning();
 
+    void updateFontPreview(QFont font);
+
     // Update _tempProfile in a way of respecting the apply button.
     // When used with some previewed property, this method should
     // always come after the preview operation.
@@ -272,7 +302,19 @@ private:
         Profile::Property property;
         const char *slot;
     };
-    void setupCheckBoxes(const QVector<BooleanOption>& options, const Profile::Ptr profile);
+    void setupCheckBoxes(const QVector<BooleanOption>& options, const Profile::Ptr &profile);
+
+    struct ButtonGroupOption {
+        QAbstractButton *button;
+        int value;
+    };
+    struct ButtonGroupOptions {
+        QButtonGroup *group;
+        Profile::Property profileProperty;
+        bool preview;
+        QVector<ButtonGroupOption> buttons;
+    };
+    void setupButtonGroup(const ButtonGroupOptions &options, const Profile::Ptr &profile);
 
     // returns false if:
     // - the profile name is empty
@@ -281,22 +323,38 @@ private:
     // otherwise returns true.
     bool isValidProfileName();
 
-    Ui::EditProfileDialog *_ui;
+    Ui::EditProfileGeneralPage      *_generalUi;
+    Ui::EditProfileTabsPage         *_tabsUi;
+    Ui::EditProfileAppearancePage   *_appearanceUi;
+    Ui::EditProfileScrollingPage    *_scrollingUi;
+    Ui::EditProfileKeyboardPage     *_keyboardUi;
+    Ui::EditProfileMousePage        *_mouseUi;
+    Ui::EditProfileAdvancedPage     *_advancedUi;
+
+    using PageSetupMethod = void (EditProfileDialog::*)(const Profile::Ptr &);
+    struct Page {
+        Page(PageSetupMethod setupPage = nullptr, bool needsUpdate = false)
+            : setupPage(setupPage)
+            , needsUpdate(needsUpdate)
+        {}
+
+        PageSetupMethod setupPage;
+        bool needsUpdate;
+    };
+
+    QMap<KPageWidgetItem *, Page> _pages;
+
     Profile::Ptr _tempProfile;
     Profile::Ptr _profile;
 
-    // keeps track of pages which need to be updated to match the current
-    // profile.  all elements in this vector are set to true when the
-    // profile is changed and individual elements are set to false
-    // after an update by a call to ensurePageLoaded()
-    QVector<bool> _pageNeedsUpdate;
     QHash<int, QVariant> _previewedProperties;
 
     QHash<int, QVariant> _delayedPreviewProperties;
     QTimer *_delayedPreviewTimer;
 
     ColorSchemeEditor *_colorDialog;
-    QDialogButtonBox *mButtonBox;
+    QDialogButtonBox *_buttonBox;
+    FontDialog *_fontDialog;
 };
 
 /**
@@ -315,6 +373,109 @@ public:
     QSize sizeHint(const QStyleOptionViewItem &option,
                    const QModelIndex &index) const Q_DECL_OVERRIDE;
 };
+
+/**
+ * An utility class for aligning 0th column in multiple QGridLayouts.
+ *
+ * Limitations:
+ * - a layout can't be nested in another layout
+ * - reference widget must be an ancestor of all added layouts
+ * - only 0th column is processed (widgets spanning multiple columns
+ *   are ignored)
+ */
+class LabelsAligner: public QObject {
+    Q_OBJECT
+
+public:
+    LabelsAligner(QWidget *refWidget): _refWidget(refWidget) {}
+
+    void addLayout(QGridLayout *layout) { _layouts.append(layout); }
+    void addLayouts(const QVector<QGridLayout *> &layouts) { _layouts.append(layouts); }
+    void setReferenceWidget(QWidget *refWidget) { _refWidget = refWidget; }
+
+public Q_SLOTS:
+    void updateLayouts() {
+        for (const auto *layout: qAsConst(_layouts)) {
+            QWidget *widget = layout->parentWidget();
+            Q_ASSERT(widget);
+            do {
+                QLayout *widgetLayout = widget->layout();
+                if (widgetLayout) {
+                    widgetLayout->update();
+                    widgetLayout->activate();
+                }
+                widget = widget->parentWidget();
+            } while (widget != _refWidget && widget != nullptr);
+        }
+    }
+
+    void align() {
+        Q_ASSERT(_refWidget);
+
+        if (_layouts.count() <= 1) {
+            return;
+        }
+
+        int maxRight = 0;
+        for (const auto *layout: qAsConst(_layouts)) {
+            int left = getLeftMargin(layout);
+            for (int row = 0; row < layout->rowCount(); ++row) {
+                QLayoutItem *layoutItem = layout->itemAtPosition(row, LABELS_COLUMN);
+                if (!layoutItem) {
+                    continue;
+                }
+                QWidget *widget = layoutItem->widget();
+                if (!widget) {
+                    continue;
+                }
+                const int idx = layout->indexOf(widget);
+                int rows, cols, rowSpan, colSpan;
+                layout->getItemPosition(idx, &rows, &cols, &rowSpan, &colSpan);
+                if (colSpan > 1) {
+                    continue;
+                }
+
+                const int right = left + widget->sizeHint().width();
+                if (maxRight < right) {
+                    maxRight = right;
+                }
+            }
+        }
+
+        for (auto *l: qAsConst(_layouts)) {
+            int left = getLeftMargin(l);
+            l->setColumnMinimumWidth(LABELS_COLUMN, maxRight - left);
+        }
+    }
+
+private:
+    int getLeftMargin(const QGridLayout *layout) {
+        int left = layout->contentsMargins().left();
+
+        if (layout->parent()->isWidgetType()) {
+            auto *parentWidget = layout->parentWidget();
+            Q_ASSERT(parentWidget);
+            left += parentWidget->contentsMargins().left();
+        } else {
+            auto *parentLayout = qobject_cast<QLayout *>(layout->parent());
+            Q_ASSERT(parentLayout);
+            left += parentLayout->contentsMargins().left();
+        }
+
+        QWidget *parent = layout->parentWidget();
+        while (parent != _refWidget && parent != nullptr) {
+            left = parent->mapToParent(QPoint(left, 0)).x();
+            parent = parent->parentWidget();
+        }
+        return left;
+    };
+
+    static constexpr int LABELS_COLUMN = 0;
+
+    QWidget *_refWidget;
+    QVector<QGridLayout *> _layouts;
+};
+
 }
 
 #endif // EDITPROFILEDIALOG_H

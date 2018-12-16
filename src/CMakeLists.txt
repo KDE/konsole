@@ -63,6 +63,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ColorSchemeEditor.cpp
                         CopyInputDialog.cpp
                         EditProfileDialog.cpp
+                        FontDialog.cpp
                         Emulation.cpp
                         DetachableTabBar.cpp
                         Filter.cpp
@@ -141,7 +142,13 @@ endif()
 
 ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 CopyInputDialog.ui
-                                EditProfileDialog.ui
+                                EditProfileGeneralPage.ui
+                                EditProfileTabsPage.ui
+                                EditProfileAppearancePage.ui
+                                EditProfileScrollingPage.ui
+                                EditProfileKeyboardPage.ui
+                                EditProfileMousePage.ui
+                                EditProfileAdvancedPage.ui
                                 KeyBindingEditor.ui
                                 RenameTabDialog.ui
                                 RenameTabWidget.ui

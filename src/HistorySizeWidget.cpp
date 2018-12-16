@@ -24,6 +24,8 @@
 // Qt
 #include <QButtonGroup>
 #include <QAbstractButton>
+#include <QToolTip>
+#include <QWhatsThis>
 
 #include <KLocalizedString>
 
@@ -38,26 +40,6 @@ HistorySizeWidget::HistorySizeWidget(QWidget *parent) :
 {
     _ui = new Ui::HistorySizeWidget();
     _ui->setupUi(this);
-
-    _ui->fixedSizeWarningWidget->setVisible(false);
-    _ui->fixedSizeWarningWidget->setWordWrap(true);
-    _ui->fixedSizeWarningWidget->setCloseButtonVisible(false);
-    _ui->fixedSizeWarningWidget->setMessageType(KMessageWidget::Information);
-    _ui->fixedSizeWarningWidget->setText(i18nc("@info:status",
-                                               "When using this option, the scrollback data will be saved "
-                                               "to RAM.  If you choose a huge value, your system may run out "
-                                               "of free RAM and cause serious issues with your system."));
-
-    _ui->unlimitedWarningWidget->setVisible(false);
-    _ui->unlimitedWarningWidget->setWordWrap(true);
-    _ui->unlimitedWarningWidget->setCloseButtonVisible(false);
-    _ui->unlimitedWarningWidget->setMessageType(KMessageWidget::Information);
-    _ui->unlimitedWarningWidget->setText(i18nc("@info:status",
-                                               "When using this option, the scrollback data will be written "
-                                               "unencrypted to temporary files. Those temporary files will be "
-                                               "deleted automatically when Konsole is closed in a normal manner.\n"
-                                               "Use Settings->Configure Konsole->File Location to select the "
-                                               "location of the temporary files."));
 
     // focus and select the spinner automatically when appropriate
     _ui->fixedSizeHistoryButton->setFocusProxy(_ui->historyLineSpinner);
@@ -79,6 +61,36 @@ HistorySizeWidget::HistorySizeWidget(QWidget *parent) :
     connect(_ui->historyLineSpinner,
             static_cast<void (KPluralHandlingSpinBox::*)(int)>(&KPluralHandlingSpinBox::valueChanged),
             this, &Konsole::HistorySizeWidget::historySizeChanged);
+
+    auto warningButtonSizePolicy = _ui->fixedSizeHistoryWarningButton->sizePolicy();
+    warningButtonSizePolicy.setRetainSizeWhenHidden(true);
+
+    _ui->fixedSizeHistoryWarningButton->setSizePolicy(warningButtonSizePolicy);
+    _ui->fixedSizeHistoryWarningButton->hide();
+    connect(_ui->fixedSizeHistoryButton, &QAbstractButton::toggled, _ui->historyLineSpinner, &QWidget::setEnabled);
+    connect(_ui->fixedSizeHistoryButton, &QAbstractButton::toggled, _ui->fixedSizeHistoryWarningButton, &QWidget::setVisible);
+    connect(_ui->fixedSizeHistoryWarningButton, &QToolButton::clicked, this, [this](bool) {
+                const QString message = i18nc("@info:whatsthis", "When using this option, the scrollback data will be saved to RAM. If you choose a huge value, your system may run out of free RAM and cause serious issues with your system.");
+                const QPoint pos = QPoint(_ui->fixedSizeHistoryWrapper->width() / 2, _ui->fixedSizeHistoryWrapper->height());
+                QWhatsThis::showText(_ui->fixedSizeHistoryWrapper->mapToGlobal(pos), message, _ui->fixedSizeHistoryWrapper);
+            });
+
+    _ui->unlimitedHistoryWarningButton->setSizePolicy(warningButtonSizePolicy);
+    _ui->unlimitedHistoryWarningButton->hide();
+    connect(_ui->unlimitedHistoryButton, &QAbstractButton::toggled, _ui->unlimitedHistoryWarningButton, &QWidget::setVisible);
+    connect(_ui->unlimitedHistoryWarningButton, &QToolButton::clicked, this, [this](bool) {
+                const auto message = i18nc("@info:whatsthis", "When using this option, the scrollback data will be written unencrypted to temporary files. Those temporary files will be deleted automatically when Konsole is closed in a normal manner.<br/>Use <i>Settings → Configure Konsole → File Location</i> to select the location of the temporary files.");
+                const QPoint pos = QPoint(_ui->unlimitedHistoryWrapper->width() / 2, _ui->unlimitedHistoryWrapper->height());
+                QWhatsThis::showText(_ui->unlimitedHistoryWrapper->mapToGlobal(pos), message, _ui->unlimitedHistoryWrapper);
+            });
+
+    // Make radio buttons height equal
+    // fixedSizeHistoryWrapper contains radio + spinbox + toolbutton, so it
+    // has height always equal to or larger than single radio button, and
+    // radio + toolbutton
+    const int radioButtonHeight = _ui->fixedSizeHistoryWrapper->sizeHint().height();
+    _ui->noHistoryButton->setMinimumHeight(radioButtonHeight);
+    _ui->unlimitedHistoryButton->setMinimumHeight(radioButtonHeight);
 }
 
 HistorySizeWidget::~HistorySizeWidget()
@@ -89,8 +101,6 @@ HistorySizeWidget::~HistorySizeWidget()
 void HistorySizeWidget::buttonClicked(QAbstractButton *)
 {
     Enum::HistoryModeEnum selectedMode = mode();
-    _ui->fixedSizeWarningWidget->setVisible(Enum::FixedSizeHistory == selectedMode);
-    _ui->unlimitedWarningWidget->setVisible(Enum::UnlimitedHistory == selectedMode);
     emit historyModeChanged(selectedMode);
 }
 
@@ -103,8 +113,6 @@ void HistorySizeWidget::setMode(Enum::HistoryModeEnum aMode)
     } else if (aMode == Enum::UnlimitedHistory) {
         _ui->unlimitedHistoryButton->setChecked(true);
     }
-    _ui->fixedSizeWarningWidget->setVisible(Enum::FixedSizeHistory == aMode);
-    _ui->unlimitedWarningWidget->setVisible(Enum::UnlimitedHistory == aMode);
 }
 
 Enum::HistoryModeEnum HistorySizeWidget::mode() const
@@ -130,4 +138,12 @@ void HistorySizeWidget::setLineCount(int lines)
 int HistorySizeWidget::lineCount() const
 {
     return _ui->historyLineSpinner->value();
+}
+
+int HistorySizeWidget::preferredLabelHeight()
+{
+    Q_ASSERT(_ui);
+    Q_ASSERT(_ui->noHistoryButton);
+
+    return _ui->fixedSizeHistoryWrapper->sizeHint().height();
 }

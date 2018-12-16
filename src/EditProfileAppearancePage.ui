@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditProfileAppearancePage</class>
+ <widget class="QWidget" name="EditProfileAppearancePage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="colorSchemeTab">
+      <attribute name="title">
+       <string>Color scheme &amp;&amp; font</string>
+      </attribute>
+      <layout class="QGridLayout">
+       <item row="0" column="0" colspan="3">
+        <widget class="KMessageWidget" name="colorSchemeMessageWidget">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QListView" name="colorSchemeList">
+         <property name="verticalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <layout class="QVBoxLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="newColorSchemeButton">
+             <property name="toolTip">
+              <string>Create a new color scheme based upon the selected scheme</string>
+             </property>
+             <property name="text">
+              <string comment="@action:button Create an alternate color scheme">New...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="editColorSchemeButton">
+             <property name="toolTip">
+              <string>Edit the selected color scheme</string>
+             </property>
+             <property name="text">
+              <string>Edit...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="removeColorSchemeButton">
+             <property name="toolTip">
+              <string>Delete the selected color scheme</string>
+             </property>
+             <property name="text">
+              <string>Remove</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="resetColorSchemeButton">
+             <property name="toolTip">
+              <string>Reset the selected color scheme settings to the default values</string>
+             </property>
+             <property name="text">
+              <string>Defaults</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="KNS3::Button" name="downloadColorSchemeButton">
+             <property name="text">
+              <string>Get New...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0" colspan="3">
+        <widget class="KMessageWidget" name="transparencyWarningWidget" />
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Font:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="fontPreview">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="text">
+          <string notr="true" />
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="buddy">
+          <cstring>chooseFontButton</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QPushButton" name="chooseFontButton">
+         <property name="text">
+          <string comment="@action:button open a dialog with list of fonts">Choose...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" colspan="2">
+        <widget class="QCheckBox" name="antialiasTextButton">
+         <property name="text">
+          <string>Smooth fonts</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" colspan="2">
+        <widget class="QCheckBox" name="boldIntenseButton">
+         <property name="text">
+          <string>Draw intense colors in bold font</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1" colspan="2">
+        <widget class="QCheckBox" name="useFontLineCharactersButton">
+         <property name="toolTip">
+          <string>Use the selected font for line characters instead of the builtin code</string>
+         </property>
+         <property name="text">
+          <string>Use line characters contained in font</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="cursorTab">
+      <attribute name="title">
+       <string>Cursor</string>
+      </attribute>
+      <layout class="QGridLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0" colspan="2">
+        <layout class="QGridLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <item row="0" column="0" alignment="Qt::AlignRight">
+          <widget class="QLabel" name="label_8">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Shape:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QRadioButton" name="cursorShapeBlock">
+           <property name="text">
+            <string>Block</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">cursorShape</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QRadioButton" name="cursorShapeIBeam">
+           <property name="text">
+            <string>I-Beam</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">cursorShape</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QRadioButton" name="cursorShapeUnderline">
+           <property name="text">
+            <string>Underline</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">cursorShape</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>16</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="4" column="0" alignment="Qt::AlignRight">
+          <widget class="QLabel" name="label_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Color:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QRadioButton" name="autoCursorColorButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Set the cursor to match the color of the character underneath it.</string>
+           </property>
+           <property name="text">
+            <string>Match current character</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">cursorColor</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <layout class="QHBoxLayout" name="customColorLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QRadioButton" name="customCursorColorButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Use a custom, fixed color for the cursor</string>
+             </property>
+             <property name="text">
+              <string>Custom cursor color:</string>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">cursorColor</string>
+             </attribute>
+            </widget>
+           </item>
+           <item>
+            <widget class="KColorButton" name="customColorSelectButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Select the color used to draw the cursor</string>
+             </property>
+             <property name="text">
+              <string />
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item row="6" column="1">
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>16</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="7" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Blinking:</string>
+           </property>
+           <property name="buddy">
+            <cstring>enableBlinkingCursorButton</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QCheckBox" name="enableBlinkingCursorButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Make the cursor blink regularly</string>
+           </property>
+           <property name="text">
+            <string />
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="miscTab">
+      <attribute name="title">
+       <string>Miscellaneous</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <layout class="QGridLayout" name="miscTabLayout" columnstretch="0,1">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <item row="0" column="0" colspan="2">
+          <widget class="QGroupBox" name="contentsGroup">
+           <property name="title">
+            <string comment="@title:group">Terminal contents</string>
+           </property>
+           <layout class="QGridLayout" columnstretch="0,1">
+            <item row="0" column="0" alignment="Qt::AlignRight">
+             <widget class="QLabel" name="lineSpacingLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Line spacing:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="buddy">
+               <cstring>lineSpacingSpinner</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <layout class="QHBoxLayout">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QSpinBox" name="lineSpacingSpinner">
+                <property name="toolTip">
+                 <string>The number of pixels between two lines</string>
+                </property>
+                <property name="suffix">
+                 <string comment="(pixels) visual size unit"> px</string>
+                </property>
+                <property name="minimum">
+                 <number>0</number>
+                </property>
+                <property name="maximum">
+                 <number>20</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0" alignment="Qt::AlignRight">
+             <widget class="QLabel" name="label_4">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Margins:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="buddy">
+               <cstring>marginsSpinner</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <layout class="QHBoxLayout">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QSpinBox" name="marginsSpinner">
+                <property name="suffix">
+                 <string comment="(pixels) visual size unit"> px</string>
+                </property>
+                <property name="maximum">
+                 <number>99</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item row="2" column="0" alignment="Qt::AlignRight">
+             <widget class="QLabel" name="label_5">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Align to center:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="buddy">
+               <cstring>alignToCenterButton</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="alignToCenterButton">
+              <property name="text">
+               <string>Enabled</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>16</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="2" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Window:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QCheckBox" name="showTerminalSizeHintButton">
+           <property name="toolTip">
+            <string>Show terminal size in columns and lines in the center of window after resizing</string>
+           </property>
+           <property name="text">
+            <string>Show hint for terminal size after resizing</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QCheckBox" name="dimWhenInactiveCheckbox">
+           <property name="toolTip">
+            <string>Indicate whether the window is active by dimming the colors</string>
+           </property>
+           <property name="text">
+            <string>Dim the colors when the window loses focus</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMessageWidget</class>
+   <extends>QFrame</extends>
+   <header>kmessagewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KNS3::Button</class>
+   <extends>QPushButton</extends>
+   <header location="global">KNS3/Button</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>colorSchemeList</tabstop>
+  <tabstop>newColorSchemeButton</tabstop>
+  <tabstop>editColorSchemeButton</tabstop>
+  <tabstop>removeColorSchemeButton</tabstop>
+  <tabstop>resetColorSchemeButton</tabstop>
+  <tabstop>downloadColorSchemeButton</tabstop>
+  <tabstop>chooseFontButton</tabstop>
+  <tabstop>antialiasTextButton</tabstop>
+  <tabstop>boldIntenseButton</tabstop>
+  <tabstop>useFontLineCharactersButton</tabstop>
+  <tabstop>cursorShapeBlock</tabstop>
+  <tabstop>cursorShapeIBeam</tabstop>
+  <tabstop>cursorShapeUnderline</tabstop>
+  <tabstop>autoCursorColorButton</tabstop>
+  <tabstop>customCursorColorButton</tabstop>
+  <tabstop>customColorSelectButton</tabstop>
+  <tabstop>enableBlinkingCursorButton</tabstop>
+  <tabstop>lineSpacingSpinner</tabstop>
+  <tabstop>marginsSpinner</tabstop>
+  <tabstop>alignToCenterButton</tabstop>
+  <tabstop>showTerminalSizeHintButton</tabstop>
+  <tabstop>dimWhenInactiveCheckbox</tabstop>
+ </tabstops>
+ <resources />
+ <connections />
+ <buttongroups>
+  <buttongroup name="cursorColor" />
+  <buttongroup name="cursorShape" />
+ </buttongroups>
+</ui>

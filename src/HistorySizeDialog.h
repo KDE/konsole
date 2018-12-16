@@ -52,6 +52,8 @@ public:
     /** See HistorySizeWidget::lineCount. */
     int lineCount() const;
 
+    QSize sizeHint() const override;
+
 private:
     Ui::HistorySizeDialog *_ui;
 };

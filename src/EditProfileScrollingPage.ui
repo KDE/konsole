@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditProfileScrollingPage</class>
+ <widget class="QWidget" name="EditProfileScrollingPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QGridLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <item row="0" column="0" alignment="Qt::AlignRight|Qt::AlignTop">
+      <widget class="QLabel" name="historySizeLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Scrollback:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="Konsole::HistorySizeWidget" name="historySizeWidget" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>16</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="2" column="0" alignment="Qt::AlignRight">
+      <widget class="QLabel" name="label_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Scroll Page Up/Down:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QRadioButton" name="scrollHalfPage">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Scroll the page the half height of window</string>
+       </property>
+       <property name="text">
+        <string>Half screen height</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">scrollAmount</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QRadioButton" name="scrollFullPage">
+       <property name="toolTip">
+        <string>Scroll the page the full height of window</string>
+       </property>
+       <property name="text">
+        <string>Full screen height</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">scrollAmount</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>16</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="5" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+      <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Scrollbar position:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QRadioButton" name="scrollBarRightButton">
+       <property name="toolTip">
+        <string>Show the scroll bar on the right side of the terminal window</string>
+       </property>
+       <property name="text">
+        <string comment="@option:radio Show scrollbar on the right side">Right side</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">scrollBarPosition</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QRadioButton" name="scrollBarLeftButton">
+       <property name="toolTip">
+        <string>Show the scroll bar on the left side of the terminal window</string>
+       </property>
+       <property name="text">
+        <string comment="@option:radio Show scrollbar on the left side">Left side</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">scrollBarPosition</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QRadioButton" name="scrollBarHiddenButton">
+       <property name="text">
+        <string comment="@option:radio Hide the scroll bar">Hidden</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">scrollBarPosition</string>
+       </attribute>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Konsole::HistorySizeWidget</class>
+   <extends>QWidget</extends>
+   <header>HistorySizeWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections />
+ <buttongroups>
+  <buttongroup name="scrollAmount" />
+  <buttongroup name="scrollBarPosition" />
+ </buttongroups>
+</ui>

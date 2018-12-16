@@ -6,117 +6,179 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>143</height>
+    <width>320</width>
+    <height>84</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
-    <widget class="QRadioButton" name="noHistoryButton">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="toolTip">
-      <string>Do not remember previous output</string>
-     </property>
-     <property name="text">
-      <string>No scrollback</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetFixedSize</enum>
-     </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0">
      <item>
-      <widget class="QRadioButton" name="fixedSizeHistoryButton">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <layout class="QHBoxLayout">
+       <property name="spacing">
+        <number>0</number>
        </property>
+       <item>
+        <widget class="QWidget" name="fixedSizeHistoryWrapper" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QRadioButton" name="fixedSizeHistoryButton">
+            <property name="toolTip">
+             <string>Limit the remembered output to a fixed number of lines</string>
+            </property>
+            <property name="text">
+             <string>Fixed size:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="KPluralHandlingSpinBox" name="historyLineSpinner">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Number of lines of output to remember</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>1000000</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="fixedSizeHistoryWarningButton">
+            <property name="icon">
+             <iconset theme="emblem-warning">
+              <normaloff>.</normaloff>.</iconset>
+            </property>
+            <property name="autoRaise">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="unlimitedHistoryWrapper" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item alignment="Qt::AlignVCenter">
+           <widget class="QRadioButton" name="unlimitedHistoryButton">
+            <property name="toolTip">
+             <string>Remember all output produced by the terminal</string>
+            </property>
+            <property name="text">
+             <string>Unlimited</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignVCenter">
+           <widget class="QToolButton" name="unlimitedHistoryWarningButton">
+            <property name="icon">
+             <iconset theme="emblem-warning">
+              <normaloff>.</normaloff>.</iconset>
+            </property>
+            <property name="autoRaise">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="noHistoryButton">
        <property name="toolTip">
-        <string>Limit the remembered output to a fixed number of lines</string>
+        <string>Do not remember previous output</string>
        </property>
        <property name="text">
-        <string>Fixed size scrollback:</string>
+        <string>None</string>
        </property>
       </widget>
-     </item>
-     <item>
-      <widget class="KPluralHandlingSpinBox" name="historyLineSpinner">
-       <property name="toolTip">
-        <string>Number of lines of output to remember</string>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>1000000</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="KMessageWidget" name="fixedSizeWarningWidget">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QRadioButton" name="unlimitedHistoryButton">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="toolTip">
-      <string>Remember all output produced by the terminal</string>
-     </property>
-     <property name="text">
-      <string>Unlimited scrollback</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="KMessageWidget" name="unlimitedWarningWidget">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>
@@ -126,13 +188,7 @@
    <extends>QSpinBox</extends>
    <header>KPluralHandlingSpinBox</header>
   </customwidget>
-  <customwidget>
-   <class>KMessageWidget</class>
-   <extends>QFrame</extends>
-   <header>kmessagewidget.h</header>
-   <container>1</container>
-  </customwidget>
  </customwidgets>
- <resources/>
- <connections/>
+ <resources />
+ <connections />
 </ui>

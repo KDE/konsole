@@ -10,9 +10,9 @@
     <height>110</height>
    </rect>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout">
    <item row="0" column="0">
-    <widget class="Konsole::RenameTabWidget" name="renameTabWidget"/>
+    <widget class="Konsole::RenameTabWidget" name="renameTabWidget" />
    </item>
   </layout>
  </widget>
@@ -23,6 +23,6 @@
    <header>RenameTabWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
- <connections/>
+ <resources />
+ <connections />
 </ui>

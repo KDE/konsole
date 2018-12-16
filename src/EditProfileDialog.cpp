@@ -29,7 +29,6 @@
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QFileDialog>
-#include <QFontDialog>
 #include <QInputDialog>
 #include <QIcon>
 #include <QLinearGradient>
@@ -41,6 +40,7 @@
 #include <QTimer>
 #include <QUrl>
 #include <QVBoxLayout>
+#include <QStandardPaths>
 
 // KDE
 #include <KCodecAction>
@@ -51,8 +51,14 @@
 #include <KWindowSystem>
 
 // Konsole
+#include "ui_EditProfileGeneralPage.h"
+#include "ui_EditProfileTabsPage.h"
+#include "ui_EditProfileAppearancePage.h"
+#include "ui_EditProfileScrollingPage.h"
+#include "ui_EditProfileKeyboardPage.h"
+#include "ui_EditProfileMousePage.h"
+#include "ui_EditProfileAdvancedPage.h"
 #include "ColorSchemeManager.h"
-#include "ui_EditProfileDialog.h"
 #include "KeyBindingEditor.h"
 #include "KeyboardTranslator.h"
 #include "KeyboardTranslatorManager.h"
@@ -60,45 +66,141 @@
 #include "ShellCommand.h"
 #include "WindowSystemInfo.h"
 #include "Shortcut_p.h"
+#include "FontDialog.h"
 
 using namespace Konsole;
 
-EditProfileDialog::EditProfileDialog(QWidget *parent) :
-    QDialog(parent),
-    _ui(nullptr),
-    _tempProfile(nullptr),
-    _profile(nullptr),
-    _pageNeedsUpdate(QVector<bool>()),
-    _previewedProperties(QHash<int, QVariant>()),
-    _delayedPreviewProperties(QHash<int, QVariant>()),
-    _delayedPreviewTimer(new QTimer(this)),
-    _colorDialog(nullptr),
-    mButtonBox(nullptr)
+EditProfileDialog::EditProfileDialog(QWidget *parent)
+    : KPageDialog(parent)
+    , _generalUi(nullptr)
+    , _tabsUi(nullptr)
+    , _appearanceUi(nullptr)
+    , _scrollingUi(nullptr)
+    , _keyboardUi(nullptr)
+    , _mouseUi(nullptr)
+    , _advancedUi(nullptr)
+    , _tempProfile(nullptr)
+    , _profile(nullptr)
+    , _previewedProperties(QHash<int, QVariant>())
+    , _delayedPreviewProperties(QHash<int, QVariant>())
+    , _delayedPreviewTimer(new QTimer(this))
+    , _colorDialog(nullptr)
+    , _buttonBox(nullptr)
+    , _fontDialog(nullptr)
 {
     setWindowTitle(i18n("Edit Profile"));
-    mButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);
-    auto mainWidget = new QWidget(this);
-    auto mainLayout = new QVBoxLayout;
-    setLayout(mainLayout);
-    mainLayout->addWidget(mainWidget);
-    QPushButton *okButton = mButtonBox->button(QDialogButtonBox::Ok);
+    setFaceType(KPageDialog::List);
+
+    _buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Apply);
+    setButtonBox(_buttonBox);
+
+    QPushButton *okButton = _buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
-    connect(mButtonBox, &QDialogButtonBox::accepted, this, &Konsole::EditProfileDialog::accept);
-    connect(mButtonBox, &QDialogButtonBox::rejected, this, &Konsole::EditProfileDialog::reject);
+    connect(_buttonBox, &QDialogButtonBox::accepted, this, &Konsole::EditProfileDialog::accept);
+    connect(_buttonBox, &QDialogButtonBox::rejected, this, &Konsole::EditProfileDialog::reject);
 
     // disable the apply button , since no modification has been made
-    mButtonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
+    _buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 
-    connect(mButtonBox->button(QDialogButtonBox::Apply),
+    connect(_buttonBox->button(QDialogButtonBox::Apply),
             &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::apply);
 
     connect(_delayedPreviewTimer, &QTimer::timeout, this,
             &Konsole::EditProfileDialog::delayedPreviewActivate);
 
-    _ui = new Ui::EditProfileDialog();
-    _ui->setupUi(mainWidget);
-    mainLayout->addWidget(mButtonBox);
+    // General page
+
+    const QString generalPageName = i18nc("@title:tab Generic, common options", "General");
+    auto *generalPageWidget = new QWidget(this);
+    _generalUi = new Ui::EditProfileGeneralPage();
+    _generalUi->setupUi(generalPageWidget);
+    auto *generalPageItem = addPage(generalPageWidget, generalPageName);
+    generalPageItem->setHeader(generalPageName);
+    generalPageItem->setIcon(QIcon::fromTheme(QStringLiteral("utilities-terminal")));
+    _pages[generalPageItem] = Page(&EditProfileDialog::setupGeneralPage);
+
+    // Tabs page
+
+    const QString tabsPageName = i18n("Tabs");
+    auto *tabsPageWidget = new QWidget(this);
+    _tabsUi = new Ui::EditProfileTabsPage();
+    _tabsUi->setupUi(tabsPageWidget);
+    auto *tabsPageItem = addPage(tabsPageWidget, tabsPageName);
+    tabsPageItem->setHeader(tabsPageName);
+    tabsPageItem->setIcon(QIcon::fromTheme(QStringLiteral("tab-duplicate")));
+    _pages[tabsPageItem] = Page(&EditProfileDialog::setupTabsPage);
+
+    LabelsAligner tabsAligner(tabsPageWidget);
+    tabsAligner.addLayout(dynamic_cast<QGridLayout *>(_tabsUi->tabMonitoringGroup->layout()));
+    tabsAligner.addLayout(dynamic_cast<QGridLayout *>(_tabsUi->renameTabWidget->layout()));
+    tabsAligner.updateLayouts();
+    tabsAligner.align();
+
+    // Appearance page
+
+    const QString appearancePageName = i18n("Appearance");
+    auto *appearancePageWidget = new QWidget(this);
+    _appearanceUi = new Ui::EditProfileAppearancePage();
+    _appearanceUi->setupUi(appearancePageWidget);
+    auto *appearancePageItem = addPage(appearancePageWidget, appearancePageName);
+    appearancePageItem->setHeader(appearancePageName);
+    appearancePageItem->setIcon(QIcon::fromTheme(QStringLiteral("kcolorchooser")));
+    _pages[appearancePageItem] = Page(&EditProfileDialog::setupAppearancePage);
+
+    LabelsAligner appearanceAligner(appearancePageWidget);
+    appearanceAligner.addLayout(dynamic_cast<QGridLayout *>(_appearanceUi->miscTabLayout));
+    appearanceAligner.addLayout(dynamic_cast<QGridLayout *>(_appearanceUi->contentsGroup->layout()));
+    appearanceAligner.updateLayouts();
+    appearanceAligner.align();
+
+    // Scrolling page
+
+    const QString scrollingPageName = i18n("Scrolling");
+    auto *scrollingPageWidget = new QWidget(this);
+    _scrollingUi = new Ui::EditProfileScrollingPage();
+    _scrollingUi->setupUi(scrollingPageWidget);
+    auto *scrollingPageItem = addPage(scrollingPageWidget, scrollingPageName);
+    scrollingPageItem->setHeader(scrollingPageName);
+    scrollingPageItem->setIcon(QIcon::fromTheme(QStringLiteral("transform-move-vertical")));
+    _pages[scrollingPageItem] = Page(&EditProfileDialog::setupScrollingPage);
+
+    // adjust "history size" label height to match history size widget's first radio button
+    _scrollingUi->historySizeLabel->setFixedHeight(_scrollingUi->historySizeWidget->preferredLabelHeight());
+
+    // Keyboard page
+
+    const QString keyboardPageName = i18n("Keyboard");
+    const QString keyboardPageTitle = i18n("Key bindings");
+    auto *keyboardPageWidget = new QWidget(this);
+    _keyboardUi = new Ui::EditProfileKeyboardPage();
+    _keyboardUi->setupUi(keyboardPageWidget);
+    auto *keyboardPageItem = addPage(keyboardPageWidget, keyboardPageName);
+    keyboardPageItem->setHeader(keyboardPageTitle);
+    keyboardPageItem->setIcon(QIcon::fromTheme(QStringLiteral("input-keyboard")));
+    _pages[keyboardPageItem] = Page(&EditProfileDialog::setupKeyboardPage);
+
+    // Mouse page
+
+    const QString mousePageName = i18n("Mouse");
+    auto *mousePageWidget = new QWidget(this);
+    _mouseUi = new Ui::EditProfileMousePage();
+    _mouseUi->setupUi(mousePageWidget);
+    auto *mousePageItem = addPage(mousePageWidget, mousePageName);
+    mousePageItem->setHeader(mousePageName);
+    mousePageItem->setIcon(QIcon::fromTheme(QStringLiteral("input-mouse")));
+    _pages[mousePageItem] = Page(&EditProfileDialog::setupMousePage);
+
+    // Advanced page
+
+    const QString advancedPageName = i18nc("@title:tab Complex options", "Advanced");
+    auto *advancedPageWidget = new QWidget(this);
+    _advancedUi = new Ui::EditProfileAdvancedPage();
+    _advancedUi->setupUi(advancedPageWidget);
+    auto *advancedPageItem = addPage(advancedPageWidget, advancedPageName);
+    advancedPageItem->setHeader(advancedPageName);
+    advancedPageItem->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
+    _pages[advancedPageItem] = Page(&EditProfileDialog::setupAdvancedPage);
 
     // there are various setupXYZPage() methods to load the items
     // for each page and update their states to match the profile
@@ -110,16 +212,27 @@ EditProfileDialog::EditProfileDialog(QWidget *parent) :
     // the _pageNeedsUpdate vector keeps track of the pages that have
     // not been updated since the last profile change and will need
     // to be refreshed when the user switches to them
-    _pageNeedsUpdate.resize(_ui->tabWidget->count());
-    connect(_ui->tabWidget, &QTabWidget::currentChanged, this,
-            &Konsole::EditProfileDialog::preparePage);
+    connect(this, &KPageDialog::currentPageChanged,
+            this, &Konsole::EditProfileDialog::preparePage);
+
+    QFontMetrics fm(font());
+    const int ch = fm.width(QLatin1Char('0'));
+
+    // Increase width a bit instead of using possible minimum
+    resize(sizeHint().width() + 10*ch, sizeHint().height());
 
     createTempProfile();
 }
 
 EditProfileDialog::~EditProfileDialog()
 {
-    delete _ui;
+    delete _generalUi;
+    delete _tabsUi;
+    delete _appearanceUi;
+    delete _scrollingUi;
+    delete _keyboardUi;
+    delete _mouseUi;
+    delete _advancedUi;
 }
 
 void EditProfileDialog::save()
@@ -140,7 +253,7 @@ void EditProfileDialog::save()
 
     createTempProfile();
 
-    mButtonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
+    _buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 }
 
 void EditProfileDialog::reject()
@@ -153,7 +266,7 @@ void EditProfileDialog::accept()
 {
     // if the Apply button is disabled then no settings were changed
     // or the changes have already been saved by apply()
-    if (mButtonBox->button(QDialogButtonBox::Apply)->isEnabled()) {
+    if (_buttonBox->button(QDialogButtonBox::Apply)->isEnabled()) {
         if (!isValidProfileName()) {
             return;
         }
@@ -207,14 +320,14 @@ bool EditProfileDialog::isValidProfileName()
                            i18n("<p>Each profile must have a name before it can be saved "
                                 "into disk.</p>"));
         // revert the name in the dialog
-        _ui->profileNameEdit->setText(_profile->name());
+        _generalUi->profileNameEdit->setText(_profile->name());
         selectProfileName();
         return false;
     } else if (!_tempProfile->name().isEmpty() && otherExistingProfileNames.contains(_tempProfile->name())) {
         KMessageBox::sorry(this,
                             i18n("<p>A profile with this name already exists.</p>"));
         // revert the name in the dialog
-        _ui->profileNameEdit->setText(_profile->name());
+        _generalUi->profileNameEdit->setText(_profile->name());
         selectProfileName();
         return false;
     } else {
@@ -255,7 +368,7 @@ void EditProfileDialog::updateCaption(const Profile::Ptr profile)
     }
 }
 
-void EditProfileDialog::setProfile(Profile::Ptr profile)
+void EditProfileDialog::setProfile(Konsole::Profile::Ptr profile)
 {
     Q_ASSERT(profile);
 
@@ -268,8 +381,10 @@ void EditProfileDialog::setProfile(Profile::Ptr profile)
     // and force an update of the currently visible page
     //
     // the other pages will be updated as necessary
-    _pageNeedsUpdate.fill(true);
-    preparePage(_ui->tabWidget->currentIndex());
+    for (Page &page: _pages) {
+        page.needsUpdate = true;
+    }
+    preparePage(currentPage());
 
     if (_tempProfile) {
         createTempProfile();
@@ -287,107 +402,89 @@ const QString EditProfileDialog::currentColorSchemeName() const
     return currentColorSchemeName;
 }
 
-void EditProfileDialog::preparePage(int page)
+void EditProfileDialog::preparePage(KPageWidgetItem *current, KPageWidgetItem *before)
 {
+    Q_UNUSED(before);
+    Q_ASSERT(current);
+    Q_ASSERT(_pages.contains(current));
+
     const Profile::Ptr profile = lookupProfile();
-
-    Q_ASSERT(_pageNeedsUpdate.count() > page);
+    auto setupPage = _pages[current].setupPage;
     Q_ASSERT(profile);
+    Q_ASSERT(setupPage);
 
-    QWidget *pageWidget = _ui->tabWidget->widget(page);
-
-    if (_pageNeedsUpdate[page]) {
-        if (pageWidget == _ui->generalTab) {
-            setupGeneralPage(profile);
-        } else if (pageWidget == _ui->tabsTab) {
-            setupTabsPage(profile);
-        } else if (pageWidget == _ui->appearanceTab) {
-            setupAppearancePage(profile);
-        } else if (pageWidget == _ui->scrollingTab) {
-            setupScrollingPage(profile);
-        } else if (pageWidget == _ui->keyboardTab) {
-            setupKeyboardPage(profile);
-        } else if (pageWidget == _ui->mouseTab) {
-            setupMousePage(profile);
-        } else if (pageWidget == _ui->advancedTab) {
-            setupAdvancedPage(profile);
-        } else {
-            Q_ASSERT(false);
-        }
-
-        _pageNeedsUpdate[page] = false;
+    if (_pages[current].needsUpdate) {
+        (*this.*setupPage)(profile);
+        _pages[current].needsUpdate = false;
     }
 }
 
-void EditProfileDialog::selectProfileName()
+void Konsole::EditProfileDialog::selectProfileName()
 {
-    _ui->profileNameEdit->setFocus();
-    _ui->profileNameEdit->selectAll();
+    _generalUi->profileNameEdit->setFocus();
+    _generalUi->profileNameEdit->selectAll();
 }
 
-void EditProfileDialog::setupGeneralPage(const Profile::Ptr profile)
+void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
 {
     // basic profile options
     {
-        _ui->profileNameEdit->setPlaceholderText(i18nc("@label:textbox", "Enter descriptive label"));
-
         ProfileGroup::Ptr group = profile->asGroup();
         if (!group || group->profiles().count() < 2) {
-            _ui->profileNameEdit->setText(profile->name());
-            _ui->profileNameEdit->setClearButtonEnabled(true);
+            _generalUi->profileNameEdit->setText(profile->name());
+            _generalUi->profileNameEdit->setClearButtonEnabled(true);
         } else {
-            _ui->profileNameEdit->setText(groupProfileNames(group, -1));
-            _ui->profileNameEdit->setEnabled(false);
-            _ui->profileNameLabel->setEnabled(false);
+            _generalUi->profileNameEdit->setText(groupProfileNames(group, -1));
+            _generalUi->profileNameEdit->setEnabled(false);
         }
     }
 
     ShellCommand command(profile->command(), profile->arguments());
-    _ui->commandEdit->setText(command.fullCommand());
+    _generalUi->commandEdit->setText(command.fullCommand());
     // If a "completion" is requested, consider changing this to KLineEdit
     // and using KCompletion.
-    _ui->initialDirEdit->setText(profile->defaultWorkingDirectory());
-    _ui->initialDirEdit->setClearButtonEnabled(true);
+    _generalUi->initialDirEdit->setText(profile->defaultWorkingDirectory());
+    _generalUi->initialDirEdit->setClearButtonEnabled(true);
+    _generalUi->initialDirEdit->setPlaceholderText(QStandardPaths::standardLocations(QStandardPaths::HomeLocation).value(0));
 
-    _ui->dirSelectButton->setIcon(QIcon::fromTheme(QStringLiteral("folder-open")));
-    _ui->iconSelectButton->setIcon(QIcon::fromTheme(profile->icon()));
-    _ui->startInSameDirButton->setChecked(profile->startInCurrentSessionDir());
+    _generalUi->dirSelectButton->setIcon(QIcon::fromTheme(QStringLiteral("folder-open")));
+    _generalUi->iconSelectButton->setIcon(QIcon::fromTheme(profile->icon()));
+    _generalUi->startInSameDirButton->setChecked(profile->startInCurrentSessionDir());
 
-    // terminal options
-    _ui->terminalColumnsEntry->setValue(profile->terminalColumns());
-    _ui->terminalRowsEntry->setValue(profile->terminalRows());
-
-    // window options
-    _ui->showTerminalSizeHintButton->setChecked(profile->showTerminalSizeHint());
-    _ui->dimWhenInactiveCheckbox->setChecked(profile->dimWhenInactive());
+    // initial terminal size
+    const auto rowsSuffix = ki18ncp("Suffix of the number of columns (N columns)", " column", " columns");
+    const auto colsSuffix = ki18ncp("Suffix of the number of rows (N rows)", " row", " rows");
+    _generalUi->terminalColumnsEntry->setValue(profile->terminalColumns());
+    _generalUi->terminalRowsEntry->setValue(profile->terminalRows());
+    _generalUi->terminalColumnsEntry->setSuffix(colsSuffix);
+    _generalUi->terminalRowsEntry->setSuffix(rowsSuffix);
+    // make width of initial terminal size spinboxes equal
+    const int sizeEntryWidth = qMax(maxSpinBoxWidth(_generalUi->terminalColumnsEntry, colsSuffix),
+                                    maxSpinBoxWidth(_generalUi->terminalRowsEntry, rowsSuffix));
+    _generalUi->terminalColumnsEntry->setFixedWidth(sizeEntryWidth);
+    _generalUi->terminalRowsEntry->setFixedWidth(sizeEntryWidth);
 
     // signals and slots
-    connect(_ui->dirSelectButton, &QToolButton::clicked, this,
+    connect(_generalUi->dirSelectButton, &QToolButton::clicked, this,
             &Konsole::EditProfileDialog::selectInitialDir);
-    connect(_ui->iconSelectButton, &QPushButton::clicked, this,
+    connect(_generalUi->iconSelectButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::selectIcon);
-    connect(_ui->startInSameDirButton, &QCheckBox::toggled, this,
+    connect(_generalUi->startInSameDirButton, &QCheckBox::toggled, this,
             &Konsole::EditProfileDialog::startInSameDir);
-    connect(_ui->profileNameEdit, &QLineEdit::textChanged, this,
+    connect(_generalUi->profileNameEdit, &QLineEdit::textChanged, this,
             &Konsole::EditProfileDialog::profileNameChanged);
-    connect(_ui->initialDirEdit, &QLineEdit::textChanged, this,
+    connect(_generalUi->initialDirEdit, &QLineEdit::textChanged, this,
             &Konsole::EditProfileDialog::initialDirChanged);
-    connect(_ui->commandEdit, &QLineEdit::textChanged, this,
+    connect(_generalUi->commandEdit, &QLineEdit::textChanged, this,
             &Konsole::EditProfileDialog::commandChanged);
-    connect(_ui->environmentEditButton, &QPushButton::clicked, this,
+    connect(_generalUi->environmentEditButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::showEnvironmentEditor);
 
-    connect(_ui->terminalColumnsEntry,
+    connect(_generalUi->terminalColumnsEntry,
             static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
             &Konsole::EditProfileDialog::terminalColumnsEntryChanged);
-    connect(_ui->terminalRowsEntry, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    connect(_generalUi->terminalRowsEntry, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
             this, &Konsole::EditProfileDialog::terminalRowsEntryChanged);
-
-    connect(_ui->showTerminalSizeHintButton, &QCheckBox::toggled, this,
-            &Konsole::EditProfileDialog::showTerminalSizeHint);
-
-    connect(_ui->dimWhenInactiveCheckbox, &QCheckBox::toggled, this,
-            &Konsole::EditProfileDialog::setDimWhenInactive);
 }
 
 void EditProfileDialog::showEnvironmentEditor()
@@ -425,23 +522,26 @@ void EditProfileDialog::showEnvironmentEditor()
     }
 }
 
-void EditProfileDialog::setupTabsPage(const Profile::Ptr profile)
+void EditProfileDialog::setupTabsPage(const Profile::Ptr &profile)
 {
     // tab title format
-    _ui->renameTabWidget->setTabTitleText(profile->localTabTitleFormat());
-    _ui->renameTabWidget->setRemoteTabTitleText(profile->remoteTabTitleFormat());
+    _tabsUi->renameTabWidget->setTabTitleText(profile->localTabTitleFormat());
+    _tabsUi->renameTabWidget->setRemoteTabTitleText(profile->remoteTabTitleFormat());
 
-    connect(_ui->renameTabWidget, &Konsole::RenameTabWidget::tabTitleFormatChanged, this,
+    connect(_tabsUi->renameTabWidget, &Konsole::RenameTabWidget::tabTitleFormatChanged, this,
             &Konsole::EditProfileDialog::tabTitleFormatChanged);
-    connect(_ui->renameTabWidget, &Konsole::RenameTabWidget::remoteTabTitleFormatChanged, this,
+    connect(_tabsUi->renameTabWidget, &Konsole::RenameTabWidget::remoteTabTitleFormatChanged, this,
             &Konsole::EditProfileDialog::remoteTabTitleFormatChanged);
 
     // tab monitoring
     const int silenceSeconds = profile->silenceSeconds();
-    _ui->silenceSecondsSpinner->setValue(silenceSeconds);
-    _ui->silenceSecondsSpinner->setSuffix(ki18ncp("Unit of time", " second", " seconds"));
+    _tabsUi->silenceSecondsSpinner->setValue(silenceSeconds);
+    auto suffix = ki18ncp("Unit of time", " second", " seconds");
+    _tabsUi->silenceSecondsSpinner->setSuffix(suffix);
+    int silenceCheckBoxWidth = maxSpinBoxWidth(_generalUi->terminalColumnsEntry, suffix);
+    _tabsUi->silenceSecondsSpinner->setFixedWidth(silenceCheckBoxWidth);
 
-    connect(_ui->silenceSecondsSpinner,
+    connect(_tabsUi->silenceSecondsSpinner,
             static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
             &Konsole::EditProfileDialog::silenceSecondsChanged);
 }
@@ -486,7 +586,7 @@ void EditProfileDialog::selectIcon()
     const QString &icon = KIconDialog::getIcon(KIconLoader::Desktop, KIconLoader::Application,
                                                false, 0, false, this);
     if (!icon.isEmpty()) {
-        _ui->iconSelectButton->setIcon(QIcon::fromTheme(icon));
+        _generalUi->iconSelectButton->setIcon(QIcon::fromTheme(icon));
         updateTempProfileProperty(Profile::Icon, icon);
     }
 }
@@ -520,62 +620,64 @@ void EditProfileDialog::selectInitialDir()
 {
     const QUrl url = QFileDialog::getExistingDirectoryUrl(this,
                                                           i18n("Select Initial Directory"),
-                                                          QUrl::fromUserInput(_ui->initialDirEdit->
-                                                                              text()));
+                                                          QUrl::fromUserInput(_generalUi->initialDirEdit->text()));
 
     if (!url.isEmpty()) {
-        _ui->initialDirEdit->setText(url.path());
+        _generalUi->initialDirEdit->setText(url.path());
     }
 }
 
-void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
+void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
 {
     auto delegate = new ColorSchemeViewDelegate(this);
-    _ui->colorSchemeList->setItemDelegate(delegate);
+    _appearanceUi->colorSchemeList->setItemDelegate(delegate);
 
-    _ui->transparencyWarningWidget->setVisible(false);
-    _ui->transparencyWarningWidget->setWordWrap(true);
-    _ui->transparencyWarningWidget->setCloseButtonVisible(false);
-    _ui->transparencyWarningWidget->setMessageType(KMessageWidget::Warning);
+    _appearanceUi->transparencyWarningWidget->setVisible(false);
+    _appearanceUi->transparencyWarningWidget->setWordWrap(true);
+    _appearanceUi->transparencyWarningWidget->setCloseButtonVisible(false);
+    _appearanceUi->transparencyWarningWidget->setMessageType(KMessageWidget::Warning);
 
-    _ui->colorSchemeMessageWidget->setVisible(false);
-    _ui->colorSchemeMessageWidget->setWordWrap(true);
-    _ui->colorSchemeMessageWidget->setCloseButtonVisible(false);
-    _ui->colorSchemeMessageWidget->setMessageType(KMessageWidget::Warning);
+    _appearanceUi->colorSchemeMessageWidget->setVisible(false);
+    _appearanceUi->colorSchemeMessageWidget->setWordWrap(true);
+    _appearanceUi->colorSchemeMessageWidget->setCloseButtonVisible(false);
+    _appearanceUi->colorSchemeMessageWidget->setMessageType(KMessageWidget::Warning);
 
-    _ui->editColorSchemeButton->setEnabled(false);
-    _ui->removeColorSchemeButton->setEnabled(false);
-    _ui->resetColorSchemeButton->setEnabled(false);
+    _appearanceUi->editColorSchemeButton->setEnabled(false);
+    _appearanceUi->removeColorSchemeButton->setEnabled(false);
+    _appearanceUi->resetColorSchemeButton->setEnabled(false);
 
-    _ui->downloadColorSchemeButton->setConfigFile(QStringLiteral("konsole.knsrc"));
+    _appearanceUi->downloadColorSchemeButton->setConfigFile(QStringLiteral("konsole.knsrc"));
 
     // setup color list
     // select the colorScheme used in the current profile
     updateColorSchemeList(currentColorSchemeName());
 
-    _ui->colorSchemeList->setMouseTracking(true);
-    _ui->colorSchemeList->installEventFilter(this);
-    _ui->colorSchemeList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    _appearanceUi->colorSchemeList->setMouseTracking(true);
+    _appearanceUi->colorSchemeList->installEventFilter(this);
+    _appearanceUi->colorSchemeList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
-    connect(_ui->colorSchemeList->selectionModel(),
+    connect(_appearanceUi->colorSchemeList->selectionModel(),
             &QItemSelectionModel::selectionChanged, this,
             &Konsole::EditProfileDialog::colorSchemeSelected);
-    connect(_ui->colorSchemeList, &QListView::entered, this,
+    connect(_appearanceUi->colorSchemeList, &QListView::entered, this,
             &Konsole::EditProfileDialog::previewColorScheme);
 
     updateColorSchemeButtons();
 
-    connect(_ui->editColorSchemeButton, &QPushButton::clicked, this,
+    connect(_appearanceUi->editColorSchemeButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::editColorScheme);
-    connect(_ui->removeColorSchemeButton, &QPushButton::clicked, this,
+    connect(_appearanceUi->removeColorSchemeButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::removeColorScheme);
-    connect(_ui->newColorSchemeButton, &QPushButton::clicked, this,
+    connect(_appearanceUi->newColorSchemeButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::newColorScheme);
-    connect(_ui->downloadColorSchemeButton, &KNS3::Button::dialogFinished, this,
+    connect(_appearanceUi->downloadColorSchemeButton, &KNS3::Button::dialogFinished, this,
             &Konsole::EditProfileDialog::gotNewColorSchemes);
 
-    connect(_ui->resetColorSchemeButton, &QPushButton::clicked, this,
+    connect(_appearanceUi->resetColorSchemeButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::resetColorScheme);
+
+    connect(_appearanceUi->chooseFontButton, &QAbstractButton::clicked, this,
+            &EditProfileDialog::showFontDialog);
 
     // setup font preview
     const bool antialias = profile->antiAliasFonts();
@@ -583,58 +685,91 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr profile)
     QFont profileFont = profile->font();
     profileFont.setStyleStrategy(antialias ? QFont::PreferAntialias : QFont::NoAntialias);
 
-    _ui->fontPreviewLabel->installEventFilter(this);
-    _ui->fontPreviewLabel->setFont(profileFont);
-    setFontInputValue(profileFont);
-
-    // Always set to unchecked
-    _ui->showAllFontsButton->setChecked(false);
-    connect(_ui->showAllFontsButton, &QCheckBox::toggled, this,
-            &Konsole::EditProfileDialog::showAllFontsButtonWarning);
-
-    connect(_ui->fontSizeInput,
-            static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this,
-            &Konsole::EditProfileDialog::setFontSize);
-    connect(_ui->selectFontButton, &QPushButton::clicked, this,
-            &Konsole::EditProfileDialog::showFontDialog);
+    _appearanceUi->fontPreview->setFont(profileFont);
+    _appearanceUi->fontPreview->setText(QStringLiteral("%1 %2pt").arg(profileFont.family()).arg(profileFont.pointSize()));
 
     // setup font smoothing
-    _ui->antialiasTextButton->setChecked(antialias);
-    connect(_ui->antialiasTextButton, &QCheckBox::toggled, this,
+    _appearanceUi->antialiasTextButton->setChecked(antialias);
+    connect(_appearanceUi->antialiasTextButton, &QCheckBox::toggled, this,
             &Konsole::EditProfileDialog::setAntialiasText);
 
-    _ui->boldIntenseButton->setChecked(profile->boldIntense());
-    connect(_ui->boldIntenseButton, &QCheckBox::toggled, this,
+    _appearanceUi->boldIntenseButton->setChecked(profile->boldIntense());
+    connect(_appearanceUi->boldIntenseButton, &QCheckBox::toggled, this,
             &Konsole::EditProfileDialog::setBoldIntense);
 
-    _ui->useFontLineCharactersButton->setChecked(profile->useFontLineCharacters());
-    connect(_ui->useFontLineCharactersButton, &QCheckBox::toggled, this,
+    _appearanceUi->useFontLineCharactersButton->setChecked(profile->useFontLineCharacters());
+    connect(_appearanceUi->useFontLineCharactersButton, &QCheckBox::toggled, this,
             &Konsole::EditProfileDialog::useFontLineCharacters);
 
-    _ui->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
-    connect(_ui->enableMouseWheelZoomButton, &QCheckBox::toggled, this,
+    _mouseUi->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
+    connect(_mouseUi->enableMouseWheelZoomButton, &QCheckBox::toggled, this,
             &Konsole::EditProfileDialog::toggleMouseWheelZoom);
-}
 
-void EditProfileDialog::showAllFontsButtonWarning(bool enable)
-{
-    if (enable) {
-        KMessageBox::information(this,
-                                 QStringLiteral(
-                                     "By its very nature, a terminal program requires font characters that are equal width (monospace).  Any non monospaced font may cause display issues.  This should not be necessary except in rare cases."),
-                                 QStringLiteral("Warning"));
+    // cursor options
+    const auto options = QVector<BooleanOption>{
+        {
+            _appearanceUi->enableBlinkingCursorButton, Profile::BlinkingCursorEnabled,
+            SLOT(toggleBlinkingCursor(bool))
+        },
+    };
+    setupCheckBoxes(options, profile);
+
+    if (profile->useCustomCursorColor()) {
+        _appearanceUi->customCursorColorButton->setChecked(true);
+    } else {
+        _appearanceUi->autoCursorColorButton->setChecked(true);
     }
+
+    _appearanceUi->customColorSelectButton->setColor(profile->customCursorColor());
+
+    connect(_appearanceUi->customCursorColorButton, &QRadioButton::clicked, this, &Konsole::EditProfileDialog::customCursorColor);
+    connect(_appearanceUi->autoCursorColorButton, &QRadioButton::clicked, this, &Konsole::EditProfileDialog::autoCursorColor);
+    connect(_appearanceUi->customColorSelectButton, &KColorButton::changed, this, &Konsole::EditProfileDialog::customCursorColorChanged);
+
+    // Make radio buttons height equal
+    int cursorColorRadioHeight = qMax(_appearanceUi->autoCursorColorButton->minimumSizeHint().height(),
+                                      _appearanceUi->customColorSelectButton->minimumSizeHint().height());
+    _appearanceUi->autoCursorColorButton->setMinimumHeight(cursorColorRadioHeight);
+    _appearanceUi->customCursorColorButton->setMinimumHeight(cursorColorRadioHeight);
+
+    const ButtonGroupOptions cursorShapeOptions = {
+        _appearanceUi->cursorShape, // group
+        Profile::CursorShape,       // profileProperty
+        true,                       // preview
+        {                           // buttons
+            {_appearanceUi->cursorShapeBlock,       Enum::BlockCursor},
+            {_appearanceUi->cursorShapeIBeam,       Enum::IBeamCursor},
+            {_appearanceUi->cursorShapeUnderline,   Enum::UnderlineCursor},
+        },
+    };
+    setupButtonGroup(cursorShapeOptions, profile);
+
+    _appearanceUi->marginsSpinner->setValue(profile->terminalMargin());
+    connect(_appearanceUi->marginsSpinner, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalMarginChanged);
+
+    _appearanceUi->lineSpacingSpinner->setValue(profile->lineSpacing());
+    connect(_appearanceUi->lineSpacingSpinner, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::lineSpacingChanged);
+
+    _appearanceUi->alignToCenterButton->setChecked(profile->terminalCenter());
+    connect(_appearanceUi->alignToCenterButton, &QCheckBox::toggled, this,
+            &Konsole::EditProfileDialog::setTerminalCenter);
+
+    _appearanceUi->showTerminalSizeHintButton->setChecked(profile->showTerminalSizeHint());
+    connect(_appearanceUi->showTerminalSizeHintButton, &QCheckBox::toggled, this,
+            &Konsole::EditProfileDialog::showTerminalSizeHint);
+
+    _appearanceUi->dimWhenInactiveCheckbox->setChecked(profile->dimWhenInactive());
+    connect(_appearanceUi->dimWhenInactiveCheckbox, &QCheckBox::toggled, this,
+            &Konsole::EditProfileDialog::setDimWhenInactive);
 }
 
 void EditProfileDialog::setAntialiasText(bool enable)
 {
-    QFont profileFont = _ui->fontPreviewLabel->font();
-    profileFont.setStyleStrategy(enable ? QFont::PreferAntialias : QFont::NoAntialias);
-
-    // update preview to reflect text smoothing state
-    fontSelected(profileFont);
     preview(Profile::AntiAliasFonts, enable);
     updateTempProfileProperty(Profile::AntiAliasFonts, enable);
+
+    const QFont font = _profile->font();
+    updateFontPreview(font);
 }
 
 void EditProfileDialog::setBoldIntense(bool enable)
@@ -649,6 +784,57 @@ void EditProfileDialog::useFontLineCharacters(bool enable)
     updateTempProfileProperty(Profile::UseFontLineCharacters, enable);
 }
 
+void EditProfileDialog::toggleBlinkingCursor(bool enable)
+{
+    preview(Profile::BlinkingCursorEnabled, enable);
+    updateTempProfileProperty(Profile::BlinkingCursorEnabled, enable);
+}
+
+void EditProfileDialog::setCursorShape(int index)
+{
+    preview(Profile::CursorShape, index);
+    updateTempProfileProperty(Profile::CursorShape, index);
+}
+
+void EditProfileDialog::autoCursorColor()
+{
+    preview(Profile::UseCustomCursorColor, false);
+    updateTempProfileProperty(Profile::UseCustomCursorColor, false);
+}
+
+void EditProfileDialog::customCursorColor()
+{
+    preview(Profile::UseCustomCursorColor, true);
+    updateTempProfileProperty(Profile::UseCustomCursorColor, true);
+}
+
+void EditProfileDialog::customCursorColorChanged(const QColor &color)
+{
+    preview(Profile::CustomCursorColor, color);
+    updateTempProfileProperty(Profile::CustomCursorColor, color);
+
+    // ensure that custom cursor colors are enabled
+    _appearanceUi->customCursorColorButton->click();
+}
+
+void EditProfileDialog::terminalMarginChanged(int margin)
+{
+    preview(Profile::TerminalMargin, margin);
+    updateTempProfileProperty(Profile::TerminalMargin, margin);
+}
+
+void EditProfileDialog::lineSpacingChanged(int spacing)
+{
+    preview(Profile::LineSpacing, spacing);
+    updateTempProfileProperty(Profile::LineSpacing, spacing);
+}
+
+void EditProfileDialog::setTerminalCenter(bool enable)
+{
+    preview(Profile::TerminalCenter, enable);
+    updateTempProfileProperty(Profile::TerminalCenter, enable);
+}
+
 void EditProfileDialog::toggleMouseWheelZoom(bool enable)
 {
     updateTempProfileProperty(Profile::MouseWheelZoomEnabled, enable);
@@ -661,13 +847,13 @@ void EditProfileDialog::toggleAlternateScrolling(bool enable)
 
 void EditProfileDialog::updateColorSchemeList(const QString &selectedColorSchemeName)
 {
-    if (_ui->colorSchemeList->model() == nullptr) {
-        _ui->colorSchemeList->setModel(new QStandardItemModel(this));
+    if (_appearanceUi->colorSchemeList->model() == nullptr) {
+        _appearanceUi->colorSchemeList->setModel(new QStandardItemModel(this));
     }
 
     const ColorScheme *selectedColorScheme = ColorSchemeManager::instance()->findColorScheme(selectedColorSchemeName);
 
-    auto *model = qobject_cast<QStandardItemModel *>(_ui->colorSchemeList->model());
+    auto *model = qobject_cast<QStandardItemModel *>(_appearanceUi->colorSchemeList->model());
 
     Q_ASSERT(model);
 
@@ -695,8 +881,8 @@ void EditProfileDialog::updateColorSchemeList(const QString &selectedColorScheme
     model->sort(0);
 
     if (selectedItem != nullptr) {
-        _ui->colorSchemeList->updateGeometry();
-        _ui->colorSchemeList->selectionModel()->setCurrentIndex(selectedItem->index(),
+        _appearanceUi->colorSchemeList->updateGeometry();
+        _appearanceUi->colorSchemeList->selectionModel()->setCurrentIndex(selectedItem->index(),
                                                                 QItemSelectionModel::Select);
 
         // update transparency warning label
@@ -706,11 +892,11 @@ void EditProfileDialog::updateColorSchemeList(const QString &selectedColorScheme
 
 void EditProfileDialog::updateKeyBindingsList(const QString &selectKeyBindingsName)
 {
-    if (_ui->keyBindingList->model() == nullptr) {
-        _ui->keyBindingList->setModel(new QStandardItemModel(this));
+    if (_keyboardUi->keyBindingList->model() == nullptr) {
+        _keyboardUi->keyBindingList->setModel(new QStandardItemModel(this));
     }
 
-    auto *model = qobject_cast<QStandardItemModel *>(_ui->keyBindingList->model());
+    auto *model = qobject_cast<QStandardItemModel *>(_keyboardUi->keyBindingList->model());
 
     Q_ASSERT(model);
 
@@ -742,26 +928,28 @@ void EditProfileDialog::updateKeyBindingsList(const QString &selectKeyBindingsNa
     model->sort(0);
 
     if (selectedItem != nullptr) {
-        _ui->keyBindingList->selectionModel()->setCurrentIndex(selectedItem->index(),
+        _keyboardUi->keyBindingList->selectionModel()->setCurrentIndex(selectedItem->index(),
                                                                QItemSelectionModel::Select);
     }
 }
 
 bool EditProfileDialog::eventFilter(QObject *watched, QEvent *event)
 {
-    if (watched == _ui->colorSchemeList && event->type() == QEvent::Leave) {
+    if (watched == _appearanceUi->colorSchemeList && event->type() == QEvent::Leave) {
         if (_tempProfile->isPropertySet(Profile::ColorScheme)) {
             preview(Profile::ColorScheme, _tempProfile->colorScheme());
         } else {
             unpreview(Profile::ColorScheme);
         }
     }
-    if (watched == _ui->fontPreviewLabel && event->type() == QEvent::FontChange) {
-        const QFont &labelFont = _ui->fontPreviewLabel->font();
-        _ui->fontPreviewLabel->setText(i18n("%1", labelFont.family()));
-    }
 
     return QDialog::eventFilter(watched, event);
+}
+
+QSize EditProfileDialog::sizeHint() const
+{
+//    return QSize();
+    return QDialog::sizeHint();
 }
 
 void EditProfileDialog::unpreviewAll()
@@ -847,13 +1035,46 @@ void EditProfileDialog::preview(int property, const QVariant &value)
 void EditProfileDialog::previewColorScheme(const QModelIndex &index)
 {
     const QString &name = index.data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
-
     delayedPreview(Profile::ColorScheme, name);
+}
+
+void EditProfileDialog::showFontDialog()
+{
+    if (!_fontDialog) {
+        _fontDialog = new FontDialog(this);
+        connect(_fontDialog, &FontDialog::fontChanged, this, [this](const QFont font) {
+            preview(Profile::Font, font);
+            updateFontPreview(font);
+        });
+        connect(_fontDialog, &FontDialog::accepted, this, [this]() {
+            const QFont font = _fontDialog->font();
+            preview(Profile::Font, font);
+            updateTempProfileProperty(Profile::Font, font);
+            updateFontPreview(font);
+        });
+        connect(_fontDialog, &FontDialog::rejected, this, [this]() {
+            unpreview(Profile::Font);
+            const QFont font = _profile->font();
+            updateFontPreview(font);
+        });
+    }
+    const QFont font = _profile->font();
+    _fontDialog->setFont(font);
+    _fontDialog->exec();
+}
+
+void EditProfileDialog::updateFontPreview(QFont font)
+{
+    bool aa = _profile->antiAliasFonts();
+    font.setStyleStrategy(aa ? QFont::PreferAntialias : QFont::NoAntialias);
+
+    _appearanceUi->fontPreview->setFont(font);
+    _appearanceUi->fontPreview->setText(QStringLiteral("%1 %2pt").arg(font.family()).arg(font.pointSize()));
 }
 
 void EditProfileDialog::removeColorScheme()
 {
-    QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
+    QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
     if (selected.isEmpty()) {
         return;
     }
@@ -863,13 +1084,13 @@ void EditProfileDialog::removeColorScheme()
     // KNS states (entry gets shown as installed when in fact we deleted it).
     auto *manager = new KNSCore::DownloadManager(QStringLiteral("konsole.knsrc"), this);
     connect(manager, &KNSCore::DownloadManager::searchResult,
-            [=](const KNSCore::EntryInternal::List &entries) {
+            this, [=](const KNSCore::EntryInternal::List &entries) {
         const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
         Q_ASSERT(!name.isEmpty());
         bool uninstalled = false;
         // Check if the theme was installed by KNS, if so uninstall it through
         // there and unload it.
-        for (auto entry : entries) {
+        for (auto &entry : entries) {
             for (const auto &file : entry.installedFiles()) {
                 if (ColorSchemeManager::colorSchemeNameFromPath(file) != name) {
                     continue;
@@ -892,7 +1113,7 @@ void EditProfileDialog::removeColorScheme()
         }
 
         if (uninstalled) {
-            _ui->colorSchemeList->model()->removeRow(selected.first().row());
+            _appearanceUi->colorSchemeList->model()->removeRow(selected.first().row());
         }
 
         manager->deleteLater();
@@ -903,7 +1124,7 @@ void EditProfileDialog::removeColorScheme()
 void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntries)
 {
     int failures = 0;
-    for (auto entry : changedEntries) {
+    for (auto &entry : changedEntries) {
         switch (entry.status()) {
         case KNS3::Entry::Installed:
             for (const auto &file : entry.installedFiles()) {
@@ -914,13 +1135,13 @@ void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntri
                 ++failures;
             }
             if (failures == entry.installedFiles().size()) {
-                _ui->colorSchemeMessageWidget->setText(
+                _appearanceUi->colorSchemeMessageWidget->setText(
                             xi18nc("@info",
                                    "Scheme <resource>%1</resource> failed to load.",
                                    entry.name()));
-                _ui->colorSchemeMessageWidget->animatedShow();
+                _appearanceUi->colorSchemeMessageWidget->animatedShow();
                 QTimer::singleShot(8000,
-                                   _ui->colorSchemeMessageWidget,
+                                   _appearanceUi->colorSchemeMessageWidget,
                                    &KMessageWidget::animatedHide);
             }
             break;
@@ -949,7 +1170,7 @@ void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntri
 void EditProfileDialog::resetColorScheme()
 {
 
-    QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
+    QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
 
     if (!selected.isEmpty()) {
         const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
@@ -964,8 +1185,8 @@ void EditProfileDialog::resetColorScheme()
 void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 {
     // Finding selected ColorScheme
-    QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
-    QAbstractItemModel *model = _ui->colorSchemeList->model();
+    QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
+    QAbstractItemModel *model = _appearanceUi->colorSchemeList->model();
     const ColorScheme *colors = nullptr;
     if (!selected.isEmpty()) {
         colors = model->data(selected.first(), Qt::UserRole + 1).value<const ColorScheme *>();
@@ -1028,10 +1249,10 @@ void EditProfileDialog::saveColorScheme(const ColorScheme &scheme, bool isNewSch
 
 void EditProfileDialog::colorSchemeSelected()
 {
-    QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
+    QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
 
     if (!selected.isEmpty()) {
-        QAbstractItemModel *model = _ui->colorSchemeList->model();
+        QAbstractItemModel *model = _appearanceUi->colorSchemeList->model();
         const auto *colors = model->data(selected.first(), Qt::UserRole + 1).value<const ColorScheme *>();
         if (colors != nullptr) {
             updateTempProfileProperty(Profile::ColorScheme, colors->name());
@@ -1046,42 +1267,42 @@ void EditProfileDialog::colorSchemeSelected()
 
 void EditProfileDialog::updateColorSchemeButtons()
 {
-    enableIfNonEmptySelection(_ui->editColorSchemeButton, _ui->colorSchemeList->selectionModel());
+    enableIfNonEmptySelection(_appearanceUi->editColorSchemeButton, _appearanceUi->colorSchemeList->selectionModel());
 
-    QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
+    QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
 
     if (!selected.isEmpty()) {
         const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
 
         bool isResettable = ColorSchemeManager::instance()->canResetColorScheme(name);
-        _ui->resetColorSchemeButton->setEnabled(isResettable);
+        _appearanceUi->resetColorSchemeButton->setEnabled(isResettable);
 
         bool isDeletable = ColorSchemeManager::instance()->isColorSchemeDeletable(name);
         // if a colorScheme can be restored then it can't be deleted
-        _ui->removeColorSchemeButton->setEnabled(isDeletable && !isResettable);
+        _appearanceUi->removeColorSchemeButton->setEnabled(isDeletable && !isResettable);
     } else {
-        _ui->removeColorSchemeButton->setEnabled(false);
-        _ui->resetColorSchemeButton->setEnabled(false);
+        _appearanceUi->removeColorSchemeButton->setEnabled(false);
+        _appearanceUi->resetColorSchemeButton->setEnabled(false);
     }
 
 }
 
 void EditProfileDialog::updateKeyBindingsButtons()
 {
-    QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
+    QModelIndexList selected = _keyboardUi->keyBindingList->selectionModel()->selectedIndexes();
 
     if (!selected.isEmpty()) {
-        _ui->editKeyBindingsButton->setEnabled(true);
+        _keyboardUi->editKeyBindingsButton->setEnabled(true);
 
         const QString &name = selected.first().data(Qt::UserRole + 1).value<const KeyboardTranslator *>()->name();
 
         bool isResettable = _keyManager->isTranslatorResettable(name);
-        _ui->resetKeyBindingsButton->setEnabled(isResettable);
+        _keyboardUi->resetKeyBindingsButton->setEnabled(isResettable);
 
         bool isDeletable = _keyManager->isTranslatorDeletable(name);
 
         // if a key bindings scheme can be reset then it can't be deleted
-        _ui->removeKeyBindingsButton->setEnabled(isDeletable && !isResettable);
+        _keyboardUi->removeKeyBindingsButton->setEnabled(isDeletable && !isResettable);
     }
 }
 
@@ -1093,22 +1314,22 @@ void EditProfileDialog::enableIfNonEmptySelection(QWidget *widget, QItemSelectio
 void EditProfileDialog::updateTransparencyWarning()
 {
     // zero or one indexes can be selected
-    foreach (const QModelIndex &index, _ui->colorSchemeList->selectionModel()->selectedIndexes()) {
+    foreach (const QModelIndex &index, _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes()) {
         bool needTransparency = index.data(Qt::UserRole + 1).value<const ColorScheme *>()->opacity() < 1.0;
 
         if (!needTransparency) {
-            _ui->transparencyWarningWidget->setHidden(true);
+            _appearanceUi->transparencyWarningWidget->setHidden(true);
         } else if (!KWindowSystem::compositingActive()) {
-            _ui->transparencyWarningWidget->setText(i18n(
+            _appearanceUi->transparencyWarningWidget->setText(i18n(
                                                         "This color scheme uses a transparent background"
                                                         " which does not appear to be supported on your"
                                                         " desktop"));
-            _ui->transparencyWarningWidget->setHidden(false);
+            _appearanceUi->transparencyWarningWidget->setHidden(false);
         } else if (!WindowSystemInfo::HAVE_TRANSPARENCY) {
-            _ui->transparencyWarningWidget->setText(i18n(
+            _appearanceUi->transparencyWarningWidget->setText(i18n(
                                                         "Konsole was started before desktop effects were enabled."
                                                         " You need to restart Konsole to see transparent background."));
-            _ui->transparencyWarningWidget->setHidden(false);
+            _appearanceUi->transparencyWarningWidget->setHidden(false);
         }
     }
 }
@@ -1153,40 +1374,40 @@ void EditProfileDialog::updateButtonApply()
         }
     }
 
-    mButtonBox->button(QDialogButtonBox::Apply)->setEnabled(userModified);
+    _buttonBox->button(QDialogButtonBox::Apply)->setEnabled(userModified);
 }
 
-void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* profile */)
+void EditProfileDialog::setupKeyboardPage(const Profile::Ptr &/* profile */)
 {
     // setup translator list
     updateKeyBindingsList(lookupProfile()->keyBindings());
 
-    connect(_ui->keyBindingList->selectionModel(),
+    connect(_keyboardUi->keyBindingList->selectionModel(),
             &QItemSelectionModel::selectionChanged, this,
             &Konsole::EditProfileDialog::keyBindingSelected);
-    connect(_ui->newKeyBindingsButton, &QPushButton::clicked, this,
+    connect(_keyboardUi->newKeyBindingsButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::newKeyBinding);
 
-    _ui->editKeyBindingsButton->setEnabled(false);
-    _ui->removeKeyBindingsButton->setEnabled(false);
-    _ui->resetKeyBindingsButton->setEnabled(false);
+    _keyboardUi->editKeyBindingsButton->setEnabled(false);
+    _keyboardUi->removeKeyBindingsButton->setEnabled(false);
+    _keyboardUi->resetKeyBindingsButton->setEnabled(false);
 
     updateKeyBindingsButtons();
 
-    connect(_ui->editKeyBindingsButton, &QPushButton::clicked, this,
+    connect(_keyboardUi->editKeyBindingsButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::editKeyBinding);
-    connect(_ui->removeKeyBindingsButton, &QPushButton::clicked, this,
+    connect(_keyboardUi->removeKeyBindingsButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::removeKeyBinding);
-    connect(_ui->resetKeyBindingsButton, &QPushButton::clicked, this,
+    connect(_keyboardUi->resetKeyBindingsButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::resetKeyBindings);
 }
 
 void EditProfileDialog::keyBindingSelected()
 {
-    QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
+    QModelIndexList selected = _keyboardUi->keyBindingList->selectionModel()->selectedIndexes();
 
     if (!selected.isEmpty()) {
-        QAbstractItemModel *model = _ui->keyBindingList->model();
+        QAbstractItemModel *model = _keyboardUi->keyBindingList->model();
         const auto *translator = model->data(selected.first(), Qt::UserRole + 1)
                                                .value<const KeyboardTranslator *>();
         if (translator != nullptr) {
@@ -1199,20 +1420,20 @@ void EditProfileDialog::keyBindingSelected()
 
 void EditProfileDialog::removeKeyBinding()
 {
-    QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
+    QModelIndexList selected = _keyboardUi->keyBindingList->selectionModel()->selectedIndexes();
 
     if (!selected.isEmpty()) {
         const QString &name = selected.first().data(Qt::UserRole + 1).value<const KeyboardTranslator *>()->name();
         if (KeyboardTranslatorManager::instance()->deleteTranslator(name)) {
-            _ui->keyBindingList->model()->removeRow(selected.first().row());
+            _keyboardUi->keyBindingList->model()->removeRow(selected.first().row());
         }
     }
 }
 
 void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 {
-    QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
-    QAbstractItemModel *model = _ui->keyBindingList->model();
+    QModelIndexList selected = _keyboardUi->keyBindingList->selectionModel()->selectedIndexes();
+    QAbstractItemModel *model = _keyboardUi->keyBindingList->model();
 
     const KeyboardTranslator *translator = nullptr;
     if (!selected.isEmpty()) {
@@ -1250,7 +1471,7 @@ void EditProfileDialog::editKeyBinding()
 
 void EditProfileDialog::resetKeyBindings()
 {
-    QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
+    QModelIndexList selected = _keyboardUi->keyBindingList->selectionModel()->selectedIndexes();
 
     if (!selected.isEmpty()) {
         const QString &name = selected.first().data(Qt::UserRole + 1).value<const KeyboardTranslator *>()->name();
@@ -1263,7 +1484,7 @@ void EditProfileDialog::resetKeyBindings()
     }
 }
 
-void EditProfileDialog::setupCheckBoxes(const QVector<BooleanOption>& options, const Profile::Ptr profile)
+void EditProfileDialog::setupCheckBoxes(const QVector<BooleanOption>& options, const Profile::Ptr &profile)
 {
     for(const auto& option : options) {
         option.button->setChecked(profile->property<bool>(option.property));
@@ -1279,39 +1500,67 @@ void EditProfileDialog::setupRadio(const QVector<RadioOption>& possibilities, in
     }
 }
 
-void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
+void EditProfileDialog::setupButtonGroup(const ButtonGroupOptions &options, const Profile::Ptr &profile)
+{
+    auto currentValue = profile->property<int>(options.profileProperty);
+
+    for (auto option: options.buttons) {
+        options.group->setId(option.button, option.value);
+    }
+
+    Q_ASSERT(options.buttons.count() > 0);
+    auto *activeButton = options.group->button(currentValue);
+    if (!activeButton) {
+        activeButton = options.buttons[0].button;
+    }
+    activeButton->setChecked(true);
+
+    connect(options.group, QOverload<int>::of(&QButtonGroup::buttonClicked),
+            this, [this, options](int value) {
+        if (options.preview) {
+            preview(options.profileProperty, value);
+        }
+        updateTempProfileProperty(options.profileProperty, value);
+    });
+}
+
+void EditProfileDialog::setupScrollingPage(const Profile::Ptr &profile)
 {
     // setup scrollbar radio
-    auto scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
-
-    const auto positions = QVector<RadioOption>{ {_ui->scrollBarHiddenButton, Enum::ScrollBarHidden, SLOT(hideScrollBar())},
-                                {_ui->scrollBarLeftButton, Enum::ScrollBarLeft, SLOT(showScrollBarLeft())},
-                                {_ui->scrollBarRightButton, Enum::ScrollBarRight, SLOT(showScrollBarRight())}};
-
-    setupRadio(positions, scrollBarPosition);
+    const ButtonGroupOptions scrollBarPositionOptions = {
+        _scrollingUi->scrollBarPosition,    // group
+        Profile::ScrollBarPosition,         // profileProperty
+        false,                              // preview
+        {                                   // buttons
+            {_scrollingUi->scrollBarRightButton,    Enum::ScrollBarRight},
+            {_scrollingUi->scrollBarLeftButton,     Enum::ScrollBarLeft},
+            {_scrollingUi->scrollBarHiddenButton,   Enum::ScrollBarHidden},
+        },
+    };
+    setupButtonGroup(scrollBarPositionOptions, profile);
 
     // setup scrollback type radio
     auto scrollBackType = profile->property<int>(Profile::HistoryMode);
-    _ui->historySizeWidget->setMode(Enum::HistoryModeEnum(scrollBackType));
-    connect(_ui->historySizeWidget, &Konsole::HistorySizeWidget::historyModeChanged, this,
+    _scrollingUi->historySizeWidget->setMode(Enum::HistoryModeEnum(scrollBackType));
+    connect(_scrollingUi->historySizeWidget, &Konsole::HistorySizeWidget::historyModeChanged, this,
             &Konsole::EditProfileDialog::historyModeChanged);
 
     // setup scrollback line count spinner
     const int historySize = profile->historySize();
-    _ui->historySizeWidget->setLineCount(historySize);
+    _scrollingUi->historySizeWidget->setLineCount(historySize);
 
     // setup scrollpageamount type radio
     auto scrollFullPage = profile->property<int>(Profile::ScrollFullPage);
 
     const auto pageamounts = QVector<RadioOption>{
-        {_ui->scrollHalfPage, Enum::ScrollPageHalf, SLOT(scrollHalfPage())},
-        {_ui->scrollFullPage, Enum::ScrollPageFull, SLOT(scrollFullPage())}
+        {_scrollingUi->scrollHalfPage, Enum::ScrollPageHalf, SLOT(scrollHalfPage())},
+        {_scrollingUi->scrollFullPage, Enum::ScrollPageFull, SLOT(scrollFullPage())}
     };
 
     setupRadio(pageamounts, scrollFullPage);
 
     // signals and slots
-    connect(_ui->historySizeWidget, &Konsole::HistorySizeWidget::historySizeChanged, this,
+    connect(_scrollingUi->historySizeWidget, &Konsole::HistorySizeWidget::historySizeChanged, this,
             &Konsole::EditProfileDialog::historySizeChanged);
 }
 
@@ -1325,21 +1574,6 @@ void EditProfileDialog::historyModeChanged(Enum::HistoryModeEnum mode)
     updateTempProfileProperty(Profile::HistoryMode, mode);
 }
 
-void EditProfileDialog::hideScrollBar()
-{
-    updateTempProfileProperty(Profile::ScrollBarPosition, Enum::ScrollBarHidden);
-}
-
-void EditProfileDialog::showScrollBarLeft()
-{
-    updateTempProfileProperty(Profile::ScrollBarPosition, Enum::ScrollBarLeft);
-}
-
-void EditProfileDialog::showScrollBarRight()
-{
-    updateTempProfileProperty(Profile::ScrollBarPosition, Enum::ScrollBarRight);
-}
-
 void EditProfileDialog::scrollFullPage()
 {
     updateTempProfileProperty(Profile::ScrollFullPage, Enum::ScrollPageFull);
@@ -1350,47 +1584,47 @@ void EditProfileDialog::scrollHalfPage()
     updateTempProfileProperty(Profile::ScrollFullPage, Enum::ScrollPageHalf);
 }
 
-void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
+void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
 {
     const auto options = QVector<BooleanOption>{
         {
-            _ui->underlineLinksButton, Profile::UnderlineLinksEnabled,
+            _mouseUi->underlineLinksButton, Profile::UnderlineLinksEnabled,
             SLOT(toggleUnderlineLinks(bool))
         },
         {
-            _ui->underlineFilesButton, Profile::UnderlineFilesEnabled,
+            _mouseUi->underlineFilesButton, Profile::UnderlineFilesEnabled,
             SLOT(toggleUnderlineFiles(bool))
         },
         {
-            _ui->ctrlRequiredForDragButton, Profile::CtrlRequiredForDrag,
+            _mouseUi->ctrlRequiredForDragButton, Profile::CtrlRequiredForDrag,
             SLOT(toggleCtrlRequiredForDrag(bool))
         },
         {
-            _ui->copyTextAsHTMLButton, Profile::CopyTextAsHTML,
+            _mouseUi->copyTextAsHTMLButton, Profile::CopyTextAsHTML,
             SLOT(toggleCopyTextAsHTML(bool))
         },
         {
-            _ui->copyTextToClipboardButton, Profile::AutoCopySelectedText,
+            _mouseUi->copyTextToClipboardButton, Profile::AutoCopySelectedText,
             SLOT(toggleCopyTextToClipboard(bool))
         },
         {
-            _ui->trimLeadingSpacesButton, Profile::TrimLeadingSpacesInSelectedText,
+            _mouseUi->trimLeadingSpacesButton, Profile::TrimLeadingSpacesInSelectedText,
             SLOT(toggleTrimLeadingSpacesInSelectedText(bool))
         },
         {
-            _ui->trimTrailingSpacesButton, Profile::TrimTrailingSpacesInSelectedText,
+            _mouseUi->trimTrailingSpacesButton, Profile::TrimTrailingSpacesInSelectedText,
             SLOT(toggleTrimTrailingSpacesInSelectedText(bool))
         },
         {
-            _ui->openLinksByDirectClickButton, Profile::OpenLinksByDirectClickEnabled,
+            _mouseUi->openLinksByDirectClickButton, Profile::OpenLinksByDirectClickEnabled,
             SLOT(toggleOpenLinksByDirectClick(bool))
         },
         {
-            _ui->dropUrlsAsText, Profile::DropUrlsAsText,
+            _mouseUi->dropUrlsAsText, Profile::DropUrlsAsText,
             SLOT(toggleDropUrlsAsText(bool))
         },
         {
-            _ui->enableAlternateScrollingButton, Profile::AlternateScrolling,
+            _mouseUi->enableAlternateScrollingButton, Profile::AlternateScrolling,
             SLOT(toggleAlternateScrolling(bool))
         }
     };
@@ -1399,47 +1633,53 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr profile)
     // setup middle click paste mode
     const auto middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
     const auto pasteModes = QVector<RadioOption> {
-        {_ui->pasteFromX11SelectionButton, Enum::PasteFromX11Selection, SLOT(pasteFromX11Selection())},
-        {_ui->pasteFromClipboardButton, Enum::PasteFromClipboard, SLOT(pasteFromClipboard())}    };
+        {_mouseUi->pasteFromX11SelectionButton, Enum::PasteFromX11Selection, SLOT(pasteFromX11Selection())},
+        {_mouseUi->pasteFromClipboardButton, Enum::PasteFromClipboard, SLOT(pasteFromClipboard())}    };
     setupRadio(pasteModes, middleClickPasteMode);
 
     // interaction options
-    _ui->wordCharacterEdit->setText(profile->wordCharacters());
+    _mouseUi->wordCharacterEdit->setText(profile->wordCharacters());
 
-    connect(_ui->wordCharacterEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::wordCharactersChanged);
+    connect(_mouseUi->wordCharacterEdit, &QLineEdit::textChanged, this, &Konsole::EditProfileDialog::wordCharactersChanged);
 
-    auto tripleClickMode = profile->property<int>(Profile::TripleClickMode);
-    _ui->tripleClickModeCombo->setCurrentIndex(tripleClickMode);
+    const ButtonGroupOptions tripleClickModeOptions = {
+        _mouseUi->tripleClickMode,  // group
+        Profile::TripleClickMode,   // profileProperty
+        false,                      // preview
+        {                           // buttons
+            {_mouseUi->tripleClickSelectsTheWholeLine,      Enum::SelectWholeLine},
+            {_mouseUi->tripleClickSelectsFromMousePosition, Enum::SelectForwardsFromCursor},
+        },
+    };
+    setupButtonGroup(tripleClickModeOptions, profile);
 
-    connect(_ui->tripleClickModeCombo, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &Konsole::EditProfileDialog::TripleClickModeChanged);
+    _mouseUi->openLinksByDirectClickButton->setEnabled(_mouseUi->underlineLinksButton->isChecked() || _mouseUi->underlineFilesButton->isChecked());
 
-    _ui->openLinksByDirectClickButton->setEnabled(_ui->underlineLinksButton->isChecked() || _ui->underlineFilesButton->isChecked());
-
-    _ui->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
-    connect(_ui->enableMouseWheelZoomButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::toggleMouseWheelZoom);
+    _mouseUi->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
+    connect(_mouseUi->enableMouseWheelZoomButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::toggleMouseWheelZoom);
 }
 
-void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
+void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
 {
     const auto options = QVector<BooleanOption>{
         {
-            _ui->enableBlinkingTextButton, Profile::BlinkingTextEnabled,
+            _advancedUi->enableBlinkingTextButton, Profile::BlinkingTextEnabled,
             SLOT(toggleBlinkingText(bool))
         },
         {
-            _ui->enableFlowControlButton, Profile::FlowControlEnabled,
+            _advancedUi->enableFlowControlButton, Profile::FlowControlEnabled,
             SLOT(toggleFlowControl(bool))
         },
         {
-            _ui->enableBlinkingCursorButton, Profile::BlinkingCursorEnabled,
+            _appearanceUi->enableBlinkingCursorButton, Profile::BlinkingCursorEnabled,
             SLOT(toggleBlinkingCursor(bool))
         },
         {
-            _ui->enableBidiRenderingButton, Profile::BidiRenderingEnabled,
+            _advancedUi->enableBidiRenderingButton, Profile::BidiRenderingEnabled,
             SLOT(togglebidiRendering(bool))
         },
         {
-            _ui->enableReverseUrlHints, Profile::ReverseUrlHints,
+            _advancedUi->enableReverseUrlHints, Profile::ReverseUrlHints,
             SLOT(toggleReverseUrlHints(bool))
         }
     };
@@ -1448,45 +1688,54 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
     // Setup the URL hints modifier checkboxes
     {
         auto modifiers = profile->property<int>(Profile::UrlHintsModifiers);
-        _ui->urlHintsModifierShift->setChecked((modifiers &Qt::ShiftModifier) != 0u);
-        _ui->urlHintsModifierCtrl->setChecked((modifiers &Qt::ControlModifier) != 0u);
-        _ui->urlHintsModifierAlt->setChecked((modifiers &Qt::AltModifier) != 0u);
-        _ui->urlHintsModifierMeta->setChecked((modifiers &Qt::MetaModifier) != 0u);
-        connect(_ui->urlHintsModifierShift, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
-        connect(_ui->urlHintsModifierCtrl, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
-        connect(_ui->urlHintsModifierAlt, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
-        connect(_ui->urlHintsModifierMeta, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
+        _advancedUi->urlHintsModifierShift->setChecked((modifiers &Qt::ShiftModifier) != 0u);
+        _advancedUi->urlHintsModifierCtrl->setChecked((modifiers &Qt::ControlModifier) != 0u);
+        _advancedUi->urlHintsModifierAlt->setChecked((modifiers &Qt::AltModifier) != 0u);
+        _advancedUi->urlHintsModifierMeta->setChecked((modifiers &Qt::MetaModifier) != 0u);
+        connect(_advancedUi->urlHintsModifierShift, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
+        connect(_advancedUi->urlHintsModifierCtrl, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
+        connect(_advancedUi->urlHintsModifierAlt, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
+        connect(_advancedUi->urlHintsModifierMeta, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
     }
-
-    const int lineSpacing = profile->lineSpacing();
-    _ui->lineSpacingSpinner->setValue(lineSpacing);
-
-    connect(_ui->lineSpacingSpinner, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::lineSpacingChanged);
-
-    // cursor options
-    if (profile->useCustomCursorColor()) {
-        _ui->customCursorColorButton->setChecked(true);
-    } else {
-        _ui->autoCursorColorButton->setChecked(true);
-    }
-
-    _ui->customColorSelectButton->setColor(profile->customCursorColor());
-
-    connect(_ui->customCursorColorButton, &QRadioButton::clicked, this, &Konsole::EditProfileDialog::customCursorColor);
-    connect(_ui->autoCursorColorButton, &QRadioButton::clicked, this, &Konsole::EditProfileDialog::autoCursorColor);
-    connect(_ui->customColorSelectButton, &KColorButton::changed, this, &Konsole::EditProfileDialog::customCursorColorChanged);
-
-    auto shape = profile->property<int>(Profile::CursorShape);
-    _ui->cursorShapeCombo->setCurrentIndex(shape);
-
-    connect(_ui->cursorShapeCombo, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &Konsole::EditProfileDialog::setCursorShape);
 
     // encoding options
     auto codecAction = new KCodecAction(this);
-    _ui->selectEncodingButton->setMenu(codecAction->menu());
+    _advancedUi->selectEncodingButton->setMenu(codecAction->menu());
     connect(codecAction, static_cast<void (KCodecAction::*)(QTextCodec *)>(&KCodecAction::triggered), this, &Konsole::EditProfileDialog::setDefaultCodec);
 
-    _ui->characterEncodingLabel->setText(profile->defaultEncoding());
+    _advancedUi->selectEncodingButton->setText(profile->defaultEncoding());
+}
+
+int EditProfileDialog::maxSpinBoxWidth(const KPluralHandlingSpinBox *spinBox, const KLocalizedString &suffix)
+{
+    static const int cursorWidth = 2;
+
+    const QFontMetrics fm(spinBox->fontMetrics());
+    const QString plural    = suffix.subs(2).toString();
+    const QString singular  = suffix.subs(1).toString();
+    const QString min       = QString::number(spinBox->minimum());
+    const QString max       = QString::number(spinBox->maximum());
+    const int pluralWidth   = fm.width(plural);
+    const int singularWidth = fm.width(singular);
+    const int minWidth      = fm.width(min);
+    const int maxWidth      = fm.width(max);
+    const int width         = qMax(pluralWidth, singularWidth) + qMax(minWidth, maxWidth) + cursorWidth;
+
+    // Based on QAbstractSpinBox::initStyleOption() from Qt
+    QStyleOptionSpinBox opt;
+    opt.initFrom(spinBox);
+    opt.activeSubControls   = QStyle::SC_None;
+    opt.buttonSymbols       = spinBox->buttonSymbols();
+    // Assume all spinboxes have buttons
+    opt.subControls         = QStyle::SC_SpinBoxFrame | QStyle::SC_SpinBoxEditField
+                            | QStyle::SC_SpinBoxUp | QStyle::SC_SpinBoxDown;
+    opt.frame               = spinBox->hasFrame();
+
+    const QSize hint(width, spinBox->sizeHint().height());
+    const QSize spinBoxSize = style()->sizeFromContents(QStyle::CT_SpinBox, &opt, hint, spinBox)
+                              .expandedTo(QApplication::globalStrut());
+
+    return spinBoxSize.width();
 }
 
 void EditProfileDialog::setDefaultCodec(QTextCodec *codec)
@@ -1494,15 +1743,7 @@ void EditProfileDialog::setDefaultCodec(QTextCodec *codec)
     QString name = QString::fromLocal8Bit(codec->name());
 
     updateTempProfileProperty(Profile::DefaultEncoding, name);
-    _ui->characterEncodingLabel->setText(name);
-}
-
-void EditProfileDialog::customCursorColorChanged(const QColor &color)
-{
-    updateTempProfileProperty(Profile::CustomCursorColor, color);
-
-    // ensure that custom cursor colors are enabled
-    _ui->customCursorColorButton->click();
+    _advancedUi->selectEncodingButton->setText(name);
 }
 
 void EditProfileDialog::wordCharactersChanged(const QString &text)
@@ -1510,50 +1751,25 @@ void EditProfileDialog::wordCharactersChanged(const QString &text)
     updateTempProfileProperty(Profile::WordCharacters, text);
 }
 
-void EditProfileDialog::autoCursorColor()
-{
-    updateTempProfileProperty(Profile::UseCustomCursorColor, false);
-}
-
-void EditProfileDialog::customCursorColor()
-{
-    updateTempProfileProperty(Profile::UseCustomCursorColor, true);
-}
-
-void EditProfileDialog::setCursorShape(int index)
-{
-    updateTempProfileProperty(Profile::CursorShape, index);
-}
-
 void EditProfileDialog::togglebidiRendering(bool enable)
 {
     updateTempProfileProperty(Profile::BidiRenderingEnabled, enable);
-}
-
-void EditProfileDialog::lineSpacingChanged(int spacing)
-{
-    updateTempProfileProperty(Profile::LineSpacing, spacing);
-}
-
-void EditProfileDialog::toggleBlinkingCursor(bool enable)
-{
-    updateTempProfileProperty(Profile::BlinkingCursorEnabled, enable);
 }
 
 void EditProfileDialog::toggleUnderlineLinks(bool enable)
 {
     updateTempProfileProperty(Profile::UnderlineLinksEnabled, enable);
 
-    bool enableClick = _ui->underlineFilesButton->isChecked() || enable;
-    _ui->openLinksByDirectClickButton->setEnabled(enableClick);
+    bool enableClick = _mouseUi->underlineFilesButton->isChecked() || enable;
+    _mouseUi->openLinksByDirectClickButton->setEnabled(enableClick);
 }
 
 void EditProfileDialog::toggleUnderlineFiles(bool enable)
 {
     updateTempProfileProperty(Profile::UnderlineFilesEnabled, enable);
 
-    bool enableClick = _ui->underlineLinksButton->isChecked() || enable;
-    _ui->openLinksByDirectClickButton->setEnabled(enableClick);
+    bool enableClick = _mouseUi->underlineLinksButton->isChecked() || enable;
+    _mouseUi->openLinksByDirectClickButton->setEnabled(enableClick);
 }
 
 void EditProfileDialog::toggleCtrlRequiredForDrag(bool enable)
@@ -1609,16 +1825,16 @@ void EditProfileDialog::TripleClickModeChanged(int newValue)
 void EditProfileDialog::updateUrlHintsModifier(bool)
 {
     Qt::KeyboardModifiers modifiers;
-    if (_ui->urlHintsModifierShift->isChecked()) {
+    if (_advancedUi->urlHintsModifierShift->isChecked()) {
         modifiers |= Qt::ShiftModifier;
     }
-    if (_ui->urlHintsModifierCtrl->isChecked()) {
+    if (_advancedUi->urlHintsModifierCtrl->isChecked()) {
         modifiers |= Qt::ControlModifier;
     }
-    if (_ui->urlHintsModifierAlt->isChecked()) {
+    if (_advancedUi->urlHintsModifierAlt->isChecked()) {
         modifiers |= Qt::AltModifier;
     }
-    if (_ui->urlHintsModifierMeta->isChecked()) {
+    if (_advancedUi->urlHintsModifierMeta->isChecked()) {
         modifiers |= Qt::MetaModifier;
     }
     updateTempProfileProperty(Profile::UrlHintsModifiers, int(modifiers));
@@ -1637,54 +1853,6 @@ void EditProfileDialog::toggleBlinkingText(bool enable)
 void EditProfileDialog::toggleFlowControl(bool enable)
 {
     updateTempProfileProperty(Profile::FlowControlEnabled, enable);
-}
-
-void EditProfileDialog::fontSelected(const QFont &aFont)
-{
-    QFont previewFont = aFont;
-
-    setFontInputValue(aFont);
-
-    _ui->fontPreviewLabel->setFont(previewFont);
-
-    preview(Profile::Font, aFont);
-    updateTempProfileProperty(Profile::Font, aFont);
-}
-
-void EditProfileDialog::showFontDialog()
-{
-    QFont currentFont = _ui->fontPreviewLabel->font();
-    bool showAllFonts = _ui->showAllFontsButton->isChecked();
-
-    bool result;
-    if (showAllFonts) {
-        currentFont = QFontDialog::getFont(&result, currentFont, this,
-                                           i18n("Select Any Font"));
-    } else {
-        currentFont = QFontDialog::getFont(&result, currentFont, this,
-                                           i18n("Select Fixed Width Font"),
-                                           QFontDialog::MonospacedFonts);
-    }
-    if (!result) {
-        return;
-    }
-
-    fontSelected(currentFont);
-}
-
-void EditProfileDialog::setFontSize(double pointSize)
-{
-    QFont newFont = _ui->fontPreviewLabel->font();
-    newFont.setPointSizeF(pointSize);
-    _ui->fontPreviewLabel->setFont(newFont);
-
-    preview(Profile::Font, newFont);
-    updateTempProfileProperty(Profile::Font, newFont);
-}
-
-void EditProfileDialog::setFontInputValue(const QFont &aFont)
-{
-    _ui->fontSizeInput->setValue(aFont.pointSizeF());
 }
 
 ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject *parent) :

@@ -54,7 +54,7 @@ HistorySizeDialog::HistorySizeDialog(QWidget *parent) :
     _ui->setupUi(mainWidget);
 
     _ui->tempWarningWidget->setVisible(true);
-    _ui->tempWarningWidget->setWordWrap(true);
+    _ui->tempWarningWidget->setWordWrap(false);
     _ui->tempWarningWidget->setCloseButtonVisible(false);
     _ui->tempWarningWidget->setMessageType(KMessageWidget::Information);
     _ui->tempWarningWidget->setText(i18nc("@info:status",
@@ -85,3 +85,8 @@ void HistorySizeDialog::setLineCount(int lines)
 {
     _ui->historySizeWidget->setLineCount(lines);
 }
+
+QSize HistorySizeDialog::sizeHint() const {
+    return QSize(_ui->tempWarningWidget->sizeHint().width(), 0);
+}
+

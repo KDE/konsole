@@ -124,6 +124,9 @@ public:
         }
     }
 
+    quint8 colorSpace() { return _colorSpace; }
+    void termColor(int *u, int *v, int *w) { *u = _u; *v = _v; *w = _w; }
+
     /**
      * Returns true if this character color entry is valid.
      */

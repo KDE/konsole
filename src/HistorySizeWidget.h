@@ -61,6 +61,12 @@ public:
      */
     int lineCount() const;
 
+    /**
+     * Return height which should be set on the widget's label
+     * to align with the first widget's item
+     */
+    int preferredLabelHeight();
+
 Q_SIGNALS:
     /** Emitted when the history mode is changed. */
     void historyModeChanged(Enum::HistoryModeEnum);
