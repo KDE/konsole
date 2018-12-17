@@ -466,7 +466,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
     auto terminalDisplay = createView(session);
 
     viewSplitter->addTerminalDisplay(terminalDisplay, orientation);
-    emit splitViewToggle(viewSplitter->terminalDisplays().count() > 0);
+    emit splitViewToggle(viewSplitter->count() > 0);
 
     // focus the new container
     terminalDisplay->setFocus();

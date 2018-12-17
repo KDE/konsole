@@ -92,14 +92,6 @@ public:
     void setActiveTerminalDisplay(TerminalDisplay *container);
 
     /**
-     * Returns a list of the containers held by this splitter
-     */
-    QList<TerminalDisplay *> terminalDisplays() const
-    {
-        return _terminalDisplays;
-    }
-
-    /**
      * Gives the focus to the active view in the next container
      */
     void activateNextTerminalDisplay();
@@ -124,23 +116,9 @@ Q_SIGNALS:
     /** Signal emitted when the last child widget is removed from the splitter */
     void empty(ViewSplitter *splitter);
 
-protected:
-    //virtual void focusEvent(QFocusEvent* event);
-
 private:
-    // Adds container to splitter's internal list and
-    // connects signals and slots
-    void registerTerminalDisplay(TerminalDisplay *terminalDisplay);
-    // Removes container from splitter's internal list and
-    // removes signals and slots
-    void unregisterTerminalDisplay(TerminalDisplay *container);
-
     void updateSizes();
-
-    void terminalDisplayDestroyed(QObject *terminalDisplay);
-
-private:
-    QList<TerminalDisplay *> _terminalDisplays;
+    void childDestroyed(QObject *terminalDisplay);
 };
 }
 #endif //VIEWSPLITTER_H

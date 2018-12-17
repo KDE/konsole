@@ -78,16 +78,6 @@ ViewSplitter *ViewSplitter::activeSplitter()
     return splitter;
 }
 
-void ViewSplitter::registerTerminalDisplay(TerminalDisplay *container)
-{
-    _terminalDisplays.append(container);
-}
-
-void ViewSplitter::unregisterTerminalDisplay(TerminalDisplay *container)
-{
-    _terminalDisplays.removeOne(container);
-}
-
 void ViewSplitter::updateSizes()
 {
     int space;
@@ -108,39 +98,29 @@ void ViewSplitter::updateSizes()
     setSizes(widgetSizes);
 }
 
-void ViewSplitter::removeTerminalDisplay(TerminalDisplay *terminalDisplay)
-{
-    Q_ASSERT(terminalDisplays().contains(terminalDisplay));
-    unregisterTerminalDisplay(terminalDisplay);
-}
-
 void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation containerOrientation)
 {
     ViewSplitter *splitter = activeSplitter();
-    connect(terminalDisplay, &QWidget::destroyed, this, &ViewSplitter::terminalDisplayDestroyed);
 
     if (splitter->count() < 2
         || containerOrientation == splitter->orientation()) {
-        splitter->registerTerminalDisplay(terminalDisplay);
         splitter->addWidget(terminalDisplay);
 
         if (splitter->orientation() != containerOrientation) {
             splitter->setOrientation(containerOrientation);
         }
-
+        connect(terminalDisplay, &QObject::destroyed, this, &ViewSplitter::childDestroyed);
         splitter->updateSizes();
     } else {
         auto newSplitter = new ViewSplitter();
+        connect(newSplitter, &QObject::destroyed, this, &ViewSplitter::childDestroyed);
+        connect(terminalDisplay, &QObject::destroyed, newSplitter, &ViewSplitter::childDestroyed);
 
         TerminalDisplay *oldTerminalDisplay = splitter->activeTerminalDisplay();
+        disconnect(oldTerminalDisplay, &QObject::destroyed, nullptr, nullptr);
+        connect(oldTerminalDisplay, &QObject::destroyed, newSplitter, &ViewSplitter::childDestroyed);
 
         const int oldContainerIndex = splitter->indexOf(oldTerminalDisplay);
-
-        splitter->unregisterTerminalDisplay(oldTerminalDisplay);
-
-        newSplitter->registerTerminalDisplay(oldTerminalDisplay);
-        newSplitter->registerTerminalDisplay(terminalDisplay);
-
         newSplitter->addWidget(oldTerminalDisplay);
         newSplitter->addWidget(terminalDisplay);
         newSplitter->setOrientation(containerOrientation);
@@ -151,9 +131,10 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
     }
 }
 
-void ViewSplitter::terminalDisplayDestroyed(QObject *terminalDisplay)
+void ViewSplitter::childDestroyed(QObject *childWidget)
 {
-    terminalDisplay->setParent(nullptr);
+    // remove the parent so count() has the correct value.
+    childWidget->setParent(nullptr);
     if (count() == 0) {
         deleteLater();
     }
@@ -195,41 +176,32 @@ void ViewSplitter::activateNextTerminalDisplay()
 {
     TerminalDisplay *active = activeTerminalDisplay();
 
-    int index = _terminalDisplays.indexOf(active);
+    int index = indexOf(active);
 
     if (index == -1) {
         return;
     }
 
-    if (index == _terminalDisplays.count() - 1) {
+    if (index == count() - 1) {
         index = 0;
     } else {
         index++;
     }
-
-    setActiveTerminalDisplay(_terminalDisplays.at(index));
+    widget(index)->setFocus(Qt::OtherFocusReason);
 }
 
 void ViewSplitter::activatePreviousTerminalDisplay()
 {
     TerminalDisplay *active = activeTerminalDisplay();
 
-    int index = _terminalDisplays.indexOf(active);
+    int index = indexOf(active);
 
     if (index == 0) {
-        index = _terminalDisplays.count() - 1;
+        index = count() - 1;
     } else {
         index--;
     }
-
-    setActiveTerminalDisplay(_terminalDisplays.at(index));
-}
-
-void ViewSplitter::setActiveTerminalDisplay(TerminalDisplay *terminalDisplay)
-{
-    if (terminalDisplay != nullptr) {
-        terminalDisplay->setFocus(Qt::OtherFocusReason);
-    }
+    widget(index)->setFocus(Qt::OtherFocusReason);
 }
 
 TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
