@@ -130,9 +130,10 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
 
         splitter->updateSizes();
     } else {
-        auto newSplitter = new ViewSplitter(this);
+        auto newSplitter = new ViewSplitter();
 
         TerminalDisplay *oldTerminalDisplay = splitter->activeTerminalDisplay();
+
         const int oldContainerIndex = splitter->indexOf(oldTerminalDisplay);
 
         splitter->unregisterTerminalDisplay(oldTerminalDisplay);
