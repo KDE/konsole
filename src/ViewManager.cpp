@@ -604,10 +604,10 @@ void ViewManager::createView(Session *session, TabbedViewContainer *container, i
     const QSize &preferredSize = session->preferredSize();
 
     display->setSize(preferredSize.width(), preferredSize.height());
-    ViewProperties *properties = createController(session, display);
+    createController(session, display);
 
     _sessionMap[display] = session;
-    container->addView(display, properties, index);
+    container->addView(display, index);
     session->addView(display);
 
     // tell the session whether it has a light or dark background

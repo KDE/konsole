@@ -78,7 +78,7 @@ public:
     ~TabbedViewContainer() Q_DECL_OVERRIDE;
 
     /** Adds a new view to the container widget */
-    void addView(TerminalDisplay *view, ViewProperties *item, int index = -1);
+    void addView(TerminalDisplay *view, int index = -1);
 
     /** Removes a view from the container */
     void removeView(TerminalDisplay *view);
@@ -172,7 +172,7 @@ Q_SIGNALS:
     void activeViewChanged(TerminalDisplay *view);
 
     /** Emitted when a view is added to the container. */
-    void viewAdded(TerminalDisplay *view, ViewProperties *properties);
+    void viewAdded(TerminalDisplay *view);
 
     /** Emitted when a view is removed from the container. */
     void viewRemoved(TerminalDisplay *view);

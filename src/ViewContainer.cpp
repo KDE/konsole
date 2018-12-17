@@ -247,8 +247,9 @@ void TabbedViewContainer::moveActiveView(MoveDirection direction)
     setCurrentIndex(newIndex);
 }
 
-void TabbedViewContainer::addView(TerminalDisplay *view, ViewProperties *item, int index)
+void TabbedViewContainer::addView(TerminalDisplay *view, int index)
 {
+    auto item = view->sessionController();
     if (index == -1) {
         addTab(view, item->icon(), item->title());
     } else {
@@ -264,7 +265,7 @@ void TabbedViewContainer::addView(TerminalDisplay *view, ViewProperties *item, i
             &Konsole::TabbedViewContainer::updateActivity);
     connect(view, &QWidget::destroyed, this,
             &Konsole::TabbedViewContainer::viewDestroyed);
-    emit viewAdded(view, item);
+    emit viewAdded(view);
 }
 
 void TabbedViewContainer::viewDestroyed(QObject *view)
