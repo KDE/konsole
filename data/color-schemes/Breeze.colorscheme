@@ -1,14 +1,14 @@
 [Background]
-Color=49,54,59
+Color=35,38,39
 
 [BackgroundFaint]
 Color=49,54,59
 
 [BackgroundIntense]
-Color=35,38,41
+Color=0,0,0
 
 [Color0]
-Color=49,54,59
+Color=35,38,39
 
 [Color0Faint]
 Color=49,54,59
@@ -71,22 +71,22 @@ Color=24,108,96
 Color=22,160,133
 
 [Color7]
-Color=239,240,241
+Color=252,252,252
 
 [Color7Faint]
 Color=99,104,109
 
 [Color7Intense]
-Color=252,252,252
+Color=255,255,255
 
 [Foreground]
-Color=239,240,241
+Color=252,252,252
 
 [ForegroundFaint]
-Color=220,230,231
+Color=239,240,241
 
 [ForegroundIntense]
-Color=252,252,252
+Color=255,255,255
 
 [General]
 Description=Breeze
