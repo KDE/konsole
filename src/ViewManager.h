@@ -75,12 +75,6 @@ public:
     ~ViewManager() Q_DECL_OVERRIDE;
 
     /**
-     * Creates a new view to display the output from and deliver input to @p session.
-     * Constructs a new container to hold the views if no container has yet been created.
-     */
-    void createView(TabbedViewContainer *tabWidget, Session *session);
-
-    /**
      * Applies the view-specific settings associated with specified @p profile
      * to the terminal display @p view.
      */
@@ -197,6 +191,7 @@ public:
     /** returns the active tab from the view
     */
     TabbedViewContainer *activeContainer();
+    TerminalDisplay *createView(Session *session);
 
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
@@ -390,7 +385,6 @@ private Q_SLOTS:
 private:
     Q_DISABLE_COPY(ViewManager)
 
-    void createView(Session *session, TabbedViewContainer *container, int index);
     static const ColorScheme *colorSchemeForProfile(const Profile::Ptr profile);
 
     void setupActions();

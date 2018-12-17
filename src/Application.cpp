@@ -187,7 +187,7 @@ void Application::detachView(Session *session)
     MainWindow *window = newMainWindow();
     ViewManager *manager = window->viewManager();
 
-    manager->createView(manager->activeContainer(), session);
+    manager->createView(session);
 
     // Since user is dragging and dropping, move dnd window to where
     // the user has the cursor (correct multiple monitor setups).

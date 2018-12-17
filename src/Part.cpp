@@ -213,7 +213,8 @@ void Part::createSession(const QString &profileName, const QString &directory)
         session->setInitialWorkingDirectory(directory);
     }
 
-    _viewManager->createView(_viewManager->activeContainer(), session);
+    auto newView = _viewManager->createView(session);
+    _viewManager->activeContainer()->addView(newView);
 }
 
 void Part::activeViewChanged(SessionController *controller)

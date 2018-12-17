@@ -467,6 +467,7 @@ void MainWindow::openUrls(const QList<QUrl> &urls)
 
 void MainWindow::newTab(TabbedViewContainer *tabWidget)
 {
+    qDebug() << "New Tab Triggered";
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
     createSession(tabWidget, defaultProfile, activeSessionDir());
 }
@@ -504,8 +505,8 @@ Session *MainWindow::createSession(TabbedViewContainer *tabWidget, Profile::Ptr 
     // doesn't suffer a change in terminal size right after the session
     // starts.  Some applications such as GNU Screen and Midnight Commander
     // don't like this happening
-    _viewManager->createView(tabWidget, session);
-
+    auto newView = _viewManager->createView(session);
+    _viewManager->activeContainer()->addView(newView);
     return session;
 }
 
@@ -534,8 +535,8 @@ Session *MainWindow::createSSHSession(TabbedViewContainer *tabWidget, Profile::P
     // doesn't suffer a change in terminal size right after the session
     // starts.  some applications such as GNU Screen and Midnight Commander
     // don't like this happening
-    _viewManager->createView(tabWidget, session);
-
+    auto newView = _viewManager->createView(session);
+    _viewManager->activeContainer()->addView(newView);
     return session;
 }
 
