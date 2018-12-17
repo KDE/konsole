@@ -39,15 +39,6 @@ ViewSplitter::ViewSplitter(QWidget *parent) :
 {
 }
 
-void ViewSplitter::childEmpty(ViewSplitter *splitter)
-{
-    delete splitter;
-
-    if (count() == 0) {
-        emit empty(this);
-    }
-}
-
 void ViewSplitter::adjustTerminalDisplaySize(TerminalDisplay *container, int percentage)
 {
     int containerIndex = indexOf(container);
@@ -120,13 +111,13 @@ void ViewSplitter::updateSizes()
 void ViewSplitter::removeTerminalDisplay(TerminalDisplay *terminalDisplay)
 {
     Q_ASSERT(terminalDisplays().contains(terminalDisplay));
-
     unregisterTerminalDisplay(terminalDisplay);
 }
 
 void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation containerOrientation)
 {
     ViewSplitter *splitter = activeSplitter();
+    connect(terminalDisplay, &QWidget::destroyed, this, &ViewSplitter::terminalDisplayDestroyed);
 
     if (splitter->count() < 2
         || containerOrientation == splitter->orientation()) {
@@ -140,8 +131,6 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
         splitter->updateSizes();
     } else {
         auto newSplitter = new ViewSplitter(this);
-        connect(newSplitter, &Konsole::ViewSplitter::empty, splitter,
-                &Konsole::ViewSplitter::childEmpty);
 
         TerminalDisplay *oldTerminalDisplay = splitter->activeTerminalDisplay();
         const int oldContainerIndex = splitter->indexOf(oldTerminalDisplay);
@@ -161,8 +150,16 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
     }
 }
 
+void ViewSplitter::terminalDisplayDestroyed(QObject *terminalDisplay)
+{
+    terminalDisplay->setParent(nullptr);
+    if (count() == 0) {
+        deleteLater();
+    }
+}
+
 //TODO: Maybe move this to the TabbedViewContainer ?
-/*
+#if 0
 void ViewSplitter::containerEmpty(TerminalDisplay * myContainer)
 {
     _containers.removeAll(myContainer);
@@ -191,7 +188,7 @@ void ViewSplitter::containerEmpty(TerminalDisplay * myContainer)
         }
     }
 }
-*/
+#endif
 
 void ViewSplitter::activateNextTerminalDisplay()
 {

@@ -280,22 +280,25 @@ void TabbedViewContainer::addView(TerminalDisplay *view, int index)
             &Konsole::TabbedViewContainer::updateIcon);
     connect(item, &Konsole::ViewProperties::activity, this,
             &Konsole::TabbedViewContainer::updateActivity);
+
+    connect(viewSplitter, &ViewSplitter::destroyed, this, &TabbedViewContainer::viewDestroyed);
     emit viewAdded(view);
 }
 
 void TabbedViewContainer::viewDestroyed(QObject *view)
 {
-    auto widget = static_cast<TerminalDisplay*>(view);
+    auto widget = static_cast<ViewSplitter*>(view);
     const auto idx = indexOf(widget);
 
     removeTab(idx);
     forgetView(widget);
 }
 
-void TabbedViewContainer::forgetView(TerminalDisplay *view)
+void TabbedViewContainer::forgetView(ViewSplitter *view)
 {
-    updateTabHistory(view, true);
-    emit viewRemoved(view);
+    //TODO: Fix updateTabHistory
+    // updateTabHistory(view, true);
+    // emit viewRemoved(view);
     if (count() == 0) {
         emit empty(this);
     }
@@ -306,7 +309,7 @@ void TabbedViewContainer::removeView(TerminalDisplay *view)
     const int idx = indexOf(view);
     disconnect(view, &QWidget::destroyed, this, &Konsole::TabbedViewContainer::viewDestroyed);
     removeTab(idx);
-    forgetView(view);
+  //  forgetView(view);
 }
 
 void TabbedViewContainer::activateNextView()

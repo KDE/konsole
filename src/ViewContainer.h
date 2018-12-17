@@ -198,7 +198,7 @@ private Q_SLOTS:
     void konsoleConfigChanged();
 
 private:
-    void forgetView(TerminalDisplay *view);
+    void forgetView(ViewSplitter *view);
     void updateTabHistory(TerminalDisplay *view, bool remove = false);
 
     QList<TerminalDisplay *> _tabHistory;

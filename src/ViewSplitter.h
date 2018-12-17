@@ -137,10 +137,7 @@ private:
 
     void updateSizes();
 
-private Q_SLOTS:
-    // Called to indicate that a child ViewSplitter is empty
-    // (ie. all child widgets have been deleted)
-    void childEmpty(ViewSplitter *splitter);
+    void terminalDisplayDestroyed(QObject *terminalDisplay);
 
 private:
     QList<TerminalDisplay *> _terminalDisplays;
