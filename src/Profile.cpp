@@ -179,7 +179,7 @@ void Profile::useFallback()
     setProperty(AlternateScrolling, true);
 
     setProperty(KeyBindings, QStringLiteral("default"));
-    setProperty(ColorScheme, QStringLiteral("Linux")); //use DarkPastels when is start support blue ncurses UI properly
+    setProperty(ColorScheme, QStringLiteral("Breeze")); //use DarkPastels when is start support blue ncurses UI properly
     setProperty(Font, QFontDatabase::systemFont(QFontDatabase::FixedFont));
 
     setProperty(HistoryMode, Enum::FixedSizeHistory);
