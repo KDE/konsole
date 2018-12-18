@@ -18,10 +18,11 @@
     02110-1301  USA.
 */
 
+#include "SearchHistoryTask.h"
+
 #include <QApplication>
 #include <QTextStream>
 
-#include "SearchHistoryTask.h"
 #include "TerminalCharacterDecoder.h"
 #include "Emulation.h"
 
