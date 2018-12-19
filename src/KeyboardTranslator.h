@@ -208,12 +208,6 @@ public:
         void setStateMask(States aStateMask);
 
         /**
-         * Returns the key code and modifiers associated with this entry
-         * as a QKeySequence
-         */
-        //QKeySequence keySequence() const;
-
-        /**
          * Returns this entry's conditions ( ie. its key code, modifier and state criteria )
          * as a string.
          */
@@ -254,8 +248,6 @@ public:
 
     /** Constructs a new keyboard translator with the given @p name */
     explicit KeyboardTranslator(const QString &name);
-
-    //KeyboardTranslator(const KeyboardTranslator& other);
 
     /** Returns the name of this keyboard translator */
     QString name() const;
