@@ -346,7 +346,7 @@ public:
  *  }
  * @endcode
  */
-class KeyboardTranslatorReader
+class KONSOLEPRIVATE_EXPORT KeyboardTranslatorReader
 {
 public:
     /** Constructs a new reader which parses the given @p source */

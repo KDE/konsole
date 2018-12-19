@@ -34,6 +34,7 @@ private Q_SLOTS:
     void testEntryTextWildcards();
     void testEntryTextWildcards_data();
     void testFallback();
+    void testHexKeys();
 };
 
 }
