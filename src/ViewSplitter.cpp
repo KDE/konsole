@@ -206,5 +206,6 @@ void ViewSplitter::activatePreviousTerminalDisplay()
 
 TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
 {
-    return qobject_cast<TerminalDisplay*>(focusWidget());
+    auto focusedWidget = qobject_cast<TerminalDisplay*>(focusWidget());
+    return focusedWidget ? focusedWidget : findChild<TerminalDisplay*>();
 }
