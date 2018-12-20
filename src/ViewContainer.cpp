@@ -151,6 +151,11 @@ TabbedViewContainer::~TabbedViewContainer()
     }
 }
 
+ViewSplitter *TabbedViewContainer::activeViewSplitter()
+{
+    return viewSplitterAt(currentIndex());
+}
+
 ViewSplitter *TabbedViewContainer::viewSplitterAt(int index)
 {
     return qobject_cast<ViewSplitter*>(widget(index));

@@ -44,10 +44,9 @@ class TabbedViewContainer;
 /**
  * Manages the terminal display widgets in a Konsole window or part.
  *
- * When a view manager is created, it constructs a splitter widget ( accessed via
- * widget() ) to hold one or more view containers.  Each view container holds
- * one or more terminal displays and a navigation widget ( eg. tabs or a list )
- * to allow the user to navigate between the displays in that container.
+ * When a view manager is created, it constructs a tab widget ( accessed via
+ * widget() ) to hold one or more view splitters.  Each view splitter holds
+ * one or more terminal displays  and splitters.
  *
  * The view manager provides menu actions ( defined in the 'konsoleui.rc' XML file )
  * to manipulate the views and view containers - for example, actions to split the view

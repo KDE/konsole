@@ -318,7 +318,7 @@ void ViewManager::moveActiveViewRight()
 
 void ViewManager::nextContainer()
 {
-    //_viewSplitter->activateNextContainer();
+//    _viewSplitter->activateNextContainer();
 }
 
 void ViewManager::nextView()
@@ -492,16 +492,16 @@ void ViewManager::removeContainer(TabbedViewContainer *container)
 
 void ViewManager::expandActiveContainer()
 {
-#if 0
-    _viewSplitter->adjustContainerSize(_viewSplitter->activeContainer(), 10);
-#endif
+    auto activeSplitter = _viewContainer->activeViewSplitter();
+    auto activeTerminalDisplay = activeSplitter->activeTerminalDisplay();
+    activeSplitter->adjustTerminalDisplaySize(activeTerminalDisplay, 10);
 }
 
 void ViewManager::shrinkActiveContainer()
 {
-#if 0
-    _viewSplitter->adjustContainerSize(_viewSplitter->activeContainer(), -10);
-#endif
+    auto activeSplitter = _viewContainer->activeViewSplitter();
+    auto activeTerminalDisplay = activeSplitter->activeTerminalDisplay();
+    activeSplitter->adjustTerminalDisplaySize(activeTerminalDisplay, -10);
 }
 
 void ViewManager::closeActiveContainer()

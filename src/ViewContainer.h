@@ -103,6 +103,8 @@ public:
 
     void setCss(const QString& styleSheet = QString());
     void setCssFromFile(const QUrl& url);
+
+    ViewSplitter *activeViewSplitter();
     /**
      * This enum describes the directions
      * in which views can be re-arranged within the container
