@@ -407,6 +407,11 @@ private:
     // about the session ( such as title and associated icon ) to the display.
     SessionController *createController(Session *session, TerminalDisplay *view);
 
+    // Activates a different terminal than the one passed by
+    // that lives in the same tab. this is used when the TerminalDisplay
+    // closes and another one should be focused.
+    void focusAnotherTerminal(TerminalDisplay *lostFocus);
+
 private:
     QPointer<TabbedViewContainer> _viewContainer;
     QPointer<SessionController> _pluggedController;

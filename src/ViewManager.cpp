@@ -403,8 +403,21 @@ void ViewManager::sessionFinished()
         // order to prevent BUG: 185466 - disappearing menu popup
         emit unplugController(_pluggedController);
     }
+
+    focusAnotherTerminal(view);
 }
 
+void ViewManager::focusAnotherTerminal(TerminalDisplay *lostFocus)
+{
+    auto viewSplitter = _viewContainer->activeViewSplitter();
+    auto terminalDisplays = viewSplitter->findChildren<TerminalDisplay*>();
+    for (auto terminalDisplay : terminalDisplays) {
+        if (terminalDisplay != lostFocus) {
+            terminalDisplay->setFocus(Qt::OtherFocusReason);
+            return;
+        }
+    }
+}
 void ViewManager::viewActivated(QWidget *view)
 {
     Q_ASSERT(view != nullptr);
@@ -649,6 +662,7 @@ void ViewManager::containerViewsChanged(TabbedViewContainer *container)
 
 void ViewManager::viewDestroyed(QWidget *view)
 {
+    qDebug() << "TerminalDisplay destroyed";
     // Note: the received QWidget has already been destroyed, so
     // using dynamic_cast<> or qobject_cast<> does not work here
     // We only need the pointer address to look it up below
@@ -674,6 +688,7 @@ void ViewManager::viewDestroyed(QWidget *view)
     // Only happens when using the tab bar close button
 //    if (_pluggedController)
 //        emit unplugController(_pluggedController);
+    qDebug() << "End of view destroyed";
 }
 
 TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
