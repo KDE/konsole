@@ -391,15 +391,9 @@ void ViewManager::sessionFinished()
     auto *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
 
-    // close attached views
-    QList<TerminalDisplay *> children = _viewContainer->findChildren<TerminalDisplay *>();
-
-    foreach (TerminalDisplay *view, children) {
-        if (_sessionMap[view] == session) {
-            _sessionMap.remove(view);
-            view->deleteLater();
-        }
-    }
+    auto view = _sessionMap.key(session);
+    _sessionMap.remove(view);
+    view->deleteLater();
 
     // Only remove the controller from factory() if it's actually controlling
     // the session from the sender.
