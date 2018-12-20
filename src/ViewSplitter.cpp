@@ -140,38 +140,6 @@ void ViewSplitter::childDestroyed(QObject *childWidget)
     }
 }
 
-//TODO: Maybe move this to the TabbedViewContainer ?
-#if 0
-void ViewSplitter::containerEmpty(TerminalDisplay * myContainer)
-{
-    _containers.removeAll(myContainer);
-    if (count() == 0) {
-        emit empty(this);
-    }
-
-    int children = 0;
-    foreach (auto container, _containers) {
-        children += container->count();
-    }
-
-    if (children == 0) {
-        emit allContainersEmpty();
-    }
-
-    // This container is no more, try to find another container to focus.
-    ViewSplitter *currentSplitter = activeSplitter();
-    while(qobject_cast<ViewSplitter*>(currentSplitter->parent())) {
-        currentSplitter = qobject_cast<ViewSplitter*>(currentSplitter->parent());
-    }
-
-    for(auto tabWidget : currentSplitter->findChildren<TerminalDisplay*>()) {
-        if (tabWidget != myContainer && tabWidget->count()) {
-            tabWidget->setCurrentIndex(0);
-        }
-    }
-}
-#endif
-
 void ViewSplitter::activateNextTerminalDisplay()
 {
     TerminalDisplay *active = activeTerminalDisplay();
