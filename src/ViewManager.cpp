@@ -146,26 +146,6 @@ void ViewManager::setupActions()
     collection->addAction(QStringLiteral("split-view-top-bottom"), splitTopBottomAction);
     connect(splitTopBottomAction, &QAction::triggered, this, &Konsole::ViewManager::splitTopBottom);
 
-    QAction *closeActiveAction = new QAction(i18nc("@action:inmenu Close Active View", "Close Active"), this);
-    closeActiveAction->setIcon(QIcon::fromTheme(QStringLiteral("view-close")));
-    collection->setDefaultShortcut(closeActiveAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_X);
-    closeActiveAction->setEnabled(false);
-    collection->addAction(QStringLiteral("close-active-view"), closeActiveAction);
-    connect(closeActiveAction, &QAction::triggered, this,
-            &Konsole::ViewManager::closeActiveContainer);
-
-    multiViewOnlyActions << closeActiveAction;
-
-    QAction *closeOtherAction = new QAction(i18nc("@action:inmenu Close Other Views",
-                                                  "Close Others"), this);
-    collection->setDefaultShortcut(closeOtherAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_O);
-    closeOtherAction->setEnabled(false);
-    collection->addAction(QStringLiteral("close-other-views"), closeOtherAction);
-    connect(closeOtherAction, &QAction::triggered, this,
-            &Konsole::ViewManager::closeOtherContainers);
-
-    multiViewOnlyActions << closeOtherAction;
-
     // Expand & Shrink Active View
     QAction *expandActiveAction = new QAction(i18nc("@action:inmenu", "Expand View"), this);
     collection->setDefaultShortcut(expandActiveAction,
@@ -474,6 +454,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
 
 void ViewManager::removeContainer(TabbedViewContainer *container)
 {
+    qDebug() << "Remove Container Called";
 #if 0
     // remove session map entries for views in this container
     for(int i = 0, end = container->count(); i < end; i++) {
@@ -502,35 +483,6 @@ void ViewManager::shrinkActiveContainer()
     auto activeSplitter = _viewContainer->activeViewSplitter();
     auto activeTerminalDisplay = activeSplitter->activeTerminalDisplay();
     activeSplitter->adjustTerminalDisplaySize(activeTerminalDisplay, -10);
-}
-
-void ViewManager::closeActiveContainer()
-{
-#if 0
-    // only do something if there is more than one container active
-    if (_viewSplitter->containers().count() > 1) {
-        TabbedViewContainer *container = _viewSplitter->activeContainer();
-
-        removeContainer(container);
-
-        // focus next container so that user can continue typing
-        // without having to manually focus it themselves
-        nextContainer();
-    }
-#endif
-}
-
-void ViewManager::closeOtherContainers()
-{
-#if 0
-    TabbedViewContainer *active = _viewSplitter->activeContainer();
-
-    foreach (TabbedViewContainer *container, _viewSplitter->containers()) {
-        if (container != active) {
-            removeContainer(container);
-        }
-    }
-#endif
 }
 
 SessionController *ViewManager::createController(Session *session, TerminalDisplay *view)
