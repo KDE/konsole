@@ -140,6 +140,59 @@ void ViewSplitter::childDestroyed(QObject *childWidget)
     }
 }
 
+
+void ViewSplitter::focusUp()
+{
+    qDebug() << "Focus up called";
+    auto terminalDisplay = activeTerminalDisplay();
+    auto activeViewSplitter = qobject_cast<ViewSplitter*>(terminalDisplay->parentWidget());
+    auto idx = activeViewSplitter->indexOf(terminalDisplay);
+
+    // Easy, we are in a vertical spliter and we want to focus up.
+    if (activeViewSplitter->orientation() == Qt::Vertical && idx > 0) {
+        activeViewSplitter->widget(idx - 1)->setFocus(Qt::OtherFocusReason);
+    }
+
+    // Hard, we are in a horizontal splitter or we are in the top of the vertical splitter.
+    else {
+        ViewSplitter *parentTerminalWidget = nullptr;
+        ViewSplitter *oldParent = activeViewSplitter;
+        do {
+            parentTerminalWidget = qobject_cast<ViewSplitter*>(
+                        parentTerminalWidget ? parentTerminalWidget->parentWidget()
+                                             : activeViewSplitter->parentWidget());
+
+            if (parentTerminalWidget) {
+                idx = parentTerminalWidget->indexOf(oldParent);
+            }
+            oldParent = parentTerminalWidget;
+        } while (parentTerminalWidget && parentTerminalWidget->orientation() != Qt::Vertical);
+
+        if (!parentTerminalWidget) {
+            return;
+        }
+
+        if (idx > 0) {
+            parentTerminalWidget->widget(idx - 1)->setFocus(Qt::OtherFocusReason);
+        } else {
+            qDebug() << "Could not find idx.";
+        }
+    }
+}
+
+void ViewSplitter::focusDown()
+{
+}
+
+void ViewSplitter::focusLeft()
+{
+}
+
+void ViewSplitter::focusRight()
+{
+}
+
+
 void ViewSplitter::activateNextTerminalDisplay()
 {
     TerminalDisplay *active = activeTerminalDisplay();

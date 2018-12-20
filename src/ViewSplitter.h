@@ -112,6 +112,10 @@ public:
      */
     void activatePreviousTerminalDisplay();
 
+    void focusUp();
+    void focusDown();
+    void focusLeft();
+    void focusRight();
 Q_SIGNALS:
     /** Signal emitted when the last child widget is removed from the splitter */
     void empty(ViewSplitter *splitter);

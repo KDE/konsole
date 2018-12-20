@@ -221,8 +221,8 @@ void ViewManager::setupActions()
     // _viewSplitter->addAction(previousViewAction);
 
     collection->setDefaultShortcut(nextContainerAction, Qt::SHIFT + Qt::Key_Tab);
-    connect(nextContainerAction, &QAction::triggered, this, &Konsole::ViewManager::nextContainer);
-    // _viewSplitter->addAction(nextContainerAction);
+    connect(nextContainerAction, &QAction::triggered, this, &Konsole::ViewManager::focusUp);
+     _viewContainer->addAction(nextContainerAction);
 
 #ifdef Q_OS_MACOS
     collection->setDefaultShortcut(moveViewLeftAction,
@@ -284,6 +284,26 @@ void ViewManager::updateDetachViewState()
         detachAction->setEnabled(shouldEnable);
     }
 #endif
+}
+
+void ViewManager::focusUp()
+{
+    _viewContainer->activeViewSplitter()->focusUp();
+}
+
+void ViewManager::focusDown()
+{
+    _viewContainer->activeViewSplitter()->focusDown();
+}
+
+void ViewManager::focusLeft()
+{
+    _viewContainer->activeViewSplitter()->focusLeft();
+}
+
+void ViewManager::focusRight()
+{
+    _viewContainer->activeViewSplitter()->focusRight();
 }
 
 void ViewManager::moveActiveViewLeft()

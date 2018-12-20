@@ -332,6 +332,11 @@ private Q_SLOTS:
     // that we can plug the appropriate actions into the UI
     void viewActivated(QWidget *view);
 
+    void focusUp();
+    void focusDown();
+    void focusLeft();
+    void focusRight();
+
     // called when "Next View" shortcut is activated
     void nextView();
 
