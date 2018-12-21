@@ -112,156 +112,126 @@ void ViewManager::setupActions()
 
     KActionCollection *collection = _actionCollection;
 
-    QAction *nextViewAction = new QAction(i18nc("@action Shortcut entry", "Next Tab"), this);
-    QAction *previousViewAction = new QAction(i18nc("@action Shortcut entry", "Previous Tab"), this);
-    QAction *lastViewAction = new QAction(i18nc("@action Shortcut entry",
-                                                "Switch to Last Tab"), this);
-    QAction *lastUsedViewAction = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs"), this);
-    QAction *lastUsedViewReverseAction = new QAction(i18nc("@action Shortcut entry",
-                                                           "Last Used Tabs (Reverse)"), this);
-    QAction *toggleTwoViewsAction = new QAction(i18nc("@action Shortcut entry", "Toggle Between Two Tabs"), this);
-    QAction *nextContainerAction = new QAction(i18nc("@action Shortcut entry",
-                                                     "Next View Container"), this);
-
-    QAction *moveViewLeftAction = new QAction(i18nc("@action Shortcut entry", "Move Tab Left"), this);
-    QAction *moveViewRightAction = new QAction(i18nc("@action Shortcut entry",
-                                                     "Move Tab Right"), this);
-
     // list of actions that should only be enabled when there are multiple view
     // containers open
     QList<QAction *> multiViewOnlyActions;
-    multiViewOnlyActions << nextContainerAction;
 
-    QAction *splitLeftRightAction = new QAction(QIcon::fromTheme(QStringLiteral("view-split-left-right")),
-                                                i18nc("@action:inmenu", "Split View Left/Right"),
-                                                this);
-    collection->setDefaultShortcut(splitLeftRightAction, Konsole::ACCEL + Qt::Key_ParenLeft);
-    collection->addAction(QStringLiteral("split-view-left-right"), splitLeftRightAction);
-    connect(splitLeftRightAction, &QAction::triggered, this, &Konsole::ViewManager::splitLeftRight);
+    // Let's reuse the pointer, no need not to.
+    auto *action = new QAction();
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-left-right")));
+    action->setText(i18nc("@action:inmenu", "Split View Left/Right"));
+    connect(action, &QAction::triggered, this, &ViewManager::splitLeftRight);
+    collection->addAction(QStringLiteral("split-view-left-right"), action);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::Key_ParenLeft);
 
-    QAction *splitTopBottomAction = new QAction(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")),
-                                                i18nc("@action:inmenu",
-                                                "Split View Top/Bottom"), this);
-    collection->setDefaultShortcut(splitTopBottomAction, Konsole::ACCEL + Qt::Key_ParenRight);
-    collection->addAction(QStringLiteral("split-view-top-bottom"), splitTopBottomAction);
-    connect(splitTopBottomAction, &QAction::triggered, this, &Konsole::ViewManager::splitTopBottom);
+    action = new QAction();
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
+    action->setText(i18nc("@action:inmenu", "Split View Top/Bottom"));
+    connect(action, &QAction::triggered, this, &ViewManager::splitTopBottom);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::Key_ParenRight);
+    collection->addAction(QStringLiteral("split-view-top-bottom"), action);
 
-    // Expand & Shrink Active View
-    QAction *expandActiveAction = new QAction(i18nc("@action:inmenu", "Expand View"), this);
-    collection->setDefaultShortcut(expandActiveAction,
-                                   Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketRight);
-    expandActiveAction->setEnabled(false);
-    collection->addAction(QStringLiteral("expand-active-view"), expandActiveAction);
-    connect(expandActiveAction, &QAction::triggered, this,
-            &Konsole::ViewManager::expandActiveContainer);
+    action = new QAction();
+    action->setText(i18nc("@action:inmenu", "Expand View"));
+    action->setEnabled(false);
+    connect(action, &QAction::triggered, this, &ViewManager::expandActiveContainer);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketRight);
+    collection->addAction(QStringLiteral("expand-active-view"), action);
+    multiViewOnlyActions << action;
 
-    multiViewOnlyActions << expandActiveAction;
-
-    QAction *shrinkActiveAction = new QAction(i18nc("@action:inmenu", "Shrink View"), this);
-    collection->setDefaultShortcut(shrinkActiveAction,
-                                   Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketLeft);
-    shrinkActiveAction->setEnabled(false);
-    collection->addAction(QStringLiteral("shrink-active-view"), shrinkActiveAction);
-    connect(shrinkActiveAction, &QAction::triggered, this,
-            &Konsole::ViewManager::shrinkActiveContainer);
-
-    multiViewOnlyActions << shrinkActiveAction;
+    action = new QAction();
+    action->setText(i18nc("@action:inmenu", "Shrink View"));
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketLeft);
+    action->setEnabled(false);
+    collection->addAction(QStringLiteral("shrink-active-view"), action);
+    connect(action, &QAction::triggered, this, &ViewManager::shrinkActiveContainer);
+    multiViewOnlyActions << action;
 
     // Crashes on Mac.
 #if defined(ENABLE_DETACHING)
-    QAction *detachViewAction = collection->addAction(QStringLiteral("detach-view"));
-    detachViewAction->setEnabled(true);
-    detachViewAction->setIcon(QIcon::fromTheme(QStringLiteral("tab-detach")));
-    detachViewAction->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
+    action = collection->addAction(QStringLiteral("detach-view"));
+    action->setEnabled(true);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("tab-detach")));
+    action->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
+
+    connect(this, &ViewManager::splitViewToggle, this, &ViewManager::updateDetachViewState);
+    connect(action, &QAction::triggered, this, &ViewManager::detachActiveView);
+
     // Ctrl+Shift+D is not used as a shortcut by default because it is too close
     // to Ctrl+D - which will terminate the session in many cases
-    collection->setDefaultShortcut(detachViewAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_H);
-
-    connect(this, &Konsole::ViewManager::splitViewToggle, this,
-            &Konsole::ViewManager::updateDetachViewState);
-    connect(detachViewAction, &QAction::triggered, this, &Konsole::ViewManager::detachActiveView);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_H);
 #endif
 
-    // Next / Previous View , Next Container
-    collection->addAction(QStringLiteral("next-view"), nextViewAction);
-    collection->addAction(QStringLiteral("previous-view"), previousViewAction);
-    collection->addAction(QStringLiteral("last-tab"), lastViewAction);
-    collection->addAction(QStringLiteral("last-used-tab"), lastUsedViewAction);
-    collection->addAction(QStringLiteral("last-used-tab-reverse"), lastUsedViewReverseAction);
-    collection->addAction(QStringLiteral("toggle-two-tabs"), toggleTwoViewsAction);
-    collection->addAction(QStringLiteral("next-container"), nextContainerAction);
-    collection->addAction(QStringLiteral("move-view-left"), moveViewLeftAction);
-    collection->addAction(QStringLiteral("move-view-right"), moveViewRightAction);
+    // keyboard shortcut only actions
+    action = new QAction(i18nc("@action Shortcut entry", "Next Tab"), this);
+    const QList<QKeySequence> nextViewActionKeys{Qt::SHIFT + Qt::Key_Right, Qt::CTRL + Qt::Key_PageDown};
+    collection->setDefaultShortcuts(action, nextViewActionKeys);
+    collection->addAction(QStringLiteral("next-tab"), action);
+    connect(action, &QAction::triggered, this, &ViewManager::nextView);
+   // _viewSplitter->addAction(nextViewAction);
 
-    // Switch to tab N shortcuts
+    action = new QAction(i18nc("@action Shortcut entry", "Previous Tab"), this);
+    const QList<QKeySequence> previousViewActionKeys{Qt::SHIFT + Qt::Key_Left, Qt::CTRL + Qt::Key_PageUp};
+    collection->setDefaultShortcuts(action, previousViewActionKeys);
+    collection->addAction(QStringLiteral("previous-tab"), action);
+    connect(action, &QAction::triggered, this, &ViewManager::previousView);
+    // _viewSplitter->addAction(previousViewAction);
+
+    action = new QAction(i18nc("@action Shortcut entry", "Next View Container"), this);
+    connect(action, &QAction::triggered, this, &ViewManager::focusUp);
+    collection->addAction(QStringLiteral("next-container"), action);
+    collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Up);
+     _viewContainer->addAction(action);
+     multiViewOnlyActions << action;
+
+     action = new QAction(QStringLiteral("Focus Down"));
+     collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Down);
+     connect(action, &QAction::triggered, this, &ViewManager::focusDown);
+     _viewContainer->addAction(action);
+
+     action = new QAction(i18nc("@action Shortcut entry", "Move Tab Left"), this);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Konsole::LEFT);
+    connect(action, &QAction::triggered, this, &ViewManager::focusLeft);
+    collection->addAction(QStringLiteral("move-view-left"), action);
+    // _viewSplitter->addAction(action);
+
+    action = new QAction(i18nc("@action Shortcut entry", "Move Tab Right"), this);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Konsole::RIGHT);
+    connect(action, &QAction::triggered, this, &ViewManager::focusRight);
+    collection->addAction(QStringLiteral("move-view-right"), action);
+    // _viewSplitter->addAction(action);
+
+    action = new QAction(i18nc("@action Shortcut entry", "Switch to Last Tab"), this);
+    connect(action, &QAction::triggered, this, &ViewManager::lastView);
+    collection->addAction(QStringLiteral("last-tab"), action);
+    // _viewSplitter->addAction(action);
+
+    action = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs"), this);
+    connect(action, &QAction::triggered, this, &ViewManager::lastUsedView);
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::Key_Tab);
+    collection->addAction(QStringLiteral("last-used-tab"), action);
+    // _viewSplitter->addAction(lastUsedViewAction);
+
+    action = new QAction(i18nc("@action Shortcut entry", "Toggle Between Two Tabs"), this);
+    connect(action, &QAction::triggered, this, &Konsole::ViewManager::toggleTwoViews);
+    //_viewSplitter->addAction(toggleTwoViewsAction);
+
+    action = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs (Reverse)"), this);
+    collection->addAction(QStringLiteral("last-used-tab-reverse"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Tab);
+    connect(action, &QAction::triggered, this, &ViewManager::lastUsedViewReverse);
+    // _viewSplitter->addAction(lastUsedViewReverseAction);
+
     const int SWITCH_TO_TAB_COUNT = 19;
     for (int i = 0; i < SWITCH_TO_TAB_COUNT; i++) {
-        QAction *switchToTabAction = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);
-
-        connect(switchToTabAction, &QAction::triggered, this,
-           [this, i]() {
-               switchToView(i);
-           });
-        collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), switchToTabAction);
+        action = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);
+        connect(action, &QAction::triggered, this, [this, i]() { switchToView(i); });
+        collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), action);
     }
 
     foreach (QAction *action, multiViewOnlyActions) {
-        connect(this, &Konsole::ViewManager::splitViewToggle, action, &QAction::setEnabled);
+        connect(this, &ViewManager::splitViewToggle, action, &QAction::setEnabled);
     }
-
-    // keyboard shortcut only actions
-    const QList<QKeySequence> nextViewActionKeys{Qt::SHIFT + Qt::Key_Right, Qt::CTRL + Qt::Key_PageDown};
-    collection->setDefaultShortcuts(nextViewAction, nextViewActionKeys);
-    connect(nextViewAction, &QAction::triggered, this, &Konsole::ViewManager::nextView);
-   // _viewSplitter->addAction(nextViewAction);
-
-    const QList<QKeySequence> previousViewActionKeys{Qt::SHIFT + Qt::Key_Left, Qt::CTRL + Qt::Key_PageUp};
-    collection->setDefaultShortcuts(previousViewAction, previousViewActionKeys);
-    connect(previousViewAction, &QAction::triggered, this, &Konsole::ViewManager::previousView);
-    // _viewSplitter->addAction(previousViewAction);
-
-    collection->setDefaultShortcut(nextContainerAction, Qt::SHIFT + Qt::CTRL + Qt::Key_Up);
-    connect(nextContainerAction, &QAction::triggered, this, &Konsole::ViewManager::focusUp);
-     _viewContainer->addAction(nextContainerAction);
-
-     auto *action = new QAction(QStringLiteral("Focus Down"));
-     collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Down);
-     connect(action, &QAction::triggered, this, &Konsole::ViewManager::focusDown);
-     _viewContainer->addAction(action);
-
-#ifdef Q_OS_MACOS
-    collection->setDefaultShortcut(moveViewLeftAction,
-                                   Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketLeft);
-#else
-    collection->setDefaultShortcut(moveViewLeftAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Left);
-#endif
-    connect(moveViewLeftAction, &QAction::triggered, this,
-            &Konsole::ViewManager::focusLeft);
-    // _viewSplitter->addAction(moveViewLeftAction);
-
-#ifdef Q_OS_MACOS
-    collection->setDefaultShortcut(moveViewRightAction,
-                                   Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketRight);
-#else
-    collection->setDefaultShortcut(moveViewRightAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Right);
-#endif
-    connect(moveViewRightAction, &QAction::triggered, this,
-            &Konsole::ViewManager::focusRight);
-    // _viewSplitter->addAction(moveViewRightAction);
-
-    connect(lastViewAction, &QAction::triggered, this, &Konsole::ViewManager::lastView);
-    // _viewSplitter->addAction(lastViewAction);
-
-    collection->setDefaultShortcut(lastUsedViewAction, Qt::CTRL + Qt::Key_Tab);
-    connect(lastUsedViewAction, &QAction::triggered, this, &Konsole::ViewManager::lastUsedView);
-    // _viewSplitter->addAction(lastUsedViewAction);
-
-    collection->setDefaultShortcut(lastUsedViewReverseAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Tab);
-    connect(lastUsedViewReverseAction, &QAction::triggered, this, &Konsole::ViewManager::lastUsedViewReverse);
-    //_viewSplitter->addAction(lastUsedViewReverseAction);
-
-    connect(toggleTwoViewsAction, &QAction::triggered, this, &Konsole::ViewManager::toggleTwoViews);
-    //_viewSplitter->addAction(toggleTwoViewsAction);
 }
 
 void ViewManager::switchToView(int index)
