@@ -138,6 +138,9 @@ void ViewSplitter::childDestroyed(QObject *childWidget)
     if (count() == 0) {
         deleteLater();
     }
+    if (!findChild<TerminalDisplay*>()) {
+        deleteLater();
+    }
 }
 
 void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int direction)
