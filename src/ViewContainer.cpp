@@ -273,7 +273,7 @@ void TabbedViewContainer::addView(TerminalDisplay *view, int index)
     viewSplitter->addTerminalDisplay(view, Qt::Horizontal);
     auto item = view->sessionController();
     if (index == -1) {
-        addTab(viewSplitter, item->icon(), item->title());
+       index = addTab(viewSplitter, item->icon(), item->title());
     } else {
         insertTab(index, viewSplitter, item->icon(), item->title());
     }
@@ -287,6 +287,7 @@ void TabbedViewContainer::addView(TerminalDisplay *view, int index)
             &Konsole::TabbedViewContainer::updateActivity);
 
     connect(viewSplitter, &ViewSplitter::destroyed, this, &TabbedViewContainer::viewDestroyed);
+    setCurrentIndex(index);
     emit viewAdded(view);
 }
 
