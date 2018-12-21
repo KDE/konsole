@@ -311,10 +311,11 @@ void TabbedViewContainer::forgetView(ViewSplitter *view)
 
 void TabbedViewContainer::removeView(TerminalDisplay *view)
 {
-    const int idx = indexOf(view);
-    disconnect(view, &QWidget::destroyed, this, &Konsole::TabbedViewContainer::viewDestroyed);
-    removeTab(idx);
-  //  forgetView(view);
+    /* TODO: This is absolutely the wrong place.
+     * We are removing a terminal display from a ViewSplitter,
+     * this should be inside of the view splitter or something.
+    */
+    view->setParent(nullptr);
 }
 
 void TabbedViewContainer::activateNextView()

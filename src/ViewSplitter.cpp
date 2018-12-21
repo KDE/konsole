@@ -24,6 +24,7 @@
 
 // Qt
 #include <QDebug>
+#include <QChildEvent>
 
 // Konsole
 #include "ViewContainer.h"
@@ -109,17 +110,11 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
         if (splitter->orientation() != containerOrientation) {
             splitter->setOrientation(containerOrientation);
         }
-        connect(terminalDisplay, &QObject::destroyed, this, &ViewSplitter::childDestroyed);
         splitter->updateSizes();
     } else {
         auto newSplitter = new ViewSplitter();
-        connect(newSplitter, &QObject::destroyed, this, &ViewSplitter::childDestroyed);
-        connect(terminalDisplay, &QObject::destroyed, newSplitter, &ViewSplitter::childDestroyed);
 
         TerminalDisplay *oldTerminalDisplay = splitter->activeTerminalDisplay();
-        disconnect(oldTerminalDisplay, &QObject::destroyed, nullptr, nullptr);
-        connect(oldTerminalDisplay, &QObject::destroyed, newSplitter, &ViewSplitter::childDestroyed);
-
         const int oldContainerIndex = splitter->indexOf(oldTerminalDisplay);
         newSplitter->addWidget(oldTerminalDisplay);
         newSplitter->addWidget(terminalDisplay);
@@ -131,15 +126,17 @@ void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orie
     }
 }
 
-void ViewSplitter::childDestroyed(QObject *childWidget)
+void ViewSplitter::childEvent(QChildEvent *event)
 {
-    // remove the parent so count() has the correct value.
-    childWidget->setParent(nullptr);
-    if (count() == 0) {
-        deleteLater();
-    }
-    if (!findChild<TerminalDisplay*>()) {
-        deleteLater();
+    QSplitter::childEvent(event);
+
+    if (event->removed()) {
+        if (count() == 0) {
+            deleteLater();
+        }
+        if (!findChild<TerminalDisplay*>()) {
+            deleteLater();
+        }
     }
 }
 
