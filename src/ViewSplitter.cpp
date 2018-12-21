@@ -146,7 +146,7 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
     auto activeViewSplitter = qobject_cast<ViewSplitter*>(terminalDisplay->parentWidget());
     auto idx = activeViewSplitter->indexOf(terminalDisplay);
 
-    // Easy, we are in a vertical spliter and we want to focus up.
+    // Easy, the orientation of this splitter is the same as we are looking for.
     if (activeViewSplitter->orientation() == orientation &&
             ((direction < 0 && idx > 0) || (direction > 0 && idx < activeViewSplitter->count() - 1))) {
         auto nextPossibleTerminal = qobject_cast<TerminalDisplay*>(activeViewSplitter->widget(idx + direction));
@@ -165,30 +165,30 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
             }
             return;
         }
+        return;
     }
 
     // Hard, we are in a horizontal splitter or we are in the top of the vertical splitter.
-    else {
-        ViewSplitter *parentTerminalWidget = nullptr;
-        ViewSplitter *oldParent = activeViewSplitter;
-        do {
-            parentTerminalWidget = qobject_cast<ViewSplitter*>(
-                        parentTerminalWidget ? parentTerminalWidget->parentWidget()
-                                             : activeViewSplitter->parentWidget());
+    // we need to get a splitter parent that we can to, following the parent chain.
+    ViewSplitter *parentTerminalWidget = nullptr;
+    ViewSplitter *oldParent = activeViewSplitter;
+    do {
+        parentTerminalWidget = qobject_cast<ViewSplitter*>(
+                    parentTerminalWidget ? parentTerminalWidget->parentWidget()
+                                         : activeViewSplitter->parentWidget());
 
-            if (parentTerminalWidget) {
-                idx = parentTerminalWidget->indexOf(oldParent);
-            }
-            oldParent = parentTerminalWidget;
-        } while (parentTerminalWidget && parentTerminalWidget->orientation() != orientation);
-
-        if (!parentTerminalWidget) {
-            return;
+        if (parentTerminalWidget) {
+            idx = parentTerminalWidget->indexOf(oldParent);
         }
+        oldParent = parentTerminalWidget;
+    } while (parentTerminalWidget && parentTerminalWidget->orientation() != orientation);
 
-        if ((direction < 0 && idx > 0) || (direction > 0 && idx < parentTerminalWidget->count() - 1)) {
-            parentTerminalWidget->widget(idx + direction)->setFocus(Qt::OtherFocusReason);
-        }
+    if (!parentTerminalWidget) {
+        return;
+    }
+
+    if ((direction < 0 && idx > 0) || (direction > 0 && idx < parentTerminalWidget->count() - 1)) {
+        parentTerminalWidget->widget(idx + direction)->setFocus(Qt::OtherFocusReason);
     }
 }
 
