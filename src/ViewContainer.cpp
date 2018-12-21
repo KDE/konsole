@@ -229,6 +229,9 @@ void TabbedViewContainer::setCssFromFile(const QUrl &url)
 
 void TabbedViewContainer::moveActiveView(MoveDirection direction)
 {
+    if (count() < 2) { // return if only one view
+        return;
+    }
     const int currentIndex = indexOf(currentWidget());
     int newIndex = direction  == MoveViewLeft ? qMax(currentIndex - 1, 0) : qMin(currentIndex + 1, count() - 1);
 
