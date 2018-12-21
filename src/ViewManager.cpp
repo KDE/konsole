@@ -401,6 +401,10 @@ void ViewManager::sessionFinished()
 
     auto view = _sessionMap.key(session);
     _sessionMap.remove(view);
+
+    // Before deleting the view, let's unmaximize if it's maximized.
+    auto splitter = qobject_cast<ViewSplitter*>(view->parentWidget());
+    splitter->getToplevelSplitter()->restoreOtherTerminals();
     view->deleteLater();
 
     // Only remove the controller from factory() if it's actually controlling
