@@ -116,6 +116,8 @@ public:
     void focusDown();
     void focusLeft();
     void focusRight();
+
+    void handleFocusDirection(Qt::Orientation orientation, int direction);
 Q_SIGNALS:
     /** Signal emitted when the last child widget is removed from the splitter */
     void empty(ViewSplitter *splitter);

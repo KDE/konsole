@@ -140,16 +140,16 @@ void ViewSplitter::childDestroyed(QObject *childWidget)
     }
 }
 
-
-void ViewSplitter::focusUp()
+void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int direction)
 {
     auto terminalDisplay = activeTerminalDisplay();
     auto activeViewSplitter = qobject_cast<ViewSplitter*>(terminalDisplay->parentWidget());
     auto idx = activeViewSplitter->indexOf(terminalDisplay);
 
     // Easy, we are in a vertical spliter and we want to focus up.
-    if (activeViewSplitter->orientation() == Qt::Vertical && idx > 0) {
-        auto nextPossibleTerminal = qobject_cast<TerminalDisplay*>(activeViewSplitter->widget(idx -1));
+    if (activeViewSplitter->orientation() == orientation &&
+            ((direction < 0 && idx > 0) || (direction > 0 && idx < activeViewSplitter->count()))) {
+        auto nextPossibleTerminal = qobject_cast<TerminalDisplay*>(activeViewSplitter->widget(idx + direction));
         if (nextPossibleTerminal) {
             nextPossibleTerminal->setFocus(Qt::OtherFocusReason);
             return;
@@ -157,7 +157,7 @@ void ViewSplitter::focusUp()
 
         // element is not a terminal display but a splitter with perhaps more splitters and terminals.
         // choose one element and focus it.
-        auto nextPossibleSplitter = qobject_cast<ViewSplitter*>(activeViewSplitter->widget(idx -1));
+        auto nextPossibleSplitter = qobject_cast<ViewSplitter*>(activeViewSplitter->widget(idx + direction));
         if (nextPossibleSplitter) {
             nextPossibleTerminal = nextPossibleSplitter->findChild<TerminalDisplay*>();
             nextPossibleTerminal->setFocus(Qt::OtherFocusReason);
@@ -178,16 +178,21 @@ void ViewSplitter::focusUp()
                 idx = parentTerminalWidget->indexOf(oldParent);
             }
             oldParent = parentTerminalWidget;
-        } while (parentTerminalWidget && parentTerminalWidget->orientation() != Qt::Vertical);
+        } while (parentTerminalWidget && parentTerminalWidget->orientation() != orientation);
 
         if (!parentTerminalWidget) {
             return;
         }
 
-        if (idx > 0) {
-            parentTerminalWidget->widget(idx - 1)->setFocus(Qt::OtherFocusReason);
+        if ((direction < 0 && idx > 0) || (direction > 0 && idx < parentTerminalWidget->count())) {
+            parentTerminalWidget->widget(idx + direction)->setFocus(Qt::OtherFocusReason);
         }
     }
+}
+
+void ViewSplitter::focusUp()
+{
+    handleFocusDirection(Qt::Vertical, -1);
 }
 
 void ViewSplitter::focusDown()
