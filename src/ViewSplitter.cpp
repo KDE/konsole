@@ -215,38 +215,6 @@ void ViewSplitter::focusRight()
     handleFocusDirection(Qt::Horizontal, +1);
 }
 
-void ViewSplitter::activateNextTerminalDisplay()
-{
-    TerminalDisplay *active = activeTerminalDisplay();
-
-    int index = indexOf(active);
-
-    if (index == -1) {
-        return;
-    }
-
-    if (index == count() - 1) {
-        index = 0;
-    } else {
-        index++;
-    }
-    widget(index)->setFocus(Qt::OtherFocusReason);
-}
-
-void ViewSplitter::activatePreviousTerminalDisplay()
-{
-    TerminalDisplay *active = activeTerminalDisplay();
-
-    int index = indexOf(active);
-
-    if (index == 0) {
-        index = count() - 1;
-    } else {
-        index--;
-    }
-    widget(index)->setFocus(Qt::OtherFocusReason);
-}
-
 TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
 {
     auto focusedWidget = qobject_cast<TerminalDisplay*>(focusWidget());

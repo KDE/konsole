@@ -92,11 +92,6 @@ public:
     void setActiveTerminalDisplay(TerminalDisplay *container);
 
     /**
-     * Gives the focus to the active view in the next container
-     */
-    void activateNextTerminalDisplay();
-
-    /**
      * Changes the size of the specified @p container by a given @p percentage.
      * @p percentage may be positive ( in which case the size of the container
      * is increased ) or negative ( in which case the size of the container
@@ -106,11 +101,6 @@ public:
      * uniformly to maintain the width of the splitter.
      */
     void adjustTerminalDisplaySize(TerminalDisplay *container, int percentage);
-
-    /**
-     * Gives the focus to the active view in the previous container
-     */
-    void activatePreviousTerminalDisplay();
 
     void focusUp();
     void focusDown();
