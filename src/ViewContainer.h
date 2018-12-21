@@ -142,6 +142,8 @@ public:
     void setNavigationVisibility(ViewManager::NavigationVisibility navigationVisibility);
     void moveTabToWindow(int index, QWidget *window);
 
+    void maximizeCurrentTerminal();
+    void restoreOtherTerminals();
     /* return the widget(int index) casted to TerminalDisplay*
      *
      * The only thing that this class holds are TerminalDisplays, so

@@ -574,3 +574,13 @@ void TabbedViewContainer::setNavigationVisibility(ViewManager::NavigationVisibil
         tabBar()->setVisible(false);
     }
 }
+
+void TabbedViewContainer::maximizeCurrentTerminal()
+{
+    activeViewSplitter()->maximizeCurrentTerminal();
+}
+
+void TabbedViewContainer::restoreOtherTerminals()
+{
+    activeViewSplitter()->restoreOtherTerminals();
+}

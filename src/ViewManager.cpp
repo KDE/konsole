@@ -222,6 +222,19 @@ void ViewManager::setupActions()
     connect(action, &QAction::triggered, this, &ViewManager::lastUsedViewReverse);
     // _viewSplitter->addAction(lastUsedViewReverseAction);
 
+    action = new QAction(i18nc("@action Shortcut entry", "Maximize current Terminal"), this);
+    collection->addAction(QStringLiteral("maximize-current-terminal"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_E);
+    connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::maximizeCurrentTerminal);
+    _viewContainer->addAction(action);
+
+    action = new QAction(i18nc("@action Shortcut entry", "Restore other terminals"), this);
+    collection->addAction(QStringLiteral("restore-other-terminals"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Minus);
+    connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::restoreOtherTerminals);
+    _viewContainer->addAction(action);
+
+    // _viewSplitter->addAction(lastUsedViewReverseAction);
     const int SWITCH_TO_TAB_COUNT = 19;
     for (int i = 0; i < SWITCH_TO_TAB_COUNT; i++) {
         action = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);

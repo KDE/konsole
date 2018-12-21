@@ -86,6 +86,19 @@ public:
      */
     TerminalDisplay *activeTerminalDisplay() const;
 
+    /** Makes the current TerminalDisplay expanded to 100% of the view
+     */
+    void maximizeCurrentTerminal();
+
+    /** Restore the sizes of the terminals.
+     */
+    void restoreOtherTerminals();
+
+    void handleMinimizeMaximize(bool maximize);
+
+    /** returns the splitter that has no splitter as a parent. */
+    ViewSplitter *getToplevelSplitter();
+
     /**
      * Gives the focus to the active view in the specified container
      */

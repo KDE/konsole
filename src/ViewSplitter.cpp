@@ -217,3 +217,35 @@ TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
     auto focusedWidget = qobject_cast<TerminalDisplay*>(focusWidget());
     return focusedWidget ? focusedWidget : findChild<TerminalDisplay*>();
 }
+
+void ViewSplitter::maximizeCurrentTerminal()
+{
+    handleMinimizeMaximize(true);
+}
+
+void ViewSplitter::restoreOtherTerminals()
+{
+    handleMinimizeMaximize(false);
+}
+
+void ViewSplitter::handleMinimizeMaximize(bool maximize)
+{
+    auto viewSplitter = getToplevelSplitter();
+    auto terminalDisplays = viewSplitter->findChildren<TerminalDisplay*>();
+    auto currentActiveTerminal = viewSplitter->activeTerminalDisplay();
+    auto method = maximize ? &QWidget::hide : &QWidget::show;
+    for(auto terminal : terminalDisplays) {
+        if (Q_LIKELY(currentActiveTerminal != terminal)) {
+            (terminal->*method)();
+        }
+    }
+}
+
+ViewSplitter *ViewSplitter::getToplevelSplitter()
+{
+    ViewSplitter *current = this;
+    while(qobject_cast<ViewSplitter*>(current->parentWidget())) {
+        current = qobject_cast<ViewSplitter*>(current->parentWidget());
+    }
+    return current;
+}
