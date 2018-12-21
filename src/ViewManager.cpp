@@ -220,9 +220,14 @@ void ViewManager::setupActions()
     connect(previousViewAction, &QAction::triggered, this, &Konsole::ViewManager::previousView);
     // _viewSplitter->addAction(previousViewAction);
 
-    collection->setDefaultShortcut(nextContainerAction, Qt::SHIFT + Qt::Key_Tab);
+    collection->setDefaultShortcut(nextContainerAction, Qt::SHIFT + Qt::CTRL + Qt::Key_Up);
     connect(nextContainerAction, &QAction::triggered, this, &Konsole::ViewManager::focusUp);
      _viewContainer->addAction(nextContainerAction);
+
+     auto *action = new QAction(QStringLiteral("Focus Down"));
+     collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Down);
+     connect(action, &QAction::triggered, this, &Konsole::ViewManager::focusDown);
+     _viewContainer->addAction(action);
 
 #ifdef Q_OS_MACOS
     collection->setDefaultShortcut(moveViewLeftAction,
@@ -231,7 +236,7 @@ void ViewManager::setupActions()
     collection->setDefaultShortcut(moveViewLeftAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Left);
 #endif
     connect(moveViewLeftAction, &QAction::triggered, this,
-            &Konsole::ViewManager::moveActiveViewLeft);
+            &Konsole::ViewManager::focusLeft);
     // _viewSplitter->addAction(moveViewLeftAction);
 
 #ifdef Q_OS_MACOS
@@ -241,7 +246,7 @@ void ViewManager::setupActions()
     collection->setDefaultShortcut(moveViewRightAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Right);
 #endif
     connect(moveViewRightAction, &QAction::triggered, this,
-            &Konsole::ViewManager::moveActiveViewRight);
+            &Konsole::ViewManager::focusRight);
     // _viewSplitter->addAction(moveViewRightAction);
 
     connect(lastViewAction, &QAction::triggered, this, &Konsole::ViewManager::lastView);
@@ -867,6 +872,8 @@ void ViewManager::saveSessions(KConfigGroup &group)
     }
     ids.reserve(container->count());
 
+    //TODO: Handle sessions
+#if 0
     auto *activeview = qobject_cast<TerminalDisplay *>(container->currentWidget());
     for (int i = 0, end = container->count(); i < end; i++) {
         auto *view = qobject_cast<TerminalDisplay *>(container->widget(i));
@@ -880,6 +887,7 @@ void ViewManager::saveSessions(KConfigGroup &group)
         }
         tab++;
     }
+#endif
 
     // second: all other sessions, in random order
     // we don't want to have sessions restored that are not connected
