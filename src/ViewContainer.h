@@ -161,10 +161,10 @@ Q_SIGNALS:
      * into this container.  If 'success' is set to true by a connected slot
      * then the original view will be removed.
      *
-     * @param index Index at which to insert the new view in the container or -1
-     * to append it.  This index should be passed to addView() when the new view
-     * has been created.
-     * @param id The identifier of the view.
+     * @param index Index at which to insert the new view in the container
+     * or -1 to append it.  This index should be passed to addView() when
+     * the new view has been created.
+     * @param sessionControllerId The identifier of the view.
      */
     void moveViewRequest(int index, int sessionControllerId);
 
