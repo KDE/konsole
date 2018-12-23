@@ -36,11 +36,6 @@
 
 #include <KIO/Job>
 
-// Backward compatibility
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#define qAsConst(code) code
-#endif
-
 
 
 static constexpr unsigned int CODE_POINTS_NUM = 0x110000;

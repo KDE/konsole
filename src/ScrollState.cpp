@@ -25,21 +25,10 @@ using namespace Konsole;
 
 void ScrollState::addWheelEvent(const QWheelEvent *wheel)
 {
-    // If the Libinput X server input driver is used we get a value for
-    // pixelDelta for a physical mouse wheel scroll, so we check that
-    // the source of the wheel event is actually a mouse, this has been
-    // fixed upstream in Qt 5.9.5: https://bugreports.qt.io/browse/QTBUG-59261
-    // Fixes Konsole BUG: https://bugs.kde.org/show_bug.cgi?id=386762
-#if (QT_VERSION < QT_VERSION_CHECK(5, 9, 5))
-    if (wheel->source() != Qt::MouseEventNotSynthesized) {
-#else
-    if (true) {
-#endif
-        if ((wheel->angleDelta().y() != 0) && (wheel->pixelDelta().y() == 0)) {
-            _remainingScrollPixel = 0;
-        } else {
-            _remainingScrollPixel += wheel->pixelDelta().y();
-        }
+    if ((wheel->angleDelta().y() != 0) && (wheel->pixelDelta().y() == 0)) {
+        _remainingScrollPixel = 0;
+    } else {
+        _remainingScrollPixel += wheel->pixelDelta().y();
     }
     _remainingScrollAngle += wheel->angleDelta().y();
 }

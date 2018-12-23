@@ -44,11 +44,6 @@
 #include "KeyboardTranslatorManager.h"
 #include "FontDialog.h"
 
-// Backward compatibility
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#define qAsConst(code)
-#endif
-
 class KPluralHandlingSpinBox;
 class KLocalizedString;
 class QItemSelectionModel;

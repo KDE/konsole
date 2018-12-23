@@ -26,11 +26,6 @@
 #include <QString>
 #include <QVector>
 
-// Backward compatibility
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0) && !defined(qAsConst)
-#define qAsConst(code) code
-#endif
-
 // QVariant doesn't offer modification in place. Var does.
 class Var {
 public:
