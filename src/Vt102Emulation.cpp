@@ -1368,6 +1368,10 @@ void Vt102Emulation::resetModes()
     // MODE_Allow132Columns is not reset here
     // to match Xterm's behavior (see Xterm's VTReset() function)
 
+    // MODE_Mouse1007 (Alternate Scrolling) is not reset here, to maintain
+    // the profile alternate scrolling property after reset() is called, which
+    // makes more sense; also this matches XTerm behavior.
+
     resetMode(MODE_132Columns); saveMode(MODE_132Columns);
     resetMode(MODE_Mouse1000);  saveMode(MODE_Mouse1000);
     resetMode(MODE_Mouse1001);  saveMode(MODE_Mouse1001);
@@ -1375,7 +1379,6 @@ void Vt102Emulation::resetModes()
     resetMode(MODE_Mouse1003);  saveMode(MODE_Mouse1003);
     resetMode(MODE_Mouse1005);  saveMode(MODE_Mouse1005);
     resetMode(MODE_Mouse1006);  saveMode(MODE_Mouse1006);
-    resetMode(MODE_Mouse1007);  saveMode(MODE_Mouse1007);
     resetMode(MODE_Mouse1015);  saveMode(MODE_Mouse1015);
     resetMode(MODE_BracketedPaste);  saveMode(MODE_BracketedPaste);
 
