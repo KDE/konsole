@@ -80,6 +80,8 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
        closeCurrentTab();
     });
 
+    connect(tabBar(), &QTabBar::currentChanged, this,
+        &Konsole::TabbedViewContainer::currentTabChanged);
     connect(tabBar(), &QTabBar::tabBarDoubleClicked, this,
         &Konsole::TabbedViewContainer::tabDoubleClicked);
     connect(tabBar(), &QTabBar::customContextMenuRequested, this,
