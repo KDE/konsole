@@ -58,6 +58,8 @@
 #include <KMessageWidget>
 #include <KIO/StatJob>
 
+#include <memory>
+
 // Konsole
 #include "Filter.h"
 #include "konsoledebug.h"
@@ -3096,7 +3098,7 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
 
     Screen *screen = _screenWindow->screen();
     Character *image = _image;
-    Character *tmp_image = nullptr;
+    std::unique_ptr<Character> tempImage;
 
     int imgLine = pnt.y();
     int x = pnt.x();
@@ -3106,58 +3108,45 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
     const QChar selClass = charClass(image[imgLoc]);
     const int imageSize = regSize * _columns;
 
-    while (true) {
-        for (;;imgLoc--, x--) {
-            if (imgLoc < 1) {
-                // no more chars in this region
-                break;
+    while (imgLoc > 0) {
+        for (; imgLoc > 0 && imgLine >= 0; imgLoc--, x--) {
+            const QChar &curClass = charClass(image[imgLoc - 1]);
+            if (curClass != selClass) {
+                return {x, y - firstVisibleLine};
             }
+
+            // has previous char on this line
             if (x > 0) {
-                // has previous char on this line
-                if (charClass(image[imgLoc - 1]) == selClass) {
-                    continue;
-                }
-                goto out;
-            } else if (imgLine > 0) {
-                // not the first line in the session
-                if ((lineProperties[imgLine - 1] & LINE_WRAPPED) != 0) {
-                    // have continuation on prev line
-                    if (charClass(image[imgLoc - 1]) == selClass) {
-                        x = _columns;
-                        imgLine--;
-                        y--;
-                        continue;
-                    }
-                }
-                goto out;
-            } else if (y > 0) {
-                // want more data, but need to fetch new region
-                break;
-            } else {
-                goto out;
+                continue;
             }
+
+            // not the first line in the session
+            if ((lineProperties[imgLine - 1] & LINE_WRAPPED) == 0) {
+                return {x, y - firstVisibleLine};
+            }
+
+            // have continuation on prev line
+            x = _columns;
+            imgLine--;
+            y--;
         }
+
         if (y <= 0) {
-            // No more data
-            goto out;
+            return {x, y - firstVisibleLine};
         }
-        int newRegStart = qMax(0, y - regSize + 1);
+
+        // Fetch new region
+        const int newRegStart = qMax(y - regSize + 1, 0);
         lineProperties = screen->getLineProperties(newRegStart, y - 1);
         imgLine = y - newRegStart;
 
-        delete[] tmp_image;
-        tmp_image = new Character[imageSize];
-        image = tmp_image;
+        tempImage.reset(new Character[imageSize]);
+        image = tempImage.get();
 
-        screen->getImage(tmp_image, imageSize, newRegStart, y - 1);
+        screen->getImage(image, imageSize, newRegStart, y - 1);
         imgLoc = loc(x, imgLine);
-        if (imgLoc < 1) {
-            // Reached the start of the session
-            break;
-        }
     }
-out:
-    delete[] tmp_image;
+
     return {x, y - firstVisibleLine};
 }
 
