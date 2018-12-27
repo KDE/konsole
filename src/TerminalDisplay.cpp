@@ -3140,8 +3140,10 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
         lineProperties = screen->getLineProperties(newRegStart, y - 1);
         imgLine = y - newRegStart;
 
-        tempImage.reset(new Character[imageSize]);
-        image = tempImage.get();
+        if (!tempImage) {
+            tempImage.reset(new Character[imageSize]);
+            image = tempImage.get();
+        }
 
         screen->getImage(image, imageSize, newRegStart, y - 1);
         imgLoc = loc(x, imgLine);
@@ -3154,65 +3156,76 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
 {
     const int regSize = qMax(_screenWindow->windowLines(), 10);
     const int curLine = _screenWindow->currentLine();
-    int i = pnt.y();
+    int line = pnt.y();
     int x = pnt.x();
-    int y = i + curLine;
-    int j = loc(x, i);
+    int y = line + curLine;
     QVector<LineProperty> lineProperties = _lineProperties;
     Screen *screen = _screenWindow->screen();
     Character *image = _image;
-    Character *tmp_image = nullptr;
-    const QChar selClass = charClass(image[j]);
+    std::unique_ptr<Character> tempImage;
+
+    int imgPos = loc(x, line);
+    const QChar selClass = charClass(image[imgPos]);
+    QChar curClass;
+    QChar nextClass;
+
     const int imageSize = regSize * _columns;
     const int maxY = _screenWindow->lineCount() - 1;
     const int maxX = _columns - 1;
 
-    while (true) {
+    while (x >= 0 && line >= 0) {
+        imgPos = loc(x, line);
+
         const int lineCount = lineProperties.count();
-        for (;;j++, x++) {
-            if (x < maxX) {
-                if (charClass(image[j + 1]) == selClass &&
-                    // A colon right before whitespace is never part of a word
-                    ! (image[j + 1].character == ':' && charClass(image[j + 2]) == QLatin1Char(' '))) {
-                    continue;
-                }
-                goto out;
-            } else if (i < lineCount - 1) {
-                if (((lineProperties[i] & LINE_WRAPPED) != 0) &&
-                    charClass(image[j + 1]) == selClass &&
-                    // A colon right before whitespace is never part of a word
-                    ! (image[j + 1].character == ':' && charClass(image[j + 2]) == QLatin1Char(' '))) {
-                    x = -1;
-                    i++;
-                    y++;
-                    continue;
-                }
-                goto out;
-            } else if (y < maxY) {
-                if (i < lineCount && ((lineProperties[i] & LINE_WRAPPED) == 0)) {
-                    goto out;
-                }
+        bool isBreak = false;
+
+        for (;y < maxY && line < lineCount - 1;imgPos++, x++) {
+            curClass = charClass(image[imgPos + 1]);
+            nextClass = charClass(image[imgPos + 2]);
+
+            isBreak = curClass != selClass &&
+                // A colon right before whitespace is never part of a word
+                !(image[imgPos + 1].character == ':' && nextClass == QLatin1Char(' '));
+
+            if (isBreak) {
                 break;
-            } else {
-                goto out;
+            }
+
+            if (x >= maxX) {
+                if (!(lineProperties[line] & LINE_WRAPPED)) {
+                    break;
+                }
+
+                line++;
+                y++;
+                x = -1;
             }
         }
-        int newRegEnd = qMin(y + regSize - 1, maxY);
-        lineProperties = screen->getLineProperties(y, newRegEnd);
-        i = 0;
-        if (tmp_image == nullptr) {
-            tmp_image = new Character[imageSize];
-            image = tmp_image;
+
+        if (isBreak) {
+            break;
         }
-        screen->getImage(tmp_image, imageSize, y, newRegEnd);
+
+        if (line < lineCount && ((lineProperties[line] & LINE_WRAPPED) == 0)) {
+            break;
+        }
+
+        const int newRegEnd = qMin(y + regSize - 1, maxY);
+        lineProperties = screen->getLineProperties(y, newRegEnd);
+        if (!tempImage) {
+            tempImage.reset(new Character[imageSize]);
+            image = tempImage.get();
+        }
+        screen->getImage(tempImage.get(), imageSize, y, newRegEnd);
+
+        line = 0;
         x--;
-        j = loc(x, i);
     }
-out:
+
     y -= curLine;
     // In word selection mode don't select @ (64) if at end of word.
-    if (((image[j].rendition & RE_EXTENDED_CHAR) == 0) &&
-        (QChar(image[j].character) == QLatin1Char('@')) &&
+    if (((image[imgPos].rendition & RE_EXTENDED_CHAR) == 0) &&
+        (QChar(image[imgPos].character) == QLatin1Char('@')) &&
         (y > pnt.y() || x > pnt.x())) {
         if (x > 0) {
             x--;
@@ -3220,7 +3233,6 @@ out:
             y--;
         }
     }
-    delete[] tmp_image;
 
     return {x, y};
 }
