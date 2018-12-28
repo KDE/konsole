@@ -1525,6 +1525,15 @@ void SessionController::monitorSilence(bool monitor)
 }
 void SessionController::updateSessionIcon()
 {
+    // If the default profile icon is being used, don't put it on the tab
+    // Only show the icon if the user specifically chose one
+    if (_session->iconName() == QStringLiteral("utilities-terminal")) {
+        _sessionIconName = QString();
+    } else {
+        _sessionIconName = _session->iconName();
+    }
+    _sessionIcon = QIcon::fromTheme(_sessionIconName);
+
     // Visualize that the session is broadcasting to others
     if ((_copyToGroup != nullptr) && _copyToGroup->sessions().count() > 1) {
         // Master Mode: set different icon, to warn the user to be careful
@@ -1582,8 +1591,6 @@ bool SessionController::isReadOnly() const
 void SessionController::sessionAttributeChanged()
 {
     if (_sessionIconName != _session->iconName()) {
-        _sessionIconName = _session->iconName();
-        _sessionIcon = QIcon::fromTheme(_sessionIconName);
         updateSessionIcon();
     }
 
@@ -1708,11 +1715,6 @@ void SessionController::sessionStateChanged(int state)
         setIcon(*_bellIcon);
         _keepIconUntilInteraction = true;
     } else if (state == NOTIFYNORMAL) {
-        if (_sessionIconName != _session->iconName()) {
-            _sessionIconName = _session->iconName();
-            _sessionIcon = QIcon::fromTheme(_sessionIconName);
-        }
-
         updateSessionIcon();
     }
 
