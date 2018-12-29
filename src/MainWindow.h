@@ -100,6 +100,14 @@ public:
      */
     void setMenuBarInitialVisibility(bool visible);
 
+
+    /**
+     * @brief Set the framless state
+     *
+     * @param frameless
+     */
+    void setRemoveWindowTitleBarAndFrame(bool frameless);
+
 Q_SIGNALS:
 
     /**

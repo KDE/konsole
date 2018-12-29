@@ -758,7 +758,7 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
 void MainWindow::applyKonsoleSettings()
 {
     setMenuBarInitialVisibility(KonsoleSettings::showMenuBarByDefault());
-
+    setRemoveWindowTitleBarAndFrame(KonsoleSettings::removeWindowTitleBarAndFrame());
     if (KonsoleSettings::allowMenuAccelerators()) {
         restoreMenuAccelerators();
     } else {
@@ -810,6 +810,23 @@ void MainWindow::setBlur(bool blur)
 void MainWindow::setMenuBarInitialVisibility(bool visible)
 {
     _menuBarInitialVisibility = visible;
+}
+
+void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
+{
+    // This is used to check if the window is in "opening" state
+    // And avoid the visibility change when we change the window flag
+    bool oldVisibility = isVisible();
+
+    if(frameless) {
+        setWindowFlags(Qt::FramelessWindowHint);
+    } else {
+        setWindowFlags(Qt::Widget);
+    }
+
+    if (oldVisibility & !isVisible()) {
+        setVisible(true);
+    }
 }
 
 void MainWindow::showEvent(QShowEvent *event)
