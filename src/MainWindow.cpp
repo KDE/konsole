@@ -818,13 +818,13 @@ void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
     // And avoid the visibility change when we change the window flag
     bool oldVisibility = isVisible();
 
-    if(frameless) {
+    if (frameless) {
         setWindowFlags(Qt::FramelessWindowHint);
     } else {
         setWindowFlags(Qt::Widget);
     }
 
-    if (oldVisibility & !isVisible()) {
+    if (oldVisibility && !isVisible()) {
         setVisible(true);
     }
 }

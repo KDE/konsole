@@ -102,7 +102,7 @@ public:
 
 
     /**
-     * @brief Set the framless state
+     * @brief Set the frameless state
      *
      * @param frameless
      */
