@@ -24,7 +24,6 @@
 #include <QIcon>
 #include <QObject>
 #include <QHash>
-#include <QMimeData>
 #include <QUrl>
 
 // Konsole

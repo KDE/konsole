@@ -21,7 +21,6 @@
 #define APPLICATION_H
 
 // Qt
-#include <QApplication>
 #include <QCommandLineParser>
 
 // Konsole

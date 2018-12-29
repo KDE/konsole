@@ -25,7 +25,6 @@
 #include <QAbstractItemDelegate>
 #include <QDialog>
 #include <QHash>
-#include <QPointer>
 #include <QButtonGroup>
 #include <QWidget>
 #include <QGridLayout>

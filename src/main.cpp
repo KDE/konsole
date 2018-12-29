@@ -25,6 +25,7 @@
 
 // OS specific
 #include <qplatformdefs.h>
+#include <QApplication>
 #include <QCommandLineParser>
 #include <QStandardPaths>
 #include <QDir>

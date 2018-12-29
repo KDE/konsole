@@ -24,11 +24,8 @@
 
 // Qt
 #include <QObject>
-#include <QPointer>
-#include <QHash>
 #include <QList>
 #include <QTabWidget>
-#include <QTabBar>
 
 // Konsole
 #include "Profile.h"

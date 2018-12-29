@@ -21,6 +21,7 @@
 #include "Application.h"
 
 // Qt
+#include <QApplication>
 #include <QHashIterator>
 #include <QFileInfo>
 #include <QDir>

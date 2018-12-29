@@ -22,7 +22,6 @@
 
 // Qt
 #include <QFile>
-#include <QMap>
 #include <QString>
 #include <QVector>
 

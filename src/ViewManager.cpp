@@ -25,6 +25,7 @@
 // Qt
 #include <QStringList>
 #include <QAction>
+#include <QTabBar>
 
 // KDE
 #include <KAcceleratorManager>
