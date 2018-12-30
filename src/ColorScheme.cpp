@@ -33,6 +33,8 @@
 // STL
 #include <random>
 
+#include "konsoledebug.h"
+
 namespace {
 const int FGCOLOR_INDEX = 0;
 const int BGCOLOR_INDEX = 1;
@@ -234,7 +236,12 @@ void ColorScheme::setColorTableEntry(int index, const ColorEntry &entry)
         }
     }
 
-    _table[index] = entry;
+    if (entry.isValid()) {
+        _table[index] = entry;
+    } else {
+        _table[index] = defaultTable[index];
+        qCDebug(KonsoleDebug)<<"ColorScheme"<<name()<<"has an invalid color index"<<index<<", using default table color";
+    }
 }
 
 ColorEntry ColorScheme::colorEntry(int index, uint randomSeed) const
@@ -360,6 +367,10 @@ bool ColorScheme::hasDarkBackground() const
 
 void ColorScheme::setOpacity(qreal opacity)
 {
+    if (opacity < 0.0 || opacity > 1.0) {
+        qCDebug(KonsoleDebug)<<"ColorScheme"<<name()<<"has an invalid opacity"<<opacity<<"using 1";
+        opacity = 1.0;
+    }
     _opacity = opacity;
 }
 
@@ -385,7 +396,7 @@ void ColorScheme::read(const KConfig &config)
     const QString schemeDescription = configGroup.readEntry("Description", i18nc("@item", "Un-named Color Scheme"));
 
     _description = i18n(schemeDescription.toUtf8().constData());
-    _opacity = configGroup.readEntry("Opacity", 1.0);
+    setOpacity(configGroup.readEntry("Opacity", 1.0));
     _blur = configGroup.readEntry("Blur", false);
     setWallpaper(configGroup.readEntry("Wallpaper", QString()));
 
@@ -405,12 +416,16 @@ void ColorScheme::readColorEntry(const KConfig &config, int index)
     ColorEntry entry;
 
     entry = configGroup.readEntry("Color", QColor());
-
     setColorTableEntry(index, entry);
 
-    const quint16 hue = static_cast<quint16>(configGroup.readEntry("MaxRandomHue", 0));
+    quint16 hue = static_cast<quint16>(configGroup.readEntry("MaxRandomHue", 0));
     const quint8 value = static_cast<quint8>(configGroup.readEntry("MaxRandomValue", 0));
     const quint8 saturation = static_cast<quint8>(configGroup.readEntry("MaxRandomSaturation", 0));
+
+    if (hue > MAX_HUE) {
+        qCDebug(KonsoleDebug)<<"ColorScheme"<<name()<<"has an invalid MaxRandomHue"<<hue<<"for index"<< index<<", using"<<MAX_HUE;
+        hue = MAX_HUE;
+    }
 
     if (hue != 0 || value != 0 || saturation != 0) {
         setRandomizationRange(index, hue, saturation, value);
