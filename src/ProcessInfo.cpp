@@ -142,6 +142,10 @@ QSet<QString> ProcessInfo::commonDirNames()
 
 QString ProcessInfo::formatShortDir(const QString &input) const
 {
+    if(input == QStringLiteral("/")) {
+        return QStringLiteral("/");
+    }
+
     QString result;
 
     const QStringList &parts = input.split(QDir::separator());
