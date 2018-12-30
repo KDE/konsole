@@ -381,7 +381,7 @@ class LabelsAligner: public QObject {
     Q_OBJECT
 
 public:
-    LabelsAligner(QWidget *refWidget): _refWidget(refWidget) {}
+    explicit LabelsAligner(QWidget *refWidget): _refWidget(refWidget) {}
 
     void addLayout(QGridLayout *layout) { _layouts.append(layout); }
     void addLayouts(const QVector<QGridLayout *> &layouts) { _layouts.append(layouts); }
