@@ -3454,7 +3454,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
                 description = i18n("ESC: Used for special commands to the current process");
                 break;
             default:
-                description = i18n("Other unprintable character (\\x%1)").arg(QString::number(c.unicode(), 16));
+                description = i18n("Other unprintable character (\\x%1)", QString::number(c.unicode(), 16));
                 break;
             }
             unsafeCharacters.append(description);
