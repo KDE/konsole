@@ -1062,8 +1062,7 @@ void Session::updateSessionProcessInfo()
     if ((_sessionProcessInfo == nullptr) ||
             (processId() != 0 && processId() != _sessionProcessInfo->pid(&ok))) {
         delete _sessionProcessInfo;
-        _sessionProcessInfo = ProcessInfo::newInstance(processId(),
-                    tabTitleFormat(Session::LocalTabTitle));
+        _sessionProcessInfo = ProcessInfo::newInstance(processId());
         _sessionProcessInfo->setUserHomeDir();
     }
     _sessionProcessInfo->update();
@@ -1076,8 +1075,7 @@ bool Session::updateForegroundProcessInfo()
     const int foregroundPid = _shellProcess->foregroundProcessGroup();
     if (foregroundPid != _foregroundPid) {
         delete _foregroundProcessInfo;
-        _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid,
-                    tabTitleFormat(Session::LocalTabTitle));
+        _foregroundProcessInfo = ProcessInfo::newInstance(foregroundPid);
         _foregroundPid = foregroundPid;
     }
 
@@ -1134,28 +1132,29 @@ QString Session::getDynamicTitle()
     title.replace(QLatin1String("%n"), process->name(&ok));
 
     QString dir = _reportedWorkingUrl.toLocalFile();
+    ok = true;
     if (dir.isEmpty()) {
         // update current directory from process
         updateWorkingDirectory();
-        dir = process->validCurrentDir();
+        dir = process->currentDir(&ok);
     }
-
-    if (title.contains(QLatin1String("%D"))) {
-        const QString homeDir = process->userHomeDir();
-        if (!homeDir.isEmpty()) {
-            QString tempDir = dir;
-            // Change User's Home Dir w/ ~ only at the beginning
-            if (tempDir.startsWith(homeDir)) {
-                tempDir.remove(0, homeDir.length());
-                tempDir.prepend(QLatin1Char('~'));
+    if(!ok) {
+        title.replace(QLatin1String("%d"), QStringLiteral("-"));
+        title.replace(QLatin1String("%D"), QStringLiteral("-"));
+    } else {
+        if (title.contains(QLatin1String("%D"))) {
+            const QString homeDir = process->userHomeDir();
+            if (!homeDir.isEmpty()) {
+                // Change User's Home Dir w/ ~ only at the beginning
+                if (dir.startsWith(homeDir)) {
+                    dir.remove(0, homeDir.length());
+                    dir.prepend(QLatin1Char('~'));
+                }
             }
-            title.replace(QLatin1String("%D"), tempDir);
-        } else {
-            // Example: 'sudo top'  We have to replace %D with something
-            title.replace(QLatin1String("%D"), QStringLiteral("-"));
+            title.replace(QLatin1String("%D"), dir);
         }
+        title.replace(QLatin1String("%d"), process->formatShortDir(dir));
     }
-    title.replace(QLatin1String("%d"), process->formatShortDir(dir));
 
     return title;
 }

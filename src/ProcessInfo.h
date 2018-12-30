@@ -76,10 +76,8 @@ public:
      * the current platform which provides information about a given process.
      *
      * @param pid The pid of the process to examine
-     * @param titleFormat The local title format - used to determine if it
-     *  contains %u which requires expensive prodecures to be used.
      */
-    static ProcessInfo *newInstance(int pid, const QString &titleFormat);
+    static ProcessInfo *newInstance(int pid);
 
     virtual ~ProcessInfo()
     {
@@ -304,7 +302,7 @@ public:
      * Constructs a new NullProcessInfo instance.
      * See ProcessInfo::newInstance()
      */
-    explicit NullProcessInfo(int pid, const QString &titleFormat);
+    explicit NullProcessInfo(int pid);
 protected:
     void readProcessInfo(int pid) Q_DECL_OVERRIDE;
     bool readCurrentDir(int pid) Q_DECL_OVERRIDE;
@@ -323,7 +321,7 @@ public:
      * Constructs a new instance of UnixProcessInfo.
      * See ProcessInfo::newInstance()
      */
-    explicit UnixProcessInfo(int pid, const QString &titleFormat);
+    explicit UnixProcessInfo(int pid);
 
 protected:
     /**

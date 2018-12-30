@@ -113,7 +113,7 @@ QString ProcessInfo::validCurrentDir() const
     int currentPid = parentPid(&ok);
     QString dir = currentDir(&ok);
     while (!ok && currentPid != 0) {
-        ProcessInfo *current = ProcessInfo::newInstance(currentPid, QString());
+        ProcessInfo *current = ProcessInfo::newInstance(currentPid);
         current->update();
         currentPid = current->parentPid(&ok);
         dir = current->currentDir(&ok);
@@ -331,7 +331,7 @@ void ProcessInfo::setFileError(QFile::FileError error)
 // implementations of the UnixProcessInfo abstract class.
 //
 
-NullProcessInfo::NullProcessInfo(int pid, const QString & /*titleFormat*/) :
+NullProcessInfo::NullProcessInfo(int pid) :
     ProcessInfo(pid)
 {
 }
@@ -350,10 +350,10 @@ void NullProcessInfo::readUserName()
 }
 
 #if !defined(Q_OS_WIN)
-UnixProcessInfo::UnixProcessInfo(int pid, const QString &titleFormat) :
+UnixProcessInfo::UnixProcessInfo(int pid) :
     ProcessInfo(pid)
 {
-    setUserNameRequired(titleFormat.contains(QLatin1String("%u")));
+    setUserNameRequired(true);
 }
 
 void UnixProcessInfo::readProcessInfo(int pid)
@@ -419,8 +419,8 @@ void UnixProcessInfo::readUserName()
 class LinuxProcessInfo : public UnixProcessInfo
 {
 public:
-    LinuxProcessInfo(int pid, const QString &titleFormat) :
-        UnixProcessInfo(pid, titleFormat)
+    LinuxProcessInfo(int pid) :
+        UnixProcessInfo(pid)
     {
     }
 
@@ -490,6 +490,7 @@ private:
             // This will cause constant opening of /etc/passwd
             if (userNameRequired()) {
                 readUserName();
+                setUserNameRequired(false);
             }
         } else {
             setFileError(statusInfo.error());
@@ -595,8 +596,8 @@ private:
 class FreeBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    FreeBSDProcessInfo(int pid, const QString &titleFormat) :
-        UnixProcessInfo(pid, titleFormat)
+    FreeBSDProcessInfo(int pid) :
+        UnixProcessInfo(pid)
     {
     }
 
@@ -720,8 +721,8 @@ private:
 class OpenBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    OpenBSDProcessInfo(int pid, const QString &titleFormat) :
-        UnixProcessInfo(pid, titleFormat)
+    OpenBSDProcessInfo(int pid) :
+        UnixProcessInfo(pid)
     {
     }
 
@@ -838,8 +839,8 @@ private:
 class MacProcessInfo : public UnixProcessInfo
 {
 public:
-    MacProcessInfo(int pid, const QString &titleFormat) :
-        UnixProcessInfo(pid, titleFormat)
+    MacProcessInfo(int pid) :
+        UnixProcessInfo(pid)
     {
     }
 
@@ -939,8 +940,8 @@ private:
 class SolarisProcessInfo : public UnixProcessInfo
 {
 public:
-    SolarisProcessInfo(int pid, const QString &titleFormat) :
-        UnixProcessInfo(pid, titleFormat)
+    SolarisProcessInfo(int pid) :
+        UnixProcessInfo(pid)
     {
     }
 
@@ -1170,21 +1171,21 @@ QString SSHProcessInfo::format(const QString &input) const
     return output;
 }
 
-ProcessInfo *ProcessInfo::newInstance(int pid, const QString &titleFormat)
+ProcessInfo *ProcessInfo::newInstance(int pid)
 {
     ProcessInfo *info;
 #if defined(Q_OS_LINUX)
-    info = new LinuxProcessInfo(pid, titleFormat);
+    info = new LinuxProcessInfo(pid);
 #elif defined(Q_OS_SOLARIS)
-    info = new SolarisProcessInfo(pid, titleFormat);
+    info = new SolarisProcessInfo(pid);
 #elif defined(Q_OS_MACOS)
-    info = new MacProcessInfo(pid, titleFormat);
+    info = new MacProcessInfo(pid);
 #elif defined(Q_OS_FREEBSD)
-    info = new FreeBSDProcessInfo(pid, titleFormat);
+    info = new FreeBSDProcessInfo(pid);
 #elif defined(Q_OS_OPENBSD)
-    info = new OpenBSDProcessInfo(pid, titleFormat);
+    info = new OpenBSDProcessInfo(pid);
 #else
-    info = new NullProcessInfo(pid, titleFormat);
+    info = new NullProcessInfo(pid);
 #endif
     info->readProcessInfo(pid);
     return info;
