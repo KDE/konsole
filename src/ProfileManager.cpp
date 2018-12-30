@@ -76,6 +76,7 @@ ProfileManager::ProfileManager()
     , _loadedAllProfiles(false)
     , _loadedFavorites(false)
     , _shortcuts(QMap<QKeySequence, ShortcutData>())
+    , _profileList(nullptr)
 {
     //load fallback profile
     _fallbackProfile = Profile::Ptr(new Profile());
@@ -697,3 +698,10 @@ QKeySequence ProfileManager::shortcut(Profile::Ptr profile) const
     return QKeySequence();
 }
 
+ProfileList *ProfileManager::getProfileList()
+{
+    if (_profileList == nullptr) {
+        _profileList = new ProfileList(true, this);
+    }
+    return _profileList;
+}

@@ -156,6 +156,10 @@ void SessionManager::setSessionProfile(Session *session, Profile::Ptr profile)
 
     Q_ASSERT(profile);
 
+    if (_sessionProfiles[session] == profile) {
+        return;
+    }
+
     _sessionProfiles[session] = profile;
 
     applyProfile(session, profile, false);

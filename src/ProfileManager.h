@@ -33,6 +33,7 @@
 
 // Konsole
 #include "Profile.h"
+#include "ProfileList.h"
 
 namespace Konsole {
 /**
@@ -211,6 +212,7 @@ public:
      */
     Profile::Ptr findByShortcut(const QKeySequence &shortcut);
 
+    ProfileList *getProfileList();
 Q_SIGNALS:
 
     /** Emitted when a profile is added to the manager. */
@@ -288,6 +290,8 @@ private:
     // finds out if it's a internal profile or an external one,
     // fixing the path to point to the correct location for the profile.
     QString normalizePath(const QString& path) const;
+
+    ProfileList *_profileList;
 };
 
 /**

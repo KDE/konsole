@@ -97,7 +97,6 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _session(session)
     , _view(view)
     , _copyToGroup(nullptr)
-    , _profileList(nullptr)
     , _sessionIcon(QIcon())
     , _sessionIconName(QString())
     , _previousState(-1)
@@ -223,6 +222,10 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     _bookmarkValidProgramsToClear << QStringLiteral("tcsh") << QStringLiteral("zsh");
     setupSearchBar();
     _searchBar->setVisible(_isSearchBarEnabled);
+
+    _profileList = ProfileManager::instance()->getProfileList();
+    connect(_profileList, &ProfileList::actionsChanged, this, &Konsole::SessionController::prepareSwitchProfileMenu);
+    prepareSwitchProfileMenu();
 }
 
 SessionController::~SessionController()
@@ -490,6 +493,9 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
         // second, connect the newly focused view to listen for the session's bell signal
         connect(_session.data(), &Konsole::Session::bellRequest, _view.data(), &Konsole::TerminalDisplay::bell);
 
+        disconnect(_profileList, &Konsole::ProfileList::profileSelected, nullptr, nullptr);
+        connect(_profileList, &Konsole::ProfileList::profileSelected, this, &Konsole::SessionController::switchProfile);
+
         if ((_copyInputToAllTabsAction != nullptr) && _copyInputToAllTabsAction->isChecked()) {
             // A session with "Copy To All Tabs" has come into focus:
             // Ensure that newly created sessions are included in _copyToGroup!
@@ -621,7 +627,6 @@ void SessionController::setupCommonActions()
 
     _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), this);
     collection->addAction(QStringLiteral("switch-profile"), _switchProfileMenu);
-    connect(_switchProfileMenu->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::prepareSwitchProfileMenu);
 
     // History
     _findAction = KStandardAction::find(this, SLOT(searchBarEvent()), collection);
@@ -780,17 +785,16 @@ void SessionController::setupExtraActions()
 
 void SessionController::switchProfile(Profile::Ptr profile)
 {
+    if (isReadOnly()) {
+        return;
+    }
+
     SessionManager::instance()->setSessionProfile(_session, profile);
     updateFilterList(profile);
 }
 
 void SessionController::prepareSwitchProfileMenu()
 {
-    if (_switchProfileMenu->menu()->isEmpty()) {
-        _profileList = new ProfileList(false, this);
-        connect(_profileList, &Konsole::ProfileList::profileSelected, this, &Konsole::SessionController::switchProfile);
-    }
-
     _switchProfileMenu->menu()->clear();
     _switchProfileMenu->menu()->addActions(_profileList->actions());
 }
