@@ -168,7 +168,7 @@ void ViewManager::setupActions()
     collection->setDefaultShortcuts(action, nextViewActionKeys);
     collection->addAction(QStringLiteral("next-tab"), action);
     connect(action, &QAction::triggered, this, &ViewManager::nextView);
-   // _viewSplitter->addAction(nextViewAction);
+    // _viewSplitter->addAction(nextViewAction);
 
     action = new QAction(i18nc("@action Shortcut entry", "Previous Tab"), this);
     const QList<QKeySequence> previousViewActionKeys{Qt::SHIFT + Qt::Key_Left, Qt::CTRL + Qt::Key_PageUp};
@@ -181,15 +181,15 @@ void ViewManager::setupActions()
     connect(action, &QAction::triggered, this, &ViewManager::focusUp);
     collection->addAction(QStringLiteral("next-container"), action);
     collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Up);
-     _viewContainer->addAction(action);
-     multiViewOnlyActions << action;
+    _viewContainer->addAction(action);
+    multiViewOnlyActions << action;
 
-     action = new QAction(QStringLiteral("Focus Down"));
-     collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Down);
-     connect(action, &QAction::triggered, this, &ViewManager::focusDown);
-     _viewContainer->addAction(action);
+    action = new QAction(QStringLiteral("Focus Down"));
+    collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Down);
+    connect(action, &QAction::triggered, this, &ViewManager::focusDown);
+    _viewContainer->addAction(action);
 
-     action = new QAction(i18nc("@action Shortcut entry", "Move Tab Left"), this);
+    action = new QAction(i18nc("@action Shortcut entry", "Move Tab Left"), this);
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Konsole::LEFT);
     connect(action, &QAction::triggered, this, &ViewManager::focusLeft);
     collection->addAction(QStringLiteral("move-view-left"), action);
@@ -336,9 +336,7 @@ void ViewManager::lastUsedViewReverse()
 
 void ViewManager::toggleTwoViews()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->toggleLastUsedView();
+    _viewContainer->toggleLastUsedView();
 }
 
 void ViewManager::detachActiveView()
