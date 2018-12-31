@@ -342,6 +342,18 @@ void TabbedViewContainer::activateLastUsedView(bool reverse)
     setCurrentIndex(index);
 }
 
+// Jump to last view - this allows toggling between two views
+// Using "Last Used Tabs" shortcut will cause "Toggle between two tabs"
+// shortcut to be incorrect the first time.
+void TabbedViewContainer::toggleLastUsedView()
+{
+    if (_tabHistory.count() <= 1) {
+        return;
+    }
+
+    setCurrentIndex(indexOf(_tabHistory.at(1)));
+}
+
 void TabbedViewContainer::keyReleaseEvent(QKeyEvent* event)
 {
     if (_tabHistoryIndex != -1 && event->modifiers() == Qt::NoModifier) {

@@ -98,6 +98,9 @@ public:
     /** Changes the active view to the last used view */
     void activateLastUsedView(bool reverse);
 
+    /** Toggle between last two views */
+    void toggleLastUsedView();
+
     void setCss(const QString& styleSheet = QString());
     void setCssFromFile(const QUrl& url);
     /**

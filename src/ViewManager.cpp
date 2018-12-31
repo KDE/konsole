@@ -138,6 +138,7 @@ void ViewManager::setupActions()
     QAction *lastUsedViewAction = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs"), this);
     QAction *lastUsedViewReverseAction = new QAction(i18nc("@action Shortcut entry",
                                                            "Last Used Tabs (Reverse)"), this);
+    QAction *toggleTwoViewsAction = new QAction(i18nc("@action Shortcut entry", "Toggle Between Two Tabs"), this);
     QAction *nextContainerAction = new QAction(i18nc("@action Shortcut entry",
                                                      "Next View Container"), this);
 
@@ -226,6 +227,7 @@ void ViewManager::setupActions()
     collection->addAction(QStringLiteral("last-tab"), lastViewAction);
     collection->addAction(QStringLiteral("last-used-tab"), lastUsedViewAction);
     collection->addAction(QStringLiteral("last-used-tab-reverse"), lastUsedViewReverseAction);
+    collection->addAction(QStringLiteral("toggle-two-tabs"), toggleTwoViewsAction);
     collection->addAction(QStringLiteral("next-container"), nextContainerAction);
     collection->addAction(QStringLiteral("move-view-left"), moveViewLeftAction);
     collection->addAction(QStringLiteral("move-view-right"), moveViewRightAction);
@@ -291,6 +293,9 @@ void ViewManager::setupActions()
     collection->setDefaultShortcut(lastUsedViewReverseAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Tab);
     connect(lastUsedViewReverseAction, &QAction::triggered, this, &Konsole::ViewManager::lastUsedViewReverse);
     _viewSplitter->addAction(lastUsedViewReverseAction);
+
+    connect(toggleTwoViewsAction, &QAction::triggered, this, &Konsole::ViewManager::toggleTwoViews);
+    _viewSplitter->addAction(toggleTwoViewsAction);
 }
 
 void ViewManager::switchToView(int index)
@@ -370,6 +375,13 @@ void ViewManager::lastUsedViewReverse()
     TabbedViewContainer *container = _viewSplitter->activeContainer();
     Q_ASSERT(container);
     container->activateLastUsedView(true);
+}
+
+void ViewManager::toggleTwoViews()
+{
+    TabbedViewContainer *container = _viewSplitter->activeContainer();
+    Q_ASSERT(container);
+    container->toggleLastUsedView();
 }
 
 void ViewManager::detachActiveView()

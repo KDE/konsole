@@ -358,6 +358,9 @@ private Q_SLOTS:
     // called when "Next View Container" shortcut is activated
     void nextContainer();
 
+    // called when "Toggle Two tabs" shortcut is activated
+    void toggleTwoViews();
+
     // called when the views in a container owned by this view manager
     // changes
     void containerViewsChanged(TabbedViewContainer *container);
