@@ -462,7 +462,7 @@ private:
             parent = parent->parentWidget();
         }
         return left;
-    };
+    }
 
     static constexpr int LABELS_COLUMN = 0;
 
