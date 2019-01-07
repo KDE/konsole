@@ -43,24 +43,19 @@ ViewSplitter::ViewSplitter(QWidget *parent) :
 
 void ViewSplitter::adjustTerminalDisplaySize(TerminalDisplay *container, int percentage)
 {
-    int containerIndex = indexOf(container);
-
+    const int containerIndex = indexOf(container);
     Q_ASSERT(containerIndex != -1);
 
     QList<int> containerSizes = sizes();
 
     const int oldSize = containerSizes[containerIndex];
     const auto newSize = static_cast<int>(oldSize * (1.0 + percentage / 100.0));
-
     const int perContainerDelta = (count() == 1) ? 0 : ((newSize - oldSize) / (count() - 1)) * (-1);
 
     for (int i = 0; i < containerSizes.count(); i++) {
-        if (i == containerIndex) {
-            containerSizes[i] = newSize;
-        } else {
-            containerSizes[i] = containerSizes[i] + perContainerDelta;
-        }
+        containerSizes[i] += perContainerDelta;
     }
+    containerSizes[containerIndex] = newSize;
 
     setSizes(containerSizes);
 }
@@ -82,13 +77,7 @@ ViewSplitter *ViewSplitter::activeSplitter()
 
 void ViewSplitter::updateSizes()
 {
-    int space;
-
-    if (orientation() == Qt::Horizontal) {
-        space = width() / count();
-    } else {
-        space = height() / count();
-    }
+    const int space = (orientation() == Qt::Horizontal ? width() : height()) / count();
 
     QList<int> widgetSizes;
     const int widgetCount = count();
