@@ -25,6 +25,7 @@
 // Qt
 #include <QDebug>
 #include <QChildEvent>
+#include <QScrollBar>
 
 // Konsole
 #include "ViewContainer.h"
@@ -143,52 +144,34 @@ void ViewSplitter::childEvent(QChildEvent *event)
 void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int direction)
 {
     auto terminalDisplay = activeTerminalDisplay();
-    auto activeViewSplitter = qobject_cast<ViewSplitter*>(terminalDisplay->parentWidget());
-    auto idx = activeViewSplitter->indexOf(terminalDisplay);
+    auto parentSplitter = qobject_cast<ViewSplitter*>(terminalDisplay->parentWidget());
+    auto topSplitter = parentSplitter->getToplevelSplitter();
 
-    // Easy, the orientation of this splitter is the same as we are looking for.
-    if (activeViewSplitter->orientation() == orientation &&
-            ((direction < 0 && idx > 0) || (direction > 0 && idx < activeViewSplitter->count() - 1))) {
-        auto nextPossibleTerminal = qobject_cast<TerminalDisplay*>(activeViewSplitter->widget(idx + direction));
-        if (nextPossibleTerminal) {
-            nextPossibleTerminal->setFocus(Qt::OtherFocusReason);
-            return;
-        }
+    const auto handleWidth = parentSplitter->handleWidth() <= 1 ? 4 : parentSplitter->handleWidth();
 
-        // element is not a terminal display but a splitter with perhaps more splitters and terminals.
-        // choose one element and focus it.
-        auto nextPossibleSplitter = qobject_cast<ViewSplitter*>(activeViewSplitter->widget(idx + direction));
-        if (nextPossibleSplitter) {
-            nextPossibleTerminal = nextPossibleSplitter->findChild<TerminalDisplay*>();
-            if (nextPossibleTerminal) {
-                nextPossibleTerminal->setFocus(Qt::OtherFocusReason);
-            }
-            return;
-        }
-        return;
-    }
+    const auto start = QPoint(terminalDisplay->x(), terminalDisplay->y());
+    const auto startMapped = parentSplitter->mapTo(topSplitter, start);
 
-    // Hard, we are in a horizontal splitter or we are in the top of the vertical splitter.
-    // we need to get a splitter parent that we can to, following the parent chain.
-    ViewSplitter *parentTerminalWidget = nullptr;
-    ViewSplitter *oldParent = activeViewSplitter;
-    do {
-        parentTerminalWidget = qobject_cast<ViewSplitter*>(
-                    parentTerminalWidget ? parentTerminalWidget->parentWidget()
-                                         : activeViewSplitter->parentWidget());
+    const int newX = orientation != Qt::Horizontal ? startMapped.x() + handleWidth
+             : direction == 1 ? startMapped.x() + terminalDisplay->width() + handleWidth
+             : startMapped.x() - handleWidth;
 
-        if (parentTerminalWidget) {
-            idx = parentTerminalWidget->indexOf(oldParent);
-        }
-        oldParent = parentTerminalWidget;
-    } while (parentTerminalWidget && parentTerminalWidget->orientation() != orientation);
+    const int newY = orientation != Qt::Vertical ? startMapped.y() + handleWidth
+                    : direction == 1 ? startMapped.y() + terminalDisplay->height() + handleWidth
+                    : startMapped.y() - handleWidth;
 
-    if (!parentTerminalWidget) {
-        return;
-    }
+    const auto newPoint = QPoint(newX, newY);
+    auto child = topSplitter->childAt(newPoint);
 
-    if ((direction < 0 && idx > 0) || (direction > 0 && idx < parentTerminalWidget->count() - 1)) {
-        parentTerminalWidget->widget(idx + direction)->setFocus(Qt::OtherFocusReason);
+    if (TerminalDisplay* terminal = qobject_cast<TerminalDisplay*>(child)) {
+        terminal->setFocus(Qt::OtherFocusReason);
+    } else if (qobject_cast<QScrollBar*>(child)) {
+        auto terminal = qobject_cast<TerminalDisplay*>(child->parent());
+        terminal->setFocus(Qt::OtherFocusReason);
+    } else if (qobject_cast<QSplitterHandle*>(child)) {
+        auto targetSplitter = qobject_cast<QSplitter*>(child->parent());
+        auto terminal = qobject_cast<TerminalDisplay*>(targetSplitter->widget(0));
+        terminal->setFocus(Qt::OtherFocusReason);
     }
 }
 
