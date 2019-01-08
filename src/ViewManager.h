@@ -192,6 +192,9 @@ public:
     TabbedViewContainer *activeContainer();
     TerminalDisplay *createView(Session *session);
 
+    /** Reorder the terminal display history list */
+    void updateTerminalDisplayHistory(TerminalDisplay *terminalDisplay = nullptr, bool remove = false);
+
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
     void empty();
@@ -330,7 +333,7 @@ private Q_SLOTS:
 
     // called when the active view in a ViewContainer changes, so
     // that we can plug the appropriate actions into the UI
-    void viewActivated(QWidget *view);
+    void viewActivated(TerminalDisplay *view);
 
     void focusUp();
     void focusDown();
@@ -374,6 +377,8 @@ private Q_SLOTS:
     // switches to the view at visual position 'index'
     // in the current container
     void switchToView(int index);
+    // gives focus and switches the terminal display, changing tab if needed
+    void switchToTerminalDisplay(TerminalDisplay *terminalDisplay);
 
     // called when a SessionController gains focus
     void controllerChanged(SessionController *controller);
@@ -417,6 +422,8 @@ private:
     // closes and another one should be focused.
     void focusAnotherTerminal(TerminalDisplay *lostFocus);
 
+    void activateLastUsedView(bool reverse);
+
 private:
     QPointer<TabbedViewContainer> _viewContainer;
     QPointer<SessionController> _pluggedController;
@@ -430,6 +437,8 @@ private:
     NewTabBehavior _newTabBehavior;
     int _managerId;
     static int lastManagerId;
+    QList<TerminalDisplay *> _terminalDisplayHistory;
+    int _terminalDisplayHistoryIndex;
 };
 }
 

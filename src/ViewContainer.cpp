@@ -60,8 +60,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     _newTabButton(new QToolButton()),
     _closeTabButton(new QToolButton()),
     _contextMenuTabIndex(-1),
-    _navigationVisibility(ViewManager::NavigationVisibility::NavigationNotSet),
-    _tabHistoryIndex(-1)
+    _navigationVisibility(ViewManager::NavigationVisibility::NavigationNotSet)
 {
     setAcceptDrops(true);
 
@@ -278,7 +277,6 @@ void TabbedViewContainer::addView(TerminalDisplay *view, int index)
         insertTab(index, viewSplitter, item->icon(), item->title());
     }
 
-    _tabHistory.append(view);
     connect(item, &Konsole::ViewProperties::titleChanged, this,
             &Konsole::TabbedViewContainer::updateTitle);
     connect(item, &Konsole::ViewProperties::iconChanged, this,
@@ -302,8 +300,7 @@ void TabbedViewContainer::viewDestroyed(QObject *view)
 
 void TabbedViewContainer::forgetView(ViewSplitter *view)
 {
-    //TODO: Fix updateTabHistory
-    // updateTabHistory(view, true);
+    //TODO: Needed ?
     // emit viewRemoved(view);
     if (count() == 0) {
         emit empty(this);
@@ -338,71 +335,10 @@ void TabbedViewContainer::activatePreviousView()
     setCurrentIndex(index == 0 ? count() - 1 : index - 1);
 }
 
-void TabbedViewContainer::activateLastUsedView(bool reverse)
-{
-    if (_tabHistory.count() <= 1) {
-        return;
-    }
-
-    if (_tabHistoryIndex == -1) {
-        _tabHistoryIndex = reverse ? _tabHistory.count() - 1 : 1;
-    } else if (reverse) {
-        if (_tabHistoryIndex == 0) {
-            _tabHistoryIndex = _tabHistory.count() - 1;
-        } else {
-            _tabHistoryIndex--;
-        }
-    } else {
-        if (_tabHistoryIndex >= _tabHistory.count() - 1) {
-            _tabHistoryIndex = 0;
-        } else {
-            _tabHistoryIndex++;
-        }
-    }
-
-    int index = indexOf(_tabHistory[_tabHistoryIndex]);
-    setCurrentIndex(index);
-}
-
-// Jump to last view - this allows toggling between two views
-// Using "Last Used Tabs" shortcut will cause "Toggle between two tabs"
-// shortcut to be incorrect the first time.
-void TabbedViewContainer::toggleLastUsedView()
-{
-    if (_tabHistory.count() <= 1) {
-        return;
-    }
-
-    setCurrentIndex(indexOf(_tabHistory.at(1)));
-}
-
 void TabbedViewContainer::keyReleaseEvent(QKeyEvent* event)
 {
-    if (_tabHistoryIndex != -1 && event->modifiers() == Qt::NoModifier) {
-        _tabHistoryIndex = -1;
-        auto *active = qobject_cast<TerminalDisplay*>(currentWidget());
-        if (active != _tabHistory[0]) {
-            // Update the tab history now that we have ended the walk-through
-            updateTabHistory(active);
-        }
-    }
-}
-
-void TabbedViewContainer::updateTabHistory(TerminalDisplay* view, bool remove)
-{
-    if (_tabHistoryIndex != -1 && !remove) {
-        // Do not reorder the tab history while we are walking through it
-        return;
-    }
-
-    for (int i = 0; i < _tabHistory.count(); ++i ) {
-        if (_tabHistory[i] == view) {
-            _tabHistory.removeAt(i);
-            if (!remove) {
-                _tabHistory.prepend(view);
-            }
-            break;
-        }
+    if (event->modifiers() == Qt::NoModifier) {
+        _connectedViewManager->updateTerminalDisplayHistory();
     }
 }
 
@@ -487,7 +423,6 @@ void TabbedViewContainer::currentTabChanged(int index)
     if (index != -1) {
         auto splitview = qobject_cast<ViewSplitter*>(widget(index));
         auto view = splitview->activeTerminalDisplay();
-        updateTabHistory(view);
         emit activeViewChanged(view);
         setTabActivity(index, false);
     } else {

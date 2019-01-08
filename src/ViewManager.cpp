@@ -60,7 +60,8 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _navigationMethod(NoNavigation),
     _navigationVisibility(NavigationNotSet),
     _newTabBehavior(PutNewTabAtTheEnd),
-    _managerId(0)
+    _managerId(0),
+    _terminalDisplayHistoryIndex(-1)
 {
     _viewContainer = createContainer();
     // setup actions which are related to the views
@@ -214,7 +215,7 @@ void ViewManager::setupActions()
 
     action = new QAction(i18nc("@action Shortcut entry", "Toggle Between Two Tabs"), this);
     connect(action, &QAction::triggered, this, &Konsole::ViewManager::toggleTwoViews);
-    //_viewSplitter->addAction(toggleTwoViewsAction);
+    collection->addAction(QStringLiteral("toggle-two-tabs"), action);
 
     action = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs (Reverse)"), this);
     collection->addAction(QStringLiteral("last-used-tab-reverse"), action);
@@ -251,6 +252,21 @@ void ViewManager::switchToView(int index)
 {
     _viewContainer->setCurrentIndex(index);
 }
+
+void ViewManager::switchToTerminalDisplay(Konsole::TerminalDisplay* terminalDisplay)
+{
+    auto splitter = qobject_cast<ViewSplitter*>(terminalDisplay->parentWidget());
+    auto toplevelSplitter = splitter->getToplevelSplitter();
+
+    // Focus the TermialDisplay
+    terminalDisplay->setFocus();
+
+    if (_viewContainer->currentWidget() != toplevelSplitter) {
+        // Focus the tab
+        switchToView(_viewContainer->indexOf(toplevelSplitter));
+    }
+}
+
 
 void ViewManager::updateDetachViewState()
 {
@@ -324,19 +340,48 @@ void ViewManager::lastView()
     _viewContainer->activateLastView();
 }
 
+void ViewManager::activateLastUsedView(bool reverse)
+{
+    if (_terminalDisplayHistory.count() <= 1) {
+        return;
+    }
+
+    if (_terminalDisplayHistoryIndex == -1) {
+        _terminalDisplayHistoryIndex = reverse ? _terminalDisplayHistory.count() - 1 : 1;
+    } else if (reverse) {
+        if (_terminalDisplayHistoryIndex == 0) {
+            _terminalDisplayHistoryIndex = _terminalDisplayHistory.count() - 1;
+        } else {
+            _terminalDisplayHistoryIndex--;
+        }
+    } else {
+        if (_terminalDisplayHistoryIndex >= _terminalDisplayHistory.count() - 1) {
+            _terminalDisplayHistoryIndex = 0;
+        } else {
+            _terminalDisplayHistoryIndex++;
+        }
+    }
+
+    switchToTerminalDisplay(_terminalDisplayHistory[_terminalDisplayHistoryIndex]);
+}
+
 void ViewManager::lastUsedView()
 {
-    _viewContainer->activateLastUsedView(false);
+    activateLastUsedView(false);
 }
 
 void ViewManager::lastUsedViewReverse()
 {
-    _viewContainer->activateLastUsedView(true);
+    activateLastUsedView(true);
 }
 
 void ViewManager::toggleTwoViews()
 {
-    _viewContainer->toggleLastUsedView();
+    if (_terminalDisplayHistory.count() <= 1) {
+        return;
+    }
+
+    switchToTerminalDisplay(_terminalDisplayHistory.at(1));
 }
 
 void ViewManager::detachActiveView()
@@ -402,7 +447,8 @@ void ViewManager::sessionFinished()
 
     // Before deleting the view, let's unmaximize if it's maximized.
     auto splitter = qobject_cast<ViewSplitter*>(view->parentWidget());
-    splitter->getToplevelSplitter()->restoreOtherTerminals();
+    auto toplevelSplitter = splitter->getToplevelSplitter();
+    toplevelSplitter->restoreOtherTerminals();
     view->deleteLater();
 
     // Only remove the controller from factory() if it's actually controlling
@@ -414,7 +460,12 @@ void ViewManager::sessionFinished()
         emit unplugController(_pluggedController);
     }
 
-    focusAnotherTerminal(view);
+    updateTerminalDisplayHistory(view, true);
+
+    // Give focus to the last used terminal in this tab
+    if ((toplevelSplitter->findChildren<TerminalDisplay*>()).count() > 1) {
+        _terminalDisplayHistory[0]->setFocus(Qt::OtherFocusReason);
+    }
 }
 
 void ViewManager::focusAnotherTerminal(TerminalDisplay *lostFocus)
@@ -428,7 +479,7 @@ void ViewManager::focusAnotherTerminal(TerminalDisplay *lostFocus)
         }
     }
 }
-void ViewManager::viewActivated(QWidget *view)
+void ViewManager::viewActivated(TerminalDisplay *view)
 {
     Q_ASSERT(view != nullptr);
 
@@ -535,6 +586,8 @@ void ViewManager::controllerChanged(SessionController *controller)
     //TODO: Verify This.
     // _viewSplitter->setFocusProxy(controller->view());
 
+    updateTerminalDisplayHistory(controller->view());
+
     _pluggedController = controller;
     emit activeViewChanged(controller);
 }
@@ -570,6 +623,9 @@ TerminalDisplay *ViewManager::createView(Session *session)
     session->setDarkBackground(colorSchemeForProfile(profile)->hasDarkBackground());
     display->setFocus(Qt::OtherFocusReason);
     updateDetachViewState();
+
+    _terminalDisplayHistory.append(display);
+
     return display;
 }
 
@@ -1077,4 +1133,33 @@ void ViewManager::setNavigationVisibility(NavigationVisibility navigationVisibil
 void ViewManager::setNavigationBehavior(int behavior)
 {
     _newTabBehavior = static_cast<NewTabBehavior>(behavior);
+}
+
+void ViewManager::updateTerminalDisplayHistory(TerminalDisplay* terminalDisplay, bool remove)
+{
+    if (terminalDisplay == nullptr) {
+        if (_terminalDisplayHistoryIndex >= 0) {
+            // This is the case when we finished walking through the history
+            // (i.e. when Ctrl-Tab has been released)
+            terminalDisplay = _terminalDisplayHistory[_terminalDisplayHistoryIndex];
+            _terminalDisplayHistoryIndex = -1;
+        } else {
+            return;
+        }
+    }
+
+    if (_terminalDisplayHistoryIndex >= 0 && !remove) {
+        // Do not reorder the tab history while we are walking through it
+        return;
+    }
+
+    for (int i = 0; i < _terminalDisplayHistory.count(); i++) {
+        if (_terminalDisplayHistory[i] == terminalDisplay) {
+            _terminalDisplayHistory.removeAt(i);
+            if (!remove) {
+                _terminalDisplayHistory.prepend(terminalDisplay);
+            }
+            break;
+        }
+    }
 }

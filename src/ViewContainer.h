@@ -95,12 +95,6 @@ public:
     /** Changes the active view to the last view */
     void activateLastView();
 
-    /** Changes the active view to the last used view */
-    void activateLastUsedView(bool reverse);
-
-    /** Toggle between last two views */
-    void toggleLastUsedView();
-
     void setCss(const QString& styleSheet = QString());
     void setCssFromFile(const QUrl& url);
 
@@ -203,17 +197,13 @@ private Q_SLOTS:
 
 private:
     void forgetView(ViewSplitter *view);
-    void updateTabHistory(TerminalDisplay *view, bool remove = false);
 
-    QList<TerminalDisplay *> _tabHistory;
     ViewManager *_connectedViewManager;
     QMenu *_contextPopupMenu;
     QToolButton *_newTabButton;
     QToolButton *_closeTabButton;
     int _contextMenuTabIndex;
     ViewManager::NavigationVisibility _navigationVisibility;
-    int _tabHistoryIndex;
-    ViewSplitter *_viewSplitter;
 };
 
 
