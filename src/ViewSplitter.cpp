@@ -89,7 +89,7 @@ ViewSplitter *ViewSplitter::activeSplitter()
 void ViewSplitter::registerContainer(TabbedViewContainer *container)
 {
     _containers << container;
-    connect(container, SIGNAL(empty(TabbedViewContainer*)), this, SLOT(containerEmpty(TabbedViewContainer*)));
+    connect(container, &TabbedViewContainer::empty, this, &ViewSplitter::containerEmpty);
 }
 
 void ViewSplitter::unregisterContainer(TabbedViewContainer *container)

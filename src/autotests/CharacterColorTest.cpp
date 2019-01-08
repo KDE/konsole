@@ -156,7 +156,7 @@ void CharacterColorTest::testColorSpaceRGB_data()
 
     // Pick colors to test or test all if needed
     for (const int i : {0, 1, 64, 127, 128, 215, 255}) {
-        const QString name = QString::fromLatin1("color %1").arg(i);
+        const QString name = QStringLiteral("color %1").arg(i);
         QTest::newRow(qPrintable(name)) << i << QColor(i >> 16, i >> 8, i);
     }
 }
@@ -178,15 +178,15 @@ void CharacterColorTest::testColor256_data()
 
     // This might be overkill
     for (int i = 0; i < 8; ++i) {
-        const QString name = QString::fromLatin1("color256 color %1").arg(i);
+        const QString name = QStringLiteral("color256 color %1").arg(i);
         QTest::newRow(qPrintable(name)) << i << DefaultColorTable[i + 2];
     }
     for (int i = 8; i < 16; ++i) {
-        const QString name = QString::fromLatin1("color256 color %1").arg(i);
+        const QString name = QStringLiteral("color256 color %1").arg(i);
         QTest::newRow(qPrintable(name)) << i << DefaultColorTable[i + 2 + 10 - 8];
     }
     for (int i = 16; i < 232; ++i) {
-        const QString name = QString::fromLatin1("color256 color %1").arg(i);
+        const QString name = QStringLiteral("color256 color %1").arg(i);
         const auto u = i - 16;
         const auto color = QColor(((u / 36) % 6) ? (40 * ((u / 36) % 6) + 55) : 0,
                       ((u / 6) % 6) ? (40 * ((u / 6) % 6) + 55) : 0,
@@ -194,7 +194,7 @@ void CharacterColorTest::testColor256_data()
         QTest::newRow(qPrintable(name)) << i << color;
     }
     for (int i = 232; i < 256; ++i) {
-        const QString name = QString::fromLatin1("color256 color %1").arg(i);
+        const QString name = QStringLiteral("color256 color %1").arg(i);
         const auto gray = (i - 232) * 10 + 8;
         QTest::newRow(qPrintable(name)) << i << QColor(gray, gray, gray);
     }
