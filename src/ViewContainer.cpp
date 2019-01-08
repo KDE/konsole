@@ -485,8 +485,8 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
 void TabbedViewContainer::currentTabChanged(int index)
 {
     if (index != -1) {
-        auto view = widget(index)->findChild<TerminalDisplay*>();
-        view->setFocus();
+        auto splitview = qobject_cast<ViewSplitter*>(widget(index));
+        auto view = splitview->activeTerminalDisplay();
         updateTabHistory(view);
         emit activeViewChanged(view);
         setTabActivity(index, false);
