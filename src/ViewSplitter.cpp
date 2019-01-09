@@ -78,15 +78,7 @@ ViewSplitter *ViewSplitter::activeSplitter()
 void ViewSplitter::updateSizes()
 {
     const int space = (orientation() == Qt::Horizontal ? width() : height()) / count();
-
-    QList<int> widgetSizes;
-    const int widgetCount = count();
-    widgetSizes.reserve(widgetCount);
-    for (int i = 0; i < widgetCount; i++) {
-        widgetSizes << space;
-    }
-
-    setSizes(widgetSizes);
+    setSizes(QVector<int>(count(), space).toList());
 }
 
 void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation containerOrientation)
