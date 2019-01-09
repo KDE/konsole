@@ -77,6 +77,9 @@ public:
     /** Adds a new view to the container widget */
     void addView(TerminalDisplay *view, int index = -1);
 
+    /** splits the currently focused Splitter */
+    void splitView(TerminalDisplay *view, Qt::Orientation orientation);
+
     /** Removes a view from the container */
     void removeView(TerminalDisplay *view);
 
@@ -130,7 +133,7 @@ public:
     void currentTabChanged(int index);
     void closeCurrentTab();
     void wheelScrolled(int delta);
-
+    void currentSessionControllerChanged(SessionController *controller);
     void tabDoubleClicked(int index);
     void openTabContextMenu(const QPoint &point);
     void setNavigationVisibility(ViewManager::NavigationVisibility navigationVisibility);
@@ -144,6 +147,9 @@ public:
      * this is the only thing that should be used to retrieve widgets.
      */
     ViewSplitter *viewSplitterAt(int index);
+
+    void connectTerminalDisplay(TerminalDisplay *view);
+
 Q_SIGNALS:
     /** Emitted when the container has no more children */
     void empty(TabbedViewContainer *container);

@@ -277,16 +277,33 @@ void TabbedViewContainer::addView(TerminalDisplay *view, int index)
         insertTab(index, viewSplitter, item->icon(), item->title());
     }
 
-    connect(item, &Konsole::ViewProperties::titleChanged, this,
-            &Konsole::TabbedViewContainer::updateTitle);
-    connect(item, &Konsole::ViewProperties::iconChanged, this,
-            &Konsole::TabbedViewContainer::updateIcon);
-    connect(item, &Konsole::ViewProperties::activity, this,
-            &Konsole::TabbedViewContainer::updateActivity);
-
+    connectTerminalDisplay(view);
     connect(viewSplitter, &ViewSplitter::destroyed, this, &TabbedViewContainer::viewDestroyed);
     setCurrentIndex(index);
     emit viewAdded(view);
+}
+
+void TabbedViewContainer::splitView(TerminalDisplay *view, Qt::Orientation orientation)
+{
+    auto viewSplitter = qobject_cast<ViewSplitter*>(currentWidget());
+    viewSplitter->addTerminalDisplay(view, orientation);
+    connectTerminalDisplay(view);
+}
+
+void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
+{
+    auto item = display->sessionController();
+    connect(item, &Konsole::SessionController::focused, this,
+        &Konsole::TabbedViewContainer::currentSessionControllerChanged);
+
+    connect(item, &Konsole::ViewProperties::titleChanged, this,
+            &Konsole::TabbedViewContainer::updateTitle);
+
+    connect(item, &Konsole::ViewProperties::iconChanged, this,
+            &Konsole::TabbedViewContainer::updateIcon);
+
+    connect(item, &Konsole::ViewProperties::activity, this,
+            &Konsole::TabbedViewContainer::updateActivity);
 }
 
 void TabbedViewContainer::viewDestroyed(QObject *view)
@@ -360,12 +377,12 @@ void TabbedViewContainer::tabDoubleClicked(int index)
 
 void TabbedViewContainer::renameTab(int index)
 {
-    /* TODO: Fix renaming.
-        The problem with the renaming right now is that many Terminals can be at a tab.
-    */
-
     if (index != -1) {
-//        terminalAt(index)->sessionController()->rename();
+        setCurrentIndex(index);
+        viewSplitterAt(index)
+            -> activeTerminalDisplay()
+            -> sessionController()
+            -> rename();
     }
 }
 
@@ -464,11 +481,17 @@ void TabbedViewContainer::updateActivity(ViewProperties *item)
     }
 }
 
+void TabbedViewContainer::currentSessionControllerChanged(SessionController *controller)
+{
+    updateTitle(qobject_cast<ViewProperties*>(controller));
+}
+
 void TabbedViewContainer::updateTitle(ViewProperties *item)
 {
     auto controller = qobject_cast<SessionController*>(item);
+    auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
 
-    const int index = indexOf(controller->view());
+    const int index = indexOf(topLevelSplitter);
     QString tabText = item->title();
 
     setTabToolTip(index, tabText);
