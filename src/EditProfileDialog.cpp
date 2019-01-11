@@ -335,7 +335,7 @@ bool EditProfileDialog::isValidProfileName()
     }
 }
 
-QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr group, int maxLength)
+QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr &group, int maxLength)
 {
     QString caption;
     int count = group->profiles().count();
@@ -353,7 +353,7 @@ QString EditProfileDialog::groupProfileNames(const ProfileGroup::Ptr group, int 
     return caption;
 }
 
-void EditProfileDialog::updateCaption(const Profile::Ptr profile)
+void EditProfileDialog::updateCaption(const Profile::Ptr &profile)
 {
     const int MAX_GROUP_CAPTION_LENGTH = 25;
     ProfileGroup::Ptr group = profile->asGroup();
@@ -368,7 +368,7 @@ void EditProfileDialog::updateCaption(const Profile::Ptr profile)
     }
 }
 
-void EditProfileDialog::setProfile(Konsole::Profile::Ptr profile)
+void EditProfileDialog::setProfile(const Konsole::Profile::Ptr &profile)
 {
     Q_ASSERT(profile);
 
@@ -1042,7 +1042,7 @@ void EditProfileDialog::showFontDialog()
 {
     if (!_fontDialog) {
         _fontDialog = new FontDialog(this);
-        connect(_fontDialog, &FontDialog::fontChanged, this, [this](const QFont font) {
+        connect(_fontDialog, &FontDialog::fontChanged, this, [this](const QFont &font) {
             preview(Profile::Font, font);
             updateFontPreview(font);
         });

@@ -74,7 +74,7 @@ void ProfileList::updateEmptyAction()
         _emptyListAction->setVisible(showEmptyAction);
     }
 }
-QAction* ProfileList::actionForProfile(Profile::Ptr profile) const
+QAction* ProfileList::actionForProfile(const Profile::Ptr &profile) const
 {
     foreach(QAction* action, _group->actions()) {
         if (action->data().value<Profile::Ptr>() == profile) {
@@ -84,7 +84,7 @@ QAction* ProfileList::actionForProfile(Profile::Ptr profile) const
     return nullptr; // not found
 }
 
-void ProfileList::profileChanged(Profile::Ptr profile)
+void ProfileList::profileChanged(const Profile::Ptr &profile)
 {
     QAction* action = actionForProfile(profile);
     if (action != nullptr) {
@@ -100,7 +100,7 @@ void ProfileList::updateAction(QAction* action , Profile::Ptr profile)
     action->setText(profile->name());
     action->setIcon(QIcon::fromTheme(profile->icon()));
 }
-void ProfileList::shortcutChanged(Profile::Ptr profile, const QKeySequence& sequence)
+void ProfileList::shortcutChanged(const Profile::Ptr &profile, const QKeySequence& sequence)
 {
     if (!_addShortcuts) {
         return;
@@ -129,7 +129,7 @@ void ProfileList::syncWidgetActions(QWidget* widget, bool sync)
     widget->addActions(_group->actions());
 }
 
-void ProfileList::addShortcutAction(Profile::Ptr profile)
+void ProfileList::addShortcutAction(const Profile::Ptr &profile)
 {
     ProfileManager* manager = ProfileManager::instance();
 
@@ -150,7 +150,7 @@ void ProfileList::addShortcutAction(Profile::Ptr profile)
     updateEmptyAction();
 }
 
-void ProfileList::removeShortcutAction(Profile::Ptr profile)
+void ProfileList::removeShortcutAction(const Profile::Ptr &profile)
 {
     QAction* action = actionForProfile(profile);
 
@@ -164,7 +164,7 @@ void ProfileList::removeShortcutAction(Profile::Ptr profile)
     updateEmptyAction();
 }
 
-void ProfileList::favoriteChanged(Profile::Ptr profile, bool isFavorite)
+void ProfileList::favoriteChanged(const Profile::Ptr &profile, bool isFavorite)
 {
     if (isFavorite) {
         addShortcutAction(profile);

@@ -249,7 +249,7 @@ private Q_SLOTS:
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);
     void renameSession();
-    void switchProfile(Profile::Ptr profile);
+    void switchProfile(const Profile::Ptr &profile);
     void handleWebShortcutAction();
     void configureWebShortcuts();
     void sendSignal(QAction *action);

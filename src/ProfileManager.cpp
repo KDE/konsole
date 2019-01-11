@@ -336,7 +336,7 @@ Profile::Ptr ProfileManager::fallbackProfile() const
     return _fallbackProfile;
 }
 
-QString ProfileManager::saveProfile(Profile::Ptr profile)
+QString ProfileManager::saveProfile(const Profile::Ptr &profile)
 {
     ProfileWriter writer;
 
@@ -453,7 +453,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
     emit profileChanged(newProfile);
 }
 
-void ProfileManager::addProfile(Profile::Ptr profile)
+void ProfileManager::addProfile(const Profile::Ptr &profile)
 {
     if (_profiles.isEmpty()) {
         _defaultProfile = profile;
@@ -501,7 +501,7 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
     return true;
 }
 
-void ProfileManager::setDefaultProfile(Profile::Ptr profile)
+void ProfileManager::setDefaultProfile(const Profile::Ptr &profile)
 {
     Q_ASSERT(_profiles.contains(profile));
 
@@ -530,7 +530,7 @@ QSet<Profile::Ptr> ProfileManager::findFavorites()
 
     return _favorites;
 }
-void ProfileManager::setFavorite(Profile::Ptr profile , bool favorite)
+void ProfileManager::setFavorite(const Profile::Ptr &profile , bool favorite)
 {
     if (!_profiles.contains(profile)) {
         addProfile(profile);

@@ -110,7 +110,7 @@ protected Q_SLOTS:
 private Q_SLOTS:
     void sessionProfileCommandReceived(const QString &text);
 
-    void profileChanged(Profile::Ptr profile);
+    void profileChanged(const Profile::Ptr &profile);
 
 private:
     Q_DISABLE_COPY(SessionManager)
@@ -119,13 +119,13 @@ private:
     // to all sessions currently using that profile
     // if modifiedPropertiesOnly is true, only properties which
     // are set in the profile @p key are updated
-    void applyProfile(Profile::Ptr profile, bool modifiedPropertiesOnly);
+    void applyProfile(const Profile::Ptr &profile, bool modifiedPropertiesOnly);
 
     // applies updates to the profile @p profile to the session @p session
     // if modifiedPropertiesOnly is true, only properties which
     // are set in @p profile are update ( ie. properties for which profile->isPropertySet(<property>)
     // returns true )
-    void applyProfile(Session *session, const Profile::Ptr profile, bool modifiedPropertiesOnly);
+    void applyProfile(Session *session, const Profile::Ptr &profile, bool modifiedPropertiesOnly);
 
     QList<Session *> _sessions; // list of running sessions
 
@@ -138,7 +138,7 @@ private:
 class ShouldApplyProperty
 {
 public:
-    ShouldApplyProperty(const Profile::Ptr profile, bool modifiedOnly) :
+    ShouldApplyProperty(const Profile::Ptr &profile, bool modifiedOnly) :
         _profile(profile),
         _modifiedPropertiesOnly(modifiedOnly)
     {

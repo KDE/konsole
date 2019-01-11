@@ -770,7 +770,7 @@ TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
     return display;
 }
 
-const ColorScheme *ViewManager::colorSchemeForProfile(const Profile::Ptr profile)
+const ColorScheme *ViewManager::colorSchemeForProfile(const Profile::Ptr &profile)
 {
     const ColorScheme *colorScheme = ColorSchemeManager::instance()->
                                      findColorScheme(profile->colorScheme());
@@ -782,12 +782,12 @@ const ColorScheme *ViewManager::colorSchemeForProfile(const Profile::Ptr profile
     return colorScheme;
 }
 
-bool ViewManager::profileHasBlurEnabled(const Profile::Ptr profile)
+bool ViewManager::profileHasBlurEnabled(const Profile::Ptr &profile)
 {
     return colorSchemeForProfile(profile)->blur();
 }
 
-void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr profile)
+void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr &profile)
 {
     Q_ASSERT(profile);
 
@@ -867,7 +867,7 @@ void ViewManager::updateViewsForSession(Session *session)
     }
 }
 
-void ViewManager::profileChanged(Profile::Ptr profile)
+void ViewManager::profileChanged(const Profile::Ptr &profile)
 {
     // update all views associated with this profile
     QHashIterator<TerminalDisplay *, Session *> iter(_sessionMap);

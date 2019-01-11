@@ -130,7 +130,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     auto profileList = new ProfileList(false, profileMenu);
     profileList->syncWidgetActions(profileMenu, true);
     connect(profileList, &Konsole::ProfileList::profileSelected, this,
-            [this](Profile::Ptr profile) { emit newViewWithProfileRequest(this, profile); });
+            [this](const Profile::Ptr &profile) { emit newViewWithProfileRequest(this, profile); });
     _newTabButton->setMenu(profileMenu);
 
     konsoleConfigChanged();

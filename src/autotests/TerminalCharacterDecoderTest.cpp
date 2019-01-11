@@ -33,7 +33,7 @@
 
 using namespace Konsole;
 
-Character* TerminalCharacterDecoderTest::convertToCharacter(QString text, QVector<RenditionFlags> renditions)
+Character* TerminalCharacterDecoderTest::convertToCharacter(const QString &text, QVector<RenditionFlags> renditions)
 {
     auto charResult = new Character[text.size()];
 

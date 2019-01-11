@@ -88,7 +88,7 @@ public:
      *
      * @param profile The profile to be edited
      */
-    void setProfile(Profile::Ptr profile);
+    void setProfile(const Profile::Ptr &profile);
 
     /**
      * Selects the text in the profile name edit area.
@@ -265,7 +265,7 @@ private:
     void unpreviewAll();
     void enableIfNonEmptySelection(QWidget *widget, QItemSelectionModel *selectionModel);
 
-    void updateCaption(const Profile::Ptr profile);
+    void updateCaption(const Profile::Ptr &profile);
     void updateTransparencyWarning();
 
     void updateFontPreview(QFont font);
@@ -283,7 +283,7 @@ private:
     // updateTempProfileProperty().
     void updateButtonApply();
 
-    static QString groupProfileNames(const ProfileGroup::Ptr group, int maxLength = -1);
+    static QString groupProfileNames(const ProfileGroup::Ptr &group, int maxLength = -1);
 
     struct RadioOption {
         QAbstractButton *button;

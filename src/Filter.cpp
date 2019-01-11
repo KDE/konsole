@@ -567,7 +567,7 @@ void FileFilter::HotSpot::activate(QObject *)
     new KRun(QUrl::fromLocalFile(_filePath), QApplication::activeWindow());
 }
 
-static QString createFileRegex(const QStringList &patterns, const QString &filePattern, const QString pathPattern)
+static QString createFileRegex(const QStringList &patterns, const QString &filePattern, const QString &pathPattern)
 {
     QStringList suffixes = patterns.filter(QRegularExpression(QStringLiteral("^\\*") + filePattern + QStringLiteral("$")));
     QStringList prefixes = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("+\\*$")));

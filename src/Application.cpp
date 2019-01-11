@@ -173,7 +173,7 @@ MainWindow *Application::newMainWindow()
     return window;
 }
 
-void Application::createWindow(Profile::Ptr profile, const QString &directory)
+void Application::createWindow(const Profile::Ptr &profile, const QString &directory)
 {
     MainWindow *window = newMainWindow();
     ViewManager *viewManager = window->viewManager();

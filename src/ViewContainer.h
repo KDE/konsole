@@ -154,7 +154,7 @@ Q_SIGNALS:
     void newViewRequest(TabbedViewContainer *thisContainer);
 
     /** Requests creation of a new view, with the selected profile. */
-    void newViewWithProfileRequest(TabbedViewContainer *thisContainer, Profile::Ptr);
+    void newViewWithProfileRequest(TabbedViewContainer *thisContainer, const Profile::Ptr&);
 
     /**
      * Emitted when the user requests to move a view from another container

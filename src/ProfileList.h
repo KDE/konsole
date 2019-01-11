@@ -75,7 +75,7 @@ Q_SIGNALS:
      *
      * @param profile The profile to select
      */
-    void profileSelected(Profile::Ptr profile);
+    void profileSelected(const Profile::Ptr &profile);
     /**
      * Emitted when the list of actions changes.
      */
@@ -83,16 +83,16 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void triggered(QAction *action);
-    void favoriteChanged(Profile::Ptr profile, bool isFavorite);
-    void profileChanged(Profile::Ptr profile);
-    void shortcutChanged(Profile::Ptr profile, const QKeySequence &sequence);
-    void addShortcutAction(Profile::Ptr profile);
-    void removeShortcutAction(Profile::Ptr profile);
+    void favoriteChanged(const Profile::Ptr &profile, bool isFavorite);
+    void profileChanged(const Profile::Ptr &profile);
+    void shortcutChanged(const Profile::Ptr &profile, const QKeySequence &sequence);
+    void addShortcutAction(const Profile::Ptr &profile);
+    void removeShortcutAction(const Profile::Ptr &profile);
 
 private:
     Q_DISABLE_COPY(ProfileList)
 
-    QAction *actionForProfile(Profile::Ptr profile) const;
+    QAction *actionForProfile(const Profile::Ptr &profile) const;
     void updateAction(QAction *action, Profile::Ptr profile);
     void updateEmptyAction();
 

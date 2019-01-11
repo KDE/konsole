@@ -223,7 +223,7 @@ void Profile::useFallback()
     // Fallback should not be shown in menus
     setHidden(true);
 }
-Profile::Profile(Profile::Ptr parent)
+Profile::Profile(const Profile::Ptr &parent)
     : _propertyValues(QHash<Property, QVariant>())
     , _parent(parent)
     , _hidden(false)
@@ -260,7 +260,7 @@ void Profile::setHidden(bool hidden)
     _hidden = hidden;
 }
 
-void Profile::setParent(Profile::Ptr parent)
+void Profile::setParent(const Profile::Ptr &parent)
 {
     _parent = parent;
 }

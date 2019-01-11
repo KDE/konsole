@@ -90,7 +90,7 @@ public:
     void setOpacity(qreal opacity);
 
     /** Sets the background picture */
-    void setWallpaper(ColorSchemeWallpaper::Ptr p);
+    void setWallpaper(const ColorSchemeWallpaper::Ptr &p);
 
     /**
      * Specifies whether the terminal display has a vertical scroll bar, and if so whether it

@@ -1011,7 +1011,7 @@ void TerminalDisplay::setOpacity(qreal opacity)
     onColorsChanged();
 }
 
-void TerminalDisplay::setWallpaper(ColorSchemeWallpaper::Ptr p)
+void TerminalDisplay::setWallpaper(const ColorSchemeWallpaper::Ptr &p)
 {
     _wallpaper = p;
 }

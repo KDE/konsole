@@ -783,7 +783,7 @@ void SessionController::setupExtraActions()
 #endif
 }
 
-void SessionController::switchProfile(Profile::Ptr profile)
+void SessionController::switchProfile(const Profile::Ptr &profile)
 {
     if (isReadOnly()) {
         return;

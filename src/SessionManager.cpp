@@ -118,7 +118,7 @@ Session *SessionManager::createSession(Profile::Ptr profile)
     return session;
 }
 
-void SessionManager::profileChanged(Profile::Ptr profile)
+void SessionManager::profileChanged(const Profile::Ptr &profile)
 {
     applyProfile(profile, true);
 }
@@ -134,7 +134,7 @@ void SessionManager::sessionTerminated(Session *session)
     session->deleteLater();
 }
 
-void SessionManager::applyProfile(Profile::Ptr profile, bool modifiedPropertiesOnly)
+void SessionManager::applyProfile(const Profile::Ptr &profile, bool modifiedPropertiesOnly)
 {
     foreach (Session *session, _sessions) {
         if (_sessionProfiles[session] == profile) {
@@ -167,7 +167,7 @@ void SessionManager::setSessionProfile(Session *session, Profile::Ptr profile)
     emit sessionUpdated(session);
 }
 
-void SessionManager::applyProfile(Session *session, const Profile::Ptr profile,
+void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
                                   bool modifiedPropertiesOnly)
 {
     Q_ASSERT(profile);

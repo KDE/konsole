@@ -81,11 +81,11 @@ private Q_SLOTS:
     // selection changes
     void tableSelectionChanged(const QItemSelection &);
 
-    void updateFavoriteStatus(Profile::Ptr profile, bool favorite);
+    void updateFavoriteStatus(const Profile::Ptr &profile, bool favorite);
 
-    void addItems(const Profile::Ptr);
-    void updateItems(const Profile::Ptr);
-    void removeItems(const Profile::Ptr);
+    void addItems(const Profile::Ptr&);
+    void updateItems(const Profile::Ptr&);
+    void removeItems(const Profile::Ptr&);
 
     // double clicking the profile name opens the edit profile dialog
     void doubleClicked(const QModelIndex &index);
@@ -98,11 +98,11 @@ private:
     // updates the font of the items to match
     // their default / non-default profile status
     void updateDefaultItem();
-    void updateItemsForProfile(const Profile::Ptr profile,const QList<QStandardItem *> &items) const;
+    void updateItemsForProfile(const Profile::Ptr &profile,const QList<QStandardItem *> &items) const;
     // updates the profile table to be in sync with the
     // session manager
     void populateTable();
-    int rowForProfile(const Profile::Ptr profile) const;
+    int rowForProfile(const Profile::Ptr &profile) const;
 
     QStandardItemModel *_sessionModel;
 

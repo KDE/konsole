@@ -303,7 +303,7 @@ public:
      * property using property(), if the property has not been set in this
      * profile then the parent's value for the property will be returned.
      */
-    explicit Profile(Ptr parent = Ptr());
+    explicit Profile(const Ptr &parent = Ptr());
     virtual ~Profile();
 
     /**
@@ -329,7 +329,7 @@ public:
      * if the specified property has not been set for this profile,
      * the parent's value for the property will be returned instead.
      */
-    void setParent(Ptr parent);
+    void setParent(const Ptr &parent);
 
     /** Returns the parent profile. */
     const Ptr parent() const;
@@ -706,21 +706,21 @@ public:
     typedef QExplicitlySharedDataPointer<ProfileGroup> Ptr;
 
     /** Construct a new profile group, which is hidden by default. */
-    explicit ProfileGroup(Profile::Ptr profileParent = Profile::Ptr());
+    explicit ProfileGroup(const Profile::Ptr &profileParent = Profile::Ptr());
 
     /** Add a profile to the group.  Calling setProperty() will update this
      * profile.  When creating a group, add the profiles to the group then
      * call updateValues() to make the group's property values reflect the
      * profiles currently in the group.
      */
-    void addProfile(Profile::Ptr profile)
+    void addProfile(const Profile::Ptr &profile)
     {
         _profiles.append(profile);
     }
 
     /** Remove a profile from the group.  Calling setProperty() will no longer
      * affect this profile. */
-    void removeProfile(Profile::Ptr profile)
+    void removeProfile(const Profile::Ptr &profile)
     {
         _profiles.removeAll(profile);
     }
@@ -754,7 +754,7 @@ private:
 
     QList<Profile::Ptr> _profiles;
 };
-inline ProfileGroup::ProfileGroup(Profile::Ptr profileParent) :
+inline ProfileGroup::ProfileGroup(const Profile::Ptr &profileParent) :
     Profile(profileParent),
     _profiles(QList<Profile::Ptr>())
 {

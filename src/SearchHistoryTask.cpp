@@ -43,7 +43,7 @@ void SearchHistoryTask::execute()
     }
 }
 
-void SearchHistoryTask::executeOnScreenWindow(QPointer<Session> session , ScreenWindowPtr window)
+void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session , ScreenWindowPtr window)
 {
     Q_ASSERT(session);
     Q_ASSERT(window);

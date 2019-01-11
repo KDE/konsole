@@ -39,7 +39,7 @@ public:
     void setFont(const QFont &font);
 
 Q_SIGNALS:
-    void fontChanged(QFont font);
+    void fontChanged(const QFont &font);
 
 private:
     KFontChooser *_fontChooser;

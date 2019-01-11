@@ -120,7 +120,7 @@ Q_SIGNALS:
      * if the default working directory associated with the profile should
      * be used.
      */
-    void newWindowRequest(Profile::Ptr profile, const QString &directory);
+    void newWindowRequest(const Profile::Ptr &profile, const QString &directory);
 
     /**
      * Emitted when a view for one session is detached from this window
@@ -150,7 +150,7 @@ private Q_SLOTS:
     void activateMenuBar();
     void showSettingsDialog(const bool showProfilePage = false);
     void showShortcutsDialog();
-    void newFromProfile(TabbedViewContainer *tabWidget, Profile::Ptr profile);
+    void newFromProfile(TabbedViewContainer *tabWidget, const Profile::Ptr &profile);
     void activeViewChanged(SessionController *controller);
     void disconnectController(SessionController *controller);
     void activeViewTitleChanged(ViewProperties *);

@@ -39,16 +39,16 @@ public:
      * @p profile to. The path-name should be accepted by
      * the corresponding ProfileReader class.
      */
-    QString getPath(const Profile::Ptr profile);
+    QString getPath(const Profile::Ptr &profile);
     /**
      * Writes the properties and values from @p profile to the file specified
      * by @p path.  This profile should be readable by the corresponding
      * ProfileReader class.
      */
-    bool writeProfile(const QString &path, const Profile::Ptr profile);
+    bool writeProfile(const QString &path, const Profile::Ptr &profile);
 
 private:
-    void writeProperties(KConfig &config, const Profile::Ptr profile,
+    void writeProperties(KConfig &config, const Profile::Ptr &profile,
                          const Profile::PropertyInfo *properties);
 };
 }

@@ -389,7 +389,7 @@ void MainWindow::setProfileList(ProfileList *list)
     profileListChanged(list->actions());
 
     connect(list, &Konsole::ProfileList::profileSelected, this,
-            [this](Profile::Ptr profile) { newFromProfile(_viewManager->activeContainer(), profile);});
+            [this](const Profile::Ptr &profile) { newFromProfile(_viewManager->activeContainer(), profile);});
 
     connect(list, &Konsole::ProfileList::actionsChanged, this,
             &Konsole::MainWindow::profileListChanged);
@@ -708,7 +708,7 @@ void MainWindow::showShortcutsDialog()
     }
 }
 
-void MainWindow::newFromProfile(TabbedViewContainer *tabWidget, Profile::Ptr profile)
+void MainWindow::newFromProfile(TabbedViewContainer *tabWidget, const Profile::Ptr &profile)
 {
     createSession(tabWidget, profile, activeSessionDir());
 }

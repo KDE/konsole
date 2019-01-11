@@ -84,7 +84,7 @@ public:
      * Applies the view-specific settings associated with specified @p profile
      * to the terminal display @p view.
      */
-    void applyProfileToView(TerminalDisplay *view, const Profile::Ptr profile);
+    void applyProfileToView(TerminalDisplay *view, const Profile::Ptr &profile);
 
     /**
      * Return the main widget for the view manager which
@@ -192,7 +192,7 @@ public:
     /**
      * Returns whether the @p profile has the blur setting enabled
      */
-    static bool profileHasBlurEnabled(const Profile::Ptr profile);
+    static bool profileHasBlurEnabled(const Profile::Ptr &profile);
 
     /** returns the active tab from the view
     */
@@ -246,7 +246,7 @@ Q_SIGNALS:
     /** Requests creation of a new view with the default profile. */
     void newViewRequest(TabbedViewContainer *tabWidget);
     /** Requests creation of a new view, with the selected profile. */
-    void newViewWithProfileRequest(TabbedViewContainer *tabWidget, Profile::Ptr);
+    void newViewWithProfileRequest(TabbedViewContainer *tabWidget, const Profile::Ptr&);
 
 public Q_SLOTS:
     /** DBus slot that returns the number of sessions in the current view. */
@@ -366,7 +366,7 @@ private Q_SLOTS:
     void containerViewsChanged(TabbedViewContainer *container);
 
     // called when a profile changes
-    void profileChanged(Profile::Ptr profile);
+    void profileChanged(const Profile::Ptr &profile);
 
     void updateViewsForSession(Session *session);
 
@@ -391,7 +391,7 @@ private:
     Q_DISABLE_COPY(ViewManager)
 
     void createView(Session *session, TabbedViewContainer *container, int index);
-    static const ColorScheme *colorSchemeForProfile(const Profile::Ptr profile);
+    static const ColorScheme *colorSchemeForProfile(const Profile::Ptr &profile);
 
     void setupActions();
 

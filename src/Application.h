@@ -67,7 +67,7 @@ public:
     MainWindow *newMainWindow();
 
 private Q_SLOTS:
-    void createWindow(Profile::Ptr profile, const QString &directory);
+    void createWindow(const Profile::Ptr &profile, const QString &directory);
     void detachView(Session *session);
 
     void toggleBackgroundInstance();

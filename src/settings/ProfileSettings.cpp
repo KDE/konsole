@@ -96,7 +96,7 @@ void ProfileSettings::itemDataChanged(QStandardItem* item)
     }
 }
 
-int ProfileSettings::rowForProfile(const Profile::Ptr profile) const
+int ProfileSettings::rowForProfile(const Profile::Ptr &profile) const
 {
     const int rowCount = _sessionModel->rowCount();
     for (int i = 0; i < rowCount; i++) {
@@ -107,7 +107,7 @@ int ProfileSettings::rowForProfile(const Profile::Ptr profile) const
     }
     return -1;
 }
-void ProfileSettings::removeItems(const Profile::Ptr profile)
+void ProfileSettings::removeItems(const Profile::Ptr &profile)
 {
     int row = rowForProfile(profile);
     if (row < 0) {
@@ -116,7 +116,7 @@ void ProfileSettings::removeItems(const Profile::Ptr profile)
 
     _sessionModel->removeRow(row);
 }
-void ProfileSettings::updateItems(const Profile::Ptr profile)
+void ProfileSettings::updateItems(const Profile::Ptr &profile)
 {
     const int row = rowForProfile(profile);
     if (row < 0) {
@@ -130,7 +130,7 @@ void ProfileSettings::updateItems(const Profile::Ptr profile)
     };
     updateItemsForProfile(profile, items);
 }
-void ProfileSettings::updateItemsForProfile(const Profile::Ptr profile, const QList<QStandardItem*>& items) const
+void ProfileSettings::updateItemsForProfile(const Profile::Ptr &profile, const QList<QStandardItem*>& items) const
 {
     // Profile Name
     items[ProfileNameColumn]->setText(profile->name());
@@ -164,7 +164,7 @@ void ProfileSettings::doubleClicked(const QModelIndex &index)
     }
 }
 
-void ProfileSettings::addItems(const Profile::Ptr profile)
+void ProfileSettings::addItems(const Profile::Ptr &profile)
 {
     if (profile->isHidden()) {
         return;
@@ -385,7 +385,7 @@ bool ProfileSettings::isProfileDeletable(Profile::Ptr profile) const
     const QFileInfo dirInfo(fileInfo.path());
     return dirInfo.isWritable();
 }
-void ProfileSettings::updateFavoriteStatus(Profile::Ptr profile, bool favorite)
+void ProfileSettings::updateFavoriteStatus(const Profile::Ptr &profile, bool favorite)
 {
     Q_ASSERT(_sessionModel);
 
