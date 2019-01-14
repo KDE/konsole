@@ -104,7 +104,7 @@ public:
     /**
      * @brief Set the frameless state
      *
-     * @param frameless
+     * @param frameless If true, no titlebar or frame is displayed.
      */
     void setRemoveWindowTitleBarAndFrame(bool frameless);
 
