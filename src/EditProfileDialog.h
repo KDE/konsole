@@ -223,8 +223,7 @@ private:
         KeyboardPage,
         MousePage,
         AdvancedPage,
-
-        PagesCount,
+        PagesCount
     };
 
     // initialize various pages of the dialog
