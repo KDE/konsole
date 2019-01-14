@@ -62,14 +62,14 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="2">
+      <item row="3" column="0" colspan="2">
        <widget class="QCheckBox" name="kcfg_ExpandTabWidth">
         <property name="text">
          <string>Expand Individual Tab Widths to Full Window</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="2">
+      <item row="4" column="2">
        <widget class="KUrlRequester" name="kcfg_TabBarUserStyleSheetFile">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -89,7 +89,7 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0" colspan="2">
+      <item row="4" column="0" colspan="2">
        <widget class="QCheckBox" name="kcfg_TabBarUseUserStyleSheet">
         <property name="text">
          <string>Use user-defined stylesheet</string>
@@ -114,25 +114,6 @@
           <string>Below Terminal Area</string>
          </property>
         </item>
-       </widget>
-      </item>
-      <item row="3" column="0" colspan="3">
-       <widget class="QLabel" name="Qt59label">
-        <property name="frameShape">
-         <enum>QFrame::Box</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="text">
-         <string>Starting with Qt 5.9, the next two options have different effects.</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
        </widget>
       </item>
      </layout>
