@@ -104,7 +104,7 @@
       <default>PutNewTabAtTheEnd</default>
     </entry>
     <entry name="ExpandTabWidth" type="Bool">
-      <label>Expand the tab widths (Qt5.9+ uses the full window width)</label>
+      <label>Expand the tab widths</label>
       <default>false</default>
     </entry>
   </group>
