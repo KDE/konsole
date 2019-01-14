@@ -327,9 +327,9 @@ private:
 
     using PageSetupMethod = void (EditProfileDialog::*)(const Profile::Ptr &);
     struct Page {
-        Page(PageSetupMethod setupPage = nullptr, bool needsUpdate = false)
-            : setupPage(setupPage)
-            , needsUpdate(needsUpdate)
+        Page(PageSetupMethod page = nullptr, bool update = false)
+            : setupPage(page)
+            , needsUpdate(update)
         {}
 
         PageSetupMethod setupPage;
