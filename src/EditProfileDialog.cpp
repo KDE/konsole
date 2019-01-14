@@ -1124,7 +1124,7 @@ void EditProfileDialog::removeColorScheme()
 void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntries)
 {
     int failures = 0;
-    for (auto &entry : changedEntries) {
+    for (auto &entry : qAsConst(changedEntries)) {
         switch (entry.status()) {
         case KNS3::Entry::Installed:
             for (const auto &file : entry.installedFiles()) {
