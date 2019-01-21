@@ -2552,20 +2552,14 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     int charColumn = 0;
     int charLine = 0;
-    getCharacterPosition(pos, charLine, charColumn, !_wordSelectionMode && !_lineSelectionMode);
+    getCharacterPosition(pos, charLine, charColumn, true);
 
     QPoint here = QPoint(charColumn, charLine);
-    here.rx() = qBound(0, here.x(), _columns - 1);
-    here.ry() = qBound(0, here.y(), _lines - 1);
     QPoint ohere;
     QPoint _iPntSelCorr = _iPntSel;
     _iPntSelCorr.ry() -= _scrollBar->value();
-    _iPntSelCorr.rx() = qBound(0, _iPntSelCorr.x(), _columns - 1);
-    _iPntSelCorr.ry() = qBound(0, _iPntSelCorr.y(), _lines - 1);
     QPoint _pntSelCorr = _pntSel;
     _pntSelCorr.ry() -= _scrollBar->value();
-    _pntSelCorr.rx() = qBound(0, _pntSelCorr.x(), _columns - 1);
-    _pntSelCorr.ry() = qBound(0, _pntSelCorr.y(), _lines - 1);
     bool swapping = false;
 
     if (_wordSelectionMode) {
