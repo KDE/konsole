@@ -3157,6 +3157,11 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
     const int regSize = qMax(_screenWindow->windowLines(), 10);
     const int curLine = _screenWindow->currentLine();
     int line = pnt.y();
+
+    if (line < 0) {
+        return pnt;
+    }
+
     int x = pnt.x();
     int y = line + curLine;
     QVector<LineProperty> lineProperties = _lineProperties;
