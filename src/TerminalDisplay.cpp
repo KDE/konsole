@@ -2681,7 +2681,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     int charColumn = 0;
     int charLine = 0;
-    getCharacterPosition(pos, charLine, charColumn, true);
+    getCharacterPosition(pos, charLine, charColumn, !_wordSelectionMode && !_lineSelectionMode);
 
     QPoint here = QPoint(charColumn, charLine);
     QPoint ohere;
