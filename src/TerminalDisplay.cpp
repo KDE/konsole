@@ -3101,6 +3101,12 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
     std::unique_ptr<Character> tempImage;
 
     int imgLine = pnt.y();
+
+    if (imgLine < 0 || imgLine >= _lines) {
+        qDebug() << imgLine << firstVisibleLine;
+        //return pnt;
+    }
+
     int x = pnt.x();
     int y = imgLine + firstVisibleLine;
     int imgLoc = loc(x, imgLine);
@@ -3108,7 +3114,7 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
     const QChar selClass = charClass(image[imgLoc]);
     const int imageSize = regSize * _columns;
 
-    while (imgLoc > 0) {
+    while (imgLoc >= 0) {
         for (; imgLoc > 0 && imgLine >= 0; imgLoc--, x--) {
             const QChar &curClass = charClass(image[imgLoc - 1]);
             if (curClass != selClass) {
@@ -3158,8 +3164,9 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
     const int curLine = _screenWindow->currentLine();
     int line = pnt.y();
 
-    if (line < 0) {
-        return pnt;
+    if (line < 0 || line >= _lines) {
+        qDebug() << line;
+        //return pnt;
     }
 
     int x = pnt.x();
