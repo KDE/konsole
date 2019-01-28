@@ -622,7 +622,7 @@ Name[ug]=كۆزىتىلىۋاتقان ئەڭگىمەدە جىمجىتلىق
 Name[uk]=Тиша в сеансі спостереження
 Name[wa]=Silince e corwaiteye session
 Name[x-test]=xxSilence in Monitored Sessionxx
-Name[zh_CN]=被监视会话中的缄默
+Name[zh_CN]=被监视会话中的静默
 Name[zh_TW]=監控工作階段的靜默
 Comment=Silence detected in a monitored session
 Comment[af]=Stilte bespeur in 'n sessie wat gemonitor word
@@ -706,7 +706,7 @@ Comment[ug]=كۆزىتىلىۋاتقان ئەڭگىمەدە بايقالغان �
 Comment[uk]=В сеансі спостереження виявлено тишу
 Comment[wa]=Silince detecté dins ene corwaiteye session
 Comment[x-test]=xxSilence detected in a monitored sessionxx
-Comment[zh_CN]=被监视会话中检测到的缄默
+Comment[zh_CN]=被监视会话中检测到的静默
 Comment[zh_TW]=監控工作階段中偵測到靜默時的行為
 Action=Popup
 
