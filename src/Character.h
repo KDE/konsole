@@ -54,21 +54,6 @@ const RenditionFlags RE_CONCEAL        = (1 << 9);
 const RenditionFlags RE_OVERLINE       = (1 << 10);
 
 /**
- * Unicode character in the range of U+2500 ~ U+257F are known as line
- * characters, or box-drawing characters. Currently, konsole draws those
- * characters itself, instead of using the glyph provided by the font.
- * Unfortunately, the triple and quadruple dash lines (┄┅┆┇┈┉┊┋) are too
- * detailed too be drawn cleanly at normal font scales without anti
- * -aliasing, so those are drawn as regular characters.
- */
-inline bool isSupportedLineChar(uint codePoint)
-{
-    return ((codePoint & 0xFF80) == 0x2500 // Unicode block: Mathematical Symbols - Box Drawing
-           && !(0x2504 <= codePoint && codePoint <= 0x250B)) || // Triple and quadruple dash range
-        (codePoint >= 0x2580 && codePoint <= 0x259F); // Block characters
-}
-
-/**
  * A single character in the terminal which consists of a unicode character
  * value, foreground and background colors and a set of rendition attributes
  * which specify how it should be drawn.
@@ -142,15 +127,6 @@ public:
      * renditions or colors.
      */
     friend bool operator !=(const Character &a, const Character &b);
-
-    inline bool isLineChar() const
-    {
-        if (rendition & RE_EXTENDED_CHAR) {
-            return false;
-        } else {
-            return isSupportedLineChar(character);
-        }
-    }
 
     inline bool isSpace() const
     {

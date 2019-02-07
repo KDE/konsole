@@ -34,8 +34,6 @@ endif()
 option(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS "Konsole: remove sendText and runCommand dbus methods" OFF)
 
 ### Development tools
-option(KONSOLE_BUILD_FONTEMBEDDER "Konsole: build fontembedder executable" OFF)
-option(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
 option(KONSOLE_BUILD_UNI2CHARACTERWIDTH "Konsole: build uni2characterwidth executable" OFF)
 
 ### Konsole source files shared between embedded terminal and main application
@@ -99,6 +97,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ExtendedCharTable.cpp
                         TerminalDisplay.cpp
                         TerminalDisplayAccessible.cpp
+                        LineBlockCharacters.cpp
                         ViewContainer.cpp
                         ViewManager.cpp
                         ViewProperties.cpp

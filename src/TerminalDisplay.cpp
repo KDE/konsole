@@ -45,6 +45,7 @@
 #include <QDrag>
 #include <QDesktopServices>
 #include <QAccessible>
+#include <QtMath>
 
 // KDE
 #include <KShell>
@@ -63,7 +64,6 @@
 #include "konsoledebug.h"
 #include "TerminalCharacterDecoder.h"
 #include "Screen.h"
-#include "LineFont.h"
 #include "SessionController.h"
 #include "ExtendedCharTable.h"
 #include "TerminalDisplayAccessible.h"
@@ -73,6 +73,7 @@
 #include "IncrementalSearchBar.h"
 #include "Profile.h"
 #include "ViewManager.h" // for colorSchemeForProfile. // TODO: Rewrite this.
+#include "LineBlockCharacters.h"
 
 using namespace Konsole;
 
@@ -211,7 +212,7 @@ static inline bool isLineCharString(const QString& string)
         return false;
     }
 
-    return isSupportedLineChar(string.at(0).unicode());
+    return LineBlockCharacters::canDraw(string.at(0).unicode());
 }
 
 void TerminalDisplay::fontChange(const QFont&)
@@ -566,382 +567,16 @@ TerminalDisplay::~TerminalDisplay()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/**
- A table for emulating the simple (single width) unicode drawing chars.
- It represents the 250x - 257x glyphs. If it's zero, we can't use it.
- if it's not, it's encoded as follows: imagine a 5x5 grid where the points are numbered
- 0 to 24 left to top, top to bottom. Each point is represented by the corresponding bit.
-
- Then, the pixels basically have the following interpretation:
- _|||_
- -...-
- -...-
- -...-
- _|||_
-
-where _ = none
-      | = vertical line.
-      - = horizontal line.
- */
-
-enum LineEncode {
-    TopL  = (1 << 1),
-    TopC  = (1 << 2),
-    TopR  = (1 << 3),
-
-    LeftT = (1 << 5),
-    Int11 = (1 << 6),
-    Int12 = (1 << 7),
-    Int13 = (1 << 8),
-    RightT = (1 << 9),
-
-    LeftC = (1 << 10),
-    Int21 = (1 << 11),
-    Int22 = (1 << 12),
-    Int23 = (1 << 13),
-    RightC = (1 << 14),
-
-    LeftB = (1 << 15),
-    Int31 = (1 << 16),
-    Int32 = (1 << 17),
-    Int33 = (1 << 18),
-    RightB = (1 << 19),
-
-    BotL  = (1 << 21),
-    BotC  = (1 << 22),
-    BotR  = (1 << 23)
-};
-
-static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code)
-{
-    //Calculate cell midpoints, end points.
-    const int cx = x + w / 2;
-    const int cy = y + h / 2. - 0.5;
-    const int ex = x + w - 1;
-    const int ey = y + h - 1;
-
-    const quint32 toDraw = LineChars[code];
-
-    //Top _lines:
-    if ((toDraw & TopL) != 0u) {
-        paint.drawLine(cx - 1, y, cx - 1, cy - 2);
-    }
-    if ((toDraw & TopC) != 0u) {
-        paint.drawLine(cx, y, cx, cy - 2);
-    }
-    if ((toDraw & TopR) != 0u) {
-        paint.drawLine(cx + 1, y, cx + 1, cy - 2);
-    }
-
-    //Bot _lines:
-    if ((toDraw & BotL) != 0u) {
-        paint.drawLine(cx - 1, cy + 2, cx - 1, ey);
-    }
-    if ((toDraw & BotC) != 0u) {
-        paint.drawLine(cx, cy + 2, cx, ey);
-    }
-    if ((toDraw & BotR) != 0u) {
-        paint.drawLine(cx + 1, cy + 2, cx + 1, ey);
-    }
-
-    //Left _lines:
-    if ((toDraw & LeftT) != 0u) {
-        paint.drawLine(x, cy - 1, cx - 2, cy - 1);
-    }
-    if ((toDraw & LeftC) != 0u) {
-        paint.drawLine(x, cy, cx - 2, cy);
-    }
-    if ((toDraw & LeftB) != 0u) {
-        paint.drawLine(x, cy + 1, cx - 2, cy + 1);
-    }
-
-    //Right _lines:
-    if ((toDraw & RightT) != 0u) {
-        paint.drawLine(cx + 2, cy - 1, ex, cy - 1);
-    }
-    if ((toDraw & RightC) != 0u) {
-        paint.drawLine(cx + 2, cy, ex, cy);
-    }
-    if ((toDraw & RightB) != 0u) {
-        paint.drawLine(cx + 2, cy + 1, ex, cy + 1);
-    }
-
-    //Intersection points.
-    if ((toDraw & Int11) != 0u) {
-        paint.drawPoint(cx - 2, cy - 2);
-    }
-    if ((toDraw & Int12) != 0u) {
-        paint.drawPoint(cx - 1, cy - 2);
-    }
-    if ((toDraw & Int13) != 0u) {
-        paint.drawPoint(cx - 0, cy - 2);
-    }
-
-    if ((toDraw & Int21) != 0u) {
-        paint.drawPoint(cx - 2, cy - 1);
-    }
-    if ((toDraw & Int22) != 0u) {
-        paint.drawPoint(cx - 1, cy - 1);
-    }
-    if ((toDraw & Int23) != 0u) {
-        paint.drawPoint(cx - 0, cy - 1);
-    }
-
-    if ((toDraw & Int31) != 0u) {
-        paint.drawPoint(cx - 2, cy);
-    }
-    if ((toDraw & Int32) != 0u) {
-        paint.drawPoint(cx - 1, cy);
-    }
-    if ((toDraw & Int33) != 0u) {
-        paint.drawPoint(cx - 0, cy);
-    }
-}
-
-static void drawOtherChar(QPainter& paint, int x, int y, int w, int h, uchar code)
-{
-    //Calculate cell midpoints, end points.
-    const int cx = x + w / 2;
-    const int cy = y + h / 2. - 0.5; // Compensate for the translation, to match fonts
-    const int ex = x + w - 1;
-    const int ey = y + h - 1;
-
-    // Double dashes
-    if (0x4C <= code && code <= 0x4F) {
-        const int xHalfGap = qMax(w / 15, 1);
-        const int yHalfGap = qMax(h / 15, 1);
-        switch (code) {
-        case 0x4D: // BOX DRAWINGS HEAVY DOUBLE DASH HORIZONTAL
-            paint.drawLine(x, cy - 1, cx - xHalfGap - 1, cy - 1);
-            paint.drawLine(x, cy + 1, cx - xHalfGap - 1, cy + 1);
-            paint.drawLine(cx + xHalfGap, cy - 1, ex, cy - 1);
-            paint.drawLine(cx + xHalfGap, cy + 1, ex, cy + 1);
-            // No break!
-            Q_FALLTHROUGH();
-        case 0x4C: // BOX DRAWINGS LIGHT DOUBLE DASH HORIZONTAL
-            paint.drawLine(x, cy, cx - xHalfGap - 1, cy);
-            paint.drawLine(cx + xHalfGap, cy, ex, cy);
-            break;
-        case 0x4F: // BOX DRAWINGS HEAVY DOUBLE DASH VERTICAL
-            paint.drawLine(cx - 1, y, cx - 1, cy - yHalfGap - 1);
-            paint.drawLine(cx + 1, y, cx + 1, cy - yHalfGap - 1);
-            paint.drawLine(cx - 1, cy + yHalfGap, cx - 1, ey);
-            paint.drawLine(cx + 1, cy + yHalfGap, cx + 1, ey);
-            // No break!
-            Q_FALLTHROUGH();
-        case 0x4E: // BOX DRAWINGS LIGHT DOUBLE DASH VERTICAL
-            paint.drawLine(cx, y, cx, cy - yHalfGap - 1);
-            paint.drawLine(cx, cy + yHalfGap, cx, ey);
-            break;
-        }
-    }
-
-    // Rounded corner characters
-    else if (0x6D <= code && code <= 0x70) {
-        const int r = w * 3 / 8;
-        const int d = 2 * r;
-        switch (code) {
-        case 0x6D: // BOX DRAWINGS LIGHT ARC DOWN AND RIGHT
-            paint.drawLine(cx, cy + r, cx, ey);
-            paint.drawLine(cx + r, cy, ex, cy);
-            paint.drawArc(cx, cy, d, d, 90 * 16, 90 * 16);
-            break;
-        case 0x6E: // BOX DRAWINGS LIGHT ARC DOWN AND LEFT
-            paint.drawLine(cx, cy + r, cx, ey);
-            paint.drawLine(x, cy, cx - r, cy);
-            paint.drawArc(cx - d, cy, d, d, 0 * 16, 90 * 16);
-            break;
-        case 0x6F: // BOX DRAWINGS LIGHT ARC UP AND LEFT
-            paint.drawLine(cx, y, cx, cy - r);
-            paint.drawLine(x, cy, cx - r, cy);
-            paint.drawArc(cx - d, cy - d, d, d, 270 * 16, 90 * 16);
-            break;
-        case 0x70: // BOX DRAWINGS LIGHT ARC UP AND RIGHT
-            paint.drawLine(cx, y, cx, cy - r);
-            paint.drawLine(cx + r, cy, ex, cy);
-            paint.drawArc(cx, cy - d, d, d, 180 * 16, 90 * 16);
-            break;
-        }
-    }
-
-    // Diagonals
-    else if (0x71 <= code && code <= 0x73) {
-        switch (code) {
-        case 0x71: // BOX DRAWINGS LIGHT DIAGONAL UPPER RIGHT TO LOWER LEFT
-            paint.drawLine(ex, y, x, ey);
-            break;
-        case 0x72: // BOX DRAWINGS LIGHT DIAGONAL UPPER LEFT TO LOWER RIGHT
-            paint.drawLine(x, y, ex, ey);
-            break;
-        case 0x73: // BOX DRAWINGS LIGHT DIAGONAL CROSS
-            paint.drawLine(ex, y, x, ey);
-            paint.drawLine(x, y, ex, ey);
-            break;
-        }
-    }
-}
-
-static void drawBlockChar(QPainter& paint, int x, int y, int w, int h, uchar code)
-{
-    const QColor color = paint.pen().color();
-
-    const float left = x - 0.5;
-    const float top = y - 0.5;
-
-    const float cx = left + w / 2;
-    const float cy = top + h / 2;
-    const float right = x + w - 0.5;
-    const float bottom = y + h - 0.5;
-
-    // Default rect fills entire cell
-    QRectF rect(left, top, w, h);
-
-    // LOWER ONE EIGHTH BLOCK to LEFT ONE EIGHTH BLOCK
-    if (code >= 0x81 && code <= 0x8f) {
-        if (code < 0x88) { // Horizontal
-            const int height = h * (0x88 - code) / 8;
-            rect.setY(top + height);
-            rect.setHeight(h - height);
-        } else if (code > 0x88) { // Vertical
-            const int width = w * (0x90 - code) / 8;
-            rect.setWidth(width);
-        }
-
-        paint.fillRect(rect, color);
-
-        return;
-    }
-
-    // Combinations of quarter squares
-    // LEFT ONE EIGHTH BLOCK to QUADRANT UPPER RIGHT AND LOWER LEFT AND LOWER RIGHT
-    if (code >= 0x96 && code <= 0x9F) {
-        bool upperLeft = false, upperRight = false,
-             lowerLeft = false, lowerRight = false;
-
-        switch(code) {
-        case 0x96:
-            lowerLeft = true;
-            break;
-        case 0x97:
-            lowerRight = true;
-            break;
-        case 0x98:
-            upperLeft = true;
-            break;
-        case 0x99:
-            upperLeft = true;
-            lowerLeft = true;
-            lowerRight = true;
-            break;
-        case 0x9a:
-            upperLeft = true;
-            lowerRight = true;
-            break;
-        case 0x9b:
-            upperLeft = true;
-            upperRight = true;
-            lowerLeft = true;
-            break;
-        case 0x9c:
-            upperLeft = true;
-            upperRight = true;
-            lowerRight = true;
-            break;
-        case 0x9d:
-            upperRight = true;
-            break;
-        case 0x9e:
-            upperRight = true;
-            lowerLeft = true;
-            break;
-        case 0x9f:
-            upperRight = true;
-            lowerLeft = true;
-            lowerRight = true;
-            break;
-        default:
-            break;
-        }
-
-        if (upperLeft) {
-            paint.fillRect(QRectF(QPointF(left, top), QPointF(cx, cy)), color);
-        }
-        if (upperRight) {
-            paint.fillRect(QRectF(QPointF(cx, top), QPointF(right, cy)), color);
-        }
-        if (lowerLeft) {
-            paint.fillRect(QRectF(QPointF(left, cy), QPointF(cx, bottom)), color);
-        }
-        if (lowerRight) {
-            paint.fillRect(QRectF(QPointF(cx, cy), QPointF(right, bottom)), color);
-        }
-
-        return;
-    }
-
-    // And the random stuff
-    switch(code) {
-    case 0x80: // Top half block
-        rect.setHeight(h / 2);
-        paint.fillRect(rect, color);
-        return;
-    case 0x90: // Right half block
-        paint.fillRect(QRectF(QPointF(cx, top), QPointF(right, bottom)), color);
-        return;
-    case 0x94: // Top one eighth block
-        rect.setHeight(h / 8);
-        paint.fillRect(rect, color);
-        return;
-    case 0x95: { // Right one eighth block
-        const float width = 7 * w / 8;
-        rect.setX(left + width);
-        rect.setWidth(w - width);
-        paint.fillRect(rect, color);
-        return;
-    }
-    case 0x91: // Light shade
-        paint.fillRect(rect, QBrush(color, Qt::Dense6Pattern));
-        return;
-    case 0x92: // Medium shade
-        paint.fillRect(rect, QBrush(color, Qt::Dense4Pattern));
-        return;
-    case 0x93: // Dark shade
-        paint.fillRect(rect, QBrush(color, Qt::Dense2Pattern));
-        return;
-
-    default:
-        break;
-    }
-}
-
 void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const QString& str,
         const Character* attributes)
 {
-    painter.save();
+    const bool useBoldPen = (attributes->rendition & RE_BOLD) != 0 && _boldIntense;
 
-    // For antialiasing, we need to shift it so the single pixel width is in the middle
-    painter.translate(0.5, 0.5);
-
-    if (((attributes->rendition & RE_BOLD) != 0) && _boldIntense) {
-        QPen boldPen(painter.pen());
-        boldPen.setWidth(4);
-        painter.setPen(boldPen);
-    }
-
-
+    QRect cellRect = {x, y, _fontWidth, _fontHeight};
     for (int i = 0 ; i < str.length(); i++) {
-        const uchar code = str[i].cell();
-
-        if (code >= 0x80 && code <= 0x9F) { // UPPER HALF BLOCK to QUADRANT UPPER RIGHT AND LOWER LEFT AND LOWER RIGHT
-            drawBlockChar(painter, x + (_fontWidth * i), y, _fontWidth, _fontHeight, code);
-        } else if (LineChars[code] != 0u) {
-            drawLineChar(painter, x + (_fontWidth * i), y, _fontWidth, _fontHeight, code);
-        } else {
-            drawOtherChar(painter, x + (_fontWidth * i), y, _fontWidth, _fontHeight, code);
-        }
+        LineBlockCharacters::draw(painter, cellRect.translated(i * _fontWidth, 0), str[i],
+                                        useBoldPen);
     }
-
-    painter.restore();
 }
 
 void TerminalDisplay::setKeyboardCursorShape(Enum::CursorShapeEnum shape)
@@ -1135,6 +770,9 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         painter.setPen(color);
     }
 
+    const bool origClipping = painter.hasClipping();
+    const auto origClipRegion = painter.clipRegion();
+    painter.setClipRect(rect);
     // draw text
     if (isLineCharString(text) && !_useFontLineCharacters) {
         drawLineCharString(painter, rect.x(), rect.y(), text, style);
@@ -1145,14 +783,14 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         // This still allows RTL characters to be rendered in the RTL way.
         painter.setLayoutDirection(Qt::LeftToRight);
 
-        painter.setClipRect(rect);
         if (_bidiEnabled) {
             painter.drawText(rect.x(), rect.y() + _fontAscent + _lineSpacing, text);
         } else {
             painter.drawText(rect.x(), rect.y() + _fontAscent + _lineSpacing, LTR_OVERRIDE_CHAR + text);
         }
-        painter.setClipping(false);
     }
+    painter.setClipRegion(origClipRegion);
+    painter.setClipping(origClipping);
 }
 
 void TerminalDisplay::drawTextFragment(QPainter& painter ,
@@ -1450,7 +1088,7 @@ void TerminalDisplay::updateImage()
                     if (newLine[x + 0].character == 0u) {
                         continue;
                     }
-                    const bool lineDraw = newLine[x + 0].isLineChar();
+                    const bool lineDraw = LineBlockCharacters::canDraw(newLine[x + 0].character);
                     const bool doubleWidth = (x + 1 == columnsToUpdate) ? false : (newLine[x + 1].character == 0);
                     const RenditionFlags cr = newLine[x].rendition;
                     const CharacterColor clipboard = newLine[x].backgroundColor;
@@ -1471,7 +1109,7 @@ void TerminalDisplay::updateImage()
                                 ch.backgroundColor != clipboard ||
                                 (ch.rendition & ~RE_EXTENDED_CHAR) != (cr & ~RE_EXTENDED_CHAR) ||
                                 (dirtyMask[x + len] == 0) ||
-                                ch.isLineChar() != lineDraw ||
+                                LineBlockCharacters::canDraw(ch.character) != lineDraw ||
                                 nextIsDoubleWidth != doubleWidth) {
                             break;
                         }
@@ -1874,7 +1512,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
                 }
             }
 
-            const bool lineDraw = _image[loc(x, y)].isLineChar();
+            const bool lineDraw = LineBlockCharacters::canDraw(_image[loc(x, y)].character);
             const bool doubleWidth = (_image[qMin(loc(x, y) + 1, _imageSize - 1)].character == 0);
             const CharacterColor currentForeground = _image[loc(x, y)].foregroundColor;
             const CharacterColor currentBackground = _image[loc(x, y)].backgroundColor;
