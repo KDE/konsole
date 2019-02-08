@@ -2657,10 +2657,12 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     int linesBeyondWidget = 0;
 
-    QRect textBounds(tLx + _contentRect.left(),
+    const QRect textBounds(tLx + _contentRect.left(),
                      tLy + _contentRect.top(),
                      _usedColumns * _fontWidth - 1,
                      _usedLines * _fontHeight - 1);
+
+    const QRect characterBounds(0, 0, _columns, _lines);
 
     QPoint pos = position;
 
@@ -2683,73 +2685,83 @@ void TerminalDisplay::extendSelection(const QPoint& position)
     int charLine = 0;
     getCharacterPosition(pos, charLine, charColumn, !_wordSelectionMode && !_lineSelectionMode);
 
-    QPoint here = QPoint(charColumn, charLine);
-    QPoint ohere;
-    QPoint selectionStart = _initialSelectionPoint;
-    selectionStart.ry() -= _scrollBar->value();
-    QPoint _pntSelCorr = _currentSelectionPoint;
-    _pntSelCorr.ry() -= _scrollBar->value();
+    const QPoint cursorPosition(charColumn, charLine);
+    QPoint selectionEnd = QPoint(charColumn, charLine);
+    QPoint selectionStart;
+    QPoint initialSelectionPoint = _initialSelectionPoint;
+    initialSelectionPoint.ry() -= _scrollBar->value();
+    QPoint currentSelectionPoint = _currentSelectionPoint;
+    currentSelectionPoint.ry() -= _scrollBar->value();
     bool swapping = false;
 
     if (_wordSelectionMode) {
         // Extend to word boundaries
-        const bool left_not_right = (here.y() < selectionStart.y() ||
-                                     (here.y() == selectionStart.y() && here.x() < selectionStart.x()));
-        const bool old_left_not_right = (_pntSelCorr.y() < selectionStart.y() ||
-                                         (_pntSelCorr.y() == selectionStart.y() && _pntSelCorr.x() < selectionStart.x()));
-        swapping = left_not_right != old_left_not_right;
+        const bool extendingLeft = (selectionEnd.y() < initialSelectionPoint.y() ||
+                                     (selectionEnd.y() == initialSelectionPoint.y() && selectionEnd.x() < initialSelectionPoint.x()));
+        const bool wasExtendingLeft = (currentSelectionPoint.y() < initialSelectionPoint.y() ||
+                                         (currentSelectionPoint.y() == initialSelectionPoint.y() && currentSelectionPoint.x() < initialSelectionPoint.x()));
+        swapping = extendingLeft != wasExtendingLeft;
 
         // Find left (left_not_right ? from here : from start of word)
-        QPoint left = left_not_right ? here : selectionStart;
+        QPoint wordStart = extendingLeft ? selectionEnd : initialSelectionPoint;
         // Find left (left_not_right ? from end of word : from here)
-        QPoint right = left_not_right ? selectionStart : here;
+        QPoint wordEnd = extendingLeft ? initialSelectionPoint : selectionEnd;
 
-        left = findWordStart(left);
-        right = findWordEnd(right);
+        if (characterBounds.contains(wordStart)) {
+            wordStart = findWordStart(wordStart);
+        } else {
+            wordStart = currentSelectionPoint;
+        }
+
+        if (characterBounds.contains(wordEnd)) {
+            wordEnd = findWordEnd(wordEnd);
+        } else {
+            wordEnd = currentSelectionPoint;
+        }
 
         // Pick which is start (ohere) and which is extension (here)
-        if (left_not_right) {
-            here = left;
-            ohere = right;
+        if (extendingLeft) {
+            selectionEnd = wordStart;
+            selectionStart = wordEnd;
         } else {
-            here = right;
-            ohere = left;
+            selectionEnd = wordEnd;
+            selectionStart = wordStart;
         }
-        ohere.rx()++;
+        selectionStart.rx()++;
     }
 
     if (_lineSelectionMode) {
         // Extend to complete line
-        const bool above_not_below = (here.y() < selectionStart.y());
+        const bool above_not_below = (selectionEnd.y() < initialSelectionPoint.y());
         if (above_not_below) {
-            ohere = findLineEnd(selectionStart);
-            here = findLineStart(here);
+            selectionStart = findLineEnd(initialSelectionPoint);
+            selectionEnd = findLineStart(selectionEnd);
         } else {
-            ohere = findLineStart(selectionStart);
-            here = findLineEnd(here);
+            selectionStart = findLineStart(initialSelectionPoint);
+            selectionEnd = findLineEnd(selectionEnd);
         }
 
-        swapping = !(_tripleSelBegin == ohere);
-        _tripleSelBegin = ohere;
+        swapping = !(_tripleSelBegin == selectionStart);
+        _tripleSelBegin = selectionStart;
 
-        ohere.rx()++;
+        selectionStart.rx()++;
     }
 
     int offset = 0;
     if (!_wordSelectionMode && !_lineSelectionMode) {
         QChar selClass;
 
-        const bool left_not_right = (here.y() < selectionStart.y() ||
-                                     (here.y() == selectionStart.y() && here.x() < selectionStart.x()));
-        const bool old_left_not_right = (_pntSelCorr.y() < selectionStart.y() ||
-                                         (_pntSelCorr.y() == selectionStart.y() && _pntSelCorr.x() < selectionStart.x()));
+        const bool left_not_right = (selectionEnd.y() < initialSelectionPoint.y() ||
+                                     (selectionEnd.y() == initialSelectionPoint.y() && selectionEnd.x() < initialSelectionPoint.x()));
+        const bool old_left_not_right = (currentSelectionPoint.y() < initialSelectionPoint.y() ||
+                                         (currentSelectionPoint.y() == initialSelectionPoint.y() && currentSelectionPoint.x() < initialSelectionPoint.x()));
         swapping = left_not_right != old_left_not_right;
 
         // Find left (left_not_right ? from here : from start)
-        const QPoint left = left_not_right ? here : selectionStart;
+        const QPoint left = left_not_right ? selectionEnd : initialSelectionPoint;
 
         // Find left (left_not_right ? from start : from here)
-        QPoint right = left_not_right ? selectionStart : here;
+        QPoint right = left_not_right ? initialSelectionPoint : selectionEnd;
         if (right.x() > 0 && !_columnSelectionMode) {
             if (right.x() - 1 < _columns && right.y() < _lines) {
                 selClass = charClass(_image[loc(right.x() - 1, right.y())]);
@@ -2758,40 +2770,40 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
         // Pick which is start (ohere) and which is extension (here)
         if (left_not_right) {
-            here = left;
-            ohere = right;
+            selectionEnd = left;
+            selectionStart = right;
             offset = 0;
         } else {
-            here = right;
-            ohere = left;
+            selectionEnd = right;
+            selectionStart = left;
             offset = -1;
         }
     }
 
-    if ((here == _pntSelCorr) && (scroll == _scrollBar->value())) {
+    if ((selectionEnd == currentSelectionPoint) && (scroll == _scrollBar->value())) {
         return; // not moved
     }
 
-    if (here == ohere) {
+    if (selectionEnd == selectionStart) {
         return; // It's not left, it's not right.
     }
 
     if (_actSel < 2 || swapping) {
         if (_columnSelectionMode && !_lineSelectionMode && !_wordSelectionMode) {
-            _screenWindow->setSelectionStart(ohere.x() , ohere.y() , true);
+            _screenWindow->setSelectionStart(selectionStart.x() , selectionStart.y() , true);
         } else {
-            _screenWindow->setSelectionStart(ohere.x() - 1 - offset , ohere.y() , false);
+            _screenWindow->setSelectionStart(selectionStart.x() - 1 - offset , selectionStart.y() , false);
         }
     }
 
     _actSel = 2; // within selection
-    _currentSelectionPoint = here;
+    _currentSelectionPoint = selectionEnd;
     _currentSelectionPoint.ry() += _scrollBar->value();
 
     if (_columnSelectionMode && !_lineSelectionMode && !_wordSelectionMode) {
-        _screenWindow->setSelectionEnd(here.x() , here.y());
+        _screenWindow->setSelectionEnd(selectionEnd.x() , selectionEnd.y());
     } else {
-        _screenWindow->setSelectionEnd(here.x() + offset , here.y());
+        _screenWindow->setSelectionEnd(selectionEnd.x() + offset , selectionEnd.y());
     }
 }
 
@@ -3103,6 +3115,7 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
     int imgLine = pnt.y();
 
     if (imgLine < 0 || imgLine >= _lines) {
+        qDebug() << imgLine;
         return pnt;
     }
 
@@ -3165,6 +3178,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
 
     // The selection is already scrolled out of view, so assume it is already at a boundary
     if (line < 0 || line >= _lines) {
+        qDebug() << line;
         return pnt;
     }
 
@@ -3181,17 +3195,16 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
     QChar nextClass;
 
     const int imageSize = regSize * _columns;
-    const int maxY = _screenWindow->lineCount() - 1;
+    const int maxY = _screenWindow->lineCount();
     const int maxX = _columns - 1;
 
-    qDebug() << maxY << maxX << x << y;
     while (x >= 0 && line >= 0) {
         imgPos = loc(x, line);
 
         const int visibleLinesCount = lineProperties.count();
         bool changedClass = false;
 
-        for (;y < maxY && line < visibleLinesCount;imgPos++, x++) {
+        for (;y < maxY && line < visibleLinesCount - 1;imgPos++, x++) {
             curClass = charClass(image[imgPos + 1]);
             nextClass = charClass(image[imgPos + 2]);
 
@@ -3200,7 +3213,6 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
                 !(image[imgPos + 1].character == ':' && nextClass == QLatin1Char(' '));
 
             if (changedClass) {
-                qDebug() << curClass << selClass;
                 break;
             }
 
@@ -3216,17 +3228,16 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
         }
 
         if (changedClass) {
-            qDebug() <<  "changed class";
+//            qDebug() << "Changed class";
             break;
         }
 
         if (line < visibleLinesCount && ((lineProperties[line] & LINE_WRAPPED) == 0)) {
-            qDebug() << "Line not break";
+//            qDebug() << "Not wrapped" << x;
             break;
         }
 
         const int newRegEnd = qMin(y + regSize - 1, maxY - 1);
-        qDebug() << "newrgaend" << newRegEnd << (y + regSize) << maxY << x;
         lineProperties = screen->getLineProperties(y, newRegEnd);
         if (!tempImage) {
             tempImage.reset(new Character[imageSize]);
@@ -3235,6 +3246,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
         screen->getImage(tempImage.get(), imageSize, y, newRegEnd);
 
         line = 0;
+//        qDebug() << x;
 //        x--;
     }
 
