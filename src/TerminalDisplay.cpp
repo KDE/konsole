@@ -2696,6 +2696,8 @@ void TerminalDisplay::extendSelection(const QPoint& position)
     previousSelectionPoint.ry() -= _scrollBar->value();
     bool swapping = false;
 
+    int offset = 0;
+
     if (_wordSelectionMode) {
         // Extend to word boundaries
         const bool extendingLeft = (selectionEnd.y() < initialSelectionBegin.y() ||
@@ -2704,7 +2706,6 @@ void TerminalDisplay::extendSelection(const QPoint& position)
                                          (previousSelectionPoint.y() == initialSelectionBegin.y() && previousSelectionPoint.x() < initialSelectionBegin.x()));
         swapping = extendingLeft != wasExtendingLeft;
 
-
         if (extendingLeft) {
             selectionEnd = findWordStart(cursorPosition);
             selectionStart = initialSelectionEnd;
@@ -2712,24 +2713,28 @@ void TerminalDisplay::extendSelection(const QPoint& position)
             selectionEnd = findWordEnd(cursorPosition);
             selectionStart = initialSelectionBegin;
         }
+
+        selectionStart.rx()++;
     }
 
     if (_lineSelectionMode) {
         // Extend to complete line
-        const bool above_not_below = (selectionEnd.y() < initialSelectionBegin.y());
-        if (above_not_below) {
-            selectionStart = initialSelectionEnd;
+        const bool extendingUpwards = (selectionEnd.y() < initialSelectionBegin.y());
+        const bool wasExtendingUpwards = (previousSelectionPoint.y() < initialSelectionBegin.y());
+        swapping = extendingUpwards != wasExtendingUpwards;
+        if (extendingUpwards) {
             selectionEnd = findLineStart(selectionEnd);
+            selectionStart = initialSelectionEnd;
         } else {
             selectionStart = initialSelectionBegin;
             selectionEnd = findLineEnd(selectionEnd);
         }
 
-        swapping = !(_tripleSelBegin == selectionStart);
         _tripleSelBegin = selectionStart;
+
+        selectionStart.rx()++;
     }
 
-    int offset = 0;
     if (!_wordSelectionMode && !_lineSelectionMode) {
         QChar selClass;
 
@@ -2758,7 +2763,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         } else {
             selectionEnd = right;
             selectionStart = left;
-//            offset = -1;
+            offset = -1;
         }
     }
 
@@ -2774,8 +2779,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         if (_columnSelectionMode && !_lineSelectionMode && !_wordSelectionMode) {
             _screenWindow->setSelectionStart(selectionStart.x() , selectionStart.y() , true);
         } else {
-            _screenWindow->setSelectionStart(selectionStart.x() - offset , selectionStart.y() , false);
-//            _screenWindow->setSelectionStart(selectionStart.x() - 1 - offset , selectionStart.y() , false);
+            _screenWindow->setSelectionStart(selectionStart.x() - 1 - offset , selectionStart.y() , false);
         }
     }
 
@@ -2914,8 +2918,8 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
     }
 
     _screenWindow->clearSelection();
-    _initialSelectionPoint = pos;
-    _initialSelectionPoint.ry() += _scrollBar->value();
+    _currentSelectionPoint = pos;
+    _currentSelectionPoint.ry() += _scrollBar->value();
 
     _wordSelectionMode = true;
     _actSel = 2; // within selection
@@ -2932,11 +2936,9 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
         _screenWindow->setSelectionEnd(endSel.x() , endSel.y());
 
         _initialSelectionPoint = bgnSel;
-//        _initialSelectionPoint.rx()++;
         _initialSelectionPoint.ry() += _scrollBar->value();
 
         _initialSelectionEnd = endSel;
-//        _initialSelectionEnd.rx()--;
         _initialSelectionEnd.ry() += _scrollBar->value();
 
         copyToX11Selection();
@@ -3295,22 +3297,23 @@ void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
     _actSel = 2; // within selection
 
     if (!entireLine) { // Select from cursor to end of line
-        _tripleSelBegin = findWordStart(_initialSelectionPoint);
+        _tripleSelBegin = findWordStart(pos);
         _screenWindow->setSelectionStart(_tripleSelBegin.x(),
                                          _tripleSelBegin.y() , false);
     } else {
-        _tripleSelBegin = findLineStart(_initialSelectionPoint);
+        _tripleSelBegin = findLineStart(pos);
         _screenWindow->setSelectionStart(0 , _tripleSelBegin.y() , false);
     }
 
-    _initialSelectionPoint = findLineEnd(_initialSelectionPoint);
-    _initialSelectionEnd = findLineStart(_initialSelectionPoint);
+    _initialSelectionPoint = findLineStart(_initialSelectionPoint);
+    _initialSelectionEnd = findLineEnd(pos);
 
-    _screenWindow->setSelectionEnd(_initialSelectionPoint.x() , _initialSelectionPoint.y());
+    _screenWindow->setSelectionEnd(_initialSelectionEnd.x() , _initialSelectionEnd.y());
 
     copyToX11Selection();
 
     _initialSelectionPoint.ry() += _scrollBar->value();
+    _initialSelectionEnd.ry() += _scrollBar->value();
 }
 
 void TerminalDisplay::selectCurrentLine()
