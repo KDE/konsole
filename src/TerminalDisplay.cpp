@@ -3108,7 +3108,6 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
     int imgLine = pnt.y();
 
     if (imgLine < 0 || imgLine >= _lines) {
-        qDebug() << imgLine;
         return pnt;
     }
 
@@ -3171,7 +3170,6 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
 
     // The selection is already scrolled out of view, so assume it is already at a boundary
     if (line < 0 || line >= _lines) {
-        qDebug() << line;
         return pnt;
     }
 
@@ -3197,7 +3195,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
         const int visibleLinesCount = lineProperties.count();
         bool changedClass = false;
 
-        for (;y < maxY && line < visibleLinesCount - 1;imgPos++, x++) {
+        for (;y < maxY && line < visibleLinesCount; imgPos++, x++) {
             curClass = charClass(image[imgPos + 1]);
             nextClass = charClass(image[imgPos + 2]);
 
@@ -3237,8 +3235,6 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
         screen->getImage(tempImage.get(), imageSize, y, newRegEnd);
 
         line = 0;
-//        qDebug() << x;
-//        x--;
     }
 
     y -= curLine;
