@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE xbel>
+<xbel dbusName="KonsoleTest" xmlns:kdepriv="http://www.kde.org/kdepriv" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info" folded="no" xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks">
+ <bookmark href="ssh machine">
+  <title>machine</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="www"/>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="ssh machine %7C tee -a /var/log/system.log">
+  <title>machine system.log</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="www"/>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///home/user/a%CE%BA%E1%BD%B9%CF%83%CE%BC%CE%B5">
+  <title>folder</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="utilities-terminal"/>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="isql-fb -u sysdba -p example %22test%22">
+  <title>double quote</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="utilities-terminal"/>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="isql-fb -u sysdba -p example 'test'">
+  <title>single quote</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="utilities-terminal"/>
+   </metadata>
+  </info>
+ </bookmark>
+</xbel>

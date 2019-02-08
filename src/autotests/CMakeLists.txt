@@ -5,6 +5,12 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 set(KONSOLE_TEST_LIBS Qt5::Test konsoleprivate)
 
+add_executable(BookMarkTest BookMarkTest.cpp)
+ecm_mark_as_test(BookMarkTest)
+ecm_mark_nongui_executable(BookMarkTest)
+add_test(BookMarkTest BookMarkTest)
+target_link_libraries(BookMarkTest ${KONSOLE_TEST_LIBS})
+
 add_executable(CharacterColorTest CharacterColorTest.cpp)
 ecm_mark_as_test(CharacterColorTest)
 ecm_mark_nongui_executable(CharacterColorTest)
