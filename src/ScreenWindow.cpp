@@ -22,6 +22,9 @@
 
 // Konsole
 #include "Screen.h"
+#include "ExtendedCharTable.h"
+
+#include <memory>
 
 using namespace Konsole;
 
@@ -102,6 +105,16 @@ void ScreenWindow::fillUnusedArea()
     Screen::fillWithDefaultChar(_windowBuffer + _windowBufferSize - charsToFill, charsToFill);
 }
 
+int ScreenWindow::loc(int x, int y) const
+{
+    Q_ASSERT(y >= 0 && y < lineCount());
+    Q_ASSERT(x >= 0 && x < columnCount());
+    x = qBound(0, x, columnCount() - 1);
+    y = qBound(0, y, lineCount() - 1);
+
+    return y * columnCount() + x;
+}
+
 // return the index of the line at the end of this window, or if this window
 // goes beyond the end of the screen, the index of the line at the end
 // of the screen.
@@ -129,6 +142,253 @@ QVector<LineProperty> ScreenWindow::getLineProperties()
 QString ScreenWindow::selectedText(const Screen::DecodingOptions options) const
 {
     return _screen->selectedText(options);
+}
+
+QPoint ScreenWindow::findLineStart(const QPoint &pnt)
+{
+    QVector<LineProperty> lineProperties = getLineProperties();
+
+    const int visibleScreenLines = lineProperties.size();
+    const int topVisibleLine = currentLine();
+    int line = pnt.y();
+    int lineInHistory= line + topVisibleLine;
+
+
+    while (lineInHistory > 0) {
+        for (; line > 0; line--, lineInHistory--) {
+            // Does previous line wrap around?
+            if ((lineProperties[line - 1] & LINE_WRAPPED) == 0) {
+                return {0, lineInHistory - topVisibleLine};
+            }
+        }
+
+        if (lineInHistory < 1) {
+            break;
+        }
+
+        // _lineProperties is only for the visible screen, so grab new data
+        int newRegionStart = qMax(0, lineInHistory - visibleScreenLines);
+        lineProperties = _screen->getLineProperties(newRegionStart, lineInHistory - 1);
+        line = lineInHistory - newRegionStart;
+    }
+
+    return {0, lineInHistory - topVisibleLine};
+}
+
+QPoint ScreenWindow::findLineEnd(const QPoint &pnt)
+{
+    QVector<LineProperty> lineProperties = getLineProperties();
+
+    const int visibleScreenLines = lineProperties.size();
+    const int topVisibleLine = currentLine();
+    const int maxY = lineCount() - 1;
+    int line = pnt.y();
+    int lineInHistory= line + topVisibleLine;
+
+    while (lineInHistory < maxY) {
+        for (; line < lineProperties.count() && lineInHistory < maxY; line++, lineInHistory++) {
+            // Does current line wrap around?
+            if ((lineProperties[line] & LINE_WRAPPED) == 0) {
+                return {columnCount() - 1, lineInHistory - topVisibleLine};
+            }
+        }
+
+        line = 0;
+        lineProperties = _screen->getLineProperties(lineInHistory, qMin(lineInHistory + visibleScreenLines, maxY));
+    }
+    return {columnCount() - 1, lineInHistory - topVisibleLine};
+}
+
+QPoint ScreenWindow::findWordStart(const QPoint &pnt)
+{
+    const int regSize = qMax(windowLines(), 10);
+    const int firstVisibleLine = currentLine();
+
+    Character *image = getImage();
+    std::unique_ptr<Character[]> tempImage;
+
+    int imgLine = pnt.y();
+
+    if (imgLine < 0 || imgLine >= lineCount()) {
+        return pnt;
+    }
+
+    int x = pnt.x();
+    int y = imgLine + firstVisibleLine;
+    int imgLoc = loc(x, imgLine);
+    QVector<LineProperty> lineProperties = getLineProperties();
+    const QChar selClass = charClass(image[imgLoc]);
+    const int imageSize = regSize * columnCount();
+
+    while (imgLoc >= 0) {
+        for (; imgLoc > 0 && imgLine >= 0; imgLoc--, x--) {
+            const QChar &curClass = charClass(image[imgLoc - 1]);
+            if (curClass != selClass) {
+                return {x, y - firstVisibleLine};
+            }
+
+            // has previous char on this line
+            if (x > 0) {
+                continue;
+            }
+
+            // not the first line in the session
+            if ((lineProperties[imgLine - 1] & LINE_WRAPPED) == 0) {
+                return {x, y - firstVisibleLine};
+            }
+
+            // have continuation on prev line
+            x = columnCount();
+            imgLine--;
+            y--;
+        }
+
+        if (y <= 0) {
+            return {x, y - firstVisibleLine};
+        }
+
+        // Fetch new region
+        const int newRegStart = qMax(y - regSize + 1, 0);
+        lineProperties = _screen->getLineProperties(newRegStart, y - 1);
+        imgLine = y - newRegStart;
+
+        if (!tempImage) {
+            tempImage.reset(new Character[imageSize]);
+            image = tempImage.get();
+        }
+
+        _screen->getImage(image, imageSize, newRegStart, y - 1);
+        imgLoc = loc(x, imgLine);
+    }
+
+    return {x, y - firstVisibleLine};
+
+}
+
+QPoint ScreenWindow::findWordEnd(const QPoint &pnt)
+{
+    const int regSize = qMax(windowLines(), 10);
+    const int curLine = currentLine();
+    int line = pnt.y();
+
+    // The selection is already scrolled out of view, so assume it is already at a boundary
+    if (line < 0 || line >= lineCount()) {
+        return pnt;
+    }
+
+    int x = pnt.x();
+    int y = line + curLine;
+    QVector<LineProperty> lineProperties = getLineProperties();
+    Character *image = getImage();
+    std::unique_ptr<Character[]> tempImage;
+
+    int imgPos = loc(x, line);
+    const QChar selClass = charClass(image[imgPos]);
+    QChar curClass;
+    QChar nextClass;
+
+    const int imageSize = regSize * columnCount();
+    const int maxY = lineCount();
+    const int maxX = columnCount() - 1;
+
+    while (x >= 0 && line >= 0) {
+        imgPos = loc(x, line);
+
+        const int visibleLinesCount = lineProperties.count();
+        bool changedClass = false;
+
+        for (;y < maxY && line < visibleLinesCount; imgPos++, x++) {
+            curClass = charClass(image[imgPos + 1]);
+            nextClass = charClass(image[imgPos + 2]);
+
+            changedClass = curClass != selClass &&
+                // A colon right before whitespace is never part of a word
+                !(image[imgPos + 1].character == ':' && nextClass == QLatin1Char(' '));
+
+            if (changedClass) {
+                break;
+            }
+
+            if (x >= maxX) {
+                if ((lineProperties[line] & LINE_WRAPPED) == 0) {
+                    break;
+                }
+
+                line++;
+                y++;
+                x = -1;
+            }
+        }
+
+        if (changedClass) {
+            break;
+        }
+
+        if (line < visibleLinesCount && ((lineProperties[line] & LINE_WRAPPED) == 0)) {
+            break;
+        }
+
+        const int newRegEnd = qMin(y + regSize - 1, maxY - 1);
+        lineProperties = _screen->getLineProperties(y, newRegEnd);
+        if (!tempImage) {
+            tempImage.reset(new Character[imageSize]);
+            image = tempImage.get();
+        }
+        _screen->getImage(tempImage.get(), imageSize, y, newRegEnd);
+
+        line = 0;
+    }
+
+    y -= curLine;
+    // In word selection mode don't select @ (64) if at end of word.
+    if (((image[imgPos].rendition & RE_EXTENDED_CHAR) == 0) &&
+        (QChar(image[imgPos].character) == QLatin1Char('@')) &&
+        (y > pnt.y() || x > pnt.x())) {
+        if (x > 0) {
+            x--;
+        } else {
+            y--;
+        }
+    }
+
+    return {x, y};
+
+}
+
+QChar ScreenWindow::charClass(const Character &ch) const
+{
+    if ((ch.rendition & RE_EXTENDED_CHAR) != 0) {
+        ushort extendedCharLength = 0;
+        const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
+        if ((chars != nullptr) && extendedCharLength > 0) {
+            const QString s = QString::fromUcs4(chars, extendedCharLength);
+            if (_wordCharacters.contains(s, Qt::CaseInsensitive)) {
+                return QLatin1Char('a');
+            }
+            bool letterOrNumber = false;
+            for (int i = 0; !letterOrNumber && i < s.size(); ++i) {
+                letterOrNumber = s.at(i).isLetterOrNumber();
+            }
+            return letterOrNumber ? QLatin1Char('a') : s.at(0);
+        }
+        return 0;
+    } else {
+        const QChar qch(ch.character);
+        if (qch.isSpace()) {
+            return QLatin1Char(' ');
+        }
+
+        if (qch.isLetterOrNumber() || _wordCharacters.contains(qch, Qt::CaseInsensitive)) {
+            return QLatin1Char('a');
+        }
+
+        return qch;
+    }
+}
+
+void ScreenWindow::setWordCharacters(const QString &wc)
+{
+    _wordCharacters = wc;
 }
 
 void ScreenWindow::getSelectionStart(int &column, int &line)

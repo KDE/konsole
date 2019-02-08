@@ -354,16 +354,6 @@ public:
      * of a word ( in addition to letters and numbers ).
      */
     void setWordCharacters(const QString &wc);
-    /**
-     * Returns the characters which are considered part of a word for the
-     * purpose of selecting words in the display with the mouse.
-     *
-     * @see setWordCharacters()
-     */
-    QString wordCharacters() const
-    {
-        return _wordCharacters;
-    }
 
     /**
      * Sets the type of effect used to alert the user when a 'bell' occurs in the
@@ -779,14 +769,6 @@ protected:
         QDrag *dragObject;
     } _dragInfo;
 
-    // classifies the 'ch' into one of three categories
-    // and returns a character to indicate which category it is in
-    //
-    //     - A space (returns ' ')
-    //     - Part of a word (returns 'a')
-    //     - Other characters (returns the input character)
-    QChar charClass(const Character &ch) const;
-
     void clearImage();
 
     void mouseTripleClickEvent(QMouseEvent *ev);
@@ -907,11 +889,6 @@ private:
     void doPaste(QString text, bool appendReturn);
 
     void processMidButtonClick(QMouseEvent *ev);
-
-    QPoint findLineStart(const QPoint &pnt);
-    QPoint findLineEnd(const QPoint &pnt);
-    QPoint findWordStart(const QPoint &pnt);
-    QPoint findWordEnd(const QPoint &pnt);
 
     // Uses the current settings for trimming whitespace and preserving linebreaks to create a proper flag value for Screen
     Screen::DecodingOptions currentDecodingOptions();

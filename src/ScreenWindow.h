@@ -231,6 +231,44 @@ public:
      */
     QString selectedText(const Screen::DecodingOptions options) const;
 
+
+    /**
+     * Moving left/up from the line containing pnt, return the starting
+     * offset point which the given line is continuously wrapped
+     * (top left corner = 0,0; previous line not visible = 0,-1).
+     */
+    QPoint findLineStart(const QPoint &pnt);
+
+    /**
+     * Moving right/down from the line containing pnt, return the ending
+     * offset point which the given line is continuously wrapped.
+     */
+    QPoint findLineEnd(const QPoint &pnt);
+
+    QPoint findWordStart(const QPoint &pnt);
+    QPoint findWordEnd(const QPoint &pnt);
+
+    // classifies the 'ch' into one of three categories
+    // and returns a character to indicate which category it is in
+    //
+    //     - A space (returns ' ')
+    //     - Part of a word (returns 'a')
+    //     - Other characters (returns the input character)
+    QChar charClass(const Character &ch) const;
+
+    /**
+     * Sets which characters, in addition to letters and numbers,
+     * are regarded as being part of a word for the purposes
+     * of selecting words in the display by double clicking on them.
+     *
+     * The word boundaries occur at the first and last characters which
+     * are either a letter, number, or a character in @p wc
+     *
+     * @param wc An array of characters which are to be considered parts
+     * of a word ( in addition to letters and numbers ).
+     */
+    void setWordCharacters(const QString &wc);
+
 public Q_SLOTS:
     /**
      * Notifies the window that the contents of the associated terminal screen have changed.
@@ -262,6 +300,7 @@ private:
 
     int endWindowLine() const;
     void fillUnusedArea();
+    int loc(int x, int y) const;
 
     Screen *_screen; // see setScreen() , screen()
     Character *_windowBuffer;
@@ -273,6 +312,7 @@ private:
     int _currentResultLine;
     bool _trackOutput; // see setTrackOutput() , trackOutput()
     int _scrollCount;  // count of lines which the window has been scrolled by since
+    QString _wordCharacters;
     // the last call to resetScrollCount()
 };
 }

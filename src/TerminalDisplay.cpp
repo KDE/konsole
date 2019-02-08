@@ -131,6 +131,7 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
             _filterUpdateRequired = true;
         });
         _screenWindow->setWindowLines(_lines);
+        _screenWindow->setWordCharacters(_wordCharacters);
     }
 }
 
@@ -2707,10 +2708,10 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         swapping = extendingLeft != wasExtendingLeft;
 
         if (extendingLeft) {
-            selectionEnd = findWordStart(cursorPosition);
+            selectionEnd = _screenWindow->findWordStart(cursorPosition);
             selectionStart = initialSelectionEnd;
         } else {
-            selectionEnd = findWordEnd(cursorPosition);
+            selectionEnd = _screenWindow->findWordEnd(cursorPosition);
             selectionStart = initialSelectionBegin;
         }
 
@@ -2723,11 +2724,11 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         const bool wasExtendingUpwards = (previousSelectionPoint.y() < initialSelectionBegin.y());
         swapping = extendingUpwards != wasExtendingUpwards;
         if (extendingUpwards) {
-            selectionEnd = findLineStart(selectionEnd);
+            selectionEnd = _screenWindow->findLineStart(selectionEnd);
             selectionStart = initialSelectionEnd;
         } else {
             selectionStart = initialSelectionBegin;
-            selectionEnd = findLineEnd(selectionEnd);
+            selectionEnd = _screenWindow->findLineEnd(selectionEnd);
         }
 
         _tripleSelBegin = selectionStart;
@@ -2751,7 +2752,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         QPoint right = extendingLeft ? initialSelectionBegin : selectionEnd;
         if (right.x() > 0 && !_columnSelectionMode) {
             if (right.x() - 1 < _columns && right.y() < _lines) {
-                selClass = charClass(_image[loc(right.x() - 1, right.y())]);
+                selClass = _screenWindow->charClass(_image[loc(right.x() - 1, right.y())]);
             }
         }
 
@@ -2927,8 +2928,8 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
     // find word boundaries...
     {
         // find the start of the word
-        const QPoint bgnSel = findWordStart(pos);
-        const QPoint endSel = findWordEnd(pos);
+        const QPoint bgnSel = _screenWindow->findWordStart(pos);
+        const QPoint endSel = _screenWindow->findWordEnd(pos);
 
         _actSel = 2; // within selection
 
@@ -3034,224 +3035,6 @@ void TerminalDisplay::viewScrolledByUser()
     _sessionController->setSearchStartToWindowCurrentLine();
 }
 
-/* Moving left/up from the line containing pnt, return the starting
-   offset point which the given line is continuously wrapped
-   (top left corner = 0,0; previous line not visible = 0,-1).
-*/
-QPoint TerminalDisplay::findLineStart(const QPoint &pnt)
-{
-    const int visibleScreenLines = _lineProperties.size();
-    const int topVisibleLine = _screenWindow->currentLine();
-    Screen *screen = _screenWindow->screen();
-    int line = pnt.y();
-    int lineInHistory= line + topVisibleLine;
-
-    QVector<LineProperty> lineProperties = _lineProperties;
-
-    while (lineInHistory > 0) {
-        for (; line > 0; line--, lineInHistory--) {
-            // Does previous line wrap around?
-            if ((lineProperties[line - 1] & LINE_WRAPPED) == 0) {
-                return {0, lineInHistory - topVisibleLine};
-            }
-        }
-
-        if (lineInHistory < 1) {
-            break;
-        }
-
-        // _lineProperties is only for the visible screen, so grab new data
-        int newRegionStart = qMax(0, lineInHistory - visibleScreenLines);
-        lineProperties = screen->getLineProperties(newRegionStart, lineInHistory - 1);
-        line = lineInHistory - newRegionStart;
-    }
-    return {0, lineInHistory - topVisibleLine};
-}
-
-/* Moving right/down from the line containing pnt, return the ending
-   offset point which the given line is continuously wrapped.
-*/
-QPoint TerminalDisplay::findLineEnd(const QPoint &pnt)
-{
-    const int visibleScreenLines = _lineProperties.size();
-    const int topVisibleLine = _screenWindow->currentLine();
-    const int maxY = _screenWindow->lineCount() - 1;
-    Screen *screen = _screenWindow->screen();
-    int line = pnt.y();
-    int lineInHistory= line + topVisibleLine;
-
-    QVector<LineProperty> lineProperties = _lineProperties;
-
-    while (lineInHistory < maxY) {
-        for (; line < lineProperties.count() && lineInHistory < maxY; line++, lineInHistory++) {
-            // Does current line wrap around?
-            if ((lineProperties[line] & LINE_WRAPPED) == 0) {
-                return {_columns - 1, lineInHistory - topVisibleLine};
-            }
-        }
-
-        line = 0;
-        lineProperties = screen->getLineProperties(lineInHistory, qMin(lineInHistory + visibleScreenLines, maxY));
-    }
-    return {_columns - 1, lineInHistory - topVisibleLine};
-}
-
-QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
-{
-    const int regSize = qMax(_screenWindow->windowLines(), 10);
-    const int firstVisibleLine = _screenWindow->currentLine();
-
-    Screen *screen = _screenWindow->screen();
-    Character *image = _image;
-    std::unique_ptr<Character[]> tempImage;
-
-    int imgLine = pnt.y();
-
-    if (imgLine < 0 || imgLine >= _lines) {
-        return pnt;
-    }
-
-    int x = pnt.x();
-    int y = imgLine + firstVisibleLine;
-    int imgLoc = loc(x, imgLine);
-    QVector<LineProperty> lineProperties = _lineProperties;
-    const QChar selClass = charClass(image[imgLoc]);
-    const int imageSize = regSize * _columns;
-
-    while (imgLoc >= 0) {
-        for (; imgLoc > 0 && imgLine >= 0; imgLoc--, x--) {
-            const QChar &curClass = charClass(image[imgLoc - 1]);
-            if (curClass != selClass) {
-                return {x, y - firstVisibleLine};
-            }
-
-            // has previous char on this line
-            if (x > 0) {
-                continue;
-            }
-
-            // not the first line in the session
-            if ((lineProperties[imgLine - 1] & LINE_WRAPPED) == 0) {
-                return {x, y - firstVisibleLine};
-            }
-
-            // have continuation on prev line
-            x = _columns;
-            imgLine--;
-            y--;
-        }
-
-        if (y <= 0) {
-            return {x, y - firstVisibleLine};
-        }
-
-        // Fetch new region
-        const int newRegStart = qMax(y - regSize + 1, 0);
-        lineProperties = screen->getLineProperties(newRegStart, y - 1);
-        imgLine = y - newRegStart;
-
-        if (!tempImage) {
-            tempImage.reset(new Character[imageSize]);
-            image = tempImage.get();
-        }
-
-        screen->getImage(image, imageSize, newRegStart, y - 1);
-        imgLoc = loc(x, imgLine);
-    }
-
-    return {x, y - firstVisibleLine};
-}
-
-QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
-{
-    const int regSize = qMax(_screenWindow->windowLines(), 10);
-    const int curLine = _screenWindow->currentLine();
-    int line = pnt.y();
-
-    // The selection is already scrolled out of view, so assume it is already at a boundary
-    if (line < 0 || line >= _lines) {
-        return pnt;
-    }
-
-    int x = pnt.x();
-    int y = line + curLine;
-    QVector<LineProperty> lineProperties = _lineProperties;
-    Screen *screen = _screenWindow->screen();
-    Character *image = _image;
-    std::unique_ptr<Character[]> tempImage;
-
-    int imgPos = loc(x, line);
-    const QChar selClass = charClass(image[imgPos]);
-    QChar curClass;
-    QChar nextClass;
-
-    const int imageSize = regSize * _columns;
-    const int maxY = _screenWindow->lineCount();
-    const int maxX = _columns - 1;
-
-    while (x >= 0 && line >= 0) {
-        imgPos = loc(x, line);
-
-        const int visibleLinesCount = lineProperties.count();
-        bool changedClass = false;
-
-        for (;y < maxY && line < visibleLinesCount; imgPos++, x++) {
-            curClass = charClass(image[imgPos + 1]);
-            nextClass = charClass(image[imgPos + 2]);
-
-            changedClass = curClass != selClass &&
-                // A colon right before whitespace is never part of a word
-                !(image[imgPos + 1].character == ':' && nextClass == QLatin1Char(' '));
-
-            if (changedClass) {
-                break;
-            }
-
-            if (x >= maxX) {
-                if ((lineProperties[line] & LINE_WRAPPED) == 0) {
-                    break;
-                }
-
-                line++;
-                y++;
-                x = -1;
-            }
-        }
-
-        if (changedClass) {
-            break;
-        }
-
-        if (line < visibleLinesCount && ((lineProperties[line] & LINE_WRAPPED) == 0)) {
-            break;
-        }
-
-        const int newRegEnd = qMin(y + regSize - 1, maxY - 1);
-        lineProperties = screen->getLineProperties(y, newRegEnd);
-        if (!tempImage) {
-            tempImage.reset(new Character[imageSize]);
-            image = tempImage.get();
-        }
-        screen->getImage(tempImage.get(), imageSize, y, newRegEnd);
-
-        line = 0;
-    }
-
-    y -= curLine;
-    // In word selection mode don't select @ (64) if at end of word.
-    if (((image[imgPos].rendition & RE_EXTENDED_CHAR) == 0) &&
-        (QChar(image[imgPos].character) == QLatin1Char('@')) &&
-        (y > pnt.y() || x > pnt.x())) {
-        if (x > 0) {
-            x--;
-        } else {
-            y--;
-        }
-    }
-
-    return {x, y};
-}
-
 Screen::DecodingOptions TerminalDisplay::currentDecodingOptions()
 {
     Screen::DecodingOptions decodingOptions;
@@ -3293,16 +3076,16 @@ void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
     _actSel = 2; // within selection
 
     if (!entireLine) { // Select from cursor to end of line
-        _tripleSelBegin = findWordStart(pos);
+        _tripleSelBegin = _screenWindow->findWordStart(pos);
         _screenWindow->setSelectionStart(_tripleSelBegin.x(),
                                          _tripleSelBegin.y() , false);
     } else {
-        _tripleSelBegin = findLineStart(pos);
+        _tripleSelBegin = _screenWindow->findLineStart(pos);
         _screenWindow->setSelectionStart(0 , _tripleSelBegin.y() , false);
     }
 
-    _initialSelectionPoint = findLineStart(_initialSelectionPoint);
-    _initialSelectionEnd = findLineEnd(pos);
+    _initialSelectionPoint = _screenWindow->findLineStart(_initialSelectionPoint);
+    _initialSelectionEnd = _screenWindow->findLineEnd(pos);
 
     _screenWindow->setSelectionEnd(_initialSelectionEnd.x() , _initialSelectionEnd.y());
 
@@ -3343,40 +3126,13 @@ bool TerminalDisplay::focusNextPrevChild(bool next)
     }
 }
 
-QChar TerminalDisplay::charClass(const Character& ch) const
-{
-    if ((ch.rendition & RE_EXTENDED_CHAR) != 0) {
-        ushort extendedCharLength = 0;
-        const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
-        if ((chars != nullptr) && extendedCharLength > 0) {
-            const QString s = QString::fromUcs4(chars, extendedCharLength);
-            if (_wordCharacters.contains(s, Qt::CaseInsensitive)) {
-                return QLatin1Char('a');
-            }
-            bool letterOrNumber = false;
-            for (int i = 0; !letterOrNumber && i < s.size(); ++i) {
-                letterOrNumber = s.at(i).isLetterOrNumber();
-            }
-            return letterOrNumber ? QLatin1Char('a') : s.at(0);
-        }
-        return 0;
-    } else {
-        const QChar qch(ch.character);
-        if (qch.isSpace()) {
-            return QLatin1Char(' ');
-        }
-
-        if (qch.isLetterOrNumber() || _wordCharacters.contains(qch, Qt::CaseInsensitive)) {
-            return QLatin1Char('a');
-        }
-
-        return qch;
-    }
-}
-
 void TerminalDisplay::setWordCharacters(const QString& wc)
 {
     _wordCharacters = wc;
+
+    if (_screenWindow) {
+        _screenWindow->setWordCharacters(wc);
+    }
 }
 
 void TerminalDisplay::setUsesMouseTracking(bool on)
