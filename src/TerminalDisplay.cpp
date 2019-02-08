@@ -3181,29 +3181,31 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
     QChar nextClass;
 
     const int imageSize = regSize * _columns;
-    const int maxY = _screenWindow->lineCount();
+    const int maxY = _screenWindow->lineCount() - 1;
     const int maxX = _columns - 1;
 
+    qDebug() << maxY << maxX << x << y;
     while (x >= 0 && line >= 0) {
         imgPos = loc(x, line);
 
-        const int lineCount = lineProperties.count();
-        bool isBreak = false;
+        const int visibleLinesCount = lineProperties.count();
+        bool changedClass = false;
 
-        for (;y < maxY && line < lineCount;imgPos++, x++) {
+        for (;y < maxY && line < visibleLinesCount;imgPos++, x++) {
             curClass = charClass(image[imgPos + 1]);
             nextClass = charClass(image[imgPos + 2]);
 
-            isBreak = curClass != selClass &&
+            changedClass = curClass != selClass &&
                 // A colon right before whitespace is never part of a word
                 !(image[imgPos + 1].character == ':' && nextClass == QLatin1Char(' '));
 
-            if (isBreak) {
+            if (changedClass) {
+                qDebug() << curClass << selClass;
                 break;
             }
 
             if (x >= maxX) {
-                if (!(lineProperties[line] & LINE_WRAPPED)) {
+                if ((lineProperties[line] & LINE_WRAPPED) == 0) {
                     break;
                 }
 
@@ -3213,15 +3215,18 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
             }
         }
 
-        if (isBreak) {
+        if (changedClass) {
+            qDebug() <<  "changed class";
             break;
         }
 
-        if (line < lineCount && ((lineProperties[line] & LINE_WRAPPED) == 0)) {
+        if (line < visibleLinesCount && ((lineProperties[line] & LINE_WRAPPED) == 0)) {
+            qDebug() << "Line not break";
             break;
         }
 
-        const int newRegEnd = qMin(y + regSize - 1, maxY);
+        const int newRegEnd = qMin(y + regSize - 1, maxY - 1);
+        qDebug() << "newrgaend" << newRegEnd << (y + regSize) << maxY << x;
         lineProperties = screen->getLineProperties(y, newRegEnd);
         if (!tempImage) {
             tempImage.reset(new Character[imageSize]);
@@ -3230,7 +3235,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
         screen->getImage(tempImage.get(), imageSize, y, newRegEnd);
 
         line = 0;
-        x--;
+//        x--;
     }
 
     y -= curLine;

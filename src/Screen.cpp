@@ -537,7 +537,8 @@ void Screen::getImage(Character* dest, int size, int startLine, int endLine) con
 QVector<LineProperty> Screen::getLineProperties(int startLine , int endLine) const
 {
     Q_ASSERT(startLine >= 0);
-    Q_ASSERT(endLine >= startLine && endLine < _history->getLines() + _lines);
+    Q_ASSERT(endLine >= startLine);
+    Q_ASSERT(endLine < _history->getLines() + _lines);
 
     const int mergedLines = endLine - startLine + 1;
     const int linesInHistory = qBound(0, _history->getLines() - startLine, mergedLines);
