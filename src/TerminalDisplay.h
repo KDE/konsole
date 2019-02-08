@@ -965,6 +965,7 @@ private:
     bool _bracketedPasteMode;
 
     QPoint _initialSelectionPoint;  // initial selection point
+    QPoint _initialSelectionEnd;
     QPoint _currentSelectionPoint;  // current selection point
     QPoint _tripleSelBegin;  // help avoid flicker
     int _actSel;     // selection state
