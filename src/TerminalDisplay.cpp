@@ -419,8 +419,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _usesMouseTracking(false)
     , _alternateScrolling(true)
     , _bracketedPasteMode(false)
-    , _iPntSel(QPoint())
-    , _pntSel(QPoint())
+    , _initialSelectionPoint(QPoint())
+    , _currentSelectionPoint(QPoint())
     , _tripleSelBegin(QPoint())
     , _actSel(0)
     , _wordSelectionMode(false)
@@ -2478,7 +2478,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
                 _screenWindow->clearSelection();
 
                 pos.ry() += _scrollBar->value();
-                _iPntSel = _pntSel = pos;
+                _initialSelectionPoint = _currentSelectionPoint = pos;
                 _actSel = 1; // left mouse button pressed but nothing selected yet.
             } else if (_usesMouseTracking && !_readOnly) {
                     emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
@@ -2685,24 +2685,24 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     QPoint here = QPoint(charColumn, charLine);
     QPoint ohere;
-    QPoint _iPntSelCorr = _iPntSel;
-    _iPntSelCorr.ry() -= _scrollBar->value();
-    QPoint _pntSelCorr = _pntSel;
+    QPoint selectionStart = _initialSelectionPoint;
+    selectionStart.ry() -= _scrollBar->value();
+    QPoint _pntSelCorr = _currentSelectionPoint;
     _pntSelCorr.ry() -= _scrollBar->value();
     bool swapping = false;
 
     if (_wordSelectionMode) {
         // Extend to word boundaries
-        const bool left_not_right = (here.y() < _iPntSelCorr.y() ||
-                                     (here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x()));
-        const bool old_left_not_right = (_pntSelCorr.y() < _iPntSelCorr.y() ||
-                                         (_pntSelCorr.y() == _iPntSelCorr.y() && _pntSelCorr.x() < _iPntSelCorr.x()));
+        const bool left_not_right = (here.y() < selectionStart.y() ||
+                                     (here.y() == selectionStart.y() && here.x() < selectionStart.x()));
+        const bool old_left_not_right = (_pntSelCorr.y() < selectionStart.y() ||
+                                         (_pntSelCorr.y() == selectionStart.y() && _pntSelCorr.x() < selectionStart.x()));
         swapping = left_not_right != old_left_not_right;
 
         // Find left (left_not_right ? from here : from start of word)
-        QPoint left = left_not_right ? here : _iPntSelCorr;
+        QPoint left = left_not_right ? here : selectionStart;
         // Find left (left_not_right ? from end of word : from here)
-        QPoint right = left_not_right ? _iPntSelCorr : here;
+        QPoint right = left_not_right ? selectionStart : here;
 
         left = findWordStart(left);
         right = findWordEnd(right);
@@ -2720,12 +2720,12 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     if (_lineSelectionMode) {
         // Extend to complete line
-        const bool above_not_below = (here.y() < _iPntSelCorr.y());
+        const bool above_not_below = (here.y() < selectionStart.y());
         if (above_not_below) {
-            ohere = findLineEnd(_iPntSelCorr);
+            ohere = findLineEnd(selectionStart);
             here = findLineStart(here);
         } else {
-            ohere = findLineStart(_iPntSelCorr);
+            ohere = findLineStart(selectionStart);
             here = findLineEnd(here);
         }
 
@@ -2739,17 +2739,17 @@ void TerminalDisplay::extendSelection(const QPoint& position)
     if (!_wordSelectionMode && !_lineSelectionMode) {
         QChar selClass;
 
-        const bool left_not_right = (here.y() < _iPntSelCorr.y() ||
-                                     (here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x()));
-        const bool old_left_not_right = (_pntSelCorr.y() < _iPntSelCorr.y() ||
-                                         (_pntSelCorr.y() == _iPntSelCorr.y() && _pntSelCorr.x() < _iPntSelCorr.x()));
+        const bool left_not_right = (here.y() < selectionStart.y() ||
+                                     (here.y() == selectionStart.y() && here.x() < selectionStart.x()));
+        const bool old_left_not_right = (_pntSelCorr.y() < selectionStart.y() ||
+                                         (_pntSelCorr.y() == selectionStart.y() && _pntSelCorr.x() < selectionStart.x()));
         swapping = left_not_right != old_left_not_right;
 
         // Find left (left_not_right ? from here : from start)
-        const QPoint left = left_not_right ? here : _iPntSelCorr;
+        const QPoint left = left_not_right ? here : selectionStart;
 
         // Find left (left_not_right ? from start : from here)
-        QPoint right = left_not_right ? _iPntSelCorr : here;
+        QPoint right = left_not_right ? selectionStart : here;
         if (right.x() > 0 && !_columnSelectionMode) {
             if (right.x() - 1 < _columns && right.y() < _lines) {
                 selClass = charClass(_image[loc(right.x() - 1, right.y())]);
@@ -2785,8 +2785,8 @@ void TerminalDisplay::extendSelection(const QPoint& position)
     }
 
     _actSel = 2; // within selection
-    _pntSel = here;
-    _pntSel.ry() += _scrollBar->value();
+    _currentSelectionPoint = here;
+    _currentSelectionPoint.ry() += _scrollBar->value();
 
     if (_columnSelectionMode && !_lineSelectionMode && !_wordSelectionMode) {
         _screenWindow->setSelectionEnd(here.x() , here.y());
@@ -2919,8 +2919,8 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
     }
 
     _screenWindow->clearSelection();
-    _iPntSel = pos;
-    _iPntSel.ry() += _scrollBar->value();
+    _initialSelectionPoint = pos;
+    _initialSelectionPoint.ry() += _scrollBar->value();
 
     _wordSelectionMode = true;
     _actSel = 2; // within selection
@@ -3098,13 +3098,12 @@ QPoint TerminalDisplay::findWordStart(const QPoint &pnt)
 
     Screen *screen = _screenWindow->screen();
     Character *image = _image;
-    std::unique_ptr<Character> tempImage;
+    std::unique_ptr<Character[]> tempImage;
 
     int imgLine = pnt.y();
 
     if (imgLine < 0 || imgLine >= _lines) {
-        qDebug() << imgLine << firstVisibleLine;
-        //return pnt;
+        return pnt;
     }
 
     int x = pnt.x();
@@ -3164,9 +3163,9 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
     const int curLine = _screenWindow->currentLine();
     int line = pnt.y();
 
+    // The selection is already scrolled out of view, so assume it is already at a boundary
     if (line < 0 || line >= _lines) {
-        qDebug() << line;
-        //return pnt;
+        return pnt;
     }
 
     int x = pnt.x();
@@ -3174,7 +3173,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
     QVector<LineProperty> lineProperties = _lineProperties;
     Screen *screen = _screenWindow->screen();
     Character *image = _image;
-    std::unique_ptr<Character> tempImage;
+    std::unique_ptr<Character[]> tempImage;
 
     int imgPos = loc(x, line);
     const QChar selClass = charClass(image[imgPos]);
@@ -3182,7 +3181,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
     QChar nextClass;
 
     const int imageSize = regSize * _columns;
-    const int maxY = _screenWindow->lineCount() - 1;
+    const int maxY = _screenWindow->lineCount();
     const int maxX = _columns - 1;
 
     while (x >= 0 && line >= 0) {
@@ -3191,7 +3190,7 @@ QPoint TerminalDisplay::findWordEnd(const QPoint &pnt)
         const int lineCount = lineProperties.count();
         bool isBreak = false;
 
-        for (;y < maxY && line < lineCount - 1;imgPos++, x++) {
+        for (;y < maxY && line < lineCount;imgPos++, x++) {
             curClass = charClass(image[imgPos + 1]);
             nextClass = charClass(image[imgPos + 2]);
 
@@ -3280,7 +3279,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 
 void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
 {
-    _iPntSel = pos;
+    _initialSelectionPoint = pos;
 
     _screenWindow->clearSelection();
 
@@ -3290,20 +3289,20 @@ void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
     _actSel = 2; // within selection
 
     if (!entireLine) { // Select from cursor to end of line
-        _tripleSelBegin = findWordStart(_iPntSel);
+        _tripleSelBegin = findWordStart(_initialSelectionPoint);
         _screenWindow->setSelectionStart(_tripleSelBegin.x(),
                                          _tripleSelBegin.y() , false);
     } else {
-        _tripleSelBegin = findLineStart(_iPntSel);
+        _tripleSelBegin = findLineStart(_initialSelectionPoint);
         _screenWindow->setSelectionStart(0 , _tripleSelBegin.y() , false);
     }
 
-    _iPntSel = findLineEnd(_iPntSel);
-    _screenWindow->setSelectionEnd(_iPntSel.x() , _iPntSel.y());
+    _initialSelectionPoint = findLineEnd(_initialSelectionPoint);
+    _screenWindow->setSelectionEnd(_initialSelectionPoint.x() , _initialSelectionPoint.y());
 
     copyToX11Selection();
 
-    _iPntSel.ry() += _scrollBar->value();
+    _initialSelectionPoint.ry() += _scrollBar->value();
 }
 
 void TerminalDisplay::selectCurrentLine()

@@ -964,8 +964,8 @@ private:
     bool _alternateScrolling;
     bool _bracketedPasteMode;
 
-    QPoint _iPntSel;  // initial selection point
-    QPoint _pntSel;  // current selection point
+    QPoint _initialSelectionPoint;  // initial selection point
+    QPoint _currentSelectionPoint;  // current selection point
     QPoint _tripleSelBegin;  // help avoid flicker
     int _actSel;     // selection state
     bool _wordSelectionMode;
