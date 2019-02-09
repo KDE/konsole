@@ -772,7 +772,6 @@ protected:
     void clearImage();
 
     void mouseTripleClickEvent(QMouseEvent *ev);
-    void selectLine(QPoint pos, bool entireLine);
 
     // reimplemented
     void inputMethodEvent(QInputMethodEvent *event) Q_DECL_OVERRIDE;
@@ -941,11 +940,6 @@ private:
     bool _alternateScrolling;
     bool _bracketedPasteMode;
 
-    QPoint _initialSelectionPoint;  // initial selection point
-    QPoint _initialSelectionEnd;
-    QPoint _currentSelectionPoint;  // current selection point
-    QPoint _tripleSelBegin;  // help avoid flicker
-    int _actSel;     // selection state
     bool _wordSelectionMode;
     bool _lineSelectionMode;
     bool _preserveLineBreaks;

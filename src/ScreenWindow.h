@@ -53,6 +53,13 @@ class ScreenWindow : public QObject
     Q_OBJECT
 
 public:
+    enum class SelectionMode {
+        Normal,
+        Word,
+        Column,
+        Line
+    };
+
     /**
      * Constructs a new screen window with the given parent.
      * A screen must be specified by calling setScreen() before calling getImage() or getLineProperties().
@@ -248,6 +255,9 @@ public:
     QPoint findWordStart(const QPoint &pnt);
     QPoint findWordEnd(const QPoint &pnt);
 
+    int selectionState() const { return _actSel; }
+    void setSelectionState(const int state) { _actSel = state; }
+
     // classifies the 'ch' into one of three categories
     // and returns a character to indicate which category it is in
     //
@@ -268,6 +278,11 @@ public:
      * of a word ( in addition to letters and numbers ).
      */
     void setWordCharacters(const QString &wc);
+
+    void extendSelection(const QPoint &position, const SelectionMode selectionMode);
+    void selectLine(QPoint pos, bool entireLine);
+    void selectWord(QPoint pos);
+    void startNormalSelection(QPoint pos);
 
 public Q_SLOTS:
     /**
@@ -313,6 +328,11 @@ private:
     bool _trackOutput; // see setTrackOutput() , trackOutput()
     int _scrollCount;  // count of lines which the window has been scrolled by since
     QString _wordCharacters;
+    QPoint _initialSelectionPoint;  // initial selection point
+    QPoint _initialSelectionEnd;
+    QPoint _currentSelectionPoint;  // current selection point
+    QPoint _tripleSelBegin;  // help avoid flicker
+    int _actSel = 0;     // selection state
     // the last call to resetScrollCount()
 };
 }

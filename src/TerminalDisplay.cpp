@@ -45,6 +45,7 @@
 #include <QDrag>
 #include <QDesktopServices>
 #include <QAccessible>
+#include <QtMath>
 
 // KDE
 #include <KShell>
@@ -420,10 +421,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _usesMouseTracking(false)
     , _alternateScrolling(true)
     , _bracketedPasteMode(false)
-    , _initialSelectionPoint(QPoint())
-    , _currentSelectionPoint(QPoint())
-    , _tripleSelBegin(QPoint())
-    , _actSel(0)
     , _wordSelectionMode(false)
     , _lineSelectionMode(false)
     , _preserveLineBreaks(true)
@@ -2479,8 +2476,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
                 _screenWindow->clearSelection();
 
                 pos.ry() += _scrollBar->value();
-                _initialSelectionPoint = _currentSelectionPoint = pos;
-                _actSel = 1; // left mouse button pressed but nothing selected yet.
+                _screenWindow->startNormalSelection(pos);
             } else if (_usesMouseTracking && !_readOnly) {
                     emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
             }
@@ -2619,7 +2615,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         return;
     }
 
-    if (_actSel == 0) {
+    if (_screenWindow->selectionState() == 0) {
         return;
     }
 
@@ -2646,153 +2642,25 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         return;
     }
 
-    //if ( !contentsRect().contains(ev->pos()) ) return;
-    const QPoint tL  = contentsRect().topLeft();
-    const int    tLx = tL.x();
-    const int    tLy = tL.y();
-    const int    scroll = _scrollBar->value();
-
     // we're in the process of moving the mouse with the left button pressed
     // the mouse cursor will kept caught within the bounds of the text in
     // this widget.
 
-    int linesBeyondWidget = 0;
-
-    const QRect textBounds(tLx + _contentRect.left(),
-                     tLy + _contentRect.top(),
-                     _usedColumns * _fontWidth - 1,
-                     _usedLines * _fontHeight - 1);
-
-    const QRect characterBounds(0, 0, _columns, _lines);
-
-    QPoint pos = position;
-
-    // Adjust position within text area bounds.
-    const QPoint oldpos = pos;
-
-    pos.setX(qBound(textBounds.left(), pos.x(), textBounds.right()));
-    pos.setY(qBound(textBounds.top(), pos.y(), textBounds.bottom()));
-
-    if (oldpos.y() > textBounds.bottom()) {
-        linesBeyondWidget = (oldpos.y() - textBounds.bottom()) / _fontHeight;
-        _scrollBar->setValue(_scrollBar->value() + linesBeyondWidget + 1); // scrollforward
-    }
-    if (oldpos.y() < textBounds.top()) {
-        linesBeyondWidget = (textBounds.top() - oldpos.y()) / _fontHeight;
-        _scrollBar->setValue(_scrollBar->value() - linesBeyondWidget - 1); // history
-    }
-
-    int charColumn = 0;
-    int charLine = 0;
-    getCharacterPosition(pos, charLine, charColumn, !_wordSelectionMode && !_lineSelectionMode);
-
-    const QPoint cursorPosition(charColumn, charLine);
-    QPoint selectionEnd = QPoint(charColumn, charLine);
-    QPoint selectionStart;
-    QPoint initialSelectionBegin = _initialSelectionPoint;
-    initialSelectionBegin.ry() -= _scrollBar->value();
-    QPoint initialSelectionEnd = _initialSelectionEnd;
-    initialSelectionEnd.ry() -= _scrollBar->value();
-    QPoint previousSelectionPoint = _currentSelectionPoint;
-    previousSelectionPoint.ry() -= _scrollBar->value();
-    bool swapping = false;
-
-    int offset = 0;
-
-    if (_wordSelectionMode) {
-        // Extend to word boundaries
-        const bool extendingLeft = (selectionEnd.y() < initialSelectionBegin.y() ||
-                                     (selectionEnd.y() == initialSelectionBegin.y() && selectionEnd.x() < initialSelectionBegin.x()));
-        const bool wasExtendingLeft = (previousSelectionPoint.y() < initialSelectionBegin.y() ||
-                                         (previousSelectionPoint.y() == initialSelectionBegin.y() && previousSelectionPoint.x() < initialSelectionBegin.x()));
-        swapping = extendingLeft != wasExtendingLeft;
-
-        if (extendingLeft) {
-            selectionEnd = _screenWindow->findWordStart(cursorPosition);
-            selectionStart = initialSelectionEnd;
-        } else {
-            selectionEnd = _screenWindow->findWordEnd(cursorPosition);
-            selectionStart = initialSelectionBegin;
-        }
-
-        selectionStart.rx()++;
-    }
+    int column =  qRound((float(position.x() - contentsRect().left() - _contentRect.left()) / _fontWidth));
+    int line = qFloor(float(position.y() - contentsRect().top() - _contentRect.top()) / _fontHeight);
+    const QPoint cursorPosition(column, line);
 
     if (_lineSelectionMode) {
-        // Extend to complete line
-        const bool extendingUpwards = (selectionEnd.y() < initialSelectionBegin.y());
-        const bool wasExtendingUpwards = (previousSelectionPoint.y() < initialSelectionBegin.y());
-        swapping = extendingUpwards != wasExtendingUpwards;
-        if (extendingUpwards) {
-            selectionEnd = _screenWindow->findLineStart(selectionEnd);
-            selectionStart = initialSelectionEnd;
-        } else {
-            selectionStart = initialSelectionBegin;
-            selectionEnd = _screenWindow->findLineEnd(selectionEnd);
-        }
-
-        _tripleSelBegin = selectionStart;
-
-        selectionStart.rx()++;
-    }
-
-    if (!_wordSelectionMode && !_lineSelectionMode) {
-        QChar selClass;
-
-        const bool extendingLeft = (selectionEnd.y() < initialSelectionBegin.y() ||
-                                     (selectionEnd.y() == initialSelectionBegin.y() && selectionEnd.x() < initialSelectionBegin.x()));
-        const bool wasExtendingLeft = (previousSelectionPoint.y() < initialSelectionBegin.y() ||
-                                         (previousSelectionPoint.y() == initialSelectionBegin.y() && previousSelectionPoint.x() < initialSelectionBegin.x()));
-        swapping = extendingLeft != wasExtendingLeft;
-
-        // Find left (left_not_right ? from here : from start)
-        const QPoint left = extendingLeft ? selectionEnd : initialSelectionBegin;
-
-        // Find left (left_not_right ? from start : from here)
-        QPoint right = extendingLeft ? initialSelectionBegin : selectionEnd;
-        if (right.x() > 0 && !_columnSelectionMode) {
-            if (right.x() - 1 < _columns && right.y() < _lines) {
-                selClass = _screenWindow->charClass(_image[loc(right.x() - 1, right.y())]);
-            }
-        }
-
-        // Pick which is start (ohere) and which is extension (here)
-        if (extendingLeft) {
-            selectionEnd = left;
-            selectionStart = right;
-            offset = 0;
-        } else {
-            selectionEnd = right;
-            selectionStart = left;
-            offset = -1;
-        }
-    }
-
-    if ((selectionEnd == previousSelectionPoint) && (scroll == _scrollBar->value())) {
-        return; // not moved
-    }
-
-    if (selectionEnd == selectionStart) {
-        return; // It's not left, it's not right.
-    }
-
-    if (_actSel < 2 || swapping) {
-        if (_columnSelectionMode && !_lineSelectionMode && !_wordSelectionMode) {
-            _screenWindow->setSelectionStart(selectionStart.x() , selectionStart.y() , true);
-        } else {
-            _screenWindow->setSelectionStart(selectionStart.x() - 1 - offset , selectionStart.y() , false);
-        }
-    }
-
-    _actSel = 2; // within selection
-    _currentSelectionPoint = selectionEnd;
-    _currentSelectionPoint.ry() += _scrollBar->value();
-
-    if (_columnSelectionMode && !_lineSelectionMode && !_wordSelectionMode) {
-        _screenWindow->setSelectionEnd(selectionEnd.x() , selectionEnd.y());
+        _screenWindow->extendSelection(cursorPosition, ScreenWindow::SelectionMode::Line);
+    } else if (_wordSelectionMode) {
+        _screenWindow->extendSelection(cursorPosition, ScreenWindow::SelectionMode::Word);
+    } else if (_columnSelectionMode) {
+        _screenWindow->extendSelection(cursorPosition, ScreenWindow::SelectionMode::Column);
     } else {
-        _screenWindow->setSelectionEnd(selectionEnd.x() + offset , selectionEnd.y());
+        _screenWindow->extendSelection(cursorPosition, ScreenWindow::SelectionMode::Normal);
     }
+
+    _scrollBar->setValue(_screenWindow->currentLine());
 }
 
 void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
@@ -2810,11 +2678,11 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
             // We had a drag event pending but never confirmed.  Kill selection
             _screenWindow->clearSelection();
         } else {
-            if (_actSel > 1) {
+            if (_screenWindow->selectionState() > 1) {
                 copyToX11Selection();
             }
 
-            _actSel = 0;
+            _screenWindow->setSelectionState(0);
 
             //FIXME: emits a release event even if the mouse is
             //       outside the range. The procedure used in `mouseMoveEvent'
@@ -2918,32 +2786,12 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
         return;
     }
 
-    _screenWindow->clearSelection();
-    _currentSelectionPoint = pos;
-    _currentSelectionPoint.ry() += _scrollBar->value();
+    _screenWindow->selectWord(pos);
 
     _wordSelectionMode = true;
-    _actSel = 2; // within selection
+    _lineSelectionMode = false;
 
-    // find word boundaries...
-    {
-        // find the start of the word
-        const QPoint bgnSel = _screenWindow->findWordStart(pos);
-        const QPoint endSel = _screenWindow->findWordEnd(pos);
-
-        _actSel = 2; // within selection
-
-        _screenWindow->setSelectionStart(bgnSel.x() , bgnSel.y() , false);
-        _screenWindow->setSelectionEnd(endSel.x() , endSel.y());
-
-        _initialSelectionPoint = bgnSel;
-        _initialSelectionPoint.ry() += _scrollBar->value();
-
-        _initialSelectionEnd = endSel;
-        _initialSelectionEnd.ry() += _scrollBar->value();
-
-        copyToX11Selection();
-    }
+    copyToX11Selection();
 
     _possibleTripleClick = true;
 
@@ -3060,39 +2908,13 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
     int charLine;
     int charColumn;
     getCharacterPosition(ev->pos(), charLine, charColumn, true);
-    selectLine(QPoint(charColumn, charLine),
+    _screenWindow->selectLine(QPoint(charColumn, charLine),
                _tripleClickMode == Enum::SelectWholeLine);
-}
-
-void TerminalDisplay::selectLine(QPoint pos, bool entireLine)
-{
-    _initialSelectionPoint = pos;
-
-    _screenWindow->clearSelection();
 
     _lineSelectionMode = true;
     _wordSelectionMode = false;
 
-    _actSel = 2; // within selection
-
-    if (!entireLine) { // Select from cursor to end of line
-        _tripleSelBegin = _screenWindow->findWordStart(pos);
-        _screenWindow->setSelectionStart(_tripleSelBegin.x(),
-                                         _tripleSelBegin.y() , false);
-    } else {
-        _tripleSelBegin = _screenWindow->findLineStart(pos);
-        _screenWindow->setSelectionStart(0 , _tripleSelBegin.y() , false);
-    }
-
-    _initialSelectionPoint = _screenWindow->findLineStart(_initialSelectionPoint);
-    _initialSelectionEnd = _screenWindow->findLineEnd(pos);
-
-    _screenWindow->setSelectionEnd(_initialSelectionEnd.x() , _initialSelectionEnd.y());
-
     copyToX11Selection();
-
-    _initialSelectionPoint.ry() += _scrollBar->value();
-    _initialSelectionEnd.ry() += _scrollBar->value();
 }
 
 void TerminalDisplay::selectCurrentLine()
@@ -3101,7 +2923,12 @@ void TerminalDisplay::selectCurrentLine()
         return;
     }
 
-    selectLine(cursorPosition(), true);
+    _screenWindow->selectLine(cursorPosition(), true);
+
+    _lineSelectionMode = true;
+    _wordSelectionMode = false;
+
+    copyToX11Selection();
 }
 
 void TerminalDisplay::selectAll()
@@ -3555,8 +3382,9 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     _screenWindow->screen()->setCurrentTerminalDisplay(this);
 
     if (!_readOnly) {
-        _actSel = 0; // Key stroke implies a screen update, so TerminalDisplay won't
-                     // know where the current selection is.
+        // Key stroke implies a screen update, so TerminalDisplay won't
+        // know where the current selection is.
+        _screenWindow->setSelectionState(0);
 
         if (_allowBlinkingCursor) {
             _blinkCursorTimer->start();

@@ -23,6 +23,7 @@
 // Konsole
 #include "Screen.h"
 #include "ExtendedCharTable.h"
+#include <QDebug>
 
 #include <memory>
 
@@ -391,6 +392,189 @@ void ScreenWindow::setWordCharacters(const QString &wc)
     _wordCharacters = wc;
 }
 
+void ScreenWindow::extendSelection(const QPoint &rawPosition, const ScreenWindow::SelectionMode selectionMode)
+{
+    QPoint cursorPosition = rawPosition;
+
+    const QRect characterBounds(0, 0, windowColumns(), windowLines());
+
+    int linesBeyondWidget = 0;
+    if (!characterBounds.contains(cursorPosition)) {
+        cursorPosition.setX(qBound(0, cursorPosition.x(), windowColumns() - 1));
+        cursorPosition.setY(qBound(0, cursorPosition.y(), windowLines() - 1));
+
+        linesBeyondWidget = rawPosition.y() - cursorPosition.y();
+        if (linesBeyondWidget < 0) {
+            scrollTo(currentLine() + linesBeyondWidget);
+        } else if (linesBeyondWidget > 0) {
+            scrollTo(currentLine() + linesBeyondWidget);
+        }
+    }
+
+    QPoint selectionEnd = cursorPosition;
+    QPoint selectionStart;
+    QPoint initialSelectionBegin = _initialSelectionPoint;
+    initialSelectionBegin.ry() -= currentLine();
+    QPoint initialSelectionEnd = _initialSelectionEnd;
+    initialSelectionEnd.ry() -= currentLine();
+    QPoint previousSelectionPoint = _currentSelectionPoint;
+    previousSelectionPoint.ry() -= currentLine();
+    bool swapping = false;
+
+    int offset = 0;
+
+    if (selectionMode == SelectionMode::Word) {
+        // Extend to word boundaries
+        const bool extendingLeft = (selectionEnd.y() < initialSelectionBegin.y() ||
+                                     (selectionEnd.y() == initialSelectionBegin.y() && selectionEnd.x() < initialSelectionBegin.x()));
+        const bool wasExtendingLeft = (previousSelectionPoint.y() < initialSelectionBegin.y() ||
+                                         (previousSelectionPoint.y() == initialSelectionBegin.y() && previousSelectionPoint.x() < initialSelectionBegin.x()));
+        swapping = extendingLeft != wasExtendingLeft;
+
+        if (extendingLeft) {
+            selectionEnd = findWordStart(cursorPosition);
+            selectionStart = initialSelectionEnd;
+        } else {
+            selectionEnd = findWordEnd(cursorPosition);
+            selectionStart = initialSelectionBegin;
+        }
+
+        selectionStart.rx()++;
+    }
+
+    if (selectionMode == SelectionMode::Line) {
+        // Extend to complete line
+        const bool extendingUpwards = (selectionEnd.y() < initialSelectionBegin.y());
+        const bool wasExtendingUpwards = (previousSelectionPoint.y() < initialSelectionBegin.y());
+        swapping = extendingUpwards != wasExtendingUpwards;
+        if (extendingUpwards) {
+            selectionEnd = findLineStart(selectionEnd);
+            selectionStart = initialSelectionEnd;
+        } else {
+            selectionStart = initialSelectionBegin;
+            selectionEnd = findLineEnd(selectionEnd);
+        }
+
+        _tripleSelBegin = selectionStart;
+
+        selectionStart.rx()++;
+    }
+
+    if (selectionMode == SelectionMode::Normal) {
+        QChar selClass;
+
+        const bool extendingLeft = (selectionEnd.y() < initialSelectionBegin.y() ||
+                                     (selectionEnd.y() == initialSelectionBegin.y() && selectionEnd.x() < initialSelectionBegin.x()));
+        const bool wasExtendingLeft = (previousSelectionPoint.y() < initialSelectionBegin.y() ||
+                                         (previousSelectionPoint.y() == initialSelectionBegin.y() && previousSelectionPoint.x() < initialSelectionBegin.x()));
+        swapping = extendingLeft != wasExtendingLeft;
+
+        // Find left (left_not_right ? from here : from start)
+        const QPoint left = extendingLeft ? selectionEnd : initialSelectionBegin;
+
+        Character *image = getImage();
+        // Find left (left_not_right ? from start : from here)
+        QPoint right = extendingLeft ? initialSelectionBegin : selectionEnd;
+        if (right.x() > 0 && selectionMode != SelectionMode::Column) {
+            if (right.x() - 1 < columnCount() && right.y() < windowLines()) {
+                selClass = charClass(image[loc(right.x() - 1, right.y())]);
+            }
+        }
+
+        // Pick which is start (ohere) and which is extension (here)
+        if (extendingLeft) {
+            selectionEnd = left;
+            selectionStart = right;
+            offset = 0;
+        } else {
+            selectionEnd = right;
+            selectionStart = left;
+            offset = -1;
+        }
+    }
+
+    if ((selectionEnd == previousSelectionPoint) && linesBeyondWidget == 0) {
+        return; // not moved
+    }
+
+    if (selectionEnd == selectionStart) {
+        return; // It's not left, it's not right.
+    }
+
+    if (_actSel < 2 || swapping) {
+        if (selectionMode == SelectionMode::Column) {
+            setSelectionStart(selectionStart.x() , selectionStart.y() , true);
+        } else {
+            setSelectionStart(selectionStart.x() - 1 - offset , selectionStart.y() , false);
+        }
+    }
+
+    _actSel = 2; // within selection
+    _currentSelectionPoint = selectionEnd;
+    _currentSelectionPoint.ry() += currentLine();
+
+    if (selectionMode == SelectionMode::Column) {
+        setSelectionEnd(selectionEnd.x() , selectionEnd.y());
+    } else {
+        setSelectionEnd(selectionEnd.x() + offset , selectionEnd.y());
+    }
+
+}
+
+void ScreenWindow::selectLine(QPoint pos, bool entireLine)
+{
+    _initialSelectionPoint = pos;
+
+    clearSelection();
+
+    _actSel = 2; // within selection
+
+    if (!entireLine) { // Select from cursor to end of line
+        _tripleSelBegin = findWordStart(pos);
+        setSelectionStart(_tripleSelBegin.x(),
+                                         _tripleSelBegin.y() , false);
+    } else {
+        _tripleSelBegin = findLineStart(pos);
+        setSelectionStart(0 , _tripleSelBegin.y() , false);
+    }
+
+    _initialSelectionPoint = findLineStart(_initialSelectionPoint);
+    _initialSelectionEnd = findLineEnd(pos);
+
+    setSelectionEnd(_initialSelectionEnd.x() , _initialSelectionEnd.y());
+
+    _initialSelectionPoint.ry() += currentLine();
+    _initialSelectionEnd.ry() += currentLine();
+
+}
+
+void ScreenWindow::selectWord(QPoint pos)
+{
+    clearSelection();
+
+    _currentSelectionPoint = pos;
+    _currentSelectionPoint.ry() += currentLine();
+
+    _actSel = 2; // within selection
+
+    // find word boundaries...
+    // find the start of the word
+    const QPoint bgnSel = findWordStart(pos);
+    const QPoint endSel = findWordEnd(pos);
+
+    _actSel = 2; // within selection
+
+    setSelectionStart(bgnSel.x() , bgnSel.y() , false);
+    setSelectionEnd(endSel.x() , endSel.y());
+
+    _initialSelectionPoint = bgnSel;
+    _initialSelectionPoint.ry() += currentLine();
+
+    _initialSelectionEnd = endSel;
+    _initialSelectionEnd.ry() += currentLine();
+
+}
+
 void ScreenWindow::getSelectionStart(int &column, int &line)
 {
     _screen->getSelectionStart(column, line);
@@ -588,4 +772,11 @@ void ScreenWindow::notifyOutputChanged()
     _bufferNeedsUpdate = true;
 
     emit outputChanged();
+}
+
+void ScreenWindow::startNormalSelection(QPoint pos)
+{
+    clearSelection();
+    _initialSelectionPoint = _currentSelectionPoint = pos;
+    _actSel = 1; // left mouse button pressed but nothing selected yet.
 }
