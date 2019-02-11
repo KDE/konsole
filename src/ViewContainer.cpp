@@ -70,7 +70,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     setMovable(true);
     connect(tabBarWidget, &DetachableTabBar::moveTabToWindow, this, &TabbedViewContainer::moveTabToWindow);
     tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
-    _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
+    _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("tab-new")));
     _newTabButton->setAutoRaise(true);
     connect(_newTabButton, &QToolButton::clicked, this, [this]{
         emit newViewRequest(this);
@@ -102,6 +102,8 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
             }
         }
     });
+
+    connect(tabBar(), &QTabBar::tabCloseRequested, this, &TabbedViewContainer::closeTerminalTab);
 
 #if defined(ENABLE_DETACHING)
     auto detachAction = _contextPopupMenu->addAction(
@@ -188,15 +190,16 @@ void TabbedViewContainer::konsoleConfigChanged()
 
     setTabPosition((QTabWidget::TabPosition) KonsoleSettings::tabBarPosition());
 
-    setCornerWidget( KonsoleSettings::showQuickButtons() ? _newTabButton : nullptr, Qt::TopLeftCorner);
-    setCornerWidget( KonsoleSettings::showQuickButtons() ? _closeTabButton : nullptr, Qt::TopRightCorner);
+    setCornerWidget(KonsoleSettings::newTabButton() ? _newTabButton : nullptr, Qt::TopLeftCorner);
+    _newTabButton->setVisible(KonsoleSettings::newTabButton());
+
+    setCornerWidget(KonsoleSettings::closeTabButton() == 1 ? _closeTabButton : nullptr, Qt::TopRightCorner);
+    _closeTabButton->setVisible(KonsoleSettings::closeTabButton() == 1);
+
+    tabBar()->setTabsClosable(KonsoleSettings::closeTabButton() == 0);
 
     tabBar()->setExpanding(KonsoleSettings::expandTabWidth());
     tabBar()->update();
-    if (isVisible() && KonsoleSettings::showQuickButtons()) {
-        _newTabButton->setVisible(true);
-        _closeTabButton->setVisible(true);
-    }
 
     if (KonsoleSettings::tabBarUseUserStyleSheet()) {
         setCssFromFile(KonsoleSettings::tabBarUserStyleSheetFile());

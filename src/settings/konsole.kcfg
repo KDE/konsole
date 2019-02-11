@@ -91,9 +91,18 @@
       <label>The .css file to use for the tab bar style</label>
       <default></default>
     </entry>
-    <entry name="ShowQuickButtons" type="Bool">
-      <label>Control the visibility of quick buttons on the tab bar</label>
+    <entry name="NewTabButton" type="Bool">
+      <label>Control the visibility of 'New Tab' button on the tab bar</label>
       <default>false</default>
+    </entry>
+    <entry name="CloseTabButton" type="Enum">
+      <label>Control where the "Close tab" button will be displayed</label>
+      <choices>
+        <choice name="OnEachTab" />
+        <choice name="OnTabBar" />
+        <choice name="None" />
+      </choices>
+      <default>OnEachTab</default>
     </entry>
     <entry name="NewTabBehavior" type="Enum">
       <label>Control where to put the new tab</label>
