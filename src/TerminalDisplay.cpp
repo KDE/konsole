@@ -2702,8 +2702,16 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         // Find left (left_not_right ? from end of word : from here)
         QPoint right = left_not_right ? _iPntSelCorr : here;
 
-        left = findWordStart(left);
-        right = findWordEnd(right);
+        if (left.y() < 0 || left.y() >= _lines || left.x() < 0 || left.x() >= _columns) {
+            left = _pntSelCorr;
+        } else {
+            left = findWordStart(left);
+        }
+        if (right.y() < 0 || right.y() >= _lines || right.x() < 0 || right.x() >= _columns) {
+            right = _pntSelCorr;
+        } else {
+            right = findWordEnd(right);
+        }
 
         // Pick which is start (ohere) and which is extension (here)
         if (left_not_right) {
