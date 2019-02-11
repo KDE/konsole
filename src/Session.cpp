@@ -178,7 +178,9 @@ void Session::openTeletype(int fd)
     connect(_emulation, &Konsole::Emulation::useUtf8Request, _shellProcess, &Konsole::Pty::setUtf8Mode);
 
     // get notified when the pty process is finished
-    connect(_shellProcess, static_cast<void(Pty::*)(int,QProcess::ExitStatus)>(&Konsole::Pty::finished), this, &Konsole::Session::done);
+    connect(_shellProcess,
+            QOverload<int,QProcess::ExitStatus>::of(&Konsole::Pty::finished),
+            this, &Konsole::Session::done);
 
     // emulator size
     // Use a direct connection to ensure that the window size is set before it runs
@@ -936,7 +938,8 @@ void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
 void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 {
     // This slot should be triggered only one time
-    disconnect(_shellProcess, static_cast<void(Pty::*)(int,QProcess::ExitStatus)>(&Konsole::Pty::finished),
+    disconnect(_shellProcess,
+               QOverload<int,QProcess::ExitStatus>::of(&Konsole::Pty::finished),
                this, &Konsole::Session::done);
 
     if (!_autoClose) {
@@ -1373,7 +1376,9 @@ void Session::startZModem(const QString& zmodem, const QString& dir, const QStri
 
     connect(_zmodemProc, &KProcess::readyReadStandardOutput, this, &Konsole::Session::zmodemReadAndSendBlock);
     connect(_zmodemProc, &KProcess::readyReadStandardError, this, &Konsole::Session::zmodemReadStatus);
-    connect(_zmodemProc, static_cast<void(KProcess::*)(int,QProcess::ExitStatus)>(&KProcess::finished), this, &Konsole::Session::zmodemFinished);
+    connect(_zmodemProc,
+            QOverload<int,QProcess::ExitStatus>::of(&KProcess::finished),
+            this, &Konsole::Session::zmodemFinished);
 
     _zmodemProc->start();
 

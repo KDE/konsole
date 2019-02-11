@@ -481,10 +481,11 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
             &Konsole::EditProfileDialog::showEnvironmentEditor);
 
     connect(_generalUi->terminalColumnsEntry,
-            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
+            QOverload<int>::of(&QSpinBox::valueChanged), this,
             &Konsole::EditProfileDialog::terminalColumnsEntryChanged);
-    connect(_generalUi->terminalRowsEntry, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
-            this, &Konsole::EditProfileDialog::terminalRowsEntryChanged);
+    connect(_generalUi->terminalRowsEntry,
+            QOverload<int>::of(&QSpinBox::valueChanged), this,
+            &Konsole::EditProfileDialog::terminalRowsEntryChanged);
 }
 
 void EditProfileDialog::showEnvironmentEditor()
@@ -542,7 +543,7 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr &profile)
     _tabsUi->silenceSecondsSpinner->setFixedWidth(silenceCheckBoxWidth);
 
     connect(_tabsUi->silenceSecondsSpinner,
-            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,
+            QOverload<int>::of(&QSpinBox::valueChanged), this,
             &Konsole::EditProfileDialog::silenceSecondsChanged);
 }
 
@@ -745,10 +746,14 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     setupButtonGroup(cursorShapeOptions, profile);
 
     _appearanceUi->marginsSpinner->setValue(profile->terminalMargin());
-    connect(_appearanceUi->marginsSpinner, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::terminalMarginChanged);
+    connect(_appearanceUi->marginsSpinner,
+            QOverload<int>::of(&QSpinBox::valueChanged), this,
+            &Konsole::EditProfileDialog::terminalMarginChanged);
 
     _appearanceUi->lineSpacingSpinner->setValue(profile->lineSpacing());
-    connect(_appearanceUi->lineSpacingSpinner, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &Konsole::EditProfileDialog::lineSpacingChanged);
+    connect(_appearanceUi->lineSpacingSpinner,
+            QOverload<int>::of(&QSpinBox::valueChanged), this,
+            &Konsole::EditProfileDialog::lineSpacingChanged);
 
     _appearanceUi->alignToCenterButton->setChecked(profile->terminalCenter());
     connect(_appearanceUi->alignToCenterButton, &QCheckBox::toggled, this,
@@ -1701,7 +1706,9 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
     // encoding options
     auto codecAction = new KCodecAction(this);
     _advancedUi->selectEncodingButton->setMenu(codecAction->menu());
-    connect(codecAction, static_cast<void (KCodecAction::*)(QTextCodec *)>(&KCodecAction::triggered), this, &Konsole::EditProfileDialog::setDefaultCodec);
+    connect(codecAction,
+            QOverload<QTextCodec *>::of(&KCodecAction::triggered), this,
+            &Konsole::EditProfileDialog::setDefaultCodec);
 
     _advancedUi->selectEncodingButton->setText(profile->defaultEncoding());
 }

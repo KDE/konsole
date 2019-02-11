@@ -645,7 +645,9 @@ void SessionController::setupCommonActions()
     _codecAction->setIcon(QIcon::fromTheme(QStringLiteral("character-set")));
     collection->addAction(QStringLiteral("set-encoding"), _codecAction);
     connect(_codecAction->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::updateCodecAction);
-    connect(_codecAction, static_cast<void(KCodecAction::*)(QTextCodec*)>(&KCodecAction::triggered), this, &Konsole::SessionController::changeCodec);
+    connect(_codecAction,
+            QOverload<QTextCodec*>::of(&KCodecAction::triggered), this,
+            &Konsole::SessionController::changeCodec);
 
     // Read-only
     action = collection->addAction(QStringLiteral("view-readonly"), this, SLOT(toggleReadOnly()));
@@ -691,7 +693,9 @@ void SessionController::setupExtraActions()
     copyInputActions->addAction(copyInputToAllTabsAction);
     copyInputActions->addAction(copyInputToSelectedTabsAction);
     copyInputActions->addAction(copyInputToNoneAction);
-    connect(copyInputActions, static_cast<void(KSelectAction::*)(QAction*)>(&KSelectAction::triggered), this, &Konsole::SessionController::copyInputActionsTriggered);
+    connect(copyInputActions,
+            QOverload<QAction*>::of(&KSelectAction::triggered), this,
+            &Konsole::SessionController::copyInputActionsTriggered);
 
     action = collection->addAction(QStringLiteral("zmodem-upload"), this, SLOT(zmodemUpload()));
     action->setText(i18n("&ZModem Upload..."));
@@ -730,7 +734,9 @@ void SessionController::setupExtraActions()
     // Send signal
     auto* sendSignalActions = collection->add<KSelectAction>(QStringLiteral("send-signal"));
     sendSignalActions->setText(i18n("Send Signal"));
-    connect(sendSignalActions, static_cast<void(KSelectAction::*)(QAction*)>(&KSelectAction::triggered), this, &Konsole::SessionController::sendSignal);
+    connect(sendSignalActions,
+            QOverload<QAction*>::of(&KSelectAction::triggered), this,
+            &Konsole::SessionController::sendSignal);
 
     action = collection->addAction(QStringLiteral("sigstop-signal"));
     action->setText(i18n("&Suspend Task")   + QStringLiteral(" (STOP)"));
@@ -1172,7 +1178,9 @@ void SessionController::listenForScreenWindowUpdates()
 
     connect(_view->screenWindow(), &Konsole::ScreenWindow::outputChanged, this, &Konsole::SessionController::updateSearchFilter);
     connect(_view->screenWindow(), &Konsole::ScreenWindow::scrolled, this, &Konsole::SessionController::updateSearchFilter);
-    connect(_view->screenWindow(), &Konsole::ScreenWindow::currentResultLineChanged, _view.data(), static_cast<void(TerminalDisplay::*)()>(&Konsole::TerminalDisplay::update));
+    connect(_view->screenWindow(),
+            &Konsole::ScreenWindow::currentResultLineChanged, _view.data(),
+            QOverload<>::of(&Konsole::TerminalDisplay::update));
 
     _listenForScreenWindowUpdates = true;
 }
@@ -1459,7 +1467,10 @@ void SessionController::print_screen()
 
     dialog->setOptionTabs(QList<QWidget*>() << options);
     dialog->setWindowTitle(i18n("Print Shell"));
-    connect(dialog.data(), static_cast<void(QPrintDialog::*)()>(&QPrintDialog::accepted), options, &Konsole::PrintOptions::saveSettings);
+    connect(dialog.data(),
+            QOverload<>::of(&QPrintDialog::accepted),
+            options,
+            &Konsole::PrintOptions::saveSettings);
     if (dialog->exec() != QDialog::Accepted) {
         return;
     }
