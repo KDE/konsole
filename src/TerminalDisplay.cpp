@@ -1893,14 +1893,27 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             const RenditionFlags currentRendition = _image[loc(x, y)].rendition;
             const bool rtl = isRtl(_image[loc(x, y)]);
 
-            if(_image[loc(x, y)].character <= 0x7e || rtl) {
-                while (x + len <= rect.right() &&
-                        _image[loc(x + len, y)].foregroundColor == currentForeground &&
-                        _image[loc(x + len, y)].backgroundColor == currentBackground &&
-                        (_image[loc(x + len, y)].rendition & ~RE_EXTENDED_CHAR) == (currentRendition & ~RE_EXTENDED_CHAR) &&
-                        (_image[qMin(loc(x + len, y) + 1, _imageSize - 1)].character == 0) == doubleWidth &&
-                        _image[loc(x + len, y)].isLineChar() == lineDraw &&
-                        (_image[loc(x + len, y)].character <= 0x7e || rtl)) {
+            const auto isInsideDrawArea = [&](int column) { return column <= rect.right(); };
+            const auto hasSameColors = [&](int column) {
+                return _image[loc(column, y)].foregroundColor == currentForeground
+                    && _image[loc(column, y)].backgroundColor == currentBackground;
+            };
+            const auto hasSameRendition = [&](int column) {
+                return (_image[loc(column, y)].rendition & ~RE_EXTENDED_CHAR)
+                    == (currentRendition & ~RE_EXTENDED_CHAR);
+            };
+            const auto hasSameWidth = [&](int column) {
+                const int characterLoc = qMin(loc(column, y) + 1, _imageSize - 1);
+                return (_image[characterLoc].character == 0) == doubleWidth;
+            };
+            const auto canBeGrouped = [&](int column) {
+                return _image[loc(column, y)].character <= 0x7e || rtl;
+            };
+
+            if (canBeGrouped(x)) {
+                while (isInsideDrawArea(x + len) && hasSameColors(x + len)
+                        && hasSameRendition(x + len) && hasSameWidth(x + len)
+                        && canBeGrouped(x + len)) {
                     const uint c = _image[loc(x + len, y)].character;
                     if ((_image[loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                         // sequence of characters
@@ -1927,6 +1940,15 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
                     if (doubleWidth) { // assert((_image[loc(x+len,y)+1].character == 0)), see above if condition
                         len++; // Skip trailing part of multi-column character
                     }
+                    len++;
+                }
+            } else {
+                // Group spaces following any non-wide character with the character. This allows for
+                // rendering ambiguous characters with wide glyphs without clipping them.
+                while (!doubleWidth && isInsideDrawArea(x + len)
+                        && _image[loc(x + len, y)].character == ' ' && hasSameColors(x + len)
+                        && hasSameRendition(x + len)) {
+                    // disstrU intentionally not modified - trailing spaces are meaningless
                     len++;
                 }
             }
