@@ -65,7 +65,6 @@ set(HAVE_X11 ${X11_FOUND})
 add_definitions(
   -DQT_STRICT_ITERATORS
   -DQT_NO_URL_CAST_FROM_STRING
-  -Wno-deprecated-declarations
 )
 
 set(CMAKE_CXX_STANDARD 11)
