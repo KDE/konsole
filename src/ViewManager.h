@@ -81,12 +81,6 @@ public:
     void createView(TabbedViewContainer *tabWidget, Session *session);
 
     /**
-     * Applies the view-specific settings associated with specified @p profile
-     * to the terminal display @p view.
-     */
-    void applyProfileToView(TerminalDisplay *view, const Profile::Ptr &profile);
-
-    /**
      * Return the main widget for the view manager which
      * holds all of the views managed by this ViewManager instance.
      */
@@ -197,6 +191,10 @@ public:
     /** returns the active tab from the view
     */
     TabbedViewContainer *activeContainer();
+
+    void applyProfileToView(TerminalDisplay *view, const Profile::Ptr &profile);
+
+    static const ColorScheme *colorSchemeForProfile(const Profile::Ptr &profile);
 
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
@@ -391,7 +389,6 @@ private:
     Q_DISABLE_COPY(ViewManager)
 
     void createView(Session *session, TabbedViewContainer *container, int index);
-    static const ColorScheme *colorSchemeForProfile(const Profile::Ptr &profile);
 
     void setupActions();
 

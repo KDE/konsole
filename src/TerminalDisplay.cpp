@@ -71,6 +71,8 @@
 #include "Session.h"
 #include "WindowSystemInfo.h"
 #include "IncrementalSearchBar.h"
+#include "Profile.h"
+#include "ViewManager.h" // for colorSchemeForProfile. // TODO: Rewrite this.
 
 using namespace Konsole;
 
@@ -2981,7 +2983,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
     const int modifiers = ev->modifiers();
 
     // ctrl+<wheel> for zooming, like in konqueror and firefox
-    if (((modifiers & Qt::ControlModifier) != 0u) && mouseWheelZoom()) {
+    if (((modifiers & Qt::ControlModifier) != 0u) && _mouseWheelZoom) {
         _scrollWheelState.addWheelEvent(ev);
 
         int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
@@ -4220,3 +4222,66 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
     return false;
 }
 
+void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
+{
+    // load color scheme
+    ColorEntry table[TABLE_COLORS];
+    _colorScheme = ViewManager::colorSchemeForProfile(profile);
+    _colorScheme->getColorTable(table, randomSeed());
+    setColorTable(table);
+    setOpacity(_colorScheme->opacity());
+    setWallpaper(_colorScheme->wallpaper());
+
+    // load font
+    _antialiasText = profile->antiAliasFonts();
+    _boldIntense = profile->boldIntense();
+    _useFontLineCharacters = profile->useFontLineCharacters();
+    setVTFont(profile->font());
+
+    // set scroll-bar position
+    setScrollBarPosition(Enum::ScrollBarPositionEnum(profile->property<int>(Profile::ScrollBarPosition)));
+    setScrollFullPage(profile->property<bool>(Profile::ScrollFullPage));
+
+    // show hint about terminal size after resizing
+    _showTerminalSizeHint = profile->showTerminalSizeHint();
+    _dimWhenInactive = profile->dimWhenInactive();
+
+    // terminal features
+    setBlinkingCursorEnabled(profile->blinkingCursorEnabled());
+    setBlinkingTextEnabled(profile->blinkingTextEnabled());
+    _tripleClickMode = Enum::TripleClickModeEnum(profile->property<int>(Profile::TripleClickMode));
+    setAutoCopySelectedText(profile->autoCopySelectedText());
+    _ctrlRequiredForDrag = profile->property<bool>(Profile::CtrlRequiredForDrag);
+    _dropUrlsAsText = profile->property<bool>(Profile::DropUrlsAsText);
+    _bidiEnabled = profile->bidiRenderingEnabled();
+    setLineSpacing(uint(profile->lineSpacing()));
+    _trimLeadingSpaces = profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText);
+    _trimTrailingSpaces = profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText);
+    _openLinksByDirectClick = profile->property<bool>(Profile::OpenLinksByDirectClickEnabled);
+    _urlHintsModifiers = Qt::KeyboardModifiers(profile->property<int>(Profile::UrlHintsModifiers));
+    _reverseUrlHints = profile->property<bool>(Profile::ReverseUrlHints);
+    setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum(profile->property<int>(Profile::MiddleClickPasteMode)));
+    setCopyTextAsHTML(profile->property<bool>(Profile::CopyTextAsHTML));
+
+    // margin/center
+    setMargin(profile->property<int>(Profile::TerminalMargin));
+    setCenterContents(profile->property<bool>(Profile::TerminalCenter));
+
+    // cursor shape
+    setKeyboardCursorShape(Enum::CursorShapeEnum(profile->property<int>(Profile::CursorShape)));
+
+    // cursor color
+    // an invalid QColor is used to inform the view widget to
+    // draw the cursor using the default color( matching the text)
+    setKeyboardCursorColor(profile->useCustomCursorColor() ? profile->customCursorColor() : QColor());
+
+    // word characters
+    setWordCharacters(profile->wordCharacters());
+
+    // bell mode
+    setBellMode(profile->property<int>(Profile::BellMode));
+
+    // mouse wheel zoom
+    _mouseWheelZoom = profile->mouseWheelZoomEnabled();
+    setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
+}

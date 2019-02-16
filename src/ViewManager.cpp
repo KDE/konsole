@@ -790,71 +790,9 @@ bool ViewManager::profileHasBlurEnabled(const Profile::Ptr &profile)
 void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr &profile)
 {
     Q_ASSERT(profile);
-
+    view->applyProfile(profile);
     emit updateWindowIcon();
-
-    // load color scheme
-    ColorEntry table[TABLE_COLORS];
-    const ColorScheme *colorScheme = colorSchemeForProfile(profile);
-    colorScheme->getColorTable(table, view->randomSeed());
-    view->setColorTable(table);
-    view->setOpacity(colorScheme->opacity());
-    view->setWallpaper(colorScheme->wallpaper());
-
-    emit blurSettingChanged(colorScheme->blur());
-
-    // load font
-    view->setAntialias(profile->antiAliasFonts());
-    view->setBoldIntense(profile->boldIntense());
-    view->setUseFontLineCharacters(profile->useFontLineCharacters());
-    view->setVTFont(profile->font());
-
-    // set scroll-bar position
-    view->setScrollBarPosition(Enum::ScrollBarPositionEnum(profile->property<int>(Profile::ScrollBarPosition)));
-    view->setScrollFullPage(profile->property<bool>(Profile::ScrollFullPage));
-
-    // show hint about terminal size after resizing
-    view->setShowTerminalSizeHint(profile->showTerminalSizeHint());
-    view->setDimWhenInactive(profile->dimWhenInactive());
-
-    // terminal features
-    view->setBlinkingCursorEnabled(profile->blinkingCursorEnabled());
-    view->setBlinkingTextEnabled(profile->blinkingTextEnabled());
-    view->setTripleClickMode(Enum::TripleClickModeEnum(profile->property<int>(Profile::TripleClickMode)));
-    view->setAutoCopySelectedText(profile->autoCopySelectedText());
-    view->setControlDrag(profile->property<bool>(Profile::CtrlRequiredForDrag));
-    view->setDropUrlsAsText(profile->property<bool>(Profile::DropUrlsAsText));
-    view->setBidiEnabled(profile->bidiRenderingEnabled());
-    view->setLineSpacing(profile->lineSpacing());
-    view->setTrimLeadingSpaces(profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText));
-    view->setTrimTrailingSpaces(profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText));
-    view->setOpenLinksByDirectClick(profile->property<bool>(Profile::OpenLinksByDirectClickEnabled));
-    view->setUrlHintsModifiers(profile->property<int>(Profile::UrlHintsModifiers));
-    view->setReverseUrlHintsEnabled(profile->property<bool>(Profile::ReverseUrlHints));
-    view->setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum(profile->property<int>(Profile::MiddleClickPasteMode)));
-    view->setCopyTextAsHTML(profile->property<bool>(Profile::CopyTextAsHTML));
-
-    // margin/center
-    view->setMargin(profile->property<int>(Profile::TerminalMargin));
-    view->setCenterContents(profile->property<bool>(Profile::TerminalCenter));
-
-    // cursor shape
-    view->setKeyboardCursorShape(Enum::CursorShapeEnum(profile->property<int>(Profile::CursorShape)));
-
-    // cursor color
-    // an invalid QColor is used to inform the view widget to
-    // draw the cursor using the default color( matching the text)
-    view->setKeyboardCursorColor(profile->useCustomCursorColor() ? profile->customCursorColor() : QColor());
-
-    // word characters
-    view->setWordCharacters(profile->wordCharacters());
-
-    // bell mode
-    view->setBellMode(profile->property<int>(Profile::BellMode));
-
-    // mouse wheel zoom
-    view->setMouseWheelZoom(profile->mouseWheelZoomEnabled());
-    view->setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
+    emit blurSettingChanged(view->colorScheme()->blur());
 }
 
 void ViewManager::updateViewsForSession(Session *session)
