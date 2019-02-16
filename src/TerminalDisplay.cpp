@@ -1324,31 +1324,28 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
 QRegion TerminalDisplay::hotSpotRegion() const
 {
     QRegion region;
-    foreach(Filter::HotSpot * hotSpot , _filterChain->hotSpots()) {
+    for (const Filter::HotSpot *hotSpot : _filterChain->hotSpots()) {
         QRect r;
+        r.setLeft(hotSpot->startColumn());
+        r.setTop(hotSpot->startLine());
         if (hotSpot->startLine() == hotSpot->endLine()) {
-            r.setLeft(hotSpot->startColumn());
-            r.setTop(hotSpot->startLine());
             r.setRight(hotSpot->endColumn());
             r.setBottom(hotSpot->endLine());
             region |= imageToWidget(r);
         } else {
-            r.setLeft(hotSpot->startColumn());
-            r.setTop(hotSpot->startLine());
             r.setRight(_columns);
             r.setBottom(hotSpot->startLine());
             region |= imageToWidget(r);
-            for (int line = hotSpot->startLine() + 1 ; line < hotSpot->endLine() ; line++) {
-                r.setLeft(0);
-                r.setTop(line);
-                r.setRight(_columns);
-                r.setBottom(line);
+
+            r.setLeft(0);
+
+            for (int line = hotSpot->startLine() + 1 ; line < hotSpot->endLine(); line++) {
+                r.moveTop(line);
                 region |= imageToWidget(r);
             }
-            r.setLeft(0);
-            r.setTop(hotSpot->endLine());
+
+            r.moveTop(hotSpot->endLine());
             r.setRight(hotSpot->endColumn());
-            r.setBottom(hotSpot->endLine());
             region |= imageToWidget(r);
         }
     }
