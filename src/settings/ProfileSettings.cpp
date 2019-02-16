@@ -405,14 +405,16 @@ void ProfileSettings::setShortcutEditorVisible(bool visible)
 void StyledBackgroundPainter::drawBackground(QPainter* painter, const QStyleOptionViewItem& option,
         const QModelIndex&)
 {
-    const auto* v3option = qstyleoption_cast<const QStyleOptionViewItemV3*>(&option);
-    const QWidget* widget = v3option != nullptr ? v3option->widget : nullptr;
+    const auto* opt = qstyleoption_cast<const QStyleOptionViewItem*>(&option);
+    const QWidget* widget = opt != nullptr ? opt->widget : nullptr;
 
     QStyle* style = widget != nullptr ? widget->style() : QApplication::style();
 
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, widget);
 }
 
+// This adds a checkmark and the appropriate background in the "Show"
+// column of the Manage Profiles->Profiles page.
 FavoriteItemDelegate::FavoriteItemDelegate(QObject* aParent)
     : QStyledItemDelegate(aParent)
 {
@@ -420,7 +422,7 @@ FavoriteItemDelegate::FavoriteItemDelegate(QObject* aParent)
 void FavoriteItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     // See implementation of QStyledItemDelegate::paint()
-    QStyleOptionViewItemV4 opt = option;
+    QStyleOptionViewItem opt = option;
     initStyleOption(&opt, index);
 
     StyledBackgroundPainter::drawBackground(painter, opt, index);
