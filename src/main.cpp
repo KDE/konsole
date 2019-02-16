@@ -109,6 +109,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
     app->setAttribute(Qt::AA_DontUseNativeMenuBar);
 #endif
 
+    app->setWindowIcon(QIcon::fromTheme(QStringLiteral("utilities-terminal")));
+
     KLocalizedString::setApplicationDomain("konsole");
 
     KAboutData about(QStringLiteral("konsole"),
@@ -286,7 +288,6 @@ bool shouldUseNewProcess(int argc, char *argv[])
 
 void fillAboutData(KAboutData &aboutData)
 {
-    aboutData.setProgramIconName(QStringLiteral("utilities-terminal"));
     aboutData.setOrganizationDomain("kde.org");
 
     aboutData.addAuthor(i18nc("@info:credit", "Kurt Hindenburg"),
