@@ -630,13 +630,6 @@ Q_SIGNALS:
     /** Emitted when a bell event occurs in the session. */
     void bellRequest(const QString &message);
 
-    /**
-     * Requests that the color the text for any tabs associated with
-     * this session should be changed;
-     *
-     * TODO: Document what the parameter does
-     */
-    void changeTabTextColorRequest(int);
 
     /**
      * Requests that the background color of views on this session
@@ -737,6 +730,14 @@ private Q_SLOTS:
     void onPrimaryScreenInUse(bool use);
 
     void sessionAttributeRequest(int id);
+
+    /**
+     * Requests that the color the text for any tabs associated with
+     * this session should be changed;
+     *
+     * TODO: Document what the parameter does
+     */
+    void changeTabTextColor(int);
 
 private:
     Q_DISABLE_COPY(Session)
