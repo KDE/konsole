@@ -998,17 +998,6 @@ void TerminalDisplay::setOpacity(qreal opacity)
     color.setAlphaF(opacity);
     _opacity = opacity;
 
-    // enable automatic background filling to prevent the display
-    // flickering if there is no transparency
-    /*if ( color.alpha() == 255 )
-    {
-        setAutoFillBackground(true);
-    }
-    else
-    {
-        setAutoFillBackground(false);
-    }*/
-
     _blendColor = color.rgba();
     onColorsChanged();
 }

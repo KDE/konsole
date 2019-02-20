@@ -543,13 +543,6 @@ void Session::setSessionAttribute(int what, const QString& caption)
         }
     }
 
-    /* I don't believe this has ever worked in KDE 4.x
-    if (what == 31) {
-        QString cwd = caption;
-        cwd = cwd.replace(QRegExp("^~"), QDir::homePath());
-        emit openUrlRequest(cwd);
-    }*/
-
     /* The below use of 32 works but appears to non-standard.
        It is from a commit from 2004 c20973eca8776f9b4f15bee5fdcb5a3205aa69de
      */
