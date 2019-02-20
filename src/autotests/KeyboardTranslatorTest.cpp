@@ -123,7 +123,7 @@ void KeyboardTranslatorTest::testFallback()
 
 void KeyboardTranslatorTest::testHexKeys()
 {
-    QFile linuxkeytab(QFINDTESTDATA(QLatin1String("data/test.keytab")));
+    QFile linuxkeytab(QFINDTESTDATA(QStringLiteral("data/test.keytab")));
     QVERIFY(linuxkeytab.exists());
     QVERIFY(linuxkeytab.open(QIODevice::ReadOnly));
 

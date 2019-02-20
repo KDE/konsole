@@ -35,7 +35,7 @@ using namespace Konsole;
 /* Test that the URL (command) does not get mangled by KBookMark's encoding */
 void BookMarkTest::testBookMarkURLs_data()
 {
-    auto testData = QFINDTESTDATA(QLatin1String("data/bookmarks.xml"));
+    auto testData = QFINDTESTDATA(QStringLiteral("data/bookmarks.xml"));
     auto bookmarkManager = KBookmarkManager::managerForFile(testData, QStringLiteral("KonsoleTest"));
     auto groupUrlList = bookmarkManager->root().groupUrlList();
 
