@@ -228,7 +228,11 @@ void ProfileSettings::updateDefaultItem()
             itemFont.setBold(true);
             item->setFont(itemFont);
         } else if (!isDefault && itemFont.bold()) {
-            item->setIcon(QIcon(defaultProfile->icon()));
+            QModelIndex index = _sessionModel->index(i, ProfileNameColumn);
+            Profile::Ptr profile = index.data(ProfileSettings::ProfileKeyRole).value<Profile::Ptr>();
+            if (profile != nullptr) {
+                item->setIcon(QIcon::fromTheme(profile->icon()));
+            }
             itemFont.setBold(false);
             item->setFont(itemFont);
         }
