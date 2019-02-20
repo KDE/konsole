@@ -34,7 +34,10 @@ public:
 Q_SIGNALS:
     void detachTab(int index);
     void moveTabToWindow(int tabIndex, QWidget *otherWindow);
+    void closeTab(int index);
+    void newTabRequest();
 protected:
+    void middleMouseButtonClickAt(const QPoint& pos);
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent*event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
@@ -44,6 +47,7 @@ private:
     DragType dragType;
     QCursor _originalCursor;
     QList<TabbedViewContainer*> _containers;
+    int tabId;
 };
 }
 

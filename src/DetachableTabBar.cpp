@@ -18,6 +18,7 @@
 */
 
 #include "DetachableTabBar.h"
+#include "KonsoleSettings.h"
 #include "ViewContainer.h"
 
 #include <QMouseEvent>
@@ -28,7 +29,8 @@ namespace Konsole {
 DetachableTabBar::DetachableTabBar(QWidget *parent) :
     QTabBar(parent),
     dragType(DragType::NONE),
-    _originalCursor(cursor())
+    _originalCursor(cursor()),
+    tabId(-1)
 {}
 
 bool DetachableTabBar::droppedContainerIsNotThis(const QPoint& currentPos) const
@@ -41,6 +43,15 @@ bool DetachableTabBar::droppedContainerIsNotThis(const QPoint& currentPos) const
         }
     }
     return false;
+}
+
+void DetachableTabBar::middleMouseButtonClickAt(const QPoint& pos)
+{
+    tabId = tabAt(pos);
+
+    if (tabId != -1) {
+        emit closeTab(tabId);
+    }
 }
 
 void DetachableTabBar::mousePressEvent(QMouseEvent *event)
@@ -87,6 +98,21 @@ void DetachableTabBar::mouseMoveEvent(QMouseEvent *event)
 void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
     QTabBar::mouseReleaseEvent(event);
+
+    switch(event->button()) {
+        case Qt::MiddleButton : if (KonsoleSettings::closeTabOnMiddleMouseButton()) {
+                                    middleMouseButtonClickAt(event->pos());
+                                }
+
+                                tabId = tabAt(event->pos());
+                                if (tabId == -1) {
+                                    emit newTabRequest();
+                                }
+                                break;
+        case Qt::LeftButton: _containers = window()->findChildren<Konsole::TabbedViewContainer*>(); break;
+        default: break;
+    }
+
     setCursor(_originalCursor);
 
     if (contentsRect().adjusted(-30,-30,30,30).contains(event->pos())) {

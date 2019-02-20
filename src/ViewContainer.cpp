@@ -89,6 +89,10 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(tabBarWidget, &DetachableTabBar::detachTab, this, [this](int idx) {
         emit detachTab(this, terminalAt(idx));
     });
+    connect(tabBarWidget, &DetachableTabBar::closeTab,
+        this, &TabbedViewContainer::closeTerminalTab);
+    connect(tabBarWidget, &DetachableTabBar::newTabRequest,
+        this, [this]{ emit newViewRequest(this); });
     connect(this, &TabbedViewContainer::currentChanged, this, &TabbedViewContainer::currentTabChanged);
 
     // The context menu of tab bar

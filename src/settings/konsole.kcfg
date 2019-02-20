@@ -91,6 +91,10 @@
       <label>The .css file to use for the tab bar style</label>
       <default></default>
     </entry>
+    <entry name="CloseTabOnMiddleMouseButton" type="Bool">
+      <label>Allow middle-clicking on open tabs to close them</label>
+      <default>false</default>
+    </entry>
     <entry name="NewTabButton" type="Bool">
       <label>Control the visibility of 'New Tab' button on the tab bar</label>
       <default>false</default>
