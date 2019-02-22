@@ -168,7 +168,7 @@ template <typename T>
 inline static T rotateBitsLeft(T value, quint8 amount)
 {
     static_assert (std::is_unsigned<T>(), "T must be unsigned type");
-    assert(amount < sizeof(value) * 8);
+    Q_ASSERT(amount < sizeof(value) * 8);
     return value << amount | value >> (sizeof(value) * 8 - amount);
 }
 
