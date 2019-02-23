@@ -874,11 +874,11 @@ private:
         managementInfoBase[2] = KERN_PROC_PID;
         managementInfoBase[3] = pid;
 
-        if (sysctl(managementInfoBase, 4, NULL, &mibLength, NULL, 0) == -1) {
+        if (sysctl(managementInfoBase, 4, nullptr, &mibLength, nullptr, 0) == -1) {
             return false;
         } else {
             kInfoProc = new struct kinfo_proc [mibLength];
-            if (sysctl(managementInfoBase, 4, kInfoProc, &mibLength, NULL, 0) == -1) {
+            if (sysctl(managementInfoBase, 4, kInfoProc, &mibLength, nullptr, 0) == -1) {
                 delete [] kInfoProc;
                 return false;
             } else {
@@ -901,14 +901,14 @@ private:
                 managementInfoBase[3] = statInfo.st_rdev;
 
                 mibLength = 0;
-                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), NULL,
-                           &mibLength, NULL, 0) == -1) {
+                if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), nullptr,
+                           &mibLength, nullptr, 0) == -1) {
                     return false;
                 }
 
                 kInfoProc = new struct kinfo_proc [mibLength];
                 if (sysctl(managementInfoBase, sizeof(managementInfoBase) / sizeof(int), kInfoProc,
-                           &mibLength, NULL, 0) == -1) {
+                           &mibLength, nullptr, 0) == -1) {
                     return false;
                 }
 
