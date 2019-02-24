@@ -369,7 +369,7 @@ uint TerminalDisplay::lineSpacing() const
 void TerminalDisplay::setLineSpacing(uint i)
 {
     _lineSpacing = i;
-    setVTFont(font()); // Trigger an update.
+    fontChange(font()); // Trigger an update.
 }
 
 
