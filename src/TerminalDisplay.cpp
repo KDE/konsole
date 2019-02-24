@@ -254,18 +254,6 @@ void TerminalDisplay::setVTFont(const QFont& f)
     QFont newFont(f);
     int strategy = 0;
 
-    QFontMetrics fontMetrics(newFont);
-
-    // This check seems extreme and semi-random
-    // TODO: research if these checks are still needed to prevent
-    // enormous fonts from being used; consider usage on big TV
-    // screens.
-    if ((fontMetrics.height() > height()) || (fontMetrics.maxWidth() > width())) {
-        // return here will cause the "general" non-fixed width font
-        // to be selected
-        return;
-    }
-
     // hint that text should be drawn with- or without anti-aliasing.
     // depending on the user's font configuration, this may not be respected
     strategy |= _antialiasText ? QFont::PreferAntialias : QFont::NoAntialias;
