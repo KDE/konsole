@@ -297,6 +297,11 @@ void TerminalDisplay::setVTFont(const QFont& f)
     // Disabling kerning saves some computation when rendering text.
     newFont.setKerning(false);
 
+    // "Draw intense colors in bold font" feature needs to use different font weights. StyleName
+    // property, when set, doesn't allow weight changes. Since all properties (weight, stretch,
+    // italic, etc) are stored in QFont independently, in almost all cases styleName is not needed.
+    newFont.setStyleName(QString());
+
     QFontInfo fontInfo(newFont);
 
     // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch()
@@ -740,25 +745,32 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         return;
     }
 
-    // setup bold and underline
-    bool useBold = (((style->rendition & RE_BOLD) != 0) && _boldIntense) || font().bold();
+    const int normalWeight = font().weight();
+    // +26 makes "bold" from "normal", "normal" from "light", etc. It is 26 instead of not 25 to prefer
+    // bolder weight when 25 falls in the middle between two weights. See QFont::Weight
+    const int boldWeight = normalWeight + 26;
+
+    const auto isBold = [boldWeight](const QFont &font) { return font.weight() >= boldWeight; };
+
+    const bool useBold = (((style->rendition & RE_BOLD) != 0) && _boldIntense);
     const bool useUnderline = ((style->rendition & RE_UNDERLINE) != 0) || font().underline();
     const bool useItalic = ((style->rendition & RE_ITALIC) != 0) || font().italic();
     const bool useStrikeOut = ((style->rendition & RE_STRIKEOUT) != 0) || font().strikeOut();
     const bool useOverline = ((style->rendition & RE_OVERLINE) != 0) || font().overline();
 
-    QFont font = painter.font();
-    if (font.bold() != useBold
-            || font.underline() != useUnderline
-            || font.italic() != useItalic
-            || font.strikeOut() != useStrikeOut
-            || font.overline() != useOverline) {
-        font.setBold(useBold);
-        font.setUnderline(useUnderline);
-        font.setItalic(useItalic);
-        font.setStrikeOut(useStrikeOut);
-        font.setOverline(useOverline);
-        painter.setFont(font);
+    QFont currentFont = painter.font();
+
+    if (isBold(currentFont) != useBold
+            || currentFont.underline() != useUnderline
+            || currentFont.italic() != useItalic
+            || currentFont.strikeOut() != useStrikeOut
+            || currentFont.overline() != useOverline) {
+        currentFont.setWeight(useBold ? boldWeight : normalWeight);
+        currentFont.setUnderline(useUnderline);
+        currentFont.setItalic(useItalic);
+        currentFont.setStrikeOut(useStrikeOut);
+        currentFont.setOverline(useOverline);
+        painter.setFont(currentFont);
     }
 
     // setup pen
