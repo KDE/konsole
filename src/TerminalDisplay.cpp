@@ -302,6 +302,11 @@ void TerminalDisplay::setVTFont(const QFont& f)
     // italic, etc) are stored in QFont independently, in almost all cases styleName is not needed.
     newFont.setStyleName(QString());
 
+    if (newFont == font()) {
+        // Do not process the same font again
+        return;
+    }
+
     QFontInfo fontInfo(newFont);
 
     // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch()
