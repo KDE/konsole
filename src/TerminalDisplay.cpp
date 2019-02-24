@@ -309,24 +309,31 @@ void TerminalDisplay::setVTFont(const QFont& f)
 
     QFontInfo fontInfo(newFont);
 
-    // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch()
+    // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch() - do not test it.
     // related?  https://bugreports.qt.io/browse/QTBUG-34082
-    if (!fontInfo.exactMatch()) {
-        const QChar comma(QLatin1Char(','));
-        QString nonMatching = fontInfo.family() % comma %
-            QString::number(fontInfo.pointSizeF()) % comma %
-            QString::number(fontInfo.pixelSize()) % comma %
-            QString::number(static_cast<int>(fontInfo.styleHint())) % comma %
-            QString::number(fontInfo.weight()) % comma %
-            QString::number(static_cast<int>(fontInfo.style())) % comma %
-            QString::number(static_cast<int>(fontInfo.underline())) % comma %
-            QString::number(static_cast<int>(fontInfo.strikeOut())) % comma %
-            QString::number(static_cast<int>(fontInfo.fixedPitch())) % comma %
-            QString::number(static_cast<int>(fontInfo.rawMode()));
-
+    if (fontInfo.family() != newFont.family()
+            || fontInfo.pointSizeF() != newFont.pointSizeF()
+            || fontInfo.styleHint()  != newFont.styleHint()
+            || fontInfo.weight()     != newFont.weight()
+            || fontInfo.style()      != newFont.style()
+            || fontInfo.underline()  != newFont.underline()
+            || fontInfo.strikeOut()  != newFont.strikeOut()
+            || fontInfo.rawMode()    != newFont.rawMode()) {
+        const QString nonMatching = QString::asprintf("%s,%g,%d,%d,%d,%d,%d,%d,%d,%d",
+                qPrintable(fontInfo.family()),
+                fontInfo.pointSizeF(),
+                -1, // pixelSize is not used
+                static_cast<int>(fontInfo.styleHint()),
+                fontInfo.weight(),
+                static_cast<int>(fontInfo.style()),
+                static_cast<int>(fontInfo.underline()),
+                static_cast<int>(fontInfo.strikeOut()),
+                // Intentional newFont use - fixedPitch is bugged, see comment above
+                static_cast<int>(newFont.fixedPitch()),
+                static_cast<int>(fontInfo.rawMode()));
         qCDebug(KonsoleDebug) << "The font to use in the terminal can not be matched exactly on your system.";
-        qCDebug(KonsoleDebug)<<" Selected: "<<newFont.toString();
-        qCDebug(KonsoleDebug)<<" System  : "<<nonMatching;
+        qCDebug(KonsoleDebug) << " Selected: " << newFont.toString();
+        qCDebug(KonsoleDebug) << " System  : " << nonMatching;
     }
 
     QWidget::setFont(newFont);
