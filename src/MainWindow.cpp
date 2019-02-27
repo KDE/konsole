@@ -842,17 +842,21 @@ void MainWindow::setMenuBarInitialVisibility(bool visible)
 
 void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
 {
-    // This is used to check if the window is in "opening" state
-    // And avoid the visibility change when we change the window flag
-    bool oldVisibility = isVisible();
+    Qt::WindowFlags newFlags = frameless ? Qt::FramelessWindowHint : Qt::Window;
 
-    if (frameless) {
-        setWindowFlags(Qt::FramelessWindowHint);
-    } else {
-        setWindowFlags(Qt::Widget);
-    }
+    // The window is not yet visible
+    if (!isVisible()) {
+        setWindowFlags(newFlags);
 
-    if (oldVisibility && !isVisible()) {
+    // The window is visible and the setting changed
+    } else if (windowFlags().testFlag(Qt::FramelessWindowHint) != frameless) {
+        const auto oldGeometry = saveGeometry();
+
+        setWindowFlags(newFlags);
+
+        // The setWindowFlags() has hidden the window. Show it again
+        // with previous geometry
+        restoreGeometry(oldGeometry);
         setVisible(true);
     }
 }
