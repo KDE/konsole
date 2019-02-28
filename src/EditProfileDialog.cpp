@@ -109,6 +109,14 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     connect(_delayedPreviewTimer, &QTimer::timeout, this,
             &Konsole::EditProfileDialog::delayedPreviewActivate);
 
+    // Set a fallback icon for non-plasma desktops as this dialog looks
+    // terrible without all the icons on the left sidebar.  This make GTK
+    // related desktops look good enough with installing oxygen-icon-theme
+    // and qt5ct and setting export QT_QPA_PLATFORMTHEME=qt5ct
+    // Plain Xorg desktops still look terrible as there are no icons
+    // visible.
+    const auto defaultIcon = QIcon::fromTheme(QStringLiteral("utilities-terminal"));
+
     // General page
 
     const QString generalPageName = i18nc("@title:tab Generic, common options", "General");
@@ -128,7 +136,8 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _tabsUi->setupUi(tabsPageWidget);
     auto *tabsPageItem = addPage(tabsPageWidget, tabsPageName);
     tabsPageItem->setHeader(tabsPageName);
-    tabsPageItem->setIcon(QIcon::fromTheme(QStringLiteral("tab-duplicate")));
+    tabsPageItem->setIcon(QIcon::fromTheme(QStringLiteral("tab-duplicate"),
+                          defaultIcon));
     _pages[tabsPageItem] = Page(&EditProfileDialog::setupTabsPage);
 
     LabelsAligner tabsAligner(tabsPageWidget);
@@ -145,7 +154,8 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _appearanceUi->setupUi(appearancePageWidget);
     auto *appearancePageItem = addPage(appearancePageWidget, appearancePageName);
     appearancePageItem->setHeader(appearancePageName);
-    appearancePageItem->setIcon(QIcon::fromTheme(QStringLiteral("kcolorchooser")));
+    appearancePageItem->setIcon(QIcon::fromTheme(QStringLiteral("kcolorchooser"),
+                                defaultIcon));
     _pages[appearancePageItem] = Page(&EditProfileDialog::setupAppearancePage);
 
     LabelsAligner appearanceAligner(appearancePageWidget);
@@ -162,7 +172,8 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _scrollingUi->setupUi(scrollingPageWidget);
     auto *scrollingPageItem = addPage(scrollingPageWidget, scrollingPageName);
     scrollingPageItem->setHeader(scrollingPageName);
-    scrollingPageItem->setIcon(QIcon::fromTheme(QStringLiteral("transform-move-vertical")));
+    scrollingPageItem->setIcon(QIcon::fromTheme(QStringLiteral("transform-move-vertical"),
+                               defaultIcon));
     _pages[scrollingPageItem] = Page(&EditProfileDialog::setupScrollingPage);
 
     // adjust "history size" label height to match history size widget's first radio button
@@ -177,7 +188,8 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _keyboardUi->setupUi(keyboardPageWidget);
     auto *keyboardPageItem = addPage(keyboardPageWidget, keyboardPageName);
     keyboardPageItem->setHeader(keyboardPageTitle);
-    keyboardPageItem->setIcon(QIcon::fromTheme(QStringLiteral("input-keyboard")));
+    keyboardPageItem->setIcon(QIcon::fromTheme(QStringLiteral("input-keyboard"),
+                              defaultIcon));
     _pages[keyboardPageItem] = Page(&EditProfileDialog::setupKeyboardPage);
 
     // Mouse page
@@ -188,7 +200,8 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _mouseUi->setupUi(mousePageWidget);
     auto *mousePageItem = addPage(mousePageWidget, mousePageName);
     mousePageItem->setHeader(mousePageName);
-    mousePageItem->setIcon(QIcon::fromTheme(QStringLiteral("input-mouse")));
+    mousePageItem->setIcon(QIcon::fromTheme(QStringLiteral("input-mouse"),
+                           defaultIcon));
     _pages[mousePageItem] = Page(&EditProfileDialog::setupMousePage);
 
     // Advanced page
@@ -199,7 +212,8 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _advancedUi->setupUi(advancedPageWidget);
     auto *advancedPageItem = addPage(advancedPageWidget, advancedPageName);
     advancedPageItem->setHeader(advancedPageName);
-    advancedPageItem->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
+    advancedPageItem->setIcon(QIcon::fromTheme(QStringLiteral("configure"),
+                              defaultIcon));
     _pages[advancedPageItem] = Page(&EditProfileDialog::setupAdvancedPage);
 
     // there are various setupXYZPage() methods to load the items
