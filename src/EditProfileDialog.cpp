@@ -215,12 +215,6 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     connect(this, &KPageDialog::currentPageChanged,
             this, &Konsole::EditProfileDialog::preparePage);
 
-    QFontMetrics fm(font());
-    const int ch = fm.width(QLatin1Char('0'));
-
-    // Increase width a bit instead of using possible minimum
-    resize(sizeHint().width() + 10*ch, sizeHint().height());
-
     createTempProfile();
 }
 
@@ -953,8 +947,14 @@ bool EditProfileDialog::eventFilter(QObject *watched, QEvent *event)
 
 QSize EditProfileDialog::sizeHint() const
 {
-//    return QSize();
-    return QDialog::sizeHint();
+    QFontMetrics fm(font());
+    const int ch = fm.width(QLatin1Char('0'));
+
+    // By default minimum size is used. Increase it to make text inputs
+    // on "tabs" page wider and to add some whitespace on right side
+    // of other pages. The window will not be wider than 2/3 of
+    // the screen width (unless necessary to fit everything)
+    return QDialog::sizeHint() + QSize(10*ch, 0);
 }
 
 void EditProfileDialog::unpreviewAll()
