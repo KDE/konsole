@@ -61,6 +61,9 @@ if(NOT APPLE)
 endif()
 set(HAVE_X11 ${X11_FOUND})
 
+# FIXME: Fix code to allow this
+#add_definitions(-DQT_NO_FOREACH)
+
 # See above includes for defaults
 add_definitions(
   -DQT_STRICT_ITERATORS
