@@ -397,6 +397,9 @@ void ProfileSettings::updateFavoriteStatus(const Profile::Ptr &profile, bool fav
     for (int i = 0; i < rowCount; i++) {
         QModelIndex index = _sessionModel->index(i, FavoriteStatusColumn);
         if (index.data(ProfileKeyRole).value<Profile::Ptr>() == profile) {
+            // FIXME: On desktops without this icon, it is impossible to
+            //        determine if a profile is a favorite in this dialog.
+            //        Consider changing to using QStandardItem::setCheckable
             const QIcon icon = favorite ? QIcon::fromTheme(QStringLiteral("dialog-ok-apply")) : QIcon();
             _sessionModel->setData(index, icon, Qt::DecorationRole);
         }
