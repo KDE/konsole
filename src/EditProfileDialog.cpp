@@ -110,9 +110,9 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
             &Konsole::EditProfileDialog::delayedPreviewActivate);
 
     // Set a fallback icon for non-plasma desktops as this dialog looks
-    // terrible without all the icons on the left sidebar.  This make GTK
-    // related desktops look good enough with installing oxygen-icon-theme
-    // and qt5ct and setting export QT_QPA_PLATFORMTHEME=qt5ct
+    // terrible without all the icons on the left sidebar.  On GTK related
+    // desktops, this dialog look good enough without installing
+    // oxygen-icon-theme, qt5ct and setting export QT_QPA_PLATFORMTHEME=qt5ct
     // Plain Xorg desktops still look terrible as there are no icons
     // visible.
     const auto defaultIcon = QIcon::fromTheme(QStringLiteral("utilities-terminal"));
