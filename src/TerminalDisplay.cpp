@@ -300,7 +300,7 @@ void TerminalDisplay::setVTFont(const QFont& f)
     // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch() - do not test it.
     // related?  https://bugreports.qt.io/browse/QTBUG-34082
     if (fontInfo.family() != newFont.family()
-            || fontInfo.pointSizeF() != newFont.pointSizeF()
+            || !qFuzzyCompare(fontInfo.pointSizeF(), newFont.pointSizeF())
             || fontInfo.styleHint()  != newFont.styleHint()
             || fontInfo.weight()     != newFont.weight()
             || fontInfo.style()      != newFont.style()
