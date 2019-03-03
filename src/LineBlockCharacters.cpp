@@ -4,7 +4,7 @@
     Copyright 2018-2019 by Mariusz Glebocki <mglb@arccos-1.net>
     Copyright 2018 by Martin T. H. Sandsmark <martin.sandsmark@kde.org>
     Copyright 2015-2018 by Kurt Hindenburg <kurt.hindenburg@gmail.com>
-    Copyright 2005 by Maksim Orlovich
+    Copyright 2005 by Maksim Orlovich <maksim@kde.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
