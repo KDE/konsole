@@ -716,16 +716,18 @@ void TerminalDisplay::drawCursor(QPainter& painter,
             }
         }
     } else if (_cursorShape == Enum::UnderlineCursor) {
-        painter.drawLine(cursorRect.left(),
-                         cursorRect.bottom(),
-                         cursorRect.right(),
-                         cursorRect.bottom());
+        QLineF line(cursorRect.left() + 0.5,
+                    cursorRect.bottom() - 0.5,
+                    cursorRect.right() - 0.5,
+                    cursorRect.bottom() - 0.5);
+        painter.drawLine(line);
 
     } else if (_cursorShape == Enum::IBeamCursor) {
-        painter.drawLine(cursorRect.left(),
-                         cursorRect.top(),
-                         cursorRect.left(),
-                         cursorRect.bottom());
+        QLineF line(cursorRect.left() + 0.5,
+                    cursorRect.top() + 0.5,
+                    cursorRect.left() + 0.5,
+                    cursorRect.bottom() - 0.5);
+        painter.drawLine(line);
     }
 }
 
