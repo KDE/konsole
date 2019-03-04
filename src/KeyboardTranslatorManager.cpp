@@ -102,9 +102,9 @@ void KeyboardTranslatorManager::findTranslators()
                                                        QStandardPaths::LocateDirectory);
     list.reserve(dirs.size());
 
-    Q_FOREACH (const QString &dir, dirs) {
+    for (const QString &dir : dirs) {
         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.keytab"));
-        Q_FOREACH (const QString &file, fileNames) {
+        for (const QString &file : fileNames) {
             list.append(dir + QLatin1Char('/') + file);
         }
     }

@@ -141,9 +141,9 @@ QStringList ColorSchemeManager::listColorSchemes()
                                                        QStandardPaths::LocateDirectory);
     colorschemes.reserve(dirs.size());
 
-    Q_FOREACH (const QString &dir, dirs) {
+    for (const QString &dir : dirs) {
         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.colorscheme"));
-        Q_FOREACH (const QString &file, fileNames) {
+        for (const QString &file : fileNames) {
             colorschemes.append(dir + QLatin1Char('/') + file);
         }
     }

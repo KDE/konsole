@@ -202,7 +202,7 @@ void ColorSchemeEditor::selectWallpaper()
     // Get supported image formats and convert to QString for getOpenFileName()
     const QList<QByteArray> mimeTypes = QImageReader::supportedImageFormats();
     QString fileFormats = QStringLiteral("(");
-    Q_FOREACH (const QByteArray &mime, mimeTypes) {
+    for (const QByteArray &mime : mimeTypes) {
         fileFormats += QStringLiteral("*.%1 ").arg(QLatin1String(mime));
     }
     fileFormats += QLatin1String(")");

@@ -50,9 +50,9 @@ QStringList ProfileReader::findProfiles()
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole"), QStandardPaths::LocateDirectory);
     profiles.reserve(dirs.size());
 
-    Q_FOREACH (const QString& dir, dirs) {
+    for (const QString& dir : dirs) {
         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.profile"));
-        Q_FOREACH (const QString& file, fileNames) {
+        for (const QString& file : fileNames) {
             profiles.append(dir + QLatin1Char('/') + file);
         }
     }

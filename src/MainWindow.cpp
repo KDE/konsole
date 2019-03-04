@@ -456,7 +456,7 @@ void MainWindow::openUrls(const QList<QUrl> &urls)
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
-    Q_FOREACH (const auto &url, urls) {
+    for (const auto &url : urls) {
         if (url.isLocalFile()) {
             createSession(_viewManager->activeContainer(), defaultProfile, url.path());
         } else if (url.scheme() == QLatin1String("ssh")) {
