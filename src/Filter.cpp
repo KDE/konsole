@@ -190,15 +190,16 @@ Filter::Filter() :
 
 Filter::~Filter()
 {
-    QListIterator<HotSpot *> iter(_hotspotList);
-    while (iter.hasNext()) {
-        delete iter.next();
-    }
+    reset();
 }
 
 void Filter::reset()
 {
     _hotspots.clear();
+    QListIterator<HotSpot *> iter(_hotspotList);
+    while (iter.hasNext()) {
+        delete iter.next();
+    }
     _hotspotList.clear();
 }
 
