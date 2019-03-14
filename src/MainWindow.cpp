@@ -234,6 +234,9 @@ void MainWindow::disconnectController(SessionController *controller)
 
 void MainWindow::activeViewChanged(SessionController *controller)
 {
+    if (!SessionManager::instance()->sessionProfile(controller->session())) {
+        return;
+    }
     // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
     disconnect(bookmarkHandler(), &Konsole::BookmarkHandler::openUrl, nullptr, nullptr);
