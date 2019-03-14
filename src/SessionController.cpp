@@ -630,15 +630,22 @@ void SessionController::setupCommonActions()
 
     // History
     _findAction = KStandardAction::find(this, SLOT(searchBarEvent()), collection);
-    collection->setDefaultShortcut(_findAction, QKeySequence());
 
     _findNextAction = KStandardAction::findNext(this, SLOT(findNextInHistory()), collection);
-    collection->setDefaultShortcut(_findNextAction, QKeySequence());
     _findNextAction->setEnabled(false);
 
     _findPreviousAction = KStandardAction::findPrev(this, SLOT(findPreviousInHistory()), collection);
-    collection->setDefaultShortcut(_findPreviousAction, QKeySequence());
     _findPreviousAction->setEnabled(false);
+
+#ifdef Q_OS_MACOS
+    collection->setDefaultShortcut(_findAction, Qt::META + Qt::Key_F);
+    collection->setDefaultShortcut(_findNextAction, Qt::META + Qt::Key_G);
+    collection->setDefaultShortcut(_findPreviousAction, Qt::META + Qt::SHIFT + Qt::Key_G);
+#else
+    collection->setDefaultShortcut(_findAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_F);
+    collection->setDefaultShortcut(_findNextAction, Qt::Key_F3);
+    collection->setDefaultShortcut(_findPreviousAction, Qt::SHIFT + Qt::Key_F3);
+#endif
 
     // Character Encoding
     _codecAction = new KCodecAction(i18n("Set &Encoding"), this);
@@ -777,16 +784,6 @@ void SessionController::setupExtraActions()
     action->setText(i18n("User Signal &2")   + QStringLiteral(" (USR2)"));
     action->setData(SIGUSR2);
     sendSignalActions->addAction(action);
-
-#ifdef Q_OS_MACOS
-    collection->setDefaultShortcut(_findAction, Qt::META + Qt::Key_F);
-    collection->setDefaultShortcut(_findNextAction, Qt::META + Qt::Key_G);
-    collection->setDefaultShortcut(_findPreviousAction, Qt::META + Qt::SHIFT + Qt::Key_G);
-#else
-    collection->setDefaultShortcut(_findAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_F);
-    collection->setDefaultShortcut(_findNextAction, Qt::Key_F3);
-    collection->setDefaultShortcut(_findPreviousAction, Qt::SHIFT + Qt::Key_F3);
-#endif
 }
 
 void SessionController::switchProfile(const Profile::Ptr &profile)
