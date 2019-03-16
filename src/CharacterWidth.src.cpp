@@ -33,6 +33,9 @@
 //
 // This text  will not appear in an output file.
 «*-----------------------------------------------------------------------:NOTE*»
+
+//krazy:excludeall=typedefs
+
 //
 // «gen-file-warning»
 //
