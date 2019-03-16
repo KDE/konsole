@@ -143,11 +143,11 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string>Sets whether the search is case sensitive</string>
+          </property>
           <property name="text">
            <string>Search is case sensitive</string>
-          </property>
-          <property name="toolTip">
-              <string>Sets whether the search is case sensitive</string>
           </property>
          </widget>
         </item>
@@ -185,11 +185,11 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="text">
-           <string>Search backwards</string>
-          </property>
           <property name="toolTip">
            <string>Sets whether search should start from the bottom</string>
+          </property>
+          <property name="text">
+           <string>Search backwards</string>
           </property>
          </widget>
         </item>
