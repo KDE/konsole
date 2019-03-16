@@ -80,20 +80,22 @@ static constexpr const int RANGE_LUT_LIST_SIZE = «ranges-lut-list-size»;
 
 
 int KONSOLEPRIVATE_EXPORT characterWidth(uint ucs4) {
-    if(Q_LIKELY(ucs4 < sizeof(DIRECT_LUT)))
+    if(Q_LIKELY(ucs4 < sizeof(DIRECT_LUT))) {
         return DIRECT_LUT[ucs4];
+    }
 
     for(auto rl = RANGE_LUT_LIST; rl->lut != nullptr; ++rl) {
         int l = 0;
         int r = rl->size - 1;
         while(l <= r) {
             const int m = (l + r) / 2;
-            if(rl->lut[m].last < ucs4)
+            if(rl->lut[m].last < ucs4) {
                 l = m + 1;
-            else if(rl->lut[m].first > ucs4)
+            } else if(rl->lut[m].first > ucs4) {
                 r = m - 1;
-            else
+            } else {
                 return rl->width;
+            }
         }
     }
 
