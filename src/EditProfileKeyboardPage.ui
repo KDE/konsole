@@ -133,6 +133,6 @@
   <tabstop>removeKeyBindingsButton</tabstop>
   <tabstop>resetKeyBindingsButton</tabstop>
  </tabstops>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

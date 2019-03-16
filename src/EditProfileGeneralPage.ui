@@ -55,7 +55,7 @@
         <string>Select the icon displayed on tabs using this profile</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="iconSize">
         <size>
@@ -305,7 +305,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string comment="@info">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-style:italic;"&gt;Settings → Configure Konsole → General → Use current window size on next startup&lt;/span&gt; must be disabled for these entries to work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string comment="@info">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Settings → Configure Konsole → General → Use current window size on next startup&lt;/span&gt; must be disabled for these entries to work.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::RichText</enum>
@@ -347,6 +347,6 @@
   <tabstop>terminalColumnsEntry</tabstop>
   <tabstop>terminalRowsEntry</tabstop>
  </tabstops>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

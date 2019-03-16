@@ -63,17 +63,17 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>Konsole::HistorySizeWidget</class>
+   <extends>QWidget</extends>
+   <header>HistorySizeWidget.h</header>
+  </customwidget>
+  <customwidget>
    <class>KMessageWidget</class>
    <extends>QFrame</extends>
    <header>kmessagewidget.h</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>Konsole::HistorySizeWidget</class>
-   <extends>QWidget</extends>
-   <header>HistorySizeWidget.h</header>
-  </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

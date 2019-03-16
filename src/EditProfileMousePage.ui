@@ -376,10 +376,10 @@
  <tabstops>
   <tabstop>tabWidget</tabstop>
  </tabstops>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
  <buttongroups>
-  <buttongroup name="pasteFrom" />
-  <buttongroup name="tripleClickMode" />
+  <buttongroup name="tripleClickMode"/>
+  <buttongroup name="pasteFrom"/>
  </buttongroups>
 </ui>

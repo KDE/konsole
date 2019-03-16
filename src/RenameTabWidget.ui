@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>50</height>
+    <height>70</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -62,7 +62,7 @@
     </widget>
    </item>
    <item row="0" column="2">
-    <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton" />
+    <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton"/>
    </item>
    <item row="1" column="0" alignment="Qt::AlignRight">
     <widget class="QLabel" name="label_2">
@@ -97,7 +97,7 @@
     </widget>
    </item>
    <item row="1" column="2">
-    <widget class="Konsole::TabTitleFormatButton" name="remoteTabTitleFormatButton" />
+    <widget class="Konsole::TabTitleFormatButton" name="remoteTabTitleFormatButton"/>
    </item>
   </layout>
  </widget>
@@ -114,6 +114,6 @@
   <tabstop>remoteTabTitleEdit</tabstop>
   <tabstop>remoteTabTitleFormatButton</tabstop>
  </tabstops>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

@@ -213,10 +213,10 @@
    <header>HistorySizeWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
  <buttongroups>
-  <buttongroup name="scrollAmount" />
-  <buttongroup name="scrollBarPosition" />
+  <buttongroup name="scrollBarPosition"/>
+  <buttongroup name="scrollAmount"/>
  </buttongroups>
 </ui>

@@ -12,7 +12,7 @@
   </property>
   <layout class="QGridLayout">
    <item row="0" column="0">
-    <widget class="Konsole::RenameTabWidget" name="renameTabWidget" />
+    <widget class="Konsole::RenameTabWidget" name="renameTabWidget" native="true"/>
    </item>
   </layout>
  </widget>
@@ -23,6 +23,6 @@
    <header>RenameTabWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>
