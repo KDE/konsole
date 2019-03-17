@@ -169,7 +169,7 @@
      <item row="2" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Miscellaneous:</string>
+        <string comment="Items that do not fit in other categories">Miscellaneous:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

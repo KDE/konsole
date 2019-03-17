@@ -112,7 +112,7 @@
         </item>
         <item>
          <property name="text">
-          <string>None</string>
+          <string comment="Do not show a close button">None</string>
          </property>
         </item>
        </widget>

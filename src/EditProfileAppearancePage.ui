@@ -233,7 +233,7 @@
          <item row="0" column="1">
           <widget class="QRadioButton" name="cursorShapeBlock">
            <property name="text">
-            <string>Block</string>
+            <string comment="A solid rectangular">Block</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">cursorShape</string>
@@ -243,7 +243,7 @@
          <item row="1" column="1">
           <widget class="QRadioButton" name="cursorShapeIBeam">
            <property name="text">
-            <string>I-Beam</string>
+            <string comment="A vertical line on the left edge">I-Beam</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">cursorShape</string>
@@ -253,7 +253,7 @@
          <item row="2" column="1">
           <widget class="QRadioButton" name="cursorShapeUnderline">
            <property name="text">
-            <string>Underline</string>
+            <string comment="A hortizonal line on the bottom edge">Underline</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">cursorShape</string>
@@ -285,7 +285,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Color:</string>
+            <string comment="Cursor color options">Color:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -427,7 +427,7 @@
      </widget>
      <widget class="QWidget" name="miscTab">
       <attribute name="title">
-       <string>Miscellaneous</string>
+       <string comment="Items that do not fit in other categories">Miscellaneous</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <property name="spacing">

@@ -135,7 +135,7 @@
              <string>Remember all output produced by the terminal</string>
             </property>
             <property name="text">
-             <string>Unlimited</string>
+             <string comment="Save all lines to the scrollback history">Unlimited</string>
             </property>
            </widget>
           </item>
@@ -174,7 +174,7 @@
         <string>Do not remember previous output</string>
        </property>
        <property name="text">
-        <string>None</string>
+        <string comment="Do not save any lines to the scrollback history">None</string>
        </property>
       </widget>
      </item>
