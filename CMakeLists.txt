@@ -9,7 +9,13 @@ set (KDE_APPLICATIONS_VERSION "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATI
 # minimal requirements
 cmake_minimum_required (VERSION 3.0 FATAL_ERROR)
 # Qt 5.9 LTS EOL May 2020
-set (QT_MIN_VERSION "5.9.7")
+
+# See autotests/KeyboardTranslatorTest.cpp which require checks for
+#  Qt >= 5.10.0 due to qCompare issues.
+#  Qt 5.9.4 is on DragonflyBSD; Qt 5.9.5 is on Ubuntu 18.04 LTS
+#  I could not find a 5.9.6 or 5.9.7 system to test.
+set (QT_MIN_VERSION "5.9.4")
+
 set (KF5_MIN_VERSION "5.6.0")
 
 # Release script will create bugzilla versions
