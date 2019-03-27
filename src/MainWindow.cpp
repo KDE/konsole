@@ -114,8 +114,8 @@ MainWindow::MainWindow() :
             this, &Konsole::MainWindow::newFromProfile);
     connect(_viewManager, &Konsole::ViewManager::newViewRequest,
             this, &Konsole::MainWindow::newTab);
-    connect(_viewManager, &Konsole::ViewManager::viewDetached, this,
-            &Konsole::MainWindow::viewDetached);
+    connect(_viewManager, &Konsole::ViewManager::terminalsDetached, this,
+            &Konsole::MainWindow::terminalsDetached);
 
     setCentralWidget(_viewManager->widget());
 
@@ -230,6 +230,10 @@ void MainWindow::disconnectController(SessionController *controller)
     if (controller->isValid()) {
         guiFactory()->removeClient(controller);
     }
+
+    if (_pluggedController == controller) {
+        _pluggedController = nullptr;
+    }
 }
 
 void MainWindow::activeViewChanged(SessionController *controller)
@@ -317,8 +321,7 @@ void MainWindow::setupActions()
     collection->setDefaultShortcut(_newTabMenuAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_T);
     collection->setShortcutsConfigurable(_newTabMenuAction, true);
     _newTabMenuAction->setAutoRepeat(false);
-    connect(_newTabMenuAction, &KActionMenu::triggered,
-            this, [this] { newTab(_viewManager->activeContainer());});
+    connect(_newTabMenuAction, &KActionMenu::triggered, this, &MainWindow::newTab);
     collection->addAction(QStringLiteral("new-tab"), _newTabMenuAction);
     collection->setShortcutsConfigurable(_newTabMenuAction, true);
 
@@ -391,11 +394,8 @@ void MainWindow::setProfileList(ProfileList *list)
 {
     profileListChanged(list->actions());
 
-    connect(list, &Konsole::ProfileList::profileSelected, this,
-            [this](const Profile::Ptr &profile) { newFromProfile(_viewManager->activeContainer(), profile);});
-
-    connect(list, &Konsole::ProfileList::actionsChanged, this,
-            &Konsole::MainWindow::profileListChanged);
+    connect(list, &Konsole::ProfileList::profileSelected, this, &MainWindow::newFromProfile);
+    connect(list, &Konsole::ProfileList::actionsChanged, this, &Konsole::MainWindow::profileListChanged);
 }
 
 void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
@@ -461,17 +461,17 @@ void MainWindow::openUrls(const QList<QUrl> &urls)
 
     for (const auto &url : urls) {
         if (url.isLocalFile()) {
-            createSession(_viewManager->activeContainer(), defaultProfile, url.path());
+            createSession(defaultProfile, url.path());
         } else if (url.scheme() == QLatin1String("ssh")) {
-            createSSHSession(_viewManager->activeContainer(), defaultProfile, url);
+            createSSHSession(defaultProfile, url);
         }
     }
 }
 
-void MainWindow::newTab(TabbedViewContainer *tabWidget)
+void MainWindow::newTab()
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
-    createSession(tabWidget, defaultProfile, activeSessionDir());
+    createSession(defaultProfile, activeSessionDir());
 }
 
 void MainWindow::cloneTab()
@@ -481,15 +481,15 @@ void MainWindow::cloneTab()
     Session *session = _pluggedController->session();
     Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
     if (profile) {
-        createSession(_viewManager->activeContainer(), profile, activeSessionDir());
+        createSession(profile, activeSessionDir());
     } else {
         // something must be wrong: every session should be associated with profile
         Q_ASSERT(false);
-        newTab(_viewManager->activeContainer());
+        newTab();
     }
 }
 
-Session *MainWindow::createSession(TabbedViewContainer *tabWidget, Profile::Ptr profile, const QString &directory)
+Session *MainWindow::createSession(Profile::Ptr profile, const QString &directory)
 {
     if (!profile) {
         profile = ProfileManager::instance()->defaultProfile();
@@ -507,12 +507,12 @@ Session *MainWindow::createSession(TabbedViewContainer *tabWidget, Profile::Ptr 
     // doesn't suffer a change in terminal size right after the session
     // starts.  Some applications such as GNU Screen and Midnight Commander
     // don't like this happening
-    _viewManager->createView(tabWidget, session);
-
+    auto newView = _viewManager->createView(session);
+    _viewManager->activeContainer()->addView(newView);
     return session;
 }
 
-Session *MainWindow::createSSHSession(TabbedViewContainer *tabWidget, Profile::Ptr profile, const QUrl &url)
+Session *MainWindow::createSSHSession(Profile::Ptr profile, const QUrl &url)
 {
     if (!profile) {
         profile = ProfileManager::instance()->defaultProfile();
@@ -537,8 +537,8 @@ Session *MainWindow::createSSHSession(TabbedViewContainer *tabWidget, Profile::P
     // doesn't suffer a change in terminal size right after the session
     // starts.  some applications such as GNU Screen and Midnight Commander
     // don't like this happening
-    _viewManager->createView(tabWidget, session);
-
+    auto newView = _viewManager->createView(session);
+    _viewManager->activeContainer()->addView(newView);
     return session;
 }
 
@@ -711,9 +711,9 @@ void MainWindow::showShortcutsDialog()
     }
 }
 
-void MainWindow::newFromProfile(TabbedViewContainer *tabWidget, const Profile::Ptr &profile)
+void MainWindow::newFromProfile(const Profile::Ptr &profile)
 {
-    createSession(tabWidget, profile, activeSessionDir());
+    createSession(profile, activeSessionDir());
 }
 
 void MainWindow::showManageProfilesDialog()
@@ -863,20 +863,20 @@ void MainWindow::triggerAction(const QString &name) const
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
-    if (obj == _pluggedController->view()) {
+    if (!_pluggedController.isNull() && obj == _pluggedController->view()) {
         switch(event->type()) {
-        case QEvent::MouseButtonPress:
-        case QEvent::MouseButtonDblClick:
+            case QEvent::MouseButtonPress:
+            case QEvent::MouseButtonDblClick:
             switch(static_cast<QMouseEvent*>(event)->button()) {
-            case Qt::ForwardButton:
-                triggerAction(QStringLiteral("next-view"));
-                break;
-            case Qt::BackButton:
-                triggerAction(QStringLiteral("previous-view"));
-                break;
-            default: ;
+                case Qt::ForwardButton:
+                    triggerAction(QStringLiteral("next-view"));
+                    break;
+                case Qt::BackButton:
+                    triggerAction(QStringLiteral("previous-view"));
+                    break;
+                default: ;
             }
-        default: ;
+            default: ;
         }
     }
 

@@ -25,6 +25,7 @@
 
 // Konsole
 #include "Profile.h"
+#include "ViewSplitter.h"
 
 namespace Konsole {
 class MainWindow;
@@ -68,7 +69,7 @@ public:
 
 private Q_SLOTS:
     void createWindow(const Profile::Ptr &profile, const QString &directory);
-    void detachView(Session *session);
+    void detachTerminals(ViewSplitter *splitter, const QHash<TerminalDisplay*, Session*>& sessionsMap);
 
     void toggleBackgroundInstance();
 

@@ -29,6 +29,7 @@
 
 // Konsole
 #include "Profile.h"
+#include "ViewSplitter.h"
 
 class QAction;
 class KActionMenu;
@@ -74,21 +75,19 @@ public:
     /**
      * Create a new session.
      *
-     * @param tabWidget where the new widget should be added.
      * @param profile The profile to use to create the new session.
      * @param directory Initial working directory for the new session or empty
      * if the default working directory associated with the profile should be used.
      */
-    Session *createSession(TabbedViewContainer *tabWidget, Profile::Ptr profile, const QString &directory);
+    Session *createSession(Profile::Ptr profile, const QString &directory);
 
     /**
      * create a new SSH session.
      *
-     * @param tabWidget where the new widget should be added.
      * @param profile The profile to use to create the new session.
      * @param url the URL representing the new SSH connection
      */
-    Session *createSSHSession(TabbedViewContainer *tabWidget, Profile::Ptr profile, const QUrl &url);
+    Session *createSSHSession(Profile::Ptr profile, const QUrl &url);
 
     /**
      * Helper method to make this window get input focus
@@ -125,7 +124,7 @@ Q_SIGNALS:
     /**
      * Emitted when a view for one session is detached from this window
      */
-    void viewDetached(Session *session);
+    void terminalsDetached(ViewSplitter *splitter, QHash<TerminalDisplay*, Session*> sessionsMap);
 
 protected:
     // Reimplemented for internal reasons.
@@ -143,14 +142,14 @@ protected:
     bool focusNextPrevChild(bool next) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
-    void newTab(TabbedViewContainer *tabWidget);
+    void newTab();
     void cloneTab();
     void newWindow();
     void showManageProfilesDialog();
     void activateMenuBar();
     void showSettingsDialog(const bool showProfilePage = false);
     void showShortcutsDialog();
-    void newFromProfile(TabbedViewContainer *tabWidget, const Profile::Ptr &profile);
+    void newFromProfile(const Profile::Ptr &profile);
     void activeViewChanged(SessionController *controller);
     void disconnectController(SessionController *controller);
     void activeViewTitleChanged(ViewProperties *);

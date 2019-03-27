@@ -33,18 +33,6 @@ DetachableTabBar::DetachableTabBar(QWidget *parent) :
     tabId(-1)
 {}
 
-bool DetachableTabBar::droppedContainerIsNotThis(const QPoint& currentPos) const
-{
-    for(const auto dropWidget : _containers) {
-        if (dropWidget->rect().contains(dropWidget->mapFromGlobal(currentPos))) {
-            if (dropWidget != parent()) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
 void DetachableTabBar::middleMouseButtonClickAt(const QPoint& pos)
 {
     tabId = tabAt(pos);
@@ -66,16 +54,9 @@ void DetachableTabBar::mouseMoveEvent(QMouseEvent *event)
     auto widgetAtPos = qApp->topLevelAt(event->globalPos());
     if (widgetAtPos != nullptr) {
         if (window() == widgetAtPos->window()) {
-            if (droppedContainerIsNotThis(event->globalPos())) {
-                if (dragType != DragType::WINDOW) {
-                    dragType = DragType::WINDOW;
-                    setCursor(QCursor(Qt::DragMoveCursor));
-                }
-            } else {
-                if (dragType != DragType::NONE) {
-                    dragType = DragType::NONE;
-                    setCursor(_originalCursor);
-                }
+            if (dragType != DragType::NONE) {
+                dragType = DragType::NONE;
+                setCursor(_originalCursor);
             }
         } else {
             if (dragType != DragType::WINDOW) {
@@ -125,12 +106,7 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
             emit detachTab(currentIndex());
         }
     } else if (window() != widgetAtPos->window()) {
-        // splits have a tendency to break, forbid to detach if split and it's the last tab.
         if (_containers.size() == 1 || count() > 1) {
-            emit moveTabToWindow(currentIndex(), widgetAtPos);
-        }
-    } else if (droppedContainerIsNotThis(event->globalPos())){
-        if (count() != 1) {
             emit moveTabToWindow(currentIndex(), widgetAtPos);
         }
     }

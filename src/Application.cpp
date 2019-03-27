@@ -43,6 +43,8 @@
 #include "ViewManager.h"
 #include "SessionController.h"
 #include "WindowSystemInfo.h"
+#include "ViewContainer.h"
+#include "TerminalDisplay.h"
 
 using namespace Konsole;
 
@@ -168,7 +170,7 @@ MainWindow *Application::newMainWindow()
 
     connect(window, &Konsole::MainWindow::newWindowRequest, this,
             &Konsole::Application::createWindow);
-    connect(window, &Konsole::MainWindow::viewDetached, this, &Konsole::Application::detachView);
+    connect(window, &Konsole::MainWindow::terminalsDetached, this, &Konsole::Application::detachTerminals);
 
     return window;
 }
@@ -176,24 +178,24 @@ MainWindow *Application::newMainWindow()
 void Application::createWindow(const Profile::Ptr &profile, const QString &directory)
 {
     MainWindow *window = newMainWindow();
-    ViewManager *viewManager = window->viewManager();
-    window->createSession(viewManager->activeContainer(), profile, directory);
+    window->createSession(profile, directory);
     finalizeNewMainWindow(window);
 }
 
-void Application::detachView(Session *session)
+void Application::detachTerminals(ViewSplitter *splitter,const QHash<TerminalDisplay*, Session*>& sessionsMap)
 {
     MainWindow *currentWindow = qobject_cast<MainWindow*>(sender());
     MainWindow *window = newMainWindow();
     ViewManager *manager = window->viewManager();
 
-    manager->createView(manager->activeContainer(), session);
+    foreach(TerminalDisplay* terminal, splitter->findChildren<TerminalDisplay*>()) {
+        manager->attachView(terminal, sessionsMap[terminal]);
+    }
+    manager->activeContainer()->addSplitter(splitter);
 
-    // Since user is dragging and dropping, move dnd window to where
-    // the user has the cursor (correct multiple monitor setups).
-    window->move(QCursor::pos());
-    window->resize(currentWindow->geometry().width(), currentWindow->geometry().height());
     window->show();
+    window->resize(currentWindow->width(), currentWindow->height());
+    window->move(QCursor::pos());
 }
 
 int Application::newInstance()
@@ -228,8 +230,7 @@ int Application::newInstance()
     Profile::Ptr newProfile = processProfileChangeArgs(baseProfile);
 
     // create new session
-    ViewManager *viewManager = window->viewManager();
-    Session *session = window->createSession(viewManager->activeContainer(), newProfile, QString());
+    Session *session = window->createSession(newProfile, QString());
 
     if (m_parser->isSet(QStringLiteral("noclose"))) {
         session->setAutoClose(false);
@@ -376,8 +377,7 @@ void Application::createTabFromArgs(MainWindow *window, const QHash<QString, QSt
 
     // Create the new session
     Profile::Ptr theProfile = shouldUseNewProfile ? newProfile : baseProfile;
-    ViewManager *viewManager = window->viewManager();
-    Session *session = window->createSession(viewManager->activeContainer(), theProfile, QString());
+    Session *session = window->createSession(theProfile, QString());
 
     if (m_parser->isSet(QStringLiteral("noclose"))) {
         session->setAutoClose(false);

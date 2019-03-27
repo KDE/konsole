@@ -21,6 +21,7 @@
 #define VIEWMANAGER_H
 
 // Qt
+#include <QAction>
 #include <QHash>
 #include <QObject>
 #include <QPointer>
@@ -44,10 +45,9 @@ class TabbedViewContainer;
 /**
  * Manages the terminal display widgets in a Konsole window or part.
  *
- * When a view manager is created, it constructs a splitter widget ( accessed via
- * widget() ) to hold one or more view containers.  Each view container holds
- * one or more terminal displays and a navigation widget ( eg. tabs or a list )
- * to allow the user to navigate between the displays in that container.
+ * When a view manager is created, it constructs a tab widget ( accessed via
+ * widget() ) to hold one or more view splitters.  Each view splitter holds
+ * one or more terminal displays  and splitters.
  *
  * The view manager provides menu actions ( defined in the 'konsoleui.rc' XML file )
  * to manipulate the views and view containers - for example, actions to split the view
@@ -79,6 +79,12 @@ public:
      * Constructs a new container to hold the views if no container has yet been created.
      */
     void createView(TabbedViewContainer *tabWidget, Session *session);
+
+    /*
+     * Applies the view-specific settings associated with specified @p profile
+     * to the terminal display @p view.
+     */
+    void applyProfileToView(TerminalDisplay *view, const Profile::Ptr &profile);
 
     /**
      * Return the main widget for the view manager which
@@ -191,17 +197,21 @@ public:
     /** returns the active tab from the view
     */
     TabbedViewContainer *activeContainer();
-
-    void applyProfileToView(TerminalDisplay *view, const Profile::Ptr &profile);
+    TerminalDisplay *createView(Session *session);
+    void attachView(TerminalDisplay *terminal, Session *session);
 
     static const ColorScheme *colorSchemeForProfile(const Profile::Ptr &profile);
+    /** Reorder the terminal display history list */
+    void updateTerminalDisplayHistory(TerminalDisplay *terminalDisplay = nullptr, bool remove = false);
 
+    QHash<TerminalDisplay*, Session*> forgetAll(ViewSplitter* splitter);
+    Session* forgetTerminal(TerminalDisplay* terminal);
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
     void empty();
 
     /** Emitted when a session is detached from a view owned by this ViewManager */
-    void viewDetached(Session *session);
+    void terminalsDetached(ViewSplitter *splitter, QHash<TerminalDisplay*, Session*> sessionsMap);
 
     /**
      * Emitted when the active view changes.
@@ -223,16 +233,6 @@ Q_SIGNALS:
     void viewPropertiesChanged(const QList<ViewProperties *> &propertiesList);
 
     /**
-     * Emitted when the number of views containers changes.  This is used to disable or
-     * enable menu items which can only be used when there are one or multiple containers
-     * visible.
-     *
-     * @param multipleViews True if there are multiple view containers open or false if there is
-     * just a single view.
-     */
-    void splitViewToggle(bool multipleViews);
-
-    /**
      * Emitted when menu bar visibility changes because a profile that requires so is
      * activated.
      */
@@ -242,9 +242,9 @@ Q_SIGNALS:
     void blurSettingChanged(bool);
 
     /** Requests creation of a new view with the default profile. */
-    void newViewRequest(TabbedViewContainer *tabWidget);
+    void newViewRequest();
     /** Requests creation of a new view, with the selected profile. */
-    void newViewWithProfileRequest(TabbedViewContainer *tabWidget, const Profile::Ptr&);
+    void newViewWithProfileRequest(const Profile::Ptr&);
 
 public Q_SLOTS:
     /** DBus slot that returns the number of sessions in the current view. */
@@ -314,13 +314,12 @@ private Q_SLOTS:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();
     void splitTopBottom();
-    void closeActiveContainer();
-    void closeOtherContainers();
     void expandActiveContainer();
     void shrinkActiveContainer();
 
     // called when the "Detach View" menu item is selected
     void detachActiveView();
+    void detachActiveTab();
     void updateDetachViewState();
 
     // called when a session terminates - the view manager will delete any
@@ -336,7 +335,12 @@ private Q_SLOTS:
 
     // called when the active view in a ViewContainer changes, so
     // that we can plug the appropriate actions into the UI
-    void viewActivated(QWidget *view);
+    void viewActivated(TerminalDisplay *view);
+
+    void focusUp();
+    void focusDown();
+    void focusLeft();
+    void focusRight();
 
     // called when "Next View" shortcut is activated
     void nextView();
@@ -375,15 +379,14 @@ private Q_SLOTS:
     // switches to the view at visual position 'index'
     // in the current container
     void switchToView(int index);
+    // gives focus and switches the terminal display, changing tab if needed
+    void switchToTerminalDisplay(TerminalDisplay *terminalDisplay);
 
     // called when a SessionController gains focus
     void controllerChanged(SessionController *controller);
 
-    // called when a ViewContainer requests a view be
-    // moved
-    void containerMoveViewRequest(int index, int sessionControllerId);
-
-    void detachView(TabbedViewContainer *container, QWidget *view);
+    /* Detaches the tab at index tabIdx */
+    void detachTab(int tabIdx);
 
 private:
     Q_DISABLE_COPY(ViewManager)
@@ -400,8 +403,6 @@ private:
 
     // creates a new container which can hold terminal displays
     TabbedViewContainer *createContainer();
-    // removes a container and emits appropriate signals
-    void removeContainer(TabbedViewContainer *container);
 
     // creates a new terminal display
     // the 'session' is used so that the terminal display's random seed
@@ -412,9 +413,18 @@ private:
     // actions associated with that view, and exposes basic information
     // about the session ( such as title and associated icon ) to the display.
     SessionController *createController(Session *session, TerminalDisplay *view);
+    void removeController(SessionController* controller);
+
+    // Activates a different terminal when the TerminalDisplay
+    // closes or is detached and another one should be focused.
+    // It will activate the last used terminal within the same splitView
+    // if possible otherwise it will focus the last used tab
+    void focusAnotherTerminal(ViewSplitter *toplevelSplitter);
+
+    void activateLastUsedView(bool reverse);
 
 private:
-    QPointer<ViewSplitter> _viewSplitter;
+    QPointer<TabbedViewContainer> _viewContainer;
     QPointer<SessionController> _pluggedController;
 
     QHash<TerminalDisplay *, Session *> _sessionMap;
@@ -426,6 +436,14 @@ private:
     NewTabBehavior _newTabBehavior;
     int _managerId;
     static int lastManagerId;
+    QList<TerminalDisplay *> _terminalDisplayHistory;
+    int _terminalDisplayHistoryIndex;
+
+    // List of actions that should only be enabled when there are multiple view
+    // containers open
+    QList<QAction *> _multiTabOnlyActions;
+    QList<QAction *> _multiSplitterOnlyActions;
+
 };
 }
 

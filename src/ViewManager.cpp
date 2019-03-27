@@ -24,7 +24,6 @@
 
 // Qt
 #include <QStringList>
-#include <QAction>
 #include <QTabBar>
 
 // KDE
@@ -53,36 +52,25 @@ int ViewManager::lastManagerId = 0;
 
 ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     QObject(parent),
-    _viewSplitter(nullptr),
+    _viewContainer(nullptr),
     _pluggedController(nullptr),
     _sessionMap(QHash<TerminalDisplay *, Session *>()),
     _actionCollection(collection),
     _navigationMethod(NoNavigation),
     _navigationVisibility(NavigationNotSet),
     _newTabBehavior(PutNewTabAtTheEnd),
-    _managerId(0)
+    _managerId(0),
+    _terminalDisplayHistoryIndex(-1)
 {
-    // create main view area
-    _viewSplitter = new ViewSplitter(nullptr);
-    KAcceleratorManager::setNoAccel(_viewSplitter);
-
-    // the ViewSplitter class supports both recursive and non-recursive splitting,
-    // in non-recursive mode, all containers are inserted into the same top-level splitter
-    // widget, and all the divider lines between the containers have the same orientation
-    //
-    // the ViewManager class is not currently able to handle a ViewSplitter in recursive-splitting
-    // mode
-    _viewSplitter->setRecursiveSplitting(false);
-    _viewSplitter->setFocusPolicy(Qt::NoFocus);
-
+    _viewContainer = createContainer();
     // setup actions which are related to the views
     setupActions();
 
+    /* TODO: Reconnect
     // emit a signal when all of the views held by this view manager are destroyed
-    connect(_viewSplitter.data(), &Konsole::ViewSplitter::allContainersEmpty,
+    */
+    connect(_viewContainer.data(), &Konsole::TabbedViewContainer::empty,
             this, &Konsole::ViewManager::empty);
-    connect(_viewSplitter.data(), &Konsole::ViewSplitter::empty, this,
-            &Konsole::ViewManager::empty);
 
     // listen for profile changes
     connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged,
@@ -96,8 +84,6 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _managerId = ++lastManagerId;
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Windows/")
                                                  + QString::number(_managerId), this);
-
-    _viewSplitter->addContainer(createContainer(), Qt::Vertical);
 }
 
 ViewManager::~ViewManager() = default;
@@ -109,17 +95,12 @@ int ViewManager::managerId() const
 
 QWidget *ViewManager::activeView() const
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    if (container != nullptr) {
-        return container->currentWidget();
-    } else {
-        return nullptr;
-    }
+    return _viewContainer->currentWidget();
 }
 
 QWidget *ViewManager::widget() const
 {
-    return _viewSplitter;
+    return _viewContainer;
 }
 
 void ViewManager::setupActions()
@@ -131,320 +112,368 @@ void ViewManager::setupActions()
 
     KActionCollection *collection = _actionCollection;
 
-    QAction *nextViewAction = new QAction(i18nc("@action Shortcut entry", "Next Tab"), this);
-    QAction *previousViewAction = new QAction(i18nc("@action Shortcut entry", "Previous Tab"), this);
-    QAction *lastViewAction = new QAction(i18nc("@action Shortcut entry",
-                                                "Switch to Last Tab"), this);
-    QAction *lastUsedViewAction = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs"), this);
-    QAction *lastUsedViewReverseAction = new QAction(i18nc("@action Shortcut entry",
-                                                           "Last Used Tabs (Reverse)"), this);
-    QAction *toggleTwoViewsAction = new QAction(i18nc("@action Shortcut entry", "Toggle Between Two Tabs"), this);
-    QAction *nextContainerAction = new QAction(i18nc("@action Shortcut entry",
-                                                     "Next View Container"), this);
+    // Let's reuse the pointer, no need not to.
+    auto *action = new QAction();
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-left-right")));
+    action->setText(i18nc("@action:inmenu", "Split View Left/Right"));
+    connect(action, &QAction::triggered, this, &ViewManager::splitLeftRight);
+    collection->addAction(QStringLiteral("split-view-left-right"), action);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::Key_ParenLeft);
 
-    QAction *moveViewLeftAction = new QAction(i18nc("@action Shortcut entry", "Move Tab Left"), this);
-    QAction *moveViewRightAction = new QAction(i18nc("@action Shortcut entry",
-                                                     "Move Tab Right"), this);
+    action = new QAction();
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
+    action->setText(i18nc("@action:inmenu", "Split View Top/Bottom"));
+    connect(action, &QAction::triggered, this, &ViewManager::splitTopBottom);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::Key_ParenRight);
+    collection->addAction(QStringLiteral("split-view-top-bottom"), action);
 
-    // list of actions that should only be enabled when there are multiple view
-    // containers open
-    QList<QAction *> multiViewOnlyActions;
-    multiViewOnlyActions << nextContainerAction;
+    action = new QAction();
+    action->setText(i18nc("@action:inmenu", "Expand View"));
+    action->setEnabled(false);
+    connect(action, &QAction::triggered, this, &ViewManager::expandActiveContainer);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketRight);
+    collection->addAction(QStringLiteral("expand-active-view"), action);
+    _multiSplitterOnlyActions << action;
 
-    QAction *splitLeftRightAction = new QAction(QIcon::fromTheme(QStringLiteral("view-split-left-right")),
-                                                i18nc("@action:inmenu", "Split View Left/Right"),
-                                                this);
-    collection->setDefaultShortcut(splitLeftRightAction, Konsole::ACCEL + Qt::Key_ParenLeft);
-    collection->addAction(QStringLiteral("split-view-left-right"), splitLeftRightAction);
-    connect(splitLeftRightAction, &QAction::triggered, this, &Konsole::ViewManager::splitLeftRight);
-
-    QAction *splitTopBottomAction = new QAction(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")),
-                                                i18nc("@action:inmenu",
-                                                "Split View Top/Bottom"), this);
-    collection->setDefaultShortcut(splitTopBottomAction, Konsole::ACCEL + Qt::Key_ParenRight);
-    collection->addAction(QStringLiteral("split-view-top-bottom"), splitTopBottomAction);
-    connect(splitTopBottomAction, &QAction::triggered, this, &Konsole::ViewManager::splitTopBottom);
-
-    QAction *closeActiveAction = new QAction(i18nc("@action:inmenu Close Active View", "Close Active"), this);
-    closeActiveAction->setIcon(QIcon::fromTheme(QStringLiteral("view-close")));
-    collection->setDefaultShortcut(closeActiveAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_X);
-    closeActiveAction->setEnabled(false);
-    collection->addAction(QStringLiteral("close-active-view"), closeActiveAction);
-    connect(closeActiveAction, &QAction::triggered, this,
-            &Konsole::ViewManager::closeActiveContainer);
-
-    multiViewOnlyActions << closeActiveAction;
-
-    QAction *closeOtherAction = new QAction(i18nc("@action:inmenu Close Other Views",
-                                                  "Close Others"), this);
-    collection->setDefaultShortcut(closeOtherAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_O);
-    closeOtherAction->setEnabled(false);
-    collection->addAction(QStringLiteral("close-other-views"), closeOtherAction);
-    connect(closeOtherAction, &QAction::triggered, this,
-            &Konsole::ViewManager::closeOtherContainers);
-
-    multiViewOnlyActions << closeOtherAction;
-
-    // Expand & Shrink Active View
-    QAction *expandActiveAction = new QAction(i18nc("@action:inmenu", "Expand View"), this);
-    collection->setDefaultShortcut(expandActiveAction,
-                                   Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketRight);
-    expandActiveAction->setEnabled(false);
-    collection->addAction(QStringLiteral("expand-active-view"), expandActiveAction);
-    connect(expandActiveAction, &QAction::triggered, this,
-            &Konsole::ViewManager::expandActiveContainer);
-
-    multiViewOnlyActions << expandActiveAction;
-
-    QAction *shrinkActiveAction = new QAction(i18nc("@action:inmenu", "Shrink View"), this);
-    collection->setDefaultShortcut(shrinkActiveAction,
-                                   Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketLeft);
-    shrinkActiveAction->setEnabled(false);
-    collection->addAction(QStringLiteral("shrink-active-view"), shrinkActiveAction);
-    connect(shrinkActiveAction, &QAction::triggered, this,
-            &Konsole::ViewManager::shrinkActiveContainer);
-
-    multiViewOnlyActions << shrinkActiveAction;
+    action = new QAction();
+    action->setText(i18nc("@action:inmenu", "Shrink View"));
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketLeft);
+    action->setEnabled(false);
+    collection->addAction(QStringLiteral("shrink-active-view"), action);
+    connect(action, &QAction::triggered, this, &ViewManager::shrinkActiveContainer);
+    _multiSplitterOnlyActions << action;
 
     // Crashes on Mac.
 #if defined(ENABLE_DETACHING)
-    QAction *detachViewAction = collection->addAction(QStringLiteral("detach-view"));
-    detachViewAction->setEnabled(true);
-    detachViewAction->setIcon(QIcon::fromTheme(QStringLiteral("tab-detach")));
-    detachViewAction->setText(i18nc("@action:inmenu", "D&etach Current Tab"));
+    action = collection->addAction(QStringLiteral("detach-view"));
+    action->setEnabled(true);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("tab-detach")));
+    action->setText(i18nc("@action:inmenu", "Detach Current &View"));
+
+    connect(action, &QAction::triggered, this, &ViewManager::detachActiveView);
+    _multiSplitterOnlyActions << action;
+
     // Ctrl+Shift+D is not used as a shortcut by default because it is too close
     // to Ctrl+D - which will terminate the session in many cases
-    collection->setDefaultShortcut(detachViewAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_H);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_H);
 
-    connect(this, &Konsole::ViewManager::splitViewToggle, this,
-            &Konsole::ViewManager::updateDetachViewState);
-    connect(detachViewAction, &QAction::triggered, this, &Konsole::ViewManager::detachActiveView);
+    action = collection->addAction(QStringLiteral("detach-tab"));
+    action->setEnabled(true);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("tab-detach")));
+    action->setText(i18nc("@action:inmenu", "Detach Current &Tab"));
+    connect(action, &QAction::triggered, this, &ViewManager::detachActiveTab);
+    _multiTabOnlyActions << action;
+    // Ctrl+Shift+D is not used as a shortcut by default because it is too close
+    // to Ctrl+D - which will terminate the session in many cases
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_L);
 #endif
-
-    // Next / Previous View , Next Container
-    collection->addAction(QStringLiteral("next-view"), nextViewAction);
-    collection->addAction(QStringLiteral("previous-view"), previousViewAction);
-    collection->addAction(QStringLiteral("last-tab"), lastViewAction);
-    collection->addAction(QStringLiteral("last-used-tab"), lastUsedViewAction);
-    collection->addAction(QStringLiteral("last-used-tab-reverse"), lastUsedViewReverseAction);
-    collection->addAction(QStringLiteral("toggle-two-tabs"), toggleTwoViewsAction);
-    collection->addAction(QStringLiteral("next-container"), nextContainerAction);
-    collection->addAction(QStringLiteral("move-view-left"), moveViewLeftAction);
-    collection->addAction(QStringLiteral("move-view-right"), moveViewRightAction);
-
-    // Switch to tab N shortcuts
-    const int SWITCH_TO_TAB_COUNT = 19;
-    for (int i = 0; i < SWITCH_TO_TAB_COUNT; i++) {
-        QAction *switchToTabAction = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);
-
-        connect(switchToTabAction, &QAction::triggered, this,
-           [this, i]() {
-               switchToView(i);
-           });
-        collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), switchToTabAction);
-    }
-
-    foreach (QAction *action, multiViewOnlyActions) {
-        connect(this, &Konsole::ViewManager::splitViewToggle, action, &QAction::setEnabled);
-    }
 
     // keyboard shortcut only actions
+    action = new QAction(i18nc("@action Shortcut entry", "Next Tab"), this);
     const QList<QKeySequence> nextViewActionKeys{Qt::SHIFT + Qt::Key_Right, Qt::CTRL + Qt::Key_PageDown};
-    collection->setDefaultShortcuts(nextViewAction, nextViewActionKeys);
-    connect(nextViewAction, &QAction::triggered, this, &Konsole::ViewManager::nextView);
-    _viewSplitter->addAction(nextViewAction);
+    collection->setDefaultShortcuts(action, nextViewActionKeys);
+    collection->addAction(QStringLiteral("next-tab"), action);
+    connect(action, &QAction::triggered, this, &ViewManager::nextView);
+    _multiTabOnlyActions << action;
+    // _viewSplitter->addAction(nextViewAction);
 
+    action = new QAction(i18nc("@action Shortcut entry", "Previous Tab"), this);
     const QList<QKeySequence> previousViewActionKeys{Qt::SHIFT + Qt::Key_Left, Qt::CTRL + Qt::Key_PageUp};
-    collection->setDefaultShortcuts(previousViewAction, previousViewActionKeys);
-    connect(previousViewAction, &QAction::triggered, this, &Konsole::ViewManager::previousView);
-    _viewSplitter->addAction(previousViewAction);
+    collection->setDefaultShortcuts(action, previousViewActionKeys);
+    collection->addAction(QStringLiteral("previous-tab"), action);
+    connect(action, &QAction::triggered, this, &ViewManager::previousView);
+    _multiTabOnlyActions << action;
+    // _viewSplitter->addAction(previousViewAction);
 
-    collection->setDefaultShortcut(nextContainerAction, Qt::SHIFT + Qt::Key_Tab);
-    connect(nextContainerAction, &QAction::triggered, this, &Konsole::ViewManager::nextContainer);
-    _viewSplitter->addAction(nextContainerAction);
+    action = new QAction(i18nc("@action Shortcut entry", "Next View Container"), this);
+    connect(action, &QAction::triggered, this, &ViewManager::focusUp);
+    collection->addAction(QStringLiteral("next-container"), action);
+    collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Up);
+    _viewContainer->addAction(action);
+    _multiSplitterOnlyActions << action;
 
-#ifdef Q_OS_MACOS
-    collection->setDefaultShortcut(moveViewLeftAction,
-                                   Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketLeft);
-#else
-    collection->setDefaultShortcut(moveViewLeftAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Left);
-#endif
-    connect(moveViewLeftAction, &QAction::triggered, this,
-            &Konsole::ViewManager::moveActiveViewLeft);
-    _viewSplitter->addAction(moveViewLeftAction);
+    action = new QAction(QStringLiteral("Focus Down"));
+    collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Down);
+    connect(action, &QAction::triggered, this, &ViewManager::focusDown);
+    _multiSplitterOnlyActions << action;
+    _viewContainer->addAction(action);
 
-#ifdef Q_OS_MACOS
-    collection->setDefaultShortcut(moveViewRightAction,
-                                   Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketRight);
-#else
-    collection->setDefaultShortcut(moveViewRightAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Right);
-#endif
-    connect(moveViewRightAction, &QAction::triggered, this,
-            &Konsole::ViewManager::moveActiveViewRight);
-    _viewSplitter->addAction(moveViewRightAction);
+    action = new QAction(i18nc("@action Shortcut entry", "Move Tab Left"), this);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Konsole::LEFT);
+    connect(action, &QAction::triggered, this, &ViewManager::focusLeft);
+    collection->addAction(QStringLiteral("move-view-left"), action);
+    _multiSplitterOnlyActions << action;
 
-    connect(lastViewAction, &QAction::triggered, this, &Konsole::ViewManager::lastView);
-    _viewSplitter->addAction(lastViewAction);
+    action = new QAction(i18nc("@action Shortcut entry", "Move Tab Right"), this);
+    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Konsole::RIGHT);
+    connect(action, &QAction::triggered, this, &ViewManager::focusRight);
+    collection->addAction(QStringLiteral("move-view-right"), action);
+    _multiSplitterOnlyActions << action;
 
-    collection->setDefaultShortcut(lastUsedViewAction, Qt::CTRL + Qt::Key_Tab);
-    connect(lastUsedViewAction, &QAction::triggered, this, &Konsole::ViewManager::lastUsedView);
-    _viewSplitter->addAction(lastUsedViewAction);
+    action = new QAction(i18nc("@action Shortcut entry", "Switch to Last Tab"), this);
+    connect(action, &QAction::triggered, this, &ViewManager::lastView);
+    collection->addAction(QStringLiteral("last-tab"), action);
+    _multiTabOnlyActions << action;
 
-    collection->setDefaultShortcut(lastUsedViewReverseAction, Qt::CTRL + Qt::SHIFT + Qt::Key_Tab);
-    connect(lastUsedViewReverseAction, &QAction::triggered, this, &Konsole::ViewManager::lastUsedViewReverse);
-    _viewSplitter->addAction(lastUsedViewReverseAction);
+    action = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs"), this);
+    connect(action, &QAction::triggered, this, &ViewManager::lastUsedView);
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::Key_Tab);
+    collection->addAction(QStringLiteral("last-used-tab"), action);
+    _multiTabOnlyActions << action;
 
-    connect(toggleTwoViewsAction, &QAction::triggered, this, &Konsole::ViewManager::toggleTwoViews);
-    _viewSplitter->addAction(toggleTwoViewsAction);
+    action = new QAction(i18nc("@action Shortcut entry", "Toggle Between Two Tabs"), this);
+    connect(action, &QAction::triggered, this, &Konsole::ViewManager::toggleTwoViews);
+    collection->addAction(QStringLiteral("toggle-two-tabs"), action);
+    _multiTabOnlyActions << action;
+
+    action = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs (Reverse)"), this);
+    collection->addAction(QStringLiteral("last-used-tab-reverse"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Tab);
+    connect(action, &QAction::triggered, this, &ViewManager::lastUsedViewReverse);
+    _multiTabOnlyActions << action;
+
+    action = new QAction(i18nc("@action Shortcut entry", "Maximize current Terminal"), this);
+    collection->addAction(QStringLiteral("maximize-current-terminal"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_E);
+    connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::maximizeCurrentTerminal);
+    _multiSplitterOnlyActions << action;
+    _viewContainer->addAction(action);
+
+    action = new QAction(i18nc("@action Shortcut entry", "Restore other terminals"), this);
+    collection->addAction(QStringLiteral("restore-other-terminals"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Minus);
+    connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::restoreOtherTerminals);
+    _multiSplitterOnlyActions << action;
+    _viewContainer->addAction(action);
+
+    // _viewSplitter->addAction(lastUsedViewReverseAction);
+    const int SWITCH_TO_TAB_COUNT = 19;
+    for (int i = 0; i < SWITCH_TO_TAB_COUNT; i++) {
+        action = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);
+        connect(action, &QAction::triggered, this, [this, i]() { switchToView(i); });
+        collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), action);
+    }
+
+    auto handleMultiTabActionsLambda = [=]{
+        const int count = _viewContainer->count();
+        foreach(QAction *action, _multiTabOnlyActions) {
+            action->setEnabled(count > 1);
+        }
+    };
+    connect(_viewContainer, &TabbedViewContainer::viewAdded, this, handleMultiTabActionsLambda);
+    connect(_viewContainer, &TabbedViewContainer::viewRemoved, this, handleMultiTabActionsLambda);
+
+    connect(_viewContainer, &QTabWidget::currentChanged, this, &ViewManager::updateDetachViewState);
+
+    // Initial state
+    handleMultiTabActionsLambda();
+    updateDetachViewState();
 }
 
 void ViewManager::switchToView(int index)
 {
-    _viewSplitter->activeContainer()->setCurrentIndex(index);
+    _viewContainer->setCurrentIndex(index);
+}
+
+void ViewManager::switchToTerminalDisplay(Konsole::TerminalDisplay* terminalDisplay)
+{
+    auto splitter = qobject_cast<ViewSplitter*>(terminalDisplay->parentWidget());
+    auto toplevelSplitter = splitter->getToplevelSplitter();
+
+    // Focus the TermialDisplay
+    terminalDisplay->setFocus();
+
+    if (_viewContainer->currentWidget() != toplevelSplitter) {
+        // Focus the tab
+        switchToView(_viewContainer->indexOf(toplevelSplitter));
+    }
 }
 
 void ViewManager::updateDetachViewState()
 {
-    Q_ASSERT(_actionCollection);
-    if (_actionCollection == nullptr) {
-        return;
+    if (_viewContainer && _viewContainer->activeViewSplitter()) {
+        const int splitCount = _viewContainer
+                ->activeViewSplitter()
+                ->getToplevelSplitter()
+                ->findChildren<TerminalDisplay*>()
+                    .count();
+
+        foreach (QAction *action, _multiSplitterOnlyActions) {
+            action->setEnabled(splitCount > 1);
+        }
     }
+}
 
-    const bool splitView = _viewSplitter->containers().count() >= 2;
-    auto activeContainer = _viewSplitter->activeContainer();
-    const bool shouldEnable = splitView
-                              || ((activeContainer != nullptr)
-                                  && activeContainer->count() >= 2);
+void ViewManager::focusUp()
+{
+    _viewContainer->activeViewSplitter()->focusUp();
+}
 
-    QAction *detachAction = _actionCollection->action(QStringLiteral("detach-view"));
+void ViewManager::focusDown()
+{
+    _viewContainer->activeViewSplitter()->focusDown();
+}
 
-    if ((detachAction != nullptr) && shouldEnable != detachAction->isEnabled()) {
-        detachAction->setEnabled(shouldEnable);
-    }
+void ViewManager::focusLeft()
+{
+    _viewContainer->activeViewSplitter()->focusLeft();
+}
+
+void ViewManager::focusRight()
+{
+    _viewContainer->activeViewSplitter()->focusRight();
 }
 
 void ViewManager::moveActiveViewLeft()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->moveActiveView(TabbedViewContainer::MoveViewLeft);
+    _viewContainer->moveActiveView(TabbedViewContainer::MoveViewLeft);
 }
 
 void ViewManager::moveActiveViewRight()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->moveActiveView(TabbedViewContainer::MoveViewRight);
+    _viewContainer->moveActiveView(TabbedViewContainer::MoveViewRight);
 }
 
 void ViewManager::nextContainer()
 {
-    _viewSplitter->activateNextContainer();
+//    _viewSplitter->activateNextContainer();
 }
 
 void ViewManager::nextView()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->activateNextView();
+    _viewContainer->activateNextView();
 }
 
 void ViewManager::previousView()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->activatePreviousView();
+    _viewContainer->activatePreviousView();
 }
 
 void ViewManager::lastView()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->activateLastView();
+    _viewContainer->activateLastView();
+}
+
+void ViewManager::activateLastUsedView(bool reverse)
+{
+    if (_terminalDisplayHistory.count() <= 1) {
+        return;
+    }
+
+    if (_terminalDisplayHistoryIndex == -1) {
+        _terminalDisplayHistoryIndex = reverse ? _terminalDisplayHistory.count() - 1 : 1;
+    } else if (reverse) {
+        if (_terminalDisplayHistoryIndex == 0) {
+            _terminalDisplayHistoryIndex = _terminalDisplayHistory.count() - 1;
+        } else {
+            _terminalDisplayHistoryIndex--;
+        }
+    } else {
+        if (_terminalDisplayHistoryIndex >= _terminalDisplayHistory.count() - 1) {
+            _terminalDisplayHistoryIndex = 0;
+        } else {
+            _terminalDisplayHistoryIndex++;
+        }
+    }
+
+    switchToTerminalDisplay(_terminalDisplayHistory[_terminalDisplayHistoryIndex]);
 }
 
 void ViewManager::lastUsedView()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->activateLastUsedView(false);
+    activateLastUsedView(false);
 }
 
 void ViewManager::lastUsedViewReverse()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->activateLastUsedView(true);
+    activateLastUsedView(true);
 }
 
 void ViewManager::toggleTwoViews()
 {
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    Q_ASSERT(container);
-    container->toggleLastUsedView();
+    if (_terminalDisplayHistory.count() <= 1) {
+        return;
+    }
+
+    switchToTerminalDisplay(_terminalDisplayHistory.at(1));
 }
 
 void ViewManager::detachActiveView()
 {
+#if !defined(ENABLE_DETACHING)
+    return;
+#endif
     // find the currently active view and remove it from its container
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
-    detachView(container, container->currentWidget());
+    if ((_viewContainer->findChildren<TerminalDisplay*>()).count() > 1) {
+        auto activeSplitter = _viewContainer->activeViewSplitter();
+        auto terminal = activeSplitter->activeTerminalDisplay();
+        auto newSplitter = new ViewSplitter();
+        newSplitter->addTerminalDisplay(terminal, Qt::Horizontal);
+        QHash<TerminalDisplay*, Session*> detachedSessions = forgetAll(newSplitter);
+        emit terminalsDetached(newSplitter, detachedSessions);
+        focusAnotherTerminal(activeSplitter->getToplevelSplitter());
+        updateDetachViewState();
+    }
 }
 
-void ViewManager::detachView(TabbedViewContainer *container, QWidget *view)
+void ViewManager::detachActiveTab()
+{
+    const int currentIdx = _viewContainer->currentIndex();
+    detachTab(currentIdx);
+}
+
+void ViewManager::detachTab(int tabIdx)
 {
 #if !defined(ENABLE_DETACHING)
     return;
 #endif
+    ViewSplitter* splitter = _viewContainer->viewSplitterAt(tabIdx);
+    QHash<TerminalDisplay*, Session*> detachedSessions = forgetAll(_viewContainer->viewSplitterAt(tabIdx));
+    emit terminalsDetached(splitter, detachedSessions);
+}
 
-    auto *viewToDetach = qobject_cast<TerminalDisplay *>(view);
-
-    if (viewToDetach == nullptr) {
-        return;
+QHash<TerminalDisplay*, Session*> ViewManager::forgetAll(ViewSplitter* splitter) {
+    splitter->setParent(nullptr);
+    QHash<TerminalDisplay*, Session*> detachedSessions;
+    foreach(TerminalDisplay* terminal, splitter->findChildren<TerminalDisplay*>()) {
+        Session* session = forgetTerminal(terminal);
+        detachedSessions[terminal] = session;
     }
+    return detachedSessions;
+}
 
-    // BR390736 - some instances are sending invalid session to viewDetached()
-    Session *sessionToDetach = _sessionMap[viewToDetach];
-    if (sessionToDetach == nullptr) {
-        return;
+Session* ViewManager::forgetTerminal(TerminalDisplay* terminal)
+{
+    removeController(terminal->sessionController());
+    auto session = _sessionMap.take(terminal);
+    if (session != nullptr) {
+        disconnect(session, &Konsole::Session::finished, this, &Konsole::ViewManager::sessionFinished);
     }
-    emit viewDetached(sessionToDetach);
-
-    _sessionMap.remove(viewToDetach);
-
-    // remove the view from this window
-    container->removeView(viewToDetach);
-    viewToDetach->deleteLater();
-
-    // if the container from which the view was removed is now empty then it can be deleted,
-    // unless it is the only container in the window, in which case it is left empty
-    // so that there is always an active container
-    if (_viewSplitter->containers().count() > 1
-        && container->count() == 0) {
-        removeContainer(container);
-    }
+    _viewContainer->disconnectTerminalDisplay(terminal);
+    updateTerminalDisplayHistory(terminal, true);
+    return session;
 }
 
 void ViewManager::sessionFinished()
 {
     // if this slot is called after the view manager's main widget
     // has been destroyed, do nothing
-    if (_viewSplitter.isNull()) {
+    if (_viewContainer.isNull()) {
         return;
     }
 
     auto *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
 
-    // close attached views
-    QList<TerminalDisplay *> children = _viewSplitter->findChildren<TerminalDisplay *>();
+    auto view = _sessionMap.key(session);
+    _sessionMap.remove(view);
 
-    foreach (TerminalDisplay *view, children) {
-        if (_sessionMap[view] == session) {
-            _sessionMap.remove(view);
-            view->deleteLater();
-        }
-    }
+    // Before deleting the view, let's unmaximize if it's maximized.
+    auto splitter = qobject_cast<ViewSplitter*>(view->parentWidget());
+    auto toplevelSplitter = splitter->getToplevelSplitter();
+    toplevelSplitter->restoreOtherTerminals();
+    _viewContainer->removeView(view);
+    view->deleteLater();
 
     // Only remove the controller from factory() if it's actually controlling
     // the session from the sender.
@@ -454,9 +483,32 @@ void ViewManager::sessionFinished()
         // order to prevent BUG: 185466 - disappearing menu popup
         emit unplugController(_pluggedController);
     }
+
+    updateTerminalDisplayHistory(view, true);
+    focusAnotherTerminal(toplevelSplitter);
+    updateDetachViewState();
 }
 
-void ViewManager::viewActivated(QWidget *view)
+void ViewManager::focusAnotherTerminal(ViewSplitter *toplevelSplitter)
+{
+    auto tabTterminalDisplays = toplevelSplitter->findChildren<TerminalDisplay*>();
+    if (tabTterminalDisplays.count() > 1) {
+        // Give focus to the last used terminal in this tab
+        for (auto *historyItem : _terminalDisplayHistory) {
+            for (auto *terminalDisplay : tabTterminalDisplays) {
+                if (terminalDisplay == historyItem) {
+                    terminalDisplay->setFocus(Qt::OtherFocusReason);
+                    return;
+                }
+            }
+        }
+    } else if (_terminalDisplayHistory.count() >= 1) {
+        // Give focus to the last used terminal tab
+        switchToTerminalDisplay(_terminalDisplayHistory[0]);
+    }
+}
+
+void ViewManager::viewActivated(TerminalDisplay *view)
 {
     Q_ASSERT(view != nullptr);
 
@@ -478,85 +530,34 @@ void ViewManager::splitTopBottom()
 
 void ViewManager::splitView(Qt::Orientation orientation)
 {
-    TabbedViewContainer *container = createContainer();
+    auto viewSplitter = qobject_cast<ViewSplitter*>(_viewContainer->currentWidget());
 
-    if (_viewSplitter->activeContainer()->count()) {
-        // get the currently applied profile and use it to create the new tab.
-        auto *activeContainer= _viewSplitter->activeContainer();
-        auto *currentDisplay = qobject_cast<TerminalDisplay*>(activeContainer->currentWidget());
-        auto profile = SessionManager::instance()->sessionProfile(_sessionMap[currentDisplay]);
+    // get the currently applied profile and use it to create the new tab.
+    auto *currentDisplay = viewSplitter->findChild<TerminalDisplay*>();
+    auto profile = SessionManager::instance()->sessionProfile(_sessionMap[currentDisplay]);
 
-        // Create a new session with the selected profile.
-        auto *session = SessionManager::instance()->createSession(profile);
-        session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
+    // Create a new session with the selected profile.
+    auto *session = SessionManager::instance()->createSession(profile);
+    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-        createView(session, container, 0);
-    }
+    auto terminalDisplay = createView(session);
 
-    _viewSplitter->addContainer(container, orientation);
-    emit splitViewToggle(_viewSplitter->containers().count() > 0);
+    _viewContainer->splitView(terminalDisplay, orientation);
+
+    updateDetachViewState();
 
     // focus the new container
-    container->currentWidget()->setFocus();
-
-    // ensure that the active view is focused after the split / unsplit
-    TabbedViewContainer *activeContainer = _viewSplitter->activeContainer();
-    QWidget *activeView = activeContainer != nullptr ? activeContainer->currentWidget() : nullptr;
-
-    if (activeView != nullptr) {
-        activeView->setFocus(Qt::OtherFocusReason);
-    }
-}
-
-void ViewManager::removeContainer(TabbedViewContainer *container)
-{
-    // remove session map entries for views in this container
-    for(int i = 0, end = container->count(); i < end; i++) {
-        auto view = container->widget(i);
-        auto *display = qobject_cast<TerminalDisplay *>(view);
-        Q_ASSERT(display);
-        _sessionMap.remove(display);
-    }
-
-    _viewSplitter->removeContainer(container);
-    container->deleteLater();
-
-    emit splitViewToggle(_viewSplitter->containers().count() > 1);
+    terminalDisplay->setFocus();
 }
 
 void ViewManager::expandActiveContainer()
 {
-    _viewSplitter->adjustContainerSize(_viewSplitter->activeContainer(), 10);
+    _viewContainer->activeViewSplitter()->adjustActiveTerminalDisplaySize(10);
 }
 
 void ViewManager::shrinkActiveContainer()
 {
-    _viewSplitter->adjustContainerSize(_viewSplitter->activeContainer(), -10);
-}
-
-void ViewManager::closeActiveContainer()
-{
-    // only do something if there is more than one container active
-    if (_viewSplitter->containers().count() > 1) {
-        TabbedViewContainer *container = _viewSplitter->activeContainer();
-
-        removeContainer(container);
-
-        // focus next container so that user can continue typing
-        // without having to manually focus it themselves
-        nextContainer();
-    }
-}
-
-void ViewManager::closeOtherContainers()
-{
-    TabbedViewContainer *active = _viewSplitter->activeContainer();
-
-    foreach (TabbedViewContainer *container, _viewSplitter->containers()) {
-        if (container != active) {
-            removeContainer(container);
-        }
-    }
+    _viewContainer->activeViewSplitter()->adjustActiveTerminalDisplaySize(-10);
 }
 
 SessionController *ViewManager::createController(Session *session, TerminalDisplay *view)
@@ -583,13 +584,24 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
     return controller;
 }
 
+// should this be handed by ViewManager::unplugController signal
+void ViewManager::removeController(SessionController* controller)
+{
+    disconnect(controller, &Konsole::SessionController::focused, this,
+            &Konsole::ViewManager::controllerChanged);
+    if (_pluggedController == controller) {
+        _pluggedController = nullptr;
+    }
+    controller->deleteLater();
+}
+
 void ViewManager::controllerChanged(SessionController *controller)
 {
     if (controller == _pluggedController) {
         return;
     }
 
-    _viewSplitter->setFocusProxy(controller->view());
+    updateTerminalDisplayHistory(controller->view());
 
     _pluggedController = controller;
     emit activeViewChanged(controller);
@@ -600,7 +612,17 @@ SessionController *ViewManager::activeViewController() const
     return _pluggedController;
 }
 
-void ViewManager::createView(Session *session, TabbedViewContainer *container, int index)
+void ViewManager::attachView(TerminalDisplay *terminal, Session *session)
+{
+    connect(session, &Konsole::Session::finished, this, &Konsole::ViewManager::sessionFinished,
+            Qt::UniqueConnection);
+    _sessionMap[terminal] = session;
+    createController(session, terminal);
+    updateDetachViewState();
+    _terminalDisplayHistory.append(terminal);
+}
+
+TerminalDisplay *ViewManager::createView(Session *session)
 {
     // notify this view manager when the session finishes so that its view
     // can be deleted
@@ -608,8 +630,8 @@ void ViewManager::createView(Session *session, TabbedViewContainer *container, i
     // Use Qt::UniqueConnection to avoid duplicate connection
     connect(session, &Konsole::Session::finished, this, &Konsole::ViewManager::sessionFinished,
             Qt::UniqueConnection);
-
     TerminalDisplay *display = createTerminalDisplay(session);
+
     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
     applyProfileToView(display, profile);
 
@@ -620,32 +642,22 @@ void ViewManager::createView(Session *session, TabbedViewContainer *container, i
     createController(session, display);
 
     _sessionMap[display] = session;
-    container->addView(display, index);
     session->addView(display);
+    _terminalDisplayHistory.append(display);
 
     // tell the session whether it has a light or dark background
     session->setDarkBackground(colorSchemeForProfile(profile)->hasDarkBackground());
-    container->setCurrentWidget(display);
     display->setFocus(Qt::OtherFocusReason);
+//     updateDetachViewState();
 
-    updateDetachViewState();
-}
-
-void ViewManager::createView(TabbedViewContainer *tabWidget, Session *session)
-{
-    const int index = _newTabBehavior == PutNewTabAfterCurrentTab ?
-                _viewSplitter->activeContainer()->currentIndex() + 1 : -1;
-
-    createView(session, tabWidget, index);
+    return display;
 }
 
 TabbedViewContainer *ViewManager::createContainer()
 {
-
-    auto *container = new TabbedViewContainer(this, _viewSplitter);
+    auto *container = new TabbedViewContainer(this, nullptr);
     container->setNavigationVisibility(_navigationVisibility);
-    //TODO: Fix Detaching.
-    connect(container, &TabbedViewContainer::detachTab, this, &ViewManager::detachView);
+    connect(container, &TabbedViewContainer::detachTab, this, &ViewManager::detachTab);
 
     // connect signals and slots
     connect(container, &Konsole::TabbedViewContainer::viewAdded, this,
@@ -662,26 +674,12 @@ TabbedViewContainer *ViewManager::createContainer()
             this, &ViewManager::newViewRequest);
     connect(container, &Konsole::TabbedViewContainer::newViewWithProfileRequest,
             this, &Konsole::ViewManager::newViewWithProfileRequest);
-    connect(container, &Konsole::TabbedViewContainer::moveViewRequest, this,
-            &Konsole::ViewManager::containerMoveViewRequest);
     connect(container, &Konsole::TabbedViewContainer::viewRemoved, this,
             &Konsole::ViewManager::viewDestroyed);
     connect(container, &Konsole::TabbedViewContainer::activeViewChanged, this,
             &Konsole::ViewManager::viewActivated);
 
     return container;
-}
-
-void ViewManager::containerMoveViewRequest(int index, int id)
-{
-    auto *container = qobject_cast<TabbedViewContainer *>(sender());
-    auto *controller = qobject_cast<SessionController *>(ViewProperties::propertiesById(id));
-    Q_ASSERT(container);
-    Q_ASSERT(controller);
-
-    createView(controller->session(), container, index);
-    controller->session()->refresh();
-    container->currentWidget()->setFocus();
 }
 
 void ViewManager::setNavigationMethod(NavigationMethod method)
@@ -731,9 +729,8 @@ ViewManager::NavigationMethod ViewManager::navigationMethod() const
 
 void ViewManager::containerViewsChanged(TabbedViewContainer *container)
 {
-    if ((!_viewSplitter.isNull()) && container == _viewSplitter->activeContainer()) {
-        emit viewPropertiesChanged(viewProperties());
-    }
+    // TODO: Verify that this is right.
+    emit viewPropertiesChanged(viewProperties());
 }
 
 void ViewManager::viewDestroyed(QWidget *view)
@@ -752,10 +749,10 @@ void ViewManager::viewDestroyed(QWidget *view)
             session->close();
         }
     }
+
     //we only update the focus if the splitter is still alive
-    if (!_viewSplitter.isNull()) {
-        updateDetachViewState();
-    }
+    updateDetachViewState();
+
     // The below causes the menus  to be messed up
     // Only happens when using the tab bar close button
 //    if (_pluggedController)
@@ -825,18 +822,16 @@ QList<ViewProperties *> ViewManager::viewProperties() const
 {
     QList<ViewProperties *> list;
 
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
+    TabbedViewContainer *container = _viewContainer;
     if (container == nullptr) {
         return {};
     }
 
-    list.reserve(container->count());
+    auto terminalContainers = _viewContainer->findChildren<TerminalDisplay*>();
+    list.reserve(terminalContainers.size());
 
-    for(int i = 0, end = container->count(); i < end; i++) {
-        auto view = container->terminalAt(i);
-        ViewProperties *properties = view->sessionController();
-        Q_ASSERT(properties);
-        list << properties;
+    for(auto terminalDisplay : _viewContainer->findChildren<TerminalDisplay*>()) {
+        list.append(terminalDisplay->sessionController());
     }
 
     return list;
@@ -849,7 +844,7 @@ void ViewManager::saveSessions(KConfigGroup &group)
     QSet<Session *> unique;
     int tab = 1;
 
-    TabbedViewContainer *container = _viewSplitter->activeContainer();
+    TabbedViewContainer *container = _viewContainer;
 
     // first: sessions in the active container, preserving the order
     Q_ASSERT(container);
@@ -858,6 +853,8 @@ void ViewManager::saveSessions(KConfigGroup &group)
     }
     ids.reserve(container->count());
 
+    //TODO: Handle sessions
+#if 0
     auto *activeview = qobject_cast<TerminalDisplay *>(container->currentWidget());
     for (int i = 0, end = container->count(); i < end; i++) {
         auto *view = qobject_cast<TerminalDisplay *>(container->widget(i));
@@ -871,6 +868,7 @@ void ViewManager::saveSessions(KConfigGroup &group)
         }
         tab++;
     }
+#endif
 
     // second: all other sessions, in random order
     // we don't want to have sessions restored that are not connected
@@ -886,7 +884,7 @@ void ViewManager::saveSessions(KConfigGroup &group)
 
 TabbedViewContainer *ViewManager::activeContainer()
 {
-    return _viewSplitter->activeContainer();
+    return _viewContainer;
 }
 
 void ViewManager::restoreSessions(const KConfigGroup &group)
@@ -906,7 +904,7 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
             break;
         }
 
-        createView(activeContainer(), session);
+        createView(session);
         if (!session->isRunning()) {
             session->run();
         }
@@ -916,14 +914,14 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
     }
 
     if (display != nullptr) {
-        _viewSplitter->activeContainer()->setCurrentWidget(display);
+        activeContainer()->setCurrentWidget(display);
         display->setFocus(Qt::OtherFocusReason);
     }
 
     if (ids.isEmpty()) { // Session file is unusable, start default Profile
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
         Session *session = SessionManager::instance()->createSession(profile);
-        createView(activeContainer(), session);
+        createView(session);
         if (!session->isRunning()) {
             session->run();
         }
@@ -963,7 +961,7 @@ void ViewManager::setCurrentSession(int sessionId)
     QHash<TerminalDisplay *, Session *>::const_iterator i;
     for (i = _sessionMap.constBegin(); i != _sessionMap.constEnd(); ++i) {
         if (i.value()->sessionId() == sessionId) {
-            TabbedViewContainer *container = _viewSplitter->activeContainer();
+            TabbedViewContainer *container = activeContainer();
             if (container != nullptr) {
                 container->setCurrentWidget(i.key());
             }
@@ -978,7 +976,7 @@ int ViewManager::newSession()
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    createView(activeContainer(), session);
+    createView(session);
     session->run();
 
     return session->sessionId();
@@ -1000,7 +998,7 @@ int ViewManager::newSession(const QString &profile)
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    createView(activeContainer(), session);
+    createView(session);
     session->run();
 
     return session->sessionId();
@@ -1023,7 +1021,7 @@ int ViewManager::newSession(const QString &profile, const QString &directory)
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    createView(activeContainer(), session);
+    createView(session);
     session->run();
 
     return session->sessionId();
@@ -1061,22 +1059,47 @@ void ViewManager::moveSessionRight()
 
 void ViewManager::setTabWidthToText(bool setTabWidthToText)
 {
-    for(auto container : _viewSplitter->containers()) {
-        container->tabBar()->setExpanding(!setTabWidthToText);
-        container->tabBar()->update();
-    }
+    _viewContainer->tabBar()->setExpanding(!setTabWidthToText);
+    _viewContainer->tabBar()->update();
 }
 
 void ViewManager::setNavigationVisibility(NavigationVisibility navigationVisibility) {
     if (_navigationVisibility != navigationVisibility) {
         _navigationVisibility = navigationVisibility;
-        for(auto *container : _viewSplitter->containers()) {
-            container->setNavigationVisibility(navigationVisibility);
-        }
+        _viewContainer->setNavigationVisibility(navigationVisibility);
     }
 }
 
 void ViewManager::setNavigationBehavior(int behavior)
 {
     _newTabBehavior = static_cast<NewTabBehavior>(behavior);
+}
+
+void ViewManager::updateTerminalDisplayHistory(TerminalDisplay* terminalDisplay, bool remove)
+{
+    if (terminalDisplay == nullptr) {
+        if (_terminalDisplayHistoryIndex >= 0) {
+            // This is the case when we finished walking through the history
+            // (i.e. when Ctrl-Tab has been released)
+            terminalDisplay = _terminalDisplayHistory[_terminalDisplayHistoryIndex];
+            _terminalDisplayHistoryIndex = -1;
+        } else {
+            return;
+        }
+    }
+
+    if (_terminalDisplayHistoryIndex >= 0 && !remove) {
+        // Do not reorder the tab history while we are walking through it
+        return;
+    }
+
+    for (int i = 0; i < _terminalDisplayHistory.count(); i++) {
+        if (_terminalDisplayHistory[i] == terminalDisplay) {
+            _terminalDisplayHistory.removeAt(i);
+            if (!remove) {
+                _terminalDisplayHistory.prepend(terminalDisplay);
+            }
+            break;
+        }
+    }
 }

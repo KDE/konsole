@@ -230,10 +230,6 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
 SessionController::~SessionController()
 {
-    if (!_view.isNull()) {
-        _view->setScreenWindow(nullptr);
-    }
-
     _allControllers.remove(this);
 
     if (!_editProfileDialog.isNull()) {
@@ -539,11 +535,7 @@ void SessionController::setupCommonActions()
 
     // Close Session
     QAction* action = collection->addAction(QStringLiteral("close-session"), this, SLOT(closeSession()));
-    if (isKonsolePart()) {
-        action->setText(i18n("&Close Session"));
-    } else {
-        action->setText(i18n("&Close Tab"));
-    }
+    action->setText(i18n("&Close Session"));
 
     action->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_W);

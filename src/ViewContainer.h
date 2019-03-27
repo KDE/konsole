@@ -76,6 +76,10 @@ public:
 
     /** Adds a new view to the container widget */
     void addView(TerminalDisplay *view, int index = -1);
+    void addSplitter(ViewSplitter *splitter, int index = -1);
+
+    /** splits the currently focused Splitter */
+    void splitView(TerminalDisplay *view, Qt::Orientation orientation);
 
     /** Removes a view from the container */
     void removeView(TerminalDisplay *view);
@@ -95,14 +99,10 @@ public:
     /** Changes the active view to the last view */
     void activateLastView();
 
-    /** Changes the active view to the last used view */
-    void activateLastUsedView(bool reverse);
-
-    /** Toggle between last two views */
-    void toggleLastUsedView();
-
     void setCss(const QString& styleSheet = QString());
     void setCssFromFile(const QUrl& url);
+
+    ViewSplitter *activeViewSplitter();
     /**
      * This enum describes the directions
      * in which views can be re-arranged within the container
@@ -134,27 +134,33 @@ public:
     void currentTabChanged(int index);
     void closeCurrentTab();
     void wheelScrolled(int delta);
-
+    void currentSessionControllerChanged(SessionController *controller);
     void tabDoubleClicked(int index);
     void openTabContextMenu(const QPoint &point);
     void setNavigationVisibility(ViewManager::NavigationVisibility navigationVisibility);
     void moveTabToWindow(int index, QWidget *window);
 
+    void maximizeCurrentTerminal();
+    void restoreOtherTerminals();
     /* return the widget(int index) casted to TerminalDisplay*
      *
      * The only thing that this class holds are TerminalDisplays, so
      * this is the only thing that should be used to retrieve widgets.
      */
-    TerminalDisplay *terminalAt(int index);
+    ViewSplitter *viewSplitterAt(int index);
+
+    void connectTerminalDisplay(TerminalDisplay *view);
+    void disconnectTerminalDisplay(TerminalDisplay *view);
+
 Q_SIGNALS:
     /** Emitted when the container has no more children */
     void empty(TabbedViewContainer *container);
 
     /** Emitted when the user requests to open a new view */
-    void newViewRequest(TabbedViewContainer *thisContainer);
+    void newViewRequest();
 
     /** Requests creation of a new view, with the selected profile. */
-    void newViewWithProfileRequest(TabbedViewContainer *thisContainer, const Profile::Ptr&);
+    void newViewWithProfileRequest(const Profile::Ptr&);
 
     /**
      * Emitted when the user requests to move a view from another container
@@ -178,17 +184,9 @@ Q_SIGNALS:
     void viewRemoved(TerminalDisplay *view);
 
     /** detach the specific tab */
-    void detachTab(TabbedViewContainer *self, TerminalDisplay *activeView);
+    void detachTab(int tabIdx);
 
 protected:
-    /**
-     * Rearranges the order of widgets in the container.
-     *
-     * @param fromIndex Current index of the widget to move
-     * @param toIndex New index for the widget
-     */
-    void moveViewWidget(int fromIndex, int toIndex);
-
     // close tabs and unregister
     void closeTerminalTab(int idx);
 
@@ -198,17 +196,14 @@ private Q_SLOTS:
     void konsoleConfigChanged();
 
 private:
-    void forgetView(TerminalDisplay *view);
-    void updateTabHistory(TerminalDisplay *view, bool remove = false);
+    void forgetView(ViewSplitter *view);
 
-    QList<TerminalDisplay *> _tabHistory;
     ViewManager *_connectedViewManager;
     QMenu *_contextPopupMenu;
     QToolButton *_newTabButton;
     QToolButton *_closeTabButton;
     int _contextMenuTabIndex;
     ViewManager::NavigationVisibility _navigationVisibility;
-    int _tabHistoryIndex;
 };
 
 

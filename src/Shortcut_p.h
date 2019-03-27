@@ -30,9 +30,13 @@ namespace Konsole {
  */
 enum Modifier {
 #ifdef Q_OS_MACOS
-    ACCEL = Qt::META
+    ACCEL = Qt::META,
+    LEFT = Qt::Key_BracketLeft,
+    RIGHT = Qt::Key_BracketRight
 #else
-    ACCEL = Qt::CTRL
+    ACCEL = Qt::CTRL,
+    LEFT = Qt::Key_Left,
+    RIGHT = Qt::Key_Right
 #endif
 };
 }

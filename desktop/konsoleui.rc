@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsole" version="10">
+<kpartgui name="konsole" version="11">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
@@ -25,6 +25,7 @@
                 <Action name="shrink-active-view"/>
             </Menu>
             <Separator/>
+            <Action name="detach-tab" />
             <Action name="detach-view"/>
             <Separator/>
             <DefineGroup name="session-view-operations"/>
