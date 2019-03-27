@@ -80,4 +80,4 @@ void BookMarkTest::testBookMarkURLs()
     }
 */
 
-QTEST_MAIN(BookMarkTest)
+QTEST_GUILESS_MAIN(BookMarkTest)
