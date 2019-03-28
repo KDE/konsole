@@ -113,21 +113,21 @@ void ViewManager::setupActions()
     KActionCollection *collection = _actionCollection;
 
     // Let's reuse the pointer, no need not to.
-    auto *action = new QAction();
+    auto *action = new QAction(this);
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-left-right")));
     action->setText(i18nc("@action:inmenu", "Split View Left/Right"));
     connect(action, &QAction::triggered, this, &ViewManager::splitLeftRight);
     collection->addAction(QStringLiteral("split-view-left-right"), action);
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::Key_ParenLeft);
 
-    action = new QAction();
+    action = new QAction(this);
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
     action->setText(i18nc("@action:inmenu", "Split View Top/Bottom"));
     connect(action, &QAction::triggered, this, &ViewManager::splitTopBottom);
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::Key_ParenRight);
     collection->addAction(QStringLiteral("split-view-top-bottom"), action);
 
-    action = new QAction();
+    action = new QAction(this);
     action->setText(i18nc("@action:inmenu", "Expand View"));
     action->setEnabled(false);
     connect(action, &QAction::triggered, this, &ViewManager::expandActiveContainer);
@@ -135,7 +135,7 @@ void ViewManager::setupActions()
     collection->addAction(QStringLiteral("expand-active-view"), action);
     _multiSplitterOnlyActions << action;
 
-    action = new QAction();
+    action = new QAction(this);
     action->setText(i18nc("@action:inmenu", "Shrink View"));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketLeft);
     action->setEnabled(false);
@@ -192,7 +192,7 @@ void ViewManager::setupActions()
     _viewContainer->addAction(action);
     _multiSplitterOnlyActions << action;
 
-    action = new QAction(QStringLiteral("Focus Down"));
+    action = new QAction(QStringLiteral("Focus Down"), this);
     collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Down);
     connect(action, &QAction::triggered, this, &ViewManager::focusDown);
     _multiSplitterOnlyActions << action;

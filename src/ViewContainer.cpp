@@ -59,8 +59,8 @@ using namespace Konsole;
 TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWidget *parent) :
     QTabWidget(parent),
     _connectedViewManager(connectedViewManager),
-    _newTabButton(new QToolButton()),
-    _closeTabButton(new QToolButton()),
+    _newTabButton(new QToolButton(this)),
+    _closeTabButton(new QToolButton(this)),
     _contextMenuTabIndex(-1),
     _navigationVisibility(ViewManager::NavigationVisibility::NavigationNotSet)
 {
@@ -134,7 +134,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     );
     closeAction->setObjectName(QStringLiteral("tab-close"));
 
-    auto profileMenu = new QMenu();
+    auto profileMenu = new QMenu(this);
     auto profileList = new ProfileList(false, profileMenu);
     profileList->syncWidgetActions(profileMenu, true);
     connect(profileList, &Konsole::ProfileList::profileSelected, this, &TabbedViewContainer::newViewWithProfileRequest);
