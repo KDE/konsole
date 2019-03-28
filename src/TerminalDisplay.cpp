@@ -1994,12 +1994,7 @@ void TerminalDisplay::setScrollBarPosition(Enum::ScrollBarPositionEnum position)
         return;
     }
 
-    if (position == Enum::ScrollBarHidden) {
-        _scrollBar->hide();
-    } else {
-        _scrollBar->show();
-    }
-
+    _scrollBar->setHidden(position == Enum::ScrollBarHidden);
     _scrollbarLocation = position;
 
     propagateSize();
@@ -3663,6 +3658,51 @@ void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
     }
 }
 
+namespace {
+QString extractDroppedText(const QList<QUrl>& urls) {
+    QString dropText;
+    for (int i = 0 ; i < urls.count() ; i++) {
+        KIO::StatJob* job = KIO::mostLocalUrl(urls[i], KIO::HideProgressInfo);
+        if (!job->exec()) {
+            continue;
+        }
+
+        const QUrl url = job->mostLocalUrl();
+        // in future it may be useful to be able to insert file names with drag-and-drop
+        // without quoting them (this only affects paths with spaces in)
+        dropText += KShell::quoteArg(url.isLocalFile() ? url.path() : url.url());
+
+        // Each filename(including the last) should be followed by one space.
+        dropText += QLatin1Char(' ');
+    }
+    return dropText;
+}
+
+void setupCdToUrlAction(const QString& dropText, const QUrl& url, QList<QAction*>& additionalActions, TerminalDisplay *display) {
+    KIO::StatJob* job = KIO::mostLocalUrl(url, KIO::HideProgressInfo);
+    if (!job->exec()) {
+        return;
+    }
+
+    const QUrl localUrl = job->mostLocalUrl();
+    if (!localUrl.isLocalFile()) {
+        return;
+    }
+
+    const QFileInfo fileInfo(localUrl.path());
+    if (!fileInfo.isDir()) {
+        return;
+    }
+
+    QAction* cdAction = new QAction(i18n("Change &Directory To"), display);
+    const QByteArray triggerText = QString(QLatin1String(" cd ") + dropText + QLatin1Char('\n')).toLocal8Bit();
+    display->connect(cdAction, &QAction::triggered, display,  [display, triggerText]{
+        display->sendStringToEmu(triggerText);} );
+    additionalActions.append(cdAction);
+}
+
+}
+
 void TerminalDisplay::dropEvent(QDropEvent* event)
 {
     if (_readOnly) {
@@ -3678,31 +3718,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
     QString dropText;
     if (!urls.isEmpty()) {
-        for (int i = 0 ; i < urls.count() ; i++) {
-            KIO::StatJob* job = KIO::mostLocalUrl(urls[i], KIO::HideProgressInfo);
-            bool ok = job->exec();
-            if (!ok) {
-                continue;
-            }
-
-            QUrl url = job->mostLocalUrl();
-            QString urlText;
-
-            if (url.isLocalFile()) {
-                urlText = url.path();
-            } else {
-                urlText = url.url();
-            }
-
-            // in future it may be useful to be able to insert file names with drag-and-drop
-            // without quoting them (this only affects paths with spaces in)
-            urlText = KShell::quoteArg(urlText);
-
-            dropText += urlText;
-
-            // Each filename(including the last) should be followed by one space.
-            dropText += QLatin1Char(' ');
-        }
+        dropText = extractDroppedText(urls);
 
         // If our target is local we will open a popup - otherwise the fallback kicks
         // in and the URLs will simply be pasted as text.
@@ -3711,30 +3727,13 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             // plus an additional Paste option.
 
             QAction* pasteAction = new QAction(i18n("&Paste Location"), this);
-            pasteAction->setData(dropText);
-            connect(pasteAction, &QAction::triggered, this, &TerminalDisplay::dropMenuPasteActionTriggered);
+            connect(pasteAction, &QAction::triggered, this, [this, dropText]{ sendStringToEmu(dropText.toLocal8Bit());} );
 
             QList<QAction*> additionalActions;
             additionalActions.append(pasteAction);
 
             if (urls.count() == 1) {
-                KIO::StatJob* job = KIO::mostLocalUrl(urls[0], KIO::HideProgressInfo);
-                bool ok = job->exec();
-                if (ok) {
-                    const QUrl url = job->mostLocalUrl();
-
-                    if (url.isLocalFile()) {
-                        const QFileInfo fileInfo(url.path());
-
-                        if (fileInfo.isDir()) {
-                            QAction* cdAction = new QAction(i18n("Change &Directory To"), this);
-                            dropText = QLatin1String(" cd ") + dropText + QLatin1Char('\n');
-                            cdAction->setData(dropText);
-                            connect(cdAction, &QAction::triggered, this, &TerminalDisplay::dropMenuCdActionTriggered);
-                            additionalActions.append(cdAction);
-                        }
-                    }
-                }
+                setupCdToUrlAction(dropText, urls.at(0), additionalActions, this);
             }
 
             QUrl target = QUrl::fromLocalFile(_sessionController->currentDir());
@@ -3752,26 +3751,6 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
     if (mimeData->hasFormat(QStringLiteral("text/plain")) ||
             mimeData->hasFormat(QStringLiteral("text/uri-list"))) {
         emit sendStringToEmu(dropText.toLocal8Bit());
-    }
-}
-
-void TerminalDisplay::dropMenuPasteActionTriggered()
-{
-    if (sender() != nullptr) {
-        const auto* action = qobject_cast<const QAction*>(sender());
-        if (action != nullptr) {
-            emit sendStringToEmu(action->data().toString().toLocal8Bit());
-        }
-    }
-}
-
-void TerminalDisplay::dropMenuCdActionTriggered()
-{
-    if (sender() != nullptr) {
-        const auto* action = qobject_cast<const QAction*>(sender());
-        if (action != nullptr) {
-            emit sendStringToEmu(action->data().toString().toLocal8Bit());
-        }
     }
 }
 
