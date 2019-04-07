@@ -35,7 +35,7 @@ enum LineType {
     LtNone   = 0,
     LtDouble = 1,
     LtLight  = 2,
-    LtHeavy  = 3,
+    LtHeavy  = 3
 };
 
 // PackedLineTypes is an 8-bit number representing types of 4 line character's lines. Each line is
