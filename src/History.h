@@ -53,8 +53,6 @@ public:
     void map();
     //un-mmaps the file
     void unmap();
-    //returns true if the file is mmap'ed
-    bool isMapped() const;
 
 private:
     qint64 _length;

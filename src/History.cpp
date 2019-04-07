@@ -157,11 +157,6 @@ void HistoryFile::unmap()
 
 }
 
-bool HistoryFile::isMapped() const
-{
-    return _fileMap != nullptr;
-}
-
 void HistoryFile::add(const char *buffer, qint64 count)
 {
     if (_fileMap != nullptr) {
