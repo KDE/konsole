@@ -195,7 +195,7 @@ bool CheckableSessionModel::setData(const QModelIndex &index, const QVariant &va
             return false;
         }
 
-        if (value.value<int>() == Qt::Checked) {
+        if (value.toInt() == Qt::Checked) {
             _checkedSessions.insert(session);
         } else {
             _checkedSessions.remove(session);
