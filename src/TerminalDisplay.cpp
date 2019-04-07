@@ -3697,7 +3697,7 @@ void setupCdToUrlAction(const QString& dropText, const QUrl& url, QList<QAction*
     QAction* cdAction = new QAction(i18n("Change &Directory To"), display);
     const QByteArray triggerText = QString(QLatin1String(" cd ") + dropText + QLatin1Char('\n')).toLocal8Bit();
     display->connect(cdAction, &QAction::triggered, display,  [display, triggerText]{
-        display->sendStringToEmu(triggerText);} );
+        emit display->sendStringToEmu(triggerText);} );
     additionalActions.append(cdAction);
 }
 
@@ -3727,7 +3727,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             // plus an additional Paste option.
 
             QAction* pasteAction = new QAction(i18n("&Paste Location"), this);
-            connect(pasteAction, &QAction::triggered, this, [this, dropText]{ sendStringToEmu(dropText.toLocal8Bit());} );
+            connect(pasteAction, &QAction::triggered, this, [this, dropText]{ emit sendStringToEmu(dropText.toLocal8Bit());} );
 
             QList<QAction*> additionalActions;
             additionalActions.append(pasteAction);
