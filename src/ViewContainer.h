@@ -81,9 +81,6 @@ public:
     /** splits the currently focused Splitter */
     void splitView(TerminalDisplay *view, Qt::Orientation orientation);
 
-    /** Removes a view from the container */
-    void removeView(TerminalDisplay *view);
-
     void setTabActivity(int index, bool activity);
 
     void updateTitle(ViewProperties *item);

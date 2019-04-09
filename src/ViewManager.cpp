@@ -468,12 +468,17 @@ void ViewManager::sessionFinished()
     auto view = _sessionMap.key(session);
     _sessionMap.remove(view);
 
+    if (SessionManager::instance()->isClosingAllSessions()){
+        return;
+    }
+
     // Before deleting the view, let's unmaximize if it's maximized.
     auto splitter = qobject_cast<ViewSplitter*>(view->parentWidget());
     auto toplevelSplitter = splitter->getToplevelSplitter();
+
     toplevelSplitter->restoreOtherTerminals();
-    _viewContainer->removeView(view);
     view->deleteLater();
+
 
     // Only remove the controller from factory() if it's actually controlling
     // the session from the sender.
@@ -484,14 +489,20 @@ void ViewManager::sessionFinished()
         emit unplugController(_pluggedController);
     }
 
-    updateTerminalDisplayHistory(view, true);
-    focusAnotherTerminal(toplevelSplitter);
-    updateDetachViewState();
+    if (_sessionMap.size() > 0) {
+        updateTerminalDisplayHistory(view, true);
+        focusAnotherTerminal(toplevelSplitter);
+        updateDetachViewState();
+    }
 }
 
 void ViewManager::focusAnotherTerminal(ViewSplitter *toplevelSplitter)
 {
     auto tabTterminalDisplays = toplevelSplitter->findChildren<TerminalDisplay*>();
+    if (tabTterminalDisplays.count() == 0) {
+        return;
+    }
+
     if (tabTterminalDisplays.count() > 1) {
         // Give focus to the last used terminal in this tab
         for (auto *historyItem : _terminalDisplayHistory) {
@@ -837,88 +848,92 @@ QList<ViewProperties *> ViewManager::viewProperties() const
     return list;
 }
 
+namespace {
+QJsonObject saveSessionTerminal(TerminalDisplay *terminalDisplay)
+{
+    QJsonObject thisTerminal;
+    auto terminalSession = terminalDisplay->sessionController()->session();
+    const int sessionRestoreId = SessionManager::instance()->getRestoreId(terminalSession);
+    thisTerminal.insert(QStringLiteral("SessionRestoreId"), sessionRestoreId);
+    return thisTerminal;
+}
+
+QJsonObject saveSessionsRecurse(QSplitter *splitter) {
+    QJsonObject thisSplitter;
+    thisSplitter.insert(
+        QStringLiteral("Orientation"),
+        splitter->orientation() == Qt::Horizontal ? QStringLiteral("Horizontal")
+                                                  : QStringLiteral("Vertical")
+    );
+
+    QJsonArray internalWidgets;
+    for (int i = 0; i < splitter->count(); i++) {
+        auto *widget = splitter->widget(i);
+        auto *maybeSplitter = qobject_cast<QSplitter*>(widget);
+        auto *maybeTerminalDisplay = qobject_cast<TerminalDisplay*>(widget);
+
+        if (maybeSplitter != nullptr) {
+            internalWidgets.append(saveSessionsRecurse(maybeSplitter));
+        } else if (maybeTerminalDisplay) {
+            internalWidgets.append(saveSessionTerminal(maybeTerminalDisplay));
+        }
+    }
+    thisSplitter.insert(QStringLiteral("Widgets"), internalWidgets);
+    return thisSplitter;
+}
+
+} // namespace
+
 void ViewManager::saveSessions(KConfigGroup &group)
 {
-    // find all unique session restore IDs
-    QList<int> ids;
-    QSet<Session *> unique;
-    int tab = 1;
-
-    TabbedViewContainer *container = _viewContainer;
-
-    // first: sessions in the active container, preserving the order
-    Q_ASSERT(container);
-    if (container == nullptr) {
-        return;
-    }
-    ids.reserve(container->count());
-
-    //TODO: Handle sessions
-#if 0
-    auto *activeview = qobject_cast<TerminalDisplay *>(container->currentWidget());
-    for (int i = 0, end = container->count(); i < end; i++) {
-        auto *view = qobject_cast<TerminalDisplay *>(container->widget(i));
-        Q_ASSERT(view);
-
-        Session *session = _sessionMap[view];
-        ids << SessionManager::instance()->getRestoreId(session);
-        unique.insert(session);
-        if (view == activeview) {
-            group.writeEntry("Active", tab);
-        }
-        tab++;
-    }
-#endif
-
-    // second: all other sessions, in random order
-    // we don't want to have sessions restored that are not connected
-    foreach (Session *session, _sessionMap) {
-        if (!unique.contains(session)) {
-            ids << SessionManager::instance()->getRestoreId(session);
-            unique.insert(session);
-        }
+    QJsonArray rootArray;
+    for(int i = 0; i < _viewContainer->count(); i++) {
+        QSplitter *splitter = qobject_cast<QSplitter*>(_viewContainer->widget(i));
+        rootArray.append(saveSessionsRecurse(splitter));
     }
 
-    group.writeEntry("Sessions", ids);
+    group.writeEntry("Tabs", QJsonDocument(rootArray).toJson(QJsonDocument::Compact));
+    group.writeEntry("Active", _viewContainer->currentIndex());
 }
 
-TabbedViewContainer *ViewManager::activeContainer()
+namespace {
+
+ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject& jsonSplitter, ViewManager *manager)
 {
-    return _viewContainer;
+    auto splitterWidgets = jsonSplitter[QStringLiteral("Widgets")].toArray();
+    auto orientation = (jsonSplitter[QStringLiteral("Orientation")].toString() == QStringLiteral("Horizontal"))
+        ? Qt::Horizontal : Qt::Vertical;
+
+    auto *currentSplitter = new ViewSplitter();
+    currentSplitter->setOrientation(orientation);
+
+    for (const auto& widgetJsonValue : splitterWidgets) {
+        const auto widgetJsonObject = widgetJsonValue.toObject();
+        const auto sessionIterator = widgetJsonObject.constFind(QStringLiteral("SessionRestoreId"));
+
+        if (sessionIterator != widgetJsonObject.constEnd()) {
+            Session *session = SessionManager::instance()->idToSession(sessionIterator->toInt());
+            auto newView = manager->createView(session);
+            currentSplitter->addWidget(newView);
+        } else {
+            auto nextSplitter = restoreSessionsSplitterRecurse(widgetJsonObject, manager);
+            currentSplitter->addWidget(nextSplitter);
+        }
+    }
+    return currentSplitter;
 }
 
+} // namespace
 void ViewManager::restoreSessions(const KConfigGroup &group)
 {
-    QList<int> ids = group.readEntry("Sessions", QList<int>());
-    int activeTab = group.readEntry("Active", 0);
-    TerminalDisplay *display = nullptr;
-
-    int tab = 1;
-    foreach (int id, ids) {
-        Session *session = SessionManager::instance()->idToSession(id);
-
-        if (session == nullptr) {
-            qWarning() << "Unable to load session with id" << id;
-            // Force a creation of a default session below
-            ids.clear();
-            break;
-        }
-
-        createView(session);
-        if (!session->isRunning()) {
-            session->run();
-        }
-        if (tab++ == activeTab) {
-            display = qobject_cast<TerminalDisplay *>(activeView());
-        }
+    const auto tabList = group.readEntry("Tabs", QByteArray("[]"));
+    const auto jsonTabs = QJsonDocument::fromJson(tabList).array();
+    for (const auto& jsonSplitter : jsonTabs) {
+        auto topLevelSplitter = restoreSessionsSplitterRecurse(jsonSplitter.toObject(), this);
+        _viewContainer->addSplitter(topLevelSplitter, _viewContainer->count());
     }
 
-    if (display != nullptr) {
-        activeContainer()->setCurrentWidget(display);
-        display->setFocus(Qt::OtherFocusReason);
-    }
-
-    if (ids.isEmpty()) { // Session file is unusable, start default Profile
+    if (jsonTabs.isEmpty()) { // Session file is unusable, start default Profile
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
         Session *session = SessionManager::instance()->createSession(profile);
         createView(session);
@@ -926,6 +941,11 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
             session->run();
         }
     }
+}
+
+TabbedViewContainer *ViewManager::activeContainer()
+{
+    return _viewContainer;
 }
 
 int ViewManager::sessionCount()
@@ -961,10 +981,8 @@ void ViewManager::setCurrentSession(int sessionId)
     QHash<TerminalDisplay *, Session *>::const_iterator i;
     for (i = _sessionMap.constBegin(); i != _sessionMap.constEnd(); ++i) {
         if (i.value()->sessionId() == sessionId) {
-            TabbedViewContainer *container = activeContainer();
-            if (container != nullptr) {
-                container->setCurrentWidget(i.key());
-            }
+            i.key()->setFocus(Qt::OtherFocusReason);
+            return;
         }
     }
 }

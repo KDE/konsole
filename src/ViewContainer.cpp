@@ -277,8 +277,12 @@ void TabbedViewContainer::addSplitter(ViewSplitter *viewSplitter, int index) {
         insertTab(index, viewSplitter, QString());
     }
     connect(viewSplitter, &ViewSplitter::destroyed, this, &TabbedViewContainer::viewDestroyed);
-    foreach(TerminalDisplay* terminal, viewSplitter->findChildren<TerminalDisplay*>()) {
+    auto terminalDisplays = viewSplitter->findChildren<TerminalDisplay*>();
+    foreach(TerminalDisplay* terminal, terminalDisplays) {
         connectTerminalDisplay(terminal);
+    }
+    if (terminalDisplays.count() > 0) {
+        updateTitle(qobject_cast<ViewProperties*>(terminalDisplays.at(0)->sessionController()));
     }
     setCurrentIndex(index);
 }
@@ -354,15 +358,6 @@ void TabbedViewContainer::forgetView(ViewSplitter *view)
     if (count() == 0) {
         emit empty(this);
     }
-}
-
-void TabbedViewContainer::removeView(TerminalDisplay *view)
-{
-    /* TODO: This is absolutely the wrong place.
-     * We are removing a terminal display from a ViewSplitter,
-     * this should be inside of the view splitter or something.
-    */
-    view->setParent(nullptr);
 }
 
 void TabbedViewContainer::activateNextView()

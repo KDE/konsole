@@ -45,7 +45,8 @@ SessionManager::SessionManager() :
     _sessions(QList<Session *>()),
     _sessionProfiles(QHash<Session *, Profile::Ptr>()),
     _sessionRuntimeProfiles(QHash<Session *, Profile::Ptr>()),
-    _restoreMapping(QHash<Session *, int>())
+    _restoreMapping(QHash<Session *, int>()),
+    _isClosingAllSessions(false)
 {
     ProfileManager *profileMananger = ProfileManager::instance();
     connect(profileMananger, &Konsole::ProfileManager::profileChanged, this,
@@ -72,9 +73,14 @@ SessionManager* SessionManager::instance()
     return theSessionManager;
 }
 
+bool SessionManager::isClosingAllSessions() const
+{
+    return _isClosingAllSessions;
+}
+
 void SessionManager::closeAllSessions()
 {
-    // close remaining sessions
+    _isClosingAllSessions = true;
     foreach (Session *session, _sessions) {
         session->close();
     }

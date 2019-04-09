@@ -91,6 +91,7 @@ public:
     void restoreSessions(KConfig *config);
     int  getRestoreId(Session *session);
     Session *idToSession(int id);
+    bool isClosingAllSessions() const;
 
 Q_SIGNALS:
     /**
@@ -132,6 +133,7 @@ private:
     QHash<Session *, Profile::Ptr> _sessionProfiles;
     QHash<Session *, Profile::Ptr> _sessionRuntimeProfiles;
     QHash<Session *, int> _restoreMapping;
+    bool _isClosingAllSessions;
 };
 
 /** Utility class to simplify code in SessionManager::applyProfile(). */

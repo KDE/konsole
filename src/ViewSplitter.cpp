@@ -60,6 +60,7 @@ void ViewSplitter::adjustActiveTerminalDisplaySize(int percentage)
     setSizes(containerSizes);
 }
 
+// Get the first splitter that's a parent of the current focused widget.
 ViewSplitter *ViewSplitter::activeSplitter()
 {
     QWidget *widget = focusWidget() != nullptr ? focusWidget() : this;
