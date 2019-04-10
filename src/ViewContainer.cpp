@@ -86,11 +86,9 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
         &Konsole::TabbedViewContainer::tabDoubleClicked);
     connect(tabBar(), &QTabBar::customContextMenuRequested, this,
         &Konsole::TabbedViewContainer::openTabContextMenu);
-#if defined(ENABLE_DETACHING)
     connect(tabBarWidget, &DetachableTabBar::detachTab, this, [this](int idx) {
         emit detachTab(idx);
     });
-#endif
     connect(tabBarWidget, &DetachableTabBar::closeTab,
         this, &TabbedViewContainer::closeTerminalTab);
     connect(tabBarWidget, &DetachableTabBar::newTabRequest,
@@ -111,14 +109,12 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
 
     connect(tabBar(), &QTabBar::tabCloseRequested, this, &TabbedViewContainer::closeTerminalTab);
 
-#if defined(ENABLE_DETACHING)
     auto detachAction = _contextPopupMenu->addAction(
         QIcon::fromTheme(QStringLiteral("tab-detach")),
         i18nc("@action:inmenu", "&Detach Tab"), this,
         [this] { emit detachTab(_contextMenuTabIndex); }
     );
     detachAction->setObjectName(QStringLiteral("tab-detach"));
-#endif
 
     auto editAction = _contextPopupMenu->addAction(
         QIcon::fromTheme(QStringLiteral("edit-rename")),
@@ -426,13 +422,11 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
 
     //TODO: add a countChanged signal so we can remove this for.
     // Detaching in mac causes crashes.
-#if defined(ENABLE_DETACHING)
     for(auto action : _contextPopupMenu->actions()) {
         if (action->objectName() == QStringLiteral("tab-detach")) {
             action->setEnabled(count() > 1);
         }
     }
-#endif
 
     /* This needs to nove away fro the tab or to lock every thing inside of it.
      * for now, disable.

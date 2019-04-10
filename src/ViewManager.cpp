@@ -143,8 +143,6 @@ void ViewManager::setupActions()
     connect(action, &QAction::triggered, this, &ViewManager::shrinkActiveContainer);
     _multiSplitterOnlyActions << action;
 
-    // Crashes on Mac.
-#if defined(ENABLE_DETACHING)
     action = collection->addAction(QStringLiteral("detach-view"));
     action->setEnabled(true);
     action->setIcon(QIcon::fromTheme(QStringLiteral("tab-detach")));
@@ -166,7 +164,6 @@ void ViewManager::setupActions()
     // Ctrl+Shift+D is not used as a shortcut by default because it is too close
     // to Ctrl+D - which will terminate the session in many cases
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_L);
-#endif
 
     // keyboard shortcut only actions
     action = new QAction(i18nc("@action Shortcut entry", "Next Tab"), this);
@@ -400,9 +397,6 @@ void ViewManager::toggleTwoViews()
 
 void ViewManager::detachActiveView()
 {
-#if !defined(ENABLE_DETACHING)
-    return;
-#endif
     // find the currently active view and remove it from its container
     if ((_viewContainer->findChildren<TerminalDisplay*>()).count() > 1) {
         auto activeSplitter = _viewContainer->activeViewSplitter();
@@ -424,9 +418,6 @@ void ViewManager::detachActiveTab()
 
 void ViewManager::detachTab(int tabIdx)
 {
-#if !defined(ENABLE_DETACHING)
-    return;
-#endif
     ViewSplitter* splitter = _viewContainer->viewSplitterAt(tabIdx);
     QHash<TerminalDisplay*, Session*> detachedSessions = forgetAll(_viewContainer->viewSplitterAt(tabIdx));
     emit terminalsDetached(splitter, detachedSessions);
