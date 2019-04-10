@@ -318,10 +318,8 @@ void ColorScheme::setRandomizedBackgroundColor(bool randomize)
         }
 
         setRandomizationRange(BGCOLOR_INDEX, MAX_HUE, 255, maxValue);
-    } else {
-        if (_randomTable != nullptr) {
-            setRandomizationRange(BGCOLOR_INDEX, 0, 0, 0);
-        }
+    } else if (_randomTable != nullptr) {
+        setRandomizationRange(BGCOLOR_INDEX, 0, 0, 0);
     }
 }
 
@@ -343,9 +341,8 @@ const ColorEntry *ColorScheme::colorTable() const
 {
     if (_table != nullptr) {
         return _table;
-    } else {
-        return defaultTable;
     }
+    return defaultTable;
 }
 
 QColor ColorScheme::foregroundColor() const
@@ -404,6 +401,7 @@ void ColorScheme::read(const KConfig &config)
         readColorEntry(config, i);
     }
 }
+
 void ColorScheme::readColorEntry(const KConfig &config, int index)
 {
     KConfigGroup configGroup = config.group(colorNameForIndex(index));
@@ -528,6 +526,7 @@ bool ColorSchemeWallpaper::draw(QPainter &painter, const QRect rect, qreal opaci
         painter.drawTiledPixmap(rect, *_picture, rect.topLeft());
         return true;
     }
+
     painter.save();
     painter.setCompositionMode(QPainter::CompositionMode_Source);
     painter.fillRect(rect, QColor(0, 0, 0, 0));
