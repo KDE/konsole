@@ -148,6 +148,8 @@ public:
 
     void connectTerminalDisplay(TerminalDisplay *view);
     void disconnectTerminalDisplay(TerminalDisplay *view);
+    void moveTabLeft();
+    void moveTabRight();
 
 Q_SIGNALS:
     /** Emitted when the container has no more children */

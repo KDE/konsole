@@ -111,7 +111,6 @@ void ViewManager::setupActions()
     }
 
     KActionCollection *collection = _actionCollection;
-
     // Let's reuse the pointer, no need not to.
     auto *action = new QAction(this);
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-left-right")));
@@ -182,29 +181,30 @@ void ViewManager::setupActions()
     _multiTabOnlyActions << action;
     // _viewSplitter->addAction(previousViewAction);
 
-    action = new QAction(i18nc("@action Shortcut entry", "Next View Container"), this);
+    action = new QAction(i18nc("@action Shortcut entry", "Focus Above Terminal"), this);
     connect(action, &QAction::triggered, this, &ViewManager::focusUp);
-    collection->addAction(QStringLiteral("next-container"), action);
+    collection->addAction(QStringLiteral("focus-view-above"), action);
     collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Up);
     _viewContainer->addAction(action);
     _multiSplitterOnlyActions << action;
 
-    action = new QAction(QStringLiteral("Focus Down"), this);
+    action = new QAction(i18nc("@action Shortcut entry", "Focus Below Terminal"), this);
     collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Down);
+    collection->addAction(QStringLiteral("focus-view-below"), action);
     connect(action, &QAction::triggered, this, &ViewManager::focusDown);
     _multiSplitterOnlyActions << action;
     _viewContainer->addAction(action);
 
-    action = new QAction(i18nc("@action Shortcut entry", "Move Tab Left"), this);
+    action = new QAction(i18nc("@action Shortcut entry", "Focus Left Terminal"), this);
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Konsole::LEFT);
     connect(action, &QAction::triggered, this, &ViewManager::focusLeft);
-    collection->addAction(QStringLiteral("move-view-left"), action);
+    collection->addAction(QStringLiteral("focus-view-left"), action);
     _multiSplitterOnlyActions << action;
 
-    action = new QAction(i18nc("@action Shortcut entry", "Move Tab Right"), this);
+    action = new QAction(i18nc("@action Shortcut entry", "Focus Right Terminal"), this);
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Konsole::RIGHT);
     connect(action, &QAction::triggered, this, &ViewManager::focusRight);
-    collection->addAction(QStringLiteral("move-view-right"), action);
+    collection->addAction(QStringLiteral("focus-view-right"), action);
     _multiSplitterOnlyActions << action;
 
     action = new QAction(i18nc("@action Shortcut entry", "Switch to Last Tab"), this);
@@ -241,6 +241,20 @@ void ViewManager::setupActions()
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Minus);
     connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::restoreOtherTerminals);
     _multiSplitterOnlyActions << action;
+    _viewContainer->addAction(action);
+
+    action = new QAction(i18nc("@action Shortcut entry", "Move tab to the right"), this);
+    collection->addAction(QStringLiteral("move-tab-to-right"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::ALT + Qt::Key_Right);
+    connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::moveTabRight);
+    _multiTabOnlyActions << action;
+    _viewContainer->addAction(action);
+
+    action = new QAction(i18nc("@action Shortcut entry", "Move tab to the left"), this);
+    collection->addAction(QStringLiteral("move-tab-to-left"), action);
+    collection->setDefaultShortcut(action, Qt::CTRL + Qt::ALT + Qt::Key_Left);
+    connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::moveTabLeft);
+    _multiTabOnlyActions << action;
     _viewContainer->addAction(action);
 
     // _viewSplitter->addAction(lastUsedViewReverseAction);

@@ -563,3 +563,19 @@ void TabbedViewContainer::restoreOtherTerminals()
 {
     activeViewSplitter()->restoreOtherTerminals();
 }
+
+void TabbedViewContainer::moveTabLeft() 
+{
+    if (currentIndex() == 0) {
+        return;
+    }
+    tabBar()->moveTab(currentIndex(), currentIndex() -1);
+}
+
+void TabbedViewContainer::moveTabRight()
+{
+    if (currentIndex() == count() -1) {
+        return;
+    }
+    tabBar()->moveTab(currentIndex(), currentIndex() + 1);
+}

@@ -148,7 +148,6 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
     const auto newPoint = QPoint(newX, newY);
     auto child = topSplitter->childAt(newPoint);
 
-    qDebug() << "Handling focus";
     if (TerminalDisplay* terminal = qobject_cast<TerminalDisplay*>(child)) {
         terminal->setFocus(Qt::OtherFocusReason);
     } else if (qobject_cast<QScrollBar*>(child)) {
