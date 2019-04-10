@@ -66,12 +66,7 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
     KBookmarkManager *manager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
 
     manager->setUpdate(true);
-
-    if (toplevel) {
-        _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, collection);
-    } else {
-        _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, nullptr);
-    }
+    _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, toplevel ? collection : nullptr);
 }
 
 BookmarkHandler::~BookmarkHandler()
@@ -93,9 +88,8 @@ bool BookmarkHandler::enableOption(BookmarkOption option) const
 {
     if (option == ShowAddBookmark || option == ShowEditBookmark) {
         return _toplevel;
-    } else {
-        return KBookmarkOwner::enableOption(option);
     }
+    return KBookmarkOwner::enableOption(option);
 }
 
 QUrl BookmarkHandler::currentUrl() const
@@ -107,9 +101,8 @@ QUrl BookmarkHandler::urlForView(ViewProperties *view) const
 {
     if (view != nullptr) {
         return view->url();
-    } else {
-        return QUrl();
     }
+    return {};
 }
 
 QString BookmarkHandler::currentTitle() const
@@ -127,14 +120,13 @@ QString BookmarkHandler::titleForView(ViewProperties *view) const
         path = QFileInfo(path).completeBaseName();
 
         return path;
-    } else if (!url.host().isEmpty()) {
+    }
+    if (!url.host().isEmpty()) {
         if (!url.userName().isEmpty()) {
             return i18nc("@item:inmenu The user's name and host they are connected to via ssh",
                          "%1 on %2", url.userName(), url.host());
-        } else {
-            return i18nc("@item:inmenu The host the user is connected to via ssh", "%1",
-                         url.host());
         }
+        return i18nc("@item:inmenu The host the user is connected to via ssh", "%1", url.host());
     }
 
     return url.toDisplayString();
@@ -149,9 +141,8 @@ QString BookmarkHandler::iconForView(ViewProperties *view) const
 {
     if (view != nullptr) {
         return view->icon().name();
-    } else {
-        return QString();
     }
+    return {};
 }
 
 bool BookmarkHandler::supportsTabs() const
