@@ -1,5 +1,6 @@
 [Global]
 IconName=utilities-terminal
+DesktopEntry=org.kde.konsole
 Comment=Konsole
 Comment[af]=Konsole
 Comment[ar]=كونسول
