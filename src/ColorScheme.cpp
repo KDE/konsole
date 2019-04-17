@@ -311,7 +311,7 @@ void ColorScheme::setRandomizedBackgroundColor(bool randomize)
     // except for dark background schemes which allow a change in the
     // colour value (one less than the dark background threshold)
     if (randomize) {
-        int maxValue = 0;
+        quint8 maxValue = 0;
 
         if (hasDarkBackground()) {
             maxValue = 126;
