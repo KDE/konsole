@@ -216,7 +216,6 @@ void ViewManager::setupActions()
     connect(action, &QAction::triggered, this, &ViewManager::lastUsedView);
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::Key_Tab);
     collection->addAction(QStringLiteral("last-used-tab"), action);
-    _multiTabOnlyActions << action;
 
     action = new QAction(i18nc("@action Shortcut entry", "Toggle Between Two Tabs"), this);
     connect(action, &QAction::triggered, this, &Konsole::ViewManager::toggleTwoViews);
@@ -227,7 +226,6 @@ void ViewManager::setupActions()
     collection->addAction(QStringLiteral("last-used-tab-reverse"), action);
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Tab);
     connect(action, &QAction::triggered, this, &ViewManager::lastUsedViewReverse);
-    _multiTabOnlyActions << action;
 
     action = new QAction(i18nc("@action Shortcut entry", "Maximize current Terminal"), this);
     collection->addAction(QStringLiteral("maximize-current-terminal"), action);
