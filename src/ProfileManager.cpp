@@ -45,17 +45,17 @@ using namespace Konsole;
 
 static bool profileIndexLessThan(const Profile::Ptr& p1, const Profile::Ptr& p2)
 {
-    return p1->menuIndexAsInt() <= p2->menuIndexAsInt();
+    return p1->menuIndexAsInt() < p2->menuIndexAsInt();
 }
 
 static bool profileNameLessThan(const Profile::Ptr& p1, const Profile::Ptr& p2)
 {
-    return QString::localeAwareCompare(p1->name(), p2->name()) <= 0;
+    return QString::localeAwareCompare(p1->name(), p2->name()) < 0;
 }
 
 static bool stringLessThan(const QString& p1, const QString& p2)
 {
-    return QString::localeAwareCompare(p1, p2) <= 0;
+    return QString::localeAwareCompare(p1, p2) < 0;
 }
 
 static void sortByIndexProfileList(QList<Profile::Ptr>& list)
