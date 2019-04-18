@@ -265,8 +265,8 @@ void ViewManager::setupActions()
 
     auto handleMultiTabActionsLambda = [=]{
         const int count = _viewContainer->count();
-        foreach(QAction *action, _multiTabOnlyActions) {
-            action->setEnabled(count > 1);
+        foreach(QAction *tabOnlyAction, _multiTabOnlyActions) {
+            tabOnlyAction->setEnabled(count > 1);
         }
     };
     connect(_viewContainer, &TabbedViewContainer::viewAdded, this, handleMultiTabActionsLambda);
