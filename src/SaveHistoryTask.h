@@ -68,6 +68,8 @@ private:
     };
 
     QHash<KJob *, SaveJob> _jobSession;
+
+    static QString _saveDialogRecentURL;
 };
 
 }

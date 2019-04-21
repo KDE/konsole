@@ -26,11 +26,16 @@
 
 #include <KMessageBox>
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <KConfig>
+#include <KConfigGroup>
 
 #include "SessionManager.h"
 #include "Emulation.h"
 
 namespace Konsole {
+
+QString SaveHistoryTask::_saveDialogRecentURL;
 
 SaveHistoryTask::SaveHistoryTask(QObject* parent)
     : SessionTask(parent)
@@ -45,9 +50,7 @@ void SaveHistoryTask::execute()
     //        three then providing a URL for each one will be tedious
 
     // TODO - show a warning ( preferably passive ) if saving the history output fails
-    QFileDialog* dialog = new QFileDialog(QApplication::activeWindow(),
-            QString(),
-            QDir::homePath());
+    QFileDialog* dialog = new QFileDialog(QApplication::activeWindow());
     dialog->setAcceptMode(QFileDialog::AcceptSave);
 
     QStringList mimeTypes {
@@ -55,6 +58,20 @@ void SaveHistoryTask::execute()
         QStringLiteral("text/html")
     };
     dialog->setMimeTypeFilters(mimeTypes);
+
+    KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig();
+    auto group = konsoleConfig->group("SaveHistory Settings");
+
+    if (_saveDialogRecentURL.isEmpty()) {
+        const auto list = group.readPathEntry("Recent URLs", QStringList());
+        if (list.isEmpty()) {
+            dialog->setDirectory(QDir::homePath());
+        } else {
+            dialog->setDirectoryUrl(QUrl(list.at(0)));
+        }
+    } else {
+        dialog->setDirectoryUrl(QUrl(_saveDialogRecentURL));
+    }
 
     // iterate over each session in the task and display a dialog to allow the user to choose where
     // to save that session's history.
@@ -75,6 +92,10 @@ void SaveHistoryTask::execute()
             KMessageBox::sorry(nullptr , i18n("%1 is an invalid URL, the output could not be saved.", url.url()));
             continue;
         }
+
+        // Save selected URL for next time
+        _saveDialogRecentURL = url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).toString();
+        group.writePathEntry("Recent URLs", _saveDialogRecentURL);
 
         KIO::TransferJob* job = KIO::put(url,
                                          -1,   // no special permissions
