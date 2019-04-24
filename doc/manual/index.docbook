@@ -676,7 +676,7 @@ Any output on one view is duplicated in the other view.
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>S</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>X</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guisubmenu>Split View</guisubmenu><guimenuitem>Close Active</guimenuitem></menuchoice>
 </term>
 <listitem><para><action>Closes the current view</action>
