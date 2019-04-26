@@ -768,7 +768,7 @@ void MainWindow::applyKonsoleSettings()
         removeMenuAccelerators();
     }
 
-    _viewManager->setNavigationBehavior(KonsoleSettings::newTabBehavior());
+    _viewManager->activeContainer()->setNavigationBehavior(KonsoleSettings::newTabBehavior());
     setAutoSaveSettings(QStringLiteral("MainWindow"), KonsoleSettings::saveGeometryOnExit());
     updateWindowCaption();
 }

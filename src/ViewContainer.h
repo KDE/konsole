@@ -75,7 +75,7 @@ public:
     ~TabbedViewContainer() Q_DECL_OVERRIDE;
 
     /** Adds a new view to the container widget */
-    void addView(TerminalDisplay *view, int index = -1);
+    void addView(TerminalDisplay *view);
     void addSplitter(ViewSplitter *splitter, int index = -1);
 
     /** splits the currently focused Splitter */
@@ -151,6 +151,18 @@ public:
     void moveTabLeft();
     void moveTabRight();
 
+    /**
+     * This enum describes where newly created tab should be placed.
+     */
+    enum NewTabBehavior {
+        /** Put newly created tab at the end. */
+        PutNewTabAtTheEnd = 0,
+        /** Put newly created tab right after current tab. */
+        PutNewTabAfterCurrentTab = 1
+    };
+
+    void setNavigationBehavior(int behavior);
+
 Q_SIGNALS:
     /** Emitted when the container has no more children */
     void empty(TabbedViewContainer *container);
@@ -203,6 +215,7 @@ private:
     QToolButton *_closeTabButton;
     int _contextMenuTabIndex;
     ViewManager::NavigationVisibility _navigationVisibility;
+    NewTabBehavior _newTabBehavior;
 };
 
 

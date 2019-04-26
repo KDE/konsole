@@ -58,7 +58,6 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     _actionCollection(collection),
     _navigationMethod(NoNavigation),
     _navigationVisibility(NavigationNotSet),
-    _newTabBehavior(PutNewTabAtTheEnd),
     _managerId(0),
     _terminalDisplayHistoryIndex(-1)
 {
@@ -1089,11 +1088,6 @@ void ViewManager::setNavigationVisibility(NavigationVisibility navigationVisibil
         _navigationVisibility = navigationVisibility;
         _viewContainer->setNavigationVisibility(navigationVisibility);
     }
-}
-
-void ViewManager::setNavigationBehavior(int behavior)
-{
-    _newTabBehavior = static_cast<NewTabBehavior>(behavior);
 }
 
 void ViewManager::updateTerminalDisplayHistory(TerminalDisplay* terminalDisplay, bool remove)

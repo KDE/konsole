@@ -122,16 +122,6 @@ public:
     };
 
     /**
-     * This enum describes where newly created tab should be placed.
-     */
-    enum NewTabBehavior {
-        /** Put newly created tab at the end. */
-        PutNewTabAtTheEnd = 0,
-        /** Put newly created tab right after current tab. */
-        PutNewTabAfterCurrentTab = 1
-    };
-
-    /**
      * Describes the options for showing or hiding the container's navigation widget.
     */
     enum NavigationVisibility {
@@ -180,7 +170,6 @@ public:
     void saveSessions(KConfigGroup &group);
     void restoreSessions(const KConfigGroup &group);
 
-    void setNavigationBehavior(int behavior);
     int managerId() const;
 
     /** Returns a list of sessions in this ViewManager */
@@ -433,7 +422,6 @@ private:
 
     NavigationMethod _navigationMethod;
     NavigationVisibility _navigationVisibility;
-    NewTabBehavior _newTabBehavior;
     int _managerId;
     static int lastManagerId;
     QList<TerminalDisplay *> _terminalDisplayHistory;

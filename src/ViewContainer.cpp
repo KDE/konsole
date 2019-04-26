@@ -62,7 +62,8 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     _newTabButton(new QToolButton(this)),
     _closeTabButton(new QToolButton(this)),
     _contextMenuTabIndex(-1),
-    _navigationVisibility(ViewManager::NavigationVisibility::NavigationNotSet)
+    _navigationVisibility(ViewManager::NavigationVisibility::NavigationNotSet),
+    _newTabBehavior(PutNewTabAtTheEnd)
 {
     setAcceptDrops(true);
 
@@ -283,11 +284,12 @@ void TabbedViewContainer::addSplitter(ViewSplitter *viewSplitter, int index) {
     setCurrentIndex(index);
 }
 
-void TabbedViewContainer::addView(TerminalDisplay *view, int index)
+void TabbedViewContainer::addView(TerminalDisplay *view)
 {
     auto viewSplitter = new ViewSplitter();
     viewSplitter->addTerminalDisplay(view, Qt::Horizontal);
     auto item = view->sessionController();
+    int index = _newTabBehavior == PutNewTabAfterCurrentTab ? currentIndex() + 1 : -1;
     if (index == -1) {
        index = addTab(viewSplitter, item->icon(), item->title());
     } else {
@@ -564,7 +566,7 @@ void TabbedViewContainer::restoreOtherTerminals()
     activeViewSplitter()->restoreOtherTerminals();
 }
 
-void TabbedViewContainer::moveTabLeft() 
+void TabbedViewContainer::moveTabLeft()
 {
     if (currentIndex() == 0) {
         return;
@@ -578,4 +580,9 @@ void TabbedViewContainer::moveTabRight()
         return;
     }
     tabBar()->moveTab(currentIndex(), currentIndex() + 1);
+}
+
+void TabbedViewContainer::setNavigationBehavior(int behavior)
+{
+    _newTabBehavior = static_cast<NewTabBehavior>(behavior);
 }
