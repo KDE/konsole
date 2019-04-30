@@ -475,8 +475,12 @@ void ViewManager::sessionFinished()
     }
 
     // Before deleting the view, let's unmaximize if it's maximized.
-    auto splitter = qobject_cast<ViewSplitter*>(view->parentWidget());
-    auto toplevelSplitter = splitter->getToplevelSplitter();
+    auto *splitter = qobject_cast<ViewSplitter*>(view->parentWidget());
+    if (!splitter) {
+        return;
+    }
+
+    auto *toplevelSplitter = splitter->getToplevelSplitter();
 
     toplevelSplitter->restoreOtherTerminals();
     view->deleteLater();
