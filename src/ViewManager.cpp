@@ -262,20 +262,31 @@ void ViewManager::setupActions()
         collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), action);
     }
 
-    auto handleMultiTabActionsLambda = [=]{
-        const int count = _viewContainer->count();
-        foreach(QAction *tabOnlyAction, _multiTabOnlyActions) {
-            tabOnlyAction->setEnabled(count > 1);
+
+    connect(_viewContainer, &TabbedViewContainer::viewAdded, this, &ViewManager::toggleActionsBasedOnState);
+    connect(_viewContainer, &TabbedViewContainer::viewRemoved, this, &ViewManager::toggleActionsBasedOnState);
+    connect(_viewContainer, &QTabWidget::currentChanged, this, &ViewManager::toggleActionsBasedOnState);
+
+    toggleActionsBasedOnState();
+}
+
+void ViewManager::toggleActionsBasedOnState() {
+    const int count = _viewContainer->count();
+    foreach(QAction *tabOnlyAction, _multiTabOnlyActions) {
+        tabOnlyAction->setEnabled(count > 1);
+    }
+
+    if (_viewContainer && _viewContainer->activeViewSplitter()) {
+        const int splitCount = _viewContainer
+                ->activeViewSplitter()
+                ->getToplevelSplitter()
+                ->findChildren<TerminalDisplay*>()
+                    .count();
+
+        foreach (QAction *action, _multiSplitterOnlyActions) {
+            action->setEnabled(splitCount > 1);
         }
-    };
-    connect(_viewContainer, &TabbedViewContainer::viewAdded, this, handleMultiTabActionsLambda);
-    connect(_viewContainer, &TabbedViewContainer::viewRemoved, this, handleMultiTabActionsLambda);
-
-    connect(_viewContainer, &QTabWidget::currentChanged, this, &ViewManager::updateDetachViewState);
-
-    // Initial state
-    handleMultiTabActionsLambda();
-    updateDetachViewState();
+    }
 }
 
 void ViewManager::switchToView(int index)
@@ -294,21 +305,6 @@ void ViewManager::switchToTerminalDisplay(Konsole::TerminalDisplay* terminalDisp
     if (_viewContainer->currentWidget() != toplevelSplitter) {
         // Focus the tab
         switchToView(_viewContainer->indexOf(toplevelSplitter));
-    }
-}
-
-void ViewManager::updateDetachViewState()
-{
-    if (_viewContainer && _viewContainer->activeViewSplitter()) {
-        const int splitCount = _viewContainer
-                ->activeViewSplitter()
-                ->getToplevelSplitter()
-                ->findChildren<TerminalDisplay*>()
-                    .count();
-
-        foreach (QAction *action, _multiSplitterOnlyActions) {
-            action->setEnabled(splitCount > 1);
-        }
     }
 }
 
@@ -417,7 +413,7 @@ void ViewManager::detachActiveView()
         QHash<TerminalDisplay*, Session*> detachedSessions = forgetAll(newSplitter);
         emit terminalsDetached(newSplitter, detachedSessions);
         focusAnotherTerminal(activeSplitter->getToplevelSplitter());
-        updateDetachViewState();
+        toggleActionsBasedOnState();
     }
 }
 
@@ -498,7 +494,7 @@ void ViewManager::sessionFinished()
     if (_sessionMap.size() > 0) {
         updateTerminalDisplayHistory(view, true);
         focusAnotherTerminal(toplevelSplitter);
-        updateDetachViewState();
+        toggleActionsBasedOnState();
     }
 }
 
@@ -561,7 +557,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
 
     _viewContainer->splitView(terminalDisplay, orientation);
 
-    updateDetachViewState();
+    toggleActionsBasedOnState();
 
     // focus the new container
     terminalDisplay->setFocus();
@@ -635,7 +631,7 @@ void ViewManager::attachView(TerminalDisplay *terminal, Session *session)
             Qt::UniqueConnection);
     _sessionMap[terminal] = session;
     createController(session, terminal);
-    updateDetachViewState();
+    toggleActionsBasedOnState();
     _terminalDisplayHistory.append(terminal);
 }
 
@@ -768,7 +764,7 @@ void ViewManager::viewDestroyed(QWidget *view)
     }
 
     //we only update the focus if the splitter is still alive
-    updateDetachViewState();
+    toggleActionsBasedOnState();
 
     // The below causes the menus  to be messed up
     // Only happens when using the tab bar close button

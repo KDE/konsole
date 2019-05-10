@@ -86,6 +86,7 @@ public:
      */
     void applyProfileToView(TerminalDisplay *view, const Profile::Ptr &profile);
 
+    void toggleActionsBasedOnState();
     /**
      * Return the main widget for the view manager which
      * holds all of the views managed by this ViewManager instance.
@@ -309,7 +310,6 @@ private Q_SLOTS:
     // called when the "Detach View" menu item is selected
     void detachActiveView();
     void detachActiveTab();
-    void updateDetachViewState();
 
     // called when a session terminates - the view manager will delete any
     // views associated with the session

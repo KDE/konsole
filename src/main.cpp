@@ -22,6 +22,7 @@
 #include "MainWindow.h"
 #include "config-konsole.h" //krazy:exclude=includes
 #include "KonsoleSettings.h"
+#include "ViewManager.h"
 
 // OS specific
 #include <qplatformdefs.h>
@@ -369,7 +370,10 @@ void fillAboutData(KAboutData &aboutData)
 void restoreSession(Application &app)
 {
     int n = 1;
+
     while (KMainWindow::canBeRestored(n)) {
-        app.newMainWindow()->restore(n++);
+        auto mainWindow = app.newMainWindow();
+        mainWindow->restore(n++);
+        mainWindow->viewManager()->toggleActionsBasedOnState();
     }
 }
