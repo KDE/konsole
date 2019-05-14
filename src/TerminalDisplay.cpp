@@ -160,6 +160,7 @@ void TerminalDisplay::onColorsChanged()
     }
     p.setColor(QPalette::Button, buttonColor);
     p.setColor(QPalette::Window, backgroundColor);
+    p.setColor(QPalette::Base, backgroundColor);
     p.setColor(QPalette::WindowText, buttonTextColor);
     p.setColor(QPalette::ButtonText, buttonTextColor);
 
