@@ -87,6 +87,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         TabTitleFormatButton.cpp
                         TerminalCharacterDecoder.cpp
                         TerminalHeaderBar.cpp
+                        TerminalWidget.cpp
                         ExtendedCharTable.cpp
                         TerminalDisplay.cpp
                         TerminalDisplayAccessible.cpp
