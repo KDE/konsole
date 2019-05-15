@@ -17,4 +17,12 @@ TerminalWidget::TerminalWidget(Session *session, QWidget *parent)
     setLayout(internalLayout);
 }
 
+TerminalDisplay *TerminalWidget::terminalDisplay() const {
+    return m_terminalDisplay;
+}
+
+TerminalHeaderBar *TerminalWidget::headerBar() const {
+    return m_headerBar;
+}
+
 } // namespace Konsole

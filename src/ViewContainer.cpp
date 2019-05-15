@@ -50,6 +50,7 @@
 #include "ViewSplitter.h"
 #include "MainWindow.h"
 #include "Session.h"
+#include "TerminalWidget.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 
@@ -172,7 +173,7 @@ void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
     auto container = manager->activeContainer();
     container->addSplitter(splitter);
 
-    auto controller = splitter->activeTerminalDisplay()->sessionController();
+    auto controller = splitter->activeTerminal()->terminalDisplay()->sessionController();
     container->currentSessionControllerChanged(controller);
 
     forgetView(splitter);
@@ -284,11 +285,11 @@ void TabbedViewContainer::addSplitter(ViewSplitter *viewSplitter, int index) {
     setCurrentIndex(index);
 }
 
-void TabbedViewContainer::addView(TerminalDisplay *view)
+void TabbedViewContainer::addView(TerminalWidget *view)
 {
     auto viewSplitter = new ViewSplitter();
-    viewSplitter->addTerminalDisplay(view, Qt::Horizontal);
-    auto item = view->sessionController();
+    viewSplitter->addTerminal(view, Qt::Horizontal);
+    auto item = view->terminalDisplay()->sessionController();
     int index = _newTabBehavior == PutNewTabAfterCurrentTab ? currentIndex() + 1 : -1;
     if (index == -1) {
        index = addTab(viewSplitter, item->icon(), item->title());
@@ -296,17 +297,17 @@ void TabbedViewContainer::addView(TerminalDisplay *view)
         insertTab(index, viewSplitter, item->icon(), item->title());
     }
 
-    connectTerminalDisplay(view);
+    connectTerminalDisplay(view->terminalDisplay());
     connect(viewSplitter, &ViewSplitter::destroyed, this, &TabbedViewContainer::viewDestroyed);
     setCurrentIndex(index);
-    emit viewAdded(view);
+    emit viewAdded(view->terminalDisplay());
 }
 
-void TabbedViewContainer::splitView(TerminalDisplay *view, Qt::Orientation orientation)
+void TabbedViewContainer::splitView(TerminalWidget *widget, Qt::Orientation orientation)
 {
     auto viewSplitter = qobject_cast<ViewSplitter*>(currentWidget());
-    viewSplitter->addTerminalDisplay(view, orientation);
-    connectTerminalDisplay(view);
+    viewSplitter->addTerminal(widget, orientation);
+    connectTerminalDisplay(widget->terminalDisplay());
 }
 
 void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
@@ -405,7 +406,8 @@ void TabbedViewContainer::renameTab(int index)
     if (index != -1) {
         setCurrentIndex(index);
         viewSplitterAt(index)
-            -> activeTerminalDisplay()
+            -> activeTerminal()
+            -> terminalDisplay()
             -> sessionController()
             -> rename();
     }
@@ -462,8 +464,8 @@ void TabbedViewContainer::currentTabChanged(int index)
 {
     if (index != -1) {
         auto splitview = qobject_cast<ViewSplitter*>(widget(index));
-        auto view = splitview->activeTerminalDisplay();
-        emit activeViewChanged(view);
+        auto view = splitview->activeTerminal();
+        emit activeViewChanged(view->terminalDisplay());
         setTabActivity(index, false);
     } else {
         deleteLater();
@@ -512,7 +514,11 @@ void TabbedViewContainer::currentSessionControllerChanged(SessionController *con
 void TabbedViewContainer::updateTitle(ViewProperties *item)
 {
     auto controller = qobject_cast<SessionController*>(item);
-    auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
+    auto topLevelSplitter = qobject_cast<ViewSplitter*>(
+        controller->view()
+        ->parentWidget() // TerminalWidget
+        ->parentWidget() // ViewSplitter
+        )->getToplevelSplitter();
 
     const int index = indexOf(topLevelSplitter);
     QString tabText = item->title();

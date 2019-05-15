@@ -30,9 +30,11 @@
 // Konsole
 #include "ViewContainer.h"
 #include "TerminalDisplay.h"
+#include "TerminalWidget.h"
 
 using Konsole::ViewSplitter;
 using Konsole::TerminalDisplay;
+using Konsole::TerminalWidget;
 
 //TODO: Connect the TerminalDisplay destroyed signal here.
 
@@ -43,7 +45,7 @@ ViewSplitter::ViewSplitter(QWidget *parent) :
 
 void ViewSplitter::adjustActiveTerminalDisplaySize(int percentage)
 {
-    const int containerIndex = indexOf(activeTerminalDisplay());
+    const int containerIndex = indexOf(activeTerminal());
     Q_ASSERT(containerIndex != -1);
 
     QList<int> containerSizes = sizes();
@@ -82,27 +84,27 @@ void ViewSplitter::updateSizes()
     setSizes(QVector<int>(count(), space).toList());
 }
 
-void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation containerOrientation)
+void ViewSplitter::addTerminal(TerminalWidget *widget, Qt::Orientation containerOrientation)
 {
     ViewSplitter *splitter = activeSplitter();
     if (splitter->count() < 2) {
-        splitter->addWidget(terminalDisplay);
+        splitter->addWidget(widget);
         splitter->setOrientation(containerOrientation);
     } else if (containerOrientation == splitter->orientation()) {
-        auto activeDisplay = splitter->activeTerminalDisplay();
+        auto activeDisplay = splitter->activeTerminal();
         if (!activeDisplay) {
-            splitter->addWidget(terminalDisplay);
+            splitter->addWidget(widget);
         } else {
             const int currentIndex = splitter->indexOf(activeDisplay);
-            splitter->insertWidget(currentIndex, terminalDisplay);
+            splitter->insertWidget(currentIndex, widget);
         }
     } else {
         auto newSplitter = new ViewSplitter();
 
-        TerminalDisplay *oldTerminalDisplay = splitter->activeTerminalDisplay();
-        const int oldContainerIndex = splitter->indexOf(oldTerminalDisplay);
-        newSplitter->addWidget(oldTerminalDisplay);
-        newSplitter->addWidget(terminalDisplay);
+        auto *oldWidget = splitter->activeTerminal();
+        const int oldContainerIndex = splitter->indexOf(oldWidget);
+        newSplitter->addWidget(oldWidget);
+        newSplitter->addWidget(widget);
         newSplitter->setOrientation(containerOrientation);
         newSplitter->updateSizes();
         newSplitter->show();
@@ -128,7 +130,7 @@ void ViewSplitter::childEvent(QChildEvent *event)
 
 void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int direction)
 {
-    auto terminalDisplay = activeTerminalDisplay();
+    auto terminalDisplay = activeTerminal();
     auto parentSplitter = qobject_cast<ViewSplitter*>(terminalDisplay->parentWidget());
     auto topSplitter = parentSplitter->getToplevelSplitter();
 
@@ -180,10 +182,10 @@ void ViewSplitter::focusRight()
     handleFocusDirection(Qt::Horizontal, +1);
 }
 
-TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
+TerminalWidget *ViewSplitter::activeTerminal() const
 {
-    auto focusedWidget = qobject_cast<TerminalDisplay*>(focusWidget());
-    return focusedWidget ? focusedWidget : findChild<TerminalDisplay*>();
+    auto focusedWidget = qobject_cast<TerminalWidget*>(focusWidget());
+    return focusedWidget ? focusedWidget : findChild<TerminalWidget*>();
 }
 
 void ViewSplitter::maximizeCurrentTerminal()
@@ -199,10 +201,10 @@ void ViewSplitter::restoreOtherTerminals()
 void ViewSplitter::handleMinimizeMaximize(bool maximize)
 {
     auto viewSplitter = getToplevelSplitter();
-    auto terminalDisplays = viewSplitter->findChildren<TerminalDisplay*>();
-    auto currentActiveTerminal = viewSplitter->activeTerminalDisplay();
+    auto terminals = viewSplitter->findChildren<TerminalWidget*>();
+    auto currentActiveTerminal = viewSplitter->activeTerminal();
     auto method = maximize ? &QWidget::hide : &QWidget::show;
-    for(auto terminal : terminalDisplays) {
+    for(auto terminal : terminals) {
         if (Q_LIKELY(currentActiveTerminal != terminal)) {
             (terminal->*method)();
         }

@@ -45,6 +45,7 @@
 #include "ViewSplitter.h"
 #include "Enumeration.h"
 #include "ViewContainer.h"
+#include "TerminalWidget.h"
 
 using namespace Konsole;
 
@@ -407,9 +408,9 @@ void ViewManager::detachActiveView()
     // find the currently active view and remove it from its container
     if ((_viewContainer->findChildren<TerminalDisplay*>()).count() > 1) {
         auto activeSplitter = _viewContainer->activeViewSplitter();
-        auto terminal = activeSplitter->activeTerminalDisplay();
+        auto terminal = activeSplitter->activeTerminal();
         auto newSplitter = new ViewSplitter();
-        newSplitter->addTerminalDisplay(terminal, Qt::Horizontal);
+        newSplitter->addTerminal(terminal, Qt::Horizontal);
         QHash<TerminalDisplay*, Session*> detachedSessions = forgetAll(newSplitter);
         emit terminalsDetached(newSplitter, detachedSessions);
         focusAnotherTerminal(activeSplitter->getToplevelSplitter());
@@ -553,14 +554,14 @@ void ViewManager::splitView(Qt::Orientation orientation)
     auto *session = SessionManager::instance()->createSession(profile);
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    auto terminalDisplay = createView(session);
+    auto terminalWidget = createView(session);
 
-    _viewContainer->splitView(terminalDisplay, orientation);
+    _viewContainer->splitView(terminalWidget, orientation);
 
     toggleActionsBasedOnState();
 
     // focus the new container
-    terminalDisplay->setFocus();
+    terminalWidget->setFocus();
 }
 
 void ViewManager::expandActiveContainer()
@@ -635,7 +636,7 @@ void ViewManager::attachView(TerminalDisplay *terminal, Session *session)
     _terminalDisplayHistory.append(terminal);
 }
 
-TerminalDisplay *ViewManager::createView(Session *session)
+TerminalWidget *ViewManager::createView(Session *session)
 {
     // notify this view manager when the session finishes so that its view
     // can be deleted
@@ -643,16 +644,17 @@ TerminalDisplay *ViewManager::createView(Session *session)
     // Use Qt::UniqueConnection to avoid duplicate connection
     connect(session, &Konsole::Session::finished, this, &Konsole::ViewManager::sessionFinished,
             Qt::UniqueConnection);
-    TerminalDisplay *display = createTerminalDisplay(session);
+    auto *terminalWidget = createTerminal(session);
+    auto *display = terminalWidget->terminalDisplay();
 
     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
-    applyProfileToView(display, profile);
+    applyProfileToView(terminalWidget->terminalDisplay(), profile);
 
     // set initial size
     const QSize &preferredSize = session->preferredSize();
 
     display->setSize(preferredSize.width(), preferredSize.height());
-    createController(session, display);
+    createController(session, terminalWidget->terminalDisplay());
 
     _sessionMap[display] = session;
     session->addView(display);
@@ -661,9 +663,9 @@ TerminalDisplay *ViewManager::createView(Session *session)
     // tell the session whether it has a light or dark background
     session->setDarkBackground(colorSchemeForProfile(profile)->hasDarkBackground());
     display->setFocus(Qt::OtherFocusReason);
-//     updateDetachViewState();
+    //     updateDetachViewState();
 
-    return display;
+    return terminalWidget;
 }
 
 TabbedViewContainer *ViewManager::createContainer()
@@ -772,12 +774,11 @@ void ViewManager::viewDestroyed(QWidget *view)
 //        emit unplugController(_pluggedController);
 }
 
-TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
+TerminalWidget *ViewManager::createTerminal(Session *session)
 {
-    auto display = new TerminalDisplay(nullptr);
-    display->setRandomSeed(session->sessionId() * 31);
-
-    return display;
+    auto terminalWidget = new TerminalWidget(session, nullptr);
+    terminalWidget->terminalDisplay()->setRandomSeed(session->sessionId() * 31);
+    return terminalWidget;
 }
 
 const ColorScheme *ViewManager::colorSchemeForProfile(const Profile::Ptr &profile)

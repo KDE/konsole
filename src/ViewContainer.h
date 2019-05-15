@@ -43,6 +43,7 @@ class IncrementalSearchBar;
 class ViewProperties;
 class ViewManager;
 class TabbedViewContainer;
+class TerminalWidget;
 
 /**
  * An interface for container widgets which can hold one or more views.
@@ -75,11 +76,11 @@ public:
     ~TabbedViewContainer() Q_DECL_OVERRIDE;
 
     /** Adds a new view to the container widget */
-    void addView(TerminalDisplay *view);
+    void addView(TerminalWidget *view);
     void addSplitter(ViewSplitter *splitter, int index = -1);
 
     /** splits the currently focused Splitter */
-    void splitView(TerminalDisplay *view, Qt::Orientation orientation);
+    void splitView(TerminalWidget *view, Qt::Orientation orientation);
 
     void setTabActivity(int index, bool activity);
 

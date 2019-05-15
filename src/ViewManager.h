@@ -41,6 +41,7 @@ class SessionController;
 class ViewProperties;
 class ViewSplitter;
 class TabbedViewContainer;
+class TerminalWidget;
 
 /**
  * Manages the terminal display widgets in a Konsole window or part.
@@ -187,7 +188,7 @@ public:
     /** returns the active tab from the view
     */
     TabbedViewContainer *activeContainer();
-    TerminalDisplay *createView(Session *session);
+    TerminalWidget *createView(Session *session);
     void attachView(TerminalDisplay *terminal, Session *session);
 
     static const ColorScheme *colorSchemeForProfile(const Profile::Ptr &profile);
@@ -396,7 +397,7 @@ private:
     // creates a new terminal display
     // the 'session' is used so that the terminal display's random seed
     // can be set to something which depends uniquely on that session
-    TerminalDisplay *createTerminalDisplay(Session *session = nullptr);
+    TerminalWidget *createTerminal(Session *session = nullptr);
 
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information

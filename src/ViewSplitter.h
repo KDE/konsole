@@ -33,7 +33,7 @@ class QFocusEvent;
 
 namespace Konsole {
 class TerminalDisplay;
-
+class TerminalWidget;
 /**
  * A splitter which holds a number of ViewContainer objects and allows
  * the user to control the size of each view container by dragging a splitter
@@ -68,7 +68,7 @@ public:
      *                    will be created, into which the container will
      *                    be inserted.
      */
-    void addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation orientation);
+    void addTerminal(TerminalWidget *widget, Qt::Orientation orientation);
 
     /** Removes a container from the splitter.  The container is not deleted. */
     void removeTerminalDisplay(TerminalDisplay *terminalDisplay);
@@ -87,7 +87,7 @@ public:
      * mySplitter->activeSplitter()->activeContainer() where mySplitter
      * is the ViewSplitter widget at the top of the hierarchy.
      */
-    TerminalDisplay *activeTerminalDisplay() const;
+    TerminalWidget *activeTerminal() const;
 
     /** Makes the current TerminalDisplay expanded to 100% of the view
      */
