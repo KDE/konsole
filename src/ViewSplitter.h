@@ -57,7 +57,7 @@ public:
      * Locates the child ViewSplitter widget which currently has the focus
      * and inserts the container into it.
      *
-     * @param container The container to insert
+     * @param terminalDisplay The container to insert
      * @param orientation Specifies whether the view should be split
      *                    horizontally or vertically.  If the orientation
      *                    is the same as the ViewSplitter into which the

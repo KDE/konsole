@@ -48,6 +48,7 @@ namespace LineBlockCharacters {
      * @param paint QPainter to draw on
      * @param cellRect Rectangle to draw in
      * @param chr Character to be drawn
+     * @param bold Whether the character should be boldface
      */
     void draw(QPainter &paint, const QRect &cellRect, const QChar &chr, bool bold);
 
