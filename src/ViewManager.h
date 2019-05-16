@@ -394,11 +394,6 @@ private:
     // creates a new container which can hold terminal displays
     TabbedViewContainer *createContainer();
 
-    // creates a new terminal display
-    // the 'session' is used so that the terminal display's random seed
-    // can be set to something which depends uniquely on that session
-    TerminalWidget *createTerminal(Session *session = nullptr);
-
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information
     // about the session ( such as title and associated icon ) to the display.

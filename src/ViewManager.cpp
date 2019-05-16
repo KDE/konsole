@@ -644,7 +644,8 @@ TerminalWidget *ViewManager::createView(Session *session)
     // Use Qt::UniqueConnection to avoid duplicate connection
     connect(session, &Konsole::Session::finished, this, &Konsole::ViewManager::sessionFinished,
             Qt::UniqueConnection);
-    auto *terminalWidget = createTerminal(session);
+    auto *terminalWidget = new TerminalWidget(session->sessionId());
+
     auto *display = terminalWidget->terminalDisplay();
 
     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
@@ -774,12 +775,6 @@ void ViewManager::viewDestroyed(QWidget *view)
 //        emit unplugController(_pluggedController);
 }
 
-TerminalWidget *ViewManager::createTerminal(Session *session)
-{
-    auto terminalWidget = new TerminalWidget(session, nullptr);
-    terminalWidget->terminalDisplay()->setRandomSeed(session->sessionId() * 31);
-    return terminalWidget;
-}
 
 const ColorScheme *ViewManager::colorSchemeForProfile(const Profile::Ptr &profile)
 {

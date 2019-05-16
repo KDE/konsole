@@ -6,14 +6,19 @@
 #include <QBoxLayout>
 
 namespace Konsole {
-TerminalWidget::TerminalWidget(Session *session, QWidget *parent)
+TerminalWidget::TerminalWidget(uint randomSeed, QWidget *parent)
+    : QWidget(parent)
 {
     m_terminalDisplay = new TerminalDisplay();
+    m_terminalDisplay->setRandomSeed(randomSeed * 31);
+
     m_headerBar = new TerminalHeaderBar(m_terminalDisplay);
 
     auto internalLayout = new QBoxLayout(QBoxLayout::TopToBottom);
     internalLayout->addWidget(m_headerBar);
     internalLayout->addWidget(m_terminalDisplay);
+    internalLayout->setSpacing(0);
+    internalLayout->setMargin(0);
     setLayout(internalLayout);
 }
 

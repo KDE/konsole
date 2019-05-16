@@ -11,7 +11,7 @@ namespace Konsole {
     class TerminalWidget : public QWidget {
         Q_OBJECT
     public:
-        TerminalWidget(Session *session, QWidget *parent);
+        TerminalWidget(uint randomSeed, QWidget *parent = nullptr);
         TerminalHeaderBar *headerBar() const;
         TerminalDisplay *terminalDisplay() const;
     private:
