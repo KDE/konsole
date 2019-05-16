@@ -14,10 +14,13 @@ namespace Konsole {
         TerminalWidget(uint randomSeed, QWidget *parent = nullptr);
         TerminalHeaderBar *headerBar() const;
         TerminalDisplay *terminalDisplay() const;
+
+        // Hack untill I can detangle the setup of the TerminalViews.
+        void finishTerminalSetup();
     private:
         TerminalHeaderBar *m_headerBar;
         TerminalDisplay *m_terminalDisplay;
     };
-};
+}
 
 #endif

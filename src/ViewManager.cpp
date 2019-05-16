@@ -574,6 +574,7 @@ void ViewManager::shrinkActiveContainer()
     _viewContainer->activeViewSplitter()->adjustActiveTerminalDisplaySize(-10);
 }
 
+//TODO: Those connects should be done by the Controller Constructor
 SessionController *ViewManager::createController(Session *session, TerminalDisplay *view)
 {
     // create a new controller for the session, and ensure that this view manager
@@ -636,6 +637,9 @@ void ViewManager::attachView(TerminalDisplay *terminal, Session *session)
     _terminalDisplayHistory.append(terminal);
 }
 
+/* TODO: This function should migrate to the Constructor of the TerminalDisplay
+* or at least to the constructor of TerminalWidget / TerminalDisplay
+*/
 TerminalWidget *ViewManager::createView(Session *session)
 {
     // notify this view manager when the session finishes so that its view
@@ -666,6 +670,8 @@ TerminalWidget *ViewManager::createView(Session *session)
     display->setFocus(Qt::OtherFocusReason);
     //     updateDetachViewState();
 
+    // HACK, The setup above should be inside TerminalDisplay constructor.
+    terminalWidget->finishTerminalSetup();
     return terminalWidget;
 }
 

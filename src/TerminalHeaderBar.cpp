@@ -2,6 +2,7 @@
 
 #include "TerminalDisplay.h"
 #include "SessionController.h"
+#include "ViewProperties.h"
 
 #include <KLocalizedString>
 #include <QBoxLayout>
@@ -9,33 +10,52 @@
 #include <QMenu>
 #include <QLabel>
 #include <QAction>
+#include <KToolBarLabelAction>
+#include <QToolButton>
 
 namespace Konsole {
 
-TerminalHeaderBar::TerminalHeaderBar(TerminalDisplay *terminalDisplay, QWidget *parent)
-    : QToolBar(parent),
-    m_terminalDisplay(terminalDisplay)
+TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
+    : QWidget(parent)
 {
-    auto closeAction = new QAction(
-        QIcon::fromTheme(QStringLiteral("tab-close")),
-        i18nc("@action:inmenu", "Close terminal"),
-        this
-    );
+    m_closeBtn = new QToolButton();
+    m_closeBtn->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
+    m_closeBtn->setToolTip(i18nc("@action:itooltip", "Close terminal"));
+    m_closeBtn->setText(i18nc("@action:itooltip", "Close terminal"));
+    m_closeBtn->setObjectName(QStringLiteral("close-terminal-button"));
+    m_closeBtn->setAutoRaise(true);
 
-    closeAction->setObjectName(
-        QStringLiteral("close-terminal")
-    );
+    m_terminalTitle = new QLabel();
 
-    addSpacer();
-    addAction(closeAction);
+    m_boxLayout = new QBoxLayout(QBoxLayout::LeftToRight);
+    m_boxLayout->setSpacing(0);
+    m_boxLayout->setMargin(0);
+
+    // Layout Setup
+    m_boxLayout->addStretch();
+    m_boxLayout->addWidget(m_terminalTitle);
+    m_boxLayout->addStretch();
+    m_boxLayout->addWidget(m_closeBtn);
+    setLayout(m_boxLayout);
 }
 
-void TerminalHeaderBar::addSpacer()
+// Hack untill I can detangle the creation of the TerminalViews
+void TerminalHeaderBar::finishHeaderSetup(ViewProperties *properties)
 {
-    // Spacer
-    auto *spacer = new QWidget(this);
-    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    addWidget(spacer);
+    //TODO: Fix ViewProperties signals.
+    connect(properties, &Konsole::ViewProperties::titleChanged, this,
+    [this, properties]{
+        m_terminalTitle->setText(properties->title());
+    });
+
+    /*
+    connect(item, &Konsole::ViewProperties::iconChanged, this,
+            &Konsole::TabbedViewContainer::updateIcon);
+
+    connect(item, &Konsole::ViewProperties::activity, this,
+            &Konsole::TabbedViewContainer::updateActivity);
+*/
 }
+
 
 }

@@ -1,25 +1,28 @@
 #ifndef TERMINAL_HEADER_BAR_H
 #define TERMINAL_HEADER_BAR_H
 
-#include <QToolBar>
+#include <QWidget>
 
 class QLabel;
 class QToolButton;
-
+class QBoxLayout;
 namespace Konsole {
     class TerminalDisplay;
+    class ViewProperties;
 
-class TerminalHeaderBar : public QToolBar {
+class TerminalHeaderBar : public QWidget {
     Q_OBJECT
 public:
     // TODO: Verify if the terminalDisplay is needed, or some other thing like SessionController.
-    TerminalHeaderBar(TerminalDisplay *terminalDisplay, QWidget *parent = nullptr);
+    TerminalHeaderBar(QWidget *parent = nullptr);
+    void finishHeaderSetup(ViewProperties *properties);
 
 private:
     void addSpacer();
+    QBoxLayout *m_boxLayout;
     TerminalDisplay *m_terminalDisplay;
     QLabel *m_terminalTitle;
-    std::vector<QAction*> m_actions;
+    QToolButton *m_closeBtn;
 };
 
 } // namespace Konsole

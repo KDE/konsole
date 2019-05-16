@@ -310,6 +310,7 @@ void TabbedViewContainer::splitView(TerminalWidget *widget, Qt::Orientation orie
     connectTerminalDisplay(widget->terminalDisplay());
 }
 
+//TODO: Those two functions below can be templated pure functions so I can reuse in different classes.
 void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
 {
     auto item = display->sessionController();

@@ -2,6 +2,8 @@
 
 #include "TerminalHeaderBar.h"
 #include "TerminalDisplay.h"
+#include "ViewProperties.h"
+#include "SessionController.h"
 
 #include <QBoxLayout>
 
@@ -20,6 +22,11 @@ TerminalWidget::TerminalWidget(uint randomSeed, QWidget *parent)
     internalLayout->setSpacing(0);
     internalLayout->setMargin(0);
     setLayout(internalLayout);
+}
+
+void TerminalWidget::finishTerminalSetup()
+{
+    m_headerBar->finishHeaderSetup(m_terminalDisplay->sessionController());
 }
 
 TerminalDisplay *TerminalWidget::terminalDisplay() const {
