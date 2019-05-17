@@ -23,6 +23,7 @@
 #include "config-konsole.h" //krazy:exclude=includes
 #include "KonsoleSettings.h"
 #include "ViewManager.h"
+#include "ViewContainer.h"
 
 // OS specific
 #include <qplatformdefs.h>
@@ -375,5 +376,13 @@ void restoreSession(Application &app)
         auto mainWindow = app.newMainWindow();
         mainWindow->restore(n++);
         mainWindow->viewManager()->toggleActionsBasedOnState();
+        mainWindow->show();
+
+        // TODO: HACK without the code below the sessions would be `unitialized`
+        // and the tabs wouldn't display the correct information.
+        auto tabbedContainer = qobject_cast<Konsole::TabbedViewContainer*>(mainWindow->centralWidget());
+        for(int i = 0; i < tabbedContainer->count(); i++) {
+            tabbedContainer->setCurrentIndex(i);
+        }
     }
 }
