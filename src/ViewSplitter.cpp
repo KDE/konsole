@@ -150,13 +150,17 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
 
     if (TerminalDisplay* terminal = qobject_cast<TerminalDisplay*>(child)) {
         terminal->setFocus(Qt::OtherFocusReason);
-    } else if (qobject_cast<QScrollBar*>(child)) {
-        auto scrollbarTerminal = qobject_cast<TerminalDisplay*>(child->parent());
-        scrollbarTerminal->setFocus(Qt::OtherFocusReason);
     } else if (qobject_cast<QSplitterHandle*>(child)) {
         auto targetSplitter = qobject_cast<QSplitter*>(child->parent());
         auto splitterTerminal = qobject_cast<TerminalDisplay*>(targetSplitter->widget(0));
         splitterTerminal->setFocus(Qt::OtherFocusReason);
+    } else if (qobject_cast<QWidget*>(child)) {
+        TerminalDisplay *terminalParent = nullptr;
+        while(!terminalParent) {
+            terminalParent = qobject_cast<TerminalDisplay*>(child->parentWidget());
+            child = child->parentWidget();
+        }
+        terminalParent->setFocus(Qt::OtherFocusReason);
     }
 }
 
