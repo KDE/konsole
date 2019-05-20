@@ -34,6 +34,7 @@
 #include "Enumeration.h"
 #include "ScrollState.h"
 #include "Profile.h"
+#include "TerminalHeaderBar.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -293,6 +294,10 @@ public:
         return font();
     }
 
+    TerminalHeaderBar *headerBar() const
+    {
+        return _headerBar;
+    }
     /**
      * Sets the font used to draw the display.  Has no effect if @p font
      * is larger than the size of the display itself.
@@ -845,7 +850,7 @@ private:
 
     ScrollState _scrollWheelState;
     IncrementalSearchBar *_searchBar;
-
+    TerminalHeaderBar *_headerBar;
     QRect _searchResultRect;
     friend class TerminalDisplayAccessible;
 };

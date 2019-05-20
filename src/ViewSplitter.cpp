@@ -124,6 +124,15 @@ void ViewSplitter::childEvent(QChildEvent *event)
             deleteLater();
         }
     }
+
+    auto terminals = getToplevelSplitter()->findChildren<TerminalDisplay*>();
+    if (terminals.size() == 1) {
+        terminals.at(0)->headerBar()->setVisible(false);
+    } else {
+        for(auto terminal : terminals) {
+            terminal->headerBar()->setVisible(true);
+        }
+    }
 }
 
 void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int direction)
