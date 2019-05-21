@@ -31,7 +31,10 @@ DetachableTabBar::DetachableTabBar(QWidget *parent) :
     dragType(DragType::NONE),
     _originalCursor(cursor()),
     tabId(-1)
-{}
+{
+    setUsesScrollButtons(false);
+    setElideMode(Qt::TextElideMode::ElideMiddle);
+}
 
 void DetachableTabBar::middleMouseButtonClickAt(const QPoint& pos)
 {
