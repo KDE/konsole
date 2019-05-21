@@ -126,6 +126,11 @@ public:
     void handleFocusDirection(Qt::Orientation orientation, int direction);
 
     void childEvent(QChildEvent* event) override;
+protected:
+    void dragEnterEvent(QDragEnterEvent *ev) override;
+    void dragMoveEvent(QDragMoveEvent *ev) override;
+    void dragLeaveEvent(QDragLeaveEvent *ev) override;
+    void dropEvent(QDropEvent *ev) override;
 private:
     void updateSizes();
 };

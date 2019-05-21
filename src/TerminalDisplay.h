@@ -76,6 +76,9 @@ public:
 
     void applyProfile(const Profile::Ptr& profile);
 
+    void enableDropOverlay();
+    void disableDropOverlay();
+
     /** Returns the terminal color palette used by the display. */
     const ColorEntry *colorTable() const;
     /** Sets the terminal color palette used by the display. */
@@ -635,6 +638,9 @@ private:
 
     // draws the preedit string for input methods
     void drawInputMethodPreeditString(QPainter &painter, const QRect &rect);
+
+    void paintDropOverlay(QPainter &painter);
+    bool _paintDropOverlay = false;
 
     // --
 

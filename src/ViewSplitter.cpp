@@ -26,6 +26,15 @@
 #include <QDebug>
 #include <QChildEvent>
 #include <QScrollBar>
+#include <QDropEvent>
+#include <QDragEnterEvent>
+#include <QDragMoveEvent>
+#include <QDragLeaveEvent>
+#include <QPaintEvent>
+#include <QMimeData>
+#include <QDebug>
+#include <QCursor>
+#include <QPainter>
 
 // Konsole
 #include "ViewContainer.h"
@@ -39,6 +48,7 @@ using Konsole::TerminalDisplay;
 ViewSplitter::ViewSplitter(QWidget *parent) :
     QSplitter(parent)
 {
+    setAcceptDrops(true);
 }
 
 void ViewSplitter::adjustActiveTerminalDisplaySize(int percentage)
@@ -229,4 +239,72 @@ ViewSplitter *ViewSplitter::getToplevelSplitter()
         current = qobject_cast<ViewSplitter*>(current->parentWidget());
     }
     return current;
+}
+
+void ViewSplitter::dragEnterEvent(QDragEnterEvent *ev)
+{
+    auto mime = ev->mimeData();
+    qDebug() << mime;
+    if (mime->hasFormat(QStringLiteral("konsole/terminal_display"))) {
+        auto terminalWidget = qobject_cast<TerminalDisplay*>(ev->source()->parent());
+        if (!terminalWidget) {
+            ev->ignore();
+        } else if (terminalWidget->rect().contains(terminalWidget->mapFromGlobal(QCursor::pos()))) {
+            ev->ignore();
+        } else {
+            qDebug() << terminalWidget->geometry() << terminalWidget->mapFromGlobal(QCursor::pos());
+            ev->accept();
+        }
+    }
+    QSplitter::dragEnterEvent(ev);
+}
+
+/* this variable is shared across all splitter instances */
+namespace  {
+    TerminalDisplay *lastDragged = nullptr;
+}
+
+void ViewSplitter::dragMoveEvent(QDragMoveEvent *ev)
+{
+    auto mime = ev->mimeData();
+    if (mime->hasFormat(QStringLiteral("konsole/terminal_display"))) {
+        ev->accept();
+        auto childWidget = childAt(mapFromGlobal(QCursor::pos()));
+        TerminalDisplay *displayAt = qobject_cast<TerminalDisplay*>(childWidget);
+        while(displayAt == nullptr) {
+            if (!childWidget->parent()) {
+                break;
+            }
+            childWidget = childWidget->parentWidget();
+            displayAt = qobject_cast<TerminalDisplay*>(childWidget);
+        }
+
+        if (displayAt) {
+            if (lastDragged != displayAt) {
+                if (lastDragged) {
+                    lastDragged->disableDropOverlay();
+                }
+                lastDragged = displayAt;
+                lastDragged->enableDropOverlay();
+            }
+        } else {
+            if (lastDragged) {
+                lastDragged->disableDropOverlay();
+                lastDragged = nullptr;
+            }
+        }
+    }
+    QSplitter::dragMoveEvent(ev);
+}
+
+void ViewSplitter::dragLeaveEvent(QDragLeaveEvent *ev)
+{
+    Q_UNUSED(ev)
+    update();
+}
+
+void ViewSplitter::dropEvent(QDropEvent *ev)
+{
+    Q_UNUSED(ev)
+    update();
 }

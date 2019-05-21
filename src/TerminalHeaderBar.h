@@ -19,6 +19,8 @@ public:
 
     void terminalFocusIn();
     void terminalFocusOut();
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
 
 Q_SIGNALS:
     void requestToggleExpansion();

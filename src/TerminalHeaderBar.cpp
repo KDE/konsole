@@ -13,6 +13,9 @@
 #include <KToolBarLabelAction>
 #include <QToolButton>
 #include <QDebug>
+#include <QMouseEvent>
+#include <QMimeData>
+#include <QDrag>
 
 namespace Konsole {
 
@@ -86,6 +89,19 @@ void TerminalHeaderBar::terminalFocusOut()
 {
     // TODO: Don't focusOut if searchBar is enabled.
     m_terminalTitle->setEnabled(false);
+}
+
+void TerminalHeaderBar::mousePressEvent(QMouseEvent *event)
+{
+    Q_UNUSED(event)
+
+    auto mimeData = new QMimeData();
+    mimeData->setData(QStringLiteral("konsole/terminal_display"), {});
+
+    auto dragAction = new QDrag(this);
+    dragAction->setMimeData(mimeData);
+
+    dragAction->exec();
 }
 
 }
