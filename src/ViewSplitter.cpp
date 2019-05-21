@@ -241,6 +241,11 @@ ViewSplitter *ViewSplitter::getToplevelSplitter()
     return current;
 }
 
+/* this variable is shared across all splitter instances */
+namespace  {
+    TerminalDisplay *lastDragged = nullptr;
+}
+
 void ViewSplitter::dragEnterEvent(QDragEnterEvent *ev)
 {
     auto mime = ev->mimeData();
@@ -257,11 +262,6 @@ void ViewSplitter::dragEnterEvent(QDragEnterEvent *ev)
         }
     }
     QSplitter::dragEnterEvent(ev);
-}
-
-/* this variable is shared across all splitter instances */
-namespace  {
-    TerminalDisplay *lastDragged = nullptr;
 }
 
 void ViewSplitter::dragMoveEvent(QDragMoveEvent *ev)
@@ -285,8 +285,8 @@ void ViewSplitter::dragMoveEvent(QDragMoveEvent *ev)
                     lastDragged->disableDropOverlay();
                 }
                 lastDragged = displayAt;
-                lastDragged->enableDropOverlay();
             }
+            lastDragged->enableDropOverlay();
         } else {
             if (lastDragged) {
                 lastDragged->disableDropOverlay();
@@ -306,5 +306,37 @@ void ViewSplitter::dragLeaveEvent(QDragLeaveEvent *ev)
 void ViewSplitter::dropEvent(QDropEvent *ev)
 {
     Q_UNUSED(ev)
-    update();
+    if (!lastDragged) {
+        return;
+    }
+    lastDragged->disableDropOverlay();
+
+    const auto width = lastDragged->width();
+    const auto height = lastDragged->height();
+    const auto midPoint = QPoint(width/2, height / 2);
+    const auto topTriangle = QPolygon({{0,0}, midPoint, {width, 0}, {0,0}});
+    const auto leftTriangle = QPolygon({{0,0}, midPoint, {0, height}, {0,0}});
+    const auto bottomTriangle = QPolygon({{0, height}, midPoint, {width, height}, {0, height}});
+    const auto rightTriangle = QPolygon({{width, 0}, midPoint, {width, height}, {width, 0}});
+
+    const auto mousePos = mapFromGlobal(QCursor::pos());
+    const auto addLocation = (topTriangle.contains(mousePos)) ? Qt::TopEdge
+                           : (leftTriangle.contains(mousePos)) ? Qt::LeftEdge
+                           : (bottomTriangle.contains(mousePos)) ? Qt::BottomEdge
+                           : (rightTriangle.contains(mousePos)) ? Qt::RightEdge
+                           : /* in case of error */ Qt::Edge::RightEdge;
+
+    auto *movingTerminal = qobject_cast<TerminalDisplay*>(ev->source()->parent());
+    ev->acceptProposedAction();
+    ev->accept();
+
+    movingTerminal->hide();
+    movingTerminal->setParent(nullptr);
+
+    //TODO: Still need to do the 'add before' or 'add after'. right now is just 'after'.
+    addTerminalDisplay(movingTerminal, addLocation == Qt::TopEdge || addLocation == Qt::BottomEdge ?
+                           Qt::Orientation::Vertical : Qt::Orientation::Horizontal);
+
+    movingTerminal->show();
+    lastDragged = nullptr;
 }

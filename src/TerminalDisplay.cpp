@@ -3927,34 +3927,8 @@ void TerminalDisplay::disableDropOverlay() {
 
 void TerminalDisplay::paintDropOverlay(QPainter& painter)
 {
+    Q_UNUSED(painter);
     if (_paintDropOverlay) {
-        // Discover the "triangle" the drop belongs to.
-        const auto midPoint = QPoint(width()/2, height() / 2);
-        const auto topTriangle = QPolygon({QPoint(0,0), midPoint, QPoint(width(), 0), QPoint(0,0)});
-        const auto leftTriangle = QPolygon({QPoint(0,0), midPoint, QPoint(0, height()), QPoint(0,0)});
-        const auto bottomTriangle = QPolygon({QPoint(0, height()), midPoint, QPoint(width(), height()), QPoint(0, height())});
-        const auto rightTriangle = QPolygon({QPoint(width(), 0), midPoint, QPoint(width(), height()), QPoint(width(), 0)});
-
-        const auto mousePos = mapFromGlobal(QCursor::pos());
-        if (topTriangle.contains(mousePos)) {
-            qDebug() << "Topo";
-        } else if (leftTriangle.contains(mousePos)) {
-            qDebug() << "Left";
-        } else if (bottomTriangle.contains(mousePos)) {
-            qDebug() << "Bottom";
-        } else if (rightTriangle.contains(mousePos)) {
-            qDebug() << "Right";
-        }
-
-        QColor blueAlpha(0,0,255,125);
-        QColor greenAlpha(0,255,0,125);
-        QColor redAlpha(255,0,0,125);
-
-        painter.setBrush(blueAlpha);
-        painter.drawPolygon(topTriangle);
-        painter.setBrush(greenAlpha);
-        painter.drawPolygon(bottomTriangle);
-        painter.setBrush(redAlpha);
-        painter.drawPolygon(rightTriangle);
+        // TODO: PAint a overlay near the border where the new Terminal will be added.
     }
 }

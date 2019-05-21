@@ -70,9 +70,6 @@ public:
      */
     void addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation orientation);
 
-    /** Removes a container from the splitter.  The container is not deleted. */
-    void removeTerminalDisplay(TerminalDisplay *terminalDisplay);
-
     /** Returns the child ViewSplitter widget which currently has the focus */
     ViewSplitter *activeSplitter();
 
