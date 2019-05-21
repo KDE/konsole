@@ -31,7 +31,7 @@ static const QString unescape(const QStringRef &str) {
     QString result;
     result.reserve(str.length());
     for(int i = 0; i < str.length(); ++i) {
-        if(str[i] == QLatin1Char('\\') && i < str.length() - 1)
+        if(i < str.length() - 1 && str[i] == QLatin1Char('\\'))
             result += str[++i];
         else
             result += str[i];
