@@ -91,40 +91,6 @@
   <summary xml:lang="zh-TW">終端機</summary>
   <description>
     <p>Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
-    <p xml:lang="ast">Konsole ye un emulador de terminal X, davezu llamáu como terminal o shell. Emula una interfaz en llinia de comandos nuna ventana de namái testu.</p>
-    <p xml:lang="ca">El Konsole és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordres). Emula una interfície de línia d'ordres en una finestra de només text.</p>
-    <p xml:lang="ca-valencia">El Konsole és un emulador de terminal X, sovint referit com un terminal o una shell (intèrpret d'ordres). Emula una interfície de línia d'ordres en una finestra de només text.</p>
-    <p xml:lang="da">Konsole er en X-terminalemulator, ofte omtal som en terminal eller en skal. Den emulerer en kommandolinjegrænseflade i et vindue kun med tekst.</p>
-    <p xml:lang="de">Konsole ist ein X-Terminal-Emulator, oftmals auch einfach nur als Terminal oder Shell bezeichnet. Es emuliert die Befehlszeile in einem Textfenster.</p>
-    <p xml:lang="el">Το Konsole είναι ένας εξομοιωτής τερματικού, το οποίο συχνά αναφέρεται ως τερματικό ή κέλυφος. Εξομοιώνει ένα περιβάλλον χρήστη γραμμής εντολών σε ένα παράθυρο για κείμενο μόνο.</p>
-    <p xml:lang="en-GB">Konsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.</p>
-    <p xml:lang="es">Konsole es un emulador de terminal X, al que se le suele llamar terminal o shell. Emula in interfaz de línea de órdenes en una ventana solo de texto.</p>
-    <p xml:lang="eu">Konsole X terminal emulatzaile bat da, askotan terminal edo shell gisa izendatua. Testu soileko leiho bateko komando-lerroko interfaze bat emulatzen du.</p>
-    <p xml:lang="fi">Konsole on X-pääte-emulaattori eli pääte eli komentotulkki. Se mukailee tekstitilan komentorivikäyttöliittymää.</p>
-    <p xml:lang="fr">Konsole est un émulateur de terminal, souvent utilisé appelé console ou shell. Il émule une interface de ligne de commande dans une fenêtre de texte seulement.</p>
-    <p xml:lang="gl">Konsole é un emulador de terminal de X, comunmente denominado terminal ou intérprete de ordes. Emula unha interface de liña de ordes nunha xanela de só texto.</p>
-    <p xml:lang="hu">A Konsole egy X terminálemulátor, más néven terminál vagy parancsértelmező. Parancssori felületet emulál egy szöveges ablakba,</p>
-    <p xml:lang="ia">Konsole es un emulator de terminal de X, sovente referite como unterminal o un shell. Illo emula uninterfacie de linea de commando in un fenestra de sol texto.</p>
-    <p xml:lang="id">Konsole adalah sebuah emulator terminal X, sering disebut sebagai sebuah terminal atau sebuah shell. Ini mengemulasi antarmuka baris perintah dalam window yang hanya teks.</p>
-    <p xml:lang="it">Konsole è un emulatore di terminale per X, spesso indicato come un terminale o una shell. Emula un'interfaccia a riga di comando in una finestra di solo testo.</p>
-    <p xml:lang="ko">Konsole은 흔히 터미널, 혹은 셸이라고 불리는 X 터미널 에뮬레이터입니다. 텍스트 창에서 명령행 인터페이스를 재현합니다.</p>
-    <p xml:lang="nl">Konsole is een X-terminalemulator, vaak een terminal of shell genoemd. Het emuleert een opdrachtprompt in een venster met alleen tekst.</p>
-    <p xml:lang="nn">Konsole er ein såkalla terminalemulator for X, gjerne kalla ein «terminal» eller eit «skal». Han emulerer eit tekstbasert kommandolinjegrensesnitt.</p>
-    <p xml:lang="pl">Konsola jest emulatorem terminala dla X, częściej nazwyana po prostu terminalem ub powłoką. Emuluje interfejs wiersza poleceń w oknie zawierającym wyłącznie tekst.</p>
-    <p xml:lang="pt">O Konsole é um emulador de terminal do X, normalmente referido como um terminal ou consola. Ele emula uma interface de linha de comandos numa janela apenas de texto.</p>
-    <p xml:lang="pt-BR">Konsole é um emulador de terminais X, frequentemente denominado como um terminal, console ou shell. Emula uma interface de linha de comando em uma janela somente com texto.</p>
-    <p xml:lang="sk">Konsole je emulátor terminálu X, často sa označuje ako terminál alebo shell. Emuluje rozhranie príkazového riadku v textovom okne.</p>
-    <p xml:lang="sl">Konsole je posnemovalnik terminala X, ki se ga pogosto označuje kot terminal ali lupina. V besedilnem oknu posnema vmesnik ukazne vrstice.</p>
-    <p xml:lang="sr">Конзола је емулатор терминала за Икс, који се често назива само терминалом или шкољком. Емулира сучеље командне линије у чисто текстуалном прозору.</p>
-    <p xml:lang="sr-Latn">Konsole je emulator terminala za X, koji se često naziva samo terminalom ili školjkom. Emulira sučelje komandne linije u čisto tekstualnom prozoru.</p>
-    <p xml:lang="sr-ijekavian">Конзола је емулатор терминала за Икс, који се често назива само терминалом или шкољком. Емулира сучеље командне линије у чисто текстуалном прозору.</p>
-    <p xml:lang="sr-ijekavianlatin">Konsole je emulator terminala za X, koji se često naziva samo terminalom ili školjkom. Emulira sučelje komandne linije u čisto tekstualnom prozoru.</p>
-    <p xml:lang="sv">Terminal är en X-terminalemulator, ofta kallad bara terminal eller ett skal. Det emulerar ett kommandoradsgränssnitt i ett fönster med bara text.</p>
-    <p xml:lang="tr">Konsole, genellikle uçbirim (terminal) veya kabuk (shell) olarak adlandırılan, X uçbirim öykünücüsüdür. Komut satırı arayüzünü sadece metin penceresinde gerçekleştirir.</p>
-    <p xml:lang="uk">Konsole — це графічний емулятор термінала, який часто називають терміналом або оболонкою. Ця програма імітує інтерфейс командного рядка у вікні, що працює лише у текстовому режимі.</p>
-    <p xml:lang="x-test">xxKonsole is an X terminal emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.xx</p>
-    <p xml:lang="zh-CN">Konsole 是一个 X 终端模拟器，通常称为终端或者 shell。它通过一个文本窗口来模拟命令行界面。</p>
-    <p xml:lang="zh-TW">Konsole 是一個 X 終端機模擬器，通常稱為終端機或 shell。它模擬了一個在只有文字的視窗中的指令列介面。</p>
     <p>Features:</p>
     <p xml:lang="ar">الميزات:</p>
     <p xml:lang="ast">Carauterístiques:</p>
