@@ -460,8 +460,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     _generalUi->startInSameDirButton->setChecked(profile->startInCurrentSessionDir());
 
     // initial terminal size
-    const auto rowsSuffix = ki18ncp("Suffix of the number of columns (N columns)", " column", " columns");
-    const auto colsSuffix = ki18ncp("Suffix of the number of rows (N rows)", " row", " rows");
+    const auto colsSuffix = ki18ncp("Suffix of the number of columns (N columns)", " column", " columns");
+    const auto rowsSuffix = ki18ncp("Suffix of the number of rows (N rows)", " row", " rows");
     _generalUi->terminalColumnsEntry->setValue(profile->terminalColumns());
     _generalUi->terminalRowsEntry->setValue(profile->terminalRows());
     _generalUi->terminalColumnsEntry->setSuffix(colsSuffix);
