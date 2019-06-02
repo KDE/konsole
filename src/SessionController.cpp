@@ -1758,7 +1758,6 @@ void SessionController::zmodemUpload()
                            i18n("<p>The current session already has a ZModem file transfer in progress.</p>"));
         return;
     }
-    _session->setZModemBusy(true);
 
     QString zmodem = QStandardPaths::findExecutable(QStringLiteral("sz"));
     if (zmodem.isEmpty()) {
