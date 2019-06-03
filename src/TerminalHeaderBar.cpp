@@ -129,21 +129,30 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
         optTabBase.documentMode = false;
         p.drawPrimitive(QStyle::PE_FrameTabBarBase, optTabBase);
     }
+
     QWidget::paintEvent(paintEvent);
+    if (!m_terminalIsFocused) {
+        auto p = qApp->palette();
+        auto shadowColor = p.color(QPalette::ColorRole::Shadow);
+        shadowColor.setAlphaF( 0.2f * shadowColor.alphaF() ); // same as breeze.
+
+        QPainter painter(this);
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(shadowColor);
+        painter.drawRect(rect());
+    }
 }
 
 void TerminalHeaderBar::terminalFocusIn()
 {
-    setPalette(qApp->palette());
-    m_terminalTitle->setEnabled(true);
+    m_terminalIsFocused = true;
+    update();
 }
 
 void TerminalHeaderBar::terminalFocusOut()
 {
-    auto p = palette();
-    p.setBrush(QPalette::ColorRole::Window, p.brush(QPalette::ColorGroup::Disabled,QPalette::ColorRole::Window));
-    setPalette(p);
-    m_terminalTitle->setEnabled(false);
+    m_terminalIsFocused = false;
+    update();
 }
 
 }

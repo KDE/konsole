@@ -55,6 +55,7 @@ private:
     QLabel *m_terminalActivity; // Bell icon.
     QToolButton *m_closeBtn;
     QToolButton *m_toggleExpandedMode;
+    bool m_terminalIsFocused;
 };
 
 } // namespace Konsole
