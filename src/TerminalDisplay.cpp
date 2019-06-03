@@ -483,6 +483,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _dimWhenInactive(false)
     , _scrollWheelState(ScrollState())
     , _searchBar(new IncrementalSearchBar(this))
+    , _headerBar(new TerminalHeaderBar(this))
     , _searchResultRect(QRect())
 {
     // terminal applications are not designed with Right-To-Left in mind,
@@ -497,6 +498,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     // set the scroll bar's slider to occupy the whole area of the scroll bar initially
     setScroll(0, 0);
     _scrollBar->setCursor(Qt::ArrowCursor);
+    _headerBar->setCursor(Qt::ArrowCursor);
     connect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
     connect(_scrollBar, &QScrollBar::sliderMoved, this, &Konsole::TerminalDisplay::viewScrolledByUser);
 
@@ -533,21 +535,13 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     setAttribute(Qt::WA_OpaquePaintEvent);
 
     // Add the stretch item once, the KMessageWidgets are inserted at index 0.
+    _verticalLayout->addWidget(_headerBar);
     _verticalLayout->addStretch();
     _verticalLayout->setSpacing(0);
-
+    _verticalLayout->setMargin(0);
     setLayout(_verticalLayout);
 
-    // Take the scrollbar into account and add a margin to the layout. Without the timer the scrollbar width
-    // is garbage.
-    QTimer::singleShot(0, this, [this]() {
-        const int scrollBarWidth = _scrollBar->isVisible() ? geometry().intersected(_scrollBar->geometry()).width() : 0;
-        _verticalLayout->setContentsMargins(0, 0, scrollBarWidth, 0);
-    });
-
     new AutoScrollHandler(this);
-
-
 #ifndef QT_NO_ACCESSIBILITY
     QAccessible::installFactory(Konsole::accessibleInterfaceFactory);
 #endif
@@ -1766,7 +1760,7 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     Q_ASSERT(!_textBlinking);
 
     _showUrlHint = false;
-
+    _headerBar->terminalFocusOut();
     emit focusLost();
 }
 
@@ -1781,7 +1775,7 @@ void TerminalDisplay::focusInEvent(QFocusEvent*)
     if (_allowBlinkingText && _hasTextBlinker) {
         _blinkTextTimer->start();
     }
-
+    _headerBar->terminalFocusIn();
     emit focusGained();
 }
 
@@ -1793,6 +1787,7 @@ void TerminalDisplay::blinkTextEvent()
 
     // TODO: Optimize to only repaint the areas of the widget where there is
     // blinking text rather than repainting the whole widget.
+    _headerBar->terminalFocusOut();
     update();
 }
 
@@ -1827,7 +1822,9 @@ void TerminalDisplay::updateCursor()
 void TerminalDisplay::resizeEvent(QResizeEvent *event)
 {
     const auto width = event->size().width() - _scrollBar->geometry().width();
-    _searchBar->correctPosition(QSize(width, event->size().height()));
+    const auto headerHeight = _headerBar->isVisible() ? _headerBar->height() : 0;
+
+    _searchBar->correctPosition(QSize(width, headerHeight));
     if (contentsRect().isValid()) {
         updateImageSize();
     }
@@ -1901,7 +1898,13 @@ void TerminalDisplay::clearImage()
 
 void TerminalDisplay::calcGeometry()
 {
-    _scrollBar->resize(_scrollBar->sizeHint().width(), contentsRect().height());
+    const auto headerHeight = _headerBar->isVisible() ? _headerBar->height() : 0;
+
+    _scrollBar->resize(
+        _scrollBar->sizeHint().width(),        // width
+        contentsRect().height() - headerHeight // height
+    );
+
     _contentRect = contentsRect().adjusted(_margin, _margin, -_margin, -_margin);
 
     switch (_scrollbarLocation) {
@@ -1909,13 +1912,17 @@ void TerminalDisplay::calcGeometry()
         break;
     case Enum::ScrollBarLeft :
         _contentRect.setLeft(_contentRect.left() + _scrollBar->width());
-        _scrollBar->move(contentsRect().topLeft());
+        _scrollBar->move(contentsRect().left(),
+                         contentsRect().top() + headerHeight);
         break;
     case Enum::ScrollBarRight:
         _contentRect.setRight(_contentRect.right() - _scrollBar->width());
-        _scrollBar->move(contentsRect().topRight() - QPoint(_scrollBar->width() - 1, 0));
+        _scrollBar->move(contentsRect().right() - _scrollBar->width() - 1,
+                         contentsRect().top() + headerHeight);
         break;
     }
+
+    _contentRect.setTop(_contentRect.top() + headerHeight);
 
     // ensure that display is always at least one column wide
     _columns = qMax(1, _contentRect.width() / _fontWidth);
@@ -3388,7 +3395,7 @@ KMessageWidget* TerminalDisplay::createMessageWidget(const QString &text) {
     widget->setFocusProxy(this);
     widget->setCursor(Qt::ArrowCursor);
 
-    _verticalLayout->insertWidget(0, widget);
+    _verticalLayout->insertWidget(1, widget);
     return widget;
 }
 
@@ -3773,6 +3780,7 @@ void TerminalDisplay::doDrag()
 void TerminalDisplay::setSessionController(SessionController* controller)
 {
     _sessionController = controller;
+    _headerBar->finishHeaderSetup(controller);
 }
 
 SessionController* TerminalDisplay::sessionController()

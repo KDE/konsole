@@ -93,6 +93,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ExtendedCharTable.cpp
                         TerminalDisplay.cpp
                         TerminalDisplayAccessible.cpp
+                        TerminalHeaderBar.cpp
                         LineBlockCharacters.cpp
                         ViewContainer.cpp
                         ViewManager.cpp

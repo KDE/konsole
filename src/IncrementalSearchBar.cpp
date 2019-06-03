@@ -239,10 +239,9 @@ bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *event)
 
 void IncrementalSearchBar::correctPosition(const QSize &parentSize)
 {
-    const auto width = geometry().width();
-    const auto height = geometry().height();
-    const auto x = parentSize.width() - width;
-    setGeometry(x, 0, width, height);
+    const auto x = parentSize.width() - width();
+    const auto y = parentSize.height();
+    setGeometry(x, 0 + y, width(), height());
 }
 
 void IncrementalSearchBar::keyPressEvent(QKeyEvent *event)
