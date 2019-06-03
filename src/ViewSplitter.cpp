@@ -186,14 +186,10 @@ TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
     return focusedWidget ? focusedWidget : findChild<TerminalDisplay*>();
 }
 
-void ViewSplitter::maximizeCurrentTerminal()
+void ViewSplitter::toggleMaximizeCurrentTerminal()
 {
-    handleMinimizeMaximize(true);
-}
-
-void ViewSplitter::restoreOtherTerminals()
-{
-    handleMinimizeMaximize(false);
+    m_terminalMaximized = !m_terminalMaximized;
+    handleMinimizeMaximize(m_terminalMaximized);
 }
 
 void ViewSplitter::handleMinimizeMaximize(bool maximize)

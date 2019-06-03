@@ -91,11 +91,7 @@ public:
 
     /** Makes the current TerminalDisplay expanded to 100% of the view
      */
-    void maximizeCurrentTerminal();
-
-    /** Restore the sizes of the terminals.
-     */
-    void restoreOtherTerminals();
+    void toggleMaximizeCurrentTerminal();
 
     void handleMinimizeMaximize(bool maximize);
 
@@ -128,6 +124,7 @@ public:
     void childEvent(QChildEvent* event) override;
 private:
     void updateSizes();
+    bool m_terminalMaximized = false;
 };
 }
 #endif //VIEWSPLITTER_H

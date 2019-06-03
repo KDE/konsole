@@ -556,14 +556,9 @@ void TabbedViewContainer::setNavigationVisibility(ViewManager::NavigationVisibil
     }
 }
 
-void TabbedViewContainer::maximizeCurrentTerminal()
+void TabbedViewContainer::toggleMaximizeCurrentTerminal()
 {
-    activeViewSplitter()->maximizeCurrentTerminal();
-}
-
-void TabbedViewContainer::restoreOtherTerminals()
-{
-    activeViewSplitter()->restoreOtherTerminals();
+    activeViewSplitter()->toggleMaximizeCurrentTerminal();
 }
 
 void TabbedViewContainer::moveTabLeft()
