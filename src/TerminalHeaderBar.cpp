@@ -35,6 +35,10 @@
 #include <QToolButton>
 #include <QDebug>
 #include <QApplication>
+#include <QPaintEvent>
+#include <QTabBar>
+#include <QPainter>
+#include <QSplitter>
 
 namespace Konsole {
 
@@ -102,6 +106,27 @@ void TerminalHeaderBar::finishHeaderSetup(ViewProperties *properties)
             this, &TerminalHeaderBar::requestToggleExpansion);
 }
 
+void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
+{
+    /* Try to get the widget that's 10px above this one.
+     * If the widget is something else than a TerminalWidget, a TabBar or a QSplitter,
+     * draw a 1px line to separate it from the others.
+     */
+    const auto globalPos = parentWidget()->mapToGlobal(pos());
+    auto *widget = qApp->widgetAt(globalPos.x() + 10, globalPos.y() - 10);
+
+    const bool isTabbar = qobject_cast<QTabBar*>(widget);
+    const bool isTerminalWidget = qobject_cast<TerminalDisplay*>(widget);
+    const bool isSplitter = qobject_cast<QSplitter*>(widget) || qobject_cast<QSplitterHandle*>(widget);
+    if (widget && !isTabbar && !isTerminalWidget && !isSplitter) {
+        const auto brushColor = palette().brush(QPalette::ColorGroup::Active,QPalette::ColorRole::Light).color();
+        QPainter painter(this);
+        painter.setPen(QPen(QBrush(brushColor), 1));
+        painter.drawLine(0, 1, width(), 1);
+    }
+    QWidget::paintEvent(paintEvent);
+}
+
 void TerminalHeaderBar::terminalFocusIn()
 {
     setPalette(qApp->palette());
@@ -111,7 +136,7 @@ void TerminalHeaderBar::terminalFocusIn()
 void TerminalHeaderBar::terminalFocusOut()
 {
     auto p = palette();
-    p.setBrush(QPalette::ColorRole::Window, p.brush(QPalette::ColorRole::Window).color().dark());
+    p.setBrush(QPalette::ColorRole::Window, p.brush(QPalette::ColorGroup::Disabled,QPalette::ColorRole::Window));
     setPalette(p);
     m_terminalTitle->setEnabled(false);
 }

@@ -41,11 +41,13 @@ public:
     void terminalFocusIn();
     void terminalFocusOut();
 
+protected:
+    void paintEvent(QPaintEvent* ev) override;
+
 Q_SIGNALS:
     void requestToggleExpansion();
 
 private:
-    void addSpacer();
     QBoxLayout *m_boxLayout;
     TerminalDisplay *m_terminalDisplay;
     QLabel *m_terminalTitle;
