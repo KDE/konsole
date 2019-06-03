@@ -201,10 +201,34 @@ void ViewSplitter::handleMinimizeMaximize(bool maximize)
     auto viewSplitter = getToplevelSplitter();
     auto terminalDisplays = viewSplitter->findChildren<TerminalDisplay*>();
     auto currentActiveTerminal = viewSplitter->activeTerminalDisplay();
-    auto method = maximize ? &QWidget::hide : &QWidget::show;
-    for(auto terminal : terminalDisplays) {
-        if (Q_LIKELY(currentActiveTerminal != terminal)) {
-            (terminal->*method)();
+    auto splitters = viewSplitter->findChildren<ViewSplitter*>();
+
+    if (maximize) {
+        for(auto splitter : splitters) {
+            bool collapseSplitter = true;
+            for (auto child : splitter->findChildren<TerminalDisplay*>()) {
+                if (child == currentActiveTerminal) {
+                    collapseSplitter = false;
+                    break;
+                }
+            }
+            if (collapseSplitter) {
+                splitter->setVisible(false);
+            } else {
+                for (int i = 0, end = splitter->count(); i < end; i++) {
+                    QWidget *widgetAt = splitter->widget(i);
+                    if (splitter->widget(i) != currentActiveTerminal && widgetAt->isVisible()) {
+                        splitter->setVisible(false);
+                    }
+                }
+            }
+        }
+    } else {
+        for (auto splitter : splitters) {
+            splitter->setVisible(true);
+        }
+        for (auto terminalDisplay : terminalDisplays) {
+            terminalDisplay->setVisible(true);
         }
     }
 }
