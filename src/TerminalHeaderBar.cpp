@@ -39,6 +39,8 @@
 #include <QTabBar>
 #include <QPainter>
 #include <QSplitter>
+#include <QStyleOptionTabBarBase>
+#include <QStylePainter>
 
 namespace Konsole {
 
@@ -112,6 +114,7 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
      * If the widget is something else than a TerminalWidget, a TabBar or a QSplitter,
      * draw a 1px line to separate it from the others.
      */
+
     const auto globalPos = parentWidget()->mapToGlobal(pos());
     auto *widget = qApp->widgetAt(globalPos.x() + 10, globalPos.y() - 10);
 
@@ -119,10 +122,12 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
     const bool isTerminalWidget = qobject_cast<TerminalDisplay*>(widget);
     const bool isSplitter = qobject_cast<QSplitter*>(widget) || qobject_cast<QSplitterHandle*>(widget);
     if (widget && !isTabbar && !isTerminalWidget && !isSplitter) {
-        const auto brushColor = palette().brush(QPalette::ColorGroup::Active,QPalette::ColorRole::Light).color();
-        QPainter painter(this);
-        painter.setPen(QPen(QBrush(brushColor), 1));
-        painter.drawLine(0, 1, width(), 1);
+        QStyleOptionTabBarBase optTabBase;
+        QStylePainter p(this);
+        optTabBase.init(this);
+        optTabBase.shape = QTabBar::Shape::RoundedSouth;
+        optTabBase.documentMode = false;
+        p.drawPrimitive(QStyle::PE_FrameTabBarBase, optTabBase);
     }
     QWidget::paintEvent(paintEvent);
 }
