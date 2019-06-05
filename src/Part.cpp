@@ -24,6 +24,7 @@
 #include <QStringList>
 #include <QDir>
 #include <QKeyEvent>
+#include <QMetaEnum>
 #include <QUrl>
 
 // KDE
@@ -196,6 +197,50 @@ QString Part::currentWorkingDirectory() const
 
     return activeSession()->currentWorkingDirectory();
 }
+
+#ifdef USE_TERMINALINTERFACEV2
+QVariant Part::profileProperty(const QString &profileProperty) const
+{
+    const auto metaEnum = QMetaEnum::fromType<Profile::Property>();
+    const auto value = metaEnum.keyToValue(profileProperty.toStdString().c_str());
+
+    if (value == -1) {
+        return QString();
+    }
+
+    const Profile::Property p = static_cast<Profile::Property>(value);
+    return SessionManager::instance()->sessionProfile(activeSession())->property<QVariant>(p);
+}
+
+QStringList Part::availableProfiles() const
+{
+    return ProfileManager::instance()->availableProfileNames();
+}
+
+QString Part::currentProfileName() const
+{
+    return SessionManager::instance()->sessionProfile(activeSession())->name();
+}
+
+bool Part::setCurrentProfile(const QString &profileName)
+{
+
+    Profile::Ptr profile;
+    for(auto p : ProfileManager::instance()->allProfiles()) {
+        if (p->name() == profileName) {
+            profile = p;
+            break;
+        }
+    }
+
+    if (!profile) {
+        profile = ProfileManager::instance()->loadProfile(profileName);
+    }
+
+    SessionManager::instance()->setSessionProfile(activeSession(), profile);
+    return currentProfileName() == profileName;
+}
+#endif
 
 void Part::createSession(const QString &profileName, const QString &directory)
 {

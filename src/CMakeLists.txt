@@ -9,6 +9,10 @@ else()
   set(HAVE_OS_DRAGONFLYBSD 0)
 endif()
 
+IF(NOT (${KF5_VERSION} VERSION_LESS "5.60.0"))
+    set(USE_TERMINALINTERFACEV2 1)
+endif()
+
 include(CheckIncludeFiles)
 include(ECMAddAppIcon)
 
@@ -73,17 +77,17 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         Pty.cpp
                         RenameTabDialog.cpp
                         RenameTabWidget.cpp
-			SaveHistoryTask.cpp
-			SearchHistoryTask.cpp
-			Screen.cpp
+                        SaveHistoryTask.cpp
+                        SearchHistoryTask.cpp
+                        Screen.cpp
                         ScreenWindow.cpp
                         ScrollState.cpp
                         Session.cpp
                         SessionController.cpp
                         SessionManager.cpp
                         SessionListModel.cpp
-			SessionTask.cpp
-			ShellCommand.cpp
+                        SessionTask.cpp
+                        ShellCommand.cpp
                         TabTitleFormatButton.cpp
                         TerminalCharacterDecoder.cpp
                         ExtendedCharTable.cpp

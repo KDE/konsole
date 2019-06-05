@@ -35,6 +35,7 @@ public:
 private Q_SLOTS:
     void testTerminalInterfaceNoShell();
     void testTerminalInterface();
+    void testTerminalInterfaceV2();
 
 private:
     KParts::Part* createPart();

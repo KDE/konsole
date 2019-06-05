@@ -55,6 +55,8 @@ class ProfileGroup;
  */
 class KONSOLEPRIVATE_EXPORT Profile : public QSharedData
 {
+    Q_GADGET
+
     friend class ProfileReader;
     friend class ProfileWriter;
     friend class ProfileGroup;
@@ -295,6 +297,8 @@ public:
         /** (bool) Reverse the order of URL hints */
         ReverseUrlHints
     };
+
+    Q_ENUM(Property)
 
     /**
      * Constructs a new profile

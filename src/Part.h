@@ -29,6 +29,7 @@
 #include <QVariantList>
 
 // Konsole
+#include "config-konsole.h"
 #include "Profile.h"
 
 class QAction;
@@ -45,33 +46,55 @@ class ViewProperties;
  * A re-usable terminal emulator component using the KParts framework which can
  * be used to embed terminal emulators into other applications.
  */
+#ifdef USE_TERMINALINTERFACEV2
+class Part : public KParts::ReadOnlyPart, public TerminalInterfaceV2
+{
+    Q_OBJECT
+    Q_INTERFACES(TerminalInterface TerminalInterfaceV2)
+#else
+class TerminalInterfaceV2;
 class Part : public KParts::ReadOnlyPart, public TerminalInterface
 {
     Q_OBJECT
     Q_INTERFACES(TerminalInterface)
+#endif
 public:
     /** Constructs a new Konsole part with the specified parent. */
     explicit Part(QWidget *parentWidget, QObject *parent, const QVariantList &);
     ~Part() Q_DECL_OVERRIDE;
 
     /** Reimplemented from TerminalInterface. */
-    void startProgram(const QString &program, const QStringList &arguments) Q_DECL_OVERRIDE;
+    void startProgram(const QString &program, const QStringList &arguments) override;
     /** Reimplemented from TerminalInterface. */
-    void showShellInDir(const QString &dir) Q_DECL_OVERRIDE;
+    void showShellInDir(const QString &dir) override;
     /** Reimplemented from TerminalInterface. */
-    void sendInput(const QString &text) Q_DECL_OVERRIDE;
+    void sendInput(const QString &text) override;
 
     /** Reimplemented from TerminalInterface. */
-    int terminalProcessId() Q_DECL_OVERRIDE;
+    int terminalProcessId() override;
 
     /** Reimplemented from TerminalInterface. */
-    int foregroundProcessId() Q_DECL_OVERRIDE;
+    int foregroundProcessId() override;
 
     /** Reimplemented from TerminalInterface. */
-    QString foregroundProcessName() Q_DECL_OVERRIDE;
+    QString foregroundProcessName() override;
 
     /** Reimplemented from TerminalInterface. */
-    QString currentWorkingDirectory() const Q_DECL_OVERRIDE;
+    QString currentWorkingDirectory() const override;
+
+#ifdef USE_TERMINALINTERFACEV2
+    /** Reimplemented from TerminalInterfaceV2 */
+    QStringList availableProfiles() const override;
+
+    /** Reimplemented from TerminalInterfaceV2 */
+    QString currentProfileName() const override;
+
+    /** Reimplemented from TerminalInterfaceV2 */
+    bool setCurrentProfile(const QString &profileName) override;
+
+    /** Reimplemented from TerminalInterfaceV2 */
+    QVariant profileProperty(const QString &profileProperty) const override;
+#endif
 
 public Q_SLOTS:
     /**

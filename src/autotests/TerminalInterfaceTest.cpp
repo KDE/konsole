@@ -19,6 +19,9 @@
 
 // Own
 #include "TerminalInterfaceTest.h"
+#include "../Profile.h"
+#include "../ProfileManager.h"
+#include "config-konsole.h"
 
 // Qt
 #include <QDir>
@@ -166,6 +169,35 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     delete _terminalPart;
     QCOMPARE(destroyedSpy.count(), 1);
+}
+
+void TerminalInterfaceTest::testTerminalInterfaceV2()
+{
+#ifdef USE_TERMINALINTERFACEV2
+    Profile::Ptr testProfile(new Profile);
+    testProfile->useFallback();
+    ProfileManager::instance()->addProfile(testProfile);
+
+    _terminalPart = createPart();
+    if (_terminalPart == nullptr) {
+        QSKIP("konsolepart not found.", SkipSingle);
+    }
+
+    TerminalInterfaceV2 *terminal = qobject_cast<TerminalInterfaceV2*>(_terminalPart);
+
+    QVERIFY(terminal);
+    QVERIFY(terminal->setCurrentProfile(testProfile->name()));
+    QCOMPARE(terminal->currentProfileName(), testProfile->name());
+
+    QCOMPARE(terminal->profileProperty(QStringLiteral("Path")), testProfile->path());
+    QCOMPARE(terminal->profileProperty(QStringLiteral("SilenceSeconds")), testProfile->silenceSeconds());
+    QCOMPARE(terminal->profileProperty(QStringLiteral("Icon")), testProfile->icon());
+    QCOMPARE(terminal->profileProperty(QStringLiteral("ShowTerminalSizeHint")), testProfile->showTerminalSizeHint());
+    QCOMPARE(terminal->profileProperty(QStringLiteral("Environment")), testProfile->environment());
+    QCOMPARE(terminal->profileProperty(QStringLiteral("BellMode")), testProfile->property<QVariant>(Profile::Property::BellMode));
+#else
+    QSKIP("TerminalInterfaceV2 not enabled", SkipSingle);
+#endif
 }
 
 KParts::Part *TerminalInterfaceTest::createPart()
