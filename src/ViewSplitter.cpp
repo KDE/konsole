@@ -205,40 +205,59 @@ void ViewSplitter::toggleMaximizeCurrentTerminal()
     handleMinimizeMaximize(m_terminalMaximized);
 }
 
-void ViewSplitter::handleMinimizeMaximize(bool maximize)
-{
-    auto viewSplitter = getToplevelSplitter();
-    auto terminalDisplays = viewSplitter->findChildren<TerminalDisplay*>();
-    auto currentActiveTerminal = viewSplitter->activeTerminalDisplay();
-    auto splitters = viewSplitter->findChildren<ViewSplitter*>();
-
-    if (maximize) {
-        for(auto splitter : splitters) {
-            bool collapseSplitter = true;
-            for (auto child : splitter->findChildren<TerminalDisplay*>()) {
-                if (child == currentActiveTerminal) {
-                    collapseSplitter = false;
-                    break;
-                }
-            }
-            if (collapseSplitter) {
-                splitter->setVisible(false);
-            } else {
-                for (int i = 0, end = splitter->count(); i < end; i++) {
-                    QWidget *widgetAt = splitter->widget(i);
-                    if (splitter->widget(i) != currentActiveTerminal && widgetAt->isVisible()) {
-                        splitter->setVisible(false);
-                    }
-                }
-            }
-        }
-    } else {
+namespace {
+    void restoreAll(QList<TerminalDisplay*>&& terminalDisplays, QList<ViewSplitter*>&& splitters) {
         for (auto splitter : splitters) {
             splitter->setVisible(true);
         }
         for (auto terminalDisplay : terminalDisplays) {
             terminalDisplay->setVisible(true);
         }
+    }
+}
+
+bool ViewSplitter::hideRecurse(TerminalDisplay *currentTerminalDisplay) {
+    bool allHidden = true;
+
+    for(int i = 0, end = count(); i < end; i++) {
+        if (auto *maybeSplitter = qobject_cast<ViewSplitter*>(widget(i))) {
+            allHidden = maybeSplitter->hideRecurse(currentTerminalDisplay) && allHidden;
+            continue;
+        }
+        if (auto maybeTerminalDisplay = qobject_cast<TerminalDisplay*>(widget(i))) {
+            if (maybeTerminalDisplay == currentTerminalDisplay) {
+                allHidden = false;
+            } else {
+                maybeTerminalDisplay->setVisible(false);
+            }
+        }
+    }
+
+    if (allHidden) {
+        setVisible(false);
+    }
+    return allHidden;
+}
+
+void ViewSplitter::handleMinimizeMaximize(bool maximize)
+{
+    auto topLevelSplitter = getToplevelSplitter();
+    auto currentTerminalDisplay = topLevelSplitter->activeTerminalDisplay();
+    if (maximize) {
+        for (int i = 0, end = topLevelSplitter->count(); i < end; i++) {
+            auto widgetAt = topLevelSplitter->widget(i);
+            if (auto *maybeSplitter = qobject_cast<ViewSplitter*>(widgetAt)) {
+                maybeSplitter->hideRecurse(currentTerminalDisplay);
+            }
+            if (auto maybeTerminalDisplay = qobject_cast<TerminalDisplay*>(widgetAt)) {
+                if (maybeTerminalDisplay != currentTerminalDisplay) {
+                    maybeTerminalDisplay->setVisible(false);
+                }
+            }
+        }
+    } else {
+        restoreAll(topLevelSplitter->findChildren<TerminalDisplay*>(),
+                   topLevelSplitter->findChildren<ViewSplitter*>());
     }
 }
 

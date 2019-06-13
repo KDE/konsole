@@ -499,6 +499,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     setScroll(0, 0);
     _scrollBar->setCursor(Qt::ArrowCursor);
     _headerBar->setCursor(Qt::ArrowCursor);
+    connect(_headerBar, &TerminalHeaderBar::requestToggleExpansion, this, &Konsole::TerminalDisplay::requestToggleExpansion);
     connect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
     connect(_scrollBar, &QScrollBar::sliderMoved, this, &Konsole::TerminalDisplay::viewScrolledByUser);
 

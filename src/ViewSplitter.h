@@ -122,7 +122,17 @@ public:
     void handleFocusDirection(Qt::Orientation orientation, int direction);
 
     void childEvent(QChildEvent* event) override;
+
 private:
+    /** recursively walks the object tree looking for Splitters and
+     * TerminalDisplays, hidding the ones that should be hidden.
+     * If a terminal display is not hidden in a subtree, we cannot
+     * hide the whole tree.
+     * 
+     * @p currentTerminalDisplay the only terminal display that will still be visible.
+     */
+    bool hideRecurse(TerminalDisplay *currentTerminalDisplay);
+
     void updateSizes();
     bool m_terminalMaximized = false;
 };

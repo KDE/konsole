@@ -558,6 +558,10 @@ void TabbedViewContainer::setNavigationVisibility(ViewManager::NavigationVisibil
 
 void TabbedViewContainer::toggleMaximizeCurrentTerminal()
 {
+    if (auto *terminal = qobject_cast<TerminalDisplay*>(sender())) {
+        terminal->setFocus(Qt::FocusReason::OtherFocusReason);
+    }
+
     activeViewSplitter()->toggleMaximizeCurrentTerminal();
 }
 

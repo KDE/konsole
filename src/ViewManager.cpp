@@ -769,7 +769,7 @@ TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
 {
     auto display = new TerminalDisplay(nullptr);
     display->setRandomSeed(session->sessionId() * 31);
-    connect(display->headerBar(), &TerminalHeaderBar::requestToggleExpansion,
+    connect(display, &TerminalDisplay::requestToggleExpansion,
             _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal);
     return display;
 }

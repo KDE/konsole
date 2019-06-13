@@ -113,7 +113,6 @@ public:
 
     void setScrollFullPage(bool fullPage);
     bool scrollFullPage() const;
-
     /**
      * Returns the display's filter chain.  When the image for the display is updated,
      * the text is passed through each filter in the chain.  Each filter can define
@@ -488,7 +487,7 @@ public Q_SLOTS:
     void updateReadOnlyState(bool readonly);
     IncrementalSearchBar *searchBar() const;
 Q_SIGNALS:
-
+    void requestToggleExpansion();
     /**
      * Emitted when the user presses a key whilst the terminal widget has focus.
      */
