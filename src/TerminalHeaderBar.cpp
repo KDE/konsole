@@ -143,6 +143,21 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
     }
 }
 
+void TerminalHeaderBar::mouseMoveEvent(QMouseEvent* ev)
+{
+    Q_UNUSED(ev);
+}
+
+void TerminalHeaderBar::mousePressEvent(QMouseEvent* ev)
+{
+    Q_UNUSED(ev);
+}
+
+void TerminalHeaderBar::mouseReleaseEvent(QMouseEvent* ev)
+{
+    Q_UNUSED(ev);
+}
+
 void TerminalHeaderBar::terminalFocusIn()
 {
     m_terminalIsFocused = true;

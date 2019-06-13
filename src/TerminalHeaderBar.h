@@ -43,6 +43,9 @@ public:
 
 protected:
     void paintEvent(QPaintEvent* ev) override;
+    void mousePressEvent(QMouseEvent *ev) override;
+    void mouseReleaseEvent(QMouseEvent *ev) override;
+    void mouseMoveEvent(QMouseEvent *ev) override;
 
 Q_SIGNALS:
     void requestToggleExpansion();
