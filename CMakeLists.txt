@@ -51,7 +51,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED
 )
 
 find_package(KF5DocTools ${KF5_MIN_VERSION})
-set_package_properties(KF5DocTools PROPERTIES DESCRIPTION 
+set_package_properties(KF5DocTools PROPERTIES DESCRIPTION
     "Tools to generate documentation"
     TYPE OPTIONAL
 )
@@ -86,6 +86,11 @@ endif()
 
 add_subdirectory( tools )
 
-install( FILES konsole.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
+
+if (${ECM_VERSION} STRGREATER "5.58.0")
+    install( FILES konsole.categories DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR} )
+else()
+    install( FILES konsole.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
+endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
