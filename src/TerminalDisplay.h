@@ -34,6 +34,7 @@
 #include "Enumeration.h"
 #include "ScrollState.h"
 #include "Profile.h"
+#include "TerminalHeaderBar.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -112,7 +113,6 @@ public:
 
     void setScrollFullPage(bool fullPage);
     bool scrollFullPage() const;
-
     /**
      * Returns the display's filter chain.  When the image for the display is updated,
      * the text is passed through each filter in the chain.  Each filter can define
@@ -293,6 +293,10 @@ public:
         return font();
     }
 
+    TerminalHeaderBar *headerBar() const
+    {
+        return _headerBar;
+    }
     /**
      * Sets the font used to draw the display.  Has no effect if @p font
      * is larger than the size of the display itself.
@@ -483,7 +487,7 @@ public Q_SLOTS:
     void updateReadOnlyState(bool readonly);
     IncrementalSearchBar *searchBar() const;
 Q_SIGNALS:
-
+    void requestToggleExpansion();
     /**
      * Emitted when the user presses a key whilst the terminal widget has focus.
      */
@@ -845,7 +849,7 @@ private:
 
     ScrollState _scrollWheelState;
     IncrementalSearchBar *_searchBar;
-
+    TerminalHeaderBar *_headerBar;
     QRect _searchResultRect;
     friend class TerminalDisplayAccessible;
 };

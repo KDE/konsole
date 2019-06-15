@@ -124,6 +124,15 @@ void ViewSplitter::childEvent(QChildEvent *event)
             deleteLater();
         }
     }
+
+    auto terminals = getToplevelSplitter()->findChildren<TerminalDisplay*>();
+    if (terminals.size() == 1) {
+        terminals.at(0)->headerBar()->setVisible(false);
+    } else {
+        for(auto terminal : terminals) {
+            terminal->headerBar()->setVisible(true);
+        }
+    }
 }
 
 void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int direction)
@@ -150,13 +159,17 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
 
     if (TerminalDisplay* terminal = qobject_cast<TerminalDisplay*>(child)) {
         terminal->setFocus(Qt::OtherFocusReason);
-    } else if (qobject_cast<QScrollBar*>(child)) {
-        auto scrollbarTerminal = qobject_cast<TerminalDisplay*>(child->parent());
-        scrollbarTerminal->setFocus(Qt::OtherFocusReason);
     } else if (qobject_cast<QSplitterHandle*>(child)) {
         auto targetSplitter = qobject_cast<QSplitter*>(child->parent());
         auto splitterTerminal = qobject_cast<TerminalDisplay*>(targetSplitter->widget(0));
         splitterTerminal->setFocus(Qt::OtherFocusReason);
+    } else if (qobject_cast<QWidget*>(child)) {
+        TerminalDisplay *terminalParent = nullptr;
+        while(!terminalParent) {
+            terminalParent = qobject_cast<TerminalDisplay*>(child->parentWidget());
+            child = child->parentWidget();
+        }
+        terminalParent->setFocus(Qt::OtherFocusReason);
     }
 }
 
@@ -186,26 +199,65 @@ TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
     return focusedWidget ? focusedWidget : findChild<TerminalDisplay*>();
 }
 
-void ViewSplitter::maximizeCurrentTerminal()
+void ViewSplitter::toggleMaximizeCurrentTerminal()
 {
-    handleMinimizeMaximize(true);
+    m_terminalMaximized = !m_terminalMaximized;
+    handleMinimizeMaximize(m_terminalMaximized);
 }
 
-void ViewSplitter::restoreOtherTerminals()
-{
-    handleMinimizeMaximize(false);
+namespace {
+    void restoreAll(QList<TerminalDisplay*>&& terminalDisplays, QList<ViewSplitter*>&& splitters) {
+        for (auto splitter : splitters) {
+            splitter->setVisible(true);
+        }
+        for (auto terminalDisplay : terminalDisplays) {
+            terminalDisplay->setVisible(true);
+        }
+    }
+}
+
+bool ViewSplitter::hideRecurse(TerminalDisplay *currentTerminalDisplay) {
+    bool allHidden = true;
+
+    for(int i = 0, end = count(); i < end; i++) {
+        if (auto *maybeSplitter = qobject_cast<ViewSplitter*>(widget(i))) {
+            allHidden = maybeSplitter->hideRecurse(currentTerminalDisplay) && allHidden;
+            continue;
+        }
+        if (auto maybeTerminalDisplay = qobject_cast<TerminalDisplay*>(widget(i))) {
+            if (maybeTerminalDisplay == currentTerminalDisplay) {
+                allHidden = false;
+            } else {
+                maybeTerminalDisplay->setVisible(false);
+            }
+        }
+    }
+
+    if (allHidden) {
+        setVisible(false);
+    }
+    return allHidden;
 }
 
 void ViewSplitter::handleMinimizeMaximize(bool maximize)
 {
-    auto viewSplitter = getToplevelSplitter();
-    auto terminalDisplays = viewSplitter->findChildren<TerminalDisplay*>();
-    auto currentActiveTerminal = viewSplitter->activeTerminalDisplay();
-    auto method = maximize ? &QWidget::hide : &QWidget::show;
-    for(auto terminal : terminalDisplays) {
-        if (Q_LIKELY(currentActiveTerminal != terminal)) {
-            (terminal->*method)();
+    auto topLevelSplitter = getToplevelSplitter();
+    auto currentTerminalDisplay = topLevelSplitter->activeTerminalDisplay();
+    if (maximize) {
+        for (int i = 0, end = topLevelSplitter->count(); i < end; i++) {
+            auto widgetAt = topLevelSplitter->widget(i);
+            if (auto *maybeSplitter = qobject_cast<ViewSplitter*>(widgetAt)) {
+                maybeSplitter->hideRecurse(currentTerminalDisplay);
+            }
+            if (auto maybeTerminalDisplay = qobject_cast<TerminalDisplay*>(widgetAt)) {
+                if (maybeTerminalDisplay != currentTerminalDisplay) {
+                    maybeTerminalDisplay->setVisible(false);
+                }
+            }
         }
+    } else {
+        restoreAll(topLevelSplitter->findChildren<TerminalDisplay*>(),
+                   topLevelSplitter->findChildren<ViewSplitter*>());
     }
 }
 

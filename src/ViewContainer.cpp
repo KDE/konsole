@@ -556,14 +556,13 @@ void TabbedViewContainer::setNavigationVisibility(ViewManager::NavigationVisibil
     }
 }
 
-void TabbedViewContainer::maximizeCurrentTerminal()
+void TabbedViewContainer::toggleMaximizeCurrentTerminal()
 {
-    activeViewSplitter()->maximizeCurrentTerminal();
-}
+    if (auto *terminal = qobject_cast<TerminalDisplay*>(sender())) {
+        terminal->setFocus(Qt::FocusReason::OtherFocusReason);
+    }
 
-void TabbedViewContainer::restoreOtherTerminals()
-{
-    activeViewSplitter()->restoreOtherTerminals();
+    activeViewSplitter()->toggleMaximizeCurrentTerminal();
 }
 
 void TabbedViewContainer::moveTabLeft()

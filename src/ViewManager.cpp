@@ -229,14 +229,7 @@ void ViewManager::setupActions()
     action = new QAction(i18nc("@action Shortcut entry", "Maximize current Terminal"), this);
     collection->addAction(QStringLiteral("maximize-current-terminal"), action);
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_E);
-    connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::maximizeCurrentTerminal);
-    _multiSplitterOnlyActions << action;
-    _viewContainer->addAction(action);
-
-    action = new QAction(i18nc("@action Shortcut entry", "Restore other terminals"), this);
-    collection->addAction(QStringLiteral("restore-other-terminals"), action);
-    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Minus);
-    connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::restoreOtherTerminals);
+    connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal);
     _multiSplitterOnlyActions << action;
     _viewContainer->addAction(action);
 
@@ -478,7 +471,7 @@ void ViewManager::sessionFinished()
 
     auto *toplevelSplitter = splitter->getToplevelSplitter();
 
-    toplevelSplitter->restoreOtherTerminals();
+    toplevelSplitter->handleMinimizeMaximize(false);
     view->deleteLater();
 
 
@@ -776,7 +769,8 @@ TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
 {
     auto display = new TerminalDisplay(nullptr);
     display->setRandomSeed(session->sessionId() * 31);
-
+    connect(display, &TerminalDisplay::requestToggleExpansion,
+            _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal);
     return display;
 }
 
