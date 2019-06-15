@@ -151,7 +151,7 @@ ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 HistorySizeDialog.ui
                                 HistorySizeWidget.ui
                                 PrintOptions.ui
-                                settings/FileLocationSettings.ui
+                                settings/TemporaryFilesSettings.ui
                                 settings/GeneralSettings.ui
                                 settings/PartInfo.ui
                                 settings/ProfileSettings.ui
@@ -175,7 +175,8 @@ set(konsole_KDEINIT_SRCS
    Application.cpp
    MainWindow.cpp
    main.cpp
-   settings/FileLocationSettings.cpp
+   settings/ConfigurationDialog.cpp
+   settings/TemporaryFilesSettings.cpp
    settings/GeneralSettings.cpp
    settings/ProfileSettings.cpp
    settings/TabBarSettings.cpp)

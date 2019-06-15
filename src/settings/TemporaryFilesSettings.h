@@ -18,24 +18,20 @@
   along with this program. If not, see http://www.gnu.org/licenses/.
 */
 
-// Own
-#include "FileLocationSettings.h"
+#ifndef FILELOCATIONSETTINGS_H
+#define FILELOCATIONSETTINGS_H
 
-#include <QDir>
-#include <QStandardPaths>
+#include "ui_TemporaryFilesSettings.h"
 
-using namespace Konsole;
-
-FileLocationSettings::FileLocationSettings(QWidget* aParent) : QWidget(aParent)
+namespace Konsole {
+class TemporaryFilesSettings : public QWidget, private Ui::TemporaryFilesSettings
 {
-    setupUi(this);
+    Q_OBJECT
 
-    // TODO: worth adding gauge on free disk space?
-    useSystemLocationText->setText(QDir::tempPath());
-    useUsersHomeLocationText->setText(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
-    kcfg_scrollbackUseSpecifiedLocationDirectory->setMode(KFile::Directory);
-
+public:
+    explicit TemporaryFilesSettings(QWidget *aParent = nullptr);
+    ~TemporaryFilesSettings() override = default;
+};
 }
 
-FileLocationSettings::~FileLocationSettings() = default;
-
+#endif

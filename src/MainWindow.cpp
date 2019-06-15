@@ -57,7 +57,8 @@
 #include "KonsoleSettings.h"
 #include "WindowSystemInfo.h"
 #include "TerminalDisplay.h"
-#include "settings/FileLocationSettings.h"
+#include "settings/ConfigurationDialog.h"
+#include "settings/TemporaryFilesSettings.h"
 #include "settings/GeneralSettings.h"
 #include "settings/ProfileSettings.h"
 #include "settings/TabBarSettings.h"
@@ -723,39 +724,39 @@ void MainWindow::showManageProfilesDialog()
 
 void MainWindow::showSettingsDialog(const bool showProfilePage)
 {
-    if (KConfigDialog::showDialog(QStringLiteral("settings"))) {
+    static ConfigurationDialog *confDialog = nullptr;
+    if (confDialog) {
+        confDialog->show();
         return;
     }
 
-    KConfigDialog *settingsDialog = new KConfigDialog(this, QStringLiteral("settings"), KonsoleSettings::self());
-    settingsDialog->setFaceType(KPageDialog::List);
+    confDialog = new ConfigurationDialog(this, KonsoleSettings::self());
 
-    auto generalSettings = new GeneralSettings(settingsDialog);
-    settingsDialog->addPage(generalSettings,
-                            i18nc("@title Preferences page name", "General"),
-                            QStringLiteral("utilities-terminal"));
+    const QString generalPageName = i18nc("@title Preferences page name", "General");
+    auto *generalPage = new KPageWidgetItem(new GeneralSettings(confDialog), generalPageName);
+    generalPage->setIcon(QIcon::fromTheme(QStringLiteral("utilities-terminal")));
+    confDialog->addPage(generalPage, true);
 
-    auto profileSettings = new ProfileSettings(settingsDialog);
-    KPageWidgetItem *profilePage = settingsDialog->addPage(profileSettings,
-                                                           i18nc("@title Preferences page name",
-                                                                 "Profiles"),
-                                                           QStringLiteral("configure"));
+    const QString profilePageName = i18nc("@title Preferences page name", "Profiles");
+    auto profilePage = new KPageWidgetItem(new ProfileSettings(confDialog), profilePageName);
+    profilePage->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
+    confDialog->addPage(profilePage, true);
 
-    auto tabBarSettings = new TabBarSettings(settingsDialog);
-    settingsDialog->addPage(tabBarSettings,
-                            i18nc("@title Preferences page name", "TabBar"),
-                            QStringLiteral("system-run"));
+    const QString tabBarPageName = i18nc("@title Preferences page name", "Tab Bar");
+    auto tabBarPage = new KPageWidgetItem(new TabBarSettings(confDialog), tabBarPageName);
+    tabBarPage->setIcon(QIcon::fromTheme(QStringLiteral("system-run")));
+    confDialog->addPage(tabBarPage, true);
 
-    auto fileLocationSettings = new FileLocationSettings(settingsDialog);
-    settingsDialog->addPage(fileLocationSettings,
-                            i18nc("@title Preferences page name", "File Location"),
-                            QStringLiteral("configure"));
+    const QString temporaryFilesPageName = i18nc("@title Preferences page name", "Temporary Files");
+    auto temporaryFilesPage = new KPageWidgetItem(new TemporaryFilesSettings(confDialog), temporaryFilesPageName);
+    temporaryFilesPage->setIcon(QIcon::fromTheme(QStringLiteral("inode-directory")));
+    confDialog->addPage(temporaryFilesPage, true);
 
     if (showProfilePage) {
-        settingsDialog->setCurrentPage(profilePage);
+        confDialog->setCurrentPage(profilePage);
     }
 
-    settingsDialog->show();
+    confDialog->show();
 }
 
 void MainWindow::applyKonsoleSettings()
