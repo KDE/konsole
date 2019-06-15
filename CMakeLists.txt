@@ -11,12 +11,13 @@ cmake_minimum_required (VERSION 3.0 FATAL_ERROR)
 # Qt 5.9 LTS EOL May 2020
 set (QT_MIN_VERSION "5.9.0")
 
+# The exact version required is not known ATM
 set (KF5_MIN_VERSION "5.6.0")
 
 # Release script will create bugzilla versions
 project(konsole VERSION ${KDE_APPLICATIONS_VERSION})
 
-find_package(ECM 1.6.0 REQUIRED NO_MODULE)
+find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 include(KDEInstallDirs)
