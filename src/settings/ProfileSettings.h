@@ -23,6 +23,7 @@
 // Qt
 #include <QStyledItemDelegate>
 #include <QSet>
+#include <QKeySequenceEdit>
 
 // KDE
 
@@ -45,7 +46,6 @@ class ProfileSettings : public QWidget, private Ui::ProfileSettings
 {
     Q_OBJECT
 
-    friend class FavoriteItemDelegate;
     friend class ShortcutItemDelegate;
 
 public:
@@ -72,8 +72,6 @@ private Q_SLOTS:
     void setSelectedAsDefault();
     void createProfile();
     void editSelected();
-    void moveUpSelected();
-    void moveDownSelected();
 
     void itemDataChanged(QStandardItem *item);
 
@@ -99,6 +97,7 @@ private:
     // their default / non-default profile status
     void updateDefaultItem();
     void updateItemsForProfile(const Profile::Ptr &profile,const QList<QStandardItem *> &items) const;
+    void updateShortcutField(QStandardItem *item, bool isFavorite) const;
     // updates the profile table to be in sync with the
     // session manager
     void populateTable();
@@ -106,11 +105,17 @@ private:
 
     QStandardItemModel *_sessionModel;
 
-    static const int ProfileNameColumn = 0;
-    static const int FavoriteStatusColumn = 1;
-    static const int ShortcutColumn = 2;
-    static const int ProfileKeyRole = Qt::UserRole + 1;
-    static const int ShortcutRole = Qt::UserRole + 1;
+    enum Column {
+        FavoriteStatusColumn = 0,
+        ProfileNameColumn    = 1,
+        ShortcutColumn       = 2,
+        ProfileColumn      = 3,
+    };
+
+    enum Role {
+        ProfilePtrRole = Qt::UserRole + 1,
+        ShortcutRole,
+    };
 };
 
 class StyledBackgroundPainter
@@ -120,17 +125,15 @@ public:
                                const QModelIndex &index);
 };
 
-class FavoriteItemDelegate : public QStyledItemDelegate
+class FilteredKeySequenceEdit: public QKeySequenceEdit
 {
     Q_OBJECT
 
 public:
-    explicit FavoriteItemDelegate(QObject *parent = nullptr);
+    explicit FilteredKeySequenceEdit(QWidget *parent = nullptr): QKeySequenceEdit(parent) {}
 
-    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option,
-                     const QModelIndex &index) Q_DECL_OVERRIDE;
-    void paint(QPainter *painter, const QStyleOptionViewItem &option,
-               const QModelIndex &index) const Q_DECL_OVERRIDE;
+protected:
+    void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 };
 
 class ShortcutItemDelegate : public QStyledItemDelegate
@@ -146,9 +149,12 @@ public:
                           const QModelIndex &index) const Q_DECL_OVERRIDE;
     void paint(QPainter *painter, const QStyleOptionViewItem &option,
                const QModelIndex &index) const Q_DECL_OVERRIDE;
+    QSize sizeHint(const QStyleOptionViewItem &option,
+                   const QModelIndex &index) const Q_DECL_OVERRIDE;
+    void destroyEditor(QWidget *editor, const QModelIndex &index) const Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
-    void editorModified(const QKeySequence &keys);
+    void editorModified();
 
 private:
     mutable QSet<QWidget *> _modifiedEditors;
