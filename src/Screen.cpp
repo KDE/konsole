@@ -1037,12 +1037,6 @@ void Screen::clearToBeginOfScreen()
 
 void Screen::clearEntireScreen()
 {
-    // Add entire screen to history
-    for (int i = 0; i < (_lines - 1); i++) {
-        addHistLine();
-        scrollUp(0, 1);
-    }
-
     clearImage(loc(0, 0), loc(_columns - 1, _lines - 1), ' ');
 }
 
