@@ -52,8 +52,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2018-04-03</date>
-<releaseinfo>Applications 18.08</releaseinfo>
+<date>2019-06-16</date>
+<releaseinfo>Applications 19.08</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -78,8 +78,8 @@
 emulator, often referred to as a terminal or a shell. It emulates a command line interface in a text only window.
 </para>
 
-<para>&konsole; typically runs a command shell, an application that executes commands that you type. 
-The shell the &konsole; runs depends on your account settings.  
+<para>&konsole; typically runs a command shell, an application that executes commands that you type.
+The shell the &konsole; runs depends on your account settings.
 Consult your operating system documentation to know what the shell is, how to configure it and how to use it.
 </para>
 </sect1>
@@ -130,6 +130,8 @@ Procedure to create a new profile:
 <orderedlist>
 <listitem><para>Click on the menu entry <menuchoice><guimenu>Settings</guimenu><guimenuitem>Manage Profiles...</guimenuitem>
 </menuchoice></para></listitem>
+
+<listitem><para>Switch to the <guibutton>Profiles</guibutton> page.</para></listitem>
 
 <listitem><para>Click on the button <guibutton>New Profile...</guibutton>.</para></listitem>
 
@@ -187,7 +189,7 @@ running will mark a region of the text. While dragging the mouse, the marked
 text is displayed in reversed color for visual feedback. Select <guimenuitem>Copy</guimenuitem>
 from the <guimenu>Edit</guimenu> menu to copy the marked text to the clipboard for further use
 within &konsole; or another application. The selected text can also be
-dragged and dropped into compatible applications. Hold the &Ctrl; key and 
+dragged and dropped into compatible applications. Hold the &Ctrl; key and
 drag the selected text to the desired location.</para>
 
 <para>Normally, new-line characters are inserted at the end of each
@@ -272,9 +274,9 @@ rolling it in a mouse-unaware program will move &konsole;'s scrollbar.</para>
 
 <sect1 id="drag-and-drop">
 <title>Drag and Drop</title>
-<para>If you drop a file, folder or &URL; on a &konsole; window, a context 
+<para>If you drop a file, folder or &URL; on a &konsole; window, a context
 menu appears with these actions:
-</para>  
+</para>
 <screenshot>
 <screeninfo>Drag and Drop Context Menu</screeninfo>
 <mediaobject>
@@ -292,7 +294,7 @@ menu appears with these actions:
 <term><menuchoice>
 <shortcut>&Shift;</shortcut><guimenuitem>Move Here</guimenuitem> </menuchoice>
 </term> <listitem>
-<para>Move the dropped item into the current folder. This item only appears in 
+<para>Move the dropped item into the current folder. This item only appears in
 the context menu, if you have the rights to delete the dropped file or folder.
 </para></listitem>
 </varlistentry>
@@ -322,7 +324,7 @@ the context menu, if you have the rights to delete the dropped file or folder.
 <term><menuchoice>
 <guimenuitem>Change Directory To</guimenuitem> </menuchoice>
 </term> <listitem>
-<para>If a folder is dropped, this action appears in the context menu and allows you to 
+<para>If a folder is dropped, this action appears in the context menu and allows you to
 change the working folder of the &konsole; session.</para></listitem>
 </varlistentry>
 
@@ -335,7 +337,7 @@ change the working folder of the &konsole; session.</para></listitem>
 
 </variablelist>
 
-<para>If you press the shortcuts before releasing the &LMB; during drag and drop, no context menu appears and 
+<para>If you press the shortcuts before releasing the &LMB; during drag and drop, no context menu appears and
 the actions will be executed immediately.
 </para>
 
@@ -449,7 +451,7 @@ at the current directory</action>.  By default, that is
 <note><para>&konsole; will display a confirmation dialog if there is more than one
 tab open.  This dialog can be disabled by clicking on the <guibutton>Do not ask again</guibutton> checkbox.
 </para>
-<para>If you want to get the confirmation dialog get back, delete the entry 
+<para>If you want to get the confirmation dialog get back, delete the entry
 <screen>[Notification Messages]
 CloseAllTabs=true</screen>
 in <filename>$<envar>XDG_CONFIG_HOME</envar>/konsolerc</filename>.
@@ -606,14 +608,14 @@ Various search improvements
  This was causing the annoying behavior that if you were to pause while typing
  in a search term, and it would actually find a hit, then you would be searching
  for the term a second time once you finish typing.
- 
+
  This commit introduces two new behaviors:
  1. When you show the search bar, all searching will be done from the first
  visible line in the terminal.
  2. This start position is only reset when you
  advance to the next result, by pressing "next", "previous", or the shortcuts
  RETURN or SHIFT-RETURN
- 
+
  - When the view scrolls to a result, it will appear centered.
  - When showing the search bar, do not invoke a search, only apply the highlight filters
  - Add "search from beginning/end" button
@@ -622,7 +624,7 @@ Various search improvements
  - Text highlighted by mouse will be set as the current search text when the incremental
  search bar is opened
  - Add "Search backwards" to search bar options
- Button text is swapped according to reverse search switch 
+ Button text is swapped according to reverse search switch
 -->
 <varlistentry>
 <term><menuchoice>
@@ -713,14 +715,24 @@ Any output on one view is duplicated in the other view.
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>H</keycap></keycombo></shortcut>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>L</keycap></keycombo></shortcut>
 <guimenu>View</guimenu><guimenuitem>Detach Current Tab</guimenuitem></menuchoice>
 </term>
 <listitem><para><action>Opens the current tab in a
 separate window</action>
 </para><para>
-Quiting the previous &konsole; window will not
+Quitting the previous &konsole; window will not
 affect the newly created window.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;&Shift;<keycap>H</keycap></keycombo></shortcut>
+<guimenu>View</guimenu><guimenuitem>Detach Current View</guimenuitem></menuchoice>
+</term>
+<listitem><para><action>Opens the current split view in a
+separate window</action>
 </para></listitem>
 </varlistentry>
 
@@ -858,7 +870,7 @@ Currently, &konsole; accepts the following:
 <variablelist>
 
 <varlistentry>
-<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit 
+<term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit
 Current Profile...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens a dialog to configure current profile</action>
 </para>
@@ -956,8 +968,8 @@ Notifications...</guimenuitem></menuchoice></term>
 <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
 &konsole;...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens the &konsole; settings editor</action></para>
-<para>This dialog has options influencing the appearance and behaviour of the 
-<guilabel>TabBar</guilabel> and general options for the &konsole; window.
+<para>This dialog has options influencing the appearance and behaviour of the
+<guilabel>Tab Bar</guilabel> and general options for the &konsole; window.
 </para></listitem>
 <!-- FIXME
 since 4.9 Move options influencing tabbar from profiles into global setting
@@ -1134,9 +1146,9 @@ instead of the default profile.</para></listitem>
 <listitem><para><action>Create tabs</action> as specified in the given tabs configuration file.
 </para>
 <note><para>The file has one tab per line in the following format:</para>
-<para>Each line specifies a tab to open using up to 4 fields specifying how it is to open. 
+<para>Each line specifies a tab to open using up to 4 fields specifying how it is to open.
 Fields are delimited with <userinput>;;</userinput> and a field name must have a <userinput>:</userinput> appended.
-Empty lines or lines with <userinput>#</userinput> at the beginning are ignored, so you can use line beginning with 
+Empty lines or lines with <userinput>#</userinput> at the beginning are ignored, so you can use line beginning with
 <userinput>#</userinput> to add comments.
 </para>
 
@@ -1214,8 +1226,8 @@ Empty lines or lines with <userinput>#</userinput> at the beginning are ignored,
 </para>
 <para>
 For more information, please visit
-<ulink url="http://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html#a57848e15fe69d3f27565851fe7cda429">&konsole; API Reference</ulink>.
-<!--FIXME update url to kf5 if available on api.kde.org-->
+<ulink url="https://api.kde.org/4.14-api/applications-apidocs/konsole/html/classKonsole_1_1Profile.html">&konsole; API Reference</ulink>.
+<!--FIXME update url to kf5 when available on api.kde.org-->
 </para>
 </listitem>
 </varlistentry>
@@ -1630,7 +1642,7 @@ Pressing the <keycombo action="simul">&Ctrl;&Alt;</keycombo> keys while selectin
 </para></listitem>
 
 <listitem><para>
-The <keycombo action="simul">&Ctrl;<mousebutton>Wheel</mousebutton></keycombo> combination will zoom text size, like in konqueror and firefox. 
+The <keycombo action="simul">&Ctrl;<mousebutton>Wheel</mousebutton></keycombo> combination will zoom text size, like in konqueror and firefox.
 </para></listitem>
 
 <listitem><para>
@@ -1717,7 +1729,7 @@ Of course, users still can run login shell in &konsole; if they really need to. 
 </listitem>
 
 <listitem><para>
-The <option>--new-tab</option> option sometimes behaves strangely. It may create new window, or it may create new tab in another existing &konsole; window instead of the current &konsole; window. 
+The <option>--new-tab</option> option sometimes behaves strangely. It may create new window, or it may create new tab in another existing &konsole; window instead of the current &konsole; window.
 </para>
 <para>
 Those behaviors feel strange, but they are not necessarily bugs. The <option>--new-tab</option> option tries to reuse existing &konsole; windows, but not all &konsole; windows are reusable. All &konsole; windows opened through &krunner; are reusable, while most &konsole; windows opened from command line are not.
