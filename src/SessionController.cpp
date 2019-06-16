@@ -1674,15 +1674,6 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 
         // check for validity of the pointer to the popup menu
         if (!popup.isNull()) {
-            // Remove content-specific actions
-            //
-            // If the close action was chosen, the popup menu will be partially
-            // destroyed at this point, and the rest will be destroyed later by
-            // 'chosen->trigger()'
-            foreach(QAction * action, contentActions) {
-                popup->removeAction(action);
-            }
-
             delete contentSeparator;
         }
 
