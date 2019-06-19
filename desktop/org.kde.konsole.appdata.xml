@@ -91,6 +91,7 @@
   <summary xml:lang="zh-TW">終端機</summary>
   <description>
     <p>Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
+    <p xml:lang="ast">Konsole ye una terminal pa executar comandos de la shell. Apurre una llinia de comandos pa controlar direutamente l'ordenador.</p>
     <p xml:lang="ca">El Konsole és un terminal per executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per controlar directament l'ordinador.</p>
     <p xml:lang="ca-valencia">El Konsole és un terminal per executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per controlar directament l'ordinador.</p>
     <p xml:lang="en-GB">Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
