@@ -73,6 +73,7 @@ public:
     bool supportsTabs() const Q_DECL_OVERRIDE;
     QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const Q_DECL_OVERRIDE;
     void openFolderinTabs(const KBookmarkGroup &group) Q_DECL_OVERRIDE;
+    void maybeAddBookmark();
 
     /**
      * Returns the menu which this bookmark handler inserts its actions into.
@@ -122,6 +123,7 @@ private:
 
     QMenu *_menu;
     KBookmarkMenu *_bookmarkMenu;
+    KBookmarkManager *_bookmarkManager;
     QString _file;
     bool _toplevel;
     ViewProperties *_activeView;
