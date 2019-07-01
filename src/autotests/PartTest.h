@@ -33,6 +33,7 @@ class PartTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
+    void initTestCase();
     void testFd();
 
 private:

@@ -40,6 +40,24 @@
 
 using namespace Konsole;
 
+void PartTest::initTestCase()
+{
+    /* Try to test against build konsolepart, so move directory containing
+      executable to front of libraryPaths.  KPluginLoader should find the
+      part first in the build dir over the system installed ones.
+      I believe the CI installs first and then runs the test so the other
+      paths can not be removed.
+    */
+    const auto libraryPaths = QCoreApplication::libraryPaths();
+    auto buildPath = libraryPaths.last();
+    QCoreApplication::removeLibraryPath(buildPath);
+    // konsolepart.so is in ../autotests/
+    if (buildPath.endsWith(QStringLiteral("/autotests"))) {
+        buildPath.chop(10);
+    }
+    QCoreApplication::addLibraryPath(buildPath);
+}
+
 void PartTest::testFd()
 {
     // find ping
@@ -62,7 +80,7 @@ void PartTest::testFd()
     // create a Konsole part and attempt to connect to it
     KParts::Part *terminalPart = createPart();
     if (terminalPart == nullptr) { // not found
-        QSKIP("konsolepart not found.");
+        QFAIL("konsolepart not found.");
         return;
     }
 
@@ -97,13 +115,15 @@ void PartTest::testFd()
     ptyProcess.waitForFinished(1000);
 }
 
+
 KParts::Part *PartTest::createPart()
 {
-    KService::Ptr service = KService::serviceByDesktopName(QStringLiteral("konsolepart"));
-    if (!service) {       // not found
+    auto konsolePartPlugin = KPluginLoader::findPlugin(QStringLiteral("konsolepart"));
+    if (konsolePartPlugin.isNull()) {
         return nullptr;
     }
-    KPluginFactory *factory = KPluginLoader(service->library()).factory();
+
+    KPluginFactory *factory = KPluginLoader(konsolePartPlugin).factory();
     if (factory == nullptr) {       // not found
         return nullptr;
     }
