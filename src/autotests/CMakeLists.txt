@@ -32,6 +32,7 @@ if (0)
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_executable(DBusTest DBusTest.cpp)
     ecm_mark_as_test(DBusTest)
+    ecm_mark_nongui_executable(DBusTest)
     add_test(DBusTest DBusTest)
     target_link_libraries(DBusTest ${KONSOLE_TEST_LIBS} Qt5::DBus)
 endif()
@@ -52,6 +53,7 @@ target_link_libraries(KeyboardTranslatorTest ${KONSOLE_TEST_LIBS})
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_executable(PartTest PartTest.cpp)
     ecm_mark_as_test(PartTest)
+    ecm_mark_nongui_executable(PartTest)
     add_test(PartTest PartTest)
     target_link_libraries(PartTest KF5::XmlGui KF5::Parts KF5::Pty
                                ${KONSOLE_TEST_LIBS})
@@ -96,6 +98,7 @@ target_link_libraries(TerminalTest ${KONSOLE_TEST_LIBS} KF5::Parts)
 
 add_executable(TerminalInterfaceTest TerminalInterfaceTest.cpp)
 ecm_mark_as_test(TerminalInterface)
+ecm_mark_nongui_executable(TerminalInterfaceTest)
 add_test(TerminalInterfaceTest TerminalInterfaceTest)
 target_link_libraries(TerminalInterfaceTest
                       KF5::Parts
