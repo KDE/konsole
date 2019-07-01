@@ -23,6 +23,12 @@ ecm_mark_nongui_executable(CharacterWidthTest)
 add_test(CharacterWidthTest CharacterWidthTest)
 target_link_libraries(CharacterWidthTest ${KONSOLE_TEST_LIBS})
 
+if ("$ENV{USER}" STREQUAL "jenkins")
+    message(STATUS, "We are running in jenkins")
+else()
+    message(STATUS "We are NOT running in jenkins")
+endif()
+
 # This test fails on kf5-qt5 SUSEQt5.9 buildbot since Oct 28, 2018
 # Believed due to frameworks regession; disable to avoid sysadmins having
 # to fix for every build
