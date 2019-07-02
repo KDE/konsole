@@ -74,6 +74,9 @@ public:
     explicit TerminalDisplay(QWidget *parent = nullptr);
     ~TerminalDisplay() Q_DECL_OVERRIDE;
 
+    void showDragTarget();
+    void hideDragTarget();
+
     void applyProfile(const Profile::Ptr& profile);
 
     /** Returns the terminal color palette used by the display. */
@@ -483,6 +486,10 @@ public Q_SLOTS:
         return _scrollbarLocation;
     }
 
+    Qt::Edge droppedEdge() const {
+        return _overlayEdge;
+    }
+
     // Used to show/hide the message widget
     void updateReadOnlyState(bool readonly);
     IncrementalSearchBar *searchBar() const;
@@ -852,6 +859,9 @@ private:
     TerminalHeaderBar *_headerBar;
     QRect _searchResultRect;
     friend class TerminalDisplayAccessible;
+
+    bool _drawOverlay;
+    Qt::Edge _overlayEdge;
 };
 
 class AutoScrollHandler : public QObject

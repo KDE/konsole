@@ -41,6 +41,8 @@
 #include <QSplitter>
 #include <QStyleOptionTabBarBase>
 #include <QStylePainter>
+#include <QDrag>
+#include <QMimeData>
 
 namespace Konsole {
 
@@ -80,20 +82,17 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
 
     setAutoFillBackground(true);
     terminalFocusOut();
+    connect(m_toggleExpandedMode, &QToolButton::clicked,
+        this, &TerminalHeaderBar::requestToggleExpansion);
+
 }
 
 // Hack untill I can detangle the creation of the TerminalViews
 void TerminalHeaderBar::finishHeaderSetup(ViewProperties *properties)
 {
-    //TODO: Fix ViewProperties signals.
-    connect(properties, &Konsole::ViewProperties::titleChanged, this,
-    [this, properties]{
+    auto controller = dynamic_cast<SessionController*>(properties);
+    connect(properties, &Konsole::ViewProperties::titleChanged, this, [this, properties]{
         m_terminalTitle->setText(properties->title());
-    });
-
-    connect(m_closeBtn, &QToolButton::clicked, this, [properties]{
-        auto controller = qobject_cast<SessionController*>(properties);
-        controller->closeSession();
     });
 
     connect(properties, &Konsole::ViewProperties::iconChanged, this, [this, properties] {
@@ -104,8 +103,7 @@ void TerminalHeaderBar::finishHeaderSetup(ViewProperties *properties)
         m_terminalActivity->setPixmap(QPixmap());
     });
 
-    connect(m_toggleExpandedMode, &QToolButton::clicked,
-            this, &TerminalHeaderBar::requestToggleExpansion);
+    connect(m_closeBtn, &QToolButton::clicked, controller, &SessionController::closeSession);
 }
 
 void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
@@ -145,12 +143,24 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
 
 void TerminalHeaderBar::mouseMoveEvent(QMouseEvent* ev)
 {
-    Q_UNUSED(ev);
+    if (m_toggleExpandedMode->isChecked()) {
+        return;
+    }
+    auto point = ev->pos() - m_startDrag;
+    if (point.manhattanLength() > 10) {
+        auto drag = new QDrag(parent());
+        auto mimeData = new QMimeData();
+        QByteArray payload;
+        payload.setNum(qApp->applicationPid());
+        mimeData->setData(QStringLiteral("konsole/terminal_display"), payload);
+        drag->setMimeData(mimeData);
+        drag->start();
+    }
 }
 
 void TerminalHeaderBar::mousePressEvent(QMouseEvent* ev)
 {
-    Q_UNUSED(ev);
+    m_startDrag = ev->pos();
 }
 
 void TerminalHeaderBar::mouseReleaseEvent(QMouseEvent* ev)

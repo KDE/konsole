@@ -23,6 +23,7 @@
 
 #include <QMouseEvent>
 #include <QApplication>
+#include <QMimeData>
 
 namespace Konsole {
 
@@ -32,6 +33,7 @@ DetachableTabBar::DetachableTabBar(QWidget *parent) :
     _originalCursor(cursor()),
     tabId(-1)
 {
+    setAcceptDrops(true);
     setUsesScrollButtons(false);
     setElideMode(Qt::TextElideMode::ElideMiddle);
 }
@@ -112,6 +114,26 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
         if (_containers.size() == 1 || count() > 1) {
             emit moveTabToWindow(currentIndex(), widgetAtPos);
         }
+    }
+}
+
+void DetachableTabBar::dragEnterEvent(QDragEnterEvent* event)
+{
+    const auto dragId = QStringLiteral("konsole/terminal_display");
+    if (event->mimeData()->hasFormat(dragId)) {
+        auto other_pid = event->mimeData()->data(dragId).toInt();
+        // don't accept the drop if it's another instance of konsole
+        if (qApp->applicationPid() != other_pid)
+            return;
+        event->accept();
+    }
+}
+
+void DetachableTabBar::dragMoveEvent(QDragMoveEvent* event)
+{
+    int tabIdx = tabAt(event->pos());
+    if (tabIdx != -1) {
+        setCurrentIndex(tabIdx);
     }
 }
 

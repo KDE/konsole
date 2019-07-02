@@ -161,6 +161,7 @@ public:
     };
 
     void setNavigationBehavior(int behavior);
+    void terminalDisplayDropped(TerminalDisplay* terminalDisplay);
 
 Q_SIGNALS:
     /** Emitted when the container has no more children */
@@ -171,6 +172,8 @@ Q_SIGNALS:
 
     /** Requests creation of a new view, with the selected profile. */
     void newViewWithProfileRequest(const Profile::Ptr&);
+
+    /** a terminalDisplay was dropped in a child Splitter */
 
     /**
      * Emitted when the user requests to move a view from another container

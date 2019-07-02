@@ -26,6 +26,14 @@
 #include <QDebug>
 #include <QChildEvent>
 #include <QScrollBar>
+#include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QDragMoveEvent>
+#include <QMimeType>
+#include <QMimeData>
+#include <QApplication>
+#include <memory>
+
 
 // Konsole
 #include "ViewContainer.h"
@@ -39,14 +47,20 @@ using Konsole::TerminalDisplay;
 ViewSplitter::ViewSplitter(QWidget *parent) :
     QSplitter(parent)
 {
+    setAcceptDrops(true);
 }
 
+/* This function is called on the toplevel splitter, we need to look at the actual ViewSplitter inside it */
 void ViewSplitter::adjustActiveTerminalDisplaySize(int percentage)
 {
-    const int containerIndex = indexOf(activeTerminalDisplay());
+    auto focusedTerminalDisplay = activeTerminalDisplay();
+    Q_ASSERT(focusedTerminalDisplay);
+
+    auto parentSplitter = qobject_cast<ViewSplitter*>(focusedTerminalDisplay->parent());
+    const int containerIndex = parentSplitter->indexOf(activeTerminalDisplay());
     Q_ASSERT(containerIndex != -1);
 
-    QList<int> containerSizes = sizes();
+    QList<int> containerSizes = parentSplitter->sizes();
 
     const int oldSize = containerSizes[containerIndex];
     const int newSize = static_cast<int>(oldSize * (1.0 + percentage / 100.0));
@@ -57,7 +71,7 @@ void ViewSplitter::adjustActiveTerminalDisplaySize(int percentage)
     }
     containerSizes[containerIndex] = newSize;
 
-    setSizes(containerSizes);
+    parentSplitter->setSizes(containerSizes);
 }
 
 // Get the first splitter that's a parent of the current focused widget.
@@ -82,31 +96,26 @@ void ViewSplitter::updateSizes()
     setSizes(QVector<int>(count(), space).toList());
 }
 
-void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation containerOrientation)
+void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation containerOrientation, AddBehavior behavior)
 {
     ViewSplitter *splitter = activeSplitter();
+    const int currentIndex = !splitter->activeTerminalDisplay() ? splitter->count()
+                            : splitter->indexOf(splitter->activeTerminalDisplay());
+
     if (splitter->count() < 2) {
-        splitter->addWidget(terminalDisplay);
+        splitter->insertWidget(behavior == AddBehavior::AddBefore ? currentIndex : currentIndex + 1, terminalDisplay);
         splitter->setOrientation(containerOrientation);
     } else if (containerOrientation == splitter->orientation()) {
-        auto activeDisplay = splitter->activeTerminalDisplay();
-        if (!activeDisplay) {
-            splitter->addWidget(terminalDisplay);
-        } else {
-            const int currentIndex = splitter->indexOf(activeDisplay);
-            splitter->insertWidget(currentIndex, terminalDisplay);
-        }
+        splitter->insertWidget(currentIndex, terminalDisplay);
     } else {
         auto newSplitter = new ViewSplitter();
-
         TerminalDisplay *oldTerminalDisplay = splitter->activeTerminalDisplay();
         const int oldContainerIndex = splitter->indexOf(oldTerminalDisplay);
-        newSplitter->addWidget(oldTerminalDisplay);
-        newSplitter->addWidget(terminalDisplay);
+        newSplitter->addWidget(behavior == AddBehavior::AddBefore ? terminalDisplay : oldTerminalDisplay);
+        newSplitter->addWidget(behavior == AddBehavior::AddBefore ? oldTerminalDisplay : terminalDisplay);
         newSplitter->setOrientation(containerOrientation);
         newSplitter->updateSizes();
         newSplitter->show();
-
         splitter->insertWidget(oldContainerIndex, newSplitter);
     }
     splitter->updateSizes();
@@ -269,3 +278,78 @@ ViewSplitter *ViewSplitter::getToplevelSplitter()
     }
     return current;
 }
+
+namespace {
+    TerminalDisplay *currentDragTarget = nullptr;
+}
+
+void Konsole::ViewSplitter::dragEnterEvent(QDragEnterEvent* ev)
+{
+    const auto dragId = QStringLiteral("konsole/terminal_display");
+    if (ev->mimeData()->hasFormat(dragId)) {
+        auto other_pid = ev->mimeData()->data(dragId).toInt();
+        // don't accept the drop if it's another instance of konsole
+        if (qApp->applicationPid() != other_pid)
+            return;
+        if (getToplevelSplitter()->terminalMaximized()) {
+            return;
+        }
+        ev->accept();
+    }
+}
+
+void Konsole::ViewSplitter::dragMoveEvent(QDragMoveEvent* ev)
+{
+    auto currentWidget = childAt(ev->pos());
+    if (auto terminal = qobject_cast<TerminalDisplay*>(currentWidget)) {
+        if (currentDragTarget && currentDragTarget != terminal) {
+            currentDragTarget->hideDragTarget();
+        }
+        if (terminal == ev->source()) {
+            return;
+        }
+        currentDragTarget = terminal;
+        currentDragTarget->showDragTarget();
+    }
+}
+
+void Konsole::ViewSplitter::dragLeaveEvent(QDragLeaveEvent* event)
+{
+    if (currentDragTarget) {
+        currentDragTarget->hideDragTarget();
+        currentDragTarget = nullptr;
+    }
+}
+
+void Konsole::ViewSplitter::dropEvent(QDropEvent* ev)
+{
+    if (ev->mimeData()->hasFormat(QStringLiteral("konsole/terminal_display"))) {
+        if (getToplevelSplitter()->terminalMaximized()) {
+            return;
+        }
+        if (currentDragTarget) {
+            currentDragTarget->hideDragTarget();
+            auto source = qobject_cast<TerminalDisplay*>(ev->source());
+            source->setVisible(false);
+            source->setParent(nullptr);
+
+            currentDragTarget->setFocus(Qt::OtherFocusReason);
+            const auto droppedEdge = currentDragTarget->droppedEdge();
+
+            AddBehavior behavior = droppedEdge == Qt::LeftEdge || droppedEdge == Qt::TopEdge
+                ? AddBehavior::AddBefore : AddBehavior::AddAfter;
+
+            Qt::Orientation orientation = droppedEdge == Qt::LeftEdge || droppedEdge == Qt::RightEdge
+                ? Qt::Horizontal : Qt::Vertical;
+
+            // topLevel is the splitter that's connected with the ViewManager
+            // that in turn can call the SessionController.
+            getToplevelSplitter()->terminalDisplayDropped(source);
+            addTerminalDisplay(source, orientation, behavior);
+            source->setVisible(true);
+            currentDragTarget = nullptr;
+        }
+    }
+}
+
+
