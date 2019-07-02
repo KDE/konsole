@@ -253,7 +253,6 @@ void ViewManager::setupActions()
         collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), action);
     }
 
-
     connect(_viewContainer, &TabbedViewContainer::viewAdded, this, &ViewManager::toggleActionsBasedOnState);
     connect(_viewContainer, &TabbedViewContainer::viewRemoved, this, &ViewManager::toggleActionsBasedOnState);
     connect(_viewContainer, &QTabWidget::currentChanged, this, &ViewManager::toggleActionsBasedOnState);
@@ -433,6 +432,8 @@ QHash<TerminalDisplay*, Session*> ViewManager::forgetAll(ViewSplitter* splitter)
 
 Session* ViewManager::forgetTerminal(TerminalDisplay* terminal)
 {
+    disconnect(terminal, &TerminalDisplay::requestToggleExpansion, nullptr, nullptr);
+
     removeController(terminal->sessionController());
     auto session = _sessionMap.take(terminal);
     if (session != nullptr) {
@@ -591,10 +592,8 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
 // should this be handed by ViewManager::unplugController signal
 void ViewManager::removeController(SessionController* controller)
 {
-    disconnect(controller, &Konsole::SessionController::focused, this,
-            &Konsole::ViewManager::controllerChanged);
     if (_pluggedController == controller) {
-        _pluggedController = nullptr;
+        _pluggedController.clear();
     }
     controller->deleteLater();
 }
@@ -620,6 +619,14 @@ void ViewManager::attachView(TerminalDisplay *terminal, Session *session)
 {
     connect(session, &Konsole::Session::finished, this, &Konsole::ViewManager::sessionFinished,
             Qt::UniqueConnection);
+
+    // Disconnect from the other viewcontainer.
+    disconnect(terminal, &TerminalDisplay::requestToggleExpansion, nullptr, nullptr);
+
+    // reconnect on this container.
+    connect(terminal, &TerminalDisplay::requestToggleExpansion,
+            _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal, Qt::UniqueConnection);
+
     _sessionMap[terminal] = session;
     createController(session, terminal);
     toggleActionsBasedOnState();

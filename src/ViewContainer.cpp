@@ -267,6 +267,12 @@ void TabbedViewContainer::moveActiveView(MoveDirection direction)
     setCurrentIndex(newIndex);
 }
 
+void TabbedViewContainer::terminalDisplayDropped(TerminalDisplay *terminalDisplay) {
+    Session* terminalSession = terminalDisplay->sessionController()->session();
+    terminalDisplay->sessionController()->deleteLater();
+    connectedViewManager()->attachView(terminalDisplay, terminalSession);
+}
+
 void TabbedViewContainer::addSplitter(ViewSplitter *viewSplitter, int index) {
     if (index == -1) {
        index = addTab(viewSplitter, QString());
@@ -274,6 +280,10 @@ void TabbedViewContainer::addSplitter(ViewSplitter *viewSplitter, int index) {
         insertTab(index, viewSplitter, QString());
     }
     connect(viewSplitter, &ViewSplitter::destroyed, this, &TabbedViewContainer::viewDestroyed);
+
+    disconnect(viewSplitter, &ViewSplitter::terminalDisplayDropped, nullptr, nullptr);
+    connect(viewSplitter, &ViewSplitter::terminalDisplayDropped, this, &TabbedViewContainer::terminalDisplayDropped);
+
     auto terminalDisplays = viewSplitter->findChildren<TerminalDisplay*>();
     foreach(TerminalDisplay* terminal, terminalDisplays) {
         connectTerminalDisplay(terminal);
@@ -298,6 +308,8 @@ void TabbedViewContainer::addView(TerminalDisplay *view)
 
     connectTerminalDisplay(view);
     connect(viewSplitter, &ViewSplitter::destroyed, this, &TabbedViewContainer::viewDestroyed);
+    connect(viewSplitter, &ViewSplitter::terminalDisplayDropped, this, &TabbedViewContainer::terminalDisplayDropped);
+
     setCurrentIndex(index);
     emit viewAdded(view);
 }

@@ -23,6 +23,7 @@
 #define TERMINAL_HEADER_BAR_H
 
 #include <QWidget>
+#include <QPoint>
 
 class QLabel;
 class QToolButton;
@@ -59,6 +60,7 @@ private:
     QToolButton *m_closeBtn;
     QToolButton *m_toggleExpandedMode;
     bool m_terminalIsFocused;
+    QPoint m_startDrag;
 };
 
 } // namespace Konsole
