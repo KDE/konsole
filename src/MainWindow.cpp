@@ -619,11 +619,13 @@ bool MainWindow::queryClose()
                                                                     "Close Current &Tab"),
                                                               QStringLiteral("tab-close")),
                                                      KStandardGuiItem::cancel(),
+                                                     // don't ask again name is wrong but I can't update.
+                                                     // this is not about tabs anymore. it's about empty tabs *or* splits.
                                                      QStringLiteral("CloseAllTabs"));
     } else {
         result = KMessageBox::warningYesNoCancel(this,
                                                  i18nc("@info",
-                                                       "There are %1 open tabs in this window. "
+                                                       "There are %1 open terminals in this window. "
                                                        "Do you still want to quit?",
                                                        openTabs),
                                                  i18nc("@title", "Confirm Close"),
@@ -633,6 +635,8 @@ bool MainWindow::queryClose()
                                                                 "Close Current &Tab"),
                                                           QStringLiteral("tab-close")),
                                                  KStandardGuiItem::cancel(),
+                                                 // don't ask again name is wrong but I can't update.
+                                                 // this is not about tabs anymore. it's about empty tabs *or* splits.
                                                  QStringLiteral("CloseAllEmptyTabs"));
     }
 
