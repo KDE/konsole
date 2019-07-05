@@ -63,6 +63,8 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     m_toggleExpandedMode->setToolTip(i18nc("@action:itooltip", "Maximize / Restore Terminal"));
 
     m_terminalTitle = new QLabel(this);
+    m_terminalTitle->setFont(QApplication::font());
+
     m_terminalIcon = new QLabel(this);
     m_terminalActivity = new QLabel(this);
 
