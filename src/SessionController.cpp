@@ -240,9 +240,27 @@ void SessionController::trackOutput(QKeyEvent* event)
 {
     Q_ASSERT(_view->screenWindow());
 
+    // Qt has broken something, so we can't rely on just checking if certain
+    // keys are passed as modifiers anymore.
+    const int key = event->key();
+    const bool shouldNotTriggerScroll =
+        key == Qt::Key_Super_L      ||
+        key == Qt::Key_Super_R      ||
+        key == Qt::Key_Hyper_L      ||
+        key == Qt::Key_Hyper_R      ||
+        key == Qt::Key_Shift        ||
+        key == Qt::Key_Control      ||
+        key == Qt::Key_Meta         ||
+        key == Qt::Key_Alt          ||
+        key == Qt::Key_AltGr        ||
+        key == Qt::Key_CapsLock     ||
+        key == Qt::Key_NumLock      ||
+        key == Qt::Key_ScrollLock;
+
+
     // Only jump to the bottom if the user actually typed something in,
     // not if the user e. g. just pressed a modifier.
-    if (event->text().isEmpty() && (event->modifiers() != 0u)) {
+    if (event->text().isEmpty() && (event->modifiers() || shouldNotTriggerScroll)) {
         return;
     }
 
