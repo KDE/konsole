@@ -1868,6 +1868,7 @@ void TerminalDisplay::resizeEvent(QResizeEvent *event)
     _searchBar->correctPosition(QSize(width, headerHeight));
     if (contentsRect().isValid()) {
         updateImageSize();
+        updateImage();
     }
 }
 
