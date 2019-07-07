@@ -51,8 +51,8 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
 {
     m_closeBtn = new QToolButton(this);
     m_closeBtn->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
-    m_closeBtn->setToolTip(i18nc("@action:itooltip", "Close terminal"));
-    m_closeBtn->setText(i18nc("@action:itooltip", "Close terminal"));
+    m_closeBtn->setToolTip(i18nc("@action:tooltip", "Close terminal"));
+    m_closeBtn->setText(i18nc("@action:tooltip", "Close terminal"));
     m_closeBtn->setObjectName(QStringLiteral("close-terminal-button"));
     m_closeBtn->setAutoRaise(true);
 
@@ -60,7 +60,7 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     m_toggleExpandedMode->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen"))); // fake 'expand' icon. VDG input?
     m_toggleExpandedMode->setAutoRaise(true);
     m_toggleExpandedMode->setCheckable(true);
-    m_toggleExpandedMode->setToolTip(i18nc("@action:itooltip", "Maximize / Restore Terminal"));
+    m_toggleExpandedMode->setToolTip(i18nc("@action:tooltip", "Maximize / Restore Terminal"));
 
     m_terminalTitle = new QLabel(this);
     m_terminalTitle->setFont(QApplication::font());
