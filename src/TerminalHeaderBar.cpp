@@ -60,7 +60,7 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     m_toggleExpandedMode->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen"))); // fake 'expand' icon. VDG input?
     m_toggleExpandedMode->setAutoRaise(true);
     m_toggleExpandedMode->setCheckable(true);
-    m_toggleExpandedMode->setToolTip(i18nc("@action:tooltip", "Maximize / Restore Terminal"));
+    m_toggleExpandedMode->setToolTip(i18nc("@action:tooltip", "Maximize terminal"));
 
     m_terminalTitle = new QLabel(this);
     m_terminalTitle->setFont(QApplication::font());
