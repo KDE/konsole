@@ -25,43 +25,26 @@
 #include "BookmarkHandler.h"
 
 // Qt
-#include <QAction>
 #include <QFileInfo>
 #include <QStandardPaths>
 #include <QDir>
-#include <QDebug>
 
 // KDE
 #include <KShell>
-#include <KBookmarkMenu>
 #include <KBookmarkOwner>
 #include <KLocalizedString>
-#include <KActionCollection>
 
 // Konsole
+#include "BookmarkMenu.h"
 #include "ViewProperties.h"
 
 using namespace Konsole;
-
-/* Hackish hack to mitigate a broken behavior of KBookmarkMenu.
- * slotAddBookmark accepts duplicates and it's fragile code,
- * that thing really deserves a rewrite.
- * the easiest way is to "hijack" it's protected method to public
- * and just cast around.
- */
-namespace {
-    class HackBookmarkMenu : public KBookmarkMenu {
-    public:
-        using KBookmarkMenu::slotAddBookmark;
-    };
-}
 
 BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, bool toplevel,
                                  QObject *parent) :
     QObject(parent),
     KBookmarkOwner(),
     _menu(menu),
-    _bookmarkMenu(nullptr),
     _file(QString()),
     _toplevel(toplevel),
     _activeView(nullptr),
@@ -79,30 +62,15 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
         _file += QStringLiteral("/bookmarks.xml");
     }
 
-    _bookmarkManager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
+    KBookmarkManager *manager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
+    manager->setUpdate(true);
 
-    _bookmarkManager->setUpdate(true);
-    _bookmarkMenu = new KBookmarkMenu(_bookmarkManager, this, _menu, toplevel ? collection : nullptr);
-    QAction *bookmarkAction = collection->action(QStringLiteral("add_bookmark"));
-    disconnect(bookmarkAction, nullptr, _bookmarkMenu, nullptr);
-    connect(bookmarkAction, &QAction::triggered, this, &BookmarkHandler::maybeAddBookmark);
+    BookmarkMenu *bookmarkMenu = new BookmarkMenu(manager, this, _menu, toplevel ? collection : nullptr);
+    bookmarkMenu->setParent(this);
 }
 
 BookmarkHandler::~BookmarkHandler()
 {
-    delete _bookmarkMenu;
-}
-
-void Konsole::BookmarkHandler::maybeAddBookmark()
-{
-    auto rootGroup = _bookmarkManager->root();
-    auto currUrl = currentUrl();
-    for(auto url : rootGroup.groupUrlList()) {
-        if (url == currUrl) {
-            return;
-        }
-    }
-    reinterpret_cast<HackBookmarkMenu*>(_bookmarkMenu)->slotAddBookmark();
 }
 
 void BookmarkHandler::openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers)
