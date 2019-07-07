@@ -135,7 +135,7 @@ MainWindow::MainWindow() :
     // emulator (as they are reserved for use by terminal applications)
     correctStandardShortcuts();
 
-    setProfileList(new ProfileList(false, this));
+    setProfileList(new ProfileList(true, this));
 
     // this must come at the end
     applyKonsoleSettings();
