@@ -273,6 +273,42 @@ void TabbedViewContainer::terminalDisplayDropped(TerminalDisplay *terminalDispla
     connectedViewManager()->attachView(terminalDisplay, terminalSession);
 }
 
+QSize TabbedViewContainer::sizeHint() const
+{
+    // QTabWidget::sizeHint() contains some margins added by widgets
+    // style, which were making the initial window size too big.
+    const auto tabsSize = tabBar()->sizeHint();
+    const auto *leftWidget = cornerWidget(Qt::TopLeftCorner);
+    const auto *rightWidget = cornerWidget(Qt::TopRightCorner);
+    const auto leftSize = leftWidget ? leftWidget->sizeHint() : QSize(0, 0);
+    const auto rightSize = rightWidget ? rightWidget->sizeHint() : QSize(0, 0);
+
+    auto tabBarSize = QSize(0, 0);
+    // isVisible() won't work; this is called when the window is not yet visible
+    if (tabBar()->isVisibleTo(this)) {
+        tabBarSize.setWidth(leftSize.width() + tabsSize.width() + rightSize.width());
+        tabBarSize.setHeight(qMax(tabsSize.height(), qMax(leftSize.height(), rightSize.height())));
+    }
+
+    const auto terminalSize = currentWidget() ? currentWidget()->sizeHint() : QSize(0, 0);
+
+    //        width
+    // ├──────────────────┤
+    //
+    // ┌──────────────────┐  ┬
+    // │                  │  │
+    // │     Terminal     │  │
+    // │                  │  │ height
+    // ├───┬──────────┬───┤  │  ┬
+    // │ L │   Tabs   │ R │  │  │ tab bar height
+    // └───┴──────────┴───┘  ┴  ┴
+    //
+    // L/R = left/right widget
+
+    return QSize(qMax(terminalSize.width(), tabBarSize.width()),
+                 tabBarSize.height() + terminalSize.height());
+}
+
 void TabbedViewContainer::addSplitter(ViewSplitter *viewSplitter, int index) {
     if (index == -1) {
        index = addTab(viewSplitter, QString());
