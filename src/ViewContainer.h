@@ -163,6 +163,8 @@ public:
     void setNavigationBehavior(int behavior);
     void terminalDisplayDropped(TerminalDisplay* terminalDisplay);
 
+    QSize sizeHint() const override;
+
 Q_SIGNALS:
     /** Emitted when the container has no more children */
     void empty(TabbedViewContainer *container);
