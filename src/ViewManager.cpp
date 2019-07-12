@@ -740,6 +740,7 @@ ViewManager::NavigationMethod ViewManager::navigationMethod() const
 
 void ViewManager::containerViewsChanged(TabbedViewContainer *container)
 {
+    Q_UNUSED(container);
     // TODO: Verify that this is right.
     emit viewPropertiesChanged(viewProperties());
 }
