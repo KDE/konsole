@@ -49,7 +49,6 @@ private:
     QCursor _originalCursor;
     QList<TabbedViewContainer*> _containers;
     int tabId;
-    bool terminalIsFocused;
 };
 }
 
