@@ -26,7 +26,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Profiles marked as visible will appear in context and File menu. A shortcut for switching current terminal's profile can be assigned to each entry. However, only shortcuts of visible profiles will work.</string>
+      <string>Profiles marked as visible will appear in context and File menu. A shortcut for creating a new tab can be assigned to each entry. However, only shortcuts of visible profiles will work.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
