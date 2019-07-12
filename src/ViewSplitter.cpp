@@ -345,7 +345,7 @@ void Konsole::ViewSplitter::dropEvent(QDropEvent* ev)
 
             // topLevel is the splitter that's connected with the ViewManager
             // that in turn can call the SessionController.
-            getToplevelSplitter()->terminalDisplayDropped(source);
+            emit getToplevelSplitter()->terminalDisplayDropped(source);
             addTerminalDisplay(source, orientation, behavior);
             source->setVisible(true);
             currentDragTarget = nullptr;
