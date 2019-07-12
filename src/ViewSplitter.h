@@ -62,7 +62,7 @@ public:
      * and inserts the container into it.
      *
      * @param terminalDisplay The container to insert
-     * @param orientation Specifies whether the view should be split
+     * @param containerOrientation Specifies whether the view should be split
      *                    horizontally or vertically.  If the orientation
      *                    is the same as the ViewSplitter into which the
      *                    container is to be inserted, or if the splitter
@@ -71,6 +71,8 @@ public:
      *                    is different, then a new child splitter
      *                    will be created, into which the container will
      *                    be inserted.
+     * @param behavior Specifies whether to add new terminal after current
+     *                 tab or at end.
      */
     void addTerminalDisplay(TerminalDisplay* terminalDisplay, Qt::Orientation containerOrientation, AddBehavior behavior = AddBehavior::AddAfter);
 
@@ -134,7 +136,7 @@ private:
      * TerminalDisplays, hidding the ones that should be hidden.
      * If a terminal display is not hidden in a subtree, we cannot
      * hide the whole tree.
-     * 
+     *
      * @p currentTerminalDisplay the only terminal display that will still be visible.
      */
     bool hideRecurse(TerminalDisplay *currentTerminalDisplay);
