@@ -1277,14 +1277,14 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 
     // Determine which characters should be repainted (1 region unit = 1 character)
     QRegion dirtyImageRegion;
-    foreach(const QRect & rect, (pe->region() & contentsRect()).rects()) {
+    foreach(const QRect & rect, (pe->region() & contentsRect())) {
         dirtyImageRegion += widgetToImage(rect);
         drawBackground(paint, rect, getBackgroundColor(), true /* use opacity setting */);
     }
 
     paint.setRenderHint(QPainter::Antialiasing, _antialiasText);
 
-    foreach(const QRect & rect, dirtyImageRegion.rects()) {
+    foreach(const QRect & rect, dirtyImageRegion) {
         drawContents(paint, rect);
     }
     drawCurrentResultRect(paint);
@@ -1293,7 +1293,7 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 
     const bool drawDimmed = _dimWhenInactive && !hasFocus();
     const QColor dimColor(0, 0, 0, 128);
-    foreach(const QRect & rect, (pe->region() & contentsRect()).rects()) {
+    foreach(const QRect & rect, (pe->region() & contentsRect())) {
         if (drawDimmed) {
             paint.fillRect(rect, dimColor);
         }
@@ -1417,8 +1417,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 
             if (_showUrlHint && urlNumber < 10) {
                 // Position at the beginning of the URL
-                const QVector<QRect> regionRects = region.rects();
-                QRect hintRect(regionRects.first());
+                QRect hintRect(*region.begin());
                 hintRect.setWidth(r.height());
                 painter.fillRect(hintRect, QColor(0, 0, 0, 128));
                 painter.setPen(Qt::white);
