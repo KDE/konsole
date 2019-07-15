@@ -32,7 +32,6 @@
 #include <QLabel>
 #include <QAction>
 #include <KToolBarLabelAction>
-#include <QToolButton>
 #include <QDebug>
 #include <QApplication>
 #include <QPaintEvent>
