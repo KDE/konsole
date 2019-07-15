@@ -378,7 +378,7 @@ void restoreSession(Application &app)
         mainWindow->viewManager()->toggleActionsBasedOnState();
         mainWindow->show();
 
-        // TODO: HACK without the code below the sessions would be `unitialized`
+        // TODO: HACK without the code below the sessions would be `uninitialized`
         // and the tabs wouldn't display the correct information.
         auto tabbedContainer = qobject_cast<Konsole::TabbedViewContainer*>(mainWindow->centralWidget());
         for(int i = 0; i < tabbedContainer->count(); i++) {
