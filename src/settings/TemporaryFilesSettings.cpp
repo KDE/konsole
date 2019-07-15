@@ -36,7 +36,7 @@ TemporaryFilesSettings::TemporaryFilesSettings(QWidget* aParent) : QWidget(aPare
     QString cachePath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
 #ifdef Q_OS_UNIX
     // Use "~" instead of full path. It looks nice and helps
-    // in cases when home path is realy long.
+    // in cases when home path is really long.
     const QString homePath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
     if(cachePath.startsWith(homePath)) {
         cachePath.replace(0, homePath.length(), QStringLiteral("~"));
