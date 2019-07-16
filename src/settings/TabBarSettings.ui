@@ -110,7 +110,7 @@
         <string>text/css</string>
        </property>
        <property name="placeholderText" stdset="0">
-        <string comment="@info:placeholder Optional file path is empty">(none)</string>
+        <string comment="@item:intext Optional file path is empty">(none)</string>
        </property>
       </widget>
      </item>
@@ -153,7 +153,7 @@
      <item row="14" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="miscellaneousLabel">
        <property name="text">
-        <string>Miscellaneous:</string>
+        <string comment="@item:intext Miscellaneous Options">Miscellaneous:</string>
        </property>
       </widget>
      </item>

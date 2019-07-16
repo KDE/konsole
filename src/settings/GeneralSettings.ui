@@ -195,7 +195,7 @@
      <item row="8" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Search:</string>
+        <string comment="@item:intext Search options">Search:</string>
        </property>
       </widget>
      </item>
