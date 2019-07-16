@@ -265,7 +265,7 @@ void ProfileSettings::updateDefaultItem()
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
 
-    const QString defaultItemSuffix = i18nc("Default list item's name suffix (with separator)", " (default)");
+    const QString defaultItemSuffix = i18nc("@item:intable Default list item's name suffix (with separator)", " (default)");
 
     const int rowCount = _sessionModel->rowCount();
     for (int i = 0; i < rowCount; i++) {
