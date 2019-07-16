@@ -36,7 +36,7 @@ class TerminalHeaderBar : public QWidget {
     Q_OBJECT
 public:
     // TODO: Verify if the terminalDisplay is needed, or some other thing like SessionController.
-    TerminalHeaderBar(QWidget *parent = nullptr);
+    explicit TerminalHeaderBar(QWidget *parent = nullptr);
     void finishHeaderSetup(ViewProperties *properties);
 
     void terminalFocusIn();
