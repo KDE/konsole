@@ -51,7 +51,7 @@ void BookMarkTest::testBookMarkURLs_data()
     QTest::addColumn<QString>("text");
     QTest::addColumn<QString>("result");
     for (int i = 0; i < groupUrlList.size(); ++i) {
-        auto bm_url = groupUrlList.at(i);
+        const auto& bm_url = groupUrlList.at(i);
         // Current Konsole code using bm.url()
         // The below is new to test decoding the url/command
         auto bm = QUrl::fromPercentEncoding(bm_url.url().toUtf8());
