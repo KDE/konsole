@@ -123,8 +123,9 @@ void DetachableTabBar::dragEnterEvent(QDragEnterEvent* event)
     if (event->mimeData()->hasFormat(dragId)) {
         auto other_pid = event->mimeData()->data(dragId).toInt();
         // don't accept the drop if it's another instance of konsole
-        if (qApp->applicationPid() != other_pid)
+        if (qApp->applicationPid() != other_pid) {
             return;
+        }
         event->accept();
     }
 }

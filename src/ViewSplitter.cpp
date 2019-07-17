@@ -289,8 +289,9 @@ void Konsole::ViewSplitter::dragEnterEvent(QDragEnterEvent* ev)
     if (ev->mimeData()->hasFormat(dragId)) {
         auto other_pid = ev->mimeData()->data(dragId).toInt();
         // don't accept the drop if it's another instance of konsole
-        if (qApp->applicationPid() != other_pid)
+        if (qApp->applicationPid() != other_pid) {
             return;
+        }
         if (getToplevelSplitter()->terminalMaximized()) {
             return;
         }
