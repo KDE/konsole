@@ -512,7 +512,7 @@ QSize Konsole::ShortcutItemDelegate::sizeHint(const QStyleOptionViewItem &option
     const int width = fm.width(shortcutString + QStringLiteral(", ..."))
                       + editorMargins;
 
-    return QSize(width, QStyledItemDelegate::sizeHint(option, index).height());
+    return {width, QStyledItemDelegate::sizeHint(option, index).height()};
 }
 
 void Konsole::ShortcutItemDelegate::destroyEditor(QWidget *editor, const QModelIndex &index) const

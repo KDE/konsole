@@ -87,6 +87,6 @@ void HistorySizeDialog::setLineCount(int lines)
 }
 
 QSize HistorySizeDialog::sizeHint() const {
-    return QSize(_ui->tempWarningWidget->sizeHint().width(), 0);
+    return {_ui->tempWarningWidget->sizeHint().width(), 0};
 }
 
