@@ -154,7 +154,7 @@ public Q_SLOTS:
         blockSignals(true);
         for(const QButtonGroup *group: qAsConst(_groups)) {
             auto *enumItem = groupToConfigItemEnum(group);
-            if(!enumItem) {
+            if(enumItem == nullptr) {
                 continue;
             }
 
@@ -167,7 +167,7 @@ public Q_SLOTS:
                     break;
                 }
             }
-            if(!currentButton) {
+            if(currentButton == nullptr) {
                 return;
             }
             currentButton->setChecked(true);
@@ -189,11 +189,11 @@ public Q_SLOTS:
         bool updateConfig = false;
         for(const QButtonGroup *group: qAsConst(_groups)) {
             auto *enumItem = groupToConfigItemEnum(group);
-            if(!enumItem) {
+            if(enumItem == nullptr) {
                 continue;
             }
             const auto *currentButton = group->checkedButton();
-            if(!currentButton) {
+            if(currentButton == nullptr) {
                 continue;
             }
             const int value = buttonToEnumValue(currentButton);
@@ -222,7 +222,7 @@ protected Q_SLOTS:
             return;
         }
         auto *enumItem = groupToConfigItemEnum(button->group());
-        if(!enumItem) {
+        if(enumItem == nullptr) {
             return;
         }
 
@@ -240,11 +240,11 @@ private:
         Q_ASSERT(group);
         const QString key = group->objectName().mid(ManagedNamePrefix.length());
         auto *item = _config->findItem(key);
-        if(!item) {
+        if(item == nullptr) {
             return nullptr;
         }
         auto *enumItem = dynamic_cast<KCoreConfigSkeleton::ItemEnum *>(item);
-        if(!enumItem) {
+        if(enumItem == nullptr) {
             return nullptr;
         }
         return enumItem;
@@ -260,7 +260,7 @@ private:
         }
 
         const auto *enumItem = groupToConfigItemEnum(button->group());
-        if(!enumItem) {
+        if(enumItem == nullptr) {
             return -1;
         }
         const auto &choices = enumItem->choices();

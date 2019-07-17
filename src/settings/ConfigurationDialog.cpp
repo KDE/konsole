@@ -100,7 +100,7 @@ void ConfigurationDialog::addPage(KPageWidgetItem *item, bool manage)
 
     if (_shown && manage) {
         QPushButton *defaultButton = buttonBox()->button(QDialogButtonBox::RestoreDefaults);
-        if (defaultButton) {
+        if (defaultButton != nullptr) {
             bool isDefault = defaultButton->isEnabled() && _manager->isDefault();
             defaultButton->setEnabled(!isDefault);
         }
@@ -134,7 +134,7 @@ void ConfigurationDialog::settingsChangedSlot()
 void ConfigurationDialog::setApplyButtonEnabled(bool enabled)
 {
     QPushButton *applyButton = buttonBox()->button(QDialogButtonBox::Apply);
-    if (applyButton) {
+    if (applyButton != nullptr) {
         applyButton->setEnabled(enabled);
     }
 }
@@ -142,7 +142,7 @@ void ConfigurationDialog::setApplyButtonEnabled(bool enabled)
 void ConfigurationDialog::setRestoreDefaultsButtonEnabled(bool enabled)
 {
     QPushButton *restoreDefaultsButton = buttonBox()->button(QDialogButtonBox::RestoreDefaults);
-    if (restoreDefaultsButton) {
+    if (restoreDefaultsButton != nullptr) {
         restoreDefaultsButton->setEnabled(enabled);
     }
 }

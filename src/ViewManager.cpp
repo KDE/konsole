@@ -266,7 +266,7 @@ void ViewManager::toggleActionsBasedOnState() {
         tabOnlyAction->setEnabled(count > 1);
     }
 
-    if (_viewContainer && _viewContainer->activeViewSplitter()) {
+    if ((_viewContainer != nullptr) && (_viewContainer->activeViewSplitter() != nullptr)) {
         const int splitCount = _viewContainer
                 ->activeViewSplitter()
                 ->getToplevelSplitter()
@@ -464,7 +464,7 @@ void ViewManager::sessionFinished()
 
     // Before deleting the view, let's unmaximize if it's maximized.
     auto *splitter = qobject_cast<ViewSplitter*>(view->parentWidget());
-    if (!splitter) {
+    if (splitter == nullptr) {
         return;
     }
 
@@ -876,7 +876,7 @@ QJsonObject saveSessionsRecurse(QSplitter *splitter) {
 
         if (maybeSplitter != nullptr) {
             internalWidgets.append(saveSessionsRecurse(maybeSplitter));
-        } else if (maybeTerminalDisplay) {
+        } else if (maybeTerminalDisplay != nullptr) {
             internalWidgets.append(saveSessionTerminal(maybeTerminalDisplay));
         }
     }

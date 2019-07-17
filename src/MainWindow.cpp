@@ -729,7 +729,7 @@ void MainWindow::showManageProfilesDialog()
 void MainWindow::showSettingsDialog(const bool showProfilePage)
 {
     static ConfigurationDialog *confDialog = nullptr;
-    if (confDialog) {
+    if (confDialog != nullptr) {
         confDialog->show();
         return;
     }

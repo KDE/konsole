@@ -1059,7 +1059,7 @@ void EditProfileDialog::previewColorScheme(const QModelIndex &index)
 
 void EditProfileDialog::showFontDialog()
 {
-    if (!_fontDialog) {
+    if (_fontDialog == nullptr) {
         _fontDialog = new FontDialog(this);
         connect(_fontDialog, &FontDialog::fontChanged, this, [this](const QFont &font) {
             preview(Profile::Font, font);
@@ -1529,7 +1529,7 @@ void EditProfileDialog::setupButtonGroup(const ButtonGroupOptions &options, cons
 
     Q_ASSERT(options.buttons.count() > 0);
     auto *activeButton = options.group->button(currentValue);
-    if (!activeButton) {
+    if (activeButton == nullptr) {
         activeButton = options.buttons[0].button;
     }
     activeButton->setChecked(true);

@@ -393,7 +393,7 @@ public Q_SLOTS:
             Q_ASSERT(widget);
             do {
                 QLayout *widgetLayout = widget->layout();
-                if (widgetLayout) {
+                if (widgetLayout != nullptr) {
                     widgetLayout->update();
                     widgetLayout->activate();
                 }
@@ -414,11 +414,11 @@ public Q_SLOTS:
             int left = getLeftMargin(layout);
             for (int row = 0; row < layout->rowCount(); ++row) {
                 QLayoutItem *layoutItem = layout->itemAtPosition(row, LABELS_COLUMN);
-                if (!layoutItem) {
+                if (layoutItem == nullptr) {
                     continue;
                 }
                 QWidget *widget = layoutItem->widget();
-                if (!widget) {
+                if (widget == nullptr) {
                     continue;
                 }
                 const int idx = layout->indexOf(widget);
