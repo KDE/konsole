@@ -483,7 +483,7 @@ void ViewManager::sessionFinished()
         emit unplugController(_pluggedController);
     }
 
-    if (_sessionMap.size() > 0) {
+    if (!_sessionMap.empty()) {
         updateTerminalDisplayHistory(view, true);
         focusAnotherTerminal(toplevelSplitter);
         toggleActionsBasedOnState();
