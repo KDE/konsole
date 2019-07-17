@@ -890,7 +890,7 @@ void ViewManager::saveSessions(KConfigGroup &group)
 {
     QJsonArray rootArray;
     for(int i = 0; i < _viewContainer->count(); i++) {
-        QSplitter *splitter = qobject_cast<QSplitter*>(_viewContainer->widget(i));
+        auto *splitter = qobject_cast<QSplitter*>(_viewContainer->widget(i));
         rootArray.append(saveSessionsRecurse(splitter));
     }
 

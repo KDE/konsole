@@ -63,7 +63,7 @@ void ViewSplitter::adjustActiveTerminalDisplaySize(int percentage)
     QList<int> containerSizes = parentSplitter->sizes();
 
     const int oldSize = containerSizes[containerIndex];
-    const int newSize = static_cast<int>(oldSize * (1.0 + percentage / 100.0));
+    const auto newSize = static_cast<int>(oldSize * (1.0 + percentage / 100.0));
     const int perContainerDelta = (count() == 1) ? 0 : ((newSize - oldSize) / (count() - 1)) * (-1);
 
     for (int& size : containerSizes) {
@@ -166,7 +166,7 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
     const auto newPoint = QPoint(newX, newY);
     auto child = topSplitter->childAt(newPoint);
 
-    if (TerminalDisplay* terminal = qobject_cast<TerminalDisplay*>(child)) {
+    if (auto* terminal = qobject_cast<TerminalDisplay*>(child)) {
         terminal->setFocus(Qt::OtherFocusReason);
     } else if (qobject_cast<QSplitterHandle*>(child)) {
         auto targetSplitter = qobject_cast<QSplitter*>(child->parent());

@@ -208,7 +208,7 @@ QVariant Part::profileProperty(const QString &profileProperty) const
         return QString();
     }
 
-    const Profile::Property p = static_cast<Profile::Property>(value);
+    const auto p = static_cast<Profile::Property>(value);
     return SessionManager::instance()->sessionProfile(activeSession())->property<QVariant>(p);
 }
 
