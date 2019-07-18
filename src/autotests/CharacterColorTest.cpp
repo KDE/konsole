@@ -188,9 +188,9 @@ void CharacterColorTest::testColor256_data()
     for (int i = 16; i < 232; ++i) {
         const QString name = QStringLiteral("color256 color %1").arg(i);
         const auto u = i - 16;
-        const auto color = QColor(((u / 36) % 6) ? (40 * ((u / 36) % 6) + 55) : 0,
-                      ((u / 6) % 6) ? (40 * ((u / 6) % 6) + 55) : 0,
-                      ((u / 1) % 6) ? (40 * ((u / 1) % 6) + 55) : 0);
+        const auto color = QColor(((u / 36) % 6) != 0 ? (40 * ((u / 36) % 6) + 55) : 0,
+                      ((u / 6) % 6) != 0 ? (40 * ((u / 6) % 6) + 55) : 0,
+                      ((u / 1) % 6) != 0 ? (40 * ((u / 1) % 6) + 55) : 0);
         QTest::newRow(qPrintable(name)) << i << color;
     }
     for (int i = 232; i < 256; ++i) {

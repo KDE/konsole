@@ -117,10 +117,10 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
     const auto globalPos = parentWidget()->mapToGlobal(pos());
     auto *widget = qApp->widgetAt(globalPos.x() + 10, globalPos.y() - 10);
 
-    const bool isTabbar = qobject_cast<QTabBar*>(widget);
-    const bool isTerminalWidget = qobject_cast<TerminalDisplay*>(widget);
-    const bool isSplitter = qobject_cast<QSplitter*>(widget) || qobject_cast<QSplitterHandle*>(widget);
-    if (widget && !isTabbar && !isTerminalWidget && !isSplitter) {
+    const bool isTabbar = qobject_cast<QTabBar*>(widget) != nullptr;
+    const bool isTerminalWidget = qobject_cast<TerminalDisplay*>(widget) != nullptr;
+    const bool isSplitter = (qobject_cast<QSplitter*>(widget) != nullptr) || (qobject_cast<QSplitterHandle*>(widget) != nullptr);
+    if ((widget != nullptr) && !isTabbar && !isTerminalWidget && !isSplitter) {
         QStyleOptionTabBarBase optTabBase;
         QStylePainter p(this);
         optTabBase.init(this);

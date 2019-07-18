@@ -99,7 +99,7 @@ void ViewSplitter::updateSizes()
 void ViewSplitter::addTerminalDisplay(TerminalDisplay *terminalDisplay, Qt::Orientation containerOrientation, AddBehavior behavior)
 {
     ViewSplitter *splitter = activeSplitter();
-    const int currentIndex = !splitter->activeTerminalDisplay() ? splitter->count()
+    const int currentIndex = splitter->activeTerminalDisplay() == nullptr ? splitter->count()
                             : splitter->indexOf(splitter->activeTerminalDisplay());
 
     if (splitter->count() < 2) {
@@ -129,7 +129,7 @@ void ViewSplitter::childEvent(QChildEvent *event)
         if (count() == 0) {
             deleteLater();
         }
-        if (!findChild<TerminalDisplay*>()) {
+        if (findChild<TerminalDisplay*>() == nullptr) {
             deleteLater();
         }
     }
@@ -168,13 +168,13 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
 
     if (auto* terminal = qobject_cast<TerminalDisplay*>(child)) {
         terminal->setFocus(Qt::OtherFocusReason);
-    } else if (qobject_cast<QSplitterHandle*>(child)) {
+    } else if (qobject_cast<QSplitterHandle*>(child) != nullptr) {
         auto targetSplitter = qobject_cast<QSplitter*>(child->parent());
         auto splitterTerminal = qobject_cast<TerminalDisplay*>(targetSplitter->widget(0));
         splitterTerminal->setFocus(Qt::OtherFocusReason);
-    } else if (qobject_cast<QWidget*>(child)) {
+    } else if (qobject_cast<QWidget*>(child) != nullptr) {
         TerminalDisplay *terminalParent = nullptr;
-        while(!terminalParent) {
+        while(terminalParent == nullptr) {
             terminalParent = qobject_cast<TerminalDisplay*>(child->parentWidget());
             child = child->parentWidget();
         }
@@ -205,7 +205,7 @@ void ViewSplitter::focusRight()
 TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
 {
     auto focusedWidget = qobject_cast<TerminalDisplay*>(focusWidget());
-    return focusedWidget ? focusedWidget : findChild<TerminalDisplay*>();
+    return focusedWidget != nullptr ? focusedWidget : findChild<TerminalDisplay*>();
 }
 
 void ViewSplitter::toggleMaximizeCurrentTerminal()
@@ -273,7 +273,7 @@ void ViewSplitter::handleMinimizeMaximize(bool maximize)
 ViewSplitter *ViewSplitter::getToplevelSplitter()
 {
     ViewSplitter *current = this;
-    while(qobject_cast<ViewSplitter*>(current->parentWidget())) {
+    while(qobject_cast<ViewSplitter*>(current->parentWidget()) != nullptr) {
         current = qobject_cast<ViewSplitter*>(current->parentWidget());
     }
     return current;
@@ -303,7 +303,7 @@ void Konsole::ViewSplitter::dragMoveEvent(QDragMoveEvent* ev)
 {
     auto currentWidget = childAt(ev->pos());
     if (auto terminal = qobject_cast<TerminalDisplay*>(currentWidget)) {
-        if (currentDragTarget && currentDragTarget != terminal) {
+        if ((currentDragTarget != nullptr) && currentDragTarget != terminal) {
             currentDragTarget->hideDragTarget();
         }
         if (terminal == ev->source()) {
@@ -317,7 +317,7 @@ void Konsole::ViewSplitter::dragMoveEvent(QDragMoveEvent* ev)
 void Konsole::ViewSplitter::dragLeaveEvent(QDragLeaveEvent* event)
 {
     Q_UNUSED(event);
-    if (currentDragTarget) {
+    if (currentDragTarget != nullptr) {
         currentDragTarget->hideDragTarget();
         currentDragTarget = nullptr;
     }
@@ -329,7 +329,7 @@ void Konsole::ViewSplitter::dropEvent(QDropEvent* ev)
         if (getToplevelSplitter()->terminalMaximized()) {
             return;
         }
-        if (currentDragTarget) {
+        if (currentDragTarget != nullptr) {
             currentDragTarget->hideDragTarget();
             auto source = qobject_cast<TerminalDisplay*>(ev->source());
             source->setVisible(false);
