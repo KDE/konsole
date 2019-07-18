@@ -147,7 +147,7 @@ private Q_SLOTS:
     void newWindow();
     void showManageProfilesDialog();
     void activateMenuBar();
-    void showSettingsDialog(const bool showProfilePage = false);
+    void showSettingsDialog(bool showProfilePage = false);
     void showShortcutsDialog();
     void newFromProfile(const Profile::Ptr &profile);
     void activeViewChanged(SessionController *controller);
