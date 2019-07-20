@@ -141,9 +141,6 @@ public:
     bool confirmClose() const override;
     virtual bool confirmForceClose() const;
 
-    // Reimplemented to watch for events happening to the view
-    bool eventFilter(QObject *watched, QEvent *event) override;
-
     /** Returns the set of all controllers that exist. */
     static QSet<SessionController *> allControllers()
     {
@@ -160,7 +157,7 @@ Q_SIGNALS:
      * This can be used by other classes to plug the controller's actions into a window's
      * menus.
      */
-    void focused(SessionController *controller);
+    void viewFocused(SessionController *controller);
 
     void rawTitleChanged();
 
@@ -266,6 +263,7 @@ private Q_SLOTS:
 
     void updateFilterList(Profile::Ptr profile); // Called when the profile has changed, so we might need to change the list of filters
 
+    void viewFocusChangeHandler(bool focused);
     void interactionHandler();
     void snapshot(); // called periodically as the user types
     // to take a snapshot of the state of the

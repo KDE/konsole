@@ -148,8 +148,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     setIdentifier(++_lastControllerId);
     sessionAttributeChanged();
 
-    view->installEventFilter(this);
-    view->setSessionController(this);
+    connect(_view, &TerminalDisplay::compositeFocusChanged, this, &SessionController::viewFocusChangeHandler);
+    _view->setSessionController(this);
 
     // install filter on the view to highlight URLs and files
     updateFilterList(SessionManager::instance()->sessionProfile(_session));
@@ -203,8 +203,10 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     _interactionTimer->setSingleShot(true);
     _interactionTimer->setInterval(500);
     connect(_interactionTimer, &QTimer::timeout, this, &Konsole::SessionController::snapshot);
-    connect(_view.data(), &Konsole::TerminalDisplay::focusGained, this, &Konsole::SessionController::interactionHandler);
-    connect(_view.data(), &Konsole::TerminalDisplay::keyPressedSignal, this, &Konsole::SessionController::interactionHandler);
+    connect(_view.data(), &Konsole::TerminalDisplay::compositeFocusChanged,
+            this, [this](bool focused) { if (focused) { interactionHandler(); }});
+    connect(_view.data(), &Konsole::TerminalDisplay::keyPressedSignal,
+            this, &Konsole::SessionController::interactionHandler);
 
     // take a snapshot of the session state periodically in the background
     auto backgroundTimer = new QTimer(_session);
@@ -271,6 +273,30 @@ void SessionController::trackOutput(QKeyEvent* event)
 
     _view->screenWindow()->setTrackOutput(true);
 }
+
+void SessionController::viewFocusChangeHandler(bool focused)
+{
+    if (focused) {
+        // notify the world that the view associated with this session has been focused
+        // used by the view manager to update the title of the MainWindow widget containing the view
+        emit viewFocused(this);
+
+        // when the view is focused, set bell events from the associated session to be delivered
+        // by the focused view
+
+        // first, disconnect any other views which are listening for bell signals from the session
+        disconnect(_session.data(), &Konsole::Session::bellRequest, nullptr, nullptr);
+        // second, connect the newly focused view to listen for the session's bell signal
+        connect(_session.data(), &Konsole::Session::bellRequest, _view.data(), &Konsole::TerminalDisplay::bell);
+
+        if ((_copyInputToAllTabsAction != nullptr) && _copyInputToAllTabsAction->isChecked()) {
+            // A session with "Copy To All Tabs" has come into focus:
+            // Ensure that newly created sessions are included in _copyToGroup!
+            copyInputToAllTabs();
+        }
+    }
+}
+
 void SessionController::interactionHandler()
 {
     // This flag is used to make sure those special icons indicating interest
@@ -501,30 +527,6 @@ void SessionController::toggleReadOnly()
         bool readonly = !isReadOnly();
         _session->setReadOnly(readonly);
     }
-}
-
-bool SessionController::eventFilter(QObject* watched , QEvent* event)
-{
-    if (event->type() == QEvent::FocusIn && watched == _view) {
-        // notify the world that the view associated with this session has been focused
-        // used by the view manager to update the title of the MainWindow widget containing the view
-        emit focused(this);
-
-        // when the view is focused, set bell events from the associated session to be delivered
-        // by the focused view
-
-        // first, disconnect any other views which are listening for bell signals from the session
-        disconnect(_session.data(), &Konsole::Session::bellRequest, nullptr, nullptr);
-        // second, connect the newly focused view to listen for the session's bell signal
-        connect(_session.data(), &Konsole::Session::bellRequest, _view.data(), &Konsole::TerminalDisplay::bell);
-
-        if ((_copyInputToAllTabsAction != nullptr) && _copyInputToAllTabsAction->isChecked()) {
-            // A session with "Copy To All Tabs" has come into focus:
-            // Ensure that newly created sessions are included in _copyToGroup!
-            copyInputToAllTabs();
-        }
-    }
-    return Konsole::ViewProperties::eventFilter(watched, event);
 }
 
 void SessionController::removeSearchFilter()

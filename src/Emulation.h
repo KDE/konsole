@@ -266,14 +266,9 @@ public Q_SLOTS:
     void receiveData(const char *text, int length);
 
     /**
-     * Sends information about the focus lost event to the terminal.
+     * Sends information about the focus event to the terminal.
      */
-    virtual void focusLost() = 0;
-
-    /**
-     * Sends information about the focus gained event to the terminal.
-     */
-    virtual void focusGained() = 0;
+    virtual void focusChanged(bool focused) = 0;
 
 Q_SIGNALS:
 

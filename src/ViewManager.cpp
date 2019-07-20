@@ -525,7 +525,7 @@ void ViewManager::focusAnotherTerminal(ViewSplitter *toplevelSplitter)
     }
 }
 
-void ViewManager::viewActivated(TerminalDisplay *view)
+void ViewManager::activateView(TerminalDisplay *view)
 {
     Q_ASSERT(view != nullptr);
 
@@ -586,7 +586,7 @@ SessionController *ViewManager::createController(Session *session, TerminalDispl
     // create a new controller for the session, and ensure that this view manager
     // is notified when the view gains the focus
     auto controller = new SessionController(session, view, this);
-    connect(controller, &Konsole::SessionController::focused, this,
+    connect(controller, &Konsole::SessionController::viewFocused, this,
             &Konsole::ViewManager::controllerChanged);
     connect(session, &Konsole::Session::destroyed, controller,
             &Konsole::SessionController::deleteLater);
@@ -705,7 +705,7 @@ TabbedViewContainer *ViewManager::createContainer()
     connect(container, &Konsole::TabbedViewContainer::viewRemoved, this,
             &Konsole::ViewManager::viewDestroyed);
     connect(container, &Konsole::TabbedViewContainer::activeViewChanged, this,
-            &Konsole::ViewManager::viewActivated);
+            &Konsole::ViewManager::activateView);
 
     return container;
 }

@@ -78,10 +78,9 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     setLayout(m_boxLayout);
 
     setAutoFillBackground(true);
-    terminalFocusOut();
+    setFocusIndicatorState(false);
     connect(m_toggleExpandedMode, &QToolButton::clicked,
         this, &TerminalHeaderBar::requestToggleExpansion);
-
 }
 
 // Hack untill I can detangle the creation of the TerminalViews
@@ -101,6 +100,12 @@ void TerminalHeaderBar::finishHeaderSetup(ViewProperties *properties)
     });
 
     connect(m_closeBtn, &QToolButton::clicked, controller, &SessionController::closeSession);
+}
+
+void TerminalHeaderBar::setFocusIndicatorState(bool focused)
+{
+    m_terminalIsFocused = focused;
+    update();
 }
 
 void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
@@ -163,18 +168,6 @@ void TerminalHeaderBar::mousePressEvent(QMouseEvent* ev)
 void TerminalHeaderBar::mouseReleaseEvent(QMouseEvent* ev)
 {
     Q_UNUSED(ev)
-}
-
-void TerminalHeaderBar::terminalFocusIn()
-{
-    m_terminalIsFocused = true;
-    update();
-}
-
-void TerminalHeaderBar::terminalFocusOut()
-{
-    m_terminalIsFocused = false;
-    update();
 }
 
 }

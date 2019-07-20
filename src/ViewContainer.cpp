@@ -363,7 +363,7 @@ void TabbedViewContainer::splitView(TerminalDisplay *view, Qt::Orientation orien
 void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
 {
     auto item = display->sessionController();
-    connect(item, &Konsole::SessionController::focused, this,
+    connect(item, &Konsole::SessionController::viewFocused, this,
         &Konsole::TabbedViewContainer::currentSessionControllerChanged);
 
     connect(item, &Konsole::ViewProperties::titleChanged, this,
@@ -379,7 +379,7 @@ void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
 void TabbedViewContainer::disconnectTerminalDisplay(TerminalDisplay *display)
 {
     auto item = display->sessionController();
-    disconnect(item, &Konsole::SessionController::focused, this,
+    disconnect(item, &Konsole::SessionController::viewFocused, this,
         &Konsole::TabbedViewContainer::currentSessionControllerChanged);
 
     disconnect(item, &Konsole::ViewProperties::titleChanged, this,

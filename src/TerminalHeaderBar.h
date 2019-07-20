@@ -39,8 +39,8 @@ public:
     explicit TerminalHeaderBar(QWidget *parent = nullptr);
     void finishHeaderSetup(ViewProperties *properties);
 
-    void terminalFocusIn();
-    void terminalFocusOut();
+public Q_SLOTS:
+    void setFocusIndicatorState(bool focused);
 
 protected:
     void paintEvent(QPaintEvent* paintEvent) override;

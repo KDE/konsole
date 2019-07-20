@@ -1098,30 +1098,16 @@ void Vt102Emulation::sendMouseEvent(int cb, int cx, int cy, int eventType)
 }
 
 /**
- * The focus lost event can be used by Vim (or other terminal applications)
- * to recognize that the konsole window has lost focus.
+ * The focus change event can be used by Vim (or other terminal applications)
+ * to recognize that the konsole window has changed focus.
  * The escape sequence is also used by iTerm2.
  * Vim needs the following plugin to be installed to convert the escape
- * sequence into the FocusLost autocmd: https://github.com/sjl/vitality.vim
+ * sequence into the FocusLost/FocusGained autocmd:
+ * https://github.com/sjl/vitality.vim
  */
-void Vt102Emulation::focusLost()
-{
+void Vt102Emulation::focusChanged(bool focused) {
     if (_reportFocusEvents) {
-        sendString("\033[O");
-    }
-}
-
-/**
- * The focus gained event can be used by Vim (or other terminal applications)
- * to recognize that the konsole window has gained focus again.
- * The escape sequence is also used by iTerm2.
- * Vim needs the following plugin to be installed to convert the escape
- * sequence into the FocusGained autocmd: https://github.com/sjl/vitality.vim
- */
-void Vt102Emulation::focusGained()
-{
-    if (_reportFocusEvents) {
-        sendString("\033[I");
+        sendString(focused ? "\033[I" : "\033[O");
     }
 }
 

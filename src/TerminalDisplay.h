@@ -371,6 +371,11 @@ public:
     /** See setAlternateScrolling() */
     bool alternateScrolling() const;
 
+    bool hasCompositeFocus() const
+    {
+        return _hasCompositeFocus;
+    }
+
 public Q_SLOTS:
     /**
      * Scrolls current ScreenWindow
@@ -546,8 +551,7 @@ Q_SIGNALS:
 
     void sendStringToEmu(const QByteArray &local8BitString);
 
-    void focusLost();
-    void focusGained();
+    void compositeFocusChanged(bool focused);
 
 protected:
     // events
@@ -880,6 +884,8 @@ private:
 
     bool _drawOverlay;
     Qt::Edge _overlayEdge;
+
+    bool _hasCompositeFocus;
 };
 
 class AutoScrollHandler : public QObject
@@ -899,6 +905,29 @@ private:
 
     int _timerId;
 };
+
+// Watches compositeWidget and all its focusable children,
+// and emits focusChanged() signal when either compositeWidget's
+// or a child's focus changed.
+// Limitation: children added after the object was created
+// will not be registered.
+class CompositeWidgetFocusWatcher : public QObject
+{
+    Q_OBJECT
+
+public:
+    explicit CompositeWidgetFocusWatcher(QWidget *compositeWidget, QObject *parent);
+    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
+
+Q_SIGNALS:
+    void compositeFocusChanged(bool focused);
+
+private:
+    void registerWidgetAndChildren(QWidget *widget);
+
+    QWidget *_compositeWidget;
+};
+
 }
 
 #endif // TERMINALDISPLAY_H

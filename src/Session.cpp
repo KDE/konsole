@@ -329,8 +329,7 @@ void Session::addView(TerminalDisplay* widget)
 
     connect(widget, &Konsole::TerminalDisplay::destroyed, this, &Konsole::Session::viewDestroyed);
 
-    connect(widget, &Konsole::TerminalDisplay::focusLost, _emulation, &Konsole::Emulation::focusLost);
-    connect(widget, &Konsole::TerminalDisplay::focusGained, _emulation, &Konsole::Emulation::focusGained);
+    connect(widget, &Konsole::TerminalDisplay::compositeFocusChanged, _emulation, &Konsole::Emulation::focusChanged);
 
     connect(_emulation, &Konsole::Emulation::setCursorStyleRequest, widget, &Konsole::TerminalDisplay::setCursorStyle);
     connect(_emulation, &Konsole::Emulation::resetCursorStyleRequest, widget, &Konsole::TerminalDisplay::resetCursorStyle);

@@ -555,6 +555,16 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     _verticalLayout->setContentsMargins(0, 0, 0, 0);
     setLayout(_verticalLayout);
     new AutoScrollHandler(this);
+
+    // Keep this last
+    auto focusWatcher = new CompositeWidgetFocusWatcher(this, this);
+    connect(focusWatcher, &CompositeWidgetFocusWatcher::compositeFocusChanged,
+            this, [this](bool focused) {_hasCompositeFocus = focused;});
+    connect(focusWatcher, &CompositeWidgetFocusWatcher::compositeFocusChanged,
+            this, &TerminalDisplay::compositeFocusChanged);
+    connect(focusWatcher, &CompositeWidgetFocusWatcher::compositeFocusChanged,
+            _headerBar, &TerminalHeaderBar::setFocusIndicatorState);
+
 #ifndef QT_NO_ACCESSIBILITY
     QAccessible::installFactory(Konsole::accessibleInterfaceFactory);
 #endif
@@ -1826,8 +1836,6 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     Q_ASSERT(!_textBlinking);
 
     _showUrlHint = false;
-    _headerBar->terminalFocusOut();
-    emit focusLost();
 }
 
 void TerminalDisplay::focusInEvent(QFocusEvent*)
@@ -1841,8 +1849,6 @@ void TerminalDisplay::focusInEvent(QFocusEvent*)
     if (_allowBlinkingText && _hasTextBlinker) {
         _blinkTextTimer->start();
     }
-    _headerBar->terminalFocusIn();
-    emit focusGained();
 }
 
 void TerminalDisplay::blinkTextEvent()
@@ -1853,7 +1859,6 @@ void TerminalDisplay::blinkTextEvent()
 
     // TODO: Optimize to only repaint the areas of the widget where there is
     // blinking text rather than repainting the whole widget.
-    _headerBar->terminalFocusOut();
     update();
 }
 
@@ -4025,4 +4030,50 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     // mouse wheel zoom
     _mouseWheelZoom = profile->mouseWheelZoomEnabled();
     setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
+}
+
+//
+// CompositeWidgetFocusWatcher
+//
+
+CompositeWidgetFocusWatcher::CompositeWidgetFocusWatcher(QWidget *compositeWidget, QObject *parent)
+    : QObject(parent)
+    , _compositeWidget(compositeWidget)
+{
+    registerWidgetAndChildren(compositeWidget);
+}
+
+bool CompositeWidgetFocusWatcher::eventFilter(QObject *watched, QEvent *event)
+{
+    Q_UNUSED(watched);
+
+    auto *focusEvent = static_cast<QFocusEvent *>(event);
+    switch(event->type()) {
+    case QEvent::FocusIn:
+        emit compositeFocusChanged(true);
+        break;
+    case QEvent::FocusOut:
+        if(focusEvent->reason() != Qt::PopupFocusReason) {
+            emit compositeFocusChanged(false);
+        }
+        break;
+    default:
+        break;
+    }
+    return false;
+}
+
+void CompositeWidgetFocusWatcher::registerWidgetAndChildren(QWidget *widget)
+{
+    Q_ASSERT(widget != nullptr);
+
+    if (widget->focusPolicy() != Qt::NoFocus) {
+        widget->installEventFilter(this);
+    }
+    for (auto *child: widget->children()) {
+        auto *childWidget = qobject_cast<QWidget *>(child);
+        if (childWidget) {
+            registerWidgetAndChildren(childWidget);
+        }
+    }
 }
