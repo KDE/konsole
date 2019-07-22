@@ -90,10 +90,12 @@ void TerminalHeaderBar::finishHeaderSetup(ViewProperties *properties)
     connect(properties, &Konsole::ViewProperties::titleChanged, this, [this, properties]{
         m_terminalTitle->setText(properties->title());
     });
+    m_terminalTitle->setText(properties->title());
 
     connect(properties, &Konsole::ViewProperties::iconChanged, this, [this, properties] {
         m_terminalIcon->setPixmap(properties->icon().pixmap(QSize(22,22)));
     });
+    m_terminalIcon->setPixmap(properties->icon().pixmap(QSize(22,22)));
 
     connect(properties, &Konsole::ViewProperties::activity, this, [this]{
         m_terminalActivity->setPixmap(QPixmap());
