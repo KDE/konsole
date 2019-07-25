@@ -61,6 +61,8 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     m_terminalTitle->setFont(QApplication::font());
 
     m_terminalIcon = new QLabel(this);
+    m_terminalIcon->setAlignment(Qt::AlignCenter);
+    m_terminalIcon->setFixedSize(m_toggleExpandedMode->sizeHint());
     m_terminalActivity = new QLabel(this);
 
     m_boxLayout = new QBoxLayout(QBoxLayout::LeftToRight);
@@ -68,10 +70,10 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     m_boxLayout->setContentsMargins(0, 0, 0, 0);
 
     // Layout Setup
-    m_boxLayout->addStretch();
     m_boxLayout->addWidget(m_terminalIcon);
-    m_boxLayout->addWidget(m_terminalTitle);
     m_boxLayout->addWidget(m_terminalActivity);
+    m_boxLayout->addStretch();
+    m_boxLayout->addWidget(m_terminalTitle);
     m_boxLayout->addStretch();
     m_boxLayout->addWidget(m_toggleExpandedMode);
     m_boxLayout->addWidget(m_closeBtn);
