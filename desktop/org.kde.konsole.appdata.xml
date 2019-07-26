@@ -107,6 +107,7 @@
     <p xml:lang="pl">Konsola jest terminalem do wykonywania poleceń powłoki. Zapewnia interfejs wiersza poleceń do bezpośredniego sterowania komputerem.</p>
     <p xml:lang="pt">O Konsole é um emulador de terminal para executar uma linha de comandos. Ele oferece uma interface de linha de comandos para controlar directamente o seu computador.</p>
     <p xml:lang="pt-BR">O Konsole é um emulador de terminal para executar uma linha de comandos. Ele oferece uma interface de linha de comandos para controlar diretamente o seu computador.</p>
+    <p xml:lang="ru">Konsole — терминал для работы в командной оболочке. Konsole предоставляет интерфейс командной строки для непосредственного взаимодействия с компьютером.</p>
     <p xml:lang="sk">Konsole je emulátor terminálu, často sa označuje ako terminál alebo shell. Emuluje rozhranie príkazového riadku v textovom okne.</p>
     <p xml:lang="sv">Terminal är en terminal för att köra ett kommandoskal. Det tillhandahåller ett kommandoradsgränssnitt för att direkt styra datorn.</p>
     <p xml:lang="uk">Konsole — це термінал для роботи з командною оболонкою. За її допомогою можна отримати доступ до інтерфейсу командного рядка для керування вашим комп'ютером.</p>
@@ -440,6 +441,7 @@
       <caption xml:lang="pl">Konsole używana jako emulator terminala</caption>
       <caption xml:lang="pt">O Konsole a ser usado como um emulador de terminal</caption>
       <caption xml:lang="pt-BR">Konsole sendo usado como emulador de terminal</caption>
+      <caption xml:lang="ru">Konsole является эмулятором терминала.</caption>
       <caption xml:lang="sk">Konsole používaný ako emulátor terminálu.</caption>
       <caption xml:lang="sl">Program Konsole, ko je uporabljen kot posnemovalnik terminala</caption>
       <caption xml:lang="sv">Terminal används som en terminalemulator.</caption>
