@@ -25,6 +25,8 @@
 #include <QApplication>
 #include <QMimeData>
 
+#include <KAcceleratorManager>
+
 namespace Konsole {
 
 DetachableTabBar::DetachableTabBar(QWidget *parent) :
@@ -36,6 +38,7 @@ DetachableTabBar::DetachableTabBar(QWidget *parent) :
     setAcceptDrops(true);
     setUsesScrollButtons(false);
     setElideMode(Qt::TextElideMode::ElideMiddle);
+    KAcceleratorManager::setNoAccel(this);
 }
 
 void DetachableTabBar::middleMouseButtonClickAt(const QPoint& pos)
