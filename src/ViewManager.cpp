@@ -996,7 +996,8 @@ int ViewManager::newSession()
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    createView(session);
+    auto newView = createView(session);
+    activeContainer()->addView(newView);
     session->run();
 
     return session->sessionId();
@@ -1018,7 +1019,8 @@ int ViewManager::newSession(const QString &profile)
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    createView(session);
+    auto newView = createView(session);
+    activeContainer()->addView(newView);
     session->run();
 
     return session->sessionId();
@@ -1041,7 +1043,8 @@ int ViewManager::newSession(const QString &profile, const QString &directory)
 
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
-    createView(session);
+    auto newView = createView(session);
+    activeContainer()->addView(newView);
     session->run();
 
     return session->sessionId();
