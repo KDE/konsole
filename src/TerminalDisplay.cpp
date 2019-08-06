@@ -725,10 +725,10 @@ void TerminalDisplay::drawCursor(QPainter& painter,
         // draw the cursor outline, adjusting the area so that
         // it is draw entirely inside 'rect'
         int penWidth = qMax(1, painter.pen().width());
-        painter.drawRect(cursorRect.adjusted(penWidth / 2 + 0.5,
-                                             penWidth / 2 + 0.5,
-                                             - penWidth / 2 - penWidth % 2 + 0.5,
-                                             - penWidth / 2 - penWidth % 2 + 0.5));
+        painter.drawRect(cursorRect.adjusted(int(penWidth / 2) + 0.5,
+                                             int(penWidth / 2) + 0.5,
+                                             - int(penWidth / 2) - penWidth % 2 + 0.5,
+                                             - int(penWidth / 2) - penWidth % 2 + 0.5));
 
         // draw the cursor body only when the widget has focus
         if (hasFocus()) {
