@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>384</width>
-    <height>512</height>
+    <width>382</width>
+    <height>418</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -27,285 +27,345 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,1">
-     <property name="spacing">
-      <number>6</number>
+    <widget class="QTabWidget" name="tabs">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-     <item row="2" column="1" colspan="2">
-      <widget class="QRadioButton" name="AlwaysHideTabBar">
-       <property name="text">
-        <string>&amp;Never</string>
+     <widget class="QWidget" name="appearanceTab">
+      <attribute name="title">
+       <string comment="@title:tab Tab bar settings">Appearance</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>0</number>
        </property>
-       <attribute name="buttonGroup">
-        <string notr="true">kcfg_TabBarVisibility</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="16" column="1" colspan="2">
-      <widget class="QCheckBox" name="kcfg_TabBarUseUserStyleSheet">
-       <property name="text">
-        <string>Use user-defined stylesheet:</string>
+       <item>
+        <layout class="QGridLayout" name="appearanceTabLayout" columnstretch="0,0,1">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="showTabBarLabel">
+           <property name="text">
+            <string>Show:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" colspan="2">
+          <widget class="QRadioButton" name="ShowTabBarWhenNeeded">
+           <property name="text">
+            <string>When needed</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">kcfg_TabBarVisibility</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="2">
+          <widget class="QRadioButton" name="AlwaysShowTabBar">
+           <property name="text">
+            <string>Alwa&amp;ys</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">kcfg_TabBarVisibility</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="2" column="1" colspan="2">
+          <widget class="QRadioButton" name="AlwaysHideTabBar">
+           <property name="text">
+            <string>&amp;Never</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">kcfg_TabBarVisibility</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="3" column="1" colspan="2">
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>16</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="positionLabel">
+           <property name="text">
+            <string>Position:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1" colspan="2">
+          <widget class="QRadioButton" name="Bottom">
+           <property name="text">
+            <string>Be&amp;low terminal area</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">kcfg_TabBarPosition</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="5" column="1" colspan="2">
+          <widget class="QRadioButton" name="Top">
+           <property name="text">
+            <string>Above terminal area</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">kcfg_TabBarPosition</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="6" column="1" colspan="2">
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>16</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="7" column="0" alignment="Qt::AlignRight">
+          <widget class="QLabel" name="showCloseTabButtonLabel">
+           <property name="text">
+            <string>Show Close Tab button:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1" colspan="2">
+          <widget class="QRadioButton" name="OnEachTab">
+           <property name="text">
+            <string>&amp;On each tab</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">kcfg_CloseTabButton</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="8" column="1" colspan="2">
+          <widget class="QRadioButton" name="OnTabBar">
+           <property name="text">
+            <string>On &amp;the tab bar</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">kcfg_CloseTabButton</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="9" column="1" colspan="2">
+          <widget class="QRadioButton" name="None">
+           <property name="text">
+            <string comment="Do not show a close button">None</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">kcfg_CloseTabButton</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="10" column="1" colspan="2">
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>16</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="11" column="0">
+          <widget class="QLabel" name="miscellaneousAppearanceLabel">
+           <property name="text">
+            <string comment="@item:intext Miscellaneous Options">Miscellaneous:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="1" colspan="2">
+          <widget class="QCheckBox" name="kcfg_ExpandTabWidth">
+           <property name="text">
+            <string>Expand individual tab widths to full window</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="1" colspan="2">
+          <widget class="QCheckBox" name="kcfg_TabBarUseUserStyleSheet">
+           <property name="text">
+            <string>Use user-defined stylesheet:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="13" column="1">
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>16</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="13" column="2">
+          <widget class="KUrlRequester" name="kcfg_TabBarUserStyleSheetFile">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="filter" stdset="0">
+            <string>text/css</string>
+           </property>
+           <property name="placeholderText" stdset="0">
+            <string comment="@item:intext Optional file path is empty">(none)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="behaviorTab">
+      <attribute name="title">
+       <string comment="@title:tab Tab bar settings">Behavior</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+        <number>0</number>
        </property>
-      </widget>
-     </item>
-     <item row="12" column="1" colspan="2">
-      <widget class="QRadioButton" name="PutNewTabAfterCurrentTab">
-       <property name="text">
-        <string>After c&amp;urrent tab</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">kcfg_NewTabBehavior</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="14" column="1" colspan="2">
-      <widget class="QCheckBox" name="kcfg_CloseTabOnMiddleMouseButton">
-       <property name="text">
-        <string>Close tab on middle-click</string>
-       </property>
-      </widget>
-     </item>
-     <item row="17" column="1">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>16</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="9" column="1" colspan="2">
-      <widget class="QRadioButton" name="None">
-       <property name="text">
-        <string comment="Do not show a close button">None</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">kcfg_CloseTabButton</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="7" column="0" alignment="Qt::AlignRight">
-      <widget class="QLabel" name="showCloseTabButtonLabel">
-       <property name="text">
-        <string>Show Close Tab button:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="17" column="2">
-      <widget class="KUrlRequester" name="kcfg_TabBarUserStyleSheetFile">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="filter" stdset="0">
-        <string>text/css</string>
-       </property>
-       <property name="placeholderText" stdset="0">
-        <string comment="@item:intext Optional file path is empty">(none)</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1" colspan="2">
-      <widget class="QRadioButton" name="OnTabBar">
-       <property name="text">
-        <string>On &amp;the tab bar</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">kcfg_CloseTabButton</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="13" column="2">
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>16</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="7" column="1" colspan="2">
-      <widget class="QRadioButton" name="OnEachTab">
-       <property name="text">
-        <string>On each tab</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">kcfg_CloseTabButton</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="14" column="0" alignment="Qt::AlignRight">
-      <widget class="QLabel" name="miscellaneousLabel">
-       <property name="text">
-        <string comment="@item:intext Miscellaneous Options">Miscellaneous:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="0">
-      <widget class="QLabel" name="putNewTabsLabel">
-       <property name="text">
-        <string>Put new tabs:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="2">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>16</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="positionLabel">
-       <property name="text">
-        <string>Position:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="1" colspan="2">
-      <widget class="QRadioButton" name="PutNewTabAtTheEnd">
-       <property name="text">
-        <string>At the end</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">kcfg_NewTabBehavior</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="0" column="1" colspan="2">
-      <widget class="QRadioButton" name="ShowTabBarWhenNeeded">
-       <property name="text">
-        <string>When needed</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">kcfg_TabBarVisibility</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="1" column="1" colspan="2">
-      <widget class="QRadioButton" name="AlwaysShowTabBar">
-       <property name="text">
-        <string>A&amp;lways</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">kcfg_TabBarVisibility</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="4" column="1" colspan="2">
-      <widget class="QRadioButton" name="Bottom">
-       <property name="text">
-        <string>Below terminal area</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">kcfg_TabBarPosition</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="5" column="1" colspan="2">
-      <widget class="QRadioButton" name="Top">
-       <property name="text">
-        <string>Above terminal area</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">kcfg_TabBarPosition</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="15" column="1" colspan="2">
-      <widget class="QCheckBox" name="kcfg_ExpandTabWidth">
-       <property name="text">
-        <string>Expand individual tab widths to full window</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="2">
-      <spacer name="verticalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>16</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="3" column="2">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>16</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="showTabBarLabel">
-       <property name="text">
-        <string>Show:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <spacer>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>0</height>
-      </size>
-     </property>
-    </spacer>
+       <item>
+        <layout class="QGridLayout" name="behaviorTabLayout" columnstretch="0,0,1">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="putNewTabsLabel">
+           <property name="text">
+            <string>Put new tabs:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" colspan="2">
+          <widget class="QRadioButton" name="PutNewTabAtTheEnd">
+           <property name="text">
+            <string>At &amp;the end</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">kcfg_NewTabBehavior</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="2">
+          <widget class="QRadioButton" name="PutNewTabAfterCurrentTab">
+           <property name="text">
+            <string>After current &amp;tab</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">kcfg_NewTabBehavior</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="2" column="1" colspan="2">
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>16</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="miscellaneousBehaviorLabel">
+           <property name="text">
+            <string comment="@item:intext Miscellaneous Options">Miscellaneous:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1" colspan="2">
+          <widget class="QCheckBox" name="kcfg_CloseTabOnMiddleMouseButton">
+           <property name="text">
+            <string>Close tab on middle-click</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -318,6 +378,7 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>tabs</tabstop>
   <tabstop>ShowTabBarWhenNeeded</tabstop>
   <tabstop>AlwaysShowTabBar</tabstop>
   <tabstop>AlwaysHideTabBar</tabstop>
@@ -326,62 +387,14 @@
   <tabstop>OnEachTab</tabstop>
   <tabstop>OnTabBar</tabstop>
   <tabstop>None</tabstop>
+  <tabstop>kcfg_ExpandTabWidth</tabstop>
+  <tabstop>kcfg_TabBarUseUserStyleSheet</tabstop>
   <tabstop>PutNewTabAtTheEnd</tabstop>
   <tabstop>PutNewTabAfterCurrentTab</tabstop>
   <tabstop>kcfg_CloseTabOnMiddleMouseButton</tabstop>
-  <tabstop>kcfg_ExpandTabWidth</tabstop>
-  <tabstop>kcfg_TabBarUseUserStyleSheet</tabstop>
  </tabstops>
  <resources/>
  <connections>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>kcfg_TabBarUseUserStyleSheet</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>141</x>
-     <y>420</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>PutNewTabAfterCurrentTab</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>141</x>
-     <y>320</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>kcfg_CloseTabOnMiddleMouseButton</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>141</x>
-     <y>368</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>AlwaysHideTabBar</sender>
    <signal>toggled(bool)</signal>
@@ -389,12 +402,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>141</x>
-     <y>246</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -405,12 +418,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>21</x>
-     <y>194</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -421,12 +434,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>141</x>
-     <y>220</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -437,12 +450,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>141</x>
-     <y>146</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -453,44 +466,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>141</x>
-     <y>194</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>miscellaneousLabel</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>63</x>
-     <y>368</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>putNewTabsLabel</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>21</x>
-     <y>294</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -501,28 +482,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>21</x>
-     <y>120</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>PutNewTabAtTheEnd</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>141</x>
-     <y>294</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -533,12 +498,28 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>141</x>
-     <y>120</y>
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>miscellaneousAppearanceLabel</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -549,20 +530,84 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>141</x>
-     <y>72</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>141</x>
-     <y>394</y>
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_TabBarUseUserStyleSheet</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>kcfg_TabBarUseUserStyleSheet</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_TabBarUserStyleSheetFile</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_CloseTabOnMiddleMouseButton</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>miscellaneousBehaviorLabel</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="kcfg_TabBarPosition"/>
-  <buttongroup name="kcfg_NewTabBehavior"/>
   <buttongroup name="kcfg_TabBarVisibility"/>
+  <buttongroup name="kcfg_NewTabBehavior"/>
   <buttongroup name="kcfg_CloseTabButton"/>
+  <buttongroup name="kcfg_TabBarPosition"/>
  </buttongroups>
 </ui>

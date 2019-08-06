@@ -103,14 +103,10 @@ public:
 
     void addChildren(const QObject *parentObj)
     {
-        for (const QObject *child: parentObj->children()) {
-            if (!child->objectName().startsWith(ManagedNamePrefix)) {
-                continue;
-            }
-
-            const char *className = child->metaObject()->className();
-            if (qstrcmp(className, "QButtonGroup") == 0) {
-                add(qobject_cast<const QButtonGroup *>(child));
+        const auto allButtonGroups = parentObj->findChildren<QButtonGroup *>();
+        for (const auto *buttonGroup: allButtonGroups) {
+            if (buttonGroup->objectName().startsWith(ManagedNamePrefix)) {
+                add(buttonGroup);
             }
         }
     }
