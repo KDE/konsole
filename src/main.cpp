@@ -29,6 +29,7 @@
 #include <qplatformdefs.h>
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QProxyStyle>
 #include <QStandardPaths>
 #include <QDir>
 
@@ -63,6 +64,21 @@ void deleteQApplication()
     }
 }
 
+// This override resolves following problem: since some qt version if
+// XDG_CURRENT_DESKTOP ≠ kde, then pressing and immediately releasing Alt
+// key makes focus get stuck in QMenu.
+// Upstream report: https://bugreports.qt.io/browse/QTBUG-77355
+class MenuStyle : public QProxyStyle {
+public:
+    int styleHint(const StyleHint stylehint,
+                  const QStyleOption *opt,
+                  const QWidget *widget,
+                  QStyleHintReturn *returnData) const override {
+        return (stylehint == QStyle::SH_MenuBar_AltKeyNavigation)
+            ? 0 : QProxyStyle::styleHint(stylehint, opt, widget, returnData);
+    }
+};
+
 // ***
 // Entry point into the Konsole terminal application.
 // ***
@@ -88,6 +104,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
 #endif
 
     auto app = new QApplication(argc, argv);
+    app->setStyle(new MenuStyle());
 
 #if defined(Q_OS_LINUX) && (QT_VERSION < QT_VERSION_CHECK(5, 11, 2))
     if (qtUseGLibOld.isNull()) {
