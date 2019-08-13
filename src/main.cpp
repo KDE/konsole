@@ -32,6 +32,7 @@
 #include <QProxyStyle>
 #include <QStandardPaths>
 #include <QDir>
+#include <memory>
 
 // KDE
 #include <KAboutData>
@@ -103,7 +104,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
     qputenv("QT_NO_GLIB", "1");
 #endif
 
-    auto app = new QApplication(argc, argv);
+    // Allocate QApplication on the heap for the KDBusService workaround
+    auto app = std::unique_ptr<QApplication>(new QApplication(argc, argv));
     app->setStyle(new MenuStyle());
 
 #if defined(Q_OS_LINUX) && (QT_VERSION < QT_VERSION_CHECK(5, 11, 2))
@@ -219,15 +221,11 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
         // 2. An invalid situation occurred
         const bool continueStarting = (konsoleApp.newInstance() != 0);
         if (!continueStarting) {
-            delete app;
             return 0;
         }
     }
 
-    // Since we've allocated the QApplication on the heap for the KDBusService workaround,
-    // we need to delete it manually before returning from main().
     int ret = app->exec();
-    delete app;
     return ret;
 }
 
