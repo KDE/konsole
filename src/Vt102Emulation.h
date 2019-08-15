@@ -151,7 +151,7 @@ private:
     void reportDecodingError();
 
     void processToken(int code, int p, int q);
-    void processSessionAttributeRequest();
+    void processSessionAttributeRequest(int tokenSize);
 
     void reportTerminalType();
     void reportSecondaryAttributes();
