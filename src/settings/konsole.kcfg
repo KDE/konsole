@@ -149,4 +149,10 @@
       <default></default>
     </entry>
   </group>
+  <group name="Security">
+    <entry name="AllowSendTextAndRunCommandDBusMethods" type="Bool">
+      <label>Allow sendText and runCommand DBus methods</label>
+      <default>true</default>
+    </entry>
+  </group>
 </kcfg>

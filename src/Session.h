@@ -490,20 +490,12 @@ public Q_SLOTS:
      */
     void sendTextToTerminal(const QString &text, const QChar &eol = QChar()) const;
 
-#if defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
-    void sendText(const QString &text) const;
-#else
     Q_SCRIPTABLE void sendText(const QString &text) const;
-#endif
 
     /**
      * Sends @p command to the current foreground terminal program.
      */
-#if defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
-    void runCommand(const QString &command) const;
-#else
     Q_SCRIPTABLE void runCommand(const QString &command) const;
-#endif
 
     /**
      * Sends a mouse event of type @p eventType emitted by button

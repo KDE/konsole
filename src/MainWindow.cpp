@@ -61,6 +61,7 @@
 #include "settings/TemporaryFilesSettings.h"
 #include "settings/GeneralSettings.h"
 #include "settings/ProfileSettings.h"
+#include "settings/SecuritySettings.h"
 #include "settings/TabBarSettings.h"
 
 using namespace Konsole;
@@ -745,6 +746,11 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
     auto profilePage = new KPageWidgetItem(new ProfileSettings(confDialog), profilePageName);
     profilePage->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
     confDialog->addPage(profilePage, true);
+
+    const QString securityPageName = i18nc("@title Security page name", "Security");
+    auto securityPage = new KPageWidgetItem(new SecuritySettings(confDialog), securityPageName);
+    securityPage->setIcon(QIcon::fromTheme(QStringLiteral("preferences-security")));
+    confDialog->addPage(securityPage, true);
 
     const QString tabBarPageName = i18nc("@title Preferences page name", "Tab Bar");
     auto tabBarPage = new KPageWidgetItem(new TabBarSettings(confDialog), tabBarPageName);

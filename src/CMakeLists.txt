@@ -26,9 +26,6 @@ if(BUILD_TESTING)
   add_subdirectory(tests)
 endif()
 
-### Security concerns about sendText and runCommand dbus methods being public
-option(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS "Konsole: remove sendText and runCommand dbus methods" OFF)
-
 ### Development tools
 option(KONSOLE_BUILD_UNI2CHARACTERWIDTH "Konsole: build uni2characterwidth executable" OFF)
 
@@ -155,6 +152,7 @@ ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 settings/GeneralSettings.ui
                                 settings/PartInfo.ui
                                 settings/ProfileSettings.ui
+                                settings/SecuritySettings.ui
                                 settings/TabBarSettings.ui)
 
 # add the resource files for the ui files
@@ -179,6 +177,7 @@ set(konsole_KDEINIT_SRCS
    settings/TemporaryFilesSettings.cpp
    settings/GeneralSettings.cpp
    settings/ProfileSettings.cpp
+   settings/SecuritySettings.cpp
    settings/TabBarSettings.cpp)
 
 

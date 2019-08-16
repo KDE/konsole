@@ -23,6 +23,7 @@
 
 // Own
 #include "Session.h"
+#include "config-konsole.h"
 
 // Standard
 #include <cstdlib>
@@ -48,6 +49,7 @@
 // Konsole
 #include <sessionadaptor.h>
 
+#include "KonsoleSettings.h"
 #include "ProcessInfo.h"
 #include "Pty.h"
 #include "TerminalDisplay.h"
@@ -909,15 +911,9 @@ void Session::sendText(const QString& text) const
         return;
     }
 
-#if !defined(REMOVE_SENDTEXT_RUNCOMMAND_DBUS_METHODS)
-    if (show_disallow_certain_dbus_methods_message) {
-
-        KNotification::event(KNotification::Warning, QStringLiteral("Konsole D-Bus Warning"),
-            i18n("The D-Bus methods sendText/runCommand were just used.  There are security concerns about allowing these methods to be public.  If desired, these methods can be changed to internal use only by re-compiling Konsole. <p>This warning will only show once for this Konsole instance.</p>"));
-
-        show_disallow_certain_dbus_methods_message = false;
-    }
-#endif
+     if (!KonsoleSettings::allowSendTextAndRunCommandDBusMethods()) {
+        return;
+     }
 
     _emulation->sendText(text);
 }
