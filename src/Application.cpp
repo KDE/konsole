@@ -136,7 +136,7 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
     auto titleOption = QCommandLineOption({ QStringLiteral("T") },
                                           QStringLiteral("Debian policy compatibility, not used"),
                                           QStringLiteral("value"));
-    titleOption.setHidden(true);
+    titleOption.setFlags(QCommandLineOption::HiddenFromHelp);
     parser->addOption(titleOption);
 }
 
