@@ -774,9 +774,10 @@ void ViewManager::viewDestroyed(QWidget *view)
 TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
 {
     auto display = new TerminalDisplay(nullptr);
-    display->setRandomSeed(session->sessionId() * 31);
+    display->setRandomSeed(session->sessionId() | (qApp->applicationPid() << 10));
     connect(display, &TerminalDisplay::requestToggleExpansion,
             _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal);
+
     return display;
 }
 

@@ -1,12 +1,20 @@
 [Background]
 Color=247,247,214
-MaxRandomHue=340
+RandomHueRange=360
+RandomSaturationRange=25
+RandomLightnessRange=10
 
 [BackgroundIntense]
 Color=255,255,221
+RandomHueRange=360
+RandomSaturationRange=25
+RandomLightnessRange=10
 
 [BackgroundFaint]
 Color=247,247,214
+RandomHueRange=360
+RandomSaturationRange=25
+RandomLightnessRange=10
 
 [Color0]
 Color=0,0,0
@@ -92,4 +100,5 @@ Color=0,0,0
 
 [General]
 Description=Black on Random Light
+ColorRandomization=true
 Opacity=1

@@ -258,7 +258,7 @@ void ColorSchemeEditor::setBlur(bool blur)
 
 void ColorSchemeEditor::setRandomizedBackgroundColor(bool randomized)
 {
-    _colors->setRandomizedBackgroundColor(randomized);
+    _colors->setColorRandomization(randomized);
 }
 
 void ColorSchemeEditor::setup(const ColorScheme *scheme, bool isNewScheme)
@@ -291,7 +291,7 @@ void ColorSchemeEditor::setup(const ColorScheme *scheme, bool isNewScheme)
     _ui->blurCheckBox->setChecked(scheme->blur());
 
     // randomized background color checkbox
-    _ui->randomizedBackgroundCheck->setChecked(scheme->randomizedBackgroundColor());
+    _ui->randomizedBackgroundCheck->setChecked(scheme->isColorRandomizationEnabled());
 
     // wallpaper stuff
     _ui->wallpaperPath->setText(scheme->wallpaper()->path());

@@ -51,6 +51,7 @@ qt5_add_dbus_adaptor(windowadaptors_SRCS
 
 set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ${windowadaptors_SRCS}
+                        hsluv.c
                         BookmarkHandler.cpp
                         ColorScheme.cpp
                         ColorSchemeManager.cpp

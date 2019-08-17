@@ -45,8 +45,12 @@
    </item>
    <item>
     <widget class="QCheckBox" name="randomizedBackgroundCheck">
+     <property name="toolTip">
+      <string>Hue and saturation values of default foreground and background colors are randomized by default. Some color schemes might use different randomization settings.
+To see any effect, set colors with saturation value greater than 0.</string>
+     </property>
      <property name="text">
-      <string>Vary the background color for each tab</string>
+      <string>Randomly adjust colors for each session</string>
      </property>
     </widget>
    </item>
