@@ -962,7 +962,7 @@ bool EditProfileDialog::eventFilter(QObject *watched, QEvent *event)
 QSize EditProfileDialog::sizeHint() const
 {
     QFontMetrics fm(font());
-    const int ch = fm.width(QLatin1Char('0'));
+    const int ch = fm.boundingRect(QLatin1Char('0')).width();
 
     // By default minimum size is used. Increase it to make text inputs
     // on "tabs" page wider and to add some whitespace on right side
@@ -1736,10 +1736,10 @@ int EditProfileDialog::maxSpinBoxWidth(const KPluralHandlingSpinBox *spinBox, co
     const QString singular  = suffix.subs(1).toString();
     const QString min       = QString::number(spinBox->minimum());
     const QString max       = QString::number(spinBox->maximum());
-    const int pluralWidth   = fm.width(plural);
-    const int singularWidth = fm.width(singular);
-    const int minWidth      = fm.width(min);
-    const int maxWidth      = fm.width(max);
+    const int pluralWidth   = fm.boundingRect(plural).width();
+    const int singularWidth = fm.boundingRect(singular).width();
+    const int minWidth      = fm.boundingRect(min).width();
+    const int maxWidth      = fm.boundingRect(max).width();
     const int width         = qMax(pluralWidth, singularWidth) + qMax(minWidth, maxWidth) + cursorWidth;
 
     // Based on QAbstractSpinBox::initStyleOption() from Qt
@@ -1905,7 +1905,7 @@ void ColorSchemeViewDelegate::paint(QPainter *painter, const QStyleOptionViewIte
     // Determine width of sample text using profile's font
     const QString sampleText = i18n("AaZz09...");
     QFontMetrics profileFontMetrics(profileFont);
-    const int sampleTextWidth = profileFontMetrics.width(sampleText);
+    const int sampleTextWidth = profileFontMetrics.boundingRect(sampleText).width();
 
     painter->drawText(option.rect.adjusted(sampleTextWidth + 15, 0, 0, 0),
                       Qt::AlignLeft | Qt::AlignVCenter,
