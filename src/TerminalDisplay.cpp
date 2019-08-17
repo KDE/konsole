@@ -223,6 +223,13 @@ void TerminalDisplay::fontChange(const QFont&)
 
     Q_ASSERT(_fontHeight > 0);
 
+    /* TODO: When changing the three deprecated width() below
+     *       consider the info in
+     *       https://phabricator.kde.org/D23144 comments
+     *       horizontalAdvance() was added in Qt 5.11 (which should be the
+     *       minimum for 20.04 or 20.08 KDE Applications release)
+     */
+
     // waba TerminalDisplay 1.123:
     // "Base character width on widest ASCII character. This prevents too wide
     //  characters in the presence of double wide (e.g. Japanese) characters."
