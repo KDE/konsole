@@ -87,7 +87,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget *parent) :
 
     // transparency slider
     QFontMetrics metrics(font());
-    _ui->transparencyPercentLabel->setMinimumWidth(metrics.width(QStringLiteral("100%")));
+    _ui->transparencyPercentLabel->setMinimumWidth(metrics.boundingRect(QStringLiteral("100%")).width());
 
     connect(_ui->transparencySlider, &QSlider::valueChanged, this,
             &Konsole::ColorSchemeEditor::setTransparencyPercentLabel);

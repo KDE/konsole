@@ -1251,7 +1251,7 @@ void TerminalDisplay::showResizeNotification()
     if (_showTerminalSizeHint && isVisible()) {
         if (_resizeWidget == nullptr) {
             _resizeWidget = new QLabel(i18n("Size: XXX x XXX"), this);
-            _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().width(i18n("Size: XXX x XXX")));
+            _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().boundingRect(i18n("Size: XXX x XXX")).width());
             _resizeWidget->setMinimumHeight(_resizeWidget->sizeHint().height());
             _resizeWidget->setAlignment(Qt::AlignCenter);
 

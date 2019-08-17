@@ -509,7 +509,7 @@ QSize Konsole::ShortcutItemDelegate::sizeHint(const QStyleOptionViewItem &option
     QFontMetrics fm = option.fontMetrics;
 
     static const int editorMargins = 16; // chosen empirically
-    const int width = fm.width(shortcutString + QStringLiteral(", ..."))
+    const int width = fm.boundingRect(shortcutString + QStringLiteral(", ...")).width()
                       + editorMargins;
 
     return {width, QStyledItemDelegate::sizeHint(option, index).height()};
