@@ -17,6 +17,18 @@ set (KF5_MIN_VERSION "5.6.0")
 # Release script will create bugzilla versions
 project(konsole VERSION ${KDE_APPLICATIONS_VERSION})
 
+find_program(CCACHE_FOUND "ccache")
+set(CCACHE_SUPPORT ON CACHE BOOL "Enable ccache support")
+if (CCACHE_FOUND AND CCACHE_SUPPORT)
+  if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" # GNU is GNU GCC
+      OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    # without this compiler messages in `make` backend would be uncolored
+    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fdiagnostics-color=auto")
+  endif()
+  set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "ccache")
+  set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK "ccache")
+endif(CCACHE_FOUND)
+
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
