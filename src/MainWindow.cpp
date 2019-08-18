@@ -644,14 +644,13 @@ bool MainWindow::queryClose()
     case KMessageBox::Yes:
         return true;
     case KMessageBox::No:
-/* HACK FIXME This currently crashes when clicking "Close Current Tab"
- * for now just comment it out
- * https://bugs.kde.org/show_bug.cgi?id=410607
         if ((!_pluggedController.isNull()) && (!_pluggedController->session().isNull())) {
-            disconnectController(_pluggedController);
-            _pluggedController->session()->closeInNormalWay();
+            if (!(_pluggedController->session()->closeInNormalWay())) {
+                if (_pluggedController->confirmForceClose()) {
+                    _pluggedController->session()->closeInForceWay();
+                }
+            }
         }
- */
         return false;
     case KMessageBox::Cancel:
         return false;
