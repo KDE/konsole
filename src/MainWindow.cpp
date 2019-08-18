@@ -666,8 +666,11 @@ bool MainWindow::queryClose()
         return true;
     case KMessageBox::No:
         if ((!_pluggedController.isNull()) && (!_pluggedController->session().isNull())) {
-            disconnectController(_pluggedController);
-            _pluggedController->session()->closeInNormalWay();
+            if (!(_pluggedController->session()->closeInNormalWay())) {
+                if (_pluggedController->confirmForceClose()) {
+                    _pluggedController->session()->closeInForceWay();
+                }
+            }
         }
         return false;
     case KMessageBox::Cancel:
