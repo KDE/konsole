@@ -263,7 +263,7 @@ void Vt102Emulation::addArgument()
     argv[argc] = 0;
 }
 
-void Vt102Emulation::addToCurrentToken(int cc)
+void Vt102Emulation::addToCurrentToken(uint cc)
 {
     tokenBuffer[tokenBufferPos] = cc;
     tokenBufferPos = qMin(tokenBufferPos + 1, MAX_TOKEN_LENGTH - 1);
@@ -382,7 +382,8 @@ void Vt102Emulation::receiveChar(uint cc)
   // advance the state
   addToCurrentToken(cc);
 
-  int* s = tokenBuffer;
+
+  uint* s = tokenBuffer;
   const int  p = tokenBufferPos;
 
   if (getMode(MODE_Ansi))
@@ -1498,7 +1499,7 @@ char Vt102Emulation::eraseChar() const
 }
 
 // return contents of the scan buffer
-static QString hexdump2(int *s, int len)
+static QString hexdump2(uint *s, int len)
 {
     int i;
     char dump[128];
