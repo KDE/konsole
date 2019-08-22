@@ -18,8 +18,8 @@
   along with this program. If not, see http://www.gnu.org/licenses/.
 */
 
-#ifndef FILELOCATIONSETTINGS_H
-#define FILELOCATIONSETTINGS_H
+#ifndef TEMPORARYFILESSETTINGS_H
+#define TEMPORARYFILESSETTINGS_H
 
 #include "ui_TemporaryFilesSettings.h"
 
