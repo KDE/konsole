@@ -255,7 +255,7 @@ static bool drawBasicLineCharacter(QPainter& paint, int x, int y, int w, int h, 
     // Process all single up-down/left-right lines for every character that has them. Doing it here
     // reduces amount of combinations below.
     // Fully draws: ╋ ╂ ┃ ┿ ┼ │ ━ ─
-    for (unsigned topIndex = 0; topIndex < LinesNum/2; topIndex++) {
+    for (unsigned int topIndex = 0; topIndex < LinesNum/2; topIndex++) {
         unsigned iB = (topIndex + 2) % LinesNum;
         const bool isSingleLine = (getLineType(topIndex) == LtLight
                                 || getLineType(topIndex) == LtHeavy);
