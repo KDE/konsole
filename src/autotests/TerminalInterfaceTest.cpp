@@ -26,7 +26,6 @@
 // Qt
 #include <QDir>
 #include <QSignalSpy>
-#include <QTimer>
 
 // KDE
 #include <KService>

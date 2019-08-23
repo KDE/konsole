@@ -22,11 +22,8 @@
 #include "TerminalCharacterDecoderTest.h"
 
 // Qt
-#include <QStringList>
 #include <QTextStream>
 
-#include <QFile>
-#include <QXmlSimpleReader>
 
 // KDE
 #include <qtest.h>

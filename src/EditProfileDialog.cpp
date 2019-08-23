@@ -31,15 +31,12 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QIcon>
-#include <QLinearGradient>
 #include <QPainter>
 #include <QPushButton>
-#include <QRadialGradient>
 #include <QStandardItem>
 #include <QTextCodec>
 #include <QTimer>
 #include <QUrl>
-#include <QVBoxLayout>
 #include <QStandardPaths>
 
 // KDE

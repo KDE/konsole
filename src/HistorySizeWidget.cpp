@@ -24,7 +24,6 @@
 // Qt
 #include <QButtonGroup>
 #include <QAbstractButton>
-#include <QToolTip>
 #include <QWhatsThis>
 
 #include <KLocalizedString>

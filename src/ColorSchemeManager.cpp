@@ -26,7 +26,6 @@
 #include "konsoledebug.h"
 
 // Qt
-#include <QIODevice>
 #include <QFileInfo>
 #include <QFile>
 #include <QDir>

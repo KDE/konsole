@@ -20,11 +20,9 @@
 #include "ZModemDialog.h"
 
 // KDE
-#include <KLocalizedString>
 #include <KTextEdit>
 #include <QDialogButtonBox>
 #include <QPushButton>
-#include <KGuiItem>
 #include <QVBoxLayout>
 
 using Konsole::ZModemDialog;

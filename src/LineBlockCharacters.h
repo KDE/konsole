@@ -24,7 +24,6 @@
 
 // Qt
 #include <QPainter>
-#include <QtGlobal>
 
 namespace Konsole {
 

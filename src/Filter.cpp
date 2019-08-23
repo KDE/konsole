@@ -27,7 +27,6 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QDir>
-#include <QFile>
 #include <QMimeDatabase>
 #include <QString>
 #include <QTextStream>

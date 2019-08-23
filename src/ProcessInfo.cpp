@@ -35,7 +35,6 @@
 // Qt
 #include <QDir>
 #include <QFileInfo>
-#include <QFlags>
 #include <QTextStream>
 #include <QStringList>
 #include <QHostInfo>

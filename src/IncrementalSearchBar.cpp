@@ -22,14 +22,11 @@
 
 // Qt
 #include <QHBoxLayout>
-#include <QLabel>
 #include <QKeyEvent>
 #include <QTimer>
 #include <QToolButton>
 #include <QMenu>
 #include <QApplication>
-#include <QPaintEvent>
-#include <QPainter>
 
 // KDE
 #include <KColorScheme>

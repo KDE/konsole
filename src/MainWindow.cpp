@@ -21,7 +21,6 @@
 #include "MainWindow.h"
 
 // Qt
-#include <QVBoxLayout>
 #include <QMouseEvent>
 
 // KDE
@@ -30,8 +29,6 @@
 #include <KActionMenu>
 #include <KShortcutsDialog>
 #include <KLocalizedString>
-#include <KToggleAction>
-#include <KToggleFullScreenAction>
 #include <KWindowEffects>
 
 #include <QMenu>
@@ -42,7 +39,6 @@
 #include <KWindowSystem>
 #include <KXMLGUIFactory>
 #include <KNotifyConfigWidget>
-#include <KConfigDialog>
 #include <KIconLoader>
 
 // Konsole

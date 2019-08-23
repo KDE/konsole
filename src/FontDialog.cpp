@@ -26,7 +26,6 @@
 
 // KDE
 #include <KLocalizedString>
-#include <KMessageBox>
 
 using namespace Konsole;
 

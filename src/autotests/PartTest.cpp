@@ -29,7 +29,6 @@
 // KDE
 #include <KPluginLoader>
 #include <KPluginFactory>
-#include <KService>
 #include <KParts/Part>
 #include <KPtyProcess>
 #include <KPtyDevice>

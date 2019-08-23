@@ -27,10 +27,7 @@
 #include <QTabBar>
 #include <QMenu>
 #include <QFile>
-#include <QMouseEvent>
-#include <QDragEnterEvent>
-#include <QDropEvent>
-#include <QDrag>
+#include <QKeyEvent>
 
 // KDE
 #include <KColorScheme>

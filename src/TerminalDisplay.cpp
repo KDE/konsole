@@ -34,7 +34,6 @@
 #include <QFileInfo>
 #include <QVBoxLayout>
 #include <QAction>
-#include <QFontDatabase>
 #include <QLabel>
 #include <QMimeData>
 #include <QPainter>

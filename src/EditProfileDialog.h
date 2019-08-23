@@ -29,7 +29,6 @@
 #include <QWidget>
 #include <QGridLayout>
 #include <QCheckBox>
-#include <QSpinBox>
 
 // KDE
 #include <KPageDialog>

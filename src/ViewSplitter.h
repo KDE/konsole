@@ -23,7 +23,6 @@
 #define VIEWSPLITTER_H
 
 // Qt
-#include <QList>
 #include <QSplitter>
 
 // Konsole

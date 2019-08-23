@@ -25,7 +25,6 @@
 #include <QFileInfo>
 #include <QCompleter>
 #include <QFileSystemModel>
-#include <QUrl>
 #include <QIcon>
 #include <QFileDialog>
 #include <QImageReader>

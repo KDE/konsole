@@ -35,7 +35,6 @@
 // KDE
 #include <KPageDialog>
 #include <KCoreConfigSkeleton>
-#include <QDebug>
 
 // Konsole
 #include "konsoleprivate_export.h"

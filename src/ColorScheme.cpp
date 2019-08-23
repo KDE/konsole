@@ -25,7 +25,6 @@
 
 // Qt
 #include <QPainter>
-#include <QVariant>
 
 // KDE
 #include <KConfig>

@@ -27,7 +27,6 @@
 #include <QTabBar>
 
 // KDE
-#include <KAcceleratorManager>
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KConfigGroup>

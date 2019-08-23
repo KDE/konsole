@@ -24,7 +24,6 @@
 
 // Qt
 #include <QObject>
-#include <QList>
 #include <QTabWidget>
 
 // Konsole

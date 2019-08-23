@@ -29,9 +29,7 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QString>
-#include <QStringBuilder>
 #include <QTextStream>
-#include <QTimer>
 #include "template.h"
 
 #include <KIO/Job>

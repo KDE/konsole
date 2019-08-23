@@ -28,11 +28,7 @@
 #include <KLocalizedString>
 #include <QBoxLayout>
 #include <QToolButton>
-#include <QMenu>
 #include <QLabel>
-#include <QAction>
-#include <KToolBarLabelAction>
-#include <QDebug>
 #include <QApplication>
 #include <QPaintEvent>
 #include <QTabBar>

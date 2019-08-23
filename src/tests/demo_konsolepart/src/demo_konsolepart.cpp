@@ -28,7 +28,6 @@
 #include <KPluginLoader>
 #include <KPluginFactory>
 #include <KService>
-#include <KStandardAction>
 #include <KWindowSystem>
 #include <KWindowEffects>
 

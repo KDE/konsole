@@ -20,9 +20,7 @@
 */
 
 #include <QDebug>
-#include <QMap>
 #include <QString>
-#include <QVector>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include "template.h"

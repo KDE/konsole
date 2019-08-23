@@ -23,13 +23,10 @@
 #include "ViewSplitter.h"
 
 // Qt
-#include <QDebug>
 #include <QChildEvent>
-#include <QScrollBar>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QDragMoveEvent>
-#include <QMimeType>
 #include <QMimeData>
 #include <QApplication>
 #include <memory>
