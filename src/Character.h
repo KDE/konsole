@@ -28,6 +28,7 @@
 #include "CharacterWidth.h"
 
 // Qt
+#include <QVector>
 
 namespace Konsole {
 typedef unsigned char LineProperty;
