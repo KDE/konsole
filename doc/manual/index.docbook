@@ -1013,6 +1013,7 @@ These changes can be made permanent by editing the current profile.
 <listitem><para>%D : current directory (long)</para></listitem>
 <listitem><para>%h : local host (short)</para></listitem>
 <listitem><para>%u : user name</para></listitem>
+<listitem><para>%B : user's Bourne prompt sigil ($ = normal user, # = superuser)</para></listitem>
 <listitem><para>%w : window title set by shell</para></listitem>
 <listitem><para>%# : session number</para></listitem>
 </itemizedlist>

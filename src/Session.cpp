@@ -1115,6 +1115,7 @@ QString Session::getDynamicTitle()
      * <br>
      * The markers recognized are:
      * <ul>
+     * <li> %B - User's Bourne prompt sigil ($, or # for superuser). </li>
      * <li> %u - Name of the user which owns the process. </li>
      * <li> %n - Replaced with the name of the process.   </li>
      * <li> %d - Replaced with the last part of the path name of the
@@ -1128,6 +1129,20 @@ QString Session::getDynamicTitle()
      */
     QString title = tabTitleFormat(Session::LocalTabTitle);
     // search for and replace known marker
+
+    int UID = process->userId(&ok);
+    if(!ok) {
+        title.replace(QLatin1String("%B"), QStringLiteral("-"));
+    } else {
+        //title.replace(QLatin1String("%I"), QString::number(UID));
+        if (UID == 0) {
+            title.replace(QLatin1String("%B"), QStringLiteral("#"));
+        } else {
+            title.replace(QLatin1String("%B"), QStringLiteral("$"));
+        }
+    }
+
+
     title.replace(QLatin1String("%u"), process->userName());
     title.replace(QLatin1String("%h"), Konsole::ProcessInfo::localHost());
     title.replace(QLatin1String("%n"), process->name(&ok));
@@ -1143,17 +1158,15 @@ QString Session::getDynamicTitle()
         title.replace(QLatin1String("%d"), QStringLiteral("-"));
         title.replace(QLatin1String("%D"), QStringLiteral("-"));
     } else {
-        if (title.contains(QLatin1String("%D"))) {
-            const QString homeDir = process->userHomeDir();
-            if (!homeDir.isEmpty()) {
-                // Change User's Home Dir w/ ~ only at the beginning
-                if (dir.startsWith(homeDir)) {
-                    dir.remove(0, homeDir.length());
-                    dir.prepend(QLatin1Char('~'));
-                }
+        // allow for shortname to have the ~ as homeDir
+        const QString homeDir = process->userHomeDir();
+        if (!homeDir.isEmpty()) {
+            if (dir.startsWith(homeDir)) {
+                dir.remove(0, homeDir.length());
+                dir.prepend(QLatin1Char('~'));
             }
-            title.replace(QLatin1String("%D"), dir);
         }
+        title.replace(QLatin1String("%D"), dir);
         title.replace(QLatin1String("%d"), process->formatShortDir(dir));
     }
 
