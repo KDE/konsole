@@ -325,7 +325,7 @@ ColorEntry ColorScheme::colorEntry(int index, uint randomSeed) const
     double red, green, blue;
     hsluv2rgb(hue, saturation, lightness, &red, &green, &blue);
 
-    return QColor(qRound(red * 255), qRound(green * 255), qRound(blue * 255));
+    return {qRound(red * 255), qRound(green * 255), qRound(blue * 255)};
 }
 
 void ColorScheme::getColorTable(ColorEntry *table, uint randomSeed) const

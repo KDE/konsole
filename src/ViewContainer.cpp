@@ -302,8 +302,8 @@ QSize TabbedViewContainer::sizeHint() const
     //
     // L/R = left/right widget
 
-    return QSize(qMax(terminalSize.width(), tabBarSize.width()),
-                 tabBarSize.height() + terminalSize.height());
+    return {qMax(terminalSize.width(), tabBarSize.width()),
+                 tabBarSize.height() + terminalSize.height()};
 }
 
 void TabbedViewContainer::addSplitter(ViewSplitter *viewSplitter, int index) {
