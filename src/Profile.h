@@ -62,8 +62,8 @@ class KONSOLEPRIVATE_EXPORT Profile : public QSharedData
     friend class ProfileGroup;
 
 public:
-    typedef QExplicitlySharedDataPointer<Profile> Ptr;
-    typedef QExplicitlySharedDataPointer<ProfileGroup> GroupPtr;
+    using Ptr = QExplicitlySharedDataPointer<Profile>;
+    using GroupPtr = QExplicitlySharedDataPointer<ProfileGroup>;
 
     /**
      * This enum describes the available properties
@@ -707,7 +707,7 @@ inline QVariant Profile::property(Property p) const
 class KONSOLEPRIVATE_EXPORT ProfileGroup : public Profile
 {
 public:
-    typedef QExplicitlySharedDataPointer<ProfileGroup> Ptr;
+    using Ptr = QExplicitlySharedDataPointer<ProfileGroup>;
 
     /** Construct a new profile group, which is hidden by default. */
     explicit ProfileGroup(const Profile::Ptr &profileParent = Profile::Ptr());
