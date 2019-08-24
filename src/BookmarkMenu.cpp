@@ -42,6 +42,7 @@ BookmarkMenu::BookmarkMenu (KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu 
 void BookmarkMenu::maybeAddBookmark()
 {
     // Check for duplicates first
+    // This only catches duplicates in top-level (ie not sub-folders)
     const KBookmarkGroup rootGroup = manager()->root();
     const QUrl currUrl = owner()->currentUrl();
     for (const QUrl &url : rootGroup.groupUrlList()) {
