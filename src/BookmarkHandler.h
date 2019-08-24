@@ -33,7 +33,6 @@
 #include "konsoleprivate_export.h"
 
 class QMenu;
-class KBookmarkMenu;
 class KActionCollection;
 
 namespace Konsole {
@@ -121,7 +120,6 @@ private:
     QString iconForView(ViewProperties *view) const;
 
     QMenu *_menu;
-    KBookmarkMenu *_bookmarkMenu;
     QString _file;
     bool _toplevel;
     ViewProperties *_activeView;

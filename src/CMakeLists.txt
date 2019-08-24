@@ -53,6 +53,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ${windowadaptors_SRCS}
                         hsluv.c
                         BookmarkHandler.cpp
+                        BookmarkMenu.cpp
                         ColorScheme.cpp
                         ColorSchemeManager.cpp
                         ColorSchemeEditor.cpp

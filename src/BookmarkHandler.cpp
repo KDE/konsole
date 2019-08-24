@@ -31,11 +31,11 @@
 
 // KDE
 #include <KShell>
-#include <KBookmarkMenu>
 #include <KBookmarkOwner>
 #include <KLocalizedString>
 
 // Konsole
+#include "BookmarkMenu.h"
 #include "ViewProperties.h"
 
 using namespace Konsole;
@@ -45,7 +45,6 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
     QObject(parent),
     KBookmarkOwner(),
     _menu(menu),
-    _bookmarkMenu(nullptr),
     _file(QString()),
     _toplevel(toplevel),
     _activeView(nullptr),
@@ -64,14 +63,14 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
     }
 
     KBookmarkManager *manager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
-
     manager->setUpdate(true);
-    _bookmarkMenu = new KBookmarkMenu(manager, this, _menu, toplevel ? collection : nullptr);
+
+    BookmarkMenu *bookmarkMenu = new BookmarkMenu(manager, this, _menu, toplevel ? collection : nullptr);
+    bookmarkMenu->setParent(this);
 }
 
 BookmarkHandler::~BookmarkHandler()
 {
-    delete _bookmarkMenu;
 }
 
 void BookmarkHandler::openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers)
