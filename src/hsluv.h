@@ -41,8 +41,8 @@ extern "C" {
  * @param s Saturation. Between 0.0 and 100.0.
  * @param l Lightness. Between 0.0 and 100.0.
  * @param[out] pr Red component. Between 0.0 and 1.0.
- * @param[out] pr Green component. Between 0.0 and 1.0.
- * @param[out] pr Blue component. Between 0.0 and 1.0.
+ * @param[out] pg Green component. Between 0.0 and 1.0.
+ * @param[out] pb Blue component. Between 0.0 and 1.0.
  */
 void hsluv2rgb(double h, double s, double l, double* pr, double* pg, double* pb);
 
