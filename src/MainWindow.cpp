@@ -851,6 +851,9 @@ void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
     // The window is visible and the setting changed
     } else if (windowFlags().testFlag(Qt::FramelessWindowHint) != frameless) {
         const auto oldGeometry = saveGeometry();
+        // This happens for every Konsole window. It depends on
+        // the fact that every window is processed in single thread
+        const auto oldActiveWindow = KWindowSystem::activeWindow();
 
         setWindowFlags(newFlags);
 
@@ -858,6 +861,7 @@ void MainWindow::setRemoveWindowTitleBarAndFrame(bool frameless)
         // with previous geometry
         restoreGeometry(oldGeometry);
         setVisible(true);
+        KWindowSystem::activateWindow(oldActiveWindow);
     }
 }
 
