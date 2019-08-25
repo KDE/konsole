@@ -41,7 +41,7 @@
        </attribute>
       </widget>
      </item>
-     <item row="16" column="1" colspan="2">
+     <item row="17" column="1" colspan="2">
       <widget class="QCheckBox" name="kcfg_TabBarUseUserStyleSheet">
        <property name="text">
         <string>Use user-defined stylesheet:</string>
@@ -59,13 +59,20 @@
       </widget>
      </item>
      <item row="14" column="1" colspan="2">
+      <widget class="QCheckBox" name="kcfg_NewTabButton">
+       <property name="text">
+        <string>Show 'New Tab' button</string>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="1" colspan="2">
       <widget class="QCheckBox" name="kcfg_CloseTabOnMiddleMouseButton">
        <property name="text">
         <string>Close tab on middle-click</string>
        </property>
       </widget>
      </item>
-     <item row="17" column="1">
+     <item row="18" column="1">
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -101,7 +108,7 @@
        </property>
       </widget>
      </item>
-     <item row="17" column="2">
+     <item row="18" column="2">
       <widget class="KUrlRequester" name="kcfg_TabBarUserStyleSheetFile">
        <property name="enabled">
         <bool>false</bool>
@@ -243,7 +250,7 @@
        </attribute>
       </widget>
      </item>
-     <item row="15" column="1" colspan="2">
+     <item row="16" column="1" colspan="2">
       <widget class="QCheckBox" name="kcfg_ExpandTabWidth">
        <property name="text">
         <string>Expand individual tab widths to full window</string>
