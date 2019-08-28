@@ -120,7 +120,7 @@ public:
      * Registers a new type of session.
      * The favorite status of the session ( as returned by isFavorite() ) is set to false by default.
      */
-    void addProfile(const Profile::Ptr &type);
+    void addProfile(const Profile::Ptr &profile);
 
     /**
      * Deletes the configuration file used to store a profile.
@@ -189,7 +189,7 @@ public:
     /**
      * Associates a shortcut with a particular profile.
      */
-    void setShortcut(Profile::Ptr profile, const QKeySequence &shortcut);
+    void setShortcut(Profile::Ptr profile, const QKeySequence &keySequence);
 
     /** Returns the shortcut associated with a particular profile. */
     QKeySequence shortcut(Profile::Ptr profile) const;

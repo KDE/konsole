@@ -23,7 +23,7 @@
 
 using namespace Konsole;
 
-PartInfoSettings::PartInfoSettings(QWidget* aParent) : QWidget(aParent)
+PartInfoSettings::PartInfoSettings(QWidget* parent) : QWidget(parent)
 {
     setupUi(this);
 }
