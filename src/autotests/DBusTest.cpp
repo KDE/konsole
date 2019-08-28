@@ -62,11 +62,7 @@ void DBusTest::initTestCase()
     }
 
     // Wait for above Konsole to finish starting
-#if defined(HAVE_USLEEP)
-    usleep(5 * 1000);
-#else
-    sleep(5);
-#endif
+    QThread::sleep(5);
 
     serviceReply = bus->registeredServiceNames();
     QVERIFY2(serviceReply.isValid(), "SessionBus interfaces not available");
