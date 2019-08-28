@@ -20,7 +20,7 @@
 // Own
 #include "ViewManager.h"
 
-#include <config-konsole.h>
+#include "config-konsole.h"
 
 // Qt
 #include <QStringList>

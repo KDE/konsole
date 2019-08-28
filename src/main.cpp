@@ -20,7 +20,7 @@
 // Own
 #include "Application.h"
 #include "MainWindow.h"
-#include "config-konsole.h" //krazy:exclude=includes
+#include "config-konsole.h"
 #include "KonsoleSettings.h"
 #include "ViewManager.h"
 #include "ViewContainer.h"

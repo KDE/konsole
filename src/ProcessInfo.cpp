@@ -18,7 +18,7 @@
 */
 
 // Config
-#include <config-konsole.h>
+#include "config-konsole.h"
 
 // Own
 #include "ProcessInfo.h"

@@ -24,7 +24,7 @@
 #include "TerminalDisplay.h"
 
 // Config
-#include <config-konsole.h>
+#include "config-konsole.h"
 
 // Qt
 #include <QApplication>
