@@ -30,10 +30,12 @@
 #include <KBookmarkManager>
 #include <KBookmark>
 
+#include <algorithm>    // std::any_of
+
 BookmarkMenu::BookmarkMenu (KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu *parentMenu, KActionCollection *collec) :
     KBookmarkMenu (mgr, owner, parentMenu, collec)
 {
-    // We need to hijack the action
+    // We need to hijack the action - note this only hijacks top-level action
     QAction *bookmarkAction = collec->action(QStringLiteral("add_bookmark"));
     disconnect(bookmarkAction, nullptr, this, nullptr);
     connect(bookmarkAction, &QAction::triggered, this, &BookmarkMenu::maybeAddBookmark);
@@ -42,13 +44,14 @@ BookmarkMenu::BookmarkMenu (KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu 
 void BookmarkMenu::maybeAddBookmark()
 {
     // Check for duplicates first
-    // This only catches duplicates in top-level (ie not sub-folders)
+    // This only catches duplicates in top-level (ie not sub-folders);
+    //  this is due to only the top-level add_bookmark is hijacked.
     const KBookmarkGroup rootGroup = manager()->root();
     const QUrl currUrl = owner()->currentUrl();
-    for (const QUrl &url : rootGroup.groupUrlList()) {
-        if (url == currUrl) {
-            return;
-        }
+    const auto urlList = rootGroup.groupUrlList();
+    if (std::any_of(urlList.constBegin(), urlList.constEnd(),
+                   [currUrl] (const QUrl &url) { return url == currUrl; })) {
+        return;
     }
 
     slotAddBookmark();
