@@ -177,6 +177,7 @@ ColorScheme::ColorScheme() :
     _randomTable(nullptr),
     _opacity(1.0),
     _blur(false),
+    _colorRandomization(false),
     _wallpaper(nullptr)
 {
     setWallpaper(QString());
