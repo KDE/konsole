@@ -44,17 +44,9 @@ void PlainTextDecoder::setLeadingWhitespace(bool enable)
 {
     _includeLeadingWhitespace = enable;
 }
-bool PlainTextDecoder::leadingWhitespace() const
-{
-    return _includeLeadingWhitespace;
-}
 void PlainTextDecoder::setTrailingWhitespace(bool enable)
 {
     _includeTrailingWhitespace = enable;
-}
-bool PlainTextDecoder::trailingWhitespace() const
-{
-    return _includeTrailingWhitespace;
 }
 void PlainTextDecoder::begin(QTextStream* output)
 {
