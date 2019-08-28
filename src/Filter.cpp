@@ -252,11 +252,6 @@ QList<Filter::HotSpot *> Filter::hotSpots() const
     return _hotspotList;
 }
 
-QList<Filter::HotSpot *> Filter::hotSpotsAtLine(int line) const
-{
-    return _hotspots.values(line);
-}
-
 Filter::HotSpot *Filter::hotSpotAt(int line, int column) const
 {
     QList<HotSpot *> hotspots = _hotspots.values(line);

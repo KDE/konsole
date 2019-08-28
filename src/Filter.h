@@ -149,7 +149,6 @@ public:
     QList<HotSpot *> hotSpots() const;
 
     /** Returns the list of hotspots identified by the filter which occur on a given line */
-    QList<HotSpot *> hotSpotsAtLine(int line) const;
 
     /**
      * TODO: Document me
@@ -355,7 +354,7 @@ private:
  *
  * The hotSpotAt() method will return the first hotspot which covers a given position.
  *
- * The hotSpots() and hotSpotsAtLine() method return all of the hotspots in the text and on
+ * The hotSpots() method return all of the hotspots in the text and on
  * a given line respectively.
  */
 class FilterChain : protected QList<Filter *>
@@ -384,8 +383,6 @@ public:
     Filter::HotSpot *hotSpotAt(int line, int column) const;
     /** Returns a list of all the hotspots in all the chain's filters */
     QList<Filter::HotSpot *> hotSpots() const;
-    /** Returns a list of all hotspots at the given line in all the chain's filters */
-    QList<Filter::HotSpot> hotSpotsAtLine(int line) const;
 };
 
 /** A filter chain which processes character images from terminal displays */
