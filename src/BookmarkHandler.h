@@ -69,7 +69,6 @@ public:
     QString currentTitle() const Q_DECL_OVERRIDE;
     QString currentIcon() const Q_DECL_OVERRIDE;
     bool enableOption(BookmarkOption option) const Q_DECL_OVERRIDE;
-    QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const Q_DECL_OVERRIDE;
     void openFolderinTabs(const KBookmarkGroup &group) Q_DECL_OVERRIDE;
 
     /**
