@@ -144,11 +144,6 @@ QString BookmarkHandler::iconForView(ViewProperties *view) const
     return {};
 }
 
-bool BookmarkHandler::supportsTabs() const
-{
-    return true;
-}
-
 QList<KBookmarkOwner::FutureBookmark> BookmarkHandler::currentBookmarkList() const
 {
     QList<KBookmarkOwner::FutureBookmark> list;
