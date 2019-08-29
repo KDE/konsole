@@ -306,6 +306,7 @@ void KeyBindingEditor::accept()
 
     if (newTranslator->description().isEmpty()) {
         KMessageBox::sorry(this, i18n("A key bindings scheme cannot be saved with an empty description."));
+        delete newTranslator;
         return;
     }
 
