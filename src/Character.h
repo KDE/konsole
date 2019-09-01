@@ -154,7 +154,7 @@ public:
     }
 
     inline static int stringWidth(const QString &str) {
-        auto ucs4Str = str.toUcs4();
+        QVector<uint> ucs4Str = str.toUcs4();
         return stringWidth(ucs4Str.constData(), ucs4Str.length());
     }
 };
