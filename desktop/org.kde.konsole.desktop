@@ -283,6 +283,7 @@ Name[uk]=Відкрити нове вікно
 Name[x-test]=xxOpen a New Windowxx
 Name[zh_CN]=打开新窗口
 Name[zh_TW]=開啟新視窗
+Icon=window-new
 Exec=konsole
 
 [Desktop Action NewTab]
@@ -329,4 +330,5 @@ Name[uk]=Відкрити нову вкладку
 Name[x-test]=xxOpen a New Tabxx
 Name[zh_CN]=打开新标签
 Name[zh_TW]=開啟新分頁
+Icon=tab-new
 Exec=konsole --new-tab
