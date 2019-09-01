@@ -310,12 +310,9 @@ ColorEntry ColorScheme::colorEntry(int index, uint randomSeed) const
     const double maxLightness = qMin(baseLightness + range.lightness / 2.0, MaxLightness);
     // Use triangular distribution with peak at L=50.0.
     // Dark and very light colors are less distinguishable.
-    std::initializer_list<double> lightnessIntervals;
-    if (minLightness < 50.0 && 50.0 < maxLightness) {
-        lightnessIntervals = {minLightness, 50.0, maxLightness};
-    } else {
-        lightnessIntervals = {minLightness, maxLightness};
-    }
+    const auto lightnessIntervals = (minLightness < 50.0 && 50.0 < maxLightness)
+        ? std::initializer_list<double>{minLightness, 50.0, maxLightness}
+        : std::initializer_list<double>{minLightness, maxLightness};
     static const auto lightnessWeightsFunc = [](double v) { return 50.0 - qAbs(v - 50.0); };
     std::piecewise_linear_distribution<> lightnessDistribution(lightnessIntervals,
                                                                lightnessWeightsFunc);
