@@ -938,7 +938,7 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
     if (jsonTabs.isEmpty()) { // Session file is unusable, start default Profile
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
         Session *session = SessionManager::instance()->createSession(profile);
-        createView(session);
+        activeContainer()->addView(createView(session));
         if (!session->isRunning()) {
             session->run();
         }
