@@ -36,14 +36,12 @@ class KActionMenu;
 class KToggleAction;
 
 namespace Konsole {
-class IncrementalSearchBar;
 class ViewManager;
 class ViewProperties;
 class Session;
 class SessionController;
 class ProfileList;
 class BookmarkHandler;
-class TabbedViewContainer;
 
 /**
  * The main window.  This contains the menus and an area which contains the terminal displays.

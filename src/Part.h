@@ -32,7 +32,6 @@
 #include "config-konsole.h"
 #include "Profile.h"
 
-class QAction;
 class QStringList;
 class QKeyEvent;
 

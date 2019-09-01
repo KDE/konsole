@@ -32,7 +32,6 @@
 #include "ui_ProfileSettings.h"
 
 class QItemSelection;
-class QShowEvent;
 class QStandardItem;
 class QStandardItemModel;
 

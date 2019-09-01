@@ -27,12 +27,11 @@
 // KDE
 #include <KBookmarkManager>
 
-#include <QUrl>
-
 // Konsole
 #include "konsoleprivate_export.h"
 
 class QMenu;
+class QUrl;
 class KActionCollection;
 
 namespace Konsole {

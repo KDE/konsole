@@ -28,7 +28,6 @@
 // Konsole
 #include "konsoleprivate_export.h"
 
-class QFocusEvent;
 class QDragMoveEvent;
 class QDragEnterEvent;
 class QDropEvent;

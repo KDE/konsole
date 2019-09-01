@@ -46,7 +46,6 @@ class QTimer;
 class QUrl;
 
 class KCodecAction;
-class KJob;
 class QAction;
 class KActionMenu;
 

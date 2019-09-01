@@ -34,11 +34,8 @@
 class QPoint;
 class QToolButton;
 class QMenu;
-class QDropEvent;
-class QDragEnterEvent;
 
 namespace Konsole {
-class IncrementalSearchBar;
 class ViewProperties;
 class ViewManager;
 class TabbedViewContainer;

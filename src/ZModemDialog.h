@@ -23,7 +23,6 @@
 
 class KTextEdit;
 class QDialogButtonBox;
-class QPushButton;
 namespace Konsole {
 class ZModemDialog : public QDialog
 {
