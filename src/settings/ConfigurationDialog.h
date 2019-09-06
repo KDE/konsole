@@ -26,7 +26,6 @@
 #define CONFIGURATIONDIALOG_H
 
 // Qt
-#include <QWidget>
 #include <QButtonGroup>
 #include <QAbstractButton>
 #include <QTimer>
@@ -39,8 +38,7 @@
 // Konsole
 #include "konsoleprivate_export.h"
 
-class KConfig;
-class KCoreConfigSkeleton;
+class QWidget;
 class KConfigDialogManager;
 
 namespace Konsole {

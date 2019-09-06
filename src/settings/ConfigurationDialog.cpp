@@ -32,7 +32,6 @@
 // KDE
 #include <KLocalizedString>
 #include <KConfigDialogManager>
-#include <KCoreConfigSkeleton>
 
 
 using namespace Konsole;
