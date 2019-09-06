@@ -19,18 +19,12 @@
 
 // Own
 #include "ProfileSettings.h"
-#include <QPainter>
 
 // Qt
 #include <QFileInfo>
 #include <QStandardPaths>
 #include <QStandardItem>
 #include <QKeyEvent>
-
-// KDE
-#include <KLocalizedString>
-#include <KIconLoader>
-#include <QPushButton>
 
 // Konsole
 #include "EditProfileDialog.h"
