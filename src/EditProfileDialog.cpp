@@ -21,11 +21,7 @@
 // Own
 #include "EditProfileDialog.h"
 
-// Standard
-#include <cmath>
-
 // Qt
-#include <QBrush>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QFileDialog>
@@ -62,7 +58,6 @@
 #include "ProfileManager.h"
 #include "ShellCommand.h"
 #include "WindowSystemInfo.h"
-#include "Shortcut_p.h"
 #include "FontDialog.h"
 
 using namespace Konsole;

@@ -23,12 +23,10 @@
 
 // Qt
 #include <QAbstractItemDelegate>
-#include <QDialog>
 #include <QHash>
 #include <QButtonGroup>
 #include <QWidget>
 #include <QGridLayout>
-#include <QCheckBox>
 
 // KDE
 #include <KPageDialog>
