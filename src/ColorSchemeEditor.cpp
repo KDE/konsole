@@ -41,7 +41,6 @@
 #include "ui_ColorSchemeEditor.h"
 #include "ColorScheme.h"
 #include "CharacterColor.h"
-#include "Shortcut_p.h"
 
 using namespace Konsole;
 
