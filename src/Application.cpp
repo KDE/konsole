@@ -41,7 +41,6 @@
 #include "ShellCommand.h"
 #include "KonsoleSettings.h"
 #include "ViewManager.h"
-#include "SessionController.h"
 #include "WindowSystemInfo.h"
 #include "ViewContainer.h"
 #include "TerminalDisplay.h"
