@@ -21,7 +21,6 @@
 #define PART_H
 
 // KDE
-#include <KParts/Part>
 #include <KParts/ReadOnlyPart>
 #include <kde_terminal_interface.h>
 
@@ -30,7 +29,6 @@
 
 // Konsole
 #include "config-konsole.h"
-#include "Profile.h"
 
 class QStringList;
 class QKeyEvent;
