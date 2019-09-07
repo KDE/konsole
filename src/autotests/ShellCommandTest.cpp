@@ -54,7 +54,7 @@ void ShellCommandTest::testConstructorWithTwoArguments()
     ShellCommand shellCommand(command, arguments);
     QCOMPARE(shellCommand.command(), command);
     QCOMPARE(shellCommand.arguments(), arguments);
-    QCOMPARE(shellCommand.fullCommand(), arguments.join(QLatin1String(" ")));
+    QCOMPARE(shellCommand.fullCommand(), arguments.join(QLatin1Char(' ')));
 }
 
 void ShellCommandTest::testExpandEnvironmentVariable()

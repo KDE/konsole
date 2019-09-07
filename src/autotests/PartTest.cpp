@@ -51,7 +51,7 @@ void PartTest::initTestCase()
     auto buildPath = libraryPaths.last();
     QCoreApplication::removeLibraryPath(buildPath);
     // konsolepart.so is in ../autotests/
-    if (buildPath.endsWith(QStringLiteral("/autotests"))) {
+    if (buildPath.endsWith(QLatin1String("/autotests"))) {
         buildPath.chop(10);
     }
     QCoreApplication::addLibraryPath(buildPath);

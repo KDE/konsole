@@ -221,7 +221,7 @@ const ColorScheme *ColorSchemeManager::findColorScheme(const QString &name)
 
 QString ColorSchemeManager::findColorSchemePath(const QString &name) const
 {
-    QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".colorscheme"));
+    QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("konsole/") + name + QLatin1String(".colorscheme"));
 
     if (!path.isEmpty()) {
         return path;
@@ -247,7 +247,7 @@ bool ColorSchemeManager::isColorSchemeDeletable(const QString &name)
 
 bool ColorSchemeManager::canResetColorScheme(const QString &name)
 {
-    const QStringList paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".colorscheme"));
+    const QStringList paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QLatin1String("konsole/") + name + QLatin1String(".colorscheme"));
 
     // if the colorscheme exists in both a writable location under the
     // user's home dir and a system-wide location, then it's possible

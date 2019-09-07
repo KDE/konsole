@@ -85,7 +85,7 @@ bool KeyboardTranslatorManager::isTranslatorDeletable(const QString &name) const
 
 bool KeyboardTranslatorManager::isTranslatorResettable(const QString &name) const
 {
-    const QStringList &paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + name + QStringLiteral(".keytab"));
+    const QStringList &paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QLatin1String("konsole/") + name + QLatin1String(".keytab"));
 
     return (paths.count() > 1);
 }

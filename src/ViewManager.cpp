@@ -903,7 +903,7 @@ namespace {
 ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject& jsonSplitter, ViewManager *manager)
 {
     auto splitterWidgets = jsonSplitter[QStringLiteral("Widgets")].toArray();
-    auto orientation = (jsonSplitter[QStringLiteral("Orientation")].toString() == QStringLiteral("Horizontal"))
+    auto orientation = (jsonSplitter[QStringLiteral("Orientation")].toString() == QLatin1String("Horizontal"))
         ? Qt::Horizontal : Qt::Vertical;
 
     auto *currentSplitter = new ViewSplitter();

@@ -141,7 +141,7 @@ QSet<QString> ProcessInfo::commonDirNames()
 
 QString ProcessInfo::formatShortDir(const QString &input) const
 {
-    if(input == QStringLiteral("/")) {
+    if(input == QLatin1String("/")) {
         return QStringLiteral("/");
     }
 
@@ -1151,7 +1151,7 @@ QString SSHProcessInfo::format(const QString &input) const
     // Depending on whether -l was passed to ssh (which is mostly not the
     // case due to ~/.ssh/config).
     if (_user.isEmpty()) {
-        output.replace(QLatin1String("%U"), QString());
+        output.remove(QLatin1String("%U"));
     } else {
         output.replace(QLatin1String("%U"), _user + QLatin1Char('@'));
     }

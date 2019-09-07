@@ -493,7 +493,7 @@ void Session::run()
 
     int result = _shellProcess->start(exec, arguments, _environment);
     if (result < 0) {
-        terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(QLatin1String(" "))));
+        terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(QLatin1Char(' '))));
         terminalWarning(_shellProcess->errorString());
         return;
     }
