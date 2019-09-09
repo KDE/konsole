@@ -574,9 +574,8 @@ void TerminalDisplay::hideDragTarget()
     update();
 }
 
-void TerminalDisplay::showDragTarget()
+void TerminalDisplay::showDragTarget(const QPoint& cursorPos)
 {
-    auto cursorPos = mapFromGlobal(QCursor::pos());
     using EdgeDistance = std::pair<int, Qt::Edge>;
     auto closerToEdge = std::min<EdgeDistance>(
         {

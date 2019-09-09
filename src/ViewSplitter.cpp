@@ -307,7 +307,8 @@ void Konsole::ViewSplitter::dragMoveEvent(QDragMoveEvent* ev)
             return;
         }
         currentDragTarget = terminal;
-        currentDragTarget->showDragTarget();
+        auto localPos = currentDragTarget->mapFromParent(ev->pos());
+        currentDragTarget->showDragTarget(localPos);
     }
 }
 
