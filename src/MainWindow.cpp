@@ -763,7 +763,7 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
 
     const QString profilePageName = i18nc("@title Preferences page name", "Profiles");
     auto profilePage = new KPageWidgetItem(new ProfileSettings(confDialog), profilePageName);
-    profilePage->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
+    profilePage->setIcon(QIcon::fromTheme(QStringLiteral("preferences-system-profiles")));
     confDialog->addPage(profilePage, true);
 
     const QString tabBarPageName = i18nc("@title Preferences page name", "Tab Bar");
@@ -773,7 +773,7 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
 
     const QString temporaryFilesPageName = i18nc("@title Preferences page name", "Temporary Files");
     auto temporaryFilesPage = new KPageWidgetItem(new TemporaryFilesSettings(confDialog), temporaryFilesPageName);
-    temporaryFilesPage->setIcon(QIcon::fromTheme(QStringLiteral("inode-directory")));
+    temporaryFilesPage->setIcon(QIcon::fromTheme(QStringLiteral("folder-temp")));
     confDialog->addPage(temporaryFilesPage, true);
 
     if (showProfilePage) {
