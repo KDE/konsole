@@ -593,6 +593,11 @@ public Q_SLOTS:
      */
     Q_SCRIPTABLE void setProfile(const QString &profileName);
 
+    /**
+     * Returns the current session's profile name
+     */
+    Q_SCRIPTABLE QString profile();
+
 Q_SIGNALS:
 
     /** Emitted when the terminal process starts. */

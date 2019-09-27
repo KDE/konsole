@@ -1594,6 +1594,10 @@ int Session::historySize() const
     }
 }
 
+QString Session::profile()
+{
+    return SessionManager::instance()->sessionProfile(this)->name();
+}
 
 void Session::setProfile(const QString &profileName)
 {
