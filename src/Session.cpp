@@ -205,15 +205,16 @@ WId Session::windowId() const
     if (_views.count() == 0) {
         return 0;
     } else {
-        QWidget* window = _views.first();
-
-        Q_ASSERT(window);
-
-        while (window->parentWidget() != nullptr) {
-            window = window->parentWidget();
-        }
-
-        return window->winId();
+        /**
+         * compute the windows id to use
+         * doesn't call winId on some widget, as this might lead
+         * to rendering artifacts as this will trigger the
+         * creation of a native window, see https://doc.qt.io/qt-5/qwidget.html#winId
+         * instead, use https://doc.qt.io/qt-5/qwidget.html#effectiveWinId
+         */
+        QWidget* widget = _views.first();
+        Q_ASSERT(widget);
+        return widget->effectiveWinId();
     }
 }
 
