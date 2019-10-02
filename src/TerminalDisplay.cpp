@@ -1284,7 +1284,9 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
         drawBackground(paint, rect, getBackgroundColor(), true /* use opacity setting */);
     }
 
-    paint.setRenderHint(QPainter::Antialiasing, _antialiasText);
+    // only turn on text anti-aliasing, never turn on normal antialiasing
+    // set https://bugreports.qt.io/browse/QTBUG-66036
+    paint.setRenderHint(QPainter::TextAntialiasing, _antialiasText);
 
     foreach(const QRect & rect, dirtyImageRegion.rects()) {
         drawContents(paint, rect);
