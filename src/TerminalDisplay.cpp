@@ -605,6 +605,12 @@ void TerminalDisplay::showDragTarget(const QPoint& cursorPos)
 void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const QString& str,
         const Character* attributes)
 {
+    // only turn on anti-aliasing during this short time for the "text"
+    // for the normal text we have TextAntialiasing on demand on
+    // otherwise we have rendering artifacts
+    // set https://bugreports.qt.io/browse/QTBUG-66036
+    painter.setRenderHint(QPainter::Antialiasing, _antialiasText);
+
     const bool useBoldPen = (attributes->rendition & RE_BOLD) != 0 && _boldIntense;
 
     QRect cellRect = {x, y, _fontWidth, _fontHeight};
@@ -612,6 +618,8 @@ void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const 
         LineBlockCharacters::draw(painter, cellRect.translated(i * _fontWidth, 0), str[i],
                                         useBoldPen);
     }
+
+    painter.setRenderHint(QPainter::Antialiasing, false);
 }
 
 void TerminalDisplay::setKeyboardCursorShape(Enum::CursorShapeEnum shape)
