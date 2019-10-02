@@ -29,6 +29,7 @@
 #include <QDragMoveEvent>
 #include <QMimeData>
 #include <QApplication>
+#include <QStyle>
 #include <memory>
 
 
@@ -147,7 +148,8 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
     auto parentSplitter = qobject_cast<ViewSplitter*>(terminalDisplay->parentWidget());
     auto topSplitter = parentSplitter->getToplevelSplitter();
 
-    const auto handleWidth = parentSplitter->handleWidth() <= 1 ? 4 : parentSplitter->handleWidth();
+    // Find the theme's splitter width + extra space to find valid terminal
+    const auto handleWidth = parentSplitter->style()->pixelMetric(QStyle::PM_SplitterWidth) + 2;
 
     const auto start = QPoint(terminalDisplay->x(), terminalDisplay->y());
     const auto startMapped = parentSplitter->mapTo(topSplitter, start);
@@ -163,19 +165,20 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
     const auto newPoint = QPoint(newX, newY);
     auto child = topSplitter->childAt(newPoint);
 
+    TerminalDisplay *focusTerminal = nullptr;
     if (auto* terminal = qobject_cast<TerminalDisplay*>(child)) {
-        terminal->setFocus(Qt::OtherFocusReason);
+        focusTerminal = terminal;
     } else if (qobject_cast<QSplitterHandle*>(child) != nullptr) {
         auto targetSplitter = qobject_cast<QSplitter*>(child->parent());
-        auto splitterTerminal = qobject_cast<TerminalDisplay*>(targetSplitter->widget(0));
-        splitterTerminal->setFocus(Qt::OtherFocusReason);
+        focusTerminal = qobject_cast<TerminalDisplay*>(targetSplitter->widget(0));
     } else if (qobject_cast<QWidget*>(child) != nullptr) {
-        TerminalDisplay *terminalParent = nullptr;
-        while(terminalParent == nullptr) {
-            terminalParent = qobject_cast<TerminalDisplay*>(child->parentWidget());
+        while(child != nullptr && focusTerminal == nullptr) {
+            focusTerminal = qobject_cast<TerminalDisplay*>(child->parentWidget());
             child = child->parentWidget();
         }
-        terminalParent->setFocus(Qt::OtherFocusReason);
+    }
+    if (focusTerminal != nullptr) {
+        focusTerminal->setFocus(Qt::OtherFocusReason);
     }
 }
 
