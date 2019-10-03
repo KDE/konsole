@@ -84,6 +84,10 @@ public:
 // ***
 extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
 {
+    // enable high dpi support
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+
     // Check if any of the arguments makes it impossible to re-use an existing process.
     // We need to do this manually and before creating a QApplication, because
     // QApplication takes/removes the Qt specific arguments that are incompatible.
@@ -113,9 +117,6 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
         qputenv("QT_NO_GLIB", qtUseGLibOld);
     }
 #endif
-
-    // enable high dpi support
-    app->setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
 #if defined(Q_OS_MACOS)
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
