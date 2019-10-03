@@ -29,7 +29,6 @@
 #include <QDragMoveEvent>
 #include <QMimeData>
 #include <QApplication>
-#include <QStyle>
 #include <memory>
 
 
@@ -149,7 +148,8 @@ void ViewSplitter::handleFocusDirection(Qt::Orientation orientation, int directi
     auto topSplitter = parentSplitter->getToplevelSplitter();
 
     // Find the theme's splitter width + extra space to find valid terminal
-    const auto handleWidth = parentSplitter->style()->pixelMetric(QStyle::PM_SplitterWidth) + 2;
+    // See https://bugs.kde.org/show_bug.cgi?id=411387 for more info
+    const auto handleWidth = parentSplitter->handleWidth() + 3;
 
     const auto start = QPoint(terminalDisplay->x(), terminalDisplay->y());
     const auto startMapped = parentSplitter->mapTo(topSplitter, start);
