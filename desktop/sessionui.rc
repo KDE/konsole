@@ -57,7 +57,5 @@
         <Action name="view-readonly" />
         <Action name="switch-profile"/>
         <Action name="edit-current-profile"/>
-        <Separator/>
-        <Action name="close-session"/>
     </Menu>
 </kpartgui>
