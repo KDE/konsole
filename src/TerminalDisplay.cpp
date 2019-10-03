@@ -546,7 +546,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     _verticalLayout->addWidget(_headerBar);
     _verticalLayout->addStretch();
     _verticalLayout->setSpacing(0);
-    _verticalLayout->setMargin(0);
+    _verticalLayout->setContentsMargins(0, 0, 0, 0);
     setLayout(_verticalLayout);
     new AutoScrollHandler(this);
 #ifndef QT_NO_ACCESSIBILITY

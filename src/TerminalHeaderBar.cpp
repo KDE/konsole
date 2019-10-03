@@ -65,7 +65,7 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
 
     m_boxLayout = new QBoxLayout(QBoxLayout::LeftToRight);
     m_boxLayout->setSpacing(0);
-    m_boxLayout->setMargin(0);
+    m_boxLayout->setContentsMargins(0, 0, 0, 0);
 
     // Layout Setup
     m_boxLayout->addStretch();
