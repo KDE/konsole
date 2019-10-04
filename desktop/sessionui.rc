@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="26">
+<kpartgui name="session" version="27">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
