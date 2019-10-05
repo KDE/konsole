@@ -1382,7 +1382,7 @@ int Screen::copyLineToStream(int line ,
     if ((options & TrimLeadingWhitespace) != 0u) {
         int spacesCount = 0;
         for (spacesCount = 0; spacesCount < count; spacesCount++) {
-            if (!QChar(characterBuffer[spacesCount].character).isSpace()) {
+            if (QChar::category(characterBuffer[spacesCount].character) != QChar::Category::Separator_Space) {
                 break;
             }
         }
