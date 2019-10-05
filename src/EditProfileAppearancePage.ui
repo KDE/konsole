@@ -404,7 +404,7 @@
             <string>Make the cursor blink regularly</string>
            </property>
            <property name="text">
-            <string/>
+            <string>Enabled</string>
            </property>
           </widget>
          </item>
