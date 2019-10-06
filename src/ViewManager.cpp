@@ -935,7 +935,40 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
         _viewContainer->addSplitter(topLevelSplitter, _viewContainer->count());
     }
 
-    if (jsonTabs.isEmpty()) { // Session file is unusable, start default Profile
+    if (!jsonTabs.isEmpty())
+        return;
+
+    // Session file is unusable, try older format
+    QList<int> ids = group.readEntry("Sessions", QList<int>());
+    int activeTab = group.readEntry("Active", 0);
+    TerminalDisplay *display = nullptr;
+
+    int tab = 1;
+    foreach (int id, ids) {
+        Session *session = SessionManager::instance()->idToSession(id);
+
+        if (session == nullptr) {
+            qWarning() << "Unable to load session with id" << id;
+            // Force a creation of a default session below
+            ids.clear();
+            break;
+        }
+
+        activeContainer()->addView(createView(session));
+        if (!session->isRunning()) {
+            session->run();
+        }
+        if (tab++ == activeTab) {
+            display = qobject_cast<TerminalDisplay *>(activeView());
+        }
+    }
+
+    if (display != nullptr) {
+        activeContainer()->setCurrentWidget(display);
+        display->setFocus(Qt::OtherFocusReason);
+    }
+
+    if (ids.isEmpty()) { // Session file is unusable, start default Profile
         Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
         Session *session = SessionManager::instance()->createSession(profile);
         activeContainer()->addView(createView(session));
