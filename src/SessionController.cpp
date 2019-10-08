@@ -885,6 +885,7 @@ void SessionController::renameSession()
     }
 }
 
+// This is called upon Menu->Close Sesssion and right-click on tab->Close Tab
 bool SessionController::confirmClose() const
 {
     if (_session->isForegroundProcessActive()) {
@@ -907,7 +908,12 @@ bool SessionController::confirmClose() const
                             "  Are you sure you want to close it?", title);
         }
 
-        int result = KMessageBox::warningYesNo(_view->window(), question, i18n("Confirm Close"));
+        int result = KMessageBox::warningYesNo(_view->window(),
+                                               question,
+                                               i18n("Confirm Close"),
+                                               KStandardGuiItem::yes(),
+                                               KStandardGuiItem::no(),
+                                               QStringLiteral("CloseSingleTab"));
         return result == KMessageBox::Yes;
     }
     return true;
