@@ -29,6 +29,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <sys/types.h>
+#include <unistd.h>
 
 // KDE
 #include <QDir>
@@ -110,13 +111,17 @@ HistoryFile::HistoryFile() :
     const QString tmpFormat = tmpDir + QLatin1Char('/') + QLatin1String("konsole-XXXXXX.history");
     _tmpFile.setFileTemplate(tmpFormat);
     if (_tmpFile.open()) {
-        _tmpFile.setAutoRemove(true);
+        // On some systems QTemporaryFile creates unnamed file.
+        // Do not interfere in such cases.
+        if (_tmpFile.exists()) {
+            // Remove file entry from filesystem. Since the file
+            // is opened, it will still be available for reading
+            // and writing. This guarantees the file won't remain
+            // in filesystem after process termination, even when
+            // there was a crash.
+            unlink(_tmpFile.fileName().toLocal8Bit().constData());
+        }
     }
-    // Force Qt to use named files so I don't waste hours trying to find
-    // these files again.  Perhaps investigate if there are any downsides
-    // to doing this.
-    // https://bugreports.qt.io/browse/QTBUG-66577
-    Q_UNUSED(_tmpFile.fileName());
 }
 
 HistoryFile::~HistoryFile()
