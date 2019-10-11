@@ -252,8 +252,8 @@ bool HistoryScroll::hasScroll()
    at 0 in cells.
 */
 
-HistoryScrollFile::HistoryScrollFile(const QString &logFileName) :
-    HistoryScroll(new HistoryTypeFile(logFileName))
+HistoryScrollFile::HistoryScrollFile() :
+    HistoryScroll(new HistoryTypeFile())
 {
 }
 
@@ -629,10 +629,7 @@ int HistoryTypeNone::maximumLineCount() const
 
 //////////////////////////////
 
-HistoryTypeFile::HistoryTypeFile(const QString &fileName) :
-    _fileName(fileName)
-{
-}
+HistoryTypeFile::HistoryTypeFile() = default;
 
 bool HistoryTypeFile::isEnabled() const
 {
@@ -644,7 +641,7 @@ HistoryScroll *HistoryTypeFile::scroll(HistoryScroll *old) const
     if (dynamic_cast<HistoryFile *>(old) != nullptr) {
         return old; // Unchanged.
     }
-    HistoryScroll *newScroll = new HistoryScrollFile(_fileName);
+    HistoryScroll *newScroll = new HistoryScrollFile();
 
     Character line[LINE_SIZE];
     int lines = (old != nullptr) ? old->getLines() : 0;

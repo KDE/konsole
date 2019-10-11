@@ -112,7 +112,7 @@ void HistoryTest::testHistoryScroll()
     delete historyScroll;
 
     // File
-    historyScroll = new HistoryScrollFile(QStringLiteral("test.log"));
+    historyScroll = new HistoryScrollFile();
     QVERIFY(historyScroll->hasScroll());
     QCOMPARE(historyScroll->getLines(), 0);
     QCOMPARE(historyScroll->getLineLen(0), 0);
