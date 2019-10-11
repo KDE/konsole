@@ -199,6 +199,7 @@ private:
 
     bool _menuBarInitialVisibility;
     bool _menuBarInitialVisibilityApplied;
+    bool _blurEnabled = false;
 };
 }
 

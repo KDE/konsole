@@ -839,6 +839,12 @@ void MainWindow::setBlur(bool blur)
         return;
     }
 
+    // Saves 70-100ms when starting
+    if (blur == _blurEnabled) {
+        return;
+    }
+    _blurEnabled = blur;
+
     if (!_pluggedController->isKonsolePart()) {
         KWindowEffects::enableBlurBehind(winId(), blur);
     }
