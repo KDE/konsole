@@ -1975,7 +1975,7 @@ void TerminalDisplay::calcGeometry()
         break;
     case Enum::ScrollBarRight:
         _contentRect.setRight(_contentRect.right() - _scrollBar->width());
-        _scrollBar->move(contentsRect().right() - _scrollBar->width() - 1,
+        _scrollBar->move(contentsRect().left() + contentsRect().width() - _scrollBar->width(),
                          contentsRect().top() + headerHeight);
         break;
     }
