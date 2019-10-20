@@ -1881,7 +1881,10 @@ void TerminalDisplay::resizeEvent(QResizeEvent *event)
     const auto width = event->size().width() - _scrollBar->geometry().width();
     const auto headerHeight = _headerBar->isVisible() ? _headerBar->height() : 0;
 
-    _searchBar->correctPosition(QSize(width, headerHeight));
+    const auto x = width - _searchBar->width();
+    const auto y = headerHeight;
+    _searchBar->setGeometry(x, 0 + y, _searchBar->width(), _searchBar->height());
+
     if (contentsRect().isValid()) {
         updateImageSize();
         updateImage();

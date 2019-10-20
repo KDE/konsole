@@ -99,7 +99,6 @@ public:
     void focusLineEdit();
 
     void setOptions();
-    void correctPosition(const QSize& parentSize);
 
     // reimplemented
     void setVisible(bool visible) Q_DECL_OVERRIDE;

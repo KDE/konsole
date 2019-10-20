@@ -234,13 +234,6 @@ bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *event)
     return QWidget::eventFilter(watched, event);
 }
 
-void IncrementalSearchBar::correctPosition(const QSize &parentSize)
-{
-    const auto x = parentSize.width() - width();
-    const auto y = parentSize.height();
-    setGeometry(x, 0 + y, width(), height());
-}
-
 void IncrementalSearchBar::keyPressEvent(QKeyEvent *event)
 {
     static auto movementKeysToPassAlong = QSet<int>{
