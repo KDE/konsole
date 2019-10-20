@@ -1878,17 +1878,24 @@ void TerminalDisplay::updateCursor()
 
 void TerminalDisplay::resizeEvent(QResizeEvent *event)
 {
-    const auto width = event->size().width() - _scrollBar->geometry().width();
-    const auto headerHeight = _headerBar->isVisible() ? _headerBar->height() : 0;
-
-    const auto x = width - _searchBar->width();
-    const auto y = headerHeight;
-    _searchBar->setGeometry(x, 0 + y, _searchBar->width(), _searchBar->height());
+    Q_UNUSED(event)
 
     if (contentsRect().isValid()) {
+        // NOTE: This calls setTabText() in TabbedViewContainer::updateTitle(),
+        // which might update the widget size again. New resizeEvent
+        // won't be called, do not rely on new sizes before this call.
         updateImageSize();
         updateImage();
     }
+
+    const auto scrollBarWidth = _scrollbarLocation != Enum::ScrollBarHidden
+                                ? _scrollBar->width()
+                                : 0;
+    const auto headerHeight = _headerBar->isVisible() ? _headerBar->height() : 0;
+
+    const auto x = width() - scrollBarWidth - _searchBar->width();
+    const auto y = headerHeight;
+    _searchBar->move(x, y);
 }
 
 void TerminalDisplay::propagateSize()
