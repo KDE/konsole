@@ -57,6 +57,8 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent) :
     closeButton->setAutoRaise(true);
     closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close")));
     connect(closeButton, &QToolButton::clicked, this, &Konsole::IncrementalSearchBar::closeClicked);
+    // SubWindow flag limits tab focus switching to this widget
+    setWindowFlags(windowFlags() | Qt::SubWindow);
 
     _searchEdit = new QLineEdit(this);
     _searchEdit->setClearButtonEnabled(true);
@@ -67,6 +69,8 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent) :
     _searchEdit->setCursor(Qt::IBeamCursor);
     _searchEdit->setStyleSheet(QString());
     _searchEdit->setFont(QApplication::font());
+    // When the widget focus is set, focus input box instead
+    setFocusProxy(_searchEdit);
 
     setCursor(Qt::ArrowCursor);
     // text box may be a minimum of 6 characters wide and a maximum of 10 characters wide
