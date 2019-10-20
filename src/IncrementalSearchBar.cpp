@@ -51,12 +51,6 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent) :
     setPalette(qApp->palette());
     setAutoFillBackground(true);
 
-    auto closeButton = new QToolButton(this);
-    closeButton->setObjectName(QStringLiteral("close-button"));
-    closeButton->setToolTip(i18nc("@info:tooltip", "Close the search bar"));
-    closeButton->setAutoRaise(true);
-    closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close")));
-    connect(closeButton, &QToolButton::clicked, this, &Konsole::IncrementalSearchBar::closeClicked);
     // SubWindow flag limits tab focus switching to this widget
     setWindowFlags(windowFlags() | Qt::SubWindow);
 
@@ -124,6 +118,13 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent) :
     optionsButton->setToolTip(i18nc("@info:tooltip", "Display the options menu"));
     optionsButton->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
     optionsButton->setAutoRaise(true);
+
+    auto closeButton = new QToolButton(this);
+    closeButton->setObjectName(QStringLiteral("close-button"));
+    closeButton->setToolTip(i18nc("@info:tooltip", "Close the search bar"));
+    closeButton->setAutoRaise(true);
+    closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close")));
+    connect(closeButton, &QToolButton::clicked, this, &Konsole::IncrementalSearchBar::closeClicked);
 
     // Fill the options menu
     auto optionsMenu = new QMenu(this);
