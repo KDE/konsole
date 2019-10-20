@@ -214,10 +214,6 @@ bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *event)
     }
 
     auto *keyEvent = static_cast<QKeyEvent *>(event);
-    if (keyEvent->key() == Qt::Key_Escape) {
-        emit closeClicked();
-        return true;
-    }
 
     if (keyEvent->key() == Qt::Key_Return && !keyEvent->modifiers()) {
         _findNextButton->click();
@@ -248,6 +244,10 @@ void IncrementalSearchBar::keyPressEvent(QKeyEvent *event)
     if (movementKeysToPassAlong.contains(event->key())
         && (event->modifiers() == Qt::ShiftModifier)) {
         emit unhandledMovementKeyPressed(event);
+    }
+
+    if (event->key() == Qt::Key_Escape) {
+        emit closeClicked();
     }
 }
 
