@@ -534,14 +534,26 @@ void ViewManager::splitTopBottom()
 
 void ViewManager::splitView(Qt::Orientation orientation)
 {
-    auto viewSplitter = qobject_cast<ViewSplitter*>(_viewContainer->currentWidget());
-
     // get the currently applied profile and use it to create the new tab.
-    auto *currentDisplay = viewSplitter->findChild<TerminalDisplay*>();
-    auto profile = SessionManager::instance()->sessionProfile(_sessionMap[currentDisplay]);
+    int currentSessionId = currentSession();
+    // At least one display/session exists if we are splitting
+    Q_ASSERT(currentSessionId >= 0);
+
+    Session *activeSession = SessionManager::instance()->idToSession(currentSessionId);
+    Q_ASSERT(activeSession);
+
+    auto profile = SessionManager::instance()->sessionProfile(activeSession);
 
     // Create a new session with the selected profile.
     auto *session = SessionManager::instance()->createSession(profile);
+
+    const QString directory = profile->startInCurrentSessionDir()
+                              ? activeSession->currentWorkingDirectory()
+                              : QString();
+    if (!directory.isEmpty() && profile->startInCurrentSessionDir()) {
+        session->setInitialWorkingDirectory(directory);
+    }
+
     session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
 
     auto terminalDisplay = createView(session);
