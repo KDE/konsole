@@ -196,6 +196,15 @@ public:
 
     QHash<TerminalDisplay*, Session*> forgetAll(ViewSplitter* splitter);
     Session* forgetTerminal(TerminalDisplay* terminal);
+
+    /**
+     * Creates and returns new session
+     *
+     * The session has specified @p profile, working @p directory
+     * and configured environment.
+     */
+    Session* createSession(const Profile::Ptr &profile, const QString &directory = QString());
+
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
     void empty();

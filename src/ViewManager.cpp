@@ -443,6 +443,17 @@ Session* ViewManager::forgetTerminal(TerminalDisplay* terminal)
     return session;
 }
 
+Session* ViewManager::createSession(const Profile::Ptr &profile, const QString &directory)
+{
+    Session *session = SessionManager::instance()->createSession(profile);
+    Q_ASSERT(session);
+    if (!directory.isEmpty()) {
+        session->setInitialWorkingDirectory(directory);
+    }
+    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
+    return session;
+}
+
 void ViewManager::sessionFinished()
 {
     // if this slot is called after the view manager's main widget
@@ -534,7 +545,6 @@ void ViewManager::splitTopBottom()
 
 void ViewManager::splitView(Qt::Orientation orientation)
 {
-    // get the currently applied profile and use it to create the new tab.
     int currentSessionId = currentSession();
     // At least one display/session exists if we are splitting
     Q_ASSERT(currentSessionId >= 0);
@@ -544,17 +554,10 @@ void ViewManager::splitView(Qt::Orientation orientation)
 
     auto profile = SessionManager::instance()->sessionProfile(activeSession);
 
-    // Create a new session with the selected profile.
-    auto *session = SessionManager::instance()->createSession(profile);
-
     const QString directory = profile->startInCurrentSessionDir()
                               ? activeSession->currentWorkingDirectory()
                               : QString();
-    if (!directory.isEmpty() && profile->startInCurrentSessionDir()) {
-        session->setInitialWorkingDirectory(directory);
-    }
-
-    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
+    auto *session = createSession(profile, directory);
 
     auto terminalDisplay = createView(session);
 
@@ -1036,57 +1039,29 @@ void ViewManager::setCurrentSession(int sessionId)
 
 int ViewManager::newSession()
 {
-    Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
-    Session *session = SessionManager::instance()->createSession(profile);
-
-    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
-
-    auto newView = createView(session);
-    activeContainer()->addView(newView);
-    session->run();
-
-    return session->sessionId();
+    return newSession(QString(), QString());
 }
 
 int ViewManager::newSession(const QString &profile)
 {
-    const QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
-    Profile::Ptr profileptr = ProfileManager::instance()->defaultProfile();
-
-    for (const auto &i : profilelist) {
-        if (i->name() == profile) {
-            profileptr = i;
-            break;
-        }
-    }
-
-    Session *session = SessionManager::instance()->createSession(profileptr);
-
-    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
-
-    auto newView = createView(session);
-    activeContainer()->addView(newView);
-    session->run();
-
-    return session->sessionId();
+    return newSession(profile, QString());
 }
 
 int ViewManager::newSession(const QString &profile, const QString &directory)
 {
-    const QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
     Profile::Ptr profileptr = ProfileManager::instance()->defaultProfile();
+    if(!profile.isEmpty()) {
+        const QList<Profile::Ptr> profilelist = ProfileManager::instance()->allProfiles();
 
-    for (const auto &i : profilelist) {
-        if (i->name() == profile) {
-            profileptr = i;
-            break;
+        for (const auto &i : profilelist) {
+            if (i->name() == profile) {
+                profileptr = i;
+                break;
+            }
         }
     }
 
-    Session *session = SessionManager::instance()->createSession(profileptr);
-    session->setInitialWorkingDirectory(directory);
-
-    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(managerId()));
+    Session *session = createSession(profileptr, directory);
 
     auto newView = createView(session);
     activeContainer()->addView(newView);

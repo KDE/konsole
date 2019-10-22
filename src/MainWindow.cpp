@@ -492,13 +492,8 @@ Session *MainWindow::createSession(Profile::Ptr profile, const QString &director
         profile = ProfileManager::instance()->defaultProfile();
     }
 
-    Session *session = SessionManager::instance()->createSession(profile);
-
-    if (!directory.isEmpty() && profile->startInCurrentSessionDir()) {
-        session->setInitialWorkingDirectory(directory);
-    }
-
-    session->addEnvironmentEntry(QStringLiteral("KONSOLE_DBUS_WINDOW=/Windows/%1").arg(_viewManager->managerId()));
+    const QString newSessionDirectory = profile->startInCurrentSessionDir() ? directory : QString();
+    Session *session = _viewManager->createSession(profile, newSessionDirectory);
 
     // create view before starting the session process so that the session
     // doesn't suffer a change in terminal size right after the session
