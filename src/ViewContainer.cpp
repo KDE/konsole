@@ -543,7 +543,9 @@ void TabbedViewContainer::setTabActivity(int index, bool activity)
 void TabbedViewContainer::updateActivity(ViewProperties *item)
 {
     auto controller = qobject_cast<SessionController*>(item);
-    auto index = indexOf(controller->view());
+    auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
+
+    const int index = indexOf(topLevelSplitter);
     if (index != currentIndex()) {
         setTabActivity(index, true);
     }
