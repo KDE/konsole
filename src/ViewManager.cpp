@@ -1002,11 +1002,9 @@ QStringList ViewManager::sessionList()
 
 int ViewManager::currentSession()
 {
-    QHash<TerminalDisplay *, Session *>::const_iterator i;
-    for (i = _sessionMap.constBegin(); i != _sessionMap.constEnd(); ++i) {
-        if (i.key()->isVisible()) {
-            return i.value()->sessionId();
-        }
+    if (_pluggedController) {
+        Q_ASSERT(_pluggedController->session() != nullptr);
+        return _pluggedController->session()->sessionId();
     }
     return -1;
 }
