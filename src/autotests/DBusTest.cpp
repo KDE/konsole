@@ -96,12 +96,14 @@ void DBusTest::cleanupTestCase()
     // they will get a popup dialog when we try to close this.
     QSignalSpy quitSpy(_process, SIGNAL(finished(int,QProcess::ExitStatus)));
 
+    // Do not use QWidget::close(), as it shows question popup when
+    // CloseAllTabs is set to false (default).
     QDBusInterface iface(_interfaceName,
-                         QStringLiteral("/konsole/MainWindow_1"),
-                         QStringLiteral("org.qtproject.Qt.QWidget"));
+                         QStringLiteral("/MainApplication"),
+                         QStringLiteral("org.qtproject.Qt.QCoreApplication"));
     QVERIFY2(iface.isValid(), "Unable to get a dbus interface to Konsole!");
 
-    QDBusReply<void> instanceReply = iface.call(QStringLiteral("close"));
+    QDBusReply<void> instanceReply = iface.call(QStringLiteral("quit"));
     if (!instanceReply.isValid()) {
         QFAIL(QStringLiteral("Unable to close Konsole: %1").arg(instanceReply.error().message()).toLatin1().data());
     }
