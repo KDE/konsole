@@ -253,6 +253,11 @@ public Q_SLOTS:
     /** DBus slot that sets the current (active) session window */
     Q_SCRIPTABLE void setCurrentSession(int sessionId);
 
+    /** DBus slot that creates a new session in the current view with the associated
+      * default profile and the default working directory
+      */
+    Q_SCRIPTABLE int newSession();
+
     /** DBus slot that creates a new session in the current view.
      * @param profile the name of the profile to be used
      * started.
@@ -273,11 +278,6 @@ public Q_SLOTS:
     // TODO: its semantic is application-wide. Move it to more appropriate place
     // DBus slot that returns a string list of defined (known) profiles
     Q_SCRIPTABLE QStringList profileList();
-
-    /** DBus slot that creates a new session in the current view with the associated
-      * default profile and the default working directory
-      */
-    Q_SCRIPTABLE int newSession();
 
     /** DBus slot that changes the view port to the next session */
     Q_SCRIPTABLE void nextSession();
