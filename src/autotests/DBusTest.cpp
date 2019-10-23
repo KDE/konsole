@@ -211,7 +211,7 @@ void DBusTest::testSessions()
 
     //****************** Test is/set title
     // TODO: Consider checking what is in Profile
-    stringReply = iface.call(QStringLiteral("title"), Session::LocalTabTitle);
+    stringReply = iface.call(QStringLiteral("title"), Session::NameRole);
     QVERIFY(stringReply.isValid());
 
     // set title to,  what title should be
@@ -224,10 +224,10 @@ void DBusTest::testSessions()
     QMapIterator<QString, QString> i(titleMap);
     while (i.hasNext()) {
         i.next();
-        voidReply = iface.call(QStringLiteral("setTitle"), Session::LocalTabTitle, i.key());
+        voidReply = iface.call(QStringLiteral("setTitle"), Session::NameRole, i.key());
         QVERIFY(voidReply.isValid());
 
-        stringReply = iface.call(QStringLiteral("title"), Session::LocalTabTitle);
+        stringReply = iface.call(QStringLiteral("title"), Session::NameRole);
         QVERIFY(stringReply.isValid());
 
         QCOMPARE(stringReply.value(), i.value());
