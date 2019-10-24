@@ -90,6 +90,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent) :
     _findNextButton->setAutoRaise(true);
     _findNextButton->setToolTip(i18nc("@info:tooltip",
                                       "Find the next match for the current search phrase"));
+    _findNextButton->installEventFilter(this);
     connect(_findNextButton, &QToolButton::clicked, this,
             &Konsole::IncrementalSearchBar::findNextClicked);
 
@@ -100,13 +101,14 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent) :
     _findPreviousButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
     _findPreviousButton->setToolTip(i18nc("@info:tooltip",
                                           "Find the previous match for the current search phrase"));
+    _findPreviousButton->installEventFilter(this);
     connect(_findPreviousButton, &QToolButton::clicked, this,
             &Konsole::IncrementalSearchBar::findPreviousClicked);
 
     _searchFromButton = new QToolButton(this);
     _searchFromButton->setAutoRaise(true);
-
     _searchFromButton->setObjectName(QStringLiteral("search-from-button"));
+    _searchFromButton->installEventFilter(this);
     connect(_searchFromButton, &QToolButton::clicked, this,
             &Konsole::IncrementalSearchBar::searchFromClicked);
 
@@ -118,12 +120,14 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent) :
     optionsButton->setToolTip(i18nc("@info:tooltip", "Display the options menu"));
     optionsButton->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
     optionsButton->setAutoRaise(true);
+    optionsButton->installEventFilter(this);
 
     auto closeButton = new QToolButton(this);
     closeButton->setObjectName(QStringLiteral("close-button"));
     closeButton->setToolTip(i18nc("@info:tooltip", "Close the search bar"));
     closeButton->setAutoRaise(true);
     closeButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-close")));
+    closeButton->installEventFilter(this);
     connect(closeButton, &QToolButton::clicked, this, &Konsole::IncrementalSearchBar::closeClicked);
 
     // Fill the options menu
@@ -209,29 +213,37 @@ void IncrementalSearchBar::setSearchText(const QString &text)
 
 bool IncrementalSearchBar::eventFilter(QObject *watched, QEvent *event)
 {
-    if ((event->type() != QEvent::KeyPress) || watched != _searchEdit) {
-        return QWidget::eventFilter(watched, event);
+    if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease) {
+        auto *keyEvent = static_cast<QKeyEvent *>(event);
+        QToolButton *toolButton = nullptr;
+
+        if (keyEvent->key() == Qt::Key_Return) {
+            if (watched == _searchEdit && event->type() == QEvent::KeyPress) {
+                if (keyEvent->modifiers() == Qt::NoModifier) {
+                    _findNextButton->click();
+                    return true;
+                }
+                if (keyEvent->modifiers() == Qt::ShiftModifier) {
+                    _findPreviousButton->click();
+                    return true;
+                }
+                if (keyEvent->modifiers() == Qt::ControlModifier) {
+                    _searchFromButton->click();
+                    return true;
+                }
+            } else if ((toolButton = qobject_cast<QToolButton *>(watched)) != nullptr) {
+                if(event->type() == QEvent::KeyPress && !toolButton->isDown()) {
+                    toolButton->setDown(true);
+                    toolButton->pressed();
+                } else if (toolButton->isDown()) {
+                    toolButton->setDown(keyEvent->isAutoRepeat());
+                    toolButton->released();
+                    toolButton->click();
+                }
+                return true;
+            }
+        }
     }
-
-    auto *keyEvent = static_cast<QKeyEvent *>(event);
-
-    if (keyEvent->key() == Qt::Key_Return && !keyEvent->modifiers()) {
-        _findNextButton->click();
-        return true;
-    }
-
-    if ((keyEvent->key() == Qt::Key_Return)
-        && (keyEvent->modifiers() == Qt::ShiftModifier)) {
-        _findPreviousButton->click();
-        return true;
-    }
-
-    if ((keyEvent->key() == Qt::Key_Return)
-        && (keyEvent->modifiers() == Qt::ControlModifier)) {
-        _searchFromButton->click();
-        return true;
-    }
-
     return QWidget::eventFilter(watched, event);
 }
 
