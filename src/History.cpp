@@ -111,8 +111,8 @@ HistoryFile::HistoryFile() :
     const QString tmpFormat = tmpDir + QLatin1Char('/') + QLatin1String("konsole-XXXXXX.history");
     _tmpFile.setFileTemplate(tmpFormat);
     if (_tmpFile.open()) {
-#if defined(Q_OS_LINUX) && !NDEBUG
-        qDebug("HistoryFile: /proc/%lld/fd/%d", qApp->applicationPid(), _tmpFile.handle());
+#if defined(Q_OS_LINUX)
+        qCDebug(KonsoleDebug, "HistoryFile: /proc/%lld/fd/%d", qApp->applicationPid(), _tmpFile.handle());
 #endif
         // On some systems QTemporaryFile creates unnamed file.
         // Do not interfere in such cases.
