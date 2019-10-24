@@ -122,7 +122,7 @@ HistoryFile::HistoryFile() :
             // and writing. This guarantees the file won't remain
             // in filesystem after process termination, even when
             // there was a crash.
-            unlink(_tmpFile.fileName().toLocal8Bit().constData());
+            unlink(QFile::encodeName(_tmpFile.fileName()).constData());
         }
     }
 }
