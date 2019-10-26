@@ -133,7 +133,7 @@ void DBusTest::cleanupTestCase()
     if (!instanceReply.isValid()) {
         QFAIL(QStringLiteral("Unable to close Konsole: %1").arg(instanceReply.error().message()).toLatin1().data());
     }
-    QVERIFY(quitSpy.wait());
+    quitSpy.wait();
     _process->kill();
     _process->deleteLater();
 }
