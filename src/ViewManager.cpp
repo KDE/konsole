@@ -1011,12 +1011,14 @@ int ViewManager::currentSession()
 
 void ViewManager::setCurrentSession(int sessionId)
 {
-    QHash<TerminalDisplay *, Session *>::const_iterator i;
-    for (i = _sessionMap.constBegin(); i != _sessionMap.constEnd(); ++i) {
-        if (i.value()->sessionId() == sessionId) {
-            i.key()->setFocus(Qt::OtherFocusReason);
-            return;
-        }
+    auto *session = SessionManager::instance()->idToSession(sessionId);
+    if (session == nullptr || session->views().count() == 0) {
+        return;
+    }
+
+    auto *display = session->views().at(0);
+    if (display != nullptr) {
+        display->setFocus(Qt::OtherFocusReason);
     }
 }
 
