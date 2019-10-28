@@ -1671,6 +1671,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             }
 
             //Apply text scaling matrix.
+            // TODO: setWorldMatrix is obsolete, change to setWorldTransform
             paint.setWorldMatrix(textScale, true);
 
             //calculate the area in which the text will be drawn
@@ -1705,6 +1706,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             _fixedFont = save__fixedFont;
 
             //reset back to single-width, single-height _lines
+            // TODO: setWorldMatrix is obsolete, change to setWorldTransform
             paint.setWorldMatrix(textScale.inverted(), true);
 
             if (y < _lineProperties.size() - 1) {
