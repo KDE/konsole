@@ -151,7 +151,7 @@ void TerminalHeaderBar::mouseMoveEvent(QMouseEvent* ev)
         payload.setNum(qApp->applicationPid());
         mimeData->setData(QStringLiteral("konsole/terminal_display"), payload);
         drag->setMimeData(mimeData);
-        drag->start();
+        drag->exec();
     }
 }
 
