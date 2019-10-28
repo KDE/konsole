@@ -44,6 +44,7 @@
 #include <KShell>
 #include <KProcess>
 #include <KConfigGroup>
+#include <KIO/DesktopExecParser>
 
 // Konsole
 #include <sessionadaptor.h>
@@ -382,7 +383,7 @@ QString Session::checkProgram(const QString& program)
         return exec;
     }
 
-    exec = KRun::binaryName(exec, false);
+    exec = KIO::DesktopExecParser::executablePath(exec);
     exec = KShell::tildeExpand(exec);
     const QString pexec = QStandardPaths::findExecutable(exec);
     if (pexec.isEmpty()) {
