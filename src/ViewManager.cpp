@@ -618,6 +618,7 @@ void ViewManager::controllerChanged(SessionController *controller)
         return;
     }
 
+    _viewContainer->setFocusProxy(controller->view());
     updateTerminalDisplayHistory(controller->view());
 
     _pluggedController = controller;
