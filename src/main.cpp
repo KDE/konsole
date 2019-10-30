@@ -167,6 +167,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
     if (!Konsole::KonsoleSettings::useSingleInstance()
         && !parser->isSet(QStringLiteral("new-tab"))) {
         startupOption = KDBusService::Multiple;
+    } else if (Konsole::KonsoleSettings::useSingleInstance()) {
+        startupOption = KDBusService::Unique;
     }
 
     atexit(deleteQApplication);
