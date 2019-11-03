@@ -1,7 +1,7 @@
 /*
  *  This file is part of Konsole, a terminal emulator for KDE.
  *
- *  Copyright 2012  Frederik Gladhorn <gladhorn@kde.org>
+ *  Copyright 2019  Tomaz Canabrava <tcanabrava@kde.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
