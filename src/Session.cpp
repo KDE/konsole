@@ -121,7 +121,10 @@ Session::Session(QObject* parent) :
     _emulation = new Vt102Emulation();
 
     connect(_emulation, &Konsole::Emulation::sessionAttributeChanged, this, &Konsole::Session::setSessionAttribute);
-    connect(_emulation, &Konsole::Emulation::stateSet, this, &Konsole::Session::activityStateSet);
+    connect(_emulation, &Konsole::Emulation::bell, this, [this]() {
+        emit bellRequest(i18n("Bell in session '%1'", _nameTitle));
+        this->setPendingNotification(Notification::Bell);
+    });
     connect(_emulation, &Konsole::Emulation::zmodemDownloadDetected, this, &Konsole::Session::fireZModemDownloadDetected);
     connect(_emulation, &Konsole::Emulation::zmodemUploadDetected, this, &Konsole::Session::fireZModemUploadDetected);
     connect(_emulation, &Konsole::Emulation::changeTabTextColorRequest, this, &Konsole::Session::changeTabTextColor);
@@ -333,6 +336,8 @@ void Session::addView(TerminalDisplay* widget)
 
     connect(_emulation, &Konsole::Emulation::setCursorStyleRequest, widget, &Konsole::TerminalDisplay::setCursorStyle);
     connect(_emulation, &Konsole::Emulation::resetCursorStyleRequest, widget, &Konsole::TerminalDisplay::resetCursorStyle);
+
+    connect(widget, &Konsole::TerminalDisplay::keyPressedSignal, this, &Konsole::Session::resetNotifications);
 }
 
 void Session::viewDestroyed(QObject* view)
@@ -617,7 +622,7 @@ void Session::silenceTimerDone()
 
     //FIXME: Make message text for this notification and the activity notification more descriptive.
     if (!_monitorSilence) {
-        emit stateChanged(NOTIFYNORMAL);
+        setPendingNotification(Notification::Silence, false);
         return;
     }
 
@@ -633,12 +638,20 @@ void Session::silenceTimerDone()
             i18n("Silence in session '%1'", _nameTitle), QPixmap(),
             QApplication::activeWindow(),
             KNotification::CloseWhenWidgetActivated);
-    emit stateChanged(NOTIFYSILENCE);
+    setPendingNotification(Notification::Silence);
 }
 
 void Session::activityTimerDone()
 {
     _notifiedActivity = false;
+}
+
+void Session::resetNotifications()
+{
+    static const Notification availableNotifications[] = {Activity, Silence, Bell};
+    for (auto notification: availableNotifications) {
+        setPendingNotification(notification, false);
+    }
 }
 
 void Session::updateFlowControlState(bool suspended)
@@ -686,50 +699,6 @@ void Session::sessionAttributeRequest(int id)
             emit getBackgroundColor();
             break;
     }
-}
-
-void Session::activityStateSet(int state)
-{
-    // TODO: should this hardcoded interval be user configurable?
-    const int activityMaskInSeconds = 15;
-
-    if (state == NOTIFYBELL) {
-        emit bellRequest(i18n("Bell in session '%1'", _nameTitle));
-    } else if (state == NOTIFYACTIVITY) {
-        // Don't notify if the terminal is active
-        bool hasFocus = false;
-        for (const TerminalDisplay *display : qAsConst(_views)) {
-            if (display->hasFocus()) {
-                hasFocus = true;
-                break;
-            }
-        }
-
-        if (_monitorActivity  && !_notifiedActivity) {
-            KNotification::event(hasFocus ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"),
-                                 i18n("Activity in session '%1'", _nameTitle), QPixmap(),
-                                 QApplication::activeWindow(),
-                                 KNotification::CloseWhenWidgetActivated);
-
-            // mask activity notification for a while to avoid flooding
-            _notifiedActivity = true;
-            _activityTimer->start(activityMaskInSeconds * 1000);
-        }
-
-        // reset the counter for monitoring continuous silence since there is activity
-        if (_monitorSilence) {
-            _silenceTimer->start(_silenceSeconds * 1000);
-        }
-    }
-
-    if (state == NOTIFYACTIVITY && !_monitorActivity) {
-        state = NOTIFYNORMAL;
-    }
-    if (state == NOTIFYSILENCE && !_monitorSilence) {
-        state = NOTIFYNORMAL;
-    }
-
-    emit stateChanged(state);
 }
 
 void Session::onViewSizeChange(int /*height*/, int /*width*/)
@@ -1305,7 +1274,7 @@ void Session::setMonitorActivity(bool monitor)
     // This timer is meaningful only after activity has been notified
     _activityTimer->stop();
 
-    activityStateSet(NOTIFYNORMAL);
+    setPendingNotification(Notification::Activity, false);
 }
 
 void Session::setMonitorSilence(bool monitor)
@@ -1321,7 +1290,7 @@ void Session::setMonitorSilence(bool monitor)
         _silenceTimer->stop();
     }
 
-    activityStateSet(NOTIFYNORMAL);
+    setPendingNotification(Notification::Silence, false);
 }
 
 void Session::setMonitorSilenceSeconds(int seconds)
@@ -1495,6 +1464,7 @@ void Session::zmodemFinished()
 
 void Session::onReceiveBlock(const char* buf, int len)
 {
+    handleActivity();
     _emulation->receiveData(buf, len);
 }
 
@@ -1708,6 +1678,50 @@ QString Session::validDirectory(const QString& dir) const
     }
 
     return validDir;
+}
+
+void Session::setPendingNotification(Session::Notification notification, bool enable)
+{
+    if(enable != _activeNotifications.testFlag(notification)) {
+        _activeNotifications.setFlag(notification, enable);
+        emit notificationsChanged(notification, enable);
+    }
+}
+
+void Session::handleActivity()
+{
+    // TODO: should this hardcoded interval be user configurable?
+    const int activityMaskInSeconds = 15;
+
+    bool hasFocus = false;
+    // Don't notify if the terminal is active
+    const auto &displays = _views;
+    for (const TerminalDisplay *display: displays) {
+        if (display->hasFocus()) {
+            hasFocus = true;
+            break;
+        }
+    }
+
+    if (_monitorActivity && !_notifiedActivity) {
+        KNotification::event(hasFocus ? QStringLiteral("Activity") : QStringLiteral("ActivityHidden"),
+                             i18n("Activity in session '%1'", _nameTitle), QPixmap(),
+                             QApplication::activeWindow(),
+                             KNotification::CloseWhenWidgetActivated);
+
+        // mask activity notification for a while to avoid flooding
+        _notifiedActivity = true;
+        _activityTimer->start(activityMaskInSeconds * 1000);
+    }
+
+    // reset the counter for monitoring continuous silence since there is activity
+    if (_monitorSilence) {
+        _silenceTimer->start(_silenceSeconds * 1000);
+    }
+
+    if (_monitorActivity) {
+        setPendingNotification(Notification::Activity);
+    }
 }
 
 bool Session::isReadOnly() const

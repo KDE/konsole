@@ -34,6 +34,7 @@
 #include "ViewProperties.h"
 #include "Profile.h"
 #include "Enumeration.h"
+#include "Session.h"
 
 class QAction;
 class QTextCodec;
@@ -255,7 +256,7 @@ private Q_SLOTS:
     void updateCodecAction();
     void showDisplayContextMenu(const QPoint &position);
     void movementKeyFromSearchBarReceived(QKeyEvent *event);
-    void sessionStateChanged(int state);
+    void sessionNotificationsChanged(Session::Notification notification, bool enabled);
     void sessionAttributeChanged();
     void sessionReadOnlyChanged();
     void searchTextChanged(const QString &text);

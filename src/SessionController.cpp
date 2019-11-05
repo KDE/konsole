@@ -167,7 +167,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect(_view.data(), &Konsole::TerminalDisplay::keyPressedSignal, this, &Konsole::SessionController::trackOutput);
 
     // listen to activity / silence notifications from session
-    connect(_session.data(), &Konsole::Session::stateChanged, this, &Konsole::SessionController::sessionStateChanged);
+    connect(_session.data(), &Konsole::Session::notificationsChanged, this, &Konsole::SessionController::sessionNotificationsChanged);
     // listen to title and icon changes
     connect(_session.data(), &Konsole::Session::sessionAttributeChanged, this, &Konsole::SessionController::sessionAttributeChanged);
     connect(_session.data(), &Konsole::Session::readOnlyChanged, this, &Konsole::SessionController::sessionReadOnlyChanged);
@@ -1741,26 +1741,21 @@ void SessionController::movementKeyFromSearchBarReceived(QKeyEvent *event)
     setSearchStartToWindowCurrentLine();
 }
 
-void SessionController::sessionStateChanged(int state)
+void SessionController::sessionNotificationsChanged(Session::Notification notification, bool enabled)
 {
-    if (state == _previousState) {
-        return;
-    }
-
-    if (state == NOTIFYACTIVITY) {
+    if (notification == Session::Notification::Activity && enabled) {
         setIcon(*_activityIcon);
         _keepIconUntilInteraction = true;
-    } else if (state == NOTIFYSILENCE) {
+    } else if (notification == Session::Notification::Silence && enabled) {
         setIcon(*_silenceIcon);
         _keepIconUntilInteraction = true;
-    } else if (state == NOTIFYBELL) {
+    } else if (notification == Session::Notification::Bell && enabled) {
         setIcon(*_bellIcon);
         _keepIconUntilInteraction = true;
-    } else if (state == NOTIFYNORMAL) {
+    } else {
         updateSessionIcon();
     }
-
-    _previousState = state;
+    emit notificationChanged(this, notification, enabled);
 }
 
 void SessionController::zmodemDownload()

@@ -205,7 +205,7 @@ void Emulation::receiveChar(uint c)
         _currentScreen->toStartOfLine();
         break;
     case 0x07:
-        emit stateSet(NOTIFYBELL);
+        emit bell();
         break;
     default:
         _currentScreen->displayCharacter(c);
@@ -215,8 +215,6 @@ void Emulation::receiveChar(uint c)
 
 void Emulation::sendKeyEvent(QKeyEvent *ev)
 {
-    emit stateSet(NOTIFYNORMAL);
-
     if (!ev->text().isEmpty()) {
         // A block of text
         // Note that the text is proper unicode.
@@ -236,8 +234,6 @@ void Emulation::sendMouseEvent(int /*buttons*/, int /*column*/, int /*row*/, int
 
 void Emulation::receiveData(const char *text, int length)
 {
-    emit stateSet(NOTIFYACTIVITY);
-
     bufferedUpdate();
 
     QVector<uint> unicodeText = _decoder->toUnicode(text, length).toUcs4();

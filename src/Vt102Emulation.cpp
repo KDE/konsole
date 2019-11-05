@@ -564,7 +564,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_ctl('D'      ) : /* EOT: ignored                      */ break;
     case token_ctl('E'      ) :      reportAnswerBack     (          ); break; //VT100
     case token_ctl('F'      ) : /* ACK: ignored                      */ break;
-    case token_ctl('G'      ) : emit stateSet(NOTIFYBELL);
+    case token_ctl('G'      ) : emit bell();
                                 break; //VT100
     case token_ctl('H'      ) : _currentScreen->backspace            (          ); break; //VT100
     case token_ctl('I'      ) : _currentScreen->tab                  (          ); break; //VT100

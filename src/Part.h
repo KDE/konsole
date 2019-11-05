@@ -28,6 +28,7 @@
 #include <QVariantList>
 
 // Konsole
+#include "Session.h"
 #include "config-konsole.h"
 
 class QStringList;
@@ -208,7 +209,7 @@ private Q_SLOTS:
     void terminalExited();
     void newTab();
     void overrideTerminalShortcut(QKeyEvent *, bool &override);
-    void sessionStateChanged(int state);
+    void notificationChanged(Session::Notification notification, bool enabled);
 private:
     Session *activeSession() const;
 

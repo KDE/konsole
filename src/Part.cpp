@@ -393,13 +393,13 @@ void Part::setMonitorSilenceEnabled(bool enabled)
 
     if (enabled) {
         activeSession()->setMonitorSilence(true);
-        connect(activeSession(), &Konsole::Session::stateChanged,
-                this, &Konsole::Part::sessionStateChanged,
+        connect(activeSession(), &Konsole::Session::notificationsChanged,
+                this, &Konsole::Part::notificationChanged,
                 Qt::UniqueConnection);
     } else {
         activeSession()->setMonitorSilence(false);
-        disconnect(activeSession(), &Konsole::Session::stateChanged,
-                   this, &Konsole::Part::sessionStateChanged);
+        disconnect(activeSession(), &Konsole::Session::notificationsChanged,
+                   this, &Konsole::Part::notificationChanged);
     }
 }
 
@@ -409,14 +409,14 @@ void Part::setMonitorActivityEnabled(bool enabled)
 
     if (enabled) {
         activeSession()->setMonitorActivity(true);
-        connect(activeSession(), &Konsole::Session::stateChanged,
-                this, &Konsole::Part::sessionStateChanged,
+        connect(activeSession(), &Konsole::Session::notificationsChanged,
+                this, &Konsole::Part::notificationChanged,
                 Qt::UniqueConnection);
     } else {
         activeSession()->setMonitorActivity(false);
-        disconnect(activeSession(), &Konsole::Session::stateChanged,
+        disconnect(activeSession(), &Konsole::Session::notificationsChanged,
                    this,
-                   &Konsole::Part::sessionStateChanged);
+                   &Konsole::Part::notificationChanged);
     }
 }
 
@@ -425,11 +425,11 @@ bool Part::isBlurEnabled()
     return ViewManager::profileHasBlurEnabled(SessionManager::instance()->sessionProfile(activeSession()));
 }
 
-void Part::sessionStateChanged(int state)
+void Part::notificationChanged(Session::Notification notification, bool enabled)
 {
-    if (state == NOTIFYSILENCE) {
+    if (notification == Session::Notification::Silence && enabled) {
         emit silenceDetected();
-    } else if (state == NOTIFYACTIVITY) {
+    } else if (notification == Session::Notification::Activity && enabled) {
         emit activityDetected();
     }
 }

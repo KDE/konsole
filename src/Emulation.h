@@ -42,30 +42,6 @@ class ScreenWindow;
 class TerminalCharacterDecoder;
 
 /**
- * This enum describes the available states which
- * the terminal emulation may be set to.
- *
- * These are the values used by Emulation::stateChanged()
- */
-enum {
-    /** The emulation is currently receiving user input. */
-    NOTIFYNORMAL = 0,
-    /**
-     * The terminal program has triggered a bell event
-     * to get the user's attention.
-     */
-    NOTIFYBELL = 1,
-    /**
-     * The emulation is currently receiving data from its
-     * terminal input.
-     */
-    NOTIFYACTIVITY = 2,
-
-    // unused here?
-    NOTIFYSILENCE = 3
-};
-
-/**
  * Base class for terminal emulation back-ends.
  *
  * The back-end is responsible for decoding an incoming character stream and
@@ -289,12 +265,9 @@ Q_SIGNALS:
     void useUtf8Request(bool);
 
     /**
-     * Emitted when the activity state of the emulation is set.
-     *
-     * @param state The new activity state, one of NOTIFYNORMAL, NOTIFYACTIVITY
-     * or NOTIFYBELL
+     * Emitted when bell appeared
      */
-    void stateSet(int state);
+    void bell();
 
     /**
      * Emitted when the special sequence indicating the request for data
