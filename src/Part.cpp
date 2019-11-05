@@ -398,8 +398,10 @@ void Part::setMonitorSilenceEnabled(bool enabled)
                 Qt::UniqueConnection);
     } else {
         activeSession()->setMonitorSilence(false);
-        disconnect(activeSession(), &Konsole::Session::notificationsChanged,
-                   this, &Konsole::Part::notificationChanged);
+        if (!activeSession()->isMonitorActivity()) {
+            disconnect(activeSession(), &Konsole::Session::notificationsChanged,
+                       this, &Konsole::Part::notificationChanged);
+        }
     }
 }
 
@@ -414,9 +416,11 @@ void Part::setMonitorActivityEnabled(bool enabled)
                 Qt::UniqueConnection);
     } else {
         activeSession()->setMonitorActivity(false);
-        disconnect(activeSession(), &Konsole::Session::notificationsChanged,
-                   this,
-                   &Konsole::Part::notificationChanged);
+        if (!activeSession()->isMonitorSilence()) {
+            disconnect(activeSession(), &Konsole::Session::notificationsChanged,
+                       this,
+                       &Konsole::Part::notificationChanged);
+        }
     }
 }
 
