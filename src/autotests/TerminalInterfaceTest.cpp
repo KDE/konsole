@@ -120,7 +120,7 @@ void TerminalInterfaceTest::testTerminalInterface()
     // int terminalProcessId  = terminal->terminalProcessId();
 
     // Let's try using QSignalSpy
-    // http://techbase.kde.org/Development/Tutorials/Unittests
+    // https://community.kde.org/Guidelines_and_HOWTOs/UnitTests
     // QSignalSpy is really a QList of QLists, so we take the first
     // list, which corresponds to the arguments for the first signal
     // we caught.

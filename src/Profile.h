@@ -284,7 +284,7 @@ public:
          * Tracking events but don't indicate they're interested in those
          * events; for example, when vim doesn't indicate it's interested
          * in Mouse Tracking events (i.e. when the mouse is in Normal
-         * (not Visual) mode): http://vimdoc.sourceforge.net/htmldoc/intro.html#Normal
+         * (not Visual) mode): https://vimhelp.org/intro.txt.html#vim-modes-intro
          * mouse wheel scroll events will send up/down key press events.
          *
          * Default value is true.

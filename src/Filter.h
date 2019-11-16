@@ -284,7 +284,7 @@ private:
 
 /**
  * A filter which matches files according to POSIX Portable Filename Character Set
- * http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_267
+ * https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_267
  */
 class FileFilter : public RegExpFilter
 {

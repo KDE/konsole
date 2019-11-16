@@ -349,7 +349,7 @@ public:
     /**
       * Possible values of the @p what parameter for setSessionAttribute().
       * See the "Operating System Commands" section at:
-      * http://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Operating-System-Commands
+      * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands
       */
     enum SessionAttributes {
         IconNameAndWindowTitle = 0,

@@ -515,7 +515,7 @@ QList<QAction *> UrlFilter::HotSpot::actions()
   * File Filter - Construct a filter that works on local file paths using the
   * posix portable filename character set combined with KDE's mimetype filename
   * extension blob patterns.
-  * http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_267
+  * https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_267
   */
 
 RegExpFilter::HotSpot *FileFilter::newHotSpot(int startLine, int startColumn, int endLine,

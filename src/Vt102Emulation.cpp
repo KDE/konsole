@@ -1006,7 +1006,7 @@ void Vt102Emulation::reportSecondaryAttributes()
 /* DECREPTPARM – Report Terminal Parameters
     ESC [ <sol>; <par>; <nbits>; <xspeed>; <rspeed>; <clkmul>; <flags> x
 
-    http://vt100.net/docs/vt100-ug/chapter3.html
+    https://vt100.net/docs/vt100-ug/chapter3.html
 */
 void Vt102Emulation::reportTerminalParms(int p)
 {
