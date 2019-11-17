@@ -3164,30 +3164,42 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         }
     }
 
+    // Most code in Konsole uses UTF-32. We're filtering
+    // UTF-16 here, as all control characters can be represented
+    // in this encoding as single code unit. If you ever need to
+    // filter anything above 0xFFFF (specific code points or
+    // categories which contain such code points), convert text to
+    // UTF-32 using QString::toUcs4() and use QChar static
+    // methods which take "uint ucs4".
+    static const QVector<ushort> whitelist = { u'\t', u'\r', u'\n' };
+    static const auto isUnsafe = [](const QChar &c) {
+        return (c.category() == QChar::Category::Other_Control && !whitelist.contains(c.unicode()));
+    };
+
     QStringList unsafeCharacters;
     for (const QChar &c : text) {
-        if (!c.isPrint() && c != QLatin1Char('\t') && c != QLatin1Char('\n')) {
+        if (isUnsafe(c)) {
             QString description;
             switch(c.unicode()) {
-            case '\x03':
+            case u'\x03':
                 description = i18n("^C Interrupt: May abort the current process");
                 break;
-            case '\x04':
+            case u'\x04':
                 description = i18n("^D End of transmission: May exit the current process");
                 break;
-            case '\x07':
+            case u'\x07':
                 description = i18n("^G Bell: Will try to emit an audible warning");
                 break;
-            case '\x08':
+            case u'\x08':
                 description = i18n("^H Backspace");
                 break;
-            case '\x13':
+            case u'\x13':
                 description = i18n("^S Scroll lock: Locks terminal output");
                 break;
-            case '\x1a':
+            case u'\x1a':
                 description = i18n("^Z Suspend: Stops current process");
                 break;
-            case '\x1b':
+            case u'\x1b':
                 description = i18n("ESC: Used for special commands to the current process");
                 break;
             default:
@@ -3222,7 +3234,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         case KMessageBox::Yes: {
             QString sanitized;
             for (const QChar &c : text) {
-                if (c.isPrint() || c == QLatin1Char('\t') || c == QLatin1Char('\n')) {
+                if (!isUnsafe(c)) {
                     sanitized.append(c);
                 }
             }
