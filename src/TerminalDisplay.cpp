@@ -3222,13 +3222,13 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
                 unsafeCharacters,
                 i18nc("@title", "Filter"),
                 KGuiItem(i18nc("@action:button",
-                    "&Remove unprintable"),
+                    "Paste &without control characters"),
                     QStringLiteral("filter-symbolic")),
                 KGuiItem(i18nc("@action:button",
-                    "Confirm &paste"),
+                    "&Paste everything"),
                     QStringLiteral("edit-paste")),
                 KGuiItem(i18nc("@action:button",
-                    "&Cancel paste"),
+                    "&Cancel"),
                     QStringLiteral("dialog-cancel")),
                 QStringLiteral("ShowPasteUnprintableWarning")
             );
