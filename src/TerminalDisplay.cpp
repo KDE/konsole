@@ -3220,7 +3220,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
                 i18n("The text you're trying to paste contains hidden control characters, "
                     "do you want to filter them out?"),
                 unsafeCharacters,
-                i18nc("@title", "Filter"),
+                i18nc("@title", "Confirm Paste"),
                 KGuiItem(i18nc("@action:button",
                     "Paste &without control characters"),
                     QStringLiteral("filter-symbolic")),
