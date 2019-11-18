@@ -3175,45 +3175,49 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
     static const auto isUnsafe = [](const QChar &c) {
         return (c.category() == QChar::Category::Other_Control && !whitelist.contains(c.unicode()));
     };
+    // Returns control sequence string (e.g. "^C") for control character c
+    static const auto charToSequence = [](const QChar &c) {
+        if (c.unicode() <= 0x1F) {
+            return QStringLiteral("^%1").arg(QChar(u'@' + c.unicode()));
+        } else if (c.unicode() == 0x7F) {
+            return QStringLiteral("^?");
+        } else if (c.unicode() >= 0x80 && c.unicode() <= 0x9F){
+            return QStringLiteral("^[%1").arg(QChar(u'@' + c.unicode() - 0x80));
+        }
+        return QString();
+    };
+
+    const QMap<ushort, QString> characterDescriptions = {
+        {0x0003, i18n("End Of Text/Interrupt: may exit the current process")},
+        {0x0004, i18n("End Of Transmission: may exit the current process")},
+        {0x0007, i18n("Bell: will try to emit an audible warning")},
+        {0x0008, i18n("Backspace")},
+        {0x0013, i18n("Device Control Three/XOFF: suspends output")},
+        {0x001a, i18n("Substitute/Suspend: may suspend current process")},
+        {0x001b, i18n("Escape: used for manipulating terminal state")},
+        {0x001c, i18n("File Separator/Quit: may abort the current process")},
+    };
 
     QStringList unsafeCharacters;
     for (const QChar &c : text) {
         if (isUnsafe(c)) {
-            QString description;
-            switch(c.unicode()) {
-            case u'\x03':
-                description = i18n("^C Interrupt: May abort the current process");
-                break;
-            case u'\x04':
-                description = i18n("^D End of transmission: May exit the current process");
-                break;
-            case u'\x07':
-                description = i18n("^G Bell: Will try to emit an audible warning");
-                break;
-            case u'\x08':
-                description = i18n("^H Backspace");
-                break;
-            case u'\x13':
-                description = i18n("^S Scroll lock: Locks terminal output");
-                break;
-            case u'\x1a':
-                description = i18n("^Z Suspend: Stops current process");
-                break;
-            case u'\x1b':
-                description = i18n("ESC: Used for special commands to the current process");
-                break;
-            default:
-                description = ki18n("Other unprintable character (\\x%1)").subs(c.unicode(), 0, 16).toString();
-                break;
+            const QString sequence = charToSequence(c);
+            const QString description = characterDescriptions.value(c.unicode(), QString());
+            QString entry = QStringLiteral("U+%1").arg(c.unicode(), 4, 16, QLatin1Char('0'));
+            if(!sequence.isEmpty()) {
+                entry += QStringLiteral("\t%1").arg(sequence);
             }
-            unsafeCharacters.append(description);
+            if(!description.isEmpty()) {
+                entry += QStringLiteral("\t%1").arg(description);
+            }
+            unsafeCharacters.append(entry);
         }
     }
     unsafeCharacters.removeDuplicates();
 
     if (!unsafeCharacters.isEmpty()) {
         int result = KMessageBox::warningYesNoCancelList(window(),
-                i18n("The text you're trying to paste contains hidden unprintable characters, "
+                i18n("The text you're trying to paste contains hidden control characters, "
                     "do you want to filter them out?"),
                 unsafeCharacters,
                 i18nc("@title", "Filter"),
