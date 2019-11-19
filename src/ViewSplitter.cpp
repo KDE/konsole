@@ -203,8 +203,17 @@ void ViewSplitter::focusRight()
 
 TerminalDisplay *ViewSplitter::activeTerminalDisplay() const
 {
-    auto focusedWidget = qobject_cast<TerminalDisplay*>(focusWidget());
-    return focusedWidget != nullptr ? focusedWidget : findChild<TerminalDisplay*>();
+    auto focusedWidget = focusWidget();
+    auto focusedTerminalDisplay = qobject_cast<TerminalDisplay*>(focusedWidget);
+
+    // TD's child can be focused - try to find parent.
+    while (focusedTerminalDisplay == nullptr && focusedWidget != nullptr && focusedWidget != this) {
+        focusedWidget = focusedWidget->parentWidget();
+        focusedTerminalDisplay = qobject_cast<TerminalDisplay*>(focusedWidget);
+    }
+
+    return focusedTerminalDisplay != nullptr ? focusedTerminalDisplay
+                                             : findChild<TerminalDisplay*>();
 }
 
 void ViewSplitter::toggleMaximizeCurrentTerminal()
