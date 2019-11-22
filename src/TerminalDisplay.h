@@ -392,8 +392,11 @@ public Q_SLOTS:
     void copyToClipboard();
 
     /**
-     * Pastes the content of the clipboard into the
-     * display.
+     * Pastes the content of the clipboard into the display.
+     *
+     * URLs of local files are treated specially:
+     *  - The scheme part, "file://", is removed from each URL
+     *  - The URLs are pasted as a space-separated list of file paths
      */
     void pasteFromClipboard(bool appendEnter = false);
     /**
