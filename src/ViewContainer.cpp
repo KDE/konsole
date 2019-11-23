@@ -364,7 +364,7 @@ void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
 {
     auto item = display->sessionController();
     connect(item, &Konsole::SessionController::viewFocused, this,
-        &Konsole::TabbedViewContainer::currentSessionControllerChanged);
+            &Konsole::TabbedViewContainer::currentSessionControllerChanged);
 
     connect(item, &Konsole::ViewProperties::titleChanged, this,
             &Konsole::TabbedViewContainer::updateTitle);
@@ -380,7 +380,7 @@ void TabbedViewContainer::disconnectTerminalDisplay(TerminalDisplay *display)
 {
     auto item = display->sessionController();
     disconnect(item, &Konsole::SessionController::viewFocused, this,
-        &Konsole::TabbedViewContainer::currentSessionControllerChanged);
+            &Konsole::TabbedViewContainer::currentSessionControllerChanged);
 
     disconnect(item, &Konsole::ViewProperties::titleChanged, this,
             &Konsole::TabbedViewContainer::updateTitle);
