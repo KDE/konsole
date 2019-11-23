@@ -1292,7 +1292,9 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 
     // Determine which characters should be repainted (1 region unit = 1 character)
     QRegion dirtyImageRegion;
-    foreach(const QRect & rect, (pe->region() & contentsRect())) {
+    const QRegion region = pe->region() & contentsRect();
+
+    for (const QRect &rect : region) {
         dirtyImageRegion += widgetToImage(rect);
         drawBackground(paint, rect, getBackgroundColor(), true /* use opacity setting */);
     }
@@ -1301,7 +1303,7 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
     // set https://bugreports.qt.io/browse/QTBUG-66036
     paint.setRenderHint(QPainter::TextAntialiasing, _antialiasText);
 
-    foreach(const QRect & rect, dirtyImageRegion) {
+    for (const QRect &rect : qAsConst(dirtyImageRegion)) {
         drawContents(paint, rect);
     }
     drawCurrentResultRect(paint);
@@ -1310,7 +1312,7 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 
     const bool drawDimmed = _dimWhenInactive && !hasFocus();
     const QColor dimColor(0, 0, 0, 128);
-    foreach(const QRect & rect, (pe->region() & contentsRect())) {
+    for (const QRect &rect : region) {
         if (drawDimmed) {
             paint.fillRect(rect, dimColor);
         }

@@ -57,7 +57,7 @@ Application::Application(QSharedPointer<QCommandLineParser> parser,
 
 void Application::populateCommandLineParser(QCommandLineParser *parser)
 {
-    auto options = QVector<QCommandLineOption> {
+    const auto options = QVector<QCommandLineOption> {
         { { QStringLiteral("profile") },
             i18nc("@info:shell", "Name of profile to use for new Konsole instance"),
             QStringLiteral("name")
@@ -118,7 +118,7 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
             QStringLiteral("cmd")
         }
     };
-    foreach(const auto& option, options) {
+    for (const auto &option : options) {
         parser->addOption(option);
     }
 
@@ -187,7 +187,8 @@ void Application::detachTerminals(ViewSplitter *splitter,const QHash<TerminalDis
     MainWindow *window = newMainWindow();
     ViewManager *manager = window->viewManager();
 
-    foreach(TerminalDisplay* terminal, splitter->findChildren<TerminalDisplay*>()) {
+    const QList<TerminalDisplay *> displays = splitter->findChildren<TerminalDisplay *>();
+    for (TerminalDisplay* terminal : displays) {
         manager->attachView(terminal, sessionsMap[terminal]);
     }
     manager->activeContainer()->addSplitter(splitter);
@@ -472,9 +473,9 @@ bool Application::processHelpArgs()
 
 void Application::listAvailableProfiles()
 {
-    QStringList paths = ProfileManager::instance()->availableProfilePaths();
+    const QStringList paths = ProfileManager::instance()->availableProfilePaths();
 
-    foreach (const QString &path, paths) {
+    for (const QString &path : paths) {
         QFileInfo info(path);
         printf("%s\n", info.completeBaseName().toLocal8Bit().constData());
     }
@@ -485,7 +486,7 @@ void Application::listProfilePropertyInfo()
     Profile::Ptr tempProfile = ProfileManager::instance()->defaultProfile();
     const QStringList names = tempProfile->propertiesInfoList();
 
-    foreach (const QString &name, names) {
+    for (const QString &name : names) {
         printf("%s\n", name.toLocal8Bit().constData());
     }
 }
@@ -505,7 +506,7 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
 
     // temporary changes to profile options specified on the command line
     const QStringList profileProperties = m_parser->values(QStringLiteral("p"));
-    foreach (const QString &value, profileProperties) {
+    for (const QString &value : profileProperties) {
         ProfileCommandParser parser;
 
         QHashIterator<Profile::Property, QVariant> iter(parser.parse(value));

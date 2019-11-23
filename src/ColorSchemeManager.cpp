@@ -58,8 +58,8 @@ void ColorSchemeManager::loadAllColorSchemes()
     int success = 0;
     int failed = 0;
 
-    QStringList nativeColorSchemes = listColorSchemes();
-    foreach (const QString &colorScheme, nativeColorSchemes) {
+    const QStringList nativeColorSchemes = listColorSchemes();
+    for (const QString &colorScheme : nativeColorSchemes) {
         if (loadColorScheme(colorScheme)) {
             success++;
         } else {

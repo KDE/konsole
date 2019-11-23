@@ -623,7 +623,7 @@ void Session::silenceTimerDone()
     }
 
     bool hasFocus = false;
-    foreach(TerminalDisplay *display, _views) {
+    for (const TerminalDisplay *display : qAsConst(_views)) {
         if (display->hasFocus()) {
             hasFocus = true;
             break;
@@ -646,14 +646,14 @@ void Session::updateFlowControlState(bool suspended)
 {
     if (suspended) {
         if (flowControlEnabled()) {
-            foreach(TerminalDisplay * display, _views) {
+            for (TerminalDisplay *display : qAsConst(_views)) {
                 if (display->flowControlWarningEnabled()) {
                     display->outputSuspended(true);
                 }
             }
         }
     } else {
-        foreach(TerminalDisplay * display, _views) {
+        for (TerminalDisplay *display : qAsConst(_views)) {
             display->outputSuspended(false);
         }
     }
@@ -695,7 +695,7 @@ void Session::activityStateSet(int state)
     } else if (state == NOTIFYACTIVITY) {
         // Don't notify if the terminal is active
         bool hasFocus = false;
-        foreach(TerminalDisplay *display, _views) {
+        for (const TerminalDisplay *display : qAsConst(_views)) {
             if (display->hasFocus()) {
                 hasFocus = true;
                 break;
@@ -746,7 +746,7 @@ void Session::updateTerminalSize()
     const int VIEW_COLUMNS_THRESHOLD = 2;
 
     //select largest number of lines and columns that will fit in all visible views
-    foreach(TerminalDisplay* view, _views) {
+    for (TerminalDisplay *view : qAsConst(_views)) {
         if (!view->isHidden() &&
                 view->lines() >= VIEW_LINES_THRESHOLD &&
                 view->columns() >= VIEW_COLUMNS_THRESHOLD) {
@@ -1604,7 +1604,7 @@ QString Session::profile()
 void Session::setProfile(const QString &profileName)
 {
   const QList<Profile::Ptr> profiles = ProfileManager::instance()->allProfiles();
-  foreach (const Profile::Ptr &profile, profiles) {
+  for (const Profile::Ptr &profile : profiles) {
     if (profile->name() == profileName) {
       SessionManager::instance()->setSessionProfile(this, profile);
     }
@@ -1785,7 +1785,7 @@ void SessionGroup::forwardData(const QByteArray& data)
 
     _inForwardData = true;
     const QList<Session*> sessionsKeys = _sessions.keys();
-    foreach(Session* other, sessionsKeys) {
+    for (Session *other : sessionsKeys) {
         if (!_sessions[other]) {
             other->emulation()->sendString(data);
         }

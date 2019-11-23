@@ -121,10 +121,10 @@ void CopyInputDialog::setSelectionChecked(bool checked)
     QAbstractItemModel *model = _ui->sessionList->model();
     int rows = model->rowCount();
 
-    QModelIndexList selected = _ui->sessionList->selectionModel()->selectedIndexes();
+    const QModelIndexList selected = _ui->sessionList->selectionModel()->selectedIndexes();
 
     if (selected.count() > 1) {
-        foreach (const QModelIndex &index, selected) {
+        for (const QModelIndex &index : selected) {
             setRowChecked(index.row(), checked);
         }
     } else {

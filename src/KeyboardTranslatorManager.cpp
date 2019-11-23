@@ -112,7 +112,7 @@ void KeyboardTranslatorManager::findTranslators()
     // add the name of each translator to the list and associated
     // the name with a null pointer to indicate that the translator
     // has not yet been loaded from disk
-    foreach (const QString &translatorPath, list) {
+    for (const QString &translatorPath : qAsConst(list)) {
         QString name = QFileInfo(translatorPath).completeBaseName();
 
         if (!_translators.contains(name)) {
@@ -163,8 +163,8 @@ bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator *transla
     {
         KeyboardTranslatorWriter writer(&destination);
         writer.writeHeader(translator->description());
-
-        foreach (const KeyboardTranslator::Entry &entry, translator->entries()) {
+        const QList<KeyboardTranslator::Entry> entriesList = translator->entries();
+        for (const KeyboardTranslator::Entry &entry : entriesList) {
             writer.writeEntry(entry);
         }
     }

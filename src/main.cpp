@@ -196,9 +196,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
             if (!targetDir.exists()) {
                 QDir().mkpath(targetBasePath);
             }
-            QStringList fileNames = sourceDir.entryList(
-                QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
-            foreach (const QString &fileName, fileNames) {
+            const QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+            for (const QString &fileName : fileNames) {
                 targetFilePath = targetBasePath + fileName;
                 if (!QFile::exists(targetFilePath)) {
                     QFile::copy(sourceBasePath + fileName, targetFilePath);
@@ -259,7 +258,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
     qtProblematicOptions << QStringLiteral("--display")
                          << QStringLiteral("--visual");
 #endif
-    foreach (const QString &option, qtProblematicOptions) {
+    for (const QString &option : qAsConst(qtProblematicOptions)) {
         if (arguments.contains(option)) {
             return true;
         }
@@ -273,7 +272,7 @@ bool shouldUseNewProcess(int argc, char *argv[])
     kdeProblematicOptions << QStringLiteral("--waitforwm");
 #endif
 
-    foreach (const QString &option, kdeProblematicOptions) {
+    for (const QString &option : qAsConst(kdeProblematicOptions)) {
         if (arguments.contains(option)) {
             return true;
         }

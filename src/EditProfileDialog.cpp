@@ -307,7 +307,7 @@ bool EditProfileDialog::isValidProfileName()
     const QList<Profile::Ptr> existingProfiles = ProfileManager::instance()->allProfiles();
     QStringList otherExistingProfileNames;
 
-    foreach(auto existingProfile, existingProfiles) {
+    for (const Profile::Ptr &existingProfile : existingProfiles) {
         if (existingProfile->name() != _profile->name()) {
             otherExistingProfileNames.append(existingProfile->name());
         }
@@ -866,9 +866,9 @@ void EditProfileDialog::updateColorSchemeList(const QString &selectedColorScheme
 
     QStandardItem *selectedItem = nullptr;
 
-    QList<const ColorScheme *> schemeList = ColorSchemeManager::instance()->allColorSchemes();
+   const QList<const ColorScheme *> schemeList = ColorSchemeManager::instance()->allColorSchemes();
 
-    foreach (const ColorScheme *scheme, schemeList) {
+    for (const ColorScheme *scheme : schemeList) {
         QStandardItem *item = new QStandardItem(scheme->description());
         item->setData(QVariant::fromValue(scheme), Qt::UserRole + 1);
         item->setData(QVariant::fromValue(_profile->font()), Qt::UserRole + 2);
@@ -1325,7 +1325,8 @@ void EditProfileDialog::enableIfNonEmptySelection(QWidget *widget, QItemSelectio
 void EditProfileDialog::updateTransparencyWarning()
 {
     // zero or one indexes can be selected
-    foreach (const QModelIndex &index, _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes()) {
+    const QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
+    for (const QModelIndex &index : selected) {
         bool needTransparency = index.data(Qt::UserRole + 1).value<const ColorScheme *>()->opacity() < 1.0;
 
         if (!needTransparency) {

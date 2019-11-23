@@ -74,10 +74,11 @@ uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort len
                     // All the hashes are full, go to all Screens and try to free any
                     // This is slow but should happen very rarely
                     QSet<uint> usedExtendedChars;
-                    const SessionManager *sm = SessionManager::instance();
-                    foreach (const Session *s, sm->sessions()) {
-                        foreach (const TerminalDisplay *td, s->views()) {
-                            usedExtendedChars += td->screenWindow()->screen()->usedExtendedChars();
+                    const QList<Session *> sessionsList = SessionManager::instance()->sessions();
+                    for (const Session *s : sessionsList) {
+                        const QList<TerminalDisplay *> displayList = s->views();
+                        for (const TerminalDisplay *display : displayList) {
+                            usedExtendedChars += display->screenWindow()->screen()->usedExtendedChars();
                         }
                     }
 
