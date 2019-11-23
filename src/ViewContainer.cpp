@@ -546,22 +546,6 @@ void TabbedViewContainer::setTabActivity(int index, bool activity)
     }
 }
 
-void TabbedViewContainer::updateActivity(ViewProperties *item)
-{
-    auto controller = qobject_cast<SessionController*>(item);
-    auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
-
-    const int index = indexOf(topLevelSplitter);
-    if (index != currentIndex()) {
-        setTabActivity(index, true);
-    }
-}
-
-void TabbedViewContainer::currentSessionControllerChanged(SessionController *controller)
-{
-    updateTitle(qobject_cast<ViewProperties*>(controller));
-}
-
 void TabbedViewContainer::updateTitle(ViewProperties *item)
 {
     auto controller = qobject_cast<SessionController*>(item);
@@ -582,6 +566,22 @@ void TabbedViewContainer::updateIcon(ViewProperties *item)
     auto controller = qobject_cast<SessionController*>(item);
     const int index = indexOf(controller->view());
     setTabIcon(index, item->icon());
+}
+
+void TabbedViewContainer::updateActivity(ViewProperties *item)
+{
+    auto controller = qobject_cast<SessionController*>(item);
+    auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
+
+    const int index = indexOf(topLevelSplitter);
+    if (index != currentIndex()) {
+        setTabActivity(index, true);
+    }
+}
+
+void TabbedViewContainer::currentSessionControllerChanged(SessionController *controller)
+{
+    updateTitle(qobject_cast<ViewProperties*>(controller));
 }
 
 void TabbedViewContainer::closeTerminalTab(int idx) {
