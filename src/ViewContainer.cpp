@@ -587,6 +587,8 @@ void TabbedViewContainer::updateActivity(ViewProperties *item)
 void TabbedViewContainer::currentSessionControllerChanged(SessionController *controller)
 {
     updateTitle(qobject_cast<ViewProperties*>(controller));
+    updateIcon(qobject_cast<ViewProperties*>(controller));
+    updateActivity(qobject_cast<ViewProperties*>(controller));
 }
 
 void TabbedViewContainer::closeTerminalTab(int idx) {
