@@ -550,7 +550,9 @@ void TabbedViewContainer::updateTitle(ViewProperties *item)
 {
     auto controller = qobject_cast<SessionController*>(item);
     auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
-
+    if (controller->view() != topLevelSplitter->activeTerminalDisplay()) {
+        return;
+    }
     const int index = indexOf(topLevelSplitter);
     QString tabText = item->title();
 
