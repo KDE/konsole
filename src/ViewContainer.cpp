@@ -313,11 +313,7 @@ QSize TabbedViewContainer::sizeHint() const
 }
 
 void TabbedViewContainer::addSplitter(ViewSplitter *viewSplitter, int index) {
-    if (index == -1) {
-       index = addTab(viewSplitter, QString());
-    } else {
-        insertTab(index, viewSplitter, QString());
-    }
+    index = insertTab(index, viewSplitter, QString());
     connect(viewSplitter, &ViewSplitter::destroyed, this, &TabbedViewContainer::viewDestroyed);
 
     disconnect(viewSplitter, &ViewSplitter::terminalDisplayDropped, nullptr, nullptr);
@@ -339,11 +335,7 @@ void TabbedViewContainer::addView(TerminalDisplay *view)
     viewSplitter->addTerminalDisplay(view, Qt::Horizontal);
     auto item = view->sessionController();
     int index = _newTabBehavior == PutNewTabAfterCurrentTab ? currentIndex() + 1 : -1;
-    if (index == -1) {
-       index = addTab(viewSplitter, item->icon(), item->title());
-    } else {
-        insertTab(index, viewSplitter, item->icon(), item->title());
-    }
+    index = insertTab(index, viewSplitter, item->icon(), item->title());
 
     connectTerminalDisplay(view);
     connect(viewSplitter, &ViewSplitter::destroyed, this, &TabbedViewContainer::viewDestroyed);
