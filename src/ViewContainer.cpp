@@ -481,31 +481,6 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
         }
     }
 
-    /* This needs to nove away fro the tab or to lock every thing inside of it.
-     * for now, disable.
-     * */
-    //
-    // Add the read-only action
-#if 0
-    auto sessionController = terminalAt(_contextMenuTabIndex)->sessionController();
-
-    if (sessionController != nullptr) {
-        auto collection = sessionController->actionCollection();
-        auto readonlyAction = collection->action(QStringLiteral("view-readonly"));
-        if (readonlyAction != nullptr) {
-            const auto readonlyActions = _contextPopupMenu->actions();
-            _contextPopupMenu->insertAction(readonlyActions.last(), readonlyAction);
-        }
-
-        // Disable tab rename
-        for (auto &action : _contextPopupMenu->actions()) {
-            if (action->objectName() == QStringLiteral("edit-rename")) {
-                action->setEnabled(!sessionController->isReadOnly());
-                break;
-            }
-        }
-    }
-#endif
     _contextPopupMenu->exec(tabBar()->mapToGlobal(point));
 }
 
