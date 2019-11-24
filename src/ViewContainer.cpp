@@ -379,17 +379,7 @@ void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
 void TabbedViewContainer::disconnectTerminalDisplay(TerminalDisplay *display)
 {
     auto item = display->sessionController();
-    disconnect(item, &Konsole::SessionController::viewFocused, this,
-            &Konsole::TabbedViewContainer::currentSessionControllerChanged);
-
-    disconnect(item, &Konsole::ViewProperties::titleChanged, this,
-            &Konsole::TabbedViewContainer::updateTitle);
-
-    disconnect(item, &Konsole::ViewProperties::iconChanged, this,
-            &Konsole::TabbedViewContainer::updateIcon);
-
-    disconnect(item, &Konsole::ViewProperties::activity, this,
-            &Konsole::TabbedViewContainer::updateActivity);
+    item->disconnect(this);
 }
 
 void TabbedViewContainer::viewDestroyed(QObject *view)
