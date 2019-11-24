@@ -151,6 +151,7 @@ public:
     /* Returns true if called within a KPart; false if called within Konsole. */
     bool isKonsolePart() const;
     bool isReadOnly() const;
+    bool isCopyInputActive() const;
 
 Q_SIGNALS:
     /**
