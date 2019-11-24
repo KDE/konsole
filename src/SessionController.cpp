@@ -81,13 +81,6 @@
 
 using namespace Konsole;
 
-// TODO - Replace the icon choices below when suitable icons for silence and
-// activity are available
-Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _activityIcon, (QIcon::fromTheme(QLatin1String("dialog-information"))))
-Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _silenceIcon, (QIcon::fromTheme(QLatin1String("dialog-information"))))
-Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _bellIcon, (QIcon::fromTheme(QLatin1String("preferences-desktop-notification-bell"))))
-Q_GLOBAL_STATIC_WITH_ARGS(QIcon, _broadcastIcon, (QIcon::fromTheme(QLatin1String("emblem-important"))))
-
 QSet<SessionController*> SessionController::_allControllers;
 int SessionController::_lastControllerId;
 
@@ -116,7 +109,6 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _webSearchMenu(nullptr)
     , _listenForScreenWindowUpdates(false)
     , _preventClose(false)
-    , _keepIconUntilInteraction(false)
     , _selectedText(QString())
     , _showMenuAction(nullptr)
     , _bookmarkValidProgramsToClear(QStringList())
@@ -299,11 +291,6 @@ void SessionController::viewFocusChangeHandler(bool focused)
 
 void SessionController::interactionHandler()
 {
-    // This flag is used to make sure those special icons indicating interest
-    // events (activity/silence/bell?) remain in the tab until user interaction
-    // happens. Otherwise, those special icons will quickly be replaced by
-    // normal icon when ::snapshot() is triggered
-    _keepIconUntilInteraction = false;
     _interactionTimer->start();
 }
 
@@ -1579,16 +1566,7 @@ void SessionController::updateSessionIcon()
     }
     _sessionIcon = QIcon::fromTheme(_sessionIconName);
 
-    // Visualize that the session is broadcasting to others
-    if ((_copyToGroup != nullptr) && _copyToGroup->sessions().count() > 1) {
-        // Master Mode: set different icon, to warn the user to be careful
-        setIcon(*_broadcastIcon);
-    } else {
-        if (!_keepIconUntilInteraction) {
-            // Not in Master Mode: use normal icon
-            setIcon(_sessionIcon);
-        }
-    }
+    setIcon(_sessionIcon);
 }
 
 void SessionController::updateReadOnlyActionStates()
@@ -1665,9 +1643,6 @@ void SessionController::sessionAttributeChanged()
 }
 
 void SessionController::sessionReadOnlyChanged() {
-    // Trigger icon update
-    sessionAttributeChanged();
-
     updateReadOnlyActionStates();
 
     // Update all views
@@ -1751,18 +1726,6 @@ void SessionController::movementKeyFromSearchBarReceived(QKeyEvent *event)
 
 void SessionController::sessionNotificationsChanged(Session::Notification notification, bool enabled)
 {
-    if (notification == Session::Notification::Activity && enabled) {
-        setIcon(*_activityIcon);
-        _keepIconUntilInteraction = true;
-    } else if (notification == Session::Notification::Silence && enabled) {
-        setIcon(*_silenceIcon);
-        _keepIconUntilInteraction = true;
-    } else if (notification == Session::Notification::Bell && enabled) {
-        setIcon(*_bellIcon);
-        _keepIconUntilInteraction = true;
-    } else {
-        updateSessionIcon();
-    }
     emit notificationChanged(this, notification, enabled);
 }
 

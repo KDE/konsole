@@ -340,8 +340,6 @@ private:
     bool _listenForScreenWindowUpdates;
     bool _preventClose;
 
-    bool _keepIconUntilInteraction;
-
     QString _selectedText;
 
     QAction *_showMenuAction;

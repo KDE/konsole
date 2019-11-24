@@ -1220,7 +1220,7 @@ void Session::setIconText(const QString& iconText)
 
 QString Session::iconName() const
 {
-    return isReadOnly() ? QStringLiteral("object-locked") : _iconName;
+    return _iconName;
 }
 
 QString Session::iconText() const
