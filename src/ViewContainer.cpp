@@ -366,6 +366,15 @@ void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
 
     connect(item, &Konsole::ViewProperties::activity, this,
             &Konsole::TabbedViewContainer::updateActivity);
+
+    connect(item, &Konsole::ViewProperties::notificationChanged, this,
+            &Konsole::TabbedViewContainer::updateNotification);
+
+    connect(item, &Konsole::ViewProperties::readOnlyChanged, this,
+            &Konsole::TabbedViewContainer::updateSpecialState);
+
+    connect(item, &Konsole::ViewProperties::copyInputChanged, this,
+            &Konsole::TabbedViewContainer::updateSpecialState);
 }
 
 void TabbedViewContainer::disconnectTerminalDisplay(TerminalDisplay *display)
@@ -381,6 +390,7 @@ void TabbedViewContainer::viewDestroyed(QObject *view)
 
     removeTab(idx);
     forgetView(widget);
+    _tabIconState.remove(widget);
 }
 
 void TabbedViewContainer::forgetView(ViewSplitter *view)
@@ -473,6 +483,8 @@ void TabbedViewContainer::currentTabChanged(int index)
         auto view = splitview->activeTerminalDisplay();
         emit activeViewChanged(view);
         setTabActivity(index, false);
+        _tabIconState[splitview].notification = Session::NoNotification;
+        updateIcon(view->sessionController());
     } else {
         deleteLater();
     }
@@ -524,12 +536,46 @@ void TabbedViewContainer::updateIcon(ViewProperties *item)
 {
     auto controller = qobject_cast<SessionController *>(item);
     auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
-    if (controller->view() != topLevelSplitter->activeTerminalDisplay()) {
-        return;
-    }
     const int index = indexOf(topLevelSplitter);
+    const auto &state = _tabIconState[topLevelSplitter];
 
-    setTabIcon(index, item->icon());
+    // Tab icon priority (from highest to lowest):
+    //
+    // 1. Latest Notification
+    //    - Inactive tab: Latest notification from any view in a tab. Removed
+    //      when tab is activated.
+    //    - Active tab: Latest notification from focused view. Removed when
+    //      focus changes or when the Session clears its notifications
+    // 2. Copy input or read-only indicator when all views in the tab have
+    //    the status
+    // 3. Active view icon
+
+    QIcon icon;
+    if (state.notification != Session::NoNotification) {
+        switch(state.notification) {
+        case Session::Bell:
+            icon = QIcon::fromTheme(QLatin1String("preferences-desktop-notification-bell"));
+            break;
+        case Session::Activity:
+            icon = QIcon::fromTheme(QLatin1String("dialog-information"));
+            break;
+        case Session::Silence:
+            icon = QIcon::fromTheme(QLatin1String("dialog-information"));
+            break;
+        default:
+            break;
+        }
+    } else if (state.broadcast) {
+        icon = QIcon::fromTheme(QLatin1String("emblem-important"));
+    } else if (state.readOnly) {
+        icon = QIcon::fromTheme(QLatin1String("object-locked"));
+    } else {
+        icon = item->icon();
+    }
+
+    if (tabIcon(index).name() != icon.name()) {
+        setTabIcon(index, icon);
+    }
 }
 
 void TabbedViewContainer::updateActivity(ViewProperties *item)
@@ -543,11 +589,56 @@ void TabbedViewContainer::updateActivity(ViewProperties *item)
     }
 }
 
+void TabbedViewContainer::updateNotification(ViewProperties *item, Session::Notification notification, bool enabled)
+{
+    auto controller = qobject_cast<SessionController*>(item);
+    auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
+    const int index = indexOf(topLevelSplitter);
+    auto &state = _tabIconState[topLevelSplitter];
+
+    if (enabled && (index != currentIndex() || controller->view()->hasCompositeFocus())) {
+        state.notification = notification;
+        updateIcon(item);
+    } else if (!enabled && controller->view()->hasCompositeFocus()) {
+        state.notification = Session::NoNotification;
+        updateIcon(item);
+    }
+}
+
+void TabbedViewContainer::updateSpecialState(ViewProperties *item)
+{
+    auto controller = qobject_cast<SessionController*>(item);
+    auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
+
+    auto &state = _tabIconState[topLevelSplitter];
+    state.readOnly = true;
+    state.broadcast = true;
+    const auto displays = topLevelSplitter->findChildren<TerminalDisplay*>();
+    for (const auto display : displays) {
+        if (!display->sessionController()->isReadOnly()) {
+            state.readOnly = false;
+        }
+        if (!display->sessionController()->isCopyInputActive()) {
+            state.broadcast = false;
+        }
+    }
+    updateIcon(item);
+}
+
 void TabbedViewContainer::currentSessionControllerChanged(SessionController *controller)
 {
+    auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
+    const int index = indexOf(topLevelSplitter);
+
+    if (index == currentIndex()) {
+        // Active view changed in current tab - clear notifications
+        auto &state = _tabIconState[topLevelSplitter];
+        state.notification = Session::NoNotification;
+    }
+
     updateTitle(qobject_cast<ViewProperties*>(controller));
-    updateIcon(qobject_cast<ViewProperties*>(controller));
     updateActivity(qobject_cast<ViewProperties*>(controller));
+    updateSpecialState(qobject_cast<ViewProperties*>(controller));
 }
 
 void TabbedViewContainer::closeTerminalTab(int idx) {

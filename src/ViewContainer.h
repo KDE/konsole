@@ -29,6 +29,7 @@
 // Konsole
 #include "Profile.h"
 #include "ViewManager.h"
+#include "Session.h"
 
 // Qt
 class QPoint;
@@ -79,9 +80,16 @@ public:
 
     void setTabActivity(int index, bool activity);
 
+    /** Sets tab title to item title if the view is active */
     void updateTitle(ViewProperties *item);
+    /** Sets tab icon to item icon if the view is active */
     void updateIcon(ViewProperties *item);
+    /** Sets tab activity status if the tab is not active */
     void updateActivity(ViewProperties *item);
+    /** Sets tab notification */
+    void updateNotification(ViewProperties *item, Konsole::Session::Notification notification, bool enabled);
+    /** Sets tab special state (copy input or read-only) */
+    void updateSpecialState(ViewProperties *item);
 
     /** Changes the active view to the next view */
     void activateNextView();
@@ -209,6 +217,19 @@ private Q_SLOTS:
 private:
     void forgetView(ViewSplitter *view);
 
+    struct TabIconState {
+        TabIconState(): readOnly(false), broadcast(false), notification(Session::NoNotification) {}
+
+        bool readOnly;
+        bool broadcast;
+        Session::Notification notification;
+
+        bool isAnyStateActive() const {
+            return readOnly || broadcast || (notification != Session::NoNotification);
+        }
+    };
+
+    QHash<const QWidget *, TabIconState> _tabIconState;
     ViewManager *_connectedViewManager;
     QMenu *_contextPopupMenu;
     QToolButton *_newTabButton;
