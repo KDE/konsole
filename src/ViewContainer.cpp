@@ -265,9 +265,14 @@ void TabbedViewContainer::moveActiveView(MoveDirection direction)
 }
 
 void TabbedViewContainer::terminalDisplayDropped(TerminalDisplay *terminalDisplay) {
-    Session* terminalSession = terminalDisplay->sessionController()->session();
-    terminalDisplay->sessionController()->deleteLater();
-    connectedViewManager()->attachView(terminalDisplay, terminalSession);
+    if (terminalDisplay->sessionController()->parent() != connectedViewManager()) {
+        // Terminal from another window - recreate SessionController for current ViewManager
+        disconnectTerminalDisplay(terminalDisplay);
+        Session* terminalSession = terminalDisplay->sessionController()->session();
+        terminalDisplay->sessionController()->deleteLater();
+        connectedViewManager()->attachView(terminalDisplay, terminalSession);
+        connectTerminalDisplay(terminalDisplay);
+    }
 }
 
 QSize TabbedViewContainer::sizeHint() const
