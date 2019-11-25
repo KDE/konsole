@@ -1075,6 +1075,7 @@ void SessionController::copyInputToAllTabs()
     _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
 
     snapshot();
+    emit copyInputChanged(this);
 }
 
 void SessionController::copyInputToSelectedTabs()
@@ -1117,6 +1118,7 @@ void SessionController::copyInputToSelectedTabs()
         _copyToGroup->setMasterStatus(_session, true);
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
         snapshot();
+        emit copyInputChanged(this);
     }
 }
 
@@ -1139,6 +1141,7 @@ void SessionController::copyInputToNone()
     delete _copyToGroup;
     _copyToGroup = nullptr;
     snapshot();
+    emit copyInputChanged(this);
 }
 
 void SessionController::searchClosed()
@@ -1651,6 +1654,7 @@ void SessionController::sessionReadOnlyChanged() {
         if (terminalDisplay != _view.data()) {
             terminalDisplay->updateReadOnlyState(isReadOnly());
         }
+        emit readOnlyChanged(this);
     }
 }
 

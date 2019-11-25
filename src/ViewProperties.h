@@ -92,6 +92,10 @@ Q_SIGNALS:
     void activity(ViewProperties *item);
     /** Emitted when notification for a view changes */
     void notificationChanged(ViewProperties *item, Session::Notification notification, bool enabled);
+    /** Emitted when read only state changes */
+    void readOnlyChanged(ViewProperties *item);
+    /** Emitted when "copy input" state changes */
+    void copyInputChanged(ViewProperties *item);
 
 public Q_SLOTS:
     /**
