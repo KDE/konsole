@@ -554,19 +554,19 @@ void TabbedViewContainer::updateIcon(ViewProperties *item)
     if (state.notification != Session::NoNotification) {
         switch(state.notification) {
         case Session::Bell:
-            icon = QIcon::fromTheme(QLatin1String("preferences-desktop-notification-bell"));
+            icon = QIcon::fromTheme(QLatin1String("notifications"));
             break;
         case Session::Activity:
             icon = QIcon::fromTheme(QLatin1String("dialog-information"));
             break;
         case Session::Silence:
-            icon = QIcon::fromTheme(QLatin1String("dialog-information"));
+            icon = QIcon::fromTheme(QLatin1String("system-suspend"));
             break;
         default:
             break;
         }
     } else if (state.broadcast) {
-        icon = QIcon::fromTheme(QLatin1String("emblem-important"));
+        icon = QIcon::fromTheme(QLatin1String("irc-voice"));
     } else if (state.readOnly) {
         icon = QIcon::fromTheme(QLatin1String("object-locked"));
     } else {
