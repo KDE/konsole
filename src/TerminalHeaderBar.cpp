@@ -129,7 +129,7 @@ void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
     if (!m_terminalIsFocused) {
         auto p = qApp->palette();
         auto shadowColor = p.color(QPalette::ColorRole::Shadow);
-        shadowColor.setAlphaF( 0.2f * shadowColor.alphaF() ); // same as breeze.
+        shadowColor.setAlphaF( qreal(0.2) * shadowColor.alphaF() ); // same as breeze.
 
         QPainter painter(this);
         painter.setPen(Qt::NoPen);
