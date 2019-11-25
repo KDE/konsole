@@ -918,14 +918,14 @@ namespace {
 
 ViewSplitter *restoreSessionsSplitterRecurse(const QJsonObject& jsonSplitter, ViewManager *manager)
 {
-    auto splitterWidgets = jsonSplitter[QStringLiteral("Widgets")].toArray();
+    const QJsonArray splitterWidgets = jsonSplitter[QStringLiteral("Widgets")].toArray();
     auto orientation = (jsonSplitter[QStringLiteral("Orientation")].toString() == QLatin1String("Horizontal"))
         ? Qt::Horizontal : Qt::Vertical;
 
     auto *currentSplitter = new ViewSplitter();
     currentSplitter->setOrientation(orientation);
 
-    for (const auto& widgetJsonValue : splitterWidgets) {
+    for (const auto widgetJsonValue : splitterWidgets) {
         const auto widgetJsonObject = widgetJsonValue.toObject();
         const auto sessionIterator = widgetJsonObject.constFind(QStringLiteral("SessionRestoreId"));
 
