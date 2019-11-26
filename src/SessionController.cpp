@@ -232,6 +232,9 @@ SessionController::~SessionController()
     if (!_editProfileDialog.isNull()) {
         delete _editProfileDialog.data();
     }
+    if(factory()) {
+        factory()->removeClient(this);
+    }
 }
 void SessionController::trackOutput(QKeyEvent* event)
 {
