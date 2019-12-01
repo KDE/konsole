@@ -261,7 +261,7 @@ void ViewManager::setupActions()
 
 void ViewManager::toggleActionsBasedOnState() {
     const int count = _viewContainer->count();
-    foreach(QAction *tabOnlyAction, _multiTabOnlyActions) {
+    for (QAction *tabOnlyAction : qAsConst(_multiTabOnlyActions)) {
         tabOnlyAction->setEnabled(count > 1);
     }
 
@@ -272,7 +272,7 @@ void ViewManager::toggleActionsBasedOnState() {
                 ->findChildren<TerminalDisplay*>()
                     .count();
 
-        foreach (QAction *action, _multiSplitterOnlyActions) {
+        for (QAction *action : qAsConst(_multiSplitterOnlyActions)) {
             action->setEnabled(splitCount > 1);
         }
     }
@@ -422,7 +422,8 @@ void ViewManager::detachTab(int tabIdx)
 QHash<TerminalDisplay*, Session*> ViewManager::forgetAll(ViewSplitter* splitter) {
     splitter->setParent(nullptr);
     QHash<TerminalDisplay*, Session*> detachedSessions;
-    foreach(TerminalDisplay* terminal, splitter->findChildren<TerminalDisplay*>()) {
+    const QList<TerminalDisplay *> displays = splitter->findChildren<TerminalDisplay*>();
+    for (TerminalDisplay *terminal : displays) {
         Session* session = forgetTerminal(terminal);
         detachedSessions[terminal] = session;
     }
@@ -826,7 +827,7 @@ void ViewManager::updateViewsForSession(Session *session)
     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
 
     const QList<TerminalDisplay *> sessionMapKeys = _sessionMap.keys(session);
-    foreach (TerminalDisplay *view, sessionMapKeys) {
+    for (TerminalDisplay *view : sessionMapKeys) {
         applyProfileToView(view, profile);
     }
 }
@@ -960,7 +961,8 @@ void ViewManager::restoreSessions(const KConfigGroup &group)
     TerminalDisplay *display = nullptr;
 
     int tab = 1;
-    foreach (int id, ids) {
+    for (auto it = ids.cbegin(); it != ids.cend(); ++it) {
+        const int &id = *it;
         Session *session = SessionManager::instance()->idToSession(id);
 
         if (session == nullptr) {

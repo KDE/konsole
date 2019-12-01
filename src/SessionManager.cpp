@@ -292,8 +292,8 @@ void SessionManager::sessionProfileCommandReceived(const QString &text)
     // store the font for each view if zoom was applied so that they can
     // be restored after applying the new profile
     QHash<TerminalDisplay *, QFont> zoomFontSizes;
-    const QList<TerminalDisplay *> views = session->views();
-    for (TerminalDisplay *view : views) {
+    const QList<TerminalDisplay *> viewsList = session->views();
+    for (TerminalDisplay *view : viewsList) {
         const QFont &viewCurFont = view->getVTFont();
         if (viewCurFont != _sessionProfiles[session]->font()) {
             zoomFontSizes.insert(view, viewCurFont);

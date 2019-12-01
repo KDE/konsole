@@ -211,7 +211,7 @@ void Pty::addEnvironmentVariables(const QStringList &environmentVariables)
 {
     bool isTermEnvAdded = false;
 
-    foreach (const QString &pair, environmentVariables) {
+    for (const QString &pair : environmentVariables) {
         // split on the first '=' character
         const int separator = pair.indexOf(QLatin1Char('='));
 

@@ -154,7 +154,8 @@ void MainWindow::updateUseTransparency()
 
 void MainWindow::rememberMenuAccelerators()
 {
-    foreach (QAction *menuItem, menuBar()->actions()) {
+    const QList<QAction *> actions = menuBar()->actions();
+    for (QAction *menuItem : actions) {
         QString itemText = menuItem->text();
         menuItem->setData(itemText);
     }
@@ -170,14 +171,16 @@ void MainWindow::rememberMenuAccelerators()
 // can then be redefined there to exclude the standard accelerators
 void MainWindow::removeMenuAccelerators()
 {
-    foreach (QAction *menuItem, menuBar()->actions()) {
+    const QList<QAction *> actions = menuBar()->actions();
+    for (QAction *menuItem : actions) {
         menuItem->setText(menuItem->text().replace(QLatin1Char('&'), QString()));
     }
 }
 
 void MainWindow::restoreMenuAccelerators()
 {
-    foreach (QAction *menuItem, menuBar()->actions()) {
+    const QList<QAction *> actions = menuBar()->actions();
+    for (QAction *menuItem : actions) {
         QString itemText = menuItem->data().toString();
         menuItem->setText(itemText);
     }
@@ -406,7 +409,7 @@ void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
         } else {
             _newTabMenuAction->setMenu(new QMenu());
         }
-        foreach (QAction *sessionAction, sessionActions) {
+        for (QAction *sessionAction : sessionActions) {
             _newTabMenuAction->menu()->addAction(sessionAction);
 
             // NOTE: defaultProfile seems to not work here, sigh.
@@ -558,7 +561,7 @@ bool MainWindow::queryClose()
     QStringList processesRunning;
     const auto uniqueSessions = QSet<Session*>::fromList(_viewManager->sessions());
 
-    foreach (Session *session, uniqueSessions) {
+    for (Session *session : uniqueSessions) {
         if ((session == nullptr) || !session->isForegroundProcessActive()) {
             continue;
         }
@@ -693,7 +696,8 @@ void MainWindow::readGlobalProperties(KConfig *config)
 
 void MainWindow::syncActiveShortcuts(KActionCollection *dest, const KActionCollection *source)
 {
-    foreach (QAction *qAction, source->actions()) {
+    const QList<QAction *> actionsList = source->actions();
+    for (QAction *qAction : actionsList) {
         if (QAction *destQAction = dest->action(qAction->objectName())) {
             destQAction->setShortcut(qAction->shortcut());
         }
@@ -706,13 +710,15 @@ void MainWindow::showShortcutsDialog()
                             KShortcutsEditor::LetterShortcutsDisallowed, this);
 
     // add actions from this window and the current session controller
-    foreach (KXMLGUIClient *client, guiFactory()->clients()) {
+    const QList<KXMLGUIClient *> clientsList = guiFactory()->clients();
+    for (KXMLGUIClient *client : clientsList) {
         dialog.addCollection(client->actionCollection());
     }
 
     if (dialog.configure()) {
         // sync shortcuts for non-session actions (defined in "konsoleui.rc") in other main windows
-        foreach (QWidget *mainWindowWidget, QApplication::topLevelWidgets()) {
+        const QList<QWidget *> widgets = QApplication::topLevelWidgets();
+        for (QWidget *mainWindowWidget : widgets) {
             auto *mainWindow = qobject_cast<MainWindow *>(mainWindowWidget);
             if ((mainWindow != nullptr) && mainWindow != this) {
                 syncActiveShortcuts(mainWindow->actionCollection(), actionCollection());
@@ -722,7 +728,8 @@ void MainWindow::showShortcutsDialog()
         // Controllers which are currently plugged in (ie. their actions are part of the current menu)
         // must be updated immediately via syncActiveShortcuts().  Other controllers will be updated
         // when they are plugged into a main window.
-        foreach (SessionController *controller, SessionController::allControllers()) {
+        const QSet<SessionController *> allControllers = SessionController::allControllers();
+        for (SessionController *controller : allControllers) {
             controller->reloadXML();
             if ((controller->factory() != nullptr) && controller != _pluggedController) {
                 syncActiveShortcuts(controller->actionCollection(), _pluggedController->actionCollection());

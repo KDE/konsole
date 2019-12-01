@@ -241,7 +241,7 @@ void ProfileSettings::populateTable()
     QList<Profile::Ptr> profiles = ProfileManager::instance()->allProfiles();
     ProfileManager::instance()->sortProfiles(profiles);
 
-    foreach(const Profile::Ptr& profile, profiles) {
+    for (const Profile::Ptr &profile : qAsConst(profiles)) {
         addItems(profile);
     }
     updateDefaultItem();
@@ -303,7 +303,8 @@ void ProfileSettings::tableSelectionChanged(const QItemSelection&)
 }
 void ProfileSettings::deleteSelected()
 {
-    foreach(const Profile::Ptr & profile, selectedProfiles()) {
+    const QList<Profile::Ptr> profiles = selectedProfiles();
+    for (const Profile::Ptr &profile : profiles) {
         if (profile != ProfileManager::instance()->defaultProfile()) {
             ProfileManager::instance()->deleteProfile(profile);
         }
@@ -349,27 +350,30 @@ void ProfileSettings::createProfile()
 }
 void ProfileSettings::editSelected()
 {
-    QList<Profile::Ptr> profiles(selectedProfiles());
-
-    foreach (Session* session, SessionManager::instance()->sessions()) {
-         foreach (TerminalDisplay* terminal, session->views()) {
-             // Searching for opened profiles
-             if (terminal->sessionController()->profileDialogPointer() != nullptr) {
-                 foreach (const Profile::Ptr & profile, profiles) {
-                     if (profile->name() == terminal->sessionController()->profileDialogPointer()->lookupProfile()->name()
-                         && terminal->sessionController()->profileDialogPointer()->isVisible()) {
-                         // close opened edit dialog
-                         terminal->sessionController()->profileDialogPointer()->close();
-                     }
-                 }
-             }
+    const QList<Profile::Ptr> profiles = selectedProfiles();
+    EditProfileDialog *profileDialog = nullptr;
+    // sessions() returns a const QList
+    for (const Session *session : SessionManager::instance()->sessions()) {
+        const QList<TerminalDisplay *> viewsList = session->views();
+        for (TerminalDisplay *terminalDisplay : viewsList) {
+            // Searching for opened profiles
+            profileDialog = terminalDisplay->sessionController()->profileDialogPointer();
+            if (profileDialog != nullptr) {
+                for (const Profile::Ptr &profile : profiles) {
+                    if (profile->name() == profileDialog->lookupProfile()->name()
+                        && profileDialog->isVisible()) {
+                        // close opened edit dialog
+                        profileDialog->close();
+                    }
+                }
+            }
          }
     }
 
     EditProfileDialog dialog(this);
     // the dialog will delete the profile group when it is destroyed
     ProfileGroup* group = new ProfileGroup;
-    foreach (const Profile::Ptr & profile, profiles) {
+    for (const Profile::Ptr &profile : profiles) {
         group->addProfile(profile);
     }
     group->updateValues();
@@ -385,7 +389,8 @@ QList<Profile::Ptr> ProfileSettings::selectedProfiles() const
         return list;
     }
 
-    foreach(const QModelIndex & index, selection->selectedIndexes()) {
+    const QList<QModelIndex> selectedIndexes = selection->selectedIndexes();
+    for (const QModelIndex &index : selectedIndexes) {
         if (index.column() == ProfileColumn) {
             list << index.data(ProfilePtrRole).value<Profile::Ptr>();
         }

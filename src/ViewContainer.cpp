@@ -163,7 +163,8 @@ void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
 
     QHash<TerminalDisplay*, Session*> sessionsMap = _connectedViewManager->forgetAll(splitter);
 
-    foreach(TerminalDisplay* terminal, splitter->findChildren<TerminalDisplay*>()) {
+    const QList<TerminalDisplay *> displays = splitter->findChildren<TerminalDisplay*>();
+    for (TerminalDisplay *terminal : displays) {
         manager->attachView(terminal, sessionsMap[terminal]);
     }
     auto container = manager->activeContainer();
@@ -322,8 +323,8 @@ void TabbedViewContainer::addSplitter(ViewSplitter *viewSplitter, int index) {
     disconnect(viewSplitter, &ViewSplitter::terminalDisplayDropped, nullptr, nullptr);
     connect(viewSplitter, &ViewSplitter::terminalDisplayDropped, this, &TabbedViewContainer::terminalDisplayDropped);
 
-    auto terminalDisplays = viewSplitter->findChildren<TerminalDisplay*>();
-    foreach(TerminalDisplay* terminal, terminalDisplays) {
+    const auto terminalDisplays = viewSplitter->findChildren<TerminalDisplay*>();
+    for (TerminalDisplay *terminal : terminalDisplays) {
         connectTerminalDisplay(terminal);
     }
     if (terminalDisplays.count() > 0) {

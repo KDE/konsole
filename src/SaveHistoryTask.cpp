@@ -76,7 +76,8 @@ void SaveHistoryTask::execute()
     // iterate over each session in the task and display a dialog to allow the user to choose where
     // to save that session's history.
     // then start a KIO job to transfer the data from the history to the chosen URL
-    foreach(const auto& session, sessions()) {
+    const QList<QPointer<Session>> sessionsList = sessions();
+    for (const auto &session : sessionsList) {
         dialog->setWindowTitle(i18n("Save Output From %1", session->title(Session::NameRole)));
 
         int result = dialog->exec();

@@ -582,7 +582,7 @@ private:
 
             const QStringList &argList = data.split(QLatin1Char('\0'));
 
-            foreach (const QString &entry, argList) {
+            for (const QString &entry : argList) {
                 if (!entry.isEmpty()) {
                     addArgument(entry);
                 }
@@ -709,8 +709,8 @@ private:
         }
 
         // len holds the length of the string
-        QString qargs = QString::fromLocal8Bit(args, len);
-        foreach (const QString &value, qargs.split(QLatin1Char('\u0000'))) {
+        const QStringList argurments = QString::fromLocal8Bit(args, len).split(QLatin1Char('\u0000'));
+        for (const QString &value : argurments) {
             if (!value.isEmpty()) {
                 addArgument(value);
             }

@@ -1393,7 +1393,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     // iterate over hotspots identified by the display's currently active filters
     // and draw appropriate visuals to indicate the presence of the hotspot
 
-    QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
+    const QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
     int urlNumber, urlNumInc;
     if (_reverseUrlHints) {
         urlNumber = spots.size() + 1;
@@ -1402,7 +1402,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
         urlNumber = 0;
         urlNumInc = 1;
     }
-    foreach(Filter::HotSpot* spot, spots) {
+    for (const Filter::HotSpot *spot : spots) {
         urlNumber += urlNumInc;
 
         QRegion region;

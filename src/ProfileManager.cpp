@@ -161,7 +161,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     }
 
     // check that we have not already loaded this profile
-    foreach(const Profile::Ptr& profile, _profiles) {
+    for (const Profile::Ptr &profile : qAsConst(_profiles)) {
         if (profile->path() == path) {
             return profile;
         }
@@ -221,7 +221,8 @@ QStringList ProfileManager::availableProfileNames() const
 {
     QStringList names;
 
-    foreach(Profile::Ptr profile, ProfileManager::instance()->allProfiles()) {
+    const QList<Profile::Ptr> allProfiles = ProfileManager::instance()->allProfiles();
+    for (const Profile::Ptr &profile : allProfiles) {
         if (!profile->isHidden()) {
             names.push_back(profile->name());
         }
@@ -239,7 +240,7 @@ void ProfileManager::loadAllProfiles()
     }
 
     const QStringList& paths = availableProfilePaths();
-    foreach(const QString& path, paths) {
+    for (const QString &path : paths) {
         loadProfile(path);
     }
 
@@ -369,9 +370,9 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
 
         // Generate a new name, so it is obvious what is actually built-in
         // in the profile manager
-        QList<Profile::Ptr> existingProfiles = allProfiles();
         QStringList existingProfileNames;
-        foreach(Profile::Ptr existingProfile, existingProfiles) {
+        const QList<Profile::Ptr> profiles = allProfiles();
+        for (const Profile::Ptr &existingProfile : profiles) {
             existingProfileNames.append(existingProfile->name());
         }
 
@@ -415,7 +416,8 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
     // is saved to disk
     ProfileGroup::Ptr group = newProfile->asGroup();
     if (group) {
-        foreach(const Profile::Ptr & groupProfile, group->profiles()) {
+        const QList<Profile::Ptr> profiles = group->profiles();
+        for (const Profile::Ptr &groupProfile : profiles) {
             changeProfile(groupProfile, propertyMap, persistent);
         }
         return;
@@ -435,7 +437,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
             // this is needed to include the old profile too
             _loadedAllProfiles = false;
            const QList<Profile::Ptr> availableProfiles = ProfileManager::instance()->allProfiles();
-            foreach(auto oldProfile, availableProfiles) {
+            for (const Profile::Ptr &oldProfile : availableProfiles) {
                 if (oldProfile->path() == origPath) {
                     // assign the same shortcut of the old profile to
                     // the newly renamed profile
@@ -599,7 +601,7 @@ void ProfileManager::saveFavorites()
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
     QStringList paths;
-    foreach(const Profile::Ptr& profile, _favorites) {
+    for (const Profile::Ptr &profile : qAsConst(_favorites)) {
         Q_ASSERT(_profiles.contains(profile) && profile);
         paths << normalizePath(profile->path());
     }
@@ -643,7 +645,7 @@ void ProfileManager::loadFavorites()
     }
 
     // look for favorites among those already loaded
-    foreach(const Profile::Ptr& profile, _profiles) {
+    for (const Profile::Ptr &profile : qAsConst(_profiles)) {
         const QString& path = profile->path();
         if (favoriteSet.contains(path)) {
             _favorites.insert(profile);
@@ -651,7 +653,7 @@ void ProfileManager::loadFavorites()
         }
     }
     // load any remaining favorites
-    foreach(const QString& favorite, favoriteSet) {
+    for (const QString &favorite : qAsConst(favoriteSet)) {
         Profile::Ptr profile = loadProfile(favorite);
         if (profile) {
             _favorites.insert(profile);
