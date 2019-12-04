@@ -55,7 +55,7 @@ class KeyBindingEditor : public QDialog
 public:
     /** Constructs a new key bindings editor with the specified parent. */
     explicit KeyBindingEditor(QWidget *parent = nullptr);
-    ~KeyBindingEditor() Q_DECL_OVERRIDE;
+    ~KeyBindingEditor() override;
 
     /**
      * Initializes the dialog with the bindings and other settings
@@ -86,7 +86,7 @@ public:
     QString description() const;
 
     // reimplemented to handle test area input
-    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 Q_SIGNALS:
     /**
@@ -111,7 +111,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     // reimplemented
-    void accept() Q_DECL_OVERRIDE;
+    void accept() override;
 
     void setTranslatorDescription(const QString &description);
     void bindingTableItemChanged(QTableWidgetItem *item);
@@ -142,7 +142,7 @@ private:
 
     // Sets the size hint of the dialog to be slightly smaller than the
     // size of EditProfileDialog
-    QSize sizeHint() const Q_DECL_OVERRIDE;
+    QSize sizeHint() const override;
 };
 }
 

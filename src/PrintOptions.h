@@ -30,7 +30,7 @@ class PrintOptions : public QWidget, private Ui::PrintOptions
 
 public:
     explicit PrintOptions(QWidget *parent = nullptr);
-    ~PrintOptions() Q_DECL_OVERRIDE;
+    ~PrintOptions() override;
 
 public Q_SLOTS:
     void saveSettings();

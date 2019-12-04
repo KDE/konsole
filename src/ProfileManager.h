@@ -58,7 +58,7 @@ public:
     /**
      * Destroys the ProfileManager.
      */
-    ~ProfileManager() Q_DECL_OVERRIDE;
+    ~ProfileManager() override;
 
     /**
      * Returns the profile manager instance.

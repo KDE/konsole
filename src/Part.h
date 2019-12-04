@@ -58,7 +58,7 @@ class Part : public KParts::ReadOnlyPart, public TerminalInterface
 public:
     /** Constructs a new Konsole part with the specified parent. */
     explicit Part(QWidget *parentWidget, QObject *parent, const QVariantList &);
-    ~Part() Q_DECL_OVERRIDE;
+    ~Part() override;
 
     /** Reimplemented from TerminalInterface. */
     void startProgram(const QString &program, const QStringList &arguments) override;
@@ -199,8 +199,8 @@ Q_SIGNALS:
 
 protected:
     /** Reimplemented from KParts::PartBase. */
-    bool openFile() Q_DECL_OVERRIDE;
-    bool openUrl(const QUrl &url) Q_DECL_OVERRIDE;
+    bool openFile() override;
+    bool openUrl(const QUrl &url) override;
 
 private Q_SLOTS:
     void activeViewChanged(SessionController *controller);

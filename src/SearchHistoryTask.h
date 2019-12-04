@@ -84,7 +84,7 @@ public:
      *
      * To continue the search looking for further matches, call execute() again.
      */
-    void execute() Q_DECL_OVERRIDE;
+    void execute() override;
 
 private:
     using ScreenWindowPtr = QPointer<ScreenWindow>;

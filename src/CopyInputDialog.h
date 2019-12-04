@@ -51,7 +51,7 @@ class CopyInputDialog : public QDialog
 
 public:
     explicit CopyInputDialog(QWidget *parent = nullptr);
-    ~CopyInputDialog() Q_DECL_OVERRIDE;
+    ~CopyInputDialog() override;
     /**
      * Sets the 'source' session whose input will be copied to
      * other sessions.  This session is displayed grayed out in the list
@@ -117,12 +117,12 @@ public:
     QSet<Session *> checkedSessions() const;
 
     // reimplemented from QAbstractItemModel
-    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
-    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
-    bool setData(const QModelIndex &index, const QVariant &value, int role) Q_DECL_OVERRIDE;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 
 protected:
-    void sessionRemoved(Session *) Q_DECL_OVERRIDE;
+    void sessionRemoved(Session *) override;
 
 private:
     QSet<Session *> _checkedSessions;

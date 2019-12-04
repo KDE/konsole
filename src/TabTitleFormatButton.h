@@ -34,7 +34,7 @@ class TabTitleFormatButton : public QPushButton
 
 public:
     explicit TabTitleFormatButton(QWidget *parent);
-    ~TabTitleFormatButton() Q_DECL_OVERRIDE;
+    ~TabTitleFormatButton() override;
 
     void setContext(Session::TabTitleContext titleContext);
     Session::TabTitleContext context() const;

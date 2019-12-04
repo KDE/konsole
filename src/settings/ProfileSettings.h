@@ -50,7 +50,7 @@ class ProfileSettings : public QWidget, private Ui::ProfileSettings
 public:
     /** Constructs a new profile type with the specified parent. */
     explicit ProfileSettings(QWidget *parent = nullptr);
-    ~ProfileSettings() Q_DECL_OVERRIDE;
+    ~ProfileSettings() override;
 
     /**
      * Specifies whether the shortcut editor should be show.
@@ -132,7 +132,7 @@ public:
     explicit FilteredKeySequenceEdit(QWidget *parent = nullptr): QKeySequenceEdit(parent) {}
 
 protected:
-    void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
+    void keyPressEvent(QKeyEvent *event) override;
 };
 
 class ShortcutItemDelegate : public QStyledItemDelegate
@@ -143,14 +143,14 @@ public:
     explicit ShortcutItemDelegate(QObject *parent = nullptr);
 
     void setModelData(QWidget *editor, QAbstractItemModel *model,
-                      const QModelIndex &index) const Q_DECL_OVERRIDE;
+                      const QModelIndex &index) const override;
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                          const QModelIndex &index) const Q_DECL_OVERRIDE;
+                          const QModelIndex &index) const override;
     void paint(QPainter *painter, const QStyleOptionViewItem &option,
-               const QModelIndex &index) const Q_DECL_OVERRIDE;
+               const QModelIndex &index) const override;
     QSize sizeHint(const QStyleOptionViewItem &option,
-                   const QModelIndex &index) const Q_DECL_OVERRIDE;
-    void destroyEditor(QWidget *editor, const QModelIndex &index) const Q_DECL_OVERRIDE;
+                   const QModelIndex &index) const override;
+    void destroyEditor(QWidget *editor, const QModelIndex &index) const override;
 
 private Q_SLOTS:
     void editorModified();

@@ -52,7 +52,7 @@ public:
      * Destroys the SessionManager. All running sessions should be closed
      * (via closeAllSessions()) before the SessionManager is destroyed.
      */
-    ~SessionManager() Q_DECL_OVERRIDE;
+    ~SessionManager() override;
 
     /**
      * Returns the session manager instance.

@@ -30,7 +30,7 @@ class PartInfoSettings : public QWidget, private Ui::PartInfoSettings
 
 public:
     explicit PartInfoSettings(QWidget *parent = nullptr);
-    ~PartInfoSettings() Q_DECL_OVERRIDE;
+    ~PartInfoSettings() override;
 };
 }
 

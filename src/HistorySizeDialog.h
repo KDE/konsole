@@ -38,7 +38,7 @@ class HistorySizeDialog : public QDialog
 
 public:
     explicit HistorySizeDialog(QWidget *parent = nullptr);
-    ~HistorySizeDialog() Q_DECL_OVERRIDE;
+    ~HistorySizeDialog() override;
 
     /** See HistorySizeWidget::setMode. */
     void setMode(Enum::HistoryModeEnum aMode);

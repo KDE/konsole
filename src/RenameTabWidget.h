@@ -34,7 +34,7 @@ class RenameTabWidget : public QWidget
 
 public:
     explicit RenameTabWidget(QWidget *parent = nullptr);
-    ~RenameTabWidget() Q_DECL_OVERRIDE;
+    ~RenameTabWidget() override;
 
     QString tabTitleText() const;
     QString remoteTabTitleText() const;

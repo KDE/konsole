@@ -192,7 +192,7 @@ public:
     public:
         HotSpot(int startLine, int startColumn, int endLine, int endColumn,
                 const QStringList &capturedTexts);
-        void activate(QObject *object = nullptr) Q_DECL_OVERRIDE;
+        void activate(QObject *object = nullptr) override;
 
         /** Returns the texts found by the filter when matching the filter's regular expression */
         QStringList capturedTexts() const;
@@ -219,7 +219,7 @@ public:
      * If regexp matches the empty string, then process() will return immediately
      * without finding results.
      */
-    void process() Q_DECL_OVERRIDE;
+    void process() override;
 
 protected:
     /**
@@ -248,15 +248,15 @@ public:
     public:
         HotSpot(int startLine, int startColumn, int endLine, int endColumn,
                 const QStringList &capturedTexts);
-        ~HotSpot() Q_DECL_OVERRIDE;
+        ~HotSpot() override;
 
-        QList<QAction *> actions() Q_DECL_OVERRIDE;
+        QList<QAction *> actions() override;
 
         /**
          * Open a web browser at the current URL.  The url itself can be determined using
          * the capturedTexts() method.
          */
-        void activate(QObject *object = nullptr) Q_DECL_OVERRIDE;
+        void activate(QObject *object = nullptr) override;
 
     private:
         enum UrlType {
@@ -272,7 +272,7 @@ public:
     UrlFilter();
 
 protected:
-    RegExpFilter::HotSpot *newHotSpot(int, int, int, int, const QStringList &) Q_DECL_OVERRIDE;
+    RegExpFilter::HotSpot *newHotSpot(int, int, int, int, const QStringList &) override;
 
 private:
     static const QRegularExpression FullUrlRegExp;
@@ -297,14 +297,14 @@ public:
     public:
         HotSpot(int startLine, int startColumn, int endLine, int endColumn,
                 const QStringList &capturedTexts, const QString &filePath);
-        ~HotSpot() Q_DECL_OVERRIDE;
+        ~HotSpot() override;
 
-        QList<QAction *> actions() Q_DECL_OVERRIDE;
+        QList<QAction *> actions() override;
 
         /**
          * Opens kate for editing the file.
          */
-        void activate(QObject *object = nullptr) Q_DECL_OVERRIDE;
+        void activate(QObject *object = nullptr) override;
 
     private:
         FilterObject *_fileObject;
@@ -313,10 +313,10 @@ public:
 
     explicit FileFilter(Session *session);
 
-    void process() Q_DECL_OVERRIDE;
+    void process() override;
 
 protected:
-    RegExpFilter::HotSpot *newHotSpot(int, int, int, int, const QStringList &) Q_DECL_OVERRIDE;
+    RegExpFilter::HotSpot *newHotSpot(int, int, int, int, const QStringList &) override;
 
 private:
     QPointer<Session> _session;
@@ -390,7 +390,7 @@ class TerminalImageFilterChain : public FilterChain
 {
 public:
     TerminalImageFilterChain();
-    ~TerminalImageFilterChain() Q_DECL_OVERRIDE;
+    ~TerminalImageFilterChain() override;
 
     /**
      * Set the current terminal image to @p image.

@@ -74,7 +74,7 @@ class KONSOLEPRIVATE_EXPORT EditProfileDialog: public KPageDialog
 public:
     /** Constructs a new dialog with the specified parent. */
     explicit EditProfileDialog(QWidget *parent = nullptr);
-    ~EditProfileDialog() Q_DECL_OVERRIDE;
+    ~EditProfileDialog() override;
 
     /**
      * Initializes the dialog with the settings for the specified session
@@ -98,14 +98,14 @@ public:
 
 public Q_SLOTS:
     // reimplemented
-    void accept() Q_DECL_OVERRIDE;
+    void accept() override;
     // reimplemented
-    void reject() Q_DECL_OVERRIDE;
+    void reject() override;
 
     void apply();
 
 protected:
-    bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private Q_SLOTS:
     QSize sizeHint() const override;
@@ -359,9 +359,9 @@ public:
 
     // reimplemented
     void paint(QPainter *painter, const QStyleOptionViewItem &option,
-               const QModelIndex &index) const Q_DECL_OVERRIDE;
+               const QModelIndex &index) const override;
     QSize sizeHint(const QStyleOptionViewItem &option,
-                   const QModelIndex &index) const Q_DECL_OVERRIDE;
+                   const QModelIndex &index) const override;
 };
 
 /**

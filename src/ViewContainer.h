@@ -68,7 +68,7 @@ public:
      * subclasses, use object->deleteLater() to delete any widgets or other objects
      * instead of 'delete object'.
      */
-    ~TabbedViewContainer() Q_DECL_OVERRIDE;
+    ~TabbedViewContainer() override;
 
     /** Adds a new view to the container widget */
     void addView(TerminalDisplay *view);
@@ -201,7 +201,7 @@ protected:
     // close tabs and unregister
     void closeTerminalTab(int idx);
 
-    void keyReleaseEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
+    void keyReleaseEvent(QKeyEvent *event) override;
 private Q_SLOTS:
     void viewDestroyed(QObject *view);
     void konsoleConfigChanged();

@@ -751,7 +751,7 @@ public:
     /** Sets the value of @p property in each of the group's profiles to
      * @p value.
      */
-    void setProperty(Property p, const QVariant &value) Q_DECL_OVERRIDE;
+    void setProperty(Property p, const QVariant &value) override;
 
 private:
     Q_DISABLE_COPY(ProfileGroup)

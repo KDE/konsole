@@ -85,7 +85,7 @@ public:
      * variable.
      */
     explicit Session(QObject *parent = nullptr);
-    ~Session() Q_DECL_OVERRIDE;
+    ~Session() override;
 
     /**
      * Connect to an existing terminal.  When a new Session() is constructed it
@@ -840,7 +840,7 @@ public:
     /** Constructs an empty session group. */
     explicit SessionGroup(QObject *parent);
     /** Destroys the session group and removes all connections between master and slave sessions. */
-    ~SessionGroup() Q_DECL_OVERRIDE;
+    ~SessionGroup() override;
 
     /** Adds a session to the group. */
     void addSession(Session *session);

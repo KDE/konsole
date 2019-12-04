@@ -43,7 +43,7 @@ class HistorySizeWidget : public QWidget
 
 public:
     explicit HistorySizeWidget(QWidget *parent);
-    ~HistorySizeWidget() Q_DECL_OVERRIDE;
+    ~HistorySizeWidget() override;
 
     /** Specifies the history mode. */
     void setMode(Enum::HistoryModeEnum aMode);
