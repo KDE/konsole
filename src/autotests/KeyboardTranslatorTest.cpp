@@ -106,7 +106,7 @@ void KeyboardTranslatorTest::testFallback()
 
     auto entries = fallback->entries();
     QCOMPARE(1, entries.size());
-    auto entry = fallback->findEntry(Qt::Key_Tab, nullptr);
+    auto entry = fallback->findEntry(Qt::Key_Tab, Qt::NoModifier);
     QVERIFY(!entry.isNull());
     QCOMPARE(FallbackKeyboardTranslator::Command::NoCommand, entry.command());
     QCOMPARE(int(Qt::Key_Tab), entry.keyCode());
@@ -118,7 +118,7 @@ void KeyboardTranslatorTest::testFallback()
     QCOMPARE(QStringLiteral("Tab"), entry.conditionToString());
     QCOMPARE(QStringLiteral("\\t"), entry.resultToString());
     QVERIFY(entry.matches(Qt::Key_Tab, Qt::NoModifier, KeyboardTranslator::NoState));
-    QVERIFY(entry == fallback->findEntry(Qt::Key_Tab, nullptr));
+    QVERIFY(entry == fallback->findEntry(Qt::Key_Tab, Qt::NoModifier));
 
     delete fallback;
 }
@@ -146,7 +146,7 @@ void KeyboardTranslatorTest::testHexKeys()
     QCOMPARE(QStringLiteral("testtranslator"), translator->name());
     QCOMPARE(QString(), translator->description());
 
-    auto entry = translator->findEntry(Qt::Key_Backspace, nullptr);
+    auto entry = translator->findEntry(Qt::Key_Backspace, Qt::NoModifier);
     QVERIFY(!entry.isNull());
     QCOMPARE(FallbackKeyboardTranslator::Command::NoCommand, entry.command());
     QCOMPARE(int(Qt::Key_Backspace), entry.keyCode());
@@ -158,9 +158,9 @@ void KeyboardTranslatorTest::testHexKeys()
     QCOMPARE(QStringLiteral("Backspace"), entry.conditionToString());
     QCOMPARE(QStringLiteral("\\x7f"), entry.resultToString());
     QVERIFY(entry.matches(Qt::Key_Backspace, Qt::NoModifier, KeyboardTranslator::NoState));
-    QVERIFY(entry == translator->findEntry(Qt::Key_Backspace, nullptr));
+    QVERIFY(entry == translator->findEntry(Qt::Key_Backspace, Qt::NoModifier));
 
-    entry = translator->findEntry(Qt::Key_Delete, nullptr);
+    entry = translator->findEntry(Qt::Key_Delete, Qt::NoModifier);
     QVERIFY(!entry.isNull());
     QCOMPARE(FallbackKeyboardTranslator::Command::NoCommand, entry.command());
     QCOMPARE(int(Qt::Key_Delete), entry.keyCode());
@@ -173,9 +173,9 @@ void KeyboardTranslatorTest::testHexKeys()
     QCOMPARE(QStringLiteral("\\b"), entry.resultToString());
     QVERIFY(entry.matches(Qt::Key_Delete, Qt::NoModifier, KeyboardTranslator::NoState));
     QVERIFY(!entry.matches(Qt::Key_Backspace, Qt::NoModifier, KeyboardTranslator::NoState));
-    QVERIFY(!(entry == translator->findEntry(Qt::Key_Backspace, nullptr)));
+    QVERIFY(!(entry == translator->findEntry(Qt::Key_Backspace, Qt::NoModifier)));
 
-    entry = translator->findEntry(Qt::Key_Space, nullptr);
+    entry = translator->findEntry(Qt::Key_Space, Qt::NoModifier);
     QVERIFY(!entry.isNull());
     QCOMPARE(FallbackKeyboardTranslator::Command::NoCommand, entry.command());
     QCOMPARE(int(Qt::Key_Space), entry.keyCode());
@@ -188,9 +188,9 @@ void KeyboardTranslatorTest::testHexKeys()
     QCOMPARE(QStringLiteral("Space"), entry.conditionToString());
     QCOMPARE(QStringLiteral("\\x00"), entry.resultToString());
     QVERIFY(entry.matches(Qt::Key_Space, Qt::NoModifier, KeyboardTranslator::NoState));
-    QVERIFY(entry == translator->findEntry(Qt::Key_Space, nullptr));
+    QVERIFY(entry == translator->findEntry(Qt::Key_Space, Qt::NoModifier));
     QVERIFY(!entry.matches(Qt::Key_Backspace, Qt::NoModifier, KeyboardTranslator::NoState));
-    QVERIFY(!(entry == translator->findEntry(Qt::Key_Backspace, nullptr)));
+    QVERIFY(!(entry == translator->findEntry(Qt::Key_Backspace, Qt::NoModifier)));
 
     delete translator;
 }
