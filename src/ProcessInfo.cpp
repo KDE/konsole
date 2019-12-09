@@ -141,7 +141,7 @@ QSet<QString> ProcessInfo::commonDirNames()
 
 QString ProcessInfo::formatShortDir(const QString &input) const
 {
-    if(input == QLatin1String("/")) {
+    if(input == QStringLiteral("/")) {
         return QStringLiteral("/");
     }
 

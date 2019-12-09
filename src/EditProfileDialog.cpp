@@ -507,7 +507,7 @@ void EditProfileDialog::showEnvironmentEditor()
     QString text = QInputDialog::getMultiLineText(this,
                                                   i18n("Edit Environment"),
                                                   i18n("One environment variable per line"),
-                                                  currentEnvironment.join(QLatin1Char('\n')),
+                                                  currentEnvironment.join(QStringLiteral("\n")),
                                                   &ok);
 
     QStringList newEnvironment;

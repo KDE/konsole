@@ -281,13 +281,13 @@ bool shouldUseNewProcess(int argc, char *argv[])
     // if users have explictly requested starting a new process
     // Support --nofork to retain argument compatibility with older
     // versions.
-    if (arguments.contains(QLatin1String("--separate"))
-        || arguments.contains(QLatin1String("--nofork"))) {
+    if (arguments.contains(QStringLiteral("--separate"))
+        || arguments.contains(QStringLiteral("--nofork"))) {
         return true;
     }
 
     // the only way to create new tab is to reuse existing Konsole process.
-    if (arguments.contains(QLatin1String("--new-tab"))) {
+    if (arguments.contains(QStringLiteral("--new-tab"))) {
         return false;
     }
 

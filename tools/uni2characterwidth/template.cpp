@@ -124,7 +124,7 @@ static inline void warn(const Template::Element &element, const QString &msg) {
 
 void Template::executeCommand(Element &element, const Template::Element &childStub, const QStringList &argv) {
     // Insert content N times
-    if(argv[0] == QLatin1String("repeat")) {
+    if(argv[0] == QStringLiteral("repeat")) {
         bool ok;
         unsigned count = argv.value(1).toInt(&ok);
         if(!ok || count < 1) {
@@ -148,7 +148,7 @@ void Template::executeCommand(Element &element, const Template::Element &childSt
         }
     // Set printf-like format (with leading %) applied for strings and numbers
     // inside the group
-    } else if(argv[0] == QLatin1String("fmt")) {
+    } else if(argv[0] == QStringLiteral("fmt")) {
         static const QRegularExpression FMT_RE(QStringLiteral(R":(^%[-0 +#]?(?:[1-9][0-9]*)?\.?[0-9]*[diouxXs]$):"),
                                                QRegularExpression::OptimizeOnFirstUsageOption);
         const auto match = FMT_RE.match(argv.value(1));

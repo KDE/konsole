@@ -141,7 +141,7 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
 
 QStringList Application::getCustomCommand(QStringList &args)
 {
-    int i = args.indexOf(QLatin1String("-e"));
+    int i = args.indexOf(QStringLiteral("-e"));
     QStringList customCommand;
     if ((0 < i) && (i < (args.size() - 1))) {
         // -e was specified with at least one extra argument
@@ -311,8 +311,8 @@ bool Application::processTabsFromFileArgs(MainWindow *window)
             lineTokens[key] = value;
         }
         // should contain at least one of 'command' and 'profile'
-        if (lineTokens.contains(QLatin1String("command"))
-            || lineTokens.contains(QLatin1String("profile"))) {
+        if (lineTokens.contains(QStringLiteral("command"))
+            || lineTokens.contains(QStringLiteral("profile"))) {
             createTabFromArgs(window, lineTokens);
             sessions++;
         } else {

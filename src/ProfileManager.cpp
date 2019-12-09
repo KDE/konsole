@@ -100,7 +100,7 @@ ProfileManager::ProfileManager()
     _defaultProfile = _fallbackProfile;
     if (!defaultProfileFileName.isEmpty()) {
         // load the default profile
-        const QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("konsole/") + defaultProfileFileName);
+        const QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + defaultProfileFileName);
 
         if (!path.isEmpty()) {
             Profile::Ptr profile = loadProfile(path);
@@ -146,7 +146,7 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     if (fileInfo.suffix() != QLatin1String("profile")) {
         path.append(QLatin1String(".profile"));
     }
-    if (fileInfo.path().isEmpty() || fileInfo.path() == QLatin1Char('.')) {
+    if (fileInfo.path().isEmpty() || fileInfo.path() == QLatin1String(".")) {
         path.prepend(QLatin1String("konsole") + QDir::separator());
     }
 
@@ -380,7 +380,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         QString newName;
         QString newTranslatedName;
         do {
-            newName = QLatin1String("Profile ") + QString::number(nameSuffix);
+            newName = QStringLiteral("Profile ") + QString::number(nameSuffix);
             newTranslatedName = i18nc("The default name of a profile", "Profile #%1", nameSuffix);
             // TODO: remove the # above and below - too many issues
             newTranslatedName.remove(QLatin1Char('#'));
@@ -564,7 +564,7 @@ void ProfileManager::loadShortcuts()
         // if the file is not an absolute path, look it up
         QFileInfo fileInfo(profilePath);
         if (!fileInfo.isAbsolute()) {
-            profilePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("konsole/") + profilePath);
+            profilePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("konsole/") + profilePath);
         }
 
         data.profilePath = profilePath;

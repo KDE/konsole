@@ -1558,7 +1558,7 @@ void SessionController::updateSessionIcon()
 {
     // If the default profile icon is being used, don't put it on the tab
     // Only show the icon if the user specifically chose one
-    if (_session->iconName() == QLatin1String("utilities-terminal")) {
+    if (_session->iconName() == QStringLiteral("utilities-terminal")) {
         _sessionIconName = QString();
     } else {
         _sessionIconName = _session->iconName();

@@ -119,7 +119,7 @@ protected:
                 continue;
             }
             if(!match.captured(QStringLiteral("udRangeInd")).isNull()) {
-                if(match.captured(QStringLiteral("udRangeInd")) == QLatin1String("First")) {
+                if(match.captured(QStringLiteral("udRangeInd")) == QStringLiteral("First")) {
                     // Fetch next valid line, as it pairs with the current one to form a range
                     QRegularExpressionMatch nlMatch;
                     int firstLineNo = _lineNo;
@@ -914,20 +914,20 @@ int main(int argc, char *argv[]) {
         {EmojiOpt,          EmojiProperty::EmojiPresentation},
     };
 
-    if(emojiStr == QLatin1String("presentation"))
+    if(emojiStr == QStringLiteral("presentation"))
         convertOpts[EmojiOpt] = EmojiProperty::EmojiPresentation;
-    else if(emojiStr == QLatin1String("all"))
+    else if(emojiStr == QStringLiteral("all"))
         convertOpts[EmojiOpt] = EmojiProperty::Emoji;
     else {
         convertOpts[EmojiOpt] = EmojiProperty::EmojiPresentation;
         qWarning() << QStringLiteral("invalid emoji option value: %1. Assuming \"presentation\".").arg(emojiStr);
     }
 
-    if(ambiguousWidthStr == QLatin1String("separate"))
+    if(ambiguousWidthStr == QStringLiteral("separate"))
         convertOpts[AmbiguousWidthOpt] = CharacterWidth::Ambiguous;
-    else if(ambiguousWidthStr == QLatin1Char('1'))
+    else if(ambiguousWidthStr == QStringLiteral("1"))
         convertOpts[AmbiguousWidthOpt] = 1;
-    else if(ambiguousWidthStr == QLatin1Char('2'))
+    else if(ambiguousWidthStr == QStringLiteral("2"))
         convertOpts[AmbiguousWidthOpt] = 2;
     else {
         convertOpts[AmbiguousWidthOpt] = CharacterWidth::Ambiguous;
@@ -940,7 +940,7 @@ int main(int argc, char *argv[]) {
 
     if(!GENERATOR_FUNCS_MAP.contains(generatorName)) {
         int status = 0;
-        if(generatorName != QLatin1String("-")) {
+        if(generatorName != QStringLiteral("-")) {
             status = 1;
             eout << QStringLiteral("Invalid output generator. Available generators:") << endl;
         }

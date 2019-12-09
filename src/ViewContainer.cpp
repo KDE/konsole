@@ -98,7 +98,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(_contextPopupMenu, &QMenu::aboutToHide, this, [this]() {
         // Remove the read-only action when the popup closes
         for (auto &action : _contextPopupMenu->actions()) {
-            if (action->objectName() == QLatin1String("view-readonly")) {
+            if (action->objectName() == QStringLiteral("view-readonly")) {
                 _contextPopupMenu->removeAction(action);
                 break;
             }
@@ -476,7 +476,7 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
     //TODO: add a countChanged signal so we can remove this for.
     // Detaching in mac causes crashes.
     for(auto action : _contextPopupMenu->actions()) {
-        if (action->objectName() == QLatin1String("tab-detach")) {
+        if (action->objectName() == QStringLiteral("tab-detach")) {
             action->setEnabled(count() > 1);
         }
     }
@@ -499,7 +499,7 @@ void TabbedViewContainer::openTabContextMenu(const QPoint &point)
 
         // Disable tab rename
         for (auto &action : _contextPopupMenu->actions()) {
-            if (action->objectName() == QLatin1String("edit-rename")) {
+            if (action->objectName() == QStringLiteral("edit-rename")) {
                 action->setEnabled(!sessionController->isReadOnly());
                 break;
             }
