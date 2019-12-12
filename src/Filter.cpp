@@ -202,7 +202,7 @@ void Filter::setBuffer(const QString *buffer, const QList<int> *linePositions)
     _linePositions = linePositions;
 }
 
-void Filter::getLineColumn(int position, int &startLine, int &startColumn)
+std::pair<int, int> Filter::getLineColumn(int position)
 {
     Q_ASSERT(_linePositions);
     Q_ASSERT(_buffer);
@@ -213,12 +213,11 @@ void Filter::getLineColumn(int position, int &startLine, int &startColumn)
             : _linePositions->value(i + 1);
 
         if (_linePositions->value(i) <= position && position < nextLine) {
-            startLine = i;
-            startColumn = Character::stringWidth(buffer()->mid(_linePositions->value(i),
-                                                     position - _linePositions->value(i)));
-            return;
+            return std::make_pair(i,  Character::stringWidth(buffer()->mid(_linePositions->value(i),
+                                                     position - _linePositions->value(i))));
         }
     }
+    return std::make_pair(-1, -1);
 }
 
 const QString *Filter::buffer()
@@ -350,14 +349,8 @@ void RegExpFilter::process()
     QRegularExpressionMatchIterator iterator(_searchText.globalMatch(*text));
     while (iterator.hasNext()) {
         QRegularExpressionMatch match(iterator.next());
-
-        int startLine = 0;
-        int endLine = 0;
-        int startColumn = 0;
-        int endColumn = 0;
-
-        getLineColumn(match.capturedStart(), startLine, startColumn);
-        getLineColumn(match.capturedEnd(), endLine, endColumn);
+        auto [startLine, startColumn] = getLineColumn(match.capturedStart());
+        auto [endLine, endColumn] = getLineColumn(match.capturedEnd());
 
         QSharedPointer<Filter::HotSpot> spot(newHotSpot(startLine, startColumn,
                                                  endLine, endColumn, match.capturedTexts()));
