@@ -168,7 +168,7 @@ protected:
     /** Returns the internal buffer */
     const QString *buffer();
     /** Converts a character position within buffer() to a line and column */
-    void getLineColumn(int position, int &startLine, int &startColumn);
+    std::pair<int,int> getLineColumn(int position);
 
 private:
     Q_DISABLE_COPY(Filter)
