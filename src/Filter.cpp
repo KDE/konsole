@@ -208,13 +208,9 @@ void Filter::getLineColumn(int position, int &startLine, int &startColumn)
     Q_ASSERT(_buffer);
 
     for (int i = 0; i < _linePositions->count(); i++) {
-        int nextLine = 0;
-
-        if (i == _linePositions->count() - 1) {
-            nextLine = _buffer->length() + 1;
-        } else {
-            nextLine = _linePositions->value(i + 1);
-        }
+        const int nextLine = i == _linePositions->count() - 1
+            ? _buffer->length() + 1
+            : _linePositions->value(i + 1);
 
         if (_linePositions->value(i) <= position && position < nextLine) {
             startLine = i;
