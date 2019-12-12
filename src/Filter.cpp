@@ -397,14 +397,9 @@ UrlFilter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int end
 UrlFilter::HotSpot::UrlType UrlFilter::HotSpot::urlType() const
 {
     const QString url = capturedTexts().at(0);
-
-    if (FullUrlRegExp.match(url).hasMatch()) {
-        return StandardUrl;
-    } else if (EmailAddressRegExp.match(url).hasMatch()) {
-        return Email;
-    } else {
-        return Unknown;
-    }
+    return FullUrlRegExp.match(url).hasMatch() ? StandardUrl
+         : EmailAddressRegExp.match(url).hasMatch() ? Email
+         : Unknown;
 }
 
 void UrlFilter::HotSpot::activate(QObject *object)
@@ -561,6 +556,7 @@ QString createFileRegex(const QStringList &patterns, const QString &filePattern,
     QStringList suffixes = patterns.filter(QRegularExpression(QStringLiteral("^\\*") + filePattern + QStringLiteral("$")));
     QStringList prefixes = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("+\\*$")));
     const QStringList fullNames = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("$")));
+
 
     suffixes.replaceInStrings(QStringLiteral("*"), QString());
     suffixes.replaceInStrings(QStringLiteral("."), QStringLiteral("\\."));
