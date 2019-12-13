@@ -29,6 +29,8 @@
 #include <QRegularExpression>
 #include <QMultiHash>
 
+#include <memory>
+
 // Konsole
 #include "Character.h"
 
@@ -394,8 +396,10 @@ public:
 private:
     Q_DISABLE_COPY(TerminalImageFilterChain)
 
-    QString *_buffer;
-    QList<int> *_linePositions;
+/* usually QStrings and QLists are not supposed to be in the heap, here we have a problem:
+    we need a shared memory space between many filter objeccts, defined by this TerminalImage. */
+    std::unique_ptr<QString> _buffer;
+    std::unique_ptr<QList<int>> _linePositions;
 };
 }
 #endif //FILTER_H

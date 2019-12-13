@@ -111,8 +111,6 @@ TerminalImageFilterChain::TerminalImageFilterChain() :
 
 TerminalImageFilterChain::~TerminalImageFilterChain()
 {
-    delete _buffer;
-    delete _linePositions;
 }
 
 void TerminalImageFilterChain::setImage(const Character * const image, int lines, int columns,
@@ -130,18 +128,12 @@ void TerminalImageFilterChain::setImage(const Character * const image, int lines
     decoder.setTrailingWhitespace(true);
 
     // setup new shared buffers for the filters to process on
-    auto newBuffer = new QString();
-    auto newLinePositions = new QList<int>();
-    setBuffer(newBuffer, newLinePositions);
+    _buffer.reset(new QString());
+    _linePositions.reset(new QList<int>());
 
-    // free the old buffers
-    delete _buffer;
-    delete _linePositions;
+    setBuffer(_buffer.get(), _linePositions.get());
 
-    _buffer = newBuffer;
-    _linePositions = newLinePositions;
-
-    QTextStream lineStream(_buffer);
+    QTextStream lineStream(_buffer.get());
     decoder.begin(&lineStream);
 
     for (int i = 0; i < lines; i++) {
