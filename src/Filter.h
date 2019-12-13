@@ -343,7 +343,7 @@ private:
  * The hotSpots() method return all of the hotspots in the text and on
  * a given line respectively.
  */
-class FilterChain : protected QList<Filter *>
+class FilterChain
 {
 public:
     virtual ~FilterChain();
@@ -369,6 +369,8 @@ public:
     QSharedPointer<Filter::HotSpot> hotSpotAt(int line, int column) const;
     /** Returns a list of all the hotspots in all the chain's filters */
     QList<QSharedPointer<Filter::HotSpot>> hotSpots() const;
+protected:
+    QList<Filter *> _filters;
 };
 
 /** A filter chain which processes character images from terminal displays */
