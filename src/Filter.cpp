@@ -44,76 +44,62 @@ using namespace Konsole;
 
 FilterChain::~FilterChain()
 {
-    QMutableListIterator<Filter *> iter(*this);
-
-    while (iter.hasNext()) {
-        Filter *filter = iter.next();
-        iter.remove();
-        delete filter;
-    }
+    qDeleteAll(_filters);
 }
 
 void FilterChain::addFilter(Filter *filter)
 {
-    append(filter);
+    _filters.append(filter);
 }
 
 void FilterChain::removeFilter(Filter *filter)
 {
-    removeAll(filter);
+    _filters.removeAll(filter);
 }
 
 void FilterChain::reset()
 {
-    QListIterator<Filter *> iter(*this);
-    while (iter.hasNext()) {
-        iter.next()->reset();
+    for(auto *filter : _filters) {
+        filter->reset();
     }
 }
 
 void FilterChain::setBuffer(const QString *buffer, const QList<int> *linePositions)
 {
-    QListIterator<Filter *> iter(*this);
-    while (iter.hasNext()) {
-        iter.next()->setBuffer(buffer, linePositions);
+    for(auto *filter : _filters) {
+        filter->setBuffer(buffer, linePositions);
     }
 }
 
 void FilterChain::process()
 {
-    QListIterator<Filter *> iter(*this);
-    while (iter.hasNext()) {
-        iter.next()->process();
+    for( auto *filter : _filters) {
+        filter->process();
     }
 }
 
 void FilterChain::clear()
 {
-    QList<Filter *>::clear();
+    _filters.clear();
 }
 
 QSharedPointer<Filter::HotSpot> FilterChain::hotSpotAt(int line, int column) const
 {
-    QListIterator<Filter *> iter(*this);
-    while (iter.hasNext()) {
-        Filter *filter = iter.next();
+    for(auto *filter : _filters) {
         QSharedPointer<Filter::HotSpot> spot = filter->hotSpotAt(line, column);
         if (spot != nullptr) {
-            return spot;
+           return spot;
         }
     }
-
     return nullptr;
 }
 
 QList<QSharedPointer<Filter::HotSpot>> FilterChain::hotSpots() const
 {
     QList<QSharedPointer<Filter::HotSpot>> list;
-    QListIterator<Filter *> iter(*this);
-    while (iter.hasNext()) {
-        Filter *filter = iter.next();
-        list << filter->hotSpots();
-    }
+    for (auto *filter : _filters) {
+        list.append(filter->hotSpots());
+>   }
     return list;
 }
 
@@ -132,7 +118,7 @@ TerminalImageFilterChain::~TerminalImageFilterChain()
 void TerminalImageFilterChain::setImage(const Character * const image, int lines, int columns,
                                         const QVector<LineProperty> &lineProperties)
 {
-    if (empty()) {
+    if (_filters.empty()) {
         return;
     }
 
