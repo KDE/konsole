@@ -254,9 +254,9 @@ Filter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endCol
 {
 }
 
-QList<QAction *> Filter::HotSpot::actions()
+QList<QAction *> Filter::HotSpot::actions() const
 {
-    return QList<QAction *>();
+    return {};
 }
 
 int Filter::HotSpot::startLine() const
@@ -434,7 +434,7 @@ UrlFilter::HotSpot::~HotSpot()
 {
 }
 
-QList<QAction *> UrlFilter::HotSpot::actions()
+QList<QAction *> UrlFilter::HotSpot::actions() const
 {
     auto openAction = new QAction(this);
     auto copyAction = new QAction(this);
@@ -589,7 +589,7 @@ FileFilter::HotSpot::~HotSpot()
 {
 }
 
-QList<QAction *> FileFilter::HotSpot::actions()
+QList<QAction *> FileFilter::HotSpot::actions() const
 {
     auto openAction = new QAction(this);
     openAction->setText(i18n("Open File"));
