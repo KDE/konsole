@@ -487,10 +487,14 @@ QList<QAction *> UrlFilter::HotSpot::actions()
 
     if (kind == StandardUrl) {
         openAction->setText(i18n("Open Link"));
+        openAction->setIcon(QIcon::fromTheme(QStringLiteral("internet-services")));
         copyAction->setText(i18n("Copy Link Address"));
+        copyAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy-url")));
     } else if (kind == Email) {
         openAction->setText(i18n("Send Email To..."));
+        openAction->setIcon(QIcon::fromTheme(QStringLiteral("mail-send")));
         copyAction->setText(i18n("Copy Email Address"));
+        copyAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy-mail")));
     }
 
     // object names are set here so that the hotspot performs the
