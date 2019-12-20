@@ -26,6 +26,7 @@
   <name xml:lang="it">Konsole</name>
   <name xml:lang="ko">Konsole</name>
   <name xml:lang="lt">Konsolė</name>
+  <name xml:lang="ml">കൺസോൾ</name>
   <name xml:lang="nb">Konsole</name>
   <name xml:lang="nl">Konsole</name>
   <name xml:lang="nn">Konsole</name>
@@ -69,6 +70,7 @@
   <summary xml:lang="it">Terminale</summary>
   <summary xml:lang="ko">터미널</summary>
   <summary xml:lang="lt">Terminalas</summary>
+  <summary xml:lang="ml">ടെർമിനൽ</summary>
   <summary xml:lang="nb">Terminal</summary>
   <summary xml:lang="nl">Terminal</summary>
   <summary xml:lang="nn">Terminal</summary>
@@ -107,6 +109,7 @@
     <p xml:lang="id">Konsole adalah sebuah terminal untuk menjalankan shell perintah. Ini menyediakan antarmuka baris perintah untuk secara langsung mengendalikan komputermu.</p>
     <p xml:lang="it">Konsole è un terminale per eseguire una shell di comandi. Fornisce un'interfaccia a riga di comando per controllare direttamente il tuo computer.</p>
     <p xml:lang="ko">Konsole은 흔히 터미널, 혹은 셸이라고 불리는 X 터미널 에뮬레이터입니다. 텍스트 창에서 컴퓨터를 직접 재현하는 명령행 인터페이스를 재현합니다.</p>
+    <p xml:lang="ml">കൺസോൾ എന്നത് ആജ്ഞ ഷെൽ റൺ ചെയ്യുന്നതിനുള്ള ഒരു ടെർമിനലാണ്. ഇത് കമ്പ്യൂട്ടറിനെ നേരിട്ട് നിയന്ത്രിക്കുന്നതിനുള്ള ഒരു ആജ്ഞാസ്ഥാനം നല്‍കുന്നു.</p>
     <p xml:lang="nl">Konsole is een terminal om een opdrachtshell uit te voeren. Het biedt een interface voor een opdrachtregel voor directe besturing van uw computer.</p>
     <p xml:lang="nn">Konsole er ein terminal for å køyra kommandolinjeprogram. Han gjev altså eit tekstbasert grensesnitt til datamaskina.</p>
     <p xml:lang="pl">Konsola jest terminalem do wykonywania poleceń powłoki. Zapewnia interfejs wiersza poleceń do bezpośredniego sterowania komputerem.</p>
@@ -142,6 +145,7 @@
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="ko">기능:</p>
     <p xml:lang="lt">Ypatybės:</p>
+    <p xml:lang="ml">വിശേഷതകൾ:</p>
     <p xml:lang="nb">Funksjoner:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
     <p xml:lang="nn">Funksjonar:</p>
@@ -186,6 +190,7 @@
       <li xml:lang="it">Schede</li>
       <li xml:lang="ko">탭</li>
       <li xml:lang="lt">Kortelės</li>
+      <li xml:lang="ml">ടാബുകൾ</li>
       <li xml:lang="nb">Faner</li>
       <li xml:lang="nl">Tabbladen</li>
       <li xml:lang="nn">Faner</li>
@@ -228,6 +233,7 @@
       <li xml:lang="it">Profili multipli</li>
       <li xml:lang="ko">다중 프로필</li>
       <li xml:lang="lt">Daugybė profilių</li>
+      <li xml:lang="ml">അനേക രൂപങ്ങൾ</li>
       <li xml:lang="nb">Flere profiler</li>
       <li xml:lang="nl">Meerdere profielen</li>
       <li xml:lang="nn">Fleire profilar</li>
@@ -269,6 +275,7 @@
       <li xml:lang="id">Pemantauan Diam dan Aktivitas</li>
       <li xml:lang="it">Monitoraggio del silenzio e dell'attività</li>
       <li xml:lang="ko">침묵 및 활동 모니터링</li>
+      <li xml:lang="ml">നിശ്ശബ്ദതയും പ്രവൃത്തി നിരീക്ഷണവും</li>
       <li xml:lang="nb">Overvåking av stillhet og aktivitet</li>
       <li xml:lang="nl">Monitoring van stilte en activiteit</li>
       <li xml:lang="nn">Overvaking av aktivitet og inaktivitet</li>
@@ -310,6 +317,7 @@
       <li xml:lang="id">Dukungan markah</li>
       <li xml:lang="it">Supporto dei segnalibri</li>
       <li xml:lang="ko">책갈피 지원</li>
+      <li xml:lang="ml">ഓര്‍മ്മക്കുറിപ്പു് സംവിദാനം</li>
       <li xml:lang="nb">Støtte for bokmerker</li>
       <li xml:lang="nl">Ondersteuning van bladwijzers</li>
       <li xml:lang="nn">Bokmerkestøtte</li>
@@ -352,6 +360,7 @@
       <li xml:lang="it">Ricerca</li>
       <li xml:lang="ko">찾기</li>
       <li xml:lang="lt">Paieška</li>
+      <li xml:lang="ml">തിരയൽ</li>
       <li xml:lang="nb">Søking</li>
       <li xml:lang="nl">Zoeken</li>
       <li xml:lang="nn">Søkjestøtte</li>
@@ -394,6 +403,7 @@
       <li xml:lang="it">Salvataggio del risultato</li>
       <li xml:lang="ko">출력 저장</li>
       <li xml:lang="lt">Išvesties įrašymas</li>
+      <li xml:lang="ml">ഫലം സൂക്ഷിക്കുക</li>
       <li xml:lang="nb">Lagrer utdata</li>
       <li xml:lang="nl">Opslaan van uitvoer</li>
       <li xml:lang="nn">Lagring av utdata</li>
@@ -442,6 +452,7 @@
       <caption xml:lang="id">Konsole adalah wujud yang digunakan sebagai emulator terminal</caption>
       <caption xml:lang="it">Konsole utilizzata come un emulatore di terminale</caption>
       <caption xml:lang="ko">터미널 에뮬레이터로 사용 중인 Konsole</caption>
+      <caption xml:lang="ml">കൺസോൾ നിലവിൽ ടെർമിനൽ അനുകരിക്കുന്നതിനായി ഉപയോഗിക്കുന്നു</caption>
       <caption xml:lang="nl">Konsole wordt gebruikt als een terminalemulator</caption>
       <caption xml:lang="nn">Konsole brukt som ein terminalemulator.</caption>
       <caption xml:lang="pl">Konsole używana jako emulator terminala</caption>
