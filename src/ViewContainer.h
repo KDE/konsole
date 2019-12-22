@@ -141,8 +141,8 @@ public:
      */
     ViewSplitter *viewSplitterAt(int index);
 
-    void connectTerminalDisplay(TerminalDisplay *view);
-    void disconnectTerminalDisplay(TerminalDisplay *view);
+    void connectTerminalDisplay(TerminalDisplay *display);
+    void disconnectTerminalDisplay(TerminalDisplay *display);
     void moveTabLeft();
     void moveTabRight();
 

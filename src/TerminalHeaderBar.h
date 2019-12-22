@@ -43,7 +43,7 @@ public:
     void terminalFocusOut();
 
 protected:
-    void paintEvent(QPaintEvent* ev) override;
+    void paintEvent(QPaintEvent* paintEvent) override;
     void mousePressEvent(QMouseEvent *ev) override;
     void mouseReleaseEvent(QMouseEvent *ev) override;
     void mouseMoveEvent(QMouseEvent *ev) override;

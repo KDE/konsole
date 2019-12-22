@@ -74,7 +74,7 @@ public:
     explicit TerminalDisplay(QWidget *parent = nullptr);
     ~TerminalDisplay() override;
 
-    void showDragTarget(const QPoint& pos);
+    void showDragTarget(const QPoint& cursorPos);
     void hideDragTarget();
 
     void applyProfile(const Profile::Ptr& profile);
