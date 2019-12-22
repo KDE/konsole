@@ -194,23 +194,6 @@ public:
     /** Returns the shortcut associated with a particular profile. */
     QKeySequence shortcut(Profile::Ptr profile) const;
 
-    /**
-     * Returns the list of shortcut key sequences which
-     * can be used to create new sessions based on
-     * existing profiles
-     *
-     * When one of the shortcuts is activated,
-     * use findByShortcut() to load the profile associated
-     * with the shortcut.
-     */
-    QList<QKeySequence> shortcuts();
-
-    /**
-     * Finds and loads the profile associated with
-     * the specified @p shortcut key sequence and returns a pointer to it.
-     */
-    Profile::Ptr findByShortcut(const QKeySequence &shortcut);
-
 Q_SIGNALS:
 
     /** Emitted when a profile is added to the manager. */

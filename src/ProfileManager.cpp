@@ -663,28 +663,6 @@ void ProfileManager::loadFavorites()
     _loadedFavorites = true;
 }
 
-QList<QKeySequence> ProfileManager::shortcuts()
-{
-    return _shortcuts.keys();
-}
-
-Profile::Ptr ProfileManager::findByShortcut(const QKeySequence& shortcut)
-{
-    Q_ASSERT(_shortcuts.contains(shortcut));
-
-    if (!_shortcuts[shortcut].profileKey) {
-        Profile::Ptr key = loadProfile(_shortcuts[shortcut].profilePath);
-        if (!key) {
-            _shortcuts.remove(shortcut);
-            return Profile::Ptr();
-        }
-        _shortcuts[shortcut].profileKey = key;
-    }
-
-    return _shortcuts[shortcut].profileKey;
-}
-
-
 QKeySequence ProfileManager::shortcut(Profile::Ptr profile) const
 {
     QMapIterator<QKeySequence, ShortcutData> iter(_shortcuts);
