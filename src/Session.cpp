@@ -1725,10 +1725,6 @@ QList<Session*> SessionGroup::sessions() const
 {
     return _sessions.keys();
 }
-bool SessionGroup::masterStatus(Session* session) const
-{
-    return _sessions[session];
-}
 
 void SessionGroup::addSession(Session* session)
 {

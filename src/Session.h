@@ -859,8 +859,6 @@ public:
      * @param master True to make this session a master or false otherwise
      */
     void setMasterStatus(Session *session, bool master);
-    /** Returns the master status of a session.  See setMasterStatus() */
-    bool masterStatus(Session *session) const;
 
     /**
      * This enum describes the options for propagating certain activity or
