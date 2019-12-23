@@ -159,7 +159,7 @@ public:
         }
     }
 
-    quint8 colorSpace() { return _colorSpace; }
+    quint8 colorSpace() const { return _colorSpace; }
     void termColor(int *u, int *v, int *w) { *u = _u; *v = _v; *w = _w; }
 
     /**
