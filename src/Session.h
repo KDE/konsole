@@ -879,11 +879,6 @@ public:
      * @param mode A bitwise OR of MasterMode flags.
      */
     void setMasterMode(int mode);
-    /**
-     * Returns a bitwise OR of the active MasterMode flags for this group.
-     * See setMasterMode()
-     */
-    int masterMode() const;
 
 private Q_SLOTS:
     void sessionFinished();

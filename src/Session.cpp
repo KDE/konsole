@@ -1717,10 +1717,6 @@ SessionGroup::SessionGroup(QObject* parent)
 }
 SessionGroup::~SessionGroup() = default;
 
-int SessionGroup::masterMode() const
-{
-    return _masterMode;
-}
 QList<Session*> SessionGroup::sessions() const
 {
     return _sessions.keys();
