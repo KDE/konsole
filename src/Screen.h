@@ -484,17 +484,6 @@ public:
     void writeLinesToStream(TerminalCharacterDecoder *decoder, int fromLine, int toLine) const;
 
     /**
-     * Copies the selected characters, set using @see setSelBeginXY and @see setSelExtentXY
-     * into a stream.
-     *
-     * @param decoder A decoder which converts terminal characters into text.
-     * PlainTextDecoder is the most commonly used decoder which converts characters
-     * into plain text with no formatting.
-     * @param options See Screen::DecodingOptions
-     */
-    void writeSelectionToStream(TerminalCharacterDecoder *decoder, const DecodingOptions options) const;
-
-    /**
      * Checks if the text between from and to is inside the current
      * selection. If this is the case, the selection is cleared. The
      * from and to are coordinates in the current viewable window.

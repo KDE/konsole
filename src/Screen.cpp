@@ -1227,15 +1227,6 @@ bool Screen::isSelectionValid() const
     return _selTopLeft >= 0 && _selBottomRight >= 0;
 }
 
-void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder ,
-                                    const DecodingOptions options) const
-{
-    if (!isSelectionValid()) {
-        return;
-    }
-    writeToStream(decoder, _selTopLeft, _selBottomRight, options);
-}
-
 void Screen::writeToStream(TerminalCharacterDecoder* decoder,
                            int startIndex, int endIndex,
                            const DecodingOptions options) const
