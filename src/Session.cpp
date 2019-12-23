@@ -1751,10 +1751,7 @@ void SessionGroup::setMasterMode(int mode)
 {
     _masterMode = mode;
 }
-QList<Session*> SessionGroup::masters() const
-{
-    return _sessions.keys(true);
-}
+ 
 void SessionGroup::setMasterStatus(Session* session , bool master)
 {
     const bool wasMaster = _sessions[session];

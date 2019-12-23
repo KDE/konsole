@@ -892,8 +892,6 @@ private Q_SLOTS:
     void forwardData(const QByteArray &data);
 
 private:
-    QList<Session *> masters() const;
-
     // maps sessions to their master status
     QHash<Session *, bool> _sessions;
 
