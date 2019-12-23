@@ -626,10 +626,6 @@ void TerminalDisplay::setKeyboardCursorShape(Enum::CursorShapeEnum shape)
 {
     _cursorShape = shape;
 }
-Enum::CursorShapeEnum TerminalDisplay::keyboardCursorShape() const
-{
-    return _cursorShape;
-}
 
 void TerminalDisplay::setCursorStyle(Enum::CursorShapeEnum shape, bool isBlinking)
 {
@@ -664,10 +660,6 @@ void TerminalDisplay::resetCursorStyle()
 void TerminalDisplay::setKeyboardCursorColor(const QColor& color)
 {
     _cursorColor = color;
-}
-QColor TerminalDisplay::keyboardCursorColor() const
-{
-    return _cursorColor;
 }
 
 void TerminalDisplay::setOpacity(qreal opacity)

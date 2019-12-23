@@ -174,10 +174,6 @@ public:
      * Defaults to BlockCursor
      */
     void setKeyboardCursorShape(Enum::CursorShapeEnum shape);
-    /**
-     * Returns the shape of the keyboard cursor.  See setKeyboardCursorShape()
-     */
-    Enum::CursorShapeEnum keyboardCursorShape() const;
 
     /**
      * Sets the Cursor Style (DECSCUSR) via escape sequences
@@ -205,13 +201,6 @@ public:
      * to the default behavior.
      */
     void setKeyboardCursorColor(const QColor &color);
-
-    /**
-     * Returns the color of the keyboard cursor, or an invalid color if the keyboard
-     * cursor color is set to change according to the foreground color of the character
-     * underneath it.
-     */
-    QColor keyboardCursorColor() const;
 
     /**
      * Returns the number of lines of text which can be displayed in the widget.
