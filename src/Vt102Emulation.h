@@ -69,7 +69,7 @@ struct CharCodes {
  *
  * In addition, various additional xterm escape sequences are supported to provide
  * features such as mouse input handling.
- * See http://rtfm.etla.org/xterm/ctlseq.html for a description of xterm's escape
+ * See https://invisible-island.net/xterm/ctlseqs/ctlseqs.html for a description of xterm's escape
  * sequences.
  *
  */
