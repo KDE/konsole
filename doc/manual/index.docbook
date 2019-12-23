@@ -1509,7 +1509,7 @@ Space+Ctrl
 <listitem>
 <para>\xHH : where HH are two hex digits</para>
 <tip>
-<para>This can be used to send ASCII control characters, &eg; <quote>\x00</quote> which is the NUL character</para>
+<para>This can be used to send &ASCII; control characters, &eg; <quote>\x00</quote> which is the NUL character</para>
 </tip>
 </listitem>
 </itemizedlist>
