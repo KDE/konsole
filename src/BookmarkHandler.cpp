@@ -144,6 +144,11 @@ QString BookmarkHandler::iconForView(ViewProperties *view) const
     return {};
 }
 
+bool BookmarkHandler::supportsTabs() const
+{
+    return true;
+}
+
 void BookmarkHandler::setViews(const QList<ViewProperties *> &views)
 {
     _views = views;
