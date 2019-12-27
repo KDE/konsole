@@ -69,6 +69,7 @@ public:
     QString currentIcon() const override;
     bool enableOption(BookmarkOption option) const override;
     bool supportsTabs() const override;
+    QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const override;
     void openFolderinTabs(const KBookmarkGroup &group) override;
 
     /**
