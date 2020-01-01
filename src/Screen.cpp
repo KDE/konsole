@@ -731,7 +731,7 @@ void Screen::displayCharacter(uint c)
             Q_ASSERT(oldChars);
             if (((oldChars) != nullptr) && extendedCharLength < 3) {
                 Q_ASSERT(extendedCharLength > 1);
-                Q_ASSERT(extendedCharLength < 65535);
+                Q_ASSERT(extendedCharLength < 65535); // redundant due to above check
                 auto chars = new uint[extendedCharLength + 1];
                 memcpy(chars, oldChars, sizeof(uint) * extendedCharLength);
                 chars[extendedCharLength] = c;
