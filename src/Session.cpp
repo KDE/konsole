@@ -1154,6 +1154,8 @@ QString Session::getDynamicTitle()
     if (dir.isEmpty()) {
         // update current directory from process
         updateWorkingDirectory();
+        // Previous process may have been freed in updateSessionProcessInfo()
+        process = getProcessInfo();
         dir = process->currentDir(&ok);
     }
     if(!ok) {
