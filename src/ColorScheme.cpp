@@ -190,6 +190,7 @@ ColorScheme::ColorScheme(const ColorScheme &other) :
     _randomTable(nullptr),
     _opacity(other._opacity),
     _blur(other._blur),
+    _colorRandomization(other._colorRandomization),
     _wallpaper(other._wallpaper)
 {
     setName(other.name());
