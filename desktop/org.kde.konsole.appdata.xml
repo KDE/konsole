@@ -463,6 +463,7 @@
   </provides>
   <update_contact>konsole-devel_AT_kde.org</update_contact>
   <releases>
+    <release version="19.12.1" date="2020-01-09"/>
     <release version="19.12.0" date="2019-12-12"/>
   </releases>
 </component>
