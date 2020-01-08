@@ -151,8 +151,6 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
 
     QSharedPointer<QCommandLineParser> parser(new QCommandLineParser);
     parser->setApplicationDescription(about.shortDescription());
-    parser->addHelpOption();
-    parser->addVersionOption();
     about.setupCommandLine(parser.data());
 
     QStringList args = app->arguments();
