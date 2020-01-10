@@ -327,6 +327,12 @@ public:
     void printContent(QPainter &painter, bool friendly);
 
     /**
+     * Gets the foreground of the display
+     * @see setForegroundColor(), setColorTable(), setBackgroundColor()
+     */
+    QColor getForegroundColor() const;
+
+    /**
      * Gets the background of the display
      * @see setBackgroundColor(), setColorTable(), setForegroundColor()
      */

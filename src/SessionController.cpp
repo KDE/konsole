@@ -213,6 +213,9 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect(backgroundTimer, &QTimer::timeout, this, &Konsole::SessionController::snapshot);
     backgroundTimer->start();
 
+    // xterm '10;?' request
+    connect(_session.data(), &Konsole::Session::getForegroundColor,
+            this, &Konsole::SessionController::sendForegroundColor);
     // xterm '11;?' request
     connect(_session.data(), &Konsole::Session::getBackgroundColor,
             this, &Konsole::SessionController::sendBackgroundColor);
@@ -477,6 +480,12 @@ void SessionController::sendSignal(QAction* action)
 {
     const auto signal = action->data().toInt();
     _session->sendSignal(signal);
+}
+
+void SessionController::sendForegroundColor()
+{
+    const QColor c = _view->getForegroundColor();
+    _session->reportForegroundColor(c);
 }
 
 void SessionController::sendBackgroundColor()

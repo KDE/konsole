@@ -248,6 +248,7 @@ private Q_SLOTS:
     void handleWebShortcutAction();
     void configureWebShortcuts();
     void sendSignal(QAction *action);
+    void sendForegroundColor();
     void sendBackgroundColor();
     void toggleReadOnly();
 

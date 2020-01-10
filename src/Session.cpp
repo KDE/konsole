@@ -678,6 +678,10 @@ bool Session::isPrimaryScreen()
 void Session::sessionAttributeRequest(int id)
 {
     switch (id) {
+        case TextColor:
+            // Get 'TerminalDisplay' (_view) foreground color
+            emit getForegroundColor();
+            break;
         case BackgroundColor:
             // Get 'TerminalDisplay' (_view) background color
             emit getBackgroundColor();
@@ -801,15 +805,25 @@ void Session::sendSignal(int signal)
     }
 }
 
-void Session::reportBackgroundColor(const QColor& c)
+void Session::reportColor(SessionAttributes r, const QColor& c)
 {
     #define to65k(a) (QStringLiteral("%1").arg(int(((a)*0xFFFF)), 4, 16, QLatin1Char('0')))
-    QString msg = QStringLiteral("\033]11;rgb:")
+    QString msg = QStringLiteral("\033]%1;rgb:").arg(r)
                 + to65k(c.redF())   + QLatin1Char('/')
                 + to65k(c.greenF()) + QLatin1Char('/')
                 + to65k(c.blueF())  + QLatin1Char('\a');
     _emulation->sendString(msg.toUtf8());
     #undef to65k
+}
+
+void Session::reportForegroundColor(const QColor& c)
+{
+    reportColor(SessionAttributes::TextColor, c);
+}
+
+void Session::reportBackgroundColor(const QColor& c)
+{
+    reportColor(SessionAttributes::BackgroundColor, c);
 }
 
 bool Session::kill(int signal)
