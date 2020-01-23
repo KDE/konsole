@@ -403,7 +403,7 @@ bool ColorScheme::hasDarkBackground() const
     const double g = backgroundColor().greenF();
     const double b = backgroundColor().blueF();
     rgb2hsluv(r, g, b, &h, &s, &l);
-    return l < 0.5;
+    return l < 50;
 }
 
 void ColorScheme::setOpacity(qreal opacity)
