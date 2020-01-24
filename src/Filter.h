@@ -32,6 +32,9 @@
 // Konsole
 #include "Character.h"
 
+// std
+#include <optional>
+
 class QAction;
 
 namespace Konsole {
@@ -70,7 +73,7 @@ public:
     * Hotspots may have more than one action, in which case the list of actions can be obtained using the
     * actions() method.  These actions may then be displayed in a popup menu or toolbar for example.
     */
-    class HotSpot
+    class HotSpot : public QObject
     {
     public:
         /**
@@ -143,10 +146,10 @@ public:
     void reset();
 
     /** Returns the hotspot which covers the given @p line and @p column, or 0 if no hotspot covers that area */
-    HotSpot *hotSpotAt(int line, int column) const;
+    QSharedPointer<HotSpot> hotSpotAt(int line, int column) const;
 
     /** Returns the list of hotspots identified by the filter */
-    QList<HotSpot *> hotSpots() const;
+    QList<QSharedPointer<HotSpot>> hotSpots() const;
 
     /** Returns the list of hotspots identified by the filter which occur on a given line */
 
@@ -157,7 +160,7 @@ public:
 
 protected:
     /** Adds a new hotspot to the list */
-    void addHotSpot(HotSpot *);
+    void addHotSpot(QSharedPointer<HotSpot> spot);
     /** Returns the internal buffer */
     const QString *buffer();
     /** Converts a character position within buffer() to a line and column */
@@ -166,8 +169,8 @@ protected:
 private:
     Q_DISABLE_COPY(Filter)
 
-    QMultiHash<int, HotSpot *> _hotspots;
-    QList<HotSpot *> _hotspotList;
+    QMultiHash<int, QSharedPointer<HotSpot>> _hotspots;
+    QList<QSharedPointer<HotSpot>> _hotspotList;
 
     const QList<int> *_linePositions;
     const QString *_buffer;
@@ -226,14 +229,12 @@ protected:
      * Called when a match for the regular expression is encountered.  Subclasses should reimplement this
      * to return custom hotspot types
      */
-    virtual RegExpFilter::HotSpot *newHotSpot(int startLine, int startColumn, int endLine,
+    virtual QSharedPointer<Filter::HotSpot> newHotSpot(int startLine, int startColumn, int endLine,
                                               int endColumn, const QStringList &capturedTexts);
 
 private:
     QRegularExpression _searchText;
 };
-
-class FilterObject;
 
 /** A filter which matches URLs in blocks of text */
 class UrlFilter : public RegExpFilter
@@ -265,14 +266,12 @@ public:
             Unknown
         };
         UrlType urlType() const;
-
-        FilterObject *_urlObject;
     };
 
     UrlFilter();
 
 protected:
-    RegExpFilter::HotSpot *newHotSpot(int, int, int, int, const QStringList &) override;
+    QSharedPointer<Filter::HotSpot> newHotSpot(int, int, int, int, const QStringList &) override;
 
 private:
     static const QRegularExpression FullUrlRegExp;
@@ -307,7 +306,6 @@ public:
         void activate(QObject *object = nullptr) override;
 
     private:
-        FilterObject *_fileObject;
         QString _filePath;
     };
 
@@ -316,28 +314,12 @@ public:
     void process() override;
 
 protected:
-    RegExpFilter::HotSpot *newHotSpot(int, int, int, int, const QStringList &) override;
+    QSharedPointer<Filter::HotSpot> newHotSpot(int, int, int, int, const QStringList &) override;
 
 private:
     QPointer<Session> _session;
     QString _dirPath;
     QSet<QString> _currentFiles;
-};
-
-class FilterObject : public QObject
-{
-    Q_OBJECT
-public:
-    explicit FilterObject(Filter::HotSpot *filter) : _filter(filter)
-    {
-    }
-
-public Q_SLOTS:
-    void activated();
-private:
-    Q_DISABLE_COPY(FilterObject)
-
-    Filter::HotSpot *_filter;
 };
 
 /**
@@ -380,9 +362,9 @@ public:
     void setBuffer(const QString *buffer, const QList<int> *linePositions);
 
     /** Returns the first hotspot which occurs at @p line, @p column or 0 if no hotspot was found */
-    Filter::HotSpot *hotSpotAt(int line, int column) const;
+    QSharedPointer<Filter::HotSpot> hotSpotAt(int line, int column) const;
     /** Returns a list of all the hotspots in all the chain's filters */
-    QList<Filter::HotSpot *> hotSpots() const;
+    QList<QSharedPointer<Filter::HotSpot>> hotSpots() const;
 };
 
 /** A filter chain which processes character images from terminal displays */

@@ -35,6 +35,7 @@
 #include "ScrollState.h"
 #include "Profile.h"
 #include "TerminalHeaderBar.h"
+#include "Filter.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -149,7 +150,7 @@ public:
      * Returns a list of menu actions created by the filters for the content
      * at the given @p position.
      */
-    QList<QAction *> filterActions(const QPoint &position);
+    QSharedPointer<Filter::HotSpot> filterActions(const QPoint &position);
 
     /** Specifies whether or not the cursor can blink. */
     void setBlinkingCursorEnabled(bool blink);

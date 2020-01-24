@@ -1002,7 +1002,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
 QRegion TerminalDisplay::hotSpotRegion() const
 {
     QRegion region;
-    for (const Filter::HotSpot *hotSpot : _filterChain->hotSpots()) {
+    for (const auto &hotSpot : _filterChain->hotSpots()) {
         QRect r;
         r.setLeft(hotSpot->startColumn());
         r.setTop(hotSpot->startLine());
@@ -1032,6 +1032,7 @@ QRegion TerminalDisplay::hotSpotRegion() const
 
 void TerminalDisplay::processFilters()
 {
+
     if (_screenWindow.isNull()) {
         return;
     }
@@ -1390,7 +1391,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     // iterate over hotspots identified by the display's currently active filters
     // and draw appropriate visuals to indicate the presence of the hotspot
 
-    const QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
+    const auto spots = _filterChain->hotSpots();
     int urlNumber, urlNumInc;
     if (_reverseUrlHints) {
         urlNumber = spots.size() + 1;
@@ -1399,7 +1400,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
         urlNumber = 0;
         urlNumInc = 1;
     }
-    for (const Filter::HotSpot *spot : spots) {
+    for (const auto &spot : spots) {
         urlNumber += urlNumInc;
 
         QRegion region;
@@ -2217,7 +2218,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             }
 
             if ((_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
-                Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
+                auto spot = _filterChain->hotSpotAt(charLine, charColumn);
                 if ((spot != nullptr) && spot->type() == Filter::HotSpot::Link) {
                     QObject action;
                     action.setObjectName(QStringLiteral("open-action"));
@@ -2238,14 +2239,12 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
     }
 }
 
-QList<QAction*> TerminalDisplay::filterActions(const QPoint& position)
+QSharedPointer<Filter::HotSpot> TerminalDisplay::filterActions(const QPoint& position)
 {
     int charLine, charColumn;
     getCharacterPosition(position, charLine, charColumn, false);
 
-    Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
-
-    return spot != nullptr ? spot->actions() : QList<QAction*>();
+    return _filterChain->hotSpotAt(charLine, charColumn);
 }
 
 void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
@@ -2257,7 +2256,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     processFilters();
     // handle filters
     // change link hot-spot appearance on mouse-over
-    Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine, charColumn);
+    auto spot = _filterChain->hotSpotAt(charLine, charColumn);
     if ((spot != nullptr) && spot->type() == Filter::HotSpot::Link) {
         QRegion previousHotspotArea = _mouseOverHotspotArea;
         _mouseOverHotspotArea = QRegion();

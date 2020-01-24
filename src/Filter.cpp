@@ -92,12 +92,12 @@ void FilterChain::clear()
     QList<Filter *>::clear();
 }
 
-Filter::HotSpot *FilterChain::hotSpotAt(int line, int column) const
+QSharedPointer<Filter::HotSpot> FilterChain::hotSpotAt(int line, int column) const
 {
     QListIterator<Filter *> iter(*this);
     while (iter.hasNext()) {
         Filter *filter = iter.next();
-        Filter::HotSpot *spot = filter->hotSpotAt(line, column);
+        QSharedPointer<Filter::HotSpot> spot = filter->hotSpotAt(line, column);
         if (spot != nullptr) {
             return spot;
         }
@@ -106,9 +106,9 @@ Filter::HotSpot *FilterChain::hotSpotAt(int line, int column) const
     return nullptr;
 }
 
-QList<Filter::HotSpot *> FilterChain::hotSpots() const
+QList<QSharedPointer<Filter::HotSpot>> FilterChain::hotSpots() const
 {
-    QList<Filter::HotSpot *> list;
+    QList<QSharedPointer<Filter::HotSpot>> list;
     QListIterator<Filter *> iter(*this);
     while (iter.hasNext()) {
         Filter *filter = iter.next();
@@ -180,8 +180,6 @@ void TerminalImageFilterChain::setImage(const Character * const image, int lines
 }
 
 Filter::Filter() :
-    _hotspots(QMultiHash<int, HotSpot *>()),
-    _hotspotList(QList<HotSpot *>()),
     _linePositions(nullptr),
     _buffer(nullptr)
 {
@@ -195,10 +193,6 @@ Filter::~Filter()
 void Filter::reset()
 {
     _hotspots.clear();
-    QListIterator<HotSpot *> iter(_hotspotList);
-    while (iter.hasNext()) {
-        delete iter.next();
-    }
     _hotspotList.clear();
 }
 
@@ -238,7 +232,7 @@ const QString *Filter::buffer()
 
 Filter::HotSpot::~HotSpot() = default;
 
-void Filter::addHotSpot(HotSpot *spot)
+void Filter::addHotSpot(QSharedPointer<HotSpot> spot)
 {
     _hotspotList << spot;
 
@@ -247,16 +241,16 @@ void Filter::addHotSpot(HotSpot *spot)
     }
 }
 
-QList<Filter::HotSpot *> Filter::hotSpots() const
+QList<QSharedPointer<Filter::HotSpot>> Filter::hotSpots() const
 {
     return _hotspotList;
 }
 
-Filter::HotSpot *Filter::hotSpotAt(int line, int column) const
+QSharedPointer<Filter::HotSpot> Filter::hotSpotAt(int line, int column) const
 {
-    const QList<HotSpot *> hotspots = _hotspots.values(line);
+    const auto hotspots = _hotspots.values(line);
 
-    for (HotSpot *spot : hotspots) {
+    for (auto &spot : hotspots) {
         if (spot->startLine() == line && spot->startColumn() > column) {
             continue;
         }
@@ -369,8 +363,8 @@ void RegExpFilter::process()
         getLineColumn(match.capturedStart(), startLine, startColumn);
         getLineColumn(match.capturedEnd(), endLine, endColumn);
 
-        RegExpFilter::HotSpot *spot = newHotSpot(startLine, startColumn,
-                                                 endLine, endColumn, match.capturedTexts());
+        QSharedPointer<Filter::HotSpot> spot(newHotSpot(startLine, startColumn,
+                                                 endLine, endColumn, match.capturedTexts()));
         if (spot == nullptr) {
             continue;
         }
@@ -379,24 +373,23 @@ void RegExpFilter::process()
     }
 }
 
-RegExpFilter::HotSpot *RegExpFilter::newHotSpot(int startLine, int startColumn, int endLine,
+QSharedPointer<Filter::HotSpot> RegExpFilter::newHotSpot(int startLine, int startColumn, int endLine,
                                                 int endColumn, const QStringList &capturedTexts)
 {
-    return new RegExpFilter::HotSpot(startLine, startColumn,
-                                     endLine, endColumn, capturedTexts);
+    return QSharedPointer<Filter::HotSpot>(new RegExpFilter::HotSpot(startLine, startColumn,
+                                     endLine, endColumn, capturedTexts));
 }
 
-RegExpFilter::HotSpot *UrlFilter::newHotSpot(int startLine, int startColumn, int endLine,
+QSharedPointer<Filter::HotSpot> UrlFilter::newHotSpot(int startLine, int startColumn, int endLine,
                                              int endColumn, const QStringList &capturedTexts)
 {
-    return new UrlFilter::HotSpot(startLine, startColumn,
-                                  endLine, endColumn, capturedTexts);
+    return QSharedPointer<Filter::HotSpot>(new UrlFilter::HotSpot(startLine, startColumn,
+                                  endLine, endColumn, capturedTexts));
 }
 
 UrlFilter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endColumn,
                             const QStringList &capturedTexts) :
-    RegExpFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts),
-    _urlObject(new FilterObject(this))
+    RegExpFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts)
 {
     setType(Link);
 }
@@ -469,18 +462,12 @@ UrlFilter::UrlFilter()
 
 UrlFilter::HotSpot::~HotSpot()
 {
-    delete _urlObject;
-}
-
-void FilterObject::activated()
-{
-    _filter->activate(sender());
 }
 
 QList<QAction *> UrlFilter::HotSpot::actions()
 {
-    auto openAction = new QAction(_urlObject);
-    auto copyAction = new QAction(_urlObject);
+    auto openAction = new QAction(this);
+    auto copyAction = new QAction(this);
 
     const UrlType kind = urlType();
     Q_ASSERT(kind == StandardUrl || kind == Email);
@@ -503,16 +490,10 @@ QList<QAction *> UrlFilter::HotSpot::actions()
     openAction->setObjectName(QStringLiteral("open-action"));
     copyAction->setObjectName(QStringLiteral("copy-action"));
 
-    QObject::connect(openAction, &QAction::triggered, _urlObject,
-                     &Konsole::FilterObject::activated);
-    QObject::connect(copyAction, &QAction::triggered, _urlObject,
-                     &Konsole::FilterObject::activated);
+    QObject::connect(openAction, &QAction::triggered, this, [this, openAction]{ activate(openAction); });
+    QObject::connect(copyAction, &QAction::triggered, this, [this, copyAction]{ activate(copyAction); });
 
-    QList<QAction *> actions;
-    actions << openAction;
-    actions << copyAction;
-
-    return actions;
+    return {openAction, copyAction};
 }
 
 /**
@@ -522,7 +503,7 @@ QList<QAction *> UrlFilter::HotSpot::actions()
   * https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_267
   */
 
-RegExpFilter::HotSpot *FileFilter::newHotSpot(int startLine, int startColumn, int endLine,
+QSharedPointer<Filter::HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, int endLine,
                                               int endColumn, const QStringList &capturedTexts)
 {
     if (_session.isNull()) {
@@ -540,7 +521,7 @@ RegExpFilter::HotSpot *FileFilter::newHotSpot(int startLine, int startColumn, in
         return nullptr;
     }
 
-    return new FileFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts, _dirPath + filename);
+    return QSharedPointer<Filter::HotSpot>(new FileFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts, _dirPath + filename));
 }
 
 void FileFilter::process()
@@ -555,7 +536,6 @@ void FileFilter::process()
 FileFilter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endColumn,
                              const QStringList &capturedTexts, const QString &filePath) :
     RegExpFilter::HotSpot(startLine, startColumn, endLine, endColumn, capturedTexts),
-    _fileObject(new FilterObject(this)),
     _filePath(filePath)
 {
     setType(Link);
@@ -626,16 +606,12 @@ FileFilter::FileFilter(Session *session) :
 
 FileFilter::HotSpot::~HotSpot()
 {
-    delete _fileObject;
 }
 
 QList<QAction *> FileFilter::HotSpot::actions()
 {
-    auto openAction = new QAction(_fileObject);
+    auto openAction = new QAction(this);
     openAction->setText(i18n("Open File"));
-    QObject::connect(openAction, &QAction::triggered, _fileObject,
-                     &Konsole::FilterObject::activated);
-    QList<QAction *> actions;
-    actions << openAction;
-    return actions;
+    QObject::connect(openAction, &QAction::triggered, this, [this ]{ activate(); });
+    return {openAction};
 }
