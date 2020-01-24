@@ -1684,13 +1684,15 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
     if (!popup.isNull()) {
         updateReadOnlyActionStates();
 
+        auto contentSeparator = new QAction(popup);
+        contentSeparator->setSeparator(true);
+
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
         QSharedPointer<Filter::HotSpot> hotSpot = _view->filterActions(position);
         if (hotSpot) {
-            popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions());
+            popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions() << contentSeparator );
+
         }
-        auto contentSeparator = new QAction(popup);
-        contentSeparator->setSeparator(true);
 
         // always update this submenu before showing the context menu,
         // because the available search services might have changed
