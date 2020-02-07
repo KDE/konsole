@@ -24,6 +24,7 @@
 
 #include <QWidget>
 #include <QPoint>
+#include "Session.h"
 
 class QLabel;
 class QToolButton;
@@ -38,9 +39,14 @@ public:
     // TODO: Verify if the terminalDisplay is needed, or some other thing like SessionController.
     explicit TerminalHeaderBar(QWidget *parent = nullptr);
     void finishHeaderSetup(ViewProperties *properties);
+    QSize minimumSizeHint() const override;
 
 public Q_SLOTS:
     void setFocusIndicatorState(bool focused);
+    /** Shows/hide notification status icon */
+    void updateNotification(ViewProperties *item, Konsole::Session::Notification notification, bool enabled);
+    /** Shows/hide special state status icon (copy input or read-only) */
+    void updateSpecialState(ViewProperties *item);
 
 protected:
     void paintEvent(QPaintEvent* paintEvent) override;
@@ -56,7 +62,11 @@ private:
     TerminalDisplay *m_terminalDisplay;
     QLabel *m_terminalTitle;
     QLabel *m_terminalIcon;
-    QLabel *m_terminalActivity; // Bell icon.
+    QLabel *m_statusIconReadOnly;
+    QLabel *m_statusIconCopyInput;
+    QLabel *m_statusIconSilence;
+    QLabel *m_statusIconActivity;
+    QLabel *m_statusIconBell;
     QToolButton *m_closeBtn;
     QToolButton *m_toggleExpandedMode;
     bool m_terminalIsFocused;

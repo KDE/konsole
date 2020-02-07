@@ -44,12 +44,47 @@ namespace Konsole {
 TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     : QWidget(parent)
 {
-    m_closeBtn = new QToolButton(this);
-    m_closeBtn->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
-    m_closeBtn->setToolTip(i18nc("@info:tooltip", "Close terminal"));
-    m_closeBtn->setText(i18nc("@info:tooltip", "Close terminal"));
-    m_closeBtn->setObjectName(QStringLiteral("close-terminal-button"));
-    m_closeBtn->setAutoRaise(true);
+    m_boxLayout = new QBoxLayout(QBoxLayout::LeftToRight);
+    m_boxLayout->setSpacing(0);
+    m_boxLayout->setContentsMargins(0, 0, 0, 0);
+
+    // Session icon
+
+    m_terminalIcon = new QLabel(this);
+    m_terminalIcon->setAlignment(Qt::AlignCenter);
+    m_terminalIcon->setFixedSize(20, 20);
+
+    m_boxLayout->addWidget(m_terminalIcon);
+
+    // Status icons
+
+    QLabel ** statusIcons[] = {&m_statusIconReadOnly, &m_statusIconCopyInput, &m_statusIconSilence, &m_statusIconActivity, &m_statusIconBell};
+
+    for (auto **statusIcon: statusIcons) {
+        *statusIcon = new QLabel(this);
+        (*statusIcon)->setAlignment(Qt::AlignCenter);
+        (*statusIcon)->setFixedSize(20, 20);
+        (*statusIcon)->setVisible(false);
+
+        m_boxLayout->addWidget(*statusIcon);
+    }
+
+    m_statusIconReadOnly->setPixmap(QIcon::fromTheme(QStringLiteral("object-locked")).pixmap(QSize(16,16)));
+    m_statusIconCopyInput->setPixmap(QIcon::fromTheme(QStringLiteral("irc-voice")).pixmap(QSize(16,16)));
+    m_statusIconSilence->setPixmap(QIcon::fromTheme(QStringLiteral("system-suspend")).pixmap(QSize(16,16)));
+    m_statusIconActivity->setPixmap(QIcon::fromTheme(QStringLiteral("dialog-information")).pixmap(QSize(16,16)));
+    m_statusIconBell->setPixmap(QIcon::fromTheme(QStringLiteral("notifications")).pixmap(QSize(16,16)));
+
+    // Title
+
+    m_terminalTitle = new QLabel(this);
+    m_terminalTitle->setFont(QApplication::font());
+
+    m_boxLayout->addStretch();
+    m_boxLayout->addWidget(m_terminalTitle);
+    m_boxLayout->addStretch();
+
+    // Expand button
 
     m_toggleExpandedMode = new QToolButton(this);
     m_toggleExpandedMode->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen"))); // fake 'expand' icon. VDG input?
@@ -57,32 +92,27 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     m_toggleExpandedMode->setCheckable(true);
     m_toggleExpandedMode->setToolTip(i18nc("@info:tooltip", "Maximize terminal"));
 
-    m_terminalTitle = new QLabel(this);
-    m_terminalTitle->setFont(QApplication::font());
-
-    m_terminalIcon = new QLabel(this);
-    m_terminalIcon->setAlignment(Qt::AlignCenter);
-    m_terminalIcon->setFixedSize(m_toggleExpandedMode->sizeHint());
-    m_terminalActivity = new QLabel(this);
-
-    m_boxLayout = new QBoxLayout(QBoxLayout::LeftToRight);
-    m_boxLayout->setSpacing(0);
-    m_boxLayout->setContentsMargins(0, 0, 0, 0);
-
-    // Layout Setup
-    m_boxLayout->addWidget(m_terminalIcon);
-    m_boxLayout->addWidget(m_terminalActivity);
-    m_boxLayout->addStretch();
-    m_boxLayout->addWidget(m_terminalTitle);
-    m_boxLayout->addStretch();
-    m_boxLayout->addWidget(m_toggleExpandedMode);
-    m_boxLayout->addWidget(m_closeBtn);
-    setLayout(m_boxLayout);
-
-    setAutoFillBackground(true);
-    setFocusIndicatorState(false);
     connect(m_toggleExpandedMode, &QToolButton::clicked,
         this, &TerminalHeaderBar::requestToggleExpansion);
+
+    m_boxLayout->addWidget(m_toggleExpandedMode);
+
+    // Close button
+
+    m_closeBtn = new QToolButton(this);
+    m_closeBtn->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
+    m_closeBtn->setToolTip(i18nc("@info:tooltip", "Close terminal"));
+    m_closeBtn->setText(i18nc("@info:tooltip", "Close terminal"));
+    m_closeBtn->setObjectName(QStringLiteral("close-terminal-button"));
+    m_closeBtn->setAutoRaise(true);
+
+    m_boxLayout->addWidget(m_closeBtn);
+
+    // The widget itself
+
+    setLayout(m_boxLayout);
+    setAutoFillBackground(true);
+    setFocusIndicatorState(false);
 }
 
 // Hack untill I can detangle the creation of the TerminalViews
@@ -99,9 +129,14 @@ void TerminalHeaderBar::finishHeaderSetup(ViewProperties *properties)
     });
     m_terminalIcon->setPixmap(properties->icon().pixmap(QSize(22,22)));
 
-    connect(properties, &Konsole::ViewProperties::activity, this, [this]{
-        m_terminalActivity->setPixmap(QPixmap());
-    });
+    connect(properties, &Konsole::ViewProperties::notificationChanged, this,
+            &Konsole::TerminalHeaderBar::updateNotification);
+
+    connect(properties, &Konsole::ViewProperties::readOnlyChanged, this,
+            &Konsole::TerminalHeaderBar::updateSpecialState);
+
+    connect(properties, &Konsole::ViewProperties::copyInputChanged, this,
+            &Konsole::TerminalHeaderBar::updateSpecialState);
 
     connect(m_closeBtn, &QToolButton::clicked, controller, &SessionController::closeSession);
 }
@@ -110,6 +145,33 @@ void TerminalHeaderBar::setFocusIndicatorState(bool focused)
 {
     m_terminalIsFocused = focused;
     update();
+}
+
+void TerminalHeaderBar::updateNotification(ViewProperties *item, Session::Notification notification, bool enabled)
+{
+    Q_UNUSED(item);
+
+    switch(notification) {
+    case Session::Notification::Silence:
+        m_statusIconSilence->setVisible(enabled);
+        break;
+    case Session::Notification::Activity:
+        m_statusIconActivity->setVisible(enabled);
+        break;
+    case Session::Notification::Bell:
+        m_statusIconBell->setVisible(enabled);
+        break;
+    default:
+        break;
+    }
+}
+
+void TerminalHeaderBar::updateSpecialState(ViewProperties *item)
+{
+    auto controller = dynamic_cast<SessionController*>(item);
+
+    m_statusIconReadOnly->setVisible(controller->isReadOnly());
+    m_statusIconCopyInput->setVisible(controller->isCopyInputActive());
 }
 
 void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
@@ -174,4 +236,10 @@ void TerminalHeaderBar::mouseReleaseEvent(QMouseEvent* ev)
     Q_UNUSED(ev)
 }
 
+}
+
+QSize Konsole::TerminalHeaderBar::minimumSizeHint() const
+{
+    auto height = sizeHint().height();
+    return QSize(height, height);
 }
