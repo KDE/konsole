@@ -43,9 +43,11 @@ void ProfileTest::testProfile()
     parent->setProperty(Profile::UseCustomCursorColor, true);
     QVERIFY(parent->useCustomCursorColor());
     QCOMPARE(parent->customCursorColor(), QColor());
+    QCOMPARE(parent->customCursorTextColor(), QColor());
     parent->setProperty(Profile::UseCustomCursorColor, false);
     QVERIFY(!parent->useCustomCursorColor());
     QCOMPARE(parent->customCursorColor(), QColor());
+    QCOMPARE(parent->customCursorTextColor(), QColor());
 
     // create a child profile
     Profile *child = new Profile(Profile::Ptr(parent));

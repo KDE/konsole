@@ -106,6 +106,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { UseCustomCursorColor , "UseCustomCursorColor" , CURSOR_GROUP , QVariant::Bool}
     , { CursorShape , "CursorShape" , CURSOR_GROUP , QVariant::Int}
     , { CustomCursorColor , "CustomCursorColor" , CURSOR_GROUP , QVariant::Color }
+    , { CustomCursorTextColor , "CustomCursorTextColor" , CURSOR_GROUP , QVariant::Color }
 
     // Interaction
     , { WordCharacters , "WordCharacters" , INTERACTION_GROUP , QVariant::String }
@@ -210,7 +211,8 @@ void Profile::useFallback()
     setProperty(LineSpacing, 0);
     setProperty(CursorShape, Enum::BlockCursor);
     setProperty(UseCustomCursorColor, false);
-    setProperty(CustomCursorColor, QColor(Qt::black));
+    setProperty(CustomCursorColor, QColor(Qt::white));
+    setProperty(CustomCursorTextColor, QColor(Qt::black));
     setProperty(BellMode, Enum::NotifyBell);
 
     setProperty(DefaultEncoding, QLatin1String(QTextCodec::codecForLocale()->name()));

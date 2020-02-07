@@ -312,61 +312,101 @@
           </widget>
          </item>
          <item row="5" column="1">
-          <layout class="QHBoxLayout" name="customColorLayout">
-           <property name="spacing">
-            <number>0</number>
+          <widget class="QRadioButton" name="customCursorColorButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
-           <item>
-            <widget class="QRadioButton" name="customCursorColorButton">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+           <property name="toolTip">
+            <string>Use a custom, fixed color for the cursor</string>
+           </property>
+           <property name="text">
+            <string>Custom cursor color</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">cursorColor</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <layout class="QGridLayout" name="customColorLayout">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item row="0" column="0">
+            <spacer>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
-             <property name="toolTip">
-              <string>Use a custom, fixed color for the cursor</string>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
              </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>24</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="customCursorColorLabel">
              <property name="text">
-              <string>Custom cursor color:</string>
+              <string>Cursor:</string>
              </property>
-             <attribute name="buttonGroup">
-              <string notr="true">cursorColor</string>
-             </attribute>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="buddy">
+              <cstring>customColorSelectButton</cstring>
+             </property>
             </widget>
            </item>
-           <item>
+           <item row="0" column="2">
             <widget class="KColorButton" name="customColorSelectButton">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
              <property name="toolTip">
               <string>Select the color used to draw the cursor</string>
              </property>
-             <property name="text">
-              <string/>
-             </property>
             </widget>
            </item>
-           <item>
+           <item row="0" column="3">
             <spacer>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>0</width>
-               <height>0</height>
+               <width>40</width>
+               <height>20</height>
               </size>
              </property>
             </spacer>
            </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="customCursorTextColorLabel">
+             <property name="text">
+              <string>Text:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="buddy">
+              <cstring>customTextColorSelectButton</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="KColorButton" name="customTextColorSelectButton">
+             <property name="toolTip">
+              <string>Select the color used to draw the character underneath the cursor</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
-         <item row="6" column="1">
+         <item row="7" column="1">
           <spacer>
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -382,7 +422,7 @@
            </property>
           </spacer>
          </item>
-         <item row="7" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+         <item row="8" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
           <widget class="QLabel" name="label_2">
            <property name="text">
             <string>Blinking:</string>
@@ -392,7 +432,7 @@
            </property>
           </widget>
          </item>
-         <item row="7" column="1">
+         <item row="8" column="1">
           <widget class="QCheckBox" name="enableBlinkingCursorButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -680,6 +720,7 @@
   <tabstop>autoCursorColorButton</tabstop>
   <tabstop>customCursorColorButton</tabstop>
   <tabstop>customColorSelectButton</tabstop>
+  <tabstop>customTextColorSelectButton</tabstop>
   <tabstop>enableBlinkingCursorButton</tabstop>
   <tabstop>lineSpacingSpinner</tabstop>
   <tabstop>marginsSpinner</tabstop>

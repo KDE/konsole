@@ -186,6 +186,11 @@ public:
          * Only applicable if the UseCustomCursorColor property is true.
          */
         CustomCursorColor,
+        /** (QColor) The color used by terminal displays to draw the character
+         * underneath the cursor. Only applicable if the UseCustomCursorColor
+         * property is true and CursorShape property is Enum::BlockCursor.
+         */
+        CustomCursorTextColor,
         /** (QString) A string consisting of the characters used to delimit
          * words when selecting text in the terminal display.
          */
@@ -524,10 +529,16 @@ public:
         return property<bool>(Profile::UseCustomCursorColor);
     }
 
-    /** Convenience method for property<bool>(Profile::CustomCursorColor) */
+    /** Convenience method for property<QColor>(Profile::CustomCursorColor) */
     QColor customCursorColor() const
     {
         return property<QColor>(Profile::CustomCursorColor);
+    }
+
+    /** Convenience method for property<QColor>(Profile::CustomCursorTextColor) */
+    QColor customCursorTextColor() const
+    {
+        return property<QColor>(Profile::CustomCursorTextColor);
     }
 
     /** Convenience method for property<QString>(Profile::WordCharacters) */

@@ -722,16 +722,12 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     }
 
     _appearanceUi->customColorSelectButton->setColor(profile->customCursorColor());
+    _appearanceUi->customTextColorSelectButton->setColor(profile->customCursorTextColor());
 
     connect(_appearanceUi->customCursorColorButton, &QRadioButton::clicked, this, &Konsole::EditProfileDialog::customCursorColor);
     connect(_appearanceUi->autoCursorColorButton, &QRadioButton::clicked, this, &Konsole::EditProfileDialog::autoCursorColor);
     connect(_appearanceUi->customColorSelectButton, &KColorButton::changed, this, &Konsole::EditProfileDialog::customCursorColorChanged);
-
-    // Make radio buttons height equal
-    int cursorColorRadioHeight = qMax(_appearanceUi->autoCursorColorButton->minimumSizeHint().height(),
-                                      _appearanceUi->customColorSelectButton->minimumSizeHint().height());
-    _appearanceUi->autoCursorColorButton->setMinimumHeight(cursorColorRadioHeight);
-    _appearanceUi->customCursorColorButton->setMinimumHeight(cursorColorRadioHeight);
+    connect(_appearanceUi->customTextColorSelectButton, &KColorButton::changed, this, &Konsole::EditProfileDialog::customCursorTextColorChanged);
 
     const ButtonGroupOptions cursorShapeOptions = {
         _appearanceUi->cursorShape, // group
@@ -817,6 +813,15 @@ void EditProfileDialog::customCursorColorChanged(const QColor &color)
 {
     preview(Profile::CustomCursorColor, color);
     updateTempProfileProperty(Profile::CustomCursorColor, color);
+
+    // ensure that custom cursor colors are enabled
+    _appearanceUi->customCursorColorButton->click();
+}
+
+void EditProfileDialog::customCursorTextColorChanged(const QColor &color)
+{
+    preview(Profile::CustomCursorTextColor, color);
+    updateTempProfileProperty(Profile::CustomCursorTextColor, color);
 
     // ensure that custom cursor colors are enabled
     _appearanceUi->customCursorColorButton->click();

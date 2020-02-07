@@ -479,6 +479,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _filterUpdateRequired(true)
     , _cursorShape(Enum::BlockCursor)
     , _cursorColor(QColor())
+    , _cursorTextColor(QColor())
     , _antialiasText(true)
     , _useFontLineCharacters(false)
     , _printerFriendly(false)
@@ -667,6 +668,11 @@ void TerminalDisplay::setKeyboardCursorColor(const QColor& color)
     _cursorColor = color;
 }
 
+void TerminalDisplay::setKeyboardCursorTextColor(const QColor& color)
+{
+    _cursorTextColor = color;
+}
+
 void TerminalDisplay::setOpacity(qreal opacity)
 {
     QColor color(_blendColor);
@@ -716,8 +722,8 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
 void TerminalDisplay::drawCursor(QPainter& painter,
                                  const QRect& rect,
                                  const QColor& foregroundColor,
-                                 const QColor& /*backgroundColor*/,
-                                 bool& invertCharacterColor)
+                                 const QColor& backgroundColor,
+                                 QColor& characterColor)
 {
     // don't draw cursor which is currently blinking
     if (_cursorBlinking) {
@@ -744,11 +750,10 @@ void TerminalDisplay::drawCursor(QPainter& painter,
         if (hasFocus()) {
             painter.fillRect(cursorRect, cursorColor);
 
-            if (!_cursorColor.isValid()) {
-                // invert the color used to draw the text to ensure that the character at
-                // the cursor position is readable
-                invertCharacterColor = true;
-            }
+            // if the cursor text color is valid then use it to draw the character under the cursor,
+            // otherwise invert the color used to draw the text to ensure that the character at
+            // the cursor position is readable
+            characterColor = _cursorTextColor.isValid() ? _cursorTextColor : backgroundColor;
         }
     } else if (_cursorShape == Enum::UnderlineCursor) {
         QLineF line(cursorRect.left() + 0.5,
@@ -770,7 +775,7 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
                                      const QRect& rect,
                                      const QString& text,
                                      const Character* style,
-                                     bool invertCharacterColor)
+                                     const QColor& characterColor)
 {
     // don't draw text which is currently blinking
     if (_textBlinking && ((style->rendition & RE_BLINK) != 0)) {
@@ -813,8 +818,8 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
     }
 
     // setup pen
-    const CharacterColor& textColor = (invertCharacterColor ? style->backgroundColor : style->foregroundColor);
-    const QColor color = textColor.color(_colorTable);
+    const QColor foregroundColor = style->foregroundColor.color(_colorTable);
+    const QColor color = characterColor.isValid() ? characterColor : foregroundColor;
     QPen pen = painter.pen();
     if (pen.color() != color) {
         pen.setColor(color);
@@ -861,13 +866,13 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
 
     // draw cursor shape if the current character is the cursor
     // this may alter the foreground and background colors
-    bool invertCharacterColor = false;
+    QColor characterColor;
     if ((style->rendition & RE_CURSOR) != 0) {
-        drawCursor(painter, rect, foregroundColor, backgroundColor, invertCharacterColor);
+        drawCursor(painter, rect, foregroundColor, backgroundColor, characterColor);
     }
 
     // draw text
-    drawCharacters(painter, rect, text, style, invertCharacterColor);
+    drawCharacters(painter, rect, text, style, characterColor);
 }
 
 void TerminalDisplay::drawPrinterFriendlyTextFragment(QPainter& painter,
@@ -882,7 +887,7 @@ void TerminalDisplay::drawPrinterFriendlyTextFragment(QPainter& painter,
     print_style.backgroundColor = CharacterColor(COLOR_SPACE_RGB, 0xFFFFFFFF);
 
     // draw text
-    drawCharacters(painter, rect, text, &print_style, false);
+    drawCharacters(painter, rect, text, &print_style, QColor());
 }
 
 void TerminalDisplay::setRandomSeed(uint randomSeed)
@@ -3435,14 +3440,14 @@ void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRe
 
     const QPoint cursorPos = cursorPosition();
 
-    bool invertColors = false;
+    QColor characterColor;
     const QColor background = _colorTable[DEFAULT_BACK_COLOR];
     const QColor foreground = _colorTable[DEFAULT_FORE_COLOR];
     const Character* style = &_image[loc(cursorPos.x(), cursorPos.y())];
 
     drawBackground(painter, rect, background, true);
-    drawCursor(painter, rect, foreground, background, invertColors);
-    drawCharacters(painter, rect, _inputMethodData.preeditString, style, invertColors);
+    drawCursor(painter, rect, foreground, background, characterColor);
+    drawCharacters(painter, rect, _inputMethodData.preeditString, style, characterColor);
 
     _inputMethodData.previousPreeditRect = rect;
 }
@@ -4007,6 +4012,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     // an invalid QColor is used to inform the view widget to
     // draw the cursor using the default color( matching the text)
     setKeyboardCursorColor(profile->useCustomCursorColor() ? profile->customCursorColor() : QColor());
+    setKeyboardCursorTextColor(profile->useCustomCursorColor() ? profile->customCursorTextColor() : QColor());
 
     // word characters
     setWordCharacters(profile->wordCharacters());

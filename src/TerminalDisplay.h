@@ -204,6 +204,21 @@ public:
     void setKeyboardCursorColor(const QColor &color);
 
     /**
+     * Sets the color used to draw the character underneath the keyboard cursor.
+     *
+     * The keyboard cursor defaults to using the background color of the
+     * terminal cell to draw the character at the cursor position.
+     *
+     * @param color By default, the widget uses the color of the
+     * character under the cursor to draw the cursor, and inverts the
+     * color of that character to make sure it is still readable. If @p
+     * color is a valid QColor, the widget uses that color to draw the
+     * character underneath the cursor. If @p color is not an valid QColor,
+     * the widget falls back to the default behavior.
+     */
+    void setKeyboardCursorTextColor(const QColor &color);
+
+    /**
      * Returns the number of lines of text which can be displayed in the widget.
      *
      * This will depend upon the height of the widget and the current font.
@@ -630,10 +645,10 @@ private:
                         bool useOpacitySetting);
     // draws the cursor character
     void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor,
-                    const QColor &backgroundColor, bool &invertCharacterColor);
+                    const QColor &backgroundColor, QColor &characterColor);
     // draws the characters or line graphics in a text fragment
     void drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
-                        const Character *style, bool invertCharacterColor);
+                        const Character *style, const QColor &characterColor);
     // draws a string of line graphics
     void drawLineCharString(QPainter &painter, int x, int y, const QString &str,
                             const Character *attributes);
@@ -817,6 +832,10 @@ private:
     // cursor color. If it is invalid (by default) then the foreground
     // color of the character under the cursor is used
     QColor _cursorColor;
+
+    // cursor text color. If it is invalid (by default) then the background
+    // color of the character under the cursor is used
+    QColor _cursorTextColor;
 
     struct InputMethodData {
         QString preeditString;

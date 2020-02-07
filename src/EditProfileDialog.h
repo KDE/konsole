@@ -149,6 +149,7 @@ private Q_SLOTS:
     void autoCursorColor();
     void customCursorColor();
     void customCursorColorChanged(const QColor &);
+    void customCursorTextColorChanged(const QColor &);
     void terminalMarginChanged(int margin);
     void lineSpacingChanged(int);
     void setTerminalCenter(bool enable);
