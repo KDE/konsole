@@ -246,10 +246,15 @@ void ViewManager::setupActions()
 
     // _viewSplitter->addAction(lastUsedViewReverseAction);
     const int SWITCH_TO_TAB_COUNT = 19;
-    for (int i = 0; i < SWITCH_TO_TAB_COUNT; i++) {
+    for (int i = 0; i < SWITCH_TO_TAB_COUNT; ++i) {
         action = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);
         connect(action, &QAction::triggered, this, [this, i]() { switchToView(i); });
         collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), action);
+
+        // only add default shortcut bindings for the first 9 tabs, regardless of SWITCH_TO_TAB_COUNT
+        if (i < 9) {
+            collection->setDefaultShortcut(action, QStringLiteral("Alt+%1").arg(i + 1));
+        }
     }
 
     connect(_viewContainer, &TabbedViewContainer::viewAdded, this, &ViewManager::toggleActionsBasedOnState);
