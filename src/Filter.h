@@ -319,7 +319,7 @@ protected:
 private:
     QPointer<Session> _session;
     QString _dirPath;
-    QSet<QString> _currentFiles;
+    QStringList _currentDirContents;
 };
 
 /**

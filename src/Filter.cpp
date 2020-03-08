@@ -517,7 +517,17 @@ QSharedPointer<Filter::HotSpot> FileFilter::newHotSpot(int startLine, int startC
         filename.chop(1);
     }
 
-    if (!_currentFiles.contains(filename)) {
+    // Return nullptr if it's not:
+    // <current dir>/filename
+    // <current dir>/childDir/filename
+    bool isChild = false;
+    for (const QString &s : _currentDirContents) {
+        if (filename.startsWith(s)) {
+            isChild = true;
+            break;
+        }
+    }
+    if (!isChild) {
         return nullptr;
     }
 
@@ -528,7 +538,7 @@ void FileFilter::process()
 {
     const QDir dir(_session->currentWorkingDirectory());
     _dirPath = dir.canonicalPath() + QLatin1Char('/');
-    _currentFiles = dir.entryList(QDir::Files).toSet();
+    _currentDirContents = dir.entryList(QDir::Dirs | QDir::Files);
 
     RegExpFilter::process();
 }
@@ -546,11 +556,11 @@ void FileFilter::HotSpot::activate(QObject *)
     new KRun(QUrl::fromLocalFile(_filePath), QApplication::activeWindow());
 }
 
-static QString createFileRegex(const QStringList &patterns, const QString &filePattern, const QString &pathPattern)
+QString createFileRegex(const QStringList &patterns, const QString &filePattern, const QString &pathPattern)
 {
     QStringList suffixes = patterns.filter(QRegularExpression(QStringLiteral("^\\*") + filePattern + QStringLiteral("$")));
     QStringList prefixes = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("+\\*$")));
-    QStringList fullNames = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("$")));
+    const QStringList fullNames = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("$")));
 
     suffixes.replaceInStrings(QStringLiteral("*"), QString());
     suffixes.replaceInStrings(QStringLiteral("."), QStringLiteral("\\."));
@@ -558,50 +568,50 @@ static QString createFileRegex(const QStringList &patterns, const QString &fileP
     prefixes.replaceInStrings(QStringLiteral("."), QStringLiteral("\\."));
 
     return QString(
-                // Optional path in front
-                pathPattern + QLatin1Char('?') +
-                // Files with known suffixes
-                QLatin1Char('(') +
-                  filePattern +
-                    QLatin1String("(") +
-                      suffixes.join(QLatin1Char('|')) +
-                    QLatin1String(")") +
-                // Files with known prefixes
-                QLatin1String("|") +
-                    QLatin1String("(") +
-                      prefixes.join(QLatin1Char('|')) +
-                    QLatin1String(")") +
-                    filePattern +
-                // Files with known full names
-                QLatin1String("|") +
-                    fullNames.join(QLatin1Char('|')) +
-                QLatin1String(")")
+        // Optional path in front
+        pathPattern + QLatin1Char('?')
+        + QLatin1Char('(')
+        // Files with known suffixes, e.g. "[A-Za-z0-9\\._\\-]+(txt|cpp|h|xml)"
+        + filePattern + QLatin1Char('(') + suffixes.join(QLatin1Char('|')) + QLatin1Char(')')
+        + QLatin1Char('|')
+        // Files with known prefixes, e.g. "(Makefile\\.)[A-Za-z0-9\\._\\-]+" to match "Makefile.am"
+        + QLatin1Char('(') + prefixes.join(QLatin1Char('|')) + QLatin1Char(')') + filePattern
+        + QLatin1Char('|')
+        // Files with known full names, e.g. "ChangeLog|COPYING"
+        + fullNames.join(QLatin1Char('|'))
+        + QLatin1Char(')')
     );
 }
 
 FileFilter::FileFilter(Session *session) :
     _session(session)
     , _dirPath(QString())
-    , _currentFiles(QSet<QString>())
+    , _currentDirContents(QStringList())
 {
-    QStringList patterns;
-    QMimeDatabase mimeDatabase;
-    const QList<QMimeType> allMimeTypes = mimeDatabase.allMimeTypes();
-    for (const QMimeType &mimeType : allMimeTypes) {
-        patterns.append(mimeType.globPatterns());
+    static QRegularExpression re = QRegularExpression(QString(), QRegularExpression::DontCaptureOption);
+    if (re.pattern().isEmpty()) {
+        QStringList patterns;
+        QMimeDatabase mimeDatabase;
+        const QList<QMimeType> allMimeTypes = mimeDatabase.allMimeTypes();
+        for (const QMimeType &mimeType : allMimeTypes) {
+            patterns.append(mimeType.globPatterns());
+        }
+
+        patterns.removeDuplicates();
+
+        const QString fileRegex = createFileRegex(patterns,
+                                                  QStringLiteral("[A-Za-z0-9\\._\\-]+"),    // filenames regex
+                                                  QStringLiteral("([A-Za-z0-9\\._\\-/]+/)") // path regex
+                                                 );
+
+        const QString regex = QLatin1String("(\\b") + fileRegex + QLatin1String("\\b)") // file names with no spaces
+                              + QLatin1Char('|')
+                              + QLatin1String("('") + fileRegex + QLatin1String("')");  // file names with spaces
+
+        re.setPattern(regex);
     }
 
-    patterns.removeDuplicates();
-
-    QString validFilename(QStringLiteral("[A-Za-z0-9\\._\\-]+"));
-    QString pathRegex(QStringLiteral("([A-Za-z0-9\\._\\-/]+/)"));
-    QString noSpaceRegex = QLatin1String("\\b") + createFileRegex(patterns, validFilename, pathRegex) + QLatin1String("\\b");
-
-    QString spaceRegex = QLatin1String("'") + createFileRegex(patterns, validFilename, pathRegex) + QLatin1String("'");
-
-    QString regex = QLatin1String("(") + noSpaceRegex + QLatin1String(")|(") + spaceRegex + QLatin1String(")");
-
-    setRegExp(QRegularExpression(regex, QRegularExpression::DontCaptureOption));
+    setRegExp(re);
 }
 
 FileFilter::HotSpot::~HotSpot()
