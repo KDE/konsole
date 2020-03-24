@@ -96,8 +96,10 @@ public:
      * Calling openTeletype() while a session is running has no effect.
      *
      * @param fd The file descriptor of the pseudo-teletype master (See KPtyProcess::KPtyProcess())
+     * @param runShell When true, runs the teletype in a shell session environment.
+     * When false, the session is not run, so that the KPtyProcess can be standalone.
      */
-    void openTeletype(int fd);
+    void openTeletype(int fd, bool runShell);
 
     /**
      * Returns true if the session is currently running.  This will be true

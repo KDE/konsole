@@ -135,8 +135,11 @@ public Q_SLOTS:
      * or showShellInDir()
      *
      * @param ptyMasterFd The file descriptor of the pseudo-teletype (pty) master
+     * @param runShell When true (default, legacy), runs the teletype in a shell
+     * session environment. When false, the session is not run, so that the
+     * KPtyProcess can be standalone, which may be useful for interactive programs.
      */
-    void openTeletype(int ptyMasterFd);
+    void openTeletype(int ptyMasterFd, bool runShell = true);
 
     /**
      * Toggles monitoring for silence in the active session. If silence is detected,

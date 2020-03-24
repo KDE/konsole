@@ -133,11 +133,11 @@ void Part::startProgram(const QString &program, const QStringList &arguments)
     activeSession()->run();
 }
 
-void Part::openTeletype(int ptyMasterFd)
+void Part::openTeletype(int ptyMasterFd, bool runShell)
 {
     Q_ASSERT(activeSession());
 
-    activeSession()->openTeletype(ptyMasterFd);
+    activeSession()->openTeletype(ptyMasterFd, runShell);
 }
 
 void Part::showShellInDir(const QString &dir)

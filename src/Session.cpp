@@ -136,7 +136,7 @@ Session::Session(QObject* parent) :
     connect(_emulation, &Konsole::Emulation::sessionAttributeRequest, this, &Konsole::Session::sessionAttributeRequest);
 
     //create new teletype for I/O with shell process
-    openTeletype(-1);
+    openTeletype(-1, true);
 
     //setup timer for monitoring session activity & silence
     _silenceTimer = new QTimer(this);
@@ -157,7 +157,7 @@ Session::~Session()
     delete _zmodemProc;
 }
 
-void Session::openTeletype(int fd)
+void Session::openTeletype(int fd, bool runShell)
 {
     if (isRunning()) {
         qWarning() << "Attempted to open teletype in a running session.";
@@ -189,7 +189,12 @@ void Session::openTeletype(int fd)
     // emulator size
     // Use a direct connection to ensure that the window size is set before it runs
     connect(_emulation, &Konsole::Emulation::imageSizeChanged, this, &Konsole::Session::updateWindowSize, Qt::DirectConnection);
-    connect(_emulation, &Konsole::Emulation::imageSizeInitialized, this, &Konsole::Session::run);
+    if (fd < 0 || runShell) {
+        connect(_emulation, &Konsole::Emulation::imageSizeInitialized, this, &Konsole::Session::run);
+    } else {
+        // run needs to be disconnected, as it may be already connected by the constructor
+        disconnect(_emulation, &Konsole::Emulation::imageSizeInitialized, this, &Konsole::Session::run);
+    }
 }
 
 WId Session::windowId() const

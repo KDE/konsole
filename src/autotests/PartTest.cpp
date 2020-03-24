@@ -92,8 +92,9 @@ void PartTest::testFd()
 
     int fd = ptyProcess.pty()->masterFd();
 
+    // connect to an existing pty. The 2nd argument of openTeletype is optional, to run without shell
     bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype",
-                                            Qt::DirectConnection, Q_ARG(int, fd));
+                                            Qt::DirectConnection, Q_ARG(int, fd), Q_ARG(bool, false));
     QVERIFY(result);
 
     // suspend the KPtyDevice so that the embedded terminal gets a chance to
