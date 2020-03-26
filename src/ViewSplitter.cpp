@@ -363,4 +363,8 @@ void Konsole::ViewSplitter::dropEvent(QDropEvent* ev)
     }
 }
 
-
+void Konsole::ViewSplitter::showEvent(QShowEvent *)
+{
+    // Fixes lost focus in background mode.
+    setFocusProxy(activeSplitter()->activeTerminalDisplay());
+}

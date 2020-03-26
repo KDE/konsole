@@ -125,6 +125,7 @@ protected:
     void dragMoveEvent(QDragMoveEvent *ev) override;
     void dragLeaveEvent(QDragLeaveEvent * event) override;
     void dropEvent(QDropEvent *ev) override;
+    void showEvent(QShowEvent *) override;
 
 Q_SIGNALS:
     void terminalDisplayDropped(TerminalDisplay *terminalDisplay);
