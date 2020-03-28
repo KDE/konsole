@@ -1516,27 +1516,14 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     }
 }
 
-inline static bool isRtl(const Character &chr) {
-    uint c = 0;
-    if ((chr.rendition & RE_EXTENDED_CHAR) == 0) {
-        c = chr.character;
-    } else {
+static uint baseCodePoint(const Character &ch) {
+    if (ch.rendition & RE_EXTENDED_CHAR) {
+        // sequence of characters
         ushort extendedCharLength = 0;
-        const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(chr.character, extendedCharLength);
-        if (chars != nullptr) {
-            c = chars[0];
-        }
-    }
-
-    switch(QChar::direction(c)) {
-    case QChar::DirR:
-    case QChar::DirAL:
-    case QChar::DirRLE:
-    case QChar::DirRLI:
-    case QChar::DirRLO:
-        return true;
-    default:
-        return false;
+        const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
+        return chars[0];
+    } else {
+        return ch.character;
     }
 }
 
@@ -1588,12 +1575,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             const CharacterColor currentForeground = _image[loc(x, y)].foregroundColor;
             const CharacterColor currentBackground = _image[loc(x, y)].backgroundColor;
             const RenditionFlags currentRendition = _image[loc(x, y)].rendition;
-            const bool rtl = isRtl(_image[loc(x, y)]);
-
-            const auto malayalam = [&](int column) {
-                return _image[loc(column, y)].character >= 0x0D00
-                        && _image[loc(column, y)].character <= 0x0D7F;
-            };
+            const QChar::Script currentScript = QChar::script(baseCodePoint(_image[loc(x, y)]));
 
             const auto isInsideDrawArea = [&](int column) { return column <= rect.right(); };
             const auto hasSameColors = [&](int column) {
@@ -1608,17 +1590,29 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
                 const int characterLoc = qMin(loc(column, y) + 1, _imageSize - 1);
                 return (_image[characterLoc].character == 0) == doubleWidth;
             };
+            const auto hasSameLineDrawStatus = [&](int column) {
+                return LineBlockCharacters::canDraw(_image[loc(column, y)].character)
+                    == lineDraw;
+            };
+            const auto isSameScript = [&](int column) {
+                const QChar::Script script = QChar::script(baseCodePoint(_image[loc(column, y)]));
+                if (currentScript == QChar::Script_Common || script == QChar::Script_Common
+                    || currentScript == QChar::Script_Inherited || script == QChar::Script_Inherited) {
+                    return true;
+                }
+                return currentScript == script;
+            };
             const auto canBeGrouped = [&](int column) {
                 return _image[loc(column, y)].character <= 0x7e
                        || (_image[loc(column, y)].rendition & RE_EXTENDED_CHAR)
-                       || rtl
-                       || malayalam(column);
+                       || (_bidiEnabled && !doubleWidth);
             };
 
             if (canBeGrouped(x)) {
                 while (isInsideDrawArea(x + len) && hasSameColors(x + len)
-                        && hasSameRendition(x + len) && hasSameWidth(x + len)
-                        && canBeGrouped(x + len)) {
+                       && hasSameRendition(x + len) && hasSameWidth(x + len)
+                       && hasSameLineDrawStatus(x + len) && isSameScript(x + len)
+                       && canBeGrouped(x + len)) {
                     const uint c = _image[loc(x + len, y)].character;
                     if ((_image[loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                         // sequence of characters
