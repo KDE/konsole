@@ -131,9 +131,7 @@ QSet<QString> ProcessInfo::commonDirNames()
     if (forTheFirstTime) {
         const KSharedConfigPtr &config = KSharedConfig::openConfig();
         const KConfigGroup &configGroup = config->group("ProcessInfo");
-        const QStringList groupDirNames = configGroup.readEntry("CommonDirNames", QStringList());
-
-        _commonDirNames = QSet<QString>(groupDirNames.begin(), groupDirNames.end());
+        _commonDirNames = QSet<QString>::fromList(configGroup.readEntry("CommonDirNames", QStringList()));
 
         forTheFirstTime = false;
     }

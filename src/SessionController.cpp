@@ -1069,9 +1069,8 @@ void SessionController::copyInputToAllTabs()
     // Find our window ...
     const KXmlGuiWindow* myWindow = findWindow(_view);
 
-    auto sessions = SessionManager::instance()->sessions();
-    QSet<Session*> group = QSet<Session*>(sessions.begin(), sessions.end());
-
+    QSet<Session*> group =
+        QSet<Session*>::fromList(SessionManager::instance()->sessions());
     for (auto session : group) {
         // First, ensure that the session is removed
         // (necessary to avoid duplicates on addSession()!)
@@ -1100,9 +1099,7 @@ void SessionController::copyInputToSelectedTabs()
     QPointer<CopyInputDialog> dialog = new CopyInputDialog(_view);
     dialog->setMasterSession(_session);
 
-    auto sessions = _copyToGroup->sessions();
-    QSet<Session*> currentGroup = QSet<Session*>(sessions.begin(), sessions.end());
-
+    QSet<Session*> currentGroup = QSet<Session*>::fromList(_copyToGroup->sessions());
     currentGroup.remove(_session);
 
     dialog->setChosenSessions(currentGroup);
@@ -1138,9 +1135,8 @@ void SessionController::copyInputToNone()
         return;
     }
 
-    auto sessions = SessionManager::instance()->sessions();
-    QSet<Session*> group = QSet<Session*>(sessions.begin(), sessions.end());
-
+    QSet<Session*> group =
+        QSet<Session*>::fromList(SessionManager::instance()->sessions());
     for (auto iterator : group) {
         Session* session = iterator;
 

@@ -559,9 +559,7 @@ bool MainWindow::queryClose()
 
     // Check what processes are running, excluding the shell
     QStringList processesRunning;
-
-    const auto sessions = _viewManager->sessions();
-    const auto uniqueSessions = QSet<Session*>(sessions.begin(), sessions.end());
+    const auto uniqueSessions = QSet<Session*>::fromList(_viewManager->sessions());
 
     for (Session *session : uniqueSessions) {
         if ((session == nullptr) || !session->isForegroundProcessActive()) {
