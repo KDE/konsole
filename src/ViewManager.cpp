@@ -42,7 +42,6 @@
 #include "SessionManager.h"
 #include "ProfileManager.h"
 #include "ViewSplitter.h"
-#include "Enumeration.h"
 #include "ViewContainer.h"
 
 using namespace Konsole;

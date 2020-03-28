@@ -25,8 +25,6 @@
 // Qt
 #include <QChildEvent>
 #include <QDragEnterEvent>
-#include <QDropEvent>
-#include <QDragMoveEvent>
 #include <QMimeData>
 #include <QApplication>
 #include <memory>
