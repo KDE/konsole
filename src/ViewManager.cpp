@@ -157,9 +157,6 @@ void ViewManager::setupActions()
     action->setText(i18nc("@action:inmenu", "Detach Current &Tab"));
     connect(action, &QAction::triggered, this, &ViewManager::detachActiveTab);
     _multiTabOnlyActions << action;
-    // Ctrl+Shift+D is not used as a shortcut by default because it is too close
-    // to Ctrl+D - which will terminate the session in many cases
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_L);
 
     // keyboard shortcut only actions
     action = new QAction(i18nc("@action Shortcut entry", "Next Tab"), this);
