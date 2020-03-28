@@ -3957,7 +3957,7 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
     }
     default:
         break;
-    };
+    }
 
     return false;
 }

@@ -956,7 +956,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     default:
         reportDecodingError();
         break;
-  };
+  }
 }
 
 void Vt102Emulation::clearScreenAndSetColumns(int columnCount)

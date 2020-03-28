@@ -399,7 +399,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
 
     } else {
         newProfile = profile;
-    };
+    }
 
     // insert the changes into the existing Profile instance
     QListIterator<Profile::Property> iter(propertyMap.keys());
