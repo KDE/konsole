@@ -334,7 +334,7 @@ void DBusTest::testWindows()
     }
 
     const auto tempDirectories = QStandardPaths::standardLocations(QStandardPaths::TempLocation);
-    const QString sessionDirectory = tempDirectories.size() > 0 ? tempDirectories.constFirst() : QStringLiteral("/");
+    const QString sessionDirectory = tempDirectories.empty() ? QStringLiteral("/") : tempDirectories.constFirst();
     intReply = iface.call(QStringLiteral("newSession"), _testProfileName, sessionDirectory);
     QVERIFY(intReply.isValid());
     ++sessionCount;
