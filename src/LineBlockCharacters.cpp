@@ -571,7 +571,7 @@ static inline bool drawDiagonalLineCharacter(QPainter &paint, int x, int y, int 
 static inline bool drawBlockCharacter(QPainter &paint, int x, int y, int w, int h, uchar code,
                                       bool bold)
 {
-    Q_UNUSED(bold);
+    Q_UNUSED(bold)
 
     const QColor color = paint.pen().color();
 

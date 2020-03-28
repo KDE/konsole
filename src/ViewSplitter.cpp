@@ -315,7 +315,7 @@ void Konsole::ViewSplitter::dragMoveEvent(QDragMoveEvent* ev)
 
 void Konsole::ViewSplitter::dragLeaveEvent(QDragLeaveEvent* event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     if (currentDragTarget != nullptr) {
         currentDragTarget->hideDragTarget();
         currentDragTarget = nullptr;

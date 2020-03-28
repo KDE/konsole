@@ -502,7 +502,7 @@ void Screen::getImage(Character* dest, int size, int startLine, int endLine) con
     const int mergedLines = endLine - startLine + 1;
 
     Q_ASSERT(size >= mergedLines * _columns);
-    Q_UNUSED(size);
+    Q_UNUSED(size)
 
     const int linesInHistoryBuffer = qBound(0, _history->getLines() - startLine, mergedLines);
     const int linesInScreenBuffer = mergedLines - linesInHistoryBuffer;

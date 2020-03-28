@@ -404,7 +404,7 @@ const QString EditProfileDialog::currentColorSchemeName() const
 
 void EditProfileDialog::preparePage(KPageWidgetItem *current, KPageWidgetItem *before)
 {
-    Q_UNUSED(before);
+    Q_UNUSED(before)
     Q_ASSERT(current);
     Q_ASSERT(_pages.contains(current));
 

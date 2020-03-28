@@ -162,7 +162,7 @@ void TerminalHeaderBar::mousePressEvent(QMouseEvent* ev)
 
 void TerminalHeaderBar::mouseReleaseEvent(QMouseEvent* ev)
 {
-    Q_UNUSED(ev);
+    Q_UNUSED(ev)
 }
 
 void TerminalHeaderBar::terminalFocusIn()

@@ -158,7 +158,7 @@ void Pty::setUtf8Mode(bool enable)
         }
     }
 #else
-    Q_UNUSED(enable);
+    Q_UNUSED(enable)
 #endif
 }
 

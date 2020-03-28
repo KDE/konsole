@@ -277,7 +277,7 @@ void MainWindow::activeViewChanged(SessionController *controller)
 
 void MainWindow::activeViewTitleChanged(ViewProperties *properties)
 {
-    Q_UNUSED(properties);
+    Q_UNUSED(properties)
     updateWindowCaption();
 }
 

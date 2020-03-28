@@ -403,7 +403,7 @@ void TabbedViewContainer::viewDestroyed(QObject *view)
 
 void TabbedViewContainer::forgetView(ViewSplitter *view)
 {
-    Q_UNUSED(view);
+    Q_UNUSED(view)
     if (count() == 0) {
         emit empty(this);
     }

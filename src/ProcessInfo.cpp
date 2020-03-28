@@ -923,7 +923,7 @@ private:
 
     bool readArguments(int pid) override
     {
-        Q_UNUSED(pid);
+        Q_UNUSED(pid)
         return false;
     }
 };

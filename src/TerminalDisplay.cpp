@@ -3927,7 +3927,7 @@ void AutoScrollHandler::timerEvent(QTimerEvent* event)
 bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
 {
     Q_ASSERT(watched == parent());
-    Q_UNUSED(watched);
+    Q_UNUSED(watched)
 
     switch (event->type()) {
     case QEvent::MouseMove: {
