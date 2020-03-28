@@ -1069,6 +1069,7 @@ void SessionController::copyInputToAllTabs()
     // Find our window ...
     const KXmlGuiWindow* myWindow = findWindow(_view);
 
+    // Once Qt5.14+ is the mininum, change to use range constructors
     QSet<Session*> group =
         QSet<Session*>::fromList(SessionManager::instance()->sessions());
     for (auto session : group) {
@@ -1099,6 +1100,7 @@ void SessionController::copyInputToSelectedTabs()
     QPointer<CopyInputDialog> dialog = new CopyInputDialog(_view);
     dialog->setMasterSession(_session);
 
+    // Once Qt5.14+ is the mininum, change to use range constructors
     QSet<Session*> currentGroup = QSet<Session*>::fromList(_copyToGroup->sessions());
     currentGroup.remove(_session);
 
@@ -1135,6 +1137,7 @@ void SessionController::copyInputToNone()
         return;
     }
 
+    // Once Qt5.14+ is the mininum, change to use range constructors
     QSet<Session*> group =
         QSet<Session*>::fromList(SessionManager::instance()->sessions());
     for (auto iterator : group) {

@@ -309,6 +309,7 @@ void ProfileManager::saveSettings()
 
 QList<Profile::Ptr> ProfileManager::sortedFavorites()
 {
+    // Once Qt5.14+ is the mininum, change to use range constructors
     QList<Profile::Ptr> favorites = findFavorites().toList();
 
     sortProfiles(favorites);
@@ -319,11 +320,13 @@ QList<Profile::Ptr> ProfileManager::allProfiles()
 {
     loadAllProfiles();
 
+    // Once Qt5.14+ is the mininum, change to use range constructors
     return _profiles.toList();
 }
 
 QList<Profile::Ptr> ProfileManager::loadedProfiles() const
 {
+    // Once Qt5.14+ is the mininum, change to use range constructors
     return _profiles.toList();
 }
 
@@ -641,6 +644,7 @@ void ProfileManager::loadFavorites()
 
     if (favoriteGroup.hasKey("Favorites")) {
         QStringList list = favoriteGroup.readEntry("Favorites", QStringList());
+        // Once Qt5.14+ is the mininum, change to use range constructors
         favoriteSet = QSet<QString>::fromList(list);
     }
 

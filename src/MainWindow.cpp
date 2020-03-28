@@ -559,6 +559,7 @@ bool MainWindow::queryClose()
 
     // Check what processes are running, excluding the shell
     QStringList processesRunning;
+    // Once Qt5.14+ is the mininum, change to use range constructors
     const auto uniqueSessions = QSet<Session*>::fromList(_viewManager->sessions());
 
     for (Session *session : uniqueSessions) {
