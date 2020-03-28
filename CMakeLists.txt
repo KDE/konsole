@@ -8,8 +8,8 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 
 # minimal requirements
 cmake_minimum_required (VERSION 3.0 FATAL_ERROR)
-# Qt 5.9 LTS EOL May 2020
-set (QT_MIN_VERSION "5.9.0")
+# Qt 5.12 LTS EOL May 2021
+set (QT_MIN_VERSION "5.12.0")
 
 # The exact version required is not known ATM
 set (KF5_MIN_VERSION "5.6.0")
