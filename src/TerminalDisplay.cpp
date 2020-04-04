@@ -44,7 +44,6 @@
 #include <QDrag>
 #include <QDesktopServices>
 #include <QAccessible>
-#include <QtMath>
 
 // KDE
 #include <KShell>
@@ -745,16 +744,18 @@ void TerminalDisplay::drawCursor(QPainter& painter,
     QRectF cursorRect = rect.adjusted(0, 1, 0, 0);
 
     QColor cursorColor = _cursorColor.isValid() ? _cursorColor : foregroundColor;
-    painter.setPen(cursorColor);
+    QPen pen(cursorColor);
+    // TODO: the relative pen width to draw the cursor is a bit hacky
+    // and set to 1/12 of the font width. Visually it seems to work at
+    // all scales but there must be better ways to do it
+    const qreal width = qMax(_fontWidth / 12.0, 1.0);
+    const qreal halfWidth = width / 2.0;
+    pen.setWidthF(width);
+    painter.setPen(pen);
 
     if (_cursorShape == Enum::BlockCursor) {
-        // draw the cursor outline, adjusting the area so that
-        // it is draw entirely inside 'rect'
-        int penWidth = qMax(1, painter.pen().width());
-        painter.drawRect(cursorRect.adjusted(int(penWidth / 2) + 0.5,
-                                             int(penWidth / 2) + 0.5,
-                                             - int(penWidth / 2) - penWidth % 2 + 0.5,
-                                             - int(penWidth / 2) - penWidth % 2 + 0.5));
+        // draw the cursor outline, adjusting the area so that it is draw entirely inside 'rect'
+        painter.drawRect(cursorRect.adjusted(halfWidth, halfWidth, -halfWidth, -halfWidth));
 
         // draw the cursor body only when the widget has focus
         if (hasFocus()) {
@@ -766,17 +767,17 @@ void TerminalDisplay::drawCursor(QPainter& painter,
             characterColor = _cursorTextColor.isValid() ? _cursorTextColor : backgroundColor;
         }
     } else if (_cursorShape == Enum::UnderlineCursor) {
-        QLineF line(cursorRect.left() + 0.5,
-                    cursorRect.bottom() - 0.5,
-                    cursorRect.right() - 0.5,
-                    cursorRect.bottom() - 0.5);
+        QLineF line(cursorRect.left() + halfWidth,
+                    cursorRect.bottom() - halfWidth,
+                    cursorRect.right() - halfWidth,
+                    cursorRect.bottom() - halfWidth);
         painter.drawLine(line);
 
     } else if (_cursorShape == Enum::IBeamCursor) {
-        QLineF line(cursorRect.left() + 0.5,
-                    cursorRect.top() + 0.5,
-                    cursorRect.left() + 0.5,
-                    cursorRect.bottom() - 0.5);
+        QLineF line(cursorRect.left() + halfWidth,
+                    cursorRect.top() + halfWidth,
+                    cursorRect.left() + halfWidth,
+                    cursorRect.bottom() - halfWidth);
         painter.drawLine(line);
     }
 }
