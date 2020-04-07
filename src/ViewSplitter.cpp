@@ -88,7 +88,6 @@ ViewSplitter *ViewSplitter::activeSplitter()
 void ViewSplitter::updateSizes()
 {
     const int space = (orientation() == Qt::Horizontal ? width() : height()) / count();
-    // Once Qt5.14+ is the mininum, change to use range constructors
     setSizes(QVector<int>(count(), space).toList());
 }
 

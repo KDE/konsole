@@ -131,8 +131,13 @@ QSet<QString> ProcessInfo::commonDirNames()
     if (forTheFirstTime) {
         const KSharedConfigPtr &config = KSharedConfig::openConfig();
         const KConfigGroup &configGroup = config->group("ProcessInfo");
-        // Once Qt5.14+ is the mininum, change to use range constructors
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+        // Need to make a local copy so the begin() and end() point to the same QList
+        const QStringList commonDirsList = configGroup.readEntry("CommonDirNames", QStringList());
+        _commonDirNames = QSet<QString>(commonDirsList.begin(), commonDirsList.end());
+#else
         _commonDirNames = QSet<QString>::fromList(configGroup.readEntry("CommonDirNames", QStringList()));
+#endif
 
         forTheFirstTime = false;
     }

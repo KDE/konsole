@@ -1058,9 +1058,12 @@ void SessionController::copyInputToAllTabs()
     // Find our window ...
     const KXmlGuiWindow* myWindow = findWindow(_view);
 
-    // Once Qt5.14+ is the mininum, change to use range constructors
-    QSet<Session*> group =
-        QSet<Session*>::fromList(SessionManager::instance()->sessions());
+    const QList<Session *> sessionsList = SessionManager::instance()->sessions();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+    QSet<Session*> group(sessionsList.begin(), sessionsList.end());
+#else
+    QSet<Session*> group = QSet<Session*>::fromList(sessionsList);
+#endif
     for (auto session : group) {
         // First, ensure that the session is removed
         // (necessary to avoid duplicates on addSession()!)
@@ -1090,8 +1093,13 @@ void SessionController::copyInputToSelectedTabs()
     QPointer<CopyInputDialog> dialog = new CopyInputDialog(_view);
     dialog->setMasterSession(_session);
 
-    // Once Qt5.14+ is the mininum, change to use range constructors
-    QSet<Session*> currentGroup = QSet<Session*>::fromList(_copyToGroup->sessions());
+    const QList<Session*> sessionsList = _copyToGroup->sessions();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+    QSet<Session*> currentGroup(sessionsList.begin(), sessionsList.end());
+#else
+    QSet<Session*> currentGroup = QSet<Session*>::fromList(sessionsList);
+#endif
+
     currentGroup.remove(_session);
 
     dialog->setChosenSessions(currentGroup);
@@ -1129,8 +1137,13 @@ void SessionController::copyInputToNone()
     }
 
     // Once Qt5.14+ is the mininum, change to use range constructors
-    QSet<Session*> group =
-        QSet<Session*>::fromList(SessionManager::instance()->sessions());
+    const QList<Session*> groupList = SessionManager::instance()->sessions();
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+    QSet<Session*> group(groupList.begin(), groupList.end());
+#else
+    QSet<Session*> group = QSet<Session*>::fromList(groupList);
+#endif
+
     for (auto iterator : group) {
         Session* session = iterator;
 

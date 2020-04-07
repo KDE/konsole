@@ -549,8 +549,13 @@ bool MainWindow::queryClose()
 
     // Check what processes are running, excluding the shell
     QStringList processesRunning;
-    // Once Qt5.14+ is the mininum, change to use range constructors
-    const auto uniqueSessions = QSet<Session*>::fromList(_viewManager->sessions());
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+    // Need to make a local copy so the begin() and end() point to the same QList
+    const QList<Session*> sessionList = _viewManager->sessions();
+    const QSet<Session*> uniqueSessions(sessionList.begin(), sessionList.end());
+#else
+    const QSet<Session*> uniqueSessions = QSet<Session*>::fromList(_viewManager->sessions());
+#endif
 
     for (Session *session : uniqueSessions) {
         if ((session == nullptr) || !session->isForegroundProcessActive()) {
