@@ -33,9 +33,11 @@ class PartTest : public QObject
 
 private Q_SLOTS:
     void initTestCase();
-    void testFd();
+    void testFdShell();
+    void testFdStandalone();
 
 private:
+    void testFd(bool runShell);
     KParts::Part* createPart();
 };
 

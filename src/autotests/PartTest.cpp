@@ -57,7 +57,17 @@ void PartTest::initTestCase()
     QCoreApplication::addLibraryPath(buildPath);
 }
 
-void PartTest::testFd()
+void PartTest::testFdShell()
+{
+    testFd(true);
+}
+
+void PartTest::testFdStandalone()
+{
+    testFd(false);
+}
+
+void PartTest::testFd(bool runShell)
 {
     // find ping
     QStringList pingList;
@@ -92,9 +102,12 @@ void PartTest::testFd()
 
     int fd = ptyProcess.pty()->masterFd();
 
-    // connect to an existing pty. The 2nd argument of openTeletype is optional, to run without shell
+    // test that the 2nd argument of openTeletype is optional,
+    // to run without shell
+    auto optArgRunShell = runShell ? QGenericArgument() : Q_ARG(bool, false);
+    // connect to an existing pty
     bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype",
-                                            Qt::DirectConnection, Q_ARG(int, fd), Q_ARG(bool, false));
+                                            Qt::DirectConnection, Q_ARG(int, fd), optArgRunShell);
     QVERIFY(result);
 
     // suspend the KPtyDevice so that the embedded terminal gets a chance to
@@ -104,7 +117,10 @@ void PartTest::testFd()
 
     QPointer<QDialog> dialog = new QDialog();
     auto layout = new QVBoxLayout(dialog.data());
-    layout->addWidget(new QLabel(QStringLiteral("Output of 'ping localhost' should appear in a terminal below for 5 seconds")));
+    auto explanation = runShell
+        ? QStringLiteral("Output of 'ping localhost' should appear in a terminal below for 5 seconds")
+        : QStringLiteral("Output of 'ping localhost' should appear standalone below for 5 seconds");
+    layout->addWidget(new QLabel(explanation));
     layout->addWidget(terminalPart->widget());
     QTimer::singleShot(5000, dialog.data(), &QDialog::close);
     dialog.data()->exec();
