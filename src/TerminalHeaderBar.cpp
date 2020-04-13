@@ -115,6 +115,14 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
     setFocusIndicatorState(false);
 }
 
+void TerminalHeaderBar::mouseDoubleClickEvent(QMouseEvent *ev)
+{
+    if (ev->button() != Qt::LeftButton) {
+        return;
+    }
+    m_toggleExpandedMode->click();
+}
+
 // Hack untill I can detangle the creation of the TerminalViews
 void TerminalHeaderBar::finishHeaderSetup(ViewProperties *properties)
 {

@@ -221,8 +221,10 @@ void ViewManager::setupActions()
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Tab);
     connect(action, &QAction::triggered, this, &ViewManager::lastUsedViewReverse);
 
-    action = new QAction(i18nc("@action Shortcut entry", "Maximize current Terminal"), this);
-    collection->addAction(QStringLiteral("maximize-current-terminal"), action);
+    action = new QAction(i18nc("@action Shortcut entry", "Toggle maximize current view"), this);
+    action->setText(i18nc("@action:inmenu", "Toggle maximize current view"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
+    collection->addAction(QStringLiteral("toggle-maximize-current-view"), action);
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_E);
     connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal);
     _multiSplitterOnlyActions << action;
