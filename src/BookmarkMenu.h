@@ -39,7 +39,7 @@ class KONSOLEPRIVATE_EXPORT BookmarkMenu : public KBookmarkMenu
     Q_OBJECT
 
 public:
-    BookmarkMenu (KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu *parentMenu, KActionCollection *collec);
+    BookmarkMenu (KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu *parentMenu, KActionCollection *collection);
 
 private Q_SLOTS:
     void maybeAddBookmark();
