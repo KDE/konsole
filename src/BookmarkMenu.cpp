@@ -21,24 +21,48 @@
 
 // Own
 #include "BookmarkMenu.h"
+#include "Shortcut_p.h"
 
 // KDE
 #include <KActionCollection>
-
-// Qt
-#include <QAction>
+#include <kbookmarks_version.h>
 #include <KBookmarkManager>
 #include <KBookmark>
 
+// Qt
+#include <QAction>
+#include <QMenu>
+
 #include <algorithm>    // std::any_of
 
-BookmarkMenu::BookmarkMenu (KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu *parentMenu, KActionCollection *collec) :
-    KBookmarkMenu (mgr, owner, parentMenu, collec)
+BookmarkMenu::BookmarkMenu (KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu *parentMenu, KActionCollection *collection) :
+#if KBOOKMARKS_VERSION < QT_VERSION_CHECK(5, 69, 0)
+    KBookmarkMenu (mgr, owner, parentMenu, collection)
+#else
+    KBookmarkMenu (mgr, owner, parentMenu)
+#endif
 {
+    QAction *bookmarkAction;
+#if KBOOKMARKS_VERSION < QT_VERSION_CHECK(5, 69, 0)
+    bookmarkAction = collection->action(QStringLiteral("add_bookmark"));
+#else
+    collection->addActions(parentMenu->actions());
+
+    bookmarkAction = addBookmarkAction();
+#endif
+
+    Q_ASSERT(bookmarkAction);
+
     // We need to hijack the action - note this only hijacks top-level action
-    QAction *bookmarkAction = collec->action(QStringLiteral("add_bookmark"));
     disconnect(bookmarkAction, nullptr, this, nullptr);
     connect(bookmarkAction, &QAction::triggered, this, &BookmarkMenu::maybeAddBookmark);
+
+    // replace Ctrl+B shortcut for bookmarks only if user hasn't already
+    // changed the shortcut; however, if the user changed it to Ctrl+B
+    // this will still get changed to Ctrl+Shift+B
+    if (bookmarkAction->shortcut() == QKeySequence(Konsole::ACCEL + Qt::Key_B)) {
+        collection->setDefaultShortcut(bookmarkAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_B);
+    }
 }
 
 void BookmarkMenu::maybeAddBookmark()
