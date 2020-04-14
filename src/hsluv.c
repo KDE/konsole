@@ -1,7 +1,7 @@
 /*
  * HSLuv-C: Human-friendly HSL
  * <https://github.com/hsluv/hsluv-c>
- * <http://www.hsluv.org/>
+ * <https://www.hsluv.org/>
  *
  * Copyright (c) 2015 Alexei Boronine <alexei@boronine.com> (original idea, JavaScript implementation)
  * Copyright (c) 2015 Roger Tallada <roger.tallada@gmail.com> (Obj-C implementation)
