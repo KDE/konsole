@@ -75,6 +75,10 @@ public:
     */
     class HotSpot : public QObject
     {
+        // krazy suggest using Q_OBJECT here but moc can not handle
+        // nested classes
+        // QObject derived classes should use the Q_OBJECT macro
+
     public:
         /**
          * Constructs a new hotspot which covers the area from (@p startLine,@p startColumn) to (@p endLine,@p endColumn)
