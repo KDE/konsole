@@ -104,11 +104,17 @@ void PartTest::testFd(bool runShell)
 
     // test that the 2nd argument of openTeletype is optional,
     // to run without shell
-    auto optArgRunShell = runShell ? QGenericArgument() : Q_ARG(bool, false);
-    // connect to an existing pty
-    bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype",
-                                            Qt::DirectConnection, Q_ARG(int, fd), optArgRunShell);
-    QVERIFY(result);
+    if (runShell) {
+        // connect to an existing pty
+        bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype",
+                                                Qt::DirectConnection, Q_ARG(int, fd));
+        QVERIFY(result);
+    } else {
+        // test the optional 2nd argument of openTeletype, to run without shell
+        bool result = QMetaObject::invokeMethod(terminalPart, "openTeletype",
+                                                Qt::DirectConnection, Q_ARG(int, fd), Q_ARG(bool, false));
+        QVERIFY(result);
+    }
 
     // suspend the KPtyDevice so that the embedded terminal gets a chance to
     // read from the pty.  Otherwise the KPtyDevice will simply read everything
