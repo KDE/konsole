@@ -423,9 +423,9 @@ void UrlFilter::HotSpot::activate(QObject *object)
     if ((object == nullptr) || actionName == QLatin1String("open-action")) {
         if (kind == StandardUrl) {
             // if the URL path does not include the protocol ( eg. "www.kde.org" ) then
-            // prepend http:// ( eg. "www.kde.org" --> "http://www.kde.org" )
+            // prepend https:// ( eg. "www.kde.org" --> "https://www.kde.org" )
             if (!url.contains(QLatin1String("://"))) {
-                url.prepend(QLatin1String("http://"));
+                url.prepend(QLatin1String("https://"));
             }
         } else if (kind == Email) {
             url.prepend(QLatin1String("mailto:"));
