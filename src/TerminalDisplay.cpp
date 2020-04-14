@@ -4045,7 +4045,7 @@ CompositeWidgetFocusWatcher::CompositeWidgetFocusWatcher(QWidget *compositeWidge
 
 bool CompositeWidgetFocusWatcher::eventFilter(QObject *watched, QEvent *event)
 {
-    Q_UNUSED(watched);
+    Q_UNUSED(watched)
 
     auto *focusEvent = static_cast<QFocusEvent *>(event);
     switch(event->type()) {

@@ -157,7 +157,7 @@ void TerminalHeaderBar::setFocusIndicatorState(bool focused)
 
 void TerminalHeaderBar::updateNotification(ViewProperties *item, Session::Notification notification, bool enabled)
 {
-    Q_UNUSED(item);
+    Q_UNUSED(item)
 
     switch(notification) {
     case Session::Notification::Silence:
