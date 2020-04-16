@@ -2368,10 +2368,12 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
 
 void TerminalDisplay::leaveEvent(QEvent *)
 {
-    // remove underline from an active link when cursor leaves the widget area
+    // remove underline from an active link when cursor leaves the widget area,
+    // also restore regular mouse cursor shape
     if(!_mouseOverHotspotArea.isEmpty()) {
         update(_mouseOverHotspotArea);
         _mouseOverHotspotArea = QRegion();
+        setCursor(Qt::IBeamCursor);
     }
 }
 
