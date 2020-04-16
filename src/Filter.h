@@ -124,7 +124,7 @@ public:
          * Returns a list of actions associated with the hotspot which can be used in a
          * menu or toolbar
          */
-        virtual QList<QAction *> actions() const;
+        virtual QList<QAction *> actions();
 
     protected:
         /** Sets the type of a hotspot.  This should only be set once */
@@ -257,7 +257,7 @@ public:
                 const QStringList &capturedTexts);
         ~HotSpot() override;
 
-        QList<QAction *> actions() const override;
+        QList<QAction *> actions() override;
 
         /**
          * Open a web browser at the current URL.  The url itself can be determined using
@@ -304,7 +304,7 @@ public:
                 const QStringList &capturedTexts, const QString &filePath);
         ~HotSpot() override;
 
-        QList<QAction *> actions() const override;
+        QList<QAction *> actions() override;
 
         /**
          * Opens kate for editing the file.

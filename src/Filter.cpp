@@ -99,7 +99,7 @@ QList<QSharedPointer<Filter::HotSpot>> FilterChain::hotSpots() const
     QList<QSharedPointer<Filter::HotSpot>> list;
     for (auto *filter : _filters) {
         list.append(filter->hotSpots());
->   }
+   }
     return list;
 }
 
@@ -246,7 +246,7 @@ Filter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endCol
 {
 }
 
-QList<QAction *> Filter::HotSpot::actions() const
+QList<QAction *> Filter::HotSpot::actions()
 {
     return {};
 }
@@ -426,7 +426,7 @@ UrlFilter::HotSpot::~HotSpot()
 {
 }
 
-QList<QAction *> UrlFilter::HotSpot::actions() const
+QList<QAction *> UrlFilter::HotSpot::actions()
 {
     auto openAction = new QAction(this);
     auto copyAction = new QAction(this);
@@ -581,7 +581,7 @@ FileFilter::HotSpot::~HotSpot()
 {
 }
 
-QList<QAction *> FileFilter::HotSpot::actions() const
+QList<QAction *> FileFilter::HotSpot::actions()
 {
     auto openAction = new QAction(this);
     openAction->setText(i18n("Open File"));
