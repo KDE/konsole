@@ -327,11 +327,16 @@ void RegExpFilter::process()
     QRegularExpressionMatchIterator iterator(_searchText.globalMatch(*text));
     while (iterator.hasNext()) {
         QRegularExpressionMatch match(iterator.next());
-        auto [startLine, startColumn] = getLineColumn(match.capturedStart());
-        auto [endLine, endColumn] = getLineColumn(match.capturedEnd());
+        std::pair<int, int> start = getLineColumn(match.capturedStart());
+        std::pair<int, int> end = getLineColumn(match.capturedEnd());
 
-        QSharedPointer<Filter::HotSpot> spot(newHotSpot(startLine, startColumn,
-                                                 endLine, endColumn, match.capturedTexts()));
+        QSharedPointer<Filter::HotSpot> spot(
+            newHotSpot(start.first, start.second,
+                       end.first, end.second,
+                       match.capturedTexts()
+            )
+        );
+
         if (spot == nullptr) {
             continue;
         }
