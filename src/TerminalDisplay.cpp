@@ -2761,7 +2761,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 
             int charLine;
             int charColumn;
-            getCharacterPosition(ev->pos() , charLine , charColumn, !_usesMouseTracking);
+            getCharacterPosition(ev->position().toPoint() , charLine , charColumn, !_usesMouseTracking);
             const int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
             const int button = (steps > 0) ? 4 : 5;
             for (int i = 0; i < abs(steps); ++i) {
