@@ -428,7 +428,7 @@ void UnixProcessInfo::readUserName()
 class LinuxProcessInfo : public UnixProcessInfo
 {
 public:
-    LinuxProcessInfo(int pid) :
+    explicit LinuxProcessInfo(int pid) :
         UnixProcessInfo(pid)
     {
     }
@@ -605,7 +605,7 @@ private:
 class FreeBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    FreeBSDProcessInfo(int pid) :
+    explicit FreeBSDProcessInfo(int pid) :
         UnixProcessInfo(pid)
     {
     }
@@ -730,7 +730,7 @@ private:
 class OpenBSDProcessInfo : public UnixProcessInfo
 {
 public:
-    OpenBSDProcessInfo(int pid) :
+    explicit OpenBSDProcessInfo(int pid) :
         UnixProcessInfo(pid)
     {
     }
@@ -848,7 +848,7 @@ private:
 class MacProcessInfo : public UnixProcessInfo
 {
 public:
-    MacProcessInfo(int pid) :
+    explicit MacProcessInfo(int pid) :
         UnixProcessInfo(pid)
     {
     }
@@ -949,7 +949,7 @@ private:
 class SolarisProcessInfo : public UnixProcessInfo
 {
 public:
-    SolarisProcessInfo(int pid) :
+    explicit SolarisProcessInfo(int pid) :
         UnixProcessInfo(pid)
     {
     }
