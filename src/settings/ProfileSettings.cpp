@@ -274,7 +274,7 @@ void ProfileSettings::updateDefaultItem()
             itemFont.setItalic(true);
             item->setFont(itemFont);
             item->setText(cleanItemName + defaultItemSuffix);
-        } else if (!isDefault) {
+        } else {
             // FIXME: use default font
             itemFont.setItalic(false);
             item->setFont(itemFont);
