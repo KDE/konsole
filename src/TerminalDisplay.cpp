@@ -2499,13 +2499,8 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         // Find left (left_not_right ? from here : from start)
         const QPoint left = left_not_right ? here : _iPntSelCorr;
 
-        // Find left (left_not_right ? from start : from here)
+        // Find right (left_not_right ? from start : from here)
         QPoint right = left_not_right ? _iPntSelCorr : here;
-        if (right.x() > 0 && !_columnSelectionMode) {
-            if (right.x() - 1 < _columns && right.y() < _lines) {
-                selClass = charClass(_image[loc(right.x() - 1, right.y())]);
-            }
-        }
 
         // Pick which is start (ohere) and which is extension (here)
         if (left_not_right) {
