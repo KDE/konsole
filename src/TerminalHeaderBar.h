@@ -60,7 +60,6 @@ Q_SIGNALS:
 
 private:
     QBoxLayout *m_boxLayout;
-    TerminalDisplay *m_terminalDisplay;
     QLabel *m_terminalTitle;
     QLabel *m_terminalIcon;
     QLabel *m_statusIconReadOnly;
