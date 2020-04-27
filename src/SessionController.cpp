@@ -1629,10 +1629,7 @@ bool SessionController::isReadOnly() const
 
 bool SessionController::isCopyInputActive() const
 {
-    if ((_copyToGroup != nullptr) && _copyToGroup->sessions().count() > 1) {
-        return true;
-    }
-    return false;
+    return ((_copyToGroup != nullptr) && _copyToGroup->sessions().count() > 1);
 }
 
 void SessionController::sessionAttributeChanged()
