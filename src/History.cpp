@@ -526,7 +526,8 @@ void CompactHistoryLine::getCharacters(Character *array, int size, int startColu
 CompactHistoryScroll::CompactHistoryScroll(unsigned int maxLineCount) :
     HistoryScroll(new CompactHistoryType(maxLineCount)),
     _lines(),
-    _blockList()
+    _blockList(),
+    _maxLineCount(0)
 {
     ////qDebug() << "scroll of length " << maxLineCount << " created";
     setMaxNbLines(maxLineCount);
