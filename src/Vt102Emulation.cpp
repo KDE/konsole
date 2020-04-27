@@ -77,7 +77,6 @@ Vt102Emulation::Vt102Emulation() :
                      &Konsole::Vt102Emulation::updateSessionAttributes);
 
     initTokenizer();
-    reset();
 }
 
 Vt102Emulation::~Vt102Emulation() = default;

@@ -119,6 +119,7 @@ Session::Session(QObject* parent) :
 
     //create emulation backend
     _emulation = new Vt102Emulation();
+    _emulation->reset();
 
     connect(_emulation, &Konsole::Emulation::sessionAttributeChanged, this, &Konsole::Session::setSessionAttribute);
     connect(_emulation, &Konsole::Emulation::bell, this, [this]() {
