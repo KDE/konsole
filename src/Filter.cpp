@@ -109,9 +109,7 @@ TerminalImageFilterChain::TerminalImageFilterChain() :
 {
 }
 
-TerminalImageFilterChain::~TerminalImageFilterChain()
-{
-}
+TerminalImageFilterChain::~TerminalImageFilterChain() = default;
 
 void TerminalImageFilterChain::setImage(const Character * const image, int lines, int columns,
                                         const QVector<LineProperty> &lineProperties)
@@ -427,9 +425,7 @@ UrlFilter::UrlFilter()
     setRegExp(CompleteUrlRegExp);
 }
 
-UrlFilter::HotSpot::~HotSpot()
-{
-}
+UrlFilter::HotSpot::~HotSpot() = default;
 
 QList<QAction *> UrlFilter::HotSpot::actions()
 {
@@ -582,9 +578,7 @@ FileFilter::FileFilter(Session *session) :
     setRegExp(re);
 }
 
-FileFilter::HotSpot::~HotSpot()
-{
-}
+FileFilter::HotSpot::~HotSpot() = default;
 
 QList<QAction *> FileFilter::HotSpot::actions()
 {
