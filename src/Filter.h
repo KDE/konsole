@@ -32,9 +32,6 @@
 // Konsole
 #include "Character.h"
 
-// std
-#include <optional>
-
 class QAction;
 
 namespace Konsole {
