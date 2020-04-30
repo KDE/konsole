@@ -285,6 +285,10 @@ public Q_SLOTS:
     Q_SCRIPTABLE QString defaultProfile();
 
     // TODO: its semantic is application-wide. Move it to more appropriate place
+    // DBus slot that sets the default profile
+    Q_SCRIPTABLE void setDefaultProfile(const QString &profile);
+
+    // TODO: its semantic is application-wide. Move it to more appropriate place
     // DBus slot that returns a string list of defined (known) profiles
     Q_SCRIPTABLE QStringList profileList();
 

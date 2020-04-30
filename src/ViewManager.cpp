@@ -1081,6 +1081,16 @@ QString ViewManager::defaultProfile()
     return ProfileManager::instance()->defaultProfile()->name();
 }
 
+void ViewManager::setDefaultProfile(const QString &profileName)
+{
+    const QList<Profile::Ptr> profiles = ProfileManager::instance()->allProfiles();
+    for (const Profile::Ptr &profile : profiles) {
+        if (profile->name() == profileName) {
+            ProfileManager::instance()->setDefaultProfile(profile);
+        }
+    }
+}
+
 QStringList ViewManager::profileList()
 {
     return ProfileManager::instance()->availableProfileNames();
