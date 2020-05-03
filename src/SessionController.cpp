@@ -348,7 +348,8 @@ void SessionController::openUrl(const QUrl& url)
     } else if (url.scheme().isEmpty()) {
         // QUrl couldn't parse what the user entered into the URL field
         // so just dump it to the shell
-        QString command = url.toDisplayString();
+        // If you change this, change it also in autotests/BookMarkTest.cpp
+        QString command = QUrl::fromPercentEncoding(url.toEncoded());
         if (!command.isEmpty()) {
             _session->sendTextToTerminal(command, QLatin1Char('\r'));
         }
