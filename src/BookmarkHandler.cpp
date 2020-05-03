@@ -65,7 +65,7 @@ BookmarkHandler::BookmarkHandler(KActionCollection *collection, QMenu *menu, boo
     KBookmarkManager *manager = KBookmarkManager::managerForFile(_file, QStringLiteral("konsole"));
     manager->setUpdate(true);
 
-    BookmarkMenu *bookmarkMenu = new BookmarkMenu(manager, this, _menu, toplevel ? collection : nullptr);
+    auto *bookmarkMenu = new BookmarkMenu(manager, this, _menu, toplevel ? collection : nullptr);
     bookmarkMenu->setParent(this);
 }
 

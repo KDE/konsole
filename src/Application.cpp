@@ -183,7 +183,7 @@ void Application::createWindow(const Profile::Ptr &profile, const QString &direc
 
 void Application::detachTerminals(ViewSplitter *splitter,const QHash<TerminalDisplay*, Session*>& sessionsMap)
 {
-    MainWindow *currentWindow = qobject_cast<MainWindow*>(sender());
+    auto *currentWindow = qobject_cast<MainWindow*>(sender());
     MainWindow *window = newMainWindow();
     ViewManager *manager = window->viewManager();
 
