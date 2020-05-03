@@ -249,6 +249,6 @@ void TerminalHeaderBar::mouseReleaseEvent(QMouseEvent* ev)
 QSize Konsole::TerminalHeaderBar::minimumSizeHint() const
 {
     auto height = sizeHint().height();
-    return QSize(height, height);
+    return {height, height};
 }
 
