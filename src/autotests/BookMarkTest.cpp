@@ -45,16 +45,16 @@ void BookMarkTest::testBookMarkURLs_data()
         QStringLiteral("command with pipe (|)"),  QStringLiteral("ssh machine | tee -a /var/log/system.log"),
         QStringLiteral("file URL w/ non ASCII part"), QStringLiteral("file:///home/user/aκόσμε"),
         QStringLiteral("command with double quotes"), QStringLiteral("isql-fb -u sysdba -p example \"test\""),
-        QStringLiteral("command with single quotes"), QStringLiteral("isql-fb -u sysdba -p example 'test'")
+        QStringLiteral("command with single quotes"), QStringLiteral("isql-fb -u sysdba -p example 'test'"),
+        QStringLiteral("command with %"), QStringLiteral("date +%m-%d-%Y")
     };
 
     QTest::addColumn<QString>("text");
     QTest::addColumn<QString>("result");
     for (int i = 0; i < groupUrlList.size(); ++i) {
         const auto& bm_url = groupUrlList.at(i);
-        // Current Konsole code using bm.url()
-        // The below is new to test decoding the url/command
-        auto bm = QUrl::fromPercentEncoding(bm_url.url().toUtf8());
+        // Verify this line matching SessionControll.cpp to validate tests
+        auto bm = QUrl::fromPercentEncoding(bm_url.toEncoded());
         QTest::newRow(bm_urls.at(i * 2).toUtf8().data())<< bm_urls.at((i * 2) +1) << bm;
     }
 }
