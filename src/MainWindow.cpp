@@ -440,9 +440,8 @@ QString MainWindow::activeSessionDir() const
             session->getDynamicTitle();
         }
         return _pluggedController->currentDir();
-    } else {
-        return QString();
     }
+    return QString();
 }
 
 void MainWindow::openUrls(const QList<QUrl> &urls)

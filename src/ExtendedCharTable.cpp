@@ -63,38 +63,37 @@ uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort len
             // this sequence already has an entry in the table,
             // return its hash
             return hash;
-        } else {
-            // if hash is already used by another, different sequence of unicode character
-            // points then try next hash
-            hash++;
+        } 
+        // if hash is already used by another, different sequence of unicode character
+        // points then try next hash
+        hash++;
 
-            if (hash == initialHash) {
-                if (!triedCleaningSolution) {
-                    triedCleaningSolution = true;
-                    // All the hashes are full, go to all Screens and try to free any
-                    // This is slow but should happen very rarely
-                    QSet<uint> usedExtendedChars;
-                    const QList<Session *> sessionsList = SessionManager::instance()->sessions();
-                    for (const Session *s : sessionsList) {
-                        const QList<TerminalDisplay *> displayList = s->views();
-                        for (const TerminalDisplay *display : displayList) {
-                            usedExtendedChars += display->screenWindow()->screen()->usedExtendedChars();
-                        }
+        if (hash == initialHash) {
+            if (!triedCleaningSolution) {
+                triedCleaningSolution = true;
+                // All the hashes are full, go to all Screens and try to free any
+                // This is slow but should happen very rarely
+                QSet<uint> usedExtendedChars;
+                const QList<Session *> sessionsList = SessionManager::instance()->sessions();
+                for (const Session *s : sessionsList) {
+                    const QList<TerminalDisplay *> displayList = s->views();
+                    for (const TerminalDisplay *display : displayList) {
+                        usedExtendedChars += display->screenWindow()->screen()->usedExtendedChars();
                     }
-
-                    QHash<uint, uint *>::iterator it = _extendedCharTable.begin();
-                    QHash<uint, uint *>::iterator itEnd = _extendedCharTable.end();
-                    while (it != itEnd) {
-                        if (usedExtendedChars.contains(it.key())) {
-                            ++it;
-                        } else {
-                            it = _extendedCharTable.erase(it);
-                        }
-                    }
-                } else {
-                    qCDebug(KonsoleDebug) << "Using all the extended char hashes, going to miss this extended character";
-                    return 0;
                 }
+
+                QHash<uint, uint *>::iterator it = _extendedCharTable.begin();
+                QHash<uint, uint *>::iterator itEnd = _extendedCharTable.end();
+                while (it != itEnd) {
+                    if (usedExtendedChars.contains(it.key())) {
+                        ++it;
+                    } else {
+                        it = _extendedCharTable.erase(it);
+                    }
+                }
+            } else {
+                qCDebug(KonsoleDebug) << "Using all the extended char hashes, going to miss this extended character";
+                return 0;
             }
         }
     }
@@ -121,10 +120,9 @@ uint *ExtendedCharTable::lookupExtendedChar(uint hash, ushort &length) const
     if (buffer != nullptr) {
         length = ushort(buffer[0]);
         return buffer + 1;
-    } else {
-        length = 0;
-        return nullptr;
-    }
+    } 
+    length = 0;
+    return nullptr;
 }
 
 uint ExtendedCharTable::extendedCharHash(const uint *unicodePoints, ushort length) const

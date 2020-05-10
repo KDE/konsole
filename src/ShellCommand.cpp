@@ -61,9 +61,8 @@ QString ShellCommand::command() const
 {
     if (!_arguments.isEmpty()) {
         return _arguments[0];
-    } else {
-        return QString();
-    }
+    } 
+    return QString();
 }
 
 QStringList ShellCommand::arguments() const

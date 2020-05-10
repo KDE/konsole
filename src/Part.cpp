@@ -111,9 +111,8 @@ Session *Part::activeSession() const
         Q_ASSERT(_viewManager->activeViewController()->session());
 
         return _viewManager->activeViewController()->session();
-    } else {
-        return nullptr;
-    }
+    } 
+    return nullptr;
 }
 
 void Part::startProgram(const QString &program, const QStringList &arguments)
@@ -176,9 +175,8 @@ int Part::foregroundProcessId()
 
     if (activeSession()->isForegroundProcessActive()) {
         return activeSession()->foregroundProcessId();
-    } else {
-        return -1;
-    }
+    } 
+    return -1;
 }
 
 QString Part::foregroundProcessName()
@@ -187,9 +185,8 @@ QString Part::foregroundProcessName()
 
     if (activeSession()->isForegroundProcessActive()) {
         return activeSession()->foregroundProcessName();
-    } else {
-        return QString();
-    }
+    } 
+    return QString();
 }
 
 QString Part::currentWorkingDirectory() const

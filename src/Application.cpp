@@ -550,9 +550,8 @@ Profile::Ptr Application::processProfileChangeArgs(Profile::Ptr baseProfile)
 
     if (shouldUseNewProfile) {
         return newProfile;
-    } else {
-        return baseProfile;
     }
+    return baseProfile;
 }
 
 void Application::startBackgroundMode(MainWindow *window)

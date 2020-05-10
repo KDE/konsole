@@ -98,15 +98,14 @@ QVariant SessionListModel::headerData(int section, Qt::Orientation orientation, 
 
     if (orientation == Qt::Vertical) {
         return QVariant();
-    } else {
-        switch (section) {
-        case 0:
-            return i18nc("@item:intable The session index", "Number");
-        case 1:
-            return i18nc("@item:intable The session title", "Title");
-        default:
-            return QVariant();
-        }
+    } 
+    switch (section) {
+    case 0:
+        return i18nc("@item:intable The session index", "Number");
+    case 1:
+        return i18nc("@item:intable The session title", "Title");
+    default:
+        return QVariant();
     }
 }
 
@@ -142,7 +141,6 @@ QModelIndex SessionListModel::index(int row, int column, const QModelIndex &pare
 {
     if (hasIndex(row, column, parent)) {
         return createIndex(row, column, _sessions[row]);
-    } else {
-        return {};
-    }
+    } 
+    return {};
 }

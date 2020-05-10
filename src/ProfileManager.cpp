@@ -176,9 +176,8 @@ Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
     if (recursionGuard.contains(path)) {
         qCDebug(KonsoleDebug) << "Ignoring attempt to load profile recursively from" << path;
         return _fallbackProfile;
-    } else {
-        recursionGuard.push(path);
     }
+    recursionGuard.push(path);
 
     // load the profile
     ProfileReader reader;
