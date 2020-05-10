@@ -71,10 +71,9 @@ bool KeyboardTranslatorManager::deleteTranslator(const QString &name)
     if (QFile::remove(path)) {
         _translators.remove(name);
         return true;
-    } else {
-        qCDebug(KonsoleDebug) << "Failed to remove translator - " << path;
-        return false;
-    }
+    } 
+    qCDebug(KonsoleDebug) << "Failed to remove translator - " << path;
+    return false;
 }
 
 bool KeyboardTranslatorManager::isTranslatorDeletable(const QString &name) const
@@ -200,10 +199,9 @@ KeyboardTranslator *KeyboardTranslatorManager::loadTranslator(QIODevice *source,
 
     if (!reader.parseError()) {
         return translator;
-    } else {
-        delete translator;
-        return nullptr;
-    }
+    } 
+    delete translator;
+    return nullptr;
 }
 
 const KeyboardTranslator *KeyboardTranslatorManager::defaultTranslator()
