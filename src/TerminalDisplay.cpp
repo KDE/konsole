@@ -237,13 +237,13 @@ void TerminalDisplay::fontChange(const QFont&)
     // "Base character width on widest ASCII character. This prevents too wide
     //  characters in the presence of double wide (e.g. Japanese) characters."
     // Get the width from representative normal width characters
-    _fontWidth = qRound((static_cast<double>(fm.width(QStringLiteral(REPCHAR))) / static_cast<double>(qstrlen(REPCHAR))));
+    _fontWidth = qRound((static_cast<double>(fm.horizontalAdvance(QStringLiteral(REPCHAR))) / static_cast<double>(qstrlen(REPCHAR))));
 
     _fixedFont = true;
 
-    const int fw = fm.width(QLatin1Char(REPCHAR[0]));
+    const int fw = fm.horizontalAdvance(QLatin1Char(REPCHAR[0]));
     for (unsigned int i = 1; i < qstrlen(REPCHAR); i++) {
-        if (fw != fm.width(QLatin1Char(REPCHAR[i]))) {
+        if (fw != fm.horizontalAdvance(QLatin1Char(REPCHAR[i]))) {
             _fixedFont = false;
             break;
         }
