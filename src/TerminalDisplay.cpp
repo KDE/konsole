@@ -1689,8 +1689,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             }
 
             //Apply text scaling matrix.
-            // TODO: setWorldMatrix is obsolete, change to setWorldTransform
-            paint.setWorldMatrix(textScale, true);
+            paint.setWorldTransform(QTransform(textScale), true);
 
             //calculate the area in which the text will be drawn
             QRect textArea = QRect(_contentRect.left() + contentsRect().left() + _fontWidth * x,
@@ -1724,8 +1723,7 @@ void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
             _fixedFont = save__fixedFont;
 
             //reset back to single-width, single-height _lines
-            // TODO: setWorldMatrix is obsolete, change to setWorldTransform
-            paint.setWorldMatrix(textScale.inverted(), true);
+            paint.setWorldTransform(QTransform(textScale.inverted()), true);
 
             if (y < _lineProperties.size() - 1) {
                 //double-height _lines are represented by two adjacent _lines
