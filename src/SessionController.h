@@ -174,6 +174,11 @@ Q_SIGNALS:
      */
     void tabRenamedByUser(bool renamed) const;
 
+    /**
+     * Emitted when the user changes the tab color.
+     */
+    void tabColoredByUser(bool set) const;
+
 public Q_SLOTS:
     /**
      * Issues a command to the session to navigate to the specified URL.

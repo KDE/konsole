@@ -23,6 +23,9 @@
 #include <QTabBar>
 #include <QCursor>
 
+class QColor;
+class QPaintEvent;
+
 namespace Konsole {
 class TabbedViewContainer;
 class DetachableTabBar : public QTabBar {
@@ -31,6 +34,9 @@ public:
     enum class DragType : unsigned char {NONE, OUTSIDE, WINDOW};
 
     explicit DetachableTabBar(QWidget *parent = nullptr);
+
+    void setColor(int idx, const QColor &color);
+    void removeColor(int idx);
 Q_SIGNALS:
     void detachTab(int index);
     void moveTabToWindow(int tabIndex, QWidget *otherWindow);
@@ -43,6 +49,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent * event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     DragType dragType;

@@ -245,6 +245,9 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
         session->setTabTitleFormat(Session::RemoteTabTitle,
                                    profile->remoteTabTitleFormat());
     }
+    if (apply.shouldApply(Profile::TabColor) && !session->isTabColorSetByUser()) {
+        session->setColor(profile->tabColor());
+    }
 
     // History
     if (apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize)) {

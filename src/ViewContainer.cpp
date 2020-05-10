@@ -93,6 +93,9 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
         this, [this]{ emit newViewRequest(); });
     connect(this, &TabbedViewContainer::currentChanged, this, &TabbedViewContainer::currentTabChanged);
 
+    connect(this, &TabbedViewContainer::setColor, tabBarWidget, &DetachableTabBar::setColor);
+    connect(this, &TabbedViewContainer::removeColor, tabBarWidget, &DetachableTabBar::removeColor);
+
     // The context menu of tab bar
     _contextPopupMenu = new QMenu(tabBar());
     connect(_contextPopupMenu, &QMenu::aboutToHide, this, [this]() {
@@ -325,6 +328,7 @@ void TabbedViewContainer::addSplitter(ViewSplitter *viewSplitter, int index) {
     }
     if (terminalDisplays.count() > 0) {
         updateTitle(qobject_cast<ViewProperties*>(terminalDisplays.at(0)->sessionController()));
+        updateColor(qobject_cast<ViewProperties*>(terminalDisplays.at(0)->sessionController()));
     }
     setCurrentIndex(index);
 }
@@ -360,6 +364,9 @@ void TabbedViewContainer::connectTerminalDisplay(TerminalDisplay *display)
 
     connect(item, &Konsole::ViewProperties::titleChanged, this,
             &Konsole::TabbedViewContainer::updateTitle);
+
+    connect(item, &Konsole::ViewProperties::colorChanged, this,
+            &Konsole::TabbedViewContainer::updateColor);
 
     connect(item, &Konsole::ViewProperties::iconChanged, this,
             &Konsole::TabbedViewContainer::updateIcon);
@@ -532,6 +539,15 @@ void TabbedViewContainer::updateTitle(ViewProperties *item)
     setTabText(index, tabText);
 }
 
+void TabbedViewContainer::updateColor(ViewProperties *item)
+{
+    auto controller = qobject_cast<SessionController *>(item);
+    auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
+    const int index = indexOf(topLevelSplitter);
+
+    emit setColor(index, item->color());
+}
+
 void TabbedViewContainer::updateIcon(ViewProperties *item)
 {
     auto controller = qobject_cast<SessionController *>(item);
@@ -637,11 +653,13 @@ void TabbedViewContainer::currentSessionControllerChanged(SessionController *con
     }
 
     updateTitle(qobject_cast<ViewProperties*>(controller));
+    updateColor(qobject_cast<ViewProperties*>(controller));
     updateActivity(qobject_cast<ViewProperties*>(controller));
     updateSpecialState(qobject_cast<ViewProperties*>(controller));
 }
 
 void TabbedViewContainer::closeTerminalTab(int idx) {
+    emit removeColor(idx);
     //TODO: This for should probably go to the ViewSplitter
     for (auto terminal : viewSplitterAt(idx)->findChildren<TerminalDisplay*>()) {
         terminal->sessionController()->closeSession();

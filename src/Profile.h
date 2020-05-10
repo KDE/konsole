@@ -300,7 +300,9 @@ public:
         /** (int) Keyboard modifiers to show URL hints */
         UrlHintsModifiers,
         /** (bool) Reverse the order of URL hints */
-        ReverseUrlHints
+        ReverseUrlHints,
+        /** (QColor) used in tab color */
+        TabColor
     };
 
     Q_ENUM(Property)
@@ -443,6 +445,12 @@ public:
     QString remoteTabTitleFormat() const
     {
         return property<QString>(Profile::RemoteTabTitleFormat);
+    }
+
+    /** Convenience method for property<QColor>(Profile::TabColor) */
+    QColor tabColor() const
+    {
+        return property<QColor>(Profile::TabColor);
     }
 
     /** Convenience method for property<bool>(Profile::ShowTerminalSizeHint) */

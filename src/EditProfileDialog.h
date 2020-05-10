@@ -124,15 +124,18 @@ private Q_SLOTS:
     void initialDirChanged(const QString &dir);
     void startInSameDir(bool);
     void commandChanged(const QString &command);
+
+    // tab page
     void tabTitleFormatChanged(const QString &format);
     void remoteTabTitleFormatChanged(const QString &format);
+    void tabColorChanged(const QColor &color);
+    void silenceSecondsChanged(int);
 
     void terminalColumnsEntryChanged(int);
     void terminalRowsEntryChanged(int);
     void showTerminalSizeHint(bool);
     void setDimWhenInactive(bool);
     void showEnvironmentEditor();
-    void silenceSecondsChanged(int);
 
     // appearance page
     void setAntialiasText(bool enable);

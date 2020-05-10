@@ -88,6 +88,7 @@ Session::Session(QObject* parent) :
     , _localTabTitleFormat(QString())
     , _remoteTabTitleFormat(QString())
     , _tabTitleSetByUser(false)
+    , _tabColorSetByUser(false)
     , _iconName(QString())
     , _iconText(QString())
     , _addToUtmp(true)
@@ -587,6 +588,7 @@ QString Session::userTitle() const
 {
     return _userTitle;
 }
+
 void Session::setTabTitleFormat(TabTitleContext context , const QString& format)
 {
     if (context == LocalTabTitle) {
@@ -597,6 +599,7 @@ void Session::setTabTitleFormat(TabTitleContext context , const QString& format)
         _remoteTabTitleFormat = format;
     }
 }
+
 QString Session::tabTitleFormat(TabTitleContext context) const
 {
     if (context == LocalTabTitle) {
@@ -616,6 +619,16 @@ void Session::tabTitleSetByUser(bool set)
 bool Session::isTabTitleSetByUser() const
 {
     return _tabTitleSetByUser;
+}
+
+void Session::tabColorSetByUser(bool set)
+{
+    _tabColorSetByUser = set;
+}
+
+bool Session::isTabColorSetByUser() const
+{
+    return _tabColorSetByUser;
 }
 
 void Session::silenceTimerDone()
@@ -684,10 +697,10 @@ void Session::changeTabTextColor(int i)
 
 void Session::onPrimaryScreenInUse(bool use)
 {
-
     _isPrimaryScreen = use;
     emit primaryScreenInUse(use);
 }
+
 bool Session::isPrimaryScreen()
 {
     return _isPrimaryScreen;
@@ -1641,6 +1654,7 @@ void Session::saveSession(KConfigGroup& group)
     group.writePathEntry("WorkingDir", currentWorkingDirectory());
     group.writeEntry("LocalTab",       tabTitleFormat(LocalTabTitle));
     group.writeEntry("RemoteTab",      tabTitleFormat(RemoteTabTitle));
+    group.writeEntry("TabColor",       QString(color().name(QColor::HexArgb)));
     group.writeEntry("SessionGuid",    _uniqueIdentifier.toString());
     group.writeEntry("Encoding",       QString::fromUtf8(codec()));
 }
@@ -1660,6 +1674,10 @@ void Session::restoreSession(KConfigGroup& group)
     value = group.readEntry("RemoteTab");
     if (!value.isEmpty()) {
         setTabTitleFormat(RemoteTabTitle, value);
+    }
+    value = group.readEntry("TabColor");
+    if (!value.isEmpty()) {
+        setColor(QColor(value));
     }
     value = group.readEntry("SessionGuid");
     if (!value.isEmpty()) {
@@ -1744,6 +1762,17 @@ void Session::setReadOnly(bool readOnly)
         // attached views.
         emit readOnlyChanged();
     }
+}
+
+void Session::setColor(const QColor &color)
+{
+    _tabColor = color;
+    emit sessionAttributeChanged();
+}
+
+QColor Session::color() const
+{
+    return _tabColor;
 }
 
 SessionGroup::SessionGroup(QObject* parent)

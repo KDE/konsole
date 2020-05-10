@@ -23,6 +23,8 @@
 // Qt
 #include <QWidget>
 
+class QColor;
+
 namespace Ui {
 class RenameTabWidget;
 }
@@ -38,8 +40,10 @@ public:
 
     QString tabTitleText() const;
     QString remoteTabTitleText() const;
+    QColor color() const;
     void setTabTitleText(const QString &);
     void setRemoteTabTitleText(const QString &);
+    void setColor(const QColor &);
 
     void focusTabTitleText();
     void focusRemoteTabTitleText();
@@ -47,6 +51,7 @@ public:
 Q_SIGNALS:
     void tabTitleFormatChanged(const QString &);
     void remoteTabTitleFormatChanged(const QString &);
+    void tabColorChanged(const QColor &);
 
 public Q_SLOTS:
     void insertTabTitleText(const QString &text);

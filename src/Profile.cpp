@@ -83,6 +83,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { BoldIntense, "BoldIntense", APPEARANCE_GROUP, QVariant::Bool }
     , { UseFontLineCharacters, "UseFontLineChararacters", APPEARANCE_GROUP, QVariant::Bool }
     , { LineSpacing , "LineSpacing" , APPEARANCE_GROUP , QVariant::Int }
+    , { TabColor, "TabColor", APPEARANCE_GROUP, QVariant::Color }
 
     // Keyboard
     , { KeyBindings , "KeyBindings" , KEYBOARD_GROUP , QVariant::String }
@@ -222,15 +223,19 @@ void Profile::useFallback()
 
     setProperty(WordCharacters, QStringLiteral(":@-./_~?&=%+#"));
 
+    setProperty(TabColor, QColor(QColor::Invalid));
+
     // Fallback should not be shown in menus
     setHidden(true);
 }
+
 Profile::Profile(const Profile::Ptr &parent)
     : _propertyValues(QHash<Property, QVariant>())
     , _parent(parent)
     , _hidden(false)
 {
 }
+
 void Profile::clone(Profile::Ptr profile, bool differentOnly)
 {
     const PropertyInfo* properties = DefaultPropertyNames;
@@ -275,14 +280,17 @@ bool Profile::isEmpty() const
 {
     return _propertyValues.isEmpty();
 }
+
 QHash<Profile::Property, QVariant> Profile::setProperties() const
 {
     return _propertyValues;
 }
+
 void Profile::setProperty(Property p, const QVariant& value)
 {
     _propertyValues.insert(p, value);
 }
+
 bool Profile::isPropertySet(Property p) const
 {
     return _propertyValues.contains(p);
@@ -383,6 +391,7 @@ void ProfileGroup::updateValues()
         properties++;
     }
 }
+
 void ProfileGroup::setProperty(Property p, const QVariant& value)
 {
     if (_profiles.count() > 1 && !canInheritProperty(p)) {
@@ -394,4 +403,3 @@ void ProfileGroup::setProperty(Property p, const QVariant& value)
         profile->setProperty(p, value);
     }
 }
-

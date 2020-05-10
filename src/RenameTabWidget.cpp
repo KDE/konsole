@@ -23,6 +23,12 @@
 // Konsole
 #include "ui_RenameTabWidget.h"
 
+// KDE
+#include <KColorCombo>
+
+// Qt
+#include <QColor>
+
 using Konsole::RenameTabWidget;
 
 RenameTabWidget::RenameTabWidget(QWidget *parent) :
@@ -35,10 +41,17 @@ RenameTabWidget::RenameTabWidget(QWidget *parent) :
     _ui->tabTitleEdit->setClearButtonEnabled(true);
     _ui->remoteTabTitleEdit->setClearButtonEnabled(true);
 
+    QList<QColor> listColors(_ui->tabColorCombo->colors());
+    listColors.insert(0, QColor(QColor::Invalid));
+    _ui->tabColorCombo->setColors(listColors);
+    _ui->tabColorCombo->setItemText(1, i18n("Color from theme"));
+
     connect(_ui->tabTitleEdit, &QLineEdit::textChanged, this,
             &Konsole::RenameTabWidget::tabTitleFormatChanged);
     connect(_ui->remoteTabTitleEdit, &QLineEdit::textChanged, this,
             &Konsole::RenameTabWidget::remoteTabTitleFormatChanged);
+    connect(_ui->tabColorCombo, &KColorCombo::activated, this,
+            &Konsole::RenameTabWidget::tabColorChanged);
 
     _ui->tabTitleFormatButton->setContext(Session::LocalTabTitle);
     connect(_ui->tabTitleFormatButton, &Konsole::TabTitleFormatButton::dynamicElementSelected, this,
@@ -74,6 +87,11 @@ void RenameTabWidget::setRemoteTabTitleText(const QString &text)
     _ui->remoteTabTitleEdit->setText(text);
 }
 
+void RenameTabWidget::setColor(const QColor &color)
+{
+    _ui->tabColorCombo->setColor(color);
+}
+
 QString RenameTabWidget::tabTitleText() const
 {
     return _ui->tabTitleEdit->text();
@@ -82,6 +100,11 @@ QString RenameTabWidget::tabTitleText() const
 QString RenameTabWidget::remoteTabTitleText() const
 {
     return _ui->remoteTabTitleEdit->text();
+}
+
+QColor RenameTabWidget::color() const
+{
+    return _ui->tabColorCombo->color();
 }
 
 void RenameTabWidget::insertTabTitleText(const QString &text)

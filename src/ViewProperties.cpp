@@ -80,6 +80,14 @@ void ViewProperties::setIcon(const QIcon &icon)
     }
 }
 
+void ViewProperties::setColor(const QColor &color)
+{
+    if (color != _color) {
+        _color = color;
+        emit colorChanged(this);
+    }
+}
+
 void ViewProperties::setIdentifier(int id)
 {
     if (_viewProperties.contains(_identifier)) {
@@ -104,4 +112,9 @@ QIcon ViewProperties::icon() const
 int ViewProperties::identifier() const
 {
     return _identifier;
+}
+
+QColor ViewProperties::color() const
+{
+    return _color;
 }

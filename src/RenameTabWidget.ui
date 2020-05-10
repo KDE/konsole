@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>70</height>
+    <height>119</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -29,6 +29,44 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="remoteTabTitleEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="toolTip">
+      <string>Tab title format used when a remote command (e.g. connection to another computer via SSH) is being executed</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="Konsole::TabTitleFormatButton" name="remoteTabTitleFormatButton"/>
+   </item>
+   <item row="0" column="2">
+    <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton"/>
+   </item>
+   <item row="1" column="0" alignment="Qt::AlignRight">
+    <widget class="QLabel" name="label_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Remote tab title format:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>remoteTabTitleEdit</cstring>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0" alignment="Qt::AlignRight">
     <widget class="QLabel" name="label">
      <property name="sizePolicy">
@@ -61,47 +99,37 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="2">
-    <widget class="Konsole::TabTitleFormatButton" name="tabTitleFormatButton"/>
-   </item>
-   <item row="1" column="0" alignment="Qt::AlignRight">
-    <widget class="QLabel" name="label_2">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Remote tab title format:</string>
+      <string>Tab Color:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
      <property name="buddy">
-      <cstring>remoteTabTitleEdit</cstring>
+      <cstring>tabColorCombo</cstring>
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="remoteTabTitleEdit">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+   <item row="2" column="1">
+    <widget class="KColorCombo" name="tabColorCombo">
+     <property name="editable">
+      <bool>false</bool>
      </property>
-     <property name="toolTip">
-      <string>Tab title format used when a remote command (e.g. connection to another computer via SSH) is being executed</string>
+     <property name="currentIndex">
+      <number>0</number>
      </property>
     </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="Konsole::TabTitleFormatButton" name="remoteTabTitleFormatButton"/>
    </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KColorCombo</class>
+   <extends>QComboBox</extends>
+   <header>kcolorcombo.h</header>
+  </customwidget>
   <customwidget>
    <class>Konsole::TabTitleFormatButton</class>
    <extends>QPushButton</extends>

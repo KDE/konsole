@@ -164,7 +164,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect(_session.data(), &Konsole::Session::sessionAttributeChanged, this, &Konsole::SessionController::sessionAttributeChanged);
     connect(_session.data(), &Konsole::Session::readOnlyChanged, this, &Konsole::SessionController::sessionReadOnlyChanged);
 
-    connect(this, &Konsole::SessionController::tabRenamedByUser,  _session,  &Konsole::Session::tabTitleSetByUser);
+    connect(this, &Konsole::SessionController::tabRenamedByUser, _session, &Konsole::Session::tabTitleSetByUser);
+    connect(this, &Konsole::SessionController::tabColoredByUser, _session, &Konsole::Session::tabColorSetByUser);
 
     connect(_session.data() , &Konsole::Session::currentDirectoryChanged , this , &Konsole::SessionController::currentDirectoryChanged);
 
@@ -310,9 +311,18 @@ void SessionController::snapshot()
     if (title.isEmpty()) {
         title = _session->title(Session::NameRole);
     }
+    
+    QColor color = _session->color();
+    // use the fallback color if needed
+    if (!color.isValid()) {
+        color = QColor(QColor::Invalid);
+    }
 
     // apply new title
     _session->setTitle(Session::DisplayedTitleRole, title);
+
+    // apply new color
+    _session->setColor(color);
 
     // do not forget icon
     updateSessionIcon();
@@ -859,10 +869,12 @@ void SessionController::renameSession()
 {
     const QString &sessionLocalTabTitleFormat = _session->tabTitleFormat(Session::LocalTabTitle);
     const QString &sessionRemoteTabTitleFormat = _session->tabTitleFormat(Session::RemoteTabTitle);
+    const QColor &sessionTabColor = _session->color();
 
     QScopedPointer<RenameTabDialog> dialog(new RenameTabDialog(QApplication::activeWindow()));
     dialog->setTabTitleText(sessionLocalTabTitleFormat);
     dialog->setRemoteTabTitleText(sessionRemoteTabTitleFormat);
+    dialog->setColor(sessionTabColor);
 
     if (_session->isRemote()) {
         dialog->focusRemoteTabTitleText();
@@ -879,6 +891,7 @@ void SessionController::renameSession()
     if (result != 0) {
         const QString &tabTitle = dialog->tabTitleText();
         const QString &remoteTabTitle = dialog->remoteTabTitleText();
+        const QColor &tabColor = dialog->color();
 
         if (tabTitle != sessionLocalTabTitleFormat) {
             _session->setTabTitleFormat(Session::LocalTabTitle, tabTitle);
@@ -890,6 +903,12 @@ void SessionController::renameSession()
         if(remoteTabTitle != sessionRemoteTabTitleFormat) {
             _session->setTabTitleFormat(Session::RemoteTabTitle, remoteTabTitle);
             emit tabRenamedByUser(true);
+            snapshot();
+        }
+
+        if (tabColor != sessionTabColor) {
+            _session->setColor(tabColor);
+            emit tabColoredByUser(true);
             snapshot();
         }
     }
@@ -1659,6 +1678,7 @@ void SessionController::sessionAttributeChanged()
     }
 
     setTitle(title);
+    setColor(_session->color());
     emit rawTitleChanged();
 }
 

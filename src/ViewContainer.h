@@ -82,6 +82,8 @@ public:
 
     /** Sets tab title to item title if the view is active */
     void updateTitle(ViewProperties *item);
+    /** Sets tab color to item color if the view is active */
+    void updateColor(ViewProperties *item);
     /** Sets tab icon to item icon if the view is active */
     void updateIcon(ViewProperties *item);
     /** Sets tab activity status if the tab is not active */
@@ -204,6 +206,12 @@ Q_SIGNALS:
 
     /** detach the specific tab */
     void detachTab(int tabIdx);
+
+    /** set the color tab */
+    void setColor(int index, const QColor &color);
+
+    /** remve the color tab */
+    void removeColor(int idx);
 
 protected:
     // close tabs and unregister

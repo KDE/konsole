@@ -528,11 +528,14 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr &profile)
     // tab title format
     _tabsUi->renameTabWidget->setTabTitleText(profile->localTabTitleFormat());
     _tabsUi->renameTabWidget->setRemoteTabTitleText(profile->remoteTabTitleFormat());
+    _tabsUi->renameTabWidget->setColor(profile->tabColor());
 
     connect(_tabsUi->renameTabWidget, &Konsole::RenameTabWidget::tabTitleFormatChanged, this,
             &Konsole::EditProfileDialog::tabTitleFormatChanged);
     connect(_tabsUi->renameTabWidget, &Konsole::RenameTabWidget::remoteTabTitleFormatChanged, this,
             &Konsole::EditProfileDialog::remoteTabTitleFormatChanged);
+    connect(_tabsUi->renameTabWidget, &Konsole::RenameTabWidget::tabColorChanged, this,
+            &Konsole::EditProfileDialog::tabColorChanged);
 
     // tab monitoring
     const int silenceSeconds = profile->silenceSeconds();
@@ -575,6 +578,11 @@ void EditProfileDialog::tabTitleFormatChanged(const QString &format)
 void EditProfileDialog::remoteTabTitleFormatChanged(const QString &format)
 {
     updateTempProfileProperty(Profile::RemoteTabTitleFormat, format);
+}
+
+void EditProfileDialog::tabColorChanged(const QColor &color)
+{
+    updateTempProfileProperty(Profile::TabColor, color);
 }
 
 void EditProfileDialog::silenceSecondsChanged(int seconds)

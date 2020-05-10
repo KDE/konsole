@@ -38,8 +38,10 @@ public:
 
     QString tabTitleText() const;
     QString remoteTabTitleText() const;
+    QColor color() const;
     void setTabTitleText(const QString &);
     void setRemoteTabTitleText(const QString &);
+    void setColor(const QColor &);
 
     void focusTabTitleText();
     void focusRemoteTabTitleText();

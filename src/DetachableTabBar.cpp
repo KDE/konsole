@@ -27,6 +27,9 @@
 
 #include <KAcceleratorManager>
 
+#include <QPainter>
+#include <QColor>
+
 namespace Konsole {
 
 DetachableTabBar::DetachableTabBar(QWidget *parent) :
@@ -38,6 +41,16 @@ DetachableTabBar::DetachableTabBar(QWidget *parent) :
     setAcceptDrops(true);
     setElideMode(Qt::TextElideMode::ElideMiddle);
     KAcceleratorManager::setNoAccel(this);
+}
+
+void DetachableTabBar::setColor(int idx, const QColor &color)
+{
+    setTabData(idx, QColor(color));
+}
+
+void DetachableTabBar::removeColor(int idx)
+{
+    setTabData(idx, QVariant());
 }
 
 void DetachableTabBar::middleMouseButtonClickAt(const QPoint& pos)
@@ -137,6 +150,26 @@ void DetachableTabBar::dragMoveEvent(QDragMoveEvent* event)
     int tabIdx = tabAt(event->pos());
     if (tabIdx != -1) {
         setCurrentIndex(tabIdx);
+    }
+}
+
+void DetachableTabBar::paintEvent(QPaintEvent *event)
+{
+    QTabBar::paintEvent(event);
+
+    if (!event->isAccepted()) return;       // Reduces repainting
+
+    QPainter painter(this);
+    painter.setPen(Qt::NoPen);
+
+    for (int tabIndex = 0; tabIndex <= count(); tabIndex++) {
+        QColor varColor = tabData(tabIndex).value<QColor>();
+        if (!varColor.isValid()) {
+            continue;
+        }
+        varColor.setAlpha(tabIndex == currentIndex() ? 180 : 125);
+        painter.setBrush(varColor);
+        painter.drawRect(tabRect(tabIndex));
     }
 }
 
