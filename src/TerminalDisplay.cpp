@@ -4070,7 +4070,7 @@ void CompositeWidgetFocusWatcher::registerWidgetAndChildren(QWidget *widget)
     }
     for (auto *child: widget->children()) {
         auto *childWidget = qobject_cast<QWidget *>(child);
-        if (childWidget) {
+        if (childWidget != nullptr) {
             registerWidgetAndChildren(childWidget);
         }
     }

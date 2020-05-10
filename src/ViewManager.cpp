@@ -1023,7 +1023,7 @@ QStringList ViewManager::sessionList()
 
 int ViewManager::currentSession()
 {
-    if (_pluggedController) {
+    if (_pluggedController != nullptr) {
         Q_ASSERT(_pluggedController->session() != nullptr);
         return _pluggedController->session()->sessionId();
     }

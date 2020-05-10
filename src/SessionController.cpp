@@ -232,7 +232,7 @@ SessionController::~SessionController()
     if (!_editProfileDialog.isNull()) {
         delete _editProfileDialog.data();
     }
-    if(factory()) {
+    if(factory() != nullptr) {
         factory()->removeClient(this);
     }
 }
@@ -1718,7 +1718,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
         QSharedPointer<Filter::HotSpot> hotSpot = _view->filterActions(position);
-        if (hotSpot) {
+        if (hotSpot != nullptr) {
             popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions() << contentSeparator );
 
         }
