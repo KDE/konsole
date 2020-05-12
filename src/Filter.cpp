@@ -32,6 +32,7 @@
 #include <QString>
 #include <QTextStream>
 #include <QUrl>
+#include <QMenu>
 
 // KDE
 #include <KLocalizedString>
@@ -248,6 +249,11 @@ Filter::HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endCol
 QList<QAction *> Filter::HotSpot::actions()
 {
     return {};
+}
+
+void Filter::HotSpot::setupMenu(QMenu *)
+{
+
 }
 
 int Filter::HotSpot::startLine() const
@@ -542,4 +548,9 @@ QList<QAction *> FileFilter::HotSpot::actions()
     openAction->setText(i18n("Open File"));
     QObject::connect(openAction, &QAction::triggered, this, [this ]{ activate(); });
     return {openAction};
+}
+
+void FileFilter::HotSpot::setupMenu(QMenu *menu)
+{
+    menu->addAction(QStringLiteral("Teste"));
 }

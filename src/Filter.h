@@ -35,6 +35,7 @@
 #include "Character.h"
 
 class QAction;
+class QMenu;
 
 namespace Konsole {
 class Session;
@@ -123,6 +124,10 @@ public:
          */
         virtual QList<QAction *> actions();
 
+        /**
+         * Setups a menu with actions for the hotspot.
+         */
+        virtual void setupMenu(QMenu *menu);
     protected:
         /** Sets the type of a hotspot.  This should only be set once */
         void setType(Type type);
@@ -307,7 +312,7 @@ public:
          * Opens kate for editing the file.
          */
         void activate(QObject *object = nullptr) override;
-
+        void setupMenu(QMenu *menu) override;
     private:
         QString _filePath;
     };
