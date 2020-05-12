@@ -764,7 +764,7 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
     profilePage->setIcon(QIcon::fromTheme(QStringLiteral("preferences-system-profiles")));
     confDialog->addPage(profilePage, true);
 
-    const QString tabBarPageName = i18nc("@title Preferences page name", "Tab Bar");
+    const QString tabBarPageName = i18nc("@title Preferences page name", "Tab Bar / Splitters");
     auto tabBarPage = new KPageWidgetItem(new TabBarSettings(confDialog), tabBarPageName);
     tabBarPage->setIcon(QIcon::fromTheme(QStringLiteral("system-run")));
     confDialog->addPage(tabBarPage, true);

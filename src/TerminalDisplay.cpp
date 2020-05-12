@@ -22,6 +22,7 @@
 
 // Own
 #include "TerminalDisplay.h"
+#include "KonsoleSettings.h"
 
 // Config
 #include "config-konsole.h"
@@ -570,6 +571,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
 #ifndef QT_NO_ACCESSIBILITY
     QAccessible::installFactory(Konsole::accessibleInterfaceFactory);
 #endif
+
+    connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TerminalDisplay::setupHeaderVisibility);
 }
 
 TerminalDisplay::~TerminalDisplay()
@@ -584,6 +587,12 @@ TerminalDisplay::~TerminalDisplay()
 
     _readOnlyMessageWidget = nullptr;
     _outputSuspendedMessageWidget = nullptr;
+}
+
+void TerminalDisplay::setupHeaderVisibility()
+{
+    _headerBar->applyVisibilitySettings();
+    calcGeometry();
 }
 
 void TerminalDisplay::hideDragTarget()

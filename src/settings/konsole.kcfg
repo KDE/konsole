@@ -83,6 +83,26 @@
       <default>true</default>
     </entry>
   </group>
+  <group name="SplitView">
+    <entry name="SplitViewVisibility" type="Enum">
+      <label>Control the visibility of the whole tab bar</label>
+      <choices>
+        <choice name="AlwaysShowSplitHeader" />
+        <choice name="ShowSplitHeaderWhenNeeded" />
+        <choice name="AlwaysHideSplitHeader" />
+      </choices>
+      <default>ShowTabBarWhenNeeded</default>
+    </entry>
+    <entry name="SplitDragHandleSize" type="Enum">
+        <label> Control the size of the handle between panels </label>
+        <choices>
+            <choice name="SplitDragHandleSmall"/>
+            <choice name="SplitDragHandleMedium"/>
+            <choice name="SplitDragHandleLarge"/>
+        </choices>
+        <default>SplitDragHandleSmall</default>
+    </entry>
+  </group>
   <group name="TabBar">
     <entry name="TabBarVisibility" type="Enum">
       <label>Control the visibility of the whole tab bar</label>

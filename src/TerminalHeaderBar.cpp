@@ -24,6 +24,8 @@
 #include "TerminalDisplay.h"
 #include "SessionController.h"
 #include "ViewProperties.h"
+#include "KonsoleSettings.h"
+#include "ViewSplitter.h"
 
 #include <KLocalizedString>
 #include <QBoxLayout>
@@ -248,6 +250,44 @@ QSize TerminalHeaderBar::minimumSizeHint() const
 {
     auto height = sizeHint().height();
     return {height, height};
+}
+
+QSplitter *TerminalHeaderBar::getTopLevelSplitter()
+{
+    QWidget *p = parentWidget();
+    // This is expected.
+    if (qobject_cast<TerminalDisplay*>(p)) {
+        p = p->parentWidget();
+    }
+
+    // this is also expected.
+    auto *innerSplitter = qobject_cast<ViewSplitter*>(p);
+    if (!innerSplitter) {
+        return nullptr;
+    }
+
+    return innerSplitter->getToplevelSplitter();
+}
+
+void TerminalHeaderBar::applyVisibilitySettings()
+{
+    auto *settings = KonsoleSettings::self();
+    auto toVisibility = settings->splitViewVisibility();
+    switch (toVisibility)
+    {
+    case KonsoleSettings::AlwaysShowSplitHeader:
+        setVisible(true);
+    break;
+    case KonsoleSettings::ShowSplitHeaderWhenNeeded: {
+        const bool visible = !(getTopLevelSplitter()->findChildren<TerminalDisplay*>().count() == 1);
+        setVisible(visible);
+    }
+    break;
+    case KonsoleSettings::AlwaysHideSplitHeader:
+        setVisible(false);
+    default:
+        break;
+    }
 }
 
 }

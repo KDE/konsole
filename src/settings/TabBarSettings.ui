@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>382</width>
-    <height>418</height>
+    <width>507</width>
+    <height>473</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -29,7 +29,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="appearanceTab">
       <attribute name="title">
@@ -254,10 +254,10 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="filter" stdset="0">
+           <property name="filter">
             <string>text/css</string>
            </property>
-           <property name="placeholderText" stdset="0">
+           <property name="placeholderText">
             <string comment="@item:intext Optional file path is empty">(none)</string>
            </property>
           </widget>
@@ -372,6 +372,119 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="splitTab">
+      <attribute name="title">
+       <string>Splits</string>
+      </attribute>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Show Header</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QRadioButton" name="ShowSplitHeaderWhenNeeded">
+         <property name="text">
+          <string>When needed</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">kcfg_SplitViewVisibility</string>
+         </attribute>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QRadioButton" name="AlwaysHideSplitHeader">
+         <property name="text">
+          <string>Never</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">kcfg_SplitViewVisibility</string>
+         </attribute>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>16</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Drag Handle Size</string>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QRadioButton" name="SplitDragHandleSmall">
+         <property name="text">
+          <string>Small</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">kcfg_SplitDragHandleSize</string>
+         </attribute>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QRadioButton" name="SplitDragHandleMedium">
+         <property name="text">
+          <string>Medium</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">kcfg_SplitDragHandleSize</string>
+         </attribute>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QRadioButton" name="SplitDragHandleLarge">
+         <property name="text">
+          <string>Large</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">kcfg_SplitDragHandleSize</string>
+         </attribute>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="1">
+        <widget class="QRadioButton" name="AlwaysShowSplitHeader">
+         <property name="text">
+          <string>Always</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">kcfg_SplitViewVisibility</string>
+         </attribute>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -379,7 +492,7 @@
  <customwidgets>
   <customwidget>
    <class>KUrlRequester</class>
-   <extends>QFrame</extends>
+   <extends>QWidget</extends>
    <header>kurlrequester.h</header>
    <container>1</container>
   </customwidget>
@@ -405,54 +518,6 @@
   <connection>
    <sender>AlwaysHideTabBar</sender>
    <signal>toggled(bool)</signal>
-   <receiver>None</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>showCloseTabButtonLabel</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>OnTabBar</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
    <receiver>Bottom</receiver>
    <slot>setDisabled(bool)</slot>
    <hints>
@@ -469,39 +534,7 @@
   <connection>
    <sender>AlwaysHideTabBar</sender>
    <signal>toggled(bool)</signal>
-   <receiver>OnEachTab</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>positionLabel</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>AlwaysHideTabBar</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>Top</receiver>
+   <receiver>kcfg_TabBarUseUserStyleSheet</receiver>
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -549,7 +582,23 @@
   <connection>
    <sender>AlwaysHideTabBar</sender>
    <signal>toggled(bool)</signal>
-   <receiver>kcfg_TabBarUseUserStyleSheet</receiver>
+   <receiver>OnEachTab</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>positionLabel</receiver>
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -567,6 +616,70 @@
    <signal>toggled(bool)</signal>
    <receiver>kcfg_TabBarUserStyleSheetFile</receiver>
    <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>Top</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>showCloseTabButtonLabel</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>OnTabBar</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>AlwaysHideTabBar</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>None</receiver>
+   <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>20</x>
@@ -612,9 +725,11 @@
   </connection>
  </connections>
  <buttongroups>
+  <buttongroup name="kcfg_SplitDragHandleSize"/>
   <buttongroup name="kcfg_TabBarVisibility"/>
-  <buttongroup name="kcfg_NewTabBehavior"/>
-  <buttongroup name="kcfg_CloseTabButton"/>
   <buttongroup name="kcfg_TabBarPosition"/>
+  <buttongroup name="kcfg_CloseTabButton"/>
+  <buttongroup name="kcfg_NewTabBehavior"/>
+  <buttongroup name="kcfg_SplitViewVisibility"/>
  </buttongroups>
 </ui>

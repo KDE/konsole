@@ -29,6 +29,8 @@
 class QLabel;
 class QToolButton;
 class QBoxLayout;
+class QSplitter;
+
 namespace Konsole {
     class TerminalDisplay;
     class ViewProperties;
@@ -40,6 +42,8 @@ public:
     explicit TerminalHeaderBar(QWidget *parent = nullptr);
     void finishHeaderSetup(ViewProperties *properties);
     QSize minimumSizeHint() const override;
+    void applyVisibilitySettings();
+    QSplitter *getTopLevelSplitter();
 
 public Q_SLOTS:
     void setFocusIndicatorState(bool focused);

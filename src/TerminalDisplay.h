@@ -693,6 +693,8 @@ private:
 
     void paintFilters(QPainter &painter);
 
+    void setupHeaderVisibility();
+
     // returns a region covering all of the areas of the widget which contain
     // a hotspot
     QRegion hotSpotRegion() const;
