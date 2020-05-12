@@ -1721,6 +1721,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         QSharedPointer<Filter::HotSpot> hotSpot = _view->filterActions(position);
         if (hotSpot != nullptr) {
             popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions() << contentSeparator );
+            popup->addAction(contentSeparator);
             hotSpot->setupMenu(popup.data());
         }
 

@@ -37,6 +37,9 @@
 // KDE
 #include <KLocalizedString>
 #include <KRun>
+#include <KFileItem>
+#include <KFileItemListProperties>
+#include <KFileItemActions>
 
 // Konsole
 #include "Session.h"
@@ -544,13 +547,26 @@ FileFilter::HotSpot::~HotSpot() = default;
 
 QList<QAction *> FileFilter::HotSpot::actions()
 {
-    auto openAction = new QAction(this);
-    openAction->setText(i18n("Open File"));
-    QObject::connect(openAction, &QAction::triggered, this, [this ]{ activate(); });
-    return {openAction};
+    return {};
 }
 
 void FileFilter::HotSpot::setupMenu(QMenu *menu)
 {
-    menu->addAction(QStringLiteral("Teste"));
+    // We are reusing the QMenu, but we need to update the actions anyhow.
+    // Remove the 'Open with' actions from it, then add the new ones.
+    QList<QAction*> toDelete;
+    for (auto *action : menu->actions()) {
+        qDebug() << "Action:" << action->text();
+        if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
+            toDelete.append(action);
+        }
+    }
+    qDeleteAll(toDelete);
+
+    const KFileItem fileItem(QUrl::fromLocalFile(_filePath));
+    const KFileItemList itemList({fileItem});
+    const KFileItemListProperties itemProperties(itemList);
+    _menuActions.setParent(this);
+    _menuActions.setItemListProperties(itemProperties);
+    _menuActions.addOpenWithActionsTo(menu);
 }

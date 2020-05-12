@@ -29,6 +29,9 @@
 #include <QRegularExpression>
 #include <QMultiHash>
 
+// KDE
+#include <KFileItemActions>
+
 #include <memory>
 
 // Konsole
@@ -315,6 +318,7 @@ public:
         void setupMenu(QMenu *menu) override;
     private:
         QString _filePath;
+        KFileItemActions _menuActions;
     };
 
     explicit FileFilter(Session *session);
