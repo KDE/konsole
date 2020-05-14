@@ -522,11 +522,12 @@ void FileFilter::HotSpot::activate(QObject *)
 QString createFileRegex(const QStringList &patterns)
 {
     const QString filePattern = QStringLiteral(R"RG([A-Za-z0-9\._\-~]+)RG");
+    const QString filePatternSpa = QStringLiteral(R"RG([A-Za-z0-9\._\-~\s]+)RG");
     const QString pathPattern QStringLiteral(R"RG(([A-Za-z0-9\._\-/]+/))RG");
 
     QStringList suffixes = patterns.filter(QRegularExpression(QStringLiteral("^\\*") + filePattern + QStringLiteral("$")));
     QStringList prefixes = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("+\\*$")));
-    const QStringList fullNames = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("$")));
+    QStringList fullOptions = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("$")));
 
 
     suffixes.replaceInStrings(QStringLiteral("*"), QString());
@@ -534,20 +535,21 @@ QString createFileRegex(const QStringList &patterns)
     prefixes.replaceInStrings(QStringLiteral("*"), QString());
     prefixes.replaceInStrings(QStringLiteral("."), QStringLiteral("\\."));
 
-    return QString(
+    const QString suffixesRegexp = QLatin1Char('(') + suffixes.join(QLatin1Char('|')) + QLatin1Char(')');
+    const QString prefixesRegexp = QLatin1Char('(') + prefixes.join(QLatin1Char('|')) + QLatin1Char(')');
+
+    fullOptions.append(prefixesRegexp + filePattern);
+    fullOptions.append(filePattern + suffixesRegexp);
+
+    const QString fullRegexp (
         // Optional path in front
         pathPattern + QLatin1Char('?')
         + QLatin1Char('(')
-        // Files with known suffixes, e.g. "[A-Za-z0-9\\._\\-]+(txt|cpp|h|xml)"
-        + filePattern + QLatin1Char('(') + suffixes.join(QLatin1Char('|')) + QLatin1Char(')')
-        + QLatin1Char('|')
-        // Files with known prefixes, e.g. "(Makefile\\.)[A-Za-z0-9\\._\\-]+" to match "Makefile.am"
-        + QLatin1Char('(') + prefixes.join(QLatin1Char('|')) + QLatin1Char(')') + filePattern
-        + QLatin1Char('|')
-        // Files with known full names, e.g. "ChangeLog|COPYING"
-        + fullNames.join(QLatin1Char('|'))
+        + fullOptions.join(QLatin1Char('|'))
         + QLatin1Char(')')
     );
+
+    return fullRegexp;
 }
 
 FileFilter::FileFilter(Session *session) :
