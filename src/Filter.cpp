@@ -521,7 +521,7 @@ void FileFilter::HotSpot::activate(QObject *)
 
 QString createFileRegex(const QStringList &patterns)
 {
-    const QString filePattern = QStringLiteral(R"RG([A-Za-z0-9\._\-]+)RG");
+    const QString filePattern = QStringLiteral(R"RG([A-Za-z0-9\._\-~]+)RG");
     const QString pathPattern QStringLiteral(R"RG(([A-Za-z0-9\._\-/]+/))RG");
 
     QStringList suffixes = patterns.filter(QRegularExpression(QStringLiteral("^\\*") + filePattern + QStringLiteral("$")));
