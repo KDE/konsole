@@ -519,8 +519,11 @@ void FileFilter::HotSpot::activate(QObject *)
     new KRun(QUrl::fromLocalFile(_filePath), QApplication::activeWindow());
 }
 
-QString createFileRegex(const QStringList &patterns, const QString &filePattern, const QString &pathPattern)
+QString createFileRegex(const QStringList &patterns)
 {
+    const QString filePattern = QStringLiteral(R"RG([A-Za-z0-9\._\-]+)RG");
+    const QString pathPattern QStringLiteral(R"RG(([A-Za-z0-9\._\-/]+/))RG");
+
     QStringList suffixes = patterns.filter(QRegularExpression(QStringLiteral("^\\*") + filePattern + QStringLiteral("$")));
     QStringList prefixes = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("+\\*$")));
     const QStringList fullNames = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("$")));
@@ -563,10 +566,7 @@ FileFilter::FileFilter(Session *session) :
 
         patterns.removeDuplicates();
 
-        const QString fileRegex = createFileRegex(patterns,
-                                                  QStringLiteral("[A-Za-z0-9\\._\\-]+"),    // filenames regex
-                                                  QStringLiteral("([A-Za-z0-9\\._\\-/]+/)") // path regex
-                                                 );
+        const QString fileRegex = createFileRegex(patterns);
 
         const QString regex = QLatin1String("(\\b") + fileRegex + QLatin1String("\\b)") // file names with no spaces
                               + QLatin1Char('|')
