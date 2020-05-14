@@ -21,6 +21,7 @@
 #include "Filter.h"
 
 #include "konsoledebug.h"
+#include <algorithm>
 
 // Qt
 #include <QAction>
@@ -483,14 +484,10 @@ QSharedPointer<Filter::HotSpot> FileFilter::newHotSpot(int startLine, int startC
     // Return nullptr if it's not:
     // <current dir>/filename
     // <current dir>/childDir/filename
-    bool isChild = false;
-    for (const QString &s : _currentDirContents) {
-        if (filename.startsWith(s)) {
-            isChild = true;
-            break;
-        }
-    }
-    if (!isChild) {
+    auto match = std::find_if(std::begin(_currentDirContents), std::end(_currentDirContents),
+        [filename](const QString& s) { return filename.startsWith(s); });
+
+    if (match == std::end(_currentDirContents)) {
         return nullptr;
     }
 
