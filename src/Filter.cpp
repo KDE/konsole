@@ -519,7 +519,6 @@ void FileFilter::HotSpot::activate(QObject *)
 QString createFileRegex(const QStringList &patterns)
 {
     const QString filePattern = QStringLiteral(R"RG([A-Za-z0-9\._\-~]+)RG");
-    const QString filePatternSpa = QStringLiteral(R"RG([A-Za-z0-9\._\-~\s]+)RG");
     const QString pathPattern QStringLiteral(R"RG(([A-Za-z0-9\._\-/]+/))RG");
 
     QStringList suffixes = patterns.filter(QRegularExpression(QStringLiteral("^\\*") + filePattern + QStringLiteral("$")));
@@ -569,7 +568,9 @@ FileFilter::FileFilter(Session *session) :
 
         const QString regex = QLatin1String("(\\b") + fileRegex + QLatin1String("\\b)") // file names with no spaces
                               + QLatin1Char('|')
-                              + QLatin1String("('") + fileRegex + QLatin1String("')");  // file names with spaces
+                              + QLatin1String("'[^']*'")
+                              + QLatin1Char('|')// file names with spaces denoted by single quote
+                              + QLatin1String(R"RGX("[^"]*")RGX");  // file names with spaces denoted by double quotes
 
         re.setPattern(regex);
     }
