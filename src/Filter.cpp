@@ -516,65 +516,21 @@ void FileFilter::HotSpot::activate(QObject *)
     new KRun(QUrl::fromLocalFile(_filePath), QApplication::activeWindow());
 }
 
-QString createFileRegex(const QStringList &patterns)
-{
-    const QString filePattern = QStringLiteral(R"RG([A-Za-z0-9\._\-~]+)RG");
-    const QString pathPattern QStringLiteral(R"RG(([A-Za-z0-9\._\-/]+/))RG");
-
-    QStringList suffixes = patterns.filter(QRegularExpression(QStringLiteral("^\\*") + filePattern + QStringLiteral("$")));
-    QStringList prefixes = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("+\\*$")));
-    QStringList fullOptions = patterns.filter(QRegularExpression(QStringLiteral("^") + filePattern + QStringLiteral("$")));
-
-
-    suffixes.replaceInStrings(QStringLiteral("*"), QString());
-    suffixes.replaceInStrings(QStringLiteral("."), QStringLiteral("\\."));
-    prefixes.replaceInStrings(QStringLiteral("*"), QString());
-    prefixes.replaceInStrings(QStringLiteral("."), QStringLiteral("\\."));
-
-    const QString suffixesRegexp = QLatin1Char('(') + suffixes.join(QLatin1Char('|')) + QLatin1Char(')');
-    const QString prefixesRegexp = QLatin1Char('(') + prefixes.join(QLatin1Char('|')) + QLatin1Char(')');
-
-    fullOptions.append(prefixesRegexp + filePattern);
-    fullOptions.append(filePattern + suffixesRegexp);
-
-    const QString fullRegexp (
-        // Optional path in front
-        pathPattern + QLatin1Char('?')
-        + QLatin1Char('(')
-        + fullOptions.join(QLatin1Char('|'))
-        + QLatin1Char(')')
-    );
-
-    return fullRegexp;
-}
-
 FileFilter::FileFilter(Session *session) :
     _session(session)
     , _dirPath(QString())
     , _currentDirContents(QStringList())
 {
-    static QRegularExpression re = QRegularExpression(QString(), QRegularExpression::DontCaptureOption);
-    if (re.pattern().isEmpty()) {
-        QStringList patterns;
-        QMimeDatabase mimeDatabase;
-        const QList<QMimeType> allMimeTypes = mimeDatabase.allMimeTypes();
-        for (const QMimeType &mimeType : allMimeTypes) {
-            patterns.append(mimeType.globPatterns());
-        }
-
-        patterns.removeDuplicates();
-
-        const QString fileRegex = createFileRegex(patterns);
-
-        const QString regex = QLatin1String("(\\b") + fileRegex + QLatin1String("\\b)") // file names with no spaces
-                              + QLatin1Char('|')
-                              + QLatin1String("'[^']*'")
-                              + QLatin1Char('|')// file names with spaces denoted by single quote
-                              + QLatin1String(R"RGX("[^"]*")RGX");  // file names with spaces denoted by double quotes
-
-        re.setPattern(regex);
-    }
-
+    static auto re = QRegularExpression(
+        /* First part of the regexp means 'strings with spaces and starting with single quotes'
+         * Second part means "Strings with double quotes"
+         * Last part means "Everything else plus some special chars
+         * This is much smaller, and faster, than the previous regexp
+         * on the HotSpot creation we verify if this is indeed a file, so there's
+         * no problem on testing on random words on the screen.
+         */
+        QLatin1String(R"('[^']+'|"[^"]+"|[\w.~:]+)"),
+        QRegularExpression::DontCaptureOption);
     setRegExp(re);
 }
 
