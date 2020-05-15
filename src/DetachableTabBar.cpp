@@ -163,7 +163,7 @@ void DetachableTabBar::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setPen(Qt::NoPen);
 
-    for (int tabIndex = 0; tabIndex <= count(); tabIndex++) {
+    for (int tabIndex = 0; tabIndex < count(); tabIndex++) {
         QColor varColor = tabData(tabIndex).value<QColor>();
         if (!varColor.isValid()) {
             continue;
