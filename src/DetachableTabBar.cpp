@@ -165,7 +165,7 @@ void DetachableTabBar::paintEvent(QPaintEvent *event)
 
     for (int tabIndex = 0; tabIndex < count(); tabIndex++) {
         const QVariant data = tabData(tabIndex);
-        if (!data.isValid()) {
+        if (!data.isValid() || data.isNull()) {
             continue;
         }
 
