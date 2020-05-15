@@ -135,14 +135,15 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
 void DetachableTabBar::dragEnterEvent(QDragEnterEvent* event)
 {
     const auto dragId = QStringLiteral("konsole/terminal_display");
-    if (event->mimeData()->hasFormat(dragId)) {
-        auto other_pid = event->mimeData()->data(dragId).toInt();
-        // don't accept the drop if it's another instance of konsole
-        if (qApp->applicationPid() != other_pid) {
-            return;
-        }
-        event->accept();
+    if (!event->mimeData()->hasFormat(dragId)) {
+        return;
     }
+    auto other_pid = event->mimeData()->data(dragId).toInt();
+    // don't accept the drop if it's another instance of konsole
+    if (qApp->applicationPid() != other_pid) {
+        return;
+    }
+    event->accept();
 }
 
 void DetachableTabBar::dragMoveEvent(QDragMoveEvent* event)
