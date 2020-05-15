@@ -45,7 +45,7 @@ DetachableTabBar::DetachableTabBar(QWidget *parent) :
 
 void DetachableTabBar::setColor(int idx, const QColor &color)
 {
-    setTabData(idx, QColor(color));
+    setTabData(idx, color);
 }
 
 void DetachableTabBar::removeColor(int idx)
