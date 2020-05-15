@@ -156,8 +156,9 @@ void DetachableTabBar::dragMoveEvent(QDragMoveEvent* event)
 void DetachableTabBar::paintEvent(QPaintEvent *event)
 {
     QTabBar::paintEvent(event);
-
-    if (!event->isAccepted()) return;       // Reduces repainting
+    if (!event->isAccepted()) {
+        return;       // Reduces repainting
+    }
 
     QPainter painter(this);
     painter.setPen(Qt::NoPen);
