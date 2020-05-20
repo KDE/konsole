@@ -75,6 +75,7 @@
 #include "PrintOptions.h"
 #include "SaveHistoryTask.h"
 #include "SearchHistoryTask.h"
+#include "SessionGroup.h"
 
 // For Unix signal names
 #include <csignal>
