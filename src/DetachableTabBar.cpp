@@ -175,9 +175,13 @@ void DetachableTabBar::paintEvent(QPaintEvent *event)
             continue;
         }
 
-        varColor.setAlpha(tabIndex == currentIndex() ? 180 : 125);
         painter.setBrush(varColor);
-        painter.drawRect(tabRect(tabIndex));
+        QRect tRect = tabRect(tabIndex);
+        tRect.setTop(painter.fontMetrics().height() + 6);   // Color bar top position consider a height the font and fixed spacing of 6px
+        tRect.setHeight(4);
+        tRect.setLeft(tRect.left() + 6);
+        tRect.setWidth(tRect.width() - 6);
+        painter.drawRect(tRect);
     }
 }
 
