@@ -538,7 +538,7 @@ FileFilter::FileFilter(Session *session) :
          * on the HotSpot creation we verify if this is indeed a file, so there's
          * no problem on testing on random words on the screen.
          */
-        QLatin1String(R"('[^']+'|"[^"]+"|[\w.~:]+)"),
+        QLatin1String(R"('[^']+'|"[^"]+"|[\w.~:-]+)"),
         QRegularExpression::DontCaptureOption);
     setRegExp(re);
 }
