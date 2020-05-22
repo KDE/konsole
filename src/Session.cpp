@@ -1654,7 +1654,7 @@ void Session::saveSession(KConfigGroup& group)
     group.writePathEntry("WorkingDir", currentWorkingDirectory());
     group.writeEntry("LocalTab",       tabTitleFormat(LocalTabTitle));
     group.writeEntry("RemoteTab",      tabTitleFormat(RemoteTabTitle));
-    group.writeEntry("TabColor",       QString(color().name(QColor::HexArgb)));
+    group.writeEntry("TabColor",       color().isValid() ? color().name(QColor::HexArgb) : QString());
     group.writeEntry("SessionGuid",    _uniqueIdentifier.toString());
     group.writeEntry("Encoding",       QString::fromUtf8(codec()));
 }
