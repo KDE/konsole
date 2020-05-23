@@ -145,7 +145,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
 
     KAboutData::setApplicationData(about);
 
-    KCrash::3333initialize();
+    KCrash::initialize();
 
     QSharedPointer<QCommandLineParser> parser(new QCommandLineParser);
     parser->setApplicationDescription(about.shortDescription());
