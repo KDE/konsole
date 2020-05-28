@@ -677,7 +677,8 @@ void SessionController::setupCommonActions()
     _codecAction = new KCodecAction(i18n("Set &Encoding"), this);
     _codecAction->setIcon(QIcon::fromTheme(QStringLiteral("character-set")));
     collection->addAction(QStringLiteral("set-encoding"), _codecAction);
-    connect(_codecAction->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::updateCodecAction);
+    _codecAction->setCurrentCodec(QString::fromUtf8(_session->codec()));
+    connect(_session.data(), &Konsole::Session::sessionCodecChanged, this, &Konsole::SessionController::updateCodecAction);
     connect(_codecAction,
             QOverload<QTextCodec*>::of(&KCodecAction::triggered), this,
             &Konsole::SessionController::changeCodec);
@@ -828,9 +829,9 @@ void SessionController::prepareSwitchProfileMenu()
     _switchProfileMenu->menu()->clear();
     _switchProfileMenu->menu()->addActions(_profileList->actions());
 }
-void SessionController::updateCodecAction()
+void SessionController::updateCodecAction(QTextCodec *codec)
 {
-    _codecAction->setCurrentCodec(QString::fromUtf8(_session->codec()));
+    _codecAction->setCurrentCodec(codec);
 }
 
 void SessionController::changeCodec(QTextCodec* codec)

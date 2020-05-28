@@ -255,7 +255,7 @@ private Q_SLOTS:
     // other
     void setupSearchBar();
     void prepareSwitchProfileMenu();
-    void updateCodecAction();
+    void updateCodecAction(QTextCodec *codec);
     void showDisplayContextMenu(const QPoint &position);
     void movementKeyFromSearchBarReceived(QKeyEvent *event);
     void sessionStateChanged(int state);

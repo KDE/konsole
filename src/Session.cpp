@@ -236,6 +236,8 @@ void Session::setCodec(QTextCodec* codec)
     }
 
     emulation()->setCodec(codec);
+
+    emit sessionCodecChanged(codec);
 }
 
 bool Session::setCodec(const QByteArray& name)

@@ -634,6 +634,11 @@ Q_SIGNALS:
      */
     void currentDirectoryChanged(const QString &dir);
 
+    /**
+     * Emitted when the session text encoding changes.
+     */
+    void sessionCodecChanged(QTextCodec *codec);
+
     /** Emitted when a bell event occurs in the session. */
     void bellRequest(const QString &message);
 
