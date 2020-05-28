@@ -1725,6 +1725,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
 
     // encoding options
     auto codecAction = new KCodecAction(this);
+    codecAction->setCurrentCodec(profile->defaultEncoding());
     _advancedUi->selectEncodingButton->setMenu(codecAction->menu());
     connect(codecAction,
             QOverload<QTextCodec *>::of(&KCodecAction::triggered), this,
