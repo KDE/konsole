@@ -727,6 +727,16 @@ Comment[zh_CN]=被监视会话中检测到的静默
 Comment[zh_TW]=監控工作階段中偵測到靜默時的行為
 Action=Popup
 
+[Event/ProcessFinishedHidden]
+Name=Process finished in Non-Focused Monitored Session
+Comment=Process finished in a non-focused monitored session
+Action=Popup
+
+[Event/ProcessFinished]
+Name=Process finished in Monitored Session
+Comment=Process finished in a monitored session
+Action=Popup
+
 [Event/Finished]
 Name=Session Finished With Non-Zero Status
 Name[af]=Sessie het geëindig met nie-zero status 

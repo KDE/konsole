@@ -247,6 +247,7 @@ private Q_SLOTS:
     void clearHistoryAndReset();
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);
+    void monitorProcessFinish(bool monitor);
     void renameSession();
     void switchProfile(const Profile::Ptr &profile);
     void handleWebShortcutAction();
@@ -320,7 +321,6 @@ private:
 
     QIcon _sessionIcon;
     QString _sessionIconName;
-    int _previousState;
 
     RegExpFilter *_searchFilter;
     UrlFilter *_urlFilter;
@@ -359,6 +359,9 @@ private:
 
     QString _searchText;
     QPointer<IncrementalSearchBar> _searchBar;
+
+    QString _previousForegroundProcessName;
+    bool _monitorProcessFinish;
 };
 inline bool SessionController::isValid() const
 {

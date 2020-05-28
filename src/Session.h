@@ -108,6 +108,12 @@ public:
     bool isRunning() const;
 
     /**
+     * Returns true if the tab holding this session is currently selected
+     * and Konsole is the foreground window.
+     */
+    bool hasFocus() const;
+
+    /**
      * Adds a new view for this session.
      *
      * The viewing widget will display the output from the terminal and

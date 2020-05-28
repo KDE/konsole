@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="27">
+<kpartgui name="session" version="28">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
@@ -28,6 +28,7 @@
         <Menu name="view">
             <Action name="monitor-silence" group="session-view-operations"/>
             <Action name="monitor-activity" group="session-view-operations"/>
+            <Action name="monitor-process-finish" group="session-view-operations"/>
             <Separator group="session-view-operations"/>
             <Action name="view-readonly" group="session-view-operations"/>
             <Separator group="session-view-operations"/>
