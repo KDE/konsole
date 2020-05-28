@@ -999,16 +999,23 @@ void SessionController::closeSession()
         return;
     }
 
-    if (confirmClose()) {
-        if (_session->closeInNormalWay()) {
+    if (!confirmClose()) {
+        return;
+    }
+
+    if (!_session->closeInNormalWay()) {
+        if (!confirmForceClose()) {
             return;
-        } else if (confirmForceClose()) {
-            if (_session->closeInForceWay()) {
-                return;
-            } else {
-                qCDebug(KonsoleDebug) << "Konsole failed to close a session in any way.";
-            }
         }
+
+        if (!_session->closeInForceWay()) {
+            qCDebug(KonsoleDebug) << "Konsole failed to close a session in any way.";
+            return;
+        }
+    }
+
+    if (factory()) {
+        factory()->removeClient(this);
     }
 }
 
