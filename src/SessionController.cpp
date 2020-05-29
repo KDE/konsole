@@ -1732,11 +1732,13 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
     if (factory() == nullptr) {
         if (clientBuilder() == nullptr) {
             setClientBuilder(new KXMLGUIBuilder(_view));
+
+            // Client builder does not get deleted automatically
+            connect(this, &QObject::destroyed, this, [this]{ delete clientBuilder(); });
         }
 
-        auto factory = new KXMLGUIFactory(clientBuilder(), this);
+        auto factory = new KXMLGUIFactory(clientBuilder(), _view);
         factory->addClient(this);
-        ////qDebug() << "Created xmlgui factory" << factory;
     }
 
     QPointer<QMenu> popup = qobject_cast<QMenu*>(factory()->container(QStringLiteral("session-popup-menu"), this));
