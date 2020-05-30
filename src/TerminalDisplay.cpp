@@ -1420,19 +1420,22 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     // and draw appropriate visuals to indicate the presence of the hotspot
 
     const auto spots = _filterChain->hotSpots();
-    int urlNumber, urlNumInc;
+    int urlNumber = 0, urlNumInc;
     if (_reverseUrlHints) {
-        urlNumber = spots.size() + 1;
+        for (const auto &spot : spots) {
+            if (spot->type() == Filter::HotSpot::Link) {
+                urlNumber++;
+            }
+        }
+
         urlNumInc = -1;
     } else {
-        urlNumber = 0;
         urlNumInc = 1;
     }
-    for (const auto &spot : spots) {
-        urlNumber += urlNumInc;
 
+    for (const auto &spot : spots) {
         QRegion region;
-        if (spot->type() == Filter::HotSpot::Link) {
+        if (spot->type() == Filter::HotSpot::Link || spot->type() == Filter::HotSpot::EMailAddress) {
             QRect r;
             if (spot->startLine() == spot->endLine()) {
                 r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
@@ -1460,7 +1463,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 region |= r;
             }
 
-            if (_showUrlHint && urlNumber < 10) {
+            if (_showUrlHint && urlNumber >= 0 && urlNumber < 10 && spot->type() == Filter::HotSpot::Link) {
                 // Position at the beginning of the URL
                 QRect hintRect(*region.begin());
                 hintRect.setWidth(r.height());
@@ -1468,6 +1471,8 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 painter.setPen(Qt::white);
                 painter.drawRect(hintRect.adjusted(0, 0, -1, -1));
                 painter.drawText(hintRect, Qt::AlignCenter, QString::number(urlNumber));
+
+                urlNumber += urlNumInc;
             }
         }
 
@@ -1514,7 +1519,8 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                         endColumn * _fontWidth + _contentRect.left() - 1,
                         (line + 1)*_fontHeight + _contentRect.top() - 1);
             // Underline link hotspots
-            if (spot->type() == Filter::HotSpot::Link) {
+            const bool hasMouse = region.contains(mapFromGlobal(QCursor::pos()));
+            if ((spot->type() == Filter::HotSpot::Link && _showUrlHint) || hasMouse) {
                 QFontMetrics metrics(font());
 
                 // find the baseline (which is the invisible line that the characters in the font sit on,
@@ -1522,10 +1528,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 const int baseline = r.bottom() - metrics.descent();
                 // find the position of the underline below that
                 const int underlinePos = baseline + metrics.underlinePos();
-                if (_showUrlHint || region.contains(mapFromGlobal(QCursor::pos()))) {
-                    painter.drawLine(r.left() , underlinePos ,
-                                     r.right() , underlinePos);
-                }
+                painter.drawLine(r.left() , underlinePos, r.right() , underlinePos);
 
                 // Marker hotspots simply have a transparent rectangular shape
                 // drawn on top of them
@@ -2279,7 +2282,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     // handle filters
     // change link hot-spot appearance on mouse-over
     auto spot = _filterChain->hotSpotAt(charLine, charColumn);
-    if ((spot != nullptr) && spot->type() == Filter::HotSpot::Link) {
+    if ((spot != nullptr) && (spot->type() == Filter::HotSpot::Link || spot->type() == Filter::HotSpot::EMailAddress)) {
         QRegion previousHotspotArea = _mouseOverHotspotArea;
         _mouseOverHotspotArea = QRegion();
         QRect r;
@@ -2607,7 +2610,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
     if (!_screenWindow->screen()->hasSelection() && (_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
         auto spot = _filterChain->hotSpotAt(charLine, charColumn);
-        if ((spot != nullptr) && spot->type() == Filter::HotSpot::Link) {
+        if ((spot != nullptr) && (spot->type() == Filter::HotSpot::Link || spot->type() == Filter::HotSpot::EMailAddress)) {
             spot->activate();
         }
     }
@@ -3586,13 +3589,19 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
     if ((_urlHintsModifiers != 0u) && event->modifiers() == _urlHintsModifiers) {
-        int nHotSpots = _filterChain->hotSpots().count();
+        QList<QSharedPointer<Filter::HotSpot>> hotspots;
+        for (const auto &spot : _filterChain->hotSpots()) {
+            if (spot->type() == Filter::HotSpot::Link) {
+                hotspots.append(spot);
+            }
+        }
+        int nHotSpots = hotspots.count();
         int hintSelected = event->key() - 0x31;
         if (hintSelected >= 0 && hintSelected < 10 && hintSelected < nHotSpots) {
             if (_reverseUrlHints) {
                 hintSelected = nHotSpots - hintSelected - 1;
             }
-            _filterChain->hotSpots().at(hintSelected)->activate();
+            hotspots.at(hintSelected)->activate();
             _showUrlHint = false;
             update();
             return;

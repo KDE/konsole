@@ -101,6 +101,8 @@ public:
             NotSpecified,
             // this hotspot represents a clickable link
             Link,
+            // this hotspot represents a clickable e-mail address
+            EMailAddress,
             // this hotspot represents a marker
             Marker
         };
