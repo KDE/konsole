@@ -495,10 +495,7 @@ QSharedPointer<Filter::HotSpot> FileFilter::newHotSpot(int startLine, int startC
     // Return nullptr if it's not:
     // <current dir>/filename
     // <current dir>/childDir/filename
-    auto match = std::find_if(std::begin(_currentDirContents), std::end(_currentDirContents),
-        [filename](const QString& s) { return filename.startsWith(s); });
-
-    if (match == std::end(_currentDirContents)) {
+    if (!_currentDirContents.contains(filename)) {
         return nullptr;
     }
 
@@ -509,8 +506,14 @@ void FileFilter::process()
 {
     const QDir dir(_session->currentWorkingDirectory());
     _dirPath = dir.canonicalPath() + QLatin1Char('/');
-    _currentDirContents = dir.entryList(QDir::Dirs | QDir::Files);
-
+#if QT_VERSION >= QT_VERSION_CHECK(5,14,0)
+    {
+        const auto tmpList = dir.entryList(QDir::Dirs | QDir::Files);
+        _currentDirContents = QSet<QString>(std::begin(tmpList), std::end(tmpList));
+    }
+#else
+    _currentDirContents = QSet<QString>::fromList(dir.entryList(QDir::Dirs | QDir::Files));
+#endif
     RegExpFilter::process();
 }
 
@@ -530,7 +533,7 @@ void FileFilter::HotSpot::activate(QObject *)
 FileFilter::FileFilter(Session *session) :
     _session(session)
     , _dirPath(QString())
-    , _currentDirContents(QStringList())
+    , _currentDirContents()
 {
     Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
     QString wordCharacters = profile->wordCharacters();

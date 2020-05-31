@@ -331,7 +331,7 @@ protected:
 private:
     QPointer<Session> _session;
     QString _dirPath;
-    QStringList _currentDirContents;
+    QSet<QString> _currentDirContents;
 };
 
 /**
