@@ -505,15 +505,19 @@ QSharedPointer<Filter::HotSpot> FileFilter::newHotSpot(int startLine, int startC
 void FileFilter::process()
 {
     const QDir dir(_session->currentWorkingDirectory());
-    _dirPath = dir.canonicalPath() + QLatin1Char('/');
+    // Do not re-process.
+    if (_dirPath != dir.canonicalPath() + QLatin1Char('/')) {
+        _dirPath = dir.canonicalPath() + QLatin1Char('/');
 #if QT_VERSION >= QT_VERSION_CHECK(5,14,0)
-    {
+
         const auto tmpList = dir.entryList(QDir::Dirs | QDir::Files);
         _currentDirContents = QSet<QString>(std::begin(tmpList), std::end(tmpList));
-    }
+
 #else
-    _currentDirContents = QSet<QString>::fromList(dir.entryList(QDir::Dirs | QDir::Files));
+        _currentDirContents = QSet<QString>::fromList(dir.entryList(QDir::Dirs | QDir::Files));
 #endif
+    }
+
     RegExpFilter::process();
 }
 
