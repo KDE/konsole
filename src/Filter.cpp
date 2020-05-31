@@ -44,6 +44,8 @@
 // Konsole
 #include "Session.h"
 #include "TerminalCharacterDecoder.h"
+#include "ProfileManager.h"
+#include "SessionManager.h"
 
 using namespace Konsole;
 
@@ -530,6 +532,24 @@ FileFilter::FileFilter(Session *session) :
     , _dirPath(QString())
     , _currentDirContents(QStringList())
 {
+    Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
+    QString wordCharacters = profile->wordCharacters();
+
+    /* The wordCharacters can be a potentially broken regexp,
+     * so let's fix it manually if it has some troublesome characters.
+     */
+    // Add a folder delimiter at the beginning.
+    if (wordCharacters.contains(QLatin1Char('/'))) {
+        wordCharacters.remove(QLatin1Char('/'));
+        wordCharacters.prepend(QStringLiteral("\\/"));
+    }
+
+    // Add minus at the end.
+    if (wordCharacters.contains(QLatin1Char('-'))){
+        wordCharacters.remove(QLatin1Char('-'));
+        wordCharacters.append(QLatin1Char('-'));
+    }
+
     static auto re = QRegularExpression(
         /* First part of the regexp means 'strings with spaces and starting with single quotes'
          * Second part means "Strings with double quotes"
@@ -538,11 +558,10 @@ FileFilter::FileFilter(Session *session) :
          * on the HotSpot creation we verify if this is indeed a file, so there's
          * no problem on testing on random words on the screen.
          */
-        QLatin1String(
-            "'[^']+'"             // Matches everything between single quotes.
-            R"RX(|"[^"]+")RX"     // Matches everything inside double quotes
-            R"RX(|[\w\/.~:-]+)RX" // matches a contiguous line of alphanumeric characters plus some special ones.
-        ),
+            QLatin1String("'[^']+'")             // Matches everything between single quotes.
+            + QStringLiteral(R"RX(|"[^"]+")RX")      // Matches everything inside double quotes
+            + QStringLiteral(R"RX(|[\w%1]+)RX").arg(wordCharacters) // matches a contiguous line of alphanumeric characters plus some special ones defined in the profile.
+        ,
         QRegularExpression::DontCaptureOption);
     setRegExp(re);
 }
