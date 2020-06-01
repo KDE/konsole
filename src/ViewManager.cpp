@@ -248,6 +248,7 @@ void ViewManager::setupActions()
         action = new QAction(i18nc("@action Shortcut entry", "Switch to Tab %1", i + 1), this);
         connect(action, &QAction::triggered, this, [this, i]() { switchToView(i); });
         collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), action);
+        _multiTabOnlyActions << action;
 
         // only add default shortcut bindings for the first 9 tabs, regardless of SWITCH_TO_TAB_COUNT
         if (i < 9) {
