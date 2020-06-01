@@ -252,9 +252,12 @@ void ViewManager::setupActions()
         collection->addAction(QStringLiteral("switch-to-tab-%1").arg(i), action);
         _multiTabOnlyActions << action;
 
-        // only add default shortcut bindings for the first 9 tabs, regardless of SWITCH_TO_TAB_COUNT
+        // only add default shortcut bindings for the first 10 tabs, regardless of SWITCH_TO_TAB_COUNT
         if (i < 9) {
             collection->setDefaultShortcut(action, QStringLiteral("Alt+%1").arg(i + 1));
+        } else if (i == 9) {
+            // add shortcut for 10th tab
+            collection->setDefaultShortcut(action, Qt::ALT + Qt::Key_0);
         }
     }
 
