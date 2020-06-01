@@ -729,12 +729,16 @@ Action=Popup
 
 [Event/ProcessFinishedHidden]
 Name=Process finished in Non-Focused Monitored Session
+Name[x-test]=xxProcess finished in Non-Focused Monitored Sessionxx
 Comment=Process finished in a non-focused monitored session
+Comment[x-test]=xxProcess finished in a non-focused monitored sessionxx
 Action=Popup
 
 [Event/ProcessFinished]
 Name=Process finished in Monitored Session
+Name[x-test]=xxProcess finished in Monitored Sessionxx
 Comment=Process finished in a monitored session
+Comment[x-test]=xxProcess finished in a monitored sessionxx
 Action=Popup
 
 [Event/Finished]
