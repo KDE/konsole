@@ -729,15 +729,23 @@ Action=Popup
 
 [Event/ProcessFinishedHidden]
 Name=Process finished in Non-Focused Monitored Session
+Name[nl]=Proces beëindigd in gevolgde sessie zonder focus
+Name[uk]=У нефокусованому сеансі спостереження завершено процес
 Name[x-test]=xxProcess finished in Non-Focused Monitored Sessionxx
 Comment=Process finished in a non-focused monitored session
+Comment[nl]=Proces beëindigd in een gevolgde sessie zonder focus
+Comment[uk]=У нефокусованому сеансі спостереження завершено роботу процесу
 Comment[x-test]=xxProcess finished in a non-focused monitored sessionxx
 Action=Popup
 
 [Event/ProcessFinished]
 Name=Process finished in Monitored Session
+Name[nl]=Proces beëindigd in gevolgde sessie
+Name[uk]=У сеансі спостереження завершено процес
 Name[x-test]=xxProcess finished in Monitored Sessionxx
 Comment=Process finished in a monitored session
+Comment[nl]=Proces beëindigd in een gevolgde sessie
+Comment[uk]=У сеансі спостереження завершено роботу процесу
 Comment[x-test]=xxProcess finished in a monitored sessionxx
 Action=Popup
 
