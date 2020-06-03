@@ -41,6 +41,10 @@ void SearchHistoryTask::execute()
         iter.next();
         executeOnScreenWindow(iter.key() , iter.value());
     }
+
+    if (autoDelete()) {
+        deleteLater();
+    }
 }
 
 void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session , const ScreenWindowPtr& window)
