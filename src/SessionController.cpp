@@ -221,8 +221,14 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     // A list of programs that accept Ctrl+C to clear command line used
     // before outputting bookmark.
-    _bookmarkValidProgramsToClear << QStringLiteral("bash") << QStringLiteral("fish") << QStringLiteral("sh");
-    _bookmarkValidProgramsToClear << QStringLiteral("tcsh") << QStringLiteral("zsh");
+    _bookmarkValidProgramsToClear = QStringList({
+        QStringLiteral("bash"),
+        QStringLiteral("fish"),
+        QStringLiteral("sh"),
+        QStringLiteral("tcsh"),
+        QStringLiteral("zsh")
+    });
+
     setupSearchBar();
     _searchBar->setVisible(_isSearchBarEnabled);
 }
@@ -510,7 +516,7 @@ void SessionController::handleWebShortcutAction()
 
     KUriFilterData filterData(action->data().toString());
 
-    if (KUriFilter::self()->filterUri(filterData, QStringList() << QStringLiteral("kurisearchfilter"))) {
+    if (KUriFilter::self()->filterUri(filterData, { QStringLiteral("kurisearchfilter") })) {
         const QUrl& url = filterData.uri();
         new KRun(url, QApplication::activeWindow());
     }
@@ -518,7 +524,7 @@ void SessionController::handleWebShortcutAction()
 
 void SessionController::configureWebShortcuts()
 {
-    KToolInvocation::kdeinitExec(QStringLiteral("kcmshell5"), QStringList() << QStringLiteral("webshortcuts"));
+    KToolInvocation::kdeinitExec(QStringLiteral("kcmshell5"), { QStringLiteral("webshortcuts") });
 }
 
 void SessionController::sendSignal(QAction* action)
@@ -1550,7 +1556,7 @@ void SessionController::print_screen()
     QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, _view);
     auto options = new PrintOptions();
 
-    dialog->setOptionTabs(QList<QWidget*>() << options);
+    dialog->setOptionTabs({options});
     dialog->setWindowTitle(i18n("Print Shell"));
     connect(dialog,
             QOverload<>::of(&QPrintDialog::accepted),
