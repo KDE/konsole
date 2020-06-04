@@ -1539,8 +1539,11 @@ void EditProfileDialog::setupButtonGroup(const ButtonGroupOptions &options, cons
         activeButton = options.buttons[0].button;
     }
     activeButton->setChecked(true);
-
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+    connect(options.group, QOverload<int>::of(&QButtonGroup::idClicked),
+#else
     connect(options.group, QOverload<int>::of(&QButtonGroup::buttonClicked),
+#endif
             this, [this, options](int value) {
         if (options.preview) {
             preview(options.profileProperty, value);
