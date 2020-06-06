@@ -2231,15 +2231,6 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
             } else if (_usesMouseTracking && !_readOnly) {
                     emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
             }
-
-            if ((_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
-                auto spot = _filterChain->hotSpotAt(charLine, charColumn);
-                if ((spot != nullptr) && spot->type() == Filter::HotSpot::Link) {
-                    QObject action;
-                    action.setObjectName(QStringLiteral("open-action"));
-                    spot->activate(&action);
-                }
-            }
         }
     } else if (ev->button() == Qt::MidButton) {
         processMidButtonClick(ev);
@@ -2597,6 +2588,13 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
                          charColumn + 1,
                          charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
                          2);
+    }
+
+    if (!_screenWindow->screen()->hasSelection() && (_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
+        auto spot = _filterChain->hotSpotAt(charLine, charColumn);
+        if ((spot != nullptr) && spot->type() == Filter::HotSpot::Link) {
+            spot->activate();
+        }
     }
 }
 

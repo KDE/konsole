@@ -454,6 +454,9 @@ public:
     /** Clears the current selection */
     void clearSelection();
 
+    /** Return the selection state */
+    bool hasSelection() const;
+
     /**
       *  Returns true if the character at (@p x, @p y) is part of the
       *  current selection.
