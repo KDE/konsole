@@ -1835,6 +1835,7 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     Q_ASSERT(!_textBlinking);
 
     _showUrlHint = false;
+    FileFilter::HotSpot::stopThumbnailGeneration();
 }
 
 void TerminalDisplay::focusInEvent(QFocusEvent*)
@@ -2262,6 +2263,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
 {
     int charLine = 0;
     int charColumn = 0;
+
     getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
 
     processFilters();
@@ -2302,6 +2304,15 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
             setCursor(Qt::PointingHandCursor);
         }
 
+        /* can't use qobject_cast because moc is broken for inner classes */
+        auto fileSpot = spot.dynamicCast<FileFilter::HotSpot>();
+        if (fileSpot != _currentlyHoveredHotspot) {
+            _currentlyHoveredHotspot = fileSpot;
+            if (fileSpot) {
+                fileSpot->requestThumbnail(ev->modifiers(), ev->globalPos());
+            }
+        }
+
         update(_mouseOverHotspotArea | previousHotspotArea);
     } else if (!_mouseOverHotspotArea.isEmpty()) {
         if ((_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u)) || (cursor().shape() == Qt::PointingHandCursor)) {
@@ -2311,6 +2322,8 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         update(_mouseOverHotspotArea);
         // set hotspot area to an invalid rectangle
         _mouseOverHotspotArea = QRegion();
+        FileFilter::HotSpot::stopThumbnailGeneration();
+        _currentlyHoveredHotspot.clear();
     }
 
     // for auto-hiding the cursor, we need mouseTracking
@@ -3562,6 +3575,14 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
             _showUrlHint = true;
             update();
         }
+    }
+
+    if (_currentlyHoveredHotspot) {
+        auto fileHotspot = _currentlyHoveredHotspot.dynamicCast<FileFilter::HotSpot>();
+        if (!fileHotspot) {
+            return;
+        }
+        fileHotspot->requestThumbnail(event->modifiers(), QCursor::pos());
     }
 
     _screenWindow->screen()->setCurrentTerminalDisplay(this);

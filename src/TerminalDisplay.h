@@ -886,6 +886,8 @@ private:
     Qt::Edge _overlayEdge;
 
     bool _hasCompositeFocus;
+
+    QSharedPointer<Filter::HotSpot> _currentlyHoveredHotspot;
 };
 
 class AutoScrollHandler : public QObject

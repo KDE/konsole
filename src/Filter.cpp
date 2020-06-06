@@ -21,6 +21,8 @@
 #include "Filter.h"
 
 #include "konsoledebug.h"
+#include "KonsoleSettings.h"
+
 #include <algorithm>
 
 // Qt
@@ -33,6 +35,11 @@
 #include <QTextStream>
 #include <QUrl>
 #include <QMenu>
+#include <QMouseEvent>
+#include <QToolTip>
+#include <QBuffer>
+#include <QToolTip>
+#include <QTimer>
 
 // KDE
 #include <KLocalizedString>
@@ -40,6 +47,7 @@
 #include <KFileItem>
 #include <KFileItemListProperties>
 #include <KFileItemActions>
+#include <KIO/PreviewJob>
 
 // Konsole
 #include "Session.h"
@@ -598,4 +606,97 @@ void FileFilter::HotSpot::setupMenu(QMenu *menu)
     _menuActions.setParent(this);
     _menuActions.setItemListProperties(itemProperties);
     _menuActions.addOpenWithActionsTo(menu);
+}
+
+// Static variables for the HotSpot
+qintptr FileFilter::HotSpot::currentThumbnailHotspot = 0;
+bool FileFilter::HotSpot::_canGenerateThumbnail = false;
+QPointer<KIO::PreviewJob> FileFilter::HotSpot::_previewJob;
+
+void FileFilter::HotSpot::requestThumbnail(Qt::KeyboardModifiers modifiers, const QPoint &pos) {
+    _canGenerateThumbnail = true;
+    currentThumbnailHotspot = reinterpret_cast<qintptr>(this);
+    _eventModifiers = modifiers;
+    _eventPos = pos;
+
+    // Defer the real creation of the thumbnail by a few msec.
+    QTimer::singleShot(250, this, [this]{
+        if (currentThumbnailHotspot != reinterpret_cast<qintptr>(this)) {
+            return;
+        }
+
+        thumbnailRequested();
+    });
+}
+
+void FileFilter::HotSpot::stopThumbnailGeneration()
+{
+    _canGenerateThumbnail = false;
+    if (_previewJob) {
+        _previewJob->deleteLater();
+        QToolTip::hideText();
+    }
+}
+
+void Konsole::FileFilter::HotSpot::showThumbnail(const KFileItem& item, const QPixmap& preview)
+{
+    if (!_canGenerateThumbnail) {
+        return;
+    }
+    _thumbnailFinished = true;
+    Q_UNUSED(item)
+    QByteArray data;
+    QBuffer buffer(&data);
+    preview.save(&buffer, "PNG", 100);
+
+    const auto tooltipString = QStringLiteral("<img src='data:image/png;base64, %0'>")
+        .arg(QString::fromLocal8Bit(data.toBase64()));
+
+    QToolTip::showText(_thumbnailPos, tooltipString, qApp->focusWidget());
+}
+
+void FileFilter::HotSpot::thumbnailRequested() {
+    if (!_canGenerateThumbnail) {
+        return;
+    }
+
+    auto *settings = KonsoleSettings::self();
+
+    Qt::KeyboardModifiers modifiers = settings->thumbnailCtrl() ? Qt::ControlModifier : Qt::NoModifier;
+    modifiers |= settings->thumbnailAlt() ? Qt::AltModifier : Qt::NoModifier;
+    modifiers |= settings->thumbnailShift() ? Qt::ShiftModifier : Qt::NoModifier;
+
+    if (_eventModifiers != modifiers) {
+        return;
+    }
+
+    _thumbnailPos = QPoint(_eventPos.x() + 100, _eventPos.y() - settings->thumbnailSize() / 2);
+
+    const int size = KonsoleSettings::thumbnailSize();
+    if (_previewJob) {
+        _previewJob->deleteLater();
+    }
+
+    _thumbnailFinished = false;
+
+    // Show a "Loading" if Preview takes a long time.
+    QTimer::singleShot(10, this, [this]{
+        if (!_previewJob) {
+            return;
+        }
+        if (!_thumbnailFinished) {
+            QToolTip::showText(_thumbnailPos, i18n("Generating Thumbnail"), qApp->focusWidget());
+        }
+    });
+
+    _previewJob = new KIO::PreviewJob(KFileItemList({fileItem()}), QSize(size, size));
+    connect(_previewJob, &KIO::PreviewJob::gotPreview, this, &FileFilter::HotSpot::showThumbnail);
+    connect(_previewJob, &KIO::PreviewJob::failed, this, []{ QToolTip::hideText(); });
+    _previewJob->setAutoDelete(true);
+    _previewJob->start();
+}
+
+KFileItem Konsole::FileFilter::HotSpot::fileItem() const
+{
+    return KFileItem(QUrl::fromLocalFile(_filePath));
 }

@@ -158,7 +158,8 @@ ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 settings/GeneralSettings.ui
                                 settings/PartInfo.ui
                                 settings/ProfileSettings.ui
-                                settings/TabBarSettings.ui)
+                                settings/TabBarSettings.ui
+                                settings/ThumbnailsSettings.ui)
 
 # add the resource files for the ui files
 qt5_add_resources( konsoleprivate_SRCS ../desktop/konsole.qrc)
@@ -182,7 +183,9 @@ set(konsole_KDEINIT_SRCS
    settings/TemporaryFilesSettings.cpp
    settings/GeneralSettings.cpp
    settings/ProfileSettings.cpp
-   settings/TabBarSettings.cpp)
+   settings/TabBarSettings.cpp
+   settings/ThumbnailsSettings.cpp
+)
 
 
 # Sets the icon on Windows and OSX

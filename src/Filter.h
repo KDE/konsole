@@ -28,9 +28,13 @@
 #include <QStringList>
 #include <QRegularExpression>
 #include <QMultiHash>
+#include <QRect>
+#include <QPoint>
 
 // KDE
 #include <KFileItemActions>
+#include <KFileItem>
+#include <KIO/PreviewJob>
 
 #include <memory>
 
@@ -39,6 +43,8 @@
 
 class QAction;
 class QMenu;
+class QMouseEvent;
+class KFileItem;
 
 namespace Konsole {
 class Session;
@@ -316,9 +322,29 @@ public:
          */
         void activate(QObject *object = nullptr) override;
         void setupMenu(QMenu *menu) override;
+
+        KFileItem fileItem() const;
+        void requestThumbnail(Qt::KeyboardModifiers modifiers, const QPoint &pos);
+        void thumbnailRequested();
+
+        static void stopThumbnailGeneration();
     private:
+        void showThumbnail(const KFileItem& item, const QPixmap& preview);
         QString _filePath;
         KFileItemActions _menuActions;
+
+        QPoint _eventPos;
+        QPoint _thumbnailPos;
+        Qt::KeyboardModifiers _eventModifiers;
+        bool _thumbnailFinished;
+
+        /* This variable stores the pointer of the active HotSpot that
+         * is generating the thumbnail now, so we can bail out early.
+         * it's not used for pointer access.
+         */
+        static qintptr currentThumbnailHotspot;
+        static bool _canGenerateThumbnail;
+        static QPointer<KIO::PreviewJob> _previewJob;
     };
 
     explicit FileFilter(Session *session);

@@ -40,6 +40,28 @@
       <default>false</default>
     </entry>
   </group>
+  <group name="ThumbnailsSettings">
+      <entry name="ThumbnailSize" type="Int">
+        <label> Thumbnail Width </label>
+        <tooltip> Sets the width of the thumbnail </tooltip>
+        <default> 250 </default>
+      </entry>
+     <entry name="ThumbnailShift" type="bool">
+        <label> Use shift to display a thumbnail </label>
+        <tooltip> Use shift to display a thumbnail </tooltip>
+        <default> false </default>
+      </entry>
+     <entry name="ThumbnailAlt" type="bool">
+        <label> Use alt to display a thumbnail </label>
+        <tooltip> Use alt to display a thumbnail </tooltip>
+        <default> false </default>
+      </entry>
+     <entry name="ThumbnailCtrl" type="bool">
+        <label> Use ctrl to display a thumbnail </label>
+        <tooltip> Use ctrl to display a thumbnail </tooltip>
+        <default> false </default>
+      </entry>
+  </group>
   <group name="SearchSettings">
     <entry name="SearchCaseSensitive" type="Bool">
       <label>Search is case sensitive</label>

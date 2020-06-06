@@ -58,6 +58,7 @@
 #include "settings/GeneralSettings.h"
 #include "settings/ProfileSettings.h"
 #include "settings/TabBarSettings.h"
+#include "settings/ThumbnailsSettings.h"
 
 using namespace Konsole;
 
@@ -772,6 +773,11 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
     auto temporaryFilesPage = new KPageWidgetItem(new TemporaryFilesSettings(confDialog), temporaryFilesPageName);
     temporaryFilesPage->setIcon(QIcon::fromTheme(QStringLiteral("folder-temp")));
     confDialog->addPage(temporaryFilesPage, true);
+
+    const QString thumbnailPageName = i18nc("@title Preferences page name", "Thumbnails");
+    auto thumbnailPage = new KPageWidgetItem(new ThumbnailsSettings(confDialog), thumbnailPageName);
+    thumbnailPage->setIcon(QIcon::fromTheme(QStringLiteral("image-jpeg")));
+    confDialog->addPage(thumbnailPage, true);
 
     if (showProfilePage) {
         confDialog->setCurrentPage(profilePage);
