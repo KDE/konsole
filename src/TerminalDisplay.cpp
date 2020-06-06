@@ -129,7 +129,7 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
         connect(_screenWindow.data(), &Konsole::ScreenWindow::scrolled, this, [this]() {
             _filterUpdateRequired = true;
         });
-        connect(_screenWindow.data(), &Konsole::ScreenWindow::outputChanged, this, [this]() {
+        connect(_screenWindow.data(), &Konsole::ScreenWindow::outputChanged, this, []() {
             QGuiApplication::inputMethod()->update(Qt::ImCursorRectangle);
         });
         _screenWindow->setWindowLines(_lines);
