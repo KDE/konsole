@@ -129,6 +129,9 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
         connect(_screenWindow.data(), &Konsole::ScreenWindow::scrolled, this, [this]() {
             _filterUpdateRequired = true;
         });
+        connect(_screenWindow.data(), &Konsole::ScreenWindow::outputChanged, this, [this]() {
+            QGuiApplication::inputMethod()->update(Qt::ImCursorRectangle);
+        });
         _screenWindow->setWindowLines(_lines);
     }
 }
@@ -3407,7 +3410,7 @@ QVariant TerminalDisplay::inputMethodQuery(Qt::InputMethodQuery query) const
 {
     const QPoint cursorPos = cursorPosition();
     switch (query) {
-    case Qt::ImMicroFocus:
+    case Qt::ImCursorRectangle:
         return imageToWidget(QRect(cursorPos.x(), cursorPos.y(), 1, 1));
     case Qt::ImFont:
         return font();
