@@ -503,7 +503,10 @@ QSharedPointer<Filter::HotSpot> FileFilter::newHotSpot(int startLine, int startC
     // Return nullptr if it's not:
     // <current dir>/filename
     // <current dir>/childDir/filename
-    if (!_currentDirContents.contains(filename)) {
+    auto match = std::find_if(_currentDirContents.cbegin(), _currentDirContents.cend(),
+                              [filename](const QString &s) { return filename.startsWith(s); });
+
+    if (match == _currentDirContents.cend()) {
         return nullptr;
     }
 
