@@ -41,7 +41,7 @@
 <holder>&Jonathan.Singer;</holder>
 </copyright>
 <copyright>
-    <year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year><year>2016</year><year>2017</year><year>2018</year>
+    <year>2005</year><year>2008</year><year>2009</year><year>2010</year><year>2011</year><year>2014</year><year>2016</year><year>2017</year><year>2018</year><year>2020</year>
 <holder>&Kurt.Hindenburg;</holder>
 </copyright>
 
@@ -52,8 +52,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2019-06-16</date>
-<releaseinfo>Applications 19.08</releaseinfo>
+<date>2020-06-06</date>
+<releaseinfo>Applications 20.08</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -968,14 +968,49 @@ Notifications...</guimenuitem></menuchoice></term>
 <term><menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
 &konsole;...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens the &konsole; settings editor</action></para>
-<para>This dialog has options influencing the appearance and behaviour of the
-<guilabel>Tab Bar</guilabel> and general options for the &konsole; window.
-</para></listitem>
-<!-- FIXME
-since 4.9 Move options influencing tabbar from profiles into global setting
-Add global option for showing window title on titlebar
-When the window title from current session is emtpy, fallback to using
-  tab title-->
+<para>
+    This dialog has options influencing the appearance and behaviour of the &konsole; window.
+</para>
+<itemizedlist>
+    <listitem>
+        <para>
+            The <guilabel>General</guilabel> page allows configuring the menubar visibility,
+            remembering the &konsole; window size, running all &konsole; windows in a single process,
+            enabling menu accelerators, showing window title on the titlebar, removing window titlebar and frame.
+            It is also possible to configure the search case sensitivity, usage of the regular expression,
+            highlighting all matches, and the search direction (<guilabel>Search backwards</guilabel> is the default).
+            The <guilabel>General</guilabel> page is also the place where you can <guibutton>Enable all "Don't Ask Again" messages</guibutton>
+            again if they were switched off before.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            The <guilabel>Profiles</guilabel> page is meant for creating and handling <link linkend="profiles">profiles</link>.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            Using the <guilabel>Tab Bar</guilabel> page you can configure the visibility and
+            placement of tab bar, define tabs behavior and fine-tune the tab buttons options. It is possible to configure if you want to
+            <guilabel>Show 'New Tab' button</guilabel> and <guilabel>Expand individual tab widths to full window</guilabel>
+            or configure <guilabel>Use user-defined stylesheet</guilabel>. The <guilabel>Behavior</guilabel> tab can
+            be used to define the place for the new tabs (<guilabel>At the end</guilabel> or <guilabel>After current tab</guilabel>)
+            and closing of tabs with a &MMB; click.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            The <guilabel>Temporary Files</guilabel> page is used to define the <link linkend="scrollback">scrollback</link> file location.
+        </para>
+    </listitem>
+    <listitem>
+        <para>
+            The <guilabel>Thumbnails</guilabel> page can be used to define the thumbnail size and activation options
+            (you can choose the activation control key from &Shift;, &Alt;, and &Ctrl;).
+        </para>
+    </listitem>
+</itemizedlist>
+</listitem>
 </varlistentry>
 
 </variablelist>
