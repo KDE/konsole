@@ -118,6 +118,16 @@ public:
      */
     void cursorLeft(int n);
     /**
+     * Moves cursor to beginning of the line by @p n lines down.
+     * The cursor will stop at the beginning of the line.
+     */
+    void cursorNextLine(int n);
+    /**
+     * Moves cursor to beginning of the line by @p n lines up.
+     * The cursor will stop at the beginning of the line.
+     */
+    void cursorPreviousLine(int n);
+    /**
      * Move the cursor to the right by @p n columns.
      * The cursor will stop at the right-most column.
      */

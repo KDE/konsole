@@ -129,6 +129,37 @@ void Screen::cursorLeft(int n)
     _cuX = qMax(0, _cuX - n);
 }
 
+void Screen::cursorNextLine(int n)
+//=CNL
+{
+    if (n == 0) {
+        n = 1; // Default
+    }
+    _cuX = 0;
+    while (n > 0) {
+        if (_cuY < _lines - 1) {
+            _cuY += 1;
+        }
+        n--;
+    }
+
+}
+
+void Screen::cursorPreviousLine(int n)
+//=CPL
+{
+    if (n == 0) {
+        n = 1; // Default
+    }
+    _cuX = 0;
+    while (n > 0) {
+        if (_cuY  > 0) {
+            _cuY -= 1;
+        }
+        n--;
+    }
+}
+
 void Screen::cursorRight(int n)
 //=CUF
 {

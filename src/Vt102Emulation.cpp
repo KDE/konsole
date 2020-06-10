@@ -291,7 +291,7 @@ void Vt102Emulation::initTokenizer()
     for (i = 32; i < 256; ++i) {
         charClass[i] |= CHR;
     }
-    for (s = (quint8 *)"@ABCDGHILMPSTXZbcdfry"; *s != 0u; ++s) {
+    for (s = (quint8 *)"@ABCDEFGHILMPSTXZbcdfry"; *s != 0u; ++s) {
         charClass[*s] |= CPN;
     }
     // resize = \e[8;<row>;<col>t
@@ -753,8 +753,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_csi_pn('B'      ) : _currentScreen->cursorDown           (p         ); break; //VT100
     case token_csi_pn('C'      ) : _currentScreen->cursorRight          (p         ); break; //VT100
     case token_csi_pn('D'      ) : _currentScreen->cursorLeft           (p         ); break; //VT100
-    case token_csi_pn('E'      ) : /* Not implemented: cursor next p lines */         break; //VT100
-    case token_csi_pn('F'      ) : /* Not implemented: cursor preceding p lines */    break; //VT100
+    case token_csi_pn('E'      ) : _currentScreen->cursorNextLine       (p         ); break; //VT100
+    case token_csi_pn('F'      ) : _currentScreen->cursorPreviousLine   (p         ); break; //VT100
     case token_csi_pn('G'      ) : _currentScreen->setCursorX           (p         ); break; //LINUX
     case token_csi_pn('H'      ) : _currentScreen->setCursorYX          (p,      q); break; //VT100
     case token_csi_pn('I'      ) : _currentScreen->tab                  (p         ); break;
