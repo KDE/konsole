@@ -742,6 +742,7 @@ Name[pt]=Processo Terminado numa Sessão Vigiada em Segundo Plano
 Name[sv]=Process avslutades i icke-fokuserad bevakad session
 Name[uk]=У нефокусованому сеансі спостереження завершено процес
 Name[x-test]=xxProcess finished in Non-Focused Monitored Sessionxx
+Name[zh_CN]=未取得焦点的被监视会话中的进程完成
 Comment=Process finished in a non-focused monitored session
 Comment[ca]=El procés ha finalitzat a una sessió controlada sense focus
 Comment[el]=Η διεργασία τερματίστηκε σε μία μη εστιασμένη υπό εποπτεία συνεδρία
@@ -756,6 +757,7 @@ Comment[pt]=Processo terminado numa sessão vigiada em segundo plano
 Comment[sv]=Process avslutades i en icke-fokuserad bevakad session
 Comment[uk]=У нефокусованому сеансі спостереження завершено роботу процесу
 Comment[x-test]=xxProcess finished in a non-focused monitored sessionxx
+Comment[zh_CN]=未取得焦点的被监视会话中的进程完成
 Action=Popup
 
 [Event/ProcessFinished]
@@ -774,6 +776,7 @@ Name[pt]=Processo Terminado numa Sessão Vigiada
 Name[sv]=Process avslutades i bevakad session
 Name[uk]=У сеансі спостереження завершено процес
 Name[x-test]=xxProcess finished in Monitored Sessionxx
+Name[zh_CN]=被监视会话中的进程完成
 Comment=Process finished in a monitored session
 Comment[ca]=El procés ha finalitzat a una sessió controlada
 Comment[cs]=Proces dokončen v monitorovaném sezení
@@ -789,6 +792,7 @@ Comment[pt]=Processo terminado numa sessão vigiada
 Comment[sv]=Process avslutades i en bevakad session
 Comment[uk]=У сеансі спостереження завершено роботу процесу
 Comment[x-test]=xxProcess finished in a monitored sessionxx
+Comment[zh_CN]=被监视会话中的进程完成
 Action=Popup
 
 [Event/Finished]
