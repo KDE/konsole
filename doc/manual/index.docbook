@@ -1019,6 +1019,11 @@ Notifications...</guimenuitem></menuchoice></term>
             The <guilabel>Thumbnails</guilabel> page can be used to define the thumbnail size and activation options
             (you can choose the activation control key from &Shift;, &Alt;, and &Ctrl;).
         </para>
+        <note>
+            <para>
+                To use the thumbnails feature showing image thumbnails in popups when hovering image items with the mouse pointer, you should enable file underlining for your current profile: <menuchoice><guimenu>Settings</guimenu><guimenuitem>Edit Current Profile...</guimenuitem><guimenuitem>Mouse</guimenuitem><guimenuitem>Miscellaneous</guimenuitem><guimenuitem>Underline files</guimenuitem></menuchoice>.
+            </para>
+        </note>
     </listitem>
 </itemizedlist>
 </listitem>
