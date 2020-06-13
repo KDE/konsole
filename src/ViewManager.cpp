@@ -233,12 +233,14 @@ void ViewManager::setupActions()
     collection->addAction(QStringLiteral("move-tab-to-right"), action);
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::ALT + Qt::Key_Right);
     connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::moveTabRight);
+    _multiTabOnlyActions << action;
     _viewContainer->addAction(action);
 
     action = new QAction(i18nc("@action Shortcut entry", "Move tab to the left"), this);
     collection->addAction(QStringLiteral("move-tab-to-left"), action);
     collection->setDefaultShortcut(action, Qt::CTRL + Qt::ALT + Qt::Key_Left);
     connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::moveTabLeft);
+    _multiTabOnlyActions << action;
     _viewContainer->addAction(action);
 
     // _viewSplitter->addAction(lastUsedViewReverseAction);
