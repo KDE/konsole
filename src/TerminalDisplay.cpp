@@ -3274,6 +3274,10 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
     }
 
     if (!text.isEmpty()) {
+        // replace CRLF with CR first, fixes issues with pasting multiline
+        // text from gtk apps (e.g. Firefox), bug 421480
+        text.replace(QLatin1String("\r\n"), QLatin1String("\r"));
+
         text.replace(QLatin1Char('\n'), QLatin1Char('\r'));
         if (bracketedPasteMode()) {
             text.remove(QLatin1String("\033"));
