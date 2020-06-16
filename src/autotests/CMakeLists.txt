@@ -87,6 +87,12 @@ ecm_mark_nongui_executable(ShellCommandTest)
 add_test(ShellCommandTest ShellCommandTest)
 target_link_libraries(ShellCommandTest ${KONSOLE_TEST_LIBS})
 
+add_executable(ScreenTest ScreenTest.cpp)
+ecm_mark_as_test(ScreenTest)
+ecm_mark_nongui_executable(ScreenTest)
+add_test(ScreenTest ScreenTest)
+target_link_libraries(ScreenTest ${KONSOLE_TEST_LIBS})
+
 add_executable(TerminalCharacterDecoderTest
                TerminalCharacterDecoderTest.cpp)
 ecm_mark_as_test(TerminalCharacterDecoderTest)

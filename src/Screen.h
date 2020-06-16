@@ -32,6 +32,7 @@
 
 // Konsole
 #include "Character.h"
+#include "konsoleprivate_export.h"
 
 #define MODE_Origin    0
 #define MODE_Wrap      1
@@ -70,7 +71,7 @@ class HistoryScroll;
     using selectedText().  When getImage() is used to retrieve the visible image,
     characters which are part of the selection have their colors inverted.
 */
-class Screen
+class KONSOLEPRIVATE_EXPORT Screen
 {
 public:
     /* PlainText: Return plain text (default)
