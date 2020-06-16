@@ -1277,6 +1277,34 @@ void Screen::writeToStream(TerminalCharacterDecoder* decoder,
     }
 }
 
+int Screen::getLineLength(const int line) const
+{
+  // determine if the line is in the history buffer or the screen image
+  const bool isInHistoryBuffer = line < _history->getLines();
+
+  if (isInHistoryBuffer) {
+    return _history->getLineLen(line);
+  }
+
+  return _columns;
+}
+
+Character *Screen::getCharacterBuffer(const int size)
+{
+  // buffer to hold characters for decoding
+  // the buffer is static to avoid initializing every
+  // element on each call to copyLineToStream
+  // (which is unnecessary since all elements will be overwritten anyway)
+  static const int MAX_CHARS = 1024;
+  static QVector<Character> characterBuffer(MAX_CHARS);
+
+  if (characterBuffer.count() < size) {
+    characterBuffer.resize(size);
+  }
+
+  return characterBuffer.data();
+}
+
 int Screen::copyLineToStream(int line ,
                              int start,
                              int count,
@@ -1284,21 +1312,14 @@ int Screen::copyLineToStream(int line ,
                              bool appendNewLine,
                              const DecodingOptions options) const
 {
-    //buffer to hold characters for decoding
-    //the buffer is static to avoid initializing every
-    //element on each call to copyLineToStream
-    //(which is unnecessary since all elements will be overwritten anyway)
-    static const int MAX_CHARS = 1024;
-    static Character characterBuffer[MAX_CHARS];
-
-    Q_ASSERT(count < MAX_CHARS);
-
+    const int lineLength = getLineLength(line);
+    // ensure that this method, can append space or 'eol' character to
+    // the selection
+    Character *characterBuffer = getCharacterBuffer((count > -1 ? count : lineLength - start) + 1);
     LineProperty currentLineProperties = 0;
 
-    //determine if the line is in the history buffer or the screen image
+    // determine if the line is in the history buffer or the screen image
     if (line < _history->getLines()) {
-        const int lineLength = _history->getLineLen(line);
-
         // ensure that start position is before end of line
         start = qMin(start, qMax(0, lineLength - 1));
 
@@ -1323,7 +1344,7 @@ int Screen::copyLineToStream(int line ,
         }
     } else {
         if (count == -1) {
-            count = _columns - start;
+            count = lineLength - start;
         }
 
         Q_ASSERT(count >= 0);
@@ -1363,7 +1384,7 @@ int Screen::copyLineToStream(int line ,
         currentLineProperties |= _lineProperties[screenLine];
     }
 
-    if (appendNewLine && (count + 1 < MAX_CHARS)) {
+    if (appendNewLine) {
         if ((currentLineProperties & LINE_WRAPPED) != 0) {
             // do nothing extra when this line is wrapped.
         } else {

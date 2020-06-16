@@ -642,6 +642,13 @@ private:
     // starting from 'startLine', where 0 is the first line in the history
     void copyFromHistory(Character *dest, int startLine, int count) const;
 
+    // returns a buffer that can hold at most 'count' characters,
+    // where the number of reallocations and object reinitializations
+    // should be as minimal as possible
+    static Character *getCharacterBuffer(const int size);
+
+    int getLineLength(const int line) const;
+
     // screen image ----------------
     int _lines;
     int _columns;
