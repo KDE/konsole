@@ -3510,6 +3510,9 @@ KMessageWidget* TerminalDisplay::createMessageWidget(const QString &text) {
     widget->setCursor(Qt::ArrowCursor);
 
     _verticalLayout->insertWidget(1, widget);
+
+    _searchBar->raise();
+
     return widget;
 }
 
