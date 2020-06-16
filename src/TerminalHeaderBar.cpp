@@ -244,11 +244,10 @@ void TerminalHeaderBar::mouseReleaseEvent(QMouseEvent* ev)
     Q_UNUSED(ev)
 }
 
-}
-
-QSize Konsole::TerminalHeaderBar::minimumSizeHint() const
+QSize TerminalHeaderBar::minimumSizeHint() const
 {
     auto height = sizeHint().height();
     return {height, height};
 }
 
+}
