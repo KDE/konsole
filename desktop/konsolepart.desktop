@@ -100,7 +100,6 @@ Name[uz@cyrillic]=Терминал эмулятори
 Name[vi]=Mô phỏng thiết bị cuối
 Name[wa]=Programes terminås
 Name[xh]=Umzami kulinganisela ngokulinganayo Wendlela yesiphelo
-Name[x-test]=xxTerminal Emulatorxx
 Name[zh_CN]=终端仿真器
 Name[zh_TW]=終端機模擬程式
 
@@ -143,6 +142,5 @@ Comment[sr@latin]=Pristup komandnoj liniji
 Comment[sv]=Åtkomst till kommandorad
 Comment[tr]=Komut satırı erişimi
 Comment[uk]=Доступ до командного рядка
-Comment[x-test]=xxCommand line accessxx
 Comment[zh_CN]=命令行访问
 Comment[zh_TW]=指令列
