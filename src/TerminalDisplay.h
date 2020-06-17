@@ -117,6 +117,8 @@ public:
 
     void setScrollFullPage(bool fullPage);
     bool scrollFullPage() const;
+    void setHighlightScrolledLines(bool highlight);
+
     /**
      * Returns the display's filter chain.  When the image for the display is updated,
      * the text is passed through each filter in the chain.  Each filter can define
@@ -614,6 +616,7 @@ protected Q_SLOTS:
     void scrollBarPositionChanged(int value);
     void blinkTextEvent();
     void blinkCursorEvent();
+    void highlightScrolledLinesEvent();
 
 private Q_SLOTS:
 
@@ -634,6 +637,8 @@ private:
     void drawContents(QPainter &painter, const QRect &rect);
     // draw a transparent rectangle over the line of the current match
     void drawCurrentResultRect(QPainter &painter);
+    // draw a thin highlight on the left of the screen for lines that have been scrolled into view
+    void highlightScrolledLines(QPainter& painter);
     // draws a section of text, all the text in this section
     // has a common color and style
     void drawTextFragment(QPainter &painter, const QRect &rect, const QString &text,
@@ -886,6 +891,12 @@ private:
 
     bool _drawOverlay;
     Qt::Edge _overlayEdge;
+
+    bool _highlightScrolledLines;
+    QRect _highlightScrolledLinesRect;
+    int _previousScrollCount;
+    static const int HIGHLIGHT_SCROLLED_LINES_WIDTH = 3;
+    QTimer *_highlightScrolledLinesTimer;
 
     bool _hasCompositeFocus;
 

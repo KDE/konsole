@@ -152,6 +152,10 @@ public:
          * height or half height.
              */
         ScrollFullPage,
+        /** (bool) Specifies whether the the lines that are scrolled into view
+         * should be highlighted.
+             */
+        HighlightScrolledLines,
         /** (bool) Specifies whether the terminal will enable Bidirectional
          * text display
          */
