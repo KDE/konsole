@@ -1587,6 +1587,12 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr &profile)
 
     setupRadio(pageamounts, scrollFullPage);
 
+
+    const auto options = QVector<BooleanOption>{
+        {_scrollingUi->highlightScrolledLinesButton, Profile::HighlightScrolledLines, SLOT(toggleHighlightScrolledLines(bool))}
+    };
+    setupCheckBoxes(options, profile);
+
     // signals and slots
     connect(_scrollingUi->historySizeWidget, &Konsole::HistorySizeWidget::historySizeChanged, this,
             &Konsole::EditProfileDialog::historySizeChanged);
@@ -1610,6 +1616,11 @@ void EditProfileDialog::scrollFullPage()
 void EditProfileDialog::scrollHalfPage()
 {
     updateTempProfileProperty(Profile::ScrollFullPage, Enum::ScrollPageHalf);
+}
+
+void EditProfileDialog::toggleHighlightScrolledLines(bool enable)
+{
+    updateTempProfileProperty(Profile::HighlightScrolledLines, enable);
 }
 
 void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
