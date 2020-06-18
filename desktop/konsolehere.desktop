@@ -98,6 +98,7 @@ Name[uz@cyrillic]=Терминални шу ерда очиш
 Name[vi]=Mở cửa sổ dòng lệnh ở đây
 Name[wa]=Drovi on terminå chal
 Name[xh]=Vula Isiphelo Sendlela Apha
+Name[x-test]=xxOpen Terminal Herexx
 Name[zh_CN]=在此处打开终端
 Name[zh_TW]=在這裡開啟終端機
 
@@ -141,5 +142,6 @@ Comment[sr@latin]=Otvori terminal na tekućoj fascikli
 Comment[sv]=Öppnar en terminal för aktuell katalog
 Comment[tr]=Geçerli klasörde bir uçbirim açar
 Comment[uk]=Відкрити термінал у поточній теці
+Comment[x-test]=xxOpens a terminal at the current folderxx
 Comment[zh_CN]=在当前文件夹打开终端
 Comment[zh_TW]=在目前的資料夾開啟終端機
