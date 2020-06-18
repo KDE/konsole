@@ -180,8 +180,8 @@ void Profile::useFallback()
     setProperty(StartInCurrentSessionDir, true);
     setProperty(MenuIndex, QStringLiteral("0"));
     setProperty(SilenceSeconds, 10);
-    setProperty(TerminalColumns, 80);
-    setProperty(TerminalRows, 24);
+    setProperty(TerminalColumns, 110);
+    setProperty(TerminalRows, 28);
     setProperty(TerminalMargin, 1);
     setProperty(TerminalCenter, false);
     setProperty(MouseWheelZoomEnabled, true);
