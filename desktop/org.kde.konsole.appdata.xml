@@ -44,6 +44,7 @@
   <name xml:lang="sv">Terminal</name>
   <name xml:lang="tr">Konsole</name>
   <name xml:lang="uk">Konsole</name>
+  <name xml:lang="x-test">xxKonsolexx</name>
   <name xml:lang="zh-CN">Konsole</name>
   <name xml:lang="zh-TW">Konsole</name>
   <summary>Terminal</summary>
@@ -87,6 +88,7 @@
   <summary xml:lang="sv">Terminal</summary>
   <summary xml:lang="tr">Uçbirim</summary>
   <summary xml:lang="uk">Термінал</summary>
+  <summary xml:lang="x-test">xxTerminalxx</summary>
   <summary xml:lang="zh-CN">终端</summary>
   <summary xml:lang="zh-TW">終端機</summary>
   <description>
@@ -118,6 +120,7 @@
     <p xml:lang="sl">Konsole je posnemovalnik terminala, kjer teče ukazni jezik shell. Nudi vam ukazno vrstico, kjer lahko neposredno upravljate vaš računalnik.</p>
     <p xml:lang="sv">Terminal är en terminal för att köra ett kommandoskal. Det tillhandahåller ett kommandoradsgränssnitt för att direkt styra datorn.</p>
     <p xml:lang="uk">Konsole — це термінал для роботи з командною оболонкою. За її допомогою можна отримати доступ до інтерфейсу командного рядка для керування вашим комп'ютером.</p>
+    <p xml:lang="x-test">xxKonsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.xx</p>
     <p xml:lang="zh-CN">Konsole 是一个运行命令 Shell 的终端。它提供了直接控制计算机的命令行接口。</p>
     <p xml:lang="zh-TW">Konsole 是個用於執行指令 shell 的終端機。其提供能直接操作電腦的指令行介面。</p>
     <p>Features:</p>
@@ -161,6 +164,7 @@
     <p xml:lang="sv">Funktioner:</p>
     <p xml:lang="tr">Özellikler:</p>
     <p xml:lang="uk">Можливості:</p>
+    <p xml:lang="x-test">xxFeatures:xx</p>
     <p xml:lang="zh-CN">功能：</p>
     <p xml:lang="zh-TW">功能：</p>
     <ul>
@@ -205,6 +209,7 @@
       <li xml:lang="sv">Flikar</li>
       <li xml:lang="tr">Sekmeler</li>
       <li xml:lang="uk">Вкладки.</li>
+      <li xml:lang="x-test">xxTabsxx</li>
       <li xml:lang="zh-CN">标签</li>
       <li xml:lang="zh-TW">分頁</li>
       <li>Multiple profiles</li>
@@ -247,6 +252,7 @@
       <li xml:lang="sv">Flera profiler</li>
       <li xml:lang="tr">Çoklu profiller</li>
       <li xml:lang="uk">Підтримка роботи з декількома профілями.</li>
+      <li xml:lang="x-test">xxMultiple profilesxx</li>
       <li xml:lang="zh-CN">多配置文件</li>
       <li xml:lang="zh-TW">多重設定檔</li>
       <li>Silence and Activity monitoring</li>
@@ -288,6 +294,7 @@
       <li xml:lang="sv">Övervakning av tystnad och aktivitet</li>
       <li xml:lang="tr">Sessizlik ve Etkinlik izleme</li>
       <li xml:lang="uk">Спостереження за бездіяльністю та діями.</li>
+      <li xml:lang="x-test">xxSilence and Activity monitoringxx</li>
       <li xml:lang="zh-CN">沉默和活动监视</li>
       <li xml:lang="zh-TW">靜音與活動監控</li>
       <li>Bookmark support</li>
@@ -329,6 +336,7 @@
       <li xml:lang="sv">Stöd för bokmärken</li>
       <li xml:lang="tr">Yer imi desteği</li>
       <li xml:lang="uk">Підтримка закладок.</li>
+      <li xml:lang="x-test">xxBookmark supportxx</li>
       <li xml:lang="zh-CN">书签支持</li>
       <li xml:lang="zh-TW">書籤支援</li>
       <li>Searching</li>
@@ -371,6 +379,7 @@
       <li xml:lang="sv">Sökning</li>
       <li xml:lang="tr">Arama</li>
       <li xml:lang="uk">Пошук.</li>
+      <li xml:lang="x-test">xxSearchingxx</li>
       <li xml:lang="zh-CN">搜索</li>
       <li xml:lang="zh-TW">搜尋</li>
       <li>Saving output</li>
@@ -413,6 +422,7 @@
       <li xml:lang="sv">Spara utmatning</li>
       <li xml:lang="tr">Çıktıyı kaydetme</li>
       <li xml:lang="uk">Збереження виведених даних.</li>
+      <li xml:lang="x-test">xxSaving outputxx</li>
       <li xml:lang="zh-CN">保存输出</li>
       <li xml:lang="zh-TW">儲存輸出</li>
     </ul>
@@ -454,6 +464,7 @@
       <caption xml:lang="sl">Program Konsole, ko je uporabljen kot posnemovalnik terminala</caption>
       <caption xml:lang="sv">Terminal används som en terminalemulator.</caption>
       <caption xml:lang="uk">Konsole використовується як емулятор термінала</caption>
+      <caption xml:lang="x-test">xxKonsole being used as a terminal emulatorxx</caption>
       <caption xml:lang="zh-CN">将 Konsole 用作终端仿真器</caption>
       <caption xml:lang="zh-TW">Konsole 是一款使用中的終端模擬器</caption>
     </screenshot>
