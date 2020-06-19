@@ -576,10 +576,10 @@ signal</option></userinput>.</para></listitem>
 <term><menuchoice>
 <shortcut><keycombo
  action="simul">&Ctrl;&Alt;<keycap>S</keycap></keycombo></shortcut>
-<guimenu>Edit</guimenu><guimenuitem>Rename Tab...</guimenuitem></menuchoice></term>
+<guimenu>Edit</guimenu><guimenuitem>Configure Tab Settings...</guimenuitem></menuchoice></term>
 <listitem><para><action>Opens a dialog box allowing you to change
-the name of the current tab</action>
-(<link linkend="rename-tab-dialog">more info</link>)
+the name format, the remote tab title format and the color of the current tab</action>
+(<link linkend="configure-tab-settings-dialog">more info</link>)
 </para></listitem>
 </varlistentry>
 
@@ -1045,14 +1045,14 @@ of the &kde; Fundamentals.
 <sect1 id="console-dialogs">
 <title>&konsole; Dialogs</title>
 
-<sect2 id="rename-tab-dialog">
-<title>Rename Tab Dialog</title>
+<sect2 id="configure-tab-settings-dialog">
+<title>Configure Tab Settings Dialog</title>
 
-<para>The name of the current tab can be changed from this dialog.
+<para>The name format, the remote tab title format, and the color of the current tab can be changed from this dialog.
 The dialog can be displayed via the menu, the shortcut <keycombo
  action="simul">&Ctrl;&Alt;<keycap>S</keycap></keycombo> or by
 double-clicking on the tab in the tab bar.
-These changes can be made permanent by editing the current profile.
+These changes are temporary and can be made permanent by editing the current profile.
 </para>
 
 <para>

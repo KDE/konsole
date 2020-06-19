@@ -716,7 +716,7 @@ void SessionController::setupExtraActions()
 
     // Rename Session
     QAction* action = collection->addAction(QStringLiteral("rename-session"), this, SLOT(renameSession()));
-    action->setText(i18n("&Rename Tab..."));
+    action->setText(i18n("&Current Tab Settings..."));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-rename")));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_S);
 
