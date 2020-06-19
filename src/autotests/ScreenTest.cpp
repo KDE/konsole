@@ -32,7 +32,7 @@ void ScreenTest::doLargeScreenCopyVerification(const QString &putToScreen, const
 {
   Screen screen(largeScreenLines, largeScreenColumns);
 
-  for(const auto lineCharacter : putToScreen) {
+  for(const auto &lineCharacter : putToScreen) {
     screen.displayCharacter(lineCharacter.toLatin1());
   }
 
