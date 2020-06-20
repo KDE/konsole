@@ -23,6 +23,7 @@ illustrated in the Konsole handbook, which can be accessed by browsing to
 ## Contact
 
 Up-to-date information about the latest releases can be found on Konsole's
-website at http://konsole.kde.org. Discussions about Konsole's development are
+website at https://konsole.kde.org. Discussions about Konsole's development are
 held on the konsole-devel mailing list, which can be accessed at
 https://mail.kde.org/mailman/listinfo/konsole-devel.
+
