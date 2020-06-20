@@ -6,6 +6,7 @@
   <name>Konsole</name>
   <name xml:lang="ar">كونسول</name>
   <name xml:lang="ast">Konsole</name>
+  <name xml:lang="az">Konsole</name>
   <name xml:lang="bs">Konzola</name>
   <name xml:lang="ca">Konsole</name>
   <name xml:lang="ca-valencia">Konsole</name>
@@ -50,6 +51,7 @@
   <summary>Terminal</summary>
   <summary xml:lang="ar">طرفيّة</summary>
   <summary xml:lang="ast">Terminal</summary>
+  <summary xml:lang="az">Terminal</summary>
   <summary xml:lang="bs">Terminal</summary>
   <summary xml:lang="ca">Terminal</summary>
   <summary xml:lang="ca-valencia">Terminal</summary>
@@ -94,6 +96,7 @@
   <description>
     <p>Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
     <p xml:lang="ast">Konsole ye una terminal pa executar comandos de la shell. Apurre una llinia de comandos pa controlar direutamente l'ordenador.</p>
+    <p xml:lang="az">Konsole, əmr təbəqəsini işlətmək üçün bir terminaldır. Kompüterinizi birbaşa idarə etmək üçün bir sətir interfeysi təmin edir.</p>
     <p xml:lang="ca">El Konsole és un terminal per executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per controlar directament l'ordinador.</p>
     <p xml:lang="ca-valencia">El Konsole és un terminal per executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per controlar directament l'ordinador.</p>
     <p xml:lang="de">Konsole ist ein Terminal zum Ausführen einer Befehls-Shell. Es stellt eine Befehlszeile-Schnittstelle zur direkten Steuerung Ihres Rechner zur Verfügung.</p>
@@ -126,6 +129,7 @@
     <p>Features:</p>
     <p xml:lang="ar">الميزات:</p>
     <p xml:lang="ast">Carauterístiques:</p>
+    <p xml:lang="az">İmkanlar:</p>
     <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="ca-valencia">Característiques:</p>
@@ -171,6 +175,7 @@
       <li>Tabs</li>
       <li xml:lang="ar">الألسنة</li>
       <li xml:lang="ast">Llingüetes</li>
+      <li xml:lang="az">Vərəqlər</li>
       <li xml:lang="bs">Kartice</li>
       <li xml:lang="ca">Pestanyes</li>
       <li xml:lang="ca-valencia">Pestanyes</li>
@@ -215,6 +220,7 @@
       <li>Multiple profiles</li>
       <li xml:lang="ar">مختلف التّشكيلات</li>
       <li xml:lang="ast">Perfiles múltiples</li>
+      <li xml:lang="az">Profil seçimi</li>
       <li xml:lang="ca">Perfils múltiples</li>
       <li xml:lang="ca-valencia">Perfils múltiples</li>
       <li xml:lang="cs">Možnost mít několik profilů</li>
@@ -258,6 +264,7 @@
       <li>Silence and Activity monitoring</li>
       <li xml:lang="ar">مراقبة السّكوت والنّشاط</li>
       <li xml:lang="ast">Supervisión de l'actividá y los silencios</li>
+      <li xml:lang="az">Sakitlik və Aktivlik izlənməsi</li>
       <li xml:lang="ca">Monitoratge del silenci i de l'activitat</li>
       <li xml:lang="ca-valencia">Monitoratge del silenci i de l'activitat</li>
       <li xml:lang="cs">Monitorování nečinnosti a aktivity</li>
@@ -300,6 +307,7 @@
       <li>Bookmark support</li>
       <li xml:lang="ar">دعم العلامات</li>
       <li xml:lang="ast">Sofitu pa marcadores</li>
+      <li xml:lang="az">Əlfəcinlər</li>
       <li xml:lang="ca">Implementació de punts</li>
       <li xml:lang="ca-valencia">Implementació de punts</li>
       <li xml:lang="cs">Podpora záložek</li>
@@ -342,6 +350,7 @@
       <li>Searching</li>
       <li xml:lang="ar">البحث</li>
       <li xml:lang="ast">Gueta</li>
+      <li xml:lang="az">Axtarış</li>
       <li xml:lang="ca">Cerques</li>
       <li xml:lang="ca-valencia">Cerques</li>
       <li xml:lang="cs">Hledání</li>
@@ -385,6 +394,7 @@
       <li>Saving output</li>
       <li xml:lang="ar">حفظ الخرج</li>
       <li xml:lang="ast">Guardáu de la salida</li>
+      <li xml:lang="az">Çıxarışların saxlanılması</li>
       <li xml:lang="ca">Desament de la sortida</li>
       <li xml:lang="ca-valencia">Desament de l'eixida</li>
       <li xml:lang="cs">Ukládání výstupu</li>
@@ -436,6 +446,7 @@
       <image>https://cdn.kde.org/screenshots/konsole/konsole.png</image>
       <caption>Konsole being used as a terminal emulator</caption>
       <caption xml:lang="ast">Konsole usándose como un emulador de terminal</caption>
+      <caption xml:lang="az">Konsole terminal emulyatoru olaraq istifadə olunur</caption>
       <caption xml:lang="ca">El Konsole s'usa com a emulador de terminal</caption>
       <caption xml:lang="ca-valencia">El Konsole s'usa com a emulador de terminal</caption>
       <caption xml:lang="cs">Konsole je použita jako emulátor terminálu</caption>
