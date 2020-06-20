@@ -4,8 +4,7 @@ Items for the Konsole maintainer:
 
 A new maintainer may need super powers for some of these.  If so, put in a 
 request.
-http://sysadmin.kde.org/tickets/
-
+https://go.kde.org/systickets
 
 A. New releases
     1. Update src/main.cpp for version  (2.7, 2.7.1, etc)
@@ -31,7 +30,7 @@ C. Sites
         a. It is currently in git (2012).
             https://projects.kde.org/projects/websites/konsole-kde-org
         b. If it becomes to much work or outdated, it might be forwarded to
-            http://userbase.kde.org/Konsole
+            https://userbase.kde.org/Konsole
 
 D. Mailing list
     1. https://mail.kde.org/mailman/admin/konsole-devel
@@ -45,11 +44,9 @@ Links
     1. General Konsole bug page:
         https://bugs.kde.org/editproducts.cgi?action=edit&product=konsole
     2. An attempt to get more interest in Konsole
-        http://userbase.kde.org/KonsoleDevelopment
+        https://userbase.kde.org/KonsoleDevelopment
     3. HTML version of Handbook
-        http://docs.kde.org/development/en/applications/konsole/index.html
-    4. KDE schedule http://techbase.kde.org/Schedules
-        Suggest using http://www.kde.org/releaseschedule.ics in your calendar
-        to watch for new releases.
+        https://docs.kde.org/trunk5/en/applications/konsole/index.html
+    4. KDE schedule https://community.kde.org/Schedules
 
 
