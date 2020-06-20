@@ -17,8 +17,7 @@
 #   1. konsole --list-profile-properties
 #   2. refer to konsole/src/Profile.h
 #   3. visit the online reference:
-#       http://api.kde.org/4.7-api/kde-baseapps-apidocs/konsole/html/namespaceKonsole.html
-#       http://api.kde.org/4.7-api/kde-baseapps-apidocs/konsole/html/classKonsole_1_1Profile.html
+#       https://invent.kde.org/utilities/konsole/-/blob/master/src/Profile.h
 #
 #  All of the logic is in konsole. This script is provided for convenience.
 
