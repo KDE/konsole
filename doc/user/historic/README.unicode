@@ -12,7 +12,7 @@ konsole.
 To fully install it, please get a complete set of unicode
 enhanced fixed fonts from
 
-   <http://www.cl.cam.ac.uk/~mgk25/ucs-fonts.html>.
+   <https://www.cl.cam.ac.uk/~mgk25/ucs-fonts.html>.
 
 These fonts are expected to be distributed with the next X11
 release. Konsole distributes one of this fonts for your
