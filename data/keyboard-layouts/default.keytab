@@ -77,7 +77,8 @@ key Left  +Shift+AppScreen             : "\E[1;*D"
 key Right +Shift+AppScreen             : "\E[1;*C"
 
 # Keypad keys with NumLock ON
-# (see "Numeric Keypad" section at http://www.nw.com/nw/WWW/products/wizcon/vt100.html )
+# (see https://web.archive.org/web/20070807181942/http://www.nw.com/nw/WWW/products/wizcon/vt100.html
+#    https://vt100.net/docs/vt100-ug/chapter3.html)
 #
 # Not enabled for now because it breaks the keypad in Vim.
 #
