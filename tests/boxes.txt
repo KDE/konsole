@@ -137,6 +137,6 @@ Block elements.
 █▓▒░ ▕ ▏ ▐# ▌#
 
 
-VT-102:  http://vt100.net/docs/vt102-ug/table5-13.html
-Unicode: http://www.unicode.org/charts/PDF/U2500.pdf
-     and http://www.unicode.org/charts/PDF/U2580.pdf
+VT-102:  https://vt100.net/docs//vt102-ug/contents.html
+Unicode: https://www.unicode.org/charts/PDF/U2500.pdf
+     and https://www.unicode.org/charts/PDF/U2580.pdf
