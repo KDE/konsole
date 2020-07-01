@@ -449,9 +449,10 @@ void SessionController::selectionChanged(const QString& selectedText)
 void SessionController::updateCopyAction(const QString& selectedText)
 {
     QAction* copyAction = actionCollection()->action(QStringLiteral("edit_copy"));
-
+    QAction* copyContextMenu = actionCollection()->action(QStringLiteral("edit_copy_contextmenu"));
     // copy action is meaningful only when some text is selected.
     copyAction->setEnabled(!selectedText.isEmpty());
+    copyContextMenu->setVisible(!selectedText.isEmpty());
 }
 
 void SessionController::updateWebSearchMenu()
@@ -599,7 +600,7 @@ void SessionController::setupCommonActions()
     action->setIcon(QIcon::fromTheme(QStringLiteral("system-file-manager")));
 
     // Copy and Paste
-    action = KStandardAction::copy(this, SLOT(copy()), collection);
+    action = KStandardAction::copy(this, &SessionController::copy, collection);
 #ifdef Q_OS_MACOS
     // Don't use the Konsole::ACCEL const here, we really want the Command key (Qt::META)
     // TODO: check what happens if we leave it to Qt to assign the default?
@@ -609,6 +610,14 @@ void SessionController::setupCommonActions()
 #endif
     // disabled at first, since nothing has been selected now
     action->setEnabled(false);
+
+    // We need a different QAction on the context menu because one will be disabled when there's no selection,
+    // other will be hidden.
+    action = collection->addAction(QStringLiteral("edit_copy_contextmenu"));
+    action->setText(i18n("Copy"));
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
+    action->setVisible(false);
+    connect(action, &QAction::triggered, this, &SessionController::copy);
 
     action = KStandardAction::paste(this, SLOT(paste()), collection);
     QList<QKeySequence> pasteShortcut;
@@ -1659,7 +1668,7 @@ void SessionController::updateReadOnlyActionStates()
     auto updateActionState = [this, readonly](const QString &name) {
         QAction *action = actionCollection()->action(name);
         if (action != nullptr) {
-            action->setEnabled(!readonly);
+            action->setVisible(!readonly);
         }
     };
 
@@ -1755,6 +1764,13 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         auto contentSeparator = new QAction(popup);
         contentSeparator->setSeparator(true);
 
+        // We don't actually use this shortcut, but we need to display it for consistency :/
+        QAction *copy = actionCollection()->action(QStringLiteral("edit_copy_contextmenu"));
+#ifdef Q_OS_MACOS
+        copy->setShortcut(Qt::META + Qt::Key_C);
+#else
+        copy->setShortcut(Konsole::ACCEL + Qt::SHIFT + Qt::Key_C);
+#endif
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
         QSharedPointer<Filter::HotSpot> hotSpot = _view->filterActions(position);
         if (hotSpot != nullptr) {
@@ -1792,6 +1808,9 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         if ((chosen != nullptr) && chosen->objectName() == QLatin1String("close-session")) {
             chosen->trigger();
         }
+
+        // Remove the Accelerator for the copy shortcut so we don't have two actions with same shortcut.
+        copy->setShortcut({});
     } else {
         qCDebug(KonsoleDebug) << "Unable to display popup menu for session"
                    << _session->title(Session::NameRole)
