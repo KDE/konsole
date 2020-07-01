@@ -617,6 +617,7 @@ void FileFilter::HotSpot::setupMenu(QMenu *menu)
 
     // Here we added the actions to the last part of the menu, but we need to move them up.
     // TODO: As soon as addOpenWithActionsTo accepts a index, change this.
+    // https://bugs.kde.org/show_bug.cgi?id=423765
     QAction *firstAction = menu->actions().at(0);
     for (auto *action : menu->actions()) {
         if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
