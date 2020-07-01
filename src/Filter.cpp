@@ -589,6 +589,7 @@ FileFilter::HotSpot::~HotSpot() = default;
 QList<QAction *> FileFilter::HotSpot::actions()
 {
     QAction *action = new QAction(i18n("Copy Location"), this);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
     connect(action, &QAction::triggered, this, [this] {
         QGuiApplication::clipboard()->setText(_filePath);
     });
