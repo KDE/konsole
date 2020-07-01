@@ -588,7 +588,7 @@ FileFilter::HotSpot::~HotSpot() = default;
 
 QList<QAction *> FileFilter::HotSpot::actions()
 {
-    QAction *action = new QAction(i18n("Copy full path"), this);
+    QAction *action = new QAction(i18n("Copy Location"), this);
     connect(action, &QAction::triggered, this, [this] {
         QGuiApplication::clipboard()->setText(_filePath);
     });
