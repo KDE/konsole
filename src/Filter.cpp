@@ -614,6 +614,16 @@ void FileFilter::HotSpot::setupMenu(QMenu *menu)
     _menuActions.setParent(this);
     _menuActions.setItemListProperties(itemProperties);
     _menuActions.addOpenWithActionsTo(menu);
+
+    // Here we added the actions to the last part of the menu, but we need to move them up.
+    // TODO: As soon as addOpenWithActionsTo accepts a index, change this.
+    QAction *firstAction = menu->actions().at(0);
+    for (auto *action : menu->actions()) {
+        if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
+            menu->removeAction(action);
+            menu->insertAction(firstAction, action);
+        }
+    }
 }
 
 // Static variables for the HotSpot
