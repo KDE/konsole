@@ -94,7 +94,7 @@
       <default>ShowTabBarWhenNeeded</default>
     </entry>
     <entry name="SplitDragHandleSize" type="Enum">
-        <label> Control the size of the handle between panels </label>
+        <label>Control the size of the handle between panels</label>
         <choices>
             <choice name="SplitDragHandleSmall"/>
             <choice name="SplitDragHandleMedium"/>
