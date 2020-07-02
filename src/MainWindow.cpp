@@ -344,16 +344,16 @@ void MainWindow::setupActions()
             &Konsole::MainWindow::openUrls);
 
     // Settings Menu
-    _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), SLOT(setVisible(bool)), collection);
+    _toggleMenuBarAction = KStandardAction::showMenubar(menuBar(), &QMenuBar::setVisible, collection);
     collection->setDefaultShortcut(_toggleMenuBarAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_M);
 
     // Full Screen
-    menuAction = KStandardAction::fullScreen(this, SLOT(viewFullScreen(bool)), this, collection);
+    menuAction = KStandardAction::fullScreen(this, &MainWindow::viewFullScreen, this, collection);
     collection->setDefaultShortcut(menuAction, Qt::Key_F11);
 
-    KStandardAction::configureNotifications(this, SLOT(configureNotifications()), collection);
-    KStandardAction::keyBindings(this, SLOT(showShortcutsDialog()), collection);
-    KStandardAction::preferences(this, SLOT(showSettingsDialog()), collection);
+    KStandardAction::configureNotifications(this, &MainWindow::configureNotifications, collection);
+    KStandardAction::keyBindings(this, &MainWindow::showShortcutsDialog, collection);
+    KStandardAction::preferences(this, &MainWindow::showSettingsDialog, collection);
 
     menuAction = collection->addAction(QStringLiteral("manage-profiles"));
     menuAction->setText(i18nc("@action:inmenu", "Manage Profiles..."));
