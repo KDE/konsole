@@ -588,14 +588,14 @@ void SessionController::setupCommonActions()
     KActionCollection* collection = actionCollection();
 
     // Close Session
-    QAction* action = collection->addAction(QStringLiteral("close-session"), this, SLOT(closeSession()));
+    QAction* action = collection->addAction(QStringLiteral("close-session"), this, &SessionController::closeSession);
     action->setText(i18n("&Close Session"));
 
     action->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_W);
 
     // Open Browser
-    action = collection->addAction(QStringLiteral("open-browser"), this, SLOT(openBrowser()));
+    action = collection->addAction(QStringLiteral("open-browser"), this, &SessionController::openBrowser);
     action->setText(i18n("Open File Manager"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("system-file-manager")));
 
@@ -619,7 +619,7 @@ void SessionController::setupCommonActions()
     action->setVisible(false);
     connect(action, &QAction::triggered, this, &SessionController::copy);
 
-    action = KStandardAction::paste(this, SLOT(paste()), collection);
+    action = KStandardAction::paste(this, &SessionController::paste, collection);
     QList<QKeySequence> pasteShortcut;
 #ifdef Q_OS_MACOS
     pasteShortcut.append(QKeySequence(Qt::META + Qt::Key_V));
@@ -630,7 +630,7 @@ void SessionController::setupCommonActions()
 #endif
     collection->setDefaultShortcuts(action, pasteShortcut);
 
-    action = collection->addAction(QStringLiteral("paste-selection"), this, SLOT(pasteFromX11Selection()));
+    action = collection->addAction(QStringLiteral("paste-selection"), this, &SessionController::pasteFromX11Selection);
     action->setText(i18n("Paste Selection"));
 #ifdef Q_OS_MACOS
     collection->setDefaultShortcut(action, Qt::META + Qt::SHIFT + Qt::Key_V);
@@ -644,38 +644,38 @@ void SessionController::setupCommonActions()
     collection->addAction(QStringLiteral("web-search"), _webSearchMenu);
 
 
-    action = collection->addAction(QStringLiteral("select-all"), this, SLOT(selectAll()));
+    action = collection->addAction(QStringLiteral("select-all"), this, &SessionController::selectAll);
     action->setText(i18n("&Select All"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-select-all")));
 
-    action = collection->addAction(QStringLiteral("select-line"), this, SLOT(selectLine()));
+    action = collection->addAction(QStringLiteral("select-line"), this, &SessionController::selectLine);
     action->setText(i18n("Select &Line"));
 
-    action = KStandardAction::saveAs(this, SLOT(saveHistory()), collection);
+    action = KStandardAction::saveAs(this, &SessionController::saveHistory, collection);
     action->setText(i18n("Save Output &As..."));
 #ifdef Q_OS_MACOS
     action->setShortcut(QKeySequence(Qt::META + Qt::Key_S));
 #endif
 
-    action = KStandardAction::print(this, SLOT(print_screen()), collection);
+    action = KStandardAction::print(this, &SessionController::print_screen, collection);
     action->setText(i18n("&Print Screen..."));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_P);
 
-    action = collection->addAction(QStringLiteral("adjust-history"), this, SLOT(showHistoryOptions()));
+    action = collection->addAction(QStringLiteral("adjust-history"), this, &SessionController::showHistoryOptions);
     action->setText(i18n("Adjust Scrollback..."));
     action->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
 
-    action = collection->addAction(QStringLiteral("clear-history"), this, SLOT(clearHistory()));
+    action = collection->addAction(QStringLiteral("clear-history"), this, &SessionController::clearHistory);
     action->setText(i18n("Clear Scrollback"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear-history")));
 
-    action = collection->addAction(QStringLiteral("clear-history-and-reset"), this, SLOT(clearHistoryAndReset()));
+    action = collection->addAction(QStringLiteral("clear-history-and-reset"), this, &SessionController::clearHistoryAndReset);
     action->setText(i18n("Clear Scrollback and Reset"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear-history")));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_K);
 
     // Profile Options
-    action = collection->addAction(QStringLiteral("edit-current-profile"), this, SLOT(editCurrentProfile()));
+    action = collection->addAction(QStringLiteral("edit-current-profile"), this, &SessionController::editCurrentProfile);
     action->setText(i18n("Edit Current Profile..."));
     action->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
 
@@ -684,12 +684,12 @@ void SessionController::setupCommonActions()
     connect(_switchProfileMenu->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::prepareSwitchProfileMenu);
 
     // History
-    _findAction = KStandardAction::find(this, SLOT(searchBarEvent()), collection);
+    _findAction = KStandardAction::find(this, &SessionController::searchBarEvent, collection);
 
-    _findNextAction = KStandardAction::findNext(this, SLOT(findNextInHistory()), collection);
+    _findNextAction = KStandardAction::findNext(this, &SessionController::findNextInHistory, collection);
     _findNextAction->setEnabled(false);
 
-    _findPreviousAction = KStandardAction::findPrev(this, SLOT(findPreviousInHistory()), collection);
+    _findPreviousAction = KStandardAction::findPrev(this, &SessionController::findPreviousInHistory, collection);
     _findPreviousAction->setEnabled(false);
 
 #ifdef Q_OS_MACOS
@@ -713,7 +713,7 @@ void SessionController::setupCommonActions()
             &Konsole::SessionController::changeCodec);
 
     // Read-only
-    action = collection->addAction(QStringLiteral("view-readonly"), this, SLOT(toggleReadOnly()));
+    action = collection->addAction(QStringLiteral("view-readonly"), this, &SessionController::toggleReadOnly);
     action->setText(i18nc("@item:inmenu A read only (locked) session", "Read-only"));
     action->setCheckable(true);
     updateReadOnlyActionStates();
@@ -724,7 +724,7 @@ void SessionController::setupExtraActions()
     KActionCollection* collection = actionCollection();
 
     // Rename Session
-    QAction* action = collection->addAction(QStringLiteral("rename-session"), this, SLOT(renameSession()));
+    QAction* action = collection->addAction(QStringLiteral("rename-session"), this, &SessionController::renameSession);
     action->setText(i18n("&Current Tab Settings..."));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-rename")));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_S);
@@ -760,7 +760,7 @@ void SessionController::setupExtraActions()
             QOverload<QAction*>::of(&KSelectAction::triggered), this,
             &Konsole::SessionController::copyInputActionsTriggered);
 
-    action = collection->addAction(QStringLiteral("zmodem-upload"), this, SLOT(zmodemUpload()));
+    action = collection->addAction(QStringLiteral("zmodem-upload"), this, &SessionController::zmodemUpload);
     action->setText(i18n("&ZModem Upload..."));
     action->setIcon(QIcon::fromTheme(QStringLiteral("document-open")));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_U);
@@ -781,7 +781,7 @@ void SessionController::setupExtraActions()
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorProcessFinish);
 
     // Text Size
-    action = collection->addAction(QStringLiteral("enlarge-font"), this, SLOT(increaseFontSize()));
+    action = collection->addAction(QStringLiteral("enlarge-font"), this, &SessionController::increaseFontSize);
     action->setText(i18n("Enlarge Font"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("format-font-size-more")));
     QList<QKeySequence> enlargeFontShortcut;
@@ -789,12 +789,12 @@ void SessionController::setupExtraActions()
     enlargeFontShortcut.append(QKeySequence(Konsole::ACCEL + Qt::Key_Equal));
     collection->setDefaultShortcuts(action, enlargeFontShortcut);
 
-    action = collection->addAction(QStringLiteral("shrink-font"), this, SLOT(decreaseFontSize()));
+    action = collection->addAction(QStringLiteral("shrink-font"), this, &SessionController::decreaseFontSize);
     action->setText(i18n("Shrink Font"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("format-font-size-less")));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::Key_Minus);
 
-    action = collection->addAction(QStringLiteral("reset-font-size"), this, SLOT(resetFontSize()));
+    action = collection->addAction(QStringLiteral("reset-font-size"), this, &SessionController::resetFontSize);
     action->setText(i18n("Reset Font Size"));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_0);
 
