@@ -1504,22 +1504,6 @@ void EditProfileDialog::resetKeyBindings()
     }
 }
 
-void EditProfileDialog::setupCheckBoxes(const QVector<BooleanOption>& options, const Profile::Ptr &profile)
-{
-    for(const auto& option : options) {
-        option.button->setChecked(profile->property<bool>(option.property));
-        connect(option.button, SIGNAL(toggled(bool)), this, option.slot);
-    }
-}
-
-void EditProfileDialog::setupRadio(const QVector<RadioOption>& possibilities, int actual)
-{
-    for(const auto& possibility : possibilities) {
-        possibility.button->setChecked(possibility.value == actual);
-        connect(possibility.button, SIGNAL(clicked()), this, possibility.slot);
-    }
-}
-
 void EditProfileDialog::setupButtonGroup(const ButtonGroupOptions &options, const Profile::Ptr &profile)
 {
     auto currentValue = profile->property<int>(options.profileProperty);
@@ -1642,10 +1626,10 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
 
     // setup middle click paste mode
     const auto middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
-    const auto pasteModes = QVector<RadioOption> {
-        {_mouseUi->pasteFromX11SelectionButton, Enum::PasteFromX11Selection, SLOT(pasteFromX11Selection())},
-        {_mouseUi->pasteFromClipboardButton, Enum::PasteFromClipboard, SLOT(pasteFromClipboard())}    };
-    setupRadio(pasteModes, middleClickPasteMode);
+    _mouseUi->pasteFromX11SelectionButton->setChecked(Enum::PasteFromX11Selection == middleClickPasteMode);
+    connect(_mouseUi->pasteFromX11SelectionButton, &QPushButton::clicked, this, &EditProfileDialog::pasteFromX11Selection);
+    _mouseUi->pasteFromClipboardButton->setChecked(Enum::PasteFromClipboard == middleClickPasteMode);
+    connect(_mouseUi->pasteFromClipboardButton, &QPushButton::clicked, this, &EditProfileDialog::pasteFromClipboard);
 
     // interaction options
     _mouseUi->wordCharacterEdit->setText(profile->wordCharacters());
