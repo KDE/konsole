@@ -380,7 +380,7 @@
        <item row="0" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Show Header</string>
+          <string>Show Header:</string>
          </property>
         </widget>
        </item>
@@ -423,7 +423,7 @@
        <item row="4" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Drag Handle Size</string>
+          <string>Drag Handle Size:</string>
          </property>
          <property name="margin">
           <number>0</number>
