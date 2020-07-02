@@ -57,8 +57,10 @@ ConfigurationDialog::ConfigurationDialog(QWidget *parent, KCoreConfigSkeleton *c
             this, &ConfigurationDialog::updateButtons);
 
     _manager = new KConfigDialogManager(this, config);
-    connect(_manager, SIGNAL(settingsChanged()), this, SLOT(settingsChangedSlot()));
-    connect(_manager, SIGNAL(widgetModified()),  this, SLOT(updateButtons()));
+
+    connect(_manager, QOverload<>::of(&KConfigDialogManager::settingsChanged), this, &ConfigurationDialog::settingsChangedSlot);
+
+    connect(_manager, &KConfigDialogManager::widgetModified,  this, &ConfigurationDialog::updateButtons);
 
     connect(buttonBox()->button(QDialogButtonBox::Ok), &QAbstractButton::clicked,
             _manager, &KConfigDialogManager::updateSettings);
@@ -70,8 +72,8 @@ ConfigurationDialog::ConfigurationDialog(QWidget *parent, KCoreConfigSkeleton *c
             _manager, &KConfigDialogManager::updateWidgetsDefault);
 
     _groupManager = new ConfigDialogButtonGroupManager(this, config);
-    connect(_groupManager, SIGNAL(settingsChanged()), this, SLOT(settingsChangedSlot()));
-    connect(_groupManager, SIGNAL(widgetModified()),  this, SLOT(updateButtons()));
+    connect(_groupManager, &ConfigDialogButtonGroupManager::settingsChanged, this, &ConfigurationDialog::settingsChangedSlot);
+    connect(_groupManager, &ConfigDialogButtonGroupManager::widgetModified,  this, &ConfigurationDialog::updateButtons);
 
     connect(buttonBox()->button(QDialogButtonBox::Ok), &QAbstractButton::clicked,
             _groupManager, &ConfigDialogButtonGroupManager::updateSettings);
