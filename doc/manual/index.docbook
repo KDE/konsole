@@ -52,7 +52,7 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2020-06-06</date>
+<date>2020-07-02</date>
 <releaseinfo>Applications 20.08</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
@@ -1001,12 +1001,15 @@ Notifications...</guimenuitem></menuchoice></term>
     </listitem>
     <listitem>
         <para>
-            Using the <guilabel>Tab Bar</guilabel> page you can configure the visibility and
+            Using the <guilabel>Tab Bar/Splitters</guilabel> page you can configure the visibility and
             placement of tab bar, define tabs behavior and fine-tune the tab buttons options. It is possible to configure if you want to
             <guilabel>Show 'New Tab' button</guilabel> and <guilabel>Expand individual tab widths to full window</guilabel>
             or configure <guilabel>Use user-defined stylesheet</guilabel>. The <guilabel>Behavior</guilabel> tab can
             be used to define the place for the new tabs (<guilabel>At the end</guilabel> or <guilabel>After current tab</guilabel>)
             and closing of tabs with a &MMB; click.
+        </para>
+        <para>
+            It is also possible to configure visibility of the split headers (<guilabel>When needed</guilabel> (default), <guilabel>Always</guilabel>, or <guilabel>Never</guilabel>) and define the drag handle size for splits (<guilabel>Small</guilabel> (default), <guilabel>Medium</guilabel>, or <guilabel>Large</guilabel>) using the <guilabel>Splits</guilabel> tab of this configuration page.
         </para>
     </listitem>
     <listitem>
