@@ -895,11 +895,13 @@ private:
     bool _drawOverlay;
     Qt::Edge _overlayEdge;
 
-    bool _highlightScrolledLines;
-    QRect _highlightScrolledLinesRect;
-    int _previousScrollCount;
+    struct HighligthScrolledLines {
+        bool enabled = false;
+        QRect rect;
+        int previousScrollCount = 0;
+        QTimer *timer = nullptr;
+    } _highligthScrolledLinesControl;
     static const int HIGHLIGHT_SCROLLED_LINES_WIDTH = 3;
-    QTimer *_highlightScrolledLinesTimer;
 
     bool _hasCompositeFocus;
 

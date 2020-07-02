@@ -501,10 +501,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _headerBar(new TerminalHeaderBar(this))
     , _searchResultRect(QRect())
     , _drawOverlay(false)
-    , _highlightScrolledLines(false)
-    , _highlightScrolledLinesRect(QRect())
-    , _previousScrollCount(0)
-    , _highlightScrolledLinesTimer(nullptr)
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
@@ -1269,7 +1265,7 @@ void TerminalDisplay::updateImage()
                              _columns * _fontWidth, _fontHeight);
     }
 
-    if (_highlightScrolledLines) {
+    if (_highligthScrolledLinesControl.enabled) {
         dirtyRegion |= highlightScrolledLinesRegion();
     }
     _screenWindow->resetScrollCount();
@@ -1774,13 +1770,13 @@ void TerminalDisplay::drawCurrentResultRect(QPainter& painter)
 
 void TerminalDisplay::highlightScrolledLines(QPainter& painter)
 {
-    if (!_highlightScrolledLines) {
+    if (!_highligthScrolledLinesControl.enabled) {
         return;
     }
 
     QColor color = QColor(_colorTable[Color4Index]);
-    color.setAlpha(_highlightScrolledLinesTimer->isActive() ? 255 : 150);
-    painter.fillRect(_highlightScrolledLinesRect, color);
+    color.setAlpha(_highligthScrolledLinesControl.timer->isActive() ? 255 : 150);
+    painter.fillRect(_highligthScrolledLinesControl.rect, color);
 }
 
 QRect TerminalDisplay::highlightScrolledLinesRegion()
@@ -1789,25 +1785,25 @@ QRect TerminalDisplay::highlightScrolledLinesRegion()
 
     if (_scrollBar->maximum() == 0) {
         // De-highlight when entering something like 'vim'
-        if (!_highlightScrolledLinesRect.isEmpty()) {
-            result = _highlightScrolledLinesRect;
-            _highlightScrolledLinesRect.setRect(0, 0, 0, 0);
+        if (!_highligthScrolledLinesControl.rect.isEmpty()) {
+            result = _highligthScrolledLinesControl.rect;
+            _highligthScrolledLinesControl.rect.setRect(0, 0, 0, 0);
         }
     } else {
-        if (_previousScrollCount != 0) {
+        if (_highligthScrolledLinesControl.previousScrollCount != 0) {
             // De-highlight previously scrolled lines
             if (_screenWindow->scrollCount() == 0) {
-                // Nothing has moved, we can reuse _highlightScrolledLinesRect to clear
-                result = _highlightScrolledLinesRect;
-                _highlightScrolledLinesRect.setRect(0, 0, 0, 0);
+                // Nothing has moved, we can reuse _highligthScrolledLinesControl.rect to clear
+                result = _highligthScrolledLinesControl.rect;
+                _highligthScrolledLinesControl.rect.setRect(0, 0, 0, 0);
             } else {
                 int start = 0;
-                const int nb_lines = abs(_previousScrollCount);
-                if (_screenWindow->scrollCount() * _previousScrollCount > 0) {
+                const int nb_lines = abs(_highligthScrolledLinesControl.previousScrollCount);
+                if (_screenWindow->scrollCount() * _highligthScrolledLinesControl.previousScrollCount > 0) {
                     start = _screenWindow->scrollCount() < 0 ? abs(_screenWindow->scrollCount()) :
-                            _screenWindow->windowLines() - _screenWindow->scrollCount() - _previousScrollCount;
+                            _screenWindow->windowLines() - _screenWindow->scrollCount() - _highligthScrolledLinesControl.previousScrollCount;
                 } else {
-                    start = _previousScrollCount > 0 ? _screenWindow->windowLines() - _previousScrollCount : 0;
+                    start = _highligthScrolledLinesControl.previousScrollCount > 0 ? _screenWindow->windowLines() - _highligthScrolledLinesControl.previousScrollCount : 0;
                 }
                 result = QRect(0, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
             }
@@ -1816,17 +1812,17 @@ QRect TerminalDisplay::highlightScrolledLinesRegion()
         // Highlight the new lines coming into view
         int nb_lines = abs(_screenWindow->scrollCount());
         if (nb_lines > 0) {
-            if (_highlightScrolledLinesTimer->isActive() && (_screenWindow->scrollCount() * _previousScrollCount > 0)) {
-                nb_lines += abs(_previousScrollCount);
+            if (_highligthScrolledLinesControl.timer->isActive() && (_screenWindow->scrollCount() * _highligthScrolledLinesControl.previousScrollCount > 0)) {
+                nb_lines += abs(_highligthScrolledLinesControl.previousScrollCount);
                 nb_lines = std::min(nb_lines, _screenWindow->windowLines());
-                _previousScrollCount += _screenWindow->scrollCount();
+                _highligthScrolledLinesControl.previousScrollCount += _screenWindow->scrollCount();
             } else {
-                _previousScrollCount = _screenWindow->scrollCount();
+                _highligthScrolledLinesControl.previousScrollCount = _screenWindow->scrollCount();
             }
             const int start = _screenWindow->scrollCount() > 0 ? std::max(_screenWindow->windowLines() - nb_lines, 0) : 0;
-            _highlightScrolledLinesRect.setRect(0, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
-            result |= _highlightScrolledLinesRect;
-            _highlightScrolledLinesTimer->start();
+            _highligthScrolledLinesControl.rect.setRect(0, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
+            result |= _highligthScrolledLinesControl.rect;
+            _highligthScrolledLinesControl.timer->start();
         }
     }
 
@@ -1835,7 +1831,7 @@ QRect TerminalDisplay::highlightScrolledLinesRegion()
 
 void TerminalDisplay::highlightScrolledLinesEvent()
 {
-    update(_highlightScrolledLinesRect);
+    update(_highligthScrolledLinesControl.rect);
 }
 
 QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
@@ -2073,8 +2069,8 @@ void TerminalDisplay::calcGeometry()
         contentsRect().height() - headerHeight // height
     );
 
-    _contentRect = contentsRect().adjusted(_margin + (_highlightScrolledLines ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0), _margin,
-                                           -_margin - (_highlightScrolledLines ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0), -_margin);
+    _contentRect = contentsRect().adjusted(_margin + (_highligthScrolledLinesControl.enabled ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0), _margin,
+                                           -_margin - (_highligthScrolledLinesControl.enabled ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0), -_margin);
 
     switch (_scrollbarLocation) {
     case Enum::ScrollBarHidden :
@@ -2227,17 +2223,16 @@ bool TerminalDisplay::scrollFullPage() const
     return _scrollFullPage;
 }
 
-
 void TerminalDisplay::setHighlightScrolledLines(bool highlight)
 {
-    _highlightScrolledLines = highlight;
+    _highligthScrolledLinesControl.enabled = highlight;
 
-    if (_highlightScrolledLines && _highlightScrolledLinesTimer == nullptr) {
+    if (_highligthScrolledLinesControl.enabled && _highligthScrolledLinesControl.timer == nullptr) {
         // setup timer for diming the highlight on scrolled lines
-        _highlightScrolledLinesTimer = new QTimer(this);
-        _highlightScrolledLinesTimer->setSingleShot(true);
-        _highlightScrolledLinesTimer->setInterval(250);
-        connect(_highlightScrolledLinesTimer, &QTimer::timeout, this, &Konsole::TerminalDisplay::highlightScrolledLinesEvent);
+        _highligthScrolledLinesControl.timer = new QTimer(this);
+        _highligthScrolledLinesControl.timer->setSingleShot(true);
+        _highligthScrolledLinesControl.timer->setInterval(250);
+        connect(_highligthScrolledLinesControl.timer, &QTimer::timeout, this, &Konsole::TerminalDisplay::highlightScrolledLinesEvent);
     }
 }
 
