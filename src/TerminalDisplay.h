@@ -639,6 +639,9 @@ private:
     void drawCurrentResultRect(QPainter &painter);
     // draw a thin highlight on the left of the screen for lines that have been scrolled into view
     void highlightScrolledLines(QPainter& painter);
+    // compute which region need to be repainted for scrolled lines highlight
+    QRect highlightScrolledLinesRegion(void);
+
     // draws a section of text, all the text in this section
     // has a common color and style
     void drawTextFragment(QPainter &painter, const QRect &rect, const QString &text,

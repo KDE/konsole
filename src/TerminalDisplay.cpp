@@ -1270,48 +1270,7 @@ void TerminalDisplay::updateImage()
     }
 
     if (_highlightScrolledLines) {
-        if (_scrollBar->maximum() == 0) {
-            // De-highlight when entering something like 'vim'
-            if (!_highlightScrolledLinesRect.isEmpty()) {
-                dirtyRegion |= _highlightScrolledLinesRect;
-                _highlightScrolledLinesRect.setRect(0, 0, 0, 0);
-            }
-        } else {
-            if (_previousScrollCount != 0) {
-                // De-highlight previously scrolled lines
-                if (_screenWindow->scrollCount() == 0) {
-                    // Nothing has moved, we can reuse _highlightScrolledLinesRect to clear
-                    dirtyRegion |= _highlightScrolledLinesRect;
-                    _highlightScrolledLinesRect.setRect(0, 0, 0, 0);
-                } else {
-                    int start = 0;
-                    const int nb_lines = abs(_previousScrollCount);
-                    if (_screenWindow->scrollCount() * _previousScrollCount > 0) {
-                        start = _screenWindow->scrollCount() < 0 ? abs(_screenWindow->scrollCount()) :
-                                _screenWindow->windowLines() - _screenWindow->scrollCount() - _previousScrollCount;
-                    } else {
-                        start = _previousScrollCount > 0 ? _screenWindow->windowLines() - _previousScrollCount : 0;
-                    }
-                    dirtyRegion |= QRect(0, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
-                }
-            }
-
-            // Highlight the new lines coming into view
-            int nb_lines = abs(_screenWindow->scrollCount());
-            if (nb_lines > 0) {
-                if (_highlightScrolledLinesTimer->isActive() && (_screenWindow->scrollCount() * _previousScrollCount > 0)) {
-                    nb_lines += abs(_previousScrollCount);
-                    nb_lines = std::min(nb_lines, _screenWindow->windowLines());
-                    _previousScrollCount += _screenWindow->scrollCount();
-                } else {
-                    _previousScrollCount = _screenWindow->scrollCount();
-                }
-                const int start = _screenWindow->scrollCount() > 0 ? std::max(_screenWindow->windowLines() - nb_lines, 0) : 0;
-                _highlightScrolledLinesRect.setRect(0, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
-                dirtyRegion |= _highlightScrolledLinesRect;
-                _highlightScrolledLinesTimer->start();
-            }
-        }
+        dirtyRegion |= highlightScrolledLinesRegion();
     }
     _screenWindow->resetScrollCount();
 
@@ -1822,6 +1781,56 @@ void TerminalDisplay::highlightScrolledLines(QPainter& painter)
     QColor color = QColor(_colorTable[Color4Index]);
     color.setAlpha(_highlightScrolledLinesTimer->isActive() ? 255 : 150);
     painter.fillRect(_highlightScrolledLinesRect, color);
+}
+
+QRect TerminalDisplay::highlightScrolledLinesRegion()
+{
+    QRect result;
+
+    if (_scrollBar->maximum() == 0) {
+        // De-highlight when entering something like 'vim'
+        if (!_highlightScrolledLinesRect.isEmpty()) {
+            result = _highlightScrolledLinesRect;
+            _highlightScrolledLinesRect.setRect(0, 0, 0, 0);
+        }
+    } else {
+        if (_previousScrollCount != 0) {
+            // De-highlight previously scrolled lines
+            if (_screenWindow->scrollCount() == 0) {
+                // Nothing has moved, we can reuse _highlightScrolledLinesRect to clear
+                result = _highlightScrolledLinesRect;
+                _highlightScrolledLinesRect.setRect(0, 0, 0, 0);
+            } else {
+                int start = 0;
+                const int nb_lines = abs(_previousScrollCount);
+                if (_screenWindow->scrollCount() * _previousScrollCount > 0) {
+                    start = _screenWindow->scrollCount() < 0 ? abs(_screenWindow->scrollCount()) :
+                            _screenWindow->windowLines() - _screenWindow->scrollCount() - _previousScrollCount;
+                } else {
+                    start = _previousScrollCount > 0 ? _screenWindow->windowLines() - _previousScrollCount : 0;
+                }
+                result = QRect(0, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
+            }
+        }
+
+        // Highlight the new lines coming into view
+        int nb_lines = abs(_screenWindow->scrollCount());
+        if (nb_lines > 0) {
+            if (_highlightScrolledLinesTimer->isActive() && (_screenWindow->scrollCount() * _previousScrollCount > 0)) {
+                nb_lines += abs(_previousScrollCount);
+                nb_lines = std::min(nb_lines, _screenWindow->windowLines());
+                _previousScrollCount += _screenWindow->scrollCount();
+            } else {
+                _previousScrollCount = _screenWindow->scrollCount();
+            }
+            const int start = _screenWindow->scrollCount() > 0 ? std::max(_screenWindow->windowLines() - nb_lines, 0) : 0;
+            _highlightScrolledLinesRect.setRect(0, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
+            result |= _highlightScrolledLinesRect;
+            _highlightScrolledLinesTimer->start();
+        }
+    }
+
+    return result;
 }
 
 void TerminalDisplay::highlightScrolledLinesEvent()
