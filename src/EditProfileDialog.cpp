@@ -715,13 +715,8 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
             &Konsole::EditProfileDialog::toggleMouseWheelZoom);
 
     // cursor options
-    const auto options = QVector<BooleanOption>{
-        {
-            _appearanceUi->enableBlinkingCursorButton, Profile::BlinkingCursorEnabled,
-            SLOT(toggleBlinkingCursor(bool))
-        },
-    };
-    setupCheckBoxes(options, profile);
+    _appearanceUi->enableBlinkingCursorButton->setChecked(profile->property<bool>(Profile::BlinkingCursorEnabled));
+    connect(_appearanceUi->enableBlinkingCursorButton, &QToolButton::toggled, this, &EditProfileDialog::toggleBlinkingCursor);
 
     if (profile->useCustomCursorColor()) {
         _appearanceUi->customCursorColorButton->setChecked(true);
