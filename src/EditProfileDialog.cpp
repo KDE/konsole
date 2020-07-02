@@ -1694,29 +1694,16 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
 
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
 {
-    const auto options = QVector<BooleanOption>{
-        {
-            _advancedUi->enableBlinkingTextButton, Profile::BlinkingTextEnabled,
-            SLOT(toggleBlinkingText(bool))
-        },
-        {
-            _advancedUi->enableFlowControlButton, Profile::FlowControlEnabled,
-            SLOT(toggleFlowControl(bool))
-        },
-        {
-            _appearanceUi->enableBlinkingCursorButton, Profile::BlinkingCursorEnabled,
-            SLOT(toggleBlinkingCursor(bool))
-        },
-        {
-            _advancedUi->enableBidiRenderingButton, Profile::BidiRenderingEnabled,
-            SLOT(togglebidiRendering(bool))
-        },
-        {
-            _advancedUi->enableReverseUrlHints, Profile::ReverseUrlHints,
-            SLOT(toggleReverseUrlHints(bool))
-        }
-    };
-    setupCheckBoxes(options, profile);
+    _advancedUi->enableBlinkingTextButton->setChecked(profile->property<bool>(Profile::BlinkingTextEnabled));
+    connect(_advancedUi->enableBlinkingTextButton, &QPushButton::toggled, this, &EditProfileDialog::toggleBlinkingText);
+    _advancedUi->enableFlowControlButton->setChecked(profile->property<bool>(Profile::FlowControlEnabled));
+    connect(_advancedUi->enableFlowControlButton, &QPushButton::toggled, this, &EditProfileDialog::toggleFlowControl);
+    _appearanceUi->enableBlinkingCursorButton->setChecked(profile->property<bool>(Profile::BlinkingCursorEnabled));
+    connect(_appearanceUi->enableBlinkingCursorButton, &QPushButton::toggled, this, &EditProfileDialog::toggleBlinkingCursor);
+    _advancedUi->enableBidiRenderingButton->setChecked(profile->property<bool>(Profile::BidiRenderingEnabled));
+    connect(_advancedUi->enableBidiRenderingButton, &QPushButton::toggled, this, &EditProfileDialog::togglebidiRendering);
+    _advancedUi->enableReverseUrlHints->setChecked(profile->property<bool>(Profile::ReverseUrlHints));
+    connect(_advancedUi->enableReverseUrlHints, &QPushButton::toggled, this, &EditProfileDialog::toggleReverseUrlHints);
 
     // Setup the URL hints modifier checkboxes
     {
