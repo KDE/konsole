@@ -283,11 +283,8 @@ void Part::activeViewChanged(SessionController *controller)
     connect(controller, &Konsole::SessionController::currentDirectoryChanged, this,
             &Konsole::Part::currentDirectoryChanged);
 
-    const char *displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*,bool&));
-    const char *partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*,bool&));
-
-    disconnect(controller->view(), displaySignal, this, partSlot);
-    connect(controller->view(), displaySignal, this, partSlot);
+    disconnect(controller->view(), &TerminalDisplay::overrideShortcutCheck, this, &Part::overrideTerminalShortcut);
+    connect(controller->view(), &TerminalDisplay::overrideShortcutCheck, this, &Part::overrideTerminalShortcut);
 
     _pluggedController = controller;
 }
