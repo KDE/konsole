@@ -1619,49 +1619,26 @@ void EditProfileDialog::toggleHighlightScrolledLines(bool enable)
 
 void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
 {
-    const auto options = QVector<BooleanOption>{
-        {
-            _mouseUi->underlineLinksButton, Profile::UnderlineLinksEnabled,
-            SLOT(toggleUnderlineLinks(bool))
-        },
-        {
-            _mouseUi->underlineFilesButton, Profile::UnderlineFilesEnabled,
-            SLOT(toggleUnderlineFiles(bool))
-        },
-        {
-            _mouseUi->ctrlRequiredForDragButton, Profile::CtrlRequiredForDrag,
-            SLOT(toggleCtrlRequiredForDrag(bool))
-        },
-        {
-            _mouseUi->copyTextAsHTMLButton, Profile::CopyTextAsHTML,
-            SLOT(toggleCopyTextAsHTML(bool))
-        },
-        {
-            _mouseUi->copyTextToClipboardButton, Profile::AutoCopySelectedText,
-            SLOT(toggleCopyTextToClipboard(bool))
-        },
-        {
-            _mouseUi->trimLeadingSpacesButton, Profile::TrimLeadingSpacesInSelectedText,
-            SLOT(toggleTrimLeadingSpacesInSelectedText(bool))
-        },
-        {
-            _mouseUi->trimTrailingSpacesButton, Profile::TrimTrailingSpacesInSelectedText,
-            SLOT(toggleTrimTrailingSpacesInSelectedText(bool))
-        },
-        {
-            _mouseUi->openLinksByDirectClickButton, Profile::OpenLinksByDirectClickEnabled,
-            SLOT(toggleOpenLinksByDirectClick(bool))
-        },
-        {
-            _mouseUi->dropUrlsAsText, Profile::DropUrlsAsText,
-            SLOT(toggleDropUrlsAsText(bool))
-        },
-        {
-            _mouseUi->enableAlternateScrollingButton, Profile::AlternateScrolling,
-            SLOT(toggleAlternateScrolling(bool))
-        }
-    };
-    setupCheckBoxes(options, profile);
+    _mouseUi->underlineLinksButton->setChecked(profile->property<bool>(Profile::UnderlineLinksEnabled));
+    connect(_mouseUi->underlineLinksButton, &QPushButton::toggled, this, &EditProfileDialog::toggleUnderlineLinks);
+    _mouseUi->underlineFilesButton->setChecked(profile->property<bool>(Profile::UnderlineFilesEnabled));
+    connect(_mouseUi->underlineFilesButton, &QPushButton::toggled, this, &EditProfileDialog::toggleUnderlineFiles);
+    _mouseUi->ctrlRequiredForDragButton->setChecked(profile->property<bool>(Profile::CtrlRequiredForDrag));
+    connect(_mouseUi->ctrlRequiredForDragButton, &QPushButton::toggled, this, &EditProfileDialog::toggleCtrlRequiredForDrag);
+    _mouseUi->copyTextAsHTMLButton->setChecked(profile->property<bool>(Profile::CopyTextAsHTML));
+    connect(_mouseUi->copyTextAsHTMLButton, &QPushButton::toggled, this, &EditProfileDialog::toggleCopyTextAsHTML);
+    _mouseUi->copyTextToClipboardButton->setChecked(profile->property<bool>(Profile::AutoCopySelectedText));
+    connect(_mouseUi->copyTextToClipboardButton, &QPushButton::toggled, this, &EditProfileDialog::toggleCopyTextToClipboard);
+    _mouseUi->trimLeadingSpacesButton->setChecked(profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText));
+    connect(_mouseUi->trimLeadingSpacesButton, &QPushButton::toggled, this, &EditProfileDialog::toggleTrimLeadingSpacesInSelectedText);
+    _mouseUi->trimTrailingSpacesButton->setChecked(profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText));
+    connect(_mouseUi->trimTrailingSpacesButton, &QPushButton::toggled, this, &EditProfileDialog::toggleTrimTrailingSpacesInSelectedText);
+    _mouseUi->openLinksByDirectClickButton->setChecked(profile->property<bool>(Profile::OpenLinksByDirectClickEnabled));
+    connect(_mouseUi->openLinksByDirectClickButton, &QPushButton::toggled, this, &EditProfileDialog::toggleOpenLinksByDirectClick);
+    _mouseUi->dropUrlsAsText->setChecked(profile->property<bool>(Profile::DropUrlsAsText));
+    connect(_mouseUi->dropUrlsAsText, &QPushButton::toggled, this, &EditProfileDialog::toggleDropUrlsAsText);
+    _mouseUi->enableAlternateScrollingButton->setChecked(profile->property<bool>(Profile::AlternateScrolling));
+    connect(_mouseUi->enableAlternateScrollingButton, &QPushButton::toggled, this, &EditProfileDialog::toggleAlternateScrolling);
 
     // setup middle click paste mode
     const auto middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);
