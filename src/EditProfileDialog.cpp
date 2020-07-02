@@ -1575,12 +1575,11 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr &profile)
     // setup scrollpageamount type radio
     auto scrollFullPage = profile->property<int>(Profile::ScrollFullPage);
 
-    const auto pageamounts = QVector<RadioOption>{
-        {_scrollingUi->scrollHalfPage, Enum::ScrollPageHalf, SLOT(scrollHalfPage())},
-        {_scrollingUi->scrollFullPage, Enum::ScrollPageFull, SLOT(scrollFullPage())}
-    };
+    _scrollingUi->scrollHalfPage->setChecked(Enum::ScrollPageHalf == scrollFullPage);
+    connect(_scrollingUi->scrollHalfPage, &QPushButton::clicked, this, &EditProfileDialog::scrollFullPage);
 
-    setupRadio(pageamounts, scrollFullPage);
+    _scrollingUi->scrollFullPage->setChecked(Enum::ScrollPageFull == scrollFullPage);
+    connect(_scrollingUi->scrollFullPage, &QPushButton::clicked, this, &EditProfileDialog::scrollFullPage);
 
 
     const auto options = QVector<BooleanOption>{
