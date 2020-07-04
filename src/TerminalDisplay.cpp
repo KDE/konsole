@@ -2096,11 +2096,17 @@ void TerminalDisplay::setScrollBarPosition(Enum::ScrollBarPositionEnum position)
         return;
     }
 
-    _scrollBar->setHidden(position == Enum::ScrollBarHidden);
     _scrollbarLocation = position;
+    applyScrollBarPosition(true);
+}
 
-    propagateSize();
-    update();
+void TerminalDisplay::applyScrollBarPosition(bool propagate) {
+    _scrollBar->setHidden(_scrollbarLocation == Enum::ScrollBarHidden);
+
+    if (propagate) {
+        propagateSize();
+        update();
+    }
 }
 
 void TerminalDisplay::scrollBarPositionChanged(int)
@@ -2744,6 +2750,11 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         _scrollWheelState.addWheelEvent(ev);
 
         _scrollBar->event(ev);
+
+        // Reapply scrollbar position since the scrollbar event handler
+        // sometimes makes the scrollbar visible when set to hidden.
+        // Don't call propagateSize and update, since nothing changed.
+        applyScrollBarPosition(false);
 
         Q_ASSERT(_sessionController != nullptr);
 

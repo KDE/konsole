@@ -678,6 +678,10 @@ private:
     // current size in columns and lines
     void showResizeNotification();
 
+    // applies changes to scrollbarLocation to the scroll bar and
+    // if @propagate is true, propagates size information
+    void applyScrollBarPosition(bool propagate = true);
+
     // scrolls the image by a number of lines.
     // 'lines' may be positive ( to scroll the image down )
     // or negative ( to scroll the image up )
