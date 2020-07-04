@@ -180,8 +180,10 @@ void TerminalHeaderBar::updateSpecialState(ViewProperties *item)
 {
     auto controller = dynamic_cast<SessionController*>(item);
 
-    m_statusIconReadOnly->setVisible(controller->isReadOnly());
-    m_statusIconCopyInput->setVisible(controller->isCopyInputActive());
+    if (controller != nullptr) {
+        m_statusIconReadOnly->setVisible(controller->isReadOnly());
+        m_statusIconCopyInput->setVisible(controller->isCopyInputActive());
+    }
 }
 
 void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
