@@ -1790,6 +1790,8 @@ QRect TerminalDisplay::highlightScrolledLinesRegion()
             _highlightScrolledLinesControl.rect.setRect(0, 0, 0, 0);
         }
     } else {
+        const int highlightLeftPosition = _scrollbarLocation == Enum::ScrollBarLeft ? _scrollBar->width() : 0;
+
         if (_highlightScrolledLinesControl.previousScrollCount != 0) {
             // De-highlight previously scrolled lines
             if (_screenWindow->scrollCount() == 0 && _scrollBar->value() == _scrollBar->maximum()) {
@@ -1805,7 +1807,7 @@ QRect TerminalDisplay::highlightScrolledLinesRegion()
                 } else {
                     start = _highlightScrolledLinesControl.previousScrollCount > 0 ? _screenWindow->windowLines() - _highlightScrolledLinesControl.previousScrollCount : 0;
                 }
-                result = QRect(0, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
+                result = QRect(highlightLeftPosition, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
             }
         }
 
@@ -1820,7 +1822,8 @@ QRect TerminalDisplay::highlightScrolledLinesRegion()
                 _highlightScrolledLinesControl.previousScrollCount = _screenWindow->scrollCount();
             }
             const int start = _screenWindow->scrollCount() > 0 ? std::max(_screenWindow->windowLines() - nb_lines, 0) : 0;
-            _highlightScrolledLinesControl.rect.setRect(0, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
+            _highlightScrolledLinesControl.rect.setRect(highlightLeftPosition, _contentRect.top() + start * _fontHeight,
+                                                        HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
             result |= _highlightScrolledLinesControl.rect;
             _highlightScrolledLinesControl.timer->start();
         }
