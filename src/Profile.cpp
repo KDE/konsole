@@ -189,7 +189,7 @@ void Profile::useFallback()
     setProperty(HistorySize, 1000);
     setProperty(ScrollBarPosition, Enum::ScrollBarRight);
     setProperty(ScrollFullPage, false);
-    setProperty(HighlightScrolledLines, false);
+    setProperty(HighlightScrolledLines, true);
 
     setProperty(FlowControlEnabled, true);
     setProperty(UrlHintsModifiers, 0);
