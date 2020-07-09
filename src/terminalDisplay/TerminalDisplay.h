@@ -267,6 +267,13 @@ public:
     /** See setUsesMouseTracking() */
     bool usesMouseTracking() const;
 
+    /**
+     * Set whether mouse tracking should be allowed, even if requested.
+     * This is stored separately from if mouse tracking is enabled, in case the
+     * user turns it on/off while mouse tracking is requested.
+     */
+    void setAllowMouseTracking(const bool allow);
+
     bool hasCompositeFocus() const
     {
         return _hasCompositeFocus;
@@ -667,6 +674,7 @@ private:
     bool _showTerminalSizeHint;
     bool _bidiEnabled;
     bool _usesMouseTracking;
+    bool _allowMouseTracking;
     bool _bracketedPasteMode;
 
     QPoint _iPntSel; // initial selection point
