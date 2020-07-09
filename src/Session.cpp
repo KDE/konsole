@@ -928,6 +928,10 @@ void Session::sendText(const QString& text) const
 // Only D-Bus calls this function
 void Session::runCommand(const QString& command) const
 {
+    if (isReadOnly()) {
+        return;
+    }
+
     sendText(command + QLatin1Char('\n'));
 }
 
