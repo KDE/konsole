@@ -63,7 +63,9 @@ public:
         // this hotspot represents a clickable e-mail address
         EMailAddress,
         // this hotspot represents a marker
-        Marker
+        Marker,
+        // this spot represents a Escaped URL
+        EscapedUrl,
     };
 
     /** Returns the line when the hotspot area starts */

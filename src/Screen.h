@@ -47,6 +47,7 @@ class TerminalCharacterDecoder;
 class TerminalDisplay;
 class HistoryType;
 class HistoryScroll;
+class EscapeSequenceUrlExtractor;
 
 /**
     \brief An image of characters with associated attributes.
@@ -98,6 +99,8 @@ public:
 
     Screen(const Screen &) = delete;
     Screen &operator=(const Screen &) = delete;
+
+    EscapeSequenceUrlExtractor *urlExtractor() const;
 
     // VT100/2 Operations
     // Cursor Movement
@@ -735,6 +738,8 @@ private:
 
     // used in REP (repeating char)
     quint32 _lastDrawnChar;
+    EscapeSequenceUrlExtractor *_escapeSequenceUrlExtractor;
+    void toggleUrlInput();
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Screen::DecodingOptions)

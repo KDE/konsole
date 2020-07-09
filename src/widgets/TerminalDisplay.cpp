@@ -66,6 +66,8 @@
 #include "filterHotSpots/TerminalImageFilterChain.h"
 #include "filterHotSpots/HotSpot.h"
 #include "filterHotSpots/FileFilterHotspot.h"
+#include "filterHotSpots/EscapeSequenceUrlFilter.h"
+#include "filterHotSpots/EscapeSequenceUrlFilterHotSpot.h"
 
 #include "konsoledebug.h"
 #include "PlainTextDecoder.h"
@@ -82,6 +84,7 @@
 #include "LineBlockCharacters.h"
 #include "PrintOptions.h"
 #include "KonsolePrintManager.h"
+#include "EscapeSequenceUrlExtractor.h"
 
 using namespace Konsole;
 
@@ -143,6 +146,9 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
             QGuiApplication::inputMethod()->update(Qt::ImCursorRectangle);
         });
         _screenWindow->setWindowLines(_lines);
+
+        auto profile = SessionManager::instance()->sessionProfile(_sessionController->session());
+        _screenWindow->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
     }
 }
 
@@ -1452,7 +1458,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 
     for (const auto &spot : spots) {
         QRegion region;
-        if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress) {
+        if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl) {
             QRect r;
             if (spot->startLine() == spot->endLine()) {
                 r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
@@ -1535,6 +1541,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                         line * _fontHeight + _contentRect.top(),
                         endColumn * _fontWidth + _contentRect.left() - 1,
                         (line + 1)*_fontHeight + _contentRect.top() - 1);
+
             // Underline link hotspots
             const bool hasMouse = region.contains(mapFromGlobal(QCursor::pos()));
             if ((spot->type() == HotSpot::Link && _showUrlHint) || hasMouse) {
@@ -1554,6 +1561,18 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 const bool isCurrentResultLine = (_screenWindow->currentResultLine() == (spot->startLine() + _screenWindow->currentLine()));
                 QColor color = isCurrentResultLine ? QColor(255, 255, 0, 120) : QColor(255, 0, 0, 120);
                 painter.fillRect(r, color);
+            } else if (spot->type() == HotSpot::EscapedUrl) {
+                /* Always underline escaped links, it's the only way
+                 *to recognize that this is not just random bytes in
+                 * the screen. */
+                QFontMetrics metrics(font());
+
+                // find the baseline (which is the invisible line that the characters in the font sit on,
+                // with some having tails dangling below)
+                const int baseline = r.bottom() - metrics.descent();
+                // find the position of the underline below that
+                const int underlinePos = baseline + metrics.underlinePos();
+                painter.drawLine(r.left() , underlinePos, r.right() , underlinePos);
             }
         }
     }
@@ -2379,7 +2398,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     // handle filters
     // change link hot-spot appearance on mouse-over
     auto spot = _filterChain->hotSpotAt(charLine, charColumn);
-    if ((spot != nullptr) && (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress)) {
+    if ((spot != nullptr) && (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl)) {
         QRegion previousHotspotArea = _mouseOverHotspotArea;
         _mouseOverHotspotArea = QRegion();
         QRect r;
@@ -2707,7 +2726,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
     if (!_screenWindow->screen()->hasSelection() && (_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
         auto spot = _filterChain->hotSpotAt(charLine, charColumn);
-        if ((spot != nullptr) && (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress)) {
+        if ((spot != nullptr) && (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl)) {
             spot->activate();
         }
     }

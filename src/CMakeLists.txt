@@ -113,18 +113,22 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         CompositeWidgetFocusWatcher.cpp
                         CopyInputDialog.cpp
                         Emulation.cpp
+                        EscapeSequenceUrlExtractor.cpp
                         ExtendedCharTable.cpp
                         FontDialog.cpp
-                        hsluv.c
                         HTMLDecoder.cpp
                         HistorySizeDialog.cpp
                         KeyBindingEditor.cpp
                         LabelsAligner.cpp
                         LineBlockCharacters.cpp
                         NullProcessInfo.cpp
+                        NullProcessInfo.cpp
                         PlainTextDecoder.cpp
                         PrintOptions.cpp
+                        PrintOptions.cpp
                         ProcessInfo.cpp
+                        ProcessInfo.cpp
+                        Pty.cpp
                         Pty.cpp
                         RenameTabDialog.cpp
                         SSHProcessInfo.cpp
@@ -138,7 +142,10 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         ViewManager.cpp
                         ViewProperties.cpp
                         Vt102Emulation.cpp
+                        WindowSystemInfo.cpp
                         ZModemDialog.cpp
+                        filterHotSpots/EscapeSequenceUrlFilter.cpp
+                        filterHotSpots/EscapeSequenceUrlFilterHotSpot.cpp
                         filterHotSpots/FileFilter.cpp
                         filterHotSpots/FileFilterHotspot.cpp
                         filterHotSpots/Filter.cpp
@@ -162,9 +169,13 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         history/compact/CompactHistoryScroll.cpp
                         history/compact/CompactHistoryType.cpp
                         widgets/DetachableTabBar.cpp
+                        widgets/DetachableTabBar.cpp
                         widgets/EditProfileDialog.cpp
                         widgets/HistorySizeWidget.cpp
+                        widgets/HistorySizeWidget.cpp
                         widgets/IncrementalSearchBar.cpp
+                        widgets/IncrementalSearchBar.cpp
+                        widgets/RenameTabWidget.cpp
                         widgets/RenameTabWidget.cpp
                         widgets/TabTitleFormatButton.cpp
                         widgets/TerminalDisplay.cpp

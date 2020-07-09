@@ -212,6 +212,9 @@ private Q_SLOTS:
     // apply the first previewed changes stored up by delayedPreview()
     void delayedPreviewActivate();
 
+    void toggleAllowLinkEscapeSequence(bool);
+    void linkEscapeSequenceTextsChanged();
+
 private:
     Q_DISABLE_COPY(EditProfileDialog)
 

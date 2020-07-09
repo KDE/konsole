@@ -35,13 +35,18 @@
 // Konsole
 #include "ShouldApplyProperty.h"
 #include "session/Session.h"
+
 #include "profile/ProfileManager.h"
 #include "ProfileCommandParser.h"
 #include "history/HistoryTypeNone.h"
 #include "history/HistoryTypeFile.h"
 #include "history/compact/CompactHistoryType.h"
+#include "session/SessionController.h"
+
 #include "Enumeration.h"
 #include "widgets/TerminalDisplay.h"
+#include "Screen.h"
+#include "EscapeSequenceUrlExtractor.h"
 
 using namespace Konsole;
 
@@ -178,6 +183,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
 {
     Q_ASSERT(profile);
 
+    qDebug() << "Applying profile";
     _sessionProfiles[session] = profile;
 
     ShouldApplyProperty apply(profile, modifiedPropertiesOnly);
@@ -288,6 +294,10 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
     // Monitor Silence
     if (apply.shouldApply(Profile::SilenceSeconds)) {
         session->setMonitorSilenceSeconds(profile->silenceSeconds());
+    }
+
+    for (TerminalDisplay *view : session->views()) {
+        view->screenWindow()->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
     }
 }
 

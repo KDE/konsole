@@ -34,6 +34,7 @@
 #include <QTimer>
 #include <QUrl>
 #include <QStandardPaths>
+#include <QRegularExpressionValidator>
 
 // KDE
 #include <KCodecAction>
@@ -192,6 +193,11 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     auto *mousePageWidget = new QWidget(this);
     _mouseUi = new Ui::EditProfileMousePage();
     _mouseUi->setupUi(mousePageWidget);
+
+    const auto regExp = QRegularExpression(QStringLiteral(R"(([a-z]*:\/\/;)*([A-Za-z*]:\/\/))"));
+    auto validator = new QRegularExpressionValidator(regExp, this);
+    _mouseUi->linkEscapeSequenceTexts->setValidator(validator);
+
     auto *mousePageItem = addPage(mousePageWidget, mousePageName);
     mousePageItem->setHeader(mousePageName);
     mousePageItem->setIcon(QIcon::fromTheme(QStringLiteral("input-mouse"),
@@ -787,6 +793,16 @@ void EditProfileDialog::setAntialiasText(bool enable)
 
     const QFont font = _profile->font();
     updateFontPreview(font);
+}
+
+void EditProfileDialog::toggleAllowLinkEscapeSequence(bool enable)
+{
+    updateTempProfileProperty(Profile::AllowEscapedLinks, enable);
+}
+
+void EditProfileDialog::linkEscapeSequenceTextsChanged()
+{
+    updateTempProfileProperty(Profile::EscapedLinksSchema, _mouseUi->linkEscapeSequenceTexts->text());
 }
 
 void EditProfileDialog::setBoldIntense(bool enable)
@@ -1661,6 +1677,15 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
 
     _mouseUi->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
     connect(_mouseUi->enableMouseWheelZoomButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::toggleMouseWheelZoom);
+
+    _mouseUi->allowLinkEscapeSequenceButton->setChecked(profile->allowEscapedLinks());
+    connect(_mouseUi->allowLinkEscapeSequenceButton, &QPushButton::clicked,
+            this, &Konsole::EditProfileDialog::toggleAllowLinkEscapeSequence);
+
+    _mouseUi->linkEscapeSequenceTexts->setEnabled(profile->allowEscapedLinks());
+    _mouseUi->linkEscapeSequenceTexts->setText(profile->escapedLinksSchema().join(QLatin1Char(';')));
+    connect(_mouseUi->linkEscapeSequenceTexts, &QLineEdit::textChanged,
+            this, &Konsole::EditProfileDialog::linkEscapeSequenceTextsChanged);
 }
 
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)

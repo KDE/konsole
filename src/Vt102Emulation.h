@@ -25,6 +25,8 @@
 
 // Qt
 #include <QHash>
+#include <QPair>
+#include <QVector>
 
 // Konsole
 #include "Emulation.h"
@@ -189,6 +191,7 @@ private:
 
     bool _reportFocusEvents;
 };
+
 }
 
 #endif // VT102EMULATION_H

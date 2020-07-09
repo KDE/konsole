@@ -65,20 +65,26 @@
 #include "SaveHistoryTask.h"
 #include "ScreenWindow.h"
 #include "SearchHistoryTask.h"
+
+#include "filterHotSpots/EscapeSequenceUrlFilter.h"
 #include "filterHotSpots/FileFilter.h"
 #include "filterHotSpots/Filter.h"
 #include "filterHotSpots/FilterChain.h"
 #include "filterHotSpots/HotSpot.h"
 #include "filterHotSpots/RegExpFilter.h"
 #include "filterHotSpots/UrlFilter.h"
+
 #include "history/HistoryType.h"
 #include "history/HistoryTypeFile.h"
 #include "history/HistoryTypeNone.h"
 #include "history/compact/CompactHistoryType.h"
+
 #include "profile/ProfileList.h"
+
 #include "session/Session.h"
 #include "session/SessionGroup.h"
 #include "session/SessionManager.h"
+
 #include "widgets/EditProfileDialog.h"
 #include "widgets/IncrementalSearchBar.h"
 #include "widgets/TerminalDisplay.h"
@@ -122,6 +128,7 @@ SessionController::SessionController(Session* session, TerminalDisplay* view, QO
     , _editProfileDialog(nullptr)
     , _searchBar(view->searchBar())
     , _monitorProcessFinish(false)
+    , _escapedUrlFilter(nullptr)
 {
     Q_ASSERT(session);
     Q_ASSERT(view);
@@ -1246,25 +1253,36 @@ void SessionController::updateFilterList(Profile::Ptr profile)
         return;
     }
 
+    //TODO: Refactor this code.
     bool underlineFiles = profile->underlineFilesEnabled();
-
+    FilterChain *filterChain = _sessionDisplayConnection->view()->filterChain();
     if (!underlineFiles && (_fileFilter != nullptr)) {
-        _sessionDisplayConnection->view()->filterChain()->removeFilter(_fileFilter);
+        filterChain->removeFilter(_fileFilter);
         delete _fileFilter;
         _fileFilter = nullptr;
     } else if (underlineFiles && (_fileFilter == nullptr)) {
         _fileFilter = new FileFilter(_sessionDisplayConnection->session());
-        _sessionDisplayConnection->view()->filterChain()->addFilter(_fileFilter);
+        filterChain->addFilter(_fileFilter);
     }
 
     bool underlineLinks = profile->underlineLinksEnabled();
     if (!underlineLinks && (_urlFilter != nullptr)) {
-        _sessionDisplayConnection->view()->filterChain()->removeFilter(_urlFilter);
+        filterChain->removeFilter(_urlFilter);
         delete _urlFilter;
         _urlFilter = nullptr;
     } else if (underlineLinks && (_urlFilter == nullptr)) {
         _urlFilter = new UrlFilter();
-        _sessionDisplayConnection->view()->filterChain()->addFilter(_urlFilter);
+        filterChain->addFilter(_urlFilter);
+    }
+
+    const bool allowEscapeSequenceLinks = profile->allowEscapedLinks();
+    if (allowEscapeSequenceLinks && (_escapedUrlFilter != nullptr)) {
+        filterChain->removeFilter(_escapedUrlFilter);
+        delete _escapedUrlFilter;
+        _escapedUrlFilter = nullptr;
+    } else if (allowEscapeSequenceLinks && _escapedUrlFilter == nullptr) {
+        _escapedUrlFilter = new EscapeSequenceUrlFilter(_session, _view);
+        filterChain->addFilter(_escapedUrlFilter);
     }
 }
 

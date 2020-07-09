@@ -1,4 +1,5 @@
 set(konsole_colorscheme_SRCS
+    hsluv.c
     ColorScheme.cpp
     ColorSchemeManager.cpp
     ColorSchemeWallpaper.cpp

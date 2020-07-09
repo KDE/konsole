@@ -33,6 +33,7 @@
 #include "history/HistoryScrollNone.h"
 #include "ExtendedCharTable.h"
 #include "profile/Profile.h"
+#include "EscapeSequenceUrlExtractor.h"
 
 using namespace Konsole;
 
@@ -82,8 +83,10 @@ Screen::Screen(int lines, int columns):
     _effectiveBackground(CharacterColor()),
     _effectiveRendition(DEFAULT_RENDITION),
     _lastPos(-1),
-    _lastDrawnChar(0)
+    _lastDrawnChar(0),
+    _escapeSequenceUrlExtractor(new EscapeSequenceUrlExtractor())
 {
+    _escapeSequenceUrlExtractor->setScreen(this);
     _lineProperties.resize(_lines + 1);
     for (int i = 0; i < _lines + 1; i++) {
         _lineProperties[i] = LINE_DEFAULT;
@@ -828,6 +831,7 @@ void Screen::displayCharacter(uint c)
         w--;
     }
     _cuX = newCursorX;
+    _escapeSequenceUrlExtractor->appendUrlText(QChar(c));
 }
 
 int Screen::scrolledLines() const
@@ -1465,9 +1469,8 @@ void Screen::addHistLine()
 {
     // add line to history buffer
     // we have to take care about scrolling, too...
-
+    const int oldHistLines = _history->getLines();
     if (hasScroll()) {
-        const int oldHistLines = _history->getLines();
 
         _history->addCellsVector(_screenLines[0]);
         _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
@@ -1517,6 +1520,12 @@ void Screen::addHistLine()
             }
         }
     }
+
+    // We removed a line, we need to verify if we need to remove a URL.
+    const int newHistLines = _history->getLines();
+    if (oldHistLines == newHistLines) {
+        _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+    }
 }
 
 int Screen::getHistLines() const
@@ -1561,3 +1570,9 @@ void Screen::fillWithDefaultChar(Character* dest, int count)
         dest[i] = Screen::DefaultChar;
     }
 }
+
+Konsole::EscapeSequenceUrlExtractor * Konsole::Screen::urlExtractor() const
+{
+    return _escapeSequenceUrlExtractor;
+}
+

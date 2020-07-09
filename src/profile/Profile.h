@@ -308,7 +308,17 @@ public:
         /** (QColor) used in tab color */
         TabColor,
         /** (int) Value of the Dimm Effect */
-        DimValue
+        DimValue,
+        /** (bool) Allow Escape sequence for Links.
+         * this allows applications to use links in the form of
+         * printf '\e]8;;http://www.example.org\e\\example text\e]8;;\e\\\n'
+         */
+        AllowEscapedLinks,
+        /** (String) Escape Sequence for Links schema,
+         * This tell us what kinf of links are accepted, for security reaosn we can't accept
+         * some weird ones like git:// and ssh:// but if the user wants he can enable.
+         */
+        EscapedLinksSchema,
     };
 
     Q_ENUM(Property)
@@ -457,6 +467,16 @@ public:
     QColor tabColor() const
     {
         return property<QColor>(Profile::TabColor);
+    }
+
+    bool allowEscapedLinks() const
+    {
+        return property<bool>(Profile::AllowEscapedLinks);
+    }
+
+    QStringList escapedLinksSchema() const
+    {
+        return property<QString>(Profile::EscapedLinksSchema).split(QLatin1Char(';'));
     }
 
     /** Convenience method for property<bool>(Profile::ShowTerminalSizeHint) */

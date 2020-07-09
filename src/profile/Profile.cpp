@@ -129,6 +129,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { MiddleClickPasteMode, "MiddleClickPasteMode" , INTERACTION_GROUP , QVariant::Int }
     , { MouseWheelZoomEnabled, "MouseWheelZoomEnabled", INTERACTION_GROUP, QVariant::Bool }
     , { AlternateScrolling, "AlternateScrolling", INTERACTION_GROUP, QVariant::Bool }
+    , { AllowEscapedLinks, "AllowEscapedLinks", INTERACTION_GROUP, QVariant::Bool }
+    , { EscapedLinksSchema, "EscapedLinksSchema", INTERACTION_GROUP, QVariant::String }
 
     // Encoding
     , { DefaultEncoding , "DefaultEncoding" , ENCODING_GROUP , QVariant::String }
@@ -229,7 +231,8 @@ void Profile::useFallback()
     setProperty(WordCharacters, QStringLiteral(":@-./_~?&=%+#"));
 
     setProperty(TabColor, QColor(QColor::Invalid));
-
+    setProperty(AllowEscapedLinks, true);
+    setProperty(EscapedLinksSchema, QStringLiteral("http://;https://;file://"));
     // Fallback should not be shown in menus
     setHidden(true);
 }

@@ -39,6 +39,8 @@
 #include "keyboardtranslator/KeyboardTranslator.h"
 #include "session/SessionController.h"
 #include "widgets/TerminalDisplay.h"
+#include "EscapeSequenceUrlExtractor.h"
+#include "Screen.h"
 
 using Konsole::Vt102Emulation;
 
@@ -62,6 +64,10 @@ unsigned short Konsole::vt100_graphics[32] = {
     0x00b1, 0x2424, 0x240b, 0x2518, 0x2510, 0x250c, 0x2514, 0x253c,
     0xF800, 0xF801, 0x2500, 0xF803, 0xF804, 0x251c, 0x2524, 0x2534,
     0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
+};
+
+enum XTERM_EXTENDED {
+    URL_LINK = '8'
 };
 
 Vt102Emulation::Vt102Emulation() :
@@ -396,7 +402,17 @@ void Vt102Emulation::receiveChar(uint cc)
     // Operating System Command
     if (p > 2 && s[1] == ']') {
       // <ESC> ']' ... <ESC> '\'
-      if (s[p-2] == ESC && s[p-1] == '\\') { processSessionAttributeRequest(p-1); resetTokenizer(); return; }
+      if (s[p-2] == ESC && s[p-1] == '\\') {
+          // This runs two times per link, the first prepares the link to be read,
+          // the second finalizes it.
+          if (s[2] == XTERM_EXTENDED::URL_LINK) {
+                // printf '\e]8;;http://example.com\e\\This is a link\e]8;;\e\\\n'
+               _currentScreen->urlExtractor()->toggleUrlInput();
+          }
+          processSessionAttributeRequest(p-1);
+          resetTokenizer();
+          return;
+      }
       // <ESC> ']' ... <ESC> + one character for reprocessing
       if (s[p-2] == ESC) { processSessionAttributeRequest(p-1); resetTokenizer(); receiveChar(cc); return; }
       // <ESC> ']' ... <BEL>
@@ -509,7 +525,12 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
   // skip ';'
   ++i;
 
-  const QString value = QString::fromUcs4(&tokenBuffer[i], tokenSize - i);
+  QString value = QString::fromUcs4(&tokenBuffer[i], tokenSize - i);
+  if (_currentScreen->urlExtractor()->reading()) {
+      value.remove(0,1);
+      _currentScreen->urlExtractor()->setUrl(value);
+      return;
+  }
 
   if (value == QLatin1String("?")) {
       emit sessionAttributeRequest(attribute);
@@ -552,7 +573,8 @@ void Vt102Emulation::processToken(int token, int p, int q)
 {
   switch (token)
   {
-    case token_chr(         ) : _currentScreen->displayCharacter     (p         ); break; //UTF16
+    case token_chr(         ) :
+        _currentScreen->displayCharacter     (p         ); break; //UTF16
 
     //             127 DEL    : ignored on input
 

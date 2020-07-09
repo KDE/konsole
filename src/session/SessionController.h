@@ -48,6 +48,7 @@ class KActionMenu;
 
 namespace Konsole {
 class EditProfileDialog;
+class EscapeSequenceUrlFilter;
 class FileFilter;
 class IncrementalSearchBar;
 class Profile;
@@ -367,6 +368,8 @@ private:
 
     QString _previousForegroundProcessName;
     bool _monitorProcessFinish;
+    EscapeSequenceUrlFilter *_escapedUrlFilter;
+
 };
 
 }
