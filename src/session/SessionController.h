@@ -257,6 +257,7 @@ private Q_SLOTS:
     void sendForegroundColor(uint terminator);
     void sendBackgroundColor(uint terminator);
     void toggleReadOnly();
+    void toggleAllowMouseTracking();
 
     // other
     void setupSearchBar();
