@@ -273,6 +273,7 @@ public:
      * user turns it on/off while mouse tracking is requested.
      */
     void setAllowMouseTracking(const bool allow);
+    bool allowsMouseTracking() const;
 
     bool hasCompositeFocus() const
     {

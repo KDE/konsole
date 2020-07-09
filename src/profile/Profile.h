@@ -345,6 +345,9 @@ public:
          *  when hovered by the mouse pointer.
          */
         ColorFilterEnabled,
+
+        /** (bool) Allows mouse tracking */
+        AllowMouseTracking
     };
 
     Q_ENUM(Property)

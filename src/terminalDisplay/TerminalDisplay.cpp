@@ -2074,6 +2074,11 @@ void TerminalDisplay::setAllowMouseTracking(bool allow)
     resetCursor();
 }
 
+bool TerminalDisplay::allowsMouseTracking() const
+{
+    return _allowMouseTracking;
+}
+
 void TerminalDisplay::resetCursor()
 {
     setCursor(usesMouseTracking() ? Qt::ArrowCursor : Qt::IBeamCursor);

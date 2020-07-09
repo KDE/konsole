@@ -446,6 +446,16 @@
          </property>
         </spacer>
        </item>
+       <item>
+        <widget class="QCheckBox" name="allowMouseTrackingButton">
+         <property name="toolTip">
+           <string>Some terminal applications have mouse support, this allows them to get it by default. It can be toggled on/off while running as well.</string>
+         </property>
+         <property name="text">
+          <string>Allow terminal applications to handle clicks and drags</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>

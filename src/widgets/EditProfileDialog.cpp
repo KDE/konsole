@@ -719,6 +719,11 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     _appearanceUi->useFontLineCharactersButton->setChecked(profile->useFontLineCharacters());
     connect(_appearanceUi->useFontLineCharactersButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::useFontLineCharacters);
 
+    _mouseUi->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
+    connect(_mouseUi->enableMouseWheelZoomButton, &QCheckBox::toggled, this,
+            &Konsole::EditProfileDialog::toggleMouseWheelZoom);
+
+
     // cursor options
     _appearanceUi->enableBlinkingCursorButton->setChecked(profile->property<bool>(Profile::BlinkingCursorEnabled));
     connect(_appearanceUi->enableBlinkingCursorButton, &QToolButton::toggled, this, &EditProfileDialog::toggleBlinkingCursor);
@@ -895,6 +900,11 @@ void EditProfileDialog::toggleAlternateScrolling(bool enable)
 void EditProfileDialog::toggleAllowColorFilter(bool enable)
 {
     updateTempProfileProperty(Profile::ColorFilterEnabled, enable);
+}
+
+void EditProfileDialog::toggleAllowMouseTracking(bool allow)
+{
+    updateTempProfileProperty(Profile::AllowMouseTracking, allow);
 }
 
 void EditProfileDialog::updateColorSchemeList(const QString &selectedColorSchemeName)
@@ -1614,6 +1624,8 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
     connect(_mouseUi->enableAlternateScrollingButton, &QPushButton::toggled, this, &EditProfileDialog::toggleAlternateScrolling);
     _mouseUi->allowColorFilters->setChecked(profile->property<bool>(Profile::ColorFilterEnabled));
     connect(_mouseUi->allowColorFilters, &QPushButton::toggled, this, &EditProfileDialog::toggleAllowColorFilter);
+    _mouseUi->allowMouseTrackingButton->setChecked(profile->property<bool>(Profile::AllowMouseTracking));
+    connect(_mouseUi->allowMouseTrackingButton, &QPushButton::toggled, this, &EditProfileDialog::toggleAllowMouseTracking);
 
     // setup middle click paste mode
     const auto middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);

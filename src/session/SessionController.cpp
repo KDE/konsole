@@ -155,8 +155,10 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
 
     connect(view(), &TerminalDisplay::compositeFocusChanged, this, &SessionController::viewFocusChangeHandler);
 
+    Profile::Ptr currentProfile = SessionManager::instance()->sessionProfile(session());
+
     // install filter on the view to highlight URLs and files
-    updateFilterList(SessionManager::instance()->sessionProfile(session()));
+    updateFilterList(currentProfile);
 
     // listen for changes in session, we might need to change the enabled filters
     connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged, this, &Konsole::SessionController::updateFilterList);
@@ -236,6 +238,11 @@ SessionController::SessionController(Session *sessionParam, TerminalDisplay *vie
 
     setupSearchBar();
     _searchBar->setVisible(_isSearchBarEnabled);
+
+    // Setup default state for mouse tracking
+    const bool allowMouseTracking = currentProfile->property<bool>(Profile::AllowMouseTracking);
+    view()->setAllowMouseTracking(allowMouseTracking);
+    actionCollection()->action(QStringLiteral("allow-mouse-tracking"))->setChecked(allowMouseTracking);
 }
 
 SessionController::~SessionController()
@@ -570,7 +577,7 @@ void SessionController::toggleAllowMouseTracking()
         return;
     }
 
-    _view->setAllowMouseTracking(action->isChecked());
+    _sessionDisplayConnection->view()->setAllowMouseTracking(action->isChecked());
 }
 
 void SessionController::removeSearchFilter()
@@ -747,7 +754,6 @@ void SessionController::setupCommonActions()
     action = collection->addAction(QStringLiteral("allow-mouse-tracking"), this, &SessionController::toggleAllowMouseTracking);
     action->setText(i18nc("@item:inmenu Allows terminal applications to request mouse tracking", "Allow mouse tracking"));
     action->setCheckable(true);
-    action->setChecked(true); // the default state
 
     // Read-only
     action = collection->addAction(QStringLiteral("view-readonly"), this, &SessionController::toggleReadOnly);

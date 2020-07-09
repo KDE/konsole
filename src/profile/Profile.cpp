@@ -130,7 +130,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     {AlternateScrolling, "AlternateScrolling", INTERACTION_GROUP, QVariant::Bool},
     {AllowEscapedLinks, "AllowEscapedLinks", INTERACTION_GROUP, QVariant::Bool},
     {EscapedLinksSchema, "EscapedLinksSchema", INTERACTION_GROUP, QVariant::String},
-    {ColorFilterEnabled, "ColorFilterEnabled", INTERACTION_GROUP, QVariant::Bool}
+    {ColorFilterEnabled, "ColorFilterEnabled", INTERACTION_GROUP, QVariant::Bool},
+    {AllowMouseTracking, "AllowMouseTracking", INTERACTION_GROUP, QVariant::Bool}
 
     // Encoding
     ,
@@ -187,6 +188,7 @@ void Profile::useFallback()
     setProperty(TerminalCenter, false);
     setProperty(MouseWheelZoomEnabled, true);
     setProperty(AlternateScrolling, true);
+    setProperty(AllowMouseTracking, true);
 
 #ifdef Q_OS_MACOS
     setProperty(KeyBindings, QStringLiteral("macos"));

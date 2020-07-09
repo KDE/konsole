@@ -195,6 +195,7 @@ private Q_SLOTS:
     void pasteFromClipboard();
     void toggleAlternateScrolling(bool enable);
     void toggleAllowColorFilter(bool enable);
+    void toggleAllowMouseTracking(bool allow);
 
     void TripleClickModeChanged(int);
     void wordCharactersChanged(const QString &);
