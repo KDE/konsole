@@ -933,6 +933,10 @@ void Session::runCommand(const QString& command) const
 
 void Session::sendMouseEvent(int buttons, int column, int line, int eventType)
 {
+    if (isReadOnly()) {
+        return;
+    }
+
     _emulation->sendMouseEvent(buttons, column, line, eventType);
 }
 
