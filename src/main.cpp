@@ -91,10 +91,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
     // Check if any of the arguments makes it impossible to re-use an existing process.
     // We need to do this manually and before creating a QApplication, because
     // QApplication takes/removes the Qt specific arguments that are incompatible.
-    KDBusService::StartupOption startupOption = KDBusService::Unique;
-    if (shouldUseNewProcess(argc, argv)) {
-        startupOption = KDBusService::Multiple;
-    } else {
+    const bool needNewProcess = shouldUseNewProcess(argc, argv);
+    if (!needNewProcess) { // We need to avoid crashing
         needToDeleteQApplication = true;
     }
 
@@ -159,11 +157,16 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
     parser->process(args);
     about.processCommandLine(parser.data());
 
-    // Enable user to force multiple instances, unless a new tab is requested
-    if (!Konsole::KonsoleSettings::useSingleInstance()
-        && !parser->isSet(QStringLiteral("new-tab"))) {
-        startupOption = KDBusService::Multiple;
-    }
+
+    /// ! DON'T TOUCH THIS ! ///
+    const KDBusService::StartupOption startupOption = Konsole::KonsoleSettings::useSingleInstance() && !needNewProcess ?
+        KDBusService::Unique :
+        KDBusService::Multiple;
+    /// ! DON'T TOUCH THIS ! ///
+    // If you need to change something here, add your logic _at the bottom_ of
+    // shouldUseNewProcess(), after reading the explanations there for why you
+    // probably shouldn't.
+
 
     atexit(deleteQApplication);
     // Ensure that we only launch a new instance if we need to
