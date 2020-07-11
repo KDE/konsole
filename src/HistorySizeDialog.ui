@@ -65,7 +65,7 @@
   <customwidget>
    <class>Konsole::HistorySizeWidget</class>
    <extends>QWidget</extends>
-   <header>HistorySizeWidget.h</header>
+   <header>widgets/HistorySizeWidget.h</header>
   </customwidget>
   <customwidget>
    <class>KMessageWidget</class>

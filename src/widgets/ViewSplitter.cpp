@@ -20,7 +20,7 @@
 */
 
 // Own
-#include "ViewSplitter.h"
+#include "widgets/ViewSplitter.h"
 #include "KonsoleSettings.h"
 
 // Qt
@@ -32,8 +32,8 @@
 
 
 // Konsole
-#include "ViewContainer.h"
-#include "TerminalDisplay.h"
+#include "widgets/ViewContainer.h"
+#include "widgets/TerminalDisplay.h"
 
 using Konsole::ViewSplitter;
 using Konsole::TerminalDisplay;

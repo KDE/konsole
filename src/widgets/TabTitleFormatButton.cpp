@@ -18,7 +18,7 @@
 */
 
 // Own
-#include "TabTitleFormatButton.h"
+#include "widgets/TabTitleFormatButton.h"
 
 // Qt
 #include <QList>

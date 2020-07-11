@@ -37,7 +37,7 @@
 #include "ProfileManager.h"
 #include "History.h"
 #include "Enumeration.h"
-#include "TerminalDisplay.h"
+#include "widgets/TerminalDisplay.h"
 
 using namespace Konsole;
 

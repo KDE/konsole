@@ -29,7 +29,7 @@
 
 // Konsole
 #include "Profile.h"
-#include "ViewSplitter.h"
+#include "widgets/ViewSplitter.h"
 
 class QAction;
 class KActionMenu;

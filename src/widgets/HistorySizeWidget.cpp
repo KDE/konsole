@@ -19,7 +19,7 @@
 */
 
 // Own
-#include "HistorySizeWidget.h"
+#include "widgets/HistorySizeWidget.h"
 
 // Qt
 #include <QButtonGroup>

@@ -133,7 +133,7 @@
   <customwidget>
    <class>Konsole::TabTitleFormatButton</class>
    <extends>QPushButton</extends>
-   <header>TabTitleFormatButton.h</header>
+   <header>widgets/TabTitleFormatButton.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

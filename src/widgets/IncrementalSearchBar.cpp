@@ -18,7 +18,7 @@
 */
 
 // Own
-#include "IncrementalSearchBar.h"
+#include "widgets/IncrementalSearchBar.h"
 
 // Qt
 #include <QHBoxLayout>

@@ -21,11 +21,11 @@
 
 #include "TerminalHeaderBar.h"
 
-#include "TerminalDisplay.h"
+#include "widgets/TerminalDisplay.h"
 #include "SessionController.h"
 #include "ViewProperties.h"
 #include "KonsoleSettings.h"
-#include "ViewSplitter.h"
+#include "widgets/ViewSplitter.h"
 
 #include <KLocalizedString>
 #include <QBoxLayout>

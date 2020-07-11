@@ -19,7 +19,7 @@
 
 #include "DetachableTabBar.h"
 #include "KonsoleSettings.h"
-#include "ViewContainer.h"
+#include "widgets/ViewContainer.h"
 
 #include <QMouseEvent>
 #include <QApplication>

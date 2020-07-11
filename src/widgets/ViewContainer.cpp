@@ -20,7 +20,7 @@
 */
 
 // Own
-#include "ViewContainer.h"
+#include "widgets/ViewContainer.h"
 #include "config-konsole.h"
 
 // Qt
@@ -36,15 +36,15 @@
 #include <KActionCollection>
 
 // Konsole
-#include "IncrementalSearchBar.h"
+#include "widgets/IncrementalSearchBar.h"
 #include "ViewProperties.h"
 #include "ProfileList.h"
 #include "ViewManager.h"
 #include "KonsoleSettings.h"
 #include "SessionController.h"
 #include "DetachableTabBar.h"
-#include "TerminalDisplay.h"
-#include "ViewSplitter.h"
+#include "widgets/TerminalDisplay.h"
+#include "widgets/ViewSplitter.h"
 #include "MainWindow.h"
 #include "Session.h"
 

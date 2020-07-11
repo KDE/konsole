@@ -18,7 +18,7 @@
 */
 
 // Own
-#include "RenameTabWidget.h"
+#include "widgets/RenameTabWidget.h"
 
 // Konsole
 #include "ui_RenameTabWidget.h"

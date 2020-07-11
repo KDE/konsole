@@ -21,7 +21,7 @@
 */
 
 // Own
-#include "TerminalDisplay.h"
+#include "widgets/TerminalDisplay.h"
 #include "KonsoleSettings.h"
 
 // Config
@@ -69,7 +69,7 @@
 #include "SessionManager.h"
 #include "Session.h"
 #include "WindowSystemInfo.h"
-#include "IncrementalSearchBar.h"
+#include "widgets/IncrementalSearchBar.h"
 #include "Profile.h"
 #include "ViewManager.h" // for colorSchemeForProfile. // TODO: Rewrite this.
 #include "LineBlockCharacters.h"

@@ -42,8 +42,8 @@
 #include "KonsoleSettings.h"
 #include "ViewManager.h"
 #include "WindowSystemInfo.h"
-#include "ViewContainer.h"
-#include "TerminalDisplay.h"
+#include "widgets/ViewContainer.h"
+#include "widgets/TerminalDisplay.h"
 
 using namespace Konsole;
 

@@ -20,7 +20,7 @@
   <customwidget>
    <class>Konsole::RenameTabWidget</class>
    <extends>QWidget</extends>
-   <header>RenameTabWidget.h</header>
+   <header>widgets/RenameTabWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

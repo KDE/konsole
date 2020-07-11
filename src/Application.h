@@ -25,7 +25,7 @@
 
 // Konsole
 #include "Profile.h"
-#include "ViewSplitter.h"
+#include "widgets/ViewSplitter.h"
 
 namespace Konsole {
 class MainWindow;

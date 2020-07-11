@@ -23,7 +23,7 @@
 #include "config-konsole.h"
 #include "KonsoleSettings.h"
 #include "ViewManager.h"
-#include "ViewContainer.h"
+#include "widgets/ViewContainer.h"
 
 // OS specific
 #include <qplatformdefs.h>
