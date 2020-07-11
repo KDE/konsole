@@ -48,6 +48,12 @@
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalScrollBar.hpp"
 
+// Linux
+#ifdef Q_OS_LINUX
+#include <sys/types.h>
+#include <pwd.h>
+#endif
+
 using namespace Konsole;
 
 int Session::lastSessionId = 0;
@@ -444,26 +450,30 @@ void Session::run()
         _uniqueIdentifier = QUuid::createUuid();
     }
 
-    const int CHOICE_COUNT = 3;
-    // if '_program' is empty , fall back to default shell. If that is not set
-    // then fall back to /bin/sh
-    QString programs[CHOICE_COUNT] = {_program, QString::fromUtf8(qgetenv("SHELL")), QStringLiteral("/bin/sh")};
+    QStringList programs = {_program, QString::fromUtf8(qgetenv("SHELL")), QStringLiteral("/bin/sh")};
+
+#ifdef Q_OS_LINUX
+    auto pw = getpwuid(getuid());
+    // pw may be NULL
+    if (pw != NULL) {
+        programs.insert(1, QString::fromLocal8Bit(pw->pw_shell));
+    }
+    // we don't need to and shouldn't free pw
+#endif
+
     QString exec;
-    int choice = 0;
-    while (choice < CHOICE_COUNT) {
-        exec = checkProgram(programs[choice]);
-        if (exec.isEmpty()) {
-            choice++;
-        } else {
+    for (auto choice : programs) {
+        exec = checkProgram(choice);
+        if (!exec.isEmpty()) {
             break;
         }
     }
 
     // if a program was specified via setProgram(), but it couldn't be found, print a warning
-    if (choice != 0 && choice < CHOICE_COUNT && !_program.isEmpty()) {
+    if (exec != checkProgram(_program)) {
         terminalWarning(i18n("Could not find '%1', starting '%2' instead.  Please check your profile settings.", _program, exec));
         // if none of the choices are available, print a warning
-    } else if (choice == CHOICE_COUNT) {
+    } else if (programs.last() == checkProgram(exec)) {
         terminalWarning(i18n("Could not find an interactive shell to start."));
         return;
     }
