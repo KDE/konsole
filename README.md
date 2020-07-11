@@ -19,11 +19,17 @@ illustrated in the Konsole handbook, which can be accessed by browsing to
 | `/desktop`         | .desktop files for Konsole, used to launch the program from KDE's various menus and other application launchers.                                                                   |
 | `/data`            | Data files for use with Konsole as well as the keyboard setup and color schemes provided with Konsole.                                                                             |
 
-
 ## Contact
 
 Up-to-date information about the latest releases can be found on Konsole's
 website at https://konsole.kde.org. Discussions about Konsole's development are
 held on the konsole-devel mailing list, which can be accessed at
 https://mail.kde.org/mailman/listinfo/konsole-devel.
+
+## Quick Links
+- [KDE Release Schedule](https://community.kde.org/Schedules)
+- [Official Homepage](https://konsole.kde.org)
+- [Builds](https://build.kde.org/job/Applications/job/konsole)
+- [Forums](http://forum.kde.org/viewforum.php?f=227)
+- [Konsole Bug Reports per Component](https://bugs.kde.org/describecomponents.cgi?product=konsole)
 
