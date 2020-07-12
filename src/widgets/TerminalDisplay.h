@@ -912,24 +912,6 @@ private:
     QSharedPointer<Filter::HotSpot> _currentlyHoveredHotspot;
 };
 
-class AutoScrollHandler : public QObject
-{
-    Q_OBJECT
-
-public:
-    explicit AutoScrollHandler(QWidget *parent);
-protected:
-    void timerEvent(QTimerEvent *event) override;
-    bool eventFilter(QObject *watched, QEvent *event) override;
-private:
-    QWidget *widget() const
-    {
-        return static_cast<QWidget *>(parent());
-    }
-
-    int _timerId;
-};
-
 }
 
 #endif // TERMINALDISPLAY_H
