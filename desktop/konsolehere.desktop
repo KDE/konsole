@@ -14,6 +14,7 @@ Name=Open Terminal Here
 Name[af]=Maak Terminaal Hier Oop
 Name[ar]=افتح الطرفية هنا
 Name[ast]=Abrir terminal equí
+Name[az]=Terminalı burada açmaq
 Name[be]=Адкрыць тэрмінал тут
 Name[be@latin]=Adčyni terminał
 Name[bg]=Отваряне на терминал тук
@@ -104,6 +105,7 @@ Name[zh_TW]=在這裡開啟終端機
 
 Comment=Opens a terminal at the current folder
 Comment[ast]=Abre una terminal na carpeta actual
+Comment[az]=Terminalı cari qovluqda açmaq
 Comment[ca]=Obre un terminal en la carpeta actual
 Comment[ca@valencia]=Obri un terminal en la carpeta actual
 Comment[cs]=Otevře terminál v současné složce
