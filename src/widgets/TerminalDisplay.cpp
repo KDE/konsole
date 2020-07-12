@@ -59,6 +59,7 @@
 #include <KIO/StatJob>
 
 // Konsole
+#include "CompositeWidgetFocusWatcher.h"
 #include "Filter.h"
 #include "konsoledebug.h"
 #include "TerminalCharacterDecoder.h"
@@ -4176,50 +4177,4 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     // mouse wheel zoom
     _mouseWheelZoom = profile->mouseWheelZoomEnabled();
     setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
-}
-
-//
-// CompositeWidgetFocusWatcher
-//
-
-CompositeWidgetFocusWatcher::CompositeWidgetFocusWatcher(QWidget *compositeWidget, QObject *parent)
-    : QObject(parent)
-    , _compositeWidget(compositeWidget)
-{
-    registerWidgetAndChildren(compositeWidget);
-}
-
-bool CompositeWidgetFocusWatcher::eventFilter(QObject *watched, QEvent *event)
-{
-    Q_UNUSED(watched)
-
-    auto *focusEvent = static_cast<QFocusEvent *>(event);
-    switch(event->type()) {
-    case QEvent::FocusIn:
-        emit compositeFocusChanged(true);
-        break;
-    case QEvent::FocusOut:
-        if(focusEvent->reason() != Qt::PopupFocusReason) {
-            emit compositeFocusChanged(false);
-        }
-        break;
-    default:
-        break;
-    }
-    return false;
-}
-
-void CompositeWidgetFocusWatcher::registerWidgetAndChildren(QWidget *widget)
-{
-    Q_ASSERT(widget != nullptr);
-
-    if (widget->focusPolicy() != Qt::NoFocus) {
-        widget->installEventFilter(this);
-    }
-    for (auto *child: widget->children()) {
-        auto *childWidget = qobject_cast<QWidget *>(child);
-        if (childWidget != nullptr) {
-            registerWidgetAndChildren(childWidget);
-        }
-    }
 }
