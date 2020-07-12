@@ -58,8 +58,6 @@ class UrlFilter;
 class FileFilter;
 class EditProfileDialog;
 
-using SessionPtr = QPointer<Session>;
-
 /**
  * Provides the menu actions to manipulate a single terminal session and view pair.
  * The actions provided by this class are defined in the sessionui.rc XML file.
