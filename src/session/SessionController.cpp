@@ -86,7 +86,7 @@ using namespace Konsole;
 QSet<SessionController*> SessionController::_allControllers;
 int SessionController::_lastControllerId;
 
-SessionController::SessionController(Session* session , TerminalDisplay* view, QObject* parent)
+SessionController::SessionController(Session* session, TerminalDisplay* view, QObject* parent)
     : ViewProperties(parent)
     , KXMLGUIClient()
     , _session(session)
@@ -121,6 +121,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     Q_ASSERT(session);
     Q_ASSERT(view);
 
+    _sessionDisplayConnection = new SessionDisplayConnection(session, view, this);
+
     // handle user interface related to session (menus etc.)
     if (isKonsolePart()) {
         setComponentName(QStringLiteral("konsole"), i18n("Konsole"));
@@ -142,79 +144,79 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     setIdentifier(++_lastControllerId);
     sessionAttributeChanged();
 
-    connect(_view, &TerminalDisplay::compositeFocusChanged, this, &SessionController::viewFocusChangeHandler);
-    _view->setSessionController(this);
+    connect(_sessionDisplayConnection->view(), &TerminalDisplay::compositeFocusChanged, this, &SessionController::viewFocusChangeHandler);
+    _sessionDisplayConnection->view()->setSessionController(this);
 
     // install filter on the view to highlight URLs and files
-    updateFilterList(SessionManager::instance()->sessionProfile(_session));
+    updateFilterList(SessionManager::instance()->sessionProfile(_sessionDisplayConnection->session()));
 
     // listen for changes in session, we might need to change the enabled filters
     connect(ProfileManager::instance(), &Konsole::ProfileManager::profileChanged, this, &Konsole::SessionController::updateFilterList);
 
     // listen for session resize requests
-    connect(_session, &Konsole::Session::resizeRequest, this, &Konsole::SessionController::sessionResizeRequest);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::resizeRequest, this, &Konsole::SessionController::sessionResizeRequest);
 
     // listen for popup menu requests
-    connect(_view, &Konsole::TerminalDisplay::configureRequest, this, &Konsole::SessionController::showDisplayContextMenu);
+    connect(_sessionDisplayConnection->view(), &Konsole::TerminalDisplay::configureRequest, this, &Konsole::SessionController::showDisplayContextMenu);
 
     // move view to newest output when keystrokes occur
-    connect(_view, &Konsole::TerminalDisplay::keyPressedSignal, this, &Konsole::SessionController::trackOutput);
+    connect(_sessionDisplayConnection->view(), &Konsole::TerminalDisplay::keyPressedSignal, this, &Konsole::SessionController::trackOutput);
 
     // listen to activity / silence notifications from session
-    connect(_session, &Konsole::Session::notificationsChanged, this, &Konsole::SessionController::sessionNotificationsChanged);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::notificationsChanged, this, &Konsole::SessionController::sessionNotificationsChanged);
     // listen to title and icon changes
-    connect(_session, &Konsole::Session::sessionAttributeChanged, this, &Konsole::SessionController::sessionAttributeChanged);
-    connect(_session, &Konsole::Session::readOnlyChanged, this, &Konsole::SessionController::sessionReadOnlyChanged);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::sessionAttributeChanged, this, &Konsole::SessionController::sessionAttributeChanged);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::readOnlyChanged, this, &Konsole::SessionController::sessionReadOnlyChanged);
 
-    connect(this, &Konsole::SessionController::tabRenamedByUser, _session, &Konsole::Session::tabTitleSetByUser);
-    connect(this, &Konsole::SessionController::tabColoredByUser, _session, &Konsole::Session::tabColorSetByUser);
+    connect(this, &Konsole::SessionController::tabRenamedByUser, _sessionDisplayConnection->session(), &Konsole::Session::tabTitleSetByUser);
+    connect(this, &Konsole::SessionController::tabColoredByUser, _sessionDisplayConnection->session(), &Konsole::Session::tabColorSetByUser);
 
-    connect(_session , &Konsole::Session::currentDirectoryChanged , this , &Konsole::SessionController::currentDirectoryChanged);
+    connect(_sessionDisplayConnection->session() , &Konsole::Session::currentDirectoryChanged , this , &Konsole::SessionController::currentDirectoryChanged);
 
     // listen for color changes
-    connect(_session, &Konsole::Session::changeBackgroundColorRequest, _view, &Konsole::TerminalDisplay::setBackgroundColor);
-    connect(_session, &Konsole::Session::changeForegroundColorRequest, _view, &Konsole::TerminalDisplay::setForegroundColor);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::changeBackgroundColorRequest, _sessionDisplayConnection->view(), &Konsole::TerminalDisplay::setBackgroundColor);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::changeForegroundColorRequest, _sessionDisplayConnection->view(), &Konsole::TerminalDisplay::setForegroundColor);
 
     // update the title when the session starts
-    connect(_session, &Konsole::Session::started, this, &Konsole::SessionController::snapshot);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::started, this, &Konsole::SessionController::snapshot);
 
     // listen for output changes to set activity flag
-    connect(_session->emulation(), &Konsole::Emulation::outputChanged, this, &Konsole::SessionController::fireActivity);
+    connect(_sessionDisplayConnection->session()->emulation(), &Konsole::Emulation::outputChanged, this, &Konsole::SessionController::fireActivity);
 
     // listen for detection of ZModem transfer
-    connect(_session, &Konsole::Session::zmodemDownloadDetected, this, &Konsole::SessionController::zmodemDownload);
-    connect(_session, &Konsole::Session::zmodemUploadDetected, this, &Konsole::SessionController::zmodemUpload);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::zmodemDownloadDetected, this, &Konsole::SessionController::zmodemDownload);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::zmodemUploadDetected, this, &Konsole::SessionController::zmodemUpload);
 
     // listen for flow control status changes
-    connect(_session, &Konsole::Session::flowControlEnabledChanged, _view, &Konsole::TerminalDisplay::setFlowControlWarningEnabled);
-    _view->setFlowControlWarningEnabled(_session->flowControlEnabled());
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::flowControlEnabledChanged, _sessionDisplayConnection->view(), &Konsole::TerminalDisplay::setFlowControlWarningEnabled);
+    _sessionDisplayConnection->view()->setFlowControlWarningEnabled(_sessionDisplayConnection->session()->flowControlEnabled());
 
     // take a snapshot of the session state every so often when
     // user activity occurs
     //
     // the timer is owned by the session so that it will be destroyed along
     // with the session
-    _interactionTimer = new QTimer(_session);
+    _interactionTimer = new QTimer(_sessionDisplayConnection->session());
     _interactionTimer->setSingleShot(true);
     _interactionTimer->setInterval(500);
     connect(_interactionTimer, &QTimer::timeout, this, &Konsole::SessionController::snapshot);
-    connect(_view, &Konsole::TerminalDisplay::compositeFocusChanged,
+    connect(_sessionDisplayConnection->view(), &Konsole::TerminalDisplay::compositeFocusChanged,
             this, [this](bool focused) { if (focused) { interactionHandler(); }});
-    connect(_view, &Konsole::TerminalDisplay::keyPressedSignal,
+    connect(_sessionDisplayConnection->view(), &Konsole::TerminalDisplay::keyPressedSignal,
             this, &Konsole::SessionController::interactionHandler);
 
     // take a snapshot of the session state periodically in the background
-    auto backgroundTimer = new QTimer(_session);
+    auto backgroundTimer = new QTimer(_sessionDisplayConnection->session());
     backgroundTimer->setSingleShot(false);
     backgroundTimer->setInterval(2000);
     connect(backgroundTimer, &QTimer::timeout, this, &Konsole::SessionController::snapshot);
     backgroundTimer->start();
 
     // xterm '10;?' request
-    connect(_session, &Konsole::Session::getForegroundColor,
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::getForegroundColor,
             this, &Konsole::SessionController::sendForegroundColor);
     // xterm '11;?' request
-    connect(_session, &Konsole::Session::getBackgroundColor,
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::getBackgroundColor,
             this, &Konsole::SessionController::sendBackgroundColor);
 
     _allControllers.insert(this);
@@ -246,7 +248,7 @@ SessionController::~SessionController()
 }
 void SessionController::trackOutput(QKeyEvent* event)
 {
-    Q_ASSERT(_view->screenWindow());
+    Q_ASSERT(_sessionDisplayConnection->view()->screenWindow());
 
     // Qt has broken something, so we can't rely on just checking if certain
     // keys are passed as modifiers anymore.
@@ -272,7 +274,7 @@ void SessionController::trackOutput(QKeyEvent* event)
         return;
     }
 
-    _view->screenWindow()->setTrackOutput(true);
+    _sessionDisplayConnection->view()->screenWindow()->setTrackOutput(true);
 }
 
 void SessionController::viewFocusChangeHandler(bool focused)
@@ -286,9 +288,9 @@ void SessionController::viewFocusChangeHandler(bool focused)
         // by the focused view
 
         // first, disconnect any other views which are listening for bell signals from the session
-        disconnect(_session, &Konsole::Session::bellRequest, nullptr, nullptr);
+        disconnect(_sessionDisplayConnection->session(), &Konsole::Session::bellRequest, nullptr, nullptr);
         // second, connect the newly focused view to listen for the session's bell signal
-        connect(_session, &Konsole::Session::bellRequest, _view, &Konsole::TerminalDisplay::bell);
+        connect(_sessionDisplayConnection->session(), &Konsole::Session::bellRequest, _sessionDisplayConnection->view(), &Konsole::TerminalDisplay::bell);
 
         if ((_copyInputToAllTabsAction != nullptr) && _copyInputToAllTabsAction->isChecked()) {
             // A session with "Copy To All Tabs" has come into focus:
@@ -305,9 +307,9 @@ void SessionController::interactionHandler()
 
 void SessionController::snapshot()
 {
-    Q_ASSERT(!_session.isNull());
+    Q_ASSERT(!_sessionDisplayConnection->session().isNull());
 
-    QString title = _session->getDynamicTitle();
+    QString title = _sessionDisplayConnection->session()->getDynamicTitle();
     title         = title.simplified();
 
     // Visualize that the session is broadcasting to others
@@ -317,32 +319,32 @@ void SessionController::snapshot()
 
     // use the fallback title if needed
     if (title.isEmpty()) {
-        title = _session->title(Session::NameRole);
+        title = _sessionDisplayConnection->session()->title(Session::NameRole);
     }
 
-    QColor color = _session->color();
+    QColor color = _sessionDisplayConnection->session()->color();
     // use the fallback color if needed
     if (!color.isValid()) {
         color = QColor(QColor::Invalid);
     }
 
     // apply new title
-    _session->setTitle(Session::DisplayedTitleRole, title);
+    _sessionDisplayConnection->session()->setTitle(Session::DisplayedTitleRole, title);
 
     // apply new color
-    _session->setColor(color);
+    _sessionDisplayConnection->session()->setColor(color);
 
     // check if foreground process ended and notify if this option was requested
     if (_monitorProcessFinish) {
-        bool isForegroundProcessActive = _session->isForegroundProcessActive();
+        bool isForegroundProcessActive = _sessionDisplayConnection->session()->isForegroundProcessActive();
         if (!_previousForegroundProcessName.isNull() && !isForegroundProcessActive) {
-            KNotification::event(_session->hasFocus() ? QStringLiteral("ProcessFinished") : QStringLiteral("ProcessFinishedHidden"),
-                                 i18n("The process '%1' has finished running in session '%2'", _previousForegroundProcessName, _session->nameTitle()),
+            KNotification::event(_sessionDisplayConnection->session()->hasFocus() ? QStringLiteral("ProcessFinished") : QStringLiteral("ProcessFinishedHidden"),
+                                 i18n("The process '%1' has finished running in session '%2'", _previousForegroundProcessName, _sessionDisplayConnection->session()->nameTitle()),
                                  QPixmap(),
                                  QApplication::activeWindow(),
                                  KNotification::CloseWhenWidgetActivated);
         }
-        _previousForegroundProcessName = isForegroundProcessActive ? _session->foregroundProcessName() : QString();
+        _previousForegroundProcessName = isForegroundProcessActive ? _sessionDisplayConnection->session()->foregroundProcessName() : QString();
     }
 
     // do not forget icon
@@ -351,12 +353,12 @@ void SessionController::snapshot()
 
 QString SessionController::currentDir() const
 {
-    return _session->currentWorkingDirectory();
+    return _sessionDisplayConnection->session()->currentWorkingDirectory();
 }
 
 QUrl SessionController::url() const
 {
-    return _session->getUrl();
+    return _sessionDisplayConnection->session()->getUrl();
 }
 
 void SessionController::rename()
@@ -367,22 +369,22 @@ void SessionController::rename()
 void SessionController::openUrl(const QUrl& url)
 {
     // Clear shell's command line
-    if (!_session->isForegroundProcessActive()
-            && _bookmarkValidProgramsToClear.contains(_session->foregroundProcessName())) {
-        _session->sendTextToTerminal(QChar(0x03), QLatin1Char('\n')); // Ctrl+C
+    if (!_sessionDisplayConnection->session()->isForegroundProcessActive()
+            && _bookmarkValidProgramsToClear.contains(_sessionDisplayConnection->session()->foregroundProcessName())) {
+        _sessionDisplayConnection->session()->sendTextToTerminal(QChar(0x03), QLatin1Char('\n')); // Ctrl+C
     }
 
     // handle local paths
     if (url.isLocalFile()) {
         QString path = url.toLocalFile();
-        _session->sendTextToTerminal(QStringLiteral("cd ") + KShell::quoteArg(path), QLatin1Char('\r'));
+        _sessionDisplayConnection->session()->sendTextToTerminal(QStringLiteral("cd ") + KShell::quoteArg(path), QLatin1Char('\r'));
     } else if (url.scheme().isEmpty()) {
         // QUrl couldn't parse what the user entered into the URL field
         // so just dump it to the shell
         // If you change this, change it also in autotests/BookMarkTest.cpp
         QString command = QUrl::fromPercentEncoding(url.toEncoded());
         if (!command.isEmpty()) {
-            _session->sendTextToTerminal(command, QLatin1Char('\r'));
+            _sessionDisplayConnection->session()->sendTextToTerminal(command, QLatin1Char('\r'));
         }
     } else if (url.scheme() == QLatin1String("ssh")) {
         QString sshCommand = QStringLiteral("ssh ");
@@ -396,7 +398,7 @@ void SessionController::openUrl(const QUrl& url)
         if (!url.host().isEmpty()) {
             sshCommand += url.host();
         }
-        _session->sendTextToTerminal(sshCommand, QLatin1Char('\r'));
+        _sessionDisplayConnection->session()->sendTextToTerminal(sshCommand, QLatin1Char('\r'));
 
     } else if (url.scheme() == QLatin1String("telnet")) {
         QString telnetCommand = QStringLiteral("telnet ");
@@ -411,12 +413,12 @@ void SessionController::openUrl(const QUrl& url)
             telnetCommand += QString::number(url.port());
         }
 
-        _session->sendTextToTerminal(telnetCommand, QLatin1Char('\r'));
+        _sessionDisplayConnection->session()->sendTextToTerminal(telnetCommand, QLatin1Char('\r'));
 
     } else {
         //TODO Implement handling for other Url types
 
-        KMessageBox::sorry(_view->window(),
+        KMessageBox::sorry(_sessionDisplayConnection->view()->window(),
                            i18n("Konsole does not know how to open the bookmark: ") +
                            url.toDisplayString());
 
@@ -531,19 +533,19 @@ void SessionController::configureWebShortcuts()
 void SessionController::sendSignal(QAction* action)
 {
     const auto signal = action->data().toInt();
-    _session->sendSignal(signal);
+    _sessionDisplayConnection->session()->sendSignal(signal);
 }
 
 void SessionController::sendForegroundColor()
 {
-    const QColor c = _view->getForegroundColor();
-    _session->reportForegroundColor(c);
+    const QColor c = _sessionDisplayConnection->view()->getForegroundColor();
+    _sessionDisplayConnection->session()->reportForegroundColor(c);
 }
 
 void SessionController::sendBackgroundColor()
 {
-    const QColor c = _view->getBackgroundColor();
-    _session->reportBackgroundColor(c);
+    const QColor c = _sessionDisplayConnection->view()->getBackgroundColor();
+    _sessionDisplayConnection->session()->reportBackgroundColor(c);
 }
 
 void SessionController::toggleReadOnly()
@@ -551,7 +553,7 @@ void SessionController::toggleReadOnly()
     auto *action = qobject_cast<QAction*>(sender());
     if (action != nullptr) {
         bool readonly = !isReadOnly();
-        _session->setReadOnly(readonly);
+        _sessionDisplayConnection->session()->setReadOnly(readonly);
     }
 }
 
@@ -561,7 +563,7 @@ void SessionController::removeSearchFilter()
         return;
     }
 
-    _view->filterChain()->removeFilter(_searchFilter);
+    _sessionDisplayConnection->view()->filterChain()->removeFilter(_searchFilter);
     delete _searchFilter;
     _searchFilter = nullptr;
 }
@@ -706,8 +708,8 @@ void SessionController::setupCommonActions()
     _codecAction = new KCodecAction(i18n("Set &Encoding"), this);
     _codecAction->setIcon(QIcon::fromTheme(QStringLiteral("character-set")));
     collection->addAction(QStringLiteral("set-encoding"), _codecAction);
-    _codecAction->setCurrentCodec(QString::fromUtf8(_session->codec()));
-    connect(_session, &Konsole::Session::sessionCodecChanged, this, &Konsole::SessionController::updateCodecAction);
+    _codecAction->setCurrentCodec(QString::fromUtf8(_sessionDisplayConnection->session()->codec()));
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::sessionCodecChanged, this, &Konsole::SessionController::updateCodecAction);
     connect(_codecAction,
             QOverload<QTextCodec*>::of(&KCodecAction::triggered), this,
             &Konsole::SessionController::changeCodec);
@@ -848,7 +850,7 @@ void SessionController::setupExtraActions()
 
 void SessionController::switchProfile(const Profile::Ptr &profile)
 {
-    SessionManager::instance()->setSessionProfile(_session, profile);
+    SessionManager::instance()->setSessionProfile(_sessionDisplayConnection->session(), profile);
     updateFilterList(profile);
 }
 
@@ -869,7 +871,7 @@ void SessionController::updateCodecAction(QTextCodec *codec)
 
 void SessionController::changeCodec(QTextCodec* codec)
 {
-    _session->setCodec(codec);
+    _sessionDisplayConnection->session()->setCodec(codec);
 }
 
 EditProfileDialog* SessionController::profileDialogPointer()
@@ -884,7 +886,7 @@ void SessionController::editCurrentProfile()
         if ( (controller->profileDialogPointer() != nullptr)
              && controller->profileDialogPointer()->isVisible()
              && (controller->profileDialogPointer()->lookupProfile()
-                 == SessionManager::instance()->sessionProfile(_session)) ) {
+                 == SessionManager::instance()->sessionProfile(_sessionDisplayConnection->session())) ) {
             controller->profileDialogPointer()->close();
         }
     }
@@ -896,28 +898,28 @@ void SessionController::editCurrentProfile()
     }
 
     _editProfileDialog = new EditProfileDialog(QApplication::activeWindow());
-    _editProfileDialog->setProfile(SessionManager::instance()->sessionProfile(_session));
+    _editProfileDialog->setProfile(SessionManager::instance()->sessionProfile(_sessionDisplayConnection->session()));
     _editProfileDialog->show();
 }
 
 void SessionController::renameSession()
 {
-    const QString &sessionLocalTabTitleFormat = _session->tabTitleFormat(Session::LocalTabTitle);
-    const QString &sessionRemoteTabTitleFormat = _session->tabTitleFormat(Session::RemoteTabTitle);
-    const QColor &sessionTabColor = _session->color();
+    const QString &sessionLocalTabTitleFormat = _sessionDisplayConnection->session()->tabTitleFormat(Session::LocalTabTitle);
+    const QString &sessionRemoteTabTitleFormat = _sessionDisplayConnection->session()->tabTitleFormat(Session::RemoteTabTitle);
+    const QColor &sessionTabColor = _sessionDisplayConnection->session()->color();
 
     QScopedPointer<RenameTabDialog> dialog(new RenameTabDialog(QApplication::activeWindow()));
     dialog->setTabTitleText(sessionLocalTabTitleFormat);
     dialog->setRemoteTabTitleText(sessionRemoteTabTitleFormat);
     dialog->setColor(sessionTabColor);
 
-    if (_session->isRemote()) {
+    if (_sessionDisplayConnection->session()->isRemote()) {
         dialog->focusRemoteTabTitleText();
     } else {
         dialog->focusTabTitleText();
     }
 
-    QPointer<Session> guard(_session);
+    QPointer<Session> guard(_sessionDisplayConnection->session());
     int result = dialog->exec();
     if (guard.isNull()) {
         return;
@@ -929,20 +931,20 @@ void SessionController::renameSession()
         const QColor &tabColor = dialog->color();
 
         if (tabTitle != sessionLocalTabTitleFormat) {
-            _session->setTabTitleFormat(Session::LocalTabTitle, tabTitle);
+            _sessionDisplayConnection->session()->setTabTitleFormat(Session::LocalTabTitle, tabTitle);
             emit tabRenamedByUser(true);
             // trigger an update of the tab text
             snapshot();
         }
 
         if(remoteTabTitle != sessionRemoteTabTitleFormat) {
-            _session->setTabTitleFormat(Session::RemoteTabTitle, remoteTabTitle);
+            _sessionDisplayConnection->session()->setTabTitleFormat(Session::RemoteTabTitle, remoteTabTitle);
             emit tabRenamedByUser(true);
             snapshot();
         }
 
         if (tabColor != sessionTabColor) {
-            _session->setColor(tabColor);
+            _sessionDisplayConnection->session()->setColor(tabColor);
             emit tabColoredByUser(true);
             snapshot();
         }
@@ -952,8 +954,8 @@ void SessionController::renameSession()
 // This is called upon Menu->Close Sesssion and right-click on tab->Close Tab
 bool SessionController::confirmClose() const
 {
-    if (_session->isForegroundProcessActive()) {
-        QString title = _session->foregroundProcessName();
+    if (_sessionDisplayConnection->session()->isForegroundProcessActive()) {
+        QString title = _sessionDisplayConnection->session()->foregroundProcessName();
 
         // hard coded for now.  In future make it possible for the user to specify which programs
         // are ignored when considering whether to display a confirmation
@@ -972,7 +974,7 @@ bool SessionController::confirmClose() const
                             "  Are you sure you want to close it?", title);
         }
 
-        int result = KMessageBox::warningYesNo(_view->window(),
+        int result = KMessageBox::warningYesNo(_sessionDisplayConnection->view()->window(),
                                                question,
                                                i18n("Confirm Close"),
                                                KStandardGuiItem::yes(),
@@ -984,8 +986,8 @@ bool SessionController::confirmClose() const
 }
 bool SessionController::confirmForceClose() const
 {
-    if (_session->isRunning()) {
-        QString title = _session->program();
+    if (_sessionDisplayConnection->session()->isRunning()) {
+        QString title = _sessionDisplayConnection->session()->program();
 
         // hard coded for now.  In future make it possible for the user to specify which programs
         // are ignored when considering whether to display a confirmation
@@ -1004,7 +1006,7 @@ bool SessionController::confirmForceClose() const
                             "  Are you sure you want to kill it by force?", title);
         }
 
-        int result = KMessageBox::warningYesNo(_view->window(), question, i18n("Confirm Close"));
+        int result = KMessageBox::warningYesNo(_sessionDisplayConnection->view()->window(), question, i18n("Confirm Close"));
         return result == KMessageBox::Yes;
     }
     return true;
@@ -1019,12 +1021,12 @@ void SessionController::closeSession()
         return;
     }
 
-    if (!_session->closeInNormalWay()) {
+    if (!_sessionDisplayConnection->session()->closeInNormalWay()) {
         if (!confirmForceClose()) {
             return;
         }
 
-        if (!_session->closeInForceWay()) {
+        if (!_sessionDisplayConnection->session()->closeInForceWay()) {
             qCDebug(KonsoleDebug) << "Konsole failed to close a session in any way.";
             return;
         }
@@ -1052,24 +1054,24 @@ void SessionController::openBrowser()
 
 void SessionController::copy()
 {
-    _view->copyToClipboard();
+    _sessionDisplayConnection->view()->copyToClipboard();
 }
 
 void SessionController::paste()
 {
-    _view->pasteFromClipboard();
+    _sessionDisplayConnection->view()->pasteFromClipboard();
 }
 void SessionController::pasteFromX11Selection()
 {
-    _view->pasteFromX11Selection();
+    _sessionDisplayConnection->view()->pasteFromX11Selection();
 }
 void SessionController::selectAll()
 {
-    _view->selectAll();
+    _sessionDisplayConnection->view()->selectAll();
 }
 void SessionController::selectLine()
 {
-    _view->selectCurrentLine();
+    _sessionDisplayConnection->view()->selectCurrentLine();
 }
 static const KXmlGuiWindow* findWindow(const QObject* object)
 {
@@ -1124,7 +1126,7 @@ void SessionController::copyInputToAllTabs()
     }
 
     // Find our window ...
-    const KXmlGuiWindow* myWindow = findWindow(_view);
+    const KXmlGuiWindow* myWindow = findWindow(_sessionDisplayConnection->view());
 
     const QList<Session *> sessionsList = SessionManager::instance()->sessions();
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
@@ -1142,7 +1144,7 @@ void SessionController::copyInputToAllTabs()
             _copyToGroup->addSession(session);
         }
     }
-    _copyToGroup->setMasterStatus(_session, true);
+    _copyToGroup->setMasterStatus(_sessionDisplayConnection->session(), true);
     _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
 
     snapshot();
@@ -1153,13 +1155,13 @@ void SessionController::copyInputToSelectedTabs()
 {
     if (_copyToGroup == nullptr) {
         _copyToGroup = new SessionGroup(this);
-        _copyToGroup->addSession(_session);
-        _copyToGroup->setMasterStatus(_session, true);
+        _copyToGroup->addSession(_sessionDisplayConnection->session());
+        _copyToGroup->setMasterStatus(_sessionDisplayConnection->session(), true);
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
     }
 
-    QPointer<CopyInputDialog> dialog = new CopyInputDialog(_view);
-    dialog->setMasterSession(_session);
+    QPointer<CopyInputDialog> dialog = new CopyInputDialog(_sessionDisplayConnection->view());
+    dialog->setMasterSession(_sessionDisplayConnection->session());
 
     const QList<Session*> sessionsList = _copyToGroup->sessions();
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
@@ -1168,11 +1170,11 @@ void SessionController::copyInputToSelectedTabs()
     QSet<Session*> currentGroup = QSet<Session*>::fromList(sessionsList);
 #endif
 
-    currentGroup.remove(_session);
+    currentGroup.remove(_sessionDisplayConnection->session());
 
     dialog->setChosenSessions(currentGroup);
 
-    QPointer<Session> guard(_session);
+    QPointer<Session> guard(_sessionDisplayConnection->session());
     int result = dialog->exec();
     if (guard.isNull()) {
         return;
@@ -1180,7 +1182,7 @@ void SessionController::copyInputToSelectedTabs()
 
     if (result == QDialog::Accepted) {
         QSet<Session*> newGroup = dialog->chosenSessions();
-        newGroup.remove(_session);
+        newGroup.remove(_sessionDisplayConnection->session());
 
         const QSet<Session *> completeGroup = newGroup | currentGroup;
         for (Session *session : completeGroup) {
@@ -1191,7 +1193,7 @@ void SessionController::copyInputToSelectedTabs()
             }
         }
 
-        _copyToGroup->setMasterStatus(_session, true);
+        _copyToGroup->setMasterStatus(_sessionDisplayConnection->session(), true);
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
         snapshot();
         emit copyInputChanged(this);
@@ -1215,7 +1217,7 @@ void SessionController::copyInputToNone()
     for (auto iterator : group) {
         Session* session = iterator;
 
-        if (session != _session) {
+        if (session != _sessionDisplayConnection->session()) {
             _copyToGroup->removeSession(iterator);
         }
     }
@@ -1233,29 +1235,29 @@ void SessionController::searchClosed()
 
 void SessionController::updateFilterList(Profile::Ptr profile)
 {
-    if (profile != SessionManager::instance()->sessionProfile(_session)) {
+    if (profile != SessionManager::instance()->sessionProfile(_sessionDisplayConnection->session())) {
         return;
     }
 
     bool underlineFiles = profile->underlineFilesEnabled();
 
     if (!underlineFiles && (_fileFilter != nullptr)) {
-        _view->filterChain()->removeFilter(_fileFilter);
+        _sessionDisplayConnection->view()->filterChain()->removeFilter(_fileFilter);
         delete _fileFilter;
         _fileFilter = nullptr;
     } else if (underlineFiles && (_fileFilter == nullptr)) {
-        _fileFilter = new FileFilter(_session);
-        _view->filterChain()->addFilter(_fileFilter);
+        _fileFilter = new FileFilter(_sessionDisplayConnection->session());
+        _sessionDisplayConnection->view()->filterChain()->addFilter(_fileFilter);
     }
 
     bool underlineLinks = profile->underlineLinksEnabled();
     if (!underlineLinks && (_urlFilter != nullptr)) {
-        _view->filterChain()->removeFilter(_urlFilter);
+        _sessionDisplayConnection->view()->filterChain()->removeFilter(_urlFilter);
         delete _urlFilter;
         _urlFilter = nullptr;
     } else if (underlineLinks && (_urlFilter == nullptr)) {
         _urlFilter = new UrlFilter();
-        _view->filterChain()->addFilter(_urlFilter);
+        _sessionDisplayConnection->view()->filterChain()->addFilter(_urlFilter);
     }
 }
 
@@ -1276,10 +1278,10 @@ void SessionController::listenForScreenWindowUpdates()
         return;
     }
 
-    connect(_view->screenWindow(), &Konsole::ScreenWindow::outputChanged, this, &Konsole::SessionController::updateSearchFilter);
-    connect(_view->screenWindow(), &Konsole::ScreenWindow::scrolled, this, &Konsole::SessionController::updateSearchFilter);
-    connect(_view->screenWindow(),
-            &Konsole::ScreenWindow::currentResultLineChanged, _view,
+    connect(_sessionDisplayConnection->view()->screenWindow(), &Konsole::ScreenWindow::outputChanged, this, &Konsole::SessionController::updateSearchFilter);
+    connect(_sessionDisplayConnection->view()->screenWindow(), &Konsole::ScreenWindow::scrolled, this, &Konsole::SessionController::updateSearchFilter);
+    connect(_sessionDisplayConnection->view()->screenWindow(),
+            &Konsole::ScreenWindow::currentResultLineChanged, _sessionDisplayConnection->view(),
             QOverload<>::of(&Konsole::TerminalDisplay::update));
 
     _listenForScreenWindowUpdates = true;
@@ -1288,13 +1290,13 @@ void SessionController::listenForScreenWindowUpdates()
 void SessionController::updateSearchFilter()
 {
     if ((_searchFilter != nullptr) && (!_searchBar.isNull())) {
-        _view->processFilters();
+        _sessionDisplayConnection->view()->processFilters();
     }
 }
 
 void SessionController::searchBarEvent()
 {
-    QString selectedText = _view->screenWindow()->selectedText(Screen::PreserveLineBreaks | Screen::TrimLeadingWhitespace | Screen::TrimTrailingWhitespace);
+    QString selectedText = _sessionDisplayConnection->view()->screenWindow()->selectedText(Screen::PreserveLineBreaks | Screen::TrimLeadingWhitespace | Screen::TrimTrailingWhitespace);
     if (!selectedText.isEmpty()) {
         _searchBar->setSearchText(selectedText);
     }
@@ -1329,8 +1331,8 @@ void SessionController::enableSearchBar(bool showSearchBar)
                    &Konsole::SessionController::findPreviousInHistory);
         disconnect(_searchBar, &Konsole::IncrementalSearchBar::searchShiftPlusReturnPressed, this,
                    &Konsole::SessionController::findNextInHistory);
-        if ((!_view.isNull()) && (_view->screenWindow() != nullptr)) {
-            _view->screenWindow()->setCurrentResultLine(-1);
+        if ((!_sessionDisplayConnection->view().isNull()) && (_sessionDisplayConnection->view()->screenWindow() != nullptr)) {
+            _sessionDisplayConnection->view()->screenWindow()->setCurrentResultLine(-1);
         }
     }
 }
@@ -1378,8 +1380,8 @@ void SessionController::searchHistory(bool showSearchBar)
 
             _searchFilter = new RegExpFilter();
             _searchFilter->setRegExp(regexpFromSearchBarOptions());
-            _view->filterChain()->addFilter(_searchFilter);
-            _view->processFilters();
+            _sessionDisplayConnection->view()->filterChain()->addFilter(_searchFilter);
+            _sessionDisplayConnection->view()->processFilters();
 
             setFindNextPrevEnabled(true);
         } else {
@@ -1387,7 +1389,7 @@ void SessionController::searchHistory(bool showSearchBar)
 
             removeSearchFilter();
 
-            _view->setFocus(Qt::ActiveWindowFocusReason);
+            _sessionDisplayConnection->view()->setFocus(Qt::ActiveWindowFocusReason);
         }
     }
 }
@@ -1399,7 +1401,7 @@ void SessionController::setFindNextPrevEnabled(bool enabled)
 }
 void SessionController::searchTextChanged(const QString& text)
 {
-    Q_ASSERT(_view->screenWindow());
+    Q_ASSERT(_sessionDisplayConnection->view()->screenWindow());
 
     if (_searchText == text) {
         return;
@@ -1408,8 +1410,8 @@ void SessionController::searchTextChanged(const QString& text)
     _searchText = text;
 
     if (text.isEmpty()) {
-        _view->screenWindow()->clearSelection();
-        _view->screenWindow()->scrollTo(_searchStartLine);
+        _sessionDisplayConnection->view()->screenWindow()->clearSelection();
+        _sessionDisplayConnection->view()->screenWindow()->scrollTo(_searchStartLine);
     }
 
     // update search.  this is called even when the text is
@@ -1418,7 +1420,7 @@ void SessionController::searchTextChanged(const QString& text)
 }
 void SessionController::searchCompleted(bool success)
 {
-    _prevSearchResultLine = _view->screenWindow()->currentResultLine();
+    _prevSearchResultLine = _sessionDisplayConnection->view()->screenWindow()->currentResultLine();
 
     if (!_searchBar.isNull()) {
         _searchBar->setFoundMatch(success);
@@ -1433,16 +1435,16 @@ void SessionController::beginSearch(const QString& text, Enum::SearchDirection d
     QRegularExpression regExp = regexpFromSearchBarOptions();
     _searchFilter->setRegExp(regExp);
 
-    if (_searchStartLine < 0 || _searchStartLine > _view->screenWindow()->lineCount()) {
+    if (_searchStartLine < 0 || _searchStartLine > _sessionDisplayConnection->view()->screenWindow()->lineCount()) {
         if (direction == Enum::ForwardsSearch) {
-            setSearchStartTo(_view->screenWindow()->currentLine());
+            setSearchStartTo(_sessionDisplayConnection->view()->screenWindow()->currentLine());
         } else {
-            setSearchStartTo(_view->screenWindow()->currentLine() + _view->screenWindow()->windowLines());
+            setSearchStartTo(_sessionDisplayConnection->view()->screenWindow()->currentLine() + _sessionDisplayConnection->view()->screenWindow()->windowLines());
         }
     }
 
     if (!regExp.pattern().isEmpty()) {
-        _view->screenWindow()->setCurrentResultLine(-1);
+        _sessionDisplayConnection->view()->screenWindow()->setCurrentResultLine(-1);
         auto task = new SearchHistoryTask(this);
 
         connect(task, &Konsole::SearchHistoryTask::completed, this, &Konsole::SessionController::searchCompleted);
@@ -1451,24 +1453,24 @@ void SessionController::beginSearch(const QString& text, Enum::SearchDirection d
         task->setSearchDirection(direction);
         task->setAutoDelete(true);
         task->setStartLine(_searchStartLine);
-        task->addScreenWindow(_session , _view->screenWindow());
+        task->addScreenWindow(_sessionDisplayConnection->session() , _sessionDisplayConnection->view()->screenWindow());
         task->execute();
     } else if (text.isEmpty()) {
         searchCompleted(false);
     }
 
-    _view->processFilters();
+    _sessionDisplayConnection->view()->processFilters();
 }
 void SessionController::highlightMatches(bool highlight)
 {
     if (highlight) {
-        _view->filterChain()->addFilter(_searchFilter);
-        _view->processFilters();
+        _sessionDisplayConnection->view()->filterChain()->addFilter(_searchFilter);
+        _sessionDisplayConnection->view()->processFilters();
     } else {
-        _view->filterChain()->removeFilter(_searchFilter);
+        _sessionDisplayConnection->view()->filterChain()->removeFilter(_searchFilter);
     }
 
-    _view->update();
+    _sessionDisplayConnection->view()->update();
 }
 
 void SessionController::searchFrom()
@@ -1477,7 +1479,7 @@ void SessionController::searchFrom()
     Q_ASSERT(_searchFilter);
 
     if (reverseSearchChecked()) {
-        setSearchStartTo(_view->screenWindow()->lineCount());
+        setSearchStartTo(_sessionDisplayConnection->view()->screenWindow()->lineCount());
     } else {
         setSearchStartTo(0);
     }
@@ -1509,13 +1511,13 @@ void SessionController::changeSearchMatch()
     Q_ASSERT(_searchFilter);
 
     // reset Selection for new case match
-    _view->screenWindow()->clearSelection();
+    _sessionDisplayConnection->view()->screenWindow()->clearSelection();
     beginSearch(_searchBar->searchText(), reverseSearchChecked() ? Enum::BackwardsSearch : Enum::ForwardsSearch);
 }
 void SessionController::showHistoryOptions()
 {
     QScopedPointer<HistorySizeDialog> dialog(new HistorySizeDialog(QApplication::activeWindow()));
-    const HistoryType& currentHistory = _session->historyType();
+    const HistoryType& currentHistory = _sessionDisplayConnection->session()->historyType();
 
     if (currentHistory.isEnabled()) {
         if (currentHistory.isUnlimited()) {
@@ -1528,7 +1530,7 @@ void SessionController::showHistoryOptions()
         dialog->setMode(Enum::NoHistory);
     }
 
-    QPointer<Session> guard(_session);
+    QPointer<Session> guard(_sessionDisplayConnection->session());
     int result = dialog->exec();
     if (guard.isNull()) {
         return;
@@ -1541,19 +1543,19 @@ void SessionController::showHistoryOptions()
 void SessionController::sessionResizeRequest(const QSize& size)
 {
     ////qDebug() << "View resize requested to " << size;
-    _view->setSize(size.width(), size.height());
+    _sessionDisplayConnection->view()->setSize(size.width(), size.height());
 }
 void SessionController::scrollBackOptionsChanged(int mode, int lines)
 {
     switch (mode) {
     case Enum::NoHistory:
-        _session->setHistoryType(HistoryTypeNone());
+        _sessionDisplayConnection->session()->setHistoryType(HistoryTypeNone());
         break;
     case Enum::FixedSizeHistory:
-        _session->setHistoryType(CompactHistoryType(lines));
+        _sessionDisplayConnection->session()->setHistoryType(CompactHistoryType(lines));
         break;
     case Enum::UnlimitedHistory:
-        _session->setHistoryType(HistoryTypeFile());
+        _sessionDisplayConnection->session()->setHistoryType(HistoryTypeFile());
         break;
     }
 }
@@ -1562,7 +1564,7 @@ void SessionController::print_screen()
 {
     QPrinter printer;
 
-    QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, _view);
+    QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, _sessionDisplayConnection->view());
     auto options = new PrintOptions();
 
     dialog->setOptionTabs({options});
@@ -1581,63 +1583,63 @@ void SessionController::print_screen()
     KConfigGroup configGroup(KSharedConfig::openConfig(), "PrintOptions");
 
     if (configGroup.readEntry("ScaleOutput", true)) {
-        double scale = qMin(printer.pageRect().width() / static_cast<double>(_view->width()),
-                            printer.pageRect().height() / static_cast<double>(_view->height()));
+        double scale = qMin(printer.pageRect().width() / static_cast<double>(_sessionDisplayConnection->view()->width()),
+                            printer.pageRect().height() / static_cast<double>(_sessionDisplayConnection->view()->height()));
         painter.scale(scale, scale);
     }
 
-    _view->printContent(painter, configGroup.readEntry("PrinterFriendly", true));
+    _sessionDisplayConnection->view()->printContent(painter, configGroup.readEntry("PrinterFriendly", true));
 }
 
 void SessionController::saveHistory()
 {
     SessionTask* task = new SaveHistoryTask(this);
     task->setAutoDelete(true);
-    task->addSession(_session);
+    task->addSession(_sessionDisplayConnection->session());
     task->execute();
 }
 
 void SessionController::clearHistory()
 {
-    _session->clearHistory();
-    _view->updateImage();   // To reset view scrollbar
-    _view->repaint();
+    _sessionDisplayConnection->session()->clearHistory();
+    _sessionDisplayConnection->view()->updateImage();   // To reset view scrollbar
+    _sessionDisplayConnection->view()->repaint();
 }
 
 void SessionController::clearHistoryAndReset()
 {
-    Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
+    Profile::Ptr profile = SessionManager::instance()->sessionProfile(_sessionDisplayConnection->session());
     QByteArray name = profile->defaultEncoding().toUtf8();
 
-    Emulation* emulation = _session->emulation();
+    Emulation* emulation = _sessionDisplayConnection->session()->emulation();
     emulation->reset();
-    _session->refresh();
-    _session->setCodec(QTextCodec::codecForName(name));
+    _sessionDisplayConnection->session()->refresh();
+    _sessionDisplayConnection->session()->setCodec(QTextCodec::codecForName(name));
     clearHistory();
 }
 
 void SessionController::increaseFontSize()
 {
-    _view->increaseFontSize();
+    _sessionDisplayConnection->view()->increaseFontSize();
 }
 
 void SessionController::decreaseFontSize()
 {
-    _view->decreaseFontSize();
+    _sessionDisplayConnection->view()->decreaseFontSize();
 }
 
 void SessionController::resetFontSize()
 {
-    _view->resetFontSize();
+    _sessionDisplayConnection->view()->resetFontSize();
 }
 
 void SessionController::monitorActivity(bool monitor)
 {
-    _session->setMonitorActivity(monitor);
+    _sessionDisplayConnection->session()->setMonitorActivity(monitor);
 }
 void SessionController::monitorSilence(bool monitor)
 {
-    _session->setMonitorSilence(monitor);
+    _sessionDisplayConnection->session()->setMonitorSilence(monitor);
 }
 void SessionController::monitorProcessFinish(bool monitor)
 {
@@ -1647,10 +1649,10 @@ void SessionController::updateSessionIcon()
 {
     // If the default profile icon is being used, don't put it on the tab
     // Only show the icon if the user specifically chose one
-    if (_session->iconName() == QStringLiteral("utilities-terminal")) {
+    if (_sessionDisplayConnection->session()->iconName() == QStringLiteral("utilities-terminal")) {
         _sessionIconName = QString();
     } else {
-        _sessionIconName = _session->iconName();
+        _sessionIconName = _sessionDisplayConnection->session()->iconName();
     }
     _sessionIcon = QIcon::fromTheme(_sessionIconName);
 
@@ -1686,14 +1688,14 @@ void SessionController::updateReadOnlyActionStates()
     // Without the timer, when detaching a tab while the message widget is visible,
     // the size of the terminal becomes really small...
     QTimer::singleShot(0, this, [this, readonly]() {
-        _view->updateReadOnlyState(readonly);
+        _sessionDisplayConnection->view()->updateReadOnlyState(readonly);
     });
 }
 
 bool SessionController::isReadOnly() const
 {
-    if (!_session.isNull()) {
-        return _session->isReadOnly();
+    if (!_sessionDisplayConnection->session().isNull()) {
+        return _sessionDisplayConnection->session()->isReadOnly();
     } else {
         return false;
     }
@@ -1706,25 +1708,25 @@ bool SessionController::isCopyInputActive() const
 
 void SessionController::sessionAttributeChanged()
 {
-    if (_sessionIconName != _session->iconName()) {
+    if (_sessionIconName != _sessionDisplayConnection->session()->iconName()) {
         updateSessionIcon();
     }
 
-    QString title = _session->title(Session::DisplayedTitleRole);
+    QString title = _sessionDisplayConnection->session()->title(Session::DisplayedTitleRole);
 
     // special handling for the "%w" marker which is replaced with the
     // window title set by the shell
-    title.replace(QLatin1String("%w"), _session->userTitle());
+    title.replace(QLatin1String("%w"), _sessionDisplayConnection->session()->userTitle());
     // special handling for the "%#" marker which is replaced with the
     // number of the shell
-    title.replace(QLatin1String("%#"), QString::number(_session->sessionId()));
+    title.replace(QLatin1String("%#"), QString::number(_sessionDisplayConnection->session()->sessionId()));
 
     if (title.isEmpty()) {
-        title = _session->title(Session::NameRole);
+        title = _sessionDisplayConnection->session()->title(Session::NameRole);
     }
 
     setTitle(title);
-    setColor(_session->color());
+    setColor(_sessionDisplayConnection->session()->color());
     emit rawTitleChanged();
 }
 
@@ -1734,7 +1736,7 @@ void SessionController::sessionReadOnlyChanged() {
     // Update all views
     const QList<TerminalDisplay *> viewsList = session()->views();
     for (TerminalDisplay *terminalDisplay : viewsList) {
-        if (terminalDisplay != _view) {
+        if (terminalDisplay != _sessionDisplayConnection->view()) {
             terminalDisplay->updateReadOnlyState(isReadOnly());
         }
         emit readOnlyChanged(this);
@@ -1747,13 +1749,13 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
     // application did not merge our GUI.
     if (factory() == nullptr) {
         if (clientBuilder() == nullptr) {
-            setClientBuilder(new KXMLGUIBuilder(_view));
+            setClientBuilder(new KXMLGUIBuilder(_sessionDisplayConnection->view()));
 
             // Client builder does not get deleted automatically
             connect(this, &QObject::destroyed, this, [this]{ delete clientBuilder(); });
         }
 
-        auto factory = new KXMLGUIFactory(clientBuilder(), _view);
+        auto factory = new KXMLGUIFactory(clientBuilder(), _sessionDisplayConnection->view());
         factory->addClient(this);
     }
 
@@ -1772,7 +1774,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         copy->setShortcut(Konsole::ACCEL + Qt::SHIFT + Qt::Key_C);
 #endif
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
-        QSharedPointer<Filter::HotSpot> hotSpot = _view->filterActions(position);
+        QSharedPointer<Filter::HotSpot> hotSpot = _sessionDisplayConnection->view()->filterActions(position);
         if (hotSpot != nullptr) {
             popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions() << contentSeparator );
             popup->addAction(contentSeparator);
@@ -1813,14 +1815,14 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         copy->setShortcut({});
     } else {
         qCDebug(KonsoleDebug) << "Unable to display popup menu for session"
-                   << _session->title(Session::NameRole)
+                   << _sessionDisplayConnection->session()->title(Session::NameRole)
                    << ", no GUI factory available to build the popup.";
     }
 }
 
 void SessionController::movementKeyFromSearchBarReceived(QKeyEvent *event)
 {
-    QCoreApplication::sendEvent(_view, event);
+    QCoreApplication::sendEvent(_sessionDisplayConnection->view(), event);
     setSearchStartToWindowCurrentLine();
 }
 
@@ -1836,28 +1838,28 @@ void SessionController::zmodemDownload()
         zmodem = QStandardPaths::findExecutable(QStringLiteral("lrz"));
     }
     if (!zmodem.isEmpty()) {
-        const QString path = QFileDialog::getExistingDirectory(_view,
+        const QString path = QFileDialog::getExistingDirectory(_sessionDisplayConnection->view(),
                 i18n("Save ZModem Download to..."),
                 QDir::homePath(),
                 QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
         if (!path.isEmpty()) {
-            _session->startZModem(zmodem, path, QStringList());
+            _sessionDisplayConnection->session()->startZModem(zmodem, path, QStringList());
             return;
         }
     } else {
-        KMessageBox::error(_view,
+        KMessageBox::error(_sessionDisplayConnection->view(),
                            i18n("<p>A ZModem file transfer attempt has been detected, "
                                 "but no suitable ZModem software was found on this system.</p>"
                                 "<p>You may wish to install the 'rzsz' or 'lrzsz' package.</p>"));
     }
-    _session->cancelZModem();
+    _sessionDisplayConnection->session()->cancelZModem();
 }
 
 void SessionController::zmodemUpload()
 {
-    if (_session->isZModemBusy()) {
-        KMessageBox::sorry(_view,
+    if (_sessionDisplayConnection->session()->isZModemBusy()) {
+        KMessageBox::sorry(_sessionDisplayConnection->view(),
                            i18n("<p>The current session already has a ZModem file transfer in progress.</p>"));
         return;
     }
@@ -1867,17 +1869,17 @@ void SessionController::zmodemUpload()
         zmodem = QStandardPaths::findExecutable(QStringLiteral("lsz"));
     }
     if (zmodem.isEmpty()) {
-        KMessageBox::sorry(_view,
+        KMessageBox::sorry(_sessionDisplayConnection->view(),
                            i18n("<p>No suitable ZModem software was found on this system.</p>"
                                 "<p>You may wish to install the 'rzsz' or 'lrzsz' package.</p>"));
         return;
     }
 
-    QStringList files = QFileDialog::getOpenFileNames(_view,
+    QStringList files = QFileDialog::getOpenFileNames(_sessionDisplayConnection->view(),
                         i18n("Select Files for ZModem Upload"),
                         QDir::homePath());
     if (!files.isEmpty()) {
-        _session->startZModem(zmodem, QString(), files);
+        _sessionDisplayConnection->session()->startZModem(zmodem, QString(), files);
     }
 }
 
@@ -1889,9 +1891,14 @@ bool SessionController::isKonsolePart() const
 
 QString SessionController::userTitle() const
 {
-    if (!_session.isNull()) {
-        return _session->userTitle();
+    if (!_sessionDisplayConnection->session().isNull()) {
+        return _sessionDisplayConnection->session()->userTitle();
     } else {
         return QString();
     }
+}
+
+bool SessionController::isValid() const
+{
+    return _sessionDisplayConnection->isValid();
 }

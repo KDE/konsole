@@ -110,6 +110,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         CharacterWidth.cpp
                         CompositeWidgetFocusWatcher.cpp
                         AutoScrollHandler.cpp
+                        SessionDisplayConnection.cpp
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
 
