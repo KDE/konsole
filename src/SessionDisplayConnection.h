@@ -43,8 +43,8 @@ public:
     QPointer<TerminalDisplay> view();
 
     /**
-     * Returns true if the controller is valid.
-     * A valid controller is one which has a non-null session() and view().
+     * Returns true if the session and view is valid.
+     * A valid connection and view is one which has a non-null session() and view().
      *
      * Equivalent to "!session().isNull() && !view().isNull()"
      */
