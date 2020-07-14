@@ -68,7 +68,6 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { LocalTabTitleFormat , "tabtitle" , nullptr , QVariant::String }
     , { RemoteTabTitleFormat , "RemoteTabTitleFormat" , GENERAL_GROUP , QVariant::String }
     , { ShowTerminalSizeHint , "ShowTerminalSizeHint" , GENERAL_GROUP , QVariant::Bool }
-    , { DimWhenInactive , "DimWhenInactive" , GENERAL_GROUP , QVariant::Bool }
     , { StartInCurrentSessionDir , "StartInCurrentSessionDir" , GENERAL_GROUP , QVariant::Bool }
     , { SilenceSeconds, "SilenceSeconds" , GENERAL_GROUP , QVariant::Int }
     , { TerminalColumns, "TerminalColumns" , GENERAL_GROUP , QVariant::Int }
@@ -85,6 +84,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { UseFontLineCharacters, "UseFontLineChararacters", APPEARANCE_GROUP, QVariant::Bool }
     , { LineSpacing , "LineSpacing" , APPEARANCE_GROUP , QVariant::Int }
     , { TabColor, "TabColor", APPEARANCE_GROUP, QVariant::Color }
+    , { DimValue, "DimmValue", APPEARANCE_GROUP, QVariant::Int }
+    , { DimWhenInactive , "DimWhenInactive" , GENERAL_GROUP , QVariant::Bool }
 
     // Keyboard
     , { KeyBindings , "KeyBindings" , KEYBOARD_GROUP , QVariant::String }
@@ -172,6 +173,7 @@ void Profile::useFallback()
     setProperty(RemoteTabTitleFormat, QStringLiteral("(%u) %H"));
     setProperty(ShowTerminalSizeHint, true);
     setProperty(DimWhenInactive, false);
+    setProperty(DimValue, 128);
     setProperty(StartInCurrentSessionDir, true);
     setProperty(MenuIndex, QStringLiteral("0"));
     setProperty(SilenceSeconds, 10);

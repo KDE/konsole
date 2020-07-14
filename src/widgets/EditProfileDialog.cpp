@@ -573,6 +573,11 @@ void EditProfileDialog::setDimWhenInactive(bool value)
     updateTempProfileProperty(Profile::DimWhenInactive, value);
 }
 
+void EditProfileDialog::setDimValue(int value)
+{
+    updateTempProfileProperty(Profile::DimValue, value);
+}
+
 void EditProfileDialog::tabTitleFormatChanged(const QString &format)
 {
     updateTempProfileProperty(Profile::LocalTabTitleFormat, format);
@@ -768,6 +773,10 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     _appearanceUi->dimWhenInactiveCheckbox->setChecked(profile->dimWhenInactive());
     connect(_appearanceUi->dimWhenInactiveCheckbox, &QCheckBox::toggled, this,
             &Konsole::EditProfileDialog::setDimWhenInactive);
+
+    _appearanceUi->dimValue->setValue(profile->dimValue());
+    connect(_appearanceUi->dimValue, &QSlider::valueChanged,
+            this, &Konsole::EditProfileDialog::setDimValue);
 }
 
 void EditProfileDialog::setAntialiasText(bool enable)

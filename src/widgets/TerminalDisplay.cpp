@@ -1352,9 +1352,9 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
     paintFilters(paint);
 
     const bool drawDimmed = _dimWhenInactive && !hasFocus();
-    const QColor dimColor(0, 0, 0, 128);
-    for (const QRect &rect : region) {
-        if (drawDimmed) {
+    if (drawDimmed) {
+        const QColor dimColor(0, 0, 0, _dimValue);
+        for (const QRect &rect : region) {
             paint.fillRect(rect, dimColor);
         }
     }
@@ -4129,6 +4129,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     // mouse wheel zoom
     _mouseWheelZoom = profile->mouseWheelZoomEnabled();
     setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
+    _dimValue = profile->dimValue();
 }
 
 void TerminalDisplay::printScreen()

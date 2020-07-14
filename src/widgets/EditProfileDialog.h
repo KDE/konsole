@@ -132,6 +132,7 @@ private Q_SLOTS:
     void terminalRowsEntryChanged(int);
     void showTerminalSizeHint(bool);
     void setDimWhenInactive(bool);
+    void setDimValue(int value);
     void showEnvironmentEditor();
 
     // appearance page

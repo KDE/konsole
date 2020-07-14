@@ -894,6 +894,7 @@ private:
     qreal _opacity;
 
     bool _dimWhenInactive;
+    int _dimValue;
 
     ScrollState _scrollWheelState;
     IncrementalSearchBar *_searchBar;

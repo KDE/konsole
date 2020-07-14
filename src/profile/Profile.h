@@ -306,7 +306,9 @@ public:
         /** (bool) Reverse the order of URL hints */
         ReverseUrlHints,
         /** (QColor) used in tab color */
-        TabColor
+        TabColor,
+        /** (int) Value of the Dimm Effect */
+        DimValue
     };
 
     Q_ENUM(Property)
@@ -467,6 +469,11 @@ public:
     bool dimWhenInactive() const
     {
         return property<bool>(Profile::DimWhenInactive);
+    }
+
+    int dimValue() const
+    {
+        return property<int>(Profile::DimValue);
     }
 
     /** Convenience method for property<QFont>(Profile::Font) */

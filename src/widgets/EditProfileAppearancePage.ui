@@ -26,7 +26,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="colorSchemeTab">
       <attribute name="title">
@@ -469,12 +469,9 @@
       <attribute name="title">
        <string comment="Items that do not fit in other categories">Miscellaneous</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <property name="spacing">
-        <number>0</number>
-       </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QGridLayout" name="miscTabLayout" columnstretch="0,1">
+        <layout class="QGridLayout" name="miscTabLayout" columnstretch="0,0,0">
          <property name="spacing">
           <number>6</number>
          </property>
@@ -620,6 +617,13 @@
            </layout>
           </widget>
          </item>
+         <item row="2" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Window:</string>
+           </property>
+          </widget>
+         </item>
          <item row="1" column="1">
           <spacer>
            <property name="orientation">
@@ -636,10 +640,13 @@
            </property>
           </spacer>
          </item>
-         <item row="2" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
-          <widget class="QLabel" name="label">
+         <item row="3" column="1">
+          <widget class="QCheckBox" name="dimWhenInactiveCheckbox">
+           <property name="toolTip">
+            <string>Indicate whether the window is active by dimming the colors</string>
+           </property>
            <property name="text">
-            <string>Window:</string>
+            <string>Dim the colors when the window loses focus</string>
            </property>
           </widget>
          </item>
@@ -653,15 +660,36 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QCheckBox" name="dimWhenInactiveCheckbox">
-           <property name="toolTip">
-            <string>Indicate whether the window is active by dimming the colors</string>
-           </property>
-           <property name="text">
-            <string>Dim the colors when the window loses focus</string>
-           </property>
-          </widget>
+         <item row="4" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>translucent</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSlider" name="dimValue">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TicksAbove</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>opaque</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
