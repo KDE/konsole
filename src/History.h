@@ -41,6 +41,7 @@
 #include "CompactHistoryBlockList.h"
 #include "CompactHistoryLine.h"
 #include "CompactHistoryScroll.h"
+#include "HistoryType.h"
 
 // Konsole
 #include "Character.h"
@@ -52,40 +53,6 @@ namespace Konsole {
 // This implementation uses a list of fixed-sized blocks
 // where history lines are allocated in (avoids heap fragmentation)
 //////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
-// History type
-//////////////////////////////////////////////////////////////////////
-
-class KONSOLEPRIVATE_EXPORT HistoryType
-{
-public:
-    HistoryType();
-    virtual ~HistoryType();
-
-    /**
-     * Returns true if the history is enabled ( can store lines of output )
-     * or false otherwise.
-     */
-    virtual bool isEnabled() const = 0;
-    /**
-     * Returns the maximum number of lines which this history type
-     * can store or -1 if the history can store an unlimited number of lines.
-     */
-    virtual int maximumLineCount() const = 0;
-    /**
-     * Converts from one type of HistoryScroll to another or if given the
-     * same type, returns it.
-     */
-    virtual HistoryScroll *scroll(HistoryScroll *) const = 0;
-    /**
-     * Returns true if the history size is unlimited.
-     */
-    bool isUnlimited() const
-    {
-        return maximumLineCount() == -1;
-    }
-};
 
 class KONSOLEPRIVATE_EXPORT HistoryTypeNone : public HistoryType
 {

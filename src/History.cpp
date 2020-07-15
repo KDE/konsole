@@ -60,15 +60,6 @@ using namespace Konsole;
    at constant costs.
 */
 
-//////////////////////////////////////////////////////////////////////
-// History Types
-//////////////////////////////////////////////////////////////////////
-
-HistoryType::HistoryType() = default;
-HistoryType::~HistoryType() = default;
-
-//////////////////////////////
-
 HistoryTypeNone::HistoryTypeNone() = default;
 
 bool HistoryTypeNone::isEnabled() const
