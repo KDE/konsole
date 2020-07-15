@@ -18,41 +18,29 @@
     02110-1301  USA.
 */
 
-// Own
-#include "History.h"
+#ifndef COMPACTHISTORYTYPE_H
+#define COMPACTHISTORYTYPE_H
 
-#include "HistoryScrollFile.h"
+#include "HistoryType.h"
+#include "konsoleprivate_export.h"
 
-#include "konsoledebug.h"
-#include "KonsoleSettings.h"
+namespace Konsole
+{
 
-// System
-#include <cerrno>
-#include <cstdlib>
-#include <cstdio>
-#include <sys/types.h>
-#include <unistd.h>
+class KONSOLEPRIVATE_EXPORT CompactHistoryType : public HistoryType
+{
+public:
+    explicit CompactHistoryType(unsigned int nbLines);
 
-// KDE
-#include <QDir>
-#include <qplatformdefs.h>
-#include <QStandardPaths>
-#include <KConfigGroup>
-#include <KSharedConfig>
+    bool isEnabled() const override;
+    int maximumLineCount() const override;
 
-using namespace Konsole;
+    HistoryScroll *scroll(HistoryScroll *) const override;
 
-/*
-   An arbitrary long scroll.
+protected:
+    unsigned int _maxLines;
+};
 
-   One can modify the scroll only by adding either cells
-   or newlines, but access it randomly.
+}
 
-   The model is that of an arbitrary wide typewriter scroll
-   in that the scroll is a series of lines and each line is
-   a series of cells with no overwriting permitted.
-
-   The implementation provides arbitrary length and numbers
-   of cells and line/column indexed read access to the scroll
-   at constant costs.
-*/
+#endif

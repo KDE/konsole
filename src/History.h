@@ -45,6 +45,7 @@
 #include "HistoryType.h"
 #include "HistoryTypeNone.h"
 #include "HistoryTypeFile.h"
+#include "CompactHistoryType.h"
 
 // Konsole
 #include "Character.h"
@@ -57,19 +58,6 @@ namespace Konsole {
 // where history lines are allocated in (avoids heap fragmentation)
 //////////////////////////////////////////////////////////////////////
 
-class KONSOLEPRIVATE_EXPORT CompactHistoryType : public HistoryType
-{
-public:
-    explicit CompactHistoryType(unsigned int nbLines);
-
-    bool isEnabled() const override;
-    int maximumLineCount() const override;
-
-    HistoryScroll *scroll(HistoryScroll *) const override;
-
-protected:
-    unsigned int _maxLines;
-};
 }
 
 #endif // HISTORY_H

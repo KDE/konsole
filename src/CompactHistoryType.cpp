@@ -19,40 +19,36 @@
 */
 
 // Own
-#include "History.h"
+#include "CompactHistoryType.h"
 
-#include "HistoryScrollFile.h"
-
-#include "konsoledebug.h"
-#include "KonsoleSettings.h"
-
-// System
-#include <cerrno>
-#include <cstdlib>
-#include <cstdio>
-#include <sys/types.h>
-#include <unistd.h>
-
-// KDE
-#include <QDir>
-#include <qplatformdefs.h>
-#include <QStandardPaths>
-#include <KConfigGroup>
-#include <KSharedConfig>
+#include "CompactHistoryScroll.h"
 
 using namespace Konsole;
 
-/*
-   An arbitrary long scroll.
+CompactHistoryType::CompactHistoryType(unsigned int nbLines) :
+    _maxLines(nbLines)
+{
+}
 
-   One can modify the scroll only by adding either cells
-   or newlines, but access it randomly.
+bool CompactHistoryType::isEnabled() const
+{
+    return true;
+}
 
-   The model is that of an arbitrary wide typewriter scroll
-   in that the scroll is a series of lines and each line is
-   a series of cells with no overwriting permitted.
+int CompactHistoryType::maximumLineCount() const
+{
+    return _maxLines;
+}
 
-   The implementation provides arbitrary length and numbers
-   of cells and line/column indexed read access to the scroll
-   at constant costs.
-*/
+HistoryScroll *CompactHistoryType::scroll(HistoryScroll *old) const
+{
+    if (old != nullptr) {
+        auto *oldBuffer = dynamic_cast<CompactHistoryScroll *>(old);
+        if (oldBuffer != nullptr) {
+            oldBuffer->setMaxNbLines(_maxLines);
+            return oldBuffer;
+        }
+        delete old;
+    }
+    return new CompactHistoryScroll(_maxLines);
+}
