@@ -26,6 +26,7 @@
 #include "../session/Session.h"
 #include "../Emulation.h"
 #include "../History.h"
+#include "../HistoryScrollFile.h"
 
 using namespace Konsole;
 

@@ -41,32 +41,6 @@
 namespace Konsole {
 
 //////////////////////////////////////////////////////////////////////
-// File-based history (e.g. file log, no limitation in length)
-//////////////////////////////////////////////////////////////////////
-
-class KONSOLEPRIVATE_EXPORT HistoryScrollFile : public HistoryScroll
-{
-public:
-    explicit HistoryScrollFile();
-    ~HistoryScrollFile() override;
-
-    int  getLines() override;
-    int  getLineLen(int lineno) override;
-    void getCells(int lineno, int colno, int count, Character res[]) override;
-    bool isWrappedLine(int lineno) override;
-
-    void addCells(const Character text[], int count) override;
-    void addLine(bool previousWrapped = false) override;
-
-private:
-    qint64 startOfLine(int lineno);
-
-    HistoryFile _index; // lines Row(qint64)
-    HistoryFile _cells; // text  Row(Character)
-    HistoryFile _lineflags; // flags Row(unsigned char)
-};
-
-//////////////////////////////////////////////////////////////////////
 // Nothing-based history (no history :-)
 //////////////////////////////////////////////////////////////////////
 class KONSOLEPRIVATE_EXPORT HistoryScrollNone : public HistoryScroll
