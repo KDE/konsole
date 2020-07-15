@@ -58,23 +58,6 @@ using namespace Konsole;
    at constant costs.
 */
 
-// History Scroll abstract base class //////////////////////////////////////
-
-HistoryScroll::HistoryScroll(HistoryType *t) :
-    _historyType(t)
-{
-}
-
-HistoryScroll::~HistoryScroll()
-{
-    delete _historyType;
-}
-
-bool HistoryScroll::hasScroll()
-{
-    return true;
-}
-
 // History Scroll File //////////////////////////////////////
 
 /*
