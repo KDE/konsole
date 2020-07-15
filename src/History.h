@@ -39,52 +39,18 @@
 #include "CharacterFormat.h"
 #include "CompactHistoryBlock.h"
 #include "CompactHistoryBlockList.h"
+#include "CompactHistoryLine.h"
 
 // Konsole
 #include "Character.h"
 
 namespace Konsole {
 
-typedef QVector<Character> TextLine;
-
-class CompactHistoryLine
-{
-public:
-    CompactHistoryLine(const TextLine &, CompactHistoryBlockList &blockList);
-    virtual ~CompactHistoryLine();
-
-    // custom new operator to allocate memory from custom pool instead of heap
-    static void *operator new(size_t size, CompactHistoryBlockList &blockList);
-    static void operator delete(void *)
-    {
-        /* do nothing, deallocation from pool is done in destructor*/
-    }
-
-    virtual void getCharacters(Character *array, int size, int startColumn);
-    virtual void getCharacter(int index, Character &r);
-    virtual bool isWrapped() const
-    {
-        return _wrapped;
-    }
-
-    virtual void setWrapped(bool value)
-    {
-        _wrapped = value;
-    }
-
-    virtual unsigned int getLength() const
-    {
-        return _length;
-    }
-
-protected:
-    CompactHistoryBlockList &_blockListRef;
-    CharacterFormat *_formatArray;
-    quint16 _length;
-    uint    *_text;
-    quint16 _formatLength;
-    bool _wrapped;
-};
+//////////////////////////////////////////////////////////////////////
+// History using compact storage
+// This implementation uses a list of fixed-sized blocks
+// where history lines are allocated in (avoids heap fragmentation)
+//////////////////////////////////////////////////////////////////////
 
 class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
 {
