@@ -43,12 +43,12 @@
 
 // Konsole
 #include "BookmarkHandler.h"
-#include "SessionController.h"
+#include "session/SessionController.h"
 #include "ProfileList.h"
-#include "Session.h"
+#include "session/Session.h"
 #include "widgets/ViewContainer.h"
 #include "ViewManager.h"
-#include "SessionManager.h"
+#include "session/SessionManager.h"
 #include "ProfileManager.h"
 #include "KonsoleSettings.h"
 #include "WindowSystemInfo.h"

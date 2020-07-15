@@ -34,7 +34,7 @@
 #include "ViewProperties.h"
 #include "Profile.h"
 #include "Enumeration.h"
-#include "Session.h"
+#include "session/Session.h"
 
 class QAction;
 class QTextCodec;

@@ -29,7 +29,7 @@
 
 // Konsole
 #include "konsoleprivate_export.h"
-#include "Session.h"
+#include "session/Session.h"
 
 namespace Konsole {
 /**

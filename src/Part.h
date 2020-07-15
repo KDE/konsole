@@ -28,7 +28,7 @@
 #include <QVariantList>
 
 // Konsole
-#include "Session.h"
+#include "session/Session.h"
 #include "config-konsole.h"
 
 class QStringList;

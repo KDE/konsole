@@ -22,7 +22,7 @@
 #include "TerminalHeaderBar.h"
 
 #include "widgets/TerminalDisplay.h"
-#include "SessionController.h"
+#include "session/SessionController.h"
 #include "ViewProperties.h"
 #include "KonsoleSettings.h"
 #include "widgets/ViewSplitter.h"

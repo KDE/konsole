@@ -19,7 +19,7 @@
 */
 
 // Own
-#include "SessionController.h"
+#include "session/SessionController.h"
 
 #include "ProfileManager.h"
 #include "konsoledebug.h"
@@ -68,15 +68,15 @@
 #include "widgets/IncrementalSearchBar.h"
 #include "RenameTabDialog.h"
 #include "ScreenWindow.h"
-#include "Session.h"
+#include "session/Session.h"
 #include "ProfileList.h"
 #include "widgets/TerminalDisplay.h"
-#include "SessionManager.h"
+#include "session/SessionManager.h"
 #include "Enumeration.h"
 #include "PrintOptions.h"
 #include "SaveHistoryTask.h"
 #include "SearchHistoryTask.h"
-#include "SessionGroup.h"
+#include "session/SessionGroup.h"
 
 // For Unix signal names
 #include <csignal>

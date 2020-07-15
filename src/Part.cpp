@@ -37,9 +37,9 @@
 // Konsole
 #include "EditProfileDialog.h"
 #include "Emulation.h"
-#include "Session.h"
-#include "SessionController.h"
-#include "SessionManager.h"
+#include "session/Session.h"
+#include "session/SessionController.h"
+#include "session/SessionManager.h"
 #include "ProfileManager.h"
 #include "widgets/TerminalDisplay.h"
 #include "ViewManager.h"

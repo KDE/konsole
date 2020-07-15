@@ -24,7 +24,7 @@
 
 #include <QWidget>
 #include <QPoint>
-#include "Session.h"
+#include "session/Session.h"
 
 class QLabel;
 class QToolButton;

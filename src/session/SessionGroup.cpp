@@ -22,8 +22,8 @@
 */
 
 // Konsole
-#include "Session.h"
-#include "SessionGroup.h"
+#include "session/Session.h"
+#include "session/SessionGroup.h"
 #include "Emulation.h"
 
 namespace Konsole {

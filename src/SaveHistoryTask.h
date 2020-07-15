@@ -21,7 +21,7 @@
 #ifndef SAVEHISTORYTASK_H
 #define SAVEHISTORYTASK_H
 
-#include "SessionTask.h"
+#include "session/SessionTask.h"
 #include "TerminalCharacterDecoder.h"
 
 #include <kio/job.h>

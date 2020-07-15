@@ -37,7 +37,7 @@
 
 // Konsole
 #include "KeyboardTranslator.h"
-#include "SessionController.h"
+#include "session/SessionController.h"
 #include "widgets/TerminalDisplay.h"
 
 using Konsole::Vt102Emulation;

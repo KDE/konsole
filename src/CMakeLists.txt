@@ -37,12 +37,12 @@ option(KONSOLE_BUILD_UNI2CHARACTERWIDTH "Konsole: build uni2characterwidth execu
 # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
 
 # Generate dbus .xml files; do not store .xml in source folder
-qt5_generate_dbus_interface(Session.h org.kde.konsole.Session.xml OPTIONS -m)
+qt5_generate_dbus_interface(session/Session.h org.kde.konsole.Session.xml OPTIONS -m)
 qt5_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
 
 qt5_add_dbus_adaptor(sessionadaptors_SRCS
                     ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
-                    Session.h
+                    session/Session.h
                     Konsole::Session)
 qt5_add_dbus_adaptor(windowadaptors_SRCS
                     ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
@@ -84,12 +84,12 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         Screen.cpp
                         ScreenWindow.cpp
                         ScrollState.cpp
-                        Session.cpp
-                        SessionGroup.cpp
-                        SessionController.cpp
-                        SessionManager.cpp
-                        SessionListModel.cpp
-                        SessionTask.cpp
+                        session/Session.cpp
+                        session/SessionGroup.cpp
+                        session/SessionController.cpp
+                        session/SessionManager.cpp
+                        session/SessionListModel.cpp
+                        session/SessionTask.cpp
                         ShellCommand.cpp
                         widgets/TabTitleFormatButton.cpp
                         TerminalCharacterDecoder.cpp

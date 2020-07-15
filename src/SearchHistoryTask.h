@@ -25,10 +25,10 @@
 #include <QMap>
 #include <QRegularExpression>
 
-#include "SessionTask.h"
+#include "session/SessionTask.h"
 #include "Enumeration.h"
 #include "ScreenWindow.h"
-#include "Session.h"
+#include "session/Session.h"
 
 namespace Konsole
 {

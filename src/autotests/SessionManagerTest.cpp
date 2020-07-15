@@ -18,7 +18,7 @@
 */
 
 // Own
-#include "SessionManagerTest.h"
+#include "session/SessionManagerTest.h"
 
 // KDE
 #include <qtest.h>

@@ -26,8 +26,8 @@
 
 // Konsole
 #include "widgets/TerminalDisplay.h"
-#include "SessionManager.h"
-#include "Session.h"
+#include "session/SessionManager.h"
+#include "session/Session.h"
 #include "Screen.h"
 
 using namespace Konsole;

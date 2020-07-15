@@ -29,7 +29,7 @@
 // Konsole
 #include "Profile.h"
 #include "ViewManager.h"
-#include "Session.h"
+#include "session/Session.h"
 
 // Qt
 class QPoint;

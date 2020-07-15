@@ -25,7 +25,7 @@
 #include <QAction>
 
 // Konsole
-#include "Session.h"
+#include "session/Session.h"
 
 namespace Konsole {
 class TabTitleFormatButton : public QPushButton

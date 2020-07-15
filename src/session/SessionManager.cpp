@@ -20,7 +20,7 @@
 */
 
 // Own
-#include "SessionManager.h"
+#include "session/SessionManager.h"
 
 #include "konsoledebug.h"
 
@@ -33,7 +33,7 @@
 #include <KConfigGroup>
 
 // Konsole
-#include "Session.h"
+#include "session/Session.h"
 #include "ProfileManager.h"
 #include "History.h"
 #include "Enumeration.h"

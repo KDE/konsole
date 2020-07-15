@@ -29,10 +29,10 @@
 // Konsole
 #include "EditProfileDialog.h"
 #include "ProfileManager.h"
-#include "Session.h"
+#include "session/Session.h"
 #include "widgets/TerminalDisplay.h"
-#include "SessionManager.h"
-#include "SessionController.h"
+#include "session/SessionManager.h"
+#include "session/SessionController.h"
 
 using namespace Konsole;
 

@@ -36,10 +36,10 @@
 
 #include "ColorScheme.h"
 #include "ColorSchemeManager.h"
-#include "Session.h"
+#include "session/Session.h"
 #include "widgets/TerminalDisplay.h"
-#include "SessionController.h"
-#include "SessionManager.h"
+#include "session/SessionController.h"
+#include "session/SessionManager.h"
 #include "ProfileManager.h"
 #include "widgets/ViewSplitter.h"
 #include "widgets/ViewContainer.h"

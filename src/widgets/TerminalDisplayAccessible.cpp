@@ -20,7 +20,7 @@
  */
 
 #include "TerminalDisplayAccessible.h"
-#include "SessionController.h"
+#include "session/SessionController.h"
 #include <klocalizedstring.h>
 
 using namespace Konsole;

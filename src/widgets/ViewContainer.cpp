@@ -41,12 +41,12 @@
 #include "ProfileList.h"
 #include "ViewManager.h"
 #include "KonsoleSettings.h"
-#include "SessionController.h"
+#include "session/SessionController.h"
 #include "DetachableTabBar.h"
 #include "widgets/TerminalDisplay.h"
 #include "widgets/ViewSplitter.h"
 #include "MainWindow.h"
-#include "Session.h"
+#include "session/Session.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 

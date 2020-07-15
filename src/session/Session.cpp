@@ -22,7 +22,7 @@
 */
 
 // Own
-#include "Session.h"
+#include "session/Session.h"
 
 // Standard
 #include <cstdlib>
@@ -57,7 +57,7 @@
 #include "ZModemDialog.h"
 #include "History.h"
 #include "konsoledebug.h"
-#include "SessionManager.h"
+#include "session/SessionManager.h"
 #include "ProfileManager.h"
 #include "Profile.h"
 

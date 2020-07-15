@@ -50,10 +50,10 @@
 #include <KIO/PreviewJob>
 
 // Konsole
-#include "Session.h"
+#include "session/Session.h"
 #include "TerminalCharacterDecoder.h"
 #include "ProfileManager.h"
-#include "SessionManager.h"
+#include "session/SessionManager.h"
 
 using namespace Konsole;
 
