@@ -678,7 +678,7 @@
            <item>
             <widget class="QLabel" name="label_9">
              <property name="text">
-              <string>translucent</string>
+              <string>Translucent</string>
              </property>
             </widget>
            </item>
@@ -698,7 +698,7 @@
            <item>
             <widget class="QLabel" name="label_6">
              <property name="text">
-              <string>opaque</string>
+              <string>Opaque</string>
              </property>
             </widget>
            </item>
