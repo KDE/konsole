@@ -1565,11 +1565,8 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr &profile)
     _scrollingUi->scrollFullPage->setChecked(Enum::ScrollPageFull == scrollFullPage);
     connect(_scrollingUi->scrollFullPage, &QPushButton::clicked, this, &EditProfileDialog::scrollFullPage);
 
-
-    const auto options = QVector<BooleanOption>{
-        {_scrollingUi->highlightScrolledLinesButton, Profile::HighlightScrolledLines, SLOT(toggleHighlightScrolledLines(bool))}
-    };
-    setupCheckBoxes(options, profile);
+    _scrollingUi->highlightScrolledLinesButton->setChecked(profile->property<bool>(Profile::HighlightScrolledLines));
+    connect(_scrollingUi->highlightScrolledLinesButton, &QPushButton::clicked, this,  &EditProfileDialog::toggleHighlightScrolledLines);
 
     // signals and slots
     connect(_scrollingUi->historySizeWidget, &Konsole::HistorySizeWidget::historySizeChanged, this,
