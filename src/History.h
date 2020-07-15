@@ -40,6 +40,7 @@
 #include "CompactHistoryBlock.h"
 #include "CompactHistoryBlockList.h"
 #include "CompactHistoryLine.h"
+#include "CompactHistoryScroll.h"
 
 // Konsole
 #include "Character.h"
@@ -51,33 +52,6 @@ namespace Konsole {
 // This implementation uses a list of fixed-sized blocks
 // where history lines are allocated in (avoids heap fragmentation)
 //////////////////////////////////////////////////////////////////////
-
-class KONSOLEPRIVATE_EXPORT CompactHistoryScroll : public HistoryScroll
-{
-    typedef QList<CompactHistoryLine *> HistoryArray;
-
-public:
-    explicit CompactHistoryScroll(unsigned int maxLineCount = 1000);
-    ~CompactHistoryScroll() override;
-
-    int  getLines() override;
-    int  getLineLen(int lineNumber) override;
-    void getCells(int lineNumber, int startColumn, int count, Character buffer[]) override;
-    bool isWrappedLine(int lineNumber) override;
-
-    void addCells(const Character a[], int count) override;
-    void addCellsVector(const TextLine &cells) override;
-    void addLine(bool previousWrapped = false) override;
-
-    void setMaxNbLines(unsigned int lineCount);
-
-private:
-    bool hasDifferentColors(const TextLine &line) const;
-    HistoryArray _lines;
-    CompactHistoryBlockList _blockList;
-
-    unsigned int _maxLineCount;
-};
 
 //////////////////////////////////////////////////////////////////////
 // History type
