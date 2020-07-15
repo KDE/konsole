@@ -21,7 +21,7 @@
 #include "SessionDisplayConnection.h"
 
 // Konsole
-#include "Session.h"
+#include "session/Session.h"
 #include "widgets/TerminalDisplay.h"
 
 namespace Konsole
@@ -30,23 +30,23 @@ namespace Konsole
 SessionDisplayConnection::SessionDisplayConnection(Session *session, TerminalDisplay *view, QObject *parent)
     : QObject(parent)
 {
-    mSession = session;
-    mView = view;
+    _session = session;
+    _view = view;
 }
 
 QPointer<Session> SessionDisplayConnection::session()
 {
-    return mSession;
+    return _session;
 }
 
 QPointer<TerminalDisplay> SessionDisplayConnection::view()
 {
-    return mView;
+    return _view;
 }
 
 bool SessionDisplayConnection::isValid() const
 {
-    return !mSession.isNull() && !mView.isNull();
+    return !_session.isNull() && !_view.isNull();
 }
 
 }   // namespace Konsole

@@ -51,8 +51,8 @@ public:
     bool isValid() const;
 
 private:
-    QPointer<Session> mSession;
-    QPointer<TerminalDisplay> mView;
+    QPointer<Session> _session;
+    QPointer<TerminalDisplay> _view;
 };
 
 }
