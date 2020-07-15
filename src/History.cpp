@@ -60,26 +60,6 @@ using namespace Konsole;
    at constant costs.
 */
 
-HistoryTypeNone::HistoryTypeNone() = default;
-
-bool HistoryTypeNone::isEnabled() const
-{
-    return false;
-}
-
-HistoryScroll *HistoryTypeNone::scroll(HistoryScroll *old) const
-{
-    delete old;
-    return new HistoryScrollNone();
-}
-
-int HistoryTypeNone::maximumLineCount() const
-{
-    return 0;
-}
-
-//////////////////////////////
-
 HistoryTypeFile::HistoryTypeFile() = default;
 
 bool HistoryTypeFile::isEnabled() const
