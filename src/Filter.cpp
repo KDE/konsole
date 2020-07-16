@@ -710,7 +710,7 @@ void FileFilter::HotSpot::thumbnailRequested() {
     _thumbnailPos = QPoint(_eventPos.x() + 100, _eventPos.y() - settings->thumbnailSize() / 2);
 
     const int size = KonsoleSettings::thumbnailSize();
-    if (_previewJob) {
+    if (_previewJob != nullptr) {
         _previewJob->deleteLater();
     }
 

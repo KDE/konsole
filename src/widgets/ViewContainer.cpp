@@ -286,8 +286,8 @@ QSize TabbedViewContainer::sizeHint() const
     const auto tabsSize = tabBar()->sizeHint();
     const auto *leftWidget = cornerWidget(Qt::TopLeftCorner);
     const auto *rightWidget = cornerWidget(Qt::TopRightCorner);
-    const auto leftSize = leftWidget ? leftWidget->sizeHint() : QSize(0, 0);
-    const auto rightSize = rightWidget ? rightWidget->sizeHint() : QSize(0, 0);
+    const auto leftSize = leftWidget != nullptr ? leftWidget->sizeHint() : QSize(0, 0);
+    const auto rightSize = rightWidget != nullptr ? rightWidget->sizeHint() : QSize(0, 0);
 
     auto tabBarSize = QSize(0, 0);
     // isVisible() won't work; this is called when the window is not yet visible
@@ -296,7 +296,7 @@ QSize TabbedViewContainer::sizeHint() const
         tabBarSize.setHeight(qMax(tabsSize.height(), qMax(leftSize.height(), rightSize.height())));
     }
 
-    const auto terminalSize = currentWidget() ? currentWidget()->sizeHint() : QSize(0, 0);
+    const auto terminalSize = currentWidget() != nullptr ? currentWidget()->sizeHint() : QSize(0, 0);
 
     //        width
     // ├──────────────────┤
