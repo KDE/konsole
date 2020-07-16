@@ -267,7 +267,9 @@ ColorEntry ColorScheme::colorEntry(int index, uint randomSeed) const
         return entry;
     }
 
-    double baseHue, baseSaturation, baseLightness;
+    double baseHue;
+    double baseSaturation;
+    double baseLightness;
     rgb2hsluv(entry.redF(), entry.greenF(), entry.blueF(),
               &baseHue, &baseSaturation, &baseLightness);
 
@@ -322,7 +324,9 @@ ColorEntry ColorScheme::colorEntry(int index, uint randomSeed) const
                              ? baseLightness
                              : lightnessDistribution(randomEngine);
 
-    double red, green, blue;
+    double red;
+    double green;
+    double blue;
     hsluv2rgb(hue, saturation, lightness, &red, &green, &blue);
 
     return {qRound(red * 255), qRound(green * 255), qRound(blue * 255)};
@@ -398,7 +402,9 @@ QColor ColorScheme::backgroundColor() const
 
 bool ColorScheme::hasDarkBackground() const
 {
-    double h, s, l;
+    double h;
+    double s;
+    double l;
     const double r = backgroundColor().redF();
     const double g = backgroundColor().greenF();
     const double b = backgroundColor().blueF();

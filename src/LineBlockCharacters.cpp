@@ -656,7 +656,9 @@ static inline bool drawBlockCharacter(QPainter &paint, int x, int y, int w, int 
         return true;
     }
 
-    QBrush lightShade, mediumShade, darkShade;
+    QBrush lightShade;
+    QBrush mediumShade;
+    QBrush darkShade;
     if (paint.testRenderHint(QPainter::Antialiasing)) {
         lightShade  = QColor(color.red(), color.green(), color.blue(), 64);
         mediumShade = QColor(color.red(), color.green(), color.blue(), 128);

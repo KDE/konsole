@@ -1120,7 +1120,9 @@ void TerminalDisplay::updateImage()
     Q_ASSERT(_usedLines <= _lines);
     Q_ASSERT(_usedColumns <= _columns);
 
-    int y, x, len;
+    int y;
+    int x;
+    int len;
 
     const QPoint tL  = contentsRect().topLeft();
     const int    tLx = tL.x();
@@ -1426,7 +1428,8 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     // and draw appropriate visuals to indicate the presence of the hotspot
 
     const auto spots = _filterChain->hotSpots();
-    int urlNumber = 0, urlNumInc;
+    int urlNumber = 0;
+    int urlNumInc;
     if (_reverseUrlHints) {
         for (const auto &spot : spots) {
             if (spot->type() == Filter::HotSpot::Link) {
@@ -2354,7 +2357,8 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 
 QSharedPointer<Filter::HotSpot> TerminalDisplay::filterActions(const QPoint& position)
 {
-    int charLine, charColumn;
+    int charLine;
+    int charColumn;
     getCharacterPosition(position, charLine, charColumn, false);
 
     return _filterChain->hotSpotAt(charLine, charColumn);
