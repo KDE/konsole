@@ -640,7 +640,7 @@ void FileFilter::HotSpot::setupMenu(QMenu *menu)
             menu->insertAction(firstAction, action);
         }
     }
-    QAction *separator = new QAction(this);
+    auto *separator = new QAction(this);
     separator->setSeparator(true);
     menu->insertAction(firstAction, separator);
 }
