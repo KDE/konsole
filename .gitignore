@@ -20,3 +20,8 @@ random_seed
 CMakeLists.txt.user*
 *.unc-backup*
 .vscode
+
+# Ignore source trail files
+*.srctrlbm
+*.srctrldb
+*.srctrlprj
