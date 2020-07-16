@@ -45,11 +45,6 @@
 
 namespace Konsole {
 
-//////////////////////////////////////////////////////////////////////
-// History using compact storage
-// This implementation uses a list of fixed-sized blocks
-// where history lines are allocated in (avoids heap fragmentation)
-//////////////////////////////////////////////////////////////////////
 typedef QVector<Character> TextLine;
 
 class CompactHistoryLine
