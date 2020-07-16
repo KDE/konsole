@@ -983,10 +983,10 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     const int SCROLLBAR_CONTENT_GAP = 1;
     QRect scrollRect;
     if (_scrollbarLocation == Enum::ScrollBarLeft) {
-        scrollRect.setLeft(scrollBarWidth + SCROLLBAR_CONTENT_GAP);
+        scrollRect.setLeft(scrollBarWidth + SCROLLBAR_CONTENT_GAP + (_highlightScrolledLinesControl.enabled ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0));
         scrollRect.setRight(width());
     } else {
-        scrollRect.setLeft(0);
+        scrollRect.setLeft(_highlightScrolledLinesControl.enabled ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0);
         scrollRect.setRight(width() - scrollBarWidth - SCROLLBAR_CONTENT_GAP);
     }
     void* firstCharPos = &_image[ region.top() * _columns ];
@@ -1270,7 +1270,7 @@ void TerminalDisplay::updateImage()
     }
 
     if (_highlightScrolledLinesControl.enabled) {
-        dirtyRegion |= highlightScrolledLinesRegion();
+        dirtyRegion |= highlightScrolledLinesRegion(dirtyRegion.isEmpty());
     }
     _screenWindow->resetScrollCount();
 
@@ -1787,57 +1787,53 @@ void TerminalDisplay::highlightScrolledLines(QPainter& painter)
     painter.fillRect(_highlightScrolledLinesControl.rect, color);
 }
 
-QRect TerminalDisplay::highlightScrolledLinesRegion()
+QRegion TerminalDisplay::highlightScrolledLinesRegion(bool nothingChanged)
 {
-    QRect result;
+    QRegion dirtyRegion;
+    const int highlightLeftPosition = _scrollbarLocation == Enum::ScrollBarLeft ? _scrollBar->width() : 0;
 
-    if (_scrollBar->maximum() == 0) {
-        // De-highlight when entering something like 'vim'
-        if (!_highlightScrolledLinesControl.rect.isEmpty()) {
-            result = _highlightScrolledLinesControl.rect;
-            _highlightScrolledLinesControl.rect.setRect(0, 0, 0, 0);
-        }
-    } else {
-        const int highlightLeftPosition = _scrollbarLocation == Enum::ScrollBarLeft ? _scrollBar->width() : 0;
+    int start = 0;
+    int nb_lines = abs(_screenWindow->scrollCount());
+    if (nb_lines > 0 && _scrollBar->maximum() > 0) {
+        QRect new_highlight;
+        bool addToCurrentHighlight = _highlightScrolledLinesControl.timer->isActive() &&
+                                     (_screenWindow->scrollCount() * _highlightScrolledLinesControl.previousScrollCount > 0);
 
-        if (_highlightScrolledLinesControl.previousScrollCount != 0) {
-            // De-highlight previously scrolled lines
-            if (_screenWindow->scrollCount() == 0 && _scrollBar->value() == _scrollBar->maximum()) {
-                // Nothing has moved, we can reuse _highlightScrolledLinesControl.rect to clear
-                result = _highlightScrolledLinesControl.rect;
-                _highlightScrolledLinesControl.rect.setRect(0, 0, 0, 0);
+        if (addToCurrentHighlight) {
+            if (_screenWindow->scrollCount() > 0) {
+                start = -1 * (_highlightScrolledLinesControl.previousScrollCount + _screenWindow->scrollCount()) + _screenWindow->windowLines();
             } else {
-                int start = 0;
-                const int nb_lines = abs(_highlightScrolledLinesControl.previousScrollCount);
-                if (_screenWindow->scrollCount() * _highlightScrolledLinesControl.previousScrollCount > 0) {
-                    start = _screenWindow->scrollCount() < 0 ? abs(_screenWindow->scrollCount()) :
-                            _screenWindow->windowLines() - _screenWindow->scrollCount() - _highlightScrolledLinesControl.previousScrollCount;
-                } else {
-                    start = _highlightScrolledLinesControl.previousScrollCount > 0 ? _screenWindow->windowLines() - _highlightScrolledLinesControl.previousScrollCount : 0;
-                }
-                result = QRect(highlightLeftPosition, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
+                start = -1 * _highlightScrolledLinesControl.previousScrollCount;
             }
+            _highlightScrolledLinesControl.previousScrollCount += _screenWindow->scrollCount();
+        } else {
+            start = _screenWindow->scrollCount() > 0 ? _screenWindow->windowLines() - nb_lines : 0;
+            _highlightScrolledLinesControl.previousScrollCount = _screenWindow->scrollCount();
         }
 
-        // Highlight the new lines coming into view
-        int nb_lines = abs(_screenWindow->scrollCount());
-        if (nb_lines > 0) {
-            if (_highlightScrolledLinesControl.timer->isActive() && (_screenWindow->scrollCount() * _highlightScrolledLinesControl.previousScrollCount > 0)) {
-                nb_lines += abs(_highlightScrolledLinesControl.previousScrollCount);
-                nb_lines = std::min(nb_lines, _screenWindow->windowLines());
-                _highlightScrolledLinesControl.previousScrollCount += _screenWindow->scrollCount();
-            } else {
-                _highlightScrolledLinesControl.previousScrollCount = _screenWindow->scrollCount();
-            }
-            const int start = _screenWindow->scrollCount() > 0 ? std::max(_screenWindow->windowLines() - nb_lines, 0) : 0;
-            _highlightScrolledLinesControl.rect.setRect(highlightLeftPosition, _contentRect.top() + start * _fontHeight,
-                                                        HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
-            result |= _highlightScrolledLinesControl.rect;
-            _highlightScrolledLinesControl.timer->start();
+        new_highlight.setRect(highlightLeftPosition, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
+        new_highlight.setTop(std::max(new_highlight.top(), _contentRect.top()));
+        new_highlight.setBottom(std::min(new_highlight.bottom(), _contentRect.bottom()));
+        if (!new_highlight.isValid()) {
+            new_highlight = QRect(0, 0, 0, 0);
         }
+        dirtyRegion = new_highlight;
+
+        if (addToCurrentHighlight) {
+            _highlightScrolledLinesControl.rect |= new_highlight;
+        } else {
+            dirtyRegion |= _highlightScrolledLinesControl.rect;
+            _highlightScrolledLinesControl.rect = new_highlight;
+        }
+
+        _highlightScrolledLinesControl.timer->start();
+    } else if (!nothingChanged || _highlightScrolledLinesControl.needToClear) {
+        dirtyRegion = _highlightScrolledLinesControl.rect;
+        _highlightScrolledLinesControl.rect.setRect(0, 0, 0, 0);
+        _highlightScrolledLinesControl.needToClear = false;
     }
 
-    return result;
+    return dirtyRegion;
 }
 
 void TerminalDisplay::highlightScrolledLinesEvent()
@@ -4101,6 +4097,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 
     // highlight lines scrolled into view (must be applied before margin/center)
     setHighlightScrolledLines(profile->property<bool>(Profile::HighlightScrolledLines));
+    _highlightScrolledLinesControl.needToClear = true;
 
     // margin/center
     setMargin(profile->property<int>(Profile::TerminalMargin));
