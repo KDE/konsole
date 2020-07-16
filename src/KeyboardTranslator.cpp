@@ -606,11 +606,11 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray &text) const
 
 void KeyboardTranslator::Entry::insertModifier(QString &item, int modifier) const
 {
-    if ((modifier & _modifierMask) == 0u) {
+    if ((modifier & _modifierMask) == 0U) {
         return;
     }
 
-    if ((modifier & _modifiers) != 0u) {
+    if ((modifier & _modifiers) != 0U) {
         item += QLatin1Char('+');
     } else {
         item += QLatin1Char('-');

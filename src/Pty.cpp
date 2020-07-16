@@ -131,8 +131,8 @@ bool Pty::flowControlEnabled() const
     if (pty()->masterFd() >= 0) {
         struct ::termios ttmode;
         pty()->tcGetAttr(&ttmode);
-        return ((ttmode.c_iflag & IXOFF) != 0u)
-               && ((ttmode.c_iflag & IXON) != 0u);
+        return ((ttmode.c_iflag & IXOFF) != 0U)
+               && ((ttmode.c_iflag & IXON) != 0U);
     } else {
         qCDebug(KonsoleDebug) << "Unable to get flow control status, terminal not connected.";
         return _xonXoff;

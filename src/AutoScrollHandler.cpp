@@ -62,7 +62,7 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
 
             _timerId = 0;
         } else {
-            if ((_timerId == 0) && ((mouseEvent->buttons() & Qt::LeftButton) != 0u)) {
+            if ((_timerId == 0) && ((mouseEvent->buttons() & Qt::LeftButton) != 0U)) {
                 _timerId = startTimer(100);
             }
         }
@@ -71,7 +71,7 @@ bool AutoScrollHandler::eventFilter(QObject* watched, QEvent* event)
     }
     case QEvent::MouseButtonRelease: {
         auto* mouseEvent = static_cast<QMouseEvent*>(event);
-        if ((_timerId != 0) && ((mouseEvent->buttons() & ~Qt::LeftButton) != 0u)) {
+        if ((_timerId != 0) && ((mouseEvent->buttons() & ~Qt::LeftButton) != 0U)) {
             killTimer(_timerId);
             _timerId = 0;
         }

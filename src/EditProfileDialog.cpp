@@ -1666,10 +1666,10 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
     // Setup the URL hints modifier checkboxes
     {
         auto modifiers = profile->property<int>(Profile::UrlHintsModifiers);
-        _advancedUi->urlHintsModifierShift->setChecked((modifiers &Qt::ShiftModifier) != 0u);
-        _advancedUi->urlHintsModifierCtrl->setChecked((modifiers &Qt::ControlModifier) != 0u);
-        _advancedUi->urlHintsModifierAlt->setChecked((modifiers &Qt::AltModifier) != 0u);
-        _advancedUi->urlHintsModifierMeta->setChecked((modifiers &Qt::MetaModifier) != 0u);
+        _advancedUi->urlHintsModifierShift->setChecked((modifiers &Qt::ShiftModifier) != 0U);
+        _advancedUi->urlHintsModifierCtrl->setChecked((modifiers &Qt::ControlModifier) != 0U);
+        _advancedUi->urlHintsModifierAlt->setChecked((modifiers &Qt::AltModifier) != 0U);
+        _advancedUi->urlHintsModifierMeta->setChecked((modifiers &Qt::MetaModifier) != 0U);
         connect(_advancedUi->urlHintsModifierShift, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
         connect(_advancedUi->urlHintsModifierCtrl, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);
         connect(_advancedUi->urlHintsModifierAlt, &QCheckBox::toggled, this, &EditProfileDialog::updateUrlHintsModifier);

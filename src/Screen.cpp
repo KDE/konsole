@@ -1245,7 +1245,7 @@ QString Screen::text(int startIndex, int endIndex, const DecodingOptions options
     PlainTextDecoder plainTextDecoder;
 
     TerminalCharacterDecoder *decoder;
-    if((options & ConvertToHtml) != 0u) {
+    if((options & ConvertToHtml) != 0U) {
         decoder = &htmlDecoder;
     } else {
         decoder = &plainTextDecoder;
@@ -1427,7 +1427,7 @@ int Screen::copyLineToStream(int line ,
         }
     }
 
-    if ((options & TrimLeadingWhitespace) != 0u) {
+    if ((options & TrimLeadingWhitespace) != 0U) {
         int spacesCount = 0;
         for (spacesCount = 0; spacesCount < count; spacesCount++) {
             if (QChar::category(characterBuffer[spacesCount].character) != QChar::Category::Separator_Space) {

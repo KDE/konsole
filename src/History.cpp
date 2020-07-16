@@ -111,7 +111,7 @@ bool HistoryScrollFile::isWrappedLine(int lineno)
         unsigned char flag = 0;
         _lineflags.get(reinterpret_cast<char *>(&flag), sizeof(unsigned char),
                        (lineno)*sizeof(unsigned char));
-        return flag != 0u;
+        return flag != 0U;
     }
     return false;
 }

@@ -291,20 +291,20 @@ void Vt102Emulation::initTokenizer()
     for (i = 32; i < 256; ++i) {
         charClass[i] |= CHR;
     }
-    for (s = (quint8 *)"@ABCDEFGHILMPSTXZbcdfry"; *s != 0u; ++s) {
+    for (s = (quint8 *)"@ABCDEFGHILMPSTXZbcdfry"; *s != 0U; ++s) {
         charClass[*s] |= CPN;
     }
     // resize = \e[8;<row>;<col>t
-    for (s = (quint8 *)"t"; *s != 0u; ++s) {
+    for (s = (quint8 *)"t"; *s != 0U; ++s) {
         charClass[*s] |= CPS;
     }
-    for (s = (quint8 *)"0123456789"; *s != 0u; ++s) {
+    for (s = (quint8 *)"0123456789"; *s != 0U; ++s) {
         charClass[*s] |= DIG;
     }
-    for (s = (quint8 *)"()+*%"; *s != 0u; ++s) {
+    for (s = (quint8 *)"()+*%"; *s != 0U; ++s) {
         charClass[*s] |= SCS;
     }
-    for (s = (quint8 *)"()+*#[]%"; *s != 0u; ++s) {
+    for (s = (quint8 *)"()+*#[]%"; *s != 0U; ++s) {
         charClass[*s] |= GRP;
     }
 
@@ -1145,13 +1145,13 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
     if (getMode(MODE_AppScreen)) {
         states |= KeyboardTranslator::AlternateScreenState;
     }
-    if (getMode(MODE_AppKeyPad) && ((modifiers &Qt::KeypadModifier) != 0u)) {
+    if (getMode(MODE_AppKeyPad) && ((modifiers &Qt::KeypadModifier) != 0U)) {
         states |= KeyboardTranslator::ApplicationKeypadState;
     }
 
     if (!isReadOnly) {
         // check flow control state
-        if ((modifiers &Qt::ControlModifier) != 0u) {
+        if ((modifiers &Qt::ControlModifier) != 0U) {
             switch (event->key()) {
             case Qt::Key_S:
                 emit flowControlKeyPressed(true);
@@ -1178,17 +1178,17 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         // Alt+[Character] results in Esc+[Character] being sent
         // (unless there is an entry defined for this particular combination
         //  in the keyboard modifier)
-        const bool wantsAltModifier = ((entry.modifiers() & entry.modifierMask() & Qt::AltModifier) != 0u);
-        const bool wantsMetaModifier = ((entry.modifiers() & entry.modifierMask() & Qt::MetaModifier) != 0u);
+        const bool wantsAltModifier = ((entry.modifiers() & entry.modifierMask() & Qt::AltModifier) != 0U);
+        const bool wantsMetaModifier = ((entry.modifiers() & entry.modifierMask() & Qt::MetaModifier) != 0U);
         const bool wantsAnyModifier = ((entry.state() &
                                 entry.stateMask() & KeyboardTranslator::AnyModifierState) != 0);
 
-        if ( ((modifiers & Qt::AltModifier) != 0u) && !(wantsAltModifier || wantsAnyModifier)
+        if ( ((modifiers & Qt::AltModifier) != 0U) && !(wantsAltModifier || wantsAnyModifier)
              && !event->text().isEmpty() )
         {
             textToSend.prepend("\033");
         }
-        if ( ((modifiers & Qt::MetaModifier) != 0u) && !(wantsMetaModifier || wantsAnyModifier)
+        if ( ((modifiers & Qt::MetaModifier) != 0U) && !(wantsMetaModifier || wantsAnyModifier)
              && !event->text().isEmpty() )
         {
             textToSend.prepend("\030@s");
