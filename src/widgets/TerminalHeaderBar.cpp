@@ -258,13 +258,13 @@ QSplitter *TerminalHeaderBar::getTopLevelSplitter()
 {
     QWidget *p = parentWidget();
     // This is expected.
-    if (qobject_cast<TerminalDisplay*>(p)) {
+    if (qobject_cast<TerminalDisplay*>(p) != nullptr) {
         p = p->parentWidget();
     }
 
     // this is also expected.
     auto *innerSplitter = qobject_cast<ViewSplitter*>(p);
-    if (!innerSplitter) {
+    if (innerSplitter == nullptr) {
         return nullptr;
     }
 

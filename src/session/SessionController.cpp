@@ -1032,7 +1032,7 @@ void SessionController::closeSession()
         }
     }
 
-    if (factory()) {
+    if (factory() != nullptr) {
         factory()->removeClient(this);
     }
 }

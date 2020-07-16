@@ -2413,7 +2413,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         auto fileSpot = spot.dynamicCast<FileFilter::HotSpot>();
         if (fileSpot != _currentlyHoveredHotspot) {
             _currentlyHoveredHotspot = fileSpot;
-            if (fileSpot) {
+            if (fileSpot != nullptr) {
                 fileSpot->requestThumbnail(ev->modifiers(), ev->globalPos());
             }
         }
@@ -3707,7 +3707,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
         }
     }
 
-    if (_currentlyHoveredHotspot) {
+    if (_currentlyHoveredHotspot != nullptr) {
         auto fileHotspot = _currentlyHoveredHotspot.dynamicCast<FileFilter::HotSpot>();
         if (!fileHotspot) {
             return;

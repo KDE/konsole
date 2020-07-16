@@ -669,7 +669,7 @@ void FileFilter::HotSpot::requestThumbnail(Qt::KeyboardModifiers modifiers, cons
 void FileFilter::HotSpot::stopThumbnailGeneration()
 {
     _canGenerateThumbnail = false;
-    if (_previewJob) {
+    if (_previewJob != nullptr) {
         _previewJob->deleteLater();
         QToolTip::hideText();
     }
@@ -718,7 +718,7 @@ void FileFilter::HotSpot::thumbnailRequested() {
 
     // Show a "Loading" if Preview takes a long time.
     QTimer::singleShot(10, this, [this]{
-        if (!_previewJob) {
+        if (_previewJob == nullptr) {
             return;
         }
         if (!_thumbnailFinished) {
