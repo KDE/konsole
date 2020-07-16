@@ -640,7 +640,7 @@ private:
     // draw a thin highlight on the left of the screen for lines that have been scrolled into view
     void highlightScrolledLines(QPainter& painter);
     // compute which region need to be repainted for scrolled lines highlight
-    QRect highlightScrolledLinesRegion(void);
+    QRegion highlightScrolledLinesRegion(bool nothingChanged);
 
     // draws a section of text, all the text in this section
     // has a common color and style
@@ -904,6 +904,7 @@ private:
         QRect rect;
         int previousScrollCount = 0;
         QTimer *timer = nullptr;
+        bool needToClear = false;
     } _highlightScrolledLinesControl;
     static const int HIGHLIGHT_SCROLLED_LINES_WIDTH = 3;
 
