@@ -26,6 +26,7 @@
 #include "KonsoleSettings.h"
 
 // System
+#include <cerrno>
 #include <unistd.h>
 
 // Qt
