@@ -38,6 +38,7 @@
 #include "HistoryScrollNone.h"
 #include "CharacterFormat.h"
 #include "CompactHistoryBlock.h"
+#include "CompactHistoryBlockList.h"
 
 // Konsole
 #include "Character.h"
@@ -50,27 +51,6 @@ namespace Konsole {
 // where history lines are allocated in (avoids heap fragmentation)
 //////////////////////////////////////////////////////////////////////
 typedef QVector<Character> TextLine;
-
-class CompactHistoryBlockList
-{
-public:
-    CompactHistoryBlockList() :
-        list(QList<CompactHistoryBlock *>())
-    {
-    }
-
-    ~CompactHistoryBlockList();
-
-    void *allocate(size_t size);
-    void deallocate(void *);
-    int length()
-    {
-        return list.size();
-    }
-
-private:
-    QList<CompactHistoryBlock *> list;
-};
 
 class CompactHistoryLine
 {
