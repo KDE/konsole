@@ -68,6 +68,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         HistoryScroll.cpp
                         HistoryScrollFile.cpp
                         HistoryScrollNone.cpp
+                        CharacterFormat.cpp
                         HistorySizeDialog.cpp
                         widgets/HistorySizeWidget.cpp
                         widgets/IncrementalSearchBar.cpp

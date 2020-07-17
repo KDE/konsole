@@ -36,6 +36,7 @@
 #include "HistoryScroll.h"
 #include "HistoryScrollFile.h"
 #include "HistoryScrollNone.h"
+#include "CharacterFormat.h"
 
 // Konsole
 #include "Character.h"
@@ -48,35 +49,6 @@ namespace Konsole {
 // where history lines are allocated in (avoids heap fragmentation)
 //////////////////////////////////////////////////////////////////////
 typedef QVector<Character> TextLine;
-
-class CharacterFormat
-{
-public:
-    bool equalsFormat(const CharacterFormat &other) const
-    {
-        return (other.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR)
-               && other.fgColor == fgColor && other.bgColor == bgColor;
-    }
-
-    bool equalsFormat(const Character &c) const
-    {
-        return (c.rendition & ~RE_EXTENDED_CHAR) == (rendition & ~RE_EXTENDED_CHAR)
-               && c.foregroundColor == fgColor && c.backgroundColor == bgColor;
-    }
-
-    void setFormat(const Character &c)
-    {
-        rendition = c.rendition;
-        fgColor = c.foregroundColor;
-        bgColor = c.backgroundColor;
-        isRealCharacter = c.isRealCharacter;
-    }
-
-    CharacterColor fgColor, bgColor;
-    quint16 startPos;
-    RenditionFlags rendition;
-    bool isRealCharacter;
-};
 
 class CompactHistoryBlock
 {
