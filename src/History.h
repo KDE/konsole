@@ -37,6 +37,7 @@
 #include "HistoryScrollFile.h"
 #include "HistoryScrollNone.h"
 #include "CharacterFormat.h"
+#include "CompactHistoryBlock.h"
 
 // Konsole
 #include "Character.h"
@@ -49,56 +50,6 @@ namespace Konsole {
 // where history lines are allocated in (avoids heap fragmentation)
 //////////////////////////////////////////////////////////////////////
 typedef QVector<Character> TextLine;
-
-class CompactHistoryBlock
-{
-public:
-    CompactHistoryBlock() :
-        _blockLength(4096 * 64), // 256kb
-        _head(static_cast<quint8 *>(mmap(nullptr, _blockLength, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0))),
-        _tail(nullptr),
-        _blockStart(nullptr),
-        _allocCount(0)
-    {
-        Q_ASSERT(_head != MAP_FAILED);
-        _tail = _blockStart = _head;
-    }
-
-    virtual ~CompactHistoryBlock()
-    {
-        //free(_blockStart);
-        munmap(_blockStart, _blockLength);
-    }
-
-    virtual unsigned int remaining()
-    {
-        return _blockStart + _blockLength - _tail;
-    }
-
-    virtual unsigned  length()
-    {
-        return _blockLength;
-    }
-
-    virtual void *allocate(size_t size);
-    virtual bool contains(void *addr)
-    {
-        return addr >= _blockStart && addr < (_blockStart + _blockLength);
-    }
-
-    virtual void deallocate();
-    virtual bool isInUse()
-    {
-        return _allocCount != 0;
-    }
-
-private:
-    size_t _blockLength;
-    quint8 *_head;
-    quint8 *_tail;
-    quint8 *_blockStart;
-    int _allocCount;
-};
 
 class CompactHistoryBlockList
 {

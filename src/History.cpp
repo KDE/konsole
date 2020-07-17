@@ -60,29 +60,6 @@ using namespace Konsole;
    at constant costs.
 */
 
-////////////////////////////////////////////////////////////////
-// Compact History Scroll //////////////////////////////////////
-////////////////////////////////////////////////////////////////
-void *CompactHistoryBlock::allocate(size_t size)
-{
-    Q_ASSERT(size > 0);
-    if (_tail - _blockStart + size > _blockLength) {
-        return nullptr;
-    }
-
-    void *block = _tail;
-    _tail += size;
-    ////qDebug() << "allocated " << length << " bytes at address " << block;
-    _allocCount++;
-    return block;
-}
-
-void CompactHistoryBlock::deallocate()
-{
-    _allocCount--;
-    Q_ASSERT(_allocCount >= 0);
-}
-
 void *CompactHistoryBlockList::allocate(size_t size)
 {
     CompactHistoryBlock *block;
