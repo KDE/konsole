@@ -728,7 +728,11 @@ void FileFilter::HotSpot::thumbnailRequested() {
 
     _previewJob = new KIO::PreviewJob(KFileItemList({fileItem()}), QSize(size, size));
     connect(_previewJob, &KIO::PreviewJob::gotPreview, this, &FileFilter::HotSpot::showThumbnail);
-    connect(_previewJob, &KIO::PreviewJob::failed, this, []{ QToolTip::hideText(); });
+    connect(_previewJob, &KIO::PreviewJob::failed, this, []{
+        qCDebug(KonsoleDebug) << "Error generating the preview" << _previewJob->errorString();
+        QToolTip::hideText();
+    });
+
     _previewJob->setAutoDelete(true);
     _previewJob->start();
 }
