@@ -127,13 +127,24 @@ QRegion FilterChain::hotSpotRegion() const
     return region;
 }
 
-int FilterChain::count(HotSpot::Type type)
+int FilterChain::count(HotSpot::Type type) const
 {
     const auto hSpots = hotSpots();
     return std::count_if(std::begin(hSpots), std::end(hSpots),
             [type](const QSharedPointer<HotSpot> &s) {
                 return s->type() == type;
             });
+}
+
+QList<QSharedPointer<HotSpot>> FilterChain::filterBy(HotSpot::Type type) const
+{
+    QList<QSharedPointer<HotSpot>> hotspots;
+    for (const auto &spot : hotSpots()) {
+        if (spot->type() == type) {
+            hotspots.append(spot);
+        }
+    }
+    return hotspots;
 }
 
 void FilterChain::leaveEvent(TerminalDisplay *td, QEvent *ev)

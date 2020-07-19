@@ -85,7 +85,8 @@ public:
     QRegion hotSpotRegion() const;
 
     /* Returns the amount of hotspots of the given type */
-    int count(HotSpot::Type type);
+    int count(HotSpot::Type type) const;
+    QList<QSharedPointer<HotSpot>> filterBy(HotSpot::Type type) const;
 
     void leaveEvent(TerminalDisplay *td, QEvent *ev);
 protected:

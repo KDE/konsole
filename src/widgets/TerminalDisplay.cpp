@@ -3610,12 +3610,7 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
     if ((_urlHintsModifiers != 0u) && event->modifiers() == _urlHintsModifiers) {
-        QList<QSharedPointer<HotSpot>> hotspots;
-        for (const auto &spot : _filterChain->hotSpots()) {
-            if (spot->type() == HotSpot::Link) {
-                hotspots.append(spot);
-            }
-        }
+        QList<QSharedPointer<HotSpot>> hotspots = _filterChain->filterBy(HotSpot::Link);
         int nHotSpots = hotspots.count();
         int hintSelected = event->key() - 0x31;
         if (hintSelected >= 0 && hintSelected < 10 && hintSelected < nHotSpots) {
