@@ -322,6 +322,9 @@ public:
     /** Reset the font size */
     void resetFontSize();
 
+    QRect contentRect() const { return _contentRect; }
+    bool openLinksByDirectClick() const { return _openLinksByDirectClick; }
+
     /**
      * Sets the terminal screen section which is displayed in this widget.
      * When updateImage() is called, the display fetches the latest character image from the
@@ -844,7 +847,6 @@ private:
     // list of filters currently applied to the display.  used for links and
     // search highlight
     TerminalImageFilterChain *_filterChain;
-    QRegion _mouseOverHotspotArea;
     bool _filterUpdateRequired;
 
     Enum::CursorShapeEnum _cursorShape;
@@ -914,8 +916,6 @@ private:
     bool _hasCompositeFocus;
     bool _displayVerticalLine;
     int _displayVerticalLineAtChar;
-
-    QSharedPointer<HotSpot> _currentlyHoveredHotspot;
 };
 
 }

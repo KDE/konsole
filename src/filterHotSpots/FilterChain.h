@@ -28,6 +28,8 @@
 
 #include "HotSpot.h"
 
+class QLeaveEvent;
+
 namespace Konsole
 {
 class Filter;
@@ -84,6 +86,8 @@ public:
 
     /* Returns the amount of hotspots of the given type */
     int count(HotSpot::Type type);
+
+    void leaveEvent(TerminalDisplay *td, QEvent *ev);
 protected:
     QList<Filter *> _filters;
     TerminalDisplay *_terminalDisplay;

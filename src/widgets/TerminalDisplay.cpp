@@ -498,7 +498,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _blendColor(qRgba(0, 0, 0, 0xff))
     , _wallpaper(nullptr)
     , _filterChain(new TerminalImageFilterChain(this))
-    , _mouseOverHotspotArea(QRegion())
     , _filterUpdateRequired(true)
     , _cursorShape(Enum::BlockCursor)
     , _cursorColor(QColor())
@@ -2358,35 +2357,10 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     processFilters();
     // handle filters
     // change link hot-spot appearance on mouse-over
+    // TODO: Move this to filterChain::mouseMoveEvent
     auto spot = _filterChain->hotSpotAt(charLine, charColumn);
-    if ((spot != nullptr) && (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl)) {
-        QRegion previousHotspotArea = _mouseOverHotspotArea;
-        _mouseOverHotspotArea = spot->region(_fontWidth, _fontHeight, _columns, _contentRect).first;
-
-        if ((_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u)) && (cursor().shape() != Qt::PointingHandCursor)) {
-            setCursor(Qt::PointingHandCursor);
-        }
-
-        /* can't use qobject_cast because moc is broken for inner classes */
-        auto fileSpot = spot.dynamicCast<FileFilterHotSpot>();
-        if (fileSpot != _currentlyHoveredHotspot) {
-            _currentlyHoveredHotspot = fileSpot;
-            if (fileSpot != nullptr) {
-                fileSpot->requestThumbnail(ev->modifiers(), ev->globalPos());
-            }
-        }
-
-        update(_mouseOverHotspotArea | previousHotspotArea);
-    } else if (!_mouseOverHotspotArea.isEmpty()) {
-        if ((_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u)) || (cursor().shape() == Qt::PointingHandCursor)) {
-            setCursor(_usesMouseTracking ? Qt::ArrowCursor : Qt::IBeamCursor);
-        }
-
-        update(_mouseOverHotspotArea);
-        // set hotspot area to an invalid rectangle
-        _mouseOverHotspotArea = QRegion();
-        FileFilterHotSpot::stopThumbnailGeneration();
-        _currentlyHoveredHotspot.clear();
+    if (spot) {
+        spot->mouseMoveEvent(this, ev);
     }
 
     // for auto-hiding the cursor, we need mouseTracking
@@ -2448,15 +2422,11 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     extendSelection(ev->pos());
 }
 
-void TerminalDisplay::leaveEvent(QEvent *)
+void TerminalDisplay::leaveEvent(QEvent *ev)
 {
     // remove underline from an active link when cursor leaves the widget area,
     // also restore regular mouse cursor shape
-    if(!_mouseOverHotspotArea.isEmpty()) {
-        update(_mouseOverHotspotArea);
-        _mouseOverHotspotArea = QRegion();
-        setCursor(Qt::IBeamCursor);
-    }
+    _filterChain->leaveEvent(this, ev);
 }
 
 void TerminalDisplay::extendSelection(const QPoint& position)
@@ -3665,8 +3635,9 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
         }
     }
 
-    if (_currentlyHoveredHotspot != nullptr) {
-        auto fileHotspot = _currentlyHoveredHotspot.dynamicCast<FileFilterHotSpot>();
+    // TODO: Move this to hotSpot::keyPressEvent.
+    if (HotSpot::currentlyHoveredHotSpot != nullptr) {
+        auto fileHotspot = HotSpot::currentlyHoveredHotSpot.dynamicCast<FileFilterHotSpot>();
         if (!fileHotspot) {
             return;
         }

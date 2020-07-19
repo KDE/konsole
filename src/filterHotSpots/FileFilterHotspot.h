@@ -35,10 +35,11 @@ class QAction;
 class QPixmap;
 
 namespace Konsole {
+class TerminalDisplay;
+
 /**
 * Hotspot type created by FileFilter instances.
 */
-
 class FileFilterHotSpot : public RegExpFilterHotSpot
 {
 public:
@@ -59,6 +60,8 @@ public:
     void thumbnailRequested();
 
     static void stopThumbnailGeneration();
+
+    void mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev);
 private:
     void showThumbnail(const KFileItem& item, const QPixmap& preview);
     QString _filePath;

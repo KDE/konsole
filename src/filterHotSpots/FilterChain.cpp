@@ -25,7 +25,7 @@
 #include "widgets/TerminalDisplay.h"
 
 #include <QRect>
-
+#include <QEvent>
 #include <algorithm>
 
 using namespace Konsole;
@@ -134,4 +134,14 @@ int FilterChain::count(HotSpot::Type type)
             [type](const QSharedPointer<HotSpot> &s) {
                 return s->type() == type;
             });
+}
+
+void FilterChain::leaveEvent(TerminalDisplay *td, QEvent *ev)
+{
+    Q_UNUSED(ev);
+    if(!HotSpot::mouseOverHotSpotArea.isEmpty()) {
+        td->update(HotSpot::mouseOverHotSpotArea);
+        HotSpot::mouseOverHotSpotArea = QRegion();
+        td->setCursor(Qt::IBeamCursor);
+    }
 }

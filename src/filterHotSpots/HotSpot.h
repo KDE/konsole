@@ -26,11 +26,15 @@
 #include <QList>
 #include <QRegion>
 #include <QRect>
+#include <QSharedPointer>
 
 class QAction;
 class QMenu;
+class QMouseEvent;
 
 namespace Konsole {
+class TerminalDisplay;
+
 /**
 * Represents an area of text which matched the pattern a particular filter has been looking for.
 *
@@ -57,6 +61,8 @@ public:
     HotSpot(int startLine, int startColumn, int endLine, int endColumn);
     virtual ~HotSpot();
 
+    static QSharedPointer<HotSpot> currentlyHoveredHotSpot;
+    static QRegion mouseOverHotSpotArea;
     enum Type {
         // the type of the hotspot is not specified
         NotSpecified,
@@ -104,6 +110,9 @@ public:
     virtual void setupMenu(QMenu *menu);
 
     QPair<QRegion, QRect> region(int fontWidth, int fontHeight, int columns, QRect terminalDisplayRect) const;
+
+    void mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev);
+
 protected:
     /** Sets the type of a hotspot.  This should only be set once */
     void setType(Type type);
@@ -114,6 +123,7 @@ private:
     int _endLine;
     int _endColumn;
     Type _type;
+    QRegion _mouseOverHotspotArea;
 };
 
 }

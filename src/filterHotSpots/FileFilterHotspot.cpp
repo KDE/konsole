@@ -27,6 +27,7 @@
 #include <QMenu>
 #include <QTimer>
 #include <QToolTip>
+#include <QMouseEvent>
 
 #include <KRun>
 #include <KLocalizedString>
@@ -34,6 +35,7 @@
 
 #include "konsoledebug.h"
 #include "KonsoleSettings.h"
+#include "widgets/TerminalDisplay.h"
 
 using namespace Konsole;
 
@@ -193,4 +195,13 @@ void FileFilterHotSpot::thumbnailRequested() {
 KFileItem FileFilterHotSpot::fileItem() const
 {
     return KFileItem(QUrl::fromLocalFile(_filePath));
+}
+
+void FileFilterHotSpot::mouseMoveEvent(TerminalDisplay *td, QMouseEvent* ev)
+{
+    HotSpot::mouseMoveEvent(td, ev);
+    if (this != HotSpot::currentlyHoveredHotSpot) {
+        HotSpot::currentlyHoveredHotSpot.reset(this);
+        requestThumbnail(ev->modifiers(), ev->globalPos());
+    }
 }
