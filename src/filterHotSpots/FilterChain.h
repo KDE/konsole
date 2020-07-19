@@ -26,6 +26,8 @@
 #include <QSharedPointer>
 #include <QRegion>
 
+#include "HotSpot.h"
+
 namespace Konsole
 {
 class Filter;
@@ -80,6 +82,8 @@ public:
     /* Returns the region of the hotspot inside of the TerminalDisplay */
     QRegion hotSpotRegion() const;
 
+    /* Returns the amount of hotspots of the given type */
+    int count(HotSpot::Type type);
 protected:
     QList<Filter *> _filters;
     TerminalDisplay *_terminalDisplay;

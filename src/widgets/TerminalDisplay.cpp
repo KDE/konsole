@@ -1424,17 +1424,13 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     // and draw appropriate visuals to indicate the presence of the hotspot
 
     const auto spots = _filterChain->hotSpots();
-    int urlNumber = 0;
+    int urlNumber;
     int urlNumInc;
     if (_reverseUrlHints) {
-        for (const auto &spot : spots) {
-            if (spot->type() == HotSpot::Link) {
-                urlNumber++;
-            }
-        }
-
+        urlNumber = _filterChain->count(HotSpot::Link);
         urlNumInc = -1;
     } else {
+        urlNumber = 0;
         urlNumInc = 1;
     }
 

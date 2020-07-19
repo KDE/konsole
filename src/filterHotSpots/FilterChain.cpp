@@ -26,6 +26,8 @@
 
 #include <QRect>
 
+#include <algorithm>
+
 using namespace Konsole;
 FilterChain::FilterChain(TerminalDisplay *terminalDisplay)
 : _terminalDisplay(terminalDisplay)
@@ -123,4 +125,13 @@ QRegion FilterChain::hotSpotRegion() const
         }
     }
     return region;
+}
+
+int FilterChain::count(HotSpot::Type type)
+{
+    const auto hSpots = hotSpots();
+    return std::count_if(std::begin(hSpots), std::end(hSpots),
+            [type](const QSharedPointer<HotSpot> &s) {
+                return s->type() == type;
+            });
 }
