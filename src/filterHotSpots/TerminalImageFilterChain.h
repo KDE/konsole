@@ -28,12 +28,13 @@
 #include "Character.h"
 
 namespace Konsole {
+class TerminalDisplay;
 
 /** A filter chain which processes character images from terminal displays */
 class TerminalImageFilterChain : public FilterChain
 {
 public:
-    TerminalImageFilterChain();
+    TerminalImageFilterChain(TerminalDisplay *terminalDisplay);
     ~TerminalImageFilterChain() override;
 
     /**

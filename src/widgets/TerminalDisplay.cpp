@@ -497,7 +497,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _size(QSize())
     , _blendColor(qRgba(0, 0, 0, 0xff))
     , _wallpaper(nullptr)
-    , _filterChain(new TerminalImageFilterChain())
+    , _filterChain(new TerminalImageFilterChain(this))
     , _mouseOverHotspotArea(QRegion())
     , _filterUpdateRequired(true)
     , _cursorShape(Enum::BlockCursor)
@@ -1047,37 +1047,6 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     scroll(0 , _fontHeight * (-lines) , scrollRect);
 }
 
-QRegion TerminalDisplay::hotSpotRegion() const
-{
-    QRegion region;
-    for (const auto &hotSpot : _filterChain->hotSpots()) {
-        QRect r;
-        r.setLeft(hotSpot->startColumn());
-        r.setTop(hotSpot->startLine());
-        if (hotSpot->startLine() == hotSpot->endLine()) {
-            r.setRight(hotSpot->endColumn());
-            r.setBottom(hotSpot->endLine());
-            region |= imageToWidget(r);
-        } else {
-            r.setRight(_columns);
-            r.setBottom(hotSpot->startLine());
-            region |= imageToWidget(r);
-
-            r.setLeft(0);
-
-            for (int line = hotSpot->startLine() + 1 ; line < hotSpot->endLine(); line++) {
-                r.moveTop(line);
-                region |= imageToWidget(r);
-            }
-
-            r.moveTop(hotSpot->endLine());
-            r.setRight(hotSpot->endColumn());
-            region |= imageToWidget(r);
-        }
-    }
-    return region;
-}
-
 void TerminalDisplay::processFilters()
 {
 
@@ -1089,7 +1058,7 @@ void TerminalDisplay::processFilters()
         return;
     }
 
-    QRegion preUpdateHotSpots = hotSpotRegion();
+    const QRegion preUpdateHotSpots = _filterChain->hotSpotRegion();
 
     // use _screenWindow->getImage() here rather than _image because
     // other classes may call processFilters() when this display's
@@ -1102,7 +1071,7 @@ void TerminalDisplay::processFilters()
                            _screenWindow->getLineProperties());
     _filterChain->process();
 
-    QRegion postUpdateHotSpots = hotSpotRegion();
+    const QRegion postUpdateHotSpots = _filterChain->hotSpotRegion();
 
     update(preUpdateHotSpots | postUpdateHotSpots);
     _filterUpdateRequired = false;

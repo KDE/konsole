@@ -379,6 +379,10 @@ public:
         return _hasCompositeFocus;
     }
 
+    // maps an area in the character image to an area on the widget
+    QRect imageToWidget(const QRect &imageArea) const;
+    QRect widgetToImage(const QRect &widgetArea) const;
+
 public Q_SLOTS:
     /**
      * Scrolls current ScreenWindow
@@ -675,9 +679,6 @@ private:
 
     // --
 
-    // maps an area in the character image to an area on the widget
-    QRect imageToWidget(const QRect &imageArea) const;
-    QRect widgetToImage(const QRect &widgetArea) const;
 
     // maps a point on the widget to the position ( ie. line and column )
     // of the character at that point. When the edge is true, it maps to
@@ -711,10 +712,6 @@ private:
     void paintFilters(QPainter &painter);
 
     void setupHeaderVisibility();
-
-    // returns a region covering all of the areas of the widget which contain
-    // a hotspot
-    QRegion hotSpotRegion() const;
 
     // returns the position of the cursor in columns and lines
     QPoint cursorPosition() const;

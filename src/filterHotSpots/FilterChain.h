@@ -24,11 +24,13 @@
 #include <QString>
 #include <QList>
 #include <QSharedPointer>
+#include <QRegion>
 
 namespace Konsole
 {
 class Filter;
 class HotSpot;
+class TerminalDisplay;
 
 /**
  * A chain which allows a group of filters to be processed as one.
@@ -50,6 +52,7 @@ class HotSpot;
 class FilterChain
 {
 public:
+    explicit FilterChain(TerminalDisplay *terminalDisplay);
     virtual ~FilterChain();
 
     /** Adds a new filter to the chain.  The chain will delete this filter when it is destroyed */
@@ -73,8 +76,13 @@ public:
     QSharedPointer<HotSpot> hotSpotAt(int line, int column) const;
     /** Returns a list of all the hotspots in all the chain's filters */
     QList<QSharedPointer<HotSpot>> hotSpots() const;
+
+    /* Returns the region of the hotspot inside of the TerminalDisplay */
+    QRegion hotSpotRegion() const;
+
 protected:
     QList<Filter *> _filters;
+    TerminalDisplay *_terminalDisplay;
 };
 
 }

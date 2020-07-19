@@ -20,8 +20,18 @@
 
 #include "FilterChain.h"
 #include "Filter.h"
+#include "HotSpot.h"
+
+#include "widgets/TerminalDisplay.h"
+
+#include <QRect>
 
 using namespace Konsole;
+FilterChain::FilterChain(TerminalDisplay *terminalDisplay)
+: _terminalDisplay(terminalDisplay)
+{
+
+}
 FilterChain::~FilterChain()
 {
     qDeleteAll(_filters);
@@ -81,4 +91,36 @@ QList<QSharedPointer<HotSpot>> FilterChain::hotSpots() const
         list.append(filter->hotSpots());
    }
     return list;
+}
+
+
+QRegion FilterChain::hotSpotRegion() const
+{
+    QRegion region;
+    for (const auto &hotSpot : hotSpots()) {
+        QRect r;
+        r.setLeft(hotSpot->startColumn());
+        r.setTop(hotSpot->startLine());
+        if (hotSpot->startLine() == hotSpot->endLine()) {
+            r.setRight(hotSpot->endColumn());
+            r.setBottom(hotSpot->endLine());
+            region |= _terminalDisplay->imageToWidget(r);
+        } else {
+            r.setRight(_terminalDisplay->columns());
+            r.setBottom(hotSpot->startLine());
+            region |= _terminalDisplay->imageToWidget(r);
+
+            r.setLeft(0);
+
+            for (int line = hotSpot->startLine() + 1 ; line < hotSpot->endLine(); line++) {
+                r.moveTop(line);
+                region |= _terminalDisplay->imageToWidget(r);
+            }
+
+            r.moveTop(hotSpot->endLine());
+            r.setRight(hotSpot->endColumn());
+            region |= _terminalDisplay->imageToWidget(r);
+        }
+    }
+    return region;
 }
