@@ -35,7 +35,6 @@
 #include "ScrollState.h"
 #include "Profile.h"
 #include "TerminalHeaderBar.h"
-#include "Filter.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -56,6 +55,7 @@ class FilterChain;
 class TerminalImageFilterChain;
 class SessionController;
 class IncrementalSearchBar;
+class HotSpot;
 
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
@@ -152,7 +152,7 @@ public:
      * Returns a list of menu actions created by the filters for the content
      * at the given @p position.
      */
-    QSharedPointer<Filter::HotSpot> filterActions(const QPoint &position);
+    QSharedPointer<HotSpot> filterActions(const QPoint &position);
 
     /** Specifies whether or not the cursor can blink. */
     void setBlinkingCursorEnabled(bool blink);
@@ -910,7 +910,7 @@ private:
 
     bool _hasCompositeFocus;
 
-    QSharedPointer<Filter::HotSpot> _currentlyHoveredHotspot;
+    QSharedPointer<HotSpot> _currentlyHoveredHotspot;
 };
 
 }

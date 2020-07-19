@@ -62,7 +62,16 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         FontDialog.cpp
                         Emulation.cpp
                         widgets/DetachableTabBar.cpp
-                        Filter.cpp
+                        filterHotSpots/FileFilter.cpp
+                        filterHotSpots/FileFilterHotspot.cpp
+                        filterHotSpots/FilterChain.cpp
+                        filterHotSpots/Filter.cpp
+                        filterHotSpots/HotSpot.cpp
+                        filterHotSpots/RegExpFilter.cpp
+                        filterHotSpots/RegExpFilterHotspot.cpp
+                        filterHotSpots/TerminalImageFilterChain.cpp
+                        filterHotSpots/UrlFilter.cpp
+                        filterHotSpots/UrlFilterHotspot.cpp
                         History.cpp
                         HistoryFile.cpp
                         HistoryScroll.cpp

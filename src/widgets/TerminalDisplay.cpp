@@ -61,7 +61,12 @@
 // Konsole
 #include "CompositeWidgetFocusWatcher.h"
 #include "AutoScrollHandler.h"
-#include "Filter.h"
+
+#include "filterHotSpots/Filter.h"
+#include "filterHotSpots/TerminalImageFilterChain.h"
+#include "filterHotSpots/HotSpot.h"
+#include "filterHotSpots/FileFilterHotspot.h"
+
 #include "konsoledebug.h"
 #include "TerminalCharacterDecoder.h"
 #include "Screen.h"
@@ -1432,7 +1437,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     int urlNumInc;
     if (_reverseUrlHints) {
         for (const auto &spot : spots) {
-            if (spot->type() == Filter::HotSpot::Link) {
+            if (spot->type() == HotSpot::Link) {
                 urlNumber++;
             }
         }
@@ -1444,7 +1449,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 
     for (const auto &spot : spots) {
         QRegion region;
-        if (spot->type() == Filter::HotSpot::Link || spot->type() == Filter::HotSpot::EMailAddress) {
+        if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress) {
             QRect r;
             if (spot->startLine() == spot->endLine()) {
                 r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
@@ -1472,7 +1477,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 region |= r;
             }
 
-            if (_showUrlHint && urlNumber >= 0 && urlNumber < 10 && spot->type() == Filter::HotSpot::Link) {
+            if (_showUrlHint && urlNumber >= 0 && urlNumber < 10 && spot->type() == HotSpot::Link) {
                 // Position at the beginning of the URL
                 QRect hintRect(*region.begin());
                 hintRect.setWidth(r.height());
@@ -1529,7 +1534,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                         (line + 1)*_fontHeight + _contentRect.top() - 1);
             // Underline link hotspots
             const bool hasMouse = region.contains(mapFromGlobal(QCursor::pos()));
-            if ((spot->type() == Filter::HotSpot::Link && _showUrlHint) || hasMouse) {
+            if ((spot->type() == HotSpot::Link && _showUrlHint) || hasMouse) {
                 QFontMetrics metrics(font());
 
                 // find the baseline (which is the invisible line that the characters in the font sit on,
@@ -1541,7 +1546,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 
                 // Marker hotspots simply have a transparent rectangular shape
                 // drawn on top of them
-            } else if (spot->type() == Filter::HotSpot::Marker) {
+            } else if (spot->type() == HotSpot::Marker) {
                 //TODO - Do not use a hardcoded color for this
                 const bool isCurrentResultLine = (_screenWindow->currentResultLine() == (spot->startLine() + _screenWindow->currentLine()));
                 QColor color = isCurrentResultLine ? QColor(255, 255, 0, 120) : QColor(255, 0, 0, 120);
@@ -1924,7 +1929,7 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     Q_ASSERT(!_textBlinking);
 
     _showUrlHint = false;
-    FileFilter::HotSpot::stopThumbnailGeneration();
+    FileFilterHotSpot::stopThumbnailGeneration();
 }
 
 void TerminalDisplay::focusInEvent(QFocusEvent*)
@@ -2351,7 +2356,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
     }
 }
 
-QSharedPointer<Filter::HotSpot> TerminalDisplay::filterActions(const QPoint& position)
+QSharedPointer<HotSpot> TerminalDisplay::filterActions(const QPoint& position)
 {
     int charLine;
     int charColumn;
@@ -2371,7 +2376,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     // handle filters
     // change link hot-spot appearance on mouse-over
     auto spot = _filterChain->hotSpotAt(charLine, charColumn);
-    if ((spot != nullptr) && (spot->type() == Filter::HotSpot::Link || spot->type() == Filter::HotSpot::EMailAddress)) {
+    if ((spot != nullptr) && (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress)) {
         QRegion previousHotspotArea = _mouseOverHotspotArea;
         _mouseOverHotspotArea = QRegion();
         QRect r;
@@ -2406,7 +2411,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         }
 
         /* can't use qobject_cast because moc is broken for inner classes */
-        auto fileSpot = spot.dynamicCast<FileFilter::HotSpot>();
+        auto fileSpot = spot.dynamicCast<FileFilterHotSpot>();
         if (fileSpot != _currentlyHoveredHotspot) {
             _currentlyHoveredHotspot = fileSpot;
             if (fileSpot != nullptr) {
@@ -2423,7 +2428,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         update(_mouseOverHotspotArea);
         // set hotspot area to an invalid rectangle
         _mouseOverHotspotArea = QRegion();
-        FileFilter::HotSpot::stopThumbnailGeneration();
+        FileFilterHotSpot::stopThumbnailGeneration();
         _currentlyHoveredHotspot.clear();
     }
 
@@ -2699,7 +2704,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
     if (!_screenWindow->screen()->hasSelection() && (_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
         auto spot = _filterChain->hotSpotAt(charLine, charColumn);
-        if ((spot != nullptr) && (spot->type() == Filter::HotSpot::Link || spot->type() == Filter::HotSpot::EMailAddress)) {
+        if ((spot != nullptr) && (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress)) {
             spot->activate();
         }
     }
@@ -3678,9 +3683,9 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
     if ((_urlHintsModifiers != 0u) && event->modifiers() == _urlHintsModifiers) {
-        QList<QSharedPointer<Filter::HotSpot>> hotspots;
+        QList<QSharedPointer<HotSpot>> hotspots;
         for (const auto &spot : _filterChain->hotSpots()) {
-            if (spot->type() == Filter::HotSpot::Link) {
+            if (spot->type() == HotSpot::Link) {
                 hotspots.append(spot);
             }
         }
@@ -3704,7 +3709,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     }
 
     if (_currentlyHoveredHotspot != nullptr) {
-        auto fileHotspot = _currentlyHoveredHotspot.dynamicCast<FileFilter::HotSpot>();
+        auto fileHotspot = _currentlyHoveredHotspot.dynamicCast<FileFilterHotSpot>();
         if (!fileHotspot) {
             return;
         }

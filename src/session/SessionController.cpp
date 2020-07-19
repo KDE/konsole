@@ -62,7 +62,12 @@
 #include "EditProfileDialog.h"
 #include "CopyInputDialog.h"
 #include "Emulation.h"
-#include "Filter.h"
+#include "filterHotSpots/FileFilter.h"
+#include "filterHotSpots/Filter.h"
+#include "filterHotSpots/FilterChain.h"
+#include "filterHotSpots/HotSpot.h"
+#include "filterHotSpots/RegExpFilter.h"
+#include "filterHotSpots/UrlFilter.h"
 #include "History.h"
 #include "HistorySizeDialog.h"
 #include "widgets/IncrementalSearchBar.h"
@@ -1774,7 +1779,7 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         copy->setShortcut(Konsole::ACCEL + Qt::SHIFT + Qt::Key_C);
 #endif
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
-        QSharedPointer<Filter::HotSpot> hotSpot = _sessionDisplayConnection->view()->filterActions(position);
+        QSharedPointer<HotSpot> hotSpot = _sessionDisplayConnection->view()->filterActions(position);
         if (hotSpot != nullptr) {
             popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions() << contentSeparator );
             popup->addAction(contentSeparator);
