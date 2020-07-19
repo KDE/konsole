@@ -24,6 +24,8 @@
 #include <QObject>
 
 #include <QList>
+#include <QRegion>
+#include <QRect>
 
 class QAction;
 class QMenu;
@@ -100,6 +102,8 @@ public:
         * Setups a menu with actions for the hotspot.
         */
     virtual void setupMenu(QMenu *menu);
+
+    QPair<QRegion, QRect> region(int fontWidth, int fontHeight, int columns, QRect terminalDisplayRect) const;
 protected:
     /** Sets the type of a hotspot.  This should only be set once */
     void setType(Type type);

@@ -72,3 +72,38 @@ void HotSpot::setType(Type type)
 {
     _type = type;
 }
+
+QPair<QRegion, QRect> HotSpot::region(int fontWidth, int fontHeight, int columns, QRect terminalDisplayRect) const
+{
+    QRegion region;
+    QRect r;
+    const int top = terminalDisplayRect.top();
+    const int left = terminalDisplayRect.left();
+
+    if (startLine() == endLine()) {
+        r.setCoords(startColumn() * fontWidth + left,
+                    startLine() * fontHeight + top,
+                    (endColumn()) * fontWidth + left - 1,
+                    (endLine() + 1) * fontHeight + top - 1);
+        region |= r;
+    } else {
+        r.setCoords(startColumn() * fontWidth + left,
+                    startLine() * fontHeight + top,
+                    (columns) * fontWidth + left - 1,
+                    (startLine() + 1) *fontHeight + top - 1);
+        region |= r;
+        for (int line = startLine() + 1 ; line < endLine() ; line++) {
+            r.setCoords(0 *  fontWidth + left,
+                        line *  fontHeight + top,
+                        (columns)* fontWidth + left - 1,
+                        (line + 1)* fontHeight + top - 1);
+            region |= r;
+        }
+        r.setCoords(0 *  fontWidth + left,
+                    endLine()* fontHeight + top,
+                    (endColumn()) * fontWidth + left - 1,
+                    (endLine() + 1) * fontHeight + top - 1);
+        region |= r;
+    }
+    return {region, r};
+}

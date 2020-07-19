@@ -1437,32 +1437,9 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     for (const auto &spot : spots) {
         QRegion region;
         if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl) {
-            QRect r;
-            if (spot->startLine() == spot->endLine()) {
-                r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
-                            spot->startLine()*_fontHeight + _contentRect.top(),
-                            (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
-                            (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
-                region |= r;
-            } else {
-                r.setCoords(spot->startColumn()*_fontWidth + _contentRect.left(),
-                            spot->startLine()*_fontHeight + _contentRect.top(),
-                            (_columns)*_fontWidth + _contentRect.left() - 1,
-                            (spot->startLine() + 1)*_fontHeight + _contentRect.top() - 1);
-                region |= r;
-                for (int line = spot->startLine() + 1 ; line < spot->endLine() ; line++) {
-                    r.setCoords(0 * _fontWidth + _contentRect.left(),
-                                line * _fontHeight + _contentRect.top(),
-                                (_columns)*_fontWidth + _contentRect.left() - 1,
-                                (line + 1)*_fontHeight + _contentRect.top() - 1);
-                    region |= r;
-                }
-                r.setCoords(0 * _fontWidth + _contentRect.left(),
-                            spot->endLine()*_fontHeight + _contentRect.top(),
-                            (spot->endColumn())*_fontWidth + _contentRect.left() - 1,
-                            (spot->endLine() + 1)*_fontHeight + _contentRect.top() - 1);
-                region |= r;
-            }
+            QPair<QRegion, QRect> spotRegion = spot->region(_fontWidth, _fontHeight, _columns, _contentRect);
+            region = spotRegion.first;
+            QRect r = spotRegion.second;
 
             if (_showUrlHint && spot->type() == HotSpot::Link) {
                 if (urlNumber >= 0 && urlNumber < 10) {
