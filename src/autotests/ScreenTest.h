@@ -18,8 +18,8 @@
 */
 
 
-#ifndef SHELLCOMMANDTEST_H
-#define SHELLCOMMANDTEST_H
+#ifndef SCREENTEST_H
+#define SCREENTEST_H
 
 #include <QObject>
 
@@ -46,5 +46,5 @@ private:
 
 }
 
-#endif // SHELLCOMMANDTEST_H
+#endif // SCREENTEST_H
 
