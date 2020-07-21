@@ -18,8 +18,8 @@
     02110-1301  USA.
 */
 
-#include "History.h"
 #include "HistoryScrollFile.h"
+#include "History.h"
 
 /*
    The history scroll makes a Row(Row(Cell)) from
