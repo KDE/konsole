@@ -152,7 +152,7 @@ public:
          * height or half height.
              */
         ScrollFullPage,
-        /** (bool) Specifies whether the the lines that are scrolled into view
+        /** (bool) Specifies whether the lines that are scrolled into view
          * should be highlighted.
              */
         HighlightScrolledLines,
