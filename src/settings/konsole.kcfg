@@ -46,17 +46,17 @@
         <tooltip>Sets the width of the thumbnail</tooltip>
         <default>250</default>
       </entry>
-     <entry name="ThumbnailShift" type="bool">
+     <entry name="ThumbnailShift" type="Bool">
         <label>Use Shift to display a thumbnail</label>
         <tooltip>Use Shift to display a thumbnail</tooltip>
         <default>false</default>
       </entry>
-     <entry name="ThumbnailAlt" type="bool">
+     <entry name="ThumbnailAlt" type="Bool">
         <label>Use Alt to display a thumbnail</label>
         <tooltip>Use Alt to display a thumbnail</tooltip>
         <default>false</default>
       </entry>
-     <entry name="ThumbnailCtrl" type="bool">
+     <entry name="ThumbnailCtrl" type="Bool">
         <label>Use Ctrl to display a thumbnail</label>
         <tooltip>Use Ctrl to display a thumbnail</tooltip>
         <default>false</default>
