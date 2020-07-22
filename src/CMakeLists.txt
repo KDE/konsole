@@ -59,6 +59,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ColorSchemeManager.cpp
                         ColorSchemeEditor.cpp
                         CopyInputDialog.cpp
+                        CheckableSessionModel.cpp
                         EditProfileDialog.cpp
                         FontDialog.cpp
                         Emulation.cpp
