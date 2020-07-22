@@ -387,7 +387,7 @@
        <item row="0" column="1">
         <widget class="QRadioButton" name="ShowSplitHeaderWhenNeeded">
          <property name="text">
-          <string>When needed</string>
+          <string comment="@option:radio When needed show the splitter header">When needed</string>
          </property>
          <attribute name="buttonGroup">
           <string notr="true">kcfg_SplitViewVisibility</string>
@@ -397,7 +397,7 @@
        <item row="2" column="1">
         <widget class="QRadioButton" name="AlwaysHideSplitHeader">
          <property name="text">
-          <string>Never</string>
+          <string comment="@option:radio Never show the splitter header">Never</string>
          </property>
          <attribute name="buttonGroup">
           <string notr="true">kcfg_SplitViewVisibility</string>
@@ -433,7 +433,7 @@
        <item row="4" column="1">
         <widget class="QRadioButton" name="SplitDragHandleSmall">
          <property name="text">
-          <string>Small</string>
+          <string comment="@option:radio Small height/width of splitter widget">Small</string>
          </property>
          <attribute name="buttonGroup">
           <string notr="true">kcfg_SplitDragHandleSize</string>
@@ -443,7 +443,7 @@
        <item row="5" column="1">
         <widget class="QRadioButton" name="SplitDragHandleMedium">
          <property name="text">
-          <string>Medium</string>
+          <string comment="@option:radio Medium height/width of splitter widget">Medium</string>
          </property>
          <attribute name="buttonGroup">
           <string notr="true">kcfg_SplitDragHandleSize</string>
@@ -453,7 +453,7 @@
        <item row="6" column="1">
         <widget class="QRadioButton" name="SplitDragHandleLarge">
          <property name="text">
-          <string>Large</string>
+          <string comment="@option:radio Large height/width of splitter widget">Large</string>
          </property>
          <attribute name="buttonGroup">
           <string notr="true">kcfg_SplitDragHandleSize</string>
@@ -476,7 +476,7 @@
        <item row="1" column="1">
         <widget class="QRadioButton" name="AlwaysShowSplitHeader">
          <property name="text">
-          <string>Always</string>
+          <string comment="@option:radio Always show the splitter header">Always</string>
          </property>
          <attribute name="buttonGroup">
           <string notr="true">kcfg_SplitViewVisibility</string>
