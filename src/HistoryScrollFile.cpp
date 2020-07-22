@@ -19,7 +19,8 @@
 */
 
 #include "HistoryScrollFile.h"
-#include "History.h"
+
+#include "HistoryTypeFile.h"
 
 /*
    The history scroll makes a Row(Row(Cell)) from

@@ -72,7 +72,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         filterHotSpots/TerminalImageFilterChain.cpp
                         filterHotSpots/UrlFilter.cpp
                         filterHotSpots/UrlFilterHotspot.cpp
-                        History.cpp
                         HistoryFile.cpp
                         HistoryScroll.cpp
                         HistoryScrollFile.cpp

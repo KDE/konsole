@@ -21,7 +21,7 @@
 // Own
 #include "HistoryScroll.h"
 
-#include "History.h"
+#include "HistoryType.h"
 
 using namespace Konsole;
 

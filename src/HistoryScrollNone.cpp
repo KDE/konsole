@@ -21,7 +21,7 @@
 // Own
 #include "HistoryScrollNone.h"
 
-#include "History.h"
+#include "HistoryTypeNone.h"
 
 using namespace Konsole;
 

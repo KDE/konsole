@@ -25,8 +25,12 @@
 // Konsole
 #include "../session/Session.h"
 #include "../Emulation.h"
-#include "../History.h"
+#include "../HistoryTypeNone.h"
+#include "../HistoryTypeFile.h"
+#include "../CompactHistoryType.h"
+#include "../HistoryScrollNone.h"
 #include "../HistoryScrollFile.h"
+#include "../CompactHistoryScroll.h"
 
 using namespace Konsole;
 
