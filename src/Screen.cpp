@@ -28,8 +28,8 @@
 
 // Konsole
 #include "TerminalCharacterDecoder.h"
-#include "HistoryType.h"
-#include "HistoryScrollNone.h"
+#include "history/HistoryType.h"
+#include "history/HistoryScrollNone.h"
 #include "ExtendedCharTable.h"
 
 using namespace Konsole;

@@ -72,19 +72,19 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         filterHotSpots/TerminalImageFilterChain.cpp
                         filterHotSpots/UrlFilter.cpp
                         filterHotSpots/UrlFilterHotspot.cpp
-                        HistoryFile.cpp
-                        HistoryScroll.cpp
-                        HistoryScrollFile.cpp
-                        HistoryScrollNone.cpp
+                        history/HistoryFile.cpp
+                        history/HistoryScroll.cpp
+                        history/HistoryScrollFile.cpp
+                        history/HistoryScrollNone.cpp
                         CharacterFormat.cpp
-                        CompactHistoryBlock.cpp
-                        CompactHistoryBlockList.cpp
-                        CompactHistoryLine.cpp
-                        CompactHistoryScroll.cpp
-                        HistoryType.cpp
-                        HistoryTypeNone.cpp
-                        HistoryTypeFile.cpp
-                        CompactHistoryType.cpp
+                        history/compact/CompactHistoryBlock.cpp
+                        history/compact/CompactHistoryBlockList.cpp
+                        history/compact/CompactHistoryLine.cpp
+                        history/compact/CompactHistoryScroll.cpp
+                        history/HistoryType.cpp
+                        history/HistoryTypeNone.cpp
+                        history/HistoryTypeFile.cpp
+                        history/compact/CompactHistoryType.cpp
                         HistorySizeDialog.cpp
                         widgets/HistorySizeWidget.cpp
                         widgets/IncrementalSearchBar.cpp

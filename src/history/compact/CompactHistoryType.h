@@ -21,7 +21,7 @@
 #ifndef COMPACTHISTORYTYPE_H
 #define COMPACTHISTORYTYPE_H
 
-#include "HistoryType.h"
+#include "history/HistoryType.h"
 #include "konsoleprivate_export.h"
 
 namespace Konsole
