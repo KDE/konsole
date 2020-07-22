@@ -55,6 +55,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         BookmarkHandler.cpp
                         BookmarkMenu.cpp
                         ColorScheme.cpp
+                        ColorSchemeWallpaper.cpp
                         ColorSchemeManager.cpp
                         ColorSchemeEditor.cpp
                         CopyInputDialog.cpp
