@@ -3,8 +3,6 @@
 # Prints tables with all characters supported by LineBlockCharactersDrawer,
 # one for normal weight and one for bold.
 
-#// krazy:excludeall=copyright,license
-
 first = 0x2500
 last = 0x259F
 

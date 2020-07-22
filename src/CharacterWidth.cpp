@@ -19,9 +19,6 @@
     02110-1301  USA.
 */
 
-
-//krazy:excludeall=typedefs
-
 //
 // THIS IS A GENERATED FILE. DO NOT EDIT.
 //
