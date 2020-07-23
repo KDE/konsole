@@ -43,14 +43,10 @@ UrlFilterHotSpot::UrlFilterHotSpot(int startLine, int startColumn, int endLine, 
                             const QStringList &capturedTexts) :
     RegExpFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts)
 {
-    switch(urlType()) {
-    case Email:
+    const UrlType kind = urlType();
+    if (kind == Email) {
         setType(EMailAddress);
-        break;
-
-    case StandardUrl:
-    case Unknown:
-    default:
+    } else {
         setType(Link);
     }
 }
