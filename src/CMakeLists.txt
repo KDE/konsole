@@ -62,6 +62,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         CheckableSessionModel.cpp
                         EditProfileDialog.cpp
                         ColorSchemeViewDelegate.cpp
+                        LabelsAligner.cpp
                         FontDialog.cpp
                         Emulation.cpp
                         widgets/DetachableTabBar.cpp

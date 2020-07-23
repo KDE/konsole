@@ -21,13 +21,6 @@
 #ifndef EDITPROFILEDIALOG_H
 #define EDITPROFILEDIALOG_H
 
-// Qt
-#include <QAbstractItemDelegate>
-#include <QHash>
-#include <QButtonGroup>
-#include <QWidget>
-#include <QGridLayout>
-
 // KDE
 #include <KPageDialog>
 #include <KNS3/Entry>
@@ -40,6 +33,7 @@
 #include "KeyboardTranslatorManager.h"
 #include "FontDialog.h"
 #include "ColorSchemeViewDelegate.h"
+#include "LabelsAligner.h"
 
 class KPluralHandlingSpinBox;
 class KLocalizedString;
@@ -338,108 +332,6 @@ private:
     ColorSchemeEditor *_colorDialog;
     QDialogButtonBox *_buttonBox;
     FontDialog *_fontDialog;
-};
-
-/**
- * An utility class for aligning 0th column in multiple QGridLayouts.
- *
- * Limitations:
- * - a layout can't be nested in another layout
- * - reference widget must be an ancestor of all added layouts
- * - only 0th column is processed (widgets spanning multiple columns
- *   are ignored)
- */
-class LabelsAligner: public QObject {
-    Q_OBJECT
-
-public:
-    explicit LabelsAligner(QWidget *refWidget): _refWidget(refWidget) {}
-
-    void addLayout(QGridLayout *layout) { _layouts.append(layout); }
-    void addLayouts(const QVector<QGridLayout *> &layouts) { _layouts.append(layouts); }
-    void setReferenceWidget(QWidget *refWidget) { _refWidget = refWidget; }
-
-public Q_SLOTS:
-    void updateLayouts() {
-        for (const auto *layout: qAsConst(_layouts)) {
-            QWidget *widget = layout->parentWidget();
-            Q_ASSERT(widget);
-            do {
-                QLayout *widgetLayout = widget->layout();
-                if (widgetLayout != nullptr) {
-                    widgetLayout->update();
-                    widgetLayout->activate();
-                }
-                widget = widget->parentWidget();
-            } while (widget != _refWidget && widget != nullptr);
-        }
-    }
-
-    void align() {
-        Q_ASSERT(_refWidget);
-
-        if (_layouts.count() <= 1) {
-            return;
-        }
-
-        int maxRight = 0;
-        for (const auto *layout: qAsConst(_layouts)) {
-            int left = getLeftMargin(layout);
-            for (int row = 0; row < layout->rowCount(); ++row) {
-                QLayoutItem *layoutItem = layout->itemAtPosition(row, LABELS_COLUMN);
-                if (layoutItem == nullptr) {
-                    continue;
-                }
-                QWidget *widget = layoutItem->widget();
-                if (widget == nullptr) {
-                    continue;
-                }
-                const int idx = layout->indexOf(widget);
-                int rows, cols, rowSpan, colSpan;
-                layout->getItemPosition(idx, &rows, &cols, &rowSpan, &colSpan);
-                if (colSpan > 1) {
-                    continue;
-                }
-
-                const int right = left + widget->sizeHint().width();
-                if (maxRight < right) {
-                    maxRight = right;
-                }
-            }
-        }
-
-        for (auto *l: qAsConst(_layouts)) {
-            int left = getLeftMargin(l);
-            l->setColumnMinimumWidth(LABELS_COLUMN, maxRight - left);
-        }
-    }
-
-private:
-    int getLeftMargin(const QGridLayout *layout) {
-        int left = layout->contentsMargins().left();
-
-        if (layout->parent()->isWidgetType()) {
-            auto *parentWidget = layout->parentWidget();
-            Q_ASSERT(parentWidget);
-            left += parentWidget->contentsMargins().left();
-        } else {
-            auto *parentLayout = qobject_cast<QLayout *>(layout->parent());
-            Q_ASSERT(parentLayout);
-            left += parentLayout->contentsMargins().left();
-        }
-
-        QWidget *parent = layout->parentWidget();
-        while (parent != _refWidget && parent != nullptr) {
-            left = parent->mapToParent(QPoint(left, 0)).x();
-            parent = parent->parentWidget();
-        }
-        return left;
-    }
-
-    static constexpr int LABELS_COLUMN = 0;
-
-    QWidget *_refWidget;
-    QVector<QGridLayout *> _layouts;
 };
 
 }
