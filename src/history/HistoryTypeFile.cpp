@@ -18,8 +18,8 @@
     02110-1301  USA.
 */
 
-#include "HistoryFile.h"
 #include "HistoryTypeFile.h"
+#include "HistoryFile.h"
 #include "HistoryScrollFile.h"
 
 using namespace Konsole;
