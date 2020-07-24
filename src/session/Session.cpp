@@ -49,7 +49,7 @@
 // Konsole
 #include <sessionadaptor.h>
 
-#include "ProcessInfo.h"
+#include "SSHProcessInfo.h"
 #include "Pty.h"
 #include "widgets/TerminalDisplay.h"
 #include "ShellCommand.h"

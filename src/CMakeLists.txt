@@ -99,6 +99,9 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         KeyboardTranslatorWriter.cpp
                         KeyboardTranslatorManager.cpp
                         ProcessInfo.cpp
+                        NullProcessInfo.cpp
+                        UnixProcessInfo.cpp
+                        SSHProcessInfo.cpp
                         Profile.cpp
                         ProfileList.cpp
                         ProfileReader.cpp
