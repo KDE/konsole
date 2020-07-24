@@ -81,6 +81,8 @@ add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
 
 target_link_libraries(konsoleprivate_core ${konsole_LIBS})
 
+add_subdirectory(profile)
+
 set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ${windowadaptors_SRCS}
                         hsluv.c
@@ -92,12 +94,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ColorSchemeEditor.cpp
                         CopyInputDialog.cpp
                         CheckableSessionModel.cpp
-                        profile/EditProfileDialog.cpp
-                        profile/Profile.cpp
-                        profile/ProfileList.cpp
-                        profile/ProfileReader.cpp
-                        profile/ProfileWriter.cpp
-                        profile/ProfileManager.cpp
                         ColorSchemeViewDelegate.cpp
                         LabelsAligner.cpp
                         FontDialog.cpp
@@ -183,13 +179,6 @@ kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
 ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 CopyInputDialog.ui
-                                profile/EditProfileGeneralPage.ui
-                                profile/EditProfileTabsPage.ui
-                                profile/EditProfileAppearancePage.ui
-                                profile/EditProfileScrollingPage.ui
-                                profile/EditProfileKeyboardPage.ui
-                                profile/EditProfileMousePage.ui
-                                profile/EditProfileAdvancedPage.ui
                                 KeyBindingEditor.ui
                                 RenameTabDialog.ui
                                 widgets/RenameTabWidget.ui
@@ -212,6 +201,7 @@ generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
 target_link_libraries(konsoleprivate
     PUBLIC
     konsoleprivate_core
+    konsoleprofile
     ${konsole_LIBS}
 )
 
