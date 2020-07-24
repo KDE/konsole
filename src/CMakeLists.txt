@@ -94,6 +94,9 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         widgets/IncrementalSearchBar.cpp
                         KeyBindingEditor.cpp
                         KeyboardTranslator.cpp
+                        FallbackKeyboardTranslator.cpp
+                        KeyboardTranslatorReader.cpp
+                        KeyboardTranslatorWriter.cpp
                         KeyboardTranslatorManager.cpp
                         ProcessInfo.cpp
                         Profile.cpp

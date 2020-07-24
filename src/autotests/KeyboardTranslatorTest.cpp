@@ -20,6 +20,9 @@
 // Own
 #include "KeyboardTranslatorTest.h"
 
+#include "FallbackKeyboardTranslator.h"
+#include "KeyboardTranslatorReader.h"
+
 // KDE
 #include <qtest.h>
 

@@ -22,6 +22,10 @@
 // Own
 #include "KeyboardTranslatorManager.h"
 
+#include "FallbackKeyboardTranslator.h"
+#include "KeyboardTranslatorReader.h"
+#include "KeyboardTranslatorWriter.h"
+
 #include "konsoledebug.h"
 
 // Qt
