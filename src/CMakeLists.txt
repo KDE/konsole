@@ -49,6 +49,38 @@ qt5_add_dbus_adaptor(windowadaptors_SRCS
                     ViewManager.h
                     Konsole::ViewManager)
 
+
+set(konsole_LIBS
+    KF5::XmlGui
+    Qt5::PrintSupport
+    Qt5::Xml
+    KF5::Notifications
+    KF5::WindowSystem
+    KF5::TextWidgets
+    KF5::GuiAddons
+    KF5::IconThemes
+    KF5::Bookmarks
+    KF5::I18n
+    KF5::Pty
+    KF5::KIOWidgets
+    KF5::DBusAddons
+    KF5::GlobalAccel
+    KF5::NewStuff
+)
+
+if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+    #kinfo_getfile() is in libutil
+    list(APPEND konsole_LIBS util)
+endif()
+
+
+# This konsoleprivate_core is the "core" library that depends in nothing from konsole itself
+# so we can start to detangle the codebase.
+set(konsoleprivate_core_SRCS ShellCommand.cpp)
+add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
+
+target_link_libraries(konsoleprivate_core ${konsole_LIBS})
+
 set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ${windowadaptors_SRCS}
                         hsluv.c
@@ -121,7 +153,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         session/SessionManager.cpp
                         session/SessionListModel.cpp
                         session/SessionTask.cpp
-                        ShellCommand.cpp
                         widgets/TabTitleFormatButton.cpp
                         TerminalCharacterDecoder.cpp
                         ExtendedCharTable.cpp
@@ -177,7 +208,12 @@ qt5_add_resources( konsoleprivate_SRCS ../desktop/konsole.qrc)
 
 add_library(konsoleprivate ${konsoleprivate_SRCS})
 generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
-target_link_libraries(konsoleprivate PUBLIC ${konsole_LIBS})
+
+target_link_libraries(konsoleprivate
+    PUBLIC
+    konsoleprivate_core
+    ${konsole_LIBS}
+)
 
 set_target_properties(konsoleprivate PROPERTIES
     VERSION ${KONSOLEPRIVATE_VERSION_STRING}
