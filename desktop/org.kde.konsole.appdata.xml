@@ -97,8 +97,8 @@
     <p>Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
     <p xml:lang="ast">Konsole ye una terminal pa executar comandos de la shell. Apurre una llinia de comandos pa controlar direutamente l'ordenador.</p>
     <p xml:lang="az">Konsole, əmr təbəqəsini işlətmək üçün bir terminaldır. Kompüterinizi birbaşa idarə etmək üçün bir sətir interfeysi təmin edir.</p>
-    <p xml:lang="ca">El Konsole és un terminal per executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per controlar directament l'ordinador.</p>
-    <p xml:lang="ca-valencia">El Konsole és un terminal per executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per controlar directament l'ordinador.</p>
+    <p xml:lang="ca">El Konsole és un terminal per a executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per a controlar directament l'ordinador.</p>
+    <p xml:lang="ca-valencia">El Konsole és un terminal per a executar un intèrpret d'ordres. Proporciona una interfície de línia d'ordres per a controlar directament l'ordinador.</p>
     <p xml:lang="de">Konsole ist ein Terminal zum Ausführen einer Befehls-Shell. Es stellt eine Befehlszeile-Schnittstelle zur direkten Steuerung Ihres Rechner zur Verfügung.</p>
     <p xml:lang="el">Το Konsole είναι ένα τερματικό για την εκτέλεση ενός σεναρίου φλοιού. Παρέχει ένα περιβάλλον χρήστη για να ελέγχετε απευθείας τον υπολογιστή σας.</p>
     <p xml:lang="en-GB">Konsole is a terminal to run a command shell. It provides a command line interface for directly controlling your computer.</p>
@@ -221,8 +221,8 @@
       <li xml:lang="ar">مختلف التّشكيلات</li>
       <li xml:lang="ast">Perfiles múltiples</li>
       <li xml:lang="az">Profil seçimi</li>
-      <li xml:lang="ca">Perfils múltiples</li>
-      <li xml:lang="ca-valencia">Perfils múltiples</li>
+      <li xml:lang="ca">Múltiples perfils</li>
+      <li xml:lang="ca-valencia">Múltiples perfils</li>
       <li xml:lang="cs">Možnost mít několik profilů</li>
       <li xml:lang="da">Flere profiler</li>
       <li xml:lang="de">Mehrere Profile</li>
