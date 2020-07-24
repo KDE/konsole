@@ -51,17 +51,17 @@
 
 #include "SSHProcessInfo.h"
 #include "Pty.h"
-#include "widgets/TerminalDisplay.h"
 #include "ShellCommand.h"
 #include "Vt102Emulation.h"
 #include "ZModemDialog.h"
-#include "history/HistoryTypeNone.h"
 #include "history/HistoryTypeFile.h"
+#include "history/HistoryTypeNone.h"
 #include "history/compact/CompactHistoryType.h"
 #include "konsoledebug.h"
+#include "profile/Profile.h"
+#include "profile/ProfileManager.h"
 #include "session/SessionManager.h"
-#include "ProfileManager.h"
-#include "Profile.h"
+#include "widgets/TerminalDisplay.h"
 
 using namespace Konsole;
 

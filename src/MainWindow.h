@@ -23,12 +23,12 @@
 // Qt
 #include <QPointer>
 #include <QUrl>
+#include <QExplicitlySharedDataPointer>
 
 // KDE
 #include <KXmlGuiWindow>
 
 // Konsole
-#include "Profile.h"
 #include "widgets/ViewSplitter.h"
 
 class QAction;
@@ -40,6 +40,7 @@ class ViewManager;
 class ViewProperties;
 class Session;
 class SessionController;
+class Profile;
 class ProfileList;
 class BookmarkHandler;
 
@@ -77,7 +78,7 @@ public:
      * @param directory Initial working directory for the new session or empty
      * if the default working directory associated with the profile should be used.
      */
-    Session *createSession(Profile::Ptr profile, const QString &directory);
+    Session *createSession(QExplicitlySharedDataPointer<Profile> profile, const QString &directory);
 
     /**
      * create a new SSH session.
@@ -85,7 +86,7 @@ public:
      * @param profile The profile to use to create the new session.
      * @param url the URL representing the new SSH connection
      */
-    Session *createSSHSession(Profile::Ptr profile, const QUrl &url);
+    Session *createSSHSession(QExplicitlySharedDataPointer<Profile> profile , const QUrl &url);
 
     /**
      * Helper method to make this window get input focus
@@ -117,7 +118,7 @@ Q_SIGNALS:
      * if the default working directory associated with the profile should
      * be used.
      */
-    void newWindowRequest(const Profile::Ptr &profile, const QString &directory);
+    void newWindowRequest(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory);
 
     /**
      * Emitted when a view for one session is detached from this window
@@ -147,7 +148,7 @@ private Q_SLOTS:
     void activateMenuBar();
     void showSettingsDialog(bool showProfilePage = false);
     void showShortcutsDialog();
-    void newFromProfile(const Profile::Ptr &profile);
+    void newFromProfile(const QExplicitlySharedDataPointer<Profile> &profile);
     void activeViewChanged(SessionController *controller);
     void disconnectController(SessionController *controller);
     void activeViewTitleChanged(ViewProperties *);

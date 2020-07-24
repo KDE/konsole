@@ -24,7 +24,8 @@
 #include <QDialog>
 
 // Konsole
-#include "Profile.h"
+//TODO: Move away Profile::Property from the profile header.
+#include "profile/Profile.h"
 
 class QTableWidgetItem;
 

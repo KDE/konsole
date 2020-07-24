@@ -23,6 +23,8 @@
 
 #include <QObject>
 
+#include "../profile/Profile.h"
+
 #include "../TerminalCharacterDecoder.h"
 
 namespace Konsole

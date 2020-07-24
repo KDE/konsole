@@ -24,15 +24,17 @@
 
 // Qt
 #include <QList>
+#include <QExplicitlySharedDataPointer>
 
 // Konsole
 #include "Character.h"
-#include "Profile.h"
 #include "konsoleprivate_export.h"
 
 class QTextStream;
 
 namespace Konsole {
+class Profile;
+
 /**
  * Base class for terminal character decoders
  *
@@ -120,7 +122,7 @@ public:
     /**
      * Constructs an HTML decoder using a default black-on-white color scheme.
      */
-    explicit HTMLDecoder(const Profile::Ptr &profile = Profile::Ptr());
+    explicit HTMLDecoder(const QExplicitlySharedDataPointer<Profile> &profile = QExplicitlySharedDataPointer<Profile>());
 
     void decodeLine(const Character * const characters, int count,
                     LineProperty properties) override;
@@ -133,7 +135,7 @@ private:
     void closeSpan(QString &text);
 
     QTextStream *_output;
-    Profile::Ptr _profile;
+    QExplicitlySharedDataPointer<Profile> _profile;
     ColorEntry _colorTable[TABLE_COLORS];
     bool _innerSpanOpen;
     RenditionFlags _lastRendition;

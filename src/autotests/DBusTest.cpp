@@ -20,8 +20,8 @@
 // Own
 #include "DBusTest.h"
 #include "../session/Session.h"
-#include "../Profile.h"
-#include "../ProfileWriter.h"
+#include "../profile/Profile.h"
+#include "../profile/ProfileWriter.h"
 
 // Qt
 #include <QProcess>

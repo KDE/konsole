@@ -24,12 +24,12 @@
 #include <QCommandLineParser>
 
 // Konsole
-#include "Profile.h"
 #include "widgets/ViewSplitter.h"
 
 namespace Konsole {
 class MainWindow;
 class Session;
+class Profile;
 
 /**
  * The Konsole Application.
@@ -68,7 +68,7 @@ public:
     MainWindow *newMainWindow();
 
 private Q_SLOTS:
-    void createWindow(const Profile::Ptr &profile, const QString &directory);
+    void createWindow(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory);
     void detachTerminals(ViewSplitter *splitter, const QHash<TerminalDisplay*, Session*>& sessionsMap);
 
     void toggleBackgroundInstance();
@@ -84,8 +84,8 @@ private:
     void startBackgroundMode(MainWindow *window);
     bool processHelpArgs();
     MainWindow *processWindowArgs(bool &createdNewMainWindow);
-    Profile::Ptr processProfileSelectArgs();
-    Profile::Ptr processProfileChangeArgs(Profile::Ptr baseProfile);
+    QExplicitlySharedDataPointer<Profile> processProfileSelectArgs();
+    QExplicitlySharedDataPointer<Profile> processProfileChangeArgs(QExplicitlySharedDataPointer<Profile> baseProfile);
     bool processTabsFromFileArgs(MainWindow *window);
     void createTabFromArgs(MainWindow *window, const QHash<QString, QString> &);
     void finalizeNewMainWindow(MainWindow *window);

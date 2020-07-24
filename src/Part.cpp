@@ -35,18 +35,18 @@
 #include <KConfigDialog>
 
 // Konsole
-#include "EditProfileDialog.h"
 #include "Emulation.h"
+#include "KonsoleSettings.h"
+#include "ViewManager.h"
+#include "profile/EditProfileDialog.h"
+#include "profile/ProfileManager.h"
 #include "session/Session.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
-#include "ProfileManager.h"
-#include "widgets/TerminalDisplay.h"
-#include "ViewManager.h"
-#include "widgets/ViewContainer.h"
-#include "KonsoleSettings.h"
 #include "settings/PartInfo.h"
 #include "settings/ProfileSettings.h"
+#include "widgets/TerminalDisplay.h"
+#include "widgets/ViewContainer.h"
 
 using namespace Konsole;
 
@@ -111,7 +111,7 @@ Session *Part::activeSession() const
         Q_ASSERT(_viewManager->activeViewController()->session());
 
         return _viewManager->activeViewController()->session();
-    } 
+    }
     return nullptr;
 }
 
@@ -175,7 +175,7 @@ int Part::foregroundProcessId()
 
     if (activeSession()->isForegroundProcessActive()) {
         return activeSession()->foregroundProcessId();
-    } 
+    }
     return -1;
 }
 
@@ -185,7 +185,7 @@ QString Part::foregroundProcessName()
 
     if (activeSession()->isForegroundProcessActive()) {
         return activeSession()->foregroundProcessName();
-    } 
+    }
     return QString();
 }
 

@@ -24,6 +24,7 @@
 #include <QTextStream>
 
 #include "TerminalCharacterDecoder.h"
+#include "profile/Profile.h"
 #include "Emulation.h"
 
 namespace Konsole {

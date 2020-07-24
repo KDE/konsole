@@ -27,7 +27,6 @@
 #include <QTabWidget>
 
 // Konsole
-#include "Profile.h"
 #include "ViewManager.h"
 #include "session/Session.h"
 
@@ -179,7 +178,7 @@ Q_SIGNALS:
     void newViewRequest();
 
     /** Requests creation of a new view, with the selected profile. */
-    void newViewWithProfileRequest(const Profile::Ptr&);
+    void newViewWithProfileRequest(const QExplicitlySharedDataPointer<Profile> &profile);
 
     /** a terminalDisplay was dropped in a child Splitter */
 

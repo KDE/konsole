@@ -21,7 +21,7 @@
 // Own
 #include "session/SessionController.h"
 
-#include "ProfileManager.h"
+#include "profile/ProfileManager.h"
 #include "konsoledebug.h"
 
 // Qt
@@ -59,9 +59,15 @@
 #include <KNotification>
 
 // Konsole
-#include "EditProfileDialog.h"
 #include "CopyInputDialog.h"
 #include "Emulation.h"
+#include "Enumeration.h"
+#include "HistorySizeDialog.h"
+#include "PrintOptions.h"
+#include "RenameTabDialog.h"
+#include "SaveHistoryTask.h"
+#include "ScreenWindow.h"
+#include "SearchHistoryTask.h"
 #include "filterHotSpots/FileFilter.h"
 #include "filterHotSpots/Filter.h"
 #include "filterHotSpots/FilterChain.h"
@@ -69,22 +75,16 @@
 #include "filterHotSpots/RegExpFilter.h"
 #include "filterHotSpots/UrlFilter.h"
 #include "history/HistoryType.h"
-#include "history/HistoryTypeNone.h"
 #include "history/HistoryTypeFile.h"
+#include "history/HistoryTypeNone.h"
 #include "history/compact/CompactHistoryType.h"
-#include "HistorySizeDialog.h"
-#include "widgets/IncrementalSearchBar.h"
-#include "RenameTabDialog.h"
-#include "ScreenWindow.h"
+#include "profile/EditProfileDialog.h"
+#include "profile/ProfileList.h"
 #include "session/Session.h"
-#include "ProfileList.h"
-#include "widgets/TerminalDisplay.h"
-#include "session/SessionManager.h"
-#include "Enumeration.h"
-#include "PrintOptions.h"
-#include "SaveHistoryTask.h"
-#include "SearchHistoryTask.h"
 #include "session/SessionGroup.h"
+#include "session/SessionManager.h"
+#include "widgets/IncrementalSearchBar.h"
+#include "widgets/TerminalDisplay.h"
 
 // For Unix signal names
 #include <csignal>

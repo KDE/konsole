@@ -60,7 +60,12 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ColorSchemeEditor.cpp
                         CopyInputDialog.cpp
                         CheckableSessionModel.cpp
-                        EditProfileDialog.cpp
+                        profile/EditProfileDialog.cpp
+                        profile/Profile.cpp
+                        profile/ProfileList.cpp
+                        profile/ProfileReader.cpp
+                        profile/ProfileWriter.cpp
+                        profile/ProfileManager.cpp
                         ColorSchemeViewDelegate.cpp
                         LabelsAligner.cpp
                         FontDialog.cpp
@@ -102,11 +107,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         NullProcessInfo.cpp
                         UnixProcessInfo.cpp
                         SSHProcessInfo.cpp
-                        Profile.cpp
-                        ProfileList.cpp
-                        ProfileReader.cpp
-                        ProfileWriter.cpp
-                        ProfileManager.cpp
                         Pty.cpp
                         RenameTabDialog.cpp
                         widgets/RenameTabWidget.cpp
@@ -148,40 +148,17 @@ ecm_qt_declare_logging_category(konsoleprivate_SRCS HEADER konsoledebug.h IDENTI
 
 kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
-set(konsole_LIBS
-                 KF5::XmlGui
-                 Qt5::PrintSupport
-                 Qt5::Xml
-                 KF5::Notifications
-                 KF5::WindowSystem
-                 KF5::TextWidgets
-                 KF5::GuiAddons
-                 KF5::IconThemes
-                 KF5::Bookmarks
-                 KF5::I18n
-                 KF5::Pty
-                 KF5::KIOWidgets
-                 KF5::DBusAddons
-                 KF5::GlobalAccel
-                 KF5::NewStuff
-)
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
-    #kinfo_getfile() is in libutil
-    list(APPEND konsole_LIBS util)
-endif()
-
 ### Konsole Application
 
 ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
                                 CopyInputDialog.ui
-                                EditProfileGeneralPage.ui
-                                EditProfileTabsPage.ui
-                                EditProfileAppearancePage.ui
-                                EditProfileScrollingPage.ui
-                                EditProfileKeyboardPage.ui
-                                EditProfileMousePage.ui
-                                EditProfileAdvancedPage.ui
+                                profile/EditProfileGeneralPage.ui
+                                profile/EditProfileTabsPage.ui
+                                profile/EditProfileAppearancePage.ui
+                                profile/EditProfileScrollingPage.ui
+                                profile/EditProfileKeyboardPage.ui
+                                profile/EditProfileMousePage.ui
+                                profile/EditProfileAdvancedPage.ui
                                 KeyBindingEditor.ui
                                 RenameTabDialog.ui
                                 widgets/RenameTabWidget.ui

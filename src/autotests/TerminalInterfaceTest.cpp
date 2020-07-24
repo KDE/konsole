@@ -19,8 +19,8 @@
 
 // Own
 #include "TerminalInterfaceTest.h"
-#include "../Profile.h"
-#include "../ProfileManager.h"
+#include "../profile/Profile.h"
+#include "../profile/ProfileManager.h"
 #include "config-konsole.h"
 
 // Qt

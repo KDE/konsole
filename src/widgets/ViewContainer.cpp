@@ -38,7 +38,7 @@
 // Konsole
 #include "widgets/IncrementalSearchBar.h"
 #include "ViewProperties.h"
-#include "ProfileList.h"
+#include "profile/ProfileList.h"
 #include "ViewManager.h"
 #include "KonsoleSettings.h"
 #include "session/SessionController.h"

@@ -33,7 +33,6 @@
 // Konsole
 #include "SessionDisplayConnection.h"
 #include "ViewProperties.h"
-#include "Profile.h"
 #include "Enumeration.h"
 #include "session/Session.h"
 
@@ -48,16 +47,17 @@ class QAction;
 class KActionMenu;
 
 namespace Konsole {
-class Session;
-class SessionGroup;
-class ScreenWindow;
-class TerminalDisplay;
+class EditProfileDialog;
+class FileFilter;
 class IncrementalSearchBar;
+class Profile;
 class ProfileList;
 class RegExpFilter;
+class ScreenWindow;
+class Session;
+class SessionGroup;
+class TerminalDisplay;
 class UrlFilter;
-class FileFilter;
-class EditProfileDialog;
 
 /**
  * Provides the menu actions to manipulate a single terminal session and view pair.
@@ -248,7 +248,7 @@ private Q_SLOTS:
     void monitorSilence(bool monitor);
     void monitorProcessFinish(bool monitor);
     void renameSession();
-    void switchProfile(const Profile::Ptr &profile);
+    void switchProfile(const QExplicitlySharedDataPointer<Profile> &profile);
     void handleWebShortcutAction();
     void configureWebShortcuts();
     void sendSignal(QAction *action);
@@ -268,7 +268,7 @@ private Q_SLOTS:
     void searchTextChanged(const QString &text);
     void searchCompleted(bool success);
 
-    void updateFilterList(Profile::Ptr profile); // Called when the profile has changed, so we might need to change the list of filters
+    void updateFilterList(QExplicitlySharedDataPointer<Profile> profile); // Called when the profile has changed, so we might need to change the list of filters
 
     void viewFocusChangeHandler(bool focused);
     void interactionHandler();

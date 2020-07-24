@@ -26,21 +26,23 @@
 #include <QObject>
 #include <QPointer>
 
+#include "konsoleprivate_export.h"
 // Konsole
-#include "Profile.h"
 
 class KActionCollection;
 class KConfigGroup;
 
 namespace Konsole {
+
 class ColorScheme;
+class Profile;
 class Session;
-class TerminalDisplay;
-class TabbedViewContainer;
 class SessionController;
+class TabbedViewContainer;
+class TabbedViewContainer;
+class TerminalDisplay;
 class ViewProperties;
 class ViewSplitter;
-class TabbedViewContainer;
 
 /**
  * Manages the terminal display widgets in a Konsole window or part.
@@ -84,7 +86,7 @@ public:
      * Applies the view-specific settings associated with specified @p profile
      * to the terminal display @p view.
      */
-    void applyProfileToView(TerminalDisplay *view, const Profile::Ptr &profile);
+    void applyProfileToView(TerminalDisplay *view, const QExplicitlySharedDataPointer<Profile> &profile);
 
     void toggleActionsBasedOnState();
     /**
@@ -182,7 +184,7 @@ public:
     /**
      * Returns whether the @p profile has the blur setting enabled
      */
-    static bool profileHasBlurEnabled(const Profile::Ptr &profile);
+    static bool profileHasBlurEnabled(const QExplicitlySharedDataPointer<Profile> &profile);
 
     /** returns the active tab from the view
     */
@@ -190,7 +192,7 @@ public:
     TerminalDisplay *createView(Session *session);
     void attachView(TerminalDisplay *terminal, Session *session);
 
-    static const ColorScheme *colorSchemeForProfile(const Profile::Ptr &profile);
+    static const ColorScheme *colorSchemeForProfile(const QExplicitlySharedDataPointer<Profile> &profile);
     /** Reorder the terminal display history list */
     void updateTerminalDisplayHistory(TerminalDisplay *terminalDisplay = nullptr, bool remove = false);
 
@@ -203,7 +205,7 @@ public:
      * The session has specified @p profile, working @p directory
      * and configured environment.
      */
-    Session* createSession(const Profile::Ptr &profile, const QString &directory = QString());
+    Session* createSession(const QExplicitlySharedDataPointer<Profile> &profile, const QString &directory = QString());
 
 Q_SIGNALS:
     /** Emitted when the last view is removed from the view manager */
@@ -243,7 +245,7 @@ Q_SIGNALS:
     /** Requests creation of a new view with the default profile. */
     void newViewRequest();
     /** Requests creation of a new view, with the selected profile. */
-    void newViewWithProfileRequest(const Profile::Ptr&);
+    void newViewWithProfileRequest(const QExplicitlySharedDataPointer<Profile> &profile);
 
 public Q_SLOTS:
     /** DBus slot that returns the number of sessions in the current view. */
@@ -370,7 +372,7 @@ private Q_SLOTS:
     void containerViewsChanged(TabbedViewContainer *container);
 
     // called when a profile changes
-    void profileChanged(const Profile::Ptr &profile);
+    void profileChanged(const QExplicitlySharedDataPointer<Profile> &profile);
 
     void updateViewsForSession(Session *session);
 

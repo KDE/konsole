@@ -24,7 +24,7 @@
 
 #include "session/Session.h"
 #include "session/SessionManager.h"
-#include "Profile.h"
+#include "profile/Profile.h"
 
 #include "FileFilterHotspot.h"
 

@@ -25,14 +25,16 @@
 // Qt
 #include <QHash>
 #include <QList>
+#include <QExplicitlySharedDataPointer>
 
-// Konsole
-#include "Profile.h"
+// TODO: Move the Property away from Profile.h
+#include "profile/Profile.h"
 
 class KConfig;
 
 namespace Konsole {
 class Session;
+class Profile;
 
 /**
  * Manages running terminal sessions.
@@ -73,13 +75,13 @@ public:
      * @param profile A profile containing the settings for the new session.  If @p profile
      * is null the default profile (see ProfileManager::defaultProfile()) will be used.
      */
-    Session *createSession(Profile::Ptr profile = Profile::Ptr());
+    Session *createSession(QExplicitlySharedDataPointer<Profile> profile = QExplicitlySharedDataPointer<Profile>());
 
     /** Sets the profile associated with a session. */
-    void setSessionProfile(Session *session, Profile::Ptr profile);
+    void setSessionProfile(Session *session,QExplicitlySharedDataPointer<Profile> profile);
 
     /** Returns the profile associated with a session. */
-    Profile::Ptr sessionProfile(Session *session) const;
+    QExplicitlySharedDataPointer<Profile> sessionProfile(Session *session) const;
 
     /**
      * Returns a list of active sessions.
@@ -111,7 +113,7 @@ protected Q_SLOTS:
 private Q_SLOTS:
     void sessionProfileCommandReceived(const QString &text);
 
-    void profileChanged(const Profile::Ptr &profile);
+    void profileChanged(const QExplicitlySharedDataPointer<Profile> &profile);
 
 private:
     Q_DISABLE_COPY(SessionManager)
@@ -120,18 +122,18 @@ private:
     // to all sessions currently using that profile
     // if modifiedPropertiesOnly is true, only properties which
     // are set in the profile @p key are updated
-    void applyProfile(const Profile::Ptr &profile, bool modifiedPropertiesOnly);
+    void applyProfile(const QExplicitlySharedDataPointer<Profile> &profile, bool modifiedPropertiesOnly);
 
     // applies updates to the profile @p profile to the session @p session
     // if modifiedPropertiesOnly is true, only properties which
     // are set in @p profile are update ( ie. properties for which profile->isPropertySet(<property>)
     // returns true )
-    void applyProfile(Session *session, const Profile::Ptr &profile, bool modifiedPropertiesOnly);
+    void applyProfile(Session *session, const QExplicitlySharedDataPointer<Profile> &profile, bool modifiedPropertiesOnly);
 
     QList<Session *> _sessions; // list of running sessions
 
-    QHash<Session *, Profile::Ptr> _sessionProfiles;
-    QHash<Session *, Profile::Ptr> _sessionRuntimeProfiles;
+    QHash<Session *, QExplicitlySharedDataPointer<Profile>> _sessionProfiles;
+    QHash<Session *, QExplicitlySharedDataPointer<Profile>> _sessionRuntimeProfiles;
     QHash<Session *, int> _restoreMapping;
     bool _isClosingAllSessions;
 };
@@ -140,7 +142,7 @@ private:
 class ShouldApplyProperty
 {
 public:
-    ShouldApplyProperty(const Profile::Ptr &profile, bool modifiedOnly) :
+    ShouldApplyProperty(const QExplicitlySharedDataPointer<Profile> &profile, bool modifiedOnly) :
         _profile(profile),
         _modifiedPropertiesOnly(modifiedOnly)
     {
@@ -152,7 +154,7 @@ public:
     }
 
 private:
-    const Profile::Ptr _profile;
+    const QExplicitlySharedDataPointer<Profile> _profile;
     bool _modifiedPropertiesOnly;
 };
 }

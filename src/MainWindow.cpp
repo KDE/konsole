@@ -43,22 +43,26 @@
 
 // Konsole
 #include "BookmarkHandler.h"
-#include "session/SessionController.h"
-#include "ProfileList.h"
-#include "session/Session.h"
-#include "widgets/ViewContainer.h"
-#include "ViewManager.h"
-#include "session/SessionManager.h"
-#include "ProfileManager.h"
 #include "KonsoleSettings.h"
+#include "ViewManager.h"
 #include "WindowSystemInfo.h"
-#include "widgets/TerminalDisplay.h"
+
+#include "profile/ProfileList.h"
+#include "profile/ProfileManager.h"
+
+#include "session/Session.h"
+#include "session/SessionController.h"
+#include "session/SessionManager.h"
+
 #include "settings/ConfigurationDialog.h"
-#include "settings/TemporaryFilesSettings.h"
 #include "settings/GeneralSettings.h"
 #include "settings/ProfileSettings.h"
 #include "settings/TabBarSettings.h"
+#include "settings/TemporaryFilesSettings.h"
 #include "settings/ThumbnailsSettings.h"
+
+#include "widgets/TerminalDisplay.h"
+#include "widgets/ViewContainer.h"
 
 using namespace Konsole;
 

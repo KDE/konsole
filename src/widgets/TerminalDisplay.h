@@ -33,7 +33,6 @@
 #include "ColorScheme.h"
 #include "Enumeration.h"
 #include "ScrollState.h"
-#include "Profile.h"
 #include "TerminalHeaderBar.h"
 
 class QDrag;
@@ -56,6 +55,7 @@ class TerminalImageFilterChain;
 class SessionController;
 class IncrementalSearchBar;
 class HotSpot;
+class Profile;
 
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
@@ -78,7 +78,7 @@ public:
     void showDragTarget(const QPoint& cursorPos);
     void hideDragTarget();
 
-    void applyProfile(const Profile::Ptr& profile);
+    void applyProfile(const QExplicitlySharedDataPointer<Profile>& profile);
 
     /** Returns the terminal color palette used by the display. */
     const ColorEntry *colorTable() const;

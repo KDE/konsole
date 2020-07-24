@@ -70,14 +70,14 @@
 #include "konsoledebug.h"
 #include "TerminalCharacterDecoder.h"
 #include "Screen.h"
-#include "session/SessionController.h"
 #include "ExtendedCharTable.h"
 #include "TerminalDisplayAccessible.h"
+#include "session/SessionController.h"
 #include "session/SessionManager.h"
 #include "session/Session.h"
 #include "WindowSystemInfo.h"
 #include "widgets/IncrementalSearchBar.h"
-#include "Profile.h"
+#include "profile/Profile.h"
 #include "ViewManager.h" // for colorSchemeForProfile. // TODO: Rewrite this.
 #include "LineBlockCharacters.h"
 

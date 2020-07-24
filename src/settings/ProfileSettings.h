@@ -24,11 +24,12 @@
 #include <QStyledItemDelegate>
 #include <QSet>
 #include <QKeySequenceEdit>
+#include <QExplicitlySharedDataPointer>
 
 // KDE
 
 // Konsole
-#include "Profile.h"
+// TODO: Move this file to the profile folder?
 #include "ui_ProfileSettings.h"
 
 class QItemSelection;
@@ -36,6 +37,8 @@ class QStandardItem;
 class QStandardItemModel;
 
 namespace Konsole {
+class Profile;
+
 /**
  * A dialog which lists the available types of profiles and allows
  * the user to add new profiles, and remove or edit existing
@@ -78,29 +81,29 @@ private Q_SLOTS:
     // selection changes
     void tableSelectionChanged(const QItemSelection &);
 
-    void updateFavoriteStatus(const Profile::Ptr &profile, bool favorite);
+    void updateFavoriteStatus(const QExplicitlySharedDataPointer<Profile> &profile, bool favorite);
 
-    void addItems(const Profile::Ptr&);
-    void updateItems(const Profile::Ptr&);
-    void removeItems(const Profile::Ptr&);
+    void addItems(const QExplicitlySharedDataPointer<Profile> &profile);
+    void updateItems(const QExplicitlySharedDataPointer<Profile> &profile);
+    void removeItems(const QExplicitlySharedDataPointer<Profile> &profile);
 
     // double clicking the profile name opens the edit profile dialog
     void doubleClicked(const QModelIndex &index);
 
 private:
-    Profile::Ptr currentProfile() const;
-    QList<Profile::Ptr> selectedProfiles() const;
-    bool isProfileDeletable(Profile::Ptr profile) const;
+    QExplicitlySharedDataPointer<Profile> currentProfile() const;
+    QList<QExplicitlySharedDataPointer<Profile>> selectedProfiles() const;
+    bool isProfileDeletable(QExplicitlySharedDataPointer<Profile> profile) const;
 
     // updates the font of the items to match
     // their default / non-default profile status
     void updateDefaultItem();
-    void updateItemsForProfile(const Profile::Ptr &profile,const QList<QStandardItem *> &items) const;
+    void updateItemsForProfile(const QExplicitlySharedDataPointer<Profile> &profile,const QList<QStandardItem *> &items) const;
     void updateShortcutField(QStandardItem *item, bool isFavorite) const;
     // updates the profile table to be in sync with the
     // session manager
     void populateTable();
-    int rowForProfile(const Profile::Ptr &profile) const;
+    int rowForProfile(const QExplicitlySharedDataPointer<Profile> &profile) const;
 
     QStandardItemModel *_sessionModel;
 

@@ -34,16 +34,16 @@
 #include <KLocalizedString>
 
 // Konsole
-#include "session/SessionManager.h"
-#include "ProfileManager.h"
-#include "MainWindow.h"
-#include "session/Session.h"
-#include "ShellCommand.h"
 #include "KonsoleSettings.h"
+#include "MainWindow.h"
+#include "ShellCommand.h"
 #include "ViewManager.h"
 #include "WindowSystemInfo.h"
-#include "widgets/ViewContainer.h"
+#include "profile/ProfileManager.h"
+#include "session/Session.h"
+#include "session/SessionManager.h"
 #include "widgets/TerminalDisplay.h"
+#include "widgets/ViewContainer.h"
 
 using namespace Konsole;
 

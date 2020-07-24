@@ -26,8 +26,7 @@
 // KDE
 #include <QDialog>
 
-// Konsole
-#include "Profile.h"
+#include "konsoleprivate_export.h"
 
 class QTableWidgetItem;
 

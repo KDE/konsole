@@ -29,7 +29,7 @@
 #include "ExtendedCharTable.h"
 #include "ColorScheme.h"
 #include "ColorSchemeManager.h"
-#include "Profile.h"
+#include "profile/Profile.h"
 
 using namespace Konsole;
 PlainTextDecoder::PlainTextDecoder()

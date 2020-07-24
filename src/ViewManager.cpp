@@ -40,7 +40,7 @@
 #include "widgets/TerminalDisplay.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
-#include "ProfileManager.h"
+#include "profile/ProfileManager.h"
 #include "widgets/ViewSplitter.h"
 #include "widgets/ViewContainer.h"
 
