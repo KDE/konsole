@@ -207,3 +207,4 @@ QString SSHProcessInfo::format(const QString &input) const
 
     return output;
 }
+
