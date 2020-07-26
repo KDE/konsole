@@ -33,6 +33,7 @@
 #include <KConfigGroup>
 
 // Konsole
+#include "ShouldApplyProperty.h"
 #include "session/Session.h"
 #include "profile/ProfileManager.h"
 #include "ProfileCommandParser.h"

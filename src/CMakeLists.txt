@@ -147,6 +147,7 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         session/SessionGroup.cpp
                         session/SessionController.cpp
                         session/SessionManager.cpp
+                        ShouldApplyProperty.cpp
                         session/SessionListModel.cpp
                         session/SessionTask.cpp
                         widgets/TabTitleFormatButton.cpp

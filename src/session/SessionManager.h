@@ -138,24 +138,6 @@ private:
     bool _isClosingAllSessions;
 };
 
-/** Utility class to simplify code in SessionManager::applyProfile(). */
-class ShouldApplyProperty
-{
-public:
-    ShouldApplyProperty(const QExplicitlySharedDataPointer<Profile> &profile, bool modifiedOnly) :
-        _profile(profile),
-        _modifiedPropertiesOnly(modifiedOnly)
-    {
-    }
-
-    bool shouldApply(Profile::Property property) const
-    {
-        return !_modifiedPropertiesOnly || _profile->isPropertySet(property);
-    }
-
-private:
-    const QExplicitlySharedDataPointer<Profile> _profile;
-    bool _modifiedPropertiesOnly;
-};
 }
+
 #endif //SESSIONMANAGER_H
