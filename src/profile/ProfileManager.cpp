@@ -21,6 +21,7 @@
 
 // Own
 #include "ProfileManager.h"
+#include "PopStackOnExit.h"
 
 #include "konsoledebug.h"
 

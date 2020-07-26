@@ -273,34 +273,6 @@ private:
     QString normalizePath(const QString& path) const;
 };
 
-/**
- * PopStackOnExit is a utility to remove all values from a QStack which are added during
- * the lifetime of a PopStackOnExit instance.
- *
- * When a PopStackOnExit instance is destroyed, elements are removed from the stack
- * until the stack count is reduced the value when the PopStackOnExit instance was created.
- */
-template<class T>
-class PopStackOnExit
-{
-public:
-    explicit PopStackOnExit(QStack<T> &stack) : _stack(stack),
-        _count(stack.count())
-    {
-    }
-
-    ~PopStackOnExit()
-    {
-        while (_stack.count() > _count) {
-            _stack.pop();
-        }
-    }
-
-private:
-    Q_DISABLE_COPY(PopStackOnExit)
-
-    QStack<T> &_stack;
-    int _count;
-};
 }
+
 #endif //PROFILEMANAGER_H
