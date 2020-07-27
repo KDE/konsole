@@ -16,6 +16,7 @@ STATIC
     ProfileReader.cpp
     ProfileWriter.cpp
     ProfileManager.cpp
+    ${konsoleprofile_SRCS}
 )
 
 target_link_libraries(
