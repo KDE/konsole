@@ -219,6 +219,7 @@ set(konsole_KDEINIT_SRCS
    MainWindow.cpp
    main.cpp
    settings/ConfigurationDialog.cpp
+   settings/ConfigDialogButtonGroupManager.cpp
    settings/TemporaryFilesSettings.cpp
    settings/GeneralSettings.cpp
    settings/ProfileSettings.cpp

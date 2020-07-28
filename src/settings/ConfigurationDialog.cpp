@@ -25,6 +25,9 @@
 // Own
 #include "ConfigurationDialog.h"
 
+// Konsole
+#include "ConfigDialogButtonGroupManager.h"
+
 // Qt
 #include <QPushButton>
 #include <QDialogButtonBox>
@@ -35,10 +38,6 @@
 
 
 using namespace Konsole;
-
-
-const QString ConfigDialogButtonGroupManager::ManagedNamePrefix = QStringLiteral("kcfg_");
-
 
 ConfigurationDialog::ConfigurationDialog(QWidget *parent, KCoreConfigSkeleton *config)
     : KPageDialog(parent)
