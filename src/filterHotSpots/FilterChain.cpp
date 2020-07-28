@@ -149,10 +149,32 @@ QList<QSharedPointer<HotSpot>> FilterChain::filterBy(HotSpot::Type type) const
 
 void FilterChain::leaveEvent(TerminalDisplay *td, QEvent *ev)
 {
-    Q_UNUSED(ev);
-    if(!HotSpot::mouseOverHotSpotArea.isEmpty()) {
-        td->update(HotSpot::mouseOverHotSpotArea);
-        HotSpot::mouseOverHotSpotArea = QRegion();
-        td->setCursor(Qt::IBeamCursor);
+}
+
+
+void FilterChain::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn)
+{
+    auto spot = hotSpotAt(charLine, charColumn);
+    if (spot) {
+        spot->keyPressEvent(td, ev);
     }
+}
+
+void  FilterChain::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev, int charLine, int charColumn)
+{
+    auto spot = hotSpotAt(charLine, charColumn);
+    if (_hotSpotUnderMouse != spot) {
+        if (_hotSpotUnderMouse) {
+            _hotSpotUnderMouse->mouseLeaveEvent(td, ev);
+        }
+        _hotSpotUnderMouse = spot;
+        if (_hotSpotUnderMouse) {
+            _hotSpotUnderMouse->mouseEnterEvent(td, ev);
+        }
+    }
+
+    if (spot) {
+        spot->mouseMoveEvent(td, ev);
+    }
+
 }

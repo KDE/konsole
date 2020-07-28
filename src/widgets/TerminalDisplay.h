@@ -916,6 +916,7 @@ private:
     bool _hasCompositeFocus;
     bool _displayVerticalLine;
     int _displayVerticalLineAtChar;
+    QSharedPointer<HotSpot> _hotSpotUnderMouse;
 };
 
 }

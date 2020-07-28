@@ -28,6 +28,7 @@
 #include <QTimer>
 #include <QToolTip>
 #include <QMouseEvent>
+#include <QKeyEvent>
 
 #include <KRun>
 #include <KLocalizedString>
@@ -101,22 +102,16 @@ void FileFilterHotSpot::setupMenu(QMenu *menu)
 }
 
 // Static variables for the HotSpot
-qintptr FileFilterHotSpot::currentThumbnailHotspot = 0;
 bool FileFilterHotSpot::_canGenerateThumbnail = false;
 QPointer<KIO::PreviewJob> FileFilterHotSpot::_previewJob;
 
 void FileFilterHotSpot::requestThumbnail(Qt::KeyboardModifiers modifiers, const QPoint &pos) {
     _canGenerateThumbnail = true;
-    currentThumbnailHotspot = reinterpret_cast<qintptr>(this);
     _eventModifiers = modifiers;
     _eventPos = pos;
 
     // Defer the real creation of the thumbnail by a few msec.
     QTimer::singleShot(250, this, [this]{
-        if (currentThumbnailHotspot != reinterpret_cast<qintptr>(this)) {
-            return;
-        }
-
         thumbnailRequested();
     });
 }
@@ -200,8 +195,16 @@ KFileItem FileFilterHotSpot::fileItem() const
 void FileFilterHotSpot::mouseMoveEvent(TerminalDisplay *td, QMouseEvent* ev)
 {
     HotSpot::mouseMoveEvent(td, ev);
-    if (this != HotSpot::currentlyHoveredHotSpot) {
-        HotSpot::currentlyHoveredHotSpot.reset(this);
-        requestThumbnail(ev->modifiers(), ev->globalPos());
-    }
+    requestThumbnail(ev->modifiers(), ev->globalPos());
+}
+
+void FileFilterHotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
+{
+    HotSpot::mouseLeaveEvent(td, ev);
+    stopThumbnailGeneration();
+}
+
+void Konsole::FileFilterHotSpot::keyPressEvent(Konsole::TerminalDisplay* td, QKeyEvent* ev)
+{
+    requestThumbnail(ev->modifiers(), QCursor::pos());
 }

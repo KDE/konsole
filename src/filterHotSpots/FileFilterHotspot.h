@@ -33,6 +33,8 @@
 
 class QAction;
 class QPixmap;
+class QKeyEvent;
+class QMouseEvent;
 
 namespace Konsole {
 class TerminalDisplay;
@@ -61,7 +63,10 @@ public:
 
     static void stopThumbnailGeneration();
 
-    void mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev);
+    void mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev) override;
+    void mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev) override;
+    void keyPressEvent(TerminalDisplay *td, QKeyEvent *ev) override;
+
 private:
     void showThumbnail(const KFileItem& item, const QPixmap& preview);
     QString _filePath;

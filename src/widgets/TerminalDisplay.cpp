@@ -97,6 +97,13 @@ using namespace Konsole;
 const QChar LTR_OVERRIDE_CHAR(0x202D);
 
 inline int TerminalDisplay::loc(int x, int y) const {
+    if (y < 0 || y > _lines) {
+        qDebug() << "Y: " << y << "Lines" << _lines;
+    }
+    if (x < 0 || x > _columns ) {
+        qDebug() << "X" << x << "Columns" << _columns;
+    }
+
     Q_ASSERT(y >= 0 && y < _lines);
     Q_ASSERT(x >= 0 && x < _columns);
     x = qBound(0, x, _columns - 1);
@@ -1455,6 +1462,10 @@ void TerminalDisplay::paintFilters(QPainter& painter)
             }
         }
 
+        if (spot->startLine() < 0 || spot->endLine() < 0) {
+            qDebug() << "ERROR, invalid hotspot:";
+            spot->debug();
+        }
         for (int line = spot->startLine() ; line <= spot->endLine() ; line++) {
             int startColumn = 0;
             int endColumn = _columns - 1; // TODO use number of _columns which are actually
@@ -2355,13 +2366,8 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
 
     processFilters();
-    // handle filters
-    // change link hot-spot appearance on mouse-over
-    // TODO: Move this to filterChain::mouseMoveEvent
-    auto spot = _filterChain->hotSpotAt(charLine, charColumn);
-    if (spot) {
-        spot->mouseMoveEvent(this, ev);
-    }
+
+    _filterChain->mouseMoveEvent(this, ev, charLine, charColumn);
 
     // for auto-hiding the cursor, we need mouseTracking
     if (ev->buttons() == Qt::NoButton) {
@@ -3630,13 +3636,11 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
         }
     }
 
-    // TODO: Move this to hotSpot::keyPressEvent.
-    if (HotSpot::currentlyHoveredHotSpot != nullptr) {
-        auto fileHotspot = HotSpot::currentlyHoveredHotSpot.dynamicCast<FileFilterHotSpot>();
-        if (!fileHotspot) {
-            return;
-        }
-        fileHotspot->requestThumbnail(event->modifiers(), QCursor::pos());
+    { // C++17: change getCharacterPosition to return a tuple and use auto [charLine, charColumn] to extract the values.
+        int charLine;
+        int charColumn;
+        getCharacterPosition(QCursor::pos(), charLine, charColumn, !_usesMouseTracking);
+        _filterChain->keyPressEvent(this, event, charLine, charColumn);
     }
 
     _screenWindow->screen()->setCurrentTerminalDisplay(this);

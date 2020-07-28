@@ -28,8 +28,10 @@
 #include <QIcon>
 #include <KLocalizedString>
 #include <KRun>
+#include <QMouseEvent>
 
 #include "UrlFilter.h"
+#include "widgets/TerminalDisplay.h"
 //regexp matches:
 // full url:
 
@@ -123,4 +125,16 @@ QList<QAction *> UrlFilterHotSpot::actions()
     QObject::connect(copyAction, &QAction::triggered, this, [this, copyAction]{ activate(copyAction); });
 
     return {openAction, copyAction};
+}
+
+void Konsole::UrlFilterHotSpot::mouseMoveEvent(Konsole::TerminalDisplay* td, QMouseEvent* ev)
+{
+    auto cursor = td->cursor();
+    auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
+
+    if ((td->openLinksByDirectClick()|| ((ev->modifiers() & Qt::ControlModifier) != 0u)) && (cursor.shape() != Qt::PointingHandCursor)) {
+        td->setCursor(Qt::PointingHandCursor);
+    }
+
+    td->update(r);
 }

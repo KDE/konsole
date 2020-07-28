@@ -88,10 +88,13 @@ public:
     int count(HotSpot::Type type) const;
     QList<QSharedPointer<HotSpot>> filterBy(HotSpot::Type type) const;
 
+    void mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev, int charLine, int charColumn);
+    void keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn);
     void leaveEvent(TerminalDisplay *td, QEvent *ev);
 protected:
     QList<Filter *> _filters;
     TerminalDisplay *_terminalDisplay;
+    QSharedPointer<HotSpot> _hotSpotUnderMouse;
 };
 
 }

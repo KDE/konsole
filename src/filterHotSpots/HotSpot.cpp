@@ -27,9 +27,6 @@
 
 using namespace Konsole;
 
-QSharedPointer<HotSpot> HotSpot::currentlyHoveredHotSpot;
-QRegion HotSpot::mouseOverHotSpotArea;
-
 HotSpot::~HotSpot() = default;
 
 HotSpot::HotSpot(int startLine, int startColumn, int endLine, int endColumn) :
@@ -116,33 +113,26 @@ QPair<QRegion, QRect> HotSpot::region(int fontWidth, int fontHeight, int columns
     return {region, r};
 }
 
-void HotSpot::mouseMoveEvent(TerminalDisplay *td, QMouseEvent* ev)
+void HotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
 {
-  //TODO: Move this to HotSpot::mouseMoveEvent
-    QCursor cursor = td->cursor();
-    if ((type() == HotSpot::Link || type() == HotSpot::EMailAddress || type() == HotSpot::EscapedUrl)) {
-        QRegion previousHotspotArea = _mouseOverHotspotArea;
-        _mouseOverHotspotArea = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
-
-        if ((td->openLinksByDirectClick()|| ((ev->modifiers() & Qt::ControlModifier) != 0u)) && (cursor.shape() != Qt::PointingHandCursor)) {
-            td->setCursor(Qt::PointingHandCursor);
-        }
-
-        td->update(_mouseOverHotspotArea | previousHotspotArea);
-    } else if (!_mouseOverHotspotArea.isEmpty()) {
-        if ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u)) || (cursor.shape() == Qt::PointingHandCursor)) {
-            td->setCursor(td->usesMouseTracking() ? Qt::ArrowCursor : Qt::IBeamCursor);
-        }
-
-        td->update(_mouseOverHotspotArea);
-        // set hotspot area to an invalid rectangle
-        _mouseOverHotspotArea = QRegion();
-
-        // TODO: We need to move this to a `mouseLeaveEvent`
-        // HACK: Special case, if we move away from a FileFilterHotSpot, we need to stop the thumbnail.
-        FileFilterHotSpot::stopThumbnailGeneration();
-        HotSpot::currentlyHoveredHotSpot.clear();
-    }
+    auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
+    td->update(r);
+    td->setCursor(Qt::IBeamCursor);
 }
 
+void HotSpot::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev)
+{
+    QCursor cursor = td->cursor();
+    if ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u))
+        || (cursor.shape() == Qt::PointingHandCursor)) {
+        td->setCursor(td->usesMouseTracking() ? Qt::ArrowCursor : Qt::IBeamCursor);
+    }
+    auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
+    td->update(r);
+}
 
+void HotSpot::debug() {
+    qDebug() << this;
+    qDebug() <<  type();
+    qDebug() << _startLine << _endLine << _startColumn << _endColumn;
+}
