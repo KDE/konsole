@@ -261,6 +261,7 @@ int Application::newInstance()
             finalizeNewMainWindow(window);
         } else {
             window->show();
+            window->activateWindow();
         }
     }
 
