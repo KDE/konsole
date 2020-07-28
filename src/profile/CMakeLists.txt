@@ -12,6 +12,8 @@ add_library(konsoleprofile
 STATIC
     EditProfileDialog.cpp
     Profile.cpp
+    ProfileCommandParser.cpp
+    ProfileGroup.cpp
     ProfileList.cpp
     ProfileReader.cpp
     ProfileWriter.cpp

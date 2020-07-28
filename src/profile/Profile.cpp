@@ -32,6 +32,7 @@
 
 // Konsole
 #include "Enumeration.h"
+#include "ProfileGroup.h"
 
 using namespace Konsole;
 
@@ -340,68 +341,14 @@ const QStringList Profile::propertiesInfoList() const
     return info;
 }
 
-QHash<Profile::Property, QVariant> ProfileCommandParser::parse(const QString& input)
+const Profile::GroupPtr Profile::asGroup() const
 {
-    QHash<Profile::Property, QVariant> changes;
-
-    // regular expression to parse profile change requests.
-    //
-    // format: property=value;property=value ...
-    //
-    // where 'property' is a word consisting only of characters from A-Z
-    // where 'value' is any sequence of characters other than a semi-colon
-    //
-    static const QRegularExpression regExp(QStringLiteral("([a-zA-Z]+)=([^;]+)"));
-
-    QRegularExpressionMatchIterator iterator(regExp.globalMatch(input));
-    while (iterator.hasNext()) {
-        QRegularExpressionMatch match(iterator.next());
-        Profile::Property property = Profile::lookupByName(match.captured(1));
-        const QString value = match.captured(2);
-        changes.insert(property, value);
-    }
-
-    return changes;
+    const Profile::GroupPtr ptr(dynamic_cast<ProfileGroup *>(
+                                    const_cast<Profile *>(this)));
+    return ptr;
 }
 
-void ProfileGroup::updateValues()
+Profile::GroupPtr Profile::asGroup()
 {
-    const PropertyInfo* properties = Profile::DefaultPropertyNames;
-    while (properties->name != nullptr) {
-        // the profile group does not store a value for some properties
-        // (eg. name, path) if even they are equal between profiles -
-        //
-        // the exception is when the group has only one profile in which
-        // case it behaves like a standard Profile
-        if (_profiles.count() > 1 &&
-                !canInheritProperty(properties->property)) {
-            properties++;
-            continue;
-        }
-
-        QVariant value;
-        for (int i = 0; i < _profiles.count(); i++) {
-            QVariant profileValue = _profiles[i]->property<QVariant>(properties->property);
-            if (value.isNull()) {
-                value = profileValue;
-            } else if (value != profileValue) {
-                value = QVariant();
-                break;
-            }
-        }
-        Profile::setProperty(properties->property, value);
-        properties++;
-    }
-}
-
-void ProfileGroup::setProperty(Property p, const QVariant& value)
-{
-    if (_profiles.count() > 1 && !canInheritProperty(p)) {
-        return;
-    }
-
-    Profile::setProperty(p, value);
-    for (const Profile::Ptr &profile : qAsConst(_profiles)) {
-        profile->setProperty(p, value);
-    }
+    return Profile::GroupPtr(dynamic_cast<ProfileGroup *>(this));
 }

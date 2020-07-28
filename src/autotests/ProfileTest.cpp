@@ -26,6 +26,7 @@
 
 // Konsole
 #include "../profile/Profile.h"
+#include "../profile/ProfileGroup.h"
 #include "../profile/ProfileWriter.h"
 
 #include <array>

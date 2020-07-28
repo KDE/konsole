@@ -41,6 +41,7 @@
 // Konsole
 #include "ProfileReader.h"
 #include "ProfileWriter.h"
+#include "ProfileGroup.h"
 
 using namespace Konsole;
 

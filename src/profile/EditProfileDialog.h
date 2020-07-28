@@ -27,6 +27,7 @@
 
 // Konsole
 #include "Profile.h"
+#include "ProfileGroup.h"
 #include "Enumeration.h"
 #include "ColorScheme.h"
 #include "ColorSchemeEditor.h"
