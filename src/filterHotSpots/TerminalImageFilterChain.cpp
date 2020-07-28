@@ -22,7 +22,7 @@
 
 #include <QTextStream>
 
-#include "TerminalCharacterDecoder.h"
+#include "PlainTextDecoder.h"
 
 using namespace Konsole;
 

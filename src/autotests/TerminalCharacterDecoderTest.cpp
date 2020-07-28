@@ -21,9 +21,12 @@
 // Own
 #include "TerminalCharacterDecoderTest.h"
 
+// Konsole
+#include "../PlainTextDecoder.h"
+#include "../HTMLDecoder.h"
+
 // Qt
 #include <QTextStream>
-
 
 // KDE
 #include <qtest.h>

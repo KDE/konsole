@@ -68,7 +68,7 @@
 #include "filterHotSpots/FileFilterHotspot.h"
 
 #include "konsoledebug.h"
-#include "TerminalCharacterDecoder.h"
+#include "PlainTextDecoder.h"
 #include "Screen.h"
 #include "ExtendedCharTable.h"
 #include "TerminalDisplayAccessible.h"

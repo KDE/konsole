@@ -150,7 +150,8 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         session/SessionListModel.cpp
                         session/SessionTask.cpp
                         widgets/TabTitleFormatButton.cpp
-                        TerminalCharacterDecoder.cpp
+                        PlainTextDecoder.cpp
+                        HTMLDecoder.cpp
                         ExtendedCharTable.cpp
                         widgets/TerminalDisplay.cpp
                         widgets/TerminalDisplayAccessible.cpp

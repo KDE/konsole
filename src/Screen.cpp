@@ -27,7 +27,8 @@
 #include <QTextStream>
 
 // Konsole
-#include "TerminalCharacterDecoder.h"
+#include "PlainTextDecoder.h"
+#include "HTMLDecoder.h"
 #include "history/HistoryType.h"
 #include "history/HistoryScrollNone.h"
 #include "ExtendedCharTable.h"

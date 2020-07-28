@@ -33,6 +33,9 @@
 #include "session/SessionManager.h"
 #include "Emulation.h"
 
+#include "PlainTextDecoder.h"
+#include "HTMLDecoder.h"
+
 namespace Konsole {
 
 QString SaveHistoryTask::_saveDialogRecentURL;
