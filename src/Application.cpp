@@ -259,6 +259,7 @@ int Application::newInstance()
         if (createdNewMainWindow) {
             finalizeNewMainWindow(window);
         } else {
+            window->setWindowState(window->windowState() & ~Qt::WindowMinimized | Qt::WindowActive);
             window->show();
             window->activateWindow();
         }
