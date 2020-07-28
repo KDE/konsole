@@ -1792,7 +1792,6 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     Q_ASSERT(!_textBlinking);
 
     _showUrlHint = false;
-    FileFilterHotSpot::stopThumbnailGeneration();
 }
 
 void TerminalDisplay::focusInEvent(QFocusEvent*)
