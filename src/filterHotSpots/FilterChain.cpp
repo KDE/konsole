@@ -26,6 +26,8 @@
 
 #include <QRect>
 #include <QEvent>
+#include <QPainter>
+
 #include <algorithm>
 
 using namespace Konsole;
@@ -176,5 +178,129 @@ void  FilterChain::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev, int char
     if (spot) {
         spot->mouseMoveEvent(td, ev);
     }
-
 }
+
+void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
+{
+    // get color of character under mouse and use it to draw
+    // lines for filters
+    QPoint cursorPos = td->mapFromGlobal(QCursor::pos());
+    int cursorLine;
+    int cursorColumn;
+
+    td->getCharacterPosition(cursorPos, cursorLine, cursorColumn, false);
+    Character cursorCharacter = td->getCursorCharacter( std::min(cursorColumn, td->columns() - 1), cursorLine);
+    painter.setPen(QPen(cursorCharacter.foregroundColor.color(td->colorTable())));
+
+    // iterate over hotspots identified by the display's currently active filters
+    // and draw appropriate visuals to indicate the presence of the hotspot
+
+    const auto spots = hotSpots();
+    int urlNumber;
+    int urlNumInc;
+
+    // TODO: Remove _reverseUrllHints from TerminalDisplay.
+    if (false) { // TODO: Access reverseUrlHints from the profile, here.
+        urlNumber = count(HotSpot::Link);
+        urlNumInc = -1;
+    } else {
+        urlNumber = 0;
+        urlNumInc = 1;
+    }
+
+    for (const auto &spot : spots) {
+        QRegion region;
+        if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl) {
+            QPair<QRegion, QRect> spotRegion = spot->region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect());
+            region = spotRegion.first;
+            QRect r = spotRegion.second;
+
+            // TODO: Move this paint code to HotSpot->drawHint();
+            // TODO: Fix the Url Hints access from the Profile.
+            if (/* _showUrlHint */ false && urlNumber >= 0 && urlNumber < 10 && spot->type() == HotSpot::Link) {
+                // Position at the beginning of the URL
+                QRect hintRect(*region.begin());
+                hintRect.setWidth(r.height());
+                painter.fillRect(hintRect, QColor(0, 0, 0, 128));
+                painter.setPen(Qt::white);
+                painter.drawRect(hintRect.adjusted(0, 0, -1, -1));
+                painter.drawText(hintRect, Qt::AlignCenter, QString::number(urlNumber));
+
+                urlNumber += urlNumInc;
+            }
+        }
+
+        if (spot->startLine() < 0 || spot->endLine() < 0) {
+            qDebug() << "ERROR, invalid hotspot:";
+            spot->debug();
+        }
+
+        for (int line = spot->startLine() ; line <= spot->endLine() ; line++) {
+            int startColumn = 0;
+            int endColumn = td->columns() - 1; // TODO use number of _columns which are actually
+            // occupied on this line rather than the width of the
+            // display in _columns
+
+            // Check image size so _image[] is valid (see makeImage)
+            if (endColumn >= td->columns() || line >= td->lines()) {
+                break;
+            }
+
+            // ignore whitespace at the end of the lines
+            while (td->getCursorCharacter(endColumn, line).isSpace() && endColumn > 0) {
+                endColumn--;
+            }
+
+            // increment here because the column which we want to set 'endColumn' to
+            // is the first whitespace character at the end of the line
+            endColumn++;
+
+            if (line == spot->startLine()) {
+                startColumn = spot->startColumn();
+            }
+            if (line == spot->endLine()) {
+                endColumn = spot->endColumn();
+            }
+
+            // TODO: resolve this comment with the new margin/center code
+            // subtract one pixel from
+            // the right and bottom so that
+            // we do not overdraw adjacent
+            // hotspots
+            //
+            // subtracting one pixel from all sides also prevents an edge case where
+            // moving the mouse outside a link could still leave it underlined
+            // because the check below for the position of the cursor
+            // finds it on the border of the target area
+            QRect r;
+            r.setCoords(startColumn * td->fontWidth() + td->contentRect().left(),
+                        line * td->fontHeight() + td->contentRect().top(),
+                        endColumn * td->fontWidth() + td->contentRect().left() - 1,
+                        (line + 1)* td->fontHeight() + td->contentRect().top() - 1);
+
+            // Underline link hotspots
+            // TODO: Fix accessing the urlHint here.
+            // TODO: Move this code to UrlFilterHotSpot.
+            const bool hasMouse = region.contains(td->mapFromGlobal(QCursor::pos()));
+            if ((spot->type() == HotSpot::Link && /*_showUrlHint*/ false) || hasMouse) {
+                QFontMetrics metrics(td->font());
+
+                // find the baseline (which is the invisible line that the characters in the font sit on,
+                // with some having tails dangling below)
+                const int baseline = r.bottom() - metrics.descent();
+                // find the position of the underline below that
+                const int underlinePos = baseline + metrics.underlinePos();
+                painter.drawLine(r.left() , underlinePos, r.right() , underlinePos);
+
+                // Marker hotspots simply have a transparent rectangular shape
+                // drawn on top of them
+            } else if (spot->type() == HotSpot::Marker) {
+                //TODO - Do not use a hardcoded color for this
+                const bool isCurrentResultLine = (td->screenWindow()->currentResultLine() == (spot->startLine() + td->screenWindow()->currentLine()));
+                QColor color = isCurrentResultLine ? QColor(255, 255, 0, 120) : QColor(255, 0, 0, 120);
+                painter.fillRect(r, color);
+            }
+        }
+    }
+}
+

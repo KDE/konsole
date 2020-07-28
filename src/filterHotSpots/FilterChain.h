@@ -29,6 +29,7 @@
 #include "HotSpot.h"
 
 class QLeaveEvent;
+class QPainter;
 
 namespace Konsole
 {
@@ -91,6 +92,8 @@ public:
     void mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev, int charLine, int charColumn);
     void keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn);
     void leaveEvent(TerminalDisplay *td, QEvent *ev);
+
+    void paint(TerminalDisplay *td, QPainter &painter);
 protected:
     QList<Filter *> _filters;
     TerminalDisplay *_terminalDisplay;

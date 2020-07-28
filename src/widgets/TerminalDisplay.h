@@ -386,6 +386,11 @@ public:
     QRect imageToWidget(const QRect &imageArea) const;
     QRect widgetToImage(const QRect &widgetArea) const;
 
+    // maps a point on the widget to the position ( ie. line and column )
+    // of the character at that point. When the edge is true, it maps to
+    // a character which left edge is closest to the point.
+    void getCharacterPosition(const QPoint &widgetPoint, int &line, int &column, bool edge) const;
+
 public Q_SLOTS:
     /**
      * Scrolls current ScreenWindow
@@ -525,6 +530,7 @@ public Q_SLOTS:
 
     // Used for requestPrint
     void printScreen();
+    Character getCursorCharacter(int column, int line);
 
 Q_SIGNALS:
     void requestToggleExpansion();
@@ -683,10 +689,6 @@ private:
     // --
 
 
-    // maps a point on the widget to the position ( ie. line and column )
-    // of the character at that point. When the edge is true, it maps to
-    // a character which left edge is closest to the point.
-    void getCharacterPosition(const QPoint &widgetPoint, int &line, int &column, bool edge) const;
 
     // the area where the preedit string for input methods will be draw
     QRect preeditRect() const;

@@ -1415,134 +1415,8 @@ void TerminalDisplay::paintFilters(QPainter& painter)
         return;
     }
 
-    // get color of character under mouse and use it to draw
-    // lines for filters
-    QPoint cursorPos = mapFromGlobal(QCursor::pos());
-    int cursorLine;
-    int cursorColumn;
 
-    getCharacterPosition(cursorPos, cursorLine, cursorColumn, false);
-    Character cursorCharacter = _image[loc(qMin(cursorColumn, _columns - 1), cursorLine)];
-
-    painter.setPen(QPen(cursorCharacter.foregroundColor.color(_colorTable)));
-
-    // iterate over hotspots identified by the display's currently active filters
-    // and draw appropriate visuals to indicate the presence of the hotspot
-
-    const auto spots = _filterChain->hotSpots();
-    int urlNumber;
-    int urlNumInc;
-    if (_reverseUrlHints) {
-        urlNumber = _filterChain->count(HotSpot::Link);
-        urlNumInc = -1;
-    } else {
-        urlNumber = 0;
-        urlNumInc = 1;
-    }
-
-    for (const auto &spot : spots) {
-        QRegion region;
-        if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl) {
-            QPair<QRegion, QRect> spotRegion = spot->region(_fontWidth, _fontHeight, _columns, _contentRect);
-            region = spotRegion.first;
-            QRect r = spotRegion.second;
-
-            // TODO: Move this paint code to HotSpot->drawHint();
-            if (_showUrlHint && spot->type() == HotSpot::Link) {
-                if (urlNumber >= 0 && urlNumber < 10) {
-                    // Position at the beginning of the URL
-                    QRect hintRect(*region.begin());
-                    hintRect.setWidth(r.height());
-                    painter.fillRect(hintRect, QColor(0, 0, 0, 128));
-                    painter.setPen(Qt::white);
-                    painter.drawRect(hintRect.adjusted(0, 0, -1, -1));
-                    painter.drawText(hintRect, Qt::AlignCenter, QString::number(urlNumber));
-                }
-                urlNumber += urlNumInc;
-            }
-        }
-
-        if (spot->startLine() < 0 || spot->endLine() < 0) {
-            qDebug() << "ERROR, invalid hotspot:";
-            spot->debug();
-        }
-        for (int line = spot->startLine() ; line <= spot->endLine() ; line++) {
-            int startColumn = 0;
-            int endColumn = _columns - 1; // TODO use number of _columns which are actually
-            // occupied on this line rather than the width of the
-            // display in _columns
-
-            // Check image size so _image[] is valid (see makeImage)
-            if (endColumn >= _columns || line >= _lines) {
-                break;
-            }
-
-            // ignore whitespace at the end of the lines
-            while (_image[loc(endColumn, line)].isSpace() && endColumn > 0) {
-                endColumn--;
-            }
-
-            // increment here because the column which we want to set 'endColumn' to
-            // is the first whitespace character at the end of the line
-            endColumn++;
-
-            if (line == spot->startLine()) {
-                startColumn = spot->startColumn();
-            }
-            if (line == spot->endLine()) {
-                endColumn = spot->endColumn();
-            }
-
-            // TODO: resolve this comment with the new margin/center code
-            // subtract one pixel from
-            // the right and bottom so that
-            // we do not overdraw adjacent
-            // hotspots
-            //
-            // subtracting one pixel from all sides also prevents an edge case where
-            // moving the mouse outside a link could still leave it underlined
-            // because the check below for the position of the cursor
-            // finds it on the border of the target area
-            QRect r;
-            r.setCoords(startColumn * _fontWidth + _contentRect.left(),
-                        line * _fontHeight + _contentRect.top(),
-                        endColumn * _fontWidth + _contentRect.left() - 1,
-                        (line + 1)*_fontHeight + _contentRect.top() - 1);
-
-            // Underline link hotspots
-            const bool hasMouse = region.contains(mapFromGlobal(QCursor::pos()));
-            if ((spot->type() == HotSpot::Link && _showUrlHint) || hasMouse) {
-                QFontMetrics metrics(font());
-
-                // find the baseline (which is the invisible line that the characters in the font sit on,
-                // with some having tails dangling below)
-                const int baseline = r.bottom() - metrics.descent();
-                // find the position of the underline below that
-                const int underlinePos = baseline + metrics.underlinePos();
-                painter.drawLine(r.left() , underlinePos, r.right() , underlinePos);
-
-                // Marker hotspots simply have a transparent rectangular shape
-                // drawn on top of them
-            } else if (spot->type() == HotSpot::Marker) {
-                //TODO - Do not use a hardcoded color for this
-                const bool isCurrentResultLine = (_screenWindow->currentResultLine() == (spot->startLine() + _screenWindow->currentLine()));
-                QColor color = isCurrentResultLine ? QColor(255, 255, 0, 120) : QColor(255, 0, 0, 120);
-                painter.fillRect(r, color);
-            } else if (spot->type() == HotSpot::EscapedUrl) {
-                /* Always underline escaped links, it's the only way
-                 *to recognize that this is not just random bytes in
-                 * the screen. */
-                QFontMetrics metrics(font());
-
-                // find the baseline (which is the invisible line that the characters in the font sit on,
-                // with some having tails dangling below)
-                const int baseline = r.bottom() - metrics.descent();
-                // find the position of the underline below that
-                const int underlinePos = baseline + metrics.underlinePos();
-                painter.drawLine(r.left() , underlinePos, r.right() , underlinePos);
-            }
-        }
-    }
+    _filterChain->paint(this, painter);
 }
 
 static uint baseCodePoint(const Character &ch) {
@@ -4066,3 +3940,9 @@ void TerminalDisplay::printScreen()
     };
     KonsolePrintManager::printRequest(lambda, this);
 }
+
+Character TerminalDisplay::getCursorCharacter(int column, int line)
+{
+    return _image[loc(column, line)];
+}
+
