@@ -26,14 +26,15 @@
 #include <KNS3/Entry>
 
 // Konsole
+#include "colorscheme/ColorScheme.h"
+#include "colorscheme/ColorSchemeEditor.h"
+#include "colorscheme/ColorSchemeViewDelegate.h"
+
 #include "Profile.h"
 #include "ProfileGroup.h"
 #include "Enumeration.h"
-#include "ColorScheme.h"
-#include "ColorSchemeEditor.h"
 #include "KeyboardTranslatorManager.h"
 #include "FontDialog.h"
-#include "ColorSchemeViewDelegate.h"
 #include "LabelsAligner.h"
 
 class KPluralHandlingSpinBox;

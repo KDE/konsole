@@ -81,6 +81,7 @@ add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
 
 target_link_libraries(konsoleprivate_core ${konsole_LIBS})
 
+add_subdirectory(colorscheme)
 add_subdirectory(profile)
 
 set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
@@ -88,13 +89,8 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         hsluv.c
                         BookmarkHandler.cpp
                         BookmarkMenu.cpp
-                        ColorScheme.cpp
-                        ColorSchemeWallpaper.cpp
-                        ColorSchemeManager.cpp
-                        ColorSchemeEditor.cpp
                         CopyInputDialog.cpp
                         CheckableSessionModel.cpp
-                        ColorSchemeViewDelegate.cpp
                         LabelsAligner.cpp
                         FontDialog.cpp
                         Emulation.cpp
@@ -179,20 +175,21 @@ kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
 ### Konsole Application
 
-ki18n_wrap_ui(konsoleprivate_SRCS ColorSchemeEditor.ui
-                                CopyInputDialog.ui
-                                KeyBindingEditor.ui
-                                RenameTabDialog.ui
-                                widgets/RenameTabWidget.ui
-                                HistorySizeDialog.ui
-                                widgets/HistorySizeWidget.ui
-                                PrintOptions.ui
-                                settings/TemporaryFilesSettings.ui
-                                settings/GeneralSettings.ui
-                                settings/PartInfo.ui
-                                settings/ProfileSettings.ui
-                                settings/TabBarSettings.ui
-                                settings/ThumbnailsSettings.ui)
+ki18n_wrap_ui(konsoleprivate_SRCS
+    CopyInputDialog.ui
+    KeyBindingEditor.ui
+    RenameTabDialog.ui
+    widgets/RenameTabWidget.ui
+    HistorySizeDialog.ui
+    widgets/HistorySizeWidget.ui
+    PrintOptions.ui
+    settings/TemporaryFilesSettings.ui
+    settings/GeneralSettings.ui
+    settings/PartInfo.ui
+    settings/ProfileSettings.ui
+    settings/TabBarSettings.ui
+    settings/ThumbnailsSettings.ui
+)
 
 # add the resource files for the ui files
 qt5_add_resources( konsoleprivate_SRCS ../desktop/konsole.qrc)
@@ -203,6 +200,7 @@ generate_export_header(konsoleprivate BASE_NAME konsoleprivate)
 target_link_libraries(konsoleprivate
     PUBLIC
     konsoleprivate_core
+    konsolecolorscheme
     konsoleprofile
     ${konsole_LIBS}
 )

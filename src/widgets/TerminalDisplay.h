@@ -30,7 +30,7 @@
 #include "Character.h"
 #include "konsoleprivate_export.h"
 #include "ScreenWindow.h"
-#include "ColorScheme.h"
+#include "colorscheme/ColorScheme.h"
 #include "Enumeration.h"
 #include "ScrollState.h"
 #include "TerminalHeaderBar.h"

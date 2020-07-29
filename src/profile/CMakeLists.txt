@@ -25,4 +25,5 @@ target_link_libraries(
     konsoleprofile
     ${konsole_LIBS}
     konsoleprivate_core
+    konsolecolorscheme
 )

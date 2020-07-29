@@ -51,7 +51,8 @@
 #include "ui_EditProfileKeyboardPage.h"
 #include "ui_EditProfileMousePage.h"
 #include "ui_EditProfileAdvancedPage.h"
-#include "ColorSchemeManager.h"
+
+#include "colorscheme/ColorSchemeManager.h"
 #include "KeyBindingEditor.h"
 #include "KeyboardTranslator.h"
 #include "KeyboardTranslatorManager.h"

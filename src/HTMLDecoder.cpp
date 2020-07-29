@@ -23,7 +23,7 @@
 #include "HTMLDecoder.h"
 
 // Konsole
-#include "ColorSchemeManager.h"
+#include "colorscheme/ColorSchemeManager.h"
 #include "ExtendedCharTable.h"
 
 // Qt
