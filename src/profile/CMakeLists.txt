@@ -26,4 +26,5 @@ target_link_libraries(
     ${konsole_LIBS}
     konsoleprivate_core
     konsolecolorscheme
+    keyboardtranslator
 )

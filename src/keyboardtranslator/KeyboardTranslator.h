@@ -29,7 +29,7 @@
 #include <QString>
 
 // Konsole
-#include "konsoleprivate_export.h"
+#include "../konsoleprivate_export.h"
 
 class QIODevice;
 class QTextStream;

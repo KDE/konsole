@@ -26,7 +26,7 @@
 #include "KeyboardTranslatorReader.h"
 #include "KeyboardTranslatorWriter.h"
 
-#include "konsoledebug.h"
+#include "../konsoledebug.h"
 
 // Qt
 #include <QFile>
@@ -75,7 +75,7 @@ bool KeyboardTranslatorManager::deleteTranslator(const QString &name)
     if (QFile::remove(path)) {
         _translators.remove(name);
         return true;
-    } 
+    }
     qCDebug(KonsoleDebug) << "Failed to remove translator - " << path;
     return false;
 }
@@ -203,7 +203,7 @@ KeyboardTranslator *KeyboardTranslatorManager::loadTranslator(QIODevice *source,
 
     if (!reader.parseError()) {
         return translator;
-    } 
+    }
     delete translator;
     return nullptr;
 }

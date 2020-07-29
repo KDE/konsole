@@ -31,9 +31,9 @@
 
 // Konsole
 #include "ui_KeyBindingEditor.h"
-#include "KeyboardTranslator.h"
-#include "KeyboardTranslatorReader.h"
-#include "KeyboardTranslatorManager.h"
+#include "keyboardtranslator/KeyboardTranslator.h"
+#include "keyboardtranslator/KeyboardTranslatorReader.h"
+#include "keyboardtranslator/KeyboardTranslatorManager.h"
 
 #include "profile/EditProfileDialog.h"
 

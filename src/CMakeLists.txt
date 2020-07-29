@@ -76,12 +76,17 @@ endif()
 
 # This konsoleprivate_core is the "core" library that depends in nothing from konsole itself
 # so we can start to detangle the codebase.
-set(konsoleprivate_core_SRCS ShellCommand.cpp)
+set(konsoleprivate_core_SRCS
+    ShellCommand.cpp
+    WindowSystemInfo.cpp
+)
+
 add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
 
 target_link_libraries(konsoleprivate_core ${konsole_LIBS})
 
 add_subdirectory(colorscheme)
+add_subdirectory(keyboardtranslator)
 add_subdirectory(profile)
 
 set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
@@ -122,11 +127,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         widgets/HistorySizeWidget.cpp
                         widgets/IncrementalSearchBar.cpp
                         KeyBindingEditor.cpp
-                        KeyboardTranslator.cpp
-                        FallbackKeyboardTranslator.cpp
-                        KeyboardTranslatorReader.cpp
-                        KeyboardTranslatorWriter.cpp
-                        KeyboardTranslatorManager.cpp
                         ProcessInfo.cpp
                         NullProcessInfo.cpp
                         UnixProcessInfo.cpp
@@ -161,7 +161,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         Vt102Emulation.cpp
                         ZModemDialog.cpp
                         PrintOptions.cpp
-                        WindowSystemInfo.cpp
                         CharacterWidth.cpp
                         CompositeWidgetFocusWatcher.cpp
                         AutoScrollHandler.cpp
@@ -201,6 +200,7 @@ target_link_libraries(konsoleprivate
     PUBLIC
     konsoleprivate_core
     konsolecolorscheme
+    keyboardtranslator
     konsoleprofile
     ${konsole_LIBS}
 )

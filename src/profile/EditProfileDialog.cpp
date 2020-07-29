@@ -53,9 +53,11 @@
 #include "ui_EditProfileAdvancedPage.h"
 
 #include "colorscheme/ColorSchemeManager.h"
+
+#include "keyboardtranslator/KeyboardTranslator.h"
+#include "keyboardtranslator/KeyboardTranslatorManager.h"
+
 #include "KeyBindingEditor.h"
-#include "KeyboardTranslator.h"
-#include "KeyboardTranslatorManager.h"
 #include "ProfileManager.h"
 #include "ShellCommand.h"
 #include "WindowSystemInfo.h"

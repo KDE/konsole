@@ -26,8 +26,8 @@
 #include <QKeyEvent>
 
 // Konsole
-#include "KeyboardTranslator.h"
-#include "KeyboardTranslatorManager.h"
+#include "keyboardtranslator/KeyboardTranslator.h"
+#include "keyboardtranslator/KeyboardTranslatorManager.h"
 #include "Screen.h"
 #include "ScreenWindow.h"
 

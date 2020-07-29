@@ -22,7 +22,7 @@
 // Own
 #include "KeyboardTranslator.h"
 
-#include "konsoledebug.h"
+#include "../konsoledebug.h"
 
 // System
 #include <cctype>

@@ -27,7 +27,7 @@
 #include <QStringList>
 
 // Konsole
-#include "konsoleprivate_export.h"
+#include "../konsoleprivate_export.h"
 #include "KeyboardTranslator.h"
 
 class QIODevice;

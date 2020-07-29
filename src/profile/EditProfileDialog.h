@@ -33,7 +33,7 @@
 #include "Profile.h"
 #include "ProfileGroup.h"
 #include "Enumeration.h"
-#include "KeyboardTranslatorManager.h"
+#include "keyboardtranslator/KeyboardTranslatorManager.h"
 #include "FontDialog.h"
 #include "LabelsAligner.h"
 

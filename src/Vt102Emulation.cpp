@@ -36,7 +36,7 @@
 #include <KLocalizedString>
 
 // Konsole
-#include "KeyboardTranslator.h"
+#include "keyboardtranslator/KeyboardTranslator.h"
 #include "session/SessionController.h"
 #include "widgets/TerminalDisplay.h"
 

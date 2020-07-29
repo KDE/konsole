@@ -21,7 +21,7 @@
 
 #include "KeyboardTranslatorReader.h"
 
-#include "konsoledebug.h"
+#include "../konsoledebug.h"
 
 // Qt
 #include <QBuffer>
