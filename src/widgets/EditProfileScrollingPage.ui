@@ -138,7 +138,7 @@
       </spacer>
      </item>
      <item row="5" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="labelSize">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
          <horstretch>0</horstretch>
