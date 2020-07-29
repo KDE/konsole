@@ -25,7 +25,7 @@
 // Konsole
 #include "../widgets/TerminalDisplay.h"
 #include "../CharacterColor.h"
-#include "../ColorScheme.h"
+#include "colorscheme/ColorScheme.h"
 
 using namespace Konsole;
 

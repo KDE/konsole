@@ -78,11 +78,11 @@
 #include "history/HistoryTypeFile.h"
 #include "history/HistoryTypeNone.h"
 #include "history/compact/CompactHistoryType.h"
-#include "profile/EditProfileDialog.h"
 #include "profile/ProfileList.h"
 #include "session/Session.h"
 #include "session/SessionGroup.h"
 #include "session/SessionManager.h"
+#include "widgets/EditProfileDialog.h"
 #include "widgets/IncrementalSearchBar.h"
 #include "widgets/TerminalDisplay.h"
 

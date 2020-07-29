@@ -27,9 +27,9 @@
 #include <QKeyEvent>
 
 // Konsole
-#include "profile/EditProfileDialog.h"
 #include "profile/ProfileManager.h"
 #include "session/Session.h"
+#include "widgets/EditProfileDialog.h"
 #include "widgets/TerminalDisplay.h"
 #include "session/SessionManager.h"
 #include "session/SessionController.h"

@@ -35,7 +35,7 @@
 #include "keyboardtranslator/KeyboardTranslatorReader.h"
 #include "keyboardtranslator/KeyboardTranslatorManager.h"
 
-#include "profile/EditProfileDialog.h"
+#include "widgets/EditProfileDialog.h"
 
 using namespace Konsole;
 

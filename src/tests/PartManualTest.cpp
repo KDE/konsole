@@ -41,7 +41,7 @@
 // Konsole
 #include "../Pty.h"
 #include "../session/Session.h"
-#include "../KeyboardTranslator.h"
+#include "keyboardtranslator/KeyboardTranslator.h"
 
 using namespace Konsole;
 

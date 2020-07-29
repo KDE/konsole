@@ -73,7 +73,7 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
     list(APPEND konsole_LIBS util)
 endif()
 
-
+# TODO: Move this to an internal folder if it grows too much.
 # This konsoleprivate_core is the "core" library that depends in nothing from konsole itself
 # so we can start to detangle the codebase.
 set(konsoleprivate_core_SRCS
@@ -89,8 +89,19 @@ ecm_qt_declare_logging_category(
 )
 
 add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
-
 target_link_libraries(konsoleprivate_core ${konsole_LIBS})
+
+set(konsolehelpers_SRCS
+    LabelsAligner.cpp
+)
+add_library(konsolehelpers
+    STATIC
+    ${konsolehelpers_SRCS}
+)
+target_link_libraries(konsolehelpers
+    Qt5::Core
+    Qt5::Widgets
+)
 
 add_subdirectory(colorscheme)
 add_subdirectory(keyboardtranslator)
@@ -98,19 +109,45 @@ add_subdirectory(profile)
 
 set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         ${windowadaptors_SRCS}
-                        hsluv.c
+                        AutoScrollHandler.cpp
                         BookmarkHandler.cpp
                         BookmarkMenu.cpp
-                        CopyInputDialog.cpp
+                        CharacterFormat.cpp
+                        CharacterWidth.cpp
                         CheckableSessionModel.cpp
-                        LabelsAligner.cpp
-                        FontDialog.cpp
+                        CompositeWidgetFocusWatcher.cpp
+                        CopyInputDialog.cpp
                         Emulation.cpp
-                        widgets/DetachableTabBar.cpp
+                        ExtendedCharTable.cpp
+                        FontDialog.cpp
+                        hsluv.c
+                        HTMLDecoder.cpp
+                        HistorySizeDialog.cpp
+                        KeyBindingEditor.cpp
+                        LabelsAligner.cpp
+                        LineBlockCharacters.cpp
+                        NullProcessInfo.cpp
+                        PlainTextDecoder.cpp
+                        PrintOptions.cpp
+                        ProcessInfo.cpp
+                        Pty.cpp
+                        RenameTabDialog.cpp
+                        SSHProcessInfo.cpp
+                        SaveHistoryTask.cpp
+                        Screen.cpp
+                        ScreenWindow.cpp
+                        ScrollState.cpp
+                        SearchHistoryTask.cpp
+                        ShouldApplyProperty.cpp
+                        UnixProcessInfo.cpp
+                        ViewManager.cpp
+                        ViewProperties.cpp
+                        Vt102Emulation.cpp
+                        ZModemDialog.cpp
                         filterHotSpots/FileFilter.cpp
                         filterHotSpots/FileFilterHotspot.cpp
-                        filterHotSpots/FilterChain.cpp
                         filterHotSpots/Filter.cpp
+                        filterHotSpots/FilterChain.cpp
                         filterHotSpots/HotSpot.cpp
                         filterHotSpots/RegExpFilter.cpp
                         filterHotSpots/RegExpFilterHotspot.cpp
@@ -121,57 +158,32 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         history/HistoryScroll.cpp
                         history/HistoryScrollFile.cpp
                         history/HistoryScrollNone.cpp
-                        CharacterFormat.cpp
+                        history/HistoryType.cpp
+                        history/HistoryTypeFile.cpp
+                        history/HistoryTypeNone.cpp
                         history/compact/CompactHistoryBlock.cpp
                         history/compact/CompactHistoryBlockList.cpp
                         history/compact/CompactHistoryLine.cpp
                         history/compact/CompactHistoryScroll.cpp
-                        history/HistoryType.cpp
-                        history/HistoryTypeNone.cpp
-                        history/HistoryTypeFile.cpp
                         history/compact/CompactHistoryType.cpp
-                        HistorySizeDialog.cpp
+                        session/Session.cpp
+                        session/SessionController.cpp
+                        session/SessionDisplayConnection.cpp
+                        session/SessionGroup.cpp
+                        session/SessionListModel.cpp
+                        session/SessionManager.cpp
+                        session/SessionTask.cpp
+                        widgets/DetachableTabBar.cpp
+                        widgets/EditProfileDialog.cpp
                         widgets/HistorySizeWidget.cpp
                         widgets/IncrementalSearchBar.cpp
-                        KeyBindingEditor.cpp
-                        ProcessInfo.cpp
-                        NullProcessInfo.cpp
-                        UnixProcessInfo.cpp
-                        SSHProcessInfo.cpp
-                        Pty.cpp
-                        RenameTabDialog.cpp
                         widgets/RenameTabWidget.cpp
-                        SaveHistoryTask.cpp
-                        SearchHistoryTask.cpp
-                        Screen.cpp
-                        ScreenWindow.cpp
-                        ScrollState.cpp
-                        session/Session.cpp
-                        session/SessionGroup.cpp
-                        session/SessionController.cpp
-                        session/SessionManager.cpp
-                        ShouldApplyProperty.cpp
-                        session/SessionListModel.cpp
-                        session/SessionTask.cpp
                         widgets/TabTitleFormatButton.cpp
-                        PlainTextDecoder.cpp
-                        HTMLDecoder.cpp
-                        ExtendedCharTable.cpp
                         widgets/TerminalDisplay.cpp
                         widgets/TerminalDisplayAccessible.cpp
                         widgets/TerminalHeaderBar.cpp
-                        LineBlockCharacters.cpp
                         widgets/ViewContainer.cpp
-                        ViewManager.cpp
-                        ViewProperties.cpp
                         widgets/ViewSplitter.cpp
-                        Vt102Emulation.cpp
-                        ZModemDialog.cpp
-                        PrintOptions.cpp
-                        CharacterWidth.cpp
-                        CompositeWidgetFocusWatcher.cpp
-                        AutoScrollHandler.cpp
-                        session/SessionDisplayConnection.cpp
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
 
@@ -181,18 +193,25 @@ kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
 ki18n_wrap_ui(konsoleprivate_SRCS
     CopyInputDialog.ui
-    KeyBindingEditor.ui
-    RenameTabDialog.ui
-    widgets/RenameTabWidget.ui
     HistorySizeDialog.ui
-    widgets/HistorySizeWidget.ui
+    KeyBindingEditor.ui
     PrintOptions.ui
-    settings/TemporaryFilesSettings.ui
+    RenameTabDialog.ui
     settings/GeneralSettings.ui
     settings/PartInfo.ui
     settings/ProfileSettings.ui
     settings/TabBarSettings.ui
+    settings/TemporaryFilesSettings.ui
     settings/ThumbnailsSettings.ui
+    widgets/EditProfileAdvancedPage.ui
+    widgets/EditProfileAppearancePage.ui
+    widgets/EditProfileGeneralPage.ui
+    widgets/EditProfileKeyboardPage.ui
+    widgets/EditProfileMousePage.ui
+    widgets/EditProfileScrollingPage.ui
+    widgets/EditProfileTabsPage.ui
+    widgets/HistorySizeWidget.ui
+    widgets/RenameTabWidget.ui
 )
 
 # add the resource files for the ui files
@@ -206,6 +225,7 @@ target_link_libraries(konsoleprivate
     konsoleprivate_core
     konsolecolorscheme
     keyboardtranslator
+    konsolehelpers
     konsoleprofile
     ${konsole_LIBS}
 )
