@@ -81,6 +81,13 @@ set(konsoleprivate_core_SRCS
     WindowSystemInfo.cpp
 )
 
+ecm_qt_declare_logging_category(
+    konsoleprivate_core_SRCS
+    HEADER konsoledebug.h
+    IDENTIFIER KonsoleDebug
+    CATEGORY_NAME org.kde.konsole
+)
+
 add_library(konsoleprivate_core STATIC ${konsoleprivate_core_SRCS})
 
 target_link_libraries(konsoleprivate_core ${konsole_LIBS})
@@ -167,8 +174,6 @@ set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
                         session/SessionDisplayConnection.cpp
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                         ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
-
-ecm_qt_declare_logging_category(konsoleprivate_SRCS HEADER konsoledebug.h IDENTIFIER KonsoleDebug CATEGORY_NAME org.kde.konsole)
 
 kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
