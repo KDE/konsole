@@ -367,6 +367,8 @@ void Screen::restoreCursor()
     updateEffectiveRendition();
 }
 
+#include <QDebug>
+
 void Screen::resizeImage(int new_lines, int new_columns)
 {
     if ((new_lines == _lines) && (new_columns == _columns)) {
@@ -382,23 +384,61 @@ void Screen::resizeImage(int new_lines, int new_columns)
         }
     }
 
-    // create new screen _lines and copy from old to new
+    if (new_columns < _columns) {
+        QVector<ImageLine> images;
+        // First copy everything.
+        for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++) {
+            images.push_back(_screenLines[i]);
+        }
 
-    auto newScreenLines = new ImageLine[new_lines + 1];
-    for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++) {
-        newScreenLines[i] = _screenLines[i];
+        // Then move the data to lines below.
+        int currentPos = 0;
+        while (currentPos != images.count()) {
+
+            // If we are in the last line, append a new one.
+            const bool shouldCopy = images[currentPos].size() > new_columns;
+            if (shouldCopy && images.count() - 1 == currentPos) {
+                images.append(ImageLine{});
+            }
+
+            // Now copy from the current line, to the next one.
+            if (shouldCopy) {
+                auto values = images[currentPos].mid(new_columns);
+                images[currentPos].remove(new_columns, values.size());
+                values.append(images[currentPos+1]);
+                images[currentPos+1] = values;
+            }
+            currentPos += 1;
+        }
+
+        // Now set the correct image based on the moved lines.
+        auto newScreenLines = new ImageLine[new_lines + 1];
+        for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++) {
+            newScreenLines[i] = images[i];
+        }
+        delete[] _screenLines;
+        _screenLines = newScreenLines;
+    } else if (new_columns > _columns) {
+
+
+    } else {
+        auto newScreenLines = new ImageLine[new_lines + 1];
+        for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++) {
+            newScreenLines[i] = _screenLines[i];
+        }
+
+        delete[] _screenLines;
+        _screenLines = newScreenLines;
     }
+
+    clearSelection();
+    _screenLinesSize = new_lines;
 
     _lineProperties.resize(new_lines + 1);
     for (int i = _lines; (i > 0) && (i < new_lines + 1); i++) {
         _lineProperties[i] = LINE_DEFAULT;
     }
 
-    clearSelection();
-
-    delete[] _screenLines;
-    _screenLines = newScreenLines;
-    _screenLinesSize = new_lines;
 
     _lines = new_lines;
     _columns = new_columns;

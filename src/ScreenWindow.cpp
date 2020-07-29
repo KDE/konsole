@@ -290,7 +290,7 @@ QRect ScreenWindow::scrollRegion() const
 
     if (atEndOfOutput() && equalToScreenSize) {
         return _screen->lastScrolledRegion();
-    } 
+    }
     return {0, 0, windowColumns(), windowLines()};
 }
 
