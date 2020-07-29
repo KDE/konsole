@@ -6,7 +6,7 @@ set(konsole_colorscheme_SRCS
     ColorSchemeViewDelegate.cpp
 )
 
-ki18n_wrap_ui(konsoleprofile_SRCS
+ki18n_wrap_ui(konsole_colorscheme_SRCS
     ColorSchemeEditor.ui
 )
 
@@ -20,3 +20,4 @@ target_link_libraries(
     ${konsole_LIBS}
     konsoleprivate_core
 )
+
