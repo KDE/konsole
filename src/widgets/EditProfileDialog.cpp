@@ -154,7 +154,6 @@ EditProfileDialog::EditProfileDialog(QWidget *parent)
     _pages[appearancePageItem] = Page(&EditProfileDialog::setupAppearancePage);
 
     LabelsAligner appearanceAligner(appearancePageWidget);
-    appearanceAligner.addLayout(dynamic_cast<QGridLayout *>(_appearanceUi->miscTabLayout));
     appearanceAligner.addLayout(dynamic_cast<QGridLayout *>(_appearanceUi->contentsGroup->layout()));
     appearanceAligner.updateLayouts();
     appearanceAligner.align();
