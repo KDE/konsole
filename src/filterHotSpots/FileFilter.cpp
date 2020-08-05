@@ -63,7 +63,7 @@ FileFilter::FileFilter(Session *session) :
          */
             QLatin1String("'[^']+'")             // Matches everything between single quotes.
             + QStringLiteral(R"RX(|"[^"]+")RX")      // Matches everything inside double quotes
-            + QStringLiteral(R"RX(|[\w%1]+)RX").arg(wordCharacters) // matches a contiguous line of alphanumeric characters plus some special ones defined in the profile.
+            + QStringLiteral(R"RX(|[\p{L}\w%1]+)RX").arg(wordCharacters) // matches a contiguous line of alphanumeric characters plus some special ones defined in the profile.
         ,
         QRegularExpression::DontCaptureOption);
     setRegExp(re);
