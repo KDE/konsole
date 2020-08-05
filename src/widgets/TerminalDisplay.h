@@ -915,6 +915,8 @@ private:
     static const int HIGHLIGHT_SCROLLED_LINES_WIDTH = 3;
 
     bool _hasCompositeFocus;
+    bool _displayVerticalLine;
+    int _displayVerticalLineAtChar;
 
     QSharedPointer<HotSpot> _currentlyHoveredHotspot;
 };

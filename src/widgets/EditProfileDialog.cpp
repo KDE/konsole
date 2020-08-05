@@ -784,6 +784,14 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     _appearanceUi->dimLabel->setEnabled(profile->dimWhenInactive());
     connect(_appearanceUi->dimValue, &QSlider::valueChanged,
             this, &Konsole::EditProfileDialog::setDimValue);
+
+    _appearanceUi->displayVerticalLine->setChecked(profile->verticalLine());
+    connect(_appearanceUi->displayVerticalLine, &QCheckBox::toggled,
+            this, &EditProfileDialog::setVerticalLine);
+
+    _appearanceUi->displayVerticalLineAtColumn->setValue(profile->verticalLineAtChar());
+    connect(_appearanceUi->displayVerticalLineAtColumn, QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &EditProfileDialog::setVerticalLineColumn);
 }
 
 void EditProfileDialog::setAntialiasText(bool enable)
@@ -803,6 +811,15 @@ void EditProfileDialog::toggleAllowLinkEscapeSequence(bool enable)
 void EditProfileDialog::linkEscapeSequenceTextsChanged()
 {
     updateTempProfileProperty(Profile::EscapedLinksSchema, _mouseUi->linkEscapeSequenceTexts->text());
+}
+void EditProfileDialog::setVerticalLine(bool value)
+{
+    updateTempProfileProperty(Profile::VerticalLine, value);
+}
+
+void EditProfileDialog::setVerticalLineColumn(int value)
+{
+    updateTempProfileProperty(Profile::VerticalLineAtChar, value);
 }
 
 void EditProfileDialog::setBoldIntense(bool enable)

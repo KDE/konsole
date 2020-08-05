@@ -144,7 +144,8 @@ private Q_SLOTS:
     void saveColorScheme(const ColorScheme &scheme, bool isNewScheme);
     void removeColorScheme();
     void gotNewColorSchemes(const KNS3::Entry::List &changedEntries);
-
+    void setVerticalLine(bool);
+    void setVerticalLineColumn(int);
     void toggleBlinkingCursor(bool);
     void setCursorShape(int);
     void autoCursorColor();

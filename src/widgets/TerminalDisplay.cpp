@@ -1345,6 +1345,14 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
         drawBackground(paint, rect, getBackgroundColor(), true /* use opacity setting */);
     }
 
+    if (_displayVerticalLine) {
+        const int x = (_fontWidth/2) + (_fontWidth * _displayVerticalLineAtChar);
+        const QColor lineColor = getForegroundColor();
+
+        paint.setPen(lineColor);
+        paint.drawLine(QPoint(x, 0), QPoint(x, height()));
+    }
+
     // only turn on text anti-aliasing, never turn on normal antialiasing
     // set https://bugreports.qt.io/browse/QTBUG-66036
     paint.setRenderHint(QPainter::TextAntialiasing, _antialiasText);
@@ -4147,6 +4155,9 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 
     // mouse wheel zoom
     _mouseWheelZoom = profile->mouseWheelZoomEnabled();
+
+    _displayVerticalLine = profile->verticalLine();
+    _displayVerticalLineAtChar = profile->verticalLineAtChar();
     setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
     _dimValue = profile->dimValue();
 }

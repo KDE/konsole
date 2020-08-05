@@ -471,47 +471,55 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QGridLayout" name="miscTabLayout" columnstretch="0,0">
+        <layout class="QGridLayout" name="miscTabLayout" columnstretch="0,0,0">
          <property name="spacing">
           <number>6</number>
          </property>
-         <item row="1" column="1">
-          <spacer>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>16</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
          <item row="2" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
           <widget class="QLabel" name="label">
            <property name="text">
             <string>Window:</string>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QCheckBox" name="dimWhenInactiveCheckbox">
+         <item row="2" column="1" colspan="2">
+          <widget class="QCheckBox" name="showTerminalSizeHintButton">
            <property name="toolTip">
-            <string>Indicate whether the window is active by dimming the colors</string>
+            <string>Show terminal size in columns and lines in the center of window after resizing</string>
            </property>
            <property name="text">
-            <string>Darken</string>
+            <string>Show hint for terminal size after resizing</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
+         <item row="5" column="1" colspan="2">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLabel" name="dimLabel">
+             <property name="text">
+              <string>Darkening strength:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSlider" name="dimValue">
+             <property name="maximum">
+              <number>255</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::NoTicks</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="4" column="0">
           <widget class="QLabel" name="label_10">
            <property name="text">
             <string>Inactive Terminals:</string>
@@ -521,7 +529,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0" colspan="2">
+         <item row="0" column="0" colspan="3">
           <widget class="QGroupBox" name="contentsGroup">
            <property name="title">
             <string comment="@title:group">Terminal contents</string>
@@ -663,7 +671,17 @@
            </layout>
           </widget>
          </item>
-         <item row="6" column="1">
+         <item row="4" column="1" colspan="2">
+          <widget class="QCheckBox" name="dimWhenInactiveCheckbox">
+           <property name="toolTip">
+            <string>Indicate whether the window is active by dimming the colors</string>
+           </property>
+           <property name="text">
+            <string>Darken</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
             <spacer name="horizontalSpacer">
@@ -680,40 +698,46 @@
            </item>
           </layout>
          </item>
-         <item row="2" column="1">
-          <widget class="QCheckBox" name="showTerminalSizeHintButton">
-           <property name="toolTip">
-            <string>Show terminal size in columns and lines in the center of window after resizing</string>
+         <item row="1" column="1">
+          <spacer>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
            </property>
-           <property name="text">
-            <string>Show hint for terminal size after resizing</string>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
            </property>
-          </widget>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>16</height>
+            </size>
+           </property>
+          </spacer>
          </item>
-         <item row="4" column="1">
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item row="3" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QLabel" name="dimLabel">
+            <widget class="QCheckBox" name="displayVerticalLine">
              <property name="text">
-              <string>Darkening strength:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <string>Display Vertical line at column:</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QSlider" name="dimValue">
-             <property name="maximum">
-              <number>255</number>
-             </property>
+            <widget class="QSpinBox" name="displayVerticalLineAtColumn"/>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
-             <property name="tickPosition">
-              <enum>QSlider::NoTicks</enum>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
              </property>
-            </widget>
+            </spacer>
            </item>
           </layout>
          </item>

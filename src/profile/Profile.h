@@ -319,6 +319,10 @@ public:
          * some weird ones like git:// and ssh:// but if the user wants he can enable.
          */
         EscapedLinksSchema,
+        /** Use Vertical Line At */
+        VerticalLine,
+        /** Vertical Line Pixel at */
+        VerticalLineAtChar
     };
 
     Q_ENUM(Property)
@@ -667,6 +671,16 @@ public:
     QString menuIndex() const
     {
         return property<QString>(Profile::MenuIndex);
+    }
+
+    bool verticalLine() const
+    {
+        return property<bool>(Profile::VerticalLine);
+    }
+
+    int verticalLineAtChar() const
+    {
+        return property<int>(Profile::VerticalLineAtChar);
     }
 
     int menuIndexAsInt() const;

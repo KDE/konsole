@@ -105,7 +105,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { BidiRenderingEnabled , "BidiRenderingEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { BlinkingCursorEnabled , "BlinkingCursorEnabled" , TERMINAL_GROUP , QVariant::Bool }
     , { BellMode , "BellMode" , TERMINAL_GROUP , QVariant::Int }
-
+    , { VerticalLine, "VerticalLine", TERMINAL_GROUP, QVariant::Bool }
+    , { VerticalLineAtChar, "VerticalLineAtChar", TERMINAL_GROUP, QVariant::Int }
     // Cursor
     , { UseCustomCursorColor , "UseCustomCursorColor" , CURSOR_GROUP , QVariant::Bool}
     , { CursorShape , "CursorShape" , CURSOR_GROUP , QVariant::Int}
@@ -233,6 +234,8 @@ void Profile::useFallback()
     setProperty(TabColor, QColor(QColor::Invalid));
     setProperty(AllowEscapedLinks, true);
     setProperty(EscapedLinksSchema, QStringLiteral("http://;https://;file://"));
+    setProperty(VerticalLine, false);
+    setProperty(VerticalLineAtChar, 80);
     // Fallback should not be shown in menus
     setHidden(true);
 }
