@@ -744,7 +744,7 @@ Q_SIGNALS:
      * Terminal is expected send "\033]11;rgb:RRRR/GGGG/BBBB\a" response.
      *
      * Originally implemented to support vim's background detection feature
-     * (without explictly setting 'bg=dark' within local/remote vimrc)
+     * (without explicitly setting 'bg=dark' within local/remote vimrc)
      */
     void getBackgroundColor();
 
