@@ -693,7 +693,7 @@
          <item row="4" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QLabel" name="label_11">
+            <widget class="QLabel" name="dimLabel">
              <property name="text">
               <string>Darkening strength:</string>
              </property>
@@ -795,14 +795,30 @@
      <y>249</y>
     </hint>
     <hint type="destinationlabel">
-     <x>205</x>
-     <y>277</y>
+     <x>461</x>
+     <y>288</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dimWhenInactiveCheckbox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>dimLabel</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>247</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>270</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="cursorColor"/>
   <buttongroup name="cursorShape"/>
+  <buttongroup name="cursorColor"/>
  </buttongroups>
 </ui>

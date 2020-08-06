@@ -774,6 +774,8 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
             &Konsole::EditProfileDialog::setDimWhenInactive);
 
     _appearanceUi->dimValue->setValue(profile->dimValue());
+    _appearanceUi->dimValue->setEnabled(profile->dimWhenInactive());
+    _appearanceUi->dimLabel->setEnabled(profile->dimWhenInactive());
     connect(_appearanceUi->dimValue, &QSlider::valueChanged,
             this, &Konsole::EditProfileDialog::setDimValue);
 }
