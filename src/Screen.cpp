@@ -790,6 +790,7 @@ void Screen::displayCharacter(uint c)
 
     // ensure current line vector has enough elements
     if (_screenLines[_cuY].size() < _cuX + w) {
+        _screenLines[_cuY].reserve(_columns);
         _screenLines[_cuY].resize(_cuX + w);
     }
 
@@ -1005,15 +1006,17 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
     //so it matters that we do the copy in the right order -
     //forwards if dest < sourceBegin or backwards otherwise.
     //(search the web for 'memmove implementation' for details)
+    const int destY = dest / _columns;
+    const int srcY = sourceBegin / _columns;
     if (dest < sourceBegin) {
         for (int i = 0; i <= lines; i++) {
-            _screenLines[(dest / _columns) + i ] = _screenLines[(sourceBegin / _columns) + i ];
-            _lineProperties[(dest / _columns) + i] = _lineProperties[(sourceBegin / _columns) + i];
+            _screenLines[destY + i] = std::move(_screenLines[srcY + i]);
+            _lineProperties[destY + i] = _lineProperties[srcY + i];
         }
     } else {
         for (int i = lines; i >= 0; i--) {
-            _screenLines[(dest / _columns) + i ] = _screenLines[(sourceBegin / _columns) + i ];
-            _lineProperties[(dest / _columns) + i] = _lineProperties[(sourceBegin / _columns) + i];
+            _screenLines[destY + i ] = std::move(_screenLines[srcY + i]);
+            _lineProperties[destY + i] = _lineProperties[srcY + i];
         }
     }
 
