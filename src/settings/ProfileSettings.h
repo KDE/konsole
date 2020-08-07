@@ -38,6 +38,7 @@ class QStandardItemModel;
 
 namespace Konsole {
 class Profile;
+class ProfileModel;
 
 /**
  * A dialog which lists the available types of profiles and allows
@@ -75,17 +76,9 @@ private Q_SLOTS:
     void createProfile();
     void editSelected();
 
-    void itemDataChanged(QStandardItem *item);
-
     // enables or disables Edit/Delete/Set as Default buttons when the
     // selection changes
     void tableSelectionChanged(const QItemSelection &);
-
-    void updateFavoriteStatus(const QExplicitlySharedDataPointer<Profile> &profile, bool favorite);
-
-    void addItems(const QExplicitlySharedDataPointer<Profile> &profile);
-    void updateItems(const QExplicitlySharedDataPointer<Profile> &profile);
-    void removeItems(const QExplicitlySharedDataPointer<Profile> &profile);
 
     // double clicking the profile name opens the edit profile dialog
     void doubleClicked(const QModelIndex &index);
@@ -95,72 +88,12 @@ private:
     QList<QExplicitlySharedDataPointer<Profile>> selectedProfiles() const;
     bool isProfileDeletable(QExplicitlySharedDataPointer<Profile> profile) const;
 
-    // updates the font of the items to match
-    // their default / non-default profile status
-    void updateDefaultItem();
-    void updateItemsForProfile(const QExplicitlySharedDataPointer<Profile> &profile,const QList<QStandardItem *> &items) const;
-    void updateShortcutField(QStandardItem *item, bool isFavorite) const;
     // updates the profile table to be in sync with the
     // session manager
     void populateTable();
-    int rowForProfile(const QExplicitlySharedDataPointer<Profile> &profile) const;
 
-    QStandardItemModel *_sessionModel;
-
-    enum Column {
-        FavoriteStatusColumn = 0,
-        ProfileNameColumn    = 1,
-        ShortcutColumn       = 2,
-        ProfileColumn      = 3,
-    };
-
-    enum Role {
-        ProfilePtrRole = Qt::UserRole + 1,
-        ShortcutRole,
-    };
+    ProfileModel *m_profileModel;
 };
 
-class StyledBackgroundPainter
-{
-public:
-    static void drawBackground(QPainter *painter, const QStyleOptionViewItem &option,
-                               const QModelIndex &index);
-};
-
-class FilteredKeySequenceEdit: public QKeySequenceEdit
-{
-    Q_OBJECT
-
-public:
-    explicit FilteredKeySequenceEdit(QWidget *parent = nullptr): QKeySequenceEdit(parent) {}
-
-protected:
-    void keyPressEvent(QKeyEvent *event) override;
-};
-
-class ShortcutItemDelegate : public QStyledItemDelegate
-{
-    Q_OBJECT
-
-public:
-    explicit ShortcutItemDelegate(QObject *parent = nullptr);
-
-    void setModelData(QWidget *editor, QAbstractItemModel *model,
-                      const QModelIndex &index) const override;
-    QWidget *createEditor(QWidget *aParent, const QStyleOptionViewItem &option,
-                          const QModelIndex &index) const override;
-    void paint(QPainter *painter, const QStyleOptionViewItem &option,
-               const QModelIndex &index) const override;
-    QSize sizeHint(const QStyleOptionViewItem &option,
-                   const QModelIndex &index) const override;
-    void destroyEditor(QWidget *editor, const QModelIndex &index) const override;
-
-private Q_SLOTS:
-    void editorModified();
-
-private:
-    mutable QSet<QWidget *> _modifiedEditors;
-    mutable QSet<QModelIndex> _itemsBeingEdited;
-};
 }
 #endif // MANAGEPROFILESDIALOG_H

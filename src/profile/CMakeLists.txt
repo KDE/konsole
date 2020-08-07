@@ -9,6 +9,7 @@ STATIC
     ProfileReader.cpp
     ProfileWriter.cpp
     ProfileManager.cpp
+    ProfileModel.cpp
     ${konsoleprofile_SRCS}
 )
 

@@ -248,6 +248,7 @@ set(konsole_KDEINIT_SRCS
    settings/ProfileSettings.cpp
    settings/TabBarSettings.cpp
    settings/ThumbnailsSettings.cpp
+   delegates/ProfileShortcutDelegate.cpp
 )
 
 
@@ -281,7 +282,10 @@ install(TARGETS kdeinit_konsole konsole
 
 set(konsolepart_PART_SRCS Part.cpp
     settings/PartInfo.cpp
-    settings/ProfileSettings.cpp)
+    settings/ProfileSettings.cpp
+    delegates/ProfileShortcutDelegate.cpp
+)
+
 add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 generate_export_header(konsolepart BASE_NAME konsole)
 kcoreaddons_desktop_to_json(konsolepart ../desktop/konsolepart.desktop)
