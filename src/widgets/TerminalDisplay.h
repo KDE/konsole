@@ -341,8 +341,7 @@ public:
      * Selects everything in the terminal
      */
     void selectAll();
-    
-    // TODO: Move this code to KonsolePrintManager
+
     void printContent(QPainter &painter, bool friendly);
 
     /**
@@ -515,10 +514,6 @@ public Q_SLOTS:
     // Used to show/hide the message widget
     void updateReadOnlyState(bool readonly);
     IncrementalSearchBar *searchBar() const;
-
-    // Used for requestPrint
-    void printScreen();
-
 Q_SIGNALS:
     void requestToggleExpansion();
     /**

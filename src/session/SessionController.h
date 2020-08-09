@@ -178,11 +178,6 @@ Q_SIGNALS:
      */
     void tabColoredByUser(bool set) const;
 
-    /**
-     * Emmited when the user request print screen.
-     */
-    void requestPrint();
-
 public Q_SLOTS:
     /**
      * Issues a command to the session to navigate to the specified URL.
@@ -244,6 +239,7 @@ private Q_SLOTS:
     void findNextInHistory();
     void findPreviousInHistory();
     void changeSearchMatch();
+    void print_screen();
     void saveHistory();
     void showHistoryOptions();
     void clearHistory();

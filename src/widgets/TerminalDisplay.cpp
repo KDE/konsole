@@ -80,8 +80,6 @@
 #include "profile/Profile.h"
 #include "ViewManager.h" // for colorSchemeForProfile. // TODO: Rewrite this.
 #include "LineBlockCharacters.h"
-#include "PrintOptions.h"
-#include "KonsolePrintManager.h"
 
 using namespace Konsole;
 
@@ -1375,7 +1373,6 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 
 void TerminalDisplay::printContent(QPainter& painter, bool friendly)
 {
-    // TODO: Move this code to KonsolePrintManager
     // Reinitialize the font with the printers paint device so the font
     // measurement calculations will be done correctly
     QFont savedFont = getVTFont();
@@ -4130,12 +4127,4 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _mouseWheelZoom = profile->mouseWheelZoomEnabled();
     setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
     _dimValue = profile->dimValue();
-}
-
-void TerminalDisplay::printScreen()
-{
-    auto lambda = [this](QPainter& painter, bool friendly) {
-        printContent(painter, friendly);
-    };
-    KonsolePrintManager::printRequest(lambda, this);
 }

@@ -30,6 +30,8 @@
 #include <QList>
 #include <QMenu>
 #include <QKeyEvent>
+#include <QPrinter>
+#include <QPrintDialog>
 #include <QFileDialog>
 #include <QPainter>
 #include <QStandardPaths>
@@ -61,6 +63,7 @@
 #include "Emulation.h"
 #include "Enumeration.h"
 #include "HistorySizeDialog.h"
+#include "PrintOptions.h"
 #include "RenameTabDialog.h"
 #include "SaveHistoryTask.h"
 #include "ScreenWindow.h"
@@ -138,8 +141,6 @@ SessionController::SessionController(Session* session, TerminalDisplay* view, QO
         setupCommonActions();
         setupExtraActions();
     }
-
-    connect(this, &SessionController::requestPrint, _sessionDisplayConnection->view(), &TerminalDisplay::printScreen);
 
     actionCollection()->addAssociatedWidget(view);
 
@@ -666,7 +667,7 @@ void SessionController::setupCommonActions()
     action->setShortcut(QKeySequence(Qt::META + Qt::Key_S));
 #endif
 
-    action = KStandardAction::print(this, &SessionController::requestPrint, collection);
+    action = KStandardAction::print(this, &SessionController::print_screen, collection);
     action->setText(i18n("&Print Screen..."));
     collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_P);
 
@@ -1565,6 +1566,37 @@ void SessionController::scrollBackOptionsChanged(int mode, int lines)
         _sessionDisplayConnection->session()->setHistoryType(HistoryTypeFile());
         break;
     }
+}
+
+void SessionController::print_screen()
+{
+    QPrinter printer;
+
+    QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, _sessionDisplayConnection->view());
+    auto options = new PrintOptions();
+
+    dialog->setOptionTabs({options});
+    dialog->setWindowTitle(i18n("Print Shell"));
+    connect(dialog,
+            QOverload<>::of(&QPrintDialog::accepted),
+            options,
+            &Konsole::PrintOptions::saveSettings);
+    if (dialog->exec() != QDialog::Accepted) {
+        return;
+    }
+
+    QPainter painter;
+    painter.begin(&printer);
+
+    KConfigGroup configGroup(KSharedConfig::openConfig(), "PrintOptions");
+
+    if (configGroup.readEntry("ScaleOutput", true)) {
+        double scale = qMin(printer.pageRect().width() / static_cast<double>(_sessionDisplayConnection->view()->width()),
+                            printer.pageRect().height() / static_cast<double>(_sessionDisplayConnection->view()->height()));
+        painter.scale(scale, scale);
+    }
+
+    _sessionDisplayConnection->view()->printContent(painter, configGroup.readEntry("PrinterFriendly", true));
 }
 
 void SessionController::saveHistory()

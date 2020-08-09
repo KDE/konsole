@@ -37,8 +37,13 @@ option(KONSOLE_BUILD_UNI2CHARACTERWIDTH "Konsole: build uni2characterwidth execu
 # qdbuscpp2xml -M -s ViewManager.h -o org.kde.konsole.Konsole.xml
 
 # Generate dbus .xml files; do not store .xml in source folder
+qt5_generate_dbus_interface(session/Session.h org.kde.konsole.Session.xml OPTIONS -m)
 qt5_generate_dbus_interface(ViewManager.h org.kde.konsole.Window.xml OPTIONS -m)
 
+qt5_add_dbus_adaptor(sessionadaptors_SRCS
+                    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml
+                    session/Session.h
+                    Konsole::Session)
 qt5_add_dbus_adaptor(windowadaptors_SRCS
                     ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
                     ViewManager.h
@@ -101,9 +106,9 @@ target_link_libraries(konsolehelpers
 add_subdirectory(colorscheme)
 add_subdirectory(keyboardtranslator)
 add_subdirectory(profile)
-add_subdirectory(session)
 
-set(konsoleprivate_SRCS ${windowadaptors_SRCS}
+set(konsoleprivate_SRCS ${sessionadaptors_SRCS}
+                        ${windowadaptors_SRCS}
                         AutoScrollHandler.cpp
                         BookmarkHandler.cpp
                         BookmarkMenu.cpp
@@ -161,6 +166,13 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         history/compact/CompactHistoryLine.cpp
                         history/compact/CompactHistoryScroll.cpp
                         history/compact/CompactHistoryType.cpp
+                        session/Session.cpp
+                        session/SessionController.cpp
+                        session/SessionDisplayConnection.cpp
+                        session/SessionGroup.cpp
+                        session/SessionListModel.cpp
+                        session/SessionManager.cpp
+                        session/SessionTask.cpp
                         widgets/DetachableTabBar.cpp
                         widgets/EditProfileDialog.cpp
                         widgets/HistorySizeWidget.cpp
@@ -172,8 +184,8 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         widgets/TerminalHeaderBar.cpp
                         widgets/ViewContainer.cpp
                         widgets/ViewSplitter.cpp
-                        widgets/KonsolePrintManager.cpp
-                        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml)
+                        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Window.xml
+                        ${CMAKE_CURRENT_BINARY_DIR}/org.kde.konsole.Session.xml)
 
 kconfig_add_kcfg_files(konsoleprivate_SRCS settings/KonsoleSettings.kcfgc)
 
@@ -183,7 +195,7 @@ ki18n_wrap_ui(konsoleprivate_SRCS
     CopyInputDialog.ui
     HistorySizeDialog.ui
     KeyBindingEditor.ui
-    PrintOptions.ui       # Temporary to build session static library
+    PrintOptions.ui
     RenameTabDialog.ui
     settings/GeneralSettings.ui
     settings/PartInfo.ui
@@ -215,7 +227,6 @@ target_link_libraries(konsoleprivate
     keyboardtranslator
     konsolehelpers
     konsoleprofile
-    konsolesession
     ${konsole_LIBS}
 )
 
