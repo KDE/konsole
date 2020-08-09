@@ -1,4 +1,7 @@
-
+#TODO: This Needs TerminalDisplay. Perhaps we should create a library
+# that has only TerminalDisplay and link with this one? It's a hard thing
+# to do as currently SessionController depends on TerminalDisplay and
+# TerminalDisplay depends on SessionController.
 
 # qdbuscpp2xml -m  Session.h -o org.kde.konsole.Session.xml
 # Generate dbus .xml files; do not store .xml in source folder
@@ -24,7 +27,7 @@ set(konsole_session_SRCS
 )
 
 add_library(konsolesession
-    STATIC
+    OBJECT
     ${konsole_session_SRCS}
 )
 
