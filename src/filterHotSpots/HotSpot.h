@@ -113,6 +113,7 @@ public:
     virtual void mouseMoveEvent(TerminalDisplay *, QMouseEvent *);
     virtual void mouseLeaveEvent(TerminalDisplay *, QMouseEvent *);
     virtual void mouseEnterEvent(TerminalDisplay *, QMouseEvent *) {};
+    virtual void mouseReleaseEvent(TerminalDisplay *, QMouseEvent *){};
     virtual void keyPressEvent(TerminalDisplay *, QKeyEvent *) {};
     virtual void keyReleaseEvent(TerminalDisplay *, QKeyEvent *) {};
 

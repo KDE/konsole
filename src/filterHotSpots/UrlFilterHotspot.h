@@ -46,6 +46,7 @@ public:
         */
     void activate(QObject *object = nullptr) override;
     void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev) override;
+    void mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev) override;
     void keyPressEvent(TerminalDisplay *td, QKeyEvent *ev) override;
     void keyReleaseEvent(TerminalDisplay *td, QKeyEvent *ev) override;
 

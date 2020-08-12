@@ -57,6 +57,11 @@ void EscapeSequenceUrlHotSpot::mouseEnterEvent(TerminalDisplay* td, QMouseEvent*
 
     td->setCursor(Qt::PointingHandCursor);
     td->update(r);
-    qDebug() << td->cursor();
 }
 
+void EscapeSequenceUrlHotSpot::mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev)
+{
+    if ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
+        activate(nullptr);
+    }
+}

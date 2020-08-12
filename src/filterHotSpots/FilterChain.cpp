@@ -187,6 +187,15 @@ void  FilterChain::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev, int char
     }
 }
 
+void FilterChain::mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev, int charLine, int charColumn)
+{
+    auto spot = hotSpotAt(charLine, charColumn);
+    if (!spot) {
+        return;
+    }
+    spot->mouseReleaseEvent(td, ev);
+}
+
 void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
 {
     // get color of character under mouse and use it to draw

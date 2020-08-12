@@ -149,6 +149,13 @@ void UrlFilterHotSpot::mouseEnterEvent(TerminalDisplay* td, QMouseEvent* ev)
     setTerminalCursor(r, td, ev);
 }
 
+void UrlFilterHotSpot::mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev)
+{
+    if ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
+        activate(nullptr);
+    }
+}
+
 void UrlFilterHotSpot::keyPressEvent(TerminalDisplay* td, QKeyEvent* ev)
 {
     QRegion r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;

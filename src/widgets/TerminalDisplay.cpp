@@ -2507,12 +2507,8 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
                          2);
     }
 
-    // TODO: Move this code to hot spots too.
-    if (!_screenWindow->screen()->hasSelection() && (_openLinksByDirectClick || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
-        auto spot = _filterChain->hotSpotAt(charLine, charColumn);
-        if ((spot != nullptr) && (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl)) {
-            spot->activate();
-        }
+    if (!_screenWindow->screen()->hasSelection()) {
+        _filterChain->mouseReleaseEvent(this, ev, charLine, charColumn);
     }
 }
 
