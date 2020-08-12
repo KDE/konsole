@@ -31,6 +31,8 @@ public:
     EscapeSequenceUrlHotSpot(int startLine, int startColumn, int endLine, int endColumn,
             const QString &text, const QString &url);
     void activate(QObject *obj) override;
+
+    void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev) override;
 private:
     QString _text;
     QString _url;

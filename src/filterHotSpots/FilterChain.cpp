@@ -153,6 +153,13 @@ void FilterChain::leaveEvent(TerminalDisplay *td, QEvent *ev)
 {
 }
 
+void FilterChain::keyReleaseEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn)
+{
+    auto spot = hotSpotAt(charLine, charColumn);
+    if (spot) {
+        spot->keyReleaseEvent(td, ev);
+    }
+}
 
 void FilterChain::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn)
 {

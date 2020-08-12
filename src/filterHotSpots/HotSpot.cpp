@@ -117,18 +117,11 @@ void HotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
 {
     auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
     td->update(r);
-    td->setCursor(Qt::IBeamCursor);
+    td->resetCursor();
 }
 
 void HotSpot::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev)
 {
-    QCursor cursor = td->cursor();
-    if ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u))
-        || (cursor.shape() == Qt::PointingHandCursor)) {
-        td->setCursor(td->usesMouseTracking() ? Qt::ArrowCursor : Qt::IBeamCursor);
-    }
-    auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
-    td->update(r);
 }
 
 void HotSpot::debug() {

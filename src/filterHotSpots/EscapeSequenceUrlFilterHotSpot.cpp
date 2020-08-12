@@ -22,6 +22,10 @@
 
 #include <KRun>
 #include <QApplication>
+#include <QMouseEvent>
+#include <QDebug>
+
+#include "widgets/TerminalDisplay.h"
 
 using namespace Konsole;
 
@@ -45,3 +49,14 @@ void EscapeSequenceUrlHotSpot::activate(QObject *obj)
 
     new KRun(QUrl(_url), QApplication::activeWindow());
 }
+
+void EscapeSequenceUrlHotSpot::mouseEnterEvent(TerminalDisplay* td, QMouseEvent* ev)
+{
+    auto cursor = td->cursor();
+    auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
+
+    td->setCursor(Qt::PointingHandCursor);
+    td->update(r);
+    qDebug() << td->cursor();
+}
+

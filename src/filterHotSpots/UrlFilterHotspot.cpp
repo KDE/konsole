@@ -127,14 +127,38 @@ QList<QAction *> UrlFilterHotSpot::actions()
     return {openAction, copyAction};
 }
 
-void Konsole::UrlFilterHotSpot::mouseMoveEvent(Konsole::TerminalDisplay* td, QMouseEvent* ev)
+template<typename Event> 
+void setTerminalCursor(const QRegion &r, TerminalDisplay *td, Event *ev) 
 {
-    auto cursor = td->cursor();
-    auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
+    QCursor cursor = td->cursor();
 
-    if ((td->openLinksByDirectClick()|| ((ev->modifiers() & Qt::ControlModifier) != 0u)) && (cursor.shape() != Qt::PointingHandCursor)) {
+    if (cursor.shape() == Qt::PointingHandCursor) {
+        return;
+    }
+
+    if ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
         td->setCursor(Qt::PointingHandCursor);
     }
 
     td->update(r);
+}
+
+void UrlFilterHotSpot::mouseEnterEvent(TerminalDisplay* td, QMouseEvent* ev)
+{
+    QRegion r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
+    setTerminalCursor(r, td, ev);
+}
+
+void UrlFilterHotSpot::keyPressEvent(TerminalDisplay* td, QKeyEvent* ev)
+{
+    QRegion r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
+    setTerminalCursor(r, td, ev);
+}
+
+void UrlFilterHotSpot::keyReleaseEvent(TerminalDisplay* td, QKeyEvent*)
+{
+    if (td->openLinksByDirectClick()) {
+        return;
+    }
+    td->resetCursor();
 }

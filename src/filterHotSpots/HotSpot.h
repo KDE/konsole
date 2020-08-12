@@ -110,10 +110,12 @@ public:
 
     QPair<QRegion, QRect> region(int fontWidth, int fontHeight, int columns, QRect terminalDisplayRect) const;
 
-    virtual void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev) { Q_UNUSED(td); Q_UNUSED(ev); };
-    virtual void mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev);
-    virtual void mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev);
-    virtual void keyPressEvent(TerminalDisplay *td, QKeyEvent *ev) {};
+    virtual void mouseMoveEvent(TerminalDisplay *, QMouseEvent *);
+    virtual void mouseLeaveEvent(TerminalDisplay *, QMouseEvent *);
+    virtual void mouseEnterEvent(TerminalDisplay *, QMouseEvent *) {};
+    virtual void keyPressEvent(TerminalDisplay *, QKeyEvent *) {};
+    virtual void keyReleaseEvent(TerminalDisplay *, QKeyEvent *) {};
+
     void debug();
 protected:
     /** Sets the type of a hotspot.  This should only be set once */

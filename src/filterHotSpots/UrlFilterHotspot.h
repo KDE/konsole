@@ -45,7 +45,9 @@ public:
         * the capturedTexts() method.
         */
     void activate(QObject *object = nullptr) override;
-    void mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev) override;
+    void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev) override;
+    void keyPressEvent(TerminalDisplay *td, QKeyEvent *ev) override;
+    void keyReleaseEvent(TerminalDisplay *td, QKeyEvent *ev) override;
 
 private:
     enum UrlType {

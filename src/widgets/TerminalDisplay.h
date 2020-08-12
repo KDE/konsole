@@ -322,6 +322,8 @@ public:
     /** Reset the font size */
     void resetFontSize();
 
+    void resetCursor();
+
     QRect contentRect() const { return _contentRect; }
     bool openLinksByDirectClick() const { return _openLinksByDirectClick; }
 

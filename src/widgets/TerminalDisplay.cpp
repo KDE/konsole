@@ -2241,7 +2241,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     processFilters();
 
     _filterChain->mouseMoveEvent(this, ev, charLine, charColumn);
-
     // for auto-hiding the cursor, we need mouseTracking
     if (ev->buttons() == Qt::NoButton) {
         return;
@@ -3052,8 +3051,14 @@ void TerminalDisplay::setWordCharacters(const QString& wc)
 void TerminalDisplay::setUsesMouseTracking(bool on)
 {
     _usesMouseTracking = on;
+    resetCursor();
+}
+
+void TerminalDisplay::resetCursor() 
+{
     setCursor(_usesMouseTracking ? Qt::ArrowCursor : Qt::IBeamCursor);
 }
+
 bool TerminalDisplay::usesMouseTracking() const
 {
     return _usesMouseTracking;
@@ -3514,7 +3519,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     { // C++17: change getCharacterPosition to return a tuple and use auto [charLine, charColumn] to extract the values.
         int charLine;
         int charColumn;
-        getCharacterPosition(QCursor::pos(), charLine, charColumn, !_usesMouseTracking);
+        getCharacterPosition(mapFromGlobal(QCursor::pos()), charLine, charColumn, !_usesMouseTracking);
         _filterChain->keyPressEvent(this, event, charLine, charColumn);
     }
 
@@ -3560,6 +3565,13 @@ void TerminalDisplay::keyReleaseEvent(QKeyEvent *event)
     if (_readOnly) {
         event->accept();
         return;
+    }
+
+    { // C++17: change getCharacterPosition to return a tuple and use auto [charLine, charColumn] to extract the values.
+        int charLine;
+        int charColumn;
+        getCharacterPosition(mapFromGlobal(QCursor::pos()), charLine, charColumn, !_usesMouseTracking);
+        _filterChain->keyReleaseEvent(this, event, charLine, charColumn);
     }
 
     QWidget::keyReleaseEvent(event);
