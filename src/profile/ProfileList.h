@@ -83,7 +83,6 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void triggered(QAction *action);
-    void favoriteChanged(const Profile::Ptr &profile, bool isFavorite);
     void profileChanged(const Profile::Ptr &profile);
     void shortcutChanged(const Profile::Ptr &profile, const QKeySequence &sequence);
     void addShortcutAction(const Profile::Ptr &profile);

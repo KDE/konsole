@@ -40,7 +40,7 @@ using namespace Konsole;
 
 ProfileSettings::ProfileSettings(QWidget* parent)
     : QWidget(parent)
-    , m_profileModel(new ProfileModel(this))
+    , m_profileModel(ProfileModel::instance())
 {
     setupUi(this);
 
@@ -78,31 +78,12 @@ void ProfileSettings::doubleClicked(const QModelIndex &idx)
 
 void ProfileSettings::populateTable()
 {
-    // Calculate favorite column width. resizeColumnToContents()
-    // is not used because it takes distance between checkbox and
-    // text into account, but there is no text and it looks weird.
-    const int headerMargin = style()->pixelMetric(QStyle::PM_HeaderMargin, nullptr,
-                                            profilesList->header());
-    const int iconWidth = style()->pixelMetric(QStyle::PM_SmallIconSize, nullptr,
-                                               profilesList->header());
-    const int favoriteHeaderWidth = headerMargin * 2 + iconWidth;
     QStyleOptionViewItem opt;
     opt.features = QStyleOptionViewItem::HasCheckIndicator | QStyleOptionViewItem::HasDecoration;
-
-    const QRect checkBoxRect = style()->subElementRect(QStyle::SE_ItemViewItemCheckIndicator, &opt, profilesList);
-
-    // When right edge is at x < 0 it is assumed the checkbox is
-    // placed on the right item's side and the margin between right
-    // checkbox edge and right item edge should be used.
-    const int checkBoxMargin = checkBoxRect.right() >= 0 ? checkBoxRect.x()
-                                                         : 0 - checkBoxRect.right();
-    const int favoriteItemWidth = checkBoxMargin * 2 + checkBoxRect.width();
     auto *listHeader = profilesList->header();
 
-    profilesList->setColumnWidth(ProfileModel::VISIBILITY, qMax(favoriteHeaderWidth, favoriteItemWidth));
     profilesList->resizeColumnToContents(ProfileModel::NAME);
 
-    listHeader->setSectionResizeMode(ProfileModel::VISIBILITY, QHeaderView::ResizeMode::Fixed);
     listHeader->setSectionResizeMode(ProfileModel::NAME, QHeaderView::ResizeMode::Stretch);
     listHeader->setSectionResizeMode(ProfileModel::SHORTCUT, QHeaderView::ResizeMode::ResizeToContents);
     listHeader->setStretchLastSection(false);
@@ -178,7 +159,6 @@ void ProfileSettings::createProfile()
 
     if (dialog.data()->exec() == QDialog::Accepted) {
         ProfileManager::instance()->addProfile(newProfile);
-        ProfileManager::instance()->setFavorite(newProfile, true);
         ProfileManager::instance()->changeProfile(newProfile, newProfile->setProperties());
     }
     delete dialog.data();

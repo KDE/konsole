@@ -24,16 +24,6 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Profiles marked as visible will appear in context and File menu. A shortcut for creating a new tab can be assigned to each entry. However, only shortcuts of visible profiles will work.</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
     <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,1">
      <property name="verticalSpacing">
       <number>0</number>

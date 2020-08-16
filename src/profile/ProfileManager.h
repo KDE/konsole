@@ -38,11 +38,6 @@ namespace Konsole {
 /**
  * Manages profiles which specify various settings for terminal sessions
  * and their displays.
- *
- * Profiles in the manager have a concept of favorite status, which can be used
- * by widgets and dialogs in the application decide which profiles to list and
- * how to display them.  The favorite status of a profile can be altered using
- * setFavorite() and retrieved using isFavorite()
  */
 class KONSOLEPRIVATE_EXPORT ProfileManager : public QObject
 {
@@ -69,9 +64,7 @@ public:
      * Returns a list of all available profiles
      *
      * Initially only the profile currently set as the default is loaded.
-     *
-     * Favorite profiles are loaded automatically when findFavorites() is called.
-     *
+    *
      * When this method is called, it calls loadAllProfiles() internally to
      * ensure all available profiles are loaded and usable.
      */
@@ -118,7 +111,6 @@ public:
 
     /**
      * Registers a new type of session.
-     * The favorite status of the session ( as returned by isFavorite() ) is set to false by default.
      */
     void addProfile(const Profile::Ptr &profile);
 
@@ -166,19 +158,6 @@ public:
     Profile::Ptr fallbackProfile() const;
 
     /**
-     * Specifies whether a profile should be included in the user's
-     * list of favorite profiles.
-     */
-    void setFavorite(const Profile::Ptr &profile, bool favorite);
-
-    /**
-     * Returns the set of the user's favorite profiles.
-     */
-    QSet<Profile::Ptr> findFavorites();
-
-    QList<Profile::Ptr> sortedFavorites();
-
-    /**
      * Sorts the profile list by menuindex; those without an menuindex, sort by name.
      *  The menuindex list is first and then the non-menuindex list.
      *
@@ -204,14 +183,6 @@ Q_SIGNALS:
     void profileChanged(const Profile::Ptr &ptr);
 
     /**
-     * Emitted when the favorite status of a profile changes.
-     *
-     * @param profile The profile to change
-     * @param favorite Specifies whether the profile is a favorite or not
-     */
-    void favoriteStatusChanged(const Profile::Ptr &profile, bool favorite);
-
-    /**
      * Emitted when the shortcut for a profile is changed.
      *
      * @param profile The profile whose status was changed
@@ -220,7 +191,7 @@ Q_SIGNALS:
     void shortcutChanged(const Profile::Ptr &profile, const QKeySequence &newShortcut);
 
 public Q_SLOTS:
-    /** Saves settings (favorites, shortcuts, default profile etc.) to disk. */
+    /** Saves settings (shortcuts, default profile etc.) to disk. */
     void saveSettings();
 
 protected Q_SLOTS:
@@ -237,11 +208,6 @@ private:
     // profile paths
     void saveShortcuts();
 
-    //loads the set of favorite profiles
-    void loadFavorites();
-    //saves the set of favorite profiles
-    void saveFavorites();
-
     // records which profile is set as the default profile
     // Note: it does not save the profile itself into disk. That is
     // what saveProfile() does.
@@ -254,13 +220,11 @@ private:
     QString saveProfile(const Profile::Ptr &profile);
 
     QSet<Profile::Ptr> _profiles;  // list of all loaded profiles
-    QSet<Profile::Ptr> _favorites; // list of favorite profiles
 
     Profile::Ptr _defaultProfile;
     Profile::Ptr _fallbackProfile;
 
     bool _loadedAllProfiles; // set to true after loadAllProfiles has been called
-    bool _loadedFavorites; // set to true after loadFavorites has been called
 
     struct ShortcutData {
         Profile::Ptr profileKey;

@@ -11,9 +11,10 @@ class Profile;
 class ProfileModel : public QAbstractTableModel {
     Q_OBJECT
 public:
+    static ProfileModel* instance();
+
     enum Roles { ProfilePtrRole = Qt::UserRole + 1 };
-    enum Column { VISIBILITY, NAME, SHORTCUT, PROFILE, COLUMNS };
-    ProfileModel(QObject *parent);
+    enum Column { NAME, SHORTCUT, PROFILE, COLUMNS };
     void populate();
     void add(QExplicitlySharedDataPointer<Profile> profile);
     void remove(QExplicitlySharedDataPointer<Profile> profile);
@@ -27,6 +28,8 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 private:
     QList<QExplicitlySharedDataPointer<Profile>> m_profiles;
+    ProfileModel();
+
 };
 
 }

@@ -47,21 +47,21 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     // create new tabs using the default profile from the menu
     _emptyListAction = new QAction(i18n("Default profile"), _group);
 
+
+    connect(_group, &QActionGroup::triggered, this, &ProfileList::triggered);
+
     // TODO - Handle re-sorts when user changes profile names
     ProfileManager* manager = ProfileManager::instance();
-    const QList<Profile::Ptr> favoriteProfiles = manager->sortedFavorites();
+    connect(manager, &ProfileManager::shortcutChanged, this, &ProfileList::shortcutChanged);
+    connect(manager, &ProfileManager::profileChanged, this, &ProfileList::profileChanged);
+    connect(manager, &ProfileManager::profileRemoved, this, &ProfileList::removeShortcutAction);
+    connect(manager, &ProfileManager::profileAdded, this, &ProfileList::addShortcutAction);
 
-    for (const Profile::Ptr &profile : favoriteProfiles) {
-        favoriteChanged(profile, true);
+    for (const auto& profile : ProfileManager::instance()->allProfiles()) {
+        addShortcutAction(profile);
     }
-
-    connect(_group, &QActionGroup::triggered, this, &Konsole::ProfileList::triggered);
-
-    // listen for future changes to the profiles
-    connect(manager, &Konsole::ProfileManager::favoriteStatusChanged, this, &Konsole::ProfileList::favoriteChanged);
-    connect(manager, &Konsole::ProfileManager::shortcutChanged, this, &Konsole::ProfileList::shortcutChanged);
-    connect(manager, &Konsole::ProfileManager::profileChanged, this, &Konsole::ProfileList::profileChanged);
 }
+
 void ProfileList::updateEmptyAction()
 {
     Q_ASSERT(_group);
@@ -163,15 +163,6 @@ void ProfileList::removeShortcutAction(const Profile::Ptr &profile)
         emit actionsChanged(_group->actions());
     }
     updateEmptyAction();
-}
-
-void ProfileList::favoriteChanged(const Profile::Ptr &profile, bool isFavorite)
-{
-    if (isFavorite) {
-        addShortcutAction(profile);
-    } else {
-        removeShortcutAction(profile);
-    }
 }
 
 void ProfileList::triggered(QAction* action)
