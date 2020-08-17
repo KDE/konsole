@@ -77,8 +77,10 @@ QVariant ProfileModel::data(const QModelIndex& idx, int role) const
     }
     break;
     case SHORTCUT: {
+        auto shortcut = ProfileManager::instance()->shortcut(profile);
         switch (role) {
-            case Qt::DisplayRole: return ProfileManager::instance()->shortcut(profile).toString();
+            case Qt::DisplayRole: return shortcut;
+            case Qt::EditRole: return shortcut;
             case Qt::ToolTipRole: return i18nc("@info:tooltip", "Double click to change shortcut");
         }
         break;
@@ -100,6 +102,7 @@ Qt::ItemFlags ProfileModel::flags(const QModelIndex& idx) const
 
     switch(idx.column()) {
         case NAME: return currentFlags & (~Qt::ItemIsEditable);
+        case SHORTCUT: return currentFlags | Qt::ItemIsEditable;
         default: return currentFlags;
     }
     return currentFlags;
@@ -111,22 +114,23 @@ bool ProfileModel::setData(const QModelIndex &idx, const QVariant &value, int ro
         return false;
     }
 
-    if (idx.row() != SHORTCUT) {
+    if (idx.column() != SHORTCUT) {
         return false;
     }
 
-    if (role != Qt::EditRole) {
+    if (role != Qt::EditRole && role != Qt::DisplayRole) {
         return false;
     }
 
     auto profile = m_profiles.at(idx.row());
-    if (idx.row() == SHORTCUT) {
-        QKeySequence sequence = QKeySequence::fromString(value.toString());
+    if (idx.column() == SHORTCUT) {
+        auto sequence = QKeySequence::fromString(value.toString());
         ProfileManager::instance()->setShortcut(profile, sequence);
         emit dataChanged(idx, idx, {Qt::DisplayRole});
+        return true;
     }
 
-    return true;
+    return false;
 }
 
 void ProfileModel::populate()
