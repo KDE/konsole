@@ -34,19 +34,21 @@
 
 // Konsole
 #include "ShouldApplyProperty.h"
-#include "session/Session.h"
+#include "Enumeration.h"
+#include "Screen.h"
+#include "EscapeSequenceUrlExtractor.h"
+
+#include "history/compact/CompactHistoryType.h"
+#include "history/HistoryTypeFile.h"
+#include "history/HistoryTypeNone.h"
 
 #include "profile/ProfileManager.h"
 #include "ProfileCommandParser.h"
-#include "history/HistoryTypeNone.h"
-#include "history/HistoryTypeFile.h"
-#include "history/compact/CompactHistoryType.h"
+
+#include "session/Session.h"
 #include "session/SessionController.h"
 
-#include "Enumeration.h"
 #include "widgets/TerminalDisplay.h"
-#include "Screen.h"
-#include "EscapeSequenceUrlExtractor.h"
 
 using namespace Konsole;
 
@@ -182,8 +184,6 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
                                   bool modifiedPropertiesOnly)
 {
     Q_ASSERT(profile);
-
-    qDebug() << "Applying profile";
     _sessionProfiles[session] = profile;
 
     ShouldApplyProperty apply(profile, modifiedPropertiesOnly);
