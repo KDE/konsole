@@ -40,6 +40,10 @@ using namespace Konsole;
 
 void KonsolePrintManager::printRequest(pPrintContent pContent, QWidget *parent)
 {
+    if (!pContent) {
+        return;
+    }
+
     QPrinter printer;
 
     QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, parent);
