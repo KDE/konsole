@@ -6,23 +6,23 @@
 
 using namespace Konsole;
 
-ShortcutItemDelegate::ShortcutItemDelegate(QObject* parent)
+ShortcutItemDelegate::ShortcutItemDelegate(QObject *parent)
     : QStyledItemDelegate(parent),
-    _modifiedEditors(QSet<QWidget *>()),
+    _modifiedEditors(QSet<QWidget*>()),
     _itemsBeingEdited(QSet<QModelIndex>())
 {
 }
 
 void ShortcutItemDelegate::editorModified()
 {
-    auto* editor = qobject_cast<FilteredKeySequenceEdit*>(sender());
+    auto *editor = qobject_cast<FilteredKeySequenceEdit*>(sender());
     Q_ASSERT(editor);
     _modifiedEditors.insert(editor);
     emit commitData(editor);
     emit closeEditor(editor);
 }
-void ShortcutItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model,
-                                        const QModelIndex& index) const
+void ShortcutItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
+                                        const QModelIndex &index) const
 {
     _itemsBeingEdited.remove(index);
 
@@ -30,25 +30,28 @@ void ShortcutItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* mod
         return;
     }
 
-    QString shortcut = qobject_cast<FilteredKeySequenceEdit *>(editor)->keySequence().toString();
+    const auto shortcut = qobject_cast<FilteredKeySequenceEdit *>(editor)->keySequence().toString();
     model->setData(index, shortcut, Qt::DisplayRole);
 
     _modifiedEditors.remove(editor);
 }
 
-QWidget* ShortcutItemDelegate::createEditor(QWidget* aParent, const QStyleOptionViewItem&, const QModelIndex& index) const
+QWidget* ShortcutItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem&, const QModelIndex &index) const
 {
     _itemsBeingEdited.insert(index);
 
-    auto editor = new FilteredKeySequenceEdit(aParent);
-    QString shortcutString = index.data(Qt::DisplayRole).toString();
+    auto editor = new FilteredKeySequenceEdit(parent);
+    const auto shortcutString = index.data(Qt::DisplayRole).toString();
+
     editor->setKeySequence(QKeySequence::fromString(shortcutString));
-    connect(editor, &QKeySequenceEdit::editingFinished, this, &Konsole::ShortcutItemDelegate::editorModified);
     editor->setFocus(Qt::FocusReason::MouseFocusReason);
+
+    connect(editor, &QKeySequenceEdit::editingFinished, this, &Konsole::ShortcutItemDelegate::editorModified);
+
     return editor;
 }
-void ShortcutItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
-                                 const QModelIndex& index) const
+void ShortcutItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
+                                 const QModelIndex &index) const
 {
     if (_itemsBeingEdited.contains(index)) {
         StyledBackgroundPainter::drawBackground(painter, option, index);
@@ -59,8 +62,8 @@ void ShortcutItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& 
 
 QSize ShortcutItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    const QString shortcutString = index.data(Qt::DisplayRole).toString();
-    QFontMetrics fm = option.fontMetrics;
+    const auto shortcutString = index.data(Qt::DisplayRole).toString();
+    const auto fm = option.fontMetrics;
 
     static const int editorMargins = 16; // chosen empirically
     const int width = fm.boundingRect(shortcutString + QStringLiteral(", ...")).width()
@@ -99,7 +102,7 @@ void FilteredKeySequenceEdit::keyPressEvent(QKeyEvent *event)
     QKeySequenceEdit::keyPressEvent(event);
 }
 
-void StyledBackgroundPainter::drawBackground(QPainter* painter, const QStyleOptionViewItem& option,
+void StyledBackgroundPainter::drawBackground(QPainter *painter, const QStyleOptionViewItem &option,
         const QModelIndex&)
 {
     const auto* opt = qstyleoption_cast<const QStyleOptionViewItem*>(&option);
