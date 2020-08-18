@@ -14,6 +14,10 @@
       <label>Remove window titlebar and frame</label>
       <default>false</default>
     </entry>
+    <entry name="FocusFollowsMouse" type="Bool">
+      <label>Focus terminals when the mouse pointer is moved over them</label>
+      <default>false</default>
+    </entry>
     <entry name="ShowWindowTitleOnTitleBar" type="Bool">
       <label>Show window title on the titlebar</label>
       <tooltip>Show window title set by escape sequence on the titlebar</tooltip>

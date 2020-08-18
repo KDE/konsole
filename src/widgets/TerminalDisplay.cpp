@@ -2407,6 +2407,10 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     int charLine = 0;
     int charColumn = 0;
 
+    if (!hasFocus() && KonsoleSettings::focusFollowsMouse()) {
+       setFocus();
+    }
+
     getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
 
     processFilters();
