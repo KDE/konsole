@@ -75,6 +75,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} )
 
+file(GLOB ICONS_SRCS "data/icons/*.png")
+
 add_subdirectory( src )
 add_subdirectory( data )
 add_subdirectory( desktop )
@@ -83,6 +85,13 @@ if (KF5DocTools_FOUND)
 endif()
 
 add_subdirectory( tools )
+
+# Conditionally install icons for Linux as they may not be provided by the user theme
+option(INSTALL_ICONS "Install icons" OFF)
+if (INSTALL_ICONS)
+    include(ECMInstallIcons)
+    ecm_install_icons( ICONS ${ICONS_SRCS} DESTINATION ${KDE_INSTALL_ICONDIR} )
+endif()
 
 
 if (${ECM_VERSION} STRGREATER "5.58.0")
