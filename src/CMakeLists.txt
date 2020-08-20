@@ -225,8 +225,8 @@ target_link_libraries(konsoleprivate
     konsolecolorscheme
     keyboardtranslator
     konsolehelpers
-    konsoleprofile
     konsolesession
+    konsoleprofile
     ${konsole_LIBS}
 )
 
@@ -256,7 +256,12 @@ set(konsole_KDEINIT_SRCS
 ecm_add_app_icon(kdeinit_konsole ICONS ${ICONS_SRCS})
 
 kf5_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
-target_link_libraries(kdeinit_konsole konsoleprivate KF5::XmlGui KF5::WindowSystem KF5::Bookmarks
+target_link_libraries(kdeinit_konsole
+  konsoleprofile
+  konsoleprivate
+  KF5::XmlGui
+  KF5::WindowSystem
+  KF5::Bookmarks
   KF5::I18n
   KF5::KIOWidgets
   KF5::NotifyConfig
@@ -290,6 +295,11 @@ add_library(konsolepart MODULE ${konsolepart_PART_SRCS})
 generate_export_header(konsolepart BASE_NAME konsole)
 kcoreaddons_desktop_to_json(konsolepart ../desktop/konsolepart.desktop)
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
-target_link_libraries(konsolepart KF5::Parts KF5::XmlGui konsoleprivate)
+target_link_libraries(konsolepart
+    KF5::Parts
+    KF5::XmlGui
+    konsoleprofile
+    konsoleprivate
+)
 install(TARGETS konsolepart  DESTINATION ${KDE_INSTALL_PLUGINDIR})
 

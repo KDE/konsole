@@ -38,7 +38,6 @@ class QStandardItemModel;
 
 namespace Konsole {
 class Profile;
-class ProfileModel;
 
 /**
  * A dialog which lists the available types of profiles and allows
@@ -91,8 +90,6 @@ private:
     // updates the profile table to be in sync with the
     // session manager
     void populateTable();
-
-    ProfileModel *m_profileModel;
 };
 
 }

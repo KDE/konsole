@@ -59,7 +59,7 @@
 #include "keyboardtranslator/KeyboardTranslatorManager.h"
 
 #include "KeyBindingEditor.h"
-#include "ProfileManager.h"
+#include "profile/ProfileManager.h"
 #include "ShellCommand.h"
 #include "WindowSystemInfo.h"
 #include "FontDialog.h"

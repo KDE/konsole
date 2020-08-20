@@ -42,6 +42,7 @@
 #include "ProfileReader.h"
 #include "ProfileWriter.h"
 #include "ProfileGroup.h"
+#include "ProfileModel.h"
 
 using namespace Konsole;
 
@@ -491,8 +492,8 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
 void ProfileManager::setDefaultProfile(const Profile::Ptr &profile)
 {
     Q_ASSERT(_profiles.contains(profile));
-
     _defaultProfile = profile;
+    ProfileModel::instance()->setDefault(profile);
 }
 
 void ProfileManager::saveDefaultProfile()

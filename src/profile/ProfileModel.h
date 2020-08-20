@@ -19,6 +19,7 @@ public:
     void add(QExplicitlySharedDataPointer<Profile> profile);
     void remove(QExplicitlySharedDataPointer<Profile> profile);
     void update(QExplicitlySharedDataPointer<Profile> profile);
+    void setDefault(QExplicitlySharedDataPointer<Profile> profile);
 
     int rowCount(const QModelIndex& parent) const override;
     int columnCount(const QModelIndex& parent) const override;
@@ -29,7 +30,6 @@ public:
 private:
     QList<QExplicitlySharedDataPointer<Profile>> m_profiles;
     ProfileModel();
-
 };
 
 }

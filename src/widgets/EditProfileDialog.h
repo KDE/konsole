@@ -30,8 +30,9 @@
 #include "colorscheme/ColorSchemeEditor.h"
 #include "colorscheme/ColorSchemeViewDelegate.h"
 
-#include "Profile.h"
-#include "ProfileGroup.h"
+#include "profile/Profile.h"
+#include "profile/ProfileGroup.h"
+
 #include "Enumeration.h"
 #include "keyboardtranslator/KeyboardTranslatorManager.h"
 #include "FontDialog.h"

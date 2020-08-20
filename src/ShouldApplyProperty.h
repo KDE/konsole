@@ -22,7 +22,7 @@
 #ifndef SHOULDAPPLYPROPERTY_H
 #define SHOULDAPPLYPROPERTY_H
 
-#include "Profile.h"
+#include "profile/Profile.h"
 
 namespace Konsole
 {

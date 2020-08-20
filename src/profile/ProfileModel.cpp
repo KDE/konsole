@@ -5,6 +5,7 @@
 #include <KLocalizedString>
 
 #include <QIcon>
+#include <QDebug>
 
 using namespace Konsole;
 
@@ -27,6 +28,8 @@ ProfileModel::ProfileModel()
 int ProfileModel::rowCount(const QModelIndex &unused) const
 {
     Q_UNUSED(unused);
+
+    // All profiles  plus the default profile that's always at index 0 on
     return m_profiles.count();
 }
 
@@ -58,12 +61,17 @@ QVariant ProfileModel::data(const QModelIndex& idx, int role) const
         return {};
     }
 
-    QExplicitlySharedDataPointer<Profile> profile = m_profiles.at(idx.row());
+    if (idx.row() > m_profiles.count()) {
+        return {};
+    }
 
+    auto profile = m_profiles.at(idx.row());
     switch (idx.column()) {
     case NAME: {
         switch (role) {
-        case Qt::DisplayRole: return QStringLiteral("%1%2").arg(profile->name(), (idx.row() == 0 ? i18n("(Default)") : QString()));
+        case Qt::DisplayRole: {
+            return QStringLiteral("%1%2").arg(profile->name(), (idx.row() == 0 ? i18n("(Default)") : QString()));
+        }
         case Qt::DecorationRole: return QIcon::fromTheme(profile->icon());
         case Qt::FontRole: {
                 // Default Profile
@@ -142,21 +150,30 @@ void ProfileModel::populate()
     endResetModel();
 }
 
-void ProfileModel::add(QExplicitlySharedDataPointer<Konsole::Profile> profile)
+void ProfileModel::add(QExplicitlySharedDataPointer<Profile> profile)
 {
     // The model is too small for this to matter.
     Q_UNUSED(profile);
     populate();
 }
 
-void ProfileModel::remove(QExplicitlySharedDataPointer<Konsole::Profile> profile)
+void ProfileModel::remove(QExplicitlySharedDataPointer<Profile> profile)
 {
     // The model is too small for this to matter.
     Q_UNUSED(profile);
     populate();
 }
 
-void ProfileModel::update(QExplicitlySharedDataPointer<Konsole::Profile> profile)
+void ProfileModel::setDefault(QExplicitlySharedDataPointer<Profile> profile)
+{
+    if (m_profiles.count()) {
+        m_profiles.removeFirst();
+        m_profiles.prepend(profile);
+    }
+    emit dataChanged(index(0, 0), index(0, COLUMNS-1), {Qt::DisplayRole});
+}
+
+void ProfileModel::update(QExplicitlySharedDataPointer<Profile> profile)
 {
     int row = m_profiles.indexOf(profile);
     dataChanged(index(row, 0), index(row, COLUMNS-1));

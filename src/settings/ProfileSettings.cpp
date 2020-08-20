@@ -40,11 +40,10 @@ using namespace Konsole;
 
 ProfileSettings::ProfileSettings(QWidget* parent)
     : QWidget(parent)
-    , m_profileModel(ProfileModel::instance())
 {
     setupUi(this);
 
-    profilesList->setModel(m_profileModel);
+    profilesList->setModel(ProfileModel::instance());
     profilesList->setItemDelegateForColumn(ProfileModel::SHORTCUT, new ShortcutItemDelegate(this));
 
     // double clicking the profile name opens the profile edit dialog

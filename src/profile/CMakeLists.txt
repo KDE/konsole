@@ -1,7 +1,7 @@
 
 
 add_library(konsoleprofile
-STATIC
+OBJECT
     Profile.cpp
     ProfileCommandParser.cpp
     ProfileGroup.cpp

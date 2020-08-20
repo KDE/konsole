@@ -43,7 +43,7 @@
 #include "history/HistoryTypeNone.h"
 
 #include "profile/ProfileManager.h"
-#include "ProfileCommandParser.h"
+#include "profile/ProfileCommandParser.h"
 
 #include "session/Session.h"
 #include "session/SessionController.h"
