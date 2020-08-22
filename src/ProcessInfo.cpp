@@ -703,12 +703,12 @@ private:
             return false;
         }
 
-        setName(kInfoProc->p_comm);
+        setName(QString::fromUtf8(kInfoProc->p_comm));
         setPid(kInfoProc->p_pid);
         setParentPid(kInfoProc->p_ppid);
         setForegroundPid(kInfoProc->p_tpgid);
         setUserId(kInfoProc->p_uid);
-        setUserName(kInfoProc->p_login);
+        setUserName(QString::fromUtf8(kInfoProc->p_login));
 
         free(kInfoProc);
         return true;
@@ -757,7 +757,7 @@ private:
         }
 
         for (char **p = argv; *p != NULL; p++) {
-            addArgument(QString(*p));
+            addArgument(QString::fromUtf8(*p));
         }
         free(argv);
         return true;
