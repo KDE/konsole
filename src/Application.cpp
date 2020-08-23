@@ -179,7 +179,7 @@ void Application::createWindow(const Profile::Ptr &profile, const QString &direc
 {
     MainWindow *window = newMainWindow();
     window->createSession(profile, directory);
-    finalizeNewMainWindow(window);
+    window->show();
 }
 
 void Application::detachTerminals(ViewSplitter *splitter,const QHash<TerminalDisplay*, Session*>& sessionsMap)
@@ -258,7 +258,7 @@ int Application::newInstance()
         // If not restoring size from last time or only adding new tab,
         // resize window to chosen profile size (see Bug:345403)
         if (createdNewMainWindow) {
-            finalizeNewMainWindow(window);
+            window->show();
         } else {
             window->setWindowState(window->windowState() & (~Qt::WindowMinimized | Qt::WindowActive));
             window->show();
@@ -609,10 +609,3 @@ void Application::slotActivateRequested(QStringList args, const QString & /*work
     newInstance();
 }
 
-void Application::finalizeNewMainWindow(MainWindow *window)
-{
-    if (!KonsoleSettings::saveGeometryOnExit()) {
-        window->resize(window->sizeHint());
-    }
-    window->show();
-}

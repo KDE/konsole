@@ -88,7 +88,6 @@ private:
     QExplicitlySharedDataPointer<Profile> processProfileChangeArgs(QExplicitlySharedDataPointer<Profile> baseProfile);
     bool processTabsFromFileArgs(MainWindow *window);
     void createTabFromArgs(MainWindow *window, const QHash<QString, QString> &);
-    void finalizeNewMainWindow(MainWindow *window);
 
     MainWindow *_backgroundInstance;
     QSharedPointer<QCommandLineParser> m_parser;
