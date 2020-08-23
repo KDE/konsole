@@ -27,6 +27,7 @@
 #include <QDir>
 #include <QCommandLineParser>
 #include <QStandardPaths>
+#include <QTimer>
 
 // KDE
 #include <KActionCollection>
@@ -258,7 +259,7 @@ int Application::newInstance()
         // If not restoring size from last time or only adding new tab,
         // resize window to chosen profile size (see Bug:345403)
         if (createdNewMainWindow) {
-            window->show();
+            QTimer::singleShot(0, window, &MainWindow::show);
         } else {
             window->setWindowState(window->windowState() & (~Qt::WindowMinimized | Qt::WindowActive));
             window->show();
