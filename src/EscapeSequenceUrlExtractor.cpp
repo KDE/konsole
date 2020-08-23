@@ -62,7 +62,7 @@ void EscapeSequenceUrlExtractor::appendUrlText(QChar c)
 
 void EscapeSequenceUrlExtractor::setUrl(const QString& url)
 {
-    if (_allowedUriSchemas.contains(QUrl(url).scheme())) {
+    if (_allowedUriSchemas.contains(QUrl(url).scheme() + QLatin1String("://"))) {
         _currentUrl.url = url;
     } else {
         abortUrlInput();
