@@ -22,6 +22,8 @@
 
 #include "EscapeSequenceUrlExtractor.h"
 
+#include <QUrl>
+
 namespace Konsole {
 EscapeSequenceUrlExtractor::EscapeSequenceUrlExtractor()
 {
@@ -60,13 +62,11 @@ void EscapeSequenceUrlExtractor::appendUrlText(QChar c)
 
 void EscapeSequenceUrlExtractor::setUrl(const QString& url)
 {
-    _currentUrl.url = url;
-    for (const auto &schema : _allowedUriSchemas) {
-        if (url.startsWith(schema)) {
-            return;
-        }
+    if (_allowedUriSchemas.contains(QUrl(url).scheme())) {
+        _currentUrl.url = url;
+    } else {
+        abortUrlInput();
     }
-    abortUrlInput();
 }
 
 void EscapeSequenceUrlExtractor::abortUrlInput()
