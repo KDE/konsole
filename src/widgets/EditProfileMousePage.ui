@@ -273,14 +273,14 @@
            </property>
           </spacer>
          </item>
-         <item row="4" column="2">
+         <item row="5" column="2">
           <widget class="QLineEdit" name="linkEscapeSequenceTexts">
            <property name="toolTip">
             <string>The formats of possible links, like http://, https:// and file://</string>
            </property>
           </widget>
          </item>
-         <item row="6" column="0" colspan="4">
+         <item row="7" column="0" colspan="4">
           <widget class="QCheckBox" name="ctrlRequiredForDragButton">
            <property name="toolTip">
             <string>Selected text will require control key plus click to drag.</string>
@@ -290,7 +290,7 @@
            </property>
           </widget>
          </item>
-         <item row="9" column="0" colspan="4">
+         <item row="10" column="0" colspan="4">
           <widget class="QCheckBox" name="enableAlternateScrollingButton">
            <property name="toolTip">
             <string>Mouse scroll wheel will emulate up/down key presses in programs that use the Alternate Screen buffer (e.g. less)</string>
@@ -326,7 +326,7 @@
            </property>
           </spacer>
          </item>
-         <item row="5" column="0" colspan="4">
+         <item row="6" column="0" colspan="4">
           <widget class="QCheckBox" name="underlineFilesButton">
            <property name="toolTip">
             <string>Text recognized as a file will be underlined when hovered by the mouse pointer.</string>
@@ -336,7 +336,7 @@
            </property>
           </widget>
          </item>
-         <item row="7" column="0" colspan="4">
+         <item row="8" column="0" colspan="4">
           <widget class="QCheckBox" name="dropUrlsAsText">
            <property name="toolTip">
             <string>Always paste dropped files and URLs as text without offering move, copy and link actions.</string>
@@ -353,7 +353,23 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="0" colspan="4">
+         <item row="4" column="1" colspan="3">
+          <widget class="QLabel" name="allowLinkEscapeSequenceButtonWarning">
+           <property name="text">
+            <string>&lt;b&gt;WARNING&lt;/b&gt;: This has security implications as it allows malicious URLs to be shown as another URL or hidden.&lt;br&gt;Make sure you understand the implications before turning this on.</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::RichText</enum>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="0" colspan="4">
           <widget class="QCheckBox" name="enableMouseWheelZoomButton">
            <property name="toolTip">
             <string>Pressing Ctrl+scrollwheel will increase/decrease the text size.</string>
@@ -363,7 +379,7 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
+         <item row="5" column="1">
           <widget class="QLabel" name="label_2">
            <property name="text">
             <string>Allowed link formats</string>

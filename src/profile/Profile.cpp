@@ -233,7 +233,7 @@ void Profile::useFallback()
     setProperty(WordCharacters, QStringLiteral(":@-./_~?&=%+#"));
 
     setProperty(TabColor, QColor(QColor::Invalid));
-    setProperty(AllowEscapedLinks, true);
+    setProperty(AllowEscapedLinks, false);
     setProperty(EscapedLinksSchema, QStringLiteral("http://;https://;file://"));
     setProperty(VerticalLine, false);
     setProperty(VerticalLineAtChar, 80);
