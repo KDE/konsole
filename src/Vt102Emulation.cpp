@@ -533,7 +533,9 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
   }
 
   if (value == QLatin1String("?")) {
-      emit sessionAttributeRequest(attribute);
+      // pass terminator type indication here, because OSC response terminator
+      // should match the terminator of OSC request.
+      emit sessionAttributeRequest(attribute, tokenBuffer[tokenSize]);
       return;
   }
 

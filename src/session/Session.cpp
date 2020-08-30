@@ -708,16 +708,16 @@ bool Session::isPrimaryScreen()
     return _isPrimaryScreen;
 }
 
-void Session::sessionAttributeRequest(int id)
+void Session::sessionAttributeRequest(int id, uint terminator)
 {
     switch (id) {
         case TextColor:
             // Get 'TerminalDisplay' (_view) foreground color
-            emit getForegroundColor();
+            emit getForegroundColor(terminator);
             break;
         case BackgroundColor:
             // Get 'TerminalDisplay' (_view) background color
-            emit getBackgroundColor();
+            emit getBackgroundColor(terminator);
             break;
     }
 }
@@ -794,25 +794,32 @@ void Session::sendSignal(int signal)
     }
 }
 
-void Session::reportColor(SessionAttributes r, const QColor& c)
+void Session::reportColor(SessionAttributes r, const QColor& c, uint terminator)
 {
     #define to65k(a) (QStringLiteral("%1").arg(int(((a)*0xFFFF)), 4, 16, QLatin1Char('0')))
     QString msg = QStringLiteral("\033]%1;rgb:").arg(r)
                 + to65k(c.redF())   + QLatin1Char('/')
                 + to65k(c.greenF()) + QLatin1Char('/')
-                + to65k(c.blueF())  + QLatin1Char('\a');
+                + to65k(c.blueF());
+
+    // Match termination of OSC reply to termination of OSC request.
+    if (terminator == '\a') { // non standard BEL terminator
+        msg += QLatin1Char('\a');
+    } else { // standard 7-bit ST terminator
+        msg += QStringLiteral("\033\\");
+    }
     _emulation->sendString(msg.toUtf8());
     #undef to65k
 }
 
-void Session::reportForegroundColor(const QColor& c)
+void Session::reportForegroundColor(const QColor& c, uint terminator)
 {
-    reportColor(SessionAttributes::TextColor, c);
+    reportColor(SessionAttributes::TextColor, c, terminator);
 }
 
-void Session::reportBackgroundColor(const QColor& c)
+void Session::reportBackgroundColor(const QColor& c, uint terminator)
 {
-    reportColor(SessionAttributes::BackgroundColor, c);
+    reportColor(SessionAttributes::BackgroundColor, c, terminator);
 }
 
 bool Session::kill(int signal)

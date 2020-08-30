@@ -399,7 +399,7 @@ Q_SIGNALS:
     /**
      * Emitted when terminal code requiring terminal's response received.
      */
-    void sessionAttributeRequest(int id);
+    void sessionAttributeRequest(int id, uint terminator);
 
     /**
      * Emitted when Set Cursor Style (DECSCUSR) escape sequences are sent

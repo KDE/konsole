@@ -395,9 +395,9 @@ public:
 
     void sendSignal(int signal);
 
-    void reportColor(SessionAttributes r, const QColor &c);
-    void reportForegroundColor(const QColor &c);
-    void reportBackgroundColor(const QColor &c);
+    void reportColor(SessionAttributes r, const QColor& c, uint terminator);
+    void reportForegroundColor(const QColor &c, uint terminator);
+    void reportBackgroundColor(const QColor &c, uint terminator);
 
     bool isReadOnly() const;
     void setReadOnly(bool readOnly);
@@ -737,7 +737,7 @@ Q_SIGNALS:
      * Emitted when foreground request ("\033]10;?\a") terminal code received.
      * Terminal is expected send "\033]10;rgb:RRRR/GGGG/BBBB\a" response.
      */
-    void getForegroundColor();
+    void getForegroundColor(uint terminator);
 
     /**
      * Emitted when background request ("\033]11;?\a") terminal code received.
@@ -746,7 +746,7 @@ Q_SIGNALS:
      * Originally implemented to support vim's background detection feature
      * (without explicitly setting 'bg=dark' within local/remote vimrc)
      */
-    void getBackgroundColor();
+    void getBackgroundColor(uint terminator);
 
 private Q_SLOTS:
     void done(int, QProcess::ExitStatus);
@@ -775,7 +775,7 @@ private Q_SLOTS:
     // Relays the signal from Emulation and sets _isPrimaryScreen
     void onPrimaryScreenInUse(bool use);
 
-    void sessionAttributeRequest(int id);
+    void sessionAttributeRequest(int id, uint terminator);
 
     /**
      * Requests that the color the text for any tabs associated with

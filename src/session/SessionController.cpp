@@ -551,16 +551,16 @@ void SessionController::sendSignal(QAction* action)
     _sessionDisplayConnection->session()->sendSignal(signal);
 }
 
-void SessionController::sendForegroundColor()
+void SessionController::sendForegroundColor(uint terminator)
 {
     const QColor c = _sessionDisplayConnection->view()->getForegroundColor();
-    _sessionDisplayConnection->session()->reportForegroundColor(c);
+    _sessionDisplayConnection->session()->reportForegroundColor(c, terminator);
 }
 
-void SessionController::sendBackgroundColor()
+void Konsole::SessionController::sendBackgroundColor(uint terminator)
 {
     const QColor c = _sessionDisplayConnection->view()->getBackgroundColor();
-    _sessionDisplayConnection->session()->reportBackgroundColor(c);
+    _sessionDisplayConnection->session()->reportBackgroundColor(c, terminator);
 }
 
 void SessionController::toggleReadOnly()
