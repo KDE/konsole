@@ -23,6 +23,9 @@
      <property name="suffix">
       <string>px</string>
      </property>
+     <property name="minimum">
+      <number>16</number>
+     </property>
      <property name="maximum">
       <number>1024</number>
      </property>
