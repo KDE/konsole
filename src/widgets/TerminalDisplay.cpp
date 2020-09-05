@@ -2850,7 +2850,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
 void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 {
     // Only vertical scrolling is supported
-    if (ev->angleDelta().x() != 0) {
+    if (qAbs(ev->angleDelta().y()) < qAbs(ev->angleDelta().x())) {
         return;
     }
 
