@@ -67,7 +67,7 @@ private:
      * that will take over the history file.
      * TODO: make it configurable.
      */
-    const int _maximumUrlHistory = 200;
+    //Not used ATM const int _maximumUrlHistory = 200;
 
     /* All of the extracted URL's. */
     QVector<ExtractedUrl> _history;
