@@ -43,7 +43,6 @@
 #include <KMessageBox>
 #include <KRun>
 #include <KShell>
-#include <KToolInvocation>
 #include <KToggleAction>
 #include <KSelectAction>
 #include <KXmlGuiWindow>
@@ -55,6 +54,7 @@
 #include <KConfigGroup>
 #include <KCodecAction>
 #include <KNotification>
+#include <KIO/CommandLauncherJob>
 
 // Konsole
 #include "CopyInputDialog.h"
@@ -541,7 +541,8 @@ void SessionController::handleWebShortcutAction()
 
 void SessionController::configureWebShortcuts()
 {
-    KToolInvocation::kdeinitExec(QStringLiteral("kcmshell5"), { QStringLiteral("webshortcuts") });
+    auto job = new KIO::CommandLauncherJob(QStringLiteral("kcmshell5"), { QStringLiteral("webshortcuts") });
+    job->start();
 }
 
 void SessionController::sendSignal(QAction* action)
