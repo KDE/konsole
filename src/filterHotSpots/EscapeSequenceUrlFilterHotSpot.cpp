@@ -41,7 +41,7 @@ EscapeSequenceUrlHotSpot::EscapeSequenceUrlHotSpot(
 
 void EscapeSequenceUrlHotSpot::activate(QObject *obj)
 {
-    Q_UNUSED(obj);
+    Q_UNUSED(obj)
 
     new KRun(QUrl(_url), QApplication::activeWindow());
 }
