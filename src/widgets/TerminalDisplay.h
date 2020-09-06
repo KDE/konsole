@@ -560,6 +560,8 @@ Q_SIGNALS:
 
     void compositeFocusChanged(bool focused);
 
+    void peekPrimaryRequested(bool doPeek);
+
 protected:
     // events
     bool event(QEvent *event) override;
@@ -919,6 +921,7 @@ private:
     int _displayVerticalLineAtChar;
 
     QSharedPointer<HotSpot> _currentlyHoveredHotspot;
+    QKeySequence _peekPrimaryShortcut;
 };
 
 }

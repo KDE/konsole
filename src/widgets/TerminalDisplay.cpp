@@ -3739,11 +3739,14 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
     }
 
     if (_currentlyHoveredHotspot != nullptr) {
-        auto fileHotspot = _currentlyHoveredHotspot.dynamicCast<FileFilterHotSpot>();
-        if (!fileHotspot) {
-            return;
+        QSharedPointer<Konsole::FileFilterHotSpot> fileHotspot = _currentlyHoveredHotspot.dynamicCast<FileFilterHotSpot>();
+        if (fileHotspot) {
+            fileHotspot->requestThumbnail(event->modifiers(), QCursor::pos());
         }
-        fileHotspot->requestThumbnail(event->modifiers(), QCursor::pos());
+    }
+
+    if (!_peekPrimaryShortcut.isEmpty() && _peekPrimaryShortcut.matches(QKeySequence(event->key() | event->modifiers()))) {
+        peekPrimaryRequested(true);
     }
 
     _screenWindow->screen()->setCurrentTerminalDisplay(this);
@@ -3789,6 +3792,8 @@ void TerminalDisplay::keyReleaseEvent(QKeyEvent *event)
         event->accept();
         return;
     }
+
+    peekPrimaryRequested(false);
 
     QWidget::keyReleaseEvent(event);
 }
@@ -4160,6 +4165,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _displayVerticalLineAtChar = profile->verticalLineAtChar();
     setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
     _dimValue = profile->dimValue();
+    _peekPrimaryShortcut = profile->peekPrimaryKeySequence();
 }
 
 void TerminalDisplay::printScreen()

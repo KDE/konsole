@@ -216,6 +216,8 @@ private Q_SLOTS:
     void toggleAllowLinkEscapeSequence(bool);
     void linkEscapeSequenceTextsChanged();
 
+    void peekPrimaryKeySequenceChanged();
+
 private:
     Q_DISABLE_COPY(EditProfileDialog)
 
