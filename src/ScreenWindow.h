@@ -257,6 +257,11 @@ Q_SIGNALS:
     /** Emitted when the selection is changed. */
     void selectionChanged();
 
+    /** Emitted when e. g. Screen is changed (to alternate or primary), so
+     * initial selection offsets etc. are invalidated.
+     */
+    void screenAboutToChange();
+
 private:
     Q_DISABLE_COPY(ScreenWindow)
 
