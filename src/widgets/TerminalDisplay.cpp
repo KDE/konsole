@@ -2348,32 +2348,32 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     QPoint here = QPoint(charColumn, charLine);
     QPoint ohere;
-    QPoint _iPntSelCorr = _iPntSel;
-    _iPntSelCorr.ry() -= _scrollBar->value();
-    QPoint _pntSelCorr = _pntSel;
-    _pntSelCorr.ry() -= _scrollBar->value();
+    QPoint iPntSelCorr = _iPntSel;
+    iPntSelCorr.ry() -= _scrollBar->value();
+    QPoint pntSelCorr = _pntSel;
+    pntSelCorr.ry() -= _scrollBar->value();
     bool swapping = false;
 
     if (_wordSelectionMode) {
         // Extend to word boundaries
-        const bool left_not_right = (here.y() < _iPntSelCorr.y() ||
-                                     (here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x()));
-        const bool old_left_not_right = (_pntSelCorr.y() < _iPntSelCorr.y() ||
-                                         (_pntSelCorr.y() == _iPntSelCorr.y() && _pntSelCorr.x() < _iPntSelCorr.x()));
+        const bool left_not_right = (here.y() < iPntSelCorr.y() ||
+                                     (here.y() == iPntSelCorr.y() && here.x() < iPntSelCorr.x()));
+        const bool old_left_not_right = (pntSelCorr.y() < iPntSelCorr.y() ||
+                                         (pntSelCorr.y() == iPntSelCorr.y() && pntSelCorr.x() < iPntSelCorr.x()));
         swapping = left_not_right != old_left_not_right;
 
         // Find left (left_not_right ? from here : from start of word)
-        QPoint left = left_not_right ? here : _iPntSelCorr;
+        QPoint left = left_not_right ? here : iPntSelCorr;
         // Find left (left_not_right ? from end of word : from here)
-        QPoint right = left_not_right ? _iPntSelCorr : here;
+        QPoint right = left_not_right ? iPntSelCorr : here;
 
         if (left.y() < 0 || left.y() >= _lines || left.x() < 0 || left.x() >= _columns) {
-            left = _pntSelCorr;
+            left = pntSelCorr;
         } else {
             left = findWordStart(left);
         }
         if (right.y() < 0 || right.y() >= _lines || right.x() < 0 || right.x() >= _columns) {
-            right = _pntSelCorr;
+            right = pntSelCorr;
         } else {
             right = findWordEnd(right);
         }
@@ -2391,12 +2391,12 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     if (_lineSelectionMode) {
         // Extend to complete line
-        const bool above_not_below = (here.y() < _iPntSelCorr.y());
+        const bool above_not_below = (here.y() < iPntSelCorr.y());
         if (above_not_below) {
-            ohere = findLineEnd(_iPntSelCorr);
+            ohere = findLineEnd(iPntSelCorr);
             here = findLineStart(here);
         } else {
-            ohere = findLineStart(_iPntSelCorr);
+            ohere = findLineStart(iPntSelCorr);
             here = findLineEnd(here);
         }
 
@@ -2408,17 +2408,17 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     int offset = 0;
     if (!_wordSelectionMode && !_lineSelectionMode) {
-        const bool left_not_right = (here.y() < _iPntSelCorr.y() ||
-                                     (here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x()));
-        const bool old_left_not_right = (_pntSelCorr.y() < _iPntSelCorr.y() ||
-                                         (_pntSelCorr.y() == _iPntSelCorr.y() && _pntSelCorr.x() < _iPntSelCorr.x()));
+        const bool left_not_right = (here.y() < iPntSelCorr.y() ||
+                                     (here.y() == iPntSelCorr.y() && here.x() < iPntSelCorr.x()));
+        const bool old_left_not_right = (pntSelCorr.y() < iPntSelCorr.y() ||
+                                         (pntSelCorr.y() == iPntSelCorr.y() && pntSelCorr.x() < iPntSelCorr.x()));
         swapping = left_not_right != old_left_not_right;
 
         // Find left (left_not_right ? from here : from start)
-        const QPoint left = left_not_right ? here : _iPntSelCorr;
+        const QPoint left = left_not_right ? here : iPntSelCorr;
 
         // Find right (left_not_right ? from start : from here)
-        QPoint right = left_not_right ? _iPntSelCorr : here;
+        QPoint right = left_not_right ? iPntSelCorr : here;
 
         // Pick which is start (ohere) and which is extension (here)
         if (left_not_right) {
@@ -2432,7 +2432,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         }
     }
 
-    if ((here == _pntSelCorr) && (scroll == _scrollBar->value())) {
+    if ((here == pntSelCorr) && (scroll == _scrollBar->value())) {
         return; // not moved
     }
 
