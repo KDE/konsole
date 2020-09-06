@@ -147,9 +147,9 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
             _filterUpdateRequired = true;
         });
         connect(_screenWindow.data(), &Konsole::ScreenWindow::screenAboutToChange, this, [this]() {
-            _iPntSel = QPoint();
-            _pntSel = QPoint();
-            _tripleSelBegin = QPoint();
+            _iPntSel = QPoint(-1, -1);
+            _pntSel = QPoint(-1, -1);
+            _tripleSelBegin = QPoint(-1, -1);
         });
         connect(_screenWindow.data(), &Konsole::ScreenWindow::scrolled, this, [this]() {
             _filterUpdateRequired = true;
@@ -467,9 +467,9 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _usesMouseTracking(false)
     , _alternateScrolling(true)
     , _bracketedPasteMode(false)
-    , _iPntSel(QPoint())
-    , _pntSel(QPoint())
-    , _tripleSelBegin(QPoint())
+    , _iPntSel(QPoint(-1, -1))
+    , _pntSel(QPoint(-1, -1))
+    , _tripleSelBegin(QPoint(-1, -1))
     , _actSel(0)
     , _wordSelectionMode(false)
     , _lineSelectionMode(false)
@@ -2305,6 +2305,11 @@ void TerminalDisplay::leaveEvent(QEvent *ev)
 void TerminalDisplay::extendSelection(const QPoint& position)
 {
     if (_screenWindow.isNull()) {
+        return;
+    }
+
+    if (_iPntSel.x() < 0 || _iPntSel.y() < 0 || _pntSel.x() < 0 || _pntSel.y() < 0) {
+        _iPntSel = _pntSel = position;
         return;
     }
 
