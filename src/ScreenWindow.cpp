@@ -49,6 +49,11 @@ void ScreenWindow::setScreen(Screen *screen)
 {
     Q_ASSERT(screen);
 
+    if (screen == _screen) {
+        return;
+    }
+
+    emit screenAboutToChange();
     _screen = screen;
 }
 

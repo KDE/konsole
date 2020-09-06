@@ -139,6 +139,11 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
         connect(_screenWindow.data(), &Konsole::ScreenWindow::outputChanged, this, [this]() {
             _filterUpdateRequired = true;
         });
+        connect(_screenWindow.data(), &Konsole::ScreenWindow::screenAboutToChange, this, [this]() {
+            _iPntSel = QPoint();
+            _pntSel = QPoint();
+            _tripleSelBegin = QPoint();
+        });
         connect(_screenWindow.data(), &Konsole::ScreenWindow::scrolled, this, [this]() {
             _filterUpdateRequired = true;
         });
