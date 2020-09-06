@@ -1499,15 +1499,17 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 region |= r;
             }
 
-            if (_showUrlHint && urlNumber >= 0 && urlNumber < 10 && spot->type() == HotSpot::Link) {
-                // Position at the beginning of the URL
-                QRect hintRect(*region.begin());
-                hintRect.setWidth(r.height());
-                painter.fillRect(hintRect, QColor(0, 0, 0, 128));
-                painter.setPen(Qt::white);
-                painter.drawRect(hintRect.adjusted(0, 0, -1, -1));
-                painter.drawText(hintRect, Qt::AlignCenter, QString::number(urlNumber));
+            if (_showUrlHint && spot->type() == HotSpot::Link) {
+                if (urlNumber >= 0 && urlNumber < 10) {
+                    // Position at the beginning of the URL
+                    QRect hintRect(*region.begin());
+                    hintRect.setWidth(r.height());
+                    painter.fillRect(hintRect, QColor(0, 0, 0, 128));
+                    painter.setPen(Qt::white);
+                    painter.drawRect(hintRect.adjusted(0, 0, -1, -1));
+                    painter.drawText(hintRect, Qt::AlignCenter, QString::number(urlNumber));
 
+                }
                 urlNumber += urlNumInc;
             }
         }
