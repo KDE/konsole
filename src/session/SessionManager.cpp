@@ -20,6 +20,7 @@
 #include <KConfigGroup>
 
 // Konsole
+#include "Emulation.h" // to connect the URL escape sequence extractor
 #include "Enumeration.h"
 #include "EscapeSequenceUrlExtractor.h"
 #include "Screen.h"
@@ -277,10 +278,17 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
     if (apply.shouldApply(Profile::SilenceSeconds)) {
         session->setMonitorSilenceSeconds(profile->silenceSeconds());
     }
-
-    for (TerminalDisplay *view : session->views()) {
-        view->screenWindow()->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
-        view->screenWindow()->screen()->setReflowLines(profile->property<bool>(Profile::ReflowLines));
+    if (apply.shouldApply(Profile::AllowEscapedLinks) || apply.shouldApply(Profile::ReflowLines)) {
+        const bool shouldEnableUrlExtractor = profile->allowEscapedLinks();
+        const bool enableReflowLines = profile->allowEscapedLinks();
+        for (TerminalDisplay *view : session->views()) {
+            view->screenWindow()->screen()->setReflowLines(enableReflowLines);
+            view->screenWindow()->screen()->setEnableUrlExtractor(shouldEnableUrlExtractor);
+            if (shouldEnableUrlExtractor) {
+                view->screenWindow()->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
+                connect(session->emulation(), &Emulation::toggleUrlExtractionRequest, view->screenWindow()->screen()->urlExtractor(), &EscapeSequenceUrlExtractor::toggleUrlInput);
+            }
+        }
     }
 }
 

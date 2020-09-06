@@ -25,7 +25,12 @@ void EscapeSequenceUrlFilter::process()
     if ((_window->screenWindow() == nullptr) && (_window->screenWindow()->screen() != nullptr)) {
         return;
     }
-    auto sWindow = _window->screenWindow();
+
+    QPointer<ScreenWindow> sWindow = _window->screenWindow();
+    if (!sWindow->screen()->urlExtractor()) {
+        return;
+    }
+
     const auto urls = sWindow->screen()->urlExtractor()->history();
 
     for (const auto &escapedUrl : urls) {

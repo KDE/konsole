@@ -403,6 +403,8 @@ Q_SIGNALS:
      */
     void resetCursorStyleRequest();
 
+    void toggleUrlExtractionRequest();
+
 protected:
     virtual void setMode(int mode) = 0;
     virtual void resetMode(int mode) = 0;

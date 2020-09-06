@@ -35,8 +35,10 @@ struct ExtractedUrl {
 /* Stored in Screen, but used in V10Emulation to
  * store extracted URL's. Perhaps this should be a Model?
  */
-class EscapeSequenceUrlExtractor
+class EscapeSequenceUrlExtractor : public QObject
 {
+    Q_OBJECT
+
 private:
     /* Tell us if we are currently reading or not a URL. */
     bool _reading = false;
@@ -120,6 +122,8 @@ public:
     void historyLinesRemoved(int lines);
 
     /* starts / stops URL Processing */
+
+public Q_SLOTS:
     void toggleUrlInput();
 };
 

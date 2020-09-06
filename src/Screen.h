@@ -605,6 +605,8 @@ public:
         return result;
     }
 
+    void setEnableUrlExtractor(const bool enable);
+
     static const Character DefaultChar;
 
     // Return the total number of lines before resize (fix scroll glitch)

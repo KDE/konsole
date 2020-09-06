@@ -84,9 +84,8 @@ Screen::Screen(int lines, int columns)
     , _effectiveRendition(DEFAULT_RENDITION)
     , _lastPos(-1)
     , _lastDrawnChar(0)
-    , _escapeSequenceUrlExtractor(std::make_unique<EscapeSequenceUrlExtractor>())
+    , _escapeSequenceUrlExtractor(nullptr)
 {
-    _escapeSequenceUrlExtractor->setScreen(this);
     std::fill(_lineProperties.begin(), _lineProperties.end(), LINE_DEFAULT);
 
     _graphicsPlacements = std::vector<std::unique_ptr<TerminalGraphicsPlacement_t>>();
@@ -497,7 +496,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
         // If _history size > max history size it will drop a line from _history.
         // We need to verify if we need to remove a URL.
-        if (removedLines) {
+        if (removedLines && _escapeSequenceUrlExtractor) {
             _escapeSequenceUrlExtractor->historyLinesRemoved(removedLines);
         }
     }
@@ -1063,7 +1062,10 @@ notcombine:
         --w;
     }
     _cuX = newCursorX;
-    _escapeSequenceUrlExtractor->appendUrlText(QChar(c));
+
+    if (_escapeSequenceUrlExtractor) {
+        _escapeSequenceUrlExtractor->appendUrlText(QChar(c));
+    }
 }
 
 int Screen::scrolledLines() const
@@ -1732,7 +1734,7 @@ void Screen::fastAddHistLine()
 
     // If _history size > max history size it will drop a line from _history.
     // We need to verify if we need to remove a URL.
-    if (removeLine) {
+    if (removeLine && _escapeSequenceUrlExtractor) {
         _escapeSequenceUrlExtractor->historyLinesRemoved(1);
     }
 
@@ -1760,7 +1762,7 @@ void Screen::addHistLine()
 
         // If the history is full, increment the count
         // of dropped _lines
-        if (newHistLines == oldHistLines) {
+        if (_escapeSequenceUrlExtractor && newHistLines == oldHistLines) {
             ++_droppedLines;
 
             // We removed a line, we need to verify if we need to remove a URL.
@@ -1854,6 +1856,22 @@ void Screen::setLineProperty(LineProperty property, bool enable)
 void Screen::fillWithDefaultChar(Character *dest, int count)
 {
     std::fill_n(dest, count, Screen::DefaultChar);
+}
+
+void Konsole::Screen::setEnableUrlExtractor(const bool enable)
+{
+    if (enable) {
+        if (_escapeSequenceUrlExtractor) {
+            return;
+        }
+        _escapeSequenceUrlExtractor = std::make_unique<EscapeSequenceUrlExtractor>();
+        _escapeSequenceUrlExtractor->setScreen(this);
+    } else {
+        if (!_escapeSequenceUrlExtractor) {
+            return;
+        }
+        _escapeSequenceUrlExtractor.reset();
+    }
 }
 
 Konsole::EscapeSequenceUrlExtractor *Konsole::Screen::urlExtractor() const

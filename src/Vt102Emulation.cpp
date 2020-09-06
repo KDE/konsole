@@ -455,7 +455,7 @@ void Vt102Emulation::receiveChars(const QVector<uint> &chars)
                     // do not.
                     if (s[2] == XTERM_EXTENDED::URL_LINK) {
                         // printf '\e]8;;https://example.com\e\\This is a link\e]8;;\e\\\n'
-                        _currentScreen->urlExtractor()->toggleUrlInput();
+                        emit toggleUrlExtractionRequest();
                     }
                     processSessionAttributeRequest(p - 1);
                     resetTokenizer();
@@ -733,7 +733,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
     ++i;
 
     QString value = QString::fromUcs4(&tokenBuffer[i], tokenSize - i);
-    if (_currentScreen->urlExtractor()->reading()) {
+    if (_currentScreen->urlExtractor() && _currentScreen->urlExtractor()->reading()) {
         // To handle '\e ] 8 ; <id-part> ; <url-part>' we discard
         // the <id-part>. Often it is empty, but GNU libtextstyle
         // may output an id here, see e.g.

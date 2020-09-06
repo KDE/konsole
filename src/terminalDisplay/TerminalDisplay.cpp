@@ -140,8 +140,11 @@ void TerminalDisplay::setScreenWindow(ScreenWindow *window)
         _screenWindow->setWindowLines(_lines);
 
         auto profile = SessionManager::instance()->sessionProfile(_sessionController->session());
-        _screenWindow->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
         _screenWindow->screen()->setReflowLines(profile->property<bool>(Profile::ReflowLines));
+
+        if (_screenWindow->screen()->urlExtractor()) {
+            _screenWindow->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
+        }
     }
 }
 
