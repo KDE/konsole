@@ -107,6 +107,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { BellMode , "BellMode" , TERMINAL_GROUP , QVariant::Int }
     , { VerticalLine, "VerticalLine", TERMINAL_GROUP, QVariant::Bool }
     , { VerticalLineAtChar, "VerticalLineAtChar", TERMINAL_GROUP, QVariant::Int }
+    , { PeekPrimaryKeySequence, "PeekPrimaryKeySequence", TERMINAL_GROUP, QVariant::String }
     // Cursor
     , { UseCustomCursorColor , "UseCustomCursorColor" , CURSOR_GROUP , QVariant::Bool}
     , { CursorShape , "CursorShape" , CURSOR_GROUP , QVariant::Int}
@@ -236,6 +237,7 @@ void Profile::useFallback()
     setProperty(EscapedLinksSchema, QStringLiteral("http://;https://;file://"));
     setProperty(VerticalLine, false);
     setProperty(VerticalLineAtChar, 80);
+    setProperty(PeekPrimaryKeySequence, QString());
     // Fallback should not be shown in menus
     setHidden(true);
 }

@@ -246,6 +246,8 @@ public Q_SLOTS:
      */
     virtual void focusChanged(bool focused) = 0;
 
+    void setPeekPrimary(const bool doPeek);
+
 Q_SIGNALS:
 
     /**
@@ -480,6 +482,7 @@ private Q_SLOTS:
     void bracketedPasteModeChanged(bool bracketedPasteMode);
 
 private:
+    void setScreenInternal(int index);
     Q_DISABLE_COPY(Emulation)
 
     bool _usesMouseTracking;
@@ -487,6 +490,8 @@ private:
     QTimer _bulkTimer1;
     QTimer _bulkTimer2;
     bool _imageSizeInitialized;
+    bool _peekingPrimary;
+    int _activeScreenIndex;
 };
 }
 

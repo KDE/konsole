@@ -3497,6 +3497,10 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
         _filterChain->keyPressEvent(this, event, charLine, charColumn);
     }
 
+    if (!_peekPrimaryShortcut.isEmpty() && _peekPrimaryShortcut.matches(QKeySequence(event->key() | event->modifiers()))) {
+        peekPrimaryRequested(true);
+    }
+
     _screenWindow->screen()->setCurrentTerminalDisplay(this);
 
     if (!_readOnly) {
@@ -3542,6 +3546,8 @@ void TerminalDisplay::keyReleaseEvent(QKeyEvent *event)
         getCharacterPosition(mapFromGlobal(QCursor::pos()), charLine, charColumn, !_usesMouseTracking);
         _filterChain->keyReleaseEvent(this, event, charLine, charColumn);
     }
+
+    peekPrimaryRequested(false);
 
     QWidget::keyReleaseEvent(event);
 }
@@ -3915,6 +3921,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _filterChain->setUrlHintsModifiers(Qt::KeyboardModifiers(profile->property<int>(Profile::UrlHintsModifiers)));
     _filterChain->setReverseUrlHints(profile->property<bool>(Profile::ReverseUrlHints));
 
+    _peekPrimaryShortcut = profile->peekPrimaryKeySequence();
 }
 
 void TerminalDisplay::printScreen()

@@ -1740,6 +1740,9 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
             &Konsole::EditProfileDialog::setDefaultCodec);
 
     _advancedUi->selectEncodingButton->setText(profile->defaultEncoding());
+
+    _advancedUi->peekPrimaryWidget->setKeySequence(profile->peekPrimaryKeySequence());
+    connect(_advancedUi->peekPrimaryWidget, &QKeySequenceEdit::editingFinished, this, &EditProfileDialog::peekPrimaryKeySequenceChanged);
 }
 
 int EditProfileDialog::maxSpinBoxWidth(const KPluralHandlingSpinBox *spinBox, const KLocalizedString &suffix)
@@ -1889,4 +1892,9 @@ void EditProfileDialog::toggleBlinkingText(bool enable)
 void EditProfileDialog::toggleFlowControl(bool enable)
 {
     updateTempProfileProperty(Profile::FlowControlEnabled, enable);
+}
+
+void EditProfileDialog::peekPrimaryKeySequenceChanged()
+{
+    updateTempProfileProperty(Profile::PeekPrimaryKeySequence, _advancedUi->peekPrimaryWidget->keySequence().toString());
 }

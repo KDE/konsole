@@ -43,7 +43,9 @@ Emulation::Emulation() :
     _bracketedPasteMode(false),
     _bulkTimer1(new QTimer(this)),
     _bulkTimer2(new QTimer(this)),
-    _imageSizeInitialized(false)
+    _imageSizeInitialized(false),
+    _peekingPrimary(false),
+    _activeScreenIndex(0)
 {
     // create screens with a default size
     _screen[0] = new Screen(40, 80);
@@ -118,7 +120,24 @@ Emulation::~Emulation()
     delete _decoder;
 }
 
+void Emulation::setPeekPrimary(const bool doPeek)
+{
+    if (doPeek == _peekingPrimary) {
+        return;
+    }
+    _peekingPrimary = doPeek;
+    setScreenInternal(doPeek ? 0 : _activeScreenIndex);
+    emit outputChanged();
+}
+
 void Emulation::setScreen(int index)
+{
+    _activeScreenIndex = index;
+    _peekingPrimary = false;
+    setScreenInternal(_activeScreenIndex);
+}
+
+void Emulation::setScreenInternal(int index)
 {
     Screen *oldScreen = _currentScreen;
     _currentScreen = _screen[index & 1];

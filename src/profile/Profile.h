@@ -28,6 +28,7 @@
 #include <QVariant>
 #include <QFont>
 #include <QColor>
+#include <QKeySequence>
 
 // Konsole
 #include "konsoleprofile_export.h"
@@ -322,7 +323,10 @@ public:
         /** Use Vertical Line At */
         VerticalLine,
         /** Vertical Line Pixel at */
-        VerticalLineAtChar
+        VerticalLineAtChar,
+
+        /** Shortcut for peeking primary screen */
+        PeekPrimaryKeySequence
     };
 
     Q_ENUM(Property)
@@ -681,6 +685,11 @@ public:
     int verticalLineAtChar() const
     {
         return property<int>(Profile::VerticalLineAtChar);
+    }
+
+    QKeySequence peekPrimaryKeySequence() const
+    {
+        return QKeySequence::fromString(property<QString>(Profile::PeekPrimaryKeySequence));
     }
 
     int menuIndexAsInt() const;

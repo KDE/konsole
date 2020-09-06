@@ -270,6 +270,20 @@
        </property>
       </widget>
      </item>
+     <item row="8" column="0" alignment="Qt::AlignRight">
+      <widget class="QLabel" name="peekPrimaryLabel">
+       <property name="text">
+        <string>Shortcut for peeking the primary screen:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1" alignment="Qt::AlignRight">
+      <widget class="QKeySequenceEdit" name="peekPrimaryWidget">
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

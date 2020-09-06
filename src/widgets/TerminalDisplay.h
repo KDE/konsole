@@ -575,6 +575,8 @@ Q_SIGNALS:
 
     void compositeFocusChanged(bool focused);
 
+    void peekPrimaryRequested(bool doPeek);
+
 protected:
     // events
     bool event(QEvent *event) override;
@@ -917,6 +919,8 @@ private:
     bool _hasCompositeFocus;
     bool _displayVerticalLine;
     int _displayVerticalLineAtChar;
+
+    QKeySequence _peekPrimaryShortcut;
 };
 
 }
