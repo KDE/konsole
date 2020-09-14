@@ -119,7 +119,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
 
     auto editAction = _contextPopupMenu->addAction(
         QIcon::fromTheme(QStringLiteral("edit-rename")),
-        i18nc("@action:inmenu", "&Current Tab Settings..."), this,
+        i18nc("@action:inmenu", "&Configure or Rename Tab..."), this,
         [this]{ renameTab(_contextMenuTabIndex); }
     );
     editAction->setObjectName(QStringLiteral("edit-rename"));

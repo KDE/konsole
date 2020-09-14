@@ -35,7 +35,7 @@ RenameTabDialog::RenameTabDialog(QWidget *parent) :
     QDialog(parent),
     _ui(nullptr)
 {
-    setWindowTitle(i18n("Current Tab Settings"));
+    setWindowTitle(i18n("Tab Properties"));
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
     auto mainWidget = new QWidget(this);
     auto mainLayout = new QVBoxLayout;
