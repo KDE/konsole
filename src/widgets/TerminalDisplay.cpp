@@ -488,9 +488,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _textBlinking(false)
     , _cursorBlinking(false)
     , _hasTextBlinker(false)
-    , _urlHintsModifiers(Qt::NoModifier)
-    , _showUrlHint(false)
-    , _reverseUrlHints(false)
     , _openLinksByDirectClick(false)
     , _ctrlRequiredForDrag(true)
     , _dropUrlsAsText(false)
@@ -1790,8 +1787,6 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
     // suppress further text blinking
     _blinkTextTimer->stop();
     Q_ASSERT(!_textBlinking);
-
-    _showUrlHint = false;
 }
 
 void TerminalDisplay::focusInEvent(QFocusEvent*)
@@ -3050,7 +3045,7 @@ void TerminalDisplay::setUsesMouseTracking(bool on)
     resetCursor();
 }
 
-void TerminalDisplay::resetCursor() 
+void TerminalDisplay::resetCursor()
 {
     setCursor(_usesMouseTracking ? Qt::ArrowCursor : Qt::IBeamCursor);
 }
@@ -3490,28 +3485,6 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
 
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
-    // TODO: Move this code to HotSpot too.
-    if ((_urlHintsModifiers != 0u) && event->modifiers() == _urlHintsModifiers) {
-        QList<QSharedPointer<HotSpot>> hotspots = _filterChain->filterBy(HotSpot::Link);
-        int nHotSpots = hotspots.count();
-        int hintSelected = event->key() - 0x31;
-        if (hintSelected >= 0 && hintSelected < 10 && hintSelected < nHotSpots) {
-            if (_reverseUrlHints) {
-                hintSelected = nHotSpots - hintSelected - 1;
-            }
-            hotspots.at(hintSelected)->activate();
-            _showUrlHint = false;
-            update();
-            return;
-        }
-
-        if (!_showUrlHint) {
-            processFilters();
-            _showUrlHint = true;
-            update();
-        }
-    }
-
     { // C++17: change getCharacterPosition to return a tuple and use auto [charLine, charColumn] to extract the values.
         int charLine;
         int charColumn;
@@ -3553,11 +3526,6 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 
 void TerminalDisplay::keyReleaseEvent(QKeyEvent *event)
 {
-    if (_showUrlHint) {
-        _showUrlHint = false;
-        update();
-    }
-
     if (_readOnly) {
         event->accept();
         return;
@@ -3905,8 +3873,6 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _trimLeadingSpaces = profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText);
     _trimTrailingSpaces = profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText);
     _openLinksByDirectClick = profile->property<bool>(Profile::OpenLinksByDirectClickEnabled);
-    _urlHintsModifiers = Qt::KeyboardModifiers(profile->property<int>(Profile::UrlHintsModifiers));
-    _reverseUrlHints = profile->property<bool>(Profile::ReverseUrlHints);
     setMiddleClickPasteMode(Enum::MiddleClickPasteModeEnum(profile->property<int>(Profile::MiddleClickPasteMode)));
     setCopyTextAsHTML(profile->property<bool>(Profile::CopyTextAsHTML));
 
@@ -3940,6 +3906,10 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _displayVerticalLineAtChar = profile->verticalLineAtChar();
     setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
     _dimValue = profile->dimValue();
+
+    _filterChain->setUrlHintsModifiers(Qt::KeyboardModifiers(profile->property<int>(Profile::UrlHintsModifiers)));
+    _filterChain->setReverseUrlHints(profile->property<bool>(Profile::ReverseUrlHints));
+
 }
 
 void TerminalDisplay::printScreen()

@@ -26,6 +26,7 @@
 
 #include <QRect>
 #include <QEvent>
+#include <QKeyEvent>
 #include <QPainter>
 
 #include <algorithm>
@@ -151,18 +152,53 @@ QList<QSharedPointer<HotSpot>> FilterChain::filterBy(HotSpot::Type type) const
 
 void FilterChain::leaveEvent(TerminalDisplay *td, QEvent *ev)
 {
+    Q_UNUSED(td);
+    Q_UNUSED(ev);
+    _showUrlHint = false;
 }
 
 void FilterChain::keyReleaseEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn)
 {
+    if (_showUrlHint) {
+        _showUrlHint = false;
+        td->update();
+    }
+
     auto spot = hotSpotAt(charLine, charColumn);
     if (spot) {
         spot->keyReleaseEvent(td, ev);
     }
 }
 
+static int ascii_to_int(int c) {
+    return c - '0';
+}
+
 void FilterChain::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn)
 {
+    if ((_urlHintsModifiers != 0u) && ev->modifiers() == _urlHintsModifiers) {
+        QList<QSharedPointer<HotSpot>> hotspots = filterBy(HotSpot::Link);
+        int nHotSpots = hotspots.count();
+        int hintSelected = ascii_to_int(ev->key());
+
+        // Triggered a Hotspot via shortcut.
+        if (hintSelected >= 0 && hintSelected < 10 && hintSelected < nHotSpots) {
+            if (_reverseUrlHints) {
+                hintSelected = nHotSpots - hintSelected - 1;
+            }
+            hotspots.at(hintSelected)->activate();
+            _showUrlHint = false;
+            td->update();
+            return;
+        }
+
+        if (!_showUrlHint) {
+            td->processFilters();
+            _showUrlHint = true;
+            td->update();
+        }
+    }
+
     auto spot = hotSpotAt(charLine, charColumn);
     if (spot) {
         spot->keyPressEvent(td, ev);
@@ -216,7 +252,7 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
     int urlNumInc;
 
     // TODO: Remove _reverseUrllHints from TerminalDisplay.
-    if (false) { // TODO: Access reverseUrlHints from the profile, here.
+    if (_reverseUrlHints) { // TODO: Access reverseUrlHints from the profile, here.
         urlNumber = count(HotSpot::Link);
         urlNumInc = -1;
     } else {
@@ -233,15 +269,16 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
 
             // TODO: Move this paint code to HotSpot->drawHint();
             // TODO: Fix the Url Hints access from the Profile.
-            if (/* _showUrlHint */ false && urlNumber >= 0 && urlNumber < 10 && spot->type() == HotSpot::Link) {
-                // Position at the beginning of the URL
-                QRect hintRect(*region.begin());
-                hintRect.setWidth(r.height());
-                painter.fillRect(hintRect, QColor(0, 0, 0, 128));
-                painter.setPen(Qt::white);
-                painter.drawRect(hintRect.adjusted(0, 0, -1, -1));
-                painter.drawText(hintRect, Qt::AlignCenter, QString::number(urlNumber));
-
+            if (_showUrlHint && spot->type() == HotSpot::Link) {
+                if (urlNumber >= 0 && urlNumber < 10) {
+                    // Position at the beginning of the URL
+                    QRect hintRect(*region.begin());
+                    hintRect.setWidth(r.height());
+                    painter.fillRect(hintRect, QColor(0, 0, 0, 128));
+                    painter.setPen(Qt::white);
+                    painter.drawRect(hintRect.adjusted(0, 0, -1, -1));
+                    painter.drawText(hintRect, Qt::AlignCenter, QString::number(urlNumber));
+                }
                 urlNumber += urlNumInc;
             }
         }
@@ -298,7 +335,7 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
             // TODO: Fix accessing the urlHint here.
             // TODO: Move this code to UrlFilterHotSpot.
             const bool hasMouse = region.contains(td->mapFromGlobal(QCursor::pos()));
-            if ((spot->type() == HotSpot::Link && /*_showUrlHint*/ false) || hasMouse) {
+            if ((spot->type() == HotSpot::Link && _showUrlHint) || hasMouse) {
                 QFontMetrics metrics(td->font());
 
                 // find the baseline (which is the invisible line that the characters in the font sit on,
@@ -320,3 +357,12 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
     }
 }
 
+void FilterChain::setReverseUrlHints(bool value)
+{
+    _reverseUrlHints = value;
+}
+
+void FilterChain::setUrlHintsModifiers(Qt::KeyboardModifiers value)
+{
+    _urlHintsModifiers = value;
+}

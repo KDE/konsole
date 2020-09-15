@@ -346,7 +346,7 @@ public:
      * Selects everything in the terminal
      */
     void selectAll();
-    
+
     // TODO: Move this code to KonsolePrintManager
     void printContent(QPainter &painter, bool friendly);
 
@@ -818,9 +818,6 @@ private:
     QTimer *_blinkTextTimer;
     QTimer *_blinkCursorTimer;
 
-    Qt::KeyboardModifiers _urlHintsModifiers;
-    bool _showUrlHint;
-    bool _reverseUrlHints;
     bool _openLinksByDirectClick;     // Open URL and hosts by single mouse click
 
     bool _ctrlRequiredForDrag; // require Ctrl key for drag selected text

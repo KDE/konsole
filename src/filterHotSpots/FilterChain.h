@@ -96,10 +96,21 @@ public:
     void leaveEvent(TerminalDisplay *td, QEvent *ev);
 
     void paint(TerminalDisplay *td, QPainter &painter);
+
+    void setReverseUrlHints(bool value);
+    void setUrlHintsModifiers(Qt::KeyboardModifiers value);
 protected:
     QList<Filter *> _filters;
     TerminalDisplay *_terminalDisplay;
     QSharedPointer<HotSpot> _hotSpotUnderMouse;
+
+    /* TODO: this should be profile related, not here. but
+    * currently this removes a bit of code from TerminalDisplay,
+    * so it's a good compromise
+    * */
+    bool _showUrlHint;
+    bool _reverseUrlHints;
+    Qt::KeyboardModifiers _urlHintsModifiers;
 };
 
 }
