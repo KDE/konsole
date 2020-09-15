@@ -77,8 +77,7 @@ QVariant ProfileModel::data(const QModelIndex& idx, int role) const
         }
         case Qt::DecorationRole: return QIcon::fromTheme(profile->icon());
         case Qt::FontRole: {
-                // Default Profile
-                if (idx.row() == 0) {
+                if (ProfileManager::instance()->defaultProfile() == profile ) {
                     QFont font;
                     font.setItalic(true);
                     return font;
