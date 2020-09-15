@@ -66,11 +66,14 @@ QVariant ProfileModel::data(const QModelIndex& idx, int role) const
     }
 
     auto profile = m_profiles.at(idx.row());
+
     switch (idx.column()) {
     case NAME: {
         switch (role) {
         case Qt::DisplayRole: {
-            return QStringLiteral("%1%2").arg(profile->name(), (idx.row() == 0 ? i18n("(Default)") : QString()));
+            return QStringLiteral("%1%2").arg(
+                profile->name(),
+                ProfileManager::instance()->defaultProfile() == profile ? i18n("(Default)") : QString());
         }
         case Qt::DecorationRole: return QIcon::fromTheme(profile->icon());
         case Qt::FontRole: {
@@ -146,7 +149,6 @@ void ProfileModel::populate()
     beginResetModel();
     m_profiles = ProfileManager::instance()->allProfiles();
     ProfileManager::instance()->sortProfiles(m_profiles);
-    m_profiles.prepend(ProfileManager::instance()->defaultProfile());
     endResetModel();
 }
 
@@ -166,10 +168,6 @@ void ProfileModel::remove(QExplicitlySharedDataPointer<Profile> profile)
 
 void ProfileModel::setDefault(QExplicitlySharedDataPointer<Profile> profile)
 {
-    if (m_profiles.count()) {
-        m_profiles.removeFirst();
-        m_profiles.prepend(profile);
-    }
     emit dataChanged(index(0, 0), index(0, COLUMNS-1), {Qt::DisplayRole});
 }
 
