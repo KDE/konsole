@@ -706,6 +706,7 @@ void SessionController::setupCommonActions()
     _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), this);
     collection->addAction(QStringLiteral("switch-profile"), _switchProfileMenu);
     connect(_switchProfileMenu->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::prepareSwitchProfileMenu);
+    _switchProfileMenu->setDelayed(false);
 
     // History
     _findAction = KStandardAction::find(this, &SessionController::searchBarEvent, collection);
@@ -873,6 +874,7 @@ void SessionController::setupExtraActions()
 void SessionController::switchProfile(const Profile::Ptr &profile)
 {
     SessionManager::instance()->setSessionProfile(_sessionDisplayConnection->session(), profile);
+    _switchProfileMenu->setIcon(QIcon::fromTheme(profile->icon()));
     updateFilterList(profile);
 }
 

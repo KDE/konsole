@@ -63,6 +63,6 @@
         <Action name="edit_copy" />
         <Action name="edit_paste" />
         <Action name="edit_find" />
-        <Action name="file_print" />
+        <Action name="switch-profile"/>
     </ToolBar>
 </kpartgui>
