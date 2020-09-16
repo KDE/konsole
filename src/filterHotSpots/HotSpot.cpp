@@ -21,6 +21,7 @@
 #include "HotSpot.h"
 
 #include <QMouseEvent>
+#include <QDebug>
 
 #include "widgets/TerminalDisplay.h"
 #include "FileFilterHotspot.h"

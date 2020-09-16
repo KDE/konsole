@@ -28,6 +28,7 @@
 #include <QEvent>
 #include <QKeyEvent>
 #include <QPainter>
+#include <QDebug>
 
 #include <algorithm>
 
