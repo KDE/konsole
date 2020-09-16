@@ -52,8 +52,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2020-07-02</date>
-<releaseinfo>Applications 20.08</releaseinfo>
+<date>2020-09-16</date>
+<releaseinfo>Applications 20.12</releaseinfo>
 
 <abstract><para>&konsole; is &kde;'s terminal emulator.</para></abstract>
 
@@ -987,7 +987,7 @@ Notifications...</guimenuitem></menuchoice></term>
         <para>
             The <guilabel>General</guilabel> page allows configuring the menubar visibility,
             remembering the &konsole; window size, running all &konsole; windows in a single process,
-            enabling menu accelerators, showing window title on the titlebar, removing window titlebar and frame.
+            enabling menu accelerators, showing window title on the titlebar, removing window titlebar and frame, and focusing terminals when the mouse pointer is moved over them.
             It is also possible to configure the search case sensitivity, usage of the regular expression,
             highlighting all matches, and the search direction (<guilabel>Search backwards</guilabel> is the default).
             The <guilabel>General</guilabel> page is also the place where you can <guibutton>Enable all "Don't Ask Again" messages</guibutton>
