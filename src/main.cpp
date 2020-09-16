@@ -177,9 +177,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
     needToDeleteQApplication = false;
 
     Kdelibs4ConfigMigrator migrate(QStringLiteral("konsole"));
-    migrate.setConfigFiles(QStringList() << QStringLiteral("konsolerc")
-                                         << QStringLiteral("konsole.notifyrc"));
-    migrate.setUiFiles(QStringList() << QStringLiteral("sessionui.rc") << QStringLiteral("partui.rc") << QStringLiteral("konsoleui.rc"));
+    migrate.setConfigFiles({QStringLiteral("konsolerc"), QStringLiteral("konsole.notifyrc")});
+    migrate.setUiFiles({QStringLiteral("sessionui.rc"), QStringLiteral("partui.rc"), QStringLiteral("konsoleui.rc")});
 
     if (migrate.migrate()) {
         Kdelibs4Migration dataMigrator;
