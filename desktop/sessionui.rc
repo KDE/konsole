@@ -59,4 +59,10 @@
         <Action name="switch-profile"/>
         <Action name="edit-current-profile"/>
     </Menu>
+    <ToolBar name="sessionToolBar">
+        <Action name="edit_copy" />
+        <Action name="edit_paste" />
+        <Action name="edit_find" />
+        <Action name="file_print" />
+    </ToolBar>
 </kpartgui>
