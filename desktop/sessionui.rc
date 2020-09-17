@@ -71,6 +71,8 @@
         <Action name="monitor-activity" group="session-view-operations"/>
         <Action name="monitor-process-finish" group="session-view-operations"/>
         <Spacer/>
+        <Action name="enlarge-font" group="session-view-operations"/>
+        <Action name="shrink-font" group="session-view-operations"/>
         <Action name="edit_find" />
     </ToolBar>
 </kpartgui>
