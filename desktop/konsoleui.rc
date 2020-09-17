@@ -48,6 +48,7 @@
     </MenuBar>
     <ToolBar name="mainToolBar">
         <text>Main Toolbar</text>
+        <index>0</index>
         <Action name="new-window"/>
         <Action name="new-tab"/>
         <Action name="split-view-left-right"/>

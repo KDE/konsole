@@ -59,10 +59,11 @@
         <Action name="switch-profile"/>
         <Action name="edit-current-profile"/>
     </Menu>
-    <ToolBar name="mainToolBar">
-        <text>Main Toolbar</text>
-
+    <ToolBar name="sessionToolbar">
+        <text>Session Toolbar</text>
+        <index>1</index>
         <Action name="switch-profile"/>
+        <Separator/>
         <Action name="edit_copy" />
         <Action name="edit_paste" />
         <Separator/>
