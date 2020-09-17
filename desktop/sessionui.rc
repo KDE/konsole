@@ -59,10 +59,17 @@
         <Action name="switch-profile"/>
         <Action name="edit-current-profile"/>
     </Menu>
-    <ToolBar name="sessionToolBar">
+    <ToolBar name="mainToolBar">
+        <text>Main Toolbar</text>
+
+        <Action name="switch-profile"/>
         <Action name="edit_copy" />
         <Action name="edit_paste" />
+        <Separator/>
+        <Action name="monitor-silence" group="session-view-operations"/>
+        <Action name="monitor-activity" group="session-view-operations"/>
+        <Action name="monitor-process-finish" group="session-view-operations"/>
+        <Spacer/>
         <Action name="edit_find" />
-        <Action name="switch-profile"/>
     </ToolBar>
 </kpartgui>

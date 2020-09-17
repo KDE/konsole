@@ -46,20 +46,14 @@
         <Menu name="help"><text>Help</text>
         </Menu>
     </MenuBar>
-    <ToolBar name="mainToolbar">
+    <ToolBar name="mainToolBar">
         <text>Main Toolbar</text>
-        <Action name="select-current-profile"/>
-        <Action name="select-current-color-theme"/>
-        <Action name="toggle-vertical-line"/>
-    </ToolBar>
-    <ToolBar name="outroToolBar">
-        <text>TerminalToolBar</text>
         <Action name="new-window"/>
         <Action name="new-tab"/>
-        <Action name="clone-tab"/>
         <Action name="split-view-left-right"/>
         <Action name="split-view-top-bottom"/>
         <Action name="close-active-view"/>
         <Action name="close-other-views"/>
+        <Separator/>
     </ToolBar>
 </kpartgui>
