@@ -795,15 +795,18 @@ void SessionController::setupExtraActions()
     collection->setDefaultShortcut(toggleAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_A);
     action = collection->addAction(QStringLiteral("monitor-activity"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorActivity);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-burn")));
 
     toggleAction = new KToggleAction(i18n("Monitor for &Silence"), this);
     collection->setDefaultShortcut(toggleAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_I);
     action = collection->addAction(QStringLiteral("monitor-silence"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorSilence);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-copy")));
 
     toggleAction = new KToggleAction(i18n("Monitor for Process Finishing"), this);
     action = collection->addAction(QStringLiteral("monitor-process-finish"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorProcessFinish);
+    action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-burn-image")));
 
     // Text Size
     action = collection->addAction(QStringLiteral("enlarge-font"), this, &SessionController::increaseFontSize);
