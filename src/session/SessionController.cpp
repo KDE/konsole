@@ -19,7 +19,7 @@
 */
 
 // Own
-#include "session/SessionController.h"
+#include "SessionController.h"
 
 #include "profile/ProfileManager.h"
 #include "konsoledebug.h"
@@ -81,9 +81,9 @@
 
 #include "profile/ProfileList.h"
 
-#include "session/Session.h"
-#include "session/SessionGroup.h"
-#include "session/SessionManager.h"
+#include "Session.h"
+#include "SessionGroup.h"
+#include "SessionManager.h"
 
 #include "widgets/EditProfileDialog.h"
 #include "widgets/IncrementalSearchBar.h"

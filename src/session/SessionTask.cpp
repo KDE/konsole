@@ -18,7 +18,7 @@
     02110-1301  USA.
 */
 
-#include "session/SessionTask.h"
+#include "SessionTask.h"
 
 namespace Konsole
 {

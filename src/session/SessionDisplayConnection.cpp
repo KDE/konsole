@@ -21,7 +21,7 @@
 #include "SessionDisplayConnection.h"
 
 // Konsole
-#include "session/Session.h"
+#include "Session.h"
 #include "widgets/TerminalDisplay.h"
 
 namespace Konsole

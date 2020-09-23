@@ -34,7 +34,7 @@
 #include "SessionDisplayConnection.h"
 #include "ViewProperties.h"
 #include "Enumeration.h"
-#include "session/Session.h"
+#include "Session.h"
 
 class QAction;
 class QTextCodec;

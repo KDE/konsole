@@ -25,7 +25,7 @@
 #include <QList>
 #include <QPointer>
 
-#include "session/Session.h"
+#include "Session.h"
 
 namespace Konsole {
 

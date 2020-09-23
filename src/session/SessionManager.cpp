@@ -20,7 +20,7 @@
 */
 
 // Own
-#include "session/SessionManager.h"
+#include "SessionManager.h"
 
 #include "konsoledebug.h"
 
@@ -45,8 +45,8 @@
 #include "profile/ProfileManager.h"
 #include "profile/ProfileCommandParser.h"
 
-#include "session/Session.h"
-#include "session/SessionController.h"
+#include "Session.h"
+#include "SessionController.h"
 
 #include "widgets/TerminalDisplay.h"
 

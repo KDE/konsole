@@ -22,7 +22,7 @@
 */
 
 // Own
-#include "session/Session.h"
+#include "Session.h"
 
 // Standard
 #include <cstdlib>
@@ -60,7 +60,7 @@
 #include "konsoledebug.h"
 #include "profile/Profile.h"
 #include "profile/ProfileManager.h"
-#include "session/SessionManager.h"
+#include "SessionManager.h"
 #include "widgets/TerminalDisplay.h"
 
 using namespace Konsole;

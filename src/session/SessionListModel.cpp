@@ -20,7 +20,7 @@
 */
 
 // Own
-#include "session/SessionListModel.h"
+#include "SessionListModel.h"
 
 // KDE
 #include <KLocalizedString>
@@ -28,7 +28,7 @@
 #include <QIcon>
 
 // Konsole
-#include "session/Session.h"
+#include "Session.h"
 
 using Konsole::Session;
 using Konsole::SessionListModel;

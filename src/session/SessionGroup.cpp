@@ -23,8 +23,8 @@
 
 // Konsole
 // TODO: Own header should be first, but this breaks compiling.
-#include "session/Session.h"
-#include "session/SessionGroup.h"
+#include "Session.h"
+#include "SessionGroup.h"
 #include "Emulation.h"
 
 namespace Konsole {
