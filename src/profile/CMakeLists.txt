@@ -12,7 +12,8 @@ OBJECT
     ProfileModel.cpp
     ${konsoleprofile_SRCS}
 )
-
+generate_export_header(konsoleprofile BASE_NAME konsoleprofile)
+target_include_directories(konsoleprofile PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(
     konsoleprofile
     ${konsole_LIBS}

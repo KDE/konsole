@@ -28,7 +28,7 @@ class KConfig;
 
 namespace Konsole {
 /** Interface for all classes which can write profile settings to a file. */
-class KONSOLEPRIVATE_EXPORT ProfileWriter
+class KONSOLEPROFILE_EXPORT ProfileWriter
 {
 public:
     ProfileWriter();

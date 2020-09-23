@@ -39,7 +39,7 @@ namespace Konsole {
  * Manages profiles which specify various settings for terminal sessions
  * and their displays.
  */
-class KONSOLEPRIVATE_EXPORT ProfileManager : public QObject
+class KONSOLEPROFILE_EXPORT ProfileManager : public QObject
 {
     Q_OBJECT
 

@@ -30,7 +30,7 @@
 #include <QColor>
 
 // Konsole
-#include "konsoleprivate_export.h"
+#include "konsoleprofile_export.h"
 
 namespace Konsole {
 class ProfileGroup;
@@ -53,7 +53,7 @@ class ProfileGroup;
  * Profiles can be loaded from disk using ProfileReader instances
  * and saved to disk using ProfileWriter instances.
  */
-class KONSOLEPRIVATE_EXPORT Profile : public QSharedData
+class KONSOLEPROFILE_EXPORT Profile : public QSharedData
 {
     Q_GADGET
 

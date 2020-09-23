@@ -23,7 +23,7 @@
 #define PROFILEGROUP_H
 
 // Konsole
-#include "konsoleprivate_export.h"
+#include "konsoleprofile_export.h"
 #include "Profile.h"
 
 // Qt
@@ -48,7 +48,7 @@ namespace Konsole
      * The Profile::Name and Profile::Path properties are unique to individual
      * profiles, setting these properties on a ProfileGroup has no effect.
      */
-    class KONSOLEPRIVATE_EXPORT ProfileGroup : public Profile
+    class KONSOLEPROFILE_EXPORT ProfileGroup : public Profile
     {
     public:
         using Ptr = QExplicitlySharedDataPointer<ProfileGroup>;

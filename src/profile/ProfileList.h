@@ -27,7 +27,7 @@
 
 // Konsole
 #include "Profile.h"
-#include "konsoleprivate_export.h"
+#include "konsoleprofile_export.h"
 
 class QAction;
 class QActionGroup;
@@ -45,7 +45,7 @@ namespace Konsole {
  * The user-data associated with each session can be passed to the createProfile() method of the
  * SessionManager to create a new terminal session.
  */
-class KONSOLEPRIVATE_EXPORT ProfileList : public QObject
+class KONSOLEPROFILE_EXPORT ProfileList : public QObject
 {
     Q_OBJECT
 

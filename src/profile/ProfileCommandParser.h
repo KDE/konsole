@@ -23,7 +23,7 @@
 #define PROFILECOMMANDPARSER_H
 
 // Konsole
-#include "konsoleprivate_export.h"
+#include "konsoleprofile_export.h"
 #include "Profile.h"
 
 class QVariant;
@@ -48,7 +48,7 @@ namespace Konsole
      *   Icon=konsole;Directory=/home/bob
      * @endcode
      */
-    class KONSOLEPRIVATE_EXPORT ProfileCommandParser
+    class KONSOLEPROFILE_EXPORT ProfileCommandParser
     {
     public:
         /**
