@@ -30,7 +30,8 @@ add_library(konsolesession
     OBJECT
     ${konsole_session_SRCS}
 )
-
+generate_export_header(konsolesession BASE_NAME konsolesession)
+target_include_directories(konsolesession PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(
     konsolesession
     ${konsole_LIBS}

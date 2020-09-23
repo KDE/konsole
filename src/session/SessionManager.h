@@ -30,6 +30,8 @@
 // TODO: Move the Property away from Profile.h
 #include "profile/Profile.h"
 
+#include "konsolesession_export.h"
+
 class KConfig;
 
 namespace Konsole {
@@ -39,7 +41,7 @@ class Profile;
 /**
  * Manages running terminal sessions.
  */
-class KONSOLEPRIVATE_EXPORT SessionManager : public QObject
+class KONSOLESESSION_EXPORT SessionManager : public QObject
 {
     Q_OBJECT
 

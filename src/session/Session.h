@@ -34,7 +34,7 @@
 #include <QUrl>
 
 // Konsole
-#include "konsoleprivate_export.h"
+#include "konsolesession_export.h"
 #include "config-konsole.h"
 #include "Shortcut_p.h"
 
@@ -62,7 +62,7 @@ class HistoryType;
  * or send input to the program in the terminal in the form of keypresses and mouse
  * activity.
  */
-class KONSOLEPRIVATE_EXPORT Session : public QObject
+class KONSOLESESSION_EXPORT Session : public QObject
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.konsole.Session")

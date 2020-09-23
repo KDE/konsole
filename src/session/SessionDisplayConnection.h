@@ -24,7 +24,7 @@
 #include <QPointer>
 
 // Konsole
-#include "konsoleprivate_export.h"
+#include "konsolesession_export.h"
 
 namespace Konsole
 {
@@ -32,7 +32,7 @@ namespace Konsole
 class Session;
 class TerminalDisplay;
 
-class KONSOLEPRIVATE_EXPORT SessionDisplayConnection : public QObject
+class KONSOLESESSION_EXPORT SessionDisplayConnection : public QObject
 {
     Q_OBJECT
 public:

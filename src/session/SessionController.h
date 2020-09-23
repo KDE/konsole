@@ -73,7 +73,7 @@ class UrlFilter;
  * which contains the view to plug the controller's actions into the menu when
  * the view is focused.
  */
-class KONSOLEPRIVATE_EXPORT SessionController : public ViewProperties, public KXMLGUIClient
+class KONSOLESESSION_EXPORT SessionController : public ViewProperties, public KXMLGUIClient
 {
     Q_OBJECT
 
