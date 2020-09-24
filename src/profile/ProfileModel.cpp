@@ -167,6 +167,7 @@ void ProfileModel::remove(QExplicitlySharedDataPointer<Profile> profile)
 
 void ProfileModel::setDefault(QExplicitlySharedDataPointer<Profile> profile)
 {
+    Q_UNUSED(profile);
     emit dataChanged(index(0, 0), index(0, COLUMNS-1), {Qt::DisplayRole});
 }
 
