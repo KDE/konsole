@@ -114,15 +114,82 @@ QPair<QRegion, QRect> HotSpot::region(int fontWidth, int fontHeight, int columns
     return {region, r};
 }
 
-void HotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
+void HotSpot::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev)
 {
+    Q_UNUSED(td);
+    Q_UNUSED(ev);
+}
+
+bool HotSpot::isUrl()
+{
+    return (_type == HotSpot::Link || _type == HotSpot::EMailAddress || _type == HotSpot::EscapedUrl);
+}
+
+void HotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
+{
+    if (!isUrl()) {
+        return;
+    }
+
+    if (td->cursor().shape() != Qt::PointingHandCursor
+        && ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u)))) {
+        td->setCursor(Qt::PointingHandCursor);
+    }
+
     auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
     td->update(r);
+}
+
+void HotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
+{
+    Q_UNUSED(ev);
+
+    if (!isUrl()) {
+        return;
+    }
+
+    auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
+    td->update(r);
+
     td->resetCursor();
 }
 
-void HotSpot::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev)
+void HotSpot::mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev)
 {
+    if (!isUrl()) {
+        return;
+    }
+
+    if ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
+        activate(nullptr);
+    }
+}
+
+void HotSpot::keyPressEvent(TerminalDisplay* td, QKeyEvent *ev)
+{
+    if (!isUrl()) {
+        return;
+    }
+
+    // If td->openLinksByDirectClick() is true, the shape has already been changed by the
+    // mouseEnterEvent
+    if (td->cursor().shape() != Qt::PointingHandCursor && (ev->modifiers() & Qt::ControlModifier) != 0u) {
+        td->setCursor(Qt::PointingHandCursor);
+    }
+}
+
+void HotSpot::keyReleaseEvent(TerminalDisplay *td, QKeyEvent *ev)
+{
+    Q_UNUSED(ev);
+
+    if (!isUrl()) {
+        return;
+    }
+
+    if (td->openLinksByDirectClick()) {
+        return;
+    }
+    td->resetCursor();
 }
 
 void HotSpot::debug() {

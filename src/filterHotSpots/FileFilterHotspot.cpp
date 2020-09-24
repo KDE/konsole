@@ -192,9 +192,9 @@ KFileItem FileFilterHotSpot::fileItem() const
     return KFileItem(QUrl::fromLocalFile(_filePath));
 }
 
-void FileFilterHotSpot::mouseMoveEvent(TerminalDisplay *td, QMouseEvent* ev)
+void FileFilterHotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
 {
-    HotSpot::mouseMoveEvent(td, ev);
+    HotSpot::mouseEnterEvent(td, ev);
     requestThumbnail(ev->modifiers(), ev->globalPos());
 }
 
@@ -206,5 +206,6 @@ void FileFilterHotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
 
 void Konsole::FileFilterHotSpot::keyPressEvent(Konsole::TerminalDisplay* td, QKeyEvent* ev)
 {
+    HotSpot::keyPressEvent(td, ev);
     requestThumbnail(ev->modifiers(), QCursor::pos());
 }

@@ -49,19 +49,3 @@ void EscapeSequenceUrlHotSpot::activate(QObject *obj)
 
     new KRun(QUrl(_url), QApplication::activeWindow());
 }
-
-void EscapeSequenceUrlHotSpot::mouseEnterEvent(TerminalDisplay* td, QMouseEvent* ev)
-{
-    auto cursor = td->cursor();
-    auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
-
-    td->setCursor(Qt::PointingHandCursor);
-    td->update(r);
-}
-
-void EscapeSequenceUrlHotSpot::mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev)
-{
-    if ((td->openLinksByDirectClick() || ((ev->modifiers() & Qt::ControlModifier) != 0u))) {
-        activate(nullptr);
-    }
-}

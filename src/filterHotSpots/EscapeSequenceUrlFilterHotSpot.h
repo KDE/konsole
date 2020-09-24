@@ -32,8 +32,6 @@ public:
             const QString &text, const QString &url);
     void activate(QObject *obj) override;
 
-    void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev) override;
-    void mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev) override;
 private:
     QString _text;
     QString _url;

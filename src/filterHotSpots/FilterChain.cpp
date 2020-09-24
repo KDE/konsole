@@ -34,7 +34,10 @@
 
 using namespace Konsole;
 FilterChain::FilterChain(TerminalDisplay *terminalDisplay)
-: _terminalDisplay(terminalDisplay)
+  : _terminalDisplay(terminalDisplay),
+    _showUrlHint(false),
+    _reverseUrlHints(false),
+    _urlHintsModifiers(Qt::NoModifier)
 {
 
 }

@@ -110,14 +110,55 @@ public:
 
     QPair<QRegion, QRect> region(int fontWidth, int fontHeight, int columns, QRect terminalDisplayRect) const;
 
-    virtual void mouseMoveEvent(TerminalDisplay *, QMouseEvent *);
-    virtual void mouseLeaveEvent(TerminalDisplay *, QMouseEvent *);
-    virtual void mouseEnterEvent(TerminalDisplay *, QMouseEvent *) {};
-    virtual void mouseReleaseEvent(TerminalDisplay *, QMouseEvent *){};
-    virtual void keyPressEvent(TerminalDisplay *, QKeyEvent *) {};
-    virtual void keyReleaseEvent(TerminalDisplay *, QKeyEvent *) {};
+    /**
+     * Returns true if the type of the HotSpot is Link, EMailAddress, or EscapedUrl, (see
+     * Type enum), otherwise returns false; mainly used in the input events, e.g. to not
+     * change the shape of the mouse pointer to a pointing hand if the HotSpot doesn't
+     * represent a clickable URI.
+    */
+    bool isUrl();
+
+    /** The base implementation does nothing */
+    virtual void mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev);
+
+    /**
+     * The mouse pointer shape is changed to a pointing hand; also because the underline
+     * is painted under the link, update() is called on the TerminalDisplay widget.
+    */
+    virtual void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev);
+
+    /**
+     * The mouse pointer is reset to the default shape, see TerminalDisplay::resetCursor();
+     * also because the underline is hidden from under the link, update() is called on the
+     * TerminalDisplay widget.
+    */
+    virtual void mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev);
+
+    /**
+     * If the Ctrl key is pressed or TerminalDisplay::openLinksByDirectClick() is
+     * true, the activate() method is called to handle/open the link, see activate().
+    */
+    virtual void mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev);
+
+    /**
+     * If the Ctrl key is pressed, the mouse pointer shape is changed to a pointing hand.
+     *
+     * Note that if TerminalDisplay::openLinksByDirectClick() is true the mouse pointer shape is always
+     * changed to a pointing hand when hovering over a link, regardless of the state of the Ctrl key.
+    */
+    virtual void keyPressEvent(TerminalDisplay *td, QKeyEvent *ev);
+
+    /**
+     * This resets the mouse pointer to the default shape (if e.g. the Ctrl key had been pressed
+     * and now has been released).
+     *
+     * Note that if TerminalDisplay::openLinksByDirectClick() is true the mouse pointer shape is always
+     * changed to a pointing hand when hovering over a link, regardless of the state of the Ctrl key.
+    */
+    virtual void keyReleaseEvent(TerminalDisplay *, QKeyEvent *ev);
 
     void debug();
+
 protected:
     /** Sets the type of a hotspot.  This should only be set once */
     void setType(Type type);
