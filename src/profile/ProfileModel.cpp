@@ -73,7 +73,7 @@ QVariant ProfileModel::data(const QModelIndex& idx, int role) const
         case Qt::DisplayRole: {
             return QStringLiteral("%1%2").arg(
                 profile->name(),
-                ProfileManager::instance()->defaultProfile() == profile ? i18n("(Default)") : QString());
+                ProfileManager::instance()->defaultProfile() == profile ? i18n(" (Default)") : QString());
         }
         case Qt::DecorationRole: return QIcon::fromTheme(profile->icon());
         case Qt::FontRole: {
