@@ -236,24 +236,20 @@ void Emulation::receiveData(const char *text, int length)
 {
     bufferedUpdate();
 
-    QVector<uint> unicodeText = _decoder->toUnicode(text, length).toUcs4();
-
     //send characters to terminal emulator
-    for (auto &&i : unicodeText) {
+    for (const uint i : _decoder->toUnicode(text, length).toUcs4()) {
         receiveChar(i);
     }
 
     //look for z-modem indicator
     //-- someone who understands more about z-modems that I do may be able to move
     //this check into the above for loop?
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < length - 4; i++) {
         if (text[i] == '\030') {
-            if (length - i - 1 > 3) {
-                if (qstrncmp(text + i + 1, "B00", 3) == 0) {
-                    emit zmodemDownloadDetected();
-                } else if (qstrncmp(text + i + 1, "B01", 3) == 0) {
-                    emit zmodemUploadDetected();
-                }
+            if (qstrncmp(text + i + 1, "B00", 3) == 0) {
+                emit zmodemDownloadDetected();
+            } else if (qstrncmp(text + i + 1, "B01", 3) == 0) {
+                emit zmodemUploadDetected();
             }
         }
     }
