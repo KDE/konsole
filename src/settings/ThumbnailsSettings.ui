@@ -62,7 +62,7 @@
    <item row="1" column="0" colspan="2">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remember&lt;/span&gt;: to enable &lt;span style=&quot; font-weight:600;&quot;&gt;Mouse-&amp;gt;Miscellaneous-&amp;gt;Underline&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;files&lt;/span&gt; inside your profile mouse settings&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To use this feature, enable &lt;span style=&quot; font-weight:600;&quot;&gt;Mouse-&amp;gt;Miscellaneous-&amp;gt;Underline &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;files&lt;/span&gt; in your profile settings&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>
