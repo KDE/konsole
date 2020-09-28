@@ -22,7 +22,7 @@
 #include "Filter.h"
 #include "HotSpot.h"
 
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 #include <QRect>
 #include <QEvent>

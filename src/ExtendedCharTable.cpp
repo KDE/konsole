@@ -25,7 +25,7 @@
 #include "konsoledebug.h"
 
 // Konsole
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "session/SessionManager.h"
 #include "session/Session.h"
 #include "Screen.h"

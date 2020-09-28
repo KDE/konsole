@@ -43,7 +43,7 @@
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
 
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
 #include "widgets/ViewSplitter.h"
 

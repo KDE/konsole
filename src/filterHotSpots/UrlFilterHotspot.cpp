@@ -38,7 +38,7 @@
 #include <QMouseEvent>
 
 #include "UrlFilter.h"
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 //regexp matches:
 // full url:
 

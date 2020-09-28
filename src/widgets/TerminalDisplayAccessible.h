@@ -27,7 +27,7 @@
 #include <QAccessibleTextInterface>
 #include <QAccessibleWidget>
 
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "ScreenWindow.h"
 #include "Screen.h"
 

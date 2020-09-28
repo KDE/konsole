@@ -60,7 +60,8 @@
 #include "profile/Profile.h"
 #include "profile/ProfileManager.h"
 #include "SessionManager.h"
-#include "widgets/TerminalDisplay.h"
+
+#include "terminalDisplay/TerminalDisplay.h"
 
 using namespace Konsole;
 

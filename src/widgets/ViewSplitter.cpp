@@ -33,7 +33,7 @@
 
 // Konsole
 #include "widgets/ViewContainer.h"
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 using Konsole::ViewSplitter;
 using Konsole::TerminalDisplay;

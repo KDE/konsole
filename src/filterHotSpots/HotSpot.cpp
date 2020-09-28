@@ -23,7 +23,7 @@
 #include <QMouseEvent>
 #include <QDebug>
 
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "FileFilterHotspot.h"
 
 using namespace Konsole;

@@ -38,7 +38,7 @@
 // Konsole
 #include "keyboardtranslator/KeyboardTranslator.h"
 #include "session/SessionController.h"
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "EscapeSequenceUrlExtractor.h"
 #include "Screen.h"
 

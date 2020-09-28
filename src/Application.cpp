@@ -44,7 +44,7 @@
 #include "profile/ProfileCommandParser.h"
 #include "session/Session.h"
 #include "session/SessionManager.h"
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
 
 using namespace Konsole;

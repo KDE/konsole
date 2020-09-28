@@ -32,7 +32,7 @@
 #include <QMouseEvent>
 #include <QDebug>
 
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 using namespace Konsole;
 

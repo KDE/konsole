@@ -48,7 +48,7 @@
 #include "Session.h"
 #include "SessionController.h"
 
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 using namespace Konsole;
 

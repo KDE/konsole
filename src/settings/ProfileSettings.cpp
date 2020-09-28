@@ -31,7 +31,7 @@
 #include "profile/ProfileModel.h"
 #include "session/Session.h"
 #include "widgets/EditProfileDialog.h"
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "session/SessionManager.h"
 #include "session/SessionController.h"
 #include "delegates/ProfileShortcutDelegate.h"

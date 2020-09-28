@@ -24,7 +24,7 @@
 
 #include "PlainTextDecoder.h"
 
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 using namespace Konsole;
 

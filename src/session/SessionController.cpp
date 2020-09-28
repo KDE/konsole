@@ -99,7 +99,8 @@
 
 #include "widgets/EditProfileDialog.h"
 #include "widgets/IncrementalSearchBar.h"
-#include "widgets/TerminalDisplay.h"
+
+#include "terminalDisplay/TerminalDisplay.h"
 
 // For Unix signal names
 #include <csignal>

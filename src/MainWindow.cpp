@@ -61,7 +61,7 @@
 #include "settings/TemporaryFilesSettings.h"
 #include "settings/ThumbnailsSettings.h"
 
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
 
 using namespace Konsole;

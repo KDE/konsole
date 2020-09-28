@@ -21,7 +21,7 @@
 */
 
 // Own
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "KonsoleSettings.h"
 
 // Config
@@ -73,7 +73,7 @@
 #include "PlainTextDecoder.h"
 #include "Screen.h"
 #include "ExtendedCharTable.h"
-#include "TerminalDisplayAccessible.h"
+#include "../widgets/TerminalDisplayAccessible.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
 #include "session/Session.h"
@@ -83,7 +83,7 @@
 #include "ViewManager.h" // for colorSchemeForProfile. // TODO: Rewrite this.
 #include "LineBlockCharacters.h"
 #include "PrintOptions.h"
-#include "KonsolePrintManager.h"
+#include "../widgets/KonsolePrintManager.h"
 #include "EscapeSequenceUrlExtractor.h"
 
 using namespace Konsole;

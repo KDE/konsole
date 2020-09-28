@@ -45,7 +45,7 @@
 #include "settings/PartInfo.h"
 #include "settings/ProfileSettings.h"
 #include "widgets/EditProfileDialog.h"
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
 
 using namespace Konsole;

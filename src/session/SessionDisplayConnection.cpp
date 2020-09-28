@@ -22,7 +22,7 @@
 
 // Konsole
 #include "Session.h"
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 namespace Konsole
 {

@@ -21,7 +21,7 @@
 #include "EscapeSequenceUrlFilter.h"
 
 #include "session/Session.h"
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "EscapeSequenceUrlExtractor.h"
 #include "EscapeSequenceUrlFilterHotSpot.h"
 

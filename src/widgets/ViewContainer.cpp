@@ -43,7 +43,7 @@
 #include "KonsoleSettings.h"
 #include "session/SessionController.h"
 #include "DetachableTabBar.h"
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewSplitter.h"
 #include "MainWindow.h"
 #include "session/Session.h"

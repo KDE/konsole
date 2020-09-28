@@ -36,7 +36,7 @@
 
 #include "konsoledebug.h"
 #include "KonsoleSettings.h"
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 using namespace Konsole;
 

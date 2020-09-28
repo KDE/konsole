@@ -21,7 +21,7 @@
 
 #include "TerminalHeaderBar.h"
 
-#include "widgets/TerminalDisplay.h"
+#include "terminalDisplay/TerminalDisplay.h"
 #include "session/SessionController.h"
 #include "ViewProperties.h"
 #include "KonsoleSettings.h"

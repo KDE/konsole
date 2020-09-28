@@ -23,7 +23,7 @@
 #include "qtest.h"
 
 // Konsole
-#include "../widgets/TerminalDisplay.h"
+#include "../terminalDisplay/TerminalDisplay.h"
 #include "../CharacterColor.h"
 #include "colorscheme/ColorScheme.h"
 

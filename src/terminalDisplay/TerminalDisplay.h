@@ -33,7 +33,7 @@
 #include "colorscheme/ColorScheme.h"
 #include "Enumeration.h"
 #include "ScrollState.h"
-#include "TerminalHeaderBar.h"
+#include "widgets/TerminalHeaderBar.h"
 
 class QDrag;
 class QDragEnterEvent;
