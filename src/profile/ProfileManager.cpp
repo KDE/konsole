@@ -79,9 +79,7 @@ ProfileManager::ProfileManager()
     , _shortcuts(QMap<QKeySequence, ShortcutData>())
 {
     //load fallback profile
-    _fallbackProfile = Profile::Ptr(new Profile());
-    _fallbackProfile->useFallback();
-    addProfile(_fallbackProfile);
+    initFallbackProfile();
 
     // lookup the default profile specified in <App>rc
     // for stand-alone Konsole, appConfig is just konsolerc
@@ -126,6 +124,13 @@ Q_GLOBAL_STATIC(ProfileManager, theProfileManager)
 ProfileManager* ProfileManager::instance()
 {
     return theProfileManager;
+}
+
+void ProfileManager::initFallbackProfile()
+{
+    _fallbackProfile = Profile::Ptr(new Profile());
+    _fallbackProfile->useFallback();
+    addProfile(_fallbackProfile);
 }
 
 Profile::Ptr ProfileManager::loadProfile(const QString& shortPath)
@@ -346,55 +351,72 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
 
     const QString origPath = profile->path();
 
-    // never save a profile with empty name into disk!
-    persistent = persistent && !profile->name().isEmpty();
+    const bool isFallback = origPath == QLatin1String("FALLBACK/");
 
-    Profile::Ptr newProfile;
+    const QStringList existingProfileNames = availableProfileNames();
+    // Generate a unique profile name
+    int nameSuffix = 1;
+    QString uniqueProfileName;
+    do {
+        uniqueProfileName = QStringLiteral("Profile ") + QString::number(nameSuffix);
+        ++nameSuffix;
+    } while (existingProfileNames.contains(uniqueProfileName));
+
+
+
+    // Don't save a profile with an empty name on disk
+    persistent = persistent && !profile->name().isEmpty();
 
     // If we are asked to store the fallback profile (which has an
     // invalid path by design), we reset the path to an empty string
     // which will make the profile writer automatically generate a
     // proper path.
-    if (persistent && profile->path() == _fallbackProfile->path()) {
+    if (persistent && isFallback) {
+        profile->setProperty(Profile::UntranslatedName, uniqueProfileName);
+        profile->setProperty(Profile::Name, uniqueProfileName);
+        profile->setProperty(Profile::MenuIndex, QStringLiteral("0"));
+        profile->setHidden(false);
 
-        // Generate a new name, so it is obvious what is actually built-in
-        // in the profile manager
-        QStringList existingProfileNames;
-        const QList<Profile::Ptr> profiles = allProfiles();
-        for (const Profile::Ptr &existingProfile : profiles) {
-            existingProfileNames.append(existingProfile->name());
-        }
+        addProfile(profile);
+        setDefaultProfile(profile);
 
-        int nameSuffix = 1;
-        QString newName;
-        QString newTranslatedName;
-        do {
-            newName = QStringLiteral("Profile ") + QString::number(nameSuffix);
-            newTranslatedName = i18nc("The default name of a profile", "Profile #%1", nameSuffix);
-            // TODO: remove the # above and below - too many issues
-            newTranslatedName.remove(QLatin1Char('#'));
-            nameSuffix++;
-        } while (existingProfileNames.contains(newName));
+        // ProfileList listens to the profileRemoved signal to update
+        // the profile menu actions (which is used by the "Switch
+        // Profile" context menu). This is needed to prevent double
+        // entries for the newly added profile.
+        emit profileRemoved(_fallbackProfile);
 
-        newProfile = Profile::Ptr(new Profile(ProfileManager::instance()->fallbackProfile()));
-        newProfile->clone(profile, true);
-        newProfile->setProperty(Profile::UntranslatedName, newName);
-        newProfile->setProperty(Profile::Name, newTranslatedName);
-        newProfile->setProperty(Profile::MenuIndex, QStringLiteral("0"));
-        newProfile->setHidden(false);
-
-        addProfile(newProfile);
-        setDefaultProfile(newProfile);
-
-    } else {
-        newProfile = profile;
+        // Since the profile object pointed to by _fallbackProfile has
+        // been given a name above, now init a fallback profile again.
+        // This way there is always a "Default" profile available in the
+        // context menu.
+        initFallbackProfile();
     }
 
-    // insert the changes into the existing Profile instance
-    QListIterator<Profile::Property> iter(propertyMap.keys());
-    while (iter.hasNext()) {
-        const Profile::Property property = iter.next();
-        newProfile->setProperty(property, propertyMap[property]);
+    bool messageShown = false;
+    // Insert the changes into the existing Profile instance
+    for (auto it = propertyMap.cbegin(); it != propertyMap.cend(); ++it) {
+        const auto property = it.key();
+        auto value = it.value();
+
+        // "Default" is reserved for the fallback profile, override it;
+        // The message is only shown if the user manually typed "Default"
+        // in the name box in the edit profile dialog; i.e. saving the
+        // fallback profile where the user didn't change the name at all,
+        // the uniqueProfileName is used silently a couple of lines above.
+        if ((property == Profile::Name || property == Profile::UntranslatedName)
+            && value == QLatin1String("Default")) {
+            value = uniqueProfileName;
+            if (!messageShown) {
+                KMessageBox::sorry(nullptr,
+                                   i18n("The name \"Default\" is reserved for the built-in"
+                                        " fallback profile;\nthe profile is going to be"
+                                        " saved as \"%1\"", uniqueProfileName));
+                messageShown = true;
+            }
+        }
+
+        profile->setProperty(property, value);
     }
 
     // when changing a group, iterate through the profiles
@@ -403,7 +425,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
     // this is so that each profile in the group, the profile is
     // applied, a change notification is emitted and the profile
     // is saved to disk
-    ProfileGroup::Ptr group = newProfile->asGroup();
+    ProfileGroup::Ptr group = profile->asGroup();
     if (group) {
         const QList<Profile::Ptr> profiles = group->profiles();
         for (const Profile::Ptr &groupProfile : profiles) {
@@ -414,25 +436,26 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
 
     // save changes to disk, unless the profile is hidden, in which case
     // it has no file on disk
-    if (persistent && !newProfile->isHidden()) {
-        newProfile->setProperty(Profile::Path, saveProfile(newProfile));
+    if (persistent && !profile->isHidden()) {
+        profile->setProperty(Profile::Path, saveProfile(profile));
+
         // if the profile was renamed, after saving the new profile
         // delete the old/redundant profile.
         // only do this if origPath is not empty, because it's empty
         // when creating a new profile, this works around a bug where
         // the newly created profile appears twice in the ProfileSettings
         // dialog
-        if (!origPath.isEmpty() && (newProfile->path() != origPath)) {
+        if (!isFallback && !origPath.isEmpty() && profile->path() != origPath) {
             // this is needed to include the old profile too
             _loadedAllProfiles = false;
-           const QList<Profile::Ptr> availableProfiles = ProfileManager::instance()->allProfiles();
+            const QList<Profile::Ptr> availableProfiles = ProfileManager::instance()->allProfiles();
             for (const Profile::Ptr &oldProfile : availableProfiles) {
                 if (oldProfile->path() == origPath) {
                     // assign the same shortcut of the old profile to
                     // the newly renamed profile
                     const auto oldShortcut = shortcut(oldProfile);
                     if (deleteProfile(oldProfile)) {
-                        setShortcut(newProfile, oldShortcut);
+                        setShortcut(profile, oldShortcut);
                     }
                 }
             }
@@ -440,7 +463,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
     }
 
     // notify the world about the change
-    emit profileChanged(newProfile);
+    emit profileChanged(profile);
 }
 
 void ProfileManager::addProfile(const Profile::Ptr &profile)

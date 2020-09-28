@@ -99,6 +99,17 @@ public:
     Profile::Ptr loadProfile(const QString &shortPath);
 
     /**
+     * This creates a profile based on the fallback profile, it's shown
+     * as "Default". This is a special profile as it's not saved on disk
+     * but rather created from code in Profile class, based on the default
+     * profile settings. When the user tries to save this profile, a name
+     * (other than "Default") is set for it, e.g. "Profile 1" unless the
+     * user has specified a name; then we init a fallback profile again as
+     * a separate instance.
+     */
+    void initFallbackProfile();
+
+    /**
      * Searches for available profiles on-disk and returns a list
      * of paths of profiles which can be loaded.
      */

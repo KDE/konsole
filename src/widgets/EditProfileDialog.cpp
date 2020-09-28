@@ -249,6 +249,8 @@ void EditProfileDialog::save()
         return;
     }
 
+    const bool isFallback = _profile->path() == QLatin1String("FALLBACK/");
+
     ProfileManager::instance()->changeProfile(_profile, _tempProfile->setProperties());
 
     // ensure that these settings are not undone by a call
@@ -260,6 +262,14 @@ void EditProfileDialog::save()
     }
 
     createTempProfile();
+
+    if (isFallback) {
+        // Needed to update the profile name in the dialog, if the user
+        // used "Apply" and the dialog is still open, since the fallback
+        // profile will have a unique name, e.g. "Profile 1", generated
+        // for it by the ProfileManager.
+        setProfile(_profile);
+    }
 
     _buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 }
