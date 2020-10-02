@@ -94,10 +94,6 @@ using namespace Konsole;
     "abcdefgjijklmnopqrstuvwxyz" \
     "0123456789./+@"
 
-// we use this to force QPainter to display text in LTR mode
-// more information can be found in: https://unicode.org/reports/tr9/
-const QChar LTR_OVERRIDE_CHAR(0x202D);
-
 inline int TerminalDisplay::loc(int x, int y) const {
     if (y < 0 || y > _lines) {
         qDebug() << "Y: " << y << "Lines" << _lines;
