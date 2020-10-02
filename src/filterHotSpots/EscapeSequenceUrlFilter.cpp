@@ -38,7 +38,7 @@ void EscapeSequenceUrlFilter::process()
     if (!_window->screenWindow() && _window->screenWindow()->screen()) {
         return;
     }
-    auto *sWindow = _window->screenWindow();
+    auto sWindow = _window->screenWindow();
     const auto urls = sWindow->screen()->urlExtractor()->history();
 
     for (const auto &escapedUrl : urls) {

@@ -86,6 +86,8 @@
 #include "../widgets/KonsolePrintManager.h"
 #include "EscapeSequenceUrlExtractor.h"
 
+#include "TerminalPainter.hpp"
+
 using namespace Konsole;
 
 #define REPCHAR   "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
@@ -126,10 +128,6 @@ inline int TerminalDisplay::loc(int x, int y) const {
    IBMPC (rgb) Black   Blue    Green   Cyan    Red     Magenta Yellow  White
 */
 
-ScreenWindow* TerminalDisplay::screenWindow() const
-{
-    return _screenWindow;
-}
 void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 {
     // disconnect existing screen window if any
@@ -596,6 +594,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
 #endif
 
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TerminalDisplay::setupHeaderVisibility);
+
+    _terminalPainter = new TerminalPainter(this);
 }
 
 TerminalDisplay::~TerminalDisplay()
@@ -610,6 +610,8 @@ TerminalDisplay::~TerminalDisplay()
 
     _readOnlyMessageWidget = nullptr;
     _outputSuspendedMessageWidget = nullptr;
+
+    delete _terminalPainter;
 }
 
 void TerminalDisplay::setupHeaderVisibility()
@@ -651,26 +653,6 @@ void TerminalDisplay::showDragTarget(const QPoint& cursorPos)
 /*                             Display Operations                            */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
-
-void TerminalDisplay::drawLineCharString(QPainter& painter, int x, int y, const QString& str,
-        const Character* attributes)
-{
-    // only turn on anti-aliasing during this short time for the "text"
-    // for the normal text we have TextAntialiasing on demand on
-    // otherwise we have rendering artifacts
-    // set https://bugreports.qt.io/browse/QTBUG-66036
-    painter.setRenderHint(QPainter::Antialiasing, _antialiasText);
-
-    const bool useBoldPen = (attributes->rendition & RE_BOLD) != 0 && _boldIntense;
-
-    QRect cellRect = {x, y, _fontWidth, _fontHeight};
-    for (int i = 0 ; i < str.length(); i++) {
-        LineBlockCharacters::draw(painter, cellRect.translated(i * _fontWidth, 0), str[i],
-                                        useBoldPen);
-    }
-
-    painter.setRenderHint(QPainter::Antialiasing, false);
-}
 
 void TerminalDisplay::setKeyboardCursorShape(Enum::CursorShapeEnum shape)
 {
@@ -730,210 +712,6 @@ void TerminalDisplay::setOpacity(qreal opacity)
 void TerminalDisplay::setWallpaper(const ColorSchemeWallpaper::Ptr &p)
 {
     _wallpaper = p;
-}
-
-void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const QColor& backgroundColor, bool useOpacitySetting)
-{
-    // the area of the widget showing the contents of the terminal display is drawn
-    // using the background color from the color scheme set with setColorTable()
-    //
-    // the area of the widget behind the scroll-bar is drawn using the background
-    // brush from the scroll-bar's palette, to give the effect of the scroll-bar
-    // being outside of the terminal display and visual consistency with other KDE
-    // applications.
-
-    if (useOpacitySetting && !_wallpaper->isNull() &&
-            _wallpaper->draw(painter, rect, _opacity)) {
-    } else if (qAlpha(_blendColor) < 0xff && useOpacitySetting) {
-#if defined(Q_OS_MACOS)
-        // TODO - On MacOS, using CompositionMode doesn't work.  Altering the
-        //        transparency in the color scheme alters the brightness.
-        painter.fillRect(rect, backgroundColor);
-#else
-        QColor color(backgroundColor);
-        color.setAlpha(qAlpha(_blendColor));
-
-        const QPainter::CompositionMode originalMode = painter.compositionMode();
-        painter.setCompositionMode(QPainter::CompositionMode_Source);
-        painter.fillRect(rect, color);
-        painter.setCompositionMode(originalMode);
-#endif
-    } else {
-        painter.fillRect(rect, backgroundColor);
-    }
-}
-
-void TerminalDisplay::drawCursor(QPainter& painter,
-                                 const QRect& rect,
-                                 const QColor& foregroundColor,
-                                 const QColor& backgroundColor,
-                                 QColor& characterColor)
-{
-    // don't draw cursor which is currently blinking
-    if (_cursorBlinking) {
-        return;
-    }
-
-    // shift rectangle top down one pixel to leave some space
-    // between top and bottom
-    QRectF cursorRect = rect.adjusted(0, 1, 0, 0);
-
-    QColor cursorColor = _cursorColor.isValid() ? _cursorColor : foregroundColor;
-    QPen pen(cursorColor);
-    // TODO: the relative pen width to draw the cursor is a bit hacky
-    // and set to 1/12 of the font width. Visually it seems to work at
-    // all scales but there must be better ways to do it
-    const qreal width = qMax(_fontWidth / 12.0, 1.0);
-    const qreal halfWidth = width / 2.0;
-    pen.setWidthF(width);
-    painter.setPen(pen);
-
-    if (_cursorShape == Enum::BlockCursor) {
-        // draw the cursor outline, adjusting the area so that it is draw entirely inside 'rect'
-        painter.drawRect(cursorRect.adjusted(halfWidth, halfWidth, -halfWidth, -halfWidth));
-
-        // draw the cursor body only when the widget has focus
-        if (hasFocus()) {
-            painter.fillRect(cursorRect, cursorColor);
-
-            // if the cursor text color is valid then use it to draw the character under the cursor,
-            // otherwise invert the color used to draw the text to ensure that the character at
-            // the cursor position is readable
-            characterColor = _cursorTextColor.isValid() ? _cursorTextColor : backgroundColor;
-        }
-    } else if (_cursorShape == Enum::UnderlineCursor) {
-        QLineF line(cursorRect.left() + halfWidth,
-                    cursorRect.bottom() - halfWidth,
-                    cursorRect.right() - halfWidth,
-                    cursorRect.bottom() - halfWidth);
-        painter.drawLine(line);
-
-    } else if (_cursorShape == Enum::IBeamCursor) {
-        QLineF line(cursorRect.left() + halfWidth,
-                    cursorRect.top() + halfWidth,
-                    cursorRect.left() + halfWidth,
-                    cursorRect.bottom() - halfWidth);
-        painter.drawLine(line);
-    }
-}
-
-void TerminalDisplay::drawCharacters(QPainter& painter,
-                                     const QRect& rect,
-                                     const QString& text,
-                                     const Character* style,
-                                     const QColor& characterColor)
-{
-    // don't draw text which is currently blinking
-    if (_textBlinking && ((style->rendition & RE_BLINK) != 0)) {
-        return;
-    }
-
-    // don't draw concealed characters
-    if ((style->rendition & RE_CONCEAL) != 0) {
-        return;
-    }
-
-    static constexpr int MaxFontWeight = 99; // https://doc.qt.io/qt-5/qfont.html#Weight-enum
-
-    const int normalWeight = font().weight();
-    // +26 makes "bold" from "normal", "normal" from "light", etc. It is 26 instead of not 25 to prefer
-    // bolder weight when 25 falls in the middle between two weights. See QFont::Weight
-    const int boldWeight = qMin(normalWeight + 26, MaxFontWeight);
-
-    const auto isBold = [boldWeight](const QFont &font) { return font.weight() >= boldWeight; };
-
-    const bool useBold = (((style->rendition & RE_BOLD) != 0) && _boldIntense);
-    const bool useUnderline = ((style->rendition & RE_UNDERLINE) != 0) || font().underline();
-    const bool useItalic = ((style->rendition & RE_ITALIC) != 0) || font().italic();
-    const bool useStrikeOut = ((style->rendition & RE_STRIKEOUT) != 0) || font().strikeOut();
-    const bool useOverline = ((style->rendition & RE_OVERLINE) != 0) || font().overline();
-
-    QFont currentFont = painter.font();
-
-    if (isBold(currentFont) != useBold
-            || currentFont.underline() != useUnderline
-            || currentFont.italic() != useItalic
-            || currentFont.strikeOut() != useStrikeOut
-            || currentFont.overline() != useOverline) {
-        currentFont.setWeight(useBold ? boldWeight : normalWeight);
-        currentFont.setUnderline(useUnderline);
-        currentFont.setItalic(useItalic);
-        currentFont.setStrikeOut(useStrikeOut);
-        currentFont.setOverline(useOverline);
-        painter.setFont(currentFont);
-    }
-
-    // setup pen
-    const QColor foregroundColor = style->foregroundColor.color(_colorTable);
-    const QColor color = characterColor.isValid() ? characterColor : foregroundColor;
-    QPen pen = painter.pen();
-    if (pen.color() != color) {
-        pen.setColor(color);
-        painter.setPen(color);
-    }
-
-    const bool origClipping = painter.hasClipping();
-    const auto origClipRegion = painter.clipRegion();
-    painter.setClipRect(rect);
-    // draw text
-    if (isLineCharString(text) && !_useFontLineCharacters) {
-        drawLineCharString(painter, rect.x(), rect.y(), text, style);
-    } else {
-        // Force using LTR as the document layout for the terminal area, because
-        // there is no use cases for RTL emulator and RTL terminal application.
-        //
-        // This still allows RTL characters to be rendered in the RTL way.
-        painter.setLayoutDirection(Qt::LeftToRight);
-
-        if (_bidiEnabled) {
-            painter.drawText(rect.x(), rect.y() + _fontAscent + _lineSpacing, text);
-        } else {
-            painter.drawText(rect.x(), rect.y() + _fontAscent + _lineSpacing, LTR_OVERRIDE_CHAR + text);
-        }
-    }
-    painter.setClipRegion(origClipRegion);
-    painter.setClipping(origClipping);
-}
-
-void TerminalDisplay::drawTextFragment(QPainter& painter ,
-                                       const QRect& rect,
-                                       const QString& text,
-                                       const Character* style)
-{
-    // setup painter
-    const QColor foregroundColor = style->foregroundColor.color(_colorTable);
-    const QColor backgroundColor = style->backgroundColor.color(_colorTable);
-
-    // draw background if different from the display's background color
-    if (backgroundColor != getBackgroundColor()) {
-        drawBackground(painter, rect, backgroundColor,
-                       false /* do not use transparency */);
-    }
-
-    // draw cursor shape if the current character is the cursor
-    // this may alter the foreground and background colors
-    QColor characterColor;
-    if ((style->rendition & RE_CURSOR) != 0) {
-        drawCursor(painter, rect, foregroundColor, backgroundColor, characterColor);
-    }
-
-    // draw text
-    drawCharacters(painter, rect, text, style, characterColor);
-}
-
-void TerminalDisplay::drawPrinterFriendlyTextFragment(QPainter& painter,
-        const QRect& rect,
-        const QString& text,
-        const Character* style)
-{
-    // Set the colors used to draw to black foreground and white
-    // background for printer friendly output when printing
-    Character print_style = *style;
-    print_style.foregroundColor = CharacterColor(COLOR_SPACE_RGB, 0x00000000);
-    print_style.backgroundColor = CharacterColor(COLOR_SPACE_RGB, 0xFFFFFFFF);
-
-    // draw text
-    drawCharacters(painter, rect, text, &print_style, QColor());
 }
 
 void TerminalDisplay::setRandomSeed(uint randomSeed)
@@ -1260,7 +1038,7 @@ void TerminalDisplay::updateImage()
     }
 
     if (_highlightScrolledLinesControl.enabled) {
-        dirtyRegion |= highlightScrolledLinesRegion(dirtyRegion.isEmpty());
+        dirtyRegion |= _terminalPainter->highlightScrolledLinesRegion(dirtyRegion.isEmpty());
     }
     _screenWindow->resetScrollCount();
 
@@ -1319,7 +1097,7 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 
     for (const QRect &rect : region) {
         dirtyImageRegion += widgetToImage(rect);
-        drawBackground(paint, rect, getBackgroundColor(), true /* use opacity setting */);
+        _terminalPainter->drawBackground(paint, rect, getBackgroundColor(), true /* use opacity setting */);
     }
 
     if (_displayVerticalLine) {
@@ -1335,11 +1113,11 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
     paint.setRenderHint(QPainter::TextAntialiasing, _antialiasText);
 
     for (const QRect &rect : qAsConst(dirtyImageRegion)) {
-        drawContents(paint, rect);
+        _terminalPainter->drawContents(paint, rect);
     }
-    drawCurrentResultRect(paint);
-    highlightScrolledLines(paint);
-    drawInputMethodPreeditString(paint, preeditRect());
+    _terminalPainter->drawCurrentResultRect(paint);
+    _terminalPainter->highlightScrolledLines(paint);
+    _terminalPainter->drawInputMethodPreeditString(paint, preeditRect());
     paintFilters(paint);
 
     const bool drawDimmed = _dimWhenInactive && !hasFocus();
@@ -1378,10 +1156,10 @@ void TerminalDisplay::printContent(QPainter& painter, bool friendly)
 
     _printerFriendly = friendly;
     if (!friendly) {
-        drawBackground(painter, rect, getBackgroundColor(),
+        _terminalPainter->drawBackground(painter, rect, getBackgroundColor(),
                        true /* use opacity setting */);
     }
-    drawContents(painter, rect);
+    _terminalPainter->drawContents(painter, rect);
     _printerFriendly = false;
     setVTFont(savedFont);
 }
@@ -1414,291 +1192,6 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 
 
     _filterChain->paint(this, painter);
-}
-
-static uint baseCodePoint(const Character &ch) {
-    if (ch.rendition & RE_EXTENDED_CHAR) {
-        // sequence of characters
-        ushort extendedCharLength = 0;
-        const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
-        return chars[0];
-    } else {
-        return ch.character;
-    }
-}
-
-void TerminalDisplay::drawContents(QPainter& paint, const QRect& rect)
-{
-    const int numberOfColumns = _usedColumns;
-    QVector<uint> univec;
-    univec.reserve(numberOfColumns);
-    for (int y = rect.y(); y <= rect.bottom(); y++) {
-        int x = rect.x();
-        if ((_image[loc(rect.x(), y)].character == 0u) && (x != 0)) {
-            x--; // Search for start of multi-column character
-        }
-        for (; x <= rect.right(); x++) {
-            int len = 1;
-            int p = 0;
-
-            // reset our buffer to the number of columns
-            int bufferSize = numberOfColumns;
-            univec.resize(bufferSize);
-            uint *disstrU = univec.data();
-
-            // is this a single character or a sequence of characters ?
-            if ((_image[loc(x, y)].rendition & RE_EXTENDED_CHAR) != 0) {
-                // sequence of characters
-                ushort extendedCharLength = 0;
-                const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(_image[loc(x, y)].character, extendedCharLength);
-                if (chars != nullptr) {
-                    Q_ASSERT(extendedCharLength > 1);
-                    bufferSize += extendedCharLength - 1;
-                    univec.resize(bufferSize);
-                    disstrU = univec.data();
-                    for (int index = 0 ; index < extendedCharLength ; index++) {
-                        Q_ASSERT(p < bufferSize);
-                        disstrU[p++] = chars[index];
-                    }
-                }
-            } else {
-                // single character
-                const uint c = _image[loc(x, y)].character;
-                if (c != 0u) {
-                    Q_ASSERT(p < bufferSize);
-                    disstrU[p++] = c;
-                }
-            }
-
-            const bool lineDraw = LineBlockCharacters::canDraw(_image[loc(x, y)].character);
-            const bool doubleWidth = (_image[qMin(loc(x, y) + 1, _imageSize - 1)].character == 0);
-            const CharacterColor currentForeground = _image[loc(x, y)].foregroundColor;
-            const CharacterColor currentBackground = _image[loc(x, y)].backgroundColor;
-            const RenditionFlags currentRendition = _image[loc(x, y)].rendition;
-            const QChar::Script currentScript = QChar::script(baseCodePoint(_image[loc(x, y)]));
-
-            const auto isInsideDrawArea = [&](int column) { return column <= rect.right(); };
-            const auto hasSameColors = [&](int column) {
-                return _image[loc(column, y)].foregroundColor == currentForeground
-                    && _image[loc(column, y)].backgroundColor == currentBackground;
-            };
-            const auto hasSameRendition = [&](int column) {
-                return (_image[loc(column, y)].rendition & ~RE_EXTENDED_CHAR)
-                    == (currentRendition & ~RE_EXTENDED_CHAR);
-            };
-            const auto hasSameWidth = [&](int column) {
-                const int characterLoc = qMin(loc(column, y) + 1, _imageSize - 1);
-                return (_image[characterLoc].character == 0) == doubleWidth;
-            };
-            const auto hasSameLineDrawStatus = [&](int column) {
-                return LineBlockCharacters::canDraw(_image[loc(column, y)].character)
-                    == lineDraw;
-            };
-            const auto isSameScript = [&](int column) {
-                const QChar::Script script = QChar::script(baseCodePoint(_image[loc(column, y)]));
-                if (currentScript == QChar::Script_Common || script == QChar::Script_Common
-                    || currentScript == QChar::Script_Inherited || script == QChar::Script_Inherited) {
-                    return true;
-                }
-                return currentScript == script;
-            };
-            const auto canBeGrouped = [&](int column) {
-                return _image[loc(column, y)].character <= 0x7e
-                       || (_image[loc(column, y)].rendition & RE_EXTENDED_CHAR)
-                       || (_bidiEnabled && !doubleWidth);
-            };
-
-            if (canBeGrouped(x)) {
-                while (isInsideDrawArea(x + len) && hasSameColors(x + len)
-                       && hasSameRendition(x + len) && hasSameWidth(x + len)
-                       && hasSameLineDrawStatus(x + len) && isSameScript(x + len)
-                       && canBeGrouped(x + len)) {
-                    const uint c = _image[loc(x + len, y)].character;
-                    if ((_image[loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
-                        // sequence of characters
-                        ushort extendedCharLength = 0;
-                        const uint* chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
-                        if (chars != nullptr) {
-                            Q_ASSERT(extendedCharLength > 1);
-                            bufferSize += extendedCharLength - 1;
-                            univec.resize(bufferSize);
-                            disstrU = univec.data();
-                            for (int index = 0 ; index < extendedCharLength ; index++) {
-                                Q_ASSERT(p < bufferSize);
-                                disstrU[p++] = chars[index];
-                            }
-                        }
-                    } else {
-                        // single character
-                        if (c != 0u) {
-                            Q_ASSERT(p < bufferSize);
-                            disstrU[p++] = c;
-                        }
-                    }
-
-                    if (doubleWidth) { // assert((_image[loc(x+len,y)+1].character == 0)), see above if condition
-                        len++; // Skip trailing part of multi-column character
-                    }
-                    len++;
-                }
-            } else {
-                // Group spaces following any non-wide character with the character. This allows for
-                // rendering ambiguous characters with wide glyphs without clipping them.
-                while (!doubleWidth && isInsideDrawArea(x + len)
-                        && _image[loc(x + len, y)].character == ' ' && hasSameColors(x + len)
-                        && hasSameRendition(x + len)) {
-                    // disstrU intentionally not modified - trailing spaces are meaningless
-                    len++;
-                }
-            }
-            if ((x + len < _usedColumns) && (_image[loc(x + len, y)].character == 0u)) {
-                len++; // Adjust for trailing part of multi-column character
-            }
-
-            const bool save__fixedFont = _fixedFont;
-            if (lineDraw) {
-                _fixedFont = false;
-            }
-            if (doubleWidth) {
-                _fixedFont = false;
-            }
-            univec.resize(p);
-
-            // Create a text scaling matrix for double width and double height lines.
-            QMatrix textScale;
-
-            if (y < _lineProperties.size()) {
-                if ((_lineProperties[y] & LINE_DOUBLEWIDTH) != 0) {
-                    textScale.scale(2, 1);
-                }
-
-                if ((_lineProperties[y] & LINE_DOUBLEHEIGHT) != 0) {
-                    textScale.scale(1, 2);
-                }
-            }
-
-            //Apply text scaling matrix.
-            paint.setWorldTransform(QTransform(textScale), true);
-
-            //calculate the area in which the text will be drawn
-            QRect textArea = QRect(_contentRect.left() + contentsRect().left() + _fontWidth * x,
-                                   _contentRect.top() + contentsRect().top() + _fontHeight * y,
-                                   _fontWidth * len,
-                                   _fontHeight);
-
-            //move the calculated area to take account of scaling applied to the painter.
-            //the position of the area from the origin (0,0) is scaled
-            //by the opposite of whatever
-            //transformation has been applied to the painter.  this ensures that
-            //painting does actually start from textArea.topLeft()
-            //(instead of textArea.topLeft() * painter-scale)
-            textArea.moveTopLeft(textScale.inverted().map(textArea.topLeft()));
-
-            QString unistr = QString::fromUcs4(univec.data(), univec.length());
-
-            //paint text fragment
-            if (_printerFriendly) {
-                drawPrinterFriendlyTextFragment(paint,
-                                                textArea,
-                                                unistr,
-                                                &_image[loc(x, y)]);
-            } else {
-                drawTextFragment(paint,
-                                 textArea,
-                                 unistr,
-                                 &_image[loc(x, y)]);
-            }
-
-            _fixedFont = save__fixedFont;
-
-            //reset back to single-width, single-height _lines
-            paint.setWorldTransform(QTransform(textScale.inverted()), true);
-
-            if (y < _lineProperties.size() - 1) {
-                //double-height _lines are represented by two adjacent _lines
-                //containing the same characters
-                //both _lines will have the LINE_DOUBLEHEIGHT attribute.
-                //If the current line has the LINE_DOUBLEHEIGHT attribute,
-                //we can therefore skip the next line
-                if ((_lineProperties[y] & LINE_DOUBLEHEIGHT) != 0) {
-                    y++;
-                }
-            }
-
-            x += len - 1;
-        }
-    }
-}
-
-void TerminalDisplay::drawCurrentResultRect(QPainter& painter)
-{
-    if(_screenWindow->currentResultLine() == -1) {
-        return;
-    }
-
-    _searchResultRect.setRect(0, _contentRect.top() + (_screenWindow->currentResultLine() - _screenWindow->currentLine()) * _fontHeight,
-                              _columns * _fontWidth, _fontHeight);
-    painter.fillRect(_searchResultRect, QColor(0, 0, 255, 80));
-}
-
-void TerminalDisplay::highlightScrolledLines(QPainter& painter)
-{
-    if (!_highlightScrolledLinesControl.enabled) {
-        return;
-    }
-
-    QColor color = QColor(_colorTable[Color4Index]);
-    color.setAlpha(_highlightScrolledLinesControl.timer->isActive() ? 255 : 150);
-    painter.fillRect(_highlightScrolledLinesControl.rect, color);
-}
-
-QRegion TerminalDisplay::highlightScrolledLinesRegion(bool nothingChanged)
-{
-    QRegion dirtyRegion;
-    const int highlightLeftPosition = _scrollbarLocation == Enum::ScrollBarLeft ? _scrollBar->width() : 0;
-
-    int start = 0;
-    int nb_lines = abs(_screenWindow->scrollCount());
-    if (nb_lines > 0 && _scrollBar->maximum() > 0) {
-        QRect new_highlight;
-        bool addToCurrentHighlight = _highlightScrolledLinesControl.timer->isActive() &&
-                                     (_screenWindow->scrollCount() * _highlightScrolledLinesControl.previousScrollCount > 0);
-
-        if (addToCurrentHighlight) {
-            if (_screenWindow->scrollCount() > 0) {
-                start = -1 * (_highlightScrolledLinesControl.previousScrollCount + _screenWindow->scrollCount()) + _screenWindow->windowLines();
-            } else {
-                start = -1 * _highlightScrolledLinesControl.previousScrollCount;
-            }
-            _highlightScrolledLinesControl.previousScrollCount += _screenWindow->scrollCount();
-        } else {
-            start = _screenWindow->scrollCount() > 0 ? _screenWindow->windowLines() - nb_lines : 0;
-            _highlightScrolledLinesControl.previousScrollCount = _screenWindow->scrollCount();
-        }
-
-        new_highlight.setRect(highlightLeftPosition, _contentRect.top() + start * _fontHeight, HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * _fontHeight);
-        new_highlight.setTop(std::max(new_highlight.top(), _contentRect.top()));
-        new_highlight.setBottom(std::min(new_highlight.bottom(), _contentRect.bottom()));
-        if (!new_highlight.isValid()) {
-            new_highlight = QRect(0, 0, 0, 0);
-        }
-        dirtyRegion = new_highlight;
-
-        if (addToCurrentHighlight) {
-            _highlightScrolledLinesControl.rect |= new_highlight;
-        } else {
-            dirtyRegion |= _highlightScrolledLinesControl.rect;
-            _highlightScrolledLinesControl.rect = new_highlight;
-        }
-
-        _highlightScrolledLinesControl.timer->start();
-    } else if (!nothingChanged || _highlightScrolledLinesControl.needToClear) {
-        dirtyRegion = _highlightScrolledLinesControl.rect;
-        _highlightScrolledLinesControl.rect.setRect(0, 0, 0, 0);
-        _highlightScrolledLinesControl.needToClear = false;
-    }
-
-    return dirtyRegion;
 }
 
 void TerminalDisplay::highlightScrolledLinesEvent()
@@ -3378,26 +2871,6 @@ QRect TerminalDisplay::preeditRect() const
                            _fontHeight);
 
     return stringRect.intersected(_contentRect);
-}
-
-void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRect& rect)
-{
-    if (_inputMethodData.preeditString.isEmpty() || !isCursorOnDisplay()) {
-        return;
-    }
-
-    const QPoint cursorPos = cursorPosition();
-
-    QColor characterColor;
-    const QColor background = _colorTable[DEFAULT_BACK_COLOR];
-    const QColor foreground = _colorTable[DEFAULT_FORE_COLOR];
-    const Character* style = &_image[loc(cursorPos.x(), cursorPos.y())];
-
-    drawBackground(painter, rect, background, true);
-    drawCursor(painter, rect, foreground, background, characterColor);
-    drawCharacters(painter, rect, _inputMethodData.preeditString, style, characterColor);
-
-    _inputMethodData.previousPreeditRect = rect;
 }
 
 /* ------------------------------------------------------------------------- */

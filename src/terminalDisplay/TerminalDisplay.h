@@ -50,6 +50,7 @@ class QTimerEvent;
 class KMessageWidget;
 
 namespace Konsole {
+class TerminalPainter;
 class FilterChain;
 class TerminalImageFilterChain;
 class SessionController;
@@ -337,7 +338,10 @@ public:
      */
     void setScreenWindow(ScreenWindow *window);
     /** Returns the terminal screen section which is displayed in this widget.  See setScreenWindow() */
-    ScreenWindow *screenWindow() const;
+    QPointer<ScreenWindow> screenWindow() const
+    {
+        return _screenWindow;
+    }
 
     // Select the current line.
     void selectCurrentLine();
@@ -392,6 +396,8 @@ public:
     // of the character at that point. When the edge is true, it maps to
     // a character which left edge is closest to the point.
     void getCharacterPosition(const QPoint &widgetPoint, int &line, int &column, bool edge) const;
+
+    friend class TerminalPainter;
 
 public Q_SLOTS:
     /**
@@ -921,6 +927,7 @@ private:
     int _displayVerticalLineAtChar;
 
     QKeySequence _peekPrimaryShortcut;
+    TerminalPainter *_terminalPainter;
 };
 
 }

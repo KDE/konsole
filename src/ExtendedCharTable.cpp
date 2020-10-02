@@ -77,7 +77,7 @@ uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort len
                 const QList<Session *> sessionsList = SessionManager::instance()->sessions();
                 for (const Session *s : sessionsList) {
                     const QList<TerminalDisplay *> displayList = s->views();
-                    for (const TerminalDisplay *display : displayList) {
+                    for (const QPointer<TerminalDisplay> display : displayList) {
                         usedExtendedChars += display->screenWindow()->screen()->usedExtendedChars();
                     }
                 }
