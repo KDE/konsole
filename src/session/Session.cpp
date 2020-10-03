@@ -40,7 +40,6 @@
 // KDE
 #include <KLocalizedString>
 #include <KNotification>
-#include <KRun>
 #include <KShell>
 #include <KProcess>
 #include <KConfigGroup>

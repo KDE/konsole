@@ -41,7 +41,6 @@
 #include <KActionCollection>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KRun>
 #include <KShell>
 #include <KToggleAction>
 #include <KSelectAction>
@@ -55,6 +54,14 @@
 #include <KCodecAction>
 #include <KNotification>
 #include <KIO/CommandLauncherJob>
+
+#include <kio_version.h>
+#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
+#include <KRun>
+#else
+#include <KIO/JobUiDelegate>
+#include <KIO/OpenUrlJob>
+#endif
 
 // Konsole
 #include "CopyInputDialog.h"
@@ -534,8 +541,15 @@ void SessionController::handleWebShortcutAction()
     KUriFilterData filterData(action->data().toString());
 
     if (KUriFilter::self()->filterUri(filterData, { QStringLiteral("kurisearchfilter") })) {
-        const QUrl& url = filterData.uri();
+        const QUrl url = filterData.uri();
+
+#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
         new KRun(url, QApplication::activeWindow());
+#else
+        auto *job = new KIO::OpenUrlJob(url);
+        job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+        job->start();
+#endif
     }
 }
 
@@ -1058,13 +1072,15 @@ void SessionController::closeSession()
 //   2) transform url to get the desired result (ssh -> sftp, etc)
 void SessionController::openBrowser()
 {
-    const QUrl currentUrl = url();
+    const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
 
-    if (currentUrl.isLocalFile()) {
-        new KRun(currentUrl, QApplication::activeWindow(), true);
-    } else {
-        new KRun(QUrl::fromLocalFile(QDir::homePath()), QApplication::activeWindow(), true);
-    }
+#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
+    new KRun(currentUrl, QApplication::activeWindow(), true);
+#else
+    auto *job = new KIO::OpenUrlJob(currentUrl);
+    job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+    job->start();
+#endif
 }
 
 void SessionController::copy()
