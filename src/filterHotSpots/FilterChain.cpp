@@ -264,7 +264,7 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
         urlNumber = count(HotSpot::Link);
         urlNumInc = -1;
     } else {
-        urlNumber = 0;
+        urlNumber = 1;
         urlNumInc = 1;
     }
 
