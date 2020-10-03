@@ -256,7 +256,11 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
     int urlNumInc;
 
     // TODO: Remove _reverseUrllHints from TerminalDisplay.
-    if (_reverseUrlHints) { // TODO: Access reverseUrlHints from the profile, here.
+    // TODO: Access reverseUrlHints from the profile, here.
+    if (_reverseUrlHints) {
+        // The URL hint numbering should be 'physically' increasing on the
+        // keyboard, so they start at one and end up on 10 (on 0, or at least
+        // they used to, but it seems to have changed, I'll fix that later).
         urlNumber = count(HotSpot::Link);
         urlNumInc = -1;
     } else {
