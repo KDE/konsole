@@ -178,7 +178,7 @@ static int ascii_to_int(int c) {
     return c - '0';
 }
 
-void FilterChain::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn)
+bool FilterChain::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn)
 {
     if ((_urlHintsModifiers != 0u) && ev->modifiers() == _urlHintsModifiers) {
         QList<QSharedPointer<HotSpot>> hotspots = filterBy(HotSpot::Link);
@@ -193,7 +193,7 @@ void FilterChain::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine
             hotspots.at(hintSelected)->activate();
             _showUrlHint = false;
             td->update();
-            return;
+            return true;
         }
 
         if (!_showUrlHint) {
@@ -207,6 +207,7 @@ void FilterChain::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine
     if (spot) {
         spot->keyPressEvent(td, ev);
     }
+    return false;
 }
 
 void  FilterChain::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev, int charLine, int charColumn)

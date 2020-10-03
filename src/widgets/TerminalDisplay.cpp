@@ -3494,7 +3494,11 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
         int charLine;
         int charColumn;
         getCharacterPosition(mapFromGlobal(QCursor::pos()), charLine, charColumn, !_usesMouseTracking);
-        _filterChain->keyPressEvent(this, event, charLine, charColumn);
+
+        // Don't process it if the filterchain handled it for us
+        if (_filterChain->keyPressEvent(this, event, charLine, charColumn)) {
+            return;
+        }
     }
 
     if (!_peekPrimaryShortcut.isEmpty() && _peekPrimaryShortcut.matches(QKeySequence(event->key() | event->modifiers()))) {

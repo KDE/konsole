@@ -91,7 +91,7 @@ public:
 
     void mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev, int charLine, int charColumn);
     void mouseReleaseEvent(TerminalDisplay *td, QMouseEvent *ev, int charLine, int charColumn);
-    void keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn);
+    bool keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn);
     void keyReleaseEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn);
     void leaveEvent(TerminalDisplay *td, QEvent *ev);
 
