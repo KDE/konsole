@@ -253,12 +253,15 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
 
     const auto spots = hotSpots();
     int urlNumber;
+    int urlNumInc;
 
     // TODO: Remove _reverseUrllHints from TerminalDisplay.
     if (_reverseUrlHints) { // TODO: Access reverseUrlHints from the profile, here.
         urlNumber = count(HotSpot::Link);
+        urlNumInc = -1;
     } else {
         urlNumber = 0;
+        urlNumInc = 1;
     }
 
     for (const auto &spot : spots) {
@@ -268,12 +271,9 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
             region = spotRegion.first;
             QRect r = spotRegion.second;
 
+            // TODO: Move this paint code to HotSpot->drawHint();
+            // TODO: Fix the Url Hints access from the Profile.
             if (_showUrlHint && spot->type() == HotSpot::Link) {
-                // if we are in reverse  url hints mode, we need to get the proper number,
-                // before trying to display the hint. if we don't do that we miss mint nr. '0'.
-                if (_reverseUrlHints) {
-                    urlNumber -= 1;
-                }
                 if (urlNumber >= 0 && urlNumber < 10) {
                     // Position at the beginning of the URL
                     QRect hintRect(*region.begin());
@@ -283,10 +283,7 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
                     painter.drawRect(hintRect.adjusted(0, 0, -1, -1));
                     painter.drawText(hintRect, Qt::AlignCenter, QString::number(urlNumber));
                 }
-                // But if we are not in reverse mode, we need to increase it later.
-                if (!_reverseUrlHints) {
-                    urlNumber += 1;
-                }
+                urlNumber += urlNumInc;
             }
         }
 
