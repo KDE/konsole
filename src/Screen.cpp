@@ -1010,7 +1010,7 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
     const int srcY = sourceBegin / _columns;
     if (dest < sourceBegin) {
         for (int i = 0; i <= lines; i++) {
-            _screenLines[destY + i] = std::move(_screenLines[srcY + i]);
+            _screenLines[destY + i] = _screenLines[srcY + i];
             _lineProperties[destY + i] = _lineProperties[srcY + i];
         }
     } else {
