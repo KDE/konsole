@@ -78,7 +78,7 @@ namespace Konsole
         univec.reserve(numberOfColumns);
         for (int y = rect.y(); y <= rect.bottom(); y++) {
             int x = rect.x();
-            if ((_display->_image[loc(rect.x(), y)].character == 0u) && (x != 0)) {
+            if ((_display->_image[_display->loc(rect.x(), y)].character == 0u) && (x != 0)) {
                 x--; // Search for start of multi-column character
             }
             for (; x <= rect.right(); x++) {
@@ -91,10 +91,10 @@ namespace Konsole
                 uint *disstrU = univec.data();
 
                 // is this a single character or a sequence of characters ?
-                if ((_display->_image[loc(x, y)].rendition & RE_EXTENDED_CHAR) != 0) {
+                if ((_display->_image[_display->loc(x, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                     // sequence of characters
                     ushort extendedCharLength = 0;
-                    const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(_display->_image[loc(x, y)].character, extendedCharLength);
+                    const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(_display->_image[_display->loc(x, y)].character, extendedCharLength);
                     if (chars != nullptr) {
                         Q_ASSERT(extendedCharLength > 1);
                         bufferSize += extendedCharLength - 1;
@@ -106,39 +106,39 @@ namespace Konsole
                         }
                     }
                 } else {
-                    const uint c = _display->_image[loc(x, y)].character;
+                    const uint c = _display->_image[_display->loc(x, y)].character;
                     if (c != 0u) {
                         Q_ASSERT(p < bufferSize);
                         disstrU[p++] = c;
                     }
                 }
 
-                const bool lineDraw = LineBlockCharacters::canDraw(_display->_image[loc(x, y)].character);
-                const bool doubleWidth = (_display->_image[qMin(loc(x, y) + 1, _display->_imageSize - 1)].character == 0);
-                const CharacterColor currentForeground = _display->_image[loc(x, y)].foregroundColor;
-                const CharacterColor currentBackground = _display->_image[loc(x, y)].backgroundColor;
-                const RenditionFlags currentRendition = _display->_image[loc(x, y)].rendition;
-                const QChar::Script currentScript = QChar::script(baseCodePoint(_display->_image[loc(x, y)]));
+                const bool lineDraw = LineBlockCharacters::canDraw(_display->_image[_display->loc(x, y)].character);
+                const bool doubleWidth = (_display->_image[qMin(_display->loc(x, y) + 1, _display->_imageSize - 1)].character == 0);
+                const CharacterColor currentForeground = _display->_image[_display->loc(x, y)].foregroundColor;
+                const CharacterColor currentBackground = _display->_image[_display->loc(x, y)].backgroundColor;
+                const RenditionFlags currentRendition = _display->_image[_display->loc(x, y)].rendition;
+                const QChar::Script currentScript = QChar::script(baseCodePoint(_display->_image[_display->loc(x, y)]));
 
                 const auto isInsideDrawArea = [&](int column) { return column <= rect.right(); };
                 const auto hasSameColors = [&](int column) {
-                    return _display->_image[loc(column, y)].foregroundColor == currentForeground
-                        && _display->_image[loc(column, y)].backgroundColor == currentBackground;
+                    return _display->_image[_display->loc(column, y)].foregroundColor == currentForeground
+                        && _display->_image[_display->loc(column, y)].backgroundColor == currentBackground;
                 };
                 const auto hasSameRendition = [&](int column) {
-                    return (_display->_image[loc(column, y)].rendition & ~RE_EXTENDED_CHAR)
+                    return (_display->_image[_display->loc(column, y)].rendition & ~RE_EXTENDED_CHAR)
                         == (currentRendition & ~RE_EXTENDED_CHAR);
                 };
                 const auto hasSameWidth = [&](int column) {
-                    const int characterLoc = qMin(loc(column, y) + 1, _display->_imageSize - 1);
+                    const int characterLoc = qMin(_display->loc(column, y) + 1, _display->_imageSize - 1);
                     return (_display->_image[characterLoc].character == 0) == doubleWidth;
                 };
                 const auto hasSameLineDrawStatus = [&](int column) {
-                    return LineBlockCharacters::canDraw(_display->_image[loc(column, y)].character)
+                    return LineBlockCharacters::canDraw(_display->_image[_display->loc(column, y)].character)
                         == lineDraw;
                 };
                 const auto isSameScript = [&](int column) {
-                    const QChar::Script script = QChar::script(baseCodePoint(_display->_image[loc(column, y)]));
+                    const QChar::Script script = QChar::script(baseCodePoint(_display->_image[_display->loc(column, y)]));
                     if (currentScript == QChar::Script_Common || script == QChar::Script_Common
                         || currentScript == QChar::Script_Inherited || script == QChar::Script_Inherited) {
                         return true;
@@ -146,8 +146,8 @@ namespace Konsole
                     return currentScript == script;
                 };
                 const auto canBeGrouped = [&](int column) {
-                    return _display->_image[loc(column, y)].character <= 0x7e
-                            || (_display->_image[loc(column, y)].rendition & RE_EXTENDED_CHAR)
+                    return _display->_image[_display->loc(column, y)].character <= 0x7e
+                            || (_display->_image[_display->loc(column, y)].rendition & RE_EXTENDED_CHAR)
                             || (_display->_bidiEnabled && !doubleWidth);
                 };
 
@@ -156,8 +156,8 @@ namespace Konsole
                             && hasSameRendition(x + len) && hasSameWidth(x + len)
                             && hasSameLineDrawStatus(x + len) && isSameScript(x + len)
                             && canBeGrouped(x + len)) {
-                        const uint c = _display->_image[loc(x + len, y)].character;
-                        if ((_display->_image[loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
+                        const uint c = _display->_image[_display->loc(x + len, y)].character;
+                        if ((_display->_image[_display->loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                             // sequence of characters
                             ushort extendedCharLength = 0;
                             const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
@@ -188,13 +188,13 @@ namespace Konsole
                     // Group spaces following any non-wide character with the character. This allows for
                     // rendering ambiguous characters with wide glyphs without clipping them.
                     while (!doubleWidth && isInsideDrawArea(x + len)
-                            && _display->_image[loc(x + len, y)].character == ' ' && hasSameColors(x + len)
+                            && _display->_image[_display->loc(x + len, y)].character == ' ' && hasSameColors(x + len)
                             && hasSameRendition(x + len)) {
                         // disstrU intentionally not modified - trailing spaces are meaningless
                         len++;
                     }
                 }
-                if ((x + len < _display->_usedColumns) && (_display->_image[loc(x + len, y)].character == 0u)) {
+                if ((x + len < _display->_usedColumns) && (_display->_image[_display->loc(x + len, y)].character == 0u)) {
                     len++; // Adjust for trailing part of multi-column character
                 }
 
@@ -243,12 +243,12 @@ namespace Konsole
                     drawPrinterFriendlyTextFragment(paint,
                                                     textArea,
                                                     unistr,
-                                                    &_display->_image[loc(x, y)]);    
+                                                    &_display->_image[_display->loc(x, y)]);    
                 } else {
                     drawTextFragment(paint,
                                     textArea,
                                     unistr,
-                                    &_display->_image[loc(x, y)]);
+                                    &_display->_image[_display->loc(x, y)]);
                 }
 
                 _display->_fixedFont = save__fixedFont;
@@ -518,16 +518,16 @@ namespace Konsole
     
     void TerminalPainter::drawInputMethodPreeditString(QPainter &painter, const QRect &rect) 
     {
-        if (_display->_inputMethodData.preeditString.isEmpty() || !isCursorOnDisplay()) {
+        if (_display->_inputMethodData.preeditString.isEmpty() || !_display->isCursorOnDisplay()) {
             return;
         }
         
-        const QPoint cursorPos = cursorPosition();
+        const QPoint cursorPos = _display->cursorPosition();
 
         QColor characterColor;
         const QColor background = _display->_colorTable[DEFAULT_BACK_COLOR];
         const QColor foreground = _display->_colorTable[DEFAULT_FORE_COLOR];
-        const Character *style = &_display->_image[loc(cursorPos.x(), cursorPos.y())];
+        const Character *style = &_display->_image[_display->loc(cursorPos.x(), cursorPos.y())];
 
         drawBackground(painter, rect, background, true);
         drawCursor(painter, rect, foreground, background, characterColor);
@@ -536,35 +536,4 @@ namespace Konsole
         _display->_inputMethodData.previousPreeditRect = rect;
     }
 
-    inline int TerminalPainter::loc(int x, int y) const
-    {
-        if (y < 0 || y > _display->lines()) {
-            qDebug() << "Y: " << y << "Lines" << _display->lines();
-        }
-        if (x < 0 || x > _display->columns()) {
-            qDebug() << "X" << x << "Columns" << _display->columns();
-        }
-
-        Q_ASSERT(y >= 0 && y < _display->lines());
-        Q_ASSERT(x >= 0 && x < _display->columns());
-        x = qBound(0, x, _display->columns() - 1);
-        y = qBound(0, y, _display->lines() - 1);
-
-        return y * _display->columns() + x;
-    }
-    
-    QPoint TerminalPainter::cursorPosition() const
-    {
-        if (!_display->_screenWindow.isNull()) {
-            return _display->screenWindow()->cursorPosition();
-        } else {
-            return {0, 0};
-        }
-    }
-    
-    inline bool TerminalPainter::isCursorOnDisplay() const
-    {
-        return cursorPosition().x() < _display->columns() &&
-                cursorPosition().y() < _display->lines();
-    }
 }

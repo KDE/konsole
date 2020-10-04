@@ -94,9 +94,6 @@ namespace Konsole
         void drawInputMethodPreeditString(QPainter &painter, const QRect &rect);
     
     private:
-        int loc(int x, int y) const;
-        QPoint cursorPosition() const;
-        bool isCursorOnDisplay() const;
 
         TerminalDisplay *_display;
     };
