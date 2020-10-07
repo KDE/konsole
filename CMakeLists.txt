@@ -11,7 +11,8 @@ cmake_minimum_required (VERSION 3.0 FATAL_ERROR)
 # Qt 5.12 LTS EOL May 2021
 set (QT_MIN_VERSION "5.12.0")
 
-set (KF5_MIN_VERSION "5.69.0")
+# Ubuntu 20.04 LTS only has KF 5.68 and Qt 5.12
+set (KF5_MIN_VERSION "5.68.0")
 
 # Release script will create bugzilla versions
 project(konsole VERSION ${RELEASE_SERVICE_VERSION})

@@ -53,9 +53,14 @@
 #include <KConfigGroup>
 #include <KCodecAction>
 #include <KNotification>
-#include <KIO/CommandLauncherJob>
 
 #include <kio_version.h>
+#if KIO_VERSION > QT_VERSION_CHECK(5, 68, 0)
+#include <KIO/CommandLauncherJob>
+#else
+#include <KToolInvocation>
+#endif
+
 #if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
 #include <KRun>
 #else
@@ -555,8 +560,12 @@ void SessionController::handleWebShortcutAction()
 
 void SessionController::configureWebShortcuts()
 {
+#if KIO_VERSION > QT_VERSION_CHECK(5, 68, 0)
     auto job = new KIO::CommandLauncherJob(QStringLiteral("kcmshell5"), { QStringLiteral("webshortcuts") });
     job->start();
+#else
+    KToolInvocation::kdeinitExec(QStringLiteral("kcmshell5"), { QStringLiteral("webshortcuts") });
+#endif
 }
 
 void SessionController::sendSignal(QAction* action)
