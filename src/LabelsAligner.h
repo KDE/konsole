@@ -22,6 +22,7 @@
 #define LABELSALIGNER_H
 
 #include <QObject>
+#include <QVector>
 
 class QWidget;
 class QGridLayout;
