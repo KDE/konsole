@@ -1169,7 +1169,7 @@ QPoint TerminalDisplay::cursorPosition() const
     }
 }
 
-inline bool TerminalDisplay::isCursorOnDisplay() const
+bool TerminalDisplay::isCursorOnDisplay() const
 {
     return cursorPosition().x() < _columns &&
            cursorPosition().y() < _lines;
