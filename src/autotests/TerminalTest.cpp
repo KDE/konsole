@@ -24,6 +24,7 @@
 
 // Konsole
 #include "../terminalDisplay/TerminalDisplay.h"
+#include "../terminalDisplay/TerminalScrollBar.hpp"
 #include "../CharacterColor.h"
 #include "colorscheme/ColorScheme.h"
 
@@ -34,12 +35,12 @@ void TerminalTest::testScrollBarPositions()
     auto display = new TerminalDisplay(nullptr);
 
     // ScrollBar Positions
-    display->setScrollBarPosition(Enum::ScrollBarLeft);
-    QCOMPARE(display->scrollBarPosition(), Enum::ScrollBarLeft);
-    display->setScrollBarPosition(Enum::ScrollBarRight);
-    QCOMPARE(display->scrollBarPosition(), Enum::ScrollBarRight);
-    display->setScrollBarPosition(Enum::ScrollBarHidden);
-    QCOMPARE(display->scrollBarPosition(), Enum::ScrollBarHidden);
+    display->scrollBar()->setScrollBarPosition(Enum::ScrollBarLeft);
+    QCOMPARE(display->scrollBar()->scrollBarPosition(), Enum::ScrollBarLeft);
+    display->scrollBar()->setScrollBarPosition(Enum::ScrollBarRight);
+    QCOMPARE(display->scrollBar()->scrollBarPosition(), Enum::ScrollBarRight);
+    display->scrollBar()->setScrollBarPosition(Enum::ScrollBarHidden);
+    QCOMPARE(display->scrollBar()->scrollBarPosition(), Enum::ScrollBarHidden);
 
     delete display;
 }

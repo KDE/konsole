@@ -24,6 +24,7 @@
 
 // Konsole
 #include "TerminalDisplay.h"
+#include "TerminalScrollBar.hpp"
 #include "ExtendedCharTable.h"
 #include "LineBlockCharacters.h"
 
@@ -292,11 +293,11 @@ namespace Konsole
     QRegion TerminalPainter::highlightScrolledLinesRegion(bool nothingChanged) 
     {
         QRegion dirtyRegion;
-        const int highlightLeftPosition = _display->scrollBarPosition() == Enum::ScrollBarLeft ? _display->_scrollBar->width() : 0;
+        const int highlightLeftPosition = _display->scrollBar()->scrollBarPosition() == Enum::ScrollBarLeft ? _display->scrollBar()->width() : 0;
 
         int start = 0;
         int nb_lines = abs(_display->_screenWindow->scrollCount());
-        if (nb_lines > 0 && _display->_scrollBar->maximum() > 0) {
+        if (nb_lines > 0 && _display->scrollBar()->maximum() > 0) {
             QRect new_highlight;
             bool addToCurrentHighlight = _display->_highlightScrolledLinesControl.timer->isActive() &&
                                      (_display->_screenWindow->scrollCount() * _display->_highlightScrolledLinesControl.previousScrollCount > 0);

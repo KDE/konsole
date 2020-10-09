@@ -62,6 +62,7 @@
 #include "SessionManager.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalScrollBar.hpp"
 
 using namespace Konsole;
 
@@ -337,7 +338,7 @@ void Session::addView(TerminalDisplay* widget)
 
     widget->setUsesMouseTracking(_emulation->programUsesMouseTracking());
 
-    connect(_emulation, &Konsole::Emulation::enableAlternateScrolling, widget, &Konsole::TerminalDisplay::setAlternateScrolling);
+    connect(_emulation, &Konsole::Emulation::enableAlternateScrolling, widget->scrollBar(), &Konsole::TerminalScrollBar::setAlternateScrolling);
 
     connect(_emulation, &Konsole::Emulation::programBracketedPasteModeChanged, widget, &Konsole::TerminalDisplay::setBracketedPasteMode);
 

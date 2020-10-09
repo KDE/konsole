@@ -39,7 +39,6 @@
 #include <QMimeData>
 #include <QPainter>
 #include <QPixmap>
-#include <QScrollBar>
 #include <QStyle>
 #include <QTimer>
 #include <QDrag>
@@ -87,6 +86,7 @@
 #include "EscapeSequenceUrlExtractor.h"
 
 #include "TerminalPainter.hpp"
+#include "TerminalScrollBar.hpp"
 
 using namespace Konsole;
 
@@ -459,7 +459,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _showTerminalSizeHint(true)
     , _bidiEnabled(false)
     , _usesMouseTracking(false)
-    , _alternateScrolling(true)
     , _bracketedPasteMode(false)
     , _iPntSel(QPoint(-1, -1))
     , _pntSel(QPoint(-1, -1))
@@ -472,9 +471,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _autoCopySelectedText(false)
     , _copyTextAsHTML(true)
     , _middleClickPasteMode(Enum::PasteFromX11Selection)
-    , _scrollBar(nullptr)
-    , _scrollbarLocation(Enum::ScrollBarRight)
-    , _scrollFullPage(false)
     , _wordCharacters(QStringLiteral(":@-./_~"))
     , _bellMode(Enum::NotifyBell)
     , _allowBlinkingText(true)
@@ -518,6 +514,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _headerBar(new TerminalHeaderBar(this))
     , _searchResultRect(QRect())
     , _drawOverlay(false)
+    , _scrollBar(nullptr)
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
@@ -526,14 +523,13 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     _contentRect = QRect(_margin, _margin, 1, 1);
 
     // create scroll bar for scrolling output up and down
-    _scrollBar = new QScrollBar(this);
+    _scrollBar = new TerminalScrollBar(this);
     _scrollBar->setAutoFillBackground(false);
     // set the scroll bar's slider to occupy the whole area of the scroll bar initially
-    setScroll(0, 0);
+    _scrollBar->setScroll(0, 0);
     _scrollBar->setCursor(Qt::ArrowCursor);
     _headerBar->setCursor(Qt::ArrowCursor);
     connect(_headerBar, &TerminalHeaderBar::requestToggleExpansion, this, &Konsole::TerminalDisplay::requestToggleExpansion);
-    connect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
     connect(_scrollBar, &QScrollBar::sliderMoved, this, &Konsole::TerminalDisplay::viewScrolledByUser);
 
     // setup timers for blinking text
@@ -710,6 +706,15 @@ void TerminalDisplay::setWallpaper(const ColorSchemeWallpaper::Ptr &p)
     _wallpaper = p;
 }
 
+void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode mode, int amount) 
+{
+    _screenWindow->scrollBy(mode, amount, _scrollBar->scrollFullPage());
+    _screenWindow->setTrackOutput(_screenWindow->atEndOfOutput());
+    updateLineProperties();
+    updateImage();
+    viewScrolledByUser();
+}
+
 void TerminalDisplay::setRandomSeed(uint randomSeed)
 {
     _randomSeed = randomSeed;
@@ -717,111 +722,6 @@ void TerminalDisplay::setRandomSeed(uint randomSeed)
 uint TerminalDisplay::randomSeed() const
 {
     return _randomSeed;
-}
-
-// scrolls the image by 'lines', down if lines > 0 or up otherwise.
-//
-// the terminal emulation keeps track of the scrolling of the character
-// image as it receives input, and when the view is updated, it calls scrollImage()
-// with the final scroll amount.  this improves performance because scrolling the
-// display is much cheaper than re-rendering all the text for the
-// part of the image which has moved up or down.
-// Instead only new lines have to be drawn
-void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
-{
-    // return if there is nothing to do
-    if ((lines == 0) || (_image == nullptr)) {
-        return;
-    }
-
-    // if the flow control warning is enabled this will interfere with the
-    // scrolling optimizations and cause artifacts.  the simple solution here
-    // is to just disable the optimization whilst it is visible
-    if ((_outputSuspendedMessageWidget != nullptr) && _outputSuspendedMessageWidget->isVisible()) {
-        return;
-    }
-
-    if ((_readOnlyMessageWidget != nullptr) && _readOnlyMessageWidget->isVisible()) {
-        return;
-    }
-
-    // constrain the region to the display
-    // the bottom of the region is capped to the number of lines in the display's
-    // internal image - 2, so that the height of 'region' is strictly less
-    // than the height of the internal image.
-    QRect region = screenWindowRegion;
-    region.setBottom(qMin(region.bottom(), _lines - 2));
-
-    // return if there is nothing to do
-    if (!region.isValid()
-            || (region.top() + abs(lines)) >= region.bottom()
-            || _lines <= region.height()) {
-        return;
-    }
-
-    // hide terminal size label to prevent it being scrolled
-    if ((_resizeWidget != nullptr) && _resizeWidget->isVisible()) {
-        _resizeWidget->hide();
-    }
-
-    // Note:  With Qt 4.4 the left edge of the scrolled area must be at 0
-    // to get the correct (newly exposed) part of the widget repainted.
-    //
-    // The right edge must be before the left edge of the scroll bar to
-    // avoid triggering a repaint of the entire widget, the distance is
-    // given by SCROLLBAR_CONTENT_GAP
-    //
-    // Set the QT_FLUSH_PAINT environment variable to '1' before starting the
-    // application to monitor repainting.
-    //
-    const int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->width();
-    const int SCROLLBAR_CONTENT_GAP = 1;
-    QRect scrollRect;
-    if (_scrollbarLocation == Enum::ScrollBarLeft) {
-        scrollRect.setLeft(scrollBarWidth + SCROLLBAR_CONTENT_GAP + (_highlightScrolledLinesControl.enabled ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0));
-        scrollRect.setRight(width());
-    } else {
-        scrollRect.setLeft(_highlightScrolledLinesControl.enabled ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0);
-        scrollRect.setRight(width() - scrollBarWidth - SCROLLBAR_CONTENT_GAP);
-    }
-    void* firstCharPos = &_image[ region.top() * _columns ];
-    void* lastCharPos = &_image[(region.top() + abs(lines)) * _columns ];
-
-    const int top = _contentRect.top() + (region.top() * _fontHeight);
-    const int linesToMove = region.height() - abs(lines);
-    const int bytesToMove = linesToMove * _columns * sizeof(Character);
-
-    Q_ASSERT(linesToMove > 0);
-    Q_ASSERT(bytesToMove > 0);
-
-    scrollRect.setTop( lines > 0 ? top : top + abs(lines) * _fontHeight);
-    scrollRect.setHeight(linesToMove * _fontHeight);
-
-    if (!scrollRect.isValid() || scrollRect.isEmpty()) {
-        return;
-    }
-
-    //scroll internal image
-    if (lines > 0) {
-        // check that the memory areas that we are going to move are valid
-        Q_ASSERT((char*)lastCharPos + bytesToMove <
-                 (char*)(_image + (_lines * _columns)));
-
-        Q_ASSERT((lines * _columns) < _imageSize);
-
-        //scroll internal image down
-        memmove(firstCharPos , lastCharPos , bytesToMove);
-    } else {
-        // check that the memory areas that we are going to move are valid
-        Q_ASSERT((char*)firstCharPos + bytesToMove <
-                 (char*)(_image + (_lines * _columns)));
-
-        //scroll internal image up
-        memmove(lastCharPos , firstCharPos , bytesToMove);
-    }
-
-    //scroll the display vertically to match internal _image
-    scroll(0 , _fontHeight * (-lines) , scrollRect);
 }
 
 void TerminalDisplay::processFilters()
@@ -865,7 +765,7 @@ void TerminalDisplay::updateImage()
     // can simply be moved up or down
     // disable this shortcut for transparent konsole with scaled pixels, otherwise we get rendering artifacts, see BUG 350651
     if (!(WindowSystemInfo::HAVE_TRANSPARENCY && (qApp->devicePixelRatio() > 1.0)) && _wallpaper->isNull() && !_searchBar->isVisible()) {
-        scrollImage(_screenWindow->scrollCount() ,
+        _scrollBar->scrollImage(_screenWindow->scrollCount() ,
                     _screenWindow->scrollRegion());
     }
 
@@ -879,7 +779,7 @@ void TerminalDisplay::updateImage()
     const int lines = _screenWindow->windowLines();
     const int columns = _screenWindow->windowColumns();
 
-    setScroll(_screenWindow->currentLine() , _screenWindow->lineCount());
+    _scrollBar->setScroll(_screenWindow->currentLine() , _screenWindow->lineCount());
 
     Q_ASSERT(_usedLines <= _lines);
     Q_ASSERT(_usedColumns <= _columns);
@@ -1190,11 +1090,6 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     _filterChain->paint(this, painter);
 }
 
-void TerminalDisplay::highlightScrolledLinesEvent()
-{
-    update(_highlightScrolledLinesControl.rect);
-}
-
 QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
 {
     QRect result;
@@ -1342,7 +1237,7 @@ void TerminalDisplay::resizeEvent(QResizeEvent *event)
         updateImage();
     }
 
-    const auto scrollBarWidth = _scrollbarLocation != Enum::ScrollBarHidden
+    const auto scrollBarWidth = _scrollBar->scrollBarPosition() != Enum::ScrollBarHidden
                                 ? _scrollBar->width()
                                 : 0;
     const auto headerHeight = _headerBar->isVisible() ? _headerBar->height() : 0;
@@ -1430,7 +1325,7 @@ void TerminalDisplay::calcGeometry()
     _contentRect = contentsRect().adjusted(_margin + (_highlightScrolledLinesControl.enabled ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0), _margin,
                                            -_margin - (_highlightScrolledLinesControl.enabled ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0), -_margin);
 
-    switch (_scrollbarLocation) {
+    switch (_scrollBar->scrollBarPosition()) {
     case Enum::ScrollBarHidden :
         break;
     case Enum::ScrollBarLeft :
@@ -1518,87 +1413,6 @@ void TerminalDisplay::setCenterContents(bool enable)
 /*                                Scrollbar                                  */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
-
-void TerminalDisplay::setScrollBarPosition(Enum::ScrollBarPositionEnum position)
-{
-    if (_scrollbarLocation == position) {
-        return;
-    }
-
-    _scrollbarLocation = position;
-    applyScrollBarPosition(true);
-}
-
-void TerminalDisplay::applyScrollBarPosition(bool propagate) {
-    _scrollBar->setHidden(_scrollbarLocation == Enum::ScrollBarHidden);
-
-    if (propagate) {
-        propagateSize();
-        update();
-    }
-}
-
-void TerminalDisplay::scrollBarPositionChanged(int)
-{
-    if (_screenWindow.isNull()) {
-        return;
-    }
-
-    _screenWindow->scrollTo(_scrollBar->value());
-
-    // if the thumb has been moved to the bottom of the _scrollBar then set
-    // the display to automatically track new output,
-    // that is, scroll down automatically
-    // to how new _lines as they are added
-    const bool atEndOfOutput = (_scrollBar->value() == _scrollBar->maximum());
-    _screenWindow->setTrackOutput(atEndOfOutput);
-
-    updateImage();
-}
-
-void TerminalDisplay::setScroll(int cursor, int slines)
-{
-    // update _scrollBar if the range or value has changed,
-    // otherwise return
-    //
-    // setting the range or value of a _scrollBar will always trigger
-    // a repaint, so it should be avoided if it is not necessary
-    if (_scrollBar->minimum() == 0                 &&
-            _scrollBar->maximum() == (slines - _lines) &&
-            _scrollBar->value()   == cursor) {
-        return;
-    }
-
-    disconnect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
-    _scrollBar->setRange(0, slines - _lines);
-    _scrollBar->setSingleStep(1);
-    _scrollBar->setPageStep(_lines);
-    _scrollBar->setValue(cursor);
-    connect(_scrollBar, &QScrollBar::valueChanged, this, &Konsole::TerminalDisplay::scrollBarPositionChanged);
-}
-
-void TerminalDisplay::setScrollFullPage(bool fullPage)
-{
-    _scrollFullPage = fullPage;
-}
-
-bool TerminalDisplay::scrollFullPage() const
-{
-    return _scrollFullPage;
-}
-
-void TerminalDisplay::setHighlightScrolledLines(bool highlight)
-{
-    _highlightScrolledLinesControl.enabled = highlight;
-
-    if (_highlightScrolledLinesControl.enabled && _highlightScrolledLinesControl.timer == nullptr) {
-        // setup timer for diming the highlight on scrolled lines
-        _highlightScrolledLinesControl.timer = new QTimer(this);
-        _highlightScrolledLinesControl.timer->setSingleShot(true);
-        _highlightScrolledLinesControl.timer->setInterval(250);
-        connect(_highlightScrolledLinesControl.timer, &QTimer::timeout, this, &Konsole::TerminalDisplay::highlightScrolledLinesEvent);
-    }
-}
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -2142,7 +1956,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         // Reapply scrollbar position since the scrollbar event handler
         // sometimes makes the scrollbar visible when set to hidden.
         // Don't call propagateSize and update, since nothing changed.
-        applyScrollBarPosition(false);
+        _scrollBar->applyScrollBarPosition(false);
 
         Q_ASSERT(_sessionController != nullptr);
 
@@ -2153,7 +1967,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 
         Q_ASSERT(!_sessionController->session().isNull());
 
-        if(!_usesMouseTracking && !_sessionController->session()->isPrimaryScreen() && _alternateScrolling) {
+        if(!_usesMouseTracking && !_sessionController->session()->isPrimaryScreen() && _scrollBar->alternateScrolling()) {
             // Send simulated up / down key presses to the terminal program
             // for the benefit of programs such as 'less' (which use the alternate screen)
 
@@ -2549,15 +2363,6 @@ bool TerminalDisplay::usesMouseTracking() const
     return _usesMouseTracking;
 }
 
-void TerminalDisplay::setAlternateScrolling(bool enable)
-{
-    _alternateScrolling = enable;
-}
-bool TerminalDisplay::alternateScrolling() const
-{
-    return _alternateScrolling;
-}
-
 void TerminalDisplay::setBracketedPasteMode(bool on)
 {
     _bracketedPasteMode = on;
@@ -2948,15 +2753,6 @@ void TerminalDisplay::updateReadOnlyState(bool readonly) {
     _readOnly = readonly;
 }
 
-void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode mode, int amount)
-{
-    _screenWindow->scrollBy(mode, amount, _scrollFullPage);
-    _screenWindow->setTrackOutput(_screenWindow->atEndOfOutput());
-    updateLineProperties();
-    updateImage();
-    viewScrolledByUser();
-}
-
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
     { // C++17: change getCharacterPosition to return a tuple and use auto [charLine, charColumn] to extract the values.
@@ -3338,8 +3134,8 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     setVTFont(profile->font());
 
     // set scroll-bar position
-    setScrollBarPosition(Enum::ScrollBarPositionEnum(profile->property<int>(Profile::ScrollBarPosition)));
-    setScrollFullPage(profile->property<bool>(Profile::ScrollFullPage));
+    _scrollBar->setScrollBarPosition(Enum::ScrollBarPositionEnum(profile->property<int>(Profile::ScrollBarPosition)));
+    _scrollBar->setScrollFullPage(profile->property<bool>(Profile::ScrollFullPage));
 
     // show hint about terminal size after resizing
     _showTerminalSizeHint = profile->showTerminalSizeHint();
@@ -3361,7 +3157,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     setCopyTextAsHTML(profile->property<bool>(Profile::CopyTextAsHTML));
 
     // highlight lines scrolled into view (must be applied before margin/center)
-    setHighlightScrolledLines(profile->property<bool>(Profile::HighlightScrolledLines));
+    _scrollBar->setHighlightScrolledLines(profile->property<bool>(Profile::HighlightScrolledLines));
     _highlightScrolledLinesControl.needToClear = true;
 
     // margin/center
@@ -3388,7 +3184,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 
     _displayVerticalLine = profile->verticalLine();
     _displayVerticalLineAtChar = profile->verticalLineAtChar();
-    setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
+    _scrollBar->setAlternateScrolling(profile->property<bool>(Profile::AlternateScrolling));
     _dimValue = profile->dimValue();
 
     _filterChain->setUrlHintsModifiers(Qt::KeyboardModifiers(profile->property<int>(Profile::UrlHintsModifiers)));

@@ -178,8 +178,11 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         widgets/RenameTabWidget.cpp
                         widgets/RenameTabWidget.cpp
                         widgets/TabTitleFormatButton.cpp
+                        
                         terminalDisplay/TerminalDisplay.cpp
                         terminalDisplay/TerminalPainter.cpp
+                        terminalDisplay/TerminalScrollBar.cpp
+
                         widgets/TerminalDisplayAccessible.cpp
                         widgets/TerminalHeaderBar.cpp
                         widgets/ViewContainer.cpp

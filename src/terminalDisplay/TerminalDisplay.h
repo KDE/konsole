@@ -43,7 +43,6 @@ class QTimer;
 class QEvent;
 class QVBoxLayout;
 class QKeyEvent;
-class QScrollBar;
 class QShowEvent;
 class QHideEvent;
 class QTimerEvent;
@@ -51,6 +50,8 @@ class KMessageWidget;
 
 namespace Konsole {
 class TerminalPainter;
+class TerminalScrollBar;
+
 class FilterChain;
 class TerminalImageFilterChain;
 class SessionController;
@@ -101,24 +102,6 @@ public:
 
     /** Sets the background picture */
     void setWallpaper(const ColorSchemeWallpaper::Ptr &p);
-
-    /**
-     * Specifies whether the terminal display has a vertical scroll bar, and if so whether it
-     * is shown on the left or right side of the display.
-     */
-    void setScrollBarPosition(Enum::ScrollBarPositionEnum position);
-
-    /**
-     * Sets the current position and range of the display's scroll bar.
-     *
-     * @param cursor The position of the scroll bar's thumb.
-     * @param slines The maximum value of the scroll bar.
-     */
-    void setScroll(int cursor, int slines);
-
-    void setScrollFullPage(bool fullPage);
-    bool scrollFullPage() const;
-    void setHighlightScrolledLines(bool highlight);
 
     /**
      * Returns the display's filter chain.  When the image for the display is updated,
@@ -380,9 +363,6 @@ public:
     /** See setUsesMouseTracking() */
     bool usesMouseTracking() const;
 
-    /** See setAlternateScrolling() */
-    bool alternateScrolling() const;
-
     bool hasCompositeFocus() const
     {
         return _hasCompositeFocus;
@@ -398,6 +378,12 @@ public:
     void getCharacterPosition(const QPoint &widgetPoint, int &line, int &column, bool edge) const;
 
     friend class TerminalPainter;
+    friend class TerminalScrollBar;
+
+    TerminalScrollBar *scrollBar()
+    {
+        return _scrollBar;
+    }
 
 public Q_SLOTS:
     /**
@@ -476,15 +462,6 @@ public Q_SLOTS:
      */
     void setUsesMouseTracking(bool on);
 
-    /**
-     * Sets the AlternateScrolling profile property which controls whether
-     * to emulate up/down key presses for mouse scroll wheel events.
-     * For more details, check the documentation of that property in the
-     * Profile header.
-     * Enabled by default.
-     */
-    void setAlternateScrolling(bool enable);
-
     void setBracketedPasteMode(bool on);
 
     /**
@@ -521,11 +498,6 @@ public Q_SLOTS:
     ColorScheme const *colorScheme() const
     {
         return _colorScheme;
-    }
-
-    Enum::ScrollBarPositionEnum scrollBarPosition() const
-    {
-        return _scrollbarLocation;
     }
 
     Qt::Edge droppedEdge() const {
@@ -641,10 +613,8 @@ protected:
 
 protected Q_SLOTS:
 
-    void scrollBarPositionChanged(int value);
     void blinkTextEvent();
     void blinkCursorEvent();
-    void highlightScrolledLinesEvent();
 
 private Q_SLOTS:
 
@@ -662,18 +632,6 @@ private:
     // shows a notification window in the middle of the widget indicating the terminal's
     // current size in columns and lines
     void showResizeNotification();
-
-    // applies changes to scrollbarLocation to the scroll bar and
-    // if @propagate is true, propagates size information
-    void applyScrollBarPosition(bool propagate = true);
-
-    // scrolls the image by a number of lines.
-    // 'lines' may be positive ( to scroll the image down )
-    // or negative ( to scroll the image up )
-    // 'region' is the part of the image to scroll - currently only
-    // the top, bottom and height of 'region' are taken into account,
-    // the left and right are ignored.
-    void scrollImage(int lines, const QRect &screenWindowRegion);
 
     void calcGeometry();
     void propagateSize();
@@ -752,7 +710,6 @@ private:
     bool _showTerminalSizeHint;
     bool _bidiEnabled;
     bool _usesMouseTracking;
-    bool _alternateScrolling;
     bool _bracketedPasteMode;
 
     QPoint _iPntSel;  // initial selection point
@@ -768,9 +725,6 @@ private:
     bool _copyTextAsHTML;
     Enum::MiddleClickPasteModeEnum _middleClickPasteMode;
 
-    QScrollBar *_scrollBar;
-    Enum::ScrollBarPositionEnum _scrollbarLocation;
-    bool _scrollFullPage;
     QString _wordCharacters;
     int _bellMode;
 
@@ -883,7 +837,9 @@ private:
     int _displayVerticalLineAtChar;
 
     QKeySequence _peekPrimaryShortcut;
+
     TerminalPainter *_terminalPainter;
+    TerminalScrollBar *_scrollBar;
 };
 
 }
