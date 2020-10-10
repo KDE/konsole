@@ -35,10 +35,14 @@ CompositeWidgetFocusWatcher::CompositeWidgetFocusWatcher(QWidget *compositeWidge
 
 bool CompositeWidgetFocusWatcher::eventFilter(QObject *watched, QEvent *event)
 {
-    Q_UNUSED(watched)
-
     auto *focusEvent = static_cast<QFocusEvent *>(event);
     switch(event->type()) {
+    case QEvent::Close:
+    case QEvent::DeferredDelete:
+    case QEvent::Destroy:
+        removeEventFilter(watched);
+        disconnect(this, &CompositeWidgetFocusWatcher::compositeFocusChanged, watched, nullptr);
+        break;
     case QEvent::FocusIn:
         emit compositeFocusChanged(true);
         break;

@@ -577,7 +577,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     new AutoScrollHandler(this);
 
     // Keep this last
-    auto focusWatcher = new CompositeWidgetFocusWatcher(this, this);
+    CompositeWidgetFocusWatcher *focusWatcher = new CompositeWidgetFocusWatcher(this, this);
     connect(focusWatcher, &CompositeWidgetFocusWatcher::compositeFocusChanged,
             this, [this](bool focused) {_hasCompositeFocus = focused;});
     connect(focusWatcher, &CompositeWidgetFocusWatcher::compositeFocusChanged,
