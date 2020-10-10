@@ -101,6 +101,7 @@ Screen::~Screen()
 {
     delete[] _screenLines;
     delete _history;
+    delete _escapeSequenceUrlExtractor;
 }
 
 void Screen::cursorUp(int n)
