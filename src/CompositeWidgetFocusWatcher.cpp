@@ -35,7 +35,6 @@ CompositeWidgetFocusWatcher::CompositeWidgetFocusWatcher(QWidget *compositeWidge
 
 bool CompositeWidgetFocusWatcher::eventFilter(QObject *watched, QEvent *event)
 {
-    auto *focusEvent = static_cast<QFocusEvent *>(event);
     switch(event->type()) {
     case QEvent::Close:
     case QEvent::DeferredDelete:
@@ -47,7 +46,7 @@ bool CompositeWidgetFocusWatcher::eventFilter(QObject *watched, QEvent *event)
         emit compositeFocusChanged(true);
         break;
     case QEvent::FocusOut:
-        if(focusEvent->reason() != Qt::PopupFocusReason) {
+        if(static_cast<QFocusEvent *>(event)->reason() != Qt::PopupFocusReason) {
             emit compositeFocusChanged(false);
         }
         break;
