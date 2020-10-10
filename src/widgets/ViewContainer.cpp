@@ -176,7 +176,7 @@ void TabbedViewContainer::moveTabToWindow(int index, QWidget *window)
     auto controller = splitter->activeTerminalDisplay()->sessionController();
     container->currentSessionControllerChanged(controller);
 
-    forgetView(splitter);
+    forgetView();
 }
 
 void TabbedViewContainer::konsoleConfigChanged()
@@ -392,17 +392,17 @@ void TabbedViewContainer::disconnectTerminalDisplay(TerminalDisplay *display)
 
 void TabbedViewContainer::viewDestroyed(QObject *view)
 {
-    auto widget = static_cast<ViewSplitter*>(view);
-    const auto idx = indexOf(widget);
+    QWidget *widget = qobject_cast<QWidget*>(view);
+    Q_ASSERT(widget);
+    const int idx = indexOf(widget);
 
     removeTab(idx);
-    forgetView(widget);
+    forgetView();
     _tabIconState.remove(widget);
 }
 
-void TabbedViewContainer::forgetView(ViewSplitter *view)
+void TabbedViewContainer::forgetView()
 {
-    Q_UNUSED(view)
     if (count() == 0) {
         emit empty(this);
     }

@@ -222,7 +222,7 @@ private Q_SLOTS:
     void konsoleConfigChanged();
 
 private:
-    void forgetView(ViewSplitter *view);
+    void forgetView();
 
     struct TabIconState {
         TabIconState(): readOnly(false), broadcast(false), notification(Session::NoNotification) {}
