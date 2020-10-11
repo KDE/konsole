@@ -43,7 +43,7 @@ namespace Konsole
                                 const QRect &rect,
                                 const QColor &backgroundColor,
                                 bool useOpacitySetting)> pDrawBackground;
-        typedef std::function<void (QPainter &paint, const QRect &rect)> pDrawContents;
+        typedef std::function<void (QPainter &paint, const QRect &rect, bool friendly)> pDrawContents;
         typedef std::function<QColor ()> pColorGet;
 
         KonsolePrintManager(pDrawBackground drawBackground, pDrawContents drawContents, pColorGet colorGet);

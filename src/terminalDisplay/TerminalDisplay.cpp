@@ -489,7 +489,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _cursorTextColor(QColor())
     , _antialiasText(true)
     , _useFontLineCharacters(false)
-    , _printerFriendly(false)
     , _sessionController(nullptr)
     , _trimLeadingSpaces(false)
     , _trimTrailingSpaces(false)
@@ -585,8 +584,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
             const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting) {
         _terminalPainter->drawBackground(painter, rect, backgroundColor, useOpacitySetting);
     };
-    auto ldrawContents = [this](QPainter &paint, const QRect &rect) {
-        _terminalPainter->drawContents(paint, rect);
+    auto ldrawContents = [this](QPainter &paint, const QRect &rect, bool friendly) {
+        _terminalPainter->drawContents(paint, rect, friendly);
     };
     auto lgetBackgroundColor = [this]() {
         return getBackgroundColor();
@@ -1014,7 +1013,7 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
     paint.setRenderHint(QPainter::TextAntialiasing, _antialiasText);
 
     for (const QRect &rect : qAsConst(dirtyImageRegion)) {
-        _terminalPainter->drawContents(paint, rect);
+        _terminalPainter->drawContents(paint, rect, false);
     }
     _terminalPainter->drawCurrentResultRect(paint);
     _terminalPainter->highlightScrolledLines(paint);
@@ -3179,15 +3178,12 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 void TerminalDisplay::printScreen()
 {
     auto lprintContent = [this](QPainter &painter, bool friendly) {
-        _printerFriendly = friendly;
         
         QPoint columnLines(_usedLines, _usedColumns);
         auto lfontget = [this]() { return getVTFont(); };
         auto lfontset = [this](const QFont &f) { setVTFont(f); };
 
         _printManager->printContent(painter, friendly, columnLines, lfontget, lfontset);
-
-        _printerFriendly = false;
     };
     _printManager->printRequest(lprintContent, this);
 }

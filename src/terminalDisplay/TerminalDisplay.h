@@ -786,8 +786,6 @@ private:
     bool _antialiasText;   // do we anti-alias or not
     bool _useFontLineCharacters;
 
-    bool _printerFriendly; // are we currently painting to a printer in black/white mode
-
     //the delay in milliseconds between redrawing blinking text
     static const int TEXT_BLINK_DELAY = 500;
 

@@ -72,7 +72,7 @@ namespace Konsole
         }
     }
 
-    void TerminalPainter::drawContents(QPainter &paint, const QRect &rect) 
+    void TerminalPainter::drawContents(QPainter &paint, const QRect &rect, bool printerFriendly)
     {
         const int numberOfColumns = _display->_usedColumns;
         QVector<uint> univec;
@@ -240,7 +240,7 @@ namespace Konsole
                 QString unistr = QString::fromUcs4(univec.data(), univec.length());
 
                 // paint text fragment
-                if (_display->_printerFriendly) {
+                if (printerFriendly) {
                     drawPrinterFriendlyTextFragment(paint,
                                                     textArea,
                                                     unistr,

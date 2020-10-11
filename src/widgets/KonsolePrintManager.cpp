@@ -98,6 +98,6 @@ void KonsolePrintManager::printContent(QPainter &painter, bool friendly, QPoint 
     if (!friendly) {
         _drawBackground(painter, rect, _backgroundColor(), true);
     }
-    _drawContents(painter, rect);
+    _drawContents(painter, rect, friendly);
     vtFontSet(savedFont);
 }

@@ -59,7 +59,7 @@ namespace Konsole
         // fragments according to their colors and styles and calls
         // drawTextFragment() or drawPrinterFriendlyTextFragment()
         // to draw the fragments
-        void drawContents(QPainter &paint, const QRect &rect);
+        void drawContents(QPainter &paint, const QRect &rect, bool PrinterFriendly);
         // draw a transparent rectangle over the line of the current match
         void drawCurrentResultRect(QPainter &painter);
         // draw a thin highlight on the left of the screen for lines that have been scrolled into view
