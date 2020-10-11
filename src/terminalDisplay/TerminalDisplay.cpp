@@ -235,15 +235,6 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-static inline bool isLineCharString(const QString& string)
-{
-    if (string.length() == 0) {
-        return false;
-    }
-
-    return LineBlockCharacters::canDraw(string.at(0).unicode());
-}
-
 void TerminalDisplay::fontChange(const QFont&)
 {
     QFontMetrics fm(font());
