@@ -52,6 +52,8 @@ namespace Konsole {
 class TerminalPainter;
 class TerminalScrollBar;
 
+class KonsolePrintManager;
+
 class FilterChain;
 class TerminalImageFilterChain;
 class SessionController;
@@ -333,9 +335,6 @@ public:
      * Selects everything in the terminal
      */
     void selectAll();
-
-    // TODO: Move this code to KonsolePrintManager
-    void printContent(QPainter &painter, bool friendly);
 
     /**
      * Gets the foreground of the display
@@ -840,6 +839,8 @@ private:
 
     TerminalPainter *_terminalPainter;
     TerminalScrollBar *_scrollBar;
+
+    KonsolePrintManager *_printManager;
 };
 
 }

@@ -26,6 +26,9 @@
 #include "PrintOptions.h"
 
 // Qt
+#include <QRect>
+#include <QFont>
+#include <QPoint>
 #include <QWidget>
 #include <QPrinter>
 #include <QPainter>
@@ -37,6 +40,13 @@
 #include <KSharedConfig>
 
 using namespace Konsole;
+
+KonsolePrintManager::KonsolePrintManager(pDrawBackground drawBackground, pDrawContents drawContents, pColorGet colorGet)
+{
+    _drawBackground = drawBackground;
+    _drawContents = drawContents;
+    _backgroundColor = colorGet;
+}
 
 void KonsolePrintManager::printRequest(pPrintContent pContent, QWidget *parent)
 {
@@ -71,4 +81,23 @@ void KonsolePrintManager::printRequest(pPrintContent pContent, QWidget *parent)
     }
     
     pContent(painter, configGroup.readEntry("PrinterFriendly", true));
+}
+
+void KonsolePrintManager::printContent(QPainter &painter, bool friendly, QPoint columnsLines,
+                                        pVTFontGet vtFontGet, pVTFontSet vtFontSet)
+{
+    // Reinitialize the font with the printers paint device so the font
+    // measurement calculations will be done correctly
+    QFont savedFont = vtFontGet();
+    QFont font(savedFont, painter.device());
+    painter.setFont(font);
+    vtFontSet(font);
+
+    QRect rect(0, 0, columnsLines.y(), columnsLines.x());
+
+    if (!friendly) {
+        _drawBackground(painter, rect, _backgroundColor(), true);
+    }
+    _drawContents(painter, rect);
+    vtFontSet(savedFont);
 }

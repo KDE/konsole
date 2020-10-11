@@ -506,6 +506,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _searchResultRect(QRect())
     , _drawOverlay(false)
     , _scrollBar(nullptr)
+    , _printManager(nullptr)
 {
     // terminal applications are not designed with Right-To-Left in mind,
     // so the layout is forced to Left-To-Right
@@ -579,6 +580,18 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TerminalDisplay::setupHeaderVisibility);
 
     _terminalPainter = new TerminalPainter(this);
+    
+    auto ldrawBackground = [this](QPainter &painter,
+            const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting) {
+        _terminalPainter->drawBackground(painter, rect, backgroundColor, useOpacitySetting);
+    };
+    auto ldrawContents = [this](QPainter &paint, const QRect &rect) {
+        _terminalPainter->drawContents(paint, rect);
+    };
+    auto lgetBackgroundColor = [this]() {
+        return getBackgroundColor();
+    };
+    _printManager = new KonsolePrintManager(ldrawBackground, ldrawContents, lgetBackgroundColor);
 }
 
 TerminalDisplay::~TerminalDisplay()
@@ -595,6 +608,7 @@ TerminalDisplay::~TerminalDisplay()
     _outputSuspendedMessageWidget = nullptr;
 
     delete _terminalPainter;
+    delete _printManager;
 }
 
 void TerminalDisplay::setupHeaderVisibility()
@@ -1027,28 +1041,6 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
         paint.setBrush(QColor(100,100,100, 127));
         paint.drawRect(rect);
     }
-}
-
-void TerminalDisplay::printContent(QPainter& painter, bool friendly)
-{
-    // TODO: Move this code to KonsolePrintManager
-    // Reinitialize the font with the printers paint device so the font
-    // measurement calculations will be done correctly
-    QFont savedFont = getVTFont();
-    QFont font(savedFont, painter.device());
-    painter.setFont(font);
-    setVTFont(font);
-
-    QRect rect(0, 0, _usedColumns, _usedLines);
-
-    _printerFriendly = friendly;
-    if (!friendly) {
-        _terminalPainter->drawBackground(painter, rect, getBackgroundColor(),
-                       true /* use opacity setting */);
-    }
-    _terminalPainter->drawContents(painter, rect);
-    _printerFriendly = false;
-    setVTFont(savedFont);
 }
 
 QPoint TerminalDisplay::cursorPosition() const
@@ -3186,14 +3178,21 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 
 void TerminalDisplay::printScreen()
 {
-    auto lambda = [this](QPainter& painter, bool friendly) {
-        printContent(painter, friendly);
+    auto lprintContent = [this](QPainter &painter, bool friendly) {
+        _printerFriendly = friendly;
+        
+        QPoint columnLines(_usedLines, _usedColumns);
+        auto lfontget = [this]() { return getVTFont(); };
+        auto lfontset = [this](const QFont &f) { setVTFont(f); };
+
+        _printManager->printContent(painter, friendly, columnLines, lfontget, lfontset);
+
+        _printerFriendly = false;
     };
-    KonsolePrintManager::printRequest(lambda, this);
+    _printManager->printRequest(lprintContent, this);
 }
 
 Character TerminalDisplay::getCursorCharacter(int column, int line)
 {
     return _image[loc(column, line)];
 }
-
