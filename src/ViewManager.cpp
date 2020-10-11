@@ -42,6 +42,7 @@
 #include "session/Session.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
+#include "session/SessionDisplayConnection.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewContainer.h"
@@ -55,7 +56,7 @@ ViewManager::ViewManager(QObject *parent, KActionCollection *collection) :
     QObject(parent),
     _viewContainer(nullptr),
     _pluggedController(nullptr),
-    _sessionMap(QHash<TerminalDisplay *, Session *>()),
+    _sessionMap(QVector<SessionDisplayConnection *>()),
     _actionCollection(collection),
     _navigationMethod(NoNavigation),
     _navigationVisibility(NavigationNotSet),
@@ -91,6 +92,15 @@ ViewManager::~ViewManager() = default;
 int ViewManager::managerId() const
 {
     return _managerId;
+}
+
+QList<Session *> ViewManager::sessions()
+{
+    QList<Session *> sessionList;
+    for (auto sdsp : _sessionMap) {
+        sessionList.append(sdsp->session());
+    }
+    return sessionList;
 }
 
 QWidget *ViewManager::activeView() const
@@ -447,9 +457,14 @@ Session* ViewManager::forgetTerminal(TerminalDisplay* terminal)
     disconnect(terminal, &TerminalDisplay::requestToggleExpansion, nullptr, nullptr);
 
     removeController(terminal->sessionController());
-    auto session = _sessionMap.take(terminal);
-    if (session != nullptr) {
-        disconnect(session, &Konsole::Session::finished, this, &Konsole::ViewManager::sessionFinished);
+    Session *session = nullptr;
+    for (auto sdsp : _sessionMap) {
+        session = sdsp->view() == terminal ? sdsp->session() : nullptr;
+        if (session != nullptr) {
+            _sessionMap.removeOne(sdsp);
+            disconnect(session, &Konsole::Session::finished, this, &Konsole::ViewManager::sessionFinished);
+            break;
+        }
     }
     _viewContainer->disconnectTerminalDisplay(terminal);
     updateTerminalDisplayHistory(terminal, true);
@@ -478,8 +493,14 @@ void ViewManager::sessionFinished()
     auto *session = qobject_cast<Session *>(sender());
     Q_ASSERT(session);
 
-    auto view = _sessionMap.key(session);
-    _sessionMap.remove(view);
+    TerminalDisplay *view = nullptr;
+    for (auto sdsp : _sessionMap) {
+        view = sdsp->session() == session ? sdsp->view() : nullptr;
+        if (view != nullptr) {
+            _sessionMap.removeOne(sdsp);
+            break;
+        }
+    }
 
     if (SessionManager::instance()->isClosingAllSessions()){
         return;
@@ -655,7 +676,7 @@ void ViewManager::attachView(TerminalDisplay *terminal, Session *session)
     connect(terminal, &TerminalDisplay::requestToggleExpansion,
             _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal, Qt::UniqueConnection);
 
-    _sessionMap[terminal] = session;
+    _sessionMap.append(new SessionDisplayConnection(session, terminal, this));
     createController(session, terminal);
     toggleActionsBasedOnState();
     _terminalDisplayHistory.append(terminal);
@@ -680,7 +701,7 @@ TerminalDisplay *ViewManager::createView(Session *session)
     display->setSize(preferredSize.width(), preferredSize.height());
     createController(session, display);
 
-    _sessionMap[display] = session;
+    _sessionMap.append(new SessionDisplayConnection(session, display, this));
     session->addView(display);
     _terminalDisplayHistory.append(display);
 
@@ -782,11 +803,14 @@ void ViewManager::viewDestroyed(QWidget *view)
 
     // 1. detach view from session
     // 2. if the session has no views left, close it
-    Session *session = _sessionMap[ display ];
-    _sessionMap.remove(display);
-    if (session != nullptr) {
-        if (session->views().count() == 0) {
-            session->close();
+    Session *session = nullptr;
+    for (auto sdsp : _sessionMap) {
+        session = sdsp->view() == display ? sdsp->session() : nullptr;
+        _sessionMap.removeOne(sdsp);
+        if (session != nullptr) {
+            if (session->views().count() == 0) {
+                session->close();
+            }
         }
     }
 
@@ -838,8 +862,8 @@ void ViewManager::updateViewsForSession(Session *session)
 {
     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
 
-    const QList<TerminalDisplay *> sessionMapKeys = _sessionMap.keys(session);
-    for (TerminalDisplay *view : sessionMapKeys) {
+    for (auto sdsp :  _sessionMap) {
+        TerminalDisplay *view = sdsp->session() ? sdsp->view() : nullptr;
         applyProfileToView(view, profile);
     }
 }
@@ -847,15 +871,13 @@ void ViewManager::updateViewsForSession(Session *session)
 void ViewManager::profileChanged(const Profile::Ptr &profile)
 {
     // update all views associated with this profile
-    QHashIterator<TerminalDisplay *, Session *> iter(_sessionMap);
+    QVectorIterator<SessionDisplayConnection*> iter(_sessionMap);
     while (iter.hasNext()) {
-        iter.next();
 
         // if session uses this profile, update the display
-        if (iter.key() != nullptr
-            && iter.value() != nullptr
-            && SessionManager::instance()->sessionProfile(iter.value()) == profile) {
-            applyProfileToView(iter.key(), profile);
+        SessionDisplayConnection *sdsp = iter.next();
+        if (sdsp != nullptr && SessionManager::instance()->sessionProfile(sdsp->session()) == profile) {
+            applyProfileToView(sdsp->view(), profile);
         }
     }
 }
@@ -1022,9 +1044,8 @@ QStringList ViewManager::sessionList()
 {
     QStringList ids;
 
-    QHash<TerminalDisplay *, Session *>::const_iterator i;
-    for (i = _sessionMap.constBegin(); i != _sessionMap.constEnd(); ++i) {
-        ids.append(QString::number(i.value()->sessionId()));
+    for (auto sdsp : _sessionMap) {
+        ids.append( QString::number( sdsp->session()->sessionId() ) );
     }
 
     return ids;

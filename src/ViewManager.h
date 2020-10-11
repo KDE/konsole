@@ -43,6 +43,7 @@ class TabbedViewContainer;
 class TerminalDisplay;
 class ViewProperties;
 class ViewSplitter;
+class SessionDisplayConnection;
 
 /**
  * Manages the terminal display widgets in a Konsole window or part.
@@ -176,10 +177,7 @@ public:
     int managerId() const;
 
     /** Returns a list of sessions in this ViewManager */
-    QList<Session *> sessions()
-    {
-        return _sessionMap.values();
-    }
+    QList<Session *> sessions();
 
     /**
      * Returns whether the @p profile has the blur setting enabled
@@ -431,7 +429,9 @@ private:
     QPointer<TabbedViewContainer> _viewContainer;
     QPointer<SessionController> _pluggedController;
 
-    QHash<TerminalDisplay *, Session *> _sessionMap;
+    // TODO: This map must be separated into a new class containing the global link map between sessions and displays used by the entire konsole
+    // The solution implemented so far is initial and should be reviewed
+    QVector<SessionDisplayConnection*> _sessionMap;
 
     KActionCollection *_actionCollection;
 
