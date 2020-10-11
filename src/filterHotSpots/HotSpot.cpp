@@ -116,8 +116,8 @@ QPair<QRegion, QRect> HotSpot::region(int fontWidth, int fontHeight, int columns
 
 void HotSpot::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev)
 {
-    Q_UNUSED(td);
-    Q_UNUSED(ev);
+    Q_UNUSED(td)
+    Q_UNUSED(ev)
 }
 
 bool HotSpot::isUrl()
@@ -142,7 +142,7 @@ void HotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
 
 void HotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
 {
-    Q_UNUSED(ev);
+    Q_UNUSED(ev)
 
     if (!isUrl()) {
         return;
@@ -180,7 +180,7 @@ void HotSpot::keyPressEvent(TerminalDisplay* td, QKeyEvent *ev)
 
 void HotSpot::keyReleaseEvent(TerminalDisplay *td, QKeyEvent *ev)
 {
-    Q_UNUSED(ev);
+    Q_UNUSED(ev)
 
     if (!isUrl()) {
         return;

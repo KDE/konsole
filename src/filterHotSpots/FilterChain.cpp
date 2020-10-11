@@ -156,8 +156,8 @@ QList<QSharedPointer<HotSpot>> FilterChain::filterBy(HotSpot::Type type) const
 
 void FilterChain::leaveEvent(TerminalDisplay *td, QEvent *ev)
 {
-    Q_UNUSED(td);
-    Q_UNUSED(ev);
+    Q_UNUSED(td)
+    Q_UNUSED(ev)
     _showUrlHint = false;
 }
 

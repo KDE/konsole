@@ -27,7 +27,7 @@ ProfileModel::ProfileModel()
 }
 int ProfileModel::rowCount(const QModelIndex &unused) const
 {
-    Q_UNUSED(unused);
+    Q_UNUSED(unused)
 
     // All profiles  plus the default profile that's always at index 0 on
     return m_profiles.count();
@@ -35,7 +35,7 @@ int ProfileModel::rowCount(const QModelIndex &unused) const
 
 int ProfileModel::columnCount(const QModelIndex& unused) const
 {
-    Q_UNUSED(unused);
+    Q_UNUSED(unused)
     return COLUMNS;
 }
 
@@ -154,20 +154,20 @@ void ProfileModel::populate()
 void ProfileModel::add(QExplicitlySharedDataPointer<Profile> profile)
 {
     // The model is too small for this to matter.
-    Q_UNUSED(profile);
+    Q_UNUSED(profile)
     populate();
 }
 
 void ProfileModel::remove(QExplicitlySharedDataPointer<Profile> profile)
 {
     // The model is too small for this to matter.
-    Q_UNUSED(profile);
+    Q_UNUSED(profile)
     populate();
 }
 
 void ProfileModel::setDefault(QExplicitlySharedDataPointer<Profile> profile)
 {
-    Q_UNUSED(profile);
+    Q_UNUSED(profile)
     emit dataChanged(index(0, 0), index(0, COLUMNS-1), {Qt::DisplayRole});
 }
 
