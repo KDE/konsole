@@ -376,21 +376,6 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         profile->setProperty(Profile::Name, uniqueProfileName);
         profile->setProperty(Profile::MenuIndex, QStringLiteral("0"));
         profile->setHidden(false);
-
-        addProfile(profile);
-        setDefaultProfile(profile);
-
-        // ProfileList listens to the profileRemoved signal to update
-        // the profile menu actions (which is used by the "Switch
-        // Profile" context menu). This is needed to prevent double
-        // entries for the newly added profile.
-        emit profileRemoved(_fallbackProfile);
-
-        // Since the profile object pointed to by _fallbackProfile has
-        // been given a name above, now init a fallback profile again.
-        // This way there is always a "Default" profile available in the
-        // context menu.
-        initFallbackProfile();
     }
 
     bool messageShown = false;
@@ -462,8 +447,22 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         }
     }
 
-    // notify the world about the change
-    emit profileChanged(profile);
+    if (isFallback) {
+        // addProfile has to be called after a path has been set for
+        // "profile", otherwise the newly saved profile won't show up
+        // in the ProfileSettings dialog in the current Konsole window
+        addProfile(profile);
+        setDefaultProfile(profile);
+
+        // Since the profile object pointed to by _fallbackProfile has
+        // been given a name above, now init a fallback profile again.
+        // This way there is always a "Default" profile available in the
+        // context menu.
+        initFallbackProfile();
+    } else {
+        // notify the world about the change
+        emit profileChanged(profile);
+    }
 }
 
 void ProfileManager::addProfile(const Profile::Ptr &profile)
