@@ -113,7 +113,7 @@ Qt::ItemFlags ProfileModel::flags(const QModelIndex& idx) const
     switch(idx.column()) {
         case NAME: return currentFlags & (~Qt::ItemIsEditable);
         case SHORTCUT: return currentFlags | Qt::ItemIsEditable;
-        default: return currentFlags;
+        default: ;
     }
     return currentFlags;
 }
