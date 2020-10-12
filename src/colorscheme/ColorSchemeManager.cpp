@@ -23,7 +23,7 @@
 // Own
 #include "ColorSchemeManager.h"
 
-#include "konsoledebug.h"
+#include "colorschemedebug.h"
 
 // Qt
 #include <QFileInfo>
@@ -65,7 +65,7 @@ void ColorSchemeManager::loadAllColorSchemes()
     }
 
     if (failed > 0) {
-        qCDebug(KonsoleDebug) << "failed to load " << failed << " color schemes.";
+        qCDebug(ColorSchemeDebug) << "failed to load " << failed << " color schemes.";
     }
 
     _haveLoadedAll = true;
@@ -94,7 +94,7 @@ bool ColorSchemeManager::loadColorScheme(const QString &filePath)
     scheme->read(config);
 
     if (scheme->name().isEmpty()) {
-        qCDebug(KonsoleDebug) << "Color scheme in" << filePath
+        qCDebug(ColorSchemeDebug) << "Color scheme in" << filePath
                               << "does not have a valid name and was not loaded.";
         delete scheme;
         return false;
@@ -182,7 +182,7 @@ bool ColorSchemeManager::deleteColorScheme(const QString &name)
         delete _colorSchemes.take(name);
         return true;
     } 
-    qCDebug(KonsoleDebug)<<"Failed to remove color scheme -"<<path;
+    qCDebug(ColorSchemeDebug)<<"Failed to remove color scheme -"<<path;
     return false;
 }
 
@@ -196,7 +196,7 @@ const ColorScheme *ColorSchemeManager::findColorScheme(const QString &name)
     // Konsole will create a sub-folder in that case (bko 315086)
     // More code will have to go in to prevent the users from doing that.
     if (name.contains(QLatin1String("/"))) {
-        qCDebug(KonsoleDebug)<<name<<" has an invalid character / in the name ... skipping";
+        qCDebug(ColorSchemeDebug)<<name<<" has an invalid character / in the name ... skipping";
         return defaultColorScheme();
     }
 
@@ -209,7 +209,7 @@ const ColorScheme *ColorSchemeManager::findColorScheme(const QString &name)
         return findColorScheme(name);
     }
 
-    qCDebug(KonsoleDebug) << "Could not find color scheme - " << name;
+    qCDebug(ColorSchemeDebug) << "Could not find color scheme - " << name;
 
     return nullptr;
 }

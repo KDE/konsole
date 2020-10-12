@@ -35,7 +35,7 @@
 #include <random>
 
 // Konsole
-#include "konsoledebug.h"
+#include "colorschemedebug.h"
 #include "ColorSchemeWallpaper.h"
 
 namespace {
@@ -254,7 +254,7 @@ void ColorScheme::setColorTableEntry(int index, const ColorEntry &entry)
         _table[index] = entry;
     } else {
         _table[index] = defaultTable[index];
-        qCDebug(KonsoleDebug)<<"ColorScheme"<<name()<<"has an invalid color index"<<index<<", using default table color";
+        qCDebug(ColorSchemeDebug)<<"ColorScheme"<<name()<<"has an invalid color index"<<index<<", using default table color";
     }
 }
 
@@ -417,7 +417,7 @@ bool ColorScheme::hasDarkBackground() const
 void ColorScheme::setOpacity(qreal opacity)
 {
     if (opacity < 0.0 || opacity > 1.0) {
-        qCDebug(KonsoleDebug)<<"ColorScheme"<<name()<<"has an invalid opacity"<<opacity<<"using 1";
+        qCDebug(ColorSchemeDebug)<<"ColorScheme"<<name()<<"has an invalid opacity"<<opacity<<"using 1";
         opacity = 1.0;
     }
     _opacity = opacity;
@@ -472,7 +472,7 @@ void ColorScheme::readColorEntry(const KConfig &config, int index)
     const auto readAndCheckConfigEntry = [&](const char *key, double min, double max) -> double {
         const double value = configGroup.readEntry(key, min);
         if (min > value || value > max) {
-            qCDebug(KonsoleDebug) << QStringLiteral(
+            qCDebug(ColorSchemeDebug) << QStringLiteral(
                     "Color scheme \"%1\": color index 2 has an invalid value: %3 = %4. "
                     "Allowed value range: %5 - %6. Using %7.")
                     .arg(name()).arg(index).arg(QLatin1String(key)).arg(value, 0, 'g', 1)

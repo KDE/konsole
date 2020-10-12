@@ -26,7 +26,7 @@
 // KDE
 #include <QDialog>
 
-#include "konsoleprivate_export.h"
+#include "konsolecolorscheme_export.h"
 
 class QTableWidgetItem;
 
@@ -49,7 +49,7 @@ class ColorScheme;
  *
  * When changes are made the colorsChanged() signal is emitted.
  */
-class KONSOLEPRIVATE_EXPORT ColorSchemeEditor : public QDialog
+class KONSOLECOLORSCHEME_EXPORT ColorSchemeEditor : public QDialog
 {
     Q_OBJECT
 
