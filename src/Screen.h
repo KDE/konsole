@@ -31,7 +31,7 @@
 #include <QVarLengthArray>
 
 // Konsole
-#include "Character.h"
+#include "../characters/Character.h"
 #include "konsoleprivate_export.h"
 
 #define MODE_Origin    0

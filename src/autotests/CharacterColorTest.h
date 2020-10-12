@@ -22,7 +22,7 @@
 
 #include <QObject>
 
-#include "../CharacterColor.h"
+#include "../characters/CharacterColor.h"
 
 namespace Konsole
 {

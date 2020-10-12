@@ -29,7 +29,7 @@
 #include <QScrollBar>
 
 // Konsole
-#include "Character.h"
+#include "../characters/Character.h"
 #include "ScreenWindow.h"
 #include "Enumeration.h"
 #include "colorscheme/ColorSchemeWallpaper.h"

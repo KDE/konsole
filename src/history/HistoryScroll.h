@@ -24,7 +24,7 @@
 #include "konsoleprivate_export.h"
 
 // Konsole
-#include "Character.h"
+#include "../characters/Character.h"
 
 // Qt
 #include <QVector>

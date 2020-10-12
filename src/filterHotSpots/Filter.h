@@ -40,7 +40,7 @@
 #include <memory>
 
 // Konsole
-#include "Character.h"
+#include "../characters/Character.h"
 
 class QAction;
 class QMenu;

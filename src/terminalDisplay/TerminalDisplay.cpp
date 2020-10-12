@@ -80,7 +80,7 @@
 #include "widgets/IncrementalSearchBar.h"
 #include "profile/Profile.h"
 #include "ViewManager.h" // for colorSchemeForProfile. // TODO: Rewrite this.
-#include "LineBlockCharacters.h"
+#include "../characters/LineBlockCharacters.h"
 #include "PrintOptions.h"
 #include "../widgets/KonsolePrintManager.h"
 #include "EscapeSequenceUrlExtractor.h"

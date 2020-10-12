@@ -23,7 +23,7 @@
 // KDE
 #include <qtest.h>
 
-#include "../Character.h"
+#include "../characters/Character.h"
 #include "konsoleprivate_export.h"
 
 using namespace Konsole;

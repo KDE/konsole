@@ -25,7 +25,7 @@
 // Konsole
 #include "TerminalDisplay.h"
 #include "session/SessionController.h"
-#include "Character.h"
+#include "../characters/Character.h"
 
 // KDE
 #include <KMessageWidget>

@@ -27,7 +27,7 @@
 #include <QWidget>
 
 // Konsole
-#include "Character.h"
+#include "../characters/Character.h"
 #include "konsoleprivate_export.h"
 #include "ScreenWindow.h"
 #include "colorscheme/ColorScheme.h"

@@ -25,7 +25,7 @@
 #include <QString>
 
 #include "FilterChain.h"
-#include "Character.h"
+#include "../characters/Character.h"
 
 namespace Konsole {
 class TerminalDisplay;

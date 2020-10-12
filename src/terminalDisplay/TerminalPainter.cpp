@@ -26,7 +26,7 @@
 #include "TerminalDisplay.h"
 #include "TerminalScrollBar.hpp"
 #include "ExtendedCharTable.h"
-#include "LineBlockCharacters.h"
+#include "../characters/LineBlockCharacters.h"
 
 // Qt
 #include <QRect>

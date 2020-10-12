@@ -27,7 +27,7 @@
 #include <QSharedData>
 
 // Konsole
-#include "CharacterColor.h"
+#include "../characters/CharacterColor.h"
 #include "ColorSchemeWallpaper.h"
 
 class KConfig;

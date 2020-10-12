@@ -107,8 +107,8 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         AutoScrollHandler.cpp
                         BookmarkHandler.cpp
                         BookmarkMenu.cpp
-                        CharacterFormat.cpp
-                        CharacterWidth.cpp
+                        characters/CharacterFormat.cpp
+                        characters/CharacterWidth.cpp
                         CheckableSessionModel.cpp
                         CompositeWidgetFocusWatcher.cpp
                         CopyInputDialog.cpp
@@ -120,7 +120,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         HistorySizeDialog.cpp
                         KeyBindingEditor.cpp
                         LabelsAligner.cpp
-                        LineBlockCharacters.cpp
+                        characters/LineBlockCharacters.cpp
                         NullProcessInfo.cpp
                         NullProcessInfo.cpp
                         PlainTextDecoder.cpp

@@ -23,7 +23,7 @@
 
 #include <QVector>
 
-#include "CharacterFormat.h"
+#include "../characters/CharacterFormat.h"
 #include "CompactHistoryBlockList.h"
 
 namespace Konsole

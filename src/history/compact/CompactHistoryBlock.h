@@ -22,7 +22,7 @@
 #define COMPACTHISTORYBLOCK_H
 
 // Konsole
-#include "Character.h"
+#include "../characters/Character.h"
 
 // System
 #include <sys/mman.h>

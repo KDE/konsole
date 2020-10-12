@@ -27,7 +27,7 @@
 #include <QSharedData>
 
 // Konsole
-#include "CharacterColor.h"
+#include "../characters/CharacterColor.h"
 
 class QPixmap;
 class QPainter;

@@ -26,7 +26,7 @@
 #include <QRect>
 
 // Konsole
-#include "Character.h"
+#include "../characters/Character.h"
 #include "Screen.h"
 
 namespace Konsole {
