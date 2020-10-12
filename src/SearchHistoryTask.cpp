@@ -11,7 +11,7 @@
 #include <QTextStream>
 
 #include "Emulation.h"
-#include "PlainTextDecoder.h"
+#include "../decoders/PlainTextDecoder.h"
 
 namespace Konsole {
 

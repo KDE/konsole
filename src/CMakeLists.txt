@@ -119,7 +119,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         LabelsAligner.cpp
                         NullProcessInfo.cpp
                         NullProcessInfo.cpp
-                        PlainTextDecoder.cpp
+                        decoders/PlainTextDecoder.cpp
                         PrintOptions.cpp
                         PrintOptions.cpp
                         ProcessInfo.cpp

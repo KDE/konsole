@@ -9,7 +9,7 @@
 
 #include <QTextStream>
 
-#include "PlainTextDecoder.h"
+#include "../decoders/PlainTextDecoder.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
 

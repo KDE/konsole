@@ -20,7 +20,7 @@
 #include "session/SessionManager.h"
 #include "Emulation.h"
 
-#include "PlainTextDecoder.h"
+#include "../decoders/PlainTextDecoder.h"
 #include "../decoders/HTMLDecoder.h"
 
 namespace Konsole {

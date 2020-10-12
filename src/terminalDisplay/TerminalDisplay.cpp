@@ -55,7 +55,7 @@
 #include "filterHotSpots/EscapeSequenceUrlFilterHotSpot.h"
 
 #include "konsoledebug.h"
-#include "PlainTextDecoder.h"
+#include "../decoders/PlainTextDecoder.h"
 #include "Screen.h"
 #include "ExtendedCharTable.h"
 #include "../widgets/TerminalDisplayAccessible.h"

@@ -9,7 +9,7 @@
 #include "TerminalCharacterDecoderTest.h"
 
 // Konsole
-#include "../PlainTextDecoder.h"
+#include "../decoders/PlainTextDecoder.h"
 #include "../decoders/HTMLDecoder.h"
 
 // Qt

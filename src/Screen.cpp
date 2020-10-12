@@ -12,7 +12,7 @@
 #include <QTextStream>
 
 // Konsole
-#include "PlainTextDecoder.h"
+#include "../decoders/PlainTextDecoder.h"
 #include "../decoders/HTMLDecoder.h"
 #include "history/HistoryType.h"
 #include "history/HistoryScrollNone.h"
