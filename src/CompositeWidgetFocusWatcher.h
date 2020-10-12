@@ -37,7 +37,7 @@ class CompositeWidgetFocusWatcher : public QObject
     Q_OBJECT
 
 public:
-    explicit CompositeWidgetFocusWatcher(QWidget *compositeWidget, QObject *parent);
+    explicit CompositeWidgetFocusWatcher(QWidget *compositeWidget);
     bool eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
 
 Q_SIGNALS:

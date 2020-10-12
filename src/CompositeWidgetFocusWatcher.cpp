@@ -26,8 +26,8 @@
 
 using namespace Konsole;
 
-CompositeWidgetFocusWatcher::CompositeWidgetFocusWatcher(QWidget *compositeWidget, QObject *parent)
-    : QObject(parent)
+CompositeWidgetFocusWatcher::CompositeWidgetFocusWatcher(QWidget *compositeWidget)
+    : QObject(compositeWidget)
     , _compositeWidget(compositeWidget)
 {
     registerWidgetAndChildren(compositeWidget);
