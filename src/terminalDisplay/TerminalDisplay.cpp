@@ -58,7 +58,7 @@
 #include <KIO/StatJob>
 
 // Konsole
-#include "CompositeWidgetFocusWatcher.h"
+#include "extras/CompositeWidgetFocusWatcher.h"
 #include "AutoScrollHandler.h"
 
 #include "filterHotSpots/Filter.h"

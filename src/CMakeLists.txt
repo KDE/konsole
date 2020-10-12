@@ -108,7 +108,6 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         BookmarkHandler.cpp
                         BookmarkMenu.cpp
                         CheckableSessionModel.cpp
-                        CompositeWidgetFocusWatcher.cpp
                         CopyInputDialog.cpp
                         Emulation.cpp
                         EscapeSequenceUrlExtractor.cpp
@@ -175,6 +174,8 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         widgets/RenameTabWidget.cpp
                         widgets/RenameTabWidget.cpp
                         widgets/TabTitleFormatButton.cpp
+
+                        terminalDisplay/extras/CompositeWidgetFocusWatcher.cpp
                         
                         terminalDisplay/TerminalDisplay.cpp
                         terminalDisplay/TerminalPainter.cpp
