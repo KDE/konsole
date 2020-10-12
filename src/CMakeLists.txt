@@ -102,13 +102,12 @@ add_subdirectory(colorscheme)
 add_subdirectory(keyboardtranslator)
 add_subdirectory(profile)
 add_subdirectory(session)
+add_subdirectory(characters)
 
 set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         AutoScrollHandler.cpp
                         BookmarkHandler.cpp
                         BookmarkMenu.cpp
-                        characters/CharacterFormat.cpp
-                        characters/CharacterWidth.cpp
                         CheckableSessionModel.cpp
                         CompositeWidgetFocusWatcher.cpp
                         CopyInputDialog.cpp
@@ -120,7 +119,6 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         HistorySizeDialog.cpp
                         KeyBindingEditor.cpp
                         LabelsAligner.cpp
-                        characters/LineBlockCharacters.cpp
                         NullProcessInfo.cpp
                         NullProcessInfo.cpp
                         PlainTextDecoder.cpp
@@ -231,6 +229,7 @@ target_link_libraries(konsoleprivate
     konsolehelpers
     konsolesession
     konsoleprofile
+    konsolecharacters
     ${konsole_LIBS}
 )
 
