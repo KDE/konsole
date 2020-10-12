@@ -113,8 +113,6 @@ int SessionController::_lastControllerId;
 SessionController::SessionController(Session* session, TerminalDisplay* view, QObject* parent)
     : ViewProperties(parent)
     , KXMLGUIClient()
-    , _session(session)
-    , _view(view)
     , _copyToGroup(nullptr)
     , _profileList(nullptr)
     , _sessionIcon(QIcon())
@@ -1308,7 +1306,7 @@ void SessionController::updateFilterList(Profile::Ptr profile)
         delete _escapedUrlFilter;
         _escapedUrlFilter = nullptr;
     } else if (allowEscapeSequenceLinks && _escapedUrlFilter == nullptr) {
-        _escapedUrlFilter = new EscapeSequenceUrlFilter(_session, _view);
+        _escapedUrlFilter = new EscapeSequenceUrlFilter(_sessionDisplayConnection->session(), _sessionDisplayConnection->view());
         filterChain->addFilter(_escapedUrlFilter);
     }
 }

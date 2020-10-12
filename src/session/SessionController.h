@@ -317,8 +317,6 @@ private:
     void updateSessionIcon();
     void updateReadOnlyActionStates();
 
-    QPointer<Session> _session;
-    QPointer<TerminalDisplay> _view;
     SessionGroup *_copyToGroup;
 
     SessionDisplayConnection *_sessionDisplayConnection;
