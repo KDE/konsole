@@ -9,7 +9,7 @@
 
 #include "konsoleprivate_export.h"
 
-#include "TerminalCharacterDecoder.h"
+#include "../decoders/TerminalCharacterDecoder.h"
 
 class QTextStream;
 template<typename> class QList;

@@ -10,7 +10,7 @@
 
 // Konsole
 #include "../PlainTextDecoder.h"
-#include "../HTMLDecoder.h"
+#include "../decoders/HTMLDecoder.h"
 
 // Qt
 #include <QTextStream>

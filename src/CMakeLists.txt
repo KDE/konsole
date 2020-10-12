@@ -113,7 +113,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         EscapeSequenceUrlExtractor.cpp
                         ExtendedCharTable.cpp
                         FontDialog.cpp
-                        HTMLDecoder.cpp
+                        decoders/HTMLDecoder.cpp
                         HistorySizeDialog.cpp
                         KeyBindingEditor.cpp
                         LabelsAligner.cpp

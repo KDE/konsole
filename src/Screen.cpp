@@ -13,7 +13,7 @@
 
 // Konsole
 #include "PlainTextDecoder.h"
-#include "HTMLDecoder.h"
+#include "../decoders/HTMLDecoder.h"
 #include "history/HistoryType.h"
 #include "history/HistoryScrollNone.h"
 #include "ExtendedCharTable.h"

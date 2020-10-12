@@ -21,7 +21,7 @@
 #include "Emulation.h"
 
 #include "PlainTextDecoder.h"
-#include "HTMLDecoder.h"
+#include "../decoders/HTMLDecoder.h"
 
 namespace Konsole {
 
