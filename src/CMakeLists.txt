@@ -105,7 +105,6 @@ add_subdirectory(session)
 add_subdirectory(characters)
 
 set(konsoleprivate_SRCS ${windowadaptors_SRCS}
-                        AutoScrollHandler.cpp
                         BookmarkHandler.cpp
                         BookmarkMenu.cpp
                         CheckableSessionModel.cpp
@@ -180,6 +179,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         terminalDisplay/TerminalDisplay.cpp
                         terminalDisplay/TerminalPainter.cpp
                         terminalDisplay/TerminalScrollBar.cpp
+                        terminalDisplay/AutoScrollHandler.cpp
 
                         widgets/TerminalDisplayAccessible.cpp
                         widgets/TerminalHeaderBar.cpp
