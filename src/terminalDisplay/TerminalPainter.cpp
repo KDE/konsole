@@ -455,7 +455,7 @@ namespace Konsole
 
         const bool useBold = (((style->rendition & RE_BOLD) != 0) && _display->_boldIntense);
         const bool useUnderline = ((style->rendition & RE_UNDERLINE) != 0) || _display->font().underline();
-        const bool useItalic = ((style->rendition * RE_ITALIC) != 0) || _display->font().italic();
+        const bool useItalic = ((style->rendition & RE_ITALIC) != 0) || _display->font().italic();
         const bool useStrikeOut = ((style->rendition & RE_STRIKEOUT) != 0) || _display->font().strikeOut();
         const bool useOverline = ((style->rendition & RE_OVERLINE) != 0) || _display->font().overline();
 
@@ -466,7 +466,7 @@ namespace Konsole
                 || currentFont.italic() != useItalic
                 || currentFont.strikeOut() != useStrikeOut
                 || currentFont.overline() != useOverline) {
-            
+
             currentFont.setWeight(useBold ? boldWeight : normalWeight);
             currentFont.setUnderline(useUnderline);
             currentFont.setItalic(useItalic);
@@ -502,9 +502,9 @@ namespace Konsole
         painter.setClipRegion(origClipRegion);
         painter.setClipping(origClipping);
     }
-    
+
     void TerminalPainter::drawLineCharString(QPainter &painter, int x, int y, const QString &str,
-                                    const Character *attributes) 
+                                    const Character *attributes)
     {
         painter.setRenderHint(QPainter::Antialiasing, _display->_antialiasText);
 
@@ -516,13 +516,13 @@ namespace Konsole
         }
         painter.setRenderHint(QPainter::Antialiasing, false);
     }
-    
-    void TerminalPainter::drawInputMethodPreeditString(QPainter &painter, const QRect &rect) 
+
+    void TerminalPainter::drawInputMethodPreeditString(QPainter &painter, const QRect &rect)
     {
         if (_display->_inputMethodData.preeditString.isEmpty() || !_display->isCursorOnDisplay()) {
             return;
         }
-        
+
         const QPoint cursorPos = _display->cursorPosition();
 
         QColor characterColor;
