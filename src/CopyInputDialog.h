@@ -58,8 +58,6 @@ public:
      * and cannot be unchecked.
      */
     void setMasterSession(Session *session);
-    /** See setMasterSession() */
-    Session *masterSession() const;
 
     /** Sets the sessions in the list which are checked. */
     void setChosenSessions(const QSet<Session *> &sessions);

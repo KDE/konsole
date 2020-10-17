@@ -683,9 +683,6 @@ Q_SIGNALS:
      */
     void changeForegroundColorRequest(const QColor &);
 
-    /** TODO: Document me. */
-    void openUrlRequest(const QString &url);
-
     /**
      * Emitted when the request for data transmission through ZModem
      * protocol is detected.

@@ -40,7 +40,6 @@ private Q_SLOTS:
 
 private:
     KParts::Part* createPart();
-    void sleep(int msecs = 10000);
 
     KParts::Part* _terminalPart;
 
