@@ -103,6 +103,7 @@ add_subdirectory(keyboardtranslator)
 add_subdirectory(profile)
 add_subdirectory(session)
 add_subdirectory(characters)
+add_subdirectory(decoders)
 
 set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         BookmarkHandler.cpp
@@ -112,13 +113,11 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         Emulation.cpp
                         EscapeSequenceUrlExtractor.cpp
                         FontDialog.cpp
-                        decoders/HTMLDecoder.cpp
                         HistorySizeDialog.cpp
                         KeyBindingEditor.cpp
                         LabelsAligner.cpp
                         NullProcessInfo.cpp
                         NullProcessInfo.cpp
-                        decoders/PlainTextDecoder.cpp
                         PrintOptions.cpp
                         PrintOptions.cpp
                         ProcessInfo.cpp
@@ -233,6 +232,7 @@ target_link_libraries(konsoleprivate
     konsolesession
     konsoleprofile
     konsolecharacters
+    konsoledecoders
     ${konsole_LIBS}
 )
 

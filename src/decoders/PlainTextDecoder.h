@@ -7,8 +7,7 @@
 #ifndef PLAINTEXTDECODER_H
 #define PLAINTEXTDECODER_H
 
-#include "konsoleprivate_export.h"
-
+// Konsole decoders
 #include "TerminalCharacterDecoder.h"
 
 class QTextStream;
@@ -20,7 +19,7 @@ namespace Konsole
      * A terminal character decoder which produces plain text, ignoring colors and other appearance-related
      * properties of the original characters.
      */
-    class KONSOLEPRIVATE_EXPORT PlainTextDecoder : public TerminalCharacterDecoder
+    class KONSOLEDECODERS_EXPORT PlainTextDecoder : public TerminalCharacterDecoder
     {
     public:
         PlainTextDecoder();

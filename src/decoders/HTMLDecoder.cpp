@@ -7,9 +7,11 @@
 // Own
 #include "HTMLDecoder.h"
 
-// Konsole
-#include "colorscheme/ColorSchemeManager.h"
-#include "../characters/ExtendedCharTable.h"
+// Konsole colorScheme
+#include <ColorSchemeManager.h>
+
+// Konsole characters
+#include <ExtendedCharTable.h>
 
 // Qt
 #include <QTextStream>

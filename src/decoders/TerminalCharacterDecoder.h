@@ -11,9 +11,11 @@
 #include <QList>
 #include <QExplicitlySharedDataPointer>
 
-// Konsole
-#include "../characters/Character.h"
-#include "konsoleprivate_export.h"
+// Konsole characters
+#include <Character.h>
+
+// Konsole decoders
+#include "konsoledecoders_export.h"
 
 class QTextStream;
 
@@ -28,7 +30,7 @@ namespace Konsole {
  * Derived classes may produce either plain text with no other color or appearance information, or
  * they may produce text which incorporates these additional properties.
  */
-class KONSOLEPRIVATE_EXPORT TerminalCharacterDecoder
+class KONSOLEDECODERS_EXPORT TerminalCharacterDecoder
 {
 public:
     virtual ~TerminalCharacterDecoder()

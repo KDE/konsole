@@ -24,7 +24,10 @@ add_library(konsolecolorscheme
     ${konsole_colorscheme_SRCS}
 )
 generate_export_header(konsolecolorscheme BASE_NAME konsolecolorscheme)
-target_include_directories(konsolecolorscheme PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(konsolecolorscheme
+    PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
+    INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+
 target_link_libraries(
     konsolecolorscheme
     ${konsole_LIBS}

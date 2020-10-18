@@ -12,9 +12,10 @@
 #include <QSet>
 #include <QTextStream>
 
-// Konsole
-#include "../decoders/PlainTextDecoder.h"
-#include "../decoders/HTMLDecoder.h"
+// Konsole decoders
+#include <PlainTextDecoder.h>
+#include <HTMLDecoder.h>
+
 #include "history/HistoryType.h"
 #include "history/HistoryScrollNone.h"
 #include "characters/ExtendedCharTable.h"

@@ -7,7 +7,7 @@
 #ifndef HTMLDECODER_H
 #define HTMLDECODER_H
 
-// Konsole
+// Konsole decoders
 #include "TerminalCharacterDecoder.h"
 
 #include <QFont>
@@ -18,7 +18,7 @@ namespace Konsole
     /**
      * A terminal character decoder which produces pretty HTML markup
      */
-    class KONSOLEPRIVATE_EXPORT HTMLDecoder : public TerminalCharacterDecoder
+    class KONSOLEDECODERS_EXPORT HTMLDecoder : public TerminalCharacterDecoder
     {
     public:
         /**
