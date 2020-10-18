@@ -18,7 +18,6 @@
 class QTextStream;
 
 namespace Konsole {
-class Profile;
 
 /**
  * Base class for terminal character decoders

@@ -10,7 +10,8 @@
 // Konsole
 #include "TerminalCharacterDecoder.h"
 
-#include "profile/Profile.h"
+#include <QFont>
+class QString;
 
 namespace Konsole
 {
@@ -23,7 +24,7 @@ namespace Konsole
         /**
          * Constructs an HTML decoder using a default black-on-white color scheme.
          */
-        explicit HTMLDecoder(const Profile::Ptr &profile = Profile::Ptr());
+        explicit HTMLDecoder(const QString &colorSchemeName = QString(), const QFont &profileFont = QFont());
 
         void decodeLine(const Character * const characters, int count,
                         LineProperty properties) override;
@@ -36,12 +37,14 @@ namespace Konsole
         void closeSpan(QString &text);
 
         QTextStream *_output;
-        Profile::Ptr _profile;
+        QString _colorSchemeName;
+        QFont _profileFont;
         ColorEntry _colorTable[TABLE_COLORS];
         bool _innerSpanOpen;
         RenditionFlags _lastRendition;
         CharacterColor _lastForeColor;
         CharacterColor _lastBackColor;
+        bool _validProfile;
     };
 }
 

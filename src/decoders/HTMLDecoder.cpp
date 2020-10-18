@@ -13,26 +13,30 @@
 
 // Qt
 #include <QTextStream>
+#include <QFont>
 
 using namespace Konsole;
 
-HTMLDecoder::HTMLDecoder(const QExplicitlySharedDataPointer<Profile> &profile) :
-    _output(nullptr)
-    , _profile(profile)
+HTMLDecoder::HTMLDecoder(const QString &colorSchemeName, const QFont &profileFont)
+    : _output(nullptr)
+    , _colorSchemeName(colorSchemeName)
+    , _profileFont(profileFont)
     , _innerSpanOpen(false)
     , _lastRendition(DEFAULT_RENDITION)
     , _lastForeColor(CharacterColor())
     , _lastBackColor(CharacterColor())
+    , _validProfile(false)
 {
     const ColorScheme *colorScheme = nullptr;
 
-    if (profile) {
-        colorScheme = ColorSchemeManager::instance()->findColorScheme(profile->colorScheme());
+    if (!colorSchemeName.isEmpty()) {
+        colorScheme = ColorSchemeManager::instance()->findColorScheme(colorSchemeName);
 
         if (colorScheme == nullptr) {
             colorScheme = ColorSchemeManager::instance()->defaultColorScheme();
         }
 
+        _validProfile = true;
     }
 
     if (colorScheme != nullptr) {
@@ -49,17 +53,16 @@ void HTMLDecoder::begin(QTextStream* output)
     _output = output;
 
 
-    if (_profile) {
+    if (_validProfile) {
         QString style;
 
-        QFont font = _profile->font();
-        style.append(QStringLiteral("font-family:'%1',monospace;").arg(font.family()));
+        style.append(QStringLiteral("font-family:'%1',monospace;").arg(_profileFont.family()));
 
         // Prefer point size if set
-        if (font.pointSizeF() > 0) {
-            style.append(QStringLiteral("font-size:%1pt;").arg(font.pointSizeF()));
+        if (_profileFont.pointSizeF() > 0) {
+            style.append(QStringLiteral("font-size:%1pt;").arg(_profileFont.pointSizeF()));
         } else {
-            style.append(QStringLiteral("font-size:%1px;").arg(font.pixelSize()));
+            style.append(QStringLiteral("font-size:%1px;").arg(_profileFont.pixelSize()));
         }
 
 
@@ -78,7 +81,7 @@ void HTMLDecoder::end()
 {
     Q_ASSERT(_output);
 
-    if (_profile) {
+    if (_validProfile) {
         *_output << QStringLiteral("</body>");
     } else {
         QString text;
@@ -90,8 +93,7 @@ void HTMLDecoder::end()
 }
 
 //TODO: Support for LineProperty (mainly double width , double height)
-void HTMLDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/
-                            )
+void HTMLDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/)
 {
     Q_ASSERT(_output);
 
@@ -180,6 +182,7 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
 
     *_output << text;
 }
+
 void HTMLDecoder::openSpan(QString& text , const QString& style)
 {
     text.append(QStringLiteral("<span style=\"%1\">").arg(style));
