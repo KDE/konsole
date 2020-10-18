@@ -9,12 +9,6 @@
 
 #include "konsoledebug.h"
 
-// Konsole
-#include "terminalDisplay/TerminalDisplay.h"
-#include "session/SessionManager.h"
-#include "session/Session.h"
-#include "Screen.h"
-
 using namespace Konsole;
 
 ExtendedCharTable::ExtendedCharTable() :
@@ -35,7 +29,7 @@ ExtendedCharTable::~ExtendedCharTable()
 // global instance
 ExtendedCharTable ExtendedCharTable::instance;
 
-uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort length)
+uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort length, const pExtendedChars extendedChars)
 {
     // look for this sequence of points in the table
     uint hash = extendedCharHash(unicodePoints, length);
@@ -58,14 +52,7 @@ uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort len
                 triedCleaningSolution = true;
                 // All the hashes are full, go to all Screens and try to free any
                 // This is slow but should happen very rarely
-                QSet<uint> usedExtendedChars;
-                const QList<Session *> sessionsList = SessionManager::instance()->sessions();
-                for (const Session *s : sessionsList) {
-                    const QList<TerminalDisplay *> displayList = s->views();
-                    for (const QPointer<TerminalDisplay> display : displayList) {
-                        usedExtendedChars += display->screenWindow()->screen()->usedExtendedChars();
-                    }
-                }
+                QSet<uint> usedExtendedChars = extendedChars();
 
                 QHash<uint, uint *>::iterator it = _extendedCharTable.begin();
                 QHash<uint, uint *>::iterator itEnd = _extendedCharTable.end();

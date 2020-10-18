@@ -9,6 +9,7 @@
 #include "Screen.h"
 
 // Qt
+#include <QSet>
 #include <QTextStream>
 
 // Konsole
@@ -741,7 +742,8 @@ void Screen::displayCharacter(uint c)
         if ((currentChar.rendition & RE_EXTENDED_CHAR) == 0) {
             const uint chars[2] = { currentChar.character, c };
             currentChar.rendition |= RE_EXTENDED_CHAR;
-            currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, 2);
+            auto extChars = [this]() { return usedExtendedChars(); };
+            currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, 2, extChars);
         } else {
             ushort extendedCharLength;
             const uint* oldChars = ExtendedCharTable::instance.lookupExtendedChar(currentChar.character, extendedCharLength);
@@ -752,7 +754,8 @@ void Screen::displayCharacter(uint c)
                 auto chars = new uint[extendedCharLength + 1];
                 memcpy(chars, oldChars, sizeof(uint) * extendedCharLength);
                 chars[extendedCharLength] = c;
-                currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, extendedCharLength + 1);
+                auto extChars = [this]() { return usedExtendedChars(); };
+                currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, extendedCharLength + 1, extChars);
                 delete[] chars;
             }
         }

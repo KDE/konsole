@@ -10,6 +10,8 @@
 // Qt
 #include <QHash>
 
+#include <functional>
+
 namespace Konsole {
 /**
  * A table which stores sequences of unicode characters, referenced
@@ -20,6 +22,8 @@ namespace Konsole {
 class ExtendedCharTable
 {
 public:
+    typedef std::function<QSet<uint> ()> pExtendedChars;
+
     /** Constructs a new character table. */
     ExtendedCharTable();
     ~ExtendedCharTable();
@@ -35,7 +39,7 @@ public:
      * @param unicodePoints An array of unicode character points
      * @param length Length of @p unicodePoints
      */
-    uint createExtendedChar(const uint *unicodePoints, ushort length);
+    uint createExtendedChar(const uint *unicodePoints, ushort length, const pExtendedChars extendedChars);
     /**
      * Looks up and returns a pointer to a sequence of unicode characters
      * which was added to the table using createExtendedChar().
@@ -61,5 +65,7 @@ private:
     // themselves.
     QHash<uint, uint *> _extendedCharTable;
 };
+
 }
+
 #endif  // end of EXTENDEDCHARTABLE_H
