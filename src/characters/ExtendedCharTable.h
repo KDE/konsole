@@ -8,6 +8,7 @@
 #define EXTENDEDCHARTABLE_H
 
 // Qt
+#include <QSet>
 #include <QHash>
 
 #include <functional>

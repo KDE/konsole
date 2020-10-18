@@ -17,7 +17,7 @@
 #include "../decoders/HTMLDecoder.h"
 #include "history/HistoryType.h"
 #include "history/HistoryScrollNone.h"
-#include "ExtendedCharTable.h"
+#include "characters/ExtendedCharTable.h"
 #include "profile/Profile.h"
 #include "EscapeSequenceUrlExtractor.h"
 

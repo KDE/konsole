@@ -7,7 +7,7 @@
 // Own
 #include "ExtendedCharTable.h"
 
-#include "konsoledebug.h"
+#include "charactersdebug.h"
 
 using namespace Konsole;
 
@@ -64,7 +64,7 @@ uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort len
                     }
                 }
             } else {
-                qCDebug(KonsoleDebug) << "Using all the extended char hashes, going to miss this extended character";
+                qCDebug(CharactersDebug) << "Using all the extended char hashes, going to miss this extended character";
                 return 0;
             }
         }

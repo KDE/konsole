@@ -111,7 +111,6 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         CopyInputDialog.cpp
                         Emulation.cpp
                         EscapeSequenceUrlExtractor.cpp
-                        ExtendedCharTable.cpp
                         FontDialog.cpp
                         decoders/HTMLDecoder.cpp
                         HistorySizeDialog.cpp

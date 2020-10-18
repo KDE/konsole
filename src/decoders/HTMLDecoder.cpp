@@ -9,7 +9,7 @@
 
 // Konsole
 #include "colorscheme/ColorSchemeManager.h"
-#include "ExtendedCharTable.h"
+#include "../characters/ExtendedCharTable.h"
 
 // Qt
 #include <QTextStream>

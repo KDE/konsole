@@ -57,7 +57,7 @@
 #include "konsoledebug.h"
 #include "../decoders/PlainTextDecoder.h"
 #include "Screen.h"
-#include "ExtendedCharTable.h"
+#include "../characters/ExtendedCharTable.h"
 #include "../widgets/TerminalDisplayAccessible.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"

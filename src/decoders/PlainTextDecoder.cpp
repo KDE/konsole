@@ -8,7 +8,7 @@
 #include "PlainTextDecoder.h"
 
 // Konsole
-#include "ExtendedCharTable.h"
+#include "../characters/ExtendedCharTable.h"
 
 // Qt
 #include <QList>

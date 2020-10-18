@@ -1,10 +1,19 @@
 
-add_library(konsolecharacters
-    OBJECT
+set(konsolecharacters_SRCS
     CharacterFormat.cpp
     CharacterWidth.cpp
     LineBlockCharacters.cpp
+    ExtendedCharTable.cpp
 )
+
+ecm_qt_declare_logging_category(
+    konsolecharacters_SRCS
+    HEADER charactersdebug.h
+    IDENTIFIER CharactersDebug
+    CATEGORY_NAME org.kde.konsole.characters
+)
+
+add_library(konsolecharacters OBJECT ${konsolecharacters_SRCS})
 generate_export_header(konsolecharacters BASE_NAME konsolecharacters)
 target_include_directories(konsolecharacters PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(konsolecharacters Qt5::Gui)

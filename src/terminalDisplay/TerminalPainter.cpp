@@ -11,7 +11,7 @@
 
 // Konsole
 #include "TerminalScrollBar.hpp"
-#include "ExtendedCharTable.h"
+#include "../characters/ExtendedCharTable.h"
 #include "../characters/LineBlockCharacters.h"
 #include "TerminalColor.hpp"
 
