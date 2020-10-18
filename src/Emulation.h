@@ -218,7 +218,7 @@ public Q_SLOTS:
      * Converts information about a mouse event into an xterm-compatible escape
      * sequence and emits the character sequence via sendData()
      */
-    virtual void sendMouseEvent(int buttons, int column, int line, int eventType);
+    virtual void sendMouseEvent(int buttons, int column, int line, int eventType) = 0;
 
     /**
      * Sends a string of characters to the foreground terminal process.

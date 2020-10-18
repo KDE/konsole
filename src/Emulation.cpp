@@ -242,15 +242,6 @@ void Emulation::sendKeyEvent(QKeyEvent *ev)
     }
 }
 
-void Emulation::sendMouseEvent(int /*buttons*/, int /*column*/, int /*row*/, int /*eventType*/)
-{
-    // default implementation does nothing
-}
-
-/*
-   We are doing code conversion from locale to unicode first.
-*/
-
 void Emulation::receiveData(const char *text, int length)
 {
     bufferedUpdate();
