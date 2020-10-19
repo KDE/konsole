@@ -209,7 +209,7 @@ namespace Konsole
             scrollRect.setLeft(_display->_highlightScrolledLinesControl.enabled ?
                                             _display->HIGHLIGHT_SCROLLED_LINES_WIDTH : 0);
             
-            scrollRect.setRight(width() - scrollBarWidth - SCROLLBAR_CONTENT_GAP);
+            scrollRect.setRight(_display->width() - scrollBarWidth - SCROLLBAR_CONTENT_GAP);
         }
         void *firstCharPos = &_display->_image[region.top() * _display->_columns];
         void *lastCharPos = &_display->_image[(region.top() + abs(lines)) * _display->_columns];
