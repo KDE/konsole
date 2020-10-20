@@ -176,11 +176,11 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         widgets/TabTitleFormatButton.cpp
 
                         terminalDisplay/extras/CompositeWidgetFocusWatcher.cpp
-                        
+                        terminalDisplay/extras/AutoScrollHandler.cpp
+
                         terminalDisplay/TerminalDisplay.cpp
                         terminalDisplay/TerminalPainter.cpp
                         terminalDisplay/TerminalScrollBar.cpp
-                        terminalDisplay/AutoScrollHandler.cpp
 
                         widgets/TerminalDisplayAccessible.cpp
                         widgets/TerminalHeaderBar.cpp

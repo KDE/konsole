@@ -59,7 +59,7 @@
 
 // Konsole
 #include "extras/CompositeWidgetFocusWatcher.h"
-#include "AutoScrollHandler.h"
+#include "extras/AutoScrollHandler.h"
 
 #include "filterHotSpots/Filter.h"
 #include "filterHotSpots/TerminalImageFilterChain.h"
