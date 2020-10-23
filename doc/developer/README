@@ -1,4 +1,3 @@
-
 Developer Documentation for Konsole
 
 Authors:        Robert Knight < robertknight@gmail.com >
@@ -55,7 +54,7 @@ template would be appreciated.
     user-interface/   - Documentation concerning design and analysis of the user interface.
 
     old-documents/  - An assortment of documentation which was created during earlier
-                      releases of Konsole.  There is useful inforamtion here, particularly
+                      releases of Konsole.  There is useful information here, particularly
                       about the type of terminal which Konsole emulates, but it is not
                       organised.
 
