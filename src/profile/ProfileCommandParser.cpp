@@ -23,7 +23,6 @@
 #include "ProfileCommandParser.h"
 
 // Konsole
-#include "Profile.h"
 
 // Qt
 #include <QHash>

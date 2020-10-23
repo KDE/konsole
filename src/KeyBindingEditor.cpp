@@ -20,7 +20,6 @@
 #include "KeyBindingEditor.h"
 
 // Qt
-#include <QDialog>
 #include <QDialogButtonBox>
 #include <QKeyEvent>
 #include <QIcon>

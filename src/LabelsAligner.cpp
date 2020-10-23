@@ -23,7 +23,6 @@
 
 // Qt
 #include <QWidget>
-#include <QVector>
 #include <QGridLayout>
 
 using namespace Konsole;

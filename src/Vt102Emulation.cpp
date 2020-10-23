@@ -40,7 +40,6 @@
 #include "session/SessionController.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "EscapeSequenceUrlExtractor.h"
-#include "Screen.h"
 
 using Konsole::Vt102Emulation;
 

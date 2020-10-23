@@ -22,7 +22,6 @@
 #include "CompactHistoryBlockList.h"
 
 // Qt
-#include <QList>
 
 using namespace Konsole;
 

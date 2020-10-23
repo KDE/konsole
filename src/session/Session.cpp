@@ -34,7 +34,6 @@
 #include <QColor>
 #include <QDir>
 #include <QFile>
-#include <QStringList>
 #include <QKeyEvent>
 
 // KDE

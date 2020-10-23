@@ -39,14 +39,12 @@
 #include "widgets/IncrementalSearchBar.h"
 #include "ViewProperties.h"
 #include "profile/ProfileList.h"
-#include "ViewManager.h"
 #include "KonsoleSettings.h"
 #include "session/SessionController.h"
 #include "DetachableTabBar.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewSplitter.h"
 #include "MainWindow.h"
-#include "session/Session.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
 

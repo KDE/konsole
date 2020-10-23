@@ -71,7 +71,6 @@
 // Konsole
 #include "CopyInputDialog.h"
 #include "Emulation.h"
-#include "Enumeration.h"
 #include "HistorySizeDialog.h"
 #include "RenameTabDialog.h"
 #include "SaveHistoryTask.h"
@@ -93,7 +92,6 @@
 
 #include "profile/ProfileList.h"
 
-#include "Session.h"
 #include "SessionGroup.h"
 #include "SessionManager.h"
 

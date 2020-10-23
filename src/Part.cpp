@@ -39,7 +39,6 @@
 #include "KonsoleSettings.h"
 #include "ViewManager.h"
 #include "profile/ProfileManager.h"
-#include "session/Session.h"
 #include "session/SessionController.h"
 #include "session/SessionManager.h"
 #include "settings/PartInfo.h"

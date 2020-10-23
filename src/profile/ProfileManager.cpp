@@ -28,7 +28,6 @@
 // Qt
 #include <QDir>
 #include <QFileInfo>
-#include <QList>
 #include <QString>
 
 // KDE

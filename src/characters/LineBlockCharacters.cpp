@@ -26,7 +26,6 @@
 #include "LineBlockCharacters.h"
 
 // Qt
-#include <QPainter>
 #include <QPainterPath>
 
 namespace Konsole {

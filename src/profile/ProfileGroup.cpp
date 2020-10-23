@@ -23,7 +23,6 @@
 #include "ProfileGroup.h"
 
 // Konsole
-#include "Profile.h"
 
 using namespace Konsole;
 

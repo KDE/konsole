@@ -20,7 +20,6 @@
 
 #include "FilterChain.h"
 #include "Filter.h"
-#include "HotSpot.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
 

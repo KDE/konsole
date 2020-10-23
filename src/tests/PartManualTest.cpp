@@ -34,7 +34,6 @@
 #include <KPluginLoader>
 #include <KPluginFactory>
 #include <KService>
-#include <KParts/Part>
 #include <KMainWindow>
 #include <qtest.h>
 

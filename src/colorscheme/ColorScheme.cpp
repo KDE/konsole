@@ -36,7 +36,6 @@
 
 // Konsole
 #include "colorschemedebug.h"
-#include "ColorSchemeWallpaper.h"
 
 namespace {
 const int FGCOLOR_INDEX = 0;

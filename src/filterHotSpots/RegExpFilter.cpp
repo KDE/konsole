@@ -20,7 +20,6 @@
 
 #include "RegExpFilter.h"
 
-#include <QRegularExpression>
 
 #include "RegExpFilterHotspot.h"
 

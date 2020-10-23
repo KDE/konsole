@@ -21,7 +21,6 @@
 #include "ScreenWindow.h"
 
 // Konsole
-#include "Screen.h"
 
 using namespace Konsole;
 

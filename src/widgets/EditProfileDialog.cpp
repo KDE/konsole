@@ -56,13 +56,11 @@
 #include "colorscheme/ColorSchemeManager.h"
 
 #include "keyboardtranslator/KeyboardTranslator.h"
-#include "keyboardtranslator/KeyboardTranslatorManager.h"
 
 #include "KeyBindingEditor.h"
 #include "profile/ProfileManager.h"
 #include "ShellCommand.h"
 #include "WindowSystemInfo.h"
-#include "FontDialog.h"
 
 using namespace Konsole;
 
