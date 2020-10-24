@@ -1792,7 +1792,6 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 #endif
 
         // remove content-specific actions such as "Open Link", "Copy Email Address" etc
-
         if (popup->actions()[0]->objectName() == QStringLiteral("open-action") &&
             popup->actions()[1]->objectName() == QStringLiteral("copy-action"))
         {
@@ -1801,7 +1800,6 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         }
 
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc
-
         QSharedPointer<HotSpot> hotSpot = _sessionDisplayConnection->view()->filterActions(position);
         if (hotSpot != nullptr) {
             popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions() << contentSeparator );
