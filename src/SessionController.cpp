@@ -1771,7 +1771,18 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
 #else
         copy->setShortcut(Konsole::ACCEL + Qt::SHIFT + Qt::Key_C);
 #endif
-        // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
+
+        // remove content-specific actions such as "Open Link", "Copy Email Address" etc
+
+        if (popup->actions()[0]->objectName() == QStringLiteral("open-action")&&
+            popup->actions()[1]->objectName() == QStringLiteral("copy-action"))
+        {
+            popup->removeAction(popup->actions().value(0, nullptr));
+            popup->removeAction(popup->actions().value(0, nullptr));
+        }
+
+        // prepend content-specific actions such as "Open Link", "Copy Email Address" etc
+
         QSharedPointer<Filter::HotSpot> hotSpot = _view->filterActions(position);
         if (hotSpot != nullptr) {
             popup->insertActions(popup->actions().value(0, nullptr), hotSpot->actions() << contentSeparator );
