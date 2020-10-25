@@ -747,7 +747,11 @@ void MainWindow::showManageProfilesDialog()
 void MainWindow::showSettingsDialog(const bool showProfilePage)
 {
     static ConfigurationDialog *confDialog = nullptr;
+    static KPageWidgetItem *profilePage = nullptr;
     if (confDialog != nullptr) {
+        if (showProfilePage && profilePage != nullptr) {
+            confDialog->setCurrentPage(profilePage);
+        }
         confDialog->show();
         return;
     }
@@ -760,7 +764,7 @@ void MainWindow::showSettingsDialog(const bool showProfilePage)
     confDialog->addPage(generalPage, true);
 
     const QString profilePageName = i18nc("@title Preferences page name", "Profiles");
-    auto profilePage = new KPageWidgetItem(new ProfileSettings(confDialog), profilePageName);
+    profilePage = new KPageWidgetItem(new ProfileSettings(confDialog), profilePageName);
     profilePage->setIcon(QIcon::fromTheme(QStringLiteral("preferences-system-profiles")));
     confDialog->addPage(profilePage, true);
 
