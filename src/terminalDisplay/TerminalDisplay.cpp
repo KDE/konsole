@@ -1434,6 +1434,10 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
     getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
     QPoint pos = QPoint(charColumn, charLine);
 
+    processFilters();
+
+    _filterChain->mouseMoveEvent(this, ev, charLine, charColumn);
+
     if (ev->button() == Qt::LeftButton) {
         // request the software keyboard, if any
         if (qApp->autoSipEnabled()) {

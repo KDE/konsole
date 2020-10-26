@@ -1791,14 +1791,6 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         copy->setShortcut(Konsole::ACCEL + Qt::SHIFT + Qt::Key_C);
 #endif
 
-        // remove content-specific actions such as "Open Link", "Copy Email Address" etc
-        if (popup->actions()[0]->objectName() == QStringLiteral("open-action") &&
-            popup->actions()[1]->objectName() == QStringLiteral("copy-action"))
-        {
-            popup->removeAction(popup->actions().value(0, nullptr));
-            popup->removeAction(popup->actions().value(0, nullptr));
-        }
-
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc
         QSharedPointer<HotSpot> hotSpot = _sessionDisplayConnection->view()->filterActions(position);
         if (hotSpot != nullptr) {
@@ -1836,6 +1828,15 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         if ((chosen != nullptr) && chosen->objectName() == QLatin1String("close-session")) {
             chosen->trigger();
         }
+
+        // Remove the 'Open with' actions from it.
+        QList<QAction*> toDelete;
+        for (auto *action : popup->actions()) {
+            if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
+                toDelete.append(action);
+            }
+        }
+        qDeleteAll(toDelete);
 
         // Remove the Accelerator for the copy shortcut so we don't have two actions with same shortcut.
         copy->setShortcut({});

@@ -69,16 +69,6 @@ QList<QAction *> FileFilterHotSpot::actions()
 
 void FileFilterHotSpot::setupMenu(QMenu *menu)
 {
-    // We are reusing the QMenu, but we need to update the actions anyhow.
-    // Remove the 'Open with' actions from it, then add the new ones.
-    QList<QAction*> toDelete;
-    for (auto *action : menu->actions()) {
-        if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
-            toDelete.append(action);
-        }
-    }
-    qDeleteAll(toDelete);
-
     const KFileItem fileItem(QUrl::fromLocalFile(_filePath));
     const KFileItemList itemList({fileItem});
     const KFileItemListProperties itemProperties(itemList);
