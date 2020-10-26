@@ -173,19 +173,15 @@ void FilterChain::keyReleaseEvent(TerminalDisplay *td, QKeyEvent *ev, int charLi
     }
 }
 
-static int ascii_to_int(int c) {
-    return c - '0';
-}
-
 bool FilterChain::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine, int charColumn)
 {
     if ((_urlHintsModifiers != 0u) && ev->modifiers() == _urlHintsModifiers) {
         QList<QSharedPointer<HotSpot>> hotspots = filterBy(HotSpot::Link);
         int nHotSpots = hotspots.count();
-        int hintSelected = ascii_to_int(ev->key());
+        int hintSelected = ev->key() - '1';
 
         // Triggered a Hotspot via shortcut.
-        if (hintSelected >= 0 && hintSelected < 10 && hintSelected < nHotSpots) {
+        if (hintSelected >= 0 && hintSelected <= 9 && hintSelected < nHotSpots) {
             if (_reverseUrlHints) {
                 hintSelected = nHotSpots - hintSelected - 1;
             }
