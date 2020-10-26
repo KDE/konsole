@@ -104,7 +104,7 @@ public:
     void abortUrlInput();
 
     /* The URL is parsed at once, but not the text. We received
-     * one character per time untill we hit the end byte. */
+     * one character per time until we hit the end byte. */
     void appendUrlText(QChar c);
 
     /* The URL is parsed at once, store it at once. */

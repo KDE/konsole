@@ -180,7 +180,7 @@ Q_SIGNALS:
     void tabColoredByUser(bool set) const;
 
     /**
-     * Emmited when the user request print screen.
+     * Emitted when the user request print screen.
      */
     void requestPrint();
 

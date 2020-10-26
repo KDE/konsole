@@ -371,7 +371,7 @@ protected:
 private:
     bool readProcInfo(int pid) override
     {
-        // indicies of various fields within the process status file which
+        // indices of various fields within the process status file which
         // contain various information about the process
         const int PARENT_PID_FIELD = 3;
         const int PROCESS_NAME_FIELD = 1;

@@ -1224,7 +1224,7 @@ void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntri
                     continue;
                 }
                 qWarning() << "Failed to unload file" << file;
-                // If unloading fails we do not care. Iff the scheme failed here
+                // If unloading fails we do not care. If the scheme failed here
                 // it either wasn't loaded or was invalid to begin with.
             }
             break;

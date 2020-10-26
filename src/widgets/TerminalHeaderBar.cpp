@@ -125,7 +125,7 @@ void TerminalHeaderBar::mouseDoubleClickEvent(QMouseEvent *ev)
     m_toggleExpandedMode->click();
 }
 
-// Hack untill I can detangle the creation of the TerminalViews
+// Hack until I can detangle the creation of the TerminalViews
 void TerminalHeaderBar::finishHeaderSetup(ViewProperties *properties)
 {
     auto controller = dynamic_cast<SessionController*>(properties);
