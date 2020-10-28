@@ -185,6 +185,13 @@ void TerminalHeaderBar::updateSpecialState(ViewProperties *item)
     }
 }
 
+void TerminalHeaderBar::setExpandedMode(bool expand)
+{
+    if (m_toggleExpandedMode->isChecked() != expand) {
+        m_toggleExpandedMode->setChecked(expand);
+    }
+}
+
 void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
 {
     /* Try to get the widget that's 10px above this one.

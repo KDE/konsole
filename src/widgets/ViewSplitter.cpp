@@ -270,6 +270,7 @@ void ViewSplitter::handleMinimizeMaximize(bool maximize)
 {
     auto topLevelSplitter = getToplevelSplitter();
     auto currentTerminalDisplay = topLevelSplitter->activeTerminalDisplay();
+    currentTerminalDisplay->setExpandedMode(maximize);
     if (maximize) {
         for (int i = 0, end = topLevelSplitter->count(); i < end; i++) {
             auto widgetAt = topLevelSplitter->widget(i);

@@ -376,6 +376,9 @@ public:
     // a character which left edge is closest to the point.
     void getCharacterPosition(const QPoint &widgetPoint, int &line, int &column, bool edge) const;
 
+    // toggle the header bar Minimize/Maximize button.
+    void setExpandedMode(bool expand);
+
     friend class TerminalPainter;
     friend class TerminalScrollBar;
 
