@@ -1439,6 +1439,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 
         urlNumInc = -1;
     } else {
+        urlNumber = 1;
         urlNumInc = 1;
     }
 
@@ -1472,7 +1473,8 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 region |= r;
             }
 
-            if (_showUrlHint && urlNumber >= 0 && urlNumber < 10 && spot->type() == Filter::HotSpot::Link) {
+            if (_showUrlHint && spot->type() == Filter::HotSpot::Link) {
+                if (urlNumber >= 0 && urlNumber < 10) {
                 // Position at the beginning of the URL
                 QRect hintRect(*region.begin());
                 hintRect.setWidth(r.height());
@@ -1480,6 +1482,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                 painter.setPen(Qt::white);
                 painter.drawRect(hintRect.adjusted(0, 0, -1, -1));
                 painter.drawText(hintRect, Qt::AlignCenter, QString::number(urlNumber));
+                }
 
                 urlNumber += urlNumInc;
             }
