@@ -378,6 +378,9 @@ public:
         return _hasCompositeFocus;
     }
 
+    // toggle the header bar Minimize/Maximize button.
+    void setExpandedMode(bool expand);
+
 public Q_SLOTS:
     /**
      * Scrolls current ScreenWindow

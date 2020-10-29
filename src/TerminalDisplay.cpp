@@ -2720,6 +2720,11 @@ void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, int& line,
     line = qBound(0, (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _fontHeight, _usedLines - 1);
 }
 
+void TerminalDisplay::setExpandedMode(bool expand)
+{
+    _headerBar->setExpandedMode(expand);
+}
+
 void TerminalDisplay::updateLineProperties()
 {
     if (_screenWindow.isNull()) {

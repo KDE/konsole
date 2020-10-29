@@ -44,6 +44,7 @@ public:
     QSize minimumSizeHint() const override;
     void applyVisibilitySettings();
     QSplitter *getTopLevelSplitter();
+    void setExpandedMode(bool expand);
 
 public Q_SLOTS:
     void setFocusIndicatorState(bool focused);
