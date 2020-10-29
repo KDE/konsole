@@ -260,6 +260,10 @@ bool shouldUseNewProcess(int argc, char *argv[])
         arguments.append(QString::fromLocal8Bit(argv[i]));
     }
 
+    if (arguments.contains(QLatin1String("--force-reuse"))) {
+        return false;
+    }
+
     // take Qt options into consideration
     QStringList qtProblematicOptions;
     qtProblematicOptions << QStringLiteral("--session") << QStringLiteral("--name") << QStringLiteral("--reverse") << QStringLiteral("--stylesheet")

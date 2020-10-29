@@ -72,7 +72,10 @@ void Application::populateCommandLineParser(QCommandLineParser *parser)
         {{QStringLiteral("p")}, i18nc("@info:shell", "Change the value of a profile property."), QStringLiteral("property=value")},
         {{QStringLiteral("e")},
          i18nc("@info:shell", "Command to execute. This option will catch all following arguments, so use it as the last option."),
-         QStringLiteral("cmd")}};
+         QStringLiteral("cmd")},
+        {{QStringLiteral("force-reuse")}, i18nc("@info:shell", "Force re-using the existing instance even if it breaks functionality, e. g. --new-tab. Mostly for debugging.")},
+    };
+
     for (const auto &option : options) {
         parser->addOption(option);
     }
