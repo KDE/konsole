@@ -70,10 +70,12 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
     _newTabButton->setIcon(QIcon::fromTheme(QStringLiteral("tab-new")));
     _newTabButton->setAutoRaise(true);
+    _newTabButton->setToolTip(i18nc("@info:tooltip", "Open a new tab"));
     connect(_newTabButton, &QToolButton::clicked, this, &TabbedViewContainer::newViewRequest);
 
     _closeTabButton->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
     _closeTabButton->setAutoRaise(true);
+    _closeTabButton->setToolTip(i18nc("@info:tooltip", "Close this tab"));
     connect(_closeTabButton, &QToolButton::clicked, this, [this]{
        closeCurrentTab();
     });
