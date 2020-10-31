@@ -190,6 +190,11 @@ void TerminalHeaderBar::setExpandedMode(bool expand)
     if (m_toggleExpandedMode->isChecked() != expand) {
         m_toggleExpandedMode->setChecked(expand);
     }
+    if (expand) {
+        m_toggleExpandedMode->setToolTip(i18nc("@info:tooltip", "Restore terminal"));
+    } else {
+        m_toggleExpandedMode->setToolTip(i18nc("@info:tooltip", "Maximize terminal"));
+    }
 }
 
 void TerminalHeaderBar::paintEvent(QPaintEvent *paintEvent)
