@@ -137,6 +137,10 @@ void ViewSplitter::childEvent(QChildEvent *event)
 
     if (event->removed()) {
         if (count() == 0) {
+            auto *parent_splitter = qobject_cast<ViewSplitter *>(parentWidget());
+            if (parent_splitter != nullptr) {
+                setParent(nullptr);
+            }
             deleteLater();
         }
         if (findChild<TerminalDisplay*>() == nullptr) {
