@@ -50,16 +50,16 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
 
     connect(_group, &QActionGroup::triggered, this, &ProfileList::triggered);
 
+    for (const auto& profile : ProfileManager::instance()->allProfiles()) {
+        addShortcutAction(profile);
+    }
+
     // TODO - Handle re-sorts when user changes profile names
     ProfileManager* manager = ProfileManager::instance();
     connect(manager, &ProfileManager::shortcutChanged, this, &ProfileList::shortcutChanged);
     connect(manager, &ProfileManager::profileChanged, this, &ProfileList::profileChanged);
     connect(manager, &ProfileManager::profileRemoved, this, &ProfileList::removeShortcutAction);
     connect(manager, &ProfileManager::profileAdded, this, &ProfileList::addShortcutAction);
-
-    for (const auto& profile : ProfileManager::instance()->allProfiles()) {
-        addShortcutAction(profile);
-    }
 }
 
 void ProfileList::updateEmptyAction()
