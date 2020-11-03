@@ -312,7 +312,10 @@ QList<Profile::Ptr> ProfileManager::allProfiles()
 {
     loadAllProfiles();
 
-    return _profiles.values();
+    auto loadedProfiles = _profiles.values();
+    sortByNameProfileList(loadedProfiles);
+
+    return loadedProfiles;
 }
 
 QList<Profile::Ptr> ProfileManager::loadedProfiles() const
