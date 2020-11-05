@@ -3075,6 +3075,8 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             mimeData->hasFormat(QStringLiteral("text/uri-list"))) {
         emit sendStringToEmu(dropText.toLocal8Bit());
     }
+
+    setFocus(Qt::MouseFocusReason);
 }
 
 void TerminalDisplay::doDrag()
