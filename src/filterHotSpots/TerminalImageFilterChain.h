@@ -34,7 +34,7 @@ class TerminalDisplay;
 class TerminalImageFilterChain : public FilterChain
 {
 public:
-    TerminalImageFilterChain(TerminalDisplay *terminalDisplay);
+    explicit TerminalImageFilterChain(TerminalDisplay *terminalDisplay);
     ~TerminalImageFilterChain() override;
 
     /**
