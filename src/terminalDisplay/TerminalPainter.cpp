@@ -220,7 +220,7 @@ namespace Konsole
                     }
                 }
 
-                // Apply text scalling matrix
+                // Apply text scaling matrix
                 paint.setWorldTransform(QTransform(textScale), true);
 
                 // Calculate the area in which the text will be drawn

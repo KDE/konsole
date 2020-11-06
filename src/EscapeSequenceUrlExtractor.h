@@ -84,8 +84,8 @@ public:
      */
     EscapeSequenceUrlExtractor();
 
-    /* This is a list of URI schemas that are going to be supported, separated by semicollon.
-     * like https://;ile://
+    /* This is a list of URI schemas that are going to be supported, separated by semicolon.
+     * like https://;file://
      */
     void setAllowedLinkSchema(const QStringList& allowedSchemas);
 

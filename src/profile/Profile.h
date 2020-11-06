@@ -316,7 +316,7 @@ public:
          */
         AllowEscapedLinks,
         /** (String) Escape Sequence for Links schema,
-         * This tell us what kinf of links are accepted, for security reaosn we can't accept
+         * This tell us what kind of links are accepted, for security reason we can't accept
          * some weird ones like git:// and ssh:// but if the user wants he can enable.
          */
         EscapedLinksSchema,
