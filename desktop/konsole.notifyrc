@@ -250,7 +250,7 @@ Action=Popup
 
 [Event/ActivityHidden]
 Name=Activity in Non-Focused Monitored Session
-Name[ast]=Actividá nuna sesión monitorizada ensin el focu
+Name[ast]=Actividá nuna sesión supervisada ensin el focu
 Name[az]=Arxa plandakı, izlənən sesiyada aktivlik
 Name[ca]=Activitat en una sessió controlada sense focus
 Name[ca@valencia]=Activitat en una sessió controlada sense focus
@@ -329,7 +329,7 @@ Action=Popup
 Name=Activity in Monitored Session
 Name[af]=Aktiwiteit in gemonitorde sessie
 Name[ar]=نشاط في الجلسة المُراقبة
-Name[ast]=Actividá nuna sesión monitorizada
+Name[ast]=Actividá nuna sesión supervisada
 Name[az]=İzlənən sesiyada aktivlik
 Name[be@latin]=Pieramieny ŭ adsočvanaj sesii
 Name[bg]=Активност в наблюдаваната сесия
@@ -496,7 +496,7 @@ Action=Popup
 
 [Event/SilenceHidden]
 Name=Silence in Non-Focused Monitored Session
-Name[ast]=Silenciu nun sesión monitorizada ensin el focu
+Name[ast]=Silenciu nun sesión supervisada ensin el focu
 Name[az]=İzlənən aktiv sesiyada sakitlik
 Name[ca]=Silenci en una sessió controlada sense focus
 Name[ca@valencia]=Silenci en una sessió controlada sense focus
@@ -575,7 +575,7 @@ Action=Popup
 Name=Silence in Monitored Session
 Name[af]=Stilte in gemonitorde sessie 
 Name[ar]=لا نشاط في الجلسة المُراقبة
-Name[ast]=Silenciu nuna sesión monitorizada
+Name[ast]=Silenciu nuna sesión supervisada
 Name[az]=İzlənən sesiyada sakitlik
 Name[be@latin]=Cišynia ŭ adsočvanaj sesii
 Name[bg]=Неактивност в наблюдаваната сесия
@@ -742,6 +742,7 @@ Action=Popup
 
 [Event/ProcessFinishedHidden]
 Name=Process finished in Non-Focused Monitored Session
+Name[ast]=Procesu fináu nuna sesión supervisada ensin el focu
 Name[az]=Arxa plandakı izlənən sesiyada əməliyyat başa çatdı
 Name[ca]=El procés ha finalitzat a una sessió controlada sense focus
 Name[ca@valencia]=El procés ha finalitzat a una sessió controlada sense focus
@@ -769,6 +770,7 @@ Name[uk]=У нефокусованому сеансі спостереження
 Name[x-test]=xxProcess finished in Non-Focused Monitored Sessionxx
 Name[zh_CN]=未取得焦点的被监视会话中的进程完成
 Comment=Process finished in a non-focused monitored session
+Comment[ast]=Un procesu finó nuna sesión supervisada ensin el focu
 Comment[az]=Arxa plandakı, izlənən sesiyada əməliyyat başa çatdı
 Comment[ca]=El procés ha finalitzat a una sessió controlada sense focus
 Comment[ca@valencia]=El procés ha finalitzat a una sessió controlada sense focus
@@ -799,6 +801,7 @@ Action=Popup
 
 [Event/ProcessFinished]
 Name=Process finished in Monitored Session
+Name[ast]=Procesu fináu nuna sesión supervisáu
 Name[az]=İzlənən sesiyada əməliyyat başa çatdı
 Name[ca]=El procés ha finalitzat a una sessió controlada
 Name[ca@valencia]=El procés ha finalitzat a una sessió controlada
@@ -827,6 +830,7 @@ Name[uk]=У сеансі спостереження завершено проц�
 Name[x-test]=xxProcess finished in Monitored Sessionxx
 Name[zh_CN]=被监视会话中的进程完成
 Comment=Process finished in a monitored session
+Comment[ast]=Un procesu finó nuna sesión supervisada
 Comment[az]=İzlənən sesiyada əməliyyat başa çatdı
 Comment[ca]=El procés ha finalitzat a una sessió controlada
 Comment[ca@valencia]=El procés ha finalitzat a una sessió controlada
