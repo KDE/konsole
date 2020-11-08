@@ -6,9 +6,11 @@ set (RELEASE_SERVICE_VERSION_MINOR "03")
 set (RELEASE_SERVICE_VERSION_MICRO "70")
 set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
 
+# Do not increase these requirements without a merge-request or/and
+# approval from maintainer(s).
 # minimal requirements
 cmake_minimum_required (VERSION 3.0 FATAL_ERROR)
-# Qt 5.12 LTS EOL May 2021
+# Qt 5.12 LTS EOL December 2021
 set (QT_MIN_VERSION "5.12.0")
 
 # Ubuntu 20.04 LTS only has KF 5.68 and Qt 5.12
