@@ -1070,6 +1070,11 @@ void ViewManager::setCurrentSession(int sessionId)
     auto *display = session->views().at(0);
     if (display != nullptr) {
         display->setFocus(Qt::OtherFocusReason);
+
+        auto *splitter = qobject_cast<ViewSplitter *>(display->parent());
+        if (splitter != nullptr) {
+                _viewContainer->setCurrentWidget(splitter->getToplevelSplitter());
+        }
     }
 }
 
