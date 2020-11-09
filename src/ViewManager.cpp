@@ -1044,8 +1044,11 @@ QStringList ViewManager::sessionList()
 {
     QStringList ids;
 
-    for (auto sdsp : _sessionMap) {
-        ids.append( QString::number( sdsp->session()->sessionId() ) );
+    for (int i = 0; i < _viewContainer->count(); i++) {
+        auto terminaldisplayList = _viewContainer->widget(i)->findChildren<TerminalDisplay *>();
+        for (auto *terminaldisplay : terminaldisplayList) {
+            ids.append(QString::number(terminaldisplay->sessionController()->session()->sessionId()));
+        }
     }
 
     return ids;

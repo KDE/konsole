@@ -251,7 +251,7 @@ public Q_SLOTS:
 
     /**
      * DBus slot that returns the unique ids of the sessions in the
-     * current view.  The returned list is not sorted.
+     * current view.  The returned list is ordered by tab.
      * QList<int> is not printable by qdbus so we use QStringList
      */
     Q_SCRIPTABLE QStringList sessionList();
