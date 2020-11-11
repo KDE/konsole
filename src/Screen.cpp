@@ -384,43 +384,55 @@ void Screen::resizeImage(int new_lines, int new_columns)
         }
     }
 
-    if (new_columns < _columns) {
+    if (new_columns != _columns) {
+        // Random not printable char to mark nextline
+        const auto NextLine = Character(130, 
+                            CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_FORE_COLOR),
+                            CharacterColor(COLOR_SPACE_DEFAULT, DEFAULT_BACK_COLOR),
+                            DEFAULT_RENDITION,
+                            false);
         QVector<ImageLine> images;
         // First copy everything.
         for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++) {
+            // if the line have the 'NextLine' char, concat with the next line before push_back.
+            if (_screenLines[i].count() && _screenLines[i].at(_screenLines[i].count() - 1) == NextLine) {
+                _screenLines[i].pop_back();
+                _screenLines[i].append(_screenLines[i + 1]);
+                _screenLines[i + 1] = _screenLines[i];
+                _cuY--;
+                continue;
+            }
             images.push_back(_screenLines[i]);
         }
 
         // Then move the data to lines below.
         int currentPos = 0;
         while (currentPos != images.count()) {
-
-            // If we are in the last line, append a new one.
             const bool shouldCopy = images[currentPos].size() > new_columns;
-            if (shouldCopy && images.count() - 1 == currentPos) {
-                images.append(ImageLine{});
-            }
 
-            // Now copy from the current line, to the next one.
+            // Copy from the current line, to the next one.
             if (shouldCopy) {
+                // If we are in the last line, append a new one.
+                if (currentPos == images.count() - 1) {
+                    images.append(ImageLine{});
+                }
+
                 auto values = images[currentPos].mid(new_columns);
                 images[currentPos].remove(new_columns, values.size());
-                values.append(images[currentPos+1]);
-                images[currentPos+1] = values;
+                images[currentPos].append(NextLine);
+                images.insert(currentPos + 1, values);
+                _cuY++;
             }
             currentPos += 1;
         }
 
         // Now set the correct image based on the moved lines.
         auto newScreenLines = new ImageLine[new_lines + 1];
-        for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++) {
+        for (int i = 0; i < qMin(images.count(), new_lines + 1) ; i++) {
             newScreenLines[i] = images[i];
         }
         delete[] _screenLines;
         _screenLines = newScreenLines;
-    } else if (new_columns > _columns) {
-
-
     } else {
         auto newScreenLines = new ImageLine[new_lines + 1];
         for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++) {
