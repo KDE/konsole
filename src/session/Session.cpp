@@ -182,10 +182,12 @@ void Session::openTeletype(int fd, bool runShell)
             this, &Konsole::Session::done);
 
     // emulator size
-    // Use a direct connection to ensure that the window size is set before it runs
-    connect(_emulation, &Konsole::Emulation::imageSizeChanged, this, &Konsole::Session::updateWindowSize, Qt::DirectConnection);
+    connect(_emulation, &Konsole::Emulation::imageSizeChanged, this, &Konsole::Session::updateWindowSize);
     if (fd < 0 || runShell) {
-        connect(_emulation, &Konsole::Emulation::imageSizeInitialized, this, &Konsole::Session::run);
+        // Using a queued connection guarantees that starting the session
+        // is delayed until all (both) image size updates at startup have
+        // been processed. See #203185 and #412598.
+        connect(_emulation, &Konsole::Emulation::imageSizeInitialized, this, &Konsole::Session::run, Qt::QueuedConnection);
     } else {
         // run needs to be disconnected, as it may be already connected by the constructor
         disconnect(_emulation, &Konsole::Emulation::imageSizeInitialized, this, &Konsole::Session::run);
