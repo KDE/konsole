@@ -11,6 +11,7 @@
 // Qt
 #include <QSet>
 #include <QTextStream>
+#include <QDebug>
 
 // Konsole decoders
 #include <PlainTextDecoder.h>
@@ -366,21 +367,10 @@ void Screen::restoreCursor()
     updateEffectiveRendition();
 }
 
-#include <QDebug>
-
 void Screen::resizeImage(int new_lines, int new_columns)
 {
     if ((new_lines == _lines) && (new_columns == _columns)) {
         return;
-    }
-
-    if (_cuY > new_lines - 1) {
-        // attempt to preserve focus and _lines
-        _bottomMargin = _lines - 1; //FIXME: margin lost
-        for (int i = 0; i < _cuY - (new_lines - 1); i++) {
-            addHistLine();
-            scrollUp(0, 1);
-        }
     }
 
     if (new_columns != _columns) {
@@ -392,6 +382,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
                             false);
         // First join everything.
         int currentPos = 0;
+        int count_needed_lines = 0;
         while (currentPos != _screenLines.count()) {
             // if the line have the 'NextLine' char, concat with the next line and remove it.
             if (_screenLines[currentPos].count() && _screenLines[currentPos].at(_screenLines[currentPos].count() - 1) == NextLine) {
@@ -401,7 +392,20 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _cuY--;
                 continue;
             }
+            count_needed_lines += _screenLines[currentPos].count() / (new_columns + 1);
             currentPos++;
+        }
+
+        // If it will need more lines than new_lines have, send lines to _history
+        count_needed_lines += _cuY;
+        if (count_needed_lines > new_lines - 1) {
+            _screenLines.resize(_lines + 1);
+            // attempt to preserve focus and _lines
+            _bottomMargin = _lines - 1; //FIXME: margin lost
+            for (int i = 0; i < count_needed_lines - (new_lines - 1); i++) {
+                addHistLine();
+                scrollUp(0, 1);
+            }
         }
 
         // Then move the data to lines below.
@@ -426,6 +430,14 @@ void Screen::resizeImage(int new_lines, int new_columns)
         }
         _screenLines.resize(new_lines + 1);
     } else {
+        if (_cuY > new_lines - 1) {
+            // attempt to preserve focus and _lines
+            _bottomMargin = _lines - 1; //FIXME: margin lost
+            for (int i = 0; i < _cuY - (new_lines - 1); i++) {
+                addHistLine();
+                scrollUp(0, 1);
+            }
+        }
        _screenLines.resize(new_lines + 1);
     }
 
