@@ -653,7 +653,7 @@ private:
     int _columns;
 
     typedef QVector<Character> ImageLine;      // [0..columns]
-    ImageLine *_screenLines;             // [lines]
+    QVector<ImageLine> _screenLines;             // [lines]
     int _screenLinesSize;                // _screenLines.size()
 
     int _scrolledLines;
