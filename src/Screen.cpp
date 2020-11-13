@@ -408,15 +408,11 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
     // Then move the data to lines below.
     currentPos = 0;
-    while (currentPos != _screenLines.count()) {
+    while (currentPos != _screenLines.count() && currentPos != _cuY) {
         const bool shouldCopy = _screenLines[currentPos].size() > new_columns;
 
         // Copy from the current line, to the next one.
         if (shouldCopy) {
-            // If we are in the last line, append a new one.
-            if (currentPos == _screenLines.count() - 1) {
-                _screenLines.append(ImageLine{});
-            }
             _cuY++;
 
             auto values = _screenLines[currentPos].mid(new_columns);
