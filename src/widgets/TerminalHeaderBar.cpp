@@ -1,6 +1,4 @@
 /*
- *  This file is part of Konsole, a terminal emulator for KDE.
- *
  *  SPDX-FileCopyrightText: 2019 Tomaz Canabrava <tcanabrava@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later

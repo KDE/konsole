@@ -1,6 +1,4 @@
 /*
-    This file is part of Konsole, a terminal emulator for KDE.
-
     SPDX-FileCopyrightText: 2018-2019 Mariusz Glebocki <mglb@arccos-1.net>
     SPDX-FileCopyrightText: 2018 Martin T. H. Sandsmark <martin.sandsmark@kde.org>
     SPDX-FileCopyrightText: 2015-2018 Kurt Hindenburg <kurt.hindenburg@gmail.com>

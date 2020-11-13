@@ -1,6 +1,4 @@
 /*
-    This file is part of Konsole, an X terminal.
-
     SPDX-FileCopyrightText: 2015 René J.V. Bertin <rjvbertin@gmail.com>
 
     SPDX-License-Identifier: GPL-2.0-or-later

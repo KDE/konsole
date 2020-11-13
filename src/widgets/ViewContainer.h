@@ -1,6 +1,4 @@
 /*
-    This file is part of the Konsole Terminal.
-
     SPDX-FileCopyrightText: 2006-2008 Robert Knight <robertknight@gmail.com>
 
     SPDX-License-Identifier: GPL-2.0-or-later

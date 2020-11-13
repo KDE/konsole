@@ -1,6 +1,4 @@
 /*
-    This file is part of Konsole
-
     SPDX-FileCopyrightText: 2006-2008 Robert Knight <robertknight@gmail.com>
     SPDX-FileCopyrightText: 1997, 1998 Lars Doelle <lars.doelle@on-line.de>
     SPDX-FileCopyrightText: 2009 Thomas Dreibholz <dreibh@iem.uni-due.de>
