@@ -29,6 +29,7 @@
 #include <QDrag>
 #include <QDesktopServices>
 #include <QAccessible>
+#include <QElapsedTimer>
 
 // KDE
 #include <KShell>
@@ -1900,15 +1901,21 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
 
 void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 {
+    static QElapsedTimer enable_zoom_timer;
+    static bool enable_zoom = true;
     // Only vertical scrolling is supported
     if (qAbs(ev->angleDelta().y()) < qAbs(ev->angleDelta().x())) {
         return;
     }
 
+    if (enable_zoom_timer.isValid() && enable_zoom_timer.elapsed() > 1000) {
+        enable_zoom = true;
+    }
+
     const int modifiers = ev->modifiers();
 
     // ctrl+<wheel> for zooming, like in konqueror and firefox
-    if (((modifiers & Qt::ControlModifier) != 0u) && _mouseWheelZoom) {
+    if (((modifiers & Qt::ControlModifier) != 0u) && _mouseWheelZoom && enable_zoom) {
         _scrollWheelState.addWheelEvent(ev);
 
         int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
@@ -1920,6 +1927,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             // wheel-down for decreasing font size
             decreaseFontSize();
         }
+        return;
     } else if (!_usesMouseTracking && (_scrollBar->maximum() > 0)) {
         // If the program running in the terminal is not interested in Mouse
         // Tracking events, send the event to the scrollbar if the slider
@@ -1982,6 +1990,8 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             }
         }
     }
+    enable_zoom_timer.start();
+    enable_zoom = false;
 }
 
 void TerminalDisplay::viewScrolledByUser()
