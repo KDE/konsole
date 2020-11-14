@@ -1,0 +1,97 @@
+#!/bin/bash
+# Add this to your konsole/.git/hooks/ folder to prevent push if message is not following commit-template
+# In your konsole folder type:
+# cp ./doc/developer/pre-push ./.git/hooks/pre-push && chmod +x ./.git/hooks/pre-push
+
+# Get the current branch and apply it to a variable
+currentbranch=`git branch | grep \* | cut -d ' ' -f2`
+
+# Gets the commits for the current branch and outputs to file
+git log $currentbranch --pretty=format:"%H" --not master > shafile.txt
+
+if [ ! -f "./shafile.txt" ]
+then
+      echo "It is not possible to write temporary files"
+      echo "Check Read/Write permissions or remove this"
+      echo "pre-push check" 
+      exit 1
+fi
+
+if [ ! -s "./shafile.txt" ]
+then
+      # if size is 0 there is no commit
+      rm shafile.txt  >/dev/null 2>&1
+      exit 0
+fi
+
+echo '
+====================
+Commit Message Check
+====================
+'
+
+#colors used here
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+passedall=0
+# loops through the file an gets the messages
+for i in `cat ./shafile.txt`;
+do
+      passed=0
+      # gets the git commit message based on the sha
+      git log --format=%B -n 1 "$i" > logfile.txt
+      # load this message to an array
+      mapfile -t gitmessage < ./logfile.txt
+
+      # commit title
+      echo "- ${gitmessage[0]}"
+
+      # analise each line
+      for (( nline=0; nline<${#gitmessage[@]}+1; nline++ ));
+      do
+            line=${gitmessage[$nline]}
+            if [ ${#line} -gt 72 ]
+            then
+                  echo -e "     ${RED}*${NC} You MUST wrap all lines at 72 characters."
+                  passed=1
+            fi
+
+            if [[ $nline -eq 1 && ${#line} -gt 0 ]]
+            then
+                  echo -e "     ${RED}*${NC} Follow the Subject with a blank line."
+                  passed=1
+            fi
+
+            messagecheck=`echo $line | grep -w "BUG\|FEATURE\|FIXED-IN\|CCBUG\|CCMAIL\|GUI\|CHANGELOG"`
+            if [ -n "$messagecheck" ]
+            then
+                  messagecheck=`echo $line | grep ': '`
+                  if [ -z "$messagecheck" ]
+                  then 
+                        echo -e "     ${RED}*${NC} Your commit message has a formatting error."
+                        echo "       Type ' ' after field specification"
+                        echo "       -> $line"
+                        passed=1
+                  fi
+            fi
+      done
+
+      # Check if all passed
+      if [ $passed -gt 0 ]
+      then
+            echo -e "  Commit message ${RED}FAILED${NC}"
+            passedall=1
+      else
+            echo -e "  Commit message ${GREEN}PASSED${NC}"
+      fi
+      echo ""
+done
+# remove temporary files
+rm shafile.txt  >/dev/null 2>&1
+rm logfile.txt  >/dev/null 2>&1
+# Test mode remove the next '#' to test it
+#exit 1 
+# If all passed in the check it will exit 0
+exit $passedall
