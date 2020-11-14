@@ -49,12 +49,8 @@
     <ToolBar name="mainToolBar">
         <text>Main Toolbar</text>
         <index>0</index>
-        <Action name="new-window"/>
         <Action name="new-tab"/>
         <Action name="split-view-left-right"/>
         <Action name="split-view-top-bottom"/>
-        <Action name="close-active-view"/>
-        <Action name="close-other-views"/>
-        <Separator/>
     </ToolBar>
 </kpartgui>

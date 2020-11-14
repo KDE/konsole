@@ -62,17 +62,9 @@
     <ToolBar name="sessionToolbar">
         <text>Session Toolbar</text>
         <index>1</index>
-        <Action name="switch-profile"/>
-        <Separator/>
+        <Spacer/>
         <Action name="edit_copy" />
         <Action name="edit_paste" />
-        <Separator/>
-        <Action name="monitor-silence" group="session-view-operations"/>
-        <Action name="monitor-activity" group="session-view-operations"/>
-        <Action name="monitor-process-finish" group="session-view-operations"/>
-        <Spacer/>
-        <Action name="enlarge-font" group="session-view-operations"/>
-        <Action name="shrink-font" group="session-view-operations"/>
         <Action name="edit_find" />
     </ToolBar>
 </kpartgui>
