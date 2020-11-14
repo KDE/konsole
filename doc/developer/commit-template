@@ -1,0 +1,42 @@
+# Add this to your .gitconfig after renaming/moving/etc
+#[commit]
+#    template = ~/.commit-template
+#
+#  Please enter the commit message for your changes. Lines starting
+#  with '#' will be ignored, and an empty message aborts the commit.
+#  You MUST wrap all lines at 72 characters.
+#  https://community.kde.org/Policies/Commit_Policy
+#  https://community.kde.org/Infrastructure/GitLab#Write_a_good_commit_message
+#  For Git commit hook keywords see:
+#  https://community.kde.org/Policies/Commit_Policy#Special_keywords_in_GIT_and_SVN_log_messages
+# ==[ Subject: One line ONLY short meaningful description for logs ]===|
+
+# ==[ Blank: Follow the Subject with a blank line, do NOT remove ]=====|
+
+# ==[ Details: Describe what changed and explain why it changed]=======|
+
+
+# ==[ Fields: Uncomment and edit where applicable ]====================|
+# --[ Close bug in bugs.kde.org as fixed ]-----------------------------|
+#BUG: <bug number>
+#FIXED-IN: <optional release version>
+# --[ Add to release changelog optionally close wish in bugs.kde.org ]-|
+#FEATURE: <optional bug number>
+#FIXED-IN: <optional release version>
+# --[ Copy commit message to a bug or wish in bugs.kde.org ]-----------|
+#CCBUG: <bug number>
+# --[ Copy commit message to an email address ]------------------------|
+#CCMAIL: <email>
+#
+# --[ Notify documentation team of user visible changes ]--------------|
+#GUI:
+#
+# --[ Notify team of something interesting ]-------------|
+#CHANGELOG:
+#
+# --[ Mark commit as silent for commit filter filtering. ]-------------|
+#   [ Use sparingly and only for uninteresting and       ]
+#   [ uncontroversial commits.                           ]
+#GIT_SILENT
+#
+
