@@ -7,7 +7,6 @@
 #ifndef PARTTEST_H
 #define PARTTEST_H
 
-
 #include <kde_terminal_interface.h>
 #include <KParts/Part>
 

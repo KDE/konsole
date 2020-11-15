@@ -4,7 +4,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
 #ifndef SCREENTEST_H
 #define SCREENTEST_H
 

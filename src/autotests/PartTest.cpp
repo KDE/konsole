@@ -123,7 +123,6 @@ void PartTest::testFd(bool runShell)
     ptyProcess.waitForFinished(1000);
 }
 
-
 KParts::Part *PartTest::createPart()
 {
     auto konsolePartPlugin = KPluginLoader::findPlugin(QStringLiteral("konsolepart"));

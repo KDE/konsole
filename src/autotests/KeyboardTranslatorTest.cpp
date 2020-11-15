@@ -38,7 +38,6 @@ void KeyboardTranslatorTest::testEntryTextWildcards_data()
     QTest::newRow("Home yes wildcards Alt modifiers")<< QByteArray("Home") << QByteArray("Home") << true << Qt::KeyboardModifiers(Qt::AltModifier);
     QTest::newRow("Home yes wildcards Control modifiers")<< QByteArray("Home") << QByteArray("Home") << true << Qt::KeyboardModifiers(Qt::ControlModifier);
 
-
     // text, results: no mod, shift, alt, control
     QList<QByteArray> entry;
     entry << QByteArray("E*") << QByteArray("E1") << QByteArray("E2") << QByteArray("E3") << QByteArray("E5");
