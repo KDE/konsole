@@ -3,9 +3,9 @@
  * <https://github.com/hsluv/hsluv-c>
  * <https://www.hsluv.org/>
  *
- * Copyright (c) 2015 Alexei Boronine (original idea, JavaScript implementation)
- * Copyright (c) 2015 Roger Tallada (Obj-C implementation)
- * Copyright (c) 2017 Martin Mitas (C implementation, based on Obj-C implementation)
+ * Copyright (c) 2015 Alexei Boronine <alexei@boronine.com> (original idea, JavaScript implementation)
+ * Copyright (c) 2015 Roger Tallada <roger.tallada@gmail.com> (Obj-C implementation)
+ * Copyright (c) 2017 Martin Mitas <mity@morous.org> (C implementation, based on Obj-C implementation)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),

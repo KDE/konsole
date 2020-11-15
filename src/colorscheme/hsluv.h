@@ -3,9 +3,9 @@
  * <https://github.com/hsluv/hsluv-c>
  * <https://www.hsluv.org/>
  *
- * Copyright (c) 2015 Alexei Boronine (original idea, JavaScript implementation)
- * Copyright (c) 2015 Roger Tallada (Obj-C implementation)
- * Copyright (c) 2017 Martin Mitas (C implementation, based on Obj-C implementation)
+ * Copyright (c) 2015 Alexei Boronine <alexei@boronine.com> (original idea, JavaScript implementation)
+ * Copyright (c) 2015 Roger Tallada <roger.tallada@gmail.com> (Obj-C implementation)
+ * Copyright (c) 2017 Martin Mitas <mity@morous.org> (C implementation, based on Obj-C implementation)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -79,9 +79,6 @@ void hpluv2rgb(double h, double s, double l, double* pr, double* pg, double* pb)
  * @param[out] ph Hue. Between 0.0 and 360.0.
  * @param[out] ps Saturation. Between 0.0 and 100.0.
  * @param[out] pl Lightness. Between 0.0 and 100.0.
- *
- * Note that HPLuv does not contain all the colors of RGB, so converting
- * arbitrary RGB to it may generate invalid HPLuv colors.
  */
 void rgb2hpluv(double r, double g, double b, double* ph, double* ps, double* pl);
 
