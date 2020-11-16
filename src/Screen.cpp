@@ -376,7 +376,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     // First join everything.
     int currentPos = 0;
     int count_needed_lines = 0;
-    while (currentPos != _screenLines.count()) {
+    while (currentPos != _screenLines.count() - 1) {
         // if the line have the 'NextLine' char, concat with the next line and remove it.
         if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
             _screenLines[currentPos].append(_screenLines[currentPos + 1]);
