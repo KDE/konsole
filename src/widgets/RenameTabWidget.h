@@ -46,6 +46,7 @@ public Q_SLOTS:
 
 private:
     Ui::RenameTabWidget *_ui;
+    QColor _colorNone;
 };
 }
 

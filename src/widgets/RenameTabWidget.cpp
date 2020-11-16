@@ -28,10 +28,13 @@ RenameTabWidget::RenameTabWidget(QWidget *parent) :
     _ui->tabTitleEdit->setClearButtonEnabled(true);
     _ui->remoteTabTitleEdit->setClearButtonEnabled(true);
 
+    _colorNone = palette().base().color(); // so that item's text is visible in the combo-box
+    _colorNone.setAlpha(0);
+
     QList<QColor> listColors(_ui->tabColorCombo->colors());
-    listColors.insert(0, QColor(QColor::Invalid));
+    listColors.insert(0, _colorNone);
     _ui->tabColorCombo->setColors(listColors);
-    _ui->tabColorCombo->setItemText(1, i18n("Color from theme"));
+    _ui->tabColorCombo->setItemText(1, i18n("None"));
 
     connect(_ui->tabTitleEdit, &QLineEdit::textChanged, this,
             &Konsole::RenameTabWidget::tabTitleFormatChanged);
@@ -76,7 +79,11 @@ void RenameTabWidget::setRemoteTabTitleText(const QString &text)
 
 void RenameTabWidget::setColor(const QColor &color)
 {
-    _ui->tabColorCombo->setColor(color);
+    if (!color.isValid() || color.alpha() == 0) {
+        _ui->tabColorCombo->setColor(_colorNone);
+    } else {
+        _ui->tabColorCombo->setColor(color);
+    }
 }
 
 QString RenameTabWidget::tabTitleText() const

@@ -158,7 +158,7 @@ void DetachableTabBar::paintEvent(QPaintEvent *event)
         }
 
         QColor varColor = data.value<QColor>();
-        if (!varColor.isValid()) {
+        if (!varColor.isValid() || varColor.alpha() == 0) {
             continue;
         }
 
