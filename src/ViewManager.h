@@ -242,6 +242,11 @@ public Q_SLOTS:
      * DBus slot that returns the unique ids of the sessions in the
      * current view.  The returned list is ordered by tab.
      * QList<int> is not printable by qdbus so we use QStringList
+     * Example:
+     *  A) create tab, create tab 2, create tab 3, go to tab 2, split view
+     *     sessionList() returns 1 4 2 3
+     *  B) create tab, create tab 2, split view, create tab 3
+     *     sessionList() returns 1 3 2 4
      */
     Q_SCRIPTABLE QStringList sessionList();
 
