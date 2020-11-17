@@ -15,8 +15,9 @@ using namespace Konsole;
 // used for finding URLs in the text, especially if they are very general and could match very long
 // pieces of text.
 // Please be careful when altering them.
-// protocolname:// or www. followed by anything other than whitespaces, <, >, ' or ", and ends before whitespaces, <, >, ', ", ], !, ), :, comma and dot
-const QRegularExpression UrlFilter::FullUrlRegExp(QStringLiteral("(www\\.(?!\\.)|[a-z][a-z0-9+.-]*://)[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]\\)\\:]"));
+// protocolname:// or www. followed by anything other than whitespaces, <, >, ', ", ], !, ), : and comma, and ends before whitespaces, <, >, ', ", ], !, ), :, comma and dot
+// I. e. it can end with anything as a part of the URL except .
+const QRegularExpression UrlFilter::FullUrlRegExp(QStringLiteral("(www\\.(?!\\.)|[a-z][a-z0-9+.-]*://)[^!,\\s<>'\"\\]\\)\\:]+[^!,\\.\\s<>'\"\\]\\)\\:]"));
 
 // email address:
 // [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]
