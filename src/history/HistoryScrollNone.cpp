@@ -51,3 +51,11 @@ void HistoryScrollNone::addCells(const Character [], int)
 void HistoryScrollNone::addLine(bool)
 {
 }
+
+void HistoryScrollNone::setCellsVectorAt(int , const QVector<Character> &)
+{
+}
+
+void HistoryScrollNone::setLineAt(int , bool)
+{
+}

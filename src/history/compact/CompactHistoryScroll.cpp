@@ -91,6 +91,21 @@ void CompactHistoryScroll::setMaxNbLines(unsigned int lineCount)
     ////qDebug() << "set max lines to: " << _maxLineCount;
 }
 
+void CompactHistoryScroll::setCellsVectorAt(int position, const TextLine &cells)
+{
+    CompactHistoryLine *line = new(_blockList) CompactHistoryLine(cells, _blockList);
+
+    delete _lines.takeAt(position);
+    _lines.insert(position, line);
+}
+
+void CompactHistoryScroll::setLineAt(int position, bool previousWrapped)
+{
+    CompactHistoryLine *line = _lines.at(position);
+
+    line->setWrapped(previousWrapped);
+}
+
 bool CompactHistoryScroll::isWrappedLine(int lineNumber)
 {
     Q_ASSERT(lineNumber < _lines.size());

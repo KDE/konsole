@@ -32,6 +32,9 @@ public:
 
     void addCells(const Character a[], int count) override;
     void addLine(bool previousWrapped = false) override;
+
+    void setCellsVectorAt(int position, const QVector<Character> &cells) override;
+    void setLineAt(int position, bool previousWrapped) override;
 };
 
 }

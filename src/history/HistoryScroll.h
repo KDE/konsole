@@ -47,6 +47,10 @@ public:
 
     virtual void addLine(bool previousWrapped = false) = 0;
 
+    // modify history
+    virtual void setCellsVectorAt(int position, const QVector<Character> &cells) = 0;
+    virtual void setLineAt(int position, bool previousWrapped) = 0;
+
     //
     // FIXME:  Passing around constant references to HistoryType instances
     // is very unsafe, because those references will no longer

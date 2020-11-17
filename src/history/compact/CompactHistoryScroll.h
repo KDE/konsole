@@ -33,6 +33,8 @@ public:
     void addLine(bool previousWrapped = false) override;
 
     void setMaxNbLines(unsigned int lineCount);
+    void setCellsVectorAt(int position, const TextLine &cells) override;
+    void setLineAt(int position, bool previousWrapped) override;
 
 private:
     bool hasDifferentColors(const TextLine &line) const;

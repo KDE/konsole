@@ -34,6 +34,9 @@ public:
     void addCells(const Character text[], int count) override;
     void addLine(bool previousWrapped = false) override;
 
+    void setCellsVectorAt(int position, const QVector<Character> &cells) override;
+    void setLineAt(int position, bool previousWrapped) override;
+
 private:
     qint64 startOfLine(int lineno);
 

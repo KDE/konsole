@@ -79,3 +79,11 @@ void HistoryScrollFile::addLine(bool previousWrapped)
     unsigned char flags = previousWrapped ? 0x01 : 0x00;
     _lineflags.add(reinterpret_cast<char *>(&flags), sizeof(char));
 }
+
+void HistoryScrollFile::setCellsVectorAt(int , const QVector<Character> &)
+{
+}
+
+void HistoryScrollFile::setLineAt(int , bool)
+{
+}
