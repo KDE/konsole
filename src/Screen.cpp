@@ -1494,26 +1494,46 @@ void Screen::addHistLine()
     // add line to history buffer
     // we have to take care about scrolling, too...
     const int oldHistLines = _history->getLines();
+    int newHistLines = _history->getLines();
+    bool beginIsTL = (_selBegin == _selTopLeft);
+
     if (hasScroll()) {
 
-        _history->addCellsVector(_screenLines[0]);
-        _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
+        // Check if _history have 'new line' property and join lines before adding new ones
+        if (oldHistLines > 0 && _history->isWrappedLine(oldHistLines - 1)) {
+            int hist_linelen = _history->getLineLen(oldHistLines - 1);
+            auto *hist_line = getCharacterBuffer(hist_linelen);
+            _history->getCells(oldHistLines - 1, 0, hist_linelen, hist_line);
 
-        const int newHistLines = _history->getLines();
+            ImageLine joinline;
+            for (int i = 0; i < hist_linelen; i++) {
+                joinline << hist_line[i];
+            }
+            joinline << _screenLines[0];
+            _history->setCellsVectorAt(oldHistLines - 1, joinline);
+            _history->setLineAt(oldHistLines - 1, (_lineProperties[0] & LINE_WRAPPED) != 0);
+        } else {
+            _history->addCellsVector(_screenLines[0]);
+            _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
 
-        const bool beginIsTL = (_selBegin == _selTopLeft);
+            newHistLines = _history->getLines();
+            beginIsTL = (_selBegin == _selTopLeft);
 
-        // If the history is full, increment the count
-        // of dropped _lines
-        if (newHistLines == oldHistLines) {
-            _droppedLines++;
-        }
+            // If the history is full, increment the count
+            // of dropped _lines
+            if (newHistLines == oldHistLines) {
+                _droppedLines++;
+                
+                // We removed a line, we need to verify if we need to remove a URL.
+                _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+            }
 
-        // Adjust selection for the new point of reference
-        if (newHistLines > oldHistLines) {
-            if (_selBegin != -1) {
-                _selTopLeft += _columns;
-                _selBottomRight += _columns;
+            // Adjust selection for the new point of reference
+            if (newHistLines > oldHistLines) {
+                if (_selBegin != -1) {
+                    _selTopLeft += _columns;
+                    _selBottomRight += _columns;
+                }
             }
         }
 
@@ -1543,12 +1563,6 @@ void Screen::addHistLine()
                 _selBegin = _selBottomRight;
             }
         }
-    }
-
-    // We removed a line, we need to verify if we need to remove a URL.
-    const int newHistLines = _history->getLines();
-    if (oldHistLines == newHistLines) {
-        _escapeSequenceUrlExtractor->historyLinesRemoved(1);
     }
 }
 
