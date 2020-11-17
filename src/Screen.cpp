@@ -377,7 +377,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     int currentPos = 0;
     int count_needed_lines = 0;
     while (currentPos != _screenLines.count() - 1) {
-        // if the line have the 'NextLine' char, concat with the next line and remove it.
+        // if the line have the 'LINE_WRAPPED' property, concat with the next line and remove it.
         if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
             _screenLines[currentPos].append(_screenLines[currentPos + 1]);
             _screenLines.remove(currentPos + 1);
@@ -417,9 +417,9 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
             auto values = _screenLines[currentPos].mid(new_columns);
             _screenLines[currentPos].remove(new_columns, values.size());
-            _lineProperties[currentPos] = _lineProperties[currentPos] | LINE_WRAPPED;
+            _lineProperties.insert(currentPos + 1, _lineProperties[currentPos]);
             _screenLines.insert(currentPos + 1, values);
-            _lineProperties.insert(currentPos + 1, LINE_DEFAULT);
+            _lineProperties[currentPos] |= LINE_WRAPPED;
         }
         currentPos += 1;
     }
