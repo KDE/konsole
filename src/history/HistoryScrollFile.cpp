@@ -80,6 +80,22 @@ void HistoryScrollFile::addLine(bool previousWrapped)
     _lineflags.add(reinterpret_cast<char *>(&flags), sizeof(char));
 }
 
+void HistoryScrollFile::insertCells(int , const Character [], int)
+{
+}
+
+void HistoryScrollFile::removeCells(int )
+{
+}
+
+void HistoryScrollFile::insertCellsVector(int , const QVector<Character> &)
+{
+}
+
+void HistoryScrollFile::setCellsAt(int , const Character [], int)
+{
+}
+
 void HistoryScrollFile::setCellsVectorAt(int , const QVector<Character> &)
 {
 }

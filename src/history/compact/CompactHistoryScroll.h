@@ -32,7 +32,12 @@ public:
     void addCellsVector(const TextLine &cells) override;
     void addLine(bool previousWrapped = false) override;
 
+    void insertCellsVector(int position, const TextLine &cells) override;
+    void insertCells(int position, const Character a[], int count) override;
+    void removeCells(int position) override;
+
     void setMaxNbLines(unsigned int lineCount);
+    void setCellsAt(int position, const Character a[], int count) override;
     void setCellsVectorAt(int position, const TextLine &cells) override;
     void setLineAt(int position, bool previousWrapped) override;
 

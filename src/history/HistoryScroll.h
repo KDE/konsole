@@ -48,6 +48,10 @@ public:
     virtual void addLine(bool previousWrapped = false) = 0;
 
     // modify history
+    virtual void insertCellsVector(int position, const QVector<Character> &cells) = 0;
+    virtual void insertCells(int position, const Character a[], int count) = 0;
+    virtual void removeCells(int position) = 0;
+    virtual void setCellsAt(int position, const Character a[], int count) = 0;
     virtual void setCellsVectorAt(int position, const QVector<Character> &cells) = 0;
     virtual void setLineAt(int position, bool previousWrapped) = 0;
 
