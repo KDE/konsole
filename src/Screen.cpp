@@ -439,6 +439,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 int curr_linelen = _history->getLineLen(currentPos);
                 int next_linelen = _history->getLineLen(currentPos + 1);
                 auto *new_line = getCharacterBuffer(curr_linelen + next_linelen);
+                bool new_line_property = _history->isWrappedLine(currentPos + 1);
 
                 // Join the lines
                 _history->getCells(currentPos, 0, curr_linelen, new_line);
@@ -446,25 +447,26 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
                 // save the new_line in history and remove the next line
                 _history->setCellsAt(currentPos, new_line, curr_linelen + next_linelen);
-                _history->setLineAt(currentPos, _history->isWrappedLine(currentPos + 1));
+                _history->setLineAt(currentPos, new_line_property);
                 _history->removeCells(currentPos + 1);
             }
             currentPos++;
         }
         // Move data to next line if needed
         currentPos = 0;
-        while (currentPos < _history->getLines() - 1) {
+        while (currentPos < _history->getLines()) {
             int curr_linelen = _history->getLineLen(currentPos);
 
             // if the current line > new_columns it will need a new line
             if (curr_linelen > new_columns) {
                 auto *curr_line = getCharacterBuffer(curr_linelen);
+                bool curr_line_property = _history->isWrappedLine(currentPos);
                 _history->getCells(currentPos, 0, curr_linelen, curr_line);
                 
                 _history->setCellsAt(currentPos, curr_line, new_columns);
                 _history->setLineAt(currentPos, true);
                 _history->insertCells(currentPos + 1, curr_line + new_columns, curr_linelen - new_columns);
-                _history->setLineAt(currentPos + 1, false);
+                _history->setLineAt(currentPos + 1, curr_line_property);
             }
             currentPos++;
         }
@@ -1545,11 +1547,13 @@ void Screen::addHistLine()
             _history->getCells(oldHistLines - 1, 0, hist_linelen, hist_line);
 
             // Join the new line into the old line
-            memcpy(hist_line + hist_linelen, _screenLines[0].data(), _screenLines[0].count());
+            for (int i = 0; i < _screenLines[0].count(); i++) {
+                hist_line[hist_linelen + i] = _screenLines[0][i];
+            }
             hist_linelen += _screenLines[0].count();
 
             // After join, check if it needs new line in history to show it on scroll
-            if (hist_linelen > _columns) {              
+            if (hist_linelen > _columns) {
                 _history->setCellsAt(oldHistLines - 1, hist_line, _columns);
                 _history->setLineAt(oldHistLines - 1, true);
                 _history->addCells(hist_line + _columns, hist_linelen - _columns);
@@ -1584,7 +1588,6 @@ void Screen::addHistLine()
                 // We removed a line, we need to verify if we need to remove a URL.
                 _escapeSequenceUrlExtractor->historyLinesRemoved(1);
             }
-
         }
 
         bool beginIsTL = (_selBegin == _selTopLeft);
