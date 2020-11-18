@@ -376,7 +376,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     // First join everything.
     int currentPos = 0;
     int count_needed_lines = 0;
-    while (currentPos != _screenLines.count() - 1) {
+    while (currentPos < _screenLines.count() - 1) {
         // if the line have the 'LINE_WRAPPED' property, concat with the next line and remove it.
         if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
             _screenLines[currentPos].append(_screenLines[currentPos + 1]);
@@ -429,6 +429,45 @@ void Screen::resizeImage(int new_lines, int new_columns)
     }
     _screenLines.resize(new_lines + 1);
 
+    // Check if _history need to change
+    if (new_columns != _columns && _history->getLines()) {
+        // Join next line history
+        currentPos = 0;
+        while (currentPos < _history->getLines() - 1) {
+            // if it's true, join the line with next line
+            if (_history->isWrappedLine(currentPos)) {
+                int curr_linelen = _history->getLineLen(currentPos);
+                int next_linelen = _history->getLineLen(currentPos + 1);
+                auto *new_line = getCharacterBuffer(curr_linelen + next_linelen);
+
+                // Join the lines
+                _history->getCells(currentPos, 0, curr_linelen, new_line);
+                _history->getCells(currentPos + 1, 0, next_linelen, new_line + curr_linelen);
+
+                // save the new_line in history and remove the next line
+                _history->setCellsAt(currentPos, new_line, curr_linelen + next_linelen);
+                _history->setLineAt(currentPos, _history->isWrappedLine(currentPos + 1));
+                _history->removeCells(currentPos + 1);
+            }
+            currentPos++;
+        }
+        // Move data to next line if needed
+        currentPos = 0;
+        while (currentPos < _history->getLines() - 1) {
+            int curr_linelen = _history->getLineLen(currentPos);
+
+            // if the current line > new_columns it will need a new line
+            if (curr_linelen > new_columns) {
+                auto *curr_line = getCharacterBuffer(curr_linelen);
+                _history->getCells(currentPos, 0, curr_linelen, curr_line);
+                
+                _history->setCellsAt(currentPos, curr_line, new_columns);
+                _history->setLineAt(currentPos, true);
+                _history->insertCells(currentPos + 1, curr_line + new_columns, curr_linelen - new_columns);
+            }
+            currentPos++;
+        }
+    }
     clearSelection();
     _screenLinesSize = new_lines;
 
@@ -1495,29 +1534,46 @@ void Screen::addHistLine()
     // we have to take care about scrolling, too...
     const int oldHistLines = _history->getLines();
     int newHistLines = _history->getLines();
-    bool beginIsTL = (_selBegin == _selTopLeft);
 
     if (hasScroll()) {
 
-        // Check if _history have 'new line' property and join lines before adding new ones
+        // Check if _history have 'new line' property and join lines before adding a new one to history
         if (oldHistLines > 0 && _history->isWrappedLine(oldHistLines - 1)) {
             int hist_linelen = _history->getLineLen(oldHistLines - 1);
-            auto *hist_line = getCharacterBuffer(hist_linelen);
+            auto *hist_line = getCharacterBuffer(hist_linelen + _screenLines[0].count());
             _history->getCells(oldHistLines - 1, 0, hist_linelen, hist_line);
 
-            ImageLine joinline;
-            for (int i = 0; i < hist_linelen; i++) {
-                joinline << hist_line[i];
+            // Join the new line into the old line
+            memcpy(hist_line + hist_linelen, _screenLines[0].data(), _screenLines[0].count());
+            hist_linelen += _screenLines[0].count();
+
+            // After join, check if it needs new line in history to show it on scroll
+            if (hist_linelen > _columns) {              
+                _history->setCellsAt(oldHistLines - 1, hist_line, _columns);
+                _history->setLineAt(oldHistLines - 1, true);
+                _history->addCells(hist_line + _columns, hist_linelen - _columns);
+                _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
+
+                newHistLines = _history->getLines();
+
+                // If the history is full, increment the count
+                // of dropped _lines
+                if (newHistLines == oldHistLines) {
+                    _droppedLines++;
+                    
+                    // We removed a line, we need to verify if we need to remove a URL.
+                    _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+                }
+            } else {
+                // Doesn't need a new line
+                _history->setCellsAt(oldHistLines - 1, hist_line, hist_linelen);
+                _history->setLineAt(oldHistLines - 1, (_lineProperties[0] & LINE_WRAPPED) != 0);
             }
-            joinline << _screenLines[0];
-            _history->setCellsVectorAt(oldHistLines - 1, joinline);
-            _history->setLineAt(oldHistLines - 1, (_lineProperties[0] & LINE_WRAPPED) != 0);
         } else {
             _history->addCellsVector(_screenLines[0]);
             _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
 
             newHistLines = _history->getLines();
-            beginIsTL = (_selBegin == _selTopLeft);
 
             // If the history is full, increment the count
             // of dropped _lines
@@ -1528,12 +1584,15 @@ void Screen::addHistLine()
                 _escapeSequenceUrlExtractor->historyLinesRemoved(1);
             }
 
-            // Adjust selection for the new point of reference
-            if (newHistLines > oldHistLines) {
-                if (_selBegin != -1) {
-                    _selTopLeft += _columns;
-                    _selBottomRight += _columns;
-                }
+        }
+
+        bool beginIsTL = (_selBegin == _selTopLeft);
+
+        // Adjust selection for the new point of reference
+        if (newHistLines > oldHistLines) {
+            if (_selBegin != -1) {
+                _selTopLeft += _columns;
+                _selBottomRight += _columns;
             }
         }
 
