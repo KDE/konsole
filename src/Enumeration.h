@@ -89,6 +89,21 @@ public:
     };
 
     /**
+     * This enum describes the the text editor cmd used to open local text file URLs
+     * in Konsole, where line and column data are appended to the file URL, e.g.:
+     * /path/to/file:123:123
+     */
+    enum TextEditorCmd {
+        Kate = 0,
+        KWrite,
+        KDevelop,
+        QtCreator,
+        Gedit,
+        gVim,
+        CustomTextEditor,
+    };
+
+    /**
      * This enum describes the different types of sounds and visual effects which
      * can be used to alert the user when a 'bell' occurs in the terminal
      * session.

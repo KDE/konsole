@@ -1706,10 +1706,6 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
 
     _mouseUi->openLinksByDirectClickButton->setEnabled(_mouseUi->underlineLinksButton->isChecked() || _mouseUi->underlineFilesButton->isChecked());
 
-    _mouseUi->textEditorCmdLineEdit->setText(profile->textEditorCmd());
-    connect(_mouseUi->textEditorCmdLineEdit, &QLineEdit::textChanged,
-            this, &Konsole::EditProfileDialog::textEditorCmdEditLineChanged);
-
     _mouseUi->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
     connect(_mouseUi->enableMouseWheelZoomButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::toggleMouseWheelZoom);
 
@@ -1721,6 +1717,112 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
     _mouseUi->linkEscapeSequenceTexts->setText(profile->escapedLinksSchema().join(QLatin1Char(';')));
     connect(_mouseUi->linkEscapeSequenceTexts, &QLineEdit::textChanged,
             this, &Konsole::EditProfileDialog::linkEscapeSequenceTextsChanged);
+
+    setTextEditorCombo(profile);
+}
+
+void EditProfileDialog::setTextEditorCombo(const Profile::Ptr &profile)
+{
+    std::array<Enum::TextEditorCmd, 7> editorsList = { Enum::Kate, Enum::KWrite,
+                                                       Enum::KDevelop, Enum::QtCreator,
+                                                       Enum::Gedit, Enum::gVim,
+                                                       Enum::CustomTextEditor };
+
+    auto *editorCombo = _mouseUi->textEditorCombo;
+
+    QStandardItemModel *model = static_cast<QStandardItemModel *>(editorCombo->model());
+    Q_ASSERT(model);
+
+    for (auto editor : editorsList) {
+        QString exec;
+        QString displayName;
+        QIcon icon;
+        switch(editor) {
+        case Enum::Kate:
+            exec = QStringLiteral("kate");
+            displayName = QStringLiteral("Kate");
+            icon = QIcon::fromTheme(exec);
+            break;
+        case Enum::KWrite:
+            exec = QStringLiteral("kwrite");
+            displayName = QStringLiteral("KWrite");
+            icon = QIcon::fromTheme(exec);
+            break;
+        case Enum::KDevelop:
+            exec = QStringLiteral("kdevelop");
+            displayName = QStringLiteral("KDevelop");
+            icon = QIcon::fromTheme(exec);
+            break;
+        case Enum::QtCreator:
+            exec = QStringLiteral("qtcreator");
+            displayName = QStringLiteral("Qt Creator");
+            icon = QIcon::fromTheme(exec);
+            break;
+        case Enum::Gedit:
+            exec = QStringLiteral("gedit");
+            displayName = QStringLiteral("Gedit");
+            QIcon::fromTheme(QStringLiteral("org.gnome.gedit"));
+            break;
+        case Enum::gVim:
+            exec = QStringLiteral("gvim");
+            displayName = QStringLiteral("gVim");
+            icon = QIcon::fromTheme(exec);
+            break;
+        case Enum::CustomTextEditor:
+            displayName = QStringLiteral("Custom");
+            icon = QIcon::fromTheme(QStringLiteral("system-run"));
+            break;
+        default:
+            break;
+        }
+
+        editorCombo->addItem(icon, displayName);
+
+        // For "CustomTextEditor" we don't check if the binary exists
+        const bool isAvailable = editor == Enum::CustomTextEditor
+                                 || !QStandardPaths::findExecutable(exec).isEmpty();
+        // Make un-available editors look disabled in the combobox
+        model->item(static_cast<int>(editor))->setEnabled(isAvailable);
+    }
+
+    const auto currentEditor = profile->property<int>(Profile::TextEditorCmd);
+    editorCombo->setCurrentIndex(currentEditor);
+
+    connect(editorCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, [this](const int index) {
+        updateTempProfileProperty(Profile::TextEditorCmd, index);
+        _mouseUi->textEditorCustomBtn->setEnabled(index == Enum::CustomTextEditor);
+    });
+
+    _mouseUi->textEditorCustomBtn->setEnabled(currentEditor == Enum::CustomTextEditor);
+    connect(_mouseUi->textEditorCustomBtn, &QAbstractButton::clicked,
+            this, [this, profile]() {
+        auto *dlg = new QInputDialog(static_cast<QWidget *>(this));
+        dlg->setLabelText(i18n("The format is e.g. 'eidtorExec PATH:LINE:COLUMN'\n\n"
+                               "PATH    will be replaced by the path to the text file\n"
+                               "LINE    will be replaced by the line number\n"
+                               "COLUMN  (optional) will be replaced by the column number\n"
+                               "Note: you will need to replace 'PATH:LINE:COLUMN' by the actual\n"
+                               "syntax the editor you want to use supports; e.g.:\n"
+                               "gedit +LINE:COLUMN PATH\n\n"
+                               "If PATH or LINE aren't present in the command, this setting\n"
+                               "will be ignored and the file will be opened by the default text\n"
+                               "editor."));
+        const QString cmd = profile->customTextEditorCmd();
+        dlg->setTextValue(cmd);
+        dlg->setAttribute(Qt::WA_DeleteOnClose);
+        dlg->setWindowTitle(i18n("Text Editor Custom Command"));
+
+        QFontMetrics fm(font());
+        const int width = qMin(fm.averageCharWidth() * cmd.size(), this->width());
+        dlg->resize(width, dlg->height());
+
+        connect(dlg, &QDialog::accepted, this, [this, dlg]() {
+            updateTempProfileProperty(Profile::TextEditorCmdCustom, dlg->textValue());
+        });
+
+        dlg->show();
+    });
 }
 
 void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)

@@ -107,7 +107,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { UnderlineLinksEnabled , "UnderlineLinksEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { UnderlineFilesEnabled , "UnderlineFilesEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { OpenLinksByDirectClickEnabled , "OpenLinksByDirectClickEnabled" , INTERACTION_GROUP , QVariant::Bool }
-    , { TextEditorCmd , "TextEditorCmd" , INTERACTION_GROUP , QVariant::String }
+    , { TextEditorCmd , "TextEditorCmd" , INTERACTION_GROUP , QVariant::Int }
+    , { TextEditorCmdCustom , "TextEditorCmdCustom" , INTERACTION_GROUP , QVariant::String }
     , { CtrlRequiredForDrag, "CtrlRequiredForDrag" , INTERACTION_GROUP , QVariant::Bool }
     , { DropUrlsAsText , "DropUrlsAsText" , INTERACTION_GROUP , QVariant::Bool }
     , { AutoCopySelectedText , "AutoCopySelectedText" , INTERACTION_GROUP , QVariant::Bool }
@@ -194,7 +195,10 @@ void Profile::useFallback()
     setProperty(UnderlineLinksEnabled, true);
     setProperty(UnderlineFilesEnabled, false);
     setProperty(OpenLinksByDirectClickEnabled, false);
-    setProperty(TextEditorCmd, QStringLiteral("/usr/bin/kate PATH:LINE:COLUMN"));
+
+    setProperty(TextEditorCmd, Enum::Kate);
+    setProperty(TextEditorCmdCustom, QStringLiteral("kate PATH:LINE:COLUMN"));
+
     setProperty(CtrlRequiredForDrag, true);
     setProperty(AutoCopySelectedText, false);
     setProperty(CopyTextAsHTML, true);
@@ -352,4 +356,38 @@ const Profile::GroupPtr Profile::asGroup() const
 Profile::GroupPtr Profile::asGroup()
 {
     return Profile::GroupPtr(dynamic_cast<ProfileGroup *>(this));
+}
+
+QString Profile::textEditorCmd() const
+{
+    auto current = property<int>(Profile::TextEditorCmd);
+
+    QString editorCmd;
+    switch(current) {
+    case Enum::Kate:
+        editorCmd = QStringLiteral("kate PATH:LINE:COLUMN");
+        break;
+    case Enum::KWrite:
+        editorCmd = QStringLiteral("kwrite PATH:LINE:COLUMN");
+        break;
+    case Enum::KDevelop:
+        editorCmd = QStringLiteral("kdevelop PATH:LINE:COLUMN");
+        break;
+    case Enum::QtCreator:
+        editorCmd = QStringLiteral("qtcreator PATH:LINE:COLUMN");
+        break;
+    case Enum::Gedit:
+        editorCmd = QStringLiteral("gedit +LINE:COLUMN PATH");
+        break;
+    case Enum::gVim:
+        editorCmd = QStringLiteral("gvim +LINE PATH");
+        break;
+    case Enum::CustomTextEditor:
+        editorCmd = customTextEditorCmd();
+        break;
+    default:
+        break;
+    }
+
+    return editorCmd;
 }

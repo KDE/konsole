@@ -285,24 +285,33 @@
               <string>Text Editor Command: </string>
              </property>
              <property name="buddy">
-              <cstring>textEditorCmdLineEdit</cstring>
+              <cstring>textEditorCombo</cstring>
+             </property>
+             <property name="toolTip">
+              <string comment="@info:tooltip">Text editor to use when opening text file URLs at a given line/column.</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="textEditorCmdLineEdit">
-             <property name="toolTip">
-              <string comment="@info:tooltip">Command used to open a file PATH at LINE/COLUMN.</string>
+            <widget class="QComboBox" name="textEditorCombo">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>1</horstretch>
+              </sizepolicy>
              </property>
-             <property name="whatsThis">
-              <string comment="@info:whatsthis">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
-                  &lt;p&gt;The text editor command that will be used to open a file starting at the specified line and column.&lt;/p&gt;
-                  &lt;p&gt;PATH, LINE and COLUMN are palceholders that will be replaced by the actual path to the file, line number and column number respectively.&lt;/p&gt;
-                  &lt;p&gt;If PATH and LINE aren't specified in the command, the file will be opened with the system default text editor.&lt;/p&gt;
-                  &lt;p&gt;For example:&lt;/p&gt;
-                  &lt;p&gt;/usr/bin/kate PATH:LINE:COMLUMN&lt;/p&gt;
-                  &lt;p&gt;/usr/bin/gedit +LINE:COLUMN PATH&lt;/p&gt;
-                  &lt;/body&gt;&lt;/html&gt;</string>
+             <property name="toolTip">
+              <string comment="@info:tooltip">Text editor to use when opening text file URLs at a given line/column.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="textEditorCustomBtn">
+             <property name="text">
+              <string>Edit</string>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              </sizepolicy>
              </property>
             </widget>
            </item>

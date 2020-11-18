@@ -74,23 +74,24 @@ void FileFilterHotSpot::activate(QObject *)
 
         Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
         QString editorCmd = profile->textEditorCmd();
+        const int firstBlank = editorCmd.indexOf(QLatin1Char(' '));
+        const QString editorExecPath = QStandardPaths::findExecutable(editorCmd.mid(0, firstBlank));
 
-        // If the cmd is empty or PATH and LINE don't exist, then the command
-        // is malformed, ignore it and open with the default editor
         // TODO: show an error message to the user?
-        if (editorCmd.isEmpty()
-            || ! (editorCmd.contains(QLatin1String("PATH")) && editorCmd.contains(QLatin1String("LINE")))) {
+        if (editorCmd.isEmpty() || editorExecPath.isEmpty()
+            || !(editorCmd.contains(QLatin1String("PATH")) && editorCmd.contains(QLatin1String("LINE")))) {
             openUrl(path);
             return;
         }
 
+        // Substitute e.g. "kate" with full path, "/usr/bin/kate"
+        editorCmd.replace(0, firstBlank, editorExecPath);
+
+        editorCmd.replace(QLatin1String("PATH"), path);
         editorCmd.replace(QLatin1String("LINE"), match.captured(1));
 
         const QString col = match.captured(2);
-
         editorCmd.replace(QLatin1String("COLUMN"), !col.isEmpty() ? col : QLatin1String("0"));
-
-        editorCmd.replace(QLatin1String("PATH"), path);
 
         qCDebug(KonsoleDebug) << "editorCmd:" << editorCmd;
 

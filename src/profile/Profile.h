@@ -201,16 +201,23 @@ public:
          * underlined when hovered by the mouse pointer.
          */
         UnderlineFilesEnabled,
+
         /**
-         * (QString) Text editor command used to open link/file URLs at a given line/column;
-         * it should include two placeholders, LINE and COLUMN, which will be
-         * replaced by the actual line and column numbers, respectively. This is needed as
-         * each text editor has its own command line options to specify line/column numbers
-         * when opening a text file. For example:
-         * "/usr/bin/kate --line LINE --column COLUMN"
-         * "/usr/bin/gedit +LINE:COLUMN"
+         * (Enum::TextEditorCmd) Text editor command used to open local
+         * text file URLs at a given line/column. There is a default list
+         * of editors that the user can select from, and a CustomTextEditor
+         * option if the user wants to use a different editor.
+         *
+         * See Enum::TextEditorCmd
         */
         TextEditorCmd,
+        /**
+         * (QString) This is the command string corresponding to Enum::CustomTextEditor.
+         *
+         * See TextEditorCmd and Enum::TextEditorCmd
+         */
+        TextEditorCmdCustom,
+
         /** (bool) If true, links can be opened by direct mouse click.*/
         OpenLinksByDirectClickEnabled,
         /** (bool) If true, control key must be pressed to click and drag selected text. */
@@ -608,10 +615,18 @@ public:
         return property<bool>(Profile::UnderlineFilesEnabled);
     }
 
-    /** Convenience method for property<QString>(Profile::TextEditorCmd) */
-    QString textEditorCmd() const
+    /**
+     * Returns the command line that will be used with the current text
+     * editor setting.
+     */
+    QString textEditorCmd() const;
+    /**
+     * Convenience method to get the text editor command corresponding to
+     * Enum::TextEditorCmdCustom.
+     */
+    QString customTextEditorCmd() const
     {
-        return property<QString>(Profile::TextEditorCmd);
+        return property<QString>(Profile::TextEditorCmdCustom);
     }
 
     bool autoCopySelectedText() const
