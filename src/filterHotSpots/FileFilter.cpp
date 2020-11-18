@@ -17,14 +17,20 @@
 
 using namespace Konsole;
 
-FileFilter::FileFilter(Session *session) :
+// static
+QRegularExpression FileFilter::_regex;
+
+FileFilter::FileFilter(Session *session, const QString &wordCharacters) :
     _session(session)
     , _dirPath(QString())
     , _currentDirContents()
 {
-    Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
-    QString wordCharacters = profile->wordCharacters();
+    _regex = QRegularExpression(concatRegexPattern(wordCharacters), QRegularExpression::DontCaptureOption);
+    setRegExp(_regex);
+}
 
+QString FileFilter::concatRegexPattern(QString wordCharacters) const
+{
     /* The wordCharacters can be a potentially broken regexp,
      * so let's fix it manually if it has some troublesome characters.
      */
@@ -40,7 +46,7 @@ FileFilter::FileFilter(Session *session) :
         wordCharacters.append(QLatin1Char('-'));
     }
 
-    static const auto re = QRegularExpression(
+    const QString pattern =
         /* First part of the regexp means 'strings with spaces and starting with single quotes'
          * Second part means "Strings with double quotes"
          * Last part means "Everything else plus some special chars
@@ -61,12 +67,10 @@ FileFilter::FileFilter(Session *session) :
             // next | branch (ctest stuff)
             + QStringLiteral(R"RX(|([^\n\s/\[]/)?[\p{L}\w%1]+(:\d+)?(:\d+:)?)RX").arg(wordCharacters)
             // - ctest error output: "[/path/to/file(123)]"
-            + QStringLiteral(R"RX(|\[[/\w%1]+\(\d+\)\])RX").arg(wordCharacters),
-        QRegularExpression::DontCaptureOption
-    );
-    setRegExp(re);
-}
+            + QStringLiteral(R"RX(|\[[/\w%1]+\(\d+\)\])RX").arg(wordCharacters);
 
+    return pattern;
+}
 
 /**
   * File Filter - Construct a filter that works on local file paths using the
@@ -128,4 +132,10 @@ void FileFilter::process()
     }
 
     RegExpFilter::process();
+}
+
+void FileFilter::updateRegex(const QString &wordCharacters)
+{
+    _regex.setPattern(concatRegexPattern(wordCharacters));
+    setRegExp(_regex);
 }

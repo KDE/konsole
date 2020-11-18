@@ -26,17 +26,22 @@ class HotSpot;
 class FileFilter : public RegExpFilter
 {
 public:
-    explicit FileFilter(Session *session);
+    explicit FileFilter(Session *session, const QString &wordCharacters);
 
     void process() override;
+
+    void updateRegex(const QString &wordCharacters);
 
 protected:
     QSharedPointer<HotSpot> newHotSpot(int, int, int, int, const QStringList &) override;
 
 private:
+    QString concatRegexPattern(QString wordCharacters) const;
+
     QPointer<Session> _session;
     QString _dirPath;
     QSet<QString> _currentDirContents;
+    static QRegularExpression _regex;
 };
 
 }

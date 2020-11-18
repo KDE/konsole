@@ -1270,6 +1270,9 @@ void SessionController::updateFilterList(Profile::Ptr profile)
         return;
     }
 
+    const QString currentWordCharacters = profile->wordCharacters();
+    static QString _wordChars = currentWordCharacters;
+
     //TODO: Refactor this code.
     bool underlineFiles = profile->underlineFilesEnabled();
     FilterChain *filterChain = _sessionDisplayConnection->view()->filterChain();
@@ -1277,9 +1280,18 @@ void SessionController::updateFilterList(Profile::Ptr profile)
         filterChain->removeFilter(_fileFilter);
         delete _fileFilter;
         _fileFilter = nullptr;
-    } else if (underlineFiles && (_fileFilter == nullptr)) {
-        _fileFilter = new FileFilter(_sessionDisplayConnection->session());
-        filterChain->addFilter(_fileFilter);
+    } else if (underlineFiles) {
+        if (_fileFilter == nullptr) {
+            _fileFilter = new FileFilter(_sessionDisplayConnection->session(), currentWordCharacters);
+            filterChain->addFilter(_fileFilter);
+        } else {
+            // If wordCharacters changed, we need to change the static regex
+            // pattern in _fileFilter
+            if (_wordChars != currentWordCharacters) {
+                _wordChars = currentWordCharacters;
+                _fileFilter->updateRegex(currentWordCharacters);
+            }
+        }
     }
 
     bool underlineLinks = profile->underlineLinksEnabled();
