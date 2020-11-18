@@ -201,6 +201,16 @@ public:
          * underlined when hovered by the mouse pointer.
          */
         UnderlineFilesEnabled,
+        /**
+         * (QString) Text editor command used to open link/file URLs at a given line/column;
+         * it should include two placeholders, LINE and COLUMN, which will be
+         * replaced by the actual line and column numbers, respectively. This is needed as
+         * each text editor has its own command line options to specify line/column numbers
+         * when opening a text file. For example:
+         * "/usr/bin/kate --line LINE --column COLUMN"
+         * "/usr/bin/gedit +LINE:COLUMN"
+        */
+        TextEditorCmd,
         /** (bool) If true, links can be opened by direct mouse click.*/
         OpenLinksByDirectClickEnabled,
         /** (bool) If true, control key must be pressed to click and drag selected text. */
@@ -591,6 +601,12 @@ public:
     bool underlineFilesEnabled() const
     {
         return property<bool>(Profile::UnderlineFilesEnabled);
+    }
+
+    /** Convenience method for property<QString>(Profile::TextEditorCmd) */
+    QString textEditorCmd() const
+    {
+        return property<QString>(Profile::TextEditorCmd);
     }
 
     bool autoCopySelectedText() const

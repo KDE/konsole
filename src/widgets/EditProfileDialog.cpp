@@ -1687,6 +1687,10 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
 
     _mouseUi->openLinksByDirectClickButton->setEnabled(_mouseUi->underlineLinksButton->isChecked() || _mouseUi->underlineFilesButton->isChecked());
 
+    _mouseUi->textEditorCmdLineEdit->setText(profile->textEditorCmd());
+    connect(_mouseUi->textEditorCmdLineEdit, &QLineEdit::textChanged,
+            this, &Konsole::EditProfileDialog::textEditorCmdEditLineChanged);
+
     _mouseUi->enableMouseWheelZoomButton->setChecked(profile->mouseWheelZoomEnabled());
     connect(_mouseUi->enableMouseWheelZoomButton, &QCheckBox::toggled, this, &Konsole::EditProfileDialog::toggleMouseWheelZoom);
 
@@ -1804,6 +1808,11 @@ void EditProfileDialog::toggleUnderlineFiles(bool enable)
 
     bool enableClick = _mouseUi->underlineLinksButton->isChecked() || enable;
     _mouseUi->openLinksByDirectClickButton->setEnabled(enableClick);
+}
+
+void EditProfileDialog::textEditorCmdEditLineChanged(const QString &text)
+{
+    updateTempProfileProperty(Profile::TextEditorCmd, text);
 }
 
 void EditProfileDialog::toggleCtrlRequiredForDrag(bool enable)

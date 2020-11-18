@@ -16,29 +16,125 @@
 #include <QToolTip>
 #include <QMouseEvent>
 #include <QKeyEvent>
+#include <QRegularExpression>
 
+#include <kio_version.h>
+#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
 #include <KRun>
+#else
+#include <KIO/ApplicationLauncherJob>
+#include <KIO/OpenUrlJob>
+#endif
+
+#include <KIO/JobUiDelegate>
 #include <KLocalizedString>
 #include <KFileItemListProperties>
+#include <KMessageBox>
+#include <KShell>
 
 #include "konsoledebug.h"
 #include "KonsoleSettings.h"
+#include "profile/Profile.h"
+#include "session/SessionManager.h"
 #include "terminalDisplay/TerminalDisplay.h"
 
 using namespace Konsole;
 
 
 FileFilterHotSpot::FileFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn,
-                             const QStringList &capturedTexts, const QString &filePath) :
-    RegExpFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts),
-    _filePath(filePath)
+                                     const QStringList &capturedTexts, const QString &filePath,
+                                     Session *session)
+  : RegExpFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts),
+    _filePath(filePath),
+    _session(session)
 {
     setType(Link);
 }
 
 void FileFilterHotSpot::activate(QObject *)
 {
-    new KRun(QUrl::fromLocalFile(_filePath), QApplication::activeWindow());
+    // Used to fallback to opening the url with the system default application
+    auto openUrl = [](const QString &filePath) {
+#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
+        new KRun(QUrl::fromLocalFile(filePath), QApplication::activeWindow());
+#else
+        auto *job = new KIO::OpenUrlJob(QUrl::fromLocalFile(filePath));
+        job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+        job->setRunExecutables(false); // Always open, e.g. shell scripts, as text
+        job->start();
+#endif
+    };
+
+    // Output of e.g.:
+    // - grep with line numbers: "path/to/some/file:123:"
+    // - compiler errors with line/column numbers: "/path/to/file.cpp:123:123:"
+    // - ctest failing unit tests: "/path/to/file(204)"
+    const auto re(QRegularExpression(QStringLiteral(R"foo((?:[:\(]?(\d+)(?::?|\)\]))(?:(\d+):)?$)foo")));
+    QRegularExpressionMatch match = re.match(_filePath);
+    if (match.hasMatch()) {
+        // The file path without the ":123" ... etc bits
+        const QString path = _filePath.mid(0, match.capturedStart(0));
+
+        if (!_session) {
+            openUrl(path);
+            return;
+        }
+
+        Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
+        QString editorCmd = profile->textEditorCmd();
+
+        // If the cmd is empty or PATH and LINE don't exist, then the command
+        // is malformed, ignore it and open with the default editor
+        // TODO: show an error message to the user?
+        if (editorCmd.isEmpty()
+            || ! (editorCmd.contains(QLatin1String("PATH")) && editorCmd.contains(QLatin1String("LINE")))) {
+            openUrl(path);
+            return;
+        }
+
+        editorCmd.replace(QLatin1String("LINE"), match.captured(1));
+
+        const QString col = match.captured(2);
+
+        editorCmd.replace(QLatin1String("COLUMN"), !col.isEmpty() ? col : QLatin1String("0"));
+
+        editorCmd.replace(QLatin1String("PATH"), path);
+
+        qCDebug(KonsoleDebug) << "editorCmd:" << editorCmd;
+
+        KService::Ptr service(new KService(QString(), editorCmd, QString()));
+
+#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
+        const bool success = KRun::runService(*service, {}, QApplication::activeWindow());
+        if (!success) {
+            openUrl(path);
+        }
+#else
+        // ApplicationLauncherJob is better at reporting errors to the user than
+        // CommandLauncherJob; no need to call job->setUrls() because the url is
+        // already part of editorCmd
+        auto *job = new KIO::ApplicationLauncherJob(service);
+        connect(job, &KJob::result, this, [this, path, job, openUrl]() {
+            if (job->error()) {
+                // TODO: use KMessageWidget (like the "terminal is read-only" message)
+                KMessageBox::sorry(QApplication::activeWindow(),
+                                   i18n("Could not open file with the text editor specified in the profile settings;\n"
+                                        "it will be opened with the system default editor."));
+
+                openUrl(path);
+            }
+        });
+        job->start();
+#endif
+        return;
+    }
+
+    // There was no match, i.e. regular url "path/to/file", open it with
+    // the system default editor
+    // In case the regex above didn't match for any reason, clean up the file path
+    QString path(_filePath);
+    path.remove(QRegularExpression(QStringLiteral(R"foo((:\d+[:]?|:)$)foo"), QRegularExpression::DontCaptureOption));
+    openUrl(path);
 }
 
 

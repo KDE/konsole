@@ -107,6 +107,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { UnderlineLinksEnabled , "UnderlineLinksEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { UnderlineFilesEnabled , "UnderlineFilesEnabled" , INTERACTION_GROUP , QVariant::Bool }
     , { OpenLinksByDirectClickEnabled , "OpenLinksByDirectClickEnabled" , INTERACTION_GROUP , QVariant::Bool }
+    , { TextEditorCmd , "TextEditorCmd" , INTERACTION_GROUP , QVariant::String }
     , { CtrlRequiredForDrag, "CtrlRequiredForDrag" , INTERACTION_GROUP , QVariant::Bool }
     , { DropUrlsAsText , "DropUrlsAsText" , INTERACTION_GROUP , QVariant::Bool }
     , { AutoCopySelectedText , "AutoCopySelectedText" , INTERACTION_GROUP , QVariant::Bool }
@@ -192,6 +193,7 @@ void Profile::useFallback()
     setProperty(UnderlineLinksEnabled, true);
     setProperty(UnderlineFilesEnabled, false);
     setProperty(OpenLinksByDirectClickEnabled, false);
+    setProperty(TextEditorCmd, QStringLiteral("/usr/bin/kate PATH:LINE:COLUMN"));
     setProperty(CtrlRequiredForDrag, true);
     setProperty(AutoCopySelectedText, false);
     setProperty(CopyTextAsHTML, true);

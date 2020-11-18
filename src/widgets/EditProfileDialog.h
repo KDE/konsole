@@ -176,6 +176,7 @@ private Q_SLOTS:
     void toggleUnderlineFiles(bool enable);
     void toggleUnderlineLinks(bool);
     void toggleOpenLinksByDirectClick(bool);
+    void textEditorCmdEditLineChanged(const QString &text);
     void toggleCtrlRequiredForDrag(bool);
     void toggleDropUrlsAsText(bool);
     void toggleCopyTextToClipboard(bool);

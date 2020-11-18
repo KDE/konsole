@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>538</width>
-    <height>516</height>
+    <width>993</width>
+    <height>632</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -250,57 +250,14 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <property name="spacing">
-        <number>0</number>
+        <number>10</number>
        </property>
        <item>
-        <layout class="QGridLayout" columnstretch="0,0,0,0">
+        <layout class="QVBoxLayout" name="underlineURILayout">
          <property name="spacing">
-          <number>6</number>
+          <number>10</number>
          </property>
-         <item row="1" column="0">
-          <spacer>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>16</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="5" column="2">
-          <widget class="QLineEdit" name="linkEscapeSequenceTexts">
-           <property name="toolTip">
-            <string>The formats of possible links, like http://, https:// and file://</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0" colspan="4">
-          <widget class="QCheckBox" name="ctrlRequiredForDragButton">
-           <property name="toolTip">
-            <string>Selected text will require control key plus click to drag.</string>
-           </property>
-           <property name="text">
-            <string>Require Ctrl key for drag &amp;&amp; drop</string>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="0" colspan="4">
-          <widget class="QCheckBox" name="enableAlternateScrollingButton">
-           <property name="toolTip">
-            <string>Mouse scroll wheel will emulate up/down key presses in programs that use the Alternate Screen buffer (e.g. less)</string>
-           </property>
-           <property name="text">
-            <string>Enable Alternate Screen buffer scrolling</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0" colspan="4">
+         <item>
           <widget class="QCheckBox" name="underlineLinksButton">
            <property name="toolTip">
             <string>Text recognized as a link or an email address will be underlined when hovered by the mouse pointer.</string>
@@ -310,23 +267,7 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>16</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="6" column="0" colspan="4">
+         <item>
           <widget class="QCheckBox" name="underlineFilesButton">
            <property name="toolTip">
             <string>Text recognized as a file will be underlined when hovered by the mouse pointer.</string>
@@ -336,24 +277,65 @@
            </property>
           </widget>
          </item>
-         <item row="8" column="0" colspan="4">
-          <widget class="QCheckBox" name="dropUrlsAsText">
+         <item>
+          <layout class="QHBoxLayout">
+           <item>
+            <widget class="QLabel" name="textEditorCommandLabel">
+             <property name="text">
+              <string>Text Editor Command: </string>
+             </property>
+             <property name="buddy">
+              <cstring>textEditorCmdLineEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="textEditorCmdLineEdit">
+             <property name="toolTip">
+              <string comment="@info:tooltip">Command used to open a file PATH at LINE/COLUMN.</string>
+             </property>
+             <property name="whatsThis">
+              <string comment="@info:whatsthis">&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+                  &lt;p&gt;The text editor command that will be used to open a file starting at the specified line and column.&lt;/p&gt;
+                  &lt;p&gt;PATH, LINE and COLUMN are palceholders that will be replaced by the actual path to the file, line number and column number respectively.&lt;/p&gt;
+                  &lt;p&gt;If PATH and LINE aren't specified in the command, the file will be opened with the system default text editor.&lt;/p&gt;
+                  &lt;p&gt;For example:&lt;/p&gt;
+                  &lt;p&gt;/usr/bin/kate PATH:LINE:COMLUMN&lt;/p&gt;
+                  &lt;p&gt;/usr/bin/gedit +LINE:COLUMN PATH&lt;/p&gt;
+                  &lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="openLinksByDirectClickButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="toolTip">
-            <string>Always paste dropped files and URLs as text without offering move, copy and link actions.</string>
+            <string>Text recognized as a file, link or an email address can be opened by direct mouse click.</string>
            </property>
            <property name="text">
-            <string>Disable drag &amp;&amp; drop menu for files &amp;&amp; URLs</string>
+            <string>Open files/links by direct click</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0" colspan="4">
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout">
+         <item>
           <widget class="QCheckBox" name="allowLinkEscapeSequenceButton">
            <property name="text">
             <string>Allow escape sequences for links</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="1" colspan="3">
+         <item>
           <widget class="QLabel" name="allowLinkEscapeSequenceButtonWarning">
            <property name="text">
             <string>&lt;b&gt;WARNING&lt;/b&gt;: This has security implications as it allows malicious URLs to be shown as another URL or hidden.&lt;br&gt;Make sure you understand the implications before turning this on.</string>
@@ -367,45 +349,73 @@
            <property name="wordWrap">
             <bool>true</bool>
            </property>
-          </widget>
-         </item>
-         <item row="9" column="0" colspan="4">
-          <widget class="QCheckBox" name="enableMouseWheelZoomButton">
-           <property name="toolTip">
-            <string>Pressing Ctrl+scrollwheel will increase/decrease the text size.</string>
-           </property>
-           <property name="text">
-            <string>Allow Ctrl+scrollwheel to zoom text size</string>
+           <property name="indent">
+            <number>30</number>
            </property>
           </widget>
          </item>
-         <item row="5" column="1">
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Allowed link formats</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1" colspan="3">
-          <widget class="QCheckBox" name="openLinksByDirectClickButton">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="toolTip">
-            <string>Text recognized as a file, link or an email address can be opened by direct mouse click.</string>
-           </property>
-           <property name="text">
-            <string>Open by direct click</string>
-           </property>
-          </widget>
+         <item>
+          <layout class="QHBoxLayout">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Allowed link formats: </string>
+             </property>
+             <property name="indent">
+              <number>30</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="linkEscapeSequenceTexts">
+             <property name="toolTip">
+              <string>The formats of possible links, like http://, https:// and file://</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="ctrlRequiredForDragButton">
+         <property name="toolTip">
+          <string>Selected text will require control key plus click to drag.</string>
+         </property>
+         <property name="text">
+          <string>Require Ctrl key for drag &amp;&amp; drop</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="enableAlternateScrollingButton">
+         <property name="toolTip">
+          <string>Mouse scroll wheel will emulate up/down key presses in programs that use the Alternate Screen buffer (e.g. less)</string>
+         </property>
+         <property name="text">
+          <string>Enable Alternate Screen buffer scrolling</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="dropUrlsAsText">
+         <property name="toolTip">
+          <string>Always paste dropped files and URLs as text without offering move, copy and link actions.</string>
+         </property>
+         <property name="text">
+          <string>Disable drag &amp;&amp; drop menu for files &amp;&amp; URLs</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="enableMouseWheelZoomButton">
+         <property name="toolTip">
+          <string>Pressing Ctrl+scrollwheel will increase/decrease the text size.</string>
+         </property>
+         <property name="text">
+          <string>Allow Ctrl+scrollwheel to zoom text size</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer>

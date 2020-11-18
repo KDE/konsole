@@ -24,6 +24,7 @@ class QKeyEvent;
 class QMouseEvent;
 
 namespace Konsole {
+class Session;
 class TerminalDisplay;
 
 /**
@@ -33,7 +34,7 @@ class FileFilterHotSpot : public RegExpFilterHotSpot
 {
 public:
     FileFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn,
-            const QStringList &capturedTexts, const QString &filePath);
+                      const QStringList &capturedTexts, const QString &filePath, Session *session);
     ~FileFilterHotSpot() override;
 
     QList<QAction *> actions() override;
@@ -58,6 +59,7 @@ public:
 private:
     void showThumbnail(const KFileItem& item, const QPixmap& preview);
     QString _filePath;
+    Session *_session = nullptr;
     KFileItemActions _menuActions;
 
     QPoint _eventPos;
