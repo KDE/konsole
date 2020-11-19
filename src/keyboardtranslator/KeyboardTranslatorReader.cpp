@@ -337,12 +337,10 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
     text = text.simplified();
 
     // title line: keyboard "title"
-    static const QRegularExpression title(QStringLiteral("keyboard\\s+\"(.*)\""),
-                                          QRegularExpression::OptimizeOnFirstUsageOption);
+    static const QRegularExpression title(QStringLiteral("keyboard\\s+\"(.*)\""));
     // key line: key KeySequence : "output"
     // key line: key KeySequence : command
-    static const QRegularExpression key(QStringLiteral("key\\s+(.+?)\\s*:\\s*(\"(.*)\"|\\w+)"),
-                                        QRegularExpression::OptimizeOnFirstUsageOption);
+    static const QRegularExpression key(QStringLiteral("key\\s+(.+?)\\s*:\\s*(\"(.*)\"|\\w+)"));
 
     QList<Token> list;
     if (text.isEmpty()) {

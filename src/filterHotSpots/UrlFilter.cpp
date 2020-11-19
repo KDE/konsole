@@ -17,19 +17,16 @@ using namespace Konsole;
 // Please be careful when altering them.
 // protocolname:// or www. followed by anything other than whitespaces, <, >, ' or ", and ends before whitespaces, <, >, ', ", ], !, ), :, comma and dot
 const QRegularExpression UrlFilter::FullUrlRegExp(
-    QStringLiteral("(www\\.(?!\\.)|[a-z][a-z0-9+.-]*://)[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]\\)\\:]"),
-    QRegularExpression::OptimizeOnFirstUsageOption);
+    QStringLiteral("(www\\.(?!\\.)|[a-z][a-z0-9+.-]*://)[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]\\)\\:]"));
 
 // email address:
 // [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]
 const QRegularExpression UrlFilter::EmailAddressRegExp(
-    QStringLiteral("\\b(\\w|\\.|-|\\+)+@(\\w|\\.|-)+\\.\\w+\\b"),
-    QRegularExpression::OptimizeOnFirstUsageOption);
+    QStringLiteral("\\b(\\w|\\.|-|\\+)+@(\\w|\\.|-)+\\.\\w+\\b"));
 
 // matches full url or email address
 const QRegularExpression UrlFilter::CompleteUrlRegExp(
-    QLatin1Char('(') + FullUrlRegExp.pattern() + QLatin1Char('|') + EmailAddressRegExp.pattern() + QLatin1Char(')'),
-    QRegularExpression::OptimizeOnFirstUsageOption);
+    QLatin1Char('(') + FullUrlRegExp.pattern() + QLatin1Char('|') + EmailAddressRegExp.pattern() + QLatin1Char(')'));
 
 
 UrlFilter::UrlFilter()

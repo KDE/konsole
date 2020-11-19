@@ -70,8 +70,7 @@ protected:
             //          "udRangeInd" (UnicodeData.txt only) - if present, the line is either first or last line of a range
             R"#([ \t]*(?<field0>[^#;\n]*?(?:, (?<udRangeInd>First|Last)>)?)[ \t]*(?:;|(?:\#.*)?$))|)#"
             // Match 2..n: "field" - n-th field
-            R"#((?:\G(?<=;)[ \t]*(?<field>[^#;\n]*?)[ \t]*(?:;|(?:#.*)?$)))#"),
-            QRegularExpression::OptimizeOnFirstUsageOption
+            R"#((?:\G(?<=;)[ \t]*(?<field>[^#;\n]*?)[ \t]*(?:;|(?:#.*)?$)))#")
         );
         static const QRegularExpression UD_RANGE_IND_RE(QStringLiteral(", (First|Last)"));
         static const QRegularExpression COMMENT_RE(QStringLiteral("^[ \t]*(#.*)?$"));
@@ -717,7 +716,7 @@ bool details(QTextStream &out, const QVector<CharacterProperties> &props, const 
 template <class EntryType>
 static void processInputFiles(QVector<CharacterProperties> &props, const QStringList &files, const QString &fileTypeName,
                               void (*cb)(CharacterProperties &prop, const EntryType &entry)) {
-    static const QRegularExpression PROTOCOL_RE(QStringLiteral(R"#(^[a-z]+://)#"), QRegularExpression::OptimizeOnFirstUsageOption);
+    static const QRegularExpression PROTOCOL_RE(QStringLiteral(R"#(^[a-z]+://)#"));
     for(const QString &fileName: files) {
         qInfo().noquote() << QStringLiteral("Parsing as %1: %2").arg(fileTypeName).arg(fileName);
         QSharedPointer<QIODevice> source = nullptr;

@@ -135,8 +135,7 @@ void Template::executeCommand(Element &element, const Template::Element &childSt
     // Set printf-like format (with leading %) applied for strings and numbers
     // inside the group
     } else if(argv[0] == QStringLiteral("fmt")) {
-        static const QRegularExpression FMT_RE(QStringLiteral(R":(^%[-0 +#]?(?:[1-9][0-9]*)?\.?[0-9]*[diouxXs]$):"),
-                                               QRegularExpression::OptimizeOnFirstUsageOption);
+        static const QRegularExpression FMT_RE(QStringLiteral(R":(^%[-0 +#]?(?:[1-9][0-9]*)?\.?[0-9]*[diouxXs]$):"));
         const auto match = FMT_RE.match(argv.value(1));
         QString fmt = QStringLiteral("");
         if(!match.hasMatch())
@@ -155,14 +154,11 @@ void Template::parseRecursively(Element &element) {
     static const QRegularExpression RE(QStringLiteral(R":((?'comment'«\*(([^:]*):)?.*?(?(-2):\g{-1})\*»)|):"
                                                       R":(«(?:(?'name'[-_a-zA-Z0-9]*)|(?:!(?'cmd'[-_a-zA-Z0-9]+(?: +(?:[^\\:]+|(?:\\.)+)+)?)))):"
                                                       R":((?::(?:~[ \t]*\n)?(?'inner'(?:[^«]*?|(?R))*))?(?:\n[ \t]*~)?»):"),
-                                       QRegularExpression::DotMatchesEverythingOption | QRegularExpression::MultilineOption |
-                                       QRegularExpression::OptimizeOnFirstUsageOption);
+                                       QRegularExpression::DotMatchesEverythingOption | QRegularExpression::MultilineOption);
     static const QRegularExpression CMD_SPLIT_RE(QStringLiteral(R":((?:"((?:(?:\\.)*|[^"]*)*)"|(?:[^\\ "]+|(?:\\.)+)+)):"),
-                                                 QRegularExpression::DotMatchesEverythingOption | QRegularExpression::MultilineOption |
-                                                 QRegularExpression::OptimizeOnFirstUsageOption);
+                                                 QRegularExpression::DotMatchesEverythingOption | QRegularExpression::MultilineOption);
     static const QRegularExpression UNESCAPE_RE(QStringLiteral(R":(\\(.)):"),
-                                                 QRegularExpression::DotMatchesEverythingOption | QRegularExpression::MultilineOption |
-                                                 QRegularExpression::OptimizeOnFirstUsageOption);
+                                                 QRegularExpression::DotMatchesEverythingOption | QRegularExpression::MultilineOption);
     static const QString nameGroupName      = QStringLiteral("name");
     static const QString innerGroupName     = QStringLiteral("inner");
     static const QString cmdGroupName       = QStringLiteral("cmd");
