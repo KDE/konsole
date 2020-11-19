@@ -340,9 +340,6 @@
            <property name="text">
             <string>&lt;b&gt;WARNING&lt;/b&gt;: This has security implications as it allows malicious URLs to be shown as another URL or hidden.&lt;br&gt;Make sure you understand the implications before turning this on.</string>
            </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
            <property name="textFormat">
             <enum>Qt::RichText</enum>
            </property>
@@ -418,6 +415,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="allowColorFilters">
+         <property name="toolTip">
+          <string>When positioning the mouse over a hexadecimal color it will be displayed in a frame next to the mouse pointer</string>
+         </property>
+         <property name="text">
+          <string>Allow Color Filters</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -459,7 +466,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="pasteFrom"/>
   <buttongroup name="tripleClickMode"/>
+  <buttongroup name="pasteFrom"/>
  </buttongroups>
 </ui>

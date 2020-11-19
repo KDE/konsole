@@ -60,6 +60,8 @@ public:
         Marker,
         // this spot represents a Escaped URL
         EscapedUrl,
+        // this hotspot represents a color of text
+        Color,
     };
 
     /** Returns the line when the hotspot area starts */

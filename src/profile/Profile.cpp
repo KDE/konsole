@@ -121,6 +121,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { AlternateScrolling, "AlternateScrolling", INTERACTION_GROUP, QVariant::Bool }
     , { AllowEscapedLinks, "AllowEscapedLinks", INTERACTION_GROUP, QVariant::Bool }
     , { EscapedLinksSchema, "EscapedLinksSchema", INTERACTION_GROUP, QVariant::String }
+    , { ColorFilterEnabled, "ColorFilterEnabled", INTERACTION_GROUP, QVariant::Bool }
 
     // Encoding
     , { DefaultEncoding , "DefaultEncoding" , ENCODING_GROUP , QVariant::String }
@@ -204,6 +205,7 @@ void Profile::useFallback()
     setProperty(PasteFromClipboardEnabled, false);
     setProperty(MiddleClickPasteMode, Enum::PasteFromX11Selection);
     setProperty(TripleClickMode, Enum::SelectWholeLine);
+    setProperty(ColorFilterEnabled, true);
 
     setProperty(BlinkingCursorEnabled, false);
     setProperty(BidiRenderingEnabled, true);

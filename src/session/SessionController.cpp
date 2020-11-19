@@ -71,6 +71,7 @@
 #include "filterHotSpots/HotSpot.h"
 #include "filterHotSpots/RegExpFilter.h"
 #include "filterHotSpots/UrlFilter.h"
+#include "filterHotSpots/ColorFilter.h"
 
 #include "history/HistoryType.h"
 #include "history/HistoryTypeFile.h"
@@ -105,6 +106,7 @@ SessionController::SessionController(Session* session, TerminalDisplay* view, QO
     , _searchFilter(nullptr)
     , _urlFilter(nullptr)
     , _fileFilter(nullptr)
+    , _colorFilter(nullptr)
     , _copyInputToAllTabsAction(nullptr)
     , _findAction(nullptr)
     , _findNextAction(nullptr)
@@ -1298,6 +1300,16 @@ void SessionController::updateFilterList(Profile::Ptr profile)
     } else if (allowEscapeSequenceLinks && _escapedUrlFilter == nullptr) {
         _escapedUrlFilter = new EscapeSequenceUrlFilter(_sessionDisplayConnection->session(), _sessionDisplayConnection->view());
         filterChain->addFilter(_escapedUrlFilter);
+    }
+
+    const bool allowColorFilters = profile->colorFilterEnabled();
+    if (!allowColorFilters && (_colorFilter != nullptr)) {
+        filterChain->removeFilter(_colorFilter);
+        delete _colorFilter;
+        _colorFilter = nullptr;
+    } else if (allowColorFilters && (_colorFilter == nullptr)) {
+        _colorFilter = new ColorFilter();
+        filterChain->addFilter(_colorFilter);
     }
 }
 

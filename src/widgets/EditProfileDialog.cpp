@@ -899,6 +899,11 @@ void EditProfileDialog::toggleAlternateScrolling(bool enable)
     updateTempProfileProperty(Profile::AlternateScrolling, enable);
 }
 
+void EditProfileDialog::toggleAllowColorFilter(bool enable) 
+{
+    updateTempProfileProperty(Profile::ColorFilterEnabled, enable);
+}
+
 void EditProfileDialog::updateColorSchemeList(const QString &selectedColorSchemeName)
 {
     if (_appearanceUi->colorSchemeList->model() == nullptr) {
@@ -1661,6 +1666,8 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
     connect(_mouseUi->dropUrlsAsText, &QPushButton::toggled, this, &EditProfileDialog::toggleDropUrlsAsText);
     _mouseUi->enableAlternateScrollingButton->setChecked(profile->property<bool>(Profile::AlternateScrolling));
     connect(_mouseUi->enableAlternateScrollingButton, &QPushButton::toggled, this, &EditProfileDialog::toggleAlternateScrolling);
+    _mouseUi->allowColorFilters->setChecked(profile->property<bool>(Profile::ColorFilterEnabled));
+    connect(_mouseUi->allowColorFilters, &QPushButton::toggled, this, &EditProfileDialog::toggleAllowColorFilter);
 
     // setup middle click paste mode
     const auto middleClickPasteMode = profile->property<int>(Profile::MiddleClickPasteMode);

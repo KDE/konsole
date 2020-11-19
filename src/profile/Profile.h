@@ -323,7 +323,12 @@ public:
         VerticalLineAtChar,
 
         /** Shortcut for peeking primary screen */
-        PeekPrimaryKeySequence
+        PeekPrimaryKeySequence,
+
+        /** (bool) If true, text that matches a color in hex format
+         *  when hovered by the mouse pointer.
+         */
+        ColorFilterEnabled
     };
 
     Q_ENUM(Property)
@@ -688,6 +693,12 @@ public:
     int verticalLineAtChar() const
     {
         return property<int>(Profile::VerticalLineAtChar);
+    }
+
+    /** Convenience method for property<bool>(Profile::colorFilterEnabled) */
+    bool colorFilterEnabled() const
+    {
+        return property<bool>(Profile::ColorFilterEnabled);
     }
 
     QKeySequence peekPrimaryKeySequence() const
