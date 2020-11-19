@@ -1304,14 +1304,15 @@ void SessionController::updateFilterList(const Profile::Ptr &profile)
         filterChain->addFilter(_urlFilter);
     }
 
-    const bool allowEscapeSequenceLinks = profile->allowEscapedLinks();
-    if (allowEscapeSequenceLinks && (_escapedUrlFilter != nullptr)) {
+    if (profile->allowEscapedLinks()) {
+        if (_escapedUrlFilter == nullptr) {
+            _escapedUrlFilter = new EscapeSequenceUrlFilter(_sessionDisplayConnection->session(), _sessionDisplayConnection->view());
+            filterChain->addFilter(_escapedUrlFilter);
+        }
+    } else if (_escapedUrlFilter != nullptr) { // Became disabled, clean up
         filterChain->removeFilter(_escapedUrlFilter);
         delete _escapedUrlFilter;
         _escapedUrlFilter = nullptr;
-    } else if (allowEscapeSequenceLinks && _escapedUrlFilter == nullptr) {
-        _escapedUrlFilter = new EscapeSequenceUrlFilter(_sessionDisplayConnection->session(), _sessionDisplayConnection->view());
-        filterChain->addFilter(_escapedUrlFilter);
     }
 
     const bool allowColorFilters = profile->colorFilterEnabled();
