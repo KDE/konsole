@@ -1264,7 +1264,7 @@ void SessionController::searchClosed()
     searchHistory(false);
 }
 
-void SessionController::updateFilterList(Profile::Ptr profile)
+void SessionController::updateFilterList(const Profile::Ptr &profile)
 {
     if (profile != SessionManager::instance()->sessionProfile(_sessionDisplayConnection->session())) {
         return;
@@ -1274,7 +1274,7 @@ void SessionController::updateFilterList(Profile::Ptr profile)
     static QString _wordChars = currentWordCharacters;
 
     //TODO: Refactor this code.
-    bool underlineFiles = profile->underlineFilesEnabled();
+    const bool underlineFiles = profile->underlineFilesEnabled();
     FilterChain *filterChain = _sessionDisplayConnection->view()->filterChain();
     if (!underlineFiles && (_fileFilter != nullptr)) {
         filterChain->removeFilter(_fileFilter);
@@ -1294,7 +1294,7 @@ void SessionController::updateFilterList(Profile::Ptr profile)
         }
     }
 
-    bool underlineLinks = profile->underlineLinksEnabled();
+    const bool underlineLinks = profile->underlineLinksEnabled();
     if (!underlineLinks && (_urlFilter != nullptr)) {
         filterChain->removeFilter(_urlFilter);
         delete _urlFilter;

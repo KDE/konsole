@@ -261,7 +261,7 @@ private Q_SLOTS:
     void searchTextChanged(const QString &text);
     void searchCompleted(bool success);
 
-    void updateFilterList(QExplicitlySharedDataPointer<Profile> profile); // Called when the profile has changed, so we might need to change the list of filters
+    void updateFilterList(const QExplicitlySharedDataPointer<Profile> &profile); // Called when the profile has changed, so we might need to change the list of filters
 
     void viewFocusChangeHandler(bool focused);
     void interactionHandler();
