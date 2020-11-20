@@ -28,6 +28,11 @@ key Tab   +Shift-Ansi  : "\t"
 key Backtab     +Ansi  : "\E[Z"
 key Backtab     -Ansi  : "\t"
 
+key Tab       +Control+Ansi : "\E[27;5;9~"
+key Backtab   +Control+Ansi : "\E[27;6;9~"
+key Tab       +Control-Ansi : "\t"
+key Backtab   +Control-Ansi : "\t"
+
 key Return-Shift-NewLine : "\r"
 key Return-Shift+NewLine : "\r\n"
 
