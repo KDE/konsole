@@ -65,7 +65,8 @@ if(NOT APPLE)
 endif()
 set(HAVE_X11 ${X11_FOUND})
 
-check_function_exists (getpwuid HAVE_GETPWUID)
+# Check for function GETPWUID
+check_symbol_exists(getpwuid "pwd.h" HAVE_GETPWUID)
 
 # See above includes for defaults
 add_definitions(
