@@ -65,6 +65,8 @@ if(NOT APPLE)
 endif()
 set(HAVE_X11 ${X11_FOUND})
 
+check_function_exists (getpwuid HAVE_GETPWUID)
+
 # See above includes for defaults
 add_definitions(
   -DQT_NO_FOREACH

@@ -49,7 +49,7 @@
 #include "terminalDisplay/TerminalScrollBar.hpp"
 
 // Linux
-#ifdef Q_OS_LINUX
+#ifdef HAVE_GETPWUID
 #include <sys/types.h>
 #include <pwd.h>
 #endif
@@ -452,17 +452,17 @@ void Session::run()
 
     QStringList programs = {_program, QString::fromUtf8(qgetenv("SHELL")), QStringLiteral("/bin/sh")};
 
-#ifdef Q_OS_LINUX
+#ifdef HAVE_GETPWUID
     auto pw = getpwuid(getuid());
     // pw may be NULL
-    if (pw != NULL) {
+    if (pw != nullptr) {
         programs.insert(1, QString::fromLocal8Bit(pw->pw_shell));
     }
-    // we don't need to and shouldn't free pw
+    // pw: Do not pass the returned pointer to free.
 #endif
 
     QString exec;
-    for (auto choice : programs) {
+    for (const auto &choice : programs) {
         exec = checkProgram(choice);
         if (!exec.isEmpty()) {
             break;
