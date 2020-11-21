@@ -13,6 +13,7 @@
 // Qt
 #include <QDir>
 #include <QSignalSpy>
+#include <QDebug>
 
 // KDE
 #include <KService>
@@ -96,6 +97,9 @@ void TerminalInterfaceTest::testTerminalInterface()
 
     // Start a shell in given directory
     terminal->showShellInDir(QDir::home().path());
+
+    // testing failure on FreeBSD
+    qWarning()<<"Process Name: "<<terminal->foregroundProcessName();
 
     int foregroundProcessId = terminal->foregroundProcessId();
     QCOMPARE(foregroundProcessId, -1);
