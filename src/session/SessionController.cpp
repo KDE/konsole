@@ -1270,19 +1270,16 @@ void SessionController::updateFilterList(const Profile::Ptr &profile)
         return;
     }
 
+    auto session = _sessionDisplayConnection->session();
+    auto view = _sessionDisplayConnection->view();
+    auto *filterChain = view->filterChain();
+
     const QString currentWordCharacters = profile->wordCharacters();
     static QString _wordChars = currentWordCharacters;
 
-    //TODO: Refactor this code.
-    const bool underlineFiles = profile->underlineFilesEnabled();
-    FilterChain *filterChain = _sessionDisplayConnection->view()->filterChain();
-    if (!underlineFiles && (_fileFilter != nullptr)) {
-        filterChain->removeFilter(_fileFilter);
-        delete _fileFilter;
-        _fileFilter = nullptr;
-    } else if (underlineFiles) {
-        if (_fileFilter == nullptr) {
-            _fileFilter = new FileFilter(_sessionDisplayConnection->session(), currentWordCharacters);
+    if (profile->underlineFilesEnabled()) {
+        if (_fileFilter == nullptr) { // Initialize
+            _fileFilter = new FileFilter(session, currentWordCharacters);
             filterChain->addFilter(_fileFilter);
         } else {
             // If wordCharacters changed, we need to change the static regex
@@ -1292,24 +1289,29 @@ void SessionController::updateFilterList(const Profile::Ptr &profile)
                 _fileFilter->updateRegex(currentWordCharacters);
             }
         }
+    } else if (_fileFilter != nullptr) { // It became disabled, clean up
+        filterChain->removeFilter(_fileFilter);
+        delete _fileFilter;
+        _fileFilter = nullptr;
     }
 
-    const bool underlineLinks = profile->underlineLinksEnabled();
-    if (!underlineLinks && (_urlFilter != nullptr)) {
+    if (profile->underlineLinksEnabled()) {
+        if (_urlFilter == nullptr) { // Initialize
+            _urlFilter = new UrlFilter();
+            filterChain->addFilter(_urlFilter);
+        }
+    } else if (_urlFilter != nullptr) { // It became disabled, clean up
         filterChain->removeFilter(_urlFilter);
         delete _urlFilter;
         _urlFilter = nullptr;
-    } else if (underlineLinks && (_urlFilter == nullptr)) {
-        _urlFilter = new UrlFilter();
-        filterChain->addFilter(_urlFilter);
     }
 
     if (profile->allowEscapedLinks()) {
-        if (_escapedUrlFilter == nullptr) {
-            _escapedUrlFilter = new EscapeSequenceUrlFilter(_sessionDisplayConnection->session(), _sessionDisplayConnection->view());
+        if (_escapedUrlFilter == nullptr) { // Initialize
+            _escapedUrlFilter = new EscapeSequenceUrlFilter(session, view);
             filterChain->addFilter(_escapedUrlFilter);
         }
-    } else if (_escapedUrlFilter != nullptr) { // Became disabled, clean up
+    } else if (_escapedUrlFilter != nullptr) { // It became disabled, clean up
         filterChain->removeFilter(_escapedUrlFilter);
         delete _escapedUrlFilter;
         _escapedUrlFilter = nullptr;
