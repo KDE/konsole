@@ -372,11 +372,14 @@ void Screen::resizeImage(int new_lines, int new_columns)
     if ((new_lines == _lines) && (new_columns == _columns)) {
         return;
     }
+    // set min values of columns and lines here
+    new_columns = (17 < new_columns)? new_columns : 17; // FIXME: bug when column <= 16
+    new_lines = (3 < new_lines)? new_lines : 3; // FIXME: bug when lines <= 2
 
     // First join everything.
     int currentPos = 0;
     int count_needed_lines = 0;
-    while (currentPos < _screenLines.count() - 1) {
+    while (currentPos < _cuY && currentPos < _screenLines.count() - 1) {
         // if the line have the 'LINE_WRAPPED' property, concat with the next line and remove it.
         if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
             _screenLines[currentPos].append(_screenLines[currentPos + 1]);
@@ -462,7 +465,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 auto *curr_line = getCharacterBuffer(curr_linelen);
                 bool curr_line_property = _history->isWrappedLine(currentPos);
                 _history->getCells(currentPos, 0, curr_linelen, curr_line);
-                
+
                 _history->setCellsAt(currentPos, curr_line, new_columns);
                 _history->setLineAt(currentPos, true);
                 _history->insertCells(currentPos + 1, curr_line + new_columns, curr_linelen - new_columns);
@@ -1565,7 +1568,7 @@ void Screen::addHistLine()
                 // of dropped _lines
                 if (newHistLines == oldHistLines) {
                     _droppedLines++;
-                    
+
                     // We removed a line, we need to verify if we need to remove a URL.
                     _escapeSequenceUrlExtractor->historyLinesRemoved(1);
                 }
@@ -1584,7 +1587,7 @@ void Screen::addHistLine()
             // of dropped _lines
             if (newHistLines == oldHistLines) {
                 _droppedLines++;
-                
+
                 // We removed a line, we need to verify if we need to remove a URL.
                 _escapeSequenceUrlExtractor->historyLinesRemoved(1);
             }
