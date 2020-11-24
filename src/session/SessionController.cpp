@@ -1825,25 +1825,25 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         // check for validity of the pointer to the popup menu
         if (!popup.isNull()) {
             delete contentSeparator;
+            // Remove the 'Open with' actions from it.
+            QList<QAction*> toDelete;
+            for (auto *action : popup->actions()) {
+                if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
+                    toDelete.append(action);
+                }
+            }
+            qDeleteAll(toDelete);
+
+            // Remove the Accelerator for the copy shortcut so we don't have two actions with same shortcut.
+            copy->setShortcut({});
         }
 
+        // This should be at the end, to prevent crashes if the session
+        // is closed from the menu in e.g. konsole kpart
         _preventClose = false;
-
         if ((chosen != nullptr) && chosen->objectName() == QLatin1String("close-session")) {
             chosen->trigger();
         }
-
-        // Remove the 'Open with' actions from it.
-        QList<QAction*> toDelete;
-        for (auto *action : popup->actions()) {
-            if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
-                toDelete.append(action);
-            }
-        }
-        qDeleteAll(toDelete);
-
-        // Remove the Accelerator for the copy shortcut so we don't have two actions with same shortcut.
-        copy->setShortcut({});
     } else {
         qCDebug(KonsoleDebug) << "Unable to display popup menu for session"
                    << _sessionDisplayConnection->session()->title(Session::NameRole)
