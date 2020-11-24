@@ -1826,13 +1826,14 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         if (!popup.isNull()) {
             delete contentSeparator;
             // Remove the 'Open with' actions from it.
-            QList<QAction*> toDelete;
-            for (auto *action : popup->actions()) {
+            const auto actList = popup->actions();
+            for (auto *action : actList) {
                 if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
-                    toDelete.append(action);
+                    popup->removeAction(action);
+                    action = nullptr;
+                    delete action;
                 }
             }
-            qDeleteAll(toDelete);
 
             // Remove the Accelerator for the copy shortcut so we don't have two actions with same shortcut.
             copy->setShortcut({});
