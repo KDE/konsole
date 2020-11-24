@@ -84,13 +84,13 @@ public:
     ~SessionController() override;
 
     /** Returns the session associated with this controller */
-    QPointer<Session> session()
+    QPointer<Session> session() const
     {
         return _sessionDisplayConnection->session();
     }
 
     /** Returns the view associated with this controller */
-    QPointer<TerminalDisplay> view()
+    QPointer<TerminalDisplay> view() const
     {
         return _sessionDisplayConnection->view();
     }
