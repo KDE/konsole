@@ -114,7 +114,7 @@ void FileFilterHotSpot::activate(QObject *)
         // CommandLauncherJob; no need to call job->setUrls() because the url is
         // already part of editorCmd
         auto *job = new KIO::ApplicationLauncherJob(service);
-        connect(job, &KJob::result, this, [this, path, job, openUrl]() {
+        connect(job, &KJob::result, this, [path, job, openUrl]() {
             if (job->error()) {
                 // TODO: use KMessageWidget (like the "terminal is read-only" message)
                 KMessageBox::sorry(QApplication::activeWindow(),
