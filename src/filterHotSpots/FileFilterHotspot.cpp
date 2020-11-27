@@ -49,80 +49,105 @@ FileFilterHotSpot::FileFilterHotSpot(int startLine, int startColumn, int endLine
 
 void FileFilterHotSpot::activate(QObject *)
 {
-    // Used to fallback to opening the url with the system default application
-    auto openUrl = [](const QString &filePath) {
-        auto *job = new KIO::OpenUrlJob(QUrl::fromLocalFile(filePath));
-        job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
-        job->setRunExecutables(false); // Always open, e.g. shell scripts, as text
-        job->start();
-    };
-
-    // Output of e.g.:
-    // - grep with line numbers: "path/to/some/file:123:"
-    // - compiler errors with line/column numbers: "/path/to/file.cpp:123:123:"
-    // - ctest failing unit tests: "/path/to/file(204)"
-    const auto re(QRegularExpression(QStringLiteral(R"foo((?:[:\(]?(\d+)(?::?|\)\]))(?:(\d+):)?$)foo")));
-    QRegularExpressionMatch match = re.match(_filePath);
-    if (match.hasMatch()) {
-        // The file path without the ":123" ... etc bits
-        const QString path = _filePath.mid(0, match.capturedStart(0));
-
-        if (_session == nullptr) {
-            openUrl(path);
-            return;
-        }
-
-        Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
-        QString editorCmd = profile->textEditorCmd();
-        const int firstBlank = editorCmd.indexOf(QLatin1Char(' '));
-        const QString editorExecPath = QStandardPaths::findExecutable(editorCmd.mid(0, firstBlank));
-
-        // TODO: show an error message to the user?
-        if (editorCmd.isEmpty() || editorExecPath.isEmpty()
-            || !(editorCmd.contains(QLatin1String("PATH")) && editorCmd.contains(QLatin1String("LINE")))) {
-            openUrl(path);
-            return;
-        }
-
-        // Substitute e.g. "kate" with full path, "/usr/bin/kate"
-        editorCmd.replace(0, firstBlank, editorExecPath);
-
-        editorCmd.replace(QLatin1String("PATH"), path);
-        editorCmd.replace(QLatin1String("LINE"), match.captured(1));
-
-        const QString col = match.captured(2);
-        editorCmd.replace(QLatin1String("COLUMN"), !col.isEmpty() ? col : QLatin1String("0"));
-
-        qCDebug(KonsoleDebug) << "editorCmd:" << editorCmd;
-
-        KService::Ptr service(new KService(QString(), editorCmd, QString()));
-
-        // ApplicationLauncherJob is better at reporting errors to the user than
-        // CommandLauncherJob; no need to call job->setUrls() because the url is
-        // already part of editorCmd
-        auto *job = new KIO::ApplicationLauncherJob(service);
-        connect(job, &KJob::result, this, [path, job, openUrl]() {
-            if (job->error() != 0) {
-                // TODO: use KMessageWidget (like the "terminal is read-only" message)
-                KMessageBox::sorry(QApplication::activeWindow(),
-                                   i18n("Could not open file with the text editor specified in the profile settings;\n"
-                                        "it will be opened with the system default editor."));
-
-                openUrl(path);
-            }
-        });
-        job->start();
+    if (!_session) { // The Session is dead, nothing to do
         return;
     }
 
-    // There was no match, i.e. regular url "path/to/file", open it with
-    // the system default editor
-    // In case the regex above didn't match for any reason, clean up the file path
+    QString editorExecPath;
+    int firstBlankIdx = -1;
+    QString fullCmd;
+
+    Profile::Ptr profile = SessionManager::instance()->sessionProfile(_session);
+    const QString editorCmd = profile->textEditorCmd();
+    if (!editorCmd.isEmpty()) {
+        firstBlankIdx = editorCmd.indexOf(QLatin1Char(' '));
+        if (firstBlankIdx != -1) {
+            editorExecPath = QStandardPaths::findExecutable(editorCmd.mid(0, firstBlankIdx));
+        } else { // No spaces, e.g. just a binary name "foo"
+            editorExecPath = QStandardPaths::findExecutable(editorCmd);
+        }
+    }
+
+    // Output of e.g.:
+    // - grep with line numbers: "path/to/some/file:123:"
+    //   grep with long lines e.g. "path/to/some/file:123:void blah" i.e. no space after 123:
+    // - compiler errors with line/column numbers: "/path/to/file.cpp:123:123:"
+    // - ctest failing unit tests: "/path/to/file(204)"
+    static const QRegularExpression re(QStringLiteral(R"foo([:\(](\d+)(?:\)\])?(?::(\d+):|:[^\d]*)?$)foo"));
+    const QRegularExpressionMatch match = re.match(_filePath);
+    if (match.hasMatch()) {
+        // The file path without the ":123" ... etc part
+        const QString path = _filePath.mid(0, match.capturedStart(0));
+
+        // TODO: show an error message to the user?
+        if (editorExecPath.isEmpty()) { // Couldn't find the specified binary, fallback
+            openWithSysDefaultEditor(path);
+            return;
+        }
+        if (firstBlankIdx != -1) {
+            fullCmd = editorCmd;
+            // Substitute e.g. "fooBinary" with full path, "/usr/bin/fooBinary"
+            fullCmd.replace(0, firstBlankIdx, editorExecPath);
+
+            fullCmd.replace(QLatin1String("PATH"), path);
+            fullCmd.replace(QLatin1String("LINE"), match.captured(1));
+
+            const QString col = match.captured(2);
+            fullCmd.replace(QLatin1String("COLUMN"), !col.isEmpty() ? col : QLatin1String("0"));
+        } else { // The editorCmd is just the binary name, no PATH, LINE or COLUMN
+            // Add the "path" here, so it becomes "/path/to/fooBinary path"
+            fullCmd += QLatin1Char(' ') + path;
+        }
+
+        openWithEditorFromProfile(fullCmd, path);
+        return;
+    }
+
+    // There was no match, i.e. regular url "path/to/file"
+    // Clean up the file path; the second branch in the regex is for "path/to/file:"
     QString path(_filePath);
-    path.remove(QRegularExpression(QStringLiteral(R"foo((:\d+[:]?|:)$)foo"), QRegularExpression::DontCaptureOption));
-    openUrl(path);
+    static const QRegularExpression cleanupRe(QStringLiteral(R"foo((:\d+[:]?|:)$)foo"),
+                                              QRegularExpression::DontCaptureOption);
+    path.remove(cleanupRe);
+    if (!editorExecPath.isEmpty()) { // Use the editor from the profile settings
+        const QString fCmd = editorExecPath + QLatin1Char(' ') + path;
+        openWithEditorFromProfile(fCmd, path);
+    } else { // Fallback
+        openWithSysDefaultEditor(path);
+    }
 }
 
+void FileFilterHotSpot::openWithSysDefaultEditor(const QString &filePath) const
+{
+    auto *job = new KIO::OpenUrlJob(QUrl::fromLocalFile(filePath));
+    job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
+    job->setRunExecutables(false); // Always open scripts, shell/python/perl... etc, as text
+    job->start();
+}
+
+void FileFilterHotSpot::openWithEditorFromProfile(const QString &fullCmd, const QString &path) const
+{
+    qCDebug(KonsoleDebug) << "fullCmd:" << fullCmd;
+
+    KService::Ptr service(new KService(QString(), fullCmd, QString()));
+
+    // ApplicationLauncherJob is better at reporting errors to the user than
+    // CommandLauncherJob; no need to call job->setUrls() because the url is
+    // already part of fullCmd
+    auto *job = new KIO::ApplicationLauncherJob(service);
+    connect(job, &KJob::result, this, [this, path, job]() {
+        if (job->error() != 0) {
+            // TODO: use KMessageWidget (like the "terminal is read-only" message)
+            KMessageBox::sorry(QApplication::activeWindow(),
+                i18n("Could not open file with the text editor specified in the profile settings;\n"
+                     "it will be opened with the system default editor."));
+
+            openWithSysDefaultEditor(path);
+        }
+    });
+
+    job->start();
+}
 
 FileFilterHotSpot::~FileFilterHotSpot() = default;
 
