@@ -1826,8 +1826,6 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
             for (auto *action : actList) {
                 if (action->text().toLower().remove(QLatin1Char('&')).contains(i18n("open with"))) {
                     popup->removeAction(action);
-                    action = nullptr;
-                    delete action;
                 }
             }
 
