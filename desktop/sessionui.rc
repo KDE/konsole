@@ -1,6 +1,7 @@
-<!DOCTYPE kpartgui>
+<?xml version="1.0"?>
+<!DOCTYPE gui SYSTEM "kpartgui.dtd">
 
-<kpartgui name="session" version="29">
+<gui name="session" version="29">
     <MenuBar>
         <Menu name="file">
             <Action name="file_save_as" group="session-operations"/>
@@ -67,4 +68,4 @@
         <Action name="edit_paste" />
         <Action name="edit_find" />
     </ToolBar>
-</kpartgui>
+</gui>

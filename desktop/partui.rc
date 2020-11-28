@@ -1,6 +1,7 @@
-<!DOCTYPE kpartgui>
+<?xml version="1.0"?>
+<!DOCTYPE gui SYSTEM "kpartgui.dtd">
 
-<kpartgui name="konsolepart" version="13" translationDomain="konsole">
+<gui name="konsolepart" version="13" translationDomain="konsole">
     <Menu name="session-popup-menu">
         <Action name="edit_copy_contextmenu"/>
         <Action name="edit_paste"/>
@@ -26,4 +27,4 @@
         <Separator/>
         <Action name="close-session"/>
     </Menu>
-</kpartgui>
+</gui>

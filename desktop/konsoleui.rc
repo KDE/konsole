@@ -1,6 +1,7 @@
-<!DOCTYPE kpartgui>
+<?xml version="1.0"?>
+<!DOCTYPE gui SYSTEM "kpartgui.dtd">
 
-<kpartgui name="konsole" version="13">
+<gui name="konsole" version="13">
     <MenuBar>
         <Menu name="file"><text>File</text>
             <Action name="new-window"/>
@@ -53,4 +54,4 @@
         <Action name="split-view-left-right"/>
         <Action name="split-view-top-bottom"/>
     </ToolBar>
-</kpartgui>
+</gui>
