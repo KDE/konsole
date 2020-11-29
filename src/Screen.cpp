@@ -393,6 +393,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
         count_needed_lines += _screenLines[currentPos].count() / (new_columns + 1);
         currentPos++;
     }
+    count_needed_lines += _screenLines[currentPos].count() / (new_columns + 1);
 
     // If it will need more lines than new_lines have, send lines to _history
     count_needed_lines += _cuY;
