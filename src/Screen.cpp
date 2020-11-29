@@ -376,6 +376,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
     new_columns = (17 < new_columns)? new_columns : 17; // FIXME: bug when column <= 16
     new_lines = (3 < new_lines)? new_lines : 3; // FIXME: bug when lines <= 2
 
+    const int old_cuY = qMin(_cuY, new_lines - 1);
+
     // First join everything.
     int currentPos = 0;
     int count_needed_lines = 0;
@@ -427,14 +429,16 @@ void Screen::resizeImage(int new_lines, int new_columns)
         currentPos += 1;
     }
     _lineProperties.resize(new_lines + 1);
-    for (int i = _screenLines.count(); (i > 0) && (i < new_lines + 1); i++) {
-        _lineProperties[i] = LINE_DEFAULT;
-    }
     _screenLines.resize(new_lines + 1);
 
     // Check if _history need to change
     if (new_columns != _columns && _history->getLines()) {
-        // Join next line history
+        // Join next line _history from _screenLine
+        while (_history->isWrappedLine(_history->getLines() - 1)) {
+            addHistLine();
+            scrollUp(0, 1);
+            _cuY--;
+        }
         currentPos = 0;
         while (currentPos < _history->getLines() - 1) {
             // if it's true, join the line with next line
@@ -473,7 +477,28 @@ void Screen::resizeImage(int new_lines, int new_columns)
             }
             currentPos++;
         }
+        // Check cursor position and send from _history to _screenLines
+        ImageLine histLine;
+        histLine.reserve(1024);
+        while (_cuY < old_cuY && _history->getLines()) {
+            int histPos = _history->getLines() - 1;
+            int histLineLen = _history->getLineLen(histPos);
+            histLine.resize(histLineLen);
+            _history->getCells(histPos, 0, histLineLen, histLine.data());
+
+            _screenLines.prepend(histLine);
+            _lineProperties.insert(0, _history->isWrappedLine(histPos)? LINE_WRAPPED : LINE_DEFAULT);
+            _history->removeCells(histPos);
+            _cuY++;
+        }
     }
+
+    _lineProperties.resize(new_lines + 1);
+    for (int i = _screenLines.count(); (i > 0) && (i < new_lines + 1); i++) {
+        _lineProperties[i] = LINE_DEFAULT;
+    }
+    _screenLines.resize(new_lines + 1);
+
     clearSelection();
     _screenLinesSize = new_lines;
 
