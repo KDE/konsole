@@ -53,6 +53,7 @@ namespace Konsole
         if (ch.rendition & RE_EXTENDED_CHAR) {
             ushort extendedCharLength = 0;
             const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(ch.character, extendedCharLength);
+            // FIXME: Coverity-Dereferencing chars, which is known to be nullptr
             return chars[0];
         } else {
             return ch.character;
