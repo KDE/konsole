@@ -46,7 +46,8 @@ FileFilterHotSpot::FileFilterHotSpot(int startLine, int startColumn, int endLine
                                      Session *session)
   : RegExpFilterHotSpot(startLine, startColumn, endLine, endColumn, capturedTexts),
     _filePath(filePath),
-    _session(session)
+    _session(session),
+    _thumbnailFinished(false)
 {
     setType(Link);
 }

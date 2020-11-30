@@ -28,6 +28,7 @@ namespace Konsole
         : QScrollBar(display)
         , _display(display)
         , _scrollFullPage(false)
+        , _alternateScrolling(false)
         , _scrollbarLocation(Enum::ScrollBarRight)
     {
         connect(this, &QScrollBar::valueChanged, this, &TerminalScrollBar::scrollBarPositionChanged);
