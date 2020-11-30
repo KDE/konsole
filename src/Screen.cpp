@@ -380,7 +380,6 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
     // First join everything.
     int currentPos = 0;
-    int count_needed_lines = 0;
     while (currentPos < _cuY && currentPos < _screenLines.count() - 1) {
         // if the line have the 'LINE_WRAPPED' property, concat with the next line and remove it.
         if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
@@ -390,26 +389,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
             _cuY--;
             continue;
         }
-        count_needed_lines += _screenLines[currentPos].count() / (new_columns + 1);
         currentPos++;
-    }
-    count_needed_lines += _screenLines[currentPos].count() / (new_columns + 1);
-
-    // If it will need more lines than new_lines have, send lines to _history
-    count_needed_lines += _cuY;
-    if (count_needed_lines > new_lines - 1) {
-        _lineProperties.resize(_lines + 1);
-        for (int i = _screenLines.count(); (i > 0) && (i < new_lines + 1); i++) {
-            _lineProperties[i] = LINE_DEFAULT;
-        }
-        _screenLines.resize(_lines + 1);
-        // attempt to preserve focus and _lines
-        _bottomMargin = _lines - 1; //FIXME: margin lost
-        for (int i = 0; i < count_needed_lines - (new_lines - 1); i++) {
-            addHistLine();
-            scrollUp(0, 1);
-            _cuY--;
-        }
     }
 
     // Then move the data to lines below.
@@ -429,15 +409,23 @@ void Screen::resizeImage(int new_lines, int new_columns)
         }
         currentPos += 1;
     }
+    // Check if it need to move from _screenLine to _history
+    while (_cuY > new_lines - 1) {
+        addHistLine();
+        _screenLines.pop_front();
+        _lineProperties.remove(0);
+        _cuY--;
+    }
     _lineProperties.resize(new_lines + 1);
     _screenLines.resize(new_lines + 1);
 
     // Check if _history need to change
     if (new_columns != _columns && _history->getLines()) {
-        // Join next line _history from _screenLine
+        // Join next line from _screenLine to _history
         while (_history->isWrappedLine(_history->getLines() - 1)) {
             addHistLine();
-            scrollUp(0, 1);
+            _screenLines.pop_front();
+            _lineProperties.remove(0);
             _cuY--;
         }
         currentPos = 0;
@@ -457,6 +445,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _history->setCellsAt(currentPos, new_line, curr_linelen + next_linelen);
                 _history->setLineAt(currentPos, new_line_property);
                 _history->removeCells(currentPos + 1);
+                continue;
             }
             currentPos++;
         }
@@ -473,8 +462,13 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
                 _history->setCellsAt(currentPos, curr_line, new_columns);
                 _history->setLineAt(currentPos, true);
+                if (currentPos < _history->getMaxLines() - 1) {
                 _history->insertCells(currentPos + 1, curr_line + new_columns, curr_linelen - new_columns);
                 _history->setLineAt(currentPos + 1, curr_line_property);
+                } else {
+                    _history->addCells(curr_line + new_columns, curr_linelen - new_columns);
+                    _history->addLine(curr_line_property);
+                }
             }
             currentPos++;
         }
@@ -484,11 +478,12 @@ void Screen::resizeImage(int new_lines, int new_columns)
         while (_cuY < old_cuY && _history->getLines()) {
             int histPos = _history->getLines() - 1;
             int histLineLen = _history->getLineLen(histPos);
+            int isWrapped = _history->isWrappedLine(histPos)? LINE_WRAPPED : LINE_DEFAULT;
             histLine.resize(histLineLen);
             _history->getCells(histPos, 0, histLineLen, histLine.data());
 
-            _screenLines.prepend(histLine);
-            _lineProperties.insert(0, _history->isWrappedLine(histPos)? LINE_WRAPPED : LINE_DEFAULT);
+            _screenLines.insert(0, histLine);
+            _lineProperties.insert(0, isWrapped);
             _history->removeCells(histPos);
             _cuY++;
         }
@@ -1568,7 +1563,6 @@ void Screen::addHistLine()
     int newHistLines = _history->getLines();
 
     if (hasScroll()) {
-
         // Check if _history have 'new line' property and join lines before adding a new one to history
         if (oldHistLines > 0 && _history->isWrappedLine(oldHistLines - 1)) {
             int hist_linelen = _history->getLineLen(oldHistLines - 1);
