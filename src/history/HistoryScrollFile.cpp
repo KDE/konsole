@@ -33,6 +33,11 @@ int HistoryScrollFile::getLines()
     return _index.len() / sizeof(qint64);
 }
 
+int HistoryScrollFile::getMaxLines()
+{
+    return _index.len() / sizeof(qint64);
+}
+
 int HistoryScrollFile::getLineLen(int lineno)
 {
     return (startOfLine(lineno + 1) - startOfLine(lineno)) / sizeof(Character);

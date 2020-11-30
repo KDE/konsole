@@ -26,6 +26,7 @@ public:
     bool hasScroll() override;
 
     int  getLines() override;
+    int  getMaxLines() override;
     int  getLineLen(int lineno) override;
     void getCells(int lineno, int colno, int count, Character res[]) override;
     bool isWrappedLine(int lineno) override;

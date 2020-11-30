@@ -24,6 +24,7 @@ public:
     ~CompactHistoryScroll() override;
 
     int  getLines() override;
+    int  getMaxLines() override;
     int  getLineLen(int lineNumber) override;
     void getCells(int lineNumber, int startColumn, int count, Character buffer[]) override;
     bool isWrappedLine(int lineNumber) override;

@@ -32,6 +32,7 @@ public:
 
     // access to history
     virtual int  getLines() = 0;
+    virtual int  getMaxLines() = 0;
     virtual int  getLineLen(int lineno) = 0;
     virtual void getCells(int lineno, int colno, int count, Character res[]) = 0;
     virtual bool isWrappedLine(int lineNumber) = 0;

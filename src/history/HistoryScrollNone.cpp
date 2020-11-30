@@ -30,6 +30,11 @@ int HistoryScrollNone::getLines()
     return 0;
 }
 
+int HistoryScrollNone::getMaxLines()
+{
+    return 0;
+}
+
 int HistoryScrollNone::getLineLen(int)
 {
     return 0;

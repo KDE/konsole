@@ -57,6 +57,11 @@ int CompactHistoryScroll::getLines()
     return _lines.size();
 }
 
+int CompactHistoryScroll::getMaxLines()
+{
+    return static_cast<int>(_maxLineCount);
+}
+
 int CompactHistoryScroll::getLineLen(int lineNumber)
 {
     if ((lineNumber < 0) || (lineNumber >= _lines.size())) {
