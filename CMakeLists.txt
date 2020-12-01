@@ -1,5 +1,8 @@
 # Konsole project
 
+# See comments in https://invent.kde.org/utilities/konsole/-/commit/9d8e47298c81fc1e47c998eda1b6e980589274eb
+cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
+
 # KDE Application Version, managed by release script
 set (RELEASE_SERVICE_VERSION_MAJOR "21")
 set (RELEASE_SERVICE_VERSION_MINOR "03")
