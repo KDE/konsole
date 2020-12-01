@@ -463,8 +463,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _history->setCellsAt(currentPos, curr_line, new_columns);
                 _history->setLineAt(currentPos, true);
                 if (currentPos < _history->getMaxLines() - 1) {
-                _history->insertCells(currentPos + 1, curr_line + new_columns, curr_linelen - new_columns);
-                _history->setLineAt(currentPos + 1, curr_line_property);
+                    _history->insertCells(currentPos + 1, curr_line + new_columns, curr_linelen - new_columns);
+                    _history->setLineAt(currentPos + 1, curr_line_property);
                 } else {
                     _history->addCells(curr_line + new_columns, curr_linelen - new_columns);
                     _history->addLine(curr_line_property);
