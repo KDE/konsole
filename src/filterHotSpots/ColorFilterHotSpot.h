@@ -20,7 +20,7 @@ namespace Konsole
     {
     public:
         ColorFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts, const QString &colorName);
-        ~ColorFilterHotSpot() = default;
+        ~ColorFilterHotSpot() override = default;
 
         void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev) override;
         void mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev) override;
