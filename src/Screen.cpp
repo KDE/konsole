@@ -53,6 +53,8 @@ Screen::Screen(int lines, int columns):
     _scrolledLines(0),
     _lastScrolledRegion(QRect()),
     _droppedLines(0),
+    _oldTotalLines(0),
+    _isResize(false),
     _lineProperties(QVarLengthArray<LineProperty, 64>()),
     _history(new HistoryScrollNone()),
     _cuX(0),
@@ -367,6 +369,20 @@ void Screen::restoreCursor()
     updateEffectiveRendition();
 }
 
+int Screen::getOldTotalLines()
+{
+    return _oldTotalLines;
+}
+
+bool Screen::isResize()
+{
+    if (_isResize) {
+        _isResize = false;
+        return true;
+    }
+    return _isResize;
+}
+
 void Screen::resizeImage(int new_lines, int new_columns)
 {
     if ((new_lines == _lines) && (new_columns == _columns)) {
@@ -376,42 +392,45 @@ void Screen::resizeImage(int new_lines, int new_columns)
     new_columns = (17 < new_columns)? new_columns : 17; // FIXME: bug when column <= 16
     new_lines = (3 < new_lines)? new_lines : 3; // FIXME: bug when lines <= 2
 
-    const int old_cuY = qMin(_cuY, new_lines - 1);
+    _oldTotalLines = getLines() + getHistLines();
+    _isResize = true;
 
     // First join everything.
     int currentPos = 0;
-    while (currentPos < _cuY && currentPos < _screenLines.count() - 1) {
-        // if the line have the 'LINE_WRAPPED' property, concat with the next line and remove it.
-        if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
-            _screenLines[currentPos].append(_screenLines[currentPos + 1]);
-            _screenLines.remove(currentPos + 1);
-            _lineProperties.remove(currentPos);
-            _cuY--;
-            continue;
+    if (new_columns != _columns) {
+        while (currentPos < _cuY && currentPos < _screenLines.count() - 1) {
+            // if the line have the 'LINE_WRAPPED' property, concat with the next line and remove it.
+            if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
+                _screenLines[currentPos].append(_screenLines[currentPos + 1]);
+                _screenLines.remove(currentPos + 1);
+                _lineProperties.remove(currentPos);
+                _cuY--;
+                continue;
+            }
+            currentPos++;
         }
-        currentPos++;
-    }
+        // Then move the data to lines below.
+        currentPos = 0;
+        while (currentPos != _screenLines.count() && currentPos != _cuY) {
+            const bool shouldCopy = _screenLines[currentPos].size() > new_columns;
 
-    // Then move the data to lines below.
-    currentPos = 0;
-    while (currentPos != _screenLines.count() && currentPos != _cuY) {
-        const bool shouldCopy = _screenLines[currentPos].size() > new_columns;
+            // Copy from the current line, to the next one.
+            if (shouldCopy) {
+                _cuY++;
 
-        // Copy from the current line, to the next one.
-        if (shouldCopy) {
-            _cuY++;
-
-            auto values = _screenLines[currentPos].mid(new_columns);
-            _screenLines[currentPos].remove(new_columns, values.size());
-            _lineProperties.insert(currentPos + 1, _lineProperties[currentPos]);
-            _screenLines.insert(currentPos + 1, values);
-            _lineProperties[currentPos] |= LINE_WRAPPED;
+                auto values = _screenLines[currentPos].mid(new_columns);
+                _screenLines[currentPos].remove(new_columns, values.size());
+                _lineProperties.insert(currentPos + 1, _lineProperties[currentPos]);
+                _screenLines.insert(currentPos + 1, values);
+                _lineProperties[currentPos] |= LINE_WRAPPED;
+            }
+            currentPos += 1;
         }
-        currentPos += 1;
     }
     // Check if it need to move from _screenLine to _history
     while (_cuY > new_lines - 1) {
-        addHistLine();
+        _history->addCellsVector(_screenLines[0]);
+        _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
         _screenLines.pop_front();
         _lineProperties.remove(0);
         _cuY--;
@@ -423,7 +442,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
     if (new_columns != _columns && _history->getLines()) {
         // Join next line from _screenLine to _history
         while (_history->isWrappedLine(_history->getLines() - 1)) {
-            addHistLine();
+            _history->addCellsVector(_screenLines[0]);
+            _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
             _screenLines.pop_front();
             _lineProperties.remove(0);
             _cuY--;
@@ -472,21 +492,21 @@ void Screen::resizeImage(int new_lines, int new_columns)
             }
             currentPos++;
         }
-        // Check cursor position and send from _history to _screenLines
-        ImageLine histLine;
-        histLine.reserve(1024);
-        while (_cuY < old_cuY && _history->getLines()) {
-            int histPos = _history->getLines() - 1;
-            int histLineLen = _history->getLineLen(histPos);
-            int isWrapped = _history->isWrappedLine(histPos)? LINE_WRAPPED : LINE_DEFAULT;
-            histLine.resize(histLineLen);
-            _history->getCells(histPos, 0, histLineLen, histLine.data());
+    }
 
-            _screenLines.insert(0, histLine);
-            _lineProperties.insert(0, isWrapped);
-            _history->removeCells(histPos);
-            _cuY++;
-        }
+    // Check cursor position and send from _history to _screenLines
+    ImageLine histLine;
+    histLine.reserve(1024);
+    while (_cuY < new_lines - 1 && _history->getLines()) {
+        int histPos = _history->getLines() - 1;
+        int histLineLen = _history->getLineLen(histPos);
+        int isWrapped = _history->isWrappedLine(histPos)? LINE_WRAPPED : LINE_DEFAULT;
+        histLine.resize(histLineLen);
+        _history->getCells(histPos, 0, histLineLen, histLine.data());
+        _screenLines.insert(0, histLine);
+        _lineProperties.insert(0, isWrapped);
+        _history->removeCells(histPos);
+        _cuY++;
     }
 
     _lineProperties.resize(new_lines + 1);
@@ -495,17 +515,14 @@ void Screen::resizeImage(int new_lines, int new_columns)
     }
     _screenLines.resize(new_lines + 1);
 
-    clearSelection();
     _screenLinesSize = new_lines;
-
     _lines = new_lines;
     _columns = new_columns;
     _cuX = qMin(_cuX, _columns - 1);
     _cuY = qMin(_cuY, _lines - 1);
 
     // FIXME: try to keep values, evtl.
-    _topMargin = 0;
-    _bottomMargin = _lines - 1;
+    setDefaultMargins();
     initTabStops();
     clearSelection();
 }

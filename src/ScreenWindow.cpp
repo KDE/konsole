@@ -294,6 +294,17 @@ QRect ScreenWindow::scrollRegion() const
     return {0, 0, windowColumns(), windowLines()};
 }
 
+void ScreenWindow::updateCurrentLine()
+{
+    if (!_screen->isResize()) {
+        return;
+    }
+    if (_currentLine > 0) {
+        _currentLine -= _screen->getOldTotalLines() - lineCount();
+    }
+    _currentLine = qBound(0, _currentLine, lineCount() - windowLines());
+}
+
 void ScreenWindow::notifyOutputChanged()
 {
     // move window to the bottom of the screen and update scroll count

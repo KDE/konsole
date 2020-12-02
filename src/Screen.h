@@ -588,6 +588,9 @@ public:
 
     static const Character DefaultChar;
 
+    int getOldTotalLines();
+    bool isResize();
+
 private:
     //copies a line of text from the screen or history into a stream using a
     //specified character decoder.  Returns the number of lines actually copied,
@@ -660,6 +663,9 @@ private:
     QRect _lastScrolledRegion;
 
     int _droppedLines;
+
+    int _oldTotalLines;
+    bool _isResize;
 
     QVarLengthArray<LineProperty, 64> _lineProperties;
 
