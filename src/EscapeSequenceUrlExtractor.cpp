@@ -11,8 +11,7 @@
 
 namespace Konsole {
 EscapeSequenceUrlExtractor::EscapeSequenceUrlExtractor()
-{
-}
+= default;
 
 void Konsole::EscapeSequenceUrlExtractor::setScreen(Konsole::Screen* screen)
 {
