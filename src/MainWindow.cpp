@@ -134,7 +134,7 @@ MainWindow::MainWindow() :
 
 
     // KXMLGui is making the status bar always visible, we need to fix in a proper way.
-    if (statusBar()) {
+    if (statusBar() != nullptr) {
         statusBar()->installEventFilter(this);
     }
 }
@@ -926,7 +926,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
             default: ;
         }
     }
-    if (qobject_cast<QStatusBar*>(obj)) {
+    if (qobject_cast<QStatusBar*>(obj) != nullptr) {
         switch(event->type()) {
             case QEvent::Show: statusBar()->hide(); break;
             default: return true;

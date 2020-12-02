@@ -76,7 +76,7 @@ void FileFilterHotSpot::activate(QObject *)
         // The file path without the ":123" ... etc bits
         const QString path = _filePath.mid(0, match.capturedStart(0));
 
-        if (!_session) {
+        if (_session == nullptr) {
             openUrl(path);
             return;
         }
@@ -116,7 +116,7 @@ void FileFilterHotSpot::activate(QObject *)
         // already part of editorCmd
         auto *job = new KIO::ApplicationLauncherJob(service);
         connect(job, &KJob::result, this, [path, job, openUrl]() {
-            if (job->error()) {
+            if (job->error() != 0) {
                 // TODO: use KMessageWidget (like the "terminal is read-only" message)
                 KMessageBox::sorry(QApplication::activeWindow(),
                                    i18n("Could not open file with the text editor specified in the profile settings;\n"

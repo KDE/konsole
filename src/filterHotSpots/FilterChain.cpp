@@ -155,7 +155,7 @@ void FilterChain::keyReleaseEvent(TerminalDisplay *td, QKeyEvent *ev, int charLi
     }
 
     auto spot = hotSpotAt(charLine, charColumn);
-    if (spot) {
+    if (spot != nullptr) {
         spot->keyReleaseEvent(td, ev);
     }
 }
@@ -186,7 +186,7 @@ bool FilterChain::keyPressEvent(TerminalDisplay *td, QKeyEvent *ev, int charLine
     }
 
     auto spot = hotSpotAt(charLine, charColumn);
-    if (spot) {
+    if (spot != nullptr) {
         spot->keyPressEvent(td, ev);
     }
     return false;
@@ -196,16 +196,16 @@ void  FilterChain::mouseMoveEvent(TerminalDisplay *td, QMouseEvent *ev, int char
 {
     auto spot = hotSpotAt(charLine, charColumn);
     if (_hotSpotUnderMouse != spot) {
-        if (_hotSpotUnderMouse) {
+        if (_hotSpotUnderMouse != nullptr) {
             _hotSpotUnderMouse->mouseLeaveEvent(td, ev);
         }
         _hotSpotUnderMouse = spot;
-        if (_hotSpotUnderMouse) {
+        if (_hotSpotUnderMouse != nullptr) {
             _hotSpotUnderMouse->mouseEnterEvent(td, ev);
         }
     }
 
-    if (spot) {
+    if (spot != nullptr) {
         spot->mouseMoveEvent(td, ev);
     }
 }

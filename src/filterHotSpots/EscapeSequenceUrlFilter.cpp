@@ -22,7 +22,7 @@ EscapeSequenceUrlFilter::EscapeSequenceUrlFilter(Session* session, TerminalDispl
 
 void EscapeSequenceUrlFilter::process()
 {
-    if (!_window->screenWindow() && _window->screenWindow()->screen()) {
+    if ((_window->screenWindow() == nullptr) && (_window->screenWindow()->screen() != nullptr)) {
         return;
     }
     auto sWindow = _window->screenWindow();

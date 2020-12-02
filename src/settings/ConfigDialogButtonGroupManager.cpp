@@ -54,7 +54,7 @@ void ConfigDialogButtonGroupManager::add(const QButtonGroup *obj)
 bool ConfigDialogButtonGroupManager::hasChanged() const
 {
     for(const QButtonGroup *group: qAsConst(_groups)) {
-        if (!group->checkedButton()) {
+        if (group->checkedButton() == nullptr) {
             continue;
         }
         int value = buttonToEnumValue(group->checkedButton());
