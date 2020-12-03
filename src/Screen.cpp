@@ -388,10 +388,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
     if ((new_lines == _lines) && (new_columns == _columns)) {
         return;
     }
-    // set min values of columns and lines here
-    new_columns = (17 < new_columns)? new_columns : 17; // FIXME: bug when column <= 16
-    new_lines = (3 < new_lines)? new_lines : 3; // FIXME: bug when lines <= 2
 
+    // Adjust scroll position, and fix glitches
     _oldTotalLines = getLines() + getHistLines();
     _isResize = true;
 
@@ -429,11 +427,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     }
     // Check if it need to move from _screenLine to _history
     while (_cuY > new_lines - 1) {
-        _history->addCellsVector(_screenLines[0]);
-        _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
-        _screenLines.pop_front();
-        _lineProperties.remove(0);
-        _cuY--;
+        fastAddHistLine();
     }
     _lineProperties.resize(new_lines + 1);
     _screenLines.resize(new_lines + 1);
@@ -442,13 +436,10 @@ void Screen::resizeImage(int new_lines, int new_columns)
     if (new_columns != _columns && _history->getLines()) {
         // Join next line from _screenLine to _history
         while (_history->isWrappedLine(_history->getLines() - 1)) {
-            _history->addCellsVector(_screenLines[0]);
-            _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
-            _screenLines.pop_front();
-            _lineProperties.remove(0);
-            _cuY--;
+            fastAddHistLine();
         }
         currentPos = 0;
+        // Join everything in _history
         while (currentPos < _history->getLines() - 1) {
             // if it's true, join the line with next line
             if (_history->isWrappedLine(currentPos)) {
@@ -469,13 +460,14 @@ void Screen::resizeImage(int new_lines, int new_columns)
             }
             currentPos++;
         }
-        // Move data to next line if needed
+        // Now move data to next line if needed
         currentPos = 0;
         while (currentPos < _history->getLines()) {
             int curr_linelen = _history->getLineLen(currentPos);
 
             // if the current line > new_columns it will need a new line
             if (curr_linelen > new_columns) {
+                bool removeLine = _history->getLines() == _history->getMaxLines();
                 auto *curr_line = getCharacterBuffer(curr_linelen);
                 bool curr_line_property = _history->isWrappedLine(currentPos);
                 _history->getCells(currentPos, 0, curr_linelen, curr_line);
@@ -488,6 +480,11 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 } else {
                     _history->addCells(curr_line + new_columns, curr_linelen - new_columns);
                     _history->addLine(curr_line_property);
+                }
+                // If _history size > max history size it will drop a line from _history.
+                // We need to verify if we need to remove a URL.
+                if (removeLine) {
+                    _escapeSequenceUrlExtractor->historyLinesRemoved(1);
                 }
             }
             currentPos++;
@@ -1570,6 +1567,23 @@ int Screen::copyLineToStream(int line ,
 void Screen::writeLinesToStream(TerminalCharacterDecoder* decoder, int fromLine, int toLine) const
 {
     writeToStream(decoder, loc(0, fromLine), loc(_columns - 1, toLine), PreserveLineBreaks);
+}
+
+void Screen::fastAddHistLine()
+{
+    bool removeLine = _history->getLines() == _history->getMaxLines();
+    _history->addCellsVector(_screenLines[0]);
+    _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
+
+    // If _history size > max history size it will drop a line from _history.
+    // We need to verify if we need to remove a URL.
+    if (removeLine) {
+        _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+    }
+
+    _screenLines.pop_front();
+    _lineProperties.remove(0);
+    _cuY--;
 }
 
 void Screen::addHistLine()
