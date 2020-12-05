@@ -1415,9 +1415,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
         }
     }
 
-    int charLine;
-    int charColumn;
-    getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
+    auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !_usesMouseTracking);
     QPoint pos = QPoint(charColumn, charLine);
 
     processFilters();
@@ -1490,23 +1488,17 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 
 QSharedPointer<HotSpot> TerminalDisplay::filterActions(const QPoint& position)
 {
-    int charLine;
-    int charColumn;
-    getCharacterPosition(position, charLine, charColumn, false);
-
+    auto [charLine, charColumn] = getCharacterPosition(position, false);
     return _filterChain->hotSpotAt(charLine, charColumn);
 }
 
 void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
 {
-    int charLine = 0;
-    int charColumn = 0;
-
     if (!hasFocus() && KonsoleSettings::focusFollowsMouse()) {
        setFocus();
     }
 
-    getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
+    auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !_usesMouseTracking);
 
     processFilters();
 
@@ -1622,9 +1614,7 @@ void TerminalDisplay::extendSelection(const QPoint& position)
         _scrollBar->setValue(_scrollBar->value() - linesBeyondWidget - 1); // history
     }
 
-    int charColumn = 0;
-    int charLine = 0;
-    getCharacterPosition(pos, charLine, charColumn, true);
+    auto [charLine, charColumn] = getCharacterPosition(pos, true);
 
     QPoint here = QPoint(charColumn, charLine);
     QPoint ohere;
@@ -1745,9 +1735,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
         return;
     }
 
-    int charLine;
-    int charColumn;
-    getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
+    auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !_usesMouseTracking);
 
     if (ev->button() == Qt::LeftButton) {
         if (_dragInfo.state == diPending) {
@@ -1787,7 +1775,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
     }
 }
 
-void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, int& line, int& column, bool edge) const
+std::tuple<int, int> TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, bool edge) const
 {
     // the column value returned can be equal to _usedColumns (when edge == true),
     // which is the position just after the last character displayed in a line.
@@ -1796,8 +1784,10 @@ void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, int& line,
     // column (or left-most for right-to-left input)
     const int columnMax = edge ? _usedColumns : _usedColumns - 1;
     const int xOffset = edge ? _fontWidth / 2 : 0;
-    column = qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _fontWidth, columnMax);
-    line = qBound(0, (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _fontHeight, _usedLines - 1);
+    int column = qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _fontWidth, columnMax);
+    int line = qBound(0, (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _fontHeight, _usedLines - 1);
+
+    return std::make_tuple(line, column);
 }
 
 void TerminalDisplay::setExpandedMode(bool expand)
@@ -1828,10 +1818,7 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)
         }
     } else {
         if(!_readOnly) {
-            int charLine = 0;
-            int charColumn = 0;
-            getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
-
+            auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !_usesMouseTracking);
             emit mouseSignal(1, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
         }
     }
@@ -1852,10 +1839,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
         return;
     }
 
-    int charLine = 0;
-    int charColumn = 0;
-
-    getCharacterPosition(ev->pos(), charLine, charColumn, !_usesMouseTracking);
+    auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !_usesMouseTracking);
 
     QPoint pos(qMin(charColumn, _columns - 1), qMin(charLine, _lines - 1));
 
@@ -1973,12 +1957,10 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         } else if (_usesMouseTracking) {
             // terminal program wants notification of mouse activity
 
-            int charLine;
-            int charColumn;
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-            getCharacterPosition(ev->position().toPoint() , charLine , charColumn, !_usesMouseTracking);
+            auto [charLine, charColumn] = getCharacterPosition(ev->position().toPoint(), !_usesMouseTracking);
 #else
-            getCharacterPosition(ev->pos() , charLine , charColumn, !_usesMouseTracking);
+            auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !_usesMouseTracking);
 #endif
             const int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
             const int button = (steps > 0) ? 4 : 5;
@@ -2231,9 +2213,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
         return;
     }
 
-    int charLine;
-    int charColumn;
-    getCharacterPosition(ev->pos(), charLine, charColumn, true);
+    auto [charLine, charColumn] = getCharacterPosition(ev->pos(), true);
     selectLine(QPoint(charColumn, charLine),
                _tripleClickMode == Enum::SelectWholeLine);
 }
@@ -2741,10 +2721,8 @@ void TerminalDisplay::updateReadOnlyState(bool readonly) {
 
 void TerminalDisplay::keyPressEvent(QKeyEvent* event)
 {
-    { // C++17: change getCharacterPosition to return a tuple and use auto [charLine, charColumn] to extract the values.
-        int charLine;
-        int charColumn;
-        getCharacterPosition(mapFromGlobal(QCursor::pos()), charLine, charColumn, !_usesMouseTracking);
+    {
+        auto [charLine, charColumn] = getCharacterPosition(mapFromGlobal(QCursor::pos()), !_usesMouseTracking);
 
         // Don't process it if the filterchain handled it for us
         if (_filterChain->keyPressEvent(this, event, charLine, charColumn)) {
@@ -2795,10 +2773,8 @@ void TerminalDisplay::keyReleaseEvent(QKeyEvent *event)
         return;
     }
 
-    { // C++17: change getCharacterPosition to return a tuple and use auto [charLine, charColumn] to extract the values.
-        int charLine;
-        int charColumn;
-        getCharacterPosition(mapFromGlobal(QCursor::pos()), charLine, charColumn, !_usesMouseTracking);
+    {
+        auto [charLine, charColumn] = getCharacterPosition(mapFromGlobal(QCursor::pos()), !_usesMouseTracking);
         _filterChain->keyReleaseEvent(this, event, charLine, charColumn);
     }
 

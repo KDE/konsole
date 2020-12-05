@@ -18,6 +18,7 @@
 
 #include <algorithm>
 
+
 using namespace Konsole;
 FilterChain::FilterChain(TerminalDisplay *terminalDisplay)
   : _terminalDisplay(terminalDisplay),
@@ -224,10 +225,9 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
     // get color of character under mouse and use it to draw
     // lines for filters
     QPoint cursorPos = td->mapFromGlobal(QCursor::pos());
-    int cursorLine;
-    int cursorColumn;
 
-    td->getCharacterPosition(cursorPos, cursorLine, cursorColumn, false);
+    auto [cursorLine, cursorColumn] = td->getCharacterPosition(cursorPos, false);
+
     Character cursorCharacter = td->getCursorCharacter( std::min(cursorColumn, td->columns() - 1), cursorLine);
     painter.setPen(QPen(cursorCharacter.foregroundColor.color(td->colorTable())));
 
