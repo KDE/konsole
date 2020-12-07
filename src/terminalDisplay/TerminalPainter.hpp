@@ -20,6 +20,8 @@
 #include "ScreenWindow.h"
 #include "Enumeration.h"
 #include "colorscheme/ColorSchemeWallpaper.h"
+#include "profile/Profile.h"
+#include "terminalDisplay/TerminalDisplay.h"
 
 class QRect;
 class QColor;
@@ -34,11 +36,13 @@ namespace Konsole
     class Character;
     class TerminalDisplay;
     
-    class TerminalPainter
+    class TerminalPainter : public QObject
     {
     public:
-        explicit TerminalPainter(TerminalDisplay *display);
+        explicit TerminalPainter(QObject *parent = nullptr);
         ~TerminalPainter() = default;
+
+        void applyProfile(const Profile::Ptr &profile);
 
         // -- Drawing helpers --
 
@@ -46,43 +50,54 @@ namespace Konsole
         // fragments according to their colors and styles and calls
         // drawTextFragment() or drawPrinterFriendlyTextFragment()
         // to draw the fragments
-        void drawContents(QPainter &paint, const QRect &rect, bool PrinterFriendly);
+        void drawContents(Character *image, QPainter &paint, const QRect &rect, bool PrinterFriendly, int imageSize, bool bidiEnabled, bool &fixedFont,
+            QVector<LineProperty> lineProperties);
+        
         // draw a transparent rectangle over the line of the current match
-        void drawCurrentResultRect(QPainter &painter);
+        void drawCurrentResultRect(QPainter &painter, QRect searchResultRect);
+
         // draw a thin highlight on the left of the screen for lines that have been scrolled into view
-        void highlightScrolledLines(QPainter& painter);
+        void highlightScrolledLines(QPainter& painter, QTimer *timer, QRect rect);
+
         // compute which region need to be repainted for scrolled lines highlight
-        QRegion highlightScrolledLinesRegion(bool nothingChanged);
+        QRegion highlightScrolledLinesRegion(bool nothingChanged, QTimer *timer, int &previousScrollCount, QRect &rect, bool &needToClear, int HighlightScrolledLinesWidth);
 
-        // draws a section of text, all the text in this section
-        // has a common color and style
-        void drawTextFragment(QPainter &painter, const QRect &rect, const QString &text,
-                            const Character *style);
-
-        void drawPrinterFriendlyTextFragment(QPainter &painter, const QRect &rect, const QString &text,
-                                            const Character *style);
         // draws the background for a text fragment
         // if useOpacitySetting is true then the color's alpha value will be set to
         // the display's transparency (set with setOpacity()), otherwise the background
         // will be drawn fully opaque
         void drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor,
                             bool useOpacitySetting);
+
         // draws the cursor character
         void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor,
                         const QColor &backgroundColor, QColor &characterColor);
         // draws the characters or line graphics in a text fragment
         void drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
                             const Character *style, const QColor &characterColor);
-        // draws a string of line graphics
-        void drawLineCharString(QPainter &painter, int x, int y, const QString &str,
-                                const Character *attributes);
 
         // draws the preedit string for input methods
-        void drawInputMethodPreeditString(QPainter &painter, const QRect &rect);
+        void drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image);
     
     private:
+        // draws a string of line graphics
+        void drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character *attributes);
+        
+        // draws a section of text, all the text in this section
+        // has a common color and style
+        void drawTextFragment(QPainter &painter, const QRect &rect, const QString &text,
+                            const Character *style, const ColorEntry *colorTable);
+        
+        void drawPrinterFriendlyTextFragment(QPainter &painter, const QRect &rect, const QString &text,
+                            const Character *style);
 
-        TerminalDisplay *_display;
+        // cursor color. If it is invalid (by default) then the foreground
+        // color of the character under the cursor is used
+        QColor m_cursorColor;
+
+        // cursor text color. If it is invalid (by default) then the background
+        // color of the character under the cursor is used
+        QColor m_cursorTextColor;
     };
 
 }

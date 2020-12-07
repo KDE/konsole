@@ -167,36 +167,6 @@ public:
     void resetCursorStyle();
 
     /**
-     * Sets the color used to draw the keyboard cursor.
-     *
-     * The keyboard cursor defaults to using the foreground color of the character
-     * underneath it.
-     *
-     * @param color By default, the widget uses the color of the
-     * character under the cursor to draw the cursor, and inverts the
-     * color of that character to make sure it is still readable. If @p
-     * color is a valid QColor, the widget uses that color to draw the
-     * cursor. If @p color is not an valid QColor, the widget falls back
-     * to the default behavior.
-     */
-    void setKeyboardCursorColor(const QColor &color);
-
-    /**
-     * Sets the color used to draw the character underneath the keyboard cursor.
-     *
-     * The keyboard cursor defaults to using the background color of the
-     * terminal cell to draw the character at the cursor position.
-     *
-     * @param color By default, the widget uses the color of the
-     * character under the cursor to draw the cursor, and inverts the
-     * color of that character to make sure it is still readable. If @p
-     * color is a valid QColor, the widget uses that color to draw the
-     * character underneath the cursor. If @p color is not an valid QColor,
-     * the widget falls back to the default behavior.
-     */
-    void setKeyboardCursorTextColor(const QColor &color);
-
-    /**
      * Returns the number of lines of text which can be displayed in the widget.
      *
      * This will depend upon the height of the widget and the current font.
@@ -217,6 +187,11 @@ public:
     int  columns() const
     {
         return _columns;
+    }
+
+    int usedColumns() const
+    {
+        return _usedColumns;
     }
 
     /**
@@ -369,13 +344,78 @@ public:
     // toggle the header bar Minimize/Maximize button.
     void setExpandedMode(bool expand);
 
-    friend class TerminalPainter;
     friend class TerminalScrollBar;
 
-    TerminalScrollBar *scrollBar()
+    TerminalScrollBar *scrollBar() const
     {
         return _scrollBar;
     }
+
+    qreal opacity() const
+    {
+        return _opacity;
+    }
+
+    QRgb blendColor() const
+    {
+        return _blendColor;
+    }
+
+    bool cursorBlinking() const
+    {
+        return _cursorBlinking;
+    }
+
+    bool textBlinking() const
+    {
+        return _textBlinking;
+    }
+
+    Enum::CursorShapeEnum cursorShape() const
+    {
+        return _cursorShape;
+    }
+
+    bool boldIntense() const
+    {
+        return _boldIntense;
+    }
+
+    bool useFontLineCharacters() const
+    {
+        return _useFontLineCharacters;
+    }
+
+    bool bidiEnabled() const
+    {
+        return _bidiEnabled;
+    }
+
+    int fontAscent() const
+    {
+        return _fontAscent;
+    }
+
+    bool antialiasText() const
+    {
+        return _antialiasText;
+    }
+
+    ColorSchemeWallpaper::Ptr wallpaper() const
+    {
+        return _wallpaper;
+    }
+
+    struct InputMethodData {
+        QString preeditString;
+        QRect previousPreeditRect;
+    };
+
+    // returns true if the cursor's position is on display.
+    bool isCursorOnDisplay() const;
+
+    // returns the position of the cursor in columns and lines
+    QPoint cursorPosition() const;
 
 public Q_SLOTS:
     /**
@@ -504,6 +544,8 @@ public Q_SLOTS:
     void printScreen();
     Character getCursorCharacter(int column, int line);
 
+    int loc(int x, int y) const;
+
 Q_SIGNALS:
     void requestToggleExpansion();
     /**
@@ -546,6 +588,20 @@ Q_SIGNALS:
     void compositeFocusChanged(bool focused);
 
     void peekPrimaryRequested(bool doPeek);
+
+    void drawContents(Character *image, QPainter &paint, const QRect &rect, bool printerFriendly, int imageSize, bool bidiEnabled, bool &fixedFont,
+        QVector<LineProperty> lineProperties);
+    void drawCurrentResultRect(QPainter &painter, QRect searchResultRect);
+    
+    void highlightScrolledLines(QPainter& painter, QTimer *timer, QRect rect);
+    QRegion highlightScrolledLinesRegion(bool nothingChanged, QTimer *timer, int &previousScrollCount, QRect &rect, bool &needToClear, int HighlightScrolledLinesWidth);
+    
+    void drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting);
+    void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor,
+                        const QColor &backgroundColor, QColor &characterColor);
+    void drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
+                            const Character *style, const QColor &characterColor);
+    void drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image);
 
 protected:
     // events
@@ -634,12 +690,6 @@ private:
 
     void setupHeaderVisibility();
 
-    // returns the position of the cursor in columns and lines
-    QPoint cursorPosition() const;
-
-    // returns true if the cursor's position is on display.
-    bool isCursorOnDisplay() const;
-
     // redraws the cursor
     void updateCursor();
 
@@ -659,8 +709,6 @@ private:
 
     // Boilerplate setup for MessageWidget
     KMessageWidget* createMessageWidget(const QString &text);
-
-    int loc(int x, int y) const;
 
     // the window onto the terminal screen which this display
     // is currently showing.
@@ -762,18 +810,6 @@ private:
 
     Enum::CursorShapeEnum _cursorShape;
 
-    // cursor color. If it is invalid (by default) then the foreground
-    // color of the character under the cursor is used
-    QColor _cursorColor;
-
-    // cursor text color. If it is invalid (by default) then the background
-    // color of the character under the cursor is used
-    QColor _cursorTextColor;
-
-    struct InputMethodData {
-        QString preeditString;
-        QRect previousPreeditRect;
-    };
     InputMethodData _inputMethodData;
 
     bool _antialiasText;   // do we anti-alias or not

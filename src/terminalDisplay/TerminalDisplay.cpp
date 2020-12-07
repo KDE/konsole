@@ -471,8 +471,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _filterChain(new TerminalImageFilterChain(this))
     , _filterUpdateRequired(true)
     , _cursorShape(Enum::BlockCursor)
-    , _cursorColor(QColor())
-    , _cursorTextColor(QColor())
     , _antialiasText(true)
     , _useFontLineCharacters(false)
     , _sessionController(nullptr)
@@ -565,13 +563,21 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TerminalDisplay::setupHeaderVisibility);
 
     _terminalPainter = new TerminalPainter(this);
+    connect(this, &TerminalDisplay::drawContents, _terminalPainter, &TerminalPainter::drawContents);
+    connect(this, &TerminalDisplay::drawCurrentResultRect, _terminalPainter, &TerminalPainter::drawCurrentResultRect);
+    connect(this, &TerminalDisplay::highlightScrolledLines, _terminalPainter, &TerminalPainter::highlightScrolledLines);
+    connect(this, &TerminalDisplay::highlightScrolledLinesRegion, _terminalPainter, &TerminalPainter::highlightScrolledLinesRegion);
+    connect(this, &TerminalDisplay::drawBackground, _terminalPainter, &TerminalPainter::drawBackground);
+    connect(this, &TerminalDisplay::drawCursor, _terminalPainter, &TerminalPainter::drawCursor);
+    connect(this, &TerminalDisplay::drawCharacters, _terminalPainter, &TerminalPainter::drawCharacters);
+    connect(this, &TerminalDisplay::drawInputMethodPreeditString, _terminalPainter, &TerminalPainter::drawInputMethodPreeditString);
     
     auto ldrawBackground = [this](QPainter &painter,
             const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting) {
-        _terminalPainter->drawBackground(painter, rect, backgroundColor, useOpacitySetting);
+        emit drawBackground(painter, rect, backgroundColor, useOpacitySetting);
     };
     auto ldrawContents = [this](QPainter &paint, const QRect &rect, bool friendly) {
-        _terminalPainter->drawContents(paint, rect, friendly);
+        emit drawContents(_image, paint, rect, friendly, _imageSize, _bidiEnabled, _fixedFont, _lineProperties);
     };
     auto lgetBackgroundColor = [this]() {
         return getBackgroundColor();
@@ -669,16 +675,6 @@ void TerminalDisplay::resetCursorStyle()
         setKeyboardCursorShape(shape);
         setBlinkingCursorEnabled(currentProfile->blinkingCursorEnabled());
     }
-}
-
-void TerminalDisplay::setKeyboardCursorColor(const QColor& color)
-{
-    _cursorColor = color;
-}
-
-void TerminalDisplay::setKeyboardCursorTextColor(const QColor& color)
-{
-    _cursorTextColor = color;
 }
 
 void TerminalDisplay::setOpacity(qreal opacity)
@@ -924,7 +920,12 @@ void TerminalDisplay::updateImage()
     }
 
     if (_highlightScrolledLinesControl.enabled) {
-        dirtyRegion |= _terminalPainter->highlightScrolledLinesRegion(dirtyRegion.isEmpty());
+        dirtyRegion |= emit highlightScrolledLinesRegion(dirtyRegion.isEmpty(),
+                _highlightScrolledLinesControl.timer,
+                _highlightScrolledLinesControl.previousScrollCount,
+                _highlightScrolledLinesControl.rect,
+                _highlightScrolledLinesControl.needToClear,
+                HIGHLIGHT_SCROLLED_LINES_WIDTH);
     }
     _screenWindow->resetScrollCount();
 
@@ -983,7 +984,7 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 
     for (const QRect &rect : region) {
         dirtyImageRegion += widgetToImage(rect);
-        _terminalPainter->drawBackground(paint, rect, getBackgroundColor(), true /* use opacity setting */);
+        emit drawBackground(paint, rect, getBackgroundColor(), true /* use opacity setting */);
     }
 
     if (_displayVerticalLine) {
@@ -999,11 +1000,13 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
     paint.setRenderHint(QPainter::TextAntialiasing, _antialiasText);
 
     for (const QRect &rect : qAsConst(dirtyImageRegion)) {
-        _terminalPainter->drawContents(paint, rect, false);
+        emit drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _fixedFont, _lineProperties);
     }
-    _terminalPainter->drawCurrentResultRect(paint);
-    _terminalPainter->highlightScrolledLines(paint);
-    _terminalPainter->drawInputMethodPreeditString(paint, preeditRect());
+    emit drawCurrentResultRect(paint, _searchResultRect);
+    if (_highlightScrolledLinesControl.enabled) {
+        emit highlightScrolledLines(paint, _highlightScrolledLinesControl.timer, _highlightScrolledLinesControl.rect);
+    }
+    emit drawInputMethodPreeditString(paint, preeditRect(), _inputMethodData, _image);
     paintFilters(paint);
 
     const bool drawDimmed = _dimWhenInactive && !hasFocus();
@@ -3131,12 +3134,6 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     // cursor shape
     setKeyboardCursorShape(Enum::CursorShapeEnum(profile->property<int>(Profile::CursorShape)));
 
-    // cursor color
-    // an invalid QColor is used to inform the view widget to
-    // draw the cursor using the default color( matching the text)
-    setKeyboardCursorColor(profile->useCustomCursorColor() ? profile->customCursorColor() : QColor());
-    setKeyboardCursorTextColor(profile->useCustomCursorColor() ? profile->customCursorTextColor() : QColor());
-
     // word characters
     setWordCharacters(profile->wordCharacters());
 
@@ -3155,6 +3152,8 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _filterChain->setReverseUrlHints(profile->property<bool>(Profile::ReverseUrlHints));
 
     _peekPrimaryShortcut = profile->peekPrimaryKeySequence();
+
+    _terminalPainter->applyProfile(profile);
 }
 
 void TerminalDisplay::printScreen()
