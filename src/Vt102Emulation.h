@@ -20,22 +20,21 @@
 class QTimer;
 class QKeyEvent;
 
-#define MODE_AppScreen       (MODES_SCREEN+0)   // Mode #1
-#define MODE_AppCuKeys       (MODES_SCREEN+1)   // Application cursor keys (DECCKM)
-#define MODE_AppKeyPad       (MODES_SCREEN+2)   //
-#define MODE_Mouse1000       (MODES_SCREEN+3)   // Send mouse X,Y position on press and release
-#define MODE_Mouse1001       (MODES_SCREEN+4)   // Use Hilight mouse tracking
-#define MODE_Mouse1002       (MODES_SCREEN+5)   // Use cell motion mouse tracking
-#define MODE_Mouse1003       (MODES_SCREEN+6)   // Use all motion mouse tracking
-#define MODE_Mouse1005       (MODES_SCREEN+7)   // Xterm-style extended coordinates
-#define MODE_Mouse1006       (MODES_SCREEN+8)   // 2nd Xterm-style extended coordinates
-#define MODE_Mouse1007       (MODES_SCREEN+9)   // XTerm Alternate Scroll mode; also check AlternateScrolling profile property
-#define MODE_Mouse1015       (MODES_SCREEN+10)   // Urxvt-style extended coordinates
-#define MODE_Ansi            (MODES_SCREEN+11)   // Use US Ascii for character sets G0-G3 (DECANM)
-#define MODE_132Columns      (MODES_SCREEN+12)  // 80 <-> 132 column mode switch (DECCOLM)
-#define MODE_Allow132Columns (MODES_SCREEN+13)  // Allow DECCOLM mode
-#define MODE_BracketedPaste  (MODES_SCREEN+14)  // Xterm-style bracketed paste mode
-#define MODE_total           (MODES_SCREEN+15)
+#define MODE_AppCuKeys       (MODES_SCREEN+0)   // Application cursor keys (DECCKM)
+#define MODE_AppKeyPad       (MODES_SCREEN+1)   //
+#define MODE_Mouse1000       (MODES_SCREEN+2)   // Send mouse X,Y position on press and release
+#define MODE_Mouse1001       (MODES_SCREEN+3)   // Use Hilight mouse tracking
+#define MODE_Mouse1002       (MODES_SCREEN+4)   // Use cell motion mouse tracking
+#define MODE_Mouse1003       (MODES_SCREEN+5)   // Use all motion mouse tracking
+#define MODE_Mouse1005       (MODES_SCREEN+6)   // Xterm-style extended coordinates
+#define MODE_Mouse1006       (MODES_SCREEN+7)   // 2nd Xterm-style extended coordinates
+#define MODE_Mouse1007       (MODES_SCREEN+8)   // XTerm Alternate Scroll mode; also check AlternateScrolling profile property
+#define MODE_Mouse1015       (MODES_SCREEN+9)   // Urxvt-style extended coordinates
+#define MODE_Ansi            (MODES_SCREEN+10)   // Use US Ascii for character sets G0-G3 (DECANM)
+#define MODE_132Columns      (MODES_SCREEN+11)  // 80 <-> 132 column mode switch (DECCOLM)
+#define MODE_Allow132Columns (MODES_SCREEN+12)  // Allow DECCOLM mode
+#define MODE_BracketedPaste  (MODES_SCREEN+13)  // Xterm-style bracketed paste mode
+#define MODE_total           (MODES_SCREEN+14)
 
 namespace Konsole {
 extern unsigned short vt100_graphics[32];
