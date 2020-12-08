@@ -12,6 +12,8 @@
 // Konsole
 #include "../terminalDisplay/TerminalDisplay.h"
 #include "../terminalDisplay/TerminalScrollBar.hpp"
+#include "../terminalDisplay/TerminalColor.hpp"
+
 #include "../characters/CharacterColor.h"
 #include "colorscheme/ColorScheme.h"
 
@@ -50,9 +52,9 @@ void TerminalTest::testColorTable()
 
     auto display = new TerminalDisplay(nullptr);
 
-    display->setColorTable(defaultTable);
+    display->terminalColor()->setColorTable(defaultTable);
 
-    const ColorEntry *colorTable = display->colorTable();
+    const ColorEntry *colorTable = display->terminalColor()->colorTable();
 
     for (int i = 0; i < TABLE_COLORS; i++) {
         QCOMPARE(colorTable[i], defaultTable[i]);

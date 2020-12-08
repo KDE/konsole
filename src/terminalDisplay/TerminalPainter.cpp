@@ -13,6 +13,7 @@
 #include "TerminalScrollBar.hpp"
 #include "ExtendedCharTable.h"
 #include "../characters/LineBlockCharacters.h"
+#include "TerminalColor.hpp"
 
 // Qt
 #include <QRect>
@@ -37,18 +38,7 @@ namespace Konsole
 
     TerminalPainter::TerminalPainter(QObject *parent)
         : QObject(parent)
-        , m_cursorColor(QColor())
-        , m_cursorTextColor(QColor())
     {}
-    
-    void TerminalPainter::applyProfile(const Profile::Ptr &profile) 
-    {
-        // cursor color
-        // an invalid QColor is used to inform the view widget to
-        // draw the cursor using the default color( matching the text)7
-        m_cursorColor = profile->useCustomCursorColor() ? profile->customCursorColor() : QColor();
-        m_cursorTextColor = profile->useCustomCursorColor() ? profile->customCursorTextColor() : QColor();
-    }
 
     static inline bool isLineCharString(const QString &string)
     {
@@ -251,7 +241,7 @@ namespace Konsole
                                     textArea,
                                     unistr,
                                     &image[display->loc(x, y)],
-                                    display->colorTable());
+                                    display->terminalColor()->colorTable());
                 }
 
                 fixedFont = save__fixedFont;
@@ -287,7 +277,7 @@ namespace Konsole
     {
         const auto display = qobject_cast<TerminalDisplay*>(sender());
 
-        QColor color = QColor(display->colorTable()[Color4Index]);
+        QColor color = QColor(display->terminalColor()->colorTable()[Color4Index]);
         color.setAlpha(timer->isActive() ? 255 : 150);
         painter.fillRect(rect, color);
     }
@@ -377,15 +367,15 @@ namespace Konsole
         const auto display = qobject_cast<TerminalDisplay*>(sender());
 
         if (useOpacitySetting && !display->wallpaper()->isNull() &&
-               display->wallpaper()->draw(painter, rect, display->opacity())) {
-        } else if (qAlpha(display->blendColor()) < 0xff && useOpacitySetting) {
+               display->wallpaper()->draw(painter, rect, display->terminalColor()->opacity())) {
+        } else if (qAlpha(display->terminalColor()->blendColor()) < 0xff && useOpacitySetting) {
 #if defined(Q_OS_MACOS)
             // TODO: On MacOS, using CompositionMode doesn't work. Altering the
             //       transparency in the color scheme alters the brightness.
             painter.fillRect(rect, backgroundColor);
 #else
             QColor color(backgroundColor);
-            color.setAlpha(qAlpha(display->blendColor()));
+            color.setAlpha(qAlpha(display->terminalColor()->blendColor()));
 
             const QPainter::CompositionMode originalMode = painter.compositionMode();
             painter.setCompositionMode(QPainter::CompositionMode_Source);
@@ -408,7 +398,9 @@ namespace Konsole
 
         QRectF cursorRect = rect.adjusted(0, 1, 0, 0);
 
-        QColor cursorColor = m_cursorColor.isValid() ? m_cursorColor : foregroundColor;
+        QColor color = display->terminalColor()->cursorColor();
+        QColor cursorColor = color.isValid() ? color : foregroundColor;
+
         QPen pen(cursorColor);
         // TODO: the relative pen width to draw the cursor is a bit hacky
         // and set to 1/12 of the font width. Visually it seems to work at
@@ -424,7 +416,8 @@ namespace Konsole
             if (display->hasFocus()) {
                 painter.fillRect(cursorRect, cursorColor);
 
-                characterColor = m_cursorTextColor.isValid() ? m_cursorTextColor : backgroundColor;
+                QColor color = display->terminalColor()->cursorTextColor();
+                characterColor = color.isValid() ? color : backgroundColor;
             }
         } else if (display->cursorShape() == Enum::UnderlineCursor) {
             QLineF line(cursorRect.left() + halfWidth,
@@ -486,7 +479,7 @@ namespace Konsole
         }
 
         // setup pen
-        const QColor foregroundColor = style->foregroundColor.color(display->colorTable());
+        const QColor foregroundColor = style->foregroundColor.color(display->terminalColor()->colorTable());
         const QColor color = characterColor.isValid() ? characterColor : foregroundColor;
         QPen pen = painter.pen();
         if (pen.color() != color) {
@@ -537,8 +530,8 @@ namespace Konsole
         const QPoint cursorPos = display->cursorPosition();
 
         QColor characterColor;
-        const QColor background = display->colorTable()[DEFAULT_BACK_COLOR];
-        const QColor foreground = display->colorTable()[DEFAULT_FORE_COLOR];
+        const QColor background = display->terminalColor()->colorTable()[DEFAULT_BACK_COLOR];
+        const QColor foreground = display->terminalColor()->colorTable()[DEFAULT_FORE_COLOR];
         const Character *style = &image[display->loc(cursorPos.x(), cursorPos.y())];
 
         drawBackground(painter, rect, background, true);

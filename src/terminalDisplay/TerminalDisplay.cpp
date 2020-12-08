@@ -73,6 +73,7 @@
 
 #include "TerminalPainter.hpp"
 #include "TerminalScrollBar.hpp"
+#include "TerminalColor.hpp"
 
 using namespace Konsole;
 
@@ -142,77 +143,6 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
         auto profile = SessionManager::instance()->sessionProfile(_sessionController->session());
         _screenWindow->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
     }
-}
-
-const ColorEntry* TerminalDisplay::colorTable() const
-{
-    return _colorTable;
-}
-
-void TerminalDisplay::onColorsChanged()
-{
-    // Mostly just fix the scrollbar
-    // this is a workaround to add some readability to old themes like Fusion
-    // changing the light value for button a bit makes themes like fusion, windows and oxygen way more readable and pleasing
-
-    QPalette p = QApplication::palette();
-
-    QColor buttonTextColor = _colorTable[DEFAULT_FORE_COLOR];
-    QColor backgroundColor = _colorTable[DEFAULT_BACK_COLOR];
-    backgroundColor.setAlphaF(_opacity);
-
-    QColor buttonColor = backgroundColor.toHsv();
-    if (buttonColor.valueF() < 0.5) {
-        buttonColor = buttonColor.lighter();
-    } else {
-        buttonColor = buttonColor.darker();
-    }
-    p.setColor(QPalette::Button, buttonColor);
-    p.setColor(QPalette::Window, backgroundColor);
-    p.setColor(QPalette::Base, backgroundColor);
-    p.setColor(QPalette::WindowText, buttonTextColor);
-    p.setColor(QPalette::ButtonText, buttonTextColor);
-
-    setPalette(p);
-
-    _scrollBar->setPalette(p);
-
-    update();
-}
-
-void TerminalDisplay::setBackgroundColor(const QColor& color)
-{
-    _colorTable[DEFAULT_BACK_COLOR] = color;
-
-    onColorsChanged();
-}
-
-QColor TerminalDisplay::getBackgroundColor() const
-{
-    return _colorTable[DEFAULT_BACK_COLOR];
-}
-
-void TerminalDisplay::setForegroundColor(const QColor& color)
-{
-    _colorTable[DEFAULT_FORE_COLOR] = color;
-
-    onColorsChanged();
-}
-
-QColor TerminalDisplay::getForegroundColor() const
-{
-    return _colorTable[DEFAULT_FORE_COLOR];
-}
-
-void TerminalDisplay::setColorTable(const ColorEntry table[])
-{
-    for (int i = 0; i < TABLE_COLORS; i++) {
-        _colorTable[i] = table[i];
-    }
-
-    setBackgroundColor(_colorTable[DEFAULT_BACK_COLOR]);
-
-    onColorsChanged();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -466,7 +396,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _outputSuspendedMessageWidget(nullptr)
     , _lineSpacing(0)
     , _size(QSize())
-    , _blendColor(qRgba(0, 0, 0, 0xff))
     , _wallpaper(nullptr)
     , _filterChain(new TerminalImageFilterChain(this))
     , _filterUpdateRequired(true)
@@ -481,7 +410,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _centerContents(false)
     , _readOnlyMessageWidget(nullptr)
     , _readOnly(false)
-    , _opacity(1.0)
     , _dimWhenInactive(false)
     , _scrollWheelState(ScrollState())
     , _searchBar(new IncrementalSearchBar(this))
@@ -489,6 +417,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _searchResultRect(QRect())
     , _drawOverlay(false)
     , _scrollBar(nullptr)
+    , _terminalColor(nullptr)
     , _printManager(nullptr)
 {
     // terminal applications are not designed with Right-To-Left in mind,
@@ -523,8 +452,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
 
     setUsesMouseTracking(false);
     setBracketedPasteMode(false);
-
-    setColorTable(ColorScheme::defaultTable);
 
     // Enable drag and drop support
     setAcceptDrops(true);
@@ -562,13 +489,15 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
 
     connect(KonsoleSettings::self(), &KonsoleSettings::configChanged, this, &TerminalDisplay::setupHeaderVisibility);
 
+    _terminalColor = new TerminalColor(this);
+    connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::setPalette);
+
     _terminalPainter = new TerminalPainter(this);
     connect(this, &TerminalDisplay::drawContents, _terminalPainter, &TerminalPainter::drawContents);
     connect(this, &TerminalDisplay::drawCurrentResultRect, _terminalPainter, &TerminalPainter::drawCurrentResultRect);
     connect(this, &TerminalDisplay::highlightScrolledLines, _terminalPainter, &TerminalPainter::highlightScrolledLines);
     connect(this, &TerminalDisplay::highlightScrolledLinesRegion, _terminalPainter, &TerminalPainter::highlightScrolledLinesRegion);
     connect(this, &TerminalDisplay::drawBackground, _terminalPainter, &TerminalPainter::drawBackground);
-    connect(this, &TerminalDisplay::drawCursor, _terminalPainter, &TerminalPainter::drawCursor);
     connect(this, &TerminalDisplay::drawCharacters, _terminalPainter, &TerminalPainter::drawCharacters);
     connect(this, &TerminalDisplay::drawInputMethodPreeditString, _terminalPainter, &TerminalPainter::drawInputMethodPreeditString);
     
@@ -580,7 +509,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
         emit drawContents(_image, paint, rect, friendly, _imageSize, _bidiEnabled, _fixedFont, _lineProperties);
     };
     auto lgetBackgroundColor = [this]() {
-        return getBackgroundColor();
+        return _terminalColor->backgroundColor();
     };
     _printManager = new KonsolePrintManager(ldrawBackground, ldrawContents, lgetBackgroundColor);
 }
@@ -599,6 +528,7 @@ TerminalDisplay::~TerminalDisplay()
     _outputSuspendedMessageWidget = nullptr;
 
     delete _terminalPainter;
+    delete _terminalColor;
     delete _printManager;
 }
 
@@ -675,16 +605,6 @@ void TerminalDisplay::resetCursorStyle()
         setKeyboardCursorShape(shape);
         setBlinkingCursorEnabled(currentProfile->blinkingCursorEnabled());
     }
-}
-
-void TerminalDisplay::setOpacity(qreal opacity)
-{
-    QColor color(_blendColor);
-    color.setAlphaF(opacity);
-    _opacity = opacity;
-
-    _blendColor = color.rgba();
-    onColorsChanged();
 }
 
 void TerminalDisplay::setWallpaper(const ColorSchemeWallpaper::Ptr &p)
@@ -984,12 +904,12 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 
     for (const QRect &rect : region) {
         dirtyImageRegion += widgetToImage(rect);
-        emit drawBackground(paint, rect, getBackgroundColor(), true /* use opacity setting */);
+        emit drawBackground(paint, rect, _terminalColor->backgroundColor(), true /* use opacity setting */);
     }
 
     if (_displayVerticalLine) {
         const int x = (_fontWidth/2) + (_fontWidth * _displayVerticalLineAtChar);
-        const QColor lineColor = getForegroundColor();
+        const QColor lineColor = _terminalColor->foregroundColor();
 
         paint.setPen(lineColor);
         paint.drawLine(QPoint(x, 0), QPoint(x, height()));
@@ -2841,10 +2761,6 @@ bool TerminalDisplay::event(QEvent* event)
     case QEvent::ShortcutOverride:
         eventHandled = handleShortcutOverrideEvent(static_cast<QKeyEvent*>(event));
         break;
-    case QEvent::PaletteChange:
-    case QEvent::ApplicationPaletteChange:
-        onColorsChanged();
-        break;
     case QEvent::FocusOut:
     case QEvent::FocusIn:
         if(_screenWindow != nullptr) {
@@ -2904,7 +2820,7 @@ void TerminalDisplay::bell(const QString& message)
                              message, QPixmap(), this);
         break;
     case Enum::VisualBell:
-        visualBell();
+        _terminalColor->visualBell();
         break;
     default:
         break;
@@ -2917,22 +2833,6 @@ void TerminalDisplay::bell(const QString& message)
     QTimer::singleShot(500, this, [this]() {
         _bellMasked = false;
     });
-}
-
-void TerminalDisplay::visualBell()
-{
-    swapFGBGColors();
-    QTimer::singleShot(200, this, &Konsole::TerminalDisplay::swapFGBGColors);
-}
-
-void TerminalDisplay::swapFGBGColors()
-{
-    // swap the default foreground & background color
-    ColorEntry color = _colorTable[DEFAULT_BACK_COLOR];
-    _colorTable[DEFAULT_BACK_COLOR] = _colorTable[DEFAULT_FORE_COLOR];
-    _colorTable[DEFAULT_FORE_COLOR] = color;
-
-    onColorsChanged();
 }
 
 /* --------------------------------------------------------------------- */
@@ -3087,11 +2987,8 @@ IncrementalSearchBar *TerminalDisplay::searchBar() const
 void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 {
     // load color scheme
-    ColorEntry table[TABLE_COLORS];
     _colorScheme = ViewManager::colorSchemeForProfile(profile);
-    _colorScheme->getColorTable(table, randomSeed());
-    setColorTable(table);
-    setOpacity(_colorScheme->opacity());
+    _terminalColor->applyProfile(profile, _colorScheme, randomSeed());
     setWallpaper(_colorScheme->wallpaper());
 
     // load font
@@ -3152,8 +3049,6 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _filterChain->setReverseUrlHints(profile->property<bool>(Profile::ReverseUrlHints));
 
     _peekPrimaryShortcut = profile->peekPrimaryKeySequence();
-
-    _terminalPainter->applyProfile(profile);
 }
 
 void TerminalDisplay::printScreen()

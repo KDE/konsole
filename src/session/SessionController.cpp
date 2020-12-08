@@ -87,6 +87,7 @@
 #include "widgets/IncrementalSearchBar.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalColor.hpp"
 
 // For Unix signal names
 #include <csignal>
@@ -186,8 +187,8 @@ SessionController::SessionController(Session* session, TerminalDisplay* view, QO
     connect(_sessionDisplayConnection->session() , &Konsole::Session::currentDirectoryChanged , this , &Konsole::SessionController::currentDirectoryChanged);
 
     // listen for color changes
-    connect(_sessionDisplayConnection->session(), &Konsole::Session::changeBackgroundColorRequest, _sessionDisplayConnection->view(), &Konsole::TerminalDisplay::setBackgroundColor);
-    connect(_sessionDisplayConnection->session(), &Konsole::Session::changeForegroundColorRequest, _sessionDisplayConnection->view(), &Konsole::TerminalDisplay::setForegroundColor);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::changeBackgroundColorRequest, _sessionDisplayConnection->view()->terminalColor(), &Konsole::TerminalColor::setBackgroundColor);
+    connect(_sessionDisplayConnection->session(), &Konsole::Session::changeForegroundColorRequest, _sessionDisplayConnection->view()->terminalColor(), &Konsole::TerminalColor::setForegroundColor);
 
     // update the title when the session starts
     connect(_sessionDisplayConnection->session(), &Konsole::Session::started, this, &Konsole::SessionController::snapshot);
@@ -562,13 +563,13 @@ void SessionController::sendSignal(QAction* action)
 
 void SessionController::sendForegroundColor(uint terminator)
 {
-    const QColor c = _sessionDisplayConnection->view()->getForegroundColor();
+    const QColor c = _sessionDisplayConnection->view()->terminalColor()->foregroundColor();
     _sessionDisplayConnection->session()->reportForegroundColor(c, terminator);
 }
 
 void Konsole::SessionController::sendBackgroundColor(uint terminator)
 {
-    const QColor c = _sessionDisplayConnection->view()->getBackgroundColor();
+    const QColor c = _sessionDisplayConnection->view()->terminalColor()->backgroundColor();
     _sessionDisplayConnection->session()->reportBackgroundColor(c, terminator);
 }
 

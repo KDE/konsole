@@ -41,6 +41,7 @@ class KMessageWidget;
 namespace Konsole {
 class TerminalPainter;
 class TerminalScrollBar;
+class TerminalColor;
 
 class KonsolePrintManager;
 
@@ -74,10 +75,6 @@ public:
 
     void applyProfile(const QExplicitlySharedDataPointer<Profile>& profile);
 
-    /** Returns the terminal color palette used by the display. */
-    const ColorEntry *colorTable() const;
-    /** Sets the terminal color palette used by the display. */
-    void setColorTable(const ColorEntry table[]);
     /**
      * Sets the seed used to generate random colors for the display
      * (in color schemes that support them).
@@ -245,9 +242,6 @@ public:
      */
     int bellMode() const;
 
-    /** Play a visual bell for prompt or warning. */
-    void visualBell();
-
     /** Returns the font used to draw characters in the display */
     QFont getVTFont()
     {
@@ -301,18 +295,6 @@ public:
      */
     void selectAll();
 
-    /**
-     * Gets the foreground of the display
-     * @see setForegroundColor(), setColorTable(), setBackgroundColor()
-     */
-    QColor getForegroundColor() const;
-
-    /**
-     * Gets the background of the display
-     * @see setBackgroundColor(), setColorTable(), setForegroundColor()
-     */
-    QColor getBackgroundColor() const;
-
     bool bracketedPasteMode() const;
 
     /**
@@ -351,14 +333,9 @@ public:
         return _scrollBar;
     }
 
-    qreal opacity() const
+    TerminalColor *terminalColor() const
     {
-        return _opacity;
-    }
-
-    QRgb blendColor() const
-    {
-        return _blendColor;
+        return _terminalColor;
     }
 
     bool cursorBlinking() const
@@ -503,18 +480,6 @@ public Q_SLOTS:
     void bell(const QString &message);
 
     /**
-     * Sets the background of the display to the specified color.
-     * @see setColorTable(), getBackgroundColor(), setForegroundColor()
-     */
-    void setBackgroundColor(const QColor &color);
-
-    /**
-     * Sets the text of the display to the specified color.
-     * @see setColorTable(), setBackgroundColor(), getBackgroundColor()
-     */
-    void setForegroundColor(const QColor &color);
-
-    /**
      * Sets the display's contents margins.
      */
     void setMargin(int margin);
@@ -597,8 +562,6 @@ Q_SIGNALS:
     QRegion highlightScrolledLinesRegion(bool nothingChanged, QTimer *timer, int &previousScrollCount, QRect &rect, bool &needToClear, int HighlightScrolledLinesWidth);
     
     void drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting);
-    void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor,
-                        const QColor &backgroundColor, QColor &characterColor);
     void drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
                             const Character *style, const QColor &characterColor);
     void drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image);
@@ -657,8 +620,6 @@ protected:
     void inputMethodEvent(QInputMethodEvent *event) override;
     QVariant inputMethodQuery(Qt::InputMethodQuery query) const override;
 
-    void onColorsChanged();
-
 protected Q_SLOTS:
 
     void blinkTextEvent();
@@ -666,7 +627,6 @@ protected Q_SLOTS:
 
 private Q_SLOTS:
 
-    void swapFGBGColors();
     void viewScrolledByUser();
 
     void dismissOutputSuspendedMessage();
@@ -798,8 +758,6 @@ private:
 
     QSize _size;
 
-    QRgb _blendColor;
-
     ColorScheme const* _colorScheme;
     ColorSchemeWallpaper::Ptr _wallpaper;
 
@@ -835,8 +793,6 @@ private:
     // Needed to know whether the mode really changed between update calls
     bool _readOnly;
 
-    qreal _opacity;
-
     bool _dimWhenInactive;
     int _dimValue;
 
@@ -866,6 +822,7 @@ private:
 
     TerminalPainter *_terminalPainter;
     TerminalScrollBar *_scrollBar;
+    TerminalColor *_terminalColor;
 
     KonsolePrintManager *_printManager;
 };

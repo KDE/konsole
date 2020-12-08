@@ -9,6 +9,7 @@
 #include "Filter.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalColor.hpp"
 
 #include <QRect>
 #include <QEvent>
@@ -229,7 +230,7 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
     auto [cursorLine, cursorColumn] = td->getCharacterPosition(cursorPos, false);
 
     Character cursorCharacter = td->getCursorCharacter( std::min(cursorColumn, td->columns() - 1), cursorLine);
-    painter.setPen(QPen(cursorCharacter.foregroundColor.color(td->colorTable())));
+    painter.setPen(QPen(cursorCharacter.foregroundColor.color(td->terminalColor()->colorTable())));
 
     // iterate over hotspots identified by the display's currently active filters
     // and draw appropriate visuals to indicate the presence of the hotspot

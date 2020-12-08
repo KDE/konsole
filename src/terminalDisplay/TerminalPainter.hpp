@@ -42,8 +42,6 @@ namespace Konsole
         explicit TerminalPainter(QObject *parent = nullptr);
         ~TerminalPainter() = default;
 
-        void applyProfile(const Profile::Ptr &profile);
-
         // -- Drawing helpers --
 
         // divides the part of the display specified by 'rect' into
@@ -69,9 +67,6 @@ namespace Konsole
         void drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor,
                             bool useOpacitySetting);
 
-        // draws the cursor character
-        void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor,
-                        const QColor &backgroundColor, QColor &characterColor);
         // draws the characters or line graphics in a text fragment
         void drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
                             const Character *style, const QColor &characterColor);
@@ -91,13 +86,9 @@ namespace Konsole
         void drawPrinterFriendlyTextFragment(QPainter &painter, const QRect &rect, const QString &text,
                             const Character *style);
 
-        // cursor color. If it is invalid (by default) then the foreground
-        // color of the character under the cursor is used
-        QColor m_cursorColor;
-
-        // cursor text color. If it is invalid (by default) then the background
-        // color of the character under the cursor is used
-        QColor m_cursorTextColor;
+        // draws the cursor character
+        void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor,
+                            const QColor &backgroundColor, QColor &characterColor);
     };
 
 }
