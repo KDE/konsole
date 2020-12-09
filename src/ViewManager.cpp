@@ -104,26 +104,26 @@ void ViewManager::setupActions()
     action->setText(i18nc("@action:inmenu", "Split View Left/Right"));
     connect(action, &QAction::triggered, this, &ViewManager::splitLeftRight);
     collection->addAction(QStringLiteral("split-view-left-right"), action);
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::Key_ParenLeft);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_ParenLeft);
 
     action = new QAction(this);
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
     action->setText(i18nc("@action:inmenu", "Split View Top/Bottom"));
     connect(action, &QAction::triggered, this, &ViewManager::splitTopBottom);
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::Key_ParenRight);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_ParenRight);
     collection->addAction(QStringLiteral("split-view-top-bottom"), action);
 
     action = new QAction(this);
     action->setText(i18nc("@action:inmenu", "Expand View"));
     action->setEnabled(false);
     connect(action, &QAction::triggered, this, &ViewManager::expandActiveContainer);
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketRight);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_BracketRight);
     collection->addAction(QStringLiteral("expand-active-view"), action);
     _multiSplitterOnlyActions << action;
 
     action = new QAction(this);
     action->setText(i18nc("@action:inmenu", "Shrink View"));
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_BracketLeft);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_BracketLeft);
     action->setEnabled(false);
     collection->addAction(QStringLiteral("shrink-active-view"), action);
     connect(action, &QAction::triggered, this, &ViewManager::shrinkActiveContainer);
@@ -139,7 +139,7 @@ void ViewManager::setupActions()
 
     // Ctrl+Shift+D is not used as a shortcut by default because it is too close
     // to Ctrl+D - which will terminate the session in many cases
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_H);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_H);
 
     action = collection->addAction(QStringLiteral("detach-tab"));
     action->setEnabled(true);
@@ -150,7 +150,7 @@ void ViewManager::setupActions()
 
     // keyboard shortcut only actions
     action = new QAction(i18nc("@action Shortcut entry", "Next Tab"), this);
-    const QList<QKeySequence> nextViewActionKeys{Qt::SHIFT + Qt::Key_Right, Qt::CTRL + Qt::Key_PageDown};
+    const QList<QKeySequence> nextViewActionKeys{Qt::SHIFT | Qt::Key_Right, Qt::CTRL | Qt::Key_PageDown};
     collection->setDefaultShortcuts(action, nextViewActionKeys);
     collection->addAction(QStringLiteral("next-tab"), action);
     connect(action, &QAction::triggered, this, &ViewManager::nextView);
@@ -158,7 +158,7 @@ void ViewManager::setupActions()
     // _viewSplitter->addAction(nextViewAction);
 
     action = new QAction(i18nc("@action Shortcut entry", "Previous Tab"), this);
-    const QList<QKeySequence> previousViewActionKeys{Qt::SHIFT + Qt::Key_Left, Qt::CTRL + Qt::Key_PageUp};
+    const QList<QKeySequence> previousViewActionKeys{Qt::SHIFT | Qt::Key_Left, Qt::CTRL | Qt::Key_PageUp};
     collection->setDefaultShortcuts(action, previousViewActionKeys);
     collection->addAction(QStringLiteral("previous-tab"), action);
     connect(action, &QAction::triggered, this, &ViewManager::previousView);
@@ -168,25 +168,25 @@ void ViewManager::setupActions()
     action = new QAction(i18nc("@action Shortcut entry", "Focus Above Terminal"), this);
     connect(action, &QAction::triggered, this, &ViewManager::focusUp);
     collection->addAction(QStringLiteral("focus-view-above"), action);
-    collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Up);
+    collection->setDefaultShortcut(action, Qt::SHIFT | Qt::CTRL | Qt::Key_Up);
     _viewContainer->addAction(action);
     _multiSplitterOnlyActions << action;
 
     action = new QAction(i18nc("@action Shortcut entry", "Focus Below Terminal"), this);
-    collection->setDefaultShortcut(action, Qt::SHIFT + Qt::CTRL + Qt::Key_Down);
+    collection->setDefaultShortcut(action, Qt::SHIFT | Qt::CTRL | Qt::Key_Down);
     collection->addAction(QStringLiteral("focus-view-below"), action);
     connect(action, &QAction::triggered, this, &ViewManager::focusDown);
     _multiSplitterOnlyActions << action;
     _viewContainer->addAction(action);
 
     action = new QAction(i18nc("@action Shortcut entry", "Focus Left Terminal"), this);
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Konsole::LEFT);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT + Konsole::LEFT);
     connect(action, &QAction::triggered, this, &ViewManager::focusLeft);
     collection->addAction(QStringLiteral("focus-view-left"), action);
     _multiSplitterOnlyActions << action;
 
     action = new QAction(i18nc("@action Shortcut entry", "Focus Right Terminal"), this);
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Konsole::RIGHT);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT + Konsole::RIGHT);
     connect(action, &QAction::triggered, this, &ViewManager::focusRight);
     collection->addAction(QStringLiteral("focus-view-right"), action);
     _multiSplitterOnlyActions << action;
@@ -198,7 +198,7 @@ void ViewManager::setupActions()
 
     action = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs"), this);
     connect(action, &QAction::triggered, this, &ViewManager::lastUsedView);
-    collection->setDefaultShortcut(action, Qt::CTRL + Qt::Key_Tab);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::Key_Tab);
     collection->addAction(QStringLiteral("last-used-tab"), action);
 
     action = new QAction(i18nc("@action Shortcut entry", "Toggle Between Two Tabs"), this);
@@ -208,28 +208,28 @@ void ViewManager::setupActions()
 
     action = new QAction(i18nc("@action Shortcut entry", "Last Used Tabs (Reverse)"), this);
     collection->addAction(QStringLiteral("last-used-tab-reverse"), action);
-    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_Tab);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::SHIFT | Qt::Key_Tab);
     connect(action, &QAction::triggered, this, &ViewManager::lastUsedViewReverse);
 
     action = new QAction(i18nc("@action Shortcut entry", "Toggle maximize current view"), this);
     action->setText(i18nc("@action:inmenu", "Toggle maximize current view"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
     collection->addAction(QStringLiteral("toggle-maximize-current-view"), action);
-    collection->setDefaultShortcut(action, Qt::CTRL + Qt::SHIFT + Qt::Key_E);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::SHIFT | Qt::Key_E);
     connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal);
     _multiSplitterOnlyActions << action;
     _viewContainer->addAction(action);
 
     action = new QAction(i18nc("@action Shortcut entry", "Move tab to the right"), this);
     collection->addAction(QStringLiteral("move-tab-to-right"), action);
-    collection->setDefaultShortcut(action, Qt::CTRL + Qt::ALT + Qt::Key_Right);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_Right);
     connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::moveTabRight);
     _multiTabOnlyActions << action;
     _viewContainer->addAction(action);
 
     action = new QAction(i18nc("@action Shortcut entry", "Move tab to the left"), this);
     collection->addAction(QStringLiteral("move-tab-to-left"), action);
-    collection->setDefaultShortcut(action, Qt::CTRL + Qt::ALT + Qt::Key_Left);
+    collection->setDefaultShortcut(action, Qt::CTRL | Qt::ALT | Qt::Key_Left);
     connect(action, &QAction::triggered, _viewContainer, &TabbedViewContainer::moveTabLeft);
     _multiTabOnlyActions << action;
     _viewContainer->addAction(action);
@@ -247,7 +247,7 @@ void ViewManager::setupActions()
             collection->setDefaultShortcut(action, QStringLiteral("Alt+%1").arg(i + 1));
         } else if (i == 9) {
             // add shortcut for 10th tab
-            collection->setDefaultShortcut(action, Qt::ALT + Qt::Key_0);
+            collection->setDefaultShortcut(action, Qt::ALT | Qt::Key_0);
         }
     }
 

@@ -618,7 +618,7 @@ void SessionController::setupCommonActions()
     action->setText(i18n("&Close Session"));
 
     action->setIcon(QIcon::fromTheme(QStringLiteral("tab-close")));
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_W);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_W);
 
     // Open Browser
     action = collection->addAction(QStringLiteral("open-browser"), this, &SessionController::openBrowser);
@@ -630,9 +630,9 @@ void SessionController::setupCommonActions()
 #ifdef Q_OS_MACOS
     // Don't use the Konsole::ACCEL const here, we really want the Command key (Qt::META)
     // TODO: check what happens if we leave it to Qt to assign the default?
-    collection->setDefaultShortcut(action, Qt::META + Qt::Key_C);
+    collection->setDefaultShortcut(action, Qt::META | Qt::Key_C);
 #else
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_C);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_C);
 #endif
     // disabled at first, since nothing has been selected now
     action->setEnabled(false);
@@ -648,20 +648,20 @@ void SessionController::setupCommonActions()
     action = KStandardAction::paste(this, &SessionController::paste, collection);
     QList<QKeySequence> pasteShortcut;
 #ifdef Q_OS_MACOS
-    pasteShortcut.append(QKeySequence(Qt::META + Qt::Key_V));
+    pasteShortcut.append(QKeySequence(Qt::META | Qt::Key_V));
     // No Insert key on Mac keyboards
 #else
-    pasteShortcut.append(QKeySequence(Konsole::ACCEL + Qt::SHIFT + Qt::Key_V));
-    pasteShortcut.append(QKeySequence(Qt::SHIFT + Qt::Key_Insert));
+    pasteShortcut.append(QKeySequence(Konsole::ACCEL | Qt::SHIFT | Qt::Key_V));
+    pasteShortcut.append(QKeySequence(Qt::SHIFT | Qt::Key_Insert));
 #endif
     collection->setDefaultShortcuts(action, pasteShortcut);
 
     action = collection->addAction(QStringLiteral("paste-selection"), this, &SessionController::pasteFromX11Selection);
     action->setText(i18n("Paste Selection"));
 #ifdef Q_OS_MACOS
-    collection->setDefaultShortcut(action, Qt::META + Qt::SHIFT + Qt::Key_V);
+    collection->setDefaultShortcut(action, Qt::META | Qt::SHIFT | Qt::Key_V);
 #else
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Insert);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_Insert);
 #endif
 
     _webSearchMenu = new KActionMenu(i18n("Web Search"), this);
@@ -680,12 +680,12 @@ void SessionController::setupCommonActions()
     action = KStandardAction::saveAs(this, &SessionController::saveHistory, collection);
     action->setText(i18n("Save Output &As..."));
 #ifdef Q_OS_MACOS
-    action->setShortcut(QKeySequence(Qt::META + Qt::Key_S));
+    action->setShortcut(QKeySequence(Qt::META | Qt::Key_S));
 #endif
 
     action = KStandardAction::print(this, &SessionController::requestPrint, collection);
     action->setText(i18n("&Print Screen..."));
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_P);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_P);
 
     action = collection->addAction(QStringLiteral("adjust-history"), this, &SessionController::showHistoryOptions);
     action->setText(i18n("Adjust Scrollback..."));
@@ -698,7 +698,7 @@ void SessionController::setupCommonActions()
     action = collection->addAction(QStringLiteral("clear-history-and-reset"), this, &SessionController::clearHistoryAndReset);
     action->setText(i18n("Clear Scrollback and Reset"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear-history")));
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::SHIFT + Qt::Key_K);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Qt::Key_K);
 
     // Profile Options
     action = collection->addAction(QStringLiteral("edit-current-profile"), this, &SessionController::editCurrentProfile);
@@ -720,13 +720,13 @@ void SessionController::setupCommonActions()
     _findPreviousAction->setEnabled(false);
 
 #ifdef Q_OS_MACOS
-    collection->setDefaultShortcut(_findAction, Qt::META + Qt::Key_F);
-    collection->setDefaultShortcut(_findNextAction, Qt::META + Qt::Key_G);
-    collection->setDefaultShortcut(_findPreviousAction, Qt::META + Qt::SHIFT + Qt::Key_G);
+    collection->setDefaultShortcut(_findAction, Qt::META | Qt::Key_F);
+    collection->setDefaultShortcut(_findNextAction, Qt::META | Qt::Key_G);
+    collection->setDefaultShortcut(_findPreviousAction, Qt::META | Qt::SHIFT | Qt::Key_G);
 #else
-    collection->setDefaultShortcut(_findAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_F);
+    collection->setDefaultShortcut(_findAction, Konsole::ACCEL | Qt::SHIFT | Qt::Key_F);
     collection->setDefaultShortcut(_findNextAction, Qt::Key_F3);
-    collection->setDefaultShortcut(_findPreviousAction, Qt::SHIFT + Qt::Key_F3);
+    collection->setDefaultShortcut(_findPreviousAction, Qt::SHIFT | Qt::Key_F3);
 #endif
 
     // Character Encoding
@@ -754,7 +754,7 @@ void SessionController::setupExtraActions()
     QAction* action = collection->addAction(QStringLiteral("rename-session"), this, &SessionController::renameSession);
     action->setText(i18n("&Configure or Rename Tab..."));
     action->setIcon(QIcon::fromTheme(QStringLiteral("edit-rename")));
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_S);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::ALT | Qt::Key_S);
 
     // Copy input to ==> all tabs
     auto* copyInputToAllTabsAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-all-tabs"));
@@ -766,13 +766,13 @@ void SessionController::setupExtraActions()
     // Copy input to ==> selected tabs
     auto* copyInputToSelectedTabsAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-selected-tabs"));
     copyInputToSelectedTabsAction->setText(i18n("&Select Tabs..."));
-    collection->setDefaultShortcut(copyInputToSelectedTabsAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Period);
+    collection->setDefaultShortcut(copyInputToSelectedTabsAction, Konsole::ACCEL | Qt::SHIFT | Qt::Key_Period);
     copyInputToSelectedTabsAction->setData(CopyInputToSelectedTabsMode);
 
     // Copy input to ==> none
     auto* copyInputToNoneAction = collection->add<KToggleAction>(QStringLiteral("copy-input-to-none"));
     copyInputToNoneAction->setText(i18nc("@action:inmenu Do not select any tabs", "&None"));
-    collection->setDefaultShortcut(copyInputToNoneAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_Slash);
+    collection->setDefaultShortcut(copyInputToNoneAction, Konsole::ACCEL | Qt::SHIFT | Qt::Key_Slash);
     copyInputToNoneAction->setData(CopyInputToNoneMode);
     copyInputToNoneAction->setChecked(true); // the default state
 
@@ -790,17 +790,17 @@ void SessionController::setupExtraActions()
     action = collection->addAction(QStringLiteral("zmodem-upload"), this, &SessionController::zmodemUpload);
     action->setText(i18n("&ZModem Upload..."));
     action->setIcon(QIcon::fromTheme(QStringLiteral("document-open")));
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_U);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::ALT | Qt::Key_U);
 
     // Monitor
     KToggleAction* toggleAction = new KToggleAction(i18n("Monitor for &Activity"), this);
-    collection->setDefaultShortcut(toggleAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_A);
+    collection->setDefaultShortcut(toggleAction, Konsole::ACCEL | Qt::SHIFT | Qt::Key_A);
     action = collection->addAction(QStringLiteral("monitor-activity"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorActivity);
     action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-burn")));
 
     toggleAction = new KToggleAction(i18n("Monitor for &Silence"), this);
-    collection->setDefaultShortcut(toggleAction, Konsole::ACCEL + Qt::SHIFT + Qt::Key_I);
+    collection->setDefaultShortcut(toggleAction, Konsole::ACCEL | Qt::SHIFT | Qt::Key_I);
     action = collection->addAction(QStringLiteral("monitor-silence"), toggleAction);
     connect(action, &QAction::toggled, this, &Konsole::SessionController::monitorSilence);
     action->setIcon(QIcon::fromTheme(QStringLiteral("tools-media-optical-copy")));
@@ -815,18 +815,18 @@ void SessionController::setupExtraActions()
     action->setText(i18n("Enlarge Font"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("format-font-size-more")));
     QList<QKeySequence> enlargeFontShortcut;
-    enlargeFontShortcut.append(QKeySequence(Konsole::ACCEL + Qt::Key_Plus));
-    enlargeFontShortcut.append(QKeySequence(Konsole::ACCEL + Qt::Key_Equal));
+    enlargeFontShortcut.append(QKeySequence(Konsole::ACCEL | Qt::Key_Plus));
+    enlargeFontShortcut.append(QKeySequence(Konsole::ACCEL | Qt::Key_Equal));
     collection->setDefaultShortcuts(action, enlargeFontShortcut);
 
     action = collection->addAction(QStringLiteral("shrink-font"), this, &SessionController::decreaseFontSize);
     action->setText(i18n("Shrink Font"));
     action->setIcon(QIcon::fromTheme(QStringLiteral("format-font-size-less")));
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::Key_Minus);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::Key_Minus);
 
     action = collection->addAction(QStringLiteral("reset-font-size"), this, &SessionController::resetFontSize);
     action->setText(i18n("Reset Font Size"));
-    collection->setDefaultShortcut(action, Konsole::ACCEL + Qt::ALT + Qt::Key_0);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::ALT | Qt::Key_0);
 
     // Send signal
     auto* sendSignalActions = collection->add<KSelectAction>(QStringLiteral("send-signal"));
@@ -1805,9 +1805,9 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
         // We don't actually use this shortcut, but we need to display it for consistency :/
         QAction *copy = actionCollection()->action(QStringLiteral("edit_copy_contextmenu"));
 #ifdef Q_OS_MACOS
-        copy->setShortcut(Qt::META + Qt::Key_C);
+        copy->setShortcut(Qt::META | Qt::Key_C);
 #else
-        copy->setShortcut(Konsole::ACCEL + Qt::SHIFT + Qt::Key_C);
+        copy->setShortcut(Konsole::ACCEL | Qt::SHIFT | Qt::Key_C);
 #endif
 
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc
