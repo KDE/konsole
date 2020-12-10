@@ -180,13 +180,13 @@ void ViewManager::setupActions()
     _viewContainer->addAction(action);
 
     action = new QAction(i18nc("@action Shortcut entry", "Focus Left Terminal"), this);
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT + Konsole::LEFT);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Konsole::LEFT);
     connect(action, &QAction::triggered, this, &ViewManager::focusLeft);
     collection->addAction(QStringLiteral("focus-view-left"), action);
     _multiSplitterOnlyActions << action;
 
     action = new QAction(i18nc("@action Shortcut entry", "Focus Right Terminal"), this);
-    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT + Konsole::RIGHT);
+    collection->setDefaultShortcut(action, Konsole::ACCEL | Qt::SHIFT | Konsole::RIGHT);
     connect(action, &QAction::triggered, this, &ViewManager::focusRight);
     collection->addAction(QStringLiteral("focus-view-right"), action);
     _multiSplitterOnlyActions << action;
