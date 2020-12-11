@@ -684,6 +684,11 @@ private:
     int _lines;      // the number of lines that can be displayed in the widget
     int _columns;    // the number of columns that can be displayed in the widget
 
+    // Character line and character column as per a previous call to
+    // getCharacterPosition() in mouseMoveEvent().
+    int _prevCharacterLine;
+    int _prevCharacterColumn;
+
     int _usedLines;  // the number of lines that are actually being used, this will be less
     // than 'lines' if the character image provided with setImage() is smaller
     // than the maximum image size which can be displayed

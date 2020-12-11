@@ -355,6 +355,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _boldIntense(true)
     , _lines(1)
     , _columns(1)
+    , _prevCharacterLine(-1)
+    , _prevCharacterColumn(-1)
     , _usedLines(1)
     , _usedColumns(1)
     , _contentRect(QRect())
@@ -1413,6 +1415,13 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
 
     auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !_usesMouseTracking);
 
+    if (charLine == _prevCharacterLine && charColumn == _prevCharacterColumn) {
+        return;
+    }
+
+    _prevCharacterLine = charLine;
+    _prevCharacterColumn = charColumn;
+
     processFilters();
 
     _filterChain->mouseMoveEvent(this, ev, charLine, charColumn);
@@ -1422,7 +1431,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
     }
 
     // if the program running in the terminal is interested in Mouse Tracking
-    // evnets then emit a mouse movement signal, unless the shift key is
+    // events then emit a mouse movement signal, unless the shift key is
     // being held down, which overrides this.
     if (_usesMouseTracking && !(ev->modifiers() & Qt::ShiftModifier)) {
         int button = 3;
