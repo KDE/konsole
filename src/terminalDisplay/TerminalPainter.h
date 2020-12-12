@@ -42,6 +42,7 @@ namespace Konsole
         explicit TerminalPainter(QObject *parent = nullptr);
         ~TerminalPainter() = default;
 
+    public Q_SLOTS:
         // -- Drawing helpers --
 
         // divides the part of the display specified by 'rect' into
@@ -55,10 +56,10 @@ namespace Konsole
         void drawCurrentResultRect(QPainter &painter, QRect searchResultRect);
 
         // draw a thin highlight on the left of the screen for lines that have been scrolled into view
-        void highlightScrolledLines(QPainter& painter, QTimer *timer, QRect rect);
+        void highlightScrolledLines(QPainter &painter, bool isTimerActive, QRect rect);
 
         // compute which region need to be repainted for scrolled lines highlight
-        QRegion highlightScrolledLinesRegion(bool nothingChanged, QTimer *timer, int &previousScrollCount, QRect &rect, bool &needToClear, int HighlightScrolledLinesWidth);
+        QRegion highlightScrolledLinesRegion(bool nothingChanged, TerminalScrollBar *scrollBar);
 
         // draws the background for a text fragment
         // if useOpacitySetting is true then the color's alpha value will be set to

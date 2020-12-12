@@ -206,6 +206,7 @@ public:
     }
 
     void setSize(int columns, int lines);
+    void propagateSize();
 
     // reimplemented
     QSize sizeHint() const override;
@@ -322,8 +323,6 @@ public:
 
     // toggle the header bar Minimize/Maximize button.
     void setExpandedMode(bool expand);
-
-    friend class TerminalScrollBar;
 
     TerminalScrollBar *scrollBar() const
     {
@@ -555,8 +554,8 @@ Q_SIGNALS:
         QVector<LineProperty> lineProperties);
     void drawCurrentResultRect(QPainter &painter, QRect searchResultRect);
     
-    void highlightScrolledLines(QPainter& painter, QTimer *timer, QRect rect);
-    QRegion highlightScrolledLinesRegion(bool nothingChanged, QTimer *timer, int &previousScrollCount, QRect &rect, bool &needToClear, int HighlightScrolledLinesWidth);
+    void highlightScrolledLines(QPainter& painter, bool isTimerActive, QRect rect);
+    QRegion highlightScrolledLinesRegion(bool nothingChanged, TerminalScrollBar *scrollBar);
     
     void drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting);
     void drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
@@ -639,7 +638,6 @@ private:
     void showResizeNotification();
 
     void calcGeometry();
-    void propagateSize();
     void updateImageSize();
     void makeImage();
 
@@ -806,15 +804,6 @@ private:
 
     bool _drawOverlay;
     Qt::Edge _overlayEdge;
-
-    struct {
-        bool enabled = false;
-        QRect rect;
-        int previousScrollCount = 0;
-        QTimer *timer = nullptr;
-        bool needToClear = false;
-    } _highlightScrolledLinesControl;
-    static const int HIGHLIGHT_SCROLLED_LINES_WIDTH = 3;
 
     bool _hasCompositeFocus;
     bool _displayVerticalLine;

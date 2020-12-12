@@ -272,17 +272,17 @@ namespace Konsole
             display->columns() * display->fontWidth(), display->fontHeight());
         painter.fillRect(searchResultRect, QColor(0, 0, 255, 80));
     }
-    
-    void TerminalPainter::highlightScrolledLines(QPainter& painter, QTimer *timer, QRect rect) 
+
+    void TerminalPainter::highlightScrolledLines(QPainter &painter, bool isTimerActive, QRect rect)
     {
-        const auto display = qobject_cast<TerminalDisplay*>(sender());
+        const auto display = qobject_cast<TerminalDisplay *>(sender());
 
         QColor color = QColor(display->terminalColor()->colorTable()[Color4Index]);
-        color.setAlpha(timer->isActive() ? 255 : 150);
+        color.setAlpha(isTimerActive ? 255 : 150);
         painter.fillRect(rect, color);
     }
-    
-    QRegion TerminalPainter::highlightScrolledLinesRegion(bool nothingChanged, QTimer *timer, int &previousScrollCount, QRect &rect, bool &needToClear, int HighlightScrolledLinesWidth)
+
+    QRegion TerminalPainter::highlightScrolledLinesRegion(bool nothingChanged, TerminalScrollBar* scrollBar)
     {
         const auto display = qobject_cast<TerminalDisplay*>(sender());
 
@@ -293,21 +293,23 @@ namespace Konsole
         int nb_lines = abs(display->screenWindow()->scrollCount());
         if (nb_lines > 0 && display->scrollBar()->maximum() > 0) {
             QRect new_highlight;
-            bool addToCurrentHighlight = timer->isActive() &&
-                                     (display->screenWindow()->scrollCount() * previousScrollCount > 0);
+            bool addToCurrentHighlight = scrollBar->highlightScrolledLines().isTimerActive() &&
+                                         (display->screenWindow()->scrollCount() * scrollBar->highlightScrolledLines().getPreviousScrollCount() > 0);
             if (addToCurrentHighlight) {
+                const int oldScrollCount = scrollBar->highlightScrolledLines().getPreviousScrollCount();
                 if (display->screenWindow()->scrollCount() > 0) {
-                    start = -1 * (previousScrollCount + display->screenWindow()->scrollCount()) + display->screenWindow()->windowLines();
+                    start = -1 * (oldScrollCount + display->screenWindow()->scrollCount()) + display->screenWindow()->windowLines();
                 } else {
-                    start = -1 * previousScrollCount;
+                    start = -1 * oldScrollCount;
                 }
-                previousScrollCount += display->screenWindow()->scrollCount();
+                scrollBar->highlightScrolledLines().setPreviousScrollCount(oldScrollCount + display->screenWindow()->scrollCount());
             } else {
                 start = display->screenWindow()->scrollCount() > 0 ? display->screenWindow()->windowLines() - nb_lines : 0;
-                previousScrollCount = display->screenWindow()->scrollCount();
+                scrollBar->highlightScrolledLines().setPreviousScrollCount(display->screenWindow()->scrollCount());
             }
 
-            new_highlight.setRect(highlightLeftPosition, display->contentRect().top() + start * display->fontHeight(), HighlightScrolledLinesWidth, nb_lines * display->fontHeight());
+            new_highlight.setRect(highlightLeftPosition, display->contentRect().top() + start * display->fontHeight(),
+                                  scrollBar->highlightScrolledLines().HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * display->fontHeight());
             new_highlight.setTop(std::max(new_highlight.top(), display->contentRect().top()));
             new_highlight.setBottom(std::min(new_highlight.bottom(), display->contentRect().bottom()));
             if (!new_highlight.isValid()) {
@@ -315,22 +317,22 @@ namespace Konsole
             }
 
             if (addToCurrentHighlight) {
-                rect |= new_highlight;
+                scrollBar->highlightScrolledLines().rect() |= new_highlight;
             } else {
-                dirtyRegion |= rect;
-                rect = new_highlight;
+                dirtyRegion |= scrollBar->highlightScrolledLines().rect();
+                scrollBar->highlightScrolledLines().rect() = new_highlight;
             }
 
-            timer->start();
-        } else if (!nothingChanged || needToClear) {
-            dirtyRegion = rect;
-            rect.setRect(0, 0, 0, 0);
-            needToClear = false;
+            scrollBar->highlightScrolledLines().startTimer();
+        } else if (!nothingChanged || scrollBar->highlightScrolledLines().isNeedToClear()) {
+            dirtyRegion = scrollBar->highlightScrolledLines().rect();
+            scrollBar->highlightScrolledLines().rect().setRect(0, 0, 0, 0);
+            scrollBar->highlightScrolledLines().setNeedToClear(false);
         }
 
         return dirtyRegion;
     }
-    
+
     void TerminalPainter::drawTextFragment(QPainter &painter, const QRect &rect, const QString &text,
                                 const Character *style, const QColor *colorTable)
     {

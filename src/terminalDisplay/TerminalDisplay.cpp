@@ -673,8 +673,22 @@ void TerminalDisplay::updateImage()
     // can simply be moved up or down
     // disable this shortcut for transparent konsole with scaled pixels, otherwise we get rendering artifacts, see BUG 350651
     if (!(WindowSystemInfo::HAVE_TRANSPARENCY && (qApp->devicePixelRatio() > 1.0)) && _wallpaper->isNull() && !_searchBar->isVisible()) {
-        _scrollBar->scrollImage(_screenWindow->scrollCount() ,
-                    _screenWindow->scrollRegion());
+        // if the flow control warning is enabled this will interfere with the
+        // scrolling optimizations and cause artifacts.  the simple solution here
+        // is to just disable the optimization whilst it is visible
+        if (!((_outputSuspendedMessageWidget != nullptr) && _outputSuspendedMessageWidget->isVisible()) &&
+            !((_readOnlyMessageWidget != nullptr) && _readOnlyMessageWidget->isVisible())) {
+
+            // hide terminal size label to prevent it being scrolled and show again after scroll
+            const bool viewResizeWidget = (_resizeWidget != nullptr) && _resizeWidget->isVisible();
+            if (viewResizeWidget) {
+                _resizeWidget->hide();
+            }
+            _scrollBar->scrollImage(_screenWindow->scrollCount(), _screenWindow->scrollRegion(), _image, _imageSize);
+            if (viewResizeWidget) {
+                _resizeWidget->show();
+            }
+        }
     }
 
     if (_image == nullptr) {
@@ -831,13 +845,8 @@ void TerminalDisplay::updateImage()
                              _columns * _fontWidth, _fontHeight);
     }
 
-    if (_highlightScrolledLinesControl.enabled) {
-        dirtyRegion |= emit highlightScrolledLinesRegion(dirtyRegion.isEmpty(),
-                _highlightScrolledLinesControl.timer,
-                _highlightScrolledLinesControl.previousScrollCount,
-                _highlightScrolledLinesControl.rect,
-                _highlightScrolledLinesControl.needToClear,
-                HIGHLIGHT_SCROLLED_LINES_WIDTH);
+    if (_scrollBar->highlightScrolledLines().isEnabled()) {
+        dirtyRegion |= emit highlightScrolledLinesRegion(dirtyRegion.isEmpty(), _scrollBar);
     }
     _screenWindow->resetScrollCount();
 
@@ -915,8 +924,8 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
         emit drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _fixedFont, _lineProperties);
     }
     emit drawCurrentResultRect(paint, _searchResultRect);
-    if (_highlightScrolledLinesControl.enabled) {
-        emit highlightScrolledLines(paint, _highlightScrolledLinesControl.timer, _highlightScrolledLinesControl.rect);
+    if (_scrollBar->highlightScrolledLines().isEnabled()) {
+        emit highlightScrolledLines(paint, _scrollBar->highlightScrolledLines().isTimerActive(), _scrollBar->highlightScrolledLines().rect());
     }
     emit drawInputMethodPreeditString(paint, preeditRect(), _inputMethodData, _image);
     paintFilters(paint);
@@ -1205,8 +1214,10 @@ void TerminalDisplay::calcGeometry()
         contentsRect().height() - headerHeight // height
     );
 
-    _contentRect = contentsRect().adjusted(_margin + (_highlightScrolledLinesControl.enabled ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0), _margin,
-                                           -_margin - (_highlightScrolledLinesControl.enabled ? HIGHLIGHT_SCROLLED_LINES_WIDTH : 0), -_margin);
+    _contentRect = contentsRect().adjusted(
+        _margin + (_scrollBar->highlightScrolledLines().isEnabled() ? _scrollBar->highlightScrolledLines().HIGHLIGHT_SCROLLED_LINES_WIDTH : 0),
+        _margin, -_margin - (_scrollBar->highlightScrolledLines().isEnabled() ? _scrollBar->highlightScrolledLines().HIGHLIGHT_SCROLLED_LINES_WIDTH : 0),
+        -_margin);
 
     switch (_scrollBar->scrollBarPosition()) {
     case Enum::ScrollBarHidden :
@@ -3021,7 +3032,6 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 
     // highlight lines scrolled into view (must be applied before margin/center)
     _scrollBar->setHighlightScrolledLines(profile->property<bool>(Profile::HighlightScrolledLines));
-    _highlightScrolledLinesControl.needToClear = true;
 
     // margin/center
     setMargin(profile->property<int>(Profile::TerminalMargin));

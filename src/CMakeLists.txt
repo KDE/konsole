@@ -177,6 +177,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
 
                         terminalDisplay/extras/CompositeWidgetFocusWatcher.cpp
                         terminalDisplay/extras/AutoScrollHandler.cpp
+                        terminalDisplay/extras/HighlightScrolledLines.cpp
 
                         terminalDisplay/TerminalDisplay.cpp
                         terminalDisplay/TerminalPainter.cpp

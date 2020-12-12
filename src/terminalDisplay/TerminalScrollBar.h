@@ -17,6 +17,7 @@
 #include "Enumeration.h"
 #include "ScreenWindow.h"
 #include "konsoleprivate_export.h"
+#include "extras/HighlightScrolledLines.h"
 
 namespace Konsole
 {
@@ -26,7 +27,7 @@ namespace Konsole
     {
         Q_OBJECT
     public:
-        explicit TerminalScrollBar(TerminalDisplay *display);
+        explicit TerminalScrollBar(QWidget *parent);
 
         /**
          * Specifies whether the terminal display has a vertical scroll bar, and if so whether it
@@ -68,24 +69,32 @@ namespace Konsole
         // 'region' is the part of the image to scroll - currently only
         // the top, bottom and height of 'region' are taken into account,
         // the left and right are ignored.
-        void scrollImage(int lines, const QRect &screenWindowRegion);
+        void scrollImage(int lines, const QRect &screenWindowRegion, Character *image, int imageSize);
 
         Enum::ScrollBarPositionEnum scrollBarPosition() const
         {
             return _scrollbarLocation;
         }
+
+        /**
+         * Return the higlight line control
+         */
+        HighlightScrolledLines &highlightScrolledLines()
+        {
+            return _highlightScrolledLines;
+        }
+
     public Q_SLOTS:
 
         void scrollBarPositionChanged(int value);
         void highlightScrolledLinesEvent();
-    
+
     private:
-        TerminalDisplay *_display;
         bool _scrollFullPage;
         bool _alternateScrolling;
         Enum::ScrollBarPositionEnum _scrollbarLocation;
+        HighlightScrolledLines _highlightScrolledLines;
     };
-
-}
+} // namespace Konsole
 
 #endif
