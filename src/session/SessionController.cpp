@@ -10,6 +10,7 @@
 
 #include "profile/ProfileManager.h"
 #include "konsoledebug.h"
+#include "terminalDisplay/TerminalColor.hpp"
 
 // Qt
 #include <QApplication>
@@ -187,8 +188,8 @@ SessionController::SessionController(Session* sessionParam, TerminalDisplay* vie
     connect(session() , &Konsole::Session::currentDirectoryChanged , this , &Konsole::SessionController::currentDirectoryChanged);
 
     // listen for color changes
-    connect(session(), &Konsole::Session::changeBackgroundColorRequest, view(), &Konsole::TerminalDisplay::setBackgroundColor);
-    connect(session(), &Konsole::Session::changeForegroundColorRequest, view(), &Konsole::TerminalDisplay::setForegroundColor);
+    connect(session(), &Konsole::Session::changeBackgroundColorRequest, view()->terminalColor(), &TerminalColor::setBackgroundColor);
+    connect(session(), &Konsole::Session::changeForegroundColorRequest, view()->terminalColor(), &TerminalColor::setForegroundColor);
 
     // update the title when the session starts
     connect(session(), &Konsole::Session::started, this, &Konsole::SessionController::snapshot);
@@ -563,13 +564,13 @@ void SessionController::sendSignal(QAction* action)
 
 void SessionController::sendForegroundColor(uint terminator)
 {
-    const QColor c = view()->getForegroundColor();
+    const QColor c = view()->terminalColor()->foregroundColor();
     session()->reportForegroundColor(c, terminator);
 }
 
 void Konsole::SessionController::sendBackgroundColor(uint terminator)
 {
-    const QColor c = view()->getBackgroundColor();
+    const QColor c = view()->terminalColor()->backgroundColor();
     session()->reportBackgroundColor(c, terminator);
 }
 
