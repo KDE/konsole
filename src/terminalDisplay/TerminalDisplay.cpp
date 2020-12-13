@@ -767,17 +767,7 @@ void TerminalDisplay::updateImage()
                         }
                     }
 
-                    const bool saveFixedFont = _fixedFont;
-                    if (lineDraw) {
-                        _fixedFont = false;
-                    }
-                    if (doubleWidth) {
-                        _fixedFont = false;
-                    }
-
                     updateLine = true;
-
-                    _fixedFont = saveFixedFont;
                     x += len - 1;
                 }
             }
