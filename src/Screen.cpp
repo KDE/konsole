@@ -94,39 +94,36 @@ Screen::~Screen()
 void Screen::cursorUp(int n)
 //=CUU
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
     const int stop = _cuY < _topMargin ? 0 : _topMargin;
-    _cuX = qMin(_columns - 1, _cuX); // nowrap!
     _cuY = qMax(stop, _cuY - n);
 }
 
 void Screen::cursorDown(int n)
 //=CUD
 {
-    if (n == 0) {
+    if (n < 1) {
        n = 1; // Default
     }
     const int stop = _cuY > _bottomMargin ? _lines - 1 : _bottomMargin;
-    _cuX = qMin(_columns - 1, _cuX); // nowrap!
     _cuY = qMin(stop, _cuY + n);
 }
 
 void Screen::cursorLeft(int n)
 //=CUB
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
-    _cuX = qMin(_columns - 1, _cuX); // nowrap!
     _cuX = qMax(0, _cuX - n);
 }
 
 void Screen::cursorNextLine(int n)
 //=CNL
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
     _cuX = 0;
@@ -142,7 +139,7 @@ void Screen::cursorNextLine(int n)
 void Screen::cursorPreviousLine(int n)
 //=CPL
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
     _cuX = 0;
@@ -157,7 +154,7 @@ void Screen::cursorPreviousLine(int n)
 void Screen::cursorRight(int n)
 //=CUF
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
     _cuX = qMin(_columns - 1, _cuX + n);
@@ -166,10 +163,10 @@ void Screen::cursorRight(int n)
 void Screen::setMargins(int top, int bot)
 //=STBM
 {
-    if (top == 0) {
+    if (top < 1) {
         top = 1;      // Default
     }
-    if (bot == 0) {
+    if (bot < 1) {
         bot = _lines;  // Default
     }
     top = top - 1;              // Adjust to internal lineno
@@ -222,7 +219,7 @@ void Screen::nextLine()
 
 void Screen::eraseChars(int n)
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
     const int p = qMax(0, qMin(_cuX + n - 1, _columns - 1));
@@ -234,7 +231,7 @@ void Screen::deleteChars(int n)
     Q_ASSERT(n >= 0);
 
     // always delete at least one char
-    if (n == 0) {
+    if (n < 1) {
         n = 1;
     }
 
@@ -264,7 +261,7 @@ void Screen::deleteChars(int n)
 
 void Screen::insertChars(int n)
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
 
@@ -281,7 +278,7 @@ void Screen::insertChars(int n)
 
 void Screen::repeatChars(int n)
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
 
@@ -299,7 +296,7 @@ void Screen::repeatChars(int n)
 
 void Screen::deleteLines(int n)
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
     scrollUp(_cuY, n);
@@ -307,7 +304,7 @@ void Screen::deleteLines(int n)
 
 void Screen::insertLines(int n)
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
     scrollDown(_cuY, n);
@@ -615,7 +612,6 @@ void Screen::reset()
 
 void Screen::backspace()
 {
-    _cuX = qMin(_columns - 1, _cuX); // nowrap!
     _cuX = qMax(0, _cuX - 1);
 
     if (_screenLines[_cuY].size() < _cuX + 1) {
@@ -626,7 +622,7 @@ void Screen::backspace()
 void Screen::tab(int n)
 {
     // note that TAB is a format effector (does not write ' ');
-    if (n == 0) {
+    if (n < 1) {
         n = 1;
     }
     while ((n > 0) && (_cuX < _columns - 1)) {
@@ -641,7 +637,7 @@ void Screen::tab(int n)
 void Screen::backtab(int n)
 {
     // note that TAB is a format effector (does not write ' ');
-    if (n == 0) {
+    if (n < 1) {
         n = 1;
     }
     while ((n > 0) && (_cuX > 0)) {
@@ -838,7 +834,7 @@ void Screen::resetScrolledLines()
 
 void Screen::scrollUp(int n)
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
     if (_topMargin == 0) {
@@ -874,7 +870,7 @@ void Screen::scrollUp(int from, int n)
 
 void Screen::scrollDown(int n)
 {
-    if (n == 0) {
+    if (n < 1) {
         n = 1; // Default
     }
     scrollDown(_topMargin, n);
@@ -906,7 +902,7 @@ void Screen::setCursorYX(int y, int x)
 
 void Screen::setCursorX(int x)
 {
-    if (x == 0) {
+    if (x < 1) {
         x = 1; // Default
     }
     x -= 1; // Adjust
@@ -915,7 +911,7 @@ void Screen::setCursorX(int x)
 
 void Screen::setCursorY(int y)
 {
-    if (y == 0) {
+    if (y < 1) {
         y = 1; // Default
     }
     y -= 1; // Adjust
