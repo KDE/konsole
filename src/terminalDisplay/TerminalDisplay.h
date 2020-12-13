@@ -8,9 +8,6 @@
 #ifndef TERMINALDISPLAY_H
 #define TERMINALDISPLAY_H
 
-// Standard
-#include <tuple>
-
 // Qt
 #include <QColor>
 #include <QPointer>
@@ -310,7 +307,7 @@ public:
     // maps a point on the widget to the position ( ie. line and column )
     // of the character at that point. When the edge is true, it maps to
     // a character which left edge is closest to the point.
-    std::tuple<int, int> getCharacterPosition(const QPoint &widgetPoint, bool edge) const;
+    QPair<int, int> getCharacterPosition(const QPoint &widgetPoint, bool edge) const;
 
     // toggle the header bar Minimize/Maximize button.
     void setExpandedMode(bool expand);

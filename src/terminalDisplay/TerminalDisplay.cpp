@@ -1678,7 +1678,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
     }
 }
 
-std::tuple<int, int> TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, bool edge) const
+QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint, bool edge) const
 {
     // the column value returned can be equal to _usedColumns (when edge == true),
     // which is the position just after the last character displayed in a line.
@@ -1690,7 +1690,7 @@ std::tuple<int, int> TerminalDisplay::getCharacterPosition(const QPoint& widgetP
     int column = qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _fontWidth, columnMax);
     int line = qBound(0, (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _fontHeight, _usedLines - 1);
 
-    return std::make_tuple(line, column);
+    return qMakePair(line, column);
 }
 
 void TerminalDisplay::setExpandedMode(bool expand)
