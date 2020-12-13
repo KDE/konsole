@@ -7,13 +7,13 @@
 */
 
 // Own
-#include "TerminalPainter.hpp"
+#include "TerminalPainter.h"
 
 // Konsole
-#include "TerminalScrollBar.hpp"
+#include "TerminalScrollBar.h"
 #include "../characters/ExtendedCharTable.h"
 #include "../characters/LineBlockCharacters.h"
-#include "TerminalColor.hpp"
+#include "TerminalColor.h"
 
 // Qt
 #include <QRect>

@@ -10,7 +10,7 @@
 
 #include "profile/ProfileManager.h"
 #include "konsoledebug.h"
-#include "terminalDisplay/TerminalColor.hpp"
+#include "terminalDisplay/TerminalColor.h"
 
 // Qt
 #include <QApplication>
@@ -88,7 +88,7 @@
 #include "widgets/IncrementalSearchBar.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
-#include "terminalDisplay/TerminalColor.hpp"
+#include "terminalDisplay/TerminalColor.h"
 
 // For Unix signal names
 #include <csignal>

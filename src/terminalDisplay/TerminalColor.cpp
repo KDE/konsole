@@ -7,7 +7,7 @@
 */
 
 // Own
-#include "TerminalColor.hpp"
+#include "TerminalColor.h"
 
 // Konsole
 #include "colorscheme/ColorScheme.h"

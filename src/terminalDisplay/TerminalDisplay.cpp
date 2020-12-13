@@ -71,9 +71,9 @@
 #include "../widgets/KonsolePrintManager.h"
 #include "EscapeSequenceUrlExtractor.h"
 
-#include "TerminalPainter.hpp"
-#include "TerminalScrollBar.hpp"
-#include "TerminalColor.hpp"
+#include "TerminalPainter.h"
+#include "TerminalScrollBar.h"
+#include "TerminalColor.h"
 
 using namespace Konsole;
 

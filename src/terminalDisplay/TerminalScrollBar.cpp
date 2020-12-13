@@ -7,7 +7,7 @@
 */
 
 // Own
-#include "TerminalScrollBar.hpp"
+#include "TerminalScrollBar.h"
 
 // Konsole
 #include "TerminalDisplay.h"

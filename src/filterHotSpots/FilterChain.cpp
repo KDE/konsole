@@ -9,7 +9,7 @@
 #include "Filter.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
-#include "terminalDisplay/TerminalColor.hpp"
+#include "terminalDisplay/TerminalColor.h"
 
 #include <QRect>
 #include <QEvent>

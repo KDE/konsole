@@ -46,7 +46,7 @@
 #include "SessionManager.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
-#include "terminalDisplay/TerminalScrollBar.hpp"
+#include "terminalDisplay/TerminalScrollBar.h"
 
 // Linux
 #ifdef HAVE_GETPWUID

@@ -11,8 +11,8 @@
 
 // Konsole
 #include "../terminalDisplay/TerminalDisplay.h"
-#include "../terminalDisplay/TerminalScrollBar.hpp"
-#include "../terminalDisplay/TerminalColor.hpp"
+#include "../terminalDisplay/TerminalScrollBar.h"
+#include "../terminalDisplay/TerminalColor.h"
 
 #include "../characters/CharacterColor.h"
 #include "colorscheme/ColorScheme.h"
