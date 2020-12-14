@@ -11,24 +11,24 @@
 
 #include <QPoint>
 #include <QPointer>
+#include <QColor>
 
-class QAction;
 
 namespace Konsole
 {
     class ColorFilterHotSpot : public RegExpFilterHotSpot
     {
     public:
-        ColorFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts, const QString &colorName);
+        ColorFilterHotSpot(int startLine, int startColumn, int endLine, int endColumn, const QStringList &capturedTexts, const QColor &color);
         ~ColorFilterHotSpot() override = default;
 
         void mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev) override;
         void mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev) override;
-    
+
     private:
         void tooltipRequested();
 
-        QString _colorName;
+        QColor _color;
         QPoint _toolPos;
         static bool _canGenerateTooltip;
     };
