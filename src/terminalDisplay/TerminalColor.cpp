@@ -32,7 +32,7 @@ namespace Konsole
     
     void TerminalColor::applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, int randomSeed)
     {
-        ColorEntry table[TABLE_COLORS];
+        QColor table[TABLE_COLORS];
         colorScheme->getColorTable(table, randomSeed);
         setColorTable(table);
         setOpacity(colorScheme->opacity());
@@ -51,7 +51,7 @@ namespace Konsole
         return m_colorTable[DEFAULT_FORE_COLOR];
     }
     
-    void TerminalColor::setColorTable(const ColorEntry *table) 
+    void TerminalColor::setColorTable(const QColor *table) 
     {
         for (int index = 0; index < TABLE_COLORS; index++) {
             m_colorTable[index] = table[index];
@@ -60,7 +60,7 @@ namespace Konsole
         onColorsChanged();
     }
     
-    const ColorEntry* TerminalColor::colorTable() const
+    const QColor* TerminalColor::colorTable() const
     {
         return m_colorTable;
     }
@@ -148,7 +148,7 @@ namespace Konsole
     
     void TerminalColor::swapFGBGColors() 
     {
-        ColorEntry color = m_colorTable[DEFAULT_BACK_COLOR];
+        QColor color = m_colorTable[DEFAULT_BACK_COLOR];
         m_colorTable[DEFAULT_BACK_COLOR] = m_colorTable[DEFAULT_FORE_COLOR];
         m_colorTable[DEFAULT_FORE_COLOR] = color;
 

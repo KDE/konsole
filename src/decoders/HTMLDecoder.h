@@ -39,7 +39,7 @@ namespace Konsole
         QTextStream *_output;
         QString _colorSchemeName;
         QFont _profileFont;
-        ColorEntry _colorTable[TABLE_COLORS];
+        QColor _colorTable[TABLE_COLORS];
         bool _innerSpanOpen;
         RenditionFlags _lastRendition;
         CharacterColor _lastForeColor;

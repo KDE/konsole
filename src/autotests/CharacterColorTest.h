@@ -35,7 +35,7 @@ private Q_SLOTS:
     void testColor256();
 
 private:
-    static const ColorEntry DefaultColorTable[];
+    static const QColor DefaultColorTable[];
 };
 
 }

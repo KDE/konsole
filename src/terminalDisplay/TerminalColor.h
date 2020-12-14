@@ -34,8 +34,8 @@ namespace Konsole
 
         QColor backgroundColor() const;
         QColor foregroundColor() const;
-        void setColorTable(const ColorEntry *table);
-        const ColorEntry *colorTable() const;
+        void setColorTable(const QColor *table);
+        const QColor *colorTable() const;
 
         void setOpacity(qreal opacity);
 
@@ -75,7 +75,7 @@ namespace Konsole
         QColor m_cursorColor;
         QColor m_cursorTextColor;
 
-        ColorEntry m_colorTable[TABLE_COLORS];
+        QColor m_colorTable[TABLE_COLORS];
     };
 }
 

@@ -43,40 +43,40 @@ using namespace Konsole;
 // The following are almost IBM standard color codes, with some slight
 // gamma correction for the dim colors to compensate for bright X screens.
 // It contains the 8 ansiterm/xterm colors in 2 intensities.
-const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] = {
-    ColorEntry(0x00, 0x00, 0x00), // Dfore
-    ColorEntry(0xFF, 0xFF, 0xFF), // Dback
-    ColorEntry(0x00, 0x00, 0x00), // Black
-    ColorEntry(0xB2, 0x18, 0x18), // Red
-    ColorEntry(0x18, 0xB2, 0x18), // Green
-    ColorEntry(0xB2, 0x68, 0x18), // Yellow
-    ColorEntry(0x18, 0x18, 0xB2), // Blue
-    ColorEntry(0xB2, 0x18, 0xB2), // Magenta
-    ColorEntry(0x18, 0xB2, 0xB2), // Cyan
-    ColorEntry(0xB2, 0xB2, 0xB2), // White
+const QColor ColorScheme::defaultTable[TABLE_COLORS] = {
+    QColor(0x00, 0x00, 0x00), // Dfore
+    QColor(0xFF, 0xFF, 0xFF), // Dback
+    QColor(0x00, 0x00, 0x00), // Black
+    QColor(0xB2, 0x18, 0x18), // Red
+    QColor(0x18, 0xB2, 0x18), // Green
+    QColor(0xB2, 0x68, 0x18), // Yellow
+    QColor(0x18, 0x18, 0xB2), // Blue
+    QColor(0xB2, 0x18, 0xB2), // Magenta
+    QColor(0x18, 0xB2, 0xB2), // Cyan
+    QColor(0xB2, 0xB2, 0xB2), // White
     // intensive versions
-    ColorEntry(0x00, 0x00, 0x00),
-    ColorEntry(0xFF, 0xFF, 0xFF),
-    ColorEntry(0x68, 0x68, 0x68),
-    ColorEntry(0xFF, 0x54, 0x54),
-    ColorEntry(0x54, 0xFF, 0x54),
-    ColorEntry(0xFF, 0xFF, 0x54),
-    ColorEntry(0x54, 0x54, 0xFF),
-    ColorEntry(0xFF, 0x54, 0xFF),
-    ColorEntry(0x54, 0xFF, 0xFF),
-    ColorEntry(0xFF, 0xFF, 0xFF),
+    QColor(0x00, 0x00, 0x00),
+    QColor(0xFF, 0xFF, 0xFF),
+    QColor(0x68, 0x68, 0x68),
+    QColor(0xFF, 0x54, 0x54),
+    QColor(0x54, 0xFF, 0x54),
+    QColor(0xFF, 0xFF, 0x54),
+    QColor(0x54, 0x54, 0xFF),
+    QColor(0xFF, 0x54, 0xFF),
+    QColor(0x54, 0xFF, 0xFF),
+    QColor(0xFF, 0xFF, 0xFF),
     // Here are faint intensities, which may not be good.
     // faint versions
-    ColorEntry(0x00, 0x00, 0x00),
-    ColorEntry(0xFF, 0xFF, 0xFF),
-    ColorEntry(0x00, 0x00, 0x00),
-    ColorEntry(0x65, 0x00, 0x00),
-    ColorEntry(0x00, 0x65, 0x00),
-    ColorEntry(0x65, 0x5E, 0x00),
-    ColorEntry(0x00, 0x00, 0x65),
-    ColorEntry(0x65, 0x00, 0x65),
-    ColorEntry(0x00, 0x65, 0x65),
-    ColorEntry(0x65, 0x65, 0x65)
+    QColor(0x00, 0x00, 0x00),
+    QColor(0xFF, 0xFF, 0xFF),
+    QColor(0x00, 0x00, 0x00),
+    QColor(0x65, 0x00, 0x00),
+    QColor(0x00, 0x65, 0x00),
+    QColor(0x65, 0x5E, 0x00),
+    QColor(0x00, 0x00, 0x65),
+    QColor(0x65, 0x00, 0x65),
+    QColor(0x00, 0x65, 0x65),
+    QColor(0x65, 0x65, 0x65)
 };
 
 const char * const ColorScheme::colorNames[TABLE_COLORS] = {
@@ -224,12 +224,12 @@ QString ColorScheme::name() const
     return _name;
 }
 
-void ColorScheme::setColorTableEntry(int index, const ColorEntry &entry)
+void ColorScheme::setColorTableEntry(int index, const QColor &entry)
 {
     Q_ASSERT(index >= 0 && index < TABLE_COLORS);
 
     if (_table == nullptr) {
-        _table = new ColorEntry[TABLE_COLORS];
+        _table = new QColor[TABLE_COLORS];
 
         for (int i = 0; i < TABLE_COLORS; i++) {
             _table[i] = defaultTable[i];
@@ -244,11 +244,11 @@ void ColorScheme::setColorTableEntry(int index, const ColorEntry &entry)
     }
 }
 
-ColorEntry ColorScheme::colorEntry(int index, uint randomSeed) const
+QColor ColorScheme::colorEntry(int index, uint randomSeed) const
 {
     Q_ASSERT(index >= 0 && index < TABLE_COLORS);
 
-    ColorEntry entry = colorTable()[index];
+    QColor entry = colorTable()[index];
 
     if (!_colorRandomization || randomSeed == 0 || _randomTable == nullptr
             || _randomTable[index].isNull()) {
@@ -320,7 +320,7 @@ ColorEntry ColorScheme::colorEntry(int index, uint randomSeed) const
     return {qRound(red * 255), qRound(green * 255), qRound(blue * 255)};
 }
 
-void ColorScheme::getColorTable(ColorEntry *table, uint randomSeed) const
+void ColorScheme::getColorTable(QColor *table, uint randomSeed) const
 {
     for (int i = 0; i < TABLE_COLORS; i++) {
         table[i] = colorEntry(i, randomSeed);
@@ -370,7 +370,7 @@ void ColorScheme::setRandomizationRange(int index, double hue, double saturation
     _randomTable[index].lightness = lightness;
 }
 
-const ColorEntry *ColorScheme::colorTable() const
+const QColor *ColorScheme::colorTable() const
 {
     if (_table != nullptr) {
         return _table;
@@ -450,7 +450,7 @@ void ColorScheme::readColorEntry(const KConfig &config, int index)
         return;
     }
 
-    ColorEntry entry;
+    QColor entry;
 
     entry = configGroup.readEntry("Color", QColor());
     setColorTableEntry(index, entry);
@@ -496,7 +496,7 @@ void ColorScheme::writeColorEntry(KConfig &config, int index) const
 {
     KConfigGroup configGroup = config.group(colorNameForIndex(index));
 
-    const ColorEntry &entry = colorTable()[index];
+    const QColor &entry = colorTable()[index];
 
     configGroup.writeEntry("Color", entry);
 

@@ -81,7 +81,7 @@ namespace Konsole
         // draws a section of text, all the text in this section
         // has a common color and style
         void drawTextFragment(QPainter &painter, const QRect &rect, const QString &text,
-                            const Character *style, const ColorEntry *colorTable);
+                            const Character *style, const QColor *colorTable);
         
         void drawPrinterFriendlyTextFragment(QPainter &painter, const QRect &rect, const QString &text,
                             const Character *style);

@@ -332,7 +332,7 @@ namespace Konsole
     }
     
     void TerminalPainter::drawTextFragment(QPainter &painter, const QRect &rect, const QString &text,
-                                const Character *style, const ColorEntry *colorTable)
+                                const Character *style, const QColor *colorTable)
     {
         // setup painter
         const QColor foregroundColor = style->foregroundColor.color(colorTable);

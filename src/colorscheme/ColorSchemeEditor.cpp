@@ -174,7 +174,7 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem *item)
             colorSchemeRow += 2*COLOR_TABLE_ROW_LENGTH;
         }
 
-        ColorEntry entry(_colors->colorEntry(colorSchemeRow));
+        QColor entry(_colors->colorEntry(colorSchemeRow));
         entry = color;
         _colors->setColorTableEntry(colorSchemeRow, entry);
 
@@ -284,7 +284,7 @@ void ColorSchemeEditor::setup(const ColorScheme *scheme, bool isNewScheme)
 
 void ColorSchemeEditor::setupColorTable(const ColorScheme *colors)
 {
-    ColorEntry table[TABLE_COLORS];
+    QColor table[TABLE_COLORS];
     colors->getColorTable(table);
 
     for (int row = 0; row < COLOR_TABLE_ROW_LENGTH; row++) {

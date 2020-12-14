@@ -12,13 +12,6 @@
 #include <QColor>
 
 namespace Konsole {
-/**
- * An entry in a terminal display's color palette.
- *
- * A color palette is an array of 16 ColorEntry instances which map
- * system color indexes (from 0 to 15) into actual colors.
- */
-typedef QColor ColorEntry;
 
 // Attributed Character Representations ///////////////////////////////
 
@@ -177,7 +170,7 @@ public:
      * The @p base is only used if this color is one of the 16 system colors, otherwise
      * it is ignored.
      */
-    QColor color(const ColorEntry *base) const;
+    QColor color(const QColor *base) const;
 
     /**
      * Compares two colors and returns true if they represent the same color value and
@@ -212,7 +205,7 @@ inline bool operator !=(const CharacterColor &a, const CharacterColor &b)
     return !operator==(a, b);
 }
 
-inline const QColor color256(quint8 u, const ColorEntry *base)
+inline const QColor color256(quint8 u, const QColor *base)
 {
     //   0.. 16: system colors
     if (u < 8) {
@@ -238,7 +231,7 @@ inline const QColor color256(quint8 u, const ColorEntry *base)
     return QColor(gray, gray, gray);
 }
 
-inline QColor CharacterColor::color(const ColorEntry *base) const
+inline QColor CharacterColor::color(const QColor *base) const
 {
     switch (_colorSpace) {
     case COLOR_SPACE_DEFAULT:
