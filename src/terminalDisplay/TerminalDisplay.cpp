@@ -361,6 +361,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _image(nullptr)
     , _imageSize(0)
     , _lineProperties(QVector<LineProperty>())
+    , _randomSeed(0)
     , _resizing(false)
     , _showTerminalSizeHint(true)
     , _bidiEnabled(false)
@@ -618,6 +619,15 @@ void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode m
     updateLineProperties();
     updateImage();
     viewScrolledByUser();
+}
+
+void TerminalDisplay::setRandomSeed(uint randomSeed)
+{
+    _randomSeed = randomSeed;
+}
+uint TerminalDisplay::randomSeed() const
+{
+    return _randomSeed;
 }
 
 void TerminalDisplay::processFilters()
@@ -2968,7 +2978,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 {
     // load color scheme
     _colorScheme = ViewManager::colorSchemeForProfile(profile);
-    _terminalColor->applyProfile(profile, _colorScheme, sessionController()->session()->sessionId());
+    _terminalColor->applyProfile(profile, _colorScheme, randomSeed());
     setWallpaper(_colorScheme->wallpaper());
 
     // load font

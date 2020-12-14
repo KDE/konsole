@@ -72,6 +72,17 @@ public:
 
     void applyProfile(const QExplicitlySharedDataPointer<Profile>& profile);
 
+    /**
+     * Sets the seed used to generate random colors for the display
+     * (in color schemes that support them).
+     */
+    void setRandomSeed(uint randomSeed);
+    /**
+     * Returns the seed used to generate random colors for the display
+     * (in color schemes that support them).
+     */
+    uint randomSeed() const;
+
     /** Sets the opacity of the terminal display. */
     void setOpacity(qreal opacity);
 
@@ -689,6 +700,8 @@ private:
     QVector<LineProperty> _lineProperties;
 
     ColorEntry _colorTable[TABLE_COLORS];
+
+    uint _randomSeed;
 
     bool _resizing;
     bool _showTerminalSizeHint;

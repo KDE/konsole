@@ -65,15 +65,17 @@ public:
      *
      * @param table Array into which the color entries for this color scheme
      * are copied.
+     * @param randomSeed Color schemes may allow certain colors in their
+     * palette to be randomized.  The seed is used to pick the random color.
      */
-    void getColorTable(ColorEntry *table, uint sessionId = 0) const;
+    void getColorTable(ColorEntry *table, uint randomSeed = 0) const;
 
     /**
      * Retrieves a single color entry from the table.
      *
      * See getColorTable()
      */
-    ColorEntry colorEntry(int index, uint sessionId = 0) const;
+    ColorEntry colorEntry(int index, uint randomSeed = 0) const;
 
     /**
      * Convenience method.  Returns the
