@@ -49,7 +49,7 @@ namespace Konsole
         // fragments according to their colors and styles and calls
         // drawTextFragment() or drawPrinterFriendlyTextFragment()
         // to draw the fragments
-        void drawContents(Character *image, QPainter &paint, const QRect &rect, bool PrinterFriendly, int imageSize, bool bidiEnabled, bool &fixedFont,
+        void drawContents(Character *image, QPainter &paint, const QRect &rect, bool PrinterFriendly, int imageSize, bool bidiEnabled,
             QVector<LineProperty> lineProperties);
         
         // draw a transparent rectangle over the line of the current match

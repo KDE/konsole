@@ -14,6 +14,7 @@
 #include "../characters/ExtendedCharTable.h"
 #include "../characters/LineBlockCharacters.h"
 #include "TerminalColor.h"
+#include "TerminalFonts.h"
 
 // Qt
 #include <QRect>
@@ -60,7 +61,7 @@ namespace Konsole
         }
     }
 
-    void TerminalPainter::drawContents(Character *image, QPainter &paint, const QRect &rect, bool printerFriendly, int imageSize, bool bidiEnabled, bool &fixedFont,
+    void TerminalPainter::drawContents(Character *image, QPainter &paint, const QRect &rect, bool printerFriendly, int imageSize, bool bidiEnabled,
             QVector<LineProperty> lineProperties)
     {
         const auto display = qobject_cast<TerminalDisplay*>(sender());
@@ -190,12 +191,12 @@ namespace Konsole
                     len++; // Adjust for trailing part of multi-column character
                 }
 
-                const bool save__fixedFont = fixedFont;
+                const bool save__fixedFont = display->terminalFont()->fixedFont();
                 if (lineDraw) {
-                    fixedFont = false;
+                    display->terminalFont()->setFixedFont(false);
                 }
                 if (doubleWidth) {
-                    fixedFont = false;
+                    display->terminalFont()->setFixedFont(false);
                 }
                 univec.resize(p);
 
@@ -215,10 +216,10 @@ namespace Konsole
                 paint.setWorldTransform(QTransform(textScale), true);
 
                 // Calculate the area in which the text will be drawn
-                QRect textArea = QRect(display->contentRect().left() + display->contentsRect().left() + display->fontWidth() * x,
-                                        display->contentRect().top() + display->contentsRect().top() + display->fontHeight() * y,
-                                        display->fontWidth() * len,
-                                        display->fontHeight());
+                QRect textArea = QRect(display->contentRect().left() + display->contentsRect().left() + display->terminalFont()->fontWidth() * x,
+                                        display->contentRect().top() + display->contentsRect().top() + display->terminalFont()->fontHeight() * y,
+                                        display->terminalFont()->fontWidth() * len,
+                                        display->terminalFont()->fontHeight());
 
                 //move the calculated area to take account of scaling applied to the painter.
                 //the position of the area from the origin (0,0) is scaled
@@ -244,7 +245,7 @@ namespace Konsole
                                     display->terminalColor()->colorTable());
                 }
 
-                fixedFont = save__fixedFont;
+                display->terminalFont()->setFixedFont(save__fixedFont);
 
                 paint.setWorldTransform(QTransform(textScale.inverted()), true);
 
@@ -268,8 +269,8 @@ namespace Konsole
             return;
         }
         
-        searchResultRect.setRect(0, display->contentRect().top() + (display->screenWindow()->currentResultLine() - display->screenWindow()->currentLine()) * display->fontHeight(),
-            display->columns() * display->fontWidth(), display->fontHeight());
+        searchResultRect.setRect(0, display->contentRect().top() + (display->screenWindow()->currentResultLine() - display->screenWindow()->currentLine()) * display->terminalFont()->fontHeight(),
+            display->columns() * display->terminalFont()->fontWidth(), display->terminalFont()->fontHeight());
         painter.fillRect(searchResultRect, QColor(0, 0, 255, 80));
     }
 
@@ -308,8 +309,8 @@ namespace Konsole
                 scrollBar->highlightScrolledLines().setPreviousScrollCount(display->screenWindow()->scrollCount());
             }
 
-            new_highlight.setRect(highlightLeftPosition, display->contentRect().top() + start * display->fontHeight(),
-                                  scrollBar->highlightScrolledLines().HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * display->fontHeight());
+            new_highlight.setRect(highlightLeftPosition, display->contentRect().top() + start * display->terminalFont()->fontHeight(),
+                                  scrollBar->highlightScrolledLines().HIGHLIGHT_SCROLLED_LINES_WIDTH, nb_lines * display->terminalFont()->fontHeight());
             new_highlight.setTop(std::max(new_highlight.top(), display->contentRect().top()));
             new_highlight.setBottom(std::min(new_highlight.bottom(), display->contentRect().bottom()));
             if (!new_highlight.isValid()) {
@@ -407,7 +408,7 @@ namespace Konsole
         // TODO: the relative pen width to draw the cursor is a bit hacky
         // and set to 1/12 of the font width. Visually it seems to work at
         // all scales but there must be better ways to do it
-        const qreal width = qMax(display->fontWidth() / 12.0, 1.0);
+        const qreal width = qMax(display->terminalFont()->fontWidth() / 12.0, 1.0);
         const qreal halfWidth = width / 2.0;
         pen.setWidthF(width);
         painter.setPen(pen);
@@ -458,7 +459,7 @@ namespace Konsole
 
         const auto isBold = [boldWeight](const QFont &font) { return font.weight() >= boldWeight; };
 
-        const bool useBold = (((style->rendition & RE_BOLD) != 0) && display->boldIntense());
+        const bool useBold = (((style->rendition & RE_BOLD) != 0) && display->terminalFont()->boldIntense());
         const bool useUnderline = ((style->rendition & RE_UNDERLINE) != 0) || display->font().underline();
         const bool useItalic = ((style->rendition & RE_ITALIC) != 0) || display->font().italic();
         const bool useStrikeOut = ((style->rendition & RE_STRIKEOUT) != 0) || display->font().strikeOut();
@@ -493,15 +494,15 @@ namespace Konsole
         const auto origClipRegion = painter.clipRegion();
         painter.setClipRect(rect);
         // draw text
-        if (isLineCharString(text) && !display->useFontLineCharacters()) {
+        if (isLineCharString(text) && !display->terminalFont()->useFontLineCharacters()) {
             drawLineCharString(display, painter, rect.x(), rect.y(), text, style);
         } else {
             painter.setLayoutDirection(Qt::LeftToRight);
 
             if (display->bidiEnabled()) {
-                painter.drawText(rect.x(), rect.y() + display->fontAscent() + display->lineSpacing(), text);
+                painter.drawText(rect.x(), rect.y() + display->terminalFont()->fontAscent() + display->terminalFont()->lineSpacing(), text);
             } else {
-                painter.drawText(rect.x(), rect.y() + display->fontAscent() + display->lineSpacing(), LTR_OVERRIDE_CHAR + text);
+                painter.drawText(rect.x(), rect.y() + display->terminalFont()->fontAscent() + display->terminalFont()->lineSpacing(), LTR_OVERRIDE_CHAR + text);
             }
         }
         painter.setClipRegion(origClipRegion);
@@ -510,13 +511,13 @@ namespace Konsole
 
     void TerminalPainter::drawLineCharString(TerminalDisplay *display, QPainter &painter, int x, int y, const QString &str, const Character *attributes)
     {
-        painter.setRenderHint(QPainter::Antialiasing, display->antialiasText());
+        painter.setRenderHint(QPainter::Antialiasing, display->terminalFont()->antialiasText());
 
-        const bool useBoldPen = (attributes->rendition & RE_BOLD) != 0 && display->boldIntense();
+        const bool useBoldPen = (attributes->rendition & RE_BOLD) != 0 && display->terminalFont()->boldIntense();
 
-        QRect cellRect = {x, y, display->fontWidth(), display->fontHeight()};
+        QRect cellRect = {x, y, display->terminalFont()->fontWidth(), display->terminalFont()->fontHeight()};
         for (int i = 0; i < str.length(); i++) {
-            LineBlockCharacters::draw(painter, cellRect.translated(i * display->fontWidth(), 0), str[i], useBoldPen);
+            LineBlockCharacters::draw(painter, cellRect.translated(i * display->terminalFont()->fontWidth(), 0), str[i], useBoldPen);
         }
         painter.setRenderHint(QPainter::Antialiasing, false);
     }

@@ -11,6 +11,7 @@
 #include <QDebug>
 
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalFonts.h"
 #include "FileFilterHotspot.h"
 
 using namespace Konsole;
@@ -123,7 +124,7 @@ void HotSpot::mouseEnterEvent(TerminalDisplay *td, QMouseEvent *ev)
         td->setCursor(Qt::PointingHandCursor);
     }
 
-    auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
+    auto r = region(td->terminalFont()->fontWidth(), td->terminalFont()->fontHeight(), td->columns(), td->contentRect()).first;
     td->update(r);
 }
 
@@ -135,7 +136,7 @@ void HotSpot::mouseLeaveEvent(TerminalDisplay *td, QMouseEvent *ev)
         return;
     }
 
-    auto r = region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect()).first;
+    auto r = region(td->terminalFont()->fontWidth(), td->terminalFont()->fontHeight(), td->columns(), td->contentRect()).first;
     td->update(r);
 
     td->resetCursor();

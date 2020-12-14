@@ -11,6 +11,8 @@
 
 // Konsole
 #include "TerminalDisplay.h"
+#include "TerminalFonts.h"
+#include "session/SessionController.h"
 #include "../characters/Character.h"
 #include "extras/HighlightScrolledLines.h"
 
@@ -183,15 +185,15 @@ namespace Konsole
         void *firstCharPos = &image[region.top() * display->columns()];
         void *lastCharPos = &image[(region.top() + abs(lines)) * display->columns()];
 
-        const int top = display->contentRect().top() + (region.top() * display->fontHeight());
+        const int top = display->contentRect().top() + (region.top() * display->terminalFont()->fontHeight());
         const int linesToMove = region.height() - abs(lines);
         const int bytesToMove = linesToMove * display->columns() * sizeof(Character);
 
         Q_ASSERT(linesToMove > 0);
         Q_ASSERT(bytesToMove > 0);
 
-        scrollRect.setTop(lines > 0 ? top : top + abs(lines) * display->fontHeight());
-        scrollRect.setHeight(linesToMove * display->fontHeight());
+        scrollRect.setTop(lines > 0 ? top : top + abs(lines) * display->terminalFont()->fontHeight());
+        scrollRect.setHeight(linesToMove * display->terminalFont()->fontHeight());
 
         if (!scrollRect.isValid() || scrollRect.isEmpty()) {
             return;
@@ -216,6 +218,6 @@ namespace Konsole
         }
 
         // scroll the display vertically to match internal _image
-        display->scroll(0, display->fontHeight() * (-lines), scrollRect);
+        display->scroll(0, display->terminalFont()->fontHeight() * (-lines), scrollRect);
     }
 } // namespace Konsole

@@ -183,6 +183,7 @@ set(konsoleprivate_SRCS ${windowadaptors_SRCS}
                         terminalDisplay/TerminalPainter.cpp
                         terminalDisplay/TerminalScrollBar.cpp
                         terminalDisplay/TerminalColor.cpp
+                        terminalDisplay/TerminalFonts.cpp
 
                         widgets/TerminalDisplayAccessible.cpp
                         widgets/TerminalHeaderBar.cpp

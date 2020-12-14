@@ -39,6 +39,7 @@ namespace Konsole {
 class TerminalPainter;
 class TerminalScrollBar;
 class TerminalColor;
+class TerminalFont;
 
 class KonsolePrintManager;
 
@@ -130,9 +131,6 @@ public:
     /** Specifies whether or not text can blink. */
     void setBlinkingTextEnabled(bool blink);
 
-    void setLineSpacing(uint);
-    uint lineSpacing() const;
-
     void setSessionController(SessionController *controller);
     SessionController *sessionController();
 
@@ -188,23 +186,6 @@ public:
         return _usedColumns;
     }
 
-    /**
-     * Returns the height of the characters in the font used to draw the text in the display.
-     */
-    int  fontHeight() const
-    {
-        return _fontHeight;
-    }
-
-    /**
-     * Returns the width of the characters in the display.
-     * This assumes the use of a fixed-width font.
-     */
-    int  fontWidth() const
-    {
-        return _fontWidth;
-    }
-
     void setSize(int columns, int lines);
     void propagateSize();
 
@@ -240,30 +221,10 @@ public:
      */
     int bellMode() const;
 
-    /** Returns the font used to draw characters in the display */
-    QFont getVTFont()
-    {
-        return font();
-    }
-
     TerminalHeaderBar *headerBar() const
     {
         return _headerBar;
     }
-    /**
-     * Sets the font used to draw the display.  Has no effect if @p font
-     * is larger than the size of the display itself.
-     */
-    void setVTFont(const QFont &f);
-
-    /** Increases the font size */
-    void increaseFontSize();
-
-    /** Decreases the font size */
-    void decreaseFontSize();
-
-    /** Reset the font size */
-    void resetFontSize();
 
     void resetCursor();
 
@@ -334,6 +295,11 @@ public:
         return _terminalColor;
     }
 
+    TerminalFont *terminalFont() const
+    {
+        return _terminalFont;
+    }
+
     bool cursorBlinking() const
     {
         return _cursorBlinking;
@@ -349,29 +315,9 @@ public:
         return _cursorShape;
     }
 
-    bool boldIntense() const
-    {
-        return _boldIntense;
-    }
-
-    bool useFontLineCharacters() const
-    {
-        return _useFontLineCharacters;
-    }
-
     bool bidiEnabled() const
     {
         return _bidiEnabled;
-    }
-
-    int fontAscent() const
-    {
-        return _fontAscent;
-    }
-
-    bool antialiasText() const
-    {
-        return _antialiasText;
     }
 
     ColorSchemeWallpaper::Ptr wallpaper() const
@@ -522,7 +468,6 @@ Q_SIGNALS:
      * @param eventType The type of event.  0 for a mouse press / release or 1 for mouse motion
      */
     void mouseSignal(int button, int column, int line, int eventType);
-    void changedFontMetricSignal(int height, int width);
     void changedContentSizeSignal(int height, int width);
 
     /**
@@ -550,7 +495,7 @@ Q_SIGNALS:
 
     void peekPrimaryRequested(bool doPeek);
 
-    void drawContents(Character *image, QPainter &paint, const QRect &rect, bool printerFriendly, int imageSize, bool bidiEnabled, bool &fixedFont,
+    void drawContents(Character *image, QPainter &paint, const QRect &rect, bool printerFriendly, int imageSize, bool bidiEnabled,
         QVector<LineProperty> lineProperties);
     void drawCurrentResultRect(QPainter &painter, QRect searchResultRect);
     
@@ -582,7 +527,6 @@ protected:
     void wheelEvent(QWheelEvent *ev) override;
     bool focusNextPrevChild(bool next) override;
 
-    void fontChange(const QFont &);
     void extendSelection(const QPoint &position);
 
     // drag and drop
@@ -673,12 +617,6 @@ private:
 
     QVBoxLayout *_verticalLayout;
 
-    bool _fixedFont; // has fixed pitch
-    int _fontHeight;      // height
-    int _fontWidth;      // width
-    int _fontAscent;      // ascend
-    bool _boldIntense;   // Whether intense colors should be rendered with bold font
-
     int _lines;      // the number of lines that can be displayed in the widget
     int _columns;    // the number of columns that can be displayed in the widget
 
@@ -754,8 +692,6 @@ private:
     //terminal output - informing them what has happened and how to resume output
     KMessageWidget *_outputSuspendedMessageWidget;
 
-    uint _lineSpacing;
-
     QSize _size;
 
     ColorScheme const* _colorScheme;
@@ -769,9 +705,6 @@ private:
     Enum::CursorShapeEnum _cursorShape;
 
     InputMethodData _inputMethodData;
-
-    bool _antialiasText;   // do we anti-alias or not
-    bool _useFontLineCharacters;
 
     //the delay in milliseconds between redrawing blinking text
     static const int TEXT_BLINK_DELAY = 500;
@@ -814,6 +747,7 @@ private:
     TerminalPainter *_terminalPainter;
     TerminalScrollBar *_scrollBar;
     TerminalColor *_terminalColor;
+    TerminalFont *_terminalFont;
 
     KonsolePrintManager *_printManager;
 };

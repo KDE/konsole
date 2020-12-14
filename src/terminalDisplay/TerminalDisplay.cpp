@@ -74,6 +74,7 @@
 #include "TerminalPainter.h"
 #include "TerminalScrollBar.h"
 #include "TerminalColor.h"
+#include "TerminalFonts.h"
 
 using namespace Konsole;
 
@@ -147,172 +148,6 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/*                                   Font                                    */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
-
-void TerminalDisplay::fontChange(const QFont&)
-{
-    QFontMetrics fm(font());
-    _fontHeight = fm.height() + _lineSpacing;
-
-    Q_ASSERT(_fontHeight > 0);
-
-    /* TODO: When changing the three deprecated width() below
-     *       consider the info in
-     *       https://phabricator.kde.org/D23144 comments
-     *       horizontalAdvance() was added in Qt 5.11 (which should be the
-     *       minimum for 20.04 or 20.08 KDE Applications release)
-     */
-
-    // waba TerminalDisplay 1.123:
-    // "Base character width on widest ASCII character. This prevents too wide
-    //  characters in the presence of double wide (e.g. Japanese) characters."
-    // Get the width from representative normal width characters
-    _fontWidth = qRound((static_cast<double>(fm.horizontalAdvance(QStringLiteral(REPCHAR))) / static_cast<double>(qstrlen(REPCHAR))));
-
-    _fixedFont = true;
-
-    const int fw = fm.horizontalAdvance(QLatin1Char(REPCHAR[0]));
-    for (unsigned int i = 1; i < qstrlen(REPCHAR); i++) {
-        if (fw != fm.horizontalAdvance(QLatin1Char(REPCHAR[i]))) {
-            _fixedFont = false;
-            break;
-        }
-    }
-
-    if (_fontWidth < 1) {
-        _fontWidth = 1;
-    }
-
-    _fontAscent = fm.ascent();
-
-    emit changedFontMetricSignal(_fontHeight, _fontWidth);
-    propagateSize();
-    update();
-}
-
-void TerminalDisplay::setVTFont(const QFont& f)
-{
-    QFont newFont(f);
-    int strategy = 0;
-
-    // hint that text should be drawn with- or without anti-aliasing.
-    // depending on the user's font configuration, this may not be respected
-    strategy |= _antialiasText ? QFont::PreferAntialias : QFont::NoAntialias;
-
-    // Konsole cannot handle non-integer font metrics
-    strategy |= QFont::ForceIntegerMetrics;
-
-    // In case the provided font doesn't have some specific characters it should
-    // fall back to a Monospace fonts.
-    newFont.setStyleHint(QFont::TypeWriter, QFont::StyleStrategy(strategy));
-
-    // Try to check that a good font has been loaded.
-    // For some fonts, ForceIntegerMetrics causes height() == 0 which
-    // will cause Konsole to crash later.
-    QFontMetrics fontMetrics2(newFont);
-    if (fontMetrics2.height() < 1) {
-        qCDebug(KonsoleDebug)<<"The font "<<newFont.toString()<<" has an invalid height()";
-        // Ask for a generic font so at least it is usable.
-        // Font listed in profile's dialog will not be updated.
-        newFont = QFont(QStringLiteral("Monospace"));
-        // Set style strategy without ForceIntegerMetrics for the font
-        strategy &= ~QFont::ForceIntegerMetrics;
-        newFont.setStyleHint(QFont::TypeWriter, QFont::StyleStrategy(strategy));
-        qCDebug(KonsoleDebug)<<"Font changed to "<<newFont.toString();
-    }
-
-    // experimental optimization.  Konsole assumes that the terminal is using a
-    // mono-spaced font, in which case kerning information should have an effect.
-    // Disabling kerning saves some computation when rendering text.
-    newFont.setKerning(false);
-
-    // "Draw intense colors in bold font" feature needs to use different font weights. StyleName
-    // property, when set, doesn't allow weight changes. Since all properties (weight, stretch,
-    // italic, etc) are stored in QFont independently, in almost all cases styleName is not needed.
-    newFont.setStyleName(QString());
-
-    if (newFont == font()) {
-        // Do not process the same font again
-        return;
-    }
-
-    QFontInfo fontInfo(newFont);
-
-    // QFontInfo::fixedPitch() appears to not match QFont::fixedPitch() - do not test it.
-    // related?  https://bugreports.qt.io/browse/QTBUG-34082
-    if (fontInfo.family() != newFont.family()
-            || !qFuzzyCompare(fontInfo.pointSizeF(), newFont.pointSizeF())
-            || fontInfo.styleHint()  != newFont.styleHint()
-            || fontInfo.weight()     != newFont.weight()
-            || fontInfo.style()      != newFont.style()
-            || fontInfo.underline()  != newFont.underline()
-            || fontInfo.strikeOut()  != newFont.strikeOut()
-            || fontInfo.rawMode()    != newFont.rawMode()) {
-        const QString nonMatching = QString::asprintf("%s,%g,%d,%d,%d,%d,%d,%d,%d,%d",
-                qPrintable(fontInfo.family()),
-                fontInfo.pointSizeF(),
-                -1, // pixelSize is not used
-                static_cast<int>(fontInfo.styleHint()),
-                fontInfo.weight(),
-                static_cast<int>(fontInfo.style()),
-                static_cast<int>(fontInfo.underline()),
-                static_cast<int>(fontInfo.strikeOut()),
-                // Intentional newFont use - fixedPitch is bugged, see comment above
-                static_cast<int>(newFont.fixedPitch()),
-                static_cast<int>(fontInfo.rawMode()));
-        qCDebug(KonsoleDebug) << "The font to use in the terminal can not be matched exactly on your system.";
-        qCDebug(KonsoleDebug) << " Selected: " << newFont.toString();
-        qCDebug(KonsoleDebug) << " System  : " << nonMatching;
-    }
-
-    QWidget::setFont(newFont);
-    fontChange(newFont);
-}
-
-void TerminalDisplay::increaseFontSize()
-{
-    QFont font = getVTFont();
-    font.setPointSizeF(font.pointSizeF() + 1);
-    setVTFont(font);
-}
-
-void TerminalDisplay::decreaseFontSize()
-{
-    const qreal MinimumFontSize = 6;
-
-    QFont font = getVTFont();
-    font.setPointSizeF(qMax(font.pointSizeF() - 1, MinimumFontSize));
-    setVTFont(font);
-}
-
-void TerminalDisplay::resetFontSize()
-{
-    const qreal MinimumFontSize = 6;
-
-    QFont font = getVTFont();
-    Profile::Ptr currentProfile = SessionManager::instance()->sessionProfile(_sessionController->session());
-    const qreal defaultFontSize = currentProfile->font().pointSizeF();
-
-    font.setPointSizeF(qMax(defaultFontSize, MinimumFontSize));
-    setVTFont(font);
-}
-
-uint TerminalDisplay::lineSpacing() const
-{
-    return _lineSpacing;
-}
-
-void TerminalDisplay::setLineSpacing(uint i)
-{
-    _lineSpacing = i;
-    fontChange(font()); // Trigger an update.
-}
-
-
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
 /*                         Accessibility                                     */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
@@ -348,11 +183,6 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _screenWindow(nullptr)
     , _bellMasked(false)
     , _verticalLayout(new QVBoxLayout(this))
-    , _fixedFont(true)
-    , _fontHeight(1)
-    , _fontWidth(1)
-    , _fontAscent(1)
-    , _boldIntense(true)
     , _lines(1)
     , _columns(1)
     , _prevCharacterLine(-1)
@@ -396,14 +226,11 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     , _resizeTimer(nullptr)
     , _flowControlWarningEnabled(false)
     , _outputSuspendedMessageWidget(nullptr)
-    , _lineSpacing(0)
     , _size(QSize())
     , _wallpaper(nullptr)
     , _filterChain(new TerminalImageFilterChain(this))
     , _filterUpdateRequired(true)
     , _cursorShape(Enum::BlockCursor)
-    , _antialiasText(true)
-    , _useFontLineCharacters(false)
     , _sessionController(nullptr)
     , _trimLeadingSpaces(false)
     , _trimTrailingSpaces(false)
@@ -494,6 +321,8 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     _terminalColor = new TerminalColor(this);
     connect(_terminalColor, &TerminalColor::onPalette, _scrollBar, &TerminalScrollBar::setPalette);
 
+    _terminalFont = new TerminalFont(this);
+
     _terminalPainter = new TerminalPainter(this);
     connect(this, &TerminalDisplay::drawContents, _terminalPainter, &TerminalPainter::drawContents);
     connect(this, &TerminalDisplay::drawCurrentResultRect, _terminalPainter, &TerminalPainter::drawCurrentResultRect);
@@ -508,7 +337,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
         emit drawBackground(painter, rect, backgroundColor, useOpacitySetting);
     };
     auto ldrawContents = [this](QPainter &paint, const QRect &rect, bool friendly) {
-        emit drawContents(_image, paint, rect, friendly, _imageSize, _bidiEnabled, _fixedFont, _lineProperties);
+        emit drawContents(_image, paint, rect, friendly, _imageSize, _bidiEnabled, _lineProperties);
     };
     auto lgetBackgroundColor = [this]() {
         return _terminalColor->backgroundColor();
@@ -782,7 +611,6 @@ void TerminalDisplay::updateImage()
                             break;
                         }
                     }
-
                     updateLine = true;
                     x += len - 1;
                 }
@@ -805,9 +633,9 @@ void TerminalDisplay::updateImage()
             // add the area occupied by this line to the region which needs to be
             // repainted
             QRect dirtyRect = QRect(_contentRect.left() + tLx ,
-                                    _contentRect.top() + tLy + _fontHeight * y ,
-                                    _fontWidth * columnsToUpdate ,
-                                    _fontHeight);
+                                    _contentRect.top() + tLy + _terminalFont->fontHeight() * y ,
+                                    _terminalFont->fontWidth() * columnsToUpdate ,
+                                    _terminalFont->fontHeight());
 
             dirtyRegion |= dirtyRect;
         }
@@ -821,17 +649,17 @@ void TerminalDisplay::updateImage()
     // outside the new _image is cleared
     if (linesToUpdate < _usedLines) {
         dirtyRegion |= QRect(_contentRect.left() + tLx ,
-                             _contentRect.top() + tLy + _fontHeight * linesToUpdate ,
-                             _fontWidth * _columns ,
-                             _fontHeight * (_usedLines - linesToUpdate));
+                             _contentRect.top() + tLy + _terminalFont->fontHeight() * linesToUpdate ,
+                             _terminalFont->fontWidth() * _columns ,
+                             _terminalFont->fontHeight() * (_usedLines - linesToUpdate));
     }
     _usedLines = linesToUpdate;
 
     if (columnsToUpdate < _usedColumns) {
-        dirtyRegion |= QRect(_contentRect.left() + tLx + columnsToUpdate * _fontWidth ,
+        dirtyRegion |= QRect(_contentRect.left() + tLx + columnsToUpdate * _terminalFont->fontWidth(),
                              _contentRect.top() + tLy ,
-                             _fontWidth * (_usedColumns - columnsToUpdate) ,
-                             _fontHeight * _lines);
+                             _terminalFont->fontWidth() * (_usedColumns - columnsToUpdate) ,
+                             _terminalFont->fontHeight() * _lines);
     }
     _usedColumns = columnsToUpdate;
 
@@ -841,8 +669,8 @@ void TerminalDisplay::updateImage()
         // De-highlight previous result region
         dirtyRegion |= _searchResultRect;
         // Highlight new result region
-        dirtyRegion |= QRect(0, _contentRect.top() + (_screenWindow->currentResultLine() - _screenWindow->currentLine()) * _fontHeight,
-                             _columns * _fontWidth, _fontHeight);
+        dirtyRegion |= QRect(0, _contentRect.top() + (_screenWindow->currentResultLine() - _screenWindow->currentLine()) * _terminalFont->fontHeight(),
+                             _columns * _terminalFont->fontWidth(), _terminalFont->fontHeight());
     }
 
     if (_scrollBar->highlightScrolledLines().isEnabled()) {
@@ -909,7 +737,8 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
     }
 
     if (_displayVerticalLine) {
-        const int x = (_fontWidth/2) + (_fontWidth * _displayVerticalLineAtChar);
+        const int fontWidth = _terminalFont->fontWidth();
+        const int x = (fontWidth/2) + (fontWidth * _displayVerticalLineAtChar);
         const QColor lineColor = _terminalColor->foregroundColor();
 
         paint.setPen(lineColor);
@@ -918,10 +747,10 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 
     // only turn on text anti-aliasing, never turn on normal antialiasing
     // set https://bugreports.qt.io/browse/QTBUG-66036
-    paint.setRenderHint(QPainter::TextAntialiasing, _antialiasText);
+    paint.setRenderHint(QPainter::TextAntialiasing, _terminalFont->antialiasText());
 
     for (const QRect &rect : qAsConst(dirtyImageRegion)) {
-        emit drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _fixedFont, _lineProperties);
+        emit drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _lineProperties);
     }
     emit drawCurrentResultRect(paint, _searchResultRect);
     if (_scrollBar->highlightScrolledLines().isEnabled()) {
@@ -985,10 +814,12 @@ void TerminalDisplay::paintFilters(QPainter& painter)
 QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
 {
     QRect result;
-    result.setLeft(_contentRect.left() + _fontWidth * imageArea.left());
-    result.setTop(_contentRect.top() + _fontHeight * imageArea.top());
-    result.setWidth(_fontWidth * imageArea.width());
-    result.setHeight(_fontHeight * imageArea.height());
+    const int fontWidth = _terminalFont->fontWidth();
+    const int fontHeight = _terminalFont->fontHeight();
+    result.setLeft(_contentRect.left() + fontWidth * imageArea.left());
+    result.setTop(_contentRect.top() + fontHeight * imageArea.top());
+    result.setWidth(fontWidth * imageArea.width());
+    result.setHeight(fontHeight * imageArea.height());
 
     return result;
 }
@@ -996,10 +827,12 @@ QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
 QRect TerminalDisplay::widgetToImage(const QRect &widgetArea) const
 {
     QRect result;
-    result.setLeft(  qMin(_usedColumns - 1, qMax(0, (widgetArea.left()   - contentsRect().left() - _contentRect.left()) / _fontWidth )));
-    result.setTop(   qMin(_usedLines   - 1, qMax(0, (widgetArea.top()    - contentsRect().top()  - _contentRect.top() ) / _fontHeight)));
-    result.setRight( qMin(_usedColumns - 1, qMax(0, (widgetArea.right()  - contentsRect().left() - _contentRect.left()) / _fontWidth )));
-    result.setBottom(qMin(_usedLines   - 1, qMax(0, (widgetArea.bottom() - contentsRect().top()  - _contentRect.top() ) / _fontHeight)));
+    const int fontWidth = _terminalFont->fontWidth();
+    const int fontHeight = _terminalFont->fontHeight();
+    result.setLeft(  qMin(_usedColumns - 1, qMax(0, (widgetArea.left()   - contentsRect().left() - _contentRect.left()) / fontWidth )));
+    result.setTop(   qMin(_usedLines   - 1, qMax(0, (widgetArea.top()    - contentsRect().top()  - _contentRect.top() ) / fontHeight)));
+    result.setRight( qMin(_usedColumns - 1, qMax(0, (widgetArea.right()  - contentsRect().left() - _contentRect.left()) / fontWidth )));
+    result.setBottom(qMin(_usedLines   - 1, qMax(0, (widgetArea.bottom() - contentsRect().top()  - _contentRect.top() ) / fontHeight)));
     return result;
 }
 
@@ -1236,16 +1069,18 @@ void TerminalDisplay::calcGeometry()
 
     _contentRect.setTop(_contentRect.top() + headerHeight);
 
+    int fontWidth = _terminalFont->fontWidth();
+
     // ensure that display is always at least one column wide
-    _columns = qMax(1, _contentRect.width() / _fontWidth);
+    _columns = qMax(1, _contentRect.width() / fontWidth);
     _usedColumns = qMin(_usedColumns, _columns);
 
     // ensure that display is always at least one line high
-    _lines = qMax(1, _contentRect.height() / _fontHeight);
+    _lines = qMax(1, _contentRect.height() / _terminalFont->fontHeight());
     _usedLines = qMin(_usedLines, _lines);
 
     if(_centerContents) {
-        QSize unusedPixels = _contentRect.size() - QSize(_columns * _fontWidth, _lines * _fontHeight);
+        QSize unusedPixels = _contentRect.size() - QSize(_columns * fontWidth, _lines * _terminalFont->fontHeight());
         _contentRect.adjust(unusedPixels.width() / 2, unusedPixels.height() / 2, 0, 0);
     }
 }
@@ -1257,8 +1092,8 @@ void TerminalDisplay::setSize(int columns, int lines)
     const int horizontalMargin = _margin * 2;
     const int verticalMargin = _margin * 2;
 
-    QSize newSize = QSize(horizontalMargin + scrollBarWidth + (columns * _fontWidth)  ,
-                          verticalMargin + (lines * _fontHeight));
+    QSize newSize = QSize(horizontalMargin + scrollBarWidth + (columns * _terminalFont->fontWidth()),
+                          verticalMargin + (lines * _terminalFont->fontHeight()));
 
     if (newSize != size()) {
         _size = newSize;
@@ -1527,8 +1362,8 @@ void TerminalDisplay::extendSelection(const QPoint& position)
 
     QRect textBounds(tLx + _contentRect.left(),
                      tLy + _contentRect.top(),
-                     _usedColumns * _fontWidth - 1,
-                     _usedLines * _fontHeight - 1);
+                     _usedColumns * _terminalFont->fontWidth() - 1,
+                     _usedLines * _terminalFont->fontHeight() - 1);
 
     QPoint pos = position;
 
@@ -1539,11 +1374,11 @@ void TerminalDisplay::extendSelection(const QPoint& position)
     pos.setY(qBound(textBounds.top(), pos.y(), textBounds.bottom()));
 
     if (oldpos.y() > textBounds.bottom()) {
-        linesBeyondWidget = (oldpos.y() - textBounds.bottom()) / _fontHeight;
+        linesBeyondWidget = (oldpos.y() - textBounds.bottom()) / _terminalFont->fontHeight();
         _scrollBar->setValue(_scrollBar->value() + linesBeyondWidget + 1); // scrollforward
     }
     if (oldpos.y() < textBounds.top()) {
-        linesBeyondWidget = (textBounds.top() - oldpos.y()) / _fontHeight;
+        linesBeyondWidget = (textBounds.top() - oldpos.y()) / _terminalFont->fontHeight();
         _scrollBar->setValue(_scrollBar->value() - linesBeyondWidget - 1); // history
     }
 
@@ -1716,9 +1551,9 @@ QPair<int, int> TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint,
     // this is required so that the user can select characters in the right-most
     // column (or left-most for right-to-left input)
     const int columnMax = edge ? _usedColumns : _usedColumns - 1;
-    const int xOffset = edge ? _fontWidth / 2 : 0;
-    int column = qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _fontWidth, columnMax);
-    int line = qBound(0, (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _fontHeight, _usedLines - 1);
+    const int xOffset = edge ? _terminalFont->fontWidth() / 2 : 0;
+    int column = qBound(0, (widgetPoint.x() + xOffset - contentsRect().left() - _contentRect.left()) / _terminalFont->fontWidth(), columnMax);
+    int line = qBound(0, (widgetPoint.y() - contentsRect().top() - _contentRect.top()) / _terminalFont->fontHeight(), _usedLines - 1);
 
     return qMakePair(line, column);
 }
@@ -1838,11 +1673,11 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
         for (;steps > 0; --steps) {
             // wheel-up for increasing font size
-            increaseFontSize();
+            _terminalFont->increaseFontSize();
         }
         for (;steps < 0; ++steps) {
             // wheel-down for decreasing font size
-            decreaseFontSize();
+            _terminalFont->decreaseFontSize();
         }
         return;
     } else if (!_usesMouseTracking && (_scrollBar->maximum() > 0)) {
@@ -1879,7 +1714,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             // of mouse wheel rotation.  Mouse wheels typically move in steps of 15 degrees,
             // giving a scroll of 3 lines
 
-            const int lines = _scrollWheelState.consumeSteps(static_cast<int>(_fontHeight * qApp->devicePixelRatio()), ScrollState::degreesToAngle(5));
+            const int lines = _scrollWheelState.consumeSteps(static_cast<int>(_terminalFont->fontHeight() * qApp->devicePixelRatio()), ScrollState::degreesToAngle(5));
             const int keyCode = lines > 0 ? Qt::Key_Up : Qt::Key_Down;
             QKeyEvent keyEvent(QEvent::KeyPress, keyCode, Qt::NoModifier);
 
@@ -2565,10 +2400,10 @@ QRect TerminalDisplay::preeditRect() const
     if (preeditLength == 0) {
         return {};
     }
-    const QRect stringRect(_contentRect.left() + _fontWidth * cursorPosition().x(),
-                           _contentRect.top() + _fontHeight * cursorPosition().y(),
-                           _fontWidth * preeditLength,
-                           _fontHeight);
+    const QRect stringRect(_contentRect.left() + _terminalFont->fontWidth() * cursorPosition().x(),
+                           _contentRect.top() + _terminalFont->fontHeight() * cursorPosition().y(),
+                           _terminalFont->fontWidth() * preeditLength,
+                           _terminalFont->fontHeight());
 
     return stringRect.intersected(_contentRect);
 }
@@ -3002,10 +2837,7 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     setWallpaper(_colorScheme->wallpaper());
 
     // load font
-    _antialiasText = profile->antiAliasFonts();
-    _boldIntense = profile->boldIntense();
-    _useFontLineCharacters = profile->useFontLineCharacters();
-    setVTFont(profile->font());
+    _terminalFont->applyProfile(profile);
 
     // set scroll-bar position
     _scrollBar->setScrollBarPosition(Enum::ScrollBarPositionEnum(profile->property<int>(Profile::ScrollBarPosition)));
@@ -3023,7 +2855,6 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
     _ctrlRequiredForDrag = profile->property<bool>(Profile::CtrlRequiredForDrag);
     _dropUrlsAsText = profile->property<bool>(Profile::DropUrlsAsText);
     _bidiEnabled = profile->bidiRenderingEnabled();
-    setLineSpacing(uint(profile->lineSpacing()));
     _trimLeadingSpaces = profile->property<bool>(Profile::TrimLeadingSpacesInSelectedText);
     _trimTrailingSpaces = profile->property<bool>(Profile::TrimTrailingSpacesInSelectedText);
     _openLinksByDirectClick = profile->property<bool>(Profile::OpenLinksByDirectClickEnabled);
@@ -3065,8 +2896,8 @@ void TerminalDisplay::printScreen()
     auto lprintContent = [this](QPainter &painter, bool friendly) {
         
         QPoint columnLines(_usedLines, _usedColumns);
-        auto lfontget = [this]() { return getVTFont(); };
-        auto lfontset = [this](const QFont &f) { setVTFont(f); };
+        auto lfontget = [this]() { return _terminalFont->getVTFont(); };
+        auto lfontset = [this](const QFont &f) { _terminalFont->setVTFont(f); };
 
         _printManager->printContent(painter, friendly, columnLines, lfontget, lfontset);
     };

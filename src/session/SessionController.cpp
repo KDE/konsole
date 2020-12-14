@@ -11,6 +11,7 @@
 #include "profile/ProfileManager.h"
 #include "konsoledebug.h"
 #include "terminalDisplay/TerminalColor.h"
+#include "terminalDisplay/TerminalFonts.h"
 
 // Qt
 #include <QApplication>
@@ -1656,17 +1657,17 @@ void SessionController::clearHistoryAndReset()
 
 void SessionController::increaseFontSize()
 {
-    view()->increaseFontSize();
+    view()->terminalFont()->increaseFontSize();
 }
 
 void SessionController::decreaseFontSize()
 {
-    view()->decreaseFontSize();
+    view()->terminalFont()->decreaseFontSize();
 }
 
 void SessionController::resetFontSize()
 {
-    view()->resetFontSize();
+    view()->terminalFont()->resetFontSize();
 }
 
 void SessionController::monitorActivity(bool monitor)

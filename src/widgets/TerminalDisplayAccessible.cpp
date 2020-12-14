@@ -8,6 +8,8 @@
 #include "session/SessionController.h"
 #include <klocalizedstring.h>
 
+#include "terminalDisplay/TerminalFonts.h"
+
 using namespace Konsole;
 
 TerminalDisplayAccessible::TerminalDisplayAccessible(TerminalDisplay *display) :
@@ -111,8 +113,8 @@ QRect TerminalDisplayAccessible::characterRect(int offset) const
 {
     int row = offset / display()->_usedColumns;
     int col = offset - row * display()->_usedColumns;
-    QPoint position = QPoint(col * display()->fontWidth(), row * display()->fontHeight());
-    return QRect(position, QSize(display()->fontWidth(), display()->fontHeight()));
+    QPoint position = QPoint(col * display()->terminalFont()->fontWidth(), row * display()->terminalFont()->fontHeight());
+    return QRect(position, QSize(display()->terminalFont()->fontWidth(), display()->terminalFont()->fontHeight()));
 }
 
 int TerminalDisplayAccessible::offsetAtPoint(const QPoint &point) const

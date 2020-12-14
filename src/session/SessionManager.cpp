@@ -36,6 +36,7 @@
 #include "SessionController.h"
 
 #include "terminalDisplay/TerminalDisplay.h"
+#include "terminalDisplay/TerminalFonts.h"
 
 using namespace Konsole;
 
@@ -298,7 +299,7 @@ void SessionManager::sessionProfileCommandReceived(const QString &text)
     QHash<TerminalDisplay *, QFont> zoomFontSizes;
     const QList<TerminalDisplay *> viewsList = session->views();
     for (TerminalDisplay *view : viewsList) {
-        const QFont &viewCurFont = view->getVTFont();
+        const QFont &viewCurFont = view->terminalFont()->getVTFont();
         if (viewCurFont != _sessionProfiles[session]->font()) {
             zoomFontSizes.insert(view, viewCurFont);
         }
@@ -329,7 +330,7 @@ void SessionManager::sessionProfileCommandReceived(const QString &text)
         QHashIterator<TerminalDisplay *, QFont> it(zoomFontSizes);
         while (it.hasNext()) {
             it.next();
-            it.key()->setVTFont(it.value());
+            it.key()->terminalFont()->setVTFont(it.value());
         }
     }
 }

@@ -10,6 +10,7 @@
 
 #include "terminalDisplay/TerminalDisplay.h"
 #include "terminalDisplay/TerminalColor.h"
+#include "terminalDisplay/TerminalFonts.h"
 
 #include <QRect>
 #include <QEvent>
@@ -255,7 +256,7 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
     for (const auto &spot : spots) {
         QRegion region;
         if (spot->type() == HotSpot::Link || spot->type() == HotSpot::EMailAddress || spot->type() == HotSpot::EscapedUrl) {
-            QPair<QRegion, QRect> spotRegion = spot->region(td->fontWidth(), td->fontHeight(), td->columns(), td->contentRect());
+            QPair<QRegion, QRect> spotRegion = spot->region(td->terminalFont()->fontWidth(), td->terminalFont()->fontHeight(), td->columns(), td->contentRect());
             region = spotRegion.first;
             QRect r = spotRegion.second;
 
@@ -318,10 +319,10 @@ void FilterChain::paint(TerminalDisplay* td, QPainter& painter)
             // because the check below for the position of the cursor
             // finds it on the border of the target area
             QRect r;
-            r.setCoords(startColumn * td->fontWidth() + td->contentRect().left(),
-                        line * td->fontHeight() + td->contentRect().top(),
-                        endColumn * td->fontWidth() + td->contentRect().left() - 1,
-                        (line + 1)* td->fontHeight() + td->contentRect().top() - 1);
+            r.setCoords(startColumn * td->terminalFont()->fontWidth() + td->contentRect().left(),
+                        line * td->terminalFont()->fontHeight() + td->contentRect().top(),
+                        endColumn * td->terminalFont()->fontWidth() + td->contentRect().left() - 1,
+                        (line + 1)* td->terminalFont()->fontHeight() + td->contentRect().top() - 1);
 
             // Underline link hotspots
             // TODO: Fix accessing the urlHint here.
