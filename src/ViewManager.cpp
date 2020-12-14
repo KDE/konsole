@@ -656,7 +656,7 @@ TerminalDisplay *ViewManager::createView(Session *session)
     // Use Qt::UniqueConnection to avoid duplicate connection
     connect(session, &Konsole::Session::finished, this, &Konsole::ViewManager::sessionFinished,
             Qt::UniqueConnection);
-    TerminalDisplay *display = createTerminalDisplay(session);
+    TerminalDisplay *display = createTerminalDisplay();
 
     const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
     applyProfileToView(display, profile);
@@ -786,10 +786,9 @@ void ViewManager::viewDestroyed(QWidget *view)
 //        emit unplugController(_pluggedController);
 }
 
-TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
+TerminalDisplay *ViewManager::createTerminalDisplay()
 {
     auto display = new TerminalDisplay(nullptr);
-    display->setRandomSeed(session->sessionId() | (qApp->applicationPid() << 10));
     connect(display, &TerminalDisplay::requestToggleExpansion,
             _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal);
 

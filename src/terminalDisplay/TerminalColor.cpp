@@ -30,10 +30,10 @@ namespace Konsole
         setColorTable(ColorScheme::defaultTable);
     }
     
-    void TerminalColor::applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, int randomSeed)
+    void TerminalColor::applyProfile(const Profile::Ptr &profile, ColorScheme const *colorScheme, uint sessionId)
     {
         ColorEntry table[TABLE_COLORS];
-        colorScheme->getColorTable(table, randomSeed);
+        colorScheme->getColorTable(table, sessionId);
         setColorTable(table);
         setOpacity(colorScheme->opacity());
 

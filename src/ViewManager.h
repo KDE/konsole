@@ -403,7 +403,7 @@ private:
     // creates a new terminal display
     // the 'session' is used so that the terminal display's random seed
     // can be set to something which depends uniquely on that session
-    TerminalDisplay *createTerminalDisplay(Session *session = nullptr);
+    TerminalDisplay *createTerminalDisplay();
 
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information
