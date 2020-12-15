@@ -22,9 +22,11 @@ private Q_SLOTS:
     void testLargeScreenCopyShortLine();
     void testLargeScreenCopyEmptyLine();
     void testLargeScreenCopyLongLine();
+    void testCursorPosition();
 
 private:
     void doLargeScreenCopyVerification(const QString &putToScreen, const QString &expectedSelection);
+    void doComparePosition(Screen *screen, int y, int x);
 
     const int largeScreenLines = 10;
     const int largeScreenColumns = 1200;

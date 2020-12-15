@@ -107,6 +107,9 @@ void Screen::cursorDown(int n)
     if (n < 1) {
        n = 1; // Default
     }
+    if (n > MAX_SCREEN_ARGUMENT) {
+        n = MAX_SCREEN_ARGUMENT;
+    }
     const int stop = _cuY > _bottomMargin ? _lines - 1 : _bottomMargin;
     _cuY = qMin(stop, _cuY + n);
 }
@@ -126,14 +129,11 @@ void Screen::cursorNextLine(int n)
     if (n < 1) {
         n = 1; // Default
     }
-    _cuX = 0;
-    while (n > 0) {
-        if (_cuY < _lines - 1) {
-            _cuY += 1;
-        }
-        n--;
+    if (n > MAX_SCREEN_ARGUMENT) {
+        n = MAX_SCREEN_ARGUMENT;
     }
-
+    _cuX = 0;
+    _cuY = qMin(_cuY + n, _lines - 1);
 }
 
 void Screen::cursorPreviousLine(int n)
@@ -143,12 +143,7 @@ void Screen::cursorPreviousLine(int n)
         n = 1; // Default
     }
     _cuX = 0;
-    while (n > 0) {
-        if (_cuY  > 0) {
-            _cuY -= 1;
-        }
-        n--;
-    }
+    _cuY = qMax(0, _cuY - n);
 }
 
 void Screen::cursorRight(int n)
@@ -156,6 +151,9 @@ void Screen::cursorRight(int n)
 {
     if (n < 1) {
         n = 1; // Default
+    }
+    if (n > MAX_SCREEN_ARGUMENT) {
+        n = MAX_SCREEN_ARGUMENT;
     }
     _cuX = qMin(_columns - 1, _cuX + n);
 }
@@ -222,7 +220,10 @@ void Screen::eraseChars(int n)
     if (n < 1) {
         n = 1; // Default
     }
-    const int p = qMax(0, qMin(_cuX + n - 1, _columns - 1));
+    if (n > MAX_SCREEN_ARGUMENT) {
+        n = MAX_SCREEN_ARGUMENT;
+    }
+    const int p = qBound(0, _cuX + n - 1, _columns - 1);
     clearImage(loc(_cuX, _cuY), loc(p, _cuY), ' ');
 }
 
@@ -911,8 +912,7 @@ void Screen::setCursorX(int x)
     if (x < 1) {
         x = 1; // Default
     }
-    x -= 1; // Adjust
-    _cuX = qMax(0, qMin(_columns - 1, x));
+    _cuX = qBound(0, x - 1, _columns - 1);
 }
 
 void Screen::setCursorY(int y)
@@ -920,8 +920,11 @@ void Screen::setCursorY(int y)
     if (y < 1) {
         y = 1; // Default
     }
-    y -= 1; // Adjust
-    _cuY = qMax(0, qMin(_lines  - 1, y + (getMode(MODE_Origin) ? _topMargin : 0)));
+    if (y > MAX_SCREEN_ARGUMENT) {
+        y = MAX_SCREEN_ARGUMENT;
+    }
+    y += (getMode(MODE_Origin) ? _topMargin : 0);
+    _cuY = qBound(0, y - 1, _lines - 1);
 }
 
 void Screen::toStartOfLine()

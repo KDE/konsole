@@ -56,4 +56,107 @@ void ScreenTest::testLargeScreenCopyLongLine()
   doLargeScreenCopyVerification(putToScreen, expectedSelection);
 }
 
+void ScreenTest::doComparePosition(Screen *screen, int y, int x)
+{
+    QCOMPARE(screen->getCursorY(), y);
+    QCOMPARE(screen->getCursorX(), x);
+}
+
+// Test: setCursorYX, setCursorX, setCursorY, cursorDown, cursorUp, 
+// cursorRight, cursorLeft, cursorNextLine and cursorPreviousLine
+void ScreenTest::testCursorPosition() 
+{
+    Screen *screen = new Screen(largeScreenLines, largeScreenColumns);
+
+    // setCursorYX will test setCursorX and setCursorY too
+    screen->setCursorYX(6, 6);
+    doComparePosition(screen, 5, 5);
+
+    screen->setCursorYX(2147483647, 2147483647);
+    doComparePosition(screen, largeScreenLines - 1, largeScreenColumns - 1);
+
+    screen->setCursorYX(-1, -1);
+    doComparePosition(screen, 0, 0);
+
+    screen->setCursorYX(0, 0);
+    doComparePosition(screen, 0, 0);
+
+    screen->setCursorYX(1, 1);
+    doComparePosition(screen, 0, 0);
+
+    screen->cursorDown(2147483647);
+    doComparePosition(screen, largeScreenLines - 1, 0);
+
+    screen->cursorUp(2147483647);
+    doComparePosition(screen, 0, 0);
+
+    screen->cursorDown(4);
+    doComparePosition(screen, 4, 0);
+
+    screen->cursorDown(-1);
+    doComparePosition(screen, 5, 0);
+
+    screen->cursorDown(0);
+    doComparePosition(screen, 6, 0);
+
+    screen->cursorUp(0);
+    doComparePosition(screen, 5, 0);
+
+    screen->cursorUp(-1);
+    doComparePosition(screen, 4, 0);
+
+    screen->cursorUp(4);
+    doComparePosition(screen, 0, 0);
+
+    screen->cursorRight(-1);
+    doComparePosition(screen, 0, 1);
+
+    screen->cursorRight(3);
+    doComparePosition(screen, 0, 4);
+
+    screen->cursorRight(0);
+    doComparePosition(screen, 0, 5);
+
+    screen->cursorLeft(0);
+    doComparePosition(screen, 0, 4);
+
+    screen->cursorLeft(2);
+    doComparePosition(screen, 0, 2);
+
+    screen->cursorLeft(-1);
+    doComparePosition(screen, 0, 1);
+
+    screen->cursorRight(2147483647);
+    doComparePosition(screen, 0, largeScreenColumns - 1);
+
+    screen->cursorLeft(2147483647);
+    doComparePosition(screen, 0, 0);
+
+    screen->cursorNextLine(4);
+    doComparePosition(screen, 4, 0);
+
+    screen->cursorNextLine(-1);
+    doComparePosition(screen, 5, 0);
+
+    screen->cursorNextLine(0);
+    doComparePosition(screen, 6, 0);
+
+    screen->cursorPreviousLine(0);
+    doComparePosition(screen, 5, 0);
+
+    screen->cursorPreviousLine(2);
+    doComparePosition(screen, 3, 0);
+
+    screen->cursorPreviousLine(-1);
+    doComparePosition(screen, 2, 0);
+
+    screen->cursorPreviousLine(2147483647);
+    doComparePosition(screen, 0, 0);
+
+    screen->cursorNextLine(2147483647);
+    doComparePosition(screen, largeScreenLines - 1, 0);
+
+    delete screen;
+}
+
 QTEST_GUILESS_MAIN(ScreenTest)

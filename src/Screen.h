@@ -725,6 +725,9 @@ private:
     quint32 _lastDrawnChar;
     EscapeSequenceUrlExtractor *_escapeSequenceUrlExtractor;
     void toggleUrlInput();
+
+    // Vt102Emulation defined max argument value that can be passed to a Screen function
+    const int MAX_SCREEN_ARGUMENT = 40960; 
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Screen::DecodingOptions)

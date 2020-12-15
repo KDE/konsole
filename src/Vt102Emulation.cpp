@@ -220,7 +220,7 @@ constexpr int token_csi_psp(int a, int n)
     return token_construct(12, a, n);
 }
 
-const int MAX_ARGUMENT = 4096;
+const int MAX_ARGUMENT = 40960;
 
 // Tokenizer --------------------------------------------------------------- --
 
@@ -241,9 +241,7 @@ void Vt102Emulation::resetTokenizer()
 
 void Vt102Emulation::addDigit(int digit)
 {
-    if (argv[argc] < MAX_ARGUMENT) {
-        argv[argc] = 10 * argv[argc] + digit;
-    }
+    argv[argc] = qMin(10 * argv[argc] + digit, MAX_ARGUMENT);
 }
 
 void Vt102Emulation::addArgument()
