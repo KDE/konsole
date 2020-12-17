@@ -7,6 +7,8 @@
 #ifndef PROFILE_MODEL_H
 #define PROFILE_MODEL_H
 
+#include "konsoleprofile_export.h"
+
 #include <QAbstractTableModel>
 #include <QExplicitlySharedDataPointer>
 #include <QList>
@@ -14,7 +16,7 @@
 namespace Konsole {
 class Profile;
 
-class ProfileModel : public QAbstractTableModel {
+class KONSOLEPROFILE_EXPORT ProfileModel : public QAbstractTableModel {
     Q_OBJECT
 public:
     static ProfileModel* instance();

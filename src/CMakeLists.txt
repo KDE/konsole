@@ -263,7 +263,6 @@ ecm_add_app_icon(kdeinit_konsole ICONS ${ICONS_SRCS})
 
 kf5_add_kdeinit_executable(konsole ${konsole_KDEINIT_SRCS})
 target_link_libraries(kdeinit_konsole
-  konsoleprofile
   konsoleprivate
   KF5::XmlGui
   KF5::WindowSystem
@@ -304,7 +303,6 @@ set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 target_link_libraries(konsolepart
     KF5::Parts
     KF5::XmlGui
-    konsoleprofile
     konsoleprivate
 )
 install(TARGETS konsolepart  DESTINATION ${KDE_INSTALL_PLUGINDIR})
