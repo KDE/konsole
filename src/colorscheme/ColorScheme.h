@@ -22,6 +22,7 @@ class QPainter;
 
 namespace Konsole {
 
+class RandomizationRange;
 /**
  * Represents a color scheme for a terminal display.
  *
@@ -145,26 +146,6 @@ public:
     static QString translatedColorNameForIndex(int index);
 
 private:
-    // specifies how much a particular color can be randomized by
-    class RandomizationRange
-    {
-    public:
-        RandomizationRange() : hue(0.0),
-            saturation(0.0),
-            lightness(0.0)
-        {
-        }
-
-        bool isNull() const
-        {
-            return qFuzzyIsNull(hue) && qFuzzyIsNull(saturation) && qFuzzyIsNull(lightness);
-        }
-
-        double hue;
-        double saturation;
-        double lightness;
-    };
-
     // returns the active color table.  if none has been set specifically,
     // this is the default color table.
     const QColor *colorTable() const;

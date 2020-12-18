@@ -9,6 +9,7 @@
 // Own
 #include "ColorScheme.h"
 #include "hsluv.h"
+#include "RandomizationRange.h"
 
 // Qt
 #include <QPainter>

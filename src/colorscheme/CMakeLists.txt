@@ -6,6 +6,7 @@ set(konsole_colorscheme_SRCS
     ColorSchemeWallpaper.cpp
     ColorSchemeEditor.cpp
     ColorSchemeViewDelegate.cpp
+    RandomizationRange.cpp
 )
 
 ki18n_wrap_ui(konsole_colorscheme_SRCS
