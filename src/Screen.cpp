@@ -474,8 +474,14 @@ void Screen::updateEffectiveRendition()
         _effectiveBackground = _currentBackground;
     }
 
-    if ((_currentRendition & RE_BOLD) == 0 && (_currentRendition & RE_FAINT) != 0) {
+    if ((_currentRendition & RE_BOLD) != 0) {
+        if ((_currentRendition & RE_FAINT) == 0) {
+            _effectiveForeground.setIntensive();
+        }
+    } else {
+        if ((_currentRendition & RE_FAINT) != 0) {
             _effectiveForeground.setFaint();
+        }
     }
 }
 
