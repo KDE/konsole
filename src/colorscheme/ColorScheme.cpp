@@ -537,3 +537,8 @@ void ColorScheme::setWallpaper(const QString &path)
 {
     _wallpaper = new ColorSchemeWallpaper(path);
 }
+
+ColorSchemeWallpaper::Ptr ColorScheme::wallpaper() const
+{
+    return _wallpaper;
+}
