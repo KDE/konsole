@@ -8,10 +8,14 @@
 // THIS IS A GENERATED FILE. DO NOT EDIT.
 //
 // CharacterWidth.cpp file is automatically generated - do not edit it.
+//
+// To build uni2characterwidth binary, add
+// -DKONSOLE_BUILD_UNI2CHARACTERWIDTH=TRUE to cmake-options
+//
 // To change anything here, edit CharacterWidth.src.cpp and regenerate the file
 // using following command:
 //
-// uni2characterwidth -U "https://unicode.org/Public/13.0.0/ucd/UnicodeData.txt" -A "https://unicode.org/Public/13.0.0/ucd/EastAsianWidth.txt" -E "https://unicode.org/Public/13.0.0/ucd/emoji/emoji-data.txt" -W "tools/uni2characterwidth/overrides.txt" --ambiguous-width=1 --emoji=presentation -g "code:src/CharacterWidth.src.cpp" "src/CharacterWidth.cpp"
+// uni2characterwidth -U "https://unicode.org/Public/13.0.0/ucd/UnicodeData.txt" -A "https://unicode.org/Public/13.0.0/ucd/EastAsianWidth.txt" -E "https://unicode.org/Public/13.0.0/ucd/emoji/emoji-data.txt" -W "tools/uni2characterwidth/overrides.txt" --ambiguous-width=1 --emoji=presentation -g "code:src/characters/CharacterWidth.src.cpp" "src/characters/CharacterWidth.cpp"
 //
 
 #include "CharacterWidth.h"
