@@ -174,9 +174,7 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem *item)
             colorSchemeRow += 2*COLOR_TABLE_ROW_LENGTH;
         }
 
-        QColor entry(_colors->colorEntry(colorSchemeRow));
-        entry = color;
-        _colors->setColorTableEntry(colorSchemeRow, entry);
+        _colors->setColorTableEntry(colorSchemeRow, color);
 
         emit colorsChanged(_colors);
     }
