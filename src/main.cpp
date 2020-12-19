@@ -97,25 +97,8 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
         needToDeleteQApplication = true;
     }
 
-#if defined(Q_OS_LINUX) && (QT_VERSION < QT_VERSION_CHECK(5, 11, 2))
-    // Workaround for https://bugreports.qt.io/browse/QTBUG-48344
-    // See also https://bugs.kde.org/show_bug.cgi?id=230184
-    // The Qt glib event loop doesn't let timers deliver events if there are a
-    // lot of other events.
-    const QByteArray qtUseGLibOld = qgetenv("QT_NO_GLIB");
-    qputenv("QT_NO_GLIB", "1");
-#endif
-
     auto app = new QApplication(argc, argv);
     app->setStyle(new MenuStyle());
-
-#if defined(Q_OS_LINUX) && (QT_VERSION < QT_VERSION_CHECK(5, 11, 2))
-    if (qtUseGLibOld.isNull()) {
-        qunsetenv("QT_NO_GLIB");
-    } else {
-        qputenv("QT_NO_GLIB", qtUseGLibOld);
-    }
-#endif
 
 #if defined(Q_OS_MACOS)
     // this ensures that Ctrl and Meta are not swapped, so CTRL-C and friends
