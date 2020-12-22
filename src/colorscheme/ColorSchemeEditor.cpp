@@ -31,8 +31,8 @@
 
 using namespace Konsole;
 
-// colorTable is half the length of _table in ColorScheme class
-// since intense colors are in a separated column
+// colorTable is one third the length of _table in ColorScheme class,
+// because intense and faint colors are in separate columns
 const int COLOR_TABLE_ROW_LENGTH = TABLE_COLORS / 3;
 
 const int NAME_COLUMN = 0;           // column 0 : color names
@@ -169,7 +169,7 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem *item)
             colorSchemeRow += COLOR_TABLE_ROW_LENGTH;
         }
 
-        // and the faint color rows are in the middle third of the color table
+        // and the faint color rows are in the final third of the color table
         if (item->column() == FAINT_COLOR_COLUMN) {
             colorSchemeRow += 2*COLOR_TABLE_ROW_LENGTH;
         }
