@@ -218,8 +218,12 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
 
     if (apply.shouldApply(Profile::TerminalColumns)
         || apply.shouldApply(Profile::TerminalRows)) {
-        const auto columns = profile->property<int>(Profile::TerminalColumns);
+        const auto highlightScrolledLines = profile->property<bool>(Profile::HighlightScrolledLines);
         const auto rows = profile->property<int>(Profile::TerminalRows);
+        auto columns = profile->property<int>(Profile::TerminalColumns);
+        // highlightScrolledLines takes 1 column to display, correct it
+        // adding 1 to terminal initial columns profile preference
+        columns += highlightScrolledLines ? 1 : 0;
         session->setPreferredSize(QSize(columns, rows));
     }
 
