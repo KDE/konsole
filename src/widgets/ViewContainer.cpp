@@ -26,6 +26,7 @@
 #include "profile/ProfileList.h"
 #include "KonsoleSettings.h"
 #include "session/SessionController.h"
+#include "session/SessionManager.h"
 #include "DetachableTabBar.h"
 #include "terminalDisplay/TerminalDisplay.h"
 #include "widgets/ViewSplitter.h"
@@ -551,12 +552,17 @@ void TabbedViewContainer::updateIcon(ViewProperties *item)
     //    the status
     // 3. Active view icon
 
-    QIcon icon;
+    QIcon icon = item->icon();
     if (state.notification != Session::NoNotification) {
         switch(state.notification) {
-        case Session::Bell:
-            icon = QIcon::fromTheme(QLatin1String("notifications"));
-            break;
+        case Session::Bell: {
+            auto session = controller->session();
+            auto profilePtr = SessionManager::instance()->sessionProfile(session);
+            if (profilePtr->property<int>(Profile::BellMode) != Enum::NoBell) {
+                icon = QIcon::fromTheme(QLatin1String("notifications"));
+            }
+        }
+        break;
         case Session::Activity:
             icon = QIcon::fromTheme(QLatin1String("dialog-information"));
             break;
@@ -570,8 +576,6 @@ void TabbedViewContainer::updateIcon(ViewProperties *item)
         icon = QIcon::fromTheme(QLatin1String("irc-voice"));
     } else if (state.readOnly) {
         icon = QIcon::fromTheme(QLatin1String("object-locked"));
-    } else {
-        icon = item->icon();
     }
 
     if (tabIcon(index).name() != icon.name()) {
