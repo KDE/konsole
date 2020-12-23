@@ -21,6 +21,7 @@
 #include <QTimer>
 #include <QUrl>
 #include <QStandardPaths>
+#include <QStringListModel>
 #include <QRegularExpressionValidator>
 
 // KDE
@@ -467,6 +468,12 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     _generalUi->terminalColumnsEntry->setFixedWidth(sizeEntryWidth);
     _generalUi->terminalRowsEntry->setFixedWidth(sizeEntryWidth);
 
+    auto *bellModeModel = new QStringListModel({i18n("System Bell"), i18n("System Notifications"),
+                                                i18n("Visual Bell"), i18n("Ignore Bell Events")},
+                                               this);
+    _generalUi->terminalBellCombo->setModel(bellModeModel);
+    _generalUi->terminalBellCombo->setCurrentIndex(profile->property<int>(Profile::BellMode));
+
     // signals and slots
     connect(_generalUi->dirSelectButton, &QToolButton::clicked, this,
             &Konsole::EditProfileDialog::selectInitialDir);
@@ -489,6 +496,11 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
     connect(_generalUi->terminalRowsEntry,
             QOverload<int>::of(&QSpinBox::valueChanged), this,
             &Konsole::EditProfileDialog::terminalRowsEntryChanged);
+
+    connect(_generalUi->terminalBellCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, [this](const int index) {
+        updateTempProfileProperty(Profile::BellMode, index);
+    });
 }
 
 void EditProfileDialog::showEnvironmentEditor()
