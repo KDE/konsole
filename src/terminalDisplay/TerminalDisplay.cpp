@@ -78,10 +78,6 @@
 
 using namespace Konsole;
 
-#define REPCHAR   "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
-    "abcdefgjijklmnopqrstuvwxyz" \
-    "0123456789./+@"
-
 inline int TerminalDisplay::loc(int x, int y) const {
     if (y < 0 || y > _lines) {
         qDebug() << "Y: " << y << "Lines" << _lines;
@@ -332,7 +328,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     connect(this, &TerminalDisplay::drawBackground, _terminalPainter, &TerminalPainter::drawBackground);
     connect(this, &TerminalDisplay::drawCharacters, _terminalPainter, &TerminalPainter::drawCharacters);
     connect(this, &TerminalDisplay::drawInputMethodPreeditString, _terminalPainter, &TerminalPainter::drawInputMethodPreeditString);
-    
+
     auto ldrawBackground = [this](QPainter &painter,
             const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting) {
         emit drawBackground(painter, rect, backgroundColor, useOpacitySetting);
@@ -444,7 +440,7 @@ void TerminalDisplay::setWallpaper(const ColorSchemeWallpaper::Ptr &p)
     _wallpaper = p;
 }
 
-void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode mode, int amount) 
+void TerminalDisplay::scrollScreenWindow(enum ScreenWindow::RelativeScrollMode mode, int amount)
 {
     _screenWindow->scrollBy(mode, amount, _scrollBar->scrollFullPage());
     _screenWindow->setTrackOutput(_screenWindow->atEndOfOutput());
@@ -2891,7 +2887,6 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 void TerminalDisplay::printScreen()
 {
     auto lprintContent = [this](QPainter &painter, bool friendly) {
-        
         QPoint columnLines(_usedLines, _usedColumns);
         auto lfontget = [this]() { return _terminalFont->getVTFont(); };
         auto lfontset = [this](const QFont &f) { _terminalFont->setVTFont(f); };

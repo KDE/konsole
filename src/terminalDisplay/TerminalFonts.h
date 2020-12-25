@@ -37,9 +37,6 @@ namespace Konsole
         void setLineSpacing(uint);
         uint lineSpacing() const;
 
-        bool fixedFont() const;
-        void setFixedFont(const bool);
-
         int fontHeight() const;
         int fontWidth() const;
         int fontAscent() const;
@@ -51,7 +48,6 @@ namespace Konsole
         void fontChange(const QFont &);
 
     private:
-        bool m_fixedFont;
         uint m_lineSpacing;
         int m_fontHeight;
         int m_fontWidth;

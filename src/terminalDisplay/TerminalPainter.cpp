@@ -61,8 +61,9 @@ namespace Konsole
         }
     }
 
-    void TerminalPainter::drawContents(Character *image, QPainter &paint, const QRect &rect, bool printerFriendly, int imageSize, bool bidiEnabled,
-            QVector<LineProperty> lineProperties)
+    void TerminalPainter::drawContents(Character *image, QPainter &paint, const QRect &rect,
+                                       bool printerFriendly, int imageSize, bool bidiEnabled,
+                                       QVector<LineProperty> lineProperties)
     {
         const auto display = qobject_cast<TerminalDisplay*>(sender());
 
@@ -191,13 +192,6 @@ namespace Konsole
                     len++; // Adjust for trailing part of multi-column character
                 }
 
-                const bool save__fixedFont = display->terminalFont()->fixedFont();
-                if (lineDraw) {
-                    display->terminalFont()->setFixedFont(false);
-                }
-                if (doubleWidth) {
-                    display->terminalFont()->setFixedFont(false);
-                }
                 univec.resize(p);
 
                 QMatrix textScale;
@@ -245,8 +239,6 @@ namespace Konsole
                                     display->terminalColor()->colorTable());
                 }
 
-                display->terminalFont()->setFixedFont(save__fixedFont);
-
                 paint.setWorldTransform(QTransform(textScale.inverted()), true);
 
                 if (y < lineProperties.size() - 1) {
@@ -260,7 +252,7 @@ namespace Konsole
             }
         }
     }
-    
+
     void TerminalPainter::drawCurrentResultRect(QPainter &painter, QRect searchResultRect)
     {
         const auto display = qobject_cast<TerminalDisplay*>(sender());
@@ -268,7 +260,7 @@ namespace Konsole
         if (display->screenWindow()->currentResultLine() == -1) {
             return;
         }
-        
+
         searchResultRect.setRect(0, display->contentRect().top() + (display->screenWindow()->currentResultLine() - display->screenWindow()->currentLine()) * display->terminalFont()->fontHeight(),
             display->columns() * display->terminalFont()->fontWidth(), display->terminalFont()->fontHeight());
         painter.fillRect(searchResultRect, QColor(0, 0, 255, 80));
@@ -353,9 +345,9 @@ namespace Konsole
         // draw text
         drawCharacters(painter, rect, text, style, characterColor);
     }
-    
+
     void TerminalPainter::drawPrinterFriendlyTextFragment(QPainter &painter, const QRect &rect, const QString &text,
-                                                const Character *style) 
+                                                const Character *style)
     {
         Character print_style = *style;
         print_style.foregroundColor = CharacterColor(COLOR_SPACE_RGB, 0x00000000);
@@ -363,9 +355,9 @@ namespace Konsole
 
         drawCharacters(painter, rect, text, &print_style, QColor());
     }
-    
+
     void TerminalPainter::drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor,
-                                bool useOpacitySetting) 
+                                bool useOpacitySetting)
     {
         const auto display = qobject_cast<TerminalDisplay*>(sender());
 
@@ -389,9 +381,9 @@ namespace Konsole
             painter.fillRect(rect, backgroundColor);
         }
     }
-    
+
     void TerminalPainter::drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor,
-                            const QColor &backgroundColor, QColor &characterColor) 
+                            const QColor &backgroundColor, QColor &characterColor)
     {
         const auto display = qobject_cast<TerminalDisplay*>(sender());
 
@@ -437,9 +429,9 @@ namespace Konsole
             painter.drawLine(line);
         }
     }
-    
+
     void TerminalPainter::drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
-                                const Character *style, const QColor &characterColor) 
+                                const Character *style, const QColor &characterColor)
     {
         const auto display = qobject_cast<TerminalDisplay*>(sender());
 
@@ -452,7 +444,7 @@ namespace Konsole
         }
 
         static constexpr int MaxFontWeight = 99;
-        
+
         const int normalWeight = display->font().weight();
 
         const int boldWeight = qMin(normalWeight + 26, MaxFontWeight);

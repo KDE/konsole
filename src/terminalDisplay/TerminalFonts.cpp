@@ -20,16 +20,10 @@
 #include <QFont>
 #include <QFontMetrics>
 
-#define REPCHAR   "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
-    "abcdefgjijklmnopqrstuvwxyz" \
-    "0123456789./+@"
-
 namespace Konsole
 {
-
     TerminalFont::TerminalFont(QWidget *parent)
         : QWidget(parent)
-        , m_fixedFont(true)
         , m_lineSpacing(0)
         , m_fontHeight(1)
         , m_fontWidth(1)
@@ -40,8 +34,8 @@ namespace Konsole
         , m_profile(nullptr)
     {
     }
-    
-    void TerminalFont::applyProfile(const Profile::Ptr &profile) 
+
+    void TerminalFont::applyProfile(const Profile::Ptr &profile)
     {
         m_profile = profile;
         m_antialiasText = profile->antiAliasFonts();
@@ -50,7 +44,7 @@ namespace Konsole
         m_lineSpacing = uint(profile->lineSpacing());
         setVTFont(profile->font());
     }
-    
+
     void TerminalFont::setVTFont(const QFont &f)
     {
         QFont newFont(f);
@@ -129,20 +123,20 @@ namespace Konsole
         qobject_cast<QWidget*>(parent())->setFont(newFont);
         fontChange(newFont);
     }
-    
+
     QFont TerminalFont::getVTFont() const
     {
         return qobject_cast<QWidget*>(parent())->font();
     }
-    
-    void TerminalFont::increaseFontSize() 
+
+    void TerminalFont::increaseFontSize()
     {
         QFont font = qobject_cast<QWidget*>(parent())->font();
         font.setPointSizeF(font.pointSizeF() + 1);
         setVTFont(font);
     }
-    
-    void TerminalFont::decreaseFontSize() 
+
+    void TerminalFont::decreaseFontSize()
     {
         const qreal MinimumFontSize = 6;
 
@@ -150,11 +144,11 @@ namespace Konsole
         font.setPointSizeF(qMax(font.pointSizeF() - 1, MinimumFontSize));
         setVTFont(font);
     }
-    
-    void TerminalFont::resetFontSize() 
+
+    void TerminalFont::resetFontSize()
     {
         const qreal MinimumFontSize = 6;
-        
+
         TerminalDisplay *display = qobject_cast<TerminalDisplay*>(parent());
         QFont font = display->font();
         Profile::Ptr currentProfile = SessionManager::instance()->sessionProfile(display->sessionController()->session());
@@ -162,28 +156,18 @@ namespace Konsole
         font.setPointSizeF(qMax(defaultFontSize, MinimumFontSize));
         setVTFont(font);
     }
-    
-    void TerminalFont::setLineSpacing(uint i) 
+
+    void TerminalFont::setLineSpacing(uint i)
     {
         m_lineSpacing = i;
         fontChange(qobject_cast<QWidget*>(parent())->font());
     }
-    
+
     uint TerminalFont::lineSpacing() const
     {
         return m_lineSpacing;
     }
-    
-    bool TerminalFont::fixedFont() const
-    {
-        return m_fixedFont;
-    }
-    
-    void TerminalFont::setFixedFont(const bool fixedFont) 
-    {
-        m_fixedFont = fixedFont;
-    }
-    
+
     int TerminalFont::fontHeight() const
     {
         return m_fontHeight;
@@ -198,7 +182,7 @@ namespace Konsole
     {
         return m_fontAscent;
     }
-    
+
     bool TerminalFont::boldIntense() const
     {
         return m_boldIntense;
@@ -208,48 +192,27 @@ namespace Konsole
     {
         return m_antialiasText;
     }
-    
+
     bool TerminalFont::useFontLineCharacters() const
     {
         return m_useFontLineCharacters;
     }
-    
-    void TerminalFont::fontChange(const QFont &) 
+
+    void TerminalFont::fontChange(const QFont &)
     {
         QFontMetrics fm(qobject_cast<QWidget*>(parent())->font());
         m_fontHeight = fm.height() + m_lineSpacing;
 
         Q_ASSERT(m_fontHeight > 0);
 
-        /* TODO: When changing the three deprecated width() below
-        *       consider the info in
-        *       https://phabricator.kde.org/D23144 comments
-        *       horizontalAdvance() was added in Qt 5.11 (which should be the
-        *       minimum for 20.04 or 20.08 KDE Applications release)
-        */
-
-        // waba TerminalDisplay 1.123:
-        // "Base character width on widest ASCII character. This prevents too wide
-        //  characters in the presence of double wide (e.g. Japanese) characters."
-        // Get the width from representative normal width characters
-        m_fontWidth = qRound((static_cast<double>(fm.horizontalAdvance(QStringLiteral(REPCHAR))) / static_cast<double>(qstrlen(REPCHAR))));
-
-        m_fixedFont = true;
-
-        const int fw = fm.horizontalAdvance(QLatin1Char(REPCHAR[0]));
-        for (unsigned int i = 1; i < qstrlen(REPCHAR); i++) {
-            if (fw != fm.horizontalAdvance(QLatin1Char(REPCHAR[i]))) {
-                m_fixedFont = false;
-                break;
-            }
-        }
+        m_fontWidth = fm.horizontalAdvance(QLatin1Char('M'));
 
         if (m_fontWidth < 1) {
             m_fontWidth = 1;
         }
 
         m_fontAscent = fm.ascent();
-        
+
         qobject_cast<TerminalDisplay*>(parent())->propagateSize();
         update();
     }
