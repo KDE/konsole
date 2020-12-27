@@ -1,8 +1,5 @@
 # Konsole project
 
-# See comments in https://invent.kde.org/utilities/konsole/-/commit/9d8e47298c81fc1e47c998eda1b6e980589274eb
-cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
-
 # KDE Application Version, managed by release script
 set (RELEASE_SERVICE_VERSION_MAJOR "21")
 set (RELEASE_SERVICE_VERSION_MINOR "03")
@@ -12,12 +9,14 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 # Do not increase these requirements without a merge-request or/and
 # approval from maintainer(s).
 # minimal requirements
-cmake_minimum_required (VERSION 3.0 FATAL_ERROR)
-# Qt 5.12 LTS EOL December 2021
-set (QT_MIN_VERSION "5.12.0")
 
-# Ubuntu 20.04 LTS only has KF 5.68 and Qt 5.12
-set (KF5_MIN_VERSION "5.68.0")
+# See comments in https://invent.kde.org/utilities/konsole/-/commit/9d8e47298c81fc1e47c998eda1b6e980589274eb
+cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
+
+# Match KDE Frameworks update Dec 2020
+set (QT_MIN_VERSION "5.14.0")
+
+set (KF5_MIN_VERSION "5.71.0")
 
 # Release script will create bugzilla versions
 project(konsole VERSION ${RELEASE_SERVICE_VERSION})
