@@ -588,9 +588,7 @@ public:
 
     static const Character DefaultChar;
 
-    // Return the total number of lines before resize (fix scroll glitch)
     int getOldTotalLines();
-    // Return if it was a resize signal (fix scroll glitch)
     bool isResize();
 
 private:
@@ -628,8 +626,6 @@ private:
     TerminalDisplay *_currentTerminalDisplay;
 
     void addHistLine();
-    // add lines from _screen to _history and remove from _screen the added lines (used to resize lines and columns)
-    void fastAddHistLine();
 
     void initTabStops();
 
