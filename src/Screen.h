@@ -25,8 +25,7 @@
 #define MODE_Screen    3
 #define MODE_Cursor    4
 #define MODE_NewLine   5
-#define MODE_AppScreen 6
-#define MODES_SCREEN   7
+#define MODES_SCREEN   6
 
 namespace Konsole {
 class TerminalCharacterDecoder;
@@ -653,11 +652,6 @@ private:
     // where the number of reallocations and object reinitializations
     // should be as minimal as possible
     static Character *getCharacterBuffer(const int size);
-
-    // Get the cursor line after checking if its app mode or not
-    int getCursorLine();
-    // Set the cursor line after checking if its app mode or not
-    void setCursorLine (int newLine);
 
     int getLineLength(const int line) const;
 
