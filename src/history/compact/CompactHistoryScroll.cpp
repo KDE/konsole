@@ -57,11 +57,6 @@ int CompactHistoryScroll::getLines()
     return _lines.size();
 }
 
-int CompactHistoryScroll::getMaxLines()
-{
-    return static_cast<int>(_maxLineCount);
-}
-
 int CompactHistoryScroll::getLineLen(int lineNumber)
 {
     if ((lineNumber < 0) || (lineNumber >= _lines.size())) {
@@ -94,51 +89,6 @@ void CompactHistoryScroll::setMaxNbLines(unsigned int lineCount)
         delete _lines.takeAt(0);
     }
     ////qDebug() << "set max lines to: " << _maxLineCount;
-}
-
-void CompactHistoryScroll::insertCellsVector(int position, const TextLine &cells)
-{
-    CompactHistoryLine *line = new(_blockList) CompactHistoryLine(cells, _blockList);
-
-    _lines.insert(position, line);
-
-    if (_lines.size() > static_cast<int>(_maxLineCount)) {
-        delete _lines.takeAt(0);
-    }
-}
-
-void CompactHistoryScroll::insertCells(int position, const Character a[], int count)
-{
-    TextLine newLine(count);
-    std::copy(a, a + count, newLine.begin());
-    insertCellsVector(position, newLine);
-}
-
-void CompactHistoryScroll::removeCells(int position)
-{
-    delete _lines.takeAt(position);
-}
-
-void CompactHistoryScroll::setCellsAt(int position, const Character a[], int count)
-{
-    TextLine newLine(count);
-    std::copy(a, a + count, newLine.begin());
-    setCellsVectorAt(position, newLine);
-}
-
-void CompactHistoryScroll::setCellsVectorAt(int position, const TextLine &cells)
-{
-    CompactHistoryLine *line = new(_blockList) CompactHistoryLine(cells, _blockList);
-
-    delete _lines.takeAt(position);
-    _lines.insert(position, line);
-}
-
-void CompactHistoryScroll::setLineAt(int position, bool previousWrapped)
-{
-    CompactHistoryLine *line = _lines.at(position);
-
-    line->setWrapped(previousWrapped);
 }
 
 bool CompactHistoryScroll::isWrappedLine(int lineNumber)

@@ -218,8 +218,6 @@ public:
      */
     QString selectedText(const Screen::DecodingOptions options) const;
 
-    void updateCurrentLine();
-
 public Q_SLOTS:
     /**
      * Notifies the window that the contents of the associated terminal screen have changed.

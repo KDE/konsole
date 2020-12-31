@@ -588,9 +588,6 @@ public:
 
     static const Character DefaultChar;
 
-    int getOldTotalLines();
-    bool isResize();
-
 private:
     //copies a line of text from the screen or history into a stream using a
     //specified character decoder.  Returns the number of lines actually copied,
@@ -656,16 +653,13 @@ private:
     int _columns;
 
     typedef QVector<Character> ImageLine;      // [0..columns]
-    QVector<ImageLine> _screenLines;             // [lines]
+    ImageLine *_screenLines;             // [lines]
     int _screenLinesSize;                // _screenLines.size()
 
     int _scrolledLines;
     QRect _lastScrolledRegion;
 
     int _droppedLines;
-
-    int _oldTotalLines;
-    bool _isResize;
 
     QVarLengthArray<LineProperty, 64> _lineProperties;
 
