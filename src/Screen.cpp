@@ -469,7 +469,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     _screenLines.resize(new_lines + 1);
 
     // Check if _history need to change
-    if (new_columns != _columns && _history->getLines()) {
+    if (new_columns != _columns && _history->getLines() && _history->getMaxLines()) {
         // Join next line from _screenLine to _history
         while (_history->isWrappedLine(_history->getLines() - 1)) {
             fastAddHistLine();
@@ -477,7 +477,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
         }
         currentPos = 0;
         // Join everything in _history
-        while (currentPos < _history->getLines() - 1) {
+        while (currentPos < _history->getLines() - 1 && currentPos < _history->getMaxLines()) {
             // if it's true, join the line with next line
             if (_history->isWrappedLine(currentPos)) {
                 int curr_linelen = _history->getLineLen(currentPos);
@@ -499,7 +499,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
         }
         // Now move data to next line if needed
         currentPos = 0;
-        while (currentPos < _history->getLines()) {
+        while (currentPos < _history->getLines() && currentPos < _history->getMaxLines()) {
             int curr_linelen = _history->getLineLen(currentPos);
 
             // if the current line > new_columns it will need a new line
@@ -1644,7 +1644,7 @@ void Screen::addHistLine()
             hist_linelen += _screenLines[0].count();
 
             // After join, check if it needs new line in history to show it on scroll
-            if (hist_linelen > _columns) {
+            if (_history->getMaxLines() && hist_linelen > _columns) {
                 _history->setCellsAt(oldHistLines - 1, hist_line, _columns);
                 _history->setLineAt(oldHistLines - 1, true);
                 _history->addCells(hist_line + _columns, hist_linelen - _columns);

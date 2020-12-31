@@ -192,6 +192,15 @@ void HistoryFile::get(char *buffer, qint64 size, qint64 loc)
     }
 }
 
+void HistoryFile::removeLast(qint64 loc)
+{
+    if (loc < 0 || loc > _length) {
+        fprintf(stderr, "removeLast(%lld): invalid args.\n", loc);
+        return;
+    }
+    _length = loc;
+}
+
 qint64 HistoryFile::len() const
 {
     return _length;
