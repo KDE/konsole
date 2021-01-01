@@ -494,6 +494,9 @@ void TerminalDisplay::updateImage()
         return;
     }
 
+    // Better control over screen resizing visual glitches
+    _screenWindow->updateCurrentLine();
+
     // optimization - scroll the existing image where possible and
     // avoid expensive text drawing for parts of the image that
     // can simply be moved up or down

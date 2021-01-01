@@ -30,6 +30,11 @@ int HistoryScrollNone::getLines()
     return 0;
 }
 
+int HistoryScrollNone::getMaxLines()
+{
+    return 0;
+}
+
 int HistoryScrollNone::getLineLen(int)
 {
     return 0;
@@ -49,5 +54,29 @@ void HistoryScrollNone::addCells(const Character [], int)
 }
 
 void HistoryScrollNone::addLine(bool)
+{
+}
+
+void HistoryScrollNone::insertCells(int , const Character [], int)
+{
+}
+
+void HistoryScrollNone::removeCells(int )
+{
+}
+
+void HistoryScrollNone::insertCellsVector(int , const QVector<Character> &)
+{
+}
+
+void HistoryScrollNone::setCellsAt(int , const Character [], int)
+{
+}
+
+void HistoryScrollNone::setCellsVectorAt(int , const QVector<Character> &)
+{
+}
+
+void HistoryScrollNone::setLineAt(int , bool)
 {
 }

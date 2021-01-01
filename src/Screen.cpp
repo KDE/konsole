@@ -11,6 +11,7 @@
 // Qt
 #include <QSet>
 #include <QTextStream>
+#include <QDebug>
 
 // Konsole decoders
 #include <PlainTextDecoder.h>
@@ -47,11 +48,13 @@ Screen::Screen(int lines, int columns):
     _currentTerminalDisplay(nullptr),
     _lines(lines),
     _columns(columns),
-    _screenLines(new ImageLine[_lines + 1]),
+    _screenLines(_lines + 1),
     _screenLinesSize(_lines),
     _scrolledLines(0),
     _lastScrolledRegion(QRect()),
     _droppedLines(0),
+    _oldTotalLines(0),
+    _isResize(false),
     _lineProperties(QVarLengthArray<LineProperty, 64>()),
     _history(new HistoryScrollNone()),
     _cuX(0),
@@ -86,7 +89,6 @@ Screen::Screen(int lines, int columns):
 
 Screen::~Screen()
 {
-    delete[] _screenLines;
     delete _history;
     delete _escapeSequenceUrlExtractor;
 }
@@ -367,47 +369,195 @@ void Screen::restoreCursor()
     updateEffectiveRendition();
 }
 
+int Screen::getOldTotalLines()
+{
+    return _oldTotalLines;
+}
+
+bool Screen::isResize()
+{
+    if (_isResize) {
+        _isResize = false;
+        return true;
+    }
+    return _isResize;
+}
+
+// Not to production auxiliar functions to show what is written in screen or history
+void toDebug(const Character s[], int count, bool wrapped = false) {
+    QString out;
+    for (int i = 0; i < count; i++) {
+        out += s[i].character;
+    }
+    qDebug() << out << (wrapped? " wrapped" : "");
+}
+void toDebug(const QVector<Character> &s, bool wrapped = false) {
+    toDebug(s.data(), s.size(), wrapped);
+}
+/////
+
+int Screen::getCursorLine()
+{
+    if (_currentModes[MODE_AppScreen] == 1) {
+        return _savedState.cursorLine;
+    }
+    return _cuY;
+}
+
+void Screen::setCursorLine(int newLine)
+{
+    if (_currentModes[MODE_AppScreen] == 1) {
+        _savedState.cursorLine = newLine;
+    } else {
+        _cuY = newLine;
+    }
+}
+
 void Screen::resizeImage(int new_lines, int new_columns)
 {
     if ((new_lines == _lines) && (new_columns == _columns)) {
         return;
     }
 
-    if (_cuY > new_lines - 1) {
-        // attempt to preserve focus and _lines
-        _bottomMargin = _lines - 1; //FIXME: margin lost
-        for (int i = 0; i < _cuY - (new_lines - 1); i++) {
-            addHistLine();
-            scrollUp(0, 1);
+    // Adjust scroll position, and fix glitches
+    _oldTotalLines = getLines() + getHistLines();
+    _isResize = true;
+
+    int cursorLine = getCursorLine();
+    const int oldCursorLine = (cursorLine == _lines -1)? new_lines - 1 : cursorLine;
+
+    // First join everything.
+    int currentPos = 0;
+    while (currentPos < cursorLine && currentPos < _screenLines.count() - 1) {
+        // if the line have the 'LINE_WRAPPED' property, concat with the next line and remove it.
+        if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
+            _screenLines[currentPos].append(_screenLines[currentPos + 1]);
+            _screenLines.remove(currentPos + 1);
+            _lineProperties.remove(currentPos);
+            cursorLine--;
+            continue;
+        }
+        currentPos++;
+    }
+    // Then move the data to lines below.
+    currentPos = 0;
+    while (currentPos < cursorLine && currentPos < _screenLines.count()) {
+        // Ignore whitespaces at the end of the line
+        int lineSize = _screenLines[currentPos].size();
+        while (lineSize > 0 && QChar(_screenLines[currentPos][lineSize - 1].character).isSpace()) {
+            lineSize--;
+        }
+        const bool shouldCopy = lineSize > new_columns;
+
+        // Copy from the current line, to the next one.
+        if (shouldCopy) {
+            auto values = _screenLines[currentPos].mid(new_columns);
+            _screenLines[currentPos].remove(new_columns, values.size());
+            _lineProperties.insert(currentPos + 1, _lineProperties[currentPos]);
+            _screenLines.insert(currentPos + 1, values);
+            _lineProperties[currentPos] |= LINE_WRAPPED;
+            cursorLine++;
+        }
+        currentPos += 1;
+    }
+    // Check if it need to move from _screenLine to _history
+    while (cursorLine > new_lines - 1) {
+        fastAddHistLine();
+        cursorLine--;
+    }
+    _lineProperties.resize(new_lines + 1);
+    _screenLines.resize(new_lines + 1);
+
+    // Check if _history need to change
+    if (new_columns != _columns && _history->getLines()) {
+        // Join next line from _screenLine to _history
+        while (_history->isWrappedLine(_history->getLines() - 1)) {
+            fastAddHistLine();
+            cursorLine--;
+        }
+        currentPos = 0;
+        // Join everything in _history
+        while (currentPos < _history->getLines() - 1) {
+            // if it's true, join the line with next line
+            if (_history->isWrappedLine(currentPos)) {
+                int curr_linelen = _history->getLineLen(currentPos);
+                int next_linelen = _history->getLineLen(currentPos + 1);
+                auto *new_line = getCharacterBuffer(curr_linelen + next_linelen);
+                bool new_line_property = _history->isWrappedLine(currentPos + 1);
+
+                // Join the lines
+                _history->getCells(currentPos, 0, curr_linelen, new_line);
+                _history->getCells(currentPos + 1, 0, next_linelen, new_line + curr_linelen);
+
+                // save the new_line in history and remove the next line
+                _history->setCellsAt(currentPos, new_line, curr_linelen + next_linelen);
+                _history->setLineAt(currentPos, new_line_property);
+                _history->removeCells(currentPos + 1);
+                continue;
+            }
+            currentPos++;
+        }
+        // Now move data to next line if needed
+        currentPos = 0;
+        while (currentPos < _history->getLines()) {
+            int curr_linelen = _history->getLineLen(currentPos);
+
+            // if the current line > new_columns it will need a new line
+            if (curr_linelen > new_columns) {
+                bool removeLine = _history->getLines() == _history->getMaxLines();
+                auto *curr_line = getCharacterBuffer(curr_linelen);
+                bool curr_line_property = _history->isWrappedLine(currentPos);
+                _history->getCells(currentPos, 0, curr_linelen, curr_line);
+
+                _history->setCellsAt(currentPos, curr_line, new_columns);
+                _history->setLineAt(currentPos, true);
+                if (currentPos < _history->getMaxLines() - 1) {
+                    _history->insertCells(currentPos + 1, curr_line + new_columns, curr_linelen - new_columns);
+                    _history->setLineAt(currentPos + 1, curr_line_property);
+                } else {
+                    _history->addCells(curr_line + new_columns, curr_linelen - new_columns);
+                    _history->addLine(curr_line_property);
+                }
+                // If _history size > max history size it will drop a line from _history.
+                // We need to verify if we need to remove a URL.
+                if (removeLine) {
+                    _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+                }
+            }
+            currentPos++;
         }
     }
 
-    // create new screen _lines and copy from old to new
-
-    auto newScreenLines = new ImageLine[new_lines + 1];
-    for (int i = 0; i < qMin(_lines, new_lines + 1) ; i++) {
-        newScreenLines[i] = _screenLines[i];
+    // Check cursor position and send from _history to _screenLines
+    ImageLine histLine;
+    histLine.reserve(1024);
+    while (cursorLine < oldCursorLine && _history->getLines()) {
+        int histPos = _history->getLines() - 1;
+        int histLineLen = _history->getLineLen(histPos);
+        int isWrapped = _history->isWrappedLine(histPos)? LINE_WRAPPED : LINE_DEFAULT;
+        histLine.resize(histLineLen);
+        _history->getCells(histPos, 0, histLineLen, histLine.data());
+        _screenLines.insert(0, histLine);
+        _lineProperties.insert(0, isWrapped);
+        _history->removeCells(histPos);
+        cursorLine++;
     }
 
     _lineProperties.resize(new_lines + 1);
-    for (int i = _lines; (i > 0) && (i < new_lines + 1); i++) {
+    for (int i = _screenLines.count(); (i > 0) && (i < new_lines + 1); i++) {
         _lineProperties[i] = LINE_DEFAULT;
     }
+    _screenLines.resize(new_lines + 1);
 
-    clearSelection();
-
-    delete[] _screenLines;
-    _screenLines = newScreenLines;
     _screenLinesSize = new_lines;
-
     _lines = new_lines;
     _columns = new_columns;
     _cuX = qMin(_cuX, _columns - 1);
-    _cuY = qMin(_cuY, _lines - 1);
+    cursorLine = qBound(0, cursorLine, _lines - 1);
+    setCursorLine(cursorLine);
 
     // FIXME: try to keep values, evtl.
-    _topMargin = 0;
-    _bottomMargin = _lines - 1;
+    setDefaultMargins();
     initTabStops();
     clearSelection();
 }
@@ -1385,7 +1535,7 @@ int Screen::copyLineToStream(int line ,
 
         screenLine = qMin(screenLine, _screenLinesSize);
 
-        Character* data = _screenLines[screenLine].data();
+        auto* data = _screenLines[screenLine].data();
         int length = _screenLines[screenLine].count();
 
         // Don't remove end spaces in lines that wrap
@@ -1457,25 +1607,81 @@ void Screen::writeLinesToStream(TerminalCharacterDecoder* decoder, int fromLine,
     writeToStream(decoder, loc(0, fromLine), loc(_columns - 1, toLine), PreserveLineBreaks);
 }
 
+void Screen::fastAddHistLine()
+{
+    const bool removeLine = _history->getLines() == _history->getMaxLines();
+    _history->addCellsVector(_screenLines[0]);
+    _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
+
+    // If _history size > max history size it will drop a line from _history.
+    // We need to verify if we need to remove a URL.
+    if (removeLine) {
+        _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+    }
+
+    _screenLines.pop_front();
+    _lineProperties.remove(0);
+}
+
 void Screen::addHistLine()
 {
     // add line to history buffer
     // we have to take care about scrolling, too...
     const int oldHistLines = _history->getLines();
+    int newHistLines = _history->getLines();
+
     if (hasScroll()) {
+        // Check if _history have 'new line' property and join lines before adding a new one to history
+        if (oldHistLines > 0 && _history->isWrappedLine(oldHistLines - 1)) {
+            int hist_linelen = _history->getLineLen(oldHistLines - 1);
+            auto *hist_line = getCharacterBuffer(hist_linelen + _screenLines[0].count());
+            _history->getCells(oldHistLines - 1, 0, hist_linelen, hist_line);
 
-        _history->addCellsVector(_screenLines[0]);
-        _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
+            // Join the new line into the old line
+            for (int i = 0; i < _screenLines[0].count(); i++) {
+                hist_line[hist_linelen + i] = _screenLines[0][i];
+            }
+            hist_linelen += _screenLines[0].count();
 
-        const int newHistLines = _history->getLines();
+            // After join, check if it needs new line in history to show it on scroll
+            if (hist_linelen > _columns) {
+                _history->setCellsAt(oldHistLines - 1, hist_line, _columns);
+                _history->setLineAt(oldHistLines - 1, true);
+                _history->addCells(hist_line + _columns, hist_linelen - _columns);
+                _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
 
-        const bool beginIsTL = (_selBegin == _selTopLeft);
+                newHistLines = _history->getLines();
 
-        // If the history is full, increment the count
-        // of dropped _lines
-        if (newHistLines == oldHistLines) {
-            _droppedLines++;
+                // If the history is full, increment the count
+                // of dropped _lines
+                if (newHistLines == oldHistLines) {
+                    _droppedLines++;
+
+                    // We removed a line, we need to verify if we need to remove a URL.
+                    _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+                }
+            } else {
+                // Doesn't need a new line
+                _history->setCellsAt(oldHistLines - 1, hist_line, hist_linelen);
+                _history->setLineAt(oldHistLines - 1, (_lineProperties[0] & LINE_WRAPPED) != 0);
+            }
+        } else {
+            _history->addCellsVector(_screenLines[0]);
+            _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
+
+            newHistLines = _history->getLines();
+
+            // If the history is full, increment the count
+            // of dropped _lines
+            if (newHistLines == oldHistLines) {
+                _droppedLines++;
+
+                // We removed a line, we need to verify if we need to remove a URL.
+                _escapeSequenceUrlExtractor->historyLinesRemoved(1);
+            }
         }
+
+        bool beginIsTL = (_selBegin == _selTopLeft);
 
         // Adjust selection for the new point of reference
         if (newHistLines > oldHistLines) {
@@ -1511,12 +1717,6 @@ void Screen::addHistLine()
                 _selBegin = _selBottomRight;
             }
         }
-    }
-
-    // We removed a line, we need to verify if we need to remove a URL.
-    const int newHistLines = _history->getLines();
-    if (oldHistLines == newHistLines) {
-        _escapeSequenceUrlExtractor->historyLinesRemoved(1);
     }
 }
 

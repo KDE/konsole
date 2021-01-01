@@ -25,7 +25,8 @@
 #define MODE_Screen    3
 #define MODE_Cursor    4
 #define MODE_NewLine   5
-#define MODES_SCREEN   6
+#define MODE_AppScreen 6
+#define MODES_SCREEN   7
 
 namespace Konsole {
 class TerminalCharacterDecoder;
@@ -588,6 +589,11 @@ public:
 
     static const Character DefaultChar;
 
+    // Return the total number of lines before resize (fix scroll glitch)
+    int getOldTotalLines();
+    // Return if it was a resize signal (fix scroll glitch)
+    bool isResize();
+
 private:
     //copies a line of text from the screen or history into a stream using a
     //specified character decoder.  Returns the number of lines actually copied,
@@ -623,6 +629,8 @@ private:
     TerminalDisplay *_currentTerminalDisplay;
 
     void addHistLine();
+    // add lines from _screen to _history and remove from _screen the added lines (used to resize lines and columns)
+    void fastAddHistLine();
 
     void initTabStops();
 
@@ -646,6 +654,11 @@ private:
     // should be as minimal as possible
     static Character *getCharacterBuffer(const int size);
 
+    // Get the cursor line after checking if its app mode or not
+    int getCursorLine();
+    // Set the cursor line after checking if its app mode or not
+    void setCursorLine (int newLine);
+
     int getLineLength(const int line) const;
 
     // screen image ----------------
@@ -653,13 +666,16 @@ private:
     int _columns;
 
     typedef QVector<Character> ImageLine;      // [0..columns]
-    ImageLine *_screenLines;             // [lines]
+    QVector<ImageLine> _screenLines;             // [lines]
     int _screenLinesSize;                // _screenLines.size()
 
     int _scrolledLines;
     QRect _lastScrolledRegion;
 
     int _droppedLines;
+
+    int _oldTotalLines;
+    bool _isResize;
 
     QVarLengthArray<LineProperty, 64> _lineProperties;
 

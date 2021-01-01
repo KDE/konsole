@@ -33,6 +33,11 @@ int HistoryScrollFile::getLines()
     return _index.len() / sizeof(qint64);
 }
 
+int HistoryScrollFile::getMaxLines()
+{
+    return _index.len() / sizeof(qint64);
+}
+
 int HistoryScrollFile::getLineLen(int lineno)
 {
     return (startOfLine(lineno + 1) - startOfLine(lineno)) / sizeof(Character);
@@ -78,4 +83,28 @@ void HistoryScrollFile::addLine(bool previousWrapped)
     _index.add(reinterpret_cast<char *>(&locn), sizeof(qint64));
     unsigned char flags = previousWrapped ? 0x01 : 0x00;
     _lineflags.add(reinterpret_cast<char *>(&flags), sizeof(char));
+}
+
+void HistoryScrollFile::insertCells(int , const Character [], int)
+{
+}
+
+void HistoryScrollFile::removeCells(int )
+{
+}
+
+void HistoryScrollFile::insertCellsVector(int , const QVector<Character> &)
+{
+}
+
+void HistoryScrollFile::setCellsAt(int , const Character [], int)
+{
+}
+
+void HistoryScrollFile::setCellsVectorAt(int , const QVector<Character> &)
+{
+}
+
+void HistoryScrollFile::setLineAt(int , bool)
+{
 }
