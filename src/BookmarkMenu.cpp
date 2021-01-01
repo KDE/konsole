@@ -12,7 +12,6 @@
 
 // KDE
 #include <KActionCollection>
-#include <kbookmarks_version.h>
 #include <KBookmarkManager>
 #include <KBookmark>
 
@@ -23,20 +22,12 @@
 #include <algorithm>    // std::any_of
 
 BookmarkMenu::BookmarkMenu (KBookmarkManager *mgr, KBookmarkOwner *owner, QMenu *parentMenu, KActionCollection *collection) :
-#if KBOOKMARKS_VERSION < QT_VERSION_CHECK(5, 69, 0)
-    KBookmarkMenu (mgr, owner, parentMenu, collection)
-#else
     KBookmarkMenu (mgr, owner, parentMenu)
-#endif
 {
     QAction *bookmarkAction;
-#if KBOOKMARKS_VERSION < QT_VERSION_CHECK(5, 69, 0)
-    bookmarkAction = collection->action(QStringLiteral("add_bookmark"));
-#else
     collection->addActions(parentMenu->actions());
 
     bookmarkAction = addBookmarkAction();
-#endif
 
     Q_ASSERT(bookmarkAction);
 

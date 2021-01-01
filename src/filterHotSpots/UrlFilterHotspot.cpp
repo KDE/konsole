@@ -7,13 +7,8 @@
 
 #include "UrlFilterHotspot.h"
 
-#include <kio_version.h>
-#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
-#include <KRun>
-#else
 #include <KIO/JobUiDelegate>
 #include <KIO/OpenUrlJob>
-#endif
 
 #include <QAction>
 #include <QApplication>
@@ -85,13 +80,9 @@ void UrlFilterHotSpot::activate(QObject *object)
             url.prepend(QLatin1String("mailto:"));
         }
 
-#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
-        new KRun(QUrl(url), QApplication::activeWindow());
-#else
         auto *job = new KIO::OpenUrlJob(QUrl(url));
         job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
         job->start();
-#endif
     }
 }
 

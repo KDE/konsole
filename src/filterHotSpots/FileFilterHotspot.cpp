@@ -18,13 +18,8 @@
 #include <QKeyEvent>
 #include <QRegularExpression>
 
-#include <kio_version.h>
-#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
-#include <KRun>
-#else
 #include <KIO/ApplicationLauncherJob>
 #include <KIO/OpenUrlJob>
-#endif
 
 #include <KIO/JobUiDelegate>
 #include <KLocalizedString>
@@ -56,14 +51,10 @@ void FileFilterHotSpot::activate(QObject *)
 {
     // Used to fallback to opening the url with the system default application
     auto openUrl = [](const QString &filePath) {
-#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
-        new KRun(QUrl::fromLocalFile(filePath), QApplication::activeWindow());
-#else
         auto *job = new KIO::OpenUrlJob(QUrl::fromLocalFile(filePath));
         job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
         job->setRunExecutables(false); // Always open, e.g. shell scripts, as text
         job->start();
-#endif
     };
 
     // Output of e.g.:
@@ -105,12 +96,6 @@ void FileFilterHotSpot::activate(QObject *)
 
         KService::Ptr service(new KService(QString(), editorCmd, QString()));
 
-#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
-        const bool success = KRun::runService(*service, {}, QApplication::activeWindow());
-        if (!success) {
-            openUrl(path);
-        }
-#else
         // ApplicationLauncherJob is better at reporting errors to the user than
         // CommandLauncherJob; no need to call job->setUrls() because the url is
         // already part of editorCmd
@@ -126,7 +111,6 @@ void FileFilterHotSpot::activate(QObject *)
             }
         });
         job->start();
-#endif
         return;
     }
 

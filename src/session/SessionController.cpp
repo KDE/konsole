@@ -43,19 +43,10 @@
 #include <KCodecAction>
 #include <KNotification>
 
-#include <kio_version.h>
-#if KIO_VERSION > QT_VERSION_CHECK(5, 68, 0)
 #include <KIO/CommandLauncherJob>
-#else
-#include <KToolInvocation>
-#endif
 
-#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
-#include <KRun>
-#else
 #include <KIO/JobUiDelegate>
 #include <KIO/OpenUrlJob>
-#endif
 
 // Konsole
 #include "CopyInputDialog.h"
@@ -537,24 +528,16 @@ void SessionController::handleWebShortcutAction()
     if (KUriFilter::self()->filterUri(filterData, { QStringLiteral("kurisearchfilter") })) {
         const QUrl url = filterData.uri();
 
-#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
-        new KRun(url, QApplication::activeWindow());
-#else
         auto *job = new KIO::OpenUrlJob(url);
         job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
         job->start();
-#endif
     }
 }
 
 void SessionController::configureWebShortcuts()
 {
-#if KIO_VERSION > QT_VERSION_CHECK(5, 68, 0)
     auto job = new KIO::CommandLauncherJob(QStringLiteral("kcmshell5"), { QStringLiteral("webshortcuts") });
     job->start();
-#else
-    KToolInvocation::kdeinitExec(QStringLiteral("kcmshell5"), { QStringLiteral("webshortcuts") });
-#endif
 }
 
 void SessionController::sendSignal(QAction* action)
@@ -1077,13 +1060,9 @@ void SessionController::openBrowser()
 {
     const QUrl currentUrl = url().isLocalFile() ? url() : QUrl::fromLocalFile(QDir::homePath());
 
-#if KIO_VERSION < QT_VERSION_CHECK(5, 71, 0)
-    new KRun(currentUrl, QApplication::activeWindow(), true);
-#else
     auto *job = new KIO::OpenUrlJob(currentUrl);
     job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
     job->start();
-#endif
 }
 
 void SessionController::copy()
@@ -1163,11 +1142,7 @@ void SessionController::copyInputToAllTabs()
     const KXmlGuiWindow* myWindow = findWindow(view());
 
     const QList<Session *> sessionsList = SessionManager::instance()->sessions();
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
     QSet<Session*> group(sessionsList.begin(), sessionsList.end());
-#else
-    QSet<Session*> group = QSet<Session*>::fromList(sessionsList);
-#endif
     for (auto session : group) {
         // First, ensure that the session is removed
         // (necessary to avoid duplicates on addSession()!)
@@ -1198,11 +1173,7 @@ void SessionController::copyInputToSelectedTabs()
     dialog->setMasterSession(session());
 
     const QList<Session*> sessionsList = _copyToGroup->sessions();
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
     QSet<Session*> currentGroup(sessionsList.begin(), sessionsList.end());
-#else
-    QSet<Session*> currentGroup = QSet<Session*>::fromList(sessionsList);
-#endif
 
     currentGroup.remove(session());
 
@@ -1242,11 +1213,7 @@ void SessionController::copyInputToNone()
 
     // Once Qt5.14+ is the mininum, change to use range constructors
     const QList<Session*> groupList = SessionManager::instance()->sessions();
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
     QSet<Session*> group(groupList.begin(), groupList.end());
-#else
-    QSet<Session*> group = QSet<Session*>::fromList(groupList);
-#endif
 
     for (auto iterator : group) {
         Session *s = iterator;

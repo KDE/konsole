@@ -1725,11 +1725,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
         } else if (_usesMouseTracking) {
             // terminal program wants notification of mouse activity
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
             auto [charLine, charColumn] = getCharacterPosition(ev->position().toPoint(), !_usesMouseTracking);
-#else
-            auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !_usesMouseTracking);
-#endif
             const int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
             const int button = (steps > 0) ? 4 : 5;
             for (int i = 0; i < abs(steps); ++i) {
