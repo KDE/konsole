@@ -31,6 +31,7 @@
 #include <KMessageBox>
 #include <KNSCore/DownloadManager>
 #include <KWindowSystem>
+#include <kconfigwidgets_version.h>
 
 // Konsole
 #include "ui_EditProfileGeneralPage.h"
@@ -1856,7 +1857,11 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr &profile)
     codecAction->setCurrentCodec(profile->defaultEncoding());
     _advancedUi->selectEncodingButton->setMenu(codecAction->menu());
     connect(codecAction,
+#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+            QOverload<QTextCodec *>::of(&KCodecAction::codecTriggered), this,
+#else
             QOverload<QTextCodec *>::of(&KCodecAction::triggered), this,
+#endif
             &Konsole::EditProfileDialog::setDefaultCodec);
 
     _advancedUi->selectEncodingButton->setText(profile->defaultEncoding());

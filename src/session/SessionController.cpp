@@ -48,6 +48,9 @@
 #include <KIO/JobUiDelegate>
 #include <KIO/OpenUrlJob>
 
+#include <kwidgetsaddons_version.h>
+#include <kconfigwidgets_version.h>
+
 // Konsole
 #include "CopyInputDialog.h"
 #include "Emulation.h"
@@ -694,7 +697,11 @@ void SessionController::setupCommonActions()
     _switchProfileMenu = new KActionMenu(i18n("Switch Profile"), this);
     collection->addAction(QStringLiteral("switch-profile"), _switchProfileMenu);
     connect(_switchProfileMenu->menu(), &QMenu::aboutToShow, this, &Konsole::SessionController::prepareSwitchProfileMenu);
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 77, 0)
+    _switchProfileMenu->setPopupMode(QToolButton::MenuButtonPopup);
+#else
     _switchProfileMenu->setDelayed(false);
+#endif
 
     // History
     _findAction = KStandardAction::find(this, &SessionController::searchBarEvent, collection);
@@ -722,7 +729,11 @@ void SessionController::setupCommonActions()
     _codecAction->setCurrentCodec(QString::fromUtf8(session()->codec()));
     connect(session(), &Konsole::Session::sessionCodecChanged, this, &Konsole::SessionController::updateCodecAction);
     connect(_codecAction,
-            QOverload<QTextCodec*>::of(&KCodecAction::triggered), this,
+#if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+            QOverload<QTextCodec *>::of(&KCodecAction::codecTriggered), this,
+#else
+            QOverload<QTextCodec *>::of(&KCodecAction::triggered), this,
+#endif
             &Konsole::SessionController::changeCodec);
 
     // Read-only

@@ -13,6 +13,7 @@
 
 // KDE
 #include <qtest.h>
+#include <kcoreaddons_version.h>
 
 using namespace Konsole;
 
@@ -73,7 +74,11 @@ void PtyTest::testRunProgram()
 
     // since there is no other processes using this pty, the two methods
     // should return the same pid.
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+    QCOMPARE(pty.foregroundProcessGroup(), pty.processId());
+#else
     QCOMPARE(pty.foregroundProcessGroup(), pty.pid());
+#endif
 }
 
 QTEST_GUILESS_MAIN(PtyTest)

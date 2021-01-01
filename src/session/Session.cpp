@@ -28,6 +28,7 @@
 #include <KProcess>
 #include <KConfigGroup>
 #include <KIO/DesktopExecParser>
+#include <kcoreaddons_version.h>
 
 // Konsole
 #include <sessionadaptor.h>
@@ -437,7 +438,7 @@ void Session::run()
 {
     // FIXME: run() is called twice in some instances
     if (isRunning()) {
-        qCDebug(KonsoleDebug) << "Attempted to re-run an already running session (" << _shellProcess->pid() << ")";
+        qCDebug(KonsoleDebug) << "Attempted to re-run an already running session (" << processId() << ")";
         return;
     }
 
@@ -822,11 +823,11 @@ void Session::reportBackgroundColor(const QColor& c, uint terminator)
 
 bool Session::kill(int signal)
 {
-    if (_shellProcess->pid() <= 0) {
+    if (processId() <= 0) {
         return false;
     }
 
-    int result = ::kill(_shellProcess->pid(), signal);
+    int result = ::kill(processId(), signal);
 
     if (result == 0) {
         return _shellProcess->waitForFinished(1000);
@@ -880,7 +881,7 @@ bool Session::closeInNormalWay()
     if (kill(SIGHUP)) {
         return true;
     } else {
-        qWarning() << "Process " << _shellProcess->pid() << " did not die with SIGHUP";
+        qWarning() << "Process " << processId() << " did not die with SIGHUP";
         _shellProcess->closePty();
         return (_shellProcess->waitForFinished(1000));
     }
@@ -894,7 +895,7 @@ bool Session::closeInForceWay()
     if (kill(SIGKILL)) {
         return true;
     } else {
-        qWarning() << "Process " << _shellProcess->pid() << " did not die with SIGKILL";
+        qWarning() << "Process " << processId() << " did not die with SIGKILL";
         return false;
     }
 }
@@ -1528,7 +1529,11 @@ void Session::setPreferredSize(const QSize& size)
 
 int Session::processId() const
 {
+#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
+    return _shellProcess->processId();
+#else
     return _shellProcess->pid();
+#endif
 }
 
 void Session::setTitle(int role , const QString& title)
@@ -1646,7 +1651,7 @@ int Session::foregroundProcessId()
 bool Session::isForegroundProcessActive()
 {
     // foreground process info is always updated after this
-    return (_shellProcess->pid() != _shellProcess->foregroundProcessGroup());
+    return (processId() != _shellProcess->foregroundProcessGroup());
 }
 
 QString Session::foregroundProcessName()
