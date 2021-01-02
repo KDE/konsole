@@ -424,50 +424,9 @@ void Screen::resizeImage(int new_lines, int new_columns)
     _isResize = true;
 
     int cursorLine = getCursorLine();
-    const int oldCursorLine = (cursorLine == _lines -1)? new_lines - 1 : cursorLine;
+    const int oldCursorLine = (cursorLine == _lines - 1) ? new_lines - 1 : cursorLine;
 
-    // First join everything.
-    int currentPos = 0;
-    while (currentPos < cursorLine && currentPos < _screenLines.count() - 1) {
-        // if the line have the 'LINE_WRAPPED' property, concat with the next line and remove it.
-        if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
-            _screenLines[currentPos].append(_screenLines[currentPos + 1]);
-            _screenLines.remove(currentPos + 1);
-            _lineProperties.remove(currentPos);
-            cursorLine--;
-            continue;
-        }
-        currentPos++;
-    }
-    // Then move the data to lines below.
-    currentPos = 0;
-    while (currentPos < cursorLine && currentPos < _screenLines.count()) {
-        // Ignore whitespaces at the end of the line
-        int lineSize = _screenLines[currentPos].size();
-        while (lineSize > 0 && QChar(_screenLines[currentPos][lineSize - 1].character).isSpace()) {
-            lineSize--;
-        }
-        const bool shouldCopy = lineSize > new_columns;
-
-        // Copy from the current line, to the next one.
-        if (shouldCopy) {
-            auto values = _screenLines[currentPos].mid(new_columns);
-            _screenLines[currentPos].remove(new_columns, values.size());
-            _lineProperties.insert(currentPos + 1, _lineProperties[currentPos]);
-            _screenLines.insert(currentPos + 1, values);
-            _lineProperties[currentPos] |= LINE_WRAPPED;
-            cursorLine++;
-        }
-        currentPos += 1;
-    }
-    // Check if it need to move from _screenLine to _history
-    while (cursorLine > new_lines - 1) {
-        fastAddHistLine();
-        cursorLine--;
-    }
-    _lineProperties.resize(new_lines + 1);
-    _screenLines.resize(new_lines + 1);
-
+    int currentPos;
     // Check if _history need to change
     if (new_columns != _columns && _history->getLines() && _history->getMaxLines()) {
         // Join next line from _screenLine to _history
@@ -475,8 +434,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
             fastAddHistLine();
             cursorLine--;
         }
-        currentPos = 0;
         // Join everything in _history
+        currentPos = 0;
         while (currentPos < _history->getLines() - 1 && currentPos < _history->getMaxLines()) {
             // if it's true, join the line with next line
             if (_history->isWrappedLine(currentPos)) {
@@ -528,13 +487,61 @@ void Screen::resizeImage(int new_lines, int new_columns)
         }
     }
 
+    // Join everything in screenLines.
+    currentPos = 0;
+    while (currentPos < cursorLine && currentPos < _screenLines.count() - 1) {
+        // if the line have the 'LINE_WRAPPED' property, concat with the next line and remove it.
+        if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
+            _screenLines[currentPos].append(_screenLines[currentPos + 1]);
+            _screenLines.remove(currentPos + 1);
+            _lineProperties.remove(currentPos);
+            cursorLine--;
+            continue;
+        }
+        currentPos++;
+    }
+    // Then move the data to lines below.
+    currentPos = 0;
+    while (currentPos < cursorLine && currentPos < _screenLines.count()) {
+        // Ignore whitespaces at the end of the line
+        int lineSize = _screenLines[currentPos].size();
+        while (lineSize > 0 && QChar(_screenLines[currentPos][lineSize - 1].character).isSpace()) {
+            lineSize--;
+        }
+        const bool shouldCopy = lineSize > new_columns;
+
+        // Copy from the current line, to the next one.
+        if (shouldCopy) {
+            auto values = _screenLines[currentPos].mid(new_columns);
+            _screenLines[currentPos].remove(new_columns, values.size());
+            _lineProperties.insert(currentPos + 1, _lineProperties[currentPos]);
+            _screenLines.insert(currentPos + 1, values);
+            _lineProperties[currentPos] |= LINE_WRAPPED;
+            cursorLine++;
+        }
+        currentPos += 1;
+    }
+
+    // Check if it need to move from _screenLine to _history
+    while (cursorLine > new_lines - 1) {
+        cursorLine--;
+        if (!_history->getMaxLines()) {
+            addHistLine();
+            // _lastPos = loc(_cuX, cursorLine);
+            // scrollUp(0, 1);
+            _screenLines.pop_front();
+            _lineProperties.remove(0);
+        } else {
+            fastAddHistLine();
+        }
+    }
     // Check cursor position and send from _history to _screenLines
     ImageLine histLine;
     histLine.reserve(1024);
     while (cursorLine < oldCursorLine && _history->getLines()) {
         int histPos = _history->getLines() - 1;
         int histLineLen = _history->getLineLen(histPos);
-        int isWrapped = _history->isWrappedLine(histPos)? LINE_WRAPPED : LINE_DEFAULT;
+        int isWrapped = _history->isWrappedLine(histPos) ? LINE_WRAPPED : LINE_DEFAULT;
         histLine.resize(histLineLen);
         _history->getCells(histPos, 0, histLineLen, histLine.data());
         _screenLines.insert(0, histLine);
@@ -1767,4 +1774,3 @@ Konsole::EscapeSequenceUrlExtractor * Konsole::Screen::urlExtractor() const
 {
     return _escapeSequenceUrlExtractor;
 }
-
