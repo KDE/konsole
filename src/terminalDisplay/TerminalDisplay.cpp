@@ -263,6 +263,7 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
     _scrollBar->setCursor(Qt::ArrowCursor);
     _headerBar->setCursor(Qt::ArrowCursor);
     connect(_headerBar, &TerminalHeaderBar::requestToggleExpansion, this, &Konsole::TerminalDisplay::requestToggleExpansion);
+    connect(_headerBar, &TerminalHeaderBar::requestMoveToNewTab, this, [this]{requestMoveToNewTab(this);});
     connect(_scrollBar, &QScrollBar::sliderMoved, this, &Konsole::TerminalDisplay::viewScrolledByUser);
 
     // setup timers for blinking text

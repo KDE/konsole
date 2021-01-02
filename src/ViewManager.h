@@ -419,6 +419,9 @@ private:
 
     void activateLastUsedView(bool reverse);
 
+    void registerTerminal(TerminalDisplay *terminal);
+    void unregisterTerminal(TerminalDisplay *terminal);
+
 private:
     QPointer<TabbedViewContainer> _viewContainer;
     QPointer<SessionController> _pluggedController;

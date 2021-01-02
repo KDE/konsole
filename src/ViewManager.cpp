@@ -431,7 +431,7 @@ QHash<TerminalDisplay*, Session*> ViewManager::forgetAll(ViewSplitter* splitter)
 
 Session* ViewManager::forgetTerminal(TerminalDisplay* terminal)
 {
-    disconnect(terminal, &TerminalDisplay::requestToggleExpansion, nullptr, nullptr);
+    unregisterTerminal(terminal);
 
     removeController(terminal->sessionController());
     auto session = _sessionMap.take(terminal);
@@ -636,11 +636,10 @@ void ViewManager::attachView(TerminalDisplay *terminal, Session *session)
             Qt::UniqueConnection);
 
     // Disconnect from the other viewcontainer.
-    disconnect(terminal, &TerminalDisplay::requestToggleExpansion, nullptr, nullptr);
+    unregisterTerminal(terminal);
 
     // reconnect on this container.
-    connect(terminal, &TerminalDisplay::requestToggleExpansion,
-            _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal, Qt::UniqueConnection);
+    registerTerminal(terminal);
 
     _sessionMap[terminal] = session;
     createController(session, terminal);
@@ -790,8 +789,7 @@ TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
 {
     auto display = new TerminalDisplay(nullptr);
     display->setRandomSeed(session->sessionId() | (qApp->applicationPid() << 10));
-    connect(display, &TerminalDisplay::requestToggleExpansion,
-            _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal);
+    registerTerminal(display);
 
     return display;
 }
@@ -1159,4 +1157,18 @@ void ViewManager::updateTerminalDisplayHistory(TerminalDisplay* terminalDisplay,
             break;
         }
     }
+}
+
+void ViewManager::registerTerminal(TerminalDisplay *terminal)
+{
+    connect(terminal, &TerminalDisplay::requestToggleExpansion,
+            _viewContainer, &TabbedViewContainer::toggleMaximizeCurrentTerminal, Qt::UniqueConnection);
+    connect(terminal, &TerminalDisplay::requestMoveToNewTab,
+            _viewContainer, &TabbedViewContainer::moveToNewTab, Qt::UniqueConnection);
+}
+
+void ViewManager::unregisterTerminal(TerminalDisplay *terminal)
+{
+    disconnect(terminal, &TerminalDisplay::requestToggleExpansion, nullptr, nullptr);
+    disconnect(terminal, &TerminalDisplay::requestMoveToNewTab, nullptr, nullptr);
 }

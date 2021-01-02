@@ -84,6 +84,18 @@ TerminalHeaderBar::TerminalHeaderBar(QWidget *parent)
 
     m_boxLayout->addWidget(m_toggleExpandedMode);
 
+    // Move to new tab button
+
+    m_moveToNewTab = new QToolButton(this);
+    m_moveToNewTab->setIcon(QIcon::fromTheme(QStringLiteral("tab-new")));
+    m_moveToNewTab->setAutoRaise(true);
+    m_moveToNewTab->setToolTip(i18nc("@info:tooltip", "Move terminal to new tab"));
+
+    connect(m_moveToNewTab, &QToolButton::clicked,
+            this, &TerminalHeaderBar::requestMoveToNewTab);
+
+    m_boxLayout->addWidget(m_moveToNewTab);
+
     // Close button
 
     m_closeBtn = new QToolButton(this);

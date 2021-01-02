@@ -702,3 +702,7 @@ void TabbedViewContainer::setNavigationBehavior(int behavior)
 {
     _newTabBehavior = static_cast<NewTabBehavior>(behavior);
 }
+
+void TabbedViewContainer::moveToNewTab(TerminalDisplay* display) {
+    addView(display);
+}

@@ -153,6 +153,8 @@ public:
     void setNavigationBehavior(int behavior);
     void terminalDisplayDropped(TerminalDisplay* terminalDisplay);
 
+    void moveToNewTab(TerminalDisplay* display);
+
     QSize sizeHint() const override;
 
 Q_SIGNALS:

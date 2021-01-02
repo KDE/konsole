@@ -455,6 +455,8 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void requestToggleExpansion();
+    void requestMoveToNewTab(TerminalDisplay* display);
+
     /**
      * Emitted when the user presses a key whilst the terminal widget has focus.
      */
