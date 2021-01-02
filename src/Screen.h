@@ -593,6 +593,8 @@ public:
     int getOldTotalLines();
     // Return if it was a resize signal (fix scroll glitch)
     bool isResize();
+    // Set reflow condition
+    void setReflowLines(bool enable);
 
 private:
     //copies a line of text from the screen or history into a stream using a
@@ -676,6 +678,7 @@ private:
 
     int _oldTotalLines;
     bool _isResize;
+    bool _enableReflowLines;
 
     QVarLengthArray<LineProperty, 64> _lineProperties;
 

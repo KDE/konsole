@@ -164,6 +164,7 @@ private Q_SLOTS:
     void scrollFullPage();
     void scrollHalfPage();
     void toggleHighlightScrolledLines(bool enable);
+    void toggleReflowLines(bool enable);
 
     // keyboard page
     void editKeyBinding();

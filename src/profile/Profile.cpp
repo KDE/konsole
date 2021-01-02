@@ -83,6 +83,7 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] = {
     , { ScrollBarPosition , "ScrollBarPosition" , SCROLLING_GROUP , QVariant::Int }
     , { ScrollFullPage , "ScrollFullPage" , SCROLLING_GROUP , QVariant::Bool }
     , { HighlightScrolledLines , "HighlightScrolledLines" , SCROLLING_GROUP , QVariant::Bool }
+    , { ReflowLines , "ReflowLines" , SCROLLING_GROUP , QVariant::Bool }
 
     // Terminal Features
     , { UrlHintsModifiers , "UrlHintsModifiers" , TERMINAL_GROUP , QVariant::Int }
@@ -187,6 +188,7 @@ void Profile::useFallback()
     setProperty(ScrollBarPosition, Enum::ScrollBarRight);
     setProperty(ScrollFullPage, false);
     setProperty(HighlightScrolledLines, true);
+    setProperty(ReflowLines, true);
 
     setProperty(FlowControlEnabled, true);
     setProperty(UrlHintsModifiers, 0);

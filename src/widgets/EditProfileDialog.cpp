@@ -1627,6 +1627,9 @@ void EditProfileDialog::setupScrollingPage(const Profile::Ptr &profile)
     _scrollingUi->highlightScrolledLinesButton->setChecked(profile->property<bool>(Profile::HighlightScrolledLines));
     connect(_scrollingUi->highlightScrolledLinesButton, &QPushButton::clicked, this,  &EditProfileDialog::toggleHighlightScrolledLines);
 
+    _scrollingUi->reflowLinesButton->setChecked(profile->property<bool>(Profile::ReflowLines));
+    connect(_scrollingUi->reflowLinesButton, &QPushButton::clicked, this,  &EditProfileDialog::toggleReflowLines);
+
     // signals and slots
     connect(_scrollingUi->historySizeWidget, &Konsole::HistorySizeWidget::historySizeChanged, this,
             &Konsole::EditProfileDialog::historySizeChanged);
@@ -1655,6 +1658,11 @@ void EditProfileDialog::scrollHalfPage()
 void EditProfileDialog::toggleHighlightScrolledLines(bool enable)
 {
     updateTempProfileProperty(Profile::HighlightScrolledLines, enable);
+}
+
+void EditProfileDialog::toggleReflowLines(bool enable)
+{
+    updateTempProfileProperty(Profile::ReflowLines, enable);
 }
 
 void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)

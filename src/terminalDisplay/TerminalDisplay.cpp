@@ -139,6 +139,7 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 
         auto profile = SessionManager::instance()->sessionProfile(_sessionController->session());
         _screenWindow->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
+        _screenWindow->screen()->setReflowLines(profile->property<bool>(Profile::ReflowLines));
     }
 }
 
@@ -2859,6 +2860,9 @@ void TerminalDisplay::applyProfile(const Profile::Ptr &profile)
 
     // highlight lines scrolled into view (must be applied before margin/center)
     _scrollBar->setHighlightScrolledLines(profile->property<bool>(Profile::HighlightScrolledLines));
+
+    // reflow lines when terminal resizes
+    //_screenWindow->screen()->setReflow(profile->property<bool>(Profile::ReflowLines));
 
     // margin/center
     setMargin(profile->property<int>(Profile::TerminalMargin));

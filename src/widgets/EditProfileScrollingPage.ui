@@ -228,6 +228,29 @@
        </property>
       </widget>
      </item>
+     <item row="10" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
+      <widget class="QLabel" name="labelReflowLines">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Reflow Lines:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QCheckBox" name="reflowLinesButton">
+       <property name="text">
+        <string>Reflow lines when terminal resizes</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

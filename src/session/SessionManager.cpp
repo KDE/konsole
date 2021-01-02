@@ -290,6 +290,7 @@ void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
 
     for (TerminalDisplay *view : session->views()) {
         view->screenWindow()->screen()->urlExtractor()->setAllowedLinkSchema(profile->escapedLinksSchema());
+        view->screenWindow()->screen()->setReflowLines(profile->property<bool>(Profile::ReflowLines));
     }
 }
 

@@ -147,6 +147,10 @@ public:
         /** (bool) Specifies whether the terminal will enable Bidirectional
          * text display
          */
+        ReflowLines,
+        /** (bool) Specifies whether the terminal will enable Reflow of
+         * lines when terminal resizes.
+         */
         BidiRenderingEnabled,
         /** (bool) Specifies whether text in terminal displays is allowed
          * to blink.
