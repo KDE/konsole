@@ -26,7 +26,6 @@
 #include <QChar>
 #include <QMatrix>
 #include <QTransform>
-#include <QTimer>
 #include <QPen>
 #include <QDebug>
 
@@ -67,22 +66,19 @@ namespace Konsole
     {
         const auto display = qobject_cast<TerminalDisplay*>(sender());
 
-        const int numberOfColumns = display->usedColumns();
         QVector<uint> univec;
-        univec.reserve(numberOfColumns);
+        univec.reserve(display->usedColumns());
+
         for (int y = rect.y(); y <= rect.bottom(); y++) {
             int x = rect.x();
+
+            // Search for start of multi-column character
             if ((image[display->loc(rect.x(), y)].character == 0u) && (x != 0)) {
-                x--; // Search for start of multi-column character
+                x--;
             }
+
             for (; x <= rect.right(); x++) {
                 int len = 1;
-                int p = 0;
-
-                // reset our buffer to the number of columns
-                int bufferSize = numberOfColumns;
-                univec.resize(bufferSize);
-                uint *disstrU = univec.data();
 
                 // is this a single character or a sequence of characters ?
                 if ((image[display->loc(x, y)].rendition & RE_EXTENDED_CHAR) != 0) {
@@ -91,19 +87,14 @@ namespace Konsole
                     const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(image[display->loc(x, y)].character, extendedCharLength);
                     if (chars != nullptr) {
                         Q_ASSERT(extendedCharLength > 1);
-                        bufferSize += extendedCharLength - 1;
-                        univec.resize(bufferSize);
-                        disstrU = univec.data();
                         for (int index = 0; index < extendedCharLength; index++) {
-                            Q_ASSERT(p < bufferSize);
-                            disstrU[p++] = chars[index];
+                            univec << chars[index];
                         }
                     }
                 } else {
                     const uint c = image[display->loc(x, y)].character;
                     if (c != 0u) {
-                        Q_ASSERT(p < bufferSize);
-                        disstrU[p++] = c;
+                        univec << c;
                     }
                 }
 
@@ -147,9 +138,9 @@ namespace Konsole
 
                 if (canBeGrouped(x)) {
                     while (isInsideDrawArea(x + len) && hasSameColors(x + len)
-                            && hasSameRendition(x + len) && hasSameWidth(x + len)
-                            && hasSameLineDrawStatus(x + len) && isSameScript(x + len)
-                            && canBeGrouped(x + len)) {
+                           && hasSameRendition(x + len) && hasSameWidth(x + len)
+                           && hasSameLineDrawStatus(x + len) && isSameScript(x + len)
+                           && canBeGrouped(x + len)) {
                         const uint c = image[display->loc(x + len, y)].character;
                         if ((image[display->loc(x + len, y)].rendition & RE_EXTENDED_CHAR) != 0) {
                             // sequence of characters
@@ -157,19 +148,14 @@ namespace Konsole
                             const uint *chars = ExtendedCharTable::instance.lookupExtendedChar(c, extendedCharLength);
                             if (chars != nullptr) {
                                 Q_ASSERT(extendedCharLength > 1);
-                                bufferSize += extendedCharLength - 1;
-                                univec.resize(bufferSize);
-                                disstrU = univec.data();
                                 for (int index = 0; index < extendedCharLength; index++) {
-                                    Q_ASSERT(p < bufferSize);
-                                    disstrU[p++] = chars[index];
+                                    univec << chars[index];
                                 }
                             }
                         } else {
                             // single character
                             if (c != 0u) {
-                                Q_ASSERT(p < bufferSize);
-                                disstrU[p++] = c;
+                                univec << c;
                             }
                         }
 
@@ -184,15 +170,15 @@ namespace Konsole
                     while (!doubleWidth && isInsideDrawArea(x + len)
                             && image[display->loc(x + len, y)].character == ' ' && hasSameColors(x + len)
                             && hasSameRendition(x + len)) {
-                        // disstrU intentionally not modified - trailing spaces are meaningless
+                        // univec intentionally not modified - trailing spaces are meaningless
                         len++;
                     }
                 }
-                if ((x + len < display->usedColumns()) && (image[display->loc(x + len, y)].character == 0u)) {
-                    len++; // Adjust for trailing part of multi-column character
-                }
 
-                univec.resize(p);
+                // Adjust for trailing part of multi-column character
+                if ((x + len < display->usedColumns()) && (image[display->loc(x + len, y)].character == 0u)) {
+                    len++;
+                }
 
                 QMatrix textScale;
 
@@ -211,9 +197,9 @@ namespace Konsole
 
                 // Calculate the area in which the text will be drawn
                 QRect textArea = QRect(display->contentRect().left() + display->contentsRect().left() + display->terminalFont()->fontWidth() * x,
-                                        display->contentRect().top() + display->contentsRect().top() + display->terminalFont()->fontHeight() * y,
-                                        display->terminalFont()->fontWidth() * len,
-                                        display->terminalFont()->fontHeight());
+                                       display->contentRect().top() + display->contentsRect().top() + display->terminalFont()->fontHeight() * y,
+                                       display->terminalFont()->fontWidth() * len,
+                                       display->terminalFont()->fontHeight());
 
                 //move the calculated area to take account of scaling applied to the painter.
                 //the position of the area from the origin (0,0) is scaled
@@ -225,6 +211,8 @@ namespace Konsole
 
                 QString unistr = QString::fromUcs4(univec.data(), univec.length());
 
+                univec.clear();
+
                 // paint text fragment
                 if (printerFriendly) {
                     drawPrinterFriendlyTextFragment(paint,
@@ -233,16 +221,15 @@ namespace Konsole
                                                     &image[display->loc(x, y)]);
                 } else {
                     drawTextFragment(paint,
-                                    textArea,
-                                    unistr,
-                                    &image[display->loc(x, y)],
-                                    display->terminalColor()->colorTable());
+                                     textArea,
+                                     unistr,
+                                     &image[display->loc(x, y)],
+                                     display->terminalColor()->colorTable());
                 }
 
                 paint.setWorldTransform(QTransform(textScale.inverted()), true);
 
                 if (y < lineProperties.size() - 1) {
-
                     if ((lineProperties[y] & LINE_DOUBLEHEIGHT) != 0) {
                         y++;
                     }
