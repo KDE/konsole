@@ -25,14 +25,13 @@ CompactHistoryLine::CompactHistoryLine(const TextLine &line, CompactHistoryBlock
     _formatLength(0),
     _wrapped(false)
 {
-    _length = line.size();
-
     if (!line.isEmpty()) {
+        _length = line.size();
         _formatLength = 1;
-        int k = 1;
 
         // count number of different formats in this text line
         Character c = line[0];
+        int k = 0;
         while (k < _length) {
             if (!(line[k].equalsFormat(c))) {
                 _formatLength++; // format change detected
@@ -41,40 +40,26 @@ CompactHistoryLine::CompactHistoryLine(const TextLine &line, CompactHistoryBlock
             k++;
         }
 
-        ////qDebug() << "number of different formats in string: " << _formatLength;
         _formatArray = static_cast<CharacterFormat *>(_blockListRef.allocate(sizeof(CharacterFormat) * _formatLength));
         Q_ASSERT(_formatArray != nullptr);
         _text = static_cast<uint *>(_blockListRef.allocate(sizeof(uint) * line.size()));
         Q_ASSERT(_text != nullptr);
 
-        _length = line.size();
-        _wrapped = false;
-
-        // record formats and their positions in the format array
         c = line[0];
         _formatArray[0].setFormat(c);
-        _formatArray[0].startPos = 0;                      // there's always at least 1 format (for the entire line, unless a change happens)
-
-        k = 1;                                            // look for possible format changes
-        int j = 1;
-        while (k < _length && j < _formatLength) {
-            if (!(line[k].equalsFormat(c))) {
-                c = line[k];
-                _formatArray[j].setFormat(c);
-                _formatArray[j].startPos = k;
-                ////qDebug() << "format entry " << j << " at pos " << _formatArray[j].startPos << " " << &(_formatArray[j].startPos) ;
-                j++;
+        _formatArray[0].startPos = 0;
+        for (int i = 0, k = 1; i < _length; i++) {
+            if (!line[i].equalsFormat(c)) {
+                c = line[i];
+                _formatArray[k].setFormat(c);
+                _formatArray[k].startPos = i;
+                k++;
             }
-            k++;
+            _text[i] = line[i].character;
         }
 
-        // copy character values
-        for (int i = 0; i < line.size(); i++) {
-            _text[i] = line[i].character;
-            ////qDebug() << "char " << i << " at mem " << &(text[i]);
-        }
+        _wrapped = false;
     }
-    ////qDebug() << "line created, length " << length << " at " << &(length);
 }
 
 CompactHistoryLine::~CompactHistoryLine()
@@ -86,28 +71,25 @@ CompactHistoryLine::~CompactHistoryLine()
     _blockListRef.deallocate(this);
 }
 
-void CompactHistoryLine::getCharacter(int index, Character &r)
-{
-    Q_ASSERT(index < _length);
-    int formatPos = 0;
-    while ((formatPos + 1) < _formatLength && index >= _formatArray[formatPos + 1].startPos) {
-        formatPos++;
-    }
-
-    r.character = _text[index];
-    r.rendition = _formatArray[formatPos].rendition;
-    r.foregroundColor = _formatArray[formatPos].fgColor;
-    r.backgroundColor = _formatArray[formatPos].bgColor;
-    r.isRealCharacter = _formatArray[formatPos].isRealCharacter;
-}
-
 void CompactHistoryLine::getCharacters(Character *array, int size, int startColumn)
 {
     Q_ASSERT(startColumn >= 0 && size >= 0);
     Q_ASSERT(startColumn + size <= static_cast<int>(getLength()));
 
+    int formatPos = 0;
+    while ((formatPos + 1) < _formatLength && startColumn >= _formatArray[formatPos + 1].startPos) {
+        formatPos++;
+    }
+
     for (int i = startColumn; i < size + startColumn; i++) {
-        getCharacter(i, array[i - startColumn]);
+        if ((formatPos + 1) < _formatLength && i == _formatArray[formatPos + 1].startPos) {
+            formatPos++;
+        }
+        array[i - startColumn] = Character(_text[i], 
+                                           _formatArray[formatPos].fgColor, 
+                                           _formatArray[formatPos].bgColor, 
+                                           _formatArray[formatPos].rendition, 
+                                           _formatArray[formatPos].isRealCharacter);
     }
 }
 

@@ -79,9 +79,7 @@ Screen::Screen(int lines, int columns):
 {
     _escapeSequenceUrlExtractor->setScreen(this);
     _lineProperties.resize(_lines + 1);
-    for (int i = 0; i < _lines + 1; i++) {
-        _lineProperties[i] = LINE_DEFAULT;
-    }
+    std::fill(_lineProperties.begin(), _lineProperties.end(), LINE_DEFAULT);
 
     initTabStops();
     clearSelection();
@@ -440,12 +438,12 @@ void Screen::resizeImage(int new_lines, int new_columns)
             fastAddHistLine();
             cursorLine--;
         }
-        // Join everything in _history
+        // Join the line and move the data to next line if needed
         currentPos = 0;
-        while (currentPos < _history->getLines() - 1) {
-            // if it's true, join the line with next line
+        while (currentPos < _history->getLines()) {
+            int curr_linelen = _history->getLineLen(currentPos);
+            // Join wrapped line in current history position
             if (_history->isWrappedLine(currentPos)) {
-                int curr_linelen = _history->getLineLen(currentPos);
                 int next_linelen = _history->getLineLen(currentPos + 1);
                 auto *new_line = getCharacterBuffer(curr_linelen + next_linelen);
                 bool new_line_property = _history->isWrappedLine(currentPos + 1);
@@ -460,12 +458,6 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _history->removeCells(currentPos + 1);
                 continue;
             }
-            currentPos++;
-        }
-        // Now move data to next line if needed
-        currentPos = 0;
-        while (currentPos < _history->getLines()) {
-            int curr_linelen = _history->getLineLen(currentPos);
 
             // if the current line > new_columns it will need a new line
             if (curr_linelen > new_columns) {
@@ -494,10 +486,10 @@ void Screen::resizeImage(int new_lines, int new_columns)
     }
 
     if (_enableReflowLines) {
-        // Join everything in screenLines.
+        // Analize the lines and move the data to lines below.
         currentPos = 0;
         while (currentPos < cursorLine && currentPos < _screenLines.count() - 1) {
-            // if the line have the 'LINE_WRAPPED' property, concat with the next line and remove it.
+            // Join wrapped line in current position
             if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
                 _screenLines[currentPos].append(_screenLines[currentPos + 1]);
                 _screenLines.remove(currentPos + 1);
@@ -505,20 +497,15 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 cursorLine--;
                 continue;
             }
-            currentPos++;
-        }
-        // Then move the data to lines below.
-        currentPos = 0;
-        while (currentPos < cursorLine && currentPos < _screenLines.count()) {
+
             // Ignore whitespaces at the end of the line
             int lineSize = _screenLines[currentPos].size();
             while (lineSize > 0 && QChar(_screenLines[currentPos][lineSize - 1].character).isSpace()) {
                 lineSize--;
             }
-            const bool shouldCopy = lineSize > new_columns;
 
-            // Copy from the current line, to the next one.
-            if (shouldCopy) {
+            // If need to move to line below, copy from the current line, to the next one.
+            if (lineSize > new_columns) {
                 auto values = _screenLines[currentPos].mid(new_columns);
                 _screenLines[currentPos].remove(new_columns, values.size());
                 _lineProperties.insert(currentPos + 1, _lineProperties[currentPos]);

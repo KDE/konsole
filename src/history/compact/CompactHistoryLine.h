@@ -28,7 +28,6 @@ public:
     static void operator delete(void *);
 
     virtual void getCharacters(Character *array, int size, int startColumn);
-    virtual void getCharacter(int index, Character &r);
     virtual bool isWrapped() const;
     virtual void setWrapped(bool value);
     virtual unsigned int getLength() const;
