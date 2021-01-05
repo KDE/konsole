@@ -1529,11 +1529,7 @@ void Session::setPreferredSize(const QSize& size)
 
 int Session::processId() const
 {
-#if KCOREADDONS_VERSION >= QT_VERSION_CHECK(5, 78, 0)
     return _shellProcess->processId();
-#else
-    return _shellProcess->pid();
-#endif
 }
 
 void Session::setTitle(int role , const QString& title)
