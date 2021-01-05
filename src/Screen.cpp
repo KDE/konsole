@@ -603,7 +603,7 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
         if (_selBegin != -1) {
             for (int column = 0; column < _columns; column++) {
                 if (isSelected(column, line)) {
-                    reverseRendition(dest[destLineOffset + column]);
+                    dest[destLineOffset + column].rendition |= RE_SELECTED;
                 }
             }
         }
@@ -626,7 +626,7 @@ void Screen::copyFromScreen(Character* dest , int startLine , int count) const
 
             // invert selected text
             if (_selBegin != -1 && isSelected(column, line + _history->getLines())) {
-                reverseRendition(dest[destIndex]);
+                dest[destIndex].rendition |= RE_SELECTED;
             }
         }
     }

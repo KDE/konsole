@@ -28,6 +28,7 @@
 #include <QTransform>
 #include <QPen>
 #include <QDebug>
+#include <QtMath>
 
 // we use this to force QPainter to display text in LTR mode
 // more information can be found in: https://unicode.org/reports/tr9/
@@ -313,12 +314,82 @@ namespace Konsole
         return dirtyRegion;
     }
 
+    QColor alphaBlend(const QColor &foreground, const QColor &background) {
+        const auto foregroundAlpha = foreground.alphaF();
+        const auto inverseForegroundAlpha = 1.0 - foregroundAlpha;
+        const auto backgroundAlpha = background.alphaF();
+
+        if (foregroundAlpha == 0.0) {
+            return background;
+        }
+
+        if (backgroundAlpha == 1.0) {
+            return QColor::fromRgb(
+                (foregroundAlpha*foreground.red()) + (inverseForegroundAlpha*background.red()),
+                (foregroundAlpha*foreground.green()) + (inverseForegroundAlpha*background.green()),
+                (foregroundAlpha*foreground.blue()) + (inverseForegroundAlpha*background.blue()),
+                0xff
+            );
+        } else {
+            const auto inverseBackgroundAlpha = (backgroundAlpha * inverseForegroundAlpha);
+            const auto finalAlpha = foregroundAlpha + inverseBackgroundAlpha;
+            Q_ASSERT(finalAlpha != 0.0);
+
+            return QColor::fromRgb(
+                (foregroundAlpha*foreground.red()) + (inverseBackgroundAlpha*background.red()),
+                (foregroundAlpha*foreground.green()) + (inverseBackgroundAlpha*background.green()),
+                (foregroundAlpha*foreground.blue()) + (inverseBackgroundAlpha*background.blue()),
+                finalAlpha
+            );
+        }
+    }
+
+    qreal wcag20AdjustColorPart(qreal v)
+    {
+        return v <= 0.03928 ? v/12.92 : qPow((v+0.055)/1.055, 2.4);
+    }
+
+    qreal wcag20RelativeLuminosity(const QColor &of)
+    {
+        auto r = of.redF(), g = of.greenF(), b = of.blueF();
+
+        const auto a = wcag20AdjustColorPart;
+
+        auto r2 = a(r), g2 = a(g), b2 = a(b);
+
+        return r2 * 0.2126 + g2 * 0.7152 + b2 * 0.0722;
+    }
+
+    qreal wcag20Contrast(const QColor &c1, const QColor &c2)
+    {
+        const auto l1 = wcag20RelativeLuminosity(c1)+0.05, l2 = wcag20RelativeLuminosity(c2)+0.05;
+
+        return (l1 > l2) ? l1/l2 : l2/l1;
+    }
+
+    QColor calculateBackgroundColor(const Character* style, const QColor *colorTable)
+    {
+        auto c1 = style->backgroundColor.color(colorTable);
+        if (!(style->rendition & RE_SELECTED)) {
+            return c1;
+        }
+
+        c1.setAlphaF(0.8);
+
+        const auto blend1 = alphaBlend(c1, colorTable[DEFAULT_FORE_COLOR]), blend2 = alphaBlend(c1, colorTable[DEFAULT_BACK_COLOR]);
+        const auto fg = style->foregroundColor.color(colorTable);
+
+        const auto contrast1 = wcag20Contrast(fg, blend1), contrast2 = wcag20Contrast(fg, blend2);
+
+        return (contrast1 < contrast2) ? blend1 : blend2;
+    }
+
     void TerminalPainter::drawTextFragment(QPainter &painter, const QRect &rect, const QString &text,
                                 const Character *style, const QColor *colorTable)
     {
         // setup painter
         const QColor foregroundColor = style->foregroundColor.color(colorTable);
-        const QColor backgroundColor = style->backgroundColor.color(colorTable);
+        const QColor backgroundColor = calculateBackgroundColor(style, colorTable);
 
         if (backgroundColor != colorTable[DEFAULT_BACK_COLOR]) {
             drawBackground(painter, rect, backgroundColor, false);
