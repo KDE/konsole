@@ -443,7 +443,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
         while (currentPos < _history->getLines()) {
             int curr_linelen = _history->getLineLen(currentPos);
             // Join wrapped line in current history position
-            if (_history->isWrappedLine(currentPos)) {
+            if (_history->isWrappedLine(currentPos) && currentPos < _history->getLines() - 1) {
                 int next_linelen = _history->getLineLen(currentPos + 1);
                 auto *new_line = getCharacterBuffer(curr_linelen + next_linelen);
                 bool new_line_property = _history->isWrappedLine(currentPos + 1);
@@ -469,8 +469,9 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _history->setCellsAt(currentPos, curr_line, new_columns);
                 _history->setLineAt(currentPos, true);
                 if (currentPos < _history->getMaxLines() - 1) {
+                    int correctPosition = (_history->getLines() == _history->getMaxLines()) ? 0 : 1;
                     _history->insertCells(currentPos + 1, curr_line + new_columns, curr_linelen - new_columns);
-                    _history->setLineAt(currentPos + 1, curr_line_property);
+                    _history->setLineAt(currentPos + correctPosition, curr_line_property);
                 } else {
                     _history->addCells(curr_line + new_columns, curr_linelen - new_columns);
                     _history->addLine(curr_line_property);
@@ -491,7 +492,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
         while (currentPos < cursorLine && currentPos < _screenLines.count() - 1) {
             // Join wrapped line in current position
             if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
-                _screenLines[currentPos].append(_screenLines[currentPos + 1]);
+                _screenLines[currentPos].append(std::move(_screenLines[currentPos + 1]));
                 _screenLines.remove(currentPos + 1);
                 _lineProperties.remove(currentPos);
                 cursorLine--;
@@ -507,9 +508,9 @@ void Screen::resizeImage(int new_lines, int new_columns)
             // If need to move to line below, copy from the current line, to the next one.
             if (lineSize > new_columns) {
                 auto values = _screenLines[currentPos].mid(new_columns);
-                _screenLines[currentPos].remove(new_columns, values.size());
+                _screenLines[currentPos].resize(new_columns);
                 _lineProperties.insert(currentPos + 1, _lineProperties[currentPos]);
-                _screenLines.insert(currentPos + 1, values);
+                _screenLines.insert(currentPos + 1, std::move(values));
                 _lineProperties[currentPos] |= LINE_WRAPPED;
                 cursorLine++;
             }
@@ -547,8 +548,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
     }
 
     _lineProperties.resize(new_lines + 1);
-    for (int i = _screenLines.count(); (i > 0) && (i < new_lines + 1); i++) {
-        _lineProperties[i] = LINE_DEFAULT;
+    if (_lineProperties.size() > _screenLines.size()) {
+        std::fill(_lineProperties.begin() + _screenLines.size(), _lineProperties.end(), LINE_DEFAULT);
     }
     _screenLines.resize(new_lines + 1);
 
