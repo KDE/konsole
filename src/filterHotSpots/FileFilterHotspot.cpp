@@ -14,6 +14,7 @@
 #include <QMenu>
 #include <QTimer>
 #include <QToolTip>
+#include <QMimeDatabase>
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QRegularExpression>
@@ -53,6 +54,13 @@ void FileFilterHotSpot::activate(QObject *)
         return;
     }
 
+    QMimeDatabase mdb;
+    const QMimeType mimeType = mdb.mimeTypeForFile(_filePath, QMimeDatabase::MatchExtension);
+    if (!mimeType.inherits(QStringLiteral("text/plain"))) {
+        openWithSysDefaultApp(_filePath);
+        return;
+    }
+
     QString editorExecPath;
     int firstBlankIdx = -1;
     QString fullCmd;
@@ -81,7 +89,7 @@ void FileFilterHotSpot::activate(QObject *)
 
         // TODO: show an error message to the user?
         if (editorExecPath.isEmpty()) { // Couldn't find the specified binary, fallback
-            openWithSysDefaultEditor(path);
+            openWithSysDefaultApp(path);
             return;
         }
         if (firstBlankIdx != -1) {
@@ -113,11 +121,11 @@ void FileFilterHotSpot::activate(QObject *)
         const QString fCmd = editorExecPath + QLatin1Char(' ') + path;
         openWithEditorFromProfile(fCmd, path);
     } else { // Fallback
-        openWithSysDefaultEditor(path);
+        openWithSysDefaultApp(path);
     }
 }
 
-void FileFilterHotSpot::openWithSysDefaultEditor(const QString &filePath) const
+void FileFilterHotSpot::openWithSysDefaultApp(const QString &filePath) const
 {
     auto *job = new KIO::OpenUrlJob(QUrl::fromLocalFile(filePath));
     job->setUiDelegate(new KIO::JobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, QApplication::activeWindow()));
@@ -142,7 +150,7 @@ void FileFilterHotSpot::openWithEditorFromProfile(const QString &fullCmd, const 
                 i18n("Could not open file with the text editor specified in the profile settings;\n"
                      "it will be opened with the system default editor."));
 
-            openWithSysDefaultEditor(path);
+            openWithSysDefaultApp(path);
         }
     });
 

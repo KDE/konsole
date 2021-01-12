@@ -57,7 +57,7 @@ public:
     void keyPressEvent(TerminalDisplay *td, QKeyEvent *ev) override;
 
 private:
-    void openWithSysDefaultEditor(const QString &filePath) const;
+    void openWithSysDefaultApp(const QString &filePath) const;
     void openWithEditorFromProfile(const QString &fullCmd, const QString &path) const;
 
     void showThumbnail(const KFileItem& item, const QPixmap& preview);
