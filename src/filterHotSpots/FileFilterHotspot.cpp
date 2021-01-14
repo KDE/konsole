@@ -54,13 +54,6 @@ void FileFilterHotSpot::activate(QObject *)
         return;
     }
 
-    QMimeDatabase mdb;
-    const QMimeType mimeType = mdb.mimeTypeForFile(_filePath, QMimeDatabase::MatchExtension);
-    if (!mimeType.inherits(QStringLiteral("text/plain"))) {
-        openWithSysDefaultApp(_filePath);
-        return;
-    }
-
     QString editorExecPath;
     int firstBlankIdx = -1;
     QString fullCmd;
@@ -135,6 +128,19 @@ void FileFilterHotSpot::openWithSysDefaultApp(const QString &filePath) const
 
 void FileFilterHotSpot::openWithEditorFromProfile(const QString &fullCmd, const QString &path) const
 {
+    // Here we are mostly interested in text-based files, e.g. if it's a
+    // PDF we should let the system default app open it.
+    QMimeDatabase mdb;
+    const auto mimeList = mdb.mimeTypesForFileName(path);
+    qCDebug(KonsoleDebug) << "FileFilterHotSpot: mime types for" << path << ":" << mimeList;
+
+    // If mimeList is empty, then it's not a recognized mime type, e.g.
+    // a text file without an extension
+    if (mimeList.isEmpty() || !mimeList.at(0).inherits(QStringLiteral("text/plain"))) {
+        openWithSysDefaultApp(path);
+        return;
+    }
+
     qCDebug(KonsoleDebug) << "fullCmd:" << fullCmd;
 
     KService::Ptr service(new KService(QString(), fullCmd, QString()));
