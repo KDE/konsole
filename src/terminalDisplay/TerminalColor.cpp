@@ -53,9 +53,7 @@ namespace Konsole
     
     void TerminalColor::setColorTable(const QColor *table) 
     {
-        for (int index = 0; index < TABLE_COLORS; index++) {
-            m_colorTable[index] = table[index];
-        }
+        std::copy(table, table + TABLE_COLORS, m_colorTable);
         setBackgroundColor(m_colorTable[DEFAULT_BACK_COLOR]);
         onColorsChanged();
     }

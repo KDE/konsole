@@ -547,8 +547,8 @@ void TerminalDisplay::updateImage()
 
     CharacterColor cf;       // undefined
 
-    const int linesToUpdate = qMin(_lines, qMax(0, lines));
-    const int columnsToUpdate = qMin(_columns, qMax(0, columns));
+    const int linesToUpdate = qBound(0, lines, _lines);
+    const int columnsToUpdate = qBound(0, columns, _columns);
 
     auto dirtyMask = new char[columnsToUpdate + 2];
     QRegion dirtyRegion;
@@ -830,10 +830,10 @@ QRect TerminalDisplay::widgetToImage(const QRect &widgetArea) const
     QRect result;
     const int fontWidth = _terminalFont->fontWidth();
     const int fontHeight = _terminalFont->fontHeight();
-    result.setLeft(  qMin(_usedColumns - 1, qMax(0, (widgetArea.left()   - contentsRect().left() - _contentRect.left()) / fontWidth )));
-    result.setTop(   qMin(_usedLines   - 1, qMax(0, (widgetArea.top()    - contentsRect().top()  - _contentRect.top() ) / fontHeight)));
-    result.setRight( qMin(_usedColumns - 1, qMax(0, (widgetArea.right()  - contentsRect().left() - _contentRect.left()) / fontWidth )));
-    result.setBottom(qMin(_usedLines   - 1, qMax(0, (widgetArea.bottom() - contentsRect().top()  - _contentRect.top() ) / fontHeight)));
+    result.setLeft(  qBound(0, (widgetArea.left()   - contentsRect().left() - _contentRect.left()) / fontWidth,  _usedColumns - 1));
+    result.setTop(   qBound(0, (widgetArea.top()    - contentsRect().top()  - _contentRect.top() ) / fontHeight, _usedLines   - 1));
+    result.setRight( qBound(0, (widgetArea.right()  - contentsRect().left() - _contentRect.left()) / fontWidth,  _usedColumns - 1));
+    result.setBottom(qBound(0, (widgetArea.bottom() - contentsRect().top()  - _contentRect.top() ) / fontHeight, _usedLines   - 1));
     return result;
 }
 
@@ -1034,9 +1034,7 @@ void TerminalDisplay::makeImage()
 
 void TerminalDisplay::clearImage()
 {
-    for (int i = 0; i < _imageSize; ++i) {
-        _image[i] = Screen::DefaultChar;
-    }
+    std::fill(_image, _image + _imageSize, Screen::DefaultChar);
 }
 
 void TerminalDisplay::calcGeometry()
@@ -1165,16 +1163,14 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
     }
 
     // Ignore clicks on the message widget
-    if (_readOnlyMessageWidget != nullptr) {
-        if (_readOnlyMessageWidget->isVisible() && _readOnlyMessageWidget->frameGeometry().contains(ev->pos())) {
-            return;
-        }
+    if (_readOnlyMessageWidget != nullptr &&
+        _readOnlyMessageWidget->isVisible() && _readOnlyMessageWidget->frameGeometry().contains(ev->pos())) {
+        return;
     }
 
-    if (_outputSuspendedMessageWidget != nullptr) {
-        if (_outputSuspendedMessageWidget->isVisible() && _outputSuspendedMessageWidget->frameGeometry().contains(ev->pos())) {
-            return;
-        }
+    if (_outputSuspendedMessageWidget != nullptr &&
+        _outputSuspendedMessageWidget->isVisible() && _outputSuspendedMessageWidget->frameGeometry().contains(ev->pos())) {
+        return;
     }
 
     auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !_usesMouseTracking);
