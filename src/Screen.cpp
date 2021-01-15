@@ -496,6 +496,9 @@ void Screen::resizeImage(int new_lines, int new_columns)
                 _screenLines.remove(currentPos + 1);
                 _lineProperties.remove(currentPos);
                 cursorLine--;
+                if (cursorLine == currentPos) {
+                    _cuX = _screenLines[currentPos].size();
+                }
                 continue;
             }
 
@@ -1636,22 +1639,22 @@ void Screen::addHistLine()
 
     if (hasScroll()) {
         // Check if _history have 'new line' property and join lines before adding a new one to history
-        if (oldHistLines > 0 && _history->isWrappedLine(oldHistLines - 1)) {
-            int hist_linelen = _history->getLineLen(oldHistLines - 1);
-            auto *hist_line = getCharacterBuffer(hist_linelen + _screenLines[0].count());
-            _history->getCells(oldHistLines - 1, 0, hist_linelen, hist_line);
+        if (_enableReflowLines && oldHistLines > 0 &&
+            _history->getMaxLines() && _history->isWrappedLine(oldHistLines - 1)) {
+
+            int hist_lineLen = _history->getLineLen(oldHistLines - 1);
+            auto *hist_line = getCharacterBuffer(hist_lineLen + _screenLines[0].count());
+            _history->getCells(oldHistLines - 1, 0, hist_lineLen, hist_line);
 
             // Join the new line into the old line
-            for (int i = 0; i < _screenLines[0].count(); i++) {
-                hist_line[hist_linelen + i] = _screenLines[0][i];
-            }
-            hist_linelen += _screenLines[0].count();
+            std::copy(_screenLines[0].begin(), _screenLines[0].end(), hist_line + hist_lineLen);
+            hist_lineLen += _screenLines[0].count();
 
             // After join, check if it needs new line in history to show it on scroll
-            if (_enableReflowLines && _history->getMaxLines() && hist_linelen > _columns) {
+            if (hist_lineLen > _columns) {
                 _history->setCellsAt(oldHistLines - 1, hist_line, _columns);
                 _history->setLineAt(oldHistLines - 1, true);
-                _history->addCells(hist_line + _columns, hist_linelen - _columns);
+                _history->addCells(hist_line + _columns, hist_lineLen - _columns);
                 _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
 
                 newHistLines = _history->getLines();
@@ -1666,7 +1669,7 @@ void Screen::addHistLine()
                 }
             } else {
                 // Doesn't need a new line
-                _history->setCellsAt(oldHistLines - 1, hist_line, hist_linelen);
+                _history->setCellsAt(oldHistLines - 1, hist_line, hist_lineLen);
                 _history->setLineAt(oldHistLines - 1, (_lineProperties[0] & LINE_WRAPPED) != 0);
             }
         } else {
