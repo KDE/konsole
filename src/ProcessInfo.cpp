@@ -793,6 +793,10 @@ private:
                 const QString deviceNumber = QString::fromUtf8(devname(((&kInfoProc->kp_eproc)->e_tdev), S_IFCHR));
                 const QString fullDeviceName = QStringLiteral("/dev/")
                                                + deviceNumber.rightJustified(3, QLatin1Char('0'));
+
+                setParentPid(kInfoProc->kp_eproc.e_ppid);
+                setForegroundPid(kInfoProc->kp_eproc.e_pgid);
+
                 delete [] kInfoProc;
 
                 const QByteArray deviceName = fullDeviceName.toLatin1();

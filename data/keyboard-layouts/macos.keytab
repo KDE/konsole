@@ -12,12 +12,12 @@ keyboard "macOS"
 # ~/Library/Application Support/konsole/
 
 key A+Ctrl : "\x01"     # goto start of line
-#key C+Ctrl : "\x03"  # Does not work - Cmd+C is copy
+key C+Ctrl : "\x03"     # interrupt
 key D+Ctrl : "\x04"     # logout "exit"
 key E+Ctrl : "\x05"     # goto end of line
 key L+Ctrl : "\x0C"     # clear terminal screen
 key U+Ctrl : "\x15"     # clear current line
-#key V+Ctrl : "\x16"    # Cmd+V is paste
+key V+Ctrl : "\x16"     #
 key W+Ctrl : "\x17"     # erase the word preceding to the cursor position
 #key Z+Ctrl : "\x1a"
 

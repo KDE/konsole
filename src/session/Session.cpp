@@ -790,6 +790,8 @@ void Session::sendSignal(int signal)
 
     if (ok) {
         ::kill(pid, signal);
+    } else {
+        qWarning()<<"foreground process id not set, unable to send signal "<<signal;
     }
 }
 
