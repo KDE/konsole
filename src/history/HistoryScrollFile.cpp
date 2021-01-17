@@ -35,7 +35,7 @@ int HistoryScrollFile::getLines()
 
 int HistoryScrollFile::getMaxLines()
 {
-    return 0;
+    return getLines();
 }
 
 int HistoryScrollFile::getLineLen(int lineno)
@@ -121,6 +121,63 @@ void HistoryScrollFile::setCellsAt(int, const Character text[], int count)
 
 void HistoryScrollFile::setCellsVectorAt(int, const QVector<Character> &)
 {
+}
+
+int HistoryScrollFile::reflowLines(int columns)
+{
+    HistoryFile *reflowFile = new HistoryFile;
+    reflowData newLine;
+
+    auto reflowLineLen = [] (qint64 start, qint64 end) {
+        return (int)((end - start) / sizeof(Character));
+    };
+    auto setNewLine = [] (reflowData &change, qint64 index, bool lineflag) {
+        change.index = index;
+        change.lineFlag = lineflag;
+    };
+
+    // First all changes are saved on an auxiliary file, no real index is changed
+    int currentPos = 0;
+    while (currentPos < getLines()) {
+        qint64 startLine = startOfLine(currentPos);
+        qint64 endLine = startOfLine(currentPos + 1);
+
+        // Join the lines if they are wrapped
+        while (isWrappedLine(currentPos)) {
+            currentPos++;
+            endLine = startOfLine(currentPos + 1);
+        }
+
+        // Now reflow the lines
+        while (reflowLineLen(startLine, endLine) > columns) {
+            startLine += (qint64)columns * sizeof(Character);
+            setNewLine(newLine, startLine, true);
+            reflowFile->add(reinterpret_cast<const char *>(&newLine), sizeof(reflowData));
+        }
+        setNewLine(newLine, endLine, false);
+        reflowFile->add(reinterpret_cast<const char *>(&newLine), sizeof(reflowData));
+        currentPos++;
+    }
+
+    // Erase data from index and flag data
+    _index.removeLast(0);
+    _lineflags.removeLast(0);
+
+    // Now save the new indexes and properties to proper files
+    int totalLines = reflowFile->len() / sizeof(reflowData);
+    currentPos = 0;
+    while (currentPos < totalLines) {
+        reflowFile->get(reinterpret_cast<char *>(&newLine), sizeof(reflowData), currentPos * sizeof(reflowData));
+
+        _index.add(reinterpret_cast<char *>(&newLine.index), sizeof(qint64));
+
+        unsigned char flags = newLine.lineFlag ? 0x01 : 0x00;
+        _lineflags.add(reinterpret_cast<char *>(&flags), sizeof(char));
+        currentPos++;
+    }
+
+    delete reflowFile;
+    return 0;
 }
 
 void HistoryScrollFile::setLineAt(int, bool previousWrapped)

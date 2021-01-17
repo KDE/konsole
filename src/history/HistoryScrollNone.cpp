@@ -77,6 +77,11 @@ void HistoryScrollNone::setCellsVectorAt(int , const QVector<Character> &)
 {
 }
 
+int HistoryScrollNone::reflowLines(int)
+{
+    return 0;
+}
+
 void HistoryScrollNone::setLineAt(int , bool)
 {
 }

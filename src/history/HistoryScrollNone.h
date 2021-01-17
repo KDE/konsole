@@ -34,12 +34,14 @@ public:
     void addCells(const Character a[], int count) override;
     void addLine(bool previousWrapped = false) override;
 
+    // Modify history (do nothing here)
     void insertCellsVector(int position, const QVector<Character> &cells) override;
     void insertCells(int position, const Character a[], int count) override;
     void removeCells(int position) override;
     void setCellsAt(int position, const Character a[], int count) override;
     void setCellsVectorAt(int position, const QVector<Character> &cells) override;
     void setLineAt(int position, bool previousWrapped) override;
+    int reflowLines(int) override;
 };
 
 }

@@ -35,12 +35,14 @@ public:
     void addCells(const Character text[], int count) override;
     void addLine(bool previousWrapped = false) override;
 
+    // Modify history
     void insertCellsVector(int position, const QVector<Character> &cells) override;
     void insertCells(int position, const Character a[], int count) override;
     void removeCells(int position) override;
     void setCellsAt(int position, const Character a[], int count) override;
     void setCellsVectorAt(int position, const QVector<Character> &cells) override;
     void setLineAt(int position, bool previousWrapped) override;
+    int reflowLines(int columns) override;
 
 private:
     qint64 startOfLine(int lineno);
@@ -48,6 +50,11 @@ private:
     HistoryFile _index; // lines Row(qint64)
     HistoryFile _cells; // text  Row(Character)
     HistoryFile _lineflags; // flags Row(unsigned char)
+
+    struct reflowData { // data to reflow lines
+        qint64 index;
+        bool lineFlag;
+    };
 };
 
 }
