@@ -149,8 +149,6 @@ bool CompactHistoryScroll::isWrappedLine(int lineNumber)
 
 int CompactHistoryScroll::reflowLines(int columns)
 {
-    // Join the line and move the data to next line if needed
-
     auto getCharacterBuffer = [](int size) {
         static QVector<Character> characterBuffer(1024);
         if (characterBuffer.count() < size) {
@@ -160,8 +158,12 @@ int CompactHistoryScroll::reflowLines(int columns)
         return characterBuffer.data();
     };
 
+    // Join the line and move the data to next line if needed
     int removedLines = 0;
     int currentPos = 0;
+    if (getLines() > MAX_REFLOW_LINES) {
+        currentPos = getLines() - MAX_REFLOW_LINES;
+    }
     while (currentPos < getLines()) {
         int curr_linelen = getLineLen(currentPos);
         // Join wrapped line in current history position

@@ -138,6 +138,9 @@ int HistoryScrollFile::reflowLines(int columns)
 
     // First all changes are saved on an auxiliary file, no real index is changed
     int currentPos = 0;
+    if (getLines() > MAX_REFLOW_LINES) {
+        currentPos = getLines() - MAX_REFLOW_LINES;
+    }
     while (currentPos < getLines()) {
         qint64 startLine = startOfLine(currentPos);
         qint64 endLine = startOfLine(currentPos + 1);
@@ -160,8 +163,14 @@ int HistoryScrollFile::reflowLines(int columns)
     }
 
     // Erase data from index and flag data
-    _index.removeLast(0);
-    _lineflags.removeLast(0);
+    if (getLines() > MAX_REFLOW_LINES) {
+        currentPos = getLines() - MAX_REFLOW_LINES;
+        _index.removeLast(currentPos * sizeof(qint64));
+        _lineflags.removeLast(currentPos * sizeof(char));
+    } else {
+        _index.removeLast(0);
+        _lineflags.removeLast(0);
+    }
 
     // Now save the new indexes and properties to proper files
     int totalLines = reflowFile->len() / sizeof(reflowData);

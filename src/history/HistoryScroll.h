@@ -69,6 +69,7 @@ public:
 
 protected:
     HistoryType *_historyType;
+    const int MAX_REFLOW_LINES = 20000;
 };
 
 }
