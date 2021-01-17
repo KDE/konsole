@@ -42,6 +42,8 @@ public:
     void setCellsVectorAt(int position, const TextLine &cells) override;
     void setLineAt(int position, bool previousWrapped) override;
 
+    int reflowLines(int columns) override;
+
 private:
     bool hasDifferentColors(const TextLine &line) const;
     HistoryArray _lines;

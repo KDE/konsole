@@ -27,17 +27,15 @@ CompactHistoryLine::CompactHistoryLine(const TextLine &line, CompactHistoryBlock
 {
     if (!line.isEmpty()) {
         _length = line.size();
-        _formatLength = 1;
 
         // count number of different formats in this text line
         Character c = line[0];
-        int k = 0;
-        while (k < _length) {
-            if (!(line[k].equalsFormat(c))) {
+        _formatLength = 1;
+        for (auto &k : line) {
+            if (!(k.equalsFormat(c))) {
                 _formatLength++; // format change detected
-                c = line[k];
+                c = k;
             }
-            k++;
         }
 
         _formatArray = static_cast<CharacterFormat *>(_blockListRef.allocate(sizeof(CharacterFormat) * _formatLength));

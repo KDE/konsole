@@ -146,3 +146,63 @@ bool CompactHistoryScroll::isWrappedLine(int lineNumber)
     Q_ASSERT(lineNumber < _lines.size());
     return _lines[lineNumber]->isWrapped();
 }
+
+int CompactHistoryScroll::reflowLines(int columns)
+{
+    // Join the line and move the data to next line if needed
+
+    auto getCharacterBuffer = [](int size) {
+        static QVector<Character> characterBuffer(1024);
+        if (characterBuffer.count() < size) {
+            characterBuffer.resize(size);
+        }
+
+        return characterBuffer.data();
+    };
+
+    int removedLines = 0;
+    int currentPos = 0;
+    while (currentPos < getLines()) {
+        int curr_linelen = getLineLen(currentPos);
+        // Join wrapped line in current history position
+        if (isWrappedLine(currentPos) && currentPos < getLines() - 1) {
+            int next_linelen = getLineLen(currentPos + 1);
+            auto *new_line = getCharacterBuffer(curr_linelen + next_linelen);
+            bool new_line_property = isWrappedLine(currentPos + 1);
+
+            // Join the lines
+            getCells(currentPos, 0, curr_linelen, new_line);
+            getCells(currentPos + 1, 0, next_linelen, new_line + curr_linelen);
+
+            // save the new_line in history and remove the next line
+            setCellsAt(currentPos, new_line, curr_linelen + next_linelen);
+            setLineAt(currentPos, new_line_property);
+            removeCells(currentPos + 1);
+            continue;
+        }
+
+        // if the current line > columns it will need a new line
+        if (curr_linelen > columns) {
+            bool removeLine = getLines() == getMaxLines();
+            auto *curr_line = getCharacterBuffer(curr_linelen);
+            bool curr_line_property = isWrappedLine(currentPos);
+            getCells(currentPos, 0, curr_linelen, curr_line);
+
+            setCellsAt(currentPos, curr_line, columns);
+            setLineAt(currentPos, true);
+            if (currentPos < getMaxLines() - 1) {
+                int correctPosition = (getLines() == getMaxLines()) ? 0 : 1;
+                insertCells(currentPos + 1, curr_line + columns, curr_linelen - columns);
+                setLineAt(currentPos + correctPosition, curr_line_property);
+            } else {
+                addCells(curr_line + columns, curr_linelen - columns);
+                addLine(curr_line_property);
+            }
+            if (removeLine) {
+                removedLines += 1;
+            }
+        }
+        currentPos++;
+    }
+    return removedLines;
+}

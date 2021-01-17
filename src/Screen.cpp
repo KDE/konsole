@@ -388,14 +388,18 @@ void Screen::setReflowLines(bool enable)
 }
 
 // Not to production auxiliar functions to show what is written in screen or history
-void toDebug(const Character s[], int count, bool wrapped = false) {
+void toDebug(const Character *s, int count, bool wrapped = false)
+{
     QString out;
-    for (int i = 0; i < count; i++) {
-        out += s[i].character;
+    std::for_each_n(s, count, [&out](const Character &i) { out += i.character; });
+    if (wrapped) {
+        qDebug() << out << "*wrapped*";
+    } else {
+        qDebug() << out;
     }
-    qDebug() << out << (wrapped? " wrapped" : "");
 }
-void toDebug(const QVector<Character> &s, bool wrapped = false) {
+void toDebug(const QVector<Character> &s, bool wrapped = false)
+{
     toDebug(s.data(), s.size(), wrapped);
 }
 /////
@@ -430,7 +434,6 @@ void Screen::resizeImage(int new_lines, int new_columns)
     int cursorLine = getCursorLine();
     const int oldCursorLine = (cursorLine == _lines - 1) ? new_lines - 1 : cursorLine;
 
-    int currentPos;
     // Check if _history need to change
     if (_enableReflowLines && new_columns != _columns && _history->getLines() && _history->getMaxLines()) {
         // Join next line from _screenLine to _history
@@ -438,57 +441,18 @@ void Screen::resizeImage(int new_lines, int new_columns)
             fastAddHistLine();
             cursorLine--;
         }
-        // Join the line and move the data to next line if needed
-        currentPos = 0;
-        while (currentPos < _history->getLines()) {
-            int curr_linelen = _history->getLineLen(currentPos);
-            // Join wrapped line in current history position
-            if (_history->isWrappedLine(currentPos) && currentPos < _history->getLines() - 1) {
-                int next_linelen = _history->getLineLen(currentPos + 1);
-                auto *new_line = getCharacterBuffer(curr_linelen + next_linelen);
-                bool new_line_property = _history->isWrappedLine(currentPos + 1);
+        auto removedLines = _history->reflowLines(new_columns);
 
-                // Join the lines
-                _history->getCells(currentPos, 0, curr_linelen, new_line);
-                _history->getCells(currentPos + 1, 0, next_linelen, new_line + curr_linelen);
-
-                // save the new_line in history and remove the next line
-                _history->setCellsAt(currentPos, new_line, curr_linelen + next_linelen);
-                _history->setLineAt(currentPos, new_line_property);
-                _history->removeCells(currentPos + 1);
-                continue;
-            }
-
-            // if the current line > new_columns it will need a new line
-            if (curr_linelen > new_columns) {
-                bool removeLine = _history->getLines() == _history->getMaxLines();
-                auto *curr_line = getCharacterBuffer(curr_linelen);
-                bool curr_line_property = _history->isWrappedLine(currentPos);
-                _history->getCells(currentPos, 0, curr_linelen, curr_line);
-
-                _history->setCellsAt(currentPos, curr_line, new_columns);
-                _history->setLineAt(currentPos, true);
-                if (currentPos < _history->getMaxLines() - 1) {
-                    int correctPosition = (_history->getLines() == _history->getMaxLines()) ? 0 : 1;
-                    _history->insertCells(currentPos + 1, curr_line + new_columns, curr_linelen - new_columns);
-                    _history->setLineAt(currentPos + correctPosition, curr_line_property);
-                } else {
-                    _history->addCells(curr_line + new_columns, curr_linelen - new_columns);
-                    _history->addLine(curr_line_property);
-                }
-                // If _history size > max history size it will drop a line from _history.
-                // We need to verify if we need to remove a URL.
-                if (removeLine) {
-                    _escapeSequenceUrlExtractor->historyLinesRemoved(1);
-                }
-            }
-            currentPos++;
+        // If _history size > max history size it will drop a line from _history.
+        // We need to verify if we need to remove a URL.
+        if (removedLines) {
+            _escapeSequenceUrlExtractor->historyLinesRemoved(removedLines);
         }
     }
 
-    if (_enableReflowLines) {
+    if (_enableReflowLines && new_columns != _columns) {
         // Analize the lines and move the data to lines below.
-        currentPos = 0;
+        int currentPos = 0;
         while (currentPos < cursorLine && currentPos < _screenLines.count() - 1) {
             // Join wrapped line in current position
             if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
@@ -523,14 +487,8 @@ void Screen::resizeImage(int new_lines, int new_columns)
 
     // Check if it need to move from _screenLine to _history
     while (cursorLine > new_lines - 1) {
+        fastAddHistLine();
         cursorLine--;
-        if (!_enableReflowLines || !_history->getMaxLines()) {
-            addHistLine();
-            _screenLines.pop_front();
-            _lineProperties.remove(0);
-        } else {
-            fastAddHistLine();
-        }
     }
 
     if (_enableReflowLines) {
@@ -637,8 +595,8 @@ void Screen::copyFromHistory(Character* dest, int startLine, int count) const
 
         _history->getCells(line, 0, length, dest + destLineOffset);
 
-        for (int column = length; column < _columns; column++) {
-            dest[destLineOffset + column] = Screen::DefaultChar;
+        if (length < _columns) {
+            std::fill(&dest[destLineOffset + length], &dest[destLineOffset + _columns], Screen::DefaultChar);
         }
 
         // invert selected text
@@ -815,9 +773,7 @@ void Screen::backtab(int n)
 
 void Screen::clearTabStops()
 {
-    for (int i = 0; i < _columns; i++) {
-        _tabStops[i] = false;
-    }
+    _tabStops.fill(false);
 }
 
 void Screen::changeTabStop(bool set)
@@ -1133,9 +1089,8 @@ void Screen::clearImage(int loca, int loce, char c)
                 line.resize(endCol + 1);
             }
 
-            Character* data = line.data();
-            for (int i = startCol; i <= endCol; i++) {
-                data[i] = clearCh;
+            if (startCol <= endCol) {
+                std::fill(line.begin() + startCol, line.begin() + (endCol + 1), clearCh);
             }
         }
     }
@@ -1156,7 +1111,7 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
     const int srcY = sourceBegin / _columns;
     if (dest < sourceBegin) {
         for (int i = 0; i <= lines; i++) {
-            _screenLines[destY + i] = _screenLines[srcY + i];
+            _screenLines[destY + i] = std::move(_screenLines[srcY + i]);
             _lineProperties[destY + i] = _lineProperties[srcY + i];
         }
     } else {
@@ -1508,7 +1463,7 @@ int Screen::copyLineToStream(int line ,
     // determine if the line is in the history buffer or the screen image
     if (line < _history->getLines()) {
         // ensure that start position is before end of line
-        start = qMin(start, qMax(0, lineLength - 1));
+        start = qBound(0, start, lineLength - 1);
 
         // retrieve line from history buffer.  It is assumed
         // that the history buffer does not store trailing white space
@@ -1549,19 +1504,15 @@ int Screen::copyLineToStream(int line ,
         if (options.testFlag(TrimTrailingWhitespace) && ((_lineProperties[screenLine] & LINE_WRAPPED) == 0))
         {
             // ignore trailing white space at the end of the line
-            for (int i = length-1; i >= 0; i--)
-            {
-                if (QChar(data[i].character).isSpace()) {
-                    length--;
-                } else {
-                    break;
-                }
+            while (length > 0 && QChar(data[length - 1].character).isSpace()) {
+                length--;
             }
         }
 
         //retrieve line from screen image
-        for (int i = start; i < qMin(start + count, length); i++) {
-            characterBuffer[i - start] = data[i];
+        auto end = qMin(start + count, length);
+        if (start < end) {
+            std::copy(data + start, data + end, characterBuffer);
         }
 
         // count cannot be any greater than length
@@ -1595,9 +1546,7 @@ int Screen::copyLineToStream(int line ,
             return 0;
         }
 
-        for (int i=0; i < count - spacesCount; i++) {
-            characterBuffer[i] = characterBuffer[i + spacesCount];
-        }
+        std::copy(characterBuffer + spacesCount, characterBuffer + count, characterBuffer);
 
         count -= spacesCount;
     }
@@ -1638,91 +1587,55 @@ void Screen::addHistLine()
     int newHistLines = _history->getLines();
 
     if (hasScroll()) {
-        // Check if _history have 'new line' property and join lines before adding a new one to history
-        if (_enableReflowLines && oldHistLines > 0 &&
-            _history->getMaxLines() && _history->isWrappedLine(oldHistLines - 1)) {
+        _history->addCellsVector(_screenLines[0]);
+        _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
 
-            int hist_lineLen = _history->getLineLen(oldHistLines - 1);
-            auto *hist_line = getCharacterBuffer(hist_lineLen + _screenLines[0].count());
-            _history->getCells(oldHistLines - 1, 0, hist_lineLen, hist_line);
+        newHistLines = _history->getLines();
 
-            // Join the new line into the old line
-            std::copy(_screenLines[0].begin(), _screenLines[0].end(), hist_line + hist_lineLen);
-            hist_lineLen += _screenLines[0].count();
+        // If the history is full, increment the count
+        // of dropped _lines
+        if (newHistLines == oldHistLines) {
+            _droppedLines++;
 
-            // After join, check if it needs new line in history to show it on scroll
-            if (hist_lineLen > _columns) {
-                _history->setCellsAt(oldHistLines - 1, hist_line, _columns);
-                _history->setLineAt(oldHistLines - 1, true);
-                _history->addCells(hist_line + _columns, hist_lineLen - _columns);
-                _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
-
-                newHistLines = _history->getLines();
-
-                // If the history is full, increment the count
-                // of dropped _lines
-                if (newHistLines == oldHistLines) {
-                    _droppedLines++;
-
-                    // We removed a line, we need to verify if we need to remove a URL.
-                    _escapeSequenceUrlExtractor->historyLinesRemoved(1);
-                }
-            } else {
-                // Doesn't need a new line
-                _history->setCellsAt(oldHistLines - 1, hist_line, hist_lineLen);
-                _history->setLineAt(oldHistLines - 1, (_lineProperties[0] & LINE_WRAPPED) != 0);
-            }
-        } else {
-            _history->addCellsVector(_screenLines[0]);
-            _history->addLine((_lineProperties[0] & LINE_WRAPPED) != 0);
-
-            newHistLines = _history->getLines();
-
-            // If the history is full, increment the count
-            // of dropped _lines
-            if (newHistLines == oldHistLines) {
-                _droppedLines++;
-
-                // We removed a line, we need to verify if we need to remove a URL.
-                _escapeSequenceUrlExtractor->historyLinesRemoved(1);
-            }
+            // We removed a line, we need to verify if we need to remove a URL.
+            _escapeSequenceUrlExtractor->historyLinesRemoved(1);
         }
+    }
 
-        bool beginIsTL = (_selBegin == _selTopLeft);
+    bool beginIsTL = (_selBegin == _selTopLeft);
 
-        // Adjust selection for the new point of reference
-        if (newHistLines > oldHistLines) {
-            if (_selBegin != -1) {
-                _selTopLeft += _columns;
-                _selBottomRight += _columns;
-            }
-        }
-
+    // Adjust selection for the new point of reference
+    if (newHistLines > oldHistLines) {
         if (_selBegin != -1) {
-            // Scroll selection in history up
-            const int top_BR = loc(0, 1 + newHistLines);
+            _selTopLeft += _columns;
+            _selBottomRight += _columns;
+        }
+    }
 
-            if (_selTopLeft < top_BR) {
-                _selTopLeft -= _columns;
-            }
+    if (_selBegin != -1) {
+        // Scroll selection in history up
+        const int top_BR = loc(0, 1 + newHistLines);
 
-            if (_selBottomRight < top_BR) {
-                _selBottomRight -= _columns;
-            }
+        if (_selTopLeft < top_BR) {
+            _selTopLeft -= _columns;
+        }
 
-            if (_selBottomRight < 0) {
-                clearSelection();
-            } else {
-                if (_selTopLeft < 0) {
-                    _selTopLeft = 0;
-                }
-            }
+        if (_selBottomRight < top_BR) {
+            _selBottomRight -= _columns;
+        }
 
-            if (beginIsTL) {
-                _selBegin = _selTopLeft;
-            } else {
-                _selBegin = _selBottomRight;
+        if (_selBottomRight < 0) {
+            clearSelection();
+        } else {
+            if (_selTopLeft < 0) {
+                _selTopLeft = 0;
             }
+        }
+
+        if (beginIsTL) {
+            _selBegin = _selTopLeft;
+        } else {
+            _selBegin = _selBottomRight;
         }
     }
 }
@@ -1765,9 +1678,7 @@ void Screen::setLineProperty(LineProperty property , bool enable)
 }
 void Screen::fillWithDefaultChar(Character* dest, int count)
 {
-    for (int i = 0; i < count; i++) {
-        dest[i] = Screen::DefaultChar;
-    }
+    std::fill_n(dest, count, Screen::DefaultChar);
 }
 
 Konsole::EscapeSequenceUrlExtractor * Konsole::Screen::urlExtractor() const
