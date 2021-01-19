@@ -22,6 +22,7 @@ private Q_SLOTS:
     void testCompactHistory();
     void testEmulationHistory();
     void testHistoryScroll();
+    void testHistoryReflow();
 
 private:
 };

@@ -178,10 +178,9 @@ int HistoryScrollFile::reflowLines(int columns)
     while (currentPos < totalLines) {
         reflowFile->get(reinterpret_cast<char *>(&newLine), sizeof(reflowData), currentPos * sizeof(reflowData));
 
-        _index.add(reinterpret_cast<char *>(&newLine.index), sizeof(qint64));
-
         unsigned char flags = newLine.lineFlag ? 0x01 : 0x00;
         _lineflags.add(reinterpret_cast<char *>(&flags), sizeof(char));
+        _index.add(reinterpret_cast<char *>(&newLine.index), sizeof(qint64));
         currentPos++;
     }
 

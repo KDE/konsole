@@ -30,12 +30,13 @@ CompactHistoryScroll::~CompactHistoryScroll()
 void CompactHistoryScroll::addCellsVector(const TextLine &cells)
 {
     CompactHistoryLine *line;
-    line = new(_blockList) CompactHistoryLine(cells, _blockList);
+    line = new (_blockList) CompactHistoryLine(cells, _blockList);
+
+    _lines.append(line);
 
     if (_lines.size() > static_cast<int>(_maxLineCount)) {
         delete _lines.takeAt(0);
     }
-    _lines.append(line);
 }
 
 void CompactHistoryScroll::addCells(const Character a[], int count)
@@ -98,7 +99,7 @@ void CompactHistoryScroll::setMaxNbLines(unsigned int lineCount)
 
 void CompactHistoryScroll::insertCellsVector(int position, const TextLine &cells)
 {
-    CompactHistoryLine *line = new(_blockList) CompactHistoryLine(cells, _blockList);
+    CompactHistoryLine *line = new (_blockList) CompactHistoryLine(cells, _blockList);
 
     _lines.insert(position, line);
 
@@ -128,7 +129,7 @@ void CompactHistoryScroll::setCellsAt(int position, const Character a[], int cou
 
 void CompactHistoryScroll::setCellsVectorAt(int position, const TextLine &cells)
 {
-    CompactHistoryLine *line = new(_blockList) CompactHistoryLine(cells, _blockList);
+    CompactHistoryLine *line = new (_blockList) CompactHistoryLine(cells, _blockList);
 
     delete _lines.takeAt(position);
     _lines.insert(position, line);
@@ -199,6 +200,7 @@ int CompactHistoryScroll::reflowLines(int columns)
             } else {
                 addCells(curr_line + columns, curr_linelen - columns);
                 addLine(curr_line_property);
+                currentPos--;
             }
             if (removeLine) {
                 removedLines += 1;
