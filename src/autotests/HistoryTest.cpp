@@ -131,6 +131,7 @@ void HistoryTest::testHistoryScroll()
 
     delete historyScroll;
 }
+
 void HistoryTest::testHistoryReflow()
 {
     HistoryScroll *historyScroll;
@@ -161,11 +162,11 @@ void HistoryTest::testHistoryReflow()
     QCOMPARE(historyScroll->getLines(), 10);
     QCOMPARE(historyScroll->getLineLen(5), 1);
     historyScroll->getCells(3, 0, 1, &testChar);
-    QCOMPARE(testChar.character, (uint)testString[testStringSize - 7]);
+    QCOMPARE(testChar, testImage[testStringSize - 7]);
     historyScroll->getCells(0, 0, 1, &testChar);
-    QCOMPARE(testChar.character, (uint)testString[testStringSize - 10]);
+    QCOMPARE(testChar, testImage[testStringSize - 10]);
     historyScroll->getCells(9, 0, 1, &testChar);
-    QCOMPARE(testChar.character, (uint)testString[testStringSize - 1]);
+    QCOMPARE(testChar, testImage[testStringSize - 1]);
 
     delete historyScroll;
 
@@ -183,13 +184,65 @@ void HistoryTest::testHistoryReflow()
     QCOMPARE(historyScroll->getLines(), testStringSize);
     QCOMPARE(historyScroll->getLineLen(5), 1);
     historyScroll->getCells(3, 0, 1, &testChar);
-    QCOMPARE(testChar.character, (uint)testString[3]);
+    QCOMPARE(testChar, testImage[3]);
     historyScroll->getCells(0, 0, 1, &testChar);
-    QCOMPARE(testChar.character, (uint)testString[0]);
+    QCOMPARE(testChar, testImage[0]);
     historyScroll->getCells(testStringSize - 1, 0, 1, &testChar);
-    QCOMPARE(testChar.character, (uint)testString[testStringSize - 1]);
+    QCOMPARE(testChar, testImage[testStringSize - 1]);
 
     delete historyScroll;
+    delete[] testImage;
+}
+
+void HistoryTest::testHistoryTypeChange()
+{
+    HistoryScroll *historyScroll = nullptr;
+
+    const char testString[] = "abcdefghijklmnopqrstuvwxyz1234567890";
+    const int testStringSize = sizeof(testString) / sizeof(char) - 1;
+    auto testImage = new Character[testStringSize];
+    Character testChar;
+    for (int i = 0; i < testStringSize; i++) {
+        testImage[i] = Character((uint)testString[i]);
+    }
+
+    // None
+    auto historyTypeNone = new HistoryTypeNone();
+    historyScroll = historyTypeNone->scroll(historyScroll);
+
+    // None to File
+    auto historyTypeFile = new HistoryTypeFile();
+    historyScroll = historyTypeFile->scroll(historyScroll);
+
+    historyScroll->addCells(testImage, testStringSize);
+    historyScroll->addLine(false);
+    QCOMPARE(historyScroll->reflowLines(1), 0);
+    QCOMPARE(historyScroll->getLines(), testStringSize);
+    historyScroll->getCells(0, 0, 1, &testChar);
+    QCOMPARE(testChar, testImage[0]);
+
+    // File to Compact
+    auto compactHistoryType = new CompactHistoryType(10);
+    historyScroll = compactHistoryType->scroll(historyScroll);
+
+    QCOMPARE(historyScroll->getLines(), 10);
+    historyScroll->getCells(0, 0, 1, &testChar);
+    QCOMPARE(testChar, testImage[testStringSize - 10]);
+
+    // Compact to File
+    historyScroll = historyTypeFile->scroll(historyScroll);
+    QCOMPARE(historyScroll->getLines(), 10);
+    historyScroll->getCells(0, 0, 1, &testChar);
+    QCOMPARE(testChar, testImage[testStringSize - 10]);
+
+    // File to None
+    historyScroll = historyTypeNone->scroll(historyScroll);
+    QCOMPARE(historyScroll->getLines(), 0);
+
+    delete historyScroll;
+    delete historyTypeFile;
+    delete historyTypeNone;
+    delete compactHistoryType;
     delete[] testImage;
 }
 
