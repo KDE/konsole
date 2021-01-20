@@ -30,6 +30,8 @@
 #include <KNotifyConfigWidget>
 #include <KIconLoader>
 
+#include <kio_version.h>
+
 // Konsole
 #include "BookmarkHandler.h"
 #include "KonsoleSettings.h"
@@ -67,16 +69,27 @@ MainWindow::MainWindow() :
 {
     if (!KonsoleSettings::saveGeometryOnExit()) {
         // If we are not using the global Konsole save geometry on exit,
-        // remove all Height and Width from [MainWindow] from konsolerc
-        // Each screen resolution will have entries (Width 1280=619)
+        // remove all geometry data from [MainWindow] in Konsolerc, so KWin will
+        // manage it directly
         KSharedConfigPtr konsoleConfig = KSharedConfig::openConfig(QStringLiteral("konsolerc"));
         KConfigGroup group = konsoleConfig->group("MainWindow");
         QMap<QString, QString> configEntries = group.entryMap();
         QMapIterator<QString, QString> i(configEntries);
+
         while (i.hasNext()) {
             i.next();
+// After https://bugs.kde.org/show_bug.cgi?id=415150 was fixed in 5.74,
+// the config file keys changed
+#if KIO_VERSION < QT_VERSION_CHECK(5, 75, 0)
             if (i.key().startsWith(QLatin1String("Width"))
-                || i.key().startsWith(QLatin1String("Height"))) {
+                || i.key().startsWith(QLatin1String("Height"))
+#else
+            if (i.key().contains(QLatin1String(" Width"))
+                || i.key().contains(QLatin1String(" Height"))
+                || i.key().contains(QLatin1String(" XPosition"))
+                || i.key().contains(QLatin1String(" YPosition"))
+#endif
+            ) {
                 group.deleteEntry(i.key());
             }
         }
