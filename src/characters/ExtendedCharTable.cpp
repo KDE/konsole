@@ -74,9 +74,7 @@ uint ExtendedCharTable::createExtendedChar(const uint *unicodePoints, ushort len
     // return that index
     auto buffer = new uint[length + 1];
     buffer[0] = length;
-    for (int i = 0; i < length; i++) {
-        buffer[i + 1] = unicodePoints[i];
-    }
+    std::copy_n(unicodePoints, length, &buffer[1]);
 
     _extendedCharTable.insert(hash, buffer);
 

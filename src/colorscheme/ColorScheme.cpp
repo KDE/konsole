@@ -232,9 +232,7 @@ void ColorScheme::setColorTableEntry(int index, const QColor &entry)
     if (_table == nullptr) {
         _table = new QColor[TABLE_COLORS];
 
-        for (int i = 0; i < TABLE_COLORS; i++) {
-            _table[i] = defaultTable[i];
-        }
+        std::copy_n(defaultTable, TABLE_COLORS, _table);
     }
 
     if (entry.isValid()) {

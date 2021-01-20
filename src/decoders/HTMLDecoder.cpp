@@ -44,9 +44,7 @@ HTMLDecoder::HTMLDecoder(const QString &colorSchemeName, const QFont &profileFon
     if (colorScheme != nullptr) {
         colorScheme->getColorTable(_colorTable);
     } else {
-        for (int i = 0; i < TABLE_COLORS; i++) {
-            _colorTable[i] = ColorScheme::defaultTable[i];
-        }
+        std::copy_n(ColorScheme::defaultTable, TABLE_COLORS, _colorTable);
     }
 }
 

@@ -78,10 +78,8 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     // If we should remove leading whitespace find the first non-space character
     int start = 0;
     if (!_includeLeadingWhitespace) {
-        for (start = 0; start < count; start++) {
-            if (!characters[start].isSpace()) {
-                break;
-            }
+        while (start < count && characters[start].isSpace()) {
+            start++;
         }
     }
 
@@ -94,12 +92,8 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
     // if inclusion of trailing whitespace is disabled then find the end of the
     // line
     if (!_includeTrailingWhitespace) {
-        for (int i = count - 1 ; i >= start ; i--) {
-            if (!characters[i].isSpace()) {
-                break;
-            } else {
-                outputCount--;
-            }
+        while(outputCount > 0 && characters[start + outputCount - 1].isSpace()) {
+            outputCount--;
         }
     }
 
