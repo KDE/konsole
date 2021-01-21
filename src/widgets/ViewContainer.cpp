@@ -488,10 +488,12 @@ void TabbedViewContainer::currentTabChanged(int index)
     if (index != -1) {
         auto splitview = qobject_cast<ViewSplitter*>(widget(index));
         auto view = splitview->activeTerminalDisplay();
-        emit activeViewChanged(view);
         setTabActivity(index, false);
         _tabIconState[splitview].notification = Session::NoNotification;
-        updateIcon(view->sessionController());
+        if (view != nullptr) {
+            emit activeViewChanged(view);
+            updateIcon(view->sessionController());
+        }
     } else {
         deleteLater();
     }
