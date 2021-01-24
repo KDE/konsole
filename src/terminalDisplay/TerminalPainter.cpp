@@ -398,8 +398,8 @@ namespace Konsole
             if (display->hasFocus()) {
                 painter.fillRect(cursorRect, cursorColor);
 
-                QColor color = display->terminalColor()->cursorTextColor();
-                characterColor = color.isValid() ? color : backgroundColor;
+                QColor cursorTextColor = display->terminalColor()->cursorTextColor();
+                characterColor = cursorTextColor.isValid() ? cursorTextColor : backgroundColor;
             }
         } else if (display->cursorShape() == Enum::UnderlineCursor) {
             QLineF line(cursorRect.left() + halfWidth,
