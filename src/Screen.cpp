@@ -16,6 +16,10 @@
 #include <PlainTextDecoder.h>
 #include <HTMLDecoder.h>
 
+#include "terminalDisplay/TerminalDisplay.h"
+#include "session/SessionController.h"
+#include "session/Session.h"
+
 #include "history/HistoryType.h"
 #include "history/HistoryScrollNone.h"
 #include "characters/ExtendedCharTable.h"
@@ -454,18 +458,28 @@ void Screen::resizeImage(int new_lines, int new_columns)
     }
 
     if (_enableReflowLines && new_columns != _columns) {
+        int cursorLineCorrection = 0;
+        if (_currentTerminalDisplay) {
+            // The 'zsh' works different from other shells when writting the command line.
+            // It needs to identify the 'zsh' and calculate the new command line.
+            auto sessionController = _currentTerminalDisplay->sessionController();
+            auto terminal = sessionController->session()->foregroundProcessName();
+            if (terminal == QLatin1String("zsh") && cursorLine > 0 && (_lineProperties[cursorLine - 1] & LINE_WRAPPED) != 0) {
+                while (cursorLine + cursorLineCorrection > 0 && (_lineProperties[cursorLine + cursorLineCorrection - 1] & LINE_WRAPPED) != 0) {
+                    cursorLineCorrection--;
+                }
+            }
+        }
+
         // Analize the lines and move the data to lines below.
         int currentPos = 0;
-        while (currentPos < cursorLine && currentPos < _screenLines.count() - 1) {
+        while (currentPos < (cursorLine + cursorLineCorrection) && currentPos < _screenLines.count() - 1) {
             // Join wrapped line in current position
             if ((_lineProperties[currentPos] & LINE_WRAPPED) != 0) {
                 _screenLines[currentPos].append(std::move(_screenLines[currentPos + 1]));
                 _screenLines.remove(currentPos + 1);
                 _lineProperties.remove(currentPos);
                 cursorLine--;
-                if (cursorLine == currentPos) {
-                    _cuX = _screenLines[currentPos].size();
-                }
                 continue;
             }
 
