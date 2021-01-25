@@ -252,7 +252,6 @@ void ViewManager::setupActions()
     }
 
     connect(_viewContainer, &TabbedViewContainer::viewAdded, this, &ViewManager::toggleActionsBasedOnState);
-    connect(_viewContainer, &TabbedViewContainer::viewRemoved, this, &ViewManager::toggleActionsBasedOnState);
     connect(_viewContainer, &QTabWidget::currentChanged, this, &ViewManager::toggleActionsBasedOnState);
 
     toggleActionsBasedOnState();
@@ -690,17 +689,10 @@ TabbedViewContainer *ViewManager::createContainer()
                containerViewsChanged(container);
            });
 
-    connect(container, &Konsole::TabbedViewContainer::viewRemoved, this,
-           [this, container]() {
-               containerViewsChanged(container);
-           });
-
     connect(container, &TabbedViewContainer::newViewRequest,
             this, &ViewManager::newViewRequest);
     connect(container, &Konsole::TabbedViewContainer::newViewWithProfileRequest,
             this, &Konsole::ViewManager::newViewWithProfileRequest);
-    connect(container, &Konsole::TabbedViewContainer::viewRemoved, this,
-            &Konsole::ViewManager::viewDestroyed);
     connect(container, &Konsole::TabbedViewContainer::activeViewChanged, this,
             &Konsole::ViewManager::activateView);
 
