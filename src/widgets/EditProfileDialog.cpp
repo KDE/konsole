@@ -29,7 +29,7 @@
 #include <KIconDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KNSCore/DownloadManager>
+#include <KNSCore/Engine>
 #include <KWindowSystem>
 #include <kconfigwidgets_version.h>
 
@@ -1152,51 +1152,15 @@ void EditProfileDialog::updateFontPreview(QFont font)
 
 void EditProfileDialog::removeColorScheme()
 {
-    QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
+    const QModelIndexList selected = _appearanceUi->colorSchemeList->selectionModel()->selectedIndexes();
     if (selected.isEmpty()) {
         return;
     }
-
-    // The actual delete runs async because we need to on-demand query
-    // files managed by KNS. Deleting files managed by KNS screws up the
-    // KNS states (entry gets shown as installed when in fact we deleted it).
-    auto *manager = new KNSCore::DownloadManager(QStringLiteral("konsole.knsrc"), this);
-    connect(manager, &KNSCore::DownloadManager::searchResult,
-            this, [=](const KNSCore::EntryInternal::List &entries) {
-        const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
-        Q_ASSERT(!name.isEmpty());
-        bool uninstalled = false;
-        // Check if the theme was installed by KNS, if so uninstall it through
-        // there and unload it.
-        for (auto &entry : entries) {
-            for (const auto &file : entry.installedFiles()) {
-                if (ColorSchemeManager::colorSchemeNameFromPath(file) != name) {
-                    continue;
-                }
-                // Make sure the manager can unload it before uninstalling it.
-                if (ColorSchemeManager::instance()->unloadColorScheme(file)) {
-                    manager->uninstallEntry(entry);
-                    uninstalled = true;
-                }
-            }
-            if (uninstalled) {
-                break;
-            }
-        }
-
-        // If KNS wasn't able to remove it is a custom theme and we'll drop
-        // it manually.
-        if (!uninstalled) {
-            uninstalled = ColorSchemeManager::instance()->deleteColorScheme(name);
-        }
-
-        if (uninstalled) {
-            _appearanceUi->colorSchemeList->model()->removeRow(selected.first().row());
-        }
-
-        manager->deleteLater();
-    });
-    manager->checkForInstalled();
+    const QString &name = selected.first().data(Qt::UserRole + 1).value<const ColorScheme *>()->name();
+    Q_ASSERT(!name.isEmpty());
+    if (ColorSchemeManager::instance()->deleteColorScheme(name)) {
+        _appearanceUi->colorSchemeList->model()->removeRow(selected.first().row());
+    }
 }
 
 void EditProfileDialog::gotNewColorSchemes(const KNS3::Entry::List &changedEntries)

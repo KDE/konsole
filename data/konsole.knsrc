@@ -4,3 +4,4 @@ Categories=Konsole Color Schemes
 TargetDir=konsole
 AcceptHtmlDownloads=false
 Uncompress=archive
+RemoveDeadEntries=true
