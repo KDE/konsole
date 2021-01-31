@@ -1807,7 +1807,7 @@ void EditProfileDialog::setTextEditorCombo(const Profile::Ptr &profile)
     connect(_mouseUi->textEditorCustomBtn, &QAbstractButton::clicked,
             this, [this, profile]() {
         auto *dlg = new QInputDialog(static_cast<QWidget *>(this));
-        dlg->setLabelText(i18n("The format is e.g. 'eidtorExec PATH:LINE:COLUMN'\n\n"
+        dlg->setLabelText(i18n("The format is e.g. 'editorExec PATH:LINE:COLUMN'\n\n"
                                "PATH    will be replaced by the path to the text file\n"
                                "LINE    will be replaced by the line number\n"
                                "COLUMN  (optional) will be replaced by the column number\n"
