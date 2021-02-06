@@ -30,6 +30,8 @@
 // KDE
 #include <KXMLGUIClient>
 
+#include <memory>
+
 // Konsole
 #include "SessionDisplayConnection.h"
 #include "ViewProperties.h"
@@ -368,6 +370,7 @@ private:
     bool _monitorProcessFinish;
     EscapeSequenceUrlFilter *_escapedUrlFilter;
 
+    std::unique_ptr<KXMLGUIBuilder> _clientBuilder;
 };
 
 }

@@ -1766,10 +1766,9 @@ void SessionController::showDisplayContextMenu(const QPoint& position)
     // application did not merge our GUI.
     if (factory() == nullptr) {
         if (clientBuilder() == nullptr) {
-            setClientBuilder(new KXMLGUIBuilder(_sessionDisplayConnection->view()));
-
-            // Client builder does not get deleted automatically
-            connect(this, &QObject::destroyed, this, [this]{ delete clientBuilder(); });
+            // Client builder does not get deleted automatically, we handle this
+            _clientBuilder.reset(new KXMLGUIBuilder(_sessionDisplayConnection->view()));
+            setClientBuilder(_clientBuilder.get());
         }
 
         auto factory = new KXMLGUIFactory(clientBuilder(), _sessionDisplayConnection->view());
