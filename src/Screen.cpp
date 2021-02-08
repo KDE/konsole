@@ -387,7 +387,7 @@ void Screen::setReflowLines(bool enable)
     _enableReflowLines = enable;
 }
 
-// Not to production auxiliar functions to show what is written in screen or history
+// Debugging auxiliar functions to show what is written in screen or history
 void toDebug(const Character *s, int count, bool wrapped = false)
 {
     QString out;

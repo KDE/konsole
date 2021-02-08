@@ -89,7 +89,7 @@ public:
     };
 
     /**
-     * This enum describes the the text editor cmd used to open local text file URLs
+     * This enum describes the text editor cmd used to open local text file URLs
      * in Konsole, where line and column data are appended to the file URL, e.g.:
      * /path/to/file:123:123
      */
