@@ -320,7 +320,7 @@ public:
         DimValue,
         /** (bool) Allow Escape sequence for Links.
          * this allows applications to use links in the form of
-         * printf '\e]8;;http://www.example.org\e\\example text\e]8;;\e\\\n'
+         * printf '\e]8;;https://www.example.org\e\\example text\e]8;;\e\\\n'
          */
         AllowEscapedLinks,
         /** (String) Escape Sequence for Links schema,

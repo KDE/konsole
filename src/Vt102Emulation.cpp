@@ -388,7 +388,7 @@ void Vt102Emulation::receiveChar(uint cc)
           // This runs two times per link, the first prepares the link to be read,
           // the second finalizes it.
           if (s[2] == XTERM_EXTENDED::URL_LINK) {
-                // printf '\e]8;;http://example.com\e\\This is a link\e]8;;\e\\\n'
+                // printf '\e]8;;https://example.com\e\\This is a link\e]8;;\e\\\n'
                _currentScreen->urlExtractor()->toggleUrlInput();
           }
           processSessionAttributeRequest(p-1);
