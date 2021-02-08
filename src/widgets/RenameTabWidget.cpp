@@ -34,7 +34,7 @@ RenameTabWidget::RenameTabWidget(QWidget *parent) :
     QList<QColor> listColors(_ui->tabColorCombo->colors());
     listColors.insert(0, _colorNone);
     _ui->tabColorCombo->setColors(listColors);
-    _ui->tabColorCombo->setItemText(1, i18n("None"));
+    _ui->tabColorCombo->setItemText(1, i18nc("@label:listbox No color selected", "None"));
 
     connect(_ui->tabTitleEdit, &QLineEdit::textChanged, this,
             &Konsole::RenameTabWidget::tabTitleFormatChanged);
