@@ -210,3 +210,4 @@ int CompactHistoryScroll::reflowLines(int columns)
     }
     return removedLines;
 }
+
