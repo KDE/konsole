@@ -1649,6 +1649,10 @@ int Session::foregroundProcessId()
 bool Session::isForegroundProcessActive()
 {
     // foreground process info is always updated after this
+
+    // This check is wrong when Konsole is started with '-e cmd'
+    // as there will only be one process.
+    // See BKO 134581 for no popup when closing session
     return (processId() != _shellProcess->foregroundProcessGroup());
 }
 
