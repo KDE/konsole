@@ -104,13 +104,12 @@ QSharedPointer<HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, i
 
     const bool absolute = filename.startsWith(QLatin1Char('/'));
     if (!absolute) {
-        // Return nullptr if it's not:
-        // <current dir>/filename
-        // <current dir>/childDir/filename
         auto match = std::find_if(_currentDirContents.cbegin(), _currentDirContents.cend(),
-                                [filename](const QString &s) { return filename.startsWith(s); });
+                                  [&filename](const QString &s) {
+                                      return filename == s || // It's a direct child file or dir
+                                             filename.startsWith(s + QLatin1Char{'/'}); // It's inside a child dir
+                                });
 
-        // Create a hotspot if the match starts with '/', which denotes an absolute path
         if (match == _currentDirContents.cend()) {
             return nullptr;
         }
