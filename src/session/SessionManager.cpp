@@ -165,7 +165,7 @@ void SessionManager::setSessionProfile(Session *session, Profile::Ptr profile)
 
     applyProfile(session, profile, false);
 
-    emit sessionUpdated(session);
+    Q_EMIT sessionUpdated(session);
 }
 
 void SessionManager::applyProfile(Session *session, const Profile::Ptr &profile,
@@ -329,7 +329,7 @@ void SessionManager::sessionProfileCommandReceived(const QString &text)
 
     _sessionProfiles[session] = newProfile;
     applyProfile(newProfile, true);
-    emit sessionUpdated(session);
+    Q_EMIT sessionUpdated(session);
 
     if (!zoomFontSizes.isEmpty()) {
         QHashIterator<TerminalDisplay *, QFont> it(zoomFontSizes);

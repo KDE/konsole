@@ -291,7 +291,7 @@ void SessionController::viewFocusChangeHandler(bool focused)
     if (focused) {
         // notify the world that the view associated with this session has been focused
         // used by the view manager to update the title of the MainWindow widget containing the view
-        emit viewFocused(this);
+        Q_EMIT viewFocused(this);
 
         // when the view is focused, set bell events from the associated session to be delivered
         // by the focused view
@@ -958,20 +958,20 @@ void SessionController::renameSession()
 
         if (tabTitle != sessionLocalTabTitleFormat) {
             session()->setTabTitleFormat(Session::LocalTabTitle, tabTitle);
-            emit tabRenamedByUser(true);
+            Q_EMIT tabRenamedByUser(true);
             // trigger an update of the tab text
             snapshot();
         }
 
         if(remoteTabTitle != sessionRemoteTabTitleFormat) {
             session()->setTabTitleFormat(Session::RemoteTabTitle, remoteTabTitle);
-            emit tabRenamedByUser(true);
+            Q_EMIT tabRenamedByUser(true);
             snapshot();
         }
 
         if (tabColor != sessionTabColor) {
             session()->setColor(tabColor);
-            emit tabColoredByUser(true);
+            Q_EMIT tabColoredByUser(true);
             snapshot();
         }
     }
@@ -1168,7 +1168,7 @@ void SessionController::copyInputToAllTabs()
     _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
 
     snapshot();
-    emit copyInputChanged(this);
+    Q_EMIT copyInputChanged(this);
 }
 
 void SessionController::copyInputToSelectedTabs()
@@ -1212,7 +1212,7 @@ void SessionController::copyInputToSelectedTabs()
         _copyToGroup->setMasterStatus(session(), true);
         _copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
         snapshot();
-        emit copyInputChanged(this);
+        Q_EMIT copyInputChanged(this);
     }
 }
 
@@ -1236,7 +1236,7 @@ void SessionController::copyInputToNone()
     delete _copyToGroup;
     _copyToGroup = nullptr;
     snapshot();
-    emit copyInputChanged(this);
+    Q_EMIT copyInputChanged(this);
 }
 
 void SessionController::searchClosed()
@@ -1742,7 +1742,7 @@ void SessionController::sessionAttributeChanged()
 
     setTitle(title);
     setColor(session()->color());
-    emit rawTitleChanged();
+    Q_EMIT rawTitleChanged();
 }
 
 void SessionController::sessionReadOnlyChanged() {
@@ -1754,7 +1754,7 @@ void SessionController::sessionReadOnlyChanged() {
         if (terminalDisplay != view()) {
             terminalDisplay->updateReadOnlyState(isReadOnly());
         }
-        emit readOnlyChanged(this);
+        Q_EMIT readOnlyChanged(this);
     }
 }
 
@@ -1851,7 +1851,7 @@ void SessionController::movementKeyFromSearchBarReceived(QKeyEvent *event)
 
 void SessionController::sessionNotificationsChanged(Session::Notification notification, bool enabled)
 {
-    emit notificationChanged(this, notification, enabled);
+    Q_EMIT notificationChanged(this, notification, enabled);
 }
 
 void SessionController::zmodemDownload()

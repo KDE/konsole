@@ -24,8 +24,8 @@ void ShortcutItemDelegate::editorModified()
     auto *editor = qobject_cast<FilteredKeySequenceEdit*>(sender());
     Q_ASSERT(editor);
     _modifiedEditors.insert(editor);
-    emit commitData(editor);
-    emit closeEditor(editor);
+    Q_EMIT commitData(editor);
+    Q_EMIT closeEditor(editor);
 }
 void ShortcutItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
                                         const QModelIndex &index) const
@@ -92,12 +92,12 @@ void FilteredKeySequenceEdit::keyPressEvent(QKeyEvent *event)
         switch(event->key()) {
         case Qt::Key_Enter:
         case Qt::Key_Return:
-            emit editingFinished();
+            Q_EMIT editingFinished();
             return;
         case Qt::Key_Backspace:
         case Qt::Key_Delete:
             clear();
-            emit editingFinished();
+            Q_EMIT editingFinished();
             event->accept();
             return;
         default:

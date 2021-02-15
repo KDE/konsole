@@ -172,7 +172,7 @@ void SaveHistoryTask::jobResult(KJob* job)
     delete decoder;
 
     // notify the world that the task is done
-    emit completed(true);
+    Q_EMIT completed(true);
 
     if (autoDelete()) {
         deleteLater();

@@ -133,7 +133,7 @@ void ProfileList::addShortcutAction(const Profile::Ptr &profile)
     for (QWidget *widget : qAsConst(_registeredWidgets)) {
         widget->addAction(action);
     }
-    emit actionsChanged(_group->actions());
+    Q_EMIT actionsChanged(_group->actions());
 
     updateEmptyAction();
 }
@@ -147,14 +147,14 @@ void ProfileList::removeShortcutAction(const Profile::Ptr &profile)
         for (QWidget *widget : qAsConst(_registeredWidgets)) {
             widget->removeAction(action);
         }
-        emit actionsChanged(_group->actions());
+        Q_EMIT actionsChanged(_group->actions());
     }
     updateEmptyAction();
 }
 
 void ProfileList::triggered(QAction* action)
 {
-    emit profileSelected(action->data().value<Profile::Ptr>());
+    Q_EMIT profileSelected(action->data().value<Profile::Ptr>());
 }
 
 QList<QAction*> ProfileList::actions()

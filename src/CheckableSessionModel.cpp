@@ -59,7 +59,7 @@ bool CheckableSessionModel::setData(const QModelIndex &index, const QVariant &va
             _checkedSessions.remove(session);
         }
 
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
         return true;
     }
     return SessionListModel::setData(index, value, role);

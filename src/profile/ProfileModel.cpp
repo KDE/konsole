@@ -142,7 +142,7 @@ bool ProfileModel::setData(const QModelIndex &idx, const QVariant &value, int ro
     if (idx.column() == SHORTCUT) {
         auto sequence = QKeySequence::fromString(value.toString());
         ProfileManager::instance()->setShortcut(profile, sequence);
-        emit dataChanged(idx, idx, {Qt::DisplayRole});
+        Q_EMIT dataChanged(idx, idx, {Qt::DisplayRole});
         return true;
     }
 
@@ -174,7 +174,7 @@ void ProfileModel::remove(QExplicitlySharedDataPointer<Profile> profile)
 void ProfileModel::setDefault(QExplicitlySharedDataPointer<Profile> profile)
 {
     Q_UNUSED(profile)
-    emit dataChanged(index(0, 0), index(0, COLUMNS-1), {Qt::DisplayRole});
+    Q_EMIT dataChanged(index(0, 0), index(0, COLUMNS-1), {Qt::DisplayRole});
 }
 
 void ProfileModel::update(QExplicitlySharedDataPointer<Profile> profile)

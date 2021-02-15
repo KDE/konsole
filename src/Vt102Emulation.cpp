@@ -96,7 +96,7 @@ void Vt102Emulation::reset()
         setCodec(LocaleCodec);
     }
 
-    emit resetCursorStyleRequest();
+    Q_EMIT resetCursorStyleRequest();
 
     bufferedUpdate();
 }
@@ -517,7 +517,7 @@ void Vt102Emulation::processSessionAttributeRequest(int tokenSize)
   if (value == QLatin1String("?")) {
       // pass terminator type indication here, because OSC response terminator
       // should match the terminator of OSC request.
-      emit sessionAttributeRequest(attribute, tokenBuffer[tokenSize]);
+      Q_EMIT sessionAttributeRequest(attribute, tokenBuffer[tokenSize]);
       return;
   }
 
@@ -530,7 +530,7 @@ void Vt102Emulation::updateSessionAttributes()
     QListIterator<int> iter(_pendingSessionAttributesUpdates.keys());
     while (iter.hasNext()) {
         int arg = iter.next();
-        emit sessionAttributeChanged(arg , _pendingSessionAttributesUpdates[arg]);
+        Q_EMIT sessionAttributeChanged(arg , _pendingSessionAttributesUpdates[arg]);
     }
     _pendingSessionAttributesUpdates.clear();
 }
@@ -653,7 +653,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
 
 // resize = \e[8;<row>;<col>t
     case token_csi_ps('t',   8) : setImageSize( p /*lines */, q /* columns */ );
-                               emit imageResizeRequest(QSize(q, p));
+                               Q_EMIT imageResizeRequest(QSize(q, p));
                                break;
 
 // change tab text color : \e[28;<color>t  color: 0-16,777,215
@@ -974,7 +974,7 @@ void Vt102Emulation::clearScreenAndSetColumns(int columnCount)
 
 void Vt102Emulation::sendString(const QByteArray& s)
 {
-    emit sendData(s);
+    Q_EMIT sendData(s);
 }
 
 void Vt102Emulation::reportCursorPosition()
@@ -1160,11 +1160,11 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         if ((modifiers &Qt::ControlModifier) != 0U) {
             switch (event->key()) {
             case Qt::Key_S:
-                emit flowControlKeyPressed(true);
+                Q_EMIT flowControlKeyPressed(true);
                 break;
             case Qt::Key_Q:
             case Qt::Key_C: // cancel flow control
-                emit flowControlKeyPressed(false);
+                Q_EMIT flowControlKeyPressed(false);
                 break;
             }
         }
@@ -1228,7 +1228,7 @@ void Vt102Emulation::sendKeyEvent(QKeyEvent *event)
         }
 
         if (!isReadOnly) {
-            emit sendData(textToSend);
+            Q_EMIT sendData(textToSend);
         }
     } else {
         if (!isReadOnly) {
@@ -1412,14 +1412,14 @@ void Vt102Emulation::setMode(int m)
     case MODE_Mouse1001:
     case MODE_Mouse1002:
     case MODE_Mouse1003:
-        emit programRequestsMouseTracking(true);
+        Q_EMIT programRequestsMouseTracking(true);
         break;
     case MODE_Mouse1007:
-        emit enableAlternateScrolling(true);
+        Q_EMIT enableAlternateScrolling(true);
         break;
 
     case MODE_BracketedPaste:
-        emit programBracketedPasteModeChanged(true);
+        Q_EMIT programBracketedPasteModeChanged(true);
         break;
 
     case MODE_AppScreen:
@@ -1449,14 +1449,14 @@ void Vt102Emulation::resetMode(int m)
     case MODE_Mouse1001:
     case MODE_Mouse1002:
     case MODE_Mouse1003:
-        emit programRequestsMouseTracking(false);
+        Q_EMIT programRequestsMouseTracking(false);
         break;
     case MODE_Mouse1007:
-        emit enableAlternateScrolling(false);
+        Q_EMIT enableAlternateScrolling(false);
         break;
 
     case MODE_BracketedPaste:
-        emit programBracketedPasteModeChanged(false);
+        Q_EMIT programBracketedPasteModeChanged(false);
         break;
 
     case MODE_AppScreen:

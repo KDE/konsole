@@ -332,10 +332,10 @@ TerminalDisplay::TerminalDisplay(QWidget* parent)
 
     auto ldrawBackground = [this](QPainter &painter,
             const QRect &rect, const QColor &backgroundColor, bool useOpacitySetting) {
-        emit drawBackground(painter, rect, backgroundColor, useOpacitySetting);
+        Q_EMIT drawBackground(painter, rect, backgroundColor, useOpacitySetting);
     };
     auto ldrawContents = [this](QPainter &paint, const QRect &rect, bool friendly) {
-        emit drawContents(_image, paint, rect, friendly, _imageSize, _bidiEnabled, _lineProperties);
+        Q_EMIT drawContents(_image, paint, rect, friendly, _imageSize, _bidiEnabled, _lineProperties);
     };
     auto lgetBackgroundColor = [this]() {
         return _terminalColor->backgroundColor();
@@ -734,7 +734,7 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
 
     for (const QRect &rect : region) {
         dirtyImageRegion += widgetToImage(rect);
-        emit drawBackground(paint, rect, _terminalColor->backgroundColor(), true /* use opacity setting */);
+        Q_EMIT drawBackground(paint, rect, _terminalColor->backgroundColor(), true /* use opacity setting */);
     }
 
     if (_displayVerticalLine) {
@@ -751,13 +751,13 @@ void TerminalDisplay::paintEvent(QPaintEvent* pe)
     paint.setRenderHint(QPainter::TextAntialiasing, _terminalFont->antialiasText());
 
     for (const QRect &rect : qAsConst(dirtyImageRegion)) {
-        emit drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _lineProperties);
+        Q_EMIT drawContents(_image, paint, rect, false, _imageSize, _bidiEnabled, _lineProperties);
     }
-    emit drawCurrentResultRect(paint, _searchResultRect);
+    Q_EMIT drawCurrentResultRect(paint, _searchResultRect);
     if (_scrollBar->highlightScrolledLines().isEnabled()) {
-        emit highlightScrolledLines(paint, _scrollBar->highlightScrolledLines().isTimerActive(), _scrollBar->highlightScrolledLines().rect());
+        Q_EMIT highlightScrolledLines(paint, _scrollBar->highlightScrolledLines().isTimerActive(), _scrollBar->highlightScrolledLines().rect());
     }
-    emit drawInputMethodPreeditString(paint, preeditRect(), _inputMethodData, _image);
+    Q_EMIT drawInputMethodPreeditString(paint, preeditRect(), _inputMethodData, _image);
     paintFilters(paint);
 
     const bool drawDimmed = _dimWhenInactive && !hasFocus();
@@ -1008,7 +1008,7 @@ void TerminalDisplay::updateImageSize()
 
     if (_resizing) {
         showResizeNotification();
-        emit changedContentSizeSignal(_contentRect.height(), _contentRect.width()); // expose resizeEvent
+        Q_EMIT changedContentSizeSignal(_contentRect.height(), _contentRect.width()); // expose resizeEvent
     }
 
     _resizing = false;
@@ -1113,11 +1113,11 @@ QSize TerminalDisplay::sizeHint() const
 void TerminalDisplay::showEvent(QShowEvent*)
 {
     propagateSize();
-    emit changedContentSizeSignal(_contentRect.height(), _contentRect.width());
+    Q_EMIT changedContentSizeSignal(_contentRect.height(), _contentRect.width());
 }
 void TerminalDisplay::hideEvent(QHideEvent*)
 {
-    emit changedContentSizeSignal(_contentRect.height(), _contentRect.width());
+    Q_EMIT changedContentSizeSignal(_contentRect.height(), _contentRect.width());
 }
 
 void TerminalDisplay::setMargin(int margin)
@@ -1228,17 +1228,17 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
                 _iPntSel = _pntSel = pos;
                 _actSel = 1; // left mouse button pressed but nothing selected yet.
             } else if (_usesMouseTracking && !_readOnly) {
-                    emit mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+                    Q_EMIT mouseSignal(0, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
             }
         }
     } else if (ev->button() == Qt::MiddleButton) {
         processMidButtonClick(ev);
     } else if (ev->button() == Qt::RightButton) {
         if (!_usesMouseTracking || ((ev->modifiers() & Qt::ShiftModifier) != 0u)) {
-            emit configureRequest(ev->pos());
+            Q_EMIT configureRequest(ev->pos());
         } else {
             if(!_readOnly) {
-                emit mouseSignal(2, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+                Q_EMIT mouseSignal(2, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
             }
         }
     }
@@ -1288,7 +1288,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
             button = 2;
         }
 
-        emit mouseSignal(button,
+        Q_EMIT mouseSignal(button,
                          charColumn + 1,
                          charLine + 1 + _scrollBar->value() - _scrollBar->maximum(),
                          1);
@@ -1518,7 +1518,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
             //       applies here, too.
 
             if (_usesMouseTracking && !(ev->modifiers() & Qt::ShiftModifier)) {
-                emit mouseSignal(0,
+                Q_EMIT mouseSignal(0,
                                  charColumn + 1,
                                  charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 2);
             }
@@ -1529,7 +1529,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
     if (_usesMouseTracking &&
             (ev->button() == Qt::RightButton || ev->button() == Qt::MiddleButton) &&
             !(ev->modifiers() & Qt::ShiftModifier)) {
-        emit mouseSignal(ev->button() == Qt::MiddleButton ? 1 : 2,
+        Q_EMIT mouseSignal(ev->button() == Qt::MiddleButton ? 1 : 2,
                          charColumn + 1,
                          charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
                          2);
@@ -1584,7 +1584,7 @@ void TerminalDisplay::processMidButtonClick(QMouseEvent* ev)
     } else {
         if(!_readOnly) {
             auto [charLine, charColumn] = getCharacterPosition(ev->pos(), !_usesMouseTracking);
-            emit mouseSignal(1, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
+            Q_EMIT mouseSignal(1, charColumn + 1, charLine + 1 + _scrollBar->value() - _scrollBar->maximum() , 0);
         }
     }
 }
@@ -1613,7 +1613,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
         if(!_readOnly) {
             // Send just _ONE_ click event, since the first click of the double click
             // was already sent by the click handler
-            emit mouseSignal(0, charColumn + 1,
+            Q_EMIT mouseSignal(0, charColumn + 1,
                              charLine + 1 + _scrollBar->value() - _scrollBar->maximum(),
                              0);  // left button
         }
@@ -1717,7 +1717,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
 
             for (int i = 0; i < abs(lines); i++) {
                 _screenWindow->screen()->setCurrentTerminalDisplay(this);
-                emit keyPressedSignal(&keyEvent);
+                Q_EMIT keyPressedSignal(&keyEvent);
             }
         } else if (_usesMouseTracking) {
             // terminal program wants notification of mouse activity
@@ -1726,7 +1726,7 @@ void TerminalDisplay::wheelEvent(QWheelEvent* ev)
             const int steps = _scrollWheelState.consumeLegacySteps(ScrollState::DEFAULT_ANGLE_SCROLL_LINE);
             const int button = (steps > 0) ? 4 : 5;
             for (int i = 0; i < abs(steps); ++i) {
-                emit mouseSignal(button,
+                Q_EMIT mouseSignal(button,
                                  charColumn + 1,
                                  charLine + 1 + _scrollBar->value() - _scrollBar->maximum() ,
                                  0);
@@ -2232,7 +2232,7 @@ void TerminalDisplay::doPaste(QString text, bool appendReturn)
         }
         // perform paste by simulating keypress events
         QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
-        emit keyPressedSignal(&e);
+        Q_EMIT keyPressedSignal(&e);
     }
 }
 
@@ -2344,7 +2344,7 @@ void TerminalDisplay::inputMethodEvent(QInputMethodEvent* event)
 {
     if (!event->commitString().isEmpty()) {
         QKeyEvent keyEvent(QEvent::KeyPress, 0, Qt::NoModifier, event->commitString());
-        emit keyPressedSignal(&keyEvent);
+        Q_EMIT keyPressedSignal(&keyEvent);
     }
 
     if (!_readOnly && isCursorOnDisplay()) {
@@ -2511,7 +2511,7 @@ void TerminalDisplay::keyPressEvent(QKeyEvent* event)
         }
     }
 
-    emit keyPressedSignal(event);
+    Q_EMIT keyPressedSignal(event);
 
 #ifndef QT_NO_ACCESSIBILITY
     if (!_readOnly) {
@@ -2559,7 +2559,7 @@ bool TerminalDisplay::handleShortcutOverrideEvent(QKeyEvent* keyEvent)
         }
         if (modifierCount < 2) {
             bool override = false;
-            emit overrideShortcutCheck(keyEvent, override);
+            Q_EMIT overrideShortcutCheck(keyEvent, override);
             if (override) {
                 keyEvent->accept();
                 return true;
@@ -2615,7 +2615,7 @@ void TerminalDisplay::contextMenuEvent(QContextMenuEvent* event)
 {
     // the logic for the mouse case is within MousePressEvent()
     if (event->reason() != QContextMenuEvent::Mouse) {
-        emit configureRequest(mapFromGlobal(QCursor::pos()));
+        Q_EMIT configureRequest(mapFromGlobal(QCursor::pos()));
     }
 }
 
@@ -2728,7 +2728,7 @@ void setupCdToUrlAction(const QString& dropText, const QUrl& url, QList<QAction*
     QAction* cdAction = new QAction(i18n("Change &Directory To"), display);
     const QByteArray triggerText = QString(QLatin1String(" cd ") + dropText + QLatin1Char('\n')).toLocal8Bit();
     display->connect(cdAction, &QAction::triggered, display,  [display, triggerText]{
-        emit display->sendStringToEmu(triggerText);} );
+        Q_EMIT display->sendStringToEmu(triggerText);} );
     additionalActions.append(cdAction);
 }
 
@@ -2781,7 +2781,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
 
     if (mimeData->hasFormat(QStringLiteral("text/plain")) ||
             mimeData->hasFormat(QStringLiteral("text/uri-list"))) {
-        emit sendStringToEmu(dropText.toLocal8Bit());
+        Q_EMIT sendStringToEmu(dropText.toLocal8Bit());
     }
 
     setFocus(Qt::MouseFocusReason);

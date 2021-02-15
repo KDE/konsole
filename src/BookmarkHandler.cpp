@@ -60,12 +60,12 @@ BookmarkHandler::~BookmarkHandler() = default;
 
 void BookmarkHandler::openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers)
 {
-    emit openUrl(bm.url());
+    Q_EMIT openUrl(bm.url());
 }
 
 void BookmarkHandler::openFolderinTabs(const KBookmarkGroup &group)
 {
-    emit openUrls(group.groupUrlList());
+    Q_EMIT openUrls(group.groupUrlList());
 }
 
 bool BookmarkHandler::enableOption(BookmarkOption option) const

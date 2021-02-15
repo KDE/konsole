@@ -39,7 +39,7 @@ void ScreenWindow::setScreen(Screen *screen)
         return;
     }
 
-    emit screenAboutToChange();
+    Q_EMIT screenAboutToChange();
     _screen = screen;
 }
 
@@ -139,7 +139,7 @@ void ScreenWindow::setSelectionStart(int column, int line, bool columnMode)
     _screen->setSelectionStart(column, line + currentLine(), columnMode);
 
     _bufferNeedsUpdate = true;
-    emit selectionChanged();
+    Q_EMIT selectionChanged();
 }
 
 void ScreenWindow::setSelectionEnd(int column, int line)
@@ -147,7 +147,7 @@ void ScreenWindow::setSelectionEnd(int column, int line)
     _screen->setSelectionEnd(column, line + currentLine());
 
     _bufferNeedsUpdate = true;
-    emit selectionChanged();
+    Q_EMIT selectionChanged();
 }
 
 void ScreenWindow::setSelectionByLineRange(int start, int end)
@@ -158,7 +158,7 @@ void ScreenWindow::setSelectionByLineRange(int start, int end)
     _screen->setSelectionEnd(windowColumns(), end);
 
     _bufferNeedsUpdate = true;
-    emit selectionChanged();
+    Q_EMIT selectionChanged();
 }
 
 bool ScreenWindow::isSelected(int column, int line)
@@ -170,7 +170,7 @@ void ScreenWindow::clearSelection()
 {
     _screen->clearSelection();
 
-    emit selectionChanged();
+    Q_EMIT selectionChanged();
 }
 
 void ScreenWindow::setWindowLines(int lines)
@@ -226,7 +226,7 @@ void ScreenWindow::setCurrentResultLine(int line)
     }
 
     _currentResultLine = line;
-    emit currentResultLineChanged();
+    Q_EMIT currentResultLineChanged();
 }
 
 void ScreenWindow::scrollBy(RelativeScrollMode mode, int amount, bool fullPage)
@@ -261,7 +261,7 @@ void ScreenWindow::scrollTo(int line)
 
     _bufferNeedsUpdate = true;
 
-    emit scrolled(_currentLine);
+    Q_EMIT scrolled(_currentLine);
 }
 
 void ScreenWindow::setTrackOutput(bool trackOutput)
@@ -328,5 +328,5 @@ void ScreenWindow::notifyOutputChanged()
 
     _bufferNeedsUpdate = true;
 
-    emit outputChanged();
+    Q_EMIT outputChanged();
 }

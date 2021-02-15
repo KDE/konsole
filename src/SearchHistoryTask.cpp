@@ -139,7 +139,7 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session ,
 
                 highlightResult(window, findPos);
 
-                emit completed(true);
+                Q_EMIT completed(true);
 
                 return;
             }
@@ -154,7 +154,7 @@ void SearchHistoryTask::executeOnScreenWindow(const QPointer<Session> &session ,
         window->notifyOutputChanged();
     }
 
-    emit completed(false);
+    Q_EMIT completed(false);
 }
 void SearchHistoryTask::highlightResult(const ScreenWindowPtr& window , int findPos)
 {

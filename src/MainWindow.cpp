@@ -547,7 +547,7 @@ void MainWindow::setFocus()
 void MainWindow::newWindow()
 {
     Profile::Ptr defaultProfile = ProfileManager::instance()->defaultProfile();
-    emit newWindowRequest(defaultProfile, activeSessionDir());
+    Q_EMIT newWindowRequest(defaultProfile, activeSessionDir());
 }
 
 bool MainWindow::queryClose()

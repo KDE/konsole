@@ -450,7 +450,7 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
         initFallbackProfile();
     } else {
         // notify the world about the change
-        emit profileChanged(profile);
+        Q_EMIT profileChanged(profile);
     }
 }
 
@@ -462,7 +462,7 @@ void ProfileManager::addProfile(const Profile::Ptr &profile)
 
     _profiles.insert(profile);
 
-    emit profileAdded(profile);
+    Q_EMIT profileAdded(profile);
 }
 
 bool ProfileManager::deleteProfile(Profile::Ptr profile)
@@ -495,7 +495,7 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
         setDefaultProfile(existingProfiles.at(0));
     }
 
-    emit profileRemoved(profile);
+    Q_EMIT profileRemoved(profile);
 
     return true;
 }
@@ -589,7 +589,7 @@ void ProfileManager::setShortcut(Profile::Ptr profile ,
     // have a path yet
     _shortcuts.insert(keySequence, data);
 
-    emit shortcutChanged(profile, keySequence);
+    Q_EMIT shortcutChanged(profile, keySequence);
 }
 
 QKeySequence ProfileManager::shortcut(Profile::Ptr profile) const

@@ -108,14 +108,14 @@ void ConfigurationDialog::updateButtons()
     bool is_default = _manager->isDefault() && _groupManager->isDefault();
     setRestoreDefaultsButtonEnabled(!is_default);
 
-    emit widgetModified();
+    Q_EMIT widgetModified();
     onlyOnce = false;
 }
 
 void ConfigurationDialog::settingsChangedSlot()
 {
     updateButtons();
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 void ConfigurationDialog::setApplyButtonEnabled(bool enabled)

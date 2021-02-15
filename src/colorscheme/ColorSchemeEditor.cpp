@@ -176,7 +176,7 @@ void ColorSchemeEditor::editColorItem(QTableWidgetItem *item)
 
         _colors->setColorTableEntry(colorSchemeRow, color);
 
-        emit colorsChanged(_colors);
+        Q_EMIT colorsChanged(_colors);
     }
 }
 
@@ -326,5 +326,5 @@ bool ColorSchemeEditor::isNewScheme() const
 
 void ColorSchemeEditor::saveColorScheme()
 {
-    emit colorSchemeSaveRequested(colorScheme(), _isNewScheme);
+    Q_EMIT colorSchemeSaveRequested(colorScheme(), _isNewScheme);
 }

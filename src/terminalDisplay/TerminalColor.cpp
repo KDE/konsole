@@ -139,7 +139,7 @@ namespace Konsole
 
         widget->setPalette(palette);
 
-        emit onPalette(palette);
+        Q_EMIT onPalette(palette);
         
         widget->update();
     }

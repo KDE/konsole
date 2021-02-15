@@ -45,7 +45,7 @@ void DetachableTabBar::middleMouseButtonClickAt(const QPoint& pos)
     tabId = tabAt(pos);
 
     if (tabId != -1) {
-        emit closeTab(tabId);
+        Q_EMIT closeTab(tabId);
     }
 }
 
@@ -94,7 +94,7 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
 
                                 tabId = tabAt(event->pos());
                                 if (tabId == -1) {
-                                    emit newTabRequest();
+                                    Q_EMIT newTabRequest();
                                 }
                                 break;
         case Qt::LeftButton: _containers = window()->findChildren<Konsole::TabbedViewContainer*>(); break;
@@ -110,11 +110,11 @@ void DetachableTabBar::mouseReleaseEvent(QMouseEvent *event)
     auto widgetAtPos = qApp->topLevelAt(event->globalPos());
     if (widgetAtPos == nullptr) {
         if (count() != 1) {
-            emit detachTab(currentIndex());
+            Q_EMIT detachTab(currentIndex());
         }
     } else if (window() != widgetAtPos->window()) {
         if (_containers.size() == 1 || count() > 1) {
-            emit moveTabToWindow(currentIndex(), widgetAtPos);
+            Q_EMIT moveTabToWindow(currentIndex(), widgetAtPos);
         }
     }
 }

@@ -71,7 +71,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(tabBar(), &QTabBar::customContextMenuRequested, this,
         &Konsole::TabbedViewContainer::openTabContextMenu);
     connect(tabBarWidget, &DetachableTabBar::detachTab, this, [this](int idx) {
-        emit detachTab(idx);
+        Q_EMIT detachTab(idx);
     });
     connect(tabBarWidget, &DetachableTabBar::closeTab,
         this, &TabbedViewContainer::closeTerminalTab);
@@ -332,7 +332,7 @@ void TabbedViewContainer::addView(TerminalDisplay *view)
     connect(viewSplitter, &ViewSplitter::terminalDisplayDropped, this, &TabbedViewContainer::terminalDisplayDropped);
 
     setCurrentIndex(index);
-    emit viewAdded(view);
+    Q_EMIT viewAdded(view);
 }
 
 void TabbedViewContainer::splitView(TerminalDisplay *view, Qt::Orientation orientation)
@@ -390,7 +390,7 @@ void TabbedViewContainer::viewDestroyed(QObject *view)
 void TabbedViewContainer::forgetView()
 {
     if (count() == 0) {
-        emit empty(this);
+        Q_EMIT empty(this);
     }
 }
 
@@ -432,7 +432,7 @@ void TabbedViewContainer::tabDoubleClicked(int index)
     if (index >= 0) {
         renameTab(index);
     } else {
-        emit newViewRequest();
+        Q_EMIT newViewRequest();
     }
 }
 
@@ -477,7 +477,7 @@ void TabbedViewContainer::currentTabChanged(int index)
         setTabActivity(index, false);
         _tabIconState[splitview].notification = Session::NoNotification;
         if (view != nullptr) {
-            emit activeViewChanged(view);
+            Q_EMIT activeViewChanged(view);
             updateIcon(view->sessionController());
         }
     } else {
@@ -533,7 +533,7 @@ void TabbedViewContainer::updateColor(ViewProperties *item)
     auto topLevelSplitter = qobject_cast<ViewSplitter*>(controller->view()->parentWidget())->getToplevelSplitter();
     const int index = indexOf(topLevelSplitter);
 
-    emit setColor(index, item->color());
+    Q_EMIT setColor(index, item->color());
 }
 
 void TabbedViewContainer::updateIcon(ViewProperties *item)
@@ -650,7 +650,7 @@ void TabbedViewContainer::currentSessionControllerChanged(SessionController *con
 }
 
 void TabbedViewContainer::closeTerminalTab(int idx) {
-    emit removeColor(idx);
+    Q_EMIT removeColor(idx);
     //TODO: This for should probably go to the ViewSplitter
     for (auto terminal : viewSplitterAt(idx)->findChildren<TerminalDisplay*>()) {
         terminal->sessionController()->closeSession();

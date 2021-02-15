@@ -288,12 +288,12 @@ void Part::overrideTerminalShortcut(QKeyEvent *event, bool &override)
 
     // override all shortcuts in the embedded terminal by default
     override = true;
-    emit overrideShortcut(event, override);
+    Q_EMIT overrideShortcut(event, override);
 }
 
 void Part::activeViewTitleChanged(ViewProperties *properties)
 {
-    emit setWindowCaption(properties->title());
+    Q_EMIT setWindowCaption(properties->title());
 }
 
 void Part::showManageProfilesDialog(QWidget *parent)
@@ -348,14 +348,14 @@ void Part::changeSessionSettings(const QString &text)
 bool Part::openUrl(const QUrl &url)
 {
     if (KParts::ReadOnlyPart::url() == url) {
-        emit completed();
+        Q_EMIT completed();
         return true;
     }
 
     setUrl(url);
-    emit setWindowCaption(url.toDisplayString(QUrl::PreferLocalFile));
+    Q_EMIT setWindowCaption(url.toDisplayString(QUrl::PreferLocalFile));
     ////qDebug() << "Set Window Caption to " << url.pathOrUrl();
-    emit started(nullptr);
+    Q_EMIT started(nullptr);
 
     if (url.isLocalFile()) {
         showShellInDir(url.path());
@@ -363,7 +363,7 @@ bool Part::openUrl(const QUrl &url)
         showShellInDir(QDir::homePath());
     }
 
-    emit completed();
+    Q_EMIT completed();
     return true;
 }
 
@@ -412,9 +412,9 @@ bool Part::isBlurEnabled()
 void Part::notificationChanged(Session::Notification notification, bool enabled)
 {
     if (notification == Session::Notification::Silence && enabled) {
-        emit silenceDetected();
+        Q_EMIT silenceDetected();
     } else if (notification == Session::Notification::Activity && enabled) {
-        emit activityDetected();
+        Q_EMIT activityDetected();
     }
 }
 

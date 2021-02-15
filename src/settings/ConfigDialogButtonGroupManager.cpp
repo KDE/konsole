@@ -138,7 +138,7 @@ void ConfigDialogButtonGroupManager::updateSettings()
     }
     if(updateConfig) {
         _config->save();
-        emit settingsChanged();
+        Q_EMIT settingsChanged();
     }
 }
 
@@ -159,7 +159,7 @@ void ConfigDialogButtonGroupManager::setButtonState(QAbstractButton *button, boo
         return;
     }
 
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 // Returns configuration item associated with the group

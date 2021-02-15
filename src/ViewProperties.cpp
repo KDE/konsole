@@ -41,7 +41,7 @@ QString ViewProperties::currentDir() const
 
 void ViewProperties::fireActivity()
 {
-    emit activity(this);
+    Q_EMIT activity(this);
 }
 
 void ViewProperties::rename()
@@ -52,7 +52,7 @@ void ViewProperties::setTitle(const QString &title)
 {
     if (title != _title) {
         _title = title;
-        emit titleChanged(this);
+        Q_EMIT titleChanged(this);
     }
 }
 
@@ -63,7 +63,7 @@ void ViewProperties::setIcon(const QIcon &icon)
 
     if (icon.cacheKey() != _icon.cacheKey()) {
         _icon = icon;
-        emit iconChanged(this);
+        Q_EMIT iconChanged(this);
     }
 }
 
@@ -71,7 +71,7 @@ void ViewProperties::setColor(const QColor &color)
 {
     if (color != _color) {
         _color = color;
-        emit colorChanged(this);
+        Q_EMIT colorChanged(this);
     }
 }
 

@@ -118,7 +118,7 @@ Session::Session(QObject* parent) :
 
     connect(_emulation, &Konsole::Emulation::sessionAttributeChanged, this, &Konsole::Session::setSessionAttribute);
     connect(_emulation, &Konsole::Emulation::bell, this, [this]() {
-        emit bellRequest(i18n("Bell in session '%1'", _nameTitle));
+        Q_EMIT bellRequest(i18n("Bell in session '%1'", _nameTitle));
         this->setPendingNotification(Notification::Bell);
     });
     connect(_emulation, &Konsole::Emulation::zmodemDownloadDetected, this, &Konsole::Session::fireZModemDownloadDetected);
@@ -249,7 +249,7 @@ void Session::setCodec(QTextCodec* codec)
 
     emulation()->setCodec(codec);
 
-    emit sessionCodecChanged(codec);
+    Q_EMIT sessionCodecChanged(codec);
 }
 
 bool Session::setCodec(const QByteArray& name)
@@ -304,7 +304,7 @@ void Session::updateWorkingDirectory()
     const QString currentDir = _sessionProcessInfo->validCurrentDir();
     if (currentDir != _currentWorkingDir) {
         _currentWorkingDir = currentDir;
-        emit currentDirectoryChanged(_currentWorkingDir);
+        Q_EMIT currentDirectoryChanged(_currentWorkingDir);
     }
 }
 
@@ -522,7 +522,7 @@ void Session::run()
 
     _shellProcess->setWriteable(false);  // We are reachable via kwrited.
 
-    emit started();
+    Q_EMIT started();
 }
 
 void Session::setSessionAttribute(int what, const QString& caption)
@@ -550,9 +550,9 @@ void Session::setSessionAttribute(int what, const QString& caption)
         QColor color = QColor(colorString);
         if (color.isValid()) {
             if (what == TextColor) {
-                emit changeForegroundColorRequest(color);
+                Q_EMIT changeForegroundColorRequest(color);
             } else {
-                emit changeBackgroundColorRequest(color);
+                Q_EMIT changeBackgroundColorRequest(color);
             }
         }
     }
@@ -579,17 +579,17 @@ void Session::setSessionAttribute(int what, const QString& caption)
 
     if (what == CurrentDirectory) {
         _reportedWorkingUrl = QUrl::fromUserInput(caption);
-        emit currentDirectoryChanged(currentWorkingDirectory());
+        Q_EMIT currentDirectoryChanged(currentWorkingDirectory());
         modified = true;
     }
 
     if (what == ProfileChange) {
-        emit profileChangeCommandReceived(caption);
+        Q_EMIT profileChangeCommandReceived(caption);
         return;
     }
 
     if (modified) {
-        emit sessionAttributeChanged();
+        Q_EMIT sessionAttributeChanged();
     }
 }
 
@@ -699,7 +699,7 @@ void Session::changeTabTextColor(int i)
 void Session::onPrimaryScreenInUse(bool use)
 {
     _isPrimaryScreen = use;
-    emit primaryScreenInUse(use);
+    Q_EMIT primaryScreenInUse(use);
 }
 
 bool Session::isPrimaryScreen()
@@ -712,11 +712,11 @@ void Session::sessionAttributeRequest(int id, uint terminator)
     switch (id) {
         case TextColor:
             // Get 'TerminalDisplay' (_view) foreground color
-            emit getForegroundColor(terminator);
+            Q_EMIT getForegroundColor(terminator);
             break;
         case BackgroundColor:
             // Get 'TerminalDisplay' (_view) background color
-            emit getBackgroundColor(terminator);
+            Q_EMIT getBackgroundColor(terminator);
             break;
     }
 }
@@ -862,7 +862,7 @@ bool Session::closeInNormalWay()
     // 3). the user closes the tab explicitly
     //
     if (!isRunning()) {
-        emit finished();
+        Q_EMIT finished();
         return true;
     }
 
@@ -963,12 +963,12 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
 
     if (!_autoClose) {
         _userTitle = i18nc("@info:shell This session is done", "Finished");
-        emit sessionAttributeChanged();
+        Q_EMIT sessionAttributeChanged();
         return;
     }
 
     if (_closePerUserRequest) {
-        emit finished();
+        Q_EMIT finished();
         return;
     }
 
@@ -992,7 +992,7 @@ void Session::done(int exitCode, QProcess::ExitStatus exitStatus)
         message = i18n("Program '%1' crashed.", _program);
         terminalWarning(message);
     } else {
-        emit finished();
+        Q_EMIT finished();
     }
 }
 
@@ -1044,7 +1044,7 @@ void Session::setTitle(TitleRole role , const QString& newTitle)
             _displayTitle = newTitle;
         }
 
-        emit sessionAttributeChanged();
+        Q_EMIT sessionAttributeChanged();
     }
 }
 
@@ -1246,7 +1246,7 @@ void Session::setIconName(const QString& iconName)
 {
     if (iconName != _iconName) {
         _iconName = iconName;
-        emit sessionAttributeChanged();
+        Q_EMIT sessionAttributeChanged();
     }
 }
 
@@ -1365,7 +1365,7 @@ void Session::setFlowControlEnabled(bool enabled)
         _shellProcess->setFlowControlEnabled(_flowControlEnabled);
     }
 
-    emit flowControlEnabledChanged(enabled);
+    Q_EMIT flowControlEnabledChanged(enabled);
 }
 bool Session::flowControlEnabled() const
 {
@@ -1516,7 +1516,7 @@ void Session::setSize(const QSize& size)
         return;
     }
 
-    emit resizeRequest(size);
+    Q_EMIT resizeRequest(size);
 }
 
 QSize Session::preferredSize() const
@@ -1730,7 +1730,7 @@ void Session::setPendingNotification(Session::Notification notification, bool en
 {
     if(enable != _activeNotifications.testFlag(notification)) {
         _activeNotifications.setFlag(notification, enable);
-        emit notificationsChanged(notification, enable);
+        Q_EMIT notificationsChanged(notification, enable);
     }
 }
 
@@ -1772,14 +1772,14 @@ void Session::setReadOnly(bool readOnly)
 
         // Needed to update the tab icons and all
         // attached views.
-        emit readOnlyChanged();
+        Q_EMIT readOnlyChanged();
     }
 }
 
 void Session::setColor(const QColor &color)
 {
     _tabColor = color;
-    emit sessionAttributeChanged();
+    Q_EMIT sessionAttributeChanged();
 }
 
 QColor Session::color() const

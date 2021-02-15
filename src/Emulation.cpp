@@ -87,13 +87,13 @@ ScreenWindow *Emulation::createWindow()
 
 void Emulation::checkScreenInUse()
 {
-    emit primaryScreenInUse(_currentScreen == _screen[0]);
+    Q_EMIT primaryScreenInUse(_currentScreen == _screen[0]);
 }
 
 void Emulation::checkSelectedText()
 {
     QString text = _currentScreen->selectedText(Screen::PreserveLineBreaks);
-    emit selectionChanged(text);
+    Q_EMIT selectionChanged(text);
 }
 
 Emulation::~Emulation()
@@ -114,7 +114,7 @@ void Emulation::setPeekPrimary(const bool doPeek)
     }
     _peekingPrimary = doPeek;
     setScreenInternal(doPeek ? 0 : _activeScreenIndex);
-    emit outputChanged();
+    Q_EMIT outputChanged();
 }
 
 void Emulation::setScreen(int index)
@@ -164,7 +164,7 @@ void Emulation::setCodec(const QTextCodec *codec)
         delete _decoder;
         _decoder = _codec->makeDecoder();
 
-        emit useUtf8Request(utf8());
+        Q_EMIT useUtf8Request(utf8());
     } else {
         setCodec(LocaleCodec);
     }
@@ -211,7 +211,7 @@ void Emulation::receiveChar(uint c)
         _currentScreen->toStartOfLine();
         break;
     case 0x07:
-        emit bell();
+        Q_EMIT bell();
         break;
     default:
         _currentScreen->displayCharacter(c);
@@ -225,7 +225,7 @@ void Emulation::sendKeyEvent(QKeyEvent *ev)
         // A block of text
         // Note that the text is proper unicode.
         // We should do a conversion here
-        emit sendData(ev->text().toLocal8Bit());
+        Q_EMIT sendData(ev->text().toLocal8Bit());
     }
 }
 
@@ -244,9 +244,9 @@ void Emulation::receiveData(const char *text, int length)
     for (int i = 0; i < length - 4; i++) {
         if (text[i] == '\030') {
             if (qstrncmp(text + i + 1, "B00", 3) == 0) {
-                emit zmodemDownloadDetected();
+                Q_EMIT zmodemDownloadDetected();
             } else if (qstrncmp(text + i + 1, "B01", 3) == 0) {
-                emit zmodemUploadDetected();
+                Q_EMIT zmodemUploadDetected();
             }
         }
     }
@@ -268,7 +268,7 @@ void Emulation::showBulk()
     _bulkTimer1.stop();
     _bulkTimer2.stop();
 
-    emit outputChanged();
+    Q_EMIT outputChanged();
 
     _currentScreen->resetScrolledLines();
     _currentScreen->resetDroppedLines();
@@ -311,13 +311,13 @@ void Emulation::setImageSize(int lines, int columns)
         // SIGNAL(imageSizeChange()), even if the new size is the same as the
         // current size.  See #176902
         if (!_imageSizeInitialized) {
-            emit imageSizeChanged(lines, columns);
+            Q_EMIT imageSizeChanged(lines, columns);
         }
     } else {
         _screen[0]->resizeImage(lines, columns);
         _screen[1]->resizeImage(lines, columns);
 
-        emit imageSizeChanged(lines, columns);
+        Q_EMIT imageSizeChanged(lines, columns);
 
         bufferedUpdate();
     }
@@ -325,7 +325,7 @@ void Emulation::setImageSize(int lines, int columns)
     if (!_imageSizeInitialized) {
         _imageSizeInitialized = true;
 
-        emit imageSizeInitialized();
+        Q_EMIT imageSizeInitialized();
     }
 }
 

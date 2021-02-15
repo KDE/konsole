@@ -398,7 +398,7 @@ void ViewManager::detachActiveView()
         auto newSplitter = new ViewSplitter();
         newSplitter->addTerminalDisplay(terminal, Qt::Horizontal);
         QHash<TerminalDisplay*, Session*> detachedSessions = forgetAll(newSplitter);
-        emit terminalsDetached(newSplitter, detachedSessions);
+        Q_EMIT terminalsDetached(newSplitter, detachedSessions);
         focusAnotherTerminal(activeSplitter->getToplevelSplitter());
         toggleActionsBasedOnState();
     }
@@ -414,7 +414,7 @@ void ViewManager::detachTab(int tabIdx)
 {
     ViewSplitter* splitter = _viewContainer->viewSplitterAt(tabIdx);
     QHash<TerminalDisplay*, Session*> detachedSessions = forgetAll(_viewContainer->viewSplitterAt(tabIdx));
-    emit terminalsDetached(splitter, detachedSessions);
+    Q_EMIT terminalsDetached(splitter, detachedSessions);
 }
 
 QHash<TerminalDisplay*, Session*> ViewManager::forgetAll(ViewSplitter* splitter) {
@@ -489,7 +489,7 @@ void ViewManager::sessionFinished()
     if ((!_pluggedController.isNull()) && (_pluggedController->session() == session)) {
         // This is needed to remove this controller from factory() in
         // order to prevent BUG: 185466 - disappearing menu popup
-        emit unplugController(_pluggedController);
+        Q_EMIT unplugController(_pluggedController);
     }
 
     if (!_sessionMap.empty()) {
@@ -621,7 +621,7 @@ void ViewManager::controllerChanged(SessionController *controller)
     updateTerminalDisplayHistory(controller->view());
 
     _pluggedController = controller;
-    emit activeViewChanged(controller);
+    Q_EMIT activeViewChanged(controller);
 }
 
 SessionController *ViewManager::activeViewController() const
@@ -748,7 +748,7 @@ void ViewManager::containerViewsChanged(TabbedViewContainer *container)
 {
     Q_UNUSED(container)
     // TODO: Verify that this is right.
-    emit viewPropertiesChanged(viewProperties());
+    Q_EMIT viewPropertiesChanged(viewProperties());
 }
 
 void ViewManager::viewDestroyed(QWidget *view)
@@ -774,7 +774,7 @@ void ViewManager::viewDestroyed(QWidget *view)
     // The below causes the menus  to be messed up
     // Only happens when using the tab bar close button
 //    if (_pluggedController)
-//        emit unplugController(_pluggedController);
+//        Q_EMIT unplugController(_pluggedController);
 }
 
 TerminalDisplay *ViewManager::createTerminalDisplay(Session *session)
@@ -807,8 +807,8 @@ void ViewManager::applyProfileToView(TerminalDisplay *view, const Profile::Ptr &
 {
     Q_ASSERT(profile);
     view->applyProfile(profile);
-    emit updateWindowIcon();
-    emit blurSettingChanged(view->colorScheme()->blur());
+    Q_EMIT updateWindowIcon();
+    Q_EMIT blurSettingChanged(view->colorScheme()->blur());
 }
 
 void ViewManager::updateViewsForSession(Session *session)

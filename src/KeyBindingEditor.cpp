@@ -306,10 +306,10 @@ void KeyBindingEditor::accept()
 
     const QString &currentTranslatorName = newTranslator->name();
 
-    emit updateKeyBindingsListRequest(currentTranslatorName);
+    Q_EMIT updateKeyBindingsListRequest(currentTranslatorName);
 
     if (currentTranslatorName == _currentProfileTranslator) {
-        emit updateTempProfileKeyBindingsRequest(Profile::KeyBindings, currentTranslatorName);
+        Q_EMIT updateTempProfileKeyBindingsRequest(Profile::KeyBindings, currentTranslatorName);
     }
 
     QDialog::accept();

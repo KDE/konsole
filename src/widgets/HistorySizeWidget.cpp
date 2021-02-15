@@ -87,7 +87,7 @@ HistorySizeWidget::~HistorySizeWidget()
 void HistorySizeWidget::buttonClicked(QAbstractButton *)
 {
     Enum::HistoryModeEnum selectedMode = mode();
-    emit historyModeChanged(selectedMode);
+    Q_EMIT historyModeChanged(selectedMode);
 }
 
 void HistorySizeWidget::setMode(Enum::HistoryModeEnum aMode)

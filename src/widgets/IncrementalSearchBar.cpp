@@ -165,7 +165,7 @@ IncrementalSearchBar::IncrementalSearchBar(QWidget *parent) :
 
 void IncrementalSearchBar::notifySearchChanged()
 {
-    emit searchChanged(searchText());
+    Q_EMIT searchChanged(searchText());
 }
 
 void IncrementalSearchBar::updateButtonsAccordingToReverseSearchSetting()
@@ -242,11 +242,11 @@ void IncrementalSearchBar::keyPressEvent(QKeyEvent *event)
 
     if (movementKeysToPassAlong.contains(event->key())
         && (event->modifiers() == Qt::ShiftModifier)) {
-        emit unhandledMovementKeyPressed(event);
+        Q_EMIT unhandledMovementKeyPressed(event);
     }
 
     if (event->key() == Qt::Key_Escape) {
-        emit closeClicked();
+        Q_EMIT closeClicked();
     }
 }
 
