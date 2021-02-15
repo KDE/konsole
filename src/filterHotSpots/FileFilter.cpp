@@ -92,6 +92,12 @@ QSharedPointer<HotSpot> FileFilter::newHotSpot(int startLine, int startColumn, i
         filename.chop(1);
     }
 
+    // '.' and '..' could be valid hotspots, but '..................' most likely isn't
+    static const QRegularExpression allDotRe{QRegularExpression::anchoredPattern(QStringLiteral("\\.{3}"))};
+    if (allDotRe.match(filename).hasMatch()) {
+        return nullptr;
+    }
+
     if (filename.startsWith(QLatin1String("[/"))) { // ctest error output
         filename.remove(0, 1);
     }
