@@ -96,7 +96,7 @@
               <string>Reset the selected color scheme settings to the default values</string>
              </property>
              <property name="text">
-              <string>Defaults</string>
+              <string>Reset</string>
              </property>
             </widget>
            </item>

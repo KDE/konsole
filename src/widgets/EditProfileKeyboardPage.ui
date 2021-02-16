@@ -102,7 +102,7 @@
            <string>Reset the selected key bindings scheme to its default values</string>
           </property>
           <property name="text">
-           <string>Defaults</string>
+           <string>Reset</string>
           </property>
          </widget>
         </item>
