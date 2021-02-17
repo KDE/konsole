@@ -163,9 +163,6 @@
          <property name="textFormat">
           <enum>Qt::PlainText</enum>
          </property>
-         <property name="buddy">
-          <cstring>chooseFontButton</cstring>
-         </property>
         </widget>
        </item>
        <item row="3" column="2">
