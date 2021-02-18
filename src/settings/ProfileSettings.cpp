@@ -40,6 +40,11 @@ ProfileSettings::ProfileSettings(QWidget* parent)
     populateTable();
 
     // setup buttons
+    newProfileButton->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
+    editProfileButton->setIcon(QIcon::fromTheme(QStringLiteral("document-edit")));
+    deleteProfileButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
+    setAsDefaultButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok-apply")));
+
     connect(newProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::createProfile);
     connect(editProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::editSelected);
     connect(deleteProfileButton, &QPushButton::clicked, this, &Konsole::ProfileSettings::deleteSelected);
