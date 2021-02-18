@@ -454,6 +454,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr &profile)
 
     _generalUi->dirSelectButton->setIcon(QIcon::fromTheme(QStringLiteral("folder-open")));
     _generalUi->iconSelectButton->setIcon(QIcon::fromTheme(profile->icon()));
+    _generalUi->environmentEditButton->setIcon(QIcon::fromTheme(QStringLiteral("document-edit")));
     _generalUi->startInSameDirButton->setChecked(profile->startInCurrentSessionDir());
 
     // initial terminal size
@@ -671,6 +672,12 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr &profile)
     _appearanceUi->colorSchemeMessageWidget->setWordWrap(true);
     _appearanceUi->colorSchemeMessageWidget->setCloseButtonVisible(false);
     _appearanceUi->colorSchemeMessageWidget->setMessageType(KMessageWidget::Warning);
+
+    _appearanceUi->editColorSchemeButton->setIcon(QIcon::fromTheme(QStringLiteral("document-edit")));
+    _appearanceUi->removeColorSchemeButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
+    _appearanceUi->newColorSchemeButton->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
+    _appearanceUi->chooseFontButton->setIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-font")));
+    _appearanceUi->resetColorSchemeButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-undo")));
 
     _appearanceUi->editColorSchemeButton->setEnabled(false);
     _appearanceUi->removeColorSchemeButton->setEnabled(false);
@@ -1431,6 +1438,11 @@ void EditProfileDialog::setupKeyboardPage(const Profile::Ptr &/* profile */)
     connect(_keyboardUi->newKeyBindingsButton, &QPushButton::clicked, this,
             &Konsole::EditProfileDialog::newKeyBinding);
 
+    _keyboardUi->editKeyBindingsButton->setIcon(QIcon::fromTheme(QStringLiteral("document-edit")));
+    _keyboardUi->removeKeyBindingsButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
+    _keyboardUi->newKeyBindingsButton->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
+    _keyboardUi->resetKeyBindingsButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-undo")));
+
     _keyboardUi->editKeyBindingsButton->setEnabled(false);
     _keyboardUi->removeKeyBindingsButton->setEnabled(false);
     _keyboardUi->resetKeyBindingsButton->setEnabled(false);
@@ -1660,6 +1672,8 @@ void EditProfileDialog::setupMousePage(const Profile::Ptr &profile)
     connect(_mouseUi->pasteFromX11SelectionButton, &QPushButton::clicked, this, &EditProfileDialog::pasteFromX11Selection);
     _mouseUi->pasteFromClipboardButton->setChecked(Enum::PasteFromClipboard == middleClickPasteMode);
     connect(_mouseUi->pasteFromClipboardButton, &QPushButton::clicked, this, &EditProfileDialog::pasteFromClipboard);
+
+    _mouseUi->textEditorCustomBtn->setIcon(QIcon::fromTheme(QStringLiteral("document-edit")));
 
     // interaction options
     _mouseUi->wordCharacterEdit->setText(profile->wordCharacters());
