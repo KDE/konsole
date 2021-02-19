@@ -11,7 +11,6 @@
 // Qt
 #include <QSet>
 #include <QTextStream>
-#include <QDebug>
 
 // Konsole decoders
 #include <PlainTextDecoder.h>
@@ -387,6 +386,10 @@ void Screen::setReflowLines(bool enable)
     _enableReflowLines = enable;
 }
 
+/* Note that if you use these debugging functions, it will
+   fail to compile on gcc 8.3.1 as of Feb 2021 due to for_each_n().
+   See BKO: 432639
+
 // Debugging auxiliar functions to show what is written in screen or history
 void toDebug(const Character *s, int count, bool wrapped = false)
 {
@@ -402,7 +405,7 @@ void toDebug(const QVector<Character> &s, bool wrapped = false)
 {
     toDebug(s.data(), s.size(), wrapped);
 }
-/////
+*/
 
 int Screen::getCursorLine()
 {
