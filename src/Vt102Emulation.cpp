@@ -569,7 +569,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
     case token_ctl('D'      ) : /* EOT: ignored                      */ break;
     case token_ctl('E'      ) :      reportAnswerBack     (          ); break; //VT100
     case token_ctl('F'      ) : /* ACK: ignored                      */ break;
-    case token_ctl('G'      ) : emit bell();
+    case token_ctl('G'      ) : Q_EMIT bell();
                                 break; //VT100
     case token_ctl('H'      ) : _currentScreen->backspace            (          ); break; //VT100
     case token_ctl('I'      ) : _currentScreen->tab                  (          ); break; //VT100
@@ -657,7 +657,7 @@ void Vt102Emulation::processToken(int token, int p, int q)
                                break;
 
 // change tab text color : \e[28;<color>t  color: 0-16,777,215
-    case token_csi_ps('t',   28) : emit changeTabTextColorRequest      ( p        );          break;
+    case token_csi_ps('t',   28) : Q_EMIT changeTabTextColorRequest      ( p        );          break;
 
     case token_csi_ps('K',   0) : _currentScreen->clearToEndOfLine     (          ); break;
     case token_csi_ps('K',   1) : _currentScreen->clearToBeginOfLine   (          ); break;
@@ -925,14 +925,14 @@ void Vt102Emulation::processToken(int token, int p, int q)
     // Set Cursor Style (DECSCUSR), VT520, with the extra xterm sequences
     // the first one is a special case, 'ESC[ q', which mimics 'ESC[1 q'
     // Using 0 to reset to default is matching VTE, but not any official standard.
-    case token_csi_sp ('q'    ) : emit setCursorStyleRequest(Enum::BlockCursor,     true);  break;
-    case token_csi_psp('q',  0) : emit resetCursorStyleRequest();                           break;
-    case token_csi_psp('q',  1) : emit setCursorStyleRequest(Enum::BlockCursor,     true);  break;
-    case token_csi_psp('q',  2) : emit setCursorStyleRequest(Enum::BlockCursor,     false); break;
-    case token_csi_psp('q',  3) : emit setCursorStyleRequest(Enum::UnderlineCursor, true);  break;
-    case token_csi_psp('q',  4) : emit setCursorStyleRequest(Enum::UnderlineCursor, false); break;
-    case token_csi_psp('q',  5) : emit setCursorStyleRequest(Enum::IBeamCursor,     true);  break;
-    case token_csi_psp('q',  6) : emit setCursorStyleRequest(Enum::IBeamCursor,     false); break;
+    case token_csi_sp ('q'    ) : Q_EMIT setCursorStyleRequest(Enum::BlockCursor,     true);  break;
+    case token_csi_psp('q',  0) : Q_EMIT resetCursorStyleRequest();                           break;
+    case token_csi_psp('q',  1) : Q_EMIT setCursorStyleRequest(Enum::BlockCursor,     true);  break;
+    case token_csi_psp('q',  2) : Q_EMIT setCursorStyleRequest(Enum::BlockCursor,     false); break;
+    case token_csi_psp('q',  3) : Q_EMIT setCursorStyleRequest(Enum::UnderlineCursor, true);  break;
+    case token_csi_psp('q',  4) : Q_EMIT setCursorStyleRequest(Enum::UnderlineCursor, false); break;
+    case token_csi_psp('q',  5) : Q_EMIT setCursorStyleRequest(Enum::IBeamCursor,     true);  break;
+    case token_csi_psp('q',  6) : Q_EMIT setCursorStyleRequest(Enum::IBeamCursor,     false); break;
 
     //FIXME: weird DEC reset sequence
     case token_csi_pe('p'      ) : /* IGNORED: reset         (        ) */ break;

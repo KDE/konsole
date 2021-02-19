@@ -675,7 +675,7 @@ void TerminalDisplay::updateImage()
     }
 
     if (_scrollBar->highlightScrolledLines().isEnabled()) {
-        dirtyRegion |= emit highlightScrolledLinesRegion(dirtyRegion.isEmpty(), _scrollBar);
+        dirtyRegion |= Q_EMIT highlightScrolledLinesRegion(dirtyRegion.isEmpty(), _scrollBar);
     }
     _screenWindow->resetScrollCount();
 
@@ -2758,7 +2758,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
             // plus an additional Paste option.
 
             QAction* pasteAction = new QAction(i18n("&Paste Location"), this);
-            connect(pasteAction, &QAction::triggered, this, [this, dropText]{ emit sendStringToEmu(dropText.toLocal8Bit());} );
+            connect(pasteAction, &QAction::triggered, this, [this, dropText]{ Q_EMIT sendStringToEmu(dropText.toLocal8Bit());} );
 
             QList<QAction*> additionalActions;
             additionalActions.append(pasteAction);

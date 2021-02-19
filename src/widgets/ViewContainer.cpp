@@ -76,7 +76,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     connect(tabBarWidget, &DetachableTabBar::closeTab,
         this, &TabbedViewContainer::closeTerminalTab);
     connect(tabBarWidget, &DetachableTabBar::newTabRequest,
-        this, [this]{ emit newViewRequest(); });
+        this, [this]{ Q_EMIT newViewRequest(); });
     connect(this, &TabbedViewContainer::currentChanged, this, &TabbedViewContainer::currentTabChanged);
 
     connect(this, &TabbedViewContainer::setColor, tabBarWidget, &DetachableTabBar::setColor);
@@ -99,7 +99,7 @@ TabbedViewContainer::TabbedViewContainer(ViewManager *connectedViewManager, QWid
     auto detachAction = _contextPopupMenu->addAction(
         QIcon::fromTheme(QStringLiteral("tab-detach")),
         i18nc("@action:inmenu", "&Detach Tab"), this,
-        [this] { emit detachTab(_contextMenuTabIndex); }
+        [this] { Q_EMIT detachTab(_contextMenuTabIndex); }
     );
     detachAction->setObjectName(QStringLiteral("tab-detach"));
 
