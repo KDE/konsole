@@ -435,7 +435,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     _isResize = true;
 
     int cursorLine = getCursorLine();
-    const int oldCursorLine = (cursorLine == _lines - 1) ? new_lines - 1 : cursorLine;
+    const int oldCursorLine = (cursorLine == _lines - 1 || cursorLine > new_lines - 1) ? new_lines - 1 : cursorLine;
 
     // Check if _history need to change
     if (_enableReflowLines && new_columns != _columns && _history->getLines() && _history->getMaxLines()) {
