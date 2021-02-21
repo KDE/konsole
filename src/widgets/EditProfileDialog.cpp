@@ -236,7 +236,7 @@ void EditProfileDialog::save()
         return;
     }
 
-    const bool isFallback = _profile->path() == QLatin1String("FALLBACK/");
+    const bool isFallback = _profile->isFallback();
 
     ProfileManager::instance()->changeProfile(_profile, _tempProfile->setProperties());
 

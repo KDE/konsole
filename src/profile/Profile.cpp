@@ -268,6 +268,11 @@ void Profile::clone(Profile::Ptr profile, bool differentOnly)
 
 Profile::~Profile() = default;
 
+bool Profile::isFallback() const
+{
+    return path() == QLatin1String{"FALLBACK/"};
+}
+
 bool Profile::isHidden() const
 {
     return _hidden;

@@ -338,9 +338,8 @@ void ProfileManager::changeProfile(Profile::Ptr profile,
 {
     Q_ASSERT(profile);
 
+    const bool isFallback = profile->isFallback();
     const QString origPath = profile->path();
-
-    const bool isFallback = origPath == QLatin1String("FALLBACK/");
 
     const QStringList existingProfileNames = availableProfileNames();
     // Generate a unique profile name

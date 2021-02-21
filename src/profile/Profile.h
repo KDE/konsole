@@ -414,6 +414,12 @@ public:
     bool isEmpty() const;
 
     /**
+     * Returns true if this profile is the fallback profile, i.e. the
+     * profile path is "FALLBACK/".
+     */
+    bool isFallback() const;
+
+    /**
      * Returns true if this is a 'hidden' profile which should not be
      * displayed in menus or saved to disk.
      *
