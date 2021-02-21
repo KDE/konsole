@@ -481,7 +481,7 @@ void ViewManager::sessionFinished()
 
     toplevelSplitter->handleMinimizeMaximize(false);
     view->deleteLater();
-
+    connect(view, &QObject::destroyed, this, [this]() { toggleActionsBasedOnState(); });
 
     // Only remove the controller from factory() if it's actually controlling
     // the session from the sender.
@@ -495,7 +495,6 @@ void ViewManager::sessionFinished()
     if (!_sessionMap.empty()) {
         updateTerminalDisplayHistory(view, true);
         focusAnotherTerminal(toplevelSplitter);
-        toggleActionsBasedOnState();
     }
 }
 
