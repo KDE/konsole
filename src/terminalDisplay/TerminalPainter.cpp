@@ -182,10 +182,12 @@ namespace Konsole
                 }
 
                 QMatrix textScale;
+                bool doubleWidthLine = false;
 
                 if (y < lineProperties.size()) {
                     if ((lineProperties[y] & LINE_DOUBLEWIDTH) != 0) {
                         textScale.scale(2, 1);
+                        doubleWidthLine = true;
                     }
 
                     if ((lineProperties[y] & LINE_DOUBLEHEIGHT) != 0) {
@@ -197,7 +199,7 @@ namespace Konsole
                 paint.setWorldTransform(QTransform(textScale), true);
 
                 // Calculate the area in which the text will be drawn
-                QRect textArea = QRect(display->contentRect().left() + display->contentsRect().left() + display->terminalFont()->fontWidth() * x,
+                QRect textArea = QRect(display->contentRect().left() + display->contentsRect().left() + display->terminalFont()->fontWidth() * x * (doubleWidthLine ? 2 : 1),
                                        display->contentRect().top() + display->contentsRect().top() + display->terminalFont()->fontHeight() * y,
                                        display->terminalFont()->fontWidth() * len,
                                        display->terminalFont()->fontHeight());
@@ -230,13 +232,13 @@ namespace Konsole
 
                 paint.setWorldTransform(QTransform(textScale.inverted()), true);
 
-                if (y < lineProperties.size() - 1) {
-                    if ((lineProperties[y] & LINE_DOUBLEHEIGHT) != 0) {
-                        y++;
-                    }
-                }
-
                 x += len - 1;
+            }
+
+            if (y < lineProperties.size() - 1) {
+                if ((lineProperties[y] & LINE_DOUBLEHEIGHT) != 0) {
+                    y++;
+                }
             }
         }
     }
