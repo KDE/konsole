@@ -666,6 +666,10 @@ private:
 
     int getLineLength(const int line) const;
 
+    // returns the width in columns of the specified screen line,
+    // taking DECDWL/DECDHL (double width/height modes) into account.
+    int getScreenLineColumns(const int line) const;
+
     // screen image ----------------
     int _lines;
     int _columns;

@@ -716,6 +716,17 @@ QVector<LineProperty> Screen::getLineProperties(int startLine , int endLine) con
     return result;
 }
 
+int Screen::getScreenLineColumns(const int line) const
+{
+    const int doubleWidthLine = _lineProperties[line] & LINE_DOUBLEWIDTH;
+
+    if (doubleWidthLine) {
+        return _columns / 2;
+    }
+
+    return _columns;
+}
+
 void Screen::reset()
 {
     // Clear screen, but preserve the current line
@@ -891,12 +902,12 @@ void Screen::displayCharacter(uint c)
         return;
     }
 
-    if (_cuX + w > _columns) {
+    if (_cuX + w > getScreenLineColumns(_cuY)) {
         if (getMode(MODE_Wrap)) {
             _lineProperties[_cuY] = static_cast<LineProperty>(_lineProperties[_cuY] | LINE_WRAPPED);
             nextLine();
         } else {
-            _cuX = qMax(_columns - w, 0);
+            _cuX = qMax(getScreenLineColumns(_cuY) - w, 0);
         }
     }
 
