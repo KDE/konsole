@@ -155,7 +155,7 @@ void Screen::cursorRight(int n)
     if (n > MAX_SCREEN_ARGUMENT) {
         n = MAX_SCREEN_ARGUMENT;
     }
-    _cuX = qMin(_columns - 1, _cuX + n);
+    _cuX = qMin(getScreenLineColumns(_cuY) - 1, _cuX + n);
 }
 
 void Screen::setMargins(int top, int bot)
@@ -272,8 +272,8 @@ void Screen::insertChars(int n)
 
     _screenLines[_cuY].insert(_cuX, n, Character(' '));
 
-    if (_screenLines[_cuY].count() > _columns) {
-        _screenLines[_cuY].resize(_columns);
+    if (_screenLines[_cuY].count() > getScreenLineColumns(_cuY)) {
+        _screenLines[_cuY].resize(getScreenLineColumns(_cuY));
     }
 }
 
@@ -359,7 +359,7 @@ void Screen::saveCursor()
 
 void Screen::restoreCursor()
 {
-    _cuX     = qMin(_savedState.cursorColumn, _columns - 1);
+    _cuX     = qMin(_savedState.cursorColumn, getScreenLineColumns(_savedState.cursorLine) - 1);
     _cuY     = qMin(_savedState.cursorLine, _lines - 1);
     _currentRendition   = _savedState.rendition;
     _currentForeground   = _savedState.foreground;
@@ -677,7 +677,7 @@ void Screen::getImage(Character* dest, int size, int startLine, int endLine) con
         }
     }
 
-    int visX = qMin(_cuX, _columns - 1);
+    int visX = qMin(_cuX, getScreenLineColumns(_cuY) - 1);
     // mark the character at the current cursor position
     int cursorIndex = loc(visX, _cuY + linesInHistoryBuffer);
     if (getMode(MODE_Cursor) && cursorIndex < _columns * mergedLines) {
@@ -771,9 +771,9 @@ void Screen::tab(int n)
     if (n < 1) {
         n = 1;
     }
-    while ((n > 0) && (_cuX < _columns - 1)) {
+    while ((n > 0) && (_cuX < getScreenLineColumns(_cuY) - 1)) {
         cursorRight(1);
-        while ((_cuX < _columns - 1) && !_tabStops[_cuX]) {
+        while ((_cuX < getScreenLineColumns(_cuY) - 1) && !_tabStops[_cuX]) {
             cursorRight(1);
         }
         n--;
