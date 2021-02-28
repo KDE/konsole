@@ -87,6 +87,8 @@ void ProfileList::updateAction(QAction* action , Profile::Ptr profile)
 
     action->setText(profile->name());
     action->setIcon(QIcon::fromTheme(profile->icon()));
+
+    Q_EMIT actionsChanged(_group->actions());
 }
 void ProfileList::shortcutChanged(const Profile::Ptr &profile, const QKeySequence& sequence)
 {

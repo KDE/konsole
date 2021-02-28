@@ -502,8 +502,16 @@ bool ProfileManager::deleteProfile(Profile::Ptr profile)
 void ProfileManager::setDefaultProfile(const Profile::Ptr &profile)
 {
     Q_ASSERT(_profiles.contains(profile));
+
+    const auto oldDefault = _defaultProfile;
     _defaultProfile = profile;
     ProfileModel::instance()->setDefault(profile);
+
+    // Setting/unsetting a profile as the default is a sort of a
+    // "profile change", useful for updating the icon/font of the
+    // "default profile in e.g. 'File -> New Tab' menu.
+    Q_EMIT profileChanged(oldDefault);
+    Q_EMIT profileChanged(profile);
 }
 
 void ProfileManager::saveDefaultProfile()

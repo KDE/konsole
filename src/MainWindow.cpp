@@ -415,15 +415,20 @@ void MainWindow::profileListChanged(const QList<QAction *> &sessionActions)
         for (QAction *sessionAction : sessionActions) {
             _newTabMenuAction->menu()->addAction(sessionAction);
 
-            // NOTE: defaultProfile seems to not work here, sigh.
+            auto setActionFont = [sessionAction](bool isBold) {
+                QFont actionFont = sessionAction->font();
+                actionFont.setBold(isBold);
+                sessionAction->setFont(actionFont);
+            };
+
             Profile::Ptr profile = ProfileManager::instance()->defaultProfile();
             if (profile && profile->name() == sessionAction->text().remove(QLatin1Char('&'))) {
                 QIcon icon(KIconLoader::global()->loadIcon(profile->icon(), KIconLoader::Small, 0, KIconLoader::DefaultState, QStringList(QStringLiteral("emblem-favorite"))));
                 sessionAction->setIcon(icon);
-                _newTabMenuAction->menu()->setDefaultAction(sessionAction);
-                QFont actionFont = sessionAction->font();
-                actionFont.setBold(true);
-                sessionAction->setFont(actionFont);
+                setActionFont(true);
+            } else {
+                sessionAction->setIcon(QIcon::fromTheme(profile->icon()));
+                setActionFont(false);
             }
         }
     } else {
