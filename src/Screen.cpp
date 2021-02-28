@@ -224,7 +224,7 @@ void Screen::eraseChars(int n)
         n = MAX_SCREEN_ARGUMENT;
     }
     const int p = qBound(0, _cuX + n - 1, _columns - 1);
-    clearImage(loc(_cuX, _cuY), loc(p, _cuY), ' ');
+    clearImage(loc(_cuX, _cuY), loc(p, _cuY), ' ', false);
 }
 
 void Screen::deleteChars(int n)
@@ -1078,7 +1078,7 @@ int Screen::getCursorY() const
     return _cuY;
 }
 
-void Screen::clearImage(int loca, int loce, char c)
+void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
 {
     const int scr_TL = loc(0, _history->getLines());
     //FIXME: check positions
@@ -1098,7 +1098,7 @@ void Screen::clearImage(int loca, int loce, char c)
     const bool isDefaultCh = (clearCh == Screen::DefaultChar);
 
     for (int y = topLine; y <= bottomLine; y++) {
-        _lineProperties[y] = 0;
+        _lineProperties[y] &= ~LINE_WRAPPED;
 
         const int endCol = (y == bottomLine) ? loce % _columns : _columns - 1;
         const int startCol = (y == topLine) ? loca % _columns : 0;
@@ -1115,6 +1115,10 @@ void Screen::clearImage(int loca, int loce, char c)
             if (startCol <= endCol) {
                 std::fill(line.begin() + startCol, line.begin() + (endCol + 1), clearCh);
             }
+        }
+
+        if (resetLineRendition && startCol == 0 && endCol == _columns - 1) {
+                _lineProperties[y] &= ~(LINE_DOUBLEWIDTH | LINE_DOUBLEHEIGHT);
         }
     }
 }
@@ -1216,17 +1220,17 @@ void Screen::helpAlign()
 
 void Screen::clearToEndOfLine()
 {
-    clearImage(loc(_cuX, _cuY), loc(_columns - 1, _cuY), ' ');
+    clearImage(loc(_cuX, _cuY), loc(_columns - 1, _cuY), ' ', false);
 }
 
 void Screen::clearToBeginOfLine()
 {
-    clearImage(loc(0, _cuY), loc(_cuX, _cuY), ' ');
+    clearImage(loc(0, _cuY), loc(_cuX, _cuY), ' ', false);
 }
 
 void Screen::clearEntireLine()
 {
-    clearImage(loc(0, _cuY), loc(_columns - 1, _cuY), ' ');
+    clearImage(loc(0, _cuY), loc(_columns - 1, _cuY), ' ', false);
 }
 
 void Screen::setRendition(RenditionFlags rendition)

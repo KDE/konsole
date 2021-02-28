@@ -617,7 +617,8 @@ private:
     //fills a section of the screen image with the character 'c'
     //the parameters are specified as offsets from the start of the screen image.
     //the loc(x,y) macro can be used to generate these values from a column,line pair.
-    void clearImage(int loca, int loce, char c);
+    //if resetLineRendition is true, all completely cleared lines will be set to single-width.
+    void clearImage(int loca, int loce, char c, bool resetLineRendition = true);
 
     //move screen image between 'sourceBegin' and 'sourceEnd' to 'dest'.
     //the parameters are specified as offsets from the start of the screen image.
