@@ -36,7 +36,7 @@
        <item>
         <widget class="QPushButton" name="newProfileButton">
          <property name="toolTip">
-          <string>Create a new profile based upon the selected profile</string>
+          <string>Create a new profile based on the selected profile</string>
          </property>
          <property name="text">
           <string>&amp;New...</string>
@@ -49,7 +49,7 @@
           <bool>false</bool>
          </property>
          <property name="toolTip">
-          <string>Edit the selected profile(s)</string>
+          <string>Edit the selected profile (this button is disabled for read-only profiles)</string>
          </property>
          <property name="text">
           <string>&amp;Edit...</string>
@@ -62,7 +62,7 @@
           <bool>false</bool>
          </property>
          <property name="toolTip">
-          <string>Delete the selected profile(s)</string>
+          <string>Delete the selected profile</string>
          </property>
          <property name="text">
           <string>&amp;Remove</string>

@@ -32,6 +32,7 @@ ProfileSettings::ProfileSettings(QWidget* parent)
 
     profilesList->setModel(ProfileModel::instance());
     profilesList->setItemDelegateForColumn(ProfileModel::SHORTCUT, new ShortcutItemDelegate(this));
+    profilesList->setSelectionMode(QAbstractItemView::SingleSelection);
 
     // double clicking the profile name opens the profile edit dialog
     connect(profilesList, &QAbstractItemView::doubleClicked, this, &Konsole::ProfileSettings::doubleClicked);
@@ -61,7 +62,6 @@ void ProfileSettings::slotAccepted()
 
 void ProfileSettings::doubleClicked(const QModelIndex &idx)
 {
-
     if (idx.column() == ProfileModel::NAME) {
         editSelected();
     }
@@ -92,32 +92,28 @@ void ProfileSettings::populateTable()
 
 void ProfileSettings::tableSelectionChanged(const QItemSelection&)
 {
-    const ProfileManager* manager = ProfileManager::instance();
-    bool isNotDefault = true;
-    bool isDeletable = true;
+    const auto profile = currentProfile();
+    const bool isNotDefault = profile != ProfileManager::instance()->defaultProfile();
 
-    const auto profiles = selectedProfiles();
-    for (const auto &profile: profiles) {
-        isNotDefault = isNotDefault && (profile != manager->defaultProfile());
-        isDeletable = isDeletable && isProfileDeletable(profile);
-    }
+    newProfileButton->setEnabled(true);
 
-    newProfileButton->setEnabled(profiles.count() < 2);
-    // FIXME: At some point editing 2+ profiles no longer works
-    editProfileButton->setEnabled(profiles.count() == 1);
-    // do not allow the default session type to be removed
-    deleteProfileButton->setEnabled(isDeletable && isNotDefault && (profiles.count() > 0));
-    setAsDefaultButton->setEnabled(isNotDefault && (profiles.count() == 1));
+    // See comment about isProfileWritable(profile) in editSelected()
+    editProfileButton->setEnabled(isProfileWritable(profile));
+
+    // Do not allow the current default profile of the session to be removed
+    deleteProfileButton->setEnabled(isNotDefault && isProfileDeletable(profile));
+
+    setAsDefaultButton->setEnabled(isNotDefault);
 }
 
 void ProfileSettings::deleteSelected()
 {
-    const QList<Profile::Ptr> profiles = selectedProfiles();
-    for (const Profile::Ptr &profile : profiles) {
-        if (profile != ProfileManager::instance()->defaultProfile()) {
-            ProfileManager::instance()->deleteProfile(profile);
-        }
-    }
+    const auto profile = currentProfile();
+
+    // The "Delete" button is disabled for the current default profile
+    Q_ASSERT(profile != ProfileManager::instance()->defaultProfile());
+
+    ProfileManager::instance()->deleteProfile(profile);
 }
 
 void ProfileSettings::setSelectedAsDefault()
@@ -156,54 +152,40 @@ void ProfileSettings::createProfile()
 }
 void ProfileSettings::editSelected()
 {
-    const QList<Profile::Ptr> profiles = selectedProfiles();
+    const auto profile = currentProfile();
+
+    // Read-only profiles, i.e. oens with .profile's that aren't writable
+    // for the user aren't editable, only clone-able by using the "New"
+    // button, this includes the Default/fallback profile, which is hardcoded.
+    if (!isProfileWritable(profile)) {
+        return;
+    }
+
     EditProfileDialog *profileDialog = nullptr;
-    // sessions() returns a const QList
-    for (const Session *session : SessionManager::instance()->sessions()) {
+    const auto sessionsList = SessionManager::instance()->sessions();
+    for (const Session *session : sessionsList) {
         for (TerminalDisplay *terminalDisplay : session->views()) {
-            // Searching for opened profiles
+            // Searching for already open EditProfileDialog instances
+            // for this profile
             profileDialog = terminalDisplay->sessionController()->profileDialogPointer();
             if (profileDialog == nullptr) {
                 continue;
             }
-            for (const Profile::Ptr &profile : profiles) {
-                if (profile->name() == profileDialog->lookupProfile()->name()
-                    && profileDialog->isVisible()) {
-                    // close opened edit dialog
-                    profileDialog->close();
-                }
+
+            if (profile->name() == profileDialog->lookupProfile()->name()
+                && profileDialog->isVisible()) {
+                // close opened edit dialog
+                profileDialog->close();
             }
         }
     }
 
     EditProfileDialog dialog(this);
-    // the dialog will delete the profile group when it is destroyed
-    ProfileGroup* group = new ProfileGroup;
-    for (const Profile::Ptr &profile : profiles) {
-        group->addProfile(profile);
-    }
-    group->updateValues();
 
-    dialog.setProfile(Profile::Ptr(group));
+    dialog.setProfile(profile);
     dialog.exec();
 }
-QList<Profile::Ptr> ProfileSettings::selectedProfiles() const
-{
-    QList<Profile::Ptr> list;
-    QItemSelectionModel* selection = profilesList->selectionModel();
-    if (selection == nullptr) {
-        return list;
-    }
 
-    const QList<QModelIndex> selectedIndexes = selection->selectedIndexes();
-    for (const QModelIndex &index : selectedIndexes) {
-        if (index.column() == ProfileModel::PROFILE) {
-            list << index.data(ProfileModel::ProfilePtrRole).value<Profile::Ptr>();
-        }
-    }
-
-    return list;
-}
 Profile::Ptr ProfileSettings::currentProfile() const
 {
     QItemSelectionModel* selection = profilesList->selectionModel();
@@ -221,17 +203,20 @@ Profile::Ptr ProfileSettings::currentProfile() const
 
 bool ProfileSettings::isProfileDeletable(Profile::Ptr profile) const
 {
-    if (!profile) {
+    if (!profile || profile->isFallback()) {
         return false;
     }
 
     const QFileInfo fileInfo(profile->path());
-    if (!fileInfo.exists()) {
-        return false;
-    }
+    return fileInfo.exists()
+        && QFileInfo(fileInfo.path()).isWritable(); // To delete a file, parent dir must be writable
+}
 
-    const QFileInfo dirInfo(fileInfo.path());
-    return dirInfo.isWritable();
+bool ProfileSettings::isProfileWritable(Profile::Ptr profile) const
+{
+    return profile
+        && !profile->isFallback() // Default/fallback profile is hardcoded
+        && QFileInfo(profile->path()).isWritable();
 }
 
 void ProfileSettings::setShortcutEditorVisible(bool visible)
