@@ -77,21 +77,32 @@ QVariant ProfileModel::data(const QModelIndex& idx, int role) const
     case NAME: {
         switch (role) {
         case Qt::DisplayRole: {
-            return QStringLiteral("%1%2").arg(
-                profile->name(),
-                ProfileManager::instance()->defaultProfile() == profile ? i18nc("@label:textbox Name of the current default profile", " (Default)") : QString());
-        }
-        case Qt::DecorationRole: return QIcon::fromTheme(profile->icon());
-        case Qt::FontRole: {
-                if (ProfileManager::instance()->defaultProfile() == profile ) {
-                    QFont font;
-                    font.setItalic(true);
-                    return font;
-                }
+            QString txt = profile->name();
+            if (profile->isFallback()) {
+                txt += i18nc("@label:textbox added to the name of the Default/fallback profile, to point out it's read-only/hardcoded", " [Read-only]");
             }
+
+            if (ProfileManager::instance()->defaultProfile() == profile) {
+                txt += i18nc("@label:textbox added to the name of the current default profile", " (default)");
+            }
+
+            return txt;
+        }
+        case Qt::DecorationRole:
+            return QIcon::fromTheme(profile->icon());
+        case Qt::FontRole:
+            if (ProfileManager::instance()->defaultProfile() == profile ) {
+                QFont font;
+                font.setBold(true);
+                return font;
+            }
+            break;
+        case Qt::ToolTipRole:
+            return profile->isFallback() ? QStringLiteral("Built-in/hardcoded") : profile->path();
         }
     }
     break;
+
     case SHORTCUT: {
         auto shortcut = ProfileManager::instance()->shortcut(profile);
         switch (role) {
@@ -101,6 +112,7 @@ QVariant ProfileModel::data(const QModelIndex& idx, int role) const
         }
         break;
     }
+
     case PROFILE: {
         switch(role) {
             case ProfilePtrRole: return QVariant::fromValue(profile);
