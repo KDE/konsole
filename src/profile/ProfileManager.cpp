@@ -39,6 +39,13 @@ static bool profileIndexLessThan(const Profile::Ptr& p1, const Profile::Ptr& p2)
 
 static bool profileNameLessThan(const Profile::Ptr& p1, const Profile::Ptr& p2)
 {
+    // Always put the Default/fallback profile at the top
+    if (p1->isFallback()) {
+        return true;
+    } else if (p2->isFallback()) {
+        return false;
+    }
+
     return QString::localeAwareCompare(p1->name(), p2->name()) < 0;
 }
 
