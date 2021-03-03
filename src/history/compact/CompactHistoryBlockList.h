@@ -7,7 +7,9 @@
 #ifndef COMPACTHISTORYBLOCKLIST_H
 #define COMPACTHISTORYBLOCKLIST_H
 
-#include <QList>
+#include <memory>
+#include <vector>
+
 #include "CompactHistoryBlock.h"
 
 namespace Konsole
@@ -24,7 +26,7 @@ public:
     int length();
 
 private:
-    QList<CompactHistoryBlock *> list;
+    std::vector<std::unique_ptr<CompactHistoryBlock>> _blocks;
 };
 
 }

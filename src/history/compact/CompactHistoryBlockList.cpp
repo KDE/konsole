@@ -12,53 +12,44 @@
 using namespace Konsole;
 
 CompactHistoryBlockList::CompactHistoryBlockList()
-    : list(QList<CompactHistoryBlock *>())
+    : _blocks()
 {
 }
 
 void *CompactHistoryBlockList::allocate(size_t size)
 {
-    CompactHistoryBlock *block;
-    if (list.isEmpty() || list.last()->remaining() < size) {
-        block = new CompactHistoryBlock();
-        list.append(block);
-        ////qDebug() << "new block created, remaining " << block->remaining() << "number of blocks=" << list.size();
-    } else {
-        block = list.last();
-        ////qDebug() << "old block used, remaining " << block->remaining();
+    if (_blocks.empty() || _blocks.back()->remaining() < size) {
+        _blocks.push_back(std::make_unique<CompactHistoryBlock>());
+        ////qDebug() << "new block created, remaining " << block->remaining() << "number of blocks=" << _blocks.size();
     }
-    return block->allocate(size);
+    return _blocks.back()->allocate(size);
 }
 
 void CompactHistoryBlockList::deallocate(void *ptr)
 {
-    Q_ASSERT(!list.isEmpty());
+    Q_ASSERT(!_blocks.empty());
 
-    int i = 0;
-    CompactHistoryBlock *block = list.at(i);
-    while (i < list.size() && !block->contains(ptr)) {
-        i++;
-        block = list.at(i);
+    auto block = _blocks.begin();
+    while (block != _blocks.end() && !(*block)->contains(ptr)) {
+        block++;
     }
 
-    Q_ASSERT(i < list.size());
+    Q_ASSERT(block != _blocks.end());
 
-    block->deallocate();
+    (*block)->deallocate();
 
-    if (!block->isInUse()) {
-        list.removeAt(i);
-        delete block;
+    if (!(*block)->isInUse()) {
+        _blocks.erase(block);
         ////qDebug() << "block deleted, new size = " << list.size();
     }
 }
 
 int CompactHistoryBlockList::length()
 {
-    return list.size();
+    return _blocks.size();
 }
 
 CompactHistoryBlockList::~CompactHistoryBlockList()
 {
-    qDeleteAll(list.begin(), list.end());
-    list.clear();
+    _blocks.clear();
 }
