@@ -614,7 +614,7 @@ void TerminalDisplay::updateImage()
         //the top one is actually
         //drawn.
         if (_lineProperties.count() > y) {
-            updateLine |= (_lineProperties[y] & LINE_DOUBLEHEIGHT);
+            updateLine |= (_lineProperties[y] & LINE_DOUBLEHEIGHT_TOP);
         }
 
         // if the characters on the line are different in the old and the new _image

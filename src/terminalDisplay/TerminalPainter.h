@@ -70,7 +70,7 @@ namespace Konsole
 
         // draws the characters or line graphics in a text fragment
         void drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
-                            const Character *style, const QColor &characterColor);
+                            const Character *style, const QColor &characterColor, const LineProperty lineProperty);
 
         // draws the preedit string for input methods
         void drawInputMethodPreeditString(QPainter &painter, const QRect &rect, TerminalDisplay::InputMethodData &inputMethodData, Character *image);
@@ -82,10 +82,10 @@ namespace Konsole
         // draws a section of text, all the text in this section
         // has a common color and style
         void drawTextFragment(QPainter &painter, const QRect &rect, const QString &text,
-                            const Character *style, const QColor *colorTable);
+                            const Character *style, const QColor *colorTable, const LineProperty lineProperty);
         
         void drawPrinterFriendlyTextFragment(QPainter &painter, const QRect &rect, const QString &text,
-                            const Character *style);
+                            const Character *style, const LineProperty lineProperty);
 
         // draws the cursor character
         void drawCursor(QPainter &painter, const QRect &rect, const QColor &foregroundColor,

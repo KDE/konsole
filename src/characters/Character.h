@@ -20,10 +20,11 @@ typedef unsigned char LineProperty;
 
 typedef quint16 RenditionFlags;
 
-const int LINE_DEFAULT      = 0;
-const int LINE_WRAPPED      = (1 << 0);
-const int LINE_DOUBLEWIDTH  = (1 << 1);
-const int LINE_DOUBLEHEIGHT = (1 << 2);
+const int LINE_DEFAULT             = 0;
+const int LINE_WRAPPED             = (1 << 0);
+const int LINE_DOUBLEWIDTH         = (1 << 1);
+const int LINE_DOUBLEHEIGHT_TOP    = (1 << 2);
+const int LINE_DOUBLEHEIGHT_BOTTOM = (1 << 3);
 
 const RenditionFlags DEFAULT_RENDITION = 0;
 const RenditionFlags RE_BOLD           = (1 << 0);

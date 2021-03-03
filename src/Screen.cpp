@@ -1118,7 +1118,7 @@ void Screen::clearImage(int loca, int loce, char c, bool resetLineRendition)
         }
 
         if (resetLineRendition && startCol == 0 && endCol == _columns - 1) {
-                _lineProperties[y] &= ~(LINE_DOUBLEWIDTH | LINE_DOUBLEHEIGHT);
+                _lineProperties[y] &= ~(LINE_DOUBLEWIDTH | LINE_DOUBLEHEIGHT_TOP | LINE_DOUBLEHEIGHT_BOTTOM);
         }
     }
 }

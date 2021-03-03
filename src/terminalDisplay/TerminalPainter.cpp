@@ -72,6 +72,7 @@ namespace Konsole
 
         for (int y = rect.y(); y <= rect.bottom(); y++) {
             int x = rect.x();
+            bool doubleHeightLinePair = false;
 
             // Search for start of multi-column character
             if ((image[display->loc(rect.x(), y)].character == 0u) && (x != 0)) {
@@ -182,6 +183,7 @@ namespace Konsole
                 }
 
                 QMatrix textScale;
+                bool doubleHeight = false;
                 bool doubleWidthLine = false;
 
                 if (y < lineProperties.size()) {
@@ -190,8 +192,15 @@ namespace Konsole
                         doubleWidthLine = true;
                     }
 
-                    if ((lineProperties[y] & LINE_DOUBLEHEIGHT) != 0) {
+                    doubleHeight = lineProperties[y] & (LINE_DOUBLEHEIGHT_TOP | LINE_DOUBLEHEIGHT_BOTTOM);
+                    if (doubleHeight) {
                         textScale.scale(1, 2);
+                    }
+                }
+
+                if (y < lineProperties.size() - 1) {
+                    if (((lineProperties[y] & LINE_DOUBLEHEIGHT_TOP) != 0) && ((lineProperties[y+1] & LINE_DOUBLEHEIGHT_BOTTOM) != 0)) {
+                        doubleHeightLinePair = true;
                     }
                 }
 
@@ -202,7 +211,7 @@ namespace Konsole
                 QRect textArea = QRect(display->contentRect().left() + display->contentsRect().left() + display->terminalFont()->fontWidth() * x * (doubleWidthLine ? 2 : 1),
                                        display->contentRect().top() + display->contentsRect().top() + display->terminalFont()->fontHeight() * y,
                                        display->terminalFont()->fontWidth() * len,
-                                       display->terminalFont()->fontHeight());
+                                       doubleHeight && !doubleHeightLinePair ? display->terminalFont()->fontHeight() / 2 : display->terminalFont()->fontHeight());
 
                 //move the calculated area to take account of scaling applied to the painter.
                 //the position of the area from the origin (0,0) is scaled
@@ -221,13 +230,15 @@ namespace Konsole
                     drawPrinterFriendlyTextFragment(paint,
                                                     textArea,
                                                     unistr,
-                                                    &image[display->loc(x, y)]);
+                                                    &image[display->loc(x, y)],
+                                                    y < lineProperties.size() ? lineProperties[y] : 0);
                 } else {
                     drawTextFragment(paint,
                                      textArea,
                                      unistr,
                                      &image[display->loc(x, y)],
-                                     display->terminalColor()->colorTable());
+                                     display->terminalColor()->colorTable(),
+                                     y < lineProperties.size() ? lineProperties[y] : 0);
                 }
 
                 paint.setWorldTransform(QTransform(textScale.inverted()), true);
@@ -235,10 +246,8 @@ namespace Konsole
                 x += len - 1;
             }
 
-            if (y < lineProperties.size() - 1) {
-                if ((lineProperties[y] & LINE_DOUBLEHEIGHT) != 0) {
-                    y++;
-                }
+            if (doubleHeightLinePair) {
+                y++;
             }
         }
     }
@@ -387,7 +396,7 @@ namespace Konsole
     }
 
     void TerminalPainter::drawTextFragment(QPainter &painter, const QRect &rect, const QString &text,
-                                const Character *style, const QColor *colorTable)
+                                const Character *style, const QColor *colorTable, const LineProperty lineProperty)
     {
         // setup painter
         const QColor foregroundColor = style->foregroundColor.color(colorTable);
@@ -403,17 +412,17 @@ namespace Konsole
         }
 
         // draw text
-        drawCharacters(painter, rect, text, style, characterColor);
+        drawCharacters(painter, rect, text, style, characterColor, lineProperty);
     }
 
     void TerminalPainter::drawPrinterFriendlyTextFragment(QPainter &painter, const QRect &rect, const QString &text,
-                                                const Character *style)
+                                                const Character *style, const LineProperty lineProperty)
     {
         Character print_style = *style;
         print_style.foregroundColor = CharacterColor(COLOR_SPACE_RGB, 0x00000000);
         print_style.backgroundColor = CharacterColor(COLOR_SPACE_RGB, 0xFFFFFFFF);
 
-        drawCharacters(painter, rect, text, &print_style, QColor());
+        drawCharacters(painter, rect, text, &print_style, QColor(), lineProperty);
     }
 
     void TerminalPainter::drawBackground(QPainter &painter, const QRect &rect, const QColor &backgroundColor,
@@ -491,7 +500,7 @@ namespace Konsole
     }
 
     void TerminalPainter::drawCharacters(QPainter &painter, const QRect &rect, const QString &text,
-                                const Character *style, const QColor &characterColor)
+                                const Character *style, const QColor &characterColor, const LineProperty lineProperty)
     {
         const auto display = qobject_cast<TerminalDisplay*>(sender());
 
@@ -547,14 +556,27 @@ namespace Konsole
         painter.setClipRect(rect);
         // draw text
         if (isLineCharString(text) && !display->terminalFont()->useFontLineCharacters()) {
-            drawLineCharString(display, painter, rect.x(), rect.y(), text, style);
+            int y = rect.y();
+
+            if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
+                y -= display->terminalFont()->fontHeight() / 2;
+            }
+
+            drawLineCharString(display, painter, rect.x(), y, text, style);
         } else {
             painter.setLayoutDirection(Qt::LeftToRight);
+            int y = rect.y() + display->terminalFont()->fontAscent();
+
+            if (lineProperty & LINE_DOUBLEHEIGHT_BOTTOM) {
+                y -= display->terminalFont()->fontHeight() / 2;
+            } else {
+                y += display->terminalFont()->lineSpacing();
+            }
 
             if (display->bidiEnabled()) {
-                painter.drawText(rect.x(), rect.y() + display->terminalFont()->fontAscent() + display->terminalFont()->lineSpacing(), text);
+                painter.drawText(rect.x(), y, text);
             } else {
-                painter.drawText(rect.x(), rect.y() + display->terminalFont()->fontAscent() + display->terminalFont()->lineSpacing(), LTR_OVERRIDE_CHAR + text);
+                painter.drawText(rect.x(), y, LTR_OVERRIDE_CHAR + text);
             }
         }
         painter.setClipRegion(origClipRegion);
@@ -591,7 +613,7 @@ namespace Konsole
 
         drawBackground(painter, rect, background, true);
         drawCursor(painter, rect, foreground, background, characterColor);
-        drawCharacters(painter, rect, inputMethodData.preeditString, style, characterColor);
+        drawCharacters(painter, rect, inputMethodData.preeditString, style, characterColor, 0);
 
         inputMethodData.previousPreeditRect = rect;
     }

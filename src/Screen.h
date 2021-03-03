@@ -509,10 +509,12 @@ public:
      * LINE_WRAPPED:     Specifies that the line is wrapped.
      * LINE_DOUBLEWIDTH: Specifies that the characters in the current line
      *                   should be double the normal width.
-     * LINE_DOUBLEHEIGHT:Specifies that the characters in the current line
+     * LINE_DOUBLEHEIGHT_TOP:
+     * LINE_DOUBLEHEIGHT_BOTTOM: Specifies that the characters in the current line
      *                   should be double the normal height.
      *                   Double-height lines are formed of two lines containing the same characters,
-     *                   with both having the LINE_DOUBLEHEIGHT attribute.
+     *                   with the top one having the LINE_DOUBLEHEIGHT_TOP attribute
+     *                   and the bottom one having the LINE_DOUBLEHEIGHT_BOTTOM attribute.
      *                   This allows other parts of the code to work on the
      *                   assumption that all lines are the same height.
      *

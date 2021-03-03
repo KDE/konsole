@@ -635,19 +635,23 @@ void Vt102Emulation::processToken(int token, int p, int q)
 
     case token_esc_de('3'      ) : /* Double height line, top half    */
                                 _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
-                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT_TOP , true );
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT_BOTTOM , false );
                                     break;
     case token_esc_de('4'      ) : /* Double height line, bottom half */
                                 _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
-                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT_TOP , false );
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT_BOTTOM , true );
                                     break;
     case token_esc_de('5'      ) : /* Single width, single height line*/
                                 _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , false);
-                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT_TOP , false);
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT_BOTTOM , false);
                                 break;
     case token_esc_de('6'      ) : /* Double width, single height line*/
                                 _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true);
-                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT_TOP , false);
+                                _currentScreen->setLineProperty( LINE_DOUBLEHEIGHT_BOTTOM , false);
                                 break;
     case token_esc_de('8'      ) : _currentScreen->helpAlign            (          ); break;
 
